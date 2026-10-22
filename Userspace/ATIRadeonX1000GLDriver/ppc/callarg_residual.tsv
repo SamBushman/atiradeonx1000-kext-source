@@ -72,4 +72,4 @@
 0x188fec	FUN_00188fec	0x189418	FUN_00160320	r7	r1+0x38 (a stack address) not at argument 4 of any C call (3 C calls)	CHECK (C arg4: piVar6; piVar6)
 0x1922c4	FUN_001922c4	0x192850	FUN_001875a8	r7	field at param_4+0x8: 1 stock site(s), 0 C call(s) carry it at argument 4 (1 C calls)	BENIGN-CALLEE-IGNORES
 0x19286c	FUN_0019286c	0x1934dc	FUN_001875a8	r7	field at param_5+0x8: 2 stock site(s), 0 C call(s) carry it at argument 4 (2 C calls)	BENIGN-CALLEE-IGNORES
-0x1a1338	FUN_001a1338	0x1a135c	Arena__alloc	r4	0x10c4 printed as &UNK_000010c4 (symbolized-text-address)	BENIGN-SYMBOLIZED
+0x1a1338	R520MachineAssembler__create	0x1a135c	Arena__alloc	r4	0x10c4 printed as &UNK_000010c4 (symbolized-text-address)	BENIGN-SYMBOLIZED

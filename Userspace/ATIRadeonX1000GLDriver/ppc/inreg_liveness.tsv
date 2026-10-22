@@ -182,42 +182,42 @@
 18b9cc	FUN_0018b9cc	r7	PASS-indirect	18ba00 bl 0x126760
 18b9cc	FUN_0018b9cc	r8	PASS-indirect	18ba00 bl 0x126760
 18d4b4	FUN_0018d4b4	r8	PASS-indirect	18d50c bl 0x105594
-1906c8	R300VSchedModel__vslot3	r5	PASS-indirect	190720 bctrl 
-1906c8	R300VSchedModel__vslot3	r6	PASS-indirect	190720 bctrl 
+1906c8	R300VSchedModel__vslot3_canAddInstruction	r5	PASS-indirect	190720 bctrl 
+1906c8	R300VSchedModel__vslot3_canAddInstruction	r6	PASS-indirect	190720 bctrl 
 190990	FUN_00190990	r5	PASS-indirect	1909d4 bctrl 
 190990	FUN_00190990	r6	PASS-indirect	1909d4 bctrl 
 190990	FUN_00190990	r7	PASS-indirect	1909d4 bctrl 
 190990	FUN_00190990	r8	PASS-indirect	1909d4 bctrl 
 193944	FUN_00193944	r7	PASS-indirect	193974 bctrl 
 193944	FUN_00193944	r8	PASS-indirect	193974 bctrl 
-19c130	FUN_0019c130	r8	PASS-deep	19c190 bl 0x105594
-19ca78	FUN_0019ca78	r6	PASS-deep	19cab4 bl 0x105dbc
-19ca78	FUN_0019ca78	r7	PASS-deep	19cab4 bl 0x105dbc
-19ca78	FUN_0019ca78	r8	PASS-deep	19cab4 bl 0x105dbc
-19d478	FUN_0019d478	r5	USED	19d47c or. r28,r5,r5
-19f880	FUN_0019f880	r6	PASS-indirect	19f950 bctrl 
-19f880	FUN_0019f880	r7	PASS-indirect	19f950 bctrl 
-19f880	FUN_0019f880	r8	PASS-indirect	19f950 bctrl 
-19ff2c	FUN_0019ff2c	r6	PASS-indirect	19ff60 bctrl 
-19ff2c	FUN_0019ff2c	r7	PASS-indirect	19ff60 bctrl 
-19ff2c	FUN_0019ff2c	r8	PASS-indirect	19ff60 bctrl 
-19ffdc	FUN_0019ffdc	r6	PASS-indirect	1a0010 bctrl 
-19ffdc	FUN_0019ffdc	r7	PASS-indirect	1a0010 bctrl 
-19ffdc	FUN_0019ffdc	r8	PASS-indirect	1a0010 bctrl 
-1a14d0	FUN_001a14d0	r6	PASS-indirect	1a1504 bctrl 
-1a14d0	FUN_001a14d0	r7	PASS-indirect	1a1504 bctrl 
-1a14d0	FUN_001a14d0	r8	PASS-indirect	1a1504 bctrl 
-1a2878	FUN_001a2878	r5	PASS-indirect	1a28f4 bctrl 
-1a2878	FUN_001a2878	r6	PASS-indirect	1a28f4 bctrl 
-1a2878	FUN_001a2878	r7	PASS-indirect	1a28f4 bctrl 
-1a2878	FUN_001a2878	r8	PASS-indirect	1a28f4 bctrl 
-1a2d10	FUN_001a2d10	r6	PASS-indirect	1a2d44 bctrl 
-1a2d10	FUN_001a2d10	r7	PASS-indirect	1a2d44 bctrl 
-1a2d10	FUN_001a2d10	r8	PASS-indirect	1a2d44 bctrl 
-1a3000	FUN_001a3000	r5	PASS-no	1a3020 bl 0x194034
-1a3000	FUN_001a3000	r6	PASS-no	1a3020 bl 0x194034
-1a3000	FUN_001a3000	r7	PASS-no	1a3020 bl 0x194034
-1a3000	FUN_001a3000	r8	PASS-no	1a3020 bl 0x194034
+19c130	R300VMachineAssembler__encodeSourceOperand	r8	PASS-deep	19c190 bl 0x105594
+19ca78	R300VMachineAssembler__encodeDualMathOperands	r6	PASS-deep	19cab4 bl 0x105dbc
+19ca78	R300VMachineAssembler__encodeDualMathOperands	r7	PASS-deep	19cab4 bl 0x105dbc
+19ca78	R300VMachineAssembler__encodeDualMathOperands	r8	PASS-deep	19cab4 bl 0x105dbc
+19d478	R520VMachineAssembler__vslot12_visitNode	r5	USED	19d47c or. r28,r5,r5
+19f880	R520MachineAssembler__vslot38_appendBranchRecord	r6	PASS-indirect	19f950 bctrl 
+19f880	R520MachineAssembler__vslot38_appendBranchRecord	r7	PASS-indirect	19f950 bctrl 
+19f880	R520MachineAssembler__vslot38_appendBranchRecord	r8	PASS-indirect	19f950 bctrl 
+19ff2c	R520MachineAssembler__vslot31_assembleChildrenAndMark	r6	PASS-indirect	19ff60 bctrl 
+19ff2c	R520MachineAssembler__vslot31_assembleChildrenAndMark	r7	PASS-indirect	19ff60 bctrl 
+19ff2c	R520MachineAssembler__vslot31_assembleChildrenAndMark	r8	PASS-indirect	19ff60 bctrl 
+19ffdc	R520MachineAssembler__vslot24_assembleWithTarget	r6	PASS-indirect	1a0010 bctrl 
+19ffdc	R520MachineAssembler__vslot24_assembleWithTarget	r7	PASS-indirect	1a0010 bctrl 
+19ffdc	R520MachineAssembler__vslot24_assembleWithTarget	r8	PASS-indirect	1a0010 bctrl 
+1a14d0	R520MachineAssembler__vslot30_assembleThenTerminate	r6	PASS-indirect	1a1504 bctrl 
+1a14d0	R520MachineAssembler__vslot30_assembleThenTerminate	r7	PASS-indirect	1a1504 bctrl 
+1a14d0	R520MachineAssembler__vslot30_assembleThenTerminate	r8	PASS-indirect	1a1504 bctrl 
+1a2878	R520MachineAssembler__vslot39_appendLoopStartRecord	r5	PASS-indirect	1a28f4 bctrl 
+1a2878	R520MachineAssembler__vslot39_appendLoopStartRecord	r6	PASS-indirect	1a28f4 bctrl 
+1a2878	R520MachineAssembler__vslot39_appendLoopStartRecord	r7	PASS-indirect	1a28f4 bctrl 
+1a2878	R520MachineAssembler__vslot39_appendLoopStartRecord	r8	PASS-indirect	1a28f4 bctrl 
+1a2d10	R520MachineAssembler__vslot32_assembleBranchEnd	r6	PASS-indirect	1a2d44 bctrl 
+1a2d10	R520MachineAssembler__vslot32_assembleBranchEnd	r7	PASS-indirect	1a2d44 bctrl 
+1a2d10	R520MachineAssembler__vslot32_assembleBranchEnd	r8	PASS-indirect	1a2d44 bctrl 
+1a3000	R520MachineAssembler__vslot37_closeBranch	r5	PASS-no	1a3020 bl 0x194034
+1a3000	R520MachineAssembler__vslot37_closeBranch	r6	PASS-no	1a3020 bl 0x194034
+1a3000	R520MachineAssembler__vslot37_closeBranch	r7	PASS-no	1a3020 bl 0x194034
+1a3000	R520MachineAssembler__vslot37_closeBranch	r8	PASS-no	1a3020 bl 0x194034
 1e280	FUN_0001e280	r6	PASS-no	1e32c bl 0xb620
 1e280	FUN_0001e280	r10	PASS-no	1e3dc bl 0x1db50
 1f70	FUN_00001f70	r5	PASS-import	__keymgr_set_and_unlock_processwide_ptr	
@@ -405,8 +405,8 @@ ce148	FUN_000ce148	r8	PASS-no	ce1a8 bl 0x1a3d00	; symbol stub for: _strlen
 ce148	FUN_000ce148	r10	PASS-no	ce1a8 bl 0x1a3d00	; symbol stub for: _strlen
 ced58	FUN_000ced58	r8	PASS-no	cf034 bl 0x1a3fa0	; symbol stub for: _strcat
 ced58	FUN_000ced58	r10	PASS-no	cf034 bl 0x1a3fa0	; symbol stub for: _strcat
-d0304	FUN_000d0304	r10	PASS-no	d0324 bl 0xce038
-d035c	FUN_000d035c	r10	PASS-no	d037c bl 0xce038
+d0304	vsDisassembleToString	r10	PASS-no	d0324 bl 0xce038
+d035c	vsDisassembleVertexProgram	r10	PASS-no	d037c bl 0xce038
 d4e8c	FUN_000d4e8c	r10	PASS-no	d4eac bl 0xd4df8
 db574	FUN_000db574	r7	PASS-no	db69c bl 0xcdc3c
 db574	FUN_000db574	r8	PASS-import		

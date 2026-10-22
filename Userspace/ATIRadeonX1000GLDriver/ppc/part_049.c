@@ -1744,8 +1744,8 @@ int FUN_001895a0(param_1, param_2)
   return;
 }
 
-/* R520SchedModel__vslot2 @ 0x189604 (40 bytes) */
-int R520SchedModel__vslot2(param_1)
+/* R520SchedModel__vslot2_reset @ 0x189604 (40 bytes) */
+int R520SchedModel__vslot2_reset(param_1)
   int param_1;
 {
   *(undefined4 *)(param_1 + 0x24) = 0xffffffff;
@@ -4794,8 +4794,8 @@ code_r0x0018eb5c: ;
 #undef local_8c
 #undef local_88
 
-/* R520SchedModel__vslot4 @ 0x18f42c (304 bytes) */
-int R520SchedModel__vslot4(param_1, param_2)
+/* R520SchedModel__vslot4_addInstruction @ 0x18f42c (304 bytes) */
+int R520SchedModel__vslot4_addInstruction(param_1, param_2)
   int param_1;
   int *param_2;
 {
@@ -4842,8 +4842,8 @@ int R520SchedModel__vslot4(param_1, param_2)
   return;
 }
 
-/* R520SchedModel__vslot3 @ 0x18f55c (280 bytes) */
-int R520SchedModel__vslot3(param_1, param_2)
+/* R520SchedModel__vslot3_canAddInstruction @ 0x18f55c (280 bytes) */
+int R520SchedModel__vslot3_canAddInstruction(param_1, param_2)
   int param_1;
   int *param_2;
 {
@@ -4921,8 +4921,8 @@ int FUN_0018f674(param_1, inst)
   return 0;
 }
 
-/* R300VSchedModel__vslot2 @ 0x18f824 (44 bytes) */
-int R300VSchedModel__vslot2(param_1)
+/* R300VSchedModel__vslot2_reset @ 0x18f824 (44 bytes) */
+int R300VSchedModel__vslot2_reset(param_1)
   int param_1;
 {
   *(undefined4 *)(param_1 + 0x34) = 0xffffffff;
@@ -5400,8 +5400,8 @@ int FUN_00190100(param_1, inst, param_3, param_4, param_5)
   return uVar2;
 }
 
-/* R300VSchedModel__vslot4 @ 0x1904b8 (528 bytes) */
-int R300VSchedModel__vslot4(param_1, param_2)
+/* R300VSchedModel__vslot4_addInstruction @ 0x1904b8 (528 bytes) */
+int R300VSchedModel__vslot4_addInstruction(param_1, param_2)
   int *param_1;
   int *param_2;
 {
@@ -5470,8 +5470,8 @@ LAB_0019060c:
   return;
 }
 
-/* R300VSchedModel__vslot3 @ 0x1906c8 (712 bytes) */
-int R300VSchedModel__vslot3(param_1, param_2)
+/* R300VSchedModel__vslot3_canAddInstruction @ 0x1906c8 (712 bytes) */
+int R300VSchedModel__vslot3_canAddInstruction(param_1, param_2)
   int *param_1;
   int *param_2;
 {
@@ -5935,7 +5935,7 @@ asm(".set FUN_00188fec, _FUN_00188fec");
 asm(".globl FUN_001894ec");
 asm(".set FUN_001894ec, _FUN_001894ec");
 asm(".globl FUN_00189604");
-asm(".set FUN_00189604, _R520SchedModel__vslot2");
+asm(".set FUN_00189604, _R520SchedModel__vslot2_reset");
 asm(".globl FUN_0018962c");
 asm(".set FUN_0018962c, _FUN_0018962c");
 asm(".globl FUN_00189660");
@@ -5965,13 +5965,13 @@ asm(".set FUN_0018dabc, _FUN_0018dabc");
 asm(".globl FUN_0018e1a8");
 asm(".set FUN_0018e1a8, _FUN_0018e1a8");
 asm(".globl FUN_0018f42c");
-asm(".set FUN_0018f42c, _R520SchedModel__vslot4");
+asm(".set FUN_0018f42c, _R520SchedModel__vslot4_addInstruction");
 asm(".globl FUN_0018f55c");
-asm(".set FUN_0018f55c, _R520SchedModel__vslot3");
+asm(".set FUN_0018f55c, _R520SchedModel__vslot3_canAddInstruction");
 asm(".globl FUN_0018f674");
 asm(".set FUN_0018f674, _FUN_0018f674");
 asm(".globl FUN_0018f824");
-asm(".set FUN_0018f824, _R300VSchedModel__vslot2");
+asm(".set FUN_0018f824, _R300VSchedModel__vslot2_reset");
 asm(".globl FUN_0018f918");
 asm(".set FUN_0018f918, _FUN_0018f918");
 asm(".globl FUN_0018f984");
@@ -5981,9 +5981,9 @@ asm(".set FUN_0018fbd8, _FUN_0018fbd8");
 asm(".globl FUN_0018fd34");
 asm(".set FUN_0018fd34, _FUN_0018fd34");
 asm(".globl FUN_001904b8");
-asm(".set FUN_001904b8, _R300VSchedModel__vslot4");
+asm(".set FUN_001904b8, _R300VSchedModel__vslot4_addInstruction");
 asm(".globl FUN_001906c8");
-asm(".set FUN_001906c8, _R300VSchedModel__vslot3");
+asm(".set FUN_001906c8, _R300VSchedModel__vslot3_canAddInstruction");
 asm(".globl FUN_00190990");
 asm(".set FUN_00190990, _FUN_00190990");
 asm(".globl FUN_00191298");

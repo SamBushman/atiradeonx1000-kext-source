@@ -1,0 +1,693 @@
+# local rows (fork C3)
+local	FUN_001952d8	param_1	element	INFERRED	union-find find: element, int parent array, chain walk
+local	FUN_001952d8	param_2	parents	INFERRED	union-find find: element, int parent array, chain walk
+local	FUN_001952d8	iVar1	nextLink	INFERRED	union-find find: element, int parent array, chain walk
+local	FUN_001952d8	iVar2	link	INFERRED	union-find find: element, int parent array, chain walk
+local	FUN_001952d8	iVar3	root	INFERRED	union-find find: element, int parent array, chain walk
+local	FUN_00195330	param_1	value	CONFIRMED	array[index] = value
+local	FUN_00195330	param_2	elementIndex	CONFIRMED	array[index] = value
+local	FUN_00195330	param_3	array	CONFIRMED	array[index] = value
+local	FUN_0019533c	param_1	scaleExponent	CONFIRMED	signed log2 of the output scale
+local	FUN_0019534c	param_1	swizzle	INFERRED	four byte lanes (x y z w, first memory byte = x)
+local	FUN_0019534c	param_2	laneEnable	INFERRED	four byte lanes (x y z w, first memory byte = x)
+local	FUN_001953b8	param_1	swizzle	INFERRED	four byte lanes (x y z w, first memory byte = x)
+local	FUN_001953b8	param_2	laneEnable	INFERRED	four byte lanes (x y z w, first memory byte = x)
+local	FUN_00195424	param_1	laneWord	INFERRED	four byte lanes, 0 = component present
+local	FUN_0019545c	param_1	modifierBit0	INFERRED	flag bits of the IR source record
+local	FUN_0019545c	param_2	modifierBit1	INFERRED	flag bits of the IR source record
+local	FUN_00195650	param_1	unusedThis	INFERRED	opcode * 0x38 into the opcode info table
+local	FUN_00195650	param_2	irOpcode	INFERRED	opcode * 0x38 into the opcode info table
+local	FUN_00195650	iVar1	entryByteOffset	INFERRED	opcode * 0x38 into the opcode info table
+local	FUN_0019569c	param_1	unusedThis	INFERRED	opcode * 0x38 into the opcode info table
+local	FUN_0019569c	param_2	irOpcode	INFERRED	opcode * 0x38 into the opcode info table
+local	FUN_0019569c	iVar1	entryByteOffset	INFERRED	opcode * 0x38 into the opcode info table
+local	FUN_00195584	param_1	this	CONFIRMED	vslot 9 stores the constant 0x258f through its out parameter
+local	FUN_00195584	param_2	resultOut	CONFIRMED	vslot 9 stores the constant 0x258f through its out parameter
+local	FUN_00195590	param_1	this	INFERRED	bit-field split of the descriptor
+local	FUN_00195590	param_2	registerWord	INFERRED	bit-field split of the descriptor
+local	FUN_00195590	uVar1	descriptor	INFERRED	bit-field split of the descriptor
+local	FUN_00195590	uVar2	biasedExponent	INFERRED	bit-field split of the descriptor
+local	FUN_001956e8	param_1	this	CONFIRMED	receiver
+local	FUN_0019570c	param_1	this	CONFIRMED	iVar1 = records + index * 0x48
+local	FUN_0019570c	iVar1	record	CONFIRMED	iVar1 = records + index * 0x48
+local	FUN_00195794	param_1	this	CONFIRMED	field offsets match the RS record layout printed by FUN_000d183c (notes_shader_formats.md sec. 6)
+local	FUN_00195794	param_2	recordIndex	CONFIRMED	field offsets match the RS record layout printed by FUN_000d183c (notes_shader_formats.md sec. 6)
+local	FUN_00195794	param_3	colorIndex	CONFIRMED	field offsets match the RS record layout printed by FUN_000d183c (notes_shader_formats.md sec. 6)
+local	FUN_00195794	param_4	colorSource	CONFIRMED	field offsets match the RS record layout printed by FUN_000d183c (notes_shader_formats.md sec. 6)
+local	FUN_00195794	param_5	destRegisterWord	CONFIRMED	field offsets match the RS record layout printed by FUN_000d183c (notes_shader_formats.md sec. 6)
+local	FUN_00195794	param_6	biased	CONFIRMED	field offsets match the RS record layout printed by FUN_000d183c (notes_shader_formats.md sec. 6)
+local	FUN_00195794	iVar1	recordOffset	CONFIRMED	field offsets match the RS record layout printed by FUN_000d183c (notes_shader_formats.md sec. 6)
+local	FUN_001957d8	param_1	this	CONFIRMED	field offsets match the RS record layout printed by FUN_000d183c
+local	FUN_001957d8	param_2	recordIndex	CONFIRMED	field offsets match the RS record layout printed by FUN_000d183c
+local	FUN_001957d8	param_3	texCoordIndex	CONFIRMED	field offsets match the RS record layout printed by FUN_000d183c
+local	FUN_001957d8	param_4	texCoordPresent	CONFIRMED	field offsets match the RS record layout printed by FUN_000d183c
+local	FUN_001957d8	param_5	destRegisterWord	CONFIRMED	field offsets match the RS record layout printed by FUN_000d183c
+local	FUN_001957d8	param_6	adjusted	CONFIRMED	field offsets match the RS record layout printed by FUN_000d183c
+local	FUN_001957d8	iVar1	recordOffset	CONFIRMED	field offsets match the RS record layout printed by FUN_000d183c
+local	FUN_0019581c	param_1	this	CONFIRMED	select codes follow R300_ALU_ARGC_* order (SRCP_XYZ=15..SRCP_WWW=19)
+local	FUN_0019581c	param_2	sourceIndex	CONFIRMED	select codes follow R300_ALU_ARGC_* order (SRCP_XYZ=15..SRCP_WWW=19)
+local	FUN_0019581c	param_3	selectOut	CONFIRMED	select codes follow R300_ALU_ARGC_* order (SRCP_XYZ=15..SRCP_WWW=19)
+local	FUN_0019581c	param_4	unused	CONFIRMED	select codes follow R300_ALU_ARGC_* order (SRCP_XYZ=15..SRCP_WWW=19)
+local	FUN_0019581c	param_5	swizzle	CONFIRMED	select codes follow R300_ALU_ARGC_* order (SRCP_XYZ=15..SRCP_WWW=19)
+local	FUN_0019581c	uVar2	swizzleLanes	CONFIRMED	select codes follow R300_ALU_ARGC_* order (SRCP_XYZ=15..SRCP_WWW=19)
+local	FUN_00195920	param_1	this	CONFIRMED	select codes follow R300_ALU_ARGA_* order
+local	FUN_00195920	param_2	sourceIndex	CONFIRMED	select codes follow R300_ALU_ARGA_* order
+local	FUN_00195920	param_3	selectOut	CONFIRMED	select codes follow R300_ALU_ARGA_* order
+local	FUN_00195920	param_4	unused	CONFIRMED	select codes follow R300_ALU_ARGA_* order
+local	FUN_00195920	param_5	componentIndex	CONFIRMED	select codes follow R300_ALU_ARGA_* order
+local	FUN_0019598c	param_1	this	CONFIRMED	select codes follow R300_ALU_ARGC_* order
+local	FUN_0019598c	param_2	sourceIndex	CONFIRMED	select codes follow R300_ALU_ARGC_* order
+local	FUN_0019598c	param_3	selectOut	CONFIRMED	select codes follow R300_ALU_ARGC_* order
+local	FUN_0019598c	param_4	unused	CONFIRMED	select codes follow R300_ALU_ARGC_* order
+local	FUN_0019598c	param_5	sourceNumber	CONFIRMED	select codes follow R300_ALU_ARGC_* order
+local	FUN_0019598c	param_6	swizzle	CONFIRMED	select codes follow R300_ALU_ARGC_* order
+local	FUN_001959fc	param_1	this	CONFIRMED	select codes follow R300_ALU_ARGC_* order
+local	FUN_001959fc	param_2	sourceIndex	CONFIRMED	select codes follow R300_ALU_ARGC_* order
+local	FUN_001959fc	param_3	selectOut	CONFIRMED	select codes follow R300_ALU_ARGC_* order
+local	FUN_001959fc	param_4	unused	CONFIRMED	select codes follow R300_ALU_ARGC_* order
+local	FUN_001959fc	param_5	sourceNumber	CONFIRMED	select codes follow R300_ALU_ARGC_* order
+local	FUN_001959fc	param_6	swizzle	CONFIRMED	select codes follow R300_ALU_ARGC_* order
+local	FUN_001959fc	uVar2	swizzleOrLane	CONFIRMED	select codes follow R300_ALU_ARGC_* order
+local	FUN_00195b4c	param_1	this	CONFIRMED	select codes follow R300_ALU_ARGA_* order
+local	FUN_00195b4c	param_2	sourceIndex	CONFIRMED	select codes follow R300_ALU_ARGA_* order
+local	FUN_00195b4c	param_3	selectOut	CONFIRMED	select codes follow R300_ALU_ARGA_* order
+local	FUN_00195b4c	param_4	unused	CONFIRMED	select codes follow R300_ALU_ARGA_* order
+local	FUN_00195b4c	param_5	sourceNumber	CONFIRMED	select codes follow R300_ALU_ARGA_* order
+local	FUN_00195b5c	param_1	this	CONFIRMED	select codes follow R300_ALU_ARGA_* order
+local	FUN_00195b5c	param_2	sourceIndex	CONFIRMED	select codes follow R300_ALU_ARGA_* order
+local	FUN_00195b5c	param_3	selectOut	CONFIRMED	select codes follow R300_ALU_ARGA_* order
+local	FUN_00195b5c	param_4	unused	CONFIRMED	select codes follow R300_ALU_ARGA_* order
+local	FUN_00195b5c	param_5	sourceNumber	CONFIRMED	select codes follow R300_ALU_ARGA_* order
+local	FUN_00195b5c	param_6	componentIndex	CONFIRMED	select codes follow R300_ALU_ARGA_* order
+local	FUN_00195bb0	param_1	this	CONFIRMED	record field offsets match the ALU record layout printed by FUN_000d183c
+local	FUN_00195bb0	param_2	rgbSourceMask	CONFIRMED	record field offsets match the ALU record layout printed by FUN_000d183c
+local	FUN_00195bb0	param_3	rgbSourceAddress	CONFIRMED	record field offsets match the ALU record layout printed by FUN_000d183c
+local	FUN_00195bb0	param_4	alphaSourceMask	CONFIRMED	record field offsets match the ALU record layout printed by FUN_000d183c
+local	FUN_00195bb0	param_5	alphaSourceAddress	CONFIRMED	record field offsets match the ALU record layout printed by FUN_000d183c
+local	FUN_00195bb0	bVar1	notLastSource	CONFIRMED	record field offsets match the ALU record layout printed by FUN_000d183c
+local	FUN_00195bb0	iVar2	addressCursor	CONFIRMED	record field offsets match the ALU record layout printed by FUN_000d183c
+local	FUN_00195cec	param_1	this	CONFIRMED	IR opcode numbers from the static-initialiser table (Userspace/ATIRadeonX1000GLDriver/ppc/notes_r500_backend.md section 1)
+local	FUN_00195cec	param_2	hardwareOpcode	CONFIRMED	IR opcode numbers from the static-initialiser table (Userspace/ATIRadeonX1000GLDriver/ppc/notes_r500_backend.md section 1)
+local	FUN_00195cec	param_3	irOpcode	CONFIRMED	IR opcode numbers from the static-initialiser table (Userspace/ATIRadeonX1000GLDriver/ppc/notes_r500_backend.md section 1)
+local	FUN_00195cec	param_4	irInst	CONFIRMED	IR opcode numbers from the static-initialiser table (Userspace/ATIRadeonX1000GLDriver/ppc/notes_r500_backend.md section 1)
+local	FUN_00195cec	uVar3	alphaOpcode	CONFIRMED	IR opcode numbers from the static-initialiser table (Userspace/ATIRadeonX1000GLDriver/ppc/notes_r500_backend.md section 1)
+local	FUN_00195cec	uVar1	savedModifier	CONFIRMED	IR opcode numbers from the static-initialiser table (Userspace/ATIRadeonX1000GLDriver/ppc/notes_r500_backend.md section 1)
+local	FUN_00196ad8	param_1	this	CONFIRMED	see FUN_00195cec
+local	FUN_00196ad8	param_2	hardwareOpcode	CONFIRMED	see FUN_00195cec
+local	FUN_00196ad8	param_3	irOpcode	CONFIRMED	see FUN_00195cec
+local	FUN_00196ad8	param_4	irInst	CONFIRMED	see FUN_00195cec
+local	FUN_00196ad8	uVar3	rgbOpcode	CONFIRMED	see FUN_00195cec
+local	FUN_00196ad8	uVar1	savedModifier	CONFIRMED	see FUN_00195cec
+local	FUN_00195f70	param_1	this	CONFIRMED	receiver
+local	FUN_00195f8c	param_1	this	INFERRED	this+0x68 = TEX count
+local	FUN_00195f8c	iVar1	texCountNow	INFERRED	this+0x68 = TEX count
+local	FUN_00195fd8	param_1	this	CONFIRMED	header field offsets from notes_shader_formats.md sec. 6
+local	FUN_00195fd8	param_2	highestConstant	CONFIRMED	header field offsets from notes_shader_formats.md sec. 6
+local	FUN_00195fd8	param_3	pixelSize	CONFIRMED	header field offsets from notes_shader_formats.md sec. 6
+local	FUN_00195fd8	uVar1	rsCount	CONFIRMED	header field offsets from notes_shader_formats.md sec. 6
+local	FUN_00195fd8	iVar2	aluSlotExtra	CONFIRMED	header field offsets from notes_shader_formats.md sec. 6
+local	FUN_00195fd8	iVar3	header	CONFIRMED	header field offsets from notes_shader_formats.md sec. 6
+local	FUN_00196070	param_1	this	INFERRED	recordPtr = records + index*0x48
+local	FUN_00196070	iVar1	recordPtr	INFERRED	recordPtr = records + index*0x48
+local	FUN_001962f0	param_1	this	INFERRED	forwarded unchanged to vslot 14
+local	FUN_001962f0	param_2	node	INFERRED	forwarded unchanged to vslot 14
+local	FUN_001962f0	param_3	compiler	INFERRED	forwarded unchanged to vslot 14
+local	FUN_001962f0	param_4	extraArg	INFERRED	forwarded unchanged to vslot 14
+local	FUN_00196370	param_1	this	INFERRED	max-tracking of this+0x78
+local	FUN_00196370	param_2	registerIndex	INFERRED	max-tracking of this+0x78
+local	FUN_00196370	param_3	node	INFERRED	max-tracking of this+0x78
+local	FUN_00196370	iVar1	newMax	INFERRED	max-tracking of this+0x78
+local	FUN_0019649c	param_1	this	INFERRED	buffer + 0x936c is the used-texture-unit mask
+local	FUN_0019649c	param_2	sourceIndex	INFERRED	buffer + 0x936c is the used-texture-unit mask
+local	FUN_0019649c	iVar1	registerRecord	INFERRED	buffer + 0x936c is the used-texture-unit mask
+local	FUN_0019679c	param_1	this	INFERRED	compiler + 0x6c4 is the register allocation table
+local	FUN_0019679c	param_3	sourceIndex	INFERRED	compiler + 0x6c4 is the register allocation table
+local	FUN_0019679c	param_4	compiler	INFERRED	compiler + 0x6c4 is the register allocation table
+local	FUN_0019679c	iVar2	callResult	INFERRED	compiler + 0x6c4 is the register allocation table
+local	FUN_00196858	param_1	this	CONFIRMED	field offsets from the ALU record layout (notes sec. 6)
+local	FUN_00196858	param_2	irInst	CONFIRMED	field offsets from the ALU record layout (notes sec. 6)
+local	FUN_00196858	param_3	writeRgb	CONFIRMED	field offsets from the ALU record layout (notes sec. 6)
+local	FUN_00196858	param_4	rgbSelects	CONFIRMED	field offsets from the ALU record layout (notes sec. 6)
+local	FUN_00196858	param_5	unused1	CONFIRMED	field offsets from the ALU record layout (notes sec. 6)
+local	FUN_00196858	param_6	writeAlpha	CONFIRMED	field offsets from the ALU record layout (notes sec. 6)
+local	FUN_00196858	param_7	alphaSelects	CONFIRMED	field offsets from the ALU record layout (notes sec. 6)
+local	FUN_00196858	param_8	unused2	CONFIRMED	field offsets from the ALU record layout (notes sec. 6)
+local	FUN_00196858	param_9	singleSource	CONFIRMED	field offsets from the ALU record layout (notes sec. 6)
+local	FUN_00196858	bVar1	hasThirdSource	CONFIRMED	field offsets from the ALU record layout (notes sec. 6)
+local	FUN_00196858	bVar2	notFirstSource	CONFIRMED	field offsets from the ALU record layout (notes sec. 6)
+local	FUN_00196858	uVar4	modifierBits	CONFIRMED	field offsets from the ALU record layout (notes sec. 6)
+local	FUN_00196858	puVar5	sourceFlags	CONFIRMED	field offsets from the ALU record layout (notes sec. 6)
+local	FUN_00196d5c	param_1	unusedThis	CONFIRMED	factory: returns allocation + 1
+local	FUN_00196e90	param_1	this	INFERRED	constantAllocator is the object passed through to FUN_0018xxxx
+local	FUN_00196e90	param_3	constantAllocator	INFERRED	constantAllocator is the object passed through to FUN_0018xxxx
+local	FUN_00196e90	uVar1	sourceLaneWord	INFERRED	constantAllocator is the object passed through to FUN_0018xxxx
+local	FUN_001955c0	param_1	this	CONFIRMED	forwarded unchanged
+local	FUN_001955c0	param_2	node	CONFIRMED	forwarded unchanged
+local	FUN_001955c0	param_3	compiler	CONFIRMED	forwarded unchanged
+local	FUN_001955dc	param_1	this	INFERRED	argument order as passed by FUN_001955c0
+local	FUN_001955dc	param_2	node	INFERRED	argument order as passed by FUN_001955c0
+local	FUN_001955dc	param_3	compiler	INFERRED	argument order as passed by FUN_001955c0
+local	FUN_001955d0	param_1	node	INFERRED	argument order as passed to FUN_000e2c78
+local	FUN_001955d0	param_2	unused1	INFERRED	argument order as passed to FUN_000e2c78
+local	FUN_001955d0	param_3	unused2	INFERRED	argument order as passed to FUN_000e2c78
+local	FUN_001955d0	param_4	compiler	INFERRED	argument order as passed to FUN_000e2c78
+local	FUN_001955d0	param_5	this	INFERRED	argument order as passed to FUN_000e2c78
+local	FUN_001971f8	param_1	this	INFERRED	param_2 + 8 is the instruction list head
+local	FUN_001971f8	param_2	block	INFERRED	param_2 + 8 is the instruction list head
+local	FUN_001971f8	param_3	startOfShaderFlag	INFERRED	param_2 + 8 is the instruction list head
+local	FUN_0019786c	param_1	this	INFERRED	field offsets: this+0xa0..+0xa3 are the four swizzle lanes of source 0
+local	FUN_0019786c	param_2	rgbLaneBytes	INFERRED	field offsets: this+0xa0..+0xa3 are the four swizzle lanes of source 0
+local	FUN_0019786c	param_3	alphaLaneBytes	INFERRED	field offsets: this+0xa0..+0xa3 are the four swizzle lanes of source 0
+local	FUN_0019786c	param_5	rgbHardwareOpcodeOut	INFERRED	field offsets: this+0xa0..+0xa3 are the four swizzle lanes of source 0
+local	FUN_0019786c	param_6	alphaHardwareOpcodeOut	INFERRED	field offsets: this+0xa0..+0xa3 are the four swizzle lanes of source 0
+local	FUN_0019786c	cVar2	laneY	INFERRED	field offsets: this+0xa0..+0xa3 are the four swizzle lanes of source 0
+local	FUN_0019786c	cVar6	laneZ	INFERRED	field offsets: this+0xa0..+0xa3 are the four swizzle lanes of source 0
+local	FUN_0019786c	cVar1	laneW	INFERRED	field offsets: this+0xa0..+0xa3 are the four swizzle lanes of source 0
+local	FUN_0019786c	uVar4	classFlags	INFERRED	field offsets: this+0xa0..+0xa3 are the four swizzle lanes of source 0
+local	FUN_0019786c	uVar7	opcodeClass	INFERRED	field offsets: this+0xa0..+0xa3 are the four swizzle lanes of source 0
+local	FUN_0019786c	iVar8	irOpcode	INFERRED	field offsets: this+0xa0..+0xa3 are the four swizzle lanes of source 0
+local	FUN_0019786c	uVar5	laneEnableByte	INFERRED	field offsets: this+0xa0..+0xa3 are the four swizzle lanes of source 0
+local	FUN_00197b30	param_1	this	CONFIRMED	TEX record layout from notes_shader_formats.md sec. 6
+local	FUN_00197b30	param_3	unused	CONFIRMED	TEX record layout from notes_shader_formats.md sec. 6
+local	FUN_00197b30	uVar4	sourceRegister	CONFIRMED	TEX record layout from notes_shader_formats.md sec. 6
+local	FUN_00197b30	iVar6	irOpcode	CONFIRMED	TEX record layout from notes_shader_formats.md sec. 6
+local	FUN_00197b30	bVar5	texFlags	CONFIRMED	TEX record layout from notes_shader_formats.md sec. 6
+local	FUN_00197de4	param_1	this	CONFIRMED	0.0, 1.0, 0.5 verified in TEXT___literal4.c
+local	FUN_00197de4	param_2	sourceIndex	CONFIRMED	0.0, 1.0, 0.5 verified in TEXT___literal4.c
+local	FUN_00197de4	param_3	selectOut	CONFIRMED	0.0, 1.0, 0.5 verified in TEXT___literal4.c
+local	FUN_00197de4	param_4	unused	CONFIRMED	0.0, 1.0, 0.5 verified in TEXT___literal4.c
+local	FUN_00197de4	fVar1	literalValue	CONFIRMED	0.0, 1.0, 0.5 verified in TEXT___literal4.c
+local	FUN_00197de4	uVar2	laneSelector	CONFIRMED	0.0, 1.0, 0.5 verified in TEXT___literal4.c
+local	FUN_00197de4	local_38	swizzleWord	CONFIRMED	0.0, 1.0, 0.5 verified in TEXT___literal4.c
+local	FUN_00197ecc	param_1	this	CONFIRMED	0.0, 1.0, 0.5 verified in TEXT___literal4.c
+local	FUN_00197ecc	param_2	sourceIndex	CONFIRMED	0.0, 1.0, 0.5 verified in TEXT___literal4.c
+local	FUN_00197ecc	param_3	selectOut	CONFIRMED	0.0, 1.0, 0.5 verified in TEXT___literal4.c
+local	FUN_00197ecc	param_4	unused	CONFIRMED	0.0, 1.0, 0.5 verified in TEXT___literal4.c
+local	FUN_00197ecc	fVar1	literalValue	CONFIRMED	0.0, 1.0, 0.5 verified in TEXT___literal4.c
+local	FUN_00197ecc	uVar2	laneSelector	CONFIRMED	0.0, 1.0, 0.5 verified in TEXT___literal4.c
+local	FUN_00197ecc	local_38	swizzleWord	CONFIRMED	0.0, 1.0, 0.5 verified in TEXT___literal4.c
+local	FUN_00197fb4	param_1	this	CONFIRMED	record offsets as above
+local	FUN_00197fb4	param_2	writeRgb	CONFIRMED	record offsets as above
+local	FUN_00197fb4	param_3	writeAlpha	CONFIRMED	record offsets as above
+local	FUN_00197fb4	param_5	destRegister	CONFIRMED	record offsets as above
+local	FUN_00197fb4	iVar4	recordIndex	CONFIRMED	record offsets as above
+local	FUN_00197fb4	iVar1	recordBase	CONFIRMED	record offsets as above
+local	FUN_00197fb4	uVar3	writeMask	CONFIRMED	record offsets as above
+local	FUN_00198084	param_1	this	CONFIRMED	record offsets as above
+local	FUN_00198084	param_2	writeRgb	CONFIRMED	record offsets as above
+local	FUN_00198084	param_3	writeAlpha	CONFIRMED	record offsets as above
+local	FUN_00198084	iVar6	destinationClass	CONFIRMED	record offsets as above
+local	FUN_00198084	uVar5	outputIndex	CONFIRMED	record offsets as above
+local	FUN_00198084	uVar2	writeMask	CONFIRMED	record offsets as above
+local	FUN_0019a2e0	param_1	firstValue	CONFIRMED	max(a, b)
+local	FUN_0019a2e0	param_2	secondValue	CONFIRMED	max(a, b)
+local	FUN_0019a2f0	param_1	this	INFERRED	receiver
+local	FUN_0019a368	param_1	this	CONFIRMED	receiver
+local	FUN_0019a384	param_1	this	CONFIRMED	receiver
+local	FUN_0019a3bc	param_1	this	CONFIRMED	format strings in the body
+local	FUN_0019a3bc	param_2	quiet	CONFIRMED	format strings in the body
+local	FUN_0019a3bc	param_3	unused1	CONFIRMED	format strings in the body
+local	FUN_0019a3bc	param_4	unused2	CONFIRMED	format strings in the body
+local	FUN_0019a3bc	param_5	unused3	CONFIRMED	format strings in the body
+local	FUN_0019a3bc	param_6	printfArg6	CONFIRMED	format strings in the body
+local	FUN_0019a3bc	param_7	printfArg7	CONFIRMED	format strings in the body
+local	FUN_0019a3bc	param_8	printfArg8	CONFIRMED	format strings in the body
+local	FUN_0019a484	param_1	this	INFERRED	entries of 0x1c bytes
+local	FUN_0019a510	param_1	this	CONFIRMED	0x10 bytes per instruction
+local	FUN_0019a510	iVar1	instructionByteOffset	CONFIRMED	0x10 bytes per instruction
+local	FUN_0019a510	iVar2	instructionWords	CONFIRMED	0x10 bytes per instruction
+local	FUN_0019a538	param_1	unusedThis	INFERRED	opcode = *(inst + 0x88)->+8
+local	FUN_0019a538	param_2	irInst	INFERRED	opcode = *(inst + 0x88)->+8
+local	FUN_0019a568	param_1	this	INFERRED	state this+0x1c
+local	FUN_0019a568	param_2	event	INFERRED	state this+0x1c
+local	FUN_0019a690	param_1	this	CONFIRMED	receiver
+local	FUN_0019a6a0	param_1	this	INFERRED	forwarded
+local	FUN_0019a6a0	param_2	node	INFERRED	forwarded
+local	FUN_0019a6f0	param_1	sourceBlock	INFERRED	literal float table at sourceBlock + 0x20, stride 0x18
+local	FUN_0019a6f0	param_2	sourceNumber	INFERRED	literal float table at sourceBlock + 0x20, stride 0x18
+local	FUN_0019a6f0	param_3	negateOut	INFERRED	literal float table at sourceBlock + 0x20, stride 0x18
+local	FUN_0019a6f0	fVar1	literalValue	INFERRED	literal float table at sourceBlock + 0x20, stride 0x18
+local	FUN_0019a7b0	param_1	laneBlock	INFERRED	lane number to offset: 1 -> +4, 2 -> +8, 3 -> +0xc
+local	FUN_0019a7b0	param_2	sourceLane	INFERRED	lane number to offset: 1 -> +4, 2 -> +8, 3 -> +0xc
+local	FUN_0019a7b0	param_3	destLane	INFERRED	lane number to offset: 1 -> +4, 2 -> +8, 3 -> +0xc
+local	FUN_0019a7b0	puVar2	sourcePtr	INFERRED	lane number to offset: 1 -> +4, 2 -> +8, 3 -> +0xc
+local	FUN_0019a7b0	puVar1	destPtr	INFERRED	lane number to offset: 1 -> +4, 2 -> +8, 3 -> +0xc
+local	FUN_0019a80c	param_1	this	INFERRED	forwards its arguments to vslot 14
+local	FUN_0019a80c	param_3	extra1	INFERRED	forwards its arguments to vslot 14
+local	FUN_0019a80c	param_4	compiler	INFERRED	forwards its arguments to vslot 14
+local	FUN_0019a8ac	param_1	this	CONFIRMED	receiver
+local	FUN_0019a8bc	param_1	this	CONFIRMED	receiver
+local	FUN_0019a8d4	param_1	this	INFERRED	loop stack entry = this+0x60 + loopId * 0xc
+local	FUN_0019a8d4	param_2	node	INFERRED	loop stack entry = this+0x60 + loopId * 0xc
+local	FUN_0019a8d4	iVar1	loopId	INFERRED	loop stack entry = this+0x60 + loopId * 0xc
+local	FUN_0019a954	param_1	this	INFERRED	receiver
+local	FUN_0019a9b0	param_1	this	CONFIRMED	0x1c bytes per entry
+local	FUN_0019a9b0	param_2	fieldA	CONFIRMED	0x1c bytes per entry
+local	FUN_0019a9b0	param_3	fieldB	CONFIRMED	0x1c bytes per entry
+local	FUN_0019a9b0	uVar2	instructionCount	CONFIRMED	0x1c bytes per entry
+local	FUN_0019a9b0	iVar1	entry	CONFIRMED	0x1c bytes per entry
+local	FUN_0019a9dc	param_1	this	INFERRED	loop stack entry = this+0x60 + loopId * 0xc
+local	FUN_0019a9dc	param_2	node	INFERRED	loop stack entry = this+0x60 + loopId * 0xc
+local	FUN_0019a9dc	iVar1	loopId	INFERRED	loop stack entry = this+0x60 + loopId * 0xc
+local	FUN_0019aa7c	param_1	this	INFERRED	receiver
+local	FUN_0019aaf4	param_1	this	INFERRED	compiler is the last argument
+local	FUN_0019aaf4	param_2	node	INFERRED	compiler is the last argument
+local	FUN_0019aaf4	param_3	extra1	INFERRED	compiler is the last argument
+local	FUN_0019aaf4	param_4	extra2	INFERRED	compiler is the last argument
+local	FUN_0019aaf4	param_5	extra3	INFERRED	compiler is the last argument
+local	FUN_0019aaf4	param_6	compiler	INFERRED	compiler is the last argument
+local	FUN_0019ab60	param_1	this	INFERRED	compiler is the last argument
+local	FUN_0019ab60	param_2	node	INFERRED	compiler is the last argument
+local	FUN_0019ab60	param_3	extra1	INFERRED	compiler is the last argument
+local	FUN_0019ab60	param_4	compiler	INFERRED	compiler is the last argument
+local	FUN_0019abc4	param_1	this	INFERRED	compiler is the last argument
+local	FUN_0019abc4	param_2	node	INFERRED	compiler is the last argument
+local	FUN_0019abc4	param_3	extra1	INFERRED	compiler is the last argument
+local	FUN_0019abc4	param_4	compiler	INFERRED	compiler is the last argument
+local	FUN_0019ac2c	param_1	this	INFERRED	entry kind stored at +8
+local	FUN_0019ac2c	param_2	entryField0	INFERRED	entry kind stored at +8
+local	FUN_0019ac2c	param_3	entryField3	INFERRED	entry kind stored at +8
+local	FUN_0019ac2c	iVar2	entryByteOffset	INFERRED	entry kind stored at +8
+local	FUN_0019ac2c	iVar1	entry	INFERRED	entry kind stored at +8
+local	FUN_0019acb0	param_1	this	CONFIRMED	allocation sizes from the code
+local	FUN_0019acb0	param_2	program	CONFIRMED	allocation sizes from the code
+local	FUN_0019acb0	param_3	allocatorArg	CONFIRMED	allocation sizes from the code
+local	FUN_0019acb0	uVar2	allocation	CONFIRMED	allocation sizes from the code
+local	FUN_0019acb0	iVar3	maxInstructions	CONFIRMED	allocation sizes from the code
+local	FUN_0019acb0	iVar1	programInstructionLimit	CONFIRMED	allocation sizes from the code
+local	FUN_0019adf8	param_1	this	INFERRED	0xc bytes per level
+local	FUN_0019adf8	param_2	enable	INFERRED	0xc bytes per level
+local	FUN_0019adf8	iVar2	compilerPtr	INFERRED	0xc bytes per level
+local	FUN_0019adf8	iVar1	loopStackLevels	INFERRED	0xc bytes per level
+local	FUN_0019adf8	uVar3	loopStack	INFERRED	0xc bytes per level
+local	FUN_0019ae80	param_1	this	INFERRED	calls pass the block as first argument
+local	FUN_0019ae80	param_2	node	INFERRED	calls pass the block as first argument
+local	FUN_0019ae80	param_3	block	INFERRED	calls pass the block as first argument
+local	FUN_0019aee8	param_1	this	INFERRED	calls pass the block as first argument
+local	FUN_0019aee8	param_2	node	INFERRED	calls pass the block as first argument
+local	FUN_0019aee8	param_3	block	INFERRED	calls pass the block as first argument
+local	FUN_0019af40	param_1	this	INFERRED	loop-stack vector at program + 0x24 (count at +4, array at +8)
+local	FUN_0019af40	param_2	node	INFERRED	loop-stack vector at program + 0x24 (count at +4, array at +8)
+local	FUN_0019af40	iVar5	conditionRegister	INFERRED	loop-stack vector at program + 0x24 (count at +4, array at +8)
+local	FUN_0019af40	iVar4	callResult	INFERRED	loop-stack vector at program + 0x24 (count at +4, array at +8)
+local	FUN_0019af40	piVar2	lastEntryPtr	INFERRED	loop-stack vector at program + 0x24 (count at +4, array at +8)
+local	FUN_0019b03c	param_1	this	INFERRED	instruction list links at +8, flags at +0x14
+local	FUN_0019b03c	param_2	block	INFERRED	instruction list links at +8, flags at +0x14
+local	FUN_0019b03c	param_3	groupHead	INFERRED	instruction list links at +8, flags at +0x14
+local	FUN_0019b03c	param_4	foldNotNeededOut	INFERRED	instruction list links at +8, flags at +0x14
+local	FUN_0019b3c8	param_1	this	INFERRED	param_2 + 8 is the instruction list head
+local	FUN_0019b3c8	param_2	block	INFERRED	param_2 + 8 is the instruction list head
+local	FUN_0019b6a0	param_1	this	INFERRED	receiver
+local	FUN_0019b748	param_1	this	INFERRED	entry stored at +4/+8/+0xc/+0x10
+local	FUN_0019b748	param_2	entryField3	INFERRED	entry stored at +4/+8/+0xc/+0x10
+local	FUN_0019b748	param_3	entryField1	INFERRED	entry stored at +4/+8/+0xc/+0x10
+local	FUN_0019b748	iVar1	entryIndex	INFERRED	entry stored at +4/+8/+0xc/+0x10
+local	FUN_0019b748	iVar5	entry	INFERRED	entry stored at +4/+8/+0xc/+0x10
+local	FUN_0019b808	param_1	this	INFERRED	receiver
+local	FUN_0019b8bc	param_1	unusedThis	CONFIRMED	factory
+local	FUN_00195474	param_1	this	INFERRED	vector layout: [1] count, [2] storage
+local	FUN_00195474	param_2	node	INFERRED	vector layout: [1] count, [2] storage
+local	FUN_00195474	iVar1	child	INFERRED	vector layout: [1] count, [2] storage
+local	FUN_00195474	iVar4	childByteOffset	INFERRED	vector layout: [1] count, [2] storage
+local	FUN_0019baf4	param_1	this	CONFIRMED	instructionWords[0] is PVS word 0, [1..3] the source operands
+local	FUN_0019baf4	param_3	instructionWords	CONFIRMED	instructionWords[0] is PVS word 0, [1..3] the source operands
+local	FUN_0019c130	param_1	this	CONFIRMED	field layout from R5xx_Acceleration_v1.5 'PVS Source Operand Description'
+local	FUN_0019c130	param_3	instructionWords	CONFIRMED	field layout from R5xx_Acceleration_v1.5 'PVS Source Operand Description'
+local	FUN_0019c130	param_4	sourceNumber	CONFIRMED	field layout from R5xx_Acceleration_v1.5 'PVS Source Operand Description'
+local	FUN_0019c130	param_5	operandSlot	CONFIRMED	field layout from R5xx_Acceleration_v1.5 'PVS Source Operand Description'
+local	FUN_0019c130	puVar20	sourceWord	CONFIRMED	field layout from R5xx_Acceleration_v1.5 'PVS Source Operand Description'
+local	FUN_0019ca78	param_1	this	CONFIRMED	puVar11 = instructionWords + 3
+local	FUN_0019ca78	param_3	instructionWords	CONFIRMED	puVar11 = instructionWords + 3
+local	FUN_0019ca78	puVar11	dualMathWord	CONFIRMED	puVar11 = instructionWords + 3
+local	FUN_0019d1f4	param_1	this	CONFIRMED	instructionWords = this+0x44 + count*0x10
+local	FUN_0019d1f4	puVar3	instructionWords	CONFIRMED	instructionWords = this+0x44 + count*0x10
+local	FUN_0019d430	param_1	this	INFERRED	this+0x8c < 0 means 'not allocated yet'
+local	FUN_0019d430	param_2	registerAllocator	INFERRED	this+0x8c < 0 means 'not allocated yet'
+local	FUN_0019d478	param_1	this	INFERRED	in_r5 is the third incoming argument register
+local	FUN_0019d478	param_2	node	INFERRED	in_r5 is the third incoming argument register
+local	FUN_0019d478	in_r5	visitFlag	INFERRED	in_r5 is the third incoming argument register
+local	FUN_0019d4e8	param_1	this	INFERRED	arena = compiler + 0x378
+local	FUN_0019d590	param_1	this	INFERRED	stack vectors: count at +4, array at +8
+local	FUN_0019d590	param_2	node	INFERRED	stack vectors: count at +4, array at +8
+local	FUN_0019d590	param_3	extra1	INFERRED	stack vectors: count at +4, array at +8
+local	FUN_0019d590	iVar8	conditionBlock	INFERRED	stack vectors: count at +4, array at +8
+local	FUN_0019d590	iVar4	callResult	INFERRED	stack vectors: count at +4, array at +8
+local	FUN_0019d7a0	param_1	this	INFERRED	vslot 13 is the block assembler
+local	FUN_0019d7a0	param_2	node	INFERRED	vslot 13 is the block assembler
+local	FUN_0019d7a0	param_3	block	INFERRED	vslot 13 is the block assembler
+local	FUN_0019d858	param_1	this	INFERRED	node + 0xac is the predicate stack entry
+local	FUN_0019d858	param_2	node	INFERRED	node + 0xac is the predicate stack entry
+local	FUN_0019d858	param_3	block	INFERRED	node + 0xac is the predicate stack entry
+local	FUN_0019dc48	param_1	this	INFERRED	forwards the block
+local	FUN_0019dc48	param_2	node	INFERRED	forwards the block
+local	FUN_0019dc48	param_3	block	INFERRED	forwards the block
+local	FUN_0019dd7c	param_1	this	CONFIRMED	vector layout: [0] arena, [1] capacity, [2] count, [3] storage
+local	FUN_0019dd7c	param_2	program	CONFIRMED	vector layout: [0] arena, [1] capacity, [2] count, [3] storage
+local	FUN_0019dd7c	param_3	allocatorArg	CONFIRMED	vector layout: [0] arena, [1] capacity, [2] count, [3] storage
+local	FUN_0019de50	param_1	unusedThis	CONFIRMED	factory
+local	FUN_0019dff8	param_1	this	INFERRED	node + 0xac is the predicate stack entry
+local	FUN_0019dff8	param_2	node	INFERRED	node + 0xac is the predicate stack entry
+local	FUN_0019dff8	param_3	block	INFERRED	node + 0xac is the predicate stack entry
+local	FUN_0019e11c	param_1	this	INFERRED	node + 0xac is the predicate stack entry
+local	FUN_0019e11c	param_2	node	INFERRED	node + 0xac is the predicate stack entry
+local	FUN_0019e11c	param_3	block	INFERRED	node + 0xac is the predicate stack entry
+local	FUN_0019e318	param_1	this	INFERRED	the factory FUN_001043f0(opcode, compiler) creates the IR instruction
+local	FUN_0019e318	param_2	node	INFERRED	the factory FUN_001043f0(opcode, compiler) creates the IR instruction
+local	FUN_0019e318	param_3	block	INFERRED	the factory FUN_001043f0(opcode, compiler) creates the IR instruction
+local	FUN_0019e318	param_5	extra2	INFERRED	the factory FUN_001043f0(opcode, compiler) creates the IR instruction
+local	FUN_0019e318	param_6	extra3	INFERRED	the factory FUN_001043f0(opcode, compiler) creates the IR instruction
+local	FUN_0019e318	param_7	extra4	INFERRED	the factory FUN_001043f0(opcode, compiler) creates the IR instruction
+local	FUN_0019e660	param_1	this	INFERRED	forwarded to FUN_0019adf8
+local	FUN_0019e660	param_2	enable	INFERRED	forwarded to FUN_0019adf8
+local	FUN_0019e6e0	param_1	this	INFERRED	loop stacks at this+0x94 / this+0x98
+local	FUN_0019e6e0	param_2	node	INFERRED	loop stacks at this+0x94 / this+0x98
+local	FUN_0019e6e0	param_3	block	INFERRED	loop stacks at this+0x94 / this+0x98
+local	FUN_0019e990	param_1	descriptor	INFERRED	four 2-bit selectors in descriptor[1]
+local	FUN_0019e990	param_2	lane	INFERRED	four 2-bit selectors in descriptor[1]
+local	FUN_0019e9fc	param_1	descriptor	INFERRED	four 3-bit selectors in descriptor[1]
+local	FUN_0019e9fc	param_2	lane	INFERRED	four 3-bit selectors in descriptor[1]
+local	FUN_0019eaa4	param_1	descriptor	INFERRED	one negate bit per lane
+local	FUN_0019eac4	param_1	descriptor	INFERRED	one negate bit per lane
+local	FUN_0019eac4	param_2	lane	INFERRED	one negate bit per lane
+local	FUN_0019f094	param_1	this	CONFIRMED	field offsets match the RS record layout of FUN_000d183c
+local	FUN_0019f094	param_2	recordIndex	CONFIRMED	field offsets match the RS record layout of FUN_000d183c
+local	FUN_0019f094	param_3	colorIndex	CONFIRMED	field offsets match the RS record layout of FUN_000d183c
+local	FUN_0019f094	param_4	colorSource	CONFIRMED	field offsets match the RS record layout of FUN_000d183c
+local	FUN_0019f094	param_5	destRegisterWord	CONFIRMED	field offsets match the RS record layout of FUN_000d183c
+local	FUN_0019f094	iVar1	recordOffset	CONFIRMED	field offsets match the RS record layout of FUN_000d183c
+local	FUN_0019f0cc	param_1	this	CONFIRMED	field offsets match the RS record layout of FUN_000d183c
+local	FUN_0019f0cc	param_2	recordIndex	CONFIRMED	field offsets match the RS record layout of FUN_000d183c
+local	FUN_0019f0cc	param_3	texCoordIndex	CONFIRMED	field offsets match the RS record layout of FUN_000d183c
+local	FUN_0019f0cc	param_4	texCoordPresent	CONFIRMED	field offsets match the RS record layout of FUN_000d183c
+local	FUN_0019f0cc	param_5	destRegisterWord	CONFIRMED	field offsets match the RS record layout of FUN_000d183c
+local	FUN_0019f0cc	param_6	adjusted	CONFIRMED	field offsets match the RS record layout of FUN_000d183c
+local	FUN_0019f0cc	iVar1	recordOffset	CONFIRMED	field offsets match the RS record layout of FUN_000d183c
+local	FUN_0019f110	param_1	this	CONFIRMED	receiver
+local	FUN_0019f138	param_1	this	CONFIRMED	record = base + index * 0x48
+local	FUN_0019f138	iVar1	record	CONFIRMED	record = base + index * 0x48
+local	FUN_0019f138	iVar2	recordsBase	CONFIRMED	record = base + index * 0x48
+local	FUN_0019f1e0	param_1	this	INFERRED	argument order as passed to FUN_000e2c78
+local	FUN_0019f1e0	param_2	node	INFERRED	argument order as passed to FUN_000e2c78
+local	FUN_0019f1e0	param_3	compiler	INFERRED	argument order as passed to FUN_000e2c78
+local	FUN_0019f1fc	param_1	this	INFERRED	packed word layout inferred from the shifts
+local	FUN_0019f1fc	param_2	sourceIndex	INFERRED	packed word layout inferred from the shifts
+local	FUN_0019f1fc	param_3	selectOut	INFERRED	packed word layout inferred from the shifts
+local	FUN_0019f1fc	param_4	packedSelectOut	INFERRED	packed word layout inferred from the shifts
+local	FUN_0019f1fc	param_5	swizzle	INFERRED	packed word layout inferred from the shifts
+local	FUN_0019f1fc	iVar1	byteOffset	INFERRED	packed word layout inferred from the shifts
+local	FUN_0019f22c	param_1	this	INFERRED	R520 twin of the R300 alpha-from-srcp builder
+local	FUN_0019f22c	param_2	sourceIndex	INFERRED	R520 twin of the R300 alpha-from-srcp builder
+local	FUN_0019f22c	param_3	selectOut	INFERRED	R520 twin of the R300 alpha-from-srcp builder
+local	FUN_0019f22c	param_4	packedSelectOut	INFERRED	R520 twin of the R300 alpha-from-srcp builder
+local	FUN_0019f22c	param_5	componentIndex	INFERRED	R520 twin of the R300 alpha-from-srcp builder
+local	FUN_0019f244	param_1	this	INFERRED	swizzle lanes: first memory byte = x
+local	FUN_0019f244	param_2	sourceIndex	INFERRED	swizzle lanes: first memory byte = x
+local	FUN_0019f244	param_3	selectOut	INFERRED	swizzle lanes: first memory byte = x
+local	FUN_0019f244	param_4	packedSelectOut	INFERRED	swizzle lanes: first memory byte = x
+local	FUN_0019f244	param_5	sourceNumber	INFERRED	swizzle lanes: first memory byte = x
+local	FUN_0019f244	param_6	swizzle	INFERRED	swizzle lanes: first memory byte = x
+local	FUN_0019f244	iVar1	byteOffset	INFERRED	swizzle lanes: first memory byte = x
+local	FUN_0019f298	param_1	this	INFERRED	packed word layout inferred from the shifts
+local	FUN_0019f298	param_2	sourceIndex	INFERRED	packed word layout inferred from the shifts
+local	FUN_0019f298	param_3	selectOut	INFERRED	packed word layout inferred from the shifts
+local	FUN_0019f298	param_4	packedSelectOut	INFERRED	packed word layout inferred from the shifts
+local	FUN_0019f298	param_5	sourceNumber	INFERRED	packed word layout inferred from the shifts
+local	FUN_0019f298	param_6	swizzle	INFERRED	packed word layout inferred from the shifts
+local	FUN_0019f298	iVar1	byteOffset	INFERRED	packed word layout inferred from the shifts
+local	FUN_0019f2c4	param_1	this	INFERRED	R520 twin of the R300 builder
+local	FUN_0019f2c4	param_2	sourceIndex	INFERRED	R520 twin of the R300 builder
+local	FUN_0019f2c4	param_3	selectOut	INFERRED	R520 twin of the R300 builder
+local	FUN_0019f2c4	param_4	packedSelectOut	INFERRED	R520 twin of the R300 builder
+local	FUN_0019f2c4	param_5	sourceNumber	INFERRED	R520 twin of the R300 builder
+local	FUN_0019f2c4	param_6	componentIndex	INFERRED	R520 twin of the R300 builder
+local	FUN_0019f2c4	iVar1	byteOffset	INFERRED	R520 twin of the R300 builder
+local	FUN_0019f2ec	param_1	this	INFERRED	R520 twin of the R300 builder
+local	FUN_0019f2ec	param_2	sourceIndex	INFERRED	R520 twin of the R300 builder
+local	FUN_0019f2ec	param_3	selectOut	INFERRED	R520 twin of the R300 builder
+local	FUN_0019f2ec	param_4	packedSelectOut	INFERRED	R520 twin of the R300 builder
+local	FUN_0019f2ec	param_5	sourceNumber	INFERRED	R520 twin of the R300 builder
+local	FUN_0019f2ec	param_6	componentIndex	INFERRED	R520 twin of the R300 builder
+local	FUN_0019f2ec	iVar1	byteOffset	INFERRED	R520 twin of the R300 builder
+local	FUN_0019f310	param_1	this	CONFIRMED	record field offsets from the ALU record layout
+local	FUN_0019f310	param_2	rgbSourceMask	CONFIRMED	record field offsets from the ALU record layout
+local	FUN_0019f310	param_3	rgbSourceAddress	CONFIRMED	record field offsets from the ALU record layout
+local	FUN_0019f310	param_4	alphaSourceMask	CONFIRMED	record field offsets from the ALU record layout
+local	FUN_0019f310	param_5	alphaSourceAddress	CONFIRMED	record field offsets from the ALU record layout
+local	FUN_0019f310	bVar1	notLastSource	CONFIRMED	record field offsets from the ALU record layout
+local	FUN_0019f310	uVar3	addressHalfword	CONFIRMED	record field offsets from the ALU record layout
+local	FUN_0019f43c	param_1	this	CONFIRMED	IR opcode numbers from notes_r500_backend.md section 1
+local	FUN_0019f43c	param_2	hardwareOpcode	CONFIRMED	IR opcode numbers from notes_r500_backend.md section 1
+local	FUN_0019f43c	param_3	irOpcode	CONFIRMED	IR opcode numbers from notes_r500_backend.md section 1
+local	FUN_0019f43c	param_4	irInst	CONFIRMED	IR opcode numbers from notes_r500_backend.md section 1
+local	FUN_0019f43c	uVar4	alphaOpcode	CONFIRMED	IR opcode numbers from notes_r500_backend.md section 1
+local	FUN_001a00b4	param_1	this	CONFIRMED	IR opcode numbers from notes_r500_backend.md section 1
+local	FUN_001a00b4	param_2	hardwareOpcode	CONFIRMED	IR opcode numbers from notes_r500_backend.md section 1
+local	FUN_001a00b4	param_3	irOpcode	CONFIRMED	IR opcode numbers from notes_r500_backend.md section 1
+local	FUN_001a00b4	param_4	irInst	CONFIRMED	IR opcode numbers from notes_r500_backend.md section 1
+local	FUN_001a00b4	uVar3	rgbOpcode	CONFIRMED	IR opcode numbers from notes_r500_backend.md section 1
+local	FUN_0019f778	param_1	this	INFERRED	receiver
+local	FUN_0019f7a4	param_1	this	CONFIRMED	header offsets as above
+local	FUN_0019f7a4	param_2	highestConstant	CONFIRMED	header offsets as above
+local	FUN_0019f7a4	param_3	pixelSize	CONFIRMED	header offsets as above
+local	FUN_0019f7a4	iVar5	header	CONFIRMED	header offsets as above
+local	FUN_0019f880	param_1	this	INFERRED	record kind 5 = CF instruction (header +0x20 counts them)
+local	FUN_0019f880	param_2	condition	INFERRED	record kind 5 = CF instruction (header +0x20 counts them)
+local	FUN_0019f880	param_3	branchArg	INFERRED	record kind 5 = CF instruction (header +0x20 counts them)
+local	FUN_0019f970	param_1	this	INFERRED	receiver
+local	FUN_0019f98c	param_1	this	INFERRED	0x2000 flags an immediate
+local	FUN_0019f98c	param_2	node	INFERRED	0x2000 flags an immediate
+local	FUN_0019f98c	param_3	immediateOut	INFERRED	0x2000 flags an immediate
+local	FUN_0019f98c	fVar1	literalValue	INFERRED	0x2000 flags an immediate
+local	FUN_0019fa58	param_1	this	INFERRED	0x800 = 4 << 9, 0xa00 = 5 << 9, 0xc00 = 6 << 9
+local	FUN_0019fa58	param_2	sourceIndex	INFERRED	0x800 = 4 << 9, 0xa00 = 5 << 9, 0xc00 = 6 << 9
+local	FUN_0019fa58	param_3	packedBase	INFERRED	0x800 = 4 << 9, 0xa00 = 5 << 9, 0xc00 = 6 << 9
+local	FUN_0019fa58	param_5	lane	INFERRED	0x800 = 4 << 9, 0xa00 = 5 << 9, 0xc00 = 6 << 9
+local	FUN_0019fa58	puVar5	packedWord	INFERRED	0x800 = 4 << 9, 0xa00 = 5 << 9, 0xc00 = 6 << 9
+local	FUN_0019fa58	uVar2	packedBits	INFERRED	0x800 = 4 << 9, 0xa00 = 5 << 9, 0xc00 = 6 << 9
+local	FUN_0019fa58	uVar3	laneSelector	INFERRED	0x800 = 4 << 9, 0xa00 = 5 << 9, 0xc00 = 6 << 9
+local	FUN_0019fb84	param_1	this	INFERRED	recordPtr = records + index*0x48
+local	FUN_0019fb84	iVar1	recordPtr	INFERRED	recordPtr = records + index*0x48
+local	FUN_0019fdf0	param_1	this	INFERRED	constants DAT_001b2d58 .. DAT_001b2d68 select modes 5, 4, 3, 2, then 1
+local	FUN_0019fdf0	param_2	textureClass	INFERRED	constants DAT_001b2d58 .. DAT_001b2d68 select modes 5, 4, 3, 2, then 1
+local	FUN_0019fdf0	param_3	compareMode	INFERRED	constants DAT_001b2d58 .. DAT_001b2d68 select modes 5, 4, 3, 2, then 1
+local	FUN_0019fdf0	uVar3	modeValue	INFERRED	constants DAT_001b2d58 .. DAT_001b2d68 select modes 5, 4, 3, 2, then 1
+local	FUN_0019fdf0	iVar1	recordsBase	INFERRED	constants DAT_001b2d58 .. DAT_001b2d68 select modes 5, 4, 3, 2, then 1
+local	FUN_0019fdf0	iVar2	recordOffset	INFERRED	constants DAT_001b2d58 .. DAT_001b2d68 select modes 5, 4, 3, 2, then 1
+local	FUN_0019ff2c	param_1	this	INFERRED	vector layout: [1] count, [2] storage
+local	FUN_0019ff2c	param_2	node	INFERRED	vector layout: [1] count, [2] storage
+local	FUN_0019ff2c	param_3	block	INFERRED	vector layout: [1] count, [2] storage
+local	FUN_0019ff2c	iVar4	recordIndexBefore	INFERRED	vector layout: [1] count, [2] storage
+local	FUN_0019ff2c	iVar3	childByteOffset	INFERRED	vector layout: [1] count, [2] storage
+local	FUN_0019ff2c	iVar1	child	INFERRED	vector layout: [1] count, [2] storage
+local	FUN_0019ffdc	param_1	this	INFERRED	record flag bytes at -0x44 / -0x3a relative to the next record
+local	FUN_0019ffdc	param_2	node	INFERRED	record flag bytes at -0x44 / -0x3a relative to the next record
+local	FUN_0019ffdc	param_3	block	INFERRED	record flag bytes at -0x44 / -0x3a relative to the next record
+local	FUN_0019ffdc	iVar3	recordIndexBefore	INFERRED	record flag bytes at -0x44 / -0x3a relative to the next record
+local	FUN_0019ffdc	bVar1	emittedNothing	INFERRED	record flag bytes at -0x44 / -0x3a relative to the next record
+local	FUN_001a06c4	param_1	this	INFERRED	0x4000 flags a constant-buffer reference
+local	FUN_001a06c4	param_3	sourceIndex	INFERRED	0x4000 flags a constant-buffer reference
+local	FUN_001a06c4	param_4	compiler	INFERRED	0x4000 flags a constant-buffer reference
+local	FUN_001a06c4	uVar3	registerWord	INFERRED	0x4000 flags a constant-buffer reference
+local	FUN_001a07c0	param_1	this	CONFIRMED	literals 0.0 / 0.5 / 1.0 verified in TEXT___literal4.c
+local	FUN_001a07c0	param_2	sourceIndex	CONFIRMED	literals 0.0 / 0.5 / 1.0 verified in TEXT___literal4.c
+local	FUN_001a07c0	param_4	selectBase	CONFIRMED	literals 0.0 / 0.5 / 1.0 verified in TEXT___literal4.c
+local	FUN_001a07c0	fVar3	zeroLiteral	CONFIRMED	literals 0.0 / 0.5 / 1.0 verified in TEXT___literal4.c
+local	FUN_001a07c0	fVar4	halfLiteral	CONFIRMED	literals 0.0 / 0.5 / 1.0 verified in TEXT___literal4.c
+local	FUN_001a07c0	fVar2	literalValue	CONFIRMED	literals 0.0 / 0.5 / 1.0 verified in TEXT___literal4.c
+local	FUN_001a07c0	uVar5	laneSelector	CONFIRMED	literals 0.0 / 0.5 / 1.0 verified in TEXT___literal4.c
+local	FUN_001a07c0	uVar10	bitShift	CONFIRMED	literals 0.0 / 0.5 / 1.0 verified in TEXT___literal4.c
+local	FUN_001a07c0	puVar9	selectWord	CONFIRMED	literals 0.0 / 0.5 / 1.0 verified in TEXT___literal4.c
+local	FUN_001a07c0	bVar1	lastLane	CONFIRMED	literals 0.0 / 0.5 / 1.0 verified in TEXT___literal4.c
+local	FUN_001a08f0	param_1	this	CONFIRMED	literals 0.0 / 0.5 / 1.0 verified in TEXT___literal4.c
+local	FUN_001a08f0	param_2	sourceIndex	CONFIRMED	literals 0.0 / 0.5 / 1.0 verified in TEXT___literal4.c
+local	FUN_001a08f0	param_3	selectOut	CONFIRMED	literals 0.0 / 0.5 / 1.0 verified in TEXT___literal4.c
+local	FUN_001a08f0	param_4	selectBase	CONFIRMED	literals 0.0 / 0.5 / 1.0 verified in TEXT___literal4.c
+local	FUN_001a08f0	fVar1	literalValue	CONFIRMED	literals 0.0 / 0.5 / 1.0 verified in TEXT___literal4.c
+local	FUN_001a08f0	uVar3	laneSelector	CONFIRMED	literals 0.0 / 0.5 / 1.0 verified in TEXT___literal4.c
+local	FUN_001a08f0	iVar2	byteOffset	CONFIRMED	literals 0.0 / 0.5 / 1.0 verified in TEXT___literal4.c
+local	FUN_001a09d0	param_1	this	INFERRED	3 bits per lane
+local	FUN_001a09d0	param_2	sourceIndex	INFERRED	3 bits per lane
+local	FUN_001a09d0	param_3	packedBase	INFERRED	3 bits per lane
+local	FUN_001a09d0	param_5	laneSelectors	INFERRED	3 bits per lane
+local	FUN_001a09d0	puVar6	packedWord	INFERRED	3 bits per lane
+local	FUN_001a0b3c	param_1	this	CONFIRMED	field offsets from the ALU record layout
+local	FUN_001a0b3c	param_2	irInst	CONFIRMED	field offsets from the ALU record layout
+local	FUN_001a0b3c	param_3	writeRgb	CONFIRMED	field offsets from the ALU record layout
+local	FUN_001a0b3c	param_4	rgbSelects	CONFIRMED	field offsets from the ALU record layout
+local	FUN_001a0b3c	param_5	rgbPacked	CONFIRMED	field offsets from the ALU record layout
+local	FUN_001a0b3c	param_6	writeAlpha	CONFIRMED	field offsets from the ALU record layout
+local	FUN_001a0b3c	param_7	alphaSelects	CONFIRMED	field offsets from the ALU record layout
+local	FUN_001a0b3c	param_8	alphaPacked	CONFIRMED	field offsets from the ALU record layout
+local	FUN_001a0b3c	bVar1	writeRgbFlag	CONFIRMED	field offsets from the ALU record layout
+local	FUN_001a0b3c	bVar2	writeAlphaFlag	CONFIRMED	field offsets from the ALU record layout
+local	FUN_001a0b3c	iVar4	sourceCount	CONFIRMED	field offsets from the ALU record layout
+local	FUN_001a0b3c	uVar5	modifierBits	CONFIRMED	field offsets from the ALU record layout
+local	FUN_001a0fe4	param_2	resultKnownOut	INFERRED	switch on the compare kind
+local	FUN_001a1160	param_1	this	INFERRED	stack vector layout: [1] count, [2] storage
+local	FUN_001a1160	iVar4	popped	INFERRED	stack vector layout: [1] count, [2] storage
+local	FUN_001a1160	iVar1	stackVector	INFERRED	stack vector layout: [1] count, [2] storage
+local	FUN_001a1160	uVar2	stackCount	INFERRED	stack vector layout: [1] count, [2] storage
+local	FUN_001a1338	param_1	unusedThis	CONFIRMED	factory
+local	FUN_001a1398	param_1	this	INFERRED	stack vector layout: [1] count, [2] storage
+local	FUN_001a1398	sVar4	previousTarget	INFERRED	stack vector layout: [1] count, [2] storage
+local	FUN_001a1398	iVar5	branchRecord	INFERRED	stack vector layout: [1] count, [2] storage
+local	FUN_001a1398	iVar2	stackVector	INFERRED	stack vector layout: [1] count, [2] storage
+local	FUN_001a14d0	param_1	this	INFERRED	record flag bytes at -0x3a / -0x44
+local	FUN_001a14d0	param_2	node	INFERRED	record flag bytes at -0x3a / -0x44
+local	FUN_001a14d0	param_3	block	INFERRED	record flag bytes at -0x3a / -0x44
+local	FUN_001a14d0	iVar2	recordIndexBefore	INFERRED	record flag bytes at -0x3a / -0x44
+local	FUN_001a14d0	bVar1	emittedNothing	INFERRED	record flag bytes at -0x3a / -0x44
+local	FUN_001a158c	param_1	this	INFERRED	loop stack at program + 0x24
+local	FUN_001a158c	param_2	node	INFERRED	loop stack at program + 0x24
+local	FUN_001a158c	param_3	block	INFERRED	loop stack at program + 0x24
+local	FUN_001a158c	param_4	compiler	INFERRED	loop stack at program + 0x24
+local	FUN_001a158c	iVar9	loopStartRecord	INFERRED	loop stack at program + 0x24
+local	FUN_001a184c	param_1	this	CONFIRMED	record offsets as in the R300 twin
+local	FUN_001a184c	param_2	writeRgb	CONFIRMED	record offsets as in the R300 twin
+local	FUN_001a184c	param_3	writeAlpha	CONFIRMED	record offsets as in the R300 twin
+local	FUN_001a184c	param_5	destRegister	CONFIRMED	record offsets as in the R300 twin
+local	FUN_001a184c	iVar4	recordIndex	CONFIRMED	record offsets as in the R300 twin
+local	FUN_001a184c	iVar1	recordBase	CONFIRMED	record offsets as in the R300 twin
+local	FUN_001a184c	uVar3	writeMask	CONFIRMED	record offsets as in the R300 twin
+local	FUN_001a191c	param_1	this	INFERRED	record layout as in notes_shader_formats.md sec. 6
+local	FUN_001a191c	param_2	writeRgb	INFERRED	record layout as in notes_shader_formats.md sec. 6
+local	FUN_001a191c	param_3	writeAlpha	INFERRED	record layout as in notes_shader_formats.md sec. 6
+local	FUN_001a191c	uVar5	compareCode	INFERRED	record layout as in notes_shader_formats.md sec. 6
+local	FUN_001a191c	bVar3	invertBit	INFERRED	record layout as in notes_shader_formats.md sec. 6
+local	FUN_001a1b64	param_1	this	CONFIRMED	record offsets as in the R300 twin
+local	FUN_001a1b64	param_2	writeRgb	CONFIRMED	record offsets as in the R300 twin
+local	FUN_001a1b64	param_3	writeAlpha	CONFIRMED	record offsets as in the R300 twin
+local	FUN_001a1b64	iVar7	destinationClass	CONFIRMED	record offsets as in the R300 twin
+local	FUN_001a1b64	iVar5	destinationIndex	CONFIRMED	record offsets as in the R300 twin
+local	FUN_001a1b64	bVar2	outputFlags	CONFIRMED	record offsets as in the R300 twin
+local	FUN_001a25a8	param_1	this	INFERRED	factory FUN_001043f0(opcode, compiler)
+local	FUN_001a25a8	param_3	blockArg	INFERRED	factory FUN_001043f0(opcode, compiler)
+local	FUN_001a25a8	param_4	flag	INFERRED	factory FUN_001043f0(opcode, compiler)
+local	FUN_001a25a8	uVar7	compareCode	INFERRED	factory FUN_001043f0(opcode, compiler)
+local	FUN_001a2878	param_1	this	INFERRED	kind 5 = control-flow record
+local	FUN_001a2878	param_2	loopCount	INFERRED	kind 5 = control-flow record
+local	FUN_001a2994	param_1	this	INFERRED	kind 5 = control-flow record
+local	FUN_001a2994	param_2	count	INFERRED	kind 5 = control-flow record
+local	FUN_001a2994	param_3	variant	INFERRED	kind 5 = control-flow record
+local	FUN_001a2994	iVar1	recordIndex	INFERRED	kind 5 = control-flow record
+local	FUN_001a2994	iVar3	recordsBase	INFERRED	kind 5 = control-flow record
+local	FUN_001a2b10	param_1	this	INFERRED	local_38[0] is the 'known at compile time' flag
+local	FUN_001a2b10	param_2	branchCount	INFERRED	local_38[0] is the 'known at compile time' flag
+local	FUN_001a2b10	param_4	variant	INFERRED	local_38[0] is the 'known at compile time' flag
+local	FUN_001a2b10	param_5	blockFlag	INFERRED	local_38[0] is the 'known at compile time' flag
+local	FUN_001a2b10	param_6	parentNode	INFERRED	local_38[0] is the 'known at compile time' flag
+local	FUN_001a2c08	param_1	this	INFERRED	node + 0xdc flags children
+local	FUN_001a2c08	param_2	node	INFERRED	node + 0xdc flags children
+local	FUN_001a2c08	param_3	block	INFERRED	node + 0xdc flags children
+local	FUN_001a2c08	param_4	extra1	INFERRED	node + 0xdc flags children
+local	FUN_001a2c08	param_5	extra2	INFERRED	node + 0xdc flags children
+local	FUN_001a2c08	param_6	extra3	INFERRED	node + 0xdc flags children
+local	FUN_001a2c08	param_7	extra4	INFERRED	node + 0xdc flags children
+local	FUN_001a2c08	iVar4	recordIndexBefore	INFERRED	node + 0xdc flags children
+local	FUN_001a2c08	uVar3	emittedAny	INFERRED	node + 0xdc flags children
+local	FUN_001a2d10	param_1	this	INFERRED	node + 0x130 is the branch count
+local	FUN_001a2d10	param_2	node	INFERRED	node + 0x130 is the branch count
+local	FUN_001a2d10	param_3	block	INFERRED	node + 0x130 is the branch count
+local	FUN_001a2d10	iVar2	recordIndexBefore	INFERRED	node + 0x130 is the branch count
+local	FUN_001a2d10	bVar1	emittedNothing	INFERRED	node + 0x130 is the branch count
+local	FUN_001a2db0	param_1	this	INFERRED	stack vector layout: [1] count, [2] storage
+local	FUN_001a2db0	param_2	hasSecondCondition	INFERRED	stack vector layout: [1] count, [2] storage
+local	FUN_001a2db0	iVar2	recordIndex	INFERRED	stack vector layout: [1] count, [2] storage
+local	FUN_001a2db0	puVar4	stackVector	INFERRED	stack vector layout: [1] count, [2] storage
+local	FUN_001a2db0	uVar3	stackCount	INFERRED	stack vector layout: [1] count, [2] storage
+local	FUN_001a2ee4	param_1	this	INFERRED	node + 0x138 / +0x13c are the exit blocks
+local	FUN_001a2ee4	param_2	node	INFERRED	node + 0x138 / +0x13c are the exit blocks
+local	FUN_001a2ee4	param_3	block	INFERRED	node + 0x138 / +0x13c are the exit blocks
+local	FUN_001a2ee4	param_4	extra1	INFERRED	node + 0x138 / +0x13c are the exit blocks
+local	FUN_001a2ee4	param_5	extra2	INFERRED	node + 0x138 / +0x13c are the exit blocks
+local	FUN_001a2ee4	param_6	extra3	INFERRED	node + 0x138 / +0x13c are the exit blocks
+local	FUN_001a2ee4	param_7	extra4	INFERRED	node + 0x138 / +0x13c are the exit blocks
+local	FUN_001a2ee4	piVar1	conditionNode	INFERRED	node + 0x138 / +0x13c are the exit blocks
+local	FUN_001a2ee4	iVar4	recordIndexBefore	INFERRED	node + 0x138 / +0x13c are the exit blocks
+local	FUN_001a2ee4	uVar3	hasCondition	INFERRED	node + 0x138 / +0x13c are the exit blocks
+local	FUN_001a3000	param_1	this	INFERRED	stack vector layout: [1] count, [2] storage
+local	FUN_001a3000	param_2	node	INFERRED	stack vector layout: [1] count, [2] storage
+local	FUN_001a3000	iVar4	stackVector	INFERRED	stack vector layout: [1] count, [2] storage
+local	FUN_001a3000	iVar3	pendingRecord	INFERRED	stack vector layout: [1] count, [2] storage
+local	FUN_001a1d24	param_1	this	CONFIRMED	record layout as in the R300 twin
+local	FUN_001a1d24	param_3	blockArg	CONFIRMED	record layout as in the R300 twin
+local	FUN_001a1d24	param_4	compiler	CONFIRMED	record layout as in the R300 twin
+local	FUN_001a11f0	param_1	this	INFERRED	the stack vector layout is [1] count, [2] storage
+local	FUN_001a11f0	param_2	node	INFERRED	the stack vector layout is [1] count, [2] storage
+local	FUN_001a11f0	param_3	block	INFERRED	the stack vector layout is [1] count, [2] storage
+local	FUN_001a11f0	param_4	compiler	INFERRED	the stack vector layout is [1] count, [2] storage
+local	FUN_00191710	fparam_1	value	CONFIRMED	literal pool values verified in TEXT___literal4.c
+local	FUN_00191888	param_1	this	INFERRED	table at this + 0x1740 filled by FudoPs__ctor
+local	FUN_00191888	param_2	unused	INFERRED	table at this + 0x1740 filled by FudoPs__ctor
+local	FUN_00191888	param_3	exponentOut	INFERRED	table at this + 0x1740 filled by FudoPs__ctor
+local	FUN_00191888	param_4	mantissaOut	INFERRED	table at this + 0x1740 filled by FudoPs__ctor
+local	FUN_00191888	fparam_1	value	INFERRED	table at this + 0x1740 filled by FudoPs__ctor
+local	FUN_00191888	fVar1	value32	INFERRED	table at this + 0x1740 filled by FudoPs__ctor
+local	FUN_00191940	param_1	this	INFERRED	four values / four selector bytes
+local	FUN_00191940	param_2	values	INFERRED	four values / four selector bytes
+local	FUN_00191940	param_3	laneSelectors	INFERRED	four values / four selector bytes
+local	FUN_00191940	bVar1	haveFirstValue	INFERRED	four values / four selector bytes
+local	FUN_00191940	fparam_1	commonValue	INFERRED	four values / four selector bytes
+local	FUN_00191c7c	param_1	this	INFERRED	selector byte 4 marks an unused lane
+local	FUN_00191c7c	param_2	laneValues	INFERRED	selector byte 4 marks an unused lane
+local	FUN_00191c7c	param_3	kindOut	INFERRED	selector byte 4 marks an unused lane
+local	FUN_00191c7c	param_4	laneSelectors	INFERRED	selector byte 4 marks an unused lane
+local	FUN_00191c7c	param_5	compiler	INFERRED	selector byte 4 marks an unused lane
+local	FUN_00191c7c	fVar1	laneValue	INFERRED	selector byte 4 marks an unused lane
+local	FUN_00191c7c	bVar2	haveFirstValue	INFERRED	selector byte 4 marks an unused lane
+local	FUN_00191e28	param_1	this	INFERRED	this+0x60 / this+0x64 hold the models
+local	FUN_00191e28	param_2	compiler	INFERRED	this+0x60 / this+0x64 hold the models
+local	FUN_00191e28	puVar2	modelAllocation	INFERRED	this+0x60 / this+0x64 hold the models
+local	FUN_00191efc	param_2	compiler	INFERRED	the loops fill the 16 x 8 float table at this + 0x1740: row 0 = denormals (mantissa * step * scale), rows 1..15 = 2^(row - bias) * (mantissa * step + 1.0) - the R5xx immediate float format (4-bit exponent, 3-bit mantissa)
+local	FUN_00191efc	param_3	createSchedModels	INFERRED	the loops fill the 16 x 8 float table at this + 0x1740: row 0 = denormals (mantissa * step * scale), rows 1..15 = 2^(row - bias) * (mantissa * step + 1.0) - the R5xx immediate float format (4-bit exponent, 3-bit mantissa)
+local	FUN_00191efc	bVar1	notLastMantissa	INFERRED	the loops fill the 16 x 8 float table at this + 0x1740: row 0 = denormals (mantissa * step * scale), rows 1..15 = 2^(row - bias) * (mantissa * step + 1.0) - the R5xx immediate float format (4-bit exponent, 3-bit mantissa)
+local	FUN_00191efc	fVar2	immediateValue	INFERRED	the loops fill the 16 x 8 float table at this + 0x1740: row 0 = denormals (mantissa * step * scale), rows 1..15 = 2^(row - bias) * (mantissa * step + 1.0) - the R5xx immediate float format (4-bit exponent, 3-bit mantissa)
+local	FUN_00191efc	fVar3	oneValue	INFERRED	the loops fill the 16 x 8 float table at this + 0x1740: row 0 = denormals (mantissa * step * scale), rows 1..15 = 2^(row - bias) * (mantissa * step + 1.0) - the R5xx immediate float format (4-bit exponent, 3-bit mantissa)
+local	FUN_00191efc	fVar4	mantissaStep	INFERRED	the loops fill the 16 x 8 float table at this + 0x1740: row 0 = denormals (mantissa * step * scale), rows 1..15 = 2^(row - bias) * (mantissa * step + 1.0) - the R5xx immediate float format (4-bit exponent, 3-bit mantissa)
+local	FUN_00191efc	fVar5	denormalScale	INFERRED	the loops fill the 16 x 8 float table at this + 0x1740: row 0 = denormals (mantissa * step * scale), rows 1..15 = 2^(row - bias) * (mantissa * step + 1.0) - the R5xx immediate float format (4-bit exponent, 3-bit mantissa)
+local	FUN_00191efc	dVar6	intToDoubleBias	INFERRED	the loops fill the 16 x 8 float table at this + 0x1740: row 0 = denormals (mantissa * step * scale), rows 1..15 = 2^(row - bias) * (mantissa * step + 1.0) - the R5xx immediate float format (4-bit exponent, 3-bit mantissa)
+local	FUN_00191efc	dVar7	exponentBias	INFERRED	the loops fill the 16 x 8 float table at this + 0x1740: row 0 = denormals (mantissa * step * scale), rows 1..15 = 2^(row - bias) * (mantissa * step + 1.0) - the R5xx immediate float format (4-bit exponent, 3-bit mantissa)
+local	FUN_00191efc	pfVar9	rowStart	INFERRED	the loops fill the 16 x 8 float table at this + 0x1740: row 0 = denormals (mantissa * step * scale), rows 1..15 = 2^(row - bias) * (mantissa * step + 1.0) - the R5xx immediate float format (4-bit exponent, 3-bit mantissa)
+local	FUN_00191efc	dVar12	powerOfTwo	INFERRED	the loops fill the 16 x 8 float table at this + 0x1740: row 0 = denormals (mantissa * step * scale), rows 1..15 = 2^(row - bias) * (mantissa * step + 1.0) - the R5xx immediate float format (4-bit exponent, 3-bit mantissa)
+local	FUN_001920e0	param_2	compiler	INFERRED	the loops fill the 16 x 8 float table at this + 0x1740: row 0 = denormals (mantissa * step * scale), rows 1..15 = 2^(row - bias) * (mantissa * step + 1.0) - the R5xx immediate float format (4-bit exponent, 3-bit mantissa)
+local	FUN_001920e0	param_3	createSchedModels	INFERRED	the loops fill the 16 x 8 float table at this + 0x1740: row 0 = denormals (mantissa * step * scale), rows 1..15 = 2^(row - bias) * (mantissa * step + 1.0) - the R5xx immediate float format (4-bit exponent, 3-bit mantissa)
+local	FUN_001920e0	bVar1	notLastMantissa	INFERRED	the loops fill the 16 x 8 float table at this + 0x1740: row 0 = denormals (mantissa * step * scale), rows 1..15 = 2^(row - bias) * (mantissa * step + 1.0) - the R5xx immediate float format (4-bit exponent, 3-bit mantissa)
+local	FUN_001920e0	fVar2	immediateValue	INFERRED	the loops fill the 16 x 8 float table at this + 0x1740: row 0 = denormals (mantissa * step * scale), rows 1..15 = 2^(row - bias) * (mantissa * step + 1.0) - the R5xx immediate float format (4-bit exponent, 3-bit mantissa)
+local	FUN_001920e0	fVar3	oneValue	INFERRED	the loops fill the 16 x 8 float table at this + 0x1740: row 0 = denormals (mantissa * step * scale), rows 1..15 = 2^(row - bias) * (mantissa * step + 1.0) - the R5xx immediate float format (4-bit exponent, 3-bit mantissa)
+local	FUN_001920e0	fVar4	mantissaStep	INFERRED	the loops fill the 16 x 8 float table at this + 0x1740: row 0 = denormals (mantissa * step * scale), rows 1..15 = 2^(row - bias) * (mantissa * step + 1.0) - the R5xx immediate float format (4-bit exponent, 3-bit mantissa)
+local	FUN_001920e0	fVar5	denormalScale	INFERRED	the loops fill the 16 x 8 float table at this + 0x1740: row 0 = denormals (mantissa * step * scale), rows 1..15 = 2^(row - bias) * (mantissa * step + 1.0) - the R5xx immediate float format (4-bit exponent, 3-bit mantissa)
+local	FUN_001920e0	dVar6	intToDoubleBias	INFERRED	the loops fill the 16 x 8 float table at this + 0x1740: row 0 = denormals (mantissa * step * scale), rows 1..15 = 2^(row - bias) * (mantissa * step + 1.0) - the R5xx immediate float format (4-bit exponent, 3-bit mantissa)
+local	FUN_001920e0	dVar7	exponentBias	INFERRED	the loops fill the 16 x 8 float table at this + 0x1740: row 0 = denormals (mantissa * step * scale), rows 1..15 = 2^(row - bias) * (mantissa * step + 1.0) - the R5xx immediate float format (4-bit exponent, 3-bit mantissa)
+local	FUN_001920e0	pfVar9	rowStart	INFERRED	the loops fill the 16 x 8 float table at this + 0x1740: row 0 = denormals (mantissa * step * scale), rows 1..15 = 2^(row - bias) * (mantissa * step + 1.0) - the R5xx immediate float format (4-bit exponent, 3-bit mantissa)
+local	FUN_001920e0	dVar12	powerOfTwo	INFERRED	the loops fill the 16 x 8 float table at this + 0x1740: row 0 = denormals (mantissa * step * scale), rows 1..15 = 2^(row - bias) * (mantissa * step + 1.0) - the R5xx immediate float format (4-bit exponent, 3-bit mantissa)
+local	FUN_000d0450	param_1	outBuffer	CONFIRMED	format strings in the body
+local	FUN_000d0450	param_2	registerWord	CONFIRMED	format strings in the body
+local	FUN_000d0488	param_1	outBuffer	CONFIRMED	the case labels are the ARGC select codes
+local	FUN_000d0488	param_2	source0Register	CONFIRMED	the case labels are the ARGC select codes
+local	FUN_000d0488	param_3	source1Register	CONFIRMED	the case labels are the ARGC select codes
+local	FUN_000d0488	param_4	source2Register	CONFIRMED	the case labels are the ARGC select codes
+local	FUN_000d0488	param_5	alpha0Register	CONFIRMED	the case labels are the ARGC select codes
+local	FUN_000d0488	param_6	alpha1Register	CONFIRMED	the case labels are the ARGC select codes
+local	FUN_000d0488	param_7	alpha2Register	CONFIRMED	the case labels are the ARGC select codes
+local	FUN_000d0488	param_8	selectCode	CONFIRMED	the case labels are the ARGC select codes
+local	FUN_000d0488	param_9	modifier	CONFIRMED	the case labels are the ARGC select codes
+local	FUN_000d0888	param_1	outBuffer	CONFIRMED	the case labels are the ARGA select codes
+local	FUN_000d0888	param_2	source0Register	CONFIRMED	the case labels are the ARGA select codes
+local	FUN_000d0888	param_3	source1Register	CONFIRMED	the case labels are the ARGA select codes
+local	FUN_000d0888	param_4	source2Register	CONFIRMED	the case labels are the ARGA select codes
+local	FUN_000d0888	param_5	alpha0Register	CONFIRMED	the case labels are the ARGA select codes
+local	FUN_000d0888	param_6	alpha1Register	CONFIRMED	the case labels are the ARGA select codes
+local	FUN_000d0888	param_7	alpha2Register	CONFIRMED	the case labels are the ARGA select codes
+local	FUN_000d0888	param_8	selectCode	CONFIRMED	the case labels are the ARGA select codes
+local	FUN_000d0888	param_9	modifier	CONFIRMED	the case labels are the ARGA select codes
+local	FUN_000d03b4	param_1	severity	INFERRED	remaining arguments are the format arguments
+local	FUN_000d03b4	param_2	format	INFERRED	remaining arguments are the format arguments
+local	FUN_000d0b68	param_1	psn	CONFIRMED	strings and record kinds in the body; header offsets from notes_shader_formats.md sec. 6
+local	FUN_000d0b68	param_2	level	CONFIRMED	strings and record kinds in the body; header offsets from notes_shader_formats.md sec. 6
+local	FUN_000d0b68	uVar12	recordCount	CONFIRMED	strings and record kinds in the body; header offsets from notes_shader_formats.md sec. 6
+local	FUN_000d0b68	puVar17	recordCursor	CONFIRMED	strings and record kinds in the body; header offsets from notes_shader_formats.md sec. 6
+local	FUN_000cff30	param_1	disassembler	INFERRED	disassembler +4 is the instruction counter
+local	FUN_000cff30	param_2	instructionWords	INFERRED	disassembler +4 is the instruction counter
+local	FUN_000cff30	param_3	lineBuffer	INFERRED	disassembler +4 is the instruction counter
+local	FUN_000d002c	param_1	disassembler	CONFIRMED	banner string in the body
+local	FUN_000d002c	param_2	program	CONFIRMED	banner string in the body

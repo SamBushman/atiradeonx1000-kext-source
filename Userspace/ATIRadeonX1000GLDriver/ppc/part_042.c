@@ -3137,9 +3137,9 @@ code_r0x0013e80c:
                     if (piVar20[3] != 0) {
                       iVar17 = ((int (*)())FUN_0013ca84)(piVar20);
                     }
-                    iVar23 = FUN_001952d8(piVar20[0x53],iVar18);
+                    iVar23 = disjointSetFindRoot(piVar20[0x53],iVar18);
                     while ((iVar17 != 0 &&
-                           ((iVar11 = FUN_001952d8(*(undefined4 *)(iVar17 + 0x14c),iVar18),
+                           ((iVar11 = disjointSetFindRoot(*(undefined4 *)(iVar17 + 0x14c),iVar18),
                             iVar23 != iVar11 || (iVar11 = FUN_000f497c(iVar17,piVar20), iVar11 == 0)
                             )))) {
                       iVar17 = ((int (*)())FUN_0013ca84)(iVar17);
@@ -3506,7 +3506,7 @@ code_r0x0013e0ac:
               iVar13 = iVar23;
               iVar16 = 0;
               do {
-                iVar10 = FUN_001952d8(*(undefined4 *)(iVar11 + 0x14c),iVar18);
+                iVar10 = disjointSetFindRoot(*(undefined4 *)(iVar11 + 0x14c),iVar18);
                 iVar23 = IRInst__getOperandRecord(iVar11,0);
                 FUN_000f3908(&local_80,*(undefined4 *)(iVar23 + 0x10));
                 if ((iVar13 == iVar10) ||
@@ -3514,7 +3514,7 @@ code_r0x0013e0ac:
                   uVar6 = uVar6 | local_80;
                   iVar23 = iVar10;
                   if ((-1 < iVar13) && (iVar23 = iVar13, iVar13 != iVar10)) {
-                    FUN_00195330(iVar13,iVar10,iVar18);
+                    storeIndexedWord(iVar13,iVar10,iVar18);
                   }
                   iVar12 = iVar11;
                   if (iVar16 != 0) {
@@ -3551,8 +3551,8 @@ code_r0x0013e0ac:
             FUN_000f3908(&local_78,*(undefined4 *)(iVar11 + 0x10));
             uVar6 = local_78;
             if (((bVar1) || (iVar11 = iVar23, (local_78 & vec2Capacity) != 0)) &&
-               (iVar11 = FUN_001952d8(operandVReg[0x53],iVar18), -1 < iVar23)) {
-              FUN_00195330(iVar23,iVar11,iVar18);
+               (iVar11 = disjointSetFindRoot(operandVReg[0x53],iVar18), -1 < iVar23)) {
+              storeIndexedWord(iVar23,iVar11,iVar18);
               iVar11 = iVar23;
             }
             uVar22 = vecCount;

@@ -44,46 +44,46 @@ int FUN_0019156c(param_1, inst)
   return 0;
 }
 
-/* FUN_00191710 @ 0x191710 (76 bytes) */
-undefined4 FUN_00191710(double fparam_1)
+/* isLiteralZeroHalfOrOne @ 0x191710 (76 bytes) */
+undefined4 isLiteralZeroHalfOrOne(double value)
 {
-  if (((fparam_1 != (double)FLOAT_001aa0d4) && (fparam_1 != (double)FLOAT_001aa10c)) &&
-     (fparam_1 != (double)FLOAT_001aa0e8)) {
+  if (((value != (double)FLOAT_001aa0d4) && (value != (double)FLOAT_001aa10c)) &&
+     (value != (double)FLOAT_001aa0e8)) {
     return 0;
   }
   return 1;
 }
 
-/* FUN_00191888 @ 0x191888 (184 bytes) */
-undefined4 FUN_00191888(int param_1,undefined4 param_2,uint *param_3,uint *param_4,double fparam_1)
+/* FudoPs__encodeImmediateFloat @ 0x191888 (184 bytes) */
+undefined4 FudoPs__encodeImmediateFloat(int this,undefined4 unused,uint *exponentOut,uint *mantissaOut,double value)
 {
-  float fVar1;
+  float value32;
   uint loopIndex;
   int loopRemaining;
   
-  if ((double)FLOAT_001aa0d4 < fparam_1) {
-    fVar1 = (float)fparam_1;
-    if (((uint)GH_F2U(fVar1) & 1) == 0) {
-      loopIndex = (uint)GH_F2U(fVar1) >> 1 & 0xff;
-      *param_3 = loopIndex;
-      if ((loopIndex == 0) || (*param_3 = loopIndex - 0x78, loopIndex - 0x78 < 0x10)) {
-        if (*param_3 == 0) {
+  if ((double)FLOAT_001aa0d4 < value) {
+    value32 = (float)value;
+    if (((uint)GH_F2U(value32) & 1) == 0) {
+      loopIndex = (uint)GH_F2U(value32) >> 1 & 0xff;
+      *exponentOut = loopIndex;
+      if ((loopIndex == 0) || (*exponentOut = loopIndex - 0x78, loopIndex - 0x78 < 0x10)) {
+        if (*exponentOut == 0) {
           loopIndex = 0;
           loopRemaining = 8;
           do {
-            if (fparam_1 == (double)*(float *)(0x00001740 + param_1 + 4)) {
-              *param_4 = loopIndex;
+            if (value == (double)*(float *)(0x00001740 + this + 4)) {
+              *mantissaOut = loopIndex;
               return 1;
             }
             loopIndex = loopIndex + 1;
-            param_1 = param_1 + 4;
+            this = this + 4;
             loopRemaining = loopRemaining + -1;
           } while (loopRemaining != 0);
         }
         else {
-          *param_4 = (uint)GH_F2U(fVar1) >> 9;
-          if (((uint)GH_F2U(fVar1) >> 9 & 0xfffff) == 0) {
-            *param_4 = (uint)GH_F2U(fVar1) >> 0x1d;
+          *mantissaOut = (uint)GH_F2U(value32) >> 9;
+          if (((uint)GH_F2U(value32) >> 9 & 0xfffff) == 0) {
+            *mantissaOut = (uint)GH_F2U(value32) >> 0x1d;
             return 1;
           }
         }
@@ -93,44 +93,44 @@ undefined4 FUN_00191888(int param_1,undefined4 param_2,uint *param_3,uint *param
   return 0;
 }
 
-/* FUN_00191940 @ 0x191940 (152 bytes) */
-int FUN_00191940(param_1, param_2, param_3)
-  undefined4 param_1;
-  float *param_2;
-  undefined4 param_3;
+/* FudoPs__encodeUniformImmediate @ 0x191940 (152 bytes) */
+int FudoPs__encodeUniformImmediate(this, values, laneSelectors)
+  undefined4 this;
+  float *values;
+  undefined4 laneSelectors;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  bool bVar1;
+  unsigned int ghidra_home[8] = { this, values, laneSelectors, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  bool haveFirstValue;
   char *loopIndex;
   undefined4 callResult;
   int loopRemaining;
-  double fparam_1;
+  double commonValue;
   undefined1 auStack_28 [4];
   undefined1 auStack_24 [32];
   
-  bVar1 = false;
+  haveFirstValue = false;
   loopRemaining = 4;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
-  fparam_1 = (double)FLOAT_001aa0d4;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = laneSelectors;
+  commonValue = (double)FLOAT_001aa0d4;
   loopIndex = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 8));
   do {
     if (*loopIndex != '\x04') {
-      if (bVar1) {
-        if ((double)*param_2 != fparam_1) {
+      if (haveFirstValue) {
+        if ((double)*values != commonValue) {
           return 0;
         }
-        bVar1 = true;
+        haveFirstValue = true;
       }
       else {
-        fparam_1 = (double)*param_2;
-        bVar1 = true;
+        commonValue = (double)*values;
+        haveFirstValue = true;
       }
     }
     loopIndex = loopIndex + 1;
-    param_2 = param_2 + 1;
+    values = values + 1;
     loopRemaining = loopRemaining + -1;
   } while (loopRemaining != 0);
-  callResult = ((undefined4 (*)())FUN_00191888)(param_1,param_2,auStack_28,auStack_24,fparam_1);
+  callResult = ((undefined4 (*)())FudoPs__encodeImmediateFloat)(this,values,auStack_28,auStack_24,commonValue);
   return callResult;
 }
 
@@ -280,31 +280,31 @@ int FudoChip__vslot2(param_1)
   return;
 }
 
-/* FUN_00191c7c @ 0x191c7c (428 bytes) */
-int FUN_00191c7c(param_1, param_2, param_3, param_4, param_5)
-  int *param_1;
-  float *param_2;
-  undefined4 *param_3;
-  undefined4 param_4;
-  undefined4 param_5;
+/* FudoPs__classifyLiteralOperand @ 0x191c7c (428 bytes) */
+int FudoPs__classifyLiteralOperand(this, laneValues, kindOut, laneSelectors, compiler)
+  int *this;
+  float *laneValues;
+  undefined4 *kindOut;
+  undefined4 laneSelectors;
+  undefined4 compiler;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  float fVar1;
-  bool bVar2;
+  unsigned int ghidra_home[8] = { this, laneValues, kindOut, laneSelectors, compiler, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  float laneValue;
+  bool haveFirstValue;
   char *loopIndex;
   float *loopIndex3;
   char *loopIndex2;
   int loopRemaining;
   int loopRemaining2;
   
-  (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = param_4;
-  *param_3 = 0xffffffff;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = laneSelectors;
+  *kindOut = 0xffffffff;
   loopIndex = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 12));
   loopRemaining = 4;
-  loopIndex3 = param_2;
+  loopIndex3 = laneValues;
   loopIndex2 = loopIndex;
-  while ((((*loopIndex2 == '\x04' || (fVar1 = *loopIndex3, fVar1 == FLOAT_001aa0d4)) ||
-          (fVar1 == FLOAT_001aa10c)) || (fVar1 == 1.0))) {
+  while ((((*loopIndex2 == '\x04' || (laneValue = *loopIndex3, laneValue == FLOAT_001aa0d4)) ||
+          (laneValue == FLOAT_001aa10c)) || (laneValue == 1.0))) {
     loopIndex2 = loopIndex2 + 1;
     loopIndex3 = loopIndex3 + 1;
     loopRemaining = loopRemaining + -1;
@@ -312,30 +312,30 @@ int FUN_00191c7c(param_1, param_2, param_3, param_4, param_5)
       loopRemaining = (int)loopIndex2 - (int)loopIndex;
       do {
         if (*loopIndex == '\x04') {
-          *param_2 = 0.0;
+          *laneValues = 0.0;
         }
         loopIndex = loopIndex + 1;
-        param_2 = param_2 + 1;
+        laneValues = laneValues + 1;
         loopRemaining = loopRemaining + -1;
       } while (loopRemaining != 0);
       return 1;
     }
   }
-  loopRemaining = Compiler__isOptionEnabled(param_5,0x2f);
+  loopRemaining = Compiler__isOptionEnabled(compiler,0x2f);
   if (loopRemaining == 0) {
     return 0;
   }
   loopRemaining = 4;
-  bVar2 = true;
-  loopIndex3 = param_2;
-  fVar1 = FLOAT_001aa0d4;
+  haveFirstValue = true;
+  loopIndex3 = laneValues;
+  laneValue = FLOAT_001aa0d4;
   do {
     if (*loopIndex != '\x04') {
-      if (bVar2) {
-        fVar1 = *loopIndex3;
-        bVar2 = false;
+      if (haveFirstValue) {
+        laneValue = *loopIndex3;
+        haveFirstValue = false;
       }
-      else if (*loopIndex3 != fVar1) {
+      else if (*loopIndex3 != laneValue) {
         return 0;
       }
     }
@@ -343,71 +343,71 @@ int FUN_00191c7c(param_1, param_2, param_3, param_4, param_5)
     loopIndex3 = loopIndex3 + 1;
     loopRemaining = loopRemaining + -1;
   } while (loopRemaining != 0);
-  loopRemaining = (**(code **)(*param_1 + 0x98))(param_1,param_2,(*(unsigned int *)((unsigned char *)ghidra_home + 12)));
+  loopRemaining = (**(code **)(*this + 0x98))(this,laneValues,(*(unsigned int *)((unsigned char *)ghidra_home + 12)));
   if (loopRemaining != 0) {
     loopRemaining = 0;
     loopRemaining2 = 4;
     do {
-      *(float *)((int)param_2 + loopRemaining) = fVar1;
+      *(float *)((int)laneValues + loopRemaining) = laneValue;
       loopRemaining = loopRemaining + 4;
       loopRemaining2 = loopRemaining2 + -1;
     } while (loopRemaining2 != 0);
-    *param_3 = 3;
+    *kindOut = 3;
     return 1;
   }
   return 0;
 }
 
-/* FUN_00191e28 @ 0x191e28 (196 bytes) */
-int FUN_00191e28(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+/* FudoPs__createSchedModels @ 0x191e28 (196 bytes) */
+int FudoPs__createSchedModels(this, compiler)
+  int this;
+  undefined4 compiler;
 {
   undefined *puVar1;
-  undefined4 *puVar2;
+  undefined4 *modelAllocation;
   undefined *puVar3;
   
-  puVar2 = (undefined4 *)FUN_000e1564(param_2,0x6c);
+  modelAllocation = (undefined4 *)FUN_000e1564(compiler,0x6c);
   puVar1 = PTR_DAT_001e90f4;
   puVar3 = PTR_DAT_001e90fc + 8;
-  puVar2[2] = param_2;
-  *puVar2 = puVar3;
-  puVar2[1] = 0;
-  *puVar2 = puVar1 + 8;
-  FUN_00189560(puVar2 + 10);
-  R520SchedModel__vslot2(puVar2);
-  puVar2[0x1a] = 0;
-  *puVar2 = PTR_DAT_001e9148 + 8;
-  *(undefined4 **)(param_1 + 0x60) = puVar2;
-  puVar2 = (undefined4 *)FUN_000e1564(param_2,0xc);
+  modelAllocation[2] = compiler;
+  *modelAllocation = puVar3;
+  modelAllocation[1] = 0;
+  *modelAllocation = puVar1 + 8;
+  FUN_00189560(modelAllocation + 10);
+  R520SchedModel__vslot2_reset(modelAllocation);
+  modelAllocation[0x1a] = 0;
+  *modelAllocation = PTR_DAT_001e9148 + 8;
+  *(undefined4 **)(this + 0x60) = modelAllocation;
+  modelAllocation = (undefined4 *)FUN_000e1564(compiler,0xc);
   puVar1 = PTR_DAT_001e9100;
-  puVar2[1] = 1;
-  puVar2[2] = 0;
-  *puVar2 = puVar1 + 8;
-  *(undefined4 **)(param_1 + 100) = puVar2;
+  modelAllocation[1] = 1;
+  modelAllocation[2] = 0;
+  *modelAllocation = puVar1 + 8;
+  *(undefined4 **)(this + 100) = modelAllocation;
   return;
 }
 
 /* FudoPs__ctor_191efc @ 0x191efc (448 bytes) */
-int FudoPs__ctor_191efc(this, param_2, param_3)
+int FudoPs__ctor_191efc(this, compiler, createSchedModels)
   undefined4 *this;
-  undefined4 param_2;
-  int param_3;
+  undefined4 compiler;
+  int createSchedModels;
 {
-  bool bVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  double dVar6;
-  double dVar7;
+  bool notLastMantissa;
+  float immediateValue;
+  float oneValue;
+  float mantissaStep;
+  float denormalScale;
+  double intToDoubleBias;
+  double exponentBias;
   uint loopIndex3;
-  float *pfVar9;
+  float *rowStart;
   uint loopIndex2;
   float *loopIndex;
-  double dVar12;
+  double powerOfTwo;
   
-  KhanPs__ctor_128fd0(this,param_2,0);
+  KhanPs__ctor_128fd0(this,compiler,0);
   this[7] = 0;
   this[0x10] = 0x200;
   *this = &PTR_FUN_001eb450;
@@ -443,65 +443,65 @@ int FudoPs__ctor_191efc(this, param_2, param_3)
   FUN_0010dbd8(this,0x4b);
   this[2] = this[2] & 0xfffdffff | 0x1d80;
   FUN_0019ef2c(this);
-  if (param_3 != 0) {
-    ((int (*)())FUN_00191e28)(this,param_2);
+  if (createSchedModels != 0) {
+    ((int (*)())FudoPs__createSchedModels)(this,compiler);
   }
-  dVar7 = DOUBLE_001aa2a8[0];
-  dVar6 = DOUBLE_001aa1e0;
-  fVar5 = FLOAT_001aa1c4;
-  fVar4 = FLOAT_001aa170;
-  fVar3 = FLOAT_001aa0e8;
-  pfVar9 = (float *)(this + 0x5d0);
+  exponentBias = DOUBLE_001aa2a8[0];
+  intToDoubleBias = DOUBLE_001aa1e0;
+  denormalScale = FLOAT_001aa1c4;
+  mantissaStep = FLOAT_001aa170;
+  oneValue = FLOAT_001aa0e8;
+  rowStart = (float *)(this + 0x5d0);
   loopIndex3 = 0;
   do {
     loopIndex2 = 0;
-    loopIndex = pfVar9;
+    loopIndex = rowStart;
     do {
       loopIndex = loopIndex + 1;
       if (loopIndex3 == 0) {
-        fVar2 = FLOAT_001aa1c0;
+        immediateValue = FLOAT_001aa1c0;
         if (loopIndex2 != 0) {
-          fVar2 = (float)((double)CONCAT44(0x43300000,loopIndex2 ^ 0x80000000) - dVar6) * fVar4 * fVar5;
+          immediateValue = (float)((double)CONCAT44(0x43300000,loopIndex2 ^ 0x80000000) - intToDoubleBias) * mantissaStep * denormalScale;
         }
       }
       else {
-        dVar12 = _pow(DOUBLE_001aa2a0,
-                      (double)(float)((double)CONCAT44(0x43300000,loopIndex3 ^ 0x80000000) - dVar6) -
-                      dVar7);
-        fVar2 = (float)dVar12 *
-                ((float)((double)CONCAT44(0x43300000,loopIndex2 ^ 0x80000000) - dVar6) * fVar4 + fVar3);
+        powerOfTwo = _pow(DOUBLE_001aa2a0,
+                      (double)(float)((double)CONCAT44(0x43300000,loopIndex3 ^ 0x80000000) - intToDoubleBias) -
+                      exponentBias);
+        immediateValue = (float)powerOfTwo *
+                ((float)((double)CONCAT44(0x43300000,loopIndex2 ^ 0x80000000) - intToDoubleBias) * mantissaStep + oneValue);
       }
-      bVar1 = loopIndex2 != 7;
-      *loopIndex = fVar2;
+      notLastMantissa = loopIndex2 != 7;
+      *loopIndex = immediateValue;
       loopIndex2 = loopIndex2 + 1;
-    } while (bVar1);
-    bVar1 = loopIndex3 != 0xf;
-    pfVar9 = pfVar9 + 8;
+    } while (notLastMantissa);
+    notLastMantissa = loopIndex3 != 0xf;
+    rowStart = rowStart + 8;
     loopIndex3 = loopIndex3 + 1;
-  } while (bVar1);
+  } while (notLastMantissa);
   return;
 }
 
 /* FudoPs__ctor_1920e0 @ 0x1920e0 (748 bytes) */
-int FudoPs__ctor_1920e0(this, param_2, param_3)
+int FudoPs__ctor_1920e0(this, compiler, createSchedModels)
   undefined4 *this;
-  undefined4 param_2;
-  int param_3;
+  undefined4 compiler;
+  int createSchedModels;
 {
-  bool bVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  double dVar6;
-  double dVar7;
+  bool notLastMantissa;
+  float immediateValue;
+  float oneValue;
+  float mantissaStep;
+  float denormalScale;
+  double intToDoubleBias;
+  double exponentBias;
   uint loopIndex3;
-  float *pfVar9;
+  float *rowStart;
   uint loopIndex2;
   float *loopIndex;
-  double dVar12;
+  double powerOfTwo;
   
-  KhanPs__ctor_128fd0(this,param_2,0);
+  KhanPs__ctor_128fd0(this,compiler,0);
   this[7] = 0;
   this[0x10] = 0x200;
   *this = &PTR_FUN_001eb450;
@@ -537,42 +537,42 @@ int FudoPs__ctor_1920e0(this, param_2, param_3)
   FUN_0010dbd8(this,0x4b);
   this[2] = this[2] & 0xfffdffff | 0x1d80;
   FUN_0019ef2c(this);
-  if (param_3 != 0) {
-    ((int (*)())FUN_00191e28)(this,param_2);
+  if (createSchedModels != 0) {
+    ((int (*)())FudoPs__createSchedModels)(this,compiler);
   }
-  dVar7 = DOUBLE_001aa2a8[0];
-  dVar6 = DOUBLE_001aa1e0;
-  fVar5 = FLOAT_001aa1c4;
-  fVar4 = FLOAT_001aa170;
-  fVar3 = FLOAT_001aa0e8;
-  pfVar9 = (float *)(this + 0x5d0);
+  exponentBias = DOUBLE_001aa2a8[0];
+  intToDoubleBias = DOUBLE_001aa1e0;
+  denormalScale = FLOAT_001aa1c4;
+  mantissaStep = FLOAT_001aa170;
+  oneValue = FLOAT_001aa0e8;
+  rowStart = (float *)(this + 0x5d0);
   loopIndex3 = 0;
   do {
     loopIndex2 = 0;
-    loopIndex = pfVar9;
+    loopIndex = rowStart;
     do {
       loopIndex = loopIndex + 1;
       if (loopIndex3 == 0) {
-        fVar2 = FLOAT_001aa1c0;
+        immediateValue = FLOAT_001aa1c0;
         if (loopIndex2 != 0) {
-          fVar2 = (float)((double)CONCAT44(0x43300000,loopIndex2 ^ 0x80000000) - dVar6) * fVar4 * fVar5;
+          immediateValue = (float)((double)CONCAT44(0x43300000,loopIndex2 ^ 0x80000000) - intToDoubleBias) * mantissaStep * denormalScale;
         }
       }
       else {
-        dVar12 = _pow(DOUBLE_001aa2a0,
-                      (double)(float)((double)CONCAT44(0x43300000,loopIndex3 ^ 0x80000000) - dVar6) -
-                      dVar7);
-        fVar2 = (float)dVar12 *
-                ((float)((double)CONCAT44(0x43300000,loopIndex2 ^ 0x80000000) - dVar6) * fVar4 + fVar3);
+        powerOfTwo = _pow(DOUBLE_001aa2a0,
+                      (double)(float)((double)CONCAT44(0x43300000,loopIndex3 ^ 0x80000000) - intToDoubleBias) -
+                      exponentBias);
+        immediateValue = (float)powerOfTwo *
+                ((float)((double)CONCAT44(0x43300000,loopIndex2 ^ 0x80000000) - intToDoubleBias) * mantissaStep + oneValue);
       }
-      bVar1 = loopIndex2 != 7;
-      *loopIndex = fVar2;
+      notLastMantissa = loopIndex2 != 7;
+      *loopIndex = immediateValue;
       loopIndex2 = loopIndex2 + 1;
-    } while (bVar1);
-    bVar1 = loopIndex3 != 0xf;
-    pfVar9 = pfVar9 + 8;
+    } while (notLastMantissa);
+    notLastMantissa = loopIndex3 != 0xf;
+    rowStart = rowStart + 8;
     loopIndex3 = loopIndex3 + 1;
-  } while (bVar1);
+  } while (notLastMantissa);
   return;
 }
 
@@ -2421,78 +2421,78 @@ int FUN_001950e0(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_001952d8 @ 0x1952d8 (88 bytes) */
-int FUN_001952d8(param_1, param_2)
-  int param_1;
-  int param_2;
+/* disjointSetFindRoot @ 0x1952d8 (88 bytes) */
+int disjointSetFindRoot(element, parents)
+  int element;
+  int parents;
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
+  int nextLink;
+  int link;
+  int root;
   
-  iVar2 = *(int *)(param_2 + param_1 * 4);
-  iVar3 = param_1;
-  if (param_1 != iVar2) {
+  link = *(int *)(parents + element * 4);
+  root = element;
+  if (element != link) {
     do {
-      iVar3 = *(int *)(param_2 + iVar2 * 4);
-      iVar2 = *(int *)(iVar3 * 4 + param_2);
-    } while (iVar3 != iVar2);
-    if (param_1 != iVar3) {
-      iVar2 = param_1 << 2;
+      root = *(int *)(parents + link * 4);
+      link = *(int *)(root * 4 + parents);
+    } while (root != link);
+    if (element != root) {
+      link = element << 2;
       do {
-        iVar1 = *(int *)(param_2 + iVar2);
-        iVar2 = iVar1 * 4;
-        *(int *)(param_2 + iVar2) = iVar3;
-      } while (iVar3 != iVar1);
+        nextLink = *(int *)(parents + link);
+        link = nextLink * 4;
+        *(int *)(parents + link) = root;
+      } while (root != nextLink);
     }
   }
-  *(int *)(param_1 * 4 + param_2) = iVar3;
-  return iVar3;
+  *(int *)(element * 4 + parents) = root;
+  return root;
 }
 
-/* FUN_00195330 @ 0x195330 (12 bytes) */
-int FUN_00195330(param_1, param_2, param_3)
-  undefined4 param_1;
-  int param_2;
-  int param_3;
+/* storeIndexedWord @ 0x195330 (12 bytes) */
+int storeIndexedWord(value, elementIndex, array)
+  undefined4 value;
+  int elementIndex;
+  int array;
 {
-  *(undefined4 *)(param_2 * 4 + param_3) = param_1;
+  *(undefined4 *)(elementIndex * 4 + array) = value;
   return;
 }
 
-/* FUN_0019533c @ 0x19533c (16 bytes) */
-int FUN_0019533c(param_1)
-  int param_1;
+/* psnOutputScaleCode @ 0x19533c (16 bytes) */
+int psnOutputScaleCode(scaleExponent)
+  int scaleExponent;
 {
-  if (-1 < param_1) {
-    return param_1;
+  if (-1 < scaleExponent) {
+    return scaleExponent;
   }
-  return 3 - param_1;
+  return 3 - scaleExponent;
 }
 
-/* FUN_0019534c @ 0x19534c (108 bytes) */
-int FUN_0019534c(param_1, param_2)
-  uint param_1;
-  uint param_2;
+/* anyEnabledLaneSelectsW @ 0x19534c (108 bytes) */
+int anyEnabledLaneSelectsW(swizzle, laneEnable)
+  uint swizzle;
+  uint laneEnable;
 {
-  if (((((param_1 >> 0x18 != 3) || (param_2 >> 0x18 == 0)) &&
-       (((param_1 >> 0x10 & 0xff) != 3 || ((param_2 >> 0x10 & 0xff) == 0)))) &&
-      (((param_1 >> 8 & 0xff) != 3 || ((param_2 >> 8 & 0xff) == 0)))) &&
-     (((param_1 & 0xff) != 3 || ((param_2 & 0xff) == 0)))) {
+  if (((((swizzle >> 0x18 != 3) || (laneEnable >> 0x18 == 0)) &&
+       (((swizzle >> 0x10 & 0xff) != 3 || ((laneEnable >> 0x10 & 0xff) == 0)))) &&
+      (((swizzle >> 8 & 0xff) != 3 || ((laneEnable >> 8 & 0xff) == 0)))) &&
+     (((swizzle & 0xff) != 3 || ((laneEnable & 0xff) == 0)))) {
     return 0;
   }
   return 1;
 }
 
-/* FUN_001953b8 @ 0x1953b8 (108 bytes) */
-int FUN_001953b8(param_1, param_2)
-  uint param_1;
-  uint param_2;
+/* anyEnabledLaneSelectsXyz @ 0x1953b8 (108 bytes) */
+int anyEnabledLaneSelectsXyz(swizzle, laneEnable)
+  uint swizzle;
+  uint laneEnable;
 {
-  if (((((2 < param_1 >> 0x18) || (param_2 >> 0x18 == 0)) &&
-       ((2 < (param_1 >> 0x10 & 0xff) || ((param_2 >> 0x10 & 0xff) == 0)))) &&
-      ((2 < (param_1 >> 8 & 0xff) || ((param_2 >> 8 & 0xff) == 0)))) &&
-     ((2 < (param_1 & 0xff) || ((param_2 & 0xff) == 0)))) {
+  if (((((2 < swizzle >> 0x18) || (laneEnable >> 0x18 == 0)) &&
+       ((2 < (swizzle >> 0x10 & 0xff) || ((laneEnable >> 0x10 & 0xff) == 0)))) &&
+      ((2 < (swizzle >> 8 & 0xff) || ((laneEnable >> 8 & 0xff) == 0)))) &&
+     ((2 < (swizzle & 0xff) || ((laneEnable & 0xff) == 0)))) {
     return 0;
   }
   return 1;
@@ -2507,9 +2507,9 @@ int FUN_001953b8(param_1, param_2)
 asm(".globl FUN_0019156c");
 asm(".set FUN_0019156c, _FUN_0019156c");
 asm(".globl FUN_00191710");
-asm(".set FUN_00191710, _FUN_00191710");
+asm(".set FUN_00191710, _isLiteralZeroHalfOrOne");
 asm(".globl FUN_00191940");
-asm(".set FUN_00191940, _FUN_00191940");
+asm(".set FUN_00191940, _FudoPs__encodeUniformImmediate");
 asm(".globl FUN_001919d8");
 asm(".set FUN_001919d8, _FUN_001919d8");
 asm(".globl FUN_00191b30");
@@ -2517,9 +2517,9 @@ asm(".set FUN_00191b30, _FUN_00191b30");
 asm(".globl FUN_00191c6c");
 asm(".set FUN_00191c6c, _FudoChip__vslot2");
 asm(".globl FUN_00191c7c");
-asm(".set FUN_00191c7c, _FUN_00191c7c");
+asm(".set FUN_00191c7c, _FudoPs__classifyLiteralOperand");
 asm(".globl FUN_00191e28");
-asm(".set FUN_00191e28, _FUN_00191e28");
+asm(".set FUN_00191e28, _FudoPs__createSchedModels");
 asm(".globl FUN_0019286c");
 asm(".set FUN_0019286c, _FUN_0019286c");
 asm(".globl FUN_00193944");

@@ -29,7 +29,7 @@ int FUN_00127f24(param_1, param_2)
   puVar2[1] = 0;
   *puVar2 = puVar1 + 8;
   FUN_00189560(puVar2 + 10);
-  R520SchedModel__vslot2(puVar2);
+  R520SchedModel__vslot2_reset(puVar2);
   puVar2[0x1a] = 0;
   *(undefined4 **)(param_1 + 0x60) = puVar2;
   puVar2 = (undefined4 *)FUN_000e1564(param_2,0xc);
@@ -775,7 +775,7 @@ int FUN_00129290(param_1, param_2)
   *puVar2 = puVar3;
   puVar2[1] = 0;
   *puVar2 = puVar1 + 8;
-  R300VSchedModel__vslot2(puVar2);
+  R300VSchedModel__vslot2_reset(puVar2);
   FUN_00172000(puVar2);
   puVar2[0xe] = 0;
   *(undefined4 **)(param_1 + 0x60) = puVar2;
@@ -1655,7 +1655,7 @@ int FUN_0012a4b8(param_1, param_2)
   *puVar2 = puVar3;
   puVar2[1] = 0;
   *puVar2 = puVar1 + 8;
-  R300VSchedModel__vslot2(puVar2);
+  R300VSchedModel__vslot2_reset(puVar2);
   FUN_00172000(puVar2);
   puVar2[0xe] = 0;
   *(undefined4 **)(param_1 + 0x60) = puVar2;

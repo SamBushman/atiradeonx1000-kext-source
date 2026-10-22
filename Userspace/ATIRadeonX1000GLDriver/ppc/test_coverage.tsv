@@ -1123,15 +1123,15 @@
 0xcf2ec	FUN_000cf2ec	1952	yes	
 0xcfc94	FUN_000cfc94	144	yes	
 0xcfd24	FUN_000cfd24	524	yes	
-0xcff30	FUN_000cff30	252	yes	
-0xd002c	FUN_000d002c	728	yes	
-0xd0304	FUN_000d0304	84	yes	
-0xd035c	FUN_000d035c	84	yes	
-0xd03b4	FUN_000d03b4	152	yes	
-0xd0450	FUN_000d0450	56	yes	
-0xd0488	FUN_000d0488	768	yes	
-0xd0888	FUN_000d0888	596	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xd0b68	FUN_000d0b68	1344	yes	
+0xcff30	vsDisassembleLine	252	yes	
+0xd002c	vsDisassemble	728	yes	
+0xd0304	vsDisassembleToString	84	yes	
+0xd035c	vsDisassembleVertexProgram	84	yes	
+0xd03b4	psnReportError	152	yes	
+0xd0450	psnFormatRegister	56	yes	
+0xd0488	psnFormatRgbSource	768	yes	
+0xd0888	psnFormatAlphaSource	596	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xd0b68	psnNormalizeProgram	1344	yes	
 0xd10a8	FUN_000d10a8	52	yes	
 0xd10dc	FUN_000d10dc	712	yes	
 0xd13a4	FUN_000d13a4	640	yes	
@@ -2952,7 +2952,7 @@
 0x1894ec	FUN_001894ec	116	yes	
 0x189560	FUN_00189560	64	yes	
 0x1895a0	FUN_001895a0	100	yes	
-0x189604	R520SchedModel__vslot2	40	yes	
+0x189604	R520SchedModel__vslot2_reset	40	yes	
 0x18962c	FUN_0018962c	52	no	indirect call (driver context / vtable / callback)
 0x189660	FUN_00189660	152	no	indirect call (driver context / vtable / callback)
 0x1896f8	FUN_001896f8	108	yes	
@@ -2985,29 +2985,29 @@
 0x18da48	FUN_0018da48	116	yes	
 0x18dabc	FUN_0018dabc	1708	no	indirect call (driver context / vtable / callback)
 0x18e1a8	FUN_0018e1a8	4688	no	indirect call (driver context / vtable / callback)
-0x18f42c	R520SchedModel__vslot4	304	no	indirect call (driver context / vtable / callback)
-0x18f55c	R520SchedModel__vslot3	280	no	indirect call (driver context / vtable / callback)
+0x18f42c	R520SchedModel__vslot4_addInstruction	304	no	indirect call (driver context / vtable / callback)
+0x18f55c	R520SchedModel__vslot3_canAddInstruction	280	no	indirect call (driver context / vtable / callback)
 0x18f674	FUN_0018f674	432	no	indirect call (driver context / vtable / callback)
-0x18f824	R300VSchedModel__vslot2	44	yes	
+0x18f824	R300VSchedModel__vslot2_reset	44	yes	
 0x18f850	FUN_0018f850	200	yes	
 0x18f918	FUN_0018f918	108	no	indirect call (driver context / vtable / callback)
 0x18f984	FUN_0018f984	596	no	indirect call (driver context / vtable / callback)
 0x18fbd8	FUN_0018fbd8	348	no	indirect call (driver context / vtable / callback)
 0x18fd34	FUN_0018fd34	972	no	indirect call (driver context / vtable / callback)
 0x190100	FUN_00190100	728	no	indirect call (driver context / vtable / callback)
-0x1904b8	R300VSchedModel__vslot4	528	no	indirect call (driver context / vtable / callback)
-0x1906c8	R300VSchedModel__vslot3	712	no	indirect call (driver context / vtable / callback)
+0x1904b8	R300VSchedModel__vslot4_addInstruction	528	no	indirect call (driver context / vtable / callback)
+0x1906c8	R300VSchedModel__vslot3_canAddInstruction	712	no	indirect call (driver context / vtable / callback)
 0x190990	FUN_00190990	2308	no	indirect call (driver context / vtable / callback)
 0x191298	FUN_00191298	724	no	indirect call (driver context / vtable / callback)
 0x19156c	FUN_0019156c	412	no	indirect call (driver context / vtable / callback)
-0x191710	FUN_00191710	76	yes	
-0x191888	FUN_00191888	184	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x191940	FUN_00191940	152	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x191710	isLiteralZeroHalfOrOne	76	yes	
+0x191888	FudoPs__encodeImmediateFloat	184	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x191940	FudoPs__encodeUniformImmediate	152	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x1919d8	FUN_001919d8	344	yes	
 0x191b30	FUN_00191b30	316	no	indirect call (driver context / vtable / callback)
 0x191c6c	FudoChip__vslot2	16	yes	
-0x191c7c	FUN_00191c7c	428	no	indirect call (driver context / vtable / callback)
-0x191e28	FUN_00191e28	196	yes	
+0x191c7c	FudoPs__classifyLiteralOperand	428	no	indirect call (driver context / vtable / callback)
+0x191e28	FudoPs__createSchedModels	196	yes	
 0x191efc	FudoPs__ctor_191efc	448	yes	
 0x1920e0	FudoPs__ctor_1920e0	748	yes	
 0x1922c4	FUN_001922c4	1220	no	indirect call (driver context / vtable / callback)
@@ -3054,147 +3054,147 @@
 0x194d44	FUN_00194d44	224	no	indirect call (driver context / vtable / callback)
 0x194e44	FUN_00194e44	608	no	indirect call (driver context / vtable / callback)
 0x1950e0	FUN_001950e0	472	no	indirect call (driver context / vtable / callback)
-0x1952d8	FUN_001952d8	88	yes	
-0x195330	FUN_00195330	12	yes	
-0x19533c	FUN_0019533c	16	yes	
-0x19534c	FUN_0019534c	108	yes	
-0x1953b8	FUN_001953b8	108	yes	
-0x195424	FUN_00195424	56	yes	
-0x19545c	FUN_0019545c	20	yes	
-0x195474	FUN_00195474	256	no	indirect call (driver context / vtable / callback)
-0x195574	R300MachineAssembler__vslot6	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x195578	R300MachineAssembler__vslot8	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x195580	R300MachineAssembler__vslot3	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x195584	R300MachineAssembler__vslot9	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x195590	FUN_00195590	48	yes	
-0x1955c0	FUN_001955c0	16	yes	
-0x1955d0	FUN_001955d0	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x1955dc	FUN_001955dc	28	yes	
-0x1955f8	R300MachineAssembler__vslot2	36	yes	
-0x19561c	FUN_0019561c	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x195624	FUN_00195624	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x195628	FUN_00195628	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x19562c	FUN_0019562c	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x195630	FUN_00195630	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x195634	FUN_00195634	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x195638	FUN_00195638	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x19563c	FUN_0019563c	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x195640	FUN_00195640	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x195650	FUN_00195650	76	yes	
-0x19569c	FUN_0019569c	76	yes	
-0x1956e8	FUN_001956e8	16	yes	
-0x1956f8	FUN_001956f8	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x1956fc	FUN_001956fc	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x195700	FUN_00195700	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x195704	FUN_00195704	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x195708	FUN_00195708	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x19570c	FUN_0019570c	136	yes	
-0x195794	FUN_00195794	68	yes	
-0x1957d8	FUN_001957d8	68	yes	
-0x19581c	FUN_0019581c	260	yes	
-0x195920	FUN_00195920	108	yes	
-0x19598c	FUN_0019598c	112	yes	
-0x1959fc	FUN_001959fc	336	yes	
-0x195b4c	FUN_00195b4c	16	yes	
-0x195b5c	FUN_00195b5c	84	yes	
-0x195bb0	FUN_00195bb0	316	yes	
-0x195cec	FUN_00195cec	644	yes	
-0x195f70	FUN_00195f70	28	yes	
-0x195f8c	FUN_00195f8c	76	yes	
-0x195fd8	FUN_00195fd8	152	yes	
-0x196070	FUN_00196070	320	no	indirect call (driver context / vtable / callback)
-0x1961c8	R300MachineAssembler__vslot4	296	no	indirect call (driver context / vtable / callback)
-0x1962f0	FUN_001962f0	128	yes	
-0x196370	FUN_00196370	64	yes	
-0x1963b0	R300MachineAssembler__vslot5	236	yes	
-0x19649c	FUN_0019649c	128	no	indirect call (driver context / vtable / callback)
+0x1952d8	disjointSetFindRoot	88	yes	
+0x195330	storeIndexedWord	12	yes	
+0x19533c	psnOutputScaleCode	16	yes	
+0x19534c	anyEnabledLaneSelectsW	108	yes	
+0x1953b8	anyEnabledLaneSelectsXyz	108	yes	
+0x195424	lanesToRgbMask	56	yes	
+0x19545c	packSourceModifier	20	yes	
+0x195474	R300MachineAssembler__vslot12_assembleNodeAndMarkChildren	256	no	indirect call (driver context / vtable / callback)
+0x195574	R300MachineAssembler__vslot6_noOp	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x195578	R300MachineAssembler__vslot8_returnsTrue	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x195580	R300MachineAssembler__vslot3_noOp	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x195584	R300MachineAssembler__vslot9_getRecordBufferWords	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x195590	psnLiteralAddressFromRegisterWord	48	yes	
+0x1955c0	R300MachineAssembler__callSlot65	16	yes	
+0x1955d0	R300MachineAssembler__declareNodeRegistersThunk	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x1955dc	R300MachineAssembler__vslot65_declareNodeRegisters	28	yes	
+0x1955f8	R300MachineAssembler__vslot2_exceedsInstructionLimit	36	yes	
+0x19561c	R300MachineAssembler__vslot38_returnsFalse	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x195624	R300MachineAssembler__vslot36_noOp	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x195628	R300MachineAssembler__vslot39_noOp	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x19562c	R300MachineAssembler__vslot40_noOp	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x195630	R300MachineAssembler__vslot41_noOp	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x195634	R300MachineAssembler__vslot42_noOp	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x195638	R300MachineAssembler__vslot29_noOp	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x19563c	R300MachineAssembler__vslot43_noOp	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x195640	R300MachineAssembler__vslot44_noOp	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x195650	opcodeInfoRgbHwOpcode	76	yes	
+0x19569c	opcodeInfoAlphaHwOpcode	76	yes	
+0x1956e8	R300MachineAssembler__callSlot14	16	yes	
+0x1956f8	R300MachineAssembler__vslot16_noOp	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x1956fc	R300MachineAssembler__vslot19_noOp	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x195700	R300MachineAssembler__vslot20_noOp	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x195704	R300MachineAssembler__vslot21_noOp	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x195708	R300MachineAssembler__vslot22_noOp	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x19570c	R300MachineAssembler__initNopAluRecord	136	yes	
+0x195794	R300MachineAssembler__setRsColorFields	68	yes	
+0x1957d8	R300MachineAssembler__setRsTexCoordFields	68	yes	
+0x19581c	R300MachineAssembler__rgbSelectForSrcpSwizzle	260	yes	
+0x195920	R300MachineAssembler__alphaSelectForSrcpComponent	108	yes	
+0x19598c	R300MachineAssembler__rgbSelectForAlphaSource	112	yes	
+0x1959fc	R300MachineAssembler__rgbSelectForSourceSwizzle	336	yes	
+0x195b4c	R300MachineAssembler__alphaSelectForAlphaSource	16	yes	
+0x195b5c	R300MachineAssembler__alphaSelectForColorComponent	84	yes	
+0x195bb0	R300MachineAssembler__setAluSourceAddresses	316	yes	
+0x195cec	R300MachineAssembler__setAlphaOpcode	644	yes	
+0x195f70	R300MachineAssembler__setAlphaTempWriteEnable	28	yes	
+0x195f8c	R300MachineAssembler__closeTextureIndirectionLevel	76	yes	
+0x195fd8	R300MachineAssembler__writeHeaderRecord	152	yes	
+0x196070	R300MachineAssembler__beginNextRecord	320	no	indirect call (driver context / vtable / callback)
+0x1961c8	R300MachineAssembler__vslot4_finishProgram	296	no	indirect call (driver context / vtable / callback)
+0x1962f0	R300MachineAssembler__assembleAsOpcodeInfo31	128	yes	
+0x196370	R300MachineAssembler__trackMaxLevelAndAssemble	64	yes	
+0x1963b0	R300MachineAssembler__vslot5_beginProgram	236	yes	
+0x19649c	R300MachineAssembler__noteFetchTextureUnit	128	no	indirect call (driver context / vtable / callback)
 0x19651c	FUN_0019651c	640	no	indirect call (driver context / vtable / callback)
-0x19679c	FUN_0019679c	188	no	indirect call (driver context / vtable / callback)
-0x196858	FUN_00196858	640	no	indirect call (driver context / vtable / callback)
-0x196ad8	FUN_00196ad8	644	yes	
-0x196d5c	FUN_00196d5c	96	yes	
+0x19679c	R300MachineAssembler__resolveSourceRegister	188	no	indirect call (driver context / vtable / callback)
+0x196858	R300MachineAssembler__setAluSourceSelectsAndModifiers	640	no	indirect call (driver context / vtable / callback)
+0x196ad8	R300MachineAssembler__setRgbOpcode	644	yes	
+0x196d5c	R300MachineAssembler__create	96	yes	
 0x196dbc	R300MachineAssembler__dtor_196dbc	64	yes	
 0x196dfc	R300MachineAssembler__dtor	64	yes	
 0x196e3c	MachineAssembler__dtor_196e3c	84	yes	
-0x196e90	FUN_00196e90	872	no	indirect call (driver context / vtable / callback)
-0x1971f8	FUN_001971f8	1652	no	indirect call (driver context / vtable / callback)
-0x19786c	FUN_0019786c	672	no	indirect call (driver context / vtable / callback)
-0x197b30	FUN_00197b30	692	no	indirect call (driver context / vtable / callback)
-0x197de4	FUN_00197de4	232	yes	
-0x197ecc	FUN_00197ecc	232	yes	
-0x197fb4	FUN_00197fb4	208	yes	
-0x198084	FUN_00198084	296	yes	
-0x1981ac	FUN_001981ac	8500	no	indirect call (driver context / vtable / callback)
-0x19a2e0	FUN_0019a2e0	16	yes	
-0x19a2f0	FUN_0019a2f0	120	yes	
-0x19a368	FUN_0019a368	28	yes	
-0x19a384	FUN_0019a384	56	yes	
-0x19a3bc	FUN_0019a3bc	172	yes	
-0x19a484	FUN_0019a484	132	yes	
-0x19a508	FUN_0019a508	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x19a50c	FUN_0019a50c	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x19a510	FUN_0019a510	40	yes	
-0x19a538	FUN_0019a538	48	yes	
-0x19a568	FUN_0019a568	176	yes	
-0x19a618	R300VMachineAssembler__vslot2	120	yes	
-0x19a690	FUN_0019a690	16	yes	
-0x19a6a0	FUN_0019a6a0	80	yes	
-0x19a6f0	FUN_0019a6f0	192	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x19a7b0	FUN_0019a7b0	92	yes	
-0x19a80c	FUN_0019a80c	156	no	indirect call (driver context / vtable / callback)
-0x19a8a8	FUN_0019a8a8	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x19a8ac	FUN_0019a8ac	16	yes	
-0x19a8bc	FUN_0019a8bc	16	yes	
-0x19a8d4	FUN_0019a8d4	128	yes	
-0x19a954	FUN_0019a954	92	yes	
-0x19a9b0	FUN_0019a9b0	44	yes	
-0x19a9dc	FUN_0019a9dc	160	yes	
-0x19aa7c	FUN_0019aa7c	92	yes	
-0x19aaf4	FUN_0019aaf4	100	no	indirect call (driver context / vtable / callback)
-0x19ab60	FUN_0019ab60	100	no	indirect call (driver context / vtable / callback)
-0x19abc4	FUN_0019abc4	100	no	indirect call (driver context / vtable / callback)
-0x19ac2c	FUN_0019ac2c	120	yes	
-0x19aca4	FUN_0019aca4	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x19acb0	FUN_0019acb0	328	yes	
-0x19adf8	FUN_0019adf8	136	yes	
-0x19ae80	FUN_0019ae80	104	no	indirect call (driver context / vtable / callback)
-0x19aee8	FUN_0019aee8	88	no	indirect call (driver context / vtable / callback)
-0x19af40	FUN_0019af40	252	no	indirect call (driver context / vtable / callback)
-0x19b03c	FUN_0019b03c	908	no	indirect call (driver context / vtable / callback)
-0x19b3c8	FUN_0019b3c8	728	no	indirect call (driver context / vtable / callback)
-0x19b6a0	FUN_0019b6a0	168	yes	
-0x19b748	FUN_0019b748	192	yes	
-0x19b808	FUN_0019b808	180	yes	
-0x19b8bc	FUN_0019b8bc	96	yes	
+0x196e90	R300MachineAssembler__placeInstructionConstants	872	no	indirect call (driver context / vtable / callback)
+0x1971f8	R300MachineAssembler__assembleBlock	1652	no	indirect call (driver context / vtable / callback)
+0x19786c	R300MachineAssembler__classifyAluOperation	672	no	indirect call (driver context / vtable / callback)
+0x197b30	R300MachineAssembler__emitTexRecord	692	no	indirect call (driver context / vtable / callback)
+0x197de4	R300MachineAssembler__rgbSelectForLiteralFloat	232	yes	
+0x197ecc	R300MachineAssembler__alphaSelectForLiteralFloat	232	yes	
+0x197fb4	R300MachineAssembler__setTempDestination	208	yes	
+0x198084	R300MachineAssembler__setOutputDestination	296	yes	
+0x1981ac	R300MachineAssembler__assembleAluInstruction	8500	no	indirect call (driver context / vtable / callback)
+0x19a2e0	maxSigned	16	yes	
+0x19a2f0	R300VMachineAssembler__finishProgram	120	yes	
+0x19a368	R300VMachineAssembler__clearInstructionByte3	28	yes	
+0x19a384	R300VMachineAssembler__nextInstruction	56	yes	
+0x19a3bc	R300VMachineAssembler__logStatistics	172	yes	
+0x19a484	R300VMachineAssembler__copyControlFlowToOutput	132	yes	
+0x19a508	R300VMachineAssembler__vslot_noOp_19a508	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x19a50c	R300VMachineAssembler__vslot_noOp_19a50c	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x19a510	R300VMachineAssembler__clearCurrentInstruction	40	yes	
+0x19a538	opcodeInfoIsVsFlagBit2	48	yes	
+0x19a568	R300VMachineAssembler__transitionState	176	yes	
+0x19a618	R300VMachineAssembler__vslot2_exceedsLimits	120	yes	
+0x19a690	R300VMachineAssembler__vslot49_advanceInstruction	16	yes	
+0x19a6a0	R300VMachineAssembler__vslot48_declareAndAssemble	80	yes	
+0x19a6f0	vsSourceSelectForConstant	192	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x19a7b0	copyLaneWord	92	yes	
+0x19a80c	R300VMachineAssembler__vslot15_assembleUnlessConstantMove	156	no	indirect call (driver context / vtable / callback)
+0x19a8a8	R300VMachineAssembler__vslot16_noOp	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x19a8ac	R300VMachineAssembler__vslot18_callSlot14	16	yes	
+0x19a8bc	R300VMachineAssembler__vslot19_callSlot14	16	yes	
+0x19a8d4	R300VMachineAssembler__vslot43_beginLoop	128	yes	
+0x19a954	R300VMachineAssembler__vslot44_endLoopBody	92	yes	
+0x19a9b0	R300VMachineAssembler__appendControlFlowEntry	44	yes	
+0x19a9dc	R300VMachineAssembler__vslot45_endLoop	160	yes	
+0x19aa7c	R300VMachineAssembler__vslot46_leaveLoop	92	yes	
+0x19aaf4	R300VMachineAssembler__vslot27_assembleOrFail	100	no	indirect call (driver context / vtable / callback)
+0x19ab60	R300VMachineAssembler__vslot25_assembleOrFail	100	no	indirect call (driver context / vtable / callback)
+0x19abc4	R300VMachineAssembler__vslot28_assembleChildOrFail	100	no	indirect call (driver context / vtable / callback)
+0x19ac2c	R300VMachineAssembler__vslot38_appendCallEntry	120	yes	
+0x19aca4	R300VMachineAssembler__vslot42_noOp	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x19acb0	R300VMachineAssembler__init	328	yes	
+0x19adf8	R300VMachineAssembler__vslot6_setLoopStack	136	yes	
+0x19ae80	R300VMachineAssembler__vslot24_assembleWithTarget	104	no	indirect call (driver context / vtable / callback)
+0x19aee8	R300VMachineAssembler__vslot30_assembleBlockThenSlot40	88	no	indirect call (driver context / vtable / callback)
+0x19af40	R300VMachineAssembler__vslot37_patchControlFlowTarget	252	no	indirect call (driver context / vtable / callback)
+0x19b03c	R300VMachineAssembler__findFoldableMovePair	908	no	indirect call (driver context / vtable / callback)
+0x19b3c8	R300VMachineAssembler__assembleBlock	728	no	indirect call (driver context / vtable / callback)
+0x19b6a0	R300VMachineAssembler__vslot40_endControlFlowBlock	168	yes	
+0x19b748	R300VMachineAssembler__vslot39_appendBranchEntry	192	yes	
+0x19b808	R300VMachineAssembler__vslot29_endIfBlock	180	yes	
+0x19b8bc	R300VMachineAssembler__create	96	yes	
 0x19b91c	MachineAssembler__dtor_19b91c	124	yes	
 0x19b9ac	MachineAssembler__dtor_19b9ac	124	yes	
 0x19ba3c	R300VMachineAssembler__deleting_dtor	164	yes	
-0x19baf4	FUN_0019baf4	1596	no	indirect call (driver context / vtable / callback)
-0x19c130	FUN_0019c130	2376	no	indirect call (driver context / vtable / callback)
-0x19ca78	FUN_0019ca78	1916	no	indirect call (driver context / vtable / callback)
-0x19d1f4	FUN_0019d1f4	572	no	indirect call (driver context / vtable / callback)
-0x19d430	FUN_0019d430	68	yes	
-0x19d474	FUN_0019d474	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x19d478	FUN_0019d478	140	yes	
-0x19d4e8	FUN_0019d4e8	136	yes	
-0x19d590	FUN_0019d590	528	no	indirect call (driver context / vtable / callback)
-0x19d7a0	FUN_0019d7a0	184	no	indirect call (driver context / vtable / callback)
-0x19d858	FUN_0019d858	1008	no	indirect call (driver context / vtable / callback)
-0x19dc48	FUN_0019dc48	104	no	indirect call (driver context / vtable / callback)
+0x19baf4	R300VMachineAssembler__encodeDestinationWord	1596	no	indirect call (driver context / vtable / callback)
+0x19c130	R300VMachineAssembler__encodeSourceOperand	2376	no	indirect call (driver context / vtable / callback)
+0x19ca78	R300VMachineAssembler__encodeDualMathOperands	1916	no	indirect call (driver context / vtable / callback)
+0x19d1f4	R300VMachineAssembler__vslot14_assembleInstruction	572	no	indirect call (driver context / vtable / callback)
+0x19d430	R300VMachineAssembler__getOrAllocateScratchRegister	68	yes	
+0x19d474	R520VMachineAssembler__vslot33_noOp	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x19d478	R520VMachineAssembler__vslot12_visitNode	140	yes	
+0x19d4e8	R520VMachineAssembler__getOrCreateConstantZeroInst	136	yes	
+0x19d590	R520VMachineAssembler__vslot37_closeConditional	528	no	indirect call (driver context / vtable / callback)
+0x19d7a0	R520VMachineAssembler__vslot32_assembleWithPredicateClear	184	no	indirect call (driver context / vtable / callback)
+0x19d858	R520VMachineAssembler__vslot27_assembleLoopHeader	1008	no	indirect call (driver context / vtable / callback)
+0x19dc48	R520VMachineAssembler__vslot30_assembleBlockThenSlot40	104	no	indirect call (driver context / vtable / callback)
 0x19dcb0	R520VMachineAssembler__deleting_dtor	184	yes	
-0x19dd7c	FUN_0019dd7c	180	yes	
-0x19de50	FUN_0019de50	96	yes	
+0x19dd7c	R520VMachineAssembler__init	180	yes	
+0x19de50	R520VMachineAssembler__create	96	yes	
 0x19deb0	MachineAssembler__dtor_19deb0	144	yes	
 0x19df54	MachineAssembler__dtor_19df54	144	yes	
-0x19dff8	FUN_0019dff8	292	yes	
-0x19e11c	FUN_0019e11c	508	no	indirect call (driver context / vtable / callback)
-0x19e318	FUN_0019e318	840	no	indirect call (driver context / vtable / callback)
-0x19e660	FUN_0019e660	128	yes	
-0x19e6e0	FUN_0019e6e0	688	no	indirect call (driver context / vtable / callback)
-0x19e990	FUN_0019e990	108	yes	
-0x19e9fc	FUN_0019e9fc	168	yes	
-0x19eaa4	FUN_0019eaa4	32	yes	
-0x19eac4	FUN_0019eac4	108	yes	
+0x19dff8	R520VMachineAssembler__vslot28_assembleIfEnd	292	yes	
+0x19e11c	R520VMachineAssembler__vslot31_assembleWithPredicateRestore	508	no	indirect call (driver context / vtable / callback)
+0x19e318	R520VMachineAssembler__vslot25_assembleConditionalBlock	840	no	indirect call (driver context / vtable / callback)
+0x19e660	R520VMachineAssembler__vslot6_setLoopStack	128	yes	
+0x19e6e0	R520VMachineAssembler__vslot24_assembleWithPredicateSet	688	no	indirect call (driver context / vtable / callback)
+0x19e990	psnPackedLaneComponent	108	yes	
+0x19e9fc	psnPackedLaneSource	168	yes	
+0x19eaa4	psnPackedNegateMask	32	yes	
+0x19eac4	psnPackedLaneNegate	108	yes	
 0x19eb30	FUN_0019eb30	172	yes	
 0x19ebdc	FUN_0019ebdc	172	yes	
 0x19ec88	FUN_0019ec88	108	yes	
@@ -3203,58 +3203,58 @@
 0x19ee08	FUN_0019ee08	108	yes	
 0x19ee74	FUN_0019ee74	184	yes	
 0x19ef2c	FUN_0019ef2c	32	yes	
-0x19ef50	R520MachineAssembler__vslot5	324	yes	
-0x19f094	FUN_0019f094	56	yes	
-0x19f0cc	FUN_0019f0cc	68	yes	
-0x19f110	FUN_0019f110	40	yes	
-0x19f138	FUN_0019f138	168	yes	
-0x19f1e0	FUN_0019f1e0	28	yes	
-0x19f1fc	FUN_0019f1fc	48	yes	
-0x19f22c	FUN_0019f22c	24	yes	
-0x19f244	FUN_0019f244	84	yes	
-0x19f298	FUN_0019f298	44	yes	
-0x19f2c4	FUN_0019f2c4	40	yes	
-0x19f2ec	FUN_0019f2ec	36	yes	
-0x19f310	FUN_0019f310	300	yes	
-0x19f43c	FUN_0019f43c	828	yes	
-0x19f778	FUN_0019f778	44	yes	
-0x19f7a4	FUN_0019f7a4	188	yes	
-0x19f860	R520MachineAssembler__vslot9	32	yes	
-0x19f880	FUN_0019f880	240	no	indirect call (driver context / vtable / callback)
-0x19f970	FUN_0019f970	28	yes	
-0x19f98c	FUN_0019f98c	204	yes	
-0x19fa58	FUN_0019fa58	300	no	indirect call (driver context / vtable / callback)
-0x19fb84	FUN_0019fb84	320	no	indirect call (driver context / vtable / callback)
-0x19fccc	R520MachineAssembler__vslot4	292	no	indirect call (driver context / vtable / callback)
-0x19fdf0	FUN_0019fdf0	316	yes	
-0x19ff2c	FUN_0019ff2c	176	no	indirect call (driver context / vtable / callback)
-0x19ffdc	FUN_0019ffdc	216	no	indirect call (driver context / vtable / callback)
-0x1a00b4	FUN_001a00b4	1552	yes	
-0x1a06c4	FUN_001a06c4	252	no	indirect call (driver context / vtable / callback)
-0x1a07c0	FUN_001a07c0	304	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x1a08f0	FUN_001a08f0	224	yes	
-0x1a09d0	FUN_001a09d0	364	no	indirect call (driver context / vtable / callback)
-0x1a0b3c	FUN_001a0b3c	1192	no	indirect call (driver context / vtable / callback)
-0x1a0fe4	FUN_001a0fe4	356	yes	
-0x1a1160	FUN_001a1160	144	yes	
-0x1a11f0	FUN_001a11f0	328	no	indirect call (driver context / vtable / callback)
-0x1a1338	FUN_001a1338	96	yes	
-0x1a1398	FUN_001a1398	312	yes	
-0x1a14d0	FUN_001a14d0	188	no	indirect call (driver context / vtable / callback)
-0x1a158c	FUN_001a158c	704	no	indirect call (driver context / vtable / callback)
-0x1a184c	FUN_001a184c	208	yes	
-0x1a191c	FUN_001a191c	560	yes	
-0x1a1b64	FUN_001a1b64	448	yes	
-0x1a1d24	FUN_001a1d24	2180	no	indirect call (driver context / vtable / callback)
-0x1a25a8	FUN_001a25a8	692	no	indirect call (driver context / vtable / callback)
-0x1a2878	FUN_001a2878	284	no	indirect call (driver context / vtable / callback)
-0x1a2994	FUN_001a2994	380	no	indirect call (driver context / vtable / callback)
-0x1a2b10	FUN_001a2b10	248	yes	
-0x1a2c08	FUN_001a2c08	264	no	indirect call (driver context / vtable / callback)
-0x1a2d10	FUN_001a2d10	160	no	indirect call (driver context / vtable / callback)
-0x1a2db0	FUN_001a2db0	308	no	indirect call (driver context / vtable / callback)
-0x1a2ee4	FUN_001a2ee4	284	no	indirect call (driver context / vtable / callback)
-0x1a3000	FUN_001a3000	556	no	indirect call (driver context / vtable / callback)
+0x19ef50	R520MachineAssembler__vslot5_beginProgram	324	yes	
+0x19f094	R520MachineAssembler__setRsColorFields	56	yes	
+0x19f0cc	R520MachineAssembler__setRsTexCoordFields	68	yes	
+0x19f110	R520MachineAssembler__clearCurrentRecord	40	yes	
+0x19f138	R520MachineAssembler__initNopAluRecord	168	yes	
+0x19f1e0	R520MachineAssembler__vslot65_declareNodeRegisters	28	yes	
+0x19f1fc	R520MachineAssembler__vslot59_selectForSrcpSwizzle	48	yes	
+0x19f22c	R520MachineAssembler__vslot60_selectForSrcpComponent	24	yes	
+0x19f244	R520MachineAssembler__vslot61_selectForAlphaSource	84	yes	
+0x19f298	R520MachineAssembler__vslot62_selectForSourceSwizzle	44	yes	
+0x19f2c4	R520MachineAssembler__vslot64_selectForColorComponent	40	yes	
+0x19f2ec	R520MachineAssembler__vslot63_selectForAlphaComponent	36	yes	
+0x19f310	R520MachineAssembler__setAluSourceAddresses	300	yes	
+0x19f43c	R520MachineAssembler__setAlphaOpcode	828	yes	
+0x19f778	R520MachineAssembler__vslot77_setRecordByteB	44	yes	
+0x19f7a4	R520MachineAssembler__writeHeaderRecord	188	yes	
+0x19f860	R520MachineAssembler__vslot9_getRecordWordsUsed	32	yes	
+0x19f880	R520MachineAssembler__vslot38_appendBranchRecord	240	no	indirect call (driver context / vtable / callback)
+0x19f970	R520MachineAssembler__vslot80_setRecordByte9	28	yes	
+0x19f98c	R520MachineAssembler__vslot55_tryEncodeImmediateLiteral	204	yes	
+0x19fa58	R520MachineAssembler__vslot67_selectForConstantLanes	300	no	indirect call (driver context / vtable / callback)
+0x19fb84	R520MachineAssembler__beginNextRecord	320	no	indirect call (driver context / vtable / callback)
+0x19fccc	R520MachineAssembler__vslot4_finishProgram	292	no	indirect call (driver context / vtable / callback)
+0x19fdf0	R520MachineAssembler__vslot79_setTexCompareFlags	316	yes	
+0x19ff2c	R520MachineAssembler__vslot31_assembleChildrenAndMark	176	no	indirect call (driver context / vtable / callback)
+0x19ffdc	R520MachineAssembler__vslot24_assembleWithTarget	216	no	indirect call (driver context / vtable / callback)
+0x1a00b4	R520MachineAssembler__setRgbOpcode	1552	yes	
+0x1a06c4	R520MachineAssembler__vslot86_resolveSourceRegister	252	no	indirect call (driver context / vtable / callback)
+0x1a07c0	R520MachineAssembler__vslot53_selectBitsForLiteralFloat	304	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x1a08f0	R520MachineAssembler__vslot54_selectBitsForAlphaLiteral	224	yes	
+0x1a09d0	R520MachineAssembler__vslot66_selectBitsForLiteralLanes	364	no	indirect call (driver context / vtable / callback)
+0x1a0b3c	R520MachineAssembler__vslot71_setAluSourceSelectsAndModifiers	1192	no	indirect call (driver context / vtable / callback)
+0x1a0fe4	evaluateConstantComparison	356	yes	
+0x1a1160	R520MachineAssembler__vslot29_patchBranchTarget	144	yes	
+0x1a11f0	R520MachineAssembler__vslot26_assembleThenAppendRecord	328	no	indirect call (driver context / vtable / callback)
+0x1a1338	R520MachineAssembler__create	96	yes	
+0x1a1398	R520MachineAssembler__terminateOpenBranches	312	yes	
+0x1a14d0	R520MachineAssembler__vslot30_assembleThenTerminate	188	no	indirect call (driver context / vtable / callback)
+0x1a158c	R520MachineAssembler__vslot28_endLoop	704	no	indirect call (driver context / vtable / callback)
+0x1a184c	R520MachineAssembler__vslot72_setTempDestination	208	yes	
+0x1a191c	R520MachineAssembler__vslot74_setPredicateSetDestination	560	yes	
+0x1a1b64	R520MachineAssembler__vslot73_setOutputDestination	448	yes	
+0x1a1d24	R520MachineAssembler__vslot23_emitTexRecord	2180	no	indirect call (driver context / vtable / callback)
+0x1a25a8	R520MachineAssembler__emitCompareToPredicate	692	no	indirect call (driver context / vtable / callback)
+0x1a2878	R520MachineAssembler__vslot39_appendLoopStartRecord	284	no	indirect call (driver context / vtable / callback)
+0x1a2994	R520MachineAssembler__appendBranchEndRecord	380	no	indirect call (driver context / vtable / callback)
+0x1a2b10	R520MachineAssembler__emitConditionalBranch	248	yes	
+0x1a2c08	R520MachineAssembler__vslot27_assembleIf	264	no	indirect call (driver context / vtable / callback)
+0x1a2d10	R520MachineAssembler__vslot32_assembleBranchEnd	160	no	indirect call (driver context / vtable / callback)
+0x1a2db0	R520MachineAssembler__appendLoopRecord	308	no	indirect call (driver context / vtable / callback)
+0x1a2ee4	R520MachineAssembler__vslot25_assembleLoop	284	no	indirect call (driver context / vtable / callback)
+0x1a3000	R520MachineAssembler__vslot37_closeBranch	556	no	indirect call (driver context / vtable / callback)
 0x1a322c	FUN_001a322c	32	no	tiny (32 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x1a324c	FUN_001a324c	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x1a3254	FUN_001a3254	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises

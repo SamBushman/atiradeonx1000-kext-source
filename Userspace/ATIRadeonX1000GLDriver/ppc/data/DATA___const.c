@@ -1832,7 +1832,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001d0050, /* +0x1c94 */
     0x0010da84, /* -> FUN_0010da84 */ /* +0x1c98 */
     0x001d0054, /* +0x1c9c */
-    0x00196d5c, /* -> FUN_00196d5c */ /* +0x1ca0 */
+    0x00196d5c, /* -> R300MachineAssembler__create */ /* +0x1ca0 */
     0x00188e24, /* -> FUN_00188e24 */ /* +0x1ca4 */
     0x0018843c, /* -> FUN_0018843c */ /* +0x1ca8 */
     0x001d82c4, /* +0x1cac */
@@ -1934,7 +1934,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001d0050, /* +0x1e2c */
     0x0010da84, /* -> FUN_0010da84 */ /* +0x1e30 */
     0x001d0054, /* +0x1e34 */
-    0x0019b8bc, /* -> FUN_0019b8bc */ /* +0x1e38 */
+    0x0019b8bc, /* -> R300VMachineAssembler__create */ /* +0x1e38 */
     0x001894ec, /* -> FUN_001894ec */ /* +0x1e3c */
     0x00188fec, /* -> FUN_00188fec */ /* +0x1e40 */
     0x00188f24, /* -> FUN_00188f24 */ /* +0x1e44 */
@@ -2038,7 +2038,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001d0050, /* +0x1fcc */
     0x0010da84, /* -> FUN_0010da84 */ /* +0x1fd0 */
     0x001d0054, /* +0x1fd4 */
-    0x0019de50, /* -> FUN_0019de50 */ /* +0x1fd8 */
+    0x0019de50, /* -> R520VMachineAssembler__create */ /* +0x1fd8 */
     0x001894ec, /* -> FUN_001894ec */ /* +0x1fdc */
     0x00188fec, /* -> FUN_00188fec */ /* +0x1fe0 */
     0x00188f24, /* -> FUN_00188f24 */ /* +0x1fe4 */
@@ -2168,9 +2168,9 @@ const unsigned int sectDATA___const[2670] = {
     0x001f6550, /* -> __const_coal+0x5648 */ /* +0x21d4 */
     0x001d8910, /* +0x21d8 */
     0x001d8944, /* -> R300SchedModel__dtor */ /* +0x21dc */
-    0x00189604, /* -> R520SchedModel__vslot2 */ /* +0x21e0 */
-    0x0018f55c, /* -> R520SchedModel__vslot3 */ /* +0x21e4 */
-    0x0018f42c, /* -> R520SchedModel__vslot4 */ /* +0x21e8 */
+    0x00189604, /* -> R520SchedModel__vslot2_reset */ /* +0x21e0 */
+    0x0018f55c, /* -> R520SchedModel__vslot3_canAddInstruction */ /* +0x21e4 */
+    0x0018f42c, /* -> R520SchedModel__vslot4_addInstruction */ /* +0x21e8 */
     0x001d8898, /* +0x21ec */
     0x001d86fc, /* +0x21f0 */
     0x001d8704, /* +0x21f4 */
@@ -2206,9 +2206,9 @@ const unsigned int sectDATA___const[2670] = {
     0x001f6560, /* -> __const_coal+0x5658 */ /* +0x226c */
     0x001d8a28, /* -> R300VSchedModel__dtor */ /* +0x2270 */
     0x001d8a5c, /* -> R300VSchedModel__deleting_dtor */ /* +0x2274 */
-    0x0018f824, /* -> R300VSchedModel__vslot2 */ /* +0x2278 */
-    0x001906c8, /* -> R300VSchedModel__vslot3 */ /* +0x227c */
-    0x001904b8, /* -> R300VSchedModel__vslot4 */ /* +0x2280 */
+    0x0018f824, /* -> R300VSchedModel__vslot2_reset */ /* +0x2278 */
+    0x001906c8, /* -> R300VSchedModel__vslot3_canAddInstruction */ /* +0x227c */
+    0x001904b8, /* -> R300VSchedModel__vslot4_addInstruction */ /* +0x2280 */
     0x001d86ec, /* +0x2284 */
     0x001d86fc, /* +0x2288 */
     0x001d8704, /* +0x228c */
@@ -2246,7 +2246,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001cfff4, /* +0x230c */
     0x001cfff8, /* +0x2310 */
     0x00128ad4, /* +0x2314 */
-    0x00191e28, /* -> FUN_00191e28 */ /* +0x2318 */
+    0x00191e28, /* -> FudoPs__createSchedModels */ /* +0x2318 */
     0x001d0000, /* -> FUN_001d0000 */ /* +0x231c */
     0x001281b0, /* -> FUN_001281b0 */ /* +0x2320 */
     0x00128930, /* -> FUN_00128930 */ /* +0x2324 */
@@ -2266,7 +2266,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001d0050, /* +0x235c */
     0x0010da84, /* -> FUN_0010da84 */ /* +0x2360 */
     0x001d0054, /* +0x2364 */
-    0x001a1338, /* -> FUN_001a1338 */ /* +0x2368 */
+    0x001a1338, /* -> R520MachineAssembler__create */ /* +0x2368 */
     0x00188e24, /* -> FUN_00188e24 */ /* +0x236c */
     0x0019286c, /* -> FUN_0019286c */ /* +0x2370 */
     0x00193a00, /* -> FUN_00193a00 */ /* +0x2374 */
@@ -2278,7 +2278,7 @@ const unsigned int sectDATA___const[2670] = {
     0x0012804c, /* -> FUN_0012804c */ /* +0x238c */
     0x001281e8, /* +0x2390 */
     0x001281ec, /* +0x2394 */
-    0x00191940, /* -> FUN_00191940 */ /* +0x2398 */
+    0x00191940, /* -> FudoPs__encodeUniformImmediate */ /* +0x2398 */
     0x001d0068, /* +0x239c */
     0x001d0070, /* -> FUN_001d0070 */ /* +0x23a0 */
     0x001d0090, /* +0x23a4 */
@@ -2298,9 +2298,9 @@ const unsigned int sectDATA___const[2670] = {
     0x001d8ac8, /* +0x23dc */
     0x00176304, /* -> FUN_00176304 */ /* +0x23e0 */
     0x001d0104, /* +0x23e4 */
-    0x00191c7c, /* -> FUN_00191c7c */ /* +0x23e8 */
+    0x00191c7c, /* -> FudoPs__classifyLiteralOperand */ /* +0x23e8 */
     0x00191b30, /* -> FUN_00191b30 */ /* +0x23ec */
-    0x00191710, /* -> FUN_00191710 */ /* +0x23f0 */
+    0x00191710, /* -> isLiteralZeroHalfOrOne */ /* +0x23f0 */
     0x001d8ad4, /* +0x23f4 */
     0x00127ff8, /* -> FUN_00127ff8 */ /* +0x23f8 */
     0x001d011c, /* +0x23fc */
@@ -2352,9 +2352,9 @@ const unsigned int sectDATA___const[2670] = {
     0x001f6590, /* -> __const_coal+0x5688 */ /* +0x24b4 */
     0x001d8c70, /* -> R520SchedModel__dtor */ /* +0x24b8 */
     0x001d8c18, /* -> R520SchedModel__deleting_dtor */ /* +0x24bc */
-    0x00189604, /* -> R520SchedModel__vslot2 */ /* +0x24c0 */
-    0x0018f55c, /* -> R520SchedModel__vslot3 */ /* +0x24c4 */
-    0x0018f42c, /* -> R520SchedModel__vslot4 */ /* +0x24c8 */
+    0x00189604, /* -> R520SchedModel__vslot2_reset */ /* +0x24c0 */
+    0x0018f55c, /* -> R520SchedModel__vslot3_canAddInstruction */ /* +0x24c4 */
+    0x0018f42c, /* -> R520SchedModel__vslot4_addInstruction */ /* +0x24c8 */
     0x001d8898, /* +0x24cc */
     0x001d86fc, /* +0x24d0 */
     0x001d8704, /* +0x24d4 */
@@ -2390,284 +2390,284 @@ const unsigned int sectDATA___const[2670] = {
     0x001f65a0, /* -> __const_coal+0x5698 */ /* +0x254c */
     0x00196dfc, /* -> R300MachineAssembler__dtor */ /* +0x2550 */
     0x00196e3c, /* -> MachineAssembler__dtor_196e3c */ /* +0x2554 */
-    0x001955f8, /* -> R300MachineAssembler__vslot2 */ /* +0x2558 */
-    0x00195580, /* -> R300MachineAssembler__vslot3 */ /* +0x255c */
-    0x001961c8, /* -> R300MachineAssembler__vslot4 */ /* +0x2560 */
-    0x001963b0, /* -> R300MachineAssembler__vslot5 */ /* +0x2564 */
-    0x00195574, /* -> R300MachineAssembler__vslot6 */ /* +0x2568 */
+    0x001955f8, /* -> R300MachineAssembler__vslot2_exceedsInstructionLimit */ /* +0x2558 */
+    0x00195580, /* -> R300MachineAssembler__vslot3_noOp */ /* +0x255c */
+    0x001961c8, /* -> R300MachineAssembler__vslot4_finishProgram */ /* +0x2560 */
+    0x001963b0, /* -> R300MachineAssembler__vslot5_beginProgram */ /* +0x2564 */
+    0x00195574, /* -> R300MachineAssembler__vslot6_noOp */ /* +0x2568 */
     0x00195470, /* +0x256c */
-    0x00195578, /* -> R300MachineAssembler__vslot8 */ /* +0x2570 */
-    0x00195584, /* -> R300MachineAssembler__vslot9 */ /* +0x2574 */
+    0x00195578, /* -> R300MachineAssembler__vslot8_returnsTrue */ /* +0x2570 */
+    0x00195584, /* -> R300MachineAssembler__vslot9_getRecordBufferWords */ /* +0x2574 */
     0x001cd69c, /* +0x2578 */
     0x001cd6a0, /* +0x257c */
-    0x00195474, /* -> FUN_00195474 */ /* +0x2580 */
-    0x001971f8, /* -> FUN_001971f8 */ /* +0x2584 */
-    0x001981ac, /* -> FUN_001981ac */ /* +0x2588 */
-    0x001962f0, /* -> FUN_001962f0 */ /* +0x258c */
-    0x001956f8, /* -> FUN_001956f8 */ /* +0x2590 */
+    0x00195474, /* -> R300MachineAssembler__vslot12_assembleNodeAndMarkChildren */ /* +0x2580 */
+    0x001971f8, /* -> R300MachineAssembler__assembleBlock */ /* +0x2584 */
+    0x001981ac, /* -> R300MachineAssembler__assembleAluInstruction */ /* +0x2588 */
+    0x001962f0, /* -> R300MachineAssembler__assembleAsOpcodeInfo31 */ /* +0x258c */
+    0x001956f8, /* -> R300MachineAssembler__vslot16_noOp */ /* +0x2590 */
     0x001cd6a4, /* +0x2594 */
-    0x001956e8, /* -> FUN_001956e8 */ /* +0x2598 */
-    0x001956fc, /* -> FUN_001956fc */ /* +0x259c */
-    0x00195700, /* -> FUN_00195700 */ /* +0x25a0 */
-    0x00195704, /* -> FUN_00195704 */ /* +0x25a4 */
-    0x00195708, /* -> FUN_00195708 */ /* +0x25a8 */
-    0x00197b30, /* -> FUN_00197b30 */ /* +0x25ac */
+    0x001956e8, /* -> R300MachineAssembler__callSlot14 */ /* +0x2598 */
+    0x001956fc, /* -> R300MachineAssembler__vslot19_noOp */ /* +0x259c */
+    0x00195700, /* -> R300MachineAssembler__vslot20_noOp */ /* +0x25a0 */
+    0x00195704, /* -> R300MachineAssembler__vslot21_noOp */ /* +0x25a4 */
+    0x00195708, /* -> R300MachineAssembler__vslot22_noOp */ /* +0x25a8 */
+    0x00197b30, /* -> R300MachineAssembler__emitTexRecord */ /* +0x25ac */
     0x001d8cb4, /* +0x25b0 */
     0x001961b0, /* +0x25b4 */
     0x000e3140, /* -> FUN_000e3140 */ /* +0x25b8 */
     0x001d8cb8, /* +0x25bc */
     0x001d8cbc, /* +0x25c0 */
-    0x00195638, /* -> FUN_00195638 */ /* +0x25c4 */
+    0x00195638, /* -> R300MachineAssembler__vslot29_noOp */ /* +0x25c4 */
     0x001d8cc0, /* +0x25c8 */
     0x001d8cc4, /* +0x25cc */
     0x001d8cc8, /* +0x25d0 */
     0x001d8ccc, /* +0x25d4 */
     0x000e2fd8, /* -> FUN_000e2fd8 */ /* +0x25d8 */
-    0x00195590, /* -> FUN_00195590 */ /* +0x25dc */
-    0x00195624, /* -> FUN_00195624 */ /* +0x25e0 */
+    0x00195590, /* -> psnLiteralAddressFromRegisterWord */ /* +0x25dc */
+    0x00195624, /* -> R300MachineAssembler__vslot36_noOp */ /* +0x25e0 */
     0x001d8cd0, /* +0x25e4 */
-    0x0019561c, /* -> FUN_0019561c */ /* +0x25e8 */
-    0x00195628, /* -> FUN_00195628 */ /* +0x25ec */
-    0x0019562c, /* -> FUN_0019562c */ /* +0x25f0 */
-    0x00195630, /* -> FUN_00195630 */ /* +0x25f4 */
-    0x00195634, /* -> FUN_00195634 */ /* +0x25f8 */
-    0x0019563c, /* -> FUN_0019563c */ /* +0x25fc */
-    0x00195640, /* -> FUN_00195640 */ /* +0x2600 */
+    0x0019561c, /* -> R300MachineAssembler__vslot38_returnsFalse */ /* +0x25e8 */
+    0x00195628, /* -> R300MachineAssembler__vslot39_noOp */ /* +0x25ec */
+    0x0019562c, /* -> R300MachineAssembler__vslot40_noOp */ /* +0x25f0 */
+    0x00195630, /* -> R300MachineAssembler__vslot41_noOp */ /* +0x25f4 */
+    0x00195634, /* -> R300MachineAssembler__vslot42_noOp */ /* +0x25f8 */
+    0x0019563c, /* -> R300MachineAssembler__vslot43_noOp */ /* +0x25fc */
+    0x00195640, /* -> R300MachineAssembler__vslot44_noOp */ /* +0x2600 */
     0x00195644, /* +0x2604 */
     0x00195648, /* +0x2608 */
     0x001d8cd4, /* +0x260c */
-    0x0019570c, /* -> FUN_0019570c */ /* +0x2610 */
-    0x00195794, /* -> FUN_00195794 */ /* +0x2614 */
-    0x001957d8, /* -> FUN_001957d8 */ /* +0x2618 */
+    0x0019570c, /* -> R300MachineAssembler__initNopAluRecord */ /* +0x2610 */
+    0x00195794, /* -> R300MachineAssembler__setRsColorFields */ /* +0x2614 */
+    0x001957d8, /* -> R300MachineAssembler__setRsTexCoordFields */ /* +0x2618 */
     0x001d8cd8, /* +0x261c */
     0x001d8cec, /* +0x2620 */
-    0x00197de4, /* -> FUN_00197de4 */ /* +0x2624 */
-    0x00197ecc, /* -> FUN_00197ecc */ /* +0x2628 */
+    0x00197de4, /* -> R300MachineAssembler__rgbSelectForLiteralFloat */ /* +0x2624 */
+    0x00197ecc, /* -> R300MachineAssembler__alphaSelectForLiteralFloat */ /* +0x2628 */
     0x001d8d00, /* +0x262c */
     0x001d8d08, /* +0x2630 */
     0x001d8d14, /* +0x2634 */
     0x001d8d2c, /* +0x2638 */
-    0x0019581c, /* -> FUN_0019581c */ /* +0x263c */
-    0x00195920, /* -> FUN_00195920 */ /* +0x2640 */
-    0x0019598c, /* -> FUN_0019598c */ /* +0x2644 */
-    0x001959fc, /* -> FUN_001959fc */ /* +0x2648 */
-    0x00195b4c, /* -> FUN_00195b4c */ /* +0x264c */
-    0x00195b5c, /* -> FUN_00195b5c */ /* +0x2650 */
-    0x001955dc, /* -> FUN_001955dc */ /* +0x2654 */
+    0x0019581c, /* -> R300MachineAssembler__rgbSelectForSrcpSwizzle */ /* +0x263c */
+    0x00195920, /* -> R300MachineAssembler__alphaSelectForSrcpComponent */ /* +0x2640 */
+    0x0019598c, /* -> R300MachineAssembler__rgbSelectForAlphaSource */ /* +0x2644 */
+    0x001959fc, /* -> R300MachineAssembler__rgbSelectForSourceSwizzle */ /* +0x2648 */
+    0x00195b4c, /* -> R300MachineAssembler__alphaSelectForAlphaSource */ /* +0x264c */
+    0x00195b5c, /* -> R300MachineAssembler__alphaSelectForColorComponent */ /* +0x2650 */
+    0x001955dc, /* -> R300MachineAssembler__vslot65_declareNodeRegisters */ /* +0x2654 */
     0x001d8d44, /* +0x2658 */
     0x001d8d48, /* +0x265c */
     0x001d8d4c, /* +0x2660 */
     0x001d8d88, /* +0x2664 */
-    0x00195bb0, /* -> FUN_00195bb0 */ /* +0x2668 */
-    0x00196858, /* -> FUN_00196858 */ /* +0x266c */
+    0x00195bb0, /* -> R300MachineAssembler__setAluSourceAddresses */ /* +0x2668 */
+    0x00196858, /* -> R300MachineAssembler__setAluSourceSelectsAndModifiers */ /* +0x266c */
     0x00197fb4, /* +0x2670 */
-    0x00198084, /* -> FUN_00198084 */ /* +0x2674 */
+    0x00198084, /* -> R300MachineAssembler__setOutputDestination */ /* +0x2674 */
     0x001d8dc0, /* +0x2678 */
-    0x00196ad8, /* -> FUN_00196ad8 */ /* +0x267c */
-    0x00195cec, /* -> FUN_00195cec */ /* +0x2680 */
-    0x00195f70, /* -> FUN_00195f70 */ /* +0x2684 */
-    0x00195f8c, /* -> FUN_00195f8c */ /* +0x2688 */
+    0x00196ad8, /* -> R300MachineAssembler__setRgbOpcode */ /* +0x267c */
+    0x00195cec, /* -> R300MachineAssembler__setAlphaOpcode */ /* +0x2680 */
+    0x00195f70, /* -> R300MachineAssembler__setAlphaTempWriteEnable */ /* +0x2684 */
+    0x00195f8c, /* -> R300MachineAssembler__closeTextureIndirectionLevel */ /* +0x2688 */
     0x001d8dc4, /* +0x268c */
     0x001d8dc8, /* +0x2690 */
-    0x00195fd8, /* -> FUN_00195fd8 */ /* +0x2694 */
+    0x00195fd8, /* -> R300MachineAssembler__writeHeaderRecord */ /* +0x2694 */
     0x001d8dcc, /* +0x2698 */
     0x001d8dd0, /* +0x269c */
     0x001d8dd4, /* +0x26a0 */
-    0x0019649c, /* -> FUN_0019649c */ /* +0x26a4 */
-    0x0019679c, /* -> FUN_0019679c */ /* +0x26a8 */
-    0x00196070, /* -> FUN_00196070 */ /* +0x26ac */
+    0x0019649c, /* -> R300MachineAssembler__noteFetchTextureUnit */ /* +0x26a4 */
+    0x0019679c, /* -> R300MachineAssembler__resolveSourceRegister */ /* +0x26a8 */
+    0x00196070, /* -> R300MachineAssembler__beginNextRecord */ /* +0x26ac */
     0x00000000, /* +0x26b0 */
     0x001f65b0, /* -> __const_coal+0x56a8 */ /* +0x26b4 */
     0x0019b9ac, /* -> MachineAssembler__dtor_19b9ac */ /* +0x26b8 */
     0x0019ba3c, /* -> R300VMachineAssembler__deleting_dtor */ /* +0x26bc */
-    0x0019a618, /* -> R300VMachineAssembler__vslot2 */ /* +0x26c0 */
+    0x0019a618, /* -> R300VMachineAssembler__vslot2_exceedsLimits */ /* +0x26c0 */
     0x001d8df8, /* +0x26c4 */
-    0x0019a2f0, /* -> FUN_0019a2f0 */ /* +0x26c8 */
-    0x0019acb0, /* -> FUN_0019acb0 */ /* +0x26cc */
-    0x0019adf8, /* -> FUN_0019adf8 */ /* +0x26d0 */
-    0x0019a3bc, /* -> FUN_0019a3bc */ /* +0x26d4 */
+    0x0019a2f0, /* -> R300VMachineAssembler__finishProgram */ /* +0x26c8 */
+    0x0019acb0, /* -> R300VMachineAssembler__init */ /* +0x26cc */
+    0x0019adf8, /* -> R300VMachineAssembler__vslot6_setLoopStack */ /* +0x26d0 */
+    0x0019a3bc, /* -> R300VMachineAssembler__logStatistics */ /* +0x26d4 */
     0x001d8dec, /* +0x26d8 */
-    0x0019a484, /* -> FUN_0019a484 */ /* +0x26dc */
+    0x0019a484, /* -> R300VMachineAssembler__copyControlFlowToOutput */ /* +0x26dc */
     0x001cd69c, /* +0x26e0 */
     0x001cd6a0, /* +0x26e4 */
     0x0019a468, /* +0x26e8 */
-    0x0019b3c8, /* -> FUN_0019b3c8 */ /* +0x26ec */
-    0x0019d1f4, /* -> FUN_0019d1f4 */ /* +0x26f0 */
-    0x0019a80c, /* -> FUN_0019a80c */ /* +0x26f4 */
-    0x0019a8a8, /* -> FUN_0019a8a8 */ /* +0x26f8 */
+    0x0019b3c8, /* -> R300VMachineAssembler__assembleBlock */ /* +0x26ec */
+    0x0019d1f4, /* -> R300VMachineAssembler__vslot14_assembleInstruction */ /* +0x26f0 */
+    0x0019a80c, /* -> R300VMachineAssembler__vslot15_assembleUnlessConstantMove */ /* +0x26f4 */
+    0x0019a8a8, /* -> R300VMachineAssembler__vslot16_noOp */ /* +0x26f8 */
     0x001cd6a4, /* +0x26fc */
-    0x0019a8ac, /* -> FUN_0019a8ac */ /* +0x2700 */
-    0x0019a8bc, /* -> FUN_0019a8bc */ /* +0x2704 */
+    0x0019a8ac, /* -> R300VMachineAssembler__vslot18_callSlot14 */ /* +0x2700 */
+    0x0019a8bc, /* -> R300VMachineAssembler__vslot19_callSlot14 */ /* +0x2704 */
     0x0019a8cc, /* +0x2708 */
     0x0019a8d0, /* +0x270c */
     0x0019aca8, /* +0x2710 */
     0x0019acac, /* +0x2714 */
-    0x0019ae80, /* -> FUN_0019ae80 */ /* +0x2718 */
-    0x0019ab60, /* -> FUN_0019ab60 */ /* +0x271c */
+    0x0019ae80, /* -> R300VMachineAssembler__vslot24_assembleWithTarget */ /* +0x2718 */
+    0x0019ab60, /* -> R300VMachineAssembler__vslot25_assembleOrFail */ /* +0x271c */
     0x000e3140, /* -> FUN_000e3140 */ /* +0x2720 */
-    0x0019aaf4, /* -> FUN_0019aaf4 */ /* +0x2724 */
-    0x0019abc4, /* -> FUN_0019abc4 */ /* +0x2728 */
-    0x0019b808, /* -> FUN_0019b808 */ /* +0x272c */
-    0x0019aee8, /* -> FUN_0019aee8 */ /* +0x2730 */
+    0x0019aaf4, /* -> R300VMachineAssembler__vslot27_assembleOrFail */ /* +0x2724 */
+    0x0019abc4, /* -> R300VMachineAssembler__vslot28_assembleChildOrFail */ /* +0x2728 */
+    0x0019b808, /* -> R300VMachineAssembler__vslot29_endIfBlock */ /* +0x272c */
+    0x0019aee8, /* -> R300VMachineAssembler__vslot30_assembleBlockThenSlot40 */ /* +0x2730 */
     0x0019aad8, /* +0x2734 */
     0x0019ab58, /* +0x2738 */
     0x0019ab5c, /* +0x273c */
     0x000e2fd8, /* -> FUN_000e2fd8 */ /* +0x2740 */
     0x000e2ac4, /* +0x2744 */
     0x0019ac28, /* +0x2748 */
-    0x0019af40, /* -> FUN_0019af40 */ /* +0x274c */
-    0x0019ac2c, /* -> FUN_0019ac2c */ /* +0x2750 */
-    0x0019b748, /* -> FUN_0019b748 */ /* +0x2754 */
-    0x0019b6a0, /* -> FUN_0019b6a0 */ /* +0x2758 */
+    0x0019af40, /* -> R300VMachineAssembler__vslot37_patchControlFlowTarget */ /* +0x274c */
+    0x0019ac2c, /* -> R300VMachineAssembler__vslot38_appendCallEntry */ /* +0x2750 */
+    0x0019b748, /* -> R300VMachineAssembler__vslot39_appendBranchEntry */ /* +0x2754 */
+    0x0019b6a0, /* -> R300VMachineAssembler__vslot40_endControlFlowBlock */ /* +0x2758 */
     0x001d8e0c, /* +0x275c */
-    0x0019aca4, /* -> FUN_0019aca4 */ /* +0x2760 */
-    0x0019a8d4, /* -> FUN_0019a8d4 */ /* +0x2764 */
-    0x0019a954, /* -> FUN_0019a954 */ /* +0x2768 */
-    0x0019a9dc, /* -> FUN_0019a9dc */ /* +0x276c */
-    0x0019aa7c, /* -> FUN_0019aa7c */ /* +0x2770 */
-    0x0019a510, /* -> FUN_0019a510 */ /* +0x2774 */
-    0x0019a6a0, /* -> FUN_0019a6a0 */ /* +0x2778 */
-    0x0019a690, /* -> FUN_0019a690 */ /* +0x277c */
+    0x0019aca4, /* -> R300VMachineAssembler__vslot42_noOp */ /* +0x2760 */
+    0x0019a8d4, /* -> R300VMachineAssembler__vslot43_beginLoop */ /* +0x2764 */
+    0x0019a954, /* -> R300VMachineAssembler__vslot44_endLoopBody */ /* +0x2768 */
+    0x0019a9dc, /* -> R300VMachineAssembler__vslot45_endLoop */ /* +0x276c */
+    0x0019aa7c, /* -> R300VMachineAssembler__vslot46_leaveLoop */ /* +0x2770 */
+    0x0019a510, /* -> R300VMachineAssembler__clearCurrentInstruction */ /* +0x2774 */
+    0x0019a6a0, /* -> R300VMachineAssembler__vslot48_declareAndAssemble */ /* +0x2778 */
+    0x0019a690, /* -> R300VMachineAssembler__vslot49_advanceInstruction */ /* +0x277c */
     0x00000000, /* +0x2780 */
     0x001f65c0, /* -> __const_coal+0x56b8 */ /* +0x2784 */
     0x0019df54, /* -> MachineAssembler__dtor_19df54 */ /* +0x2788 */
     0x0019dcb0, /* -> R520VMachineAssembler__deleting_dtor */ /* +0x278c */
-    0x0019a618, /* -> R300VMachineAssembler__vslot2 */ /* +0x2790 */
+    0x0019a618, /* -> R300VMachineAssembler__vslot2_exceedsLimits */ /* +0x2790 */
     0x001d8df8, /* +0x2794 */
-    0x0019a2f0, /* -> FUN_0019a2f0 */ /* +0x2798 */
-    0x0019dd7c, /* -> FUN_0019dd7c */ /* +0x279c */
-    0x0019e660, /* -> FUN_0019e660 */ /* +0x27a0 */
-    0x0019a3bc, /* -> FUN_0019a3bc */ /* +0x27a4 */
+    0x0019a2f0, /* -> R300VMachineAssembler__finishProgram */ /* +0x2798 */
+    0x0019dd7c, /* -> R520VMachineAssembler__init */ /* +0x279c */
+    0x0019e660, /* -> R520VMachineAssembler__vslot6_setLoopStack */ /* +0x27a0 */
+    0x0019a3bc, /* -> R300VMachineAssembler__logStatistics */ /* +0x27a4 */
     0x001d8dec, /* +0x27a8 */
-    0x0019a484, /* -> FUN_0019a484 */ /* +0x27ac */
+    0x0019a484, /* -> R300VMachineAssembler__copyControlFlowToOutput */ /* +0x27ac */
     0x001cd69c, /* +0x27b0 */
     0x001cd6a0, /* +0x27b4 */
     0x0019d478, /* +0x27b8 */
-    0x0019b3c8, /* -> FUN_0019b3c8 */ /* +0x27bc */
-    0x0019d1f4, /* -> FUN_0019d1f4 */ /* +0x27c0 */
-    0x0019a80c, /* -> FUN_0019a80c */ /* +0x27c4 */
-    0x0019a8a8, /* -> FUN_0019a8a8 */ /* +0x27c8 */
+    0x0019b3c8, /* -> R300VMachineAssembler__assembleBlock */ /* +0x27bc */
+    0x0019d1f4, /* -> R300VMachineAssembler__vslot14_assembleInstruction */ /* +0x27c0 */
+    0x0019a80c, /* -> R300VMachineAssembler__vslot15_assembleUnlessConstantMove */ /* +0x27c4 */
+    0x0019a8a8, /* -> R300VMachineAssembler__vslot16_noOp */ /* +0x27c8 */
     0x001cd6a4, /* +0x27cc */
-    0x0019a8ac, /* -> FUN_0019a8ac */ /* +0x27d0 */
-    0x0019a8bc, /* -> FUN_0019a8bc */ /* +0x27d4 */
+    0x0019a8ac, /* -> R300VMachineAssembler__vslot18_callSlot14 */ /* +0x27d0 */
+    0x0019a8bc, /* -> R300VMachineAssembler__vslot19_callSlot14 */ /* +0x27d4 */
     0x0019a8cc, /* +0x27d8 */
     0x0019a8d0, /* +0x27dc */
     0x0019aca8, /* +0x27e0 */
     0x0019acac, /* +0x27e4 */
-    0x0019e6e0, /* -> FUN_0019e6e0 */ /* +0x27e8 */
-    0x0019e318, /* -> FUN_0019e318 */ /* +0x27ec */
+    0x0019e6e0, /* -> R520VMachineAssembler__vslot24_assembleWithPredicateSet */ /* +0x27e8 */
+    0x0019e318, /* -> R520VMachineAssembler__vslot25_assembleConditionalBlock */ /* +0x27ec */
     0x000e3140, /* -> FUN_000e3140 */ /* +0x27f0 */
-    0x0019d858, /* -> FUN_0019d858 */ /* +0x27f4 */
-    0x0019dff8, /* -> FUN_0019dff8 */ /* +0x27f8 */
-    0x0019b808, /* -> FUN_0019b808 */ /* +0x27fc */
-    0x0019dc48, /* -> FUN_0019dc48 */ /* +0x2800 */
-    0x0019e11c, /* -> FUN_0019e11c */ /* +0x2804 */
-    0x0019d7a0, /* -> FUN_0019d7a0 */ /* +0x2808 */
-    0x0019d474, /* -> FUN_0019d474 */ /* +0x280c */
+    0x0019d858, /* -> R520VMachineAssembler__vslot27_assembleLoopHeader */ /* +0x27f4 */
+    0x0019dff8, /* -> R520VMachineAssembler__vslot28_assembleIfEnd */ /* +0x27f8 */
+    0x0019b808, /* -> R300VMachineAssembler__vslot29_endIfBlock */ /* +0x27fc */
+    0x0019dc48, /* -> R520VMachineAssembler__vslot30_assembleBlockThenSlot40 */ /* +0x2800 */
+    0x0019e11c, /* -> R520VMachineAssembler__vslot31_assembleWithPredicateRestore */ /* +0x2804 */
+    0x0019d7a0, /* -> R520VMachineAssembler__vslot32_assembleWithPredicateClear */ /* +0x2808 */
+    0x0019d474, /* -> R520VMachineAssembler__vslot33_noOp */ /* +0x280c */
     0x000e2fd8, /* -> FUN_000e2fd8 */ /* +0x2810 */
     0x000e2ac4, /* +0x2814 */
     0x0019ac28, /* +0x2818 */
-    0x0019d590, /* -> FUN_0019d590 */ /* +0x281c */
-    0x0019ac2c, /* -> FUN_0019ac2c */ /* +0x2820 */
-    0x0019b748, /* -> FUN_0019b748 */ /* +0x2824 */
-    0x0019b6a0, /* -> FUN_0019b6a0 */ /* +0x2828 */
+    0x0019d590, /* -> R520VMachineAssembler__vslot37_closeConditional */ /* +0x281c */
+    0x0019ac2c, /* -> R300VMachineAssembler__vslot38_appendCallEntry */ /* +0x2820 */
+    0x0019b748, /* -> R300VMachineAssembler__vslot39_appendBranchEntry */ /* +0x2824 */
+    0x0019b6a0, /* -> R300VMachineAssembler__vslot40_endControlFlowBlock */ /* +0x2828 */
     0x001d8e0c, /* +0x282c */
-    0x0019aca4, /* -> FUN_0019aca4 */ /* +0x2830 */
-    0x0019a8d4, /* -> FUN_0019a8d4 */ /* +0x2834 */
-    0x0019a954, /* -> FUN_0019a954 */ /* +0x2838 */
-    0x0019a9dc, /* -> FUN_0019a9dc */ /* +0x283c */
-    0x0019aa7c, /* -> FUN_0019aa7c */ /* +0x2840 */
-    0x0019a510, /* -> FUN_0019a510 */ /* +0x2844 */
-    0x0019a6a0, /* -> FUN_0019a6a0 */ /* +0x2848 */
-    0x0019a690, /* -> FUN_0019a690 */ /* +0x284c */
+    0x0019aca4, /* -> R300VMachineAssembler__vslot42_noOp */ /* +0x2830 */
+    0x0019a8d4, /* -> R300VMachineAssembler__vslot43_beginLoop */ /* +0x2834 */
+    0x0019a954, /* -> R300VMachineAssembler__vslot44_endLoopBody */ /* +0x2838 */
+    0x0019a9dc, /* -> R300VMachineAssembler__vslot45_endLoop */ /* +0x283c */
+    0x0019aa7c, /* -> R300VMachineAssembler__vslot46_leaveLoop */ /* +0x2840 */
+    0x0019a510, /* -> R300VMachineAssembler__clearCurrentInstruction */ /* +0x2844 */
+    0x0019a6a0, /* -> R300VMachineAssembler__vslot48_declareAndAssemble */ /* +0x2848 */
+    0x0019a690, /* -> R300VMachineAssembler__vslot49_advanceInstruction */ /* +0x284c */
     0x00000000, /* +0x2850 */
     0x001f65d0, /* -> __const_coal+0x56c8 */ /* +0x2854 */
     0x001d8fc0, /* -> R520MachineAssembler__dtor */ /* +0x2858 */
     0x001d8f58, /* -> R520MachineAssembler__deleting_dtor */ /* +0x285c */
-    0x001955f8, /* -> R300MachineAssembler__vslot2 */ /* +0x2860 */
-    0x00195580, /* -> R300MachineAssembler__vslot3 */ /* +0x2864 */
-    0x0019fccc, /* -> R520MachineAssembler__vslot4 */ /* +0x2868 */
-    0x0019ef50, /* -> R520MachineAssembler__vslot5 */ /* +0x286c */
-    0x00195574, /* -> R300MachineAssembler__vslot6 */ /* +0x2870 */
+    0x001955f8, /* -> R300MachineAssembler__vslot2_exceedsInstructionLimit */ /* +0x2860 */
+    0x00195580, /* -> R300MachineAssembler__vslot3_noOp */ /* +0x2864 */
+    0x0019fccc, /* -> R520MachineAssembler__vslot4_finishProgram */ /* +0x2868 */
+    0x0019ef50, /* -> R520MachineAssembler__vslot5_beginProgram */ /* +0x286c */
+    0x00195574, /* -> R300MachineAssembler__vslot6_noOp */ /* +0x2870 */
     0x00195470, /* +0x2874 */
-    0x00195578, /* -> R300MachineAssembler__vslot8 */ /* +0x2878 */
-    0x0019f860, /* -> R520MachineAssembler__vslot9 */ /* +0x287c */
+    0x00195578, /* -> R300MachineAssembler__vslot8_returnsTrue */ /* +0x2878 */
+    0x0019f860, /* -> R520MachineAssembler__vslot9_getRecordWordsUsed */ /* +0x287c */
     0x001cd69c, /* +0x2880 */
     0x001cd6a0, /* +0x2884 */
-    0x00195474, /* -> FUN_00195474 */ /* +0x2888 */
-    0x001971f8, /* -> FUN_001971f8 */ /* +0x288c */
-    0x001981ac, /* -> FUN_001981ac */ /* +0x2890 */
-    0x001962f0, /* -> FUN_001962f0 */ /* +0x2894 */
-    0x001956f8, /* -> FUN_001956f8 */ /* +0x2898 */
+    0x00195474, /* -> R300MachineAssembler__vslot12_assembleNodeAndMarkChildren */ /* +0x2888 */
+    0x001971f8, /* -> R300MachineAssembler__assembleBlock */ /* +0x288c */
+    0x001981ac, /* -> R300MachineAssembler__assembleAluInstruction */ /* +0x2890 */
+    0x001962f0, /* -> R300MachineAssembler__assembleAsOpcodeInfo31 */ /* +0x2894 */
+    0x001956f8, /* -> R300MachineAssembler__vslot16_noOp */ /* +0x2898 */
     0x001cd6a4, /* +0x289c */
-    0x001956e8, /* -> FUN_001956e8 */ /* +0x28a0 */
-    0x001956fc, /* -> FUN_001956fc */ /* +0x28a4 */
-    0x00195700, /* -> FUN_00195700 */ /* +0x28a8 */
-    0x00195704, /* -> FUN_00195704 */ /* +0x28ac */
-    0x00195708, /* -> FUN_00195708 */ /* +0x28b0 */
-    0x001a1d24, /* -> FUN_001a1d24 */ /* +0x28b4 */
-    0x0019ffdc, /* -> FUN_0019ffdc */ /* +0x28b8 */
-    0x001a2ee4, /* -> FUN_001a2ee4 */ /* +0x28bc */
-    0x001a11f0, /* -> FUN_001a11f0 */ /* +0x28c0 */
-    0x001a2c08, /* -> FUN_001a2c08 */ /* +0x28c4 */
-    0x001a158c, /* -> FUN_001a158c */ /* +0x28c8 */
-    0x001a1160, /* -> FUN_001a1160 */ /* +0x28cc */
-    0x001a14d0, /* -> FUN_001a14d0 */ /* +0x28d0 */
-    0x0019ff2c, /* -> FUN_0019ff2c */ /* +0x28d4 */
-    0x001a2d10, /* -> FUN_001a2d10 */ /* +0x28d8 */
+    0x001956e8, /* -> R300MachineAssembler__callSlot14 */ /* +0x28a0 */
+    0x001956fc, /* -> R300MachineAssembler__vslot19_noOp */ /* +0x28a4 */
+    0x00195700, /* -> R300MachineAssembler__vslot20_noOp */ /* +0x28a8 */
+    0x00195704, /* -> R300MachineAssembler__vslot21_noOp */ /* +0x28ac */
+    0x00195708, /* -> R300MachineAssembler__vslot22_noOp */ /* +0x28b0 */
+    0x001a1d24, /* -> R520MachineAssembler__vslot23_emitTexRecord */ /* +0x28b4 */
+    0x0019ffdc, /* -> R520MachineAssembler__vslot24_assembleWithTarget */ /* +0x28b8 */
+    0x001a2ee4, /* -> R520MachineAssembler__vslot25_assembleLoop */ /* +0x28bc */
+    0x001a11f0, /* -> R520MachineAssembler__vslot26_assembleThenAppendRecord */ /* +0x28c0 */
+    0x001a2c08, /* -> R520MachineAssembler__vslot27_assembleIf */ /* +0x28c4 */
+    0x001a158c, /* -> R520MachineAssembler__vslot28_endLoop */ /* +0x28c8 */
+    0x001a1160, /* -> R520MachineAssembler__vslot29_patchBranchTarget */ /* +0x28cc */
+    0x001a14d0, /* -> R520MachineAssembler__vslot30_assembleThenTerminate */ /* +0x28d0 */
+    0x0019ff2c, /* -> R520MachineAssembler__vslot31_assembleChildrenAndMark */ /* +0x28d4 */
+    0x001a2d10, /* -> R520MachineAssembler__vslot32_assembleBranchEnd */ /* +0x28d8 */
     0x001d8f54, /* +0x28dc */
     0x000e2fd8, /* -> FUN_000e2fd8 */ /* +0x28e0 */
     0x0019fcc4, /* +0x28e4 */
-    0x00195624, /* -> FUN_00195624 */ /* +0x28e8 */
-    0x001a3000, /* -> FUN_001a3000 */ /* +0x28ec */
-    0x0019f880, /* -> FUN_0019f880 */ /* +0x28f0 */
-    0x001a2878, /* -> FUN_001a2878 */ /* +0x28f4 */
-    0x0019562c, /* -> FUN_0019562c */ /* +0x28f8 */
-    0x00195630, /* -> FUN_00195630 */ /* +0x28fc */
-    0x00195634, /* -> FUN_00195634 */ /* +0x2900 */
-    0x0019563c, /* -> FUN_0019563c */ /* +0x2904 */
-    0x00195640, /* -> FUN_00195640 */ /* +0x2908 */
+    0x00195624, /* -> R300MachineAssembler__vslot36_noOp */ /* +0x28e8 */
+    0x001a3000, /* -> R520MachineAssembler__vslot37_closeBranch */ /* +0x28ec */
+    0x0019f880, /* -> R520MachineAssembler__vslot38_appendBranchRecord */ /* +0x28f0 */
+    0x001a2878, /* -> R520MachineAssembler__vslot39_appendLoopStartRecord */ /* +0x28f4 */
+    0x0019562c, /* -> R300MachineAssembler__vslot40_noOp */ /* +0x28f8 */
+    0x00195630, /* -> R300MachineAssembler__vslot41_noOp */ /* +0x28fc */
+    0x00195634, /* -> R300MachineAssembler__vslot42_noOp */ /* +0x2900 */
+    0x0019563c, /* -> R300MachineAssembler__vslot43_noOp */ /* +0x2904 */
+    0x00195640, /* -> R300MachineAssembler__vslot44_noOp */ /* +0x2908 */
     0x00195644, /* +0x290c */
     0x00195648, /* +0x2910 */
-    0x0019f110, /* -> FUN_0019f110 */ /* +0x2914 */
-    0x0019f138, /* -> FUN_0019f138 */ /* +0x2918 */
-    0x0019f094, /* -> FUN_0019f094 */ /* +0x291c */
-    0x0019f0cc, /* -> FUN_0019f0cc */ /* +0x2920 */
+    0x0019f110, /* -> R520MachineAssembler__clearCurrentRecord */ /* +0x2914 */
+    0x0019f138, /* -> R520MachineAssembler__initNopAluRecord */ /* +0x2918 */
+    0x0019f094, /* -> R520MachineAssembler__setRsColorFields */ /* +0x291c */
+    0x0019f0cc, /* -> R520MachineAssembler__setRsTexCoordFields */ /* +0x2920 */
     0x001d8e10, /* +0x2924 */
     0x001d8e24, /* +0x2928 */
-    0x001a07c0, /* -> FUN_001a07c0 */ /* +0x292c */
-    0x001a08f0, /* -> FUN_001a08f0 */ /* +0x2930 */
-    0x0019f98c, /* -> FUN_0019f98c */ /* +0x2934 */
+    0x001a07c0, /* -> R520MachineAssembler__vslot53_selectBitsForLiteralFloat */ /* +0x292c */
+    0x001a08f0, /* -> R520MachineAssembler__vslot54_selectBitsForAlphaLiteral */ /* +0x2930 */
+    0x0019f98c, /* -> R520MachineAssembler__vslot55_tryEncodeImmediateLiteral */ /* +0x2934 */
     0x001d8e38, /* +0x2938 */
     0x001d8e5c, /* +0x293c */
     0x001d8e74, /* +0x2940 */
-    0x0019f1fc, /* -> FUN_0019f1fc */ /* +0x2944 */
-    0x0019f22c, /* -> FUN_0019f22c */ /* +0x2948 */
-    0x0019f244, /* -> FUN_0019f244 */ /* +0x294c */
-    0x0019f298, /* -> FUN_0019f298 */ /* +0x2950 */
-    0x0019f2ec, /* -> FUN_0019f2ec */ /* +0x2954 */
-    0x0019f2c4, /* -> FUN_0019f2c4 */ /* +0x2958 */
-    0x0019f1e0, /* -> FUN_0019f1e0 */ /* +0x295c */
-    0x001a09d0, /* -> FUN_001a09d0 */ /* +0x2960 */
-    0x0019fa58, /* -> FUN_0019fa58 */ /* +0x2964 */
+    0x0019f1fc, /* -> R520MachineAssembler__vslot59_selectForSrcpSwizzle */ /* +0x2944 */
+    0x0019f22c, /* -> R520MachineAssembler__vslot60_selectForSrcpComponent */ /* +0x2948 */
+    0x0019f244, /* -> R520MachineAssembler__vslot61_selectForAlphaSource */ /* +0x294c */
+    0x0019f298, /* -> R520MachineAssembler__vslot62_selectForSourceSwizzle */ /* +0x2950 */
+    0x0019f2ec, /* -> R520MachineAssembler__vslot63_selectForAlphaComponent */ /* +0x2954 */
+    0x0019f2c4, /* -> R520MachineAssembler__vslot64_selectForColorComponent */ /* +0x2958 */
+    0x0019f1e0, /* -> R520MachineAssembler__vslot65_declareNodeRegisters */ /* +0x295c */
+    0x001a09d0, /* -> R520MachineAssembler__vslot66_selectBitsForLiteralLanes */ /* +0x2960 */
+    0x0019fa58, /* -> R520MachineAssembler__vslot67_selectForConstantLanes */ /* +0x2964 */
     0x001d8e90, /* +0x2968 */
     0x001d8ecc, /* +0x296c */
-    0x0019f310, /* -> FUN_0019f310 */ /* +0x2970 */
-    0x001a0b3c, /* -> FUN_001a0b3c */ /* +0x2974 */
+    0x0019f310, /* -> R520MachineAssembler__setAluSourceAddresses */ /* +0x2970 */
+    0x001a0b3c, /* -> R520MachineAssembler__vslot71_setAluSourceSelectsAndModifiers */ /* +0x2974 */
     0x001a184c, /* +0x2978 */
-    0x001a1b64, /* -> FUN_001a1b64 */ /* +0x297c */
-    0x001a191c, /* -> FUN_001a191c */ /* +0x2980 */
+    0x001a1b64, /* -> R520MachineAssembler__vslot73_setOutputDestination */ /* +0x297c */
+    0x001a191c, /* -> R520MachineAssembler__vslot74_setPredicateSetDestination */ /* +0x2980 */
     0x001a00b4, /* +0x2984 */
     0x0019f43c, /* +0x2988 */
-    0x0019f778, /* -> FUN_0019f778 */ /* +0x298c */
+    0x0019f778, /* -> R520MachineAssembler__vslot77_setRecordByteB */ /* +0x298c */
     0x001d8e8c, /* +0x2990 */
     0x0019fdf0, /* +0x2994 */
-    0x0019f970, /* -> FUN_0019f970 */ /* +0x2998 */
-    0x0019f7a4, /* -> FUN_0019f7a4 */ /* +0x299c */
+    0x0019f970, /* -> R520MachineAssembler__vslot80_setRecordByte9 */ /* +0x2998 */
+    0x0019f7a4, /* -> R520MachineAssembler__writeHeaderRecord */ /* +0x299c */
     0x001d8f04, /* +0x29a0 */
     0x001d8f34, /* +0x29a4 */
     0x001d8e44, /* +0x29a8 */
     0x001d8f50, /* +0x29ac */
-    0x001a06c4, /* -> FUN_001a06c4 */ /* +0x29b0 */
-    0x0019fb84, /* -> FUN_0019fb84 */ /* +0x29b4 */
+    0x001a06c4, /* -> R520MachineAssembler__vslot86_resolveSourceRegister */ /* +0x29b0 */
+    0x0019fb84, /* -> R520MachineAssembler__beginNextRecord */ /* +0x29b4 */
 };

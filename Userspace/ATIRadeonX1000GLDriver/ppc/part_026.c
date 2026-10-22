@@ -2429,10 +2429,10 @@ int FUN_000f8aa0(param_1, param_2, param_3, param_4, param_5)
     if (((uVar2 & 0x400000) != 0) && ((param_3[1] & 0x100000) != 0)) {
       IROperand__setModifierBits(param_5 + param_4 * 6 + 0x23,2,1);
     }
-    local_38[0] = FUN_0019e9fc(param_3,0);
-    local_38[1] = FUN_0019e9fc(param_3,1);
-    local_38[2] = FUN_0019e9fc(param_3,2);
-    local_38[3] = FUN_0019e9fc(param_3,3);
+    local_38[0] = psnPackedLaneSource(param_3,0);
+    local_38[1] = psnPackedLaneSource(param_3,1);
+    local_38[2] = psnPackedLaneSource(param_3,2);
+    local_38[3] = psnPackedLaneSource(param_3,3);
   }
   (**(code **)(*param_5 + 0x88))
             (param_5,param_4,0,(int)local_38[uVar3 >> 0x18],a4,in_r8,*(code **)(*param_5 + 0x88));
@@ -2545,14 +2545,14 @@ int FUN_000f8d50(param_1, param_2, param_3, param_4, param_5, inst, param_7)
         *(undefined4 *)(inst + 0x120) = 1;
       }
     }
-    iVar4 = FUN_0019e990(param_4,0);
+    iVar4 = psnPackedLaneComponent(param_4,0);
     puVar1 = PTR_DAT_001e8bc8;
     local_38[0] = (char)*(undefined4 *)(PTR_DAT_001e8bc8 + iVar4 * 4);
-    iVar4 = FUN_0019e990(param_4,1);
+    iVar4 = psnPackedLaneComponent(param_4,1);
     local_38[1] = (char)*(undefined4 *)(puVar1 + iVar4 * 4);
-    iVar4 = FUN_0019e990(param_4,2);
+    iVar4 = psnPackedLaneComponent(param_4,2);
     local_38[2] = (char)*(undefined4 *)(puVar1 + iVar4 * 4);
-    iVar4 = FUN_0019e990(param_4,3);
+    iVar4 = psnPackedLaneComponent(param_4,3);
     local_38[3] = (char)*(undefined4 *)(puVar1 + iVar4 * 4);
   }
   if (param_7 == 0) {
@@ -2603,7 +2603,7 @@ int FUN_000f8f88(param_1, param_2)
   puVar2 = PTR_DAT_001e8bb8;
   iVar4 = 0;
   do {
-    iVar3 = FUN_0019e9fc(param_1,iVar4);
+    iVar3 = psnPackedLaneSource(param_1,iVar4);
     (**(code **)(*param_2 + 0x88))(param_2,1,iVar4,*(undefined4 *)(puVar2 + iVar3 * 4));
     bVar1 = iVar4 != 3;
     iVar4 = iVar4 + 1;
@@ -2997,7 +2997,7 @@ int FUN_000f9a58(pass, param_2, param_3, param_4, param_5)
   uVar14 = 0;
   uVar17 = 0;
   do {
-    iVar5 = FUN_0019e990(param_3,uVar17);
+    iVar5 = psnPackedLaneComponent(param_3,uVar17);
     bVar1 = uVar17 != 3;
     uVar14 = uVar14 | (uint)(iVar5 == 2) << (uVar17 & 0x3f);
     uVar17 = uVar17 + 1;
@@ -3033,7 +3033,7 @@ int FUN_000f9a58(pass, param_2, param_3, param_4, param_5)
   uVar14 = 0;
   uVar17 = 0;
   do {
-    iVar5 = FUN_0019e990(param_3,uVar17);
+    iVar5 = psnPackedLaneComponent(param_3,uVar17);
     bVar1 = uVar17 != 3;
     uVar14 = uVar14 | (uint)(iVar5 == 3) << (uVar17 & 0x3f);
     uVar17 = uVar17 + 1;
@@ -3158,7 +3158,7 @@ LAB_000f9f08:
     }
     iVar20 = 0;
     do {
-      iVar5 = FUN_0019e990(param_3,iVar20);
+      iVar5 = psnPackedLaneComponent(param_3,iVar20);
       if (iVar5 == 0) {
         *(undefined1 *)((int)pvVar4 + 0x9c) = 1;
       }
@@ -4549,10 +4549,10 @@ LAB_000fc74c:
     bVar2 = false;
   }
   else {
-    arena = FUN_0019e9fc(param_4,0);
-    uVar35 = FUN_0019e9fc(param_4,1);
-    uVar12 = FUN_0019e9fc(param_4,2);
-    uVar13 = FUN_0019e9fc(param_4,3);
+    arena = psnPackedLaneSource(param_4,0);
+    uVar35 = psnPackedLaneSource(param_4,1);
+    uVar12 = psnPackedLaneSource(param_4,2);
+    uVar13 = psnPackedLaneSource(param_4,3);
     pdVar18 = local_94;
     pdVar25 = (dword *)(*(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1);
     *(dword **)(*(int *)(param_1 + 8) + 0x3ac) = pdVar25;
@@ -4903,7 +4903,7 @@ code_r0x000fd284:
   }
   pdVar31 = pdVar27;
   if (((((uVar22 & 0x400000) != 0) && ((*pdVar29 & 0x8888) != 0)) &&
-      (uVar22 = FUN_0019eaa4(param_4,arena,pdVar17,pdVar18,param_5,pdVar32,puVar21), uVar22 != 0))
+      (uVar22 = psnPackedNegateMask(param_4,arena,pdVar17,pdVar18,param_5,pdVar32,puVar21), uVar22 != 0))
      && (uVar22 != 0x8888)) {
     pdVar31 = pdVar25;
     if (!bVar2) {
@@ -5504,26 +5504,26 @@ code_r0x000fed00:
       in_r6 = (uint ******)*param_2[0x19];
       if (((uint)*in_r6 & 0x400000) != 0) {
         in_r7 = *(uint *******)(local_5c + -0x2bf8);
-        iVar34 = FUN_0019e990(in_r6,0);
+        iVar34 = psnPackedLaneComponent(in_r6,0);
         puVar8 = PTR_DAT_001e8bc8;
         if (*(int *)(PTR_DAT_001e8bc8 + iVar34 * 4) == 0) {
           iVar34 = uVar10 + 4;
           uVar10 = uVar10 + 1;
           in_r7 = (uint ******)(iVar34 * 0x1000000 | (uint)in_r7 & 0xffffff);
         }
-        iVar34 = FUN_0019e990(in_r6,1);
+        iVar34 = psnPackedLaneComponent(in_r6,1);
         if (*(int *)(puVar8 + iVar34 * 4) == 0) {
           iVar34 = uVar10 + 4;
           uVar10 = uVar10 + 1;
           in_r7 = (uint ******)(iVar34 * 0x10000 | (uint)in_r7 & 0xff00ffff);
         }
-        iVar34 = FUN_0019e990(in_r6,2);
+        iVar34 = psnPackedLaneComponent(in_r6,2);
         if (*(int *)(puVar8 + iVar34 * 4) == 0) {
           iVar34 = uVar10 + 4;
           uVar10 = uVar10 + 1;
           in_r7 = (uint ******)(iVar34 * 0x100 | (uint)in_r7 & 0xffff00ff);
         }
-        iVar34 = FUN_0019e990(in_r6,3);
+        iVar34 = psnPackedLaneComponent(in_r6,3);
         if (*(int *)(puVar8 + iVar34 * 4) == 0) {
           in_r7 = (uint ******)(uVar10 + 4 | (uint)in_r7 & 0xffffff00);
         }
@@ -5700,25 +5700,25 @@ code_r0x000fed00:
       in_r7 = (uint ******)0x4050607;
       if (((uint)*in_r6 & 0x400000) != 0) {
         in_r7 = *(uint *******)(local_5c + -0x2bf8);
-        iVar34 = FUN_0019e990(in_r6,0);
+        iVar34 = psnPackedLaneComponent(in_r6,0);
         if (*(int *)(PTR_DAT_001e8bc8 + iVar34 * 4) == 0) {
           in_r7 = (uint ******)((uint)in_r7 & 0xffffff | 0x4000000);
         }
         uVar10 = (uint)(*(int *)(PTR_DAT_001e8bc8 + iVar34 * 4) == 0);
-        iVar34 = FUN_0019e990(in_r6,1);
+        iVar34 = psnPackedLaneComponent(in_r6,1);
         puVar8 = PTR_DAT_001e8bc8;
         if (*(int *)(PTR_DAT_001e8bc8 + iVar34 * 4) == 0) {
           iVar34 = uVar10 + 4;
           uVar10 = uVar10 + 1;
           in_r7 = (uint ******)(iVar34 * 0x10000 | (uint)in_r7 & 0xff00ffff);
         }
-        iVar34 = FUN_0019e990(in_r6,2);
+        iVar34 = psnPackedLaneComponent(in_r6,2);
         if (*(int *)(puVar8 + iVar34 * 4) == 0) {
           iVar34 = uVar10 + 4;
           uVar10 = uVar10 + 1;
           in_r7 = (uint ******)(iVar34 * 0x100 | (uint)in_r7 & 0xffff00ff);
         }
-        iVar34 = FUN_0019e990(in_r6,3);
+        iVar34 = psnPackedLaneComponent(in_r6,3);
         if (*(int *)(puVar8 + iVar34 * 4) == 0) {
           iVar43 = *(int *)(param_1 + 8);
           in_r7 = (uint ******)(uVar10 + 4 | (uint)in_r7 & 0xffffff00);

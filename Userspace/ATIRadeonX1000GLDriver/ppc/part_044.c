@@ -9984,7 +9984,7 @@ LAB_0016a1fc:
                 uVar1 = piVar12[5];
 LAB_0016a200:
                 if ((uVar1 & 0x20) != 0) {
-                  iVar2 = FUN_001952d8(piVar12[0x53],iVar7);
+                  iVar2 = disjointSetFindRoot(piVar12[0x53],iVar7);
                   *(undefined4 *)(iVar2 * 4 + iVar8) = 1;
                 }
                 piVar5 = (int *)piVar12[2];
@@ -10016,8 +10016,8 @@ LAB_0016a200:
               iVar3 = piVar12[0x53];
               iVar2 = IRInst__getOperandSource(piVar12,1);
               uVar13 = *(undefined4 *)(iVar2 + 0x14c);
-              iVar3 = FUN_001952d8(iVar3,iVar7);
-              iVar2 = FUN_001952d8(uVar13,iVar7);
+              iVar3 = disjointSetFindRoot(iVar3,iVar7);
+              iVar2 = disjointSetFindRoot(uVar13,iVar7);
               if (((*(int *)(iVar8 + iVar2 * 4) == 0) && (*(int *)(iVar8 + iVar3 * 4) == 0)) &&
                  ((piVar12[5] & 0x20U) == 0)) {
                 iVar10 = IRInst__getOperandSource(piVar12,1);
@@ -10037,8 +10037,8 @@ LAB_0016a3d8:
               iVar3 = piVar12[0x53];
               iVar2 = IRInst__getOperandSource(piVar12,piVar12[0x21]);
               uVar13 = *(undefined4 *)(iVar2 + 0x14c);
-              iVar3 = FUN_001952d8(iVar3,iVar7);
-              iVar2 = FUN_001952d8(uVar13,iVar7);
+              iVar3 = disjointSetFindRoot(iVar3,iVar7);
+              iVar2 = disjointSetFindRoot(uVar13,iVar7);
               if (((*(int *)(iVar8 + iVar2 * 4) == 0) && (*(int *)(iVar8 + iVar3 * 4) == 0)) &&
                  ((piVar12[5] & 0x20U) == 0)) {
                 iVar10 = IRInst__getOperandSource(piVar12,piVar12[0x21]);
@@ -10058,7 +10058,7 @@ LAB_0016a3ec:
                 iVar2 = iVar3;
               }
             }
-            FUN_00195330(iVar10,iVar2,iVar7);
+            storeIndexedWord(iVar10,iVar2,iVar7);
             piVar5 = (int *)piVar12[2];
           }
 LAB_0016a42c:
@@ -10089,7 +10089,7 @@ LAB_0016a42c:
         do {
           iVar6 = iVar3;
           if ((*(uint *)(iVar14 + 0x14) & 1) != 0) {
-            iVar3 = FUN_001952d8(*(undefined4 *)(iVar14 + 0x14c),iVar7);
+            iVar3 = disjointSetFindRoot(*(undefined4 *)(iVar14 + 0x14c),iVar7);
             if (*(int *)(iVar3 * 4 + iVar8) == 0) {
               uVar1 = *(uint *)(iVar14 + 0x14) & 0xffffffdf;
               *(uint *)(iVar14 + 0x14) = uVar1;

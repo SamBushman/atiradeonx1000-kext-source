@@ -147,35 +147,35 @@ func	FUN_0013d160	pass_rewrite	INFERRED	calls the pass-begin function FUN_000ed7
 func	FUN_00145670	pass_post_pack_insts	INFERRED	calls the pass-begin function FUN_000ed7e4(program, "post_pack_insts") with the literal(s) post_pack_insts (R2b notes_compiler_ir.md section 6); the name is the pass string
 func	FUN_00171714	pass_sched_preprocess_and_schedule_inst	INFERRED	calls the pass-begin function FUN_000ed7e4(program, "sched_preprocess" / "schedule_inst") with the literal(s) sched_preprocess, schedule_inst (R2b notes_compiler_ir.md section 6); the name is the pass string
 func	FUN_00184ab4	pass_minreg_order	INFERRED	calls the pass-begin function FUN_000ed7e4(program, "minreg_order") with the literal(s) minreg_order (R2b notes_compiler_ir.md section 6); the name is the pass string
-func	FUN_00189604	R520SchedModel__vslot2	UNKNOWN	vtable of R520SchedModel slot 2 (R2b class_methods.tsv: vtable slot of R520SchedModel[2])
-func	FUN_0018f42c	R520SchedModel__vslot4	UNKNOWN	vtable of R520SchedModel slot 4 (R2b class_methods.tsv: vtable slot of R520SchedModel[4])
-func	FUN_0018f55c	R520SchedModel__vslot3	UNKNOWN	vtable of R520SchedModel slot 3 (R2b class_methods.tsv: vtable slot of R520SchedModel[3])
-func	FUN_0018f824	R300VSchedModel__vslot2	UNKNOWN	vtable of R300VSchedModel slot 2 (R2b class_methods.tsv: vtable slot of R300VSchedModel[2])
-func	FUN_001904b8	R300VSchedModel__vslot4	UNKNOWN	vtable of R300VSchedModel slot 4 (R2b class_methods.tsv: vtable slot of R300VSchedModel[4])
-func	FUN_001906c8	R300VSchedModel__vslot3	UNKNOWN	vtable of R300VSchedModel slot 3 (R2b class_methods.tsv: vtable slot of R300VSchedModel[3])
+func	FUN_00189604	R520SchedModel__vslot2_reset	CONFIRMED	vslot 2: clears the packing state (+4 = 0, +0x18..+0x24 = -1, +0x64 = 0) and the resource-usage block at +0x28 (FUN_00189560)
+func	FUN_0018f42c	R520SchedModel__vslot4_addInstruction	INFERRED	vslot 4: adds a live ALU instruction to the packing state (source address slots +0x18..+0x24, resource usage +0x28, last instruction +0x64) and sets the state word +4 (0 empty, 1 RGB only, 2 alpha only, 3 both, 4 not packable)
+func	FUN_0018f55c	R520SchedModel__vslot3_canAddInstruction	INFERRED	vslot 3: copies the packing state, re-runs the same checks as vslot 4 on the copy (FUN_00189df4, FUN_0018d4b4, FUN_0018c768, FUN_00189840) and returns whether the instruction still fits
+func	FUN_0018f824	R300VSchedModel__vslot2_reset	CONFIRMED	vslot 2: clears the packing state (+0x18/+0x1c/+0x2c/+0x30/+0x34 = -1, +0x20/+0x24/+0x28 = 4)
+func	FUN_001904b8	R300VSchedModel__vslot4_addInstruction	INFERRED	vslot 4: classifies the instruction (virtual +0x4c: 3 vector+math, 2 math only, else vector) and records its opcode in +0x18 / +0x1c and its sources through FUN_00190100 into +0x20..+0x34
+func	FUN_001906c8	R300VSchedModel__vslot3_canAddInstruction	INFERRED	vslot 3: copies the six operand slots +0x20..+0x34, classifies the instruction (virtual +0x4c) and checks that it fits (FUN_0018f850 / FUN_00190100); returns the result
 func	FUN_00191c6c	FudoChip__vslot2	UNKNOWN	vtable of FudoChip slot 2 (R2b class_methods.tsv: vtable slot of FudoChip[2])
 func	FUN_00191efc	FudoPs__ctor_191efc	CONFIRMED	stores the FudoPs vtable at *this (ctor); stores vtable of FudoPs at *this
 func	FUN_001920e0	FudoPs__ctor_1920e0	CONFIRMED	stores the FudoPs vtable at *this (ctor); stores vtable of FudoPs at *this
-func	FUN_00195574	R300MachineAssembler__vslot6	UNKNOWN	vtable of R300MachineAssembler slot 6 (R2b class_methods.tsv: vtable slot of R300MachineAssembler[6],R520MachineAssembler[6])
-func	FUN_00195578	R300MachineAssembler__vslot8	UNKNOWN	vtable of R300MachineAssembler slot 8 (R2b class_methods.tsv: vtable slot of R300MachineAssembler[8],R520MachineAssembler[8])
-func	FUN_00195580	R300MachineAssembler__vslot3	UNKNOWN	vtable of R300MachineAssembler slot 3 (R2b class_methods.tsv: vtable slot of R300MachineAssembler[3],R520MachineAssembler[3])
-func	FUN_00195584	R300MachineAssembler__vslot9	UNKNOWN	vtable of R300MachineAssembler slot 9 (R2b class_methods.tsv: vtable slot of R300MachineAssembler[9])
-func	FUN_001955f8	R300MachineAssembler__vslot2	UNKNOWN	vtable of R300MachineAssembler slot 2 (R2b class_methods.tsv: vtable slot of R300MachineAssembler[2],R520MachineAssembler[2])
-func	FUN_001961c8	R300MachineAssembler__vslot4	UNKNOWN	vtable of R300MachineAssembler slot 4 (R2b class_methods.tsv: vtable slot of R300MachineAssembler[4])
-func	FUN_001963b0	R300MachineAssembler__vslot5	UNKNOWN	vtable of R300MachineAssembler slot 5 (R2b class_methods.tsv: vtable slot of R300MachineAssembler[5])
+func	FUN_00195574	R300MachineAssembler__vslot6_noOp	CONFIRMED	vslot 6: single blr
+func	FUN_00195578	R300MachineAssembler__vslot8_returnsTrue	CONFIRMED	vslot 8: returns 1
+func	FUN_00195580	R300MachineAssembler__vslot3_noOp	CONFIRMED	vslot 3: single blr
+func	FUN_00195584	R300MachineAssembler__vslot9_getRecordBufferWords	CONFIRMED	vslot 9: *out = 0x258f = 0x963c / 4, the size of the record buffer in words (the R520 version returns the words used so far)
+func	FUN_001955f8	R300MachineAssembler__vslot2_exceedsInstructionLimit	CONFIRMED	vslot 2: returns (compiler's target description (+0x30c) limit at +0x40) + 1 < current record index (this+0x60)
+func	FUN_001961c8	R300MachineAssembler__vslot4_finishProgram	INFERRED	vslot 4 (0x10): stores the program statistics into the record buffer tail (+0x93b8, +0x9364, +0x9368), closes the last record through slots 0xbc/0xc0/0x15c when needed and writes the header record (vslot 81)
+func	FUN_001963b0	R300MachineAssembler__vslot5_beginProgram	CONFIRMED	vslot 5 (0x14): stores the target description (+0xa4) and compiler (+0xc), allocates and clears the 0x963c-byte record buffer (+0x5c = base +0x58), sets record index 1 and clears the counters
 func	FUN_00196dbc	R300MachineAssembler__dtor_196dbc	CONFIRMED	stores the R300MachineAssembler vtable at *this (dtor); stores vtable of R300MachineAssembler at *this
 func	FUN_00196dfc	R300MachineAssembler__dtor	CONFIRMED	vtable slot 0 of R300MachineAssembler = complete destructor (GCC 4 layout); stores vtable of R300MachineAssembler at *this; vtable slot of R300MachineAssembler[0]
 func	FUN_00196e3c	MachineAssembler__dtor_196e3c	CONFIRMED	vtable slot 0 of MachineAssembler = complete destructor (GCC 4 layout); stores vtable of R300MachineAssembler>MachineAssembler at *this; vtable slot of R300MachineAssembler[1]
-func	FUN_0019a618	R300VMachineAssembler__vslot2	UNKNOWN	vtable of R300VMachineAssembler slot 2 (R2b class_methods.tsv: vtable slot of R300VMachineAssembler[2],R520VMachineAssembler[2])
+func	FUN_0019a618	R300VMachineAssembler__vslot2_exceedsLimits	CONFIRMED	vslot 2: prints 'next_sp = %d, max = %d' and returns 1 when the instruction count (this+0x58) exceeds the limit (target description + 0x40) or more than 0x10 control-flow entries exist (this+0x5c)
 func	FUN_0019b91c	MachineAssembler__dtor_19b91c	CONFIRMED	stores the MachineAssembler vtable at *this (dtor); stores vtable of R300VMachineAssembler>MachineAssembler at *this
 func	FUN_0019b9ac	MachineAssembler__dtor_19b9ac	CONFIRMED	vtable slot 0 of MachineAssembler = complete destructor (GCC 4 layout); stores vtable of R300VMachineAssembler>MachineAssembler at *this; vtable slot of R300VMachineAssembler[0]
 func	FUN_0019ba3c	R300VMachineAssembler__deleting_dtor	CONFIRMED	vtable slot 1 of R300VMachineAssembler = deleting destructor (GCC 4 layout); stores vtable of R300VMachineAssembler at *this; vtable slot of R300VMachineAssembler[1]
 func	FUN_0019dcb0	R520VMachineAssembler__deleting_dtor	CONFIRMED	vtable slot 1 of R520VMachineAssembler = deleting destructor (GCC 4 layout); stores vtable of R520VMachineAssembler at *this; vtable slot of R520VMachineAssembler[1]
 func	FUN_0019deb0	MachineAssembler__dtor_19deb0	CONFIRMED	stores the MachineAssembler vtable at *this (dtor); stores vtable of R520VMachineAssembler>R300VMachineAssembler>MachineAssembler at *this
 func	FUN_0019df54	MachineAssembler__dtor_19df54	CONFIRMED	vtable slot 0 of MachineAssembler = complete destructor (GCC 4 layout); stores vtable of R520VMachineAssembler>R300VMachineAssembler>MachineAssembler at *this; vtable slot of R520VMachineAssembler[0]
-func	FUN_0019ef50	R520MachineAssembler__vslot5	UNKNOWN	vtable of R520MachineAssembler slot 5 (R2b class_methods.tsv: vtable slot of R520MachineAssembler[5])
-func	FUN_0019f860	R520MachineAssembler__vslot9	UNKNOWN	vtable of R520MachineAssembler slot 9 (R2b class_methods.tsv: vtable slot of R520MachineAssembler[9])
-func	FUN_0019fccc	R520MachineAssembler__vslot4	UNKNOWN	vtable of R520MachineAssembler slot 4 (R2b class_methods.tsv: vtable slot of R520MachineAssembler[4])
+func	FUN_0019ef50	R520MachineAssembler__vslot5_beginProgram	CONFIRMED	vslot 5: R520 twin of the R300 init (record buffer +0xa8 / +0xac, extra fields +0xb0..+0xbc cleared, opcode info table entries patched at PTR_DAT_001e913c + 0x2654, +0x10e4, ... to 5..0xf)
+func	FUN_0019f860	R520MachineAssembler__vslot9_getRecordWordsUsed	CONFIRMED	vslot 9: *out = this+0x60 * 0x48 >> 2, the number of record words used so far
+func	FUN_0019fccc	R520MachineAssembler__vslot4_finishProgram	INFERRED	vslot 4: R520 twin of the R300 finish (record base this+0xa8, buffer +0xac)
 func	FUN_001cd7ec	MachineAssembler__dtor_1cd7ec	CONFIRMED	vtable slot 0 of MachineAssembler = complete destructor (GCC 4 layout); stores vtable of MachineAssembler at *this; vtable slot of MachineAssembler[0]
 func	FUN_001cd810	DListNode__dtor	CONFIRMED	vtable slot 0 of DListNode = complete destructor (GCC 4 layout); stores vtable of DListNode at *this; vtable slot of DListNode[0]
 func	FUN_001cd834	DListNode__deleting_dtor	CONFIRMED	vtable slot 1 of DListNode = deleting destructor (GCC 4 layout); stores vtable of DListNode at *this; vtable slot of DListNode[1]

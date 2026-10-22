@@ -1,6 +1,6 @@
 cd10c	cd110	FUN_000cd05c
-d0340	d0344	FUN_000d0304
-d0398	d039c	FUN_000d035c
+d0340	d0344	vsDisassembleToString
+d0398	d039c	vsDisassembleVertexProgram
 d4ec8	d4ecc	FUN_000d4e8c
 da180	da184	FUN_000da0c0
 da578	da57c	FUN_000da4b8
@@ -558,9 +558,9 @@ ffd5c	ffd60	FUN_000fd5c8
 19b998	19b9ac	FUN_0019d480
 19ba28	19ba3c	FUN_0019d480
 19bab0	19bac4	R300VMachineAssembler__deleting_dtor
-19d55c	19d57c	FUN_0019d4e8
+19d55c	19d57c	R520VMachineAssembler__getOrCreateConstantZeroInst
 19dd38	19dd4c	R520VMachineAssembler__deleting_dtor
-19de30	19de50	FUN_0019dd7c
+19de30	19de50	R520VMachineAssembler__init
 19df28	19df3c	MachineAssembler__dtor_19deb0
 19dfcc	19dfe0	MachineAssembler__dtor_19df54
-1a2874	1a2878	FUN_001a25a8
+1a2874	1a2878	R520MachineAssembler__emitCompareToPredicate

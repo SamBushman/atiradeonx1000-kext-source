@@ -4532,7 +4532,7 @@ int FUN_000cdba4(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
     return;
   }
   if (*(int *)(param_2 + 0xf8) == 0) {
-    ((int (*)())FUN_000d035c)(param_1,param_2,param_3,param_5,param_5,param_6,param_2);
+    ((int (*)())vsDisassembleVertexProgram)(param_1,param_2,param_3,param_5,param_5,param_6,param_2);
     return;
   }
   if (*(int *)(param_2 + 0xf8) != 1) {
@@ -4561,7 +4561,7 @@ int FUN_000cdbe4(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
     return;
   }
   if (*(int *)(param_2 + 0xf8) == 0) {
-    ((int (*)())FUN_000d0304)(param_1,param_2,param_3,param_4,param_5,param_6,param_2);
+    ((int (*)())vsDisassembleToString)(param_1,param_2,param_3,param_4,param_5,param_6,param_2);
     return;
   }
   if (*(int *)(param_2 + 0xf8) != 1) {
@@ -6014,11 +6014,11 @@ LAB_000cfe3c:
   return;
 }
 
-/* FUN_000cff30 @ 0xcff30 (252 bytes) */
-int FUN_000cff30(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int *param_1;
-  undefined4 param_2;
-  undefined1 *param_3;
+/* vsDisassembleLine @ 0xcff30 (252 bytes) */
+int vsDisassembleLine(disassembler, instructionWords, lineBuffer, param_4, param_5, param_6, param_7, param_8)
+  int *disassembler;
+  undefined4 instructionWords;
+  undefined1 *lineBuffer;
   undefined4 param_4;
   undefined4 param_5;
   undefined4 param_6;
@@ -6035,41 +6035,41 @@ int FUN_000cff30(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   int loopIndex;
   undefined1 auStack_98 [120];
   
-  *param_3 = 0;
-  iVar1 = *param_1;
+  *lineBuffer = 0;
+  iVar1 = *disassembler;
   piVar5 = *(int **)(iVar1 + 0x654);
   uVar2 = param_4;
   uVar4 = param_5;
   if ((piVar5 == (int *)0x0) || (iVar6 = *piVar5, iVar6 < 1)) {
-    piVar3 = (int *)param_1[1];
+    piVar3 = (int *)disassembler[1];
   }
   else {
-    piVar3 = (int *)param_1[1];
+    piVar3 = (int *)disassembler[1];
     loopIndex = 0;
     while( true ) {
       iVar1 = loopIndex * 0x1c + *(int *)(iVar1 + 0x654);
       piVar5 = (int *)(*(int *)(iVar1 + 0x14) + 1);
       if (piVar5 == piVar3) {
-        ((int (*)())FUN_000cfd24)(param_1,iVar1 + 4,piVar3,uVar2,uVar4,param_6,piVar5,param_8);
-        piVar3 = (int *)param_1[1];
+        ((int (*)())FUN_000cfd24)(disassembler,iVar1 + 4,piVar3,uVar2,uVar4,param_6,piVar5,param_8);
+        piVar3 = (int *)disassembler[1];
       }
       loopIndex = loopIndex + 1;
       if (iVar6 == loopIndex) break;
-      iVar1 = *param_1;
+      iVar1 = *disassembler;
     }
   }
   FUN_001a32d0(auStack_98,"%3d:",piVar3,uVar2,uVar4,param_6,piVar5,param_8);
-  _strcat(param_3,auStack_98);
-  param_1[1] = param_1[1] + 1;
-  length = _strlen(param_3);
-  uVar2 = ((int (*)())FUN_000cf2ec)(param_1,param_2,param_3 + length,param_4,param_5);
+  _strcat(lineBuffer,auStack_98);
+  disassembler[1] = disassembler[1] + 1;
+  length = _strlen(lineBuffer);
+  uVar2 = ((int (*)())FUN_000cf2ec)(disassembler,instructionWords,lineBuffer + length,param_4,param_5);
   return uVar2;
 }
 
-/* FUN_000d002c @ 0xd002c (728 bytes) */
-int FUN_000d002c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int *param_1;
-  int param_2;
+/* vsDisassemble @ 0xd002c (728 bytes) */
+int vsDisassemble(disassembler, program, param_3, param_4, param_5, param_6, param_7, param_8)
+  int *disassembler;
+  int program;
   undefined1 *param_3;
   int *param_4;
   int *param_5;
@@ -6092,39 +6092,39 @@ int FUN_000d002c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined2 auStack_8e [11];
   int aiStack_78 [12];
   
-  iVar5 = *(int *)(param_2 + 0x650);
-  iVar3 = *(int *)(param_2 + 0x65c);
-  *param_1 = param_2;
-  ((int (*)())FUN_000ce050)(param_1,";*****************************************",param_3,param_4,param_5,param_6,
+  iVar5 = *(int *)(program + 0x650);
+  iVar3 = *(int *)(program + 0x65c);
+  *disassembler = program;
+  ((int (*)())FUN_000ce050)(disassembler,";*****************************************",param_3,param_4,param_5,param_6,
                param_7,param_8);
-  ((int (*)())FUN_000ce050)(param_1,";              VS Disassembly             ",param_3,param_4,param_5,param_6,
+  ((int (*)())FUN_000ce050)(disassembler,";              VS Disassembly             ",param_3,param_4,param_5,param_6,
                param_7,param_8);
-  ((int (*)())FUN_000ce050)(param_1,";*****************************************",param_3,param_4,param_5,param_6,
+  ((int (*)())FUN_000ce050)(disassembler,";*****************************************",param_3,param_4,param_5,param_6,
                param_7,param_8);
   if (iVar3 != 0) {
     loopIndex = 0;
     do {
       param_4 = &local_d8;
       param_5 = &local_d4;
-      iVar1 = ((int (*)())FUN_000cff30)(param_1,iVar5,auStack_ba,param_4,&local_d4,param_6,param_7,param_8);
+      iVar1 = ((int (*)())vsDisassembleLine)(disassembler,iVar5,auStack_ba,param_4,&local_d4,param_6,param_7,param_8);
       param_3 = auStack_ba;
       if (iVar1 == 0) {
         if (local_d8 == 0) {
-          uVar2 = ((int (*)())FUN_000cea6c)(param_1,iVar5,aiStack_78,param_4,param_5,param_6,param_7,param_8);
-          uVar2 = ((int (*)())FUN_000ce148)(param_1,uVar2,aiStack_d0);
-          uVar2 = ((int (*)())FUN_000ce148)(param_1,uVar2,auStack_8e);
-          iVar5 = ((int (*)())FUN_000ce148)(param_1,uVar2,auStack_a4);
+          uVar2 = ((int (*)())FUN_000cea6c)(disassembler,iVar5,aiStack_78,param_4,param_5,param_6,param_7,param_8);
+          uVar2 = ((int (*)())FUN_000ce148)(disassembler,uVar2,aiStack_d0);
+          uVar2 = ((int (*)())FUN_000ce148)(disassembler,uVar2,auStack_8e);
+          iVar5 = ((int (*)())FUN_000ce148)(disassembler,uVar2,auStack_a4);
           if (local_d4 == 1) {
             length = _strlen(aiStack_78);
             *(undefined2 *)((int)aiStack_78 + length) = 0x2c00;
             param_4 = aiStack_78;
             param_5 = aiStack_d0;
-            ((int (*)())FUN_000ce050)(param_1,"%s %-10s%-15s",auStack_ba,aiStack_78,aiStack_d0,param_6,param_7,
+            ((int (*)())FUN_000ce050)(disassembler,"%s %-10s%-15s",auStack_ba,aiStack_78,aiStack_d0,param_6,param_7,
                          param_8);
           }
           else if (local_d4 == 0) {
             param_4 = aiStack_78;
-            ((int (*)())FUN_000ce050)(param_1,"%s %-10s",auStack_ba,aiStack_78,param_5,param_6,param_7,param_8);
+            ((int (*)())FUN_000ce050)(disassembler,"%s %-10s",auStack_ba,aiStack_78,param_5,param_6,param_7,param_8);
           }
           else if (local_d4 == 2) {
             length = _strlen(aiStack_78);
@@ -6134,7 +6134,7 @@ int FUN_000d002c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
             param_4 = aiStack_78;
             param_5 = aiStack_d0;
             param_6 = auStack_8e;
-            ((int (*)())FUN_000ce050)(param_1,"%s %-10s%-15s%-15s",auStack_ba,aiStack_78,aiStack_d0,auStack_8e,
+            ((int (*)())FUN_000ce050)(disassembler,"%s %-10s%-15s%-15s",auStack_ba,aiStack_78,aiStack_d0,auStack_8e,
                          param_7,param_8);
           }
           else {
@@ -6148,42 +6148,42 @@ int FUN_000d002c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
             param_5 = aiStack_d0;
             param_6 = auStack_8e;
             param_7 = auStack_a4;
-            ((int (*)())FUN_000ce050)(param_1,"%s %-10s%-15s%-15s%s",auStack_ba,aiStack_78,aiStack_d0,auStack_8e,
+            ((int (*)())FUN_000ce050)(disassembler,"%s %-10s%-15s%-15s%s",auStack_ba,aiStack_78,aiStack_d0,auStack_8e,
                          auStack_a4,param_8);
           }
         }
         else {
-          uVar2 = ((int (*)())FUN_000cea6c)(param_1,iVar5,aiStack_78,param_4,param_5,param_6,param_7,param_8);
-          uVar2 = ((int (*)())FUN_000ce148)(param_1,uVar2,aiStack_d0);
-          uVar2 = ((int (*)())FUN_000ce148)(param_1,uVar2,auStack_8e);
+          uVar2 = ((int (*)())FUN_000cea6c)(disassembler,iVar5,aiStack_78,param_4,param_5,param_6,param_7,param_8);
+          uVar2 = ((int (*)())FUN_000ce148)(disassembler,uVar2,aiStack_d0);
+          uVar2 = ((int (*)())FUN_000ce148)(disassembler,uVar2,auStack_8e);
           length2 = _strlen(aiStack_78);
           *(undefined2 *)((int)aiStack_78 + length2) = 0x2c00;
           length2 = _strlen(aiStack_d0);
           *(undefined2 *)((int)aiStack_d0 + length2) = 0x2c00;
           param_6 = auStack_8e;
-          ((int (*)())FUN_000ce050)(param_1,"%s %-10s%-15s%-15s",auStack_ba,aiStack_78,aiStack_d0,auStack_8e,
+          ((int (*)())FUN_000ce050)(disassembler,"%s %-10s%-15s%-15s",auStack_ba,aiStack_78,aiStack_d0,auStack_8e,
                        param_7,param_8);
-          iVar5 = ((int (*)())FUN_000ced58)(param_1,uVar2,auStack_ba,aiStack_78,aiStack_d0);
+          iVar5 = ((int (*)())FUN_000ced58)(disassembler,uVar2,auStack_ba,aiStack_78,aiStack_d0);
           param_4 = aiStack_78;
           param_5 = aiStack_d0;
-          ((int (*)())FUN_000ce050)(param_1,"%s %-10s%-15s",auStack_ba,aiStack_78,aiStack_d0,param_6,param_7,
+          ((int (*)())FUN_000ce050)(disassembler,"%s %-10s%-15s",auStack_ba,aiStack_78,aiStack_d0,param_6,param_7,
                        param_8);
         }
       }
       else {
         iVar5 = iVar5 + 0x10;
-        ((int (*)())FUN_000ce050)(param_1,"%s",auStack_ba,param_4,param_5,param_6,param_7,param_8);
+        ((int (*)())FUN_000ce050)(disassembler,"%s",auStack_ba,param_4,param_5,param_6,param_7,param_8);
       }
       loopIndex = loopIndex + 1;
     } while (iVar3 != loopIndex);
   }
-  ((int (*)())FUN_000ce050)(param_1,"",param_3,param_4,param_5,param_6,param_7,param_8);
-  param_1[1] = 0;
+  ((int (*)())FUN_000ce050)(disassembler,"",param_3,param_4,param_5,param_6,param_7,param_8);
+  disassembler[1] = 0;
   return 1;
 }
 
-/* FUN_000d0304 @ 0xd0304 (60 bytes) */
-int FUN_000d0304(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+/* vsDisassembleToString @ 0xd0304 (60 bytes) */
+int vsDisassembleToString(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -6206,8 +6206,8 @@ int FUN_000d0304(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   return 0;
 }
 
-/* FUN_000d035c @ 0xd035c (60 bytes) */
-int FUN_000d035c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+/* vsDisassembleVertexProgram @ 0xd035c (60 bytes) */
+int vsDisassembleVertexProgram(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -6226,14 +6226,14 @@ int FUN_000d035c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   ((int (*)())FUN_000ce038)(auStack_38);
   local_30 = param_4;
   local_2c = param_1;
-  ((int (*)())FUN_000d002c)(auStack_38,param_2,param_3,uVar1,param_5,param_6,param_7,in_r10);
+  ((int (*)())vsDisassemble)(auStack_38,param_2,param_3,uVar1,param_5,param_6,param_7,in_r10);
   return 0;
 }
 
-/* FUN_000d03b4 @ 0xd03b4 (152 bytes) */
-int FUN_000d03b4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  undefined4 param_2;
+/* psnReportError @ 0xd03b4 (152 bytes) */
+int psnReportError(severity, format, param_3, param_4, param_5, param_6, param_7, param_8)
+  undefined4 severity;
+  undefined4 format;
   undefined4 param_3;
   undefined4 param_4;
   undefined4 param_5;
@@ -6241,7 +6241,7 @@ int FUN_000d03b4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined4 param_7;
   undefined4 param_8;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { severity, format, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined1 auStack_124 [280];
   
   if (DAT_001fa61c != (undefined4 *)0x0) {
@@ -6251,40 +6251,40 @@ int FUN_000d03b4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = param_6;
     (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = param_7;
     (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = param_8;
-    FUN_001a34d4(auStack_124,param_2,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)),param_4,param_5,param_6,param_7,param_8);
+    FUN_001a34d4(auStack_124,format,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)),param_4,param_5,param_6,param_7,param_8);
     (*(code *)*DAT_001fa61c)(DAT_001fa618,"",auStack_124,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
   }
   return;
 }
 
-/* FUN_000d0450 @ 0xd0450 (56 bytes) */
-int FUN_000d0450(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  uint param_2;
+/* psnFormatRegister @ 0xd0450 (56 bytes) */
+int psnFormatRegister(outBuffer, registerWord, param_3, param_4, param_5, param_6, param_7)
+  undefined4 outBuffer;
+  uint registerWord;
   undefined4 param_3;
   undefined4 param_4;
   undefined4 param_5;
   undefined4 param_6;
   undefined4 param_7;
 {
-  if ((param_2 & 0x8000) != 0) {
-    FUN_001a32d0(param_1,"c%02u",param_2 & 0xffff7fff,param_4,param_5,param_6,param_7,0xd0458);
+  if ((registerWord & 0x8000) != 0) {
+    FUN_001a32d0(outBuffer,"c%02u",registerWord & 0xffff7fff,param_4,param_5,param_6,param_7,0xd0458);
     return;
   }
-  return FUN_001a32d0(param_1,"r%02u",param_2,param_4,param_5,param_6,param_7,0xd0458);
+  return FUN_001a32d0(outBuffer,"r%02u",registerWord,param_4,param_5,param_6,param_7,0xd0458);
 }
 
-/* FUN_000d0488 @ 0xd0488 (552 bytes) */
-int FUN_000d0488(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
-  char *param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  uint param_8;
-  int param_9;
+/* psnFormatRgbSource @ 0xd0488 (552 bytes) */
+int psnFormatRgbSource(outBuffer, source0Register, source1Register, source2Register, alpha0Register, alpha1Register, alpha2Register, selectCode, modifier)
+  char *outBuffer;
+  undefined4 source0Register;
+  undefined4 source1Register;
+  undefined4 source2Register;
+  undefined4 alpha0Register;
+  undefined4 alpha1Register;
+  undefined4 alpha2Register;
+  uint selectCode;
+  int modifier;
 {
   int length;
   char cVar1;
@@ -6303,31 +6303,31 @@ int FUN_000d0488(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   cVar3 = s_nab__001a6f90[4];
   cVar2 = s_abs__001a6f88[4];
   cVar1 = s_neg__001a6f80[4];
-  if (param_9 == 1) {
-    *(undefined4 *)param_1 = (*(unsigned int *)((unsigned char *)&(s_neg__001a6f80) + 0));
-    param_1[4] = cVar1;
+  if (modifier == 1) {
+    *(undefined4 *)outBuffer = (*(unsigned int *)((unsigned char *)&(s_neg__001a6f80) + 0));
+    outBuffer[4] = cVar1;
   }
-  else if (param_9 == 0) {
-    *param_1 = '\0';
+  else if (modifier == 0) {
+    *outBuffer = '\0';
   }
-  else if (param_9 == 2) {
-    *(undefined4 *)param_1 = (*(unsigned int *)((unsigned char *)&(s_abs__001a6f88) + 0));
-    param_1[4] = cVar2;
+  else if (modifier == 2) {
+    *(undefined4 *)outBuffer = (*(unsigned int *)((unsigned char *)&(s_abs__001a6f88) + 0));
+    outBuffer[4] = cVar2;
   }
-  else if (param_9 == 3) {
-    *(undefined4 *)param_1 = (*(unsigned int *)((unsigned char *)&(s_nab__001a6f90) + 0));
-    param_1[4] = cVar3;
+  else if (modifier == 3) {
+    *(undefined4 *)outBuffer = (*(unsigned int *)((unsigned char *)&(s_nab__001a6f90) + 0));
+    outBuffer[4] = cVar3;
   }
   else {
-    *(undefined4 *)param_1 = (*(unsigned int *)((unsigned char *)&(s______001a6f98) + 0));
-    param_1[4] = cVar4;
+    *(undefined4 *)outBuffer = (*(unsigned int *)((unsigned char *)&(s______001a6f98) + 0));
+    outBuffer[4] = cVar4;
   }
-  uVar9 = param_8;
-  if (param_8 < 0x20) {
+  uVar9 = selectCode;
+  if (selectCode < 0x20) {
     iVar7 = 0;
-    switch(param_8) {
+    switch(selectCode) {
     default:
-      ((int (*)())FUN_000d0450)(local_38,param_2,param_3,param_4,param_5,param_6,iVar7);
+      ((int (*)())psnFormatRegister)(local_38,source0Register,source1Register,source2Register,alpha0Register,alpha1Register,iVar7);
       break;
     case 4:
     case 5:
@@ -6335,7 +6335,7 @@ int FUN_000d0488(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     case 7:
     case 0x18:
     case 0x1b:
-      ((int (*)())FUN_000d0450)(local_38,param_3,param_3,param_4,param_5,param_6,iVar7);
+      ((int (*)())psnFormatRegister)(local_38,source1Register,source1Register,source2Register,alpha0Register,alpha1Register,iVar7);
       break;
     case 8:
     case 9:
@@ -6343,16 +6343,16 @@ int FUN_000d0488(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     case 0xb:
     case 0x19:
     case 0x1c:
-      ((int (*)())FUN_000d0450)(local_38,param_4,param_3,param_4,param_5,param_6,iVar7);
+      ((int (*)())psnFormatRegister)(local_38,source2Register,source1Register,source2Register,alpha0Register,alpha1Register,iVar7);
       break;
     case 0xc:
-      ((int (*)())FUN_000d0450)(local_38,param_5,param_3,param_4,param_5,param_6,iVar7);
+      ((int (*)())psnFormatRegister)(local_38,alpha0Register,source1Register,source2Register,alpha0Register,alpha1Register,iVar7);
       break;
     case 0xd:
-      ((int (*)())FUN_000d0450)(local_38,param_6,param_3,param_4,param_5,param_6,iVar7);
+      ((int (*)())psnFormatRegister)(local_38,alpha1Register,source1Register,source2Register,alpha0Register,alpha1Register,iVar7);
       break;
     case 0xe:
-      ((int (*)())FUN_000d0450)(local_38,param_7,param_3,param_4,param_5,param_6,iVar7);
+      ((int (*)())psnFormatRegister)(local_38,alpha2Register,source1Register,source2Register,alpha0Register,alpha1Register,iVar7);
       break;
     case 0xf:
     case 0x10:
@@ -6375,56 +6375,56 @@ int FUN_000d0488(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
       builtin_strncpy(local_38,"0.5",4);
       break;
     case 0x1d:
-      ((int (*)())FUN_000d0450)(local_38,param_5,param_3,param_4,param_5,param_6,iVar7);
-      ((int (*)())FUN_000d0450)(auStack_32,param_2,param_3,param_4,param_5,param_6,iVar7);
+      ((int (*)())psnFormatRegister)(local_38,alpha0Register,source1Register,source2Register,alpha0Register,alpha1Register,iVar7);
+      ((int (*)())psnFormatRegister)(auStack_32,source0Register,source1Register,source2Register,alpha0Register,alpha1Register,iVar7);
       break;
     case 0x1e:
-      uVar6 = param_3;
-      ((int (*)())FUN_000d0450)(local_38,param_6,param_3,param_4,param_5,param_6,iVar7);
-      ((int (*)())FUN_000d0450)(auStack_32,param_3,uVar6,param_4,param_5,param_6,iVar7);
+      uVar6 = source1Register;
+      ((int (*)())psnFormatRegister)(local_38,alpha1Register,source1Register,source2Register,alpha0Register,alpha1Register,iVar7);
+      ((int (*)())psnFormatRegister)(auStack_32,source1Register,uVar6,source2Register,alpha0Register,alpha1Register,iVar7);
       break;
     case 0x1f:
-      uVar6 = param_4;
-      ((int (*)())FUN_000d0450)(local_38,param_7,param_3,param_4,param_5,param_6,iVar7);
-      ((int (*)())FUN_000d0450)(auStack_32,param_4,param_3,uVar6,param_5,param_6,iVar7);
-      param_4 = uVar6;
+      uVar6 = source2Register;
+      ((int (*)())psnFormatRegister)(local_38,alpha2Register,source1Register,source2Register,alpha0Register,alpha1Register,iVar7);
+      ((int (*)())psnFormatRegister)(auStack_32,source2Register,source1Register,uVar6,alpha0Register,alpha1Register,iVar7);
+      source2Register = uVar6;
     }
   }
   else {
     builtin_strncpy(local_38,"???",4);
   }
-  length = _strlen(param_1);
-  pcVar5 = param_1 + length;
-  if (param_8 < 0x20) {
-    puVar8 = ((unsigned char *)0x000d0730) + *(int *)(((unsigned char *)0x000d0730) + param_8 * 4);
+  length = _strlen(outBuffer);
+  pcVar5 = outBuffer + length;
+  if (selectCode < 0x20) {
+    puVar8 = ((unsigned char *)0x000d0730) + *(int *)(((unsigned char *)0x000d0730) + selectCode * 4);
                     
-    switch(param_8) {
+    switch(selectCode) {
     default:
-      FUN_001a32d0(pcVar5,"%s.rgb",local_38,param_4,param_5,param_6,puVar8,uVar9);
+      FUN_001a32d0(pcVar5,"%s.rgb",local_38,source2Register,alpha0Register,alpha1Register,puVar8,uVar9);
       break;
     case 1:
     case 5:
     case 9:
     case 0x10:
-      FUN_001a32d0(pcVar5,"%s.rrr",local_38,param_4,param_5,param_6,puVar8,uVar9);
+      FUN_001a32d0(pcVar5,"%s.rrr",local_38,source2Register,alpha0Register,alpha1Register,puVar8,uVar9);
       break;
     case 2:
     case 6:
     case 10:
     case 0x11:
-      FUN_001a32d0(pcVar5,"%s.ggg",local_38,param_4,param_5,param_6,puVar8,uVar9);
+      FUN_001a32d0(pcVar5,"%s.ggg",local_38,source2Register,alpha0Register,alpha1Register,puVar8,uVar9);
       break;
     case 3:
     case 7:
     case 0xb:
     case 0x12:
-      FUN_001a32d0(pcVar5,"%s.bbb",local_38,param_4,param_5,param_6,puVar8,uVar9);
+      FUN_001a32d0(pcVar5,"%s.bbb",local_38,source2Register,alpha0Register,alpha1Register,puVar8,uVar9);
       break;
     case 0xc:
     case 0xd:
     case 0xe:
     case 0x13:
-      FUN_001a32d0(pcVar5,"%s.aaa",local_38,param_4,param_5,param_6,puVar8,uVar9);
+      FUN_001a32d0(pcVar5,"%s.aaa",local_38,source2Register,alpha0Register,alpha1Register,puVar8,uVar9);
       break;
     case 0x14:
     case 0x15:
@@ -6433,40 +6433,40 @@ int FUN_000d0488(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     case 0x17:
     case 0x18:
     case 0x19:
-      FUN_001a32d0(pcVar5,"%s.gbr",local_38,param_4,param_5,param_6,puVar8,uVar9);
+      FUN_001a32d0(pcVar5,"%s.gbr",local_38,source2Register,alpha0Register,alpha1Register,puVar8,uVar9);
       break;
     case 0x1a:
     case 0x1b:
     case 0x1c:
-      FUN_001a32d0(pcVar5,"%s.brg",local_38,param_4,param_5,param_6,puVar8,uVar9);
+      FUN_001a32d0(pcVar5,"%s.brg",local_38,source2Register,alpha0Register,alpha1Register,puVar8,uVar9);
       break;
     case 0x1d:
-      FUN_001a32d0(pcVar5,"%s.a:%s.bg",local_38,auStack_32,param_5,param_6,puVar8,uVar9);
+      FUN_001a32d0(pcVar5,"%s.a:%s.bg",local_38,auStack_32,alpha0Register,alpha1Register,puVar8,uVar9);
     }
   }
   else {
 override_jmp_000d072c_case_5:
     _strcpy(pcVar5,local_38);
   }
-  length = _strlen(param_1);
-  if (param_9 != 0) {
-    (param_1 + length)[0] = ')';
-    (param_1 + length)[1] = '\0';
+  length = _strlen(outBuffer);
+  if (modifier != 0) {
+    (outBuffer + length)[0] = ')';
+    (outBuffer + length)[1] = '\0';
   }
   return;
 }
 
-/* FUN_000d0888 @ 0xd0888 (464 bytes) */
-int FUN_000d0888(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
-  char *param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  uint param_8;
-  int param_9;
+/* psnFormatAlphaSource @ 0xd0888 (464 bytes) */
+int psnFormatAlphaSource(outBuffer, source0Register, source1Register, source2Register, alpha0Register, alpha1Register, alpha2Register, selectCode, modifier)
+  char *outBuffer;
+  undefined4 source0Register;
+  undefined4 source1Register;
+  undefined4 source2Register;
+  undefined4 alpha0Register;
+  undefined4 alpha1Register;
+  undefined4 alpha2Register;
+  uint selectCode;
+  int modifier;
 {
   int length;
   char cVar1;
@@ -6483,52 +6483,52 @@ int FUN_000d0888(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   cVar3 = s_nab__001a6f90[4];
   cVar2 = s_abs__001a6f88[4];
   cVar1 = s_neg__001a6f80[4];
-  if (param_9 == 1) {
-    *(undefined4 *)param_1 = (*(unsigned int *)((unsigned char *)&(s_neg__001a6f80) + 0));
-    param_1[4] = cVar1;
+  if (modifier == 1) {
+    *(undefined4 *)outBuffer = (*(unsigned int *)((unsigned char *)&(s_neg__001a6f80) + 0));
+    outBuffer[4] = cVar1;
   }
-  else if (param_9 == 0) {
-    *param_1 = '\0';
+  else if (modifier == 0) {
+    *outBuffer = '\0';
   }
-  else if (param_9 == 2) {
-    *(undefined4 *)param_1 = (*(unsigned int *)((unsigned char *)&(s_abs__001a6f88) + 0));
-    param_1[4] = cVar2;
+  else if (modifier == 2) {
+    *(undefined4 *)outBuffer = (*(unsigned int *)((unsigned char *)&(s_abs__001a6f88) + 0));
+    outBuffer[4] = cVar2;
   }
-  else if (param_9 == 3) {
-    *(undefined4 *)param_1 = (*(unsigned int *)((unsigned char *)&(s_nab__001a6f90) + 0));
-    param_1[4] = cVar3;
+  else if (modifier == 3) {
+    *(undefined4 *)outBuffer = (*(unsigned int *)((unsigned char *)&(s_nab__001a6f90) + 0));
+    outBuffer[4] = cVar3;
   }
   else {
-    *(undefined4 *)param_1 = (*(unsigned int *)((unsigned char *)&(s______001a6f98) + 0));
-    param_1[4] = cVar4;
+    *(undefined4 *)outBuffer = (*(unsigned int *)((unsigned char *)&(s______001a6f98) + 0));
+    outBuffer[4] = cVar4;
   }
-  uVar8 = param_8;
-  if (param_8 < 0x13) {
+  uVar8 = selectCode;
+  if (selectCode < 0x13) {
     iVar6 = 0;
-    switch(param_8) {
+    switch(selectCode) {
     case 0:
     case 1:
     case 2:
-      ((int (*)())FUN_000d0450)(local_28,param_2,param_3,param_4,param_5,param_6,iVar6);
+      ((int (*)())psnFormatRegister)(local_28,source0Register,source1Register,source2Register,alpha0Register,alpha1Register,iVar6);
       break;
     case 3:
     case 4:
     case 5:
-      ((int (*)())FUN_000d0450)(local_28,param_3,param_3,param_4,param_5,param_6,iVar6);
+      ((int (*)())psnFormatRegister)(local_28,source1Register,source1Register,source2Register,alpha0Register,alpha1Register,iVar6);
       break;
     case 6:
     case 7:
     case 8:
-      ((int (*)())FUN_000d0450)(local_28,param_4,param_3,param_4,param_5,param_6,iVar6);
+      ((int (*)())psnFormatRegister)(local_28,source2Register,source1Register,source2Register,alpha0Register,alpha1Register,iVar6);
       break;
     case 9:
-      ((int (*)())FUN_000d0450)(local_28,param_5,param_3,param_4,param_5,param_6,iVar6);
+      ((int (*)())psnFormatRegister)(local_28,alpha0Register,source1Register,source2Register,alpha0Register,alpha1Register,iVar6);
       break;
     case 10:
-      ((int (*)())FUN_000d0450)(local_28,param_6,param_3,param_4,param_5,param_6,iVar6);
+      ((int (*)())psnFormatRegister)(local_28,alpha1Register,source1Register,source2Register,alpha0Register,alpha1Register,iVar6);
       break;
     case 0xb:
-      ((int (*)())FUN_000d0450)(local_28,param_7,param_3,param_4,param_5,param_6,iVar6);
+      ((int (*)())psnFormatRegister)(local_28,alpha2Register,source1Register,source2Register,alpha0Register,alpha1Register,iVar6);
       break;
     default:
       local_28[0] = s_srcp_001a6fa0[0];
@@ -6550,44 +6550,44 @@ int FUN_000d0888(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   else {
     builtin_strncpy(local_28,"???",4);
   }
-  length = _strlen(param_1);
-  pcVar5 = param_1 + length;
-  if (param_8 < 0x10) {
-    puVar7 = ((unsigned char *)0x000d0aa4) + *(int *)(((unsigned char *)0x000d0aa4) + param_8 * 4);
+  length = _strlen(outBuffer);
+  pcVar5 = outBuffer + length;
+  if (selectCode < 0x10) {
+    puVar7 = ((unsigned char *)0x000d0aa4) + *(int *)(((unsigned char *)0x000d0aa4) + selectCode * 4);
                     
-    switch(param_8) {
+    switch(selectCode) {
     default:
-      FUN_001a32d0(pcVar5,"%s.r",local_28,param_4,param_5,param_6,puVar7,uVar8);
+      FUN_001a32d0(pcVar5,"%s.r",local_28,source2Register,alpha0Register,alpha1Register,puVar7,uVar8);
       break;
     case 1:
     case 4:
     case 7:
-      FUN_001a32d0(pcVar5,"%s.g",local_28,param_4,param_5,param_6,puVar7,uVar8);
+      FUN_001a32d0(pcVar5,"%s.g",local_28,source2Register,alpha0Register,alpha1Register,puVar7,uVar8);
       break;
     case 2:
     case 5:
     case 8:
-      FUN_001a32d0(pcVar5,"%s.b",local_28,param_4,param_5,param_6,puVar7,uVar8);
+      FUN_001a32d0(pcVar5,"%s.b",local_28,source2Register,alpha0Register,alpha1Register,puVar7,uVar8);
       break;
     case 9:
-      FUN_001a32d0(pcVar5,"%s.a",local_28,param_4,param_5,param_6,puVar7,uVar8);
+      FUN_001a32d0(pcVar5,"%s.a",local_28,source2Register,alpha0Register,alpha1Register,puVar7,uVar8);
     }
   }
   else {
     _strcpy(pcVar5,local_28);
   }
-  length = _strlen(param_1);
-  if (param_9 != 0) {
-    (param_1 + length)[0] = ')';
-    (param_1 + length)[1] = '\0';
+  length = _strlen(outBuffer);
+  if (modifier != 0) {
+    (outBuffer + length)[0] = ')';
+    (outBuffer + length)[1] = '\0';
   }
   return;
 }
 
-/* FUN_000d0b68 @ 0xd0b68 (1344 bytes) */
-int FUN_000d0b68(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int param_1;
-  uint param_2;
+/* psnNormalizeProgram @ 0xd0b68 (1344 bytes) */
+int psnNormalizeProgram(psn, level, param_3, param_4, param_5, param_6, param_7, param_8)
+  int psn;
+  uint level;
   undefined4 param_3;
   undefined4 param_4;
   undefined4 param_5;
@@ -6607,25 +6607,25 @@ int FUN_000d0b68(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint uVar9;
   uint uVar10;
   uint loopIndex;
-  uint uVar12;
+  uint recordCount;
   uint uVar13;
   undefined1 *puVar14;
   uint uVar15;
   uint uVar16;
-  uint *puVar17;
+  uint *recordCursor;
   
-  if (param_2 <= (*(byte *)(param_1 + 0xf) & 0xf)) {
+  if (level <= (*(byte *)(psn + 0xf) & 0xf)) {
     return;
   }
-  uVar12 = *(uint *)(param_1 + 8);
-  if ((*(int *)(param_1 + 0x48) == 1) && (uVar12 != 0)) {
-    piVar7 = (int *)(param_1 + 0x90);
+  recordCount = *(uint *)(psn + 8);
+  if ((*(int *)(psn + 0x48) == 1) && (recordCount != 0)) {
+    piVar7 = (int *)(psn + 0x90);
     loopIndex = 1;
     do {
       loopIndex = loopIndex + 1;
       if (*piVar7 != 1) goto LAB_000d0bfc;
       piVar7 = piVar7 + 0x12;
-    } while (loopIndex <= uVar12);
+    } while (loopIndex <= recordCount);
 LAB_000d0bd8:
     uVar10 = 0;
     uVar9 = 0;
@@ -6634,43 +6634,43 @@ LAB_000d0bd8:
   else {
     loopIndex = 1;
 LAB_000d0bfc:
-    if (uVar12 < loopIndex) goto LAB_000d0bd8;
+    if (recordCount < loopIndex) goto LAB_000d0bd8;
     uVar10 = 0;
     bVar3 = true;
-    puVar17 = (uint *)(param_1 + loopIndex * 0x48);
+    recordCursor = (uint *)(psn + loopIndex * 0x48);
     uVar16 = 0;
     uVar13 = 0;
     bVar1 = false;
     uVar9 = 0;
     uVar15 = loopIndex;
     do {
-      uVar4 = *puVar17;
+      uVar4 = *recordCursor;
       if (uVar4 < 5) {
         if (uVar4 < 3) {
           if (uVar4 != 2) goto LAB_000d0c50;
-          param_7 = (uint)*(byte *)((int)puVar17 + 0x1b);
-          uVar10 = uVar10 | *(byte *)(puVar17 + 1) | param_7;
-          if (*(char *)((int)puVar17 + 0x1a) != '\0') {
-            uVar9 = uVar9 | -(uint)(puVar17[7] & 0xffff00) >> 0x1f;
+          param_7 = (uint)*(byte *)((int)recordCursor + 0x1b);
+          uVar10 = uVar10 | *(byte *)(recordCursor + 1) | param_7;
+          if (*(char *)((int)recordCursor + 0x1a) != '\0') {
+            uVar9 = uVar9 | -(uint)(recordCursor[7] & 0xffff00) >> 0x1f;
           }
         }
         else {
-          uVar10 = uVar10 | *(byte *)(puVar17 + 1);
+          uVar10 = uVar10 | *(byte *)(recordCursor + 1);
         }
       }
       else if (uVar4 == 5) {
-        uVar10 = uVar10 | *(byte *)(puVar17 + 1);
+        uVar10 = uVar10 | *(byte *)(recordCursor + 1);
         if (bVar3) {
-          if ((*(char *)((int)puVar17 + 0xe) != '\0') || (*(char *)((int)puVar17 + 0x11) != '\0')) {
+          if ((*(char *)((int)recordCursor + 0xe) != '\0') || (*(char *)((int)recordCursor + 0x11) != '\0')) {
             bVar1 = true;
           }
-          uVar4 = puVar17[4] & 0xff00ff00;
+          uVar4 = recordCursor[4] & 0xff00ff00;
           if ((uVar4 != 0) &&
-             ((*(ushort *)(puVar17 + 3) < uVar13 || (*(char *)((int)puVar17 + 0x19) != '\0')))) {
+             ((*(ushort *)(recordCursor + 3) < uVar13 || (*(char *)((int)recordCursor + 0x19) != '\0')))) {
             bVar1 = true;
           }
-          uVar5 = (uint)*(byte *)(puVar17 + 5);
-          uVar8 = (uint)*(byte *)((int)puVar17 + 0x15);
+          uVar5 = (uint)*(byte *)(recordCursor + 5);
+          uVar8 = (uint)*(byte *)((int)recordCursor + 0x15);
           param_7 = uVar5;
           if ((uVar4 != 0) && (param_7 = uVar8, uVar4 == 0x100ff00)) {
             uVar5 = uVar8;
@@ -6679,7 +6679,7 @@ LAB_000d0bfc:
           if ((uVar5 == 1) || (uVar4 = uVar5, uVar5 != 0)) {
             if (uVar4 == 2) goto LAB_000d0d60;
             if (uVar4 == 1) {
-              uVar16 = uVar16 - *(byte *)((int)puVar17 + 0x13);
+              uVar16 = uVar16 - *(byte *)((int)recordCursor + 0x13);
             }
           }
           else if (param_7 == 2) {
@@ -6695,95 +6695,95 @@ LAB_000d0d60:
       }
       else {
 LAB_000d0c50:
-        ((int (*)())FUN_000d03b4)(0,"Bad Instruction Type!",param_3,param_4,param_5,param_6,param_7,param_8);
+        ((int (*)())psnReportError)(0,"Bad Instruction Type!",param_3,param_4,param_5,param_6,param_7,param_8);
       }
       uVar15 = uVar15 + 1;
       uVar13 = uVar13 + 1;
-      puVar17 = puVar17 + 0x12;
-    } while (uVar15 <= uVar12);
+      recordCursor = recordCursor + 0x12;
+    } while (uVar15 <= recordCount);
     if (uVar13 != 0) goto LAB_000d0be8;
   }
   uVar13 = 1;
 LAB_000d0be8:
-  if ((*(short *)(param_1 + 0x20) == 0) && (*(short *)(param_1 + 0x12) == 0)) {
-    *(short *)(param_1 + 0x12) = (short)uVar13 + -1;
+  if ((*(short *)(psn + 0x20) == 0) && (*(short *)(psn + 0x12) == 0)) {
+    *(short *)(psn + 0x12) = (short)uVar13 + -1;
   }
   if (!bVar3) {
-    *(undefined2 *)(param_1 + 0x28) = 1;
+    *(undefined2 *)(psn + 0x28) = 1;
   }
-  if ((*(short *)(param_1 + 0x28) != 0) && (*(short *)(param_1 + 0x22) == 0)) {
-    *(undefined2 *)(param_1 + 0x22) = 1;
+  if ((*(short *)(psn + 0x28) != 0) && (*(short *)(psn + 0x22) == 0)) {
+    *(undefined2 *)(psn + 0x22) = 1;
   }
-  if (loopIndex <= uVar12) {
+  if (loopIndex <= recordCount) {
     bVar1 = uVar10 != 0;
-    puVar17 = (uint *)(param_1 + loopIndex * 0x48);
-    puVar14 = (undefined1 *)((int)puVar17 + -3);
+    recordCursor = (uint *)(psn + loopIndex * 0x48);
+    puVar14 = (undefined1 *)((int)recordCursor + -3);
     loopIndex2 = 0;
     uVar15 = 100000;
     uVar16 = loopIndex;
     do {
-      uVar5 = *puVar17;
+      uVar5 = *recordCursor;
       uVar4 = uVar15;
       if (uVar5 < 5) {
         if (uVar5 < 3) {
           if (uVar5 == 2) {
             if (uVar9 == 0) {
-              *(undefined1 *)((int)puVar17 + 0x1e) = 1;
-              *(undefined1 *)((int)puVar17 + 0x1d) = 7;
-              puVar17[5] = puVar17[5] & 0xffff | 0x1b1b0000;
+              *(undefined1 *)((int)recordCursor + 0x1e) = 1;
+              *(undefined1 *)((int)recordCursor + 0x1d) = 7;
+              recordCursor[5] = recordCursor[5] & 0xffff | 0x1b1b0000;
             }
-            bVar2 = *(byte *)((int)puVar17 + 0x1f);
+            bVar2 = *(byte *)((int)recordCursor + 0x1f);
             param_7 = (uint)bVar2;
             if (param_7 != 0) {
               if ((bVar2 & 2) != 0) {
-                puVar17[5] = puVar17[5] >> 2 & 0x300000 | puVar17[5] & 0xffcfffff;
+                recordCursor[5] = recordCursor[5] >> 2 & 0x300000 | recordCursor[5] & 0xffcfffff;
               }
               if ((bVar2 & 4) != 0) {
-                puVar17[5] = puVar17[5] >> 4 & 0xc0000 | puVar17[5] & 0xfff3ffff;
+                recordCursor[5] = recordCursor[5] >> 4 & 0xc0000 | recordCursor[5] & 0xfff3ffff;
               }
               if ((bVar2 & 8) != 0) {
-                puVar17[5] = puVar17[5] >> 6 & 0x30000 | puVar17[5] & 0xfffcffff;
+                recordCursor[5] = recordCursor[5] >> 6 & 0x30000 | recordCursor[5] & 0xfffcffff;
               }
             }
             uVar4 = uVar16;
-            if (((!bVar1) && (*(char *)(puVar17 + 8) != '\0')) && (uVar15 != 100000)) {
-              iVar6 = param_1 + uVar15 * 0x48;
+            if (((!bVar1) && (*(char *)(recordCursor + 8) != '\0')) && (uVar15 != 100000)) {
+              iVar6 = psn + uVar15 * 0x48;
               *(undefined1 *)(iVar6 + 4) = 1;
               *(undefined1 *)(iVar6 + 0x1b) = 1;
-              *(undefined1 *)(puVar17 + 1) = 1;
+              *(undefined1 *)(recordCursor + 1) = 1;
             }
           }
         }
         else {
-          if (((*(char *)((int)puVar17 + 0x15) == '\0') &&
-              (param_7 = puVar17[8] & 0xff00ff, param_7 == 0)) &&
-             (loopIndex2 != *(ushort *)(param_1 + 0x12))) {
-            *puVar17 = 4;
+          if (((*(char *)((int)recordCursor + 0x15) == '\0') &&
+              (param_7 = recordCursor[8] & 0xff00ff, param_7 == 0)) &&
+             (loopIndex2 != *(ushort *)(psn + 0x12))) {
+            *recordCursor = 4;
           }
           if ((bVar1) || (uVar15 == 100000)) {
 LAB_000d1004:
             uVar4 = 100000;
           }
           else {
-            iVar6 = param_1 + uVar15 * 0x48;
+            iVar6 = psn + uVar15 * 0x48;
             *(undefined1 *)(iVar6 + 4) = 1;
             *(undefined1 *)(iVar6 + 0x1b) = 1;
-            *(undefined1 *)(puVar17 + 1) = 1;
+            *(undefined1 *)(recordCursor + 1) = 1;
             uVar4 = 100000;
           }
         }
       }
       else if (uVar5 == 5) {
         if ((!bVar1) && (uVar15 != 100000)) {
-          iVar6 = param_1 + uVar15 * 0x48;
+          iVar6 = psn + uVar15 * 0x48;
           *(undefined1 *)(iVar6 + 4) = 1;
           *(undefined1 *)(iVar6 + 0x1b) = 1;
-          *(undefined1 *)(puVar17 + 1) = 1;
+          *(undefined1 *)(recordCursor + 1) = 1;
         }
-        if ((byte)(*(byte *)((int)puVar17 + 0x12) & 0xf0) ==
-            (byte)(*(byte *)((int)puVar17 + 0x12) << 4)) goto LAB_000d1004;
+        if ((byte)(*(byte *)((int)recordCursor + 0x12) & 0xf0) ==
+            (byte)(*(byte *)((int)recordCursor + 0x12) << 4)) goto LAB_000d1004;
         if (loopIndex2 == 0) {
-          ((int (*)())FUN_000d03b4)(0,"FC ALU result test is first US instruction",param_3,param_4,param_5,
+          ((int (*)())psnReportError)(0,"FC ALU result test is first US instruction",param_3,param_4,param_5,
                        param_6,param_7,param_8);
           uVar4 = 100000;
         }
@@ -6792,27 +6792,27 @@ LAB_000d1004:
           uVar4 = 100000;
         }
         else {
-          ((int (*)())FUN_000d03b4)(0,"FC ALU result test follows non-ALU instruction",param_3,param_4,param_5,
+          ((int (*)())psnReportError)(0,"FC ALU result test follows non-ALU instruction",param_3,param_4,param_5,
                        param_6,param_7,param_8);
           uVar4 = 100000;
         }
       }
       uVar16 = uVar16 + 1;
       loopIndex2 = loopIndex2 + 1;
-      puVar17 = puVar17 + 0x12;
+      recordCursor = recordCursor + 0x12;
       puVar14 = puVar14 + 0x48;
       uVar15 = uVar4;
-    } while (uVar16 <= uVar12);
+    } while (uVar16 <= recordCount);
     if (((loopIndex2 != 0) &&
-        (iVar6 = (*(ushort *)(param_1 + 0x12) + loopIndex) * 0x48, *(int *)(param_1 + iVar6) == 3)) &&
+        (iVar6 = (*(ushort *)(psn + 0x12) + loopIndex) * 0x48, *(int *)(psn + iVar6) == 3)) &&
        (uVar10 == 0)) {
-      *(undefined1 *)(param_1 + iVar6 + 4) = 1;
+      *(undefined1 *)(psn + iVar6 + 4) = 1;
     }
   }
-  if (((uVar9 != 0) || (uVar10 != 0)) || (*(short *)(param_1 + 0x20) != 0)) {
-    param_2 = param_2 | param_2 << 4;
+  if (((uVar9 != 0) || (uVar10 != 0)) || (*(short *)(psn + 0x20) != 0)) {
+    level = level | level << 4;
   }
-  *(char *)(param_1 + 0xf) = (char)param_2;
+  *(char *)(psn + 0xf) = (char)level;
   return;
 }
 
@@ -7351,48 +7351,48 @@ int FUN_000d183c(pixelShader, dumpLabel, dumpId, argR6, argR7, argR8, argR9, arg
   
   dumpLabelSlot = dumpLabel;
   dumpIdSlot = dumpId;
-  ((int (*)())FUN_000d0b68)(pixelShader,1,dumpId,argR6,argR7,argR8,argR9,argR10);
+  ((int (*)())psnNormalizeProgram)(pixelShader,1,dumpId,argR6,argR7,argR8,argR9,argR10);
   if ((*(byte *)((int)pixelShader + 0xf) & 0x10) == 0) {
     recordCount = pixelShader[2];
     uVar19 = dumpLabelSlot;
     puVar13 = dumpIdSlot;
-    ((int (*)())FUN_000d03b4)(0,"======== Begin Loki NSF pixel shader dump: %s: %d ========\n",dumpLabelSlot,
+    ((int (*)())psnReportError)(0,"======== Begin Loki NSF pixel shader dump: %s: %d ========\n",dumpLabelSlot,
                  dumpIdSlot,argR7,argR8,argR9,argR10);
     if (*(short *)(pixelShader + 5) == 0) {
-      ((int (*)())FUN_000d03b4)(0," Shader stats not valid\n \n",uVar19,puVar13,argR7,argR8,argR9,argR10);
+      ((int (*)())psnReportError)(0," Shader stats not valid\n \n",uVar19,puVar13,argR7,argR8,argR9,argR10);
     }
     else {
       iVar31 = 0;
-      ((int (*)())FUN_000d03b4)(0," Shader stats:\n",uVar19,puVar13,argR7,argR8,argR9,argR10);
-      ((int (*)())FUN_000d03b4)(0,"     Levels:                 %2d\n",(uint)*(ushort *)((int)pixelShader + 0x16),
+      ((int (*)())psnReportError)(0," Shader stats:\n",uVar19,puVar13,argR7,argR8,argR9,argR10);
+      ((int (*)())psnReportError)(0,"     Levels:                 %2d\n",(uint)*(ushort *)((int)pixelShader + 0x16),
                    puVar13,argR7,argR8,argR9,argR10);
-      ((int (*)())FUN_000d03b4)(0,"     RS Instructions:        %2d\n",(uint)*(ushort *)(pixelShader + 6),puVar13,
+      ((int (*)())psnReportError)(0,"     RS Instructions:        %2d\n",(uint)*(ushort *)(pixelShader + 6),puVar13,
                    argR7,argR8,argR9,argR10);
-      ((int (*)())FUN_000d03b4)(0,"     TEX Instructions:      %3d\n",(uint)*(ushort *)((int)pixelShader + 0x1a),
+      ((int (*)())psnReportError)(0,"     TEX Instructions:      %3d\n",(uint)*(ushort *)((int)pixelShader + 0x1a),
                    puVar13,argR7,argR8,argR9,argR10);
-      ((int (*)())FUN_000d03b4)(0,"     ALU Instructions:      %3d\n",(uint)*(ushort *)(pixelShader + 7),puVar13,
+      ((int (*)())psnReportError)(0,"     ALU Instructions:      %3d\n",(uint)*(ushort *)(pixelShader + 7),puVar13,
                    argR7,argR8,argR9,argR10);
-      ((int (*)())FUN_000d03b4)(0,"     ALU Instruction slots: %3d\n",(uint)*(ushort *)((int)pixelShader + 0x1e),
+      ((int (*)())psnReportError)(0,"     ALU Instruction slots: %3d\n",(uint)*(ushort *)((int)pixelShader + 0x1e),
                    puVar13,argR7,argR8,argR9,argR10);
-      ((int (*)())FUN_000d03b4)(0,"     Pix Size:               %2d\n",(uint)*(ushort *)((int)pixelShader + 0x22),
+      ((int (*)())psnReportError)(0,"     Pix Size:               %2d\n",(uint)*(ushort *)((int)pixelShader + 0x22),
                    puVar13,argR7,argR8,argR9,argR10);
-      ((int (*)())FUN_000d03b4)(0,"     Highest Const:          %2d\n",(uint)*(ushort *)(pixelShader + 9),puVar13,
+      ((int (*)())psnReportError)(0,"     Highest Const:          %2d\n",(uint)*(ushort *)(pixelShader + 9),puVar13,
                    argR7,argR8,argR9,argR10);
       uVar19 = (uint)*(ushort *)((int)pixelShader + 0x26);
-      ((int (*)())FUN_000d03b4)(0,"     Nominal cycle count:    %2d\n",uVar19,puVar13,argR7,argR8,argR9,
+      ((int (*)())psnReportError)(0,"     Nominal cycle count:    %2d\n",uVar19,puVar13,argR7,argR8,argR9,
                    argR10);
-      ((int (*)())FUN_000d03b4)(0,"     Tex lookup counts:     ",uVar19,puVar13,argR7,argR8,argR9,argR10);
+      ((int (*)())psnReportError)(0,"     Tex lookup counts:     ",uVar19,puVar13,argR7,argR8,argR9,argR10);
       statByteCursor = pixelShader;
       do {
         uVar19 = (uint)*(byte *)((int)statByteCursor + 0x2a);
-        ((int (*)())FUN_000d03b4)(0," %2d",uVar19,puVar13,argR7,argR8,argR9,argR10);
+        ((int (*)())psnReportError)(0," %2d",uVar19,puVar13,argR7,argR8,argR9,argR10);
         bVar24 = iVar31 != 0xf;
         statByteCursor = (uint *)((int)statByteCursor + 1);
         iVar31 = iVar31 + 1;
       } while (bVar24);
-      ((int (*)())FUN_000d03b4)(0,"\n \n",uVar19,puVar13,argR7,argR8,argR9,argR10);
+      ((int (*)())psnReportError)(0,"\n \n",uVar19,puVar13,argR7,argR8,argR9,argR10);
     }
-    ((int (*)())FUN_000d03b4)(0," RS Instructions:\n \n",uVar19,puVar13,argR7,argR8,argR9,argR10);
+    ((int (*)())psnReportError)(0," RS Instructions:\n \n",uVar19,puVar13,argR7,argR8,argR9,argR10);
     if ((pixelShader[0x12] == 1) && (recordCount != 0)) {
       rsScanRecord = pixelShader + 0x24;
       uVar37 = 1;
@@ -7401,44 +7401,44 @@ int FUN_000d183c(pixelShader, dumpLabel, dumpId, argR6, argR7, argR8, argR9, arg
       do {
         puVar35 = rsNextRecord;
         uVar19 = uVar37 - 1;
-        ((int (*)())FUN_000d03b4)(0,"   rs %02d:",uVar19,puVar13,argR7,argR8,argR9,argR10);
+        ((int (*)())psnReportError)(0,"   rs %02d:",uVar19,puVar13,argR7,argR8,argR9,argR10);
         if (*(char *)((int)rsRecord + 0xb) == '\0') {
           if (*(char *)((int)rsRecord + 9) != '\0') {
-            ((int (*)())FUN_000d03b4)(0,"                         ",uVar19,puVar13,argR7,argR8,argR9,
+            ((int (*)())psnReportError)(0,"                         ",uVar19,puVar13,argR7,argR8,argR9,
                          argR10);
             goto LAB_000d3b80;
           }
 LAB_000d3be0:
-          ((int (*)())FUN_000d03b4)(0,"\n",uVar19,puVar13,argR7,argR8,argR9,argR10);
+          ((int (*)())psnReportError)(0,"\n",uVar19,puVar13,argR7,argR8,argR9,argR10);
         }
         else {
           uVar19 = (uint)*(ushort *)((int)rsRecord + 6);
           argR7 = (uint)*(byte *)((int)rsRecord + 10);
           puVar13 = (uint *)((*(byte *)((int)rsRecord + 0xf) & 0xf ^ 0xf) * 5 + 0x1dc279);
-          ((int (*)())FUN_000d03b4)(0,"  r%02d.%s = col%02ld",uVar19,puVar13,argR7,argR8,argR9,argR10);
+          ((int (*)())psnReportError)(0,"  r%02d.%s = col%02ld",uVar19,puVar13,argR7,argR8,argR9,argR10);
           if (*(char *)((int)rsRecord + 0xd) == '\0') {
             if (*(char *)((int)rsRecord + 0xb) == '\x02') {
-              ((int (*)())FUN_000d03b4)(0," fbuf  ",uVar19,puVar13,argR7,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0," fbuf  ",uVar19,puVar13,argR7,argR8,argR9,argR10);
             }
             else if (*(char *)((int)rsRecord + 0xb) == '\x03') {
-              ((int (*)())FUN_000d03b4)(0," back  ",uVar19,puVar13,argR7,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0," back  ",uVar19,puVar13,argR7,argR8,argR9,argR10);
             }
             else {
               if (*(char *)((int)rsRecord + 9) == '\0') goto LAB_000d3be0;
-              ((int (*)())FUN_000d03b4)(0,"       ",uVar19,puVar13,argR7,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"       ",uVar19,puVar13,argR7,argR8,argR9,argR10);
             }
           }
           else {
-            ((int (*)())FUN_000d03b4)(0," biased",uVar19,puVar13,argR7,argR8,argR9,argR10);
+            ((int (*)())psnReportError)(0," biased",uVar19,puVar13,argR7,argR8,argR9,argR10);
           }
 LAB_000d3b80:
           if (*(char *)((int)rsRecord + 9) == '\0') goto LAB_000d3be0;
           uVar19 = (uint)*(ushort *)(rsRecord + 1);
           argR7 = (uint)*(byte *)(rsRecord + 2);
           puVar13 = (uint *)((*(byte *)((int)rsRecord + 0xe) & 0xf ^ 0xf) * 5 + 0x1dc279);
-          ((int (*)())FUN_000d03b4)(0,"   r%02d.%s = txc%02ld",uVar19,puVar13,argR7,argR8,argR9,argR10);
+          ((int (*)())psnReportError)(0,"   r%02d.%s = txc%02ld",uVar19,puVar13,argR7,argR8,argR9,argR10);
           if (*(char *)(rsRecord + 3) == '\0') goto LAB_000d3be0;
-          ((int (*)())FUN_000d03b4)(0," adjusted\n",uVar19,puVar13,argR7,argR8,argR9,argR10);
+          ((int (*)())psnReportError)(0," adjusted\n",uVar19,puVar13,argR7,argR8,argR9,argR10);
         }
         uVar37 = uVar37 + 1;
         if (*rsScanRecord != 1) break;
@@ -7450,7 +7450,7 @@ LAB_000d3b80:
     else {
       uVar37 = 1;
     }
-    ((int (*)())FUN_000d03b4)(0," \n US Program:\n",uVar19,puVar13,argR7,argR8,argR9,argR10);
+    ((int (*)())psnReportError)(0," \n US Program:\n",uVar19,puVar13,argR7,argR8,argR9,argR10);
     if (uVar37 <= recordCount) {
       uVar26 = 0;
       instructionRecord = pixelShader + uVar37 * 0x12;
@@ -7476,49 +7476,49 @@ LAB_000d3b80:
             cVar9 = cVar9 + 'G';
           }
           (*(unsigned int *)((unsigned char *)&(predicateText) + 0)) = CONCAT12(cVar9,(*(unsigned short *)((unsigned char *)&(predicateText) + 1)));
-          ((int (*)())FUN_000d03b4)(0," \n   Level %s:\n",&predicateText,puVar13,uVar19,argR8,argR9,argR10);
+          ((int (*)())psnReportError)(0," \n   Level %s:\n",&predicateText,puVar13,uVar19,argR8,argR9,argR10);
           uVar26 = uVar26 + 1;
           uVar27 = *instructionRecord;
         }
         previousIsAlu = (uint)(uVar27 - 3 < 2);
         if (uVar27 == 2) {
-          ((int (*)())FUN_000d03b4)(0,"     tex %02d    :  ",texNumber,puVar13,uVar19,argR8,argR9,argR10);
+          ((int (*)())psnReportError)(0,"     tex %02d    :  ",texNumber,puVar13,uVar19,argR8,argR9,argR10);
           texSrcReg = (uint)*(ushort *)((int)instructionRecord + 0xe);
           texDestReg = (uint)*(ushort *)(instructionRecord + 3);
           texUnit = (uint)*(byte *)((int)instructionRecord + 0x19);
           if ((*(byte *)((int)instructionRecord + 0x1a) < 5) &&
              ((1 << ((int)(char)*(byte *)((int)instructionRecord + 0x1a) & 0x3fU) & 0x1aU) != 0)) {
-            ((int (*)())FUN_000d03b4)(0,"r%02d.rgba = ",texDestReg,puVar13,uVar19,argR8,argR9,argR10);
+            ((int (*)())psnReportError)(0,"r%02d.rgba = ",texDestReg,puVar13,uVar19,argR8,argR9,argR10);
           }
           texOpcode = (uint *)(uint)*(byte *)((int)instructionRecord + 0x1a);
           puVar13 = (uint *)(*(byte *)((int)instructionRecord + 0x1f) & 0xf ^ 0xf);
           if (((unsigned char *)0x4) < texOpcode) {
-            ((int (*)())FUN_000d03b4)(0,"???()\n",texDestReg,puVar13,uVar19,argR8,texOpcode,argR10);
+            ((int (*)())psnReportError)(0,"???()\n",texDestReg,puVar13,uVar19,argR8,texOpcode,argR10);
             argR9 = (char *)texOpcode;
           }
           else {
             argR9 = (char *)(0);
             switch((int)texOpcode) {
             case 0x0:
-              ((int (*)())FUN_000d03b4)(0,"NOP\n",texDestReg,puVar13,uVar19,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"NOP\n",texDestReg,puVar13,uVar19,argR8,argR9,argR10);
               break;
             case 0x1:
               puVar13 = (uint *)((int)puVar13 * 5 + 0x1dc279);
-              ((int (*)())FUN_000d03b4)(0,"lookup(r%02d.%s, tex%02d)\n",texSrcReg,puVar13,texUnit,argR8,argR9,
+              ((int (*)())psnReportError)(0,"lookup(r%02d.%s, tex%02d)\n",texSrcReg,puVar13,texUnit,argR8,argR9,
                            argR10);
               break;
             case 0x2:
               puVar13 = (uint *)((int)puVar13 * 5 + 0x1dc279);
-              ((int (*)())FUN_000d03b4)(0,"kill(r%02d.%s)\n",texSrcReg,puVar13,uVar19,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"kill(r%02d.%s)\n",texSrcReg,puVar13,uVar19,argR8,argR9,argR10);
               break;
             case 0x3:
               puVar13 = (uint *)((int)puVar13 * 5 + 0x1dc279);
-              ((int (*)())FUN_000d03b4)(0,"lookup_proj(r%02d.%s, tex%02d)\n",texSrcReg,puVar13,texUnit,argR8,
+              ((int (*)())psnReportError)(0,"lookup_proj(r%02d.%s, tex%02d)\n",texSrcReg,puVar13,texUnit,argR8,
                            argR9,argR10);
               break;
             case 0x4:
               puVar13 = (uint *)((int)puVar13 * 5 + 0x1dc279);
-              ((int (*)())FUN_000d03b4)(0,"lookup_lodbias(r%02d.%s, tex%02d)\n",texSrcReg,puVar13,texUnit,argR8,
+              ((int (*)())psnReportError)(0,"lookup_lodbias(r%02d.%s, tex%02d)\n",texSrcReg,puVar13,texUnit,argR8,
                            argR9,argR10);
             }
           }
@@ -7632,105 +7632,105 @@ LAB_000d3b80:
           puVar21 = puVar13;
           if (uVar23 != 0) {
             puVar17 = aluNumber;
-            ((int (*)())FUN_000d03b4)(0,"     alu %02d pre:  srcp.rgb = ",aluNumber,puVar13,uVar19,uVar27,uVar23,
+            ((int (*)())psnReportError)(0,"     alu %02d pre:  srcp.rgb = ",aluNumber,puVar13,uVar19,uVar27,uVar23,
                          iVar31);
             cVar9 = *(char *)(instructionRecord + 0xc);
             if (cVar9 == '\x01') {
               puVar21 = &srcpTextA;
-              ((int (*)())FUN_000d0450)(puVar21,rgbAddrA2,puVar17,puVar13,uVar19,uVar27,uVar23);
-              ((int (*)())FUN_000d0450)(&srcpTextB,puVar33,puVar17,puVar13,uVar19,uVar27,uVar23);
-              ((int (*)())FUN_000d03b4)(0,"%s.rgb-%s.rgb\n",&srcpTextB,puVar21,uVar19,uVar27,uVar23,iVar31);
+              ((int (*)())psnFormatRegister)(puVar21,rgbAddrA2,puVar17,puVar13,uVar19,uVar27,uVar23);
+              ((int (*)())psnFormatRegister)(&srcpTextB,puVar33,puVar17,puVar13,uVar19,uVar27,uVar23);
+              ((int (*)())psnReportError)(0,"%s.rgb-%s.rgb\n",&srcpTextB,puVar21,uVar19,uVar27,uVar23,iVar31);
             }
             else if (cVar9 == '\0') {
-              ((int (*)())FUN_000d0450)(&srcpTextA,rgbAddrA2,puVar17,puVar13,uVar19,uVar27,uVar23);
-              ((int (*)())FUN_000d03b4)(0,"1.0-2.0*%s.rgb\n",&srcpTextA,puVar13,uVar19,uVar27,uVar23,iVar31);
+              ((int (*)())psnFormatRegister)(&srcpTextA,rgbAddrA2,puVar17,puVar13,uVar19,uVar27,uVar23);
+              ((int (*)())psnReportError)(0,"1.0-2.0*%s.rgb\n",&srcpTextA,puVar13,uVar19,uVar27,uVar23,iVar31);
               puVar21 = puVar13;
             }
             else if (cVar9 == '\x02') {
               puVar21 = &srcpTextA;
-              ((int (*)())FUN_000d0450)(puVar21,rgbAddrA2,puVar17,puVar13,uVar19,uVar27,uVar23);
-              ((int (*)())FUN_000d0450)(&srcpTextB,puVar33,puVar17,puVar13,uVar19,uVar27,uVar23);
-              ((int (*)())FUN_000d03b4)(0,"%s.rgb+%s.rgb\n",&srcpTextB,puVar21,uVar19,uVar27,uVar23,iVar31);
+              ((int (*)())psnFormatRegister)(puVar21,rgbAddrA2,puVar17,puVar13,uVar19,uVar27,uVar23);
+              ((int (*)())psnFormatRegister)(&srcpTextB,puVar33,puVar17,puVar13,uVar19,uVar27,uVar23);
+              ((int (*)())psnReportError)(0,"%s.rgb+%s.rgb\n",&srcpTextB,puVar21,uVar19,uVar27,uVar23,iVar31);
             }
             else if (cVar9 == '\x03') {
-              ((int (*)())FUN_000d0450)(&srcpTextA,rgbAddrA2,puVar17,puVar13,uVar19,uVar27,uVar23);
-              ((int (*)())FUN_000d03b4)(0,"1.0-%s.rgb\n",&srcpTextA,puVar13,uVar19,uVar27,uVar23,iVar31);
+              ((int (*)())psnFormatRegister)(&srcpTextA,rgbAddrA2,puVar17,puVar13,uVar19,uVar27,uVar23);
+              ((int (*)())psnReportError)(0,"1.0-%s.rgb\n",&srcpTextA,puVar13,uVar19,uVar27,uVar23,iVar31);
               puVar21 = puVar13;
             }
             else {
-              ((int (*)())FUN_000d03b4)(0,"???\n",puVar17,puVar13,uVar19,uVar27,uVar23,iVar31);
+              ((int (*)())psnReportError)(0,"???\n",puVar17,puVar13,uVar19,uVar27,uVar23,iVar31);
               puVar21 = puVar13;
             }
           }
           puVar13 = puVar21;
           if (bVar24) {
             puVar17 = aluNumber;
-            ((int (*)())FUN_000d03b4)(0,"     alu %02d pre:  srcp.a   = ",aluNumber,puVar21,uVar19,uVar27,uVar23,
+            ((int (*)())psnReportError)(0,"     alu %02d pre:  srcp.a   = ",aluNumber,puVar21,uVar19,uVar27,uVar23,
                          iVar31);
             alphaPreOp = *(char *)((int)instructionRecord + 0x3f);
             if (alphaPreOp == '\x01') {
               puVar13 = &srcpTextA;
-              ((int (*)())FUN_000d0450)(puVar13,puVar35,puVar17,puVar21,uVar19,uVar27,uVar23);
-              ((int (*)())FUN_000d0450)(&srcpTextB,argR8,puVar17,puVar21,uVar19,uVar27,uVar23);
-              ((int (*)())FUN_000d03b4)(0,"%s.a-%s.a\n",&srcpTextB,puVar13,uVar19,uVar27,uVar23,iVar31);
+              ((int (*)())psnFormatRegister)(puVar13,puVar35,puVar17,puVar21,uVar19,uVar27,uVar23);
+              ((int (*)())psnFormatRegister)(&srcpTextB,argR8,puVar17,puVar21,uVar19,uVar27,uVar23);
+              ((int (*)())psnReportError)(0,"%s.a-%s.a\n",&srcpTextB,puVar13,uVar19,uVar27,uVar23,iVar31);
             }
             else if (alphaPreOp == '\0') {
-              ((int (*)())FUN_000d0450)(&srcpTextA,puVar35,puVar17,puVar21,uVar19,uVar27,uVar23);
-              ((int (*)())FUN_000d03b4)(0,"1.0-2.0*%s.a\n",&srcpTextA,puVar21,uVar19,uVar27,uVar23,iVar31);
+              ((int (*)())psnFormatRegister)(&srcpTextA,puVar35,puVar17,puVar21,uVar19,uVar27,uVar23);
+              ((int (*)())psnReportError)(0,"1.0-2.0*%s.a\n",&srcpTextA,puVar21,uVar19,uVar27,uVar23,iVar31);
               puVar13 = puVar21;
             }
             else if (alphaPreOp == '\x02') {
               puVar13 = &srcpTextA;
-              ((int (*)())FUN_000d0450)(puVar13,puVar35,puVar17,puVar21,uVar19,uVar27,uVar23);
-              ((int (*)())FUN_000d0450)(&srcpTextB,argR8,puVar17,puVar21,uVar19,uVar27,uVar23);
-              ((int (*)())FUN_000d03b4)(0,"%s.a+%s.a\n",&srcpTextB,puVar13,uVar19,uVar27,uVar23,iVar31);
+              ((int (*)())psnFormatRegister)(puVar13,puVar35,puVar17,puVar21,uVar19,uVar27,uVar23);
+              ((int (*)())psnFormatRegister)(&srcpTextB,argR8,puVar17,puVar21,uVar19,uVar27,uVar23);
+              ((int (*)())psnReportError)(0,"%s.a+%s.a\n",&srcpTextB,puVar13,uVar19,uVar27,uVar23,iVar31);
             }
             else if (alphaPreOp == '\x03') {
-              ((int (*)())FUN_000d0450)(&srcpTextA,puVar35,puVar17,puVar21,uVar19,uVar27,uVar23);
-              ((int (*)())FUN_000d03b4)(0,"1.0-%s.a\n",&srcpTextA,puVar21,uVar19,uVar27,uVar23,iVar31);
+              ((int (*)())psnFormatRegister)(&srcpTextA,puVar35,puVar17,puVar21,uVar19,uVar27,uVar23);
+              ((int (*)())psnReportError)(0,"1.0-%s.a\n",&srcpTextA,puVar21,uVar19,uVar27,uVar23,iVar31);
               puVar13 = puVar21;
             }
             else {
-              ((int (*)())FUN_000d03b4)(0,"???\n",puVar17,puVar21,uVar19,uVar27,uVar23,iVar31);
+              ((int (*)())psnReportError)(0,"???\n",puVar17,puVar21,uVar19,uVar27,uVar23,iVar31);
               puVar13 = puVar21;
             }
           }
           puVar21 = aluNumber;
-          ((int (*)())FUN_000d03b4)(0,"     alu %02d rgb:  ",aluNumber,puVar13,uVar19,uVar27,uVar23,iVar31);
+          ((int (*)())psnReportError)(0,"     alu %02d rgb:  ",aluNumber,puVar13,uVar19,uVar27,uVar23,iVar31);
           uVar18 = (uint)*(byte *)((int)instructionRecord + 0x15);
           bVar3 = *(byte *)(instructionRecord + 5);
           if (uVar18 == 0) {
-            ((int (*)())FUN_000d03b4)(0,"           ",puVar21,0,uVar19,uVar27,uVar23,iVar31);
+            ((int (*)())psnReportError)(0,"           ",puVar21,0,uVar19,uVar27,uVar23,iVar31);
           }
           else {
             puVar21 = (uint *)(uint)*(byte *)((int)instructionRecord + 0x16);
             uVar18 = uVar18 * 4 + 0x1dc239;
-            ((int (*)())FUN_000d03b4)(0,"out%d.%s = ",puVar21,uVar18,uVar19,uVar27,uVar23,iVar31);
+            ((int (*)())psnReportError)(0,"out%d.%s = ",puVar21,uVar18,uVar19,uVar27,uVar23,iVar31);
           }
           if (bVar3 == 0) {
-            ((int (*)())FUN_000d03b4)(0,"          ",puVar21,uVar18,uVar19,uVar27,uVar23,iVar31);
+            ((int (*)())psnReportError)(0,"          ",puVar21,uVar18,uVar19,uVar27,uVar23,iVar31);
           }
           else {
             puVar21 = (uint *)(uint)*(ushort *)(instructionRecord + 3);
             uVar18 = (uint)bVar3 * 4 + 0x1dc239;
-            ((int (*)())FUN_000d03b4)(0,"r%02d.%s = ",puVar21,uVar18,uVar19,uVar27,uVar23,iVar31);
+            ((int (*)())psnReportError)(0,"r%02d.%s = ",puVar21,uVar18,uVar19,uVar27,uVar23,iVar31);
           }
           if (*(char *)((int)instructionRecord + 0x33) != '\0') {
-            ((int (*)())FUN_000d03b4)(0,"clamped ",puVar21,uVar18,uVar19,uVar27,uVar23,iVar31);
+            ((int (*)())psnReportError)(0,"clamped ",puVar21,uVar18,uVar19,uVar27,uVar23,iVar31);
           }
           local_68 = operandText2;
           local_64 = operandText3;
-          ((int (*)())FUN_000d0488)(local_68,rgbAddrA2,puVar33,puVar32,puVar35,argR8,argR9,uVar30,rgbModA);
+          ((int (*)())psnFormatRgbSource)(local_68,rgbAddrA2,puVar33,puVar32,puVar35,argR8,argR9,uVar30,rgbModA);
           local_60 = operandText4;
           puVar21 = operandText5;
-          ((int (*)())FUN_000d0488)(local_64,rgbAddrA2,puVar33,puVar32,puVar35,argR8,argR9,rgbSelectB,rgbModB);
-          ((int (*)())FUN_000d0488)(local_60,rgbAddrA2,puVar33,puVar32,puVar35,argR8,argR9,uVar15,rgbModC);
+          ((int (*)())psnFormatRgbSource)(local_64,rgbAddrA2,puVar33,puVar32,puVar35,argR8,argR9,rgbSelectB,rgbModB);
+          ((int (*)())psnFormatRgbSource)(local_60,rgbAddrA2,puVar33,puVar32,puVar35,argR8,argR9,uVar15,rgbModC);
           puVar13 = operandText6;
-          ((int (*)())FUN_000d0888)(puVar21,rgbAddrA2,puVar33,puVar32,puVar35,argR8,argR9,alphaSelectA,local_bc);
+          ((int (*)())psnFormatAlphaSource)(puVar21,rgbAddrA2,puVar33,puVar32,puVar35,argR8,argR9,alphaSelectA,local_bc);
           puVar17 = operandText0;
-          ((int (*)())FUN_000d0888)(puVar13,rgbAddrA2,puVar33,puVar32,puVar35,argR8,argR9,alphaSelectB2,alphaModB);
+          ((int (*)())psnFormatAlphaSource)(puVar13,rgbAddrA2,puVar33,puVar32,puVar35,argR8,argR9,alphaSelectB2,alphaModB);
           argR10 = alphaSelectC2;
-          ((int (*)())FUN_000d0888)(puVar17,rgbAddrA2,puVar33,puVar32,puVar35,argR8,argR9,alphaSelectC2,alphaModC);
+          ((int (*)())psnFormatAlphaSource)(puVar17,rgbAddrA2,puVar33,puVar32,puVar35,argR8,argR9,alphaSelectC2,alphaModC);
           bVar3 = *local_cc;
           if (bVar3 < 0xb) {
             argR9 = (char *)(0);
@@ -7739,35 +7739,35 @@ LAB_000d3b80:
               puVar33 = local_68;
               puVar32 = local_64;
               puVar35 = local_60;
-              ((int (*)())FUN_000d03b4)(0,"mad(%s, %s, %s)",local_68,local_64,local_60,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"mad(%s, %s, %s)",local_68,local_64,local_60,argR8,argR9,argR10);
               break;
             case 1:
               puVar33 = local_68;
               puVar32 = local_64;
-              ((int (*)())FUN_000d03b4)(0,"dp3(%s, %s)",local_68,local_64,puVar35,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"dp3(%s, %s)",local_68,local_64,puVar35,argR8,argR9,argR10);
               break;
             case 2:
               puVar33 = local_68;
               puVar32 = puVar21;
               puVar35 = local_64;
               argR8 = puVar13;
-              ((int (*)())FUN_000d03b4)(0,"dp4(%s:%s, %s:%s)",local_68,puVar21,local_64,puVar13,argR9,argR10);
+              ((int (*)())psnReportError)(0,"dp4(%s:%s, %s:%s)",local_68,puVar21,local_64,puVar13,argR9,argR10);
               break;
             case 3:
               puVar33 = local_68;
               puVar32 = local_64;
               puVar35 = local_60;
-              ((int (*)())FUN_000d03b4)(0,"d2a(%s, %s, %s)",local_68,local_64,local_60,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"d2a(%s, %s, %s)",local_68,local_64,local_60,argR8,argR9,argR10);
               break;
             case 4:
               puVar33 = local_68;
               puVar32 = local_64;
-              ((int (*)())FUN_000d03b4)(0,"min(%s, %s)",local_68,local_64,puVar35,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"min(%s, %s)",local_68,local_64,puVar35,argR8,argR9,argR10);
               break;
             case 5:
               puVar33 = local_68;
               puVar32 = local_64;
-              ((int (*)())FUN_000d03b4)(0,"max(%s, %s)",local_68,local_64,puVar35,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"max(%s, %s)",local_68,local_64,puVar35,argR8,argR9,argR10);
               break;
             case 6:
               goto switchD_000d4578_caseD_6;
@@ -7775,139 +7775,139 @@ LAB_000d3b80:
               puVar33 = local_68;
               puVar32 = local_64;
               puVar35 = local_60;
-              ((int (*)())FUN_000d03b4)(0,"cnd(%s, %s, %s)",local_68,local_64,local_60,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"cnd(%s, %s, %s)",local_68,local_64,local_60,argR8,argR9,argR10);
               break;
             case 8:
               puVar33 = local_68;
               puVar32 = local_64;
               puVar35 = local_60;
-              ((int (*)())FUN_000d03b4)(0,"cmp(%s, %s, %s)",local_68,local_64,local_60,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"cmp(%s, %s, %s)",local_68,local_64,local_60,argR8,argR9,argR10);
               break;
             case 9:
               puVar33 = local_68;
-              ((int (*)())FUN_000d03b4)(0,"frc(%s)",local_68,puVar32,puVar35,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"frc(%s)",local_68,puVar32,puVar35,argR8,argR9,argR10);
               break;
             case 10:
-              ((int (*)())FUN_000d03b4)(0,"sop()",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"sop()",puVar33,puVar32,puVar35,argR8,argR9,argR10);
             }
           }
           else {
 switchD_000d4578_caseD_6:
-            ((int (*)())FUN_000d03b4)(0,"???()",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+            ((int (*)())psnReportError)(0,"???()",puVar33,puVar32,puVar35,argR8,argR9,argR10);
           }
           bVar3 = *(byte *)((int)instructionRecord + 0x32);
           if (bVar3 < 7) {
             argR9 = (char *)(0);
             switch(bVar3) {
             case 0:
-              ((int (*)())FUN_000d03b4)(0,"\n",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"\n",puVar33,puVar32,puVar35,argR8,argR9,argR10);
               break;
             case 1:
-              ((int (*)())FUN_000d03b4)(0,"*2\n",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"*2\n",puVar33,puVar32,puVar35,argR8,argR9,argR10);
               break;
             case 2:
-              ((int (*)())FUN_000d03b4)(0,"*4\n",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"*4\n",puVar33,puVar32,puVar35,argR8,argR9,argR10);
               break;
             case 3:
-              ((int (*)())FUN_000d03b4)(0,"*8\n",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"*8\n",puVar33,puVar32,puVar35,argR8,argR9,argR10);
               break;
             case 4:
-              ((int (*)())FUN_000d03b4)(0,"/2\n",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"/2\n",puVar33,puVar32,puVar35,argR8,argR9,argR10);
               break;
             case 5:
-              ((int (*)())FUN_000d03b4)(0,"/4\n",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"/4\n",puVar33,puVar32,puVar35,argR8,argR9,argR10);
               break;
             case 6:
-              ((int (*)())FUN_000d03b4)(0,"/8\n",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"/8\n",puVar33,puVar32,puVar35,argR8,argR9,argR10);
             }
           }
           else {
-            ((int (*)())FUN_000d03b4)(0,"*???\n",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+            ((int (*)())psnReportError)(0,"*???\n",puVar33,puVar32,puVar35,argR8,argR9,argR10);
           }
           puVar33 = aluNumber;
-          ((int (*)())FUN_000d03b4)(0,"          alpha:  ",aluNumber,puVar32,puVar35,argR8,argR9,argR10);
+          ((int (*)())psnReportError)(0,"          alpha:  ",aluNumber,puVar32,puVar35,argR8,argR9,argR10);
           alphaTempEnable = *(char *)(instructionRecord + 8);
           bVar24 = *(char *)((int)instructionRecord + 0x21) != '\0';
           depthWrite = *(char *)((int)instructionRecord + 0x23);
           if (bVar24) {
             puVar33 = (uint *)(uint)*(byte *)((int)instructionRecord + 0x22);
-            ((int (*)())FUN_000d03b4)(0,"out%d.a   = ",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+            ((int (*)())psnReportError)(0,"out%d.a   = ",puVar33,puVar32,puVar35,argR8,argR9,argR10);
           }
           bVar2 = depthWrite != '\0';
           if (bVar2) {
-            ((int (*)())FUN_000d03b4)(0,"depth    = ",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+            ((int (*)())psnReportError)(0,"depth    = ",puVar33,puVar32,puVar35,argR8,argR9,argR10);
           }
           if ((!bVar24) && (!bVar2)) {
-            ((int (*)())FUN_000d03b4)(0,"           ",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+            ((int (*)())psnReportError)(0,"           ",puVar33,puVar32,puVar35,argR8,argR9,argR10);
           }
           if (alphaTempEnable == '\0') {
-            ((int (*)())FUN_000d03b4)(0,"          ",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+            ((int (*)())psnReportError)(0,"          ",puVar33,puVar32,puVar35,argR8,argR9,argR10);
           }
           else {
             puVar33 = (uint *)(uint)*(ushort *)(instructionRecord + 6);
-            ((int (*)())FUN_000d03b4)(0,"r%02d.a   = ",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+            ((int (*)())psnReportError)(0,"r%02d.a   = ",puVar33,puVar32,puVar35,argR8,argR9,argR10);
           }
           if (*(char *)((int)instructionRecord + 0x42) != '\0') {
-            ((int (*)())FUN_000d03b4)(0,"clamped ",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+            ((int (*)())psnReportError)(0,"clamped ",puVar33,puVar32,puVar35,argR8,argR9,argR10);
           }
           bVar3 = *(byte *)local_c8;
           if (bVar3 < 0xc) {
             argR9 = (char *)(0);
             switch(bVar3) {
             case 0:
-              ((int (*)())FUN_000d03b4)(0,"mad(%s, %s, %s)",puVar21,puVar13,puVar17,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"mad(%s, %s, %s)",puVar21,puVar13,puVar17,argR8,argR9,argR10);
               break;
             case 1:
-              ((int (*)())FUN_000d03b4)(0,"dp()",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"dp()",puVar33,puVar32,puVar35,argR8,argR9,argR10);
               puVar21 = puVar33;
               puVar13 = puVar32;
               puVar17 = puVar35;
               break;
             case 2:
-              ((int (*)())FUN_000d03b4)(0,"min(%s, %s)",puVar21,puVar13,puVar35,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"min(%s, %s)",puVar21,puVar13,puVar35,argR8,argR9,argR10);
               puVar17 = puVar35;
               break;
             case 3:
-              ((int (*)())FUN_000d03b4)(0,"max(%s, %s)",puVar21,puVar13,puVar35,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"max(%s, %s)",puVar21,puVar13,puVar35,argR8,argR9,argR10);
               puVar17 = puVar35;
               break;
             case 4:
               goto switchD_000d489c_caseD_4;
             case 5:
-              ((int (*)())FUN_000d03b4)(0,"cnd(%s, %s, %s)",puVar21,puVar13,puVar17,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"cnd(%s, %s, %s)",puVar21,puVar13,puVar17,argR8,argR9,argR10);
               break;
             case 6:
-              ((int (*)())FUN_000d03b4)(0,"cmp(%s, %s, %s)",puVar21,puVar13,puVar17,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"cmp(%s, %s, %s)",puVar21,puVar13,puVar17,argR8,argR9,argR10);
               break;
             case 7:
-              ((int (*)())FUN_000d03b4)(0,"frc(%s)",puVar21,puVar32,puVar35,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"frc(%s)",puVar21,puVar32,puVar35,argR8,argR9,argR10);
               puVar13 = puVar32;
               puVar17 = puVar35;
               break;
             case 8:
-              ((int (*)())FUN_000d03b4)(0,"ex2(%s)",puVar21,puVar32,puVar35,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"ex2(%s)",puVar21,puVar32,puVar35,argR8,argR9,argR10);
               puVar13 = puVar32;
               puVar17 = puVar35;
               break;
             case 9:
-              ((int (*)())FUN_000d03b4)(0,"ln2(%s)",puVar21,puVar32,puVar35,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"ln2(%s)",puVar21,puVar32,puVar35,argR8,argR9,argR10);
               puVar13 = puVar32;
               puVar17 = puVar35;
               break;
             case 10:
-              ((int (*)())FUN_000d03b4)(0,"rcp(%s)",puVar21,puVar32,puVar35,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"rcp(%s)",puVar21,puVar32,puVar35,argR8,argR9,argR10);
               puVar13 = puVar32;
               puVar17 = puVar35;
               break;
             case 0xb:
-              ((int (*)())FUN_000d03b4)(0,"rsq(%s)",puVar21,puVar32,puVar35,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"rsq(%s)",puVar21,puVar32,puVar35,argR8,argR9,argR10);
               puVar13 = puVar32;
               puVar17 = puVar35;
             }
           }
           else {
 switchD_000d489c_caseD_4:
-            ((int (*)())FUN_000d03b4)(0,"???()",puVar33,puVar32,puVar35,argR8,argR9,argR10);
+            ((int (*)())psnReportError)(0,"???()",puVar33,puVar32,puVar35,argR8,argR9,argR10);
             puVar21 = puVar33;
             puVar13 = puVar32;
             puVar17 = puVar35;
@@ -7917,32 +7917,32 @@ switchD_000d489c_caseD_4:
             argR9 = (char *)(0);
             switch(bVar3) {
             case 0:
-              ((int (*)())FUN_000d03b4)(0,"\n",puVar21,puVar13,puVar17,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"\n",puVar21,puVar13,puVar17,argR8,argR9,argR10);
               break;
             case 1:
-              ((int (*)())FUN_000d03b4)(0,"*2\n",puVar21,puVar13,puVar17,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"*2\n",puVar21,puVar13,puVar17,argR8,argR9,argR10);
               break;
             case 2:
-              ((int (*)())FUN_000d03b4)(0,"*4\n",puVar21,puVar13,puVar17,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"*4\n",puVar21,puVar13,puVar17,argR8,argR9,argR10);
               break;
             case 3:
-              ((int (*)())FUN_000d03b4)(0,"*8\n",puVar21,puVar13,puVar17,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"*8\n",puVar21,puVar13,puVar17,argR8,argR9,argR10);
               break;
             case 4:
-              ((int (*)())FUN_000d03b4)(0,"/2\n",puVar21,puVar13,puVar17,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"/2\n",puVar21,puVar13,puVar17,argR8,argR9,argR10);
               break;
             case 5:
-              ((int (*)())FUN_000d03b4)(0,"/4\n",puVar21,puVar13,puVar17,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"/4\n",puVar21,puVar13,puVar17,argR8,argR9,argR10);
               break;
             case 6:
-              ((int (*)())FUN_000d03b4)(0,"/8\n",puVar21,puVar13,puVar17,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"/8\n",puVar21,puVar13,puVar17,argR8,argR9,argR10);
             }
           }
           else {
-            ((int (*)())FUN_000d03b4)(0,"*???\n",puVar21,puVar13,puVar17,argR8,argR9,argR10);
+            ((int (*)())psnReportError)(0,"*???\n",puVar21,puVar13,puVar17,argR8,argR9,argR10);
           }
           if (*(char *)(instructionRecord + 0xd) != '\0') {
-            ((int (*)())FUN_000d03b4)(0,"     alu %02d post-NOP\n",aluNumber,puVar13,puVar17,argR8,argR9,
+            ((int (*)())psnReportError)(0,"     alu %02d post-NOP\n",aluNumber,puVar13,puVar17,argR8,argR9,
                          argR10);
           }
           aluNumber = (uint *)((int)aluNumber + 1);
@@ -7954,12 +7954,12 @@ switchD_000d489c_caseD_4:
       } while (uVar37 <= recordCount);
     }
     uVar26 = 0;
-    ((int (*)())FUN_000d03b4)(0,"======== End   Loki NSF pixel shader dump: %s: %d ========\n",dumpLabelSlot,
+    ((int (*)())psnReportError)(0,"======== End   Loki NSF pixel shader dump: %s: %d ========\n",dumpLabelSlot,
                  dumpIdSlot,argR7,argR8,argR9,argR10);
     uVar37 = pixelShader[2];
     uVar19 = dumpLabelSlot;
     puVar13 = dumpIdSlot;
-    ((int (*)())FUN_000d03b4)(0,"+++ BEGIN_PSN                       # \"%s\" %d\n",dumpLabelSlot,
+    ((int (*)())psnReportError)(0,"+++ BEGIN_PSN                       # \"%s\" %d\n",dumpLabelSlot,
                  dumpIdSlot,argR7,argR8,argR9,argR10);
     do {
       uVar27 = *pixelShader;
@@ -7972,7 +7972,7 @@ switchD_000d489c_caseD_4:
           argR8 = (uint *)(uint)*(byte *)((int)pixelShader + 0xd);
           argR9 = (char *)(uint)*(ushort *)(pixelShader + 5);
           argR10 = (byte *)(uint)*(ushort *)((int)pixelShader + 0x16);
-          ((int (*)())FUN_000d03b4)(0,
+          ((int (*)())psnReportError)(0,
                        "+++ R300PSN_INST_HEADER : %08x %08x %02x %02x %04x %04x %04x %04x %04x %04x %04x\n"
                        ,uVar19,puVar13,argR7,argR8,argR9,argR10);
           break;
@@ -7983,7 +7983,7 @@ switchD_000d489c_caseD_4:
           argR8 = (uint *)(uint)*(byte *)((int)pixelShader + 9);
           argR9 = (char *)(uint)*(byte *)((int)pixelShader + 10);
           argR10 = (byte *)(uint)*(byte *)((int)pixelShader + 0xb);
-          ((int (*)())FUN_000d03b4)(0,
+          ((int (*)())psnReportError)(0,
                        "+++ R300PSN_INST_RS     : %04x %04x %02x %02x %02x %02x %02x %02x %02x %02x\n"
                        ,uVar19,puVar13,argR7,argR8,argR9,argR10);
           break;
@@ -7994,21 +7994,21 @@ switchD_000d489c_caseD_4:
           argR8 = (uint *)(uint)*(byte *)((int)pixelShader + 0x1a);
           argR9 = (char *)(uint)*(byte *)((int)pixelShader + 0x1f);
           argR10 = (byte *)(uint)*(byte *)(pixelShader + 8);
-          ((int (*)())FUN_000d03b4)(0,"+++ R300PSN_INST_TEX    : %04x %04x %02x %02x %02x %02x\n",uVar19,puVar13,
+          ((int (*)())psnReportError)(0,"+++ R300PSN_INST_TEX    : %04x %04x %02x %02x %02x %02x\n",uVar19,puVar13,
                        argR7,argR8,argR9,argR10);
           break;
         default:
-          ((int (*)())FUN_000d03b4)(0,"+++ R300PSN_INST_ALU    : \n",uVar19,puVar13,argR7,argR8,
+          ((int (*)())psnReportError)(0,"+++ R300PSN_INST_ALU    : \n",uVar19,puVar13,argR7,argR8,
                        0,argR10);
-          ((int (*)())FUN_000d03b4)(0,"+++ RGB_ADDR            : %04x %04x %04x %04x %02x %02x %02x\n",
+          ((int (*)())psnReportError)(0,"+++ RGB_ADDR            : %04x %04x %04x %04x %02x %02x %02x\n",
                        (uint)*(ushort *)(pixelShader + 3),(uint)*(ushort *)((int)pixelShader + 0xe),
                        (uint)*(ushort *)(pixelShader + 4),(uint)*(ushort *)((int)pixelShader + 0x12),
                        (uint)*(byte *)(pixelShader + 5),(uint)*(byte *)((int)pixelShader + 0x15));
-          ((int (*)())FUN_000d03b4)(0,"+++ ALPHA_ADDR          : %04x %04x %04x %04x %02x %02x %02x %02x\n",
+          ((int (*)())psnReportError)(0,"+++ ALPHA_ADDR          : %04x %04x %04x %04x %02x %02x %02x %02x\n",
                        (uint)*(ushort *)(pixelShader + 6),(uint)*(ushort *)((int)pixelShader + 0x1a),
                        (uint)*(ushort *)(pixelShader + 7),(uint)*(ushort *)((int)pixelShader + 0x1e),
                        (uint)*(byte *)(pixelShader + 8),(uint)*(byte *)((int)pixelShader + 0x21));
-          ((int (*)())FUN_000d03b4)(0,
+          ((int (*)())psnReportError)(0,
                        "+++ RGB_INST            : %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x\n"
                        ,(uint)*(byte *)((int)pixelShader + 0x2a),(uint)*(byte *)((int)pixelShader + 0x2d),
                        (uint)*(byte *)((int)pixelShader + 0x2b),(uint)*(byte *)((int)pixelShader + 0x2e),
@@ -8019,7 +8019,7 @@ switchD_000d489c_caseD_4:
           argR8 = (uint *)(uint)*(byte *)((int)pixelShader + 0x3d);
           argR9 = (char *)(uint)*(byte *)((int)pixelShader + 0x3b);
           argR10 = (byte *)(uint)*(byte *)((int)pixelShader + 0x3e);
-          ((int (*)())FUN_000d03b4)(0,
+          ((int (*)())psnReportError)(0,
                        "+++ ALPHA_INST          : %02x %02x %02x %02x %02x %02x %02x %02x %02x %02x\n"
                        ,uVar19,puVar13,argR7,argR8,argR9,argR10);
         }
@@ -8027,46 +8027,46 @@ switchD_000d489c_caseD_4:
       uVar26 = uVar26 + 1;
       pixelShader = pixelShader + 0x12;
     } while (uVar26 <= uVar37);
-    ((int (*)())FUN_000d03b4)(0,"+++ END_PSN                         # \"%s\" %d\n",dumpLabelSlot,
+    ((int (*)())psnReportError)(0,"+++ END_PSN                         # \"%s\" %d\n",dumpLabelSlot,
                  dumpIdSlot,argR7,argR8,argR9,argR10);
   }
   else {
     uVar19 = pixelShader[2];
     puVar13 = dumpIdSlot;
     recordCount2 = uVar19;
-    ((int (*)())FUN_000d03b4)(0,"======== Begin r520 neutral format pixel shader: %d =============\n",
+    ((int (*)())psnReportError)(0,"======== Begin r520 neutral format pixel shader: %d =============\n",
                  dumpIdSlot,argR6,uVar19,argR8,argR9,argR10);
     if (*(short *)(pixelShader + 5) == 0) {
-      ((int (*)())FUN_000d03b4)(0," Shader stats not valid\n \n",puVar13,argR6,uVar19,argR8,argR9,argR10);
+      ((int (*)())psnReportError)(0," Shader stats not valid\n \n",puVar13,argR6,uVar19,argR8,argR9,argR10);
     }
     else {
-      ((int (*)())FUN_000d03b4)(0," Shader stats:\n",puVar13,argR6,uVar19,argR8,argR9,argR10);
-      ((int (*)())FUN_000d03b4)(0,"     RS Instructions:        %2d\n",(uint)*(ushort *)(pixelShader + 6),argR6,
+      ((int (*)())psnReportError)(0," Shader stats:\n",puVar13,argR6,uVar19,argR8,argR9,argR10);
+      ((int (*)())psnReportError)(0,"     RS Instructions:        %2d\n",(uint)*(ushort *)(pixelShader + 6),argR6,
                    uVar19,argR8,argR9,argR10);
-      ((int (*)())FUN_000d03b4)(0,"     TEX Instructions:      %3d\n",(uint)*(ushort *)((int)pixelShader + 0x1a),
+      ((int (*)())psnReportError)(0,"     TEX Instructions:      %3d\n",(uint)*(ushort *)((int)pixelShader + 0x1a),
                    argR6,uVar19,argR8,argR9,argR10);
-      ((int (*)())FUN_000d03b4)(0,"     ALU Instructions:      %3d\n",(uint)*(ushort *)(pixelShader + 7),argR6,
+      ((int (*)())psnReportError)(0,"     ALU Instructions:      %3d\n",(uint)*(ushort *)(pixelShader + 7),argR6,
                    uVar19,argR8,argR9,argR10);
-      ((int (*)())FUN_000d03b4)(0,"     ALU Instruction slots: %3d\n",(uint)*(ushort *)((int)pixelShader + 0x1e),
+      ((int (*)())psnReportError)(0,"     ALU Instruction slots: %3d\n",(uint)*(ushort *)((int)pixelShader + 0x1e),
                    argR6,uVar19,argR8,argR9,argR10);
       if (*(byte *)((int)pixelShader + 0xe) != 0) {
-        ((int (*)())FUN_000d03b4)(0,"     UMRT_EN:               %3d\n",(uint)*(byte *)((int)pixelShader + 0xe),
+        ((int (*)())psnReportError)(0,"     UMRT_EN:               %3d\n",(uint)*(byte *)((int)pixelShader + 0xe),
                      argR6,uVar19,argR8,argR9,argR10);
       }
-      ((int (*)())FUN_000d03b4)(0,"     CF Instructions:       %3d\n",(uint)*(ushort *)(pixelShader + 8),argR6,
+      ((int (*)())psnReportError)(0,"     CF Instructions:       %3d\n",(uint)*(ushort *)(pixelShader + 8),argR6,
                    uVar19,argR8,argR9,argR10);
-      ((int (*)())FUN_000d03b4)(0,"     Pix Size:               %2d\n",(uint)*(ushort *)((int)pixelShader + 0x22),
+      ((int (*)())psnReportError)(0,"     Pix Size:               %2d\n",(uint)*(ushort *)((int)pixelShader + 0x22),
                    argR6,uVar19,argR8,argR9,argR10);
-      ((int (*)())FUN_000d03b4)(0,"     Highest Const:          %2d\n",(uint)*(ushort *)(pixelShader + 9),argR6,
+      ((int (*)())psnReportError)(0,"     Highest Const:          %2d\n",(uint)*(ushort *)(pixelShader + 9),argR6,
                    uVar19,argR8,argR9,argR10);
-      ((int (*)())FUN_000d03b4)(0,"     Start Addr:            %3d\n",(uint)*(ushort *)(pixelShader + 4),argR6,
+      ((int (*)())psnReportError)(0,"     Start Addr:            %3d\n",(uint)*(ushort *)(pixelShader + 4),argR6,
                    uVar19,argR8,argR9,argR10);
       puVar13 = (uint *)(uint)*(ushort *)((int)pixelShader + 0x12);
-      ((int (*)())FUN_000d03b4)(0,"     End Addr:              %3d\n",puVar13,argR6,uVar19,argR8,argR9,
+      ((int (*)())psnReportError)(0,"     End Addr:              %3d\n",puVar13,argR6,uVar19,argR8,argR9,
                    argR10);
-      ((int (*)())FUN_000d03b4)(0," \n",puVar13,argR6,uVar19,argR8,argR9,argR10);
+      ((int (*)())psnReportError)(0," \n",puVar13,argR6,uVar19,argR8,argR9,argR10);
     }
-    ((int (*)())FUN_000d03b4)(0," RS Instructions:\n \n",puVar13,argR6,uVar19,argR8,argR9,argR10);
+    ((int (*)())psnReportError)(0," RS Instructions:\n \n",puVar13,argR6,uVar19,argR8,argR9,argR10);
     if ((pixelShader[0x12] == 1) && (0 < (int)recordCount2)) {
       rsScanRecord2 = pixelShader + 0x24;
       iVar31 = 1;
@@ -8075,16 +8075,16 @@ switchD_000d489c_caseD_4:
       do {
         puVar35 = rsNextRecord2;
         puVar13 = (uint *)(iVar31 + -1);
-        ((int (*)())FUN_000d03b4)(0,"   rs %02d:",puVar13,argR6,uVar19,argR8,argR9,argR10);
+        ((int (*)())psnReportError)(0,"   rs %02d:",puVar13,argR6,uVar19,argR8,argR9,argR10);
         cVar9 = *(char *)((int)rsRecord2 + 0xb);
         if (cVar9 == '\0') {
           if (*(char *)((int)rsRecord2 + 9) != '\0') {
-            ((int (*)())FUN_000d03b4)(0,"                         ",puVar13,argR6,uVar19,argR8,argR9,
+            ((int (*)())psnReportError)(0,"                         ",puVar13,argR6,uVar19,argR8,argR9,
                          argR10);
             goto LAB_000d1afc;
           }
 LAB_000d1b5c:
-          ((int (*)())FUN_000d03b4)(0,"\n",puVar13,argR6,uVar19,argR8,argR9,argR10);
+          ((int (*)())psnReportError)(0,"\n",puVar13,argR6,uVar19,argR8,argR9,argR10);
         }
         else {
           uVar37 = *(byte *)((int)rsRecord2 + 0xf) & 0xf ^ 0xf;
@@ -8092,37 +8092,37 @@ LAB_000d1b5c:
             puVar13 = (uint *)(uint)*(ushort *)((int)rsRecord2 + 6);
             uVar19 = (uint)*(byte *)((int)rsRecord2 + 10);
             argR6 = (char *)(uVar37 * 5 + 0x1dc279);
-            ((int (*)())FUN_000d03b4)(0,"  r%02d.%s = col%02ld",puVar13,argR6,uVar19,argR8,argR9,argR10);
+            ((int (*)())psnReportError)(0,"  r%02d.%s = col%02ld",puVar13,argR6,uVar19,argR8,argR9,argR10);
             if (*(char *)((int)rsRecord2 + 0xd) == '\0') {
               cVar9 = *(char *)((int)rsRecord2 + 0xb);
             }
             else {
-              ((int (*)())FUN_000d03b4)(0," biased",puVar13,argR6,uVar19,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0," biased",puVar13,argR6,uVar19,argR8,argR9,argR10);
               cVar9 = *(char *)((int)rsRecord2 + 0xb);
             }
           }
           if (cVar9 == '\x02') {
             puVar13 = (uint *)(uint)*(ushort *)((int)rsRecord2 + 6);
             argR6 = (char *)(uVar37 * 5 + 0x1dc279);
-            ((int (*)())FUN_000d03b4)(0,"  r%02d.%s = fbuf",puVar13,argR6,uVar19,argR8,argR9,argR10);
+            ((int (*)())psnReportError)(0,"  r%02d.%s = fbuf",puVar13,argR6,uVar19,argR8,argR9,argR10);
           }
           else if (cVar9 == '\x03') {
             puVar13 = (uint *)(uint)*(ushort *)((int)rsRecord2 + 6);
             argR6 = (char *)(uVar37 * 5 + 0x1dc279);
-            ((int (*)())FUN_000d03b4)(0,"  r%02d.%s = back",puVar13,argR6,uVar19,argR8,argR9,argR10);
+            ((int (*)())psnReportError)(0,"  r%02d.%s = back",puVar13,argR6,uVar19,argR8,argR9,argR10);
           }
           else {
             if (*(char *)((int)rsRecord2 + 9) == '\0') goto LAB_000d1b5c;
-            ((int (*)())FUN_000d03b4)(0,"       ",puVar13,argR6,uVar19,argR8,argR9,argR10);
+            ((int (*)())psnReportError)(0,"       ",puVar13,argR6,uVar19,argR8,argR9,argR10);
           }
 LAB_000d1afc:
           if (*(char *)((int)rsRecord2 + 9) == '\0') goto LAB_000d1b5c;
           puVar13 = (uint *)(uint)*(ushort *)(rsRecord2 + 1);
           uVar19 = (uint)*(byte *)(rsRecord2 + 2);
           argR6 = (char *)((*(byte *)((int)rsRecord2 + 0xe) & 0xf ^ 0xf) * 5 + 0x1dc279);
-          ((int (*)())FUN_000d03b4)(0,"   r%02d.%s = txc%02ld",puVar13,argR6,uVar19,argR8,argR9,argR10);
+          ((int (*)())psnReportError)(0,"   r%02d.%s = txc%02ld",puVar13,argR6,uVar19,argR8,argR9,argR10);
           if (*(char *)(rsRecord2 + 3) == '\0') goto LAB_000d1b5c;
-          ((int (*)())FUN_000d03b4)(0," adjusted\n",puVar13,argR6,uVar19,argR8,argR9,argR10);
+          ((int (*)())psnReportError)(0," adjusted\n",puVar13,argR6,uVar19,argR8,argR9,argR10);
         }
         iVar31 = iVar31 + 1;
         if (*rsScanRecord2 != 1) break;
@@ -8135,8 +8135,8 @@ LAB_000d1afc:
       iVar31 = 1;
     }
     local_5c = 0x1a1848;
-    ((int (*)())FUN_000d03b4)(0," \n US Program:\n",puVar13,argR6,uVar19,argR8,argR9,argR10);
-    ((int (*)())FUN_000d03b4)(0,local_5c + 0x5b00,puVar13,argR6,uVar19,argR8,argR9,argR10);
+    ((int (*)())psnReportError)(0," \n US Program:\n",puVar13,argR6,uVar19,argR8,argR9,argR10);
+    ((int (*)())psnReportError)(0,local_5c + 0x5b00,puVar13,argR6,uVar19,argR8,argR9,argR10);
     if (iVar31 <= (int)recordCount2) {
       local_78 = 0;
       instructionRecord2 = pixelShader + iVar31 * 0x12;
@@ -8196,7 +8196,7 @@ LAB_000d1afc:
         }
         uVar37 = *instructionRecord2;
         if (uVar37 == 2) {
-          ((int (*)())FUN_000d03b4)(0,"  %d tex %02d    :  ",instructionNumber,texIndex,uVar19,argR8,argR9,argR10);
+          ((int (*)())psnReportError)(0,"  %d tex %02d    :  ",instructionNumber,texIndex,uVar19,argR8,argR9,argR10);
           bVar3 = *(byte *)((int)instructionRecord2 + 0x1d);
           texSrcReg2 = *(ushort *)((int)instructionRecord2 + 0xe);
           puVar13 = (uint *)(uint)texSrcReg2;
@@ -8235,7 +8235,7 @@ LAB_000d1afc:
           FUN_001a32d0(writeMaskText,"%s%s%s%s",pcVar14,pcVar16,pcVar20,pcVar22,uVar19,argR10);
           if ((*(byte *)((int)instructionRecord2 + 0x1a) < 7) &&
              ((1 << ((int)(char)*(byte *)((int)instructionRecord2 + 0x1a) & 0x3fU) & 0x7aU) != 0)) {
-            ((int (*)())FUN_000d03b4)(0,"r%02d.%s = ",(uint)texDestReg2,writeMaskText,pcVar20,pcVar22,uVar19,argR10);
+            ((int (*)())psnReportError)(0,"r%02d.%s = ",(uint)texDestReg2,writeMaskText,pcVar20,pcVar22,uVar19,argR10);
           }
           if (*(byte *)((int)instructionRecord2 + 0x1a) == 2) {
             bVar3 = *(byte *)((int)instructionRecord2 + 0x15);
@@ -8315,12 +8315,12 @@ LAB_000d1afc:
             argR9 = (char *)(0);
             switch(bVar3) {
             case 0:
-              ((int (*)())FUN_000d03b4)(0,"NOP\n",puVar13,argR6,pcVar14,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"NOP\n",puVar13,argR6,pcVar14,argR8,argR9,argR10);
               break;
             case 1:
               argR8 = &semWaitText;
               argR9 = (char *)&semGrabText;
-              ((int (*)())FUN_000d03b4)(0,"lookup(%s.%s, tex%02d)%s%s%s%s",puVar35,puVar32,texUnit2,argR8,
+              ((int (*)())psnReportError)(0,"lookup(%s.%s, tex%02d)%s%s%s%s",puVar35,puVar32,texUnit2,argR8,
                            argR9,&aluWaitText);
               puVar13 = puVar35;
               argR6 = (char *)puVar32;
@@ -8330,14 +8330,14 @@ LAB_000d1afc:
               pcVar14 = (char *)&semWaitText;
               argR8 = &semGrabText;
               argR9 = (char *)&aluWaitText;
-              ((int (*)())FUN_000d03b4)(0,"kill(%s.%s)%s%s%s",puVar35,puVar32,pcVar14,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"kill(%s.%s)%s%s%s",puVar35,puVar32,pcVar14,argR8,argR9,argR10);
               puVar13 = puVar35;
               argR6 = (char *)puVar32;
               break;
             case 3:
               argR8 = &semWaitText;
               argR9 = (char *)&semGrabText;
-              ((int (*)())FUN_000d03b4)(0,"lookup_proj(%s.%s, tex%02d)%s%s%s%s",puVar35,puVar32,texUnit2,argR8,
+              ((int (*)())psnReportError)(0,"lookup_proj(%s.%s, tex%02d)%s%s%s%s",puVar35,puVar32,texUnit2,argR8,
                            argR9,&aluWaitText);
               puVar13 = puVar35;
               argR6 = (char *)puVar32;
@@ -8346,7 +8346,7 @@ LAB_000d1afc:
             case 4:
               argR8 = &semWaitText;
               argR9 = (char *)&semGrabText;
-              ((int (*)())FUN_000d03b4)(0,"lookup_lodbias(%s.%s, tex%02d)%s%s%s%s",puVar35,puVar32,texUnit2,
+              ((int (*)())psnReportError)(0,"lookup_lodbias(%s.%s, tex%02d)%s%s%s%s",puVar35,puVar32,texUnit2,
                            argR8,argR9,&aluWaitText);
               puVar13 = puVar35;
               argR6 = (char *)puVar32;
@@ -8355,7 +8355,7 @@ LAB_000d1afc:
             case 5:
               argR8 = &semWaitText;
               argR9 = (char *)&semGrabText;
-              ((int (*)())FUN_000d03b4)(0,"lookup_lod(%s.%s, tex%02d)%s%s%s%s",puVar35,puVar32,texUnit2,argR8,
+              ((int (*)())psnReportError)(0,"lookup_lod(%s.%s, tex%02d)%s%s%s%s",puVar35,puVar32,texUnit2,argR8,
                            argR9,&aluWaitText);
               puVar13 = puVar35;
               argR6 = (char *)puVar32;
@@ -8401,7 +8401,7 @@ LAB_000d1afc:
               FUN_001a32d0(operandText0,"%s%s%s%s",pcVar22,pcVar16,pbVar25,pcVar20,uVar19,argR10);
               argR9 = (char *)(uint)*(ushort *)((int)instructionRecord2 + 0x12);
               in_stack_fffffd2c = &semWaitText;
-              ((int (*)())FUN_000d03b4)(0,"lookup_dxdy(%s.%s, r%02d.%s, r%02d.%s,  tex%02d)%s%s%s%s",puVar35,
+              ((int (*)())psnReportError)(0,"lookup_dxdy(%s.%s, r%02d.%s, r%02d.%s,  tex%02d)%s%s%s%s",puVar35,
                            puVar32,pcVar14,argR8,argR9,operandText0);
               puVar13 = puVar35;
               argR6 = (char *)puVar32;
@@ -8409,7 +8409,7 @@ LAB_000d1afc:
             case 7:
               argR8 = &semWaitText;
               argR9 = (char *)&semGrabText;
-              ((int (*)())FUN_000d03b4)(0,"lookup_uncached(%s.%s, tex%02d)%s%s%s%s",puVar35,puVar32,texUnit2,
+              ((int (*)())psnReportError)(0,"lookup_uncached(%s.%s, tex%02d)%s%s%s%s",puVar35,puVar32,texUnit2,
                            argR8,argR9,&aluWaitText);
               puVar13 = puVar35;
               argR6 = (char *)puVar32;
@@ -8421,7 +8421,7 @@ LAB_000d1afc:
             argR6 = (char *)&semGrabText;
             pcVar14 = (char *)&aluWaitText;
             argR8 = &ignUncText;
-            ((int (*)())FUN_000d03b4)(0,"UNKNOWN_OP%s%s%s%s",puVar13,argR6,pcVar14,argR8,argR9,argR10);
+            ((int (*)())psnReportError)(0,"UNKNOWN_OP%s%s%s%s",puVar13,argR6,pcVar14,argR8,argR9,argR10);
           }
           pbVar25 = (byte *)((int)instructionRecord2 + 5);
           if (*(char *)((int)instructionRecord2 + 5) != '\0') {
@@ -8438,23 +8438,23 @@ LAB_000d1afc:
               switch(bVar3) {
               case 1:
                 puVar13 = &predicateText;
-                ((int (*)())FUN_000d03b4)(0," %s.rgb",puVar13,argR6,pcVar14,argR8,argR9,pbVar25);
+                ((int (*)())psnReportError)(0," %s.rgb",puVar13,argR6,pcVar14,argR8,argR9,pbVar25);
                 break;
               case 2:
                 puVar13 = &predicateText;
-                ((int (*)())FUN_000d03b4)(0," %s.rrr",puVar13,argR6,pcVar14,argR8,argR9,pbVar25);
+                ((int (*)())psnReportError)(0," %s.rrr",puVar13,argR6,pcVar14,argR8,argR9,pbVar25);
                 break;
               case 3:
                 puVar13 = &predicateText;
-                ((int (*)())FUN_000d03b4)(0," %s.ggg",puVar13,argR6,pcVar14,argR8,argR9,pbVar25);
+                ((int (*)())psnReportError)(0," %s.ggg",puVar13,argR6,pcVar14,argR8,argR9,pbVar25);
                 break;
               case 4:
                 puVar13 = &predicateText;
-                ((int (*)())FUN_000d03b4)(0," %s.bbb",puVar13,argR6,pcVar14,argR8,argR9,pbVar25);
+                ((int (*)())psnReportError)(0," %s.bbb",puVar13,argR6,pcVar14,argR8,argR9,pbVar25);
                 break;
               case 5:
                 puVar13 = &predicateText;
-                ((int (*)())FUN_000d03b4)(0," %s.aaa",puVar13,argR6,pcVar14,argR8,argR9,pbVar25);
+                ((int (*)())psnReportError)(0," %s.aaa",puVar13,argR6,pcVar14,argR8,argR9,pbVar25);
               }
             }
           }
@@ -8475,26 +8475,26 @@ LAB_000d1afc:
                 break;
               default:
                 puVar13 = &predicateText;
-                ((int (*)())FUN_000d03b4)(0," %s.a",puVar13,argR6,pcVar14,argR8,argR9,argR10);
+                ((int (*)())psnReportError)(0," %s.a",puVar13,argR6,pcVar14,argR8,argR9,argR10);
                 break;
               case 2:
                 puVar13 = &predicateText;
-                ((int (*)())FUN_000d03b4)(0," %s.r",puVar13,argR6,pcVar14,argR8,argR9,argR10);
+                ((int (*)())psnReportError)(0," %s.r",puVar13,argR6,pcVar14,argR8,argR9,argR10);
                 break;
               case 3:
                 puVar13 = &predicateText;
-                ((int (*)())FUN_000d03b4)(0," %s.g",puVar13,argR6,pcVar14,argR8,argR9,argR10);
+                ((int (*)())psnReportError)(0," %s.g",puVar13,argR6,pcVar14,argR8,argR9,argR10);
                 break;
               case 4:
                 puVar13 = &predicateText;
-                ((int (*)())FUN_000d03b4)(0," %s.b",puVar13,argR6,pcVar14,argR8,argR9,argR10);
+                ((int (*)())psnReportError)(0," %s.b",puVar13,argR6,pcVar14,argR8,argR9,argR10);
               }
             }
           }
           if (*(char *)((int)instructionRecord2 + 9) != '\0') {
-            ((int (*)())FUN_000d03b4)(0," write_inactive",puVar13,argR6,pcVar14,argR8,argR9,argR10);
+            ((int (*)())psnReportError)(0," write_inactive",puVar13,argR6,pcVar14,argR8,argR9,argR10);
           }
-          ((int (*)())FUN_000d03b4)(0,"\n",puVar13,argR6,pcVar14,argR8,argR9,argR10);
+          ((int (*)())psnReportError)(0,"\n",puVar13,argR6,pcVar14,argR8,argR9,argR10);
           uVar37 = *instructionRecord2;
           texIndex = texIndex + 1;
         }
@@ -8689,105 +8689,105 @@ LAB_000d270c:
           if (bVar1) {
             iVar10 = instructionNumber;
             puVar17 = aluIndex;
-            dVar42 = (double)((int (*)())FUN_000d03b4)(0,"  %d alu %02d pre:  srcp.rgb = ",instructionNumber,aluIndex,
+            dVar42 = (double)((int (*)())psnReportError)(0,"  %d alu %02d pre:  srcp.rgb = ",instructionNumber,aluIndex,
                                           puVar21,alphaSelectC,uVar37,alphaSelectB);
             cVar9 = *(char *)(instructionRecord2 + 0xc);
             if (cVar9 == '\x01') {
               dVar42 = (double)((double (*)())FUN_000d10dc)(&srcpTextB,rgbAddrA,iVar10,puVar17,puVar21,alphaSelectC,uVar37,
                                             alphaSelectB,dVar42);
               ((double (*)())FUN_000d10dc)(&srcpTextA,rgbAddrB,iVar10,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB,dVar42);
-              ((int (*)())FUN_000d03b4)(0,"%s.rgb-%s.rgb\n",&srcpTextA,&srcpTextB,puVar21,alphaSelectC,uVar37,alphaSelectB);
+              ((int (*)())psnReportError)(0,"%s.rgb-%s.rgb\n",&srcpTextA,&srcpTextB,puVar21,alphaSelectC,uVar37,alphaSelectB);
             }
             else if (cVar9 == '\0') {
               ((double (*)())FUN_000d10dc)(&srcpTextB,rgbAddrA,iVar10,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB,dVar42);
-              ((int (*)())FUN_000d03b4)(0,"1.0-2.0*%s.rgb\n",&srcpTextB,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
+              ((int (*)())psnReportError)(0,"1.0-2.0*%s.rgb\n",&srcpTextB,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
             }
             else if (cVar9 == '\x02') {
               dVar42 = (double)((double (*)())FUN_000d10dc)(&srcpTextB,rgbAddrA,iVar10,puVar17,puVar21,alphaSelectC,uVar37,
                                             alphaSelectB,dVar42);
               ((double (*)())FUN_000d10dc)(&srcpTextA,rgbAddrB,iVar10,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB,dVar42);
-              ((int (*)())FUN_000d03b4)(0,"%s.rgb+%s.rgb\n",&srcpTextA,&srcpTextB,puVar21,alphaSelectC,uVar37,alphaSelectB);
+              ((int (*)())psnReportError)(0,"%s.rgb+%s.rgb\n",&srcpTextA,&srcpTextB,puVar21,alphaSelectC,uVar37,alphaSelectB);
             }
             else if (cVar9 == '\x03') {
               ((double (*)())FUN_000d10dc)(&srcpTextB,rgbAddrA,iVar10,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB,dVar42);
-              ((int (*)())FUN_000d03b4)(0,"1.0-%s.rgb\n",&srcpTextB,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
+              ((int (*)())psnReportError)(0,"1.0-%s.rgb\n",&srcpTextB,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
             }
             else {
-              ((int (*)())FUN_000d03b4)(0,"???\n",iVar10,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
+              ((int (*)())psnReportError)(0,"???\n",iVar10,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
             }
           }
           if (bVar24) {
             iVar10 = instructionNumber;
             puVar17 = aluIndex;
-            dVar42 = (double)((int (*)())FUN_000d03b4)(0,"  %d alu %02d pre:  srcp.a   = ",instructionNumber,aluIndex,
+            dVar42 = (double)((int (*)())psnReportError)(0,"  %d alu %02d pre:  srcp.a   = ",instructionNumber,aluIndex,
                                           puVar21,alphaSelectC,uVar37,alphaSelectB);
             alphaPreOp = *(char *)((int)instructionRecord2 + 0x3f);
             if (alphaPreOp == '\x01') {
               dVar42 = (double)((double (*)())FUN_000d10dc)(&srcpTextB,alphaAddrA,iVar10,puVar17,puVar21,alphaSelectC,uVar37,
                                             alphaSelectB,dVar42);
               ((double (*)())FUN_000d10dc)(&srcpTextA,argR8,iVar10,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB,dVar42);
-              ((int (*)())FUN_000d03b4)(0,"%s.a-%s.a\n",&srcpTextA,&srcpTextB,puVar21,alphaSelectC,uVar37,alphaSelectB);
+              ((int (*)())psnReportError)(0,"%s.a-%s.a\n",&srcpTextA,&srcpTextB,puVar21,alphaSelectC,uVar37,alphaSelectB);
             }
             else if (alphaPreOp == '\0') {
               ((double (*)())FUN_000d10dc)(&srcpTextB,alphaAddrA,iVar10,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB,dVar42);
-              ((int (*)())FUN_000d03b4)(0,"1.0-2.0*%s.a\n",&srcpTextB,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
+              ((int (*)())psnReportError)(0,"1.0-2.0*%s.a\n",&srcpTextB,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
             }
             else if (alphaPreOp == '\x02') {
               dVar42 = (double)((double (*)())FUN_000d10dc)(&srcpTextB,alphaAddrA,iVar10,puVar17,puVar21,alphaSelectC,uVar37,
                                             alphaSelectB,dVar42);
               ((double (*)())FUN_000d10dc)(&srcpTextA,argR8,iVar10,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB,dVar42);
-              ((int (*)())FUN_000d03b4)(0,"%s.a+%s.a\n",&srcpTextA,&srcpTextB,puVar21,alphaSelectC,uVar37,alphaSelectB);
+              ((int (*)())psnReportError)(0,"%s.a+%s.a\n",&srcpTextA,&srcpTextB,puVar21,alphaSelectC,uVar37,alphaSelectB);
             }
             else if (alphaPreOp == '\x03') {
               ((double (*)())FUN_000d10dc)(&srcpTextB,alphaAddrA,iVar10,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB,dVar42);
-              ((int (*)())FUN_000d03b4)(0,"1.0-%s.a\n",&srcpTextB,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
+              ((int (*)())psnReportError)(0,"1.0-%s.a\n",&srcpTextB,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
             }
             else {
-              ((int (*)())FUN_000d03b4)(0,"???\n",iVar10,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
+              ((int (*)())psnReportError)(0,"???\n",iVar10,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
             }
           }
           puVar17 = aluIndex;
-          ((int (*)())FUN_000d03b4)(0,"  %d alu %02d rgb:  ",instructionNumber,aluIndex,puVar21,alphaSelectC,uVar37,alphaSelectB);
+          ((int (*)())psnReportError)(0,"  %d alu %02d rgb:  ",instructionNumber,aluIndex,puVar21,alphaSelectC,uVar37,alphaSelectB);
           uVar15 = (uint)*(byte *)((int)instructionRecord2 + 0x15);
           bVar3 = *(byte *)(instructionRecord2 + 5);
           if (uVar15 == 0) {
 LAB_000d2b24:
-            ((int (*)())FUN_000d03b4)(0,"           ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
+            ((int (*)())psnReportError)(0,"           ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
           }
           else if (*instructionRecord2 == 3) {
             iVar10 = uVar15 * 4;
             uVar15 = (uint)*(byte *)((int)instructionRecord2 + 0x16);
             puVar17 = (uint *)(iVar10 + 0x1dc239);
-            ((int (*)())FUN_000d03b4)(0,"out%d.%s = ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
+            ((int (*)())psnReportError)(0,"out%d.%s = ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
           }
           else {
             if (*instructionRecord2 != 4) goto LAB_000d2b24;
             uVar15 = uVar15 * 4 + 0x1dc239;
-            ((int (*)())FUN_000d03b4)(0,"pred.%s = ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
+            ((int (*)())psnReportError)(0,"pred.%s = ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
             rgbOutIndex = *(char *)((int)instructionRecord2 + 0x16);
             if (rgbOutIndex == '\x01') {
-              ((int (*)())FUN_000d03b4)(0,"(<) ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
+              ((int (*)())psnReportError)(0,"(<) ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
             }
             else if (rgbOutIndex == '\0') {
-              ((int (*)())FUN_000d03b4)(0,"(==) ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
+              ((int (*)())psnReportError)(0,"(==) ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
             }
             else if (rgbOutIndex == '\x02') {
-              ((int (*)())FUN_000d03b4)(0,"(>=) ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
+              ((int (*)())psnReportError)(0,"(>=) ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
             }
             else if (rgbOutIndex == '\x03') {
-              ((int (*)())FUN_000d03b4)(0,"(!=) ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
+              ((int (*)())psnReportError)(0,"(!=) ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
             }
           }
           if (bVar3 == 0) {
-            ((int (*)())FUN_000d03b4)(0,"          ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
+            ((int (*)())psnReportError)(0,"          ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
           }
           else {
             uVar15 = (uint)*(ushort *)(instructionRecord2 + 3);
             puVar17 = (uint *)((uint)bVar3 * 4 + 0x1dc239);
-            ((int (*)())FUN_000d03b4)(0,"r%02d.%s = ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
+            ((int (*)())psnReportError)(0,"r%02d.%s = ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
           }
           if (*(char *)((int)instructionRecord2 + 0x33) != '\0') {
-            ((int (*)())FUN_000d03b4)(0,"clamped ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
+            ((int (*)())psnReportError)(0,"clamped ",uVar15,puVar17,puVar21,alphaSelectC,uVar37,alphaSelectB);
           }
           puVar21 = operandText1;
           uVar11 = CONCAT22(uVar43,rgbAuxA);
@@ -8816,61 +8816,61 @@ LAB_000d2b24:
             argR9 = (char *)(0);
             switch(bVar3) {
             case 0:
-              ((int (*)())FUN_000d03b4)(0,"mad(%s, %s, %s)",puVar21,argR6,puVar17,argR8,argR9,uVar19);
+              ((int (*)())psnReportError)(0,"mad(%s, %s, %s)",puVar21,argR6,puVar17,argR8,argR9,uVar19);
               break;
             case 1:
-              ((int (*)())FUN_000d03b4)(0,"dp3(%s, %s)",puVar21,argR6,alphaAddrA,argR8,argR9,uVar19);
+              ((int (*)())psnReportError)(0,"dp3(%s, %s)",puVar21,argR6,alphaAddrA,argR8,argR9,uVar19);
               puVar17 = alphaAddrA;
               break;
             case 2:
               puVar13 = local_60;
               puVar17 = (uint *)argR6;
               argR8 = local_64;
-              ((int (*)())FUN_000d03b4)(0,"dp4(%s:%s, %s:%s)",puVar21,local_60,argR6,local_64,argR9,uVar19);
+              ((int (*)())psnReportError)(0,"dp4(%s:%s, %s:%s)",puVar21,local_60,argR6,local_64,argR9,uVar19);
               argR6 = (char *)puVar13;
               break;
             case 3:
-              ((int (*)())FUN_000d03b4)(0,"d2a(%s, %s, %s)",puVar21,argR6,puVar17,argR8,argR9,uVar19);
+              ((int (*)())psnReportError)(0,"d2a(%s, %s, %s)",puVar21,argR6,puVar17,argR8,argR9,uVar19);
               break;
             case 4:
-              ((int (*)())FUN_000d03b4)(0,"min(%s, %s)",puVar21,argR6,alphaAddrA,argR8,argR9,uVar19);
+              ((int (*)())psnReportError)(0,"min(%s, %s)",puVar21,argR6,alphaAddrA,argR8,argR9,uVar19);
               puVar17 = alphaAddrA;
               break;
             case 5:
-              ((int (*)())FUN_000d03b4)(0,"max(%s, %s)",puVar21,argR6,alphaAddrA,argR8,argR9,uVar19);
+              ((int (*)())psnReportError)(0,"max(%s, %s)",puVar21,argR6,alphaAddrA,argR8,argR9,uVar19);
               puVar17 = alphaAddrA;
               break;
             case 6:
               goto switchD_000d2d30_caseD_6;
             case 7:
-              ((int (*)())FUN_000d03b4)(0,"cnd(%s, %s, %s)",puVar21,argR6,puVar17,argR8,argR9,uVar19);
+              ((int (*)())psnReportError)(0,"cnd(%s, %s, %s)",puVar21,argR6,puVar17,argR8,argR9,uVar19);
               break;
             case 8:
-              ((int (*)())FUN_000d03b4)(0,"cmp(%s, %s, %s)",puVar21,argR6,puVar17,argR8,argR9,uVar19);
+              ((int (*)())psnReportError)(0,"cmp(%s, %s, %s)",puVar21,argR6,puVar17,argR8,argR9,uVar19);
               break;
             case 9:
-              ((int (*)())FUN_000d03b4)(0,"frc(%s)",puVar21,rgbAddrC,alphaAddrA,argR8,argR9,uVar19);
+              ((int (*)())psnReportError)(0,"frc(%s)",puVar21,rgbAddrC,alphaAddrA,argR8,argR9,uVar19);
               argR6 = (char *)rgbAddrC;
               puVar17 = alphaAddrA;
               break;
             case 10:
-              ((int (*)())FUN_000d03b4)(0,"sop()",rgbAddrB,rgbAddrC,alphaAddrA,argR8,argR9,uVar19);
+              ((int (*)())psnReportError)(0,"sop()",rgbAddrB,rgbAddrC,alphaAddrA,argR8,argR9,uVar19);
               puVar21 = rgbAddrB;
               argR6 = (char *)rgbAddrC;
               puVar17 = alphaAddrA;
               break;
             case 0xb:
-              ((int (*)())FUN_000d03b4)(0,"mdh(%s, %s)",puVar21,argR6,alphaAddrA,argR8,argR9,uVar19);
+              ((int (*)())psnReportError)(0,"mdh(%s, %s)",puVar21,argR6,alphaAddrA,argR8,argR9,uVar19);
               puVar17 = alphaAddrA;
               break;
             case 0xc:
-              ((int (*)())FUN_000d03b4)(0,"mdv(%s, %s)",puVar21,argR6,alphaAddrA,argR8,argR9,uVar19);
+              ((int (*)())psnReportError)(0,"mdv(%s, %s)",puVar21,argR6,alphaAddrA,argR8,argR9,uVar19);
               puVar17 = alphaAddrA;
             }
           }
           else {
 switchD_000d2d30_caseD_6:
-            ((int (*)())FUN_000d03b4)(0,"???()",rgbAddrB,rgbAddrC,alphaAddrA,argR8,argR9,uVar19);
+            ((int (*)())psnReportError)(0,"???()",rgbAddrB,rgbAddrC,alphaAddrA,argR8,argR9,uVar19);
             puVar21 = rgbAddrB;
             argR6 = (char *)rgbAddrC;
             puVar17 = alphaAddrA;
@@ -8880,31 +8880,31 @@ switchD_000d2d30_caseD_6:
             argR9 = (char *)(0);
             switch(bVar3) {
             case 1:
-              ((int (*)())FUN_000d03b4)(0,"*2",puVar21,argR6,puVar17,argR8,argR9,uVar19);
+              ((int (*)())psnReportError)(0,"*2",puVar21,argR6,puVar17,argR8,argR9,uVar19);
               break;
             case 2:
-              ((int (*)())FUN_000d03b4)(0,"*4",puVar21,argR6,puVar17,argR8,argR9,uVar19);
+              ((int (*)())psnReportError)(0,"*4",puVar21,argR6,puVar17,argR8,argR9,uVar19);
               break;
             case 3:
-              ((int (*)())FUN_000d03b4)(0,"*8",puVar21,argR6,puVar17,argR8,argR9,uVar19);
+              ((int (*)())psnReportError)(0,"*8",puVar21,argR6,puVar17,argR8,argR9,uVar19);
               break;
             case 4:
-              ((int (*)())FUN_000d03b4)(0,"/2",puVar21,argR6,puVar17,argR8,argR9,uVar19);
+              ((int (*)())psnReportError)(0,"/2",puVar21,argR6,puVar17,argR8,argR9,uVar19);
               break;
             case 5:
-              ((int (*)())FUN_000d03b4)(0,"/4",puVar21,argR6,puVar17,argR8,argR9,uVar19);
+              ((int (*)())psnReportError)(0,"/4",puVar21,argR6,puVar17,argR8,argR9,uVar19);
               break;
             case 6:
-              ((int (*)())FUN_000d03b4)(0,"/8",puVar21,argR6,puVar17,argR8,argR9,uVar19);
+              ((int (*)())psnReportError)(0,"/8",puVar21,argR6,puVar17,argR8,argR9,uVar19);
             }
           }
           else {
-            ((int (*)())FUN_000d03b4)(0,"*???",puVar21,argR6,puVar17,argR8,argR9,uVar19);
+            ((int (*)())psnReportError)(0,"*???",puVar21,argR6,puVar17,argR8,argR9,uVar19);
           }
           if (((*(unsigned char *)((unsigned char *)&(semWaitText) + 0)) != '\0') || ((*(unsigned char *)((unsigned char *)&(aluWaitText) + 0)) != '\0')) {
             puVar21 = &semWaitText;
             argR6 = (char *)&aluWaitText;
-            ((int (*)())FUN_000d03b4)(0,"%s%s",puVar21,argR6,puVar17,argR8,argR9,uVar19);
+            ((int (*)())psnReportError)(0,"%s%s",puVar21,argR6,puVar17,argR8,argR9,uVar19);
           }
           argR10 = (byte *)((int)instructionRecord2 + 5);
           if (*(char *)((int)instructionRecord2 + 5) != '\0') {
@@ -8921,70 +8921,70 @@ switchD_000d2d30_caseD_6:
               switch(bVar3) {
               case 1:
                 puVar21 = &predicateText;
-                ((int (*)())FUN_000d03b4)(0," %s.rgb",puVar21,argR6,puVar17,argR8,argR9,argR10);
+                ((int (*)())psnReportError)(0," %s.rgb",puVar21,argR6,puVar17,argR8,argR9,argR10);
                 break;
               case 2:
                 puVar21 = &predicateText;
-                ((int (*)())FUN_000d03b4)(0," %s.rrr",puVar21,argR6,puVar17,argR8,argR9,argR10);
+                ((int (*)())psnReportError)(0," %s.rrr",puVar21,argR6,puVar17,argR8,argR9,argR10);
                 break;
               case 3:
                 puVar21 = &predicateText;
-                ((int (*)())FUN_000d03b4)(0," %s.ggg",puVar21,argR6,puVar17,argR8,argR9,argR10);
+                ((int (*)())psnReportError)(0," %s.ggg",puVar21,argR6,puVar17,argR8,argR9,argR10);
                 break;
               case 4:
                 puVar21 = &predicateText;
-                ((int (*)())FUN_000d03b4)(0," %s.bbb",puVar21,argR6,puVar17,argR8,argR9,argR10);
+                ((int (*)())psnReportError)(0," %s.bbb",puVar21,argR6,puVar17,argR8,argR9,argR10);
                 break;
               case 5:
                 puVar21 = &predicateText;
-                ((int (*)())FUN_000d03b4)(0," %s.aaa",puVar21,argR6,puVar17,argR8,argR9,argR10);
+                ((int (*)())psnReportError)(0," %s.aaa",puVar21,argR6,puVar17,argR8,argR9,argR10);
               }
             }
           }
-          ((int (*)())FUN_000d03b4)(0,"\n",puVar21,argR6,puVar17,argR8,argR9,argR10);
+          ((int (*)())psnReportError)(0,"\n",puVar21,argR6,puVar17,argR8,argR9,argR10);
           puVar13 = aluIndex;
-          ((int (*)())FUN_000d03b4)(0,"         alpha:  ",aluIndex,argR6,puVar17,argR8,argR9,argR10);
+          ((int (*)())psnReportError)(0,"         alpha:  ",aluIndex,argR6,puVar17,argR8,argR9,argR10);
           alphaTempEnable = *(char *)(instructionRecord2 + 8);
           bVar24 = *(char *)((int)instructionRecord2 + 0x21) != '\0';
           depthWrite = *(char *)((int)instructionRecord2 + 0x23);
           if (bVar24) {
             if (*instructionRecord2 == 3) {
               puVar13 = (uint *)(uint)*(byte *)((int)instructionRecord2 + 0x22);
-              ((int (*)())FUN_000d03b4)(0,"out%d.a   = ",puVar13,argR6,puVar17,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"out%d.a   = ",puVar13,argR6,puVar17,argR8,argR9,argR10);
             }
             else if (*instructionRecord2 == 4) {
-              ((int (*)())FUN_000d03b4)(0,"pred.a   = ",puVar13,argR6,puVar17,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"pred.a   = ",puVar13,argR6,puVar17,argR8,argR9,argR10);
               alphaOutIndex = *(char *)((int)instructionRecord2 + 0x22);
               if (alphaOutIndex == '\x01') {
-                ((int (*)())FUN_000d03b4)(0,"(<) ",puVar13,argR6,puVar17,argR8,argR9,argR10);
+                ((int (*)())psnReportError)(0,"(<) ",puVar13,argR6,puVar17,argR8,argR9,argR10);
               }
               else if (alphaOutIndex == '\0') {
-                ((int (*)())FUN_000d03b4)(0,"(==) ",puVar13,argR6,puVar17,argR8,argR9,argR10);
+                ((int (*)())psnReportError)(0,"(==) ",puVar13,argR6,puVar17,argR8,argR9,argR10);
               }
               else if (alphaOutIndex == '\x02') {
-                ((int (*)())FUN_000d03b4)(0,"(>=) ",puVar13,argR6,puVar17,argR8,argR9,argR10);
+                ((int (*)())psnReportError)(0,"(>=) ",puVar13,argR6,puVar17,argR8,argR9,argR10);
               }
               else if (alphaOutIndex == '\x03') {
-                ((int (*)())FUN_000d03b4)(0,"(!=) ",puVar13,argR6,puVar17,argR8,argR9,argR10);
+                ((int (*)())psnReportError)(0,"(!=) ",puVar13,argR6,puVar17,argR8,argR9,argR10);
               }
             }
           }
           bVar2 = depthWrite != '\0';
           if (bVar2) {
-            ((int (*)())FUN_000d03b4)(0,"depth    = ",puVar13,argR6,puVar17,argR8,argR9,argR10);
+            ((int (*)())psnReportError)(0,"depth    = ",puVar13,argR6,puVar17,argR8,argR9,argR10);
           }
           if ((!bVar24) && (!bVar2)) {
-            ((int (*)())FUN_000d03b4)(0,"           ",puVar13,argR6,puVar17,argR8,argR9,argR10);
+            ((int (*)())psnReportError)(0,"           ",puVar13,argR6,puVar17,argR8,argR9,argR10);
           }
           if (alphaTempEnable == '\0') {
-            ((int (*)())FUN_000d03b4)(0,"          ",puVar13,argR6,puVar17,argR8,argR9,argR10);
+            ((int (*)())psnReportError)(0,"          ",puVar13,argR6,puVar17,argR8,argR9,argR10);
           }
           else {
             puVar13 = (uint *)(uint)*(ushort *)(instructionRecord2 + 6);
-            ((int (*)())FUN_000d03b4)(0,"r%02d.a   = ",puVar13,argR6,puVar17,argR8,argR9,argR10);
+            ((int (*)())psnReportError)(0,"r%02d.a   = ",puVar13,argR6,puVar17,argR8,argR9,argR10);
           }
           if (*(char *)((int)instructionRecord2 + 0x42) != '\0') {
-            ((int (*)())FUN_000d03b4)(0,"clamped ",puVar13,argR6,puVar17,argR8,argR9,argR10);
+            ((int (*)())psnReportError)(0,"clamped ",puVar13,argR6,puVar17,argR8,argR9,argR10);
           }
           bVar3 = *(byte *)puVar33;
           if (bVar3 < 0x10) {
@@ -8994,20 +8994,20 @@ switchD_000d2d30_caseD_6:
               puVar13 = local_60;
               argR6 = (char *)local_64;
               puVar17 = local_68;
-              ((int (*)())FUN_000d03b4)(0,"mad(%s, %s, %s)",local_60,local_64,local_68,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"mad(%s, %s, %s)",local_60,local_64,local_68,argR8,argR9,argR10);
               break;
             case 1:
-              ((int (*)())FUN_000d03b4)(0,"dp()",puVar13,argR6,puVar17,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"dp()",puVar13,argR6,puVar17,argR8,argR9,argR10);
               break;
             case 2:
               puVar13 = local_60;
               argR6 = (char *)local_64;
-              ((int (*)())FUN_000d03b4)(0,"min(%s, %s)",local_60,local_64,puVar17,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"min(%s, %s)",local_60,local_64,puVar17,argR8,argR9,argR10);
               break;
             case 3:
               puVar13 = local_60;
               argR6 = (char *)local_64;
-              ((int (*)())FUN_000d03b4)(0,"max(%s, %s)",local_60,local_64,puVar17,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"max(%s, %s)",local_60,local_64,puVar17,argR8,argR9,argR10);
               break;
             case 4:
               goto switchD_000d324c_caseD_4;
@@ -9015,85 +9015,85 @@ switchD_000d2d30_caseD_6:
               puVar13 = local_60;
               argR6 = (char *)local_64;
               puVar17 = local_68;
-              ((int (*)())FUN_000d03b4)(0,"cnd(%s, %s, %s)",local_60,local_64,local_68,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"cnd(%s, %s, %s)",local_60,local_64,local_68,argR8,argR9,argR10);
               break;
             case 6:
               puVar13 = local_60;
               argR6 = (char *)local_64;
               puVar17 = local_68;
-              ((int (*)())FUN_000d03b4)(0,"cmp(%s, %s, %s)",local_60,local_64,local_68,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"cmp(%s, %s, %s)",local_60,local_64,local_68,argR8,argR9,argR10);
               break;
             case 7:
               puVar13 = local_60;
-              ((int (*)())FUN_000d03b4)(0,"frc(%s)",local_60,argR6,puVar17,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"frc(%s)",local_60,argR6,puVar17,argR8,argR9,argR10);
               break;
             case 8:
               puVar13 = local_60;
-              ((int (*)())FUN_000d03b4)(0,"ex2(%s)",local_60,argR6,puVar17,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"ex2(%s)",local_60,argR6,puVar17,argR8,argR9,argR10);
               break;
             case 9:
               puVar13 = local_60;
-              ((int (*)())FUN_000d03b4)(0,"ln2(%s)",local_60,argR6,puVar17,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"ln2(%s)",local_60,argR6,puVar17,argR8,argR9,argR10);
               break;
             case 10:
               puVar13 = local_60;
-              ((int (*)())FUN_000d03b4)(0,"rcp(%s)",local_60,argR6,puVar17,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"rcp(%s)",local_60,argR6,puVar17,argR8,argR9,argR10);
               break;
             case 0xb:
               puVar13 = local_60;
-              ((int (*)())FUN_000d03b4)(0,"rsq(%s)",local_60,argR6,puVar17,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"rsq(%s)",local_60,argR6,puVar17,argR8,argR9,argR10);
               break;
             case 0xc:
               puVar13 = local_60;
-              ((int (*)())FUN_000d03b4)(0,"sin(%s)",local_60,argR6,puVar17,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"sin(%s)",local_60,argR6,puVar17,argR8,argR9,argR10);
               break;
             case 0xd:
               puVar13 = local_60;
-              ((int (*)())FUN_000d03b4)(0,"cos(%s)",local_60,argR6,puVar17,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"cos(%s)",local_60,argR6,puVar17,argR8,argR9,argR10);
               break;
             case 0xe:
               puVar13 = local_60;
               argR6 = (char *)local_64;
-              ((int (*)())FUN_000d03b4)(0,"mdh(%s, %s)",local_60,local_64,puVar17,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"mdh(%s, %s)",local_60,local_64,puVar17,argR8,argR9,argR10);
               break;
             case 0xf:
               puVar13 = local_60;
               argR6 = (char *)local_64;
-              ((int (*)())FUN_000d03b4)(0,"mdv(%s, %s)",local_60,local_64,puVar17,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"mdv(%s, %s)",local_60,local_64,puVar17,argR8,argR9,argR10);
             }
           }
           else {
 switchD_000d324c_caseD_4:
-            ((int (*)())FUN_000d03b4)(0,"???()",puVar13,argR6,puVar17,argR8,argR9,argR10);
+            ((int (*)())psnReportError)(0,"???()",puVar13,argR6,puVar17,argR8,argR9,argR10);
           }
           bVar3 = *(byte *)((int)instructionRecord2 + 0x41);
           if (bVar3 < 7) {
             argR9 = (char *)(0);
             switch(bVar3) {
             case 0:
-              ((int (*)())FUN_000d03b4)(0," ",puVar13,argR6,puVar17,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0," ",puVar13,argR6,puVar17,argR8,argR9,argR10);
               break;
             case 1:
-              ((int (*)())FUN_000d03b4)(0,"*2",puVar13,argR6,puVar17,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"*2",puVar13,argR6,puVar17,argR8,argR9,argR10);
               break;
             case 2:
-              ((int (*)())FUN_000d03b4)(0,"*4",puVar13,argR6,puVar17,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"*4",puVar13,argR6,puVar17,argR8,argR9,argR10);
               break;
             case 3:
-              ((int (*)())FUN_000d03b4)(0,"*8",puVar13,argR6,puVar17,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"*8",puVar13,argR6,puVar17,argR8,argR9,argR10);
               break;
             case 4:
-              ((int (*)())FUN_000d03b4)(0,"/2",puVar13,argR6,puVar17,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"/2",puVar13,argR6,puVar17,argR8,argR9,argR10);
               break;
             case 5:
-              ((int (*)())FUN_000d03b4)(0,"/4",puVar13,argR6,puVar17,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"/4",puVar13,argR6,puVar17,argR8,argR9,argR10);
               break;
             case 6:
-              ((int (*)())FUN_000d03b4)(0,"/8",puVar13,argR6,puVar17,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0,"/8",puVar13,argR6,puVar17,argR8,argR9,argR10);
             }
           }
           else {
-            ((int (*)())FUN_000d03b4)(0,"*???",puVar13,argR6,puVar17,argR8,argR9,argR10);
+            ((int (*)())psnReportError)(0,"*???",puVar13,argR6,puVar17,argR8,argR9,argR10);
           }
           if (*(char *)((int)instructionRecord2 + 10) == '\0') {
             argR10 = (byte *)((int)instructionRecord2 + 7);
@@ -9113,33 +9113,33 @@ switchD_000d324c_caseD_4:
                   break;
                 default:
                   puVar13 = &predicateText;
-                  ((int (*)())FUN_000d03b4)(0," %s.a",puVar13,argR6,puVar17,argR8,argR9,argR10);
+                  ((int (*)())psnReportError)(0," %s.a",puVar13,argR6,puVar17,argR8,argR9,argR10);
                   break;
                 case 2:
                   puVar13 = &predicateText;
-                  ((int (*)())FUN_000d03b4)(0," %s.r",puVar13,argR6,puVar17,argR8,argR9,argR10);
+                  ((int (*)())psnReportError)(0," %s.r",puVar13,argR6,puVar17,argR8,argR9,argR10);
                   break;
                 case 3:
                   puVar13 = &predicateText;
-                  ((int (*)())FUN_000d03b4)(0," %s.g",puVar13,argR6,puVar17,argR8,argR9,argR10);
+                  ((int (*)())psnReportError)(0," %s.g",puVar13,argR6,puVar17,argR8,argR9,argR10);
                   break;
                 case 4:
                   puVar13 = &predicateText;
-                  ((int (*)())FUN_000d03b4)(0," %s.b",puVar13,argR6,puVar17,argR8,argR9,argR10);
+                  ((int (*)())psnReportError)(0," %s.b",puVar13,argR6,puVar17,argR8,argR9,argR10);
                 }
               }
             }
             if (*(char *)((int)instructionRecord2 + 9) != '\0') {
-              ((int (*)())FUN_000d03b4)(0," write_inactive",puVar13,argR6,puVar17,argR8,argR9,argR10);
+              ((int (*)())psnReportError)(0," write_inactive",puVar13,argR6,puVar17,argR8,argR9,argR10);
             }
-            ((int (*)())FUN_000d03b4)(0," \n",puVar13,argR6,puVar17,argR8,argR9,argR10);
+            ((int (*)())psnReportError)(0," \n",puVar13,argR6,puVar17,argR8,argR9,argR10);
           }
           else {
-            ((int (*)())FUN_000d03b4)(0," last\n",puVar13,argR6,puVar17,argR8,argR9,argR10);
+            ((int (*)())psnReportError)(0," last\n",puVar13,argR6,puVar17,argR8,argR9,argR10);
           }
           if (*(char *)(instructionRecord2 + 0xd) != '\0') {
             puVar13 = aluIndex;
-            ((int (*)())FUN_000d03b4)(0,"   alu %02d post-NOP\n",aluIndex,argR6,puVar17,argR8,argR9,argR10
+            ((int (*)())psnReportError)(0,"   alu %02d post-NOP\n",aluIndex,argR6,puVar17,argR8,argR9,argR10
                         );
           }
           uVar37 = *instructionRecord2;
@@ -9181,7 +9181,7 @@ switchD_000d324c_caseD_4:
             srcpTextA = CONCAT22(0x2000,(*(unsigned short *)((unsigned char *)&(srcpTextA) + 2)));
           }
           argR6 = (char *)cfWordText;
-          ((int (*)())FUN_000d03b4)(0,"  %d cf  %02d    :  ",instructionNumber,cfIndex,local_ec,argR8,argR9,argR10);
+          ((int (*)())psnReportError)(0,"  %d cf  %02d    :  ",instructionNumber,cfIndex,local_ec,argR8,argR9,argR10);
           in_stack_fffffd2c = (uint *)0x0;
           argR10 = (byte *)((uint)*(byte *)((int)instructionRecord2 + 0x15) * 10 + 0x1dc1bc);
           argR9 = (char *)((uint)*(byte *)(instructionRecord2 + 5) * 10 + 0x1dc1bc);
@@ -9208,19 +9208,19 @@ switchD_000d324c_caseD_4:
           puVar13 = (uint *)(PTR_s_IF_b_001dc2cc)[iVar10];
           puVar33 = &semWaitText;
           argR8 = &aluWaitText;
-          ((int (*)())FUN_000d03b4)(0,"%s(%s)%s%s",puVar13,argR6,puVar33,argR8,argR9,argR10);
+          ((int (*)())psnReportError)(0,"%s(%s)%s%s",puVar13,argR6,puVar33,argR8,argR9,argR10);
           cVar9 = *(char *)((int)instructionRecord2 + 0x12);
           if ((cVar9 == -0x10) || (cVar9 == '\x0f')) {
             puVar13 = &srcpTextA;
             argR6 = (char *)&srcpTextB;
-            ((int (*)())FUN_000d03b4)(0,"( prev_alu: %s %s )\n",puVar13,argR6,puVar33,argR8,argR9,argR10);
+            ((int (*)())psnReportError)(0,"( prev_alu: %s %s )\n",puVar13,argR6,puVar33,argR8,argR9,argR10);
           }
           else if ((cVar9 == -0x56) || (cVar9 == 'U')) {
             puVar13 = (uint *)(uint)*(byte *)((int)instructionRecord2 + 0x17);
-            ((int (*)())FUN_000d03b4)(0,"( bool_addr: %d )\n",puVar13,argR6,puVar33,argR8,argR9,argR10);
+            ((int (*)())psnReportError)(0,"( bool_addr: %d )\n",puVar13,argR6,puVar33,argR8,argR9,argR10);
           }
           else {
-            ((int (*)())FUN_000d03b4)(0,"\n",puVar13,argR6,puVar33,argR8,argR9,argR10);
+            ((int (*)())psnReportError)(0,"\n",puVar13,argR6,puVar33,argR8,argR9,argR10);
           }
           cfIndex = cfIndex + 1;
         }
@@ -9230,8 +9230,8 @@ switchD_000d324c_caseD_4:
         uVar19 = recordCount2;
       } while (iVar31 <= (int)recordCount2);
     }
-    ((int (*)())FUN_000d03b4)(0,local_5c + 0x5b00,puVar13,argR6,uVar19,argR8,argR9,argR10);
-    ((int (*)())FUN_000d03b4)(0,"======== End r520 neutral format pixel shader =============\n",puVar13,argR6,
+    ((int (*)())psnReportError)(0,local_5c + 0x5b00,puVar13,argR6,uVar19,argR8,argR9,argR10);
+    ((int (*)())psnReportError)(0,"======== End r520 neutral format pixel shader =============\n",puVar13,argR6,
                  uVar19,argR8,argR9,argR10);
   }
   return;

@@ -2048,7 +2048,7 @@ int FUN_00134bf0(param_1, param_2, param_3)
   undefined4 callResult;
   
   if (param_3 != 0) {
-    callResult = FUN_001952d8(param_2,*(undefined4 *)(param_1 + 0x20));
+    callResult = disjointSetFindRoot(param_2,*(undefined4 *)(param_1 + 0x20));
     return callResult;
   }
   return *(undefined4 *)(param_2 * 4 + *(int *)(param_1 + 0x20));
@@ -2089,7 +2089,7 @@ int FUN_00134cd4(param_1, param_2, param_3)
   undefined4 param_2;
   undefined4 param_3;
 {
-  return FUN_00195330(param_2,param_3,*(undefined4 *)(param_1 + 0x20));
+  return storeIndexedWord(param_2,param_3,*(undefined4 *)(param_1 + 0x20));
 }
 
 /* ColorGraph__countSameClassNeighbors @ 0x134ce8 (200 bytes) */

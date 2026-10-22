@@ -2793,13 +2793,13 @@ cec34	cec5c	other	FUN_000cea6c	10	_strcat
 cede8	cee5c	table	FUN_000ced58	29	
 cf224	cf23c	table	FUN_000ced58	6	
 cf38c	cf594	table	FUN_000cf2ec	130	
-d0340	d0344	eh-pad	FUN_000d0304	1	__Unwind_Resume
-d0398	d039c	eh-pad	FUN_000d035c	1	__Unwind_Resume
+d0340	d0344	eh-pad	vsDisassembleToString	1	__Unwind_Resume
+d0398	d039c	eh-pad	vsDisassembleVertexProgram	1	__Unwind_Resume
 d044c	d0450	millicode	FUN_000cd1c4	1	
-d057c	d05fc	table	FUN_000d0488	32	
-d0730	d07b0	table	FUN_000d0488	32	
-d0974	d09c0	table	FUN_000d0888	19	
-d0aa4	d0ae4	table	FUN_000d0888	16	
+d057c	d05fc	table	psnFormatRgbSource	32	
+d0730	d07b0	table	psnFormatRgbSource	32	
+d0974	d09c0	table	psnFormatAlphaSource	19	
+d0aa4	d0ae4	table	psnFormatAlphaSource	16	
 d1f70	d1f90	table	FUN_000d183c	8	
 d2274	d228c	table	FUN_000d183c	6	
 d2368	d2380	table	FUN_000d183c	6	
@@ -3458,29 +3458,29 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 194dfc	194e1c	eh-pad	FUN_00194d44	8	0x193cc0,__Unwind_Resume
 194f48	194f84	eh-pad	FUN_00194e44	15	0x193cc0,__Unwind_Resume
 1951b0	1951d0	eh-pad	FUN_001950e0	8	0x193cc0,__Unwind_Resume
-195470	195474	millicode	FUN_0019545c	1	
-195644	195650	millicode	FUN_00195640	3	
-1961b0	1961c8	other	FUN_00196070	6	
-197964	197988	table	FUN_0019786c	9	
-19a8cc	19a8d4	millicode	FUN_0019d478	2	
-19aad8	19aaf4	other	FUN_0019d478	7	
-19ab58	19ab60	millicode	FUN_0019d478	2	
-19ac28	19ac2c	millicode	FUN_0019d478	1	
-19aca8	19acb0	millicode	FUN_0019d478	2	
-19b998	19b9ac	eh-pad	FUN_0019d478	5	__Unwind_Resume
-19ba28	19ba3c	eh-pad	FUN_0019d478	5	__Unwind_Resume
+195470	195474	millicode	packSourceModifier	1	
+195644	195650	millicode	R300MachineAssembler__vslot44_noOp	3	
+1961b0	1961c8	other	R300MachineAssembler__beginNextRecord	6	
+197964	197988	table	R300MachineAssembler__classifyAluOperation	9	
+19a8cc	19a8d4	millicode	R520VMachineAssembler__vslot12_visitNode	2	
+19aad8	19aaf4	other	R520VMachineAssembler__vslot12_visitNode	7	
+19ab58	19ab60	millicode	R520VMachineAssembler__vslot12_visitNode	2	
+19ac28	19ac2c	millicode	R520VMachineAssembler__vslot12_visitNode	1	
+19aca8	19acb0	millicode	R520VMachineAssembler__vslot12_visitNode	2	
+19b998	19b9ac	eh-pad	R520VMachineAssembler__vslot12_visitNode	5	__Unwind_Resume
+19ba28	19ba3c	eh-pad	R520VMachineAssembler__vslot12_visitNode	5	__Unwind_Resume
 19bab0	19bac4	eh-pad	R300VMachineAssembler__deleting_dtor	5	__Unwind_Resume
-19d55c	19d57c	eh-pad	FUN_0019d4e8	8	0x193cc0,__Unwind_Resume
+19d55c	19d57c	eh-pad	R520VMachineAssembler__getOrCreateConstantZeroInst	8	0x193cc0,__Unwind_Resume
 19dd38	19dd4c	eh-pad	R520VMachineAssembler__deleting_dtor	5	0x19b91c,__Unwind_Resume
-19de30	19de50	eh-pad	FUN_0019dd7c	8	0x193cc0,__Unwind_Resume
+19de30	19de50	eh-pad	R520VMachineAssembler__init	8	0x193cc0,__Unwind_Resume
 19df28	19df3c	eh-pad	MachineAssembler__dtor_19deb0	5	0x19b91c,__Unwind_Resume
 19dfcc	19dfe0	eh-pad	MachineAssembler__dtor_19df54	5	0x19b91c,__Unwind_Resume
 19ef4c	19ef50	millicode	FUN_0019ef2c	1	
-19fcc4	19fccc	millicode	FUN_0019fb84	2	
-1a1094	1a10ac	table	FUN_001a0fe4	6	
-1a1974	1a198c	table	FUN_001a191c	6	
-1a270c	1a2724	table	FUN_001a25a8	6	
-1a2874	1a2878	eh-pad	FUN_001a25a8	1	__Unwind_Resume
+19fcc4	19fccc	millicode	R520MachineAssembler__beginNextRecord	2	
+1a1094	1a10ac	table	evaluateConstantComparison	6	
+1a1974	1a198c	table	R520MachineAssembler__vslot74_setPredicateSetDestination	6	
+1a270c	1a2724	table	R520MachineAssembler__emitCompareToPredicate	6	
+1a2874	1a2878	eh-pad	R520MachineAssembler__emitCompareToPredicate	1	__Unwind_Resume
 1cd664	1cd7bc	other	FUN_001a3580	86	
 1cd7d8	1cd7ec	other	FUN_001cd7bc	5	
 1cdbf8	1cdc64	other	IRInst__dtor_1cdba4	27	
