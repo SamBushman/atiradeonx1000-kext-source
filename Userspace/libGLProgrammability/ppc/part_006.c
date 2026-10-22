@@ -1654,7 +1654,7 @@ int yyparse(parseContext, param_2, param_3, param_4, param_5, param_6, param_7, 
   unsigned char * pTVar8;
   unsigned char * this;
   unsigned char * pcVar9;
-  unsigned char * a0;
+  unsigned char * stackNode;
   unsigned char * psVar10;
   unsigned char * paVar11;
   unsigned char * pTVar12;
@@ -1666,59 +1666,59 @@ int yyparse(parseContext, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined4 *puVar18;
   undefined4 *puVar19;
   unsigned char * pTVar20;
-  int *a0_00;
+  int *newNode;
   unsigned char * psVar21;
   unsigned char * pTVar22;
   void *pvVar23;
   unsigned char * this_00;
-  undefined4 extraout_r4;
-  undefined4 extraout_r4_00;
-  undefined4 extraout_r4_01;
-  undefined4 extraout_r4_02;
-  undefined4 a1;
-  undefined4 extraout_r4_03;
-  undefined4 extraout_r4_04;
-  undefined4 extraout_r4_05;
-  undefined4 a1_00;
-  undefined4 a1_01;
-  undefined4 a1_02;
-  undefined4 a1_03;
-  undefined4 a1_04;
-  undefined4 a1_05;
-  undefined4 extraout_r4_06;
-  undefined4 extraout_r4_07;
-  undefined4 a1_06;
-  undefined4 extraout_r4_08;
-  undefined4 extraout_r4_09;
-  int *extraout_r4_10;
-  undefined4 a1_07;
-  int *extraout_r4_11;
+  undefined4 r4Out0;
+  undefined4 r4Out1;
+  undefined4 r4Out2;
+  undefined4 r4Out3;
+  undefined4 r4In0;
+  undefined4 r4Out4;
+  undefined4 r4Out5;
+  undefined4 r4Out6;
+  undefined4 r4In1;
+  undefined4 r4In2;
+  undefined4 r4In3;
+  undefined4 r4In4;
+  undefined4 r4In5;
+  undefined4 r4In6;
+  undefined4 r4Out7;
+  undefined4 r4Out8;
+  undefined4 r4In7;
+  undefined4 r4Out9;
+  undefined4 r4Out10;
+  int *r4Out11;
+  undefined4 r4In8;
+  int *r4Out12;
   unsigned char ** ppTVar24;
-  undefined4 extraout_r4_12;
-  undefined4 extraout_r4_13;
-  undefined4 a1_08;
-  undefined4 extraout_r4_14;
-  undefined4 extraout_r4_15;
-  undefined4 a1_09;
-  undefined4 a1_10;
-  undefined4 a1_11;
+  undefined4 r4Out13;
+  undefined4 r4Out14;
+  undefined4 r4In9;
+  undefined4 r4Out15;
+  undefined4 r4Out16;
+  undefined4 r4In10;
+  undefined4 r4In11;
+  undefined4 r4In12;
   uint *puVar25;
-  undefined4 a1_12;
+  undefined4 r4In13;
   int iVar26;
-  undefined4 extraout_r4_16;
-  undefined4 extraout_r4_17;
-  undefined4 extraout_r4_18;
+  undefined4 r4Out17;
+  undefined4 r4Out18;
+  undefined4 r4Out19;
   unsigned char * pTVar27;
   uint uVar28;
   char *pcVar29;
   int iVar30;
-  int a3;
-  char *a4;
+  int r6Pass;
+  char *emptyText;
   unsigned char * pTVar31;
-  int a4_00;
+  int r7Pass;
   unsigned char * pTVar32;
   unsigned char * pTVar33;
-  int a5;
+  int r8Pass;
   unsigned char * pTVar34;
   undefined **ppuVar35;
   bool bVar37;
@@ -1748,8 +1748,8 @@ int yyparse(parseContext, param_2, param_3, param_4, param_5, param_6, param_7, 
   int iVar60;
   int *piVar61;
   char *pcVar62;
-  char in_RESERVE;
-  byte in_cr0;
+  char reservation;
+  byte cr0;
   ulonglong uVar63;
   undefined8 uVar64;
   unsigned char aTStack_2ca2 [2];
@@ -1974,7 +1974,7 @@ LAB_97ba3784:
       yyvsp = pTVar3 + (int)param_3;
       _memcpy(pTVar3,yyvs,param_3);
       yyvsp = yyvsp + -0x2c;
-      param_2 = extraout_r4;
+      param_2 = r4Out0;
       if (pTVar7 + (int)yyssBytes + -2 <= yyssp) {
         return 1;
       }
@@ -1992,7 +1992,7 @@ LAB_97ba3958:
 LAB_97bac03c:
       if (yyerrstatus == 0) {
         yyerror("parse error",param_2,param_3,param_4,param_5,pTVar33,param_7,param_8);
-        param_2 = extraout_r4_17;
+        param_2 = r4Out18;
       }
 LAB_97bac050:
       if (yyerrstatus == 3) {
@@ -2017,7 +2017,7 @@ LAB_97bac050:
             yyvsp = yyvsp + 0x2c;
             param_3 = (char *)0x2c;
             _memcpy(yyvsp,yylval,0x2c);
-            param_2 = extraout_r4_18;
+            param_2 = r4Out19;
             goto LAB_97ba3784;
           }
         }
@@ -2063,7 +2063,7 @@ LAB_97bac050:
     yyvsp = yyvsp + 0x2c;
     param_3 = (char *)0x2c;
     _memcpy(yyvsp,yylval,0x2c);
-    param_2 = extraout_r4_00;
+    param_2 = r4Out1;
     if (yyerrstatus != 0) {
       yyerrstatus = yyerrstatus + -1;
     }
@@ -2076,7 +2076,7 @@ LAB_97ba3970:
   if (0 < yystateOrYylen) {
     param_3 = (char *)0x2c;
     _memcpy(&yyval,yyvsp + (1 - yystateOrYylen) * 0x2c,0x2c);
-    param_2 = extraout_r4_01;
+    param_2 = r4Out2;
   }
   pTVar3 = local_878;
   pTVar31 = local_7f0;
@@ -2093,7 +2093,7 @@ LAB_97ba3970:
       uVar57 = *(uint *)(yyvsp + 4);
       local_64 = (unsigned char *)0xa7b8374c;
       iVar55 = *(int *)(uVar57 + 4);
-      a4 = "";
+      emptyText = "";
       pcVar62 = "undeclared identifier";
       *(unsigned char *)(iVar55 + *(int *)(iVar55 + -0xc)) = *DAT_a7b7ba88;
       pcVar29 = *(char **)(uVar57 + 4);
@@ -2150,7 +2150,7 @@ LAB_97ba3970:
       local_81c = pTVar3;
       psVar21 = (unsigned char *)
                 (**(code **)(*(uint *)pTVar7 + 8))
-                          (pTVar7,(int)uVar64,pcVar62,pcVar29,a4,pTVar33,piVar61);
+                          (pTVar7,(int)uVar64,pcVar62,pcVar29,emptyText,pTVar33,piVar61);
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&local_800,psVar21);
       local_7f8 = pTVar7;
       std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_810,uVar16,&local_800);
@@ -2160,12 +2160,12 @@ LAB_97ba3970:
       local_7f0 = local_800;
       do {
         uVar57 = *(uint *)pTVar3;
-        if (in_RESERVE != '\0') {
+        if (reservation != '\0') {
           uVar28 = storeWordConditionalIndexed(uVar57 - 1,0,pTVar3);
           *(uint *)pTVar3 = uVar28;
-          in_cr0 = 2;
+          cr0 = 2;
         }
-      } while (!(bool)(in_cr0 >> 1 & 1));
+      } while (!(bool)(cr0 >> 1 & 1));
       if ((int)uVar57 < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                   ((unsigned char *)(local_7fc + -0xc),&local_7f0);
@@ -2316,7 +2316,7 @@ LAB_97ba41e8:
       iVar55 = (**(code **)(**(int **)(yyvsp + -0x7c) + 0x58))(*(int **)(yyvsp + -0x7c));
       if (iVar55 == 0) {
         iVar55 = (**(code **)(**(int **)(yyvsp + -0x7c) + 0x50))(*(int **)(yyvsp + -0x7c));
-        uVar64 = CONCAT44(local_878,extraout_r4_02);
+        uVar64 = CONCAT44(local_878,r4Out3);
         if (iVar55 != 0) {
           iVar55 = (**(code **)(**(int **)(yyvsp + -0x24) + 0x18))(*(int **)(yyvsp + -0x24));
           param_3 = *(char **)(yyvsp + -0x7c);
@@ -2349,10 +2349,10 @@ LAB_97ba41e8:
           uVar57 = local_7bc << 0xd;
           uVar28 = local_7bc >> 0x13;
           iVar55 = (**(code **)(**(int **)(yyvsp + -0x24) + 0x18))(*(int **)(yyvsp + -0x24));
-          uVar16 = extraout_r4_03;
+          uVar16 = r4Out4;
           if (((int)(uVar57 | uVar28) >> 0x18 <= **(int **)(iVar55 + 0x30)) &&
              (iVar55 = (**(code **)(**(int **)(yyvsp + -0x7c) + 0x54))(*(int **)(yyvsp + -0x7c))
-             , uVar16 = extraout_r4_04, iVar55 == 0)) {
+             , uVar16 = r4Out5, iVar55 == 0)) {
             bVar37 = true;
           }
           local_7e0 = local_5c + -0x610c;
@@ -2368,7 +2368,7 @@ LAB_97ba41e8:
                       ((int)parseContext,*(char **)(yyvsp + -0x58),"","[",
                        "field selection out of range \'%d\'",pTVar33,pTVar34,param_8);
             TParseContext__recover(parseContext);
-            uVar64 = CONCAT44(local_878,extraout_r4_05);
+            uVar64 = CONCAT44(local_878,r4Out6);
             goto LAB_97ba47fc;
           }
         }
@@ -2389,7 +2389,7 @@ LAB_97ba41e8:
               local_780 = pTVar3;
               pTVar8 = (unsigned char *)
                        (**(code **)(**(int **)(yyvsp + -0x7c) + 0x28))
-                                 (*(int **)(yyvsp + -0x7c),a1_00,param_3,param_4,param_5,pTVar7);
+                                 (*(int **)(yyvsp + -0x7c),r4In1,param_3,param_4,param_5,pTVar7);
               pTVar12 = (unsigned char *)(**(code **)(**(int **)(yyvsp + -0x7c) + 0x3c))
                                            (*(int **)(yyvsp + -0x7c));
               pTVar33 = *(unsigned char **)(yyvsp + -0x58);
@@ -2398,13 +2398,13 @@ LAB_97ba41e8:
             else {
               local_780 = pTVar3;
               iVar55 = (**(code **)(**(int **)(yyvsp + -0x24) + 0x18))
-                                 (*(int **)(yyvsp + -0x24),a1_00,param_3,param_4,param_5,pTVar7,
+                                 (*(int **)(yyvsp + -0x24),r4In1,param_3,param_4,param_5,pTVar7,
                                   pTVar34);
               piVar61 = *(int **)(iVar55 + 0x30);
               pTVar34 = (unsigned char *)**(undefined4 **)(yyvsp + -0x7c);
               pTVar8 = (unsigned char *)
                        (**(code **)(pTVar34 + 0x28))
-                                 (*(undefined4 **)(yyvsp + -0x7c),a1_01,param_3,param_4,param_5,
+                                 (*(undefined4 **)(yyvsp + -0x7c),r4In2,param_3,param_4,param_5,
                                   pTVar7,pTVar34);
               pTVar12 = (unsigned char *)(**(code **)(**(int **)(yyvsp + -0x7c) + 0x3c))
                                            (*(int **)(yyvsp + -0x7c));
@@ -2428,7 +2428,7 @@ LAB_97ba475c:
             local_780 = pTVar3;
             if (pTVar34 != (unsigned char *)0x0) {
               iVar55 = (**(code **)(**(int **)(yyvsp + -0x24) + 0x18))
-                                 (*(int **)(yyvsp + -0x24),a1_02,param_3,param_4,param_5,pTVar33,
+                                 (*(int **)(yyvsp + -0x24),r4In3,param_3,param_4,param_5,pTVar33,
                                   pTVar34);
               pTVar33 = (unsigned char *)**(uint **)(iVar55 + 0x30);
               TParseContext__error
@@ -2442,7 +2442,7 @@ LAB_97ba475c:
         uVar16 = 0x2d;
       }
       else {
-        iVar55 = (**(code **)(**(int **)(yyvsp + -0x7c) + 0x54))(*(int **)(yyvsp + -0x7c),a1);
+        iVar55 = (**(code **)(**(int **)(yyvsp + -0x7c) + 0x54))(*(int **)(yyvsp + -0x7c),r4In0);
         if (iVar55 != 0) {
           (**(code **)(**(int **)(yyvsp + -0x7c) + 0x38))(&local_820,*(int **)(yyvsp + -0x7c));
           local_820 = (unsigned char *)&PTR___ZN5TTypeD1Ev_a7b7d640;
@@ -2486,7 +2486,7 @@ LAB_97ba47fc:
     iVar55 = (**(code **)(**(int **)(yyvsp + -0x7c) + 0x54))
                        (*(int **)(yyvsp + -0x7c),(int)uVar64,param_3,param_4,param_5,pTVar33,
                         pTVar34);
-    in_cr0 = (iVar55 == 0) << 1;
+    cr0 = (iVar55 == 0) << 1;
     if (iVar55 == 0) {
       iVar55 = (**(code **)(**(int **)(yyvsp + -0x7c) + 0x50))(*(int **)(yyvsp + -0x7c));
       if (iVar55 != 0) {
@@ -2496,7 +2496,7 @@ LAB_97ba47fc:
         local_850 = pTVar7;
         if ((uint)local_82c >> 0x19 == 2) {
           uVar57 = (**(code **)(**(int **)(yyvsp + -0x7c) + 0x40))
-                             (*(int **)(yyvsp + -0x7c),a1_03,param_3,param_4,param_5,local_5c);
+                             (*(int **)(yyvsp + -0x7c),r4In4,param_3,param_4,param_5,local_5c);
           uVar28 = (**(code **)(**(int **)(yyvsp + -0x7c) + 0x48))(*(int **)(yyvsp + -0x7c));
           local_7fc = (unsigned char *)
                       ((uVar28 & 0xff) << 0xb |
@@ -2507,7 +2507,7 @@ LAB_97ba47fc:
       }
       pTVar3 = (unsigned char *)
                (**(code **)(**(int **)(yyvsp + -0x7c) + 0x50))(*(int **)(yyvsp + -0x7c));
-      in_cr0 = (pTVar3 == (unsigned char *)0x0) << 1;
+      cr0 = (pTVar3 == (unsigned char *)0x0) << 1;
       if (pTVar3 != (unsigned char *)0x0) {
         uVar57 = (**(code **)(**(int **)(yyvsp + -0x7c) + 0x40))(*(int **)(yyvsp + -0x7c));
         uVar28 = (**(code **)(**(int **)(yyvsp + -0x7c) + 0x48))(*(int **)(yyvsp + -0x7c));
@@ -2538,7 +2538,7 @@ LAB_97ba47fc:
         local_820 = pTVar31;
         if ((uint)local_7fc >> 0x19 == 2) {
           uVar57 = (**(code **)(**(int **)(yyvsp + -0x7c) + 0x40))
-                             (*(int **)(yyvsp + -0x7c),a1_04,param_3,param_4,param_5,local_5c);
+                             (*(int **)(yyvsp + -0x7c),r4In5,param_3,param_4,param_5,local_5c);
           local_7cc = (uVar57 & 0x3f) << 0x13 | local_7cc & 0x9ff | 0x4000000 | 0x800;
           local_7f0 = pTVar31;
           local_7ec = pTVar3;
@@ -2632,7 +2632,7 @@ LAB_97ba4bc0:
     local_7ac[*(int *)(local_7ac + -0xc)] = **(char **)(local_64 + -0x7cc4);
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     pTVar7 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
-    in_cr0 = (pTVar7 == (unsigned char *)0x0) << 1;
+    cr0 = (pTVar7 == (unsigned char *)0x0) << 1;
     pTVar3 = (unsigned char *)0x0;
     if (pTVar7 != (unsigned char *)0x0) {
       local_720[0] = GetGlobalPoolAllocator();
@@ -2644,12 +2644,12 @@ LAB_97ba4bc0:
     local_710[0] = local_7b0;
     do {
       iVar55 = *piVar61;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         iVar54 = storeWordConditionalIndexed(iVar55 + -1,0,piVar61);
         *piVar61 = iVar54;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     local_810 = pTVar3;
     if (iVar55 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
@@ -2661,12 +2661,12 @@ LAB_97ba4bc0:
     piVar61 = (int *)(local_7bc - 4);
     do {
       iVar55 = *piVar61;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         iVar54 = storeWordConditionalIndexed(iVar55 + -1,0,piVar61);
         *piVar61 = iVar54;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     pTVar3 = local_878;
     local_820 = pTVar31;
     pTVar32 = pTVar31;
@@ -2690,10 +2690,10 @@ LAB_97ba4bc0:
     }
     pTVar3 = (unsigned char *)
              (**(code **)(**(int **)(yyvsp + -0x50) + 0x58))(*(int **)(yyvsp + -0x50));
-    in_cr0 = (pTVar3 == (unsigned char *)0x0) << 1;
+    cr0 = (pTVar3 == (unsigned char *)0x0) << 1;
     if (pTVar3 == (unsigned char *)0x0) {
       iVar55 = (**(code **)(**(int **)(yyvsp + -0x50) + 0x50))
-                         (*(int **)(yyvsp + -0x50),a1_05,param_3,param_4,param_5,pTVar33,pTVar34);
+                         (*(int **)(yyvsp + -0x50),r4In6,param_3,param_4,param_5,pTVar33,pTVar34);
       if (iVar55 == 0) {
         iVar55 = (**(code **)(**(int **)(yyvsp + -0x50) + 0x40))(*(int **)(yyvsp + -0x50));
         if (iVar55 != 0xe) {
@@ -2714,7 +2714,7 @@ LAB_97ba4bc0:
           goto LAB_97ba5548;
         }
         uVar57 = 0;
-        uVar16 = extraout_r4_06;
+        uVar16 = r4Out7;
         goto LAB_97ba55dc;
       }
       iVar55 = (**(code **)(**(int **)(yyvsp + -0x50) + 0x48))(*(int **)(yyvsp + -0x50));
@@ -2826,7 +2826,7 @@ LAB_97ba4bc0:
              TParseContext__parseVectorFields
                        (parseContext,*(unsigned char **)(yyvsp + 4),iVar55,(unsigned char *)&local_850,
                         (int)param_5);
-    in_cr0 = (pTVar3 == (unsigned char *)0x0) << 1;
+    cr0 = (pTVar3 == (unsigned char *)0x0) << 1;
     if (pTVar3 == (unsigned char *)0x0) {
       local_840 = (unsigned char *)0x1;
       local_850 = pTVar3;
@@ -2924,12 +2924,12 @@ LAB_97ba50cc:
     paVar11 = (unsigned char *)(local_7fc + -0xc);
     do {
       uVar57 = *(uint *)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         uVar28 = storeWordConditionalIndexed(uVar57 - 1,0,pTVar3);
         *(uint *)pTVar3 = uVar28;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)uVar57;
     ppTVar24 = local_6f0;
     local_7f0 = pTVar7;
@@ -2958,12 +2958,12 @@ LAB_97ba50cc:
     local_6e0[0] = local_850;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if ((int)pTVar7 < 1) {
       ppTVar24 = local_6e0;
 LAB_97ba5844:
@@ -2995,12 +2995,12 @@ LAB_97ba5844:
     local_6d0[0] = local_850;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     ppTVar24 = local_6d0;
     if ((int)pTVar7 < 1) goto LAB_97ba5844;
 LAB_97ba5848:
@@ -3014,13 +3014,13 @@ switchD_97ba39c8_caseD_6:
     iVar55 = TParseContext__integerErrorCheck(parseContext,*(unsigned char **)(yyvsp + 8),"[]");
     goto LAB_97ba82e8;
   case 0xe:
-    a0 = *(unsigned char **)(yyvsp + 0x10);
-    pTVar3 = *(unsigned char **)(a0 + 0x4c);
+    stackNode = *(unsigned char **)(yyvsp + 0x10);
+    pTVar3 = *(unsigned char **)(stackNode + 0x4c);
     if (pTVar3 != (unsigned char *)0x0) {
       local_5c = (unsigned char *)0xa7b8374c;
       local_830 = (unsigned char *)0x0;
       local_82c = (unsigned char *)((uint)local_82c & 0x9ff | 0x800);
-      in_cr0 = (local_82c == (unsigned char *)0x0) << 1;
+      cr0 = (local_82c == (unsigned char *)0x0) << 1;
       local_850 = (unsigned char *)&PTR___ZN5TTypeD1Ev_a7b7d640;
       local_84c = (unsigned char *)0x0;
       local_848 = (unsigned char *)0x0;
@@ -3029,17 +3029,17 @@ switchD_97ba39c8_caseD_6:
       local_83c = (unsigned char *)0x0;
       local_838 = (unsigned char *)0x0;
       local_834 = (unsigned char *)0x0;
-      param_4 = (char *)a0;
+      param_4 = (char *)stackNode;
       param_5 = (char *)pTVar3;
       iVar55 = TParseContext__constructorErrorCheck
-                         (parseContext,*(uint *)yyvsp,*(unsigned char **)(yyvsp + 8),a0,pTVar3,
+                         (parseContext,*(uint *)yyvsp,*(unsigned char **)(yyvsp + 8),stackNode,pTVar3,
                           (unsigned char *)&local_850);
       if (iVar55 == 0) {
         param_4 = (char *)pTVar3;
-        param_5 = (char *)a0;
+        param_5 = (char *)stackNode;
         local_878 = (unsigned char *)
                     TParseContext__addConstructor
-                              (parseContext,*(unsigned char **)(yyvsp + 8),(unsigned char *)&local_850,pTVar3,a0,
+                              (parseContext,*(unsigned char **)(yyvsp + 8),(unsigned char *)&local_850,pTVar3,stackNode,
                                *(uint *)yyvsp);
       }
       else {
@@ -3058,8 +3058,8 @@ switchD_97ba39c8_caseD_6:
     }
     pTVar3 = (unsigned char *)
              TParseContext__findFunction
-                       (parseContext,*(uint *)yyvsp,a0,(bool *)&local_88,param_5,pTVar33);
-    in_cr0 = (pTVar3 == (unsigned char *)0x0) << 1;
+                       (parseContext,*(uint *)yyvsp,stackNode,(bool *)&local_88,param_5,pTVar33);
+    cr0 = (pTVar3 == (unsigned char *)0x0) << 1;
     if (pTVar3 == (unsigned char *)0x0) {
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
       pcVar9 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,4);
@@ -3100,7 +3100,7 @@ switchD_97ba39c8_caseD_6:
       (**(code **)(iVar55 + 0x68))(piVar61,uVar16);
       piVar61 = (int *)(**(code **)(*(unsigned char **)local_878 + 0x1c))(local_878);
       this = (unsigned char *)(**(code **)(*piVar61 + 0x78))(piVar61);
-      piVar61 = extraout_r4_10;
+      piVar61 = r4Out11;
       for (iVar55 = 0; iVar55 < (int)(*(uint *)(pTVar3 + 0x14) - *(uint *)(pTVar3 + 0x10)) >> 3;
           iVar55 = iVar55 + 1) {
         piVar50 = *(int **)(*(uint *)(pTVar3 + 0x10) + iVar55 * 8 + 4);
@@ -3113,7 +3113,7 @@ switchD_97ba39c8_caseD_6:
           iVar6 = *(int *)(iVar60 + 4);
           piVar61 = *(int **)(iVar6 + iVar55 * 4);
           param_4 = (char *)(**(code **)(*piVar61 + 0x14))
-                                      (piVar61,a1_07,pcVar62,param_4,param_5,pTVar33,iVar6);
+                                      (piVar61,r4In8,pcVar62,param_4,param_5,pTVar33,iVar6);
           iVar60 = (**(code **)*(unsigned char **)local_878)(local_878);
           pcVar62 = "assign";
           iVar60 = TParseContext__lValueErrorCheck
@@ -3137,7 +3137,7 @@ switchD_97ba39c8_caseD_6:
         if (piVar61 == *(int **)(this + 0xc)) {
           pcVar62 = (char *)&local_84;
           std__vector_int_pool_allocator_int_____M_insert_aux(this,piVar61,pcVar62);
-          piVar61 = extraout_r4_11;
+          piVar61 = r4Out12;
         }
         else {
           iVar60 = 0;
@@ -3165,7 +3165,7 @@ switchD_97ba39c8_caseD_6:
         local_84c[*(uint *)(local_84c + -0xc)] = **(unsigned char **)(local_64 + -0x7cc4);
         pTVar3 = local_84c;
         pcVar62 = (char *)(**(code **)**(undefined4 **)(yyvsp + 8))
-                                    (*(undefined4 **)(yyvsp + 8),a1_06,uVar28,param_4,param_5,
+                                    (*(undefined4 **)(yyvsp + 8),r4In7,uVar28,param_4,param_5,
                                      local_64,local_84c);
         param_3 = " wrong operand type";
         param_4 = "Internal Error";
@@ -3177,17 +3177,17 @@ switchD_97ba39c8_caseD_6:
         local_6c0[0] = local_850;
         do {
           uVar57 = *(uint *)pTVar3;
-          if (in_RESERVE != '\0') {
+          if (reservation != '\0') {
             uVar28 = storeWordConditionalIndexed(uVar57 - 1,0,pTVar3);
             *(uint *)pTVar3 = uVar28;
-            in_cr0 = 2;
+            cr0 = 2;
           }
-        } while (!(bool)(in_cr0 >> 1 & 1));
-        param_2 = extraout_r4_08;
+        } while (!(bool)(cr0 >> 1 & 1));
+        param_2 = r4Out9;
         if ((int)uVar57 < 1) {
           __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                     ((unsigned char *)(local_84c + -0xc),local_6c0);
-          param_2 = extraout_r4_09;
+          param_2 = r4Out10;
         }
         goto LAB_97bac050;
       }
@@ -3203,10 +3203,10 @@ LAB_97ba5e28:
     pTVar3 = local_878;
     pTVar31 = local_7f0;
     pTVar32 = local_750[0];
-    if (a0 != (unsigned char *)0x0) {
-      iVar55 = *(int *)a0;
+    if (stackNode != (unsigned char *)0x0) {
+      iVar55 = *(int *)stackNode;
 LAB_97ba86fc:
-      (**(code **)(iVar55 + 4))(a0);
+      (**(code **)(iVar55 + 4))(stackNode);
       pTVar3 = local_878;
       pTVar31 = local_7f0;
       pTVar32 = local_750[0];
@@ -3257,7 +3257,7 @@ LAB_97ba5e64:
     if (iVar55 == 0) {
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
       psVar10 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
-      in_cr0 = (psVar10 == (unsigned char *)0x0) << 1;
+      cr0 = (psVar10 == (unsigned char *)0x0) << 1;
       psVar21 = (unsigned char *)0x0;
       if (psVar10 != (unsigned char *)0x0) {
         local_6b0[0] = GetGlobalPoolAllocator();
@@ -3278,12 +3278,12 @@ LAB_97ba5e64:
     local_6a0[0] = local_840;
     do {
       uVar57 = *(uint *)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         uVar28 = storeWordConditionalIndexed(uVar57 - 1,0,pTVar3);
         *(uint *)pTVar3 = uVar28;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if ((int)uVar57 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_83c + -0xc),local_6a0);
@@ -3322,7 +3322,7 @@ LAB_97ba5e64:
     if (iVar55 == 0) {
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
       psVar10 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
-      in_cr0 = (psVar10 == (unsigned char *)0x0) << 1;
+      cr0 = (psVar10 == (unsigned char *)0x0) << 1;
       psVar21 = (unsigned char *)0x0;
       if (psVar10 != (unsigned char *)0x0) {
         local_690[0] = GetGlobalPoolAllocator();
@@ -3343,12 +3343,12 @@ LAB_97ba5e64:
     local_680[0] = local_840;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if ((int)pTVar7 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_83c + -0xc),local_680);
@@ -3385,7 +3385,7 @@ LAB_97ba97d8:
       iVar55 = DAT_a7b7ba84;
       *(uint *)(pTVar7 + 0x20) = 0;
       uVar57 = *(uint *)(pTVar7 + 0x40) & 0x9ff | 0x800;
-      in_cr0 = (uVar57 == 0) << 1;
+      cr0 = (uVar57 == 0) << 1;
       *(uint *)(pTVar7 + 0x24) = 0;
       *(uint *)(pTVar7 + 0x40) = uVar57;
       piVar61 = (int *)(iVar55 + 8);
@@ -3396,12 +3396,12 @@ LAB_97ba97d8:
       *(uint *)(pTVar7 + 0x38) = 0;
       *(uint *)(pTVar7 + 0x3c) = 0;
       do {
-        if (in_RESERVE != '\0') {
+        if (reservation != '\0') {
           iVar54 = storeWordConditionalIndexed(*piVar61 + 1,0,piVar61);
           *piVar61 = iVar54;
-          in_cr0 = 2;
+          cr0 = 2;
         }
-      } while (!(bool)(in_cr0 >> 1));
+      } while (!(bool)(cr0 >> 1));
       local_630 = GetGlobalPoolAllocator();
       *(uint *)(pTVar7 + 0x48) = iVar55 + 0xc;
       *(uint *)(pTVar7 + 0x44) = local_630;
@@ -3469,12 +3469,12 @@ LAB_97ba97d8:
     paVar11 = (unsigned char *)(local_84c + -0xc);
     do {
       pTVar33 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar31 = (unsigned char *)storeWordConditionalIndexed(pTVar33 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar31;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)pTVar33;
     ppTVar24 = local_650;
     local_870 = pTVar7;
@@ -3485,7 +3485,7 @@ LAB_97ba97d8:
       TParseContext__recover(parseContext);
     }
     local_82c = (unsigned char *)((uint)local_82c & 0x9ff | 0x800);
-    in_cr0 = (local_82c == (unsigned char *)0x0) << 1;
+    cr0 = (local_82c == (unsigned char *)0x0) << 1;
     local_850 = (unsigned char *)&PTR___ZN5TTypeD1Ev_a7b7d640;
     local_84c = (unsigned char *)0x0;
     local_848 = (unsigned char *)0x0;
@@ -3746,12 +3746,12 @@ LAB_97ba97d8:
     local_610[0] = local_850;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)pTVar7;
     ppTVar24 = local_610;
     goto LAB_97ba82d4;
@@ -3780,12 +3780,12 @@ LAB_97ba97d8:
     local_600[0] = local_850;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if ((int)pTVar7 < 1) {
       ppTVar24 = local_600;
       goto LAB_97ba69a8;
@@ -3824,12 +3824,12 @@ LAB_97ba97d8:
     local_5f0[0] = local_850;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)pTVar7;
     ppTVar24 = local_5f0;
     goto LAB_97ba82d4;
@@ -3886,12 +3886,12 @@ LAB_97ba97d8:
     local_5e0[0] = local_840;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if ((int)pTVar7 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_83c + -0xc),local_5e0);
@@ -3901,12 +3901,12 @@ LAB_97ba97d8:
     local_5d0[0] = local_850;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)pTVar7;
     ppTVar24 = local_5d0;
     goto LAB_97ba7a00;
@@ -3936,12 +3936,12 @@ LAB_97ba97d8:
     local_5c0[0] = local_840;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if ((int)pTVar7 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_83c + -0xc),local_5c0);
@@ -3951,12 +3951,12 @@ LAB_97ba97d8:
     local_5b0[0] = local_850;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)pTVar7;
     ppTVar24 = local_5b0;
     goto LAB_97ba7a00;
@@ -3986,12 +3986,12 @@ LAB_97ba97d8:
     local_5a0[0] = local_840;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if ((int)pTVar7 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_83c + -0xc),local_5a0);
@@ -4001,12 +4001,12 @@ LAB_97ba97d8:
     local_590[0] = local_850;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)pTVar7;
     ppTVar24 = local_590;
     goto LAB_97ba7a00;
@@ -4030,12 +4030,12 @@ LAB_97ba97d8:
     local_580[0] = local_840;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if ((int)pTVar7 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_83c + -0xc),local_580);
@@ -4045,12 +4045,12 @@ LAB_97ba97d8:
     local_570[0] = local_850;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)pTVar7;
     ppTVar24 = local_570;
     goto LAB_97ba7a00;
@@ -4074,12 +4074,12 @@ LAB_97ba97d8:
     local_560[0] = local_840;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if ((int)pTVar7 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_83c + -0xc),local_560);
@@ -4089,12 +4089,12 @@ LAB_97ba97d8:
     local_550[0] = local_850;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)pTVar7;
     ppTVar24 = local_550;
     goto LAB_97ba7a00;
@@ -4124,12 +4124,12 @@ LAB_97ba97d8:
     local_540[0] = local_840;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if ((int)pTVar7 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_83c + -0xc),local_540);
@@ -4139,12 +4139,12 @@ LAB_97ba97d8:
     local_530[0] = local_850;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)pTVar7;
     ppTVar24 = local_530;
     goto LAB_97ba7a00;
@@ -4174,12 +4174,12 @@ LAB_97ba97d8:
     local_520[0] = local_840;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if ((int)pTVar7 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_83c + -0xc),local_520);
@@ -4189,12 +4189,12 @@ LAB_97ba97d8:
     local_510[0] = local_850;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)pTVar7;
     ppTVar24 = local_510;
     goto LAB_97ba7a00;
@@ -4217,12 +4217,12 @@ LAB_97ba97d8:
     local_500[0] = local_840;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if ((int)pTVar7 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_83c + -0xc),local_500);
@@ -4232,12 +4232,12 @@ LAB_97ba97d8:
     local_4f0[0] = local_850;
     do {
       uVar57 = *(uint *)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         uVar28 = storeWordConditionalIndexed(uVar57 - 1,0,pTVar3);
         *(uint *)pTVar3 = uVar28;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)uVar57;
     ppTVar24 = local_4f0;
     goto LAB_97ba7bac;
@@ -4260,12 +4260,12 @@ LAB_97ba97d8:
     local_4e0[0] = local_840;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if ((int)pTVar7 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_83c + -0xc),local_4e0);
@@ -4275,12 +4275,12 @@ LAB_97ba97d8:
     local_4d0[0] = local_850;
     do {
       uVar57 = *(uint *)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         uVar28 = storeWordConditionalIndexed(uVar57 - 1,0,pTVar3);
         *(uint *)pTVar3 = uVar28;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)uVar57;
     ppTVar24 = local_4d0;
     goto LAB_97ba7bac;
@@ -4303,12 +4303,12 @@ LAB_97ba97d8:
     local_4c0[0] = local_840;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if ((int)pTVar7 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_83c + -0xc),local_4c0);
@@ -4318,12 +4318,12 @@ LAB_97ba97d8:
     local_4b0[0] = local_850;
     do {
       uVar57 = *(uint *)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         uVar28 = storeWordConditionalIndexed(uVar57 - 1,0,pTVar3);
         *(uint *)pTVar3 = uVar28;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)uVar57;
     ppTVar24 = local_4b0;
     goto LAB_97ba7bac;
@@ -4346,12 +4346,12 @@ LAB_97ba97d8:
     local_4a0[0] = local_840;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if ((int)pTVar7 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_83c + -0xc),local_4a0);
@@ -4361,12 +4361,12 @@ LAB_97ba97d8:
     local_490[0] = local_850;
     do {
       uVar57 = *(uint *)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         uVar28 = storeWordConditionalIndexed(uVar57 - 1,0,pTVar3);
         *(uint *)pTVar3 = uVar28;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)uVar57;
     ppTVar24 = local_490;
     goto LAB_97ba7bac;
@@ -4389,12 +4389,12 @@ LAB_97ba97d8:
     local_480[0] = local_840;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if ((int)pTVar7 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_83c + -0xc),local_480);
@@ -4404,12 +4404,12 @@ LAB_97ba97d8:
     local_470[0] = local_850;
     do {
       uVar57 = *(uint *)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         uVar28 = storeWordConditionalIndexed(uVar57 - 1,0,pTVar3);
         *(uint *)pTVar3 = uVar28;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)uVar57;
     ppTVar24 = local_470;
     goto LAB_97ba7bac;
@@ -4432,12 +4432,12 @@ LAB_97ba97d8:
     local_460[0] = local_840;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if ((int)pTVar7 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_83c + -0xc),local_460);
@@ -4447,12 +4447,12 @@ LAB_97ba97d8:
     local_450[0] = local_850;
     do {
       uVar57 = *(uint *)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         uVar28 = storeWordConditionalIndexed(uVar57 - 1,0,pTVar3);
         *(uint *)pTVar3 = uVar28;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)uVar57;
     ppTVar24 = local_450;
     goto LAB_97ba7bac;
@@ -4482,12 +4482,12 @@ LAB_97ba97d8:
     local_440[0] = local_840;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if ((int)pTVar7 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_83c + -0xc),local_440);
@@ -4497,12 +4497,12 @@ LAB_97ba97d8:
     local_430[0] = local_850;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)pTVar7;
     ppTVar24 = local_430;
     goto LAB_97ba7a00;
@@ -4532,12 +4532,12 @@ LAB_97ba97d8:
     local_420[0] = local_840;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if ((int)pTVar7 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_83c + -0xc),local_420);
@@ -4547,12 +4547,12 @@ LAB_97ba97d8:
     local_410[0] = local_850;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)pTVar7;
     ppTVar24 = local_410;
     goto LAB_97ba7a00;
@@ -4582,12 +4582,12 @@ LAB_97ba97d8:
     local_400[0] = local_840;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if ((int)pTVar7 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_83c + -0xc),local_400);
@@ -4597,12 +4597,12 @@ LAB_97ba97d8:
     local_3f0[0] = local_850;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)pTVar7;
     ppTVar24 = local_3f0;
 LAB_97ba7a00:
@@ -4635,12 +4635,12 @@ LAB_97ba5554:
     local_3e0[0] = local_840;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if ((int)pTVar7 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_83c + -0xc),local_3e0);
@@ -4650,12 +4650,12 @@ LAB_97ba5554:
     local_3d0[0] = local_850;
     do {
       uVar57 = *(uint *)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         uVar28 = storeWordConditionalIndexed(uVar57 - 1,0,pTVar3);
         *(uint *)pTVar3 = uVar28;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)uVar57;
     ppTVar24 = local_3d0;
     goto LAB_97ba7bac;
@@ -4678,12 +4678,12 @@ LAB_97ba5554:
     local_3c0[0] = local_840;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if ((int)pTVar7 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_83c + -0xc),local_3c0);
@@ -4693,12 +4693,12 @@ LAB_97ba5554:
     local_3b0[0] = local_850;
     do {
       uVar57 = *(uint *)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         uVar28 = storeWordConditionalIndexed(uVar57 - 1,0,pTVar3);
         *(uint *)pTVar3 = uVar28;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)uVar57;
     ppTVar24 = local_3b0;
 LAB_97ba7bac:
@@ -4751,12 +4751,12 @@ LAB_97ba7d0c:
     local_3a0[0] = local_840;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if ((int)pTVar7 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_83c + -0xc),local_3a0);
@@ -4766,12 +4766,12 @@ LAB_97ba7d0c:
     local_390[0] = local_850;
     do {
       uVar57 = *(uint *)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         uVar28 = storeWordConditionalIndexed(uVar57 - 1,0,pTVar3);
         *(uint *)pTVar3 = uVar28;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if ((int)uVar57 < 1) {
       ppTVar24 = local_390;
       goto LAB_97ba7c88;
@@ -4817,12 +4817,12 @@ LAB_97ba7d0c:
     local_380[0] = local_840;
     do {
       pTVar33 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar31 = (unsigned char *)storeWordConditionalIndexed(pTVar33 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar31;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if ((int)pTVar33 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_83c + -0xc),local_380);
@@ -4832,12 +4832,12 @@ LAB_97ba7d0c:
     local_370[0] = local_850;
     do {
       pTVar33 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar31 = (unsigned char *)storeWordConditionalIndexed(pTVar33 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar31;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)pTVar33;
     ppTVar24 = local_370;
     param_5 = (char *)pTVar7;
@@ -4868,12 +4868,12 @@ LAB_97ba7d0c:
     local_360[0] = local_840;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if ((int)pTVar7 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_83c + -0xc),local_360);
@@ -4883,12 +4883,12 @@ LAB_97ba7d0c:
     local_350[0] = local_850;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if (0 < (int)pTVar7) goto LAB_97ba5554;
     ppTVar24 = local_350;
     goto LAB_97ba7f84;
@@ -5043,12 +5043,12 @@ LAB_97ba7d0c:
     local_340[0] = local_840;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if ((int)pTVar7 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_83c + -0xc),local_340);
@@ -5058,12 +5058,12 @@ LAB_97ba7d0c:
     local_330[0] = local_850;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)pTVar7;
     ppTVar24 = local_330;
 LAB_97ba82d4:
@@ -5117,12 +5117,12 @@ LAB_97ba82e8:
                        (*(int **)(yyvsp + 0x14),param_2,param_3,param_4,param_5,pTVar33,pTVar34);
     if (iVar55 == 0) {
 LAB_97ba86ec:
-      a0 = *(unsigned char **)(yyvsp + 0x14);
+      stackNode = *(unsigned char **)(yyvsp + 0x14);
       pTVar3 = local_878;
       pTVar31 = local_7f0;
       pTVar32 = local_750[0];
-      if (a0 == (unsigned char *)0x0) break;
-      iVar55 = *(int *)a0;
+      if (stackNode == (unsigned char *)0x0) break;
+      iVar55 = *(int *)stackNode;
       goto LAB_97ba86fc;
     }
     uVar57 = *(uint *)(yyvsp + -0x1c);
@@ -5147,7 +5147,7 @@ LAB_97ba86ec:
     if (iVar55 == 0) {
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
       psVar10 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
-      in_cr0 = (psVar10 == (unsigned char *)0x0) << 1;
+      cr0 = (psVar10 == (unsigned char *)0x0) << 1;
       psVar21 = (unsigned char *)0x0;
       if (psVar10 != (unsigned char *)0x0) {
         local_2f0[0] = GetGlobalPoolAllocator();
@@ -5169,12 +5169,12 @@ LAB_97ba86ec:
     local_2e0[0] = local_850;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)pTVar7;
     ppTVar24 = local_2e0;
 LAB_97ba869c:
@@ -5224,7 +5224,7 @@ LAB_97ba8824:
     if (iVar55 == 0) {
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
       psVar10 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
-      in_cr0 = (psVar10 == (unsigned char *)0x0) << 1;
+      cr0 = (psVar10 == (unsigned char *)0x0) << 1;
       psVar21 = (unsigned char *)0x0;
       if (psVar10 != (unsigned char *)0x0) {
         local_2d0[0] = GetGlobalPoolAllocator();
@@ -5246,12 +5246,12 @@ LAB_97ba8824:
     local_2c0[0] = local_850;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     pTVar3 = local_878;
     pTVar31 = local_7f0;
     pTVar32 = local_750[0];
@@ -5320,7 +5320,7 @@ LAB_97ba8824:
       pcVar62 = *(char **)(iVar55 + 4);
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
       pTVar7 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
-      in_cr0 = (pTVar7 == (unsigned char *)0x0) << 1;
+      cr0 = (pTVar7 == (unsigned char *)0x0) << 1;
       pTVar3 = (unsigned char *)0x0;
       if (pTVar7 != (unsigned char *)0x0) {
         local_2b0[0] = GetGlobalPoolAllocator();
@@ -5437,7 +5437,7 @@ LAB_97ba8824:
       pcVar62 = *(char **)(iVar55 + 4);
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
       pvVar13 = (void *)TPoolAllocator__allocate(poolAllocator,8);
-      in_cr0 = (pvVar13 == (void *)0x0) << 1;
+      cr0 = (pvVar13 == (void *)0x0) << 1;
       pvVar23 = (void *)0x0;
       if (pvVar13 != (void *)0x0) {
         local_290[0] = GetGlobalPoolAllocator();
@@ -5508,7 +5508,7 @@ LAB_97ba8824:
         pcVar62 = *(char **)(iVar55 + 4);
         poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
         pTVar7 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
-        in_cr0 = (pTVar7 == (unsigned char *)0x0) << 1;
+        cr0 = (pTVar7 == (unsigned char *)0x0) << 1;
         pTVar3 = (unsigned char *)0x0;
         if (pTVar7 != (unsigned char *)0x0) {
           local_280[0] = GetGlobalPoolAllocator();
@@ -5527,12 +5527,12 @@ LAB_97ba8824:
       local_270[0] = local_850;
       do {
         uVar57 = *(uint *)pTVar3;
-        if (in_RESERVE != '\0') {
+        if (reservation != '\0') {
           uVar28 = storeWordConditionalIndexed(uVar57 - 1,0,pTVar3);
           *(uint *)pTVar3 = uVar28;
-          in_cr0 = 2;
+          cr0 = 2;
         }
-      } while (!(bool)(in_cr0 >> 1 & 1));
+      } while (!(bool)(cr0 >> 1 & 1));
       if ((int)uVar57 < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                   ((unsigned char *)(local_84c + -0xc),local_270);
@@ -5595,7 +5595,7 @@ LAB_97ba8824:
       pcVar62 = *(char **)(iVar55 + 4);
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
       pvVar13 = (void *)TPoolAllocator__allocate(poolAllocator,8);
-      in_cr0 = (pvVar13 == (void *)0x0) << 1;
+      cr0 = (pvVar13 == (void *)0x0) << 1;
       pvVar23 = (void *)0x0;
       if (pvVar13 != (void *)0x0) {
         local_260[0] = GetGlobalPoolAllocator();
@@ -5718,7 +5718,7 @@ LAB_97bab5f4:
       pcVar62 = *(char **)(iVar55 + 4);
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
       pvVar13 = (void *)TPoolAllocator__allocate(poolAllocator,8);
-      in_cr0 = (pvVar13 == (void *)0x0) << 1;
+      cr0 = (pvVar13 == (void *)0x0) << 1;
       pvVar23 = (void *)0x0;
       if (pvVar13 != (void *)0x0) {
         local_250[0] = GetGlobalPoolAllocator();
@@ -5788,7 +5788,7 @@ LAB_97bab5f4:
         pcVar62 = *(char **)(iVar55 + 4);
         poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
         pTVar7 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
-        in_cr0 = (pTVar7 == (unsigned char *)0x0) << 1;
+        cr0 = (pTVar7 == (unsigned char *)0x0) << 1;
         pTVar3 = (unsigned char *)0x0;
         if (pTVar7 != (unsigned char *)0x0) {
           local_240[0] = GetGlobalPoolAllocator();
@@ -5807,12 +5807,12 @@ LAB_97bab5f4:
       local_230[0] = local_850;
       do {
         uVar57 = *(uint *)pTVar3;
-        if (in_RESERVE != '\0') {
+        if (reservation != '\0') {
           uVar28 = storeWordConditionalIndexed(uVar57 - 1,0,pTVar3);
           *(uint *)pTVar3 = uVar28;
-          in_cr0 = 2;
+          cr0 = 2;
         }
-      } while (!(bool)(in_cr0 >> 1 & 1));
+      } while (!(bool)(cr0 >> 1 & 1));
       if ((int)uVar57 < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                   ((unsigned char *)(local_84c + -0xc),local_230);
@@ -5870,7 +5870,7 @@ LAB_97bab5f4:
       pcVar62 = *(char **)(iVar55 + 4);
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
       pvVar13 = (void *)TPoolAllocator__allocate(poolAllocator,8);
-      in_cr0 = (pvVar13 == (void *)0x0) << 1;
+      cr0 = (pvVar13 == (void *)0x0) << 1;
       pvVar23 = (void *)0x0;
       if (pvVar13 != (void *)0x0) {
         local_220[0] = GetGlobalPoolAllocator();
@@ -6565,7 +6565,7 @@ LAB_97baa46c:
     local_83c[(int)*(unsigned char **)(local_83c + -0xc)] = *DAT_a7b7ba88;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     pvVar13 = (void *)TPoolAllocator__allocate(poolAllocator,8);
-    in_cr0 = (pvVar13 == (void *)0x0) << 1;
+    cr0 = (pvVar13 == (void *)0x0) << 1;
     pvVar23 = (void *)0x0;
     if (pvVar13 != (void *)0x0) {
       local_210[0] = GetGlobalPoolAllocator();
@@ -6578,12 +6578,12 @@ LAB_97baa46c:
     local_200[0] = local_840;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if ((int)pTVar7 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_83c + -0xc),local_200);
@@ -6592,12 +6592,12 @@ LAB_97baa46c:
     local_1f0[0] = local_850;
     do {
       uVar57 = *(uint *)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         uVar28 = storeWordConditionalIndexed(uVar57 - 1,0,pTVar3);
         *(uint *)pTVar3 = uVar28;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if ((int)uVar57 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_84c + -0xc),local_1f0);
@@ -6655,12 +6655,12 @@ LAB_97baa46c:
     local_1d0[0] = local_1e0;
     do {
       iVar55 = *piVar61;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         iVar54 = storeWordConditionalIndexed(iVar55 + -1,0,piVar61);
         *piVar61 = iVar54;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if (iVar55 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_1dc + -0xc),local_1d0);
@@ -6725,7 +6725,7 @@ LAB_97baa46c:
     local_83c[(int)*(unsigned char **)(local_83c + -0xc)] = *DAT_a7b7ba88;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     pvVar13 = (void *)TPoolAllocator__allocate(poolAllocator,8);
-    in_cr0 = (pvVar13 == (void *)0x0) << 1;
+    cr0 = (pvVar13 == (void *)0x0) << 1;
     pvVar23 = (void *)0x0;
     if (pvVar13 != (void *)0x0) {
       local_1b0[0] = GetGlobalPoolAllocator();
@@ -6738,12 +6738,12 @@ LAB_97baa46c:
     local_1a0[0] = local_840;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if ((int)pTVar7 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_83c + -0xc),local_1a0);
@@ -6752,12 +6752,12 @@ LAB_97baa46c:
     local_190[0] = local_850;
     do {
       uVar57 = *(uint *)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         uVar28 = storeWordConditionalIndexed(uVar57 - 1,0,pTVar3);
         *(uint *)pTVar3 = uVar28;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if ((int)uVar57 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_84c + -0xc),local_190);
@@ -6804,7 +6804,7 @@ LAB_97baa46c:
                            (piVar61,puVar18,param_3,param_4,param_5,pTVar33,iVar54);
         piVar61 = *(int **)(*(int *)(*(uint *)(yyvsp + 0x10) + 4) + iVar55);
         iVar60 = (**(code **)(*piVar61 + 0x1c))
-                           (piVar61,a1_09,param_3,param_4,param_5,pTVar33,
+                           (piVar61,r4In10,param_3,param_4,param_5,pTVar33,
                             *(int *)(*(uint *)(yyvsp + 0x10) + 4));
         uVar53 = *(uint *)(*(int *)(iVar54 + 4) + -0xc);
         local_78 = uVar53;
@@ -6816,7 +6816,7 @@ LAB_97baa46c:
         }
         param_3 = (char *)*puVar25;
         iVar54 = _memcmp(*(undefined4 *)(iVar54 + 4),*(undefined4 *)(iVar60 + 4),param_3);
-        in_cr0 = (iVar54 == 0) << 1;
+        cr0 = (iVar54 == 0) << 1;
         if (iVar54 == 0) {
           iVar54 = uVar53 - uVar58;
         }
@@ -6824,7 +6824,7 @@ LAB_97baa46c:
           piVar61 = *(int **)(*(int *)(*(uint *)(yyvsp + 0x10) + 4) + iVar55);
           iVar54 = *piVar61;
           iVar54 = (**(code **)(iVar54 + 0x1c))
-                             (piVar61,a1_10,param_3,param_4,param_5,pTVar33,iVar54);
+                             (piVar61,r4In11,param_3,param_4,param_5,pTVar33,iVar54);
           param_3 = "duplicate field name in structure:";
           param_4 = "struct";
           *(unsigned char *)(*(int *)(iVar54 + 4) + *(int *)(*(int *)(iVar54 + 4) + -0xc)) = *pTVar7;
@@ -6878,7 +6878,7 @@ LAB_97baa46c:
         piVar50 = *(int **)(*(uint *)(local_870 + 4) + uVar57 * 8);
         iVar55 = *piVar50;
         uVar16 = (**(code **)(*piVar61 + 0x18))
-                           (piVar61,a1_11,uVar28,param_4,param_5,pTVar33,*piVar61);
+                           (piVar61,r4In12,uVar28,param_4,param_5,pTVar33,*piVar61);
         (**(code **)(iVar55 + 0x10))(piVar50,uVar16);
       }
     }
@@ -6886,7 +6886,7 @@ LAB_97baa46c:
   case 0xa3:
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     pvVar14 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x10);
-    in_cr0 = (pvVar14 == (unsigned char *)0x0) << 1;
+    cr0 = (pvVar14 == (unsigned char *)0x0) << 1;
     pTVar3 = (unsigned char *)(unsigned char *)0x0;
     if (pvVar14 != (unsigned char *)0x0) {
       local_180 = GetGlobalPoolAllocator();
@@ -6930,7 +6930,7 @@ LAB_97baadbc:
     ppuVar35 = &PTR___ZN5TTypeD1Ev_a7b7d640;
     *(undefined ***)pTVar33 = &PTR___ZN5TTypeD1Ev_a7b7d640;
     pTVar7 = (unsigned char *)((uint)*(unsigned char **)(pTVar33 + 0x24) & 0x9ff | 0x800);
-    in_cr0 = (pTVar7 == (unsigned char *)0x0) << 1;
+    cr0 = (pTVar7 == (unsigned char *)0x0) << 1;
     *(unsigned char **)(pTVar33 + 0x20) = (unsigned char *)0x0;
     *(unsigned char **)(pTVar33 + 0x24) = pTVar7;
     *(unsigned char **)(pTVar33 + 4) = (unsigned char *)0x0;
@@ -6952,7 +6952,7 @@ LAB_97baadbc:
     ppuVar35 = &PTR___ZN5TTypeD1Ev_a7b7d640;
     *(undefined ***)local_870 = &PTR___ZN5TTypeD1Ev_a7b7d640;
     pTVar3 = (unsigned char *)((uint)*(unsigned char **)(local_870 + 0x24) & 0x9ff | 0x800);
-    in_cr0 = (pTVar3 == (unsigned char *)0x0) << 1;
+    cr0 = (pTVar3 == (unsigned char *)0x0) << 1;
     *(unsigned char **)(local_870 + 0x20) = (unsigned char *)0x0;
     *(unsigned char **)(local_870 + 0x24) = pTVar3;
     *(unsigned char **)(local_870 + 4) = (unsigned char *)0x0;
@@ -6975,7 +6975,7 @@ LAB_97baadbc:
          (iVar55 = (**(code **)(**(int **)(yyvsp + -0x24) + 0x18))(*(int **)(yyvsp + -0x24)),
          pTVar3 = local_870, 0 < **(int **)(iVar55 + 0x30))) {
         iVar55 = (**(code **)(**(int **)(yyvsp + -0x24) + 0x18))
-                           (*(int **)(yyvsp + -0x24),a1_12,param_3,param_4,param_5,pTVar33,
+                           (*(int **)(yyvsp + -0x24),r4In13,param_3,param_4,param_5,pTVar33,
                             ppuVar35,param_8);
         pTVar7 = (unsigned char *)**(uint **)(iVar55 + 0x30);
         *(unsigned char **)(pTVar3 + 0x24) =
@@ -7383,7 +7383,7 @@ LAB_97bab674:
     local_58 = piVar61 + 3;
     if (iVar54 == 0) {
       iVar54 = piVar61[5] - piVar61[4] >> 3;
-      in_cr0 = (iVar54 == 0) << 1;
+      cr0 = (iVar54 == 0) << 1;
       if (0 < iVar54) {
         iVar60 = piVar61[1];
         iVar54 = *(int *)(iVar60 + 4);
@@ -7482,12 +7482,12 @@ LAB_97bab674:
     piVar50 = (int *)(iVar55 + 8);
     *(undefined4 *)(pTVar20 + 0x4c) = 0;
     do {
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         iVar54 = storeWordConditionalIndexed(*piVar50 + 1,0,piVar50);
         *piVar50 = iVar54;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     local_100 = GetGlobalPoolAllocator();
     *(int *)(pTVar20 + 0x58) = iVar55 + 0xc;
     *(undefined4 *)(pTVar20 + 0x68) = 0;
@@ -7514,12 +7514,12 @@ LAB_97bab674:
         local_c0[0] = local_850;
         do {
           uVar57 = *(uint *)pTVar3;
-          if (in_RESERVE != '\0') {
+          if (reservation != '\0') {
             uVar28 = storeWordConditionalIndexed(uVar57 - 1,0,pTVar3);
             *(uint *)pTVar3 = uVar28;
-            in_cr0 = 2;
+            cr0 = 2;
           }
-        } while (!(bool)(in_cr0 >> 1 & 1));
+        } while (!(bool)(cr0 >> 1 & 1));
         if ((int)uVar57 < 1) {
           __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                     ((unsigned char *)(local_84c + -0xc),local_c0);
@@ -7527,51 +7527,51 @@ LAB_97bab674:
       }
       else {
         poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-        a0_00 = (int *)TPoolAllocator__allocate(poolAllocator,0x40);
+        newNode = (int *)TPoolAllocator__allocate(poolAllocator,0x40);
         puVar5 = PTR_vtable_a7b7c0b4 + 8;
         iVar36 = *(int *)(iVar60 + iVar54 + 4);
-        a0_00[1] = *(int *)(iVar60 + iVar54);
-        *a0_00 = (int)puVar5;
+        newNode[1] = *(int *)(iVar60 + iVar54);
+        *newNode = (int)puVar5;
         iVar38 = *(int *)(iVar36 + 0xc);
-        a5 = *(int *)(iVar36 + 0x10);
-        a4_00 = *(int *)(iVar36 + 0x14);
-        a3 = *(int *)(iVar36 + 0x18);
+        r8Pass = *(int *)(iVar36 + 0x10);
+        r7Pass = *(int *)(iVar36 + 0x14);
+        r6Pass = *(int *)(iVar36 + 0x18);
         iVar30 = *(int *)(iVar36 + 0x1c);
         iVar26 = *(int *)(iVar36 + 0x20);
         iVar6 = *(int *)(iVar36 + 4);
         iVar39 = *(int *)(iVar36 + 8);
-        a0_00[3] = (int)(local_68 + 8);
-        a0_00[6] = iVar38;
-        a0_00[7] = a5;
-        a0_00[8] = a4_00;
-        a0_00[9] = a3;
-        a0_00[10] = iVar30;
-        a0_00[0xb] = iVar26;
-        a0_00[5] = iVar39;
-        a0_00[4] = iVar6;
-        uVar2 = a0_00[0xc];
+        newNode[3] = (int)(local_68 + 8);
+        newNode[6] = iVar38;
+        newNode[7] = r8Pass;
+        newNode[8] = r7Pass;
+        newNode[9] = r6Pass;
+        newNode[10] = iVar30;
+        newNode[0xb] = iVar26;
+        newNode[5] = iVar39;
+        newNode[4] = iVar6;
+        uVar2 = newNode[0xc];
         uVar28 = *(uint *)(iVar36 + 0x24) & 0xfe000000;
-        a0_00[0xc] = uVar28 | uVar2 & 0x1ffffff;
+        newNode[0xc] = uVar28 | uVar2 & 0x1ffffff;
         uVar53 = (*(uint *)(iVar36 + 0x24) >> 0x13 & 0x3f) << 0x13;
-        a0_00[0xc] = uVar53 | uVar28 | uVar2 & 0x7ffff;
+        newNode[0xc] = uVar53 | uVar28 | uVar2 & 0x7ffff;
         uVar57 = *(uint *)(iVar36 + 0x24) & 0x7f800;
-        a0_00[0xc] = uVar57 | uVar53 | uVar28 | uVar2 & 0x7ff;
+        newNode[0xc] = uVar57 | uVar53 | uVar28 | uVar2 & 0x7ff;
         uVar58 = (*(uint *)(iVar36 + 0x24) >> 10 & 1) << 10;
-        a0_00[0xc] = uVar58 | uVar57 | uVar53 | uVar28 | uVar2 & 0x3ff;
-        a0_00[0xc] = (*(uint *)(iVar36 + 0x24) >> 9 & 1) << 9 |
+        newNode[0xc] = uVar58 | uVar57 | uVar53 | uVar28 | uVar2 & 0x3ff;
+        newNode[0xc] = (*(uint *)(iVar36 + 0x24) >> 9 & 1) << 9 |
                      uVar58 | uVar57 | uVar53 | uVar28 | uVar2 & 0x1ff;
-        a0_00[0xd] = 0;
-        a0_00[0xe] = 0;
-        a0_00[0xf] = 0;
+        newNode[0xd] = 0;
+        newNode[0xe] = 0;
+        newNode[0xf] = 0;
         piVar50 = *(int **)((int)parseContext + 4);
         iVar6 = piVar50[3];
         piVar50[3] = iVar6 + 1;
-        a0_00[2] = iVar6 + 1;
+        newNode[2] = iVar6 + 1;
         uVar16 = *(undefined4 *)(*piVar50 + ((piVar50[1] - *piVar50 & 0xfffffffcU) - 4));
         local_84c = (unsigned char *)0x0;
-        psVar21 = (unsigned char *)(**(code **)(*a0_00 + 8))(a0_00,iVar26,iVar30,a3,a4_00,a5,piVar50);
+        psVar21 = (unsigned char *)(**(code **)(*newNode + 8))(newNode,iVar26,iVar30,r6Pass,r7Pass,r8Pass,piVar50);
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&local_f0,psVar21);
-        local_e8 = a0_00;
+        local_e8 = newNode;
         std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_840,uVar16,&local_f0);
         local_850 = local_840;
         piVar50 = (int *)(local_ec + -4);
@@ -7579,32 +7579,32 @@ LAB_97bab674:
         local_e0[0] = local_f0;
         do {
           iVar6 = *piVar50;
-          if (in_RESERVE != '\0') {
+          if (reservation != '\0') {
             iVar26 = storeWordConditionalIndexed(iVar6 + -1,0,piVar50);
             *piVar50 = iVar26;
-            in_cr0 = 2;
+            cr0 = 2;
           }
-        } while (!(bool)(in_cr0 >> 1 & 1));
+        } while (!(bool)(cr0 >> 1 & 1));
         if (iVar6 < 1) {
           __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                     ((unsigned char *)(local_ec + -0xc),local_e0);
         }
         if (local_84c == (unsigned char *)0x0) {
-          iVar26 = a0_00[1];
+          iVar26 = newNode[1];
           iVar6 = *(int *)(iVar26 + 4);
           *(undefined1 *)(iVar6 + *(int *)(iVar6 + -0xc)) = **(undefined1 **)(local_54 + -0x7cc4);
           TParseContext__error
                     ((int)parseContext,*(char **)yyvsp,"redefinition",*(char **)(iVar26 + 4),"",
                      local_54,iVar6,iVar26);
           TParseContext__recover(parseContext);
-          (**(code **)(*a0_00 + 4))(a0_00);
+          (**(code **)(*newNode + 4))(newNode);
         }
         *(undefined4 *)(iVar60 + iVar54) = 0;
         param_5 = *(char **)yyvsp;
         pTVar22 = (unsigned char *)
                   TIntermediate__addSymbol
-                            (*(unsigned char **)parseContext,a0_00[2],(unsigned char *)a0_00[1],
-                             (unsigned char *)(a0_00 + 3),(int)param_5);
+                            (*(unsigned char **)parseContext,newNode[2],(unsigned char *)newNode[1],
+                             (unsigned char *)(newNode + 3),(int)param_5);
         pTVar20 = (unsigned char *)
                   TIntermediate__growAggregate
                             (*(unsigned char **)parseContext,pTVar20,pTVar22,*(uint *)yyvsp);
@@ -7661,12 +7661,12 @@ LAB_97bab674:
     local_a0[0] = local_850;
     do {
       pTVar7 = *(unsigned char **)pTVar3;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         pTVar33 = (unsigned char *)storeWordConditionalIndexed(pTVar7 + -1,0,pTVar3);
         *(unsigned char **)pTVar3 = pTVar33;
-        in_cr0 = 2;
+        cr0 = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
+    } while (!(bool)(cr0 >> 1 & 1));
     if ((int)pTVar7 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_84c + -0xc),local_a0);
@@ -7696,7 +7696,7 @@ switchD_97ba39c8_caseD_0:
                       local_6c + 0x40) * 2;
   param_7 = &_yypgoto + param_8;
   uVar57 = (int)*(short *)(&DAT_97c36138 + param_8) + (int)*(short *)yyssp;
-  param_2 = extraout_r4_16;
+  param_2 = r4Out17;
   if ((uVar57 < 0x4f0) &&
      (param_7 = (undefined *)(uVar57 * 2),
      (int)*(short *)(&_yycheck + (int)param_7) == (int)*(short *)yyssp)) {
@@ -7715,7 +7715,7 @@ LAB_97ba8338:
     iVar55 = *(int *)(local_320[0] + 0x18);
   }
   iVar54 = iVar54 + -1;
-  uVar16 = extraout_r4_12;
+  uVar16 = r4Out13;
   if (iVar55 == 0) {
     if (-1 < iVar54) goto LAB_97ba8334;
   }
@@ -7736,7 +7736,7 @@ LAB_97ba8338:
                  "overloaded functions must have the same return type",param_4,"",pTVar33,iVar54,
                  uVar57);
       TParseContext__recover(parseContext);
-      uVar16 = extraout_r4_13;
+      uVar16 = r4Out14;
     }
     for (iVar54 = 0; iVar54 < *(int *)(iVar55 + 0x14) - *(int *)(iVar55 + 0x10) >> 3;
         iVar54 = iVar54 + 1) {
@@ -7746,8 +7746,8 @@ LAB_97ba8338:
       iVar6 = (**(code **)(iVar6 + 0x24))(piVar61,uVar16,pcVar29,param_4,param_5,pTVar33,iVar6);
       piVar61 = *(int **)(*(int *)(*(uint *)(yyvsp + -0x1c) + 0x10) + iVar60 + 4);
       iVar26 = *piVar61;
-      iVar26 = (**(code **)(iVar26 + 0x24))(piVar61,a1_08,pcVar29,param_4,param_5,pTVar33,iVar26);
-      uVar16 = extraout_r4_14;
+      iVar26 = (**(code **)(iVar26 + 0x24))(piVar61,r4In9,pcVar29,param_4,param_5,pTVar33,iVar26);
+      uVar16 = r4Out15;
       if (iVar6 != iVar26) {
         iVar60 = *(int *)(*(int *)(*(uint *)(yyvsp + -0x1c) + 0x10) + iVar60 + 4);
         param_4 = (char *)getQualifierString(*(uint *)(iVar60 + 0x24) >> 0x19);
@@ -7758,7 +7758,7 @@ LAB_97ba8338:
                    "overloaded functions must have the same parameter qualifiers",param_4,"",pTVar33
                    ,iVar60,uVar57);
         TParseContext__recover(parseContext);
-        uVar16 = extraout_r4_15;
+        uVar16 = r4Out16;
       }
     }
   }
@@ -7789,12 +7789,12 @@ LAB_97ba84b0:
   local_300[0] = local_310;
   do {
     iVar55 = *piVar61;
-    if (in_RESERVE != '\0') {
+    if (reservation != '\0') {
       iVar54 = storeWordConditionalIndexed(iVar55 + -1,0,piVar61);
       *piVar61 = iVar54;
-      in_cr0 = 2;
+      cr0 = 2;
     }
-  } while (!(bool)(in_cr0 >> 1 & 1));
+  } while (!(bool)(cr0 >> 1 & 1));
   bVar37 = 0 < iVar55;
   ppTVar24 = local_300;
   goto LAB_97ba869c;
@@ -7820,13 +7820,13 @@ LAB_97ba55dc:
   }
   param_3 = (char *)*puVar25;
   iVar55 = _memcmp(*(undefined4 *)(iVar55 + 4),*(undefined4 *)(*(uint *)(yyvsp + 4) + 4),param_3);
-  in_cr0 = (iVar55 == 0) << 1;
+  cr0 = (iVar55 == 0) << 1;
   if (iVar55 == 0) {
     iVar55 = uVar28 - uVar53;
   }
   if (iVar55 != 0) {
     uVar57 = uVar57 + 1;
-    uVar16 = extraout_r4_07;
+    uVar16 = r4Out8;
     goto LAB_97ba55dc;
   }
   (**(code **)(**(int **)(yyvsp + -0x50) + 0x38))(&local_850,*(int **)(yyvsp + -0x50));

@@ -100,6 +100,11 @@ def apply_uses(lines, s, e, name, uses, allrows, declset):
         i = brace + 1
         while i < len(lines) and (re.match(DECL, lines[i]) or not lines[i].strip() or re.match(r'\s*(/\*|\*)', lines[i])): i += 1
         return brace + 1, i
+    DECL2 = r'\s+(?!return\b)[\w ]+?[ *]+([A-Za-z_]\w*)( ?\[\w+\])?;$'    # the whole declaration block, incl. `T **p;` and `T x [N];` (declblock above is what the #L anchors of the machine-written rows count from: keep it)
+    def declblock2():
+        i = brace + 1
+        while i < len(lines) and (re.match(DECL2, lines[i]) or not lines[i].strip() or re.match(r'\s*(/\*|\*)', lines[i])): i += 1
+        return brace + 1, i
     Ncache = None; created = {}
     for (f, n, fn, old, new, tier, frm, to, first, last) in uses:
         if Ncache is None or len(Ncache) != len(lines): Ncache = [norm(l) for l in lines]    # renames do not change normalised text
@@ -133,27 +138,27 @@ def apply_uses(lines, s, e, name, uses, allrows, declset):
         for i, pt in todo: lines[i] = sub_part(lines[i], pt, old, new)
         npend += 1
         # declaration of new, beside old's
-        d0, d1 = declblock()
-        if not any(re.match(r'\s+[\w ]+[ *]%s;$' % re.escape(new), l) for l in lines[d0:d1]):
-            di = next((i for i in range(d0, d1) if re.match(r'(\s+)([\w ]+?[ *])%s;$' % re.escape(old), lines[i])), None)
+        d0, d1 = declblock2()
+        if not any(re.match(r'\s+[\w ]+[ *]+%s;$' % re.escape(new), l) for l in lines[d0:d1]):
+            di = next((i for i in range(d0, d1) if re.match(r'(\s+)([\w ]+?[ *]+)%s;$' % re.escape(old), lines[i])), None)
             if di is None: print('%s:%d: %s: no simple declaration of %s' % (f, n, fn, old)); nerr += 1; continue
-            m = re.match(r'(\s+)([\w ]+?[ *])%s;$' % re.escape(old), lines[di])
+            m = re.match(r'(\s+)([\w ]+?[ *]+)%s;$' % re.escape(old), lines[di])
             at = di + 1
             if os.environ.get('USE_DECL', 'first') == 'first':     # frame offsets count from the bottom: declarations placed first sit at the top and move nothing else
                 at = d0
             elif os.environ.get('USE_DECL', 'first') == 'end':    # after the last simple declaration: gcc allocates -O0 slots in declaration order
-                at = max(i for i in range(d0, d1) if re.match(DECL, lines[i])) + 1
+                at = max(i for i in range(d0, d1) if re.match(DECL2, lines[i])) + 1
             lines.insert(at, '%s%s%s;' % (m.group(1), m.group(2), new)); e += 1
             created.setdefault(old, []).append(new)
     # when nothing uses `old` any more, its first new name takes over old's declaration slot (gcc -O0 orders commutative operands, and allocates frame
     # slots, by declaration order: keeping the order keeps the object code); otherwise old stays declared
     for old in sorted({r[3] for r in uses}):
-        d0, d1 = declblock()
-        di = next((i for i in range(d0, d1) if re.match(r'\s+[\w ]+?[ *]%s;$' % re.escape(old), lines[i])), None)
+        d0, d1 = declblock2()
+        di = next((i for i in range(d0, d1) if re.match(r'\s+[\w ]+?[ *]+%s;$' % re.escape(old), lines[i])), None)
         if di is None or any(re.search(wb(old), strip_strings(lines[i])) for i in range(brace + 1, e) if i != di): continue
         nn = created.get(old)
         if nn:
-            dj = next((i for i in range(d0, d1) if re.match(r'\s+[\w ]+?[ *]%s;$' % re.escape(nn[0]), lines[i])), None)
+            dj = next((i for i in range(d0, d1) if re.match(r'\s+[\w ]+?[ *]+%s;$' % re.escape(nn[0]), lines[i])), None)
             if dj is not None and dj != di:
                 lines[di] = lines[dj]; del lines[dj]; e -= 1
                 continue
@@ -199,4 +204,5 @@ def main():
     sys.exit(1 if errors or (check and pending) else 0)
 
 
-main()
+if __name__ == "__main__":
+    main()

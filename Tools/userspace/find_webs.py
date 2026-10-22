@@ -220,7 +220,10 @@ def facts(nodes, var):
     ident = re.compile(r'(?<![\w])%s(?![\w])' % re.escape(var))
     for n in nodes:
         t = A.strip_strings(n.text)
-        if pa.search(t): raise SystemExit('%s: address taken in "%s"' % (var, n.text))
+        for m in pa.finditer(t):                           # `a & var` is a bit-and, not an address-of: look at what precedes the `&`
+            before = t[:m.start()].rstrip()
+            if not before or not (before[-1].isalnum() or before[-1] in '_)]'):
+                raise SystemExit('%s: address taken in "%s"' % (var, n.text))
         occ = [m.start() for m in ident.finditer(t)]
         defpos = [m.start() for m in pd.finditer(t) if t[m.start():m.start() + len(var)] == var]
         compound = [p for p in defpos if re.match(r'%s\s*(?:\+|-|\||&|\^|<<|>>|\*|/)=' % re.escape(var), t[p:])]
@@ -360,4 +363,5 @@ def main():
             if len(ls) > 3: print('      ...')
 
 
-main()
+if __name__ == "__main__":
+    main()

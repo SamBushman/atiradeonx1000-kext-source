@@ -592,2008 +592,2008 @@ LAB_97b916c8:
 }
 
 /* TIntermConstantUnion__fold @ 0x97b91724 (792 bytes) */
-int TIntermConstantUnion__fold(this, param_2, param_3, infoSink, param_5, param_6, param_7)
+int TIntermConstantUnion__fold(this, op, rightOperand, infoSink, swapOperands, unusedArg6, unusedArg7)
   unsigned char * this;
-  int param_2;
-  unsigned char * param_3;
+  int op;
+  unsigned char * rightOperand;
   void *infoSink;
-  int param_5;
-  undefined4 param_6;
-  uint param_7;
+  int swapOperands;
+  undefined4 unusedArg6;
+  uint unusedArg7;
 {
-  bool bVar1;
-  undefined *puVar2;
-  uint uVar3;
-  undefined **ppuVar4;
-  float fVar5;
-  float fVar6;
-  uint uVar7;
-  undefined *puVar8;
-  unsigned char * pcVar9;
-  uint uVar10;
-  undefined4 *puVar11;
-  int iVar12;
-  int iVar13;
-  int iVar14;
-  int *a0;
-  uint *puVar15;
+  bool sizeFlag;
+  undefined *newRefCount;
+  uint typeBit10;
+  undefined **refCountPtrCopy;
+  float leftValue;
+  float rightOrResultValue;
+  uint nodeBitsBefore;
+  undefined *refCountOrVtable;
+  unsigned char * thisOrRightCursor;
+  uint bitsOrLine;
+  undefined4 *nodeOrVtable;
+  int sizeOrArrayOrIndex;
+  int resultOrOffset;
+  int countOrResult;
+  int *rightConstUnion;
+  uint *resultBool;
   unsigned char * poolAllocator;
-  int iVar17;
-  unsigned char * pTVar18;
-  undefined4 uVar19;
-  unsigned char * paVar20;
-  uint uVar21;
-  undefined4 a1;
-  undefined4 a1_00;
-  undefined4 a1_01;
-  undefined4 a1_02;
-  undefined4 a1_03;
-  undefined4 a1_04;
-  undefined4 extraout_r4;
-  undefined4 extraout_r4_00;
-  undefined4 a1_05;
-  undefined4 a1_06;
-  undefined4 a1_07;
-  undefined4 extraout_r4_01;
-  undefined4 extraout_r4_02;
-  undefined4 a1_08;
-  undefined4 a1_09;
-  undefined4 a1_10;
-  undefined4 a1_11;
-  undefined4 extraout_r4_03;
-  undefined4 extraout_r4_04;
-  undefined4 extraout_r4_05;
-  undefined4 extraout_r4_06;
-  undefined4 extraout_r4_07;
-  undefined4 extraout_r4_08;
-  undefined4 extraout_r4_09;
-  undefined4 extraout_r4_10;
-  unsigned char * paVar22;
-  undefined4 extraout_r4_11;
-  void *a3;
-  int iVar23;
-  float *pfVar24;
-  uint uVar25;
-  float *pfVar26;
-  unsigned char * pcVar27;
-  int iVar28;
-  undefined **ppuVar29;
-  char *pcVar30;
-  bool bVar31;
-  char in_RESERVE;
-  byte bVar32;
-  int iVar33;
-  undefined8 uVar34;
-  undefined **local_1d0;
-  undefined4 local_1cc;
-  undefined4 local_1c8;
-  undefined4 local_1c4;
-  undefined4 local_1c0;
-  undefined4 local_1bc;
-  undefined4 local_1b8;
-  undefined4 local_1b4;
-  undefined4 local_1b0;
-  uint local_1ac;
-  undefined **local_1a0;
-  int local_19c;
-  int local_198;
-  int local_194;
-  int local_190;
-  int local_18c;
-  int local_188;
-  int local_184;
-  int local_180;
-  uint local_17c;
-  undefined **local_170;
-  int local_16c;
-  int local_168;
-  int local_164;
-  int local_160;
-  int local_15c;
-  int local_158;
-  int local_154;
-  int local_150;
-  uint local_14c;
-  undefined **local_140 [4];
-  unsigned char aaStack_130 [16];
-  unsigned char aaStack_120 [4];
-  uint local_11c;
-  undefined **local_110;
-  undefined4 local_10c;
-  undefined4 local_108;
-  undefined4 local_104;
-  undefined4 local_100;
-  undefined4 local_fc;
-  undefined4 local_f8;
-  undefined4 local_f4;
-  undefined4 local_f0;
-  uint local_ec;
-  unsigned char aaStack_e0 [16];
-  char acStack_d0 [16];
-  unsigned char aaStack_c0 [48];
-  char acStack_90 [64];
-  int local_50;
-  uint local_4c;
+  int sizeOrIndex;
+  unsigned char * newNodeOrRightArg;
+  undefined4 r4Value;
+  unsigned char * stringRep;
+  uint typeBitsOrLoc;
+  undefined4 r4In0;
+  undefined4 r4In1;
+  undefined4 r4In2;
+  undefined4 r4In3;
+  undefined4 r4In4;
+  undefined4 r4In5;
+  undefined4 r4Out0;
+  undefined4 r4Out1;
+  undefined4 r4In6;
+  undefined4 r4In7;
+  undefined4 r4In8;
+  undefined4 r4Out2;
+  undefined4 r4Out3;
+  undefined4 r4In9;
+  undefined4 r4In10;
+  undefined4 r4In11;
+  undefined4 r4In12;
+  undefined4 r4Out4;
+  undefined4 r4Out5;
+  undefined4 r4Out6;
+  undefined4 r4Out7;
+  undefined4 r4Out8;
+  undefined4 r4Out9;
+  undefined4 r4Out10;
+  undefined4 r4Out11;
+  unsigned char * locText;
+  undefined4 r4Out12;
+  void *infoSinkArg;
+  int columnOffset;
+  float *resultCursor;
+  uint typeFieldOrInt;
+  float *resultOrRightFloats;
+  unsigned char * thisUnion;
+  int sizeOrLoopIndex;
+  undefined **refCountPtr;
+  char *message;
+  bool flagOrCompare;
+  char reservation;
+  byte reservationOk;
+  int columnsLeft;
+  undefined8 allocPair;
+  undefined **unaryTypeVtbl;
+  undefined4 unaryTypeWord1;
+  undefined4 unaryTypeWord2;
+  undefined4 unaryTypeWord3;
+  undefined4 unaryTypeWord4OrLocText;
+  undefined4 unaryTypeWord5;
+  undefined4 unaryTypeWord6;
+  undefined4 unaryTypeWord7;
+  undefined4 unaryTypeWord8;
+  uint unaryTypeBits;
+  undefined **binaryTypeVtbl;
+  int binaryTypeWord1;
+  int binaryTypeWord2;
+  int binaryTypeWord3;
+  int binaryTypeWord4OrLocText;
+  int binaryTypeWord5;
+  int binaryTypeWord6;
+  int binaryTypeWord7;
+  int binaryTypeWord8;
+  uint binaryTypeBits;
+  undefined **compareTypeVtbl;
+  int compareTypeWord1;
+  int compareTypeWord2;
+  int compareTypeWord3;
+  int compareTypeWord4OrLocText;
+  int compareTypeWord5;
+  int compareTypeWord6;
+  int compareTypeWord7;
+  int compareTypeWord8;
+  uint compareTypeBits;
+  undefined **rightTypeOrString [4];
+  unsigned char locTextBuf [16];
+  unsigned char stringAllocator [4];
+  uint rightTypeBits;
+  undefined **tailTypeVtbl;
+  undefined4 tailTypeWord1;
+  undefined4 tailTypeWord2;
+  undefined4 tailTypeWord3;
+  undefined4 tailTypeWord4OrLocText;
+  undefined4 tailTypeWord5;
+  undefined4 tailTypeWord6;
+  undefined4 tailTypeWord7;
+  undefined4 tailTypeWord8;
+  uint tailTypeBits;
+  unsigned char stringAllocator2 [16];
+  char locTextBuf2 [16];
+  unsigned char stringAllocator3 [48];
+  char locTextBuf3 [64];
+  int compareStructureOut;
+  uint picBase;
   
-  pcVar27 = *(unsigned char **)(this + 0x30);
-  if (param_3 == (unsigned char *)0x0) {
-    iVar12 = 0;
-    iVar17 = (**(code **)(*(int *)this + 0x4c))(this,param_2);
+  thisUnion = *(unsigned char **)(this + 0x30);
+  if (rightOperand == (unsigned char *)0x0) {
+    sizeOrArrayOrIndex = 0;
+    sizeOrIndex = (**(code **)(*(int *)this + 0x4c))(this,op);
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-    pfVar26 = (float *)TPoolAllocator__allocate(poolAllocator,iVar17 << 2);
-    iVar17 = (**(code **)(*(int *)this + 0x4c))(this);
-    if (1 < iVar17) {
-      for (; iVar17 = (**(code **)(*(int *)this + 0x4c))(this), iVar12 < iVar17; iVar12 = iVar12 + 1
+    resultOrRightFloats = (float *)TPoolAllocator__allocate(poolAllocator,sizeOrIndex << 2);
+    sizeOrIndex = (**(code **)(*(int *)this + 0x4c))(this);
+    if (1 < sizeOrIndex) {
+      for (; sizeOrIndex = (**(code **)(*(int *)this + 0x4c))(this), sizeOrArrayOrIndex < sizeOrIndex; sizeOrArrayOrIndex = sizeOrArrayOrIndex + 1
           ) {
-        if (param_2 == 5) {
-          (**(code **)(*(int *)this + 0x38))(&local_1d0,this);
-          uVar21 = local_1ac >> 0x13 & 0x3f;
-          local_1d0 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-          if (uVar21 != 1) {
-            if (uVar21 == 2) {
-              fVar6 = GH_U2F((unsigned int)(-*(int *)(pcVar27 + iVar12 * 4)));
+        if (op == 5) {
+          (**(code **)(*(int *)this + 0x38))(&unaryTypeVtbl,this);
+          typeBitsOrLoc = unaryTypeBits >> 0x13 & 0x3f;
+          unaryTypeVtbl = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+          if (typeBitsOrLoc != 1) {
+            if (typeBitsOrLoc == 2) {
+              rightOrResultValue = GH_U2F((unsigned int)(-*(int *)(thisUnion + sizeOrArrayOrIndex * 4)));
               goto LAB_97b956a0;
             }
-            uVar21 = (*(code *)**(undefined4 **)this)(this);
+            typeBitsOrLoc = (*(code *)**(undefined4 **)this)(this);
                     
             goto override_jmp_97b95640_case_0;
           }
-          pfVar26[iVar12] = -*(float *)(pcVar27 + iVar12 * 4);
+          resultOrRightFloats[sizeOrArrayOrIndex] = -*(float *)(thisUnion + sizeOrArrayOrIndex * 4);
         }
         else {
-          if (param_2 != 6) {
+          if (op != 6) {
             return (unsigned char *)0x0;
           }
-          (**(code **)(*(int *)this + 0x38))(&local_1d0,this);
-          local_1d0 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-          if ((local_1ac >> 0x13 & 0x3f) != 3) {
-            uVar21 = (*(code *)**(undefined4 **)this)(this);
+          (**(code **)(*(int *)this + 0x38))(&unaryTypeVtbl,this);
+          unaryTypeVtbl = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+          if ((unaryTypeBits >> 0x13 & 0x3f) != 3) {
+            typeBitsOrLoc = (*(code *)**(undefined4 **)this)(this);
                     
             goto override_jmp_97b95640_case_0;
           }
-          fVar6 = GH_U2F((unsigned int)((*(uint *)(pcVar27 + iVar12 * 4) ^ 1)));
+          rightOrResultValue = GH_U2F((unsigned int)((*(uint *)(thisUnion + sizeOrArrayOrIndex * 4) ^ 1)));
 LAB_97b956a0:
-          pfVar26[iVar12] = fVar6;
+          resultOrRightFloats[sizeOrArrayOrIndex] = rightOrResultValue;
         }
-        local_1d0 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+        unaryTypeVtbl = &PTR___ZN5TTypeD1Ev_a7b7cff8;
       }
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-      puVar11 = (undefined4 *)TPoolAllocator__allocate(poolAllocator,0x34);
-      (**(code **)(*(int *)this + 0x38))(&local_1d0,this);
-      uVar34 = CONCAT44(puVar11,extraout_r4_11);
-      puVar11[1] = 0;
-      *puVar11 = &PTR_getLine_a7b7cf90;
-      puVar11[3] = local_1cc;
-      puVar11[4] = local_1c8;
-      puVar11[5] = local_1c4;
-      puVar11[6] = local_1c0;
-      puVar11[7] = local_1bc;
-      puVar11[8] = local_1b8;
-      puVar11[2] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-      puVar11[9] = local_1b4;
-      puVar11[10] = local_1b0;
-      uVar7 = puVar11[0xb];
-      uVar10 = local_1ac & 0xfe000000;
-      puVar11[0xb] = uVar10 | uVar7 & 0x1ffffff;
-      uVar25 = (local_1ac >> 0x13 & 0x3f) << 0x13;
-      puVar11[0xb] = uVar25 | uVar10 | uVar7 & 0x7ffff;
-      uVar21 = local_1ac & 0x7f800;
-      puVar11[0xb] = uVar21 | uVar25 | uVar10 | uVar7 & 0x7ff;
-      uVar3 = (local_1ac >> 10 & 1) << 10;
-      puVar11[0xb] = uVar3 | uVar21 | uVar25 | uVar10 | uVar7 & 0x3ff;
-      puVar8 = PTR_vtable_a7b7c0c8;
-      puVar11[0xb] = (local_1ac >> 9 & 1) << 9 | uVar3 | uVar21 | uVar25 | uVar10 | uVar7 & 0x1ff;
-      puVar11[0xc] = pfVar26;
-      *puVar11 = puVar8 + 8;
+      nodeOrVtable = (undefined4 *)TPoolAllocator__allocate(poolAllocator,0x34);
+      (**(code **)(*(int *)this + 0x38))(&unaryTypeVtbl,this);
+      allocPair = CONCAT44(nodeOrVtable,r4Out12);
+      nodeOrVtable[1] = 0;
+      *nodeOrVtable = &PTR_getLine_a7b7cf90;
+      nodeOrVtable[3] = unaryTypeWord1;
+      nodeOrVtable[4] = unaryTypeWord2;
+      nodeOrVtable[5] = unaryTypeWord3;
+      nodeOrVtable[6] = unaryTypeWord4OrLocText;
+      nodeOrVtable[7] = unaryTypeWord5;
+      nodeOrVtable[8] = unaryTypeWord6;
+      nodeOrVtable[2] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+      nodeOrVtable[9] = unaryTypeWord7;
+      nodeOrVtable[10] = unaryTypeWord8;
+      nodeBitsBefore = nodeOrVtable[0xb];
+      bitsOrLine = unaryTypeBits & 0xfe000000;
+      nodeOrVtable[0xb] = bitsOrLine | nodeBitsBefore & 0x1ffffff;
+      typeFieldOrInt = (unaryTypeBits >> 0x13 & 0x3f) << 0x13;
+      nodeOrVtable[0xb] = typeFieldOrInt | bitsOrLine | nodeBitsBefore & 0x7ffff;
+      typeBitsOrLoc = unaryTypeBits & 0x7f800;
+      nodeOrVtable[0xb] = typeBitsOrLoc | typeFieldOrInt | bitsOrLine | nodeBitsBefore & 0x7ff;
+      typeBit10 = (unaryTypeBits >> 10 & 1) << 10;
+      nodeOrVtable[0xb] = typeBit10 | typeBitsOrLoc | typeFieldOrInt | bitsOrLine | nodeBitsBefore & 0x3ff;
+      refCountOrVtable = PTR_vtable_a7b7c0c8;
+      nodeOrVtable[0xb] = (unaryTypeBits >> 9 & 1) << 9 | typeBit10 | typeBitsOrLoc | typeFieldOrInt | bitsOrLine | nodeBitsBefore & 0x1ff;
+      nodeOrVtable[0xc] = resultOrRightFloats;
+      *nodeOrVtable = refCountOrVtable + 8;
       goto LAB_97b95bbc;
     }
-    if (param_2 == 5) {
-      (**(code **)(*(int *)this + 0x38))(&local_1d0,this);
-      uVar21 = local_1ac >> 0x13 & 0x3f;
-      local_1d0 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-      if (uVar21 == 1) {
-        *pfVar26 = -**(float **)(this + 0x30);
+    if (op == 5) {
+      (**(code **)(*(int *)this + 0x38))(&unaryTypeVtbl,this);
+      typeBitsOrLoc = unaryTypeBits >> 0x13 & 0x3f;
+      unaryTypeVtbl = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+      if (typeBitsOrLoc == 1) {
+        *resultOrRightFloats = -**(float **)(this + 0x30);
         poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-        uVar34 = TPoolAllocator__allocate(poolAllocator,0x34);
-        uVar21 = local_1ac & 0x7ff | 0x4080000;
+        allocPair = TPoolAllocator__allocate(poolAllocator,0x34);
+        typeBitsOrLoc = unaryTypeBits & 0x7ff | 0x4080000;
         goto LAB_97b9597c;
       }
-      if (uVar21 == 2) {
-        *pfVar26 = GH_U2F((unsigned int)(-**(int **)(this + 0x30)));
+      if (typeBitsOrLoc == 2) {
+        *resultOrRightFloats = GH_U2F((unsigned int)(-**(int **)(this + 0x30)));
         poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-        uVar34 = TPoolAllocator__allocate(poolAllocator,0x34);
-        iVar17 = 2;
+        allocPair = TPoolAllocator__allocate(poolAllocator,0x34);
+        sizeOrIndex = 2;
         goto LAB_97b9596c;
       }
-      uVar21 = *(uint *)(this + 4);
+      typeBitsOrLoc = *(uint *)(this + 4);
                     
     }
     else {
-      if (param_2 != 6) {
+      if (op != 6) {
         return (unsigned char *)0x0;
       }
-      (**(code **)(*(int *)this + 0x38))(&local_1d0,this);
-      local_1d0 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-      if ((local_1ac >> 0x13 & 0x3f) == 3) {
-        *pfVar26 = GH_U2F((unsigned int)((**(uint **)(this + 0x30) ^ 1)));
+      (**(code **)(*(int *)this + 0x38))(&unaryTypeVtbl,this);
+      unaryTypeVtbl = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+      if ((unaryTypeBits >> 0x13 & 0x3f) == 3) {
+        *resultOrRightFloats = GH_U2F((unsigned int)((**(uint **)(this + 0x30) ^ 1)));
         poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-        uVar34 = TPoolAllocator__allocate(poolAllocator,0x34);
-        iVar17 = 3;
+        allocPair = TPoolAllocator__allocate(poolAllocator,0x34);
+        sizeOrIndex = 3;
 LAB_97b9596c:
-        uVar21 = iVar17 << 0x13 | local_1ac & 0xfff | 0x4000000;
+        typeBitsOrLoc = sizeOrIndex << 0x13 | unaryTypeBits & 0xfff | 0x4000000;
 LAB_97b9597c:
-        puVar11 = (undefined4 *)((ulonglong)uVar34 >> 0x20);
-        local_1ac = uVar21 & 0xfffff9ff | 0x800;
-        local_1cc = 0;
-        local_1c8 = 0;
-        local_1c4 = 0;
-        local_1c0 = 0;
-        local_1bc = 0;
-        local_1b8 = 0;
-        local_1b4 = 0;
-        local_1b0 = 0;
-        puVar11[1] = 0;
-        *puVar11 = &PTR_getLine_a7b7cf90;
-        puVar11[3] = 0;
-        puVar11[4] = 0;
-        puVar11[5] = 0;
-        puVar11[6] = 0;
-        puVar11[7] = 0;
-        puVar11[8] = 0;
-        puVar11[2] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-        puVar11[9] = 0;
-        puVar11[10] = 0;
-        uVar25 = puVar11[0xb];
-        uVar10 = uVar21 & 0xfe000000;
-        puVar11[0xb] = uVar10 | uVar25 & 0x1ffffff;
-        uVar21 = (uVar21 >> 0x13 & 0x3f) << 0x13;
-        puVar11[0xb] = uVar21 | uVar10 | uVar25 & 0x7ffff;
-        puVar11[0xb] = uVar21 | uVar10 | uVar25 & 0x7ff | 0x800;
-        puVar11[0xb] = uVar21 | uVar10 | uVar25 & 0x3ff | 0x800;
-        puVar8 = PTR_vtable_a7b7c0c8;
-        puVar11[0xb] = uVar21 | uVar10 | uVar25 & 0x1ff | 0x800;
-        puVar11[0xc] = pfVar26;
-        *puVar11 = puVar8 + 8;
+        nodeOrVtable = (undefined4 *)((ulonglong)allocPair >> 0x20);
+        unaryTypeBits = typeBitsOrLoc & 0xfffff9ff | 0x800;
+        unaryTypeWord1 = 0;
+        unaryTypeWord2 = 0;
+        unaryTypeWord3 = 0;
+        unaryTypeWord4OrLocText = 0;
+        unaryTypeWord5 = 0;
+        unaryTypeWord6 = 0;
+        unaryTypeWord7 = 0;
+        unaryTypeWord8 = 0;
+        nodeOrVtable[1] = 0;
+        *nodeOrVtable = &PTR_getLine_a7b7cf90;
+        nodeOrVtable[3] = 0;
+        nodeOrVtable[4] = 0;
+        nodeOrVtable[5] = 0;
+        nodeOrVtable[6] = 0;
+        nodeOrVtable[7] = 0;
+        nodeOrVtable[8] = 0;
+        nodeOrVtable[2] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+        nodeOrVtable[9] = 0;
+        nodeOrVtable[10] = 0;
+        typeFieldOrInt = nodeOrVtable[0xb];
+        bitsOrLine = typeBitsOrLoc & 0xfe000000;
+        nodeOrVtable[0xb] = bitsOrLine | typeFieldOrInt & 0x1ffffff;
+        typeBitsOrLoc = (typeBitsOrLoc >> 0x13 & 0x3f) << 0x13;
+        nodeOrVtable[0xb] = typeBitsOrLoc | bitsOrLine | typeFieldOrInt & 0x7ffff;
+        nodeOrVtable[0xb] = typeBitsOrLoc | bitsOrLine | typeFieldOrInt & 0x7ff | 0x800;
+        nodeOrVtable[0xb] = typeBitsOrLoc | bitsOrLine | typeFieldOrInt & 0x3ff | 0x800;
+        refCountOrVtable = PTR_vtable_a7b7c0c8;
+        nodeOrVtable[0xb] = typeBitsOrLoc | bitsOrLine | typeFieldOrInt & 0x1ff | 0x800;
+        nodeOrVtable[0xc] = resultOrRightFloats;
+        *nodeOrVtable = refCountOrVtable + 8;
 LAB_97b95bbc:
-        pTVar18 = (unsigned char *)((ulonglong)uVar34 >> 0x20);
-        local_1d0 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-        iVar17 = *(int *)pTVar18;
-        uVar19 = (*(code *)**(undefined4 **)this)(this,(int)uVar34);
-        (**(code **)(iVar17 + 4))(pTVar18,uVar19);
-        return pTVar18;
+        newNodeOrRightArg = (unsigned char *)((ulonglong)allocPair >> 0x20);
+        unaryTypeVtbl = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+        sizeOrIndex = *(int *)newNodeOrRightArg;
+        r4Value = (*(code *)**(undefined4 **)this)(this,(int)allocPair);
+        (**(code **)(sizeOrIndex + 4))(newNodeOrRightArg,r4Value);
+        return newNodeOrRightArg;
       }
-      uVar21 = *(uint *)(this + 4);
+      typeBitsOrLoc = *(uint *)(this + 4);
                     
     }
 override_jmp_97b95640_case_0:
-    pcVar30 = "Unary operation not folded into constant";
+    message = "Unary operation not folded into constant";
     __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
-    uVar10 = uVar21 & 0xffff;
-    bVar32 = (uVar10 == 0) << 1;
-    if (uVar10 == 0) {
-      _sprintf((char *)&local_1c0,"%d:? ",(int)uVar21 >> 0x10);
+    bitsOrLine = typeBitsOrLoc & 0xffff;
+    reservationOk = (bitsOrLine == 0) << 1;
+    if (bitsOrLine == 0) {
+      _sprintf((char *)&unaryTypeWord4OrLocText,"%d:? ",(int)typeBitsOrLoc >> 0x10);
     }
     else {
-      _sprintf((char *)&local_1c0,"%d:%d",(int)uVar21 >> 0x10,uVar10);
+      _sprintf((char *)&unaryTypeWord4OrLocText,"%d:%d",(int)typeBitsOrLoc >> 0x10,bitsOrLine);
     }
-    paVar22 = (unsigned char *)&local_1c0;
-    __ZNSsC1EPKcRKSaIcE(&local_1d0,(char *)paVar22,(unsigned char *)&local_180);
+    locText = (unsigned char *)&unaryTypeWord4OrLocText;
+    __ZNSsC1EPKcRKSaIcE(&unaryTypeVtbl,(char *)locText,(unsigned char *)&binaryTypeWord8);
                     
-    *(undefined *)((int)local_1d0 + (int)local_1d0[-3]) = *PTR__S_terminal_a7b7c0b8;
-    __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_1d0);
-    ppuVar29 = local_1d0;
+    *(undefined *)((int)unaryTypeVtbl + (int)unaryTypeVtbl[-3]) = *PTR__S_terminal_a7b7c0b8;
+    __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)unaryTypeVtbl);
+    refCountPtr = unaryTypeVtbl;
 code_r0x97b95b60:
-    ppuVar4 = ppuVar29 + -1;
+    refCountPtrCopy = refCountPtr + -1;
     do {
-      puVar8 = *ppuVar4;
+      refCountOrVtable = *refCountPtrCopy;
                     
-      if (in_RESERVE != '\0') {
-        puVar2 = (undefined *)storeWordConditionalIndexed(puVar8 + -1,0,ppuVar4);
-        *ppuVar4 = puVar2;
-        bVar32 = 2;
+      if (reservation != '\0') {
+        newRefCount = (undefined *)storeWordConditionalIndexed(refCountOrVtable + -1,0,refCountPtrCopy);
+        *refCountPtrCopy = newRefCount;
+        reservationOk = 2;
       }
-    } while (!(bool)(bVar32 >> 1 & 1));
+    } while (!(bool)(reservationOk >> 1 & 1));
 joined_r0x97b95b7c:
-    if ((int)puVar8 < 1) {
-      __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(ppuVar29 + -3),paVar22);
+    if ((int)refCountOrVtable < 1) {
+      __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(refCountPtr + -3),locText);
     }
     __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
 code_r0x97b95ba0:
-    __ZN13TInfoSinkBase6appendEPKc(infoSink,pcVar30);
+    __ZN13TInfoSinkBase6appendEPKc(infoSink,message);
     __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
 switchD_97b94d20_caseD_17:
     return (unsigned char *)0x0;
   }
-  bVar31 = false;
-  pTVar18 = param_3;
-  a3 = infoSink;
-  iVar17 = param_5;
-  iVar12 = (**(code **)(*(int *)param_3 + 0x18))(param_3);
-  if ((iVar12 != 0) && (iVar12 = (**(code **)(*(int *)param_3 + 0x4c))(param_3), iVar12 == 1)) {
-    (**(code **)(*(int *)param_3 + 0x38))(&local_1d0,param_3);
-    if (((local_1ac >> 0x13 & 0x3f) != 0xe) &&
-       (iVar12 = (**(code **)(*(int *)this + 0x4c))(this), 1 < iVar12)) {
-      bVar31 = true;
+  flagOrCompare = false;
+  newNodeOrRightArg = rightOperand;
+  infoSinkArg = infoSink;
+  sizeOrIndex = swapOperands;
+  sizeOrArrayOrIndex = (**(code **)(*(int *)rightOperand + 0x18))(rightOperand);
+  if ((sizeOrArrayOrIndex != 0) && (sizeOrArrayOrIndex = (**(code **)(*(int *)rightOperand + 0x4c))(rightOperand), sizeOrArrayOrIndex == 1)) {
+    (**(code **)(*(int *)rightOperand + 0x38))(&unaryTypeVtbl,rightOperand);
+    if (((unaryTypeBits >> 0x13 & 0x3f) != 0xe) &&
+       (sizeOrArrayOrIndex = (**(code **)(*(int *)this + 0x4c))(this), 1 < sizeOrArrayOrIndex)) {
+      flagOrCompare = true;
     }
-    local_4c = 0xa7b81734;
-    local_1d0 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-    if (!bVar31) goto LAB_97b92a7c;
-    iVar12 = (**(code **)(*(int *)param_3 + 0x18))(param_3);
-    uVar21 = param_2 - 0x13;
-    if (uVar21 < 0x1a) {
-      iVar28 = uVar21 * 4;
-      switch(uVar21) {
+    picBase = 0xa7b81734;
+    unaryTypeVtbl = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+    if (!flagOrCompare) goto LAB_97b92a7c;
+    sizeOrArrayOrIndex = (**(code **)(*(int *)rightOperand + 0x18))(rightOperand);
+    typeBitsOrLoc = op - 0x13;
+    if (typeBitsOrLoc < 0x1a) {
+      sizeOrLoopIndex = typeBitsOrLoc * 4;
+      switch(typeBitsOrLoc) {
       case 0:
-        local_4c = 0xa7b81734;
-        iVar28 = (**(code **)(*(int *)this + 0x4c))(this,uVar21,pTVar18,a3,iVar17,param_6,iVar28);
+        picBase = 0xa7b81734;
+        sizeOrLoopIndex = (**(code **)(*(int *)this + 0x4c))(this,typeBitsOrLoc,newNodeOrRightArg,infoSinkArg,sizeOrIndex,unusedArg6,sizeOrLoopIndex);
         poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-        iVar13 = TPoolAllocator__allocate(poolAllocator,iVar28 << 2);
-        for (iVar28 = 0; iVar14 = (**(code **)(*(int *)this + 0x4c))(this), iVar28 < iVar14;
-            iVar28 = iVar28 + 1) {
-          (**(code **)(*(int *)this + 0x38))(&local_1a0,this);
-          uVar21 = local_17c >> 0x13 & 0x3f;
-          local_1a0 = (undefined **)(local_4c - 0x473c);
-          if (uVar21 != 1) {
-            if (uVar21 == 2) {
-              *(int *)(iVar28 * 4 + iVar13) =
-                   *(int *)(pcVar27 + iVar28 * 4) + **(int **)(iVar12 + 0x30);
+        resultOrOffset = TPoolAllocator__allocate(poolAllocator,sizeOrLoopIndex << 2);
+        for (sizeOrLoopIndex = 0; countOrResult = (**(code **)(*(int *)this + 0x4c))(this), sizeOrLoopIndex < countOrResult;
+            sizeOrLoopIndex = sizeOrLoopIndex + 1) {
+          (**(code **)(*(int *)this + 0x38))(&binaryTypeVtbl,this);
+          typeBitsOrLoc = binaryTypeBits >> 0x13 & 0x3f;
+          binaryTypeVtbl = (undefined **)(picBase - 0x473c);
+          if (typeBitsOrLoc != 1) {
+            if (typeBitsOrLoc == 2) {
+              *(int *)(sizeOrLoopIndex * 4 + resultOrOffset) =
+                   *(int *)(thisUnion + sizeOrLoopIndex * 4) + **(int **)(sizeOrArrayOrIndex + 0x30);
               goto LAB_97b919a8;
             }
-            pcVar30 = "Constant folding cannot be done for \"+\"";
-            uVar21 = (*(code *)**(undefined4 **)this)(this,a1,pTVar18,a3,iVar17,param_6,local_4c);
+            message = "Constant folding cannot be done for \"+\"";
+            typeBitsOrLoc = (*(code *)**(undefined4 **)this)(this,r4In0,newNodeOrRightArg,infoSinkArg,sizeOrIndex,unusedArg6,picBase);
                     
 override_jmp_97b9198c_case_0:
             __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
-            uVar10 = uVar21 & 0xffff;
-            bVar32 = (uVar10 == 0) << 1;
-            if (uVar10 == 0) {
-              _sprintf((char *)&local_190,"%d:? ",(int)uVar21 >> 0x10);
+            bitsOrLine = typeBitsOrLoc & 0xffff;
+            reservationOk = (bitsOrLine == 0) << 1;
+            if (bitsOrLine == 0) {
+              _sprintf((char *)&binaryTypeWord4OrLocText,"%d:? ",(int)typeBitsOrLoc >> 0x10);
             }
             else {
-              _sprintf((char *)&local_190,"%d:%d",(int)uVar21 >> 0x10,uVar10);
+              _sprintf((char *)&binaryTypeWord4OrLocText,"%d:%d",(int)typeBitsOrLoc >> 0x10,bitsOrLine);
             }
-            paVar22 = (unsigned char *)&local_190;
-            __ZNSsC1EPKcRKSaIcE(&local_1a0,(char *)paVar22,(unsigned char *)&local_150);
-            *(undefined *)((int)local_1a0 + (int)local_1a0[-3]) = *PTR__S_terminal_a7b7c0b8;
-            __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_1a0);
-            ppuVar29 = local_1a0 + -1;
-            paVar20 = (unsigned char *)(local_1a0 + -3);
+            locText = (unsigned char *)&binaryTypeWord4OrLocText;
+            __ZNSsC1EPKcRKSaIcE(&binaryTypeVtbl,(char *)locText,(unsigned char *)&compareTypeWord8);
+            *(undefined *)((int)binaryTypeVtbl + (int)binaryTypeVtbl[-3]) = *PTR__S_terminal_a7b7c0b8;
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)binaryTypeVtbl);
+            refCountPtr = binaryTypeVtbl + -1;
+            stringRep = (unsigned char *)(binaryTypeVtbl + -3);
             do {
-              puVar8 = *ppuVar29;
-              if (in_RESERVE != '\0') {
-                puVar2 = (undefined *)storeWordConditionalIndexed(puVar8 + -1,0,ppuVar29);
-                *ppuVar29 = puVar2;
-                bVar32 = 2;
+              refCountOrVtable = *refCountPtr;
+              if (reservation != '\0') {
+                newRefCount = (undefined *)storeWordConditionalIndexed(refCountOrVtable + -1,0,refCountPtr);
+                *refCountPtr = newRefCount;
+                reservationOk = 2;
               }
-            } while (!(bool)(bVar32 >> 1 & 1));
-            bVar31 = 0 < (int)puVar8;
+            } while (!(bool)(reservationOk >> 1 & 1));
+            flagOrCompare = 0 < (int)refCountOrVtable;
             goto code_r0x97b93fb8;
           }
-          *(float *)(iVar13 + iVar28 * 4) =
-               *(float *)(pcVar27 + iVar28 * 4) + **(float **)(iVar12 + 0x30);
+          *(float *)(resultOrOffset + sizeOrLoopIndex * 4) =
+               *(float *)(thisUnion + sizeOrLoopIndex * 4) + **(float **)(sizeOrArrayOrIndex + 0x30);
 LAB_97b919a8: ;
         }
         break;
       case 1:
-        local_4c = 0xa7b81734;
-        iVar28 = (**(code **)(*(int *)this + 0x4c))(this);
+        picBase = 0xa7b81734;
+        sizeOrLoopIndex = (**(code **)(*(int *)this + 0x4c))(this);
         poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-        iVar13 = TPoolAllocator__allocate(poolAllocator,iVar28 << 2);
-        for (iVar28 = 0; iVar14 = (**(code **)(*(int *)this + 0x4c))(this), iVar28 < iVar14;
-            iVar28 = iVar28 + 1) {
-          (**(code **)(*(int *)this + 0x38))(&local_1a0,this);
-          uVar21 = local_17c >> 0x13 & 0x3f;
-          local_1a0 = (undefined **)(local_4c - 0x473c);
-          if (uVar21 == 1) {
-            if (param_5 == 0) {
-              fVar6 = *(float *)(pcVar27 + iVar28 * 4);
-              fVar5 = **(float **)(iVar12 + 0x30);
+        resultOrOffset = TPoolAllocator__allocate(poolAllocator,sizeOrLoopIndex << 2);
+        for (sizeOrLoopIndex = 0; countOrResult = (**(code **)(*(int *)this + 0x4c))(this), sizeOrLoopIndex < countOrResult;
+            sizeOrLoopIndex = sizeOrLoopIndex + 1) {
+          (**(code **)(*(int *)this + 0x38))(&binaryTypeVtbl,this);
+          typeBitsOrLoc = binaryTypeBits >> 0x13 & 0x3f;
+          binaryTypeVtbl = (undefined **)(picBase - 0x473c);
+          if (typeBitsOrLoc == 1) {
+            if (swapOperands == 0) {
+              rightOrResultValue = *(float *)(thisUnion + sizeOrLoopIndex * 4);
+              leftValue = **(float **)(sizeOrArrayOrIndex + 0x30);
             }
             else {
-              fVar5 = *(float *)(pcVar27 + iVar28 * 4);
-              fVar6 = **(float **)(iVar12 + 0x30);
+              leftValue = *(float *)(thisUnion + sizeOrLoopIndex * 4);
+              rightOrResultValue = **(float **)(sizeOrArrayOrIndex + 0x30);
             }
-            *(float *)(iVar13 + iVar28 * 4) = fVar5 - fVar6;
+            *(float *)(resultOrOffset + sizeOrLoopIndex * 4) = leftValue - rightOrResultValue;
           }
           else {
-            if (uVar21 != 2) {
-              pcVar30 = "Constant folding cannot be done for \"-\"";
-              uVar21 = (*(code *)**(undefined4 **)this)
-                                 (this,a1_01,pTVar18,a3,iVar17,param_6,local_4c);
+            if (typeBitsOrLoc != 2) {
+              message = "Constant folding cannot be done for \"-\"";
+              typeBitsOrLoc = (*(code *)**(undefined4 **)this)
+                                 (this,r4In2,newNodeOrRightArg,infoSinkArg,sizeOrIndex,unusedArg6,picBase);
                     
               goto override_jmp_97b9198c_case_0;
             }
-            if (param_5 == 0) {
-              iVar14 = **(int **)(iVar12 + 0x30) - *(int *)(pcVar27 + iVar28 * 4);
+            if (swapOperands == 0) {
+              countOrResult = **(int **)(sizeOrArrayOrIndex + 0x30) - *(int *)(thisUnion + sizeOrLoopIndex * 4);
             }
             else {
-              iVar14 = *(int *)(pcVar27 + iVar28 * 4) - **(int **)(iVar12 + 0x30);
+              countOrResult = *(int *)(thisUnion + sizeOrLoopIndex * 4) - **(int **)(sizeOrArrayOrIndex + 0x30);
             }
-            *(int *)(iVar28 * 4 + iVar13) = iVar14;
+            *(int *)(sizeOrLoopIndex * 4 + resultOrOffset) = countOrResult;
           }
         }
         break;
       default:
         goto switchD_97b91834_caseD_15;
       case 3:
-        local_4c = 0xa7b81734;
-        iVar17 = (**(code **)(*(int *)this + 0x4c))(this);
+        picBase = 0xa7b81734;
+        sizeOrIndex = (**(code **)(*(int *)this + 0x4c))(this);
         poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-        iVar13 = TPoolAllocator__allocate(poolAllocator,iVar17 << 2);
-        for (iVar17 = 0; iVar28 = (**(code **)(*(int *)this + 0x4c))(this), iVar17 < iVar28;
-            iVar17 = iVar17 + 1) {
-          (**(code **)(*(int *)this + 0x38))(&local_1a0,this);
-          uVar21 = local_17c >> 0x13 & 0x3f;
-          local_1a0 = (undefined **)(local_4c - 0x473c);
-          if (uVar21 == 1) {
-            if (param_5 == 0) {
-              if (*(float *)(pcVar27 + iVar17 * 4) == 0.0) {
-                uVar21 = (*(code *)**(undefined4 **)this)(this);
+        resultOrOffset = TPoolAllocator__allocate(poolAllocator,sizeOrIndex << 2);
+        for (sizeOrIndex = 0; sizeOrLoopIndex = (**(code **)(*(int *)this + 0x4c))(this), sizeOrIndex < sizeOrLoopIndex;
+            sizeOrIndex = sizeOrIndex + 1) {
+          (**(code **)(*(int *)this + 0x38))(&binaryTypeVtbl,this);
+          typeBitsOrLoc = binaryTypeBits >> 0x13 & 0x3f;
+          binaryTypeVtbl = (undefined **)(picBase - 0x473c);
+          if (typeBitsOrLoc == 1) {
+            if (swapOperands == 0) {
+              if (*(float *)(thisUnion + sizeOrIndex * 4) == 0.0) {
+                typeBitsOrLoc = (*(code *)**(undefined4 **)this)(this);
                     
                 __ZN13TInfoSinkBase6appendEPKc(infoSink,"WARNING: ");
-                uVar10 = uVar21 & 0xffff;
-                bVar32 = (uVar10 == 0) << 1;
-                if (uVar10 == 0) {
-                  _sprintf((char *)&local_190,"%d:? ",(int)uVar21 >> 0x10);
+                bitsOrLine = typeBitsOrLoc & 0xffff;
+                reservationOk = (bitsOrLine == 0) << 1;
+                if (bitsOrLine == 0) {
+                  _sprintf((char *)&binaryTypeWord4OrLocText,"%d:? ",(int)typeBitsOrLoc >> 0x10);
                 }
                 else {
-                  _sprintf((char *)&local_190,"%d:%d",(int)uVar21 >> 0x10,uVar10);
+                  _sprintf((char *)&binaryTypeWord4OrLocText,"%d:%d",(int)typeBitsOrLoc >> 0x10,bitsOrLine);
                 }
-                __ZNSsC1EPKcRKSaIcE(&local_1a0,(char *)&local_190,(unsigned char *)&local_150);
-                *(undefined *)((int)local_1a0 + (int)local_1a0[-3]) = *PTR__S_terminal_a7b7c0b8;
-                __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_1a0);
-                ppuVar29 = local_1a0 + -1;
+                __ZNSsC1EPKcRKSaIcE(&binaryTypeVtbl,(char *)&binaryTypeWord4OrLocText,(unsigned char *)&compareTypeWord8);
+                *(undefined *)((int)binaryTypeVtbl + (int)binaryTypeVtbl[-3]) = *PTR__S_terminal_a7b7c0b8;
+                __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)binaryTypeVtbl);
+                refCountPtr = binaryTypeVtbl + -1;
                 do {
-                  puVar8 = *ppuVar29;
-                  if (in_RESERVE != '\0') {
-                    puVar2 = (undefined *)storeWordConditionalIndexed(puVar8 + -1,0,ppuVar29);
-                    *ppuVar29 = puVar2;
-                    bVar32 = 2;
+                  refCountOrVtable = *refCountPtr;
+                  if (reservation != '\0') {
+                    newRefCount = (undefined *)storeWordConditionalIndexed(refCountOrVtable + -1,0,refCountPtr);
+                    *refCountPtr = newRefCount;
+                    reservationOk = 2;
                   }
-                } while (!(bool)(bVar32 >> 1 & 1));
-                if ((int)puVar8 < 1) {
-                  __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_1a0 + -3),&local_190);
+                } while (!(bool)(reservationOk >> 1 & 1));
+                if ((int)refCountOrVtable < 1) {
+                  __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(binaryTypeVtbl + -3),&binaryTypeWord4OrLocText);
                 }
                 __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
                 __ZN13TInfoSinkBase6appendEPKc
                           (infoSink,"Divide by zero error during constant folding");
                 __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
-                fVar6 = 3.4028235e+38;
+                rightOrResultValue = 3.4028235e+38;
               }
               else {
-                fVar6 = **(float **)(iVar12 + 0x30) / *(float *)(pcVar27 + iVar17 * 4);
+                rightOrResultValue = **(float **)(sizeOrArrayOrIndex + 0x30) / *(float *)(thisUnion + sizeOrIndex * 4);
               }
-              *(float *)(iVar17 * 4 + iVar13) = fVar6;
+              *(float *)(sizeOrIndex * 4 + resultOrOffset) = rightOrResultValue;
             }
             else {
-              if (**(float **)(iVar12 + 0x30) == 0.0) {
-                uVar21 = (*(code *)**(undefined4 **)this)(this);
+              if (**(float **)(sizeOrArrayOrIndex + 0x30) == 0.0) {
+                typeBitsOrLoc = (*(code *)**(undefined4 **)this)(this);
                     
                 __ZN13TInfoSinkBase6appendEPKc(infoSink,"WARNING: ");
-                uVar10 = uVar21 & 0xffff;
-                bVar32 = (uVar10 == 0) << 1;
-                if (uVar10 == 0) {
-                  _sprintf((char *)&local_190,"%d:? ",(int)uVar21 >> 0x10);
+                bitsOrLine = typeBitsOrLoc & 0xffff;
+                reservationOk = (bitsOrLine == 0) << 1;
+                if (bitsOrLine == 0) {
+                  _sprintf((char *)&binaryTypeWord4OrLocText,"%d:? ",(int)typeBitsOrLoc >> 0x10);
                 }
                 else {
-                  _sprintf((char *)&local_190,"%d:%d",(int)uVar21 >> 0x10,uVar10);
+                  _sprintf((char *)&binaryTypeWord4OrLocText,"%d:%d",(int)typeBitsOrLoc >> 0x10,bitsOrLine);
                 }
-                __ZNSsC1EPKcRKSaIcE(&local_1a0,(char *)&local_190,(unsigned char *)&local_150);
-                *(undefined *)((int)local_1a0 + (int)local_1a0[-3]) = *PTR__S_terminal_a7b7c0b8;
-                __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_1a0);
-                ppuVar29 = local_1a0 + -1;
+                __ZNSsC1EPKcRKSaIcE(&binaryTypeVtbl,(char *)&binaryTypeWord4OrLocText,(unsigned char *)&compareTypeWord8);
+                *(undefined *)((int)binaryTypeVtbl + (int)binaryTypeVtbl[-3]) = *PTR__S_terminal_a7b7c0b8;
+                __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)binaryTypeVtbl);
+                refCountPtr = binaryTypeVtbl + -1;
                 do {
-                  puVar8 = *ppuVar29;
-                  if (in_RESERVE != '\0') {
-                    puVar2 = (undefined *)storeWordConditionalIndexed(puVar8 + -1,0,ppuVar29);
-                    *ppuVar29 = puVar2;
-                    bVar32 = 2;
+                  refCountOrVtable = *refCountPtr;
+                  if (reservation != '\0') {
+                    newRefCount = (undefined *)storeWordConditionalIndexed(refCountOrVtable + -1,0,refCountPtr);
+                    *refCountPtr = newRefCount;
+                    reservationOk = 2;
                   }
-                } while (!(bool)(bVar32 >> 1 & 1));
-                if ((int)puVar8 < 1) {
-                  __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_1a0 + -3),&local_190);
+                } while (!(bool)(reservationOk >> 1 & 1));
+                if ((int)refCountOrVtable < 1) {
+                  __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(binaryTypeVtbl + -3),&binaryTypeWord4OrLocText);
                 }
                 __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
                 __ZN13TInfoSinkBase6appendEPKc
                           (infoSink,"Divide by zero error during constant folding");
                 __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
-                iVar28 = iVar17 << 2;
-                fVar6 = 3.4028235e+38;
+                sizeOrLoopIndex = sizeOrIndex << 2;
+                rightOrResultValue = 3.4028235e+38;
               }
               else {
-                iVar28 = iVar17 * 4;
-                fVar6 = *(float *)(pcVar27 + iVar28) / **(float **)(iVar12 + 0x30);
+                sizeOrLoopIndex = sizeOrIndex * 4;
+                rightOrResultValue = *(float *)(thisUnion + sizeOrLoopIndex) / **(float **)(sizeOrArrayOrIndex + 0x30);
               }
-              *(float *)(iVar13 + iVar28) = fVar6;
+              *(float *)(resultOrOffset + sizeOrLoopIndex) = rightOrResultValue;
             }
           }
           else {
-            if (uVar21 != 2) {
-              pcVar30 = "Constant folding cannot be done for \"/\"";
-              uVar21 = (*(code *)**(undefined4 **)this)(this);
+            if (typeBitsOrLoc != 2) {
+              message = "Constant folding cannot be done for \"/\"";
+              typeBitsOrLoc = (*(code *)**(undefined4 **)this)(this);
                     
               goto override_jmp_97b9198c_case_0;
             }
-            if (param_5 == 0) {
-              if (*(int *)(pcVar27 + iVar17 * 4) == 0) {
-                uVar21 = (*(code *)**(undefined4 **)this)(this);
+            if (swapOperands == 0) {
+              if (*(int *)(thisUnion + sizeOrIndex * 4) == 0) {
+                typeBitsOrLoc = (*(code *)**(undefined4 **)this)(this);
                     
                 __ZN13TInfoSinkBase6appendEPKc(infoSink,"WARNING: ");
-                uVar10 = uVar21 & 0xffff;
-                bVar32 = (uVar10 == 0) << 1;
-                if (uVar10 == 0) {
-                  _sprintf((char *)&local_190,"%d:? ",(int)uVar21 >> 0x10);
+                bitsOrLine = typeBitsOrLoc & 0xffff;
+                reservationOk = (bitsOrLine == 0) << 1;
+                if (bitsOrLine == 0) {
+                  _sprintf((char *)&binaryTypeWord4OrLocText,"%d:? ",(int)typeBitsOrLoc >> 0x10);
                 }
                 else {
-                  _sprintf((char *)&local_190,"%d:%d",(int)uVar21 >> 0x10,uVar10);
+                  _sprintf((char *)&binaryTypeWord4OrLocText,"%d:%d",(int)typeBitsOrLoc >> 0x10,bitsOrLine);
                 }
-                __ZNSsC1EPKcRKSaIcE(&local_1a0,(char *)&local_190,(unsigned char *)&local_150);
-                *(undefined *)((int)local_1a0 + (int)local_1a0[-3]) = *PTR__S_terminal_a7b7c0b8;
-                __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_1a0);
-                ppuVar29 = local_1a0 + -1;
+                __ZNSsC1EPKcRKSaIcE(&binaryTypeVtbl,(char *)&binaryTypeWord4OrLocText,(unsigned char *)&compareTypeWord8);
+                *(undefined *)((int)binaryTypeVtbl + (int)binaryTypeVtbl[-3]) = *PTR__S_terminal_a7b7c0b8;
+                __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)binaryTypeVtbl);
+                refCountPtr = binaryTypeVtbl + -1;
                 do {
-                  puVar8 = *ppuVar29;
-                  if (in_RESERVE != '\0') {
-                    puVar2 = (undefined *)storeWordConditionalIndexed(puVar8 + -1,0,ppuVar29);
-                    *ppuVar29 = puVar2;
-                    bVar32 = 2;
+                  refCountOrVtable = *refCountPtr;
+                  if (reservation != '\0') {
+                    newRefCount = (undefined *)storeWordConditionalIndexed(refCountOrVtable + -1,0,refCountPtr);
+                    *refCountPtr = newRefCount;
+                    reservationOk = 2;
                   }
-                } while (!(bool)(bVar32 >> 1 & 1));
-                if ((int)puVar8 < 1) {
-                  __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_1a0 + -3),&local_190);
+                } while (!(bool)(reservationOk >> 1 & 1));
+                if ((int)refCountOrVtable < 1) {
+                  __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(binaryTypeVtbl + -3),&binaryTypeWord4OrLocText);
                 }
                 __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
                 __ZN13TInfoSinkBase6appendEPKc
                           (infoSink,"Divide by zero error during constant folding");
                 __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
-                iVar28 = 0x7fffffff;
+                sizeOrLoopIndex = 0x7fffffff;
               }
               else {
-                iVar28 = **(int **)(iVar12 + 0x30) / *(int *)(pcVar27 + iVar17 * 4);
+                sizeOrLoopIndex = **(int **)(sizeOrArrayOrIndex + 0x30) / *(int *)(thisUnion + sizeOrIndex * 4);
               }
-              *(int *)(iVar17 * 4 + iVar13) = iVar28;
+              *(int *)(sizeOrIndex * 4 + resultOrOffset) = sizeOrLoopIndex;
             }
             else {
-              if (**(int **)(iVar12 + 0x30) == 0) {
-                uVar21 = (*(code *)**(undefined4 **)this)(this);
+              if (**(int **)(sizeOrArrayOrIndex + 0x30) == 0) {
+                typeBitsOrLoc = (*(code *)**(undefined4 **)this)(this);
                     
                 __ZN13TInfoSinkBase6appendEPKc(infoSink,"WARNING: ");
-                uVar10 = uVar21 & 0xffff;
-                bVar32 = (uVar10 == 0) << 1;
-                if (uVar10 == 0) {
-                  _sprintf((char *)&local_190,"%d:? ",(int)uVar21 >> 0x10);
+                bitsOrLine = typeBitsOrLoc & 0xffff;
+                reservationOk = (bitsOrLine == 0) << 1;
+                if (bitsOrLine == 0) {
+                  _sprintf((char *)&binaryTypeWord4OrLocText,"%d:? ",(int)typeBitsOrLoc >> 0x10);
                 }
                 else {
-                  _sprintf((char *)&local_190,"%d:%d",(int)uVar21 >> 0x10,uVar10);
+                  _sprintf((char *)&binaryTypeWord4OrLocText,"%d:%d",(int)typeBitsOrLoc >> 0x10,bitsOrLine);
                 }
-                __ZNSsC1EPKcRKSaIcE(&local_1a0,(char *)&local_190,(unsigned char *)&local_150);
-                *(undefined *)((int)local_1a0 + (int)local_1a0[-3]) = *PTR__S_terminal_a7b7c0b8;
-                __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_1a0);
-                ppuVar29 = local_1a0 + -1;
+                __ZNSsC1EPKcRKSaIcE(&binaryTypeVtbl,(char *)&binaryTypeWord4OrLocText,(unsigned char *)&compareTypeWord8);
+                *(undefined *)((int)binaryTypeVtbl + (int)binaryTypeVtbl[-3]) = *PTR__S_terminal_a7b7c0b8;
+                __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)binaryTypeVtbl);
+                refCountPtr = binaryTypeVtbl + -1;
                 do {
-                  puVar8 = *ppuVar29;
-                  if (in_RESERVE != '\0') {
-                    puVar2 = (undefined *)storeWordConditionalIndexed(puVar8 + -1,0,ppuVar29);
-                    *ppuVar29 = puVar2;
-                    bVar32 = 2;
+                  refCountOrVtable = *refCountPtr;
+                  if (reservation != '\0') {
+                    newRefCount = (undefined *)storeWordConditionalIndexed(refCountOrVtable + -1,0,refCountPtr);
+                    *refCountPtr = newRefCount;
+                    reservationOk = 2;
                   }
-                } while (!(bool)(bVar32 >> 1 & 1));
-                if ((int)puVar8 < 1) {
-                  __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_1a0 + -3),&local_190);
+                } while (!(bool)(reservationOk >> 1 & 1));
+                if ((int)refCountOrVtable < 1) {
+                  __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(binaryTypeVtbl + -3),&binaryTypeWord4OrLocText);
                 }
                 __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
                 __ZN13TInfoSinkBase6appendEPKc
                           (infoSink,"Divide by zero error during constant folding");
                 __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
-                iVar14 = 0x7fffffff;
-                iVar28 = iVar17 << 2;
+                countOrResult = 0x7fffffff;
+                sizeOrLoopIndex = sizeOrIndex << 2;
               }
               else {
-                iVar28 = iVar17 * 4;
-                iVar14 = *(int *)(pcVar27 + iVar28) / **(int **)(iVar12 + 0x30);
+                sizeOrLoopIndex = sizeOrIndex * 4;
+                countOrResult = *(int *)(thisUnion + sizeOrLoopIndex) / **(int **)(sizeOrArrayOrIndex + 0x30);
               }
-              *(int *)(iVar28 + iVar13) = iVar14;
+              *(int *)(sizeOrLoopIndex + resultOrOffset) = countOrResult;
             }
           }
         }
         break;
       case 0x13:
       case 0x16:
-        local_4c = 0xa7b81734;
-        iVar28 = (**(code **)(*(int *)this + 0x4c))(this);
+        picBase = 0xa7b81734;
+        sizeOrLoopIndex = (**(code **)(*(int *)this + 0x4c))(this);
         poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-        uVar34 = TPoolAllocator__allocate(poolAllocator,iVar28 << 2);
-        iVar13 = (int)((ulonglong)uVar34 >> 0x20);
-        uVar19 = (undefined4)uVar34;
-        for (iVar28 = 0; iVar14 = (**(code **)(*(int *)this + 0x4c))(this,uVar19), iVar28 < iVar14;
-            iVar28 = iVar28 + 1) {
-          (**(code **)(*(int *)this + 0x38))(&local_1a0,this);
-          uVar21 = local_17c >> 0x13 & 0x3f;
-          local_1a0 = (undefined **)(local_4c - 0x473c);
-          if (uVar21 == 1) {
-            *(float *)(iVar13 + iVar28 * 4) =
-                 *(float *)(pcVar27 + iVar28 * 4) * **(float **)(iVar12 + 0x30);
+        allocPair = TPoolAllocator__allocate(poolAllocator,sizeOrLoopIndex << 2);
+        resultOrOffset = (int)((ulonglong)allocPair >> 0x20);
+        r4Value = (undefined4)allocPair;
+        for (sizeOrLoopIndex = 0; countOrResult = (**(code **)(*(int *)this + 0x4c))(this,r4Value), sizeOrLoopIndex < countOrResult;
+            sizeOrLoopIndex = sizeOrLoopIndex + 1) {
+          (**(code **)(*(int *)this + 0x38))(&binaryTypeVtbl,this);
+          typeBitsOrLoc = binaryTypeBits >> 0x13 & 0x3f;
+          binaryTypeVtbl = (undefined **)(picBase - 0x473c);
+          if (typeBitsOrLoc == 1) {
+            *(float *)(resultOrOffset + sizeOrLoopIndex * 4) =
+                 *(float *)(thisUnion + sizeOrLoopIndex * 4) * **(float **)(sizeOrArrayOrIndex + 0x30);
           }
           else {
-            if (uVar21 != 2) {
-              pcVar30 = "Constant folding cannot be done for \"*\"";
-              uVar21 = (*(code *)**(undefined4 **)this)
-                                 (this,a1_00,pTVar18,a3,iVar17,param_6,local_4c);
+            if (typeBitsOrLoc != 2) {
+              message = "Constant folding cannot be done for \"*\"";
+              typeBitsOrLoc = (*(code *)**(undefined4 **)this)
+                                 (this,r4In1,newNodeOrRightArg,infoSinkArg,sizeOrIndex,unusedArg6,picBase);
                     
               __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
-              uVar10 = uVar21 & 0xffff;
-              bVar32 = (uVar10 == 0) << 1;
-              if (uVar10 == 0) {
-                _sprintf((char *)local_140,"%d:? ",(int)uVar21 >> 0x10);
+              bitsOrLine = typeBitsOrLoc & 0xffff;
+              reservationOk = (bitsOrLine == 0) << 1;
+              if (bitsOrLine == 0) {
+                _sprintf((char *)rightTypeOrString,"%d:? ",(int)typeBitsOrLoc >> 0x10);
               }
               else {
-                _sprintf((char *)local_140,"%d:%d",(int)uVar21 >> 0x10,uVar10);
+                _sprintf((char *)rightTypeOrString,"%d:%d",(int)typeBitsOrLoc >> 0x10,bitsOrLine);
               }
-              paVar22 = (unsigned char *)&local_190;
-              __ZNSsC1EPKcRKSaIcE(&local_1a0,(char *)local_140,paVar22);
-              *(undefined *)((int)local_1a0 + (int)local_1a0[-3]) = *PTR__S_terminal_a7b7c0b8;
-              __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_1a0);
-              ppuVar29 = local_1a0;
+              locText = (unsigned char *)&binaryTypeWord4OrLocText;
+              __ZNSsC1EPKcRKSaIcE(&binaryTypeVtbl,(char *)rightTypeOrString,locText);
+              *(undefined *)((int)binaryTypeVtbl + (int)binaryTypeVtbl[-3]) = *PTR__S_terminal_a7b7c0b8;
+              __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)binaryTypeVtbl);
+              refCountPtr = binaryTypeVtbl;
               goto code_r0x97b932f0;
             }
-            *(int *)(iVar28 * 4 + iVar13) =
-                 *(int *)(pcVar27 + iVar28 * 4) * **(int **)(iVar12 + 0x30);
+            *(int *)(sizeOrLoopIndex * 4 + resultOrOffset) =
+                 *(int *)(thisUnion + sizeOrLoopIndex * 4) * **(int **)(sizeOrArrayOrIndex + 0x30);
           }
-          uVar19 = a1_00;
+          r4Value = r4In1;
         }
         break;
       case 0x17:
-        local_4c = 0xa7b81734;
-        iVar28 = (**(code **)(*(int *)this + 0x4c))(this);
+        picBase = 0xa7b81734;
+        sizeOrLoopIndex = (**(code **)(*(int *)this + 0x4c))(this);
         poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-        uVar34 = TPoolAllocator__allocate(poolAllocator,iVar28 << 2);
-        iVar13 = (int)((ulonglong)uVar34 >> 0x20);
-        uVar19 = (undefined4)uVar34;
-        for (iVar28 = 0; iVar14 = (**(code **)(*(int *)this + 0x4c))(this,uVar19), iVar28 < iVar14;
-            iVar28 = iVar28 + 1) {
-          (**(code **)(*(int *)this + 0x38))(&local_1a0,this);
-          local_1a0 = (undefined **)(local_4c - 0x473c);
-          if ((local_17c >> 0x13 & 0x3f) != 3) {
-            pcVar30 = "Constant folding cannot be done for \"||\"";
-            uVar21 = (*(code *)**(undefined4 **)this)(this,a1_04,pTVar18,a3,iVar17,param_6,local_4c)
+        allocPair = TPoolAllocator__allocate(poolAllocator,sizeOrLoopIndex << 2);
+        resultOrOffset = (int)((ulonglong)allocPair >> 0x20);
+        r4Value = (undefined4)allocPair;
+        for (sizeOrLoopIndex = 0; countOrResult = (**(code **)(*(int *)this + 0x4c))(this,r4Value), sizeOrLoopIndex < countOrResult;
+            sizeOrLoopIndex = sizeOrLoopIndex + 1) {
+          (**(code **)(*(int *)this + 0x38))(&binaryTypeVtbl,this);
+          binaryTypeVtbl = (undefined **)(picBase - 0x473c);
+          if ((binaryTypeBits >> 0x13 & 0x3f) != 3) {
+            message = "Constant folding cannot be done for \"||\"";
+            typeBitsOrLoc = (*(code *)**(undefined4 **)this)(this,r4In5,newNodeOrRightArg,infoSinkArg,sizeOrIndex,unusedArg6,picBase)
             ;
                     
             goto override_jmp_97b9198c_case_0;
           }
-          uVar19 = 0;
-          if ((*(int *)(pcVar27 + iVar28 * 4) != 0) || (**(int **)(iVar12 + 0x30) != 0)) {
-            uVar19 = 1;
+          r4Value = 0;
+          if ((*(int *)(thisUnion + sizeOrLoopIndex * 4) != 0) || (**(int **)(sizeOrArrayOrIndex + 0x30) != 0)) {
+            r4Value = 1;
           }
-          *(undefined4 *)(iVar28 * 4 + iVar13) = uVar19;
-          uVar19 = a1_04;
+          *(undefined4 *)(sizeOrLoopIndex * 4 + resultOrOffset) = r4Value;
+          r4Value = r4In5;
         }
         break;
       case 0x18:
-        local_4c = 0xa7b81734;
-        iVar13 = (**(code **)(*(int *)this + 0x4c))(this);
+        picBase = 0xa7b81734;
+        resultOrOffset = (**(code **)(*(int *)this + 0x4c))(this);
         poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-        uVar34 = TPoolAllocator__allocate(poolAllocator,iVar13 << 2);
-        iVar13 = (int)((ulonglong)uVar34 >> 0x20);
-        uVar19 = (undefined4)uVar34;
-        for (iVar14 = 0;
-            iVar28 = (**(code **)(*(int *)this + 0x4c))
-                               (this,uVar19,pTVar18,a3,iVar17,param_6,iVar28), iVar14 < iVar28;
-            iVar14 = iVar14 + 1) {
-          (**(code **)(*(int *)this + 0x38))(&local_1a0,this);
-          local_1a0 = (undefined **)(local_4c - 0x473c);
-          if ((local_17c >> 0x13 & 0x3f) != 3) {
-            pcVar30 = "Constant folding cannot be done for \"^^\"";
-            uVar21 = (*(code *)**(undefined4 **)this)(this,a1_03,pTVar18,a3,iVar17,param_6,local_4c)
+        allocPair = TPoolAllocator__allocate(poolAllocator,resultOrOffset << 2);
+        resultOrOffset = (int)((ulonglong)allocPair >> 0x20);
+        r4Value = (undefined4)allocPair;
+        for (countOrResult = 0;
+            sizeOrLoopIndex = (**(code **)(*(int *)this + 0x4c))
+                               (this,r4Value,newNodeOrRightArg,infoSinkArg,sizeOrIndex,unusedArg6,sizeOrLoopIndex), countOrResult < sizeOrLoopIndex;
+            countOrResult = countOrResult + 1) {
+          (**(code **)(*(int *)this + 0x38))(&binaryTypeVtbl,this);
+          binaryTypeVtbl = (undefined **)(picBase - 0x473c);
+          if ((binaryTypeBits >> 0x13 & 0x3f) != 3) {
+            message = "Constant folding cannot be done for \"^^\"";
+            typeBitsOrLoc = (*(code *)**(undefined4 **)this)(this,r4In4,newNodeOrRightArg,infoSinkArg,sizeOrIndex,unusedArg6,picBase)
             ;
                     
             goto override_jmp_97b9198c_case_0;
           }
-          uVar21 = *(uint *)(pcVar27 + iVar14 * 4) ^ **(uint **)(iVar12 + 0x30);
-          iVar28 = uVar21 - 1;
-          *(uint *)(iVar14 * 4 + iVar13) = uVar21 - (iVar28 + (uint)(uVar21 == 0));
-          uVar19 = a1_03;
+          typeBitsOrLoc = *(uint *)(thisUnion + countOrResult * 4) ^ **(uint **)(sizeOrArrayOrIndex + 0x30);
+          sizeOrLoopIndex = typeBitsOrLoc - 1;
+          *(uint *)(countOrResult * 4 + resultOrOffset) = typeBitsOrLoc - (sizeOrLoopIndex + (uint)(typeBitsOrLoc == 0));
+          r4Value = r4In4;
         }
         break;
       case 0x19:
-        local_4c = 0xa7b81734;
-        iVar28 = (**(code **)(*(int *)this + 0x4c))(this,uVar21);
+        picBase = 0xa7b81734;
+        sizeOrLoopIndex = (**(code **)(*(int *)this + 0x4c))(this,typeBitsOrLoc);
         poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-        iVar13 = TPoolAllocator__allocate(poolAllocator,iVar28 << 2);
-        for (iVar28 = 0; iVar14 = (**(code **)(*(int *)this + 0x4c))(this), iVar28 < iVar14;
-            iVar28 = iVar28 + 1) {
-          (**(code **)(*(int *)this + 0x38))(&local_1a0,this);
-          local_1a0 = (undefined **)(local_4c - 0x473c);
-          if ((local_17c >> 0x13 & 0x3f) != 3) {
-            pcVar30 = "Constant folding cannot be done for \"&&\"";
-            uVar21 = (*(code *)**(undefined4 **)this)(this,a1_02,pTVar18,a3,iVar17,param_6,local_4c)
+        resultOrOffset = TPoolAllocator__allocate(poolAllocator,sizeOrLoopIndex << 2);
+        for (sizeOrLoopIndex = 0; countOrResult = (**(code **)(*(int *)this + 0x4c))(this), sizeOrLoopIndex < countOrResult;
+            sizeOrLoopIndex = sizeOrLoopIndex + 1) {
+          (**(code **)(*(int *)this + 0x38))(&binaryTypeVtbl,this);
+          binaryTypeVtbl = (undefined **)(picBase - 0x473c);
+          if ((binaryTypeBits >> 0x13 & 0x3f) != 3) {
+            message = "Constant folding cannot be done for \"&&\"";
+            typeBitsOrLoc = (*(code *)**(undefined4 **)this)(this,r4In3,newNodeOrRightArg,infoSinkArg,sizeOrIndex,unusedArg6,picBase)
             ;
                     
             goto override_jmp_97b9198c_case_0;
           }
-          uVar19 = 0;
-          if ((*(int *)(pcVar27 + iVar28 * 4) != 0) && (**(int **)(iVar12 + 0x30) != 0)) {
-            uVar19 = 1;
+          r4Value = 0;
+          if ((*(int *)(thisUnion + sizeOrLoopIndex * 4) != 0) && (**(int **)(sizeOrArrayOrIndex + 0x30) != 0)) {
+            r4Value = 1;
           }
-          *(undefined4 *)(iVar28 * 4 + iVar13) = uVar19;
+          *(undefined4 *)(sizeOrLoopIndex * 4 + resultOrOffset) = r4Value;
         }
       }
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-      pTVar18 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x34);
-      (**(code **)(*(int *)this + 0x38))(&local_1a0,this);
-      *(int *)(pTVar18 + 4) = 0;
-      *(undefined ***)pTVar18 = &PTR_getLine_a7b7cf90;
-      *(int *)(pTVar18 + 0xc) = local_19c;
-      local_1a0 = (undefined **)(local_4c - 0x473c);
-      *(int *)(pTVar18 + 0x10) = local_198;
-      *(int *)(pTVar18 + 0x14) = local_194;
-      *(int *)(pTVar18 + 0x18) = local_190;
-      *(int *)(pTVar18 + 0x1c) = local_18c;
-      *(int *)(pTVar18 + 0x20) = local_188;
-      *(undefined ***)(pTVar18 + 8) = local_1a0;
-      *(int *)(pTVar18 + 0x24) = local_184;
-      *(int *)(pTVar18 + 0x28) = local_180;
-      uVar7 = *(uint *)(pTVar18 + 0x2c);
-      uVar10 = local_17c & 0xfe000000;
-      *(uint *)(pTVar18 + 0x2c) = uVar10 | uVar7 & 0x1ffffff;
-      uVar25 = (local_17c >> 0x13 & 0x3f) << 0x13;
-      *(uint *)(pTVar18 + 0x2c) = uVar25 | uVar10 | uVar7 & 0x7ffff;
-      uVar21 = local_17c & 0x7f800;
-      *(uint *)(pTVar18 + 0x2c) = uVar21 | uVar25 | uVar10 | uVar7 & 0x7ff;
-      uVar3 = (local_17c >> 10 & 1) << 10;
-      *(uint *)(pTVar18 + 0x2c) = uVar3 | uVar21 | uVar25 | uVar10 | uVar7 & 0x3ff;
-      puVar8 = PTR_vtable_a7b7c0c8;
-      *(uint *)(pTVar18 + 0x2c) =
-           (local_17c >> 9 & 1) << 9 | uVar3 | uVar21 | uVar25 | uVar10 | uVar7 & 0x1ff;
-      *(undefined **)pTVar18 = puVar8 + 8;
-      *(int *)(pTVar18 + 0x30) = iVar13;
+      newNodeOrRightArg = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x34);
+      (**(code **)(*(int *)this + 0x38))(&binaryTypeVtbl,this);
+      *(int *)(newNodeOrRightArg + 4) = 0;
+      *(undefined ***)newNodeOrRightArg = &PTR_getLine_a7b7cf90;
+      *(int *)(newNodeOrRightArg + 0xc) = binaryTypeWord1;
+      binaryTypeVtbl = (undefined **)(picBase - 0x473c);
+      *(int *)(newNodeOrRightArg + 0x10) = binaryTypeWord2;
+      *(int *)(newNodeOrRightArg + 0x14) = binaryTypeWord3;
+      *(int *)(newNodeOrRightArg + 0x18) = binaryTypeWord4OrLocText;
+      *(int *)(newNodeOrRightArg + 0x1c) = binaryTypeWord5;
+      *(int *)(newNodeOrRightArg + 0x20) = binaryTypeWord6;
+      *(undefined ***)(newNodeOrRightArg + 8) = binaryTypeVtbl;
+      *(int *)(newNodeOrRightArg + 0x24) = binaryTypeWord7;
+      *(int *)(newNodeOrRightArg + 0x28) = binaryTypeWord8;
+      nodeBitsBefore = *(uint *)(newNodeOrRightArg + 0x2c);
+      bitsOrLine = binaryTypeBits & 0xfe000000;
+      *(uint *)(newNodeOrRightArg + 0x2c) = bitsOrLine | nodeBitsBefore & 0x1ffffff;
+      typeFieldOrInt = (binaryTypeBits >> 0x13 & 0x3f) << 0x13;
+      *(uint *)(newNodeOrRightArg + 0x2c) = typeFieldOrInt | bitsOrLine | nodeBitsBefore & 0x7ffff;
+      typeBitsOrLoc = binaryTypeBits & 0x7f800;
+      *(uint *)(newNodeOrRightArg + 0x2c) = typeBitsOrLoc | typeFieldOrInt | bitsOrLine | nodeBitsBefore & 0x7ff;
+      typeBit10 = (binaryTypeBits >> 10 & 1) << 10;
+      *(uint *)(newNodeOrRightArg + 0x2c) = typeBit10 | typeBitsOrLoc | typeFieldOrInt | bitsOrLine | nodeBitsBefore & 0x3ff;
+      refCountOrVtable = PTR_vtable_a7b7c0c8;
+      *(uint *)(newNodeOrRightArg + 0x2c) =
+           (binaryTypeBits >> 9 & 1) << 9 | typeBit10 | typeBitsOrLoc | typeFieldOrInt | bitsOrLine | nodeBitsBefore & 0x1ff;
+      *(undefined **)newNodeOrRightArg = refCountOrVtable + 8;
+      *(int *)(newNodeOrRightArg + 0x30) = resultOrOffset;
       goto LAB_97b94758;
     }
 switchD_97b91834_caseD_15:
-    pcVar30 = "Invalid operator for constant folding";
-    uVar21 = (*(code *)**(undefined4 **)this)(this);
+    message = "Invalid operator for constant folding";
+    typeBitsOrLoc = (*(code *)**(undefined4 **)this)(this);
                     
     __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
-    uVar10 = uVar21 & 0xffff;
-    bVar32 = (uVar10 == 0) << 1;
-    if (uVar10 == 0) {
-      _sprintf((char *)&local_190,"%d:? ",(int)uVar21 >> 0x10);
+    bitsOrLine = typeBitsOrLoc & 0xffff;
+    reservationOk = (bitsOrLine == 0) << 1;
+    if (bitsOrLine == 0) {
+      _sprintf((char *)&binaryTypeWord4OrLocText,"%d:? ",(int)typeBitsOrLoc >> 0x10);
     }
     else {
-      _sprintf((char *)&local_190,"%d:%d",(int)uVar21 >> 0x10,uVar10);
+      _sprintf((char *)&binaryTypeWord4OrLocText,"%d:%d",(int)typeBitsOrLoc >> 0x10,bitsOrLine);
     }
-    paVar22 = (unsigned char *)&local_190;
-    __ZNSsC1EPKcRKSaIcE(&local_1a0,(char *)paVar22,(unsigned char *)&local_150);
-    *(undefined *)((int)local_1a0 + (int)local_1a0[-3]) = *PTR__S_terminal_a7b7c0b8;
-    __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_1a0);
-    ppuVar4 = local_1a0 + -1;
+    locText = (unsigned char *)&binaryTypeWord4OrLocText;
+    __ZNSsC1EPKcRKSaIcE(&binaryTypeVtbl,(char *)locText,(unsigned char *)&compareTypeWord8);
+    *(undefined *)((int)binaryTypeVtbl + (int)binaryTypeVtbl[-3]) = *PTR__S_terminal_a7b7c0b8;
+    __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)binaryTypeVtbl);
+    refCountPtrCopy = binaryTypeVtbl + -1;
     do {
-      puVar8 = *ppuVar4;
-      if (in_RESERVE != '\0') {
-        puVar2 = (undefined *)storeWordConditionalIndexed(puVar8 + -1,0,ppuVar4);
-        *ppuVar4 = puVar2;
-        bVar32 = 2;
+      refCountOrVtable = *refCountPtrCopy;
+      if (reservation != '\0') {
+        newRefCount = (undefined *)storeWordConditionalIndexed(refCountOrVtable + -1,0,refCountPtrCopy);
+        *refCountPtrCopy = newRefCount;
+        reservationOk = 2;
       }
-      ppuVar29 = local_1a0;
-    } while (!(bool)(bVar32 >> 1 & 1));
+      refCountPtr = binaryTypeVtbl;
+    } while (!(bool)(reservationOk >> 1 & 1));
     goto joined_r0x97b95b7c;
   }
 LAB_97b92a7c:
-  iVar12 = (**(code **)(*(int *)param_3 + 0x18))(param_3);
-  if (iVar12 != 0) {
-    iVar12 = (**(code **)(*(int *)this + 0x4c))(this);
-    uVar19 = extraout_r4;
-    if (iVar12 < 2) {
-      local_4c = 0xa7b81734;
-      (**(code **)(*(int *)this + 0x38))(&local_1a0,this);
-      local_1a0 = (undefined **)(local_4c - 0x473c);
-      uVar19 = extraout_r4_00;
-      param_7 = local_4c;
-      if ((local_17c >> 0x13 & 0x3f) != 0xe) goto LAB_97b9478c;
+  sizeOrArrayOrIndex = (**(code **)(*(int *)rightOperand + 0x18))(rightOperand);
+  if (sizeOrArrayOrIndex != 0) {
+    sizeOrArrayOrIndex = (**(code **)(*(int *)this + 0x4c))(this);
+    r4Value = r4Out0;
+    if (sizeOrArrayOrIndex < 2) {
+      picBase = 0xa7b81734;
+      (**(code **)(*(int *)this + 0x38))(&binaryTypeVtbl,this);
+      binaryTypeVtbl = (undefined **)(picBase - 0x473c);
+      r4Value = r4Out1;
+      unusedArg7 = picBase;
+      if ((binaryTypeBits >> 0x13 & 0x3f) != 0xe) goto LAB_97b9478c;
     }
-    iVar12 = 0;
-    bVar31 = false;
-    a0 = (int *)(**(code **)(*(int *)param_3 + 0x18))
-                          (param_3,uVar19,pTVar18,a3,iVar17,param_6,param_7);
-    uVar21 = param_2 - 0x13;
-    pfVar26 = (float *)a0[0xc];
-    local_50 = 0;
-    if (0x43 < uVar21) {
+    sizeOrArrayOrIndex = 0;
+    flagOrCompare = false;
+    rightConstUnion = (int *)(**(code **)(*(int *)rightOperand + 0x18))
+                          (rightOperand,r4Value,newNodeOrRightArg,infoSinkArg,sizeOrIndex,unusedArg6,unusedArg7);
+    typeBitsOrLoc = op - 0x13;
+    resultOrRightFloats = (float *)rightConstUnion[0xc];
+    compareStructureOut = 0;
+    if (0x43 < typeBitsOrLoc) {
 switchD_97b92b40_caseD_17:
-      pcVar30 = "Invalid operator for constant folding";
-      uVar21 = (*(code *)**(undefined4 **)this)(this);
+      message = "Invalid operator for constant folding";
+      typeBitsOrLoc = (*(code *)**(undefined4 **)this)(this);
                     
 override_jmp_97b938f4_case_0:
       __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
-      uVar10 = uVar21 & 0xffff;
-      bVar32 = (uVar10 == 0) << 1;
-      if (uVar10 == 0) {
-        _sprintf((char *)&local_160,"%d:? ",(int)uVar21 >> 0x10);
+      bitsOrLine = typeBitsOrLoc & 0xffff;
+      reservationOk = (bitsOrLine == 0) << 1;
+      if (bitsOrLine == 0) {
+        _sprintf((char *)&compareTypeWord4OrLocText,"%d:? ",(int)typeBitsOrLoc >> 0x10);
       }
       else {
-        _sprintf((char *)&local_160,"%d:%d",(int)uVar21 >> 0x10,uVar10);
+        _sprintf((char *)&compareTypeWord4OrLocText,"%d:%d",(int)typeBitsOrLoc >> 0x10,bitsOrLine);
       }
 code_r0x97b945f4:
-      __ZNSsC1EPKcRKSaIcE(&local_170,(char *)&local_160,aaStack_120);
-      *(undefined *)((int)local_170 + (int)local_170[-3]) = *PTR__S_terminal_a7b7c0b8;
-      __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_170);
-      ppuVar29 = local_170 + -1;
+      __ZNSsC1EPKcRKSaIcE(&compareTypeVtbl,(char *)&compareTypeWord4OrLocText,stringAllocator);
+      *(undefined *)((int)compareTypeVtbl + (int)compareTypeVtbl[-3]) = *PTR__S_terminal_a7b7c0b8;
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)compareTypeVtbl);
+      refCountPtr = compareTypeVtbl + -1;
       do {
-        puVar8 = *ppuVar29;
-        if (in_RESERVE != '\0') {
-          puVar2 = (undefined *)storeWordConditionalIndexed(puVar8 + -1,0,ppuVar29);
-          *ppuVar29 = puVar2;
-          bVar32 = 2;
+        refCountOrVtable = *refCountPtr;
+        if (reservation != '\0') {
+          newRefCount = (undefined *)storeWordConditionalIndexed(refCountOrVtable + -1,0,refCountPtr);
+          *refCountPtr = newRefCount;
+          reservationOk = 2;
         }
-      } while (!(bool)(bVar32 >> 1 & 1));
-      paVar22 = (unsigned char *)&local_160;
-      ppuVar29 = local_170;
+      } while (!(bool)(reservationOk >> 1 & 1));
+      locText = (unsigned char *)&compareTypeWord4OrLocText;
+      refCountPtr = compareTypeVtbl;
       goto joined_r0x97b95b7c;
     }
-    iVar28 = uVar21 * 4;
-    switch(uVar21) {
+    sizeOrLoopIndex = typeBitsOrLoc * 4;
+    switch(typeBitsOrLoc) {
     case 0:
-      local_4c = 0xa7b81734;
-      iVar12 = (**(code **)(*(int *)this + 0x4c))(this,uVar21,pTVar18,a3,iVar17,param_6,iVar28);
+      picBase = 0xa7b81734;
+      sizeOrArrayOrIndex = (**(code **)(*(int *)this + 0x4c))(this,typeBitsOrLoc,newNodeOrRightArg,infoSinkArg,sizeOrIndex,unusedArg6,sizeOrLoopIndex);
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-      uVar34 = TPoolAllocator__allocate(poolAllocator,iVar12 << 2);
-      iVar12 = (int)((ulonglong)uVar34 >> 0x20);
-      uVar19 = (undefined4)uVar34;
-      for (iVar28 = 0; iVar13 = (**(code **)(*(int *)this + 0x4c))(this,uVar19), iVar28 < iVar13;
-          iVar28 = iVar28 + 1) {
-        (**(code **)(*(int *)this + 0x38))(&local_170,this);
-        uVar21 = local_14c >> 0x13 & 0x3f;
-        local_170 = (undefined **)(local_4c - 0x473c);
-        if (uVar21 != 1) {
-          if (uVar21 == 2) {
-            *(int *)(iVar12 + iVar28 * 4) = *(int *)(pcVar27 + iVar28 * 4) + (int)GH_F2U(pfVar26[iVar28]);
+      allocPair = TPoolAllocator__allocate(poolAllocator,sizeOrArrayOrIndex << 2);
+      sizeOrArrayOrIndex = (int)((ulonglong)allocPair >> 0x20);
+      r4Value = (undefined4)allocPair;
+      for (sizeOrLoopIndex = 0; resultOrOffset = (**(code **)(*(int *)this + 0x4c))(this,r4Value), sizeOrLoopIndex < resultOrOffset;
+          sizeOrLoopIndex = sizeOrLoopIndex + 1) {
+        (**(code **)(*(int *)this + 0x38))(&compareTypeVtbl,this);
+        typeBitsOrLoc = compareTypeBits >> 0x13 & 0x3f;
+        compareTypeVtbl = (undefined **)(picBase - 0x473c);
+        if (typeBitsOrLoc != 1) {
+          if (typeBitsOrLoc == 2) {
+            *(int *)(sizeOrArrayOrIndex + sizeOrLoopIndex * 4) = *(int *)(thisUnion + sizeOrLoopIndex * 4) + (int)GH_F2U(resultOrRightFloats[sizeOrLoopIndex]);
             goto LAB_97b92dd4;
           }
-          pcVar30 = "Constant folding cannot be done for \"+\"";
-          uVar21 = (*(code *)**(undefined4 **)this)(this,a1_05,pTVar18,a3,iVar17,param_6,local_4c);
+          message = "Constant folding cannot be done for \"+\"";
+          typeBitsOrLoc = (*(code *)**(undefined4 **)this)(this,r4In6,newNodeOrRightArg,infoSinkArg,sizeOrIndex,unusedArg6,picBase);
                     
           __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
-          uVar10 = uVar21 & 0xffff;
-          bVar32 = (uVar10 == 0) << 1;
-          if (uVar10 == 0) {
-            _sprintf((char *)&local_160,"%d:? ",(int)uVar21 >> 0x10);
+          bitsOrLine = typeBitsOrLoc & 0xffff;
+          reservationOk = (bitsOrLine == 0) << 1;
+          if (bitsOrLine == 0) {
+            _sprintf((char *)&compareTypeWord4OrLocText,"%d:? ",(int)typeBitsOrLoc >> 0x10);
           }
           else {
-            _sprintf((char *)&local_160,"%d:%d",(int)uVar21 >> 0x10,uVar10);
+            _sprintf((char *)&compareTypeWord4OrLocText,"%d:%d",(int)typeBitsOrLoc >> 0x10,bitsOrLine);
           }
-          paVar22 = (unsigned char *)&local_100;
+          locText = (unsigned char *)&tailTypeWord4OrLocText;
 code_r0x97b93f6c:
-          __ZNSsC1EPKcRKSaIcE(&local_170,(char *)&local_160,paVar22);
-          *(undefined *)((int)local_170 + (int)local_170[-3]) = *PTR__S_terminal_a7b7c0b8;
-          __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_170);
-          ppuVar29 = local_170 + -1;
-          paVar20 = (unsigned char *)(local_170 + -3);
+          __ZNSsC1EPKcRKSaIcE(&compareTypeVtbl,(char *)&compareTypeWord4OrLocText,locText);
+          *(undefined *)((int)compareTypeVtbl + (int)compareTypeVtbl[-3]) = *PTR__S_terminal_a7b7c0b8;
+          __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)compareTypeVtbl);
+          refCountPtr = compareTypeVtbl + -1;
+          stringRep = (unsigned char *)(compareTypeVtbl + -3);
           do {
-            puVar8 = *ppuVar29;
-            if (in_RESERVE != '\0') {
-              puVar2 = (undefined *)storeWordConditionalIndexed(puVar8 + -1,0,ppuVar29);
-              *ppuVar29 = puVar2;
-              bVar32 = 2;
+            refCountOrVtable = *refCountPtr;
+            if (reservation != '\0') {
+              newRefCount = (undefined *)storeWordConditionalIndexed(refCountOrVtable + -1,0,refCountPtr);
+              *refCountPtr = newRefCount;
+              reservationOk = 2;
             }
-          } while (!(bool)(bVar32 >> 1 & 1));
-          bVar31 = 0 < (int)puVar8;
-          paVar22 = (unsigned char *)&local_160;
+          } while (!(bool)(reservationOk >> 1 & 1));
+          flagOrCompare = 0 < (int)refCountOrVtable;
+          locText = (unsigned char *)&compareTypeWord4OrLocText;
           goto code_r0x97b93fb8;
         }
-        *(float *)(iVar12 + iVar28 * 4) = *(float *)(pcVar27 + iVar28 * 4) + pfVar26[iVar28];
+        *(float *)(sizeOrArrayOrIndex + sizeOrLoopIndex * 4) = *(float *)(thisUnion + sizeOrLoopIndex * 4) + resultOrRightFloats[sizeOrLoopIndex];
 LAB_97b92dd4:
-        uVar19 = a1_05;
+        r4Value = r4In6;
       }
       break;
     case 1:
-      local_4c = 0xa7b81734;
-      iVar12 = (**(code **)(*(int *)this + 0x4c))(this);
+      picBase = 0xa7b81734;
+      sizeOrArrayOrIndex = (**(code **)(*(int *)this + 0x4c))(this);
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-      uVar34 = TPoolAllocator__allocate(poolAllocator,iVar12 << 2);
-      iVar12 = (int)((ulonglong)uVar34 >> 0x20);
-      uVar19 = (undefined4)uVar34;
-      for (iVar28 = 0; iVar13 = (**(code **)(*(int *)this + 0x4c))(this,uVar19), iVar28 < iVar13;
-          iVar28 = iVar28 + 1) {
-        (**(code **)(*(int *)this + 0x38))(&local_170,this);
-        uVar21 = local_14c >> 0x13 & 0x3f;
-        local_170 = (undefined **)(local_4c - 0x473c);
-        if (uVar21 == 1) {
-          if (param_5 == 0) {
-            fVar6 = pfVar26[iVar28];
-            fVar5 = *(float *)(pcVar27 + iVar28 * 4);
+      allocPair = TPoolAllocator__allocate(poolAllocator,sizeOrArrayOrIndex << 2);
+      sizeOrArrayOrIndex = (int)((ulonglong)allocPair >> 0x20);
+      r4Value = (undefined4)allocPair;
+      for (sizeOrLoopIndex = 0; resultOrOffset = (**(code **)(*(int *)this + 0x4c))(this,r4Value), sizeOrLoopIndex < resultOrOffset;
+          sizeOrLoopIndex = sizeOrLoopIndex + 1) {
+        (**(code **)(*(int *)this + 0x38))(&compareTypeVtbl,this);
+        typeBitsOrLoc = compareTypeBits >> 0x13 & 0x3f;
+        compareTypeVtbl = (undefined **)(picBase - 0x473c);
+        if (typeBitsOrLoc == 1) {
+          if (swapOperands == 0) {
+            rightOrResultValue = resultOrRightFloats[sizeOrLoopIndex];
+            leftValue = *(float *)(thisUnion + sizeOrLoopIndex * 4);
           }
           else {
-            fVar6 = *(float *)(pcVar27 + iVar28 * 4);
-            fVar5 = pfVar26[iVar28];
+            rightOrResultValue = *(float *)(thisUnion + sizeOrLoopIndex * 4);
+            leftValue = resultOrRightFloats[sizeOrLoopIndex];
           }
-          *(float *)(iVar12 + iVar28 * 4) = fVar6 - fVar5;
+          *(float *)(sizeOrArrayOrIndex + sizeOrLoopIndex * 4) = rightOrResultValue - leftValue;
         }
         else {
-          if (uVar21 != 2) {
-            pcVar30 = "Constant folding cannot be done for \"-\"";
-            uVar21 = (*(code *)**(undefined4 **)this)(this,a1_06,pTVar18,a3,iVar17,param_6,local_4c)
+          if (typeBitsOrLoc != 2) {
+            message = "Constant folding cannot be done for \"-\"";
+            typeBitsOrLoc = (*(code *)**(undefined4 **)this)(this,r4In7,newNodeOrRightArg,infoSinkArg,sizeOrIndex,unusedArg6,picBase)
             ;
                     
             __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
-            uVar10 = uVar21 & 0xffff;
-            bVar32 = (uVar10 == 0) << 1;
-            if (uVar10 == 0) {
-              _sprintf((char *)&local_160,"%d:? ",(int)uVar21 >> 0x10);
+            bitsOrLine = typeBitsOrLoc & 0xffff;
+            reservationOk = (bitsOrLine == 0) << 1;
+            if (bitsOrLine == 0) {
+              _sprintf((char *)&compareTypeWord4OrLocText,"%d:? ",(int)typeBitsOrLoc >> 0x10);
             }
             else {
-              _sprintf((char *)&local_160,"%d:%d",(int)uVar21 >> 0x10,uVar10);
+              _sprintf((char *)&compareTypeWord4OrLocText,"%d:%d",(int)typeBitsOrLoc >> 0x10,bitsOrLine);
             }
-            paVar22 = (unsigned char *)&local_f0;
+            locText = (unsigned char *)&tailTypeWord8;
             goto code_r0x97b93f6c;
           }
-          if (param_5 == 0) {
-            fVar6 = pfVar26[iVar28];
-            fVar5 = *(float *)(pcVar27 + iVar28 * 4);
+          if (swapOperands == 0) {
+            rightOrResultValue = resultOrRightFloats[sizeOrLoopIndex];
+            leftValue = *(float *)(thisUnion + sizeOrLoopIndex * 4);
           }
           else {
-            fVar6 = *(float *)(pcVar27 + iVar28 * 4);
-            fVar5 = pfVar26[iVar28];
+            rightOrResultValue = *(float *)(thisUnion + sizeOrLoopIndex * 4);
+            leftValue = resultOrRightFloats[sizeOrLoopIndex];
           }
-          *(int *)(iVar12 + iVar28 * 4) = (int)GH_F2U(fVar6) - (int)GH_F2U(fVar5);
+          *(int *)(sizeOrArrayOrIndex + sizeOrLoopIndex * 4) = (int)GH_F2U(rightOrResultValue) - (int)GH_F2U(leftValue);
         }
-        uVar19 = a1_06;
+        r4Value = r4In7;
       }
       break;
     case 2:
-      iVar28 = (**(code **)(*(int *)this + 0x58))(this);
-      if (iVar28 != 0) {
-        iVar13 = 0;
-        iVar28 = (**(code **)(*(int *)this + 0x4c))(this);
+      sizeOrLoopIndex = (**(code **)(*(int *)this + 0x58))(this);
+      if (sizeOrLoopIndex != 0) {
+        resultOrOffset = 0;
+        sizeOrLoopIndex = (**(code **)(*(int *)this + 0x4c))(this);
         poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-        iVar12 = TPoolAllocator__allocate(poolAllocator,iVar28 << 2);
-        if (0 < iVar28) {
-          local_4c = 0xa7b81734;
+        sizeOrArrayOrIndex = TPoolAllocator__allocate(poolAllocator,sizeOrLoopIndex << 2);
+        if (0 < sizeOrLoopIndex) {
+          picBase = 0xa7b81734;
           do {
-            (**(code **)(*(int *)this + 0x38))(&local_170,this);
-            uVar21 = local_14c >> 0x13 & 0x3f;
-            local_170 = (undefined **)(local_4c - 0x473c);
-            if (uVar21 == 1) {
-              *(float *)(iVar12 + iVar13 * 4) = *(float *)(pcVar27 + iVar13 * 4) * pfVar26[iVar13];
+            (**(code **)(*(int *)this + 0x38))(&compareTypeVtbl,this);
+            typeBitsOrLoc = compareTypeBits >> 0x13 & 0x3f;
+            compareTypeVtbl = (undefined **)(picBase - 0x473c);
+            if (typeBitsOrLoc == 1) {
+              *(float *)(sizeOrArrayOrIndex + resultOrOffset * 4) = *(float *)(thisUnion + resultOrOffset * 4) * resultOrRightFloats[resultOrOffset];
             }
             else {
-              if (uVar21 != 2) {
-                pcVar30 = "Constant folding cannot be done for vector multiply";
-                uVar21 = (*(code *)**(undefined4 **)this)
-                                   (this,a1_07,pTVar18,a3,iVar17,param_6,local_4c);
+              if (typeBitsOrLoc != 2) {
+                message = "Constant folding cannot be done for vector multiply";
+                typeBitsOrLoc = (*(code *)**(undefined4 **)this)
+                                   (this,r4In8,newNodeOrRightArg,infoSinkArg,sizeOrIndex,unusedArg6,picBase);
                     
                 __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
-                uVar10 = uVar21 & 0xffff;
-                bVar32 = (uVar10 == 0) << 1;
-                if (uVar10 == 0) {
-                  _sprintf((char *)&local_160,"%d:? ",(int)uVar21 >> 0x10);
+                bitsOrLine = typeBitsOrLoc & 0xffff;
+                reservationOk = (bitsOrLine == 0) << 1;
+                if (bitsOrLine == 0) {
+                  _sprintf((char *)&compareTypeWord4OrLocText,"%d:? ",(int)typeBitsOrLoc >> 0x10);
                 }
                 else {
-                  _sprintf((char *)&local_160,"%d:%d",(int)uVar21 >> 0x10,uVar10);
+                  _sprintf((char *)&compareTypeWord4OrLocText,"%d:%d",(int)typeBitsOrLoc >> 0x10,bitsOrLine);
                 }
-                paVar22 = aaStack_e0;
+                locText = stringAllocator2;
                 goto code_r0x97b93f6c;
               }
-              *(int *)(iVar12 + iVar13 * 4) = *(int *)(pcVar27 + iVar13 * 4) * (int)GH_F2U(pfVar26[iVar13]);
+              *(int *)(sizeOrArrayOrIndex + resultOrOffset * 4) = *(int *)(thisUnion + resultOrOffset * 4) * (int)GH_F2U(resultOrRightFloats[resultOrOffset]);
             }
-            iVar13 = iVar13 + 1;
-          } while (iVar13 < iVar28);
+            resultOrOffset = resultOrOffset + 1;
+          } while (resultOrOffset < sizeOrLoopIndex);
           break;
         }
       }
-      local_4c = 0xa7b81734;
+      picBase = 0xa7b81734;
       break;
     case 3:
-      local_4c = 0xa7b81734;
-      iVar17 = (**(code **)(*(int *)this + 0x4c))(this);
+      picBase = 0xa7b81734;
+      sizeOrIndex = (**(code **)(*(int *)this + 0x4c))(this);
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-      iVar12 = TPoolAllocator__allocate(poolAllocator,iVar17 << 2);
-      for (iVar17 = 0; iVar28 = (**(code **)(*(int *)this + 0x4c))(this), iVar17 < iVar28;
-          iVar17 = iVar17 + 1) {
-        (**(code **)(*(int *)this + 0x38))(&local_170,this);
-        uVar21 = local_14c >> 0x13 & 0x3f;
-        local_170 = (undefined **)(local_4c - 0x473c);
-        if (uVar21 != 1) {
-          if (uVar21 == 2) {
-            if (param_5 == 0) {
-              fVar6 = *(float *)(pcVar27 + iVar17 * 4);
-              if (fVar6 == 0.0) {
-                uVar21 = (*(code *)**(undefined4 **)this)(this);
+      sizeOrArrayOrIndex = TPoolAllocator__allocate(poolAllocator,sizeOrIndex << 2);
+      for (sizeOrIndex = 0; sizeOrLoopIndex = (**(code **)(*(int *)this + 0x4c))(this), sizeOrIndex < sizeOrLoopIndex;
+          sizeOrIndex = sizeOrIndex + 1) {
+        (**(code **)(*(int *)this + 0x38))(&compareTypeVtbl,this);
+        typeBitsOrLoc = compareTypeBits >> 0x13 & 0x3f;
+        compareTypeVtbl = (undefined **)(picBase - 0x473c);
+        if (typeBitsOrLoc != 1) {
+          if (typeBitsOrLoc == 2) {
+            if (swapOperands == 0) {
+              rightOrResultValue = *(float *)(thisUnion + sizeOrIndex * 4);
+              if (rightOrResultValue == 0.0) {
+                typeBitsOrLoc = (*(code *)**(undefined4 **)this)(this);
                     
                 goto override_jmp_97b93698_case_0;
               }
-              fVar5 = pfVar26[iVar17];
+              leftValue = resultOrRightFloats[sizeOrIndex];
 code_r0x97b93828:
-              iVar28 = (int)GH_F2U(fVar5) / (int)GH_F2U(fVar6);
+              sizeOrLoopIndex = (int)GH_F2U(leftValue) / (int)GH_F2U(rightOrResultValue);
             }
             else {
-              fVar6 = pfVar26[iVar17];
-              if (fVar6 != 0.0) {
-                fVar5 = *(float *)(pcVar27 + iVar17 * 4);
+              rightOrResultValue = resultOrRightFloats[sizeOrIndex];
+              if (rightOrResultValue != 0.0) {
+                leftValue = *(float *)(thisUnion + sizeOrIndex * 4);
                 goto code_r0x97b93828;
               }
-              uVar21 = (*(code *)**(undefined4 **)this)(this);
+              typeBitsOrLoc = (*(code *)**(undefined4 **)this)(this);
                     
 override_jmp_97b93698_case_0:
               __ZN13TInfoSinkBase6appendEPKc(infoSink,"WARNING: ");
-              uVar10 = uVar21 & 0xffff;
-              bVar32 = (uVar10 == 0) << 1;
-              if (uVar10 == 0) {
-                _sprintf((char *)&local_160,"%d:? ",(int)uVar21 >> 0x10);
+              bitsOrLine = typeBitsOrLoc & 0xffff;
+              reservationOk = (bitsOrLine == 0) << 1;
+              if (bitsOrLine == 0) {
+                _sprintf((char *)&compareTypeWord4OrLocText,"%d:? ",(int)typeBitsOrLoc >> 0x10);
               }
               else {
-                _sprintf((char *)&local_160,"%d:%d",(int)uVar21 >> 0x10,uVar10);
+                _sprintf((char *)&compareTypeWord4OrLocText,"%d:%d",(int)typeBitsOrLoc >> 0x10,bitsOrLine);
               }
-              __ZNSsC1EPKcRKSaIcE(&local_170,(char *)&local_160,aaStack_120);
-              *(undefined *)((int)local_170 + (int)local_170[-3]) = *PTR__S_terminal_a7b7c0b8;
-              __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_170);
-              ppuVar29 = local_170 + -1;
+              __ZNSsC1EPKcRKSaIcE(&compareTypeVtbl,(char *)&compareTypeWord4OrLocText,stringAllocator);
+              *(undefined *)((int)compareTypeVtbl + (int)compareTypeVtbl[-3]) = *PTR__S_terminal_a7b7c0b8;
+              __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)compareTypeVtbl);
+              refCountPtr = compareTypeVtbl + -1;
               do {
-                puVar8 = *ppuVar29;
-                if (in_RESERVE != '\0') {
-                  puVar2 = (undefined *)storeWordConditionalIndexed(puVar8 + -1,0,ppuVar29);
-                  *ppuVar29 = puVar2;
-                  bVar32 = 2;
+                refCountOrVtable = *refCountPtr;
+                if (reservation != '\0') {
+                  newRefCount = (undefined *)storeWordConditionalIndexed(refCountOrVtable + -1,0,refCountPtr);
+                  *refCountPtr = newRefCount;
+                  reservationOk = 2;
                 }
-              } while (!(bool)(bVar32 >> 1 & 1));
-              if ((int)puVar8 < 1) {
-                __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_170 + -3),&local_160);
+              } while (!(bool)(reservationOk >> 1 & 1));
+              if ((int)refCountOrVtable < 1) {
+                __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(compareTypeVtbl + -3),&compareTypeWord4OrLocText);
               }
               __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
               __ZN13TInfoSinkBase6appendEPKc(infoSink,"Divide by zero error during constant folding")
               ;
               __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
-              iVar28 = 0x7fffffff;
+              sizeOrLoopIndex = 0x7fffffff;
             }
-            *(int *)(iVar17 * 4 + iVar12) = iVar28;
+            *(int *)(sizeOrIndex * 4 + sizeOrArrayOrIndex) = sizeOrLoopIndex;
             goto code_r0x97b93884;
           }
-          pcVar30 = "Constant folding cannot be done for \"/\"";
-          uVar21 = (*(code *)**(undefined4 **)this)(this);
+          message = "Constant folding cannot be done for \"/\"";
+          typeBitsOrLoc = (*(code *)**(undefined4 **)this)(this);
                     
 override_jmp_97b93868_case_0:
           __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
-          uVar10 = uVar21 & 0xffff;
-          bVar32 = (uVar10 == 0) << 1;
-          if (uVar10 == 0) {
-            _sprintf((char *)&local_160,"%d:? ",(int)uVar21 >> 0x10);
+          bitsOrLine = typeBitsOrLoc & 0xffff;
+          reservationOk = (bitsOrLine == 0) << 1;
+          if (bitsOrLine == 0) {
+            _sprintf((char *)&compareTypeWord4OrLocText,"%d:? ",(int)typeBitsOrLoc >> 0x10);
           }
           else {
-            _sprintf((char *)&local_160,"%d:%d",(int)uVar21 >> 0x10,uVar10);
+            _sprintf((char *)&compareTypeWord4OrLocText,"%d:%d",(int)typeBitsOrLoc >> 0x10,bitsOrLine);
           }
-          paVar22 = aaStack_120;
+          locText = stringAllocator;
           goto code_r0x97b93f6c;
         }
-        if (param_5 == 0) {
-          fVar6 = *(float *)(pcVar27 + iVar17 * 4);
-          if (fVar6 == 0.0) {
-            uVar21 = (*(code *)**(undefined4 **)this)(this);
+        if (swapOperands == 0) {
+          rightOrResultValue = *(float *)(thisUnion + sizeOrIndex * 4);
+          if (rightOrResultValue == 0.0) {
+            typeBitsOrLoc = (*(code *)**(undefined4 **)this)(this);
                     
             goto override_jmp_97b934a8_case_0;
           }
-          fVar5 = pfVar26[iVar17];
+          leftValue = resultOrRightFloats[sizeOrIndex];
 code_r0x97b93640:
-          fVar5 = fVar5 / fVar6;
+          leftValue = leftValue / rightOrResultValue;
         }
         else {
-          fVar6 = pfVar26[iVar17];
-          if (fVar6 != 0.0) {
-            fVar5 = *(float *)(pcVar27 + iVar17 * 4);
+          rightOrResultValue = resultOrRightFloats[sizeOrIndex];
+          if (rightOrResultValue != 0.0) {
+            leftValue = *(float *)(thisUnion + sizeOrIndex * 4);
             goto code_r0x97b93640;
           }
-          uVar21 = (*(code *)**(undefined4 **)this)(this);
+          typeBitsOrLoc = (*(code *)**(undefined4 **)this)(this);
                     
 override_jmp_97b934a8_case_0:
           __ZN13TInfoSinkBase6appendEPKc(infoSink,"WARNING: ");
-          uVar10 = uVar21 & 0xffff;
-          bVar32 = (uVar10 == 0) << 1;
-          if (uVar10 == 0) {
-            _sprintf((char *)&local_160,"%d:? ",(int)uVar21 >> 0x10);
+          bitsOrLine = typeBitsOrLoc & 0xffff;
+          reservationOk = (bitsOrLine == 0) << 1;
+          if (bitsOrLine == 0) {
+            _sprintf((char *)&compareTypeWord4OrLocText,"%d:? ",(int)typeBitsOrLoc >> 0x10);
           }
           else {
-            _sprintf((char *)&local_160,"%d:%d",(int)uVar21 >> 0x10,uVar10);
+            _sprintf((char *)&compareTypeWord4OrLocText,"%d:%d",(int)typeBitsOrLoc >> 0x10,bitsOrLine);
           }
-          __ZNSsC1EPKcRKSaIcE(&local_170,(char *)&local_160,aaStack_120);
-          *(undefined *)((int)local_170 + (int)local_170[-3]) = *PTR__S_terminal_a7b7c0b8;
-          __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_170);
-          ppuVar29 = local_170 + -1;
+          __ZNSsC1EPKcRKSaIcE(&compareTypeVtbl,(char *)&compareTypeWord4OrLocText,stringAllocator);
+          *(undefined *)((int)compareTypeVtbl + (int)compareTypeVtbl[-3]) = *PTR__S_terminal_a7b7c0b8;
+          __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)compareTypeVtbl);
+          refCountPtr = compareTypeVtbl + -1;
           do {
-            puVar8 = *ppuVar29;
-            if (in_RESERVE != '\0') {
-              puVar2 = (undefined *)storeWordConditionalIndexed(puVar8 + -1,0,ppuVar29);
-              *ppuVar29 = puVar2;
-              bVar32 = 2;
+            refCountOrVtable = *refCountPtr;
+            if (reservation != '\0') {
+              newRefCount = (undefined *)storeWordConditionalIndexed(refCountOrVtable + -1,0,refCountPtr);
+              *refCountPtr = newRefCount;
+              reservationOk = 2;
             }
-          } while (!(bool)(bVar32 >> 1 & 1));
-          if ((int)puVar8 < 1) {
-            __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_170 + -3),&local_160);
+          } while (!(bool)(reservationOk >> 1 & 1));
+          if ((int)refCountOrVtable < 1) {
+            __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(compareTypeVtbl + -3),&compareTypeWord4OrLocText);
           }
           __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
           __ZN13TInfoSinkBase6appendEPKc(infoSink,"Divide by zero error during constant folding");
           __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
-          fVar5 = 3.4028235e+38;
+          leftValue = 3.4028235e+38;
         }
-        *(float *)(iVar17 * 4 + iVar12) = fVar5;
+        *(float *)(sizeOrIndex * 4 + sizeOrArrayOrIndex) = leftValue;
 code_r0x97b93884: ;
       }
       break;
     default:
       goto switchD_97b92b40_caseD_17;
     case 10:
-      local_4c = 0xa7b81734;
-      (**(code **)(*(int *)this + 0x38))((unsigned char *)&local_170,this);
-      uVar21 = local_14c >> 0x13 & 0x3f;
-      ppuVar29 = (undefined **)(local_4c - 0x473c);
-      local_170 = ppuVar29;
-      if (uVar21 == 2) {
-        uVar19 = extraout_r4_03;
-        fVar6 = GH_U2F((unsigned int)(local_4c));
-        for (iVar12 = 0;
-            iVar28 = (**(code **)(*(int *)this + 0x4c))(this,uVar19,pTVar18,a3,iVar17,param_6,fVar6)
-            , iVar12 < iVar28; iVar12 = iVar12 + 1) {
-          fVar6 = pfVar26[iVar12];
-          if (*(float *)(pcVar27 + iVar12 * 4) != fVar6) goto LAB_97b94304;
-          uVar19 = extraout_r4_05;
+      picBase = 0xa7b81734;
+      (**(code **)(*(int *)this + 0x38))((unsigned char *)&compareTypeVtbl,this);
+      typeBitsOrLoc = compareTypeBits >> 0x13 & 0x3f;
+      refCountPtr = (undefined **)(picBase - 0x473c);
+      compareTypeVtbl = refCountPtr;
+      if (typeBitsOrLoc == 2) {
+        r4Value = r4Out4;
+        rightOrResultValue = GH_U2F((unsigned int)(picBase));
+        for (sizeOrArrayOrIndex = 0;
+            sizeOrLoopIndex = (**(code **)(*(int *)this + 0x4c))(this,r4Value,newNodeOrRightArg,infoSinkArg,sizeOrIndex,unusedArg6,rightOrResultValue)
+            , sizeOrArrayOrIndex < sizeOrLoopIndex; sizeOrArrayOrIndex = sizeOrArrayOrIndex + 1) {
+          rightOrResultValue = resultOrRightFloats[sizeOrArrayOrIndex];
+          if (*(float *)(thisUnion + sizeOrArrayOrIndex * 4) != rightOrResultValue) goto LAB_97b94304;
+          r4Value = r4Out6;
         }
         goto LAB_97b943d4;
       }
-      if (2 < uVar21) {
-        if (uVar21 == 3) {
-          uVar19 = extraout_r4_03;
-          fVar6 = GH_U2F((unsigned int)(local_4c));
-          for (iVar12 = 0;
-              iVar28 = (**(code **)(*(int *)this + 0x4c))
-                                 (this,uVar19,pTVar18,a3,iVar17,param_6,fVar6), iVar12 < iVar28;
-              iVar12 = iVar12 + 1) {
-            fVar6 = pfVar26[iVar12];
-            if (*(float *)(pcVar27 + iVar12 * 4) != fVar6) goto LAB_97b94304;
-            uVar19 = extraout_r4_06;
+      if (2 < typeBitsOrLoc) {
+        if (typeBitsOrLoc == 3) {
+          r4Value = r4Out4;
+          rightOrResultValue = GH_U2F((unsigned int)(picBase));
+          for (sizeOrArrayOrIndex = 0;
+              sizeOrLoopIndex = (**(code **)(*(int *)this + 0x4c))
+                                 (this,r4Value,newNodeOrRightArg,infoSinkArg,sizeOrIndex,unusedArg6,rightOrResultValue), sizeOrArrayOrIndex < sizeOrLoopIndex;
+              sizeOrArrayOrIndex = sizeOrArrayOrIndex + 1) {
+            rightOrResultValue = resultOrRightFloats[sizeOrArrayOrIndex];
+            if (*(float *)(thisUnion + sizeOrArrayOrIndex * 4) != rightOrResultValue) goto LAB_97b94304;
+            r4Value = r4Out7;
           }
         }
         else {
-          if (uVar21 != 0xe) goto LAB_97b9414c;
-          pcVar9 = (unsigned char *)a0[0xc];
-          (**(code **)(*a0 + 0x38))((unsigned char *)&local_170,a0);
-          iVar17 = ((int (*)())compareStructure)((unsigned char *)&local_170,pcVar9,pcVar27,&local_50);
-          bVar1 = iVar17 == 1;
+          if (typeBitsOrLoc != 0xe) goto LAB_97b9414c;
+          thisOrRightCursor = (unsigned char *)rightConstUnion[0xc];
+          (**(code **)(*rightConstUnion + 0x38))((unsigned char *)&compareTypeVtbl,rightConstUnion);
+          sizeOrIndex = ((int (*)())compareStructure)((unsigned char *)&compareTypeVtbl,thisOrRightCursor,thisUnion,&compareStructureOut);
+          sizeFlag = sizeOrIndex == 1;
 LAB_97b942fc:
-          local_170 = ppuVar29;
-          if (!bVar1) {
+          compareTypeVtbl = refCountPtr;
+          if (!sizeFlag) {
 LAB_97b94304:
-            bVar31 = true;
+            flagOrCompare = true;
           }
         }
         goto LAB_97b943d4;
       }
-      if (uVar21 == 1) {
-        uVar19 = extraout_r4_03;
-        uVar21 = local_4c;
-        for (iVar12 = 0;
-            iVar28 = (**(code **)(*(int *)this + 0x4c))
-                               (this,uVar19,pTVar18,a3,iVar17,param_6,uVar21), iVar12 < iVar28;
-            iVar12 = iVar12 + 1) {
-          if (*(float *)(pcVar27 + iVar12 * 4) != pfVar26[iVar12]) goto LAB_97b94304;
-          uVar19 = extraout_r4_04;
+      if (typeBitsOrLoc == 1) {
+        r4Value = r4Out4;
+        typeBitsOrLoc = picBase;
+        for (sizeOrArrayOrIndex = 0;
+            sizeOrLoopIndex = (**(code **)(*(int *)this + 0x4c))
+                               (this,r4Value,newNodeOrRightArg,infoSinkArg,sizeOrIndex,unusedArg6,typeBitsOrLoc), sizeOrArrayOrIndex < sizeOrLoopIndex;
+            sizeOrArrayOrIndex = sizeOrArrayOrIndex + 1) {
+          if (*(float *)(thisUnion + sizeOrArrayOrIndex * 4) != resultOrRightFloats[sizeOrArrayOrIndex]) goto LAB_97b94304;
+          r4Value = r4Out5;
         }
         goto LAB_97b943d4;
       }
 LAB_97b9414c:
-      pcVar30 = "Constant folding cannot be done for \"==\"";
-      uVar21 = (*(code *)**(undefined4 **)this)(this);
+      message = "Constant folding cannot be done for \"==\"";
+      typeBitsOrLoc = (*(code *)**(undefined4 **)this)(this);
                     
 override_jmp_97b94180_case_0:
       __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
-      uVar10 = uVar21 & 0xffff;
-      bVar32 = (uVar10 == 0) << 1;
-      if (uVar10 == 0) {
-        _sprintf((char *)&local_160,"%d:? ",(int)uVar21 >> 0x10);
+      bitsOrLine = typeBitsOrLoc & 0xffff;
+      reservationOk = (bitsOrLine == 0) << 1;
+      if (bitsOrLine == 0) {
+        _sprintf((char *)&compareTypeWord4OrLocText,"%d:? ",(int)typeBitsOrLoc >> 0x10);
       }
       else {
-        _sprintf((char *)&local_160,"%d:%d",(int)uVar21 >> 0x10,uVar10);
+        _sprintf((char *)&compareTypeWord4OrLocText,"%d:%d",(int)typeBitsOrLoc >> 0x10,bitsOrLine);
       }
       goto code_r0x97b945f4;
     case 0xb:
-      local_4c = 0xa7b81734;
-      (**(code **)(*(int *)this + 0x38))((unsigned char *)&local_170,this);
-      uVar21 = local_14c >> 0x13 & 0x3f;
-      ppuVar29 = (undefined **)(local_4c - 0x473c);
-      local_170 = ppuVar29;
-      if (uVar21 == 2) {
-        uVar19 = extraout_r4_07;
-        fVar6 = GH_U2F((unsigned int)(local_4c));
-        for (iVar12 = 0;
-            iVar28 = (**(code **)(*(int *)this + 0x4c))(this,uVar19,pTVar18,a3,iVar17,param_6,fVar6)
-            , iVar12 < iVar28; iVar12 = iVar12 + 1) {
-          fVar6 = pfVar26[iVar12];
-          if (*(float *)(pcVar27 + iVar12 * 4) == fVar6) goto LAB_97b94304;
-          uVar19 = extraout_r4_09;
+      picBase = 0xa7b81734;
+      (**(code **)(*(int *)this + 0x38))((unsigned char *)&compareTypeVtbl,this);
+      typeBitsOrLoc = compareTypeBits >> 0x13 & 0x3f;
+      refCountPtr = (undefined **)(picBase - 0x473c);
+      compareTypeVtbl = refCountPtr;
+      if (typeBitsOrLoc == 2) {
+        r4Value = r4Out8;
+        rightOrResultValue = GH_U2F((unsigned int)(picBase));
+        for (sizeOrArrayOrIndex = 0;
+            sizeOrLoopIndex = (**(code **)(*(int *)this + 0x4c))(this,r4Value,newNodeOrRightArg,infoSinkArg,sizeOrIndex,unusedArg6,rightOrResultValue)
+            , sizeOrArrayOrIndex < sizeOrLoopIndex; sizeOrArrayOrIndex = sizeOrArrayOrIndex + 1) {
+          rightOrResultValue = resultOrRightFloats[sizeOrArrayOrIndex];
+          if (*(float *)(thisUnion + sizeOrArrayOrIndex * 4) == rightOrResultValue) goto LAB_97b94304;
+          r4Value = r4Out10;
         }
       }
-      else if (uVar21 < 3) {
-        if (uVar21 != 1) {
+      else if (typeBitsOrLoc < 3) {
+        if (typeBitsOrLoc != 1) {
 LAB_97b9430c:
-          pcVar30 = "Constant folding cannot be done for \"!=\"";
-          uVar21 = (*(code *)**(undefined4 **)this)(this);
+          message = "Constant folding cannot be done for \"!=\"";
+          typeBitsOrLoc = (*(code *)**(undefined4 **)this)(this);
                     
           goto override_jmp_97b94180_case_0;
         }
-        uVar19 = extraout_r4_07;
-        uVar21 = local_4c;
-        for (iVar12 = 0;
-            iVar28 = (**(code **)(*(int *)this + 0x4c))
-                               (this,uVar19,pTVar18,a3,iVar17,param_6,uVar21), iVar12 < iVar28;
-            iVar12 = iVar12 + 1) {
-          if (*(float *)(pcVar27 + iVar12 * 4) == pfVar26[iVar12]) goto LAB_97b94304;
-          uVar19 = extraout_r4_08;
+        r4Value = r4Out8;
+        typeBitsOrLoc = picBase;
+        for (sizeOrArrayOrIndex = 0;
+            sizeOrLoopIndex = (**(code **)(*(int *)this + 0x4c))
+                               (this,r4Value,newNodeOrRightArg,infoSinkArg,sizeOrIndex,unusedArg6,typeBitsOrLoc), sizeOrArrayOrIndex < sizeOrLoopIndex;
+            sizeOrArrayOrIndex = sizeOrArrayOrIndex + 1) {
+          if (*(float *)(thisUnion + sizeOrArrayOrIndex * 4) == resultOrRightFloats[sizeOrArrayOrIndex]) goto LAB_97b94304;
+          r4Value = r4Out9;
         }
       }
       else {
-        if (uVar21 != 3) {
-          if (uVar21 == 0xe) {
-            pcVar9 = (unsigned char *)a0[0xc];
-            (**(code **)(*a0 + 0x38))((unsigned char *)&local_170,a0);
-            iVar17 = ((int (*)())compareStructure)((unsigned char *)&local_170,pcVar9,pcVar27,&local_50);
-            bVar1 = iVar17 == 0;
+        if (typeBitsOrLoc != 3) {
+          if (typeBitsOrLoc == 0xe) {
+            thisOrRightCursor = (unsigned char *)rightConstUnion[0xc];
+            (**(code **)(*rightConstUnion + 0x38))((unsigned char *)&compareTypeVtbl,rightConstUnion);
+            sizeOrIndex = ((int (*)())compareStructure)((unsigned char *)&compareTypeVtbl,thisOrRightCursor,thisUnion,&compareStructureOut);
+            sizeFlag = sizeOrIndex == 0;
             goto LAB_97b942fc;
           }
           goto LAB_97b9430c;
         }
-        uVar19 = extraout_r4_07;
-        fVar6 = GH_U2F((unsigned int)(local_4c));
-        for (iVar12 = 0;
-            iVar28 = (**(code **)(*(int *)this + 0x4c))(this,uVar19,pTVar18,a3,iVar17,param_6,fVar6)
-            , iVar12 < iVar28; iVar12 = iVar12 + 1) {
-          fVar6 = pfVar26[iVar12];
-          if (*(float *)(pcVar27 + iVar12 * 4) == fVar6) goto LAB_97b94304;
-          uVar19 = extraout_r4_10;
+        r4Value = r4Out8;
+        rightOrResultValue = GH_U2F((unsigned int)(picBase));
+        for (sizeOrArrayOrIndex = 0;
+            sizeOrLoopIndex = (**(code **)(*(int *)this + 0x4c))(this,r4Value,newNodeOrRightArg,infoSinkArg,sizeOrIndex,unusedArg6,rightOrResultValue)
+            , sizeOrArrayOrIndex < sizeOrLoopIndex; sizeOrArrayOrIndex = sizeOrArrayOrIndex + 1) {
+          rightOrResultValue = resultOrRightFloats[sizeOrArrayOrIndex];
+          if (*(float *)(thisUnion + sizeOrArrayOrIndex * 4) == rightOrResultValue) goto LAB_97b94304;
+          r4Value = r4Out11;
         }
       }
 LAB_97b943d4:
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-      puVar15 = (uint *)TPoolAllocator__allocate(poolAllocator,4);
-      *puVar15 = (uint)!bVar31;
+      resultBool = (uint *)TPoolAllocator__allocate(poolAllocator,4);
+      *resultBool = (uint)!flagOrCompare;
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-      pTVar18 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x34);
-      local_14c = local_14c & 0x1801ff | 0x4180800;
-      local_170 = (undefined **)(local_4c - 0x473c);
-      local_16c = 0;
-      local_164 = 0;
-      local_160 = 0;
-      local_15c = 0;
-      local_158 = 0;
-      local_154 = 0;
-      local_150 = 0;
-      local_168 = 0;
-      *(int *)(pTVar18 + 4) = 0;
-      *(undefined ***)pTVar18 = &PTR_getLine_a7b7cf90;
-      *(int *)(pTVar18 + 0xc) = 0;
-      *(int *)(pTVar18 + 0x10) = 0;
-      *(int *)(pTVar18 + 0x14) = 0;
-      *(int *)(pTVar18 + 0x18) = 0;
-      *(int *)(pTVar18 + 0x1c) = 0;
-      *(int *)(pTVar18 + 0x20) = 0;
-      *(undefined ***)(pTVar18 + 8) = local_170;
-      *(int *)(pTVar18 + 0x24) = 0;
-      *(int *)(pTVar18 + 0x28) = 0;
-      uVar10 = *(uint *)(pTVar18 + 0x2c);
-      *(uint *)(pTVar18 + 0x2c) = uVar10 & 0x1ffffff | 0x4000000;
-      uVar21 = (local_14c >> 0x13 & 0x3f) << 0x13;
-      *(uint *)(pTVar18 + 0x2c) = uVar21 | uVar10 & 0x7ffff | 0x4000000;
-      *(uint *)(pTVar18 + 0x2c) = uVar21 | uVar10 & 0x7ff | 0x4000000 | 0x800;
-      *(uint *)(pTVar18 + 0x2c) = uVar21 | uVar10 & 0x3ff | 0x4000000 | 0x800;
-      puVar8 = PTR_vtable_a7b7c0c8;
-      *(uint *)(pTVar18 + 0x2c) = uVar21 | uVar10 & 0x1ff | 0x4000000 | 0x800;
-      *(uint **)(pTVar18 + 0x30) = puVar15;
-      *(undefined **)pTVar18 = puVar8 + 8;
-      puVar11 = *(undefined4 **)this;
-      param_3 = this;
+      newNodeOrRightArg = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x34);
+      compareTypeBits = compareTypeBits & 0x1801ff | 0x4180800;
+      compareTypeVtbl = (undefined **)(picBase - 0x473c);
+      compareTypeWord1 = 0;
+      compareTypeWord3 = 0;
+      compareTypeWord4OrLocText = 0;
+      compareTypeWord5 = 0;
+      compareTypeWord6 = 0;
+      compareTypeWord7 = 0;
+      compareTypeWord8 = 0;
+      compareTypeWord2 = 0;
+      *(int *)(newNodeOrRightArg + 4) = 0;
+      *(undefined ***)newNodeOrRightArg = &PTR_getLine_a7b7cf90;
+      *(int *)(newNodeOrRightArg + 0xc) = 0;
+      *(int *)(newNodeOrRightArg + 0x10) = 0;
+      *(int *)(newNodeOrRightArg + 0x14) = 0;
+      *(int *)(newNodeOrRightArg + 0x18) = 0;
+      *(int *)(newNodeOrRightArg + 0x1c) = 0;
+      *(int *)(newNodeOrRightArg + 0x20) = 0;
+      *(undefined ***)(newNodeOrRightArg + 8) = compareTypeVtbl;
+      *(int *)(newNodeOrRightArg + 0x24) = 0;
+      *(int *)(newNodeOrRightArg + 0x28) = 0;
+      bitsOrLine = *(uint *)(newNodeOrRightArg + 0x2c);
+      *(uint *)(newNodeOrRightArg + 0x2c) = bitsOrLine & 0x1ffffff | 0x4000000;
+      typeBitsOrLoc = (compareTypeBits >> 0x13 & 0x3f) << 0x13;
+      *(uint *)(newNodeOrRightArg + 0x2c) = typeBitsOrLoc | bitsOrLine & 0x7ffff | 0x4000000;
+      *(uint *)(newNodeOrRightArg + 0x2c) = typeBitsOrLoc | bitsOrLine & 0x7ff | 0x4000000 | 0x800;
+      *(uint *)(newNodeOrRightArg + 0x2c) = typeBitsOrLoc | bitsOrLine & 0x3ff | 0x4000000 | 0x800;
+      refCountOrVtable = PTR_vtable_a7b7c0c8;
+      *(uint *)(newNodeOrRightArg + 0x2c) = typeBitsOrLoc | bitsOrLine & 0x1ff | 0x4000000 | 0x800;
+      *(uint **)(newNodeOrRightArg + 0x30) = resultBool;
+      *(undefined **)newNodeOrRightArg = refCountOrVtable + 8;
+      nodeOrVtable = *(undefined4 **)this;
+      rightOperand = this;
 LAB_97b953d4:
-      iVar17 = *(int *)pTVar18;
-      uVar19 = (*(code *)*puVar11)(param_3);
-      (**(code **)(iVar17 + 4))(pTVar18,uVar19);
-      return pTVar18;
+      sizeOrIndex = *(int *)newNodeOrRightArg;
+      r4Value = (*(code *)*nodeOrVtable)(rightOperand);
+      (**(code **)(sizeOrIndex + 4))(newNodeOrRightArg,r4Value);
+      return newNodeOrRightArg;
     case 0x14:
-      local_4c = 0xa7b81734;
-      (**(code **)(*(int *)this + 0x38))(&local_170,this);
-      local_170 = (undefined **)(local_4c - 0x473c);
-      if ((local_14c >> 0x13 & 0x3f) != 1) {
-        pcVar30 = "Constant Folding cannot be done for vector times matrix";
-        uVar21 = (*(code *)**(undefined4 **)this)(this,a1_08,pTVar18,a3,iVar17,param_6,local_4c);
+      picBase = 0xa7b81734;
+      (**(code **)(*(int *)this + 0x38))(&compareTypeVtbl,this);
+      compareTypeVtbl = (undefined **)(picBase - 0x473c);
+      if ((compareTypeBits >> 0x13 & 0x3f) != 1) {
+        message = "Constant Folding cannot be done for vector times matrix";
+        typeBitsOrLoc = (*(code *)**(undefined4 **)this)(this,r4In9,newNodeOrRightArg,infoSinkArg,sizeOrIndex,unusedArg6,picBase);
                     
         __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
-        uVar10 = uVar21 & 0xffff;
-        bVar32 = (uVar10 == 0) << 1;
-        if (uVar10 == 0) {
-          _sprintf((char *)aaStack_130,"%d:? ",(int)uVar21 >> 0x10);
+        bitsOrLine = typeBitsOrLoc & 0xffff;
+        reservationOk = (bitsOrLine == 0) << 1;
+        if (bitsOrLine == 0) {
+          _sprintf((char *)locTextBuf,"%d:? ",(int)typeBitsOrLoc >> 0x10);
         }
         else {
-          _sprintf((char *)aaStack_130,"%d:%d",(int)uVar21 >> 0x10,uVar10);
+          _sprintf((char *)locTextBuf,"%d:%d",(int)typeBitsOrLoc >> 0x10,bitsOrLine);
         }
-        paVar22 = aaStack_130;
-        __ZNSsC1EPKcRKSaIcE(local_140,(char *)paVar22,(unsigned char *)&local_f0);
-        *(undefined *)((int)local_140[0] + (int)local_140[0][-3]) = *PTR__S_terminal_a7b7c0b8;
-        __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_140[0]);
-        ppuVar29 = local_140[0];
+        locText = locTextBuf;
+        __ZNSsC1EPKcRKSaIcE(rightTypeOrString,(char *)locText,(unsigned char *)&tailTypeWord8);
+        *(undefined *)((int)rightTypeOrString[0] + (int)rightTypeOrString[0][-3]) = *PTR__S_terminal_a7b7c0b8;
+        __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)rightTypeOrString[0]);
+        refCountPtr = rightTypeOrString[0];
         goto code_r0x97b95b60;
       }
-      iVar17 = (**(code **)(*(int *)this + 0x48))(this,a1_08);
+      sizeOrIndex = (**(code **)(*(int *)this + 0x48))(this,r4In9);
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-      iVar12 = TPoolAllocator__allocate(poolAllocator,iVar17 << 2);
-      iVar17 = (**(code **)(*(int *)this + 0x48))(this);
-      iVar28 = 0;
-      if (0 < iVar17) {
-        iVar13 = 0;
+      sizeOrArrayOrIndex = TPoolAllocator__allocate(poolAllocator,sizeOrIndex << 2);
+      sizeOrIndex = (**(code **)(*(int *)this + 0x48))(this);
+      sizeOrLoopIndex = 0;
+      if (0 < sizeOrIndex) {
+        resultOrOffset = 0;
         do {
-          iVar14 = iVar28 * 4;
-          *(undefined4 *)(iVar14 + iVar12) = 0;
-          if (0 < iVar17) {
-            pfVar24 = pfVar26 + iVar13;
-            pcVar9 = pcVar27;
-            iVar23 = iVar17;
+          countOrResult = sizeOrLoopIndex * 4;
+          *(undefined4 *)(countOrResult + sizeOrArrayOrIndex) = 0;
+          if (0 < sizeOrIndex) {
+            resultCursor = resultOrRightFloats + resultOrOffset;
+            thisOrRightCursor = thisUnion;
+            columnOffset = sizeOrIndex;
             do {
-              fVar6 = *(float *)pcVar9;
-              pcVar9 = pcVar9 + 4;
-              fVar5 = *pfVar24;
-              pfVar24 = pfVar24 + 1;
-              *(float *)(iVar14 + iVar12) = fVar6 * fVar5 + *(float *)(iVar14 + iVar12);
-              iVar23 = iVar23 + -1;
-            } while (iVar23 != 0);
+              rightOrResultValue = *(float *)thisOrRightCursor;
+              thisOrRightCursor = thisOrRightCursor + 4;
+              leftValue = *resultCursor;
+              resultCursor = resultCursor + 1;
+              *(float *)(countOrResult + sizeOrArrayOrIndex) = rightOrResultValue * leftValue + *(float *)(countOrResult + sizeOrArrayOrIndex);
+              columnOffset = columnOffset + -1;
+            } while (columnOffset != 0);
           }
-          iVar28 = iVar28 + 1;
-          iVar13 = iVar13 + iVar17;
-        } while (iVar28 < iVar17);
+          sizeOrLoopIndex = sizeOrLoopIndex + 1;
+          resultOrOffset = resultOrOffset + sizeOrIndex;
+        } while (sizeOrLoopIndex < sizeOrIndex);
       }
       break;
     case 0x15:
-      iVar17 = (**(code **)(*a0 + 0x40))(a0,uVar21);
-      if (iVar17 != 1) {
-        pcVar30 = "Constant Folding cannot be done for matrix times vector";
-        uVar21 = (*(code *)**(undefined4 **)this)(this);
+      sizeOrIndex = (**(code **)(*rightConstUnion + 0x40))(rightConstUnion,typeBitsOrLoc);
+      if (sizeOrIndex != 1) {
+        message = "Constant Folding cannot be done for matrix times vector";
+        typeBitsOrLoc = (*(code *)**(undefined4 **)this)(this);
                     
         goto override_jmp_97b938f4_case_0;
       }
-      iVar17 = (**(code **)(*(int *)this + 0x48))(this);
+      sizeOrIndex = (**(code **)(*(int *)this + 0x48))(this);
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-      iVar12 = TPoolAllocator__allocate(poolAllocator,iVar17 << 2);
-      iVar17 = (**(code **)(*(int *)this + 0x48))(this);
-      iVar28 = 0;
-      if (0 < iVar17) {
-        iVar13 = 0;
+      sizeOrArrayOrIndex = TPoolAllocator__allocate(poolAllocator,sizeOrIndex << 2);
+      sizeOrIndex = (**(code **)(*(int *)this + 0x48))(this);
+      sizeOrLoopIndex = 0;
+      if (0 < sizeOrIndex) {
+        resultOrOffset = 0;
         do {
-          *(undefined4 *)(iVar13 + iVar12) = 0;
-          if (0 < iVar17) {
-            pcVar9 = pcVar27 + iVar13;
-            pfVar24 = pfVar26;
-            iVar14 = iVar17;
+          *(undefined4 *)(resultOrOffset + sizeOrArrayOrIndex) = 0;
+          if (0 < sizeOrIndex) {
+            thisOrRightCursor = thisUnion + resultOrOffset;
+            resultCursor = resultOrRightFloats;
+            countOrResult = sizeOrIndex;
             do {
-              fVar6 = *(float *)pcVar9;
-              pcVar9 = pcVar9 + iVar17 * 4;
-              fVar5 = *pfVar24;
-              pfVar24 = pfVar24 + 1;
-              *(float *)(iVar13 + iVar12) = fVar6 * fVar5 + *(float *)(iVar13 + iVar12);
-              iVar14 = iVar14 + -1;
-            } while (iVar14 != 0);
+              rightOrResultValue = *(float *)thisOrRightCursor;
+              thisOrRightCursor = thisOrRightCursor + sizeOrIndex * 4;
+              leftValue = *resultCursor;
+              resultCursor = resultCursor + 1;
+              *(float *)(resultOrOffset + sizeOrArrayOrIndex) = rightOrResultValue * leftValue + *(float *)(resultOrOffset + sizeOrArrayOrIndex);
+              countOrResult = countOrResult + -1;
+            } while (countOrResult != 0);
           }
-          iVar28 = iVar28 + 1;
-          iVar13 = iVar13 + 4;
-        } while (iVar28 < iVar17);
+          sizeOrLoopIndex = sizeOrLoopIndex + 1;
+          resultOrOffset = resultOrOffset + 4;
+        } while (sizeOrLoopIndex < sizeOrIndex);
       }
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-      pTVar18 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x34);
-      (**(code **)(*a0 + 0x38))(&local_170,a0);
-      *(undefined ***)pTVar18 = &PTR_getLine_a7b7cf90;
-      puVar8 = &TType__vtable;
-      *(int *)(pTVar18 + 4) = 0;
+      newNodeOrRightArg = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x34);
+      (**(code **)(*rightConstUnion + 0x38))(&compareTypeVtbl,rightConstUnion);
+      *(undefined ***)newNodeOrRightArg = &PTR_getLine_a7b7cf90;
+      refCountOrVtable = &TType__vtable;
+      *(int *)(newNodeOrRightArg + 4) = 0;
       goto LAB_97b946a4;
     case 0x17:
-      local_4c = 0xa7b81734;
-      iVar12 = (**(code **)(*(int *)this + 0x4c))(this);
+      picBase = 0xa7b81734;
+      sizeOrArrayOrIndex = (**(code **)(*(int *)this + 0x4c))(this);
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-      uVar34 = TPoolAllocator__allocate(poolAllocator,iVar12 << 2);
-      iVar12 = (int)((ulonglong)uVar34 >> 0x20);
-      uVar19 = (undefined4)uVar34;
-      for (iVar28 = 0; iVar13 = (**(code **)(*(int *)this + 0x4c))(this,uVar19), iVar28 < iVar13;
-          iVar28 = iVar28 + 1) {
-        (**(code **)(*(int *)this + 0x38))(&local_170,this);
-        local_170 = (undefined **)(local_4c - 0x473c);
-        if ((local_14c >> 0x13 & 0x3f) != 3) {
-          pcVar30 = "Constant folding cannot be done for \"||\"";
-          uVar21 = (*(code *)**(undefined4 **)this)(this,a1_11,pTVar18,a3,iVar17,param_6,local_4c);
+      allocPair = TPoolAllocator__allocate(poolAllocator,sizeOrArrayOrIndex << 2);
+      sizeOrArrayOrIndex = (int)((ulonglong)allocPair >> 0x20);
+      r4Value = (undefined4)allocPair;
+      for (sizeOrLoopIndex = 0; resultOrOffset = (**(code **)(*(int *)this + 0x4c))(this,r4Value), sizeOrLoopIndex < resultOrOffset;
+          sizeOrLoopIndex = sizeOrLoopIndex + 1) {
+        (**(code **)(*(int *)this + 0x38))(&compareTypeVtbl,this);
+        compareTypeVtbl = (undefined **)(picBase - 0x473c);
+        if ((compareTypeBits >> 0x13 & 0x3f) != 3) {
+          message = "Constant folding cannot be done for \"||\"";
+          typeBitsOrLoc = (*(code *)**(undefined4 **)this)(this,r4In12,newNodeOrRightArg,infoSinkArg,sizeOrIndex,unusedArg6,picBase);
                     
           goto override_jmp_97b93868_case_0;
         }
-        uVar19 = 0;
-        if ((*(int *)(pcVar27 + iVar28 * 4) != 0) || (pfVar26[iVar28] != 0.0)) {
-          uVar19 = 1;
+        r4Value = 0;
+        if ((*(int *)(thisUnion + sizeOrLoopIndex * 4) != 0) || (resultOrRightFloats[sizeOrLoopIndex] != 0.0)) {
+          r4Value = 1;
         }
-        *(undefined4 *)(iVar28 * 4 + iVar12) = uVar19;
-        uVar19 = a1_11;
+        *(undefined4 *)(sizeOrLoopIndex * 4 + sizeOrArrayOrIndex) = r4Value;
+        r4Value = r4In12;
       }
       break;
     case 0x18:
-      local_4c = 0xa7b81734;
-      iVar12 = (**(code **)(*(int *)this + 0x4c))(this);
+      picBase = 0xa7b81734;
+      sizeOrArrayOrIndex = (**(code **)(*(int *)this + 0x4c))(this);
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-      uVar34 = TPoolAllocator__allocate(poolAllocator,iVar12 << 2);
-      iVar12 = (int)((ulonglong)uVar34 >> 0x20);
-      uVar19 = (undefined4)uVar34;
-      for (iVar13 = 0;
-          iVar28 = (**(code **)(*(int *)this + 0x4c))(this,uVar19,pTVar18,a3,iVar17,param_6,iVar28),
-          iVar13 < iVar28; iVar13 = iVar13 + 1) {
-        (**(code **)(*(int *)this + 0x38))(&local_170,this);
-        local_170 = (undefined **)(local_4c - 0x473c);
-        if ((local_14c >> 0x13 & 0x3f) != 3) {
-          pcVar30 = "Constant folding cannot be done for \"^^\"";
-          uVar21 = (*(code *)**(undefined4 **)this)(this,a1_10,pTVar18,a3,iVar17,param_6,local_4c);
+      allocPair = TPoolAllocator__allocate(poolAllocator,sizeOrArrayOrIndex << 2);
+      sizeOrArrayOrIndex = (int)((ulonglong)allocPair >> 0x20);
+      r4Value = (undefined4)allocPair;
+      for (resultOrOffset = 0;
+          sizeOrLoopIndex = (**(code **)(*(int *)this + 0x4c))(this,r4Value,newNodeOrRightArg,infoSinkArg,sizeOrIndex,unusedArg6,sizeOrLoopIndex),
+          resultOrOffset < sizeOrLoopIndex; resultOrOffset = resultOrOffset + 1) {
+        (**(code **)(*(int *)this + 0x38))(&compareTypeVtbl,this);
+        compareTypeVtbl = (undefined **)(picBase - 0x473c);
+        if ((compareTypeBits >> 0x13 & 0x3f) != 3) {
+          message = "Constant folding cannot be done for \"^^\"";
+          typeBitsOrLoc = (*(code *)**(undefined4 **)this)(this,r4In11,newNodeOrRightArg,infoSinkArg,sizeOrIndex,unusedArg6,picBase);
                     
           goto override_jmp_97b93868_case_0;
         }
-        iVar28 = iVar13 * 4;
-        *(uint *)(iVar28 + iVar12) = (uint)(*(float *)(pcVar27 + iVar28) != pfVar26[iVar13]);
-        uVar19 = a1_10;
+        sizeOrLoopIndex = resultOrOffset * 4;
+        *(uint *)(sizeOrLoopIndex + sizeOrArrayOrIndex) = (uint)(*(float *)(thisUnion + sizeOrLoopIndex) != resultOrRightFloats[resultOrOffset]);
+        r4Value = r4In11;
       }
       break;
     case 0x19:
-      local_4c = 0xa7b81734;
-      iVar12 = (**(code **)(*(int *)this + 0x4c))(this);
+      picBase = 0xa7b81734;
+      sizeOrArrayOrIndex = (**(code **)(*(int *)this + 0x4c))(this);
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-      iVar12 = TPoolAllocator__allocate(poolAllocator,iVar12 << 2);
-      for (iVar28 = 0; iVar13 = (**(code **)(*(int *)this + 0x4c))(this), iVar28 < iVar13;
-          iVar28 = iVar28 + 1) {
-        (**(code **)(*(int *)this + 0x38))(&local_170,this);
-        local_170 = (undefined **)(local_4c - 0x473c);
-        if ((local_14c >> 0x13 & 0x3f) != 3) {
-          pcVar30 = "Constant folding cannot be done for \"&&\"";
-          uVar21 = (*(code *)**(undefined4 **)this)(this,a1_09,pTVar18,a3,iVar17,param_6,local_4c);
+      sizeOrArrayOrIndex = TPoolAllocator__allocate(poolAllocator,sizeOrArrayOrIndex << 2);
+      for (sizeOrLoopIndex = 0; resultOrOffset = (**(code **)(*(int *)this + 0x4c))(this), sizeOrLoopIndex < resultOrOffset;
+          sizeOrLoopIndex = sizeOrLoopIndex + 1) {
+        (**(code **)(*(int *)this + 0x38))(&compareTypeVtbl,this);
+        compareTypeVtbl = (undefined **)(picBase - 0x473c);
+        if ((compareTypeBits >> 0x13 & 0x3f) != 3) {
+          message = "Constant folding cannot be done for \"&&\"";
+          typeBitsOrLoc = (*(code *)**(undefined4 **)this)(this,r4In10,newNodeOrRightArg,infoSinkArg,sizeOrIndex,unusedArg6,picBase);
                     
           goto override_jmp_97b93868_case_0;
         }
-        uVar19 = 0;
-        if ((*(int *)(pcVar27 + iVar28 * 4) != 0) && (pfVar26[iVar28] != 0.0)) {
-          uVar19 = 1;
+        r4Value = 0;
+        if ((*(int *)(thisUnion + sizeOrLoopIndex * 4) != 0) && (resultOrRightFloats[sizeOrLoopIndex] != 0.0)) {
+          r4Value = 1;
         }
-        *(undefined4 *)(iVar28 * 4 + iVar12) = uVar19;
+        *(undefined4 *)(sizeOrLoopIndex * 4 + sizeOrArrayOrIndex) = r4Value;
       }
       break;
     case 0x43:
-      bVar31 = false;
-      (**(code **)(*(int *)this + 0x38))(&local_170,this);
-      uVar19 = extraout_r4_01;
-      if (((local_14c >> 0x13 & 0x3f) != 1) ||
-         (iVar17 = (**(code **)(*a0 + 0x40))(a0), uVar19 = extraout_r4_02, iVar17 != 1)) {
-        bVar31 = true;
+      flagOrCompare = false;
+      (**(code **)(*(int *)this + 0x38))(&compareTypeVtbl,this);
+      r4Value = r4Out2;
+      if (((compareTypeBits >> 0x13 & 0x3f) != 1) ||
+         (sizeOrIndex = (**(code **)(*rightConstUnion + 0x40))(rightConstUnion), r4Value = r4Out3, sizeOrIndex != 1)) {
+        flagOrCompare = true;
       }
-      local_4c = 0xa7b81734;
-      local_170 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-      if (!bVar31) {
-        iVar17 = (**(code **)(*(int *)this + 0x48))(this,uVar19);
+      picBase = 0xa7b81734;
+      compareTypeVtbl = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+      if (!flagOrCompare) {
+        sizeOrIndex = (**(code **)(*(int *)this + 0x48))(this,r4Value);
         poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-        iVar12 = TPoolAllocator__allocate(poolAllocator,iVar17 * iVar17 * 4);
-        iVar28 = 0;
-        if (0 < iVar17) {
+        sizeOrArrayOrIndex = TPoolAllocator__allocate(poolAllocator,sizeOrIndex * sizeOrIndex * 4);
+        sizeOrLoopIndex = 0;
+        if (0 < sizeOrIndex) {
           do {
-            if (0 < iVar17) {
-              iVar23 = 0;
-              iVar13 = iVar28 * 4;
-              iVar14 = iVar17;
+            if (0 < sizeOrIndex) {
+              columnOffset = 0;
+              resultOrOffset = sizeOrLoopIndex * 4;
+              countOrResult = sizeOrIndex;
               do {
-                *(undefined4 *)(iVar13 + iVar12) = 0;
-                if (0 < iVar17) {
-                  pfVar24 = pfVar26 + iVar23;
-                  pcVar9 = pcVar27 + iVar28 * 4;
-                  iVar33 = iVar17;
+                *(undefined4 *)(resultOrOffset + sizeOrArrayOrIndex) = 0;
+                if (0 < sizeOrIndex) {
+                  resultCursor = resultOrRightFloats + columnOffset;
+                  thisOrRightCursor = thisUnion + sizeOrLoopIndex * 4;
+                  columnsLeft = sizeOrIndex;
                   do {
-                    fVar6 = *(float *)pcVar9;
-                    pcVar9 = pcVar9 + iVar17 * 4;
-                    fVar5 = *pfVar24;
-                    pfVar24 = pfVar24 + 1;
-                    *(float *)(iVar12 + iVar13) = fVar6 * fVar5 + *(float *)(iVar12 + iVar13);
-                    iVar33 = iVar33 + -1;
-                  } while (iVar33 != 0);
+                    rightOrResultValue = *(float *)thisOrRightCursor;
+                    thisOrRightCursor = thisOrRightCursor + sizeOrIndex * 4;
+                    leftValue = *resultCursor;
+                    resultCursor = resultCursor + 1;
+                    *(float *)(sizeOrArrayOrIndex + resultOrOffset) = rightOrResultValue * leftValue + *(float *)(sizeOrArrayOrIndex + resultOrOffset);
+                    columnsLeft = columnsLeft + -1;
+                  } while (columnsLeft != 0);
                 }
-                iVar14 = iVar14 + -1;
-                iVar23 = iVar23 + iVar17;
-                iVar13 = iVar13 + iVar17 * 4;
-              } while (iVar14 != 0);
+                countOrResult = countOrResult + -1;
+                columnOffset = columnOffset + sizeOrIndex;
+                resultOrOffset = resultOrOffset + sizeOrIndex * 4;
+              } while (countOrResult != 0);
             }
-            iVar28 = iVar28 + 1;
-          } while (iVar28 < iVar17);
+            sizeOrLoopIndex = sizeOrLoopIndex + 1;
+          } while (sizeOrLoopIndex < sizeOrIndex);
         }
         break;
       }
-      pcVar30 = "Constant Folding cannot be done for matrix multiply";
-      uVar21 = (*(code *)**(undefined4 **)this)(this);
+      message = "Constant Folding cannot be done for matrix multiply";
+      typeBitsOrLoc = (*(code *)**(undefined4 **)this)(this);
                     
       __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
-      uVar10 = uVar21 & 0xffff;
-      bVar32 = (uVar10 == 0) << 1;
-      if (uVar10 == 0) {
-        _sprintf(acStack_d0,"%d:? ",(int)uVar21 >> 0x10);
+      bitsOrLine = typeBitsOrLoc & 0xffff;
+      reservationOk = (bitsOrLine == 0) << 1;
+      if (bitsOrLine == 0) {
+        _sprintf(locTextBuf2,"%d:? ",(int)typeBitsOrLoc >> 0x10);
       }
       else {
-        _sprintf(acStack_d0,"%d:%d",(int)uVar21 >> 0x10,uVar10);
+        _sprintf(locTextBuf2,"%d:%d",(int)typeBitsOrLoc >> 0x10,bitsOrLine);
       }
-      paVar22 = aaStack_130;
-      __ZNSsC1EPKcRKSaIcE(local_140,acStack_d0,paVar22);
-      *(undefined *)((int)local_140[0] + (int)local_140[0][-3]) = *PTR__S_terminal_a7b7c0b8;
-      __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_140[0]);
-      ppuVar29 = local_140[0];
+      locText = locTextBuf;
+      __ZNSsC1EPKcRKSaIcE(rightTypeOrString,locTextBuf2,locText);
+      *(undefined *)((int)rightTypeOrString[0] + (int)rightTypeOrString[0][-3]) = *PTR__S_terminal_a7b7c0b8;
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)rightTypeOrString[0]);
+      refCountPtr = rightTypeOrString[0];
 code_r0x97b932f0:
-      ppuVar4 = ppuVar29 + -1;
-      paVar20 = (unsigned char *)(ppuVar29 + -3);
+      refCountPtrCopy = refCountPtr + -1;
+      stringRep = (unsigned char *)(refCountPtr + -3);
       do {
-        puVar8 = *ppuVar4;
-        if (in_RESERVE != '\0') {
-          puVar2 = (undefined *)storeWordConditionalIndexed(puVar8 + -1,0,ppuVar4);
-          *ppuVar4 = puVar2;
-          bVar32 = 2;
+        refCountOrVtable = *refCountPtrCopy;
+        if (reservation != '\0') {
+          newRefCount = (undefined *)storeWordConditionalIndexed(refCountOrVtable + -1,0,refCountPtrCopy);
+          *refCountPtrCopy = newRefCount;
+          reservationOk = 2;
         }
-      } while (!(bool)(bVar32 >> 1 & 1));
-      bVar31 = 0 < (int)puVar8;
+      } while (!(bool)(reservationOk >> 1 & 1));
+      flagOrCompare = 0 < (int)refCountOrVtable;
 code_r0x97b93fb8:
-      if (!bVar31) goto code_r0x97b95524;
+      if (!flagOrCompare) goto code_r0x97b95524;
       goto code_r0x97b95528;
     }
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-    pTVar18 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x34);
-    (**(code **)(*(int *)this + 0x38))(&local_170,this);
-    *(int *)(pTVar18 + 4) = 0;
-    *(undefined ***)pTVar18 = &PTR_getLine_a7b7cf90;
-    puVar8 = (undefined *)(local_4c - 0x4744);
+    newNodeOrRightArg = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x34);
+    (**(code **)(*(int *)this + 0x38))(&compareTypeVtbl,this);
+    *(int *)(newNodeOrRightArg + 4) = 0;
+    *(undefined ***)newNodeOrRightArg = &PTR_getLine_a7b7cf90;
+    refCountOrVtable = (undefined *)(picBase - 0x4744);
 LAB_97b946a4:
-    local_170 = (undefined **)(puVar8 + 8);
-    *(int *)(pTVar18 + 0xc) = local_16c;
-    *(int *)(pTVar18 + 0x10) = local_168;
-    *(int *)(pTVar18 + 0x14) = local_164;
-    *(int *)(pTVar18 + 0x18) = local_160;
-    *(int *)(pTVar18 + 0x1c) = local_15c;
-    *(int *)(pTVar18 + 0x20) = local_158;
-    *(undefined ***)(pTVar18 + 8) = local_170;
-    *(int *)(pTVar18 + 0x24) = local_154;
-    *(int *)(pTVar18 + 0x28) = local_150;
-    uVar7 = *(uint *)(pTVar18 + 0x2c);
-    uVar10 = local_14c & 0xfe000000;
-    *(uint *)(pTVar18 + 0x2c) = uVar10 | uVar7 & 0x1ffffff;
-    uVar25 = (local_14c >> 0x13 & 0x3f) << 0x13;
-    *(uint *)(pTVar18 + 0x2c) = uVar25 | uVar10 | uVar7 & 0x7ffff;
-    uVar21 = local_14c & 0x7f800;
-    *(uint *)(pTVar18 + 0x2c) = uVar21 | uVar25 | uVar10 | uVar7 & 0x7ff;
-    uVar3 = (local_14c >> 10 & 1) << 10;
-    *(uint *)(pTVar18 + 0x2c) = uVar3 | uVar21 | uVar25 | uVar10 | uVar7 & 0x3ff;
-    puVar8 = PTR_vtable_a7b7c0c8;
-    *(uint *)(pTVar18 + 0x2c) =
-         (local_14c >> 9 & 1) << 9 | uVar3 | uVar21 | uVar25 | uVar10 | uVar7 & 0x1ff;
-    *(int *)(pTVar18 + 0x30) = iVar12;
-    *(undefined **)pTVar18 = puVar8 + 8;
+    compareTypeVtbl = (undefined **)(refCountOrVtable + 8);
+    *(int *)(newNodeOrRightArg + 0xc) = compareTypeWord1;
+    *(int *)(newNodeOrRightArg + 0x10) = compareTypeWord2;
+    *(int *)(newNodeOrRightArg + 0x14) = compareTypeWord3;
+    *(int *)(newNodeOrRightArg + 0x18) = compareTypeWord4OrLocText;
+    *(int *)(newNodeOrRightArg + 0x1c) = compareTypeWord5;
+    *(int *)(newNodeOrRightArg + 0x20) = compareTypeWord6;
+    *(undefined ***)(newNodeOrRightArg + 8) = compareTypeVtbl;
+    *(int *)(newNodeOrRightArg + 0x24) = compareTypeWord7;
+    *(int *)(newNodeOrRightArg + 0x28) = compareTypeWord8;
+    nodeBitsBefore = *(uint *)(newNodeOrRightArg + 0x2c);
+    bitsOrLine = compareTypeBits & 0xfe000000;
+    *(uint *)(newNodeOrRightArg + 0x2c) = bitsOrLine | nodeBitsBefore & 0x1ffffff;
+    typeFieldOrInt = (compareTypeBits >> 0x13 & 0x3f) << 0x13;
+    *(uint *)(newNodeOrRightArg + 0x2c) = typeFieldOrInt | bitsOrLine | nodeBitsBefore & 0x7ffff;
+    typeBitsOrLoc = compareTypeBits & 0x7f800;
+    *(uint *)(newNodeOrRightArg + 0x2c) = typeBitsOrLoc | typeFieldOrInt | bitsOrLine | nodeBitsBefore & 0x7ff;
+    typeBit10 = (compareTypeBits >> 10 & 1) << 10;
+    *(uint *)(newNodeOrRightArg + 0x2c) = typeBit10 | typeBitsOrLoc | typeFieldOrInt | bitsOrLine | nodeBitsBefore & 0x3ff;
+    refCountOrVtable = PTR_vtable_a7b7c0c8;
+    *(uint *)(newNodeOrRightArg + 0x2c) =
+         (compareTypeBits >> 9 & 1) << 9 | typeBit10 | typeBitsOrLoc | typeFieldOrInt | bitsOrLine | nodeBitsBefore & 0x1ff;
+    *(int *)(newNodeOrRightArg + 0x30) = sizeOrArrayOrIndex;
+    *(undefined **)newNodeOrRightArg = refCountOrVtable + 8;
 LAB_97b94758:
-    iVar17 = *(int *)pTVar18;
-    uVar19 = (*(code *)**(undefined4 **)this)(this);
-    (**(code **)(iVar17 + 4))(pTVar18,uVar19);
-    return pTVar18;
+    sizeOrIndex = *(int *)newNodeOrRightArg;
+    r4Value = (*(code *)**(undefined4 **)this)(this);
+    (**(code **)(sizeOrIndex + 4))(newNodeOrRightArg,r4Value);
+    return newNodeOrRightArg;
   }
 LAB_97b9478c:
-  bVar31 = false;
-  iVar12 = (**(code **)(*(int *)this + 0x4c))(this);
-  if (iVar12 != 1) {
+  flagOrCompare = false;
+  sizeOrArrayOrIndex = (**(code **)(*(int *)this + 0x4c))(this);
+  if (sizeOrArrayOrIndex != 1) {
     return this;
   }
-  (**(code **)(*(int *)this + 0x38))(&local_170,this);
-  if (((local_14c >> 0x13 & 0x3f) != 0xe) &&
-     (iVar12 = (**(code **)(*(int *)param_3 + 0x4c))(param_3), iVar12 == 1)) {
-    (**(code **)(*(int *)param_3 + 0x38))(local_140,param_3);
-    bVar31 = (local_11c >> 0x13 & 0x3f) != 0xe;
-    local_140[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+  (**(code **)(*(int *)this + 0x38))(&compareTypeVtbl,this);
+  if (((compareTypeBits >> 0x13 & 0x3f) != 0xe) &&
+     (sizeOrArrayOrIndex = (**(code **)(*(int *)rightOperand + 0x4c))(rightOperand), sizeOrArrayOrIndex == 1)) {
+    (**(code **)(*(int *)rightOperand + 0x38))(rightTypeOrString,rightOperand);
+    flagOrCompare = (rightTypeBits >> 0x13 & 0x3f) != 0xe;
+    rightTypeOrString[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   }
-  local_170 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-  if (!bVar31) {
+  compareTypeVtbl = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+  if (!flagOrCompare) {
     return this;
   }
   poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-  pfVar26 = (float *)TPoolAllocator__allocate(poolAllocator,4);
-  local_4c = 0xa7b81734;
-  (**(code **)(*(int *)this + 0x38))(&local_110,this);
-  local_110 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-  uVar21 = local_ec >> 0x13 & 0x3f;
-  if (uVar21 != 2) {
-    if (2 < uVar21) {
-      if (uVar21 != 3) goto LAB_97b95400;
-      iVar17 = (**(code **)(*(int *)param_3 + 0x18))(param_3);
-      uVar10 = **(uint **)(iVar17 + 0x30);
-      uVar21 = **(uint **)(this + 0x30);
-      if (param_2 == 0x2b) {
-        bVar31 = uVar21 == uVar10;
+  resultOrRightFloats = (float *)TPoolAllocator__allocate(poolAllocator,4);
+  picBase = 0xa7b81734;
+  (**(code **)(*(int *)this + 0x38))(&tailTypeVtbl,this);
+  tailTypeVtbl = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+  typeBitsOrLoc = tailTypeBits >> 0x13 & 0x3f;
+  if (typeBitsOrLoc != 2) {
+    if (2 < typeBitsOrLoc) {
+      if (typeBitsOrLoc != 3) goto LAB_97b95400;
+      sizeOrIndex = (**(code **)(*(int *)rightOperand + 0x18))(rightOperand);
+      bitsOrLine = **(uint **)(sizeOrIndex + 0x30);
+      typeBitsOrLoc = **(uint **)(this + 0x30);
+      if (op == 0x2b) {
+        flagOrCompare = typeBitsOrLoc == bitsOrLine;
 LAB_97b9529c:
-        *pfVar26 = GH_U2F((unsigned int)((1 - (uint)bVar31)));
+        *resultOrRightFloats = GH_U2F((unsigned int)((1 - (uint)flagOrCompare)));
         poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-        pTVar18 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x34);
-        local_ec = local_ec & 0x1801ff | 0x4180800;
-        local_110 = (undefined **)(local_4c - 0x473c);
-        local_10c = 0;
-        local_104 = 0;
-        local_100 = 0;
-        local_fc = 0;
-        local_f8 = 0;
-        local_f4 = 0;
-        local_f0 = 0;
-        local_108 = 0;
-        *(int *)(pTVar18 + 4) = 0;
-        *(undefined ***)pTVar18 = &PTR_getLine_a7b7cf90;
-        *(int *)(pTVar18 + 0xc) = 0;
-        *(int *)(pTVar18 + 0x10) = 0;
-        *(int *)(pTVar18 + 0x14) = 0;
-        *(int *)(pTVar18 + 0x18) = 0;
-        *(int *)(pTVar18 + 0x1c) = 0;
-        *(int *)(pTVar18 + 0x20) = 0;
-        *(undefined ***)(pTVar18 + 8) = local_110;
-        *(int *)(pTVar18 + 0x24) = 0;
-        *(int *)(pTVar18 + 0x28) = 0;
-        uVar10 = *(uint *)(pTVar18 + 0x2c);
-        *(uint *)(pTVar18 + 0x2c) = uVar10 & 0x1ffffff | 0x4000000;
-        uVar21 = (local_ec >> 0x13 & 0x3f) << 0x13;
-        *(uint *)(pTVar18 + 0x2c) = uVar21 | uVar10 & 0x7ffff | 0x4000000;
-        *(uint *)(pTVar18 + 0x2c) = uVar21 | uVar10 & 0x7ff | 0x4000000 | 0x800;
-        *(uint *)(pTVar18 + 0x2c) = uVar21 | uVar10 & 0x3ff | 0x4000000 | 0x800;
-        puVar8 = PTR_vtable_a7b7c0c8;
-        *(uint *)(pTVar18 + 0x2c) = uVar21 | uVar10 & 0x1ff | 0x4000000 | 0x800;
-        *(float **)(pTVar18 + 0x30) = pfVar26;
-        *(undefined **)pTVar18 = puVar8 + 8;
-        puVar11 = *(undefined4 **)param_3;
+        newNodeOrRightArg = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x34);
+        tailTypeBits = tailTypeBits & 0x1801ff | 0x4180800;
+        tailTypeVtbl = (undefined **)(picBase - 0x473c);
+        tailTypeWord1 = 0;
+        tailTypeWord3 = 0;
+        tailTypeWord4OrLocText = 0;
+        tailTypeWord5 = 0;
+        tailTypeWord6 = 0;
+        tailTypeWord7 = 0;
+        tailTypeWord8 = 0;
+        tailTypeWord2 = 0;
+        *(int *)(newNodeOrRightArg + 4) = 0;
+        *(undefined ***)newNodeOrRightArg = &PTR_getLine_a7b7cf90;
+        *(int *)(newNodeOrRightArg + 0xc) = 0;
+        *(int *)(newNodeOrRightArg + 0x10) = 0;
+        *(int *)(newNodeOrRightArg + 0x14) = 0;
+        *(int *)(newNodeOrRightArg + 0x18) = 0;
+        *(int *)(newNodeOrRightArg + 0x1c) = 0;
+        *(int *)(newNodeOrRightArg + 0x20) = 0;
+        *(undefined ***)(newNodeOrRightArg + 8) = tailTypeVtbl;
+        *(int *)(newNodeOrRightArg + 0x24) = 0;
+        *(int *)(newNodeOrRightArg + 0x28) = 0;
+        bitsOrLine = *(uint *)(newNodeOrRightArg + 0x2c);
+        *(uint *)(newNodeOrRightArg + 0x2c) = bitsOrLine & 0x1ffffff | 0x4000000;
+        typeBitsOrLoc = (tailTypeBits >> 0x13 & 0x3f) << 0x13;
+        *(uint *)(newNodeOrRightArg + 0x2c) = typeBitsOrLoc | bitsOrLine & 0x7ffff | 0x4000000;
+        *(uint *)(newNodeOrRightArg + 0x2c) = typeBitsOrLoc | bitsOrLine & 0x7ff | 0x4000000 | 0x800;
+        *(uint *)(newNodeOrRightArg + 0x2c) = typeBitsOrLoc | bitsOrLine & 0x3ff | 0x4000000 | 0x800;
+        refCountOrVtable = PTR_vtable_a7b7c0c8;
+        *(uint *)(newNodeOrRightArg + 0x2c) = typeBitsOrLoc | bitsOrLine & 0x1ff | 0x4000000 | 0x800;
+        *(float **)(newNodeOrRightArg + 0x30) = resultOrRightFloats;
+        *(undefined **)newNodeOrRightArg = refCountOrVtable + 8;
+        nodeOrVtable = *(undefined4 **)rightOperand;
         goto LAB_97b953d4;
       }
-      if (param_2 < 0x2c) {
-        if (param_2 == 0x2a) {
-          uVar21 = uVar21 | uVar10;
+      if (op < 0x2c) {
+        if (op == 0x2a) {
+          typeBitsOrLoc = typeBitsOrLoc | bitsOrLine;
 LAB_97b95254:
-          bVar31 = uVar21 == 0;
+          flagOrCompare = typeBitsOrLoc == 0;
           goto LAB_97b9529c;
         }
       }
       else {
-        uVar21 = uVar21 & uVar10;
-        if (param_2 == 0x2c) goto LAB_97b95254;
+        typeBitsOrLoc = typeBitsOrLoc & bitsOrLine;
+        if (op == 0x2c) goto LAB_97b95254;
       }
-      pcVar30 = "Binary operator cannot be folded into constant bool";
-      uVar21 = *(uint *)(this + 4);
+      message = "Binary operator cannot be folded into constant bool";
+      typeBitsOrLoc = *(uint *)(this + 4);
                     
 override_jmp_97b95280_case_0:
       __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
-      uVar10 = uVar21 & 0xffff;
-      bVar32 = (uVar10 == 0) << 1;
-      if (uVar10 == 0) {
-        _sprintf((char *)&local_100,"%d:? ",(int)uVar21 >> 0x10);
+      bitsOrLine = typeBitsOrLoc & 0xffff;
+      reservationOk = (bitsOrLine == 0) << 1;
+      if (bitsOrLine == 0) {
+        _sprintf((char *)&tailTypeWord4OrLocText,"%d:? ",(int)typeBitsOrLoc >> 0x10);
       }
       else {
-        _sprintf((char *)&local_100,"%d:%d",(int)uVar21 >> 0x10,uVar10);
+        _sprintf((char *)&tailTypeWord4OrLocText,"%d:%d",(int)typeBitsOrLoc >> 0x10,bitsOrLine);
       }
-      paVar22 = (unsigned char *)&local_100;
-      __ZNSsC1EPKcRKSaIcE(&local_110,(char *)paVar22,aaStack_c0);
+      locText = (unsigned char *)&tailTypeWord4OrLocText;
+      __ZNSsC1EPKcRKSaIcE(&tailTypeVtbl,(char *)locText,stringAllocator3);
                     
-      *(undefined *)((int)local_110 + (int)local_110[-3]) = *PTR__S_terminal_a7b7c0b8;
-      __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_110);
-      ppuVar29 = local_110 + -1;
-      paVar20 = (unsigned char *)(local_110 + -3);
+      *(undefined *)((int)tailTypeVtbl + (int)tailTypeVtbl[-3]) = *PTR__S_terminal_a7b7c0b8;
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)tailTypeVtbl);
+      refCountPtr = tailTypeVtbl + -1;
+      stringRep = (unsigned char *)(tailTypeVtbl + -3);
       do {
-        puVar8 = *ppuVar29;
+        refCountOrVtable = *refCountPtr;
                     
-        if (in_RESERVE != '\0') {
-          puVar2 = (undefined *)storeWordConditionalIndexed(puVar8 + -1,0,ppuVar29);
-          *ppuVar29 = puVar2;
-          bVar32 = 2;
+        if (reservation != '\0') {
+          newRefCount = (undefined *)storeWordConditionalIndexed(refCountOrVtable + -1,0,refCountPtr);
+          *refCountPtr = newRefCount;
+          reservationOk = 2;
         }
-      } while (!(bool)(bVar32 >> 1 & 1));
-      if ((int)puVar8 < 1) {
+      } while (!(bool)(reservationOk >> 1 & 1));
+      if ((int)refCountOrVtable < 1) {
 code_r0x97b95524:
-        __ZNSs4_Rep10_M_destroyERKSaIcE(paVar20,paVar22);
+        __ZNSs4_Rep10_M_destroyERKSaIcE(stringRep,locText);
       }
 code_r0x97b95528:
       __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
       goto code_r0x97b95ba0;
     }
-    if (uVar21 != 1) {
+    if (typeBitsOrLoc != 1) {
 LAB_97b95400:
-      pcVar30 = "Cannot fold constant";
-      uVar21 = (*(code *)**(undefined4 **)this)(this);
+      message = "Cannot fold constant";
+      typeBitsOrLoc = (*(code *)**(undefined4 **)this)(this);
                     
       goto override_jmp_97b95280_case_0;
     }
-    iVar12 = (**(code **)(*(int *)param_3 + 0x18))(param_3);
-    uVar21 = param_2 - 0x13;
-    fVar6 = **(float **)(iVar12 + 0x30);
-    fVar5 = **(float **)(this + 0x30);
-    if (0x11 < uVar21) {
+    sizeOrArrayOrIndex = (**(code **)(*(int *)rightOperand + 0x18))(rightOperand);
+    typeBitsOrLoc = op - 0x13;
+    rightOrResultValue = **(float **)(sizeOrArrayOrIndex + 0x30);
+    leftValue = **(float **)(this + 0x30);
+    if (0x11 < typeBitsOrLoc) {
       return (unsigned char *)0x0;
     }
-    switch(uVar21) {
+    switch(typeBitsOrLoc) {
     case 0:
-      fVar5 = fVar5 + fVar6;
+      leftValue = leftValue + rightOrResultValue;
       goto LAB_97b94ef8;
     case 1:
-      fVar5 = fVar5 - fVar6;
+      leftValue = leftValue - rightOrResultValue;
       goto LAB_97b94ef8;
     case 2:
-      fVar5 = fVar5 * fVar6;
+      leftValue = leftValue * rightOrResultValue;
       goto LAB_97b94ef8;
     case 3:
-      if (fVar6 == 0.0) {
-        uVar21 = (*(code *)**(undefined4 **)this)(this,uVar21,pTVar18,a3,iVar17,param_6,uVar21 * 4);
+      if (rightOrResultValue == 0.0) {
+        typeBitsOrLoc = (*(code *)**(undefined4 **)this)(this,typeBitsOrLoc,newNodeOrRightArg,infoSinkArg,sizeOrIndex,unusedArg6,typeBitsOrLoc * 4);
                     
         __ZN13TInfoSinkBase6appendEPKc(infoSink,"WARNING: ");
-        uVar10 = uVar21 & 0xffff;
-        bVar32 = (uVar10 == 0) << 1;
-        if (uVar10 == 0) {
-          _sprintf((char *)&local_100,"%d:? ",(int)uVar21 >> 0x10);
+        bitsOrLine = typeBitsOrLoc & 0xffff;
+        reservationOk = (bitsOrLine == 0) << 1;
+        if (bitsOrLine == 0) {
+          _sprintf((char *)&tailTypeWord4OrLocText,"%d:? ",(int)typeBitsOrLoc >> 0x10);
         }
         else {
-          _sprintf((char *)&local_100,"%d:%d",(int)uVar21 >> 0x10,uVar10);
+          _sprintf((char *)&tailTypeWord4OrLocText,"%d:%d",(int)typeBitsOrLoc >> 0x10,bitsOrLine);
         }
-        __ZNSsC1EPKcRKSaIcE(&local_110,(char *)&local_100,aaStack_c0);
-        *(undefined *)((int)local_110 + (int)local_110[-3]) = *PTR__S_terminal_a7b7c0b8;
-        __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_110);
-        ppuVar29 = local_110 + -1;
+        __ZNSsC1EPKcRKSaIcE(&tailTypeVtbl,(char *)&tailTypeWord4OrLocText,stringAllocator3);
+        *(undefined *)((int)tailTypeVtbl + (int)tailTypeVtbl[-3]) = *PTR__S_terminal_a7b7c0b8;
+        __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)tailTypeVtbl);
+        refCountPtr = tailTypeVtbl + -1;
         do {
-          puVar8 = *ppuVar29;
-          if (in_RESERVE != '\0') {
-            puVar2 = (undefined *)storeWordConditionalIndexed(puVar8 + -1,0,ppuVar29);
-            *ppuVar29 = puVar2;
-            bVar32 = 2;
+          refCountOrVtable = *refCountPtr;
+          if (reservation != '\0') {
+            newRefCount = (undefined *)storeWordConditionalIndexed(refCountOrVtable + -1,0,refCountPtr);
+            *refCountPtr = newRefCount;
+            reservationOk = 2;
           }
-        } while (!(bool)(bVar32 >> 1 & 1));
-        if ((int)puVar8 < 1) {
-          __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_110 + -3),&local_100);
+        } while (!(bool)(reservationOk >> 1 & 1));
+        if ((int)refCountOrVtable < 1) {
+          __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(tailTypeVtbl + -3),&tailTypeWord4OrLocText);
         }
         __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
         __ZN13TInfoSinkBase6appendEPKc(infoSink,"Divide by zero error during constant folding");
         __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
-        fVar5 = 3.4028235e+38;
+        leftValue = 3.4028235e+38;
       }
       else {
-        fVar5 = fVar5 / fVar6;
+        leftValue = leftValue / rightOrResultValue;
       }
 LAB_97b94ef8:
-      *pfVar26 = fVar5;
+      *resultOrRightFloats = leftValue;
       goto code_r0x97b95098;
     default:
       goto switchD_97b94d20_caseD_17;
     case 10:
-      fVar6 = GH_U2F((unsigned int)((uint)(fVar5 == fVar6)));
+      rightOrResultValue = GH_U2F((unsigned int)((uint)(leftValue == rightOrResultValue)));
       break;
     case 0xb:
-      fVar6 = GH_U2F((unsigned int)((uint)(fVar5 != fVar6)));
+      rightOrResultValue = GH_U2F((unsigned int)((uint)(leftValue != rightOrResultValue)));
       break;
     case 0xe:
-      fVar6 = GH_U2F((unsigned int)((uint)(fVar5 < fVar6)));
+      rightOrResultValue = GH_U2F((unsigned int)((uint)(leftValue < rightOrResultValue)));
       break;
     case 0xf:
-      fVar6 = GH_U2F((unsigned int)((uint)(fVar6 < fVar5)));
+      rightOrResultValue = GH_U2F((unsigned int)((uint)(rightOrResultValue < leftValue)));
       break;
     case 0x10:
-      bVar31 = fVar5 <= fVar6;
+      flagOrCompare = leftValue <= rightOrResultValue;
       goto LAB_97b94f58;
     case 0x11:
-      bVar31 = fVar6 <= fVar5;
+      flagOrCompare = rightOrResultValue <= leftValue;
 LAB_97b94f58:
-      fVar6 = GH_U2F((unsigned int)((uint)bVar31));
+      rightOrResultValue = GH_U2F((unsigned int)((uint)flagOrCompare));
     }
-    *pfVar26 = fVar6;
+    *resultOrRightFloats = rightOrResultValue;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-    pTVar18 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x34);
-    local_ec = local_ec & 0x1801ff | 0x4180800;
-    local_110 = (undefined **)(local_4c - 0x473c);
-    local_10c = 0;
-    local_104 = 0;
-    local_100 = 0;
-    local_fc = 0;
-    local_f8 = 0;
-    local_f4 = 0;
-    local_f0 = 0;
-    local_108 = 0;
-    *(int *)(pTVar18 + 4) = 0;
-    *(undefined ***)pTVar18 = &PTR_getLine_a7b7cf90;
-    *(int *)(pTVar18 + 0xc) = 0;
-    *(int *)(pTVar18 + 0x10) = 0;
-    *(int *)(pTVar18 + 0x14) = 0;
-    *(int *)(pTVar18 + 0x18) = 0;
-    *(int *)(pTVar18 + 0x1c) = 0;
-    *(int *)(pTVar18 + 0x20) = 0;
-    *(int *)(pTVar18 + 0x24) = 0;
-    *(undefined ***)(pTVar18 + 8) = local_110;
-    *(int *)(pTVar18 + 0x28) = 0;
-    uVar10 = *(uint *)(pTVar18 + 0x2c);
-    *(uint *)(pTVar18 + 0x2c) = uVar10 & 0x1ffffff | 0x4000000;
-    uVar21 = (local_ec >> 0x13 & 0x3f) << 0x13;
-    *(uint *)(pTVar18 + 0x2c) = uVar21 | uVar10 & 0x7ffff | 0x4000000;
-    *(uint *)(pTVar18 + 0x2c) = uVar21 | uVar10 & 0x7ff | 0x4000000 | 0x800;
-    *(uint *)(pTVar18 + 0x2c) = uVar21 | uVar10 & 0x3ff | 0x4000000 | 0x800;
-    puVar8 = PTR_vtable_a7b7c0c8;
-    *(uint *)(pTVar18 + 0x2c) = uVar21 | uVar10 & 0x1ff | 0x4000000 | 0x800;
-    *(float **)(pTVar18 + 0x30) = pfVar26;
-    *(undefined **)pTVar18 = puVar8 + 8;
-    if (pTVar18 != (unsigned char *)0x0) goto LAB_97b951c0;
+    newNodeOrRightArg = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x34);
+    tailTypeBits = tailTypeBits & 0x1801ff | 0x4180800;
+    tailTypeVtbl = (undefined **)(picBase - 0x473c);
+    tailTypeWord1 = 0;
+    tailTypeWord3 = 0;
+    tailTypeWord4OrLocText = 0;
+    tailTypeWord5 = 0;
+    tailTypeWord6 = 0;
+    tailTypeWord7 = 0;
+    tailTypeWord8 = 0;
+    tailTypeWord2 = 0;
+    *(int *)(newNodeOrRightArg + 4) = 0;
+    *(undefined ***)newNodeOrRightArg = &PTR_getLine_a7b7cf90;
+    *(int *)(newNodeOrRightArg + 0xc) = 0;
+    *(int *)(newNodeOrRightArg + 0x10) = 0;
+    *(int *)(newNodeOrRightArg + 0x14) = 0;
+    *(int *)(newNodeOrRightArg + 0x18) = 0;
+    *(int *)(newNodeOrRightArg + 0x1c) = 0;
+    *(int *)(newNodeOrRightArg + 0x20) = 0;
+    *(int *)(newNodeOrRightArg + 0x24) = 0;
+    *(undefined ***)(newNodeOrRightArg + 8) = tailTypeVtbl;
+    *(int *)(newNodeOrRightArg + 0x28) = 0;
+    bitsOrLine = *(uint *)(newNodeOrRightArg + 0x2c);
+    *(uint *)(newNodeOrRightArg + 0x2c) = bitsOrLine & 0x1ffffff | 0x4000000;
+    typeBitsOrLoc = (tailTypeBits >> 0x13 & 0x3f) << 0x13;
+    *(uint *)(newNodeOrRightArg + 0x2c) = typeBitsOrLoc | bitsOrLine & 0x7ffff | 0x4000000;
+    *(uint *)(newNodeOrRightArg + 0x2c) = typeBitsOrLoc | bitsOrLine & 0x7ff | 0x4000000 | 0x800;
+    *(uint *)(newNodeOrRightArg + 0x2c) = typeBitsOrLoc | bitsOrLine & 0x3ff | 0x4000000 | 0x800;
+    refCountOrVtable = PTR_vtable_a7b7c0c8;
+    *(uint *)(newNodeOrRightArg + 0x2c) = typeBitsOrLoc | bitsOrLine & 0x1ff | 0x4000000 | 0x800;
+    *(float **)(newNodeOrRightArg + 0x30) = resultOrRightFloats;
+    *(undefined **)newNodeOrRightArg = refCountOrVtable + 8;
+    if (newNodeOrRightArg != (unsigned char *)0x0) goto LAB_97b951c0;
 code_r0x97b95098:
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-    pTVar18 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x34);
-    uVar21 = local_ec & 0x7ff | 0x4080000;
+    newNodeOrRightArg = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x34);
+    typeBitsOrLoc = tailTypeBits & 0x7ff | 0x4080000;
     goto code_r0x97b950c8;
   }
-  iVar12 = (**(code **)(*(int *)param_3 + 0x18))(param_3);
-  uVar21 = param_2 - 0x13;
-  uVar25 = **(uint **)(iVar12 + 0x30);
-  uVar10 = **(uint **)(this + 0x30);
-  if (0x11 < uVar21) {
+  sizeOrArrayOrIndex = (**(code **)(*(int *)rightOperand + 0x18))(rightOperand);
+  typeBitsOrLoc = op - 0x13;
+  typeFieldOrInt = **(uint **)(sizeOrArrayOrIndex + 0x30);
+  bitsOrLine = **(uint **)(this + 0x30);
+  if (0x11 < typeBitsOrLoc) {
     return (unsigned char *)0x0;
   }
-  switch(uVar21) {
+  switch(typeBitsOrLoc) {
   case 0:
-    fVar6 = GH_U2F((unsigned int)((uVar10 + uVar25)));
+    rightOrResultValue = GH_U2F((unsigned int)((bitsOrLine + typeFieldOrInt)));
     break;
   case 1:
-    fVar6 = GH_U2F((unsigned int)((uVar10 - uVar25)));
+    rightOrResultValue = GH_U2F((unsigned int)((bitsOrLine - typeFieldOrInt)));
     break;
   case 2:
-    fVar6 = GH_U2F((unsigned int)((uVar10 * uVar25)));
+    rightOrResultValue = GH_U2F((unsigned int)((bitsOrLine * typeFieldOrInt)));
     break;
   case 3:
-    if (uVar25 == 0) {
-      uVar21 = (*(code *)**(undefined4 **)this)
-                         (this,uVar21,pTVar18,a3,iVar17,param_6,uVar21 * 4,uVar10);
+    if (typeFieldOrInt == 0) {
+      typeBitsOrLoc = (*(code *)**(undefined4 **)this)
+                         (this,typeBitsOrLoc,newNodeOrRightArg,infoSinkArg,sizeOrIndex,unusedArg6,typeBitsOrLoc * 4,bitsOrLine);
                     
       __ZN13TInfoSinkBase6appendEPKc(infoSink,"WARNING: ");
-      uVar10 = uVar21 & 0xffff;
-      bVar32 = (uVar10 == 0) << 1;
-      if (uVar10 == 0) {
-        _sprintf(acStack_90,"%d:? ",(int)uVar21 >> 0x10);
+      bitsOrLine = typeBitsOrLoc & 0xffff;
+      reservationOk = (bitsOrLine == 0) << 1;
+      if (bitsOrLine == 0) {
+        _sprintf(locTextBuf3,"%d:? ",(int)typeBitsOrLoc >> 0x10);
       }
       else {
-        _sprintf(acStack_90,"%d:%d",(int)uVar21 >> 0x10,uVar10);
+        _sprintf(locTextBuf3,"%d:%d",(int)typeBitsOrLoc >> 0x10,bitsOrLine);
       }
-      __ZNSsC1EPKcRKSaIcE(&local_110,acStack_90,(unsigned char *)&local_100);
-      *(undefined *)((int)local_110 + (int)local_110[-3]) = *PTR__S_terminal_a7b7c0b8;
-      __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_110);
-      ppuVar29 = local_110 + -1;
+      __ZNSsC1EPKcRKSaIcE(&tailTypeVtbl,locTextBuf3,(unsigned char *)&tailTypeWord4OrLocText);
+      *(undefined *)((int)tailTypeVtbl + (int)tailTypeVtbl[-3]) = *PTR__S_terminal_a7b7c0b8;
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)tailTypeVtbl);
+      refCountPtr = tailTypeVtbl + -1;
       do {
-        puVar8 = *ppuVar29;
-        if (in_RESERVE != '\0') {
-          puVar2 = (undefined *)storeWordConditionalIndexed(puVar8 + -1,0,ppuVar29);
-          *ppuVar29 = puVar2;
-          bVar32 = 2;
+        refCountOrVtable = *refCountPtr;
+        if (reservation != '\0') {
+          newRefCount = (undefined *)storeWordConditionalIndexed(refCountOrVtable + -1,0,refCountPtr);
+          *refCountPtr = newRefCount;
+          reservationOk = 2;
         }
-      } while (!(bool)(bVar32 >> 1 & 1));
-      if ((int)puVar8 < 1) {
-        __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_110 + -3),(unsigned char *)&local_100);
+      } while (!(bool)(reservationOk >> 1 & 1));
+      if ((int)refCountOrVtable < 1) {
+        __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(tailTypeVtbl + -3),(unsigned char *)&tailTypeWord4OrLocText);
       }
       __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
       __ZN13TInfoSinkBase6appendEPKc(infoSink,"Divide by zero error during constant folding");
       __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
-      fVar6 = GH_U2F(0x7fffffffU);
+      rightOrResultValue = GH_U2F(0x7fffffffU);
     }
     else {
-      fVar6 = GH_U2F((unsigned int)(((int)uVar10 / (int)uVar25)));
+      rightOrResultValue = GH_U2F((unsigned int)(((int)bitsOrLine / (int)typeFieldOrInt)));
     }
     break;
   case 4:
-    fVar6 = GH_U2F((unsigned int)((uVar10 - ((int)uVar10 / (int)uVar25) * uVar25)));
+    rightOrResultValue = GH_U2F((unsigned int)((bitsOrLine - ((int)bitsOrLine / (int)typeFieldOrInt) * typeFieldOrInt)));
     break;
   case 5:
-    fVar6 = GH_U2F((unsigned int)(((int)uVar10 >> (uVar25 & 0x3f))));
+    rightOrResultValue = GH_U2F((unsigned int)(((int)bitsOrLine >> (typeFieldOrInt & 0x3f))));
     break;
   case 6:
-    fVar6 = GH_U2F((unsigned int)((uVar10 << (uVar25 & 0x3f))));
+    rightOrResultValue = GH_U2F((unsigned int)((bitsOrLine << (typeFieldOrInt & 0x3f))));
     break;
   case 7:
-    fVar6 = GH_U2F((unsigned int)((uVar10 & uVar25)));
+    rightOrResultValue = GH_U2F((unsigned int)((bitsOrLine & typeFieldOrInt)));
     break;
   case 8:
-    fVar6 = GH_U2F((unsigned int)((uVar10 | uVar25)));
+    rightOrResultValue = GH_U2F((unsigned int)((bitsOrLine | typeFieldOrInt)));
     break;
   case 9:
-    fVar6 = GH_U2F((unsigned int)((uVar10 ^ uVar25)));
+    rightOrResultValue = GH_U2F((unsigned int)((bitsOrLine ^ typeFieldOrInt)));
     break;
   case 10:
-    fVar6 = GH_U2F((unsigned int)((uint)(uVar10 == uVar25)));
+    rightOrResultValue = GH_U2F((unsigned int)((uint)(bitsOrLine == typeFieldOrInt)));
     goto LAB_97b94b6c;
   case 0xb:
-    *pfVar26 = GH_U2F((unsigned int)((uint)(uVar10 != uVar25)));
+    *resultOrRightFloats = GH_U2F((unsigned int)((uint)(bitsOrLine != typeFieldOrInt)));
     goto LAB_97b94b70;
   default:
     goto switchD_97b94d20_caseD_17;
   case 0xe:
-    fVar6 = 1.4013e-45;
-    if ((int)uVar25 <= (int)uVar10) {
+    rightOrResultValue = 1.4013e-45;
+    if ((int)typeFieldOrInt <= (int)bitsOrLine) {
 LAB_97b94b68:
-      fVar6 = 0.0;
+      rightOrResultValue = 0.0;
     }
     goto LAB_97b94b6c;
   case 0xf:
-    fVar6 = 1.4013e-45;
-    if ((int)uVar10 <= (int)uVar25) goto LAB_97b94b68;
+    rightOrResultValue = 1.4013e-45;
+    if ((int)bitsOrLine <= (int)typeFieldOrInt) goto LAB_97b94b68;
     goto LAB_97b94b6c;
   case 0x10:
-    fVar6 = 1.4013e-45;
-    if ((int)uVar25 < (int)uVar10) goto LAB_97b94b68;
+    rightOrResultValue = 1.4013e-45;
+    if ((int)typeFieldOrInt < (int)bitsOrLine) goto LAB_97b94b68;
     goto LAB_97b94b6c;
   case 0x11:
-    fVar6 = 1.4013e-45;
-    if ((int)uVar10 < (int)uVar25) goto LAB_97b94b68;
+    rightOrResultValue = 1.4013e-45;
+    if ((int)bitsOrLine < (int)typeFieldOrInt) goto LAB_97b94b68;
 LAB_97b94b6c:
-    *pfVar26 = fVar6;
+    *resultOrRightFloats = rightOrResultValue;
 LAB_97b94b70:
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-    pTVar18 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x34);
-    local_ec = local_ec & 0x1801ff | 0x4180800;
-    local_110 = (undefined **)(local_4c - 0x473c);
-    local_10c = 0;
-    local_104 = 0;
-    local_100 = 0;
-    local_fc = 0;
-    local_f8 = 0;
-    local_f4 = 0;
-    local_f0 = 0;
-    local_108 = 0;
-    *(int *)(pTVar18 + 4) = 0;
-    *(undefined ***)pTVar18 = &PTR_getLine_a7b7cf90;
-    *(int *)(pTVar18 + 0xc) = 0;
-    *(int *)(pTVar18 + 0x10) = 0;
-    *(int *)(pTVar18 + 0x14) = 0;
-    *(int *)(pTVar18 + 0x18) = 0;
-    *(int *)(pTVar18 + 0x1c) = 0;
-    *(int *)(pTVar18 + 0x20) = 0;
-    *(int *)(pTVar18 + 0x24) = 0;
-    *(undefined ***)(pTVar18 + 8) = local_110;
-    *(int *)(pTVar18 + 0x28) = 0;
-    uVar10 = *(uint *)(pTVar18 + 0x2c);
-    *(uint *)(pTVar18 + 0x2c) = uVar10 & 0x1ffffff | 0x4000000;
-    uVar21 = (local_ec >> 0x13 & 0x3f) << 0x13;
-    *(uint *)(pTVar18 + 0x2c) = uVar21 | uVar10 & 0x7ffff | 0x4000000;
-    *(uint *)(pTVar18 + 0x2c) = uVar21 | uVar10 & 0x7ff | 0x4000000 | 0x800;
-    *(uint *)(pTVar18 + 0x2c) = uVar21 | uVar10 & 0x3ff | 0x4000000 | 0x800;
-    puVar8 = PTR_vtable_a7b7c0c8;
-    *(uint *)(pTVar18 + 0x2c) = uVar21 | uVar10 & 0x1ff | 0x4000000 | 0x800;
-    *(float **)(pTVar18 + 0x30) = pfVar26;
-    *(undefined **)pTVar18 = puVar8 + 8;
-    if (pTVar18 != (unsigned char *)0x0) goto LAB_97b951c0;
+    newNodeOrRightArg = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x34);
+    tailTypeBits = tailTypeBits & 0x1801ff | 0x4180800;
+    tailTypeVtbl = (undefined **)(picBase - 0x473c);
+    tailTypeWord1 = 0;
+    tailTypeWord3 = 0;
+    tailTypeWord4OrLocText = 0;
+    tailTypeWord5 = 0;
+    tailTypeWord6 = 0;
+    tailTypeWord7 = 0;
+    tailTypeWord8 = 0;
+    tailTypeWord2 = 0;
+    *(int *)(newNodeOrRightArg + 4) = 0;
+    *(undefined ***)newNodeOrRightArg = &PTR_getLine_a7b7cf90;
+    *(int *)(newNodeOrRightArg + 0xc) = 0;
+    *(int *)(newNodeOrRightArg + 0x10) = 0;
+    *(int *)(newNodeOrRightArg + 0x14) = 0;
+    *(int *)(newNodeOrRightArg + 0x18) = 0;
+    *(int *)(newNodeOrRightArg + 0x1c) = 0;
+    *(int *)(newNodeOrRightArg + 0x20) = 0;
+    *(int *)(newNodeOrRightArg + 0x24) = 0;
+    *(undefined ***)(newNodeOrRightArg + 8) = tailTypeVtbl;
+    *(int *)(newNodeOrRightArg + 0x28) = 0;
+    bitsOrLine = *(uint *)(newNodeOrRightArg + 0x2c);
+    *(uint *)(newNodeOrRightArg + 0x2c) = bitsOrLine & 0x1ffffff | 0x4000000;
+    typeBitsOrLoc = (tailTypeBits >> 0x13 & 0x3f) << 0x13;
+    *(uint *)(newNodeOrRightArg + 0x2c) = typeBitsOrLoc | bitsOrLine & 0x7ffff | 0x4000000;
+    *(uint *)(newNodeOrRightArg + 0x2c) = typeBitsOrLoc | bitsOrLine & 0x7ff | 0x4000000 | 0x800;
+    *(uint *)(newNodeOrRightArg + 0x2c) = typeBitsOrLoc | bitsOrLine & 0x3ff | 0x4000000 | 0x800;
+    refCountOrVtable = PTR_vtable_a7b7c0c8;
+    *(uint *)(newNodeOrRightArg + 0x2c) = typeBitsOrLoc | bitsOrLine & 0x1ff | 0x4000000 | 0x800;
+    *(float **)(newNodeOrRightArg + 0x30) = resultOrRightFloats;
+    *(undefined **)newNodeOrRightArg = refCountOrVtable + 8;
+    if (newNodeOrRightArg != (unsigned char *)0x0) goto LAB_97b951c0;
     goto code_r0x97b94ca4;
   }
-  *pfVar26 = fVar6;
+  *resultOrRightFloats = rightOrResultValue;
 code_r0x97b94ca4:
   poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-  pTVar18 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x34);
-  uVar21 = local_ec & 0xfff | 0x4100000;
+  newNodeOrRightArg = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x34);
+  typeBitsOrLoc = tailTypeBits & 0xfff | 0x4100000;
 code_r0x97b950c8:
-  local_110 = (undefined **)(local_4c - 0x473c);
-  local_ec = uVar21 & 0xfffff9ff | 0x800;
-  *(int *)(pTVar18 + 4) = 0;
-  *(undefined ***)pTVar18 = &PTR_getLine_a7b7cf90;
-  *(int *)(pTVar18 + 0xc) = 0;
-  *(int *)(pTVar18 + 0x10) = 0;
-  *(int *)(pTVar18 + 0x14) = 0;
-  *(int *)(pTVar18 + 0x18) = 0;
-  *(int *)(pTVar18 + 0x1c) = 0;
-  *(int *)(pTVar18 + 0x20) = 0;
-  *(undefined ***)(pTVar18 + 8) = local_110;
-  *(int *)(pTVar18 + 0x24) = 0;
-  *(int *)(pTVar18 + 0x28) = 0;
-  uVar25 = *(uint *)(pTVar18 + 0x2c);
-  uVar10 = uVar21 & 0xfe000000;
-  *(uint *)(pTVar18 + 0x2c) = uVar10 | uVar25 & 0x1ffffff;
-  uVar21 = uVar21 & 0x1f80000;
-  *(uint *)(pTVar18 + 0x2c) = uVar21 | uVar10 | uVar25 & 0x7ffff;
-  *(uint *)(pTVar18 + 0x2c) = uVar21 | uVar10 | uVar25 & 0x7ff | 0x800;
-  *(uint *)(pTVar18 + 0x2c) = uVar21 | uVar10 | uVar25 & 0x3ff | 0x800;
-  puVar8 = PTR_vtable_a7b7c0c8;
-  *(uint *)(pTVar18 + 0x2c) = uVar21 | uVar10 | uVar25 & 0x1ff | 0x800;
-  *(float **)(pTVar18 + 0x30) = pfVar26;
-  *(undefined **)pTVar18 = puVar8 + 8;
+  tailTypeVtbl = (undefined **)(picBase - 0x473c);
+  tailTypeBits = typeBitsOrLoc & 0xfffff9ff | 0x800;
+  *(int *)(newNodeOrRightArg + 4) = 0;
+  *(undefined ***)newNodeOrRightArg = &PTR_getLine_a7b7cf90;
+  *(int *)(newNodeOrRightArg + 0xc) = 0;
+  *(int *)(newNodeOrRightArg + 0x10) = 0;
+  *(int *)(newNodeOrRightArg + 0x14) = 0;
+  *(int *)(newNodeOrRightArg + 0x18) = 0;
+  *(int *)(newNodeOrRightArg + 0x1c) = 0;
+  *(int *)(newNodeOrRightArg + 0x20) = 0;
+  *(undefined ***)(newNodeOrRightArg + 8) = tailTypeVtbl;
+  *(int *)(newNodeOrRightArg + 0x24) = 0;
+  *(int *)(newNodeOrRightArg + 0x28) = 0;
+  typeFieldOrInt = *(uint *)(newNodeOrRightArg + 0x2c);
+  bitsOrLine = typeBitsOrLoc & 0xfe000000;
+  *(uint *)(newNodeOrRightArg + 0x2c) = bitsOrLine | typeFieldOrInt & 0x1ffffff;
+  typeBitsOrLoc = typeBitsOrLoc & 0x1f80000;
+  *(uint *)(newNodeOrRightArg + 0x2c) = typeBitsOrLoc | bitsOrLine | typeFieldOrInt & 0x7ffff;
+  *(uint *)(newNodeOrRightArg + 0x2c) = typeBitsOrLoc | bitsOrLine | typeFieldOrInt & 0x7ff | 0x800;
+  *(uint *)(newNodeOrRightArg + 0x2c) = typeBitsOrLoc | bitsOrLine | typeFieldOrInt & 0x3ff | 0x800;
+  refCountOrVtable = PTR_vtable_a7b7c0c8;
+  *(uint *)(newNodeOrRightArg + 0x2c) = typeBitsOrLoc | bitsOrLine | typeFieldOrInt & 0x1ff | 0x800;
+  *(float **)(newNodeOrRightArg + 0x30) = resultOrRightFloats;
+  *(undefined **)newNodeOrRightArg = refCountOrVtable + 8;
 LAB_97b951c0:
-  local_f0 = 0;
-  iVar17 = *(int *)pTVar18;
-  local_10c = local_f0;
-  local_108 = local_f0;
-  local_104 = local_f0;
-  local_100 = local_f0;
-  local_fc = local_f0;
-  local_f8 = local_f0;
-  local_f4 = local_f0;
-  uVar19 = (*(code *)**(undefined4 **)param_3)(param_3);
-  (**(code **)(iVar17 + 4))(pTVar18,uVar19);
-  return pTVar18;
+  tailTypeWord8 = 0;
+  sizeOrIndex = *(int *)newNodeOrRightArg;
+  tailTypeWord1 = tailTypeWord8;
+  tailTypeWord2 = tailTypeWord8;
+  tailTypeWord3 = tailTypeWord8;
+  tailTypeWord4OrLocText = tailTypeWord8;
+  tailTypeWord5 = tailTypeWord8;
+  tailTypeWord6 = tailTypeWord8;
+  tailTypeWord7 = tailTypeWord8;
+  r4Value = (*(code *)**(undefined4 **)rightOperand)(rightOperand);
+  (**(code **)(sizeOrIndex + 4))(newNodeOrRightArg,r4Value);
+  return newNodeOrRightArg;
 }
 
 /* TIntermediate__changeAggrToTempConst @ 0x97b95c0c (484 bytes) */
