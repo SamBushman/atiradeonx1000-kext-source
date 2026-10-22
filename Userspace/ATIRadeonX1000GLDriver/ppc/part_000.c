@@ -1111,22 +1111,22 @@ void FUN_00002ae0(int glContext,undefined4 op,double value)
   ushort uVar27;
   int iVar28;
   uint uVar29;
-  char *pcVar30;
+  char *accumByteEnd;
   uint uVar31;
   byte *pbVar32;
   ushort *puVar33;
   int iVar34;
   byte *pbVar35;
   int iVar36;
-  char *pcVar37;
-  short *psVar38;
+  char *accumByteCursor;
+  short *accumShortCursor;
   ushort uVar41;
-  short *psVar39;
+  short *accumShortEnd;
   int iVar40;
-  ushort *puVar42;
-  uint *puVar43;
+  ushort *readbackHalfCursor;
+  uint *readbackWordCursor;
   uint uVar44;
-  uint uVar45;
+  uint paddedRowPixels;
   uint uVar46;
   undefined1 *puVar47;
   ushort *puVar48;
@@ -1201,31 +1201,31 @@ void FUN_00002ae0(int glContext,undefined4 op,double value)
       if (value < (double)FLOAT_001aa0d4) {
         *(undefined1 *)(glContext + 0x140) = 1;
       }
-      uVar45 = *(int *)(glContext + 0x15c) + 7U & 0xfffffff8;
-      iVar23 = iVar23 + uVar45 * ((*(int *)(glContext + 0x160) - uVar29) + -1);
+      paddedRowPixels = *(int *)(glContext + 0x15c) + 7U & 0xfffffff8;
+      iVar23 = iVar23 + paddedRowPixels * ((*(int *)(glContext + 0x160) - uVar29) + -1);
       if (*(char *)(glContext + 0x141) == '\x01') {
         sStack_252 = (short)(int)(value * (double)FLOAT_001aa0d8);
         iVar28 = (int)sStack_252;
         if (uVar29 < uVar31) {
           iVar19 = 0;
           do {
-            puVar43 = (uint *)((int)readbackPixels + iVar23 * 4);
-            pcVar37 = (char *)(iVar23 * 4 + *(int *)(glContext + 0x148));
-            pcVar30 = pcVar37 + uVar20 * 4;
-            for (; pcVar37 < pcVar30; pcVar37 = pcVar37 + 4) {
-              uVar13 = *puVar43;
-              puVar43 = puVar43 + 1;
-              *pcVar37 = (char)((int)(iVar28 * (uVar13 >> 9 & 0x7f80 | uVar13 >> 0x11 & 0x7f)) >>
-                               0x17) + *pcVar37;
-              pcVar37[3] = (char)((int)(iVar28 * (uVar13 >> 0x11 & 0x7f80 | uVar13 >> 0x19)) >> 0x17
-                                 ) + pcVar37[3];
-              pcVar37[1] = (char)((int)(iVar28 * (uVar13 >> 1 & 0x7f80 | uVar13 >> 9 & 0x7f)) >>
-                                 0x17) + pcVar37[1];
-              pcVar37[2] = (char)((int)(iVar28 * ((uVar13 & 0xff) << 7 | uVar13 >> 1 & 0x7f)) >>
-                                 0x17) + pcVar37[2];
+            readbackWordCursor = (uint *)((int)readbackPixels + iVar23 * 4);
+            accumByteCursor = (char *)(iVar23 * 4 + *(int *)(glContext + 0x148));
+            accumByteEnd = accumByteCursor + uVar20 * 4;
+            for (; accumByteCursor < accumByteEnd; accumByteCursor = accumByteCursor + 4) {
+              uVar13 = *readbackWordCursor;
+              readbackWordCursor = readbackWordCursor + 1;
+              *accumByteCursor = (char)((int)(iVar28 * (uVar13 >> 9 & 0x7f80 | uVar13 >> 0x11 & 0x7f)) >>
+                               0x17) + *accumByteCursor;
+              accumByteCursor[3] = (char)((int)(iVar28 * (uVar13 >> 0x11 & 0x7f80 | uVar13 >> 0x19)) >> 0x17
+                                 ) + accumByteCursor[3];
+              accumByteCursor[1] = (char)((int)(iVar28 * (uVar13 >> 1 & 0x7f80 | uVar13 >> 9 & 0x7f)) >>
+                                 0x17) + accumByteCursor[1];
+              accumByteCursor[2] = (char)((int)(iVar28 * ((uVar13 & 0xff) << 7 | uVar13 >> 1 & 0x7f)) >>
+                                 0x17) + accumByteCursor[2];
             }
             iVar19 = iVar19 + 1;
-            iVar23 = iVar23 - uVar45;
+            iVar23 = iVar23 - paddedRowPixels;
           } while (uVar31 - uVar29 != iVar19);
         }
       }
@@ -1235,23 +1235,23 @@ void FUN_00002ae0(int glContext,undefined4 op,double value)
         if (uVar29 < uVar31) {
           iVar19 = 0;
           do {
-            puVar43 = (uint *)((int)readbackPixels + iVar23 * 4);
-            psVar38 = (short *)(iVar23 * 8 + *(int *)(glContext + 0x148));
-            psVar39 = psVar38 + uVar20 * 4;
-            for (; psVar38 < psVar39; psVar38 = psVar38 + 4) {
-              uVar13 = *puVar43;
-              puVar43 = puVar43 + 1;
-              *psVar38 = (short)((int)(iVar28 * (uVar13 >> 9 & 0x7f80 | uVar13 >> 0x11 & 0x7f)) >>
-                                0xf) + *psVar38;
-              psVar38[3] = (short)((int)(iVar28 * (uVar13 >> 0x11 & 0x7f80 | uVar13 >> 0x19)) >> 0xf
-                                  ) + psVar38[3];
-              psVar38[1] = (short)((int)(iVar28 * (uVar13 >> 1 & 0x7f80 | uVar13 >> 9 & 0x7f)) >>
-                                  0xf) + psVar38[1];
-              psVar38[2] = (short)((int)(iVar28 * ((uVar13 & 0xff) << 7 | uVar13 >> 1 & 0x7f)) >>
-                                  0xf) + psVar38[2];
+            readbackWordCursor = (uint *)((int)readbackPixels + iVar23 * 4);
+            accumShortCursor = (short *)(iVar23 * 8 + *(int *)(glContext + 0x148));
+            accumShortEnd = accumShortCursor + uVar20 * 4;
+            for (; accumShortCursor < accumShortEnd; accumShortCursor = accumShortCursor + 4) {
+              uVar13 = *readbackWordCursor;
+              readbackWordCursor = readbackWordCursor + 1;
+              *accumShortCursor = (short)((int)(iVar28 * (uVar13 >> 9 & 0x7f80 | uVar13 >> 0x11 & 0x7f)) >>
+                                0xf) + *accumShortCursor;
+              accumShortCursor[3] = (short)((int)(iVar28 * (uVar13 >> 0x11 & 0x7f80 | uVar13 >> 0x19)) >> 0xf
+                                  ) + accumShortCursor[3];
+              accumShortCursor[1] = (short)((int)(iVar28 * (uVar13 >> 1 & 0x7f80 | uVar13 >> 9 & 0x7f)) >>
+                                  0xf) + accumShortCursor[1];
+              accumShortCursor[2] = (short)((int)(iVar28 * ((uVar13 & 0xff) << 7 | uVar13 >> 1 & 0x7f)) >>
+                                  0xf) + accumShortCursor[2];
             }
             iVar19 = iVar19 + 1;
-            iVar23 = iVar23 - uVar45;
+            iVar23 = iVar23 - paddedRowPixels;
           } while (uVar31 - uVar29 != iVar19);
         }
       }
@@ -1303,32 +1303,32 @@ void FUN_00002ae0(int glContext,undefined4 op,double value)
       if (value < (double)FLOAT_001aa0d4) {
         *(undefined1 *)(glContext + 0x140) = 1;
       }
-      uVar45 = *(int *)(glContext + 0x15c) + 7U & 0xfffffff8;
-      iVar23 = iVar23 + uVar45 * ((*(int *)(glContext + 0x160) - uVar29) + -1);
+      paddedRowPixels = *(int *)(glContext + 0x15c) + 7U & 0xfffffff8;
+      iVar23 = iVar23 + paddedRowPixels * ((*(int *)(glContext + 0x160) - uVar29) + -1);
       if (*(char *)(glContext + 0x141) == '\x01') {
         sStack_262 = (short)(int)(value * (double)FLOAT_001aa0d8);
         iVar28 = (int)sStack_262;
         if (uVar29 < uVar31) {
           iVar19 = 0;
           do {
-            puVar42 = (ushort *)((int)readbackPixels + iVar23 * 2);
-            pcVar37 = (char *)(iVar23 * 4 + *(int *)(glContext + 0x148));
-            pcVar30 = pcVar37 + uVar20 * 4;
-            for (; pcVar37 < pcVar30; pcVar37 = pcVar37 + 4) {
-              uVar27 = *puVar42;
-              puVar42 = puVar42 + 1;
+            readbackHalfCursor = (ushort *)((int)readbackPixels + iVar23 * 2);
+            accumByteCursor = (char *)(iVar23 * 4 + *(int *)(glContext + 0x148));
+            accumByteEnd = accumByteCursor + uVar20 * 4;
+            for (; accumByteCursor < accumByteEnd; accumByteCursor = accumByteCursor + 4) {
+              uVar27 = *readbackHalfCursor;
+              readbackHalfCursor = readbackHalfCursor + 1;
               uVar13 = (uint)uVar27 << 5;
-              pcVar37[1] = (char)((int)(iVar28 * (uVar13 & 0x7c00 | uVar27 & 0x3e0 |
-                                                 uVar27 >> 5 & 0x1f)) >> 0x17) + pcVar37[1];
-              pcVar37[3] = (char)((int)(iVar28 * (-(uint)(uVar27 >> 0xf) & 0x7fff)) >> 0x17) +
-                           pcVar37[3];
-              *pcVar37 = (char)((int)(iVar28 * (uVar27 & 0x7c00 | uVar27 >> 5 & 0x3e0 |
-                                               uVar27 >> 10 & 0x1f)) >> 0x17) + *pcVar37;
-              pcVar37[2] = (char)((int)(iVar28 * ((uVar27 & 0x1f) << 10 | uVar13 & 0x3e0 |
-                                                 uVar27 & 0x1f)) >> 0x17) + pcVar37[2];
+              accumByteCursor[1] = (char)((int)(iVar28 * (uVar13 & 0x7c00 | uVar27 & 0x3e0 |
+                                                 uVar27 >> 5 & 0x1f)) >> 0x17) + accumByteCursor[1];
+              accumByteCursor[3] = (char)((int)(iVar28 * (-(uint)(uVar27 >> 0xf) & 0x7fff)) >> 0x17) +
+                           accumByteCursor[3];
+              *accumByteCursor = (char)((int)(iVar28 * (uVar27 & 0x7c00 | uVar27 >> 5 & 0x3e0 |
+                                               uVar27 >> 10 & 0x1f)) >> 0x17) + *accumByteCursor;
+              accumByteCursor[2] = (char)((int)(iVar28 * ((uVar27 & 0x1f) << 10 | uVar13 & 0x3e0 |
+                                                 uVar27 & 0x1f)) >> 0x17) + accumByteCursor[2];
             }
             iVar19 = iVar19 + 1;
-            iVar23 = iVar23 - uVar45;
+            iVar23 = iVar23 - paddedRowPixels;
           } while (uVar31 - uVar29 != iVar19);
         }
       }
@@ -1338,24 +1338,24 @@ void FUN_00002ae0(int glContext,undefined4 op,double value)
         if (uVar29 < uVar31) {
           iVar19 = 0;
           do {
-            puVar42 = (ushort *)((int)readbackPixels + iVar23 * 2);
-            psVar38 = (short *)(iVar23 * 8 + *(int *)(glContext + 0x148));
-            psVar39 = psVar38 + uVar20 * 4;
-            for (; psVar38 < psVar39; psVar38 = psVar38 + 4) {
-              uVar27 = *puVar42;
-              puVar42 = puVar42 + 1;
+            readbackHalfCursor = (ushort *)((int)readbackPixels + iVar23 * 2);
+            accumShortCursor = (short *)(iVar23 * 8 + *(int *)(glContext + 0x148));
+            accumShortEnd = accumShortCursor + uVar20 * 4;
+            for (; accumShortCursor < accumShortEnd; accumShortCursor = accumShortCursor + 4) {
+              uVar27 = *readbackHalfCursor;
+              readbackHalfCursor = readbackHalfCursor + 1;
               uVar13 = (uint)uVar27 << 5;
-              psVar38[1] = (short)((int)(iVar28 * (uVar13 & 0x7c00 | uVar27 & 0x3e0 |
-                                                  uVar27 >> 5 & 0x1f)) >> 0xf) + psVar38[1];
-              psVar38[3] = (short)((int)(iVar28 * (-(uint)(uVar27 >> 0xf) & 0x7fff)) >> 0xf) +
-                           psVar38[3];
-              *psVar38 = (short)((int)(iVar28 * (uVar27 & 0x7c00 | uVar27 >> 5 & 0x3e0 |
-                                                uVar27 >> 10 & 0x1f)) >> 0xf) + *psVar38;
-              psVar38[2] = (short)((int)(iVar28 * ((uVar27 & 0x1f) << 10 | uVar13 & 0x3e0 |
-                                                  uVar27 & 0x1f)) >> 0xf) + psVar38[2];
+              accumShortCursor[1] = (short)((int)(iVar28 * (uVar13 & 0x7c00 | uVar27 & 0x3e0 |
+                                                  uVar27 >> 5 & 0x1f)) >> 0xf) + accumShortCursor[1];
+              accumShortCursor[3] = (short)((int)(iVar28 * (-(uint)(uVar27 >> 0xf) & 0x7fff)) >> 0xf) +
+                           accumShortCursor[3];
+              *accumShortCursor = (short)((int)(iVar28 * (uVar27 & 0x7c00 | uVar27 >> 5 & 0x3e0 |
+                                                uVar27 >> 10 & 0x1f)) >> 0xf) + *accumShortCursor;
+              accumShortCursor[2] = (short)((int)(iVar28 * ((uVar27 & 0x1f) << 10 | uVar13 & 0x3e0 |
+                                                  uVar27 & 0x1f)) >> 0xf) + accumShortCursor[2];
             }
             iVar19 = iVar19 + 1;
-            iVar23 = iVar23 - uVar45;
+            iVar23 = iVar23 - paddedRowPixels;
           } while (uVar31 - uVar29 != iVar19);
         }
       }
@@ -1409,26 +1409,26 @@ void FUN_00002ae0(int glContext,undefined4 op,double value)
       if (value < (double)FLOAT_001aa0d4) {
         *(undefined1 *)(glContext + 0x140) = 1;
       }
-      uVar45 = *(int *)(glContext + 0x15c) + 7U & 0xfffffff8;
-      iVar23 = iVar23 + uVar45 * ((*(int *)(glContext + 0x160) - uVar29) + -1);
+      paddedRowPixels = *(int *)(glContext + 0x15c) + 7U & 0xfffffff8;
+      iVar23 = iVar23 + paddedRowPixels * ((*(int *)(glContext + 0x160) - uVar29) + -1);
       if (*(char *)(glContext + 0x141) == '\x01') {
         if (value == (double)FLOAT_001aa0e8) {
           if (uVar29 < uVar31) {
             iVar28 = 0;
             do {
-              puVar43 = (uint *)((int)readbackPixels + iVar23 * 4);
+              readbackWordCursor = (uint *)((int)readbackPixels + iVar23 * 4);
               pbVar35 = (byte *)(iVar23 * 4 + *(int *)(glContext + 0x148));
               pbVar32 = pbVar35 + uVar20 * 4;
               for (; pbVar35 < pbVar32; pbVar35 = pbVar35 + 4) {
-                uVar13 = *puVar43;
-                puVar43 = puVar43 + 1;
+                uVar13 = *readbackWordCursor;
+                readbackWordCursor = readbackWordCursor + 1;
                 *pbVar35 = (byte)(uVar13 >> 0x11) & 0x7f;
                 pbVar35[3] = (byte)(uVar13 >> 0x19);
                 pbVar35[1] = (byte)(uVar13 >> 9) & 0x7f;
                 pbVar35[2] = (byte)(uVar13 >> 1) & 0x7f;
               }
               iVar28 = iVar28 + 1;
-              iVar23 = iVar23 - uVar45;
+              iVar23 = iVar23 - paddedRowPixels;
             } while (uVar31 - uVar29 != iVar28);
           }
         }
@@ -1438,12 +1438,12 @@ void FUN_00002ae0(int glContext,undefined4 op,double value)
           if (uVar29 < uVar31) {
             iVar19 = 0;
             do {
-              puVar43 = (uint *)((int)readbackPixels + iVar23 * 4);
+              readbackWordCursor = (uint *)((int)readbackPixels + iVar23 * 4);
               puVar24 = (undefined1 *)(iVar23 * 4 + *(int *)(glContext + 0x148));
               puVar47 = puVar24 + uVar20 * 4;
               for (; puVar24 < puVar47; puVar24 = puVar24 + 4) {
-                uVar13 = *puVar43;
-                puVar43 = puVar43 + 1;
+                uVar13 = *readbackWordCursor;
+                readbackWordCursor = readbackWordCursor + 1;
                 *puVar24 = (char)((int)(iVar28 * (uVar13 >> 9 & 0x7f80 | uVar13 >> 0x11 & 0x7f)) >>
                                  0x17);
                 puVar24[3] = (char)((int)(iVar28 * (uVar13 >> 0x11 & 0x7f80 | uVar13 >> 0x19)) >>
@@ -1454,7 +1454,7 @@ void FUN_00002ae0(int glContext,undefined4 op,double value)
                                    0x17);
               }
               iVar19 = iVar19 + 1;
-              iVar23 = iVar23 - uVar45;
+              iVar23 = iVar23 - paddedRowPixels;
             } while (uVar31 - uVar29 != iVar19);
           }
         }
@@ -1463,23 +1463,23 @@ void FUN_00002ae0(int glContext,undefined4 op,double value)
         if (uVar29 < uVar31) {
           iVar28 = 0;
           do {
-            puVar43 = (uint *)((int)readbackPixels + iVar23 * 4);
-            puVar42 = (ushort *)(iVar23 * 8 + *(int *)(glContext + 0x148));
-            puVar33 = puVar42 + uVar20 * 4;
-            for (; puVar42 < puVar33; puVar42 = puVar42 + 4) {
-              uVar13 = *puVar43;
-              puVar43 = puVar43 + 1;
+            readbackWordCursor = (uint *)((int)readbackPixels + iVar23 * 4);
+            readbackHalfCursor = (ushort *)(iVar23 * 8 + *(int *)(glContext + 0x148));
+            puVar33 = readbackHalfCursor + uVar20 * 4;
+            for (; readbackHalfCursor < puVar33; readbackHalfCursor = readbackHalfCursor + 4) {
+              uVar13 = *readbackWordCursor;
+              readbackWordCursor = readbackWordCursor + 1;
               uVar10 = (ushort)(uVar13 >> 0x10);
               uVar21 = uVar10 >> 1;
               uVar27 = (ushort)(uVar13 >> 9);
               uVar41 = (ushort)(uVar13 >> 1);
-              puVar42[3] = uVar21 & 0x7f80 | uVar10 >> 9;
-              *puVar42 = uVar27 & 0x7f80 | uVar21 & 0x7f;
-              puVar42[1] = uVar41 & 0x7f80 | uVar27 & 0x7f;
-              puVar42[2] = (ushort)(uVar13 << 7) & 0x7f80 | uVar41 & 0x7f;
+              readbackHalfCursor[3] = uVar21 & 0x7f80 | uVar10 >> 9;
+              *readbackHalfCursor = uVar27 & 0x7f80 | uVar21 & 0x7f;
+              readbackHalfCursor[1] = uVar41 & 0x7f80 | uVar27 & 0x7f;
+              readbackHalfCursor[2] = (ushort)(uVar13 << 7) & 0x7f80 | uVar41 & 0x7f;
             }
             iVar28 = iVar28 + 1;
-            iVar23 = iVar23 - uVar45;
+            iVar23 = iVar23 - paddedRowPixels;
           } while (uVar31 - uVar29 != iVar28);
         }
       }
@@ -1489,12 +1489,12 @@ void FUN_00002ae0(int glContext,undefined4 op,double value)
         if (uVar29 < uVar31) {
           iVar19 = 0;
           do {
-            puVar43 = (uint *)((int)readbackPixels + iVar23 * 4);
+            readbackWordCursor = (uint *)((int)readbackPixels + iVar23 * 4);
             puVar25 = (undefined2 *)(iVar23 * 8 + *(int *)(glContext + 0x148));
             puVar49 = puVar25 + uVar20 * 4;
             for (; puVar25 < puVar49; puVar25 = puVar25 + 4) {
-              uVar13 = *puVar43;
-              puVar43 = puVar43 + 1;
+              uVar13 = *readbackWordCursor;
+              readbackWordCursor = readbackWordCursor + 1;
               *puVar25 = (short)((int)(iVar28 * (uVar13 >> 9 & 0x7f80 | uVar13 >> 0x11 & 0x7f)) >>
                                 0xf);
               puVar25[3] = (short)((int)(iVar28 * (uVar13 >> 0x11 & 0x7f80 | uVar13 >> 0x19)) >> 0xf
@@ -1505,7 +1505,7 @@ void FUN_00002ae0(int glContext,undefined4 op,double value)
                                   0xf);
             }
             iVar19 = iVar19 + 1;
-            iVar23 = iVar23 - uVar45;
+            iVar23 = iVar23 - paddedRowPixels;
           } while (uVar31 - uVar29 != iVar19);
         }
       }
@@ -1557,19 +1557,19 @@ void FUN_00002ae0(int glContext,undefined4 op,double value)
       if (value < (double)FLOAT_001aa0d4) {
         *(undefined1 *)(glContext + 0x140) = 1;
       }
-      uVar45 = *(int *)(glContext + 0x15c) + 7U & 0xfffffff8;
-      iVar23 = iVar23 + uVar45 * ((*(int *)(glContext + 0x160) - uVar29) + -1);
+      paddedRowPixels = *(int *)(glContext + 0x15c) + 7U & 0xfffffff8;
+      iVar23 = iVar23 + paddedRowPixels * ((*(int *)(glContext + 0x160) - uVar29) + -1);
       if (*(char *)(glContext + 0x141) == '\x01') {
         if (value == (double)FLOAT_001aa0e8) {
           if (uVar29 < uVar31) {
             iVar28 = 0;
             do {
-              puVar42 = (ushort *)((int)readbackPixels + iVar23 * 2);
+              readbackHalfCursor = (ushort *)((int)readbackPixels + iVar23 * 2);
               pbVar35 = (byte *)(iVar23 * 4 + *(int *)(glContext + 0x148));
               pbVar32 = pbVar35 + uVar20 * 4;
               for (; pbVar35 < pbVar32; pbVar35 = pbVar35 + 4) {
-                uVar27 = *puVar42;
-                puVar42 = puVar42 + 1;
+                uVar27 = *readbackHalfCursor;
+                readbackHalfCursor = readbackHalfCursor + 1;
                 bVar3 = (byte)(uVar27 >> 8);
                 bVar4 = (byte)(uVar27 >> 3);
                 pbVar35[2] = ((byte)uVar27 & 0x1f) << 2 | bVar4 & 3;
@@ -1578,7 +1578,7 @@ void FUN_00002ae0(int glContext,undefined4 op,double value)
                 pbVar35[1] = bVar4 & 0x7c | bVar3 & 3;
               }
               iVar28 = iVar28 + 1;
-              iVar23 = iVar23 - uVar45;
+              iVar23 = iVar23 - paddedRowPixels;
             } while (uVar31 - uVar29 != iVar28);
           }
         }
@@ -1588,12 +1588,12 @@ void FUN_00002ae0(int glContext,undefined4 op,double value)
           if (uVar29 < uVar31) {
             iVar19 = 0;
             do {
-              puVar42 = (ushort *)((int)readbackPixels + iVar23 * 2);
+              readbackHalfCursor = (ushort *)((int)readbackPixels + iVar23 * 2);
               puVar24 = (undefined1 *)(iVar23 * 4 + *(int *)(glContext + 0x148));
               puVar47 = puVar24 + uVar20 * 4;
               for (; puVar24 < puVar47; puVar24 = puVar24 + 4) {
-                uVar27 = *puVar42;
-                puVar42 = puVar42 + 1;
+                uVar27 = *readbackHalfCursor;
+                readbackHalfCursor = readbackHalfCursor + 1;
                 uVar13 = (uint)uVar27 << 5;
                 puVar24[1] = (char)((int)(iVar28 * (uVar13 & 0x7c00 | uVar27 & 0x3e0 |
                                                    uVar27 >> 5 & 0x1f)) >> 0x17);
@@ -1604,7 +1604,7 @@ void FUN_00002ae0(int glContext,undefined4 op,double value)
                                                    uVar27 & 0x1f)) >> 0x17);
               }
               iVar19 = iVar19 + 1;
-              iVar23 = iVar23 - uVar45;
+              iVar23 = iVar23 - paddedRowPixels;
             } while (uVar31 - uVar29 != iVar19);
           }
         }
@@ -1613,19 +1613,19 @@ void FUN_00002ae0(int glContext,undefined4 op,double value)
         if (uVar29 < uVar31) {
           iVar28 = 0;
           do {
-            puVar42 = (ushort *)((int)readbackPixels + iVar23 * 2);
+            readbackHalfCursor = (ushort *)((int)readbackPixels + iVar23 * 2);
             puVar33 = (ushort *)(iVar23 * 8 + *(int *)(glContext + 0x148));
             puVar48 = puVar33 + uVar20 * 4;
             for (; puVar33 < puVar48; puVar33 = puVar33 + 4) {
-              uVar27 = *puVar42;
-              puVar42 = puVar42 + 1;
+              uVar27 = *readbackHalfCursor;
+              readbackHalfCursor = readbackHalfCursor + 1;
               puVar33[1] = uVar27 << 5 & 0x7c00 | uVar27 & 0x3e0 | uVar27 >> 5 & 0x1f;
               puVar33[2] = (uVar27 & 0x1f) << 10 | uVar27 << 5 & 0x3e0 | uVar27 & 0x1f;
               *puVar33 = uVar27 & 0x7c00 | uVar27 >> 5 & 0x3e0 | uVar27 >> 10 & 0x1f;
               puVar33[3] = (short)uVar27 >> 0xf & 0x7fff;
             }
             iVar28 = iVar28 + 1;
-            iVar23 = iVar23 - uVar45;
+            iVar23 = iVar23 - paddedRowPixels;
           } while (uVar31 - uVar29 != iVar28);
         }
       }
@@ -1635,12 +1635,12 @@ void FUN_00002ae0(int glContext,undefined4 op,double value)
         if (uVar29 < uVar31) {
           iVar19 = 0;
           do {
-            puVar42 = (ushort *)((int)readbackPixels + iVar23 * 2);
+            readbackHalfCursor = (ushort *)((int)readbackPixels + iVar23 * 2);
             puVar25 = (undefined2 *)(iVar23 * 8 + *(int *)(glContext + 0x148));
             puVar49 = puVar25 + uVar20 * 4;
             for (; puVar25 < puVar49; puVar25 = puVar25 + 4) {
-              uVar27 = *puVar42;
-              puVar42 = puVar42 + 1;
+              uVar27 = *readbackHalfCursor;
+              readbackHalfCursor = readbackHalfCursor + 1;
               uVar13 = (uint)uVar27 << 5;
               puVar25[1] = (short)((int)(iVar28 * (uVar13 & 0x7c00 | uVar27 & 0x3e0 |
                                                   uVar27 >> 5 & 0x1f)) >> 0xf);
@@ -1651,7 +1651,7 @@ void FUN_00002ae0(int glContext,undefined4 op,double value)
                                                   uVar27 & 0x1f)) >> 0xf);
             }
             iVar19 = iVar19 + 1;
-            iVar23 = iVar23 - uVar45;
+            iVar23 = iVar23 - paddedRowPixels;
           } while (uVar31 - uVar29 != iVar19);
         }
       }
@@ -1700,25 +1700,25 @@ code_r0x00003264:
         if ((uVar20 != 0) && (iVar28 != 0)) {
           readbackPixels = _malloc((iVar19 + 7U & 0xfffffff8) * iVar26 * 4);
           iVar26 = *(int *)(glContext + 0x160);
-          uVar45 = uVar29 + iVar28;
+          paddedRowPixels = uVar29 + iVar28;
           iVar19 = *(int *)(glContext + 0x15c);
           uVar31 = iVar19 + 7U & 0xfffffff8;
           cVar14 = *(char *)(glContext + 0x140);
           iVar34 = iVar23 + uVar31 * ((iVar26 - uVar29) + -1);
           if (*(char *)(glContext + 0x141) == '\x01') {
             if (value == (double)FLOAT_001aa0e8) {
-              if (uVar29 < uVar45) {
+              if (uVar29 < paddedRowPixels) {
                 iVar36 = *(int *)(glContext + 0x148);
                 iVar40 = 0;
                 do {
                   pbVar35 = (byte *)(iVar34 * 4 + iVar36);
-                  puVar43 = (uint *)((int)readbackPixels + iVar34 * 4);
+                  readbackWordCursor = (uint *)((int)readbackPixels + iVar34 * 4);
                   pbVar32 = pbVar35 + uVar20 * 4;
                   if (cVar14 == '\0') {
                     for (; pbVar35 < pbVar32; pbVar35 = pbVar35 + 4) {
-                      *puVar43 = (uint)pbVar35[3] << 0x19 | (*pbVar35 & 0x7f) << 0x11 |
+                      *readbackWordCursor = (uint)pbVar35[3] << 0x19 | (*pbVar35 & 0x7f) << 0x11 |
                                  (pbVar35[1] & 0x7f) << 9 | (pbVar35[2] & 0x7f) << 1;
-                      puVar43 = puVar43 + 1;
+                      readbackWordCursor = readbackWordCursor + 1;
                     }
                   }
                   else {
@@ -1739,32 +1739,32 @@ code_r0x00003264:
                       if (-1 < (char)pbVar35[3]) {
                         iVar15 = (int)(char)pbVar35[3];
                       }
-                      *puVar43 = iVar15 << 0x19 | (uVar13 & 0x7f) << 0x11 | (uVar44 & 0x7f) << 9 |
+                      *readbackWordCursor = iVar15 << 0x19 | (uVar13 & 0x7f) << 0x11 | (uVar44 & 0x7f) << 9 |
                                  (uVar46 & 0x7f) << 1;
-                      puVar43 = puVar43 + 1;
+                      readbackWordCursor = readbackWordCursor + 1;
                     }
                   }
                   iVar40 = iVar40 + 1;
                   iVar34 = iVar34 - uVar31;
-                } while (iVar40 != uVar45 - uVar29);
+                } while (iVar40 != paddedRowPixels - uVar29);
               }
             }
             else {
               fVar1 = (float)(value * (double)FLOAT_001aa0dc);
-              if (uVar29 < uVar45) {
+              if (uVar29 < paddedRowPixels) {
                 iVar40 = *(int *)(glContext + 0x148);
                 iVar36 = 0;
                 do {
                   dVar51 = DOUBLE_001aa1e0;
-                  pcVar30 = (char *)(iVar34 * 4 + iVar40);
-                  puVar43 = (uint *)((int)readbackPixels + iVar34 * 4);
-                  pcVar37 = pcVar30 + uVar20 * 4;
-                  if (pcVar30 < pcVar37) {
+                  accumByteEnd = (char *)(iVar34 * 4 + iVar40);
+                  readbackWordCursor = (uint *)((int)readbackPixels + iVar34 * 4);
+                  accumByteCursor = accumByteEnd + uVar20 * 4;
+                  if (accumByteEnd < accumByteCursor) {
                     dVar52 = (double)FLOAT_001aa0d4;
                     dVar53 = (double)FLOAT_001aa0f0;
                     do {
                       dVar50 = (double)(fVar1 * (float)((double)CONCAT44(0x43300000,
-                                                                         (int)*pcVar30 ^ 0x80000000)
+                                                                         (int)*accumByteEnd ^ 0x80000000)
                                                        - dVar51));
                       fVar2 = FLOAT_001aa0d4;
                       if (dVar52 <= dVar50) {
@@ -1772,21 +1772,21 @@ code_r0x00003264:
                       }
                       dVar55 = (double)FLOAT_001aa0d4;
                       dVar50 = (double)(fVar1 * (float)((double)CONCAT44(0x43300000,
-                                                                         (int)pcVar30[1] ^
+                                                                         (int)accumByteEnd[1] ^
                                                                          0x80000000) - dVar51));
                       if (dVar55 <= dVar50) {
                         dVar55 = (double)(float)(dVar50 * dVar53);
                       }
                       dVar54 = (double)FLOAT_001aa0d4;
                       dVar50 = (double)(fVar1 * (float)((double)CONCAT44(0x43300000,
-                                                                         (int)pcVar30[2] ^
+                                                                         (int)accumByteEnd[2] ^
                                                                          0x80000000) - dVar51));
                       if (dVar54 <= dVar50) {
                         dVar54 = (double)(float)(dVar50 * dVar53);
                       }
                       dVar56 = (double)FLOAT_001aa0d4;
                       dVar50 = (double)(fVar1 * (float)((double)CONCAT44(0x43300000,
-                                                                         (int)pcVar30[3] ^
+                                                                         (int)accumByteEnd[3] ^
                                                                          0x80000000) - dVar51));
                       if (dVar56 <= dVar50) {
                         dVar56 = (double)(float)(dVar50 * dVar53);
@@ -1815,77 +1815,77 @@ code_r0x00003264:
                       else {
                         uVar13 = (uint)(int)dVar54;
                       }
-                      pcVar30 = pcVar30 + 4;
-                      *puVar43 = iVar15 << 0x18 | iVar16 << 0x10 | iVar17 << 8 | uVar13;
-                      puVar43 = puVar43 + 1;
-                    } while (pcVar30 < pcVar37);
+                      accumByteEnd = accumByteEnd + 4;
+                      *readbackWordCursor = iVar15 << 0x18 | iVar16 << 0x10 | iVar17 << 8 | uVar13;
+                      readbackWordCursor = readbackWordCursor + 1;
+                    } while (accumByteEnd < accumByteCursor);
                   }
                   iVar36 = iVar36 + 1;
                   iVar34 = iVar34 - uVar31;
-                } while (iVar36 != uVar45 - uVar29);
+                } while (iVar36 != paddedRowPixels - uVar29);
               }
             }
           }
           else if (value == (double)FLOAT_001aa0e8) {
-            if (uVar29 < uVar45) {
+            if (uVar29 < paddedRowPixels) {
               iVar36 = *(int *)(glContext + 0x148);
               iVar40 = 0;
               do {
-                psVar38 = (short *)(iVar34 * 8 + iVar36);
-                puVar43 = (uint *)((int)readbackPixels + iVar34 * 4);
-                psVar39 = psVar38 + uVar20 * 4;
+                accumShortCursor = (short *)(iVar34 * 8 + iVar36);
+                readbackWordCursor = (uint *)((int)readbackPixels + iVar34 * 4);
+                accumShortEnd = accumShortCursor + uVar20 * 4;
                 if (cVar14 == '\0') {
-                  for (; psVar38 < psVar39; psVar38 = psVar38 + 4) {
-                    *puVar43 = ((int)psVar38[3] & 0x7f80U) << 0x11 | ((int)*psVar38 & 0x7f80U) << 9
-                               | ((int)psVar38[1] & 0x7f80U) << 1 |
-                               (uint)(int)psVar38[2] >> 7 & 0xff;
-                    puVar43 = puVar43 + 1;
+                  for (; accumShortCursor < accumShortEnd; accumShortCursor = accumShortCursor + 4) {
+                    *readbackWordCursor = ((int)accumShortCursor[3] & 0x7f80U) << 0x11 | ((int)*accumShortCursor & 0x7f80U) << 9
+                               | ((int)accumShortCursor[1] & 0x7f80U) << 1 |
+                               (uint)(int)accumShortCursor[2] >> 7 & 0xff;
+                    readbackWordCursor = readbackWordCursor + 1;
                   }
                 }
                 else {
-                  for (; psVar38 < psVar39; psVar38 = psVar38 + 4) {
+                  for (; accumShortCursor < accumShortEnd; accumShortCursor = accumShortCursor + 4) {
                     uVar13 = 0;
-                    if (-1 < *psVar38) {
-                      uVar13 = (int)*psVar38;
+                    if (-1 < *accumShortCursor) {
+                      uVar13 = (int)*accumShortCursor;
                     }
                     uVar44 = 0;
-                    if (-1 < psVar38[1]) {
-                      uVar44 = (int)psVar38[1];
+                    if (-1 < accumShortCursor[1]) {
+                      uVar44 = (int)accumShortCursor[1];
                     }
                     uVar46 = 0;
-                    if (-1 < psVar38[2]) {
-                      uVar46 = (int)psVar38[2] >> 7;
+                    if (-1 < accumShortCursor[2]) {
+                      uVar46 = (int)accumShortCursor[2] >> 7;
                     }
                     uVar18 = 0;
-                    if (-1 < psVar38[3]) {
-                      uVar18 = (int)psVar38[3];
+                    if (-1 < accumShortCursor[3]) {
+                      uVar18 = (int)accumShortCursor[3];
                     }
-                    *puVar43 = (uVar18 & 0x7f80) << 0x11 | (uVar13 & 0x7f80) << 9 |
+                    *readbackWordCursor = (uVar18 & 0x7f80) << 0x11 | (uVar13 & 0x7f80) << 9 |
                                (uVar44 & 0x7f80) << 1 | uVar46 & 0xff;
-                    puVar43 = puVar43 + 1;
+                    readbackWordCursor = readbackWordCursor + 1;
                   }
                 }
                 iVar40 = iVar40 + 1;
                 iVar34 = iVar34 - uVar31;
-              } while (iVar40 != uVar45 - uVar29);
+              } while (iVar40 != paddedRowPixels - uVar29);
             }
           }
           else {
             fVar1 = (float)(value * (double)FLOAT_001aa0e4);
-            if (uVar29 < uVar45) {
+            if (uVar29 < paddedRowPixels) {
               iVar40 = *(int *)(glContext + 0x148);
               iVar36 = 0;
               do {
                 dVar51 = DOUBLE_001aa1e0;
-                psVar39 = (short *)(iVar34 * 8 + iVar40);
-                puVar43 = (uint *)((int)readbackPixels + iVar34 * 4);
-                psVar38 = psVar39 + uVar20 * 4;
-                if (psVar39 < psVar38) {
+                accumShortEnd = (short *)(iVar34 * 8 + iVar40);
+                readbackWordCursor = (uint *)((int)readbackPixels + iVar34 * 4);
+                accumShortCursor = accumShortEnd + uVar20 * 4;
+                if (accumShortEnd < accumShortCursor) {
                   dVar52 = (double)FLOAT_001aa0d4;
                   dVar53 = (double)FLOAT_001aa0f0;
                   do {
                     dVar50 = (double)(fVar1 * (float)((double)CONCAT44(0x43300000,
-                                                                       (int)*psVar39 ^ 0x80000000) -
+                                                                       (int)*accumShortEnd ^ 0x80000000) -
                                                      dVar51));
                     fVar2 = FLOAT_001aa0d4;
                     if (dVar52 <= dVar50) {
@@ -1893,21 +1893,21 @@ code_r0x00003264:
                     }
                     dVar55 = (double)FLOAT_001aa0d4;
                     dVar50 = (double)(fVar1 * (float)((double)CONCAT44(0x43300000,
-                                                                       (int)psVar39[1] ^ 0x80000000)
+                                                                       (int)accumShortEnd[1] ^ 0x80000000)
                                                      - dVar51));
                     if (dVar55 <= dVar50) {
                       dVar55 = (double)(float)(dVar50 * dVar53);
                     }
                     dVar54 = (double)FLOAT_001aa0d4;
                     dVar50 = (double)(fVar1 * (float)((double)CONCAT44(0x43300000,
-                                                                       (int)psVar39[2] ^ 0x80000000)
+                                                                       (int)accumShortEnd[2] ^ 0x80000000)
                                                      - dVar51));
                     if (dVar54 <= dVar50) {
                       dVar54 = (double)(float)(dVar50 * dVar53);
                     }
                     dVar56 = (double)FLOAT_001aa0d4;
                     dVar50 = (double)(fVar1 * (float)((double)CONCAT44(0x43300000,
-                                                                       (int)psVar39[3] ^ 0x80000000)
+                                                                       (int)accumShortEnd[3] ^ 0x80000000)
                                                      - dVar51));
                     if (dVar56 <= dVar50) {
                       dVar56 = (double)(float)(dVar50 * dVar53);
@@ -1936,14 +1936,14 @@ code_r0x00003264:
                     else {
                       uVar13 = (uint)(int)dVar54;
                     }
-                    psVar39 = psVar39 + 4;
-                    *puVar43 = iVar15 << 0x18 | iVar16 << 0x10 | iVar17 << 8 | uVar13;
-                    puVar43 = puVar43 + 1;
-                  } while (psVar39 < psVar38);
+                    accumShortEnd = accumShortEnd + 4;
+                    *readbackWordCursor = iVar15 << 0x18 | iVar16 << 0x10 | iVar17 << 8 | uVar13;
+                    readbackWordCursor = readbackWordCursor + 1;
+                  } while (accumShortEnd < accumShortCursor);
                 }
                 iVar36 = iVar36 + 1;
                 iVar34 = iVar34 - uVar31;
-              } while (iVar36 != uVar45 - uVar29);
+              } while (iVar36 != paddedRowPixels - uVar29);
             }
           }
           FUN_000198b0(glContext,iVar23,uVar29,uVar20,iVar28,0x8367,
@@ -1978,9 +1978,9 @@ code_r0x00003264:
             uVar31 = 0;
           }
           iVar19 = *(int *)(glContext + 0x15c);
-          uVar45 = iVar19 + 7U & 0xfffffff8;
-          if ((int)uVar45 < (int)uVar20) {
-            uVar20 = uVar45;
+          paddedRowPixels = iVar19 + 7U & 0xfffffff8;
+          if ((int)paddedRowPixels < (int)uVar20) {
+            uVar20 = paddedRowPixels;
           }
           iVar23 = iVar26;
           if (iVar28 <= iVar26) {
@@ -1996,9 +1996,9 @@ code_r0x00003264:
           uVar44 = uVar29 + uVar20;
           iVar19 = *(int *)(glContext + 0x15c);
           cVar14 = *(char *)(glContext + 0x140);
-          uVar45 = iVar19 + 7U & 0xfffffff8;
+          paddedRowPixels = iVar19 + 7U & 0xfffffff8;
           uVar13 = uVar31 + iVar28;
-          iVar23 = uVar29 + uVar45 * ((iVar26 - uVar31) + -1);
+          iVar23 = uVar29 + paddedRowPixels * ((iVar26 - uVar31) + -1);
           if (*(char *)(glContext + 0x141) == '\x01') {
             if (value == (double)FLOAT_001aa0e8) {
               if (uVar31 < uVar13) {
@@ -2006,13 +2006,13 @@ code_r0x00003264:
                 iVar36 = 0;
                 do {
                   pbVar35 = (byte *)(iVar23 * 4 + iVar34);
-                  puVar42 = (ushort *)((int)readbackPixels + iVar23 * 2);
+                  readbackHalfCursor = (ushort *)((int)readbackPixels + iVar23 * 2);
                   pbVar32 = pbVar35 + uVar20 * 4;
                   if (cVar14 == '\0') {
                     for (; pbVar35 < pbVar32; pbVar35 = pbVar35 + 4) {
-                      *puVar42 = ((short)(char)pbVar35[3] & 0x40U) << 9 | (*pbVar35 & 0x7c) << 8 |
+                      *readbackHalfCursor = ((short)(char)pbVar35[3] & 0x40U) << 9 | (*pbVar35 & 0x7c) << 8 |
                                  (pbVar35[1] & 0x7c) << 3 | pbVar35[2] >> 2 & 0x1f;
-                      puVar42 = puVar42 + 1;
+                      readbackHalfCursor = readbackHalfCursor + 1;
                     }
                   }
                   else {
@@ -2033,13 +2033,13 @@ code_r0x00003264:
                       if (-1 < (char)pbVar35[3]) {
                         iVar16 = (int)(char)pbVar35[3];
                       }
-                      *puVar42 = (ushort)(iVar16 << 9) & 0x8000 | (ushort)(iVar40 << 8) & 0x7c00 |
+                      *readbackHalfCursor = (ushort)(iVar16 << 9) & 0x8000 | (ushort)(iVar40 << 8) & 0x7c00 |
                                  (ushort)(iVar15 << 3) & 0x3e0 | uVar27 & 0x1f;
-                      puVar42 = puVar42 + 1;
+                      readbackHalfCursor = readbackHalfCursor + 1;
                     }
                   }
                   iVar36 = iVar36 + 1;
-                  iVar23 = iVar23 - uVar45;
+                  iVar23 = iVar23 - paddedRowPixels;
                 } while (uVar13 - uVar31 != iVar36);
               }
             }
@@ -2052,48 +2052,48 @@ code_r0x00003264:
                   dVar51 = DOUBLE_001aa1e0;
                   fVar12 = FLOAT_001aa0ec;
                   fVar11 = FLOAT_001aa0d4;
-                  pcVar37 = (char *)(iVar23 * 4 + iVar34);
-                  puVar42 = (ushort *)((int)readbackPixels + iVar23 * 2);
+                  accumByteCursor = (char *)(iVar23 * 4 + iVar34);
+                  readbackHalfCursor = (ushort *)((int)readbackPixels + iVar23 * 2);
                   iVar40 = uVar44 - uVar29;
                   if (uVar29 < uVar44) {
                     do {
-                      fVar5 = fVar2 * (float)((double)CONCAT44(0x43300000,(int)*pcVar37 ^ 0x80000000
+                      fVar5 = fVar2 * (float)((double)CONCAT44(0x43300000,(int)*accumByteCursor ^ 0x80000000
                                                               ) - dVar51);
                       fVar9 = FLOAT_001aa0d4;
                       if (fVar11 <= fVar5) {
                         fVar9 = fVar5 * fVar12;
                       }
                       fVar5 = fVar2 * (float)((double)CONCAT44(0x43300000,
-                                                               (int)pcVar37[1] ^ 0x80000000) -
+                                                               (int)accumByteCursor[1] ^ 0x80000000) -
                                              dVar51);
                       fVar7 = FLOAT_001aa0d4;
                       if (FLOAT_001aa0d4 <= fVar5) {
                         fVar7 = fVar5 * fVar12;
                       }
                       fVar5 = fVar2 * (float)((double)CONCAT44(0x43300000,
-                                                               (int)pcVar37[2] ^ 0x80000000) -
+                                                               (int)accumByteCursor[2] ^ 0x80000000) -
                                              dVar51);
                       fVar8 = FLOAT_001aa0d4;
                       if (FLOAT_001aa0d4 <= fVar5) {
                         fVar8 = fVar5 * fVar12;
                       }
                       fVar5 = fVar2 * (float)((double)CONCAT44(0x43300000,
-                                                               (int)pcVar37[3] ^ 0x80000000) -
+                                                               (int)accumByteCursor[3] ^ 0x80000000) -
                                              dVar51);
                       fVar6 = FLOAT_001aa0d4;
                       if (FLOAT_001aa0d4 <= fVar5) {
                         fVar6 = fVar5 * fVar1;
                       }
-                      pcVar37 = pcVar37 + 4;
-                      *puVar42 = (ushort)(int)fVar8 |
+                      accumByteCursor = accumByteCursor + 4;
+                      *readbackHalfCursor = (ushort)(int)fVar8 |
                                  (ushort)((int)fVar6 << 0xf) | (ushort)((int)fVar9 << 10) |
                                  (ushort)((int)fVar7 << 5);
-                      puVar42 = puVar42 + 1;
+                      readbackHalfCursor = readbackHalfCursor + 1;
                       iVar40 = iVar40 + -1;
                     } while (iVar40 != 0);
                   }
                   iVar36 = iVar36 + 1;
-                  iVar23 = iVar23 - uVar45;
+                  iVar23 = iVar23 - paddedRowPixels;
                 } while (uVar13 - uVar31 != iVar36);
               }
             }
@@ -2103,34 +2103,34 @@ code_r0x00003264:
               iVar34 = *(int *)(glContext + 0x148);
               iVar36 = 0;
               do {
-                puVar42 = (ushort *)(iVar23 * 8 + iVar34);
+                readbackHalfCursor = (ushort *)(iVar23 * 8 + iVar34);
                 puVar33 = (ushort *)((int)readbackPixels + iVar23 * 2);
-                puVar48 = puVar42 + uVar20 * 4;
+                puVar48 = readbackHalfCursor + uVar20 * 4;
                 if (cVar14 == '\0') {
-                  for (; puVar42 < puVar48; puVar42 = puVar42 + 4) {
-                    *puVar33 = (puVar42[3] & 0x4000) << 1 | *puVar42 & 0x7c00 |
-                               (ushort)((uint)(int)(short)puVar42[1] >> 5) & 0x3e0 |
-                               (ushort)((uint)(int)(short)puVar42[2] >> 10) & 0x1f;
+                  for (; readbackHalfCursor < puVar48; readbackHalfCursor = readbackHalfCursor + 4) {
+                    *puVar33 = (readbackHalfCursor[3] & 0x4000) << 1 | *readbackHalfCursor & 0x7c00 |
+                               (ushort)((uint)(int)(short)readbackHalfCursor[1] >> 5) & 0x3e0 |
+                               (ushort)((uint)(int)(short)readbackHalfCursor[2] >> 10) & 0x1f;
                     puVar33 = puVar33 + 1;
                   }
                 }
                 else {
-                  for (; puVar42 < puVar48; puVar42 = puVar42 + 4) {
+                  for (; readbackHalfCursor < puVar48; readbackHalfCursor = readbackHalfCursor + 4) {
                     uVar27 = 0;
-                    if (-1 < (short)*puVar42) {
-                      uVar27 = *puVar42 & 0x7c00;
+                    if (-1 < (short)*readbackHalfCursor) {
+                      uVar27 = *readbackHalfCursor & 0x7c00;
                     }
                     uVar41 = 0;
-                    if (-1 < (short)puVar42[1]) {
-                      uVar41 = (short)puVar42[1] >> 5;
+                    if (-1 < (short)readbackHalfCursor[1]) {
+                      uVar41 = (short)readbackHalfCursor[1] >> 5;
                     }
                     uVar21 = 0;
-                    if (-1 < (short)puVar42[2]) {
-                      uVar21 = (short)puVar42[2] >> 10;
+                    if (-1 < (short)readbackHalfCursor[2]) {
+                      uVar21 = (short)readbackHalfCursor[2] >> 10;
                     }
                     iVar40 = 0;
-                    if (-1 < (short)puVar42[3]) {
-                      iVar40 = (int)(short)puVar42[3];
+                    if (-1 < (short)readbackHalfCursor[3]) {
+                      iVar40 = (int)(short)readbackHalfCursor[3];
                     }
                     *puVar33 = uVar27 | (ushort)(iVar40 << 1) & 0x8000 | uVar41 & 0x3e0 |
                                uVar21 & 0x1f;
@@ -2138,7 +2138,7 @@ code_r0x00003264:
                   }
                 }
                 iVar36 = iVar36 + 1;
-                iVar23 = iVar23 - uVar45;
+                iVar23 = iVar23 - paddedRowPixels;
               } while (uVar13 - uVar31 != iVar36);
             }
           }
@@ -2151,45 +2151,45 @@ code_r0x00003264:
                 dVar51 = DOUBLE_001aa1e0;
                 fVar12 = FLOAT_001aa0ec;
                 fVar11 = FLOAT_001aa0d4;
-                psVar38 = (short *)(iVar23 * 8 + iVar34);
-                puVar42 = (ushort *)((int)readbackPixels + iVar23 * 2);
+                accumShortCursor = (short *)(iVar23 * 8 + iVar34);
+                readbackHalfCursor = (ushort *)((int)readbackPixels + iVar23 * 2);
                 iVar40 = uVar44 - uVar29;
                 if (uVar29 < uVar44) {
                   do {
-                    fVar5 = fVar2 * (float)((double)CONCAT44(0x43300000,(int)*psVar38 ^ 0x80000000)
+                    fVar5 = fVar2 * (float)((double)CONCAT44(0x43300000,(int)*accumShortCursor ^ 0x80000000)
                                            - dVar51);
                     fVar9 = FLOAT_001aa0d4;
                     if (fVar11 <= fVar5) {
                       fVar9 = fVar5 * fVar12;
                     }
-                    fVar5 = fVar2 * (float)((double)CONCAT44(0x43300000,(int)psVar38[1] ^ 0x80000000
+                    fVar5 = fVar2 * (float)((double)CONCAT44(0x43300000,(int)accumShortCursor[1] ^ 0x80000000
                                                             ) - dVar51);
                     fVar7 = FLOAT_001aa0d4;
                     if (FLOAT_001aa0d4 <= fVar5) {
                       fVar7 = fVar5 * fVar12;
                     }
-                    fVar5 = fVar2 * (float)((double)CONCAT44(0x43300000,(int)psVar38[2] ^ 0x80000000
+                    fVar5 = fVar2 * (float)((double)CONCAT44(0x43300000,(int)accumShortCursor[2] ^ 0x80000000
                                                             ) - dVar51);
                     fVar8 = FLOAT_001aa0d4;
                     if (FLOAT_001aa0d4 <= fVar5) {
                       fVar8 = fVar5 * fVar12;
                     }
-                    fVar5 = fVar2 * (float)((double)CONCAT44(0x43300000,(int)psVar38[3] ^ 0x80000000
+                    fVar5 = fVar2 * (float)((double)CONCAT44(0x43300000,(int)accumShortCursor[3] ^ 0x80000000
                                                             ) - dVar51);
                     fVar6 = FLOAT_001aa0d4;
                     if (FLOAT_001aa0d4 <= fVar5) {
                       fVar6 = fVar5 * fVar1;
                     }
-                    psVar38 = psVar38 + 4;
-                    *puVar42 = (ushort)(int)fVar8 |
+                    accumShortCursor = accumShortCursor + 4;
+                    *readbackHalfCursor = (ushort)(int)fVar8 |
                                (ushort)((int)fVar6 << 0xf) | (ushort)((int)fVar9 << 10) |
                                (ushort)((int)fVar7 << 5);
-                    puVar42 = puVar42 + 1;
+                    readbackHalfCursor = readbackHalfCursor + 1;
                     iVar40 = iVar40 + -1;
                   } while (iVar40 != 0);
                 }
                 iVar36 = iVar36 + 1;
-                iVar23 = iVar23 - uVar45;
+                iVar23 = iVar23 - paddedRowPixels;
               } while (uVar13 - uVar31 != iVar36);
             }
           }
@@ -2274,13 +2274,13 @@ code_r0x00004f90:
           }
           iVar26 = 0;
           while( true ) {
-            pcVar37 = (char *)(iVar34 * 4 + iVar28);
-            pcVar30 = pcVar37 + iVar40;
-            for (; pcVar37 < pcVar30; pcVar37 = pcVar37 + 4) {
-              *pcVar37 = (char)((int)*pcVar37 >> iVar23);
-              pcVar37[1] = (char)((int)pcVar37[1] >> iVar23);
-              pcVar37[2] = (char)((int)pcVar37[2] >> iVar23);
-              pcVar37[3] = (char)((int)pcVar37[3] >> iVar23);
+            accumByteCursor = (char *)(iVar34 * 4 + iVar28);
+            accumByteEnd = accumByteCursor + iVar40;
+            for (; accumByteCursor < accumByteEnd; accumByteCursor = accumByteCursor + 4) {
+              *accumByteCursor = (char)((int)*accumByteCursor >> iVar23);
+              accumByteCursor[1] = (char)((int)accumByteCursor[1] >> iVar23);
+              accumByteCursor[2] = (char)((int)accumByteCursor[2] >> iVar23);
+              accumByteCursor[3] = (char)((int)accumByteCursor[3] >> iVar23);
             }
             iVar26 = iVar26 + 1;
             iVar34 = iVar34 - uVar29;
@@ -2294,13 +2294,13 @@ code_r0x00004f90:
         }
         iVar26 = 0;
         while( true ) {
-          psVar38 = (short *)(iVar34 * 8 + iVar28);
-          psVar39 = psVar38 + uVar20 * 4;
-          for (; psVar38 < psVar39; psVar38 = psVar38 + 4) {
-            *psVar38 = (short)((int)*psVar38 >> iVar23);
-            psVar38[1] = (short)((int)psVar38[1] >> iVar23);
-            psVar38[2] = (short)((int)psVar38[2] >> iVar23);
-            psVar38[3] = (short)((int)psVar38[3] >> iVar23);
+          accumShortCursor = (short *)(iVar34 * 8 + iVar28);
+          accumShortEnd = accumShortCursor + uVar20 * 4;
+          for (; accumShortCursor < accumShortEnd; accumShortCursor = accumShortCursor + 4) {
+            *accumShortCursor = (short)((int)*accumShortCursor >> iVar23);
+            accumShortCursor[1] = (short)((int)accumShortCursor[1] >> iVar23);
+            accumShortCursor[2] = (short)((int)accumShortCursor[2] >> iVar23);
+            accumShortCursor[3] = (short)((int)accumShortCursor[3] >> iVar23);
           }
           iVar26 = iVar26 + 1;
           iVar34 = iVar34 - uVar29;
@@ -2320,24 +2320,24 @@ code_r0x00004f90:
         iVar26 = 0;
         while( true ) {
           dVar51 = DOUBLE_001aa1e0;
-          pcVar37 = (char *)(iVar34 * 4 + iVar28);
-          pcVar30 = pcVar37 + iVar40;
-          for (; pcVar37 < pcVar30; pcVar37 = pcVar37 + 4) {
-            *pcVar37 = (char)(int)(value *
+          accumByteCursor = (char *)(iVar34 * 4 + iVar28);
+          accumByteEnd = accumByteCursor + iVar40;
+          for (; accumByteCursor < accumByteEnd; accumByteCursor = accumByteCursor + 4) {
+            *accumByteCursor = (char)(int)(value *
                                   (double)(float)((double)CONCAT44(0x43300000,
-                                                                   (int)*pcVar37 ^ 0x80000000) -
+                                                                   (int)*accumByteCursor ^ 0x80000000) -
                                                  dVar51));
-            pcVar37[1] = (char)(int)(value *
+            accumByteCursor[1] = (char)(int)(value *
                                     (double)(float)((double)CONCAT44(0x43300000,
-                                                                     (int)pcVar37[1] ^ 0x80000000) -
+                                                                     (int)accumByteCursor[1] ^ 0x80000000) -
                                                    dVar51));
-            pcVar37[2] = (char)(int)(value *
+            accumByteCursor[2] = (char)(int)(value *
                                     (double)(float)((double)CONCAT44(0x43300000,
-                                                                     (int)pcVar37[2] ^ 0x80000000) -
+                                                                     (int)accumByteCursor[2] ^ 0x80000000) -
                                                    dVar51));
-            pcVar37[3] = (char)(int)(value *
+            accumByteCursor[3] = (char)(int)(value *
                                     (double)(float)((double)CONCAT44(0x43300000,
-                                                                     (int)pcVar37[3] ^ 0x80000000) -
+                                                                     (int)accumByteCursor[3] ^ 0x80000000) -
                                                    dVar51));
           }
           iVar26 = iVar26 + 1;
@@ -2353,24 +2353,24 @@ code_r0x00004f90:
       iVar26 = 0;
       while( true ) {
         dVar51 = DOUBLE_001aa1e0;
-        psVar38 = (short *)(iVar34 * 8 + iVar28);
-        psVar39 = psVar38 + uVar20 * 4;
-        for (; psVar38 < psVar39; psVar38 = psVar38 + 4) {
-          *psVar38 = (short)(int)(value *
+        accumShortCursor = (short *)(iVar34 * 8 + iVar28);
+        accumShortEnd = accumShortCursor + uVar20 * 4;
+        for (; accumShortCursor < accumShortEnd; accumShortCursor = accumShortCursor + 4) {
+          *accumShortCursor = (short)(int)(value *
                                  (double)(float)((double)CONCAT44(0x43300000,
-                                                                  (int)*psVar38 ^ 0x80000000) -
+                                                                  (int)*accumShortCursor ^ 0x80000000) -
                                                 dVar51));
-          psVar38[1] = (short)(int)(value *
+          accumShortCursor[1] = (short)(int)(value *
                                    (double)(float)((double)CONCAT44(0x43300000,
-                                                                    (int)psVar38[1] ^ 0x80000000) -
+                                                                    (int)accumShortCursor[1] ^ 0x80000000) -
                                                   dVar51));
-          psVar38[2] = (short)(int)(value *
+          accumShortCursor[2] = (short)(int)(value *
                                    (double)(float)((double)CONCAT44(0x43300000,
-                                                                    (int)psVar38[2] ^ 0x80000000) -
+                                                                    (int)accumShortCursor[2] ^ 0x80000000) -
                                                   dVar51));
-          psVar38[3] = (short)(int)(value *
+          accumShortCursor[3] = (short)(int)(value *
                                    (double)(float)((double)CONCAT44(0x43300000,
-                                                                    (int)psVar38[3] ^ 0x80000000) -
+                                                                    (int)accumShortCursor[3] ^ 0x80000000) -
                                                   dVar51));
         }
         iVar26 = iVar26 + 1;
@@ -2399,13 +2399,13 @@ code_r0x0000510c:
       if (iVar36 < iVar19) {
         iVar26 = 0;
         while( true ) {
-          pcVar37 = (char *)(iVar34 * 4 + iVar28);
-          pcVar30 = pcVar37 + iVar40;
-          for (; pcVar37 < pcVar30; pcVar37 = pcVar37 + 4) {
-            *pcVar37 = *pcVar37 << iVar23;
-            pcVar37[1] = pcVar37[1] << iVar23;
-            pcVar37[2] = pcVar37[2] << iVar23;
-            pcVar37[3] = pcVar37[3] << iVar23;
+          accumByteCursor = (char *)(iVar34 * 4 + iVar28);
+          accumByteEnd = accumByteCursor + iVar40;
+          for (; accumByteCursor < accumByteEnd; accumByteCursor = accumByteCursor + 4) {
+            *accumByteCursor = *accumByteCursor << iVar23;
+            accumByteCursor[1] = accumByteCursor[1] << iVar23;
+            accumByteCursor[2] = accumByteCursor[2] << iVar23;
+            accumByteCursor[3] = accumByteCursor[3] << iVar23;
           }
           iVar26 = iVar26 + 1;
           iVar34 = iVar34 - uVar29;
@@ -2417,13 +2417,13 @@ code_r0x0000510c:
     else if (iVar36 < iVar19) {
       iVar26 = 0;
       while( true ) {
-        psVar38 = (short *)(iVar34 * 8 + iVar28);
-        psVar39 = psVar38 + uVar20 * 4;
-        for (; psVar38 < psVar39; psVar38 = psVar38 + 4) {
-          *psVar38 = (short)((int)*psVar38 << iVar23);
-          psVar38[1] = (short)((int)psVar38[1] << iVar23);
-          psVar38[2] = (short)((int)psVar38[2] << iVar23);
-          psVar38[3] = (short)((int)psVar38[3] << iVar23);
+        accumShortCursor = (short *)(iVar34 * 8 + iVar28);
+        accumShortEnd = accumShortCursor + uVar20 * 4;
+        for (; accumShortCursor < accumShortEnd; accumShortCursor = accumShortCursor + 4) {
+          *accumShortCursor = (short)((int)*accumShortCursor << iVar23);
+          accumShortCursor[1] = (short)((int)accumShortCursor[1] << iVar23);
+          accumShortCursor[2] = (short)((int)accumShortCursor[2] << iVar23);
+          accumShortCursor[3] = (short)((int)accumShortCursor[3] << iVar23);
         }
         iVar26 = iVar26 + 1;
         iVar34 = iVar34 - uVar29;
@@ -2478,13 +2478,13 @@ code_r0x0000510c:
         if (iVar36 < iVar19) {
           iVar26 = 0;
           while( true ) {
-            pcVar37 = (char *)(iVar34 * 4 + iVar28);
-            pcVar30 = pcVar37 + uVar20 * 4;
-            for (; pcVar37 < pcVar30; pcVar37 = pcVar37 + 4) {
-              *pcVar37 = cVar14 + *pcVar37;
-              pcVar37[1] = cVar14 + pcVar37[1];
-              pcVar37[2] = cVar14 + pcVar37[2];
-              pcVar37[3] = cVar14 + pcVar37[3];
+            accumByteCursor = (char *)(iVar34 * 4 + iVar28);
+            accumByteEnd = accumByteCursor + uVar20 * 4;
+            for (; accumByteCursor < accumByteEnd; accumByteCursor = accumByteCursor + 4) {
+              *accumByteCursor = cVar14 + *accumByteCursor;
+              accumByteCursor[1] = cVar14 + accumByteCursor[1];
+              accumByteCursor[2] = cVar14 + accumByteCursor[2];
+              accumByteCursor[3] = cVar14 + accumByteCursor[3];
             }
             iVar26 = iVar26 + 1;
             iVar34 = iVar34 - uVar29;
@@ -2498,13 +2498,13 @@ code_r0x0000510c:
         if (iVar36 < iVar19) {
           iVar26 = 0;
           while( true ) {
-            psVar38 = (short *)(iVar34 * 8 + iVar28);
-            psVar39 = psVar38 + uVar20 * 4;
-            for (; psVar38 < psVar39; psVar38 = psVar38 + 4) {
-              *psVar38 = sStack_da + *psVar38;
-              psVar38[1] = sStack_da + psVar38[1];
-              psVar38[2] = sStack_da + psVar38[2];
-              psVar38[3] = sStack_da + psVar38[3];
+            accumShortCursor = (short *)(iVar34 * 8 + iVar28);
+            accumShortEnd = accumShortCursor + uVar20 * 4;
+            for (; accumShortCursor < accumShortEnd; accumShortCursor = accumShortCursor + 4) {
+              *accumShortCursor = sStack_da + *accumShortCursor;
+              accumShortCursor[1] = sStack_da + accumShortCursor[1];
+              accumShortCursor[2] = sStack_da + accumShortCursor[2];
+              accumShortCursor[3] = sStack_da + accumShortCursor[3];
             }
             iVar26 = iVar26 + 1;
             iVar34 = iVar34 - uVar29;
