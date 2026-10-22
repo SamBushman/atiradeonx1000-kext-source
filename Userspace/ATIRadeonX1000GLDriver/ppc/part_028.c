@@ -487,11 +487,11 @@ int FUN_00106230(param_1, param_2, param_3, param_4, param_5, param_6)
 }
 
 /* FUN_001062c0 @ 0x1062c0 (156 bytes) */
-int FUN_001062c0(param_1, param_2, param_3, param_4)
+int FUN_001062c0(param_1, param_2, param_3, compiler)
   int param_1;
   int param_2;
   undefined4 *param_3;
-  int param_4;
+  int compiler;
 {
   undefined4 arena;
   undefined4 *allocation;
@@ -509,7 +509,7 @@ int FUN_001062c0(param_1, param_2, param_3, param_4)
   else {
     puVar9 = *(uint **)(param_1 + 0x118);
     if (puVar9 == (uint *)0x0) {
-      arena = *(undefined4 *)(param_4 + 0x374);
+      arena = *(undefined4 *)(compiler + 0x374);
       allocation = (undefined4 *)FUN_00193e18(arena,0x14);
       puVar9 = allocation + 1;
       *allocation = arena;
@@ -521,7 +521,7 @@ int FUN_001062c0(param_1, param_2, param_3, param_4)
       *(uint **)(param_1 + 0x118) = puVar9;
     }
     if ((int)puVar9[1] < (int)(param_2 - 4U)) {
-      arena = *(undefined4 *)(param_4 + 0x374);
+      arena = *(undefined4 *)(compiler + 0x374);
       allocation = (undefined4 *)FUN_00193e18(arena,0x1c);
       *allocation = arena;
       allocation[1] = 0;
@@ -1233,16 +1233,16 @@ int FUN_00107464(param_1, compiler)
 }
 
 /* FUN_001074e0 @ 0x1074e0 (232 bytes) */
-int FUN_001074e0(param_1, param_2, param_3)
+int FUN_001074e0(param_1, param_2, compiler)
   undefined4 *param_1;
   int param_2;
-  int param_3;
+  int compiler;
 {
   undefined4 uVar1;
   undefined *puVar2;
   undefined2 *puVar3;
   
-  ((int (*)())FUN_0010704c)(param_1,param_2,param_3);
+  ((int (*)())FUN_0010704c)(param_1,param_2,compiler);
   puVar2 = PTR_DAT_001e8c0c;
   param_1[0x4c] = 0;
   param_1[0x4d] = 0xffffffff;
@@ -1251,7 +1251,7 @@ int FUN_001074e0(param_1, param_2, param_3)
   param_1[0x2c] = 0;
   param_1[0x42] = 0;
   param_1[0x41] = 0;
-  puVar3 = (undefined2 *)FUN_00193e18(*(undefined4 *)(param_3 + 0x374),0x24);
+  puVar3 = (undefined2 *)FUN_00193e18(*(undefined4 *)(compiler + 0x374),0x24);
   _memset(puVar3,0,0x24);
   uVar1 = DAT_001af9bc;
   puVar3[4] = 7;

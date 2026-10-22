@@ -63,28 +63,28 @@ int FUN_001261e8(this, param_2, param_3, param_4, compiler)
 }
 
 /* FUN_0012622c @ 0x12622c (256 bytes) */
-int FUN_0012622c(this, param_2, param_3, param_4, param_5)
+int FUN_0012622c(this, param_2, param_3, param_4, compiler)
   undefined4 *this;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
-  int param_5;
+  int compiler;
 {
   undefined4 *allocation;
   int iVar2;
   undefined4 *puVar3;
   undefined4 arena;
   
-  FUN_0012379c(this,param_2,param_3,param_4,param_5);
+  FUN_0012379c(this,param_2,param_3,param_4,compiler);
   this[4] = param_2;
   this[9] = this[9] | 2;
   *this = &PTR_FUN_001ea7f0;
-  if ((*(uint *)(*(int *)(param_5 + 0x6c4) + 0x30) & 0x4000) != 0) {
-    arena = *(undefined4 *)(param_5 + 0x374);
+  if ((*(uint *)(*(int *)(compiler + 0x6c4) + 0x30) & 0x4000) != 0) {
+    arena = *(undefined4 *)(compiler + 0x374);
     allocation = (undefined4 *)FUN_00193e18(arena,0x168);
     puVar3 = allocation + 1;
     *allocation = arena;
-    FUN_00108918(puVar3,param_5);
+    FUN_00108918(puVar3,compiler);
     allocation[0x28] = DAT_001afef0;
     FUN_001046c8(puVar3,0,this);
     FUN_0012306c(this,puVar3);
@@ -93,8 +93,8 @@ int FUN_0012622c(this, param_2, param_3, param_4, param_5)
     iVar2 = FUN_001054ec(puVar3,1);
     *(undefined4 *)(iVar2 + 0x10) = arena;
     FUN_001236e4(this,1,puVar3);
-    FUN_000ee9ac(*(undefined4 *)(param_5 + 0x6c4),puVar3);
-    FUN_000e7688(*(undefined4 *)(*(int *)(param_5 + 0x6c4) + 0x3a8),puVar3);
+    FUN_000ee9ac(*(undefined4 *)(compiler + 0x6c4),puVar3);
+    FUN_000e7688(*(undefined4 *)(*(int *)(compiler + 0x6c4) + 0x3a8),puVar3);
   }
   return;
 }
@@ -310,175 +310,175 @@ int FUN_001268d0(param_1)
 }
 
 /* FUN_001268f8 @ 0x1268f8 (84 bytes) */
-int FUN_001268f8(param_1, param_2, param_3, param_4)
+int FUN_001268f8(param_1, param_2, param_3, compiler)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
-  int param_4;
+  int compiler;
 {
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(param_4 + 0x374);
+  arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x34);
   *allocation = arena;
-  FUN_001248ec(allocation + 1,param_1,param_2,param_3,param_4);
+  FUN_001248ec(allocation + 1,param_1,param_2,param_3,compiler);
   return allocation + 1;
 }
 
 /* FUN_00126984 @ 0x126984 (84 bytes) */
-int FUN_00126984(param_1, param_2, param_3, param_4)
+int FUN_00126984(param_1, param_2, param_3, compiler)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
-  int param_4;
+  int compiler;
 {
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(param_4 + 0x374);
+  arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x38);
   *allocation = arena;
-  FUN_00124e04(allocation + 1,param_1,param_2,param_3,param_4);
+  FUN_00124e04(allocation + 1,param_1,param_2,param_3,compiler);
   return allocation + 1;
 }
 
 /* FUN_00126a10 @ 0x126a10 (84 bytes) */
-int FUN_00126a10(param_1, param_2, param_3, param_4)
+int FUN_00126a10(param_1, param_2, param_3, compiler)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
-  int param_4;
+  int compiler;
 {
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(param_4 + 0x374);
+  arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x34);
   *allocation = arena;
-  FUN_00124724(allocation + 1,param_1,param_2,param_3,param_4);
+  FUN_00124724(allocation + 1,param_1,param_2,param_3,compiler);
   return allocation + 1;
 }
 
 /* FUN_00126a9c @ 0x126a9c (84 bytes) */
-int FUN_00126a9c(param_1, param_2, param_3, param_4)
+int FUN_00126a9c(param_1, param_2, param_3, compiler)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
-  int param_4;
+  int compiler;
 {
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(param_4 + 0x374);
+  arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x44);
   *allocation = arena;
-  FUN_001257b0(allocation + 1,param_1,param_2,param_3,param_4);
+  FUN_001257b0(allocation + 1,param_1,param_2,param_3,compiler);
   return allocation + 1;
 }
 
 /* FUN_00126b28 @ 0x126b28 (84 bytes) */
-int FUN_00126b28(param_1, param_2, param_3, param_4)
+int FUN_00126b28(param_1, param_2, param_3, compiler)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
-  int param_4;
+  int compiler;
 {
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(param_4 + 0x374);
+  arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x38);
   *allocation = arena;
-  FUN_00124b24(allocation + 1,param_1,param_2,param_3,param_4);
+  FUN_00124b24(allocation + 1,param_1,param_2,param_3,compiler);
   return allocation + 1;
 }
 
 /* FUN_00126bb4 @ 0x126bb4 (84 bytes) */
-int FUN_00126bb4(param_1, param_2, param_3, param_4)
+int FUN_00126bb4(param_1, param_2, param_3, compiler)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
-  int param_4;
+  int compiler;
 {
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(param_4 + 0x374);
+  arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x38);
   *allocation = arena;
-  FUN_00125db8(allocation + 1,param_1,param_2,param_3,param_4);
+  FUN_00125db8(allocation + 1,param_1,param_2,param_3,compiler);
   return allocation + 1;
 }
 
 /* FUN_00126c40 @ 0x126c40 (84 bytes) */
-int FUN_00126c40(param_1, param_2, param_3, param_4)
+int FUN_00126c40(param_1, param_2, param_3, compiler)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
-  int param_4;
+  int compiler;
 {
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(param_4 + 0x374);
+  arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x34);
   *allocation = arena;
-  FUN_00125d60(allocation + 1,param_1,param_2,param_3,param_4);
+  FUN_00125d60(allocation + 1,param_1,param_2,param_3,compiler);
   return allocation + 1;
 }
 
 /* FUN_00126ccc @ 0x126ccc (84 bytes) */
-int FUN_00126ccc(param_1, param_2, param_3, param_4)
+int FUN_00126ccc(param_1, param_2, param_3, compiler)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
-  int param_4;
+  int compiler;
 {
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(param_4 + 0x374);
+  arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x38);
   *allocation = arena;
-  FUN_00125f94(allocation + 1,param_1,param_2,param_3,param_4);
+  FUN_00125f94(allocation + 1,param_1,param_2,param_3,compiler);
   return allocation + 1;
 }
 
 /* FUN_00126d58 @ 0x126d58 (84 bytes) */
-int FUN_00126d58(param_1, param_2, param_3, param_4)
+int FUN_00126d58(param_1, param_2, param_3, compiler)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
-  int param_4;
+  int compiler;
 {
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(param_4 + 0x374);
+  arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x34);
   *allocation = arena;
-  FUN_00126034(allocation + 1,param_1,param_2,param_3,param_4);
+  FUN_00126034(allocation + 1,param_1,param_2,param_3,compiler);
   return allocation + 1;
 }
 
 /* FUN_00126de4 @ 0x126de4 (92 bytes) */
-int FUN_00126de4(param_1, param_2, param_3, param_4)
+int FUN_00126de4(param_1, param_2, param_3, compiler)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
-  int param_4;
+  int compiler;
 {
   undefined *puVar1;
   undefined4 *allocation;
   undefined4 arena;
   undefined4 *puVar4;
   
-  arena = *(undefined4 *)(param_4 + 0x374);
+  arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x38);
   puVar4 = allocation + 1;
   *allocation = arena;
-  FUN_0012379c(puVar4,param_1,param_2,param_3,param_4);
+  FUN_0012379c(puVar4,param_1,param_2,param_3,compiler);
   puVar1 = PTR_DAT_001e90ec;
   allocation[0xd] = 0;
   *puVar4 = puVar1 + 8;
@@ -486,19 +486,19 @@ int FUN_00126de4(param_1, param_2, param_3, param_4)
 }
 
 /* FUN_00126e90 @ 0x126e90 (84 bytes) */
-int FUN_00126e90(param_1, param_2, param_3, param_4)
+int FUN_00126e90(param_1, param_2, param_3, compiler)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
-  int param_4;
+  int compiler;
 {
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(param_4 + 0x374);
+  arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x38);
   *allocation = arena;
-  FUN_00126080(allocation + 1,param_1,param_2,param_3,param_4);
+  FUN_00126080(allocation + 1,param_1,param_2,param_3,compiler);
   return allocation + 1;
 }
 
@@ -571,36 +571,36 @@ int FUN_001270c0(param_1, param_2, param_3, compiler)
 }
 
 /* FUN_0012714c @ 0x12714c (84 bytes) */
-int FUN_0012714c(param_1, param_2, param_3, param_4)
+int FUN_0012714c(param_1, param_2, param_3, compiler)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
-  int param_4;
+  int compiler;
 {
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(param_4 + 0x374);
+  arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x34);
   *allocation = arena;
-  FUN_00125c8c(allocation + 1,param_1,param_2,param_3,param_4);
+  FUN_00125c8c(allocation + 1,param_1,param_2,param_3,compiler);
   return allocation + 1;
 }
 
 /* FUN_001271d8 @ 0x1271d8 (84 bytes) */
-int FUN_001271d8(param_1, param_2, param_3, param_4)
+int FUN_001271d8(param_1, param_2, param_3, compiler)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
-  int param_4;
+  int compiler;
 {
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(param_4 + 0x374);
+  arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x3c);
   *allocation = arena;
-  FUN_001250dc(allocation + 1,param_1,param_2,param_3,param_4);
+  FUN_001250dc(allocation + 1,param_1,param_2,param_3,compiler);
   return allocation + 1;
 }
 

@@ -1,10 +1,10 @@
 #include "decls.h"
 
 /* FUN_0010f704 @ 0x10f704 (376 bytes) */
-int FUN_0010f704(param_1, param_2, param_3)
+int FUN_0010f704(param_1, param_2, compiler)
   int param_1;
   uint *param_2;
-  int param_3;
+  int compiler;
 {
   int iVar1;
   undefined4 *puVar2;
@@ -17,7 +17,7 @@ int FUN_0010f704(param_1, param_2, param_3)
   undefined4 arena;
   uint uVar10;
   
-  arena = *(undefined4 *)(param_3 + 0x378);
+  arena = *(undefined4 *)(compiler + 0x378);
   allocation = (undefined4 *)FUN_00193e18(arena,0x14);
   puVar8 = allocation + 1;
   allocation[1] = 2;

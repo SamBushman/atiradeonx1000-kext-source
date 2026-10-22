@@ -545,3 +545,245 @@ local	FUN_00127034	param_4	compiler	INFERRED	its +0x374 field is the arena hande
 local	FUN_0012614c	param_5	compiler	INFERRED	receives the compiler pointer forwarded by the allocation wrapper FUN_00127034 (whose +0x374 is the arena)
 local	FUN_001270c0	param_4	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_00126378
 local	FUN_00126378	param_5	compiler	INFERRED	receives the compiler pointer forwarded by the allocation wrapper FUN_001270c0 (whose +0x374 is the arena)
+local	FUN_000f1d7c	local_88	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_000f1d7c	local_84	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_000f1d7c	local_80	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_000f1d7c	local_7c	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_000f1d7c	local_78	vec2Capacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_000f1d7c	local_74	vec2Count	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_000f1d7c	local_70	vec2Data	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_000f1d7c	local_6c	vec2Arena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_000f1d7c	local_68	vec3Capacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_000f1d7c	local_64	vec3Count	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_000f1d7c	local_60	vec3Data	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_000f1d7c	local_5c	vec3Arena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_000f1d7c	local_58	vec4Capacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_000f1d7c	local_54	vec4Count	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_000f1d7c	local_50	vec4Data	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_000f1d7c	local_4c	vec4Arena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0011fb94	local_38	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0011fb94	local_34	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0011fb94	local_30	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0011fb94	local_2c	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00121000	local_78	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00121000	local_74	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00121000	local_70	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00121000	local_6c	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00121000	local_68	vec2Capacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00121000	local_64	vec2Count	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00121000	local_60	vec2Data	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00121000	local_5c	vec2Arena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0012cfa4	local_54	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0012cfa4	local_50	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0012cfa4	local_4c	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0012cfa4	local_48	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0012dd58	local_44	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0012dd58	local_40	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0012dd58	local_3c	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0012dd58	local_38	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0012df90	local_64	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0012df90	local_60	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0012df90	local_5c	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0012df90	local_58	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0012fe8c	local_44	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0012fe8c	local_40	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0012fe8c	local_3c	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0012fe8c	local_38	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013323c	local_90	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013323c	local_8c	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013323c	local_88	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013323c	local_84	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013323c	local_80	vec2Capacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013323c	local_7c	vec2Count	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013323c	local_78	vec2Data	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013323c	local_74	vec2Arena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00139d40	local_48	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00139d40	local_44	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00139d40	local_40	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00139d40	local_3c	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013bd68	local_54	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013bd68	local_50	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013bd68	local_4c	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013bd68	local_48	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013c210	local_54	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013c210	local_50	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013c210	local_4c	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013c210	local_48	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013c210	local_44	vec2Capacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013c210	local_40	vec2Count	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013c210	local_3c	vec2Data	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013c210	local_38	vec2Arena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013c60c	local_54	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013c60c	local_50	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013c60c	local_4c	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013c60c	local_48	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013c60c	local_44	vec2Capacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013c60c	local_40	vec2Count	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013c60c	local_3c	vec2Data	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013c60c	local_38	vec2Arena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013da3c	local_b4	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013da3c	local_b0	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013da3c	local_ac	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013da3c	local_a8	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013da3c	local_a4	vec2Capacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013da3c	local_a0	vec2Count	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013da3c	local_9c	vec2Data	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013da3c	local_98	vec2Arena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013fc38	local_78	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013fc38	local_74	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013fc38	local_70	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013fc38	local_6c	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00142974	local_6c	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00142974	local_68	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00142974	local_64	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00142974	local_60	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0014375c	local_70	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0014375c	local_6c	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0014375c	local_68	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0014375c	local_64	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0014375c	local_60	vec2Capacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0014375c	local_5c	vec2Count	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0014375c	local_58	vec2Data	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0014375c	local_54	vec2Arena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0014e6e4	local_48	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0014e6e4	local_44	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0014e6e4	local_40	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0014e6e4	local_3c	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00156d48	local_b0	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00156d48	local_ac	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00156d48	local_a8	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00156d48	local_a4	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0016ff54	local_78	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0016ff54	local_74	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0016ff54	local_70	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0016ff54	local_6c	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0016ff54	local_68	vec2Capacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0016ff54	local_64	vec2Count	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0016ff54	local_60	vec2Data	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0016ff54	local_5c	vec2Arena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_000ea3c0	param_2	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_000ea478	param_2	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_000ea530	param_2	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_000ea600	param_2	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_000ea6d0	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_000ea828	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_000eb3c8	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_000eb688	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_000eb9e0	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_000ebac8	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_000f94dc	param_1	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_0010445c	param_2	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001044e0	param_3	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_0010502c	param_3	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001051b0	param_3	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00105334	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001062c0	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001074e0	param_3	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00107df4	param_2	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00107e70	param_2	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00108c68	param_1	this	INFERRED	first argument of the node base constructor FUN_001070f8 (the object being built)
+local	FUN_00108c68	param_2	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_00108cbc	param_1	this	INFERRED	first argument of the node base constructor FUN_001070f8 (the object being built)
+local	FUN_00108cbc	param_2	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_00108d10	param_2	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_00108d5c	param_2	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_00108da8	param_2	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_00108df4	param_2	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_00108e40	param_1	this	INFERRED	first argument of the node base constructor FUN_001070f8 (the object being built)
+local	FUN_00108e40	param_2	kind	INFERRED	second argument of FUN_001070f8; the sibling constructors pass distinct literals (0x81, 0x83, 0x8d, 0x8e ...) here
+local	FUN_00108e40	param_3	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_00109a80	param_1	this	INFERRED	first argument of the node base constructor FUN_001070f8 (the object being built)
+local	FUN_00109a80	param_2	kind	INFERRED	second argument of FUN_001070f8; the sibling constructors pass distinct literals (0x81, 0x83, 0x8d, 0x8e ...) here
+local	FUN_00109a80	param_3	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_00109acc	param_1	this	INFERRED	first argument of the node base constructor FUN_001070f8 (the object being built)
+local	FUN_00109acc	param_2	kind	INFERRED	second argument of FUN_001070f8; the sibling constructors pass distinct literals (0x81, 0x83, 0x8d, 0x8e ...) here
+local	FUN_00109acc	param_3	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_00109b20	param_1	this	INFERRED	first argument of the node base constructor FUN_001070f8 (the object being built)
+local	FUN_00109b20	param_2	kind	INFERRED	second argument of FUN_001070f8; the sibling constructors pass distinct literals (0x81, 0x83, 0x8d, 0x8e ...) here
+local	FUN_00109bf0	param_1	this	INFERRED	first argument of the node base constructor FUN_001070f8 (the object being built)
+local	FUN_00109bf0	param_2	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_00109c4c	param_1	this	INFERRED	first argument of the node base constructor FUN_001070f8 (the object being built)
+local	FUN_00109c4c	param_2	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_00109ca8	param_1	this	INFERRED	first argument of the node base constructor FUN_001070f8 (the object being built)
+local	FUN_00109ca8	param_2	kind	INFERRED	second argument of FUN_001070f8; the sibling constructors pass distinct literals (0x81, 0x83, 0x8d, 0x8e ...) here
+local	FUN_00109ca8	param_3	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_00109cfc	param_1	this	INFERRED	first argument of the node base constructor FUN_001070f8 (the object being built)
+local	FUN_00109cfc	param_2	kind	INFERRED	second argument of FUN_001070f8; the sibling constructors pass distinct literals (0x81, 0x83, 0x8d, 0x8e ...) here
+local	FUN_00109dcc	param_2	kind	INFERRED	second argument of FUN_001070f8; the sibling constructors pass distinct literals (0x81, 0x83, 0x8d, 0x8e ...) here
+local	FUN_00109dcc	param_3	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_00109e28	param_2	kind	INFERRED	second argument of FUN_001070f8; the sibling constructors pass distinct literals (0x81, 0x83, 0x8d, 0x8e ...) here
+local	FUN_00109f00	param_2	kind	INFERRED	second argument of FUN_001070f8; the sibling constructors pass distinct literals (0x81, 0x83, 0x8d, 0x8e ...) here
+local	FUN_00109f00	param_3	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_00109f50	param_2	kind	INFERRED	second argument of FUN_001070f8; the sibling constructors pass distinct literals (0x81, 0x83, 0x8d, 0x8e ...) here
+local	FUN_0010a01c	param_2	kind	INFERRED	second argument of FUN_001070f8; the sibling constructors pass distinct literals (0x81, 0x83, 0x8d, 0x8e ...) here
+local	FUN_0010a01c	param_3	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_0010a070	param_2	kind	INFERRED	second argument of FUN_001070f8; the sibling constructors pass distinct literals (0x81, 0x83, 0x8d, 0x8e ...) here
+local	FUN_0010a140	param_2	kind	INFERRED	second argument of FUN_001070f8; the sibling constructors pass distinct literals (0x81, 0x83, 0x8d, 0x8e ...) here
+local	FUN_0010a140	param_3	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_0010a1c0	param_2	kind	INFERRED	second argument of FUN_001070f8; the sibling constructors pass distinct literals (0x81, 0x83, 0x8d, 0x8e ...) here
+local	FUN_0010a2bc	param_2	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_0010a398	param_2	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_0010a474	param_1	this	INFERRED	first argument of the node base constructor FUN_001070f8 (the object being built)
+local	FUN_0010a474	param_3	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_0010a50c	param_1	this	INFERRED	first argument of the node base constructor FUN_001070f8 (the object being built)
+local	FUN_0010a620	param_3	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_0010a7d4	param_1	this	INFERRED	first argument of the node base constructor FUN_001070f8 (the object being built)
+local	FUN_0010a7d4	param_4	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_0010a83c	param_1	this	INFERRED	first argument of the node base constructor FUN_001070f8 (the object being built)
+local	FUN_0010a83c	param_4	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_0010a8a4	param_1	this	INFERRED	first argument of the node base constructor FUN_001070f8 (the object being built)
+local	FUN_0010a8a4	param_4	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_0010a90c	param_1	this	INFERRED	first argument of the node base constructor FUN_001070f8 (the object being built)
+local	FUN_0010a90c	param_4	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_0010a974	param_2	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_0010a9cc	param_2	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_0010aa24	param_2	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_0010aa7c	param_2	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_0010ad68	param_2	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_0010bd50	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_0010f704	param_3	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001230e4	param_3	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00123288	param_3	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_0012379c	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001238e8	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00123c08	param_1	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001240a8	param_3	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001241fc	param_3	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_0012434c	param_3	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_0012447c	param_3	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001245a8	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00124724	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_0012499c	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00124b24	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00124c94	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00124e68	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001250dc	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00125350	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001257b0	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00125db8	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_0012622c	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001268f8	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00126984	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00126a10	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00126a9c	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00126b28	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00126bb4	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00126c40	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00126ccc	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00126d58	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00126de4	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00126e90	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_0012714c	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001271d8	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_0012e56c	param_3	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00130ec0	param_3	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00130f64	param_3	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001311cc	param_6	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001312f4	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001322a8	param_6	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00134ef4	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00135110	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001351c4	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00136ec4	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_0013719c	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00138694	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
