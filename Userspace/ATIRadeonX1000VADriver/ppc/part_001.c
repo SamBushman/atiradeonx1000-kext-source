@@ -1109,59 +1109,59 @@ int FUN_000052f0(ctx, subpicture, unused1, unused2, unused3)
 }
 
 /* FUN_000056a0 @ 0x56a0 (512 bytes) */
-int FUN_000056a0(param_1, param_2)
-  int param_1;
+int FUN_000056a0(ctx, param_2)
+  int ctx;
   int param_2;
 {
-  undefined *puVar1;
-  uint *puVar2;
+  undefined *mapMemoryType;
+  uint *lastHeader;
   int iVar3;
-  undefined4 *puVar4;
+  undefined4 *cmdWrite;
   
-  puVar1 = PTR_0000f1a0;
-  if (param_2 == *(int *)(param_1 + 0x558)) {
-    puVar4 = *(undefined4 **)(param_1 + 0x34);
-    if (*(undefined4 **)(param_1 + 0x38) <= puVar4 + 0x10) {
-      puVar2 = *(uint **)(param_1 + 0x30);
-      *puVar2 = (int)puVar4 - (int)puVar2 >> 2 | *puVar2;
-      *(undefined4 **)(param_1 + 0x30) = *(undefined4 **)(param_1 + 0x34);
-      **(undefined4 **)(param_1 + 0x34) = 0x1000000;
-      _IOConnectMapMemory(*(undefined4 *)(param_1 + 0x14),1,*(undefined4 *)puVar1,param_1 + 0x40,
-                          param_1 + 0x44,1);
-      iVar3 = *(int *)(param_1 + 0x40);
-      *(int *)(param_1 + 0x34) = iVar3 + 0x20;
-      *(int *)(param_1 + 0x30) = iVar3 + 0x1c;
-      *(int *)(param_1 + 0x38) = iVar3 + 0x20 + *(int *)(iVar3 + 0x10) * 4;
+  mapMemoryType = PTR_0000f1a0;
+  if (param_2 == *(int *)(ctx + 0x558)) {
+    cmdWrite = *(undefined4 **)(ctx + 0x34);
+    if (*(undefined4 **)(ctx + 0x38) <= cmdWrite + 0x10) {
+      lastHeader = *(uint **)(ctx + 0x30);
+      *lastHeader = (int)cmdWrite - (int)lastHeader >> 2 | *lastHeader;
+      *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
+      **(undefined4 **)(ctx + 0x34) = 0x1000000;
+      _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)mapMemoryType,ctx + 0x40,
+                          ctx + 0x44,1);
+      iVar3 = *(int *)(ctx + 0x40);
+      *(int *)(ctx + 0x34) = iVar3 + 0x20;
+      *(int *)(ctx + 0x30) = iVar3 + 0x1c;
+      *(int *)(ctx + 0x38) = iVar3 + 0x20 + *(int *)(iVar3 + 0x10) * 4;
       *(undefined4 *)(iVar3 + 0x1c) = 0;
-      puVar4 = *(undefined4 **)(param_1 + 0x34);
+      cmdWrite = *(undefined4 **)(ctx + 0x34);
     }
-    puVar2 = *(uint **)(param_1 + 0x30);
-    *(undefined4 **)(param_1 + 0x34) = puVar4 + 0x10;
-    *puVar2 = (int)puVar4 - (int)puVar2 >> 2 | *puVar2;
-    *(undefined4 **)(param_1 + 0x30) = puVar4;
-    *puVar4 = 0xd000000;
-    puVar4[1] = 2;
-    puVar4[2] = 1;
-    puVar4[3] = *(undefined4 *)(param_1 + 0x60);
-    puVar4[4] = *(undefined4 *)(param_1 + 100);
-    puVar4[5] = *(undefined4 *)(param_1 + 0x68);
-    puVar1 = PTR_0000f1a0;
-    puVar2 = *(uint **)(param_1 + 0x30);
-    *puVar2 = *(int *)(param_1 + 0x34) - (int)puVar2 >> 2 | *puVar2;
-    *(undefined4 **)(param_1 + 0x30) = *(undefined4 **)(param_1 + 0x34);
-    **(undefined4 **)(param_1 + 0x34) = 0x1000000;
-    _IOConnectMapMemory(*(undefined4 *)(param_1 + 0x14),1,*(undefined4 *)puVar1,param_1 + 0x40,
-                        param_1 + 0x44,1);
-    iVar3 = *(int *)(param_1 + 0x40);
-    *(int *)(param_1 + 0x34) = iVar3 + 0x20;
-    *(int *)(param_1 + 0x30) = iVar3 + 0x1c;
-    *(int *)(param_1 + 0x38) = iVar3 + 0x20 + *(int *)(iVar3 + 0x10) * 4;
+    lastHeader = *(uint **)(ctx + 0x30);
+    *(undefined4 **)(ctx + 0x34) = cmdWrite + 0x10;
+    *lastHeader = (int)cmdWrite - (int)lastHeader >> 2 | *lastHeader;
+    *(undefined4 **)(ctx + 0x30) = cmdWrite;
+    *cmdWrite = 0xd000000;
+    cmdWrite[1] = 2;
+    cmdWrite[2] = 1;
+    cmdWrite[3] = *(undefined4 *)(ctx + 0x60);
+    cmdWrite[4] = *(undefined4 *)(ctx + 100);
+    cmdWrite[5] = *(undefined4 *)(ctx + 0x68);
+    mapMemoryType = PTR_0000f1a0;
+    lastHeader = *(uint **)(ctx + 0x30);
+    *lastHeader = *(int *)(ctx + 0x34) - (int)lastHeader >> 2 | *lastHeader;
+    *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
+    **(undefined4 **)(ctx + 0x34) = 0x1000000;
+    _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)mapMemoryType,ctx + 0x40,
+                        ctx + 0x44,1);
+    iVar3 = *(int *)(ctx + 0x40);
+    *(int *)(ctx + 0x34) = iVar3 + 0x20;
+    *(int *)(ctx + 0x30) = iVar3 + 0x1c;
+    *(int *)(ctx + 0x38) = iVar3 + 0x20 + *(int *)(iVar3 + 0x10) * 4;
     *(undefined4 *)(iVar3 + 0x1c) = 0;
   }
-  if ((*(uint *)(*(int *)(param_1 + 0x40) + 0x14) & 2) != 0) {
-    (**(code **)(*(int *)(*(int *)(param_1 + 0x50) + 0xc) + 0xc))
-              (*(undefined4 *)(param_1 + 4),*(undefined4 *)(param_1 + 8),
-               *(undefined4 *)(param_1 + 0xc));
+  if ((*(uint *)(*(int *)(ctx + 0x40) + 0x14) & 2) != 0) {
+    (**(code **)(*(int *)(*(int *)(ctx + 0x50) + 0xc) + 0xc))
+              (*(undefined4 *)(ctx + 4),*(undefined4 *)(ctx + 8),
+               *(undefined4 *)(ctx + 0xc));
   }
   return 0;
 }
@@ -3201,84 +3201,84 @@ int FUN_000096a0(cmdPtr)
 }
 
 /* FUN_00009700 @ 0x9700 (528 bytes) */
-int FUN_00009700(param_1, param_2)
-  undefined4 *param_1;
-  uint param_2;
+int FUN_00009700(cmdPtr, stageCount)
+  undefined4 *cmdPtr;
+  uint stageCount;
 {
-  uint *puVar1;
-  int *piVar2;
-  int *piVar3;
-  uint uVar4;
-  uint uVar5;
-  int iVar6;
-  undefined4 uVar7;
+  uint *nextEntry;
+  int *tableCursor;
+  int *entryCursor;
+  uint stageMaskOrNext;
+  uint stageIndex;
+  int halfIndex;
+  undefined4 programWord;
   
-  *param_1 = 0x850;
-  param_1[1] = 0x102;
-  param_1[2] = 0x854;
-  if (param_2 == 1) {
-    uVar7 = 0x26010001;
+  *cmdPtr = 0x850;
+  cmdPtr[1] = 0x102;
+  cmdPtr[2] = 0x854;
+  if (stageCount == 1) {
+    programWord = 0x26010001;
   }
   else {
-    uVar7 = 0x6010001;
+    programWord = 0x6010001;
   }
-  param_1[3] = uVar7;
-  param_1[4] = 0x878;
-  piVar2 = param_1 + 6;
-  param_1[5] = 0xf688f688;
-  if (1 < (int)param_2) {
-    piVar3 = piVar2;
-    uVar5 = 1;
+  cmdPtr[3] = programWord;
+  cmdPtr[4] = 0x878;
+  tableCursor = cmdPtr + 6;
+  cmdPtr[5] = 0xf688f688;
+  if (1 < (int)stageCount) {
+    entryCursor = tableCursor;
+    stageIndex = 1;
     do {
-      iVar6 = ((int)uVar5 >> 1) + (uint)((int)uVar5 < 0 && (uVar5 & 1) != 0);
-      uVar4 = uVar5 + 2;
-      *piVar3 = iVar6 + 0x855;
-      piVar3[1] = (uint)(param_2 == uVar5 + 1) << 0xd | (uVar5 + 6) * 0x100 |
-                  (uint)(param_2 == uVar4) << 0x1d | (uVar5 + 7) * 0x1000000 | 0x10001;
-      piVar3[2] = iVar6 + 0x879;
-      piVar2 = piVar3 + 4;
-      piVar3[3] = -0x9770978;
-      piVar3 = piVar2;
-      uVar5 = uVar4;
-    } while ((int)uVar4 < (int)param_2);
+      halfIndex = ((int)stageIndex >> 1) + (uint)((int)stageIndex < 0 && (stageIndex & 1) != 0);
+      stageMaskOrNext = stageIndex + 2;
+      *entryCursor = halfIndex + 0x855;
+      entryCursor[1] = (uint)(stageCount == stageIndex + 1) << 0xd | (stageIndex + 6) * 0x100 |
+                  (uint)(stageCount == stageMaskOrNext) << 0x1d | (stageIndex + 7) * 0x1000000 | 0x10001;
+      entryCursor[2] = halfIndex + 0x879;
+      tableCursor = entryCursor + 4;
+      entryCursor[3] = -0x9770978;
+      entryCursor = tableCursor;
+      stageIndex = stageMaskOrNext;
+    } while ((int)stageMaskOrNext < (int)stageCount);
   }
-  *piVar2 = 0x824;
-  piVar2[1] = 1;
-  if (0 < (int)param_2) {
-    uVar4 = 0;
-    uVar5 = param_2;
+  *tableCursor = 0x824;
+  tableCursor[1] = 1;
+  if (0 < (int)stageCount) {
+    stageMaskOrNext = 0;
+    stageIndex = stageCount;
     do {
-      uVar4 = uVar4 | uVar4 << 3 | 2;
-      uVar5 = uVar5 - 1;
-    } while (uVar5 != 0);
+      stageMaskOrNext = stageMaskOrNext | stageMaskOrNext << 3 | 2;
+      stageIndex = stageIndex - 1;
+    } while (stageIndex != 0);
   }
   else {
-    uVar4 = 0;
+    stageMaskOrNext = 0;
   }
-  piVar2[2] = 0x825;
-  piVar2[3] = uVar4;
-  piVar2[4] = (int)0x000010c0;
-  piVar2[5] = param_2 << 1 | 0x40000;
-  piVar2[6] = 0x10c1;
-  piVar3 = piVar2 + 8;
-  piVar2[7] = param_2 - 1;
-  if (0 < (int)param_2) {
-    uVar5 = 0;
-    iVar6 = 1;
+  tableCursor[2] = 0x825;
+  tableCursor[3] = stageMaskOrNext;
+  tableCursor[4] = (int)0x000010c0;
+  tableCursor[5] = stageCount << 1 | 0x40000;
+  tableCursor[6] = 0x10c1;
+  entryCursor = tableCursor + 8;
+  tableCursor[7] = stageCount - 1;
+  if (0 < (int)stageCount) {
+    stageIndex = 0;
+    halfIndex = 1;
     do {
-      *piVar3 = (int)(((unsigned char *)0x0000101dU) + uVar5);
-      piVar3[1] = uVar5 << 1 | iVar6 << 6 | 0x28ffe000;
-      piVar3[2] = uVar5 + 0x10c8;
-      puVar1 = (uint *)(piVar3 + 3);
-      piVar3 = piVar3 + 4;
-      *puVar1 = uVar5 | uVar5 << 5 | 0x10;
-      uVar5 = uVar5 + 1;
-      iVar6 = iVar6 + 2;
-      param_2 = param_2 - 1;
-    } while (param_2 != 0);
-    return piVar3;
+      *entryCursor = (int)(((unsigned char *)0x0000101dU) + stageIndex);
+      entryCursor[1] = stageIndex << 1 | halfIndex << 6 | 0x28ffe000;
+      entryCursor[2] = stageIndex + 0x10c8;
+      nextEntry = (uint *)(entryCursor + 3);
+      entryCursor = entryCursor + 4;
+      *nextEntry = stageIndex | stageIndex << 5 | 0x10;
+      stageIndex = stageIndex + 1;
+      halfIndex = halfIndex + 2;
+      stageCount = stageCount - 1;
+    } while (stageCount != 0);
+    return entryCursor;
   }
-  return piVar3;
+  return entryCursor;
 }
 
 /* FUN_00009930 @ 0x9930 (80 bytes) */
@@ -3315,194 +3315,197 @@ int FUN_00009980(cmdPtr, registerValue, count, data)
 }
 
 /* FUN_000099b0 @ 0x99b0 (264 bytes) */
-int FUN_000099b0(param_1, param_2, param_3, param_4, param_5, param_6)
-  undefined4 *param_1;
-  int param_2;
-  int param_3;
-  int param_4;
-  uint param_5;
-  undefined4 param_6;
+int FUN_000099b0(cmdPtr, constBlockB, constCountB, constBlockA, constWordsA, flagsWord)
+  undefined4 *cmdPtr;
+  int constBlockB;
+  int constCountB;
+  int constBlockA;
+  uint constWordsA;
+  undefined4 flagsWord;
 {
-  int iVar1;
+  int countField;
   
-  if (param_4 != 0) {
-    param_1 = (undefined4 *)((int (*)())FUN_00009980)(param_1,0x10000,(param_5 & 0xfffffff) << 2,param_4);
+  if (constBlockA != 0) {
+    cmdPtr = (undefined4 *)((int (*)())FUN_00009980)(cmdPtr,0x10000,(constWordsA & 0xfffffff) << 2,constBlockA);
   }
-  if (param_2 != 0) {
-    param_1 = (undefined4 *)((int (*)())FUN_00009980)(param_1,0,(uint)(param_3 * 0x18) >> 2,param_2);
+  if (constBlockB != 0) {
+    cmdPtr = (undefined4 *)((int (*)())FUN_00009980)(cmdPtr,0,(uint)(constCountB * 0x18) >> 2,constBlockB);
   }
-  *param_1 = 0x1180;
-  param_1[1] = 0;
-  param_1[2] = 0x11ad;
-  param_1[3] = 0;
-  param_1[4] = 0x1181;
-  param_1[5] = param_6;
-  param_1[6] = 0x118c;
-  iVar1 = (param_3 + -1) * 0x10000;
-  param_1[7] = iVar1;
-  param_1[8] = 0x118d;
-  param_1[9] = iVar1;
-  param_1[10] = 0x118e;
-  param_1[0xb] = 0;
-  param_1[0xc] = 0x1189;
-  param_1[0xd] = 0;
-  return param_1 + 0xe;
+  *cmdPtr = 0x1180;
+  cmdPtr[1] = 0;
+  cmdPtr[2] = 0x11ad;
+  cmdPtr[3] = 0;
+  cmdPtr[4] = 0x1181;
+  cmdPtr[5] = flagsWord;
+  cmdPtr[6] = 0x118c;
+  countField = (constCountB + -1) * 0x10000;
+  cmdPtr[7] = countField;
+  cmdPtr[8] = 0x118d;
+  cmdPtr[9] = countField;
+  cmdPtr[10] = 0x118e;
+  cmdPtr[0xb] = 0;
+  cmdPtr[0xc] = 0x1189;
+  cmdPtr[0xd] = 0;
+  return cmdPtr + 0xe;
 }
 
 /* FUN_00009ac0 @ 0x9ac0 (424 bytes) */
-int FUN_00009ac0(param_1, param_2, param_3, param_4, param_5)
-  undefined4 *param_1;
-  float *param_2;
-  undefined4 *param_3;
-  undefined4 param_4;
-  undefined4 param_5;
+int FUN_00009ac0(cmdPtr, srcCoords, dstCoords, srcWidth, srcHeight)
+  undefined4 *cmdPtr;
+  float *srcCoords;
+  undefined4 *dstCoords;
+  undefined4 srcWidth;
+  undefined4 srcHeight;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  float local_38;
-  float local_34;
-  float local_30;
-  float local_2c;
+  undefined4 dstTop;
+  undefined4 dstRight;
+  float uLeft;
+  float uRight;
+  float vTop;
+  float vBottom;
+  undefined4 dstLeft;
+  undefined4 dstBottom;
   
-  *param_1 = 0x82d;
-  param_1[1] = 4;
-  param_1[2] = 0xc0103500;
-  param_1[3] = 0x4083d;
-  if (param_2 == (float *)0x0) {
-    local_30 = 0.0;
-    local_2c = 1.0;
-    local_38 = 0.0;
-    local_34 = 1.0;
+  *cmdPtr = 0x82d;
+  cmdPtr[1] = 4;
+  cmdPtr[2] = 0xc0103500;
+  cmdPtr[3] = 0x4083d;
+  if (srcCoords == (float *)0x0) {
+    vTop = 0.0;
+    vBottom = 1.0;
+    uLeft = 0.0;
+    uRight = 1.0;
   }
   else {
-    local_30 = (float)((double)CONCAT44(0x43300000,param_5) - DOUBLE_0000d418);
-    local_38 = (float)((double)CONCAT44(0x43300000,param_4) - DOUBLE_0000d418);
-    local_2c = param_2[3] / local_30;
-    local_34 = param_2[1] / local_38;
-    local_38 = *param_2 / local_38;
-    local_30 = param_2[2] / local_30;
+    vTop = (float)((double)CONCAT44(0x43300000,srcHeight) - DOUBLE_0000d418);
+    uLeft = (float)((double)CONCAT44(0x43300000,srcWidth) - DOUBLE_0000d418);
+    vBottom = srcCoords[3] / vTop;
+    uRight = srcCoords[1] / uLeft;
+    uLeft = *srcCoords / uLeft;
+    vTop = srcCoords[2] / vTop;
   }
-  uVar2 = *param_3;
-  param_1[4] = uVar2;
-  uVar1 = param_3[2];
-  param_1[5] = uVar1;
-  param_1[6] = local_38;
-  param_1[7] = local_30;
-  param_1[8] = uVar2;
-  uVar2 = param_3[3];
-  param_1[9] = uVar2;
-  param_1[10] = local_38;
-  param_1[0xb] = local_2c;
-  uVar3 = param_3[1];
-  param_1[0xc] = uVar3;
-  param_1[0xd] = uVar2;
-  param_1[0xe] = local_34;
-  param_1[0xf] = local_2c;
-  param_1[0x10] = uVar3;
-  param_1[0x11] = uVar1;
-  param_1[0x12] = local_34;
-  param_1[0x13] = local_30;
-  param_1[0x14] = 0x1393;
-  param_1[0x15] = 10;
-  return param_1 + 0x16;
+  dstLeft = *dstCoords;
+  cmdPtr[4] = dstLeft;
+  dstTop = dstCoords[2];
+  cmdPtr[5] = dstTop;
+  cmdPtr[6] = uLeft;
+  cmdPtr[7] = vTop;
+  cmdPtr[8] = dstLeft;
+  dstBottom = dstCoords[3];
+  cmdPtr[9] = dstBottom;
+  cmdPtr[10] = uLeft;
+  cmdPtr[0xb] = vBottom;
+  dstRight = dstCoords[1];
+  cmdPtr[0xc] = dstRight;
+  cmdPtr[0xd] = dstBottom;
+  cmdPtr[0xe] = uRight;
+  cmdPtr[0xf] = vBottom;
+  cmdPtr[0x10] = dstRight;
+  cmdPtr[0x11] = dstTop;
+  cmdPtr[0x12] = uRight;
+  cmdPtr[0x13] = vTop;
+  cmdPtr[0x14] = 0x1393;
+  cmdPtr[0x15] = 10;
+  return cmdPtr + 0x16;
 }
 
 /* FUN_00009c80 @ 0x9c80 (1160 bytes) */
-int FUN_00009c80(param_1, param_2, param_3)
-  int param_1;
-  undefined4 param_2;
-  int param_3;
+int FUN_00009c80(ctx, headerWord, enableFlag)
+  int ctx;
+  undefined4 headerWord;
+  int enableFlag;
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  uint uVar4;
-  uint uVar5;
-  undefined *puVar6;
-  uint *puVar7;
-  undefined4 uVar8;
-  undefined4 *puVar9;
-  int iVar10;
-  uint uVar11;
-  uint uVar12;
-  double dVar13;
-  double dVar14;
-  undefined4 local_78;
-  float local_74;
-  undefined4 local_70;
-  float local_6c;
+  float hueAngle;
+  float saturation;
+  float contrast;
+  uint quadWidth;
+  uint halfHeight;
+  undefined *mapMemoryType;
+  uint *lastHeader;
+  undefined4 cmdAfterClear;
+  undefined4 *cmdWrite;
+  uint sizeWord;
+  uint pitchBytes;
+  double cosHue;
+  double sinHue;
+  undefined4 dstLeft;
+  float dstRight;
+  undefined4 dstTop;
+  float dstBottom;
   undefined4 i2dHi1;
   uint i2dLo1;
   undefined4 i2dHi2;
   uint i2dLo2;
+  int mapBase;
+  int fillCount;
+  int pitchWordsMinus1;
   
-  puVar6 = PTR_0000f1a0;
-  puVar9 = *(undefined4 **)(param_1 + 0x34);
-  uVar12 = *(uint *)(param_1 + 0x588);
-  uVar4 = *(uint *)(param_1 + 0x578) >> 2;
-  uVar5 = *(uint *)(param_1 + 0x57c) >> 1;
-  if (*(undefined4 **)(param_1 + 0x38) <= puVar9 + 0x90) {
-    puVar7 = *(uint **)(param_1 + 0x30);
-    *puVar7 = (int)puVar9 - (int)puVar7 >> 2 | *puVar7;
-    *(undefined4 **)(param_1 + 0x30) = *(undefined4 **)(param_1 + 0x34);
-    **(undefined4 **)(param_1 + 0x34) = 0x1000000;
-    _IOConnectMapMemory(*(undefined4 *)(param_1 + 0x14),1,*(undefined4 *)puVar6,param_1 + 0x40,
-                        param_1 + 0x44,1);
-    iVar10 = *(int *)(param_1 + 0x40);
-    *(int *)(param_1 + 0x34) = iVar10 + 0x20;
-    *(int *)(param_1 + 0x30) = iVar10 + 0x1c;
-    *(int *)(param_1 + 0x38) = iVar10 + 0x20 + *(int *)(iVar10 + 0x10) * 4;
-    *(undefined4 *)(iVar10 + 0x1c) = 0;
-    puVar9 = *(undefined4 **)(param_1 + 0x34);
+  mapMemoryType = PTR_0000f1a0;
+  cmdWrite = *(undefined4 **)(ctx + 0x34);
+  pitchBytes = *(uint *)(ctx + 0x588);
+  quadWidth = *(uint *)(ctx + 0x578) >> 2;
+  halfHeight = *(uint *)(ctx + 0x57c) >> 1;
+  if (*(undefined4 **)(ctx + 0x38) <= cmdWrite + 0x90) {
+    lastHeader = *(uint **)(ctx + 0x30);
+    *lastHeader = (int)cmdWrite - (int)lastHeader >> 2 | *lastHeader;
+    *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
+    **(undefined4 **)(ctx + 0x34) = 0x1000000;
+    _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)mapMemoryType,ctx + 0x40,
+                        ctx + 0x44,1);
+    mapBase = *(int *)(ctx + 0x40);
+    *(int *)(ctx + 0x34) = mapBase + 0x20;
+    *(int *)(ctx + 0x30) = mapBase + 0x1c;
+    *(int *)(ctx + 0x38) = mapBase + 0x20 + *(int *)(mapBase + 0x10) * 4;
+    *(undefined4 *)(mapBase + 0x1c) = 0;
+    cmdWrite = *(undefined4 **)(ctx + 0x34);
   }
-  puVar7 = *(uint **)(param_1 + 0x30);
-  *(undefined4 **)(param_1 + 0x34) = puVar9 + 0x90;
-  *puVar7 = (int)puVar9 - (int)puVar7 >> 2 | *puVar7;
-  *(undefined4 **)(param_1 + 0x30) = puVar9;
-  *puVar9 = 0x42000000;
-  puVar9[1] = param_2;
-  puVar9[2] = (uint)(param_3 != 0);
-  puVar9 = puVar9 + 3;
-  iVar10 = 7;
+  lastHeader = *(uint **)(ctx + 0x30);
+  *(undefined4 **)(ctx + 0x34) = cmdWrite + 0x90;
+  *lastHeader = (int)cmdWrite - (int)lastHeader >> 2 | *lastHeader;
+  *(undefined4 **)(ctx + 0x30) = cmdWrite;
+  *cmdWrite = 0x42000000;
+  cmdWrite[1] = headerWord;
+  cmdWrite[2] = (uint)(enableFlag != 0);
+  cmdWrite = cmdWrite + 3;
+  fillCount = 7;
   do {
-    *puVar9 = 0x80000000;
-    puVar9 = puVar9 + 1;
-    iVar10 = iVar10 + -1;
-  } while (iVar10 != 0);
-  uVar8 = ((int (*)())FUN_000096a0)(puVar9);
-  puVar9 = (undefined4 *)((int (*)())FUN_00009700)(uVar8,1);
-  *puVar9 = ((unsigned char *)0x00001041U);
-  puVar9[1] = 3;
-  puVar9[2] = 0x1100;
-  puVar9[3] = 0xa92;
-  puVar9[4] = 0x1110;
-  puVar9[5] = 0;
-  puVar9[6] = 0x1120;
-  uVar11 = uVar4 - 1 | (uVar5 - 1) * 0x800 | 0x80000000;
-  puVar9[7] = uVar11;
-  puVar9[8] = 0x1130;
-  puVar9[9] = 0xa60c;
-  puVar9[10] = 0x1140;
-  iVar10 = (uVar12 >> 2) - 1;
-  puVar9[0xb] = iVar10;
-  puVar9[0xc] = 0x1101;
-  puVar9[0xd] = 0x10000a92;
-  puVar9[0xe] = 0x1111;
-  puVar9[0xf] = 0;
-  puVar9[0x10] = 0x1121;
-  puVar9[0x11] = uVar11;
-  puVar9[0x12] = 0x1131;
-  puVar9[0x13] = 0x4340c;
-  puVar9[0x14] = 0x1141;
-  puVar9[0x15] = iVar10;
-  fVar1 = *(float *)(param_1 + 300);
-  fVar2 = *(float *)(param_1 + 0x138);
-  fVar3 = *(float *)(param_1 + 0x130);
-  dVar13 = _cos((double)fVar1);
-  dVar14 = _sin((double)fVar1);
-  DAT_0000f004 = (float)(dVar13 * (double)fVar2 * (double)fVar3);
-  DAT_0000f024 = (float)((double)fVar3 * (double)fVar2 * -dVar14);
+    *cmdWrite = 0x80000000;
+    cmdWrite = cmdWrite + 1;
+    fillCount = fillCount + -1;
+  } while (fillCount != 0);
+  cmdAfterClear = ((int (*)())FUN_000096a0)(cmdWrite);
+  cmdWrite = (undefined4 *)((int (*)())FUN_00009700)(cmdAfterClear,1);
+  *cmdWrite = ((unsigned char *)0x00001041U);
+  cmdWrite[1] = 3;
+  cmdWrite[2] = 0x1100;
+  cmdWrite[3] = 0xa92;
+  cmdWrite[4] = 0x1110;
+  cmdWrite[5] = 0;
+  cmdWrite[6] = 0x1120;
+  sizeWord = quadWidth - 1 | (halfHeight - 1) * 0x800 | 0x80000000;
+  cmdWrite[7] = sizeWord;
+  cmdWrite[8] = 0x1130;
+  cmdWrite[9] = 0xa60c;
+  cmdWrite[10] = 0x1140;
+  pitchWordsMinus1 = (pitchBytes >> 2) - 1;
+  cmdWrite[0xb] = pitchWordsMinus1;
+  cmdWrite[0xc] = 0x1101;
+  cmdWrite[0xd] = 0x10000a92;
+  cmdWrite[0xe] = 0x1111;
+  cmdWrite[0xf] = 0;
+  cmdWrite[0x10] = 0x1121;
+  cmdWrite[0x11] = sizeWord;
+  cmdWrite[0x12] = 0x1131;
+  cmdWrite[0x13] = 0x4340c;
+  cmdWrite[0x14] = 0x1141;
+  cmdWrite[0x15] = pitchWordsMinus1;
+  hueAngle = *(float *)(ctx + 300);
+  saturation = *(float *)(ctx + 0x138);
+  contrast = *(float *)(ctx + 0x130);
+  cosHue = _cos((double)hueAngle);
+  sinHue = _sin((double)hueAngle);
+  DAT_0000f004 = (float)(cosHue * (double)saturation * (double)contrast);
+  DAT_0000f024 = (float)((double)contrast * (double)saturation * -sinHue);
   DAT_0000f028 = -DAT_0000f024;
   DAT_0000f018 = ((DAT_0000f024 + (1.0 - DAT_0000f004)) * 128.0) / 255.0;
   DAT_0000f014 = (((1.0 - DAT_0000f004) - DAT_0000f024) * 128.0) / 255.0;
@@ -3513,111 +3516,112 @@ int FUN_00009c80(param_1, param_2, param_3)
   DAT_0000f020 = DAT_0000f018;
   DAT_0000f02c = DAT_0000f024;
   DAT_0000f030 = DAT_0000f028;
-  puVar9 = (undefined4 *)((int (*)())FUN_000099b0)(puVar9 + 0x16,&DAT_0000ea9c,4,&DAT_0000f004,3,3);
-  *puVar9 = 0x11a9;
-  puVar9[1] = 0x1b00;
-  puVar9[2] = 0x11aa;
-  puVar9[3] = 0xf;
-  puVar9[4] = 0x11ab;
-  puVar9[5] = 0xf;
-  puVar9[6] = 0x11ac;
-  puVar9[7] = 0xf;
-  i2dLo1 = uVar4 ^ 0x80000000;
-  i2dLo2 = uVar5 ^ 0x80000000;
+  cmdWrite = (undefined4 *)((int (*)())FUN_000099b0)(cmdWrite + 0x16,&DAT_0000ea9c,4,&DAT_0000f004,3,3);
+  *cmdWrite = 0x11a9;
+  cmdWrite[1] = 0x1b00;
+  cmdWrite[2] = 0x11aa;
+  cmdWrite[3] = 0xf;
+  cmdWrite[4] = 0x11ab;
+  cmdWrite[5] = 0xf;
+  cmdWrite[6] = 0x11ac;
+  cmdWrite[7] = 0xf;
+  i2dLo1 = quadWidth ^ 0x80000000;
+  i2dLo2 = halfHeight ^ 0x80000000;
   i2dHi2 = 0x43300000;
   i2dHi1 = 0x43300000;
-  local_70 = 0;
-  local_78 = 0;
-  local_6c = (float)((double)CONCAT44(0x43300000,i2dLo2) - 4503601774854144.0);
-  local_74 = (float)((double)CONCAT44(0x43300000,i2dLo1) - 4503601774854144.0);
-  ((int (*)())FUN_00009ac0)(puVar9 + 8,0,&local_78,uVar4,uVar5);
-  puVar6 = PTR_0000f1a0;
-  puVar7 = *(uint **)(param_1 + 0x30);
-  *puVar7 = *(int *)(param_1 + 0x34) - (int)puVar7 >> 2 | *puVar7;
-  *(undefined4 **)(param_1 + 0x30) = *(undefined4 **)(param_1 + 0x34);
-  **(undefined4 **)(param_1 + 0x34) = 0x1000000;
-  _IOConnectMapMemory(*(undefined4 *)(param_1 + 0x14),1,*(undefined4 *)puVar6,param_1 + 0x40,
-                      param_1 + 0x44,1);
-  iVar10 = *(int *)(param_1 + 0x40);
-  *(int *)(param_1 + 0x34) = iVar10 + 0x20;
-  *(int *)(param_1 + 0x30) = iVar10 + 0x1c;
-  *(int *)(param_1 + 0x38) = iVar10 + 0x20 + *(int *)(iVar10 + 0x10) * 4;
-  *(undefined4 *)(iVar10 + 0x1c) = 0;
+  dstTop = 0;
+  dstLeft = 0;
+  dstBottom = (float)((double)CONCAT44(0x43300000,i2dLo2) - 4503601774854144.0);
+  dstRight = (float)((double)CONCAT44(0x43300000,i2dLo1) - 4503601774854144.0);
+  ((int (*)())FUN_00009ac0)(cmdWrite + 8,0,&dstLeft,quadWidth,halfHeight);
+  mapMemoryType = PTR_0000f1a0;
+  lastHeader = *(uint **)(ctx + 0x30);
+  *lastHeader = *(int *)(ctx + 0x34) - (int)lastHeader >> 2 | *lastHeader;
+  *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
+  **(undefined4 **)(ctx + 0x34) = 0x1000000;
+  _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)mapMemoryType,ctx + 0x40,
+                      ctx + 0x44,1);
+  mapBase = *(int *)(ctx + 0x40);
+  *(int *)(ctx + 0x34) = mapBase + 0x20;
+  *(int *)(ctx + 0x30) = mapBase + 0x1c;
+  *(int *)(ctx + 0x38) = mapBase + 0x20 + *(int *)(mapBase + 0x10) * 4;
+  *(undefined4 *)(mapBase + 0x1c) = 0;
   return;
 }
 
 /* FUN_0000a110 @ 0xa110 (964 bytes) */
-int FUN_0000a110(param_1, param_2, param_3)
-  int param_1;
-  undefined4 param_2;
-  int param_3;
+int FUN_0000a110(ctx, headerWord, enableFlag)
+  int ctx;
+  undefined4 headerWord;
+  int enableFlag;
 {
-  uint uVar1;
-  undefined *puVar2;
-  uint *puVar3;
-  undefined4 uVar4;
-  undefined4 *puVar5;
-  int iVar6;
-  uint uVar7;
-  uint uVar8;
-  undefined4 local_58;
-  float local_54;
-  undefined4 local_50;
-  float local_4c;
+  uint quadWidth;
+  undefined *mapMemoryType;
+  uint *lastHeader;
+  undefined4 cmdAfterClear;
+  undefined4 *cmdWrite;
+  uint pitchBytes;
+  uint surfaceHeight;
+  undefined4 dstLeft;
+  float dstRight;
+  undefined4 dstTop;
+  float dstBottom;
   undefined4 i2dHi1;
   uint i2dLo1;
   undefined4 i2dHi2;
   uint i2dLo2;
+  int mapBase;
+  int fillCount;
   
-  puVar2 = PTR_0000f1a0;
-  puVar5 = *(undefined4 **)(param_1 + 0x34);
-  uVar7 = *(uint *)(param_1 + 0x588);
-  uVar8 = *(uint *)(param_1 + 0x57c);
-  uVar1 = *(uint *)(param_1 + 0x578) >> 2;
-  if (*(undefined4 **)(param_1 + 0x38) <= puVar5 + 0x78) {
-    puVar3 = *(uint **)(param_1 + 0x30);
-    *puVar3 = (int)puVar5 - (int)puVar3 >> 2 | *puVar3;
-    *(undefined4 **)(param_1 + 0x30) = *(undefined4 **)(param_1 + 0x34);
-    **(undefined4 **)(param_1 + 0x34) = 0x1000000;
-    _IOConnectMapMemory(*(undefined4 *)(param_1 + 0x14),1,*(undefined4 *)puVar2,param_1 + 0x40,
-                        param_1 + 0x44,1);
-    iVar6 = *(int *)(param_1 + 0x40);
-    *(int *)(param_1 + 0x34) = iVar6 + 0x20;
-    *(int *)(param_1 + 0x30) = iVar6 + 0x1c;
-    *(int *)(param_1 + 0x38) = iVar6 + 0x20 + *(int *)(iVar6 + 0x10) * 4;
-    *(undefined4 *)(iVar6 + 0x1c) = 0;
-    puVar5 = *(undefined4 **)(param_1 + 0x34);
+  mapMemoryType = PTR_0000f1a0;
+  cmdWrite = *(undefined4 **)(ctx + 0x34);
+  pitchBytes = *(uint *)(ctx + 0x588);
+  surfaceHeight = *(uint *)(ctx + 0x57c);
+  quadWidth = *(uint *)(ctx + 0x578) >> 2;
+  if (*(undefined4 **)(ctx + 0x38) <= cmdWrite + 0x78) {
+    lastHeader = *(uint **)(ctx + 0x30);
+    *lastHeader = (int)cmdWrite - (int)lastHeader >> 2 | *lastHeader;
+    *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
+    **(undefined4 **)(ctx + 0x34) = 0x1000000;
+    _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)mapMemoryType,ctx + 0x40,
+                        ctx + 0x44,1);
+    mapBase = *(int *)(ctx + 0x40);
+    *(int *)(ctx + 0x34) = mapBase + 0x20;
+    *(int *)(ctx + 0x30) = mapBase + 0x1c;
+    *(int *)(ctx + 0x38) = mapBase + 0x20 + *(int *)(mapBase + 0x10) * 4;
+    *(undefined4 *)(mapBase + 0x1c) = 0;
+    cmdWrite = *(undefined4 **)(ctx + 0x34);
   }
-  puVar3 = *(uint **)(param_1 + 0x30);
-  *(undefined4 **)(param_1 + 0x34) = puVar5 + 0x78;
-  *puVar3 = (int)puVar5 - (int)puVar3 >> 2 | *puVar3;
-  *(undefined4 **)(param_1 + 0x30) = puVar5;
-  *puVar5 = 0x3f000000;
-  puVar5[1] = param_2;
-  puVar5[2] = (uint)(param_3 != 0);
-  puVar5 = puVar5 + 3;
-  iVar6 = 9;
+  lastHeader = *(uint **)(ctx + 0x30);
+  *(undefined4 **)(ctx + 0x34) = cmdWrite + 0x78;
+  *lastHeader = (int)cmdWrite - (int)lastHeader >> 2 | *lastHeader;
+  *(undefined4 **)(ctx + 0x30) = cmdWrite;
+  *cmdWrite = 0x3f000000;
+  cmdWrite[1] = headerWord;
+  cmdWrite[2] = (uint)(enableFlag != 0);
+  cmdWrite = cmdWrite + 3;
+  fillCount = 9;
   do {
-    *puVar5 = 0x80000000;
-    puVar5 = puVar5 + 1;
-    iVar6 = iVar6 + -1;
-  } while (iVar6 != 0);
-  uVar4 = ((int (*)())FUN_000096a0)(puVar5);
-  puVar5 = (undefined4 *)((int (*)())FUN_00009700)(uVar4,1);
-  *puVar5 = ((unsigned char *)0x00001041U);
-  puVar5[1] = 1;
-  puVar5[2] = 0x1100;
-  puVar5[3] = 0xa92;
-  puVar5[4] = 0x1110;
-  puVar5[5] = 0;
-  puVar5[6] = 0x1120;
-  puVar5[7] = uVar1 - 1 | (uVar8 - 1) * 0x800 | 0x80000000;
-  puVar5[8] = 0x1130;
-  puVar5[9] = 0xa60c;
-  puVar5[10] = 0x1140;
-  puVar5[0xb] = (uVar7 >> 2) - 1;
-  DAT_0000f034 = *(undefined4 *)(param_1 + 0x138);
-  DAT_0000f044 = ((1.0 - *(float *)(param_1 + 0x138)) * 128.0) / 255.0 + *(float *)(param_1 + 0x134)
+    *cmdWrite = 0x80000000;
+    cmdWrite = cmdWrite + 1;
+    fillCount = fillCount + -1;
+  } while (fillCount != 0);
+  cmdAfterClear = ((int (*)())FUN_000096a0)(cmdWrite);
+  cmdWrite = (undefined4 *)((int (*)())FUN_00009700)(cmdAfterClear,1);
+  *cmdWrite = ((unsigned char *)0x00001041U);
+  cmdWrite[1] = 1;
+  cmdWrite[2] = 0x1100;
+  cmdWrite[3] = 0xa92;
+  cmdWrite[4] = 0x1110;
+  cmdWrite[5] = 0;
+  cmdWrite[6] = 0x1120;
+  cmdWrite[7] = quadWidth - 1 | (surfaceHeight - 1) * 0x800 | 0x80000000;
+  cmdWrite[8] = 0x1130;
+  cmdWrite[9] = 0xa60c;
+  cmdWrite[10] = 0x1140;
+  cmdWrite[0xb] = (pitchBytes >> 2) - 1;
+  DAT_0000f034 = *(undefined4 *)(ctx + 0x138);
+  DAT_0000f044 = ((1.0 - *(float *)(ctx + 0x138)) * 128.0) / 255.0 + *(float *)(ctx + 0x134)
   ;
   DAT_0000f038 = DAT_0000f034;
   DAT_0000f03c = DAT_0000f034;
@@ -3625,53 +3629,53 @@ int FUN_0000a110(param_1, param_2, param_3)
   DAT_0000f048 = DAT_0000f044;
   DAT_0000f04c = DAT_0000f044;
   DAT_0000f050 = DAT_0000f044;
-  puVar5 = (undefined4 *)((int (*)())FUN_000099b0)(puVar5 + 0xc,&DAT_0000eafc,2,&DAT_0000f034,2,2);
-  *puVar5 = 0x11a9;
-  puVar5[1] = 0x1b00;
-  puVar5[2] = 0x11aa;
-  puVar5[3] = 0xf;
-  puVar5[4] = 0x11ab;
-  puVar5[5] = 0xf;
-  puVar5[6] = 0x11ac;
-  puVar5[7] = 0xf;
-  i2dLo1 = uVar1 ^ 0x80000000;
-  i2dLo2 = uVar8 ^ 0x80000000;
+  cmdWrite = (undefined4 *)((int (*)())FUN_000099b0)(cmdWrite + 0xc,&DAT_0000eafc,2,&DAT_0000f034,2,2);
+  *cmdWrite = 0x11a9;
+  cmdWrite[1] = 0x1b00;
+  cmdWrite[2] = 0x11aa;
+  cmdWrite[3] = 0xf;
+  cmdWrite[4] = 0x11ab;
+  cmdWrite[5] = 0xf;
+  cmdWrite[6] = 0x11ac;
+  cmdWrite[7] = 0xf;
+  i2dLo1 = quadWidth ^ 0x80000000;
+  i2dLo2 = surfaceHeight ^ 0x80000000;
   i2dHi2 = 0x43300000;
   i2dHi1 = 0x43300000;
-  local_50 = 0;
-  local_58 = 0;
-  local_4c = (float)((double)CONCAT44(0x43300000,i2dLo2) - 4503601774854144.0);
-  local_54 = (float)((double)CONCAT44(0x43300000,i2dLo1) - 4503601774854144.0);
-  ((int (*)())FUN_00009ac0)(puVar5 + 8,0,&local_58,uVar1,uVar8);
-  puVar2 = PTR_0000f1a0;
-  puVar3 = *(uint **)(param_1 + 0x30);
-  *puVar3 = *(int *)(param_1 + 0x34) - (int)puVar3 >> 2 | *puVar3;
-  *(undefined4 **)(param_1 + 0x30) = *(undefined4 **)(param_1 + 0x34);
-  **(undefined4 **)(param_1 + 0x34) = 0x1000000;
-  _IOConnectMapMemory(*(undefined4 *)(param_1 + 0x14),1,*(undefined4 *)puVar2,param_1 + 0x40,
-                      param_1 + 0x44,1);
-  iVar6 = *(int *)(param_1 + 0x40);
-  *(int *)(param_1 + 0x34) = iVar6 + 0x20;
-  *(int *)(param_1 + 0x30) = iVar6 + 0x1c;
-  *(int *)(param_1 + 0x38) = iVar6 + 0x20 + *(int *)(iVar6 + 0x10) * 4;
-  *(undefined4 *)(iVar6 + 0x1c) = 0;
+  dstTop = 0;
+  dstLeft = 0;
+  dstBottom = (float)((double)CONCAT44(0x43300000,i2dLo2) - 4503601774854144.0);
+  dstRight = (float)((double)CONCAT44(0x43300000,i2dLo1) - 4503601774854144.0);
+  ((int (*)())FUN_00009ac0)(cmdWrite + 8,0,&dstLeft,quadWidth,surfaceHeight);
+  mapMemoryType = PTR_0000f1a0;
+  lastHeader = *(uint **)(ctx + 0x30);
+  *lastHeader = *(int *)(ctx + 0x34) - (int)lastHeader >> 2 | *lastHeader;
+  *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
+  **(undefined4 **)(ctx + 0x34) = 0x1000000;
+  _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)mapMemoryType,ctx + 0x40,
+                      ctx + 0x44,1);
+  mapBase = *(int *)(ctx + 0x40);
+  *(int *)(ctx + 0x34) = mapBase + 0x20;
+  *(int *)(ctx + 0x30) = mapBase + 0x1c;
+  *(int *)(ctx + 0x38) = mapBase + 0x20 + *(int *)(mapBase + 0x10) * 4;
+  *(undefined4 *)(mapBase + 0x1c) = 0;
   return;
 }
 
 /* FUN_0000a4e0 @ 0xa4e0 (1304 bytes) */
-int FUN_0000a4e0(param_1, param_2, param_3)
-  int param_1;
+int FUN_0000a4e0(ctx, param_2, param_3)
+  int ctx;
   int param_2;
   int param_3;
 {
-  undefined *puVar1;
-  uint *puVar2;
+  undefined *mapMemoryType;
+  uint *lastHeader;
   undefined4 uVar3;
   uint uVar4;
   uint uVar5;
   int iVar6;
   uint uVar7;
-  undefined4 *puVar8;
+  undefined4 *cmdWrite;
   undefined4 local_48;
   float local_44;
   undefined4 local_40;
@@ -3681,131 +3685,131 @@ int FUN_0000a4e0(param_1, param_2, param_3)
   undefined4 i2dHi2;
   undefined4 i2dLo2;
   
-  puVar1 = PTR_0000f1a0;
-  puVar8 = *(undefined4 **)(param_1 + 0x34);
-  if (*(undefined4 **)(param_1 + 0x38) <= puVar8 + 0xb0) {
-    puVar2 = *(uint **)(param_1 + 0x30);
-    *puVar2 = (int)puVar8 - (int)puVar2 >> 2 | *puVar2;
-    *(undefined4 **)(param_1 + 0x30) = *(undefined4 **)(param_1 + 0x34);
-    **(undefined4 **)(param_1 + 0x34) = 0x1000000;
-    _IOConnectMapMemory(*(undefined4 *)(param_1 + 0x14),1,*(undefined4 *)puVar1,param_1 + 0x40,
-                        param_1 + 0x44,1);
-    iVar6 = *(int *)(param_1 + 0x40);
-    *(int *)(param_1 + 0x34) = iVar6 + 0x20;
-    *(int *)(param_1 + 0x30) = iVar6 + 0x1c;
-    *(int *)(param_1 + 0x38) = iVar6 + 0x20 + *(int *)(iVar6 + 0x10) * 4;
+  mapMemoryType = PTR_0000f1a0;
+  cmdWrite = *(undefined4 **)(ctx + 0x34);
+  if (*(undefined4 **)(ctx + 0x38) <= cmdWrite + 0xb0) {
+    lastHeader = *(uint **)(ctx + 0x30);
+    *lastHeader = (int)cmdWrite - (int)lastHeader >> 2 | *lastHeader;
+    *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
+    **(undefined4 **)(ctx + 0x34) = 0x1000000;
+    _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)mapMemoryType,ctx + 0x40,
+                        ctx + 0x44,1);
+    iVar6 = *(int *)(ctx + 0x40);
+    *(int *)(ctx + 0x34) = iVar6 + 0x20;
+    *(int *)(ctx + 0x30) = iVar6 + 0x1c;
+    *(int *)(ctx + 0x38) = iVar6 + 0x20 + *(int *)(iVar6 + 0x10) * 4;
     *(undefined4 *)(iVar6 + 0x1c) = 0;
-    puVar8 = *(undefined4 **)(param_1 + 0x34);
+    cmdWrite = *(undefined4 **)(ctx + 0x34);
   }
-  puVar2 = *(uint **)(param_1 + 0x30);
-  *(undefined4 **)(param_1 + 0x34) = puVar8 + 0xb0;
-  *puVar2 = (int)puVar8 - (int)puVar2 >> 2 | *puVar2;
-  *(undefined4 **)(param_1 + 0x30) = puVar8;
-  *puVar8 = 0x44000000;
-  puVar8[1] = param_2;
-  puVar8[2] = 0x11;
-  puVar8[3] = (uint)(*(int *)(param_2 * 4 + param_1 + 0x55c + 0x554) != 0);
-  puVar8[4] = *(undefined4 *)(param_1 + 0x11c);
-  puVar8 = puVar8 + 5;
+  lastHeader = *(uint **)(ctx + 0x30);
+  *(undefined4 **)(ctx + 0x34) = cmdWrite + 0xb0;
+  *lastHeader = (int)cmdWrite - (int)lastHeader >> 2 | *lastHeader;
+  *(undefined4 **)(ctx + 0x30) = cmdWrite;
+  *cmdWrite = 0x44000000;
+  cmdWrite[1] = param_2;
+  cmdWrite[2] = 0x11;
+  cmdWrite[3] = (uint)(*(int *)(param_2 * 4 + ctx + 0x55c + 0x554) != 0);
+  cmdWrite[4] = *(undefined4 *)(ctx + 0x11c);
+  cmdWrite = cmdWrite + 5;
   iVar6 = 5;
   do {
-    *puVar8 = 0x80000000;
-    puVar8 = puVar8 + 1;
+    *cmdWrite = 0x80000000;
+    cmdWrite = cmdWrite + 1;
     iVar6 = iVar6 + -1;
   } while (iVar6 != 0);
-  uVar3 = ((int (*)())FUN_000096a0)(puVar8);
-  puVar8 = (undefined4 *)((int (*)())FUN_00009700)(uVar3,1);
-  *puVar8 = 0x1100;
-  puVar8[1] = 0xa92;
-  puVar8[2] = 0x1110;
-  puVar8[3] = 0;
-  puVar8[4] = 0x1120;
-  uVar7 = *(uint *)(param_1 + 0x57c);
-  uVar4 = *(uint *)(param_1 + 0x578);
-  puVar8[5] = (uVar7 - 1) * 0x800 | uVar4 - 1 | 0x80000000;
-  puVar8[6] = 0x1130;
-  puVar8[7] = 0x10120800;
-  puVar8[8] = 0x1140;
-  uVar5 = *(uint *)(param_1 + 0x588);
-  puVar8[9] = uVar5 - 1;
-  puVar8[10] = 0x1101;
-  puVar8[0xb] = 0x10000a92;
-  puVar8[0xc] = 0x1111;
-  puVar8[0xd] = 0;
-  puVar8[0xe] = 0x1121;
-  puVar8[0xf] = ((uVar7 >> 1) - 1) * 0x800 | (uVar4 >> 1) - 1 | 0x80000000;
-  puVar8[0x10] = 0x1131;
-  puVar8[0x11] = 0x18044803;
-  puVar8[0x12] = 0x1141;
-  puVar8[0x13] = (uVar5 >> 1) - 1;
-  puVar8[0x14] = ((unsigned char *)0x00001041U);
-  puVar8[0x15] = 3;
-  puVar8 = (undefined4 *)((int (*)())FUN_000099b0)(puVar8 + 0x16,&DAT_0000eb7c,7,&DAT_0000eb2c,5,3);
+  uVar3 = ((int (*)())FUN_000096a0)(cmdWrite);
+  cmdWrite = (undefined4 *)((int (*)())FUN_00009700)(uVar3,1);
+  *cmdWrite = 0x1100;
+  cmdWrite[1] = 0xa92;
+  cmdWrite[2] = 0x1110;
+  cmdWrite[3] = 0;
+  cmdWrite[4] = 0x1120;
+  uVar7 = *(uint *)(ctx + 0x57c);
+  uVar4 = *(uint *)(ctx + 0x578);
+  cmdWrite[5] = (uVar7 - 1) * 0x800 | uVar4 - 1 | 0x80000000;
+  cmdWrite[6] = 0x1130;
+  cmdWrite[7] = 0x10120800;
+  cmdWrite[8] = 0x1140;
+  uVar5 = *(uint *)(ctx + 0x588);
+  cmdWrite[9] = uVar5 - 1;
+  cmdWrite[10] = 0x1101;
+  cmdWrite[0xb] = 0x10000a92;
+  cmdWrite[0xc] = 0x1111;
+  cmdWrite[0xd] = 0;
+  cmdWrite[0xe] = 0x1121;
+  cmdWrite[0xf] = ((uVar7 >> 1) - 1) * 0x800 | (uVar4 >> 1) - 1 | 0x80000000;
+  cmdWrite[0x10] = 0x1131;
+  cmdWrite[0x11] = 0x18044803;
+  cmdWrite[0x12] = 0x1141;
+  cmdWrite[0x13] = (uVar5 >> 1) - 1;
+  cmdWrite[0x14] = ((unsigned char *)0x00001041U);
+  cmdWrite[0x15] = 3;
+  cmdWrite = (undefined4 *)((int (*)())FUN_000099b0)(cmdWrite + 0x16,&DAT_0000eb7c,7,&DAT_0000eb2c,5,3);
   iVar6 = *(int *)(param_3 + 0xc);
   if (((iVar6 == 0x61726762) || (iVar6 == 0x61723135)) || (iVar6 != 0x72676261)) {
-    *puVar8 = 0x11a9;
-    puVar8[1] = 0x1b00;
+    *cmdWrite = 0x11a9;
+    cmdWrite[1] = 0x1b00;
   }
   else {
-    *puVar8 = 0x11a9;
-    puVar8[1] = 0x6c00;
+    *cmdWrite = 0x11a9;
+    cmdWrite[1] = 0x6c00;
   }
-  puVar8[2] = 0x11aa;
-  puVar8[3] = 0xf;
-  puVar8[4] = 0x11ab;
-  puVar8[5] = 0xf;
-  puVar8[6] = 0x11ac;
-  puVar8[7] = 0xf;
-  puVar8[8] = 0x1393;
-  puVar8[9] = 10;
+  cmdWrite[2] = 0x11aa;
+  cmdWrite[3] = 0xf;
+  cmdWrite[4] = 0x11ab;
+  cmdWrite[5] = 0xf;
+  cmdWrite[6] = 0x11ac;
+  cmdWrite[7] = 0xf;
+  cmdWrite[8] = 0x1393;
+  cmdWrite[9] = 10;
   if (iVar6 == 0x61723135) {
-    puVar8[10] = 0x138e;
-    puVar8[0xb] = *(uint *)(param_3 + 8) >> 1 & 0x3ffe | 0x680000;
+    cmdWrite[10] = 0x138e;
+    cmdWrite[0xb] = *(uint *)(param_3 + 8) >> 1 & 0x3ffe | 0x680000;
   }
   else {
-    puVar8[10] = 0x138e;
-    puVar8[0xb] = *(uint *)(param_3 + 8) >> 2 & 0x3ffe | 0xd00000;
+    cmdWrite[10] = 0x138e;
+    cmdWrite[0xb] = *(uint *)(param_3 + 8) >> 2 & 0x3ffe | 0xd00000;
   }
-  i2dLo1 = *(undefined4 *)(param_1 + 0x578);
-  i2dLo2 = *(undefined4 *)(param_1 + 0x57c);
+  i2dLo1 = *(undefined4 *)(ctx + 0x578);
+  i2dLo2 = *(undefined4 *)(ctx + 0x57c);
   i2dHi2 = 0x43300000;
   i2dHi1 = 0x43300000;
   local_40 = 0;
   local_48 = 0;
   local_44 = (float)((double)CONCAT44(0x43300000,i2dLo1) - 4503599627370496.0);
   local_3c = (float)((double)CONCAT44(0x43300000,i2dLo2) - 4503599627370496.0);
-  puVar8 = (undefined4 *)((int (*)())FUN_00009ac0)(puVar8 + 0xc,0,&local_48,i2dLo1,i2dLo2);
-  *puVar8 = 0x5c8;
-  puVar8[1] = 0x10030000;
-  puVar1 = PTR_0000f1a0;
-  puVar2 = *(uint **)(param_1 + 0x30);
-  *puVar2 = *(int *)(param_1 + 0x34) - (int)puVar2 >> 2 | *puVar2;
-  *(undefined4 **)(param_1 + 0x30) = *(undefined4 **)(param_1 + 0x34);
-  **(undefined4 **)(param_1 + 0x34) = 0x1000000;
-  _IOConnectMapMemory(*(undefined4 *)(param_1 + 0x14),1,*(undefined4 *)puVar1,param_1 + 0x40,
-                      param_1 + 0x44,1);
-  iVar6 = *(int *)(param_1 + 0x40);
-  *(int *)(param_1 + 0x34) = iVar6 + 0x20;
-  *(int *)(param_1 + 0x30) = iVar6 + 0x1c;
-  *(int *)(param_1 + 0x38) = iVar6 + 0x20 + *(int *)(iVar6 + 0x10) * 4;
+  cmdWrite = (undefined4 *)((int (*)())FUN_00009ac0)(cmdWrite + 0xc,0,&local_48,i2dLo1,i2dLo2);
+  *cmdWrite = 0x5c8;
+  cmdWrite[1] = 0x10030000;
+  mapMemoryType = PTR_0000f1a0;
+  lastHeader = *(uint **)(ctx + 0x30);
+  *lastHeader = *(int *)(ctx + 0x34) - (int)lastHeader >> 2 | *lastHeader;
+  *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
+  **(undefined4 **)(ctx + 0x34) = 0x1000000;
+  _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)mapMemoryType,ctx + 0x40,
+                      ctx + 0x44,1);
+  iVar6 = *(int *)(ctx + 0x40);
+  *(int *)(ctx + 0x34) = iVar6 + 0x20;
+  *(int *)(ctx + 0x30) = iVar6 + 0x1c;
+  *(int *)(ctx + 0x38) = iVar6 + 0x20 + *(int *)(iVar6 + 0x10) * 4;
   *(undefined4 *)(iVar6 + 0x1c) = 0;
-  *(undefined4 *)(*(int *)(param_1 + 0xac4) * 8 + param_1 + 0x55c + 0x570) =
-       *(undefined4 *)(*(int *)(param_1 + 0x40) + 0x18);
+  *(undefined4 *)(*(int *)(ctx + 0xac4) * 8 + ctx + 0x55c + 0x570) =
+       *(undefined4 *)(*(int *)(ctx + 0x40) + 0x18);
   return;
 }
 
 /* FUN_0000aa00 @ 0xaa00 (1152 bytes) */
-int FUN_0000aa00(param_1, param_2, param_3)
-  int param_1;
+int FUN_0000aa00(ctx, param_2, param_3)
+  int ctx;
   int param_2;
   int param_3;
 {
   uint uVar1;
-  undefined *puVar2;
+  undefined *mapMemoryType;
   uint uVar3;
-  uint *puVar4;
+  uint *lastHeader;
   undefined4 uVar5;
-  undefined4 *puVar6;
+  undefined4 *cmdWrite;
   int iVar7;
   uint uVar8;
   undefined4 local_58;
@@ -3817,81 +3821,81 @@ int FUN_0000aa00(param_1, param_2, param_3)
   undefined4 i2dHi2;
   uint i2dLo2;
   
-  puVar2 = PTR_0000f1a0;
-  puVar6 = *(undefined4 **)(param_1 + 0x34);
-  uVar3 = *(uint *)(param_1 + 0x588);
-  uVar8 = *(uint *)(param_1 + 0x57c);
-  uVar1 = *(uint *)(param_1 + 0x578) >> 1;
-  if (*(undefined4 **)(param_1 + 0x38) <= puVar6 + 0x88) {
-    puVar4 = *(uint **)(param_1 + 0x30);
-    *puVar4 = (int)puVar6 - (int)puVar4 >> 2 | *puVar4;
-    *(undefined4 **)(param_1 + 0x30) = *(undefined4 **)(param_1 + 0x34);
-    **(undefined4 **)(param_1 + 0x34) = 0x1000000;
-    _IOConnectMapMemory(*(undefined4 *)(param_1 + 0x14),1,*(undefined4 *)puVar2,param_1 + 0x40,
-                        param_1 + 0x44,1);
-    iVar7 = *(int *)(param_1 + 0x40);
-    *(int *)(param_1 + 0x34) = iVar7 + 0x20;
-    *(int *)(param_1 + 0x30) = iVar7 + 0x1c;
-    *(int *)(param_1 + 0x38) = iVar7 + 0x20 + *(int *)(iVar7 + 0x10) * 4;
+  mapMemoryType = PTR_0000f1a0;
+  cmdWrite = *(undefined4 **)(ctx + 0x34);
+  uVar3 = *(uint *)(ctx + 0x588);
+  uVar8 = *(uint *)(ctx + 0x57c);
+  uVar1 = *(uint *)(ctx + 0x578) >> 1;
+  if (*(undefined4 **)(ctx + 0x38) <= cmdWrite + 0x88) {
+    lastHeader = *(uint **)(ctx + 0x30);
+    *lastHeader = (int)cmdWrite - (int)lastHeader >> 2 | *lastHeader;
+    *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
+    **(undefined4 **)(ctx + 0x34) = 0x1000000;
+    _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)mapMemoryType,ctx + 0x40,
+                        ctx + 0x44,1);
+    iVar7 = *(int *)(ctx + 0x40);
+    *(int *)(ctx + 0x34) = iVar7 + 0x20;
+    *(int *)(ctx + 0x30) = iVar7 + 0x1c;
+    *(int *)(ctx + 0x38) = iVar7 + 0x20 + *(int *)(iVar7 + 0x10) * 4;
     *(undefined4 *)(iVar7 + 0x1c) = 0;
-    puVar6 = *(undefined4 **)(param_1 + 0x34);
+    cmdWrite = *(undefined4 **)(ctx + 0x34);
   }
-  puVar4 = *(uint **)(param_1 + 0x30);
-  *(undefined4 **)(param_1 + 0x34) = puVar6 + 0x88;
-  *puVar4 = (int)puVar6 - (int)puVar4 >> 2 | *puVar4;
-  *(undefined4 **)(param_1 + 0x30) = puVar6;
-  *puVar6 = 0x43000000;
-  puVar6[1] = param_2;
-  puVar6[2] = 0x11;
-  puVar6[3] = (uint)(*(int *)(param_2 * 4 + param_1 + 0x55c + 0x554) != 0);
-  puVar6[4] = *(undefined4 *)(param_1 + 0x11c);
-  puVar6 = puVar6 + 5;
+  lastHeader = *(uint **)(ctx + 0x30);
+  *(undefined4 **)(ctx + 0x34) = cmdWrite + 0x88;
+  *lastHeader = (int)cmdWrite - (int)lastHeader >> 2 | *lastHeader;
+  *(undefined4 **)(ctx + 0x30) = cmdWrite;
+  *cmdWrite = 0x43000000;
+  cmdWrite[1] = param_2;
+  cmdWrite[2] = 0x11;
+  cmdWrite[3] = (uint)(*(int *)(param_2 * 4 + ctx + 0x55c + 0x554) != 0);
+  cmdWrite[4] = *(undefined4 *)(ctx + 0x11c);
+  cmdWrite = cmdWrite + 5;
   iVar7 = 6;
   do {
-    *puVar6 = 0x80000000;
-    puVar6 = puVar6 + 1;
+    *cmdWrite = 0x80000000;
+    cmdWrite = cmdWrite + 1;
     iVar7 = iVar7 + -1;
   } while (iVar7 != 0);
-  uVar5 = ((int (*)())FUN_000096a0)(puVar6);
-  puVar6 = (undefined4 *)((int (*)())FUN_00009700)(uVar5,1);
-  *puVar6 = ((unsigned char *)0x00001041U);
-  puVar6[1] = 3;
-  puVar6[2] = 0x1100;
-  puVar6[3] = 0xa92;
-  puVar6[4] = 0x1110;
-  puVar6[5] = 0;
-  puVar6[6] = 0x1120;
-  puVar6[7] = uVar1 - 1 | (uVar8 - 1) * 0x800 | 0x80000000;
-  puVar6[8] = 0x1130;
-  puVar6[9] = 0x10060803;
-  puVar6[10] = 0x1140;
+  uVar5 = ((int (*)())FUN_000096a0)(cmdWrite);
+  cmdWrite = (undefined4 *)((int (*)())FUN_00009700)(uVar5,1);
+  *cmdWrite = ((unsigned char *)0x00001041U);
+  cmdWrite[1] = 3;
+  cmdWrite[2] = 0x1100;
+  cmdWrite[3] = 0xa92;
+  cmdWrite[4] = 0x1110;
+  cmdWrite[5] = 0;
+  cmdWrite[6] = 0x1120;
+  cmdWrite[7] = uVar1 - 1 | (uVar8 - 1) * 0x800 | 0x80000000;
+  cmdWrite[8] = 0x1130;
+  cmdWrite[9] = 0x10060803;
+  cmdWrite[10] = 0x1140;
   iVar7 = (uVar3 >> 1) - 1;
-  puVar6[0xb] = iVar7;
-  puVar6[0xc] = 0x1101;
-  puVar6[0xd] = 0x10000a92;
-  puVar6[0xe] = 0x1111;
-  puVar6[0xf] = 0;
-  puVar6[0x10] = 0x1121;
-  puVar6[0x11] = uVar1 - 1 |
+  cmdWrite[0xb] = iVar7;
+  cmdWrite[0xc] = 0x1101;
+  cmdWrite[0xd] = 0x10000a92;
+  cmdWrite[0xe] = 0x1111;
+  cmdWrite[0xf] = 0;
+  cmdWrite[0x10] = 0x1121;
+  cmdWrite[0x11] = uVar1 - 1 |
                  (((int)uVar8 >> 1) + (uint)((int)uVar8 < 0 && (uVar8 & 1) != 0) + -1) * 0x800 |
                  0x80000000;
-  puVar6[0x12] = 0x1131;
-  puVar6[0x13] = 0x1810c003;
-  puVar6[0x14] = 0x1141;
-  puVar6[0x15] = iVar7;
-  puVar6 = (undefined4 *)((int (*)())FUN_000099b0)(puVar6 + 0x16,&DAT_0000ec24,4,0,0,3);
-  *puVar6 = 0x11a9;
-  puVar6[1] = 0x1b00;
-  puVar6[2] = 0x11aa;
-  puVar6[3] = 0xf;
-  puVar6[4] = 0x11ab;
-  puVar6[5] = 0xf;
-  puVar6[6] = 0x11ac;
-  puVar6[7] = 0xf;
-  puVar6[8] = 0x1393;
-  puVar6[9] = 10;
-  puVar6[10] = 0x138e;
-  puVar6[0xb] = *(uint *)(param_3 + 8) >> 2 & 0x3ffe | 0xd00000;
+  cmdWrite[0x12] = 0x1131;
+  cmdWrite[0x13] = 0x1810c003;
+  cmdWrite[0x14] = 0x1141;
+  cmdWrite[0x15] = iVar7;
+  cmdWrite = (undefined4 *)((int (*)())FUN_000099b0)(cmdWrite + 0x16,&DAT_0000ec24,4,0,0,3);
+  *cmdWrite = 0x11a9;
+  cmdWrite[1] = 0x1b00;
+  cmdWrite[2] = 0x11aa;
+  cmdWrite[3] = 0xf;
+  cmdWrite[4] = 0x11ab;
+  cmdWrite[5] = 0xf;
+  cmdWrite[6] = 0x11ac;
+  cmdWrite[7] = 0xf;
+  cmdWrite[8] = 0x1393;
+  cmdWrite[9] = 10;
+  cmdWrite[10] = 0x138e;
+  cmdWrite[0xb] = *(uint *)(param_3 + 8) >> 2 & 0x3ffe | 0xd00000;
   i2dLo1 = uVar1 ^ 0x80000000;
   i2dLo2 = uVar8 ^ 0x80000000;
   i2dHi2 = 0x43300000;
@@ -3900,23 +3904,23 @@ int FUN_0000aa00(param_1, param_2, param_3)
   local_58 = 0;
   local_4c = (float)((double)CONCAT44(0x43300000,i2dLo2) - 4503601774854144.0);
   local_54 = (float)((double)CONCAT44(0x43300000,i2dLo1) - 4503601774854144.0);
-  puVar6 = (undefined4 *)((int (*)())FUN_00009ac0)(puVar6 + 0xc,0,&local_58,uVar1,uVar8);
-  *puVar6 = 0x5c8;
-  puVar6[1] = 0x10030000;
-  puVar2 = PTR_0000f1a0;
-  puVar4 = *(uint **)(param_1 + 0x30);
-  *puVar4 = *(int *)(param_1 + 0x34) - (int)puVar4 >> 2 | *puVar4;
-  *(undefined4 **)(param_1 + 0x30) = *(undefined4 **)(param_1 + 0x34);
-  **(undefined4 **)(param_1 + 0x34) = 0x1000000;
-  _IOConnectMapMemory(*(undefined4 *)(param_1 + 0x14),1,*(undefined4 *)puVar2,param_1 + 0x40,
-                      param_1 + 0x44,1);
-  iVar7 = *(int *)(param_1 + 0x40);
-  *(int *)(param_1 + 0x34) = iVar7 + 0x20;
-  *(int *)(param_1 + 0x30) = iVar7 + 0x1c;
-  *(int *)(param_1 + 0x38) = iVar7 + 0x20 + *(int *)(iVar7 + 0x10) * 4;
+  cmdWrite = (undefined4 *)((int (*)())FUN_00009ac0)(cmdWrite + 0xc,0,&local_58,uVar1,uVar8);
+  *cmdWrite = 0x5c8;
+  cmdWrite[1] = 0x10030000;
+  mapMemoryType = PTR_0000f1a0;
+  lastHeader = *(uint **)(ctx + 0x30);
+  *lastHeader = *(int *)(ctx + 0x34) - (int)lastHeader >> 2 | *lastHeader;
+  *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
+  **(undefined4 **)(ctx + 0x34) = 0x1000000;
+  _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)mapMemoryType,ctx + 0x40,
+                      ctx + 0x44,1);
+  iVar7 = *(int *)(ctx + 0x40);
+  *(int *)(ctx + 0x34) = iVar7 + 0x20;
+  *(int *)(ctx + 0x30) = iVar7 + 0x1c;
+  *(int *)(ctx + 0x38) = iVar7 + 0x20 + *(int *)(iVar7 + 0x10) * 4;
   *(undefined4 *)(iVar7 + 0x1c) = 0;
-  *(undefined4 *)(*(int *)(param_1 + 0xac4) * 8 + param_1 + 0x55c + 0x570) =
-       *(undefined4 *)(*(int *)(param_1 + 0x40) + 0x18);
+  *(undefined4 *)(*(int *)(ctx + 0xac4) * 8 + ctx + 0x55c + 0x570) =
+       *(undefined4 *)(*(int *)(ctx + 0x40) + 0x18);
   return;
 }
 
@@ -4313,17 +4317,17 @@ LAB_0000b7d0:
 }
 
 /* FUN_0000b7f0 @ 0xb7f0 (964 bytes) */
-int FUN_0000b7f0(param_1, param_2, param_3)
-  int param_1;
+int FUN_0000b7f0(ctx, param_2, param_3)
+  int ctx;
   undefined4 param_2;
   int param_3;
 {
-  undefined *puVar1;
-  uint *puVar2;
+  undefined *mapMemoryType;
+  uint *lastHeader;
   undefined4 uVar3;
   uint uVar4;
   int iVar5;
-  undefined4 *puVar6;
+  undefined4 *cmdWrite;
   uint uVar7;
   float local_78;
   float local_74;
@@ -4346,80 +4350,80 @@ int FUN_0000b7f0(param_1, param_2, param_3)
   undefined4 i2dHi6;
   undefined4 i2dLo6;
   
-  puVar6 = *(undefined4 **)(param_1 + 0x34);
-  if (*(undefined4 **)(param_1 + 0x38) <= puVar6 + 0xb0) {
-    puVar2 = *(uint **)(param_1 + 0x30);
-    *puVar2 = (int)puVar6 - (int)puVar2 >> 2 | *puVar2;
-    puVar1 = PTR_0000f1a0;
-    *(undefined4 **)(param_1 + 0x30) = *(undefined4 **)(param_1 + 0x34);
-    **(undefined4 **)(param_1 + 0x34) = 0x1000000;
-    _IOConnectMapMemory(*(undefined4 *)(param_1 + 0x14),1,*(undefined4 *)puVar1,param_1 + 0x40,
-                        param_1 + 0x44,1);
-    iVar5 = *(int *)(param_1 + 0x40);
-    *(int *)(param_1 + 0x34) = iVar5 + 0x20;
-    *(int *)(param_1 + 0x30) = iVar5 + 0x1c;
-    *(int *)(param_1 + 0x38) = iVar5 + 0x20 + *(int *)(iVar5 + 0x10) * 4;
+  cmdWrite = *(undefined4 **)(ctx + 0x34);
+  if (*(undefined4 **)(ctx + 0x38) <= cmdWrite + 0xb0) {
+    lastHeader = *(uint **)(ctx + 0x30);
+    *lastHeader = (int)cmdWrite - (int)lastHeader >> 2 | *lastHeader;
+    mapMemoryType = PTR_0000f1a0;
+    *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
+    **(undefined4 **)(ctx + 0x34) = 0x1000000;
+    _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)mapMemoryType,ctx + 0x40,
+                        ctx + 0x44,1);
+    iVar5 = *(int *)(ctx + 0x40);
+    *(int *)(ctx + 0x34) = iVar5 + 0x20;
+    *(int *)(ctx + 0x30) = iVar5 + 0x1c;
+    *(int *)(ctx + 0x38) = iVar5 + 0x20 + *(int *)(iVar5 + 0x10) * 4;
     *(undefined4 *)(iVar5 + 0x1c) = 0;
-    puVar6 = *(undefined4 **)(param_1 + 0x34);
+    cmdWrite = *(undefined4 **)(ctx + 0x34);
   }
-  puVar2 = *(uint **)(param_1 + 0x30);
-  *(undefined4 **)(param_1 + 0x34) = puVar6 + 0xb0;
-  *puVar2 = (int)puVar6 - (int)puVar2 >> 2 | *puVar2;
-  *(undefined4 **)(param_1 + 0x30) = puVar6;
-  *puVar6 = 0xa000000;
-  puVar6[1] = param_2;
-  puVar6[2] = (uint)(param_3 != 0);
-  puVar6[3] = *(undefined4 *)(param_1 + 0x11c);
-  puVar6 = puVar6 + 4;
+  lastHeader = *(uint **)(ctx + 0x30);
+  *(undefined4 **)(ctx + 0x34) = cmdWrite + 0xb0;
+  *lastHeader = (int)cmdWrite - (int)lastHeader >> 2 | *lastHeader;
+  *(undefined4 **)(ctx + 0x30) = cmdWrite;
+  *cmdWrite = 0xa000000;
+  cmdWrite[1] = param_2;
+  cmdWrite[2] = (uint)(param_3 != 0);
+  cmdWrite[3] = *(undefined4 *)(ctx + 0x11c);
+  cmdWrite = cmdWrite + 4;
   iVar5 = 0x10;
   do {
-    *puVar6 = 0x80000000;
-    puVar6 = puVar6 + 1;
+    *cmdWrite = 0x80000000;
+    cmdWrite = cmdWrite + 1;
     iVar5 = iVar5 + -1;
   } while (iVar5 != 0);
-  uVar3 = ((int (*)())FUN_000096a0)(puVar6);
-  puVar6 = (undefined4 *)((int (*)())FUN_00009700)(uVar3,1);
-  *puVar6 = 0x1100;
-  puVar6[1] = 0x1492;
-  puVar6[2] = 0x1110;
-  puVar6[3] = 0;
-  puVar6[4] = 0x1120;
-  uVar7 = *(uint *)(param_1 + 0x57c);
-  uVar4 = *(uint *)(param_1 + 0x578);
-  puVar6[5] = (uVar7 - 1) * 0x800 | uVar4 - 1 | 0x80000000;
-  puVar6[6] = 0x1130;
-  puVar6[7] = 0x10120800;
-  puVar6[8] = 0x1101;
-  puVar6[9] = 0x10001492;
-  puVar6[10] = 0x1111;
-  puVar6[0xb] = 0;
-  puVar6[0xc] = 0x1121;
-  puVar6[0xd] = ((uVar7 >> 1) - 1) * 0x800 | (uVar4 >> 1) - 1 | 0x80000000;
-  puVar6[0xe] = 0x1131;
-  puVar6[0xf] = 0x18044803;
-  puVar6[0x10] = ((unsigned char *)0x00001041U);
-  puVar6[0x11] = 3;
-  puVar6 = (undefined4 *)((int (*)())FUN_000099b0)(puVar6 + 0x12,&DAT_0000eb7c,7,&DAT_0000eb2c,5,3);
-  *puVar6 = 0x11a9;
-  puVar6[1] = 0x1b00;
-  puVar6[2] = 0x11aa;
-  puVar6[3] = 0xf;
-  puVar6[4] = 0x11ab;
-  puVar6[5] = 0xf;
-  puVar6[6] = 0x11ac;
-  puVar6[7] = 0xf;
-  i2dLo6 = *(undefined4 *)(param_1 + 0x57c);
-  i2dLo5 = *(undefined4 *)(param_1 + 0x578);
+  uVar3 = ((int (*)())FUN_000096a0)(cmdWrite);
+  cmdWrite = (undefined4 *)((int (*)())FUN_00009700)(uVar3,1);
+  *cmdWrite = 0x1100;
+  cmdWrite[1] = 0x1492;
+  cmdWrite[2] = 0x1110;
+  cmdWrite[3] = 0;
+  cmdWrite[4] = 0x1120;
+  uVar7 = *(uint *)(ctx + 0x57c);
+  uVar4 = *(uint *)(ctx + 0x578);
+  cmdWrite[5] = (uVar7 - 1) * 0x800 | uVar4 - 1 | 0x80000000;
+  cmdWrite[6] = 0x1130;
+  cmdWrite[7] = 0x10120800;
+  cmdWrite[8] = 0x1101;
+  cmdWrite[9] = 0x10001492;
+  cmdWrite[10] = 0x1111;
+  cmdWrite[0xb] = 0;
+  cmdWrite[0xc] = 0x1121;
+  cmdWrite[0xd] = ((uVar7 >> 1) - 1) * 0x800 | (uVar4 >> 1) - 1 | 0x80000000;
+  cmdWrite[0xe] = 0x1131;
+  cmdWrite[0xf] = 0x18044803;
+  cmdWrite[0x10] = ((unsigned char *)0x00001041U);
+  cmdWrite[0x11] = 3;
+  cmdWrite = (undefined4 *)((int (*)())FUN_000099b0)(cmdWrite + 0x12,&DAT_0000eb7c,7,&DAT_0000eb2c,5,3);
+  *cmdWrite = 0x11a9;
+  cmdWrite[1] = 0x1b00;
+  cmdWrite[2] = 0x11aa;
+  cmdWrite[3] = 0xf;
+  cmdWrite[4] = 0x11ab;
+  cmdWrite[5] = 0xf;
+  cmdWrite[6] = 0x11ac;
+  cmdWrite[7] = 0xf;
+  i2dLo6 = *(undefined4 *)(ctx + 0x57c);
+  i2dLo5 = *(undefined4 *)(ctx + 0x578);
   i2dHi1 = 0x43300000;
   i2dHi2 = 0x43300000;
   i2dHi3 = 0x43300000;
   i2dHi4 = 0x43300000;
   i2dHi6 = 0x43300000;
   i2dHi5 = 0x43300000;
-  i2dLo1 = (int)*(short *)(param_1 + 0x126) ^ 0x80000000;
-  i2dLo2 = (int)*(short *)(param_1 + 0x12a) ^ 0x80000000;
-  i2dLo3 = (int)*(short *)(param_1 + 0x124) ^ 0x80000000;
-  i2dLo4 = (int)*(short *)(param_1 + 0x128) ^ 0x80000000;
+  i2dLo1 = (int)*(short *)(ctx + 0x126) ^ 0x80000000;
+  i2dLo2 = (int)*(short *)(ctx + 0x12a) ^ 0x80000000;
+  i2dLo3 = (int)*(short *)(ctx + 0x124) ^ 0x80000000;
+  i2dLo4 = (int)*(short *)(ctx + 0x128) ^ 0x80000000;
   local_60 = 0;
   local_68 = 0;
   local_5c = (float)((double)CONCAT44(0x43300000,i2dLo6) - 4503599627370496.0);
@@ -4428,23 +4432,23 @@ int FUN_0000b7f0(param_1, param_2, param_3)
   local_6c = (float)((double)CONCAT44(0x43300000,i2dLo4) - 4503601774854144.0);
   local_70 = (float)((double)CONCAT44(0x43300000,i2dLo3) - 4503601774854144.0);
   local_64 = (float)((double)CONCAT44(0x43300000,i2dLo5) - 4503599627370496.0);
-  return ((int (*)())FUN_00009ac0)(puVar6 + 8,&local_78,&local_68,i2dLo5,i2dLo6);
+  return ((int (*)())FUN_00009ac0)(cmdWrite + 8,&local_78,&local_68,i2dLo5,i2dLo6);
 }
 
 /* FUN_0000bbc0 @ 0xbbc0 (864 bytes) */
-int FUN_0000bbc0(param_1, param_2, param_3, param_4, param_5, param_6)
-  int param_1;
+int FUN_0000bbc0(ctx, param_2, param_3, param_4, param_5, param_6)
+  int ctx;
   undefined4 param_2;
   undefined4 param_3;
   int param_4;
   uint param_5;
   int param_6;
 {
-  undefined *puVar1;
+  undefined *mapMemoryType;
   int iVar2;
-  uint *puVar3;
+  uint *lastHeader;
   undefined4 uVar4;
-  undefined4 *puVar5;
+  undefined4 *cmdWrite;
   uint uVar6;
   undefined4 local_58;
   float local_54;
@@ -4455,7 +4459,7 @@ int FUN_0000bbc0(param_1, param_2, param_3, param_4, param_5, param_6)
   undefined4 i2dHi2;
   uint i2dLo2;
   
-  puVar1 = PTR_0000f1a0;
+  mapMemoryType = PTR_0000f1a0;
   if (param_6 < 5) {
     iVar2 = param_4 / (4 / param_6);
     uVar6 = iVar2 + (uint)(param_4 != iVar2 * (4 / param_6));
@@ -4463,56 +4467,56 @@ int FUN_0000bbc0(param_1, param_2, param_3, param_4, param_5, param_6)
   else {
     uVar6 = (param_6 >> 2) * param_4;
   }
-  puVar5 = *(undefined4 **)(param_1 + 0x34);
-  if (*(undefined4 **)(param_1 + 0x38) <= puVar5 + 0x70) {
-    puVar3 = *(uint **)(param_1 + 0x30);
-    *puVar3 = (int)puVar5 - (int)puVar3 >> 2 | *puVar3;
-    *(undefined4 **)(param_1 + 0x30) = *(undefined4 **)(param_1 + 0x34);
-    **(undefined4 **)(param_1 + 0x34) = 0x1000000;
-    _IOConnectMapMemory(*(undefined4 *)(param_1 + 0x14),1,*(undefined4 *)puVar1,param_1 + 0x40,
-                        param_1 + 0x44,1);
-    iVar2 = *(int *)(param_1 + 0x40);
-    *(int *)(param_1 + 0x34) = iVar2 + 0x20;
-    *(int *)(param_1 + 0x30) = iVar2 + 0x1c;
-    *(int *)(param_1 + 0x38) = iVar2 + 0x20 + *(int *)(iVar2 + 0x10) * 4;
+  cmdWrite = *(undefined4 **)(ctx + 0x34);
+  if (*(undefined4 **)(ctx + 0x38) <= cmdWrite + 0x70) {
+    lastHeader = *(uint **)(ctx + 0x30);
+    *lastHeader = (int)cmdWrite - (int)lastHeader >> 2 | *lastHeader;
+    *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
+    **(undefined4 **)(ctx + 0x34) = 0x1000000;
+    _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)mapMemoryType,ctx + 0x40,
+                        ctx + 0x44,1);
+    iVar2 = *(int *)(ctx + 0x40);
+    *(int *)(ctx + 0x34) = iVar2 + 0x20;
+    *(int *)(ctx + 0x30) = iVar2 + 0x1c;
+    *(int *)(ctx + 0x38) = iVar2 + 0x20 + *(int *)(iVar2 + 0x10) * 4;
     *(undefined4 *)(iVar2 + 0x1c) = 0;
-    puVar5 = *(undefined4 **)(param_1 + 0x34);
+    cmdWrite = *(undefined4 **)(ctx + 0x34);
   }
-  puVar3 = *(uint **)(param_1 + 0x30);
-  *(undefined4 **)(param_1 + 0x34) = puVar5 + 0x70;
-  *puVar3 = (int)puVar5 - (int)puVar3 >> 2 | *puVar3;
-  *(undefined4 **)(param_1 + 0x30) = puVar5;
-  *puVar5 = 0x47000000;
-  puVar5[1] = param_2;
-  puVar5[2] = param_3;
-  puVar5 = puVar5 + 3;
+  lastHeader = *(uint **)(ctx + 0x30);
+  *(undefined4 **)(ctx + 0x34) = cmdWrite + 0x70;
+  *lastHeader = (int)cmdWrite - (int)lastHeader >> 2 | *lastHeader;
+  *(undefined4 **)(ctx + 0x30) = cmdWrite;
+  *cmdWrite = 0x47000000;
+  cmdWrite[1] = param_2;
+  cmdWrite[2] = param_3;
+  cmdWrite = cmdWrite + 3;
   iVar2 = 0xe;
   do {
-    *puVar5 = 0x80000000;
-    puVar5 = puVar5 + 1;
+    *cmdWrite = 0x80000000;
+    cmdWrite = cmdWrite + 1;
     iVar2 = iVar2 + -1;
   } while (iVar2 != 0);
-  uVar4 = ((int (*)())FUN_000096a0)(puVar5);
-  puVar5 = (undefined4 *)((int (*)())FUN_00009700)(uVar4,1);
-  *puVar5 = 0x1100;
-  puVar5[1] = 0xa92;
-  puVar5[2] = 0x1110;
-  puVar5[3] = 0;
-  puVar5[4] = 0x1120;
-  puVar5[5] = (param_5 - 1) * 0x800 | uVar6 - 1 | 0x80000000;
-  puVar5[6] = 0x1130;
-  puVar5[7] = 0xa60c;
-  puVar5[8] = ((unsigned char *)0x00001041U);
-  puVar5[9] = 1;
-  puVar5 = (undefined4 *)((int (*)())FUN_000099b0)(puVar5 + 10,&DAT_0000ecb4,2,0,0,1);
-  *puVar5 = 0x11a9;
-  puVar5[1] = 0x1b00;
-  puVar5[2] = 0x11aa;
-  puVar5[3] = 0xf;
-  puVar5[4] = 0x11ab;
-  puVar5[5] = 0xf;
-  puVar5[6] = 0x11ac;
-  puVar5[7] = 0xf;
+  uVar4 = ((int (*)())FUN_000096a0)(cmdWrite);
+  cmdWrite = (undefined4 *)((int (*)())FUN_00009700)(uVar4,1);
+  *cmdWrite = 0x1100;
+  cmdWrite[1] = 0xa92;
+  cmdWrite[2] = 0x1110;
+  cmdWrite[3] = 0;
+  cmdWrite[4] = 0x1120;
+  cmdWrite[5] = (param_5 - 1) * 0x800 | uVar6 - 1 | 0x80000000;
+  cmdWrite[6] = 0x1130;
+  cmdWrite[7] = 0xa60c;
+  cmdWrite[8] = ((unsigned char *)0x00001041U);
+  cmdWrite[9] = 1;
+  cmdWrite = (undefined4 *)((int (*)())FUN_000099b0)(cmdWrite + 10,&DAT_0000ecb4,2,0,0,1);
+  *cmdWrite = 0x11a9;
+  cmdWrite[1] = 0x1b00;
+  cmdWrite[2] = 0x11aa;
+  cmdWrite[3] = 0xf;
+  cmdWrite[4] = 0x11ab;
+  cmdWrite[5] = 0xf;
+  cmdWrite[6] = 0x11ac;
+  cmdWrite[7] = 0xf;
   i2dLo1 = uVar6 ^ 0x80000000;
   i2dLo2 = param_5 ^ 0x80000000;
   i2dHi2 = 0x43300000;
@@ -4521,18 +4525,18 @@ int FUN_0000bbc0(param_1, param_2, param_3, param_4, param_5, param_6)
   local_58 = 0;
   local_4c = (float)((double)CONCAT44(0x43300000,i2dLo2) - 4503601774854144.0);
   local_54 = (float)((double)CONCAT44(0x43300000,i2dLo1) - 4503601774854144.0);
-  ((int (*)())FUN_00009ac0)(puVar5 + 8,0,&local_58,uVar6,param_5);
-  puVar1 = PTR_0000f1a0;
-  puVar3 = *(uint **)(param_1 + 0x30);
-  *puVar3 = *(int *)(param_1 + 0x34) - (int)puVar3 >> 2 | *puVar3;
-  *(undefined4 **)(param_1 + 0x30) = *(undefined4 **)(param_1 + 0x34);
-  **(undefined4 **)(param_1 + 0x34) = 0x1000000;
-  _IOConnectMapMemory(*(undefined4 *)(param_1 + 0x14),1,*(undefined4 *)puVar1,param_1 + 0x40,
-                      param_1 + 0x44,1);
-  iVar2 = *(int *)(param_1 + 0x40);
-  *(int *)(param_1 + 0x34) = iVar2 + 0x20;
-  *(int *)(param_1 + 0x30) = iVar2 + 0x1c;
-  *(int *)(param_1 + 0x38) = iVar2 + 0x20 + *(int *)(iVar2 + 0x10) * 4;
+  ((int (*)())FUN_00009ac0)(cmdWrite + 8,0,&local_58,uVar6,param_5);
+  mapMemoryType = PTR_0000f1a0;
+  lastHeader = *(uint **)(ctx + 0x30);
+  *lastHeader = *(int *)(ctx + 0x34) - (int)lastHeader >> 2 | *lastHeader;
+  *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
+  **(undefined4 **)(ctx + 0x34) = 0x1000000;
+  _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)mapMemoryType,ctx + 0x40,
+                      ctx + 0x44,1);
+  iVar2 = *(int *)(ctx + 0x40);
+  *(int *)(ctx + 0x34) = iVar2 + 0x20;
+  *(int *)(ctx + 0x30) = iVar2 + 0x1c;
+  *(int *)(ctx + 0x38) = iVar2 + 0x20 + *(int *)(iVar2 + 0x10) * 4;
   *(undefined4 *)(iVar2 + 0x1c) = 0;
   return;
 }
@@ -4596,47 +4600,47 @@ int FUN_0000bf70(ctx, address, length, unused1, unused2, unused3, unused4, unuse
 }
 
 /* FUN_0000bfc0 @ 0xbfc0 (400 bytes) */
-int FUN_0000bfc0(param_1)
-  int param_1;
+int FUN_0000bfc0(ctx)
+  int ctx;
 {
-  undefined *puVar1;
-  uint *puVar2;
-  undefined4 *puVar3;
+  undefined *mapMemoryType;
+  uint *lastHeader;
+  undefined4 *cmdWrite;
   int iVar4;
   
-  puVar1 = PTR_0000f1a0;
-  puVar3 = *(undefined4 **)(param_1 + 0x34);
-  if (*(undefined4 **)(param_1 + 0x38) <= puVar3 + 0x10) {
-    puVar2 = *(uint **)(param_1 + 0x30);
-    *puVar2 = (int)puVar3 - (int)puVar2 >> 2 | *puVar2;
-    *(undefined4 **)(param_1 + 0x30) = *(undefined4 **)(param_1 + 0x34);
-    **(undefined4 **)(param_1 + 0x34) = 0x1000000;
-    _IOConnectMapMemory(*(undefined4 *)(param_1 + 0x14),1,*(undefined4 *)puVar1,param_1 + 0x40,
-                        param_1 + 0x44,1);
-    iVar4 = *(int *)(param_1 + 0x40);
-    *(int *)(param_1 + 0x34) = iVar4 + 0x20;
-    *(int *)(param_1 + 0x30) = iVar4 + 0x1c;
-    *(int *)(param_1 + 0x38) = iVar4 + 0x20 + *(int *)(iVar4 + 0x10) * 4;
+  mapMemoryType = PTR_0000f1a0;
+  cmdWrite = *(undefined4 **)(ctx + 0x34);
+  if (*(undefined4 **)(ctx + 0x38) <= cmdWrite + 0x10) {
+    lastHeader = *(uint **)(ctx + 0x30);
+    *lastHeader = (int)cmdWrite - (int)lastHeader >> 2 | *lastHeader;
+    *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
+    **(undefined4 **)(ctx + 0x34) = 0x1000000;
+    _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)mapMemoryType,ctx + 0x40,
+                        ctx + 0x44,1);
+    iVar4 = *(int *)(ctx + 0x40);
+    *(int *)(ctx + 0x34) = iVar4 + 0x20;
+    *(int *)(ctx + 0x30) = iVar4 + 0x1c;
+    *(int *)(ctx + 0x38) = iVar4 + 0x20 + *(int *)(iVar4 + 0x10) * 4;
     *(undefined4 *)(iVar4 + 0x1c) = 0;
-    puVar3 = *(undefined4 **)(param_1 + 0x34);
+    cmdWrite = *(undefined4 **)(ctx + 0x34);
   }
-  puVar2 = *(uint **)(param_1 + 0x30);
-  *(undefined4 **)(param_1 + 0x34) = puVar3 + 0x10;
-  *puVar2 = (int)puVar3 - (int)puVar2 >> 2 | *puVar2;
-  *(undefined4 **)(param_1 + 0x30) = puVar3;
-  *puVar3 = 0x15000000;
-  puVar3[1] = 0x20202020;
-  puVar1 = PTR_0000f1a0;
-  puVar2 = *(uint **)(param_1 + 0x30);
-  *puVar2 = *(int *)(param_1 + 0x34) - (int)puVar2 >> 2 | *puVar2;
-  *(undefined4 **)(param_1 + 0x30) = *(undefined4 **)(param_1 + 0x34);
-  **(undefined4 **)(param_1 + 0x34) = 0x1000000;
-  _IOConnectMapMemory(*(undefined4 *)(param_1 + 0x14),1,*(undefined4 *)puVar1,param_1 + 0x40,
-                      param_1 + 0x44,1);
-  iVar4 = *(int *)(param_1 + 0x40);
-  *(int *)(param_1 + 0x34) = iVar4 + 0x20;
-  *(int *)(param_1 + 0x30) = iVar4 + 0x1c;
-  *(int *)(param_1 + 0x38) = iVar4 + 0x20 + *(int *)(iVar4 + 0x10) * 4;
+  lastHeader = *(uint **)(ctx + 0x30);
+  *(undefined4 **)(ctx + 0x34) = cmdWrite + 0x10;
+  *lastHeader = (int)cmdWrite - (int)lastHeader >> 2 | *lastHeader;
+  *(undefined4 **)(ctx + 0x30) = cmdWrite;
+  *cmdWrite = 0x15000000;
+  cmdWrite[1] = 0x20202020;
+  mapMemoryType = PTR_0000f1a0;
+  lastHeader = *(uint **)(ctx + 0x30);
+  *lastHeader = *(int *)(ctx + 0x34) - (int)lastHeader >> 2 | *lastHeader;
+  *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
+  **(undefined4 **)(ctx + 0x34) = 0x1000000;
+  _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)mapMemoryType,ctx + 0x40,
+                      ctx + 0x44,1);
+  iVar4 = *(int *)(ctx + 0x40);
+  *(int *)(ctx + 0x34) = iVar4 + 0x20;
+  *(int *)(ctx + 0x30) = iVar4 + 0x1c;
+  *(int *)(ctx + 0x38) = iVar4 + 0x20 + *(int *)(iVar4 + 0x10) * 4;
   *(undefined4 *)(iVar4 + 0x1c) = 0;
   return;
 }
@@ -4910,22 +4914,20 @@ int FUN_0000caa0(ctx, arg1, arg2, arg3)
 }
 
 /* FUN_0000cb00 @ 0xcb00 (1136 bytes) */
-int FUN_0000cb00(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
+int FUN_0000cb00(ctx, srcPosPacked, srcSizePacked, headerWord, secondWord)
+  int ctx;
+  undefined4 srcPosPacked;
+  undefined4 srcSizePacked;
+  undefined4 headerWord;
+  undefined4 secondWord;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  uint uVar1;
-  undefined *puVar2;
-  uint uVar3;
-  uint *puVar4;
-  undefined4 uVar5;
-  undefined4 *puVar6;
-  int iVar7;
-  int iVar8;
+  unsigned int ghidra_home[8] = { ctx, srcPosPacked, srcSizePacked, headerWord, secondWord, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  uint halfWidth;
+  undefined *mapMemoryType;
+  uint srcWidth;
+  uint *lastHeader;
+  undefined4 cmdAfterClear;
+  undefined4 *cmdWrite;
   float local_78;
   float local_74;
   float local_70;
@@ -4944,115 +4946,119 @@ int FUN_0000cb00(param_1, param_2, param_3, param_4, param_5)
   uint i2dLo4;
   undefined4 i2dHi5;
   uint i2dLo5;
+  int mapBase;
+  int fillCount;
+  int srcHeight;
+  int closingMapBase;
   
-  puVar2 = PTR_0000f1a0;
+  mapMemoryType = PTR_0000f1a0;
   i2dHi4 = 0x43300000;
   i2dHi2 = 0x43300000;
   i2dHi1 = 0x43300000;
   i2dHi3 = 0x43300000;
-  (*(short *)((unsigned char *)ghidra_home + 10)) = (short)param_3;
-  (*(short *)((unsigned char *)ghidra_home + 6)) = (short)param_2;
-  (*(short *)((unsigned char *)ghidra_home + 8)) = (short)((uint)param_3 >> 0x10);
-  (*(short *)((unsigned char *)ghidra_home + 4)) = (short)((uint)param_2 >> 0x10);
-  puVar6 = *(undefined4 **)(param_1 + 0x34);
+  (*(short *)((unsigned char *)ghidra_home + 10)) = (short)srcSizePacked;
+  (*(short *)((unsigned char *)ghidra_home + 6)) = (short)srcPosPacked;
+  (*(short *)((unsigned char *)ghidra_home + 8)) = (short)((uint)srcSizePacked >> 0x10);
+  (*(short *)((unsigned char *)ghidra_home + 4)) = (short)((uint)srcPosPacked >> 0x10);
+  cmdWrite = *(undefined4 **)(ctx + 0x34);
   i2dLo2 = (int)(*(short *)((unsigned char *)ghidra_home + 6)) ^ 0x80000000;
   i2dLo4 = (int)(*(short *)((unsigned char *)ghidra_home + 10)) ^ 0x80000000;
   i2dLo1 = (int)(*(short *)((unsigned char *)ghidra_home + 4)) ^ 0x80000000;
   i2dLo3 = (int)(*(short *)((unsigned char *)ghidra_home + 8)) ^ 0x80000000;
-  uVar3 = *(uint *)(param_1 + 0x60);
-  iVar8 = *(int *)(param_1 + 100);
-  uVar1 = uVar3 >> 1;
+  srcWidth = *(uint *)(ctx + 0x60);
+  srcHeight = *(int *)(ctx + 100);
+  halfWidth = srcWidth >> 1;
   local_70 = (float)((double)CONCAT44(0x43300000,i2dLo1) - 4503601774854144.0);
   local_6c = (float)((double)CONCAT44(0x43300000,i2dLo3) - 4503601774854144.0);
   local_78 = (float)((double)CONCAT44(0x43300000,i2dLo2) - 4503601774854144.0) * 0.5;
   local_74 = (float)((double)CONCAT44(0x43300000,i2dLo4) - 4503601774854144.0) * 0.5;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = srcPosPacked;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = srcSizePacked;
   local_68 = local_78;
   local_64 = local_74;
   local_60 = local_70;
   local_5c = local_6c;
-  if (*(undefined4 **)(param_1 + 0x38) <= puVar6 + 0xa8) {
-    puVar4 = *(uint **)(param_1 + 0x30);
-    *puVar4 = (int)puVar6 - (int)puVar4 >> 2 | *puVar4;
-    *(undefined4 **)(param_1 + 0x30) = *(undefined4 **)(param_1 + 0x34);
-    **(undefined4 **)(param_1 + 0x34) = 0x1000000;
-    _IOConnectMapMemory(*(undefined4 *)(param_1 + 0x14),1,*(undefined4 *)puVar2,param_1 + 0x40,
-                        param_1 + 0x44,1);
-    iVar7 = *(int *)(param_1 + 0x40);
-    *(int *)(param_1 + 0x34) = iVar7 + 0x20;
-    *(int *)(param_1 + 0x30) = iVar7 + 0x1c;
-    *(int *)(param_1 + 0x38) = iVar7 + 0x20 + *(int *)(iVar7 + 0x10) * 4;
-    *(undefined4 *)(iVar7 + 0x1c) = 0;
-    puVar6 = *(undefined4 **)(param_1 + 0x34);
+  if (*(undefined4 **)(ctx + 0x38) <= cmdWrite + 0xa8) {
+    lastHeader = *(uint **)(ctx + 0x30);
+    *lastHeader = (int)cmdWrite - (int)lastHeader >> 2 | *lastHeader;
+    *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
+    **(undefined4 **)(ctx + 0x34) = 0x1000000;
+    _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)mapMemoryType,ctx + 0x40,
+                        ctx + 0x44,1);
+    mapBase = *(int *)(ctx + 0x40);
+    *(int *)(ctx + 0x34) = mapBase + 0x20;
+    *(int *)(ctx + 0x30) = mapBase + 0x1c;
+    *(int *)(ctx + 0x38) = mapBase + 0x20 + *(int *)(mapBase + 0x10) * 4;
+    *(undefined4 *)(mapBase + 0x1c) = 0;
+    cmdWrite = *(undefined4 **)(ctx + 0x34);
   }
-  puVar4 = *(uint **)(param_1 + 0x30);
-  *(undefined4 **)(param_1 + 0x34) = puVar6 + 0xa8;
-  *puVar4 = (int)puVar6 - (int)puVar4 >> 2 | *puVar4;
-  *(undefined4 **)(param_1 + 0x30) = puVar6;
-  *puVar6 = 0x18000000;
-  puVar6[1] = param_4;
-  puVar6[2] = 3;
-  puVar6[3] = param_5;
-  puVar6 = puVar6 + 4;
-  iVar7 = 8;
+  lastHeader = *(uint **)(ctx + 0x30);
+  *(undefined4 **)(ctx + 0x34) = cmdWrite + 0xa8;
+  *lastHeader = (int)cmdWrite - (int)lastHeader >> 2 | *lastHeader;
+  *(undefined4 **)(ctx + 0x30) = cmdWrite;
+  *cmdWrite = 0x18000000;
+  cmdWrite[1] = headerWord;
+  cmdWrite[2] = 3;
+  cmdWrite[3] = secondWord;
+  cmdWrite = cmdWrite + 4;
+  fillCount = 8;
   do {
-    *puVar6 = 0x80000000;
-    puVar6 = puVar6 + 1;
-    iVar7 = iVar7 + -1;
-  } while (iVar7 != 0);
-  uVar5 = ((int (*)())FUN_000096a0)(puVar6);
-  puVar6 = (undefined4 *)((int (*)())FUN_00009700)(uVar5,1);
-  *puVar6 = 0x1100;
-  puVar6[1] = 0xa92;
-  puVar6[2] = 0x1110;
-  puVar6[3] = 0;
-  puVar6[4] = 0x1120;
-  puVar6[5] = (iVar8 + -1) * 0x800 | (uVar3 >> 2) - 1 | 0x80000000;
-  puVar6[6] = 0x1130;
-  puVar6[7] = 0x10108802;
-  puVar6[8] = 0x1140;
-  puVar6[9] = 0xbf;
-  puVar6[10] = 0x1101;
-  puVar6[0xb] = 0x10000a92;
-  puVar6[0xc] = 0x1111;
-  puVar6[0xd] = 0;
-  puVar6[0xe] = 0x1121;
-  puVar6[0xf] = 0x8000000f;
-  puVar6[0x10] = 0x1131;
-  puVar6[0x11] = 0x1800a60e;
-  puVar6[0x12] = 0x1141;
-  puVar6[0x13] = 0xf;
-  puVar6[0x14] = ((unsigned char *)0x00001041U);
-  puVar6[0x15] = 3;
+    *cmdWrite = 0x80000000;
+    cmdWrite = cmdWrite + 1;
+    fillCount = fillCount + -1;
+  } while (fillCount != 0);
+  cmdAfterClear = ((int (*)())FUN_000096a0)(cmdWrite);
+  cmdWrite = (undefined4 *)((int (*)())FUN_00009700)(cmdAfterClear,1);
+  *cmdWrite = 0x1100;
+  cmdWrite[1] = 0xa92;
+  cmdWrite[2] = 0x1110;
+  cmdWrite[3] = 0;
+  cmdWrite[4] = 0x1120;
+  cmdWrite[5] = (srcHeight + -1) * 0x800 | (srcWidth >> 2) - 1 | 0x80000000;
+  cmdWrite[6] = 0x1130;
+  cmdWrite[7] = 0x10108802;
+  cmdWrite[8] = 0x1140;
+  cmdWrite[9] = 0xbf;
+  cmdWrite[10] = 0x1101;
+  cmdWrite[0xb] = 0x10000a92;
+  cmdWrite[0xc] = 0x1111;
+  cmdWrite[0xd] = 0;
+  cmdWrite[0xe] = 0x1121;
+  cmdWrite[0xf] = 0x8000000f;
+  cmdWrite[0x10] = 0x1131;
+  cmdWrite[0x11] = 0x1800a60e;
+  cmdWrite[0x12] = 0x1141;
+  cmdWrite[0x13] = 0xf;
+  cmdWrite[0x14] = ((unsigned char *)0x00001041U);
+  cmdWrite[0x15] = 3;
   i2dHi5 = 0x43300000;
-  DAT_0000f0b4 = (float)((double)CONCAT44(0x43300000,uVar1) - 4503599627370496.0);
+  DAT_0000f0b4 = (float)((double)CONCAT44(0x43300000,halfWidth) - 4503599627370496.0);
   DAT_0000f0b8 = DAT_0000f0b4;
   DAT_0000f0bc = DAT_0000f0b4;
   DAT_0000f0c0 = DAT_0000f0b4;
-  i2dLo5 = uVar1;
-  puVar6 = (undefined4 *)((int (*)())FUN_000099b0)(puVar6 + 0x16,&DAT_0000eef4,9,&DAT_0000f0b4,1,4);
-  *puVar6 = 0x11a9;
-  puVar6[1] = 0x1b05;
-  puVar6[2] = 0x11aa;
-  puVar6[3] = 0xf;
-  puVar6[4] = 0x11ab;
-  puVar6[5] = 0xf;
-  puVar6[6] = 0x11ac;
-  puVar6[7] = 0xf;
-  ((int (*)())FUN_00009ac0)(puVar6 + 8,&local_78,&local_68,uVar1,iVar8);
-  puVar2 = PTR_0000f1a0;
-  puVar4 = *(uint **)(param_1 + 0x30);
-  *puVar4 = *(int *)(param_1 + 0x34) - (int)puVar4 >> 2 | *puVar4;
-  *(undefined4 **)(param_1 + 0x30) = *(undefined4 **)(param_1 + 0x34);
-  **(undefined4 **)(param_1 + 0x34) = 0x1000000;
-  _IOConnectMapMemory(*(undefined4 *)(param_1 + 0x14),1,*(undefined4 *)puVar2,param_1 + 0x40,
-                      param_1 + 0x44,1);
-  iVar8 = *(int *)(param_1 + 0x40);
-  *(int *)(param_1 + 0x34) = iVar8 + 0x20;
-  *(int *)(param_1 + 0x30) = iVar8 + 0x1c;
-  *(int *)(param_1 + 0x38) = iVar8 + 0x20 + *(int *)(iVar8 + 0x10) * 4;
-  *(undefined4 *)(iVar8 + 0x1c) = 0;
+  i2dLo5 = halfWidth;
+  cmdWrite = (undefined4 *)((int (*)())FUN_000099b0)(cmdWrite + 0x16,&DAT_0000eef4,9,&DAT_0000f0b4,1,4);
+  *cmdWrite = 0x11a9;
+  cmdWrite[1] = 0x1b05;
+  cmdWrite[2] = 0x11aa;
+  cmdWrite[3] = 0xf;
+  cmdWrite[4] = 0x11ab;
+  cmdWrite[5] = 0xf;
+  cmdWrite[6] = 0x11ac;
+  cmdWrite[7] = 0xf;
+  ((int (*)())FUN_00009ac0)(cmdWrite + 8,&local_78,&local_68,halfWidth,srcHeight);
+  mapMemoryType = PTR_0000f1a0;
+  lastHeader = *(uint **)(ctx + 0x30);
+  *lastHeader = *(int *)(ctx + 0x34) - (int)lastHeader >> 2 | *lastHeader;
+  *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
+  **(undefined4 **)(ctx + 0x34) = 0x1000000;
+  _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)mapMemoryType,ctx + 0x40,
+                      ctx + 0x44,1);
+  closingMapBase = *(int *)(ctx + 0x40);
+  *(int *)(ctx + 0x34) = closingMapBase + 0x20;
+  *(int *)(ctx + 0x30) = closingMapBase + 0x1c;
+  *(int *)(ctx + 0x38) = closingMapBase + 0x20 + *(int *)(closingMapBase + 0x10) * 4;
+  *(undefined4 *)(closingMapBase + 0x1c) = 0;
   return;
 }
 

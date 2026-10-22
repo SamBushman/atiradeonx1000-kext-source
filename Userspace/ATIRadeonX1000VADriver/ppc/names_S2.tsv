@@ -280,3 +280,112 @@ local	FUN_0000ae80	local_80	d2iScratch2	CONFIRMED	(longlong)(int) float-to-int c
 use	FUN_0000ae80	iVar21	surfaceWidth	INFERRED	ctx+0x578, compared with the clip right (ctx+0x12a) and used as the x scale numerator	iVar21 = \*\(int \*\)\(param_1 \+ 0x578\);	iVar21 = \*\(int \*\)\(param_1 \+ 0x40\);
 use	FUN_0000ae80	iVar21	mapBase	INFERRED	ctx+0x40 after IOConnectMapMemory: base of the remapped command buffer	iVar21 = \*\(int \*\)\(param_1 \+ 0x40\);	iVar21 = 10;
 use	FUN_0000ae80	iVar21	fillCount	INFERRED	loop counter of the 10 clear words	iVar21 = 10;	
+local	FUN_000056a0	param_1	ctx	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): param_1+0x14 io_connect_t, +0x30 last header, +0x34 write cursor, +0x38 limit, +0x40 mapped buffer
+local	FUN_000056a0	puVar1	mapMemoryType	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): PTR_0000f1a0 global = memory type passed to IOConnectMapMemory
+local	FUN_000056a0	puVar2	lastHeader	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): ctx+0x30 previous packet header, OR-ed with the packet word count on close
+local	FUN_000056a0	puVar4	cmdWrite	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): ctx+0x34 command-stream write cursor
+local	FUN_00009c80	param_1	ctx	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): param_1+0x14 io_connect_t, +0x30 last header, +0x34 write cursor, +0x38 limit, +0x40 mapped buffer
+local	FUN_00009c80	puVar6	mapMemoryType	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): PTR_0000f1a0 global = memory type passed to IOConnectMapMemory
+local	FUN_00009c80	puVar7	lastHeader	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): ctx+0x30 previous packet header, OR-ed with the packet word count on close
+local	FUN_00009c80	puVar9	cmdWrite	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): ctx+0x34 command-stream write cursor
+local	FUN_0000a110	param_1	ctx	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): param_1+0x14 io_connect_t, +0x30 last header, +0x34 write cursor, +0x38 limit, +0x40 mapped buffer
+local	FUN_0000a110	puVar2	mapMemoryType	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): PTR_0000f1a0 global = memory type passed to IOConnectMapMemory
+local	FUN_0000a110	puVar3	lastHeader	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): ctx+0x30 previous packet header, OR-ed with the packet word count on close
+local	FUN_0000a110	puVar5	cmdWrite	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): ctx+0x34 command-stream write cursor
+local	FUN_0000a4e0	param_1	ctx	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): param_1+0x14 io_connect_t, +0x30 last header, +0x34 write cursor, +0x38 limit, +0x40 mapped buffer
+local	FUN_0000a4e0	puVar1	mapMemoryType	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): PTR_0000f1a0 global = memory type passed to IOConnectMapMemory
+local	FUN_0000a4e0	puVar2	lastHeader	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): ctx+0x30 previous packet header, OR-ed with the packet word count on close
+local	FUN_0000a4e0	puVar8	cmdWrite	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): ctx+0x34 command-stream write cursor
+local	FUN_0000aa00	param_1	ctx	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): param_1+0x14 io_connect_t, +0x30 last header, +0x34 write cursor, +0x38 limit, +0x40 mapped buffer
+local	FUN_0000aa00	puVar2	mapMemoryType	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): PTR_0000f1a0 global = memory type passed to IOConnectMapMemory
+local	FUN_0000aa00	puVar4	lastHeader	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): ctx+0x30 previous packet header, OR-ed with the packet word count on close
+local	FUN_0000aa00	puVar6	cmdWrite	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): ctx+0x34 command-stream write cursor
+local	FUN_0000b7f0	param_1	ctx	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): param_1+0x14 io_connect_t, +0x30 last header, +0x34 write cursor, +0x38 limit, +0x40 mapped buffer
+local	FUN_0000b7f0	puVar1	mapMemoryType	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): PTR_0000f1a0 global = memory type passed to IOConnectMapMemory
+local	FUN_0000b7f0	puVar2	lastHeader	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): ctx+0x30 previous packet header, OR-ed with the packet word count on close
+local	FUN_0000b7f0	puVar6	cmdWrite	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): ctx+0x34 command-stream write cursor
+local	FUN_0000bbc0	param_1	ctx	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): param_1+0x14 io_connect_t, +0x30 last header, +0x34 write cursor, +0x38 limit, +0x40 mapped buffer
+local	FUN_0000bbc0	puVar1	mapMemoryType	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): PTR_0000f1a0 global = memory type passed to IOConnectMapMemory
+local	FUN_0000bbc0	puVar3	lastHeader	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): ctx+0x30 previous packet header, OR-ed with the packet word count on close
+local	FUN_0000bbc0	puVar5	cmdWrite	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): ctx+0x34 command-stream write cursor
+local	FUN_0000bfc0	param_1	ctx	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): param_1+0x14 io_connect_t, +0x30 last header, +0x34 write cursor, +0x38 limit, +0x40 mapped buffer
+local	FUN_0000bfc0	puVar1	mapMemoryType	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): PTR_0000f1a0 global = memory type passed to IOConnectMapMemory
+local	FUN_0000bfc0	puVar2	lastHeader	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): ctx+0x30 previous packet header, OR-ed with the packet word count on close
+local	FUN_0000bfc0	puVar3	cmdWrite	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): ctx+0x34 command-stream write cursor
+local	FUN_0000cb00	param_1	ctx	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): param_1+0x14 io_connect_t, +0x30 last header, +0x34 write cursor, +0x38 limit, +0x40 mapped buffer
+local	FUN_0000cb00	puVar2	mapMemoryType	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): PTR_0000f1a0 global = memory type passed to IOConnectMapMemory
+local	FUN_0000cb00	puVar4	lastHeader	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): ctx+0x30 previous packet header, OR-ed with the packet word count on close
+local	FUN_0000cb00	puVar6	cmdWrite	CONFIRMED	command-buffer idiom shared by the VA packet builders (see FUN_0000ae80): ctx+0x34 command-stream write cursor
+local	FUN_00009700	param_1	cmdPtr	CONFIRMED	command-stream write pointer; the function returns the advanced pointer
+local	FUN_00009700	param_2	stageCount	INFERRED	number of pair/stage entries emitted by the three loops; compared with 1 for the 0x26010001 variant
+local	FUN_00009700	piVar2	tableCursor	INFERRED	write pointer after the fixed header words (param_1+6), then after the 0x824/0x825 block
+local	FUN_00009700	piVar3	entryCursor	INFERRED	write pointer inside the per-stage loops
+local	FUN_00009700	puVar1	nextEntry	INFERRED	pointer past one 4-word entry, stored into piVar3
+local	FUN_00009700	uVar4	stageMaskOrNext	INFERRED	loop value: next odd index in the first loop, accumulated mask word in the second
+local	FUN_00009700	uVar5	stageIndex	INFERRED	loop index of the stage loops
+local	FUN_00009700	iVar6	halfIndex	INFERRED	stage index / 2, later the running odd constant
+local	FUN_00009700	uVar7	programWord	INFERRED	0x26010001 or 0x6010001 depending on stageCount == 1
+local	FUN_000099b0	param_1	cmdPtr	CONFIRMED	command-stream write pointer; returns the advanced pointer
+local	FUN_000099b0	param_2	constBlockB	UNKNOWN	pointer to a block of 0x18-byte records loaded through FUN_00009980 (register 0)
+local	FUN_000099b0	param_3	constCountB	UNKNOWN	record count of constBlockB; (n-1)<<16 goes into registers 0x118c/0x118d
+local	FUN_000099b0	param_4	constBlockA	UNKNOWN	pointer to a block loaded through FUN_00009980 with register value 0x10000
+local	FUN_000099b0	param_5	constWordsA	UNKNOWN	word count of constBlockA (masked with 0xfffffff)
+local	FUN_000099b0	param_6	flagsWord	UNKNOWN	stored into register 0x1181
+local	FUN_000099b0	iVar1	countField	INFERRED	(constCountB - 1) << 16
+local	FUN_00009ac0	param_1	cmdPtr	CONFIRMED	command-stream write pointer; returns the advanced pointer
+local	FUN_00009ac0	param_2	srcCoords	INFERRED	4 floats {left, right, top, bottom} in source pixels; NULL = full 0..1 range
+local	FUN_00009ac0	param_3	dstCoords	INFERRED	4 words {left, right, top, bottom} of the destination rectangle (the 4 vertices are (left,top) (left,bottom) (right,bottom) (right,top))
+local	FUN_00009ac0	param_4	srcWidth	INFERRED	divisor of srcCoords[0..1]
+local	FUN_00009ac0	param_5	srcHeight	INFERRED	divisor of srcCoords[2..3]
+local	FUN_00009ac0	local_38	uLeft	CONFIRMED	left texture coordinate (srcCoords[0] / srcWidth, or 0.0)
+local	FUN_00009ac0	local_34	uRight	CONFIRMED	srcCoords[1] / srcWidth, or 1.0
+local	FUN_00009ac0	local_30	vTop	CONFIRMED	srcCoords[2] / srcHeight, or 0.0
+local	FUN_00009ac0	local_2c	vBottom	CONFIRMED	srcCoords[3] / srcHeight, or 1.0
+local	FUN_00009ac0	uVar1	dstTop	CONFIRMED	dstCoords[2]
+local	FUN_00009ac0	uVar3	dstRight	CONFIRMED	dstCoords[1]
+use	FUN_00009ac0	uVar2	dstLeft	CONFIRMED	dstCoords[0]	uVar2 = \*param_3;	uVar2 = param_3\[3\];
+use	FUN_00009ac0	uVar2	dstBottom	CONFIRMED	dstCoords[3]	uVar2 = param_3\[3\];	
+local	FUN_00009c80	param_2	headerWord	UNKNOWN	stored as word 1 of the packet header (cmdWrite[1])
+local	FUN_00009c80	param_3	enableFlag	INFERRED	stored as (param_3 != 0) in word 2
+local	FUN_00009c80	fVar1	hueAngle	INFERRED	ctx+0x12c: argument of cos/sin that build the colour matrix
+local	FUN_00009c80	fVar2	contrast	INFERRED	ctx+0x138 (video contrast control): multiplies the cos/sin terms
+local	FUN_00009c80	fVar3	saturation	INFERRED	ctx+0x130 (video saturation control): multiplies the cos/sin terms
+local	FUN_00009c80	dVar13	cosHue	CONFIRMED	_cos(hueAngle)
+local	FUN_00009c80	dVar14	sinHue	CONFIRMED	_sin(hueAngle)
+local	FUN_00009c80	uVar4	quadWidth	INFERRED	ctx+0x578 >> 2: target width in 4-pixel units, passed to FUN_00009ac0 as source width
+local	FUN_00009c80	uVar5	halfHeight	INFERRED	ctx+0x57c >> 1
+local	FUN_00009c80	uVar12	pitchBytes	INFERRED	ctx+0x588
+local	FUN_00009c80	uVar11	sizeWord	INFERRED	(quadWidth-1) | (halfHeight-1)<<11 | 0x80000000 written to registers 0x1120/0x1121
+local	FUN_00009c80	uVar8	cmdAfterClear	CONFIRMED	FUN_000096a0's return
+local	FUN_00009c80	local_78	dstLeft	INFERRED	4-float array {left, right, top, bottom} passed as &local_78 (FUN_00009ac0 dstCoords)
+local	FUN_00009c80	local_74	dstRight	INFERRED	second word
+local	FUN_00009c80	local_70	dstTop	INFERRED	third word
+local	FUN_00009c80	local_6c	dstBottom	INFERRED	fourth word
+use	FUN_00009c80	iVar10	mapBase	INFERRED	ctx+0x40 after IOConnectMapMemory	iVar10 = \*\(int \*\)\(param_1 \+ 0x40\);@1	iVar10 = 7;
+use	FUN_00009c80	iVar10	fillCount	INFERRED	loop counter of the padding words	iVar10 = 7;	iVar10 = \(uVar12 >> 2\) - 1;
+use	FUN_00009c80	iVar10	pitchWordsMinus1	INFERRED	(pitch in words) - 1, registers 0x1140/0x1141	iVar10 = \(uVar12 >> 2\) - 1;	iVar10 = \*\(int \*\)\(param_1 \+ 0x40\);
+use	FUN_00009c80	iVar10	mapBase	INFERRED	ctx+0x40 after the final IOConnectMapMemory	iVar10 = \*\(int \*\)\(param_1 \+ 0x40\);@2	
+use	FUN_0000a110	iVar6	mapBase	INFERRED	command-buffer idiom (see FUN_0000ae80): ctx+0x40 after IOConnectMapMemory	iVar6 = \*\(int \*\)\(param_1 \+ 0x40\);@1	iVar6 = \d+;
+use	FUN_0000a110	iVar6	fillCount	INFERRED	command-buffer idiom (see FUN_0000ae80): counter of the padding words	iVar6 = \d+;	iVar6 = \*\(int \*\)\(param_1 \+ 0x40\);
+use	FUN_0000a110	iVar6	mapBase	INFERRED	command-buffer idiom (see FUN_0000ae80): ctx+0x40 after the closing IOConnectMapMemory	iVar6 = \*\(int \*\)\(param_1 \+ 0x40\);@2	
+use	FUN_0000cb00	iVar7	mapBase	INFERRED	command-buffer idiom (see FUN_0000ae80): ctx+0x40 after IOConnectMapMemory	iVar7 = \*\(int \*\)\(param_1 \+ 0x40\);	iVar7 = \d+;
+use	FUN_0000cb00	iVar7	fillCount	INFERRED	command-buffer idiom (see FUN_0000ae80): counter of the padding words	iVar7 = \d+;	
+local	FUN_0000a110	param_2	headerWord	UNKNOWN	stored as word 1 of the packet header (cmdWrite[1])
+local	FUN_0000a110	param_3	enableFlag	INFERRED	stored as (param_3 != 0) in word 2
+local	FUN_0000a110	uVar1	quadWidth	INFERRED	ctx+0x578 >> 2: target width in 4-pixel units
+local	FUN_0000a110	uVar8	surfaceHeight	INFERRED	ctx+0x57c
+local	FUN_0000a110	uVar7	pitchBytes	INFERRED	ctx+0x588
+local	FUN_0000a110	uVar4	cmdAfterClear	CONFIRMED	FUN_000096a0's return
+local	FUN_0000a110	local_58	dstLeft	INFERRED	4-float array {left, right, top, bottom} passed as &local_58 (FUN_00009ac0 dstCoords)
+local	FUN_0000a110	local_54	dstRight	INFERRED	second word
+local	FUN_0000a110	local_50	dstTop	INFERRED	third word
+local	FUN_0000a110	local_4c	dstBottom	INFERRED	fourth word
+local	FUN_0000cb00	param_2	srcPosPacked	INFERRED	two packed 16-bit values (x<<16|y): split into the shorts at +4/+6
+local	FUN_0000cb00	param_3	srcSizePacked	INFERRED	two packed 16-bit values
+local	FUN_0000cb00	param_4	headerWord	UNKNOWN	stored as word 1 of the packet header
+local	FUN_0000cb00	param_5	secondWord	UNKNOWN	stored as word 3 of the packet header
+local	FUN_0000cb00	uVar1	halfWidth	INFERRED	ctx+0x60 >> 1
+local	FUN_0000cb00	uVar3	srcWidth	INFERRED	ctx+0x60
+local	FUN_0000cb00	uVar5	cmdAfterClear	CONFIRMED	FUN_000096a0's return
+use	FUN_0000cb00	iVar8	srcHeight	INFERRED	ctx+0x64, used as the height of the packet and source	iVar8 = \*\(int \*\)\(param_1 \+ 100\);	iVar8 = \*\(int \*\)\(param_1 \+ 0x40\);
+use	FUN_0000cb00	iVar8	closingMapBase	INFERRED	ctx+0x40 after the closing IOConnectMapMemory	iVar8 = \*\(int \*\)\(param_1 \+ 0x40\);	
