@@ -3553,6 +3553,10 @@ int FUN_0001ecd0(ctx, param_2, param_3, param_4, param_5, param_6, param_7, para
   uint param_7;
   int param_8;
 {
+  uint *headerWord;
+  byte *retireCounter;
+  int currentProgram;
+  int currentVertexArray;
   byte *pbVar1;
   bool bVar2;
   bool bVar3;
@@ -3797,8 +3801,8 @@ code_r0x0001f1ac:
         *(undefined4 *)(ctx + 0x26d0) = uVar17;
         *puVar16 = (((int)puVar30 - (int)puVar16) + -8) * 0x4000 | 0xc0001000;
         puVar30[-1] = (int)puVar30 - (int)puVar16;
-        puVar16 = *(uint **)(ctx + GLD_lastHeader);
-        *puVar16 = *puVar16 | (int)puVar30 - (int)puVar16 >> 2;
+        headerWord = *(uint **)(ctx + GLD_lastHeader);
+        *headerWord = *headerWord | (int)puVar30 - (int)headerWord >> 2;
         *(undefined4 **)(ctx + GLD_lastHeader) = puVar30;
         *puVar30 = 0x39000000;
         puVar30[1] = uVar8;
@@ -3812,8 +3816,8 @@ code_r0x0001f1ac:
         }
         puVar30[4] = uVar17;
         puVar16 = puVar30 + 8;
-        iVar12 = **(int **)(ctx + GLD_currentVertexArray);
-        if (*(int *)(iVar12 + 0x308) == 0 && *(int *)(iVar12 + 0x30c) == 0) {
+        currentVertexArray = **(int **)(ctx + GLD_currentVertexArray);
+        if (*(int *)(currentVertexArray + 0x308) == 0 && *(int *)(currentVertexArray + 0x30c) == 0) {
           puVar16 = puVar30 + 9;
           puVar30[8] = *(undefined4 *)(*(int **)(ctx + GLD_currentVertexArray))[0x8a];
           piVar28 = (int *)(*(int *)(*(int *)(ctx + GLD_currentVertexArray) + 0x228) + 0x10);
@@ -3915,8 +3919,8 @@ code_r0x0001f1ac:
           puVar15 = puVar16 + 1;
           *puVar16 = (*(int *)(ctx + 0x2720) + -1) * 0x10000 | 0xc0001000;
           if (*(int *)(*(int *)(ctx + GLD_capsBlock) + 0x11c) == 0) {
-            iVar12 = *(int *)(ctx + GLD_currentProgram);
-            if (iVar12 == 0) {
+            currentProgram = *(int *)(ctx + GLD_currentProgram);
+            if (currentProgram == 0) {
               if ((uVar35 & 2) != 0) {
                 puVar16[1] = *(uint *)(param_8 + 0x40);
                 puVar16[2] = *(uint *)(param_8 + 0x44);
@@ -3975,12 +3979,12 @@ code_r0x0001f1ac:
             }
           }
           else {
-            iVar12 = *(int *)(ctx + GLD_currentProgram);
+            currentProgram = *(int *)(ctx + GLD_currentProgram);
           }
           iVar22 = *(int *)(*(int *)(ctx + GLD_capsBlock) + 0x11c);
           iVar36 = 0x16;
           puVar16 = puVar15;
-          if ((iVar12 == 0) || (iVar36 = *(int *)(*(int *)(ctx + 0x29e8) + 0x28), iVar36 != 0))
+          if ((currentProgram == 0) || (iVar36 = *(int *)(*(int *)(ctx + 0x29e8) + 0x28), iVar36 != 0))
           {
             uVar24 = 0;
             puVar15 = (uint *)(ctx + 0x27dc);
@@ -4171,9 +4175,9 @@ code_r0x0001f7c0:
       (**(code **)(ctx + GLD_streamSetCurrent))(ring,puVar33);
       bVar2 = 0 < (int)puVar19;
       if (*(uint **)(ctx + GLD_streamSoftLimit) <= puVar33) {
-        pbVar25 = *(byte **)(ctx + GLD_retireCounter);
-        if (((uint)pbVar25[3] << 0x18 | (uint)pbVar25[2] << 0x10 | (uint)pbVar25[1] << 8 |
-            (uint)*pbVar25) == *(uint *)(pbVar25 + 0x20)) {
+        retireCounter = *(byte **)(ctx + GLD_retireCounter);
+        if (((uint)retireCounter[3] << 0x18 | (uint)retireCounter[2] << 0x10 | (uint)retireCounter[1] << 8 |
+            (uint)*retireCounter) == *(uint *)(retireCounter + 0x20)) {
           ((int (*)())FUN_0001a0f0)(ctx,0x1000000);
           bVar2 = 0 < (int)puVar19;
         }
@@ -5110,6 +5114,7 @@ int FUN_00022280()
 /* _gldUpdateDispatch @ 0x22290 (2632 bytes) */
 uint _gldUpdateDispatch(int ctx,int param_2,uint *dirtyBits,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
+  uint renderFlags;
   bool bVar1;
   byte bVar2;
   bool bVar3;
@@ -5418,9 +5423,9 @@ LAB_000225e8:
     }
     if ((*dirtyBits & 0x80) != 0) {
       if (*(int *)(ctx + GLD_boundFramebuffer) == 0) {
-        uVar22 = *(uint *)(ctx + GLD_renderFlags);
-        if ((uVar22 & 0x20) == 0) {
-          if ((uVar22 & 0x400) == 0) {
+        renderFlags = *(uint *)(ctx + GLD_renderFlags);
+        if ((renderFlags & 0x20) == 0) {
+          if ((renderFlags & 0x400) == 0) {
             *(code **)(param_2 + 0x60) = FUN_00022280;
           }
           else {
@@ -5430,18 +5435,18 @@ LAB_000225e8:
           *(undefined **)(param_2 + 0x58) = PTR__gldFinish_001e8978;
           *(undefined **)(param_2 + 0x5c) = puVar4;
         }
-        else if ((uVar22 & 0x400) == 0) {
+        else if ((renderFlags & 0x400) == 0) {
           *(undefined **)(param_2 + 0x60) = PTR_FUN_001e8938;
           *(undefined **)(param_2 + 0x58) = puVar7;
           *(undefined **)(param_2 + 0x5c) = puVar4;
         }
-        else if ((uVar22 & 0x800) == 0) {
+        else if ((renderFlags & 0x800) == 0) {
           *(undefined **)(param_2 + 0x58) = PTR__gldFinish_001e8978;
           *(undefined **)(param_2 + 0x5c) = puVar6;
           *(undefined **)(param_2 + 0x60) = PTR_FUN_001e8934;
         }
         else if (*(int *)(ctx + 0x26a0) == 0) {
-          ((int (*)())FUN_0001a9d0)(ctx,piVar10,puVar11,param_4,uVar20,uVar9,uVar22 & 0x800);
+          ((int (*)())FUN_0001a9d0)(ctx,piVar10,puVar11,param_4,uVar20,uVar9,renderFlags & 0x800);
           puVar4 = PTR__gldFlush_001e897c;
           *(undefined **)(param_2 + 0x58) = PTR__gldFinish_001e8978;
           *(undefined **)(param_2 + 0x5c) = puVar4;

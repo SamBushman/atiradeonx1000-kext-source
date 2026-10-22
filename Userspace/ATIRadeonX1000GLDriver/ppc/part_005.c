@@ -5594,6 +5594,7 @@ int FUN_000369f0(ctx, texture, face, level, param_5, param_6, param_7, width, he
   undefined4 param_14;
   undefined4 *param_15;
 {
+  undefined4 *packet;
   uint fg_alpha_func;
   undefined4 ga_point_size;
   undefined4 sc_scissor1;
@@ -6057,43 +6058,43 @@ LAB_00037c6c:
                 }
                 iVar22 = (int)puStack_10c - *(int *)(ctx + GLD_dataBase);
                 *(int *)(ctx + GLD_dataCursor) = (int)puStack_10c + iStack_d8;
-                puVar30 = (undefined4 *)
+                packet = (undefined4 *)
                           (**(code **)(ctx + GLD_streamAllocate))(iVar43,0x2a,a2,puStack_10c,iStack_d8);
                 uVar42 = 0;
-                *(undefined4 **)(ctx + GLD_streamCurrent) = puVar30;
+                *(undefined4 **)(ctx + GLD_streamCurrent) = packet;
                 lastHeader = *(uint **)(ctx + GLD_lastHeader);
-                *lastHeader = (int)puVar30 - (int)lastHeader >> 2 | *lastHeader;
-                *(undefined4 **)(ctx + GLD_lastHeader) = puVar30;
-                puVar30[2] = uStack_a0 | uStack_ac;
-                *puVar30 = 0x44000000;
-                puVar30[1] = 0x2a;
+                *lastHeader = (int)packet - (int)lastHeader >> 2 | *lastHeader;
+                *(undefined4 **)(ctx + GLD_lastHeader) = packet;
+                packet[2] = uStack_a0 | uStack_ac;
+                *packet = 0x44000000;
+                packet[1] = 0x2a;
                 dataBufferId = *(undefined4 *)(ctx + GLD_dataBufferId);
-                puVar30[9] = 0xd07;
-                puVar30[4] = iVar22;
-                puVar30[5] = ((unsigned char *)0x00001393U);
-                puVar30[3] = dataBufferId;
-                puVar30[6] = 10;
-                puVar30[7] = 0x5c8;
-                puVar30[8] = 0x20000;
-                puVar30[0xb] = 0xc0001000;
-                puVar30[0xc] = 0;
-                puVar30[10] = 0xffffffff;
-                puVar30[0xd] = 0x51b;
+                packet[9] = 0xd07;
+                packet[4] = iVar22;
+                packet[5] = ((unsigned char *)0x00001393U);
+                packet[3] = dataBufferId;
+                packet[6] = 10;
+                packet[7] = 0x5c8;
+                packet[8] = 0x20000;
+                packet[0xb] = 0xc0001000;
+                packet[0xc] = 0;
+                packet[10] = 0xffffffff;
+                packet[0xd] = 0x51b;
                 uVar26 = *(uint *)(iVar39 + 0x18);
-                puVar30[0xf] = 0x56b;
-                puVar30[0x11] = 0x56c;
-                puVar30[0x10] = 0;
-                puVar30[0x13] = 0x5c1;
-                puVar30[0x12] = uVar24;
-                puVar30[0x14] = 0;
-                puVar30[0x15] = 0x501;
-                puVar30[0xe] = uVar26 >> 0xf & 0xf00 | 0x2cc30fb;
+                packet[0xf] = 0x56b;
+                packet[0x11] = 0x56c;
+                packet[0x10] = 0;
+                packet[0x13] = 0x5c1;
+                packet[0x12] = uVar24;
+                packet[0x14] = 0;
+                packet[0x15] = 0x501;
+                packet[0xe] = uVar26 >> 0xf & 0xf00 | 0x2cc30fb;
                 if ((texture[0xd] == 0) || (*(char *)(texture[0xd] + 0x16) != '\x06')) {
                   iVar22 = *texture + 0x40 + iStack_dc;
-                  puVar30[0x16] = param_7 * *(int *)(iVar22 + 0x14) + *(int *)(iVar22 + 8);
+                  packet[0x16] = param_7 * *(int *)(iVar22 + 0x14) + *(int *)(iVar22 + 8);
                 }
                 else {
-                  puVar30[0x16] = 0;
+                  packet[0x16] = 0;
                 }
                 iVar22 = iStack_a4 + iStack_cc + texture[0xc];
                 uVar9 = *(ushort *)(iVar22 + 0xa6);
@@ -6115,10 +6116,10 @@ LAB_00037c6c:
                 else {
                   iVar22 = (uint)*(ushort *)((int)texture + 0x3e) << (*(uint *)(iVar39 + 0x14) & 7);
                 }
-                puVar30[0x18] = iVar22;
+                packet[0x18] = iVar22;
                 uVar26 = 0;
-                puVar30[0x17] = 0x502;
-                puVar30[0x19] = 0x5c0;
+                packet[0x17] = 0x502;
+                packet[0x19] = 0x5c0;
                 if (texture[0xd] != 0) {
                   bVar46 = *(byte *)(texture[0xd] + 0x15);
                   bVar19 = bVar46 >> 3;
@@ -6141,11 +6142,11 @@ LAB_00037c6c:
                     }
                   }
                 }
-                puVar30[0x1a] = uVar26;
-                puVar30[0x1b] = 0x5bb;
-                puVar30[0x1d] = 0x5bc;
-                puVar30[0x1e] = CONCAT22(uVar9,uVar10);
-                puVar30[0x1c] = 0;
+                packet[0x1a] = uVar26;
+                packet[0x1b] = 0x5bb;
+                packet[0x1d] = 0x5bc;
+                packet[0x1e] = CONCAT22(uVar9,uVar10);
+                packet[0x1c] = 0;
                 uVar26 = *(uint *)(iVar39 + 0x18) >> 0x17 & 0x1f;
                 if ((uVar26 < 3) || ((iVar22 = 1, 4 < uVar26 && (iVar22 = 2, uVar26 != 6)))) {
                   iVar22 = 0;
@@ -6153,20 +6154,20 @@ LAB_00037c6c:
                 uVar35 = (*(uint *)(iVar39 + 0x14) & 7) - iVar22;
                 uVar26 = 0;
                 uVar21 = (iStack_e4 + param_6) * 0x10000 | param_5 << (uVar35 & 0x3f) & 0xffff;
-                puVar30[0x24] = 0xd0b;
-                puVar30[0x22] = uStack_ec << 0x10 | width << (uVar35 & 0x3f) & 0xffff;
-                puVar30[0x1f] = 0x50e;
-                puVar30[0x20] = uVar21;
-                puVar30[0x21] = 0x50f;
-                puVar30[0x23] = 0x80000000;
-                puVar30[0x26] = 0x5c8;
-                puVar30[0x29] = 0;
-                puVar30[0x25] = 5;
-                puVar30[0x28] = ((unsigned char *)0x00001040U);
-                puVar30[0x27] = 0x10000;
-                *(undefined4 **)(ctx + GLD_streamCurrent) = puVar30 + 0x2a;
+                packet[0x24] = 0xd0b;
+                packet[0x22] = uStack_ec << 0x10 | width << (uVar35 & 0x3f) & 0xffff;
+                packet[0x1f] = 0x50e;
+                packet[0x20] = uVar21;
+                packet[0x21] = 0x50f;
+                packet[0x23] = 0x80000000;
+                packet[0x26] = 0x5c8;
+                packet[0x29] = 0;
+                packet[0x25] = 5;
+                packet[0x28] = ((unsigned char *)0x00001040U);
+                packet[0x27] = 0x10000;
+                *(undefined4 **)(ctx + GLD_streamCurrent) = packet + 0x2a;
                 (**(code **)(ctx + GLD_streamSetCurrent))
-                          (iVar43,puVar30 + 0x2a,a2,0,uVar44,uVar42,uVar21,puVar30 + 0x24);
+                          (iVar43,packet + 0x2a,a2,0,uVar44,uVar42,uVar21,packet + 0x24);
                 if (bVar1) break;
                 iStack_e4 = iStack_114;
               } while( true );
@@ -6207,37 +6208,37 @@ LAB_00037c6c:
                 uVar42 = height - iVar22;
               }
               uVar26 = (width << (*(uint *)(iVar39 + 0x14) & 7)) + 0x23 & 0xffffffe0;
-              puVar30 = (undefined4 *)
+              packet = (undefined4 *)
                         (**(code **)(ctx + GLD_streamAllocate))(iVar43,(uVar26 * uVar42 >> 2) + 0x193);
-              piStack_fc = puVar30 + 1;
-              *(undefined4 **)(ctx + GLD_streamCurrent) = puVar30;
+              piStack_fc = packet + 1;
+              *(undefined4 **)(ctx + GLD_streamCurrent) = packet;
               lastHeader = *(uint **)(ctx + GLD_lastHeader);
               uVar28 = *(undefined4 *)(iStack_9c + 0x1ec8);
               iVar45 = iStack_a4 + iStack_cc + texture[0xc];
               uStack_f8 = (uint)*(ushort *)(iVar45 + 0xa6);
               uVar9 = *(ushort *)(iVar45 + 0xa4);
-              *lastHeader = (int)puVar30 - (int)lastHeader >> 2 | *lastHeader;
-              *(undefined4 **)(ctx + GLD_lastHeader) = puVar30;
-              *puVar30 = 0x35000000;
-              puVar30[2] = uStack_100;
-              _memcpy(puVar30 + 3,uVar28,0x2f4);
+              *lastHeader = (int)packet - (int)lastHeader >> 2 | *lastHeader;
+              *(undefined4 **)(ctx + GLD_lastHeader) = packet;
+              *packet = 0x35000000;
+              packet[2] = uStack_100;
+              _memcpy(packet + 3,uVar28,0x2f4);
               uVar44 = *(uint *)(iVar39 + 0x18);
-              puVar30[0xa9] = (uVar42 - 1) * 0x800 & 0x3ff800 | uStack_104 | 0x80000000;
-              puVar30[0xa3] = uVar44 >> 0x1e | puVar30[0xa3] & 0xfffffffc;
+              packet[0xa9] = (uVar42 - 1) * 0x800 & 0x3ff800 | uStack_104 | 0x80000000;
+              packet[0xa3] = uVar44 >> 0x1e | packet[0xa3] & 0xfffffffc;
               uVar44 = *(uint *)(((unsigned char *)0x00003c14) +
                                 (int)(pcStack_d0 + (*(uint *)(iVar39 + 0x14) & 7) * 4));
-              puVar30[0xab] = uVar44 & 0x1f | 0xa600;
+              packet[0xab] = uVar44 & 0x1f | 0xa600;
               uVar24 = *(uint *)(iVar39 + 0x14);
               if ((uVar24 & 7) == 0) {
-                puVar30[0xab] = uVar44 & 0x1f | 0x8600;
+                packet[0xab] = uVar44 & 0x1f | 0x8600;
                 uVar24 = *(uint *)(iVar39 + 0x14);
               }
-              puVar30[0xad] =
+              packet[0xad] =
                    (uint)(0x800 < (int)uVar42) << 0x10 |
                    (uint)(0x800 < (int)width) << 0xf | (uVar26 >> (uVar24 & 7)) - 1 & 0x3fff;
-              puVar30[0x8d] =
+              packet[0x8d] =
                    *(uint *)(pcStack_d4 + (*(uint *)(iVar39 + 0x14) & 7) * 4 + 0x3c00) & 0x1f |
-                   puVar30[0x8d] & 0xffffffe0;
+                   packet[0x8d] & 0xffffffe0;
               iVar45 = texture[0xd];
               if ((iVar45 == 0) || ((*(byte *)(iVar45 + 0x15) & 0x18) == 0)) {
                 iVar27 = 0x20;
@@ -6258,7 +6259,7 @@ LAB_00037c6c:
                 iVar45 = 0;
                 uVar44 = *(uint *)(iVar39 + 0x18) >> 0xb & 0x180000;
               }
-              puVar30[0x9d] = iVar45;
+              packet[0x9d] = iVar45;
               if (*(char *)(texture[0xc] + 0x6d) != '\0') {
                 uVar9 = *(ushort *)((int)texture + 0x3e);
               }
@@ -6295,231 +6296,231 @@ LAB_00038698:
                                 (int)(pcStack_b0 + (*(uint *)(iVar39 + 0x14) & 7) * 4));
               uStack_144 = iVar22 + param_6 ^ 0x80000000;
               uStack_13c = uVar42 + iVar22 + param_6 ^ 0x80000000;
-              puVar30[0xb6] = uVar24 - 1 & 0x1fff | (uStack_f8 - 1) * 0x2000 & 0x3ffe000;
-              puVar40 = puVar30 + 0xcc;
-              puVar30[0x9f] =
+              packet[0xb6] = uVar24 - 1 & 0x1fff | (uStack_f8 - 1) * 0x2000 & 0x3ffe000;
+              puVar40 = packet + 0xcc;
+              packet[0x9f] =
                    uVar35 | uVar24 & 0x3ffe | iVar27 << 0x10 | uVar44 | (uVar21 & 0xf) << 0x15;
               uStack_140 = 0x43300000;
               uStack_148 = 0x43300000;
-              puVar30[0xc0] = 0x31080;
-              puVar30[0xc4] = 0;
-              puVar30[0xc1] = 0;
-              puVar30[0xc5] = ((unsigned char *)0x00001087U);
-              puVar30[0xc3] = 0x3f800000;
-              puVar30[0xc2] = 0x3f800000;
+              packet[0xc0] = 0x31080;
+              packet[0xc4] = 0;
+              packet[0xc1] = 0;
+              packet[0xc5] = ((unsigned char *)0x00001087U);
+              packet[0xc3] = 0x3f800000;
+              packet[0xc2] = 0x3f800000;
               fVar2 = (float)((double)CONCAT44(0x43300000,uStack_13c) - 4503601774854144.0);
               fVar3 = (float)((double)CONCAT44(0x43300000,uStack_144) - 4503601774854144.0);
               uVar44 = (uint)(int)((fVar2 - fVar3) * 6.0);
               lStack_138 = (longlong)(int)uVar44;
-              puVar30[199] = 0xc0033500;
-              puVar30[200] = 0x10031;
-              puVar30[0xca] = (fVar3 + fVar2) * 0.5;
-              puVar30[0xc9] = (fVar5 + fVar4) * 0.5;
-              puVar30[0xcb] = 0;
-              puVar30[0xc6] = uVar44 | uStack_108;
-              *piStack_fc = (int)puVar40 - (int)puVar30 >> 2;
+              packet[199] = 0xc0033500;
+              packet[200] = 0x10031;
+              packet[0xca] = (fVar3 + fVar2) * 0.5;
+              packet[0xc9] = (fVar5 + fVar4) * 0.5;
+              packet[0xcb] = 0;
+              packet[0xc6] = uVar44 | uStack_108;
+              *piStack_fc = (int)puVar40 - (int)packet >> 2;
               lastHeader = *(uint **)(ctx + GLD_lastHeader);
               *lastHeader = (int)puVar40 - (int)lastHeader >> 2 | *lastHeader;
               *(undefined4 **)(ctx + GLD_lastHeader) = puVar40;
-              puVar30[0xcd] = 0;
-              puVar30[0xcc] = 0x33000000;
-              puVar30[0xce] = ((unsigned char *)0x00001393U);
-              puVar30[0xcf] = 10;
-              puVar30[0xd0] = ((unsigned char *)0x000013c6U);
-              puVar30[0xd1] = 3;
-              puVar30[0xd2] = 0x5c8;
-              puVar30[0xd3] = 0x20000;
-              puVar30[0xd4] = ((unsigned char *)0x000010eaU);
+              packet[0xcd] = 0;
+              packet[0xcc] = 0x33000000;
+              packet[0xce] = ((unsigned char *)0x00001393U);
+              packet[0xcf] = 10;
+              packet[0xd0] = ((unsigned char *)0x000013c6U);
+              packet[0xd1] = 3;
+              packet[0xd2] = 0x5c8;
+              packet[0xd3] = 0x20000;
+              packet[0xd4] = ((unsigned char *)0x000010eaU);
               sc_edgerule = *(undefined4 *)(ctx + GLD_sc_edgerule);
-              puVar30[0xd6] = ((unsigned char *)0x000010faU);
-              puVar30[0xd5] = sc_edgerule;
+              packet[0xd6] = ((unsigned char *)0x000010faU);
+              packet[0xd5] = sc_edgerule;
               sc_screendoor = *(undefined4 *)(ctx + GLD_sc_screendoor);
-              puVar30[0xd8] = 0xc0001000;
-              puVar30[0xda] = 0x11004;
-              puVar30[0xd7] = sc_screendoor;
-              puVar30[0xdb] = *(undefined4 *)(ctx + GLD_gb_mspos0);
+              packet[0xd8] = 0xc0001000;
+              packet[0xda] = 0x11004;
+              packet[0xd7] = sc_screendoor;
+              packet[0xdb] = *(undefined4 *)(ctx + GLD_gb_mspos0);
               gb_mspos1 = *(undefined4 *)(ctx + GLD_gb_mspos1);
-              puVar30[0xdd] = ((unsigned char *)0x00001008U);
-              puVar30[0xdc] = gb_mspos1;
+              packet[0xdd] = ((unsigned char *)0x00001008U);
+              packet[0xdc] = gb_mspos1;
               gb_aa_config = *(undefined4 *)(ctx + GLD_gb_aa_config);
-              puVar30[0xdf] = ((unsigned char *)0x000010e9U);
-              puVar30[0xde] = gb_aa_config;
+              packet[0xdf] = ((unsigned char *)0x000010e9U);
+              packet[0xde] = gb_aa_config;
               sc_hyperz_en = *(undefined4 *)(ctx + GLD_sc_hyperz_en);
-              puVar30[0xe1] = ((unsigned char *)0x000013c7U);
-              puVar30[0xe0] = sc_hyperz_en;
+              packet[0xe1] = ((unsigned char *)0x000013c7U);
+              packet[0xe0] = sc_hyperz_en;
               zb_bw_cntl = *(undefined4 *)(ctx + GLD_zb_bw_cntl);
-              puVar30[0xe3] = ((unsigned char *)0x000013c1U);
-              puVar30[0xe2] = zb_bw_cntl;
+              packet[0xe3] = ((unsigned char *)0x000013c1U);
+              packet[0xe2] = zb_bw_cntl;
               zb_zstencilcntl = *(undefined4 *)(ctx + GLD_zb_zstencilcntl);
-              puVar30[0xe5] = 0x850;
-              puVar30[0xe4] = zb_zstencilcntl;
+              packet[0xe5] = 0x850;
+              packet[0xe4] = zb_zstencilcntl;
               vap_cntl_status = *(undefined4 *)(ctx + GLD_vap_cntl_status);
-              puVar30[0xe7] = 0x887;
-              puVar30[0xe6] = vap_cntl_status;
+              packet[0xe7] = 0x887;
+              packet[0xe6] = vap_cntl_status;
               vap_clip_cntl = *(undefined4 *)(ctx + GLD_vap_clip_cntl);
-              puVar30[0x189] = 0x82c;
-              puVar30[0xe8] = vap_clip_cntl;
+              packet[0x189] = 0x82c;
+              packet[0xe8] = vap_clip_cntl;
               uVar28 = *(undefined4 *)(GLD_vap_vte_cntl + ctx);
-              puVar30[0xe9] = ((unsigned char *)0x000010aeU);
-              puVar30[0x18a] = uVar28;
+              packet[0xe9] = ((unsigned char *)0x000010aeU);
+              packet[0x18a] = uVar28;
               su_cull_mode = *(undefined4 *)(ctx + GLD_su_cull_mode);
-              puVar30[0xeb] = ((unsigned char *)0x00001394U);
-              puVar30[0xea] = su_cull_mode;
+              packet[0xeb] = ((unsigned char *)0x00001394U);
+              packet[0xea] = su_cull_mode;
               rb3d_dither_ctl = *(undefined4 *)(ctx + GLD_rb3d_dither_ctl);
-              puVar30[0xed] = ((unsigned char *)0x00001380U);
-              puVar30[0xef] = ((unsigned char *)0x00001002U);
-              puVar30[0xee] = 0;
-              puVar30[0xec] = rb3d_dither_ctl;
-              puVar30[0xf0] = *(undefined4 *)(ctx + GLD_gb_enable);
+              packet[0xed] = ((unsigned char *)0x00001380U);
+              packet[0xef] = ((unsigned char *)0x00001002U);
+              packet[0xee] = 0;
+              packet[0xec] = rb3d_dither_ctl;
+              packet[0xf0] = *(undefined4 *)(ctx + GLD_gb_enable);
               gb_enable = *(undefined4 *)(ctx + GLD_gb_enable);
-              puVar30[0xf1] = 0x824;
-              puVar30[0xf0] = gb_enable;
+              packet[0xf1] = 0x824;
+              packet[0xf0] = gb_enable;
               vap_out_vtx_fmt_0 = *(undefined4 *)(ctx + GLD_vap_out_vtx_fmt_0);
-              puVar30[0xf3] = 0x825;
-              puVar30[0xf2] = vap_out_vtx_fmt_0;
+              packet[0xf3] = 0x825;
+              packet[0xf2] = vap_out_vtx_fmt_0;
               vap_out_vtx_fmt_1 = *(undefined4 *)(ctx + GLD_vap_out_vtx_fmt_1);
-              puVar30[0xf5] = 0x82d;
-              puVar30[0xf4] = vap_out_vtx_fmt_1;
+              packet[0xf5] = 0x82d;
+              packet[0xf4] = vap_out_vtx_fmt_1;
               vap_vtx_size = *(undefined4 *)(ctx + GLD_vap_vtx_size);
-              puVar30[0xf7] = 0x854;
-              puVar30[0xf6] = vap_vtx_size;
+              packet[0xf7] = 0x854;
+              packet[0xf6] = vap_vtx_size;
               vap_prog_stream_cntl_0_ptr = **(undefined4 **)(ctx + GLD_vap_prog_stream_cntl_0_ptr);
-              puVar30[0xf9] = 0x878;
-              puVar30[0xf8] = vap_prog_stream_cntl_0_ptr;
+              packet[0xf9] = 0x878;
+              packet[0xf8] = vap_prog_stream_cntl_0_ptr;
               vap_prog_stream_cntl_ext_0_ptr = **(undefined4 **)(ctx + GLD_vap_prog_stream_cntl_ext_0_ptr);
-              puVar30[0xfb] = ((unsigned char *)0x000013c0U);
-              puVar30[0xfa] = vap_prog_stream_cntl_ext_0_ptr;
+              packet[0xfb] = ((unsigned char *)0x000013c0U);
+              packet[0xfa] = vap_prog_stream_cntl_ext_0_ptr;
               zb_cntl = *(undefined4 *)(ctx + GLD_zb_cntl);
-              puVar30[0xfd] = ((unsigned char *)0x000012f0U);
-              puVar30[0xfc] = zb_cntl;
+              packet[0xfd] = ((unsigned char *)0x000012f0U);
+              packet[0xfc] = zb_cntl;
               uVar44 = *(uint *)(ctx + GLD_fg_fog_blend);
-              puVar30[0xfe] = uVar44;
+              packet[0xfe] = uVar44;
               if ((*(uint *)(((unsigned char *)0x0000352c) +
                             (int)(pcStack_a8 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18))
                   & 0x8000) == 0) {
-                puVar30[0xfe] = uVar44 & 0xfffffffe;
+                packet[0xfe] = uVar44 & 0xfffffffe;
               }
-              puVar30[0xff] = ((unsigned char *)0x000012f5U);
+              packet[0xff] = ((unsigned char *)0x000012f5U);
               fg_alpha_func = *(uint *)(ctx + GLD_fg_alpha_func);
-              puVar30[0x100] = fg_alpha_func;
+              packet[0x100] = fg_alpha_func;
               if ((*(uint *)(((unsigned char *)0x0000352c) +
                             (int)(pcStack_a8 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18))
                   & 0x8000) == 0) {
-                puVar30[0x100] = fg_alpha_func & 0xfffff7ff;
+                packet[0x100] = fg_alpha_func & 0xfffff7ff;
               }
-              puVar30[0x101] = ((unsigned char *)0x000010a2U);
+              packet[0x101] = ((unsigned char *)0x000010a2U);
               ga_poly_mode = *(undefined4 *)(ctx + GLD_ga_poly_mode);
-              puVar30[0x103] = ((unsigned char *)0x00001381U);
-              puVar30[0x102] = ga_poly_mode;
+              packet[0x103] = ((unsigned char *)0x00001381U);
+              packet[0x102] = ga_poly_mode;
               uVar44 = *(uint *)(ctx + 0x1cc0);
-              puVar30[0x104] = uVar44;
+              packet[0x104] = uVar44;
               if ((*(uint *)(((unsigned char *)0x0000352c) +
                             (int)(pcStack_a8 + (uint)(byte)((unsigned char *)0x00002b7f)[ctx] * 0x24 + 0x18))
                   & 0x4000) == 0) {
-                puVar30[0x104] = uVar44 & 0xfffffffc;
+                packet[0x104] = uVar44 & 0xfffffffc;
               }
-              puVar30[0x105] = ((unsigned char *)0x0000109eU);
+              packet[0x105] = ((unsigned char *)0x0000109eU);
               uVar28 = *(undefined4 *)(ctx + 0x1d6c);
-              puVar30[0x107] = ((unsigned char *)0x00001096U);
-              puVar30[0x106] = uVar28;
+              packet[0x107] = ((unsigned char *)0x00001096U);
+              packet[0x106] = uVar28;
               ga_color_control = *(undefined4 *)(ctx + GLD_ga_color_control);
-              puVar30[0x109] = ((unsigned char *)0x00001041U);
-              puVar30[0x106] = ga_color_control;
+              packet[0x109] = ((unsigned char *)0x00001041U);
+              packet[0x106] = ga_color_control;
               tx_enable = *(undefined4 *)(ctx + GLD_tx_enable);
-              puVar30[0x10b] = ((unsigned char *)0x00001046U);
-              puVar30[0x10a] = tx_enable;
+              packet[0x10b] = ((unsigned char *)0x00001046U);
+              packet[0x10a] = tx_enable;
               gb_ps3_enable = *(undefined4 *)(ctx + GLD_gb_ps3_enable);
-              puVar30[0x10d] = ((unsigned char *)0x00001094U);
-              puVar30[0x125] = ((unsigned char *)0x00001095U);
-              puVar30[0x127] = 0xc0221000;
-              puVar30[0x14b] = ((unsigned char *)0x00001180U);
-              puVar30[0x10f] = ((unsigned char *)0x00001095U);
-              puVar30[0x111] = ((unsigned char *)0x00001095U);
-              puVar30[0x113] = ((unsigned char *)0x00001095U);
-              puVar30[0x10c] = gb_ps3_enable;
-              puVar30[0x115] = ((unsigned char *)0x00001095U);
-              puVar30[0x117] = ((unsigned char *)0x00001095U);
-              puVar30[0x119] = ((unsigned char *)0x00001095U);
-              puVar30[0x11b] = ((unsigned char *)0x00001095U);
-              puVar30[0x11d] = ((unsigned char *)0x00001095U);
-              puVar30[0x11f] = ((unsigned char *)0x00001095U);
-              puVar30[0x121] = ((unsigned char *)0x00001095U);
-              puVar30[0x123] = ((unsigned char *)0x00001095U);
-              puVar30[0x10e] = 0;
-              puVar30[0x14c] = 2;
-              puVar30[0x14d] = ((unsigned char *)0x00001189U);
-              puVar30[0x14f] = ((unsigned char *)0x00001181U);
-              puVar30[0x151] = ((unsigned char *)0x0000118dU);
-              puVar30[0x153] = ((unsigned char *)0x0000118eU);
-              puVar30[0x155] = ((unsigned char *)0x0000118cU);
-              puVar30[0x157] = ((unsigned char *)0x000011a9U);
+              packet[0x10d] = ((unsigned char *)0x00001094U);
+              packet[0x125] = ((unsigned char *)0x00001095U);
+              packet[0x127] = 0xc0221000;
+              packet[0x14b] = ((unsigned char *)0x00001180U);
+              packet[0x10f] = ((unsigned char *)0x00001095U);
+              packet[0x111] = ((unsigned char *)0x00001095U);
+              packet[0x113] = ((unsigned char *)0x00001095U);
+              packet[0x10c] = gb_ps3_enable;
+              packet[0x115] = ((unsigned char *)0x00001095U);
+              packet[0x117] = ((unsigned char *)0x00001095U);
+              packet[0x119] = ((unsigned char *)0x00001095U);
+              packet[0x11b] = ((unsigned char *)0x00001095U);
+              packet[0x11d] = ((unsigned char *)0x00001095U);
+              packet[0x11f] = ((unsigned char *)0x00001095U);
+              packet[0x121] = ((unsigned char *)0x00001095U);
+              packet[0x123] = ((unsigned char *)0x00001095U);
+              packet[0x10e] = 0;
+              packet[0x14c] = 2;
+              packet[0x14d] = ((unsigned char *)0x00001189U);
+              packet[0x14f] = ((unsigned char *)0x00001181U);
+              packet[0x151] = ((unsigned char *)0x0000118dU);
+              packet[0x153] = ((unsigned char *)0x0000118eU);
+              packet[0x155] = ((unsigned char *)0x0000118cU);
+              packet[0x157] = ((unsigned char *)0x000011a9U);
               us_out_fmt_0 = *(undefined4 *)(ctx + GLD_us_out_fmt_0);
-              puVar30[0x159] = ((unsigned char *)0x000011aaU);
-              puVar30[0x158] = us_out_fmt_0;
+              packet[0x159] = ((unsigned char *)0x000011aaU);
+              packet[0x158] = us_out_fmt_0;
               us_out_fmt_1 = *(undefined4 *)(ctx + GLD_us_out_fmt_1);
-              puVar30[0x15b] = ((unsigned char *)0x000011abU);
-              puVar30[0x15a] = us_out_fmt_1;
+              packet[0x15b] = ((unsigned char *)0x000011abU);
+              packet[0x15a] = us_out_fmt_1;
               us_out_fmt_2 = *(undefined4 *)(ctx + GLD_us_out_fmt_2);
-              puVar30[0x15d] = ((unsigned char *)0x000011acU);
-              puVar30[0x15c] = us_out_fmt_2;
+              packet[0x15d] = ((unsigned char *)0x000011acU);
+              packet[0x15c] = us_out_fmt_2;
               us_out_fmt_3 = *(undefined4 *)(ctx + GLD_us_out_fmt_3);
-              puVar30[0x15f] = ((unsigned char *)0x000010c0U);
-              puVar30[0x15e] = us_out_fmt_3;
+              packet[0x15f] = ((unsigned char *)0x000010c0U);
+              packet[0x15e] = us_out_fmt_3;
               rs_count = *(undefined4 *)(ctx + GLD_rs_count);
-              puVar30[0x161] = ((unsigned char *)0x000010c1U);
-              puVar30[0x163] = ((unsigned char *)0x000010c8U);
-              puVar30[0x165] = ((unsigned char *)0x0000101dU);
-              puVar30[0x160] = rs_count;
+              packet[0x161] = ((unsigned char *)0x000010c1U);
+              packet[0x163] = ((unsigned char *)0x000010c8U);
+              packet[0x165] = ((unsigned char *)0x0000101dU);
+              packet[0x160] = rs_count;
               rs_ip_0 = *(undefined4 *)(ctx + GLD_rs_ip_0);
-              puVar30[0x167] = ((unsigned char *)0x0000138aU);
-              puVar30[0x169] = ((unsigned char *)0x0000138eU);
-              puVar30[0x16e] = 0;
-              puVar30[0x16b] = ((unsigned char *)0x00001040U);
-              puVar30[0x168] = 0;
-              puVar30[0x16a] = 0;
-              puVar30[0x16c] = 0;
-              puVar30[0x166] = rs_ip_0;
-              puVar30[0x16d] = ((unsigned char *)0x00001150U);
-              puVar30[0x16f] = ((unsigned char *)0x00001100U);
+              packet[0x167] = ((unsigned char *)0x0000138aU);
+              packet[0x169] = ((unsigned char *)0x0000138eU);
+              packet[0x16e] = 0;
+              packet[0x16b] = ((unsigned char *)0x00001040U);
+              packet[0x168] = 0;
+              packet[0x16a] = 0;
+              packet[0x16c] = 0;
+              packet[0x166] = rs_ip_0;
+              packet[0x16d] = ((unsigned char *)0x00001150U);
+              packet[0x16f] = ((unsigned char *)0x00001100U);
               tx_filter0 = *(undefined4 *)(ctx + GLD_tx_filter0);
-              puVar30[0x171] = ((unsigned char *)0x00001110U);
-              puVar30[0x170] = tx_filter0;
-              puVar30[0x172] = *(undefined4 *)(ctx + GLD_tx_filter1);
-              puVar30[0x173] = ((unsigned char *)0x00001120U);
+              packet[0x171] = ((unsigned char *)0x00001110U);
+              packet[0x170] = tx_filter0;
+              packet[0x172] = *(undefined4 *)(ctx + GLD_tx_filter1);
+              packet[0x173] = ((unsigned char *)0x00001120U);
               tx_format0 = *(undefined4 *)(ctx + GLD_tx_format0);
-              puVar30[0x175] = ((unsigned char *)0x00001130U);
-              puVar30[0x174] = tx_format0;
+              packet[0x175] = ((unsigned char *)0x00001130U);
+              packet[0x174] = tx_format0;
               tx_format1 = *(undefined4 *)(ctx + GLD_tx_format1);
-              puVar30[0x177] = ((unsigned char *)0x00001140U);
-              puVar30[0x176] = tx_format1;
+              packet[0x177] = ((unsigned char *)0x00001140U);
+              packet[0x176] = tx_format1;
               tx_format2 = *(undefined4 *)(ctx + GLD_tx_format2);
-              puVar30[0x179] = ((unsigned char *)0x000010f4U);
-              puVar30[0x17a] = 0xaaaa;
-              puVar30[0x17b] = ((unsigned char *)0x00001383U);
-              puVar30[0x178] = tx_format2;
+              packet[0x179] = ((unsigned char *)0x000010f4U);
+              packet[0x17a] = 0xaaaa;
+              packet[0x17b] = ((unsigned char *)0x00001383U);
+              packet[0x178] = tx_format2;
               rb3d_color_channel_mask = *(undefined4 *)(ctx + GLD_rb3d_color_channel_mask);
-              puVar30[0x17d] = ((unsigned char *)0x00001386U);
-              puVar30[0x17c] = rb3d_color_channel_mask;
+              packet[0x17d] = ((unsigned char *)0x00001386U);
+              packet[0x17c] = rb3d_color_channel_mask;
               rb3d_ropcntl = *(undefined4 *)(ctx + GLD_rb3d_ropcntl);
-              puVar30[0x17f] = 0x110f8;
-              puVar30[0x17e] = rb3d_ropcntl;
-              puVar30[0x180] = *(undefined4 *)(ctx + GLD_sc_scissor0);
+              packet[0x17f] = 0x110f8;
+              packet[0x17e] = rb3d_ropcntl;
+              packet[0x180] = *(undefined4 *)(ctx + GLD_sc_scissor0);
               sc_scissor1 = *(undefined4 *)(ctx + GLD_sc_scissor1);
-              puVar30[0x182] = ((unsigned char *)0x00001087U);
-              puVar30[0x181] = sc_scissor1;
+              packet[0x182] = ((unsigned char *)0x00001087U);
+              packet[0x181] = sc_scissor1;
               ga_point_size = *(undefined4 *)(ctx + GLD_ga_point_size);
-              puVar30[0x184] = 0x31080;
-              puVar30[0x183] = ga_point_size;
-              puVar30[0x185] = *(undefined4 *)(ctx + GLD_ga_point_s0);
-              puVar30[0x186] = *(undefined4 *)(ctx + GLD_ga_point_t0);
-              puVar30[0x187] = *(undefined4 *)(ctx + GLD_ga_point_s1);
-              puVar30[0x188] = *(undefined4 *)(ctx + GLD_ga_point_t1);
-              FUN_0004c100(puVar30 + 0xce,iVar43);
-              puVar29 = puVar30 + 0x18b;
-              for (puVar23 = puVar30 + 0x18c; ((uint)puVar23 & 0x1f) != 0; puVar23 = puVar23 + 1) {
+              packet[0x184] = 0x31080;
+              packet[0x183] = ga_point_size;
+              packet[0x185] = *(undefined4 *)(ctx + GLD_ga_point_s0);
+              packet[0x186] = *(undefined4 *)(ctx + GLD_ga_point_t0);
+              packet[0x187] = *(undefined4 *)(ctx + GLD_ga_point_s1);
+              packet[0x188] = *(undefined4 *)(ctx + GLD_ga_point_t1);
+              FUN_0004c100(packet + 0xce,iVar43);
+              puVar29 = packet + 0x18b;
+              for (puVar23 = packet + 0x18c; ((uint)puVar23 & 0x1f) != 0; puVar23 = puVar23 + 1) {
               }
               uVar44 = 0x80000000;
-              puVar30[0xa3] = ((int)puVar23 - (int)puVar30) * 8 & 0xffffffe0U | puVar30[0xa3] & 0x1f
+              packet[0xa3] = ((int)puVar23 - (int)packet) * 8 & 0xffffffe0U | packet[0xa3] & 0x1f
               ;
               iVar45 = ((int)((width << (*(uint *)(iVar39 + 0x14) & 7)) + 3) >> 2) +
                        ((int)puVar23 - (int)puVar29 >> 2);

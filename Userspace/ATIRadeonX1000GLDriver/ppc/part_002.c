@@ -8190,6 +8190,8 @@ LAB_00016630:
 /* FUN_00016670 @ 0x16670 (2312 bytes) */
 void FUN_00016670(int ctx,float *vertex,int param_3,int param_4,undefined4 param_5,undefined4 param_6,int param_7,int param_8,double fparam_1,double fparam_2)
 {
+  int writeCursor;
+  int engineState;
   bool bVar1;
   bool bVar2;
   float fVar3;
@@ -8254,19 +8256,19 @@ void FUN_00016670(int ctx,float *vertex,int param_3,int param_4,undefined4 param
   fStack_17c = vertex[0xe];
   fStack_188 = vertex[0xf];
   fStack_184 = vertex[0xc];
-  iVar10 = *(int *)(ctx + GLD_engineState);
+  engineState = *(int *)(ctx + GLD_engineState);
   ring = ctx + GLD_commandStream;
   fVar20 = vertex[2];
-  if (((unsigned char *)0x00002e0a)[iVar10] != '\0') {
+  if (((unsigned char *)0x00002e0a)[engineState] != '\0') {
     dVar26 = (double)vertex[0x13];
     dVar27 = DOUBLE_001aa200 - dVar26;
-    fStack_184 = (float)(dVar27 * (double)*(float *)(((unsigned char *)0x00002de0) + iVar10) +
+    fStack_184 = (float)(dVar27 * (double)*(float *)(((unsigned char *)0x00002de0) + engineState) +
                         (double)(float)((double)fStack_184 * dVar26));
-    fStack_180 = (float)(dVar27 * (double)*(float *)(((unsigned char *)0x00002de4) + iVar10) +
+    fStack_180 = (float)(dVar27 * (double)*(float *)(((unsigned char *)0x00002de4) + engineState) +
                         (double)(float)((double)fStack_180 * dVar26));
-    fStack_17c = (float)(dVar27 * (double)*(float *)(((unsigned char *)0x00002de8) + iVar10) +
+    fStack_17c = (float)(dVar27 * (double)*(float *)(((unsigned char *)0x00002de8) + engineState) +
                         (double)(float)((double)fStack_17c * dVar26));
-    fStack_188 = (float)(dVar27 * (double)*(float *)(((unsigned char *)0x00002dec) + iVar10) +
+    fStack_188 = (float)(dVar27 * (double)*(float *)(((unsigned char *)0x00002dec) + engineState) +
                         (double)(float)((double)fStack_188 * dVar26));
   }
   iVar10 = (int)(*(float *)(ctx + 0x2a54) + FLOAT_001aa10c);
@@ -8539,11 +8541,11 @@ LAB_00016a6c:
       uVar11 = extraout_r4_05;
       iVar10 = iStack_a0;
     }
-    iVar21 = *(int *)(ctx + GLD_writeCursor);
-    *(int *)(ctx + GLD_writeCursor) = iVar21 + 8;
-    *(undefined **)(iVar21 + iVar10) = ((unsigned char *)0x00001087U);
+    writeCursor = *(int *)(ctx + GLD_writeCursor);
+    *(int *)(ctx + GLD_writeCursor) = writeCursor + 8;
+    *(undefined **)(writeCursor + iVar10) = ((unsigned char *)0x00001087U);
     uVar15 = *(undefined4 *)(ring + 0x1ccc);
-    *(undefined4 *)(iVar21 + 4 + iVar10) = uVar15;
+    *(undefined4 *)(writeCursor + 4 + iVar10) = uVar15;
     FUN_0009d3b0(ring,uVar11,param_3,iVar10,pfVar12,iVar13,uVar15);
     FUN_000872e0(ring,puStack_ac);
   }
@@ -10060,6 +10062,7 @@ int FUN_00018a40(ctx, rasterPos, width, height, format, pixelType, pixels, param
   int param_8;
   uint param_9;
 {
+  int engineState;
   bool bVar1;
   bool bVar2;
   float fVar3;
@@ -10523,20 +10526,20 @@ LAB_000194f4:
       _glgProcessPixels(0,&local_420,puVar16,puVar17,uVar19,piVar18,pcVar22,pcVar26);
     }
     else {
-      iVar15 = *(int *)(ctx + GLD_engineState);
-      if (((((*(uint *)(((unsigned char *)0x000030b0) + iVar15) & 0x1ff) != 0) ||
-           ((*(uint *)(((unsigned char *)0x000030b4) + iVar15) & 0xff0000) != 0)) && (bVar2)) && (format != 0x1902)
+      engineState = *(int *)(ctx + GLD_engineState);
+      if (((((*(uint *)(((unsigned char *)0x000030b0) + engineState) & 0x1ff) != 0) ||
+           ((*(uint *)(((unsigned char *)0x000030b4) + engineState) & 0xff0000) != 0)) && (bVar2)) && (format != 0x1902)
          ) {
-        if ((*(uint *)(((unsigned char *)0x000030b0) + iVar15) & 2) == 0) {
-          if (((*(uint *)(((unsigned char *)0x000030b0) + iVar15) & 4) != 0) &&
-             (*(short *)(((unsigned char *)0x00002fe8) + iVar15) == -0x7fea)) {
-            uVar20 = (uVar20 - *(int *)(((unsigned char *)0x00002ff4) + iVar15)) + 1;
-            uVar13 = (uVar13 - *(int *)(((unsigned char *)0x00002ff0) + iVar15)) + 1;
+        if ((*(uint *)(((unsigned char *)0x000030b0) + engineState) & 2) == 0) {
+          if (((*(uint *)(((unsigned char *)0x000030b0) + engineState) & 4) != 0) &&
+             (*(short *)(((unsigned char *)0x00002fe8) + engineState) == -0x7fea)) {
+            uVar20 = (uVar20 - *(int *)(((unsigned char *)0x00002ff4) + engineState)) + 1;
+            uVar13 = (uVar13 - *(int *)(((unsigned char *)0x00002ff0) + engineState)) + 1;
           }
         }
-        else if (*(short *)(((unsigned char *)0x00002fa8) + iVar15) == -0x7fea) {
-          uVar20 = (uVar20 - *(int *)(((unsigned char *)0x00002fb4) + iVar15)) + 1;
-          uVar13 = (uVar13 - *(int *)(((unsigned char *)0x00002fb0) + iVar15)) + 1;
+        else if (*(short *)(((unsigned char *)0x00002fa8) + engineState) == -0x7fea) {
+          uVar20 = (uVar20 - *(int *)(((unsigned char *)0x00002fb4) + engineState)) + 1;
+          uVar13 = (uVar13 - *(int *)(((unsigned char *)0x00002fb0) + engineState)) + 1;
         }
         pcVar26 = *(char **)(ctx + GLD_engineObjects);
         iVar23 = *(int *)((int)*(float *)((int)pcVar26 + 0x140) + 0x30);
@@ -10556,9 +10559,9 @@ LAB_000194f4:
         local_3b8 = *(undefined4 *)(iVar23 + 0x9c);
       }
       uVar12 = 0x274;
-      fVar4 = *(float *)(((unsigned char *)0x00002e48) + iVar15) * *(float *)(ctx + 0x2a54);
-      fVar6 = *(float *)(((unsigned char *)0x00002e4c) + iVar15) * *(float *)(ctx + 0x2a58);
-      _memcpy(&local_3b0,((unsigned char *)0x00002e48) + iVar15,0x274);
+      fVar4 = *(float *)(((unsigned char *)0x00002e48) + engineState) * *(float *)(ctx + 0x2a54);
+      fVar6 = *(float *)(((unsigned char *)0x00002e4c) + engineState) * *(float *)(ctx + 0x2a58);
+      _memcpy(&local_3b0,((unsigned char *)0x00002e48) + engineState,0x274);
       uVar9 = 0x4000;
       if (fVar4 == 1.0) {
         uVar9 = 0;
