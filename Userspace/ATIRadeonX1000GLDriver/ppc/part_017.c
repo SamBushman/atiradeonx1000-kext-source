@@ -1,30 +1,55 @@
 #include "decls.h"
 
 /* FUN_000b9f10 @ 0xb9f10 (11376 bytes) */
-int FUN_000b9f10(param_1, param_2)
-  int param_1;
-  int param_2;
+int FUN_000b9f10(ctx, shader)
+  int ctx;
+  int shader;
 {
+  uint mulScanStart;
+  uint shiftIndex;
+  uint afterAddIndex;
+  int *laterSrc1Slot;
+  int *laterSrcSlot;
+  int shiftDstPtr;
+  int matMulInst;
+  int mulOffset;
+  int laterOffset;
+  int remaining;
+  int shiftCursorOffset;
+  int partnerOffset;
+  int followerCount;
+  int matrixSymbol;
+  int addInstOffset;
+  int shiftSrc;
+  int shiftOffset;
+  int shiftDst;
+  int addSrcIndex;
+  int instArray;
+  uint fusedPartnerIndex;
+  uint followerIndex;
+  uint addSearchIndex;
+  uint matMulSearchIndex;
+  uint mulSearchIndex;
   bool bVar1;
-  char cVar2;
-  char cVar3;
-  char cVar4;
+  char destEnableY;
+  char destEnableZ;
+  char destEnableW;
   bool bVar5;
-  int iVar6;
-  char *pcVar7;
-  uint uVar8;
-  int iVar9;
+  int remainingLater;
+  char *laterFlagCursor;
+  uint instCount;
+  int laterInstPtr;
   byte bVar10;
   byte bVar11;
   byte bVar12;
-  int iVar13;
+  int instEnd;
   byte bVar15;
   undefined4 *puVar14;
-  uint uVar16;
+  uint instCountAtEntry;
   undefined4 *puVar17;
   int iVar18;
   undefined4 uVar19;
-  int *piVar20;
+  int *laterDestSlot;
   undefined4 uVar21;
   int iVar22;
   undefined4 uVar23;
@@ -35,70 +60,70 @@ int FUN_000b9f10(param_1, param_2)
   undefined4 uVar28;
   undefined4 uVar29;
   undefined4 uVar30;
-  int iVar31;
-  uint uVar32;
-  uint uVar33;
+  int symbolTable;
+  uint sweepStep;
+  uint scanIndex;
   int iVar34;
-  int iVar35;
+  int instEndOffset;
   uint uVar36;
-  undefined4 *puVar37;
-  undefined4 *puVar38;
+  undefined4 *addInst;
+  undefined4 *mulInst;
   int iStack00000018;
   char local_68;
   char local_67;
   char local_66;
   char local_65 [25];
   
-  iVar31 = param_2 + 0x1c;
-  uVar16 = *(uint *)(param_2 + 0x14);
-  uVar8 = uVar16;
-  iStack00000018 = param_1;
-  if (uVar16 != 0) {
-    iVar35 = uVar16 * 0x74;
-    uVar32 = 0;
+  symbolTable = shader + 0x1c;
+  instCountAtEntry = *(uint *)(shader + 0x14);
+  instCount = instCountAtEntry;
+  iStack00000018 = ctx;
+  if (instCountAtEntry != 0) {
+    instEndOffset = instCountAtEntry * 0x74;
+    sweepStep = 0;
     do {
-      iVar9 = *(int *)(param_2 + 0x18);
-      uVar36 = uVar16 - uVar32;
-      iVar13 = iVar35 + iVar9;
-      cVar2 = *(char *)(iVar13 + -0x61);
-      cVar3 = *(char *)(iVar13 + -0x5d);
-      cVar4 = *(char *)(iVar13 + -0x59);
-      bVar1 = *(char *)(iVar13 + -0x65) == '\0';
-      if ((((bVar1) && (cVar2 == '\0')) && (cVar3 == '\0')) && (cVar4 == '\0')) {
+      laterInstPtr = *(int *)(shader + 0x18);
+      uVar36 = instCountAtEntry - sweepStep;
+      instEnd = instEndOffset + laterInstPtr;
+      destEnableY = *(char *)(instEnd + -0x61);
+      destEnableZ = *(char *)(instEnd + -0x5d);
+      destEnableW = *(char *)(instEnd + -0x59);
+      bVar1 = *(char *)(instEnd + -0x65) == '\0';
+      if ((((bVar1) && (destEnableY == '\0')) && (destEnableZ == '\0')) && (destEnableW == '\0')) {
 LAB_000ba610:
-        iVar9 = iVar35;
-        if (uVar36 < uVar8) {
+        shiftCursorOffset = instEndOffset;
+        if (uVar36 < instCount) {
           do {
             uVar36 = uVar36 + 1;
-            iVar13 = iVar9 + *(int *)(param_2 + 0x18);
-            _memcpy(iVar13 + -0x74,iVar13,0x74);
-            uVar8 = *(uint *)(param_2 + 0x14);
-            iVar9 = iVar9 + 0x74;
-          } while (uVar36 < uVar8);
+            shiftSrc = shiftCursorOffset + *(int *)(shader + 0x18);
+            _memcpy(shiftSrc + -0x74,shiftSrc,0x74);
+            instCount = *(uint *)(shader + 0x14);
+            shiftCursorOffset = shiftCursorOffset + 0x74;
+          } while (uVar36 < instCount);
         }
-        uVar8 = uVar8 - 1;
-        *(uint *)(param_2 + 0x14) = uVar8;
+        instCount = instCount - 1;
+        *(uint *)(shader + 0x14) = instCount;
       }
       else {
-        iVar18 = *(int *)(iVar13 + -0x70);
+        iVar18 = *(int *)(instEnd + -0x70);
         if (iVar18 == 1) {
-          if (uVar36 < uVar8) {
-            iVar9 = uVar8 - uVar36;
-            piVar20 = (int *)(iVar13 + 4);
+          if (uVar36 < instCount) {
+            remaining = instCount - uVar36;
+            laterDestSlot = (int *)(instEnd + 4);
             bVar12 = 0;
             bVar15 = 0;
             bVar11 = 0;
             bVar10 = 0;
             do {
-              if ((*piVar20 == 1) && (piVar20[1] == *(int *)(iVar13 + -0x6c))) {
-                bVar15 = bVar15 | *(byte *)((int)piVar20 + 0xb);
-                bVar12 = bVar12 | *(byte *)((int)piVar20 + 0xf);
-                bVar11 = bVar11 | *(byte *)((int)piVar20 + 0x13);
-                bVar10 = bVar10 | *(byte *)((int)piVar20 + 0x17);
+              if ((*laterDestSlot == 1) && (laterDestSlot[1] == *(int *)(instEnd + -0x6c))) {
+                bVar15 = bVar15 | *(byte *)((int)laterDestSlot + 0xb);
+                bVar12 = bVar12 | *(byte *)((int)laterDestSlot + 0xf);
+                bVar11 = bVar11 | *(byte *)((int)laterDestSlot + 0x13);
+                bVar10 = bVar10 | *(byte *)((int)laterDestSlot + 0x17);
               }
-              piVar20 = piVar20 + 0x1d;
-              iVar9 = iVar9 + -1;
-            } while (iVar9 != 0);
+              laterDestSlot = laterDestSlot + 0x1d;
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           else {
             bVar15 = 0;
@@ -106,34 +131,34 @@ LAB_000ba610:
             bVar11 = 0;
             bVar10 = 0;
           }
-          if ((((bVar1) || (bVar15 != 0)) && ((cVar2 == '\0' || (bVar12 != 0)))) &&
-             (((cVar3 == '\0' || (bVar11 != 0)) && ((cVar4 == '\0' || (bVar10 != 0))))))
+          if ((((bVar1) || (bVar15 != 0)) && ((destEnableY == '\0' || (bVar12 != 0)))) &&
+             (((destEnableZ == '\0' || (bVar11 != 0)) && ((destEnableW == '\0' || (bVar10 != 0))))))
           goto LAB_000ba610;
         }
         else {
-          if (*(int *)(iVar13 + -0x74) == 0x87a2) {
-            if (uVar36 < uVar8) {
-              iVar9 = uVar8 - uVar36;
-              pcVar7 = (char *)(iVar13 + 0x38);
+          if (*(int *)(instEnd + -0x74) == 0x87a2) {
+            if (uVar36 < instCount) {
+              remaining = instCount - uVar36;
+              laterFlagCursor = (char *)(instEnd + 0x38);
               bVar5 = true;
               bVar12 = 0;
               bVar11 = 0;
               bVar10 = 0;
               bVar15 = 0;
               do {
-                if (((*pcVar7 != '\0') || (pcVar7[0x1c] != '\0')) || (pcVar7[0x38] != '\0')) {
+                if (((*laterFlagCursor != '\0') || (laterFlagCursor[0x1c] != '\0')) || (laterFlagCursor[0x38] != '\0')) {
                   bVar5 = false;
                 }
-                if ((*(int *)(pcVar7 + -0x34) == 2) &&
-                   (*(int *)(pcVar7 + -0x30) == *(int *)(iVar13 + -0x6c))) {
-                  bVar12 = bVar12 | pcVar7[-0x29];
-                  bVar11 = bVar11 | pcVar7[-0x25];
-                  bVar10 = bVar10 | pcVar7[-0x21];
-                  bVar15 = bVar15 | pcVar7[-0x1d];
+                if ((*(int *)(laterFlagCursor + -0x34) == 2) &&
+                   (*(int *)(laterFlagCursor + -0x30) == *(int *)(instEnd + -0x6c))) {
+                  bVar12 = bVar12 | laterFlagCursor[-0x29];
+                  bVar11 = bVar11 | laterFlagCursor[-0x25];
+                  bVar10 = bVar10 | laterFlagCursor[-0x21];
+                  bVar15 = bVar15 | laterFlagCursor[-0x1d];
                 }
-                pcVar7 = pcVar7 + 0x74;
-                iVar9 = iVar9 + -1;
-              } while (iVar9 != 0);
+                laterFlagCursor = laterFlagCursor + 0x74;
+                remaining = remaining + -1;
+              } while (remaining != 0);
             }
             else {
               bVar5 = true;
@@ -142,74 +167,74 @@ LAB_000ba610:
               bVar10 = 0;
               bVar15 = 0;
             }
-            if (((((((bVar1) || (bVar12 != 0)) && ((cVar2 == '\0' || (bVar11 != 0)))) &&
-                  ((cVar3 == '\0' || (bVar10 != 0)))) && ((cVar4 == '\0' || (bVar15 != 0)))) &&
-                (bVar5)) || (uVar8 <= uVar36)) goto LAB_000ba610;
-            iVar9 = uVar8 - uVar36;
-            pcVar7 = (char *)(iVar13 + 0x38);
+            if (((((((bVar1) || (bVar12 != 0)) && ((destEnableY == '\0' || (bVar11 != 0)))) &&
+                  ((destEnableZ == '\0' || (bVar10 != 0)))) && ((destEnableW == '\0' || (bVar15 != 0)))) &&
+                (bVar5)) || (instCount <= uVar36)) goto LAB_000ba610;
+            remaining = instCount - uVar36;
+            laterFlagCursor = (char *)(instEnd + 0x38);
             bVar5 = true;
             do {
-              if (((*pcVar7 != '\0') || (pcVar7[0x1c] != '\0')) || (pcVar7[0x38] != '\0')) {
+              if (((*laterFlagCursor != '\0') || (laterFlagCursor[0x1c] != '\0')) || (laterFlagCursor[0x38] != '\0')) {
                 bVar5 = false;
               }
-              pcVar7 = pcVar7 + 0x74;
-              iVar9 = iVar9 + -1;
-            } while (iVar9 != 0);
+              laterFlagCursor = laterFlagCursor + 0x74;
+              remaining = remaining + -1;
+            } while (remaining != 0);
           }
           else {
-            if (*(char *)(param_2 + 0x7b) == '\0') {
+            if (*(char *)(shader + 0x7b) == '\0') {
               if (iVar18 == 2) {
-                iVar18 = *(int *)(iVar13 + -0x6c);
-                iVar22 = *(int *)(param_2 + 0x20);
+                iVar18 = *(int *)(instEnd + -0x6c);
+                iVar22 = *(int *)(shader + 0x20);
                 goto LAB_000ba1a0;
               }
             }
             else if (iVar18 == 2) {
-              iVar18 = *(int *)(iVar13 + -0x6c);
-              iVar22 = *(int *)(param_2 + 0x20);
+              iVar18 = *(int *)(instEnd + -0x6c);
+              iVar22 = *(int *)(shader + 0x20);
               if (*(int *)(iVar18 * 0x54 + iVar22 + 0x28) == 0x87c4) goto LAB_000ba664;
 LAB_000ba1a0:
               if (*(int *)(iVar18 * 0x54 + iVar22 + 0x24) == 0x87c0) goto LAB_000ba664;
             }
-            if (uVar36 < uVar8) {
+            if (uVar36 < instCount) {
               bVar10 = 0;
               bVar11 = 0;
               bVar12 = 0;
               bVar15 = 0;
               bVar5 = true;
-              iVar18 = iVar35;
-              uVar33 = uVar36;
+              iVar18 = instEndOffset;
+              scanIndex = uVar36;
               while( true ) {
-                iVar9 = iVar18 + iVar9;
-                if ((((*(int *)(iVar9 + 0x20) == 2) &&
-                     (iVar22 = *(int *)(iVar13 + -0x6c), *(int *)(iVar9 + 0x24) == iVar22)) ||
-                    ((*(int *)(iVar9 + 0x3c) == 2 &&
-                     (iVar22 = *(int *)(iVar13 + -0x6c), *(int *)(iVar9 + 0x40) == iVar22)))) ||
-                   ((*(int *)(iVar9 + 0x58) == 2 &&
-                    (iVar22 = *(int *)(iVar13 + -0x6c), *(int *)(iVar9 + 0x5c) == iVar22)))) {
-                  FUN_000b72d0(iVar31,iVar9,iVar22,&local_68,&local_67,&local_66,local_65);
+                laterInstPtr = iVar18 + laterInstPtr;
+                if ((((*(int *)(laterInstPtr + 0x20) == 2) &&
+                     (iVar22 = *(int *)(instEnd + -0x6c), *(int *)(laterInstPtr + 0x24) == iVar22)) ||
+                    ((*(int *)(laterInstPtr + 0x3c) == 2 &&
+                     (iVar22 = *(int *)(instEnd + -0x6c), *(int *)(laterInstPtr + 0x40) == iVar22)))) ||
+                   ((*(int *)(laterInstPtr + 0x58) == 2 &&
+                    (iVar22 = *(int *)(instEnd + -0x6c), *(int *)(laterInstPtr + 0x5c) == iVar22)))) {
+                  FUN_000b72d0(symbolTable,laterInstPtr,iVar22,&local_68,&local_67,&local_66,local_65);
                   if (((((bVar1) || ((local_68 == '\0' || (bVar15 != 0)))) &&
-                       ((cVar2 == '\0' || ((local_67 == '\0' || (bVar12 != 0)))))) &&
-                      ((cVar3 == '\0' || ((local_66 == '\0' || (bVar11 != 0)))))) &&
-                     ((cVar4 == '\0' || ((local_65[0] == '\0' || (bVar10 != 0)))))) {
-                    uVar8 = *(uint *)(param_2 + 0x14);
+                       ((destEnableY == '\0' || ((local_67 == '\0' || (bVar12 != 0)))))) &&
+                      ((destEnableZ == '\0' || ((local_66 == '\0' || (bVar11 != 0)))))) &&
+                     ((destEnableW == '\0' || ((local_65[0] == '\0' || (bVar10 != 0)))))) {
+                    instCount = *(uint *)(shader + 0x14);
                   }
                   else {
-                    uVar8 = *(uint *)(param_2 + 0x14);
+                    instCount = *(uint *)(shader + 0x14);
                     bVar5 = false;
                   }
                 }
-                if ((*(int *)(iVar9 + 4) == 2) && (*(int *)(iVar9 + 8) == *(int *)(iVar13 + -0x6c)))
+                if ((*(int *)(laterInstPtr + 4) == 2) && (*(int *)(laterInstPtr + 8) == *(int *)(instEnd + -0x6c)))
                 {
-                  bVar10 = bVar10 | *(byte *)(iVar9 + 0x1b);
-                  bVar15 = bVar15 | *(byte *)(iVar9 + 0xf);
-                  bVar12 = bVar12 | *(byte *)(iVar9 + 0x13);
-                  bVar11 = bVar11 | *(byte *)(iVar9 + 0x17);
+                  bVar10 = bVar10 | *(byte *)(laterInstPtr + 0x1b);
+                  bVar15 = bVar15 | *(byte *)(laterInstPtr + 0xf);
+                  bVar12 = bVar12 | *(byte *)(laterInstPtr + 0x13);
+                  bVar11 = bVar11 | *(byte *)(laterInstPtr + 0x17);
                 }
-                uVar33 = uVar33 + 1;
+                scanIndex = scanIndex + 1;
                 iVar18 = iVar18 + 0x74;
-                if (uVar8 <= uVar33) break;
-                iVar9 = *(int *)(param_2 + 0x18);
+                if (instCount <= scanIndex) break;
+                laterInstPtr = *(int *)(shader + 0x18);
               }
             }
             else {
@@ -219,192 +244,192 @@ LAB_000ba1a0:
               bVar11 = 0;
               bVar10 = 0;
             }
-            if (((((bVar1) || (bVar15 != 0)) && ((cVar2 == '\0' || (bVar12 != 0)))) &&
-                ((((cVar3 == '\0' || (bVar11 != 0)) && ((cVar4 == '\0' || (bVar10 != 0)))) &&
-                 (bVar5)))) || (uVar8 <= uVar36)) goto LAB_000ba610;
+            if (((((bVar1) || (bVar15 != 0)) && ((destEnableY == '\0' || (bVar12 != 0)))) &&
+                ((((destEnableZ == '\0' || (bVar11 != 0)) && ((destEnableW == '\0' || (bVar10 != 0)))) &&
+                 (bVar5)))) || (instCount <= uVar36)) goto LAB_000ba610;
             bVar5 = true;
             bVar11 = 0;
             bVar12 = 0;
             bVar15 = 0;
             bVar10 = 0;
-            iVar9 = iVar35;
-            uVar33 = uVar36;
+            laterOffset = instEndOffset;
+            scanIndex = uVar36;
             do {
-              iVar18 = iVar9 + *(int *)(param_2 + 0x18);
+              iVar18 = laterOffset + *(int *)(shader + 0x18);
               if ((((*(int *)(iVar18 + 0x20) == 2) &&
-                   (iVar22 = *(int *)(iVar13 + -0x6c), *(int *)(iVar18 + 0x24) == iVar22)) ||
+                   (iVar22 = *(int *)(instEnd + -0x6c), *(int *)(iVar18 + 0x24) == iVar22)) ||
                   ((*(int *)(iVar18 + 0x3c) == 2 &&
-                   (iVar22 = *(int *)(iVar13 + -0x6c), *(int *)(iVar18 + 0x40) == iVar22)))) ||
+                   (iVar22 = *(int *)(instEnd + -0x6c), *(int *)(iVar18 + 0x40) == iVar22)))) ||
                  ((*(int *)(iVar18 + 0x58) == 2 &&
-                  (iVar22 = *(int *)(iVar13 + -0x6c), *(int *)(iVar18 + 0x5c) == iVar22)))) {
-                FUN_000b72d0(iVar31,iVar18,iVar22,&local_68,&local_67,&local_66,local_65);
+                  (iVar22 = *(int *)(instEnd + -0x6c), *(int *)(iVar18 + 0x5c) == iVar22)))) {
+                FUN_000b72d0(symbolTable,iVar18,iVar22,&local_68,&local_67,&local_66,local_65);
                 if ((((bVar1) || ((local_68 == '\0' || (bVar11 != 0)))) &&
-                    (((cVar2 == '\0' || ((local_67 == '\0' || (bVar12 != 0)))) &&
-                     ((cVar3 == '\0' || ((local_66 == '\0' || (bVar15 != 0)))))))) &&
-                   ((cVar4 == '\0' || ((local_65[0] == '\0' || (bVar10 != 0)))))) {
-                  uVar8 = *(uint *)(param_2 + 0x14);
+                    (((destEnableY == '\0' || ((local_67 == '\0' || (bVar12 != 0)))) &&
+                     ((destEnableZ == '\0' || ((local_66 == '\0' || (bVar15 != 0)))))))) &&
+                   ((destEnableW == '\0' || ((local_65[0] == '\0' || (bVar10 != 0)))))) {
+                  instCount = *(uint *)(shader + 0x14);
                 }
                 else {
-                  uVar8 = *(uint *)(param_2 + 0x14);
+                  instCount = *(uint *)(shader + 0x14);
                   bVar5 = false;
                 }
               }
-              if ((*(int *)(iVar18 + 4) == 2) && (*(int *)(iVar18 + 8) == *(int *)(iVar13 + -0x6c)))
+              if ((*(int *)(iVar18 + 4) == 2) && (*(int *)(iVar18 + 8) == *(int *)(instEnd + -0x6c)))
               {
                 bVar10 = bVar10 | *(byte *)(iVar18 + 0x1b);
                 bVar11 = bVar11 | *(byte *)(iVar18 + 0xf);
                 bVar12 = bVar12 | *(byte *)(iVar18 + 0x13);
                 bVar15 = bVar15 | *(byte *)(iVar18 + 0x17);
               }
-              uVar33 = uVar33 + 1;
-              iVar9 = iVar9 + 0x74;
-            } while (uVar33 < uVar8);
+              scanIndex = scanIndex + 1;
+              laterOffset = laterOffset + 0x74;
+            } while (scanIndex < instCount);
           }
           if (bVar5) goto LAB_000ba610;
         }
       }
 LAB_000ba664:
-      uVar32 = uVar32 + 1;
-      iVar35 = iVar35 + -0x74;
-    } while (uVar16 != uVar32);
+      sweepStep = sweepStep + 1;
+      instEndOffset = instEndOffset + -0x74;
+    } while (instCountAtEntry != sweepStep);
   }
-  if (uVar8 != 0) {
-    uVar16 = 0;
+  if (instCount != 0) {
+    mulSearchIndex = 0;
     do {
-      iVar9 = uVar16 * 0x74;
-      iVar35 = *(int *)(param_2 + 0x18);
-      puVar38 = (undefined4 *)(iVar9 + iVar35);
-      if ((((*(int *)(iVar9 + iVar35) == 0x8786) && (puVar38[1] == 2)) &&
-          ((puVar38[3] != 0 && ((puVar38[4] != 0 && (puVar38[5] != 0)))))) &&
-         ((puVar38[6] != 0 && (uVar36 = uVar16 + 1, uVar32 = uVar36, uVar36 < uVar8)))) {
+      mulOffset = mulSearchIndex * 0x74;
+      instArray = *(int *)(shader + 0x18);
+      mulInst = (undefined4 *)(mulOffset + instArray);
+      if ((((*(int *)(mulOffset + instArray) == 0x8786) && (mulInst[1] == 2)) &&
+          ((mulInst[3] != 0 && ((mulInst[4] != 0 && (mulInst[5] != 0)))))) &&
+         ((mulInst[6] != 0 && (uVar36 = mulSearchIndex + 1, addSearchIndex = uVar36, uVar36 < instCount)))) {
         do {
-          iVar13 = uVar32 * 0x74;
-          puVar37 = (undefined4 *)(iVar35 + iVar13);
-          if (*(int *)(iVar35 + iVar13) == 0x8787) {
-            iVar18 = puVar37[8];
-            if ((iVar18 != 2) || (iVar22 = puVar38[2], puVar37[9] != iVar22)) {
-              if ((puVar37[0xf] != 2) || (iVar22 = puVar38[2], puVar37[0x10] != iVar22))
+          addInstOffset = addSearchIndex * 0x74;
+          addInst = (undefined4 *)(instArray + addInstOffset);
+          if (*(int *)(instArray + addInstOffset) == 0x8787) {
+            iVar18 = addInst[8];
+            if ((iVar18 != 2) || (iVar22 = mulInst[2], addInst[9] != iVar22)) {
+              if ((addInst[0xf] != 2) || (iVar22 = mulInst[2], addInst[0x10] != iVar22))
               goto LAB_000ba7ec;
               iVar34 = 2;
               if (iVar18 == 2) goto LAB_000ba7dc;
             }
             else {
-              iVar34 = puVar37[0xf];
+              iVar34 = addInst[0xf];
               if (iVar34 == 2) {
 LAB_000ba7dc:
-                if (puVar37[9] == puVar37[0x10]) goto LAB_000ba7ec;
+                if (addInst[9] == addInst[0x10]) goto LAB_000ba7ec;
               }
             }
             bVar1 = true;
-            if (uVar36 < uVar32) {
-              iVar6 = uVar32 - uVar36;
-              piVar20 = (int *)(iVar35 + uVar36 * 0x74 + 0x20);
+            if (uVar36 < addSearchIndex) {
+              remainingLater = addSearchIndex - uVar36;
+              laterSrcSlot = (int *)(instArray + uVar36 * 0x74 + 0x20);
               do {
-                if ((((*piVar20 == 2) && (piVar20[1] == iVar22)) ||
-                    ((piVar20[7] == 2 && (piVar20[8] == iVar22)))) ||
-                   ((((piVar20[0xe] == 2 && (piVar20[0xf] == iVar22)) ||
-                     ((iVar26 = piVar20[-7], iVar26 == 2 && (piVar20[-6] == iVar22)))) ||
-                    (((iVar26 == puVar38[8] && (piVar20[-6] == puVar38[9])) ||
-                     ((iVar26 == puVar38[0xf] && (piVar20[-6] == puVar38[0x10])))))))) {
+                if ((((*laterSrcSlot == 2) && (laterSrcSlot[1] == iVar22)) ||
+                    ((laterSrcSlot[7] == 2 && (laterSrcSlot[8] == iVar22)))) ||
+                   ((((laterSrcSlot[0xe] == 2 && (laterSrcSlot[0xf] == iVar22)) ||
+                     ((iVar26 = laterSrcSlot[-7], iVar26 == 2 && (laterSrcSlot[-6] == iVar22)))) ||
+                    (((iVar26 == mulInst[8] && (laterSrcSlot[-6] == mulInst[9])) ||
+                     ((iVar26 == mulInst[0xf] && (laterSrcSlot[-6] == mulInst[0x10])))))))) {
                   bVar1 = false;
                 }
-                piVar20 = piVar20 + 0x1d;
-                iVar6 = iVar6 + -1;
-              } while (iVar6 != 0);
+                laterSrcSlot = laterSrcSlot + 0x1d;
+                remainingLater = remainingLater + -1;
+              } while (remainingLater != 0);
               if (bVar1) goto LAB_000ba8a8;
 LAB_000ba754:
               bVar1 = true;
-              iVar6 = uVar32 - uVar36;
-              piVar20 = (int *)(uVar36 * 0x74 + iVar35 + 0x20);
-              if ((uVar32 < uVar16 + 2) || (uVar32 == 0)) {
-                iVar6 = 1;
+              remainingLater = addSearchIndex - uVar36;
+              laterSrcSlot = (int *)(uVar36 * 0x74 + instArray + 0x20);
+              if ((addSearchIndex < mulSearchIndex + 2) || (addSearchIndex == 0)) {
+                remainingLater = 1;
               }
               do {
-                if ((((((*piVar20 == 2) && (piVar20[1] == iVar22)) ||
-                      ((piVar20[7] == 2 && (piVar20[8] == iVar22)))) ||
-                     ((piVar20[0xe] == 2 && (piVar20[0xf] == iVar22)))) ||
-                    (((*piVar20 == 2 && (piVar20[1] == puVar37[2])) ||
-                     ((((piVar20[7] == 2 && (piVar20[8] == puVar37[2])) ||
-                       ((piVar20[0xe] == 2 && (piVar20[0xf] == puVar37[2])))) ||
-                      ((iVar26 = piVar20[-7], iVar18 == iVar26 && (piVar20[-6] == puVar37[9]))))))))
-                   || (((iVar26 == iVar34 && (piVar20[-6] == puVar37[0x10])) ||
-                       ((iVar26 == puVar37[1] && (piVar20[-6] == puVar37[2])))))) {
+                if ((((((*laterSrcSlot == 2) && (laterSrcSlot[1] == iVar22)) ||
+                      ((laterSrcSlot[7] == 2 && (laterSrcSlot[8] == iVar22)))) ||
+                     ((laterSrcSlot[0xe] == 2 && (laterSrcSlot[0xf] == iVar22)))) ||
+                    (((*laterSrcSlot == 2 && (laterSrcSlot[1] == addInst[2])) ||
+                     ((((laterSrcSlot[7] == 2 && (laterSrcSlot[8] == addInst[2])) ||
+                       ((laterSrcSlot[0xe] == 2 && (laterSrcSlot[0xf] == addInst[2])))) ||
+                      ((iVar26 = laterSrcSlot[-7], iVar18 == iVar26 && (laterSrcSlot[-6] == addInst[9]))))))))
+                   || (((iVar26 == iVar34 && (laterSrcSlot[-6] == addInst[0x10])) ||
+                       ((iVar26 == addInst[1] && (laterSrcSlot[-6] == addInst[2])))))) {
                   bVar1 = false;
                 }
-                piVar20 = piVar20 + 0x1d;
-                iVar6 = iVar6 + -1;
-              } while (iVar6 != 0);
+                laterSrcSlot = laterSrcSlot + 0x1d;
+                remainingLater = remainingLater + -1;
+              } while (remainingLater != 0);
               if (bVar1) {
 LAB_000bc018:
                 bVar1 = true;
-                uVar33 = uVar32 + 1;
-                if (uVar33 < uVar8) {
-                  iVar6 = uVar8 - uVar33;
-                  piVar20 = (int *)(iVar35 + uVar33 * 0x74 + 0x20);
+                afterAddIndex = addSearchIndex + 1;
+                if (afterAddIndex < instCount) {
+                  remainingLater = instCount - afterAddIndex;
+                  laterSrcSlot = (int *)(instArray + afterAddIndex * 0x74 + 0x20);
                   do {
-                    if ((((*piVar20 == 2) && (piVar20[1] == iVar22)) ||
-                        ((piVar20[7] == 2 && (piVar20[8] == iVar22)))) ||
-                       ((piVar20[0xe] == 2 && (piVar20[0xf] == iVar22)))) {
+                    if ((((*laterSrcSlot == 2) && (laterSrcSlot[1] == iVar22)) ||
+                        ((laterSrcSlot[7] == 2 && (laterSrcSlot[8] == iVar22)))) ||
+                       ((laterSrcSlot[0xe] == 2 && (laterSrcSlot[0xf] == iVar22)))) {
                       bVar1 = false;
                     }
-                    piVar20 = piVar20 + 0x1d;
-                    iVar6 = iVar6 + -1;
-                  } while (iVar6 != 0);
+                    laterSrcSlot = laterSrcSlot + 0x1d;
+                    remainingLater = remainingLater + -1;
+                  } while (remainingLater != 0);
                   if (!bVar1) goto LAB_000bd6dc;
                 }
-                iVar35 = puVar37[9];
-                *puVar38 = 0x8788;
-                if (iVar35 == iVar22) {
-                  uVar21 = puVar37[0x10];
-                  uVar25 = puVar37[0x11];
-                  uVar19 = puVar37[0x12];
-                  uVar27 = puVar37[0x13];
-                  uVar23 = puVar37[0x14];
-                  uVar30 = puVar37[0x15];
-                  puVar38[0x16] = iVar34;
-                  puVar38[0x17] = uVar21;
-                  puVar38[0x18] = uVar25;
-                  puVar38[0x19] = uVar19;
-                  puVar38[0x1a] = uVar27;
-                  puVar38[0x1b] = uVar23;
-                  puVar38[0x1c] = uVar30;
+                addSrcIndex = addInst[9];
+                *mulInst = 0x8788;
+                if (addSrcIndex == iVar22) {
+                  uVar21 = addInst[0x10];
+                  uVar25 = addInst[0x11];
+                  uVar19 = addInst[0x12];
+                  uVar27 = addInst[0x13];
+                  uVar23 = addInst[0x14];
+                  uVar30 = addInst[0x15];
+                  mulInst[0x16] = iVar34;
+                  mulInst[0x17] = uVar21;
+                  mulInst[0x18] = uVar25;
+                  mulInst[0x19] = uVar19;
+                  mulInst[0x1a] = uVar27;
+                  mulInst[0x1b] = uVar23;
+                  mulInst[0x1c] = uVar30;
                 }
                 else {
-                  uVar21 = puVar37[10];
-                  uVar25 = puVar37[0xb];
-                  uVar29 = puVar37[0xc];
-                  uVar28 = puVar37[0xd];
-                  uVar24 = puVar37[0xe];
-                  uVar27 = puVar37[0x11];
-                  uVar23 = puVar37[0x12];
-                  uVar19 = puVar37[0x13];
-                  uVar30 = puVar37[0x14];
-                  puVar38[0x16] = iVar18;
-                  puVar38[0x17] = iVar35;
-                  puVar38[0x18] = uVar21;
-                  puVar38[0x19] = uVar25;
-                  puVar38[0x1a] = uVar29;
-                  puVar38[0x1b] = uVar28;
-                  puVar38[0x1c] = uVar24;
-                  puVar37[10] = uVar27;
-                  puVar37[0xb] = uVar23;
-                  puVar37[0xc] = uVar19;
-                  puVar37[0xd] = uVar30;
+                  uVar21 = addInst[10];
+                  uVar25 = addInst[0xb];
+                  uVar29 = addInst[0xc];
+                  uVar28 = addInst[0xd];
+                  uVar24 = addInst[0xe];
+                  uVar27 = addInst[0x11];
+                  uVar23 = addInst[0x12];
+                  uVar19 = addInst[0x13];
+                  uVar30 = addInst[0x14];
+                  mulInst[0x16] = iVar18;
+                  mulInst[0x17] = addSrcIndex;
+                  mulInst[0x18] = uVar21;
+                  mulInst[0x19] = uVar25;
+                  mulInst[0x1a] = uVar29;
+                  mulInst[0x1b] = uVar28;
+                  mulInst[0x1c] = uVar24;
+                  addInst[10] = uVar27;
+                  addInst[0xb] = uVar23;
+                  addInst[0xc] = uVar19;
+                  addInst[0xd] = uVar30;
                 }
-                uVar21 = puVar37[2];
-                puVar14 = puVar37 + 0x11;
-                uVar25 = puVar37[3];
-                uVar30 = puVar37[4];
-                puVar38[1] = puVar37[1];
-                puVar38[2] = uVar21;
-                puVar38[3] = uVar25;
-                puVar38[4] = uVar30;
-                uVar25 = puVar37[7];
-                uVar21 = puVar37[5];
-                puVar38[6] = puVar37[6];
-                puVar38[7] = uVar25;
-                puVar38[5] = uVar21;
-                uVar21 = puVar37[10];
+                uVar21 = addInst[2];
+                puVar14 = addInst + 0x11;
+                uVar25 = addInst[3];
+                uVar30 = addInst[4];
+                mulInst[1] = addInst[1];
+                mulInst[2] = uVar21;
+                mulInst[3] = uVar25;
+                mulInst[4] = uVar30;
+                uVar25 = addInst[7];
+                uVar21 = addInst[5];
+                mulInst[6] = addInst[6];
+                mulInst[7] = uVar25;
+                mulInst[5] = uVar21;
+                uVar21 = addInst[10];
                 switch(uVar21) {
                 case 0x87d9:
                   uVar21 = 0x87d5;
@@ -421,7 +446,7 @@ LAB_000bc018:
                 case 0x87df:
                   uVar21 = 0x87de;
                 }
-                uVar25 = puVar37[0xb];
+                uVar25 = addInst[0xb];
                 *puVar14 = uVar21;
                 switch(uVar25) {
                 case 0x87d9:
@@ -439,8 +464,8 @@ LAB_000bc018:
                 case 0x87df:
                   uVar25 = 0x87de;
                 }
-                uVar21 = puVar37[0xc];
-                puVar37[0x12] = uVar25;
+                uVar21 = addInst[0xc];
+                addInst[0x12] = uVar25;
                 switch(uVar21) {
                 case 0x87d9:
                   uVar21 = 0x87d5;
@@ -457,8 +482,8 @@ LAB_000bc018:
                 case 0x87df:
                   uVar21 = 0x87de;
                 }
-                uVar25 = puVar37[0xd];
-                puVar37[0x13] = uVar21;
+                uVar25 = addInst[0xd];
+                addInst[0x13] = uVar21;
                 switch(uVar25) {
                 case 0x87d9:
                   uVar25 = 0x87d5;
@@ -475,21 +500,21 @@ LAB_000bc018:
                 case 0x87df:
                   uVar25 = 0x87de;
                 }
-                uVar21 = puVar37[10];
-                puVar37[0x14] = uVar25;
-                puVar17 = puVar38 + 10;
+                uVar21 = addInst[10];
+                addInst[0x14] = uVar25;
+                puVar17 = mulInst + 10;
                 switch(uVar21) {
                 case 0x87d5:
                   uVar21 = *puVar17;
                   break;
                 case 0x87d6:
-                  uVar21 = puVar38[0xb];
+                  uVar21 = mulInst[0xb];
                   break;
                 case 0x87d7:
-                  uVar21 = puVar38[0xc];
+                  uVar21 = mulInst[0xc];
                   break;
                 case 0x87d8:
-                  uVar21 = puVar38[0xd];
+                  uVar21 = mulInst[0xd];
                   break;
                 case 0x87d9:
                   uVar21 = *puVar17;
@@ -536,7 +561,7 @@ switchD_000bc544_caseD_87df:
                   }
                   break;
                 case 0x87da:
-                  uVar21 = puVar38[0xb];
+                  uVar21 = mulInst[0xb];
                   switch(uVar21) {
                   case 0x87d5:
                     goto switchD_000bc544_caseD_87d5;
@@ -561,7 +586,7 @@ switchD_000bc544_caseD_87df:
                   }
                   break;
                 case 0x87db:
-                  uVar21 = puVar38[0xc];
+                  uVar21 = mulInst[0xc];
                   switch(uVar21) {
                   case 0x87d5:
                     goto switchD_000bc544_caseD_87d5;
@@ -586,7 +611,7 @@ switchD_000bc544_caseD_87df:
                   }
                   break;
                 case 0x87dc:
-                  uVar21 = puVar38[0xd];
+                  uVar21 = mulInst[0xd];
                   switch(uVar21) {
                   case 0x87d5:
                     goto switchD_000bc544_caseD_87d5;
@@ -610,20 +635,20 @@ switchD_000bc544_caseD_87df:
                     goto switchD_000bc544_caseD_87df;
                   }
                 }
-                uVar25 = puVar37[0xb];
-                puVar37[10] = uVar21;
+                uVar25 = addInst[0xb];
+                addInst[10] = uVar21;
                 switch(uVar25) {
                 case 0x87d5:
                   uVar25 = *puVar17;
                   break;
                 case 0x87d6:
-                  uVar25 = puVar38[0xb];
+                  uVar25 = mulInst[0xb];
                   break;
                 case 0x87d7:
-                  uVar25 = puVar38[0xc];
+                  uVar25 = mulInst[0xc];
                   break;
                 case 0x87d8:
-                  uVar25 = puVar38[0xd];
+                  uVar25 = mulInst[0xd];
                   break;
                 case 0x87d9:
                   uVar25 = *puVar17;
@@ -670,7 +695,7 @@ switchD_000bc79c_caseD_87df:
                   }
                   break;
                 case 0x87da:
-                  uVar25 = puVar38[0xb];
+                  uVar25 = mulInst[0xb];
                   switch(uVar25) {
                   case 0x87d5:
                     goto switchD_000bc79c_caseD_87d5;
@@ -695,7 +720,7 @@ switchD_000bc79c_caseD_87df:
                   }
                   break;
                 case 0x87db:
-                  uVar25 = puVar38[0xc];
+                  uVar25 = mulInst[0xc];
                   switch(uVar25) {
                   case 0x87d5:
                     goto switchD_000bc79c_caseD_87d5;
@@ -720,7 +745,7 @@ switchD_000bc79c_caseD_87df:
                   }
                   break;
                 case 0x87dc:
-                  uVar25 = puVar38[0xd];
+                  uVar25 = mulInst[0xd];
                   switch(uVar25) {
                   case 0x87d5:
                     goto switchD_000bc79c_caseD_87d5;
@@ -744,20 +769,20 @@ switchD_000bc79c_caseD_87df:
                     goto switchD_000bc79c_caseD_87df;
                   }
                 }
-                uVar21 = puVar37[0xc];
-                puVar37[0xb] = uVar25;
+                uVar21 = addInst[0xc];
+                addInst[0xb] = uVar25;
                 switch(uVar21) {
                 case 0x87d5:
                   uVar21 = *puVar17;
                   break;
                 case 0x87d6:
-                  uVar21 = puVar38[0xb];
+                  uVar21 = mulInst[0xb];
                   break;
                 case 0x87d7:
-                  uVar21 = puVar38[0xc];
+                  uVar21 = mulInst[0xc];
                   break;
                 case 0x87d8:
-                  uVar21 = puVar38[0xd];
+                  uVar21 = mulInst[0xd];
                   break;
                 case 0x87d9:
                   uVar21 = *puVar17;
@@ -804,7 +829,7 @@ switchD_000bc9f4_caseD_87df:
                   }
                   break;
                 case 0x87da:
-                  uVar21 = puVar38[0xb];
+                  uVar21 = mulInst[0xb];
                   switch(uVar21) {
                   case 0x87d5:
                     goto switchD_000bc9f4_caseD_87d5;
@@ -829,7 +854,7 @@ switchD_000bc9f4_caseD_87df:
                   }
                   break;
                 case 0x87db:
-                  uVar21 = puVar38[0xc];
+                  uVar21 = mulInst[0xc];
                   switch(uVar21) {
                   case 0x87d5:
                     goto switchD_000bc9f4_caseD_87d5;
@@ -854,7 +879,7 @@ switchD_000bc9f4_caseD_87df:
                   }
                   break;
                 case 0x87dc:
-                  uVar21 = puVar38[0xd];
+                  uVar21 = mulInst[0xd];
                   switch(uVar21) {
                   case 0x87d5:
                     goto switchD_000bc9f4_caseD_87d5;
@@ -878,20 +903,20 @@ switchD_000bc9f4_caseD_87df:
                     goto switchD_000bc9f4_caseD_87df;
                   }
                 }
-                uVar25 = puVar37[0xd];
-                puVar37[0xc] = uVar21;
+                uVar25 = addInst[0xd];
+                addInst[0xc] = uVar21;
                 switch(uVar25) {
                 case 0x87d5:
                   uVar25 = *puVar17;
                   break;
                 case 0x87d6:
-                  uVar25 = puVar38[0xb];
+                  uVar25 = mulInst[0xb];
                   break;
                 case 0x87d7:
-                  uVar25 = puVar38[0xc];
+                  uVar25 = mulInst[0xc];
                   break;
                 case 0x87d8:
-                  uVar25 = puVar38[0xd];
+                  uVar25 = mulInst[0xd];
                   break;
                 case 0x87d9:
                   uVar25 = *puVar17;
@@ -938,7 +963,7 @@ switchD_000bcc4c_caseD_87df:
                   }
                   break;
                 case 0x87da:
-                  uVar25 = puVar38[0xb];
+                  uVar25 = mulInst[0xb];
                   switch(uVar25) {
                   case 0x87d5:
                     goto switchD_000bcc4c_caseD_87d5;
@@ -963,7 +988,7 @@ switchD_000bcc4c_caseD_87df:
                   }
                   break;
                 case 0x87db:
-                  uVar25 = puVar38[0xc];
+                  uVar25 = mulInst[0xc];
                   switch(uVar25) {
                   case 0x87d5:
                     goto switchD_000bcc4c_caseD_87d5;
@@ -988,7 +1013,7 @@ switchD_000bcc4c_caseD_87df:
                   }
                   break;
                 case 0x87dc:
-                  uVar25 = puVar38[0xd];
+                  uVar25 = mulInst[0xd];
                   switch(uVar25) {
                   case 0x87d5:
                     goto switchD_000bcc4c_caseD_87d5;
@@ -1013,20 +1038,20 @@ switchD_000bcc4c_caseD_87df:
                   }
                 }
                 uVar21 = *puVar14;
-                puVar37[0xd] = uVar25;
-                puVar17 = puVar38 + 0x11;
+                addInst[0xd] = uVar25;
+                puVar17 = mulInst + 0x11;
                 switch(uVar21) {
                 case 0x87d5:
                   uVar21 = *puVar17;
                   break;
                 case 0x87d6:
-                  uVar21 = puVar38[0x12];
+                  uVar21 = mulInst[0x12];
                   break;
                 case 0x87d7:
-                  uVar21 = puVar38[0x13];
+                  uVar21 = mulInst[0x13];
                   break;
                 case 0x87d8:
-                  uVar21 = puVar38[0x14];
+                  uVar21 = mulInst[0x14];
                   break;
                 case 0x87d9:
                   uVar21 = *puVar17;
@@ -1073,7 +1098,7 @@ switchD_000bcea8_caseD_87df:
                   }
                   break;
                 case 0x87da:
-                  uVar21 = puVar38[0x12];
+                  uVar21 = mulInst[0x12];
                   switch(uVar21) {
                   case 0x87d5:
                     goto switchD_000bcea8_caseD_87d5;
@@ -1098,7 +1123,7 @@ switchD_000bcea8_caseD_87df:
                   }
                   break;
                 case 0x87db:
-                  uVar21 = puVar38[0x13];
+                  uVar21 = mulInst[0x13];
                   switch(uVar21) {
                   case 0x87d5:
                     goto switchD_000bcea8_caseD_87d5;
@@ -1123,7 +1148,7 @@ switchD_000bcea8_caseD_87df:
                   }
                   break;
                 case 0x87dc:
-                  uVar21 = puVar38[0x14];
+                  uVar21 = mulInst[0x14];
                   switch(uVar21) {
                   case 0x87d5:
                     goto switchD_000bcea8_caseD_87d5;
@@ -1147,20 +1172,20 @@ switchD_000bcea8_caseD_87df:
                     goto switchD_000bcea8_caseD_87df;
                   }
                 }
-                uVar25 = puVar37[0x12];
+                uVar25 = addInst[0x12];
                 *puVar14 = uVar21;
                 switch(uVar25) {
                 case 0x87d5:
                   uVar25 = *puVar17;
                   break;
                 case 0x87d6:
-                  uVar25 = puVar38[0x12];
+                  uVar25 = mulInst[0x12];
                   break;
                 case 0x87d7:
-                  uVar25 = puVar38[0x13];
+                  uVar25 = mulInst[0x13];
                   break;
                 case 0x87d8:
-                  uVar25 = puVar38[0x14];
+                  uVar25 = mulInst[0x14];
                   break;
                 case 0x87d9:
                   uVar25 = *puVar17;
@@ -1207,7 +1232,7 @@ switchD_000bd100_caseD_87df:
                   }
                   break;
                 case 0x87da:
-                  uVar25 = puVar38[0x12];
+                  uVar25 = mulInst[0x12];
                   switch(uVar25) {
                   case 0x87d5:
                     goto switchD_000bd100_caseD_87d5;
@@ -1232,7 +1257,7 @@ switchD_000bd100_caseD_87df:
                   }
                   break;
                 case 0x87db:
-                  uVar25 = puVar38[0x13];
+                  uVar25 = mulInst[0x13];
                   switch(uVar25) {
                   case 0x87d5:
                     goto switchD_000bd100_caseD_87d5;
@@ -1257,7 +1282,7 @@ switchD_000bd100_caseD_87df:
                   }
                   break;
                 case 0x87dc:
-                  uVar25 = puVar38[0x14];
+                  uVar25 = mulInst[0x14];
                   switch(uVar25) {
                   case 0x87d5:
                     goto switchD_000bd100_caseD_87d5;
@@ -1281,20 +1306,20 @@ switchD_000bd100_caseD_87df:
                     goto switchD_000bd100_caseD_87df;
                   }
                 }
-                uVar21 = puVar37[0x13];
-                puVar37[0x12] = uVar25;
+                uVar21 = addInst[0x13];
+                addInst[0x12] = uVar25;
                 switch(uVar21) {
                 case 0x87d5:
                   uVar21 = *puVar17;
                   break;
                 case 0x87d6:
-                  uVar21 = puVar38[0x12];
+                  uVar21 = mulInst[0x12];
                   break;
                 case 0x87d7:
-                  uVar21 = puVar38[0x13];
+                  uVar21 = mulInst[0x13];
                   break;
                 case 0x87d8:
-                  uVar21 = puVar38[0x14];
+                  uVar21 = mulInst[0x14];
                   break;
                 case 0x87d9:
                   uVar21 = *puVar17;
@@ -1341,7 +1366,7 @@ switchD_000bd358_caseD_87df:
                   }
                   break;
                 case 0x87da:
-                  uVar21 = puVar38[0x12];
+                  uVar21 = mulInst[0x12];
                   switch(uVar21) {
                   case 0x87d5:
                     goto switchD_000bd358_caseD_87d5;
@@ -1366,7 +1391,7 @@ switchD_000bd358_caseD_87df:
                   }
                   break;
                 case 0x87db:
-                  uVar21 = puVar38[0x13];
+                  uVar21 = mulInst[0x13];
                   switch(uVar21) {
                   case 0x87d5:
                     goto switchD_000bd358_caseD_87d5;
@@ -1391,7 +1416,7 @@ switchD_000bd358_caseD_87df:
                   }
                   break;
                 case 0x87dc:
-                  uVar21 = puVar38[0x14];
+                  uVar21 = mulInst[0x14];
                   switch(uVar21) {
                   case 0x87d5:
                     goto switchD_000bd358_caseD_87d5;
@@ -1415,20 +1440,20 @@ switchD_000bd358_caseD_87df:
                     goto switchD_000bd358_caseD_87df;
                   }
                 }
-                uVar25 = puVar37[0x14];
-                puVar37[0x13] = uVar21;
+                uVar25 = addInst[0x14];
+                addInst[0x13] = uVar21;
                 switch(uVar25) {
                 case 0x87d5:
                   uVar25 = *puVar17;
                   break;
                 case 0x87d6:
-                  uVar25 = puVar38[0x12];
+                  uVar25 = mulInst[0x12];
                   break;
                 case 0x87d7:
-                  uVar25 = puVar38[0x13];
+                  uVar25 = mulInst[0x13];
                   break;
                 case 0x87d8:
-                  uVar25 = puVar38[0x14];
+                  uVar25 = mulInst[0x14];
                   break;
                 case 0x87d9:
                   uVar25 = *puVar17;
@@ -1475,7 +1500,7 @@ switchD_000bd5b0_caseD_87df:
                   }
                   break;
                 case 0x87da:
-                  uVar25 = puVar38[0x12];
+                  uVar25 = mulInst[0x12];
                   switch(uVar25) {
                   case 0x87d5:
                     goto switchD_000bd5b0_caseD_87d5;
@@ -1500,7 +1525,7 @@ switchD_000bd5b0_caseD_87df:
                   }
                   break;
                 case 0x87db:
-                  uVar25 = puVar38[0x13];
+                  uVar25 = mulInst[0x13];
                   switch(uVar25) {
                   case 0x87d5:
                     goto switchD_000bd5b0_caseD_87d5;
@@ -1525,7 +1550,7 @@ switchD_000bd5b0_caseD_87df:
                   }
                   break;
                 case 0x87dc:
-                  uVar25 = puVar38[0x14];
+                  uVar25 = mulInst[0x14];
                   switch(uVar25) {
                   case 0x87d5:
                     goto switchD_000bd5b0_caseD_87d5;
@@ -1549,86 +1574,86 @@ switchD_000bd5b0_caseD_87df:
                     goto switchD_000bd5b0_caseD_87df;
                   }
                 }
-                puVar37[0x14] = uVar25;
-                uVar30 = puVar37[0x14];
-                uVar21 = puVar37[10];
-                uVar25 = puVar37[0xb];
-                uVar23 = puVar37[0xc];
-                uVar29 = puVar37[0xd];
-                uVar27 = puVar37[0x11];
-                uVar19 = puVar37[0x13];
-                puVar38[0x12] = puVar37[0x12];
-                puVar38[0x14] = uVar30;
-                puVar38[10] = uVar21;
-                puVar38[0xb] = uVar25;
-                puVar38[0xc] = uVar23;
-                puVar38[0xd] = uVar29;
-                puVar38[0x11] = uVar27;
-                puVar38[0x13] = uVar19;
-                uVar8 = *(int *)(param_2 + 0x14) - 1;
-                *(uint *)(param_2 + 0x14) = uVar8;
-                uVar33 = uVar32;
-                if (uVar32 < uVar8) {
+                addInst[0x14] = uVar25;
+                uVar30 = addInst[0x14];
+                uVar21 = addInst[10];
+                uVar25 = addInst[0xb];
+                uVar23 = addInst[0xc];
+                uVar29 = addInst[0xd];
+                uVar27 = addInst[0x11];
+                uVar19 = addInst[0x13];
+                mulInst[0x12] = addInst[0x12];
+                mulInst[0x14] = uVar30;
+                mulInst[10] = uVar21;
+                mulInst[0xb] = uVar25;
+                mulInst[0xc] = uVar23;
+                mulInst[0xd] = uVar29;
+                mulInst[0x11] = uVar27;
+                mulInst[0x13] = uVar19;
+                instCount = *(int *)(shader + 0x14) - 1;
+                *(uint *)(shader + 0x14) = instCount;
+                shiftIndex = addSearchIndex;
+                if (addSearchIndex < instCount) {
                   do {
-                    uVar33 = uVar33 + 1;
-                    iVar35 = iVar13 + *(int *)(param_2 + 0x18);
-                    iVar13 = iVar13 + 0x74;
-                    _memcpy(iVar35,iVar35 + 0x74,0x74);
-                    uVar8 = *(uint *)(param_2 + 0x14);
-                  } while (uVar33 < uVar8);
+                    shiftIndex = shiftIndex + 1;
+                    shiftDst = addInstOffset + *(int *)(shader + 0x18);
+                    addInstOffset = addInstOffset + 0x74;
+                    _memcpy(shiftDst,shiftDst + 0x74,0x74);
+                    instCount = *(uint *)(shader + 0x14);
+                  } while (shiftIndex < instCount);
                 }
               }
 LAB_000bd6dc:
-              uVar32 = uVar32 + 1;
+              addSearchIndex = addSearchIndex + 1;
               bVar1 = true;
             }
             else {
 LAB_000ba8a8:
               bVar1 = true;
-              uVar33 = uVar32 + 1;
-              if (uVar33 < uVar8) {
-                iVar6 = uVar8 - uVar33;
-                piVar20 = (int *)(iVar35 + uVar33 * 0x74 + 0x20);
+              afterAddIndex = addSearchIndex + 1;
+              if (afterAddIndex < instCount) {
+                remainingLater = instCount - afterAddIndex;
+                laterSrcSlot = (int *)(instArray + afterAddIndex * 0x74 + 0x20);
                 do {
-                  if (((*piVar20 == 2) && (piVar20[1] == iVar22)) ||
-                     (((piVar20[7] == 2 && (piVar20[8] == iVar22)) ||
-                      ((piVar20[0xe] == 2 && (piVar20[0xf] == iVar22)))))) {
+                  if (((*laterSrcSlot == 2) && (laterSrcSlot[1] == iVar22)) ||
+                     (((laterSrcSlot[7] == 2 && (laterSrcSlot[8] == iVar22)) ||
+                      ((laterSrcSlot[0xe] == 2 && (laterSrcSlot[0xf] == iVar22)))))) {
                     bVar1 = false;
                   }
-                  piVar20 = piVar20 + 0x1d;
-                  iVar6 = iVar6 + -1;
-                } while (iVar6 != 0);
+                  laterSrcSlot = laterSrcSlot + 0x1d;
+                  remainingLater = remainingLater + -1;
+                } while (remainingLater != 0);
                 if (!bVar1) {
-                  if (uVar36 < uVar32) goto LAB_000ba754;
+                  if (uVar36 < addSearchIndex) goto LAB_000ba754;
                   goto LAB_000bc018;
                 }
               }
-              *puVar37 = 0x8788;
-              if (puVar37[9] == iVar22) {
-                uVar21 = puVar37[10];
-                puVar37[0x16] = iVar34;
-                puVar37[0x17] = puVar37[0x10];
-                puVar37[0x18] = puVar37[0x11];
-                puVar37[0x19] = puVar37[0x12];
-                puVar37[0x1a] = puVar37[0x13];
-                puVar37[0x1b] = puVar37[0x14];
-                puVar37[0x1c] = puVar37[0x15];
+              *addInst = 0x8788;
+              if (addInst[9] == iVar22) {
+                uVar21 = addInst[10];
+                addInst[0x16] = iVar34;
+                addInst[0x17] = addInst[0x10];
+                addInst[0x18] = addInst[0x11];
+                addInst[0x19] = addInst[0x12];
+                addInst[0x1a] = addInst[0x13];
+                addInst[0x1b] = addInst[0x14];
+                addInst[0x1c] = addInst[0x15];
               }
               else {
-                puVar37[0x18] = puVar37[10];
-                uVar21 = puVar37[0x11];
-                puVar37[0x16] = iVar18;
-                puVar37[0x17] = puVar37[9];
-                puVar37[0x19] = puVar37[0xb];
-                puVar37[0x1a] = puVar37[0xc];
-                puVar37[0x1b] = puVar37[0xd];
-                puVar37[0x1c] = puVar37[0xe];
-                puVar37[0xb] = puVar37[0x12];
-                puVar37[0xc] = puVar37[0x13];
-                puVar37[0xd] = puVar37[0x14];
-                puVar37[10] = uVar21;
+                addInst[0x18] = addInst[10];
+                uVar21 = addInst[0x11];
+                addInst[0x16] = iVar18;
+                addInst[0x17] = addInst[9];
+                addInst[0x19] = addInst[0xb];
+                addInst[0x1a] = addInst[0xc];
+                addInst[0x1b] = addInst[0xd];
+                addInst[0x1c] = addInst[0xe];
+                addInst[0xb] = addInst[0x12];
+                addInst[0xc] = addInst[0x13];
+                addInst[0xd] = addInst[0x14];
+                addInst[10] = uVar21;
               }
-              puVar14 = puVar37 + 0x11;
+              puVar14 = addInst + 0x11;
               switch(uVar21) {
               case 0x87d9:
                 uVar21 = 0x87d5;
@@ -1645,7 +1670,7 @@ LAB_000ba8a8:
               case 0x87df:
                 uVar21 = 0x87de;
               }
-              uVar25 = puVar37[0xb];
+              uVar25 = addInst[0xb];
               *puVar14 = uVar21;
               switch(uVar25) {
               case 0x87d9:
@@ -1663,8 +1688,8 @@ LAB_000ba8a8:
               case 0x87df:
                 uVar25 = 0x87de;
               }
-              uVar21 = puVar37[0xc];
-              puVar37[0x12] = uVar25;
+              uVar21 = addInst[0xc];
+              addInst[0x12] = uVar25;
               switch(uVar21) {
               case 0x87d9:
                 uVar21 = 0x87d5;
@@ -1681,8 +1706,8 @@ LAB_000ba8a8:
               case 0x87df:
                 uVar21 = 0x87de;
               }
-              uVar25 = puVar37[0xd];
-              puVar37[0x13] = uVar21;
+              uVar25 = addInst[0xd];
+              addInst[0x13] = uVar21;
               switch(uVar25) {
               case 0x87d9:
                 uVar25 = 0x87d5;
@@ -1699,22 +1724,22 @@ LAB_000ba8a8:
               case 0x87df:
                 uVar25 = 0x87de;
               }
-              puVar37[0x14] = uVar25;
-              puVar17 = puVar38 + 10;
-              puVar37[9] = puVar38[9];
-              uVar21 = puVar37[10];
+              addInst[0x14] = uVar25;
+              puVar17 = mulInst + 10;
+              addInst[9] = mulInst[9];
+              uVar21 = addInst[10];
               switch(uVar21) {
               case 0x87d5:
                 uVar21 = *puVar17;
                 break;
               case 0x87d6:
-                uVar21 = puVar38[0xb];
+                uVar21 = mulInst[0xb];
                 break;
               case 0x87d7:
-                uVar21 = puVar38[0xc];
+                uVar21 = mulInst[0xc];
                 break;
               case 0x87d8:
-                uVar21 = puVar38[0xd];
+                uVar21 = mulInst[0xd];
                 break;
               case 0x87d9:
                 uVar21 = *puVar17;
@@ -1761,7 +1786,7 @@ switchD_000badac_caseD_87df:
                 }
                 break;
               case 0x87da:
-                uVar21 = puVar38[0xb];
+                uVar21 = mulInst[0xb];
                 switch(uVar21) {
                 case 0x87d5:
                   goto switchD_000badac_caseD_87d5;
@@ -1786,7 +1811,7 @@ switchD_000badac_caseD_87df:
                 }
                 break;
               case 0x87db:
-                uVar21 = puVar38[0xc];
+                uVar21 = mulInst[0xc];
                 switch(uVar21) {
                 case 0x87d5:
                   goto switchD_000badac_caseD_87d5;
@@ -1811,7 +1836,7 @@ switchD_000badac_caseD_87df:
                 }
                 break;
               case 0x87dc:
-                uVar21 = puVar38[0xd];
+                uVar21 = mulInst[0xd];
                 switch(uVar21) {
                 case 0x87d5:
                   goto switchD_000badac_caseD_87d5;
@@ -1835,20 +1860,20 @@ switchD_000badac_caseD_87df:
                   goto switchD_000badac_caseD_87df;
                 }
               }
-              uVar25 = puVar37[0xb];
-              puVar37[10] = uVar21;
+              uVar25 = addInst[0xb];
+              addInst[10] = uVar21;
               switch(uVar25) {
               case 0x87d5:
                 uVar25 = *puVar17;
                 break;
               case 0x87d6:
-                uVar25 = puVar38[0xb];
+                uVar25 = mulInst[0xb];
                 break;
               case 0x87d7:
-                uVar25 = puVar38[0xc];
+                uVar25 = mulInst[0xc];
                 break;
               case 0x87d8:
-                uVar25 = puVar38[0xd];
+                uVar25 = mulInst[0xd];
                 break;
               case 0x87d9:
                 uVar25 = *puVar17;
@@ -1895,7 +1920,7 @@ switchD_000bb004_caseD_87df:
                 }
                 break;
               case 0x87da:
-                uVar25 = puVar38[0xb];
+                uVar25 = mulInst[0xb];
                 switch(uVar25) {
                 case 0x87d5:
                   goto switchD_000bb004_caseD_87d5;
@@ -1920,7 +1945,7 @@ switchD_000bb004_caseD_87df:
                 }
                 break;
               case 0x87db:
-                uVar25 = puVar38[0xc];
+                uVar25 = mulInst[0xc];
                 switch(uVar25) {
                 case 0x87d5:
                   goto switchD_000bb004_caseD_87d5;
@@ -1945,7 +1970,7 @@ switchD_000bb004_caseD_87df:
                 }
                 break;
               case 0x87dc:
-                uVar25 = puVar38[0xd];
+                uVar25 = mulInst[0xd];
                 switch(uVar25) {
                 case 0x87d5:
                   goto switchD_000bb004_caseD_87d5;
@@ -1969,20 +1994,20 @@ switchD_000bb004_caseD_87df:
                   goto switchD_000bb004_caseD_87df;
                 }
               }
-              uVar21 = puVar37[0xc];
-              puVar37[0xb] = uVar25;
+              uVar21 = addInst[0xc];
+              addInst[0xb] = uVar25;
               switch(uVar21) {
               case 0x87d5:
                 uVar21 = *puVar17;
                 break;
               case 0x87d6:
-                uVar21 = puVar38[0xb];
+                uVar21 = mulInst[0xb];
                 break;
               case 0x87d7:
-                uVar21 = puVar38[0xc];
+                uVar21 = mulInst[0xc];
                 break;
               case 0x87d8:
-                uVar21 = puVar38[0xd];
+                uVar21 = mulInst[0xd];
                 break;
               case 0x87d9:
                 uVar21 = *puVar17;
@@ -2029,7 +2054,7 @@ switchD_000bb25c_caseD_87df:
                 }
                 break;
               case 0x87da:
-                uVar21 = puVar38[0xb];
+                uVar21 = mulInst[0xb];
                 switch(uVar21) {
                 case 0x87d5:
                   goto switchD_000bb25c_caseD_87d5;
@@ -2054,7 +2079,7 @@ switchD_000bb25c_caseD_87df:
                 }
                 break;
               case 0x87db:
-                uVar21 = puVar38[0xc];
+                uVar21 = mulInst[0xc];
                 switch(uVar21) {
                 case 0x87d5:
                   goto switchD_000bb25c_caseD_87d5;
@@ -2079,7 +2104,7 @@ switchD_000bb25c_caseD_87df:
                 }
                 break;
               case 0x87dc:
-                uVar21 = puVar38[0xd];
+                uVar21 = mulInst[0xd];
                 switch(uVar21) {
                 case 0x87d5:
                   goto switchD_000bb25c_caseD_87d5;
@@ -2103,20 +2128,20 @@ switchD_000bb25c_caseD_87df:
                   goto switchD_000bb25c_caseD_87df;
                 }
               }
-              uVar25 = puVar37[0xd];
-              puVar37[0xc] = uVar21;
+              uVar25 = addInst[0xd];
+              addInst[0xc] = uVar21;
               switch(uVar25) {
               case 0x87d5:
                 uVar25 = *puVar17;
                 break;
               case 0x87d6:
-                uVar25 = puVar38[0xb];
+                uVar25 = mulInst[0xb];
                 break;
               case 0x87d7:
-                uVar25 = puVar38[0xc];
+                uVar25 = mulInst[0xc];
                 break;
               case 0x87d8:
-                uVar25 = puVar38[0xd];
+                uVar25 = mulInst[0xd];
                 break;
               case 0x87d9:
                 uVar25 = *puVar17;
@@ -2163,7 +2188,7 @@ switchD_000bb4b4_caseD_87df:
                 }
                 break;
               case 0x87da:
-                uVar25 = puVar38[0xb];
+                uVar25 = mulInst[0xb];
                 switch(uVar25) {
                 case 0x87d5:
                   goto switchD_000bb4b4_caseD_87d5;
@@ -2188,7 +2213,7 @@ switchD_000bb4b4_caseD_87df:
                 }
                 break;
               case 0x87db:
-                uVar25 = puVar38[0xc];
+                uVar25 = mulInst[0xc];
                 switch(uVar25) {
                 case 0x87d5:
                   goto switchD_000bb4b4_caseD_87d5;
@@ -2213,7 +2238,7 @@ switchD_000bb4b4_caseD_87df:
                 }
                 break;
               case 0x87dc:
-                uVar25 = puVar38[0xd];
+                uVar25 = mulInst[0xd];
                 switch(uVar25) {
                 case 0x87d5:
                   goto switchD_000bb4b4_caseD_87d5;
@@ -2237,22 +2262,22 @@ switchD_000bb4b4_caseD_87df:
                   goto switchD_000bb4b4_caseD_87df;
                 }
               }
-              puVar37[0xd] = uVar25;
-              puVar17 = puVar38 + 0x11;
-              puVar37[0x10] = puVar38[0x10];
+              addInst[0xd] = uVar25;
+              puVar17 = mulInst + 0x11;
+              addInst[0x10] = mulInst[0x10];
               uVar21 = *puVar14;
               switch(uVar21) {
               case 0x87d5:
                 uVar21 = *puVar17;
                 break;
               case 0x87d6:
-                uVar21 = puVar38[0x12];
+                uVar21 = mulInst[0x12];
                 break;
               case 0x87d7:
-                uVar21 = puVar38[0x13];
+                uVar21 = mulInst[0x13];
                 break;
               case 0x87d8:
-                uVar21 = puVar38[0x14];
+                uVar21 = mulInst[0x14];
                 break;
               case 0x87d9:
                 uVar21 = *puVar17;
@@ -2299,7 +2324,7 @@ switchD_000bb718_caseD_87df:
                 }
                 break;
               case 0x87da:
-                uVar21 = puVar38[0x12];
+                uVar21 = mulInst[0x12];
                 switch(uVar21) {
                 case 0x87d5:
                   goto switchD_000bb718_caseD_87d5;
@@ -2324,7 +2349,7 @@ switchD_000bb718_caseD_87df:
                 }
                 break;
               case 0x87db:
-                uVar21 = puVar38[0x13];
+                uVar21 = mulInst[0x13];
                 switch(uVar21) {
                 case 0x87d5:
                   goto switchD_000bb718_caseD_87d5;
@@ -2349,7 +2374,7 @@ switchD_000bb718_caseD_87df:
                 }
                 break;
               case 0x87dc:
-                uVar21 = puVar38[0x14];
+                uVar21 = mulInst[0x14];
                 switch(uVar21) {
                 case 0x87d5:
                   goto switchD_000bb718_caseD_87d5;
@@ -2373,20 +2398,20 @@ switchD_000bb718_caseD_87df:
                   goto switchD_000bb718_caseD_87df;
                 }
               }
-              uVar25 = puVar37[0x12];
+              uVar25 = addInst[0x12];
               *puVar14 = uVar21;
               switch(uVar25) {
               case 0x87d5:
                 uVar25 = *puVar17;
                 break;
               case 0x87d6:
-                uVar25 = puVar38[0x12];
+                uVar25 = mulInst[0x12];
                 break;
               case 0x87d7:
-                uVar25 = puVar38[0x13];
+                uVar25 = mulInst[0x13];
                 break;
               case 0x87d8:
-                uVar25 = puVar38[0x14];
+                uVar25 = mulInst[0x14];
                 break;
               case 0x87d9:
                 uVar25 = *puVar17;
@@ -2433,7 +2458,7 @@ switchD_000bb970_caseD_87df:
                 }
                 break;
               case 0x87da:
-                uVar25 = puVar38[0x12];
+                uVar25 = mulInst[0x12];
                 switch(uVar25) {
                 case 0x87d5:
                   goto switchD_000bb970_caseD_87d5;
@@ -2458,7 +2483,7 @@ switchD_000bb970_caseD_87df:
                 }
                 break;
               case 0x87db:
-                uVar25 = puVar38[0x13];
+                uVar25 = mulInst[0x13];
                 switch(uVar25) {
                 case 0x87d5:
                   goto switchD_000bb970_caseD_87d5;
@@ -2483,7 +2508,7 @@ switchD_000bb970_caseD_87df:
                 }
                 break;
               case 0x87dc:
-                uVar25 = puVar38[0x14];
+                uVar25 = mulInst[0x14];
                 switch(uVar25) {
                 case 0x87d5:
                   goto switchD_000bb970_caseD_87d5;
@@ -2507,20 +2532,20 @@ switchD_000bb970_caseD_87df:
                   goto switchD_000bb970_caseD_87df;
                 }
               }
-              uVar21 = puVar37[0x13];
-              puVar37[0x12] = uVar25;
+              uVar21 = addInst[0x13];
+              addInst[0x12] = uVar25;
               switch(uVar21) {
               case 0x87d5:
                 uVar21 = *puVar17;
                 break;
               case 0x87d6:
-                uVar21 = puVar38[0x12];
+                uVar21 = mulInst[0x12];
                 break;
               case 0x87d7:
-                uVar21 = puVar38[0x13];
+                uVar21 = mulInst[0x13];
                 break;
               case 0x87d8:
-                uVar21 = puVar38[0x14];
+                uVar21 = mulInst[0x14];
                 break;
               case 0x87d9:
                 uVar21 = *puVar17;
@@ -2567,7 +2592,7 @@ switchD_000bbbc8_caseD_87df:
                 }
                 break;
               case 0x87da:
-                uVar21 = puVar38[0x12];
+                uVar21 = mulInst[0x12];
                 switch(uVar21) {
                 case 0x87d5:
                   goto switchD_000bbbc8_caseD_87d5;
@@ -2592,7 +2617,7 @@ switchD_000bbbc8_caseD_87df:
                 }
                 break;
               case 0x87db:
-                uVar21 = puVar38[0x13];
+                uVar21 = mulInst[0x13];
                 switch(uVar21) {
                 case 0x87d5:
                   goto switchD_000bbbc8_caseD_87d5;
@@ -2617,7 +2642,7 @@ switchD_000bbbc8_caseD_87df:
                 }
                 break;
               case 0x87dc:
-                uVar21 = puVar38[0x14];
+                uVar21 = mulInst[0x14];
                 switch(uVar21) {
                 case 0x87d5:
                   goto switchD_000bbbc8_caseD_87d5;
@@ -2641,20 +2666,20 @@ switchD_000bbbc8_caseD_87df:
                   goto switchD_000bbbc8_caseD_87df;
                 }
               }
-              uVar25 = puVar37[0x14];
-              puVar37[0x13] = uVar21;
+              uVar25 = addInst[0x14];
+              addInst[0x13] = uVar21;
               switch(uVar25) {
               case 0x87d5:
                 uVar25 = *puVar17;
                 break;
               case 0x87d6:
-                uVar25 = puVar38[0x12];
+                uVar25 = mulInst[0x12];
                 break;
               case 0x87d7:
-                uVar25 = puVar38[0x13];
+                uVar25 = mulInst[0x13];
                 break;
               case 0x87d8:
-                uVar25 = puVar38[0x14];
+                uVar25 = mulInst[0x14];
                 break;
               case 0x87d9:
                 uVar25 = *puVar17;
@@ -2701,7 +2726,7 @@ switchD_000bbe20_caseD_87df:
                 }
                 break;
               case 0x87da:
-                uVar25 = puVar38[0x12];
+                uVar25 = mulInst[0x12];
                 switch(uVar25) {
                 case 0x87d5:
                   goto switchD_000bbe20_caseD_87d5;
@@ -2726,7 +2751,7 @@ switchD_000bbe20_caseD_87df:
                 }
                 break;
               case 0x87db:
-                uVar25 = puVar38[0x13];
+                uVar25 = mulInst[0x13];
                 switch(uVar25) {
                 case 0x87d5:
                   goto switchD_000bbe20_caseD_87d5;
@@ -2751,7 +2776,7 @@ switchD_000bbe20_caseD_87df:
                 }
                 break;
               case 0x87dc:
-                uVar25 = puVar38[0x14];
+                uVar25 = mulInst[0x14];
                 switch(uVar25) {
                 case 0x87d5:
                   goto switchD_000bbe20_caseD_87d5;
@@ -2775,63 +2800,63 @@ switchD_000bbe20_caseD_87df:
                   goto switchD_000bbe20_caseD_87df;
                 }
               }
-              puVar37[0x14] = uVar25;
-              uVar8 = *(int *)(param_2 + 0x14) - 1;
-              *(uint *)(param_2 + 0x14) = uVar8;
-              iVar35 = iVar9;
-              uVar33 = uVar16;
-              if (uVar16 < uVar8) {
+              addInst[0x14] = uVar25;
+              instCount = *(int *)(shader + 0x14) - 1;
+              *(uint *)(shader + 0x14) = instCount;
+              shiftOffset = mulOffset;
+              mulScanStart = mulSearchIndex;
+              if (mulSearchIndex < instCount) {
                 do {
-                  uVar32 = uVar33;
-                  uVar33 = uVar32 + 1;
-                  iVar13 = iVar35 + *(int *)(param_2 + 0x18);
-                  _memcpy(iVar13,iVar13 + 0x74,0x74);
-                  uVar8 = *(uint *)(param_2 + 0x14);
-                  iVar35 = iVar35 + 0x74;
-                } while (uVar33 < uVar8);
-                uVar32 = uVar32 + 2;
+                  addSearchIndex = mulScanStart;
+                  mulScanStart = addSearchIndex + 1;
+                  shiftSrc = shiftOffset + *(int *)(shader + 0x18);
+                  _memcpy(shiftSrc,shiftSrc + 0x74,0x74);
+                  instCount = *(uint *)(shader + 0x14);
+                  shiftOffset = shiftOffset + 0x74;
+                } while (mulScanStart < instCount);
+                addSearchIndex = addSearchIndex + 2;
                 bVar1 = true;
               }
               else {
                 bVar1 = true;
-                uVar32 = uVar36;
+                addSearchIndex = uVar36;
               }
             }
           }
           else {
 LAB_000ba7ec:
             bVar1 = false;
-            uVar32 = uVar32 + 1;
+            addSearchIndex = addSearchIndex + 1;
           }
-          if ((uVar8 <= uVar32) || (bVar1)) break;
-          iVar35 = *(int *)(param_2 + 0x18);
+          if ((instCount <= addSearchIndex) || (bVar1)) break;
+          instArray = *(int *)(shader + 0x18);
         } while( true );
       }
-      uVar16 = uVar16 + 1;
-    } while (uVar16 < uVar8);
-    if (uVar8 != 0) {
-      uVar16 = 0;
+      mulSearchIndex = mulSearchIndex + 1;
+    } while (mulSearchIndex < instCount);
+    if (instCount != 0) {
+      matMulSearchIndex = 0;
       do {
-        iVar35 = *(int *)(param_2 + 0x18);
-        iVar9 = iVar35 + uVar16 * 0x74;
-        if (((*(int *)(iVar35 + uVar16 * 0x74) == 0x8798) && (*(int *)(iVar9 + 4) == 2)) &&
-           (*(int *)(iVar9 + 0x20) == 2)) {
-          iVar13 = *(int *)(param_2 + 0x20) + *(int *)(iVar9 + 0x24) * 0x54;
-          if ((*(char *)(iVar13 + 0x44) != '\0') && (*(int *)(iVar13 + 0x48) == 0xba6)) {
-            uVar32 = uVar16 + 1;
-            if (uVar32 < uVar8) {
-              iVar13 = uVar8 - uVar32;
+        instArray = *(int *)(shader + 0x18);
+        matMulInst = instArray + matMulSearchIndex * 0x74;
+        if (((*(int *)(instArray + matMulSearchIndex * 0x74) == 0x8798) && (*(int *)(matMulInst + 4) == 2)) &&
+           (*(int *)(matMulInst + 0x20) == 2)) {
+          matrixSymbol = *(int *)(shader + 0x20) + *(int *)(matMulInst + 0x24) * 0x54;
+          if ((*(char *)(matrixSymbol + 0x44) != '\0') && (*(int *)(matrixSymbol + 0x48) == 0xba6)) {
+            followerIndex = matMulSearchIndex + 1;
+            if (followerIndex < instCount) {
+              followerCount = instCount - followerIndex;
               bVar1 = true;
-              uVar36 = 0;
-              piVar20 = (int *)(uVar32 * 0x74 + iVar35 + 0x3c);
+              fusedPartnerIndex = 0;
+              laterSrc1Slot = (int *)(followerIndex * 0x74 + instArray + 0x3c);
               do {
-                if ((*piVar20 == 2) && (piVar20[1] == *(int *)(iVar9 + 8))) {
-                  if ((((piVar20[-0xf] == 0x8798) && (piVar20[-7] == 2)) &&
-                      (iVar18 = *(int *)(param_2 + 0x20) + piVar20[-6] * 0x54,
+                if ((*laterSrc1Slot == 2) && (laterSrc1Slot[1] == *(int *)(matMulInst + 8))) {
+                  if ((((laterSrc1Slot[-0xf] == 0x8798) && (laterSrc1Slot[-7] == 2)) &&
+                      (iVar18 = *(int *)(shader + 0x20) + laterSrc1Slot[-6] * 0x54,
                       *(char *)(iVar18 + 0x44) != '\0')) &&
-                     ((*(int *)(iVar18 + 0x48) == 0xba7 && (uVar36 == 0)))) {
+                     ((*(int *)(iVar18 + 0x48) == 0xba7 && (fusedPartnerIndex == 0)))) {
                     bVar5 = false;
-                    uVar36 = uVar32;
+                    fusedPartnerIndex = followerIndex;
                   }
                   else {
 LAB_000bd88c:
@@ -2840,62 +2865,62 @@ LAB_000bd88c:
                   }
                 }
                 else {
-                  if (((piVar20[-7] == 2) && (piVar20[-6] == *(int *)(iVar9 + 8))) ||
-                     ((piVar20[7] == 2 && (piVar20[8] == *(int *)(iVar9 + 8))))) goto LAB_000bd88c;
-                  if ((piVar20[-0xe] != 2) || (bVar5 = true, piVar20[-0xd] != *(int *)(iVar9 + 8)))
+                  if (((laterSrc1Slot[-7] == 2) && (laterSrc1Slot[-6] == *(int *)(matMulInst + 8))) ||
+                     ((laterSrc1Slot[7] == 2 && (laterSrc1Slot[8] == *(int *)(matMulInst + 8))))) goto LAB_000bd88c;
+                  if ((laterSrc1Slot[-0xe] != 2) || (bVar5 = true, laterSrc1Slot[-0xd] != *(int *)(matMulInst + 8)))
                   {
                     bVar5 = false;
                   }
                 }
-                uVar32 = uVar32 + 1;
-                iVar13 = iVar13 + -1;
-              } while ((iVar13 != 0) && (piVar20 = piVar20 + 0x1d, !bVar5));
+                followerIndex = followerIndex + 1;
+                followerCount = followerCount + -1;
+              } while ((followerCount != 0) && (laterSrc1Slot = laterSrc1Slot + 0x1d, !bVar5));
               if (!bVar1) goto LAB_000bd970;
-              iVar13 = uVar36 * 0x74;
+              partnerOffset = fusedPartnerIndex * 0x74;
             }
             else {
-              uVar36 = 0;
-              iVar13 = 0;
+              fusedPartnerIndex = 0;
+              partnerOffset = 0;
             }
-            iVar18 = *(int *)(param_2 + 0x2c);
+            iVar18 = *(int *)(shader + 0x2c);
             if (iVar18 == 0) {
-              iVar18 = FUN_00054dd0(iStack00000018,iVar31,
+              iVar18 = FUN_00054dd0(iStack00000018,symbolTable,
                                     *(undefined4 *)(*(int *)(((unsigned char *)0x0000116c) + iStack00000018) + 0x18)
                                    );
-              iVar35 = *(int *)(param_2 + 0x18);
-              *(int *)(param_2 + 0x2c) = iVar18;
+              instArray = *(int *)(shader + 0x18);
+              *(int *)(shader + 0x2c) = iVar18;
             }
-            iVar13 = iVar13 + iVar35;
-            *(int *)(iVar9 + 0x24) = iVar18;
-            uVar21 = *(undefined4 *)(iVar13 + 8);
-            uVar30 = *(undefined4 *)(iVar13 + 0xc);
-            uVar25 = *(undefined4 *)(iVar13 + 0x10);
-            *(undefined4 *)(iVar9 + 4) = *(undefined4 *)(iVar13 + 4);
-            *(undefined4 *)(iVar9 + 8) = uVar21;
-            *(undefined4 *)(iVar9 + 0xc) = uVar30;
-            *(undefined4 *)(iVar9 + 0x10) = uVar25;
-            uVar21 = *(undefined4 *)(iVar13 + 0x14);
-            uVar25 = *(undefined4 *)(iVar13 + 0x18);
-            *(undefined4 *)(iVar9 + 0x1c) = *(undefined4 *)(iVar13 + 0x1c);
-            *(undefined4 *)(iVar9 + 0x14) = uVar21;
-            *(undefined4 *)(iVar9 + 0x18) = uVar25;
-            uVar8 = *(int *)(param_2 + 0x14) - 1;
-            *(uint *)(param_2 + 0x14) = uVar8;
-            if (uVar36 < uVar8) {
-              iVar35 = uVar36 * 0x74;
+            partnerOffset = partnerOffset + instArray;
+            *(int *)(matMulInst + 0x24) = iVar18;
+            uVar21 = *(undefined4 *)(partnerOffset + 8);
+            uVar30 = *(undefined4 *)(partnerOffset + 0xc);
+            uVar25 = *(undefined4 *)(partnerOffset + 0x10);
+            *(undefined4 *)(matMulInst + 4) = *(undefined4 *)(partnerOffset + 4);
+            *(undefined4 *)(matMulInst + 8) = uVar21;
+            *(undefined4 *)(matMulInst + 0xc) = uVar30;
+            *(undefined4 *)(matMulInst + 0x10) = uVar25;
+            uVar21 = *(undefined4 *)(partnerOffset + 0x14);
+            uVar25 = *(undefined4 *)(partnerOffset + 0x18);
+            *(undefined4 *)(matMulInst + 0x1c) = *(undefined4 *)(partnerOffset + 0x1c);
+            *(undefined4 *)(matMulInst + 0x14) = uVar21;
+            *(undefined4 *)(matMulInst + 0x18) = uVar25;
+            instCount = *(int *)(shader + 0x14) - 1;
+            *(uint *)(shader + 0x14) = instCount;
+            if (fusedPartnerIndex < instCount) {
+              shiftOffset = fusedPartnerIndex * 0x74;
               do {
-                uVar36 = uVar36 + 1;
-                iVar9 = iVar35 + *(int *)(param_2 + 0x18);
-                iVar35 = iVar35 + 0x74;
-                _memcpy(iVar9,iVar9 + 0x74,0x74);
-                uVar8 = *(uint *)(param_2 + 0x14);
-              } while (uVar36 < uVar8);
+                fusedPartnerIndex = fusedPartnerIndex + 1;
+                shiftDstPtr = shiftOffset + *(int *)(shader + 0x18);
+                shiftOffset = shiftOffset + 0x74;
+                _memcpy(shiftDstPtr,shiftDstPtr + 0x74,0x74);
+                instCount = *(uint *)(shader + 0x14);
+              } while (fusedPartnerIndex < instCount);
             }
           }
         }
 LAB_000bd970:
-        uVar16 = uVar16 + 1;
-      } while (uVar16 < uVar8);
+        matMulSearchIndex = matMulSearchIndex + 1;
+      } while (matMulSearchIndex < instCount);
     }
   }
   return;

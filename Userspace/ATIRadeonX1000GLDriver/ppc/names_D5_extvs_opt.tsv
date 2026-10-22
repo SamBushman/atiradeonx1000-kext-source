@@ -1,0 +1,185 @@
+local	FUN_000b9f10	param_1	ctx	CONFIRMED	passed as the GL context to FUN_00054dd0 (symbol append) and used with ctx-array offsets 0x1344/0x116c like the other extvs functions
+local	FUN_000b9f10	param_2	shader	CONFIRMED	EXT_vertex_shader shader object: +0x14 instruction count, +0x18 instruction array (0x74-byte records), +0x1c symbol table (count, records), +0x2c cached MVP symbol index
+local	FUN_000b9f10	iVar31	symbolTable	CONFIRMED	param_2 + 0x1c, passed as the symbol-table argument of FUN_000b72d0 / FUN_00054dd0 (FUN_000550e0 reads symbolTable+4 = record array)
+local	FUN_000b9f10	cVar2	destEnableY	CONFIRMED	byte at inst+0x13 = low byte of the Y write-enable word of the instruction's destination
+local	FUN_000b9f10	cVar3	destEnableZ	CONFIRMED	byte at inst+0x17 = Z write-enable
+local	FUN_000b9f10	cVar4	destEnableW	CONFIRMED	byte at inst+0x1b = W write-enable
+local	FUN_000b9f10	uVar8	instCount	CONFIRMED	mirrors shader+0x14 (reloaded after every removal)
+local	FUN_000b9f10	puVar38	mulInst	CONFIRMED	opcode 0x8786 = GL_OP_MUL_EXT; the instruction later rewritten to GL_OP_MADD_EXT (0x8788) when an ADD consumes its temp
+local	FUN_000b9f10	puVar37	addInst	CONFIRMED	opcode 0x8787 = GL_OP_ADD_EXT; the follower the MUL result is fused into
+use	FUN_000b9f10	uVar16	instCountAtEntry	CONFIRMED	count of the backward sweep (uVar16 - uVar32 = instructions remaining)	^\s*uVar16\ =\ \*\(uint\ \*\)\(param_2\ \+\ 0x14\);$	+2
+use	FUN_000b9f10	uVar16	instCountAtEntry	CONFIRMED	count of the backward sweep (uVar16 - uVar32 = instructions remaining)	^\s*if\ \(uVar16\ !=\ 0\)\ \{$	+2
+use	FUN_000b9f10	uVar16	instCountAtEntry	CONFIRMED	count of the backward sweep (uVar16 - uVar32 = instructions remaining)	^\s*uVar36\ =\ uVar16\ \-\ uVar32;$	+1
+use	FUN_000b9f10	uVar16	instCountAtEntry	CONFIRMED	count of the backward sweep (uVar16 - uVar32 = instructions remaining)	^\s*\}\ while\ \(uVar16\ !=\ uVar32\);$	+1
+use	FUN_000b9f10	uVar16	mulSearchIndex	CONFIRMED	forward index of the MUL candidate in the MUL+ADD fusion pass	^\s*uVar16\ =\ 0;$	+1
+use	FUN_000b9f10	uVar16	mulSearchIndex	CONFIRMED	forward index of the MUL candidate in the MUL+ADD fusion pass	^\s*iVar9\ =\ uVar16\ \*\ 0x74;$	+1
+use	FUN_000b9f10	uVar16	mulSearchIndex	CONFIRMED	forward index of the MUL candidate in the MUL+ADD fusion pass	^\s*if\ \(\(\(\(\*\(int\ \*\)\(iVar9\ \+\ iVar35\)\ ==\ 0x8786\)\ \&\&\ \(puVar38\[1\]\ ==\ 2\)\)\ \&\&$	+3
+use	FUN_000b9f10	uVar16	mulSearchIndex	CONFIRMED	forward index of the MUL candidate in the MUL+ADD fusion pass	^\s*if\ \(\(uVar32\ <\ uVar16\ \+\ 2\)\ \|\|\ \(uVar32\ ==\ 0\)\)\ \{$	+1
+use	FUN_000b9f10	uVar16	mulSearchIndex	CONFIRMED	forward index of the MUL candidate in the MUL+ADD fusion pass	^\s*uVar33\ =\ uVar16;$	+2
+use	FUN_000b9f10	uVar16	mulSearchIndex	CONFIRMED	forward index of the MUL candidate in the MUL+ADD fusion pass	^\s*uVar16\ =\ uVar16\ \+\ 1;$	+2
+use	FUN_000b9f10	uVar16	matMulSearchIndex	CONFIRMED	index of the first OP_MULTIPLY_MATRIX_EXT (0x8798) candidate in the matrix fusion pass	^\s*uVar16\ =\ 0;$@2	+1
+use	FUN_000b9f10	uVar16	matMulSearchIndex	CONFIRMED	index of the first OP_MULTIPLY_MATRIX_EXT (0x8798) candidate in the matrix fusion pass	^\s*iVar9\ =\ iVar35\ \+\ uVar16\ \*\ 0x74;$	+3
+use	FUN_000b9f10	uVar16	matMulSearchIndex	CONFIRMED	index of the first OP_MULTIPLY_MATRIX_EXT (0x8798) candidate in the matrix fusion pass	^\s*uVar32\ =\ uVar16\ \+\ 1;$	+1
+use	FUN_000b9f10	uVar16	matMulSearchIndex	CONFIRMED	index of the first OP_MULTIPLY_MATRIX_EXT (0x8798) candidate in the matrix fusion pass	^\s*uVar16\ =\ uVar16\ \+\ 1;$@2	+2
+use	FUN_000b9f10	uVar32	sweepStep	CONFIRMED	step counter of the backward dead-instruction sweep	^\s*uVar32\ =\ 0;$	+1
+use	FUN_000b9f10	uVar32	sweepStep	CONFIRMED	step counter of the backward dead-instruction sweep	^\s*uVar36\ =\ uVar16\ \-\ uVar32;$	+1
+use	FUN_000b9f10	uVar32	sweepStep	CONFIRMED	step counter of the backward dead-instruction sweep	^\s*uVar32\ =\ uVar32\ \+\ 1;$	+1
+use	FUN_000b9f10	uVar32	sweepStep	CONFIRMED	step counter of the backward dead-instruction sweep	^\s*\}\ while\ \(uVar16\ !=\ uVar32\);$	+1
+use	FUN_000b9f10	uVar32	addSearchIndex	CONFIRMED	index scanned for the ADD that consumes the MUL result	^\s*if\ \(\(\(\(\*\(int\ \*\)\(iVar9\ \+\ iVar35\)\ ==\ 0x8786\)\ \&\&\ \(puVar38\[1\]\ ==\ 2\)\)\ \&\&$	+3
+use	FUN_000b9f10	uVar32	addSearchIndex	CONFIRMED	index scanned for the ADD that consumes the MUL result	^\s*iVar13\ =\ uVar32\ \*\ 0x74;$	+1
+use	FUN_000b9f10	uVar32	addSearchIndex	CONFIRMED	index scanned for the ADD that consumes the MUL result	^\s*if\ \(uVar36\ <\ uVar32\)\ \{$	+2
+use	FUN_000b9f10	uVar32	addSearchIndex	CONFIRMED	index scanned for the ADD that consumes the MUL result	^\s*iVar6\ =\ uVar32\ \-\ uVar36;$@2	+1
+use	FUN_000b9f10	uVar32	addSearchIndex	CONFIRMED	index scanned for the ADD that consumes the MUL result	^\s*if\ \(\(uVar32\ <\ uVar16\ \+\ 2\)\ \|\|\ \(uVar32\ ==\ 0\)\)\ \{$	+1
+use	FUN_000b9f10	uVar32	addSearchIndex	CONFIRMED	index scanned for the ADD that consumes the MUL result	^\s*uVar33\ =\ uVar32\ \+\ 1;$	+1
+use	FUN_000b9f10	uVar32	addSearchIndex	CONFIRMED	index scanned for the ADD that consumes the MUL result	^\s*uVar33\ =\ uVar32;$	+2
+use	FUN_000b9f10	uVar32	addSearchIndex	CONFIRMED	index scanned for the ADD that consumes the MUL result	^\s*uVar32\ =\ uVar32\ \+\ 1;$@2	+1
+use	FUN_000b9f10	uVar32	addSearchIndex	CONFIRMED	index scanned for the ADD that consumes the MUL result	^\s*uVar33\ =\ uVar32\ \+\ 1;$@2	+1
+use	FUN_000b9f10	uVar32	addSearchIndex	CONFIRMED	index scanned for the ADD that consumes the MUL result	^\s*if\ \(uVar36\ <\ uVar32\)\ goto\ LAB_000ba754;$	+1
+use	FUN_000b9f10	uVar32	addSearchIndex	CONFIRMED	index scanned for the ADD that consumes the MUL result	^\s*uVar32\ =\ uVar33;$	+2
+use	FUN_000b9f10	uVar32	addSearchIndex	CONFIRMED	index scanned for the ADD that consumes the MUL result	^\s*uVar32\ =\ uVar32\ \+\ 2;$	+1
+use	FUN_000b9f10	uVar32	addSearchIndex	CONFIRMED	index scanned for the ADD that consumes the MUL result	^\s*uVar32\ =\ uVar36;$	+1
+use	FUN_000b9f10	uVar32	addSearchIndex	CONFIRMED	index scanned for the ADD that consumes the MUL result	^\s*uVar32\ =\ uVar32\ \+\ 1;$@3	+1
+use	FUN_000b9f10	uVar32	addSearchIndex	CONFIRMED	index scanned for the ADD that consumes the MUL result	^\s*if\ \(\(uVar8\ <=\ uVar32\)\ \|\|\ \(bVar1\)\)\ break;$	+1
+use	FUN_000b9f10	uVar32	followerIndex	CONFIRMED	index of the instruction scanned after a matrix multiply	^\s*uVar32\ =\ uVar16\ \+\ 1;$	+3
+use	FUN_000b9f10	uVar32	followerIndex	CONFIRMED	index of the instruction scanned after a matrix multiply	^\s*piVar20\ =\ \(int\ \*\)\(uVar32\ \*\ 0x74\ \+\ iVar35\ \+\ 0x3c\);$	+1
+use	FUN_000b9f10	uVar32	followerIndex	CONFIRMED	index of the instruction scanned after a matrix multiply	^\s*uVar36\ =\ uVar32;$	+1
+use	FUN_000b9f10	uVar32	followerIndex	CONFIRMED	index of the instruction scanned after a matrix multiply	^\s*uVar32\ =\ uVar32\ \+\ 1;$@4	+1
+use	FUN_000b9f10	uVar36	fusedPartnerIndex	INFERRED	index of the second matrix multiply (state 0xba7) found for the modelview multiply (0xba6); 0 when none	^\s*uVar36\ =\ 0;$	+1
+use	FUN_000b9f10	uVar36	fusedPartnerIndex	INFERRED	index of the second matrix multiply (state 0xba7) found for the modelview multiply (0xba6); 0 when none	^\s*if\ \(\(\(\(piVar20\[\-0xf\]\ ==\ 0x8798\)\ \&\&\ \(piVar20\[\-7\]\ ==\ 2\)\)\ \&\&$	+4
+use	FUN_000b9f10	uVar36	fusedPartnerIndex	INFERRED	index of the second matrix multiply (state 0xba7) found for the modelview multiply (0xba6); 0 when none	^\s*uVar36\ =\ uVar32;$	+1
+use	FUN_000b9f10	uVar36	fusedPartnerIndex	INFERRED	index of the second matrix multiply (state 0xba7) found for the modelview multiply (0xba6); 0 when none	^\s*iVar13\ =\ uVar36\ \*\ 0x74;$	+1
+use	FUN_000b9f10	uVar36	fusedPartnerIndex	INFERRED	index of the second matrix multiply (state 0xba7) found for the modelview multiply (0xba6); 0 when none	^\s*uVar36\ =\ 0;$@2	+1
+use	FUN_000b9f10	uVar36	fusedPartnerIndex	INFERRED	index of the second matrix multiply (state 0xba7) found for the modelview multiply (0xba6); 0 when none	^\s*if\ \(uVar36\ <\ uVar8\)\ \{$@5	+2
+use	FUN_000b9f10	uVar36	fusedPartnerIndex	INFERRED	index of the second matrix multiply (state 0xba7) found for the modelview multiply (0xba6); 0 when none	^\s*uVar36\ =\ uVar36\ \+\ 1;$@2	+1
+use	FUN_000b9f10	uVar36	fusedPartnerIndex	INFERRED	index of the second matrix multiply (state 0xba7) found for the modelview multiply (0xba6); 0 when none	^\s*\}\ while\ \(uVar36\ <\ uVar8\);$@2	+1
+use	FUN_000b9f10	iVar35	instEndOffset	CONFIRMED	byte offset (count*0x74, decreasing) of the end of the instruction under inspection	^\s*iVar35\ =\ uVar16\ \*\ 0x74;$	+1
+use	FUN_000b9f10	iVar35	instEndOffset	CONFIRMED	byte offset (count*0x74, decreasing) of the end of the instruction under inspection	^\s*iVar13\ =\ iVar35\ \+\ iVar9;$	+1
+use	FUN_000b9f10	iVar35	instEndOffset	CONFIRMED	byte offset (count*0x74, decreasing) of the end of the instruction under inspection	^\s*iVar9\ =\ iVar35;$	+1
+use	FUN_000b9f10	iVar35	instEndOffset	CONFIRMED	byte offset (count*0x74, decreasing) of the end of the instruction under inspection	^\s*iVar18\ =\ iVar35;$	+1
+use	FUN_000b9f10	iVar35	instEndOffset	CONFIRMED	byte offset (count*0x74, decreasing) of the end of the instruction under inspection	^\s*iVar9\ =\ iVar35;$@2	+1
+use	FUN_000b9f10	iVar35	instEndOffset	CONFIRMED	byte offset (count*0x74, decreasing) of the end of the instruction under inspection	^\s*iVar35\ =\ iVar35\ \+\ \-0x74;$	+1
+use	FUN_000b9f10	iVar35	instArray	CONFIRMED	shader+0x18, the instruction array base	^\s*iVar35\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x18\);$	+5
+use	FUN_000b9f10	iVar35	instArray	CONFIRMED	shader+0x18, the instruction array base	^\s*puVar37\ =\ \(undefined4\ \*\)\(iVar35\ \+\ iVar13\);$	+2
+use	FUN_000b9f10	iVar35	instArray	CONFIRMED	shader+0x18, the instruction array base	^\s*piVar20\ =\ \(int\ \*\)\(iVar35\ \+\ uVar36\ \*\ 0x74\ \+\ 0x20\);$	+1
+use	FUN_000b9f10	iVar35	instArray	CONFIRMED	shader+0x18, the instruction array base	^\s*piVar20\ =\ \(int\ \*\)\(uVar36\ \*\ 0x74\ \+\ iVar35\ \+\ 0x20\);$	+1
+use	FUN_000b9f10	iVar35	instArray	CONFIRMED	shader+0x18, the instruction array base	^\s*piVar20\ =\ \(int\ \*\)\(iVar35\ \+\ uVar33\ \*\ 0x74\ \+\ 0x20\);$	+1
+use	FUN_000b9f10	iVar35	instArray	CONFIRMED	shader+0x18, the instruction array base	^\s*piVar20\ =\ \(int\ \*\)\(iVar35\ \+\ uVar33\ \*\ 0x74\ \+\ 0x20\);$@2	+1
+use	FUN_000b9f10	iVar35	instArray	CONFIRMED	shader+0x18, the instruction array base	^\s*iVar35\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x18\);$@2	+1
+use	FUN_000b9f10	iVar35	instArray	CONFIRMED	shader+0x18, the instruction array base	^\s*iVar35\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x18\);$@3	+4
+use	FUN_000b9f10	iVar35	instArray	CONFIRMED	shader+0x18, the instruction array base	^\s*piVar20\ =\ \(int\ \*\)\(uVar32\ \*\ 0x74\ \+\ iVar35\ \+\ 0x3c\);$	+1
+use	FUN_000b9f10	iVar35	instArray	CONFIRMED	shader+0x18, the instruction array base	^\s*iVar35\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x18\);$@4	+1
+use	FUN_000b9f10	iVar35	instArray	CONFIRMED	shader+0x18, the instruction array base	^\s*iVar13\ =\ iVar13\ \+\ iVar35;$	+1
+use	FUN_000b9f10	iVar35	addSrcIndex	INFERRED	ADD source-0 symbol index compared with the MUL result index	^\s*iVar35\ =\ puVar37\[9\];$	+1
+use	FUN_000b9f10	iVar35	addSrcIndex	INFERRED	ADD source-0 symbol index compared with the MUL result index	^\s*if\ \(iVar35\ ==\ iVar22\)\ \{$	+1
+use	FUN_000b9f10	iVar35	addSrcIndex	INFERRED	ADD source-0 symbol index compared with the MUL result index	^\s*puVar38\[0x17\]\ =\ iVar35;$	+1
+use	FUN_000b9f10	iVar35	shiftDst	CONFIRMED	destination of the memcpy that closes the gap left by a removed instruction	^\s*iVar35\ =\ iVar13\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x18\);$	+1
+use	FUN_000b9f10	iVar35	shiftDst	CONFIRMED	destination of the memcpy that closes the gap left by a removed instruction	^\s*_memcpy\(iVar35,iVar35\ \+\ 0x74,0x74\);$	+1
+use	FUN_000b9f10	iVar35	shiftOffset	CONFIRMED	byte offset of the record being overwritten while shifting later records down	^\s*iVar35\ =\ iVar9;$	+1
+use	FUN_000b9f10	iVar35	shiftOffset	CONFIRMED	byte offset of the record being overwritten while shifting later records down	^\s*iVar13\ =\ iVar35\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x18\);$	+1
+use	FUN_000b9f10	iVar35	shiftOffset	CONFIRMED	byte offset of the record being overwritten while shifting later records down	^\s*iVar35\ =\ iVar35\ \+\ 0x74;$	+1
+use	FUN_000b9f10	iVar35	shiftOffset	CONFIRMED	byte offset of the record being overwritten while shifting later records down	^\s*iVar35\ =\ uVar36\ \*\ 0x74;$	+1
+use	FUN_000b9f10	iVar35	shiftOffset	CONFIRMED	byte offset of the record being overwritten while shifting later records down	^\s*iVar9\ =\ iVar35\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x18\);$	+2
+use	FUN_000b9f10	iVar13	instEnd	CONFIRMED	instArray + instEndOffset: end of the instruction under inspection (fields are addressed at negative offsets)	^\s*iVar13\ =\ iVar35\ \+\ iVar9;$	+5
+use	FUN_000b9f10	iVar13	instEnd	CONFIRMED	instArray + instEndOffset: end of the instruction under inspection (fields are addressed at negative offsets)	^\s*iVar18\ =\ \*\(int\ \*\)\(iVar13\ \+\ \-0x70\);$	+1
+use	FUN_000b9f10	iVar13	instEnd	CONFIRMED	instArray + instEndOffset: end of the instruction under inspection (fields are addressed at negative offsets)	^\s*piVar20\ =\ \(int\ \*\)\(iVar13\ \+\ 4\);$	+1
+use	FUN_000b9f10	iVar13	instEnd	CONFIRMED	instArray + instEndOffset: end of the instruction under inspection (fields are addressed at negative offsets)	^\s*if\ \(\(\*piVar20\ ==\ 1\)\ \&\&\ \(piVar20\[1\]\ ==\ \*\(int\ \*\)\(iVar13\ \+\ \-0x6c\)\)\)\ \{$	+1
+use	FUN_000b9f10	iVar13	instEnd	CONFIRMED	instArray + instEndOffset: end of the instruction under inspection (fields are addressed at negative offsets)	^\s*if\ \(\*\(int\ \*\)\(iVar13\ \+\ \-0x74\)\ ==\ 0x87a2\)\ \{$	+1
+use	FUN_000b9f10	iVar13	instEnd	CONFIRMED	instArray + instEndOffset: end of the instruction under inspection (fields are addressed at negative offsets)	^\s*pcVar7\ =\ \(char\ \*\)\(iVar13\ \+\ 0x38\);$	+1
+use	FUN_000b9f10	iVar13	instEnd	CONFIRMED	instArray + instEndOffset: end of the instruction under inspection (fields are addressed at negative offsets)	^\s*if\ \(\(\*\(int\ \*\)\(pcVar7\ \+\ \-0x34\)\ ==\ 2\)\ \&\&$	+2
+use	FUN_000b9f10	iVar13	instEnd	CONFIRMED	instArray + instEndOffset: end of the instruction under inspection (fields are addressed at negative offsets)	^\s*pcVar7\ =\ \(char\ \*\)\(iVar13\ \+\ 0x38\);$@2	+1
+use	FUN_000b9f10	iVar13	instEnd	CONFIRMED	instArray + instEndOffset: end of the instruction under inspection (fields are addressed at negative offsets)	^\s*iVar18\ =\ \*\(int\ \*\)\(iVar13\ \+\ \-0x6c\);$	+1
+use	FUN_000b9f10	iVar13	instEnd	CONFIRMED	instArray + instEndOffset: end of the instruction under inspection (fields are addressed at negative offsets)	^\s*iVar18\ =\ \*\(int\ \*\)\(iVar13\ \+\ \-0x6c\);$@2	+1
+use	FUN_000b9f10	iVar13	instEnd	CONFIRMED	instArray + instEndOffset: end of the instruction under inspection (fields are addressed at negative offsets)	^\s*if\ \(\(\(\(\*\(int\ \*\)\(iVar9\ \+\ 0x20\)\ ==\ 2\)\ \&\&$	+6
+use	FUN_000b9f10	iVar13	instEnd	CONFIRMED	instArray + instEndOffset: end of the instruction under inspection (fields are addressed at negative offsets)	^\s*if\ \(\(\*\(int\ \*\)\(iVar9\ \+\ 4\)\ ==\ 2\)\ \&\&\ \(\*\(int\ \*\)\(iVar9\ \+\ 8\)\ ==\ \*\(int\ \*\)\(iVar13\ \+\ \-0x6c\)\)\)$	+1
+use	FUN_000b9f10	iVar13	instEnd	CONFIRMED	instArray + instEndOffset: end of the instruction under inspection (fields are addressed at negative offsets)	^\s*if\ \(\(\(\(\*\(int\ \*\)\(iVar18\ \+\ 0x20\)\ ==\ 2\)\ \&\&$	+6
+use	FUN_000b9f10	iVar13	instEnd	CONFIRMED	instArray + instEndOffset: end of the instruction under inspection (fields are addressed at negative offsets)	^\s*if\ \(\(\*\(int\ \*\)\(iVar18\ \+\ 4\)\ ==\ 2\)\ \&\&\ \(\*\(int\ \*\)\(iVar18\ \+\ 8\)\ ==\ \*\(int\ \*\)\(iVar13\ \+\ \-0x6c\)\)\)$	+1
+use	FUN_000b9f10	iVar13	shiftSrc	CONFIRMED	source of the memcpy that moves later records down by 0x74	^\s*iVar13\ =\ iVar9\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x18\);$	+2
+use	FUN_000b9f10	iVar13	shiftSrc	CONFIRMED	source of the memcpy that moves later records down by 0x74	^\s*iVar13\ =\ iVar35\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x18\);$	+2
+use	FUN_000b9f10	iVar13	addInstOffset	CONFIRMED	byte offset of the candidate ADD	^\s*iVar13\ =\ uVar32\ \*\ 0x74;$	+3
+use	FUN_000b9f10	iVar13	addInstOffset	CONFIRMED	byte offset of the candidate ADD	^\s*iVar35\ =\ iVar13\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x18\);$	+2
+use	FUN_000b9f10	iVar13	matrixSymbol	CONFIRMED	symbol record (0x54 bytes) of the first matrix operand; +0x44 state flag, +0x48 == 0xba6 (GL_MODELVIEW_MATRIX)	^\s*iVar13\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x20\)\ \+\ \*\(int\ \*\)\(iVar9\ \+\ 0x24\)\ \*\ 0x54;$	+2
+use	FUN_000b9f10	iVar13	followerCount	CONFIRMED	count-down of instructions after the matrix multiply	^\s*iVar13\ =\ uVar8\ \-\ uVar32;$	+1
+use	FUN_000b9f10	iVar13	followerCount	CONFIRMED	count-down of instructions after the matrix multiply	^\s*iVar13\ =\ iVar13\ \+\ \-1;$	+2
+use	FUN_000b9f10	iVar13	partnerOffset	INFERRED	byte offset of the fused-partner multiply record (0 when none)	^\s*iVar13\ =\ uVar36\ \*\ 0x74;$	+1
+use	FUN_000b9f10	iVar13	partnerOffset	INFERRED	byte offset of the fused-partner multiply record (0 when none)	^\s*iVar13\ =\ 0;$	+1
+use	FUN_000b9f10	iVar13	partnerOffset	INFERRED	byte offset of the fused-partner multiply record (0 when none)	^\s*iVar13\ =\ iVar13\ \+\ iVar35;$	+1
+use	FUN_000b9f10	iVar13	partnerOffset	INFERRED	byte offset of the fused-partner multiply record (0 when none)	^\s*uVar21\ =\ \*\(undefined4\ \*\)\(iVar13\ \+\ 8\);$	+4
+use	FUN_000b9f10	iVar13	partnerOffset	INFERRED	byte offset of the fused-partner multiply record (0 when none)	^\s*uVar21\ =\ \*\(undefined4\ \*\)\(iVar13\ \+\ 0x14\);$	+3
+use	FUN_000b9f10	iVar9	laterInstPtr	CONFIRMED	pointer to the later instruction examined in the forward scan	^\s*iVar9\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x18\);$	+1
+use	FUN_000b9f10	iVar9	laterInstPtr	CONFIRMED	pointer to the later instruction examined in the forward scan	^\s*iVar13\ =\ iVar35\ \+\ iVar9;$	+1
+use	FUN_000b9f10	iVar9	laterInstPtr	CONFIRMED	pointer to the later instruction examined in the forward scan	^\s*iVar9\ =\ iVar18\ \+\ iVar9;$	+8
+use	FUN_000b9f10	iVar9	laterInstPtr	CONFIRMED	pointer to the later instruction examined in the forward scan	^\s*if\ \(\(\*\(int\ \*\)\(iVar9\ \+\ 4\)\ ==\ 2\)\ \&\&\ \(\*\(int\ \*\)\(iVar9\ \+\ 8\)\ ==\ \*\(int\ \*\)\(iVar13\ \+\ \-0x6c\)\)\)$	+1
+use	FUN_000b9f10	iVar9	laterInstPtr	CONFIRMED	pointer to the later instruction examined in the forward scan	^\s*bVar10\ =\ bVar10\ \|\ \*\(byte\ \*\)\(iVar9\ \+\ 0x1b\);$	+4
+use	FUN_000b9f10	iVar9	laterInstPtr	CONFIRMED	pointer to the later instruction examined in the forward scan	^\s*iVar9\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x18\);$@2	+1
+use	FUN_000b9f10	iVar9	shiftCursorOffset	CONFIRMED	byte offset cursor of the removal shift loop	^\s*iVar9\ =\ iVar35;$	+1
+use	FUN_000b9f10	iVar9	shiftCursorOffset	CONFIRMED	byte offset cursor of the removal shift loop	^\s*iVar13\ =\ iVar9\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x18\);$	+1
+use	FUN_000b9f10	iVar9	shiftCursorOffset	CONFIRMED	byte offset cursor of the removal shift loop	^\s*iVar9\ =\ iVar9\ \+\ 0x74;$	+1
+use	FUN_000b9f10	iVar9	remaining	CONFIRMED	count-down of later instructions to scan	^\s*iVar9\ =\ uVar8\ \-\ uVar36;$	+1
+use	FUN_000b9f10	iVar9	remaining	CONFIRMED	count-down of later instructions to scan	^\s*iVar9\ =\ iVar9\ \+\ \-1;$	+2
+use	FUN_000b9f10	iVar9	remaining	CONFIRMED	count-down of later instructions to scan	^\s*iVar9\ =\ uVar8\ \-\ uVar36;$@2	+1
+use	FUN_000b9f10	iVar9	remaining	CONFIRMED	count-down of later instructions to scan	^\s*iVar9\ =\ iVar9\ \+\ \-1;$@2	+2
+use	FUN_000b9f10	iVar9	remaining	CONFIRMED	count-down of later instructions to scan	^\s*iVar9\ =\ uVar8\ \-\ uVar36;$@3	+1
+use	FUN_000b9f10	iVar9	remaining	CONFIRMED	count-down of later instructions to scan	^\s*iVar9\ =\ iVar9\ \+\ \-1;$@3	+2
+use	FUN_000b9f10	iVar9	laterOffset	CONFIRMED	byte offset of the later instruction in the scan	^\s*iVar9\ =\ iVar35;$@2	+1
+use	FUN_000b9f10	iVar9	laterOffset	CONFIRMED	byte offset of the later instruction in the scan	^\s*iVar18\ =\ iVar9\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x18\);$	+1
+use	FUN_000b9f10	iVar9	laterOffset	CONFIRMED	byte offset of the later instruction in the scan	^\s*iVar9\ =\ iVar9\ \+\ 0x74;$@2	+1
+use	FUN_000b9f10	iVar9	mulOffset	CONFIRMED	byte offset of the candidate MUL	^\s*iVar9\ =\ uVar16\ \*\ 0x74;$	+1
+use	FUN_000b9f10	iVar9	mulOffset	CONFIRMED	byte offset of the candidate MUL	^\s*puVar38\ =\ \(undefined4\ \*\)\(iVar9\ \+\ iVar35\);$	+4
+use	FUN_000b9f10	iVar9	mulOffset	CONFIRMED	byte offset of the candidate MUL	^\s*iVar35\ =\ iVar9;$	+1
+use	FUN_000b9f10	iVar9	matMulInst	CONFIRMED	pointer to the OP_MULTIPLY_MATRIX_EXT instruction being fused	^\s*iVar9\ =\ iVar35\ \+\ uVar16\ \*\ 0x74;$	+4
+use	FUN_000b9f10	iVar9	matMulInst	CONFIRMED	pointer to the OP_MULTIPLY_MATRIX_EXT instruction being fused	^\s*if\ \(\(\*piVar20\ ==\ 2\)\ \&\&\ \(piVar20\[1\]\ ==\ \*\(int\ \*\)\(iVar9\ \+\ 8\)\)\)\ \{$	+1
+use	FUN_000b9f10	iVar9	matMulInst	CONFIRMED	pointer to the OP_MULTIPLY_MATRIX_EXT instruction being fused	^\s*if\ \(\(\(piVar20\[\-7\]\ ==\ 2\)\ \&\&\ \(piVar20\[\-6\]\ ==\ \*\(int\ \*\)\(iVar9\ \+\ 8\)\)\)\ \|\|$	+3
+use	FUN_000b9f10	iVar9	matMulInst	CONFIRMED	pointer to the OP_MULTIPLY_MATRIX_EXT instruction being fused	^\s*\*\(int\ \*\)\(iVar9\ \+\ 0x24\)\ =\ iVar18;$	+1
+use	FUN_000b9f10	iVar9	matMulInst	CONFIRMED	pointer to the OP_MULTIPLY_MATRIX_EXT instruction being fused	^\s*\*\(undefined4\ \*\)\(iVar9\ \+\ 4\)\ =\ \*\(undefined4\ \*\)\(iVar13\ \+\ 4\);$	+4
+use	FUN_000b9f10	iVar9	matMulInst	CONFIRMED	pointer to the OP_MULTIPLY_MATRIX_EXT instruction being fused	^\s*\*\(undefined4\ \*\)\(iVar9\ \+\ 0x1c\)\ =\ \*\(undefined4\ \*\)\(iVar13\ \+\ 0x1c\);$	+3
+use	FUN_000b9f10	iVar9	shiftDstPtr	CONFIRMED	destination pointer of the memcpy closing the gap after fusion	^\s*iVar9\ =\ iVar35\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x18\);$	+1
+use	FUN_000b9f10	iVar9	shiftDstPtr	CONFIRMED	destination pointer of the memcpy closing the gap after fusion	^\s*_memcpy\(iVar9,iVar9\ \+\ 0x74,0x74\);$	+1
+use	FUN_000b9f10	iVar6	remainingLater	CONFIRMED	count-down of instructions between the MUL and the ADD / after the ADD	^\s*iVar6\ =\ uVar32\ \-\ uVar36;$	+1
+use	FUN_000b9f10	iVar6	remainingLater	CONFIRMED	count-down of instructions between the MUL and the ADD / after the ADD	^\s*iVar6\ =\ iVar6\ \+\ \-1;$	+2
+use	FUN_000b9f10	iVar6	remainingLater	CONFIRMED	count-down of instructions between the MUL and the ADD / after the ADD	^\s*iVar6\ =\ uVar32\ \-\ uVar36;$@2	+1
+use	FUN_000b9f10	iVar6	remainingLater	CONFIRMED	count-down of instructions between the MUL and the ADD / after the ADD	^\s*iVar6\ =\ 1;$	+1
+use	FUN_000b9f10	iVar6	remainingLater	CONFIRMED	count-down of instructions between the MUL and the ADD / after the ADD	^\s*iVar6\ =\ iVar6\ \+\ \-1;$@2	+2
+use	FUN_000b9f10	iVar6	remainingLater	CONFIRMED	count-down of instructions between the MUL and the ADD / after the ADD	^\s*iVar6\ =\ uVar8\ \-\ uVar33;$	+1
+use	FUN_000b9f10	iVar6	remainingLater	CONFIRMED	count-down of instructions between the MUL and the ADD / after the ADD	^\s*iVar6\ =\ iVar6\ \+\ \-1;$@3	+2
+use	FUN_000b9f10	iVar6	remainingLater	CONFIRMED	count-down of instructions between the MUL and the ADD / after the ADD	^\s*iVar6\ =\ uVar8\ \-\ uVar33;$@2	+1
+use	FUN_000b9f10	iVar6	remainingLater	CONFIRMED	count-down of instructions between the MUL and the ADD / after the ADD	^\s*iVar6\ =\ iVar6\ \+\ \-1;$@4	+2
+use	FUN_000b9f10	piVar20	laterDestSlot	CONFIRMED	pointer to a later instruction's destination (type, index) pair	^\s*piVar20\ =\ \(int\ \*\)\(iVar13\ \+\ 4\);$	+1
+use	FUN_000b9f10	piVar20	laterDestSlot	CONFIRMED	pointer to a later instruction's destination (type, index) pair	^\s*if\ \(\(\*piVar20\ ==\ 1\)\ \&\&\ \(piVar20\[1\]\ ==\ \*\(int\ \*\)\(iVar13\ \+\ \-0x6c\)\)\)\ \{$	+5
+use	FUN_000b9f10	piVar20	laterDestSlot	CONFIRMED	pointer to a later instruction's destination (type, index) pair	^\s*piVar20\ =\ piVar20\ \+\ 0x1d;$	+1
+use	FUN_000b9f10	piVar20	laterSrcSlot	CONFIRMED	pointer to a later instruction's source slots (stride 0x74)	^\s*piVar20\ =\ \(int\ \*\)\(iVar35\ \+\ uVar36\ \*\ 0x74\ \+\ 0x20\);$	+1
+use	FUN_000b9f10	piVar20	laterSrcSlot	CONFIRMED	pointer to a later instruction's source slots (stride 0x74)	^\s*if\ \(\(\(\(\*piVar20\ ==\ 2\)\ \&\&\ \(piVar20\[1\]\ ==\ iVar22\)\)\ \|\|$	+6
+use	FUN_000b9f10	piVar20	laterSrcSlot	CONFIRMED	pointer to a later instruction's source slots (stride 0x74)	^\s*piVar20\ =\ piVar20\ \+\ 0x1d;$@2	+1
+use	FUN_000b9f10	piVar20	laterSrcSlot	CONFIRMED	pointer to a later instruction's source slots (stride 0x74)	^\s*piVar20\ =\ \(int\ \*\)\(uVar36\ \*\ 0x74\ \+\ iVar35\ \+\ 0x20\);$	+1
+use	FUN_000b9f10	piVar20	laterSrcSlot	CONFIRMED	pointer to a later instruction's source slots (stride 0x74)	^\s*if\ \(\(\(\(\(\(\*piVar20\ ==\ 2\)\ \&\&\ \(piVar20\[1\]\ ==\ iVar22\)\)\ \|\|$	+9
+use	FUN_000b9f10	piVar20	laterSrcSlot	CONFIRMED	pointer to a later instruction's source slots (stride 0x74)	^\s*piVar20\ =\ piVar20\ \+\ 0x1d;$@3	+1
+use	FUN_000b9f10	piVar20	laterSrcSlot	CONFIRMED	pointer to a later instruction's source slots (stride 0x74)	^\s*piVar20\ =\ \(int\ \*\)\(iVar35\ \+\ uVar33\ \*\ 0x74\ \+\ 0x20\);$	+1
+use	FUN_000b9f10	piVar20	laterSrcSlot	CONFIRMED	pointer to a later instruction's source slots (stride 0x74)	^\s*if\ \(\(\(\(\*piVar20\ ==\ 2\)\ \&\&\ \(piVar20\[1\]\ ==\ iVar22\)\)\ \|\|$@2	+3
+use	FUN_000b9f10	piVar20	laterSrcSlot	CONFIRMED	pointer to a later instruction's source slots (stride 0x74)	^\s*piVar20\ =\ piVar20\ \+\ 0x1d;$@4	+1
+use	FUN_000b9f10	piVar20	laterSrcSlot	CONFIRMED	pointer to a later instruction's source slots (stride 0x74)	^\s*piVar20\ =\ \(int\ \*\)\(iVar35\ \+\ uVar33\ \*\ 0x74\ \+\ 0x20\);$@2	+1
+use	FUN_000b9f10	piVar20	laterSrcSlot	CONFIRMED	pointer to a later instruction's source slots (stride 0x74)	^\s*if\ \(\(\(\*piVar20\ ==\ 2\)\ \&\&\ \(piVar20\[1\]\ ==\ iVar22\)\)\ \|\|$	+3
+use	FUN_000b9f10	piVar20	laterSrcSlot	CONFIRMED	pointer to a later instruction's source slots (stride 0x74)	^\s*piVar20\ =\ piVar20\ \+\ 0x1d;$@5	+1
+use	FUN_000b9f10	piVar20	laterSrc1Slot	CONFIRMED	pointer to a later instruction's source-1 slot (+0x3c)	^\s*piVar20\ =\ \(int\ \*\)\(uVar32\ \*\ 0x74\ \+\ iVar35\ \+\ 0x3c\);$	+1
+use	FUN_000b9f10	piVar20	laterSrc1Slot	CONFIRMED	pointer to a later instruction's source-1 slot (+0x3c)	^\s*if\ \(\(\*piVar20\ ==\ 2\)\ \&\&\ \(piVar20\[1\]\ ==\ \*\(int\ \*\)\(iVar9\ \+\ 8\)\)\)\ \{$	+5
+use	FUN_000b9f10	piVar20	laterSrc1Slot	CONFIRMED	pointer to a later instruction's source-1 slot (+0x3c)	^\s*if\ \(\(\(piVar20\[\-7\]\ ==\ 2\)\ \&\&\ \(piVar20\[\-6\]\ ==\ \*\(int\ \*\)\(iVar9\ \+\ 8\)\)\)\ \|\|$	+3
+use	FUN_000b9f10	piVar20	laterSrc1Slot	CONFIRMED	pointer to a later instruction's source-1 slot (+0x3c)	^\s*\}\ while\ \(\(iVar13\ !=\ 0\)\ \&\&\ \(piVar20\ =\ piVar20\ \+\ 0x1d,\ !bVar5\)\);$	+1
+use	FUN_000b9f10	pcVar7	laterFlagCursor	INFERRED	walks later instructions' per-source flag bytes (+0x38, +0x54, +0x70)	^\s*pcVar7\ =\ \(char\ \*\)\(iVar13\ \+\ 0x38\);$	+1
+use	FUN_000b9f10	pcVar7	laterFlagCursor	INFERRED	walks later instructions' per-source flag bytes (+0x38, +0x54, +0x70)	^\s*if\ \(\(\(\*pcVar7\ !=\ '\\0'\)\ \|\|\ \(pcVar7\[0x1c\]\ !=\ '\\0'\)\)\ \|\|\ \(pcVar7\[0x38\]\ !=\ '\\0'\)\)\ \{$	+1
+use	FUN_000b9f10	pcVar7	laterFlagCursor	INFERRED	walks later instructions' per-source flag bytes (+0x38, +0x54, +0x70)	^\s*if\ \(\(\*\(int\ \*\)\(pcVar7\ \+\ \-0x34\)\ ==\ 2\)\ \&\&$	+6
+use	FUN_000b9f10	pcVar7	laterFlagCursor	INFERRED	walks later instructions' per-source flag bytes (+0x38, +0x54, +0x70)	^\s*pcVar7\ =\ pcVar7\ \+\ 0x74;$	+1
+use	FUN_000b9f10	pcVar7	laterFlagCursor	INFERRED	walks later instructions' per-source flag bytes (+0x38, +0x54, +0x70)	^\s*pcVar7\ =\ \(char\ \*\)\(iVar13\ \+\ 0x38\);$@2	+1
+use	FUN_000b9f10	pcVar7	laterFlagCursor	INFERRED	walks later instructions' per-source flag bytes (+0x38, +0x54, +0x70)	^\s*if\ \(\(\(\*pcVar7\ !=\ '\\0'\)\ \|\|\ \(pcVar7\[0x1c\]\ !=\ '\\0'\)\)\ \|\|\ \(pcVar7\[0x38\]\ !=\ '\\0'\)\)\ \{$@2	+1
+use	FUN_000b9f10	pcVar7	laterFlagCursor	INFERRED	walks later instructions' per-source flag bytes (+0x38, +0x54, +0x70)	^\s*pcVar7\ =\ pcVar7\ \+\ 0x74;$@2	+1
+use	FUN_000b9f10	uVar33	scanIndex	CONFIRMED	index of the later instruction in the forward scan	^\s*uVar33\ =\ uVar36;$	+1
+use	FUN_000b9f10	uVar33	scanIndex	CONFIRMED	index of the later instruction in the forward scan	^\s*uVar33\ =\ uVar33\ \+\ 1;$	+1
+use	FUN_000b9f10	uVar33	scanIndex	CONFIRMED	index of the later instruction in the forward scan	^\s*if\ \(uVar8\ <=\ uVar33\)\ break;$	+1
+use	FUN_000b9f10	uVar33	scanIndex	CONFIRMED	index of the later instruction in the forward scan	^\s*uVar33\ =\ uVar36;$@2	+1
+use	FUN_000b9f10	uVar33	scanIndex	CONFIRMED	index of the later instruction in the forward scan	^\s*uVar33\ =\ uVar33\ \+\ 1;$@2	+1
+use	FUN_000b9f10	uVar33	scanIndex	CONFIRMED	index of the later instruction in the forward scan	^\s*\}\ while\ \(uVar33\ <\ uVar8\);$	+1
+use	FUN_000b9f10	uVar33	afterAddIndex	CONFIRMED	index after the ADD	^\s*uVar33\ =\ uVar32\ \+\ 1;$	+4
+use	FUN_000b9f10	uVar33	afterAddIndex	CONFIRMED	index after the ADD	^\s*uVar33\ =\ uVar32\ \+\ 1;$@2	+4
+use	FUN_000b9f10	uVar33	shiftIndex	CONFIRMED	index of the removal shift loop	^\s*uVar33\ =\ uVar32;$	+1
+use	FUN_000b9f10	uVar33	shiftIndex	CONFIRMED	index of the removal shift loop	^\s*uVar33\ =\ uVar33\ \+\ 1;$@3	+1
+use	FUN_000b9f10	uVar33	shiftIndex	CONFIRMED	index of the removal shift loop	^\s*\}\ while\ \(uVar33\ <\ uVar8\);$@2	+1
+use	FUN_000b9f10	uVar33	mulScanStart	CONFIRMED	scan start copied from the MUL index	^\s*uVar33\ =\ uVar16;$	+1
+use	FUN_000b9f10	uVar33	mulScanStart	CONFIRMED	scan start copied from the MUL index	^\s*uVar32\ =\ uVar33;$	+2
+use	FUN_000b9f10	uVar33	mulScanStart	CONFIRMED	scan start copied from the MUL index	^\s*\}\ while\ \(uVar33\ <\ uVar8\);$@3	+1
