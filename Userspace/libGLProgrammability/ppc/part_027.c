@@ -265,9 +265,9 @@ int TType__isVector(this)
 }
 
 /* __ZN5TType7setTypeE10TBasicTypeibbi @ 0x97c31368 (32 bytes) */
-int __ZN5TType7setTypeE10TBasicTypeibbi(this, param_2, param_3, param_4, param_5, param_6)
+int __ZN5TType7setTypeE10TBasicTypeibbi(this, basicType, param_3, param_4, param_5, param_6)
   void *this;
-  uint param_2;
+  uint basicType;
   uint param_3;
   uint param_4;
   uint param_5;
@@ -277,27 +277,27 @@ int __ZN5TType7setTypeE10TBasicTypeibbi(this, param_2, param_3, param_4, param_5
   *(uint *)((int)this + 0x24) =
        (param_5 & 1) << 9 |
        (param_4 & 1) << 10 |
-       (param_3 & 0xff) << 0xb | (param_2 & 0x3f) << 0x13 | *(uint *)((int)this + 0x24) & 0xfe0001ff
+       (param_3 & 0xff) << 0xb | (basicType & 0x3f) << 0x13 | *(uint *)((int)this + 0x24) & 0xfe0001ff
   ;
   return;
 }
 
 /* __ZN5TType7setTypeE10TBasicTypeibPS_ @ 0x97c31388 (40 bytes) */
-int __ZN5TType7setTypeE10TBasicTypeibPS_(this, param_2, param_3, param_4, param_5)
+int __ZN5TType7setTypeE10TBasicTypeibPS_(this, basicType, param_3, param_4, type)
   void *this;
-  uint param_2;
+  uint basicType;
   uint param_3;
   uint param_4;
-  int param_5;
+  int type;
 {
   *(uint *)((int)this + 0x24) =
        (param_4 & 1) << 10 |
-       (param_3 & 0xff) << 0xb | (param_2 & 0x3f) << 0x13 | *(uint *)((int)this + 0x24) & 0xfe0003ff
+       (param_3 & 0xff) << 0xb | (basicType & 0x3f) << 0x13 | *(uint *)((int)this + 0x24) & 0xfe0003ff
   ;
-  if (param_5 == 0) {
+  if (type == 0) {
     return;
   }
-  *(undefined4 *)((int)this + 8) = *(undefined4 *)(param_5 + 8);
+  *(undefined4 *)((int)this + 8) = *(undefined4 *)(type + 8);
   return;
 }
 

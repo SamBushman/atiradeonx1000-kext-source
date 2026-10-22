@@ -39,9 +39,9 @@ int __ZNKSs13find_first_ofERKSsm(this, param_2, param_3)
 }
 
 /* __ZNKSs13find_first_ofEPKcmm @ 0x97c15b90 (152 bytes) */
-int __ZNKSs13find_first_ofEPKcmm(this, param_2, param_3, param_4)
+int __ZNKSs13find_first_ofEPKcmm(this, str, param_3, param_4)
   void *this;
-  char *param_2;
+  char *str;
   ulong param_3;
   ulong param_4;
 {
@@ -50,7 +50,7 @@ int __ZNKSs13find_first_ofEPKcmm(this, param_2, param_3, param_4)
   
   if ((param_4 != 0) && (iVar1 = *(int *)this, param_3 < *(uint *)(iVar1 + -0xc))) {
     do {
-      pvVar2 = _memchr(param_2,(int)*(char *)(iVar1 + param_3),param_4);
+      pvVar2 = _memchr(str,(int)*(char *)(iVar1 + param_3),param_4);
       if (pvVar2 != (void *)0x0) {
         return param_3;
       }
@@ -62,15 +62,15 @@ int __ZNKSs13find_first_ofEPKcmm(this, param_2, param_3, param_4)
 }
 
 /* __ZNKSs13find_first_ofEPKcm @ 0x97c15c28 (72 bytes) */
-int __ZNKSs13find_first_ofEPKcm(this, param_2, param_3)
+int __ZNKSs13find_first_ofEPKcm(this, str, param_3)
   void *this;
-  char *param_2;
+  char *str;
   ulong param_3;
 {
   ulong uVar1;
   
-  uVar1 = _strlen(param_2);
-  return ((int (*)())__ZNKSs13find_first_ofEPKcmm)(this,param_2,param_3,uVar1);
+  uVar1 = _strlen(str);
+  return ((int (*)())__ZNKSs13find_first_ofEPKcmm)(this,str,param_3,uVar1);
 }
 
 /* __ZNKSs13find_first_ofEcm @ 0x97c15c70 (4 bytes) */
@@ -92,9 +92,9 @@ int __ZNKSs12find_last_ofERKSsm(this, param_2, param_3)
 }
 
 /* __ZNKSs12find_last_ofEPKcmm @ 0x97c15c80 (144 bytes) */
-int __ZNKSs12find_last_ofEPKcmm(this, param_2, param_3, param_4)
+int __ZNKSs12find_last_ofEPKcmm(this, str, param_3, param_4)
   void *this;
-  char *param_2;
+  char *str;
   ulong param_3;
   ulong param_4;
 {
@@ -113,7 +113,7 @@ LAB_97c15cf8:
     if (param_3 < uVar4) {
       uVar4 = param_3;
     }
-    while (pvVar3 = _memchr(param_2,(int)*(char *)(iVar2 + uVar4),param_4), pvVar3 == (void *)0x0) {
+    while (pvVar3 = _memchr(str,(int)*(char *)(iVar2 + uVar4),param_4), pvVar3 == (void *)0x0) {
       bVar1 = uVar4 == 0;
       uVar4 = uVar4 - 1;
       if (bVar1) goto LAB_97c15cf8;
@@ -124,15 +124,15 @@ LAB_97c15cf8:
 }
 
 /* __ZNKSs12find_last_ofEPKcm @ 0x97c15d10 (72 bytes) */
-int __ZNKSs12find_last_ofEPKcm(this, param_2, param_3)
+int __ZNKSs12find_last_ofEPKcm(this, str, param_3)
   void *this;
-  char *param_2;
+  char *str;
   ulong param_3;
 {
   ulong uVar1;
   
-  uVar1 = _strlen(param_2);
-  return ((int (*)())__ZNKSs12find_last_ofEPKcmm)(this,param_2,param_3,uVar1);
+  uVar1 = _strlen(str);
+  return ((int (*)())__ZNKSs12find_last_ofEPKcmm)(this,str,param_3,uVar1);
 }
 
 /* __ZNKSs12find_last_ofEcm @ 0x97c15d58 (4 bytes) */
@@ -154,9 +154,9 @@ int __ZNKSs17find_first_not_ofERKSsm(this, param_2, param_3)
 }
 
 /* __ZNKSs17find_first_not_ofEPKcmm @ 0x97c15d68 (124 bytes) */
-int __ZNKSs17find_first_not_ofEPKcmm(this, param_2, param_3, param_4)
+int __ZNKSs17find_first_not_ofEPKcmm(this, str, param_3, param_4)
   void *this;
-  char *param_2;
+  char *str;
   ulong param_3;
   ulong param_4;
 {
@@ -166,7 +166,7 @@ int __ZNKSs17find_first_not_ofEPKcmm(this, param_2, param_3, param_4)
   iVar1 = *(int *)this;
   if (param_3 < *(uint *)(iVar1 + -0xc)) {
     do {
-      pvVar2 = _memchr(param_2,(int)*(char *)(iVar1 + param_3),param_4);
+      pvVar2 = _memchr(str,(int)*(char *)(iVar1 + param_3),param_4);
       if (pvVar2 == (void *)0x0) {
         return param_3;
       }
@@ -178,15 +178,15 @@ int __ZNKSs17find_first_not_ofEPKcmm(this, param_2, param_3, param_4)
 }
 
 /* __ZNKSs17find_first_not_ofEPKcm @ 0x97c15de4 (72 bytes) */
-int __ZNKSs17find_first_not_ofEPKcm(this, param_2, param_3)
+int __ZNKSs17find_first_not_ofEPKcm(this, str, param_3)
   void *this;
-  char *param_2;
+  char *str;
   ulong param_3;
 {
   ulong uVar1;
   
-  uVar1 = _strlen(param_2);
-  return ((int (*)())__ZNKSs17find_first_not_ofEPKcmm)(this,param_2,param_3,uVar1);
+  uVar1 = _strlen(str);
+  return ((int (*)())__ZNKSs17find_first_not_ofEPKcmm)(this,str,param_3,uVar1);
 }
 
 /* __ZNKSs17find_first_not_ofEcm @ 0x97c15e2c (68 bytes) */
@@ -215,9 +215,9 @@ int __ZNKSs16find_last_not_ofERKSsm(this, param_2, param_3)
 }
 
 /* __ZNKSs16find_last_not_ofEPKcmm @ 0x97c15e7c (136 bytes) */
-int __ZNKSs16find_last_not_ofEPKcmm(this, param_2, param_3, param_4)
+int __ZNKSs16find_last_not_ofEPKcmm(this, str, param_3, param_4)
   void *this;
-  char *param_2;
+  char *str;
   ulong param_3;
   ulong param_4;
 {
@@ -236,7 +236,7 @@ LAB_97c15eec:
     if (param_3 < uVar4) {
       uVar4 = param_3;
     }
-    while (pvVar3 = _memchr(param_2,(int)*(char *)(iVar2 + uVar4),param_4), pvVar3 != (void *)0x0) {
+    while (pvVar3 = _memchr(str,(int)*(char *)(iVar2 + uVar4),param_4), pvVar3 != (void *)0x0) {
       bVar1 = uVar4 == 0;
       uVar4 = uVar4 - 1;
       if (bVar1) goto LAB_97c15eec;
@@ -247,15 +247,15 @@ LAB_97c15eec:
 }
 
 /* __ZNKSs16find_last_not_ofEPKcm @ 0x97c15f04 (72 bytes) */
-int __ZNKSs16find_last_not_ofEPKcm(this, param_2, param_3)
+int __ZNKSs16find_last_not_ofEPKcm(this, str, param_3)
   void *this;
-  char *param_2;
+  char *str;
   ulong param_3;
 {
   ulong uVar1;
   
-  uVar1 = _strlen(param_2);
-  return ((int (*)())__ZNKSs16find_last_not_ofEPKcmm)(this,param_2,param_3,uVar1);
+  uVar1 = _strlen(str);
+  return ((int (*)())__ZNKSs16find_last_not_ofEPKcmm)(this,str,param_3,uVar1);
 }
 
 /* __ZNKSs16find_last_not_ofEcm @ 0x97c15f4c (84 bytes) */
@@ -429,9 +429,9 @@ int __ZNKSs7compareEmmRKSsmm(this, param_2, param_3, param_4, param_5, param_6)
 }
 
 /* __ZNKSs7compareEPKc @ 0x97c1621c (112 bytes) */
-int __ZNKSs7compareEPKc(this, param_2)
+int __ZNKSs7compareEPKc(this, str)
   void *this;
-  char *param_2;
+  char *str;
 {
   uint uVar1;
   uint *puVar2;
@@ -443,13 +443,13 @@ int __ZNKSs7compareEPKc(this, param_2)
   iVar3 = *(int *)this;
   uVar4 = *(uint *)(iVar3 + -0xc);
   local_30 = uVar4;
-  uVar1 = _strlen(param_2);
+  uVar1 = _strlen(str);
   puVar2 = local_2c;
   local_2c[0] = uVar1;
   if (uVar4 <= uVar1) {
     puVar2 = &local_30;
   }
-  iVar3 = _memcmp(iVar3,param_2,*puVar2);
+  iVar3 = _memcmp(iVar3,str,*puVar2);
   if (iVar3 == 0) {
     iVar3 = uVar4 - uVar1;
   }
@@ -457,13 +457,13 @@ int __ZNKSs7compareEPKc(this, param_2)
 }
 
 /* __ZNKSs7compareEmmPKc @ 0x97c1628c (188 bytes) */
-int __ZNKSs7compareEmmPKc(this, param_2, param_3, param_4)
+int __ZNKSs7compareEmmPKc(this, param_2, param_3, str)
   void *this;
   ulong param_2;
   ulong param_3;
-  char *param_4;
+  char *str;
 {
-  unsigned int ghidra_home[8] = { this, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { this, param_2, param_3, str, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   uint *puVar1;
   uint uVar2;
   int iVar3;
@@ -479,7 +479,7 @@ int __ZNKSs7compareEmmPKc(this, param_2, param_3, param_4)
     std____throw_out_of_range("basic_string::compare");
     iVar3 = *(int *)this;
   }
-  uVar2 = _strlen(param_4);
+  uVar2 = _strlen(str);
   local_30 = uVar4 - param_2;
   local_28[0] = uVar2;
   puVar1 = &(*(unsigned int *)((unsigned char *)ghidra_home + 8));
@@ -492,7 +492,7 @@ int __ZNKSs7compareEmmPKc(this, param_2, param_3, param_4)
   if (uVar4 <= uVar2) {
     puVar1 = &local_2c;
   }
-  iVar3 = _memcmp(iVar3 + param_2,param_4,*puVar1);
+  iVar3 = _memcmp(iVar3 + param_2,str,*puVar1);
   if (iVar3 == 0) {
     iVar3 = uVar4 - uVar2;
   }
@@ -500,14 +500,14 @@ int __ZNKSs7compareEmmPKc(this, param_2, param_3, param_4)
 }
 
 /* __ZNKSs7compareEmmPKcm @ 0x97c16348 (220 bytes) */
-int __ZNKSs7compareEmmPKcm(this, param_2, param_3, param_4, param_5)
+int __ZNKSs7compareEmmPKcm(this, param_2, param_3, str, param_5)
   void *this;
   ulong param_2;
   ulong param_3;
-  char *param_4;
+  char *str;
   ulong param_5;
 {
-  unsigned int ghidra_home[8] = { this, param_2, param_3, param_4, param_5, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { this, param_2, param_3, str, param_5, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   uint *puVar1;
   int iVar2;
   uint uVar3;
@@ -525,7 +525,7 @@ int __ZNKSs7compareEmmPKcm(this, param_2, param_3, param_4, param_5)
     std____throw_out_of_range("basic_string::compare");
     iVar2 = *(int *)this;
   }
-  local_30 = _strlen(param_4);
+  local_30 = _strlen(str);
   puVar1 = &(*(unsigned int *)((unsigned char *)ghidra_home + 16));
   if (local_30 <= (*(ulong *)((unsigned char *)ghidra_home + 16))) {
     puVar1 = &local_30;
@@ -543,7 +543,7 @@ int __ZNKSs7compareEmmPKcm(this, param_2, param_3, param_4, param_5)
   if (uVar4 <= uVar3) {
     puVar1 = &local_28;
   }
-  iVar2 = _memcmp(iVar2 + param_2,param_4,*puVar1);
+  iVar2 = _memcmp(iVar2 + param_2,str,*puVar1);
   if (iVar2 == 0) {
     iVar2 = uVar4 - uVar3;
   }

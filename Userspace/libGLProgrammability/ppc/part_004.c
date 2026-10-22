@@ -592,11 +592,11 @@ LAB_97b916c8:
 }
 
 /* TIntermConstantUnion__fold @ 0x97b91724 (792 bytes) */
-int TIntermConstantUnion__fold(this, param_2, param_3, param_4, param_5, param_6, param_7)
+int TIntermConstantUnion__fold(this, param_2, param_3, infoSink, param_5, param_6, param_7)
   unsigned char * this;
   int param_2;
   unsigned char * param_3;
-  void *param_4;
+  void *infoSink;
   int param_5;
   undefined4 param_6;
   uint param_7;
@@ -867,7 +867,7 @@ LAB_97b95bbc:
     }
 override_jmp_97b95640_case_0:
     pcVar30 = "Unary operation not folded into constant";
-    __ZN13TInfoSinkBase6appendEPKc(param_4,"INTERNAL ERROR: ");
+    __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
     uVar10 = uVar21 & 0xffff;
     bVar32 = (uVar10 == 0) << 1;
     if (uVar10 == 0) {
@@ -880,7 +880,7 @@ override_jmp_97b95640_case_0:
     __ZNSsC1EPKcRKSaIcE(&local_1d0,(char *)paVar22,(unsigned char *)&local_180);
                     
     *(undefined *)((int)local_1d0 + (int)local_1d0[-3]) = *PTR__S_terminal_a7b7c0b8;
-    __ZN13TInfoSinkBase6appendEPKc(param_4,(char *)local_1d0);
+    __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_1d0);
     ppuVar29 = local_1d0;
 code_r0x97b95b60:
     ppuVar4 = ppuVar29 + -1;
@@ -897,16 +897,16 @@ joined_r0x97b95b7c:
     if ((int)puVar8 < 1) {
       __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(ppuVar29 + -3),paVar22);
     }
-    __ZN13TInfoSinkBase6appendEPKc(param_4,": ");
+    __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
 code_r0x97b95ba0:
-    __ZN13TInfoSinkBase6appendEPKc(param_4,pcVar30);
-    __ZN13TInfoSinkBase6appendEPKc(param_4,"\n");
+    __ZN13TInfoSinkBase6appendEPKc(infoSink,pcVar30);
+    __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
 switchD_97b94d20_caseD_17:
     return (unsigned char *)0x0;
   }
   bVar31 = false;
   pTVar18 = param_3;
-  a3 = param_4;
+  a3 = infoSink;
   iVar17 = param_5;
   iVar12 = (**(code **)(*(int *)param_3 + 0x18))(param_3);
   if ((iVar12 != 0) && (iVar12 = (**(code **)(*(int *)param_3 + 0x4c))(param_3), iVar12 == 1)) {
@@ -943,7 +943,7 @@ switchD_97b94d20_caseD_17:
             uVar21 = (*(code *)**(undefined4 **)this)(this,a1,pTVar18,a3,iVar17,param_6,local_4c);
                     
 override_jmp_97b9198c_case_0:
-            __ZN13TInfoSinkBase6appendEPKc(param_4,"INTERNAL ERROR: ");
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
             uVar10 = uVar21 & 0xffff;
             bVar32 = (uVar10 == 0) << 1;
             if (uVar10 == 0) {
@@ -955,7 +955,7 @@ override_jmp_97b9198c_case_0:
             paVar22 = (unsigned char *)&local_190;
             __ZNSsC1EPKcRKSaIcE(&local_1a0,(char *)paVar22,(unsigned char *)&local_150);
             *(undefined *)((int)local_1a0 + (int)local_1a0[-3]) = *PTR__S_terminal_a7b7c0b8;
-            __ZN13TInfoSinkBase6appendEPKc(param_4,(char *)local_1a0);
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_1a0);
             ppuVar29 = local_1a0 + -1;
             paVar20 = (unsigned char *)(local_1a0 + -3);
             do {
@@ -1030,7 +1030,7 @@ LAB_97b919a8: ;
               if (*(float *)(pcVar27 + iVar17 * 4) == 0.0) {
                 uVar21 = (*(code *)**(undefined4 **)this)(this);
                     
-                __ZN13TInfoSinkBase6appendEPKc(param_4,"WARNING: ");
+                __ZN13TInfoSinkBase6appendEPKc(infoSink,"WARNING: ");
                 uVar10 = uVar21 & 0xffff;
                 bVar32 = (uVar10 == 0) << 1;
                 if (uVar10 == 0) {
@@ -1041,7 +1041,7 @@ LAB_97b919a8: ;
                 }
                 __ZNSsC1EPKcRKSaIcE(&local_1a0,(char *)&local_190,(unsigned char *)&local_150);
                 *(undefined *)((int)local_1a0 + (int)local_1a0[-3]) = *PTR__S_terminal_a7b7c0b8;
-                __ZN13TInfoSinkBase6appendEPKc(param_4,(char *)local_1a0);
+                __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_1a0);
                 ppuVar29 = local_1a0 + -1;
                 do {
                   puVar8 = *ppuVar29;
@@ -1054,10 +1054,10 @@ LAB_97b919a8: ;
                 if ((int)puVar8 < 1) {
                   __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_1a0 + -3),&local_190);
                 }
-                __ZN13TInfoSinkBase6appendEPKc(param_4,": ");
+                __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
                 __ZN13TInfoSinkBase6appendEPKc
-                          (param_4,"Divide by zero error during constant folding");
-                __ZN13TInfoSinkBase6appendEPKc(param_4,"\n");
+                          (infoSink,"Divide by zero error during constant folding");
+                __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
                 fVar6 = 3.4028235e+38;
               }
               else {
@@ -1069,7 +1069,7 @@ LAB_97b919a8: ;
               if (**(float **)(iVar12 + 0x30) == 0.0) {
                 uVar21 = (*(code *)**(undefined4 **)this)(this);
                     
-                __ZN13TInfoSinkBase6appendEPKc(param_4,"WARNING: ");
+                __ZN13TInfoSinkBase6appendEPKc(infoSink,"WARNING: ");
                 uVar10 = uVar21 & 0xffff;
                 bVar32 = (uVar10 == 0) << 1;
                 if (uVar10 == 0) {
@@ -1080,7 +1080,7 @@ LAB_97b919a8: ;
                 }
                 __ZNSsC1EPKcRKSaIcE(&local_1a0,(char *)&local_190,(unsigned char *)&local_150);
                 *(undefined *)((int)local_1a0 + (int)local_1a0[-3]) = *PTR__S_terminal_a7b7c0b8;
-                __ZN13TInfoSinkBase6appendEPKc(param_4,(char *)local_1a0);
+                __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_1a0);
                 ppuVar29 = local_1a0 + -1;
                 do {
                   puVar8 = *ppuVar29;
@@ -1093,10 +1093,10 @@ LAB_97b919a8: ;
                 if ((int)puVar8 < 1) {
                   __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_1a0 + -3),&local_190);
                 }
-                __ZN13TInfoSinkBase6appendEPKc(param_4,": ");
+                __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
                 __ZN13TInfoSinkBase6appendEPKc
-                          (param_4,"Divide by zero error during constant folding");
-                __ZN13TInfoSinkBase6appendEPKc(param_4,"\n");
+                          (infoSink,"Divide by zero error during constant folding");
+                __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
                 iVar28 = iVar17 << 2;
                 fVar6 = 3.4028235e+38;
               }
@@ -1118,7 +1118,7 @@ LAB_97b919a8: ;
               if (*(int *)(pcVar27 + iVar17 * 4) == 0) {
                 uVar21 = (*(code *)**(undefined4 **)this)(this);
                     
-                __ZN13TInfoSinkBase6appendEPKc(param_4,"WARNING: ");
+                __ZN13TInfoSinkBase6appendEPKc(infoSink,"WARNING: ");
                 uVar10 = uVar21 & 0xffff;
                 bVar32 = (uVar10 == 0) << 1;
                 if (uVar10 == 0) {
@@ -1129,7 +1129,7 @@ LAB_97b919a8: ;
                 }
                 __ZNSsC1EPKcRKSaIcE(&local_1a0,(char *)&local_190,(unsigned char *)&local_150);
                 *(undefined *)((int)local_1a0 + (int)local_1a0[-3]) = *PTR__S_terminal_a7b7c0b8;
-                __ZN13TInfoSinkBase6appendEPKc(param_4,(char *)local_1a0);
+                __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_1a0);
                 ppuVar29 = local_1a0 + -1;
                 do {
                   puVar8 = *ppuVar29;
@@ -1142,10 +1142,10 @@ LAB_97b919a8: ;
                 if ((int)puVar8 < 1) {
                   __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_1a0 + -3),&local_190);
                 }
-                __ZN13TInfoSinkBase6appendEPKc(param_4,": ");
+                __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
                 __ZN13TInfoSinkBase6appendEPKc
-                          (param_4,"Divide by zero error during constant folding");
-                __ZN13TInfoSinkBase6appendEPKc(param_4,"\n");
+                          (infoSink,"Divide by zero error during constant folding");
+                __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
                 iVar28 = 0x7fffffff;
               }
               else {
@@ -1157,7 +1157,7 @@ LAB_97b919a8: ;
               if (**(int **)(iVar12 + 0x30) == 0) {
                 uVar21 = (*(code *)**(undefined4 **)this)(this);
                     
-                __ZN13TInfoSinkBase6appendEPKc(param_4,"WARNING: ");
+                __ZN13TInfoSinkBase6appendEPKc(infoSink,"WARNING: ");
                 uVar10 = uVar21 & 0xffff;
                 bVar32 = (uVar10 == 0) << 1;
                 if (uVar10 == 0) {
@@ -1168,7 +1168,7 @@ LAB_97b919a8: ;
                 }
                 __ZNSsC1EPKcRKSaIcE(&local_1a0,(char *)&local_190,(unsigned char *)&local_150);
                 *(undefined *)((int)local_1a0 + (int)local_1a0[-3]) = *PTR__S_terminal_a7b7c0b8;
-                __ZN13TInfoSinkBase6appendEPKc(param_4,(char *)local_1a0);
+                __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_1a0);
                 ppuVar29 = local_1a0 + -1;
                 do {
                   puVar8 = *ppuVar29;
@@ -1181,10 +1181,10 @@ LAB_97b919a8: ;
                 if ((int)puVar8 < 1) {
                   __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_1a0 + -3),&local_190);
                 }
-                __ZN13TInfoSinkBase6appendEPKc(param_4,": ");
+                __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
                 __ZN13TInfoSinkBase6appendEPKc
-                          (param_4,"Divide by zero error during constant folding");
-                __ZN13TInfoSinkBase6appendEPKc(param_4,"\n");
+                          (infoSink,"Divide by zero error during constant folding");
+                __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
                 iVar14 = 0x7fffffff;
                 iVar28 = iVar17 << 2;
               }
@@ -1220,7 +1220,7 @@ LAB_97b919a8: ;
               uVar21 = (*(code *)**(undefined4 **)this)
                                  (this,a1_00,pTVar18,a3,iVar17,param_6,local_4c);
                     
-              __ZN13TInfoSinkBase6appendEPKc(param_4,"INTERNAL ERROR: ");
+              __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
               uVar10 = uVar21 & 0xffff;
               bVar32 = (uVar10 == 0) << 1;
               if (uVar10 == 0) {
@@ -1232,7 +1232,7 @@ LAB_97b919a8: ;
               paVar22 = (unsigned char *)&local_190;
               __ZNSsC1EPKcRKSaIcE(&local_1a0,(char *)local_140,paVar22);
               *(undefined *)((int)local_1a0 + (int)local_1a0[-3]) = *PTR__S_terminal_a7b7c0b8;
-              __ZN13TInfoSinkBase6appendEPKc(param_4,(char *)local_1a0);
+              __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_1a0);
               ppuVar29 = local_1a0;
               goto code_r0x97b932f0;
             }
@@ -1352,7 +1352,7 @@ switchD_97b91834_caseD_15:
     pcVar30 = "Invalid operator for constant folding";
     uVar21 = (*(code *)**(undefined4 **)this)(this);
                     
-    __ZN13TInfoSinkBase6appendEPKc(param_4,"INTERNAL ERROR: ");
+    __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
     uVar10 = uVar21 & 0xffff;
     bVar32 = (uVar10 == 0) << 1;
     if (uVar10 == 0) {
@@ -1364,7 +1364,7 @@ switchD_97b91834_caseD_15:
     paVar22 = (unsigned char *)&local_190;
     __ZNSsC1EPKcRKSaIcE(&local_1a0,(char *)paVar22,(unsigned char *)&local_150);
     *(undefined *)((int)local_1a0 + (int)local_1a0[-3]) = *PTR__S_terminal_a7b7c0b8;
-    __ZN13TInfoSinkBase6appendEPKc(param_4,(char *)local_1a0);
+    __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_1a0);
     ppuVar4 = local_1a0 + -1;
     do {
       puVar8 = *ppuVar4;
@@ -1403,7 +1403,7 @@ switchD_97b92b40_caseD_17:
       uVar21 = (*(code *)**(undefined4 **)this)(this);
                     
 override_jmp_97b938f4_case_0:
-      __ZN13TInfoSinkBase6appendEPKc(param_4,"INTERNAL ERROR: ");
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
       uVar10 = uVar21 & 0xffff;
       bVar32 = (uVar10 == 0) << 1;
       if (uVar10 == 0) {
@@ -1415,7 +1415,7 @@ override_jmp_97b938f4_case_0:
 code_r0x97b945f4:
       __ZNSsC1EPKcRKSaIcE(&local_170,(char *)&local_160,aaStack_120);
       *(undefined *)((int)local_170 + (int)local_170[-3]) = *PTR__S_terminal_a7b7c0b8;
-      __ZN13TInfoSinkBase6appendEPKc(param_4,(char *)local_170);
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_170);
       ppuVar29 = local_170 + -1;
       do {
         puVar8 = *ppuVar29;
@@ -1451,7 +1451,7 @@ code_r0x97b945f4:
           pcVar30 = "Constant folding cannot be done for \"+\"";
           uVar21 = (*(code *)**(undefined4 **)this)(this,a1_05,pTVar18,a3,iVar17,param_6,local_4c);
                     
-          __ZN13TInfoSinkBase6appendEPKc(param_4,"INTERNAL ERROR: ");
+          __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
           uVar10 = uVar21 & 0xffff;
           bVar32 = (uVar10 == 0) << 1;
           if (uVar10 == 0) {
@@ -1464,7 +1464,7 @@ code_r0x97b945f4:
 code_r0x97b93f6c:
           __ZNSsC1EPKcRKSaIcE(&local_170,(char *)&local_160,paVar22);
           *(undefined *)((int)local_170 + (int)local_170[-3]) = *PTR__S_terminal_a7b7c0b8;
-          __ZN13TInfoSinkBase6appendEPKc(param_4,(char *)local_170);
+          __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_170);
           ppuVar29 = local_170 + -1;
           paVar20 = (unsigned char *)(local_170 + -3);
           do {
@@ -1513,7 +1513,7 @@ LAB_97b92dd4:
             uVar21 = (*(code *)**(undefined4 **)this)(this,a1_06,pTVar18,a3,iVar17,param_6,local_4c)
             ;
                     
-            __ZN13TInfoSinkBase6appendEPKc(param_4,"INTERNAL ERROR: ");
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
             uVar10 = uVar21 & 0xffff;
             bVar32 = (uVar10 == 0) << 1;
             if (uVar10 == 0) {
@@ -1560,7 +1560,7 @@ LAB_97b92dd4:
                 uVar21 = (*(code *)**(undefined4 **)this)
                                    (this,a1_07,pTVar18,a3,iVar17,param_6,local_4c);
                     
-                __ZN13TInfoSinkBase6appendEPKc(param_4,"INTERNAL ERROR: ");
+                __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
                 uVar10 = uVar21 & 0xffff;
                 bVar32 = (uVar10 == 0) << 1;
                 if (uVar10 == 0) {
@@ -1613,7 +1613,7 @@ code_r0x97b93828:
               uVar21 = (*(code *)**(undefined4 **)this)(this);
                     
 override_jmp_97b93698_case_0:
-              __ZN13TInfoSinkBase6appendEPKc(param_4,"WARNING: ");
+              __ZN13TInfoSinkBase6appendEPKc(infoSink,"WARNING: ");
               uVar10 = uVar21 & 0xffff;
               bVar32 = (uVar10 == 0) << 1;
               if (uVar10 == 0) {
@@ -1624,7 +1624,7 @@ override_jmp_97b93698_case_0:
               }
               __ZNSsC1EPKcRKSaIcE(&local_170,(char *)&local_160,aaStack_120);
               *(undefined *)((int)local_170 + (int)local_170[-3]) = *PTR__S_terminal_a7b7c0b8;
-              __ZN13TInfoSinkBase6appendEPKc(param_4,(char *)local_170);
+              __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_170);
               ppuVar29 = local_170 + -1;
               do {
                 puVar8 = *ppuVar29;
@@ -1637,10 +1637,10 @@ override_jmp_97b93698_case_0:
               if ((int)puVar8 < 1) {
                 __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_170 + -3),&local_160);
               }
-              __ZN13TInfoSinkBase6appendEPKc(param_4,": ");
-              __ZN13TInfoSinkBase6appendEPKc(param_4,"Divide by zero error during constant folding")
+              __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
+              __ZN13TInfoSinkBase6appendEPKc(infoSink,"Divide by zero error during constant folding")
               ;
-              __ZN13TInfoSinkBase6appendEPKc(param_4,"\n");
+              __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
               iVar28 = 0x7fffffff;
             }
             *(int *)(iVar17 * 4 + iVar12) = iVar28;
@@ -1650,7 +1650,7 @@ override_jmp_97b93698_case_0:
           uVar21 = (*(code *)**(undefined4 **)this)(this);
                     
 override_jmp_97b93868_case_0:
-          __ZN13TInfoSinkBase6appendEPKc(param_4,"INTERNAL ERROR: ");
+          __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
           uVar10 = uVar21 & 0xffff;
           bVar32 = (uVar10 == 0) << 1;
           if (uVar10 == 0) {
@@ -1682,7 +1682,7 @@ code_r0x97b93640:
           uVar21 = (*(code *)**(undefined4 **)this)(this);
                     
 override_jmp_97b934a8_case_0:
-          __ZN13TInfoSinkBase6appendEPKc(param_4,"WARNING: ");
+          __ZN13TInfoSinkBase6appendEPKc(infoSink,"WARNING: ");
           uVar10 = uVar21 & 0xffff;
           bVar32 = (uVar10 == 0) << 1;
           if (uVar10 == 0) {
@@ -1693,7 +1693,7 @@ override_jmp_97b934a8_case_0:
           }
           __ZNSsC1EPKcRKSaIcE(&local_170,(char *)&local_160,aaStack_120);
           *(undefined *)((int)local_170 + (int)local_170[-3]) = *PTR__S_terminal_a7b7c0b8;
-          __ZN13TInfoSinkBase6appendEPKc(param_4,(char *)local_170);
+          __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_170);
           ppuVar29 = local_170 + -1;
           do {
             puVar8 = *ppuVar29;
@@ -1706,9 +1706,9 @@ override_jmp_97b934a8_case_0:
           if ((int)puVar8 < 1) {
             __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_170 + -3),&local_160);
           }
-          __ZN13TInfoSinkBase6appendEPKc(param_4,": ");
-          __ZN13TInfoSinkBase6appendEPKc(param_4,"Divide by zero error during constant folding");
-          __ZN13TInfoSinkBase6appendEPKc(param_4,"\n");
+          __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
+          __ZN13TInfoSinkBase6appendEPKc(infoSink,"Divide by zero error during constant folding");
+          __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
           fVar5 = 3.4028235e+38;
         }
         *(float *)(iVar17 * 4 + iVar12) = fVar5;
@@ -1780,7 +1780,7 @@ LAB_97b9414c:
       uVar21 = (*(code *)**(undefined4 **)this)(this);
                     
 override_jmp_97b94180_case_0:
-      __ZN13TInfoSinkBase6appendEPKc(param_4,"INTERNAL ERROR: ");
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
       uVar10 = uVar21 & 0xffff;
       bVar32 = (uVar10 == 0) << 1;
       if (uVar10 == 0) {
@@ -1898,7 +1898,7 @@ LAB_97b953d4:
         pcVar30 = "Constant Folding cannot be done for vector times matrix";
         uVar21 = (*(code *)**(undefined4 **)this)(this,a1_08,pTVar18,a3,iVar17,param_6,local_4c);
                     
-        __ZN13TInfoSinkBase6appendEPKc(param_4,"INTERNAL ERROR: ");
+        __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
         uVar10 = uVar21 & 0xffff;
         bVar32 = (uVar10 == 0) << 1;
         if (uVar10 == 0) {
@@ -1910,7 +1910,7 @@ LAB_97b953d4:
         paVar22 = aaStack_130;
         __ZNSsC1EPKcRKSaIcE(local_140,(char *)paVar22,(unsigned char *)&local_f0);
         *(undefined *)((int)local_140[0] + (int)local_140[0][-3]) = *PTR__S_terminal_a7b7c0b8;
-        __ZN13TInfoSinkBase6appendEPKc(param_4,(char *)local_140[0]);
+        __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_140[0]);
         ppuVar29 = local_140[0];
         goto code_r0x97b95b60;
       }
@@ -2102,7 +2102,7 @@ LAB_97b953d4:
       pcVar30 = "Constant Folding cannot be done for matrix multiply";
       uVar21 = (*(code *)**(undefined4 **)this)(this);
                     
-      __ZN13TInfoSinkBase6appendEPKc(param_4,"INTERNAL ERROR: ");
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
       uVar10 = uVar21 & 0xffff;
       bVar32 = (uVar10 == 0) << 1;
       if (uVar10 == 0) {
@@ -2114,7 +2114,7 @@ LAB_97b953d4:
       paVar22 = aaStack_130;
       __ZNSsC1EPKcRKSaIcE(local_140,acStack_d0,paVar22);
       *(undefined *)((int)local_140[0] + (int)local_140[0][-3]) = *PTR__S_terminal_a7b7c0b8;
-      __ZN13TInfoSinkBase6appendEPKc(param_4,(char *)local_140[0]);
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_140[0]);
       ppuVar29 = local_140[0];
 code_r0x97b932f0:
       ppuVar4 = ppuVar29 + -1;
@@ -2254,7 +2254,7 @@ LAB_97b95254:
       uVar21 = *(uint *)(this + 4);
                     
 override_jmp_97b95280_case_0:
-      __ZN13TInfoSinkBase6appendEPKc(param_4,"INTERNAL ERROR: ");
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
       uVar10 = uVar21 & 0xffff;
       bVar32 = (uVar10 == 0) << 1;
       if (uVar10 == 0) {
@@ -2267,7 +2267,7 @@ override_jmp_97b95280_case_0:
       __ZNSsC1EPKcRKSaIcE(&local_110,(char *)paVar22,aaStack_c0);
                     
       *(undefined *)((int)local_110 + (int)local_110[-3]) = *PTR__S_terminal_a7b7c0b8;
-      __ZN13TInfoSinkBase6appendEPKc(param_4,(char *)local_110);
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_110);
       ppuVar29 = local_110 + -1;
       paVar20 = (unsigned char *)(local_110 + -3);
       do {
@@ -2284,7 +2284,7 @@ code_r0x97b95524:
         __ZNSs4_Rep10_M_destroyERKSaIcE(paVar20,paVar22);
       }
 code_r0x97b95528:
-      __ZN13TInfoSinkBase6appendEPKc(param_4,": ");
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
       goto code_r0x97b95ba0;
     }
     if (uVar21 != 1) {
@@ -2315,7 +2315,7 @@ LAB_97b95400:
       if (fVar6 == 0.0) {
         uVar21 = (*(code *)**(undefined4 **)this)(this,uVar21,pTVar18,a3,iVar17,param_6,uVar21 * 4);
                     
-        __ZN13TInfoSinkBase6appendEPKc(param_4,"WARNING: ");
+        __ZN13TInfoSinkBase6appendEPKc(infoSink,"WARNING: ");
         uVar10 = uVar21 & 0xffff;
         bVar32 = (uVar10 == 0) << 1;
         if (uVar10 == 0) {
@@ -2326,7 +2326,7 @@ LAB_97b95400:
         }
         __ZNSsC1EPKcRKSaIcE(&local_110,(char *)&local_100,aaStack_c0);
         *(undefined *)((int)local_110 + (int)local_110[-3]) = *PTR__S_terminal_a7b7c0b8;
-        __ZN13TInfoSinkBase6appendEPKc(param_4,(char *)local_110);
+        __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_110);
         ppuVar29 = local_110 + -1;
         do {
           puVar8 = *ppuVar29;
@@ -2339,9 +2339,9 @@ LAB_97b95400:
         if ((int)puVar8 < 1) {
           __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_110 + -3),&local_100);
         }
-        __ZN13TInfoSinkBase6appendEPKc(param_4,": ");
-        __ZN13TInfoSinkBase6appendEPKc(param_4,"Divide by zero error during constant folding");
-        __ZN13TInfoSinkBase6appendEPKc(param_4,"\n");
+        __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
+        __ZN13TInfoSinkBase6appendEPKc(infoSink,"Divide by zero error during constant folding");
+        __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
         fVar5 = 3.4028235e+38;
       }
       else {
@@ -2435,7 +2435,7 @@ code_r0x97b95098:
       uVar21 = (*(code *)**(undefined4 **)this)
                          (this,uVar21,pTVar18,a3,iVar17,param_6,uVar21 * 4,uVar10);
                     
-      __ZN13TInfoSinkBase6appendEPKc(param_4,"WARNING: ");
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,"WARNING: ");
       uVar10 = uVar21 & 0xffff;
       bVar32 = (uVar10 == 0) << 1;
       if (uVar10 == 0) {
@@ -2446,7 +2446,7 @@ code_r0x97b95098:
       }
       __ZNSsC1EPKcRKSaIcE(&local_110,acStack_90,(unsigned char *)&local_100);
       *(undefined *)((int)local_110 + (int)local_110[-3]) = *PTR__S_terminal_a7b7c0b8;
-      __ZN13TInfoSinkBase6appendEPKc(param_4,(char *)local_110);
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)local_110);
       ppuVar29 = local_110 + -1;
       do {
         puVar8 = *ppuVar29;
@@ -2459,9 +2459,9 @@ code_r0x97b95098:
       if ((int)puVar8 < 1) {
         __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_110 + -3),(unsigned char *)&local_100);
       }
-      __ZN13TInfoSinkBase6appendEPKc(param_4,": ");
-      __ZN13TInfoSinkBase6appendEPKc(param_4,"Divide by zero error during constant folding");
-      __ZN13TInfoSinkBase6appendEPKc(param_4,"\n");
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,"Divide by zero error during constant folding");
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
       fVar6 = GH_U2F(0x7fffffffU);
     }
     else {
@@ -2922,13 +2922,13 @@ LAB_97b9641c:
 }
 
 /* __ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__gnu_cxx17__normal_iteratorIPS2_St6vectorIS2_14pool_allocatorIS2_EEEEP16TIntermAggregate @ 0x97b964e8 (824 bytes) */
-int __ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__gnu_cxx17__normal_iteratorIPS2_St6vectorIS2_14pool_allocatorIS2_EEEEP16TIntermAggregate(this, param_2, param_3, param_4, param_5, param_6)
+int __ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__gnu_cxx17__normal_iteratorIPS2_St6vectorIS2_14pool_allocatorIS2_EEEEP16TIntermAggregate(this, vector, type, param_4, __normal_iterator, intermAggregate)
   void *this;
-  unsigned char * param_2;
-  unsigned char * param_3;
+  unsigned char * vector;
+  unsigned char * type;
   int *param_4;
-  unsigned char * param_5;
-  unsigned char * param_6;
+  unsigned char * __normal_iterator;
+  unsigned char * intermAggregate;
 {
   uint uVar1;
   uint uVar2;
@@ -2966,22 +2966,22 @@ int __ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__
   undefined4 local_50;
   int *local_4c [3];
   
-  if (param_6 != (unsigned char *)0x0) {
-    *(int *)param_5 = *(int *)(param_2 + 4) + *param_4 * 4;
-    a5 = param_6;
-    iVar8 = (**(code **)(*(int *)param_6 + 100))
-                      (param_6,param_2,param_3,param_4,param_5,param_6,*(int *)param_6);
-    iVar12 = *(int *)(param_2 + 8);
-    iVar7 = *(int *)(param_2 + 4);
+  if (intermAggregate != (unsigned char *)0x0) {
+    *(int *)__normal_iterator = *(int *)(vector + 4) + *param_4 * 4;
+    a5 = intermAggregate;
+    iVar8 = (**(code **)(*(int *)intermAggregate + 100))
+                      (intermAggregate,vector,type,param_4,__normal_iterator,intermAggregate,*(int *)intermAggregate);
+    iVar12 = *(int *)(vector + 8);
+    iVar7 = *(int *)(vector + 4);
     if (*(int *)(iVar8 + 8) - *(int *)(iVar8 + 4) >> 2 == 1) {
       a4 = *param_4;
-      a3 = param_6;
-      iVar9 = ((int (*)())TIntermediate__removeMatrixConstNode)(this,param_2,param_3,param_6,a4);
+      a3 = intermAggregate;
+      iVar9 = ((int (*)())TIntermediate__removeMatrixConstNode)(this,vector,type,intermAggregate,a4);
       if (iVar9 == 0) {
         iVar9 = 0;
         puVar13 = PTR_vtable_a7b7c0c8 + 8;
         while( true ) {
-          (**(code **)(*(int *)param_6 + 0x38))(local_b0,param_6);
+          (**(code **)(*(int *)intermAggregate + 0x38))(local_b0,intermAggregate);
           if ((local_8c & 0x400) == 0) {
             iVar6 = (int)(local_8c << 0xd | local_8c >> 0x13) >> 0x18;
           }
@@ -3002,7 +3002,7 @@ int __ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__
           a0 = (int *)((ulonglong)uVar14 >> 0x20);
           iVar6 = *(int *)**(undefined4 **)(iVar8 + 4);
           a1 = (int *)(**(code **)(iVar6 + 0x18))
-                                ((int *)**(undefined4 **)(iVar8 + 4),(int)uVar14,param_3,a3,a4,a5,
+                                ((int *)**(undefined4 **)(iVar8 + 4),(int)uVar14,type,a3,a4,a5,
                                  iVar6);
           (**(code **)(*a1 + 0x38))(&local_80,a1);
           *a0 = (int)&PTR_getLine_a7b7cf90;
@@ -3030,40 +3030,40 @@ int __ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__
           *a0 = (int)puVar13;
           local_80 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
           iVar6 = *a0;
-          a1_00 = (*(code *)**(undefined4 **)param_6)(param_6,a1_01,param_3,a3,a4,a5,a0 + 2);
+          a1_00 = (*(code *)**(undefined4 **)intermAggregate)(intermAggregate,a1_01,type,a3,a4,a5,a0 + 2);
           (**(code **)(iVar6 + 4))(a0,a1_00);
-          param_3 = (unsigned char *)(*(int *)(param_2 + 4) + *param_4 * 4);
+          type = (unsigned char *)(*(int *)(vector + 4) + *param_4 * 4);
           a3 = (unsigned char *)local_4c;
-          *(unsigned char **)param_5 = param_3;
+          *(unsigned char **)__normal_iterator = type;
           local_4c[0] = a0;
           std__vector_TIntermNode__pool_allocator_TIntermNode_____insert
-                    (&local_50,param_2,param_3,a3);
+                    (&local_50,vector,type,a3);
         }
       }
     }
     else {
       std__vector_TIntermNode__pool_allocator_TIntermNode______M_range_insert___gnu_cxx____normal_iterator_TIntermNode___std__vector_TIntermNode__pool_allocator_TIntermNode_____
-                (param_2,*(undefined4 *)param_5,*(int *)(iVar8 + 4),*(int *)(iVar8 + 8));
+                (vector,*(undefined4 *)__normal_iterator,*(int *)(iVar8 + 4),*(int *)(iVar8 + 8));
     }
-    iVar7 = (*param_4 + (*(int *)(param_2 + 8) - *(int *)(param_2 + 4) >> 2)) -
+    iVar7 = (*param_4 + (*(int *)(vector + 8) - *(int *)(vector + 4) >> 2)) -
             (iVar12 - iVar7 >> 2);
     *param_4 = iVar7;
-    iVar7 = *(int *)(param_2 + 4) + iVar7 * 4;
-    *(int *)param_5 = iVar7;
-    std__vector_TIntermNode__pool_allocator_TIntermNode_____erase(&local_50,param_2,iVar7);
-    *(undefined4 *)param_5 = local_50;
+    iVar7 = *(int *)(vector + 4) + iVar7 * 4;
+    *(int *)__normal_iterator = iVar7;
+    std__vector_TIntermNode__pool_allocator_TIntermNode_____erase(&local_50,vector,iVar7);
+    *(undefined4 *)__normal_iterator = local_50;
     *param_4 = *param_4 + -1;
-    *(int *)param_5 = *(int *)param_5 + -4;
+    *(int *)__normal_iterator = *(int *)__normal_iterator + -4;
   }
   return;
 }
 
 /* __ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggregate @ 0x97b96820 (496 bytes) */
-int __ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggregate(this, param_2, param_3, param_4)
+int __ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggregate(this, intermTyped, type, intermAggregate)
   void *this;
-  unsigned char * param_2;
-  unsigned char * param_3;
-  unsigned char * param_4;
+  unsigned char * intermTyped;
+  unsigned char * type;
+  unsigned char * intermAggregate;
 {
   undefined4 *puVar1;
   int iVar2;
@@ -3079,25 +3079,25 @@ int __ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggrega
   undefined4 in_r8;
   undefined1 auStack_30 [20];
   
-  a2 = param_3;
-  a3 = param_4;
-  iVar3 = (**(code **)(*(int *)param_3 + 0x30))(param_3,param_2,param_3,param_4);
+  a2 = type;
+  a3 = intermAggregate;
+  iVar3 = (**(code **)(*(int *)type + 0x30))(type,intermTyped,type,intermAggregate);
   if (iVar3 == 1) {
-    iVar3 = (**(code **)(*(int *)param_4 + 100))(param_4);
+    iVar3 = (**(code **)(*(int *)intermAggregate + 100))(intermAggregate);
     iVar4 = *(int *)**(undefined4 **)(iVar3 + 4);
-    param_2 = (unsigned char *)
+    intermTyped = (unsigned char *)
               (**(code **)(iVar4 + 0x14))
                         ((int *)**(undefined4 **)(iVar3 + 4),a1,a2,a3,in_r7,in_r8,iVar4);
   }
   else {
-    iVar3 = (**(code **)(*(int *)param_3 + 0x30))(param_3);
-    a0 = (int *)(**(code **)(*(int *)param_2 + 0x1c))(param_2);
+    iVar3 = (**(code **)(*(int *)type + 0x30))(type);
+    a0 = (int *)(**(code **)(*(int *)intermTyped + 0x1c))(intermTyped);
     this_00 = (unsigned char *)(**(code **)(*a0 + 100))(a0);
-    iVar4 = (**(code **)(*(int *)param_4 + 100))(param_4);
+    iVar4 = (**(code **)(*(int *)intermAggregate + 100))(intermAggregate);
     if (*(int *)(iVar4 + 8) - *(int *)(iVar4 + 4) >> 2 == 1) {
-      iVar3 = ((int (*)())TIntermediate__removeMatrixConstNode)(this,(unsigned char *)this_00,param_3,param_4,1);
+      iVar3 = ((int (*)())TIntermediate__removeMatrixConstNode)(this,(unsigned char *)this_00,type,intermAggregate,1);
       if (iVar3 == 0) {
-        iVar3 = (**(code **)(*(int *)param_4 + 100))(param_4);
+        iVar3 = (**(code **)(*(int *)intermAggregate + 100))(intermAggregate);
         puVar1 = *(undefined4 **)(this_00 + 8);
         if (puVar1 == *(undefined4 **)(this_00 + 0xc)) {
           std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux
@@ -3117,7 +3117,7 @@ int __ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggrega
       iVar4 = 0;
       if (0 < iVar3) {
         do {
-          iVar5 = (**(code **)(*(int *)param_4 + 100))(param_4);
+          iVar5 = (**(code **)(*(int *)intermAggregate + 100))(intermAggregate);
           puVar1 = *(undefined4 **)(this_00 + 8);
           if (puVar1 == *(undefined4 **)(this_00 + 0xc)) {
             std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux
@@ -3138,7 +3138,7 @@ int __ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggrega
     std__vector_TIntermNode__pool_allocator_TIntermNode_____erase
               (auStack_30,this_00,*(undefined4 *)(this_00 + 4));
   }
-  return param_2;
+  return intermTyped;
 }
 
 /* TIntermediate__removeMatrixConstNode @ 0x97b96a10 (776 bytes) */

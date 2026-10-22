@@ -1618,7 +1618,7 @@ int ParseSymbolTable__GetString(this, param_2)
   char *pcVar6;
   undefined4 uVar7;
   uint uVar8;
-  char cVar9;
+  char ch;
   int iVar10;
   uint uVar11;
   
@@ -1626,7 +1626,7 @@ int ParseSymbolTable__GetString(this, param_2)
   pcVar3 = (char *)_malloc(0x800);
   uVar8 = 0x800;
   iVar10 = 0;
-  cVar9 = '\x02';
+  ch = '\x02';
   pcVar6 = (char *)0x0;
   if (pcVar3 != (char *)0x0) {
     *pcVar3 = '\0';
@@ -1718,7 +1718,7 @@ LAB_97bbe3d4:
           pPVar2 = (unsigned char *)((int (*)())ParseSymbolTable__NextSymbol)(this,(unsigned char *)0x0);
           while (pPVar2 != (unsigned char *)0x0) {
             pcVar6 = pcVar3;
-            if ((**(char **)pPVar2 == cVar9) &&
+            if ((**(char **)pPVar2 == ch) &&
                (iVar4 = ParseSymbol__GetString(pPVar2,0), iVar4 != 0)) {
               iVar5 = _strlen(iVar4);
               iVar5 = iVar5 + iVar10;
@@ -1743,28 +1743,28 @@ LAB_97bbe3d4:
             pPVar2 = (unsigned char *)((int (*)())ParseSymbolTable__NextSymbol)(this,pPVar2);
             pcVar3 = pcVar6;
           }
-          if (cVar9 != '\x02') break;
-          cVar9 = '\x03';
+          if (ch != '\x02') break;
+          ch = '\x03';
           _strcat(pcVar3,DAT_a7b7bc14);
           uVar7 = DAT_a7b7bc14;
 LAB_97bbe53c:
           iVar4 = _strlen(uVar7);
           iVar10 = iVar10 + iVar4;
         }
-        if (cVar9 == '\x03') {
-          cVar9 = '\x04';
+        if (ch == '\x03') {
+          ch = '\x04';
           _strcat(pcVar3,DAT_a7b7bc18);
           uVar7 = DAT_a7b7bc18;
           goto LAB_97bbe53c;
         }
-        if (cVar9 == '\x04') {
-          cVar9 = '\0';
+        if (ch == '\x04') {
+          ch = '\0';
           _strcat(pcVar3,DAT_a7b7bc1c);
           uVar7 = DAT_a7b7bc1c;
           goto LAB_97bbe53c;
         }
         pcVar6 = pcVar3;
-      } while (cVar9 != '\0');
+      } while (ch != '\0');
     }
   }
   return pcVar6;

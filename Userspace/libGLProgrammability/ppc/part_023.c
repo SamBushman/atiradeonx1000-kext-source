@@ -84,11 +84,11 @@ int __ZNKSaIcE7addressERc(this, param_2)
 }
 
 /* __ZNKSaIcE7addressERKc @ 0x97c173a8 (8 bytes) */
-int __ZNKSaIcE7addressERKc(this, param_2)
+int __ZNKSaIcE7addressERKc(this, str)
   void *this;
-  char *param_2;
+  char *str;
 {
-  return param_2;
+  return str;
 }
 
 /* __ZNKSaIcE8max_sizeEv @ 0x97c173b0 (8 bytes) */
@@ -309,15 +309,15 @@ int std__allocator_char___deallocate(this, param_2, param_3)
 }
 
 /* __ZNSaIcE9constructEPcRKc @ 0x97c17780 (20 bytes) */
-int __ZNSaIcE9constructEPcRKc(this, param_2, param_3)
+int __ZNSaIcE9constructEPcRKc(this, param_2, str)
   void *this;
   char *param_2;
-  char *param_3;
+  char *str;
 {
   if (param_2 == (char *)0x0) {
     return;
   }
-  *param_2 = *param_3;
+  *param_2 = *str;
   return;
 }
 

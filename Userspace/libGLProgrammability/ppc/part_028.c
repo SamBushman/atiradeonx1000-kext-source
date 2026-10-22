@@ -525,9 +525,9 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4ERKS3_mm(this, param_2, para
 }
 
 /* __ZNKSbIcSt11char_traitsIcE14pool_allocatorIcEE7compareEPKc @ 0x97c32b18 (112 bytes) */
-int __ZNKSbIcSt11char_traitsIcE14pool_allocatorIcEE7compareEPKc(this, param_2)
+int __ZNKSbIcSt11char_traitsIcE14pool_allocatorIcEE7compareEPKc(this, str)
   void *this;
-  char *param_2;
+  char *str;
 {
   size_t sVar1;
   int iVar2;
@@ -540,13 +540,13 @@ int __ZNKSbIcSt11char_traitsIcE14pool_allocatorIcEE7compareEPKc(this, param_2)
   pvVar4 = *(void **)((int)this + 4);
   uVar5 = *(uint *)((int)pvVar4 + -0xc);
   local_30 = uVar5;
-  sVar1 = _strlen(param_2);
+  sVar1 = _strlen(str);
   psVar3 = local_2c;
   local_2c[0] = sVar1;
   if (uVar5 <= sVar1) {
     psVar3 = &local_30;
   }
-  iVar2 = _memcmp(pvVar4,param_2,*psVar3);
+  iVar2 = _memcmp(pvVar4,str,*psVar3);
   if (iVar2 == 0) {
     iVar2 = uVar5 - sVar1;
   }
@@ -762,9 +762,9 @@ LAB_97c32fa8:
 }
 
 /* __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm @ 0x97c32fc4 (112 bytes) */
-int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm(this, param_2, param_3)
+int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm(this, str, param_3)
   void *this;
-  char *param_2;
+  char *str;
   ulong param_3;
 {
   ulong uVar1;
@@ -777,7 +777,7 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm(this, param_2, pa
     iVar2 = *(int *)((int)this + 4);
   }
   iVar2 = iVar2 + *(int *)(iVar2 + -0xc);
-  return ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE15_M_replace_safeIPKcEERS3_N9__gnu_cxx17__normal_iteratorIPcS3_EESB_T_SC_)(this,iVar2,iVar2,param_2,param_2 + param_3);
+  return ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE15_M_replace_safeIPKcEERS3_N9__gnu_cxx17__normal_iteratorIPcS3_EESB_T_SC_)(this,iVar2,iVar2,str,str + param_3);
 }
 
 /* __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendERKS3_ @ 0x97c33034 (116 bytes) */

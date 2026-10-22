@@ -25,18 +25,18 @@ int __ZN13TParseContext14boolErrorCheckEiPK12TIntermTyped(this, param_2, param_3
 }
 
 /* __ZN13TParseContext14boolErrorCheckEiRK11TPublicType @ 0x97b9bb48 (132 bytes) */
-int __ZN13TParseContext14boolErrorCheckEiRK11TPublicType(this, param_2, param_3)
+int __ZN13TParseContext14boolErrorCheckEiRK11TPublicType(this, param_2, publicType)
   void *this;
   int param_2;
-  unsigned char * param_3;
+  unsigned char * publicType;
 {
   undefined4 uVar1;
   undefined4 in_r8;
   undefined4 in_r9;
   undefined4 in_r10;
   
-  if ((((*(int *)param_3 != 3) || (*(int *)(param_3 + 0x10) != 0)) || (*(int *)(param_3 + 0xc) != 0)
-      ) || (uVar1 = 0, 1 < *(int *)(param_3 + 8))) {
+  if ((((*(int *)publicType != 3) || (*(int *)(publicType + 0x10) != 0)) || (*(int *)(publicType + 0xc) != 0)
+      ) || (uVar1 = 0, 1 < *(int *)(publicType + 8))) {
     TParseContext__error
               ((int)this,(char *)param_2,"boolean expression expected","","",in_r8,in_r9,in_r10);
     uVar1 = 1;
