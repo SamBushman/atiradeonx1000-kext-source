@@ -4102,186 +4102,186 @@ int _PPParserBuildErrorString(parser, param_2, param_3)
   undefined4 param_2;
   int param_3;
 {
-  char *pcVar1;
+  char *message;
   int iVar2;
   undefined1 auStack_130 [16];
   undefined1 auStack_120 [264];
   
   switch(param_2) {
   default:
-    pcVar1 = "";
+    message = "";
     break;
   case 4:
-    pcVar1 = "missing or invalid version";
+    message = "missing or invalid version";
     break;
   case 5:
-    pcVar1 = "unrecognised option";
+    message = "unrecognised option";
     break;
   case 6:
-    pcVar1 = "unrecognised statement";
+    message = "unrecognised statement";
     break;
   case 7:
-    pcVar1 = "unrecognised block parameter";
+    message = "unrecognised block parameter";
     break;
   case 8:
-    pcVar1 = "unexpected option";
+    message = "unexpected option";
     break;
   case 9:
-    pcVar1 = "unexpected statement";
+    message = "unexpected statement";
     break;
   case 10:
-    pcVar1 = "malformed declaration";
+    message = "malformed declaration";
     break;
   case 0xb:
-    pcVar1 = "malformed array specifier";
+    message = "malformed array specifier";
     break;
   case 0xc:
-    pcVar1 = "malformed destination mask";
+    message = "malformed destination mask";
     break;
   case 0xd:
-    pcVar1 = "malformed source swizzle";
+    message = "malformed source swizzle";
     break;
   case 0xe:
-    pcVar1 = "malformed source texture";
+    message = "malformed source texture";
     break;
   case 0xf:
-    pcVar1 = "malformed extended swizzle code";
+    message = "malformed extended swizzle code";
     break;
   case 0x10:
-    pcVar1 = "invalid condition mask";
+    message = "invalid condition mask";
     break;
   case 0x11:
-    pcVar1 = "invalid texture coordinate plane";
+    message = "invalid texture coordinate plane";
     break;
   case 0x12:
-    pcVar1 = "invalid identifier name";
+    message = "invalid identifier name";
     break;
   case 0x13:
-    pcVar1 = "invalid attribute pair";
+    message = "invalid attribute pair";
     break;
   case 0x14:
-    pcVar1 = "invalid swizzle for scalar op";
+    message = "invalid swizzle for scalar op";
     break;
   case 0x15:
-    pcVar1 = "invalid number";
+    message = "invalid number";
     break;
   case 0x16:
-    pcVar1 = "invalid address identifier";
+    message = "invalid address identifier";
     break;
   case 0x17:
-    pcVar1 = "invalid source identifier";
+    message = "invalid source identifier";
     break;
   case 0x18:
-    pcVar1 = "invalid dest identifier";
+    message = "invalid dest identifier";
     break;
   case 0x19:
-    pcVar1 = "undefined destination identifier";
+    message = "undefined destination identifier";
     break;
   case 0x1a:
-    pcVar1 = "undefined source identifier";
+    message = "undefined source identifier";
     break;
   case 0x1b:
-    pcVar1 = "undefined branch label";
+    message = "undefined branch label";
     break;
   case 0x1c:
-    pcVar1 = "an identifier with this name already exists";
+    message = "an identifier with this name already exists";
     break;
   case 0x1d:
-    pcVar1 = "duplicate branch label";
+    message = "duplicate branch label";
     break;
   case 0x1e:
-    pcVar1 = "missing semicolon";
+    message = "missing semicolon";
     break;
   case 0x1f:
-    pcVar1 = "missing comma";
+    message = "missing comma";
     break;
   case 0x20:
-    pcVar1 = "identifier is not an array";
+    message = "identifier is not an array";
     break;
   case 0x21:
-    pcVar1 = "identifier is an array";
+    message = "identifier is an array";
     break;
   case 0x22:
-    pcVar1 = "use of result.position illegal with ARB_position_invariant";
+    message = "use of result.position illegal with ARB_position_invariant";
     break;
   case 0x23:
-    pcVar1 = "out of range array index";
+    message = "out of range array index";
     break;
   case 0x24:
-    pcVar1 = "out of range indirect offset";
+    message = "out of range indirect offset";
     break;
   case 0x25:
-    pcVar1 = "incorrect array component count";
+    message = "incorrect array component count";
     break;
   case 0x26:
-    pcVar1 = "incorrect argument count for macro";
+    message = "incorrect argument count for macro";
     break;
   case 0x27:
-    pcVar1 = "conflicting option specification";
+    message = "conflicting option specification";
     break;
   case 0x28:
-    pcVar1 = "conflicting texture target";
+    message = "conflicting texture target";
     break;
   case 0x29:
-    pcVar1 = "impossible array";
+    message = "impossible array";
     break;
   case 0x2a:
-    pcVar1 = "precision qualifier only allowed for temporaries or outputs";
+    message = "precision qualifier only allowed for temporaries or outputs";
     break;
   case 0x2b:
-    pcVar1 = "unpack instructions cannot take SHORT source";
+    message = "unpack instructions cannot take SHORT source";
     break;
   case 0x2c:
-    pcVar1 = "pack instructions cannot take SHORT destination";
+    message = "pack instructions cannot take SHORT destination";
     break;
   case 0x2d:
-    pcVar1 = "unexpected end of program";
+    message = "unexpected end of program";
     break;
   case 0x2e:
-    pcVar1 = "program env limit exceeded";
+    message = "program env limit exceeded";
     break;
   case 0x2f:
-    pcVar1 = "program local limit exceeded";
+    message = "program local limit exceeded";
     break;
   case 0x30:
-    pcVar1 = "program matrices limit exceeded";
+    message = "program matrices limit exceeded";
     break;
   case 0x31:
-    pcVar1 = "program matrix stack depth exceeded";
+    message = "program matrix stack depth exceeded";
     break;
   case 0x32:
-    pcVar1 = "program instruction count exceeded";
+    message = "program instruction count exceeded";
     break;
   case 0x33:
-    pcVar1 = "program temporary count exceeded";
+    message = "program temporary count exceeded";
     break;
   case 0x34:
-    pcVar1 = "program parameter count exceeded";
+    message = "program parameter count exceeded";
     break;
   case 0x35:
   case 0x36:
-    pcVar1 = "program attribute count exceeded";
+    message = "program attribute count exceeded";
     break;
   case 0x37:
-    pcVar1 = "program address registers limit exceeded";
+    message = "program address registers limit exceeded";
     break;
   case 0x38:
-    pcVar1 = "texture unit limit exceeded";
+    message = "texture unit limit exceeded";
     break;
   case 0x39:
-    pcVar1 = "vertex unit limit exceeded";
+    message = "vertex unit limit exceeded";
     break;
   case 0x3a:
-    pcVar1 = "palette matrix limit exceeded";
+    message = "palette matrix limit exceeded";
     break;
   case 0x3b:
-    pcVar1 = "clip plane limit exceeded";
+    message = "clip plane limit exceeded";
     break;
   case 0x3c:
-    pcVar1 = "light limit exceeded";
+    message = "light limit exceeded";
     break;
   case 0x3d:
-    pcVar1 = "vertex attribute limit exceeded";
+    message = "vertex attribute limit exceeded";
   }
   _PPParserReturnPart(parser);
   _PPParserGetPart(parser,auStack_120,0);
@@ -4289,12 +4289,12 @@ int _PPParserBuildErrorString(parser, param_2, param_3)
   iVar2 = *(int *)(parser + 0x10) + 1;
   _PPParserGetCharacter(parser,auStack_130);
   if (param_3 == 0) {
-    _sprintf((char *)(parser + 0x3c),"Error on line %u: %s (hint: \'%s\')",iVar2,pcVar1,auStack_120
+    _sprintf((char *)(parser + 0x3c),"Error on line %u: %s (hint: \'%s\')",iVar2,message,auStack_120
             );
   }
   else {
     _sprintf((char *)(parser + 0x3c),"Error in macro %s on line %u: %s (hint: \'%s\')",param_3,
-             iVar2,pcVar1,auStack_120);
+             iVar2,message,auStack_120);
   }
   return;
 }

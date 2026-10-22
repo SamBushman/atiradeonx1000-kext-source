@@ -127,6 +127,7 @@ int _byte_scan(param_1, param_2, param_3, param_4, param_5, param_6)
   undefined4 param_5;
   undefined4 param_6;
 {
+  int result;
   int loopIndex;
   bool bVar1;
   char cVar2;
@@ -149,24 +150,24 @@ int _byte_scan(param_1, param_2, param_3, param_4, param_5, param_6)
   uint uVar6;
   uint uVar7;
   undefined1 *puVar8;
-  int iVar9;
+  int cppContext;
   int iVar10;
   uint *puVar11;
   undefined1 local_2d0 [144];
   undefined1 local_240 [536];
   
   uVar7 = 0;
-  iVar9 = *(int *)PTR__cpp_a7b7c0a4;
+  cppContext = *(int *)PTR__cpp_a7b7c0a4;
 LAB_97b88f18:
   *param_2 = 0;
-  iVar3 = (**(code **)(*(int *)(iVar9 + 0x20) + 8))(*(int *)(iVar9 + 0x20),param_2);
+  iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
   while (((iVar3 == 0x20 || (iVar3 == 9)) || (iVar3 == 0xd))) {
     *param_2 = 1;
-    iVar3 = (**(code **)(*(int *)(iVar9 + 0x20) + 8))(*(int *)(iVar9 + 0x20),param_2);
+    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
   }
   if (iVar3 != -1) {
-    *(undefined2 *)(iVar9 + 0x30) = *(undefined2 *)(*(int *)(iVar9 + 0x20) + 0x12);
-    *(undefined2 *)(iVar9 + 0x32) = *(undefined2 *)(*(int *)(iVar9 + 0x20) + 0x16);
+    *(undefined2 *)(cppContext + 0x30) = *(undefined2 *)(*(int *)(cppContext + 0x20) + 0x12);
+    *(undefined2 *)(cppContext + 0x32) = *(undefined2 *)(*(int *)(cppContext + 0x20) + 0x16);
   }
   iVar10 = 0;
   if (0x7d < iVar3 + 1U) {
@@ -224,84 +225,84 @@ LAB_97b89cb4:
   case 0x7b:
     goto LAB_97b89cb4;
   case 0x21:
-    iVar3 = (**(code **)(*(int *)(iVar9 + 0x20) + 8))(*(int *)(iVar9 + 0x20),param_2);
+    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
     if (iVar3 != 0x3d) {
-      (**(code **)(*(int *)(iVar9 + 0x20) + 0xc))(*(int *)(iVar9 + 0x20),iVar3,param_2);
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
       return 0x21;
     }
     return 0x113;
   case 0x22:
-    iVar3 = (**(code **)(*(int *)(iVar9 + 0x20) + 8))(*(int *)(iVar9 + 0x20),param_2);
+    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
     bVar1 = iVar3 == 0x22;
     uVar4 = extraout_r4_08;
     if (((bVar1) || (iVar3 == 10)) || (iVar3 == -1)) goto LAB_97b89c74;
     puVar8 = local_240;
     goto LAB_97b89bf4;
   case 0x25:
-    iVar3 = (**(code **)(*(int *)(iVar9 + 0x20) + 8))(*(int *)(iVar9 + 0x20),param_2);
+    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
     if (iVar3 == 0x3d) {
       return 0x104;
     }
     if (iVar3 != 0x3e) {
-      (**(code **)(*(int *)(iVar9 + 0x20) + 0xc))(*(int *)(iVar9 + 0x20),iVar3,param_2);
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
       return 0x25;
     }
     return 0x120;
   case 0x26:
-    iVar3 = (**(code **)(*(int *)(iVar9 + 0x20) + 8))(*(int *)(iVar9 + 0x20),param_2);
+    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
     if (iVar3 == 0x26) {
       return 0x101;
     }
     if (iVar3 != 0x3d) {
-      (**(code **)(*(int *)(iVar9 + 0x20) + 0xc))(*(int *)(iVar9 + 0x20),iVar3,param_2);
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
       return 0x26;
     }
     return 0x11a;
   case 0x2a:
-    iVar3 = (**(code **)(*(int *)(iVar9 + 0x20) + 8))(*(int *)(iVar9 + 0x20),param_2);
+    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
     if (iVar3 != 0x3d) {
-      (**(code **)(*(int *)(iVar9 + 0x20) + 0xc))(*(int *)(iVar9 + 0x20),iVar3,param_2);
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
       return 0x2a;
     }
     return 0x107;
   case 0x2b:
-    iVar3 = (**(code **)(*(int *)(iVar9 + 0x20) + 8))(*(int *)(iVar9 + 0x20),param_2);
+    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
     if (iVar3 == 0x2b) {
       return 0x115;
     }
     if (iVar3 != 0x3d) {
-      (**(code **)(*(int *)(iVar9 + 0x20) + 0xc))(*(int *)(iVar9 + 0x20),iVar3,param_2);
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
       return 0x2b;
     }
     return 0x105;
   case 0x2d:
-    iVar3 = (**(code **)(*(int *)(iVar9 + 0x20) + 8))(*(int *)(iVar9 + 0x20),param_2);
+    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
     if (iVar3 == 0x2d) {
       return 0x112;
     }
     if (iVar3 != 0x3d) {
-      (**(code **)(*(int *)(iVar9 + 0x20) + 0xc))(*(int *)(iVar9 + 0x20),iVar3,param_2);
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
       return 0x2d;
     }
     return 0x103;
   case 0x2e:
-    iVar3 = (**(code **)(*(int *)(iVar9 + 0x20) + 8))(*(int *)(iVar9 + 0x20),param_2);
+    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
     if (9 < iVar3 - 0x30U) {
       if (iVar3 != 0x2e) {
-        (**(code **)(*(int *)(iVar9 + 0x20) + 0xc))(*(int *)(iVar9 + 0x20),iVar3,param_2);
+        (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
         return 0x2e;
       }
       return -1;
     }
-    (**(code **)(*(int *)(iVar9 + 0x20) + 0xc))(*(int *)(iVar9 + 0x20),iVar3,param_2);
+    (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
     iVar10 = 0;
     a1 = 0x2e;
     goto LAB_97b89a54;
   case 0x2f:
-    iVar3 = (**(code **)(*(int *)(iVar9 + 0x20) + 8))(*(int *)(iVar9 + 0x20),param_2);
+    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
     if (iVar3 != 0x2f) break;
     do {
-      iVar3 = (**(code **)(*(int *)(iVar9 + 0x20) + 8))(*(int *)(iVar9 + 0x20),param_2);
+      iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
       if (iVar3 == 10) {
         return 10;
       }
@@ -311,11 +312,11 @@ switchD_97b88fcc_caseD_ffffffff:
   case 0x30:
     *(char *)(param_2 + 3) = (char)iVar3;
     iVar10 = 1;
-    a1 = (**(code **)(*(int *)(iVar9 + 0x20) + 8))(*(int *)(iVar9 + 0x20),param_2);
+    a1 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
     if ((a1 == 0x78) || (a1 == 0x58)) {
       *(char *)((int)param_2 + 0xd) = (char)a1;
       iVar10 = 2;
-      a1 = (**(code **)(*(int *)(iVar9 + 0x20) + 8))(*(int *)(iVar9 + 0x20),param_2);
+      a1 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
       uVar6 = a1 - 0x30;
       if ((uVar6 < 10) || ((a1 - 0x41U < 6 || (a1 - 0x61U < 6)))) {
         puVar8 = (undefined1 *)((int)param_2 + 0xe);
@@ -339,7 +340,7 @@ switchD_97b88fcc_caseD_ffffffff:
             }
             bVar1 = true;
           }
-          a1 = (**(code **)(*(int *)(iVar9 + 0x20) + 8))(*(int *)(iVar9 + 0x20),param_2);
+          a1 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
           uVar6 = a1 - 0x30;
           uVar4 = extraout_r4_01;
         } while (((uVar6 < 10) || (a1 - 0x41U < 6)) || (a1 - 0x61U < 6));
@@ -370,7 +371,7 @@ switchD_97b88fcc_caseD_ffffffff:
           }
           bVar1 = true;
         }
-        a1 = (**(code **)(*(int *)(iVar9 + 0x20) + 8))(*(int *)(iVar9 + 0x20),param_2);
+        a1 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
         uVar6 = a1 - 0x30;
         uVar4 = extraout_r4_02;
       } while (uVar6 < 8);
@@ -378,12 +379,12 @@ switchD_97b88fcc_caseD_ffffffff:
          (a1 == 0x45)) goto LAB_97b89a54;
 LAB_97b89458:
       *(undefined1 *)((int)param_2 + iVar10 + 0xc) = 0;
-      (**(code **)(*(int *)(iVar9 + 0x20) + 0xc))(*(int *)(iVar9 + 0x20),a1,param_2);
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),a1,param_2);
       *param_2 = uVar7;
       return 0x10f;
     }
     iVar3 = 0x30;
-    (**(code **)(*(int *)(iVar9 + 0x20) + 0xc))(*(int *)(iVar9 + 0x20),a1,param_2);
+    (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),a1,param_2);
 switchD_97b88fcc_caseD_31:
     puVar8 = (undefined1 *)((int)param_2 + iVar10 + 0xc);
     a1 = iVar3;
@@ -394,7 +395,7 @@ switchD_97b88fcc_caseD_31:
           iVar10 = iVar10 + 1;
           puVar8 = puVar8 + 1;
         }
-        a1 = (**(code **)(*(int *)(iVar9 + 0x20) + 8))(*(int *)(iVar9 + 0x20),param_2);
+        a1 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
       }
     } while (a1 - 0x30U < 10);
     if (((((a1 != 0x2e) && (a1 != 0x65)) && (a1 != 0x66)) && ((a1 != 0x68 && (a1 != 0x78)))) &&
@@ -403,7 +404,7 @@ switchD_97b88fcc_caseD_31:
       uVar7 = 0;
       bVar1 = false;
       puVar5 = param_2;
-      (**(code **)(*(int *)(iVar9 + 0x20) + 0xc))(*(int *)(iVar9 + 0x20),a1,param_2,param_4);
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),a1,param_2,param_4);
       if (0 < iVar10) {
         puVar11 = param_2 + 3;
         uVar4 = extraout_r4_03;
@@ -429,8 +430,8 @@ switchD_97b88fcc_caseD_31:
       return 0x10f;
     }
 LAB_97b89a54:
-    iVar9 = ((int (*)())_lFloatConst)(param_2 + 3,iVar10,a1,param_2);
-    return iVar9;
+    result = ((int (*)())_lFloatConst)(param_2 + 3,iVar10,a1,param_2);
+    return result;
   case 0x31:
   case 0x32:
   case 0x33:
@@ -442,18 +443,18 @@ LAB_97b89a54:
   case 0x39:
     goto switchD_97b88fcc_caseD_31;
   case 0x3a:
-    iVar3 = (**(code **)(*(int *)(iVar9 + 0x20) + 8))(*(int *)(iVar9 + 0x20),param_2);
+    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
     if (iVar3 != 0x3e) {
-      (**(code **)(*(int *)(iVar9 + 0x20) + 0xc))(*(int *)(iVar9 + 0x20),iVar3,param_2);
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
       return 0x3a;
     }
     return 0x11e;
   case 0x3c:
-    iVar3 = (**(code **)(*(int *)(iVar9 + 0x20) + 8))(*(int *)(iVar9 + 0x20),param_2);
+    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
     if (iVar3 == 0x3c) {
-      iVar3 = (**(code **)(*(int *)(iVar9 + 0x20) + 8))(*(int *)(iVar9 + 0x20),param_2);
+      iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
       if (iVar3 != 0x3d) {
-        (**(code **)(*(int *)(iVar9 + 0x20) + 0xc))(*(int *)(iVar9 + 0x20),iVar3,param_2);
+        (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
         return 0x111;
       }
       return 0x119;
@@ -465,29 +466,29 @@ LAB_97b89a54:
       return 0x11f;
     }
     if (iVar3 != 0x3a) {
-      (**(code **)(*(int *)(iVar9 + 0x20) + 0xc))(*(int *)(iVar9 + 0x20),iVar3,param_2);
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
       return 0x3c;
     }
     return 0x11d;
   case 0x3d:
-    iVar3 = (**(code **)(*(int *)(iVar9 + 0x20) + 8))(*(int *)(iVar9 + 0x20),param_2);
+    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
     if (iVar3 != 0x3d) {
-      (**(code **)(*(int *)(iVar9 + 0x20) + 0xc))(*(int *)(iVar9 + 0x20),iVar3,param_2);
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
       return 0x3d;
     }
     return 0x108;
   case 0x3e:
-    iVar3 = (**(code **)(*(int *)(iVar9 + 0x20) + 8))(*(int *)(iVar9 + 0x20),param_2);
+    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
     if (iVar3 != 0x3e) {
       if (iVar3 != 0x3d) {
-        (**(code **)(*(int *)(iVar9 + 0x20) + 0xc))(*(int *)(iVar9 + 0x20),iVar3,param_2);
+        (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
         return 0x3e;
       }
       return 0x10c;
     }
-    iVar3 = (**(code **)(*(int *)(iVar9 + 0x20) + 8))(*(int *)(iVar9 + 0x20),param_2);
+    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
     if (iVar3 != 0x3d) {
-      (**(code **)(*(int *)(iVar9 + 0x20) + 0xc))(*(int *)(iVar9 + 0x20),iVar3,param_2);
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
       return 0x10d;
     }
     return 0x118;
@@ -499,35 +500,35 @@ LAB_97b89a54:
         iVar10 = iVar10 + 1;
         bVar1 = 0x7f < iVar10;
       }
-      iVar3 = (**(code **)(*(int *)(iVar9 + 0x20) + 8))
-                        (*(int *)(iVar9 + 0x20),param_2,param_3,param_4,param_5,param_6,uVar6);
+      iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))
+                        (*(int *)(cppContext + 0x20),param_2,param_3,param_4,param_5,param_6,uVar6);
     } while (((iVar3 - 0x61U < 0x1a) || (iVar3 - 0x41U < 0x1a)) ||
             ((iVar3 - 0x30U < 10 || (iVar3 == 0x5f))));
     if (bVar1) {
       iVar10 = 0x7f;
     }
     local_2d0[iVar10] = 0;
-    (**(code **)(*(int *)(iVar9 + 0x20) + 0xc))(*(int *)(iVar9 + 0x20),iVar3,param_2);
+    (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
     uVar7 = _LookUpAddString(*(undefined4 *)PTR__atable_a7b7c0ac,local_2d0);
     param_2[2] = uVar7;
     return 0x10e;
   case 0x5e:
-    iVar3 = (**(code **)(*(int *)(iVar9 + 0x20) + 8))(*(int *)(iVar9 + 0x20),param_2);
+    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
     if (iVar3 == 0x5e) {
       return 0x109;
     }
     if (iVar3 != 0x3d) {
-      (**(code **)(*(int *)(iVar9 + 0x20) + 0xc))(*(int *)(iVar9 + 0x20),iVar3,param_2);
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
       return 0x5e;
     }
     return 0x11c;
   case 0x7c:
-    iVar3 = (**(code **)(*(int *)(iVar9 + 0x20) + 8))(*(int *)(iVar9 + 0x20),param_2);
+    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
     if (iVar3 == 0x7c) {
       return 0x114;
     }
     if (iVar3 != 0x3d) {
-      (**(code **)(*(int *)(iVar9 + 0x20) + 0xc))(*(int *)(iVar9 + 0x20),iVar3,param_2);
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
       return 0x7c;
     }
     return 0x11b;
@@ -536,13 +537,13 @@ LAB_97b89a54:
   }
   if (iVar3 != 0x2a) {
     if (iVar3 != 0x3d) {
-      (**(code **)(*(int *)(iVar9 + 0x20) + 0xc))(*(int *)(iVar9 + 0x20),iVar3,param_2);
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
       return 0x2f;
     }
     return 0x106;
   }
   loopIndex = 0;
-  iVar10 = (**(code **)(*(int *)(iVar9 + 0x20) + 8))(*(int *)(iVar9 + 0x20),param_2);
+  iVar10 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
   uVar4 = extraout_r4_05;
   do {
     while (iVar10 != 0x2a) {
@@ -554,10 +555,10 @@ LAB_97b89b60:
         _CPPErrorToInfoLog("ERROR___EOF_IN_COMMENT",uVar4,param_3,param_4,param_5,param_6,uVar6);
         return -1;
       }
-      iVar10 = (**(code **)(*(int *)(iVar9 + 0x20) + 8))(*(int *)(iVar9 + 0x20),param_2);
+      iVar10 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
       uVar4 = extraout_r4_06;
     }
-    iVar10 = (**(code **)(*(int *)(iVar9 + 0x20) + 8))(*(int *)(iVar9 + 0x20),param_2);
+    iVar10 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
     uVar4 = extraout_r4_07;
     if (iVar10 == -1) goto LAB_97b89b60;
   } while (iVar10 != 0x2f);
@@ -567,7 +568,7 @@ LAB_97b89b60:
   goto LAB_97b88f18;
 LAB_97b89bf4:
   if (iVar3 == 0x5c) {
-    iVar3 = (**(code **)(*(int *)(iVar9 + 0x20) + 8))(*(int *)(iVar9 + 0x20),param_2);
+    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
     bVar1 = iVar3 == 0x22;
     uVar4 = extraout_r4_09;
     if ((iVar3 == 10) || (iVar3 == -1)) {
@@ -586,7 +587,7 @@ LAB_97b89c74:
     *puVar8 = (char)iVar3;
     iVar10 = iVar10 + 1;
     puVar8 = puVar8 + 1;
-    iVar3 = (**(code **)(*(int *)(iVar9 + 0x20) + 8))(*(int *)(iVar9 + 0x20),param_2);
+    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
     uVar4 = extraout_r4_10;
   }
   bVar1 = iVar3 == 0x22;

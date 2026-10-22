@@ -2253,7 +2253,7 @@ int _PPCRuntimeCompilerCompileAV(compiler)
   uint *puVar13;
   uint *puVar14;
   undefined4 uVar15;
-  undefined *puVar16;
+  undefined *opTemplate;
   undefined4 extraout_r4;
   undefined4 extraout_r4_00;
   undefined4 extraout_r4_01;
@@ -3071,28 +3071,28 @@ LAB_97bdde5c:
               cVar2 = *(char *)(*(int *)(compiler + 0xe28) + 5);
               if (cVar2 == '\x01') {
                 puVar5 = *(undefined4 **)(compiler + 0xe30);
-                puVar16 = &_glpOpSetAllEqualTo1AVRTC;
+                opTemplate = &_glpOpSetAllEqualTo1AVRTC;
               }
               else if (cVar2 == '\x02') {
                 puVar5 = *(undefined4 **)(compiler + 0xe30);
-                puVar16 = &_glpOpSetAllEqualTo2AVRTC;
+                opTemplate = &_glpOpSetAllEqualTo2AVRTC;
               }
               else if (cVar2 == '\x03') {
                 puVar5 = *(undefined4 **)(compiler + 0xe30);
-                puVar16 = &_glpOpSetAllEqualTo3AVRTC;
+                opTemplate = &_glpOpSetAllEqualTo3AVRTC;
               }
               else {
                 if (cVar2 != '\x04') goto LAB_97bdf944;
                 puVar5 = *(undefined4 **)(compiler + 0xe30);
-                puVar16 = &_glpOpSetAllEqualTo4AVRTC;
+                opTemplate = &_glpOpSetAllEqualTo4AVRTC;
               }
             }
             else {
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpSetEqualToAVRTC;
+              opTemplate = &_glpOpSetEqualToAVRTC;
             }
 LAB_97bdf930:
-            iVar9 = _glpRTCAddAChunk_97bd7cbc(puVar16,puVar5);
+            iVar9 = _glpRTCAddAChunk_97bd7cbc(opTemplate,puVar5);
             *(int *)(compiler + 0xe30) = *(int *)(compiler + 0xe30) + iVar9 * 4;
           }
           else {
@@ -3136,7 +3136,7 @@ LAB_97bdf7ec:
               _PPCRuntimeCompilerBackupRegister(compiler,0);
               _PPCRuntimeCompilerDirtyRegister(compiler,0);
               codeCursor = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpAllAVRTC;
+              opTemplate = &_glpOpAllAVRTC;
               *codeCursor = 0x10052c84;
               puVar5 = codeCursor + 1;
               *(undefined4 **)(compiler + 0xe30) = puVar5;
@@ -3285,45 +3285,45 @@ LAB_97bdde94:
             case 0:
 switchD_97bdfc38_caseD_0:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpMovAVRTC;
+              opTemplate = &_glpOpMovAVRTC;
               break;
             case 1:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpLitAVRTC;
+              opTemplate = &_glpOpLitAVRTC;
               break;
             case 2:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpAbsAVRTC;
+              opTemplate = &_glpOpAbsAVRTC;
               break;
             case 3:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpCeilAVRTC;
+              opTemplate = &_glpOpCeilAVRTC;
               break;
             case 4:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpFrcAVRTC;
+              opTemplate = &_glpOpFrcAVRTC;
               break;
             case 5:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpFlrAVRTC;
+              opTemplate = &_glpOpFlrAVRTC;
               break;
             default:
               goto switchD_97bdfc38_caseD_6;
             case 7:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpSetSignAVRTC;
+              opTemplate = &_glpOpSetSignAVRTC;
               break;
             case 8:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpAnyAVRTC;
+              opTemplate = &_glpOpAnyAVRTC;
               break;
             case 9:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpAllAVRTC;
+              opTemplate = &_glpOpAllAVRTC;
               break;
             case 10:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpNotAVRTC;
+              opTemplate = &_glpOpNotAVRTC;
               break;
             case 0xb:
               bVar3 = *(byte *)(*(int *)(compiler + 0xe28) + 5);
@@ -3348,80 +3348,80 @@ switchD_97bdfc38_caseD_0:
               goto LAB_97be1634;
             case 0xc:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpSqrtAVRTC;
+              opTemplate = &_glpOpSqrtAVRTC;
               break;
             case 0xd:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpRsqAVRTC;
+              opTemplate = &_glpOpRsqAVRTC;
               break;
             case 0xe:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpRcpAVRTC;
+              opTemplate = &_glpOpRcpAVRTC;
               break;
             case 0x10:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
               goto LAB_97be04f0;
             case 0x11:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpExpAVRTC;
+              opTemplate = &_glpOpExpAVRTC;
               break;
             case 0x12:
               bVar3 = *(byte *)(*(int *)(compiler + 0xe28) + 5);
               if (bVar3 == 2) {
                 puVar5 = *(undefined4 **)(compiler + 0xe30);
-                puVar16 = &_glpOpLength2AVRTC;
+                opTemplate = &_glpOpLength2AVRTC;
               }
               else if (bVar3 < 3) {
                 if (bVar3 != 1) goto switchD_97bdfc38_caseD_6;
                 puVar5 = *(undefined4 **)(compiler + 0xe30);
-                puVar16 = &_glpOpLength1AVRTC;
+                opTemplate = &_glpOpLength1AVRTC;
               }
               else if (bVar3 == 3) {
                 puVar5 = *(undefined4 **)(compiler + 0xe30);
-                puVar16 = &_glpOpLength3AVRTC;
+                opTemplate = &_glpOpLength3AVRTC;
               }
               else {
                 if (bVar3 != 4) goto switchD_97bdfc38_caseD_6;
                 puVar5 = *(undefined4 **)(compiler + 0xe30);
-                puVar16 = &_glpOpLength4AVRTC;
+                opTemplate = &_glpOpLength4AVRTC;
               }
               break;
             case 0x13:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpLg2AVRTC;
+              opTemplate = &_glpOpLg2AVRTC;
               break;
             case 0x14:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpLogAVRTC;
+              opTemplate = &_glpOpLogAVRTC;
               break;
             case 0x15:
               bVar3 = *(byte *)(*(int *)(compiler + 0xe28) + 5);
               if (bVar3 == 2) {
                 puVar5 = *(undefined4 **)(compiler + 0xe30);
-                puVar16 = &_glpOpNormalise2AVRTC;
+                opTemplate = &_glpOpNormalise2AVRTC;
               }
               else if (bVar3 < 3) {
                 if (bVar3 != 1) goto switchD_97bdfc38_caseD_6;
                 puVar5 = *(undefined4 **)(compiler + 0xe30);
-                puVar16 = &_glpOpNormalise1AVRTC;
+                opTemplate = &_glpOpNormalise1AVRTC;
               }
               else if (bVar3 == 3) {
                 puVar5 = *(undefined4 **)(compiler + 0xe30);
-                puVar16 = &_glpOpNormalise3AVRTC;
+                opTemplate = &_glpOpNormalise3AVRTC;
               }
               else {
                 if (bVar3 != 4) goto switchD_97bdfc38_caseD_6;
                 puVar5 = *(undefined4 **)(compiler + 0xe30);
-                puVar16 = &_glpOpNormalise4AVRTC;
+                opTemplate = &_glpOpNormalise4AVRTC;
               }
               break;
             case 0x16:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpDegreesToRadiansAVRTC;
+              opTemplate = &_glpOpDegreesToRadiansAVRTC;
               break;
             case 0x17:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpRadiansToDegreesAVRTC;
+              opTemplate = &_glpOpRadiansToDegreesAVRTC;
               break;
             case 0x18:
               codeCursor = *(undefined4 **)(compiler + 0xe30);
@@ -3440,51 +3440,51 @@ switchD_97bdfc38_caseD_0:
               goto LAB_97be1820;
             case 0x19:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpSinAVRTC;
+              opTemplate = &_glpOpSinAVRTC;
               break;
             case 0x1a:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpCosAVRTC;
+              opTemplate = &_glpOpCosAVRTC;
               break;
             case 0x1f:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpAddAVRTC;
+              opTemplate = &_glpOpAddAVRTC;
               break;
             case 0x20:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpSubAVRTC;
+              opTemplate = &_glpOpSubAVRTC;
               break;
             case 0x21:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpModAVRTC;
+              opTemplate = &_glpOpModAVRTC;
               break;
             case 0x23:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpMulAVRTC;
+              opTemplate = &_glpOpMulAVRTC;
               break;
             case 0x24:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpLogicalAndAVRTC;
+              opTemplate = &_glpOpLogicalAndAVRTC;
               break;
             case 0x25:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpLogicalOrAVRTC;
+              opTemplate = &_glpOpLogicalOrAVRTC;
               break;
             case 0x26:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpLogicalXorAVRTC;
+              opTemplate = &_glpOpLogicalXorAVRTC;
               break;
             case 0x27:
               bVar3 = *(byte *)(*(int *)(compiler + 0xe28) + 5);
               if (bVar3 == 2) {
                 puVar5 = *(undefined4 **)(compiler + 0xe30);
-                puVar16 = &_glpOpDp2AVRTC;
+                opTemplate = &_glpOpDp2AVRTC;
                 break;
               }
               if (bVar3 < 3) {
                 if (bVar3 == 1) {
                   puVar5 = *(undefined4 **)(compiler + 0xe30);
-                  puVar16 = &_glpOpDp1AVRTC;
+                  opTemplate = &_glpOpDp1AVRTC;
                   break;
                 }
               }
@@ -3496,100 +3496,100 @@ switchD_97bdfc38_caseD_0:
             case 0x28:
 switchD_97bdfc38_caseD_28:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpDp3AVRTC;
+              opTemplate = &_glpOpDp3AVRTC;
               break;
             case 0x29:
 switchD_97bdfc38_caseD_29:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpDp4AVRTC;
+              opTemplate = &_glpOpDp4AVRTC;
               break;
             case 0x2a:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpDphAVRTC;
+              opTemplate = &_glpOpDphAVRTC;
               break;
             case 0x2b:
               if (*(int *)(*(int *)(compiler + 0xe24) + 0x38) - 0x8b30U < 2) {
                 bVar3 = *(byte *)(*(int *)(compiler + 0xe28) + 5);
                 if (bVar3 == 2) {
                   puVar5 = *(undefined4 **)(compiler + 0xe30);
-                  puVar16 = &_glpOpDistance2GLSLAVRTC;
+                  opTemplate = &_glpOpDistance2GLSLAVRTC;
                 }
                 else if (bVar3 < 3) {
                   if (bVar3 != 1) goto switchD_97bdfc38_caseD_6;
                   puVar5 = *(undefined4 **)(compiler + 0xe30);
-                  puVar16 = &_glpOpDistance1GLSLAVRTC;
+                  opTemplate = &_glpOpDistance1GLSLAVRTC;
                 }
                 else if (bVar3 == 3) {
                   puVar5 = *(undefined4 **)(compiler + 0xe30);
-                  puVar16 = &_glpOpDistance3GLSLAVRTC;
+                  opTemplate = &_glpOpDistance3GLSLAVRTC;
                 }
                 else {
                   if (bVar3 != 4) goto switchD_97bdfc38_caseD_6;
                   puVar5 = *(undefined4 **)(compiler + 0xe30);
-                  puVar16 = &_glpOpDistance4GLSLAVRTC;
+                  opTemplate = &_glpOpDistance4GLSLAVRTC;
                 }
               }
               else {
                 puVar5 = *(undefined4 **)(compiler + 0xe30);
-                puVar16 = &_glpOpDistanceARBVPFPAVRTC;
+                opTemplate = &_glpOpDistanceARBVPFPAVRTC;
               }
               break;
             case 0x2c:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpMinAVRTC;
+              opTemplate = &_glpOpMinAVRTC;
               break;
             case 0x2d:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpMaxAVRTC;
+              opTemplate = &_glpOpMaxAVRTC;
               break;
             case 0x2e:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpXpdAVRTC;
+              opTemplate = &_glpOpXpdAVRTC;
               break;
             case 0x2f:
               bVar3 = *(byte *)(*(int *)(compiler + 0xe28) + 5);
               if (bVar3 == 2) {
                 puVar5 = *(undefined4 **)(compiler + 0xe30);
-                puVar16 = &_glpOpReflect2AVRTC;
+                opTemplate = &_glpOpReflect2AVRTC;
               }
               else if (bVar3 < 3) {
                 if (bVar3 != 1) goto switchD_97bdfc38_caseD_6;
                 puVar5 = *(undefined4 **)(compiler + 0xe30);
-                puVar16 = &_glpOpReflect1AVRTC;
+                opTemplate = &_glpOpReflect1AVRTC;
               }
               else if (bVar3 == 3) {
                 puVar5 = *(undefined4 **)(compiler + 0xe30);
-                puVar16 = &_glpOpReflect3AVRTC;
+                opTemplate = &_glpOpReflect3AVRTC;
               }
               else {
                 if (bVar3 != 4) goto switchD_97bdfc38_caseD_6;
                 puVar5 = *(undefined4 **)(compiler + 0xe30);
-                puVar16 = &_glpOpReflect4AVRTC;
+                opTemplate = &_glpOpReflect4AVRTC;
               }
               break;
             case 0x30:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpStrAVRTC;
+              opTemplate = &_glpOpStrAVRTC;
               break;
             case 0x32:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpSgeAVRTC;
+              opTemplate = &_glpOpSgeAVRTC;
               break;
             case 0x33:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpSgtAVRTC;
+              opTemplate = &_glpOpSgtAVRTC;
               break;
             case 0x34:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpSleAVRTC;
+              opTemplate = &_glpOpSleAVRTC;
               break;
             case 0x35:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpSltAVRTC;
+              opTemplate = &_glpOpSltAVRTC;
               break;
             case 0x37:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpSflAVRTC;
+              opTemplate = &_glpOpSflAVRTC;
               break;
             case 0x38:
               iVar9 = _glpRTCAddAChunk_97bd7cbc(&_glpOpLg2AVRTC,*(undefined4 *)(compiler + 0xe30));
@@ -3599,64 +3599,64 @@ switchD_97bdfc38_caseD_29:
               puVar5 = (undefined4 *)(*(int *)(compiler + 0xe30) + iVar9 * 4);
               *(undefined4 **)(compiler + 0xe30) = puVar5;
 LAB_97be04f0:
-              puVar16 = &_glpOpEx2AVRTC;
+              opTemplate = &_glpOpEx2AVRTC;
               break;
             case 0x39:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpScalarSelectAVRTC;
+              opTemplate = &_glpOpScalarSelectAVRTC;
               break;
             case 0x3a:
               iVar9 = *(int *)(*(int *)(compiler + 0xe28) + 0x24);
               if (iVar9 == 1) {
                 puVar5 = *(undefined4 **)(compiler + 0xe30);
-                puVar16 = &_glpOpDivideAVRTC;
+                opTemplate = &_glpOpDivideAVRTC;
               }
               else {
                 if (iVar9 != 3) goto switchD_97bdfc38_caseD_6;
                 puVar5 = *(undefined4 **)(compiler + 0xe30);
-                puVar16 = &_glpOpIntegerDivideAVRTC;
+                opTemplate = &_glpOpIntegerDivideAVRTC;
               }
               break;
             case 0x3b:
               bVar3 = *(byte *)(*(int *)(compiler + 0xe28) + 5);
               if (bVar3 == 2) {
                 puVar5 = *(undefined4 **)(compiler + 0xe30);
-                puVar16 = &_glpOpFaceForward2AVRTC;
+                opTemplate = &_glpOpFaceForward2AVRTC;
               }
               else if (bVar3 < 3) {
                 if (bVar3 != 1) goto switchD_97bdfc38_caseD_6;
                 puVar5 = *(undefined4 **)(compiler + 0xe30);
-                puVar16 = &_glpOpFaceForward1AVRTC;
+                opTemplate = &_glpOpFaceForward1AVRTC;
               }
               else if (bVar3 == 3) {
                 puVar5 = *(undefined4 **)(compiler + 0xe30);
-                puVar16 = &_glpOpFaceForward3AVRTC;
+                opTemplate = &_glpOpFaceForward3AVRTC;
               }
               else {
                 if (bVar3 != 4) goto switchD_97bdfc38_caseD_6;
                 puVar5 = *(undefined4 **)(compiler + 0xe30);
-                puVar16 = &_glpOpFaceForward4AVRTC;
+                opTemplate = &_glpOpFaceForward4AVRTC;
               }
               break;
             case 0x3c:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpLerpAVRTC;
+              opTemplate = &_glpOpLerpAVRTC;
               break;
             case 0x3d:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpClampAVRTC;
+              opTemplate = &_glpOpClampAVRTC;
               break;
             case 0x3e:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpCmpAVRTC;
+              opTemplate = &_glpOpCmpAVRTC;
               break;
             case 0x3f:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpMadAVRTC;
+              opTemplate = &_glpOpMadAVRTC;
               break;
             case 0x40:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpSmoothStepAVRTC;
+              opTemplate = &_glpOpSmoothStepAVRTC;
               break;
             case 0x41:
               iVar9 = *(int *)(compiler + 0xe28);
@@ -4547,7 +4547,7 @@ switchD_97bdfc38_caseD_49:
               goto LAB_97be1860;
             case 0x68:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpRefractAVRTC;
+              opTemplate = &_glpOpRefractAVRTC;
               break;
             case 0x6b:
               piVar10 = *(int **)(*(int *)(compiler + 0xe20) + 0xd80);
@@ -4567,19 +4567,19 @@ switchD_97bdfc38_caseD_49:
               iVar9 = *(int *)(compiler + 0xe28);
               if ((*(int *)(iVar9 + 0x24) == 3) && (*(int *)(iVar9 + 0x4c) == 1)) {
                 puVar5 = *(undefined4 **)(compiler + 0xe30);
-                puVar16 = &_glpOpTruncateAVRTC;
+                opTemplate = &_glpOpTruncateAVRTC;
               }
               else {
                 if ((*(int *)(iVar9 + 0x24) != 4) ||
                    ((*(int *)(iVar9 + 0x4c) != 1 && (*(int *)(iVar9 + 0x4c) != 3))))
                 goto switchD_97bdfc38_caseD_0;
                 puVar5 = *(undefined4 **)(compiler + 0xe30);
-                puVar16 = &_glpOpSetNotEqualToZeroAVRTC;
+                opTemplate = &_glpOpSetNotEqualToZeroAVRTC;
               }
               break;
             case 0x6d:
               puVar5 = *(undefined4 **)(compiler + 0xe30);
-              puVar16 = &_glpOpDestinationScalarSelectAVRTC;
+              opTemplate = &_glpOpDestinationScalarSelectAVRTC;
               break;
             case 0x6f:
               codeCursor4 = *(undefined4 **)(compiler + 0xe30);
@@ -4587,7 +4587,7 @@ switchD_97bdfc38_caseD_49:
               codeCursor4[1] = 0x7c6378ce;
               puVar5 = codeCursor4 + 3;
               codeCursor4[2] = 0x100038ee;
-              puVar16 = &_glpOpEx2AVRTC;
+              opTemplate = &_glpOpEx2AVRTC;
               *(undefined4 **)(compiler + 0xe30) = puVar5;
               break;
             case 0x70:
@@ -4603,7 +4603,7 @@ switchD_97bdfc38_caseD_49:
               *(int **)(compiler + 0xe30) = in_r10 + 3;
               goto switchD_97bdfc38_caseD_6;
             }
-            chunkIndex2 = _glpRTCAddAChunk_97bd7cbc(puVar16,puVar5);
+            chunkIndex2 = _glpRTCAddAChunk_97bd7cbc(opTemplate,puVar5);
             uVar15 = (undefined4)chunkIndex2;
             *(int *)(compiler + 0xe30) =
                  *(int *)(compiler + 0xe30) + (int)((ulonglong)chunkIndex2 >> 0x20) * 4;

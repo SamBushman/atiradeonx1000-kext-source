@@ -2849,7 +2849,7 @@ int _glpPPDisassemble(program)
   undefined4 extraout_r4_05;
   undefined4 extraout_r4_06;
   undefined4 extraout_r4_07;
-  undefined1 *puVar18;
+  undefined1 *outBytePtr;
   uint uVar19;
   uint uVar20;
   uint *puVar21;
@@ -2997,13 +2997,13 @@ LAB_97be9f08:
         ch = "OPTION "[copyIndex2 + 1];
         copyIndex2 = copyLength2;
       } while (ch != '\0');
-      puVar18 = (undefined1 *)((int)outCursor + copyLength2);
+      outBytePtr = (undefined1 *)((int)outCursor + copyLength2);
       switch(program[uVar6 * 2 + loopIndex * 2] & 0xff) {
       case 0:
         ch = 'A';
         copyIndex2 = 0;
         do {
-          puVar18[copyIndex2] = ch;
+          outBytePtr[copyIndex2] = ch;
           copyLength2 = copyIndex2 + 1;
           ch = "ARB_position_invariant"[copyIndex2 + 1];
           copyIndex2 = copyLength2;
@@ -3013,7 +3013,7 @@ LAB_97be9f08:
         ch = 'A';
         copyIndex2 = 0;
         do {
-          puVar18[copyIndex2] = ch;
+          outBytePtr[copyIndex2] = ch;
           copyLength2 = copyIndex2 + 1;
           ch = "ARB_fog_exp"[copyIndex2 + 1];
           copyIndex2 = copyLength2;
@@ -3023,7 +3023,7 @@ LAB_97be9f08:
         ch = 'A';
         copyIndex2 = 0;
         do {
-          puVar18[copyIndex2] = ch;
+          outBytePtr[copyIndex2] = ch;
           copyLength2 = copyIndex2 + 1;
           ch = "ARB_fog_exp2"[copyIndex2 + 1];
           copyIndex2 = copyLength2;
@@ -3033,7 +3033,7 @@ LAB_97be9f08:
         ch = 'A';
         copyIndex2 = 0;
         do {
-          puVar18[copyIndex2] = ch;
+          outBytePtr[copyIndex2] = ch;
           copyLength2 = copyIndex2 + 1;
           ch = "ARB_fog_linear"[copyIndex2 + 1];
           copyIndex2 = copyLength2;
@@ -3043,7 +3043,7 @@ LAB_97be9f08:
         ch = 'A';
         copyIndex2 = 0;
         do {
-          puVar18[copyIndex2] = ch;
+          outBytePtr[copyIndex2] = ch;
           copyLength2 = copyIndex2 + 1;
           ch = "ARB_precision_hint_fastest"[copyIndex2 + 1];
           copyIndex2 = copyLength2;
@@ -3053,7 +3053,7 @@ LAB_97be9f08:
         ch = 'A';
         copyIndex2 = 0;
         do {
-          puVar18[copyIndex2] = ch;
+          outBytePtr[copyIndex2] = ch;
           copyLength2 = copyIndex2 + 1;
           ch = "ARB_precision_hint_nicest"[copyIndex2 + 1];
           copyIndex2 = copyLength2;
@@ -3063,7 +3063,7 @@ LAB_97be9f08:
         ch = 'A';
         copyIndex2 = 0;
         do {
-          puVar18[copyIndex2] = ch;
+          outBytePtr[copyIndex2] = ch;
           copyLength2 = copyIndex2 + 1;
           ch = "APPLE_no_runtime_compile"[copyIndex2 + 1];
           copyIndex2 = copyLength2;
@@ -3073,7 +3073,7 @@ LAB_97be9f08:
         ch = 'A';
         copyIndex2 = 0;
         do {
-          puVar18[copyIndex2] = ch;
+          outBytePtr[copyIndex2] = ch;
           copyLength2 = copyIndex2 + 1;
           ch = "APPLE_no_altivec"[copyIndex2 + 1];
           copyIndex2 = copyLength2;
@@ -3083,7 +3083,7 @@ LAB_97be9f08:
         ch = 'N';
         copyIndex2 = 0;
         do {
-          puVar18[copyIndex2] = ch;
+          outBytePtr[copyIndex2] = ch;
           copyLength2 = copyIndex2 + 1;
           ch = "NV_fragment_program"[copyIndex2 + 1];
           copyIndex2 = copyLength2;
@@ -3093,7 +3093,7 @@ LAB_97be9f08:
         ch = 'N';
         copyIndex2 = 0;
         do {
-          puVar18[copyIndex2] = ch;
+          outBytePtr[copyIndex2] = ch;
           copyLength2 = copyIndex2 + 1;
           ch = "NV_fragment_program2"[copyIndex2 + 1];
           copyIndex2 = copyLength2;
@@ -3103,7 +3103,7 @@ LAB_97be9f08:
         ch = 'N';
         copyIndex2 = 0;
         do {
-          puVar18[copyIndex2] = ch;
+          outBytePtr[copyIndex2] = ch;
           copyLength2 = copyIndex2 + 1;
           ch = "NV_vertex_program2"[copyIndex2 + 1];
           copyIndex2 = copyLength2;
@@ -3113,7 +3113,7 @@ LAB_97be9f08:
         ch = 'N';
         copyIndex2 = 0;
         do {
-          puVar18[copyIndex2] = ch;
+          outBytePtr[copyIndex2] = ch;
           copyLength2 = copyIndex2 + 1;
           ch = "NV_vertex_program3"[copyIndex2 + 1];
           copyIndex2 = copyLength2;
@@ -3123,7 +3123,7 @@ LAB_97be9f08:
         ch = 'A';
         copyIndex2 = 0;
         do {
-          puVar18[copyIndex2] = ch;
+          outBytePtr[copyIndex2] = ch;
           copyLength2 = copyIndex2 + 1;
           ch = "ARB_draw_buffers"[copyIndex2 + 1];
           copyIndex2 = copyLength2;
@@ -3133,7 +3133,7 @@ LAB_97be9f08:
         ch = 'A';
         copyIndex2 = 0;
         do {
-          puVar18[copyIndex2] = ch;
+          outBytePtr[copyIndex2] = ch;
           copyLength2 = copyIndex2 + 1;
           ch = "ARB_fragment_program_shadow"[copyIndex2 + 1];
           copyIndex2 = copyLength2;
@@ -3142,16 +3142,16 @@ LAB_97be9f08:
       default:
         goto switchD_97bea038_default;
       }
-      puVar18 = puVar18 + copyLength2;
+      outBytePtr = outBytePtr + copyLength2;
 switchD_97bea038_default:
       copyIndex5 = 0;
       ch = local_60[0x3bbc];
       while (ch != '\0') {
-        puVar18[copyIndex5] = ch;
+        outBytePtr[copyIndex5] = ch;
         copyIndex5 = copyIndex5 + 1;
         ch = (local_60 + 0x3bbc)[copyIndex5];
       }
-      outCursor = (int *)(puVar18 + copyIndex5);
+      outCursor = (int *)(outBytePtr + copyIndex5);
       uVar26 = ((int (*)())_adjustAllocation_97be9cb4)(&outBufCapacity,&outBuf,&outCursor);
       if ((int)((ulonglong)uVar26 >> 0x20) == 0) goto LAB_97bf0cec;
       loopIndex = loopIndex + 1;
@@ -3179,33 +3179,33 @@ switchD_97bea038_default:
       copyIndex4 = copyLength3;
     } while (ch != '\0');
     iVar22 = 1;
-    puVar18 = (undefined1 *)((int)outCursor + copyLength3);
+    outBytePtr = (undefined1 *)((int)outCursor + copyLength3);
     if (1 < (int)uVar6) {
       do {
         ch = ',';
         copyIndex2 = 0;
         do {
-          puVar18[copyIndex2] = ch;
+          outBytePtr[copyIndex2] = ch;
           copyLength2 = copyIndex2 + 1;
           ch = ", adr"[copyIndex2 + 1];
           copyIndex2 = copyLength2;
         } while (ch != '\0');
-        outCursor = (int *)(puVar18 + copyLength2);
+        outCursor = (int *)(outBytePtr + copyLength2);
         iVar9 = iVar22 + 1;
         copyEnd4 = ((int (*)())_ncpy_97be5f58)(outCursor,iVar22);
-        puVar18 = (undefined1 *)((int)outCursor + copyEnd4);
+        outBytePtr = (undefined1 *)((int)outCursor + copyEnd4);
         iVar22 = iVar9;
       } while (iVar9 < (int)uVar6);
     }
     ch = ';';
     copyIndex4 = 0;
     do {
-      puVar18[copyIndex4] = ch;
+      outBytePtr[copyIndex4] = ch;
       copyLength3 = copyIndex4 + 1;
       ch = ";\n"[copyIndex4 + 1];
       copyIndex4 = copyLength3;
     } while (ch != '\0');
-    outCursor = (int *)(puVar18 + copyLength3);
+    outCursor = (int *)(outBytePtr + copyLength3);
     uVar26 = ((int (*)())_adjustAllocation_97be9cb4)(&outBufCapacity,&outBuf,&outCursor);
     if ((int)((ulonglong)uVar26 >> 0x20) == 0) goto LAB_97bf0cec;
     if (!bVar2) {
@@ -3985,15 +3985,15 @@ LAB_97beb790:
         outCursor = (int *)((int)outCursor + copyLength4 + copyEnd2);
         uVar26 = ((int (*)())_ncpy_97be5f58)(outCursor,local_78[local_90]);
         ch = ']';
-        puVar18 = (undefined1 *)((int)outCursor + (int)((ulonglong)uVar26 >> 0x20));
+        outBytePtr = (undefined1 *)((int)outCursor + (int)((ulonglong)uVar26 >> 0x20));
         copyIndex = 0;
         do {
-          puVar18[copyIndex] = ch;
+          outBytePtr[copyIndex] = ch;
           copyLength = copyIndex + 1;
           ch = "]"[copyIndex + 1];
           copyIndex = copyLength;
         } while (ch != '\0');
-        outCursor = (int *)(puVar18 + copyLength);
+        outCursor = (int *)(outBytePtr + copyLength);
         if (!bVar2) {
           uVar23 = puVar21[loopIndex * 2];
           uVar26 = ((int (*)())_glpWriteSizeTypePrecision)(outCursor,uVar23 >> 0x18 & 3,0,uVar23 >> 0x1a & 7,uVar23 >> 0x1d);
@@ -5672,13 +5672,13 @@ LAB_97bedcb4:
           ch = "opfail="[copyIndex + 1];
           copyIndex = copyLength5;
         } while (ch != '\0');
-        puVar18 = (undefined1 *)((int)outCursor + copyLength5 + iVar13 + copyLength);
+        outBytePtr = (undefined1 *)((int)outCursor + copyLength5 + iVar13 + copyLength);
         switch(program[uVar19 * 2 + iVar9 * 2] >> 0xf & 7) {
         case 0:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_STENCIL_ZERO "[copyIndex + 1];
             copyIndex = copyLength;
@@ -5688,7 +5688,7 @@ LAB_97bedcb4:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_STENCIL_KEEP "[copyIndex + 1];
             copyIndex = copyLength;
@@ -5698,7 +5698,7 @@ LAB_97bedcb4:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_STENCIL_REPLACE "[copyIndex + 1];
             copyIndex = copyLength;
@@ -5708,7 +5708,7 @@ LAB_97bedcb4:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_STENCIL_INCR "[copyIndex + 1];
             copyIndex = copyLength;
@@ -5718,7 +5718,7 @@ LAB_97bedcb4:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_STENCIL_DECR "[copyIndex + 1];
             copyIndex = copyLength;
@@ -5728,7 +5728,7 @@ LAB_97bedcb4:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_STENCIL_INVERT "[copyIndex + 1];
             copyIndex = copyLength;
@@ -5738,7 +5738,7 @@ LAB_97bedcb4:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_STENCIL_INCR_WRAP "[copyIndex + 1];
             copyIndex = copyLength;
@@ -5748,7 +5748,7 @@ LAB_97bedcb4:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_STENCIL_DECR_WRAP "[copyIndex + 1];
             copyIndex = copyLength;
@@ -5757,23 +5757,23 @@ LAB_97bedcb4:
         default:
           goto switchD_97bee894_default;
         }
-        puVar18 = puVar18 + copyLength;
+        outBytePtr = outBytePtr + copyLength;
 switchD_97bee894_default:
         ch = 'o';
         copyIndex = 0;
         do {
-          puVar18[copyIndex] = ch;
+          outBytePtr[copyIndex] = ch;
           copyLength = copyIndex + 1;
           ch = "opzfail="[copyIndex + 1];
           copyIndex = copyLength;
         } while (ch != '\0');
-        puVar18 = puVar18 + copyLength;
+        outBytePtr = outBytePtr + copyLength;
         switch(program[uVar19 * 2 + iVar9 * 2] >> 0x12 & 7) {
         case 0:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_STENCIL_ZERO "[copyIndex + 1];
             copyIndex = copyLength;
@@ -5783,7 +5783,7 @@ switchD_97bee894_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_STENCIL_KEEP "[copyIndex + 1];
             copyIndex = copyLength;
@@ -5793,7 +5793,7 @@ switchD_97bee894_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_STENCIL_REPLACE "[copyIndex + 1];
             copyIndex = copyLength;
@@ -5803,7 +5803,7 @@ switchD_97bee894_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_STENCIL_INCR "[copyIndex + 1];
             copyIndex = copyLength;
@@ -5813,7 +5813,7 @@ switchD_97bee894_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_STENCIL_DECR "[copyIndex + 1];
             copyIndex = copyLength;
@@ -5823,7 +5823,7 @@ switchD_97bee894_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_STENCIL_INVERT "[copyIndex + 1];
             copyIndex = copyLength;
@@ -5833,7 +5833,7 @@ switchD_97bee894_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_STENCIL_INCR_WRAP "[copyIndex + 1];
             copyIndex = copyLength;
@@ -5843,7 +5843,7 @@ switchD_97bee894_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_STENCIL_DECR_WRAP "[copyIndex + 1];
             copyIndex = copyLength;
@@ -5852,17 +5852,17 @@ switchD_97bee894_default:
         default:
           goto switchD_97beeaec_default;
         }
-        puVar18 = puVar18 + copyLength;
+        outBytePtr = outBytePtr + copyLength;
 switchD_97beeaec_default:
         ch = 'o';
         copyIndex = 0;
         do {
-          puVar18[copyIndex] = ch;
+          outBytePtr[copyIndex] = ch;
           copyLength = copyIndex + 1;
           ch = "opzpass="[copyIndex + 1];
           copyIndex = copyLength;
         } while (ch != '\0');
-        outCursor = (int *)(puVar18 + copyLength);
+        outCursor = (int *)(outBytePtr + copyLength);
         switch(program[uVar19 * 2 + iVar9 * 2] >> 0x15 & 7) {
         case 0:
           ch = 'P';
@@ -6060,13 +6060,13 @@ switchD_97beed44_default:
           ch = "BLENDING \n\talpha equ = "[copyIndex + 1];
           copyIndex = copyLength;
         } while (ch != '\0');
-        puVar18 = (undefined1 *)((int)outCursor + copyLength);
+        outBytePtr = (undefined1 *)((int)outCursor + copyLength);
         switch(program[uVar19 * 2 + iVar9 * 2] >> 0x13 & 7) {
         case 0:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_FUNC_ADD "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6076,7 +6076,7 @@ switchD_97beed44_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_FUNC_SUBTRACT "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6086,7 +6086,7 @@ switchD_97beed44_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_FUNC_REVERSE_SUBTRACT "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6096,7 +6096,7 @@ switchD_97beed44_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_FUNC_MIN "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6106,7 +6106,7 @@ switchD_97beed44_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_FUNC_MAX "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6115,23 +6115,23 @@ switchD_97beed44_default:
         default:
           goto switchD_97bef244_default;
         }
-        puVar18 = puVar18 + copyLength;
+        outBytePtr = outBytePtr + copyLength;
 switchD_97bef244_default:
         ch = '\n';
         copyIndex = 0;
         do {
-          puVar18[copyIndex] = ch;
+          outBytePtr[copyIndex] = ch;
           copyLength = copyIndex + 1;
           ch = "\n\trgb equ = "[copyIndex + 1];
           copyIndex = copyLength;
         } while (ch != '\0');
-        puVar18 = puVar18 + copyLength;
+        outBytePtr = outBytePtr + copyLength;
         switch(program[uVar19 * 2 + iVar9 * 2] >> 0x10 & 7) {
         case 0:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_FUNC_ADD "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6141,7 +6141,7 @@ switchD_97bef244_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_FUNC_SUBTRACT "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6151,7 +6151,7 @@ switchD_97bef244_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_FUNC_REVERSE_SUBTRACT "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6161,7 +6161,7 @@ switchD_97bef244_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_FUNC_MIN "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6171,7 +6171,7 @@ switchD_97bef244_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_FUNC_MAX "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6180,23 +6180,23 @@ switchD_97bef244_default:
         default:
           goto switchD_97bef3e8_default;
         }
-        puVar18 = puVar18 + copyLength;
+        outBytePtr = outBytePtr + copyLength;
 switchD_97bef3e8_default:
         ch = '\n';
         copyIndex = 0;
         do {
-          puVar18[copyIndex] = ch;
+          outBytePtr[copyIndex] = ch;
           copyLength = copyIndex + 1;
           ch = "\n\tsrc = "[copyIndex + 1];
           copyIndex = copyLength;
         } while (ch != '\0');
-        puVar18 = puVar18 + copyLength;
+        outBytePtr = outBytePtr + copyLength;
         switch(program[uVar19 * 2 + iVar9 * 2] & 0xf) {
         case 0:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_ZERO "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6206,7 +6206,7 @@ switchD_97bef3e8_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_ONE "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6216,7 +6216,7 @@ switchD_97bef3e8_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_SRC_COLOR "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6226,7 +6226,7 @@ switchD_97bef3e8_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_ONE_MINUS_SRC_COLOR "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6236,7 +6236,7 @@ switchD_97bef3e8_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_SRC_ALPHA "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6246,7 +6246,7 @@ switchD_97bef3e8_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_ONE_MINUS_SRC_ALPHA "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6256,7 +6256,7 @@ switchD_97bef3e8_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_DST_ALPHA "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6266,7 +6266,7 @@ switchD_97bef3e8_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_ONE_MINUS_DST_ALPHA "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6276,7 +6276,7 @@ switchD_97bef3e8_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_CONSTANT_COLOR "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6286,7 +6286,7 @@ switchD_97bef3e8_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_ONE_MINUS_CONSTANT_COLOR "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6296,7 +6296,7 @@ switchD_97bef3e8_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_CONSTANT_ALPHA "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6306,7 +6306,7 @@ switchD_97bef3e8_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_ONE_MINUS_CONSTANT_ALPHA "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6316,7 +6316,7 @@ switchD_97bef3e8_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_DST_COLOR "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6326,7 +6326,7 @@ switchD_97bef3e8_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_ONE_MINUS_DST_COLOR "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6336,7 +6336,7 @@ switchD_97bef3e8_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_SRC_ALPHA_SATURATE "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6345,23 +6345,23 @@ switchD_97bef3e8_default:
         default:
           goto switchD_97bef58c_default;
         }
-        puVar18 = puVar18 + copyLength;
+        outBytePtr = outBytePtr + copyLength;
 switchD_97bef58c_default:
         ch = '\n';
         copyIndex = 0;
         do {
-          puVar18[copyIndex] = ch;
+          outBytePtr[copyIndex] = ch;
           copyLength = copyIndex + 1;
           ch = "\n\tsrcA = "[copyIndex + 1];
           copyIndex = copyLength;
         } while (ch != '\0');
-        puVar18 = puVar18 + copyLength;
+        outBytePtr = outBytePtr + copyLength;
         switch(program[uVar19 * 2 + iVar9 * 2] >> 4 & 0xf) {
         case 0:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_ZERO "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6371,7 +6371,7 @@ switchD_97bef58c_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_ONE "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6381,7 +6381,7 @@ switchD_97bef58c_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_SRC_COLOR "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6391,7 +6391,7 @@ switchD_97bef58c_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_ONE_MINUS_SRC_COLOR "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6401,7 +6401,7 @@ switchD_97bef58c_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_SRC_ALPHA "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6411,7 +6411,7 @@ switchD_97bef58c_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_ONE_MINUS_SRC_ALPHA "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6421,7 +6421,7 @@ switchD_97bef58c_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_DST_ALPHA "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6431,7 +6431,7 @@ switchD_97bef58c_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_ONE_MINUS_DST_ALPHA "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6441,7 +6441,7 @@ switchD_97bef58c_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_CONSTANT_COLOR "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6451,7 +6451,7 @@ switchD_97bef58c_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_ONE_MINUS_CONSTANT_COLOR "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6461,7 +6461,7 @@ switchD_97bef58c_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_CONSTANT_ALPHA "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6471,7 +6471,7 @@ switchD_97bef58c_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_ONE_MINUS_CONSTANT_ALPHA "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6481,7 +6481,7 @@ switchD_97bef58c_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_DST_COLOR "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6491,7 +6491,7 @@ switchD_97bef58c_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_ONE_MINUS_DST_COLOR "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6501,7 +6501,7 @@ switchD_97bef58c_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_SRC_ALPHA_SATURATE "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6510,23 +6510,23 @@ switchD_97bef58c_default:
         default:
           goto switchD_97bef988_default;
         }
-        puVar18 = puVar18 + copyLength;
+        outBytePtr = outBytePtr + copyLength;
 switchD_97bef988_default:
         ch = '\n';
         copyIndex = 0;
         do {
-          puVar18[copyIndex] = ch;
+          outBytePtr[copyIndex] = ch;
           copyLength = copyIndex + 1;
           ch = "\n\tdst = "[copyIndex + 1];
           copyIndex = copyLength;
         } while (ch != '\0');
-        puVar18 = puVar18 + copyLength;
+        outBytePtr = outBytePtr + copyLength;
         switch(program[uVar19 * 2 + iVar9 * 2] >> 8 & 0xf) {
         case 0:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_ZERO "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6536,7 +6536,7 @@ switchD_97bef988_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_ONE "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6546,7 +6546,7 @@ switchD_97bef988_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_SRC_COLOR "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6556,7 +6556,7 @@ switchD_97bef988_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_ONE_MINUS_SRC_COLOR "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6566,7 +6566,7 @@ switchD_97bef988_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_SRC_ALPHA "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6576,7 +6576,7 @@ switchD_97bef988_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_ONE_MINUS_SRC_ALPHA "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6586,7 +6586,7 @@ switchD_97bef988_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_DST_ALPHA "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6596,7 +6596,7 @@ switchD_97bef988_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_ONE_MINUS_DST_ALPHA "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6606,7 +6606,7 @@ switchD_97bef988_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_CONSTANT_COLOR "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6616,7 +6616,7 @@ switchD_97bef988_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_ONE_MINUS_CONSTANT_COLOR "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6626,7 +6626,7 @@ switchD_97bef988_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_CONSTANT_ALPHA "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6636,7 +6636,7 @@ switchD_97bef988_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_ONE_MINUS_CONSTANT_ALPHA "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6646,7 +6646,7 @@ switchD_97bef988_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_DST_COLOR "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6656,7 +6656,7 @@ switchD_97bef988_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_ONE_MINUS_DST_COLOR "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6666,7 +6666,7 @@ switchD_97bef988_default:
           ch = 'P';
           copyIndex = 0;
           do {
-            puVar18[copyIndex] = ch;
+            outBytePtr[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = "PP_BLEND_SRC_ALPHA_SATURATE "[copyIndex + 1];
             copyIndex = copyLength;
@@ -6675,17 +6675,17 @@ switchD_97bef988_default:
         default:
           goto switchD_97befd84_default;
         }
-        puVar18 = puVar18 + copyLength;
+        outBytePtr = outBytePtr + copyLength;
 switchD_97befd84_default:
         ch = '\n';
         iVar10 = 0;
         do {
-          puVar18[iVar10] = ch;
+          outBytePtr[iVar10] = ch;
           copyLength = iVar10 + 1;
           ch = "\n\tdstA = "[iVar10 + 1];
           iVar10 = copyLength;
         } while (ch != '\0');
-        outCursor = (int *)(puVar18 + copyLength);
+        outCursor = (int *)(outBytePtr + copyLength);
         switch(program[uVar19 * 2 + iVar9 * 2] >> 0xc & 0xf) {
         case 0:
           ch = 'P';

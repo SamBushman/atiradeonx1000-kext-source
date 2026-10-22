@@ -1540,7 +1540,7 @@ int TParseContext__executeInitializer(this, line, identifier, publicType, initia
   uint uVar3;
   uint uVar4;
   int *piVar5;
-  int *piVar6;
+  int *newNode;
   uint uVar7;
   int iVar8;
   unsigned char * pTVar9;
@@ -1626,7 +1626,7 @@ int TParseContext__executeInitializer(this, line, identifier, publicType, initia
   }
   pTVar9 = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
   uVar31 = ((int (*)())TPoolAllocator__allocate)(pTVar9,0x40);
-  piVar6 = (int *)((ulonglong)uVar31 >> 0x20);
+  newNode = (int *)((ulonglong)uVar31 >> 0x20);
   uVar19 = (undefined4)uVar31;
   paVar15 = *(unsigned char **)(publicType + 0x14);
   uVar18 = *(uint *)(publicType + 4);
@@ -1684,44 +1684,44 @@ int TParseContext__executeInitializer(this, line, identifier, publicType, initia
     }
   }
   local_140 = ppuVar13;
-  piVar6[1] = (int)identifier;
-  a0 = (unsigned char *)(piVar6 + 3);
-  *piVar6 = (int)(PTR_vtable_a7b7c0b4 + 8);
+  newNode[1] = (int)identifier;
+  a0 = (unsigned char *)(newNode + 3);
+  *newNode = (int)(PTR_vtable_a7b7c0b4 + 8);
   puVar24 = &local_d0;
-  piVar6[4] = local_14c;
-  piVar6[5] = (int)local_148;
-  piVar6[6] = local_144;
-  piVar6[7] = (int)local_140;
-  piVar6[8] = local_13c;
-  piVar6[9] = local_138;
-  piVar6[3] = (int)&PTR___ZN5TTypeD1Ev_a7b7d4d0;
-  piVar6[10] = local_134;
-  piVar6[0xb] = local_130;
-  uVar4 = piVar6[0xc];
+  newNode[4] = local_14c;
+  newNode[5] = (int)local_148;
+  newNode[6] = local_144;
+  newNode[7] = (int)local_140;
+  newNode[8] = local_13c;
+  newNode[9] = local_138;
+  newNode[3] = (int)&PTR___ZN5TTypeD1Ev_a7b7d4d0;
+  newNode[10] = local_134;
+  newNode[0xb] = local_130;
+  uVar4 = newNode[0xc];
   uVar21 = (uint)local_12c & 0xfe000000;
-  piVar6[0xc] = uVar21 | uVar4 & 0x1ffffff;
+  newNode[0xc] = uVar21 | uVar4 & 0x1ffffff;
   uVar2 = ((uint)local_12c >> 0x13 & 0x3f) << 0x13;
-  piVar6[0xc] = uVar2 | uVar21 | uVar4 & 0x7ffff;
+  newNode[0xc] = uVar2 | uVar21 | uVar4 & 0x7ffff;
   uVar7 = (uint)local_12c & 0x7f800;
-  piVar6[0xc] = uVar7 | uVar2 | uVar21 | uVar4 & 0x7ff;
+  newNode[0xc] = uVar7 | uVar2 | uVar21 | uVar4 & 0x7ff;
   uVar3 = ((uint)local_12c >> 10 & 1) << 10;
-  piVar6[0xc] = uVar3 | uVar7 | uVar2 | uVar21 | uVar4 & 0x3ff;
-  piVar6[0xc] = ((uint)local_12c >> 9 & 1) << 9 | uVar3 | uVar7 | uVar2 | uVar21 | uVar4 & 0x1ff;
-  piVar6[0xd] = 0;
-  piVar6[0xe] = 0;
-  piVar6[0xf] = 0;
+  newNode[0xc] = uVar3 | uVar7 | uVar2 | uVar21 | uVar4 & 0x3ff;
+  newNode[0xc] = ((uint)local_12c >> 9 & 1) << 9 | uVar3 | uVar7 | uVar2 | uVar21 | uVar4 & 0x1ff;
+  newNode[0xd] = 0;
+  newNode[0xe] = 0;
+  newNode[0xf] = 0;
   a6 = *(uint **)(this + 4);
   local_150 = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
   uVar7 = a6[3];
   a6[3] = uVar7 + 1;
-  piVar6[2] = uVar7 + 1;
+  newNode[2] = uVar7 + 1;
   uVar7 = *a6;
   uVar27 = *(undefined4 *)(uVar7 + ((a6[1] - uVar7 & 0xfffffffc) - 4));
   local_14c = 0;
   psVar10 = (unsigned char *)
-            (**(code **)(*piVar6 + 8))(piVar6,uVar19,paVar15,uVar17,uVar18,ppuVar20,a6,uVar7);
+            (**(code **)(*newNode + 8))(newNode,uVar19,paVar15,uVar17,uVar18,ppuVar20,a6,uVar7);
   __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(puVar24,psVar10);
-  local_c8 = piVar6;
+  local_c8 = newNode;
   std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_140,uVar27,puVar24);
   local_150 = local_140;
   piVar5 = (int *)(local_cc + -4);
@@ -1743,22 +1743,22 @@ int TParseContext__executeInitializer(this, line, identifier, publicType, initia
     uVar19 = extraout_r4_01;
   }
   if (local_14c == 0) {
-    uVar7 = piVar6[1];
+    uVar7 = newNode[1];
     uVar21 = (uint)*DAT_a7b7ba18;
     pcVar16 = "redefinition";
     *(byte *)(*(int *)(uVar7 + 4) + *(int *)(*(int *)(uVar7 + 4) + -0xc)) = *DAT_a7b7ba18;
     pcVar29 = *(char **)(uVar7 + 4);
     goto LAB_97b9df14;
   }
-  uVar17 = (**(code **)(piVar6[3] + 0x24))(a0,uVar19,puVar24,uVar17,uVar18,ppuVar20,uVar21,uVar7);
+  uVar17 = (**(code **)(newNode[3] + 0x24))(a0,uVar19,puVar24,uVar17,uVar18,ppuVar20,uVar21,uVar7);
   if (2 < uVar17) {
-    pcVar29 = (char *)getQualifierString((uint)piVar6[0xc] >> 0x19);
+    pcVar29 = (char *)getQualifierString((uint)newNode[0xc] >> 0x19);
     pcVar16 = " cannot initialize this type of qualifier ";
     goto LAB_97b9df14;
   }
   if (uVar17 != 2) {
     iVar8 = TIntermediate__addSymbol
-                      (*(unsigned char **)this,piVar6[2],(unsigned char *)piVar6[1],a0,line);
+                      (*(unsigned char **)this,newNode[2],(unsigned char *)newNode[1],a0,line);
     pTVar12 = (unsigned char *)
               TIntermediate__addAssign(*(unsigned char **)this,0x76,iVar8,initializer,line);
     *param_6 = pTVar12;
@@ -1768,13 +1768,13 @@ int TParseContext__executeInitializer(this, line, identifier, publicType, initia
     TType__getCompleteString(&local_150,initializer + 8);
     TType__getCompleteString((unsigned char *)&local_140,iVar8 + 8);
     TParseContext__assignError(this,line,"=",(unsigned char *)&local_140,&local_150);
-    piVar6 = (int *)(local_13c - 4);
+    newNode = (int *)(local_13c - 4);
     local_60[0] = local_140;
     do {
-      iVar8 = *piVar6;
+      iVar8 = *newNode;
       if (in_RESERVE != '\0') {
-        iVar22 = storeWordConditionalIndexed(iVar8 + -1,0,piVar6);
-        *piVar6 = iVar22;
+        iVar22 = storeWordConditionalIndexed(iVar8 + -1,0,newNode);
+        *newNode = iVar22;
         bVar30 = 2;
       }
     } while (!(bool)(bVar30 >> 1 & 1));
@@ -1782,13 +1782,13 @@ int TParseContext__executeInitializer(this, line, identifier, publicType, initia
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_13c - 0xc),local_60);
     }
-    piVar6 = (int *)(local_14c - 4);
+    newNode = (int *)(local_14c - 4);
     local_50[0] = local_150;
     do {
-      iVar8 = *piVar6;
+      iVar8 = *newNode;
       if (in_RESERVE != '\0') {
-        iVar22 = storeWordConditionalIndexed(iVar8 + -1,0,piVar6);
-        *piVar6 = iVar22;
+        iVar22 = storeWordConditionalIndexed(iVar8 + -1,0,newNode);
+        *newNode = iVar22;
         bVar30 = 2;
       }
     } while (!(bool)(bVar30 >> 1 & 1));
@@ -1826,7 +1826,7 @@ LAB_97b9e848:
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
               ((unsigned char *)(uVar17 - 0xc),pppuVar14);
 LAB_97b9e184:
-    (**(code **)(piVar6[3] + 0x28))(a0,0);
+    (**(code **)(newNode[3] + 0x28))(a0,0);
     return 1;
   }
   paVar15 = *(unsigned char **)(publicType + 0x14);
@@ -1892,7 +1892,7 @@ LAB_97b9e184:
   local_150 = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
   local_120 = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
   if (iVar8 == 0) {
-    pcVar29 = (char *)getQualifierString((uint)piVar6[0xc] >> 0x19);
+    pcVar29 = (char *)getQualifierString((uint)newNode[0xc] >> 0x19);
     error((int)this,(char *)line," non-matching types for const initializer ",pcVar29,"",uVar7,
           iVar8,ppuVar20);
     goto LAB_97b9e184;
@@ -1901,10 +1901,10 @@ LAB_97b9e184:
   if (iVar8 == 0) {
     iVar8 = (**(code **)(*(int *)initializer + 0x1c))(initializer);
     if (iVar8 != 0) {
-      pcVar25 = (unsigned char *)piVar6[0xe];
+      pcVar25 = (unsigned char *)newNode[0xe];
       if (pcVar25 == (unsigned char *)0x0) {
-        if (piVar6[5] == 0) {
-          uVar21 = piVar6[0xc];
+        if (newNode[5] == 0) {
+          uVar21 = newNode[0xc];
           if ((uVar21 & 0x400) == 0) {
             iVar8 = (int)(uVar21 << 0xd | uVar21 >> 0x13) >> 0x18;
           }
@@ -1914,11 +1914,11 @@ LAB_97b9e184:
           }
         }
         else {
-          iVar8 = piVar6[9];
+          iVar8 = newNode[9];
         }
         pTVar9 = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
         pcVar25 = (unsigned char *)((int (*)())TPoolAllocator__allocate)(pTVar9,iVar8 << 2);
-        piVar6[0xe] = (int)pcVar25;
+        newNode[0xe] = (int)pcVar25;
       }
       piVar5 = (int *)(**(code **)(*(int *)initializer + 0x1c))(initializer);
       iVar8 = (**(code **)(*piVar5 + 100))(piVar5);
@@ -1933,21 +1933,21 @@ LAB_97b9e184:
         iVar8 = (**(code **)(*piVar5 + 0x18))(piVar5);
         uVar19 = a1_00;
         if (iVar8 != 0) {
-          local_14c = piVar6[4];
-          local_148 = (undefined **)piVar6[5];
-          local_144 = piVar6[6];
-          local_13c = piVar6[8];
-          local_138 = piVar6[9];
-          local_134 = piVar6[10];
-          local_130 = piVar6[0xb];
-          local_140 = (undefined **)piVar6[7];
+          local_14c = newNode[4];
+          local_148 = (undefined **)newNode[5];
+          local_144 = newNode[6];
+          local_13c = newNode[8];
+          local_138 = newNode[9];
+          local_134 = newNode[10];
+          local_130 = newNode[0xb];
+          local_140 = (undefined **)newNode[7];
           local_150 = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
           local_12c = (unsigned char *)
-                      (((uint)piVar6[0xc] >> 9 & 1) << 9 |
-                      ((uint)piVar6[0xc] >> 10 & 1) << 10 |
-                      piVar6[0xc] & 0x7f800U |
-                      ((uint)piVar6[0xc] >> 0x13 & 0x3f) << 0x13 |
-                      piVar6[0xc] & 0xfe000000U | (uint)local_12c & 0x1ff);
+                      (((uint)newNode[0xc] >> 9 & 1) << 9 |
+                      ((uint)newNode[0xc] >> 10 & 1) << 10 |
+                      newNode[0xc] & 0x7f800U |
+                      ((uint)newNode[0xc] >> 0x13 & 0x3f) << 0x13 |
+                      newNode[0xc] & 0xfe000000U | (uint)local_12c & 0x1ff);
           iVar8 = (**(code **)(*(int *)initializer + 0x1c))
                             (initializer,a1_00,local_12c,local_130,local_134,local_138,local_144,
                              local_13c);
@@ -1958,26 +1958,26 @@ LAB_97b9e184:
           goto LAB_97b9e6d8;
         }
       }
-      local_14c = piVar6[4];
-      local_148 = (undefined **)piVar6[5];
-      local_144 = piVar6[6];
-      local_13c = piVar6[8];
-      local_138 = piVar6[9];
-      local_134 = piVar6[10];
-      local_130 = piVar6[0xb];
-      local_140 = (undefined **)piVar6[7];
+      local_14c = newNode[4];
+      local_148 = (undefined **)newNode[5];
+      local_144 = newNode[6];
+      local_13c = newNode[8];
+      local_138 = newNode[9];
+      local_134 = newNode[10];
+      local_130 = newNode[0xb];
+      local_140 = (undefined **)newNode[7];
       local_150 = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
-      uVar18 = ((uint)piVar6[0xc] >> 0x13 & 0x3f) << 0x13;
-      uVar7 = ((uint)piVar6[0xc] >> 10 & 1) << 10;
+      uVar18 = ((uint)newNode[0xc] >> 0x13 & 0x3f) << 0x13;
+      uVar7 = ((uint)newNode[0xc] >> 10 & 1) << 10;
       uVar17 = (uint)local_12c & 0x3ff;
       local_12c = (unsigned char *)
-                  (((uint)piVar6[0xc] >> 9 & 1) << 9 |
-                  uVar7 | piVar6[0xc] & 0x7f800U |
-                          uVar18 | piVar6[0xc] & 0xfe000000U | (uint)local_12c & 0x1ff);
+                  (((uint)newNode[0xc] >> 9 & 1) << 9 |
+                  uVar7 | newNode[0xc] & 0x7f800U |
+                          uVar18 | newNode[0xc] & 0xfe000000U | (uint)local_12c & 0x1ff);
       iVar8 = (**(code **)(*(int *)initializer + 0x1c))
                         (initializer,uVar19,
-                         uVar7 | piVar6[0xc] & 0x7f800U |
-                                 uVar18 | piVar6[0xc] & 0xfe000000U | uVar17,local_130,local_134,
+                         uVar7 | newNode[0xc] & 0x7f800U |
+                                 uVar18 | newNode[0xc] & 0xfe000000U | uVar17,local_130,local_134,
                          local_138,local_144,local_13c);
       uVar27 = *(undefined4 *)(this + 4);
       uVar19 = *(undefined4 *)(iVar8 + 0x30);
@@ -1990,7 +1990,7 @@ LAB_97b9e6d8:
       local_150 = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
       *param_6 = (unsigned char *)0x0;
       if (iVar8 != 0) {
-        (**(code **)(piVar6[3] + 0x28))(a0,0);
+        (**(code **)(newNode[3] + 0x28))(a0,0);
         return iVar8;
       }
       return 0;
@@ -2036,10 +2036,10 @@ LAB_97b9e6d8:
     iVar8 = *(int *)(iVar8 + 0x38);
   }
   else {
-    puVar24 = (undefined4 *)piVar6[0xe];
+    puVar24 = (undefined4 *)newNode[0xe];
     if (puVar24 == (undefined4 *)0x0) {
-      if (piVar6[5] == 0) {
-        uVar7 = piVar6[0xc];
+      if (newNode[5] == 0) {
+        uVar7 = newNode[0xc];
         if ((uVar7 & 0x400) == 0) {
           iVar8 = (int)(uVar7 << 0xd | uVar7 >> 0x13) >> 0x18;
         }
@@ -2049,11 +2049,11 @@ LAB_97b9e6d8:
         }
       }
       else {
-        iVar8 = piVar6[9];
+        iVar8 = newNode[9];
       }
       pTVar9 = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
       puVar24 = (undefined4 *)((int (*)())TPoolAllocator__allocate)(pTVar9,iVar8 << 2);
-      piVar6[0xe] = (int)puVar24;
+      newNode[0xe] = (int)puVar24;
     }
     ppuVar13 = *(undefined ***)(publicType + 8);
     if (ppuVar13 == (undefined **)0x1) {
@@ -2142,7 +2142,7 @@ LAB_97b9e3bc:
     iVar8 = (**(code **)(*(int *)initializer + 0x18))(initializer,ppuVar13,paVar15,uVar17,uVar18);
     iVar8 = *(int *)(iVar8 + 0x30);
   }
-  piVar6[0xe] = iVar8;
+  newNode[0xe] = iVar8;
 LAB_97b9e850:
   *param_6 = (unsigned char *)0x0;
   return 0;

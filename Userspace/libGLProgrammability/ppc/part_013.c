@@ -515,190 +515,191 @@ int DeleteCompiler(param_1)
 }
 
 /* GetBuiltInInitialSwizzle @ 0x97bca2c8 (748 bytes) */
-int GetBuiltInInitialSwizzle(param_1)
-  unsigned char * param_1;
+int GetBuiltInInitialSwizzle(parseSymbol)
+  unsigned char * parseSymbol;
 {
-  bool bVar1;
-  char *pcVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
+  int fieldValue;
+  bool hashMatches;
+  char *charPtr;
+  int nameLength;
+  int weightedChar;
+  int charWeight;
+  int charIndex;
+  int nameHash;
   
-  iVar3 = *(int *)(param_1 + 0x20);
-  iVar7 = 0;
-  iVar6 = 0;
-  if (0 < iVar3) {
-    iVar5 = 3;
+  nameLength = *(int *)(parseSymbol + 0x20);
+  nameHash = 0;
+  charIndex = 0;
+  if (0 < nameLength) {
+    charWeight = 3;
     do {
-      pcVar2 = (char *)(*(int *)(param_1 + 0x14) + iVar6);
-      iVar6 = iVar6 + 1;
-      iVar4 = *pcVar2 * iVar5;
-      iVar5 = iVar5 + 2;
-      iVar7 = iVar7 + iVar4;
-      iVar3 = iVar3 + -1;
-    } while (iVar3 != 0);
+      charPtr = (char *)(*(int *)(parseSymbol + 0x14) + charIndex);
+      charIndex = charIndex + 1;
+      weightedChar = *charPtr * charWeight;
+      charWeight = charWeight + 2;
+      nameHash = nameHash + weightedChar;
+      nameLength = nameLength + -1;
+    } while (nameLength != 0);
   }
-  if (iVar7 == 0x18ec7) {
+  if (nameHash == 0x18ec7) {
     return 3;
   }
-  if (iVar7 < 0x18ec8) {
-    if (iVar7 == 0x17e27) {
+  if (nameHash < 0x18ec8) {
+    if (nameHash == 0x17e27) {
       return 3;
     }
-    if (0x17e27 < iVar7) {
-      if (iVar7 == 0x17ecc) {
+    if (0x17e27 < nameHash) {
+      if (nameHash == 0x17ecc) {
         return 3;
       }
-      if (iVar7 < 0x17ecd) {
-        if (iVar7 == 0x17e69) {
+      if (nameHash < 0x17ecd) {
+        if (nameHash == 0x17e69) {
           return 3;
         }
-        if (iVar7 < 0x17e6a) {
-          iVar3 = 0x17e48;
+        if (nameHash < 0x17e6a) {
+          fieldValue = 0x17e48;
         }
         else {
-          if (iVar7 == 0x17e8a) {
+          if (nameHash == 0x17e8a) {
             return 3;
           }
-          iVar3 = 0x17eab;
+          fieldValue = 0x17eab;
         }
       }
       else {
-        if (iVar7 == 0x18e64) {
+        if (nameHash == 0x18e64) {
           return 3;
         }
-        if (iVar7 < 0x18e65) {
-          if (iVar7 == 0x17eed) {
+        if (nameHash < 0x18e65) {
+          if (nameHash == 0x17eed) {
             return 3;
           }
-          iVar3 = 0x18e43;
+          fieldValue = 0x18e43;
         }
         else {
-          if (iVar7 == 0x18e85) {
+          if (nameHash == 0x18e85) {
             return 3;
           }
-          iVar3 = 0x18ea6;
+          fieldValue = 0x18ea6;
         }
       }
 LAB_97bca478:
-      if (iVar7 == iVar3) {
+      if (nameHash == fieldValue) {
         return 3;
       }
       return 0;
     }
-    if (iVar7 == 0x71c3) {
+    if (nameHash == 0x71c3) {
       return 2;
     }
-    if (iVar7 < 0x71c4) {
-      if (iVar7 == 0x3f94) {
+    if (nameHash < 0x71c4) {
+      if (nameHash == 0x3f94) {
         return 3;
       }
-      if (0x3f94 < iVar7) {
-        if (iVar7 == 0x42d8) {
+      if (0x3f94 < nameHash) {
+        if (nameHash == 0x42d8) {
           return 1;
         }
-        bVar1 = iVar7 == 0x7171;
+        hashMatches = nameHash == 0x7171;
         goto LAB_97bca520;
       }
-      bVar1 = iVar7 == 0x2c25;
+      hashMatches = nameHash == 0x2c25;
       goto LAB_97bca590;
     }
-    if (iVar7 == 0x8837) {
+    if (nameHash == 0x8837) {
       return 2;
     }
-    if (0x8837 < iVar7) {
-      if (iVar7 == 0x12304) {
+    if (0x8837 < nameHash) {
+      if (nameHash == 0x12304) {
         return 3;
       }
-      iVar3 = 0x17e06;
+      fieldValue = 0x17e06;
       goto LAB_97bca478;
     }
-    bVar1 = iVar7 == 0x7a53;
+    hashMatches = nameHash == 0x7a53;
     goto LAB_97bca520;
   }
-  if (iVar7 == 0x2043a) {
+  if (nameHash == 0x2043a) {
     return 1;
   }
-  if (iVar7 < 0x2043b) {
-    if (iVar7 == 0x20374) {
+  if (nameHash < 0x2043b) {
+    if (nameHash == 0x20374) {
       return 1;
     }
-    if (iVar7 < 0x20375) {
-      if (iVar7 == 0x18f09) {
+    if (nameHash < 0x20375) {
+      if (nameHash == 0x18f09) {
         return 3;
       }
-      if (iVar7 < 0x18f0a) {
-        iVar3 = 0x18ee8;
+      if (nameHash < 0x18f0a) {
+        fieldValue = 0x18ee8;
         goto LAB_97bca478;
       }
-      if (iVar7 == 0x18f2a) {
+      if (nameHash == 0x18f2a) {
         return 3;
       }
-      iVar3 = 0x1f1a8;
+      fieldValue = 0x1f1a8;
     }
     else {
-      if (iVar7 == 0x203d7) {
+      if (nameHash == 0x203d7) {
         return 1;
       }
-      if (iVar7 < 0x203d8) {
-        if (iVar7 == 0x20395) {
+      if (nameHash < 0x203d8) {
+        if (nameHash == 0x20395) {
           return 1;
         }
-        iVar3 = 0x203b6;
+        fieldValue = 0x203b6;
       }
       else {
-        if (iVar7 == 0x203f8) {
+        if (nameHash == 0x203f8) {
           return 1;
         }
-        iVar3 = 0x20419;
+        fieldValue = 0x20419;
       }
     }
 LAB_97bca51c:
-    bVar1 = iVar7 == iVar3;
+    hashMatches = nameHash == fieldValue;
 LAB_97bca520:
-    if (bVar1) {
+    if (hashMatches) {
       return 1;
     }
     return 0;
   }
-  if (iVar7 == 0x2614d) {
+  if (nameHash == 0x2614d) {
     return 2;
   }
-  if (iVar7 < 0x2614e) {
-    if (iVar7 == 0x24cb9) {
+  if (nameHash < 0x2614e) {
+    if (nameHash == 0x24cb9) {
       return 2;
     }
-    if (iVar7 < 0x24cba) {
-      iVar3 = 0x2045b;
+    if (nameHash < 0x24cba) {
+      fieldValue = 0x2045b;
       goto LAB_97bca51c;
     }
-    if (iVar7 == 0x2610b) {
+    if (nameHash == 0x2610b) {
       return 2;
     }
-    iVar3 = 0x2612c;
+    fieldValue = 0x2612c;
   }
   else {
-    if (iVar7 == 0x261b0) {
+    if (nameHash == 0x261b0) {
       return 2;
     }
-    if (iVar7 < 0x261b1) {
-      if (iVar7 == 0x2616e) {
+    if (nameHash < 0x261b1) {
+      if (nameHash == 0x2616e) {
         return 2;
       }
-      iVar3 = 0x2618f;
+      fieldValue = 0x2618f;
     }
     else {
-      if (iVar7 == 0x261d1) {
+      if (nameHash == 0x261d1) {
         return 2;
       }
-      iVar3 = 0x261f2;
+      fieldValue = 0x261f2;
     }
   }
-  bVar1 = iVar7 == iVar3;
+  hashMatches = nameHash == fieldValue;
 LAB_97bca590:
-  if (bVar1) {
+  if (hashMatches) {
     return 2;
   }
   return 0;
