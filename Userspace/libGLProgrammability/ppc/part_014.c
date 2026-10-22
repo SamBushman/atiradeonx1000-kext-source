@@ -9,520 +9,537 @@ void _InterpreterTextureSamplerAttachDerivatives(int param_1,undefined4 param_2,
 }
 
 /* _InterpreterTextureSamplerSampleTexel1D @ 0x97bd3620 (512 bytes) */
-void _InterpreterTextureSamplerSampleTexel1D(int *param_1,int param_2,undefined4 param_3,undefined4 param_4,float *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
+void _InterpreterTextureSamplerSampleTexel1D(int *sampler,int textureUnit,undefined4 unusedArg3,undefined4 texCoord,float *texelOut,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 {
-  float fVar1;
-  int *piVar2;
-  uint uVar3;
-  double dVar4;
-  double fparam_1_00;
+  double lodOrFrac;
+  float oneMinusLodFrac;
+  int *textureObject;
+  uint baseLevel;
+  double lambda;
+  double levelSampleResult;
   double in_stack_ffffff48;
   double in_stack_ffffff50;
   double in_stack_ffffff58;
   double in_stack_ffffff60;
-  float local_80;
-  float local_7c;
-  float local_78;
-  float local_74;
-  float local_70;
-  float local_6c;
-  float local_68;
-  float local_64;
-  longlong local_60;
-  longlong local_58;
-  float local_40;
+  float texelBaseLevelr;
+  float texelBaseLevelg;
+  float texelBaseLevelb;
+  float texelBaseLevela;
+  float texelNextLevelr;
+  float texelNextLevelg;
+  float texelNextLevelb;
+  float texelNextLevela;
+  longlong intCastScratchA;
+  longlong intCastScratchB;
+  float lodBiasedClamped;
   
-  piVar2 = *(int **)(*param_1 + param_2 * 4);
-  if ((uint)(*(ushort *)(*piVar2 + 0x16) - 0x2700) < 4) {
-    param_1[10] = 1;
-    dVar4 = (double)((double (*)())_InterpreterTextureSamplerCalculateLambda1D)(param_1,param_4,param_2,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
+  textureObject = *(int **)(*sampler + textureUnit * 4);
+  if ((uint)(*(ushort *)(*textureObject + 0x16) - 0x2700) < 4) {
+    sampler[10] = 1;
+    lambda = (double)((double (*)())_InterpreterTextureSamplerCalculateLambda1D)(sampler,texCoord,textureUnit,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
                                fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,
                                in_stack_ffffff58,in_stack_ffffff60);
-    local_40 = (float)((double)(float)(dVar4 + (double)GH_U2F((unsigned int)(piVar2[0x10]))) + fparam_1);
-    if (local_40 < GH_U2F((unsigned int)(piVar2[0xc]))) {
-      local_40 = GH_U2F((unsigned int)(piVar2[0xc]));
+    lodBiasedClamped = (float)((double)(float)(lambda + (double)GH_U2F((unsigned int)(textureObject[0x10]))) + fparam_1);
+    if (lodBiasedClamped < GH_U2F((unsigned int)(textureObject[0xc]))) {
+      lodBiasedClamped = GH_U2F((unsigned int)(textureObject[0xc]));
     }
-    fparam_1 = (double)local_40;
-    dVar4 = fparam_1;
-    if ((double)GH_U2F((unsigned int)(piVar2[8])) < fparam_1) {
-      dVar4 = (double)GH_U2F((unsigned int)(piVar2[8]));
+    fparam_1 = (double)lodBiasedClamped;
+    lodOrFrac = fparam_1;
+    if ((double)GH_U2F((unsigned int)(textureObject[8])) < fparam_1) {
+      lodOrFrac = (double)GH_U2F((unsigned int)(textureObject[8]));
     }
-    if (DOUBLE_97c30a78 <= dVar4) {
-      local_58 = (longlong)(int)(dVar4 - DOUBLE_97c30a78);
-      uVar3 = (int)(dVar4 - DOUBLE_97c30a78) ^ 0x80000000;
+    if (DOUBLE_97c30a78 <= lodOrFrac) {
+      intCastScratchB = (longlong)(int)(lodOrFrac - DOUBLE_97c30a78);
+      baseLevel = (int)(lodOrFrac - DOUBLE_97c30a78) ^ 0x80000000;
     }
     else {
-      uVar3 = (uint)(int)dVar4;
-      local_60 = (longlong)(int)uVar3;
+      baseLevel = (uint)(int)lodOrFrac;
+      intCastScratchA = (longlong)(int)baseLevel;
     }
-    if (1 < *(ushort *)(*piVar2 + 0x16) - 0x2700) {
-      fparam_1_00 = (double)((double (*)())_InterpreterTextureSamplerSampleTexel1DFromLevel)(param_1,param_2,uVar3,param_4,&local_80,fparam_1,fparam_2,
+    if (1 < *(ushort *)(*textureObject + 0x16) - 0x2700) {
+      levelSampleResult = (double)((double (*)())_InterpreterTextureSamplerSampleTexel1DFromLevel)(sampler,textureUnit,baseLevel,texCoord,&texelBaseLevelr,fparam_1,fparam_2,
                                        fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,
                                        in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58);
-      ((double (*)())_InterpreterTextureSamplerSampleTexel1DFromLevel)(param_1,param_2,uVar3 + 1,param_4,&local_70,fparam_1_00,fparam_2,fparam_3,fparam_4,
+      ((double (*)())_InterpreterTextureSamplerSampleTexel1DFromLevel)(sampler,textureUnit,baseLevel + 1,texCoord,&texelNextLevelr,levelSampleResult,fparam_2,fparam_3,fparam_4,
                  fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,
                  in_stack_ffffff58);
-      dVar4 = (double)(float)(dVar4 - (double)(float)((double)CONCAT44(0x43300000,uVar3) -
+      lodOrFrac = (double)(float)(lodOrFrac - (double)(float)((double)CONCAT44(0x43300000,baseLevel) -
                                                      DOUBLE_97c30a68));
-      fVar1 = (float)(DOUBLE_97c30a60 - dVar4);
-      *param_5 = fVar1 * local_80 + (float)(dVar4 * (double)local_70);
-      param_5[3] = fVar1 * local_74 + (float)(dVar4 * (double)local_64);
-      param_5[1] = fVar1 * local_7c + (float)(dVar4 * (double)local_6c);
-      param_5[2] = fVar1 * local_78 + (float)(dVar4 * (double)local_68);
+      oneMinusLodFrac = (float)(DOUBLE_97c30a60 - lodOrFrac);
+      *texelOut = oneMinusLodFrac * texelBaseLevelr + (float)(lodOrFrac * (double)texelNextLevelr);
+      texelOut[3] = oneMinusLodFrac * texelBaseLevela + (float)(lodOrFrac * (double)texelNextLevela);
+      texelOut[1] = oneMinusLodFrac * texelBaseLevelg + (float)(lodOrFrac * (double)texelNextLevelg);
+      texelOut[2] = oneMinusLodFrac * texelBaseLevelb + (float)(lodOrFrac * (double)texelNextLevelb);
       return;
     }
   }
   else {
-    uVar3 = 0;
-    param_1[10] = 0;
+    baseLevel = 0;
+    sampler[10] = 0;
   }
-  ((double (*)())_InterpreterTextureSamplerSampleTexel1DFromLevel)(param_1,param_2,uVar3,param_4,param_5,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
+  ((double (*)())_InterpreterTextureSamplerSampleTexel1DFromLevel)(sampler,textureUnit,baseLevel,texCoord,texelOut,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
              fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58);
   return;
 }
 
 /* _InterpreterTextureSamplerSampleTexel2D @ 0x97bd3820 (512 bytes) */
-void _InterpreterTextureSamplerSampleTexel2D(int *param_1,int param_2,undefined4 param_3,undefined4 param_4,float *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _InterpreterTextureSamplerSampleTexel2D(int *sampler,int textureUnit,undefined4 unusedArg3,undefined4 texCoord,float *texelOut,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
-  float fVar1;
-  int *piVar2;
-  uint uVar3;
-  double dVar4;
-  double fparam_1_00;
+  double lodOrFrac;
+  float oneMinusLodFrac;
+  int *textureObject;
+  uint baseLevel;
+  double lambda;
+  double levelSampleResult;
   double in_stack_ffffff48;
   double in_stack_ffffff50;
   double in_stack_ffffff58;
   double in_stack_ffffff60;
   double in_stack_ffffff68;
-  float local_80;
-  float local_7c;
-  float local_78;
-  float local_74;
-  float local_70;
-  float local_6c;
-  float local_68;
-  float local_64;
-  longlong local_60;
-  longlong local_58;
-  float local_40;
+  float texelBaseLevelr;
+  float texelBaseLevelg;
+  float texelBaseLevelb;
+  float texelBaseLevela;
+  float texelNextLevelr;
+  float texelNextLevelg;
+  float texelNextLevelb;
+  float texelNextLevela;
+  longlong intCastScratchA;
+  longlong intCastScratchB;
+  float lodBiasedClamped;
   
-  piVar2 = *(int **)(*param_1 + param_2 * 4);
-  if ((uint)(*(ushort *)(*piVar2 + 0x16) - 0x2700) < 4) {
-    param_1[10] = 1;
-    dVar4 = (double)((double (*)())_InterpreterTextureSamplerCalculateLambda2D)(param_1,param_4,param_2,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
+  textureObject = *(int **)(*sampler + textureUnit * 4);
+  if ((uint)(*(ushort *)(*textureObject + 0x16) - 0x2700) < 4) {
+    sampler[10] = 1;
+    lambda = (double)((double (*)())_InterpreterTextureSamplerCalculateLambda2D)(sampler,texCoord,textureUnit,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
                                fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,
                                in_stack_ffffff58,in_stack_ffffff60);
-    local_40 = (float)((double)(float)(dVar4 + (double)GH_U2F((unsigned int)(piVar2[0x10]))) + fparam_1);
-    if (local_40 < GH_U2F((unsigned int)(piVar2[0xc]))) {
-      local_40 = GH_U2F((unsigned int)(piVar2[0xc]));
+    lodBiasedClamped = (float)((double)(float)(lambda + (double)GH_U2F((unsigned int)(textureObject[0x10]))) + fparam_1);
+    if (lodBiasedClamped < GH_U2F((unsigned int)(textureObject[0xc]))) {
+      lodBiasedClamped = GH_U2F((unsigned int)(textureObject[0xc]));
     }
-    fparam_1 = (double)local_40;
-    dVar4 = fparam_1;
-    if ((double)GH_U2F((unsigned int)(piVar2[8])) < fparam_1) {
-      dVar4 = (double)GH_U2F((unsigned int)(piVar2[8]));
+    fparam_1 = (double)lodBiasedClamped;
+    lodOrFrac = fparam_1;
+    if ((double)GH_U2F((unsigned int)(textureObject[8])) < fparam_1) {
+      lodOrFrac = (double)GH_U2F((unsigned int)(textureObject[8]));
     }
-    if (DOUBLE_97c30a78 <= dVar4) {
-      local_58 = (longlong)(int)(dVar4 - DOUBLE_97c30a78);
-      uVar3 = (int)(dVar4 - DOUBLE_97c30a78) ^ 0x80000000;
+    if (DOUBLE_97c30a78 <= lodOrFrac) {
+      intCastScratchB = (longlong)(int)(lodOrFrac - DOUBLE_97c30a78);
+      baseLevel = (int)(lodOrFrac - DOUBLE_97c30a78) ^ 0x80000000;
     }
     else {
-      uVar3 = (uint)(int)dVar4;
-      local_60 = (longlong)(int)uVar3;
+      baseLevel = (uint)(int)lodOrFrac;
+      intCastScratchA = (longlong)(int)baseLevel;
     }
-    if (1 < *(ushort *)(*piVar2 + 0x16) - 0x2700) {
-      fparam_1_00 = (double)((double (*)())_InterpreterTextureSamplerSampleTexel2DFromLevel)(param_1,param_2,uVar3,param_4,&local_80,fparam_1,fparam_2,
+    if (1 < *(ushort *)(*textureObject + 0x16) - 0x2700) {
+      levelSampleResult = (double)((double (*)())_InterpreterTextureSamplerSampleTexel2DFromLevel)(sampler,textureUnit,baseLevel,texCoord,&texelBaseLevelr,fparam_1,fparam_2,
                                        fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,
                                        in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58,
                                        in_stack_ffffff60,in_stack_ffffff68);
-      ((double (*)())_InterpreterTextureSamplerSampleTexel2DFromLevel)(param_1,param_2,uVar3 + 1,param_4,&local_70,fparam_1_00,fparam_2,fparam_3,fparam_4,
+      ((double (*)())_InterpreterTextureSamplerSampleTexel2DFromLevel)(sampler,textureUnit,baseLevel + 1,texCoord,&texelNextLevelr,levelSampleResult,fparam_2,fparam_3,fparam_4,
                  fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,
                  in_stack_ffffff58,in_stack_ffffff60,in_stack_ffffff68);
-      dVar4 = (double)(float)(dVar4 - (double)(float)((double)CONCAT44(0x43300000,uVar3) -
+      lodOrFrac = (double)(float)(lodOrFrac - (double)(float)((double)CONCAT44(0x43300000,baseLevel) -
                                                      DOUBLE_97c30a68));
-      fVar1 = (float)(DOUBLE_97c30a60 - dVar4);
-      *param_5 = fVar1 * local_80 + (float)(dVar4 * (double)local_70);
-      param_5[3] = fVar1 * local_74 + (float)(dVar4 * (double)local_64);
-      param_5[1] = fVar1 * local_7c + (float)(dVar4 * (double)local_6c);
-      param_5[2] = fVar1 * local_78 + (float)(dVar4 * (double)local_68);
+      oneMinusLodFrac = (float)(DOUBLE_97c30a60 - lodOrFrac);
+      *texelOut = oneMinusLodFrac * texelBaseLevelr + (float)(lodOrFrac * (double)texelNextLevelr);
+      texelOut[3] = oneMinusLodFrac * texelBaseLevela + (float)(lodOrFrac * (double)texelNextLevela);
+      texelOut[1] = oneMinusLodFrac * texelBaseLevelg + (float)(lodOrFrac * (double)texelNextLevelg);
+      texelOut[2] = oneMinusLodFrac * texelBaseLevelb + (float)(lodOrFrac * (double)texelNextLevelb);
       return;
     }
   }
   else {
-    uVar3 = 0;
-    param_1[10] = 0;
+    baseLevel = 0;
+    sampler[10] = 0;
   }
-  ((double (*)())_InterpreterTextureSamplerSampleTexel2DFromLevel)(param_1,param_2,uVar3,param_4,param_5,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
+  ((double (*)())_InterpreterTextureSamplerSampleTexel2DFromLevel)(sampler,textureUnit,baseLevel,texCoord,texelOut,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
              fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58,
              in_stack_ffffff60,in_stack_ffffff68);
   return;
 }
 
 /* _InterpreterTextureSamplerSampleTexel3D @ 0x97bd3a20 (512 bytes) */
-void _InterpreterTextureSamplerSampleTexel3D(int *param_1,int param_2,undefined4 param_3,undefined4 param_4,float *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
+void _InterpreterTextureSamplerSampleTexel3D(int *sampler,int textureUnit,undefined4 unusedArg3,undefined4 texCoord,float *texelOut,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 {
-  float fVar1;
-  int *piVar2;
-  uint uVar3;
-  double dVar4;
-  double fparam_1_00;
+  double lodOrFrac;
+  float oneMinusLodFrac;
+  int *textureObject;
+  uint baseLevel;
+  double lambda;
+  double levelSampleResult;
   double in_stack_ffffff48;
   double in_stack_ffffff50;
   double in_stack_ffffff58;
   double in_stack_ffffff60;
-  float local_80;
-  float local_7c;
-  float local_78;
-  float local_74;
-  float local_70;
-  float local_6c;
-  float local_68;
-  float local_64;
-  longlong local_60;
-  longlong local_58;
-  float local_40;
+  float texelBaseLevelr;
+  float texelBaseLevelg;
+  float texelBaseLevelb;
+  float texelBaseLevela;
+  float texelNextLevelr;
+  float texelNextLevelg;
+  float texelNextLevelb;
+  float texelNextLevela;
+  longlong intCastScratchA;
+  longlong intCastScratchB;
+  float lodBiasedClamped;
   
-  piVar2 = *(int **)(*param_1 + param_2 * 4);
-  if ((uint)(*(ushort *)(*piVar2 + 0x16) - 0x2700) < 4) {
-    param_1[10] = 1;
-    dVar4 = (double)((double (*)())_InterpreterTextureSamplerCalculateLambda3D)(param_1,param_4,param_2,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
+  textureObject = *(int **)(*sampler + textureUnit * 4);
+  if ((uint)(*(ushort *)(*textureObject + 0x16) - 0x2700) < 4) {
+    sampler[10] = 1;
+    lambda = (double)((double (*)())_InterpreterTextureSamplerCalculateLambda3D)(sampler,texCoord,textureUnit,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
                                fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,
                                in_stack_ffffff58,in_stack_ffffff60);
-    local_40 = (float)((double)(float)(dVar4 + (double)GH_U2F((unsigned int)(piVar2[0x10]))) + fparam_1);
-    if (local_40 < GH_U2F((unsigned int)(piVar2[0xc]))) {
-      local_40 = GH_U2F((unsigned int)(piVar2[0xc]));
+    lodBiasedClamped = (float)((double)(float)(lambda + (double)GH_U2F((unsigned int)(textureObject[0x10]))) + fparam_1);
+    if (lodBiasedClamped < GH_U2F((unsigned int)(textureObject[0xc]))) {
+      lodBiasedClamped = GH_U2F((unsigned int)(textureObject[0xc]));
     }
-    fparam_1 = (double)local_40;
-    dVar4 = fparam_1;
-    if ((double)GH_U2F((unsigned int)(piVar2[8])) < fparam_1) {
-      dVar4 = (double)GH_U2F((unsigned int)(piVar2[8]));
+    fparam_1 = (double)lodBiasedClamped;
+    lodOrFrac = fparam_1;
+    if ((double)GH_U2F((unsigned int)(textureObject[8])) < fparam_1) {
+      lodOrFrac = (double)GH_U2F((unsigned int)(textureObject[8]));
     }
-    if (DOUBLE_97c30a78 <= dVar4) {
-      local_58 = (longlong)(int)(dVar4 - DOUBLE_97c30a78);
-      uVar3 = (int)(dVar4 - DOUBLE_97c30a78) ^ 0x80000000;
+    if (DOUBLE_97c30a78 <= lodOrFrac) {
+      intCastScratchB = (longlong)(int)(lodOrFrac - DOUBLE_97c30a78);
+      baseLevel = (int)(lodOrFrac - DOUBLE_97c30a78) ^ 0x80000000;
     }
     else {
-      uVar3 = (uint)(int)dVar4;
-      local_60 = (longlong)(int)uVar3;
+      baseLevel = (uint)(int)lodOrFrac;
+      intCastScratchA = (longlong)(int)baseLevel;
     }
-    if (1 < *(ushort *)(*piVar2 + 0x16) - 0x2700) {
-      fparam_1_00 = (double)((double (*)())_InterpreterTextureSamplerSampleTexel3DFromLevel)(param_1,param_2,uVar3,param_4,&local_80,fparam_1,fparam_2,
+    if (1 < *(ushort *)(*textureObject + 0x16) - 0x2700) {
+      levelSampleResult = (double)((double (*)())_InterpreterTextureSamplerSampleTexel3DFromLevel)(sampler,textureUnit,baseLevel,texCoord,&texelBaseLevelr,fparam_1,fparam_2,
                                        fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,
                                        in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58);
-      ((double (*)())_InterpreterTextureSamplerSampleTexel3DFromLevel)(param_1,param_2,uVar3 + 1,param_4,&local_70,fparam_1_00,fparam_2,fparam_3,fparam_4,
+      ((double (*)())_InterpreterTextureSamplerSampleTexel3DFromLevel)(sampler,textureUnit,baseLevel + 1,texCoord,&texelNextLevelr,levelSampleResult,fparam_2,fparam_3,fparam_4,
                  fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,
                  in_stack_ffffff58);
-      dVar4 = (double)(float)(dVar4 - (double)(float)((double)CONCAT44(0x43300000,uVar3) -
+      lodOrFrac = (double)(float)(lodOrFrac - (double)(float)((double)CONCAT44(0x43300000,baseLevel) -
                                                      DOUBLE_97c30a68));
-      fVar1 = (float)(DOUBLE_97c30a60 - dVar4);
-      *param_5 = fVar1 * local_80 + (float)(dVar4 * (double)local_70);
-      param_5[3] = fVar1 * local_74 + (float)(dVar4 * (double)local_64);
-      param_5[1] = fVar1 * local_7c + (float)(dVar4 * (double)local_6c);
-      param_5[2] = fVar1 * local_78 + (float)(dVar4 * (double)local_68);
+      oneMinusLodFrac = (float)(DOUBLE_97c30a60 - lodOrFrac);
+      *texelOut = oneMinusLodFrac * texelBaseLevelr + (float)(lodOrFrac * (double)texelNextLevelr);
+      texelOut[3] = oneMinusLodFrac * texelBaseLevela + (float)(lodOrFrac * (double)texelNextLevela);
+      texelOut[1] = oneMinusLodFrac * texelBaseLevelg + (float)(lodOrFrac * (double)texelNextLevelg);
+      texelOut[2] = oneMinusLodFrac * texelBaseLevelb + (float)(lodOrFrac * (double)texelNextLevelb);
       return;
     }
   }
   else {
-    uVar3 = 0;
-    param_1[10] = 0;
+    baseLevel = 0;
+    sampler[10] = 0;
   }
-  ((double (*)())_InterpreterTextureSamplerSampleTexel3DFromLevel)(param_1,param_2,uVar3,param_4,param_5,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
+  ((double (*)())_InterpreterTextureSamplerSampleTexel3DFromLevel)(sampler,textureUnit,baseLevel,texCoord,texelOut,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
              fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58);
   return;
 }
 
 /* _InterpreterTextureSamplerWrapCoordinate @ 0x97bd3c28 (528 bytes) */
-int _InterpreterTextureSamplerWrapCoordinate(param_1, param_2)
-  int param_1;
-  uint *param_2;
+int _InterpreterTextureSamplerWrapCoordinate(sampler, texelCoord)
+  int sampler;
+  uint *texelCoord;
 {
-  uint uVar1;
-  int iVar2;
-  uint uVar3;
-  int iVar4;
-  ushort uVar5;
-  ushort uVar6;
-  ushort uVar7;
+  uint clampLimitR;
+  uint clampLimitT;
+  uint wrappedR;
+  uint wrappedT;
+  uint wrappedS;
+  int textureState;
+  uint clampLimitS;
+  int levelRecord;
+  ushort wrapModeS;
+  ushort wrapModeR;
+  ushort wrapModeT;
   
-  iVar4 = *(int *)(param_1 + 8);
-  iVar2 = **(int **)(param_1 + 4);
-  uVar5 = *(ushort *)(iVar2 + 0x10);
-  uVar7 = *(ushort *)(iVar2 + 0x12);
-  uVar6 = *(ushort *)(iVar2 + 0x14);
-  if ((*(short *)(iVar2 + 0x16) == 0x2600) || (*(short *)(iVar2 + 0x16) == 0x2700)) {
-    if (uVar5 == 0x2900) {
-      uVar5 = 0x812f;
+  levelRecord = *(int *)(sampler + 8);
+  textureState = **(int **)(sampler + 4);
+  wrapModeS = *(ushort *)(textureState + 0x10);
+  wrapModeT = *(ushort *)(textureState + 0x12);
+  wrapModeR = *(ushort *)(textureState + 0x14);
+  if ((*(short *)(textureState + 0x16) == 0x2600) || (*(short *)(textureState + 0x16) == 0x2700)) {
+    if (wrapModeS == 0x2900) {
+      wrapModeS = 0x812f;
     }
-    if (uVar7 == 0x2900) {
-      uVar7 = 0x812f;
+    if (wrapModeT == 0x2900) {
+      wrapModeT = 0x812f;
     }
-    if (uVar6 == 0x2900) {
-      uVar6 = 0x812f;
+    if (wrapModeR == 0x2900) {
+      wrapModeR = 0x812f;
     }
   }
-  if (uVar5 == 0x2901) {
-    uVar1 = *param_2 & *(uint *)(iVar4 + 0x40);
+  if (wrapModeS == 0x2901) {
+    wrappedS = *texelCoord & *(uint *)(levelRecord + 0x40);
 LAB_97bd3d20:
-    *param_2 = uVar1;
+    *texelCoord = wrappedS;
   }
   else {
-    if (uVar5 < 0x2902) {
-      if (uVar5 != 0x2900) goto LAB_97bd3d24;
+    if (wrapModeS < 0x2902) {
+      if (wrapModeS != 0x2900) goto LAB_97bd3d24;
 LAB_97bd3cec:
-      uVar1 = *param_2;
-      if ((int)uVar1 < 0) {
+      wrappedS = *texelCoord;
+      if ((int)wrappedS < 0) {
 LAB_97bd3cf8:
-        uVar1 = 0;
+        wrappedS = 0;
         goto LAB_97bd3d20;
       }
-      uVar3 = *(uint *)(iVar4 + 0x80);
+      clampLimitS = *(uint *)(levelRecord + 0x80);
     }
     else {
-      if (uVar5 == 0x812d) goto LAB_97bd3cec;
-      if (uVar5 != 0x812f) goto LAB_97bd3d24;
-      uVar1 = *param_2;
-      if ((int)uVar1 < 0) goto LAB_97bd3cf8;
-      uVar3 = *(uint *)(iVar4 + 0x30);
+      if (wrapModeS == 0x812d) goto LAB_97bd3cec;
+      if (wrapModeS != 0x812f) goto LAB_97bd3d24;
+      wrappedS = *texelCoord;
+      if ((int)wrappedS < 0) goto LAB_97bd3cf8;
+      clampLimitS = *(uint *)(levelRecord + 0x30);
     }
-    if (uVar3 < uVar1) {
-      *param_2 = uVar3;
+    if (clampLimitS < wrappedS) {
+      *texelCoord = clampLimitS;
     }
   }
 LAB_97bd3d24:
-  if (uVar7 == 0x2901) {
-    uVar1 = param_2[1] & *(uint *)(iVar4 + 0x44);
+  if (wrapModeT == 0x2901) {
+    wrappedT = texelCoord[1] & *(uint *)(levelRecord + 0x44);
 LAB_97bd3da8:
-    param_2[1] = uVar1;
+    texelCoord[1] = wrappedT;
   }
   else {
-    if (uVar7 < 0x2902) {
-      if (uVar7 != 0x2900) goto LAB_97bd3dac;
+    if (wrapModeT < 0x2902) {
+      if (wrapModeT != 0x2900) goto LAB_97bd3dac;
 LAB_97bd3d74:
-      uVar1 = param_2[1];
-      if ((int)uVar1 < 0) {
+      wrappedT = texelCoord[1];
+      if ((int)wrappedT < 0) {
 LAB_97bd3d80:
-        uVar1 = 0;
+        wrappedT = 0;
         goto LAB_97bd3da8;
       }
-      uVar3 = *(uint *)(iVar4 + 0x84);
+      clampLimitT = *(uint *)(levelRecord + 0x84);
     }
     else {
-      if (uVar7 == 0x812d) goto LAB_97bd3d74;
-      if (uVar7 != 0x812f) goto LAB_97bd3dac;
-      uVar1 = param_2[1];
-      if ((int)uVar1 < 0) goto LAB_97bd3d80;
-      uVar3 = *(uint *)(iVar4 + 0x34);
+      if (wrapModeT == 0x812d) goto LAB_97bd3d74;
+      if (wrapModeT != 0x812f) goto LAB_97bd3dac;
+      wrappedT = texelCoord[1];
+      if ((int)wrappedT < 0) goto LAB_97bd3d80;
+      clampLimitT = *(uint *)(levelRecord + 0x34);
     }
-    if (uVar3 < uVar1) {
-      param_2[1] = uVar3;
+    if (clampLimitT < wrappedT) {
+      texelCoord[1] = clampLimitT;
     }
   }
 LAB_97bd3dac:
-  if (uVar6 == 0x2901) {
-    uVar1 = param_2[2] & *(uint *)(iVar4 + 0x48);
+  if (wrapModeR == 0x2901) {
+    wrappedR = texelCoord[2] & *(uint *)(levelRecord + 0x48);
     goto LAB_97bd3e30;
   }
-  if (uVar6 < 0x2902) {
-    if (uVar6 != 0x2900) {
+  if (wrapModeR < 0x2902) {
+    if (wrapModeR != 0x2900) {
       return;
     }
 LAB_97bd3dfc:
-    uVar1 = param_2[2];
-    if (-1 < (int)uVar1) {
-      uVar3 = *(uint *)(iVar4 + 0x88);
+    wrappedR = texelCoord[2];
+    if (-1 < (int)wrappedR) {
+      clampLimitR = *(uint *)(levelRecord + 0x88);
 LAB_97bd3e14:
-      if (uVar3 < uVar1) {
-        param_2[2] = uVar3;
+      if (clampLimitR < wrappedR) {
+        texelCoord[2] = clampLimitR;
         return;
       }
       return;
     }
   }
   else {
-    if (uVar6 == 0x812d) goto LAB_97bd3dfc;
-    if (uVar6 != 0x812f) {
+    if (wrapModeR == 0x812d) goto LAB_97bd3dfc;
+    if (wrapModeR != 0x812f) {
       return;
     }
-    uVar1 = param_2[2];
-    if (-1 < (int)uVar1) {
-      uVar3 = *(uint *)(iVar4 + 0x38);
+    wrappedR = texelCoord[2];
+    if (-1 < (int)wrappedR) {
+      clampLimitR = *(uint *)(levelRecord + 0x38);
       goto LAB_97bd3e14;
     }
   }
-  uVar1 = 0;
+  wrappedR = 0;
 LAB_97bd3e30:
-  param_2[2] = uVar1;
+  texelCoord[2] = wrappedR;
   return;
 }
 
 /* _InterpreterTextureSamplerCalculateLambda1D @ 0x97bd3e38 (276 bytes) */
-double _InterpreterTextureSamplerCalculateLambda1D(int *param_1,float *param_2,int param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
+double _InterpreterTextureSamplerCalculateLambda1D(int *sampler,float *texCoord,int textureUnit,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 {
-  double log2Result;
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  int iVar8;
-  int iVar9;
-  double sqrtResult;
-  double sqrtResult2;
+  float maxGradientLength;
+  double lambda;
+  float q;
+  float neighbourXQOrDsdx;
+  float neighbourYQOrDsdy;
+  float coordS;
+  float neighbourXS;
+  float neighbourYS;
+  float baseWidthOrDsdy;
+  int neighbourY;
+  int neighbourX;
+  double gradientLengthX;
+  double gradientLengthY;
   
-  fVar1 = param_2[3];
-  iVar9 = param_3 * 0x10 + param_1[3];
-  fVar2 = *(float *)(iVar9 + 0x4c);
-  iVar8 = param_3 * 0x10 + param_1[3] + 0xc0;
-  fVar3 = *(float *)(iVar8 + 0x4c);
-  fVar4 = *param_2;
-  fVar5 = *(float *)(iVar9 + 0x40);
-  fVar6 = *(float *)(iVar8 + 0x40);
-  fVar7 = *(float *)(*(int *)(param_3 * 4 + *param_1) + 0x120);
-  fVar2 = -((fVar4 - fVar5) * (float)(DOUBLE_97c30a60 / (double)(fVar1 - fVar2)) -
-           (fVar4 + fVar5) * (float)(DOUBLE_97c30a60 / (double)(fVar1 + fVar2))) * fVar7;
-  fVar7 = -((fVar4 - fVar6) * (float)(DOUBLE_97c30a60 / (double)(fVar1 - fVar3)) -
-           (fVar4 + fVar6) * (float)(DOUBLE_97c30a60 / (double)(fVar1 + fVar3))) * fVar7;
-  sqrtResult = _sqrt((double)(fVar2 * fVar2));
-  sqrtResult2 = _sqrt((double)(fVar7 * fVar7));
-  fVar1 = (float)sqrtResult2;
-  if ((float)sqrtResult2 < (float)sqrtResult) {
-    fVar1 = (float)sqrtResult;
+  q = texCoord[3];
+  neighbourX = textureUnit * 0x10 + sampler[3];
+  neighbourXQOrDsdx = *(float *)(neighbourX + 0x4c);
+  neighbourY = textureUnit * 0x10 + sampler[3] + 0xc0;
+  neighbourYQOrDsdy = *(float *)(neighbourY + 0x4c);
+  coordS = *texCoord;
+  neighbourXS = *(float *)(neighbourX + 0x40);
+  neighbourYS = *(float *)(neighbourY + 0x40);
+  baseWidthOrDsdy = *(float *)(*(int *)(textureUnit * 4 + *sampler) + 0x120);
+  neighbourXQOrDsdx = -((coordS - neighbourXS) * (float)(DOUBLE_97c30a60 / (double)(q - neighbourXQOrDsdx)) -
+           (coordS + neighbourXS) * (float)(DOUBLE_97c30a60 / (double)(q + neighbourXQOrDsdx))) * baseWidthOrDsdy;
+  baseWidthOrDsdy = -((coordS - neighbourYS) * (float)(DOUBLE_97c30a60 / (double)(q - neighbourYQOrDsdy)) -
+           (coordS + neighbourYS) * (float)(DOUBLE_97c30a60 / (double)(q + neighbourYQOrDsdy))) * baseWidthOrDsdy;
+  gradientLengthX = _sqrt((double)(neighbourXQOrDsdx * neighbourXQOrDsdx));
+  gradientLengthY = _sqrt((double)(baseWidthOrDsdy * baseWidthOrDsdy));
+  maxGradientLength = (float)gradientLengthY;
+  if ((float)gradientLengthY < (float)gradientLengthX) {
+    maxGradientLength = (float)gradientLengthX;
   }
-  log2Result = _log2((double)(fVar1 * GH_U2F((unsigned int)(param_1[4]))));
-  return (double)(float)log2Result;
+  lambda = _log2((double)(maxGradientLength * GH_U2F((unsigned int)(sampler[4]))));
+  return (double)(float)lambda;
 }
 
 /* _InterpreterTextureSamplerCalculateLambda2D @ 0x97bd3f4c (348 bytes) */
-double _InterpreterTextureSamplerCalculateLambda2D(int *param_1,float *param_2,int param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
+double _InterpreterTextureSamplerCalculateLambda2D(int *sampler,float *texCoord,int textureUnit,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 {
-  double log2Result;
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  float fVar8;
-  float fVar9;
-  int iVar10;
-  int iVar11;
-  int iVar12;
-  double sqrtResult;
-  double sqrtResult2;
+  float maxGradientLength;
+  double lambda;
+  float invQPlusXOrDsdx;
+  float invQMinusX;
+  float invQPlusY;
+  float qOrInvQMinusY;
+  float coordS;
+  float coordT;
+  float baseHeightOrDtdy;
+  float baseWidthOrDsdy;
+  float dtdx;
+  int textureObject;
+  int neighbourX;
+  int neighbourY;
+  double gradientLengthX;
+  double gradientLengthY;
   
-  fVar4 = param_2[3];
-  iVar11 = param_3 * 0x10 + param_1[3];
-  iVar12 = param_3 * 0x10 + param_1[3] + 0xc0;
-  fVar5 = *param_2;
-  fVar6 = param_2[1];
-  iVar10 = *(int *)(param_3 * 4 + *param_1);
-  fVar7 = *(float *)(iVar10 + 0x124);
-  fVar8 = *(float *)(iVar10 + 0x120);
-  fVar1 = (float)(DOUBLE_97c30a60 / (double)(fVar4 + *(float *)(iVar11 + 0x4c)));
-  fVar2 = (float)(DOUBLE_97c30a60 / (double)(fVar4 - *(float *)(iVar11 + 0x4c)));
-  fVar3 = (float)(DOUBLE_97c30a60 / (double)(fVar4 + *(float *)(iVar12 + 0x4c)));
-  fVar4 = (float)(DOUBLE_97c30a60 / (double)(fVar4 - *(float *)(iVar12 + 0x4c)));
-  fVar9 = -((fVar6 - *(float *)(iVar11 + 0x44)) * fVar2 -
-           (fVar6 + *(float *)(iVar11 + 0x44)) * fVar1) * fVar7;
-  fVar1 = -((fVar5 - *(float *)(iVar11 + 0x40)) * fVar2 -
-           (fVar5 + *(float *)(iVar11 + 0x40)) * fVar1) * fVar8;
-  fVar8 = -((fVar5 - *(float *)(iVar12 + 0x40)) * fVar4 -
-           (fVar5 + *(float *)(iVar12 + 0x40)) * fVar3) * fVar8;
-  fVar7 = -((fVar6 - *(float *)(iVar12 + 0x44)) * fVar4 -
-           (fVar6 + *(float *)(iVar12 + 0x44)) * fVar3) * fVar7;
-  sqrtResult = _sqrt((double)(fVar1 * fVar1 + fVar9 * fVar9));
-  sqrtResult2 = _sqrt((double)(fVar8 * fVar8 + fVar7 * fVar7));
-  fVar1 = (float)sqrtResult2;
-  if ((float)sqrtResult2 < (float)sqrtResult) {
-    fVar1 = (float)sqrtResult;
+  qOrInvQMinusY = texCoord[3];
+  neighbourX = textureUnit * 0x10 + sampler[3];
+  neighbourY = textureUnit * 0x10 + sampler[3] + 0xc0;
+  coordS = *texCoord;
+  coordT = texCoord[1];
+  textureObject = *(int *)(textureUnit * 4 + *sampler);
+  baseHeightOrDtdy = *(float *)(textureObject + 0x124);
+  baseWidthOrDsdy = *(float *)(textureObject + 0x120);
+  invQPlusXOrDsdx = (float)(DOUBLE_97c30a60 / (double)(qOrInvQMinusY + *(float *)(neighbourX + 0x4c)));
+  invQMinusX = (float)(DOUBLE_97c30a60 / (double)(qOrInvQMinusY - *(float *)(neighbourX + 0x4c)));
+  invQPlusY = (float)(DOUBLE_97c30a60 / (double)(qOrInvQMinusY + *(float *)(neighbourY + 0x4c)));
+  qOrInvQMinusY = (float)(DOUBLE_97c30a60 / (double)(qOrInvQMinusY - *(float *)(neighbourY + 0x4c)));
+  dtdx = -((coordT - *(float *)(neighbourX + 0x44)) * invQMinusX -
+           (coordT + *(float *)(neighbourX + 0x44)) * invQPlusXOrDsdx) * baseHeightOrDtdy;
+  invQPlusXOrDsdx = -((coordS - *(float *)(neighbourX + 0x40)) * invQMinusX -
+           (coordS + *(float *)(neighbourX + 0x40)) * invQPlusXOrDsdx) * baseWidthOrDsdy;
+  baseWidthOrDsdy = -((coordS - *(float *)(neighbourY + 0x40)) * qOrInvQMinusY -
+           (coordS + *(float *)(neighbourY + 0x40)) * invQPlusY) * baseWidthOrDsdy;
+  baseHeightOrDtdy = -((coordT - *(float *)(neighbourY + 0x44)) * qOrInvQMinusY -
+           (coordT + *(float *)(neighbourY + 0x44)) * invQPlusY) * baseHeightOrDtdy;
+  gradientLengthX = _sqrt((double)(invQPlusXOrDsdx * invQPlusXOrDsdx + dtdx * dtdx));
+  gradientLengthY = _sqrt((double)(baseWidthOrDsdy * baseWidthOrDsdy + baseHeightOrDtdy * baseHeightOrDtdy));
+  maxGradientLength = (float)gradientLengthY;
+  if ((float)gradientLengthY < (float)gradientLengthX) {
+    maxGradientLength = (float)gradientLengthX;
   }
-  log2Result = _log2((double)(fVar1 * GH_U2F((unsigned int)(param_1[4]))));
-  return (double)(float)log2Result;
+  lambda = _log2((double)(maxGradientLength * GH_U2F((unsigned int)(sampler[4]))));
+  return (double)(float)lambda;
 }
 
 /* _InterpreterTextureSamplerCalculateLambda3D @ 0x97bd40a8 (360 bytes) */
-double _InterpreterTextureSamplerCalculateLambda3D(int *param_1,float *param_2,int param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
+double _InterpreterTextureSamplerCalculateLambda3D(int *sampler,float *texCoord,int textureUnit,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 {
-  double log2Result;
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  float fVar8;
-  int iVar9;
-  int iVar10;
-  int iVar11;
-  double sqrtResult;
-  double sqrtResult2;
+  float maxGradientLength;
+  float dtdy;
+  double lambda;
+  float invQPlusX;
+  float invQMinusXOrDsdx;
+  float invQPlusYOrDsdy;
+  float qOrInvQMinusY;
+  float coordS;
+  float coordT;
+  float dtdx;
+  float drdxOrDrdxSquared;
+  int textureObject;
+  int neighbourX;
+  int neighbourY;
+  double gradientLengthX;
+  double gradientLengthY;
   
-  fVar4 = param_2[3];
-  iVar10 = param_3 * 0x10 + param_1[3];
-  iVar11 = param_3 * 0x10 + param_1[3] + 0xc0;
-  fVar5 = *param_2;
-  fVar6 = param_2[1];
-  iVar9 = *(int *)(param_3 * 4 + *param_1);
-  fVar1 = (float)(DOUBLE_97c30a60 / (double)(fVar4 + *(float *)(iVar10 + 0x4c)));
-  fVar2 = (float)(DOUBLE_97c30a60 / (double)(fVar4 - *(float *)(iVar10 + 0x4c)));
-  fVar3 = (float)(DOUBLE_97c30a60 / (double)(fVar4 + *(float *)(iVar11 + 0x4c)));
-  fVar4 = (float)(DOUBLE_97c30a60 / (double)(fVar4 - *(float *)(iVar11 + 0x4c)));
-  fVar7 = -((fVar6 - *(float *)(iVar10 + 0x44)) * fVar2 -
-           (fVar6 + *(float *)(iVar10 + 0x44)) * fVar1) * *(float *)(iVar9 + 0x124);
-  fVar8 = -((param_2[2] - *(float *)(iVar10 + 0x48)) * fVar2 -
-           (param_2[2] + *(float *)(iVar10 + 0x48)) * fVar1) * *(float *)(iVar9 + 0x128);
-  fVar2 = -((fVar5 - *(float *)(iVar10 + 0x40)) * fVar2 -
-           (fVar5 + *(float *)(iVar10 + 0x40)) * fVar1) * *(float *)(iVar9 + 0x120);
-  fVar8 = fVar8 * fVar8;
-  fVar1 = -((fVar6 - *(float *)(iVar11 + 0x44)) * fVar4 -
-           (fVar6 + *(float *)(iVar11 + 0x44)) * fVar3) * *(float *)(iVar9 + 0x124);
-  fVar3 = -((fVar5 - *(float *)(iVar11 + 0x40)) * fVar4 -
-           (fVar5 + *(float *)(iVar11 + 0x40)) * fVar3) * *(float *)(iVar9 + 0x120);
-  sqrtResult = _sqrt((double)(fVar2 * fVar2 + fVar7 * fVar7 + fVar8));
-  sqrtResult2 = _sqrt((double)(fVar3 * fVar3 + fVar1 * fVar1 + fVar8));
-  fVar1 = (float)sqrtResult2;
-  if ((float)sqrtResult2 < (float)sqrtResult) {
-    fVar1 = (float)sqrtResult;
+  qOrInvQMinusY = texCoord[3];
+  neighbourX = textureUnit * 0x10 + sampler[3];
+  neighbourY = textureUnit * 0x10 + sampler[3] + 0xc0;
+  coordS = *texCoord;
+  coordT = texCoord[1];
+  textureObject = *(int *)(textureUnit * 4 + *sampler);
+  invQPlusX = (float)(DOUBLE_97c30a60 / (double)(qOrInvQMinusY + *(float *)(neighbourX + 0x4c)));
+  invQMinusXOrDsdx = (float)(DOUBLE_97c30a60 / (double)(qOrInvQMinusY - *(float *)(neighbourX + 0x4c)));
+  invQPlusYOrDsdy = (float)(DOUBLE_97c30a60 / (double)(qOrInvQMinusY + *(float *)(neighbourY + 0x4c)));
+  qOrInvQMinusY = (float)(DOUBLE_97c30a60 / (double)(qOrInvQMinusY - *(float *)(neighbourY + 0x4c)));
+  dtdx = -((coordT - *(float *)(neighbourX + 0x44)) * invQMinusXOrDsdx -
+           (coordT + *(float *)(neighbourX + 0x44)) * invQPlusX) * *(float *)(textureObject + 0x124);
+  drdxOrDrdxSquared = -((texCoord[2] - *(float *)(neighbourX + 0x48)) * invQMinusXOrDsdx -
+           (texCoord[2] + *(float *)(neighbourX + 0x48)) * invQPlusX) * *(float *)(textureObject + 0x128);
+  invQMinusXOrDsdx = -((coordS - *(float *)(neighbourX + 0x40)) * invQMinusXOrDsdx -
+           (coordS + *(float *)(neighbourX + 0x40)) * invQPlusX) * *(float *)(textureObject + 0x120);
+  drdxOrDrdxSquared = drdxOrDrdxSquared * drdxOrDrdxSquared;
+  dtdy = -((coordT - *(float *)(neighbourY + 0x44)) * qOrInvQMinusY -
+           (coordT + *(float *)(neighbourY + 0x44)) * invQPlusYOrDsdy) * *(float *)(textureObject + 0x124);
+  invQPlusYOrDsdy = -((coordS - *(float *)(neighbourY + 0x40)) * qOrInvQMinusY -
+           (coordS + *(float *)(neighbourY + 0x40)) * invQPlusYOrDsdy) * *(float *)(textureObject + 0x120);
+  gradientLengthX = _sqrt((double)(invQMinusXOrDsdx * invQMinusXOrDsdx + dtdx * dtdx + drdxOrDrdxSquared));
+  gradientLengthY = _sqrt((double)(invQPlusYOrDsdy * invQPlusYOrDsdy + dtdy * dtdy + drdxOrDrdxSquared));
+  maxGradientLength = (float)gradientLengthY;
+  if ((float)gradientLengthY < (float)gradientLengthX) {
+    maxGradientLength = (float)gradientLengthX;
   }
-  log2Result = _log2((double)(fVar1 * GH_U2F((unsigned int)(param_1[4]))));
-  return (double)(float)log2Result;
+  lambda = _log2((double)(maxGradientLength * GH_U2F((unsigned int)(sampler[4]))));
+  return (double)(float)lambda;
 }
 
 /* _InterpreterTextureSamplerSampleTexel1DFromLevel @ 0x97bd4210 (876 bytes) */
 double _InterpreterTextureSamplerSampleTexel1DFromLevel(int *sampler,uint textureUnit,int level,float *texCoord,float *texelOut,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11)
 {
+  int linearRecordIndex;
+  int linearTexelData;
+  int nearestRecordIndex;
+  double loadTexelResult;
+  double oneConst;
+  float weightL;
   double floorResult;
-  bool bVar1;
-  float fVar2;
-  float fVar3;
-  ushort uVar4;
-  int iVar5;
+  bool isLinearFilterCode;
+  float coordS;
+  float levelWidthF;
+  ushort minFilter;
+  int textureState;
   int *textureObject;
   float *levelInfo;
-  int iVar8;
-  double dVar9;
-  double dVar10;
-  double dVar11;
-  uint local_90;
-  int local_8c;
-  int local_88;
-  longlong local_80;
-  float local_70;
-  float local_6c;
-  float local_68;
-  float local_64;
-  float local_60;
-  float local_5c;
-  float local_58;
-  float local_54;
-  uint local_50;
-  int local_4c;
-  int local_48;
-  undefined4 local_40;
-  uint uStack_3c;
+  int nearestTexelData;
+  double scaledR;
+  double fracS;
+  double scaledT;
+  uint texelCoordS;
+  int texelCoordT;
+  int texelCoordR;
+  longlong intCastScratch;
+  float texelHr;
+  float texelHg;
+  float texelHb;
+  float texelHa;
+  float texelLr;
+  float texelLg;
+  float texelLb;
+  float texelLa;
+  uint sampleCoordS;
+  int sampleCoordT;
+  int sampleCoordR;
+  undefined4 i2dHi1;
+  uint i2dLo1;
   
   if (7 < textureUnit) {
     textureUnit = 7;
@@ -535,143 +552,151 @@ double _InterpreterTextureSamplerSampleTexel1DFromLevel(int *sampler,uint textur
   levelInfo = (float *)(textureObject + level * 0x34 + 0x48);
   sampler[2] = (int)levelInfo;
   if (sampler[8] == 0) {
-    fVar2 = *texCoord;
+    coordS = *texCoord;
   }
   else {
-    fVar2 = *texCoord / texCoord[3];
+    coordS = *texCoord / texCoord[3];
   }
-  iVar5 = *textureObject;
-  uVar4 = *(ushort *)(iVar5 + 0x16);
-  if (uVar4 == 0x2700) {
+  textureState = *textureObject;
+  minFilter = *(ushort *)(textureState + 0x16);
+  if (minFilter == 0x2700) {
 LAB_97bd42d8:
-    if (*(short *)(iVar5 + 0x10) == -0x7ed3) {
-      fVar3 = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
-      iVar5 = level * 0x34 + 100;
-      iVar8 = textureObject[level * 0x34 + 0x71];
+    if (*(short *)(textureState + 0x10) == -0x7ed3) {
+      levelWidthF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
+      nearestRecordIndex = level * 0x34 + 100;
+      nearestTexelData = textureObject[level * 0x34 + 0x71];
     }
     else {
-      fVar3 = *levelInfo;
-      iVar5 = level * 0x34 + 0x50;
-      iVar8 = textureObject[level * 0x34 + 0x70];
+      levelWidthF = *levelInfo;
+      nearestRecordIndex = level * 0x34 + 0x50;
+      nearestTexelData = textureObject[level * 0x34 + 0x70];
     }
-    local_90 = (uint)(fVar2 * fVar3);
-    local_80 = 0;
-    local_8c = 0;
-    local_88 = 0;
-    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_90);
-    dVar9 = (double)((int (*)())_InterpreterTextureSamplerLoadTexel1D)(sampler,iVar8,textureObject + iVar5,&local_90,texelOut);
-    return dVar9;
+    texelCoordS = (uint)(coordS * levelWidthF);
+    intCastScratch = 0;
+    texelCoordT = 0;
+    texelCoordR = 0;
+    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&texelCoordS);
+    loadTexelResult = (double)((int (*)())_InterpreterTextureSamplerLoadTexel1D)(sampler,nearestTexelData,textureObject + nearestRecordIndex,&texelCoordS,texelOut);
+    return loadTexelResult;
   }
-  if (uVar4 < 0x2701) {
-    if (uVar4 == 0x2600) goto LAB_97bd42d8;
-    bVar1 = uVar4 == 0x2601;
+  if (minFilter < 0x2701) {
+    if (minFilter == 0x2600) goto LAB_97bd42d8;
+    isLinearFilterCode = minFilter == 0x2601;
 LAB_97bd42d0:
-    if (!bVar1) {
+    if (!isLinearFilterCode) {
       return fparam_1;
     }
   }
   else {
-    if (uVar4 == 0x2702) goto LAB_97bd42d8;
-    if (0x2701 < uVar4) {
-      bVar1 = uVar4 == 0x2703;
+    if (minFilter == 0x2702) goto LAB_97bd42d8;
+    if (0x2701 < minFilter) {
+      isLinearFilterCode = minFilter == 0x2703;
       goto LAB_97bd42d0;
     }
   }
-  if (*(short *)(iVar5 + 0x10) == -0x7ed3) {
-    fVar3 = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
-    iVar5 = textureObject[level * 0x34 + 0x71];
+  if (*(short *)(textureState + 0x10) == -0x7ed3) {
+    levelWidthF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
+    linearTexelData = textureObject[level * 0x34 + 0x71];
   }
   else {
-    if (*(short *)(iVar5 + 0x10) != 0x2900) {
-      fVar3 = *levelInfo;
-      iVar8 = level * 0x34 + 0x50;
-      iVar5 = textureObject[level * 0x34 + 0x70];
+    if (*(short *)(textureState + 0x10) != 0x2900) {
+      levelWidthF = *levelInfo;
+      linearRecordIndex = level * 0x34 + 0x50;
+      linearTexelData = textureObject[level * 0x34 + 0x70];
       goto LAB_97bd43d4;
     }
-    fVar3 = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
-    iVar5 = textureObject[level * 0x34 + 0x72];
+    levelWidthF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
+    linearTexelData = textureObject[level * 0x34 + 0x72];
   }
-  iVar8 = level * 0x34 + 100;
+  linearRecordIndex = level * 0x34 + 100;
 LAB_97bd43d4:
-  fVar2 = (float)((double)(fVar2 * fVar3) + DOUBLE_97c30a88);
-  dVar11 = DOUBLE_97c30a88 + 0.0;
-  dVar9 = DOUBLE_97c30a88 + 0.0;
-  floorResult = _floor((double)fVar2);
-  local_90 = (uint)(int)floorResult;
-  local_80 = (longlong)(int)local_90;
-  floorResult = _floor((double)(float)dVar11);
-  local_8c = (int)floorResult;
-  local_80 = (longlong)local_8c;
-  floorResult = _floor((double)(float)dVar9);
-  dVar9 = DOUBLE_97c30a60;
-  local_40 = 0x43300000;
-  local_88 = (int)floorResult;
-  local_80 = (longlong)local_88;
-  uStack_3c = local_90 ^ 0x80000000;
-  local_50 = local_90;
-  local_4c = local_8c;
-  dVar10 = (double)(fVar2 - (float)((double)CONCAT44(0x43300000,uStack_3c) - DOUBLE_97c30a58));
-  local_48 = local_88;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_50);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel1D)(sampler,iVar5,textureObject + iVar8,&local_50,&local_70);
-  local_50 = local_90 - 1;
-  fVar2 = (float)(dVar9 - dVar10);
-  local_4c = local_8c;
-  local_48 = local_88;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_50);
-  dVar9 = (double)((int (*)())_InterpreterTextureSamplerLoadTexel1D)(sampler,iVar5,textureObject + iVar8,&local_50,&local_60);
-  *texelOut = (float)(dVar10 * (double)local_70 + (double)(fVar2 * local_60));
-  texelOut[3] = (float)(dVar10 * (double)local_64 + (double)(fVar2 * local_54));
-  texelOut[1] = (float)(dVar10 * (double)local_6c + (double)(fVar2 * local_5c));
-  texelOut[2] = (float)(dVar10 * (double)local_68 + (double)(fVar2 * local_58));
-  return dVar9;
+  coordS = (float)((double)(coordS * levelWidthF) + DOUBLE_97c30a88);
+  scaledT = DOUBLE_97c30a88 + 0.0;
+  scaledR = DOUBLE_97c30a88 + 0.0;
+  floorResult = _floor((double)coordS);
+  texelCoordS = (uint)(int)floorResult;
+  intCastScratch = (longlong)(int)texelCoordS;
+  floorResult = _floor((double)(float)scaledT);
+  texelCoordT = (int)floorResult;
+  intCastScratch = (longlong)texelCoordT;
+  floorResult = _floor((double)(float)scaledR);
+  oneConst = DOUBLE_97c30a60;
+  i2dHi1 = 0x43300000;
+  texelCoordR = (int)floorResult;
+  intCastScratch = (longlong)texelCoordR;
+  i2dLo1 = texelCoordS ^ 0x80000000;
+  sampleCoordS = texelCoordS;
+  sampleCoordT = texelCoordT;
+  fracS = (double)(coordS - (float)((double)CONCAT44(0x43300000,i2dLo1) - DOUBLE_97c30a58));
+  sampleCoordR = texelCoordR;
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+  ((int (*)())_InterpreterTextureSamplerLoadTexel1D)(sampler,linearTexelData,textureObject + linearRecordIndex,&sampleCoordS,&texelHr);
+  sampleCoordS = texelCoordS - 1;
+  weightL = (float)(oneConst - fracS);
+  sampleCoordT = texelCoordT;
+  sampleCoordR = texelCoordR;
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+  loadTexelResult = (double)((int (*)())_InterpreterTextureSamplerLoadTexel1D)(sampler,linearTexelData,textureObject + linearRecordIndex,&sampleCoordS,&texelLr);
+  *texelOut = (float)(fracS * (double)texelHr + (double)(weightL * texelLr));
+  texelOut[3] = (float)(fracS * (double)texelHa + (double)(weightL * texelLa));
+  texelOut[1] = (float)(fracS * (double)texelHg + (double)(weightL * texelLg));
+  texelOut[2] = (float)(fracS * (double)texelHb + (double)(weightL * texelLb));
+  return loadTexelResult;
 }
 
 /* _InterpreterTextureSamplerSampleTexel2DFromLevel @ 0x97bd457c (1196 bytes) */
 double _InterpreterTextureSamplerSampleTexel2DFromLevel(int *sampler,uint textureUnit,int level,float *texCoord,float *texelOut,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
-  float floatValue;
-  float floatValue2;
+  int linearRecordIndex;
+  int linearTexelData;
+  int nearestRecordIndex;
+  double loadTexelResult;
+  float linearWidthF;
+  float nearestWidthF;
+  float weightHH;
+  float weightLH;
+  float linearHeightF;
+  float nearestHeightF;
   double floorResult;
   double floorResult2;
-  bool bVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  ushort uVar6;
+  bool isLinearFilterCode;
+  float coordS;
+  float coordT;
+  float weightHL;
+  float weightLL;
+  ushort minFilter;
   int *textureObject;
-  int iVar8;
+  int textureState;
   float *levelInfo;
-  int iVar10;
-  double dVar11;
-  double dVar12;
-  double dVar13;
-  uint local_c0;
-  uint local_bc;
-  int local_b8;
-  longlong local_b0;
-  float local_a0;
-  float local_9c;
-  float local_98;
-  float local_94;
-  float local_90;
-  float local_8c;
-  float local_88;
-  float local_84;
-  float local_80;
-  float local_7c;
-  float local_78;
-  float local_74;
-  float local_70;
-  float local_6c;
-  float local_68;
-  float local_64;
-  uint local_60;
-  uint local_5c;
-  int local_58;
-  undefined4 local_50;
-  uint uStack_4c;
+  int nearestTexelData;
+  double scaledR;
+  double fracT;
+  double fracS;
+  uint texelCoordS;
+  uint texelCoordT;
+  int texelCoordR;
+  longlong intCastScratch;
+  float texelHHr;
+  float texelHHg;
+  float texelHHb;
+  float texelHHa;
+  float texelHLr;
+  float texelHLg;
+  float texelHLb;
+  float texelHLa;
+  float texelLHr;
+  float texelLHg;
+  float texelLHb;
+  float texelLHa;
+  float texelLLr;
+  float texelLLg;
+  float texelLLb;
+  float texelLLa;
+  uint sampleCoordS;
+  uint sampleCoordT;
+  int sampleCoordR;
+  undefined4 i2dHi1;
+  uint i2dLo1;
   
   if (7 < textureUnit) {
     textureUnit = 7;
@@ -684,192 +709,200 @@ double _InterpreterTextureSamplerSampleTexel2DFromLevel(int *sampler,uint textur
   levelInfo = (float *)(textureObject + level * 0x34 + 0x48);
   sampler[2] = (int)levelInfo;
   if (sampler[8] == 0) {
-    fVar3 = texCoord[1];
-    fVar2 = *texCoord;
+    coordT = texCoord[1];
+    coordS = *texCoord;
   }
   else {
-    fVar3 = texCoord[1] / texCoord[3];
-    fVar2 = *texCoord / texCoord[3];
+    coordT = texCoord[1] / texCoord[3];
+    coordS = *texCoord / texCoord[3];
   }
-  iVar8 = *textureObject;
-  uVar6 = *(ushort *)(iVar8 + 0x16);
-  if (uVar6 == 0x2700) {
+  textureState = *textureObject;
+  minFilter = *(ushort *)(textureState + 0x16);
+  if (minFilter == 0x2700) {
 LAB_97bd4648:
-    if ((*(short *)(iVar8 + 0x10) == -0x7ed3) || (*(short *)(iVar8 + 0x12) == -0x7ed3)) {
-      fVar5 = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
-      iVar8 = level * 0x34 + 100;
-      iVar10 = textureObject[level * 0x34 + 0x71];
-      floatValue2 = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5d]));
+    if ((*(short *)(textureState + 0x10) == -0x7ed3) || (*(short *)(textureState + 0x12) == -0x7ed3)) {
+      nearestWidthF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
+      nearestRecordIndex = level * 0x34 + 100;
+      nearestTexelData = textureObject[level * 0x34 + 0x71];
+      nearestHeightF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5d]));
     }
     else {
-      fVar5 = *levelInfo;
-      iVar8 = level * 0x34 + 0x50;
-      iVar10 = textureObject[level * 0x34 + 0x70];
-      floatValue2 = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x49]));
+      nearestWidthF = *levelInfo;
+      nearestRecordIndex = level * 0x34 + 0x50;
+      nearestTexelData = textureObject[level * 0x34 + 0x70];
+      nearestHeightF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x49]));
     }
-    local_c0 = (uint)(fVar2 * fVar5);
-    local_bc = (uint)(int)(fVar3 * floatValue2);
-    local_b0 = 0;
-    local_b8 = 0;
-    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_c0);
-    dVar11 = (double)((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,iVar10,textureObject + iVar8,&local_c0,texelOut);
-    return dVar11;
+    texelCoordS = (uint)(coordS * nearestWidthF);
+    texelCoordT = (uint)(int)(coordT * nearestHeightF);
+    intCastScratch = 0;
+    texelCoordR = 0;
+    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&texelCoordS);
+    loadTexelResult = (double)((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,nearestTexelData,textureObject + nearestRecordIndex,&texelCoordS,texelOut);
+    return loadTexelResult;
   }
-  if (uVar6 < 0x2701) {
-    if (uVar6 == 0x2600) goto LAB_97bd4648;
-    bVar1 = uVar6 == 0x2601;
+  if (minFilter < 0x2701) {
+    if (minFilter == 0x2600) goto LAB_97bd4648;
+    isLinearFilterCode = minFilter == 0x2601;
 LAB_97bd4640:
-    if (!bVar1) {
+    if (!isLinearFilterCode) {
       return fparam_1;
     }
   }
   else {
-    if (uVar6 == 0x2702) goto LAB_97bd4648;
-    if (0x2701 < uVar6) {
-      bVar1 = uVar6 == 0x2703;
+    if (minFilter == 0x2702) goto LAB_97bd4648;
+    if (0x2701 < minFilter) {
+      isLinearFilterCode = minFilter == 0x2703;
       goto LAB_97bd4640;
     }
   }
-  if ((*(short *)(iVar8 + 0x10) == -0x7ed3) || (*(short *)(iVar8 + 0x12) == -0x7ed3)) {
-    fVar4 = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
-    iVar8 = textureObject[level * 0x34 + 0x71];
+  if ((*(short *)(textureState + 0x10) == -0x7ed3) || (*(short *)(textureState + 0x12) == -0x7ed3)) {
+    linearWidthF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
+    linearTexelData = textureObject[level * 0x34 + 0x71];
   }
   else {
-    if ((*(short *)(iVar8 + 0x10) != 0x2900) && (*(short *)(iVar8 + 0x12) != 0x2900)) {
-      fVar4 = *levelInfo;
-      iVar10 = level * 0x34 + 0x50;
-      iVar8 = textureObject[level * 0x34 + 0x70];
-      floatValue = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x49]));
+    if ((*(short *)(textureState + 0x10) != 0x2900) && (*(short *)(textureState + 0x12) != 0x2900)) {
+      linearWidthF = *levelInfo;
+      linearRecordIndex = level * 0x34 + 0x50;
+      linearTexelData = textureObject[level * 0x34 + 0x70];
+      linearHeightF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x49]));
       goto LAB_97bd479c;
     }
-    fVar4 = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
-    iVar8 = textureObject[level * 0x34 + 0x72];
+    linearWidthF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
+    linearTexelData = textureObject[level * 0x34 + 0x72];
   }
-  iVar10 = level * 0x34 + 100;
-  floatValue = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5d]));
+  linearRecordIndex = level * 0x34 + 100;
+  linearHeightF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5d]));
 LAB_97bd479c:
-  textureObject = textureObject + iVar10;
-  fVar2 = (float)((double)(fVar2 * fVar4) + DOUBLE_97c30a88);
-  dVar11 = DOUBLE_97c30a88 + 0.0;
-  fVar3 = (float)((double)(fVar3 * floatValue) + DOUBLE_97c30a88);
-  floorResult = _floor((double)fVar2);
-  local_c0 = (uint)(int)floorResult;
-  local_b0 = (longlong)(int)local_c0;
-  floorResult = _floor((double)fVar3);
-  local_bc = (uint)(int)floorResult;
-  local_b0 = (longlong)(int)local_bc;
-  floorResult2 = _floor((double)(float)dVar11);
-  local_50 = 0x43300000;
-  uStack_4c = local_bc ^ 0x80000000;
-  local_5c = local_bc;
-  local_60 = local_c0;
-  dVar13 = (double)(fVar2 - (float)((double)CONCAT44(0x43300000,local_c0 ^ 0x80000000) -
+  textureObject = textureObject + linearRecordIndex;
+  coordS = (float)((double)(coordS * linearWidthF) + DOUBLE_97c30a88);
+  scaledR = DOUBLE_97c30a88 + 0.0;
+  coordT = (float)((double)(coordT * linearHeightF) + DOUBLE_97c30a88);
+  floorResult = _floor((double)coordS);
+  texelCoordS = (uint)(int)floorResult;
+  intCastScratch = (longlong)(int)texelCoordS;
+  floorResult = _floor((double)coordT);
+  texelCoordT = (uint)(int)floorResult;
+  intCastScratch = (longlong)(int)texelCoordT;
+  floorResult2 = _floor((double)(float)scaledR);
+  i2dHi1 = 0x43300000;
+  i2dLo1 = texelCoordT ^ 0x80000000;
+  sampleCoordT = texelCoordT;
+  sampleCoordS = texelCoordS;
+  fracS = (double)(coordS - (float)((double)CONCAT44(0x43300000,texelCoordS ^ 0x80000000) -
                                    DOUBLE_97c30a58));
-  dVar12 = (double)(fVar3 - (float)((double)CONCAT44(0x43300000,uStack_4c) - DOUBLE_97c30a58));
-  local_b8 = (int)floorResult2;
-  local_b0 = (longlong)local_b8;
-  fVar3 = (float)(dVar13 * dVar12);
-  fVar2 = (float)((double)(float)(DOUBLE_97c30a60 - dVar13) * dVar12);
-  fVar4 = (float)(dVar13 * (double)(float)(DOUBLE_97c30a60 - dVar12));
-  fVar5 = (float)((double)(float)(DOUBLE_97c30a60 - dVar13) *
-                 (double)(float)(DOUBLE_97c30a60 - dVar12));
-  local_58 = local_b8;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_60);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,iVar8,textureObject,&local_60,&local_a0);
-  local_60 = local_c0;
-  local_5c = local_bc - 1;
-  local_58 = local_b8;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_60);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,iVar8,textureObject,&local_60,&local_90);
-  local_60 = local_c0 - 1;
-  local_5c = local_bc - 1;
-  local_58 = local_b8;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_60);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,iVar8,textureObject,&local_60,&local_70);
-  local_60 = local_c0 - 1;
-  local_5c = local_bc;
-  local_58 = local_b8;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_60);
-  dVar11 = (double)((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,iVar8,textureObject,&local_60,&local_80);
-  *texelOut = fVar5 * local_70 + fVar2 * local_80 + fVar3 * local_a0 + fVar4 * local_90;
-  texelOut[3] = fVar5 * local_64 + fVar2 * local_74 + fVar3 * local_94 + fVar4 * local_84;
-  texelOut[1] = fVar5 * local_6c + fVar2 * local_7c + fVar3 * local_9c + fVar4 * local_8c;
-  texelOut[2] = fVar5 * local_68 + fVar2 * local_78 + fVar3 * local_98 + fVar4 * local_88;
-  return dVar11;
+  fracT = (double)(coordT - (float)((double)CONCAT44(0x43300000,i2dLo1) - DOUBLE_97c30a58));
+  texelCoordR = (int)floorResult2;
+  intCastScratch = (longlong)texelCoordR;
+  weightHH = (float)(fracS * fracT);
+  weightLH = (float)((double)(float)(DOUBLE_97c30a60 - fracS) * fracT);
+  weightHL = (float)(fracS * (double)(float)(DOUBLE_97c30a60 - fracT));
+  weightLL = (float)((double)(float)(DOUBLE_97c30a60 - fracS) *
+                 (double)(float)(DOUBLE_97c30a60 - fracT));
+  sampleCoordR = texelCoordR;
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+  ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,linearTexelData,textureObject,&sampleCoordS,&texelHHr);
+  sampleCoordS = texelCoordS;
+  sampleCoordT = texelCoordT - 1;
+  sampleCoordR = texelCoordR;
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+  ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,linearTexelData,textureObject,&sampleCoordS,&texelHLr);
+  sampleCoordS = texelCoordS - 1;
+  sampleCoordT = texelCoordT - 1;
+  sampleCoordR = texelCoordR;
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+  ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,linearTexelData,textureObject,&sampleCoordS,&texelLLr);
+  sampleCoordS = texelCoordS - 1;
+  sampleCoordT = texelCoordT;
+  sampleCoordR = texelCoordR;
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+  loadTexelResult = (double)((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,linearTexelData,textureObject,&sampleCoordS,&texelLHr);
+  *texelOut = weightLL * texelLLr + weightLH * texelLHr + weightHH * texelHHr + weightHL * texelHLr;
+  texelOut[3] = weightLL * texelLLa + weightLH * texelLHa + weightHH * texelHHa + weightHL * texelHLa;
+  texelOut[1] = weightLL * texelLLg + weightLH * texelLHg + weightHH * texelHHg + weightHL * texelHLg;
+  texelOut[2] = weightLL * texelLLb + weightLH * texelLHb + weightHH * texelHHb + weightHL * texelHLb;
+  return loadTexelResult;
 }
 
 /* _InterpreterTextureSamplerSampleTexel3DFromLevel @ 0x97bd4a28 (1768 bytes) */
 double _InterpreterTextureSamplerSampleTexel3DFromLevel(int *sampler,uint textureUnit,int level,float *texCoord,float *texelOut,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11)
 {
+  float scaledR;
+  float scaledT;
+  float levelWidthOrScaledS;
+  float nearestWidthF;
+  int linearRecordIndex;
+  int linearTexelData;
+  int nearestRecordIndex;
+  double fracR;
   float floatValue;
-  float floatValue2;
-  float floatValue3;
+  float linearHeightF;
+  float nearestDepthF;
   double floorResult;
-  bool bVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  float fVar8;
-  float fVar9;
-  ushort uVar10;
-  int iVar11;
+  bool isLinearFilterCode;
+  float weightLHH;
+  float weightLLL;
+  float weightLLH;
+  float weightHLL;
+  float weightHLH;
+  float weightHHL;
+  float weightHHH;
+  float weightLHL;
+  ushort minFilter;
+  int textureState;
   int *textureObject;
   float *levelInfo;
-  int iVar14;
+  int nearestTexelData;
   double dVar15;
-  double dVar16;
-  double dVar17;
-  double dVar18;
-  double dVar19;
-  double dVar20;
-  double dVar21;
-  float local_130;
-  float local_12c;
-  float local_128;
-  uint local_120;
-  uint local_11c;
-  uint local_118;
-  longlong local_110;
-  float local_100;
-  float local_fc;
-  float local_f8;
-  float local_f4;
-  float local_f0;
-  float local_ec;
-  float local_e8;
-  float local_e4;
-  float local_e0;
-  float local_dc;
-  float local_d8;
-  float local_d4;
-  float local_d0;
-  float local_cc;
-  float local_c8;
-  float local_c4;
-  float local_c0;
-  float local_bc;
-  float local_b8;
-  float local_b4;
-  float local_b0;
-  float local_ac;
-  float local_a8;
-  float local_a4;
-  float local_a0;
-  float local_9c;
-  float local_98;
-  float local_94;
-  float local_90;
-  float local_8c;
-  float local_88;
-  float local_84;
-  uint local_80;
-  uint local_7c;
-  uint local_78;
-  undefined4 local_70;
-  uint uStack_6c;
+  double fracT;
+  double weight2dLH;
+  double fracS;
+  double weight2dHL;
+  double oneMinusFracR;
+  double weight2dLL;
+  float coordS;
+  float coordT;
+  float coordR;
+  uint texelCoordS;
+  uint texelCoordT;
+  uint texelCoordR;
+  longlong intCastScratch;
+  float texelHHHr;
+  float texelHHHg;
+  float texelHHHb;
+  float texelHHHa;
+  float texelHLHr;
+  float texelHLHg;
+  float texelHLHb;
+  float texelHLHa;
+  float texelLHHr;
+  float texelLHHg;
+  float texelLHHb;
+  float texelLHHa;
+  float texelLLHr;
+  float texelLLHg;
+  float texelLLHb;
+  float texelLLHa;
+  float texelHHLr;
+  float texelHHLg;
+  float texelHHLb;
+  float texelHHLa;
+  float texelHLLr;
+  float texelHLLg;
+  float texelHLLb;
+  float texelHLLa;
+  float texelLHLr;
+  float texelLHLg;
+  float texelLHLb;
+  float texelLHLa;
+  float texelLLLr;
+  float texelLLLg;
+  float texelLLLb;
+  float texelLLLa;
+  uint sampleCoordS;
+  uint sampleCoordT;
+  uint sampleCoordR;
+  undefined4 i2dHi1;
+  uint i2dLo1;
   
   if (7 < textureUnit) {
     textureUnit = 7;
@@ -882,174 +915,174 @@ double _InterpreterTextureSamplerSampleTexel3DFromLevel(int *sampler,uint textur
   levelInfo = (float *)(textureObject + level * 0x34 + 0x48);
   sampler[2] = (int)levelInfo;
   if (sampler[8] == 0) {
-    local_128 = texCoord[2];
-    local_130 = *texCoord;
-    local_12c = texCoord[1];
+    coordR = texCoord[2];
+    coordS = *texCoord;
+    coordT = texCoord[1];
   }
   else {
-    local_12c = texCoord[3];
-    local_130 = *texCoord / local_12c;
-    local_128 = texCoord[2] / local_12c;
-    local_12c = texCoord[1] / local_12c;
+    coordT = texCoord[3];
+    coordS = *texCoord / coordT;
+    coordR = texCoord[2] / coordT;
+    coordT = texCoord[1] / coordT;
   }
-  iVar11 = *textureObject;
-  uVar10 = *(ushort *)(iVar11 + 0x16);
-  if (uVar10 == 0x2700) {
+  textureState = *textureObject;
+  minFilter = *(ushort *)(textureState + 0x16);
+  if (minFilter == 0x2700) {
 LAB_97bd4b08:
-    if (((*(short *)(iVar11 + 0x10) == -0x7ed3) || (*(short *)(iVar11 + 0x12) == -0x7ed3)) ||
-       (*(short *)(iVar11 + 0x14) == -0x7ed3)) {
-      fVar8 = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
-      iVar11 = level * 0x34 + 100;
-      iVar14 = textureObject[level * 0x34 + 0x71];
+    if (((*(short *)(textureState + 0x10) == -0x7ed3) || (*(short *)(textureState + 0x12) == -0x7ed3)) ||
+       (*(short *)(textureState + 0x14) == -0x7ed3)) {
+      nearestWidthF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
+      nearestRecordIndex = level * 0x34 + 100;
+      nearestTexelData = textureObject[level * 0x34 + 0x71];
       floatValue = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5d]));
-      floatValue3 = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5e]));
+      nearestDepthF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5e]));
     }
     else {
-      fVar8 = *levelInfo;
-      iVar11 = level * 0x34 + 0x50;
-      iVar14 = textureObject[level * 0x34 + 0x70];
+      nearestWidthF = *levelInfo;
+      nearestRecordIndex = level * 0x34 + 0x50;
+      nearestTexelData = textureObject[level * 0x34 + 0x70];
       floatValue = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x49]));
-      floatValue3 = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x4a]));
+      nearestDepthF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x4a]));
     }
-    local_120 = (uint)(int)(local_130 * fVar8);
-    local_11c = (uint)(int)(local_12c * floatValue);
-    local_118 = (uint)(int)(local_128 * floatValue3);
-    local_110 = (longlong)(int)local_118;
-    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_120);
-    dVar15 = (double)((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,iVar14,textureObject + iVar11,&local_120,texelOut);
+    texelCoordS = (uint)(int)(coordS * nearestWidthF);
+    texelCoordT = (uint)(int)(coordT * floatValue);
+    texelCoordR = (uint)(int)(coordR * nearestDepthF);
+    intCastScratch = (longlong)(int)texelCoordR;
+    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&texelCoordS);
+    dVar15 = (double)((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,nearestTexelData,textureObject + nearestRecordIndex,&texelCoordS,texelOut);
     return dVar15;
   }
-  if (uVar10 < 0x2701) {
-    if (uVar10 == 0x2600) goto LAB_97bd4b08;
-    bVar1 = uVar10 == 0x2601;
+  if (minFilter < 0x2701) {
+    if (minFilter == 0x2600) goto LAB_97bd4b08;
+    isLinearFilterCode = minFilter == 0x2601;
 LAB_97bd4b00:
-    if (!bVar1) {
+    if (!isLinearFilterCode) {
       return fparam_1;
     }
   }
   else {
-    if (uVar10 == 0x2702) goto LAB_97bd4b08;
-    if (0x2701 < uVar10) {
-      bVar1 = uVar10 == 0x2703;
+    if (minFilter == 0x2702) goto LAB_97bd4b08;
+    if (0x2701 < minFilter) {
+      isLinearFilterCode = minFilter == 0x2703;
       goto LAB_97bd4b00;
     }
   }
-  if (((*(short *)(iVar11 + 0x10) == -0x7ed3) || (*(short *)(iVar11 + 0x12) == -0x7ed3)) ||
-     (*(short *)(iVar11 + 0x14) == -0x7ed3)) {
-    fVar7 = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
-    iVar11 = textureObject[level * 0x34 + 0x71];
+  if (((*(short *)(textureState + 0x10) == -0x7ed3) || (*(short *)(textureState + 0x12) == -0x7ed3)) ||
+     (*(short *)(textureState + 0x14) == -0x7ed3)) {
+    levelWidthOrScaledS = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
+    linearTexelData = textureObject[level * 0x34 + 0x71];
   }
   else {
-    if (((*(short *)(iVar11 + 0x10) != 0x2900) && (*(short *)(iVar11 + 0x12) != 0x2900)) &&
-       (*(short *)(iVar11 + 0x14) != 0x2900)) {
-      fVar7 = *levelInfo;
-      iVar14 = level * 0x34 + 0x50;
-      iVar11 = textureObject[level * 0x34 + 0x70];
-      floatValue2 = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x49]));
+    if (((*(short *)(textureState + 0x10) != 0x2900) && (*(short *)(textureState + 0x12) != 0x2900)) &&
+       (*(short *)(textureState + 0x14) != 0x2900)) {
+      levelWidthOrScaledS = *levelInfo;
+      linearRecordIndex = level * 0x34 + 0x50;
+      linearTexelData = textureObject[level * 0x34 + 0x70];
+      linearHeightF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x49]));
       floatValue = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x4a]));
       goto LAB_97bd4cb4;
     }
-    fVar7 = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
-    iVar11 = textureObject[level * 0x34 + 0x72];
+    levelWidthOrScaledS = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
+    linearTexelData = textureObject[level * 0x34 + 0x72];
   }
-  iVar14 = level * 0x34 + 100;
-  floatValue2 = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5d]));
+  linearRecordIndex = level * 0x34 + 100;
+  linearHeightF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5d]));
   floatValue = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5e]));
 LAB_97bd4cb4:
-  textureObject = textureObject + iVar14;
-  fVar7 = (float)((double)(local_130 * fVar7) + DOUBLE_97c30a88);
-  fVar8 = (float)((double)(local_12c * floatValue2) + DOUBLE_97c30a88);
-  fVar9 = (float)((double)(local_128 * floatValue) + DOUBLE_97c30a88);
-  floorResult = _floor((double)fVar7);
-  local_120 = (uint)(int)floorResult;
-  local_110 = (longlong)(int)local_120;
-  floorResult = _floor((double)fVar8);
-  local_11c = (uint)(int)floorResult;
-  local_110 = (longlong)(int)local_11c;
-  floorResult = _floor((double)fVar9);
-  local_118 = (uint)(int)floorResult;
-  local_110 = (longlong)(int)local_118;
-  local_70 = 0x43300000;
-  uStack_6c = local_118 ^ 0x80000000;
-  local_7c = local_11c;
-  dVar18 = (double)(fVar7 - (float)((double)CONCAT44(0x43300000,local_120 ^ 0x80000000) -
+  textureObject = textureObject + linearRecordIndex;
+  levelWidthOrScaledS = (float)((double)(coordS * levelWidthOrScaledS) + DOUBLE_97c30a88);
+  scaledT = (float)((double)(coordT * linearHeightF) + DOUBLE_97c30a88);
+  scaledR = (float)((double)(coordR * floatValue) + DOUBLE_97c30a88);
+  floorResult = _floor((double)levelWidthOrScaledS);
+  texelCoordS = (uint)(int)floorResult;
+  intCastScratch = (longlong)(int)texelCoordS;
+  floorResult = _floor((double)scaledT);
+  texelCoordT = (uint)(int)floorResult;
+  intCastScratch = (longlong)(int)texelCoordT;
+  floorResult = _floor((double)scaledR);
+  texelCoordR = (uint)(int)floorResult;
+  intCastScratch = (longlong)(int)texelCoordR;
+  i2dHi1 = 0x43300000;
+  i2dLo1 = texelCoordR ^ 0x80000000;
+  sampleCoordT = texelCoordT;
+  fracS = (double)(levelWidthOrScaledS - (float)((double)CONCAT44(0x43300000,texelCoordS ^ 0x80000000) -
                                    DOUBLE_97c30a58));
-  local_80 = local_120;
-  dVar16 = (double)(fVar8 - (float)((double)CONCAT44(0x43300000,local_11c ^ 0x80000000) -
+  sampleCoordS = texelCoordS;
+  fracT = (double)(scaledT - (float)((double)CONCAT44(0x43300000,texelCoordT ^ 0x80000000) -
                                    DOUBLE_97c30a58));
-  dVar15 = (double)(fVar9 - (float)((double)CONCAT44(0x43300000,uStack_6c) - DOUBLE_97c30a58));
-  dVar20 = (double)(float)(DOUBLE_97c30a60 - dVar15);
-  dVar19 = (double)(float)(dVar18 * (double)(float)(DOUBLE_97c30a60 - dVar16));
-  dVar17 = (double)(float)((double)(float)(DOUBLE_97c30a60 - dVar18) * dVar16);
-  dVar21 = (double)(float)((double)(float)(DOUBLE_97c30a60 - dVar18) *
-                          (double)(float)(DOUBLE_97c30a60 - dVar16));
-  fVar7 = (float)((double)(float)(dVar18 * dVar16) * dVar20);
-  fVar9 = (float)(dVar17 * dVar20);
-  fVar8 = (float)((double)(float)(dVar18 * dVar16) * dVar15);
-  fVar2 = (float)(dVar17 * dVar15);
-  fVar3 = (float)(dVar21 * dVar20);
-  fVar4 = (float)(dVar21 * dVar15);
-  fVar5 = (float)(dVar19 * dVar20);
-  fVar6 = (float)(dVar19 * dVar15);
-  local_78 = local_118;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_80);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,iVar11,textureObject,&local_80,&local_100);
-  local_80 = local_120;
-  local_7c = local_11c - 1;
-  local_78 = local_118;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_80);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,iVar11,textureObject,&local_80,&local_f0);
-  local_80 = local_120 - 1;
-  local_7c = local_11c - 1;
-  local_78 = local_118;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_80);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,iVar11,textureObject,&local_80,&local_d0);
-  local_80 = local_120 - 1;
-  local_7c = local_11c;
-  local_78 = local_118;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_80);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,iVar11,textureObject,&local_80,&local_e0);
-  local_78 = local_118 - 1;
-  local_80 = local_120;
-  local_7c = local_11c;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_80);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,iVar11,textureObject,&local_80,&local_c0);
-  local_7c = local_11c - 1;
-  local_78 = local_118 - 1;
-  local_80 = local_120;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_80);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,iVar11,textureObject,&local_80,&local_b0);
-  local_80 = local_120 - 1;
-  local_7c = local_11c - 1;
-  local_78 = local_118 - 1;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_80);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,iVar11,textureObject,&local_80,&local_90);
-  local_80 = local_120 - 1;
-  local_78 = local_118 - 1;
-  local_7c = local_11c;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_80);
-  dVar15 = (double)((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,iVar11,textureObject,&local_80,&local_a0)
+  fracR = (double)(scaledR - (float)((double)CONCAT44(0x43300000,i2dLo1) - DOUBLE_97c30a58));
+  oneMinusFracR = (double)(float)(DOUBLE_97c30a60 - fracR);
+  weight2dHL = (double)(float)(fracS * (double)(float)(DOUBLE_97c30a60 - fracT));
+  weight2dLH = (double)(float)((double)(float)(DOUBLE_97c30a60 - fracS) * fracT);
+  weight2dLL = (double)(float)((double)(float)(DOUBLE_97c30a60 - fracS) *
+                          (double)(float)(DOUBLE_97c30a60 - fracT));
+  weightHHL = (float)((double)(float)(fracS * fracT) * oneMinusFracR);
+  weightLHL = (float)(weight2dLH * oneMinusFracR);
+  weightHHH = (float)((double)(float)(fracS * fracT) * fracR);
+  weightLHH = (float)(weight2dLH * fracR);
+  weightLLL = (float)(weight2dLL * oneMinusFracR);
+  weightLLH = (float)(weight2dLL * fracR);
+  weightHLL = (float)(weight2dHL * oneMinusFracR);
+  weightHLH = (float)(weight2dHL * fracR);
+  sampleCoordR = texelCoordR;
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,linearTexelData,textureObject,&sampleCoordS,&texelHHHr);
+  sampleCoordS = texelCoordS;
+  sampleCoordT = texelCoordT - 1;
+  sampleCoordR = texelCoordR;
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,linearTexelData,textureObject,&sampleCoordS,&texelHLHr);
+  sampleCoordS = texelCoordS - 1;
+  sampleCoordT = texelCoordT - 1;
+  sampleCoordR = texelCoordR;
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,linearTexelData,textureObject,&sampleCoordS,&texelLLHr);
+  sampleCoordS = texelCoordS - 1;
+  sampleCoordT = texelCoordT;
+  sampleCoordR = texelCoordR;
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,linearTexelData,textureObject,&sampleCoordS,&texelLHHr);
+  sampleCoordR = texelCoordR - 1;
+  sampleCoordS = texelCoordS;
+  sampleCoordT = texelCoordT;
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,linearTexelData,textureObject,&sampleCoordS,&texelHHLr);
+  sampleCoordT = texelCoordT - 1;
+  sampleCoordR = texelCoordR - 1;
+  sampleCoordS = texelCoordS;
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,linearTexelData,textureObject,&sampleCoordS,&texelHLLr);
+  sampleCoordS = texelCoordS - 1;
+  sampleCoordT = texelCoordT - 1;
+  sampleCoordR = texelCoordR - 1;
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,linearTexelData,textureObject,&sampleCoordS,&texelLLLr);
+  sampleCoordS = texelCoordS - 1;
+  sampleCoordR = texelCoordR - 1;
+  sampleCoordT = texelCoordT;
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+  dVar15 = (double)((int (*)())_InterpreterTextureSamplerLoadTexel3D)(sampler,linearTexelData,textureObject,&sampleCoordS,&texelLHLr)
   ;
-  *texelOut = fVar3 * local_90 +
-             fVar9 * local_a0 +
-             fVar5 * local_b0 +
-             fVar7 * local_c0 +
-             fVar4 * local_d0 + fVar2 * local_e0 + fVar8 * local_100 + fVar6 * local_f0;
-  texelOut[1] = fVar3 * local_8c +
-               fVar9 * local_9c +
-               fVar5 * local_ac +
-               fVar7 * local_bc +
-               fVar4 * local_cc + fVar2 * local_dc + fVar8 * local_fc + fVar6 * local_ec;
-  texelOut[2] = fVar3 * local_88 +
-               fVar9 * local_98 +
-               fVar5 * local_a8 +
-               fVar7 * local_b8 +
-               fVar4 * local_c8 + fVar2 * local_d8 + fVar8 * local_f8 + fVar6 * local_e8;
-  texelOut[3] = fVar3 * local_84 +
-               fVar9 * local_94 +
-               fVar5 * local_a4 +
-               fVar7 * local_b4 +
-               fVar4 * local_c4 + fVar2 * local_d4 + fVar8 * local_f4 + fVar6 * local_e4;
+  *texelOut = weightLLL * texelLLLr +
+             weightLHL * texelLHLr +
+             weightHLL * texelHLLr +
+             weightHHL * texelHHLr +
+             weightLLH * texelLLHr + weightLHH * texelLHHr + weightHHH * texelHHHr + weightHLH * texelHLHr;
+  texelOut[1] = weightLLL * texelLLLg +
+               weightLHL * texelLHLg +
+               weightHLL * texelHLLg +
+               weightHHL * texelHHLg +
+               weightLLH * texelLLHg + weightLHH * texelLHHg + weightHHH * texelHHHg + weightHLH * texelHLHg;
+  texelOut[2] = weightLLL * texelLLLb +
+               weightLHL * texelLHLb +
+               weightHLL * texelHLLb +
+               weightHHL * texelHHLb +
+               weightLLH * texelLLHb + weightLHH * texelLHHb + weightHHH * texelHHHb + weightHLH * texelHLHb;
+  texelOut[3] = weightLLL * texelLLLa +
+               weightLHL * texelLHLa +
+               weightHLL * texelHLLa +
+               weightHHL * texelHHLa +
+               weightLLH * texelLLHa + weightLHH * texelLHHa + weightHHH * texelHHHa + weightHLH * texelHLHa;
   return dVar15;
 }
 
@@ -1061,46 +1094,50 @@ int _InterpreterTextureSamplerSampleTexelRECTFromLevel(sampler, textureUnit, lev
   float *texCoord;
   float *texelOut;
 {
+  int linearTexelData;
+  int nearestRecordIndex;
+  float weightLH;
+  float weightHH;
   double floorResult;
   double floorResult2;
-  bool bVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  ushort uVar6;
+  bool isLinearFilterCode;
+  float weightHL;
+  float weightLL;
+  float scaledS;
+  float scaledT;
+  ushort minFilter;
   int *textureObject;
-  int iVar8;
-  int *piVar9;
-  int iVar10;
-  double dVar11;
-  double dVar12;
-  double dVar13;
-  uint local_c0;
-  uint local_bc;
-  int local_b8;
-  longlong local_b0;
-  float local_a0;
-  float local_9c;
-  float local_98;
-  float local_94;
-  float local_90;
-  float local_8c;
-  float local_88;
-  float local_84;
-  float local_80;
-  float local_7c;
-  float local_78;
-  float local_74;
-  float local_70;
-  float local_6c;
-  float local_68;
-  float local_64;
-  uint local_60;
-  uint local_5c;
-  int local_58;
-  undefined4 local_50;
-  uint uStack_4c;
+  int textureState;
+  int *linearRecord;
+  int nearestTexelData;
+  double scaledR;
+  double fracT;
+  double fracS;
+  uint texelCoordS;
+  uint texelCoordT;
+  int texelCoordR;
+  longlong intCastScratch;
+  float texelHHr;
+  float texelHHg;
+  float texelHHb;
+  float texelHHa;
+  float texelHLr;
+  float texelHLg;
+  float texelHLb;
+  float texelHLa;
+  float texelLHr;
+  float texelLHg;
+  float texelLHb;
+  float texelLHa;
+  float texelLLr;
+  float texelLLg;
+  float texelLLb;
+  float texelLLa;
+  uint sampleCoordS;
+  uint sampleCoordT;
+  int sampleCoordR;
+  undefined4 i2dHi1;
+  uint i2dLo1;
   
   if (7 < textureUnit) {
     textureUnit = 7;
@@ -1111,245 +1148,245 @@ int _InterpreterTextureSamplerSampleTexelRECTFromLevel(sampler, textureUnit, lev
   }
   sampler[1] = (int)textureObject;
   sampler[2] = (int)(textureObject + level * 0x34 + 0x48);
-  iVar8 = *textureObject;
-  uVar6 = *(ushort *)(iVar8 + 0x16);
-  if (uVar6 == 0x2700) {
+  textureState = *textureObject;
+  minFilter = *(ushort *)(textureState + 0x16);
+  if (minFilter == 0x2700) {
 LAB_97bd51b8:
-    if ((*(short *)(iVar8 + 0x10) == -0x7ed3) || (*(short *)(iVar8 + 0x12) == -0x7ed3)) {
-      iVar8 = level * 0x34 + 100;
-      iVar10 = textureObject[level * 0x34 + 0x71];
+    if ((*(short *)(textureState + 0x10) == -0x7ed3) || (*(short *)(textureState + 0x12) == -0x7ed3)) {
+      nearestRecordIndex = level * 0x34 + 100;
+      nearestTexelData = textureObject[level * 0x34 + 0x71];
     }
     else {
-      iVar10 = textureObject[level * 0x34 + 0x70];
-      iVar8 = level * 0x34 + 0x50;
+      nearestTexelData = textureObject[level * 0x34 + 0x70];
+      nearestRecordIndex = level * 0x34 + 0x50;
     }
-    local_c0 = (uint)*texCoord;
-    local_bc = (uint)(int)texCoord[1];
-    local_b0 = 0;
-    local_b8 = 0;
-    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_c0);
-    ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,iVar10,textureObject + iVar8,&local_c0,texelOut);
+    texelCoordS = (uint)*texCoord;
+    texelCoordT = (uint)(int)texCoord[1];
+    intCastScratch = 0;
+    texelCoordR = 0;
+    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&texelCoordS);
+    ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,nearestTexelData,textureObject + nearestRecordIndex,&texelCoordS,texelOut);
   }
   else {
-    if (uVar6 < 0x2701) {
-      if (uVar6 == 0x2600) goto LAB_97bd51b8;
-      bVar1 = uVar6 == 0x2601;
+    if (minFilter < 0x2701) {
+      if (minFilter == 0x2600) goto LAB_97bd51b8;
+      isLinearFilterCode = minFilter == 0x2601;
 LAB_97bd51b0:
-      if (!bVar1) {
+      if (!isLinearFilterCode) {
         return;
       }
     }
     else {
-      if (uVar6 == 0x2702) goto LAB_97bd51b8;
-      if (0x2701 < uVar6) {
-        bVar1 = uVar6 == 0x2703;
+      if (minFilter == 0x2702) goto LAB_97bd51b8;
+      if (0x2701 < minFilter) {
+        isLinearFilterCode = minFilter == 0x2703;
         goto LAB_97bd51b0;
       }
     }
-    if ((*(short *)(iVar8 + 0x10) == -0x7ed3) || (*(short *)(iVar8 + 0x12) == -0x7ed3)) {
-      piVar9 = textureObject + level * 0x34 + 100;
-      iVar8 = textureObject[level * 0x34 + 0x71];
+    if ((*(short *)(textureState + 0x10) == -0x7ed3) || (*(short *)(textureState + 0x12) == -0x7ed3)) {
+      linearRecord = textureObject + level * 0x34 + 100;
+      linearTexelData = textureObject[level * 0x34 + 0x71];
     }
-    else if ((*(short *)(iVar8 + 0x10) == 0x2900) || (*(short *)(iVar8 + 0x12) == 0x2900)) {
-      piVar9 = textureObject + level * 0x34 + 100;
-      iVar8 = textureObject[level * 0x34 + 0x72];
+    else if ((*(short *)(textureState + 0x10) == 0x2900) || (*(short *)(textureState + 0x12) == 0x2900)) {
+      linearRecord = textureObject + level * 0x34 + 100;
+      linearTexelData = textureObject[level * 0x34 + 0x72];
     }
     else {
-      iVar8 = textureObject[level * 0x34 + 0x70];
-      piVar9 = textureObject + level * 0x34 + 0x50;
+      linearTexelData = textureObject[level * 0x34 + 0x70];
+      linearRecord = textureObject + level * 0x34 + 0x50;
     }
-    fVar4 = (float)((double)*texCoord + DOUBLE_97c30a88);
-    dVar11 = DOUBLE_97c30a88 + 0.0;
-    fVar5 = (float)((double)texCoord[1] + DOUBLE_97c30a88);
-    floorResult = _floor((double)fVar4);
-    local_c0 = (uint)(int)floorResult;
-    local_b0 = (longlong)(int)local_c0;
-    floorResult = _floor((double)fVar5);
-    local_bc = (uint)(int)floorResult;
-    local_b0 = (longlong)(int)local_bc;
-    floorResult2 = _floor((double)(float)dVar11);
-    local_50 = 0x43300000;
-    uStack_4c = local_bc ^ 0x80000000;
-    local_5c = local_bc;
-    local_60 = local_c0;
-    dVar13 = (double)(fVar4 - (float)((double)CONCAT44(0x43300000,local_c0 ^ 0x80000000) -
+    scaledS = (float)((double)*texCoord + DOUBLE_97c30a88);
+    scaledR = DOUBLE_97c30a88 + 0.0;
+    scaledT = (float)((double)texCoord[1] + DOUBLE_97c30a88);
+    floorResult = _floor((double)scaledS);
+    texelCoordS = (uint)(int)floorResult;
+    intCastScratch = (longlong)(int)texelCoordS;
+    floorResult = _floor((double)scaledT);
+    texelCoordT = (uint)(int)floorResult;
+    intCastScratch = (longlong)(int)texelCoordT;
+    floorResult2 = _floor((double)(float)scaledR);
+    i2dHi1 = 0x43300000;
+    i2dLo1 = texelCoordT ^ 0x80000000;
+    sampleCoordT = texelCoordT;
+    sampleCoordS = texelCoordS;
+    fracS = (double)(scaledS - (float)((double)CONCAT44(0x43300000,texelCoordS ^ 0x80000000) -
                                      DOUBLE_97c30a58));
-    dVar12 = (double)(fVar5 - (float)((double)CONCAT44(0x43300000,uStack_4c) - DOUBLE_97c30a58));
-    local_b8 = (int)floorResult2;
-    local_b0 = (longlong)local_b8;
-    fVar4 = (float)(dVar13 * dVar12);
-    fVar5 = (float)((double)(float)(DOUBLE_97c30a60 - dVar13) * dVar12);
-    fVar2 = (float)(dVar13 * (double)(float)(DOUBLE_97c30a60 - dVar12));
-    fVar3 = (float)((double)(float)(DOUBLE_97c30a60 - dVar13) *
-                   (double)(float)(DOUBLE_97c30a60 - dVar12));
-    local_58 = local_b8;
-    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_60);
-    ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,iVar8,piVar9,&local_60,&local_a0);
-    local_60 = local_c0;
-    local_5c = local_bc - 1;
-    local_58 = local_b8;
-    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_60);
-    ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,iVar8,piVar9,&local_60,&local_90);
-    local_60 = local_c0 - 1;
-    local_5c = local_bc - 1;
-    local_58 = local_b8;
-    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_60);
-    ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,iVar8,piVar9,&local_60,&local_70);
-    local_60 = local_c0 - 1;
-    local_5c = local_bc;
-    local_58 = local_b8;
-    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&local_60);
-    ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,iVar8,piVar9,&local_60,&local_80);
-    *texelOut = fVar3 * local_70 + fVar5 * local_80 + fVar4 * local_a0 + fVar2 * local_90;
-    texelOut[3] = fVar3 * local_64 + fVar5 * local_74 + fVar4 * local_94 + fVar2 * local_84;
-    texelOut[1] = fVar3 * local_6c + fVar5 * local_7c + fVar4 * local_9c + fVar2 * local_8c;
-    texelOut[2] = fVar3 * local_68 + fVar5 * local_78 + fVar4 * local_98 + fVar2 * local_88;
+    fracT = (double)(scaledT - (float)((double)CONCAT44(0x43300000,i2dLo1) - DOUBLE_97c30a58));
+    texelCoordR = (int)floorResult2;
+    intCastScratch = (longlong)texelCoordR;
+    weightHH = (float)(fracS * fracT);
+    weightLH = (float)((double)(float)(DOUBLE_97c30a60 - fracS) * fracT);
+    weightHL = (float)(fracS * (double)(float)(DOUBLE_97c30a60 - fracT));
+    weightLL = (float)((double)(float)(DOUBLE_97c30a60 - fracS) *
+                   (double)(float)(DOUBLE_97c30a60 - fracT));
+    sampleCoordR = texelCoordR;
+    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+    ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,linearTexelData,linearRecord,&sampleCoordS,&texelHHr);
+    sampleCoordS = texelCoordS;
+    sampleCoordT = texelCoordT - 1;
+    sampleCoordR = texelCoordR;
+    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+    ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,linearTexelData,linearRecord,&sampleCoordS,&texelHLr);
+    sampleCoordS = texelCoordS - 1;
+    sampleCoordT = texelCoordT - 1;
+    sampleCoordR = texelCoordR;
+    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+    ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,linearTexelData,linearRecord,&sampleCoordS,&texelLLr);
+    sampleCoordS = texelCoordS - 1;
+    sampleCoordT = texelCoordT;
+    sampleCoordR = texelCoordR;
+    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(sampler,&sampleCoordS);
+    ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(sampler,linearTexelData,linearRecord,&sampleCoordS,&texelLHr);
+    *texelOut = weightLL * texelLLr + weightLH * texelLHr + weightHH * texelHHr + weightHL * texelHLr;
+    texelOut[3] = weightLL * texelLLa + weightLH * texelLHa + weightHH * texelHHa + weightHL * texelHLa;
+    texelOut[1] = weightLL * texelLLg + weightLH * texelLHg + weightHH * texelHHg + weightHL * texelHLg;
+    texelOut[2] = weightLL * texelLLb + weightLH * texelLHb + weightHH * texelHHb + weightHL * texelHLb;
   }
   return;
 }
 
 /* _InterpreterTextureSamplerLoadTexel1D @ 0x97bd5530 (172 bytes) */
-int _InterpreterTextureSamplerLoadTexel1D(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  int param_2;
-  undefined4 param_3;
-  int *param_4;
-  undefined4 *param_5;
+int _InterpreterTextureSamplerLoadTexel1D(sampler, texelData, unusedLevelRecord, texelCoord, texelOut)
+  int sampler;
+  int texelData;
+  undefined4 unusedLevelRecord;
+  int *texelCoord;
+  undefined4 *texelOut;
 {
-  undefined4 *puVar1;
-  uint uVar2;
+  undefined4 *texelPtr;
+  uint texelType;
   
-  uVar2 = *(uint *)(*(int *)(param_1 + 4) + 0xae4);
-  if (uVar2 < 0x8368) {
-    if (0x8365 < uVar2) {
+  texelType = *(uint *)(*(int *)(sampler + 4) + 0xae4);
+  if (texelType < 0x8368) {
+    if (0x8365 < texelType) {
       return;
     }
-    if (uVar2 != 0x1406) {
-      if (uVar2 < 0x1407) {
-        if (uVar2 == 0x1401) {
+    if (texelType != 0x1406) {
+      if (texelType < 0x1407) {
+        if (texelType == 0x1401) {
           return;
         }
       }
       else {
-        if (uVar2 == 0x8033) {
+        if (texelType == 0x8033) {
           return;
         }
-        if (uVar2 == 0x8363) {
+        if (texelType == 0x8363) {
           return;
         }
       }
     }
   }
   else {
-    if (uVar2 == 0x8815) {
+    if (texelType == 0x8815) {
       return;
     }
-    if ((0x8815 < uVar2) && (uVar2 - 0x881a < 2)) {
+    if ((0x8815 < texelType) && (texelType - 0x881a < 2)) {
       return;
     }
   }
-  puVar1 = (undefined4 *)(param_2 + *param_4 * 0x10);
-  *param_5 = *puVar1;
-  param_5[1] = puVar1[1];
-  param_5[2] = puVar1[2];
-  param_5[3] = puVar1[3];
+  texelPtr = (undefined4 *)(texelData + *texelCoord * 0x10);
+  *texelOut = *texelPtr;
+  texelOut[1] = texelPtr[1];
+  texelOut[2] = texelPtr[2];
+  texelOut[3] = texelPtr[3];
   return;
 }
 
 /* _InterpreterTextureSamplerLoadTexel2D @ 0x97bd55dc (188 bytes) */
-int _InterpreterTextureSamplerLoadTexel2D(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  int param_2;
-  int *param_3;
-  int *param_4;
-  undefined4 *param_5;
+int _InterpreterTextureSamplerLoadTexel2D(sampler, texelData, levelRecord, texelCoord, texelOut)
+  int sampler;
+  int texelData;
+  int *levelRecord;
+  int *texelCoord;
+  undefined4 *texelOut;
 {
-  undefined4 *puVar1;
-  uint uVar2;
+  undefined4 *texelPtr;
+  uint texelType;
   
-  uVar2 = *(uint *)(*(int *)(param_1 + 4) + 0xae4);
-  if (uVar2 < 0x8368) {
-    if (0x8365 < uVar2) {
+  texelType = *(uint *)(*(int *)(sampler + 4) + 0xae4);
+  if (texelType < 0x8368) {
+    if (0x8365 < texelType) {
       return;
     }
-    if (uVar2 != 0x1406) {
-      if (uVar2 < 0x1407) {
-        if (uVar2 == 0x1401) {
+    if (texelType != 0x1406) {
+      if (texelType < 0x1407) {
+        if (texelType == 0x1401) {
           return;
         }
       }
       else {
-        if (uVar2 == 0x8033) {
+        if (texelType == 0x8033) {
           return;
         }
-        if (uVar2 == 0x8363) {
+        if (texelType == 0x8363) {
           return;
         }
       }
     }
   }
   else {
-    if (uVar2 == 0x8815) {
+    if (texelType == 0x8815) {
       return;
     }
-    if ((0x8815 < uVar2) && (uVar2 - 0x881a < 2)) {
+    if ((0x8815 < texelType) && (texelType - 0x881a < 2)) {
       return;
     }
   }
-  puVar1 = (undefined4 *)(param_2 + (param_4[1] * *param_3 + *param_4) * 0x10);
-  *param_5 = *puVar1;
-  param_5[1] = puVar1[1];
-  param_5[2] = puVar1[2];
-  param_5[3] = puVar1[3];
+  texelPtr = (undefined4 *)(texelData + (texelCoord[1] * *levelRecord + *texelCoord) * 0x10);
+  *texelOut = *texelPtr;
+  texelOut[1] = texelPtr[1];
+  texelOut[2] = texelPtr[2];
+  texelOut[3] = texelPtr[3];
   return;
 }
 
 /* _InterpreterTextureSamplerLoadTexel3D @ 0x97bd5698 (204 bytes) */
-int _InterpreterTextureSamplerLoadTexel3D(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  int param_2;
-  int *param_3;
-  int *param_4;
-  undefined4 *param_5;
+int _InterpreterTextureSamplerLoadTexel3D(sampler, texelData, levelRecord, texelCoord, texelOut)
+  int sampler;
+  int texelData;
+  int *levelRecord;
+  int *texelCoord;
+  undefined4 *texelOut;
 {
-  undefined4 *puVar1;
-  uint uVar2;
+  undefined4 *texelPtr;
+  uint texelType;
   
-  uVar2 = *(uint *)(*(int *)(param_1 + 4) + 0xae4);
-  if (uVar2 < 0x8368) {
-    if (0x8365 < uVar2) {
+  texelType = *(uint *)(*(int *)(sampler + 4) + 0xae4);
+  if (texelType < 0x8368) {
+    if (0x8365 < texelType) {
       return;
     }
-    if (uVar2 != 0x1406) {
-      if (uVar2 < 0x1407) {
-        if (uVar2 == 0x1401) {
+    if (texelType != 0x1406) {
+      if (texelType < 0x1407) {
+        if (texelType == 0x1401) {
           return;
         }
       }
       else {
-        if (uVar2 == 0x8033) {
+        if (texelType == 0x8033) {
           return;
         }
-        if (uVar2 == 0x8363) {
+        if (texelType == 0x8363) {
           return;
         }
       }
     }
   }
   else {
-    if (uVar2 == 0x8815) {
+    if (texelType == 0x8815) {
       return;
     }
-    if ((0x8815 < uVar2) && (uVar2 - 0x881a < 2)) {
+    if ((0x8815 < texelType) && (texelType - 0x881a < 2)) {
       return;
     }
   }
-  puVar1 = (undefined4 *)
-           (param_2 + ((param_4[2] * param_3[1] + param_4[1]) * *param_3 + *param_4) * 0x10);
-  *param_5 = *puVar1;
-  param_5[1] = puVar1[1];
-  param_5[2] = puVar1[2];
-  param_5[3] = puVar1[3];
+  texelPtr = (undefined4 *)
+           (texelData + ((texelCoord[2] * levelRecord[1] + texelCoord[1]) * *levelRecord + *texelCoord) * 0x10);
+  *texelOut = *texelPtr;
+  texelOut[1] = texelPtr[1];
+  texelOut[2] = texelPtr[2];
+  texelOut[3] = texelPtr[3];
   return;
 }
 
