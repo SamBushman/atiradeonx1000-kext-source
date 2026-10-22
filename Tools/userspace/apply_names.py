@@ -51,12 +51,34 @@ def load_rows(d):
             c = l.rstrip('\n').split('\t')
             if len(c) < 5 or c[0] not in ('local', 'use') or (c[0] == 'use' and len(c) < 7):
                 print('%s:%d: bad row' % (f, n)); sys.exit(1)
-            rows.append((f, n, c[1], c[2], c[3], c[4]) if c[0] == 'local' else (f, n, c[1], c[2], c[3], c[4], c[6], c[7] if len(c) > 7 else ''))
+            rows.append((f, n, c[1], c[2], c[3], c[4]) if c[0] == 'local' else (f, n, c[1], c[2], c[3], c[4], c[6], c[7] if len(c) > 7 else '', c[8] if len(c) > 8 and c[8] else 'all', c[9] if len(c) > 9 and c[9] else 'none'))
     return rows
 
 
 def wb(x):
     return r'(?<![A-Za-z0-9_])%s(?![A-Za-z0-9_])' % re.escape(x)
+
+
+def split_assign(l):
+    """index of the first plain assignment `=` of a line (not ==, !=, <=, >=, +=, ...), or -1"""
+    for i, ch in enumerate(l):
+        if ch == '=' and (i == 0 or l[i - 1] not in '=!<>+-*/&|^%') and l[i + 1:i + 2] != '=': return i
+    return -1
+
+
+def part_text(l, part):
+    """the part of a line a `first`/`last` flag talks about: all | lhs (left of the first assignment) | rhs (right of it, or the whole line when it has no assignment)"""
+    if part == 'all': return l
+    i = split_assign(l)
+    if part == 'lhs': return l[:i] if i >= 0 else ''
+    return l[i + 1:] if i >= 0 else l
+
+
+def sub_part(l, part, old, new):
+    if part == 'all': return re.sub(wb(old), new, l)
+    i = split_assign(l)
+    if part == 'lhs': return re.sub(wb(old), new, l[:i]) + l[i:] if i >= 0 else l
+    return (l[:i + 1] + re.sub(wb(old), new, l[i + 1:])) if i >= 0 else re.sub(wb(old), new, l)
 
 
 def apply_uses(lines, s, e, name, uses, allrows, declset):
@@ -78,8 +100,10 @@ def apply_uses(lines, s, e, name, uses, allrows, declset):
         i = brace + 1
         while i < len(lines) and (re.match(DECL, lines[i]) or not lines[i].strip() or re.match(r'\s*(/\*|\*)', lines[i])): i += 1
         return brace + 1, i
-    for (f, n, fn, old, new, tier, frm, to) in uses:
-        N = [norm(l) for l in lines]
+    Ncache = None
+    for (f, n, fn, old, new, tier, frm, to, first, last) in uses:
+        if Ncache is None or len(Ncache) != len(lines): Ncache = [norm(l) for l in lines]    # renames do not change normalised text
+        N = Ncache
         m = re.match(r'(.*)@(\d+)$', frm); pat, k = (m.group(1), int(m.group(2))) if m else (frm, 1)
         hits = [i for i in range(brace + 1, e) if re.search(pat, N[i])]
         if len(hits) < k: print('%s:%d: %s: anchor %r not found' % (f, n, fn, frm)); nerr += 1; continue
@@ -88,7 +112,8 @@ def apply_uses(lines, s, e, name, uses, allrows, declset):
             tz = [i for i in range(a + 1, e) if re.search(to, N[i])]
             if not tz: print('%s:%d: %s: end anchor %r not found' % (f, n, fn, to)); nerr += 1; continue
             z = tz[0]
-        seg = lines[a:z]
+        todo = [(i, first if i == a else 'all') for i in range(a, z)] + ([(z, last)] if to and last != 'none' and z < e else [])
+        seg = [part_text(lines[i], pt) for i, pt in todo]
         has_old = any(re.search(wb(old), strip_strings(l)) for l in seg)
         has_new = any(re.search(wb(new), strip_strings(l)) for l in seg)
         if not has_old:
@@ -96,7 +121,7 @@ def apply_uses(lines, s, e, name, uses, allrows, declset):
             else: print('%s:%d: %s: neither %s nor %s in the segment' % (f, n, fn, old, new)); nerr += 1
             continue
         if new in declset: print('%s:%d: %s: new name %s collides with a declaration' % (f, n, fn, new)); nerr += 1; continue
-        for i in range(a, z): lines[i] = re.sub(wb(old), new, lines[i])
+        for i, pt in todo: lines[i] = sub_part(lines[i], pt, old, new)
         npend += 1
         # declaration of new, beside old's
         d0, d1 = declblock()
@@ -132,7 +157,7 @@ def main():
             if name not in byfn: continue
             body = '\n'.join(lines[s:e])
             rws = byfn.pop(name)
-            uses = [r for r in rws if len(r) == 8]
+            uses = [r for r in rws if len(r) == 10]
             for (f, n, fn, old, new, tier) in [r for r in rws if len(r) == 6]:
                 code = strip_strings(body)
                 ids = set(IDENT.findall(code))
