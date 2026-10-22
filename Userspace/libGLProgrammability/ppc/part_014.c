@@ -1883,349 +1883,350 @@ int _InterpreterRasterOpMachineAttachRuntimeCompiler(param_1, param_2)
 }
 
 /* _InterpreterRasterOpMachine_DepthTest @ 0x97bd6414 (236 bytes) */
-int _InterpreterRasterOpMachine_DepthTest(param_1)
-  int *param_1;
+int _InterpreterRasterOpMachine_DepthTest(machine)
+  int *machine;
 {
-  float fVar1;
-  int iVar2;
-  float *pfVar3;
-  bool bVar4;
+  float fragDepth;
+  int emulator;
+  float *depthBufferPtr;
+  bool passed;
   
-  iVar2 = *param_1;
-  fVar1 = *(float *)(*(int *)(iVar2 + 0xdf0) + 0xa38);
-  pfVar3 = *(float **)(iVar2 + 0xda8);
-  switch(*(uint *)(*(int *)(iVar2 + 0xd80) + 0x50) & 7) {
+  emulator = *machine;
+  fragDepth = *(float *)(*(int *)(emulator + 0xdf0) + 0xa38);
+  depthBufferPtr = *(float **)(emulator + 0xda8);
+  switch(*(uint *)(*(int *)(emulator + 0xd80) + 0x50) & 7) {
   case 0:
     return true;
   case 1:
-    bVar4 = fVar1 < *pfVar3;
+    passed = fragDepth < *depthBufferPtr;
     break;
   case 2:
-    return fVar1 != *pfVar3;
+    return fragDepth != *depthBufferPtr;
   case 3:
-    bVar4 = fVar1 <= *pfVar3;
+    passed = fragDepth <= *depthBufferPtr;
     break;
   case 4:
-    bVar4 = *pfVar3 < fVar1;
+    passed = *depthBufferPtr < fragDepth;
     break;
   case 5:
-    return fVar1 == *pfVar3;
+    return fragDepth == *depthBufferPtr;
   case 6:
-    bVar4 = *pfVar3 <= fVar1;
+    passed = *depthBufferPtr <= fragDepth;
     break;
   default:
     return false;
   }
-  return (bool)(bVar4 ^ 1);
+  return (bool)(passed ^ 1);
 }
 
 /* _InterpreterRasterOpMachine_DepthAndStencilTest @ 0x97bd6520 (732 bytes) */
-int _InterpreterRasterOpMachine_DepthAndStencilTest(param_1)
-  int *param_1;
+int _InterpreterRasterOpMachine_DepthAndStencilTest(machine)
+  int *machine;
 {
-  bool bVar1;
-  bool bVar2;
-  float fVar3;
-  uint uVar4;
-  bool bVar5;
-  uint uVar6;
-  int iVar7;
-  byte *pbVar8;
-  uint uVar9;
-  uint uVar10;
-  uint uVar11;
-  uint uVar12;
-  int iVar13;
-  float *pfVar14;
-  uint uVar15;
+  bool writeMasksUnrestricted;
+  bool depthLessOrEqual;
+  float fragDepth;
+  uint stencilRef;
+  bool stencilEnabled;
+  uint stencilFuncAndOps;
+  int state;
+  byte *stencilBufferPtr;
+  uint stencilWriteMask;
+  uint stencilCompareMask;
+  uint writeMaskWord;
+  uint stateFlags;
+  int emulator;
+  float *depthBufferPtr;
+  uint testPassed;
   
-  uVar15 = 0;
-  iVar13 = *param_1;
-  iVar7 = *(int *)(iVar13 + 0xd80);
-  uVar6 = *(uint *)(iVar7 + 0x48);
-  uVar12 = *(uint *)(iVar7 + 0x3c);
-  uVar4 = *(uint *)(iVar7 + 0x4c) >> 0x18;
-  fVar3 = *(float *)(*(int *)(iVar13 + 0xdf0) + 0xa38);
-  pfVar14 = *(float **)(iVar13 + 0xda8);
-  pbVar8 = *(byte **)(iVar13 + 0xdac);
-  bVar1 = (uVar12 >> 6 & 1) == 0;
-  uVar10 = *(uint *)(iVar7 + 0x4c) >> 8 & 0xff;
-  uVar11 = *(uint *)(*(int *)(iVar13 + 0xd80) + 0x70);
-  if (bVar1) {
-    uVar9 = 0xff;
+  testPassed = 0;
+  emulator = *machine;
+  state = *(int *)(emulator + 0xd80);
+  stencilFuncAndOps = *(uint *)(state + 0x48);
+  stateFlags = *(uint *)(state + 0x3c);
+  stencilRef = *(uint *)(state + 0x4c) >> 0x18;
+  fragDepth = *(float *)(*(int *)(emulator + 0xdf0) + 0xa38);
+  depthBufferPtr = *(float **)(emulator + 0xda8);
+  stencilBufferPtr = *(byte **)(emulator + 0xdac);
+  writeMasksUnrestricted = (stateFlags >> 6 & 1) == 0;
+  stencilCompareMask = *(uint *)(state + 0x4c) >> 8 & 0xff;
+  writeMaskWord = *(uint *)(*(int *)(emulator + 0xd80) + 0x70);
+  if (writeMasksUnrestricted) {
+    stencilWriteMask = 0xff;
   }
   else {
-    uVar9 = uVar11 >> 8 & 0xff;
+    stencilWriteMask = writeMaskWord >> 8 & 0xff;
   }
-  bVar5 = (uVar12 & 2) != 0;
-  if (bVar5) {
-    switch(uVar6 >> 0xc & 7) {
+  stencilEnabled = (stateFlags & 2) != 0;
+  if (stencilEnabled) {
+    switch(stencilFuncAndOps >> 0xc & 7) {
     case 0:
-      uVar15 = 0;
+      testPassed = 0;
       break;
     case 1:
-      uVar15 = (uint)((uVar4 & uVar10) < (uVar10 & *pbVar8));
+      testPassed = (uint)((stencilRef & stencilCompareMask) < (stencilCompareMask & *stencilBufferPtr));
       break;
     case 2:
-      uVar15 = (uint)((uVar4 & uVar10) == (uVar10 & *pbVar8));
+      testPassed = (uint)((stencilRef & stencilCompareMask) == (stencilCompareMask & *stencilBufferPtr));
       break;
     case 3:
-      uVar15 = (uint)((uVar4 & uVar10) <= (uVar10 & *pbVar8));
+      testPassed = (uint)((stencilRef & stencilCompareMask) <= (stencilCompareMask & *stencilBufferPtr));
       break;
     case 4:
-      uVar15 = (uint)((uVar10 & *pbVar8) < (uVar4 & uVar10));
+      testPassed = (uint)((stencilCompareMask & *stencilBufferPtr) < (stencilRef & stencilCompareMask));
       break;
     case 5:
-      uVar15 = -(uint)((*pbVar8 ^ uVar4) & uVar10) >> 0x1f;
+      testPassed = -(uint)((*stencilBufferPtr ^ stencilRef) & stencilCompareMask) >> 0x1f;
       break;
     case 6:
-      uVar15 = (uint)((uVar10 & *pbVar8) <= (uVar4 & uVar10));
+      testPassed = (uint)((stencilCompareMask & *stencilBufferPtr) <= (stencilRef & stencilCompareMask));
       break;
     case 7:
-      uVar15 = 1;
+      testPassed = 1;
     }
-    if (uVar15 == 0) {
-      ((int (*)())_InterpreterRasterOpMachineUpdateStencilBuffer)(uVar6 >> 0xf & 7,uVar4,pbVar8,uVar9);
+    if (testPassed == 0) {
+      ((int (*)())_InterpreterRasterOpMachineUpdateStencilBuffer)(stencilFuncAndOps >> 0xf & 7,stencilRef,stencilBufferPtr,stencilWriteMask);
       return true;
     }
   }
-  if ((uVar12 & 4) == 0) {
-    if (bVar5) {
-      ((int (*)())_InterpreterRasterOpMachineUpdateStencilBuffer)(uVar6 >> 0x15 & 7,uVar4,pbVar8,uVar9);
+  if ((stateFlags & 4) == 0) {
+    if (stencilEnabled) {
+      ((int (*)())_InterpreterRasterOpMachineUpdateStencilBuffer)(stencilFuncAndOps >> 0x15 & 7,stencilRef,stencilBufferPtr,stencilWriteMask);
     }
-    return uVar15 == 0;
+    return testPassed == 0;
   }
-  switch(*(uint *)(*(int *)(iVar13 + 0xd80) + 0x50) & 7) {
+  switch(*(uint *)(*(int *)(emulator + 0xd80) + 0x50) & 7) {
   case 0:
-    uVar15 = 0;
+    testPassed = 0;
     break;
   case 1:
-    uVar15 = (uint)(fVar3 < *pfVar14);
+    testPassed = (uint)(fragDepth < *depthBufferPtr);
     break;
   case 2:
-    uVar15 = (uint)(fVar3 == *pfVar14);
+    testPassed = (uint)(fragDepth == *depthBufferPtr);
     break;
   case 3:
-    bVar2 = fVar3 <= *pfVar14;
+    depthLessOrEqual = fragDepth <= *depthBufferPtr;
     goto LAB_97bd67ac;
   case 4:
-    uVar15 = (uint)(*pfVar14 < fVar3);
+    testPassed = (uint)(*depthBufferPtr < fragDepth);
     break;
   case 5:
-    uVar15 = (uint)(fVar3 != *pfVar14);
+    testPassed = (uint)(fragDepth != *depthBufferPtr);
     break;
   case 6:
-    bVar2 = *pfVar14 <= fVar3;
+    depthLessOrEqual = *depthBufferPtr <= fragDepth;
 LAB_97bd67ac:
-    uVar15 = (uint)bVar2;
+    testPassed = (uint)depthLessOrEqual;
     break;
   case 7:
-    uVar15 = 1;
+    testPassed = 1;
   }
-  if (uVar15 == 0) {
-    if (bVar5) {
-      ((int (*)())_InterpreterRasterOpMachineUpdateStencilBuffer)(uVar6 >> 0x12 & 7,uVar4,pbVar8,uVar9);
+  if (testPassed == 0) {
+    if (stencilEnabled) {
+      ((int (*)())_InterpreterRasterOpMachineUpdateStencilBuffer)(stencilFuncAndOps >> 0x12 & 7,stencilRef,stencilBufferPtr,stencilWriteMask);
     }
   }
   else {
-    if (bVar5) {
-      ((int (*)())_InterpreterRasterOpMachineUpdateStencilBuffer)(uVar6 >> 0x15 & 7,uVar4,pbVar8,uVar9);
+    if (stencilEnabled) {
+      ((int (*)())_InterpreterRasterOpMachineUpdateStencilBuffer)(stencilFuncAndOps >> 0x15 & 7,stencilRef,stencilBufferPtr,stencilWriteMask);
     }
-    if ((bVar1) || ((uVar11 & 0x10000) != 0)) {
-      *pfVar14 = fVar3;
+    if ((writeMasksUnrestricted) || ((writeMaskWord & 0x10000) != 0)) {
+      *depthBufferPtr = fragDepth;
     }
   }
-  return uVar15 == 0;
+  return testPassed == 0;
 }
 
 /* _InterpreterRasterOpMachine_AlphaTest @ 0x97bd683c (1548 bytes) */
-int _InterpreterRasterOpMachine_AlphaTest(param_1, param_2)
-  int *param_1;
-  int param_2;
+int _InterpreterRasterOpMachine_AlphaTest(machine, fragment)
+  int *machine;
+  int fragment;
 {
+  uint alphaRefFixed;
   uint framebufferFormat;
-  float fVar1;
-  int iVar2;
-  uint uVar3;
-  float fVar4;
-  uint uVar5;
-  bool bVar6;
-  double dVar7;
+  float alphaRef;
+  int state;
+  uint fragAlphaFixed;
+  float fragAlpha;
+  uint alphaFunc;
+  bool passed;
+  double fixedScratch;
   
-  iVar2 = *(int *)(*param_1 + 0xd80);
-  fVar1 = *(float *)(iVar2 + 0x44);
-  uVar5 = *(uint *)(iVar2 + 0x40);
-  framebufferFormat = _PPEmulatorFramebufferFormat(*param_1);
-  bVar6 = false;
+  state = *(int *)(*machine + 0xd80);
+  alphaRef = *(float *)(state + 0x44);
+  alphaFunc = *(uint *)(state + 0x40);
+  framebufferFormat = _PPEmulatorFramebufferFormat(*machine);
+  passed = false;
   if ((framebufferFormat & 0x1c000) == 0) {
-    switch(uVar5 & 7) {
+    switch(alphaFunc & 7) {
     case 0:
 switchD_97bd6924_caseD_0:
-      bVar6 = false;
+      passed = false;
       break;
     case 1:
-      bVar6 = *(float *)(param_2 + 0xc) < fVar1;
+      passed = *(float *)(fragment + 0xc) < alphaRef;
       break;
     case 2:
-      bVar6 = *(float *)(param_2 + 0xc) == fVar1;
+      passed = *(float *)(fragment + 0xc) == alphaRef;
       break;
     case 3:
-      bVar6 = *(float *)(param_2 + 0xc) <= fVar1;
+      passed = *(float *)(fragment + 0xc) <= alphaRef;
       break;
     case 4:
-      bVar6 = fVar1 < *(float *)(param_2 + 0xc);
+      passed = alphaRef < *(float *)(fragment + 0xc);
       break;
     case 5:
-      bVar6 = *(float *)(param_2 + 0xc) != fVar1;
+      passed = *(float *)(fragment + 0xc) != alphaRef;
       break;
     case 6:
-      bVar6 = fVar1 <= *(float *)(param_2 + 0xc);
+      passed = alphaRef <= *(float *)(fragment + 0xc);
       break;
     case 7:
 switchD_97bd6924_caseD_7:
-      bVar6 = true;
+      passed = true;
     }
   }
   else {
-    fVar4 = *(float *)(param_2 + 0xc);
-    if (TAllocation__guardBlockSize <= fVar4) {
-      if (FLOAT_97c3acd8 < fVar4) {
-        fVar4 = 1.0;
+    fragAlpha = *(float *)(fragment + 0xc);
+    if (TAllocation__guardBlockSize <= fragAlpha) {
+      if (FLOAT_97c3acd8 < fragAlpha) {
+        fragAlpha = 1.0;
       }
     }
     else {
-      fVar4 = 0.0;
+      fragAlpha = 0.0;
     }
-    if (TAllocation__guardBlockSize <= fVar1) {
-      if (FLOAT_97c3acd8 < fVar1) {
-        fVar1 = 1.0;
+    if (TAllocation__guardBlockSize <= alphaRef) {
+      if (FLOAT_97c3acd8 < alphaRef) {
+        alphaRef = 1.0;
       }
     }
     else {
-      fVar1 = 0.0;
+      alphaRef = 0.0;
     }
-    switch(uVar5 & 7) {
+    switch(alphaFunc & 7) {
     case 0:
       goto switchD_97bd6924_caseD_0;
     case 1:
-      fVar4 = fVar4 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar7 = (double)fVar4;
-      if (DOUBLE_97c30a78 <= dVar7) {
-        uVar3 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
+      fragAlpha = fragAlpha * FLOAT_97c3acbc + FLOAT_97c3acc0;
+      fixedScratch = (double)fragAlpha;
+      if (DOUBLE_97c30a78 <= fixedScratch) {
+        fragAlphaFixed = (int)(fixedScratch - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar3 = (uint)(int)fVar4;
+        fragAlphaFixed = (uint)(int)fragAlpha;
       }
-      fVar1 = fVar1 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar7 = (double)fVar1;
-      if (DOUBLE_97c30a78 <= dVar7) {
-        uVar5 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
+      alphaRef = alphaRef * FLOAT_97c3acbc + FLOAT_97c3acc0;
+      fixedScratch = (double)alphaRef;
+      if (DOUBLE_97c30a78 <= fixedScratch) {
+        alphaRefFixed = (int)(fixedScratch - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar5 = (uint)(int)fVar1;
+        alphaRefFixed = (uint)(int)alphaRef;
       }
-      bVar6 = uVar3 < uVar5;
+      passed = fragAlphaFixed < alphaRefFixed;
       break;
     case 2:
-      fVar4 = fVar4 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar7 = (double)fVar4;
-      if (DOUBLE_97c30a78 <= dVar7) {
-        uVar3 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
+      fragAlpha = fragAlpha * FLOAT_97c3acbc + FLOAT_97c3acc0;
+      fixedScratch = (double)fragAlpha;
+      if (DOUBLE_97c30a78 <= fixedScratch) {
+        fragAlphaFixed = (int)(fixedScratch - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar3 = (uint)(int)fVar4;
+        fragAlphaFixed = (uint)(int)fragAlpha;
       }
-      fVar1 = fVar1 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar7 = (double)fVar1;
-      if (DOUBLE_97c30a78 <= dVar7) {
-        uVar5 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
+      alphaRef = alphaRef * FLOAT_97c3acbc + FLOAT_97c3acc0;
+      fixedScratch = (double)alphaRef;
+      if (DOUBLE_97c30a78 <= fixedScratch) {
+        alphaRefFixed = (int)(fixedScratch - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar5 = (uint)(int)fVar1;
+        alphaRefFixed = (uint)(int)alphaRef;
       }
-      bVar6 = uVar3 == uVar5;
+      passed = fragAlphaFixed == alphaRefFixed;
       break;
     case 3:
-      fVar4 = fVar4 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar7 = (double)fVar4;
-      if (DOUBLE_97c30a78 <= dVar7) {
-        uVar3 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
+      fragAlpha = fragAlpha * FLOAT_97c3acbc + FLOAT_97c3acc0;
+      fixedScratch = (double)fragAlpha;
+      if (DOUBLE_97c30a78 <= fixedScratch) {
+        fragAlphaFixed = (int)(fixedScratch - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar3 = (uint)(int)fVar4;
+        fragAlphaFixed = (uint)(int)fragAlpha;
       }
-      fVar1 = fVar1 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar7 = (double)fVar1;
-      if (DOUBLE_97c30a78 <= dVar7) {
-        uVar5 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
+      alphaRef = alphaRef * FLOAT_97c3acbc + FLOAT_97c3acc0;
+      fixedScratch = (double)alphaRef;
+      if (DOUBLE_97c30a78 <= fixedScratch) {
+        alphaRefFixed = (int)(fixedScratch - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar5 = (uint)(int)fVar1;
+        alphaRefFixed = (uint)(int)alphaRef;
       }
-      bVar6 = uVar3 <= uVar5;
+      passed = fragAlphaFixed <= alphaRefFixed;
       break;
     case 4:
-      fVar4 = fVar4 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar7 = (double)fVar4;
-      if (DOUBLE_97c30a78 <= dVar7) {
-        uVar3 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
+      fragAlpha = fragAlpha * FLOAT_97c3acbc + FLOAT_97c3acc0;
+      fixedScratch = (double)fragAlpha;
+      if (DOUBLE_97c30a78 <= fixedScratch) {
+        fragAlphaFixed = (int)(fixedScratch - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar3 = (uint)(int)fVar4;
+        fragAlphaFixed = (uint)(int)fragAlpha;
       }
-      fVar1 = fVar1 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar7 = (double)fVar1;
-      if (DOUBLE_97c30a78 <= dVar7) {
-        uVar5 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
+      alphaRef = alphaRef * FLOAT_97c3acbc + FLOAT_97c3acc0;
+      fixedScratch = (double)alphaRef;
+      if (DOUBLE_97c30a78 <= fixedScratch) {
+        alphaRefFixed = (int)(fixedScratch - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar5 = (uint)(int)fVar1;
+        alphaRefFixed = (uint)(int)alphaRef;
       }
-      bVar6 = uVar5 < uVar3;
+      passed = alphaRefFixed < fragAlphaFixed;
       break;
     case 5:
-      fVar4 = fVar4 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar7 = (double)fVar4;
-      if (DOUBLE_97c30a78 <= dVar7) {
-        uVar3 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
+      fragAlpha = fragAlpha * FLOAT_97c3acbc + FLOAT_97c3acc0;
+      fixedScratch = (double)fragAlpha;
+      if (DOUBLE_97c30a78 <= fixedScratch) {
+        fragAlphaFixed = (int)(fixedScratch - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar3 = (uint)(int)fVar4;
+        fragAlphaFixed = (uint)(int)fragAlpha;
       }
-      fVar1 = fVar1 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar7 = (double)fVar1;
-      if (DOUBLE_97c30a78 <= dVar7) {
-        uVar5 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
+      alphaRef = alphaRef * FLOAT_97c3acbc + FLOAT_97c3acc0;
+      fixedScratch = (double)alphaRef;
+      if (DOUBLE_97c30a78 <= fixedScratch) {
+        alphaRefFixed = (int)(fixedScratch - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar5 = (uint)(int)fVar1;
+        alphaRefFixed = (uint)(int)alphaRef;
       }
-      bVar6 = uVar3 != uVar5;
+      passed = fragAlphaFixed != alphaRefFixed;
       break;
     case 6:
-      fVar4 = fVar4 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar7 = (double)fVar4;
-      if (DOUBLE_97c30a78 <= dVar7) {
-        uVar3 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
+      fragAlpha = fragAlpha * FLOAT_97c3acbc + FLOAT_97c3acc0;
+      fixedScratch = (double)fragAlpha;
+      if (DOUBLE_97c30a78 <= fixedScratch) {
+        fragAlphaFixed = (int)(fixedScratch - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar3 = (uint)(int)fVar4;
+        fragAlphaFixed = (uint)(int)fragAlpha;
       }
-      fVar1 = fVar1 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar7 = (double)fVar1;
-      if (DOUBLE_97c30a78 <= dVar7) {
-        uVar5 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
+      alphaRef = alphaRef * FLOAT_97c3acbc + FLOAT_97c3acc0;
+      fixedScratch = (double)alphaRef;
+      if (DOUBLE_97c30a78 <= fixedScratch) {
+        alphaRefFixed = (int)(fixedScratch - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar5 = (uint)(int)fVar1;
+        alphaRefFixed = (uint)(int)alphaRef;
       }
-      bVar6 = uVar5 <= uVar3;
+      passed = alphaRefFixed <= fragAlphaFixed;
       break;
     case 7:
       goto switchD_97bd6924_caseD_7;
     }
   }
-  return bVar6 ^ 1;
+  return passed ^ 1;
 }
 
 /* _InterpreterRasterOpMachine_Blending @ 0x97bd6e88 (1252 bytes) */
@@ -2448,392 +2449,401 @@ switchD_97bd72e8_default:
 }
 
 /* _InterpreterRasterOpMachine_LogicOp @ 0x97bd7394 (1208 bytes) */
-int _InterpreterRasterOpMachine_LogicOp(param_1, param_2, param_3, param_4)
-  int *param_1;
-  float *param_2;
-  float *param_3;
-  float *param_4;
+int _InterpreterRasterOpMachine_LogicOp(machine, srcColor, dstColor, outColor)
+  int *machine;
+  float *srcColor;
+  float *dstColor;
+  float *outColor;
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  uint uVar8;
-  uint uVar9;
-  uint uVar10;
-  uint uVar11;
-  uint uVar12;
-  uint uVar13;
+  float unpackedA;
+  float unpackedB;
+  float unpackedG;
+  float colorR;
+  float copiedAlpha;
+  uint resultPacked;
+  uint resultShiftedLane;
+  uint resultWord;
+  uint resultAlphaLane;
+  float colorG;
+  float colorB;
+  float colorA;
+  float fillValue;
+  uint dstRedByte;
+  uint logicOp;
+  uint packedSrcRG;
+  uint packedSrcRGB;
+  uint packedSrc;
+  uint srcRedByte;
+  uint packedDstRG;
+  uint packedDstRGB;
+  uint packedDst;
   
-  uVar6 = *(uint *)(*(int *)(*param_1 + 0xd80) + 0x68) & 0xf;
-  if ((uVar6 < 3) || (uVar6 == 4)) {
-    if (uVar6 == 1) {
-      fVar4 = 1.0;
+  logicOp = *(uint *)(*(int *)(*machine + 0xd80) + 0x68) & 0xf;
+  if ((logicOp < 3) || (logicOp == 4)) {
+    if (logicOp == 1) {
+      fillValue = 1.0;
     }
     else {
-      if (1 < uVar6) {
-        if (uVar6 == 2) {
-          *param_4 = *param_2;
-          param_4[1] = param_2[1];
-          param_4[2] = param_2[2];
-          fVar4 = param_2[3];
+      if (1 < logicOp) {
+        if (logicOp == 2) {
+          *outColor = *srcColor;
+          outColor[1] = srcColor[1];
+          outColor[2] = srcColor[2];
+          copiedAlpha = srcColor[3];
         }
         else {
-          if (uVar6 != 4) {
+          if (logicOp != 4) {
             return;
           }
-          *param_4 = *param_3;
-          param_4[1] = param_3[1];
-          param_4[2] = param_3[2];
-          fVar4 = param_3[3];
+          *outColor = *dstColor;
+          outColor[1] = dstColor[1];
+          outColor[2] = dstColor[2];
+          copiedAlpha = dstColor[3];
         }
-        param_4[3] = fVar4;
+        outColor[3] = copiedAlpha;
         return;
       }
-      fVar4 = 0.0;
-      if (uVar6 != 0) {
+      fillValue = 0.0;
+      if (logicOp != 0) {
         return;
       }
     }
-    param_4[3] = fVar4;
-    *param_4 = fVar4;
-    param_4[1] = fVar4;
-    param_4[2] = fVar4;
+    outColor[3] = fillValue;
+    *outColor = fillValue;
+    outColor[1] = fillValue;
+    outColor[2] = fillValue;
     return;
   }
-  if (uVar6 == 5) {
-    fVar4 = *param_3;
-    fVar1 = param_3[1];
-    fVar2 = param_3[2];
-    fVar3 = param_3[3];
+  if (logicOp == 5) {
+    colorR = *dstColor;
+    colorG = dstColor[1];
+    colorB = dstColor[2];
+    colorA = dstColor[3];
 LAB_97bd74b4:
-    uVar6 = ~(int)((double)fVar3 * DOUBLE_97c30a98) & 0xffU |
-            (~(int)((double)fVar2 * DOUBLE_97c30a98) & 0xffU) << 8 |
-            (~(int)((double)fVar1 * DOUBLE_97c30a98) & 0xffU) << 0x10 |
-            ~(int)((double)fVar4 * DOUBLE_97c30a98) << 0x18;
+    resultPacked = ~(int)((double)colorA * DOUBLE_97c30a98) & 0xffU |
+            (~(int)((double)colorB * DOUBLE_97c30a98) & 0xffU) << 8 |
+            (~(int)((double)colorG * DOUBLE_97c30a98) & 0xffU) << 0x10 |
+            ~(int)((double)colorR * DOUBLE_97c30a98) << 0x18;
     goto LAB_97bd77d8;
   }
-  if (uVar6 == 3) {
-    fVar4 = *param_2;
-    fVar1 = param_2[1];
-    fVar2 = param_2[2];
-    fVar3 = param_2[3];
+  if (logicOp == 3) {
+    colorR = *srcColor;
+    colorG = srcColor[1];
+    colorB = srcColor[2];
+    colorA = srcColor[3];
     goto LAB_97bd74b4;
   }
-  uVar10 = (uint)(int)((double)*param_2 * DOUBLE_97c30a98);
-  uVar5 = (uint)(int)((double)*param_3 * DOUBLE_97c30a98);
-  uVar7 = ((int)((double)param_2[1] * DOUBLE_97c30a98) & 0xffU) << 0x10 | uVar10 << 0x18;
-  uVar8 = ((int)((double)param_2[2] * DOUBLE_97c30a98) & 0xffU) << 8 | uVar7;
-  uVar11 = ((int)((double)param_3[1] * DOUBLE_97c30a98) & 0xffU) << 0x10 | uVar5 << 0x18;
-  uVar9 = (int)((double)param_2[3] * DOUBLE_97c30a98) & 0xffU | uVar8;
-  uVar12 = ((int)((double)param_3[2] * DOUBLE_97c30a98) & 0xffU) << 8 | uVar11;
-  uVar13 = (int)((double)param_3[3] * DOUBLE_97c30a98) & 0xffU | uVar12;
-  switch(uVar6) {
+  srcRedByte = (uint)(int)((double)*srcColor * DOUBLE_97c30a98);
+  dstRedByte = (uint)(int)((double)*dstColor * DOUBLE_97c30a98);
+  packedSrcRG = ((int)((double)srcColor[1] * DOUBLE_97c30a98) & 0xffU) << 0x10 | srcRedByte << 0x18;
+  packedSrcRGB = ((int)((double)srcColor[2] * DOUBLE_97c30a98) & 0xffU) << 8 | packedSrcRG;
+  packedDstRG = ((int)((double)dstColor[1] * DOUBLE_97c30a98) & 0xffU) << 0x10 | dstRedByte << 0x18;
+  packedSrc = (int)((double)srcColor[3] * DOUBLE_97c30a98) & 0xffU | packedSrcRGB;
+  packedDstRGB = ((int)((double)dstColor[2] * DOUBLE_97c30a98) & 0xffU) << 8 | packedDstRG;
+  packedDst = (int)((double)dstColor[3] * DOUBLE_97c30a98) & 0xffU | packedDstRGB;
+  switch(logicOp) {
   case 6:
-    uVar5 = uVar13 & uVar9;
-    uVar7 = uVar9 & uVar13;
-    uVar6 = uVar5 >> 8;
-    uVar10 = uVar5 >> 0x10;
+    resultWord = packedDst & packedSrc;
+    resultAlphaLane = packedSrc & packedDst;
+    resultPacked = resultWord >> 8;
+    resultShiftedLane = resultWord >> 0x10;
     goto LAB_97bd7670;
   case 7:
-    uVar6 = uVar13 & uVar9;
-    uVar7 = ~(uVar9 & uVar13);
-    uVar5 = uVar6 ^ 0xff000000;
-    uVar10 = ~(uVar6 >> 0x10);
-    uVar6 = ~(uVar6 >> 8);
+    resultPacked = packedDst & packedSrc;
+    resultAlphaLane = ~(packedSrc & packedDst);
+    resultWord = resultPacked ^ 0xff000000;
+    resultShiftedLane = ~(resultPacked >> 0x10);
+    resultPacked = ~(resultPacked >> 8);
 LAB_97bd7670:
-    uVar6 = (uVar6 & 0xff) << 8 | (uVar10 & 0xff) << 0x10 | uVar5 & 0xff000000;
+    resultPacked = (resultPacked & 0xff) << 8 | (resultShiftedLane & 0xff) << 0x10 | resultWord & 0xff000000;
     goto LAB_97bd770c;
   case 8:
-    uVar10 = uVar13 | uVar9;
-    uVar7 = uVar9 | uVar13;
-    uVar5 = uVar13 | uVar9;
+    resultShiftedLane = packedDst | packedSrc;
+    resultAlphaLane = packedSrc | packedDst;
+    resultWord = packedDst | packedSrc;
     goto LAB_97bd76cc;
   case 9:
-    uVar7 = ~(uVar9 | uVar13);
-    uVar5 = (uVar13 | uVar9) ^ 0xff000000;
-    uVar6 = ~((uVar13 | uVar9) >> 0x10);
-    uVar10 = ~((uVar13 | uVar9) >> 8);
+    resultAlphaLane = ~(packedSrc | packedDst);
+    resultWord = (packedDst | packedSrc) ^ 0xff000000;
+    resultPacked = ~((packedDst | packedSrc) >> 0x10);
+    resultShiftedLane = ~((packedDst | packedSrc) >> 8);
     goto LAB_97bd7700;
   case 10:
-    uVar10 = uVar13 ^ uVar9;
-    uVar7 = uVar9 ^ uVar13;
-    uVar5 = uVar13 ^ uVar9;
+    resultShiftedLane = packedDst ^ packedSrc;
+    resultAlphaLane = packedSrc ^ packedDst;
+    resultWord = packedDst ^ packedSrc;
 LAB_97bd76cc:
-    uVar6 = uVar10 >> 0x10;
-    uVar10 = uVar10 >> 8;
+    resultPacked = resultShiftedLane >> 0x10;
+    resultShiftedLane = resultShiftedLane >> 8;
     goto LAB_97bd7700;
   case 0xb:
-    uVar5 = uVar13 ^ uVar9 ^ 0xff000000;
-    uVar6 = ~((uVar13 ^ uVar9) >> 0x10);
-    uVar10 = ~((uVar13 ^ uVar9) >> 8);
-    uVar7 = ~(uVar9 ^ uVar13);
+    resultWord = packedDst ^ packedSrc ^ 0xff000000;
+    resultPacked = ~((packedDst ^ packedSrc) >> 0x10);
+    resultShiftedLane = ~((packedDst ^ packedSrc) >> 8);
+    resultAlphaLane = ~(packedSrc ^ packedDst);
 LAB_97bd7700:
-    uVar6 = (uVar10 & 0xff) << 8 | (uVar6 & 0xff) << 0x10 | uVar5 & 0xff000000;
+    resultPacked = (resultShiftedLane & 0xff) << 8 | (resultPacked & 0xff) << 0x10 | resultWord & 0xff000000;
 LAB_97bd770c:
-    uVar6 = uVar7 & 0xff | uVar6;
+    resultPacked = resultAlphaLane & 0xff | resultPacked;
     goto LAB_97bd77d8;
   case 0xc:
-    uVar7 = uVar7 >> 0x10 & ~(uVar11 >> 0x10);
-    uVar10 = uVar10 & 0xff & ~(uVar5 & 0xff);
-    uVar6 = uVar8 >> 8 & ~(uVar12 >> 8);
-    uVar13 = uVar9 & ~uVar13;
+    packedSrcRG = packedSrcRG >> 0x10 & ~(packedDstRG >> 0x10);
+    srcRedByte = srcRedByte & 0xff & ~(dstRedByte & 0xff);
+    resultPacked = packedSrcRGB >> 8 & ~(packedDstRGB >> 8);
+    packedDst = packedSrc & ~packedDst;
     break;
   case 0xd:
-    uVar7 = uVar11 >> 0x10 & ~(uVar7 >> 0x10);
-    uVar10 = uVar5 & 0xff & ~(uVar10 & 0xff);
-    uVar6 = uVar12 >> 8 & ~(uVar8 >> 8);
-    uVar13 = uVar13 & ~uVar9;
+    packedSrcRG = packedDstRG >> 0x10 & ~(packedSrcRG >> 0x10);
+    srcRedByte = dstRedByte & 0xff & ~(srcRedByte & 0xff);
+    resultPacked = packedDstRGB >> 8 & ~(packedSrcRGB >> 8);
+    packedDst = packedDst & ~packedSrc;
     break;
   case 0xe:
-    uVar7 = uVar7 >> 0x10 | ~(uVar11 >> 0x10);
-    uVar10 = uVar10 & 0xff | ~(uVar5 & 0xff);
-    uVar6 = uVar8 >> 8 | ~(uVar12 >> 8);
-    uVar13 = uVar9 | ~uVar13;
+    packedSrcRG = packedSrcRG >> 0x10 | ~(packedDstRG >> 0x10);
+    srcRedByte = srcRedByte & 0xff | ~(dstRedByte & 0xff);
+    resultPacked = packedSrcRGB >> 8 | ~(packedDstRGB >> 8);
+    packedDst = packedSrc | ~packedDst;
     break;
   case 0xf:
-    uVar7 = uVar11 >> 0x10 | ~(uVar7 >> 0x10);
-    uVar10 = uVar5 & 0xff | ~(uVar10 & 0xff);
-    uVar6 = uVar12 >> 8 | ~(uVar8 >> 8);
-    uVar13 = uVar13 | ~uVar9;
+    packedSrcRG = packedDstRG >> 0x10 | ~(packedSrcRG >> 0x10);
+    srcRedByte = dstRedByte & 0xff | ~(srcRedByte & 0xff);
+    resultPacked = packedDstRGB >> 8 | ~(packedSrcRGB >> 8);
+    packedDst = packedDst | ~packedSrc;
     break;
   default:
-    uVar6 = 0;
+    resultPacked = 0;
     goto LAB_97bd77d8;
   }
-  uVar6 = uVar13 & 0xff | (uVar6 & 0xff) << 8 | (uVar7 & 0xff) << 0x10 | uVar10 << 0x18;
+  resultPacked = packedDst & 0xff | (resultPacked & 0xff) << 8 | (packedSrcRG & 0xff) << 0x10 | srcRedByte << 0x18;
 LAB_97bd77d8:
-  fVar4 = (GH_U2F((unsigned int)((uVar6 & 0xff | 0x4b000000))) - 8388608.0) * FLOAT_97c3acc8;
-  fVar1 = (GH_U2F((unsigned int)((uVar6 >> 0x10 & 0xff | 0x4b000000))) - 8388608.0) * FLOAT_97c3acc8;
-  fVar2 = (GH_U2F((unsigned int)((uVar6 >> 8 & 0xff | 0x4b000000))) - 8388608.0) * FLOAT_97c3acc8;
-  *param_4 = (GH_U2F((unsigned int)((uVar6 >> 0x18 | 0x4b000000))) - 8388608.0) * FLOAT_97c3acc8;
-  param_4[3] = fVar4;
-  param_4[1] = fVar1;
-  param_4[2] = fVar2;
+  unpackedA = (GH_U2F((unsigned int)((resultPacked & 0xff | 0x4b000000))) - 8388608.0) * FLOAT_97c3acc8;
+  unpackedG = (GH_U2F((unsigned int)((resultPacked >> 0x10 & 0xff | 0x4b000000))) - 8388608.0) * FLOAT_97c3acc8;
+  unpackedB = (GH_U2F((unsigned int)((resultPacked >> 8 & 0xff | 0x4b000000))) - 8388608.0) * FLOAT_97c3acc8;
+  *outColor = (GH_U2F((unsigned int)((resultPacked >> 0x18 | 0x4b000000))) - 8388608.0) * FLOAT_97c3acc8;
+  outColor[3] = unpackedA;
+  outColor[1] = unpackedG;
+  outColor[2] = unpackedB;
   return;
 }
 
 /* _InterpreterRasterOpMachine_BufferMask @ 0x97bd7874 (128 bytes) */
-int _InterpreterRasterOpMachine_BufferMask(param_1, param_2, param_3, param_4)
-  int *param_1;
-  undefined4 *param_2;
-  undefined4 *param_3;
-  undefined4 *param_4;
+int _InterpreterRasterOpMachine_BufferMask(machine, newColor, oldColor, outColor)
+  int *machine;
+  undefined4 *newColor;
+  undefined4 *oldColor;
+  undefined4 *outColor;
 {
-  undefined4 uVar1;
-  uint uVar2;
+  undefined4 selectedChannel;
+  uint writeMaskWord;
   
-  uVar2 = *(uint *)(*(int *)(*param_1 + 0xd80) + 0x70);
-  if ((uVar2 & 0x20000) == 0) {
-    uVar1 = *param_3;
+  writeMaskWord = *(uint *)(*(int *)(*machine + 0xd80) + 0x70);
+  if ((writeMaskWord & 0x20000) == 0) {
+    selectedChannel = *oldColor;
   }
   else {
-    uVar1 = *param_2;
+    selectedChannel = *newColor;
   }
-  *param_4 = uVar1;
-  if ((uVar2 & 0x40000) == 0) {
-    uVar1 = param_3[1];
-  }
-  else {
-    uVar1 = param_2[1];
-  }
-  param_4[1] = uVar1;
-  if ((uVar2 & 0x80000) == 0) {
-    uVar1 = param_3[2];
+  *outColor = selectedChannel;
+  if ((writeMaskWord & 0x40000) == 0) {
+    selectedChannel = oldColor[1];
   }
   else {
-    uVar1 = param_2[2];
+    selectedChannel = newColor[1];
   }
-  param_4[2] = uVar1;
-  if ((uVar2 & 0x100000) == 0) {
-    uVar1 = param_3[3];
+  outColor[1] = selectedChannel;
+  if ((writeMaskWord & 0x80000) == 0) {
+    selectedChannel = oldColor[2];
   }
   else {
-    uVar1 = param_2[3];
+    selectedChannel = newColor[2];
   }
-  param_4[3] = uVar1;
+  outColor[2] = selectedChannel;
+  if ((writeMaskWord & 0x100000) == 0) {
+    selectedChannel = oldColor[3];
+  }
+  else {
+    selectedChannel = newColor[3];
+  }
+  outColor[3] = selectedChannel;
   return;
 }
 
 /* _InterpreterRasterOpMachineCalculateBlendingFactors @ 0x97bd78f4 (664 bytes) */
-int _InterpreterRasterOpMachineCalculateBlendingFactors(param_1, param_2, param_3, param_4, param_5)
-  undefined4 param_1;
-  float *param_2;
-  float *param_3;
-  float *param_4;
-  float *param_5;
+int _InterpreterRasterOpMachineCalculateBlendingFactors(factorMode, srcColor, dstColor, constantColor, factorOut)
+  undefined4 factorMode;
+  float *srcColor;
+  float *dstColor;
+  float *constantColor;
+  float *factorOut;
 {
-  double dVar1;
-  float fVar2;
-  double dVar3;
+  double oneConst;
+  float factorValue;
+  double alphaForComplement;
   
-  dVar1 = DOUBLE_97c30a60;
-  switch(param_1) {
+  oneConst = DOUBLE_97c30a60;
+  switch(factorMode) {
   case 0:
-    fVar2 = 0.0;
+    factorValue = 0.0;
     goto LAB_97bd7970;
   case 1:
-    fVar2 = 1.0;
+    factorValue = 1.0;
 LAB_97bd7970:
-    param_5[3] = fVar2;
-    *param_5 = fVar2;
-    param_5[1] = fVar2;
-    param_5[2] = fVar2;
+    factorOut[3] = factorValue;
+    *factorOut = factorValue;
+    factorOut[1] = factorValue;
+    factorOut[2] = factorValue;
     return;
   case 2:
-    *param_5 = *param_2;
-    param_5[1] = param_2[1];
-    fVar2 = param_2[2];
+    *factorOut = *srcColor;
+    factorOut[1] = srcColor[1];
+    factorValue = srcColor[2];
     break;
   case 3:
-    *param_5 = (float)(DOUBLE_97c30a60 - (double)*param_2);
-    param_5[1] = (float)(dVar1 - (double)param_2[1]);
-    fVar2 = param_2[2];
+    *factorOut = (float)(DOUBLE_97c30a60 - (double)*srcColor);
+    factorOut[1] = (float)(oneConst - (double)srcColor[1]);
+    factorValue = srcColor[2];
     goto LAB_97bd7a1c;
   case 4:
-    *param_5 = param_2[3];
-    param_5[1] = param_2[3];
-    fVar2 = param_2[3];
+    *factorOut = srcColor[3];
+    factorOut[1] = srcColor[3];
+    factorValue = srcColor[3];
     break;
   case 5:
-    *param_5 = (float)(DOUBLE_97c30a60 - (double)param_2[3]);
-    param_5[1] = (float)(dVar1 - (double)param_2[3]);
-    fVar2 = param_2[3];
+    *factorOut = (float)(DOUBLE_97c30a60 - (double)srcColor[3]);
+    factorOut[1] = (float)(oneConst - (double)srcColor[3]);
+    factorValue = srcColor[3];
 LAB_97bd7a1c:
-    param_5[2] = (float)(dVar1 - (double)fVar2);
-    dVar3 = (double)param_2[3];
+    factorOut[2] = (float)(oneConst - (double)factorValue);
+    alphaForComplement = (double)srcColor[3];
 LAB_97bd7a2c:
-    param_5[3] = (float)(dVar1 - dVar3);
+    factorOut[3] = (float)(oneConst - alphaForComplement);
     return;
   case 6:
-    *param_5 = param_3[3];
-    param_5[1] = param_3[3];
-    fVar2 = param_3[3];
+    *factorOut = dstColor[3];
+    factorOut[1] = dstColor[3];
+    factorValue = dstColor[3];
     goto LAB_97bd7b40;
   case 7:
-    *param_5 = (float)(DOUBLE_97c30a60 - (double)param_3[3]);
-    param_5[1] = (float)(dVar1 - (double)param_3[3]);
-    fVar2 = param_3[3];
+    *factorOut = (float)(DOUBLE_97c30a60 - (double)dstColor[3]);
+    factorOut[1] = (float)(oneConst - (double)dstColor[3]);
+    factorValue = dstColor[3];
     goto LAB_97bd7b78;
   case 8:
-    *param_5 = *param_4;
-    param_5[1] = param_4[1];
-    fVar2 = param_4[2];
+    *factorOut = *constantColor;
+    factorOut[1] = constantColor[1];
+    factorValue = constantColor[2];
     goto LAB_97bd7ae0;
   case 9:
-    *param_5 = (float)(DOUBLE_97c30a60 - (double)*param_4);
-    param_5[1] = (float)(dVar1 - (double)param_4[1]);
-    fVar2 = param_4[2];
+    *factorOut = (float)(DOUBLE_97c30a60 - (double)*constantColor);
+    factorOut[1] = (float)(oneConst - (double)constantColor[1]);
+    factorValue = constantColor[2];
     goto LAB_97bd7b18;
   case 10:
-    *param_5 = param_4[3];
-    param_5[1] = param_4[3];
-    fVar2 = param_4[3];
+    *factorOut = constantColor[3];
+    factorOut[1] = constantColor[3];
+    factorValue = constantColor[3];
 LAB_97bd7ae0:
-    param_5[2] = fVar2;
-    fVar2 = param_4[3];
+    factorOut[2] = factorValue;
+    factorValue = constantColor[3];
     goto LAB_97bd79e8;
   case 0xb:
-    *param_5 = (float)(DOUBLE_97c30a60 - (double)param_4[3]);
-    param_5[1] = (float)(dVar1 - (double)param_4[3]);
-    fVar2 = param_4[3];
+    *factorOut = (float)(DOUBLE_97c30a60 - (double)constantColor[3]);
+    factorOut[1] = (float)(oneConst - (double)constantColor[3]);
+    factorValue = constantColor[3];
 LAB_97bd7b18:
-    param_5[2] = (float)(dVar1 - (double)fVar2);
-    dVar3 = (double)param_4[3];
+    factorOut[2] = (float)(oneConst - (double)factorValue);
+    alphaForComplement = (double)constantColor[3];
     goto LAB_97bd7a2c;
   case 0xc:
-    *param_5 = *param_3;
-    param_5[1] = param_3[1];
-    fVar2 = param_3[2];
+    *factorOut = *dstColor;
+    factorOut[1] = dstColor[1];
+    factorValue = dstColor[2];
 LAB_97bd7b40:
-    param_5[2] = fVar2;
-    fVar2 = param_3[3];
+    factorOut[2] = factorValue;
+    factorValue = dstColor[3];
     goto LAB_97bd79e8;
   case 0xd:
-    *param_5 = (float)(DOUBLE_97c30a60 - (double)*param_3);
-    param_5[1] = (float)(dVar1 - (double)param_3[1]);
-    fVar2 = param_3[2];
+    *factorOut = (float)(DOUBLE_97c30a60 - (double)*dstColor);
+    factorOut[1] = (float)(oneConst - (double)dstColor[1]);
+    factorValue = dstColor[2];
 LAB_97bd7b78:
-    param_5[2] = (float)(dVar1 - (double)fVar2);
-    dVar3 = (double)param_3[3];
+    factorOut[2] = (float)(oneConst - (double)factorValue);
+    alphaForComplement = (double)dstColor[3];
     goto LAB_97bd7a2c;
   case 0xe:
-    fVar2 = (float)(DOUBLE_97c30a60 - (double)param_3[3]);
-    if (param_2[3] < (float)(DOUBLE_97c30a60 - (double)param_3[3])) {
-      fVar2 = param_2[3];
+    factorValue = (float)(DOUBLE_97c30a60 - (double)dstColor[3]);
+    if (srcColor[3] < (float)(DOUBLE_97c30a60 - (double)dstColor[3])) {
+      factorValue = srcColor[3];
     }
-    param_5[2] = fVar2;
-    param_5[3] = 1.0;
-    *param_5 = fVar2;
-    param_5[1] = fVar2;
+    factorOut[2] = factorValue;
+    factorOut[3] = 1.0;
+    *factorOut = factorValue;
+    factorOut[1] = factorValue;
     return;
   default:
     return;
   }
-  param_5[2] = fVar2;
-  fVar2 = param_2[3];
+  factorOut[2] = factorValue;
+  factorValue = srcColor[3];
 LAB_97bd79e8:
-  param_5[3] = fVar2;
+  factorOut[3] = factorValue;
   return;
 }
 
 /* _InterpreterRasterOpMachineUpdateStencilBuffer @ 0x97bd7bc8 (212 bytes) */
-int _InterpreterRasterOpMachineUpdateStencilBuffer(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  undefined4 param_2;
-  byte *param_3;
-  undefined4 param_4;
+int _InterpreterRasterOpMachineUpdateStencilBuffer(stencilOp, referenceValue, stencilPtr, writeMask)
+  undefined4 stencilOp;
+  undefined4 referenceValue;
+  byte *stencilPtr;
+  undefined4 writeMask;
 {
-  byte bVar1;
-  byte bVar2;
+  byte wrappedValue;
+  byte newValue;
   
-  switch(param_1) {
+  switch(stencilOp) {
   case 0:
-    bVar2 = *param_3 & ~(byte)param_4;
+    newValue = *stencilPtr & ~(byte)writeMask;
     goto LAB_97bd7c38;
   case 1:
     return;
   case 2:
-    bVar2 = *param_3 & ~(byte)param_4;
+    newValue = *stencilPtr & ~(byte)writeMask;
     goto LAB_97bd7c34;
   case 3:
-    bVar2 = *param_3;
-    (*(unsigned char *)((unsigned char *)&(param_2) + 3)) = 0xff;
-    if (bVar2 != 0xff) {
-      (*(unsigned char *)((unsigned char *)&(param_2) + 3)) = bVar2 + 1;
+    newValue = *stencilPtr;
+    (*(unsigned char *)((unsigned char *)&(referenceValue) + 3)) = 0xff;
+    if (newValue != 0xff) {
+      (*(unsigned char *)((unsigned char *)&(referenceValue) + 3)) = newValue + 1;
     }
     break;
   case 4:
-    bVar2 = *param_3;
-    (*(unsigned char *)((unsigned char *)&(param_2) + 3)) = 0;
-    if (bVar2 != 0) {
-      (*(unsigned char *)((unsigned char *)&(param_2) + 3)) = bVar2 - 1;
+    newValue = *stencilPtr;
+    (*(unsigned char *)((unsigned char *)&(referenceValue) + 3)) = 0;
+    if (newValue != 0) {
+      (*(unsigned char *)((unsigned char *)&(referenceValue) + 3)) = newValue - 1;
     }
     break;
   case 5:
-    *param_3 = *param_3 & ~(byte)param_4 | (byte)param_4 & ~*param_3;
+    *stencilPtr = *stencilPtr & ~(byte)writeMask | (byte)writeMask & ~*stencilPtr;
     return;
   case 6:
-    bVar2 = *param_3;
-    bVar1 = bVar2 + 1;
+    newValue = *stencilPtr;
+    wrappedValue = newValue + 1;
     goto LAB_97bd7c90;
   case 7:
-    bVar2 = *param_3;
-    bVar1 = bVar2 - 1;
+    newValue = *stencilPtr;
+    wrappedValue = newValue - 1;
 LAB_97bd7c90:
-    *param_3 = bVar2 & ~(byte)param_4 | bVar1 & (byte)param_4;
+    *stencilPtr = newValue & ~(byte)writeMask | wrappedValue & (byte)writeMask;
     return;
   default:
     return;
   }
-  bVar2 = bVar2 & ~(byte)param_4;
+  newValue = newValue & ~(byte)writeMask;
 LAB_97bd7c34:
-  bVar2 = bVar2 | (byte)param_2 & (byte)param_4;
+  newValue = newValue | (byte)referenceValue & (byte)writeMask;
 LAB_97bd7c38:
-  *param_3 = bVar2;
+  *stencilPtr = newValue;
   return;
 }
 

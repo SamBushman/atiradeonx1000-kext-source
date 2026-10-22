@@ -1,0 +1,197 @@
+local	_InterpreterRasterOpMachine_LogicOp	param_1	machine	CONFIRMED	raster-op machine: *machine+0xd80 is the state block whose word +0x68 holds the logic op (low 4 bits)
+local	_InterpreterRasterOpMachine_LogicOp	param_2	srcColor	CONFIRMED	incoming (source) fragment colour, float[4] RGBA
+local	_InterpreterRasterOpMachine_LogicOp	param_3	dstColor	CONFIRMED	framebuffer (destination) colour, float[4] RGBA
+local	_InterpreterRasterOpMachine_LogicOp	param_4	outColor	CONFIRMED	result colour, float[4] RGBA
+local	_InterpreterRasterOpMachine_LogicOp	uVar9	packedSrc	INFERRED	source colour packed as bytes R<<24|G<<16|B<<8|A (component*255 truncated)
+local	_InterpreterRasterOpMachine_LogicOp	uVar13	packedDst	INFERRED	destination colour packed the same way
+local	_InterpreterRasterOpMachine_LogicOp	uVar8	packedSrcRGB	INFERRED	partial packing of the source: R,G,B bytes before A is OR-ed in
+local	_InterpreterRasterOpMachine_LogicOp	uVar12	packedDstRGB	INFERRED	partial packing of the destination: R,G,B bytes
+local	_InterpreterRasterOpMachine_LogicOp	uVar11	packedDstRG	INFERRED	partial packing of the destination: R,G bytes
+local	_InterpreterRasterOpMachine_LogicOp	fVar3	colorA	INFERRED	alpha of the operand being inverted
+use	_InterpreterRasterOpMachine_LogicOp	uVar7	packedSrcRG	INFERRED	partial packing of the source: R,G bytes	^\s*uVar7\ =\ \(\(int\)\(\(double\)param_2\[1\]\ \*\ DOUBLE_97c30a98\)\ \&\ 0xffU\)\ <<\ 0x10\ \|\ uVar10\ <<\ 0x18;$	+2
+use	_InterpreterRasterOpMachine_LogicOp	uVar7	packedSrcRG	INFERRED	partial packing of the source: R,G bytes	^\s*uVar7\ =\ uVar7\ >>\ 0x10\ \&\ \~\(uVar11\ >>\ 0x10\);$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar7	packedSrcRG	INFERRED	partial packing of the source: R,G bytes	^\s*uVar7\ =\ uVar11\ >>\ 0x10\ \&\ \~\(uVar7\ >>\ 0x10\);$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar7	packedSrcRG	INFERRED	partial packing of the source: R,G bytes	^\s*uVar7\ =\ uVar7\ >>\ 0x10\ \|\ \~\(uVar11\ >>\ 0x10\);$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar7	packedSrcRG	INFERRED	partial packing of the source: R,G bytes	^\s*uVar7\ =\ uVar11\ >>\ 0x10\ \|\ \~\(uVar7\ >>\ 0x10\);$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar7	packedSrcRG	INFERRED	partial packing of the source: R,G bytes	^\s*uVar6\ =\ uVar13\ \&\ 0xff\ \|\ \(uVar6\ \&\ 0xff\)\ <<\ 8\ \|\ \(uVar7\ \&\ 0xff\)\ <<\ 0x10\ \|\ uVar10\ <<\ 0x18;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar7	resultAlphaLane	INFERRED	logic-op result word whose low byte is the alpha result	^\s*uVar7\ =\ uVar9\ \&\ uVar13;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar7	resultAlphaLane	INFERRED	logic-op result word whose low byte is the alpha result	^\s*uVar7\ =\ \~\(uVar9\ \&\ uVar13\);$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar7	resultAlphaLane	INFERRED	logic-op result word whose low byte is the alpha result	^\s*uVar7\ =\ uVar9\ \|\ uVar13;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar7	resultAlphaLane	INFERRED	logic-op result word whose low byte is the alpha result	^\s*uVar7\ =\ \~\(uVar9\ \|\ uVar13\);$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar7	resultAlphaLane	INFERRED	logic-op result word whose low byte is the alpha result	^\s*uVar7\ =\ uVar9\ \^\ uVar13;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar7	resultAlphaLane	INFERRED	logic-op result word whose low byte is the alpha result	^\s*uVar7\ =\ \~\(uVar9\ \^\ uVar13\);$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar7	resultAlphaLane	INFERRED	logic-op result word whose low byte is the alpha result	^\s*uVar6\ =\ uVar7\ \&\ 0xff\ \|\ uVar6;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar10	srcRedByte	INFERRED	source red scaled to 0..255	^\s*uVar10\ =\ \(uint\)\(int\)\(\(double\)\*param_2\ \*\ DOUBLE_97c30a98\);$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar10	srcRedByte	INFERRED	source red scaled to 0..255	^\s*uVar7\ =\ \(\(int\)\(\(double\)param_2\[1\]\ \*\ DOUBLE_97c30a98\)\ \&\ 0xffU\)\ <<\ 0x10\ \|\ uVar10\ <<\ 0x18;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar10	srcRedByte	INFERRED	source red scaled to 0..255	^\s*uVar10\ =\ uVar10\ \&\ 0xff\ \&\ \~\(uVar5\ \&\ 0xff\);$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar10	srcRedByte	INFERRED	source red scaled to 0..255	^\s*uVar10\ =\ uVar5\ \&\ 0xff\ \&\ \~\(uVar10\ \&\ 0xff\);$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar10	srcRedByte	INFERRED	source red scaled to 0..255	^\s*uVar10\ =\ uVar10\ \&\ 0xff\ \|\ \~\(uVar5\ \&\ 0xff\);$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar10	srcRedByte	INFERRED	source red scaled to 0..255	^\s*uVar10\ =\ uVar5\ \&\ 0xff\ \|\ \~\(uVar10\ \&\ 0xff\);$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar10	srcRedByte	INFERRED	source red scaled to 0..255	^\s*uVar6\ =\ uVar13\ \&\ 0xff\ \|\ \(uVar6\ \&\ 0xff\)\ <<\ 8\ \|\ \(uVar7\ \&\ 0xff\)\ <<\ 0x10\ \|\ uVar10\ <<\ 0x18;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar5	dstRedByte	INFERRED	destination red scaled to 0..255	^\s*uVar5\ =\ \(uint\)\(int\)\(\(double\)\*param_3\ \*\ DOUBLE_97c30a98\);$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar5	dstRedByte	INFERRED	destination red scaled to 0..255	^\s*uVar11\ =\ \(\(int\)\(\(double\)param_3\[1\]\ \*\ DOUBLE_97c30a98\)\ \&\ 0xffU\)\ <<\ 0x10\ \|\ uVar5\ <<\ 0x18;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar5	dstRedByte	INFERRED	destination red scaled to 0..255	^\s*uVar10\ =\ uVar10\ \&\ 0xff\ \&\ \~\(uVar5\ \&\ 0xff\);$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar5	dstRedByte	INFERRED	destination red scaled to 0..255	^\s*uVar10\ =\ uVar5\ \&\ 0xff\ \&\ \~\(uVar10\ \&\ 0xff\);$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar5	dstRedByte	INFERRED	destination red scaled to 0..255	^\s*uVar10\ =\ uVar10\ \&\ 0xff\ \|\ \~\(uVar5\ \&\ 0xff\);$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar5	dstRedByte	INFERRED	destination red scaled to 0..255	^\s*uVar10\ =\ uVar5\ \&\ 0xff\ \|\ \~\(uVar10\ \&\ 0xff\);$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar5	resultWord	INFERRED	logic-op result of packedSrc and packedDst (AND/OR/XOR ... or their complements)	^\s*uVar5\ =\ uVar13\ \&\ uVar9;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar5	resultWord	INFERRED	logic-op result of packedSrc and packedDst (AND/OR/XOR ... or their complements)	^\s*uVar6\ =\ uVar5\ >>\ 8;$	+2
+use	_InterpreterRasterOpMachine_LogicOp	uVar5	resultWord	INFERRED	logic-op result of packedSrc and packedDst (AND/OR/XOR ... or their complements)	^\s*uVar5\ =\ uVar6\ \^\ 0xff000000;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar5	resultWord	INFERRED	logic-op result of packedSrc and packedDst (AND/OR/XOR ... or their complements)	^\s*uVar6\ =\ \(uVar6\ \&\ 0xff\)\ <<\ 8\ \|\ \(uVar10\ \&\ 0xff\)\ <<\ 0x10\ \|\ uVar5\ \&\ 0xff000000;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar5	resultWord	INFERRED	logic-op result of packedSrc and packedDst (AND/OR/XOR ... or their complements)	^\s*uVar5\ =\ uVar13\ \|\ uVar9;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar5	resultWord	INFERRED	logic-op result of packedSrc and packedDst (AND/OR/XOR ... or their complements)	^\s*uVar5\ =\ \(uVar13\ \|\ uVar9\)\ \^\ 0xff000000;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar5	resultWord	INFERRED	logic-op result of packedSrc and packedDst (AND/OR/XOR ... or their complements)	^\s*uVar5\ =\ uVar13\ \^\ uVar9;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar5	resultWord	INFERRED	logic-op result of packedSrc and packedDst (AND/OR/XOR ... or their complements)	^\s*uVar5\ =\ uVar13\ \^\ uVar9\ \^\ 0xff000000;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar5	resultWord	INFERRED	logic-op result of packedSrc and packedDst (AND/OR/XOR ... or their complements)	^\s*uVar6\ =\ \(uVar10\ \&\ 0xff\)\ <<\ 8\ \|\ \(uVar6\ \&\ 0xff\)\ <<\ 0x10\ \|\ uVar5\ \&\ 0xff000000;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar10	resultShiftedLane	INFERRED	result word shifted to bring the green or blue lane to the low byte	^\s*uVar10\ =\ uVar5\ >>\ 0x10;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar10	resultShiftedLane	INFERRED	result word shifted to bring the green or blue lane to the low byte	^\s*uVar10\ =\ \~\(uVar6\ >>\ 0x10\);$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar10	resultShiftedLane	INFERRED	result word shifted to bring the green or blue lane to the low byte	^\s*uVar6\ =\ \(uVar6\ \&\ 0xff\)\ <<\ 8\ \|\ \(uVar10\ \&\ 0xff\)\ <<\ 0x10\ \|\ uVar5\ \&\ 0xff000000;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar10	resultShiftedLane	INFERRED	result word shifted to bring the green or blue lane to the low byte	^\s*uVar10\ =\ uVar13\ \|\ uVar9;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar10	resultShiftedLane	INFERRED	result word shifted to bring the green or blue lane to the low byte	^\s*uVar10\ =\ \~\(\(uVar13\ \|\ uVar9\)\ >>\ 8\);$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar10	resultShiftedLane	INFERRED	result word shifted to bring the green or blue lane to the low byte	^\s*uVar10\ =\ uVar13\ \^\ uVar9;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar10	resultShiftedLane	INFERRED	result word shifted to bring the green or blue lane to the low byte	^\s*uVar6\ =\ uVar10\ >>\ 0x10;$	+2
+use	_InterpreterRasterOpMachine_LogicOp	uVar10	resultShiftedLane	INFERRED	result word shifted to bring the green or blue lane to the low byte	^\s*uVar10\ =\ \~\(\(uVar13\ \^\ uVar9\)\ >>\ 8\);$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar10	resultShiftedLane	INFERRED	result word shifted to bring the green or blue lane to the low byte	^\s*uVar6\ =\ \(uVar10\ \&\ 0xff\)\ <<\ 8\ \|\ \(uVar6\ \&\ 0xff\)\ <<\ 0x10\ \|\ uVar5\ \&\ 0xff000000;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar6	logicOp	CONFIRMED	state+0x68 & 0xf: 0 CLEAR, 1 SET, 2 COPY, 3 COPY_INVERTED, 4 NOOP, 5 INVERT, 6 AND, 7 NAND, 8 OR, 9 NOR, 10 XOR, 11 EQUIV, 12 AND_REVERSE, 13 AND_INVERTED, 14 OR_REVERSE, 15 OR_INVERTED (the switch cases implement exactly these)	^\s*uVar6\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)\(\*param_1\ \+\ 0xd80\)\ \+\ 0x68\)\ \&\ 0xf;$	+3
+use	_InterpreterRasterOpMachine_LogicOp	uVar6	logicOp	CONFIRMED	state+0x68 & 0xf: 0 CLEAR, 1 SET, 2 COPY, 3 COPY_INVERTED, 4 NOOP, 5 INVERT, 6 AND, 7 NAND, 8 OR, 9 NOR, 10 XOR, 11 EQUIV, 12 AND_REVERSE, 13 AND_INVERTED, 14 OR_REVERSE, 15 OR_INVERTED (the switch cases implement exactly these)	^\s*if\ \(1\ <\ uVar6\)\ \{$	+2
+use	_InterpreterRasterOpMachine_LogicOp	uVar6	logicOp	CONFIRMED	state+0x68 & 0xf: 0 CLEAR, 1 SET, 2 COPY, 3 COPY_INVERTED, 4 NOOP, 5 INVERT, 6 AND, 7 NAND, 8 OR, 9 NOR, 10 XOR, 11 EQUIV, 12 AND_REVERSE, 13 AND_INVERTED, 14 OR_REVERSE, 15 OR_INVERTED (the switch cases implement exactly these)	^\s*if\ \(uVar6\ !=\ 4\)\ \{$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar6	logicOp	CONFIRMED	state+0x68 & 0xf: 0 CLEAR, 1 SET, 2 COPY, 3 COPY_INVERTED, 4 NOOP, 5 INVERT, 6 AND, 7 NAND, 8 OR, 9 NOR, 10 XOR, 11 EQUIV, 12 AND_REVERSE, 13 AND_INVERTED, 14 OR_REVERSE, 15 OR_INVERTED (the switch cases implement exactly these)	^\s*if\ \(uVar6\ !=\ 0\)\ \{$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar6	logicOp	CONFIRMED	state+0x68 & 0xf: 0 CLEAR, 1 SET, 2 COPY, 3 COPY_INVERTED, 4 NOOP, 5 INVERT, 6 AND, 7 NAND, 8 OR, 9 NOR, 10 XOR, 11 EQUIV, 12 AND_REVERSE, 13 AND_INVERTED, 14 OR_REVERSE, 15 OR_INVERTED (the switch cases implement exactly these)	^\s*if\ \(uVar6\ ==\ 5\)\ \{$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar6	logicOp	CONFIRMED	state+0x68 & 0xf: 0 CLEAR, 1 SET, 2 COPY, 3 COPY_INVERTED, 4 NOOP, 5 INVERT, 6 AND, 7 NAND, 8 OR, 9 NOR, 10 XOR, 11 EQUIV, 12 AND_REVERSE, 13 AND_INVERTED, 14 OR_REVERSE, 15 OR_INVERTED (the switch cases implement exactly these)	^\s*if\ \(uVar6\ ==\ 3\)\ \{$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar6	logicOp	CONFIRMED	state+0x68 & 0xf: 0 CLEAR, 1 SET, 2 COPY, 3 COPY_INVERTED, 4 NOOP, 5 INVERT, 6 AND, 7 NAND, 8 OR, 9 NOR, 10 XOR, 11 EQUIV, 12 AND_REVERSE, 13 AND_INVERTED, 14 OR_REVERSE, 15 OR_INVERTED (the switch cases implement exactly these)	^\s*switch\(uVar6\)\ \{$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar6	resultPacked	INFERRED	packed RGBA result (also used as scratch for shifted lanes while it is assembled)	^\s*uVar6\ =\ \~\(int\)\(\(double\)fVar3\ \*\ DOUBLE_97c30a98\)\ \&\ 0xffU\ \|$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar6	resultPacked	INFERRED	packed RGBA result (also used as scratch for shifted lanes while it is assembled)	^\s*uVar6\ =\ uVar5\ >>\ 8;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar6	resultPacked	INFERRED	packed RGBA result (also used as scratch for shifted lanes while it is assembled)	^\s*uVar6\ =\ uVar13\ \&\ uVar9;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar6	resultPacked	INFERRED	packed RGBA result (also used as scratch for shifted lanes while it is assembled)	^\s*uVar5\ =\ uVar6\ \^\ 0xff000000;$	+3
+use	_InterpreterRasterOpMachine_LogicOp	uVar6	resultPacked	INFERRED	packed RGBA result (also used as scratch for shifted lanes while it is assembled)	^\s*uVar6\ =\ \(uVar6\ \&\ 0xff\)\ <<\ 8\ \|\ \(uVar10\ \&\ 0xff\)\ <<\ 0x10\ \|\ uVar5\ \&\ 0xff000000;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar6	resultPacked	INFERRED	packed RGBA result (also used as scratch for shifted lanes while it is assembled)	^\s*uVar6\ =\ \~\(\(uVar13\ \|\ uVar9\)\ >>\ 0x10\);$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar6	resultPacked	INFERRED	packed RGBA result (also used as scratch for shifted lanes while it is assembled)	^\s*uVar6\ =\ uVar10\ >>\ 0x10;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar6	resultPacked	INFERRED	packed RGBA result (also used as scratch for shifted lanes while it is assembled)	^\s*uVar6\ =\ \~\(\(uVar13\ \^\ uVar9\)\ >>\ 0x10\);$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar6	resultPacked	INFERRED	packed RGBA result (also used as scratch for shifted lanes while it is assembled)	^\s*uVar6\ =\ \(uVar10\ \&\ 0xff\)\ <<\ 8\ \|\ \(uVar6\ \&\ 0xff\)\ <<\ 0x10\ \|\ uVar5\ \&\ 0xff000000;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar6	resultPacked	INFERRED	packed RGBA result (also used as scratch for shifted lanes while it is assembled)	^\s*uVar6\ =\ uVar7\ \&\ 0xff\ \|\ uVar6;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar6	resultPacked	INFERRED	packed RGBA result (also used as scratch for shifted lanes while it is assembled)	^\s*uVar6\ =\ uVar8\ >>\ 8\ \&\ \~\(uVar12\ >>\ 8\);$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar6	resultPacked	INFERRED	packed RGBA result (also used as scratch for shifted lanes while it is assembled)	^\s*uVar6\ =\ uVar12\ >>\ 8\ \&\ \~\(uVar8\ >>\ 8\);$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar6	resultPacked	INFERRED	packed RGBA result (also used as scratch for shifted lanes while it is assembled)	^\s*uVar6\ =\ uVar8\ >>\ 8\ \|\ \~\(uVar12\ >>\ 8\);$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar6	resultPacked	INFERRED	packed RGBA result (also used as scratch for shifted lanes while it is assembled)	^\s*uVar6\ =\ uVar12\ >>\ 8\ \|\ \~\(uVar8\ >>\ 8\);$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar6	resultPacked	INFERRED	packed RGBA result (also used as scratch for shifted lanes while it is assembled)	^\s*uVar6\ =\ 0;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar6	resultPacked	INFERRED	packed RGBA result (also used as scratch for shifted lanes while it is assembled)	^\s*uVar6\ =\ uVar13\ \&\ 0xff\ \|\ \(uVar6\ \&\ 0xff\)\ <<\ 8\ \|\ \(uVar7\ \&\ 0xff\)\ <<\ 0x10\ \|\ uVar10\ <<\ 0x18;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	uVar6	resultPacked	INFERRED	packed RGBA result (also used as scratch for shifted lanes while it is assembled)	^\s*fVar4\ =\ \(GH_U2F\(\(unsigned\ int\)\(\(uVar6\ \&\ 0xff\ \|\ 0x4b000000\)\)\)\ \-\ 8388608\.0\)\ \*\ FLOAT_97c3acc8;$	+4
+use	_InterpreterRasterOpMachine_LogicOp	fVar1	colorG	INFERRED	green of the operand being inverted (dst for INVERT, src for COPY_INVERTED)	^\s*fVar1\ =\ param_3\[1\];$	+1
+use	_InterpreterRasterOpMachine_LogicOp	fVar1	colorG	INFERRED	green of the operand being inverted (dst for INVERT, src for COPY_INVERTED)	^\s*\(\~\(int\)\(\(double\)fVar1\ \*\ DOUBLE_97c30a98\)\ \&\ 0xffU\)\ <<\ 0x10\ \|$	+1
+use	_InterpreterRasterOpMachine_LogicOp	fVar1	colorG	INFERRED	green of the operand being inverted (dst for INVERT, src for COPY_INVERTED)	^\s*fVar1\ =\ param_2\[1\];$	+1
+use	_InterpreterRasterOpMachine_LogicOp	fVar2	colorB	INFERRED	blue of the operand being inverted	^\s*fVar2\ =\ param_3\[2\];$	+1
+use	_InterpreterRasterOpMachine_LogicOp	fVar2	colorB	INFERRED	blue of the operand being inverted	^\s*\(\~\(int\)\(\(double\)fVar2\ \*\ DOUBLE_97c30a98\)\ \&\ 0xffU\)\ <<\ 8\ \|$	+1
+use	_InterpreterRasterOpMachine_LogicOp	fVar2	colorB	INFERRED	blue of the operand being inverted	^\s*fVar2\ =\ param_2\[2\];$	+1
+use	_InterpreterRasterOpMachine_LogicOp	fVar4	fillValue	INFERRED	0.0 (CLEAR) or 1.0 (SET) written to all four components	^\s*fVar4\ =\ 1\.0;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	fVar4	fillValue	INFERRED	0.0 (CLEAR) or 1.0 (SET) written to all four components	^\s*fVar4\ =\ 0\.0;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	fVar4	fillValue	INFERRED	0.0 (CLEAR) or 1.0 (SET) written to all four components	^\s*param_4\[3\]\ =\ fVar4;$@2	+4
+use	_InterpreterRasterOpMachine_LogicOp	fVar4	copiedAlpha	INFERRED	alpha of the operand copied by COPY / NOOP	^\s*fVar4\ =\ param_2\[3\];$	+1
+use	_InterpreterRasterOpMachine_LogicOp	fVar4	copiedAlpha	INFERRED	alpha of the operand copied by COPY / NOOP	^\s*fVar4\ =\ param_3\[3\];$	+1
+use	_InterpreterRasterOpMachine_LogicOp	fVar4	copiedAlpha	INFERRED	alpha of the operand copied by COPY / NOOP	^\s*param_4\[3\]\ =\ fVar4;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	fVar4	colorR	INFERRED	red of the operand being inverted	^\s*fVar4\ =\ \*param_3;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	fVar4	colorR	INFERRED	red of the operand being inverted	^\s*\~\(int\)\(\(double\)fVar4\ \*\ DOUBLE_97c30a98\)\ <<\ 0x18;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	fVar4	colorR	INFERRED	red of the operand being inverted	^\s*fVar4\ =\ \*param_2;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	fVar1	unpackedG	INFERRED	green byte of the result converted back to float (x/255)	^\s*fVar1\ =\ \(GH_U2F\(\(unsigned\ int\)\(\(uVar6\ >>\ 0x10\ \&\ 0xff\ \|\ 0x4b000000\)\)\)\ \-\ 8388608\.0\)\ \*\ FLOAT_97c3acc8;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	fVar1	unpackedG	INFERRED	green byte of the result converted back to float (x/255)	^\s*param_4\[1\]\ =\ fVar1;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	fVar2	unpackedB	INFERRED	blue byte of the result converted back to float	^\s*fVar2\ =\ \(GH_U2F\(\(unsigned\ int\)\(\(uVar6\ >>\ 8\ \&\ 0xff\ \|\ 0x4b000000\)\)\)\ \-\ 8388608\.0\)\ \*\ FLOAT_97c3acc8;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	fVar2	unpackedB	INFERRED	blue byte of the result converted back to float	^\s*param_4\[2\]\ =\ fVar2;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	fVar4	unpackedA	INFERRED	alpha byte of the result converted back to float	^\s*fVar4\ =\ \(GH_U2F\(\(unsigned\ int\)\(\(uVar6\ \&\ 0xff\ \|\ 0x4b000000\)\)\)\ \-\ 8388608\.0\)\ \*\ FLOAT_97c3acc8;$	+1
+use	_InterpreterRasterOpMachine_LogicOp	fVar4	unpackedA	INFERRED	alpha byte of the result converted back to float	^\s*param_4\[3\]\ =\ fVar4;$@3	+1
+local	_InterpreterRasterOpMachine_AlphaTest	param_1	machine	CONFIRMED	raster-op machine: *machine+0xd80 is the state block (alpha function at +0x40, reference at +0x44)
+local	_InterpreterRasterOpMachine_AlphaTest	param_2	fragment	CONFIRMED	fragment record whose float at +0xc is the colour alpha tested
+local	_InterpreterRasterOpMachine_AlphaTest	iVar2	state	CONFIRMED	*(*machine+0xd80): raster state block
+local	_InterpreterRasterOpMachine_AlphaTest	fVar1	alphaRef	INFERRED	alpha reference value state+0x44 (clamped to 0..1 and scaled to fixed point when the framebuffer format needs it)
+local	_InterpreterRasterOpMachine_AlphaTest	fVar4	fragAlpha	INFERRED	fragment alpha (clamped to 0..1 and scaled to fixed point when the framebuffer format needs it)
+local	_InterpreterRasterOpMachine_AlphaTest	bVar6	passed	INFERRED	result of the alpha comparison; the function returns passed ^ 1 (non-zero = the fragment is rejected)
+use	_InterpreterRasterOpMachine_AlphaTest	uVar5	alphaFunc	CONFIRMED	state+0x40 & 7: 0 NEVER, 1 LESS, 2 EQUAL, 3 LEQUAL, 4 GREATER, 5 NOTEQUAL, 6 GEQUAL, 7 ALWAYS (GL_NEVER..GL_ALWAYS minus 0x200)	^\s*uVar5\ =\ \*\(uint\ \*\)\(iVar2\ \+\ 0x40\);$	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar5	alphaFunc	CONFIRMED	state+0x40 & 7: 0 NEVER, 1 LESS, 2 EQUAL, 3 LEQUAL, 4 GREATER, 5 NOTEQUAL, 6 GEQUAL, 7 ALWAYS (GL_NEVER..GL_ALWAYS minus 0x200)	^\s*switch\(uVar5\ \&\ 7\)\ \{$	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar5	alphaFunc	CONFIRMED	state+0x40 & 7: 0 NEVER, 1 LESS, 2 EQUAL, 3 LEQUAL, 4 GREATER, 5 NOTEQUAL, 6 GEQUAL, 7 ALWAYS (GL_NEVER..GL_ALWAYS minus 0x200)	^\s*switch\(uVar5\ \&\ 7\)\ \{$@2	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar5	alphaRefFixed	INFERRED	alpha reference converted to the framebuffer's fixed-point range	^\s*uVar5\ =\ \(int\)\(dVar7\ \-\ DOUBLE_97c30a78\)\ \^\ 0x80000000;$	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar5	alphaRefFixed	INFERRED	alpha reference converted to the framebuffer's fixed-point range	^\s*uVar5\ =\ \(uint\)\(int\)fVar1;$	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar5	alphaRefFixed	INFERRED	alpha reference converted to the framebuffer's fixed-point range	^\s*bVar6\ =\ uVar3\ <\ uVar5;$	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar5	alphaRefFixed	INFERRED	alpha reference converted to the framebuffer's fixed-point range	^\s*uVar5\ =\ \(int\)\(dVar7\ \-\ DOUBLE_97c30a78\)\ \^\ 0x80000000;$@2	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar5	alphaRefFixed	INFERRED	alpha reference converted to the framebuffer's fixed-point range	^\s*uVar5\ =\ \(uint\)\(int\)fVar1;$@2	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar5	alphaRefFixed	INFERRED	alpha reference converted to the framebuffer's fixed-point range	^\s*bVar6\ =\ uVar3\ ==\ uVar5;$	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar5	alphaRefFixed	INFERRED	alpha reference converted to the framebuffer's fixed-point range	^\s*uVar5\ =\ \(int\)\(dVar7\ \-\ DOUBLE_97c30a78\)\ \^\ 0x80000000;$@3	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar5	alphaRefFixed	INFERRED	alpha reference converted to the framebuffer's fixed-point range	^\s*uVar5\ =\ \(uint\)\(int\)fVar1;$@3	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar5	alphaRefFixed	INFERRED	alpha reference converted to the framebuffer's fixed-point range	^\s*bVar6\ =\ uVar3\ <=\ uVar5;$	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar5	alphaRefFixed	INFERRED	alpha reference converted to the framebuffer's fixed-point range	^\s*uVar5\ =\ \(int\)\(dVar7\ \-\ DOUBLE_97c30a78\)\ \^\ 0x80000000;$@4	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar5	alphaRefFixed	INFERRED	alpha reference converted to the framebuffer's fixed-point range	^\s*uVar5\ =\ \(uint\)\(int\)fVar1;$@4	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar5	alphaRefFixed	INFERRED	alpha reference converted to the framebuffer's fixed-point range	^\s*bVar6\ =\ uVar5\ <\ uVar3;$	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar5	alphaRefFixed	INFERRED	alpha reference converted to the framebuffer's fixed-point range	^\s*uVar5\ =\ \(int\)\(dVar7\ \-\ DOUBLE_97c30a78\)\ \^\ 0x80000000;$@5	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar5	alphaRefFixed	INFERRED	alpha reference converted to the framebuffer's fixed-point range	^\s*uVar5\ =\ \(uint\)\(int\)fVar1;$@5	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar5	alphaRefFixed	INFERRED	alpha reference converted to the framebuffer's fixed-point range	^\s*bVar6\ =\ uVar3\ !=\ uVar5;$	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar5	alphaRefFixed	INFERRED	alpha reference converted to the framebuffer's fixed-point range	^\s*uVar5\ =\ \(int\)\(dVar7\ \-\ DOUBLE_97c30a78\)\ \^\ 0x80000000;$@6	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar5	alphaRefFixed	INFERRED	alpha reference converted to the framebuffer's fixed-point range	^\s*uVar5\ =\ \(uint\)\(int\)fVar1;$@6	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar5	alphaRefFixed	INFERRED	alpha reference converted to the framebuffer's fixed-point range	^\s*bVar6\ =\ uVar5\ <=\ uVar3;$	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar3	fragAlphaFixed	INFERRED	fragment alpha converted to the framebuffer's fixed-point range	^\s*uVar3\ =\ \(int\)\(dVar7\ \-\ DOUBLE_97c30a78\)\ \^\ 0x80000000;$	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar3	fragAlphaFixed	INFERRED	fragment alpha converted to the framebuffer's fixed-point range	^\s*uVar3\ =\ \(uint\)\(int\)fVar4;$	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar3	fragAlphaFixed	INFERRED	fragment alpha converted to the framebuffer's fixed-point range	^\s*bVar6\ =\ uVar3\ <\ uVar5;$	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar3	fragAlphaFixed	INFERRED	fragment alpha converted to the framebuffer's fixed-point range	^\s*uVar3\ =\ \(int\)\(dVar7\ \-\ DOUBLE_97c30a78\)\ \^\ 0x80000000;$@2	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar3	fragAlphaFixed	INFERRED	fragment alpha converted to the framebuffer's fixed-point range	^\s*uVar3\ =\ \(uint\)\(int\)fVar4;$@2	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar3	fragAlphaFixed	INFERRED	fragment alpha converted to the framebuffer's fixed-point range	^\s*bVar6\ =\ uVar3\ ==\ uVar5;$	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar3	fragAlphaFixed	INFERRED	fragment alpha converted to the framebuffer's fixed-point range	^\s*uVar3\ =\ \(int\)\(dVar7\ \-\ DOUBLE_97c30a78\)\ \^\ 0x80000000;$@3	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar3	fragAlphaFixed	INFERRED	fragment alpha converted to the framebuffer's fixed-point range	^\s*uVar3\ =\ \(uint\)\(int\)fVar4;$@3	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar3	fragAlphaFixed	INFERRED	fragment alpha converted to the framebuffer's fixed-point range	^\s*bVar6\ =\ uVar3\ <=\ uVar5;$	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar3	fragAlphaFixed	INFERRED	fragment alpha converted to the framebuffer's fixed-point range	^\s*uVar3\ =\ \(int\)\(dVar7\ \-\ DOUBLE_97c30a78\)\ \^\ 0x80000000;$@4	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar3	fragAlphaFixed	INFERRED	fragment alpha converted to the framebuffer's fixed-point range	^\s*uVar3\ =\ \(uint\)\(int\)fVar4;$@4	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar3	fragAlphaFixed	INFERRED	fragment alpha converted to the framebuffer's fixed-point range	^\s*bVar6\ =\ uVar5\ <\ uVar3;$	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar3	fragAlphaFixed	INFERRED	fragment alpha converted to the framebuffer's fixed-point range	^\s*uVar3\ =\ \(int\)\(dVar7\ \-\ DOUBLE_97c30a78\)\ \^\ 0x80000000;$@5	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar3	fragAlphaFixed	INFERRED	fragment alpha converted to the framebuffer's fixed-point range	^\s*uVar3\ =\ \(uint\)\(int\)fVar4;$@5	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar3	fragAlphaFixed	INFERRED	fragment alpha converted to the framebuffer's fixed-point range	^\s*bVar6\ =\ uVar3\ !=\ uVar5;$	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar3	fragAlphaFixed	INFERRED	fragment alpha converted to the framebuffer's fixed-point range	^\s*uVar3\ =\ \(int\)\(dVar7\ \-\ DOUBLE_97c30a78\)\ \^\ 0x80000000;$@6	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar3	fragAlphaFixed	INFERRED	fragment alpha converted to the framebuffer's fixed-point range	^\s*uVar3\ =\ \(uint\)\(int\)fVar4;$@6	+1
+use	_InterpreterRasterOpMachine_AlphaTest	uVar3	fragAlphaFixed	INFERRED	fragment alpha converted to the framebuffer's fixed-point range	^\s*bVar6\ =\ uVar5\ <=\ uVar3;$	+1
+use	_InterpreterRasterOpMachine_AlphaTest	dVar7	fixedScratch	INFERRED	double copy of the scaled float, compared with 2^31 for the float-to-unsigned conversion	^\s*dVar7\ =\ \(double\)fVar4;$	+3
+use	_InterpreterRasterOpMachine_AlphaTest	dVar7	fixedScratch	INFERRED	double copy of the scaled float, compared with 2^31 for the float-to-unsigned conversion	^\s*dVar7\ =\ \(double\)fVar1;$	+3
+use	_InterpreterRasterOpMachine_AlphaTest	dVar7	fixedScratch	INFERRED	double copy of the scaled float, compared with 2^31 for the float-to-unsigned conversion	^\s*dVar7\ =\ \(double\)fVar4;$@2	+3
+use	_InterpreterRasterOpMachine_AlphaTest	dVar7	fixedScratch	INFERRED	double copy of the scaled float, compared with 2^31 for the float-to-unsigned conversion	^\s*dVar7\ =\ \(double\)fVar1;$@2	+3
+use	_InterpreterRasterOpMachine_AlphaTest	dVar7	fixedScratch	INFERRED	double copy of the scaled float, compared with 2^31 for the float-to-unsigned conversion	^\s*dVar7\ =\ \(double\)fVar4;$@3	+3
+use	_InterpreterRasterOpMachine_AlphaTest	dVar7	fixedScratch	INFERRED	double copy of the scaled float, compared with 2^31 for the float-to-unsigned conversion	^\s*dVar7\ =\ \(double\)fVar1;$@3	+3
+use	_InterpreterRasterOpMachine_AlphaTest	dVar7	fixedScratch	INFERRED	double copy of the scaled float, compared with 2^31 for the float-to-unsigned conversion	^\s*dVar7\ =\ \(double\)fVar4;$@4	+3
+use	_InterpreterRasterOpMachine_AlphaTest	dVar7	fixedScratch	INFERRED	double copy of the scaled float, compared with 2^31 for the float-to-unsigned conversion	^\s*dVar7\ =\ \(double\)fVar1;$@4	+3
+use	_InterpreterRasterOpMachine_AlphaTest	dVar7	fixedScratch	INFERRED	double copy of the scaled float, compared with 2^31 for the float-to-unsigned conversion	^\s*dVar7\ =\ \(double\)fVar4;$@5	+3
+use	_InterpreterRasterOpMachine_AlphaTest	dVar7	fixedScratch	INFERRED	double copy of the scaled float, compared with 2^31 for the float-to-unsigned conversion	^\s*dVar7\ =\ \(double\)fVar1;$@5	+3
+use	_InterpreterRasterOpMachine_AlphaTest	dVar7	fixedScratch	INFERRED	double copy of the scaled float, compared with 2^31 for the float-to-unsigned conversion	^\s*dVar7\ =\ \(double\)fVar4;$@6	+3
+use	_InterpreterRasterOpMachine_AlphaTest	dVar7	fixedScratch	INFERRED	double copy of the scaled float, compared with 2^31 for the float-to-unsigned conversion	^\s*dVar7\ =\ \(double\)fVar1;$@6	+3
+local	_InterpreterRasterOpMachine_DepthAndStencilTest	param_1	machine	CONFIRMED	raster-op machine; *machine is the emulator context
+local	_InterpreterRasterOpMachine_DepthAndStencilTest	iVar13	emulator	INFERRED	*machine: emulator context (+0xd80 state block, +0xda8 depth buffer pointer, +0xdac stencil buffer pointer, +0xdf0 fragment block)
+local	_InterpreterRasterOpMachine_DepthAndStencilTest	iVar7	state	CONFIRMED	*(emulator+0xd80): raster state block
+local	_InterpreterRasterOpMachine_DepthAndStencilTest	uVar6	stencilFuncAndOps	INFERRED	state+0x48: stencil function bits 12-14, op bits 15-17 (stencil fail), 18-20 (depth fail), 21-23 (depth pass)
+local	_InterpreterRasterOpMachine_DepthAndStencilTest	uVar12	stateFlags	INFERRED	state+0x3c: bit 1 stencil test enabled, bit 2 depth test enabled, bit 6 write masks restricted
+local	_InterpreterRasterOpMachine_DepthAndStencilTest	uVar4	stencilRef	INFERRED	state+0x4c >> 24: stencil reference value
+local	_InterpreterRasterOpMachine_DepthAndStencilTest	uVar10	stencilCompareMask	INFERRED	state+0x4c bits 8-15: stencil compare mask
+local	_InterpreterRasterOpMachine_DepthAndStencilTest	uVar11	writeMaskWord	INFERRED	state+0x70: bits 8-15 stencil write mask, bit 16 depth write enable
+local	_InterpreterRasterOpMachine_DepthAndStencilTest	uVar9	stencilWriteMask	INFERRED	0xff when writes are unrestricted, else bits 8-15 of the write mask word
+local	_InterpreterRasterOpMachine_DepthAndStencilTest	bVar1	writeMasksUnrestricted	INFERRED	true when state flag bit 6 is clear
+local	_InterpreterRasterOpMachine_DepthAndStencilTest	bVar5	stencilEnabled	INFERRED	state flag bit 1
+local	_InterpreterRasterOpMachine_DepthAndStencilTest	fVar3	fragDepth	INFERRED	fragment depth read from the fragment block (+0xa38)
+local	_InterpreterRasterOpMachine_DepthAndStencilTest	pfVar14	depthBufferPtr	INFERRED	emulator+0xda8: address of the current depth sample
+local	_InterpreterRasterOpMachine_DepthAndStencilTest	pbVar8	stencilBufferPtr	INFERRED	emulator+0xdac: address of the current stencil sample
+local	_InterpreterRasterOpMachine_DepthAndStencilTest	bVar2	depthLessOrEqual	INFERRED	fragment depth <= stored depth (GL_LEQUAL) or the reverse for GL_GEQUAL
+local	_InterpreterRasterOpMachine_DepthAndStencilTest	uVar15	testPassed	INFERRED	result of the stencil comparison, then of the depth comparison (state+0x50 & 7: NEVER, LESS, EQUAL, LEQUAL, GREATER, NOTEQUAL, GEQUAL, ALWAYS)
+local	_InterpreterRasterOpMachineUpdateStencilBuffer	param_1	stencilOp	INFERRED	stencil operation code 0 ZERO, 1 KEEP, 2 REPLACE, 3 INCR (saturating), 4 DECR (saturating), 5 INVERT, 6 INCR_WRAP, 7 DECR_WRAP - the switch implements exactly these
+local	_InterpreterRasterOpMachineUpdateStencilBuffer	param_2	referenceValue	INFERRED	stencil reference used by REPLACE
+local	_InterpreterRasterOpMachineUpdateStencilBuffer	param_3	stencilPtr	CONFIRMED	byte updated in the stencil buffer
+local	_InterpreterRasterOpMachineUpdateStencilBuffer	param_4	writeMask	INFERRED	stencil write mask applied to every update
+local	_InterpreterRasterOpMachineUpdateStencilBuffer	bVar2	newValue	INFERRED	stencil byte after the operation, before the write mask merge
+local	_InterpreterRasterOpMachineUpdateStencilBuffer	bVar1	wrappedValue	INFERRED	old value +1 / -1 for the wrapping operations
+local	_InterpreterRasterOpMachine_BufferMask	param_1	machine	CONFIRMED	raster-op machine; state block word +0x70 holds the write masks
+local	_InterpreterRasterOpMachine_BufferMask	param_2	newColor	INFERRED	incoming colour (taken for channels whose write bit is set)
+local	_InterpreterRasterOpMachine_BufferMask	param_3	oldColor	INFERRED	colour already in the framebuffer (kept for masked channels)
+local	_InterpreterRasterOpMachine_BufferMask	param_4	outColor	INFERRED	resulting colour
+local	_InterpreterRasterOpMachine_BufferMask	uVar2	writeMaskWord	INFERRED	state+0x70: bits 17-20 enable writing of R,G,B,A
+local	_InterpreterRasterOpMachine_BufferMask	uVar1	selectedChannel	INFERRED	new or old value of the channel being merged
+local	_InterpreterRasterOpMachine_DepthTest	param_1	machine	CONFIRMED	raster-op machine
+local	_InterpreterRasterOpMachine_DepthTest	iVar2	emulator	INFERRED	*machine: emulator context
+local	_InterpreterRasterOpMachine_DepthTest	fVar1	fragDepth	INFERRED	fragment depth (fragment block +0xa38)
+local	_InterpreterRasterOpMachine_DepthTest	pfVar3	depthBufferPtr	INFERRED	emulator+0xda8: current stored depth
+local	_InterpreterRasterOpMachine_DepthTest	bVar4	passed	INFERRED	depth comparison result; the function returns true when the fragment is REJECTED (NEVER returns true, ALWAYS returns false)
+local	_InterpreterRasterOpMachineCalculateBlendingFactors	param_1	factorMode	CONFIRMED	blend factor selector: 0 ZERO, 1 ONE, 2 SRC_COLOR, 3 ONE_MINUS_SRC_COLOR, 4 SRC_ALPHA, 5 ONE_MINUS_SRC_ALPHA, 6 DST_ALPHA, 7 ONE_MINUS_DST_ALPHA, 8 CONSTANT_COLOR, 9 ONE_MINUS_CONSTANT_COLOR, 10 CONSTANT_ALPHA, 11 ONE_MINUS_CONSTANT_ALPHA, 12 DST_COLOR, 13 ONE_MINUS_DST_COLOR, 14 SRC_ALPHA_SATURATE (each switch case computes exactly that)
+local	_InterpreterRasterOpMachineCalculateBlendingFactors	param_2	srcColor	CONFIRMED	incoming colour RGBA
+local	_InterpreterRasterOpMachineCalculateBlendingFactors	param_3	dstColor	CONFIRMED	framebuffer colour RGBA
+local	_InterpreterRasterOpMachineCalculateBlendingFactors	param_4	constantColor	CONFIRMED	blend constant colour RGBA
+local	_InterpreterRasterOpMachineCalculateBlendingFactors	param_5	factorOut	CONFIRMED	receives the factor as float[4]
+local	_InterpreterRasterOpMachineCalculateBlendingFactors	dVar1	oneConst	INFERRED	constant 1.0 (DOUBLE_97c30a60) used for the one-minus factors
+local	_InterpreterRasterOpMachineCalculateBlendingFactors	fVar2	factorValue	INFERRED	channel value being stored into the factor (also holds the saturate minimum)
+local	_InterpreterRasterOpMachineCalculateBlendingFactors	dVar3	alphaForComplement	INFERRED	alpha whose complement becomes the factor alpha
