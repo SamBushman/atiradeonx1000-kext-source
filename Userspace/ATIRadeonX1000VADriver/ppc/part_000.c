@@ -1,7 +1,7 @@
 #include "decls.h"
 
-/* FUN_00001070 @ 0x1070 (48 bytes) */
-int FUN_00001070()
+/* dyld_stub_binding_helper @ 0x1070 (48 bytes) */
+int dyld_stub_binding_helper()
 {
                     
                     
@@ -9,8 +9,8 @@ int FUN_00001070()
   return;
 }
 
-/* FUN_000010a0 @ 0x10a0 (32 bytes) */
-int FUN_000010a0()
+/* __dyld_func_lookup @ 0x10a0 (32 bytes) */
+int __dyld_func_lookup()
 {
                     
                     
@@ -18,31 +18,31 @@ int FUN_000010a0()
   return;
 }
 
-/* FUN_000010c0 @ 0x10c0 (40 bytes) */
-int FUN_000010c0(state)
+/* _cxa_atexit_check_2 @ 0x10c0 (40 bytes) */
+int _cxa_atexit_check_2(state)
   undefined4 *state;
 {
   *state = 1;
   return;
 }
 
-/* FUN_000010e8 @ 0x10e8 (120 bytes) */
-int FUN_000010e8(state)
+/* _cxa_atexit_check_1 @ 0x10e8 (120 bytes) */
+int _cxa_atexit_check_1(state)
   undefined4 *state;
 {
   int status;
   undefined4 *stateHome;
   
   stateHome = state;
-  status = (*(code *)state[1])(FUN_000010c0,state,state);
+  status = (*(code *)state[1])(_cxa_atexit_check_2,state,state);
   if (status != 0) {
     *state = 0xffffffff;
   }
   return;
 }
 
-/* FUN_00001160 @ 0x1160 (204 bytes) */
-int FUN_00001160(cxaAtexitFn, cxaFinalizeFn)
+/* _check_cxa_atexit @ 0x1160 (204 bytes) */
+int _check_cxa_atexit(cxaAtexitFn, cxaFinalizeFn)
   code *cxaAtexitFn;
   code *cxaFinalizeFn;
 {
@@ -57,7 +57,7 @@ int FUN_00001160(cxaAtexitFn, cxaFinalizeFn)
   cxaAtexitFnHome = cxaAtexitFn;
   cxaFinalizeFnHome = cxaFinalizeFn;
   cxaAtexitFnCopy = cxaAtexitFn;
-  status = (*cxaAtexitFn)(FUN_000010e8,&state,&state);
+  status = (*cxaAtexitFn)(_cxa_atexit_check_1,&state,&state);
   if (status == 0) {
     (*cxaFinalizeFnHome)(&state);
     if (state == 0) {
@@ -72,8 +72,8 @@ int FUN_00001160(cxaAtexitFn, cxaFinalizeFn)
   return result;
 }
 
-/* FUN_0000122c @ 0x122c (504 bytes) */
-int FUN_0000122c()
+/* _find_atexit_10_3 @ 0x122c (504 bytes) */
+int _find_atexit_10_3()
 {
   undefined4 scratchResult;
   uint imageCount;
@@ -85,11 +85,11 @@ int FUN_0000122c()
   code *lookupSymbolFn;
   code *addressOfSymbolFn [7];
   
-  ((int (*)())FUN_000010a0)("__dyld_image_count",&imageCountFn);
-  ((int (*)())FUN_000010a0)("__dyld_get_image_name",&imageNameFn);
-  ((int (*)())FUN_000010a0)("__dyld_get_image_header",&imageHeaderFn);
-  ((int (*)())FUN_000010a0)("__dyld_NSLookupSymbolInImage",&lookupSymbolFn);
-  scratchResult = ((int (*)())FUN_000010a0)("__dyld_NSAddressOfSymbol",addressOfSymbolFn);
+  ((int (*)())__dyld_func_lookup)("__dyld_image_count",&imageCountFn);
+  ((int (*)())__dyld_func_lookup)("__dyld_get_image_name",&imageNameFn);
+  ((int (*)())__dyld_func_lookup)("__dyld_get_image_header",&imageHeaderFn);
+  ((int (*)())__dyld_func_lookup)("__dyld_NSLookupSymbolInImage",&lookupSymbolFn);
+  scratchResult = ((int (*)())__dyld_func_lookup)("__dyld_NSAddressOfSymbol",addressOfSymbolFn);
   if ((((imageCountFn != (code *)0x0) && (imageNameFn != (code *)0x0)) && (imageHeaderFn != (code *)0x0)) &&
      ((lookupSymbolFn != (code *)0x0 && (addressOfSymbolFn[0] != (code *)0x0)))) {
     imageCount = (*imageCountFn)(scratchResult);
@@ -113,8 +113,8 @@ int FUN_0000122c()
   return 0;
 }
 
-/* FUN_00001424 @ 0x1424 (32 bytes) */
-int FUN_00001424(s1, s2)
+/* pic_jump_strcmp_1424 @ 0x1424 (32 bytes) */
+int pic_jump_strcmp_1424(s1, s2)
   char *s1;
   char *s2;
 {
@@ -122,8 +122,8 @@ int FUN_00001424(s1, s2)
   return;
 }
 
-/* FUN_00001444 @ 0x1444 (32 bytes) */
-int FUN_00001444()
+/* pic_jump_dyld_func_lookup_1444 @ 0x1444 (32 bytes) */
+int pic_jump_dyld_func_lookup_1444()
 {
                     
                     
@@ -131,8 +131,8 @@ int FUN_00001444()
   return;
 }
 
-/* FUN_00001464 @ 0x1464 (528 bytes) */
-int FUN_00001464()
+/* _get_globals @ 0x1464 (528 bytes) */
+int _get_globals()
 {
   int libSystemHandle;
   undefined4 symbolAddress;
@@ -148,10 +148,10 @@ int FUN_00001464()
     libSystemHandle = _dlopen("/usr/lib/libSystem.B.dylib",0x10);
     if (libSystemHandle == 0) {
       *(undefined1 *)(globals + 3) = 1;
-      symbolAddress = ((int (*)())FUN_0000122c)();
+      symbolAddress = ((int (*)())_find_atexit_10_3)();
       *(undefined4 *)(globals + 0x10) = symbolAddress;
       if ((*(int *)(globals + 0x10) != 0) &&
-         (libSystemHandle = (**(code **)(globals + 0x10))(FUN_00001bbc), libSystemHandle == 0)) goto LAB_00001638;
+         (libSystemHandle = (**(code **)(globals + 0x10))(_our_atexit), libSystemHandle == 0)) goto LAB_00001638;
     }
     else {
       symbolAddress = _dlsym(libSystemHandle,"__cxa_atexit");
@@ -159,7 +159,7 @@ int FUN_00001464()
       symbolAddress = _dlsym(libSystemHandle,"__cxa_finalize");
       *(undefined4 *)(globals + 0xc) = symbolAddress;
       if (((*(int *)(globals + 8) != 0) && (*(int *)(globals + 0xc) != 0)) &&
-         (checkResult = ((int (*)())FUN_00001160)(*(undefined4 *)(globals + 8),*(undefined4 *)(globals + 0xc)),
+         (checkResult = ((int (*)())_check_cxa_atexit)(*(undefined4 *)(globals + 8),*(undefined4 *)(globals + 0xc)),
          checkResult != -1)) {
         if (checkResult == 0) {
           *(undefined1 *)(globals + 3) = 2;
@@ -184,15 +184,15 @@ LAB_00001638:
   return result;
 }
 
-/* FUN_00001674 @ 0x1674 (32 bytes) */
-int FUN_00001674()
+/* pic_jump_keymgr_set_and_unlock_processwide_ptr_1674 @ 0x1674 (32 bytes) */
+int pic_jump_keymgr_set_and_unlock_processwide_ptr_1674()
 {
   __keymgr_set_and_unlock_processwide_ptr();
   return;
 }
 
-/* FUN_00001694 @ 0x1694 (32 bytes) */
-int FUN_00001694(cxaAtexitFn, cxaFinalizeFn)
+/* pic_jump_check_cxa_atexit_1694 @ 0x1694 (32 bytes) */
+int pic_jump_check_cxa_atexit_1694(cxaAtexitFn, cxaFinalizeFn)
   code *cxaAtexitFn;
   code *cxaFinalizeFn;
 {
@@ -207,7 +207,7 @@ int FUN_00001694(cxaAtexitFn, cxaFinalizeFn)
   cxaAtexitFnHome = cxaAtexitFn;
   cxaFinalizeFnHome = cxaFinalizeFn;
   cxaAtexitFnCopy = cxaAtexitFn;
-  status = (*cxaAtexitFn)(FUN_000010e8,&state,&state);
+  status = (*cxaAtexitFn)(_cxa_atexit_check_1,&state,&state);
   if (status == 0) {
     (*cxaFinalizeFnHome)(&state);
     if (state == 0) {
@@ -222,8 +222,8 @@ int FUN_00001694(cxaAtexitFn, cxaFinalizeFn)
   return result;
 }
 
-/* FUN_000016b4 @ 0x16b4 (32 bytes) */
-int FUN_000016b4()
+/* pic_jump_dlsym_16b4 @ 0x16b4 (32 bytes) */
+int pic_jump_dlsym_16b4()
 {
                     
                     
@@ -231,8 +231,8 @@ int FUN_000016b4()
   return;
 }
 
-/* FUN_000016d4 @ 0x16d4 (32 bytes) */
-int FUN_000016d4()
+/* pic_jump_find_atexit_10_3_16d4 @ 0x16d4 (32 bytes) */
+int pic_jump_find_atexit_10_3_16d4()
 {
   uint imageCount;
   char *imageName;
@@ -245,11 +245,11 @@ int FUN_000016d4()
   code *lookupSymbolFn;
   code *addressOfSymbolFn [7];
   
-  ((int (*)())FUN_000010a0)("__dyld_image_count",&imageCountFn);
-  ((int (*)())FUN_000010a0)("__dyld_get_image_name",&imageNameFn);
-  ((int (*)())FUN_000010a0)("__dyld_get_image_header",&imageHeaderFn);
-  ((int (*)())FUN_000010a0)("__dyld_NSLookupSymbolInImage",&lookupSymbolFn);
-  ((int (*)())FUN_000010a0)("__dyld_NSAddressOfSymbol",addressOfSymbolFn);
+  ((int (*)())__dyld_func_lookup)("__dyld_image_count",&imageCountFn);
+  ((int (*)())__dyld_func_lookup)("__dyld_get_image_name",&imageNameFn);
+  ((int (*)())__dyld_func_lookup)("__dyld_get_image_header",&imageHeaderFn);
+  ((int (*)())__dyld_func_lookup)("__dyld_NSLookupSymbolInImage",&lookupSymbolFn);
+  ((int (*)())__dyld_func_lookup)("__dyld_NSAddressOfSymbol",addressOfSymbolFn);
   if ((((imageCountFn != (code *)0x0) && (imageNameFn != (code *)0x0)) && (imageHeaderFn != (code *)0x0))
      && ((lookupSymbolFn != (code *)0x0 && (addressOfSymbolFn[0] != (code *)0x0)))) {
     imageCount = (*imageCountFn)();
@@ -273,8 +273,8 @@ int FUN_000016d4()
   return 0;
 }
 
-/* FUN_000016f4 @ 0x16f4 (32 bytes) */
-int FUN_000016f4()
+/* pic_jump_dlopen_16f4 @ 0x16f4 (32 bytes) */
+int pic_jump_dlopen_16f4()
 {
                     
                     
@@ -282,8 +282,8 @@ int FUN_000016f4()
   return;
 }
 
-/* FUN_00001714 @ 0x1714 (32 bytes) */
-int FUN_00001714()
+/* pic_jump_calloc_1714 @ 0x1714 (32 bytes) */
+int pic_jump_calloc_1714()
 {
                     
                     
@@ -291,8 +291,8 @@ int FUN_00001714()
   return;
 }
 
-/* FUN_00001734 @ 0x1734 (32 bytes) */
-int FUN_00001734()
+/* pic_jump_keymgr_get_and_lock_processwide_ptr_1734 @ 0x1734 (32 bytes) */
+int pic_jump_keymgr_get_and_lock_processwide_ptr_1734()
 {
                     
                     
@@ -300,8 +300,8 @@ int FUN_00001734()
   return;
 }
 
-/* FUN_00001754 @ 0x1754 (268 bytes) */
-int FUN_00001754(globals, routine)
+/* _add_routine @ 0x1754 (268 bytes) */
+int _add_routine(globals, routine)
   int globals;
   undefined4 *routine;
 {
@@ -341,15 +341,15 @@ int FUN_00001754(globals, routine)
   return result;
 }
 
-/* FUN_00001860 @ 0x1860 (32 bytes) */
-int FUN_00001860()
+/* pic_jump_keymgr_set_and_unlock_processwide_ptr_1860 @ 0x1860 (32 bytes) */
+int pic_jump_keymgr_set_and_unlock_processwide_ptr_1860()
 {
   __keymgr_set_and_unlock_processwide_ptr();
   return;
 }
 
-/* FUN_00001880 @ 0x1880 (32 bytes) */
-int FUN_00001880()
+/* pic_jump_malloc_1880 @ 0x1880 (32 bytes) */
+int pic_jump_malloc_1880()
 {
                     
                     
@@ -357,8 +357,8 @@ int FUN_00001880()
   return;
 }
 
-/* FUN_000018a0 @ 0x18a0 (292 bytes) */
-int FUN_000018a0(globals, stopNode)
+/* _run_routines @ 0x18a0 (292 bytes) */
+int _run_routines(globals, stopNode)
   int globals;
   undefined4 *stopNode;
 {
@@ -403,15 +403,15 @@ int FUN_000018a0(globals, stopNode)
   return globalsHome;
 }
 
-/* FUN_000019c4 @ 0x19c4 (32 bytes) */
-int FUN_000019c4()
+/* pic_jump_keymgr_get_and_lock_processwide_ptr_19c4 @ 0x19c4 (32 bytes) */
+int pic_jump_keymgr_get_and_lock_processwide_ptr_19c4()
 {
   __keymgr_get_and_lock_processwide_ptr();
   return;
 }
 
-/* FUN_000019e4 @ 0x19e4 (32 bytes) */
-int FUN_000019e4()
+/* pic_jump_free_19e4 @ 0x19e4 (32 bytes) */
+int pic_jump_free_19e4()
 {
                     
                     
@@ -419,8 +419,8 @@ int FUN_000019e4()
   return;
 }
 
-/* FUN_00001a04 @ 0x1a04 (32 bytes) */
-int FUN_00001a04()
+/* pic_jump_keymgr_set_and_unlock_processwide_ptr_1a04 @ 0x1a04 (32 bytes) */
+int pic_jump_keymgr_set_and_unlock_processwide_ptr_1a04()
 {
                     
                     
@@ -428,8 +428,8 @@ int FUN_00001a04()
   return;
 }
 
-/* FUN_00001a24 @ 0x1a24 (312 bytes) */
-int FUN_00001a24(entry)
+/* _cxa_atexit_wrapper @ 0x1a24 (312 bytes) */
+int _cxa_atexit_wrapper(entry)
   undefined4 *entry;
 {
   undefined4 a0;
@@ -468,7 +468,7 @@ int FUN_00001a24(entry)
     globals = __keymgr_get_and_lock_processwide_ptr(0xe);
   }
   if (globals != 0) {
-    globals = ((int (*)())FUN_000018a0)(globals,savedList);
+    globals = ((int (*)())_run_routines)(globals,savedList);
   }
   if (globals != 0) {
     *(undefined1 *)(globals + 2) = savedRunning;
@@ -477,17 +477,17 @@ int FUN_00001a24(entry)
   return;
 }
 
-/* FUN_00001b5c @ 0x1b5c (32 bytes) */
-int FUN_00001b5c(globals, stopNode)
+/* pic_jump_run_routines_1b5c @ 0x1b5c (32 bytes) */
+int pic_jump_run_routines_1b5c(globals, stopNode)
   undefined4 globals;
   undefined4 stopNode;
 {
-  ((int (*)())FUN_000018a0)(globals,stopNode);
+  ((int (*)())_run_routines)(globals,stopNode);
   return;
 }
 
-/* FUN_00001b7c @ 0x1b7c (32 bytes) */
-int FUN_00001b7c()
+/* pic_jump_keymgr_set_and_unlock_processwide_ptr_1b7c @ 0x1b7c (32 bytes) */
+int pic_jump_keymgr_set_and_unlock_processwide_ptr_1b7c()
 {
                     
                     
@@ -495,8 +495,8 @@ int FUN_00001b7c()
   return;
 }
 
-/* FUN_00001b9c @ 0x1b9c (32 bytes) */
-int FUN_00001b9c()
+/* pic_jump_keymgr_get_and_lock_processwide_ptr_1b9c @ 0x1b9c (32 bytes) */
+int pic_jump_keymgr_get_and_lock_processwide_ptr_1b9c()
 {
                     
                     
@@ -504,8 +504,8 @@ int FUN_00001b9c()
   return;
 }
 
-/* FUN_00001bbc @ 0x1bbc (188 bytes) */
-int FUN_00001bbc()
+/* _our_atexit @ 0x1bbc (188 bytes) */
+int _our_atexit()
 {
   undefined1 savedRunning;
   short *globals;
@@ -515,7 +515,7 @@ int FUN_00001bbc()
   if (((globals != (short *)0x0) && (*globals == 0)) && (*(char *)((int)globals + 3) == '\x01')) {
     savedRunning = *(undefined1 *)(globals + 1);
     *(undefined1 *)(globals + 1) = 1;
-    relocked = ((int (*)())FUN_000018a0)(globals,0);
+    relocked = ((int (*)())_run_routines)(globals,0);
     if (relocked != 0) {
       *(undefined1 *)(relocked + 2) = savedRunning;
       __keymgr_set_and_unlock_processwide_ptr(0xe,relocked);
@@ -524,15 +524,15 @@ int FUN_00001bbc()
   return;
 }
 
-/* FUN_00001c78 @ 0x1c78 (32 bytes) */
-int FUN_00001c78()
+/* pic_jump_keymgr_set_and_unlock_processwide_ptr_1c78 @ 0x1c78 (32 bytes) */
+int pic_jump_keymgr_set_and_unlock_processwide_ptr_1c78()
 {
   __keymgr_set_and_unlock_processwide_ptr();
   return;
 }
 
-/* FUN_00001c98 @ 0x1c98 (32 bytes) */
-int FUN_00001c98(globals, stopNode)
+/* pic_jump_run_routines_1c98 @ 0x1c98 (32 bytes) */
+int pic_jump_run_routines_1c98(globals, stopNode)
   int globals;
   undefined4 *stopNode;
 {
@@ -571,8 +571,8 @@ int FUN_00001c98(globals, stopNode)
   return globalsHome;
 }
 
-/* FUN_00001cb8 @ 0x1cb8 (32 bytes) */
-int FUN_00001cb8()
+/* pic_jump_keymgr_get_and_lock_processwide_ptr_1cb8 @ 0x1cb8 (32 bytes) */
+int pic_jump_keymgr_get_and_lock_processwide_ptr_1cb8()
 {
                     
                     
@@ -580,8 +580,8 @@ int FUN_00001cb8()
   return;
 }
 
-/* FUN_00001cd8 @ 0x1cd8 (672 bytes) */
-int FUN_00001cd8(atexit_entry, dsoHandle)
+/* _atexit_common @ 0x1cd8 (672 bytes) */
+int _atexit_common(atexit_entry, dsoHandle)
   undefined4 *atexit_entry;
   undefined4 dsoHandle;
 {
@@ -599,7 +599,7 @@ int FUN_00001cd8(atexit_entry, dsoHandle)
   
   entryHome = atexit_entry;
   dsoHandleHome = dsoHandle;
-  atexit_globals = ((int (*)())FUN_00001464)();
+  atexit_globals = ((int (*)())_get_globals)();
   if (atexit_globals == 0) {
     result = 0xffffffff;
   }
@@ -618,7 +618,7 @@ int FUN_00001cd8(atexit_entry, dsoHandle)
           *entryCopy = *entryHome;
           entryCopy[1] = word1;
           entryCopy[2] = word2;
-          result = (*registerFn)(FUN_00001a24,entryCopy,dsoHandleHome,passThroughR6,passThroughR7,passThroughR8,entryCopy);
+          result = (*registerFn)(_cxa_atexit_wrapper,entryCopy,dsoHandleHome,passThroughR6,passThroughR7,passThroughR8,entryCopy);
         }
       }
       else {
@@ -648,21 +648,21 @@ int FUN_00001cd8(atexit_entry, dsoHandle)
     }
   }
   else {
-    result = ((int (*)())FUN_00001754)(atexit_globals,entryHome);
+    result = ((int (*)())_add_routine)(atexit_globals,entryHome);
   }
   return result;
 }
 
-/* FUN_00001f78 @ 0x1f78 (32 bytes) */
-int FUN_00001f78(size)
+/* pic_jump_malloc_1f78 @ 0x1f78 (32 bytes) */
+int pic_jump_malloc_1f78(size)
   size_t size;
 {
   _malloc(size);
   return;
 }
 
-/* FUN_00001f98 @ 0x1f98 (32 bytes) */
-int FUN_00001f98()
+/* pic_jump_keymgr_set_and_unlock_processwide_ptr_1f98 @ 0x1f98 (32 bytes) */
+int pic_jump_keymgr_set_and_unlock_processwide_ptr_1f98()
 {
                     
                     
@@ -670,8 +670,8 @@ int FUN_00001f98()
   return;
 }
 
-/* FUN_00001fb8 @ 0x1fb8 (32 bytes) */
-int FUN_00001fb8(globals, entry)
+/* pic_jump_add_routine_1fb8 @ 0x1fb8 (32 bytes) */
+int pic_jump_add_routine_1fb8(globals, entry)
   int globals;
   undefined4 *entry;
 {
@@ -711,8 +711,8 @@ int FUN_00001fb8(globals, entry)
   return result;
 }
 
-/* FUN_00001fd8 @ 0x1fd8 (32 bytes) */
-int FUN_00001fd8()
+/* pic_jump_get_globals_1fd8 @ 0x1fd8 (32 bytes) */
+int pic_jump_get_globals_1fd8()
 {
   int libSystemHandle;
   undefined4 symbolAddress;
@@ -728,10 +728,10 @@ int FUN_00001fd8()
     libSystemHandle = _dlopen("/usr/lib/libSystem.B.dylib",0x10);
     if (libSystemHandle == 0) {
       *(undefined1 *)((int)globals + 3) = 1;
-      symbolAddress = ((int (*)())FUN_0000122c)();
+      symbolAddress = ((int (*)())_find_atexit_10_3)();
       *(undefined4 *)((int)globals + 0x10) = symbolAddress;
       if ((*(int *)((int)globals + 0x10) != 0) &&
-         (libSystemHandle = (**(code **)((int)globals + 0x10))(FUN_00001bbc), libSystemHandle == 0))
+         (libSystemHandle = (**(code **)((int)globals + 0x10))(_our_atexit), libSystemHandle == 0))
       goto LAB_00001638;
     }
     else {
@@ -740,7 +740,7 @@ int FUN_00001fd8()
       symbolAddress = _dlsym(libSystemHandle,"__cxa_finalize");
       *(undefined4 *)((int)globals + 0xc) = symbolAddress;
       if (((*(int *)((int)globals + 8) != 0) && (*(int *)((int)globals + 0xc) != 0)) &&
-         (checkResult = ((int (*)())FUN_00001160)(*(undefined4 *)((int)globals + 8),
+         (checkResult = ((int (*)())_check_cxa_atexit)(*(undefined4 *)((int)globals + 8),
                                *(undefined4 *)((int)globals + 0xc)), checkResult != -1)) {
         if (checkResult == 0) {
           *(undefined1 *)((int)globals + 3) = 2;
@@ -765,8 +765,8 @@ LAB_00001638:
   return result;
 }
 
-/* FUN_00001ff8 @ 0x1ff8 (96 bytes) */
-int FUN_00001ff8(function, argument, dsoHandle)
+/* ___cxa_atexit @ 0x1ff8 (96 bytes) */
+int ___cxa_atexit(function, argument, dsoHandle)
   undefined4 function;
   undefined4 argument;
   undefined4 dsoHandle;
@@ -785,21 +785,21 @@ int FUN_00001ff8(function, argument, dsoHandle)
   dsoHandleHome = dsoHandle;
   entryFunction = function;
   entryArgument = argument;
-  result = ((int (*)())FUN_00001cd8)(&entryFunction,dsoHandle);
+  result = ((int (*)())_atexit_common)(&entryFunction,dsoHandle);
   return result;
 }
 
-/* FUN_00002058 @ 0x2058 (32 bytes) */
-int FUN_00002058(atexitEntry, dsoHandle)
+/* pic_jump_atexit_common_2058 @ 0x2058 (32 bytes) */
+int pic_jump_atexit_common_2058(atexitEntry, dsoHandle)
   undefined4 atexitEntry;
   undefined4 dsoHandle;
 {
-  ((int (*)())FUN_00001cd8)(atexitEntry,dsoHandle);
+  ((int (*)())_atexit_common)(atexitEntry,dsoHandle);
   return;
 }
 
-/* FUN_00002078 @ 0x2078 (92 bytes) */
-int FUN_00002078(atexit_function)
+/* _atexit @ 0x2078 (92 bytes) */
+int _atexit(atexit_function)
   undefined4 atexit_function;
 {
   undefined4 result;
@@ -810,16 +810,16 @@ int FUN_00002078(atexit_function)
   entryKind = 0;
   atexitFunctionHome = atexit_function;
   entryFunction = atexit_function;
-  result = ((int (*)())FUN_00001cd8)(&entryFunction,PTR_0000f128);
+  result = ((int (*)())_atexit_common)(&entryFunction,PTR_0000f128);
   return result;
 }
 
-/* FUN_000020d4 @ 0x20d4 (32 bytes) */
-int FUN_000020d4(atexitEntry, dsoHandle)
+/* pic_jump_atexit_common_20d4 @ 0x20d4 (32 bytes) */
+int pic_jump_atexit_common_20d4(atexitEntry, dsoHandle)
   undefined4 atexitEntry;
   undefined4 dsoHandle;
 {
-  ((int (*)())FUN_00001cd8)(atexitEntry,dsoHandle);
+  ((int (*)())_atexit_common)(atexitEntry,dsoHandle);
   return;
 }
 
@@ -891,7 +891,7 @@ int _AVACreateRenderer(outRenderer, driverInfo, rendererInfo)
         renderer[0x13] = PTR_FUN_0000f134;
         renderer[0x14] = fnTableA;
         renderer[0x15] = PTR_FUN_0000f18c;
-        renderer[0x16] = FUN_00002340;
+        renderer[0x16] = ava_destroy_renderer;
         *outRenderer = renderer;
         return 0;
       }
@@ -901,8 +901,8 @@ int _AVACreateRenderer(outRenderer, driverInfo, rendererInfo)
   return status;
 }
 
-/* FUN_00002340 @ 0x2340 (108 bytes) */
-int FUN_00002340(renderer)
+/* ava_destroy_renderer @ 0x2340 (108 bytes) */
+int ava_destroy_renderer(renderer)
   int renderer;
 {
   undefined4 status;
@@ -990,8 +990,8 @@ int _AVAGetRendererInfo(rendererInfo)
   return 0;
 }
 
-/* FUN_00002570 @ 0x2570 (936 bytes) */
-int FUN_00002570(renderer, outContext, createInfo)
+/* ava_create_context @ 0x2570 (936 bytes) */
+int ava_create_context(renderer, outContext, createInfo)
   uint renderer;
   undefined4 *outContext;
   uint *createInfo;
@@ -1107,7 +1107,7 @@ int FUN_00002570(renderer, outContext, createInfo)
                         trackTable = trackTable + 1;
                         status = status + -1;
                       } while (status != 0);
-                      FUN_000058b0(ctx);
+                      ava_init_context_state(ctx);
                       *outContext = ctx;
                       return 0;
                     }
@@ -1126,8 +1126,8 @@ int FUN_00002570(renderer, outContext, createInfo)
   return 0xfffffffd;
 }
 
-/* FUN_00002930 @ 0x2930 (132 bytes) */
-int FUN_00002930(ctx, mapping, freeBacking)
+/* ava_delete_image @ 0x2930 (132 bytes) */
+int ava_delete_image(ctx, mapping, freeBacking)
   int ctx;
   undefined4 *mapping;
   int freeBacking;
@@ -1148,8 +1148,8 @@ int FUN_00002930(ctx, mapping, freeBacking)
   return;
 }
 
-/* FUN_000029c0 @ 0x29c0 (424 bytes) */
-int FUN_000029c0(ctx, opcodeIndex)
+/* ava_release_image @ 0x29c0 (424 bytes) */
+int ava_release_image(ctx, opcodeIndex)
   int ctx;
   int opcodeIndex;
 {
@@ -1200,8 +1200,8 @@ int FUN_000029c0(ctx, opcodeIndex)
   return;
 }
 
-/* FUN_00002b70 @ 0x2b70 (244 bytes) */
-int FUN_00002b70(ctx)
+/* ava_destroy_context @ 0x2b70 (244 bytes) */
+int ava_destroy_context(ctx)
   int ctx;
 {
   bool more;
@@ -1227,14 +1227,14 @@ int FUN_00002b70(ctx)
       mappingIndex = 0;
       do {
         mappingIndex = mappingIndex + 1;
-        ((int (*)())FUN_00002930)(ctx,cursor,1);
+        ((int (*)())ava_delete_image)(ctx,cursor,1);
         cursor = cursor + 100;
       } while (mappingIndex < *(uint *)(ctx + 0x54));
     }
-    ((int (*)())FUN_000029c0)(ctx,0);
-    ((int (*)())FUN_00002930)(ctx,ctx + 0x1518c,1);
-    ((int (*)())FUN_000029c0)(ctx,1);
-    ((int (*)())FUN_00002930)(ctx,ctx + 0x15394,1);
+    ((int (*)())ava_release_image)(ctx,0);
+    ((int (*)())ava_delete_image)(ctx,ctx + 0x1518c,1);
+    ((int (*)())ava_release_image)(ctx,1);
+    ((int (*)())ava_delete_image)(ctx,ctx + 0x15394,1);
     _IOServiceClose(*(undefined4 *)(ctx + 0x14));
     _free(ctx);
     status = 0;
@@ -1242,8 +1242,8 @@ int FUN_00002b70(ctx)
   return status;
 }
 
-/* FUN_00002c70 @ 0x2c70 (132 bytes) */
-int FUN_00002c70(ctx, unused1, slot)
+/* ava_check_stamps @ 0x2c70 (132 bytes) */
+int ava_check_stamps(ctx, unused1, slot)
   int ctx;
   undefined4 unused1;
   uint slot;
@@ -1266,8 +1266,8 @@ int FUN_00002c70(ctx, unused1, slot)
   return 1;
 }
 
-/* FUN_00002d00 @ 0x2d00 (120 bytes) */
-int FUN_00002d00(ctx, unused1, slot)
+/* ava_wait_for_stamps @ 0x2d00 (120 bytes) */
+int ava_wait_for_stamps(ctx, unused1, slot)
   int ctx;
   undefined4 unused1;
   uint slot;
@@ -1289,8 +1289,8 @@ int FUN_00002d00(ctx, unused1, slot)
   return 0xfffffff9;
 }
 
-/* FUN_00002d80 @ 0x2d80 (64 bytes) */
-int FUN_00002d80(ctx, property, outValue)
+/* ava_get_property @ 0x2d80 (64 bytes) */
+int ava_get_property(ctx, property, outValue)
   int ctx;
   int property;
   undefined4 *outValue;
@@ -1307,8 +1307,8 @@ int FUN_00002d80(ctx, property, outValue)
   return 0;
 }
 
-/* FUN_00002dc0 @ 0x2dc0 (68 bytes) */
-int FUN_00002dc0(ctx, property, value)
+/* ava_set_property @ 0x2dc0 (68 bytes) */
+int ava_set_property(ctx, property, value)
   int ctx;
   int property;
   int value;
@@ -1320,15 +1320,15 @@ int FUN_00002dc0(ctx, property, value)
     *(int *)(ctx + 0x120) = value;
     status = 0;
     if (value == 4) {
-      FUN_0000bfc0(ctx);
+      ava_emit_deint_enable_packet(ctx);
       status = 0;
     }
   }
   return status;
 }
 
-/* FUN_00002e10 @ 0x2e10 (64 bytes) */
-int FUN_00002e10(ctx, property, outValue)
+/* ava_get_attribute @ 0x2e10 (64 bytes) */
+int ava_get_attribute(ctx, property, outValue)
   int ctx;
   int property;
   undefined4 *outValue;
@@ -1345,8 +1345,8 @@ int FUN_00002e10(ctx, property, outValue)
   return 0;
 }
 
-/* FUN_00002e50 @ 0x2e50 (1144 bytes) */
-int FUN_00002e50(ctx, attribute, value)
+/* ava_set_attribute @ 0x2e50 (1144 bytes) */
+int ava_set_attribute(ctx, attribute, value)
   int ctx;
   undefined4 attribute;
   float *value;
@@ -1454,7 +1454,7 @@ LAB_00003104:
     break;
   case 0x1b:
     status = 0;
-    FUN_00004740(ctx,(int)GH_F2U((float)(SUB41(*value,0))),(int)(char)*(undefined4 *)(ctx + 0x114),
+    ava_render_slot(ctx,(int)GH_F2U((float)(SUB41(*value,0))),(int)(char)*(undefined4 *)(ctx + 0x114),
                  ctx + 0x10c,*(undefined4 *)(ctx + 0x118));
     hue = *(float *)(ctx + 300);
     brightness = *(float *)(ctx + 0x134);
@@ -1540,7 +1540,7 @@ LAB_00003220:
       if (kr == 0) {
 LAB_00003310:
         if (*(int *)(ctx + 0x120) == 4) {
-          FUN_0000bfc0(ctx);
+          ava_emit_deint_enable_packet(ctx);
           return status;
         }
         return status;
@@ -1550,8 +1550,8 @@ LAB_00003310:
   return 0xfffffffb;
 }
 
-/* FUN_00003350 @ 0x3350 (720 bytes) */
-int FUN_00003350(ctx, surface, unused, width, height, pixelFormat, externalData)
+/* ava_declare_image @ 0x3350 (720 bytes) */
+int ava_declare_image(ctx, surface, unused, width, height, pixelFormat, externalData)
   int ctx;
   uint *surface;
   undefined4 unused;
@@ -1687,8 +1687,8 @@ LAB_000034b4:
   return formatCode;
 }
 
-/* FUN_00003630 @ 0x3630 (356 bytes) */
-int FUN_00003630(ctx, surfaceDescs, count)
+/* ava_declare_surface_images @ 0x3630 (356 bytes) */
+int ava_declare_surface_images(ctx, surfaceDescs, count)
   int ctx;
   int *surfaceDescs;
   int count;
@@ -1711,7 +1711,7 @@ int FUN_00003630(ctx, surfaceDescs, count)
       descCursor = descBase;
       do {
         desc = (undefined4 *)surfaceDescs[index];
-        kr = ((int (*)())FUN_00003350)(ctx,ctx + 0x814 + index * 100,*(undefined4 *)(descCursor + 0x4ac),
+        kr = ((int (*)())ava_declare_image)(ctx,ctx + 0x814 + index * 100,*(undefined4 *)(descCursor + 0x4ac),
                              *desc,desc[1],desc[3],0);
         if (kr != 0) {
           if (0 < index) {
@@ -1719,7 +1719,7 @@ int FUN_00003630(ctx, surfaceDescs, count)
             descBase = ctx + 0x814;
             do {
               surfaceCount = surfaceCount + 1;
-              ((int (*)())FUN_00002930)(ctx,descBase,1);
+              ((int (*)())ava_delete_image)(ctx,descBase,1);
               descBase = descBase + 100;
             } while (surfaceCount != index);
           }
@@ -1753,8 +1753,8 @@ int FUN_00003630(ctx, surfaceDescs, count)
   return status;
 }
 
-/* FUN_000037b0 @ 0x37b0 (124 bytes) */
-int FUN_000037b0(ctx, outDescs)
+/* ava_get_surface_descs @ 0x37b0 (124 bytes) */
+int ava_get_surface_descs(ctx, outDescs)
   int ctx;
   int *outDescs;
 {
@@ -1790,8 +1790,8 @@ int FUN_000037b0(ctx, outDescs)
   return 0;
 }
 
-/* FUN_00003830 @ 0x3830 (136 bytes) */
-int FUN_00003830(ctx, outDescs)
+/* ava_get_image_descs @ 0x3830 (136 bytes) */
+int ava_get_image_descs(ctx, outDescs)
   int ctx;
   int *outDescs;
 {
@@ -1830,8 +1830,8 @@ int FUN_00003830(ctx, outDescs)
   return 0;
 }
 
-/* FUN_000038c0 @ 0x38c0 (100 bytes) */
-int FUN_000038c0(ctx, unused1, unused2, outSlot)
+/* ava_new_handle @ 0x38c0 (100 bytes) */
+int ava_new_handle(ctx, unused1, unused2, outSlot)
   int ctx;
   undefined4 unused1;
   undefined4 unused2;

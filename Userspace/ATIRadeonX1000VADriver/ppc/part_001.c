@@ -1,7 +1,7 @@
 #include "decls.h"
 
-/* FUN_00003930 @ 0x3930 (916 bytes) */
-int FUN_00003930(ctx, picParams, outResult)
+/* ava_decode_picture @ 0x3930 (916 bytes) */
+int ava_decode_picture(ctx, picParams, outResult)
   int ctx;
   byte *picParams;
   undefined4 *outResult;
@@ -62,7 +62,7 @@ int FUN_00003930(ctx, picParams, outResult)
           do {
             nextMbIndex = mbIndex + 1;
             slotOrMbCursor = mbCursorOrCount + 0x1c;
-            ((int (*)())FUN_00008510)(ctx,mbCursorOrCount,picExtra,mbIndex,0);
+            ((int (*)())ava_emit_macroblock)(ctx,mbCursorOrCount,picExtra,mbIndex,0);
             mbCursorOrCount = slotOrMbCursor;
             mbIndex = nextMbIndex;
           } while (nextMbIndex < macroblockCount);
@@ -81,11 +81,11 @@ int FUN_00003930(ctx, picParams, outResult)
           mbIndex = 0;
           do {
             if (*(char *)(slotOrMbCursor + 0x14) == '\0') {
-              ((int (*)())FUN_00008510)(ctx,slotOrMbCursor,picExtra,mbIndex,0);
+              ((int (*)())ava_emit_macroblock)(ctx,slotOrMbCursor,picExtra,mbIndex,0);
             }
             else {
-              ((int (*)())FUN_00008510)(ctx,slotOrMbCursor,picExtra,mbIndex,1);
-              ((int (*)())FUN_00008820)(ctx,slotOrMbCursor,mbIndex);
+              ((int (*)())ava_emit_macroblock)(ctx,slotOrMbCursor,picExtra,mbIndex,1);
+              ((int (*)())ava_emit_mb_motion_vectors)(ctx,slotOrMbCursor,mbIndex);
             }
             mbIndex = mbIndex + 1;
             slotOrMbCursor = slotOrMbCursor + 0x1c;
@@ -108,9 +108,9 @@ int FUN_00003930(ctx, picParams, outResult)
           statCountdown = statCountdown + -1;
           statCursor = statCursor + 3;
         } while (statCountdown != 0);
-        ((int (*)())FUN_00007850)(ctx,(mbCursorOrCount * 0x80 + totalWords) * 2 + 1000);
+        ((int (*)())ava_emit_picture_setup_packet)(ctx,(mbCursorOrCount * 0x80 + totalWords) * 2 + 1000);
       }
-      ((int (*)())FUN_00007f80)(ctx);
+      ((int (*)())ava_end_picture)(ctx);
       if (*descTable == 3) break;
       notLast = fieldIndex != 1;
       picParams = picParams + 1;
@@ -129,8 +129,8 @@ int FUN_00003930(ctx, picParams, outResult)
   return status;
 }
 
-/* FUN_00003cd0 @ 0x3cd0 (672 bytes) */
-int FUN_00003cd0(ctx, syncId)
+/* ava_acquire_image @ 0x3cd0 (672 bytes) */
+int ava_acquire_image(ctx, syncId)
   int ctx;
   int syncId;
 {
@@ -247,8 +247,8 @@ switchD_00003e00_default:
   return;
 }
 
-/* FUN_00003fc0 @ 0x3fc0 (696 bytes) */
-int FUN_00003fc0(ctx, surfaceIndex, surfaceDesc, outResult, unused1, unused2, unused3, unused4)
+/* ava_get_frame @ 0x3fc0 (696 bytes) */
+int ava_get_frame(ctx, surfaceIndex, surfaceDesc, outResult, unused1, unused2, unused3, unused4)
   int ctx;
   uint surfaceIndex;
   undefined4 *surfaceDesc;
@@ -278,21 +278,21 @@ int FUN_00003fc0(ctx, surfaceIndex, surfaceDesc, outResult, unused1, unused2, un
   if ((*(int *)(ctx + 0x120) == 0) || (*(int *)(surfaceIndex * 4 + descTableOrResult + 0x554) == 0)) {
     featureFlags = *(uint *)(ctx + 0x11c);
     if ((featureFlags & 2) != 0) {
-      ((int (*)())FUN_0000a110)(ctx,surfaceIndex,0);
+      ((int (*)())ava_render_brightness_contrast_pass)(ctx,surfaceIndex,0);
       featureFlags = *(uint *)(ctx + 0x11c);
     }
     if ((featureFlags & 4) != 0) {
-      ((int (*)())FUN_00009c80)(ctx,surfaceIndex,0);
+      ((int (*)())ava_render_hue_saturation_pass)(ctx,surfaceIndex,0);
     }
   }
   else {
     featureFlags = *(uint *)(ctx + 0x11c);
     if ((featureFlags & 2) != 0) {
-      ((int (*)())FUN_0000a110)(ctx,surfaceIndex,1);
+      ((int (*)())ava_render_brightness_contrast_pass)(ctx,surfaceIndex,1);
       featureFlags = *(uint *)(ctx + 0x11c);
     }
     if ((featureFlags & 4) != 0) {
-      ((int (*)())FUN_00009c80)(ctx,surfaceIndex,1);
+      ((int (*)())ava_render_hue_saturation_pass)(ctx,surfaceIndex,1);
     }
   }
   *(undefined4 *)(*(int *)(ctx + 0xac4) * 8 + descTableOrResult + 0x56c) = 0;
@@ -300,19 +300,19 @@ int FUN_00003fc0(ctx, surfaceIndex, surfaceDesc, outResult, unused1, unused2, un
   descWord0 = *surfaceDesc;
   descWord1 = surfaceDesc[1];
   fourccArg = surfaceDesc[3];
-  descTableOrResult = FUN_00003350(ctx,ctx + 0xa1c,*(undefined4 *)(ctx + 0xa80),descWord0,descWord1,fourccArg,
+  descTableOrResult = ava_declare_image(ctx,ctx + 0xa1c,*(undefined4 *)(ctx + 0xa80),descWord0,descWord1,fourccArg,
                        surfaceDesc[6]);
   failStatus = 0xfffffffd;
   if (descTableOrResult != 0) {
     return 0xfffffffd;
   }
-  ((int (*)())FUN_00003cd0)(ctx,0x11);
+  ((int (*)())ava_acquire_image)(ctx,0x11);
   featureFlags = surfaceDesc[3];
   if (featureFlags != 0x61726762) {
     if (featureFlags < 0x61726763) {
       if (featureFlags == 0x32767579) {
 LAB_000041b8:
-        ((int (*)())FUN_0000aa00)(ctx,surfaceIndex,surfaceDesc);
+        ((int (*)())ava_render_convert_frame_yuv2)(ctx,surfaceIndex,surfaceDesc);
         goto LAB_000041dc;
       }
       if (featureFlags != 0x61723135) goto LAB_000041dc;
@@ -322,12 +322,12 @@ LAB_000041b8:
       goto LAB_000041b8;
     }
   }
-  ((int (*)())FUN_0000a4e0)(ctx,surfaceIndex,surfaceDesc);
+  ((int (*)())ava_render_convert_frame)(ctx,surfaceIndex,surfaceDesc);
 LAB_000041dc:
-  FUN_00002d00(ctx,0,*(undefined4 *)(ctx + 0xac4));
-  ((int (*)())FUN_0000bf70)(ctx,surfaceDesc[6],surfaceDesc[1] * surfaceDesc[2],descWord0,descWord1,fourccArg,failStatus,unused4);
-  FUN_000029c0(ctx,0x11);
-  FUN_00002930(ctx,ctx + 0xa1c,0);
+  ava_wait_for_stamps(ctx,0,*(undefined4 *)(ctx + 0xac4));
+  ((int (*)())ava_dcache_flush_range_sync)(ctx,surfaceDesc[6],surfaceDesc[1] * surfaceDesc[2],descWord0,descWord1,fourccArg,failStatus,unused4);
+  ava_release_image(ctx,0x11);
+  ava_delete_image(ctx,ctx + 0xa1c,0);
   descWord0 = *(undefined4 *)(ctx + 0xac4);
   *outResult = 0;
   outResult[1] = descWord0;
@@ -335,8 +335,8 @@ LAB_000041dc:
   return 0;
 }
 
-/* FUN_00004280 @ 0x4280 (192 bytes) */
-int FUN_00004280(ctx, arg, opcodeBase, outSlot)
+/* ava_slot20_enqueue @ 0x4280 (192 bytes) */
+int ava_slot20_enqueue(ctx, arg, opcodeBase, outSlot)
   int ctx;
   undefined4 arg;
   int opcodeBase;
@@ -348,9 +348,9 @@ int FUN_00004280(ctx, arg, opcodeBase, outSlot)
   packetIndex = opcodeBase + 0xcU & 0xff;
   *(undefined4 *)(*(int *)(ctx + 0xac4) * 8 + ctx + 0x55c + 0x56c) = 0;
   *(undefined4 *)(*(int *)(ctx + 0xac4) * 8 + ctx + 0x55c + 0x570) = 0;
-  ((int (*)())FUN_00003cd0)(ctx,packetIndex);
-  ((int (*)())FUN_00009690)(ctx,arg,opcodeBase);
-  FUN_000029c0(ctx,packetIndex);
+  ((int (*)())ava_acquire_image)(ctx,packetIndex);
+  ((int (*)())ava_noop_9690)(ctx,arg,opcodeBase);
+  ava_release_image(ctx,packetIndex);
   slotIndex = *(undefined4 *)(ctx + 0xac4);
   *outSlot = 0;
   outSlot[1] = slotIndex;
@@ -358,8 +358,8 @@ int FUN_00004280(ctx, arg, opcodeBase, outSlot)
   return 0;
 }
 
-/* FUN_00004340 @ 0x4340 (988 bytes) */
-int FUN_00004340(ctx, sizeInfo, requestedCount)
+/* ava_setup_decode @ 0x4340 (988 bytes) */
+int ava_setup_decode(ctx, sizeInfo, requestedCount)
   int ctx;
   int *sizeInfo;
   uint requestedCount;
@@ -481,7 +481,7 @@ int FUN_00004340(ctx, sizeInfo, requestedCount)
       if (indexOrStatus == 0) {
         *(undefined4 *)(ctx + 0x28) = *(undefined4 *)(ctx + 0x578);
         *(undefined4 *)(ctx + 0x2c) = *(undefined4 *)(ctx + 0x57c);
-        indexOrStatus = FUN_00003350(ctx,ctx + 0x1518c,*(undefined4 *)(ctx + 0x151f0),
+        indexOrStatus = ava_declare_image(ctx,ctx + 0x1518c,*(undefined4 *)(ctx + 0x151f0),
                               *(uint *)(ctx + 0x578) >> 4,
                               (*(uint *)(ctx + 0x57c) >> 1 & 0x7ffffff8) *
                               *(int *)(ctx + 0x54),0x20,0);
@@ -514,18 +514,18 @@ int FUN_00004340(ctx, sizeInfo, requestedCount)
             allocOrRowBase = allocOrRowBase + 0x10;
             indexOrStatus = indexOrStatus + 1;
           } while (notLast);
-          ((int (*)())FUN_00003cd0)(ctx,0);
+          ((int (*)())ava_acquire_image)(ctx,0);
           bufferOrStatus = *(undefined4 *)(ctx + 0x153f8);
           allocAlign = 0x20;
           allocFlags = 0;
           widthOrCount = *(uint *)(ctx + 0x578) >> 4;
           allocOrRowBase = (*(uint *)(ctx + 0x57c) >> 4) * 0x18;
-          indexOrStatus = FUN_00003350(ctx,ctx + 0x15394,bufferOrStatus,widthOrCount,allocOrRowBase,0x20,0);
+          indexOrStatus = ava_declare_image(ctx,ctx + 0x15394,bufferOrStatus,widthOrCount,allocOrRowBase,0x20,0);
           if (indexOrStatus == 0) {
-            fpPassThrough1 = (double)((int (*)())FUN_00003cd0)(ctx,1);
-            ((void (*)())FUN_00006d90)(ctx,fpPassThrough1,fpPassThrough2,fpPassThrough3,fpPassThrough4,fpPassThrough5,fpPassThrough6,fpPassThrough7,fpPassThrough8,
+            fpPassThrough1 = (double)((int (*)())ava_acquire_image)(ctx,1);
+            ((void (*)())ava_build_stage_programs)(ctx,fpPassThrough1,fpPassThrough2,fpPassThrough3,fpPassThrough4,fpPassThrough5,fpPassThrough6,fpPassThrough7,fpPassThrough8,
                          in_stack_ffffff88,in_stack_ffffff90);
-            ((int (*)())FUN_00005d70)(ctx,r4AfterCall,bufferOrStatus,widthOrCount,allocOrRowBase,allocAlign,allocFlags,planeTableA);
+            ((int (*)())ava_build_block_grid)(ctx,r4AfterCall,bufferOrStatus,widthOrCount,allocOrRowBase,allocAlign,allocFlags,planeTableA);
             DAT_0000f1a8 = *(undefined4 *)(ctx + 0x578);
             DAT_0000f1a4 = *(undefined4 *)(ctx + 0x57c);
             do {
@@ -553,8 +553,8 @@ LAB_00004448:
   return bufferOrStatus;
 }
 
-/* FUN_00004740 @ 0x4740 (664 bytes) */
-int FUN_00004740(ctx, slotIndex, flags, position, enable)
+/* ava_render_slot @ 0x4740 (664 bytes) */
+int ava_render_slot(ctx, slotIndex, flags, position, enable)
   int ctx;
   int slotIndex;
   undefined4 flags;
@@ -584,10 +584,10 @@ int FUN_00004740(ctx, slotIndex, flags, position, enable)
     if (*(int *)(ctx + 0x120) != 0) {
       if (*(int *)(slotEntry + 0x540) == 1) {
         if (*(int *)(ctx + 0x120) == 4) {
-          ((int (*)())FUN_0000caa0)(ctx,ctx + 0x14348 + slotIndex * 0x14,ctx + 0x143ac + slotIndex * 0x18
+          ((int (*)())ava_deinterlace_frame)(ctx,ctx + 0x14348 + slotIndex * 0x14,ctx + 0x143ac + slotIndex * 0x18
                        ,1);
         }
-        ((int (*)())FUN_0000caa0)(ctx,slotIndex * 0x14 + ctx + 0x14348,slotIndex * 0x18 + ctx + 0x143ac,2
+        ((int (*)())ava_deinterlace_frame)(ctx,slotIndex * 0x14 + ctx + 0x14348,slotIndex * 0x18 + ctx + 0x143ac,2
                     );
         *(undefined4 *)(slotOffset + slotTable + 0x554) = 1;
         goto LAB_00004810;
@@ -602,26 +602,26 @@ LAB_0000481c:
       if (*(int *)(slotOffset + slotTable + 0x554) != 0) {
         effectFlags = *(uint *)(ctx + 0x11c);
         if ((effectFlags & 2) != 0) {
-          ((int (*)())FUN_0000a110)(ctx,slotIndex,1);
+          ((int (*)())ava_render_brightness_contrast_pass)(ctx,slotIndex,1);
           effectFlags = *(uint *)(ctx + 0x11c);
         }
         if ((effectFlags & 4) != 0) {
-          ((int (*)())FUN_00009c80)(ctx,slotIndex,1);
+          ((int (*)())ava_render_hue_saturation_pass)(ctx,slotIndex,1);
         }
-        fpPassThrough = (double)((int (*)())FUN_0000b7f0)(ctx,slotIndex,1);
+        fpPassThrough = (double)((int (*)())ava_render_source_rect_pass)(ctx,slotIndex,1);
         goto LAB_000048e0;
       }
     }
   }
   effectFlags = *(uint *)(ctx + 0x11c);
   if ((effectFlags & 2) != 0) {
-    ((int (*)())FUN_0000a110)(ctx,slotIndex,0);
+    ((int (*)())ava_render_brightness_contrast_pass)(ctx,slotIndex,0);
     effectFlags = *(uint *)(ctx + 0x11c);
   }
   if ((effectFlags & 4) != 0) {
-    ((int (*)())FUN_00009c80)(ctx,slotIndex,0);
+    ((int (*)())ava_render_hue_saturation_pass)(ctx,slotIndex,0);
   }
-  fpPassThrough = (double)((int (*)())FUN_0000b7f0)(ctx,slotIndex,0);
+  fpPassThrough = (double)((int (*)())ava_render_source_rect_pass)(ctx,slotIndex,0);
 LAB_000048e0:
   *(int *)(ctx + 0x118) = enable;
   if (enable != 0) {
@@ -629,7 +629,7 @@ LAB_000048e0:
     positionX = *position;
     *(undefined4 *)(ctx + 0x110) = position[1];
     *(undefined4 *)(ctx + 0x10c) = positionX;
-    ((void (*)())FUN_0000ae80)(ctx,fpPassThrough,fpPassThrough2,fpPassThrough3,fpPassThrough4);
+    ((void (*)())ava_render_scale_pass)(ctx,fpPassThrough,fpPassThrough2,fpPassThrough3,fpPassThrough4);
   }
   lastHeader = *(uint **)(ctx + 0x30);
   *lastHeader = *(int *)(ctx + 0x34) - (int)lastHeader >> 2 | *lastHeader;
@@ -654,20 +654,20 @@ LAB_000048e0:
   return;
 }
 
-/* FUN_000049f0 @ 0x49f0 (4 bytes) */
-int FUN_000049f0()
+/* ava_noop_49f0 @ 0x49f0 (4 bytes) */
+int ava_noop_49f0()
 {
   return;
 }
 
-/* FUN_00004a00 @ 0x4a00 (4 bytes) */
-int FUN_00004a00()
+/* ava_noop_4a00 @ 0x4a00 (4 bytes) */
+int ava_noop_4a00()
 {
   return;
 }
 
-/* FUN_00004a10 @ 0x4a10 (296 bytes) */
-int FUN_00004a10(ctx, srcRect, dstRect, outSlot)
+/* ava_queue_display @ 0x4a10 (296 bytes) */
+int ava_queue_display(ctx, srcRect, dstRect, outSlot)
   int ctx;
   char *srcRect;
   undefined4 *dstRect;
@@ -711,8 +711,8 @@ int FUN_00004a10(ctx, srcRect, dstRect, outSlot)
   return 0;
 }
 
-/* FUN_00004b40 @ 0x4b40 (1116 bytes) */
-int FUN_00004b40(ctx)
+/* ava_display_refresh @ 0x4b40 (1116 bytes) */
+int ava_display_refresh(ctx)
   int ctx;
 {
   undefined *taskPortPtr;
@@ -836,12 +836,12 @@ int FUN_00004b40(ctx)
   *(int *)(ctx + 0x30) = mapSizePtrOrBase + 0x1c;
   *(int *)(ctx + 0x38) = mapSizePtrOrBase + 0x20 + *(int *)(mapSizePtrOrBase + 0x10) * 4;
   *(undefined4 *)(mapSizePtrOrBase + 0x1c) = 0;
-  ((int (*)())FUN_00004740)(ctx,0,(int)(char)*(undefined4 *)(ctx + 0x114),ctx + 0x10c,0);
+  ((int (*)())ava_render_slot)(ctx,0,(int)(char)*(undefined4 *)(ctx + 0x114),ctx + 0x10c,0);
   return;
 }
 
-/* FUN_00004fa0 @ 0x4fa0 (552 bytes) */
-int FUN_00004fa0(ctx, subpicParams)
+/* ava_setup_subpicture @ 0x4fa0 (552 bytes) */
+int ava_setup_subpicture(ctx, subpicParams)
   int ctx;
   uint *subpicParams;
 {
@@ -894,7 +894,7 @@ int FUN_00004fa0(ctx, subpicParams)
       cursor = ctx + 0x218;
       countOrStatus = ctx;
       do {
-        countdown = FUN_00003350(ctx,cursor,*(undefined4 *)(countOrStatus + 0x538),0xc0,
+        countdown = ava_declare_image(ctx,cursor,*(undefined4 *)(countOrStatus + 0x538),0xc0,
                              *(undefined4 *)(ctx + 100),8,*(undefined4 *)(countOrStatus + 0x6c));
         if (countdown != 0) goto LAB_000051c0;
         countOrAlignedWidth = *(uint *)(ctx + 0x5c);
@@ -903,10 +903,10 @@ int FUN_00004fa0(ctx, subpicParams)
         countOrStatus = countOrStatus + 4;
       } while (index < countOrAlignedWidth);
     }
-    outCountOrResult = FUN_00003350(ctx,ctx + 0x1b0,*(undefined4 *)(ctx + 0x214),0x20,countOrAlignedWidth,0x20
+    outCountOrResult = ava_declare_image(ctx,ctx + 0x1b0,*(undefined4 *)(ctx + 0x214),0x20,countOrAlignedWidth,0x20
                             ,0);
     if (outCountOrResult == 0) {
-      ((int (*)())FUN_00003cd0)(ctx,3);
+      ((int (*)())ava_acquire_image)(ctx,3);
       scalarIn2 = *(undefined4 *)(ctx + 0x57c);
       scalarIn1 = *(undefined4 *)(ctx + 0x578);
       scalarIn4 = *(uint *)(ctx + 0xa84) | 0x10000;
@@ -939,29 +939,29 @@ LAB_000051c0:
   return status;
 }
 
-/* FUN_000051f0 @ 0x51f0 (136 bytes) */
-int FUN_000051f0(ctx)
+/* ava_release_subpicture @ 0x51f0 (136 bytes) */
+int ava_release_subpicture(ctx)
   int ctx;
 {
   uint index;
   int mapping;
   
-  FUN_000029c0(ctx,3);
-  FUN_00002930(ctx,ctx + 0x1b0,1);
+  ava_release_image(ctx,3);
+  ava_delete_image(ctx,ctx + 0x1b0,1);
   if (*(int *)(ctx + 0x5c) != 0) {
     index = 0;
     mapping = ctx + 0x218;
     do {
       index = index + 1;
-      FUN_00002930(ctx,mapping,0);
+      ava_delete_image(ctx,mapping,0);
       mapping = mapping + 100;
     } while (index < *(uint *)(ctx + 0x5c));
   }
   return 0;
 }
 
-/* FUN_00005280 @ 0x5280 (108 bytes) */
-int FUN_00005280(ctx, value)
+/* ava_set_macrovision @ 0x5280 (108 bytes) */
+int ava_set_macrovision(ctx, value)
   int ctx;
   undefined4 value;
 {
@@ -983,8 +983,8 @@ int FUN_00005280(ctx, value)
   return status;
 }
 
-/* FUN_000052f0 @ 0x52f0 (924 bytes) */
-int FUN_000052f0(ctx, subpicture, unused1, unused2, unused3)
+/* ava_display_subpicture @ 0x52f0 (924 bytes) */
+int ava_display_subpicture(ctx, subpicture, unused1, unused2, unused3)
   int ctx;
   byte *subpicture;
   undefined4 unused1;
@@ -1098,19 +1098,19 @@ int FUN_000052f0(ctx, subpicture, unused1, unused2, unused3)
       mapBaseOrRectLeft = mapBaseOrRectLeft + -1;
       cmdWriteOrDst = destEntry + 2;
     } while (mapBaseOrRectLeft != 0);
-    ((int (*)())FUN_0000bf20)(ctx,destEntry + -0x1e,0x80,lastHeaderOrPalette,0x10,wordsBase,wordsCursor,packedPalette);
-    ((int (*)())FUN_0000bf20)(ctx,*(undefined4 *)((char)*subpicture * 4 + ctx + 0x6c),
+    ((int (*)())ava_dcache_flush_range)(ctx,destEntry + -0x1e,0x80,lastHeaderOrPalette,0x10,wordsBase,wordsCursor,packedPalette);
+    ((int (*)())ava_dcache_flush_range)(ctx,*(undefined4 *)((char)*subpicture * 4 + ctx + 0x6c),
                  *(int *)(ctx + 100) * 0xc0,lastHeaderOrPalette,status,wordsBase,wordsCursor,packedPalette);
-    ((int (*)())FUN_00003cd0)(ctx,*subpicture + 4 & 0xff);
-    ((int (*)())FUN_0000cb00)(ctx,rectAndPalette[0],rectAndPalette[1],(char)*subpicture + 4,DAT_0000f1ac);
-    FUN_000029c0(ctx,*subpicture + 4 & 0xff);
+    ((int (*)())ava_acquire_image)(ctx,*subpicture + 4 & 0xff);
+    ((int (*)())ava_render_subpicture_pass)(ctx,rectAndPalette[0],rectAndPalette[1],(char)*subpicture + 4,DAT_0000f1ac);
+    ava_release_image(ctx,*subpicture + 4 & 0xff);
     status = 0;
   }
   return status;
 }
 
-/* FUN_000056a0 @ 0x56a0 (512 bytes) */
-int FUN_000056a0(ctx, slotId)
+/* ava_dvd_ext_emit_packet_0d @ 0x56a0 (512 bytes) */
+int ava_dvd_ext_emit_packet_0d(ctx, slotId)
   int ctx;
   int slotId;
 {
@@ -1167,8 +1167,8 @@ int FUN_000056a0(ctx, slotId)
   return 0;
 }
 
-/* FUN_000058b0 @ 0x58b0 (1196 bytes) */
-int FUN_000058b0(ctx)
+/* ava_init_context_state @ 0x58b0 (1196 bytes) */
+int ava_init_context_state(ctx)
   int ctx;
 {
   int ringBBody;
@@ -1284,14 +1284,14 @@ int FUN_000058b0(ctx)
   return;
 }
 
-/* FUN_00005d60 @ 0x5d60 (4 bytes) */
-int FUN_00005d60()
+/* ava_noop_5d60 @ 0x5d60 (4 bytes) */
+int ava_noop_5d60()
 {
   return;
 }
 
-/* FUN_00005d70 @ 0x5d70 (600 bytes) */
-int FUN_00005d70(ctx, unused1, unused2, rowOrScratch, unused3, unused4, unused5, colOrScratch)
+/* ava_build_block_grid @ 0x5d70 (600 bytes) */
+int ava_build_block_grid(ctx, unused1, unused2, rowOrScratch, unused3, unused4, unused5, colOrScratch)
   int ctx;
   undefined4 unused1;
   undefined4 unused2;
@@ -1429,14 +1429,14 @@ int FUN_00005d70(ctx, unused1, unused2, rowOrScratch, unused3, unused4, unused5,
       rowOrScratch = rowOrScratch + 4;
     } while (rowOrScratch < height);
   }
-  ((int (*)())FUN_0000bf20)(ctx,*(int *)(ctx + 0x15394) + 0xffU & 0xffffff00,
+  ((int (*)())ava_dcache_flush_range)(ctx,*(int *)(ctx + 0x15394) + 0xffU & 0xffffff00,
                *(int *)(ctx + 0x153a8) * *(int *)(ctx + 0x153ac),rowOrScratch,width,quadCount,quadCursor,
                colOrScratch);
   return;
 }
 
-/* FUN_00005fd0 @ 0x5fd0 (320 bytes) */
-int FUN_00005fd0(ctx, listSelect)
+/* ava_submit_idct_list @ 0x5fd0 (320 bytes) */
+int ava_submit_idct_list(ctx, listSelect)
   int ctx;
   int listSelect;
 {
@@ -1504,8 +1504,8 @@ LAB_00006078:
   return 0;
 }
 
-/* FUN_00006120 @ 0x6120 (252 bytes) */
-int FUN_00006120(ctx, listSelect)
+/* ava_submit_idct_list_and_remap @ 0x6120 (252 bytes) */
+int ava_submit_idct_list_and_remap(ctx, listSelect)
   int ctx;
   int listSelect;
 {
@@ -1513,7 +1513,7 @@ int FUN_00006120(ctx, listSelect)
   undefined4 submitResult;
   int mappedBase;
   
-  submitResult = ((int (*)())FUN_00005fd0)(ctx,listSelect);
+  submitResult = ((int (*)())ava_submit_idct_list)(ctx,listSelect);
   if (listSelect == 0) {
     _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),4,*(undefined4 *)PTR_0000f1a0,
                         ctx + 0x14554,ctx + 0x14558,1);
@@ -1536,8 +1536,8 @@ int FUN_00006120(ctx, listSelect)
   return submitResult;
 }
 
-/* FUN_00006230 @ 0x6230 (2900 bytes) */
-int FUN_00006230(ctx, outProgram, variant, halfHeight)
+/* ava_build_stage_program @ 0x6230 (2900 bytes) */
+int ava_build_stage_program(ctx, outProgram, variant, halfHeight)
   int ctx;
   undefined4 *outProgram;
   int variant;
@@ -1568,7 +1568,7 @@ int FUN_00006230(ctx, outProgram, variant, halfHeight)
     width = *(int *)(ctx + 0x578);
     heightOrHalfPitch = *(uint *)(ctx + 0x57c);
     uvTable = ctx + 0x152b4;
-    program = (undefined4 *)((int (*)())FUN_000096a0)(outProgram);
+    program = (undefined4 *)((int (*)())ava_emit_state_preamble)(outProgram);
     *program = 0x850;
     program[1] = 0x102;
     program[2] = 0x830;
@@ -1813,12 +1813,12 @@ int FUN_00006230(ctx, outProgram, variant, halfHeight)
     programEnd = outProgram + 0x44;
     outProgram[0x43] = 0x1b00;
   }
-  widthMbOrTmp = ((int (*)())FUN_00009980)(programEnd,0x10000,0x1c,uvTable);
+  widthMbOrTmp = ((int (*)())ava_emit_us_vector_data)(programEnd,0x10000,0x1c,uvTable);
   return widthMbOrTmp - (int)outProgram >> 2;
 }
 
-/* FUN_00006d90 @ 0x6d90 (644 bytes) */
-void FUN_00006d90(int ctx,double fpArg1,double fpArg2,double fpArg3,double fpArg4,double fpArg5,double fpArg6,double fpArg7,double fpArg8,double fpArg9,double fpArg10)
+/* ava_build_stage_programs @ 0x6d90 (644 bytes) */
+void ava_build_stage_programs(int ctx,double fpArg1,double fpArg2,double fpArg3,double fpArg4,double fpArg5,double fpArg6,double fpArg7,double fpArg8,double fpArg9,double fpArg10)
 {
   float widthF;
   float heightF;
@@ -1911,22 +1911,22 @@ void FUN_00006d90(int ctx,double fpArg1,double fpArg2,double fpArg3,double fpArg
   *(float *)(ctx + 0x15344) = oneAndHalfOverFourWidth;
   *(float *)(ctx + 0x15374) = twoOverWidth;
   *(float *)(ctx + 0x15338) = kS16Max / heightF;
-  programHandle = ((int (*)())FUN_00006230)(ctx,*(undefined4 *)(ctx + 0x15294),1,0);
+  programHandle = ((int (*)())ava_build_stage_program)(ctx,*(undefined4 *)(ctx + 0x15294),1,0);
   *(undefined4 *)(ctx + 0x15298) = programHandle;
-  programHandle = ((int (*)())FUN_00006230)(ctx,*(undefined4 *)(ctx + 0x1529c),2,0);
+  programHandle = ((int (*)())ava_build_stage_program)(ctx,*(undefined4 *)(ctx + 0x1529c),2,0);
   savedHeight = *(undefined4 *)(ctx + 0x57c);
   *(uint *)(ctx + 0x57c) = halfHeightAligned << 1;
   *(undefined4 *)(ctx + 0x152a0) = programHandle;
-  programHandle = ((int (*)())FUN_00006230)(ctx,*(undefined4 *)(ctx + 0x152a4),1,1);
+  programHandle = ((int (*)())ava_build_stage_program)(ctx,*(undefined4 *)(ctx + 0x152a4),1,1);
   *(undefined4 *)(ctx + 0x152a8) = programHandle;
-  programHandle = ((int (*)())FUN_00006230)(ctx,*(undefined4 *)(ctx + 0x152ac),2,1);
+  programHandle = ((int (*)())ava_build_stage_program)(ctx,*(undefined4 *)(ctx + 0x152ac),2,1);
   *(undefined4 *)(ctx + 0x57c) = savedHeight;
   *(undefined4 *)(ctx + 0x152b0) = programHandle;
   return;
 }
 
-/* FUN_00007020 @ 0x7020 (592 bytes) */
-int FUN_00007020(ctx, cmdPtr, mode)
+/* ava_emit_stage_programs @ 0x7020 (592 bytes) */
+int ava_emit_stage_programs(ctx, cmdPtr, mode)
   int ctx;
   undefined4 *cmdPtr;
   int mode;
@@ -2008,8 +2008,8 @@ int FUN_00007020(ctx, cmdPtr, mode)
   return cmdCursor;
 }
 
-/* FUN_00007270 @ 0x7270 (544 bytes) */
-int FUN_00007270(cmdPtr, ranges, variant)
+/* ava_emit_block_table_entries @ 0x7270 (544 bytes) */
+int ava_emit_block_table_entries(cmdPtr, ranges, variant)
   undefined4 cmdPtr;
   int *ranges;
   int variant;
@@ -2054,7 +2054,7 @@ int FUN_00007270(cmdPtr, ranges, variant)
   _memcpy(entries + entriesSoFar * 6,tableBase + ranges[8] * 0x18,rangeLength * 0x18);
   entries[entriesSoFar * 6] = entries[entriesSoFar * 6] | 4;
   entries[rangeLengthOrLast * 6] = entries[rangeLengthOrLast * 6] | 0x100;
-  cmdAfterEntries = (undefined4 *)((int (*)())FUN_00009980)(cmdPtr,0,(uint)(entriesAfterNext * 0x18) >> 2,entries);
+  cmdAfterEntries = (undefined4 *)((int (*)())ava_emit_us_vector_data)(cmdPtr,0,(uint)(entriesAfterNext * 0x18) >> 2,entries);
   *cmdAfterEntries = 0x118e;
   cmdAfterEntries[1] = 0;
   cmdAfterEntries[2] = 0x118c;
@@ -2064,8 +2064,8 @@ int FUN_00007270(cmdPtr, ranges, variant)
   return cmdAfterEntries + 6;
 }
 
-/* FUN_00007490 @ 0x7490 (696 bytes) */
-int FUN_00007490(ctx, blockType, wordCount, srcWords, alternateTable, stream)
+/* ava_emit_block_packet @ 0x7490 (696 bytes) */
+int ava_emit_block_packet(ctx, blockType, wordCount, srcWords, alternateTable, stream)
   int ctx;
   uint blockType;
   int wordCount;
@@ -2131,7 +2131,7 @@ int FUN_00007490(ctx, blockType, wordCount, srcWords, alternateTable, stream)
   cmdBuf[3] = 0x20000;
   cmdBuf[4] = ((unsigned char *)0x00001040U);
   cmdBuf[5] = 0;
-  cmdCursor = (undefined4 *)((int (*)())FUN_00007270)(cmdBuf + 6,programEntry,stream);
+  cmdCursor = (undefined4 *)((int (*)())ava_emit_block_table_entries)(cmdBuf + 6,programEntry,stream);
   *cmdCursor = ((unsigned char *)0x00001041U);
   cmdCursor[1] = *(undefined4 *)(programEntry + 0x30);
   cmdCursor[2] = (wordCount + 5) * 0x10000 | 0xc0003a00;
@@ -2160,8 +2160,8 @@ int FUN_00007490(ctx, blockType, wordCount, srcWords, alternateTable, stream)
   return;
 }
 
-/* FUN_00007760 @ 0x7760 (204 bytes) */
-int FUN_00007760(reservation, value, listSelect)
+/* ava_push_reservation_word @ 0x7760 (204 bytes) */
+int ava_push_reservation_word(reservation, value, listSelect)
   int *reservation;
   undefined4 value;
   int listSelect;
@@ -2200,8 +2200,8 @@ int FUN_00007760(reservation, value, listSelect)
   return 0;
 }
 
-/* FUN_00007850 @ 0x7850 (1416 bytes) */
-int FUN_00007850(ctx, ringWords)
+/* ava_emit_picture_setup_packet @ 0x7850 (1416 bytes) */
+int ava_emit_picture_setup_packet(ctx, ringWords)
   int ctx;
   int ringWords;
 {
@@ -2317,7 +2317,7 @@ LAB_00007998:
   *(undefined4 **)(ctx + 0x1516c) = programStart;
   *(undefined4 **)(ctx + 0x15170) = programStart;
   *(undefined4 **)(ctx + 0x15168) = programStart + ringWords + -1;
-  mapBaseOrAddr = ((int (*)())FUN_00007020)(ctx,programStart,1);
+  mapBaseOrAddr = ((int (*)())ava_emit_stage_programs)(ctx,programStart,1);
   ringBaseOrMid = *(int *)(ctx + 0x15164);
   *(int *)(ctx + 0x15174) = mapBaseOrAddr;
   header14[6] = mapBaseOrAddr - ringBaseOrMid >> 2;
@@ -2325,7 +2325,7 @@ LAB_00007998:
   wordsLeft = mapBaseOrAddr >> 2;
   ringBaseOrMid = ringBaseOrMid + ((mapBaseOrAddr >> 3) + (uint)((int)wordsLeft < 0 && (wordsLeft & 1) != 0)) * 4;
   *(int *)(ctx + 0x15178) = ringBaseOrMid;
-  mapBaseOrAddr = ((int (*)())FUN_00007020)(ctx,ringBaseOrMid,2);
+  mapBaseOrAddr = ((int (*)())ava_emit_stage_programs)(ctx,ringBaseOrMid,2);
   *(int *)(ctx + 0x1517c) = mapBaseOrAddr;
   header14[7] = mapBaseOrAddr - *(int *)(ctx + 0x15164) >> 2;
   surfaceIndex = 0;
@@ -2337,13 +2337,13 @@ LAB_00007998:
     if (remainingWords != 0) {
       entryHeader = *(int **)(ctx + 0x15174);
       *(int **)(ctx + 0x15174) = entryHeader + 2;
-      ((int (*)())FUN_00007490)(ctx,surfaceIndex,remainingWords,*(int *)(ringBaseOrMid + mapBaseOrAddr) * 4 + *(int *)(statEntry + 8) + 4,1,1)
+      ((int (*)())ava_emit_block_packet)(ctx,surfaceIndex,remainingWords,*(int *)(ringBaseOrMid + mapBaseOrAddr) * 4 + *(int *)(statEntry + 8) + 4,1,1)
       ;
       *entryHeader = (*(int *)(ctx + 0x15174) - (int)entryHeader >> 2) + -2;
       entryHeader[1] = *(int *)(ctx + 0x15188);
       entryHeader = *(int **)(ctx + 0x1517c);
       *(int **)(ctx + 0x1517c) = entryHeader + 2;
-      ((int (*)())FUN_00007490)(ctx,surfaceIndex,remainingWords,*(int *)(ringBaseOrMid + mapBaseOrAddr) * 4 + *(int *)(statEntry + 8) + 4,1,2)
+      ((int (*)())ava_emit_block_packet)(ctx,surfaceIndex,remainingWords,*(int *)(ringBaseOrMid + mapBaseOrAddr) * 4 + *(int *)(statEntry + 8) + 4,1,2)
       ;
       *entryHeader = (*(int *)(ctx + 0x1517c) - (int)entryHeader >> 2) + -2;
       entryHeader[1] = *(int *)(ctx + 0x15188);
@@ -2351,12 +2351,12 @@ LAB_00007998:
     if (*(int *)(statEntry + 4) != 0) {
       entryHeader = *(int **)(ctx + 0x15174);
       *(int **)(ctx + 0x15174) = entryHeader + 2;
-      ((int (*)())FUN_00007490)(ctx,surfaceIndex,*(undefined4 *)(statEntry + 4),*(undefined4 *)(statEntry + 8),0,1);
+      ((int (*)())ava_emit_block_packet)(ctx,surfaceIndex,*(undefined4 *)(statEntry + 4),*(undefined4 *)(statEntry + 8),0,1);
       *entryHeader = (*(int *)(ctx + 0x15174) - (int)entryHeader >> 2) + -2;
       entryHeader[1] = *(int *)(ctx + 0x15188);
       entryHeader = *(int **)(ctx + 0x1517c);
       *(int **)(ctx + 0x1517c) = entryHeader + 2;
-      ((int (*)())FUN_00007490)(ctx,surfaceIndex,*(undefined4 *)(statEntry + 4),*(undefined4 *)(statEntry + 8),0,2);
+      ((int (*)())ava_emit_block_packet)(ctx,surfaceIndex,*(undefined4 *)(statEntry + 4),*(undefined4 *)(statEntry + 8),0,2);
       *entryHeader = (*(int *)(ctx + 0x1517c) - (int)entryHeader >> 2) + -2;
       entryHeader[1] = *(int *)(ctx + 0x15188);
     }
@@ -2373,8 +2373,8 @@ LAB_00007998:
   return;
 }
 
-/* FUN_00007de0 @ 0x7de0 (416 bytes) */
-int FUN_00007de0(listState)
+/* ava_pad_command_lists @ 0x7de0 (416 bytes) */
+int ava_pad_command_lists(listState)
   int listState;
 {
   int chunkCount;
@@ -2441,8 +2441,8 @@ int FUN_00007de0(listState)
   return;
 }
 
-/* FUN_00007f80 @ 0x7f80 (1072 bytes) */
-int FUN_00007f80(ctx)
+/* ava_end_picture @ 0x7f80 (1072 bytes) */
+int ava_end_picture(ctx)
   int ctx;
 {
   int *chromaEntry;
@@ -2469,7 +2469,7 @@ int FUN_00007f80(ctx)
     if (*(int *)(ctx + 0x15124) == *(int *)(ctx + 0x1511c)) {
       return;
     }
-    surfaceIndexOrScratch = ((int (*)())FUN_00006120)(ctx,0);
+    surfaceIndexOrScratch = ((int (*)())ava_submit_idct_list_and_remap)(ctx,0);
     if (surfaceIndexOrScratch != 0) {
       return;
     }
@@ -2478,7 +2478,7 @@ int FUN_00007f80(ctx)
   }
   if ((((*(int *)(ctx + 0x55c) == 3) || (*(char *)(ctx + 0x574) != '\0')) &&
       (*(int *)(ctx + 0x15124) != *(int *)(ctx + 0x1511c))) &&
-     (programRingOrPitch = ((int (*)())FUN_00006120)(ctx,0), programRingOrPitch == 0)) {
+     (programRingOrPitch = ((int (*)())ava_submit_idct_list_and_remap)(ctx,0), programRingOrPitch == 0)) {
     descTable[*(int *)(ctx + 0x568) + 0x14b] = 1;
   }
   if (*(int *)(ctx + 0x15148) == *(int *)(ctx + 0x15140)) {
@@ -2486,7 +2486,7 @@ int FUN_00007f80(ctx)
     ringLimit = *(undefined4 **)(ctx + 0x38);
   }
   else {
-    programRingOrPitch = ((int (*)())FUN_00006120)(ctx,1);
+    programRingOrPitch = ((int (*)())ava_submit_idct_list_and_remap)(ctx,1);
     if (programRingOrPitch == 0) {
       surfaceIndexOrScratch = *(int *)(ctx + 0x15164);
       descTable[*(int *)(ctx + 0x568) + 0x14b] = 1;
@@ -2546,15 +2546,15 @@ int FUN_00007f80(ctx)
   cmdWrite[2] = 0x5c8;
   cmdWrite[3] = 0x20000;
   planeIndex = 0;
-  ((int (*)())FUN_00007de0)(ctx + 0x15164);
+  ((int (*)())ava_pad_command_lists)(ctx + 0x15164);
   programRingOrPitch = *(int *)(ctx + 0x151a4);
   mapBaseOrPlaneWords = (*(uint *)(ctx + 0x57c) >> 4) * programRingOrPitch;
   planeCursor = descTable + surfaceIndexOrScratch * 4 + 0x5326;
   do {
-    ((int (*)())FUN_0000bf20)(ctx,*planeCursor,mapBaseOrPlaneWords,in_r6,in_r7,regDefault,programRingOrPitch,regValue);
+    ((int (*)())ava_dcache_flush_range)(ctx,*planeCursor,mapBaseOrPlaneWords,in_r6,in_r7,regDefault,programRingOrPitch,regValue);
     chromaEntry = planeCursor + 0x14;
     planeCursor = planeCursor + 1;
-    ((int (*)())FUN_0000bf20)(ctx,*chromaEntry,mapBaseOrPlaneWords,in_r6,in_r7,regDefault,programRingOrPitch,regValue);
+    ((int (*)())ava_dcache_flush_range)(ctx,*chromaEntry,mapBaseOrPlaneWords,in_r6,in_r7,regDefault,programRingOrPitch,regValue);
     notLast = planeIndex != 3;
     planeIndex = planeIndex + 1;
   } while (notLast);
@@ -2574,14 +2574,14 @@ LAB_000082e0:
   descTable[*(int *)(ctx + 0xac4) * 2 + 0x15c] = *(int *)(*(int *)(ctx + 0x40) + 0x18);
   if (((*descTable != 3) && (*(char *)(ctx + 0x574) == '\0')) &&
      (*(int *)(ctx + 0x15124) != *(int *)(ctx + 0x1511c))) {
-    ((int (*)())FUN_00006120)(ctx,0);
+    ((int (*)())ava_submit_idct_list_and_remap)(ctx,0);
     return;
   }
   return;
 }
 
-/* FUN_000083e0 @ 0x83e0 (300 bytes) */
-int FUN_000083e0(ctx, wordsNeeded, listSelect)
+/* ava_reserve_list_words @ 0x83e0 (300 bytes) */
+int ava_reserve_list_words(ctx, wordsNeeded, listSelect)
   int ctx;
   int wordsNeeded;
   int listSelect;
@@ -2621,8 +2621,8 @@ int FUN_000083e0(ctx, wordsNeeded, listSelect)
         entriesLeft = entriesLeft + -1;
         entryCursor = entryCursor + 3;
       } while (entriesLeft != 0);
-      ((int (*)())FUN_00007850)(ctx,(totalWords + chunkCount * 0x80) * 2 + 1000);
-      ((int (*)())FUN_00007f80)(ctx);
+      ((int (*)())ava_emit_picture_setup_packet)(ctx,(totalWords + chunkCount * 0x80) * 2 + 1000);
+      ((int (*)())ava_end_picture)(ctx);
       resetCursor = (undefined4 *)(ctx + 0x1442c);
       chunkCount = 0x19;
       do {
@@ -2633,7 +2633,7 @@ int FUN_000083e0(ctx, wordsNeeded, listSelect)
       } while (chunkCount != 0);
     }
     else {
-      ((int (*)())FUN_00006120)(ctx,0);
+      ((int (*)())ava_submit_idct_list_and_remap)(ctx,0);
     }
     newCursor = wordsNeeded * 4 + *(int *)(bufferState + 8);
   }
@@ -2641,8 +2641,8 @@ int FUN_000083e0(ctx, wordsNeeded, listSelect)
   return;
 }
 
-/* FUN_00008510 @ 0x8510 (372 bytes) */
-int FUN_00008510(ctx, mbHeader, wordStream, mbAddress, listSelect)
+/* ava_emit_macroblock @ 0x8510 (372 bytes) */
+int ava_emit_macroblock(ctx, mbHeader, wordStream, mbAddress, listSelect)
   int ctx;
   int mbHeader;
   undefined4 *wordStream;
@@ -2673,7 +2673,7 @@ int FUN_00008510(ctx, mbHeader, wordStream, mbAddress, listSelect)
   }
   else {
     *(undefined1 *)(ctx + 0x590) = 0;
-    outHeader = (uint *)((int (*)())FUN_000083e0)(ctx,payloadWords + 2,listSelect);
+    outHeader = (uint *)((int (*)())ava_reserve_list_words)(ctx,payloadWords + 2,listSelect);
     flagWordOrRow = 0x80000000;
     if (*(char *)(mbHeader + 0x15) == '\0') {
       flagWordOrRow = 0;
@@ -2701,8 +2701,8 @@ int FUN_00008510(ctx, mbHeader, wordStream, mbAddress, listSelect)
   return;
 }
 
-/* FUN_00008690 @ 0x8690 (344 bytes) */
-int FUN_00008690(ctx, listState, reservation, wordCount, listSelect)
+/* ava_begin_reservation @ 0x8690 (344 bytes) */
+int ava_begin_reservation(ctx, listState, reservation, wordCount, listSelect)
   undefined4 ctx;
   int listState;
   undefined4 *reservation;
@@ -2743,7 +2743,7 @@ int FUN_00008690(ctx, listState, reservation, wordCount, listSelect)
       }
       else {
         *(uint *)(listState + 0x10) = newCursor + wordCount * -4;
-        ((int (*)())FUN_00007f80)(ctx);
+        ((int (*)())ava_end_picture)(ctx);
         reservationCursor = reservation + 3;
         reservation[2] = *(undefined4 *)(listState + 0x10);
         *(int *)(listState + 0x10) = wordCount * 4 + *(int *)(listState + 0x10);
@@ -2757,16 +2757,16 @@ int FUN_00008690(ctx, listState, reservation, wordCount, listSelect)
   return reservationCursor;
 }
 
-/* FUN_00008800 @ 0x8800 (28 bytes) */
-int FUN_00008800(ctx)
+/* ava_clear_list_marker @ 0x8800 (28 bytes) */
+int ava_clear_list_marker(ctx)
   int ctx;
 {
   *(undefined4 *)(*(int *)(ctx + 0x15164) + -0xc) = 0;
   return;
 }
 
-/* FUN_00008820 @ 0x8820 (3588 bytes) */
-int FUN_00008820(ctx, mbInfo, mbIndex)
+/* ava_emit_mb_motion_vectors @ 0x8820 (3588 bytes) */
+int ava_emit_mb_motion_vectors(ctx, mbInfo, mbIndex)
   int ctx;
   short *mbInfo;
   uint mbIndex;
@@ -3174,20 +3174,20 @@ switchD_00008894_caseD_0:
   return;
 }
 
-/* FUN_00009670 @ 0x9670 (28 bytes) */
-int FUN_00009670()
+/* ava_get_driver_name @ 0x9670 (28 bytes) */
+int ava_get_driver_name()
 {
   return "ATIRadeonX1000";
 }
 
-/* FUN_00009690 @ 0x9690 (4 bytes) */
-int FUN_00009690()
+/* ava_noop_9690 @ 0x9690 (4 bytes) */
+int ava_noop_9690()
 {
   return;
 }
 
-/* FUN_000096a0 @ 0x96a0 (96 bytes) */
-int FUN_000096a0(cmdPtr)
+/* ava_emit_state_preamble @ 0x96a0 (96 bytes) */
+int ava_emit_state_preamble(cmdPtr)
   undefined4 *cmdPtr;
 {
   *cmdPtr = 0x5c8;
@@ -3201,8 +3201,8 @@ int FUN_000096a0(cmdPtr)
   return cmdPtr + 8;
 }
 
-/* FUN_00009700 @ 0x9700 (528 bytes) */
-int FUN_00009700(cmdPtr, stageCount)
+/* ava_emit_shader_stage_setup @ 0x9700 (528 bytes) */
+int ava_emit_shader_stage_setup(cmdPtr, stageCount)
   undefined4 *cmdPtr;
   uint stageCount;
 {
@@ -3282,8 +3282,8 @@ int FUN_00009700(cmdPtr, stageCount)
   return entryCursor;
 }
 
-/* FUN_00009930 @ 0x9930 (80 bytes) */
-int FUN_00009930(cmdPtr, registerHeader, data, count)
+/* ava_emit_register_data @ 0x9930 (80 bytes) */
+int ava_emit_register_data(cmdPtr, registerHeader, data, count)
   uint *cmdPtr;
   uint registerHeader;
   uint *data;
@@ -3300,8 +3300,8 @@ int FUN_00009930(cmdPtr, registerHeader, data, count)
   return cmdPtr;
 }
 
-/* FUN_00009980 @ 0x9980 (48 bytes) */
-int FUN_00009980(cmdPtr, registerValue, count, data)
+/* ava_emit_us_vector_data @ 0x9980 (48 bytes) */
+int ava_emit_us_vector_data(cmdPtr, registerValue, count, data)
   undefined4 *cmdPtr;
   undefined4 registerValue;
   undefined4 count;
@@ -3311,12 +3311,12 @@ int FUN_00009980(cmdPtr, registerValue, count, data)
   
   *cmdPtr = 0x1094;
   cmdPtr[1] = registerValue;
-  nextPtr = ((int (*)())FUN_00009930)(cmdPtr + 2,0x1095,data,count);
+  nextPtr = ((int (*)())ava_emit_register_data)(cmdPtr + 2,0x1095,data,count);
   return nextPtr;
 }
 
-/* FUN_000099b0 @ 0x99b0 (264 bytes) */
-int FUN_000099b0(cmdPtr, constBlockB, constCountB, constBlockA, constWordsA, flagsWord)
+/* ava_emit_shader_constants @ 0x99b0 (264 bytes) */
+int ava_emit_shader_constants(cmdPtr, constBlockB, constCountB, constBlockA, constWordsA, flagsWord)
   undefined4 *cmdPtr;
   int constBlockB;
   int constCountB;
@@ -3327,10 +3327,10 @@ int FUN_000099b0(cmdPtr, constBlockB, constCountB, constBlockA, constWordsA, fla
   int countField;
   
   if (constBlockA != 0) {
-    cmdPtr = (undefined4 *)((int (*)())FUN_00009980)(cmdPtr,0x10000,(constWordsA & 0xfffffff) << 2,constBlockA);
+    cmdPtr = (undefined4 *)((int (*)())ava_emit_us_vector_data)(cmdPtr,0x10000,(constWordsA & 0xfffffff) << 2,constBlockA);
   }
   if (constBlockB != 0) {
-    cmdPtr = (undefined4 *)((int (*)())FUN_00009980)(cmdPtr,0,(uint)(constCountB * 0x18) >> 2,constBlockB);
+    cmdPtr = (undefined4 *)((int (*)())ava_emit_us_vector_data)(cmdPtr,0,(uint)(constCountB * 0x18) >> 2,constBlockB);
   }
   *cmdPtr = 0x1180;
   cmdPtr[1] = 0;
@@ -3350,8 +3350,8 @@ int FUN_000099b0(cmdPtr, constBlockB, constCountB, constBlockA, constWordsA, fla
   return cmdPtr + 0xe;
 }
 
-/* FUN_00009ac0 @ 0x9ac0 (424 bytes) */
-int FUN_00009ac0(cmdPtr, srcCoords, dstCoords, srcWidth, srcHeight)
+/* ava_emit_textured_quad @ 0x9ac0 (424 bytes) */
+int ava_emit_textured_quad(cmdPtr, srcCoords, dstCoords, srcWidth, srcHeight)
   undefined4 *cmdPtr;
   float *srcCoords;
   undefined4 *dstCoords;
@@ -3410,8 +3410,8 @@ int FUN_00009ac0(cmdPtr, srcCoords, dstCoords, srcWidth, srcHeight)
   return cmdPtr + 0x16;
 }
 
-/* FUN_00009c80 @ 0x9c80 (1160 bytes) */
-int FUN_00009c80(ctx, headerWord, enableFlag)
+/* ava_render_hue_saturation_pass @ 0x9c80 (1160 bytes) */
+int ava_render_hue_saturation_pass(ctx, headerWord, enableFlag)
   int ctx;
   undefined4 headerWord;
   int enableFlag;
@@ -3474,8 +3474,8 @@ int FUN_00009c80(ctx, headerWord, enableFlag)
     cmdWrite = cmdWrite + 1;
     fillCount = fillCount + -1;
   } while (fillCount != 0);
-  cmdAfterClear = ((int (*)())FUN_000096a0)(cmdWrite);
-  cmdWrite = (undefined4 *)((int (*)())FUN_00009700)(cmdAfterClear,1);
+  cmdAfterClear = ((int (*)())ava_emit_state_preamble)(cmdWrite);
+  cmdWrite = (undefined4 *)((int (*)())ava_emit_shader_stage_setup)(cmdAfterClear,1);
   *cmdWrite = ((unsigned char *)0x00001041U);
   cmdWrite[1] = 3;
   cmdWrite[2] = 0x1100;
@@ -3517,7 +3517,7 @@ int FUN_00009c80(ctx, headerWord, enableFlag)
   DAT_0000f020 = DAT_0000f018;
   DAT_0000f02c = DAT_0000f024;
   DAT_0000f030 = DAT_0000f028;
-  cmdWrite = (undefined4 *)((int (*)())FUN_000099b0)(cmdWrite + 0x16,&DAT_0000ea9c,4,&DAT_0000f004,3,3);
+  cmdWrite = (undefined4 *)((int (*)())ava_emit_shader_constants)(cmdWrite + 0x16,&DAT_0000ea9c,4,&DAT_0000f004,3,3);
   *cmdWrite = 0x11a9;
   cmdWrite[1] = 0x1b00;
   cmdWrite[2] = 0x11aa;
@@ -3534,7 +3534,7 @@ int FUN_00009c80(ctx, headerWord, enableFlag)
   dstLeft = 0;
   dstBottom = (float)((double)CONCAT44(0x43300000,i2dLo2) - 4503601774854144.0);
   dstRight = (float)((double)CONCAT44(0x43300000,i2dLo1) - 4503601774854144.0);
-  ((int (*)())FUN_00009ac0)(cmdWrite + 8,0,&dstLeft,quadWidth,halfHeight);
+  ((int (*)())ava_emit_textured_quad)(cmdWrite + 8,0,&dstLeft,quadWidth,halfHeight);
   mapMemoryType = PTR_0000f1a0;
   lastHeader = *(uint **)(ctx + 0x30);
   *lastHeader = *(int *)(ctx + 0x34) - (int)lastHeader >> 2 | *lastHeader;
@@ -3550,8 +3550,8 @@ int FUN_00009c80(ctx, headerWord, enableFlag)
   return;
 }
 
-/* FUN_0000a110 @ 0xa110 (964 bytes) */
-int FUN_0000a110(ctx, headerWord, enableFlag)
+/* ava_render_brightness_contrast_pass @ 0xa110 (964 bytes) */
+int ava_render_brightness_contrast_pass(ctx, headerWord, enableFlag)
   int ctx;
   undefined4 headerWord;
   int enableFlag;
@@ -3607,8 +3607,8 @@ int FUN_0000a110(ctx, headerWord, enableFlag)
     cmdWrite = cmdWrite + 1;
     fillCount = fillCount + -1;
   } while (fillCount != 0);
-  cmdAfterClear = ((int (*)())FUN_000096a0)(cmdWrite);
-  cmdWrite = (undefined4 *)((int (*)())FUN_00009700)(cmdAfterClear,1);
+  cmdAfterClear = ((int (*)())ava_emit_state_preamble)(cmdWrite);
+  cmdWrite = (undefined4 *)((int (*)())ava_emit_shader_stage_setup)(cmdAfterClear,1);
   *cmdWrite = ((unsigned char *)0x00001041U);
   cmdWrite[1] = 1;
   cmdWrite[2] = 0x1100;
@@ -3630,7 +3630,7 @@ int FUN_0000a110(ctx, headerWord, enableFlag)
   DAT_0000f048 = DAT_0000f044;
   DAT_0000f04c = DAT_0000f044;
   DAT_0000f050 = DAT_0000f044;
-  cmdWrite = (undefined4 *)((int (*)())FUN_000099b0)(cmdWrite + 0xc,&DAT_0000eafc,2,&DAT_0000f034,2,2);
+  cmdWrite = (undefined4 *)((int (*)())ava_emit_shader_constants)(cmdWrite + 0xc,&DAT_0000eafc,2,&DAT_0000f034,2,2);
   *cmdWrite = 0x11a9;
   cmdWrite[1] = 0x1b00;
   cmdWrite[2] = 0x11aa;
@@ -3647,7 +3647,7 @@ int FUN_0000a110(ctx, headerWord, enableFlag)
   dstLeft = 0;
   dstBottom = (float)((double)CONCAT44(0x43300000,i2dLo2) - 4503601774854144.0);
   dstRight = (float)((double)CONCAT44(0x43300000,i2dLo1) - 4503601774854144.0);
-  ((int (*)())FUN_00009ac0)(cmdWrite + 8,0,&dstLeft,quadWidth,surfaceHeight);
+  ((int (*)())ava_emit_textured_quad)(cmdWrite + 8,0,&dstLeft,quadWidth,surfaceHeight);
   mapMemoryType = PTR_0000f1a0;
   lastHeader = *(uint **)(ctx + 0x30);
   *lastHeader = *(int *)(ctx + 0x34) - (int)lastHeader >> 2 | *lastHeader;
@@ -3663,8 +3663,8 @@ int FUN_0000a110(ctx, headerWord, enableFlag)
   return;
 }
 
-/* FUN_0000a4e0 @ 0xa4e0 (1304 bytes) */
-int FUN_0000a4e0(ctx, slotIndex, pixelDesc)
+/* ava_render_convert_frame @ 0xa4e0 (1304 bytes) */
+int ava_render_convert_frame(ctx, slotIndex, pixelDesc)
   int ctx;
   int slotIndex;
   int pixelDesc;
@@ -3720,8 +3720,8 @@ int FUN_0000a4e0(ctx, slotIndex, pixelDesc)
     cmdWrite = cmdWrite + 1;
     fillCount = fillCount + -1;
   } while (fillCount != 0);
-  cmdAfterClear = ((int (*)())FUN_000096a0)(cmdWrite);
-  cmdWrite = (undefined4 *)((int (*)())FUN_00009700)(cmdAfterClear,1);
+  cmdAfterClear = ((int (*)())ava_emit_state_preamble)(cmdWrite);
+  cmdWrite = (undefined4 *)((int (*)())ava_emit_shader_stage_setup)(cmdAfterClear,1);
   *cmdWrite = 0x1100;
   cmdWrite[1] = 0xa92;
   cmdWrite[2] = 0x1110;
@@ -3747,7 +3747,7 @@ int FUN_0000a4e0(ctx, slotIndex, pixelDesc)
   cmdWrite[0x13] = (pitchBytes >> 1) - 1;
   cmdWrite[0x14] = ((unsigned char *)0x00001041U);
   cmdWrite[0x15] = 3;
-  cmdWrite = (undefined4 *)((int (*)())FUN_000099b0)(cmdWrite + 0x16,&DAT_0000eb7c,7,&DAT_0000eb2c,5,3);
+  cmdWrite = (undefined4 *)((int (*)())ava_emit_shader_constants)(cmdWrite + 0x16,&DAT_0000eb7c,7,&DAT_0000eb2c,5,3);
   formatCode = *(int *)(pixelDesc + 0xc);
   if (((formatCode == 0x61726762) || (formatCode == 0x61723135)) || (formatCode != 0x72676261)) {
     *cmdWrite = 0x11a9;
@@ -3781,7 +3781,7 @@ int FUN_0000a4e0(ctx, slotIndex, pixelDesc)
   dstLeft = 0;
   dstRight = (float)((double)CONCAT44(0x43300000,i2dLo1) - 4503599627370496.0);
   dstBottom = (float)((double)CONCAT44(0x43300000,i2dLo2) - 4503599627370496.0);
-  cmdWrite = (undefined4 *)((int (*)())FUN_00009ac0)(cmdWrite + 0xc,0,&dstLeft,i2dLo1,i2dLo2);
+  cmdWrite = (undefined4 *)((int (*)())ava_emit_textured_quad)(cmdWrite + 0xc,0,&dstLeft,i2dLo1,i2dLo2);
   *cmdWrite = 0x5c8;
   cmdWrite[1] = 0x10030000;
   mapMemoryType = PTR_0000f1a0;
@@ -3801,8 +3801,8 @@ int FUN_0000a4e0(ctx, slotIndex, pixelDesc)
   return;
 }
 
-/* FUN_0000aa00 @ 0xaa00 (1152 bytes) */
-int FUN_0000aa00(ctx, slotIndex, pixelDesc)
+/* ava_render_convert_frame_yuv2 @ 0xaa00 (1152 bytes) */
+int ava_render_convert_frame_yuv2(ctx, slotIndex, pixelDesc)
   int ctx;
   int slotIndex;
   int pixelDesc;
@@ -3861,8 +3861,8 @@ int FUN_0000aa00(ctx, slotIndex, pixelDesc)
     cmdWrite = cmdWrite + 1;
     fillCount = fillCount + -1;
   } while (fillCount != 0);
-  cmdAfterClear = ((int (*)())FUN_000096a0)(cmdWrite);
-  cmdWrite = (undefined4 *)((int (*)())FUN_00009700)(cmdAfterClear,1);
+  cmdAfterClear = ((int (*)())ava_emit_state_preamble)(cmdWrite);
+  cmdWrite = (undefined4 *)((int (*)())ava_emit_shader_stage_setup)(cmdAfterClear,1);
   *cmdWrite = ((unsigned char *)0x00001041U);
   cmdWrite[1] = 3;
   cmdWrite[2] = 0x1100;
@@ -3888,7 +3888,7 @@ int FUN_0000aa00(ctx, slotIndex, pixelDesc)
   cmdWrite[0x13] = 0x1810c003;
   cmdWrite[0x14] = 0x1141;
   cmdWrite[0x15] = pitchWordsMinus1;
-  cmdWrite = (undefined4 *)((int (*)())FUN_000099b0)(cmdWrite + 0x16,&DAT_0000ec24,4,0,0,3);
+  cmdWrite = (undefined4 *)((int (*)())ava_emit_shader_constants)(cmdWrite + 0x16,&DAT_0000ec24,4,0,0,3);
   *cmdWrite = 0x11a9;
   cmdWrite[1] = 0x1b00;
   cmdWrite[2] = 0x11aa;
@@ -3909,7 +3909,7 @@ int FUN_0000aa00(ctx, slotIndex, pixelDesc)
   dstLeft = 0;
   dstBottom = (float)((double)CONCAT44(0x43300000,i2dLo2) - 4503601774854144.0);
   dstRight = (float)((double)CONCAT44(0x43300000,i2dLo1) - 4503601774854144.0);
-  cmdWrite = (undefined4 *)((int (*)())FUN_00009ac0)(cmdWrite + 0xc,0,&dstLeft,halfWidth,surfaceHeight);
+  cmdWrite = (undefined4 *)((int (*)())ava_emit_textured_quad)(cmdWrite + 0xc,0,&dstLeft,halfWidth,surfaceHeight);
   *cmdWrite = 0x5c8;
   cmdWrite[1] = 0x10030000;
   mapMemoryType = PTR_0000f1a0;
@@ -3929,8 +3929,8 @@ int FUN_0000aa00(ctx, slotIndex, pixelDesc)
   return;
 }
 
-/* FUN_0000ae80 @ 0xae80 (2380 bytes) */
-void FUN_0000ae80(int ctx,double fpPassThrough,double unusedFp2,double unusedFp3,double unusedFp4)
+/* ava_render_scale_pass @ 0xae80 (2380 bytes) */
+void ava_render_scale_pass(int ctx,double fpPassThrough,double unusedFp2,double unusedFp3,double unusedFp4)
 {
   float srcHeightOrSrcTopScaled;
   float srcWidthOrSrcLeftScaled;
@@ -4284,8 +4284,8 @@ LAB_0000b2b8:
     cmdWrite = cmdWrite + 1;
     fillCount = fillCount + -1;
   } while (fillCount != 0);
-  cmdAfterClear = ((int (*)())FUN_000096a0)(cmdWrite);
-  cmdWrite = (undefined4 *)((int (*)())FUN_00009700)(cmdAfterClear,1);
+  cmdAfterClear = ((int (*)())ava_emit_state_preamble)(cmdWrite);
+  cmdWrite = (undefined4 *)((int (*)())ava_emit_shader_stage_setup)(cmdAfterClear,1);
   *cmdWrite = 0x1100;
   cmdWrite[1] = 0xa92;
   cmdWrite[2] = 0x1110;
@@ -4300,7 +4300,7 @@ LAB_0000b2b8:
   cmdWrite[9] = *(int *)(ctx + 0x68) + -1;
   cmdWrite[10] = ((unsigned char *)0x00001041U);
   cmdWrite[0xb] = 1;
-  cmdWrite = (undefined4 *)((int (*)())FUN_000099b0)(cmdWrite + 0xc,&DAT_0000ec84,2,0,0,1);
+  cmdWrite = (undefined4 *)((int (*)())ava_emit_shader_constants)(cmdWrite + 0xc,&DAT_0000ec84,2,0,0,1);
   *cmdWrite = 0x11a9;
   cmdWrite[1] = 0x1b00;
   cmdWrite[2] = 0x11aa;
@@ -4311,7 +4311,7 @@ LAB_0000b2b8:
   cmdWrite[7] = 0xf;
   cmdWrite[8] = 0x1381;
   cmdWrite[9] = 0x27260005;
-  fpPassThrough = (double)((int (*)())FUN_00009ac0)(cmdWrite + 10,&dstOffsetLeft,&srcCoordLeft,
+  fpPassThrough = (double)((int (*)())ava_emit_textured_quad)(cmdWrite + 10,&dstOffsetLeft,&srcCoordLeft,
                                   (int)*(short *)(ctx + 0x112) -
                                   (int)*(short *)(ctx + 0x10e),
                                   (int)*(short *)(ctx + 0x110) -
@@ -4321,8 +4321,8 @@ LAB_0000b7d0:
   return;
 }
 
-/* FUN_0000b7f0 @ 0xb7f0 (964 bytes) */
-int FUN_0000b7f0(ctx, headerWord, enableFlag)
+/* ava_render_source_rect_pass @ 0xb7f0 (964 bytes) */
+int ava_render_source_rect_pass(ctx, headerWord, enableFlag)
   int ctx;
   undefined4 headerWord;
   int enableFlag;
@@ -4387,8 +4387,8 @@ int FUN_0000b7f0(ctx, headerWord, enableFlag)
     cmdWrite = cmdWrite + 1;
     fillCount = fillCount + -1;
   } while (fillCount != 0);
-  cmdAfterClear = ((int (*)())FUN_000096a0)(cmdWrite);
-  cmdWrite = (undefined4 *)((int (*)())FUN_00009700)(cmdAfterClear,1);
+  cmdAfterClear = ((int (*)())ava_emit_state_preamble)(cmdWrite);
+  cmdWrite = (undefined4 *)((int (*)())ava_emit_shader_stage_setup)(cmdAfterClear,1);
   *cmdWrite = 0x1100;
   cmdWrite[1] = 0x1492;
   cmdWrite[2] = 0x1110;
@@ -4409,7 +4409,7 @@ int FUN_0000b7f0(ctx, headerWord, enableFlag)
   cmdWrite[0xf] = 0x18044803;
   cmdWrite[0x10] = ((unsigned char *)0x00001041U);
   cmdWrite[0x11] = 3;
-  cmdWrite = (undefined4 *)((int (*)())FUN_000099b0)(cmdWrite + 0x12,&DAT_0000eb7c,7,&DAT_0000eb2c,5,3);
+  cmdWrite = (undefined4 *)((int (*)())ava_emit_shader_constants)(cmdWrite + 0x12,&DAT_0000eb7c,7,&DAT_0000eb2c,5,3);
   *cmdWrite = 0x11a9;
   cmdWrite[1] = 0x1b00;
   cmdWrite[2] = 0x11aa;
@@ -4438,11 +4438,11 @@ int FUN_0000b7f0(ctx, headerWord, enableFlag)
   srcBottom = (float)((double)CONCAT44(0x43300000,i2dLo4) - 4503601774854144.0);
   srcTop = (float)((double)CONCAT44(0x43300000,i2dLo3) - 4503601774854144.0);
   dstRight = (float)((double)CONCAT44(0x43300000,i2dLo5) - 4503599627370496.0);
-  return ((int (*)())FUN_00009ac0)(cmdWrite + 8,&srcLeft,&dstLeft,i2dLo5,i2dLo6);
+  return ((int (*)())ava_emit_textured_quad)(cmdWrite + 8,&srcLeft,&dstLeft,i2dLo5,i2dLo6);
 }
 
-/* FUN_0000bbc0 @ 0xbbc0 (864 bytes) */
-int FUN_0000bbc0(ctx, headerWord, secondWord, widthPixels, height, bytesPerPixel)
+/* ava_render_pass_47 @ 0xbbc0 (864 bytes) */
+int ava_render_pass_47(ctx, headerWord, secondWord, widthPixels, height, bytesPerPixel)
   int ctx;
   undefined4 headerWord;
   undefined4 secondWord;
@@ -4505,8 +4505,8 @@ int FUN_0000bbc0(ctx, headerWord, secondWord, widthPixels, height, bytesPerPixel
     cmdWrite = cmdWrite + 1;
     fillCount = fillCount + -1;
   } while (fillCount != 0);
-  cmdAfterClear = ((int (*)())FUN_000096a0)(cmdWrite);
-  cmdWrite = (undefined4 *)((int (*)())FUN_00009700)(cmdAfterClear,1);
+  cmdAfterClear = ((int (*)())ava_emit_state_preamble)(cmdWrite);
+  cmdWrite = (undefined4 *)((int (*)())ava_emit_shader_stage_setup)(cmdAfterClear,1);
   *cmdWrite = 0x1100;
   cmdWrite[1] = 0xa92;
   cmdWrite[2] = 0x1110;
@@ -4517,7 +4517,7 @@ int FUN_0000bbc0(ctx, headerWord, secondWord, widthPixels, height, bytesPerPixel
   cmdWrite[7] = 0xa60c;
   cmdWrite[8] = ((unsigned char *)0x00001041U);
   cmdWrite[9] = 1;
-  cmdWrite = (undefined4 *)((int (*)())FUN_000099b0)(cmdWrite + 10,&DAT_0000ecb4,2,0,0,1);
+  cmdWrite = (undefined4 *)((int (*)())ava_emit_shader_constants)(cmdWrite + 10,&DAT_0000ecb4,2,0,0,1);
   *cmdWrite = 0x11a9;
   cmdWrite[1] = 0x1b00;
   cmdWrite[2] = 0x11aa;
@@ -4534,7 +4534,7 @@ int FUN_0000bbc0(ctx, headerWord, secondWord, widthPixels, height, bytesPerPixel
   dstLeft = 0;
   dstBottom = (float)((double)CONCAT44(0x43300000,i2dLo2) - 4503601774854144.0);
   dstRight = (float)((double)CONCAT44(0x43300000,i2dLo1) - 4503601774854144.0);
-  ((int (*)())FUN_00009ac0)(cmdWrite + 8,0,&dstLeft,widthWords,height);
+  ((int (*)())ava_emit_textured_quad)(cmdWrite + 8,0,&dstLeft,widthWords,height);
   mapMemoryType = PTR_0000f1a0;
   lastHeader = *(uint **)(ctx + 0x30);
   *lastHeader = *(int *)(ctx + 0x34) - (int)lastHeader >> 2 | *lastHeader;
@@ -4550,8 +4550,8 @@ int FUN_0000bbc0(ctx, headerWord, secondWord, widthPixels, height, bytesPerPixel
   return;
 }
 
-/* FUN_0000bf20 @ 0xbf20 (72 bytes) */
-int FUN_0000bf20(ctx, address, length, unused1, unused2, unused3, unused4, unused5)
+/* ava_dcache_flush_range @ 0xbf20 (72 bytes) */
+int ava_dcache_flush_range(ctx, address, length, unused1, unused2, unused3, unused4, unused5)
   int ctx;
   uint address;
   int length;
@@ -4578,8 +4578,8 @@ int FUN_0000bf20(ctx, address, length, unused1, unused2, unused3, unused4, unuse
   return;
 }
 
-/* FUN_0000bf70 @ 0xbf70 (80 bytes) */
-int FUN_0000bf70(ctx, address, length, unused1, unused2, unused3, unused4, unused5)
+/* ava_dcache_flush_range_sync @ 0xbf70 (80 bytes) */
+int ava_dcache_flush_range_sync(ctx, address, length, unused1, unused2, unused3, unused4, unused5)
   int ctx;
   uint address;
   int length;
@@ -4608,8 +4608,8 @@ int FUN_0000bf70(ctx, address, length, unused1, unused2, unused3, unused4, unuse
   return;
 }
 
-/* FUN_0000bfc0 @ 0xbfc0 (400 bytes) */
-int FUN_0000bfc0(ctx)
+/* ava_emit_deint_enable_packet @ 0xbfc0 (400 bytes) */
+int ava_emit_deint_enable_packet(ctx)
   int ctx;
 {
   undefined *mapMemoryType;
@@ -4654,8 +4654,8 @@ int FUN_0000bfc0(ctx)
   return;
 }
 
-/* FUN_0000c160 @ 0xc160 (848 bytes) */
-int FUN_0000c160(ctx, cmdPtr, srcDesc, fieldMode, flipFlag)
+/* ava_emit_deint_field_quad @ 0xc160 (848 bytes) */
+int ava_emit_deint_field_quad(ctx, cmdPtr, srcDesc, fieldMode, flipFlag)
   int ctx;
   undefined4 *cmdPtr;
   int srcDesc;
@@ -4753,8 +4753,8 @@ LAB_0000c3e4:
   return cmdPtr + 0x42;
 }
 
-/* FUN_0000c4b0 @ 0xc4b0 (1508 bytes) */
-int FUN_0000c4b0(ctx, frameInfo, unused1, frameArg)
+/* ava_render_deinterlace_pass @ 0xc4b0 (1508 bytes) */
+int ava_render_deinterlace_pass(ctx, frameInfo, unused1, frameArg)
   int ctx;
   char *frameInfo;
   undefined4 unused1;
@@ -4799,7 +4799,7 @@ int FUN_0000c4b0(ctx, frameInfo, unused1, frameArg)
   packet[7] = 0x80000000;
   packet[8] = 0x80000000;
   packet[9] = 0x80000000;
-  programCursor = (undefined4 *)((int (*)())FUN_000096a0)(packet + 10);
+  programCursor = (undefined4 *)((int (*)())ava_emit_state_preamble)(packet + 10);
   *programCursor = 0x850;
   programCursor[1] = 0x102;
   programCursor[2] = 0x854;
@@ -4880,7 +4880,7 @@ int FUN_0000c4b0(ctx, frameInfo, unused1, frameArg)
   DAT_0000f084 = 0.1254902;
   DAT_0000f088 = 0.1254902;
   DAT_0000f08c = 0.1254902;
-  programCursor = (undefined4 *)((int (*)())FUN_000099b0)(programEntry + 0x24,&DAT_0000ece4,0x16,&DAT_0000f054,6,9);
+  programCursor = (undefined4 *)((int (*)())ava_emit_shader_constants)(programEntry + 0x24,&DAT_0000ece4,0x16,&DAT_0000f054,6,9);
   *programCursor = 0x11a9;
   programCursor[1] = 0x1b00;
   programCursor[2] = 0x11aa;
@@ -4890,9 +4890,9 @@ int FUN_0000c4b0(ctx, frameInfo, unused1, frameArg)
   programCursor[6] = 0x11ac;
   programCursor[7] = 0xf;
   packet[5] = (int)(programCursor + 8) - (int)packet >> 2;
-  mapBaseOrProgramEnd = ((int (*)())FUN_0000c160)(ctx,programCursor + 8,frameInfo,1,frameArg);
+  mapBaseOrProgramEnd = ((int (*)())ava_emit_deint_field_quad)(ctx,programCursor + 8,frameInfo,1,frameArg);
   packet[6] = mapBaseOrProgramEnd - (int)packet >> 2;
-  ((int (*)())FUN_0000c160)(ctx,mapBaseOrProgramEnd,frameInfo,2,frameArg);
+  ((int (*)())ava_emit_deint_field_quad)(ctx,mapBaseOrProgramEnd,frameInfo,2,frameArg);
   taskPortPtr = PTR_0000f1a0;
   lastHeader = *(uint **)(ctx + 0x30);
   *lastHeader = *(int *)(ctx + 0x34) - (int)lastHeader >> 2 | *lastHeader;
@@ -4908,23 +4908,23 @@ int FUN_0000c4b0(ctx, frameInfo, unused1, frameArg)
   return;
 }
 
-/* FUN_0000caa0 @ 0xcaa0 (92 bytes) */
-int FUN_0000caa0(ctx, arg1, arg2, arg3)
+/* ava_deinterlace_frame @ 0xcaa0 (92 bytes) */
+int ava_deinterlace_frame(ctx, arg1, arg2, arg3)
   int ctx;
   undefined4 arg1;
   undefined4 arg2;
   undefined4 arg3;
 {
   if (*(int *)(ctx + 0x120) == 4) {
-    ((int (*)())FUN_0000c4b0)(ctx,arg1,arg2,arg3);
+    ((int (*)())ava_render_deinterlace_pass)(ctx,arg1,arg2,arg3);
   }
   *(undefined4 *)(*(int *)(ctx + 0xac4) * 8 + ctx + 0xacc) =
        *(undefined4 *)(*(int *)(ctx + 0x40) + 0x18);
   return;
 }
 
-/* FUN_0000cb00 @ 0xcb00 (1136 bytes) */
-int FUN_0000cb00(ctx, srcPosPacked, srcSizePacked, headerWord, secondWord)
+/* ava_render_subpicture_pass @ 0xcb00 (1136 bytes) */
+int ava_render_subpicture_pass(ctx, srcPosPacked, srcSizePacked, headerWord, secondWord)
   int ctx;
   undefined4 srcPosPacked;
   undefined4 srcSizePacked;
@@ -5017,8 +5017,8 @@ int FUN_0000cb00(ctx, srcPosPacked, srcSizePacked, headerWord, secondWord)
     cmdWrite = cmdWrite + 1;
     fillCount = fillCount + -1;
   } while (fillCount != 0);
-  cmdAfterClear = ((int (*)())FUN_000096a0)(cmdWrite);
-  cmdWrite = (undefined4 *)((int (*)())FUN_00009700)(cmdAfterClear,1);
+  cmdAfterClear = ((int (*)())ava_emit_state_preamble)(cmdWrite);
+  cmdWrite = (undefined4 *)((int (*)())ava_emit_shader_stage_setup)(cmdAfterClear,1);
   *cmdWrite = 0x1100;
   cmdWrite[1] = 0xa92;
   cmdWrite[2] = 0x1110;
@@ -5047,7 +5047,7 @@ int FUN_0000cb00(ctx, srcPosPacked, srcSizePacked, headerWord, secondWord)
   DAT_0000f0bc = DAT_0000f0b4;
   DAT_0000f0c0 = DAT_0000f0b4;
   i2dLo5 = halfWidth;
-  cmdWrite = (undefined4 *)((int (*)())FUN_000099b0)(cmdWrite + 0x16,&DAT_0000eef4,9,&DAT_0000f0b4,1,4);
+  cmdWrite = (undefined4 *)((int (*)())ava_emit_shader_constants)(cmdWrite + 0x16,&DAT_0000eef4,9,&DAT_0000f0b4,1,4);
   *cmdWrite = 0x11a9;
   cmdWrite[1] = 0x1b05;
   cmdWrite[2] = 0x11aa;
@@ -5056,7 +5056,7 @@ int FUN_0000cb00(ctx, srcPosPacked, srcSizePacked, headerWord, secondWord)
   cmdWrite[5] = 0xf;
   cmdWrite[6] = 0x11ac;
   cmdWrite[7] = 0xf;
-  ((int (*)())FUN_00009ac0)(cmdWrite + 8,&srcLeft,&dstLeft,halfWidth,srcHeight);
+  ((int (*)())ava_emit_textured_quad)(cmdWrite + 8,&srcLeft,&dstLeft,halfWidth,srcHeight);
   mapMemoryType = PTR_0000f1a0;
   lastHeader = *(uint **)(ctx + 0x30);
   *lastHeader = *(int *)(ctx + 0x34) - (int)lastHeader >> 2 | *lastHeader;

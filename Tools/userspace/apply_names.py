@@ -223,7 +223,8 @@ def apply_funcs(d, funcs, decl, check):
                 files.append(os.path.join(root, n))
     texts = {f: open(f, errors='surrogateescape').read() for f in sorted(files)}
     ids = set()
-    for t in texts.values():       # the alias symbols of the .globl/.set blocks stay under the Ghidra name: they do not count as a use of it
+    for f_, t in texts.items():    # the alias symbols of the .globl/.set blocks stay under the Ghidra name: they do not count as a use of it; nor does a C string literal ("_atexit")
+        if f_.endswith(('.c', '.h')): t = strip_strings(t)
         ids.update(IDENT.findall('\n'.join('' if ALIAS_G.match(l) else ALIAS_S.sub(lambda m: ' ' + m.group(2) + ' ', l) for l in t.split('\n'))))
     pend, appl, err = {}, 0, 0
     seen_new = {}
