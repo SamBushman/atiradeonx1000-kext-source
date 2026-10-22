@@ -1,7 +1,7 @@
 #include "decls.h"
 
-/* FUN_001cfeac @ 0x1cfeac (52 bytes) */
-int FUN_001cfeac(this)
+/* IRInst__dtor_1cfeac @ 0x1cfeac (52 bytes) */
+int IRInst__dtor_1cfeac(this)
   undefined4 *this;
 {
   undefined *vtable;
@@ -12,8 +12,8 @@ int FUN_001cfeac(this)
   return;
 }
 
-/* FUN_001cfee0 @ 0x1cfee0 (72 bytes) */
-int FUN_001cfee0(this)
+/* IRInst__dtor_1cfee0 @ 0x1cfee0 (72 bytes) */
+int IRInst__dtor_1cfee0(this)
   undefined4 *this;
 {
   undefined *vtable;
@@ -27,8 +27,8 @@ int FUN_001cfee0(this)
   return FUN_00193cc0(this[-1],this + -1);
 }
 
-/* FUN_001cff28 @ 0x1cff28 (52 bytes) */
-int FUN_001cff28(this)
+/* IRInst__dtor_1cff28 @ 0x1cff28 (52 bytes) */
+int IRInst__dtor_1cff28(this)
   undefined4 *this;
 {
   undefined *vtable;
@@ -39,8 +39,8 @@ int FUN_001cff28(this)
   return;
 }
 
-/* FUN_001cff5c @ 0x1cff5c (72 bytes) */
-int FUN_001cff5c(this)
+/* IRInst__dtor_1cff5c @ 0x1cff5c (72 bytes) */
+int IRInst__dtor_1cff5c(this)
   undefined4 *this;
 {
   undefined *vtable;
@@ -54,16 +54,16 @@ int FUN_001cff5c(this)
   return FUN_00193cc0(this[-1],this + -1);
 }
 
-/* FUN_001cffa4 @ 0x1cffa4 (36 bytes) */
-int FUN_001cffa4(this)
+/* HwLimits__dtor @ 0x1cffa4 (36 bytes) */
+int HwLimits__dtor(this)
   undefined4 *this;
 {
   *this = &PTR_FUN_001ea5b0;
   return;
 }
 
-/* FUN_001cffc8 @ 0x1cffc8 (36 bytes) */
-int FUN_001cffc8(this)
+/* HwLimits__deleting_dtor @ 0x1cffc8 (36 bytes) */
+int HwLimits__deleting_dtor(this)
   undefined4 *this;
 {
   *this = &PTR_FUN_001ea5b0;
@@ -94,32 +94,32 @@ int FUN_001d014c(param_1)
   return;
 }
 
-/* FUN_001d01b0 @ 0x1d01b0 (36 bytes) */
-int FUN_001d01b0(param_1)
+/* HwChip__dtor @ 0x1d01b0 (36 bytes) */
+int HwChip__dtor(param_1)
   undefined4 *param_1;
 {
   *param_1 = PTR_DAT_001e8c88 + 8;
   return;
 }
 
-/* FUN_001d01d4 @ 0x1d01d4 (36 bytes) */
-int FUN_001d01d4(param_1)
+/* HwChip__deleting_dtor @ 0x1d01d4 (36 bytes) */
+int HwChip__deleting_dtor(param_1)
   undefined4 *param_1;
 {
   *param_1 = PTR_DAT_001e8c88 + 8;
   return operator_delete(param_1);
 }
 
-/* FUN_001d0208 @ 0x1d0208 (36 bytes) */
-int FUN_001d0208(param_1)
+/* OpcodeInfo__dtor @ 0x1d0208 (36 bytes) */
+int OpcodeInfo__dtor(param_1)
   undefined4 *param_1;
 {
   *param_1 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_001d022c @ 0x1d022c (36 bytes) */
-int FUN_001d022c(param_1)
+/* OpcodeInfo__deleting_dtor @ 0x1d022c (36 bytes) */
+int OpcodeInfo__deleting_dtor(param_1)
   undefined4 *param_1;
 {
   *param_1 = PTR_DAT_001e8f28 + 8;
@@ -563,8 +563,8 @@ int FUN_001d0ee0(param_1, param_2, param_3)
   return 1;
 }
 
-/* FUN_001d0f28 @ 0x1d0f28 (68 bytes) */
-int FUN_001d0f28(param_1)
+/* IrRecipSqrtClamp__deleting_dtor @ 0x1d0f28 (68 bytes) */
+int IrRecipSqrtClamp__deleting_dtor(param_1)
   undefined4 *param_1;
 {
   undefined *puVar1;
@@ -578,8 +578,8 @@ int FUN_001d0f28(param_1)
   return operator_delete(param_1);
 }
 
-/* FUN_001d0f6c @ 0x1d0f6c (68 bytes) */
-int FUN_001d0f6c(param_1)
+/* IrRecipSqrtClamp__dtor @ 0x1d0f6c (68 bytes) */
+int IrRecipSqrtClamp__dtor(param_1)
   undefined4 *param_1;
 {
   undefined *puVar1;
@@ -593,8 +593,8 @@ int FUN_001d0f6c(param_1)
   return;
 }
 
-/* FUN_001d0fb0 @ 0x1d0fb0 (68 bytes) */
-int FUN_001d0fb0(param_1)
+/* IrRecipSqrtFF__deleting_dtor @ 0x1d0fb0 (68 bytes) */
+int IrRecipSqrtFF__deleting_dtor(param_1)
   undefined4 *param_1;
 {
   undefined *puVar1;
@@ -608,8 +608,8 @@ int FUN_001d0fb0(param_1)
   return operator_delete(param_1);
 }
 
-/* FUN_001d0ff4 @ 0x1d0ff4 (68 bytes) */
-int FUN_001d0ff4(param_1)
+/* IrRecipSqrtFF__dtor @ 0x1d0ff4 (68 bytes) */
+int IrRecipSqrtFF__dtor(param_1)
   undefined4 *param_1;
 {
   undefined *puVar1;
@@ -623,8 +623,8 @@ int FUN_001d0ff4(param_1)
   return;
 }
 
-/* FUN_001d1038 @ 0x1d1038 (68 bytes) */
-int FUN_001d1038(param_1)
+/* IrRecipSqrtIEEE__deleting_dtor @ 0x1d1038 (68 bytes) */
+int IrRecipSqrtIEEE__deleting_dtor(param_1)
   undefined4 *param_1;
 {
   undefined *puVar1;
@@ -638,8 +638,8 @@ int FUN_001d1038(param_1)
   return operator_delete(param_1);
 }
 
-/* FUN_001d107c @ 0x1d107c (68 bytes) */
-int FUN_001d107c(param_1)
+/* IrRecipSqrtIEEE__dtor @ 0x1d107c (68 bytes) */
+int IrRecipSqrtIEEE__dtor(param_1)
   undefined4 *param_1;
 {
   undefined *puVar1;
@@ -653,8 +653,8 @@ int FUN_001d107c(param_1)
   return;
 }
 
-/* FUN_001d10c0 @ 0x1d10c0 (68 bytes) */
-int FUN_001d10c0(param_1)
+/* IrRecipClamp__deleting_dtor @ 0x1d10c0 (68 bytes) */
+int IrRecipClamp__deleting_dtor(param_1)
   undefined4 *param_1;
 {
   undefined *puVar1;
@@ -668,8 +668,8 @@ int FUN_001d10c0(param_1)
   return operator_delete(param_1);
 }
 
-/* FUN_001d1104 @ 0x1d1104 (68 bytes) */
-int FUN_001d1104(param_1)
+/* IrRecipClamp__dtor @ 0x1d1104 (68 bytes) */
+int IrRecipClamp__dtor(param_1)
   undefined4 *param_1;
 {
   undefined *puVar1;
@@ -683,8 +683,8 @@ int FUN_001d1104(param_1)
   return;
 }
 
-/* FUN_001d1148 @ 0x1d1148 (68 bytes) */
-int FUN_001d1148(param_1)
+/* IrRecipFF__deleting_dtor @ 0x1d1148 (68 bytes) */
+int IrRecipFF__deleting_dtor(param_1)
   undefined4 *param_1;
 {
   undefined *puVar1;
@@ -698,8 +698,8 @@ int FUN_001d1148(param_1)
   return operator_delete(param_1);
 }
 
-/* FUN_001d118c @ 0x1d118c (68 bytes) */
-int FUN_001d118c(param_1)
+/* IrRecipFF__dtor @ 0x1d118c (68 bytes) */
+int IrRecipFF__dtor(param_1)
   undefined4 *param_1;
 {
   undefined *puVar1;
@@ -713,8 +713,8 @@ int FUN_001d118c(param_1)
   return;
 }
 
-/* FUN_001d11d0 @ 0x1d11d0 (68 bytes) */
-int FUN_001d11d0(param_1)
+/* IrRecipIEEE__deleting_dtor @ 0x1d11d0 (68 bytes) */
+int IrRecipIEEE__deleting_dtor(param_1)
   undefined4 *param_1;
 {
   undefined *puVar1;
@@ -728,8 +728,8 @@ int FUN_001d11d0(param_1)
   return operator_delete(param_1);
 }
 
-/* FUN_001d1214 @ 0x1d1214 (68 bytes) */
-int FUN_001d1214(param_1)
+/* IrRecipIEEE__dtor @ 0x1d1214 (68 bytes) */
+int IrRecipIEEE__dtor(param_1)
   undefined4 *param_1;
 {
   undefined *puVar1;
@@ -743,8 +743,8 @@ int FUN_001d1214(param_1)
   return;
 }
 
-/* FUN_001d1258 @ 0x1d1258 (68 bytes) */
-int FUN_001d1258(param_1)
+/* IrMulFloat__deleting_dtor @ 0x1d1258 (68 bytes) */
+int IrMulFloat__deleting_dtor(param_1)
   undefined4 *param_1;
 {
   undefined *puVar1;
@@ -758,8 +758,8 @@ int FUN_001d1258(param_1)
   return operator_delete(param_1);
 }
 
-/* FUN_001d129c @ 0x1d129c (68 bytes) */
-int FUN_001d129c(param_1)
+/* IrMulFloat__dtor @ 0x1d129c (68 bytes) */
+int IrMulFloat__dtor(param_1)
   undefined4 *param_1;
 {
   undefined *puVar1;
@@ -773,8 +773,8 @@ int FUN_001d129c(param_1)
   return;
 }
 
-/* FUN_001d12e0 @ 0x1d12e0 (68 bytes) */
-int FUN_001d12e0(param_1)
+/* IrMul__deleting_dtor @ 0x1d12e0 (68 bytes) */
+int IrMul__deleting_dtor(param_1)
   undefined4 *param_1;
 {
   undefined *puVar1;
@@ -788,8 +788,8 @@ int FUN_001d12e0(param_1)
   return operator_delete(param_1);
 }
 
-/* FUN_001d1324 @ 0x1d1324 (68 bytes) */
-int FUN_001d1324(param_1)
+/* IrMul__dtor @ 0x1d1324 (68 bytes) */
+int IrMul__dtor(param_1)
   undefined4 *param_1;
 {
   undefined *puVar1;
@@ -803,8 +803,8 @@ int FUN_001d1324(param_1)
   return;
 }
 
-/* FUN_001d1368 @ 0x1d1368 (68 bytes) */
-int FUN_001d1368(param_1)
+/* IrLogClamp__deleting_dtor @ 0x1d1368 (68 bytes) */
+int IrLogClamp__deleting_dtor(param_1)
   undefined4 *param_1;
 {
   undefined *puVar1;
@@ -818,8 +818,8 @@ int FUN_001d1368(param_1)
   return operator_delete(param_1);
 }
 
-/* FUN_001d13ac @ 0x1d13ac (68 bytes) */
-int FUN_001d13ac(param_1)
+/* IrLogClamp__dtor @ 0x1d13ac (68 bytes) */
+int IrLogClamp__dtor(param_1)
   undefined4 *param_1;
 {
   undefined *puVar1;
@@ -833,8 +833,8 @@ int FUN_001d13ac(param_1)
   return;
 }
 
-/* FUN_001d13f0 @ 0x1d13f0 (68 bytes) */
-int FUN_001d13f0(param_1)
+/* IrLogIEEE__deleting_dtor @ 0x1d13f0 (68 bytes) */
+int IrLogIEEE__deleting_dtor(param_1)
   undefined4 *param_1;
 {
   undefined *puVar1;
@@ -848,8 +848,8 @@ int FUN_001d13f0(param_1)
   return operator_delete(param_1);
 }
 
-/* FUN_001d1434 @ 0x1d1434 (68 bytes) */
-int FUN_001d1434(param_1)
+/* IrLogIEEE__dtor @ 0x1d1434 (68 bytes) */
+int IrLogIEEE__dtor(param_1)
   undefined4 *param_1;
 {
   undefined *puVar1;
@@ -863,8 +863,8 @@ int FUN_001d1434(param_1)
   return;
 }
 
-/* FUN_001d1478 @ 0x1d1478 (68 bytes) */
-int FUN_001d1478(param_1)
+/* IrDot2Add__deleting_dtor @ 0x1d1478 (68 bytes) */
+int IrDot2Add__deleting_dtor(param_1)
   undefined4 *param_1;
 {
   undefined *puVar1;
@@ -878,8 +878,8 @@ int FUN_001d1478(param_1)
   return operator_delete(param_1);
 }
 
-/* FUN_001d14bc @ 0x1d14bc (68 bytes) */
-int FUN_001d14bc(param_1)
+/* IrDot2Add__dtor @ 0x1d14bc (68 bytes) */
+int IrDot2Add__dtor(param_1)
   undefined4 *param_1;
 {
   undefined *puVar1;
@@ -893,8 +893,8 @@ int FUN_001d14bc(param_1)
   return;
 }
 
-/* FUN_001d1500 @ 0x1d1500 (68 bytes) */
-int FUN_001d1500(param_1)
+/* IrAdd__deleting_dtor @ 0x1d1500 (68 bytes) */
+int IrAdd__deleting_dtor(param_1)
   undefined4 *param_1;
 {
   undefined *puVar1;
@@ -908,8 +908,8 @@ int FUN_001d1500(param_1)
   return operator_delete(param_1);
 }
 
-/* FUN_001d1544 @ 0x1d1544 (68 bytes) */
-int FUN_001d1544(param_1)
+/* IrAdd__dtor @ 0x1d1544 (68 bytes) */
+int IrAdd__dtor(param_1)
   undefined4 *param_1;
 {
   undefined *puVar1;
@@ -923,8 +923,8 @@ int FUN_001d1544(param_1)
   return;
 }
 
-/* FUN_001d1588 @ 0x1d1588 (52 bytes) */
-int FUN_001d1588(this2)
+/* IrImmedConstLoad__dtor @ 0x1d1588 (52 bytes) */
+int IrImmedConstLoad__dtor(this2)
   undefined4 *this2;
 {
   undefined *vtable;
@@ -942,17 +942,17 @@ int FUN_001d1588(this2)
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_001cfeac");
-asm(".set FUN_001cfeac, _FUN_001cfeac");
+asm(".set FUN_001cfeac, _IRInst__dtor_1cfeac");
 asm(".globl FUN_001cfee0");
-asm(".set FUN_001cfee0, _FUN_001cfee0");
+asm(".set FUN_001cfee0, _IRInst__dtor_1cfee0");
 asm(".globl FUN_001cff28");
-asm(".set FUN_001cff28, _FUN_001cff28");
+asm(".set FUN_001cff28, _IRInst__dtor_1cff28");
 asm(".globl FUN_001cff5c");
-asm(".set FUN_001cff5c, _FUN_001cff5c");
+asm(".set FUN_001cff5c, _IRInst__dtor_1cff5c");
 asm(".globl FUN_001cffa4");
-asm(".set FUN_001cffa4, _FUN_001cffa4");
+asm(".set FUN_001cffa4, _HwLimits__dtor");
 asm(".globl FUN_001cffc8");
-asm(".set FUN_001cffc8, _FUN_001cffc8");
+asm(".set FUN_001cffc8, _HwLimits__deleting_dtor");
 asm(".globl FUN_001d0000");
 asm(".set FUN_001d0000, _FUN_001d0000");
 asm(".globl FUN_001d0070");
@@ -960,13 +960,13 @@ asm(".set FUN_001d0070, _FUN_001d0070");
 asm(".globl FUN_001d014c");
 asm(".set FUN_001d014c, _FUN_001d014c");
 asm(".globl FUN_001d01b0");
-asm(".set FUN_001d01b0, _FUN_001d01b0");
+asm(".set FUN_001d01b0, _HwChip__dtor");
 asm(".globl FUN_001d01d4");
-asm(".set FUN_001d01d4, _FUN_001d01d4");
+asm(".set FUN_001d01d4, _HwChip__deleting_dtor");
 asm(".globl FUN_001d0208");
-asm(".set FUN_001d0208, _FUN_001d0208");
+asm(".set FUN_001d0208, _OpcodeInfo__dtor");
 asm(".globl FUN_001d022c");
-asm(".set FUN_001d022c, _FUN_001d022c");
+asm(".set FUN_001d022c, _OpcodeInfo__deleting_dtor");
 asm(".globl FUN_001d0278");
 asm(".set FUN_001d0278, _FUN_001d0278");
 asm(".globl FUN_001d05b0");
@@ -1012,52 +1012,52 @@ asm(".set FUN_001d0e0c, _FUN_001d0e0c");
 asm(".globl FUN_001d0ee0");
 asm(".set FUN_001d0ee0, _FUN_001d0ee0");
 asm(".globl FUN_001d0f28");
-asm(".set FUN_001d0f28, _FUN_001d0f28");
+asm(".set FUN_001d0f28, _IrRecipSqrtClamp__deleting_dtor");
 asm(".globl FUN_001d0f6c");
-asm(".set FUN_001d0f6c, _FUN_001d0f6c");
+asm(".set FUN_001d0f6c, _IrRecipSqrtClamp__dtor");
 asm(".globl FUN_001d0fb0");
-asm(".set FUN_001d0fb0, _FUN_001d0fb0");
+asm(".set FUN_001d0fb0, _IrRecipSqrtFF__deleting_dtor");
 asm(".globl FUN_001d0ff4");
-asm(".set FUN_001d0ff4, _FUN_001d0ff4");
+asm(".set FUN_001d0ff4, _IrRecipSqrtFF__dtor");
 asm(".globl FUN_001d1038");
-asm(".set FUN_001d1038, _FUN_001d1038");
+asm(".set FUN_001d1038, _IrRecipSqrtIEEE__deleting_dtor");
 asm(".globl FUN_001d107c");
-asm(".set FUN_001d107c, _FUN_001d107c");
+asm(".set FUN_001d107c, _IrRecipSqrtIEEE__dtor");
 asm(".globl FUN_001d10c0");
-asm(".set FUN_001d10c0, _FUN_001d10c0");
+asm(".set FUN_001d10c0, _IrRecipClamp__deleting_dtor");
 asm(".globl FUN_001d1104");
-asm(".set FUN_001d1104, _FUN_001d1104");
+asm(".set FUN_001d1104, _IrRecipClamp__dtor");
 asm(".globl FUN_001d1148");
-asm(".set FUN_001d1148, _FUN_001d1148");
+asm(".set FUN_001d1148, _IrRecipFF__deleting_dtor");
 asm(".globl FUN_001d118c");
-asm(".set FUN_001d118c, _FUN_001d118c");
+asm(".set FUN_001d118c, _IrRecipFF__dtor");
 asm(".globl FUN_001d11d0");
-asm(".set FUN_001d11d0, _FUN_001d11d0");
+asm(".set FUN_001d11d0, _IrRecipIEEE__deleting_dtor");
 asm(".globl FUN_001d1214");
-asm(".set FUN_001d1214, _FUN_001d1214");
+asm(".set FUN_001d1214, _IrRecipIEEE__dtor");
 asm(".globl FUN_001d1258");
-asm(".set FUN_001d1258, _FUN_001d1258");
+asm(".set FUN_001d1258, _IrMulFloat__deleting_dtor");
 asm(".globl FUN_001d129c");
-asm(".set FUN_001d129c, _FUN_001d129c");
+asm(".set FUN_001d129c, _IrMulFloat__dtor");
 asm(".globl FUN_001d12e0");
-asm(".set FUN_001d12e0, _FUN_001d12e0");
+asm(".set FUN_001d12e0, _IrMul__deleting_dtor");
 asm(".globl FUN_001d1324");
-asm(".set FUN_001d1324, _FUN_001d1324");
+asm(".set FUN_001d1324, _IrMul__dtor");
 asm(".globl FUN_001d1368");
-asm(".set FUN_001d1368, _FUN_001d1368");
+asm(".set FUN_001d1368, _IrLogClamp__deleting_dtor");
 asm(".globl FUN_001d13ac");
-asm(".set FUN_001d13ac, _FUN_001d13ac");
+asm(".set FUN_001d13ac, _IrLogClamp__dtor");
 asm(".globl FUN_001d13f0");
-asm(".set FUN_001d13f0, _FUN_001d13f0");
+asm(".set FUN_001d13f0, _IrLogIEEE__deleting_dtor");
 asm(".globl FUN_001d1434");
-asm(".set FUN_001d1434, _FUN_001d1434");
+asm(".set FUN_001d1434, _IrLogIEEE__dtor");
 asm(".globl FUN_001d1478");
-asm(".set FUN_001d1478, _FUN_001d1478");
+asm(".set FUN_001d1478, _IrDot2Add__deleting_dtor");
 asm(".globl FUN_001d14bc");
-asm(".set FUN_001d14bc, _FUN_001d14bc");
+asm(".set FUN_001d14bc, _IrDot2Add__dtor");
 asm(".globl FUN_001d1500");
-asm(".set FUN_001d1500, _FUN_001d1500");
+asm(".set FUN_001d1500, _IrAdd__deleting_dtor");
 asm(".globl FUN_001d1544");
-asm(".set FUN_001d1544, _FUN_001d1544");
+asm(".set FUN_001d1544, _IrAdd__dtor");
 asm(".globl FUN_001d1588");
-asm(".set FUN_001d1588, _FUN_001d1588");
+asm(".set FUN_001d1588, _IrImmedConstLoad__dtor");

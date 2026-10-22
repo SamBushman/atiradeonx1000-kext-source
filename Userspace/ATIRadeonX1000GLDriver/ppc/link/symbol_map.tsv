@@ -1375,65 +1375,65 @@ PTR_DAT_001e9784	0x1e9784	__DATA,__const	pointer	4	extern unsigned char *PTR_DAT
 PTR_DAT_001e9788	0x1e9788	__DATA,__const	pointer	4	extern unsigned char *PTR_DAT_001e9788 asm("PTR_DAT_001e9788");	pointer -> LD_1dbd14	data.s
 PTR_DAT_001e978c	0x1e978c	__DATA,__const	pointer	4	extern unsigned char *PTR_DAT_001e978c asm("PTR_DAT_001e978c");	pointer -> LD_1dbd84	data.s
 PTR_DAT_001e9790	0x1e9790	__DATA,__const	pointer	4	extern unsigned char *PTR_DAT_001e9790 asm("PTR_DAT_001e9790");	pointer -> LD_1fa5e8	data.s
-PTR_FUN_001e97a0	0x1e97a0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e97a0[] asm("PTR_FUN_001e97a0");	pointer -> FUN_001cd970	data.s
-PTR_FUN_001e9848	0x1e9848	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9848[] asm("PTR_FUN_001e9848");	pointer -> FUN_001cda2c	data.s
-PTR_FUN_001e98f0	0x1e98f0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e98f0[] asm("PTR_FUN_001e98f0");	pointer -> FUN_001cdae8	data.s
-PTR_FUN_001e9998	0x1e9998	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9998[] asm("PTR_FUN_001e9998");	pointer -> FUN_001cdba4	data.s
-PTR_FUN_001e9a40	0x1e9a40	__DATA,__const	pointer	4	extern unsigned char *PTR_FUN_001e9a40 asm("PTR_FUN_001e9a40");	pointer -> FUN_001cd7ec	data.s
-PTR_FUN_001e9b08	0x1e9b08	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9b08[] asm("PTR_FUN_001e9b08");	pointer -> FUN_000ebbb0	data.s
-PTR_FUN_001e9b60	0x1e9b60	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9b60[] asm("PTR_FUN_001e9b60");	pointer -> FUN_001cdf28	data.s
-PTR_FUN_001e9bb8	0x1e9bb8	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9bb8[] asm("PTR_FUN_001e9bb8");	pointer -> FUN_001cdfb4	data.s
-PTR_FUN_001e9c10	0x1e9c10	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9c10[] asm("PTR_FUN_001e9c10");	pointer -> FUN_001ce040	data.s
-PTR_FUN_001e9c68	0x1e9c68	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9c68[] asm("PTR_FUN_001e9c68");	pointer -> FUN_001ce0cc	data.s
-PTR_FUN_001e9cc0	0x1e9cc0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9cc0[] asm("PTR_FUN_001e9cc0");	pointer -> FUN_001ce158	data.s
-PTR_FUN_001e9d18	0x1e9d18	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9d18[] asm("PTR_FUN_001e9d18");	pointer -> FUN_001ce1e4	data.s
-PTR_FUN_001e9d70	0x1e9d70	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9d70[] asm("PTR_FUN_001e9d70");	pointer -> FUN_001ce270	data.s
-PTR_FUN_001e9dc8	0x1e9dc8	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9dc8[] asm("PTR_FUN_001e9dc8");	pointer -> FUN_001ce2fc	data.s
-PTR_FUN_001e9e20	0x1e9e20	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9e20[] asm("PTR_FUN_001e9e20");	pointer -> FUN_001ce53c	data.s
-PTR_FUN_001e9e78	0x1e9e78	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9e78[] asm("PTR_FUN_001e9e78");	pointer -> FUN_001ce5e8	data.s
-PTR_FUN_001e9ed0	0x1e9ed0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9ed0[] asm("PTR_FUN_001e9ed0");	pointer -> FUN_001ce48c	data.s
-PTR_FUN_001e9f28	0x1e9f28	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9f28[] asm("PTR_FUN_001e9f28");	pointer -> FUN_001ce518	data.s
+PTR_FUN_001e97a0	0x1e97a0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e97a0[] asm("PTR_FUN_001e97a0");	pointer -> IRInst__dtor_1cd970	data.s
+PTR_FUN_001e9848	0x1e9848	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9848[] asm("PTR_FUN_001e9848");	pointer -> IRInst__dtor_1cda2c	data.s
+PTR_FUN_001e98f0	0x1e98f0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e98f0[] asm("PTR_FUN_001e98f0");	pointer -> IRInst__dtor_1cdae8	data.s
+PTR_FUN_001e9998	0x1e9998	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9998[] asm("PTR_FUN_001e9998");	pointer -> IRInst__dtor_1cdba4	data.s
+PTR_FUN_001e9a40	0x1e9a40	__DATA,__const	pointer	4	extern unsigned char *PTR_FUN_001e9a40 asm("PTR_FUN_001e9a40");	pointer -> MachineAssembler__dtor_1cd7ec	data.s
+PTR_FUN_001e9b08	0x1e9b08	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9b08[] asm("PTR_FUN_001e9b08");	pointer -> Block__dtor	data.s
+PTR_FUN_001e9b60	0x1e9b60	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9b60[] asm("PTR_FUN_001e9b60");	pointer -> FuncEndBlock__dtor	data.s
+PTR_FUN_001e9bb8	0x1e9bb8	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9bb8[] asm("PTR_FUN_001e9bb8");	pointer -> LoopHeader__dtor	data.s
+PTR_FUN_001e9c10	0x1e9c10	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9c10[] asm("PTR_FUN_001e9c10");	pointer -> LoopFooter__dtor	data.s
+PTR_FUN_001e9c68	0x1e9c68	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9c68[] asm("PTR_FUN_001e9c68");	pointer -> PostLoopFooter__dtor	data.s
+PTR_FUN_001e9cc0	0x1e9cc0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9cc0[] asm("PTR_FUN_001e9cc0");	pointer -> IfHeader__dtor_1ce158	data.s
+PTR_FUN_001e9d18	0x1e9d18	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9d18[] asm("PTR_FUN_001e9d18");	pointer -> IfHeader__dtor_1ce1e4	data.s
+PTR_FUN_001e9d70	0x1e9d70	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9d70[] asm("PTR_FUN_001e9d70");	pointer -> IfFooter__dtor_1ce270	data.s
+PTR_FUN_001e9dc8	0x1e9dc8	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9dc8[] asm("PTR_FUN_001e9dc8");	pointer -> IfFooter__dtor_1ce2fc	data.s
+PTR_FUN_001e9e20	0x1e9e20	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9e20[] asm("PTR_FUN_001e9e20");	pointer -> BreakBlock__dtor	data.s
+PTR_FUN_001e9e78	0x1e9e78	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9e78[] asm("PTR_FUN_001e9e78");	pointer -> ContinueBlock__dtor	data.s
+PTR_FUN_001e9ed0	0x1e9ed0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9ed0[] asm("PTR_FUN_001e9ed0");	pointer -> ExitBlock__dtor	data.s
+PTR_FUN_001e9f28	0x1e9f28	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9f28[] asm("PTR_FUN_001e9f28");	pointer -> EntryBlock__dtor	data.s
 PTR_DAT_001e9f78	0x1e9f78	__DATA,__const	pointer	4	extern unsigned char *PTR_DAT_001e9f78[] asm("PTR_DAT_001e9f78");	pointer -> LD_1ae228	data.s
 PTR_DAT_001e9f7c	0x1e9f7c	__DATA,__const	pointer	4	extern unsigned char *PTR_DAT_001e9f7c[] asm("PTR_DAT_001e9f7c");	pointer -> LD_1ae4a8	data.s
 PTR_DAT_001e9f80	0x1e9f80	__DATA,__const	undefined *	4	extern unsigned char *PTR_DAT_001e9f80[] asm("PTR_DAT_001e9f80");	pointer -> LD_1ae310	data.s
-PTR_FUN_001e9fc8	0x1e9fc8	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9fc8[] asm("PTR_FUN_001e9fc8");	pointer -> FUN_001ced3c	data.s
-PTR_FUN_001ea070	0x1ea070	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea070[] asm("PTR_FUN_001ea070");	pointer -> FUN_001cfcbc	data.s
-PTR_FUN_001ea118	0x1ea118	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea118[] asm("PTR_FUN_001ea118");	pointer -> FUN_001cf608	data.s
-PTR_FUN_001ea1c0	0x1ea1c0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea1c0[] asm("PTR_FUN_001ea1c0");	pointer -> FUN_001cfd38	data.s
-PTR_FUN_001ea268	0x1ea268	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea268[] asm("PTR_FUN_001ea268");	pointer -> FUN_001cfdb4	data.s
-PTR_FUN_001ea310	0x1ea310	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea310[] asm("PTR_FUN_001ea310");	pointer -> FUN_001cfe30	data.s
-PTR_FUN_001ea3b8	0x1ea3b8	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea3b8[] asm("PTR_FUN_001ea3b8");	pointer -> FUN_001cfeac	data.s
-PTR_FUN_001ea460	0x1ea460	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea460[] asm("PTR_FUN_001ea460");	pointer -> FUN_001cf63c	data.s
+PTR_FUN_001e9fc8	0x1e9fc8	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001e9fc8[] asm("PTR_FUN_001e9fc8");	pointer -> IRInst__dtor_1ced3c	data.s
+PTR_FUN_001ea070	0x1ea070	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea070[] asm("PTR_FUN_001ea070");	pointer -> IRInst__dtor_1cfcbc	data.s
+PTR_FUN_001ea118	0x1ea118	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea118[] asm("PTR_FUN_001ea118");	pointer -> IRInst__dtor_1cf608	data.s
+PTR_FUN_001ea1c0	0x1ea1c0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea1c0[] asm("PTR_FUN_001ea1c0");	pointer -> IRInst__dtor_1cfd38	data.s
+PTR_FUN_001ea268	0x1ea268	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea268[] asm("PTR_FUN_001ea268");	pointer -> IRInst__dtor_1cfdb4	data.s
+PTR_FUN_001ea310	0x1ea310	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea310[] asm("PTR_FUN_001ea310");	pointer -> IRInst__dtor_1cfe30	data.s
+PTR_FUN_001ea3b8	0x1ea3b8	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea3b8[] asm("PTR_FUN_001ea3b8");	pointer -> IRInst__dtor_1cfeac	data.s
+PTR_FUN_001ea460	0x1ea460	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea460[] asm("PTR_FUN_001ea460");	pointer -> IRInst__dtor_1cf63c	data.s
 DAT_001ea4fc	0x1ea4fc	__DATA,__const	-	-	extern unsigned char DAT_001ea4fc asm("DAT_001ea4fc");	0x00000000	data.s
 DAT_001ea500	0x1ea500	__DATA,__const	undefined4	4	extern unsigned int DAT_001ea500 asm("DAT_001ea500");	0x00000000	data.s
-PTR_FUN_001ea5b0	0x1ea5b0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea5b0[] asm("PTR_FUN_001ea5b0");	pointer -> FUN_001cffa4	data.s
-PTR_FUN_001ea748	0x1ea748	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea748[] asm("PTR_FUN_001ea748");	pointer -> FUN_001d7d58	data.s
-PTR_FUN_001ea780	0x1ea780	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea780[] asm("PTR_FUN_001ea780");	pointer -> FUN_001d7dd4	data.s
-PTR_FUN_001ea7b8	0x1ea7b8	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea7b8[] asm("PTR_FUN_001ea7b8");	pointer -> FUN_001d7e50	data.s
-PTR_FUN_001ea7f0	0x1ea7f0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea7f0[] asm("PTR_FUN_001ea7f0");	pointer -> FUN_001d7ecc	data.s
-PTR_FUN_001ea828	0x1ea828	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea828[] asm("PTR_FUN_001ea828");	pointer -> FUN_001d7f48	data.s
-PTR_FUN_001ea860	0x1ea860	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea860[] asm("PTR_FUN_001ea860");	pointer -> FUN_001d7fc4	data.s
-PTR_FUN_001ea898	0x1ea898	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea898[] asm("PTR_FUN_001ea898");	pointer -> FUN_001d8040	data.s
-PTR_FUN_001ea8d0	0x1ea8d0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea8d0[] asm("PTR_FUN_001ea8d0");	pointer -> FUN_001d80bc	data.s
+PTR_FUN_001ea5b0	0x1ea5b0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea5b0[] asm("PTR_FUN_001ea5b0");	pointer -> HwLimits__dtor	data.s
+PTR_FUN_001ea748	0x1ea748	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea748[] asm("PTR_FUN_001ea748");	pointer -> ExportValue__dtor	data.s
+PTR_FUN_001ea780	0x1ea780	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea780[] asm("PTR_FUN_001ea780");	pointer -> Interpolator__dtor	data.s
+PTR_FUN_001ea7b8	0x1ea7b8	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea7b8[] asm("PTR_FUN_001ea7b8");	pointer -> TempValue__dtor_1d7e50	data.s
+PTR_FUN_001ea7f0	0x1ea7f0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea7f0[] asm("PTR_FUN_001ea7f0");	pointer -> ExportSlot__dtor	data.s
+PTR_FUN_001ea828	0x1ea828	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea828[] asm("PTR_FUN_001ea828");	pointer -> Resource__dtor	data.s
+PTR_FUN_001ea860	0x1ea860	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea860[] asm("PTR_FUN_001ea860");	pointer -> VertexRegister__dtor	data.s
+PTR_FUN_001ea898	0x1ea898	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea898[] asm("PTR_FUN_001ea898");	pointer -> FixedValue__dtor	data.s
+PTR_FUN_001ea8d0	0x1ea8d0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ea8d0[] asm("PTR_FUN_001ea8d0");	pointer -> ImmedConstBuffer__dtor	data.s
 DAT_001ea904	0x1ea904	__DATA,__const	-	-	extern unsigned char DAT_001ea904 asm("DAT_001ea904");	0x00000201	data.s
 DAT_001ea908	0x1ea908	__DATA,__const	-	-	extern unsigned char DAT_001ea908[] asm("DAT_001ea908");	0x00000000	data.s
-PTR_FUN_001ead68	0x1ead68	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ead68[] asm("PTR_FUN_001ead68");	pointer -> FUN_001d8380	data.s
-PTR_FUN_001ead88	0x1ead88	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ead88[] asm("PTR_FUN_001ead88");	pointer -> FUN_001d83b4	data.s
-PTR_FUN_001eaf20	0x1eaf20	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eaf20[] asm("PTR_FUN_001eaf20");	pointer -> FUN_001d84e0	data.s
-PTR_FUN_001eb0c0	0x1eb0c0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb0c0[] asm("PTR_FUN_001eb0c0");	pointer -> FUN_001d8548	data.s
+PTR_FUN_001ead68	0x1ead68	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ead68[] asm("PTR_FUN_001ead68");	pointer -> KhanChip__dtor	data.s
+PTR_FUN_001ead88	0x1ead88	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001ead88[] asm("PTR_FUN_001ead88");	pointer -> KhanPs__dtor	data.s
+PTR_FUN_001eaf20	0x1eaf20	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eaf20[] asm("PTR_FUN_001eaf20");	pointer -> KhanVs__dtor_1d84e0	data.s
+PTR_FUN_001eb0c0	0x1eb0c0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb0c0[] asm("PTR_FUN_001eb0c0");	pointer -> KhanVs__dtor_1d8548	data.s
 PTR_DAT_001eb254	0x1eb254	__DATA,__const	pointer	4	extern unsigned char *PTR_DAT_001eb254 asm("PTR_DAT_001eb254");	pointer -> LD_1aa818	data.s
-PTR_FUN_001eb260	0x1eb260	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb260[] asm("PTR_FUN_001eb260");	pointer -> FUN_001d8874	data.s
-PTR_FUN_001eb2f0	0x1eb2f0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb2f0[] asm("PTR_FUN_001eb2f0");	pointer -> FUN_001d8850	data.s
+PTR_FUN_001eb260	0x1eb260	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb260[] asm("PTR_FUN_001eb260");	pointer -> ResourceModel__dtor	data.s
+PTR_FUN_001eb2f0	0x1eb2f0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb2f0[] asm("PTR_FUN_001eb2f0");	pointer -> ThreadModel__dtor	data.s
 PTR_DAT_001eb328	0x1eb328	__DATA,__const	undefined *	4	extern unsigned char PTR_DAT_001eb328[] asm("PTR_DAT_001eb328");	pointer -> orph_1d8910	data.s
 PTR_orph_1d8910_001eb328	0x1eb328	__DATA,__const	undefined *	4	extern unsigned char PTR_orph_1d8910_001eb328[] asm("PTR_orph_1d8910_001eb328");	pointer -> orph_1d8910	data.s
-PTR_FUN_001eb3c0	0x1eb3c0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb3c0[] asm("PTR_FUN_001eb3c0");	pointer -> FUN_001d8a28	data.s
-PTR_FUN_001eb450	0x1eb450	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb450[] asm("PTR_FUN_001eb450");	pointer -> FUN_001d8bc0	data.s
-PTR_FUN_001eb5e8	0x1eb5e8	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb5e8[] asm("PTR_FUN_001eb5e8");	pointer -> FUN_001d8b7c	data.s
-PTR_FUN_001eb608	0x1eb608	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb608[] asm("PTR_FUN_001eb608");	pointer -> FUN_001d8c70	data.s
-PTR_FUN_001eb6a0	0x1eb6a0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb6a0[] asm("PTR_FUN_001eb6a0");	pointer -> FUN_00196dfc	data.s
-PTR_FUN_001eb808	0x1eb808	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb808[] asm("PTR_FUN_001eb808");	pointer -> FUN_0019b9ac	data.s
-PTR_FUN_001eb8d8	0x1eb8d8	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb8d8[] asm("PTR_FUN_001eb8d8");	pointer -> FUN_0019df54	data.s
-PTR_FUN_001eb9a8	0x1eb9a8	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb9a8[] asm("PTR_FUN_001eb9a8");	pointer -> FUN_001d8fc0	data.s
+PTR_FUN_001eb3c0	0x1eb3c0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb3c0[] asm("PTR_FUN_001eb3c0");	pointer -> R300VSchedModel__dtor	data.s
+PTR_FUN_001eb450	0x1eb450	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb450[] asm("PTR_FUN_001eb450");	pointer -> FudoPs__dtor	data.s
+PTR_FUN_001eb5e8	0x1eb5e8	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb5e8[] asm("PTR_FUN_001eb5e8");	pointer -> FudoChip__dtor	data.s
+PTR_FUN_001eb608	0x1eb608	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb608[] asm("PTR_FUN_001eb608");	pointer -> R520SchedModel__dtor	data.s
+PTR_FUN_001eb6a0	0x1eb6a0	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb6a0[] asm("PTR_FUN_001eb6a0");	pointer -> R300MachineAssembler__dtor	data.s
+PTR_FUN_001eb808	0x1eb808	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb808[] asm("PTR_FUN_001eb808");	pointer -> MachineAssembler__dtor_19b9ac	data.s
+PTR_FUN_001eb8d8	0x1eb8d8	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb8d8[] asm("PTR_FUN_001eb8d8");	pointer -> MachineAssembler__dtor_19df54	data.s
+PTR_FUN_001eb9a8	0x1eb9a8	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb9a8[] asm("PTR_FUN_001eb9a8");	pointer -> R520MachineAssembler__dtor	data.s
 DAT_001f3a54	0x1f3a54	__DATA,__const_coal	-	-	extern unsigned char DAT_001f3a54 asm("DAT_001f3a54");	0x00000000	data.s
 PTR_DAT_001f4850	0x1f4850	__DATA,__const_coal	pointer	4	extern unsigned char *PTR_DAT_001f4850 asm("PTR_DAT_001f4850");	pointer -> orph_1d0258	data.s
 DAT_001f65e0	0x1f65e0	__DATA,__bss	undefined4	4	extern unsigned char *DAT_001f65e0 asm("DAT_001f65e0");		data.s

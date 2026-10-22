@@ -39,7 +39,7 @@ int eh_pad_eb494(param_1)
   if (unaff_r30 != 0) {
     FUN_00193cc0(unaff_r28,unaff_r30);
   }
-  FUN_000ea270(unaff_r27);
+  Block__dtor_ea270(unaff_r27);
                     
   __Unwind_Resume(param_1);
 }
@@ -55,7 +55,7 @@ int eh_pad_eb4e0(param_1)
   if (unaff_r29 != 0) {
     FUN_00193cc0(unaff_r30,unaff_r29);
   }
-  FUN_000ea270(unaff_r27);
+  Block__dtor_ea270(unaff_r27);
                     
   __Unwind_Resume(param_1);
 }
@@ -71,7 +71,7 @@ int eh_pad_eb538(param_1)
   if (unaff_r30 != 0) {
     FUN_00193cc0(unaff_r29,unaff_r30);
   }
-  FUN_000ea270(unaff_r27);
+  Block__dtor_ea270(unaff_r27);
                     
   __Unwind_Resume(param_1);
 }
@@ -82,7 +82,7 @@ int eh_pad_eb660(param_1)
 {
   undefined4 unaff_r27;
   
-  FUN_000ea270(unaff_r27);
+  Block__dtor_ea270(unaff_r27);
                     
   __Unwind_Resume(param_1);
 }
@@ -98,7 +98,7 @@ int eh_pad_eb734(param_1)
   if (unaff_r29 != 0) {
     FUN_00193cc0(unaff_r28,unaff_r29);
   }
-  FUN_000ea270(unaff_r30);
+  Block__dtor_ea270(unaff_r30);
                     
   __Unwind_Resume(param_1);
 }
@@ -114,7 +114,7 @@ int eh_pad_eb7b0(param_1)
   if (unaff_r28 != 0) {
     FUN_00193cc0(unaff_r27,unaff_r28);
   }
-  FUN_000ea270(unaff_r30);
+  Block__dtor_ea270(unaff_r30);
                     
   __Unwind_Resume(param_1);
 }
@@ -125,7 +125,7 @@ int eh_pad_eb7cc(param_1)
 {
   undefined4 unaff_r30;
   
-  FUN_000ea270(unaff_r30);
+  Block__dtor_ea270(unaff_r30);
                     
   __Unwind_Resume(param_1);
 }
@@ -171,7 +171,7 @@ int eh_pad_eba88(param_1)
     FUN_00193cc0(unaff_r28,unaff_r30);
   }
   *unaff_r27 = unaff_r31 + 0xfe2d8;
-  FUN_000ea270(unaff_r27);
+  Block__dtor_ea270(unaff_r27);
                     
   __Unwind_Resume(param_1);
 }
@@ -184,7 +184,7 @@ int eh_pad_ebaa4(param_1)
   int unaff_r31;
   
   *unaff_r27 = unaff_r31 + 0xfe2d8;
-  FUN_000ea270(unaff_r27);
+  Block__dtor_ea270(unaff_r27);
                     
   __Unwind_Resume(param_1);
 }
@@ -202,7 +202,7 @@ int eh_pad_ebb70(param_1)
     FUN_00193cc0(unaff_r28,unaff_r30);
   }
   *unaff_r27 = unaff_r31 + 0xfe1f0;
-  FUN_000ea270(unaff_r27);
+  Block__dtor_ea270(unaff_r27);
                     
   __Unwind_Resume(param_1);
 }
@@ -215,7 +215,7 @@ int eh_pad_ebb8c(param_1)
   int unaff_r31;
   
   *unaff_r27 = unaff_r31 + 0xfe1f0;
-  FUN_000ea270(unaff_r27);
+  Block__dtor_ea270(unaff_r27);
                     
   __Unwind_Resume(param_1);
 }

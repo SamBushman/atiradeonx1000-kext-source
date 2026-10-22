@@ -1504,7 +1504,7 @@ code_r0x0013b658:
   puVar9 = (undefined4 *)FUN_00193e18(arena,0x134);
   *puVar9 = arena;
   piVar22 = puVar9 + 1;
-  FUN_000ea3c0(piVar22,*(undefined4 *)(param_1 + 8));
+  AnyBlock__ctor_ea3c0(piVar22,*(undefined4 *)(param_1 + 8));
   if (piVar12 == (int *)piVar20[0x4e]) {
     piVar20[0x4e] = (int)piVar22;
   }
@@ -1545,7 +1545,7 @@ code_r0x0013b8e4:
   puVar9 = (undefined4 *)FUN_00193e18(arena,0x134);
   *puVar9 = arena;
   puVar10 = puVar9 + 1;
-  FUN_000ea148(puVar10,*(undefined4 *)(param_1 + 8));
+  Block__ctor_ea148(puVar10,*(undefined4 *)(param_1 + 8));
   puVar1 = PTR_DAT_001e9134;
   puVar9[0x4c] = piVar22;
   puVar9[1] = puVar1 + 8;
@@ -2440,8 +2440,8 @@ LAB_0013cee8:
   return;
 }
 
-/* FUN_0013d160 @ 0x13d160 (376 bytes) */
-int FUN_0013d160(program)
+/* pass_rewrite @ 0x13d160 (376 bytes) */
+int pass_rewrite(program)
   int program;
 {
   int *piVar1;
@@ -2507,7 +2507,7 @@ int FUN_0013d160(program)
   FUN_000ed7e4(program,(int)"rewrite");
   iVar2 = FUN_000e07dc(*(undefined4 *)(program + 8),0x1f);
   if (iVar2 != 0) {
-    FUN_0012ccc0(program);
+    pass_loop_trans(program);
   }
   return;
 }
@@ -7662,8 +7662,8 @@ int FUN_0014532c(param_1, param_2)
   return ((int (*)())FUN_001415a4)(param_1,iVar10,iVar11);
 }
 
-/* FUN_00145670 @ 0x145670 (3828 bytes) */
-int FUN_00145670(param_1)
+/* pass_post_pack_insts @ 0x145670 (3828 bytes) */
+int pass_post_pack_insts(param_1)
   int *param_1;
 {
   bool bVar1;
@@ -8316,7 +8316,7 @@ int FUN_0014657c(param_1)
   local_24 = 0x10;
   local_20 = FUN_00193e18(local_2c,0x2c0);
   ((int (*)())FUN_00140e5c)(local_38,param_1);
-  ((int (*)())FUN_00145670)(local_38);
+  ((int (*)())pass_post_pack_insts)(local_38);
   return FUN_00193cc0(local_2c,local_20);
 }
 

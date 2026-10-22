@@ -1,23 +1,23 @@
 #include "decls.h"
 
-/* FUN_001d8850 @ 0x1d8850 (36 bytes) */
-int FUN_001d8850(this)
+/* ThreadModel__dtor @ 0x1d8850 (36 bytes) */
+int ThreadModel__dtor(this)
   undefined4 *this;
 {
   *this = &PTR_FUN_001eb2f0;
   return;
 }
 
-/* FUN_001d8874 @ 0x1d8874 (36 bytes) */
-int FUN_001d8874(this)
+/* ResourceModel__dtor @ 0x1d8874 (36 bytes) */
+int ResourceModel__dtor(this)
   undefined4 *this;
 {
   *this = &PTR_FUN_001eb260;
   return;
 }
 
-/* FUN_001d8944 @ 0x1d8944 (72 bytes) */
-int FUN_001d8944(this)
+/* R300SchedModel__dtor @ 0x1d8944 (72 bytes) */
+int R300SchedModel__dtor(this)
   undefined4 *this;
 {
   undefined *vtable;
@@ -31,8 +31,8 @@ int FUN_001d8944(this)
   return FUN_00193cc0(this[-1],this + -1);
 }
 
-/* FUN_001d8a28 @ 0x1d8a28 (52 bytes) */
-int FUN_001d8a28(this)
+/* R300VSchedModel__dtor @ 0x1d8a28 (52 bytes) */
+int R300VSchedModel__dtor(this)
   undefined4 *this;
 {
   undefined *vtable;
@@ -43,8 +43,8 @@ int FUN_001d8a28(this)
   return;
 }
 
-/* FUN_001d8a5c @ 0x1d8a5c (72 bytes) */
-int FUN_001d8a5c(this)
+/* R300VSchedModel__deleting_dtor @ 0x1d8a5c (72 bytes) */
+int R300VSchedModel__deleting_dtor(this)
   undefined4 *this;
 {
   undefined *vtable;
@@ -58,8 +58,8 @@ int FUN_001d8a5c(this)
   return FUN_00193cc0(this[-1],this + -1);
 }
 
-/* FUN_001d8af4 @ 0x1d8af4 (68 bytes) */
-int FUN_001d8af4(this)
+/* FudoChip__deleting_dtor @ 0x1d8af4 (68 bytes) */
+int FudoChip__deleting_dtor(this)
   undefined4 *this;
 {
   undefined *puVar1;
@@ -73,8 +73,8 @@ int FUN_001d8af4(this)
   return operator_delete(this);
 }
 
-/* FUN_001d8b38 @ 0x1d8b38 (68 bytes) */
-int FUN_001d8b38(this)
+/* FudoPs__deleting_dtor @ 0x1d8b38 (68 bytes) */
+int FudoPs__deleting_dtor(this)
   undefined4 *this;
 {
   undefined *puVar1;
@@ -88,8 +88,8 @@ int FUN_001d8b38(this)
   return operator_delete(this);
 }
 
-/* FUN_001d8b7c @ 0x1d8b7c (68 bytes) */
-int FUN_001d8b7c(this)
+/* FudoChip__dtor @ 0x1d8b7c (68 bytes) */
+int FudoChip__dtor(this)
   undefined4 *this;
 {
   undefined *puVar1;
@@ -103,8 +103,8 @@ int FUN_001d8b7c(this)
   return;
 }
 
-/* FUN_001d8bc0 @ 0x1d8bc0 (68 bytes) */
-int FUN_001d8bc0(this)
+/* FudoPs__dtor @ 0x1d8bc0 (68 bytes) */
+int FudoPs__dtor(this)
   undefined4 *this;
 {
   undefined *puVar1;
@@ -118,8 +118,8 @@ int FUN_001d8bc0(this)
   return;
 }
 
-/* FUN_001d8c18 @ 0x1d8c18 (88 bytes) */
-int FUN_001d8c18(this)
+/* R520SchedModel__deleting_dtor @ 0x1d8c18 (88 bytes) */
+int R520SchedModel__deleting_dtor(this)
   undefined4 *this;
 {
   undefined *puVar1;
@@ -136,8 +136,8 @@ int FUN_001d8c18(this)
   return FUN_00193cc0(this[-1],this + -1);
 }
 
-/* FUN_001d8c70 @ 0x1d8c70 (68 bytes) */
-int FUN_001d8c70(this)
+/* R520SchedModel__dtor @ 0x1d8c70 (68 bytes) */
+int R520SchedModel__dtor(this)
   undefined4 *this;
 {
   undefined *puVar1;
@@ -151,12 +151,12 @@ int FUN_001d8c70(this)
   return;
 }
 
-/* FUN_001d8f58 @ 0x1d8f58 (104 bytes) */
-int FUN_001d8f58(this)
+/* R520MachineAssembler__deleting_dtor @ 0x1d8f58 (104 bytes) */
+int R520MachineAssembler__deleting_dtor(this)
   undefined4 *this;
 {
   *this = &PTR_FUN_001eb9a8;
-  FUN_00196dbc(this);
+  R300MachineAssembler__dtor_196dbc(this);
   if (this != (undefined4 *)0x0) {
     FUN_00193cc0(this[-1],this + -1);
     return;
@@ -164,12 +164,12 @@ int FUN_001d8f58(this)
   return;
 }
 
-/* FUN_001d8fc0 @ 0x1d8fc0 (36 bytes) */
-int FUN_001d8fc0(this2)
+/* R520MachineAssembler__dtor @ 0x1d8fc0 (36 bytes) */
+int R520MachineAssembler__dtor(this2)
   undefined4 *this2;
 {
   *this2 = &PTR_FUN_001eb9a8;
-  return FUN_00196dbc(this2);
+  return R300MachineAssembler__dtor_196dbc(this2);
 }
 
 
@@ -179,28 +179,28 @@ int FUN_001d8fc0(this2)
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_001d8850");
-asm(".set FUN_001d8850, _FUN_001d8850");
+asm(".set FUN_001d8850, _ThreadModel__dtor");
 asm(".globl FUN_001d8874");
-asm(".set FUN_001d8874, _FUN_001d8874");
+asm(".set FUN_001d8874, _ResourceModel__dtor");
 asm(".globl FUN_001d8944");
-asm(".set FUN_001d8944, _FUN_001d8944");
+asm(".set FUN_001d8944, _R300SchedModel__dtor");
 asm(".globl FUN_001d8a28");
-asm(".set FUN_001d8a28, _FUN_001d8a28");
+asm(".set FUN_001d8a28, _R300VSchedModel__dtor");
 asm(".globl FUN_001d8a5c");
-asm(".set FUN_001d8a5c, _FUN_001d8a5c");
+asm(".set FUN_001d8a5c, _R300VSchedModel__deleting_dtor");
 asm(".globl FUN_001d8af4");
-asm(".set FUN_001d8af4, _FUN_001d8af4");
+asm(".set FUN_001d8af4, _FudoChip__deleting_dtor");
 asm(".globl FUN_001d8b38");
-asm(".set FUN_001d8b38, _FUN_001d8b38");
+asm(".set FUN_001d8b38, _FudoPs__deleting_dtor");
 asm(".globl FUN_001d8b7c");
-asm(".set FUN_001d8b7c, _FUN_001d8b7c");
+asm(".set FUN_001d8b7c, _FudoChip__dtor");
 asm(".globl FUN_001d8bc0");
-asm(".set FUN_001d8bc0, _FUN_001d8bc0");
+asm(".set FUN_001d8bc0, _FudoPs__dtor");
 asm(".globl FUN_001d8c18");
-asm(".set FUN_001d8c18, _FUN_001d8c18");
+asm(".set FUN_001d8c18, _R520SchedModel__deleting_dtor");
 asm(".globl FUN_001d8c70");
-asm(".set FUN_001d8c70, _FUN_001d8c70");
+asm(".set FUN_001d8c70, _R520SchedModel__dtor");
 asm(".globl FUN_001d8f58");
-asm(".set FUN_001d8f58, _FUN_001d8f58");
+asm(".set FUN_001d8f58, _R520MachineAssembler__deleting_dtor");
 asm(".globl FUN_001d8fc0");
-asm(".set FUN_001d8fc0, _FUN_001d8fc0");
+asm(".set FUN_001d8fc0, _R520MachineAssembler__dtor");

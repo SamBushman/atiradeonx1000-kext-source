@@ -29,7 +29,7 @@ int FUN_00127f24(param_1, param_2)
   puVar2[1] = 0;
   *puVar2 = puVar1 + 8;
   FUN_00189560(puVar2 + 10);
-  FUN_00189604(puVar2);
+  R520SchedModel__vslot2(puVar2);
   puVar2[0x1a] = 0;
   *(undefined4 **)(param_1 + 0x60) = puVar2;
   puVar2 = (undefined4 *)FUN_000e1564(param_2,0xc);
@@ -677,15 +677,15 @@ LAB_00128e98:
   } while( true );
 }
 
-/* FUN_00128fd0 @ 0x128fd0 (312 bytes) */
-int FUN_00128fd0(this, param_2, param_3)
+/* KhanPs__ctor_128fd0 @ 0x128fd0 (312 bytes) */
+int KhanPs__ctor_128fd0(this, param_2, param_3)
   undefined4 *this;
   undefined4 param_2;
   int param_3;
 {
   undefined *puVar1;
   
-  FUN_0010dad8(this);
+  HwLimits__dtor_10dad8(this);
   this[7] = 0;
   puVar1 = PTR_DAT_001e9104;
   this[0xe] = 9;
@@ -718,15 +718,15 @@ int FUN_00128fd0(this, param_2, param_3)
   return;
 }
 
-/* FUN_00129130 @ 0x129130 (312 bytes) */
-int FUN_00129130(this, param_2, param_3)
+/* KhanPs__ctor_129130 @ 0x129130 (312 bytes) */
+int KhanPs__ctor_129130(this, param_2, param_3)
   undefined4 *this;
   undefined4 param_2;
   int param_3;
 {
   undefined *puVar1;
   
-  FUN_0010dad8(this);
+  HwLimits__dtor_10dad8(this);
   this[7] = 0;
   puVar1 = PTR_DAT_001e9104;
   this[0xe] = 9;
@@ -775,7 +775,7 @@ int FUN_00129290(param_1, param_2)
   *puVar2 = puVar3;
   puVar2[1] = 0;
   *puVar2 = puVar1 + 8;
-  FUN_0018f824(puVar2);
+  R300VSchedModel__vslot2(puVar2);
   FUN_00172000(puVar2);
   puVar2[0xe] = 0;
   *(undefined4 **)(param_1 + 0x60) = puVar2;
@@ -1539,7 +1539,7 @@ int FUN_0012a00c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   allocation = (undefined4 *)FUN_00193e18(arena,0x168);
   puVar9 = allocation + 1;
   *allocation = arena;
-  FUN_0010502c(puVar9,0x8c,iVar7);
+  IRInst__ctor_10502c(puVar9,0x8c,iVar7);
   iVar7 = FUN_001054ec(puVar9,1);
   *(int *)(iVar7 + 8) = iVar10;
   *(undefined4 *)(iVar7 + 0xc) = 0;
@@ -1655,7 +1655,7 @@ int FUN_0012a4b8(param_1, param_2)
   *puVar2 = puVar3;
   puVar2[1] = 0;
   *puVar2 = puVar1 + 8;
-  FUN_0018f824(puVar2);
+  R300VSchedModel__vslot2(puVar2);
   FUN_00172000(puVar2);
   puVar2[0xe] = 0;
   *(undefined4 **)(param_1 + 0x60) = puVar2;
@@ -1668,15 +1668,15 @@ int FUN_0012a4b8(param_1, param_2)
   return;
 }
 
-/* FUN_0012a578 @ 0x12a578 (288 bytes) */
-int FUN_0012a578(this, param_2, param_3)
+/* KhanVs__ctor_12a578 @ 0x12a578 (288 bytes) */
+int KhanVs__ctor_12a578(this, param_2, param_3)
   undefined4 *this;
   undefined4 param_2;
   int param_3;
 {
   undefined *puVar1;
   
-  FUN_0010dad8(this);
+  HwLimits__dtor_10dad8(this);
   puVar1 = PTR_DAT_001e9114;
   this[4] = 5;
   this[1] = puVar1;
@@ -1711,15 +1711,15 @@ int FUN_0012a578(this, param_2, param_3)
   return;
 }
 
-/* FUN_0012a6c0 @ 0x12a6c0 (288 bytes) */
-int FUN_0012a6c0(this, param_2, param_3)
+/* KhanVs__ctor_12a6c0 @ 0x12a6c0 (288 bytes) */
+int KhanVs__ctor_12a6c0(this, param_2, param_3)
   undefined4 *this;
   undefined4 param_2;
   int param_3;
 {
   undefined *puVar1;
   
-  FUN_0010dad8(this);
+  HwLimits__dtor_10dad8(this);
   puVar1 = PTR_DAT_001e9114;
   this[4] = 5;
   this[1] = puVar1;
@@ -1754,13 +1754,13 @@ int FUN_0012a6c0(this, param_2, param_3)
   return;
 }
 
-/* FUN_0012a808 @ 0x12a808 (124 bytes) */
-int FUN_0012a808(this, param_2, param_3)
+/* FudoVs__ctor_12a808 @ 0x12a808 (124 bytes) */
+int FudoVs__ctor_12a808(this, param_2, param_3)
   undefined4 *this;
   undefined4 param_2;
   int param_3;
 {
-  ((int (*)())FUN_0012a6c0)(this,param_2,0);
+  ((int (*)())KhanVs__ctor_12a6c0)(this,param_2,0);
   *this = &PTR_FUN_001eb0c0;
   this[6] = 0x80;
   this[0x10] = 0x400;
@@ -1772,13 +1772,13 @@ int FUN_0012a808(this, param_2, param_3)
   return;
 }
 
-/* FUN_0012a8bc @ 0x12a8bc (124 bytes) */
-int FUN_0012a8bc(this, param_2, param_3)
+/* FudoVs__ctor_12a8bc @ 0x12a8bc (124 bytes) */
+int FudoVs__ctor_12a8bc(this, param_2, param_3)
   undefined4 *this;
   undefined4 param_2;
   int param_3;
 {
-  ((int (*)())FUN_0012a6c0)(this,param_2,0);
+  ((int (*)())KhanVs__ctor_12a6c0)(this,param_2,0);
   *this = &PTR_FUN_001eb0c0;
   this[6] = 0x80;
   this[0x10] = 0x400;
@@ -1889,8 +1889,8 @@ int FUN_0012ab04(inst)
   return 1;
 }
 
-/* FUN_0012ab80 @ 0x12ab80 (88 bytes) */
-int FUN_0012ab80(program)
+/* pass_optimize_control_flow @ 0x12ab80 (88 bytes) */
+int pass_optimize_control_flow(program)
   int program;
 {
   int *piVar1;

@@ -143,8 +143,8 @@ int FUN_0019dc48(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_0019dcb0 @ 0x19dcb0 (156 bytes) */
-int FUN_0019dcb0(this)
+/* R520VMachineAssembler__deleting_dtor @ 0x19dcb0 (156 bytes) */
+int R520VMachineAssembler__deleting_dtor(this)
   undefined4 *this;
 {
   undefined4 *puVar1;
@@ -161,7 +161,7 @@ int FUN_0019dcb0(this)
     FUN_00193cc0(*(undefined4 *)(iVar2 + 0xc),*(undefined4 *)(iVar2 + 8));
     FUN_00193cc0(*(undefined4 *)(iVar2 + -4),iVar2 + -4);
   }
-  FUN_0019b91c(this);
+  MachineAssembler__dtor_19b91c(this);
   if (this == (undefined4 *)0x0) {
     return;
   }
@@ -225,8 +225,8 @@ int FUN_0019de50(param_1, compiler)
   return allocation + 1;
 }
 
-/* FUN_0019deb0 @ 0x19deb0 (120 bytes) */
-int FUN_0019deb0(this)
+/* MachineAssembler__dtor_19deb0 @ 0x19deb0 (120 bytes) */
+int MachineAssembler__dtor_19deb0(this)
   undefined4 *this;
 {
   int iVar1;
@@ -251,8 +251,8 @@ int FUN_0019deb0(this)
   return;
 }
 
-/* FUN_0019df54 @ 0x19df54 (120 bytes) */
-int FUN_0019df54(this)
+/* MachineAssembler__dtor_19df54 @ 0x19df54 (120 bytes) */
+int MachineAssembler__dtor_19df54(this)
   undefined4 *this;
 {
   int iVar1;
@@ -1012,8 +1012,8 @@ int FUN_0019ef2c(param_1)
   return;
 }
 
-/* FUN_0019ef50 @ 0x19ef50 (324 bytes) */
-int FUN_0019ef50(param_1, param_2, param_3, param_4)
+/* R520MachineAssembler__vslot5 @ 0x19ef50 (324 bytes) */
+int R520MachineAssembler__vslot5(param_1, param_2, param_3, param_4)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1487,8 +1487,8 @@ int FUN_0019f7a4(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_0019f860 @ 0x19f860 (32 bytes) */
-int FUN_0019f860(param_1, param_2)
+/* R520MachineAssembler__vslot9 @ 0x19f860 (32 bytes) */
+int R520MachineAssembler__vslot9(param_1, param_2)
   int param_1;
   int *param_2;
 {
@@ -1640,8 +1640,8 @@ int FUN_0019fb84(param_1)
   return;
 }
 
-/* FUN_0019fccc @ 0x19fccc (292 bytes) */
-int FUN_0019fccc(param_1)
+/* R520MachineAssembler__vslot4 @ 0x19fccc (292 bytes) */
+int R520MachineAssembler__vslot4(param_1)
   int *param_1;
 {
   int callResult;
@@ -2414,13 +2414,13 @@ asm(".set FUN_0019d858, _FUN_0019d858");
 asm(".globl FUN_0019dc48");
 asm(".set FUN_0019dc48, _FUN_0019dc48");
 asm(".globl FUN_0019dcb0");
-asm(".set FUN_0019dcb0, _FUN_0019dcb0");
+asm(".set FUN_0019dcb0, _R520VMachineAssembler__deleting_dtor");
 asm(".globl FUN_0019dd7c");
 asm(".set FUN_0019dd7c, _FUN_0019dd7c");
 asm(".globl FUN_0019de50");
 asm(".set FUN_0019de50, _FUN_0019de50");
 asm(".globl FUN_0019df54");
-asm(".set FUN_0019df54, _FUN_0019df54");
+asm(".set FUN_0019df54, _MachineAssembler__dtor_19df54");
 asm(".globl FUN_0019dff8");
 asm(".set FUN_0019dff8, _FUN_0019dff8");
 asm(".globl FUN_0019e11c");
@@ -2434,7 +2434,7 @@ asm(".set FUN_0019e6e0, _FUN_0019e6e0");
 asm(".globl FUN_0019ef2c");
 asm(".set FUN_0019ef2c, _FUN_0019ef2c");
 asm(".globl FUN_0019ef50");
-asm(".set FUN_0019ef50, _FUN_0019ef50");
+asm(".set FUN_0019ef50, _R520MachineAssembler__vslot5");
 asm(".globl FUN_0019f094");
 asm(".set FUN_0019f094, _FUN_0019f094");
 asm(".globl FUN_0019f0cc");
@@ -2466,7 +2466,7 @@ asm(".set FUN_0019f778, _FUN_0019f778");
 asm(".globl FUN_0019f7a4");
 asm(".set FUN_0019f7a4, _FUN_0019f7a4");
 asm(".globl FUN_0019f860");
-asm(".set FUN_0019f860, _FUN_0019f860");
+asm(".set FUN_0019f860, _R520MachineAssembler__vslot9");
 asm(".globl FUN_0019f880");
 asm(".set FUN_0019f880, _FUN_0019f880");
 asm(".globl FUN_0019f970");
@@ -2478,7 +2478,7 @@ asm(".set FUN_0019fa58, _FUN_0019fa58");
 asm(".globl FUN_0019fb84");
 asm(".set FUN_0019fb84, _FUN_0019fb84");
 asm(".globl FUN_0019fccc");
-asm(".set FUN_0019fccc, _FUN_0019fccc");
+asm(".set FUN_0019fccc, _R520MachineAssembler__vslot4");
 asm(".globl FUN_0019fdf0");
 asm(".set FUN_0019fdf0, _FUN_0019fdf0");
 asm(".globl FUN_0019ff2c");

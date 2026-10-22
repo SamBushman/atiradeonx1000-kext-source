@@ -6178,7 +6178,7 @@ LAB_00037c6c:
             uStack_124 = width + param_5 ^ 0x80000000;
             uStack_128 = 0x43300000;
             uStack_130 = 0x43300000;
-            pcStack_a8 = FUN_001d6a08;
+            pcStack_a8 = IrInt2F__dtor;
             iStack_9c = 0x1e6a08;
             iStack_a4 = level * 0x18;
             iStack_cc = face * 0x168;
@@ -6190,10 +6190,10 @@ LAB_00037c6c:
             piStack_c8 = &iStack_244;
             ppuStack_c0 = &puStack_23c;
             puStack_bc = &uStack_238;
-            pcStack_d0 = FUN_001d6a08;
+            pcStack_d0 = IrInt2F__dtor;
             puStack_b4 = &uStack_230;
-            pcStack_d4 = FUN_001d6a08;
-            pcStack_b0 = FUN_001d6a08;
+            pcStack_d4 = IrInt2F__dtor;
+            pcStack_b0 = IrInt2F__dtor;
             fVar4 = (float)((double)CONCAT44(0x43300000,uStack_12c) - 4503601774854144.0);
             fVar5 = (float)((double)CONCAT44(0x43300000,uStack_124) - 4503601774854144.0);
             iVar22 = (int)((fVar5 - fVar4) * 6.0);
@@ -6719,7 +6719,7 @@ LAB_00037930:
     }
     else if ((pixelFormat != 0x80e1) || (pixelType != (undefined *)0x8367)) goto LAB_00037930;
   }
-  pcStack_a8 = FUN_001d6a08;
+  pcStack_a8 = IrInt2F__dtor;
   iVar22 = (uVar26 & 0xff) * 0x24;
   bVar1 = ((uVar44 | uStack_248) & 0x1f) == 0;
   bVar46 = bVar1 << 1;

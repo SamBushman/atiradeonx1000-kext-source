@@ -1875,7 +1875,7 @@ int FUN_00134658(param_1)
     if (iVar9 != 0) {
       ((int (*)())FUN_001378e8)(*(undefined4 *)(param_1 + 0x3c0),*(undefined4 *)(param_1 + 8));
     }
-    iVar9 = ((int (*)())FUN_00135fb0)(*(undefined4 *)(param_1 + 0x3c0));
+    iVar9 = ((int (*)())pass_color_graph)(*(undefined4 *)(param_1 + 0x3c0));
     if (iVar9 != 0) {
       iVar5 = *(int *)(*(int *)(param_1 + 0x3c0) + 0x24);
       iVar4 = *(int *)(iVar5 + 4);
@@ -2859,8 +2859,8 @@ int FUN_00135d24(param_1, param_2, vector, param_4, param_5)
   return;
 }
 
-/* FUN_00135fb0 @ 0x135fb0 (516 bytes) */
-int FUN_00135fb0(colorGraph)
+/* pass_color_graph @ 0x135fb0 (516 bytes) */
+int pass_color_graph(colorGraph)
   int colorGraph;
 {
   bool bVar1;

@@ -36,8 +36,8 @@ int FUN_0012614c(param_1, param_2, param_3, param_4, compiler)
   return;
 }
 
-/* FUN_001261a4 @ 0x1261a4 (68 bytes) */
-int FUN_001261a4(this, param_2, param_3, param_4, param_5)
+/* ImmedConstBuffer__ctor_1261a4 @ 0x1261a4 (68 bytes) */
+int ImmedConstBuffer__ctor_1261a4(this, param_2, param_3, param_4, param_5)
   undefined4 *this;
   undefined4 param_2;
   undefined4 param_3;
@@ -49,8 +49,8 @@ int FUN_001261a4(this, param_2, param_3, param_4, param_5)
   return;
 }
 
-/* FUN_001261e8 @ 0x1261e8 (68 bytes) */
-int FUN_001261e8(this, param_2, param_3, param_4, compiler)
+/* ImmedConstBuffer__ctor_1261e8 @ 0x1261e8 (68 bytes) */
+int ImmedConstBuffer__ctor_1261e8(this, param_2, param_3, param_4, compiler)
   undefined4 *this;
   undefined4 param_2;
   undefined4 param_3;
@@ -62,8 +62,8 @@ int FUN_001261e8(this, param_2, param_3, param_4, compiler)
   return;
 }
 
-/* FUN_0012622c @ 0x12622c (256 bytes) */
-int FUN_0012622c(this, param_2, param_3, param_4, compiler)
+/* ExportSlot__ctor_12622c @ 0x12622c (256 bytes) */
+int ExportSlot__ctor_12622c(this, param_2, param_3, param_4, compiler)
   undefined4 *this;
   undefined4 param_2;
   undefined4 param_3;
@@ -84,7 +84,7 @@ int FUN_0012622c(this, param_2, param_3, param_4, compiler)
     allocation = (undefined4 *)FUN_00193e18(arena,0x168);
     puVar3 = allocation + 1;
     *allocation = arena;
-    FUN_00108918(puVar3,compiler);
+    IRExport__ctor_108918(puVar3,compiler);
     allocation[0x28] = DAT_001afef0;
     FUN_001046c8(puVar3,0,this);
     FUN_0012306c(this,puVar3);
@@ -99,8 +99,8 @@ int FUN_0012622c(this, param_2, param_3, param_4, compiler)
   return;
 }
 
-/* FUN_00126378 @ 0x126378 (256 bytes) */
-int FUN_00126378(this, param_2, param_3, param_4, compiler)
+/* ExportSlot__ctor_126378 @ 0x126378 (256 bytes) */
+int ExportSlot__ctor_126378(this, param_2, param_3, param_4, compiler)
   undefined4 *this;
   undefined4 param_2;
   undefined4 param_3;
@@ -121,7 +121,7 @@ int FUN_00126378(this, param_2, param_3, param_4, compiler)
     allocation = (undefined4 *)FUN_00193e18(arena,0x168);
     puVar3 = allocation + 1;
     *allocation = arena;
-    FUN_00108918(puVar3,compiler);
+    IRExport__ctor_108918(puVar3,compiler);
     allocation[0x28] = DAT_001afef0;
     FUN_001046c8(puVar3,0,this);
     FUN_0012306c(this,puVar3);
@@ -136,8 +136,8 @@ int FUN_00126378(this, param_2, param_3, param_4, compiler)
   return;
 }
 
-/* FUN_001264c4 @ 0x1264c4 (116 bytes) */
-int FUN_001264c4(this, param_2, param_3, param_4, param_5)
+/* LoopIndexedConstSet__ctor_1264c4 @ 0x1264c4 (116 bytes) */
+int LoopIndexedConstSet__ctor_1264c4(this, param_2, param_3, param_4, param_5)
   undefined4 *this;
   undefined4 param_2;
   undefined4 param_3;
@@ -156,8 +156,8 @@ int FUN_001264c4(this, param_2, param_3, param_4, param_5)
   return;
 }
 
-/* FUN_00126538 @ 0x126538 (116 bytes) */
-int FUN_00126538(this, param_2, param_3, param_4, compiler)
+/* LoopIndexedConstSet__ctor_126538 @ 0x126538 (116 bytes) */
+int LoopIndexedConstSet__ctor_126538(this, param_2, param_3, param_4, compiler)
   undefined4 *this;
   undefined4 param_2;
   undefined4 param_3;
@@ -176,8 +176,8 @@ int FUN_00126538(this, param_2, param_3, param_4, compiler)
   return;
 }
 
-/* FUN_001265ac @ 0x1265ac (116 bytes) */
-int FUN_001265ac(this, param_2, param_3, param_4, param_5)
+/* LoopIndexedInputSet__ctor_1265ac @ 0x1265ac (116 bytes) */
+int LoopIndexedInputSet__ctor_1265ac(this, param_2, param_3, param_4, param_5)
   undefined4 *this;
   undefined4 param_2;
   undefined4 param_3;
@@ -196,8 +196,8 @@ int FUN_001265ac(this, param_2, param_3, param_4, param_5)
   return;
 }
 
-/* FUN_00126620 @ 0x126620 (116 bytes) */
-int FUN_00126620(this, param_2, param_3, param_4, compiler)
+/* LoopIndexedInputSet__ctor_126620 @ 0x126620 (116 bytes) */
+int LoopIndexedInputSet__ctor_126620(this, param_2, param_3, param_4, compiler)
   undefined4 *this;
   undefined4 param_2;
   undefined4 param_3;
@@ -216,8 +216,8 @@ int FUN_00126620(this, param_2, param_3, param_4, compiler)
   return;
 }
 
-/* FUN_00126694 @ 0x126694 (116 bytes) */
-int FUN_00126694(this, param_2, param_3, param_4, param_5)
+/* LoopIndexedOutputSet__ctor_126694 @ 0x126694 (116 bytes) */
+int LoopIndexedOutputSet__ctor_126694(this, param_2, param_3, param_4, param_5)
   undefined4 *this;
   undefined4 param_2;
   undefined4 param_3;
@@ -284,7 +284,7 @@ int FUN_001267ec(param_1, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x34);
   *allocation = arena;
-  ((int (*)())FUN_001261e8)(allocation + 1,param_1,param_2,param_3,compiler);
+  ((int (*)())ImmedConstBuffer__ctor_1261e8)(allocation + 1,param_1,param_2,param_3,compiler);
   return allocation + 1;
 }
 
@@ -322,7 +322,7 @@ int FUN_001268f8(param_1, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x34);
   *allocation = arena;
-  FUN_001248ec(allocation + 1,param_1,param_2,param_3,compiler);
+  VertexRegister__ctor_1248ec(allocation + 1,param_1,param_2,param_3,compiler);
   return allocation + 1;
 }
 
@@ -339,7 +339,7 @@ int FUN_00126984(param_1, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x38);
   *allocation = arena;
-  FUN_00124e04(allocation + 1,param_1,param_2,param_3,compiler);
+  TempValue__ctor_124e04(allocation + 1,param_1,param_2,param_3,compiler);
   return allocation + 1;
 }
 
@@ -356,7 +356,7 @@ int FUN_00126a10(param_1, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x34);
   *allocation = arena;
-  FUN_00124724(allocation + 1,param_1,param_2,param_3,compiler);
+  FixedValue__ctor_124724(allocation + 1,param_1,param_2,param_3,compiler);
   return allocation + 1;
 }
 
@@ -373,7 +373,7 @@ int FUN_00126a9c(param_1, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x44);
   *allocation = arena;
-  FUN_001257b0(allocation + 1,param_1,param_2,param_3,compiler);
+  Interpolator__ctor_1257b0(allocation + 1,param_1,param_2,param_3,compiler);
   return allocation + 1;
 }
 
@@ -390,7 +390,7 @@ int FUN_00126b28(param_1, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x38);
   *allocation = arena;
-  FUN_00124b24(allocation + 1,param_1,param_2,param_3,compiler);
+  StandardIndex__ctor_124b24(allocation + 1,param_1,param_2,param_3,compiler);
   return allocation + 1;
 }
 
@@ -407,7 +407,7 @@ int FUN_00126bb4(param_1, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x38);
   *allocation = arena;
-  FUN_00125db8(allocation + 1,param_1,param_2,param_3,compiler);
+  PrimitiveIndex__ctor_125db8(allocation + 1,param_1,param_2,param_3,compiler);
   return allocation + 1;
 }
 
@@ -424,7 +424,7 @@ int FUN_00126c40(param_1, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x34);
   *allocation = arena;
-  FUN_00125d60(allocation + 1,param_1,param_2,param_3,compiler);
+  Resource__ctor_125d60(allocation + 1,param_1,param_2,param_3,compiler);
   return allocation + 1;
 }
 
@@ -498,7 +498,7 @@ int FUN_00126e90(param_1, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x38);
   *allocation = arena;
-  FUN_00126080(allocation + 1,param_1,param_2,param_3,compiler);
+  LoopIndexedOutputSet__ctor_126080(allocation + 1,param_1,param_2,param_3,compiler);
   return allocation + 1;
 }
 
@@ -515,7 +515,7 @@ int FUN_00126f1c(param_1, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x38);
   *allocation = arena;
-  ((int (*)())FUN_00126620)(allocation + 1,param_1,param_2,param_3,compiler);
+  ((int (*)())LoopIndexedInputSet__ctor_126620)(allocation + 1,param_1,param_2,param_3,compiler);
   return allocation + 1;
 }
 
@@ -532,7 +532,7 @@ int FUN_00126fa8(param_1, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x38);
   *allocation = arena;
-  ((int (*)())FUN_00126538)(allocation + 1,param_1,param_2,param_3,compiler);
+  ((int (*)())LoopIndexedConstSet__ctor_126538)(allocation + 1,param_1,param_2,param_3,compiler);
   return allocation + 1;
 }
 
@@ -566,7 +566,7 @@ int FUN_001270c0(param_1, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x34);
   *allocation = arena;
-  ((int (*)())FUN_00126378)(allocation + 1,param_1,param_2,param_3,compiler);
+  ((int (*)())ExportSlot__ctor_126378)(allocation + 1,param_1,param_2,param_3,compiler);
   return allocation + 1;
 }
 
@@ -583,7 +583,7 @@ int FUN_0012714c(param_1, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x34);
   *allocation = arena;
-  FUN_00125c8c(allocation + 1,param_1,param_2,param_3,compiler);
+  Physical__ctor_125c8c(allocation + 1,param_1,param_2,param_3,compiler);
   return allocation + 1;
 }
 
@@ -600,7 +600,7 @@ int FUN_001271d8(param_1, param_2, param_3, compiler)
   arena = *(undefined4 *)(compiler + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x3c);
   *allocation = arena;
-  FUN_001250dc(allocation + 1,param_1,param_2,param_3,compiler);
+  ExportValue__ctor_1250dc(allocation + 1,param_1,param_2,param_3,compiler);
   return allocation + 1;
 }
 
@@ -1131,7 +1131,7 @@ int FUN_00127994(compiler, param_2)
   arena = *(undefined4 *)(*compiler + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x168);
   *allocation = arena;
-  FUN_00109938(allocation + 1,*compiler);
+  IRLoadConst__ctor_109938(allocation + 1,*compiler);
   compiler[10] = (int)(allocation + 1);
   *(undefined4 *)(*compiler + 0x348) = 0;
   *(undefined4 *)(*compiler + 0x334) = 1;

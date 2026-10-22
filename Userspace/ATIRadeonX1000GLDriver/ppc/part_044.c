@@ -3353,7 +3353,7 @@ int FUN_0015ea3c(param_1, param_2, node, pass)
           *(int *)(iVar3 + 0x84) = *(int *)(iVar3 + 0x84) + -1;
           *(uint *)(iVar3 + 0x14) = *(uint *)(iVar3 + 0x14) & 0xfffffdff;
           FUN_000e7738(uVar6,iVar5,iVar3);
-          FUN_0010a1c0(node,0xa2,*(undefined4 *)(pass + 8));
+          IRMix__ctor_10a1c0(node,0xa2,*(undefined4 *)(pass + 8));
           iVar7 = 0;
           FUN_000e7738(*(undefined4 *)(iVar3 + 0x158),iVar3,node);
           iVar5 = FUN_001054ec(iVar3,0);
@@ -3469,7 +3469,7 @@ int FUN_0015ea3c(param_1, param_2, node, pass)
           iVar5 = node[1];
           uVar9 = *(undefined4 *)(iVar3 + 0x10);
           FUN_0019401c(node);
-          FUN_0010a1c0(node,0xa2,*(undefined4 *)(pass + 8));
+          IRMix__ctor_10a1c0(node,0xa2,*(undefined4 *)(pass + 8));
           FUN_00103f44(node,&local_5c);
           node[0x26] = 0x36;
           node[0x25] = node[0x53];
@@ -3530,7 +3530,7 @@ int FUN_0015ea3c(param_1, param_2, node, pass)
           iVar5 = node[1];
           FUN_0019401c(node);
           uVar9 = *(undefined4 *)(pass + 8);
-          FUN_0010a1c0(node,0xa2,uVar9);
+          IRMix__ctor_10a1c0(node,0xa2,uVar9);
           FUN_00103f44(node,&local_5c);
           node[0x26] = 0x36;
           node[0x25] = node[0x53];
@@ -3995,7 +3995,7 @@ LAB_0015fd14:
   FUN_000e7738(*(undefined4 *)(node[1] + 0x158),node[1],iVar6);
   *(int *)(iVar6 + 0x160) = *(int *)(pass + 0x478) + 1;
   *(undefined4 *)(iVar6 + 0x94) = *(undefined4 *)(iVar6 + 0x14c);
-  FUN_0010a1c0(node,0xa2,*(undefined4 *)(pass + 8));
+  IRMix__ctor_10a1c0(node,0xa2,*(undefined4 *)(pass + 8));
   uVar15 = *(undefined4 *)(iVar6 + 0x158);
   node[0x21] = piVar17[0x21] + 1;
   FUN_000e7738(uVar15,iVar6,node);

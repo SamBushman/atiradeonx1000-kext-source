@@ -24,11 +24,11 @@
 120cd4	FUN_00120cd4	r8	PASS-deep	120cf8 bl 0xec4f0
 120cd4	FUN_00120cd4	r9	PASS-deep	120cf8 bl 0xec4f0
 120cd4	FUN_00120cd4	r10	PASS-deep	120cf8 bl 0xec4f0
-1214fc	FUN_001214fc	r6	PASS-indirect	121544 bl 0x193e18
-1214fc	FUN_001214fc	r7	PASS-indirect	121544 bl 0x193e18
-1214fc	FUN_001214fc	r8	PASS-indirect	121544 bl 0x193e18
-12499c	FUN_0012499c	r8	PASS-deep	1249bc bl 0x124938
-125db8	FUN_00125db8	r8	PASS-deep	125dd8 bl 0x124938
+1214fc	pass_ssa_build	r6	PASS-indirect	121544 bl 0x193e18
+1214fc	pass_ssa_build	r7	PASS-indirect	121544 bl 0x193e18
+1214fc	pass_ssa_build	r8	PASS-indirect	121544 bl 0x193e18
+12499c	PrimitiveIndex__ctor_12499c	r8	PASS-deep	1249bc bl 0x124938
+125db8	PrimitiveIndex__ctor_125db8	r8	PASS-deep	125dd8 bl 0x124938
 12abd8	FUN_0012abd8	r5	PASS-no	12ac08 bl 0x19401c
 12abd8	FUN_0012abd8	r6	PASS-no	12ac08 bl 0x19401c
 12abd8	FUN_0012abd8	r7	PASS-no	12ac08 bl 0x19401c
@@ -43,22 +43,22 @@
 12c2dc	FUN_0012c2dc	r7	PASS-deep	12c310 bl 0xe920c
 12c2dc	FUN_0012c2dc	r8	PASS-deep	12c310 bl 0xe920c
 12c2dc	FUN_0012c2dc	r9	PASS-deep	12c310 bl 0xe920c
-12ccc0	FUN_0012ccc0	r5	PASS-indirect	12cd10 bctrl 
-12ccc0	FUN_0012ccc0	r6	PASS-indirect	12cd10 bctrl 
-12ccc0	FUN_0012ccc0	r7	PASS-indirect	12cd10 bctrl 
-12ccc0	FUN_0012ccc0	r8	PASS-indirect	12cd10 bctrl 
-12ccc0	FUN_0012ccc0	r9	PASS-indirect	12cd10 bctrl 
-12d2f0	FUN_0012d2f0	r6	PASS-indirect	12d334 bctrl 
-12d2f0	FUN_0012d2f0	r7	PASS-indirect	12d334 bctrl 
-12d2f0	FUN_0012d2f0	r8	PASS-indirect	12d334 bctrl 
+12ccc0	pass_loop_trans	r5	PASS-indirect	12cd10 bctrl 
+12ccc0	pass_loop_trans	r6	PASS-indirect	12cd10 bctrl 
+12ccc0	pass_loop_trans	r7	PASS-indirect	12cd10 bctrl 
+12ccc0	pass_loop_trans	r8	PASS-indirect	12cd10 bctrl 
+12ccc0	pass_loop_trans	r9	PASS-indirect	12cd10 bctrl 
+12d2f0	pass_flatten_ifs	r6	PASS-indirect	12d334 bctrl 
+12d2f0	pass_flatten_ifs	r7	PASS-indirect	12d334 bctrl 
+12d2f0	pass_flatten_ifs	r8	PASS-indirect	12d334 bctrl 
 12dd58	FUN_0012dd58	r6	PASS-indirect	12dda4 bl 0x193e18
 12dd58	FUN_0012dd58	r7	PASS-indirect	12dda4 bl 0x193e18
 12dd58	FUN_0012dd58	r8	PASS-indirect	12dda4 bl 0x193e18
 12df90	FUN_0012df90	r8	PASS-indirect	12dffc bl 0x193e18
-1300b0	FUN_001300b0	r6	PASS-indirect	1300f8 bctrl 
-1300b0	FUN_001300b0	r7	PASS-indirect	1300f8 bctrl 
-1300b0	FUN_001300b0	r8	PASS-indirect	1300f8 bctrl 
-1300b0	FUN_001300b0	r9	PASS-indirect	1300f8 bctrl 
+1300b0	pass_remove_empty_graphs	r6	PASS-indirect	1300f8 bctrl 
+1300b0	pass_remove_empty_graphs	r7	PASS-indirect	1300f8 bctrl 
+1300b0	pass_remove_empty_graphs	r8	PASS-indirect	1300f8 bctrl 
+1300b0	pass_remove_empty_graphs	r9	PASS-indirect	1300f8 bctrl 
 131d08	FUN_00131d08	r8	PASS-indirect	131d4c bl 0x193e18
 131d08	FUN_00131d08	r10	PASS-indirect	131d4c bl 0x193e18
 139f84	FUN_00139f84	r6	PASS-indirect	139fb0 bctrl 
@@ -131,10 +131,10 @@
 169e30	FUN_00169e30	r10	PASS-indirect	169e60 bl 0x193e18
 16d538	FUN_0016d538	r7	PASS-indirect	16d55c bl 0x1045e4
 16d538	FUN_0016d538	r8	PASS-indirect	16d55c bl 0x1045e4
-171714	FUN_00171714	r6	PASS-no	171750 bl 0x10ddcc
-171714	FUN_00171714	r7	PASS-no	171750 bl 0x10ddcc
-171714	FUN_00171714	r8	PASS-no	171750 bl 0x10ddcc
-171714	FUN_00171714	r10	PASS-no	171750 bl 0x10ddcc
+171714	pass_sched_preprocess_and_schedule_inst	r6	PASS-no	171750 bl 0x10ddcc
+171714	pass_sched_preprocess_and_schedule_inst	r7	PASS-no	171750 bl 0x10ddcc
+171714	pass_sched_preprocess_and_schedule_inst	r8	PASS-no	171750 bl 0x10ddcc
+171714	pass_sched_preprocess_and_schedule_inst	r10	PASS-no	171750 bl 0x10ddcc
 171e68	FUN_00171e68	r5	PASS-no	171e88 bl 0x1940a8
 171e68	FUN_00171e68	r6	PASS-no	171e88 bl 0x1940a8
 171e68	FUN_00171e68	r7	PASS-no	171e88 bl 0x1940a8
@@ -182,8 +182,8 @@
 18b9cc	FUN_0018b9cc	r7	PASS-indirect	18ba00 bl 0x126760
 18b9cc	FUN_0018b9cc	r8	PASS-indirect	18ba00 bl 0x126760
 18d4b4	FUN_0018d4b4	r8	PASS-indirect	18d50c bl 0x105594
-1906c8	FUN_001906c8	r5	PASS-indirect	190720 bctrl 
-1906c8	FUN_001906c8	r6	PASS-indirect	190720 bctrl 
+1906c8	R300VSchedModel__vslot3	r5	PASS-indirect	190720 bctrl 
+1906c8	R300VSchedModel__vslot3	r6	PASS-indirect	190720 bctrl 
 190990	FUN_00190990	r5	PASS-indirect	1909d4 bctrl 
 190990	FUN_00190990	r6	PASS-indirect	1909d4 bctrl 
 190990	FUN_00190990	r7	PASS-indirect	1909d4 bctrl 
@@ -426,20 +426,20 @@ e36bc	FUN_000e36bc	r9	PASS-deep	e36ec bl 0xe3544
 e36bc	FUN_000e36bc	r10	PASS-deep	e36ec bl 0xe3544
 e5e70	FUN_000e5e70	r7	PASS-no	e5efc bl 0xe4c40
 e5e70	FUN_000e5e70	r8	PASS-no	e5efc bl 0xe4c40
-e9d68	FUN_000e9d68	r5	PASS-no	e9db8 bl 0x1940a8
-e9d68	FUN_000e9d68	r6	PASS-no	e9db8 bl 0x1940a8
-e9d68	FUN_000e9d68	r7	PASS-no	e9db8 bl 0x1940a8
-e9f00	FUN_000e9f00	r5	PASS-no	e9f50 bl 0x1940a8
-e9f00	FUN_000e9f00	r6	PASS-no	e9f50 bl 0x1940a8
-e9f00	FUN_000e9f00	r7	PASS-no	e9f50 bl 0x1940a8
-ea020	FUN_000ea020	r5	PASS-no	ea06c bl 0x1940a8
-ea020	FUN_000ea020	r6	PASS-no	ea06c bl 0x1940a8
-ea020	FUN_000ea020	r7	PASS-no	ea06c bl 0x1940a8
-ea020	FUN_000ea020	r8	PASS-no	ea06c bl 0x1940a8
-ea148	FUN_000ea148	r5	PASS-no	ea194 bl 0x1940a8
-ea148	FUN_000ea148	r6	PASS-no	ea194 bl 0x1940a8
-ea148	FUN_000ea148	r7	PASS-no	ea194 bl 0x1940a8
-ea148	FUN_000ea148	r8	PASS-no	ea194 bl 0x1940a8
+e9d68	Block__ctor_e9d68	r5	PASS-no	e9db8 bl 0x1940a8
+e9d68	Block__ctor_e9d68	r6	PASS-no	e9db8 bl 0x1940a8
+e9d68	Block__ctor_e9d68	r7	PASS-no	e9db8 bl 0x1940a8
+e9f00	Block__ctor_e9f00	r5	PASS-no	e9f50 bl 0x1940a8
+e9f00	Block__ctor_e9f00	r6	PASS-no	e9f50 bl 0x1940a8
+e9f00	Block__ctor_e9f00	r7	PASS-no	e9f50 bl 0x1940a8
+ea020	Block__ctor_ea020	r5	PASS-no	ea06c bl 0x1940a8
+ea020	Block__ctor_ea020	r6	PASS-no	ea06c bl 0x1940a8
+ea020	Block__ctor_ea020	r7	PASS-no	ea06c bl 0x1940a8
+ea020	Block__ctor_ea020	r8	PASS-no	ea06c bl 0x1940a8
+ea148	Block__ctor_ea148	r5	PASS-no	ea194 bl 0x1940a8
+ea148	Block__ctor_ea148	r6	PASS-no	ea194 bl 0x1940a8
+ea148	Block__ctor_ea148	r7	PASS-no	ea194 bl 0x1940a8
+ea148	Block__ctor_ea148	r8	PASS-no	ea194 bl 0x1940a8
 f1d7c	FUN_000f1d7c	r6	PASS-indirect	f1dd8 bl 0x193e18
 f1d7c	FUN_000f1d7c	r7	PASS-indirect	f1dd8 bl 0x193e18
 f1d7c	FUN_000f1d7c	r8	PASS-indirect	f1dd8 bl 0x193e18

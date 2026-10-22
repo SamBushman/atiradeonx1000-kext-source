@@ -134,7 +134,7 @@ int orph_12dd48(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
-  FUN_0012d2f0(param_2);
+  pass_flatten_ifs(param_2);
   return;
 }
 
@@ -143,7 +143,7 @@ int orph_12dd50(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
-  FUN_0012d2f0(param_2);
+  pass_flatten_ifs(param_2);
   return;
 }
 

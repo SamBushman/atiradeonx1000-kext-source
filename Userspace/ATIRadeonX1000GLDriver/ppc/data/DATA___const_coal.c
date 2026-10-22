@@ -24,11 +24,11 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x54 */
     0x00000000, /* +0x58 */
     0x001f0f20, /* -> __const_coal+0x18 */ /* +0x5c */
-    0x001cd86c, /* -> FUN_001cd86c */ /* +0x60 */
-    0x001cd8b0, /* -> FUN_001cd8b0 */ /* +0x64 */
-    0x0010647c, /* -> FUN_0010647c */ /* +0x68 */
-    0x00105b7c, /* -> FUN_00105b7c */ /* +0x6c */
-    0x00105a44, /* -> FUN_00105a44 */ /* +0x70 */
+    0x001cd86c, /* -> IRPseudo__dtor */ /* +0x60 */
+    0x001cd8b0, /* -> IRPseudo__deleting_dtor */ /* +0x64 */
+    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0x68 */
+    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0x6c */
+    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0x70 */
     0x001cd7b0, /* +0x74 */
     0x001cd6a8, /* +0x78 */
     0x001cd7b8, /* +0x7c */
@@ -66,8 +66,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0xfc */
     0x00000000, /* +0x100 */
     0x001f1018, /* -> __const_coal+0x110 */ /* +0x104 */
-    0x001cd810, /* -> FUN_001cd810 */ /* +0x108 */
-    0x001cd834, /* -> FUN_001cd834 */ /* +0x10c */
+    0x001cd810, /* -> DListNode__dtor */ /* +0x108 */
+    0x001cd834, /* -> DListNode__deleting_dtor */ /* +0x10c */
     0x00000008, /* +0x110 */
     0x001cc1d4, /* +0x114 */
     0x00000008, /* +0x118 */
@@ -128,9 +128,9 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x1f4 */
     0x00000000, /* +0x1f8 */
     0x001f10d0, /* -> __const_coal+0x1c8 */ /* +0x1fc */
-    0x001ce388, /* -> FUN_001ce388 */ /* +0x200 */
-    0x001ce3ac, /* -> FUN_001ce3ac */ /* +0x204 */
-    0x000e9e88, /* -> FUN_000e9e88 */ /* +0x208 */
+    0x001ce388, /* -> BreakOrContinueBlock__dtor */ /* +0x200 */
+    0x001ce3ac, /* -> BreakOrContinueBlock__deleting_dtor */ /* +0x204 */
+    0x000e9e88, /* -> Block__clone */ /* +0x208 */
     0x001cdbf8, /* +0x20c */
     0x001cdbfc, /* +0x210 */
     0x001cdc04, /* +0x214 */
@@ -150,9 +150,9 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cdc64, /* -> FUN_001cdc64 */ /* +0x24c */
     0x00000000, /* +0x250 */
     0x001f11b0, /* -> __const_coal+0x2a8 */ /* +0x254 */
-    0x001cde9c, /* -> FUN_001cde9c */ /* +0x258 */
-    0x001cdec0, /* -> FUN_001cdec0 */ /* +0x25c */
-    0x000e9e88, /* -> FUN_000e9e88 */ /* +0x260 */
+    0x001cde9c, /* -> AnyBlock__dtor */ /* +0x258 */
+    0x001cdec0, /* -> AnyBlock__deleting_dtor */ /* +0x25c */
+    0x000e9e88, /* -> Block__clone */ /* +0x260 */
     0x001cdbf8, /* +0x264 */
     0x001cdbfc, /* +0x268 */
     0x001cdca4, /* +0x26c */
@@ -216,11 +216,11 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x354 */
     0x00000000, /* +0x358 */
     0x001f11e0, /* -> __const_coal+0x2d8 */ /* +0x35c */
-    0x001cff28, /* -> FUN_001cff28 */ /* +0x360 */
-    0x001cff5c, /* -> FUN_001cff5c */ /* +0x364 */
-    0x0010647c, /* -> FUN_0010647c */ /* +0x368 */
-    0x00105b7c, /* -> FUN_00105b7c */ /* +0x36c */
-    0x00105a44, /* -> FUN_00105a44 */ /* +0x370 */
+    0x001cff28, /* -> IRInst__dtor_1cff28 */ /* +0x360 */
+    0x001cff5c, /* -> IRInst__dtor_1cff5c */ /* +0x364 */
+    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0x368 */
+    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0x36c */
+    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0x370 */
     0x001cd7b0, /* +0x374 */
     0x001cd6a8, /* +0x378 */
     0x001cd7b8, /* +0x37c */
@@ -258,11 +258,11 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x3fc */
     0x00000000, /* +0x400 */
     0x001f1250, /* -> __const_coal+0x348 */ /* +0x404 */
-    0x001cedb8, /* -> FUN_001cedb8 */ /* +0x408 */
-    0x001cedec, /* -> FUN_001cedec */ /* +0x40c */
-    0x0010647c, /* -> FUN_0010647c */ /* +0x410 */
-    0x00105b7c, /* -> FUN_00105b7c */ /* +0x414 */
-    0x00105a44, /* -> FUN_00105a44 */ /* +0x418 */
+    0x001cedb8, /* -> IRInst__dtor_1cedb8 */ /* +0x408 */
+    0x001cedec, /* -> IRInst__dtor_1cedec */ /* +0x40c */
+    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0x410 */
+    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0x414 */
+    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0x418 */
     0x001cecb8, /* +0x41c */
     0x001cd6a8, /* +0x420 */
     0x001ce990, /* +0x424 */
@@ -300,11 +300,11 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x4a4 */
     0x00000000, /* +0x4a8 */
     0x001f1458, /* -> __const_coal+0x550 */ /* +0x4ac */
-    0x001cfc40, /* -> FUN_001cfc40 */ /* +0x4b0 */
-    0x001cfc74, /* -> FUN_001cfc74 */ /* +0x4b4 */
-    0x0010647c, /* -> FUN_0010647c */ /* +0x4b8 */
-    0x00105b7c, /* -> FUN_00105b7c */ /* +0x4bc */
-    0x00105a44, /* -> FUN_00105a44 */ /* +0x4c0 */
+    0x001cfc40, /* -> IRInst__dtor_1cfc40 */ /* +0x4b0 */
+    0x001cfc74, /* -> IRInst__dtor_1cfc74 */ /* +0x4b4 */
+    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0x4b8 */
+    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0x4bc */
+    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0x4c0 */
     0x001cebdc, /* +0x4c4 */
     0x001cebd4, /* +0x4c8 */
     0x001cebd0, /* +0x4cc */
@@ -346,11 +346,11 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x55c */
     0x00000000, /* +0x560 */
     0x001f1510, /* -> __const_coal+0x608 */ /* +0x564 */
-    0x001cf270, /* -> FUN_001cf270 */ /* +0x568 */
-    0x001cf228, /* -> FUN_001cf228 */ /* +0x56c */
-    0x0010647c, /* -> FUN_0010647c */ /* +0x570 */
-    0x00105b7c, /* -> FUN_00105b7c */ /* +0x574 */
-    0x00105a44, /* -> FUN_00105a44 */ /* +0x578 */
+    0x001cf270, /* -> IRInst__dtor_1cf270 */ /* +0x568 */
+    0x001cf228, /* -> IRInst__dtor_1cf228 */ /* +0x56c */
+    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0x570 */
+    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0x574 */
+    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0x578 */
     0x001cec00, /* +0x57c */
     0x001cd6a8, /* +0x580 */
     0x001cec08, /* +0x584 */
@@ -396,11 +396,11 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x624 */
     0x00000000, /* +0x628 */
     0x001f1520, /* -> __const_coal+0x618 */ /* +0x62c */
-    0x001cf58c, /* -> FUN_001cf58c */ /* +0x630 */
-    0x001cf5c0, /* -> FUN_001cf5c0 */ /* +0x634 */
-    0x0010647c, /* -> FUN_0010647c */ /* +0x638 */
-    0x00105b7c, /* -> FUN_00105b7c */ /* +0x63c */
-    0x00105a44, /* -> FUN_00105a44 */ /* +0x640 */
+    0x001cf58c, /* -> IRInst__dtor_1cf58c */ /* +0x630 */
+    0x001cf5c0, /* -> IRInst__dtor_1cf5c0 */ /* +0x634 */
+    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0x638 */
+    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0x63c */
+    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0x640 */
     0x001cea04, /* +0x644 */
     0x001cd6a8, /* +0x648 */
     0x001ce990, /* +0x64c */
@@ -438,11 +438,11 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x6cc */
     0x00000000, /* +0x6d0 */
     0x001f1680, /* -> __const_coal+0x778 */ /* +0x6d4 */
-    0x001cf2ec, /* -> FUN_001cf2ec */ /* +0x6d8 */
-    0x001cf2a4, /* -> FUN_001cf2a4 */ /* +0x6dc */
-    0x0010647c, /* -> FUN_0010647c */ /* +0x6e0 */
-    0x00105b7c, /* -> FUN_00105b7c */ /* +0x6e4 */
-    0x00105a44, /* -> FUN_00105a44 */ /* +0x6e8 */
+    0x001cf2ec, /* -> IRInst__dtor_1cf2ec */ /* +0x6d8 */
+    0x001cf2a4, /* -> IRInst__dtor_1cf2a4 */ /* +0x6dc */
+    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0x6e0 */
+    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0x6e4 */
+    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0x6e8 */
     0x001cebac, /* +0x6ec */
     0x001ceba4, /* +0x6f0 */
     0x001ce990, /* +0x6f4 */
@@ -484,11 +484,11 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x784 */
     0x00000000, /* +0x788 */
     0x001f1738, /* -> __const_coal+0x830 */ /* +0x78c */
-    0x001cf178, /* -> FUN_001cf178 */ /* +0x790 */
-    0x001cf130, /* -> FUN_001cf130 */ /* +0x794 */
+    0x001cf178, /* -> IRInst__dtor_1cf178 */ /* +0x790 */
+    0x001cf130, /* -> IRInst__dtor_1cf130 */ /* +0x794 */
     0x00106800, /* +0x798 */
-    0x00105b7c, /* -> FUN_00105b7c */ /* +0x79c */
-    0x00105a44, /* -> FUN_00105a44 */ /* +0x7a0 */
+    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0x79c */
+    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0x7a0 */
     0x001cecac, /* +0x7a4 */
     0x001ceae8, /* +0x7a8 */
     0x001ceb80, /* +0x7ac */
@@ -530,11 +530,11 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x83c */
     0x00000000, /* +0x840 */
     0x001f17f0, /* -> __const_coal+0x8e8 */ /* +0x844 */
-    0x001cf1f4, /* -> FUN_001cf1f4 */ /* +0x848 */
-    0x001cf1ac, /* -> FUN_001cf1ac */ /* +0x84c */
+    0x001cf1f4, /* -> IRInst__dtor_1cf1f4 */ /* +0x848 */
+    0x001cf1ac, /* -> IRInst__dtor_1cf1ac */ /* +0x84c */
     0x00106800, /* +0x850 */
-    0x00105b7c, /* -> FUN_00105b7c */ /* +0x854 */
-    0x00105a44, /* -> FUN_00105a44 */ /* +0x858 */
+    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0x854 */
+    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0x858 */
     0x001ceb40, /* +0x85c */
     0x001ceb38, /* +0x860 */
     0x001ceb48, /* +0x864 */
@@ -576,11 +576,11 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x8f4 */
     0x00000000, /* +0x8f8 */
     0x001f18a8, /* -> __const_coal+0x9a0 */ /* +0x8fc */
-    0x001cf0b4, /* -> FUN_001cf0b4 */ /* +0x900 */
-    0x001cf0e8, /* -> FUN_001cf0e8 */ /* +0x904 */
-    0x0010647c, /* -> FUN_0010647c */ /* +0x908 */
-    0x00105b7c, /* -> FUN_00105b7c */ /* +0x90c */
-    0x00105a44, /* -> FUN_00105a44 */ /* +0x910 */
+    0x001cf0b4, /* -> IRInst__dtor_1cf0b4 */ /* +0x900 */
+    0x001cf0e8, /* -> IRInst__dtor_1cf0e8 */ /* +0x904 */
+    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0x908 */
+    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0x90c */
+    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0x910 */
     0x001ceac4, /* +0x914 */
     0x001cd6a8, /* +0x918 */
     0x001ceacc, /* +0x91c */
@@ -626,11 +626,11 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x9bc */
     0x00000000, /* +0x9c0 */
     0x001f18b8, /* -> __const_coal+0x9b0 */ /* +0x9c4 */
-    0x001cecc0, /* -> FUN_001cecc0 */ /* +0x9c8 */
-    0x001cecf4, /* -> FUN_001cecf4 */ /* +0x9cc */
-    0x0010647c, /* -> FUN_0010647c */ /* +0x9d0 */
-    0x00105b7c, /* -> FUN_00105b7c */ /* +0x9d4 */
-    0x00105a44, /* -> FUN_00105a44 */ /* +0x9d8 */
+    0x001cecc0, /* -> IRInst__dtor_1cecc0 */ /* +0x9c8 */
+    0x001cecf4, /* -> IRInst__dtor_1cecf4 */ /* +0x9cc */
+    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0x9d0 */
+    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0x9d4 */
+    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0x9d8 */
     0x001cea1c, /* +0x9dc */
     0x001cd6a8, /* +0x9e0 */
     0x001ce61c, /* +0x9e4 */
@@ -668,11 +668,11 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0xa64 */
     0x00000000, /* +0xa68 */
     0x001f1a18, /* -> __const_coal+0xb10 */ /* +0xa6c */
-    0x001cf038, /* -> FUN_001cf038 */ /* +0xa70 */
-    0x001cf06c, /* -> FUN_001cf06c */ /* +0xa74 */
-    0x0010647c, /* -> FUN_0010647c */ /* +0xa78 */
-    0x00105b7c, /* -> FUN_00105b7c */ /* +0xa7c */
-    0x00105a44, /* -> FUN_00105a44 */ /* +0xa80 */
+    0x001cf038, /* -> IRInst__dtor_1cf038 */ /* +0xa70 */
+    0x001cf06c, /* -> IRInst__dtor_1cf06c */ /* +0xa74 */
+    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0xa78 */
+    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0xa7c */
+    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0xa80 */
     0x001cea98, /* +0xa84 */
     0x001cd6a8, /* +0xa88 */
     0x001ceaa0, /* +0xa8c */
@@ -714,11 +714,11 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0xb1c */
     0x00000000, /* +0xb20 */
     0x001f1ad0, /* -> __const_coal+0xbc8 */ /* +0xb24 */
-    0x001cef0c, /* -> FUN_001cef0c */ /* +0xb28 */
-    0x001ceec4, /* -> FUN_001ceec4 */ /* +0xb2c */
-    0x0010647c, /* -> FUN_0010647c */ /* +0xb30 */
-    0x00105b7c, /* -> FUN_00105b7c */ /* +0xb34 */
-    0x00105a44, /* -> FUN_00105a44 */ /* +0xb38 */
+    0x001cef0c, /* -> IRInst__dtor_1cef0c */ /* +0xb28 */
+    0x001ceec4, /* -> IRInst__dtor_1ceec4 */ /* +0xb2c */
+    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0xb30 */
+    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0xb34 */
+    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0xb38 */
     0x001cea88, /* +0xb3c */
     0x001cd6a8, /* +0xb40 */
     0x001cea6c, /* +0xb44 */
@@ -764,11 +764,11 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0xbe4 */
     0x00000000, /* +0xbe8 */
     0x001f1ae0, /* -> __const_coal+0xbd8 */ /* +0xbec */
-    0x001cefbc, /* -> FUN_001cefbc */ /* +0xbf0 */
-    0x001ceff0, /* -> FUN_001ceff0 */ /* +0xbf4 */
-    0x0010647c, /* -> FUN_0010647c */ /* +0xbf8 */
-    0x00105b7c, /* -> FUN_00105b7c */ /* +0xbfc */
-    0x00105a44, /* -> FUN_00105a44 */ /* +0xc00 */
+    0x001cefbc, /* -> IRInst__dtor_1cefbc */ /* +0xbf0 */
+    0x001ceff0, /* -> IRInst__dtor_1ceff0 */ /* +0xbf4 */
+    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0xbf8 */
+    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0xbfc */
+    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0xc00 */
     0x001cea1c, /* +0xc04 */
     0x001cd6a8, /* +0xc08 */
     0x001cea6c, /* +0xc0c */
@@ -806,11 +806,11 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0xc8c */
     0x00000000, /* +0xc90 */
     0x001f1c40, /* -> __const_coal+0xd38 */ /* +0xc94 */
-    0x001cef40, /* -> FUN_001cef40 */ /* +0xc98 */
-    0x001cef74, /* -> FUN_001cef74 */ /* +0xc9c */
-    0x0010647c, /* -> FUN_0010647c */ /* +0xca0 */
-    0x00105b7c, /* -> FUN_00105b7c */ /* +0xca4 */
-    0x00105a44, /* -> FUN_00105a44 */ /* +0xca8 */
+    0x001cef40, /* -> IRInst__dtor_1cef40 */ /* +0xc98 */
+    0x001cef74, /* -> IRInst__dtor_1cef74 */ /* +0xc9c */
+    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0xca0 */
+    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0xca4 */
+    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0xca8 */
     0x001cea1c, /* +0xcac */
     0x001cd6a8, /* +0xcb0 */
     0x001cea48, /* +0xcb4 */
@@ -852,11 +852,11 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0xd44 */
     0x00000000, /* +0xd48 */
     0x001f1cf8, /* -> __const_coal+0xdf0 */ /* +0xd4c */
-    0x001cfbc4, /* -> FUN_001cfbc4 */ /* +0xd50 */
-    0x001cfbf8, /* -> FUN_001cfbf8 */ /* +0xd54 */
-    0x0010647c, /* -> FUN_0010647c */ /* +0xd58 */
-    0x00105b7c, /* -> FUN_00105b7c */ /* +0xd5c */
-    0x00105a44, /* -> FUN_00105a44 */ /* +0xd60 */
+    0x001cfbc4, /* -> IRInst__dtor_1cfbc4 */ /* +0xd50 */
+    0x001cfbf8, /* -> IRInst__dtor_1cfbf8 */ /* +0xd54 */
+    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0xd58 */
+    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0xd5c */
+    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0xd60 */
     0x001cec40, /* +0xd64 */
     0x001cd6a8, /* +0xd68 */
     0x001cd7b8, /* +0xd6c */
@@ -898,11 +898,11 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0xdfc */
     0x00000000, /* +0xe00 */
     0x001f1db0, /* -> __const_coal+0xea8 */ /* +0xe04 */
-    0x001cfb48, /* -> FUN_001cfb48 */ /* +0xe08 */
-    0x001cfb7c, /* -> FUN_001cfb7c */ /* +0xe0c */
-    0x0010647c, /* -> FUN_0010647c */ /* +0xe10 */
-    0x00105b7c, /* -> FUN_00105b7c */ /* +0xe14 */
-    0x00105a44, /* -> FUN_00105a44 */ /* +0xe18 */
+    0x001cfb48, /* -> IRInst__dtor_1cfb48 */ /* +0xe08 */
+    0x001cfb7c, /* -> IRInst__dtor_1cfb7c */ /* +0xe0c */
+    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0xe10 */
+    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0xe14 */
+    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0xe18 */
     0x001ce848, /* +0xe1c */
     0x001ce840, /* +0xe20 */
     0x001cd7b8, /* +0xe24 */
@@ -944,11 +944,11 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0xeb4 */
     0x00000000, /* +0xeb8 */
     0x001f1e68, /* -> __const_coal+0xf60 */ /* +0xebc */
-    0x001cfacc, /* -> FUN_001cfacc */ /* +0xec0 */
-    0x001cfb00, /* -> FUN_001cfb00 */ /* +0xec4 */
-    0x0010647c, /* -> FUN_0010647c */ /* +0xec8 */
-    0x00105b7c, /* -> FUN_00105b7c */ /* +0xecc */
-    0x00105a44, /* -> FUN_00105a44 */ /* +0xed0 */
+    0x001cfacc, /* -> IRInst__dtor_1cfacc */ /* +0xec0 */
+    0x001cfb00, /* -> IRInst__dtor_1cfb00 */ /* +0xec4 */
+    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0xec8 */
+    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0xecc */
+    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0xed0 */
     0x001cd7b0, /* +0xed4 */
     0x001cd6a8, /* +0xed8 */
     0x001cd7b8, /* +0xedc */
@@ -990,11 +990,11 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0xf6c */
     0x00000000, /* +0xf70 */
     0x001f1f20, /* -> __const_coal+0x1018 */ /* +0xf74 */
-    0x001cf6b8, /* -> FUN_001cf6b8 */ /* +0xf78 */
-    0x001cf670, /* -> FUN_001cf670 */ /* +0xf7c */
-    0x0010647c, /* -> FUN_0010647c */ /* +0xf80 */
-    0x00105b7c, /* -> FUN_00105b7c */ /* +0xf84 */
-    0x00105a44, /* -> FUN_00105a44 */ /* +0xf88 */
+    0x001cf6b8, /* -> IRInst__dtor_1cf6b8 */ /* +0xf78 */
+    0x001cf670, /* -> IRInst__dtor_1cf670 */ /* +0xf7c */
+    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0xf80 */
+    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0xf84 */
+    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0xf88 */
     0x001cd7b0, /* +0xf8c */
     0x001cd6a8, /* +0xf90 */
     0x001cd7b8, /* +0xf94 */
@@ -1036,11 +1036,11 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x1024 */
     0x00000000, /* +0x1028 */
     0x001f1fd8, /* -> __const_coal+0x10d0 */ /* +0x102c */
-    0x001cf734, /* -> FUN_001cf734 */ /* +0x1030 */
-    0x001cf6ec, /* -> FUN_001cf6ec */ /* +0x1034 */
-    0x0010647c, /* -> FUN_0010647c */ /* +0x1038 */
-    0x00105b7c, /* -> FUN_00105b7c */ /* +0x103c */
-    0x00105a44, /* -> FUN_00105a44 */ /* +0x1040 */
+    0x001cf734, /* -> IRInst__dtor_1cf734 */ /* +0x1030 */
+    0x001cf6ec, /* -> IRInst__dtor_1cf6ec */ /* +0x1034 */
+    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0x1038 */
+    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0x103c */
+    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0x1040 */
     0x001cd7b0, /* +0x1044 */
     0x001cd6a8, /* +0x1048 */
     0x001cd7b8, /* +0x104c */
@@ -1082,11 +1082,11 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x10dc */
     0x00000000, /* +0x10e0 */
     0x001f2090, /* -> __const_coal+0x1188 */ /* +0x10e4 */
-    0x001cf7b0, /* -> FUN_001cf7b0 */ /* +0x10e8 */
-    0x001cf768, /* -> FUN_001cf768 */ /* +0x10ec */
-    0x0010647c, /* -> FUN_0010647c */ /* +0x10f0 */
-    0x00105b7c, /* -> FUN_00105b7c */ /* +0x10f4 */
-    0x00105a44, /* -> FUN_00105a44 */ /* +0x10f8 */
+    0x001cf7b0, /* -> IRInst__dtor_1cf7b0 */ /* +0x10e8 */
+    0x001cf768, /* -> IRInst__dtor_1cf768 */ /* +0x10ec */
+    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0x10f0 */
+    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0x10f4 */
+    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0x10f8 */
     0x001cd7b0, /* +0x10fc */
     0x001cd6a8, /* +0x1100 */
     0x001cd7b8, /* +0x1104 */
@@ -1128,11 +1128,11 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x1194 */
     0x00000000, /* +0x1198 */
     0x001f2148, /* -> __const_coal+0x1240 */ /* +0x119c */
-    0x001cf82c, /* -> FUN_001cf82c */ /* +0x11a0 */
-    0x001cf7e4, /* -> FUN_001cf7e4 */ /* +0x11a4 */
-    0x0010647c, /* -> FUN_0010647c */ /* +0x11a8 */
-    0x00105b7c, /* -> FUN_00105b7c */ /* +0x11ac */
-    0x00105a44, /* -> FUN_00105a44 */ /* +0x11b0 */
+    0x001cf82c, /* -> IRInst__dtor_1cf82c */ /* +0x11a0 */
+    0x001cf7e4, /* -> IRInst__dtor_1cf7e4 */ /* +0x11a4 */
+    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0x11a8 */
+    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0x11ac */
+    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0x11b0 */
     0x001cd7b0, /* +0x11b4 */
     0x001cd6a8, /* +0x11b8 */
     0x001cd7b8, /* +0x11bc */
@@ -1174,11 +1174,11 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x124c */
     0x00000000, /* +0x1250 */
     0x001f2200, /* -> __const_coal+0x12f8 */ /* +0x1254 */
-    0x001cf8a8, /* -> FUN_001cf8a8 */ /* +0x1258 */
-    0x001cf860, /* -> FUN_001cf860 */ /* +0x125c */
-    0x0010647c, /* -> FUN_0010647c */ /* +0x1260 */
-    0x00105b7c, /* -> FUN_00105b7c */ /* +0x1264 */
-    0x00105a44, /* -> FUN_00105a44 */ /* +0x1268 */
+    0x001cf8a8, /* -> IRInst__dtor_1cf8a8 */ /* +0x1258 */
+    0x001cf860, /* -> IRInst__dtor_1cf860 */ /* +0x125c */
+    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0x1260 */
+    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0x1264 */
+    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0x1268 */
     0x001cd7b0, /* +0x126c */
     0x001cd6a8, /* +0x1270 */
     0x001cd7b8, /* +0x1274 */
@@ -1220,11 +1220,11 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x1304 */
     0x00000000, /* +0x1308 */
     0x001f22b8, /* -> __const_coal+0x13b0 */ /* +0x130c */
-    0x001cf924, /* -> FUN_001cf924 */ /* +0x1310 */
-    0x001cf8dc, /* -> FUN_001cf8dc */ /* +0x1314 */
-    0x0010647c, /* -> FUN_0010647c */ /* +0x1318 */
-    0x00105b7c, /* -> FUN_00105b7c */ /* +0x131c */
-    0x00105a44, /* -> FUN_00105a44 */ /* +0x1320 */
+    0x001cf924, /* -> IRInst__dtor_1cf924 */ /* +0x1310 */
+    0x001cf8dc, /* -> IRInst__dtor_1cf8dc */ /* +0x1314 */
+    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0x1318 */
+    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0x131c */
+    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0x1320 */
     0x001cd7b0, /* +0x1324 */
     0x001cd6a8, /* +0x1328 */
     0x001cd7b8, /* +0x132c */
@@ -1266,11 +1266,11 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x13bc */
     0x00000000, /* +0x13c0 */
     0x001f2370, /* -> __const_coal+0x1468 */ /* +0x13c4 */
-    0x001cfa50, /* -> FUN_001cfa50 */ /* +0x13c8 */
-    0x001cfa84, /* -> FUN_001cfa84 */ /* +0x13cc */
-    0x0010647c, /* -> FUN_0010647c */ /* +0x13d0 */
-    0x00105b7c, /* -> FUN_00105b7c */ /* +0x13d4 */
-    0x00105a44, /* -> FUN_00105a44 */ /* +0x13d8 */
+    0x001cfa50, /* -> IRInst__dtor_1cfa50 */ /* +0x13c8 */
+    0x001cfa84, /* -> IRInst__dtor_1cfa84 */ /* +0x13cc */
+    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0x13d0 */
+    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0x13d4 */
+    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0x13d8 */
     0x001cd7b0, /* +0x13dc */
     0x001cd6a8, /* +0x13e0 */
     0x001cd7b8, /* +0x13e4 */
@@ -1312,11 +1312,11 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x1474 */
     0x00000000, /* +0x1478 */
     0x001f2428, /* -> __const_coal+0x1520 */ /* +0x147c */
-    0x001cf9d4, /* -> FUN_001cf9d4 */ /* +0x1480 */
-    0x001cfa08, /* -> FUN_001cfa08 */ /* +0x1484 */
-    0x0010647c, /* -> FUN_0010647c */ /* +0x1488 */
-    0x00105b7c, /* -> FUN_00105b7c */ /* +0x148c */
-    0x00105a44, /* -> FUN_00105a44 */ /* +0x1490 */
+    0x001cf9d4, /* -> IRInst__dtor_1cf9d4 */ /* +0x1480 */
+    0x001cfa08, /* -> IRInst__dtor_1cfa08 */ /* +0x1484 */
+    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0x1488 */
+    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0x148c */
+    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0x1490 */
     0x001cd7b0, /* +0x1494 */
     0x001cd6a8, /* +0x1498 */
     0x001cd7b8, /* +0x149c */
@@ -1358,11 +1358,11 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x152c */
     0x00000000, /* +0x1530 */
     0x001f24e0, /* -> __const_coal+0x15d8 */ /* +0x1534 */
-    0x001cf958, /* -> FUN_001cf958 */ /* +0x1538 */
-    0x001cf98c, /* -> FUN_001cf98c */ /* +0x153c */
-    0x0010647c, /* -> FUN_0010647c */ /* +0x1540 */
-    0x00105b7c, /* -> FUN_00105b7c */ /* +0x1544 */
-    0x00105a44, /* -> FUN_00105a44 */ /* +0x1548 */
+    0x001cf958, /* -> IRInst__dtor_1cf958 */ /* +0x1538 */
+    0x001cf98c, /* -> IRInst__dtor_1cf98c */ /* +0x153c */
+    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0x1540 */
+    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0x1544 */
+    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0x1548 */
     0x001cd7b0, /* +0x154c */
     0x001cd6a8, /* +0x1550 */
     0x001cd7b8, /* +0x1554 */
@@ -1404,11 +1404,11 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x15e4 */
     0x00000000, /* +0x15e8 */
     0x001f2598, /* -> __const_coal+0x1690 */ /* +0x15ec */
-    0x001cf368, /* -> FUN_001cf368 */ /* +0x15f0 */
-    0x001cf320, /* -> FUN_001cf320 */ /* +0x15f4 */
-    0x0010647c, /* -> FUN_0010647c */ /* +0x15f8 */
-    0x00105b7c, /* -> FUN_00105b7c */ /* +0x15fc */
-    0x00105a44, /* -> FUN_00105a44 */ /* +0x1600 */
+    0x001cf368, /* -> IRInst__dtor_1cf368 */ /* +0x15f0 */
+    0x001cf320, /* -> IRInst__dtor_1cf320 */ /* +0x15f4 */
+    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0x15f8 */
+    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0x15fc */
+    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0x1600 */
     0x001ce9d8, /* +0x1604 */
     0x001cd6a8, /* +0x1608 */
     0x001ce9e0, /* +0x160c */
@@ -1454,11 +1454,11 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x16ac */
     0x00000000, /* +0x16b0 */
     0x001f25a8, /* -> __const_coal+0x16a0 */ /* +0x16b4 */
-    0x001cf510, /* -> FUN_001cf510 */ /* +0x16b8 */
-    0x001cf544, /* -> FUN_001cf544 */ /* +0x16bc */
-    0x0010647c, /* -> FUN_0010647c */ /* +0x16c0 */
-    0x00105b7c, /* -> FUN_00105b7c */ /* +0x16c4 */
-    0x00105a44, /* -> FUN_00105a44 */ /* +0x16c8 */
+    0x001cf510, /* -> IRInst__dtor_1cf510 */ /* +0x16b8 */
+    0x001cf544, /* -> IRInst__dtor_1cf544 */ /* +0x16bc */
+    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0x16c0 */
+    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0x16c4 */
+    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0x16c8 */
     0x001ce9d8, /* +0x16cc */
     0x001cd6a8, /* +0x16d0 */
     0x001ce990, /* +0x16d4 */
@@ -1496,11 +1496,11 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x1754 */
     0x00000000, /* +0x1758 */
     0x001f2708, /* -> __const_coal+0x1800 */ /* +0x175c */
-    0x001cf494, /* -> FUN_001cf494 */ /* +0x1760 */
-    0x001cf4c8, /* -> FUN_001cf4c8 */ /* +0x1764 */
-    0x0010647c, /* -> FUN_0010647c */ /* +0x1768 */
-    0x00105b7c, /* -> FUN_00105b7c */ /* +0x176c */
-    0x00105a44, /* -> FUN_00105a44 */ /* +0x1770 */
+    0x001cf494, /* -> IRInst__dtor_1cf494 */ /* +0x1760 */
+    0x001cf4c8, /* -> IRInst__dtor_1cf4c8 */ /* +0x1764 */
+    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0x1768 */
+    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0x176c */
+    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0x1770 */
     0x001cea0c, /* +0x1774 */
     0x001cd6a8, /* +0x1778 */
     0x001ce990, /* +0x177c */
@@ -1542,11 +1542,11 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x180c */
     0x00000000, /* +0x1810 */
     0x001f27c0, /* -> __const_coal+0x18b8 */ /* +0x1814 */
-    0x001cf418, /* -> FUN_001cf418 */ /* +0x1818 */
-    0x001cf44c, /* -> FUN_001cf44c */ /* +0x181c */
-    0x0010647c, /* -> FUN_0010647c */ /* +0x1820 */
-    0x00105b7c, /* -> FUN_00105b7c */ /* +0x1824 */
-    0x00105a44, /* -> FUN_00105a44 */ /* +0x1828 */
+    0x001cf418, /* -> IRInst__dtor_1cf418 */ /* +0x1818 */
+    0x001cf44c, /* -> IRInst__dtor_1cf44c */ /* +0x181c */
+    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0x1820 */
+    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0x1824 */
+    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0x1828 */
     0x001ce9d0, /* +0x182c */
     0x001cd6a8, /* +0x1830 */
     0x001ce990, /* +0x1834 */
@@ -1588,11 +1588,11 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x18c4 */
     0x00000000, /* +0x18c8 */
     0x001f2878, /* -> __const_coal+0x1970 */ /* +0x18cc */
-    0x001cf3e4, /* -> FUN_001cf3e4 */ /* +0x18d0 */
-    0x001cf39c, /* -> FUN_001cf39c */ /* +0x18d4 */
-    0x0010647c, /* -> FUN_0010647c */ /* +0x18d8 */
-    0x00105b7c, /* -> FUN_00105b7c */ /* +0x18dc */
-    0x00105a44, /* -> FUN_00105a44 */ /* +0x18e0 */
+    0x001cf3e4, /* -> IRInst__dtor_1cf3e4 */ /* +0x18d0 */
+    0x001cf39c, /* -> IRInst__dtor_1cf39c */ /* +0x18d4 */
+    0x0010647c, /* -> IRStartCallRoutine__vslot2 */ /* +0x18d8 */
+    0x00105b7c, /* -> IRStartCallRoutine__vslot3 */ /* +0x18dc */
+    0x00105a44, /* -> IRStartCallRoutine__vslot4 */ /* +0x18e0 */
     0x001ce9d0, /* +0x18e4 */
     0x001cd6a8, /* +0x18e8 */
     0x001ce990, /* +0x18ec */
@@ -1636,8 +1636,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cc4e8, /* +0x1984 */
     0x00000000, /* +0x1988 */
     0x001f28b0, /* -> __const_coal+0x19a8 */ /* +0x198c */
-    0x001d01b0, /* -> FUN_001d01b0 */ /* +0x1990 */
-    0x001d01d4, /* -> FUN_001d01d4 */ /* +0x1994 */
+    0x001d01b0, /* -> HwChip__dtor */ /* +0x1990 */
+    0x001d01d4, /* -> HwChip__deleting_dtor */ /* +0x1994 */
     0x00000000, /* +0x1998 */
     0x00000000, /* +0x199c */
     0x00000000, /* +0x19a0 */
@@ -1649,8 +1649,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d0e00, /* +0x19b8 */
     0x001d01fc, /* +0x19bc */
     0x001d0204, /* +0x19c0 */
-    0x001d7840, /* -> FUN_001d7840 */ /* +0x19c4 */
-    0x001d7874, /* -> FUN_001d7874 */ /* +0x19c8 */
+    0x001d7840, /* -> IrRet__dtor */ /* +0x19c4 */
+    0x001d7874, /* -> IrRet__deleting_dtor */ /* +0x19c8 */
     0x001d0250, /* +0x19cc */
     0x001d0258, /* +0x19d0 */
     0x00000000, /* +0x19d4 */
@@ -1665,8 +1665,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x19f8 */
     0x001d01fc, /* +0x19fc */
     0x001d0204, /* +0x1a00 */
-    0x001d0208, /* -> FUN_001d0208 */ /* +0x1a04 */
-    0x001d022c, /* -> FUN_001d022c */ /* +0x1a08 */
+    0x001d0208, /* -> OpcodeInfo__dtor */ /* +0x1a04 */
+    0x001d022c, /* -> OpcodeInfo__deleting_dtor */ /* +0x1a08 */
     0x001d0250, /* +0x1a0c */
     0x001d0258, /* +0x1a10 */
     0x00000000, /* +0x1a14 */
@@ -1675,8 +1675,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x1a20 */
     0x001d01fc, /* +0x1a24 */
     0x001d0204, /* +0x1a28 */
-    0x001d77d8, /* -> FUN_001d77d8 */ /* +0x1a2c */
-    0x001d780c, /* -> FUN_001d780c */ /* +0x1a30 */
+    0x001d77d8, /* -> IrCondJmp__dtor */ /* +0x1a2c */
+    0x001d780c, /* -> IrCondJmp__deleting_dtor */ /* +0x1a30 */
     0x001d0250, /* +0x1a34 */
     0x001d0258, /* +0x1a38 */
     0x00000000, /* +0x1a3c */
@@ -1689,8 +1689,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x1a58 */
     0x001d01fc, /* +0x1a5c */
     0x001d0204, /* +0x1a60 */
-    0x001d7770, /* -> FUN_001d7770 */ /* +0x1a64 */
-    0x001d77a4, /* -> FUN_001d77a4 */ /* +0x1a68 */
+    0x001d7770, /* -> IrAlloc__dtor */ /* +0x1a64 */
+    0x001d77a4, /* -> IrAlloc__deleting_dtor */ /* +0x1a68 */
     0x001d0250, /* +0x1a6c */
     0x001d0258, /* +0x1a70 */
     0x00000000, /* +0x1a74 */
@@ -1703,8 +1703,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x1a90 */
     0x001d0260, /* +0x1a94 */
     0x001d0204, /* +0x1a98 */
-    0x001d7708, /* -> FUN_001d7708 */ /* +0x1a9c */
-    0x001d773c, /* -> FUN_001d773c */ /* +0x1aa0 */
+    0x001d7708, /* -> IrAddFloat__dtor */ /* +0x1a9c */
+    0x001d773c, /* -> IrAddFloat__deleting_dtor */ /* +0x1aa0 */
     0x001d0278, /* -> FUN_001d0278 */ /* +0x1aa4 */
     0x001d0258, /* +0x1aa8 */
     0x00000000, /* +0x1aac */
@@ -1717,8 +1717,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x1ac8 */
     0x001d0260, /* +0x1acc */
     0x001d0204, /* +0x1ad0 */
-    0x001d1544, /* -> FUN_001d1544 */ /* +0x1ad4 */
-    0x001d1500, /* -> FUN_001d1500 */ /* +0x1ad8 */
+    0x001d1544, /* -> IrAdd__dtor */ /* +0x1ad4 */
+    0x001d1500, /* -> IrAdd__deleting_dtor */ /* +0x1ad8 */
     0x001d0278, /* -> FUN_001d0278 */ /* +0x1adc */
     0x001d0258, /* +0x1ae0 */
     0x00000000, /* +0x1ae4 */
@@ -1731,8 +1731,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x1b00 */
     0x001d0398, /* +0x1b04 */
     0x001d0204, /* +0x1b08 */
-    0x001d76a0, /* -> FUN_001d76a0 */ /* +0x1b0c */
-    0x001d76d4, /* -> FUN_001d76d4 */ /* +0x1b10 */
+    0x001d76a0, /* -> IrAddInt__dtor */ /* +0x1b0c */
+    0x001d76d4, /* -> IrAddInt__deleting_dtor */ /* +0x1b10 */
     0x001d0e0c, /* -> FUN_001d0e0c */ /* +0x1b14 */
     0x001d0258, /* +0x1b18 */
     0x00000000, /* +0x1b1c */
@@ -1745,8 +1745,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x1b38 */
     0x001d0458, /* +0x1b3c */
     0x001d0204, /* +0x1b40 */
-    0x001d7638, /* -> FUN_001d7638 */ /* +0x1b44 */
-    0x001d766c, /* -> FUN_001d766c */ /* +0x1b48 */
+    0x001d7638, /* -> IrSubInt__dtor */ /* +0x1b44 */
+    0x001d766c, /* -> IrSubInt__deleting_dtor */ /* +0x1b48 */
     0x001d0250, /* +0x1b4c */
     0x001d0258, /* +0x1b50 */
     0x00000000, /* +0x1b54 */
@@ -1759,8 +1759,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x1b70 */
     0x001d0ee0, /* -> FUN_001d0ee0 */ /* +0x1b74 */
     0x001d0204, /* +0x1b78 */
-    0x001d129c, /* -> FUN_001d129c */ /* +0x1b7c */
-    0x001d1258, /* -> FUN_001d1258 */ /* +0x1b80 */
+    0x001d129c, /* -> IrMulFloat__dtor */ /* +0x1b7c */
+    0x001d1258, /* -> IrMulFloat__deleting_dtor */ /* +0x1b80 */
     0x001d0250, /* +0x1b84 */
     0x001d0258, /* +0x1b88 */
     0x00000000, /* +0x1b8c */
@@ -1777,8 +1777,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x1bb8 */
     0x001d096c, /* +0x1bbc */
     0x001d0204, /* +0x1bc0 */
-    0x001d75d0, /* -> FUN_001d75d0 */ /* +0x1bc4 */
-    0x001d7604, /* -> FUN_001d7604 */ /* +0x1bc8 */
+    0x001d75d0, /* -> IrMulIEEE__dtor */ /* +0x1bc4 */
+    0x001d7604, /* -> IrMulIEEE__deleting_dtor */ /* +0x1bc8 */
     0x001d0250, /* +0x1bcc */
     0x001d0258, /* +0x1bd0 */
     0x00000000, /* +0x1bd4 */
@@ -1787,8 +1787,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x1be0 */
     0x001d096c, /* +0x1be4 */
     0x001d0204, /* +0x1be8 */
-    0x001d1324, /* -> FUN_001d1324 */ /* +0x1bec */
-    0x001d12e0, /* -> FUN_001d12e0 */ /* +0x1bf0 */
+    0x001d1324, /* -> IrMul__dtor */ /* +0x1bec */
+    0x001d12e0, /* -> IrMul__deleting_dtor */ /* +0x1bf0 */
     0x001d0250, /* +0x1bf4 */
     0x001d0258, /* +0x1bf8 */
     0x00000000, /* +0x1bfc */
@@ -1801,8 +1801,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x1c18 */
     0x001d09b4, /* -> FUN_001d09b4 */ /* +0x1c1c */
     0x001d0204, /* +0x1c20 */
-    0x001d7568, /* -> FUN_001d7568 */ /* +0x1c24 */
-    0x001d759c, /* -> FUN_001d759c */ /* +0x1c28 */
+    0x001d7568, /* -> IrMulAddFloat__dtor */ /* +0x1c24 */
+    0x001d759c, /* -> IrMulAddFloat__deleting_dtor */ /* +0x1c28 */
     0x001d0250, /* +0x1c2c */
     0x001d0258, /* +0x1c30 */
     0x00000000, /* +0x1c34 */
@@ -1815,8 +1815,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x1c50 */
     0x001d01fc, /* +0x1c54 */
     0x001d0204, /* +0x1c58 */
-    0x001d7500, /* -> FUN_001d7500 */ /* +0x1c5c */
-    0x001d7534, /* -> FUN_001d7534 */ /* +0x1c60 */
+    0x001d7500, /* -> IrMulAdd__dtor */ /* +0x1c5c */
+    0x001d7534, /* -> IrMulAdd__deleting_dtor */ /* +0x1c60 */
     0x001d0250, /* +0x1c64 */
     0x001d0258, /* +0x1c68 */
     0x00000000, /* +0x1c6c */
@@ -1829,8 +1829,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x1c88 */
     0x001d01fc, /* +0x1c8c */
     0x001d0204, /* +0x1c90 */
-    0x001d7498, /* -> FUN_001d7498 */ /* +0x1c94 */
-    0x001d74cc, /* -> FUN_001d74cc */ /* +0x1c98 */
+    0x001d7498, /* -> IrMulAddIEEE__dtor */ /* +0x1c94 */
+    0x001d74cc, /* -> IrMulAddIEEE__deleting_dtor */ /* +0x1c98 */
     0x001d0250, /* +0x1c9c */
     0x001d0258, /* +0x1ca0 */
     0x00000000, /* +0x1ca4 */
@@ -1843,8 +1843,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x1cc0 */
     0x001d09fc, /* -> FUN_001d09fc */ /* +0x1cc4 */
     0x001d0204, /* +0x1cc8 */
-    0x001d7430, /* -> FUN_001d7430 */ /* +0x1ccc */
-    0x001d7464, /* -> FUN_001d7464 */ /* +0x1cd0 */
+    0x001d7430, /* -> IrFloorFloat__dtor */ /* +0x1ccc */
+    0x001d7464, /* -> IrFloorFloat__deleting_dtor */ /* +0x1cd0 */
     0x001d0250, /* +0x1cd4 */
     0x001d0258, /* +0x1cd8 */
     0x00000000, /* +0x1cdc */
@@ -1857,8 +1857,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x1cf8 */
     0x001d01fc, /* +0x1cfc */
     0x001d0204, /* +0x1d00 */
-    0x001d73c8, /* -> FUN_001d73c8 */ /* +0x1d04 */
-    0x001d73fc, /* -> FUN_001d73fc */ /* +0x1d08 */
+    0x001d73c8, /* -> IrFloor__dtor */ /* +0x1d04 */
+    0x001d73fc, /* -> IrFloor__deleting_dtor */ /* +0x1d08 */
     0x001d0250, /* +0x1d0c */
     0x001d0258, /* +0x1d10 */
     0x00000000, /* +0x1d14 */
@@ -1871,8 +1871,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x1d30 */
     0x001d0a38, /* -> FUN_001d0a38 */ /* +0x1d34 */
     0x001d0204, /* +0x1d38 */
-    0x001d7360, /* -> FUN_001d7360 */ /* +0x1d3c */
-    0x001d7394, /* -> FUN_001d7394 */ /* +0x1d40 */
+    0x001d7360, /* -> IrFractFloat__dtor */ /* +0x1d3c */
+    0x001d7394, /* -> IrFractFloat__deleting_dtor */ /* +0x1d40 */
     0x001d0250, /* +0x1d44 */
     0x001d0258, /* +0x1d48 */
     0x00000000, /* +0x1d4c */
@@ -1885,8 +1885,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x1d68 */
     0x001d01fc, /* +0x1d6c */
     0x001d0204, /* +0x1d70 */
-    0x001d72f8, /* -> FUN_001d72f8 */ /* +0x1d74 */
-    0x001d732c, /* -> FUN_001d732c */ /* +0x1d78 */
+    0x001d72f8, /* -> IrFract__dtor */ /* +0x1d74 */
+    0x001d732c, /* -> IrFract__deleting_dtor */ /* +0x1d78 */
     0x001d0250, /* +0x1d7c */
     0x001d0258, /* +0x1d80 */
     0x00000000, /* +0x1d84 */
@@ -1899,8 +1899,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x1da0 */
     0x001d04e0, /* +0x1da4 */
     0x001d0204, /* +0x1da8 */
-    0x001d7290, /* -> FUN_001d7290 */ /* +0x1dac */
-    0x001d72c4, /* -> FUN_001d72c4 */ /* +0x1db0 */
+    0x001d7290, /* -> IrMaxFloat__dtor */ /* +0x1dac */
+    0x001d72c4, /* -> IrMaxFloat__deleting_dtor */ /* +0x1db0 */
     0x001d0250, /* +0x1db4 */
     0x001d0258, /* +0x1db8 */
     0x00000000, /* +0x1dbc */
@@ -1913,8 +1913,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x1dd8 */
     0x001d04a0, /* +0x1ddc */
     0x001d0204, /* +0x1de0 */
-    0x001d7228, /* -> FUN_001d7228 */ /* +0x1de4 */
-    0x001d725c, /* -> FUN_001d725c */ /* +0x1de8 */
+    0x001d7228, /* -> IrMaxInt__dtor */ /* +0x1de4 */
+    0x001d725c, /* -> IrMaxInt__deleting_dtor */ /* +0x1de8 */
     0x001d0250, /* +0x1dec */
     0x001d0258, /* +0x1df0 */
     0x00000000, /* +0x1df4 */
@@ -1927,8 +1927,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x1e10 */
     0x001d04c0, /* +0x1e14 */
     0x001d0204, /* +0x1e18 */
-    0x001d71c0, /* -> FUN_001d71c0 */ /* +0x1e1c */
-    0x001d71f4, /* -> FUN_001d71f4 */ /* +0x1e20 */
+    0x001d71c0, /* -> IrMaxUInt__dtor */ /* +0x1e1c */
+    0x001d71f4, /* -> IrMaxUInt__deleting_dtor */ /* +0x1e20 */
     0x001d0250, /* +0x1e24 */
     0x001d0258, /* +0x1e28 */
     0x00000000, /* +0x1e2c */
@@ -1941,8 +1941,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x1e48 */
     0x001d01fc, /* +0x1e4c */
     0x001d0204, /* +0x1e50 */
-    0x001d7158, /* -> FUN_001d7158 */ /* +0x1e54 */
-    0x001d718c, /* -> FUN_001d718c */ /* +0x1e58 */
+    0x001d7158, /* -> IrMax__dtor */ /* +0x1e54 */
+    0x001d718c, /* -> IrMax__deleting_dtor */ /* +0x1e58 */
     0x001d0250, /* +0x1e5c */
     0x001d0258, /* +0x1e60 */
     0x00000000, /* +0x1e64 */
@@ -1955,8 +1955,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x1e80 */
     0x001d01fc, /* +0x1e84 */
     0x001d0204, /* +0x1e88 */
-    0x001d70f0, /* -> FUN_001d70f0 */ /* +0x1e8c */
-    0x001d7124, /* -> FUN_001d7124 */ /* +0x1e90 */
+    0x001d70f0, /* -> IrMaxDx10__dtor */ /* +0x1e8c */
+    0x001d7124, /* -> IrMaxDx10__deleting_dtor */ /* +0x1e90 */
     0x001d0250, /* +0x1e94 */
     0x001d0258, /* +0x1e98 */
     0x00000000, /* +0x1e9c */
@@ -1969,8 +1969,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x1eb8 */
     0x001d01fc, /* +0x1ebc */
     0x001d0204, /* +0x1ec0 */
-    0x001d7088, /* -> FUN_001d7088 */ /* +0x1ec4 */
-    0x001d70bc, /* -> FUN_001d70bc */ /* +0x1ec8 */
+    0x001d7088, /* -> IrMax4__dtor */ /* +0x1ec4 */
+    0x001d70bc, /* -> IrMax4__deleting_dtor */ /* +0x1ec8 */
     0x001d0250, /* +0x1ecc */
     0x001d0258, /* +0x1ed0 */
     0x00000000, /* +0x1ed4 */
@@ -1983,8 +1983,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x1ef0 */
     0x001d0504, /* +0x1ef4 */
     0x001d0204, /* +0x1ef8 */
-    0x001d7020, /* -> FUN_001d7020 */ /* +0x1efc */
-    0x001d7054, /* -> FUN_001d7054 */ /* +0x1f00 */
+    0x001d7020, /* -> IrMinFloat__dtor */ /* +0x1efc */
+    0x001d7054, /* -> IrMinFloat__deleting_dtor */ /* +0x1f00 */
     0x001d0250, /* +0x1f04 */
     0x001d0258, /* +0x1f08 */
     0x00000000, /* +0x1f0c */
@@ -1997,8 +1997,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x1f28 */
     0x001d01fc, /* +0x1f2c */
     0x001d0204, /* +0x1f30 */
-    0x001d6fb8, /* -> FUN_001d6fb8 */ /* +0x1f34 */
-    0x001d6fec, /* -> FUN_001d6fec */ /* +0x1f38 */
+    0x001d6fb8, /* -> IrMin__dtor */ /* +0x1f34 */
+    0x001d6fec, /* -> IrMin__deleting_dtor */ /* +0x1f38 */
     0x001d0250, /* +0x1f3c */
     0x001d0258, /* +0x1f40 */
     0x00000000, /* +0x1f44 */
@@ -2011,8 +2011,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x1f60 */
     0x001d0528, /* +0x1f64 */
     0x001d0204, /* +0x1f68 */
-    0x001d6f50, /* -> FUN_001d6f50 */ /* +0x1f6c */
-    0x001d6f84, /* -> FUN_001d6f84 */ /* +0x1f70 */
+    0x001d6f50, /* -> IrMinInt__dtor */ /* +0x1f6c */
+    0x001d6f84, /* -> IrMinInt__deleting_dtor */ /* +0x1f70 */
     0x001d0250, /* +0x1f74 */
     0x001d0258, /* +0x1f78 */
     0x00000000, /* +0x1f7c */
@@ -2025,8 +2025,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x1f98 */
     0x001d0548, /* +0x1f9c */
     0x001d0204, /* +0x1fa0 */
-    0x001d6ee8, /* -> FUN_001d6ee8 */ /* +0x1fa4 */
-    0x001d6f1c, /* -> FUN_001d6f1c */ /* +0x1fa8 */
+    0x001d6ee8, /* -> IrMinUInt__dtor */ /* +0x1fa4 */
+    0x001d6f1c, /* -> IrMinUInt__deleting_dtor */ /* +0x1fa8 */
     0x001d0250, /* +0x1fac */
     0x001d0258, /* +0x1fb0 */
     0x00000000, /* +0x1fb4 */
@@ -2039,8 +2039,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x1fd0 */
     0x001d01fc, /* +0x1fd4 */
     0x001d0204, /* +0x1fd8 */
-    0x001d6e80, /* -> FUN_001d6e80 */ /* +0x1fdc */
-    0x001d6eb4, /* -> FUN_001d6eb4 */ /* +0x1fe0 */
+    0x001d6e80, /* -> IrMinDx10__dtor */ /* +0x1fdc */
+    0x001d6eb4, /* -> IrMinDx10__deleting_dtor */ /* +0x1fe0 */
     0x001d0250, /* +0x1fe4 */
     0x001d0258, /* +0x1fe8 */
     0x00000000, /* +0x1fec */
@@ -2053,8 +2053,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2008 */
     0x001d075c, /* -> FUN_001d075c */ /* +0x200c */
     0x001d0204, /* +0x2010 */
-    0x001d1104, /* -> FUN_001d1104 */ /* +0x2014 */
-    0x001d10c0, /* -> FUN_001d10c0 */ /* +0x2018 */
+    0x001d1104, /* -> IrRecipClamp__dtor */ /* +0x2014 */
+    0x001d10c0, /* -> IrRecipClamp__deleting_dtor */ /* +0x2018 */
     0x001d0250, /* +0x201c */
     0x001d0258, /* +0x2020 */
     0x00000000, /* +0x2024 */
@@ -2071,8 +2071,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2050 */
     0x001d075c, /* -> FUN_001d075c */ /* +0x2054 */
     0x001d0204, /* +0x2058 */
-    0x001d6e18, /* -> FUN_001d6e18 */ /* +0x205c */
-    0x001d6e4c, /* -> FUN_001d6e4c */ /* +0x2060 */
+    0x001d6e18, /* -> IrRecipInternal__dtor */ /* +0x205c */
+    0x001d6e4c, /* -> IrRecipInternal__deleting_dtor */ /* +0x2060 */
     0x001d0250, /* +0x2064 */
     0x001d0258, /* +0x2068 */
     0x00000000, /* +0x206c */
@@ -2081,8 +2081,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2078 */
     0x001d075c, /* -> FUN_001d075c */ /* +0x207c */
     0x001d0204, /* +0x2080 */
-    0x001d118c, /* -> FUN_001d118c */ /* +0x2084 */
-    0x001d1148, /* -> FUN_001d1148 */ /* +0x2088 */
+    0x001d118c, /* -> IrRecipFF__dtor */ /* +0x2084 */
+    0x001d1148, /* -> IrRecipFF__deleting_dtor */ /* +0x2088 */
     0x001d0250, /* +0x208c */
     0x001d0258, /* +0x2090 */
     0x00000000, /* +0x2094 */
@@ -2095,8 +2095,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x20b0 */
     0x001d075c, /* -> FUN_001d075c */ /* +0x20b4 */
     0x001d0204, /* +0x20b8 */
-    0x001d1214, /* -> FUN_001d1214 */ /* +0x20bc */
-    0x001d11d0, /* -> FUN_001d11d0 */ /* +0x20c0 */
+    0x001d1214, /* -> IrRecipIEEE__dtor */ /* +0x20bc */
+    0x001d11d0, /* -> IrRecipIEEE__deleting_dtor */ /* +0x20c0 */
     0x001d0250, /* +0x20c4 */
     0x001d0258, /* +0x20c8 */
     0x00000000, /* +0x20cc */
@@ -2109,8 +2109,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x20e8 */
     0x001d01fc, /* +0x20ec */
     0x001d0204, /* +0x20f0 */
-    0x001d6db0, /* -> FUN_001d6db0 */ /* +0x20f4 */
-    0x001d6de4, /* -> FUN_001d6de4 */ /* +0x20f8 */
+    0x001d6db0, /* -> IrRecipInt__dtor */ /* +0x20f4 */
+    0x001d6de4, /* -> IrRecipInt__deleting_dtor */ /* +0x20f8 */
     0x001d0250, /* +0x20fc */
     0x001d0258, /* +0x2100 */
     0x00000000, /* +0x2104 */
@@ -2123,8 +2123,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2120 */
     0x001d01fc, /* +0x2124 */
     0x001d0204, /* +0x2128 */
-    0x001d6d48, /* -> FUN_001d6d48 */ /* +0x212c */
-    0x001d6d7c, /* -> FUN_001d6d7c */ /* +0x2130 */
+    0x001d6d48, /* -> IrRecipUInt__dtor */ /* +0x212c */
+    0x001d6d7c, /* -> IrRecipUInt__deleting_dtor */ /* +0x2130 */
     0x001d0250, /* +0x2134 */
     0x001d0258, /* +0x2138 */
     0x00000000, /* +0x213c */
@@ -2137,8 +2137,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2158 */
     0x001d01fc, /* +0x215c */
     0x001d0204, /* +0x2160 */
-    0x001d6ce0, /* -> FUN_001d6ce0 */ /* +0x2164 */
-    0x001d6d14, /* -> FUN_001d6d14 */ /* +0x2168 */
+    0x001d6ce0, /* -> IrTruncFloat__dtor */ /* +0x2164 */
+    0x001d6d14, /* -> IrTruncFloat__deleting_dtor */ /* +0x2168 */
     0x001d0250, /* +0x216c */
     0x001d0258, /* +0x2170 */
     0x00000000, /* +0x2174 */
@@ -2151,8 +2151,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2190 */
     0x001d01fc, /* +0x2194 */
     0x001d0204, /* +0x2198 */
-    0x001d6c78, /* -> FUN_001d6c78 */ /* +0x219c */
-    0x001d6cac, /* -> FUN_001d6cac */ /* +0x21a0 */
+    0x001d6c78, /* -> IrTrunc__dtor */ /* +0x219c */
+    0x001d6cac, /* -> IrTrunc__deleting_dtor */ /* +0x21a0 */
     0x001d0250, /* +0x21a4 */
     0x001d0258, /* +0x21a8 */
     0x00000000, /* +0x21ac */
@@ -2165,8 +2165,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x21c8 */
     0x001d01fc, /* +0x21cc */
     0x001d0204, /* +0x21d0 */
-    0x001d6c10, /* -> FUN_001d6c10 */ /* +0x21d4 */
-    0x001d6c44, /* -> FUN_001d6c44 */ /* +0x21d8 */
+    0x001d6c10, /* -> IrCube__dtor */ /* +0x21d4 */
+    0x001d6c44, /* -> IrCube__deleting_dtor */ /* +0x21d8 */
     0x001d0250, /* +0x21dc */
     0x001d0258, /* +0x21e0 */
     0x00000000, /* +0x21e4 */
@@ -2179,8 +2179,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2200 */
     0x001d01fc, /* +0x2204 */
     0x001d0a84, /* -> FUN_001d0a84 */ /* +0x2208 */
-    0x001d6ba8, /* -> FUN_001d6ba8 */ /* +0x220c */
-    0x001d6bdc, /* -> FUN_001d6bdc */ /* +0x2210 */
+    0x001d6ba8, /* -> IrDot3__dtor */ /* +0x220c */
+    0x001d6bdc, /* -> IrDot3__deleting_dtor */ /* +0x2210 */
     0x001d0250, /* +0x2214 */
     0x001d0258, /* +0x2218 */
     0x00000000, /* +0x221c */
@@ -2193,8 +2193,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2238 */
     0x001d01fc, /* +0x223c */
     0x001d0204, /* +0x2240 */
-    0x001d6b40, /* -> FUN_001d6b40 */ /* +0x2244 */
-    0x001d6b74, /* -> FUN_001d6b74 */ /* +0x2248 */
+    0x001d6b40, /* -> IrDot3IEEE__dtor */ /* +0x2244 */
+    0x001d6b74, /* -> IrDot3IEEE__deleting_dtor */ /* +0x2248 */
     0x001d0250, /* +0x224c */
     0x001d0258, /* +0x2250 */
     0x00000000, /* +0x2254 */
@@ -2207,8 +2207,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2270 */
     0x001d0568, /* +0x2274 */
     0x001d0204, /* +0x2278 */
-    0x001d6ad8, /* -> FUN_001d6ad8 */ /* +0x227c */
-    0x001d6b0c, /* -> FUN_001d6b0c */ /* +0x2280 */
+    0x001d6ad8, /* -> IrF2Int__dtor */ /* +0x227c */
+    0x001d6b0c, /* -> IrF2Int__deleting_dtor */ /* +0x2280 */
     0x001d0250, /* +0x2284 */
     0x001d0258, /* +0x2288 */
     0x00000000, /* +0x228c */
@@ -2221,8 +2221,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x22a8 */
     0x001d0584, /* +0x22ac */
     0x001d0204, /* +0x22b0 */
-    0x001d6a70, /* -> FUN_001d6a70 */ /* +0x22b4 */
-    0x001d6aa4, /* -> FUN_001d6aa4 */ /* +0x22b8 */
+    0x001d6a70, /* -> IrF2UInt__dtor */ /* +0x22b4 */
+    0x001d6aa4, /* -> IrF2UInt__deleting_dtor */ /* +0x22b8 */
     0x001d0250, /* +0x22bc */
     0x001d0258, /* +0x22c0 */
     0x00000000, /* +0x22c4 */
@@ -2235,8 +2235,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x22e0 */
     0x001d08e8, /* -> FUN_001d08e8 */ /* +0x22e4 */
     0x001d0204, /* +0x22e8 */
-    0x001d6a08, /* -> FUN_001d6a08 */ /* +0x22ec */
-    0x001d6a3c, /* -> FUN_001d6a3c */ /* +0x22f0 */
+    0x001d6a08, /* -> IrInt2F__dtor */ /* +0x22ec */
+    0x001d6a3c, /* -> IrInt2F__deleting_dtor */ /* +0x22f0 */
     0x001d0250, /* +0x22f4 */
     0x001d0258, /* +0x22f8 */
     0x00000000, /* +0x22fc */
@@ -2249,8 +2249,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2318 */
     0x001d092c, /* -> FUN_001d092c */ /* +0x231c */
     0x001d0204, /* +0x2320 */
-    0x001d69a0, /* -> FUN_001d69a0 */ /* +0x2324 */
-    0x001d69d4, /* -> FUN_001d69d4 */ /* +0x2328 */
+    0x001d69a0, /* -> IrUInt2F__dtor */ /* +0x2324 */
+    0x001d69d4, /* -> IrUInt2F__deleting_dtor */ /* +0x2328 */
     0x001d0250, /* +0x232c */
     0x001d0258, /* +0x2330 */
     0x00000000, /* +0x2334 */
@@ -2263,8 +2263,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2350 */
     0x001d03dc, /* +0x2354 */
     0x001d0204, /* +0x2358 */
-    0x001d6938, /* -> FUN_001d6938 */ /* +0x235c */
-    0x001d696c, /* -> FUN_001d696c */ /* +0x2360 */
+    0x001d6938, /* -> IrAshrInt__dtor */ /* +0x235c */
+    0x001d696c, /* -> IrAshrInt__deleting_dtor */ /* +0x2360 */
     0x001d0250, /* +0x2364 */
     0x001d0258, /* +0x2368 */
     0x00000000, /* +0x236c */
@@ -2277,8 +2277,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2388 */
     0x001d040c, /* +0x238c */
     0x001d0204, /* +0x2390 */
-    0x001d68d0, /* -> FUN_001d68d0 */ /* +0x2394 */
-    0x001d6904, /* -> FUN_001d6904 */ /* +0x2398 */
+    0x001d68d0, /* -> IrLshrInt__dtor */ /* +0x2394 */
+    0x001d6904, /* -> IrLshrInt__deleting_dtor */ /* +0x2398 */
     0x001d0250, /* +0x239c */
     0x001d0258, /* +0x23a0 */
     0x00000000, /* +0x23a4 */
@@ -2291,8 +2291,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x23c0 */
     0x001d03f4, /* +0x23c4 */
     0x001d0204, /* +0x23c8 */
-    0x001d6868, /* -> FUN_001d6868 */ /* +0x23cc */
-    0x001d689c, /* -> FUN_001d689c */ /* +0x23d0 */
+    0x001d6868, /* -> IrLshlInt__dtor */ /* +0x23cc */
+    0x001d689c, /* -> IrLshlInt__deleting_dtor */ /* +0x23d0 */
     0x001d0250, /* +0x23d4 */
     0x001d0258, /* +0x23d8 */
     0x00000000, /* +0x23dc */
@@ -2305,8 +2305,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x23f8 */
     0x001d0470, /* +0x23fc */
     0x001d0204, /* +0x2400 */
-    0x001d6800, /* -> FUN_001d6800 */ /* +0x2404 */
-    0x001d6834, /* -> FUN_001d6834 */ /* +0x2408 */
+    0x001d6800, /* -> IrMulLowInt__dtor */ /* +0x2404 */
+    0x001d6834, /* -> IrMulLowInt__deleting_dtor */ /* +0x2408 */
     0x001d0250, /* +0x240c */
     0x001d0258, /* +0x2410 */
     0x00000000, /* +0x2414 */
@@ -2319,8 +2319,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2430 */
     0x001d0984, /* +0x2434 */
     0x001d0204, /* +0x2438 */
-    0x001d6798, /* -> FUN_001d6798 */ /* +0x243c */
-    0x001d67cc, /* -> FUN_001d67cc */ /* +0x2440 */
+    0x001d6798, /* -> IrMulHiInt__dtor */ /* +0x243c */
+    0x001d67cc, /* -> IrMulHiInt__deleting_dtor */ /* +0x2440 */
     0x001d0250, /* +0x2444 */
     0x001d0258, /* +0x2448 */
     0x00000000, /* +0x244c */
@@ -2333,8 +2333,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2468 */
     0x001d0488, /* +0x246c */
     0x001d0204, /* +0x2470 */
-    0x001d6730, /* -> FUN_001d6730 */ /* +0x2474 */
-    0x001d6764, /* -> FUN_001d6764 */ /* +0x2478 */
+    0x001d6730, /* -> IrMulLowUInt__dtor */ /* +0x2474 */
+    0x001d6764, /* -> IrMulLowUInt__deleting_dtor */ /* +0x2478 */
     0x001d0250, /* +0x247c */
     0x001d0258, /* +0x2480 */
     0x00000000, /* +0x2484 */
@@ -2347,8 +2347,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x24a0 */
     0x001d099c, /* +0x24a4 */
     0x001d0204, /* +0x24a8 */
-    0x001d66c8, /* -> FUN_001d66c8 */ /* +0x24ac */
-    0x001d66fc, /* -> FUN_001d66fc */ /* +0x24b0 */
+    0x001d66c8, /* -> IrMulHiUInt__dtor */ /* +0x24ac */
+    0x001d66fc, /* -> IrMulHiUInt__deleting_dtor */ /* +0x24b0 */
     0x001d0250, /* +0x24b4 */
     0x001d0258, /* +0x24b8 */
     0x00000000, /* +0x24bc */
@@ -2361,8 +2361,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x24d8 */
     0x001d01fc, /* +0x24dc */
     0x001d0af0, /* -> FUN_001d0af0 */ /* +0x24e0 */
-    0x001d6660, /* -> FUN_001d6660 */ /* +0x24e4 */
-    0x001d6694, /* -> FUN_001d6694 */ /* +0x24e8 */
+    0x001d6660, /* -> IrDot4__dtor */ /* +0x24e4 */
+    0x001d6694, /* -> IrDot4__deleting_dtor */ /* +0x24e8 */
     0x001d0250, /* +0x24ec */
     0x001d0258, /* +0x24f0 */
     0x00000000, /* +0x24f4 */
@@ -2375,8 +2375,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2510 */
     0x001d01fc, /* +0x2514 */
     0x001d0d7c, /* +0x2518 */
-    0x001d65f8, /* -> FUN_001d65f8 */ /* +0x251c */
-    0x001d662c, /* -> FUN_001d662c */ /* +0x2520 */
+    0x001d65f8, /* -> IrDot4IEEE__dtor */ /* +0x251c */
+    0x001d662c, /* -> IrDot4IEEE__deleting_dtor */ /* +0x2520 */
     0x001d0250, /* +0x2524 */
     0x001d0258, /* +0x2528 */
     0x00000000, /* +0x252c */
@@ -2389,8 +2389,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2548 */
     0x001d01fc, /* +0x254c */
     0x001d0b94, /* -> FUN_001d0b94 */ /* +0x2550 */
-    0x001d14bc, /* -> FUN_001d14bc */ /* +0x2554 */
-    0x001d1478, /* -> FUN_001d1478 */ /* +0x2558 */
+    0x001d14bc, /* -> IrDot2Add__dtor */ /* +0x2554 */
+    0x001d1478, /* -> IrDot2Add__deleting_dtor */ /* +0x2558 */
     0x001d0250, /* +0x255c */
     0x001d0258, /* +0x2560 */
     0x00000000, /* +0x2564 */
@@ -2407,8 +2407,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2590 */
     0x001d01fc, /* +0x2594 */
     0x001d0b6c, /* +0x2598 */
-    0x001d6590, /* -> FUN_001d6590 */ /* +0x259c */
-    0x001d65c4, /* -> FUN_001d65c4 */ /* +0x25a0 */
+    0x001d6590, /* -> IrDot2AddIEEE__dtor */ /* +0x259c */
+    0x001d65c4, /* -> IrDot2AddIEEE__deleting_dtor */ /* +0x25a0 */
     0x001d0250, /* +0x25a4 */
     0x001d0258, /* +0x25a8 */
     0x00000000, /* +0x25ac */
@@ -2417,8 +2417,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x25b8 */
     0x001d01fc, /* +0x25bc */
     0x001d0204, /* +0x25c0 */
-    0x001d6528, /* -> FUN_001d6528 */ /* +0x25c4 */
-    0x001d655c, /* -> FUN_001d655c */ /* +0x25c8 */
+    0x001d6528, /* -> IrDst__dtor */ /* +0x25c4 */
+    0x001d655c, /* -> IrDst__deleting_dtor */ /* +0x25c8 */
     0x001d0250, /* +0x25cc */
     0x001d0258, /* +0x25d0 */
     0x00000000, /* +0x25d4 */
@@ -2431,8 +2431,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x25f0 */
     0x001d01fc, /* +0x25f4 */
     0x001d0204, /* +0x25f8 */
-    0x001d64c0, /* -> FUN_001d64c0 */ /* +0x25fc */
-    0x001d64f4, /* -> FUN_001d64f4 */ /* +0x2600 */
+    0x001d64c0, /* -> IrKillEFloat__dtor */ /* +0x25fc */
+    0x001d64f4, /* -> IrKillEFloat__deleting_dtor */ /* +0x2600 */
     0x001d0250, /* +0x2604 */
     0x001d0258, /* +0x2608 */
     0x00000000, /* +0x260c */
@@ -2445,8 +2445,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d0de0, /* +0x2628 */
     0x001d01fc, /* +0x262c */
     0x001d0204, /* +0x2630 */
-    0x001d6458, /* -> FUN_001d6458 */ /* +0x2634 */
-    0x001d648c, /* -> FUN_001d648c */ /* +0x2638 */
+    0x001d6458, /* -> IrKillE__dtor */ /* +0x2634 */
+    0x001d648c, /* -> IrKillE__deleting_dtor */ /* +0x2638 */
     0x001d0250, /* +0x263c */
     0x001d0258, /* +0x2640 */
     0x00000000, /* +0x2644 */
@@ -2459,8 +2459,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2660 */
     0x001d01fc, /* +0x2664 */
     0x001d0204, /* +0x2668 */
-    0x001d63f0, /* -> FUN_001d63f0 */ /* +0x266c */
-    0x001d6424, /* -> FUN_001d6424 */ /* +0x2670 */
+    0x001d63f0, /* -> IrKillGTFloat__dtor */ /* +0x266c */
+    0x001d6424, /* -> IrKillGTFloat__deleting_dtor */ /* +0x2670 */
     0x001d0250, /* +0x2674 */
     0x001d0258, /* +0x2678 */
     0x00000000, /* +0x267c */
@@ -2473,8 +2473,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d0de4, /* +0x2698 */
     0x001d01fc, /* +0x269c */
     0x001d0204, /* +0x26a0 */
-    0x001d6388, /* -> FUN_001d6388 */ /* +0x26a4 */
-    0x001d63bc, /* -> FUN_001d63bc */ /* +0x26a8 */
+    0x001d6388, /* -> IrKillGT__dtor */ /* +0x26a4 */
+    0x001d63bc, /* -> IrKillGT__deleting_dtor */ /* +0x26a8 */
     0x001d0250, /* +0x26ac */
     0x001d0258, /* +0x26b0 */
     0x00000000, /* +0x26b4 */
@@ -2487,8 +2487,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x26d0 */
     0x001d01fc, /* +0x26d4 */
     0x001d0204, /* +0x26d8 */
-    0x001d6320, /* -> FUN_001d6320 */ /* +0x26dc */
-    0x001d6354, /* -> FUN_001d6354 */ /* +0x26e0 */
+    0x001d6320, /* -> IrKillGEFloat__dtor */ /* +0x26dc */
+    0x001d6354, /* -> IrKillGEFloat__deleting_dtor */ /* +0x26e0 */
     0x001d0250, /* +0x26e4 */
     0x001d0258, /* +0x26e8 */
     0x00000000, /* +0x26ec */
@@ -2501,8 +2501,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d0de8, /* +0x2708 */
     0x001d01fc, /* +0x270c */
     0x001d0204, /* +0x2710 */
-    0x001d62b8, /* -> FUN_001d62b8 */ /* +0x2714 */
-    0x001d62ec, /* -> FUN_001d62ec */ /* +0x2718 */
+    0x001d62b8, /* -> IrKillGE__dtor */ /* +0x2714 */
+    0x001d62ec, /* -> IrKillGE__deleting_dtor */ /* +0x2718 */
     0x001d0250, /* +0x271c */
     0x001d0258, /* +0x2720 */
     0x00000000, /* +0x2724 */
@@ -2515,8 +2515,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2740 */
     0x001d01fc, /* +0x2744 */
     0x001d0204, /* +0x2748 */
-    0x001d6250, /* -> FUN_001d6250 */ /* +0x274c */
-    0x001d6284, /* -> FUN_001d6284 */ /* +0x2750 */
+    0x001d6250, /* -> IrKillNEFloat__dtor */ /* +0x274c */
+    0x001d6284, /* -> IrKillNEFloat__deleting_dtor */ /* +0x2750 */
     0x001d0250, /* +0x2754 */
     0x001d0258, /* +0x2758 */
     0x00000000, /* +0x275c */
@@ -2529,8 +2529,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d0dec, /* +0x2778 */
     0x001d01fc, /* +0x277c */
     0x001d0204, /* +0x2780 */
-    0x001d61e8, /* -> FUN_001d61e8 */ /* +0x2784 */
-    0x001d621c, /* -> FUN_001d621c */ /* +0x2788 */
+    0x001d61e8, /* -> IrKillNE__dtor */ /* +0x2784 */
+    0x001d621c, /* -> IrKillNE__deleting_dtor */ /* +0x2788 */
     0x001d0250, /* +0x278c */
     0x001d0258, /* +0x2790 */
     0x00000000, /* +0x2794 */
@@ -2543,8 +2543,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x27b0 */
     0x001d0bfc, /* -> FUN_001d0bfc */ /* +0x27b4 */
     0x001d0204, /* +0x27b8 */
-    0x001d6180, /* -> FUN_001d6180 */ /* +0x27bc */
-    0x001d61b4, /* -> FUN_001d61b4 */ /* +0x27c0 */
+    0x001d6180, /* -> IrCndEFloat__dtor */ /* +0x27bc */
+    0x001d61b4, /* -> IrCndEFloat__deleting_dtor */ /* +0x27c0 */
     0x001d0250, /* +0x27c4 */
     0x001d0258, /* +0x27c8 */
     0x00000000, /* +0x27cc */
@@ -2557,8 +2557,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x27e8 */
     0x001d01fc, /* +0x27ec */
     0x001d0204, /* +0x27f0 */
-    0x001d6118, /* -> FUN_001d6118 */ /* +0x27f4 */
-    0x001d614c, /* -> FUN_001d614c */ /* +0x27f8 */
+    0x001d6118, /* -> IrCndE__dtor */ /* +0x27f4 */
+    0x001d614c, /* -> IrCndE__deleting_dtor */ /* +0x27f8 */
     0x001d0250, /* +0x27fc */
     0x001d0258, /* +0x2800 */
     0x00000000, /* +0x2804 */
@@ -2571,8 +2571,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2820 */
     0x001d01fc, /* +0x2824 */
     0x001d0204, /* +0x2828 */
-    0x001d60b0, /* -> FUN_001d60b0 */ /* +0x282c */
-    0x001d60e4, /* -> FUN_001d60e4 */ /* +0x2830 */
+    0x001d60b0, /* -> IrCndEInt__dtor */ /* +0x282c */
+    0x001d60e4, /* -> IrCndEInt__deleting_dtor */ /* +0x2830 */
     0x001d0250, /* +0x2834 */
     0x001d0258, /* +0x2838 */
     0x00000000, /* +0x283c */
@@ -2585,8 +2585,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2858 */
     0x001d01fc, /* +0x285c */
     0x001d0204, /* +0x2860 */
-    0x001d6048, /* -> FUN_001d6048 */ /* +0x2864 */
-    0x001d607c, /* -> FUN_001d607c */ /* +0x2868 */
+    0x001d6048, /* -> IrCndE1__dtor */ /* +0x2864 */
+    0x001d607c, /* -> IrCndE1__deleting_dtor */ /* +0x2868 */
     0x001d0250, /* +0x286c */
     0x001d0258, /* +0x2870 */
     0x00000000, /* +0x2874 */
@@ -2599,8 +2599,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2890 */
     0x001d0c78, /* -> FUN_001d0c78 */ /* +0x2894 */
     0x001d0204, /* +0x2898 */
-    0x001d5fe0, /* -> FUN_001d5fe0 */ /* +0x289c */
-    0x001d6014, /* -> FUN_001d6014 */ /* +0x28a0 */
+    0x001d5fe0, /* -> IrCndGTFloat__dtor */ /* +0x289c */
+    0x001d6014, /* -> IrCndGTFloat__deleting_dtor */ /* +0x28a0 */
     0x001d0250, /* +0x28a4 */
     0x001d0258, /* +0x28a8 */
     0x00000000, /* +0x28ac */
@@ -2613,8 +2613,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x28c8 */
     0x001d01fc, /* +0x28cc */
     0x001d0204, /* +0x28d0 */
-    0x001d5f78, /* -> FUN_001d5f78 */ /* +0x28d4 */
-    0x001d5fac, /* -> FUN_001d5fac */ /* +0x28d8 */
+    0x001d5f78, /* -> IrCndGT__dtor */ /* +0x28d4 */
+    0x001d5fac, /* -> IrCndGT__deleting_dtor */ /* +0x28d8 */
     0x001d0250, /* +0x28dc */
     0x001d0258, /* +0x28e0 */
     0x00000000, /* +0x28e4 */
@@ -2627,8 +2627,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2900 */
     0x001d01fc, /* +0x2904 */
     0x001d0204, /* +0x2908 */
-    0x001d5f10, /* -> FUN_001d5f10 */ /* +0x290c */
-    0x001d5f44, /* -> FUN_001d5f44 */ /* +0x2910 */
+    0x001d5f10, /* -> IrCndGTInt__dtor */ /* +0x290c */
+    0x001d5f44, /* -> IrCndGTInt__deleting_dtor */ /* +0x2910 */
     0x001d0250, /* +0x2914 */
     0x001d0258, /* +0x2918 */
     0x00000000, /* +0x291c */
@@ -2641,8 +2641,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2938 */
     0x001d01fc, /* +0x293c */
     0x001d0204, /* +0x2940 */
-    0x001d5ea8, /* -> FUN_001d5ea8 */ /* +0x2944 */
-    0x001d5edc, /* -> FUN_001d5edc */ /* +0x2948 */
+    0x001d5ea8, /* -> IrCndGT1__dtor */ /* +0x2944 */
+    0x001d5edc, /* -> IrCndGT1__deleting_dtor */ /* +0x2948 */
     0x001d0250, /* +0x294c */
     0x001d0258, /* +0x2950 */
     0x00000000, /* +0x2954 */
@@ -2655,8 +2655,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2970 */
     0x001d0cb4, /* +0x2974 */
     0x001d0204, /* +0x2978 */
-    0x001d5e40, /* -> FUN_001d5e40 */ /* +0x297c */
-    0x001d5e74, /* -> FUN_001d5e74 */ /* +0x2980 */
+    0x001d5e40, /* -> IrSetEFloat__dtor */ /* +0x297c */
+    0x001d5e74, /* -> IrSetEFloat__deleting_dtor */ /* +0x2980 */
     0x001d0250, /* +0x2984 */
     0x001d0258, /* +0x2988 */
     0x00000000, /* +0x298c */
@@ -2669,8 +2669,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x29a8 */
     0x001d01fc, /* +0x29ac */
     0x001d0204, /* +0x29b0 */
-    0x001d5dd8, /* -> FUN_001d5dd8 */ /* +0x29b4 */
-    0x001d5e0c, /* -> FUN_001d5e0c */ /* +0x29b8 */
+    0x001d5dd8, /* -> IrSetE__dtor */ /* +0x29b4 */
+    0x001d5e0c, /* -> IrSetE__deleting_dtor */ /* +0x29b8 */
     0x001d0250, /* +0x29bc */
     0x001d0258, /* +0x29c0 */
     0x00000000, /* +0x29c4 */
@@ -2683,8 +2683,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x29e0 */
     0x001d01fc, /* +0x29e4 */
     0x001d0204, /* +0x29e8 */
-    0x001d5d70, /* -> FUN_001d5d70 */ /* +0x29ec */
-    0x001d5da4, /* -> FUN_001d5da4 */ /* +0x29f0 */
+    0x001d5d70, /* -> IrSetEInt__dtor */ /* +0x29ec */
+    0x001d5da4, /* -> IrSetEInt__deleting_dtor */ /* +0x29f0 */
     0x001d0250, /* +0x29f4 */
     0x001d0258, /* +0x29f8 */
     0x00000000, /* +0x29fc */
@@ -2697,8 +2697,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2a18 */
     0x001d0cd8, /* -> FUN_001d0cd8 */ /* +0x2a1c */
     0x001d0204, /* +0x2a20 */
-    0x001d5d08, /* -> FUN_001d5d08 */ /* +0x2a24 */
-    0x001d5d3c, /* -> FUN_001d5d3c */ /* +0x2a28 */
+    0x001d5d08, /* -> IrSetGTFloat__dtor */ /* +0x2a24 */
+    0x001d5d3c, /* -> IrSetGTFloat__deleting_dtor */ /* +0x2a28 */
     0x001d0250, /* +0x2a2c */
     0x001d0258, /* +0x2a30 */
     0x00000000, /* +0x2a34 */
@@ -2711,8 +2711,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2a50 */
     0x001d01fc, /* +0x2a54 */
     0x001d0204, /* +0x2a58 */
-    0x001d5ca0, /* -> FUN_001d5ca0 */ /* +0x2a5c */
-    0x001d5cd4, /* -> FUN_001d5cd4 */ /* +0x2a60 */
+    0x001d5ca0, /* -> IrSetGT__dtor */ /* +0x2a5c */
+    0x001d5cd4, /* -> IrSetGT__deleting_dtor */ /* +0x2a60 */
     0x001d0250, /* +0x2a64 */
     0x001d0258, /* +0x2a68 */
     0x00000000, /* +0x2a6c */
@@ -2725,8 +2725,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2a88 */
     0x001d01fc, /* +0x2a8c */
     0x001d0204, /* +0x2a90 */
-    0x001d5c38, /* -> FUN_001d5c38 */ /* +0x2a94 */
-    0x001d5c6c, /* -> FUN_001d5c6c */ /* +0x2a98 */
+    0x001d5c38, /* -> IrSetGTDx10__dtor */ /* +0x2a94 */
+    0x001d5c6c, /* -> IrSetGTDx10__deleting_dtor */ /* +0x2a98 */
     0x001d0250, /* +0x2a9c */
     0x001d0258, /* +0x2aa0 */
     0x00000000, /* +0x2aa4 */
@@ -2739,8 +2739,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2ac0 */
     0x001d01fc, /* +0x2ac4 */
     0x001d0204, /* +0x2ac8 */
-    0x001d5bd0, /* -> FUN_001d5bd0 */ /* +0x2acc */
-    0x001d5c04, /* -> FUN_001d5c04 */ /* +0x2ad0 */
+    0x001d5bd0, /* -> IrSetGTInt__dtor */ /* +0x2acc */
+    0x001d5c04, /* -> IrSetGTInt__deleting_dtor */ /* +0x2ad0 */
     0x001d0250, /* +0x2ad4 */
     0x001d0258, /* +0x2ad8 */
     0x00000000, /* +0x2adc */
@@ -2753,8 +2753,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2af8 */
     0x001d01fc, /* +0x2afc */
     0x001d0204, /* +0x2b00 */
-    0x001d5b68, /* -> FUN_001d5b68 */ /* +0x2b04 */
-    0x001d5b9c, /* -> FUN_001d5b9c */ /* +0x2b08 */
+    0x001d5b68, /* -> IrSetGTUint__dtor */ /* +0x2b04 */
+    0x001d5b9c, /* -> IrSetGTUint__deleting_dtor */ /* +0x2b08 */
     0x001d0250, /* +0x2b0c */
     0x001d0258, /* +0x2b10 */
     0x00000000, /* +0x2b14 */
@@ -2767,8 +2767,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2b30 */
     0x001d0d1c, /* +0x2b34 */
     0x001d0204, /* +0x2b38 */
-    0x001d5b00, /* -> FUN_001d5b00 */ /* +0x2b3c */
-    0x001d5b34, /* -> FUN_001d5b34 */ /* +0x2b40 */
+    0x001d5b00, /* -> IrSetGEFloat__dtor */ /* +0x2b3c */
+    0x001d5b34, /* -> IrSetGEFloat__deleting_dtor */ /* +0x2b40 */
     0x001d0250, /* +0x2b44 */
     0x001d0258, /* +0x2b48 */
     0x00000000, /* +0x2b4c */
@@ -2781,8 +2781,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2b68 */
     0x001d01fc, /* +0x2b6c */
     0x001d0204, /* +0x2b70 */
-    0x001d5a98, /* -> FUN_001d5a98 */ /* +0x2b74 */
-    0x001d5acc, /* -> FUN_001d5acc */ /* +0x2b78 */
+    0x001d5a98, /* -> IrSetGE__dtor */ /* +0x2b74 */
+    0x001d5acc, /* -> IrSetGE__deleting_dtor */ /* +0x2b78 */
     0x001d0250, /* +0x2b7c */
     0x001d0258, /* +0x2b80 */
     0x00000000, /* +0x2b84 */
@@ -2795,8 +2795,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2ba0 */
     0x001d01fc, /* +0x2ba4 */
     0x001d0204, /* +0x2ba8 */
-    0x001d5a30, /* -> FUN_001d5a30 */ /* +0x2bac */
-    0x001d5a64, /* -> FUN_001d5a64 */ /* +0x2bb0 */
+    0x001d5a30, /* -> IrSetGEInt__dtor */ /* +0x2bac */
+    0x001d5a64, /* -> IrSetGEInt__deleting_dtor */ /* +0x2bb0 */
     0x001d0250, /* +0x2bb4 */
     0x001d0258, /* +0x2bb8 */
     0x00000000, /* +0x2bbc */
@@ -2809,8 +2809,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2bd8 */
     0x001d01fc, /* +0x2bdc */
     0x001d0204, /* +0x2be0 */
-    0x001d59c8, /* -> FUN_001d59c8 */ /* +0x2be4 */
-    0x001d59fc, /* -> FUN_001d59fc */ /* +0x2be8 */
+    0x001d59c8, /* -> IrSetGE_uint__dtor */ /* +0x2be4 */
+    0x001d59fc, /* -> IrSetGE_uint__deleting_dtor */ /* +0x2be8 */
     0x001d0250, /* +0x2bec */
     0x001d0258, /* +0x2bf0 */
     0x00000000, /* +0x2bf4 */
@@ -2823,8 +2823,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2c10 */
     0x001d0d48, /* +0x2c14 */
     0x001d0204, /* +0x2c18 */
-    0x001d5960, /* -> FUN_001d5960 */ /* +0x2c1c */
-    0x001d5994, /* -> FUN_001d5994 */ /* +0x2c20 */
+    0x001d5960, /* -> IrSetNEFloat__dtor */ /* +0x2c1c */
+    0x001d5994, /* -> IrSetNEFloat__deleting_dtor */ /* +0x2c20 */
     0x001d0250, /* +0x2c24 */
     0x001d0258, /* +0x2c28 */
     0x00000000, /* +0x2c2c */
@@ -2837,8 +2837,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2c48 */
     0x001d01fc, /* +0x2c4c */
     0x001d0204, /* +0x2c50 */
-    0x001d58f8, /* -> FUN_001d58f8 */ /* +0x2c54 */
-    0x001d592c, /* -> FUN_001d592c */ /* +0x2c58 */
+    0x001d58f8, /* -> IrSetNE__dtor */ /* +0x2c54 */
+    0x001d592c, /* -> IrSetNE__deleting_dtor */ /* +0x2c58 */
     0x001d0250, /* +0x2c5c */
     0x001d0258, /* +0x2c60 */
     0x00000000, /* +0x2c64 */
@@ -2851,8 +2851,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2c80 */
     0x001d01fc, /* +0x2c84 */
     0x001d0204, /* +0x2c88 */
-    0x001d5890, /* -> FUN_001d5890 */ /* +0x2c8c */
-    0x001d58c4, /* -> FUN_001d58c4 */ /* +0x2c90 */
+    0x001d5890, /* -> IrSetNEInt__dtor */ /* +0x2c8c */
+    0x001d58c4, /* -> IrSetNEInt__deleting_dtor */ /* +0x2c90 */
     0x001d0250, /* +0x2c94 */
     0x001d0258, /* +0x2c98 */
     0x00000000, /* +0x2c9c */
@@ -2865,8 +2865,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d0db8, /* +0x2cb8 */
     0x001d01fc, /* +0x2cbc */
     0x001d0204, /* +0x2cc0 */
-    0x001d5828, /* -> FUN_001d5828 */ /* +0x2cc4 */
-    0x001d585c, /* -> FUN_001d585c */ /* +0x2cc8 */
+    0x001d5828, /* -> IrMovaRoundFloat__dtor */ /* +0x2cc4 */
+    0x001d585c, /* -> IrMovaRoundFloat__deleting_dtor */ /* +0x2cc8 */
     0x001d0250, /* +0x2ccc */
     0x001d0d6c, /* +0x2cd0 */
     0x00000000, /* +0x2cd4 */
@@ -2879,8 +2879,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d0dbc, /* +0x2cf0 */
     0x001d01fc, /* +0x2cf4 */
     0x001d0204, /* +0x2cf8 */
-    0x001d57c0, /* -> FUN_001d57c0 */ /* +0x2cfc */
-    0x001d57f4, /* -> FUN_001d57f4 */ /* +0x2d00 */
+    0x001d57c0, /* -> IrMovaRound__dtor */ /* +0x2cfc */
+    0x001d57f4, /* -> IrMovaRound__deleting_dtor */ /* +0x2d00 */
     0x001d0250, /* +0x2d04 */
     0x001d0d74, /* +0x2d08 */
     0x00000000, /* +0x2d0c */
@@ -2893,8 +2893,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2d28 */
     0x001d01fc, /* +0x2d2c */
     0x001d0204, /* +0x2d30 */
-    0x001d5758, /* -> FUN_001d5758 */ /* +0x2d34 */
-    0x001d578c, /* -> FUN_001d578c */ /* +0x2d38 */
+    0x001d5758, /* -> IrPredSetEPush__dtor */ /* +0x2d34 */
+    0x001d578c, /* -> IrPredSetEPush__deleting_dtor */ /* +0x2d38 */
     0x001d0250, /* +0x2d3c */
     0x001d0258, /* +0x2d40 */
     0x00000000, /* +0x2d44 */
@@ -2907,8 +2907,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2d60 */
     0x001d01fc, /* +0x2d64 */
     0x001d0204, /* +0x2d68 */
-    0x001d56f0, /* -> FUN_001d56f0 */ /* +0x2d6c */
-    0x001d5724, /* -> FUN_001d5724 */ /* +0x2d70 */
+    0x001d56f0, /* -> IrPredSetEPushInt__dtor */ /* +0x2d6c */
+    0x001d5724, /* -> IrPredSetEPushInt__deleting_dtor */ /* +0x2d70 */
     0x001d0250, /* +0x2d74 */
     0x001d0258, /* +0x2d78 */
     0x00000000, /* +0x2d7c */
@@ -2921,8 +2921,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2d98 */
     0x001d01fc, /* +0x2d9c */
     0x001d0204, /* +0x2da0 */
-    0x001d5688, /* -> FUN_001d5688 */ /* +0x2da4 */
-    0x001d56bc, /* -> FUN_001d56bc */ /* +0x2da8 */
+    0x001d5688, /* -> IrPredSetLTPushInt__dtor */ /* +0x2da4 */
+    0x001d56bc, /* -> IrPredSetLTPushInt__deleting_dtor */ /* +0x2da8 */
     0x001d0250, /* +0x2dac */
     0x001d0258, /* +0x2db0 */
     0x00000000, /* +0x2db4 */
@@ -2935,8 +2935,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2dd0 */
     0x001d01fc, /* +0x2dd4 */
     0x001d0204, /* +0x2dd8 */
-    0x001d5620, /* -> FUN_001d5620 */ /* +0x2ddc */
-    0x001d5654, /* -> FUN_001d5654 */ /* +0x2de0 */
+    0x001d5620, /* -> IrPredSetLEPushInt__dtor */ /* +0x2ddc */
+    0x001d5654, /* -> IrPredSetLEPushInt__deleting_dtor */ /* +0x2de0 */
     0x001d0250, /* +0x2de4 */
     0x001d0258, /* +0x2de8 */
     0x00000000, /* +0x2dec */
@@ -2949,8 +2949,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2e08 */
     0x001d01fc, /* +0x2e0c */
     0x001d0204, /* +0x2e10 */
-    0x001d55b8, /* -> FUN_001d55b8 */ /* +0x2e14 */
-    0x001d55ec, /* -> FUN_001d55ec */ /* +0x2e18 */
+    0x001d55b8, /* -> IrPredSetNEPush__dtor */ /* +0x2e14 */
+    0x001d55ec, /* -> IrPredSetNEPush__deleting_dtor */ /* +0x2e18 */
     0x001d0250, /* +0x2e1c */
     0x001d0258, /* +0x2e20 */
     0x00000000, /* +0x2e24 */
@@ -2963,8 +2963,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2e40 */
     0x001d01fc, /* +0x2e44 */
     0x001d0204, /* +0x2e48 */
-    0x001d5550, /* -> FUN_001d5550 */ /* +0x2e4c */
-    0x001d5584, /* -> FUN_001d5584 */ /* +0x2e50 */
+    0x001d5550, /* -> IrPredSetNEPushInt__dtor */ /* +0x2e4c */
+    0x001d5584, /* -> IrPredSetNEPushInt__deleting_dtor */ /* +0x2e50 */
     0x001d0250, /* +0x2e54 */
     0x001d0258, /* +0x2e58 */
     0x00000000, /* +0x2e5c */
@@ -2977,8 +2977,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2e78 */
     0x001d01fc, /* +0x2e7c */
     0x001d0204, /* +0x2e80 */
-    0x001d54e8, /* -> FUN_001d54e8 */ /* +0x2e84 */
-    0x001d551c, /* -> FUN_001d551c */ /* +0x2e88 */
+    0x001d54e8, /* -> IrPredSetGTPush__dtor */ /* +0x2e84 */
+    0x001d551c, /* -> IrPredSetGTPush__deleting_dtor */ /* +0x2e88 */
     0x001d0250, /* +0x2e8c */
     0x001d0258, /* +0x2e90 */
     0x00000000, /* +0x2e94 */
@@ -2991,8 +2991,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2eb0 */
     0x001d01fc, /* +0x2eb4 */
     0x001d0204, /* +0x2eb8 */
-    0x001d5480, /* -> FUN_001d5480 */ /* +0x2ebc */
-    0x001d54b4, /* -> FUN_001d54b4 */ /* +0x2ec0 */
+    0x001d5480, /* -> IrPredSetGTPushInt__dtor */ /* +0x2ebc */
+    0x001d54b4, /* -> IrPredSetGTPushInt__deleting_dtor */ /* +0x2ec0 */
     0x001d0250, /* +0x2ec4 */
     0x001d0258, /* +0x2ec8 */
     0x00000000, /* +0x2ecc */
@@ -3005,8 +3005,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2ee8 */
     0x001d01fc, /* +0x2eec */
     0x001d0204, /* +0x2ef0 */
-    0x001d5418, /* -> FUN_001d5418 */ /* +0x2ef4 */
-    0x001d544c, /* -> FUN_001d544c */ /* +0x2ef8 */
+    0x001d5418, /* -> IrPredSetGEPush__dtor */ /* +0x2ef4 */
+    0x001d544c, /* -> IrPredSetGEPush__deleting_dtor */ /* +0x2ef8 */
     0x001d0250, /* +0x2efc */
     0x001d0258, /* +0x2f00 */
     0x00000000, /* +0x2f04 */
@@ -3019,8 +3019,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2f20 */
     0x001d01fc, /* +0x2f24 */
     0x001d0204, /* +0x2f28 */
-    0x001d53b0, /* -> FUN_001d53b0 */ /* +0x2f2c */
-    0x001d53e4, /* -> FUN_001d53e4 */ /* +0x2f30 */
+    0x001d53b0, /* -> IrPredSetGEPushInt__dtor */ /* +0x2f2c */
+    0x001d53e4, /* -> IrPredSetGEPushInt__deleting_dtor */ /* +0x2f30 */
     0x001d0250, /* +0x2f34 */
     0x001d0258, /* +0x2f38 */
     0x00000000, /* +0x2f3c */
@@ -3033,8 +3033,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2f58 */
     0x001d01fc, /* +0x2f5c */
     0x001d0204, /* +0x2f60 */
-    0x001d5348, /* -> FUN_001d5348 */ /* +0x2f64 */
-    0x001d537c, /* -> FUN_001d537c */ /* +0x2f68 */
+    0x001d5348, /* -> IrExportFloat__dtor */ /* +0x2f64 */
+    0x001d537c, /* -> IrExportFloat__deleting_dtor */ /* +0x2f68 */
     0x001d0250, /* +0x2f6c */
     0x001d0258, /* +0x2f70 */
     0x00000000, /* +0x2f74 */
@@ -3047,8 +3047,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2f90 */
     0x001d01fc, /* +0x2f94 */
     0x001d0204, /* +0x2f98 */
-    0x001d52e0, /* -> FUN_001d52e0 */ /* +0x2f9c */
-    0x001d5314, /* -> FUN_001d5314 */ /* +0x2fa0 */
+    0x001d52e0, /* -> IrExport__dtor */ /* +0x2f9c */
+    0x001d5314, /* -> IrExport__deleting_dtor */ /* +0x2fa0 */
     0x001d0250, /* +0x2fa4 */
     0x001d0258, /* +0x2fa8 */
     0x00000000, /* +0x2fac */
@@ -3061,8 +3061,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x2fc8 */
     0x001d01fc, /* +0x2fcc */
     0x001d0204, /* +0x2fd0 */
-    0x001d5278, /* -> FUN_001d5278 */ /* +0x2fd4 */
-    0x001d52ac, /* -> FUN_001d52ac */ /* +0x2fd8 */
+    0x001d5278, /* -> IrExportRing__dtor */ /* +0x2fd4 */
+    0x001d52ac, /* -> IrExportRing__deleting_dtor */ /* +0x2fd8 */
     0x001d0250, /* +0x2fdc */
     0x001d0258, /* +0x2fe0 */
     0x00000000, /* +0x2fe4 */
@@ -3075,8 +3075,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3000 */
     0x001d05a0, /* +0x3004 */
     0x001d0204, /* +0x3008 */
-    0x001d5210, /* -> FUN_001d5210 */ /* +0x300c */
-    0x001d5244, /* -> FUN_001d5244 */ /* +0x3010 */
+    0x001d5210, /* -> IrMovFloat__dtor */ /* +0x300c */
+    0x001d5244, /* -> IrMovFloat__deleting_dtor */ /* +0x3010 */
     0x001d0250, /* +0x3014 */
     0x001d0258, /* +0x3018 */
     0x00000000, /* +0x301c */
@@ -3089,8 +3089,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3038 */
     0x001d01fc, /* +0x303c */
     0x001d0204, /* +0x3040 */
-    0x001d51a8, /* -> FUN_001d51a8 */ /* +0x3044 */
-    0x001d51dc, /* -> FUN_001d51dc */ /* +0x3048 */
+    0x001d51a8, /* -> IrMov__dtor */ /* +0x3044 */
+    0x001d51dc, /* -> IrMov__deleting_dtor */ /* +0x3048 */
     0x001d0250, /* +0x304c */
     0x001d0258, /* +0x3050 */
     0x00000000, /* +0x3054 */
@@ -3103,8 +3103,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3070 */
     0x001d01fc, /* +0x3074 */
     0x001d0204, /* +0x3078 */
-    0x001d5140, /* -> FUN_001d5140 */ /* +0x307c */
-    0x001d5174, /* -> FUN_001d5174 */ /* +0x3080 */
+    0x001d5140, /* -> IrLit__dtor */ /* +0x307c */
+    0x001d5174, /* -> IrLit__deleting_dtor */ /* +0x3080 */
     0x001d0250, /* +0x3084 */
     0x001d0258, /* +0x3088 */
     0x00000000, /* +0x308c */
@@ -3117,8 +3117,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x30a8 */
     0x001d01fc, /* +0x30ac */
     0x001d0204, /* +0x30b0 */
-    0x001d50d8, /* -> FUN_001d50d8 */ /* +0x30b4 */
-    0x001d510c, /* -> FUN_001d510c */ /* +0x30b8 */
+    0x001d50d8, /* -> IrNop__dtor */ /* +0x30b4 */
+    0x001d510c, /* -> IrNop__deleting_dtor */ /* +0x30b8 */
     0x001d0250, /* +0x30bc */
     0x001d0258, /* +0x30c0 */
     0x00000000, /* +0x30c4 */
@@ -3131,8 +3131,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x30e0 */
     0x001d01fc, /* +0x30e4 */
     0x001d0204, /* +0x30e8 */
-    0x001d5070, /* -> FUN_001d5070 */ /* +0x30ec */
-    0x001d50a4, /* -> FUN_001d50a4 */ /* +0x30f0 */
+    0x001d5070, /* -> IrNop1__dtor */ /* +0x30ec */
+    0x001d50a4, /* -> IrNop1__deleting_dtor */ /* +0x30f0 */
     0x001d0250, /* +0x30f4 */
     0x001d0258, /* +0x30f8 */
     0x00000000, /* +0x30fc */
@@ -3145,8 +3145,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3118 */
     0x001d01fc, /* +0x311c */
     0x001d0204, /* +0x3120 */
-    0x001d5008, /* -> FUN_001d5008 */ /* +0x3124 */
-    0x001d503c, /* -> FUN_001d503c */ /* +0x3128 */
+    0x001d5008, /* -> IrSub__dtor */ /* +0x3124 */
+    0x001d503c, /* -> IrSub__deleting_dtor */ /* +0x3128 */
     0x001d0250, /* +0x312c */
     0x001d0258, /* +0x3130 */
     0x00000000, /* +0x3134 */
@@ -3159,8 +3159,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3150 */
     0x001d0884, /* -> FUN_001d0884 */ /* +0x3154 */
     0x001d0204, /* +0x3158 */
-    0x001d4fa0, /* -> FUN_001d4fa0 */ /* +0x315c */
-    0x001d4fd4, /* -> FUN_001d4fd4 */ /* +0x3160 */
+    0x001d4fa0, /* -> IrExp__dtor */ /* +0x315c */
+    0x001d4fd4, /* -> IrExp__deleting_dtor */ /* +0x3160 */
     0x001d0250, /* +0x3164 */
     0x001d0258, /* +0x3168 */
     0x00000000, /* +0x316c */
@@ -3173,8 +3173,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3188 */
     0x001d0640, /* -> FUN_001d0640 */ /* +0x318c */
     0x001d0204, /* +0x3190 */
-    0x001d13ac, /* -> FUN_001d13ac */ /* +0x3194 */
-    0x001d1368, /* -> FUN_001d1368 */ /* +0x3198 */
+    0x001d13ac, /* -> IrLogClamp__dtor */ /* +0x3194 */
+    0x001d1368, /* -> IrLogClamp__deleting_dtor */ /* +0x3198 */
     0x001d0250, /* +0x319c */
     0x001d0258, /* +0x31a0 */
     0x00000000, /* +0x31a4 */
@@ -3191,8 +3191,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x31d0 */
     0x001d0640, /* -> FUN_001d0640 */ /* +0x31d4 */
     0x001d0204, /* +0x31d8 */
-    0x001d4f38, /* -> FUN_001d4f38 */ /* +0x31dc */
-    0x001d4f6c, /* -> FUN_001d4f6c */ /* +0x31e0 */
+    0x001d4f38, /* -> IrLogInternal__dtor */ /* +0x31dc */
+    0x001d4f6c, /* -> IrLogInternal__deleting_dtor */ /* +0x31e0 */
     0x001d0250, /* +0x31e4 */
     0x001d0258, /* +0x31e8 */
     0x00000000, /* +0x31ec */
@@ -3201,8 +3201,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x31f8 */
     0x001d0640, /* -> FUN_001d0640 */ /* +0x31fc */
     0x001d0204, /* +0x3200 */
-    0x001d1434, /* -> FUN_001d1434 */ /* +0x3204 */
-    0x001d13f0, /* -> FUN_001d13f0 */ /* +0x3208 */
+    0x001d1434, /* -> IrLogIEEE__dtor */ /* +0x3204 */
+    0x001d13f0, /* -> IrLogIEEE__deleting_dtor */ /* +0x3208 */
     0x001d0250, /* +0x320c */
     0x001d0258, /* +0x3210 */
     0x00000000, /* +0x3214 */
@@ -3215,8 +3215,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3230 */
     0x001d06ec, /* -> FUN_001d06ec */ /* +0x3234 */
     0x001d0204, /* +0x3238 */
-    0x001d0f6c, /* -> FUN_001d0f6c */ /* +0x323c */
-    0x001d0f28, /* -> FUN_001d0f28 */ /* +0x3240 */
+    0x001d0f6c, /* -> IrRecipSqrtClamp__dtor */ /* +0x323c */
+    0x001d0f28, /* -> IrRecipSqrtClamp__deleting_dtor */ /* +0x3240 */
     0x001d0250, /* +0x3244 */
     0x001d0258, /* +0x3248 */
     0x00000000, /* +0x324c */
@@ -3233,8 +3233,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3278 */
     0x001d06ec, /* -> FUN_001d06ec */ /* +0x327c */
     0x001d0204, /* +0x3280 */
-    0x001d4ed0, /* -> FUN_001d4ed0 */ /* +0x3284 */
-    0x001d4f04, /* -> FUN_001d4f04 */ /* +0x3288 */
+    0x001d4ed0, /* -> IrRecipSqrtInternal__dtor */ /* +0x3284 */
+    0x001d4f04, /* -> IrRecipSqrtInternal__deleting_dtor */ /* +0x3288 */
     0x001d0250, /* +0x328c */
     0x001d0258, /* +0x3290 */
     0x00000000, /* +0x3294 */
@@ -3243,8 +3243,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x32a0 */
     0x001d06ec, /* -> FUN_001d06ec */ /* +0x32a4 */
     0x001d0204, /* +0x32a8 */
-    0x001d0ff4, /* -> FUN_001d0ff4 */ /* +0x32ac */
-    0x001d0fb0, /* -> FUN_001d0fb0 */ /* +0x32b0 */
+    0x001d0ff4, /* -> IrRecipSqrtFF__dtor */ /* +0x32ac */
+    0x001d0fb0, /* -> IrRecipSqrtFF__deleting_dtor */ /* +0x32b0 */
     0x001d0250, /* +0x32b4 */
     0x001d0258, /* +0x32b8 */
     0x00000000, /* +0x32bc */
@@ -3257,8 +3257,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x32d8 */
     0x001d06ec, /* -> FUN_001d06ec */ /* +0x32dc */
     0x001d0204, /* +0x32e0 */
-    0x001d107c, /* -> FUN_001d107c */ /* +0x32e4 */
-    0x001d1038, /* -> FUN_001d1038 */ /* +0x32e8 */
+    0x001d107c, /* -> IrRecipSqrtIEEE__dtor */ /* +0x32e4 */
+    0x001d1038, /* -> IrRecipSqrtIEEE__deleting_dtor */ /* +0x32e8 */
     0x001d0250, /* +0x32ec */
     0x001d0258, /* +0x32f0 */
     0x00000000, /* +0x32f4 */
@@ -3271,8 +3271,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3310 */
     0x001d0820, /* -> FUN_001d0820 */ /* +0x3314 */
     0x001d0204, /* +0x3318 */
-    0x001d4e68, /* -> FUN_001d4e68 */ /* +0x331c */
-    0x001d4e9c, /* -> FUN_001d4e9c */ /* +0x3320 */
+    0x001d4e68, /* -> IrSqrt__dtor */ /* +0x331c */
+    0x001d4e9c, /* -> IrSqrt__deleting_dtor */ /* +0x3320 */
     0x001d0250, /* +0x3324 */
     0x001d0258, /* +0x3328 */
     0x00000000, /* +0x332c */
@@ -3285,8 +3285,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3348 */
     0x001d01fc, /* +0x334c */
     0x001d0204, /* +0x3350 */
-    0x001d4e00, /* -> FUN_001d4e00 */ /* +0x3354 */
-    0x001d4e34, /* -> FUN_001d4e34 */ /* +0x3358 */
+    0x001d4e00, /* -> IrFetchVertex__dtor */ /* +0x3354 */
+    0x001d4e34, /* -> IrFetchVertex__deleting_dtor */ /* +0x3358 */
     0x001d0250, /* +0x335c */
     0x001d0258, /* +0x3360 */
     0x00000000, /* +0x3364 */
@@ -3299,8 +3299,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3380 */
     0x001d01fc, /* +0x3384 */
     0x001d0204, /* +0x3388 */
-    0x001d4d98, /* -> FUN_001d4d98 */ /* +0x338c */
-    0x001d4dcc, /* -> FUN_001d4dcc */ /* +0x3390 */
+    0x001d4d98, /* -> IrFetchTextureMap__dtor */ /* +0x338c */
+    0x001d4dcc, /* -> IrFetchTextureMap__deleting_dtor */ /* +0x3390 */
     0x001d0250, /* +0x3394 */
     0x001d0258, /* +0x3398 */
     0x00000000, /* +0x339c */
@@ -3313,8 +3313,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x33b8 */
     0x001d01fc, /* +0x33bc */
     0x001d0204, /* +0x33c0 */
-    0x001d4d30, /* -> FUN_001d4d30 */ /* +0x33c4 */
-    0x001d4d64, /* -> FUN_001d4d64 */ /* +0x33c8 */
+    0x001d4d30, /* -> IrFetch3DNoiseMap__dtor */ /* +0x33c4 */
+    0x001d4d64, /* -> IrFetch3DNoiseMap__deleting_dtor */ /* +0x33c8 */
     0x001d0250, /* +0x33cc */
     0x001d0258, /* +0x33d0 */
     0x00000000, /* +0x33d4 */
@@ -3327,8 +3327,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x33f0 */
     0x001d01fc, /* +0x33f4 */
     0x001d0204, /* +0x33f8 */
-    0x001d4cc8, /* -> FUN_001d4cc8 */ /* +0x33fc */
-    0x001d4cfc, /* -> FUN_001d4cfc */ /* +0x3400 */
+    0x001d4cc8, /* -> IrFetchShadowMap__dtor */ /* +0x33fc */
+    0x001d4cfc, /* -> IrFetchShadowMap__deleting_dtor */ /* +0x3400 */
     0x001d0250, /* +0x3404 */
     0x001d0258, /* +0x3408 */
     0x00000000, /* +0x340c */
@@ -3341,8 +3341,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3428 */
     0x001d01fc, /* +0x342c */
     0x001d0204, /* +0x3430 */
-    0x001d4c60, /* -> FUN_001d4c60 */ /* +0x3434 */
-    0x001d4c94, /* -> FUN_001d4c94 */ /* +0x3438 */
+    0x001d4c60, /* -> IrFetchMultiSample__dtor */ /* +0x3434 */
+    0x001d4c94, /* -> IrFetchMultiSample__deleting_dtor */ /* +0x3438 */
     0x001d0250, /* +0x343c */
     0x001d0258, /* +0x3440 */
     0x00000000, /* +0x3444 */
@@ -3355,8 +3355,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3460 */
     0x001d01fc, /* +0x3464 */
     0x001d0204, /* +0x3468 */
-    0x001d4bf8, /* -> FUN_001d4bf8 */ /* +0x346c */
-    0x001d4c2c, /* -> FUN_001d4c2c */ /* +0x3470 */
+    0x001d4bf8, /* -> IrGetBorderColorFraction__dtor */ /* +0x346c */
+    0x001d4c2c, /* -> IrGetBorderColorFraction__deleting_dtor */ /* +0x3470 */
     0x001d0250, /* +0x3474 */
     0x001d0258, /* +0x3478 */
     0x00000000, /* +0x347c */
@@ -3369,8 +3369,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3498 */
     0x001d01fc, /* +0x349c */
     0x001d0204, /* +0x34a0 */
-    0x001d4b90, /* -> FUN_001d4b90 */ /* +0x34a4 */
-    0x001d4bc4, /* -> FUN_001d4bc4 */ /* +0x34a8 */
+    0x001d4b90, /* -> IrGetCompTexLod__dtor */ /* +0x34a4 */
+    0x001d4bc4, /* -> IrGetCompTexLod__deleting_dtor */ /* +0x34a8 */
     0x001d0250, /* +0x34ac */
     0x001d0258, /* +0x34b0 */
     0x00000000, /* +0x34b4 */
@@ -3383,8 +3383,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x34d0 */
     0x001d01fc, /* +0x34d4 */
     0x001d0204, /* +0x34d8 */
-    0x001d4b28, /* -> FUN_001d4b28 */ /* +0x34dc */
-    0x001d4b5c, /* -> FUN_001d4b5c */ /* +0x34e0 */
+    0x001d4b28, /* -> IrGetGradients__dtor */ /* +0x34dc */
+    0x001d4b5c, /* -> IrGetGradients__deleting_dtor */ /* +0x34e0 */
     0x001d0250, /* +0x34e4 */
     0x001d0258, /* +0x34e8 */
     0x00000000, /* +0x34ec */
@@ -3397,8 +3397,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3508 */
     0x001d01fc, /* +0x350c */
     0x001d0204, /* +0x3510 */
-    0x001d4ac0, /* -> FUN_001d4ac0 */ /* +0x3514 */
-    0x001d4af4, /* -> FUN_001d4af4 */ /* +0x3518 */
+    0x001d4ac0, /* -> IrGetWeights__dtor */ /* +0x3514 */
+    0x001d4af4, /* -> IrGetWeights__deleting_dtor */ /* +0x3518 */
     0x001d0250, /* +0x351c */
     0x001d0258, /* +0x3520 */
     0x00000000, /* +0x3524 */
@@ -3411,8 +3411,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3540 */
     0x001d01fc, /* +0x3544 */
     0x001d0204, /* +0x3548 */
-    0x001d4a58, /* -> FUN_001d4a58 */ /* +0x354c */
-    0x001d4a8c, /* -> FUN_001d4a8c */ /* +0x3550 */
+    0x001d4a58, /* -> IrSetTexLod__dtor */ /* +0x354c */
+    0x001d4a8c, /* -> IrSetTexLod__deleting_dtor */ /* +0x3550 */
     0x001d0250, /* +0x3554 */
     0x001d0258, /* +0x3558 */
     0x00000000, /* +0x355c */
@@ -3425,8 +3425,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3578 */
     0x001d01fc, /* +0x357c */
     0x001d0204, /* +0x3580 */
-    0x001d49f0, /* -> FUN_001d49f0 */ /* +0x3584 */
-    0x001d4a24, /* -> FUN_001d4a24 */ /* +0x3588 */
+    0x001d49f0, /* -> IrSetGradientsH__dtor */ /* +0x3584 */
+    0x001d4a24, /* -> IrSetGradientsH__deleting_dtor */ /* +0x3588 */
     0x001d0250, /* +0x358c */
     0x001d0258, /* +0x3590 */
     0x00000000, /* +0x3594 */
@@ -3439,8 +3439,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x35b0 */
     0x001d01fc, /* +0x35b4 */
     0x001d0204, /* +0x35b8 */
-    0x001d4988, /* -> FUN_001d4988 */ /* +0x35bc */
-    0x001d49bc, /* -> FUN_001d49bc */ /* +0x35c0 */
+    0x001d4988, /* -> IrSetGradientsV__dtor */ /* +0x35bc */
+    0x001d49bc, /* -> IrSetGradientsV__deleting_dtor */ /* +0x35c0 */
     0x001d0250, /* +0x35c4 */
     0x001d0258, /* +0x35c8 */
     0x00000000, /* +0x35cc */
@@ -3453,8 +3453,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x35e8 */
     0x001d01fc, /* +0x35ec */
     0x001d0204, /* +0x35f0 */
-    0x001d4920, /* -> FUN_001d4920 */ /* +0x35f4 */
-    0x001d4954, /* -> FUN_001d4954 */ /* +0x35f8 */
+    0x001d4920, /* -> IrSetFilter4Weights__dtor */ /* +0x35f4 */
+    0x001d4954, /* -> IrSetFilter4Weights__deleting_dtor */ /* +0x35f8 */
     0x001d0250, /* +0x35fc */
     0x001d0258, /* +0x3600 */
     0x00000000, /* +0x3604 */
@@ -3467,8 +3467,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3620 */
     0x001d01fc, /* +0x3624 */
     0x001d0204, /* +0x3628 */
-    0x001d48b8, /* -> FUN_001d48b8 */ /* +0x362c */
-    0x001d48ec, /* -> FUN_001d48ec */ /* +0x3630 */
+    0x001d48b8, /* -> IrFetchTextureMapProj__dtor */ /* +0x362c */
+    0x001d48ec, /* -> IrFetchTextureMapProj__deleting_dtor */ /* +0x3630 */
     0x001d0250, /* +0x3634 */
     0x001d0258, /* +0x3638 */
     0x00000000, /* +0x363c */
@@ -3481,8 +3481,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3658 */
     0x001d01fc, /* +0x365c */
     0x001d0204, /* +0x3660 */
-    0x001d4850, /* -> FUN_001d4850 */ /* +0x3664 */
-    0x001d4884, /* -> FUN_001d4884 */ /* +0x3668 */
+    0x001d4850, /* -> IrFetchTextureMapBias__dtor */ /* +0x3664 */
+    0x001d4884, /* -> IrFetchTextureMapBias__deleting_dtor */ /* +0x3668 */
     0x001d0250, /* +0x366c */
     0x001d0258, /* +0x3670 */
     0x00000000, /* +0x3674 */
@@ -3495,8 +3495,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3690 */
     0x001d01fc, /* +0x3694 */
     0x001d0204, /* +0x3698 */
-    0x001d47e8, /* -> FUN_001d47e8 */ /* +0x369c */
-    0x001d481c, /* -> FUN_001d481c */ /* +0x36a0 */
+    0x001d47e8, /* -> IrFetchTextureMapKill__dtor */ /* +0x369c */
+    0x001d481c, /* -> IrFetchTextureMapKill__deleting_dtor */ /* +0x36a0 */
     0x001d0250, /* +0x36a4 */
     0x001d0258, /* +0x36a8 */
     0x00000000, /* +0x36ac */
@@ -3509,8 +3509,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x36c8 */
     0x001d01fc, /* +0x36cc */
     0x001d0204, /* +0x36d0 */
-    0x001d4780, /* -> FUN_001d4780 */ /* +0x36d4 */
-    0x001d47b4, /* -> FUN_001d47b4 */ /* +0x36d8 */
+    0x001d4780, /* -> IrFetchTextureMapGradients__dtor */ /* +0x36d4 */
+    0x001d47b4, /* -> IrFetchTextureMapGradients__deleting_dtor */ /* +0x36d8 */
     0x001d0250, /* +0x36dc */
     0x001d0258, /* +0x36e0 */
     0x00000000, /* +0x36e4 */
@@ -3523,8 +3523,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3700 */
     0x001d01fc, /* +0x3704 */
     0x001d0204, /* +0x3708 */
-    0x001d4718, /* -> FUN_001d4718 */ /* +0x370c */
-    0x001d474c, /* -> FUN_001d474c */ /* +0x3710 */
+    0x001d4718, /* -> IrAddConst0__dtor */ /* +0x370c */
+    0x001d474c, /* -> IrAddConst0__deleting_dtor */ /* +0x3710 */
     0x001d0250, /* +0x3714 */
     0x001d0258, /* +0x3718 */
     0x00000000, /* +0x371c */
@@ -3537,8 +3537,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3738 */
     0x001d01fc, /* +0x373c */
     0x001d0204, /* +0x3740 */
-    0x001d46b0, /* -> FUN_001d46b0 */ /* +0x3744 */
-    0x001d46e4, /* -> FUN_001d46e4 */ /* +0x3748 */
+    0x001d46b0, /* -> IrMulConst0__dtor */ /* +0x3744 */
+    0x001d46e4, /* -> IrMulConst0__deleting_dtor */ /* +0x3748 */
     0x001d0250, /* +0x374c */
     0x001d0258, /* +0x3750 */
     0x00000000, /* +0x3754 */
@@ -3551,8 +3551,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3770 */
     0x001d01fc, /* +0x3774 */
     0x001d0204, /* +0x3778 */
-    0x001d4648, /* -> FUN_001d4648 */ /* +0x377c */
-    0x001d467c, /* -> FUN_001d467c */ /* +0x3780 */
+    0x001d4648, /* -> IrSubConst0__dtor */ /* +0x377c */
+    0x001d467c, /* -> IrSubConst0__deleting_dtor */ /* +0x3780 */
     0x001d0250, /* +0x3784 */
     0x001d0258, /* +0x3788 */
     0x00000000, /* +0x378c */
@@ -3565,8 +3565,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x37a8 */
     0x001d01fc, /* +0x37ac */
     0x001d0204, /* +0x37b0 */
-    0x001d45e0, /* -> FUN_001d45e0 */ /* +0x37b4 */
-    0x001d4614, /* -> FUN_001d4614 */ /* +0x37b8 */
+    0x001d45e0, /* -> IrAddConst1__dtor */ /* +0x37b4 */
+    0x001d4614, /* -> IrAddConst1__deleting_dtor */ /* +0x37b8 */
     0x001d0250, /* +0x37bc */
     0x001d0258, /* +0x37c0 */
     0x00000000, /* +0x37c4 */
@@ -3579,8 +3579,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x37e0 */
     0x001d01fc, /* +0x37e4 */
     0x001d0204, /* +0x37e8 */
-    0x001d4578, /* -> FUN_001d4578 */ /* +0x37ec */
-    0x001d45ac, /* -> FUN_001d45ac */ /* +0x37f0 */
+    0x001d4578, /* -> IrMulConst1__dtor */ /* +0x37ec */
+    0x001d45ac, /* -> IrMulConst1__deleting_dtor */ /* +0x37f0 */
     0x001d0250, /* +0x37f4 */
     0x001d0258, /* +0x37f8 */
     0x00000000, /* +0x37fc */
@@ -3593,8 +3593,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3818 */
     0x001d01fc, /* +0x381c */
     0x001d0204, /* +0x3820 */
-    0x001d4510, /* -> FUN_001d4510 */ /* +0x3824 */
-    0x001d4544, /* -> FUN_001d4544 */ /* +0x3828 */
+    0x001d4510, /* -> IrSubConst1__dtor */ /* +0x3824 */
+    0x001d4544, /* -> IrSubConst1__deleting_dtor */ /* +0x3828 */
     0x001d0250, /* +0x382c */
     0x001d0258, /* +0x3830 */
     0x00000000, /* +0x3834 */
@@ -3607,8 +3607,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3850 */
     0x001d0794, /* -> FUN_001d0794 */ /* +0x3854 */
     0x001d0204, /* +0x3858 */
-    0x001d44a8, /* -> FUN_001d44a8 */ /* +0x385c */
-    0x001d44dc, /* -> FUN_001d44dc */ /* +0x3860 */
+    0x001d44a8, /* -> IrSin__dtor */ /* +0x385c */
+    0x001d44dc, /* -> IrSin__deleting_dtor */ /* +0x3860 */
     0x001d0250, /* +0x3864 */
     0x001d0258, /* +0x3868 */
     0x00000000, /* +0x386c */
@@ -3621,8 +3621,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3888 */
     0x001d05b0, /* -> FUN_001d05b0 */ /* +0x388c */
     0x001d0204, /* +0x3890 */
-    0x001d4440, /* -> FUN_001d4440 */ /* +0x3894 */
-    0x001d4474, /* -> FUN_001d4474 */ /* +0x3898 */
+    0x001d4440, /* -> IrCos__dtor */ /* +0x3894 */
+    0x001d4474, /* -> IrCos__deleting_dtor */ /* +0x3898 */
     0x001d0250, /* +0x389c */
     0x001d0258, /* +0x38a0 */
     0x00000000, /* +0x38a4 */
@@ -3635,8 +3635,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d0df0, /* +0x38c0 */
     0x001d01fc, /* +0x38c4 */
     0x001d0204, /* +0x38c8 */
-    0x001d43d8, /* -> FUN_001d43d8 */ /* +0x38cc */
-    0x001d440c, /* -> FUN_001d440c */ /* +0x38d0 */
+    0x001d43d8, /* -> IrKillOne__dtor */ /* +0x38cc */
+    0x001d440c, /* -> IrKillOne__deleting_dtor */ /* +0x38d0 */
     0x001d0250, /* +0x38d4 */
     0x001d0258, /* +0x38d8 */
     0x00000000, /* +0x38dc */
@@ -3649,8 +3649,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x38f8 */
     0x001d01fc, /* +0x38fc */
     0x001d0204, /* +0x3900 */
-    0x001d4370, /* -> FUN_001d4370 */ /* +0x3904 */
-    0x001d43a4, /* -> FUN_001d43a4 */ /* +0x3908 */
+    0x001d4370, /* -> IrPredSetE__dtor */ /* +0x3904 */
+    0x001d43a4, /* -> IrPredSetE__deleting_dtor */ /* +0x3908 */
     0x001d0250, /* +0x390c */
     0x001d0258, /* +0x3910 */
     0x00000000, /* +0x3914 */
@@ -3663,8 +3663,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3930 */
     0x001d01fc, /* +0x3934 */
     0x001d0204, /* +0x3938 */
-    0x001d4308, /* -> FUN_001d4308 */ /* +0x393c */
-    0x001d433c, /* -> FUN_001d433c */ /* +0x3940 */
+    0x001d4308, /* -> IrPredSetEInt__dtor */ /* +0x393c */
+    0x001d433c, /* -> IrPredSetEInt__deleting_dtor */ /* +0x3940 */
     0x001d0250, /* +0x3944 */
     0x001d0258, /* +0x3948 */
     0x00000000, /* +0x394c */
@@ -3677,8 +3677,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3968 */
     0x001d01fc, /* +0x396c */
     0x001d0204, /* +0x3970 */
-    0x001d42a0, /* -> FUN_001d42a0 */ /* +0x3974 */
-    0x001d42d4, /* -> FUN_001d42d4 */ /* +0x3978 */
+    0x001d42a0, /* -> IrPredSetNE__dtor */ /* +0x3974 */
+    0x001d42d4, /* -> IrPredSetNE__deleting_dtor */ /* +0x3978 */
     0x001d0250, /* +0x397c */
     0x001d0258, /* +0x3980 */
     0x00000000, /* +0x3984 */
@@ -3691,8 +3691,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x39a0 */
     0x001d01fc, /* +0x39a4 */
     0x001d0204, /* +0x39a8 */
-    0x001d4238, /* -> FUN_001d4238 */ /* +0x39ac */
-    0x001d426c, /* -> FUN_001d426c */ /* +0x39b0 */
+    0x001d4238, /* -> IrPredSetNEInt__dtor */ /* +0x39ac */
+    0x001d426c, /* -> IrPredSetNEInt__deleting_dtor */ /* +0x39b0 */
     0x001d0250, /* +0x39b4 */
     0x001d0258, /* +0x39b8 */
     0x00000000, /* +0x39bc */
@@ -3705,8 +3705,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x39d8 */
     0x001d01fc, /* +0x39dc */
     0x001d0204, /* +0x39e0 */
-    0x001d41d0, /* -> FUN_001d41d0 */ /* +0x39e4 */
-    0x001d4204, /* -> FUN_001d4204 */ /* +0x39e8 */
+    0x001d41d0, /* -> IrPredSetGT__dtor */ /* +0x39e4 */
+    0x001d4204, /* -> IrPredSetGT__deleting_dtor */ /* +0x39e8 */
     0x001d0250, /* +0x39ec */
     0x001d0258, /* +0x39f0 */
     0x00000000, /* +0x39f4 */
@@ -3719,8 +3719,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3a10 */
     0x001d01fc, /* +0x3a14 */
     0x001d0204, /* +0x3a18 */
-    0x001d4168, /* -> FUN_001d4168 */ /* +0x3a1c */
-    0x001d419c, /* -> FUN_001d419c */ /* +0x3a20 */
+    0x001d4168, /* -> IrPredSetGTInt__dtor */ /* +0x3a1c */
+    0x001d419c, /* -> IrPredSetGTInt__deleting_dtor */ /* +0x3a20 */
     0x001d0250, /* +0x3a24 */
     0x001d0258, /* +0x3a28 */
     0x00000000, /* +0x3a2c */
@@ -3733,8 +3733,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3a48 */
     0x001d01fc, /* +0x3a4c */
     0x001d0204, /* +0x3a50 */
-    0x001d4100, /* -> FUN_001d4100 */ /* +0x3a54 */
-    0x001d4134, /* -> FUN_001d4134 */ /* +0x3a58 */
+    0x001d4100, /* -> IrPredSetLTInt__dtor */ /* +0x3a54 */
+    0x001d4134, /* -> IrPredSetLTInt__deleting_dtor */ /* +0x3a58 */
     0x001d0250, /* +0x3a5c */
     0x001d0258, /* +0x3a60 */
     0x00000000, /* +0x3a64 */
@@ -3747,8 +3747,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3a80 */
     0x001d01fc, /* +0x3a84 */
     0x001d0204, /* +0x3a88 */
-    0x001d4098, /* -> FUN_001d4098 */ /* +0x3a8c */
-    0x001d40cc, /* -> FUN_001d40cc */ /* +0x3a90 */
+    0x001d4098, /* -> IrPredSetLEInt__dtor */ /* +0x3a8c */
+    0x001d40cc, /* -> IrPredSetLEInt__deleting_dtor */ /* +0x3a90 */
     0x001d0250, /* +0x3a94 */
     0x001d0258, /* +0x3a98 */
     0x00000000, /* +0x3a9c */
@@ -3761,8 +3761,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3ab8 */
     0x001d01fc, /* +0x3abc */
     0x001d0204, /* +0x3ac0 */
-    0x001d4030, /* -> FUN_001d4030 */ /* +0x3ac4 */
-    0x001d4064, /* -> FUN_001d4064 */ /* +0x3ac8 */
+    0x001d4030, /* -> IrPredSetGE__dtor */ /* +0x3ac4 */
+    0x001d4064, /* -> IrPredSetGE__deleting_dtor */ /* +0x3ac8 */
     0x001d0250, /* +0x3acc */
     0x001d0258, /* +0x3ad0 */
     0x00000000, /* +0x3ad4 */
@@ -3775,8 +3775,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3af0 */
     0x001d01fc, /* +0x3af4 */
     0x001d0204, /* +0x3af8 */
-    0x001d3fc8, /* -> FUN_001d3fc8 */ /* +0x3afc */
-    0x001d3ffc, /* -> FUN_001d3ffc */ /* +0x3b00 */
+    0x001d3fc8, /* -> IrPredSetGEInt__dtor */ /* +0x3afc */
+    0x001d3ffc, /* -> IrPredSetGEInt__deleting_dtor */ /* +0x3b00 */
     0x001d0250, /* +0x3b04 */
     0x001d0258, /* +0x3b08 */
     0x00000000, /* +0x3b0c */
@@ -3789,8 +3789,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3b28 */
     0x001d01fc, /* +0x3b2c */
     0x001d0204, /* +0x3b30 */
-    0x001d3f60, /* -> FUN_001d3f60 */ /* +0x3b34 */
-    0x001d3f94, /* -> FUN_001d3f94 */ /* +0x3b38 */
+    0x001d3f60, /* -> IrPredSetInv__dtor */ /* +0x3b34 */
+    0x001d3f94, /* -> IrPredSetInv__deleting_dtor */ /* +0x3b38 */
     0x001d0250, /* +0x3b3c */
     0x001d0258, /* +0x3b40 */
     0x00000000, /* +0x3b44 */
@@ -3803,8 +3803,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3b60 */
     0x001d01fc, /* +0x3b64 */
     0x001d0204, /* +0x3b68 */
-    0x001d3ef8, /* -> FUN_001d3ef8 */ /* +0x3b6c */
-    0x001d3f2c, /* -> FUN_001d3f2c */ /* +0x3b70 */
+    0x001d3ef8, /* -> IrPredSetPop__dtor */ /* +0x3b6c */
+    0x001d3f2c, /* -> IrPredSetPop__deleting_dtor */ /* +0x3b70 */
     0x001d0250, /* +0x3b74 */
     0x001d0258, /* +0x3b78 */
     0x00000000, /* +0x3b7c */
@@ -3817,8 +3817,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3b98 */
     0x001d01fc, /* +0x3b9c */
     0x001d0204, /* +0x3ba0 */
-    0x001d3e90, /* -> FUN_001d3e90 */ /* +0x3ba4 */
-    0x001d3ec4, /* -> FUN_001d3ec4 */ /* +0x3ba8 */
+    0x001d3e90, /* -> IrPredSetClr__dtor */ /* +0x3ba4 */
+    0x001d3ec4, /* -> IrPredSetClr__deleting_dtor */ /* +0x3ba8 */
     0x001d0250, /* +0x3bac */
     0x001d0258, /* +0x3bb0 */
     0x00000000, /* +0x3bb4 */
@@ -3831,8 +3831,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3bd0 */
     0x001d01fc, /* +0x3bd4 */
     0x001d0204, /* +0x3bd8 */
-    0x001d3e28, /* -> FUN_001d3e28 */ /* +0x3bdc */
-    0x001d3e5c, /* -> FUN_001d3e5c */ /* +0x3be0 */
+    0x001d3e28, /* -> IrPredSetRst__dtor */ /* +0x3bdc */
+    0x001d3e5c, /* -> IrPredSetRst__deleting_dtor */ /* +0x3be0 */
     0x001d0250, /* +0x3be4 */
     0x001d0258, /* +0x3be8 */
     0x00000000, /* +0x3bec */
@@ -3845,8 +3845,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3c08 */
     0x001d01fc, /* +0x3c0c */
     0x001d0204, /* +0x3c10 */
-    0x001d3dc0, /* -> FUN_001d3dc0 */ /* +0x3c14 */
-    0x001d3df4, /* -> FUN_001d3df4 */ /* +0x3c18 */
+    0x001d3dc0, /* -> IrAddPrev__dtor */ /* +0x3c14 */
+    0x001d3df4, /* -> IrAddPrev__deleting_dtor */ /* +0x3c18 */
     0x001d0250, /* +0x3c1c */
     0x001d0258, /* +0x3c20 */
     0x00000000, /* +0x3c24 */
@@ -3859,8 +3859,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3c40 */
     0x001d01fc, /* +0x3c44 */
     0x001d0204, /* +0x3c48 */
-    0x001d3d58, /* -> FUN_001d3d58 */ /* +0x3c4c */
-    0x001d3d8c, /* -> FUN_001d3d8c */ /* +0x3c50 */
+    0x001d3d58, /* -> IrMulPrev__dtor */ /* +0x3c4c */
+    0x001d3d8c, /* -> IrMulPrev__deleting_dtor */ /* +0x3c50 */
     0x001d0250, /* +0x3c54 */
     0x001d0258, /* +0x3c58 */
     0x00000000, /* +0x3c5c */
@@ -3873,8 +3873,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3c78 */
     0x001d01fc, /* +0x3c7c */
     0x001d0204, /* +0x3c80 */
-    0x001d3cf0, /* -> FUN_001d3cf0 */ /* +0x3c84 */
-    0x001d3d24, /* -> FUN_001d3d24 */ /* +0x3c88 */
+    0x001d3cf0, /* -> IrMulPrev2__dtor */ /* +0x3c84 */
+    0x001d3d24, /* -> IrMulPrev2__deleting_dtor */ /* +0x3c88 */
     0x001d0250, /* +0x3c8c */
     0x001d0258, /* +0x3c90 */
     0x00000000, /* +0x3c94 */
@@ -3887,8 +3887,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3cb0 */
     0x001d01fc, /* +0x3cb4 */
     0x001d0204, /* +0x3cb8 */
-    0x001d3c88, /* -> FUN_001d3c88 */ /* +0x3cbc */
-    0x001d3cbc, /* -> FUN_001d3cbc */ /* +0x3cc0 */
+    0x001d3c88, /* -> IrSubPrev__dtor */ /* +0x3cbc */
+    0x001d3cbc, /* -> IrSubPrev__deleting_dtor */ /* +0x3cc0 */
     0x001d0250, /* +0x3cc4 */
     0x001d0258, /* +0x3cc8 */
     0x00000000, /* +0x3ccc */
@@ -3901,8 +3901,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d0dc0, /* +0x3ce8 */
     0x001d01fc, /* +0x3cec */
     0x001d0204, /* +0x3cf0 */
-    0x001d3c20, /* -> FUN_001d3c20 */ /* +0x3cf4 */
-    0x001d3c54, /* -> FUN_001d3c54 */ /* +0x3cf8 */
+    0x001d3c20, /* -> IrMovaFloor__dtor */ /* +0x3cf4 */
+    0x001d3c54, /* -> IrMovaFloor__deleting_dtor */ /* +0x3cf8 */
     0x001d0250, /* +0x3cfc */
     0x001d0258, /* +0x3d00 */
     0x00000000, /* +0x3d04 */
@@ -3915,8 +3915,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d0dc4, /* +0x3d20 */
     0x001d01fc, /* +0x3d24 */
     0x001d0204, /* +0x3d28 */
-    0x001d3bb8, /* -> FUN_001d3bb8 */ /* +0x3d2c */
-    0x001d3bec, /* -> FUN_001d3bec */ /* +0x3d30 */
+    0x001d3bb8, /* -> IrMovaFlr__dtor */ /* +0x3d2c */
+    0x001d3bec, /* -> IrMovaFlr__deleting_dtor */ /* +0x3d30 */
     0x001d0250, /* +0x3d34 */
     0x001d0258, /* +0x3d38 */
     0x00000000, /* +0x3d3c */
@@ -3929,8 +3929,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3d58 */
     0x001d01fc, /* +0x3d5c */
     0x001d0204, /* +0x3d60 */
-    0x001d3b50, /* -> FUN_001d3b50 */ /* +0x3d64 */
-    0x001d3b84, /* -> FUN_001d3b84 */ /* +0x3d68 */
+    0x001d3b50, /* -> IrMovaFloorFloat__dtor */ /* +0x3d64 */
+    0x001d3b84, /* -> IrMovaFloorFloat__deleting_dtor */ /* +0x3d68 */
     0x001d0250, /* +0x3d6c */
     0x001d0258, /* +0x3d70 */
     0x00000000, /* +0x3d74 */
@@ -3943,8 +3943,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d0dc8, /* +0x3d90 */
     0x001d01fc, /* +0x3d94 */
     0x001d0204, /* +0x3d98 */
-    0x001d3ae8, /* -> FUN_001d3ae8 */ /* +0x3d9c */
-    0x001d3b1c, /* -> FUN_001d3b1c */ /* +0x3da0 */
+    0x001d3ae8, /* -> IrMovaFloorGprInt__dtor */ /* +0x3d9c */
+    0x001d3b1c, /* -> IrMovaFloorGprInt__deleting_dtor */ /* +0x3da0 */
     0x001d0250, /* +0x3da4 */
     0x001d0258, /* +0x3da8 */
     0x00000000, /* +0x3dac */
@@ -3957,8 +3957,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d0dcc, /* +0x3dc8 */
     0x001d01fc, /* +0x3dcc */
     0x001d0204, /* +0x3dd0 */
-    0x001d3a80, /* -> FUN_001d3a80 */ /* +0x3dd4 */
-    0x001d3ab4, /* -> FUN_001d3ab4 */ /* +0x3dd8 */
+    0x001d3a80, /* -> IrMovaFloorInt__dtor */ /* +0x3dd4 */
+    0x001d3ab4, /* -> IrMovaFloorInt__deleting_dtor */ /* +0x3dd8 */
     0x001d0250, /* +0x3ddc */
     0x001d0258, /* +0x3de0 */
     0x00000000, /* +0x3de4 */
@@ -3971,8 +3971,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3e00 */
     0x001d01fc, /* +0x3e04 */
     0x001d0204, /* +0x3e08 */
-    0x001d3a18, /* -> FUN_001d3a18 */ /* +0x3e0c */
-    0x001d3a4c, /* -> FUN_001d3a4c */ /* +0x3e10 */
+    0x001d3a18, /* -> IrLoadConst__dtor */ /* +0x3e0c */
+    0x001d3a4c, /* -> IrLoadConst__deleting_dtor */ /* +0x3e10 */
     0x001d0250, /* +0x3e14 */
     0x001d0258, /* +0x3e18 */
     0x00000000, /* +0x3e1c */
@@ -3985,8 +3985,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3e38 */
     0x001d01fc, /* +0x3e3c */
     0x001d0204, /* +0x3e40 */
-    0x001d39b0, /* -> FUN_001d39b0 */ /* +0x3e44 */
-    0x001d39e4, /* -> FUN_001d39e4 */ /* +0x3e48 */
+    0x001d39b0, /* -> IrLoadTemp__dtor */ /* +0x3e44 */
+    0x001d39e4, /* -> IrLoadTemp__deleting_dtor */ /* +0x3e48 */
     0x001d0250, /* +0x3e4c */
     0x001d0258, /* +0x3e50 */
     0x00000000, /* +0x3e54 */
@@ -3999,8 +3999,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3e70 */
     0x001d01fc, /* +0x3e74 */
     0x001d0204, /* +0x3e78 */
-    0x001d3948, /* -> FUN_001d3948 */ /* +0x3e7c */
-    0x001d397c, /* -> FUN_001d397c */ /* +0x3e80 */
+    0x001d3948, /* -> IrLoadPhysical__dtor */ /* +0x3e7c */
+    0x001d397c, /* -> IrLoadPhysical__deleting_dtor */ /* +0x3e80 */
     0x001d0250, /* +0x3e84 */
     0x001d0258, /* +0x3e88 */
     0x00000000, /* +0x3e8c */
@@ -4013,8 +4013,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3ea8 */
     0x001d01fc, /* +0x3eac */
     0x001d0204, /* +0x3eb0 */
-    0x001d38e0, /* -> FUN_001d38e0 */ /* +0x3eb4 */
-    0x001d3914, /* -> FUN_001d3914 */ /* +0x3eb8 */
+    0x001d38e0, /* -> IrLoadAbstractState__dtor */ /* +0x3eb4 */
+    0x001d3914, /* -> IrLoadAbstractState__deleting_dtor */ /* +0x3eb8 */
     0x001d0250, /* +0x3ebc */
     0x001d0258, /* +0x3ec0 */
     0x00000000, /* +0x3ec4 */
@@ -4027,8 +4027,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3ee0 */
     0x001d01fc, /* +0x3ee4 */
     0x001d0204, /* +0x3ee8 */
-    0x001d3878, /* -> FUN_001d3878 */ /* +0x3eec */
-    0x001d38ac, /* -> FUN_001d38ac */ /* +0x3ef0 */
+    0x001d3878, /* -> IrLoadTempDefault__dtor */ /* +0x3eec */
+    0x001d38ac, /* -> IrLoadTempDefault__deleting_dtor */ /* +0x3ef0 */
     0x001d0250, /* +0x3ef4 */
     0x001d0258, /* +0x3ef8 */
     0x00000000, /* +0x3efc */
@@ -4041,8 +4041,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3f18 */
     0x001d01fc, /* +0x3f1c */
     0x001d0204, /* +0x3f20 */
-    0x001d3810, /* -> FUN_001d3810 */ /* +0x3f24 */
-    0x001d3844, /* -> FUN_001d3844 */ /* +0x3f28 */
+    0x001d3810, /* -> IrLoadInterp__dtor */ /* +0x3f24 */
+    0x001d3844, /* -> IrLoadInterp__deleting_dtor */ /* +0x3f28 */
     0x001d0250, /* +0x3f2c */
     0x001d0258, /* +0x3f30 */
     0x00000000, /* +0x3f34 */
@@ -4055,8 +4055,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3f50 */
     0x001d01fc, /* +0x3f54 */
     0x001d0204, /* +0x3f58 */
-    0x001d37a8, /* -> FUN_001d37a8 */ /* +0x3f5c */
-    0x001d37dc, /* -> FUN_001d37dc */ /* +0x3f60 */
+    0x001d37a8, /* -> IrVertexLoopFetch__dtor */ /* +0x3f5c */
+    0x001d37dc, /* -> IrVertexLoopFetch__deleting_dtor */ /* +0x3f60 */
     0x001d0250, /* +0x3f64 */
     0x001d0258, /* +0x3f68 */
     0x00000000, /* +0x3f6c */
@@ -4069,8 +4069,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3f88 */
     0x001d01fc, /* +0x3f8c */
     0x001d0204, /* +0x3f90 */
-    0x001d3740, /* -> FUN_001d3740 */ /* +0x3f94 */
-    0x001d3774, /* -> FUN_001d3774 */ /* +0x3f98 */
+    0x001d3740, /* -> IrPixelLoopFetch__dtor */ /* +0x3f94 */
+    0x001d3774, /* -> IrPixelLoopFetch__deleting_dtor */ /* +0x3f98 */
     0x001d0250, /* +0x3f9c */
     0x001d0258, /* +0x3fa0 */
     0x00000000, /* +0x3fa4 */
@@ -4083,8 +4083,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x3fc0 */
     0x001d01fc, /* +0x3fc4 */
     0x001d0204, /* +0x3fc8 */
-    0x001d36d8, /* -> FUN_001d36d8 */ /* +0x3fcc */
-    0x001d370c, /* -> FUN_001d370c */ /* +0x3fd0 */
+    0x001d36d8, /* -> IrLoopStart__dtor */ /* +0x3fcc */
+    0x001d370c, /* -> IrLoopStart__deleting_dtor */ /* +0x3fd0 */
     0x001d0250, /* +0x3fd4 */
     0x001d0258, /* +0x3fd8 */
     0x00000000, /* +0x3fdc */
@@ -4097,8 +4097,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d0dfc, /* +0x3ff8 */
     0x001d01fc, /* +0x3ffc */
     0x001d0204, /* +0x4000 */
-    0x001d3670, /* -> FUN_001d3670 */ /* +0x4004 */
-    0x001d36a4, /* -> FUN_001d36a4 */ /* +0x4008 */
+    0x001d3670, /* -> IrLoopIndex__dtor */ /* +0x4004 */
+    0x001d36a4, /* -> IrLoopIndex__deleting_dtor */ /* +0x4008 */
     0x001d0250, /* +0x400c */
     0x001d0258, /* +0x4010 */
     0x00000000, /* +0x4014 */
@@ -4111,8 +4111,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4030 */
     0x001d01fc, /* +0x4034 */
     0x001d0204, /* +0x4038 */
-    0x001d3608, /* -> FUN_001d3608 */ /* +0x403c */
-    0x001d363c, /* -> FUN_001d363c */ /* +0x4040 */
+    0x001d3608, /* -> IrMerge__dtor */ /* +0x403c */
+    0x001d363c, /* -> IrMerge__deleting_dtor */ /* +0x4040 */
     0x001d0250, /* +0x4044 */
     0x001d0258, /* +0x4048 */
     0x00000000, /* +0x404c */
@@ -4125,8 +4125,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4068 */
     0x001d01fc, /* +0x406c */
     0x001d0204, /* +0x4070 */
-    0x001d35a0, /* -> FUN_001d35a0 */ /* +0x4074 */
-    0x001d35d4, /* -> FUN_001d35d4 */ /* +0x4078 */
+    0x001d35a0, /* -> IrProjection__dtor */ /* +0x4074 */
+    0x001d35d4, /* -> IrProjection__deleting_dtor */ /* +0x4078 */
     0x001d0250, /* +0x407c */
     0x001d0258, /* +0x4080 */
     0x00000000, /* +0x4084 */
@@ -4139,8 +4139,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x40a0 */
     0x001d01fc, /* +0x40a4 */
     0x001d0204, /* +0x40a8 */
-    0x001d3538, /* -> FUN_001d3538 */ /* +0x40ac */
-    0x001d356c, /* -> FUN_001d356c */ /* +0x40b0 */
+    0x001d3538, /* -> IrUndefined__dtor */ /* +0x40ac */
+    0x001d356c, /* -> IrUndefined__deleting_dtor */ /* +0x40b0 */
     0x001d0250, /* +0x40b4 */
     0x001d0258, /* +0x40b8 */
     0x00000000, /* +0x40bc */
@@ -4153,8 +4153,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x40d8 */
     0x001d01fc, /* +0x40dc */
     0x001d0204, /* +0x40e0 */
-    0x001d34d0, /* -> FUN_001d34d0 */ /* +0x40e4 */
-    0x001d3504, /* -> FUN_001d3504 */ /* +0x40e8 */
+    0x001d34d0, /* -> IrHeader__dtor */ /* +0x40e4 */
+    0x001d3504, /* -> IrHeader__deleting_dtor */ /* +0x40e8 */
     0x001d0250, /* +0x40ec */
     0x001d0258, /* +0x40f0 */
     0x00000000, /* +0x40f4 */
@@ -4167,8 +4167,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4110 */
     0x001d01fc, /* +0x4114 */
     0x001d0204, /* +0x4118 */
-    0x001d3468, /* -> FUN_001d3468 */ /* +0x411c */
-    0x001d349c, /* -> FUN_001d349c */ /* +0x4120 */
+    0x001d3468, /* -> IrEntry__dtor */ /* +0x411c */
+    0x001d349c, /* -> IrEntry__deleting_dtor */ /* +0x4120 */
     0x001d0250, /* +0x4124 */
     0x001d0258, /* +0x4128 */
     0x00000000, /* +0x412c */
@@ -4181,8 +4181,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4148 */
     0x001d01fc, /* +0x414c */
     0x001d0204, /* +0x4150 */
-    0x001d3400, /* -> FUN_001d3400 */ /* +0x4154 */
-    0x001d3434, /* -> FUN_001d3434 */ /* +0x4158 */
+    0x001d3400, /* -> IrExit__dtor */ /* +0x4154 */
+    0x001d3434, /* -> IrExit__deleting_dtor */ /* +0x4158 */
     0x001d0250, /* +0x415c */
     0x001d0258, /* +0x4160 */
     0x00000000, /* +0x4164 */
@@ -4195,8 +4195,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4180 */
     0x001d01fc, /* +0x4184 */
     0x001d0204, /* +0x4188 */
-    0x001d3398, /* -> FUN_001d3398 */ /* +0x418c */
-    0x001d33cc, /* -> FUN_001d33cc */ /* +0x4190 */
+    0x001d3398, /* -> IrProlog__dtor */ /* +0x418c */
+    0x001d33cc, /* -> IrProlog__deleting_dtor */ /* +0x4190 */
     0x001d0250, /* +0x4194 */
     0x001d0258, /* +0x4198 */
     0x00000000, /* +0x419c */
@@ -4209,8 +4209,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x41b8 */
     0x001d01fc, /* +0x41bc */
     0x001d0204, /* +0x41c0 */
-    0x001d3330, /* -> FUN_001d3330 */ /* +0x41c4 */
-    0x001d3364, /* -> FUN_001d3364 */ /* +0x41c8 */
+    0x001d3330, /* -> IrEpilog__dtor */ /* +0x41c4 */
+    0x001d3364, /* -> IrEpilog__deleting_dtor */ /* +0x41c8 */
     0x001d0250, /* +0x41cc */
     0x001d0258, /* +0x41d0 */
     0x00000000, /* +0x41d4 */
@@ -4223,8 +4223,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x41f0 */
     0x001d01fc, /* +0x41f4 */
     0x001d0204, /* +0x41f8 */
-    0x001d32c8, /* -> FUN_001d32c8 */ /* +0x41fc */
-    0x001d32fc, /* -> FUN_001d32fc */ /* +0x4200 */
+    0x001d32c8, /* -> IrCmp2__dtor */ /* +0x41fc */
+    0x001d32fc, /* -> IrCmp2__deleting_dtor */ /* +0x4200 */
     0x001d0250, /* +0x4204 */
     0x001d0258, /* +0x4208 */
     0x00000000, /* +0x420c */
@@ -4237,8 +4237,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d0df4, /* +0x4228 */
     0x001d01fc, /* +0x422c */
     0x001d0204, /* +0x4230 */
-    0x001d3260, /* -> FUN_001d3260 */ /* +0x4234 */
-    0x001d3294, /* -> FUN_001d3294 */ /* +0x4238 */
+    0x001d3260, /* -> IrCmp1D__dtor */ /* +0x4234 */
+    0x001d3294, /* -> IrCmp1D__deleting_dtor */ /* +0x4238 */
     0x001d0250, /* +0x423c */
     0x001d0258, /* +0x4240 */
     0x00000000, /* +0x4244 */
@@ -4251,8 +4251,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4260 */
     0x001d01fc, /* +0x4264 */
     0x001d0204, /* +0x4268 */
-    0x001d31f8, /* -> FUN_001d31f8 */ /* +0x426c */
-    0x001d322c, /* -> FUN_001d322c */ /* +0x4270 */
+    0x001d31f8, /* -> IrCmp1S__dtor */ /* +0x426c */
+    0x001d322c, /* -> IrCmp1S__deleting_dtor */ /* +0x4270 */
     0x001d0250, /* +0x4274 */
     0x001d0258, /* +0x4278 */
     0x00000000, /* +0x427c */
@@ -4265,8 +4265,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4298 */
     0x001d01fc, /* +0x429c */
     0x001d0204, /* +0x42a0 */
-    0x001d3190, /* -> FUN_001d3190 */ /* +0x42a4 */
-    0x001d31c4, /* -> FUN_001d31c4 */ /* +0x42a8 */
+    0x001d3190, /* -> IrPhi__dtor */ /* +0x42a4 */
+    0x001d31c4, /* -> IrPhi__deleting_dtor */ /* +0x42a8 */
     0x001d0250, /* +0x42ac */
     0x001d0258, /* +0x42b0 */
     0x00000000, /* +0x42b4 */
@@ -4279,8 +4279,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x42d0 */
     0x001d01fc, /* +0x42d4 */
     0x001d0204, /* +0x42d8 */
-    0x001d3128, /* -> FUN_001d3128 */ /* +0x42dc */
-    0x001d315c, /* -> FUN_001d315c */ /* +0x42e0 */
+    0x001d3128, /* -> IrStartCallRoutine__dtor */ /* +0x42dc */
+    0x001d315c, /* -> IrStartCallRoutine__deleting_dtor */ /* +0x42e0 */
     0x001d0250, /* +0x42e4 */
     0x001d0258, /* +0x42e8 */
     0x00000000, /* +0x42ec */
@@ -4293,8 +4293,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4308 */
     0x001d01fc, /* +0x430c */
     0x001d0204, /* +0x4310 */
-    0x001d30c0, /* -> FUN_001d30c0 */ /* +0x4314 */
-    0x001d30f4, /* -> FUN_001d30f4 */ /* +0x4318 */
+    0x001d30c0, /* -> IrStartMakeCall__dtor */ /* +0x4314 */
+    0x001d30f4, /* -> IrStartMakeCall__deleting_dtor */ /* +0x4318 */
     0x001d0250, /* +0x431c */
     0x001d0258, /* +0x4320 */
     0x00000000, /* +0x4324 */
@@ -4307,8 +4307,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4340 */
     0x001d01fc, /* +0x4344 */
     0x001d0204, /* +0x4348 */
-    0x001d3058, /* -> FUN_001d3058 */ /* +0x434c */
-    0x001d308c, /* -> FUN_001d308c */ /* +0x4350 */
+    0x001d3058, /* -> IrEndCall__dtor */ /* +0x434c */
+    0x001d308c, /* -> IrEndCall__deleting_dtor */ /* +0x4350 */
     0x001d0250, /* +0x4354 */
     0x001d0258, /* +0x4358 */
     0x00000000, /* +0x435c */
@@ -4321,8 +4321,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4378 */
     0x001d01fc, /* +0x437c */
     0x001d0204, /* +0x4380 */
-    0x001d2ff0, /* -> FUN_001d2ff0 */ /* +0x4384 */
-    0x001d3024, /* -> FUN_001d3024 */ /* +0x4388 */
+    0x001d2ff0, /* -> IrEndMakeCall__dtor */ /* +0x4384 */
+    0x001d3024, /* -> IrEndMakeCall__deleting_dtor */ /* +0x4388 */
     0x001d0250, /* +0x438c */
     0x001d0258, /* +0x4390 */
     0x00000000, /* +0x4394 */
@@ -4335,8 +4335,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d0dd0, /* +0x43b0 */
     0x001d01fc, /* +0x43b4 */
     0x001d0204, /* +0x43b8 */
-    0x001d2f88, /* -> FUN_001d2f88 */ /* +0x43bc */
-    0x001d2fbc, /* -> FUN_001d2fbc */ /* +0x43c0 */
+    0x001d2f88, /* -> IrAllocPos__dtor */ /* +0x43bc */
+    0x001d2fbc, /* -> IrAllocPos__deleting_dtor */ /* +0x43c0 */
     0x001d0250, /* +0x43c4 */
     0x001d0258, /* +0x43c8 */
     0x00000000, /* +0x43cc */
@@ -4349,8 +4349,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d0dd4, /* +0x43e8 */
     0x001d01fc, /* +0x43ec */
     0x001d0204, /* +0x43f0 */
-    0x001d2f20, /* -> FUN_001d2f20 */ /* +0x43f4 */
-    0x001d2f54, /* -> FUN_001d2f54 */ /* +0x43f8 */
+    0x001d2f20, /* -> IrAllocMem__dtor */ /* +0x43f4 */
+    0x001d2f54, /* -> IrAllocMem__deleting_dtor */ /* +0x43f8 */
     0x001d0250, /* +0x43fc */
     0x001d0258, /* +0x4400 */
     0x00000000, /* +0x4404 */
@@ -4363,8 +4363,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d0dd8, /* +0x4420 */
     0x001d01fc, /* +0x4424 */
     0x001d0204, /* +0x4428 */
-    0x001d2eb8, /* -> FUN_001d2eb8 */ /* +0x442c */
-    0x001d2eec, /* -> FUN_001d2eec */ /* +0x4430 */
+    0x001d2eb8, /* -> IrAllocColor__dtor */ /* +0x442c */
+    0x001d2eec, /* -> IrAllocColor__deleting_dtor */ /* +0x4430 */
     0x001d0250, /* +0x4434 */
     0x001d0258, /* +0x4438 */
     0x00000000, /* +0x443c */
@@ -4377,8 +4377,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d0ddc, /* +0x4458 */
     0x001d01fc, /* +0x445c */
     0x001d0204, /* +0x4460 */
-    0x001d2e50, /* -> FUN_001d2e50 */ /* +0x4464 */
-    0x001d2e84, /* -> FUN_001d2e84 */ /* +0x4468 */
+    0x001d2e50, /* -> IrAllocInterp__dtor */ /* +0x4464 */
+    0x001d2e84, /* -> IrAllocInterp__deleting_dtor */ /* +0x4468 */
     0x001d0250, /* +0x446c */
     0x001d0258, /* +0x4470 */
     0x00000000, /* +0x4474 */
@@ -4391,8 +4391,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4490 */
     0x001d01fc, /* +0x4494 */
     0x001d0204, /* +0x4498 */
-    0x001d2de8, /* -> FUN_001d2de8 */ /* +0x449c */
-    0x001d2e1c, /* -> FUN_001d2e1c */ /* +0x44a0 */
+    0x001d2de8, /* -> IrOpDp__dtor */ /* +0x449c */
+    0x001d2e1c, /* -> IrOpDp__deleting_dtor */ /* +0x44a0 */
     0x001d0250, /* +0x44a4 */
     0x001d0258, /* +0x44a8 */
     0x00000000, /* +0x44ac */
@@ -4405,8 +4405,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x44c8 */
     0x001d01fc, /* +0x44cc */
     0x001d0204, /* +0x44d0 */
-    0x001d2d80, /* -> FUN_001d2d80 */ /* +0x44d4 */
-    0x001d2db4, /* -> FUN_001d2db4 */ /* +0x44d8 */
+    0x001d2d80, /* -> IrOpSop__dtor */ /* +0x44d4 */
+    0x001d2db4, /* -> IrOpSop__deleting_dtor */ /* +0x44d8 */
     0x001d0250, /* +0x44dc */
     0x001d0258, /* +0x44e0 */
     0x00000000, /* +0x44e4 */
@@ -4419,8 +4419,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4500 */
     0x001d01fc, /* +0x4504 */
     0x001d0204, /* +0x4508 */
-    0x001d2d18, /* -> FUN_001d2d18 */ /* +0x450c */
-    0x001d2d4c, /* -> FUN_001d2d4c */ /* +0x4510 */
+    0x001d2d18, /* -> IrPresubBX2Neg__dtor */ /* +0x450c */
+    0x001d2d4c, /* -> IrPresubBX2Neg__deleting_dtor */ /* +0x4510 */
     0x001d0250, /* +0x4514 */
     0x001d0258, /* +0x4518 */
     0x00000000, /* +0x451c */
@@ -4433,8 +4433,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4538 */
     0x001d01fc, /* +0x453c */
     0x001d0204, /* +0x4540 */
-    0x001d2cb0, /* -> FUN_001d2cb0 */ /* +0x4544 */
-    0x001d2ce4, /* -> FUN_001d2ce4 */ /* +0x4548 */
+    0x001d2cb0, /* -> IrPresubSub__dtor */ /* +0x4544 */
+    0x001d2ce4, /* -> IrPresubSub__deleting_dtor */ /* +0x4548 */
     0x001d0250, /* +0x454c */
     0x001d0258, /* +0x4550 */
     0x00000000, /* +0x4554 */
@@ -4447,8 +4447,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4570 */
     0x001d01fc, /* +0x4574 */
     0x001d0204, /* +0x4578 */
-    0x001d2c48, /* -> FUN_001d2c48 */ /* +0x457c */
-    0x001d2c7c, /* -> FUN_001d2c7c */ /* +0x4580 */
+    0x001d2c48, /* -> IrPresubAdd__dtor */ /* +0x457c */
+    0x001d2c7c, /* -> IrPresubAdd__deleting_dtor */ /* +0x4580 */
     0x001d0250, /* +0x4584 */
     0x001d0258, /* +0x4588 */
     0x00000000, /* +0x458c */
@@ -4461,8 +4461,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x45a8 */
     0x001d01fc, /* +0x45ac */
     0x001d0204, /* +0x45b0 */
-    0x001d2be0, /* -> FUN_001d2be0 */ /* +0x45b4 */
-    0x001d2c14, /* -> FUN_001d2c14 */ /* +0x45b8 */
+    0x001d2be0, /* -> IrPresubInvert__dtor */ /* +0x45b4 */
+    0x001d2c14, /* -> IrPresubInvert__deleting_dtor */ /* +0x45b8 */
     0x001d0250, /* +0x45bc */
     0x001d0258, /* +0x45c0 */
     0x00000000, /* +0x45c4 */
@@ -4475,8 +4475,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x45e0 */
     0x001d01fc, /* +0x45e4 */
     0x001d0204, /* +0x45e8 */
-    0x001d2b78, /* -> FUN_001d2b78 */ /* +0x45ec */
-    0x001d2bac, /* -> FUN_001d2bac */ /* +0x45f0 */
+    0x001d2b78, /* -> IrCnd05__dtor */ /* +0x45ec */
+    0x001d2bac, /* -> IrCnd05__deleting_dtor */ /* +0x45f0 */
     0x001d0250, /* +0x45f4 */
     0x001d0258, /* +0x45f8 */
     0x00000000, /* +0x45fc */
@@ -4489,8 +4489,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4618 */
     0x001d01fc, /* +0x461c */
     0x001d0204, /* +0x4620 */
-    0x001d2b10, /* -> FUN_001d2b10 */ /* +0x4624 */
-    0x001d2b44, /* -> FUN_001d2b44 */ /* +0x4628 */
+    0x001d2b10, /* -> IrDsx__dtor */ /* +0x4624 */
+    0x001d2b44, /* -> IrDsx__deleting_dtor */ /* +0x4628 */
     0x001d0250, /* +0x462c */
     0x001d0258, /* +0x4630 */
     0x00000000, /* +0x4634 */
@@ -4503,8 +4503,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4650 */
     0x001d01fc, /* +0x4654 */
     0x001d0204, /* +0x4658 */
-    0x001d2aa8, /* -> FUN_001d2aa8 */ /* +0x465c */
-    0x001d2adc, /* -> FUN_001d2adc */ /* +0x4660 */
+    0x001d2aa8, /* -> IrDsx1__dtor */ /* +0x465c */
+    0x001d2adc, /* -> IrDsx1__deleting_dtor */ /* +0x4660 */
     0x001d0250, /* +0x4664 */
     0x001d0258, /* +0x4668 */
     0x00000000, /* +0x466c */
@@ -4517,8 +4517,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4688 */
     0x001d01fc, /* +0x468c */
     0x001d0204, /* +0x4690 */
-    0x001d2a40, /* -> FUN_001d2a40 */ /* +0x4694 */
-    0x001d2a74, /* -> FUN_001d2a74 */ /* +0x4698 */
+    0x001d2a40, /* -> IrDsy__dtor */ /* +0x4694 */
+    0x001d2a74, /* -> IrDsy__deleting_dtor */ /* +0x4698 */
     0x001d0250, /* +0x469c */
     0x001d0258, /* +0x46a0 */
     0x00000000, /* +0x46a4 */
@@ -4531,8 +4531,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x46c0 */
     0x001d01fc, /* +0x46c4 */
     0x001d0204, /* +0x46c8 */
-    0x001d29d8, /* -> FUN_001d29d8 */ /* +0x46cc */
-    0x001d2a0c, /* -> FUN_001d2a0c */ /* +0x46d0 */
+    0x001d29d8, /* -> IrDsy1__dtor */ /* +0x46cc */
+    0x001d2a0c, /* -> IrDsy1__deleting_dtor */ /* +0x46d0 */
     0x001d0250, /* +0x46d4 */
     0x001d0258, /* +0x46d8 */
     0x00000000, /* +0x46dc */
@@ -4545,8 +4545,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x46f8 */
     0x001d01fc, /* +0x46fc */
     0x001d0204, /* +0x4700 */
-    0x001d2970, /* -> FUN_001d2970 */ /* +0x4704 */
-    0x001d29a4, /* -> FUN_001d29a4 */ /* +0x4708 */
+    0x001d2970, /* -> IrMix__dtor */ /* +0x4704 */
+    0x001d29a4, /* -> IrMix__deleting_dtor */ /* +0x4708 */
     0x001d0250, /* +0x470c */
     0x001d0258, /* +0x4710 */
     0x00000000, /* +0x4714 */
@@ -4559,8 +4559,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4730 */
     0x001d01fc, /* +0x4734 */
     0x001d0204, /* +0x4738 */
-    0x001d2908, /* -> FUN_001d2908 */ /* +0x473c */
-    0x001d293c, /* -> FUN_001d293c */ /* +0x4740 */
+    0x001d2908, /* -> IrDp3Add__dtor */ /* +0x473c */
+    0x001d293c, /* -> IrDp3Add__deleting_dtor */ /* +0x4740 */
     0x001d0250, /* +0x4744 */
     0x001d0258, /* +0x4748 */
     0x00000000, /* +0x474c */
@@ -4573,8 +4573,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4768 */
     0x001d01fc, /* +0x476c */
     0x001d0204, /* +0x4770 */
-    0x001d28a0, /* -> FUN_001d28a0 */ /* +0x4774 */
-    0x001d28d4, /* -> FUN_001d28d4 */ /* +0x4778 */
+    0x001d28a0, /* -> IrLoad__dtor */ /* +0x4774 */
+    0x001d28d4, /* -> IrLoad__deleting_dtor */ /* +0x4778 */
     0x001d0250, /* +0x477c */
     0x001d0258, /* +0x4780 */
     0x00000000, /* +0x4784 */
@@ -4587,8 +4587,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x47a0 */
     0x001d01fc, /* +0x47a4 */
     0x001d0204, /* +0x47a8 */
-    0x001d2838, /* -> FUN_001d2838 */ /* +0x47ac */
-    0x001d286c, /* -> FUN_001d286c */ /* +0x47b0 */
+    0x001d2838, /* -> IrPow__dtor */ /* +0x47ac */
+    0x001d286c, /* -> IrPow__deleting_dtor */ /* +0x47b0 */
     0x001d0250, /* +0x47b4 */
     0x001d0258, /* +0x47b8 */
     0x00000000, /* +0x47bc */
@@ -4601,8 +4601,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x47d8 */
     0x001d01fc, /* +0x47dc */
     0x001d0204, /* +0x47e0 */
-    0x001d27d0, /* -> FUN_001d27d0 */ /* +0x47e4 */
-    0x001d2804, /* -> FUN_001d2804 */ /* +0x47e8 */
+    0x001d27d0, /* -> IrR300Expp__dtor */ /* +0x47e4 */
+    0x001d2804, /* -> IrR300Expp__deleting_dtor */ /* +0x47e8 */
     0x001d0250, /* +0x47ec */
     0x001d0258, /* +0x47f0 */
     0x00000000, /* +0x47f4 */
@@ -4615,8 +4615,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4810 */
     0x001d01fc, /* +0x4814 */
     0x001d0204, /* +0x4818 */
-    0x001d2768, /* -> FUN_001d2768 */ /* +0x481c */
-    0x001d279c, /* -> FUN_001d279c */ /* +0x4820 */
+    0x001d2768, /* -> IrDxLogp__dtor */ /* +0x481c */
+    0x001d279c, /* -> IrDxLogp__deleting_dtor */ /* +0x4820 */
     0x001d0250, /* +0x4824 */
     0x001d0258, /* +0x4828 */
     0x00000000, /* +0x482c */
@@ -4629,8 +4629,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4848 */
     0x001d01fc, /* +0x484c */
     0x001d0204, /* +0x4850 */
-    0x001d2700, /* -> FUN_001d2700 */ /* +0x4854 */
-    0x001d2734, /* -> FUN_001d2734 */ /* +0x4858 */
+    0x001d2700, /* -> IrR300ExpBaseE__dtor */ /* +0x4854 */
+    0x001d2734, /* -> IrR300ExpBaseE__deleting_dtor */ /* +0x4858 */
     0x001d0250, /* +0x485c */
     0x001d0258, /* +0x4860 */
     0x00000000, /* +0x4864 */
@@ -4643,8 +4643,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4880 */
     0x001d01fc, /* +0x4884 */
     0x001d0204, /* +0x4888 */
-    0x001d2698, /* -> FUN_001d2698 */ /* +0x488c */
-    0x001d26cc, /* -> FUN_001d26cc */ /* +0x4890 */
+    0x001d2698, /* -> IrMad__dtor */ /* +0x488c */
+    0x001d26cc, /* -> IrMad__deleting_dtor */ /* +0x4890 */
     0x001d0250, /* +0x4894 */
     0x001d0258, /* +0x4898 */
     0x00000000, /* +0x489c */
@@ -4657,8 +4657,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x48b8 */
     0x001d0c38, /* -> FUN_001d0c38 */ /* +0x48bc */
     0x001d0204, /* +0x48c0 */
-    0x001d2630, /* -> FUN_001d2630 */ /* +0x48c4 */
-    0x001d2664, /* -> FUN_001d2664 */ /* +0x48c8 */
+    0x001d2630, /* -> IrCndGEFloat__dtor */ /* +0x48c4 */
+    0x001d2664, /* -> IrCndGEFloat__deleting_dtor */ /* +0x48c8 */
     0x001d0250, /* +0x48cc */
     0x001d0258, /* +0x48d0 */
     0x00000000, /* +0x48d4 */
@@ -4671,8 +4671,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x48f0 */
     0x001d01fc, /* +0x48f4 */
     0x001d0204, /* +0x48f8 */
-    0x001d25c8, /* -> FUN_001d25c8 */ /* +0x48fc */
-    0x001d25fc, /* -> FUN_001d25fc */ /* +0x4900 */
+    0x001d25c8, /* -> IrCndGE__dtor */ /* +0x48fc */
+    0x001d25fc, /* -> IrCndGE__deleting_dtor */ /* +0x4900 */
     0x001d0250, /* +0x4904 */
     0x001d0258, /* +0x4908 */
     0x00000000, /* +0x490c */
@@ -4685,8 +4685,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4928 */
     0x001d01fc, /* +0x492c */
     0x001d0204, /* +0x4930 */
-    0x001d2560, /* -> FUN_001d2560 */ /* +0x4934 */
-    0x001d2594, /* -> FUN_001d2594 */ /* +0x4938 */
+    0x001d2560, /* -> IrCndGE1__dtor */ /* +0x4934 */
+    0x001d2594, /* -> IrCndGE1__deleting_dtor */ /* +0x4938 */
     0x001d0250, /* +0x493c */
     0x001d0258, /* +0x4940 */
     0x00000000, /* +0x4944 */
@@ -4699,8 +4699,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4960 */
     0x001d01fc, /* +0x4964 */
     0x001d0204, /* +0x4968 */
-    0x001d24f8, /* -> FUN_001d24f8 */ /* +0x496c */
-    0x001d252c, /* -> FUN_001d252c */ /* +0x4970 */
+    0x001d24f8, /* -> IrCndGEInt__dtor */ /* +0x496c */
+    0x001d252c, /* -> IrCndGEInt__deleting_dtor */ /* +0x4970 */
     0x001d0250, /* +0x4974 */
     0x001d0258, /* +0x4978 */
     0x00000000, /* +0x497c */
@@ -4713,8 +4713,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4998 */
     0x001d01fc, /* +0x499c */
     0x001d0204, /* +0x49a0 */
-    0x001d2490, /* -> FUN_001d2490 */ /* +0x49a4 */
-    0x001d24c4, /* -> FUN_001d24c4 */ /* +0x49a8 */
+    0x001d2490, /* -> IrFetchTextureLOD__dtor */ /* +0x49a4 */
+    0x001d24c4, /* -> IrFetchTextureLOD__deleting_dtor */ /* +0x49a8 */
     0x001d0250, /* +0x49ac */
     0x001d0258, /* +0x49b0 */
     0x00000000, /* +0x49b4 */
@@ -4727,8 +4727,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x49d0 */
     0x001d01fc, /* +0x49d4 */
     0x001d0204, /* +0x49d8 */
-    0x001d2428, /* -> FUN_001d2428 */ /* +0x49dc */
-    0x001d245c, /* -> FUN_001d245c */ /* +0x49e0 */
+    0x001d2428, /* -> IrFetchTextureUncached__dtor */ /* +0x49dc */
+    0x001d245c, /* -> IrFetchTextureUncached__deleting_dtor */ /* +0x49e0 */
     0x001d0250, /* +0x49e4 */
     0x001d0258, /* +0x49e8 */
     0x00000000, /* +0x49ec */
@@ -4741,8 +4741,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4a08 */
     0x001d01fc, /* +0x4a0c */
     0x001d0204, /* +0x4a10 */
-    0x001d23c0, /* -> FUN_001d23c0 */ /* +0x4a14 */
-    0x001d23f4, /* -> FUN_001d23f4 */ /* +0x4a18 */
+    0x001d23c0, /* -> IrCmovEQ__dtor */ /* +0x4a14 */
+    0x001d23f4, /* -> IrCmovEQ__deleting_dtor */ /* +0x4a18 */
     0x001d0250, /* +0x4a1c */
     0x001d0258, /* +0x4a20 */
     0x00000000, /* +0x4a24 */
@@ -4755,8 +4755,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4a40 */
     0x001d01fc, /* +0x4a44 */
     0x001d0204, /* +0x4a48 */
-    0x001d2358, /* -> FUN_001d2358 */ /* +0x4a4c */
-    0x001d238c, /* -> FUN_001d238c */ /* +0x4a50 */
+    0x001d2358, /* -> IrCmovGE__dtor */ /* +0x4a4c */
+    0x001d238c, /* -> IrCmovGE__deleting_dtor */ /* +0x4a50 */
     0x001d0250, /* +0x4a54 */
     0x001d0258, /* +0x4a58 */
     0x00000000, /* +0x4a5c */
@@ -4769,8 +4769,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4a78 */
     0x001d01fc, /* +0x4a7c */
     0x001d0204, /* +0x4a80 */
-    0x001d22f0, /* -> FUN_001d22f0 */ /* +0x4a84 */
-    0x001d2324, /* -> FUN_001d2324 */ /* +0x4a88 */
+    0x001d22f0, /* -> IrCmovGT__dtor */ /* +0x4a84 */
+    0x001d2324, /* -> IrCmovGT__deleting_dtor */ /* +0x4a88 */
     0x001d0250, /* +0x4a8c */
     0x001d0258, /* +0x4a90 */
     0x00000000, /* +0x4a94 */
@@ -4783,8 +4783,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4ab0 */
     0x001d01fc, /* +0x4ab4 */
     0x001d0204, /* +0x4ab8 */
-    0x001d2288, /* -> FUN_001d2288 */ /* +0x4abc */
-    0x001d22bc, /* -> FUN_001d22bc */ /* +0x4ac0 */
+    0x001d2288, /* -> IrCmovNE__dtor */ /* +0x4abc */
+    0x001d22bc, /* -> IrCmovNE__deleting_dtor */ /* +0x4ac0 */
     0x001d0250, /* +0x4ac4 */
     0x001d0258, /* +0x4ac8 */
     0x00000000, /* +0x4acc */
@@ -4797,8 +4797,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d0db4, /* +0x4ae8 */
     0x001d01fc, /* +0x4aec */
     0x001d0204, /* +0x4af0 */
-    0x001d2220, /* -> FUN_001d2220 */ /* +0x4af4 */
-    0x001d2254, /* -> FUN_001d2254 */ /* +0x4af8 */
+    0x001d2220, /* -> IrScatter__dtor */ /* +0x4af4 */
+    0x001d2254, /* -> IrScatter__deleting_dtor */ /* +0x4af8 */
     0x001d0250, /* +0x4afc */
     0x001d0258, /* +0x4b00 */
     0x00000000, /* +0x4b04 */
@@ -4811,8 +4811,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4b20 */
     0x001d01fc, /* +0x4b24 */
     0x001d0204, /* +0x4b28 */
-    0x001d21b8, /* -> FUN_001d21b8 */ /* +0x4b2c */
-    0x001d21ec, /* -> FUN_001d21ec */ /* +0x4b30 */
+    0x001d21b8, /* -> IrFetchShaderCall__dtor */ /* +0x4b2c */
+    0x001d21ec, /* -> IrFetchShaderCall__deleting_dtor */ /* +0x4b30 */
     0x001d0250, /* +0x4b34 */
     0x001d0258, /* +0x4b38 */
     0x00000000, /* +0x4b3c */
@@ -4825,8 +4825,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4b58 */
     0x001d01fc, /* +0x4b5c */
     0x001d0204, /* +0x4b60 */
-    0x001d2150, /* -> FUN_001d2150 */ /* +0x4b64 */
-    0x001d2184, /* -> FUN_001d2184 */ /* +0x4b68 */
+    0x001d2150, /* -> IrSetE_Dx10__dtor */ /* +0x4b64 */
+    0x001d2184, /* -> IrSetE_Dx10__deleting_dtor */ /* +0x4b68 */
     0x001d0250, /* +0x4b6c */
     0x001d0258, /* +0x4b70 */
     0x00000000, /* +0x4b74 */
@@ -4839,8 +4839,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4b90 */
     0x001d01fc, /* +0x4b94 */
     0x001d0204, /* +0x4b98 */
-    0x001d20e8, /* -> FUN_001d20e8 */ /* +0x4b9c */
-    0x001d211c, /* -> FUN_001d211c */ /* +0x4ba0 */
+    0x001d20e8, /* -> IrSetGE_Dx10__dtor */ /* +0x4b9c */
+    0x001d211c, /* -> IrSetGE_Dx10__deleting_dtor */ /* +0x4ba0 */
     0x001d0250, /* +0x4ba4 */
     0x001d0258, /* +0x4ba8 */
     0x00000000, /* +0x4bac */
@@ -4853,8 +4853,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4bc8 */
     0x001d01fc, /* +0x4bcc */
     0x001d0204, /* +0x4bd0 */
-    0x001d2080, /* -> FUN_001d2080 */ /* +0x4bd4 */
-    0x001d20b4, /* -> FUN_001d20b4 */ /* +0x4bd8 */
+    0x001d2080, /* -> IrSetNE_Dx10__dtor */ /* +0x4bd4 */
+    0x001d20b4, /* -> IrSetNE_Dx10__deleting_dtor */ /* +0x4bd8 */
     0x001d0250, /* +0x4bdc */
     0x001d0258, /* +0x4be0 */
     0x00000000, /* +0x4be4 */
@@ -4867,8 +4867,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4c00 */
     0x001d01fc, /* +0x4c04 */
     0x001d0204, /* +0x4c08 */
-    0x001d2018, /* -> FUN_001d2018 */ /* +0x4c0c */
-    0x001d204c, /* -> FUN_001d204c */ /* +0x4c10 */
+    0x001d2018, /* -> IrCeil__dtor */ /* +0x4c0c */
+    0x001d204c, /* -> IrCeil__deleting_dtor */ /* +0x4c10 */
     0x001d0250, /* +0x4c14 */
     0x001d0258, /* +0x4c18 */
     0x00000000, /* +0x4c1c */
@@ -4881,8 +4881,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4c38 */
     0x001d01fc, /* +0x4c3c */
     0x001d0204, /* +0x4c40 */
-    0x001d1fb0, /* -> FUN_001d1fb0 */ /* +0x4c44 */
-    0x001d1fe4, /* -> FUN_001d1fe4 */ /* +0x4c48 */
+    0x001d1fb0, /* -> IrRoundNearestEven__dtor */ /* +0x4c44 */
+    0x001d1fe4, /* -> IrRoundNearestEven__deleting_dtor */ /* +0x4c48 */
     0x001d0250, /* +0x4c4c */
     0x001d0258, /* +0x4c50 */
     0x00000000, /* +0x4c54 */
@@ -4895,8 +4895,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4c70 */
     0x001d0440, /* +0x4c74 */
     0x001d0204, /* +0x4c78 */
-    0x001d1f48, /* -> FUN_001d1f48 */ /* +0x4c7c */
-    0x001d1f7c, /* -> FUN_001d1f7c */ /* +0x4c80 */
+    0x001d1f48, /* -> IrAndInt__dtor */ /* +0x4c7c */
+    0x001d1f7c, /* -> IrAndInt__deleting_dtor */ /* +0x4c80 */
     0x001d0250, /* +0x4c84 */
     0x001d0258, /* +0x4c88 */
     0x00000000, /* +0x4c8c */
@@ -4909,8 +4909,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4ca8 */
     0x001d03b0, /* +0x4cac */
     0x001d0204, /* +0x4cb0 */
-    0x001d1ee0, /* -> FUN_001d1ee0 */ /* +0x4cb4 */
-    0x001d1f14, /* -> FUN_001d1f14 */ /* +0x4cb8 */
+    0x001d1ee0, /* -> IrOrInt__dtor */ /* +0x4cb4 */
+    0x001d1f14, /* -> IrOrInt__deleting_dtor */ /* +0x4cb8 */
     0x001d0250, /* +0x4cbc */
     0x001d0258, /* +0x4cc0 */
     0x00000000, /* +0x4cc4 */
@@ -4923,8 +4923,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4ce0 */
     0x001d0428, /* +0x4ce4 */
     0x001d0204, /* +0x4ce8 */
-    0x001d1e78, /* -> FUN_001d1e78 */ /* +0x4cec */
-    0x001d1eac, /* -> FUN_001d1eac */ /* +0x4cf0 */
+    0x001d1e78, /* -> IrXorInt__dtor */ /* +0x4cec */
+    0x001d1eac, /* -> IrXorInt__deleting_dtor */ /* +0x4cf0 */
     0x001d0250, /* +0x4cf4 */
     0x001d0258, /* +0x4cf8 */
     0x00000000, /* +0x4cfc */
@@ -4937,8 +4937,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4d18 */
     0x001d03c8, /* +0x4d1c */
     0x001d0204, /* +0x4d20 */
-    0x001d1e10, /* -> FUN_001d1e10 */ /* +0x4d24 */
-    0x001d1e44, /* -> FUN_001d1e44 */ /* +0x4d28 */
+    0x001d1e10, /* -> IrNotInt__dtor */ /* +0x4d24 */
+    0x001d1e44, /* -> IrNotInt__deleting_dtor */ /* +0x4d28 */
     0x001d0250, /* +0x4d2c */
     0x001d0258, /* +0x4d30 */
     0x00000000, /* +0x4d34 */
@@ -4951,8 +4951,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4d50 */
     0x001d01fc, /* +0x4d54 */
     0x001d0204, /* +0x4d58 */
-    0x001d1da8, /* -> FUN_001d1da8 */ /* +0x4d5c */
-    0x001d1ddc, /* -> FUN_001d1ddc */ /* +0x4d60 */
+    0x001d1da8, /* -> IrMulLit__dtor */ /* +0x4d5c */
+    0x001d1ddc, /* -> IrMulLit__deleting_dtor */ /* +0x4d60 */
     0x001d0250, /* +0x4d64 */
     0x001d0258, /* +0x4d68 */
     0x00000000, /* +0x4d6c */
@@ -4965,8 +4965,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4d88 */
     0x001d01fc, /* +0x4d8c */
     0x001d0204, /* +0x4d90 */
-    0x001d1d40, /* -> FUN_001d1d40 */ /* +0x4d94 */
-    0x001d1d74, /* -> FUN_001d1d74 */ /* +0x4d98 */
+    0x001d1d40, /* -> IrPsColorFog__dtor */ /* +0x4d94 */
+    0x001d1d74, /* -> IrPsColorFog__deleting_dtor */ /* +0x4d98 */
     0x001d0250, /* +0x4d9c */
     0x001d0258, /* +0x4da0 */
     0x00000000, /* +0x4da4 */
@@ -4979,8 +4979,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4dc0 */
     0x001d01fc, /* +0x4dc4 */
     0x001d0204, /* +0x4dc8 */
-    0x001d1cd8, /* -> FUN_001d1cd8 */ /* +0x4dcc */
-    0x001d1d0c, /* -> FUN_001d1d0c */ /* +0x4dd0 */
+    0x001d1cd8, /* -> IrEmit__dtor */ /* +0x4dcc */
+    0x001d1d0c, /* -> IrEmit__deleting_dtor */ /* +0x4dd0 */
     0x001d0250, /* +0x4dd4 */
     0x001d0258, /* +0x4dd8 */
     0x00000000, /* +0x4ddc */
@@ -4993,8 +4993,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d0e04, /* +0x4df8 */
     0x001d01fc, /* +0x4dfc */
     0x001d0204, /* +0x4e00 */
-    0x001d1c70, /* -> FUN_001d1c70 */ /* +0x4e04 */
-    0x001d1ca4, /* -> FUN_001d1ca4 */ /* +0x4e08 */
+    0x001d1c70, /* -> IrDyamicReturn__dtor */ /* +0x4e04 */
+    0x001d1ca4, /* -> IrDyamicReturn__deleting_dtor */ /* +0x4e08 */
     0x001d0250, /* +0x4e0c */
     0x001d0258, /* +0x4e10 */
     0x00000000, /* +0x4e14 */
@@ -5007,8 +5007,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4e30 */
     0x001d01fc, /* +0x4e34 */
     0x001d0204, /* +0x4e38 */
-    0x001d1c08, /* -> FUN_001d1c08 */ /* +0x4e3c */
-    0x001d1c3c, /* -> FUN_001d1c3c */ /* +0x4e40 */
+    0x001d1c08, /* -> IrMemInit__dtor */ /* +0x4e3c */
+    0x001d1c3c, /* -> IrMemInit__deleting_dtor */ /* +0x4e40 */
     0x001d0250, /* +0x4e44 */
     0x001d0258, /* +0x4e48 */
     0x00000000, /* +0x4e4c */
@@ -5021,8 +5021,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4e68 */
     0x001d01fc, /* +0x4e6c */
     0x001d0204, /* +0x4e70 */
-    0x001d1ba0, /* -> FUN_001d1ba0 */ /* +0x4e74 */
-    0x001d1bd4, /* -> FUN_001d1bd4 */ /* +0x4e78 */
+    0x001d1ba0, /* -> IrScratchLoad__dtor */ /* +0x4e74 */
+    0x001d1bd4, /* -> IrScratchLoad__deleting_dtor */ /* +0x4e78 */
     0x001d0250, /* +0x4e7c */
     0x001d0258, /* +0x4e80 */
     0x00000000, /* +0x4e84 */
@@ -5035,8 +5035,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4ea0 */
     0x001d01fc, /* +0x4ea4 */
     0x001d0204, /* +0x4ea8 */
-    0x001d1b38, /* -> FUN_001d1b38 */ /* +0x4eac */
-    0x001d1b6c, /* -> FUN_001d1b6c */ /* +0x4eb0 */
+    0x001d1b38, /* -> IrScratchStore__dtor */ /* +0x4eac */
+    0x001d1b6c, /* -> IrScratchStore__deleting_dtor */ /* +0x4eb0 */
     0x001d0250, /* +0x4eb4 */
     0x001d0258, /* +0x4eb8 */
     0x00000000, /* +0x4ebc */
@@ -5049,8 +5049,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d0df8, /* +0x4ed8 */
     0x001d01fc, /* +0x4edc */
     0x001d0204, /* +0x4ee0 */
-    0x001d1ad0, /* -> FUN_001d1ad0 */ /* +0x4ee4 */
-    0x001d1b04, /* -> FUN_001d1b04 */ /* +0x4ee8 */
+    0x001d1ad0, /* -> IrWhileStart__dtor */ /* +0x4ee4 */
+    0x001d1b04, /* -> IrWhileStart__deleting_dtor */ /* +0x4ee8 */
     0x001d0250, /* +0x4eec */
     0x001d0258, /* +0x4ef0 */
     0x00000000, /* +0x4ef4 */
@@ -5063,8 +5063,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4f10 */
     0x001d01fc, /* +0x4f14 */
     0x001d0204, /* +0x4f18 */
-    0x001d1a68, /* -> FUN_001d1a68 */ /* +0x4f1c */
-    0x001d1a9c, /* -> FUN_001d1a9c */ /* +0x4f20 */
+    0x001d1a68, /* -> IrCbLoad__dtor */ /* +0x4f1c */
+    0x001d1a9c, /* -> IrCbLoad__deleting_dtor */ /* +0x4f20 */
     0x001d0250, /* +0x4f24 */
     0x001d0258, /* +0x4f28 */
     0x00000000, /* +0x4f2c */
@@ -5077,8 +5077,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4f48 */
     0x001d01fc, /* +0x4f4c */
     0x001d0204, /* +0x4f50 */
-    0x001d1a00, /* -> FUN_001d1a00 */ /* +0x4f54 */
-    0x001d1a34, /* -> FUN_001d1a34 */ /* +0x4f58 */
+    0x001d1a00, /* -> IrFetchLoad__dtor */ /* +0x4f54 */
+    0x001d1a34, /* -> IrFetchLoad__deleting_dtor */ /* +0x4f58 */
     0x001d0250, /* +0x4f5c */
     0x001d0258, /* +0x4f60 */
     0x00000000, /* +0x4f64 */
@@ -5091,8 +5091,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4f80 */
     0x001d01fc, /* +0x4f84 */
     0x001d0204, /* +0x4f88 */
-    0x001d1998, /* -> FUN_001d1998 */ /* +0x4f8c */
-    0x001d19cc, /* -> FUN_001d19cc */ /* +0x4f90 */
+    0x001d1998, /* -> IrSampleC__dtor */ /* +0x4f8c */
+    0x001d19cc, /* -> IrSampleC__deleting_dtor */ /* +0x4f90 */
     0x001d0250, /* +0x4f94 */
     0x001d0258, /* +0x4f98 */
     0x00000000, /* +0x4f9c */
@@ -5105,8 +5105,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4fb8 */
     0x001d01fc, /* +0x4fbc */
     0x001d0204, /* +0x4fc0 */
-    0x001d1930, /* -> FUN_001d1930 */ /* +0x4fc4 */
-    0x001d1964, /* -> FUN_001d1964 */ /* +0x4fc8 */
+    0x001d1930, /* -> IrSampleL__dtor */ /* +0x4fc4 */
+    0x001d1964, /* -> IrSampleL__deleting_dtor */ /* +0x4fc8 */
     0x001d0250, /* +0x4fcc */
     0x001d0258, /* +0x4fd0 */
     0x00000000, /* +0x4fd4 */
@@ -5119,8 +5119,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x4ff0 */
     0x001d01fc, /* +0x4ff4 */
     0x001d0204, /* +0x4ff8 */
-    0x001d18c8, /* -> FUN_001d18c8 */ /* +0x4ffc */
-    0x001d18fc, /* -> FUN_001d18fc */ /* +0x5000 */
+    0x001d18c8, /* -> IrSampleCLZ__dtor */ /* +0x4ffc */
+    0x001d18fc, /* -> IrSampleCLZ__deleting_dtor */ /* +0x5000 */
     0x001d0250, /* +0x5004 */
     0x001d0258, /* +0x5008 */
     0x00000000, /* +0x500c */
@@ -5133,8 +5133,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x5028 */
     0x001d01fc, /* +0x502c */
     0x001d0204, /* +0x5030 */
-    0x001d1860, /* -> FUN_001d1860 */ /* +0x5034 */
-    0x001d1894, /* -> FUN_001d1894 */ /* +0x5038 */
+    0x001d1860, /* -> IrSampleG__dtor */ /* +0x5034 */
+    0x001d1894, /* -> IrSampleG__deleting_dtor */ /* +0x5038 */
     0x001d0250, /* +0x503c */
     0x001d0258, /* +0x5040 */
     0x00000000, /* +0x5044 */
@@ -5147,8 +5147,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x5060 */
     0x001d01fc, /* +0x5064 */
     0x001d0204, /* +0x5068 */
-    0x001d17f8, /* -> FUN_001d17f8 */ /* +0x506c */
-    0x001d182c, /* -> FUN_001d182c */ /* +0x5070 */
+    0x001d17f8, /* -> IrLdBuffer__dtor */ /* +0x506c */
+    0x001d182c, /* -> IrLdBuffer__deleting_dtor */ /* +0x5070 */
     0x001d0250, /* +0x5074 */
     0x001d0258, /* +0x5078 */
     0x00000000, /* +0x507c */
@@ -5161,8 +5161,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x5098 */
     0x001d01fc, /* +0x509c */
     0x001d0204, /* +0x50a0 */
-    0x001d1790, /* -> FUN_001d1790 */ /* +0x50a4 */
-    0x001d17c4, /* -> FUN_001d17c4 */ /* +0x50a8 */
+    0x001d1790, /* -> IrCut__dtor */ /* +0x50a4 */
+    0x001d17c4, /* -> IrCut__deleting_dtor */ /* +0x50a8 */
     0x001d0250, /* +0x50ac */
     0x001d0258, /* +0x50b0 */
     0x00000000, /* +0x50b4 */
@@ -5175,8 +5175,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d0e08, /* +0x50d0 */
     0x001d01fc, /* +0x50d4 */
     0x001d0204, /* +0x50d8 */
-    0x001d1728, /* -> FUN_001d1728 */ /* +0x50dc */
-    0x001d175c, /* -> FUN_001d175c */ /* +0x50e0 */
+    0x001d1728, /* -> IrDyamicReturnSwitch__dtor */ /* +0x50dc */
+    0x001d175c, /* -> IrDyamicReturnSwitch__deleting_dtor */ /* +0x50e0 */
     0x001d0250, /* +0x50e4 */
     0x001d0258, /* +0x50e8 */
     0x00000000, /* +0x50ec */
@@ -5189,8 +5189,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x5108 */
     0x001d01fc, /* +0x510c */
     0x001d0204, /* +0x5110 */
-    0x001d16c0, /* -> FUN_001d16c0 */ /* +0x5114 */
-    0x001d16f4, /* -> FUN_001d16f4 */ /* +0x5118 */
+    0x001d16c0, /* -> IrEmitThenCut__dtor */ /* +0x5114 */
+    0x001d16f4, /* -> IrEmitThenCut__deleting_dtor */ /* +0x5118 */
     0x001d0250, /* +0x511c */
     0x001d0258, /* +0x5120 */
     0x00000000, /* +0x5124 */
@@ -5203,8 +5203,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x5140 */
     0x001d01fc, /* +0x5144 */
     0x001d0204, /* +0x5148 */
-    0x001d1658, /* -> FUN_001d1658 */ /* +0x514c */
-    0x001d168c, /* -> FUN_001d168c */ /* +0x5150 */
+    0x001d1658, /* -> IrGetResource__dtor */ /* +0x514c */
+    0x001d168c, /* -> IrGetResource__deleting_dtor */ /* +0x5150 */
     0x001d0250, /* +0x5154 */
     0x001d0258, /* +0x5158 */
     0x00000000, /* +0x515c */
@@ -5217,8 +5217,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x5178 */
     0x001d01fc, /* +0x517c */
     0x001d0204, /* +0x5180 */
-    0x001d15f0, /* -> FUN_001d15f0 */ /* +0x5184 */
-    0x001d1624, /* -> FUN_001d1624 */ /* +0x5188 */
+    0x001d15f0, /* -> IrImmedConstBuffer__dtor */ /* +0x5184 */
+    0x001d1624, /* -> IrImmedConstBuffer__deleting_dtor */ /* +0x5188 */
     0x001d0250, /* +0x518c */
     0x001d0258, /* +0x5190 */
     0x00000000, /* +0x5194 */
@@ -5231,8 +5231,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d01f8, /* +0x51b0 */
     0x001d01fc, /* +0x51b4 */
     0x001d0204, /* +0x51b8 */
-    0x001d1588, /* -> FUN_001d1588 */ /* +0x51bc */
-    0x001d15bc, /* -> FUN_001d15bc */ /* +0x51c0 */
+    0x001d1588, /* -> IrImmedConstLoad__dtor */ /* +0x51bc */
+    0x001d15bc, /* -> IrImmedConstLoad__deleting_dtor */ /* +0x51c0 */
     0x001d0250, /* +0x51c4 */
     0x001d0258, /* +0x51c8 */
     0x00000000, /* +0x51cc */
@@ -5276,8 +5276,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x5264 */
     0x00000000, /* +0x5268 */
     0x001f60f8, /* -> __const_coal+0x51f0 */ /* +0x526c */
-    0x001d7950, /* -> FUN_001d7950 */ /* +0x5270 */
-    0x001d7974, /* -> FUN_001d7974 */ /* +0x5274 */
+    0x001d7950, /* -> VRegInfo__dtor */ /* +0x5270 */
+    0x001d7974, /* -> VRegInfo__deleting_dtor */ /* +0x5274 */
     0x001d78a8, /* +0x5278 */
     0x001d78b0, /* +0x527c */
     0x001d78b8, /* +0x5280 */
@@ -5290,8 +5290,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d78f0, /* +0x529c */
     0x00000000, /* +0x52a0 */
     0x001f61e0, /* -> __const_coal+0x52d8 */ /* +0x52a4 */
-    0x001d7cdc, /* -> FUN_001d7cdc */ /* +0x52a8 */
-    0x001d7d10, /* -> FUN_001d7d10 */ /* +0x52ac */
+    0x001d7cdc, /* -> ExportAddress__dtor */ /* +0x52a8 */
+    0x001d7d10, /* -> ExportAddress__deleting_dtor */ /* +0x52ac */
     0x001d78a8, /* +0x52b0 */
     0x001d78b0, /* +0x52b4 */
     0x001d78b8, /* +0x52b8 */
@@ -5308,8 +5308,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x52e4 */
     0x00000000, /* +0x52e8 */
     0x001f6228, /* -> __const_coal+0x5320 */ /* +0x52ec */
-    0x001d8228, /* -> FUN_001d8228 */ /* +0x52f0 */
-    0x001d826c, /* -> FUN_001d826c */ /* +0x52f4 */
+    0x001d8228, /* -> LoopIndexedOutputSet__dtor */ /* +0x52f0 */
+    0x001d826c, /* -> LoopIndexedOutputSet__deleting_dtor */ /* +0x52f4 */
     0x001d78a8, /* +0x52f8 */
     0x001d78b0, /* +0x52fc */
     0x001d78b8, /* +0x5300 */
@@ -5330,8 +5330,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x533c */
     0x00000000, /* +0x5340 */
     0x001f6238, /* -> __const_coal+0x5330 */ /* +0x5344 */
-    0x001d7c60, /* -> FUN_001d7c60 */ /* +0x5348 */
-    0x001d7c94, /* -> FUN_001d7c94 */ /* +0x534c */
+    0x001d7c60, /* -> LoopIndexedSet__dtor */ /* +0x5348 */
+    0x001d7c94, /* -> LoopIndexedSet__deleting_dtor */ /* +0x534c */
     0x001d78a8, /* +0x5350 */
     0x001d78b0, /* +0x5354 */
     0x001d78b8, /* +0x5358 */
@@ -5344,8 +5344,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001d78f0, /* +0x5374 */
     0x00000000, /* +0x5378 */
     0x001f62b8, /* -> __const_coal+0x53b0 */ /* +0x537c */
-    0x001d818c, /* -> FUN_001d818c */ /* +0x5380 */
-    0x001d81d0, /* -> FUN_001d81d0 */ /* +0x5384 */
+    0x001d818c, /* -> LoopIndexedInputSet__dtor */ /* +0x5380 */
+    0x001d81d0, /* -> LoopIndexedInputSet__deleting_dtor */ /* +0x5384 */
     0x001d78a8, /* +0x5388 */
     0x001d78b0, /* +0x538c */
     0x001d78b8, /* +0x5390 */
@@ -5362,8 +5362,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x53bc */
     0x00000000, /* +0x53c0 */
     0x001f6300, /* -> __const_coal+0x53f8 */ /* +0x53c4 */
-    0x001d80f0, /* -> FUN_001d80f0 */ /* +0x53c8 */
-    0x001d8134, /* -> FUN_001d8134 */ /* +0x53cc */
+    0x001d80f0, /* -> LoopIndexedConstSet__dtor */ /* +0x53c8 */
+    0x001d8134, /* -> LoopIndexedConstSet__deleting_dtor */ /* +0x53cc */
     0x001d78a8, /* +0x53d0 */
     0x001d78b0, /* +0x53d4 */
     0x001d78b8, /* +0x53d8 */
@@ -5380,8 +5380,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x5404 */
     0x00000000, /* +0x5408 */
     0x001f6348, /* -> __const_coal+0x5440 */ /* +0x540c */
-    0x001d7be4, /* -> FUN_001d7be4 */ /* +0x5410 */
-    0x001d7c18, /* -> FUN_001d7c18 */ /* +0x5414 */
+    0x001d7be4, /* -> LoopRegister__dtor */ /* +0x5410 */
+    0x001d7c18, /* -> LoopRegister__deleting_dtor */ /* +0x5414 */
     0x001d78a8, /* +0x5418 */
     0x001d78b0, /* +0x541c */
     0x001d78b8, /* +0x5420 */
@@ -5398,8 +5398,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x544c */
     0x00000000, /* +0x5450 */
     0x001f6390, /* -> __const_coal+0x5488 */ /* +0x5454 */
-    0x001d7b68, /* -> FUN_001d7b68 */ /* +0x5458 */
-    0x001d7b9c, /* -> FUN_001d7b9c */ /* +0x545c */
+    0x001d7b68, /* -> AddrIndexedSet__dtor */ /* +0x5458 */
+    0x001d7b9c, /* -> AddrIndexedSet__deleting_dtor */ /* +0x545c */
     0x001d78a8, /* +0x5460 */
     0x001d78b0, /* +0x5464 */
     0x001d78b8, /* +0x5468 */
@@ -5416,9 +5416,9 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x5494 */
     0x00000000, /* +0x5498 */
     0x001f63d8, /* -> __const_coal+0x54d0 */ /* +0x549c */
-    0x001d7a3c, /* -> FUN_001d7a3c */ /* +0x54a0 */
-    0x001d79f4, /* -> FUN_001d79f4 */ /* +0x54a4 */
-    0x001240a8, /* -> FUN_001240a8 */ /* +0x54a8 */
+    0x001d7a3c, /* -> TempValue__dtor_1d7a3c */ /* +0x54a0 */
+    0x001d79f4, /* -> TempValue__dtor_1d79f4 */ /* +0x54a4 */
+    0x001240a8, /* -> TempValue__vslot2 */ /* +0x54a8 */
     0x001d78b0, /* +0x54ac */
     0x001d78b8, /* +0x54b0 */
     0x001d78c0, /* +0x54b4 */
@@ -5434,9 +5434,9 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x54dc */
     0x00000000, /* +0x54e0 */
     0x001f6420, /* -> __const_coal+0x5518 */ /* +0x54e4 */
-    0x001d7ab8, /* -> FUN_001d7ab8 */ /* +0x54e8 */
-    0x001d7a70, /* -> FUN_001d7a70 */ /* +0x54ec */
-    0x001240a8, /* -> FUN_001240a8 */ /* +0x54f0 */
+    0x001d7ab8, /* -> TempValue__dtor_1d7ab8 */ /* +0x54e8 */
+    0x001d7a70, /* -> TempValue__dtor_1d7a70 */ /* +0x54ec */
+    0x001240a8, /* -> TempValue__vslot2 */ /* +0x54f0 */
     0x001d78b0, /* +0x54f4 */
     0x001d78b8, /* +0x54f8 */
     0x001d78c0, /* +0x54fc */
@@ -5452,8 +5452,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x5524 */
     0x00000000, /* +0x5528 */
     0x001f6468, /* -> __const_coal+0x5560 */ /* +0x552c */
-    0x001d7aec, /* -> FUN_001d7aec */ /* +0x5530 */
-    0x001d7b20, /* -> FUN_001d7b20 */ /* +0x5534 */
+    0x001d7aec, /* -> Physical__dtor */ /* +0x5530 */
+    0x001d7b20, /* -> Physical__deleting_dtor */ /* +0x5534 */
     0x001d78a8, /* +0x5538 */
     0x001d78b0, /* +0x553c */
     0x001d78b8, /* +0x5540 */
@@ -5486,9 +5486,9 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x55ac */
     0x00000000, /* +0x55b0 */
     0x001f6510, /* -> __const_coal+0x5608 */ /* +0x55b4 */
-    0x001d8608, /* -> FUN_001d8608 */ /* +0x55b8 */
-    0x001d85a0, /* -> FUN_001d85a0 */ /* +0x55bc */
-    0x000e9e88, /* -> FUN_000e9e88 */ /* +0x55c0 */
+    0x001d8608, /* -> MirrorBlock__dtor */ /* +0x55b8 */
+    0x001d85a0, /* -> MirrorBlock__deleting_dtor */ /* +0x55bc */
+    0x000e9e88, /* -> Block__clone */ /* +0x55c0 */
     0x001cdbf8, /* +0x55c4 */
     0x001cdbfc, /* +0x55c8 */
     0x001cdc04, /* +0x55cc */
@@ -5512,8 +5512,8 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x00000000, /* +0x5614 */
     0x00000000, /* +0x5618 */
     0x001f6530, /* -> __const_coal+0x5628 */ /* +0x561c */
-    0x001d862c, /* -> FUN_001d862c */ /* +0x5620 */
-    0x001d8660, /* -> FUN_001d8660 */ /* +0x5624 */
+    0x001d862c, /* -> SchedNode__dtor */ /* +0x5620 */
+    0x001d8660, /* -> SchedNode__deleting_dtor */ /* +0x5624 */
     0x00000008, /* +0x5628 */
     0x001cd588, /* +0x562c */
     0x001f1018, /* -> __const_coal+0x110 */ /* +0x5630 */

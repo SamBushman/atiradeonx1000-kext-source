@@ -1,7 +1,7 @@
 #include "decls.h"
 
-/* FUN_000ebff8 @ 0xebff8 (64 bytes) */
-int FUN_000ebff8(param_1)
+/* ContinueBlock__clone @ 0xebff8 (64 bytes) */
+int ContinueBlock__clone(param_1)
   int param_1;
 {
   undefined4 *allocation;
@@ -10,60 +10,60 @@ int FUN_000ebff8(param_1)
   arena = *(undefined4 *)(*(int *)(param_1 + 0xa8) + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x138);
   *allocation = arena;
-  FUN_000ebfb4(allocation + 1,param_1);
+  ContinueBlock__ctor_ebfb4(allocation + 1,param_1);
   return allocation + 1;
 }
 
-/* FUN_000ec070 @ 0xec070 (88 bytes) */
-int FUN_000ec070(this, param_2, param_3, compiler)
+/* BreakBlock__ctor_ec070 @ 0xec070 (88 bytes) */
+int BreakBlock__ctor_ec070(this, param_2, param_3, compiler)
   undefined4 *this;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 compiler;
 {
-  FUN_000ea148(this,compiler);
+  Block__ctor_ea148(this,compiler);
   this[0x4b] = param_2;
   this[0x4c] = param_3;
   *this = &PTR_FUN_001e9e20;
   return;
 }
 
-/* FUN_000ec0c8 @ 0xec0c8 (88 bytes) */
-int FUN_000ec0c8(this, param_2, param_3, compiler)
+/* BreakBlock__ctor_ec0c8 @ 0xec0c8 (88 bytes) */
+int BreakBlock__ctor_ec0c8(this, param_2, param_3, compiler)
   undefined4 *this;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 compiler;
 {
-  FUN_000ea148(this,compiler);
+  Block__ctor_ea148(this,compiler);
   this[0x4b] = param_2;
   this[0x4c] = param_3;
   *this = &PTR_FUN_001e9e20;
   return;
 }
 
-/* FUN_000ec120 @ 0xec120 (88 bytes) */
-int FUN_000ec120(this, param_2, param_3, compiler)
+/* ContinueBlock__ctor_ec120 @ 0xec120 (88 bytes) */
+int ContinueBlock__ctor_ec120(this, param_2, param_3, compiler)
   undefined4 *this;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 compiler;
 {
-  FUN_000ea148(this,compiler);
+  Block__ctor_ea148(this,compiler);
   this[0x4b] = param_2;
   this[0x4c] = param_3;
   *this = &PTR_FUN_001e9e78;
   return;
 }
 
-/* FUN_000ec178 @ 0xec178 (88 bytes) */
-int FUN_000ec178(this, param_2, param_3, compiler)
+/* ContinueBlock__ctor_ec178 @ 0xec178 (88 bytes) */
+int ContinueBlock__ctor_ec178(this, param_2, param_3, compiler)
   undefined4 *this;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 compiler;
 {
-  FUN_000ea148(this,compiler);
+  Block__ctor_ea148(this,compiler);
   this[0x4b] = param_2;
   this[0x4c] = param_3;
   *this = &PTR_FUN_001e9e78;
@@ -613,7 +613,7 @@ int FUN_000eced0(param_1)
   arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x168);
   *allocation = arena;
-  FUN_0010502c(allocation + 1,0x93,*(undefined4 *)(param_1 + 8));
+  IRInst__ctor_10502c(allocation + 1,0x93,*(undefined4 *)(param_1 + 8));
   *(undefined4 **)(param_1 + 0x33c) = allocation + 1;
   allocation[0x27] = 0x2d;
   allocation[0x26] = 0;
@@ -968,7 +968,7 @@ LAB_000eda98:
             allocation = (undefined4 *)FUN_00193e18(arenaAt374,0x168);
             *allocation = arenaAt374;
             puVar7 = allocation + 1;
-            FUN_00109e28(puVar7,0x84,*(undefined4 *)(param_1 + 8));
+            IRProjection__ctor_109e28(puVar7,0x84,*(undefined4 *)(param_1 + 8));
             FUN_001046c8(puVar7,0,uVar14);
             allocation[0x28] = uVar11;
             FUN_001046c8(puVar7,1,arena);
@@ -1802,7 +1802,7 @@ LAB_000eed14:
     allocation = (undefined4 *)FUN_00193e18(arena,0x168);
     *allocation = arena;
     puVar11 = allocation + 1;
-    FUN_00108918(puVar11,*(undefined4 *)(param_1 + 8));
+    IRExport__ctor_108918(puVar11,*(undefined4 *)(param_1 + 8));
     *(undefined4 **)(param_1 + 0x348) = puVar11;
     iVar7 = FUN_001054ec(puVar11,0);
     arena = DAT_001aa800;
@@ -1933,7 +1933,7 @@ int FUN_000eee4c(param_1)
                 allocation = (undefined4 *)FUN_00193e18(arena,0x168);
                 *allocation = arena;
                 piVar8 = allocation + 1;
-                FUN_00109e28(piVar8,0x84,*(undefined4 *)(param_1 + 8));
+                IRProjection__ctor_109e28(piVar8,0x84,*(undefined4 *)(param_1 + 8));
                 allocation[0x4b] = iVar3;
                 pcVar10 = *(code **)(*piVar4 + 0x28);
                 iVar6 = FUN_001054ec(piVar12,0);
@@ -2201,14 +2201,14 @@ int FUN_000ef498(param_1, param_2)
   allocation = (undefined4 *)FUN_00193e18(arena,0x134);
   *allocation = arena;
   allocation = allocation + 1;
-  FUN_000eab70(allocation,*(undefined4 *)(param_1 + 8));
+  EntryBlock__ctor_eab70(allocation,*(undefined4 *)(param_1 + 8));
   *(undefined4 **)(param_1 + 0x3a0) = allocation;
   ((int (*)())FUN_000ec3e8)(param_1,allocation);
   arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x130);
   *allocation = arena;
   allocation = allocation + 1;
-  FUN_000eaae8(allocation,*(undefined4 *)(param_1 + 8));
+  ExitBlock__ctor_eaae8(allocation,*(undefined4 *)(param_1 + 8));
   *(undefined4 **)(param_1 + 0x3a8) = allocation;
   ((int (*)())FUN_000ec42c)(param_1,allocation);
   FUN_00127994(*(undefined4 *)(param_1 + 0x3ac),*(uint *)(param_1 + 0x30) & 1);
@@ -2493,14 +2493,14 @@ int FUN_000efde4(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
     allocation = (undefined4 *)FUN_00193e18(arena,0x168);
     *allocation = arena;
     allocation = allocation + 1;
-    FUN_0010502c(allocation,0x95,*(undefined4 *)(param_1 + 8));
+    IRInst__ctor_10502c(allocation,0x95,*(undefined4 *)(param_1 + 8));
   }
   else {
     arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
     allocation = (undefined4 *)FUN_00193e18(arena,0x168);
     *allocation = arena;
     allocation = allocation + 1;
-    FUN_0010502c(allocation,0x96,*(undefined4 *)(param_1 + 8));
+    IRInst__ctor_10502c(allocation,0x96,*(undefined4 *)(param_1 + 8));
   }
   *(undefined4 **)(param_1 + 0x33c) = allocation;
   iVar5 = *(int *)(param_1 + 0x33c);
@@ -3219,7 +3219,7 @@ int FUN_000f14f8(param_1, inst, inst2)
   arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
   allocation = (undefined4 *)FUN_00193e18(arena,0x168);
   *allocation = arena;
-  FUN_0010502c(allocation + 1,0x93,*(undefined4 *)(param_1 + 8));
+  IRInst__ctor_10502c(allocation + 1,0x93,*(undefined4 *)(param_1 + 8));
   *(undefined4 **)(param_1 + 0x340) = allocation + 1;
   allocation[0x27] = 0x2e;
   allocation[0x26] = 0;
@@ -4077,7 +4077,7 @@ int FUN_000f2d08(param_1)
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_000ebff8");
-asm(".set FUN_000ebff8, _FUN_000ebff8");
+asm(".set FUN_000ebff8, _ContinueBlock__clone");
 asm(".globl FUN_000eca10");
 asm(".set FUN_000eca10, _FUN_000eca10");
 asm(".globl FUN_000ecad0");

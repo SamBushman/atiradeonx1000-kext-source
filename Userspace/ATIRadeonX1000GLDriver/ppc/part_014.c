@@ -882,12 +882,12 @@ int FUN_00094840(param_1, param_2, param_3, param_4, param_5)
             uVar5 = *(undefined4 *)param_1[0xfc];
             if ((param_3 < 3) && (param_5 != 0)) {
               if (param_3 != 0) {
-                local_88 = FUN_001d4850;
+                local_88 = IrFetchTextureMapBias__dtor;
                 local_8c = &PTR_DAT_001f4850;
-                local_6c = FUN_001d4850;
-                local_68 = FUN_001d4850;
-                local_64 = FUN_001d4850;
-                local_70 = FUN_001d4850;
+                local_6c = IrFetchTextureMapBias__dtor;
+                local_68 = IrFetchTextureMapBias__dtor;
+                local_64 = IrFetchTextureMapBias__dtor;
+                local_70 = IrFetchTextureMapBias__dtor;
                 do {
                   uVar13 = 0;
                   uVar10 = local_1b4;
@@ -922,7 +922,7 @@ int FUN_00094840(param_1, param_2, param_3, param_4, param_5)
                   }
                 } while( true );
               }
-              local_88 = FUN_001d4850;
+              local_88 = IrFetchTextureMapBias__dtor;
               local_8c = &PTR_DAT_001f4850;
 LAB_0009510c:
               uVar6 = *puVar8;
@@ -939,12 +939,12 @@ LAB_0009510c:
             }
             else {
               if (param_3 != 0) {
-                local_88 = FUN_001d4850;
+                local_88 = IrFetchTextureMapBias__dtor;
                 local_8c = &PTR_DAT_001f4850;
-                local_6c = FUN_001d4850;
-                local_68 = FUN_001d4850;
-                local_64 = FUN_001d4850;
-                local_70 = FUN_001d4850;
+                local_6c = IrFetchTextureMapBias__dtor;
+                local_68 = IrFetchTextureMapBias__dtor;
+                local_64 = IrFetchTextureMapBias__dtor;
+                local_70 = IrFetchTextureMapBias__dtor;
 LAB_00095234:
                 uVar13 = 0;
                 pcVar7 = local_6c + 0x74b4;
@@ -985,12 +985,12 @@ LAB_00095234:
                   piVar4 = piVar4 + 1;
                 } while( true );
               }
-              local_88 = FUN_001d4850;
+              local_88 = IrFetchTextureMapBias__dtor;
               local_8c = &PTR_DAT_001f4850;
-              local_6c = FUN_001d4850;
-              local_68 = FUN_001d4850;
-              local_64 = FUN_001d4850;
-              local_70 = FUN_001d4850;
+              local_6c = IrFetchTextureMapBias__dtor;
+              local_68 = IrFetchTextureMapBias__dtor;
+              local_64 = IrFetchTextureMapBias__dtor;
+              local_70 = IrFetchTextureMapBias__dtor;
 LAB_000953b4:
               uVar6 = *puVar8;
               iVar1 = param_1[0xfe];
@@ -1045,21 +1045,21 @@ LAB_000953b4:
               uVar10 = *(undefined4 *)param_1[0xfc];
               uVar6 = puVar8[2];
               if (param_3 == 0) {
-                local_5c = FUN_001d4850;
-                local_88 = FUN_001d4850;
+                local_5c = IrFetchTextureMapBias__dtor;
+                local_88 = IrFetchTextureMapBias__dtor;
                 local_8c = &PTR_DAT_001f4850;
-                local_80 = FUN_001d4850;
-                local_74 = FUN_001d4850;
-                local_78 = FUN_001d4850;
+                local_80 = IrFetchTextureMapBias__dtor;
+                local_74 = IrFetchTextureMapBias__dtor;
+                local_78 = IrFetchTextureMapBias__dtor;
                 local_7c = &PTR_DAT_001f4850;
               }
               else {
-                local_5c = FUN_001d4850;
-                local_88 = FUN_001d4850;
+                local_5c = IrFetchTextureMapBias__dtor;
+                local_88 = IrFetchTextureMapBias__dtor;
                 local_8c = &PTR_DAT_001f4850;
-                local_80 = FUN_001d4850;
-                local_78 = FUN_001d4850;
-                local_74 = FUN_001d4850;
+                local_80 = IrFetchTextureMapBias__dtor;
+                local_78 = IrFetchTextureMapBias__dtor;
+                local_74 = IrFetchTextureMapBias__dtor;
                 uVar13 = 0;
                 local_7c = &PTR_DAT_001f4850;
                 puVar8 = local_13c;
@@ -3137,8 +3137,8 @@ LAB_00098818:
   a4 = **(int **)(param_1 + 0x3ec);
   if (param_7 == 0) {
     local_64 = &DAT_001f8514;
-    local_60 = FUN_001d8514;
-    local_80 = FUN_001d8514;
+    local_60 = KhanVs__deleting_dtor_1d8514;
+    local_80 = KhanVs__deleting_dtor_1d8514;
     iVarS11 = *(int *)((int)*(int *)((int)param_1 + 1004) + 8);
     iVarS12 = *(int *)((int)iVar16 + 36);
     iVarS13 = &DAT_001dbd14;
@@ -3154,8 +3154,8 @@ LAB_00098818:
   }
   else {
     local_64 = &DAT_001f8514;
-    local_60 = FUN_001d8514;
-    local_80 = FUN_001d8514;
+    local_60 = KhanVs__deleting_dtor_1d8514;
+    local_80 = KhanVs__deleting_dtor_1d8514;
     iVarS52 = *(int *)((int)*(int *)((int)param_1 + 1004) + 8);
     iVarS53 = *(int *)((int)iVar16 + 36);
     iVarS54 = &DAT_001dbd14;
@@ -3164,7 +3164,7 @@ LAB_00098818:
               (param_1,a1,local_1e4,auStack_1e0,a4,iVar4,&DAT_001dbcd4,&DAT_001fa5e8,iVarS52,iVarS53,iVarS54,&DAT_001fa5e8,a4,iVar4,iVarS54,iVarS55);
   }
   local_6c = auStack_108;
-  local_74 = FUN_001d8514;
+  local_74 = KhanVs__deleting_dtor_1d8514;
   pcVar21 = 0x000020d4 + (int)local_64;
   (**(code **)(((unsigned char *)0x000012e4) + iVar9))
             (param_1,a1,local_194,&DAT_001dbd04,a4,local_1e4,&DAT_001dbd74,pcVar21,a4,local_1e4,&DAT_001dbd74,pcVar21);
@@ -3414,16 +3414,16 @@ LAB_00099084:
             FUN_000911a0(param_1,local_78);
 LAB_000994dc:
             puVar12 = &local_f4;
-            local_98 = FUN_001d8514;
-            local_94 = FUN_001d8514;
+            local_98 = KhanVs__deleting_dtor_1d8514;
+            local_94 = KhanVs__deleting_dtor_1d8514;
             bVar1 = local_a4 != 0;
-            local_8c = FUN_001d8514;
+            local_8c = KhanVs__deleting_dtor_1d8514;
             bVar3 = iStack00000020 == 0;
             local_9c = 0x81fa;
             local_a8 = 0;
-            local_90 = FUN_001d8514;
+            local_90 = KhanVs__deleting_dtor_1d8514;
             puVar23 = local_68 + 8;
-            local_88 = FUN_001d8514;
+            local_88 = KhanVs__deleting_dtor_1d8514;
             iVar4 = iVar9;
             iVar13 = param_1;
             iVar14 = param_1;

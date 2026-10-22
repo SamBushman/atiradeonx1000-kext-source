@@ -16,6 +16,13 @@ including, the first later line matching `to` (empty `to` = end of function). On
 `use` rows for a variable must not also have a `local` row for it. The declaration of `new` is added next to old's (same type); old's declaration is
 dropped when nothing uses it any more. Only locals (declared after the `{`) can be split.
 
+    func<TAB>OLDNAME<TAB>NEWNAME<TAB>tier<TAB>evidence     rename the FUNCTION `OLDNAME` (its Ghidra name, normally FUN_<addr>) to NEWNAME everywhere the corpus names it:
+        part_*.c (header comment, definition, calls), decls.h, extra_decls.h, ledger.tsv, data/*.c, landing_pads/, and the other *.tsv tables that carry a name
+        column (not names_*.tsv, class_methods.tsv or notes). The address in the header comment `/* NAME @ 0xADDR (N bytes) */` is kept, so the
+        binary<->corpus mapping by address stays. `func` rows are applied AFTER every `local`/`use` row; the FUNCTION field of those rows (and the
+        anchors of `use` rows) keep the OLD name: the tool resolves either name. NEWNAME must not already occur in the corpus. Tools/userspace/funcmap.py
+        prints the new->old map for the compile gate (verify_names.sh maps the candidate's symbol names back before comparing).
+
 Idempotent: a row whose `old` is gone and whose `new` is present is "already applied". An `old` that is absent and a `new` that is absent
 is an error. A `new` that is already used in the function (as another variable, or as a global/function declared in decls.h) is refused.
 Renames never change generated code at -O0: Tools/userspace/verify_names.sh compiles the corpus before and after and demands identical objects.
@@ -49,10 +56,44 @@ def load_rows(d):
         for n, l in enumerate(open(f), 1):
             if not l.strip() or l.startswith('#'): continue
             c = l.rstrip('\n').split('\t')
+            if c[0] == 'func': continue            # see load_funcs
             if len(c) < 5 or c[0] not in ('local', 'use') or (c[0] == 'use' and len(c) < 7):
                 print('%s:%d: bad row' % (f, n)); sys.exit(1)
             rows.append((f, n, c[1], c[2], c[3], c[4]) if c[0] == 'local' else (f, n, c[1], c[2], c[3], c[4], c[6], c[7] if len(c) > 7 else '', c[8] if len(c) > 8 and c[8] else 'all', c[9] if len(c) > 9 and c[9] else 'none'))
     return rows
+
+
+def load_funcs(d):
+    """-> [(file, line, old, new, tier, evidence)] of the `func` rows of d/names*.tsv"""
+    out = []
+    for f in sorted(glob.glob(os.path.join(d, 'names.tsv')) + glob.glob(os.path.join(d, 'names_*.tsv'))):
+        for n, l in enumerate(open(f), 1):
+            if not l.startswith('func\t'): continue
+            c = l.rstrip('\n').split('\t')
+            if len(c) < 5 or not IDENT.fullmatch(c[1]) or not IDENT.fullmatch(c[2]):
+                print('%s:%d: bad func row' % (f, n)); sys.exit(1)
+            out.append((f, n, c[1], c[2], c[3], c[4]))
+    return out
+
+
+FUNCBACK = {}                                   # new function name -> old (Ghidra) name, set by main(): anchors of `use` rows are written against Ghidra's text
+
+
+TOKEN = re.compile(r'[A-Za-z_][A-Za-z0-9_]*')
+
+
+def mapname(t, table):
+    """t is one identifier token: a function name, its asm form `_name`, or a stub label `L_name`"""
+    r = table.get(t)
+    if r is not None: return r
+    if t[:1] == '_' and t[1:] in table: return '_' + table[t[1:]]
+    if t[:2] == 'L_' and t[2:] in table: return 'L_' + table[t[2:]]
+    return t
+
+
+def funcback(l):
+    if not FUNCBACK: return l
+    return TOKEN.sub(lambda m: mapname(m.group(0), FUNCBACK), l)
 
 
 def wb(x):
@@ -93,7 +134,8 @@ def apply_uses(lines, s, e, name, uses, allrows, declset):
             print('%s:%d: %s: new name %s is used for both %s and %s' % (r[0], r[1], name, r[4], o, r[3])); return 0, 0, 1
     brace = next((i for i in range(s, e) if lines[i] == '{'), None)
     if brace is None: print('%s: no body' % name); return 0, 0, 1
-    norm = lambda l: re.sub('|'.join(wb(k) for k in back), lambda m: back[m.group(0)], l) if back else l
+    back_rx = re.compile('|'.join(wb(k) for k in back)) if back else None      # compiled once per function
+    norm = lambda l: funcback(back_rx.sub(lambda m: back[m.group(0)], l) if back_rx else l)
     napp = npend = nerr = 0
     DECL = r'\s+(?!return\b)[\w ]+?[ *]([A-Za-z_]\w*)(\[\w+\])?;$'
     def declblock():                           # (first, last+1) line of the declarations right after the `{`
@@ -166,21 +208,63 @@ def apply_uses(lines, s, e, name, uses, allrows, declset):
     return napp, npend, nerr
 
 
+ALIAS_G = re.compile(r'^asm\("\.globl [A-Za-z_]\w*"\);$')
+ALIAS_S = re.compile(r'^(asm\("\.set [A-Za-z_]\w*, )(_[A-Za-z]\w*)"\);$')
+FUNC_SKIP = re.compile(r'(^|/)(names(_[^/]*)?\.tsv|class_methods\.tsv|fields_gld\.tsv|notes[^/]*)$')
+
+
+def apply_funcs(d, funcs, decl, check):
+    """the `func` rows: rename functions in every corpus file that names them (see the module docstring) -> (pending, already applied, errors)"""
+    files = []
+    for root, _, names in os.walk(d):
+        for n in sorted(names):
+            rel = os.path.relpath(os.path.join(root, n), d)
+            if n.endswith(('.c', '.h', '.tsv', '.txt')) and not FUNC_SKIP.search(rel) and 'ghidra/' not in rel and 'raw/' not in rel:
+                files.append(os.path.join(root, n))
+    texts = {f: open(f, errors='surrogateescape').read() for f in sorted(files)}
+    ids = set()
+    for t in texts.values():       # the alias symbols of the .globl/.set blocks stay under the Ghidra name: they do not count as a use of it
+        ids.update(IDENT.findall('\n'.join('' if ALIAS_G.match(l) else ALIAS_S.sub(lambda m: ' ' + m.group(2) + ' ', l) for l in t.split('\n'))))
+    pend, appl, err = {}, 0, 0
+    seen_new = {}
+    for (f, n, old, new, tier, ev) in funcs:
+        if new in seen_new: print('%s:%d: new function name %s is already used by the row at %s' % (f, n, new, seen_new[new])); err += 1; continue
+        seen_new[new] = '%s:%d' % (f, n)
+        if old in ids:
+            if new in ids or new in decl: print('%s:%d: new function name %s already occurs in the corpus' % (f, n, new)); err += 1; continue
+            pend[old] = new
+        elif new in ids: appl += 1
+        else: print('%s:%d: neither %s nor %s occurs in the corpus' % (f, n, old, new)); err += 1
+    if pend:
+        for f, t in texts.items():
+            # whole identifiers only (PTR_FUN_<addr> and the like are other tokens); the asm form `_name` follows its function. The unprefixed ALIAS symbol of the
+            # `asm(".globl FUN_x"); asm(".set FUN_x, _FUN_x");` blocks of the part files is a link-level label, not a C name, and is kept (Darwin's assembler
+            # treats a symbol starting with `L` as local, which would break `.globl`); only its target `_FUN_x` is renamed.
+            t2 = '\n'.join(l if ALIAS_G.match(l) else (ALIAS_S.sub(lambda m: m.group(1) + mapname(m.group(2), pend) + '");', l) if ALIAS_S.match(l)
+                                                          else TOKEN.sub(lambda m: mapname(m.group(0), pend), l)) for l in t.split('\n'))
+            if t2 != t and not check:
+                open(f, 'w', errors='surrogateescape').write(t2)
+    return len(pend), appl, err
+
+
 def main():
     a = sys.argv[1:]; check = '--check' in a; a = [x for x in a if x != '--check']
     d = a[0]
     rows = load_rows(d)
     dtext = re.sub(r'/\*.*?\*/|//[^\n]*', ' ', open(os.path.join(d, 'decls.h')).read(), flags=re.S)   # identifiers declared, not words in comments
     decl = set(IDENT.findall(dtext))
+    funcs = load_funcs(d)
+    FUNCBACK.clear(); FUNCBACK.update({r[3]: r[2] for r in funcs})
     byfn = {}
     for r in rows: byfn.setdefault(r[2], []).append(r)
     pending = applied = errors = 0
     for pf in sorted(glob.glob(os.path.join(d, 'part_*.c'))):
         text = open(pf).read(); lines, fns = split_functions(text); changed = False
         for name, s, e in reversed(fns):
-            if name not in byfn: continue
+            key = name if name in byfn else FUNCBACK.get(name)     # rows keep a function's Ghidra name; after a `func` row the header has the new one
+            if key not in byfn: continue
             body = '\n'.join(lines[s:e])
-            rws = byfn.pop(name)
+            rws = byfn.pop(key)
             uses = [r for r in rws if len(r) == 10]
             for (f, n, fn, old, new, tier) in [r for r in rws if len(r) == 6]:
                 code = strip_strings(body)
@@ -200,6 +284,9 @@ def main():
             open(pf, 'w').write('\n'.join(lines))
     for fn, rs in byfn.items():
         for r in rs: print('%s:%d: function %s not found' % (r[0], r[1], fn)); errors += 1
+    if funcs:
+        p2, a2, e2 = apply_funcs(d, funcs, decl, check)
+        pending += p2; applied += a2; errors += e2
     print('%d renames %s, %d already applied, %d errors' % (pending, 'pending' if check else 'applied', applied, errors))
     sys.exit(1 if errors or (check and pending) else 0)
 
