@@ -4717,58 +4717,58 @@ int FUN_00074c00(param_1, param_2, param_3, param_4)
 }
 
 /* FUN_00074cc0 @ 0x74cc0 (156 bytes) */
-int FUN_00074cc0(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  int param_2;
-  undefined4 param_3;
-  int param_4;
+int FUN_00074cc0(compiler, program, compileState, irInstruction)
+  undefined4 compiler;
+  int program;
+  undefined4 compileState;
+  int irInstruction;
 {
-  int iVar1;
-  int iVar2;
+  int emitted;
+  int code;
   
-  iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())FUN_00074a70)(param_1,iVar2,0x2e,0);
-  if (((iVar1 != 0) && (iVar1 = ((int (*)())FUN_000744d0)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) &&
-     (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x20,1,0), iVar1 != 0)) {
+  code = program + 4;
+  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x2e,0);
+  if (((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,1,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
 /* FUN_00074d60 @ 0x74d60 (204 bytes) */
-int FUN_00074d60(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  int param_2;
-  undefined4 param_3;
-  int param_4;
+int FUN_00074d60(compiler, program, compileState, irInstruction)
+  undefined4 compiler;
+  int program;
+  undefined4 compileState;
+  int irInstruction;
 {
-  int iVar1;
-  int iVar2;
+  int emitted;
+  int code;
   
-  iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())FUN_00074a70)(param_1,iVar2,0x24,0);
-  if ((((iVar1 != 0) && (iVar1 = ((int (*)())FUN_000744d0)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) &&
-      (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)) &&
-     (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x3c,0,0), iVar1 != 0)) {
+  code = program + 4;
+  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x24,0);
+  if ((((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+      (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
+     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
 /* FUN_00074e30 @ 0x74e30 (156 bytes) */
-int FUN_00074e30(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  int param_2;
-  undefined4 param_3;
-  int param_4;
+int FUN_00074e30(compiler, program, compileState, irInstruction)
+  undefined4 compiler;
+  int program;
+  undefined4 compileState;
+  int irInstruction;
 {
-  int iVar1;
-  int iVar2;
+  int emitted;
+  int code;
   
-  iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())FUN_00074a70)(param_1,iVar2,0x39,0);
-  if (((iVar1 != 0) && (iVar1 = ((int (*)())FUN_000744d0)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) &&
-     (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)) {
+  code = program + 4;
+  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x39,0);
+  if (((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
@@ -4941,251 +4941,251 @@ LAB_00075258:
 }
 
 /* FUN_000752c0 @ 0x752c0 (156 bytes) */
-int FUN_000752c0(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  int param_2;
-  undefined4 param_3;
-  int param_4;
+int FUN_000752c0(compiler, program, compileState, irInstruction)
+  undefined4 compiler;
+  int program;
+  undefined4 compileState;
+  int irInstruction;
 {
-  int iVar1;
-  int iVar2;
+  int emitted;
+  int code;
   
-  iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())FUN_00074a70)(param_1,iVar2,0x47,0);
-  if (((iVar1 != 0) && (iVar1 = ((int (*)())FUN_000744d0)(param_1,iVar2,param_3,param_4 + 4,1), iVar1 != 0)) &&
-     (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)) {
+  code = program + 4;
+  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x47,0);
+  if (((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,1), emitted != 0)) &&
+     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
 /* FUN_00075360 @ 0x75360 (156 bytes) */
-int FUN_00075360(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  int param_2;
-  undefined4 param_3;
-  int param_4;
+int FUN_00075360(compiler, program, compileState, irInstruction)
+  undefined4 compiler;
+  int program;
+  undefined4 compileState;
+  int irInstruction;
 {
-  int iVar1;
-  int iVar2;
+  int emitted;
+  int code;
   
-  iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())FUN_00074a70)(param_1,iVar2,0x47,0);
-  if (((iVar1 != 0) && (iVar1 = ((int (*)())FUN_000744d0)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) &&
-     (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)) {
+  code = program + 4;
+  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x47,0);
+  if (((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
 /* FUN_00075400 @ 0x75400 (156 bytes) */
-int FUN_00075400(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  int param_2;
-  undefined4 param_3;
-  int param_4;
+int FUN_00075400(compiler, program, compileState, irInstruction)
+  undefined4 compiler;
+  int program;
+  undefined4 compileState;
+  int irInstruction;
 {
-  int iVar1;
-  int iVar2;
+  int emitted;
+  int code;
   
-  iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())FUN_00074a70)(param_1,iVar2,0x47,0);
-  if (((iVar1 != 0) && (iVar1 = ((int (*)())FUN_000744d0)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) &&
-     (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)) {
+  code = program + 4;
+  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x47,0);
+  if (((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
 /* FUN_000754a0 @ 0x754a0 (204 bytes) */
-int FUN_000754a0(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  int param_2;
-  undefined4 param_3;
-  int param_4;
+int FUN_000754a0(compiler, program, compileState, irInstruction)
+  undefined4 compiler;
+  int program;
+  undefined4 compileState;
+  int irInstruction;
 {
-  int iVar1;
-  int iVar2;
+  int emitted;
+  int code;
   
-  iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())FUN_00074a70)(param_1,iVar2,0x45,0);
-  if ((((iVar1 != 0) && (iVar1 = ((int (*)())FUN_000744d0)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) &&
-      (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x3c,0,0), iVar1 != 0)) &&
-     (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)) {
+  code = program + 4;
+  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x45,0);
+  if ((((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+      (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) &&
+     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
 /* FUN_00075570 @ 0x75570 (204 bytes) */
-int FUN_00075570(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  int param_2;
-  undefined4 param_3;
-  int param_4;
+int FUN_00075570(compiler, program, compileState, irInstruction)
+  undefined4 compiler;
+  int program;
+  undefined4 compileState;
+  int irInstruction;
 {
-  int iVar1;
-  int iVar2;
+  int emitted;
+  int code;
   
-  iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())FUN_00074a70)(param_1,iVar2,0x13,0);
-  if ((((iVar1 != 0) && (iVar1 = ((int (*)())FUN_000744d0)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) &&
-      (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)) &&
-     (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x3c,0,0), iVar1 != 0)) {
+  code = program + 4;
+  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x13,0);
+  if ((((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+      (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
+     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
 /* FUN_00075640 @ 0x75640 (204 bytes) */
-int FUN_00075640(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  int param_2;
-  undefined4 param_3;
-  int param_4;
+int FUN_00075640(compiler, program, compileState, irInstruction)
+  undefined4 compiler;
+  int program;
+  undefined4 compileState;
+  int irInstruction;
 {
-  int iVar1;
-  int iVar2;
+  int emitted;
+  int code;
   
-  iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())FUN_00074a70)(param_1,iVar2,0x5b,0);
-  if ((((iVar1 != 0) && (iVar1 = ((int (*)())FUN_000744d0)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) &&
-      (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)) &&
-     (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x3c,0,0), iVar1 != 0)) {
+  code = program + 4;
+  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x5b,0);
+  if ((((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+      (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
+     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
 /* FUN_00075710 @ 0x75710 (156 bytes) */
-int FUN_00075710(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  int param_2;
-  undefined4 param_3;
-  int param_4;
+int FUN_00075710(compiler, program, compileState, irInstruction)
+  undefined4 compiler;
+  int program;
+  undefined4 compileState;
+  int irInstruction;
 {
-  int iVar1;
-  int iVar2;
+  int emitted;
+  int code;
   
-  iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())FUN_00074a70)(param_1,iVar2,0x55,3);
-  if (((iVar1 != 0) && (iVar1 = ((int (*)())FUN_000744d0)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) &&
-     (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)) {
+  code = program + 4;
+  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x55,3);
+  if (((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
 /* FUN_000757b0 @ 0x757b0 (156 bytes) */
-int FUN_000757b0(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  int param_2;
-  undefined4 param_3;
-  int param_4;
+int FUN_000757b0(compiler, program, compileState, irInstruction)
+  undefined4 compiler;
+  int program;
+  undefined4 compileState;
+  int irInstruction;
 {
-  int iVar1;
-  int iVar2;
+  int emitted;
+  int code;
   
-  iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())FUN_00074a70)(param_1,iVar2,0x51,3);
-  if (((iVar1 != 0) && (iVar1 = ((int (*)())FUN_000744d0)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) &&
-     (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)) {
+  code = program + 4;
+  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x51,3);
+  if (((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
 /* FUN_00075850 @ 0x75850 (204 bytes) */
-int FUN_00075850(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  int param_2;
-  undefined4 param_3;
-  int param_4;
+int FUN_00075850(compiler, program, compileState, irInstruction)
+  undefined4 compiler;
+  int program;
+  undefined4 compileState;
+  int irInstruction;
 {
-  int iVar1;
-  int iVar2;
+  int emitted;
+  int code;
   
-  iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())FUN_00074a70)(param_1,iVar2,0x4e,0);
-  if ((((iVar1 != 0) && (iVar1 = ((int (*)())FUN_000744d0)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) &&
-      (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)) &&
-     (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x3c,0,0), iVar1 != 0)) {
+  code = program + 4;
+  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x4e,0);
+  if ((((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+      (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
+     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
 /* FUN_00075920 @ 0x75920 (156 bytes) */
-int FUN_00075920(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  int param_2;
-  undefined4 param_3;
-  int param_4;
+int FUN_00075920(compiler, program, compileState, irInstruction)
+  undefined4 compiler;
+  int program;
+  undefined4 compileState;
+  int irInstruction;
 {
-  int iVar1;
-  int iVar2;
+  int emitted;
+  int code;
   
-  iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())FUN_00074a70)(param_1,iVar2,0x3c,0);
-  if (((iVar1 != 0) && (iVar1 = ((int (*)())FUN_000744d0)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) &&
-     (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)) {
+  code = program + 4;
+  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x3c,0);
+  if (((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
 /* FUN_000759c0 @ 0x759c0 (156 bytes) */
-int FUN_000759c0(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  int param_2;
-  undefined4 param_3;
-  int param_4;
+int FUN_000759c0(compiler, program, compileState, irInstruction)
+  undefined4 compiler;
+  int program;
+  undefined4 compileState;
+  int irInstruction;
 {
-  int iVar1;
-  int iVar2;
+  int emitted;
+  int code;
   
-  iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())FUN_00074a70)(param_1,iVar2,0x2d,0);
-  if (((iVar1 != 0) && (iVar1 = ((int (*)())FUN_000744d0)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) &&
-     (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)) {
+  code = program + 4;
+  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x2d,0);
+  if (((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
 /* FUN_00075a60 @ 0x75a60 (156 bytes) */
-int FUN_00075a60(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  int param_2;
-  undefined4 param_3;
-  int param_4;
+int FUN_00075a60(compiler, program, compileState, irInstruction)
+  undefined4 compiler;
+  int program;
+  undefined4 compileState;
+  int irInstruction;
 {
-  int iVar1;
-  int iVar2;
+  int emitted;
+  int code;
   
-  iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())FUN_00074a70)(param_1,iVar2,0x54,0);
-  if (((iVar1 != 0) && (iVar1 = ((int (*)())FUN_000744d0)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) &&
-     (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)) {
+  code = program + 4;
+  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x54,0);
+  if (((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
 /* FUN_00075b00 @ 0x75b00 (156 bytes) */
-int FUN_00075b00(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  int param_2;
-  undefined4 param_3;
-  int param_4;
+int FUN_00075b00(compiler, program, compileState, irInstruction)
+  undefined4 compiler;
+  int program;
+  undefined4 compileState;
+  int irInstruction;
 {
-  int iVar1;
-  int iVar2;
+  int emitted;
+  int code;
   
-  iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())FUN_00074a70)(param_1,iVar2,0x30,0);
-  if (((iVar1 != 0) && (iVar1 = ((int (*)())FUN_000744d0)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) &&
-     (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)) {
+  code = program + 4;
+  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x30,0);
+  if (((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
@@ -5213,99 +5213,99 @@ int FUN_00075ba0(param_1, param_2, param_3, param_4)
 }
 
 /* FUN_00075c90 @ 0x75c90 (204 bytes) */
-int FUN_00075c90(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  int param_2;
-  undefined4 param_3;
-  int param_4;
+int FUN_00075c90(compiler, program, compileState, irInstruction)
+  undefined4 compiler;
+  int program;
+  undefined4 compileState;
+  int irInstruction;
 {
-  int iVar1;
-  int iVar2;
+  int emitted;
+  int code;
   
-  iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())FUN_00074a70)(param_1,iVar2,0x56,5);
-  if ((((iVar1 != 0) && (iVar1 = ((int (*)())FUN_000744d0)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) &&
-      (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)) &&
-     (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x3c,0,0), iVar1 != 0)) {
+  code = program + 4;
+  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x56,5);
+  if ((((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+      (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
+     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
 /* FUN_00075d60 @ 0x75d60 (204 bytes) */
-int FUN_00075d60(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  int param_2;
-  undefined4 param_3;
-  int param_4;
+int FUN_00075d60(compiler, program, compileState, irInstruction)
+  undefined4 compiler;
+  int program;
+  undefined4 compileState;
+  int irInstruction;
 {
-  int iVar1;
-  int iVar2;
+  int emitted;
+  int code;
   
-  iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())FUN_00074a70)(param_1,iVar2,0x56,2);
-  if ((((iVar1 != 0) && (iVar1 = ((int (*)())FUN_000744d0)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) &&
-      (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)) &&
-     (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x3c,0,0), iVar1 != 0)) {
+  code = program + 4;
+  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x56,2);
+  if ((((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+      (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
+     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
 /* FUN_00075e30 @ 0x75e30 (204 bytes) */
-int FUN_00075e30(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  int param_2;
-  undefined4 param_3;
-  int param_4;
+int FUN_00075e30(compiler, program, compileState, irInstruction)
+  undefined4 compiler;
+  int program;
+  undefined4 compileState;
+  int irInstruction;
 {
-  int iVar1;
-  int iVar2;
+  int emitted;
+  int code;
   
-  iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())FUN_00074a70)(param_1,iVar2,0x44,0);
-  if ((((iVar1 != 0) && (iVar1 = ((int (*)())FUN_000744d0)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) &&
-      (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)) &&
-     (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x3c,0,0), iVar1 != 0)) {
+  code = program + 4;
+  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x44,0);
+  if ((((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+      (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
+     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
 /* FUN_00075f00 @ 0x75f00 (204 bytes) */
-int FUN_00075f00(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  int param_2;
-  undefined4 param_3;
-  int param_4;
+int FUN_00075f00(compiler, program, compileState, irInstruction)
+  undefined4 compiler;
+  int program;
+  undefined4 compileState;
+  int irInstruction;
 {
-  int iVar1;
-  int iVar2;
+  int emitted;
+  int code;
   
-  iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())FUN_00074a70)(param_1,iVar2,0x41,0);
-  if ((((iVar1 != 0) && (iVar1 = ((int (*)())FUN_000744d0)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) &&
-      (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)) &&
-     (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x3c,0,0), iVar1 != 0)) {
+  code = program + 4;
+  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x41,0);
+  if ((((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+      (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
+     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
 /* FUN_00075fd0 @ 0x75fd0 (156 bytes) */
-int FUN_00075fd0(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  int param_2;
-  undefined4 param_3;
-  int param_4;
+int FUN_00075fd0(compiler, program, compileState, irInstruction)
+  undefined4 compiler;
+  int program;
+  undefined4 compileState;
+  int irInstruction;
 {
-  int iVar1;
-  int iVar2;
+  int emitted;
+  int code;
   
-  iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())FUN_00074a70)(param_1,iVar2,0x31,0);
-  if (((iVar1 != 0) && (iVar1 = ((int (*)())FUN_000744d0)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) &&
-     (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)) {
+  code = program + 4;
+  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x31,0);
+  if (((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
@@ -5333,80 +5333,80 @@ int FUN_00076070(param_1, param_2, param_3, param_4)
 }
 
 /* FUN_00076160 @ 0x76160 (204 bytes) */
-int FUN_00076160(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  int param_2;
-  undefined4 param_3;
-  int param_4;
+int FUN_00076160(compiler, program, compileState, irInstruction)
+  undefined4 compiler;
+  int program;
+  undefined4 compileState;
+  int irInstruction;
 {
-  int iVar1;
-  int iVar2;
+  int emitted;
+  int code;
   
-  iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())FUN_00074a70)(param_1,iVar2,3,0);
-  if ((((iVar1 != 0) && (iVar1 = ((int (*)())FUN_000744d0)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) &&
-      (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)) &&
-     (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x3c,0,0), iVar1 != 0)) {
+  code = program + 4;
+  emitted = ((int (*)())FUN_00074a70)(compiler,code,3,0);
+  if ((((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+      (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
+     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
 /* FUN_00076230 @ 0x76230 (204 bytes) */
-int FUN_00076230(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  int param_2;
-  undefined4 param_3;
-  int param_4;
+int FUN_00076230(compiler, program, compileState, irInstruction)
+  undefined4 compiler;
+  int program;
+  undefined4 compileState;
+  int irInstruction;
 {
-  int iVar1;
-  int iVar2;
+  int emitted;
+  int code;
   
-  iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())FUN_00074a70)(param_1,iVar2,0x49,0);
-  if ((((iVar1 != 0) && (iVar1 = ((int (*)())FUN_000744d0)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) &&
-      (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)) &&
-     (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x3c,0,0), iVar1 != 0)) {
+  code = program + 4;
+  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x49,0);
+  if ((((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+      (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
+     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
 /* FUN_00076300 @ 0x76300 (204 bytes) */
-int FUN_00076300(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  int param_2;
-  undefined4 param_3;
-  int param_4;
+int FUN_00076300(compiler, program, compileState, irInstruction)
+  undefined4 compiler;
+  int program;
+  undefined4 compileState;
+  int irInstruction;
 {
-  int iVar1;
-  int iVar2;
+  int emitted;
+  int code;
   
-  iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())FUN_00074a70)(param_1,iVar2,0x23,0);
-  if ((((iVar1 != 0) && (iVar1 = ((int (*)())FUN_000744d0)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) &&
-      (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)) &&
-     (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x3c,0,0), iVar1 != 0)) {
+  code = program + 4;
+  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x23,0);
+  if ((((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+      (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
+     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
 /* FUN_000763d0 @ 0x763d0 (204 bytes) */
-int FUN_000763d0(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  int param_2;
-  undefined4 param_3;
-  int param_4;
+int FUN_000763d0(compiler, program, compileState, irInstruction)
+  undefined4 compiler;
+  int program;
+  undefined4 compileState;
+  int irInstruction;
 {
-  int iVar1;
-  int iVar2;
+  int emitted;
+  int code;
   
-  iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())FUN_00074a70)(param_1,iVar2,0x22,0);
-  if ((((iVar1 != 0) && (iVar1 = ((int (*)())FUN_000744d0)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) &&
-      (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)) &&
-     (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x3c,0,0), iVar1 != 0)) {
+  code = program + 4;
+  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x22,0);
+  if ((((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+      (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
+     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
