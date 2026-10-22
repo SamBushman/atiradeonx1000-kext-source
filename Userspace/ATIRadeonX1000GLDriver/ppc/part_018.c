@@ -4513,58 +4513,58 @@ LAB_000cd7d0:
 }
 
 /* FUN_000cdba4 @ 0xcdba4 (64 bytes) */
-int FUN_000cdba4(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  int param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  int param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int FUN_000cdba4(sinkArg, shaderState, optionsArg, argR6, sinkFn, argR8, argR9)
+  undefined4 sinkArg;
+  int shaderState;
+  undefined4 optionsArg;
+  undefined4 argR6;
+  int sinkFn;
+  undefined4 argR8;
+  undefined4 argR9;
 {
-  if (param_2 == 0) {
+  if (shaderState == 0) {
     return;
   }
-  if (param_5 == 0) {
+  if (sinkFn == 0) {
     return;
   }
-  if (2 < *(int *)(param_2 + 0xfc) - 1U) {
+  if (2 < *(int *)(shaderState + 0xfc) - 1U) {
     return;
   }
-  if (*(int *)(param_2 + 0xf8) == 0) {
-    ((int (*)())FUN_000d035c)(param_1,param_2,param_3,param_5,param_5,param_6,param_2);
+  if (*(int *)(shaderState + 0xf8) == 0) {
+    ((int (*)())FUN_000d035c)(sinkArg,shaderState,optionsArg,sinkFn,sinkFn,argR8,shaderState);
     return;
   }
-  if (*(int *)(param_2 + 0xf8) != 1) {
+  if (*(int *)(shaderState + 0xf8) != 1) {
     return;
   }
-  return FUN_000d4e8c(param_1,param_2,param_3,param_5,param_5,param_6,param_2);
+  return FUN_000d4e8c(sinkArg,shaderState,optionsArg,sinkFn,sinkFn,argR8,shaderState);
 }
 
 /* FUN_000cdbe4 @ 0xcdbe4 (60 bytes) */
-int FUN_000cdbe4(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  int param_2;
-  int param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int FUN_000cdbe4(sinkArg, shaderState, sinkFn, argR6, argR7, argR8, argR9)
+  undefined4 sinkArg;
+  int shaderState;
+  int sinkFn;
+  undefined4 argR6;
+  undefined4 argR7;
+  undefined4 argR8;
+  undefined4 argR9;
 {
-  if (param_2 == 0) {
+  if (shaderState == 0) {
     return;
   }
-  if (param_3 == 0) {
+  if (sinkFn == 0) {
     return;
   }
-  if (2 < *(int *)(param_2 + 0xfc) - 1U) {
+  if (2 < *(int *)(shaderState + 0xfc) - 1U) {
     return;
   }
-  if (*(int *)(param_2 + 0xf8) == 0) {
-    ((int (*)())FUN_000d0304)(param_1,param_2,param_3,param_4,param_5,param_6,param_2);
+  if (*(int *)(shaderState + 0xf8) == 0) {
+    ((int (*)())FUN_000d0304)(sinkArg,shaderState,sinkFn,argR6,argR7,argR8,shaderState);
     return;
   }
-  if (*(int *)(param_2 + 0xf8) != 1) {
+  if (*(int *)(shaderState + 0xf8) != 1) {
     return;
   }
   return FUN_000d4e64();
@@ -6183,50 +6183,50 @@ int FUN_000d002c(disasmCtx, shaderState, mnemonicTextPtr, operandText0Ptr, opera
 }
 
 /* FUN_000d0304 @ 0xd0304 (60 bytes) */
-int FUN_000d0304(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int FUN_000d0304(sinkArg, shaderState, sinkFn, argR6, argR7, argR8, argR9)
+  undefined4 sinkArg;
+  undefined4 shaderState;
+  undefined4 sinkFn;
+  undefined4 argR6;
+  undefined4 argR7;
+  undefined4 argR8;
+  undefined4 argR9;
 {
-  undefined4 uVar1;
-  undefined4 in_r10;
-  undefined1 auStack_38 [8];
-  undefined4 local_30;
-  undefined4 local_2c;
+  undefined4 sinkFnCopy;
+  undefined4 argR10;
+  undefined1 sinkRecordHeader [8];
+  undefined4 sinkRecordFn;
+  undefined4 sinkRecordArg;
   
-  uVar1 = param_3;
-  ((int (*)())FUN_000ce038)(auStack_38);
-  local_30 = param_3;
-  local_2c = param_1;
-  ((int (*)())FUN_000ce88c)(auStack_38,param_2,uVar1,param_4,param_5,param_6,param_7,in_r10);
+  sinkFnCopy = sinkFn;
+  ((int (*)())FUN_000ce038)(sinkRecordHeader);
+  sinkRecordFn = sinkFn;
+  sinkRecordArg = sinkArg;
+  ((int (*)())FUN_000ce88c)(sinkRecordHeader,shaderState,sinkFnCopy,argR6,argR7,argR8,argR9,argR10);
   return 0;
 }
 
 /* FUN_000d035c @ 0xd035c (60 bytes) */
-int FUN_000d035c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int FUN_000d035c(sinkArg, shaderState, optionsArg, sinkFn, argR7, argR8, argR9)
+  undefined4 sinkArg;
+  undefined4 shaderState;
+  undefined4 optionsArg;
+  undefined4 sinkFn;
+  undefined4 argR7;
+  undefined4 argR8;
+  undefined4 argR9;
 {
-  undefined4 uVar1;
-  undefined4 in_r10;
-  undefined1 auStack_38 [8];
-  undefined4 local_30;
-  undefined4 local_2c;
+  undefined4 sinkFnCopy;
+  undefined4 argR10;
+  undefined1 sinkRecordHeader [8];
+  undefined4 sinkRecordFn;
+  undefined4 sinkRecordArg;
   
-  uVar1 = param_4;
-  ((int (*)())FUN_000ce038)(auStack_38);
-  local_30 = param_4;
-  local_2c = param_1;
-  ((int (*)())FUN_000d002c)(auStack_38,param_2,param_3,uVar1,param_5,param_6,param_7,in_r10);
+  sinkFnCopy = sinkFn;
+  ((int (*)())FUN_000ce038)(sinkRecordHeader);
+  sinkRecordFn = sinkFn;
+  sinkRecordArg = sinkArg;
+  ((int (*)())FUN_000d002c)(sinkRecordHeader,shaderState,optionsArg,sinkFnCopy,argR7,argR8,argR9,argR10);
   return 0;
 }
 

@@ -118,3 +118,41 @@ local	FUN_000ce514	auStack_138	componentText0	INFERRED	text of output component 
 local	FUN_000ce514	auStack_f8	componentText1	INFERRED	text of output component 1
 local	FUN_000ce514	auStack_b8	componentText2	INFERRED	text of output component 2
 local	FUN_000ce514	acStack_78	componentText3	INFERRED	text of output component 3
+local	FUN_000d0304	param_1	sinkArg	INFERRED	stored at sink record +0xc (argument given to the sink function)
+local	FUN_000d0304	param_2	shaderState	CONFIRMED	passed to FUN_000ce88c, which prints "VS Data" from it
+local	FUN_000d0304	param_3	sinkFn	CONFIRMED	stored at sink record +8 and as the sink record's function
+local	FUN_000d0304	param_4	argR6	UNKNOWN	pass-through slot
+local	FUN_000d0304	param_5	argR7	UNKNOWN	pass-through slot
+local	FUN_000d0304	param_6	argR8	UNKNOWN	pass-through slot
+local	FUN_000d0304	param_7	argR9	UNKNOWN	pass-through slot
+local	FUN_000d0304	uVar1	sinkFnCopy	INFERRED	copy of param_3 kept as the third call argument
+local	FUN_000d0304	in_r10	argR10	UNKNOWN	Ghidra register input
+local	FUN_000d0304	auStack_38	sinkRecordHeader	INFERRED	first 8 bytes of the on-stack sink record (zeroed by FUN_000ce038)
+local	FUN_000d0304	local_30	sinkRecordFn	CONFIRMED	sink record +8: the sink function
+local	FUN_000d0304	local_2c	sinkRecordArg	CONFIRMED	sink record +0xc: its argument
+local	FUN_000d035c	param_1	sinkArg	INFERRED	stored at sink record +0xc
+local	FUN_000d035c	param_2	shaderState	CONFIRMED	passed to FUN_000d002c, which prints "VS Disassembly" from it
+local	FUN_000d035c	param_3	optionsArg	UNKNOWN	forwarded to FUN_000d002c unchanged
+local	FUN_000d035c	param_4	sinkFn	CONFIRMED	stored at sink record +8
+local	FUN_000d035c	param_5	argR7	UNKNOWN	pass-through slot
+local	FUN_000d035c	param_6	argR8	UNKNOWN	pass-through slot
+local	FUN_000d035c	param_7	argR9	UNKNOWN	pass-through slot
+local	FUN_000d035c	uVar1	sinkFnCopy	INFERRED	copy of param_4
+local	FUN_000d035c	in_r10	argR10	UNKNOWN	Ghidra register input
+local	FUN_000d035c	auStack_38	sinkRecordHeader	INFERRED	first 8 bytes of the on-stack sink record
+local	FUN_000d035c	local_30	sinkRecordFn	CONFIRMED	sink record +8: the sink function
+local	FUN_000d035c	local_2c	sinkRecordArg	CONFIRMED	sink record +0xc: its argument
+local	FUN_000cdbe4	param_1	sinkArg	INFERRED	forwarded as the sink argument
+local	FUN_000cdbe4	param_2	shaderState	CONFIRMED	+0xfc = shader type (1..3), +0xf8 = 0 vertex / 1 pixel dump path
+local	FUN_000cdbe4	param_3	sinkFn	CONFIRMED	must be non-NULL
+local	FUN_000cdbe4	param_4	argR6	UNKNOWN	pass-through slot
+local	FUN_000cdbe4	param_5	argR7	UNKNOWN	pass-through slot
+local	FUN_000cdbe4	param_6	argR8	UNKNOWN	pass-through slot
+local	FUN_000cdbe4	param_7	argR9	UNKNOWN	pass-through slot
+local	FUN_000cdba4	param_1	sinkArg	INFERRED	forwarded as the sink argument
+local	FUN_000cdba4	param_2	shaderState	CONFIRMED	+0xfc = shader type (1..3), +0xf8 = 0 vertex / 1 pixel disassembly path
+local	FUN_000cdba4	param_3	optionsArg	UNKNOWN	forwarded unchanged
+local	FUN_000cdba4	param_4	argR6	UNKNOWN	pass-through slot
+local	FUN_000cdba4	param_5	sinkFn	CONFIRMED	must be non-NULL and is forwarded as the sink function
+local	FUN_000cdba4	param_6	argR8	UNKNOWN	pass-through slot
+local	FUN_000cdba4	param_7	argR9	UNKNOWN	pass-through slot
