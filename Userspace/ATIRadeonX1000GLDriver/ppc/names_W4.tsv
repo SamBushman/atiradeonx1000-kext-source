@@ -1,0 +1,349 @@
+# local	FUNCTION	old	new	tier	evidence
+local	FUN_000018fc	local_38	imageIndex	CONFIRMED	loop index over _dyld_image_count images (same crt atexit shim as GA _find_atexit_10_3)
+local	FUN_000018fc	local_34	imageCountFn	CONFIRMED	filled by __dyld_func_lookup("__dyld_image_count") (same crt atexit shim as GA _find_atexit_10_3)
+local	FUN_000018fc	local_30	imageNameFn	CONFIRMED	__dyld_get_image_name (same crt atexit shim as GA _find_atexit_10_3)
+local	FUN_000018fc	local_2c	imageHeaderFn	CONFIRMED	__dyld_get_image_header (same crt atexit shim as GA _find_atexit_10_3)
+local	FUN_000018fc	local_28	lookupSymbolFn	CONFIRMED	__dyld_NSLookupSymbolInImage (same crt atexit shim as GA _find_atexit_10_3)
+local	FUN_000018fc	local_24	addressOfSymbolFn	CONFIRMED	__dyld_NSAddressOfSymbol (array of 7 words, first used) (same crt atexit shim as GA _find_atexit_10_3)
+local	FUN_000018fc	uVar2	imageCount	CONFIRMED	result of the image-count function (same crt atexit shim as GA _find_atexit_10_3)
+local	FUN_00001b34	iVar1	libSystemHandle	CONFIRMED	_dlopen("/usr/lib/libSystem.B.dylib") result, then reused for the atexit test (same crt atexit shim as GA _get_globals)
+local	FUN_00001b34	uVar2	symbolAddress	CONFIRMED	_dlsym / _find_atexit_10_3 result stored into the globals block (same crt atexit shim as GA _get_globals)
+local	FUN_00001b34	iVar3	checkResult	CONFIRMED	_check_cxa_atexit result (-1, 0 or other) (same crt atexit shim as GA _get_globals)
+local	FUN_00001b34	local_20	atexit_globals	CONFIRMED	processwide keymgr block (calloc 0x14): +2 running flag, +3 mode, +4 routine list, +8 __cxa_atexit, +0xc __cxa_finalize, +0x10 atexit (same crt atexit shim as GA _get_globals)
+local	FUN_00001b34	local_18	result	CONFIRMED	returned globals pointer or 0 (same crt atexit shim as GA _get_globals)
+local	FUN_00001830	param_1	cxaAtexitFn	CONFIRMED	called as __cxa_atexit(0x678 check routine, &state, &state) (same crt atexit shim as GA _check_cxa_atexit)
+local	FUN_00001830	param_2	cxaFinalizeFn	CONFIRMED	called with &state to run/cancel the registered check (same crt atexit shim as GA _check_cxa_atexit)
+local	FUN_00001830	iVar1	status	CONFIRMED	result of cxaAtexitFn (same crt atexit shim as GA _check_cxa_atexit)
+local	FUN_00001830	pcStack00000018	cxaAtexitFnHome	CONFIRMED	home-slot copy of param_1 (same crt atexit shim as GA _check_cxa_atexit)
+local	FUN_00001830	pcStack0000001c	cxaFinalizeFnHome	CONFIRMED	home-slot copy of param_2 (same crt atexit shim as GA _check_cxa_atexit)
+local	FUN_00001830	local_28	state	CONFIRMED	set to 1 by _cxa_atexit_check_2 when the check routine ran (same crt atexit shim as GA _check_cxa_atexit)
+local	FUN_00001830	local_24	cxaAtexitFnCopy	CONFIRMED	copy of param_1 (same crt atexit shim as GA _check_cxa_atexit)
+local	FUN_00001830	local_18	result	CONFIRMED	returned state or -1 (same crt atexit shim as GA _check_cxa_atexit)
+local	FUN_00001e24	param_1	atexit_globals	CONFIRMED	keymgr block: +4 is the routine list head (same crt atexit shim as GA _add_routine)
+local	FUN_00001e24	param_2	routine	CONFIRMED	3-word record {function, kind, argument} (same crt atexit shim as GA _add_routine)
+local	FUN_00001e24	uVar1	argument	CONFIRMED	routine[2] (same crt atexit shim as GA _add_routine)
+local	FUN_00001e24	puVar2	node	CONFIRMED	malloc(0x10) list node: [0] next, [1..3] routine copy (same crt atexit shim as GA _add_routine)
+local	FUN_00001e24	iVar3	unlockResult	CONFIRMED	_keymgr_set_and_unlock result (same crt atexit shim as GA _add_routine)
+local	FUN_00001e24	uVar4	kind	CONFIRMED	routine[1] (same crt atexit shim as GA _add_routine)
+local	FUN_00001e24	iStack00000018	globalsHome	CONFIRMED	home-slot copy of param_1 (same crt atexit shim as GA _add_routine)
+local	FUN_00001e24	puStack0000001c	routineHome	CONFIRMED	home-slot copy of param_2 (same crt atexit shim as GA _add_routine)
+local	FUN_00001e24	local_18	status	CONFIRMED	0 or -1 (same crt atexit shim as GA _add_routine)
+local	FUN_00001e24	local_14	result	CONFIRMED	returned status (same crt atexit shim as GA _add_routine)
+local	FUN_00001f70	param_1	atexit_globals	CONFIRMED	keymgr block: +4 is the routine list head (same crt atexit shim as GA _run_routines)
+local	FUN_00001f70	param_2	stopNode	CONFIRMED	walk stops when this node is reached (same crt atexit shim as GA _run_routines)
+local	FUN_00001f70	puVar1	node	CONFIRMED	current list node (same crt atexit shim as GA _run_routines)
+local	FUN_00001f70	uVar2	kindMask	CONFIRMED	1 << node[2]: tested against 0x15 and 0x2a (same crt atexit shim as GA _run_routines)
+local	FUN_00001f70	a0	unlockResult	INFERRED	result of the keymgr unlock, first argument register (same crt atexit shim as GA _run_routines)
+local	FUN_00001f70	iStack00000018	globalsHome	CONFIRMED	home-slot copy of param_1, updated on re-lock (same crt atexit shim as GA _run_routines)
+local	FUN_00001f70	puStack0000001c	stopNodeHome	CONFIRMED	home-slot copy of param_2 (same crt atexit shim as GA _run_routines)
+local	FUN_000020f4	param_1	atexit_entry	CONFIRMED	3-word record {function, argCount selector, argument} (same crt atexit shim as GA _cxa_atexit_wrapper)
+local	FUN_000020f4	uStack_28	savedRunning	CONFIRMED	previous globals+2 flag (same crt atexit shim as GA _cxa_atexit_wrapper)
+local	FUN_000020f4	uStack_24	savedList	CONFIRMED	globals+4 list head at entry, the stop node for _run_routines (same crt atexit shim as GA _cxa_atexit_wrapper)
+local	FUN_000020f4	iStack_20	atexit_globals	CONFIRMED	keymgr block (same crt atexit shim as GA _cxa_atexit_wrapper)
+local	FUN_000020f4	puStack00000018	entryHome	CONFIRMED	home-slot copy of param_1 (same crt atexit shim as GA _cxa_atexit_wrapper)
+local	FUN_0000228c	uVar1	savedRunning	CONFIRMED	previous running flag at +2 (same crt atexit shim as GA _our_atexit)
+local	FUN_0000228c	psVar2	atexit_globals	CONFIRMED	keymgr block (same crt atexit shim as GA _our_atexit)
+local	FUN_0000228c	iVar3	relocked	CONFIRMED	_run_routines result (re-locked block) (same crt atexit shim as GA _our_atexit)
+local	FUN_000023a8	param_1	atexit_entry	CONFIRMED	3-word record {function, argument selector, argument} (same crt atexit shim as GA _atexit_common)
+local	FUN_000023a8	param_2	dsoHandle	INFERRED	forwarded as __cxa_atexit third argument (same crt atexit shim as GA _atexit_common)
+local	FUN_000023a8	pcVar1	registerFn	CONFIRMED	globals+8 (__cxa_atexit) or +0x10 (atexit) (same crt atexit shim as GA _atexit_common)
+local	FUN_000023a8	iVar3	atexit_globals	CONFIRMED	_get_globals result, later the unlock result (same crt atexit shim as GA _atexit_common)
+local	FUN_000023a8	a1	entryCopy	CONFIRMED	malloc(0xc) copy of the entry passed to the wrapper (same crt atexit shim as GA _atexit_common)
+local	FUN_000023a8	puStack00000018	entryHome	CONFIRMED	home-slot copy of param_1 (same crt atexit shim as GA _atexit_common)
+local	FUN_000023a8	uStack0000001c	dsoHandleHome	CONFIRMED	home-slot copy of param_2 (same crt atexit shim as GA _atexit_common)
+local	FUN_000023a8	local_18	result	CONFIRMED	returned status (same crt atexit shim as GA _atexit_common)
+local	FUN_000026c8	param_1	atexit_function	CONFIRMED	stored as the first word of the entry (same crt atexit shim as GA ___cxa_atexit)
+local	FUN_000026c8	param_2	argument	CONFIRMED	stored as the third word (same crt atexit shim as GA ___cxa_atexit)
+local	FUN_000026c8	param_3	dsoHandle	INFERRED	forwarded to _atexit_common (same crt atexit shim as GA ___cxa_atexit)
+local	FUN_000026c8	uStack_28	entryFunction	CONFIRMED	entry[0] (same crt atexit shim as GA ___cxa_atexit)
+local	FUN_000026c8	uStack_24	entryKind	CONFIRMED	entry[1] = 1 (same crt atexit shim as GA ___cxa_atexit)
+local	FUN_000026c8	uStack_20	entryArgument	CONFIRMED	entry[2] (same crt atexit shim as GA ___cxa_atexit)
+local	FUN_000026c8	uVar1	result	CONFIRMED	_atexit_common result (same crt atexit shim as GA ___cxa_atexit)
+local	FUN_00002748	param_1	atexit_function	CONFIRMED	registered function (same crt atexit shim as GA _atexit)
+local	FUN_00002748	local_28	entryFunction	CONFIRMED	entry[0] (same crt atexit shim as GA _atexit)
+local	FUN_00002748	local_24	entryKind	CONFIRMED	entry[1] = 0 (same crt atexit shim as GA _atexit)
+local	FUN_00002748	uVar1	result	CONFIRMED	_atexit_common result (same crt atexit shim as GA _atexit)
+local	FUN_000017b8	param_1	state	CONFIRMED	*state is set to -1 when the registration call fails (same crt atexit shim as GA _cxa_atexit_check_1)
+local	FUN_000017b8	iVar1	status	CONFIRMED	result of state[1](0x650, state, state) (same crt atexit shim as GA _cxa_atexit_check_1)
+local	FUN_000017b8	puStack00000018	stateHome	CONFIRMED	home-slot copy of param_1 (same crt atexit shim as GA _cxa_atexit_check_1)
+local	FUN_00001790	param_1	state	CONFIRMED	*state = 1: the check routine ran (same crt atexit shim as GA _cxa_atexit_check_2)
+local	_gldCreateBuffer	param_1	ctx	INFERRED	first argument of every _gld* entry point; *(ctx+4) is the io_connect_t passed to _io_connect_method_*
+local	_gldCreateBuffer	param_2	bufferOut	CONFIRMED	receives the malloc(0x24) record
+local	_gldCreateBuffer	param_3	initialWord0	UNKNOWN	stored in record[0]
+local	_gldCreateBuffer	param_4	initialWord1	UNKNOWN	stored in record[1]
+local	_gldCreateBuffer	puVar1	buffer	CONFIRMED	malloc(0x24), memset 0, returned through bufferOut
+local	_gldFlushBuffer	param_1	ctx	INFERRED	first argument of every _gld* entry point; *(ctx+4) is the io_connect_t passed to _io_connect_method_*
+local	_gldFlushBuffer	param_2	buffer	INFERRED	record created by _gldCreateBuffer; +4 flags pointer, +8 memory-plugin data
+local	_gldFlushBuffer	param_3	flushRegion	UNKNOWN	nonzero -> FUN_0000b620 is called first
+local	_gldFlushBuffer	param_4	flushArg4	UNKNOWN	forwarded to FUN_0000b620
+local	_gldFlushBuffer	param_5	flushArg5	UNKNOWN	forwarded to FUN_0000b620
+local	_gldFlushBuffer	param_6	flushArg6	UNKNOWN	forwarded to FUN_0000b620
+local	_gldFlushBuffer	param_7	flushArg7	UNKNOWN	forwarded to FUN_0000b620
+local	_gldFlushBuffer	param_8	flushArg8	UNKNOWN	forwarded to FUN_0000b620
+local	_gldFlushBuffer	piVar1	pluginData	INFERRED	*(buffer+8), the memory-plugin data pointer
+local	_gldFlushBuffer	iVar2	pluginRecord	INFERRED	**(buffer+8)
+local	_gldGetMemoryPluginData	param_1	ctx	INFERRED	first argument of every _gld* entry point; *(ctx+4) is the io_connect_t passed to _io_connect_method_*
+local	_gldGetMemoryPluginData	param_2	buffer	INFERRED	as _gldFlushBuffer
+local	_gldGetMemoryPluginData	param_3	pluginDataOut	CONFIRMED	receives the plug-in data pointer; buffer+8 is cleared
+local	_gldGetMemoryPluginData	piVar1	pluginData	INFERRED	*(buffer+8)
+local	_gldGetMemoryPluginData	iVar2	pluginRecord	INFERRED	*pluginData
+local	_gldSetMemoryPluginData	param_1	ctx	INFERRED	first argument of every _gld* entry point; *(ctx+4) is the io_connect_t passed to _io_connect_method_*
+local	_gldSetMemoryPluginData	param_2	buffer	INFERRED	as _gldFlushBuffer
+local	_gldSetMemoryPluginData	param_3	pluginData	CONFIRMED	stored into buffer+8
+local	_gldSetMemoryPluginData	iVar1	pluginRecord	INFERRED	*pluginData
+local	_gldFinishMemoryPluginData	param_1	ctx	INFERRED	ctx+4 is the io_connect_t used for selector 9
+local	_gldFinishMemoryPluginData	param_2	pluginData	INFERRED	pointer to the plug-in record pointer
+local	_gldFinishMemoryPluginData	iVar1	busy	INFERRED	FUN_0001a0d0 result; nonzero -> return without the wait call
+local	_gldFinishMemoryPluginData	uVar2	connection	CONFIRMED	*(ctx+4) io_connect_t
+local	_gldFinishMemoryPluginData	iVar3	pluginRecord	INFERRED	*pluginData; +0x16 kind byte (6 or 7), +8/+0xc handle, +0x10 size
+local	_gldTestMemoryPluginData	param_1	ctx	INFERRED	as above
+local	_gldTestMemoryPluginData	param_2	pluginData	INFERRED	as _gldFinishMemoryPluginData
+local	_gldTestMemoryPluginData	uVar1	isComplete	INFERRED	returned 1/0 or FUN_0001a0d0 result
+local	_gldTestMemoryPluginData	iVar2	pluginRecord	INFERRED	*pluginData
+local	_gldDestroyMemoryPluginData	param_1	ctx	INFERRED	first argument of every _gld* entry point; *(ctx+4) is the io_connect_t passed to _io_connect_method_*
+local	_gldDestroyMemoryPluginData	param_2	pluginData	INFERRED	pointer to the plug-in record pointer; freed at the end
+local	_gldDestroyMemoryPluginData	iVar1	updatedRefCount	INFERRED	result of the store-conditional that subtracts 0x10000 from record+0x10
+local	_gldDestroyMemoryPluginData	piVar2	refCountSlot	INFERRED	&pluginRecord[+0x10], decremented atomically by 0x10000
+local	_gldDestroyMemoryPluginData	iVar3	oldRefCount	INFERRED	value read before the atomic decrement; ==0x10000 means last reference -> selector 0xb release
+local	_gldDestroyMemoryPluginData	iVar4	pluginRecord	INFERRED	*pluginData
+local	_gldDestroyMemoryPluginData	bVar5	crBits	UNKNOWN	Ghidra cr0 emulation for the lwarx/stwcx. loop
+local	_gldReclaimBuffer	param_1	ctx	INFERRED	first argument of every _gld* entry point; *(ctx+4) is the io_connect_t passed to _io_connect_method_*
+local	_gldReclaimBuffer	param_2	buffer	INFERRED	as _gldFlushBuffer; buffer+8 holds the plug-in data pointer
+local	_gldReclaimBuffer	iVar1	updatedRefCount	INFERRED	store-conditional result
+local	_gldReclaimBuffer	piVar2	pluginData	INFERRED	*(buffer+8); later reused as &pluginRecord[+0x10] (refCountSlot)
+local	_gldReclaimBuffer	iVar3	oldRefCount	INFERRED	value before the atomic decrement of 0x10000
+local	_gldReclaimBuffer	iVar4	pluginRecord	INFERRED	*pluginData
+local	_gldReclaimBuffer	in_cr0	crBits	UNKNOWN	Ghidra cr0 emulation for the lwarx/stwcx. loop
+local	_gldDestroyBuffer	param_1	ctx	INFERRED	first argument of every _gld* entry point; *(ctx+4) is the io_connect_t passed to _io_connect_method_*
+local	_gldDestroyBuffer	param_2	buffer	CONFIRMED	reclaimed with _gldReclaimBuffer, then freed
+local	_gldDestroyContext	param_1	ctx	CONFIRMED	freed at the end; *(ctx+4) passed to _IOServiceClose
+local	_gldDestroyContext	uVar1	returnCode	CONFIRMED	0x2714 for a NULL context, else 0
+local	_gldDestroyContext	piVar2	listNode	INFERRED	walks the global context list DAT_001f65e0 (node[0]=ctx, node[1]=next)
+local	_gldDestroyContext	piVar3	prevNode	INFERRED	predecessor of listNode while unlinking ctx
+local	_gldCreateShared	param_1	sharedOut	CONFIRMED	*param_1 receives the malloc(0x34) shared-state record
+local	_gldCreateShared	uVar1	returnCode	CONFIRMED	0x271e NULL out pointer, 0x2720 malloc failure, 0 success
+local	_gldCreateShared	iVar2	shared	CONFIRMED	malloc(0x34); starts with a recursive pthread mutex
+local	_gldCreateShared	auStack_28	mutexAttr	CONFIRMED	pthread_mutexattr_t passed to _pthread_mutexattr_init/settype(2)
+local	_gldDestroyShared	param_1	shared	CONFIRMED	pthread mutex destroyed then freed
+local	_gldDestroyShared	uVar1	returnCode	CONFIRMED	0x2714 for NULL, else 0
+local	_gldReclaimContext	param_1	ctx	CONFIRMED	*(ctx+4) io_connect_t for selector 0x11
+local	_gldReclaimContext	iVar1	status	CONFIRMED	_io_connect_method_scalarI_structureI result; failure frees ctx
+local	_gldGetError	param_1	ctx	INFERRED	*(ctx+0x178) is the sticky error, cleared on read
+local	_gldGetError	uVar1	error	CONFIRMED	returned value, ctx+0x178 reset to 0
+local	_gldDestroyFence	param_1	ctx	INFERRED	*(ctx+0x220) is the fence-id allocation bitmap
+local	_gldDestroyFence	param_2	fence	CONFIRMED	fence record; its first word is the id, freed at the end
+local	_gldDestroyFence	uVar1	bitIndex	CONFIRMED	id & 0x1f
+local	_gldDestroyFence	uVar2	wordOffset	CONFIRMED	(id >> 3) & ~3: byte offset of the bitmap word
+local	_gldCreateFramebuffer	param_1	ctx	INFERRED	unused
+local	_gldCreateFramebuffer	param_2	framebufferOut	CONFIRMED	receives the calloc(1,200) record
+local	_gldCreateFramebuffer	param_3	initialWord0	UNKNOWN	stored in record[0]
+local	_gldCreateFramebuffer	param_4	initialWord1	UNKNOWN	stored in record[1]
+local	_gldCreateFramebuffer	puVar1	clearCursor	CONFIRMED	steps through record words 0x13.. clearing six of them
+local	_gldCreateFramebuffer	puVar2	framebuffer	CONFIRMED	calloc(1,200) record
+local	_gldCreateFramebuffer	iVar3	clearCount	CONFIRMED	counts 6 words to zero
+local	_gldDestroyFramebuffer	param_1	ctx	INFERRED	*(ctx+0x150) is the currently bound framebuffer
+local	_gldDestroyFramebuffer	param_2	framebuffer	CONFIRMED	unbinds if current, then freed
+local	_gldDestroyPixelFormat	param_1	pixelFormat	CONFIRMED	freed
+local	_gldDestroyPixelFormat	uVar1	returnCode	CONFIRMED	0x271e for NULL, else 0
+local	_gldTestObject	param_1	ctx	INFERRED	first argument of every _gld* entry point; *(ctx+4) is the io_connect_t passed to _io_connect_method_*
+local	_gldTestObject	param_2	objectKind	INFERRED	switch value 0..3 selecting fence-like object type (FUN_0000abf0 / FUN_0000b980 / FUN_00005eb0 variants)
+local	_gldTestObject	param_3	object	INFERRED	object record; [0] index into the table at ctx+0x218 (8-byte entries), byte [1] cached completion
+local	_gldTestObject	uVar1	isDone	INFERRED	returned completion flag
+local	_gldTestObject	bVar2	completed	INFERRED	cached completion byte object+4
+local	_gldTestObject	iVar3	entryIndex	INFERRED	*object: index into the ctx+0x218 table
+local	_gldTestObject	iVar4	table	INFERRED	*(ctx+0x218) 8-byte-entry table
+local	_gldFinishObject	param_1	ctx	INFERRED	first argument of every _gld* entry point; *(ctx+4) is the io_connect_t passed to _io_connect_method_*
+local	_gldFinishObject	param_2	objectKind	INFERRED	switch value 0..3 selecting fence-like object type (FUN_0000abf0 / FUN_0000b980 / FUN_00005eb0 variants)
+local	_gldFinishObject	param_3	object	INFERRED	as _gldTestObject
+local	_gldFinishObject	uVar1	returnCode	CONFIRMED	0, or 0x271a for an unknown kind
+local	_gldFinishObject	iVar2	table	INFERRED	*(ctx+0x218) table, later reused for the FUN_0001a0d0 result
+local	_gldFinishObject	iVar3	entryIndex	INFERRED	*object
+local	_gldInitializeLibrary	param_1	libArg0	UNKNOWN	stored at library+8 (zeroed by _gldTerminateLibrary)
+local	_gldInitializeLibrary	param_2	libArg1	UNKNOWN	stored at library+0xc
+local	_gldInitializeLibrary	param_3	displayMask	INFERRED	bit mask; library+4 receives index of highest set bit + 1 (loop over 32 bits)
+local	_gldInitializeLibrary	param_4	libArg3	UNKNOWN	stored at library+0x10
+local	_gldInitializeLibrary	param_5	libArg4	UNKNOWN	stored at library+0x14
+local	_gldInitializeLibrary	puVar1	library	CONFIRMED	PTR_DAT_001e88ac global library record
+local	_gldInitializeLibrary	puVar2	libraryAlias	CONFIRMED	reload of the same global pointer
+local	_gldInitializeLibrary	uVar3	bitIndex	CONFIRMED	loop counter 0..31
+local	_gldInitializeLibrary	puVar4	slotCursor	CONFIRMED	steps library+0x18, zeroing 32 words
+local	_gldTerminateLibrary	puVar1	library	CONFIRMED	PTR_DAT_001e88ac global library record, fields zeroed
+local	_gldIsTextureResident	param_1	ctx	INFERRED	unused
+local	_gldIsTextureResident	param_2	texture	CONFIRMED	returns texture+0x34 != 0
+local	_gldCreateTexture	param_1	ctx	INFERRED	unused
+local	_gldCreateTexture	param_2	textureOut	CONFIRMED	receives the calloc(1,0xd8) record
+local	_gldCreateTexture	param_3	textureArg	UNKNOWN	stored at texture+0x30
+local	_gldCreateTexture	puVar1	texture	CONFIRMED	calloc(1,0xd8) texture record
+local	_gldCreateTextureLevel	param_1	ctx	INFERRED	unused
+local	_gldCreateTextureLevel	param_2	texture	INFERRED	texture record; flags byte at +0x39
+local	_gldCreateTextureLevel	param_3	changeFlags	INFERRED	OR-ed into texture+0x39 dirty flags
+local	_gldCreateTextureLevel	param_4	face	INFERRED	indexes the ushort level-mask array at texture+0x24
+local	_gldCreateTextureLevel	param_5	level	INFERRED	bit (1<<level) set in the face mask
+local	_gldCreateTextureLevel	iVar1	faceEntry	INFERRED	texture + face*2
+local	_gldModifyTexture	param_1	ctx	INFERRED	unused
+local	_gldModifyTexture	param_2	texture	INFERRED	texture record
+local	_gldModifyTexture	param_3	changeFlags	INFERRED	OR-ed into texture+0x39
+local	_gldModifyTextureLevel	param_1	ctx	INFERRED	first argument of every _gld* entry point; *(ctx+4) is the io_connect_t passed to _io_connect_method_*
+local	_gldModifyTextureLevel	param_2	texture	INFERRED	texture record
+local	_gldModifyTextureLevel	param_3	face	INFERRED	indexes the ushort level-mask array at texture+0x24
+local	_gldModifyTextureLevel	param_4	level	INFERRED	0xffffffff = whole texture (flag 0x40), else bit set in the face mask
+local	_gldModifyTextureLevel	uVar1	oldLevelMask	INFERRED	face mask before the update
+local	_gldModifyTextureLevel	iVar2	faceEntry	INFERRED	texture + face*2
+local	_gldModifyTextureLevel	iVar3	resident	INFERRED	texture+0x34 resident memory record; kind byte at +0x16 is 6 or 7
+local	_gldDeleteTexture	param_1	ctx	INFERRED	first argument of every _gld* entry point; *(ctx+4) is the io_connect_t passed to _io_connect_method_*
+local	_gldDeleteTexture	param_2	texture	CONFIRMED	reclaimed with _gldReclaimTexture then freed
+local	_gldCreatePipelineProgram	param_1	ctx	INFERRED	unused
+local	_gldCreatePipelineProgram	param_2	programOut	CONFIRMED	receives the calloc(1,0x40) record
+local	_gldCreatePipelineProgram	param_3	programRef	UNKNOWN	stored in program[0]
+local	_gldCreatePipelineProgram	puVar1	program	CONFIRMED	calloc(1,0x40); [0xf]=3 initial dirty flags
+local	_gldModifyPipelineProgram	param_1	ctx	INFERRED	unused
+local	_gldModifyPipelineProgram	param_2	program	INFERRED	program record; dirty flags at +0x3c
+local	_gldModifyPipelineProgram	param_3	changeFlags	INFERRED	OR-ed into program+0x3c
+local	_gldRelatePipelineProgram	param_1	ctx	INFERRED	unused
+local	_gldRelatePipelineProgram	param_2	programState	INFERRED	+4 vertex program slot, +8 fragment program slot
+local	_gldRelatePipelineProgram	param_3	programRef	CONFIRMED	**programRef is the program target enum: -0x74d0 = 0x8b30 GL_FRAGMENT_PROGRAM_ARB, -0x74cf = 0x8b31 GL_VERTEX_PROGRAM_ARB
+local	_gldRelatePipelineProgram	param_4	bind	INFERRED	0 clears the slot
+local	_gldGetPipelineProgramInfo	param_1	arg0	UNKNOWN	forwarded to FUN_000269a0
+local	_gldGetPipelineProgramInfo	param_2	arg1	UNKNOWN	forwarded
+local	_gldGetPipelineProgramInfo	param_3	arg2	UNKNOWN	forwarded
+local	_gldGetPipelineProgramInfo	param_4	arg3	UNKNOWN	forwarded
+local	_gldDestroyPipelineProgram	param_1	ctx	INFERRED	first argument of every _gld* entry point; *(ctx+4) is the io_connect_t passed to _io_connect_method_*
+local	_gldDestroyPipelineProgram	param_2	program	CONFIRMED	unbound from ctx+0x1cc[0..1], released, freed
+local	_gldDestroyPipelineProgram	bVar1	moreSlots	CONFIRMED	loop continues while slot != 1
+local	_gldDestroyPipelineProgram	iVar2	slotCursor	CONFIRMED	ctx + 4*slot
+local	_gldDestroyPipelineProgram	iVar3	slot	CONFIRMED	0..1
+local	_gldDestroyQuery	param_1	ctx	INFERRED	*(ctx+0x22c) is the query-id allocation bitmap
+local	_gldDestroyQuery	param_2	query	CONFIRMED	query record; first word is the id, freed at the end
+local	_gldDestroyQuery	uVar1	bitIndex	CONFIRMED	id & 0x1f
+local	_gldDestroyQuery	uVar2	wordOffset	CONFIRMED	(id>>3) & ~3
+local	_gldCreateFence	param_1	ctx	INFERRED	*(ctx+4) io_connect_t; ctx+0x218/0x21c = mapped fence table and its size, ctx+0x220 = id bitmap
+local	_gldCreateFence	param_2	fenceOut	CONFIRMED	receives the malloc(8) fence record (0 on failure)
+local	_gldCreateFence	puVar1	taskPtr	INFERRED	PTR_001e88b4: pointer to the owning mach task passed to _IOConnectMapMemory
+local	_gldCreateFence	iVar2	wordIndex	CONFIRMED	index of the bitmap word that has a free bit; later the allocated fence id
+local	_gldCreateFence	piVar3	fence	CONFIRMED	malloc(8): [0] = id, byte [1] = 1 when created
+local	_gldCreateFence	iVar4	wordByteOffset	CONFIRMED	wordIndex*4 into the bitmap; reused for the _IOConnectMapMemory/_realloc result
+local	_gldCreateFence	puVar5	bitmap	CONFIRMED	*(ctx+0x220) id-allocation bitmap
+local	_gldCreateFence	uVar6	bitmapWord	CONFIRMED	bitmap word under inspection (0xffffffff = full)
+local	_gldCreateFence	puVar7	bitmapCursor	CONFIRMED	walks the bitmap words
+local	_gldCreateFence	uVar8	freeBitIndex	CONFIRMED	index of the first clear bit
+local	_gldCreateFence	uVar9	scanCounter	INFERRED	words left to scan, later the bit index (reused role)
+local	_gldCreateFence	iVar10	bitsLeft	CONFIRMED	counts 0x20 bits down
+local	_gldCreateQuery	param_1	ctx	INFERRED	ctx+0x224 query storage, +0x228 its size, +0x22c id bitmap, +0x230 capacity
+local	_gldCreateQuery	param_2	queryOut	CONFIRMED	receives the malloc(4) query record (0 on failure)
+local	_gldCreateQuery	iVar1	wordIndex	CONFIRMED	index of the bitmap word with a free bit
+local	_gldCreateQuery	piVar2	query	CONFIRMED	malloc(4): [0] = id
+local	_gldCreateQuery	iVar3	wordByteOffset	CONFIRMED	wordIndex*4; reused for call results and sizes
+local	_gldCreateQuery	uVar4	allocation	CONFIRMED	malloc result for storage / bitmap
+local	_gldCreateQuery	puVar5	bitmap	CONFIRMED	*(ctx+0x22c) id bitmap
+local	_gldCreateQuery	uVar6	bitmapWord	CONFIRMED	bitmap word under inspection; later capacity
+local	_gldCreateQuery	puVar7	bitmapCursor	CONFIRMED	walks the bitmap words
+local	_gldCreateQuery	uVar8	freeBitIndex	CONFIRMED	first clear bit
+local	_gldCreateQuery	uVar9	scanCounter	INFERRED	words left, later the bit index, later the bitmap byte size (reused role)
+local	_gldCreateQuery	iVar10	bitsLeft	CONFIRMED	counts 0x20 bits down
+local	_gldGetRendererInfo	param_1	rendererInfo	INFERRED	output record filled with fixed values and the two scalar outputs of selector 3
+local	_gldGetRendererInfo	param_2	rendererMask	INFERRED	must be a non-empty subset of the library display mask PTR_DAT_001e88ac[0]
+local	_gldGetRendererInfo	param_3	unused3	UNKNOWN	not used
+local	_gldGetRendererInfo	param_4	unused4	UNKNOWN	not used
+local	_gldGetRendererInfo	param_5	unused5	UNKNOWN	not used
+local	_gldGetRendererInfo	param_6	unused6	UNKNOWN	not used
+local	_gldGetRendererInfo	param_7	unused7	UNKNOWN	not used
+local	_gldGetRendererInfo	param_8	unused8	UNKNOWN	not used
+local	_gldGetRendererInfo	uVar1	returnCode	CONFIRMED	0x2719 bad mask, 0x271f open/call failure, 0 success
+local	_gldGetRendererInfo	uVar2	bitOrId	INFERRED	bit index while searching the mask; later FUN_00017720 result stored in rendererInfo[1]
+local	_gldGetRendererInfo	piVar3	serviceList	INFERRED	library+8 list of device service entries
+local	_gldGetRendererInfo	iVar4	listCount	INFERRED	library+4 count, later _IOServiceOpen / call status
+local	_gldGetRendererInfo	iVar5	rendererIndex	INFERRED	index of the chosen service in the list; stored in the top byte of rendererInfo[1]
+local	_gldGetRendererInfo	iVar6	offsetOrService	INFERRED	byte offset into the list, then the chosen service passed to _IOServiceOpen
+local	_gldGetRendererInfo	local_38	outCount	CONFIRMED	scalarO count (3) passed as &local_38
+local	_gldGetRendererInfo	local_34	connection	CONFIRMED	io_connect_t returned by _IOServiceOpen
+local	_gldGetRendererInfo	local_30	scalarOut0	CONFIRMED	first scalarO word (array passed as local_30)
+local	_gldGetRendererInfo	local_2c	scalarOut1	CONFIRMED	second scalarO word, stored in rendererInfo[0xd]
+local	_gldGetRendererInfo	local_28	scalarOut2	CONFIRMED	third scalarO word, stored in rendererInfo[0xc]
+local	_gldGetTextureLevelInfo	param_1	ctx	INFERRED	first argument of every _gld* entry point; *(ctx+4) is the io_connect_t passed to _io_connect_method_*
+local	_gldGetTextureLevelInfo	param_2	texture	INFERRED	texture record
+local	_gldGetTextureLevelInfo	param_3	face	UNKNOWN	forwarded to FUN_00030f60 which fills the info block
+local	_gldGetTextureLevelInfo	param_4	level	UNKNOWN	forwarded to FUN_00030f60
+local	_gldGetTextureLevelInfo	param_5	pname	CONFIRMED	compared against GL enums: 0x1003 GL_TEXTURE_COMPONENTS, 0x805c..0x805f GL_TEXTURE_{RED,GREEN,BLUE,ALPHA}_SIZE, 0x8060/0x8061 LUMINANCE/INTENSITY_SIZE, 0x884a GL_TEXTURE_DEPTH_SIZE, 0x86a0 COMPRESSED_IMAGE_SIZE, 0x86a1 COMPRESSED
+local	_gldGetTextureLevelInfo	param_6	valueOut	CONFIRMED	receives the selected value
+local	_gldGetTextureLevelInfo	uVar1	residentSize	INFERRED	FUN_0000a9f0 size of this texture plus the bound ones; compared with ctx+0x28 limit -> 0x2720
+local	_gldGetTextureLevelInfo	iVar2	boundTextureSize	INFERRED	FUN_0000a9f0 result for one bound texture
+local	_gldGetTextureLevelInfo	iVar3	boundSlotCursor	INFERRED	ctx + 4*unit stepping up to ctx+0x40
+local	_gldGetTextureLevelInfo	local_58	infoComponents	CONFIRMED	GL_TEXTURE_COMPONENTS (0x1003) value
+local	_gldGetTextureLevelInfo	local_54	infoRedSize	CONFIRMED	GL_TEXTURE_RED_SIZE
+local	_gldGetTextureLevelInfo	local_50	infoGreenSize	CONFIRMED	GL_TEXTURE_GREEN_SIZE
+local	_gldGetTextureLevelInfo	local_4c	infoBlueSize	CONFIRMED	GL_TEXTURE_BLUE_SIZE
+local	_gldGetTextureLevelInfo	local_48	infoAlphaSize	CONFIRMED	GL_TEXTURE_ALPHA_SIZE
+local	_gldGetTextureLevelInfo	local_44	infoLuminanceSize	CONFIRMED	GL_TEXTURE_LUMINANCE_SIZE
+local	_gldGetTextureLevelInfo	local_40	infoIntensitySize	CONFIRMED	GL_TEXTURE_INTENSITY_SIZE
+local	_gldGetTextureLevelInfo	local_3c	infoDepthSize	CONFIRMED	GL_TEXTURE_DEPTH_SIZE
+local	_gldGetTextureLevelInfo	local_38	infoCompressedImageSize	CONFIRMED	GL_TEXTURE_COMPRESSED_IMAGE_SIZE
+local	_gldGetTextureLevelInfo	local_34	infoCompressed	CONFIRMED	GL_TEXTURE_COMPRESSED byte
+local	_gldDeleteTextureLevel	param_1	ctx	INFERRED	first argument of every _gld* entry point; *(ctx+4) is the io_connect_t passed to _io_connect_method_*
+local	_gldDeleteTextureLevel	param_2	texture	INFERRED	texture record, flags byte at +0x39
+local	_gldDeleteTextureLevel	param_3	face	INFERRED	indexes the ushort level-mask array at texture+0x24
+local	_gldDeleteTextureLevel	param_4	level	INFERRED	0xffffffff = whole texture
+local	_gldDeleteTextureLevel	uVar1	oldLevelMask	INFERRED	face mask before the update
+local	_gldDeleteTextureLevel	iVar2	updatedRefCount	INFERRED	store-conditional result of the atomic decrement
+local	_gldDeleteTextureLevel	piVar3	refCountSlot	INFERRED	&resident[+0x10]
+local	_gldDeleteTextureLevel	iVar4	oldRefCount	INFERRED	==0x10000 means last reference -> selector 0xb release
+local	_gldDeleteTextureLevel	iVar5	faceEntry	INFERRED	texture + face*2; later the resident memory record texture+0x34
+local	_gldDeleteTextureLevel	in_cr0	crBits	UNKNOWN	Ghidra cr0 emulation for the lwarx/stwcx. loop
+local	_gldReclaimTexture	param_1	ctx	INFERRED	first argument of every _gld* entry point; *(ctx+4) is the io_connect_t passed to _io_connect_method_*
+local	_gldReclaimTexture	param_2	texture	INFERRED	texture record; +0x34 resident memory, +0x18 list of attached records
+local	_gldReclaimTexture	bVar1	moreUnits	CONFIRMED	loop continues while unit != 0xf
+local	_gldReclaimTexture	iVar2	updatedRefCount	INFERRED	store-conditional result
+local	_gldReclaimTexture	piVar3	refCountSlot	INFERRED	&resident[+0x10], later the list node
+local	_gldReclaimTexture	piVar4	listNeighbour	INFERRED	node[1], later &memory[+0x10]
+local	_gldReclaimTexture	iVar5	unitOrOldRefCount	INFERRED	texture-unit index 0..0xf, then old refcount (reused role)
+local	_gldReclaimTexture	iVar6	unitSlotCursor	INFERRED	ctx + 4*unit (bound texture slots at ctx+0x18c), later resident record
+local	_gldReclaimTexture	in_cr0	crBits	UNKNOWN	Ghidra cr0 emulation for the lwarx/stwcx. loop
+local	_gldCreateVertexArray	param_1	ctx	INFERRED	unused
+local	_gldCreateVertexArray	param_2	vertexArrayOut	CONFIRMED	receives the calloc(1,0x244) record
+local	_gldCreateVertexArray	param_3	initialWord0	UNKNOWN	stored in record[0]
+local	_gldCreateVertexArray	param_4	initialWord1	UNKNOWN	stored in record[1]
+local	_gldCreateVertexArray	puVar1	vertexArray	CONFIRMED	calloc(1,0x244) record
+local	_gldFlushVertexArray	param_1	ctx	INFERRED	first argument of every _gld* entry point; *(ctx+4) is the io_connect_t passed to _io_connect_method_*
+local	_gldFlushVertexArray	param_2	unused2	UNKNOWN	not used
+local	_gldFlushVertexArray	param_3	flushArg2	UNKNOWN	forwarded to FUN_0000b620
+local	_gldFlushVertexArray	param_4	flushArg3	UNKNOWN	forwarded to FUN_0000b620 (twice)
+local	_gldFlushVertexArray	param_5	doFlush	INFERRED	nonzero -> FUN_0000b620 called; returned as a boolean
+local	_gldFlushVertexArray	param_6	flushArg5	UNKNOWN	forwarded
+local	_gldFlushVertexArray	param_7	flushArg6	UNKNOWN	forwarded
+local	_gldFlushVertexArray	param_8	flushArg7	UNKNOWN	forwarded
+local	_gldModifyVertexArray	param_1	ctx	INFERRED	first argument of every _gld* entry point; *(ctx+4) is the io_connect_t passed to _io_connect_method_*
+local	_gldModifyVertexArray	param_2	vertexArray	INFERRED	vertex array record; +0x228 holds the backing memory record
+local	_gldModifyVertexArray	bVar1	retired	INFERRED	loop-exit flag (also reused as the store-conditional success flag)
+local	_gldModifyVertexArray	iVar2	updatedRefCount	INFERRED	store-conditional result
+local	_gldModifyVertexArray	uVar3	stateMismatch	INFERRED	vertexArray[0x8c] xor the expected value 6/7 selected by the state word at *(vertexArray)+0x312
+local	_gldModifyVertexArray	piVar4	refCountSlot	INFERRED	&backing[+0x10]
+local	_gldModifyVertexArray	iVar5	backing	INFERRED	param_2[0x8a], the backing memory record
+local	_gldModifyVertexArray	iVar6	oldRefCount	INFERRED	==0x10000 means last reference -> selector 0xb release
+local	_gldReclaimVertexArray	param_1	ctx	INFERRED	first argument of every _gld* entry point; *(ctx+4) is the io_connect_t passed to _io_connect_method_*
+local	_gldReclaimVertexArray	param_2	vertexArray	INFERRED	vertex array record; ctx+0x1d4 is the bound one
+local	_gldReclaimVertexArray	iVar1	updatedRefCount	INFERRED	store-conditional result
+local	_gldReclaimVertexArray	piVar2	refCountSlot	INFERRED	&backing[+0x10]
+local	_gldReclaimVertexArray	iVar3	oldRefCount	INFERRED	==0x10000 means last reference
+local	_gldReclaimVertexArray	iVar4	backing	INFERRED	*(vertexArray+0x228)
+local	_gldReclaimVertexArray	in_cr0	crBits	UNKNOWN	Ghidra cr0 emulation for the lwarx/stwcx. loop
+local	_gldDestroyVertexArray	param_1	ctx	INFERRED	first argument of every _gld* entry point; *(ctx+4) is the io_connect_t passed to _io_connect_method_*
+local	_gldDestroyVertexArray	param_2	vertexArray	CONFIRMED	reclaimed with _gldReclaimVertexArray then freed
+local	_gldFlush	param_1	ctx	INFERRED	ctx+0x1dc command-buffer limit, ctx+0x1e4 command-buffer state
+local	_gldFinish	param_1	ctx	CONFIRMED	*(ctx+4) io_connect_t; selector 8 is retried while it returns -0x1ffffd2a
+local	_gldFinish	iVar1	status	CONFIRMED	_io_connect_method_scalarI_structureI result
+local	_gldFreeVertexBuffer	param_1	ctx	INFERRED	unused
+local	_gldFreeVertexBuffer	param_2	vertexBuffer	INFERRED	data pointer; a "free" word at -0x6c is set to 1
+local	_gldGetTextureLevel	param_1	ctx	INFERRED	first argument of every _gld* entry point; *(ctx+4) is the io_connect_t passed to _io_connect_method_*
+local	_gldGetTextureLevel	param_2	texture	INFERRED	texture record; +0x30 is the level table
+local	_gldGetTextureLevel	param_3	face	INFERRED	face index (stride 0x168 in the level table)
+local	_gldGetTextureLevel	param_4	level	INFERRED	mip level (stride 0x18 within a face)
+local	_gldGetTextureLevel	uVar1	levelFormat	INFERRED	ushort at levelEntry+0xc
+local	_gldGetTextureLevel	iVar2	bytesPerElement	INFERRED	FUN_0000a3f0(width,height) result multiplied by uVar1
+local	_gldGetTextureLevel	uVar3	returnCode	CONFIRMED	0x2717 when there is no level table, else FUN_00031340 result
+local	_gldGetTextureLevel	iVar4	levelEntry	INFERRED	table + 0xa0 + level*0x18 + face*0x168; ushort +0x10/+0x12 are width/height
+local	_gldGetVersion	param_1	majorOut	INFERRED	receives 2
+local	_gldGetVersion	param_2	minorOut	INFERRED	receives 4
+local	_gldGetVersion	param_3	patchOut	INFERRED	receives 0xb
+local	_gldGetVersion	param_4	buildOut	INFERRED	receives 0x1900
+local	_gldGetString	param_1	ctx	CONFIRMED	ctx+0x24 high bits select the X1600/X1800/X1900 renderer string
+local	_gldGetString	param_2	name	CONFIRMED	GL string enum: 0x1f00 GL_VENDOR, 0x1f01 GL_RENDERER, 0x1f02 GL_VERSION, 0x1f03 GL_EXTENSIONS, 0x1f04 driver name
+local	_gldGetString	uVar1	chipClass	CONFIRMED	ctx+0x24 & 0x7ff00000: 0x100000 X1800, 0x200000 X1600, 0x800000 X1900

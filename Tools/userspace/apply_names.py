@@ -51,7 +51,7 @@ def main():
     a = sys.argv[1:]; check = '--check' in a; a = [x for x in a if x != '--check']
     d = a[0]
     rows = load_rows(d)
-    decl = set(IDENT.findall(open(os.path.join(d, 'decls.h')).read()))
+    decl = set(IDENT.findall(re.sub(r'/\*.*?\*/|//[^\n]*', ' ', open(os.path.join(d, 'decls.h')).read(), flags=re.S)))   # identifiers only, not words in comments
     byfn = {}
     for r in rows: byfn.setdefault(r[2], []).append(r)
     pending = applied = errors = 0
