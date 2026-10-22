@@ -3313,7 +3313,8 @@ int TType__getCompleteString(param_1, param_2)
   void *param_1;
   int param_2;
 {
-  undefined4 uVar1;
+  undefined4 basicString;
+  undefined4 qualifierString;
   int iVar2;
   uint uVar3;
   char *pcVar4;
@@ -3323,8 +3324,8 @@ int TType__getCompleteString(param_1, param_2)
   uVar3 = *(uint *)(param_2 + 0x24);
   pcVar4 = acStack_90;
   if (1 < uVar3 >> 0x19) {
-    uVar1 = getQualifierString(uVar3 >> 0x19);
-    iVar2 = _sprintf(pcVar4,"%s ",uVar1);
+    qualifierString = getQualifierString(uVar3 >> 0x19);
+    iVar2 = _sprintf(pcVar4,"%s ",qualifierString);
     uVar3 = *(uint *)(param_2 + 0x24);
     pcVar4 = pcVar4 + iVar2;
   }
@@ -3345,8 +3346,8 @@ int TType__getCompleteString(param_1, param_2)
   uVar3 = *(uint *)(param_2 + 0x24);
   pcVar4 = pcVar4 + iVar2;
 LAB_97b96e98:
-  uVar1 = TType__getBasicString(uVar3 >> 0x13 & 0x3f);
-  _sprintf(pcVar4,"%s",uVar1);
+  basicString = TType__getBasicString(uVar3 >> 0x13 & 0x3f);
+  _sprintf(pcVar4,"%s",basicString);
   local_20[0] = GetGlobalPoolAllocator();
   __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
             (param_1,acStack_90,(unsigned char *)local_20);

@@ -540,11 +540,12 @@ int std____default_alloc_template_true_0___reallocate(param_1, param_2, param_3)
   ulong param_2;
   ulong param_3;
 {
+  void *allocation;
   void *pvVar1;
   
   if ((0x80 < param_2) && (0x80 < param_3)) {
-    pvVar1 = (void *)_realloc(param_1,param_3);
-    return pvVar1;
+    allocation = (void *)_realloc(param_1,param_3);
+    return allocation;
   }
   pvVar1 = param_1;
   if ((param_2 + 7 & 0xfffffff8) != (param_3 + 7 & 0xfffffff8)) {
@@ -572,10 +573,10 @@ int __ZdaPv(param_1)
 int operator_new__(param_1)
   ulong param_1;
 {
-  void *pvVar1;
+  void *allocation;
   
-  pvVar1 = operator_new(param_1);
-  return pvVar1;
+  allocation = operator_new(param_1);
+  return allocation;
 }
 
 /* __ZNSt11logic_errorC2ERKSs @ 0x97c17b64 (4 bytes) */

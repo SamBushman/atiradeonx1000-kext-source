@@ -162,6 +162,7 @@ int _FreeAtomTable(param_1)
 /* _InitCPP @ 0x97b86060 (812 bytes) */
 int _InitCPP()
 {
+  int length;
   undefined *puVar1;
   undefined4 uVar2;
   int iVar3;
@@ -198,9 +199,9 @@ int _InitCPP()
   uVar2 = ((int (*)())_mem_CreatePool)(0,0);
   _macros = _NewScopeInPool(uVar2);
   builtin_strncpy(local_60,"PROFILE_",9);
-  iVar3 = _strlen(local_60);
+  length = _strlen(local_60);
   puVar1 = PTR_DAT_a7b7c0a8;
-  pcVar6 = local_60 + iVar3;
+  pcVar6 = local_60 + length;
   pcVar7 = *(char **)(*(int *)PTR__cpp_a7b7c0a4 + 4);
   while( true ) {
     uVar5 = (uint)*pcVar7;
@@ -251,6 +252,8 @@ int _FinalCPP(param_1, param_2, param_3, param_4, param_5, param_6)
 int _CPPdefine(param_1)
   int *param_1;
 {
+  undefined4 strfromTStr;
+  undefined4 atomString;
   undefined *puVar1;
   int iVar2;
   undefined4 uVar3;
@@ -316,8 +319,8 @@ LAB_97b86554:
       iVar2 = (**(code **)(*(int *)(in_r9 + 0x20) + 4))
                         (*(int *)(in_r9 + 0x20),param_1,in_r5,in_r6,in_r7,in_r8,in_r9);
     }
-    uVar3 = _GetAtomString(*(undefined4 *)PTR__atable_a7b7c0ac,iVar5);
-    local_48 = _NewTokenStream(uVar3,*(undefined4 *)(_macros + 0x10));
+    atomString = _GetAtomString(*(undefined4 *)PTR__atable_a7b7c0ac,iVar5);
+    local_48 = _NewTokenStream(atomString,*(undefined4 *)(_macros + 0x10));
     puVar1 = PTR__cpp_a7b7c0a4;
     while (iVar2 != 10) {
       while (iVar2 == 0x5c) {
@@ -367,9 +370,9 @@ LAB_97b86728:
         _StoreStr("Macro Redefined");
         uVar3 = ((int (*)())_GetStringOfAtom)(*(undefined4 *)PTR__atable_a7b7c0ac,iVar5);
         _StoreStr(uVar3);
-        uVar3 = _GetStrfromTStr();
+        strfromTStr = _GetStrfromTStr();
         _DecLineNumber();
-        _CPPShInfoLogMsg(uVar3,extraout_r4_02,in_r5,in_r6,in_r7,in_r8,in_r9);
+        _CPPShInfoLogMsg(strfromTStr,extraout_r4_02,in_r5,in_r6,in_r7,in_r8,in_r9);
         _IncLineNumber();
         _ResetTString();
       }
@@ -1018,7 +1021,7 @@ int _CPPerror(param_1)
   undefined *puVar1;
   undefined *puVar2;
   int iVar3;
-  undefined4 uVar4;
+  undefined4 strfromTStr;
   undefined4 extraout_r4;
   undefined4 in_r5;
   undefined4 in_r6;
@@ -1045,8 +1048,8 @@ int _CPPerror(param_1)
                       (*(int *)(*(int *)puVar1 + 0x20),param_1);
   }
   _DecLineNumber();
-  uVar4 = _GetStrfromTStr();
-  _CPPShInfoLogMsg(uVar4,extraout_r4,in_r5,in_r6,in_r7,in_r8,in_r9);
+  strfromTStr = _GetStrfromTStr();
+  _CPPShInfoLogMsg(strfromTStr,extraout_r4,in_r5,in_r6,in_r7,in_r8,in_r9);
   _ResetTString();
   *(undefined4 *)(*(int *)PTR__cpp_a7b7c0a4 + 0x140) = 1;
   _IncLineNumber();
@@ -1057,11 +1060,13 @@ int _CPPerror(param_1)
 int _CPPpragma(param_1)
   int param_1;
 {
+  undefined4 allocation2;
+  int length;
   undefined *puVar1;
   undefined *puVar2;
   uint uVar3;
   undefined4 uVar4;
-  undefined4 *puVar5;
+  undefined4 *allocation;
   int iVar6;
   undefined4 extraout_r4;
   undefined4 extraout_r4_00;
@@ -1089,7 +1094,7 @@ int _CPPpragma(param_1)
     uVar4 = 10;
   }
   else {
-    puVar5 = (undefined4 *)_malloc(0x28);
+    allocation = (undefined4 *)_malloc(0x28);
     puVar2 = PTR__atable_a7b7c0ac;
     uVar4 = extraout_r4_00;
     iVar6 = 10;
@@ -1097,15 +1102,15 @@ int _CPPpragma(param_1)
       iVar8 = iVar6;
       if (iVar6 <= iVar11) {
         iVar8 = iVar6 << 1;
-        puVar5 = (undefined4 *)_realloc(puVar5,iVar6 << 3);
+        allocation = (undefined4 *)_realloc(allocation,iVar6 << 3);
         uVar4 = extraout_r4_01;
       }
       if (uVar3 == 0x10b) {
 LAB_97b8758c:
         puVar9 = (undefined2 *)(param_1 + 0xc);
-        iVar6 = _strlen(puVar9);
-        uVar4 = _malloc(iVar6 + 1);
-        puVar5[iVar11] = uVar4;
+        length = _strlen(puVar9);
+        allocation2 = _malloc(length + 1);
+        allocation[iVar11] = allocation2;
       }
       else {
         if ((int)uVar3 < 0x10c) {
@@ -1119,21 +1124,21 @@ LAB_97b8758c:
           if (uVar3 == 0x10e) {
             puVar9 = (undefined2 *)
                      _GetAtomString(*(undefined4 *)puVar2,*(undefined4 *)(param_1 + 8));
-            iVar6 = _strlen(puVar9);
-            uVar4 = _malloc(iVar6 + 1);
-            puVar5[iVar11] = uVar4;
+            length = _strlen(puVar9);
+            allocation2 = _malloc(length + 1);
+            allocation[iVar11] = allocation2;
             goto LAB_97b875f0;
           }
           if (uVar3 == 0x10f) goto LAB_97b8758c;
         }
         local_40[0] = (undefined2)((uVar3 & 0xff) << 8);
-        uVar4 = _malloc(2);
-        puVar5[iVar11] = uVar4;
+        allocation2 = _malloc(2);
+        allocation[iVar11] = allocation2;
         puVar9 = local_40;
       }
 LAB_97b875f0:
       iVar11 = iVar11 + 1;
-      _strcpy(uVar4,puVar9);
+      _strcpy(allocation2,puVar9);
       puVar1 = PTR__cpp_a7b7c0a4;
       uVar3 = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
                         (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),param_1);
@@ -1142,10 +1147,10 @@ LAB_97b875f0:
     } while (uVar3 != 10);
     iVar7 = *(int *)(*(int *)puVar1 + 0x20);
     (**(code **)(iVar7 + 0xc))(iVar7,10,param_1);
-    _HandlePragma(puVar5,iVar11);
+    _HandlePragma(allocation,iVar11);
     iVar7 = *(int *)(*(int *)puVar1 + 0x20);
     uVar4 = (**(code **)(iVar7 + 4))(iVar7,param_1);
-    puVar10 = puVar5;
+    puVar10 = allocation;
     if (0 < iVar11) {
       do {
         _free(*puVar10);
@@ -1153,7 +1158,7 @@ LAB_97b875f0:
         puVar10 = puVar10 + 1;
       } while (iVar11 != 0);
     }
-    _free(puVar5);
+    _free(allocation);
   }
   return uVar4;
 }
@@ -1217,6 +1222,7 @@ int _CPPversion(param_1)
 int _CPPextension(param_1)
   int param_1;
 {
+  undefined4 atomString;
   undefined *puVar1;
   undefined *puVar2;
   int iVar3;
@@ -1248,16 +1254,16 @@ int _CPPextension(param_1)
       _CPPErrorToInfoLog("#extension",extraout_r4,in_r5,in_r6,in_r7,in_r8,in_r9);
     }
     puVar2 = PTR__atable_a7b7c0ac;
-    uVar4 = _GetAtomString(*(undefined4 *)PTR__atable_a7b7c0ac,*(undefined4 *)(param_1 + 8));
-    _strcpy(auStack_70,uVar4);
+    atomString = _GetAtomString(*(undefined4 *)PTR__atable_a7b7c0ac,*(undefined4 *)(param_1 + 8));
+    _strcpy(auStack_70,atomString);
     iVar3 = (**(code **)(*(int *)(*(int *)puVar1 + 0x20) + 4))
                       (*(int *)(*(int *)puVar1 + 0x20),param_1);
     if (iVar3 == 0x3a) {
       iVar3 = (**(code **)(*(int *)(*(int *)puVar1 + 0x20) + 4))
                         (*(int *)(*(int *)puVar1 + 0x20),param_1);
       if (iVar3 == 0x10e) {
-        uVar4 = _GetAtomString(*(undefined4 *)puVar2,*(undefined4 *)(param_1 + 8));
-        _updateExtensionBehavior(auStack_70,uVar4);
+        atomString = _GetAtomString(*(undefined4 *)puVar2,*(undefined4 *)(param_1 + 8));
+        _updateExtensionBehavior(auStack_70,atomString);
         iVar3 = (**(code **)(*(int *)(*(int *)puVar1 + 0x20) + 4))
                           (*(int *)(*(int *)puVar1 + 0x20),param_1);
         if (iVar3 == 10) {
@@ -1282,6 +1288,7 @@ int _CPPextension(param_1)
 int _readCPPline(param_1)
   int param_1;
 {
+  undefined4 strfromTStr;
   undefined *puVar1;
   int iVar2;
   int iVar3;
@@ -1378,8 +1385,8 @@ int _readCPPline(param_1)
                   uVar4 = ((int (*)())_GetStringOfAtom)(*(undefined4 *)PTR__atable_a7b7c0ac,
                                            *(undefined4 *)(param_1 + 8));
                   _StoreStr(uVar4);
-                  uVar4 = _GetStrfromTStr();
-                  _CPPShInfoLogMsg(uVar4,extraout_r4_01,in_r5,in_r6,in_r7,in_r8,in_r9);
+                  strfromTStr = _GetStrfromTStr();
+                  _CPPShInfoLogMsg(strfromTStr,extraout_r4_01,in_r5,in_r6,in_r7,in_r8,in_r9);
                   _ResetTString();
                 }
                 goto LAB_97b87c50;
@@ -1439,22 +1446,22 @@ int _PushEofSrc()
 {
   undefined4 uVar1;
   undefined4 uVar2;
-  undefined4 *puVar3;
+  undefined4 *allocation;
   int iVar4;
   
-  puVar3 = (undefined4 *)_malloc(0x18);
+  allocation = (undefined4 *)_malloc(0x18);
   uVar2 = DAT_a7b7b010;
   uVar1 = DAT_a7b7b00c;
   iVar4 = *(int *)PTR__cpp_a7b7c0a4;
-  *puVar3 = 0;
-  puVar3[5] = 0;
-  puVar3[2] = uVar2;
-  puVar3[3] = uVar1;
-  puVar3[4] = 0;
-  puVar3[1] = uVar2;
-  *puVar3 = *(undefined4 *)(iVar4 + 0x20);
-  *(undefined4 **)(iVar4 + 0x20) = puVar3;
-  return puVar3;
+  *allocation = 0;
+  allocation[5] = 0;
+  allocation[2] = uVar2;
+  allocation[3] = uVar1;
+  allocation[4] = 0;
+  allocation[1] = uVar2;
+  *allocation = *(undefined4 *)(iVar4 + 0x20);
+  *(undefined4 **)(iVar4 + 0x20) = allocation;
+  return allocation;
 }
 
 /* _PopEofSrc @ 0x97b87d58 (64 bytes) */
@@ -1580,6 +1587,8 @@ int _MacroExpand(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
+  undefined4 strfromTStr;
+  undefined4 allocation2;
   bool bVar1;
   bool bVar2;
   bool bVar3;
@@ -1587,7 +1596,7 @@ int _MacroExpand(param_1, param_2)
   undefined *puVar5;
   int iVar6;
   undefined4 uVar7;
-  undefined4 *puVar8;
+  undefined4 *allocation;
   int iVar9;
   char *pcVar10;
   undefined4 extraout_r4;
@@ -1613,21 +1622,21 @@ int _MacroExpand(param_1, param_2)
         if ((int)*(uint *)(iVar6 + 0x24) < 0) {
           return 0;
         }
-        puVar8 = (undefined4 *)_malloc(0x20);
+        allocation = (undefined4 *)_malloc(0x20);
         uVar7 = DAT_a7b7b008;
         iVar11 = *(int *)PTR__cpp_a7b7c0a4;
-        puVar8[4] = 0;
-        puVar8[5] = 0;
-        puVar8[6] = 0;
-        puVar8[7] = 0;
-        *puVar8 = 0;
-        puVar8[2] = 0;
-        puVar8[3] = 0;
-        puVar8[1] = uVar7;
-        puVar8[5] = *(undefined4 *)(*(int *)(iVar11 + 0x20) + 0x14);
+        allocation[4] = 0;
+        allocation[5] = 0;
+        allocation[6] = 0;
+        allocation[7] = 0;
+        *allocation = 0;
+        allocation[2] = 0;
+        allocation[3] = 0;
+        allocation[1] = uVar7;
+        allocation[5] = *(undefined4 *)(*(int *)(iVar11 + 0x20) + 0x14);
         a6 = *(int **)(*(int *)(iVar11 + 0x20) + 0x10);
-        puVar8[6] = iVar6 + 0x18;
-        puVar8[4] = a6;
+        allocation[6] = iVar6 + 0x18;
+        allocation[4] = a6;
         if (*(int *)(iVar6 + 0x1c) != 0) {
           iVar11 = (**(code **)(*(int *)(iVar11 + 0x20) + 4))
                              (*(int *)(iVar11 + 0x20),param_2,in_r5,in_r6,in_r7,in_r8,a6,iVar11);
@@ -1636,17 +1645,17 @@ int _MacroExpand(param_1, param_2)
             param_2[2] = param_1;
             return 0;
           }
-          uVar7 = _malloc(*(int *)puVar8[6] << 2);
-          puVar8[7] = uVar7;
+          allocation2 = _malloc(*(int *)allocation[6] << 2);
+          allocation[7] = allocation2;
           iVar11 = 0;
-          if (0 < *(int *)puVar8[6]) {
+          if (0 < *(int *)allocation[6]) {
             do {
               iVar9 = _NewTokenStream("macro arg",0);
-              a6 = (int *)puVar8[7];
+              a6 = (int *)allocation[7];
               iVar12 = iVar11 + 1;
               a6[iVar11] = iVar9;
               iVar11 = iVar12;
-            } while (iVar12 < *(int *)puVar8[6]);
+            } while (iVar12 < *(int *)allocation[6]);
           }
           puVar4 = PTR__cpp_a7b7c0a4;
           iVar11 = 0;
@@ -1659,7 +1668,7 @@ LAB_97b881d8:
             puVar5 = PTR__cpp_a7b7c0a4;
             bVar1 = 0 < iVar12;
             if (!bVar1) goto LAB_97b8830c;
-            a6 = (int *)puVar8[6];
+            a6 = (int *)allocation[6];
             bVar2 = iVar12 == 0x29;
             if ((*a6 == 0) && (!bVar2)) goto LAB_97b88284;
             if (iVar9 == 0) {
@@ -1679,7 +1688,7 @@ LAB_97b881d8:
             }
             bVar3 = true;
             in_r5 = param_2;
-            _RecordToken(*(undefined4 *)(iVar11 * 4 + puVar8[7]),iVar12,param_2);
+            _RecordToken(*(undefined4 *)(iVar11 * 4 + allocation[7]),iVar12,param_2);
           } while( true );
         }
         goto LAB_97b883b8;
@@ -1707,10 +1716,10 @@ LAB_97b8834c:
     _StoreStr(pcVar10);
     uVar7 = ((int (*)())_GetStringOfAtom)(*(undefined4 *)PTR__atable_a7b7c0ac,param_1);
     _StoreStr(uVar7);
-    uVar7 = _GetStrfromTStr();
-    _CPPShInfoLogMsg(uVar7,extraout_r4_00,in_r5,in_r6,in_r7,in_r8,a6);
+    strfromTStr = _GetStrfromTStr();
+    _CPPShInfoLogMsg(strfromTStr,extraout_r4_00,in_r5,in_r6,in_r7,in_r8,a6);
     _ResetTString();
-    a6 = (int *)puVar8[6];
+    a6 = (int *)allocation[6];
   }
   else if (!bVar2) {
     iVar11 = 0;
@@ -1733,8 +1742,8 @@ LAB_97b8830c:
       _StoreStr("EOF in Macro ");
       uVar7 = ((int (*)())_GetStringOfAtom)(*(undefined4 *)PTR__atable_a7b7c0ac,param_1);
       _StoreStr(uVar7);
-      uVar7 = _GetStrfromTStr();
-      _CPPShInfoLogMsg(uVar7,extraout_r4,in_r5,in_r6,in_r7,in_r8,a6);
+      strfromTStr = _GetStrfromTStr();
+      _CPPShInfoLogMsg(strfromTStr,extraout_r4,in_r5,in_r6,in_r7,in_r8,a6);
       _ResetTString();
       return 1;
     }
@@ -1746,16 +1755,16 @@ LAB_97b8830c:
     do {
       iVar9 = iVar11 * 4;
       iVar11 = iVar11 + 1;
-      uVar7 = ((int (*)())_PrescanMacroArg)(*(undefined4 *)(iVar9 + puVar8[7]),param_2);
-      *(undefined4 *)(iVar9 + puVar8[7]) = uVar7;
-    } while (iVar11 < *(int *)puVar8[6]);
+      uVar7 = ((int (*)())_PrescanMacroArg)(*(undefined4 *)(iVar9 + allocation[7]),param_2);
+      *(undefined4 *)(iVar9 + allocation[7]) = uVar7;
+    } while (iVar11 < *(int *)allocation[6]);
   }
 LAB_97b883b8:
   puVar4 = PTR__cpp_a7b7c0a4;
-  *puVar8 = *(undefined4 *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20);
+  *allocation = *(undefined4 *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20);
   *(uint *)(iVar6 + 0x24) = *(uint *)(iVar6 + 0x24) | 0x80000000;
   _RewindTokenStream(*(undefined4 *)(iVar6 + 0x20));
-  *(undefined4 **)(*(int *)puVar4 + 0x20) = puVar8;
+  *(undefined4 **)(*(int *)puVar4 + 0x20) = allocation;
   return 1;
 }
 
@@ -1776,18 +1785,18 @@ int _ChkCorrectElseNesting()
 int _InitCPPStruct()
 {
   undefined4 uVar1;
-  int *piVar2;
+  int *allocation;
   undefined1 *puVar3;
   int iVar4;
   
-  piVar2 = (int *)_malloc(0x158);
+  allocation = (int *)_malloc(0x158);
   uVar1 = 0;
-  _cpp = piVar2;
-  if (piVar2 != (int *)0x0) {
+  _cpp = allocation;
+  if (allocation != (int *)0x0) {
     _refCount = _refCount + 1;
-    *piVar2 = (int)(piVar2 + 5);
+    *allocation = (int)(allocation + 5);
     iVar4 = 0x10;
-    puVar3 = (undefined1 *)((int)piVar2 + 0x13);
+    puVar3 = (undefined1 *)((int)allocation + 0x13);
     do {
       *puVar3 = 0;
       puVar3 = puVar3 + -1;
@@ -1867,7 +1876,7 @@ int _mem_CreatePool(param_1, param_2)
   uint param_2;
 {
   undefined4 *puVar1;
-  undefined4 *puVar2;
+  undefined4 *allocation;
   uint uVar3;
   
   if (param_2 == 0) {
@@ -1880,16 +1889,16 @@ int _mem_CreatePool(param_1, param_2)
   puVar1 = (undefined4 *)0x0;
   if (((param_2 & uVar3) == 0) && (0x17 < param_1)) {
     if ((param_1 & uVar3) == 0) {
-      puVar2 = (undefined4 *)_malloc(param_1);
+      allocation = (undefined4 *)_malloc(param_1);
       puVar1 = (undefined4 *)0x0;
-      if (puVar2 != (undefined4 *)0x0) {
-        puVar2[2] = (int)puVar2 + param_1;
-        puVar2[5] = 0;
-        puVar2[1] = (int)puVar2 + param_2 + 0x17 & ~uVar3;
-        *puVar2 = 0;
-        puVar2[3] = param_1;
-        puVar2[4] = uVar3;
-        puVar1 = puVar2;
+      if (allocation != (undefined4 *)0x0) {
+        allocation[2] = (int)allocation + param_1;
+        allocation[5] = 0;
+        allocation[1] = (int)allocation + param_2 + 0x17 & ~uVar3;
+        *allocation = 0;
+        allocation[3] = param_1;
+        allocation[4] = uVar3;
+        puVar1 = allocation;
       }
     }
   }
@@ -1921,7 +1930,7 @@ int _mem_Alloc(param_1, param_2)
 {
   uint uVar1;
   uint uVar2;
-  undefined4 *puVar3;
+  undefined4 *allocation;
   uint uVar4;
   uint uVar5;
   
@@ -1937,22 +1946,22 @@ int _mem_Alloc(param_1, param_2)
     param_1[1] = uVar2;
     uVar1 = uVar1 + uVar5 + 4 & ~uVar5;
     if (uVar1 < (uint)param_1[3]) {
-      puVar3 = (undefined4 *)_malloc(param_1[3]);
-      if (puVar3 == (undefined4 *)0x0) {
+      allocation = (undefined4 *)_malloc(param_1[3]);
+      if (allocation == (undefined4 *)0x0) {
         return 0;
       }
-      param_1[1] = (int)puVar3 + uVar1;
-      param_1[2] = (int)puVar3 + param_1[3];
+      param_1[1] = (int)allocation + uVar1;
+      param_1[2] = (int)allocation + param_1[3];
     }
     else {
-      puVar3 = (undefined4 *)_malloc(uVar1);
-      if (puVar3 == (undefined4 *)0x0) {
+      allocation = (undefined4 *)_malloc(uVar1);
+      if (allocation == (undefined4 *)0x0) {
         return 0;
       }
     }
-    *puVar3 = *param_1;
-    *param_1 = puVar3;
-    uVar2 = (int)puVar3 + param_1[4] + 4 & ~param_1[4];
+    *allocation = *param_1;
+    *param_1 = allocation;
+    uVar2 = (int)allocation + param_1[4] + 4 & ~param_1[4];
   }
   return uVar2;
 }
@@ -2071,23 +2080,23 @@ int _ScanFromString(param_1)
 {
   undefined4 uVar1;
   undefined4 uVar2;
-  undefined4 *puVar3;
+  undefined4 *allocation;
   int iVar4;
   
-  puVar3 = (undefined4 *)_malloc(0x1c);
+  allocation = (undefined4 *)_malloc(0x1c);
   uVar1 = DAT_a7b7b038;
   uVar2 = DAT_a7b7b034;
   iVar4 = *(int *)PTR__cpp_a7b7c0a4;
-  puVar3[4] = 0;
-  puVar3[1] = uVar1;
+  allocation[4] = 0;
+  allocation[1] = uVar1;
   uVar1 = DAT_a7b7b030;
-  *puVar3 = 0;
-  puVar3[6] = param_1;
-  puVar3[5] = 1;
-  puVar3[2] = uVar2;
-  puVar3[3] = uVar1;
-  *puVar3 = *(undefined4 *)(iVar4 + 0x20);
-  *(undefined4 **)(iVar4 + 0x20) = puVar3;
+  *allocation = 0;
+  allocation[6] = param_1;
+  allocation[5] = 1;
+  allocation[2] = uVar2;
+  allocation[3] = uVar1;
+  *allocation = *(undefined4 *)(iVar4 + 0x20);
+  *(undefined4 **)(iVar4 + 0x20) = allocation;
   return 1;
 }
 

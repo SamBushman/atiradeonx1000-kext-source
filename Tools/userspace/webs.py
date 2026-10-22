@@ -41,8 +41,8 @@ class Function:
         self.labels = {}; self.gotos = []
         self.addr = set(); self.complex = set()
         self.idre = re.compile(r'(?<![A-Za-z0-9_])(%s)(?![A-Za-z0-9_])' % '|'.join(re.escape(v) for v in sorted(self.vars, key=len, reverse=True))) if self.vars else None
-        items = self.tokenize(d1, end)
         try:
+            items = self.tokenize(d1, end)
             self.build(items)
         except (IndexError, KeyError, ValueError, RuntimeError) as ex:
             self.ok = False; self.err = 'parse: %r' % (ex,)

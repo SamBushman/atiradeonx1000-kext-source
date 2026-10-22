@@ -40,7 +40,7 @@ int _extract_cie_info(param_1, param_2, param_3)
   undefined1 uVar2;
   char cVar3;
   byte bVar4;
-  int iVar5;
+  int length;
   undefined4 uVar6;
   undefined1 *puVar7;
   byte *pbVar8;
@@ -50,12 +50,12 @@ int _extract_cie_info(param_1, param_2, param_3)
   int local_30 [5];
   
   pcVar11 = (char *)(param_1 + 9);
-  iVar5 = _strlen(pcVar11);
-  pcVar9 = pcVar11 + iVar5 + 1;
+  length = _strlen(pcVar11);
+  pcVar9 = pcVar11 + length + 1;
   pbVar8 = (byte *)0x0;
   if ((*(char *)(param_1 + 9) == 'e') && (*(char *)(param_1 + 10) == 'h')) {
-    pcVar1 = pcVar11 + iVar5 + 1;
-    pcVar9 = pcVar11 + iVar5 + 5;
+    pcVar1 = pcVar11 + length + 1;
+    pcVar9 = pcVar11 + length + 5;
     pcVar11 = (char *)(param_1 + 0xb);
     *(undefined4 *)(param_3 + 0x3a0) = *(undefined4 *)pcVar1;
   }
@@ -1658,6 +1658,7 @@ int _base_from_object(param_1, param_2)
 int _get_cie_encoding(param_1)
   int param_1;
 {
+  int length;
   char cVar1;
   int iVar2;
   undefined4 uVar3;
@@ -1670,8 +1671,8 @@ int _get_cie_encoding(param_1)
   
   bVar5 = 0;
   if (*(char *)(param_1 + 9) == 'z') {
-    iVar2 = _strlen(param_1 + 9);
-    uVar3 = ((int (*)())_read_uleb128_97c1c41c)(param_1 + 9 + iVar2 + 1,auStack_20);
+    length = _strlen(param_1 + 9);
+    uVar3 = ((int (*)())_read_uleb128_97c1c41c)(param_1 + 9 + length + 1,auStack_20);
     iVar2 = ((int (*)())_read_sleb128_97c1c44c)(uVar3,auStack_1c);
     pbVar4 = (byte *)((int (*)())_read_uleb128_97c1c41c)(iVar2 + 1,auStack_20);
     for (pcVar6 = (char *)(param_1 + 10); cVar1 = *pcVar6, cVar1 != 'R'; pcVar6 = pcVar6 + 1) {
@@ -2631,15 +2632,15 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4EPKcRKS2_(this, param_2, par
   unsigned char * param_3;
 {
   undefined4 uVar1;
-  size_t sVar2;
+  size_t length;
   char *pcVar3;
   
   if (param_2 == (char *)0x0) {
     pcVar3 = (char *)0xffffffff;
   }
   else {
-    sVar2 = _strlen(param_2);
-    pcVar3 = param_2 + sVar2;
+    length = _strlen(param_2);
+    pcVar3 = param_2 + length;
   }
   pcVar3 = ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE12_S_constructIPKcEEPcT_S8_RKS2_St20forward_iterator_tag)(param_2,pcVar3,param_3,0);
   uVar1 = *(undefined4 *)param_3;

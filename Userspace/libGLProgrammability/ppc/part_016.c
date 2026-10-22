@@ -3,11 +3,11 @@
 /* _PPCConstantsAndScratchCreate @ 0x97be56c4 (56 bytes) */
 int _PPCConstantsAndScratchCreate()
 {
-  undefined4 uVar1;
+  undefined4 allocation;
   
-  uVar1 = _malloc(0xd80);
-  ((double (*)())_PPCConstantsAndScratchInitialise)(uVar1);
-  return uVar1;
+  allocation = _malloc(0xd80);
+  ((double (*)())_PPCConstantsAndScratchInitialise)(allocation);
+  return allocation;
 }
 
 /* _PPCConstantsAndScratchInitialise @ 0x97be5700 (1196 bytes) */
@@ -225,7 +225,7 @@ int _PPEmulatorBuild(emulator, param_2, param_3, param_4, param_5, param_6)
   undefined *puVar2;
   int iVar3;
   undefined4 uVar4;
-  undefined4 uVar5;
+  undefined4 compiledResult;
   int a6;
   code *UNRECOVERED_JUMPTABLE;
   uint uVar6;
@@ -264,14 +264,14 @@ int _PPEmulatorBuild(emulator, param_2, param_3, param_4, param_5, param_6)
       }
       if (bVar1) {
         _PPCRuntimeCompilerCompileNO(uVar4);
-        uVar5 = _PPCRuntimeCompilerGetCompiledResult(uVar4);
-        *(undefined4 *)(iVar7 + 0x1c) = uVar5;
+        compiledResult = _PPCRuntimeCompilerGetCompiledResult(uVar4);
+        *(undefined4 *)(iVar7 + 0x1c) = compiledResult;
       }
       else {
         _PPCRuntimeCompilerSetOptionFlags(uVar4,8);
         _PPCRuntimeCompilerCompileNO(uVar4);
-        uVar5 = _PPCRuntimeCompilerGetCompiledResult(uVar4);
-        *(undefined4 *)(iVar7 + 0x20) = uVar5;
+        compiledResult = _PPCRuntimeCompilerGetCompiledResult(uVar4);
+        *(undefined4 *)(iVar7 + 0x20) = compiledResult;
       }
       _PPCRuntimeCompilerFree(uVar4);
     }
@@ -284,14 +284,14 @@ int _PPEmulatorBuild(emulator, param_2, param_3, param_4, param_5, param_6)
       }
       if (bVar1) {
         _PPCRuntimeCompilerCompileAV(uVar4);
-        uVar5 = _PPCRuntimeCompilerGetCompiledResult(uVar4);
-        *(undefined4 *)(iVar7 + 0x14) = uVar5;
+        compiledResult = _PPCRuntimeCompilerGetCompiledResult(uVar4);
+        *(undefined4 *)(iVar7 + 0x14) = compiledResult;
       }
       else {
         _PPCRuntimeCompilerSetOptionFlags(uVar4,8);
         _PPCRuntimeCompilerCompileAV(uVar4);
-        uVar5 = _PPCRuntimeCompilerGetCompiledResult(uVar4);
-        *(undefined4 *)(iVar7 + 0x18) = uVar5;
+        compiledResult = _PPCRuntimeCompilerGetCompiledResult(uVar4);
+        *(undefined4 *)(iVar7 + 0x18) = compiledResult;
       }
       _PPCRuntimeCompilerFree(uVar4);
     }
@@ -2761,6 +2761,7 @@ int _adjustAllocation_97be9cb4(param_1, param_2, param_3)
   int *param_2;
   int *param_3;
 {
+  int allocation;
   int iVar1;
   int iVar2;
   int iVar3;
@@ -2770,13 +2771,13 @@ int _adjustAllocation_97be9cb4(param_1, param_2, param_3)
   if (*param_1 - (iVar3 - iVar1) < 0x100) {
     iVar2 = *param_1 + 0x800;
     *param_1 = iVar2;
-    iVar2 = _realloc(*param_2,iVar2);
-    *param_3 = iVar2;
-    if (iVar2 == 0) {
+    allocation = _realloc(*param_2,iVar2);
+    *param_3 = allocation;
+    if (allocation == 0) {
       return 0;
     }
-    *param_2 = iVar2;
-    *param_3 = iVar2 + (iVar3 - iVar1);
+    *param_2 = allocation;
+    *param_3 = allocation + (iVar3 - iVar1);
   }
   return 1;
 }
@@ -2812,7 +2813,7 @@ int _glpPPDisassemble(program)
   undefined4 extraout_r3_00;
   undefined4 uVar16;
   undefined4 extraout_r3_01;
-  void *pvVar17;
+  void *allocation;
   undefined4 extraout_r4;
   undefined4 extraout_r4_00;
   undefined4 extraout_r4_01;
@@ -7108,8 +7109,8 @@ switchD_97bee2f0_default:
     _free(local_7c);
   }
   if (0 < (int)outCursor - (int)outBuf) {
-    pvVar17 = (void *)_realloc(outBuf,(int)outCursor - (int)outBuf);
-    return pvVar17;
+    allocation = (void *)_realloc(outBuf,(int)outCursor - (int)outBuf);
+    return allocation;
   }
   _free(outBuf);
   return (void *)0x0;
@@ -7136,20 +7137,20 @@ int _PPStreamChunkCreateWithType(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
-  int iVar1;
-  undefined1 *puVar2;
+  int chunkAllocationSize;
+  undefined1 *allocation;
   
-  iVar1 = _GetChunkAllocationSize(param_1,param_2);
-  puVar2 = (undefined1 *)_calloc(iVar1 + 0xc,1);
-  _memset(puVar2,0,iVar1 + 0xc);
-  *puVar2 = (char)param_1;
+  chunkAllocationSize = _GetChunkAllocationSize(param_1,param_2);
+  allocation = (undefined1 *)_calloc(chunkAllocationSize + 0xc,1);
+  _memset(allocation,0,chunkAllocationSize + 0xc);
+  *allocation = (char)param_1;
   if (param_1 == 8) {
-    *(undefined4 *)(puVar2 + 0x40) = param_2;
+    *(undefined4 *)(allocation + 0x40) = param_2;
   }
   else if (param_1 == 0xb) {
-    *(undefined4 *)(puVar2 + 0x10) = param_2;
+    *(undefined4 *)(allocation + 0x10) = param_2;
   }
-  return puVar2;
+  return allocation;
 }
 
 /* _PPStreamChunkCompare @ 0x97bf0e10 (212 bytes) */
@@ -7158,7 +7159,7 @@ int _PPStreamChunkCompare(stream, param_2)
   char *param_2;
 {
   undefined4 uVar1;
-  int iVar2;
+  int compareResult;
   undefined4 uVar3;
   
   uVar1 = 1;
@@ -7189,9 +7190,9 @@ int _PPStreamChunkCompare(stream, param_2)
     default:
       return 1;
     }
-    iVar2 = _memcmp(stream + 0xc,param_2 + 0xc,uVar3);
+    compareResult = _memcmp(stream + 0xc,param_2 + 0xc,uVar3);
     uVar1 = 1;
-    if (iVar2 == 0) {
+    if (compareResult == 0) {
       uVar1 = 0;
     }
   }
@@ -7318,59 +7319,59 @@ int _PPStreamDuplicate(stream)
 {
   int *piVar1;
   undefined4 *puVar2;
-  undefined4 uVar3;
+  undefined4 chunk;
   int iVar4;
   
   puVar2 = (undefined4 *)_PPStreamCreate();
   piVar1 = (int *)stream[1];
   *puVar2 = *stream;
   for (iVar4 = *piVar1; iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
-    uVar3 = _PPStreamChunkCreateFromChunk(iVar4);
-    _PPStreamChunkListAddChunk(puVar2[1],uVar3);
+    chunk = _PPStreamChunkCreateFromChunk(iVar4);
+    _PPStreamChunkListAddChunk(puVar2[1],chunk);
   }
   for (iVar4 = *(int *)stream[2]; iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
-    uVar3 = _PPStreamChunkCreateFromChunk(iVar4);
-    _PPStreamChunkListAddChunk(puVar2[2],uVar3);
+    chunk = _PPStreamChunkCreateFromChunk(iVar4);
+    _PPStreamChunkListAddChunk(puVar2[2],chunk);
   }
   for (iVar4 = *(int *)stream[3]; iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
-    uVar3 = _PPStreamChunkCreateFromChunk(iVar4);
-    _PPStreamChunkListAddChunk(puVar2[3],uVar3);
+    chunk = _PPStreamChunkCreateFromChunk(iVar4);
+    _PPStreamChunkListAddChunk(puVar2[3],chunk);
   }
   for (iVar4 = *(int *)stream[4]; iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
-    uVar3 = _PPStreamChunkCreateFromChunk(iVar4);
-    _PPStreamChunkListAddChunk(puVar2[4],uVar3);
+    chunk = _PPStreamChunkCreateFromChunk(iVar4);
+    _PPStreamChunkListAddChunk(puVar2[4],chunk);
   }
   for (iVar4 = *(int *)stream[5]; iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
-    uVar3 = _PPStreamChunkCreateFromChunk(iVar4);
-    _PPStreamChunkListAddChunk(puVar2[5],uVar3);
+    chunk = _PPStreamChunkCreateFromChunk(iVar4);
+    _PPStreamChunkListAddChunk(puVar2[5],chunk);
   }
   for (iVar4 = *(int *)stream[6]; iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
-    uVar3 = _PPStreamChunkCreateFromChunk(iVar4);
-    _PPStreamChunkListAddChunk(puVar2[6],uVar3);
+    chunk = _PPStreamChunkCreateFromChunk(iVar4);
+    _PPStreamChunkListAddChunk(puVar2[6],chunk);
   }
   for (iVar4 = *(int *)stream[7]; iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
-    uVar3 = _PPStreamChunkCreateFromChunk(iVar4);
-    _PPStreamChunkListAddChunk(puVar2[7],uVar3);
+    chunk = _PPStreamChunkCreateFromChunk(iVar4);
+    _PPStreamChunkListAddChunk(puVar2[7],chunk);
   }
   for (iVar4 = *(int *)stream[8]; iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
-    uVar3 = _PPStreamChunkCreateFromChunk(iVar4);
-    _PPStreamChunkListAddChunk(puVar2[8],uVar3);
+    chunk = _PPStreamChunkCreateFromChunk(iVar4);
+    _PPStreamChunkListAddChunk(puVar2[8],chunk);
   }
   for (iVar4 = *(int *)stream[9]; iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
-    uVar3 = _PPStreamChunkCreateFromChunk(iVar4);
-    _PPStreamChunkListAddChunk(puVar2[9],uVar3);
+    chunk = _PPStreamChunkCreateFromChunk(iVar4);
+    _PPStreamChunkListAddChunk(puVar2[9],chunk);
   }
   for (iVar4 = *(int *)stream[0xb]; iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
-    uVar3 = _PPStreamChunkCreateFromChunk(iVar4);
-    _PPStreamChunkListAddChunk(puVar2[0xb],uVar3);
+    chunk = _PPStreamChunkCreateFromChunk(iVar4);
+    _PPStreamChunkListAddChunk(puVar2[0xb],chunk);
   }
   for (iVar4 = *(int *)stream[10]; iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
-    uVar3 = _PPStreamChunkCreateFromChunk(iVar4);
-    _PPStreamChunkListAddChunk(puVar2[10],uVar3);
+    chunk = _PPStreamChunkCreateFromChunk(iVar4);
+    _PPStreamChunkListAddChunk(puVar2[10],chunk);
   }
   for (iVar4 = *(int *)stream[0xc]; iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
-    uVar3 = _PPStreamChunkCreateFromChunk(iVar4);
-    _PPStreamChunkListAddChunk(puVar2[0xc],uVar3);
+    chunk = _PPStreamChunkCreateFromChunk(iVar4);
+    _PPStreamChunkListAddChunk(puVar2[0xc],chunk);
   }
   return puVar2;
 }
@@ -7380,19 +7381,19 @@ int _PPStreamAddTempUsageArray(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
-  undefined1 *puVar1;
+  undefined1 *allocation;
   undefined4 uVar2;
   undefined4 uVar3;
   undefined4 uVar4;
   
-  puVar1 = (undefined1 *)_calloc(0x14,1);
+  allocation = (undefined1 *)_calloc(0x14,1);
   uVar4 = param_2[1];
   uVar2 = *(undefined4 *)(param_1 + 8);
   uVar3 = *param_2;
-  *puVar1 = 6;
-  *(undefined4 *)(puVar1 + 0xc) = uVar3;
-  *(undefined4 *)(puVar1 + 0x10) = uVar4;
-  return _PPStreamChunkListAddChunk(uVar2,puVar1);
+  *allocation = 6;
+  *(undefined4 *)(allocation + 0xc) = uVar3;
+  *(undefined4 *)(allocation + 0x10) = uVar4;
+  return _PPStreamChunkListAddChunk(uVar2,allocation);
 }
 
 /* _PPStreamAddAddressUsage @ 0x97bf1390 (84 bytes) */
@@ -7400,16 +7401,16 @@ int _PPStreamAddAddressUsage(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
-  undefined1 *puVar1;
+  undefined1 *allocation;
   undefined4 uVar2;
   undefined4 uVar3;
   
-  puVar1 = (undefined1 *)_calloc(0x10,1);
+  allocation = (undefined1 *)_calloc(0x10,1);
   uVar3 = *param_2;
   uVar2 = *(undefined4 *)(param_1 + 0xc);
-  *puVar1 = 1;
-  *(undefined4 *)(puVar1 + 0xc) = uVar3;
-  return _PPStreamChunkListAddChunk(uVar2,puVar1);
+  *allocation = 1;
+  *(undefined4 *)(allocation + 0xc) = uVar3;
+  return _PPStreamChunkListAddChunk(uVar2,allocation);
 }
 
 /* _PPStreamAddParamBindingArray @ 0x97bf13e4 (92 bytes) */
@@ -7417,19 +7418,19 @@ int _PPStreamAddParamBindingArray(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
-  undefined1 *puVar1;
+  undefined1 *allocation;
   undefined4 uVar2;
   undefined4 uVar3;
   undefined4 uVar4;
   
-  puVar1 = (undefined1 *)_calloc(0x14,1);
+  allocation = (undefined1 *)_calloc(0x14,1);
   uVar4 = param_2[1];
   uVar2 = *(undefined4 *)(param_1 + 0x14);
   uVar3 = *param_2;
-  *puVar1 = 5;
-  *(undefined4 *)(puVar1 + 0xc) = uVar3;
-  *(undefined4 *)(puVar1 + 0x10) = uVar4;
-  return _PPStreamChunkListAddChunk(uVar2,puVar1);
+  *allocation = 5;
+  *(undefined4 *)(allocation + 0xc) = uVar3;
+  *(undefined4 *)(allocation + 0x10) = uVar4;
+  return _PPStreamChunkListAddChunk(uVar2,allocation);
 }
 
 /* _PPStreamInsertOperationBeforeChunk @ 0x97bf1440 (288 bytes) */
@@ -7440,10 +7441,11 @@ int _PPStreamInsertOperationBeforeChunk(stream, param_2, param_3, param_4, param
   int param_4;
   int param_5;
 {
+  int maxIndex;
   uint uVar1;
   uint uVar2;
   int iVar3;
-  undefined1 *puVar4;
+  undefined1 *allocation;
   int iVar5;
   
   iVar5 = *(int *)(param_2 + 0x34);
@@ -7451,30 +7453,30 @@ int _PPStreamInsertOperationBeforeChunk(stream, param_2, param_3, param_4, param
   if (iVar5 != 0) {
     iVar3 = iVar5 + 0x39;
   }
-  puVar4 = (undefined1 *)_calloc(iVar3 + 0xc,1);
-  *puVar4 = 8;
-  _memcpy(puVar4 + 0xc,param_2,0x38);
+  allocation = (undefined1 *)_calloc(iVar3 + 0xc,1);
+  *allocation = 8;
+  _memcpy(allocation + 0xc,param_2,0x38);
   if ((iVar5 != 0) && (param_3 != 0)) {
-    _memmove(puVar4 + 0x44,param_3,iVar5);
-    puVar4[iVar5 + 0x44] = 0;
+    _memmove(allocation + 0x44,param_3,iVar5);
+    allocation[iVar5 + 0x44] = 0;
   }
   if (param_4 == 0) {
-    iVar3 = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(stream + 0x20));
-    uVar1 = iVar3 + 1U & 0x3ffff | *(uint *)(puVar4 + 0xc) & 0xfffc0000;
+    maxIndex = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(stream + 0x20));
+    uVar1 = maxIndex + 1U & 0x3ffff | *(uint *)(allocation + 0xc) & 0xfffc0000;
   }
   else {
-    uVar1 = *(uint *)(puVar4 + 0xc) & 0xfffc0000;
+    uVar1 = *(uint *)(allocation + 0xc) & 0xfffc0000;
   }
-  *(uint *)(puVar4 + 0xc) = uVar1;
+  *(uint *)(allocation + 0xc) = uVar1;
   if (param_5 != 0) {
     uVar1 = *(uint *)(param_5 + 0xc);
-    uVar2 = *(uint *)(puVar4 + 0xc);
+    uVar2 = *(uint *)(allocation + 0xc);
     *(uint *)(param_5 + 0xc) =
          uVar2 & 0x3ffff | (uVar2 & 0xe3ffffff) >> 3 & 0x1c000000 | uVar1 & 0xe3fc0000;
-    *(uint *)(puVar4 + 0xc) = uVar1 & 0x3ffff | (uVar1 >> 0x1a & 7) << 0x1a | uVar2 & 0xe3fc0000;
+    *(uint *)(allocation + 0xc) = uVar1 & 0x3ffff | (uVar1 >> 0x1a & 7) << 0x1a | uVar2 & 0xe3fc0000;
   }
-  ((int (*)())_PPStreamChunkListInsertChunkBeforeChunk)(*(undefined4 *)(stream + 0x20),puVar4,param_5);
-  return puVar4;
+  ((int (*)())_PPStreamChunkListInsertChunkBeforeChunk)(*(undefined4 *)(stream + 0x20),allocation,param_5);
+  return allocation;
 }
 
 /* _PPStreamInsertOperationAfterChunk @ 0x97bf1560 (236 bytes) */
@@ -7485,9 +7487,10 @@ int _PPStreamInsertOperationAfterChunk(stream, param_2, param_3, param_4, param_
   int param_4;
   undefined4 param_5;
 {
+  int maxIndex;
   uint uVar1;
   int iVar2;
-  undefined1 *puVar3;
+  undefined1 *allocation;
   int iVar4;
   
   iVar4 = *(int *)(param_2 + 0x34);
@@ -7495,23 +7498,23 @@ int _PPStreamInsertOperationAfterChunk(stream, param_2, param_3, param_4, param_
   if (iVar4 != 0) {
     iVar2 = iVar4 + 0x39;
   }
-  puVar3 = (undefined1 *)_calloc(iVar2 + 0xc,1);
-  *puVar3 = 8;
-  _memcpy(puVar3 + 0xc,param_2,0x38);
+  allocation = (undefined1 *)_calloc(iVar2 + 0xc,1);
+  *allocation = 8;
+  _memcpy(allocation + 0xc,param_2,0x38);
   if ((iVar4 != 0) && (param_3 != 0)) {
-    _memmove(puVar3 + 0x44,param_3,iVar4);
-    puVar3[iVar4 + 0x44] = 0;
+    _memmove(allocation + 0x44,param_3,iVar4);
+    allocation[iVar4 + 0x44] = 0;
   }
   if (param_4 == 0) {
-    iVar2 = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(stream + 0x20));
-    uVar1 = iVar2 + 1U & 0x3ffff | *(uint *)(puVar3 + 0xc) & 0xfffc0000;
+    maxIndex = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(stream + 0x20));
+    uVar1 = maxIndex + 1U & 0x3ffff | *(uint *)(allocation + 0xc) & 0xfffc0000;
   }
   else {
-    uVar1 = *(uint *)(puVar3 + 0xc) & 0xfffc0000;
+    uVar1 = *(uint *)(allocation + 0xc) & 0xfffc0000;
   }
-  *(uint *)(puVar3 + 0xc) = uVar1;
-  ((int (*)())_PPStreamChunkListInsertChunkAfterChunk)(*(undefined4 *)(stream + 0x20),puVar3,param_5);
-  return puVar3;
+  *(uint *)(allocation + 0xc) = uVar1;
+  ((int (*)())_PPStreamChunkListInsertChunkAfterChunk)(*(undefined4 *)(stream + 0x20),allocation,param_5);
+  return allocation;
 }
 
 /* _PPStreamAddLabel @ 0x97bf164c (128 bytes) */
@@ -7520,20 +7523,20 @@ int _PPStreamAddLabel(stream, param_2, param_3)
   undefined4 param_2;
   int param_3;
 {
-  undefined1 *puVar1;
+  undefined1 *allocation;
   undefined4 uVar2;
-  int iVar3;
+  int maxIndex;
   
-  puVar1 = (undefined1 *)_calloc(param_3 + 0x15,1);
+  allocation = (undefined1 *)_calloc(param_3 + 0x15,1);
   uVar2 = *(undefined4 *)(stream + 0x20);
-  *puVar1 = 0xb;
-  *(int *)(puVar1 + 0x10) = param_3;
-  iVar3 = _PPStreamChunkListGetMaxIndex(uVar2);
-  *(int *)(puVar1 + 0xc) = iVar3 + 1;
-  _memmove(puVar1 + 0x14,param_2,param_3);
+  *allocation = 0xb;
+  *(int *)(allocation + 0x10) = param_3;
+  maxIndex = _PPStreamChunkListGetMaxIndex(uVar2);
+  *(int *)(allocation + 0xc) = maxIndex + 1;
+  _memmove(allocation + 0x14,param_2,param_3);
   uVar2 = *(undefined4 *)(stream + 0x24);
-  puVar1[param_3 + 0x14] = 0;
-  return _PPStreamChunkListAddChunk(uVar2,puVar1);
+  allocation[param_3 + 0x14] = 0;
+  return _PPStreamChunkListAddChunk(uVar2,allocation);
 }
 
 /* _PPStreamRemoveLabelsAtOperationIndex @ 0x97bf16cc (96 bytes) */
@@ -7559,19 +7562,19 @@ int _PPStreamAddRasterOp(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
-  undefined1 *puVar1;
+  undefined1 *allocation;
   undefined4 uVar2;
   undefined4 uVar3;
   undefined4 uVar4;
   
-  puVar1 = (undefined1 *)_calloc(0x14,1);
+  allocation = (undefined1 *)_calloc(0x14,1);
   uVar4 = param_2[1];
   uVar2 = *(undefined4 *)(param_1 + 0x28);
   uVar3 = *param_2;
-  *puVar1 = 9;
-  *(undefined4 *)(puVar1 + 0xc) = uVar3;
-  *(undefined4 *)(puVar1 + 0x10) = uVar4;
-  return _PPStreamChunkListAddChunk(uVar2,puVar1);
+  *allocation = 9;
+  *(undefined4 *)(allocation + 0xc) = uVar3;
+  *(undefined4 *)(allocation + 0x10) = uVar4;
+  return _PPStreamChunkListAddChunk(uVar2,allocation);
 }
 
 /* _PPStreamAttachStream @ 0x97bf1788 (1212 bytes) */
@@ -7583,7 +7586,7 @@ int _PPStreamAttachStream(stream, param_2)
   uint uVar2;
   undefined4 uVar3;
   uint uVar4;
-  undefined1 *puVar5;
+  undefined1 *allocation;
   undefined1 *puVar6;
   uint uVar7;
   uint *puVar8;
@@ -7594,24 +7597,24 @@ int _PPStreamAttachStream(stream, param_2)
   *stream = *param_2;
   if (param_2[6] != 0) {
     do {
-      puVar5 = (undefined1 *)_calloc(0x10,1);
-      *(uint *)(puVar5 + 0xc) = uVar7;
-      *puVar5 = 1;
+      allocation = (undefined1 *)_calloc(0x10,1);
+      *(uint *)(allocation + 0xc) = uVar7;
+      *allocation = 1;
       uVar7 = uVar7 + 1;
-      _PPStreamChunkListAddChunk(stream[3],puVar5);
+      _PPStreamChunkListAddChunk(stream[3],allocation);
     } while (uVar7 < (uint)param_2[6]);
   }
   uVar7 = 0;
   puVar9 = param_2 + param_2[5] * 2;
   if (param_2[4] != 0) {
     do {
-      puVar5 = (undefined1 *)_calloc(0x1c,1);
+      allocation = (undefined1 *)_calloc(0x1c,1);
       uVar7 = uVar7 + 1;
-      *puVar5 = 0;
+      *allocation = 0;
       uVar3 = puVar9[1];
-      *(undefined4 *)(puVar5 + 0xc) = *puVar9;
-      *(undefined4 *)(puVar5 + 0x10) = uVar3;
-      _PPStreamChunkListAddChunk(stream[1],puVar5);
+      *(undefined4 *)(allocation + 0xc) = *puVar9;
+      *(undefined4 *)(allocation + 0x10) = uVar3;
+      _PPStreamChunkListAddChunk(stream[1],allocation);
       puVar9 = puVar9 + 2;
     } while (uVar7 < (uint)param_2[4]);
   }
@@ -7619,13 +7622,13 @@ int _PPStreamAttachStream(stream, param_2)
   puVar9 = param_2 + param_2[9] * 2;
   if (param_2[8] != 0) {
     do {
-      puVar5 = (undefined1 *)_calloc(0x14,1);
+      allocation = (undefined1 *)_calloc(0x14,1);
       uVar7 = uVar7 + 1;
-      *puVar5 = 2;
+      *allocation = 2;
       uVar3 = puVar9[1];
-      *(undefined4 *)(puVar5 + 0xc) = *puVar9;
-      *(undefined4 *)(puVar5 + 0x10) = uVar3;
-      _PPStreamChunkListAddChunk(stream[6],puVar5);
+      *(undefined4 *)(allocation + 0xc) = *puVar9;
+      *(undefined4 *)(allocation + 0x10) = uVar3;
+      _PPStreamChunkListAddChunk(stream[6],allocation);
       puVar9 = puVar9 + 2;
     } while (uVar7 < (uint)param_2[8]);
   }
@@ -7633,13 +7636,13 @@ int _PPStreamAttachStream(stream, param_2)
   puVar9 = param_2 + param_2[0xb] * 2;
   if (param_2[10] != 0) {
     do {
-      puVar5 = (undefined1 *)_calloc(0x1c,1);
+      allocation = (undefined1 *)_calloc(0x1c,1);
       uVar7 = uVar7 + 1;
-      *puVar5 = 3;
+      *allocation = 3;
       uVar3 = puVar9[1];
-      *(undefined4 *)(puVar5 + 0xc) = *puVar9;
-      *(undefined4 *)(puVar5 + 0x10) = uVar3;
-      _PPStreamChunkListAddChunk(stream[4],puVar5);
+      *(undefined4 *)(allocation + 0xc) = *puVar9;
+      *(undefined4 *)(allocation + 0x10) = uVar3;
+      _PPStreamChunkListAddChunk(stream[4],allocation);
       puVar9 = puVar9 + 2;
     } while (uVar7 < (uint)param_2[10]);
   }
@@ -7647,13 +7650,13 @@ int _PPStreamAttachStream(stream, param_2)
   puVar9 = param_2 + param_2[0xd] * 2;
   if (param_2[0xc] != 0) {
     do {
-      puVar5 = (undefined1 *)_calloc(0x14,1);
+      allocation = (undefined1 *)_calloc(0x14,1);
       uVar7 = uVar7 + 1;
-      *puVar5 = 4;
+      *allocation = 4;
       uVar3 = puVar9[1];
-      *(undefined4 *)(puVar5 + 0xc) = *puVar9;
-      *(undefined4 *)(puVar5 + 0x10) = uVar3;
-      _PPStreamChunkListAddChunk(stream[7],puVar5);
+      *(undefined4 *)(allocation + 0xc) = *puVar9;
+      *(undefined4 *)(allocation + 0x10) = uVar3;
+      _PPStreamChunkListAddChunk(stream[7],allocation);
       puVar9 = puVar9 + 2;
     } while (uVar7 < (uint)param_2[0xc]);
   }
@@ -7661,13 +7664,13 @@ int _PPStreamAttachStream(stream, param_2)
   puVar9 = param_2 + param_2[0xf] * 2;
   if (param_2[0xe] != 0) {
     do {
-      puVar5 = (undefined1 *)_calloc(0x14,1);
+      allocation = (undefined1 *)_calloc(0x14,1);
       uVar7 = uVar7 + 1;
-      *puVar5 = 5;
+      *allocation = 5;
       uVar3 = puVar9[1];
-      *(undefined4 *)(puVar5 + 0xc) = *puVar9;
-      *(undefined4 *)(puVar5 + 0x10) = uVar3;
-      _PPStreamChunkListAddChunk(stream[5],puVar5);
+      *(undefined4 *)(allocation + 0xc) = *puVar9;
+      *(undefined4 *)(allocation + 0x10) = uVar3;
+      _PPStreamChunkListAddChunk(stream[5],allocation);
       puVar9 = puVar9 + 2;
     } while (uVar7 < (uint)param_2[0xe]);
   }
@@ -7675,13 +7678,13 @@ int _PPStreamAttachStream(stream, param_2)
   puVar9 = param_2 + param_2[0x11] * 2;
   if (param_2[0x10] != 0) {
     do {
-      puVar5 = (undefined1 *)_calloc(0x14,1);
+      allocation = (undefined1 *)_calloc(0x14,1);
       uVar7 = uVar7 + 1;
-      *puVar5 = 6;
+      *allocation = 6;
       uVar3 = puVar9[1];
-      *(undefined4 *)(puVar5 + 0xc) = *puVar9;
-      *(undefined4 *)(puVar5 + 0x10) = uVar3;
-      _PPStreamChunkListAddChunk(stream[2],puVar5);
+      *(undefined4 *)(allocation + 0xc) = *puVar9;
+      *(undefined4 *)(allocation + 0x10) = uVar3;
+      _PPStreamChunkListAddChunk(stream[2],allocation);
       puVar9 = puVar9 + 2;
     } while (uVar7 < (uint)param_2[0x10]);
   }
@@ -7689,13 +7692,13 @@ int _PPStreamAttachStream(stream, param_2)
   puVar9 = param_2 + param_2[0x13] * 2;
   if (param_2[0x12] != 0) {
     do {
-      puVar5 = (undefined1 *)_calloc(0x14,1);
+      allocation = (undefined1 *)_calloc(0x14,1);
       uVar7 = uVar7 + 1;
-      *puVar5 = 7;
+      *allocation = 7;
       uVar3 = puVar9[1];
-      *(undefined4 *)(puVar5 + 0xc) = *puVar9;
-      *(undefined4 *)(puVar5 + 0x10) = uVar3;
-      _PPStreamChunkListAddChunk(stream[0xc],puVar5);
+      *(undefined4 *)(allocation + 0xc) = *puVar9;
+      *(undefined4 *)(allocation + 0x10) = uVar3;
+      _PPStreamChunkListAddChunk(stream[0xc],allocation);
       puVar9 = puVar9 + 2;
     } while (uVar7 < (uint)param_2[0x12]);
   }
@@ -7703,20 +7706,20 @@ int _PPStreamAttachStream(stream, param_2)
   puVar8 = param_2 + param_2[0x15] * 2;
   if (param_2[0x14] != 0) {
     do {
-      puVar5 = (undefined1 *)_calloc(0x44,1);
-      *puVar5 = 8;
-      *(undefined4 *)(puVar5 + 0x40) = 0;
+      allocation = (undefined1 *)_calloc(0x44,1);
+      *allocation = 8;
+      *(undefined4 *)(allocation + 0x40) = 0;
       uVar2 = puVar8[1];
       uVar10 = *puVar8 >> 0x1d;
-      *(uint *)(puVar5 + 0xc) = *puVar8;
-      *(uint *)(puVar5 + 0x10) = uVar2;
+      *(uint *)(allocation + 0xc) = *puVar8;
+      *(uint *)(allocation + 0x10) = uVar2;
       puVar1 = puVar8 + 2;
       uVar2 = puVar8[3];
       puVar8 = puVar8 + 4;
-      *(uint *)(puVar5 + 0x14) = *puVar1;
-      *(uint *)(puVar5 + 0x18) = uVar2;
+      *(uint *)(allocation + 0x14) = *puVar1;
+      *(uint *)(allocation + 0x18) = uVar2;
       if (uVar10 != 0) {
-        puVar6 = puVar5 + 0x10;
+        puVar6 = allocation + 0x10;
         do {
           uVar2 = *puVar8;
           uVar4 = puVar8[1];
@@ -7728,20 +7731,20 @@ int _PPStreamAttachStream(stream, param_2)
         } while (uVar10 != 0);
       }
       uVar7 = uVar7 + 1;
-      _PPStreamChunkListAddChunk(stream[8],puVar5);
+      _PPStreamChunkListAddChunk(stream[8],allocation);
     } while (uVar7 < (uint)param_2[0x14]);
   }
   uVar7 = 0;
   puVar9 = param_2 + param_2[0x19] * 2;
   if (param_2[0x18] != 0) {
     do {
-      puVar5 = (undefined1 *)_calloc(0x14,1);
+      allocation = (undefined1 *)_calloc(0x14,1);
       uVar7 = uVar7 + 1;
-      *puVar5 = 9;
+      *allocation = 9;
       uVar3 = puVar9[1];
-      *(undefined4 *)(puVar5 + 0xc) = *puVar9;
-      *(undefined4 *)(puVar5 + 0x10) = uVar3;
-      _PPStreamChunkListAddChunk(stream[10],puVar5);
+      *(undefined4 *)(allocation + 0xc) = *puVar9;
+      *(undefined4 *)(allocation + 0x10) = uVar3;
+      _PPStreamChunkListAddChunk(stream[10],allocation);
       puVar9 = puVar9 + 2;
     } while (uVar7 < (uint)param_2[0x18]);
   }
@@ -7749,15 +7752,15 @@ int _PPStreamAttachStream(stream, param_2)
   puVar9 = param_2 + param_2[0x1b] * 2;
   if (param_2[0x1a] != 0) {
     do {
-      puVar5 = (undefined1 *)_calloc(0x1c,1);
+      allocation = (undefined1 *)_calloc(0x1c,1);
       uVar7 = uVar7 + 1;
-      *puVar5 = 10;
-      *(undefined4 *)(puVar5 + 0xc) = *puVar9;
-      *(undefined4 *)(puVar5 + 0x10) = puVar9[1];
-      *(undefined4 *)(puVar5 + 0x14) = puVar9[2];
-      *(undefined4 *)(puVar5 + 0x18) = puVar9[3];
+      *allocation = 10;
+      *(undefined4 *)(allocation + 0xc) = *puVar9;
+      *(undefined4 *)(allocation + 0x10) = puVar9[1];
+      *(undefined4 *)(allocation + 0x14) = puVar9[2];
+      *(undefined4 *)(allocation + 0x18) = puVar9[3];
       puVar9 = puVar9 + 4;
-      _PPStreamChunkListAddChunk(stream[0xb],puVar5);
+      _PPStreamChunkListAddChunk(stream[0xb],allocation);
     } while (uVar7 < (uint)param_2[0x1a]);
   }
   return 0;
@@ -8089,16 +8092,16 @@ int _PPStreamSortParamConstants(stream)
   int stream;
 {
   ushort uVar1;
-  int iVar2;
+  int maxIndex;
   uint uVar3;
   int iVar4;
   
   iVar4 = **(int **)(stream + 0x10);
-  iVar2 = _PPStreamChunkListGetMaxIndex(*(int **)(stream + 0x10));
+  maxIndex = _PPStreamChunkListGetMaxIndex(*(int **)(stream + 0x10));
   if (iVar4 != 0) {
     uVar1 = *(ushort *)(iVar4 + 0x12);
-    uVar3 = iVar2 + 1U;
-    while ((uint)uVar1 < iVar2 + 1U) {
+    uVar3 = maxIndex + 1U;
+    while ((uint)uVar1 < maxIndex + 1U) {
       if ((*(uint *)(iVar4 + 0xc) >> 0x10 & 0x1f) == 0x11) {
         ((int (*)())_PPStreamRenumberOperandIndices)(stream,iVar4,uVar3);
         ((int (*)())_renumberParamArrayIndices)(**(undefined4 **)(stream + 0x14),(uint)*(ushort *)(iVar4 + 0x12),uVar3);
@@ -8117,6 +8120,7 @@ int _PPStreamSortParamConstants(stream)
 int _PPStreamResolveBranches(stream)
   int stream;
 {
+  int compareResult;
   int iVar1;
   undefined4 uVar2;
   int *piVar3;
@@ -8136,8 +8140,8 @@ int _PPStreamResolveBranches(stream)
         if (iVar5 == 0) {
           return uVar2;
         }
-        iVar6 = _memcmp("main(",iVar5 + 0x14,6);
-        if (iVar6 == 0) break;
+        compareResult = _memcmp("main(",iVar5 + 0x14,6);
+        if (compareResult == 0) break;
         iVar5 = *(int *)(iVar5 + 8);
       }
       iVar6 = *piVar4;

@@ -731,6 +731,8 @@ int __Z21base_of_encoded_valuehP15_Unwind_Context(param_1, _Unwind_Context)
   uint param_1;
   unsigned char * _Unwind_Context;
 {
+  unsigned char dataRelBase;
+  unsigned char textRelBase;
   bool bVar1;
   uint uVar2;
   unsigned char uVar3;
@@ -738,8 +740,8 @@ int __Z21base_of_encoded_valuehP15_Unwind_Context(param_1, _Unwind_Context)
   if (param_1 != 0xff) {
     uVar2 = param_1 & 0x70;
     if (uVar2 == 0x20) {
-      uVar3 = __Unwind_GetTextRelBase(_Unwind_Context);
-      return uVar3;
+      textRelBase = __Unwind_GetTextRelBase(_Unwind_Context);
+      return textRelBase;
     }
     if (uVar2 < 0x21) {
       if (uVar2 == 0) {
@@ -754,8 +756,8 @@ int __Z21base_of_encoded_valuehP15_Unwind_Context(param_1, _Unwind_Context)
       }
       if (uVar2 < 0x41) {
         if (uVar2 == 0x30) {
-          uVar3 = __Unwind_GetDataRelBase(_Unwind_Context);
-          return uVar3;
+          dataRelBase = __Unwind_GetDataRelBase(_Unwind_Context);
+          return dataRelBase;
         }
         goto LAB_97c194ec;
       }
@@ -999,7 +1001,7 @@ int ___gxx_personality_v0(param_1, param_2, param_3, param_4, param_5, param_6)
   bool bVar1;
   uchar *puVar2;
   uchar *puVar3;
-  unsigned char uVar4;
+  unsigned char iP;
   uint uVar5;
   uchar *puVar6;
   unsigned char * ptVar7;
@@ -1043,7 +1045,7 @@ int ___gxx_personality_v0(param_1, param_2, param_3, param_4, param_5, param_6)
   puVar10 = (uchar *)0x0;
   new_value_00 = 0;
   uStack_78 = ((int (*)())__Z21base_of_encoded_valuehP15_Unwind_Context)((uint)bStack_6c,param_6);
-  uVar4 = __Unwind_GetIP(param_6);
+  iP = __Unwind_GetIP(param_6);
   if (puVar3 < puStack_70) {
     do {
       uVar12 = (uint)bStack_6b;
@@ -1057,8 +1059,8 @@ int ___gxx_personality_v0(param_1, param_2, param_3, param_4, param_5, param_6)
       puVar3 = (uchar *)((int (*)())__Z28read_encoded_value_with_basehjPKhPj)(uVar12,uVar5,puVar3,&uStack_58);
       puVar6 = (uchar *)((int (*)())__Z12read_uleb128PKhPj)(puVar3,&uStack_54);
       puVar3 = puStack_70;
-      if ((iStack_80 + uStack_60 <= uVar4 - 1) &&
-         (puVar3 = puVar6, uVar4 - 1 < iStack_80 + uStack_60 + uStack_5c)) {
+      if ((iStack_80 + uStack_60 <= iP - 1) &&
+         (puVar3 = puVar6, iP - 1 < iStack_80 + uStack_60 + uStack_5c)) {
         if (uStack_58 != 0) {
           new_value = iStack_7c + uStack_58;
         }
@@ -1387,7 +1389,7 @@ int ___cxa_get_globals_fast()
 int ___cxa_get_globals()
 {
   int iVar1;
-  undefined4 *puVar2;
+  undefined4 *allocation;
   
   if ((_use_thread_key == 0) ||
      ((_use_thread_key < 0 && (((int (*)())__Z21get_globals_init_oncev)(), _use_thread_key == 0)))) {
@@ -1397,21 +1399,21 @@ int ___cxa_get_globals()
   if (iVar1 != 0) {
     return (undefined4 *)iVar1;
   }
-  puVar2 = (undefined4 *)_malloc(8);
-  if (puVar2 != (undefined4 *)0x0) {
+  allocation = (undefined4 *)_malloc(8);
+  if (allocation != (undefined4 *)0x0) {
     if ((*(int *)(PTR_DAT_a7b7c190 + 8) == 0) ||
        (*(ushort *)(*(int *)(PTR_DAT_a7b7c190 + 8) + 4) < 4)) {
-      __keymgr_set_per_thread_data(0xd,puVar2);
+      __keymgr_set_per_thread_data(0xd,allocation);
       goto LAB_97c1a1b4;
     }
-    iVar1 = __keymgr_set_per_thread_data(0xd,puVar2);
+    iVar1 = __keymgr_set_per_thread_data(0xd,allocation);
     if (iVar1 == 0) goto LAB_97c1a1b4;
   }
   ((int (*)())std__terminate)();
 LAB_97c1a1b4:
-  puVar2[1] = 0;
-  *puVar2 = 0;
-  return puVar2;
+  allocation[1] = 0;
+  *allocation = 0;
+  return allocation;
 }
 
 /* ___eprintf @ 0x97c1a1d8 (76 bytes) */
@@ -1501,6 +1503,8 @@ int _base_of_encoded_value(param_1, param_2)
   uint param_1;
   unsigned char * param_2;
 {
+  unsigned char dataRelBase;
+  unsigned char textRelBase;
   bool bVar1;
   uint uVar2;
   unsigned char uVar3;
@@ -1508,8 +1512,8 @@ int _base_of_encoded_value(param_1, param_2)
   if (param_1 != 0xff) {
     uVar2 = param_1 & 0x70;
     if (uVar2 == 0x20) {
-      uVar3 = __Unwind_GetTextRelBase(param_2);
-      return uVar3;
+      textRelBase = __Unwind_GetTextRelBase(param_2);
+      return textRelBase;
     }
     if (uVar2 < 0x21) {
       if (uVar2 == 0) {
@@ -1524,8 +1528,8 @@ int _base_of_encoded_value(param_1, param_2)
       }
       if (uVar2 < 0x41) {
         if (uVar2 == 0x30) {
-          uVar3 = __Unwind_GetDataRelBase(param_2);
-          return uVar3;
+          dataRelBase = __Unwind_GetDataRelBase(param_2);
+          return dataRelBase;
         }
         goto LAB_97c1a3d4;
       }

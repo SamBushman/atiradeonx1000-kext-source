@@ -4734,10 +4734,10 @@ int _PPCRuntimeCompilerGetCompiledResult(param_1)
 /* _PPCTextureSamplerCreate @ 0x97be1be8 (12 bytes) */
 int _PPCTextureSamplerCreate()
 {
-  undefined4 uVar1;
+  undefined4 allocation;
   
-  uVar1 = _calloc(0x2c,1);
-  return uVar1;
+  allocation = _calloc(0x2c,1);
+  return allocation;
 }
 
 /* _PPCTextureSamplerInitialise @ 0x97be1bf4 (16 bytes) */
@@ -6049,11 +6049,11 @@ LAB_97be3d2c:
 /* _PPCNoiseGeneratorCreate @ 0x97be3f34 (56 bytes) */
 int _PPCNoiseGeneratorCreate()
 {
-  undefined4 uVar1;
+  undefined4 allocation;
   
-  uVar1 = _malloc(0xa20);
-  ((int (*)())_PPCNoiseGeneratorInitialise)(uVar1);
-  return uVar1;
+  allocation = _malloc(0xa20);
+  ((int (*)())_PPCNoiseGeneratorInitialise)(allocation);
+  return allocation;
 }
 
 /* _PPCNoiseGeneratorInitialise @ 0x97be3f6c (280 bytes) */
@@ -6231,11 +6231,11 @@ int _PPCNoiseGeneratorCalculate4DAVRTC(param_1, param_2)
 /* _PPCRasterOpMachineCreate @ 0x97be436c (60 bytes) */
 int _PPCRasterOpMachineCreate()
 {
-  undefined4 uVar1;
+  undefined4 allocation;
   
-  uVar1 = _calloc(8,1);
-  ((int (*)())_PPCRasterOpMachineInitialise)(uVar1);
-  return uVar1;
+  allocation = _calloc(8,1);
+  ((int (*)())_PPCRasterOpMachineInitialise)(allocation);
+  return allocation;
 }
 
 /* _PPCRasterOpMachineInitialise @ 0x97be43a8 (16 bytes) */

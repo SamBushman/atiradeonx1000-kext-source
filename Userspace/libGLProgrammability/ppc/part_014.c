@@ -1342,11 +1342,11 @@ int _InterpreterTextureSamplerLoadTexel3D(param_1, param_2, param_3, param_4, pa
 /* _InterpreterNoiseGeneratorCreate @ 0x97bd5764 (60 bytes) */
 int _InterpreterNoiseGeneratorCreate()
 {
-  undefined4 uVar1;
+  undefined4 allocation;
   
-  uVar1 = _calloc(0xa20,1);
-  ((int (*)())_InterpreterNoiseGeneratorInitialise)(uVar1);
-  return uVar1;
+  allocation = _calloc(0xa20,1);
+  ((int (*)())_InterpreterNoiseGeneratorInitialise)(allocation);
+  return allocation;
 }
 
 /* _InterpreterNoiseGeneratorInitialise @ 0x97bd57a0 (280 bytes) */
@@ -1790,11 +1790,11 @@ int _InterpreterNoiseGeneratorCalculate3D(param_1, param_2, param_3)
 /* _InterpreterRasterOpMachineCreate @ 0x97bd63b4 (60 bytes) */
 int _InterpreterRasterOpMachineCreate()
 {
-  undefined4 uVar1;
+  undefined4 allocation;
   
-  uVar1 = _calloc(8,1);
-  ((int (*)())_InterpreterRasterOpMachineInitialise)(uVar1);
-  return uVar1;
+  allocation = _calloc(8,1);
+  ((int (*)())_InterpreterRasterOpMachineInitialise)(allocation);
+  return allocation;
 }
 
 /* _InterpreterRasterOpMachineInitialise @ 0x97bd63f0 (16 bytes) */
@@ -2798,15 +2798,15 @@ int _glpRTCAddAChunk_97bd7cbc(param_1, param_2)
 /* _PPCRuntimeCompilerCreate @ 0x97bd7cec (88 bytes) */
 int _PPCRuntimeCompilerCreate()
 {
-  int iVar1;
+  int allocation;
   undefined4 uVar2;
   
-  iVar1 = _calloc(0xe54,1);
+  allocation = _calloc(0xe54,1);
   uVar2 = _PPCTextureSamplerCreate();
-  *(undefined4 *)(iVar1 + 0xe1c) = uVar2;
-  _PPCRasterOpMachineInitialise(iVar1 + 0xe14);
-  _PPCRasterOpMachineAttachRuntimeCompiler(iVar1 + 0xe14,iVar1);
-  return iVar1;
+  *(undefined4 *)(allocation + 0xe1c) = uVar2;
+  _PPCRasterOpMachineInitialise(allocation + 0xe14);
+  _PPCRasterOpMachineAttachRuntimeCompiler(allocation + 0xe14,allocation);
+  return allocation;
 }
 
 /* _PPCRuntimeCompilerInitialise @ 0x97bd7d44 (76 bytes) */
@@ -2866,7 +2866,7 @@ int _PPCRuntimeCompilerInitialiseVariableInfo(compiler)
   int compiler;
 {
   int iVar1;
-  undefined4 uVar2;
+  undefined4 allocation;
   uint uVar3;
   int *piVar4;
   uint uVar5;
@@ -2892,8 +2892,8 @@ int _PPCRuntimeCompilerInitialiseVariableInfo(compiler)
       *(int *)(compiler + 0xe04) = iVar1;
       iVar8 = iVar8 + -1;
     } while (iVar8 != 0);
-    uVar2 = _calloc(iVar1,8);
-    *(undefined4 *)(compiler + 0xe00) = uVar2;
+    allocation = _calloc(iVar1,8);
+    *(undefined4 *)(compiler + 0xe00) = allocation;
     uVar3 = 0;
     do {
       uVar5 = 0;

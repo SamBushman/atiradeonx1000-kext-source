@@ -39,6 +39,7 @@ int _adjustAllocation_97bf27d4(param_1, param_2, param_3)
   int *param_2;
   int *param_3;
 {
+  int allocation;
   int iVar1;
   int iVar2;
   int iVar3;
@@ -48,13 +49,13 @@ int _adjustAllocation_97bf27d4(param_1, param_2, param_3)
   if (*param_1 - (iVar3 - iVar1) < 0x800) {
     iVar2 = *param_1 + 0x1000;
     *param_1 = iVar2;
-    iVar2 = _realloc(*param_2,iVar2);
-    *param_3 = iVar2;
-    if (iVar2 == 0) {
+    allocation = _realloc(*param_2,iVar2);
+    *param_3 = allocation;
+    if (allocation == 0) {
       return 0;
     }
-    *param_2 = iVar2;
-    *param_3 = iVar2 + (iVar3 - iVar1);
+    *param_2 = allocation;
+    *param_3 = allocation + (iVar3 - iVar1);
   }
   return 1;
 }
@@ -7682,6 +7683,7 @@ int _glpPPShaderToProgramString(shader, param_2, param_3)
   undefined4 param_2;
   uint param_3;
 {
+  int allocation2;
   int copyLength8;
   int copyIndex;
   int copyLength;
@@ -7708,7 +7710,7 @@ int _glpPPShaderToProgramString(shader, param_2, param_3)
   int iVar7;
   int iVar8;
   char *pcVar9;
-  char *pcVar10;
+  char *allocation;
   undefined4 extraout_r4;
   undefined4 extraout_r4_00;
   undefined4 uVar11;
@@ -9758,14 +9760,14 @@ LAB_97c04c9c:
     } while (ch != '\0');
     pcVar20 = pcVar20 + copyLength2;
   }
-  pcVar10 = (char *)_malloc(local_68);
-  if (pcVar10 != (char *)0x0) {
-    pcVar22 = pcVar10;
+  allocation = (char *)_malloc(local_68);
+  if (allocation != (char *)0x0) {
+    pcVar22 = allocation;
     if ((local_70 & 0x1000) != 0) {
       ch = 'P';
       copyIndex2 = 0;
       do {
-        pcVar10[copyIndex2] = ch;
+        allocation[copyIndex2] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "PARAM kARRAY1 = { 0.0, 1.0, 2.0, 3.0 };\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
@@ -9773,7 +9775,7 @@ LAB_97c04c9c:
       ch = 'A';
       copyIndex2 = 0;
       do {
-        pcVar10[copyIndex2 + copyLength2] = ch;
+        allocation[copyIndex2 + copyLength2] = ch;
         copyLength4 = copyIndex2 + 1;
         ch = "ALIAS kZERO       = kARRAY1.xxxx;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
@@ -9782,7 +9784,7 @@ LAB_97c04c9c:
       ch = 'A';
       copyIndex2 = 0;
       do {
-        pcVar10[copyIndex2 + iVar17] = ch;
+        allocation[copyIndex2 + iVar17] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "ALIAS kONE        = kARRAY1.yyyy;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
@@ -9791,7 +9793,7 @@ LAB_97c04c9c:
       ch = 'A';
       copyIndex2 = 0;
       do {
-        pcVar10[copyIndex2 + iVar13] = ch;
+        allocation[copyIndex2 + iVar13] = ch;
         copyLength4 = copyIndex2 + 1;
         ch = "ALIAS kTWO        = kARRAY1.zzzz;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
@@ -9800,7 +9802,7 @@ LAB_97c04c9c:
       ch = 'A';
       copyIndex2 = 0;
       do {
-        pcVar10[copyIndex2 + iVar17] = ch;
+        allocation[copyIndex2 + iVar17] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "ALIAS kTHREE      = kARRAY1.wwww;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
@@ -9809,7 +9811,7 @@ LAB_97c04c9c:
       ch = 'A';
       copyIndex2 = 0;
       do {
-        pcVar10[copyIndex2 + iVar13] = ch;
+        allocation[copyIndex2 + iVar13] = ch;
         copyLength4 = copyIndex2 + 1;
         ch = "ALIAS kSEL        = kARRAY1;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
@@ -9818,7 +9820,7 @@ LAB_97c04c9c:
       ch = 'A';
       copyIndex2 = 0;
       do {
-        pcVar10[copyIndex2 + iVar17] = ch;
+        allocation[copyIndex2 + iVar17] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "ALIAS kFLOAT      = kARRAY1.yxxx;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
@@ -9827,7 +9829,7 @@ LAB_97c04c9c:
       ch = 'A';
       copyIndex2 = 0;
       do {
-        pcVar10[copyIndex2 + iVar13] = ch;
+        allocation[copyIndex2 + iVar13] = ch;
         copyLength4 = copyIndex2 + 1;
         ch = "ALIAS kVEC2       = kARRAY1.yyxx;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
@@ -9836,7 +9838,7 @@ LAB_97c04c9c:
       ch = 'A';
       copyIndex2 = 0;
       do {
-        pcVar10[copyIndex2 + iVar17] = ch;
+        allocation[copyIndex2 + iVar17] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "ALIAS kVEC3       = kARRAY1.yyyx;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
@@ -9845,12 +9847,12 @@ LAB_97c04c9c:
       ch = 'A';
       copyIndex2 = 0;
       do {
-        pcVar10[copyIndex2 + iVar13] = ch;
+        allocation[copyIndex2 + iVar13] = ch;
         copyLength4 = copyIndex2 + 1;
         ch = "ALIAS kVEC4       = kARRAY1.yyyy;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
       } while (ch != '\0');
-      pcVar22 = pcVar10 + copyLength4 + iVar13;
+      pcVar22 = allocation + copyLength4 + iVar13;
     }
     if ((local_70 & 0x2000) != 0) {
       ch = 'P';
@@ -10127,10 +10129,10 @@ LAB_97c04c9c:
       } while (ch != '\0');
       pcVar22 = pcVar22 + copyLength2;
     }
-    iVar13 = _malloc(pcVar22 + (int)(pcVar20 +
+    allocation2 = _malloc(pcVar22 + (int)(pcVar20 +
                                     (int)(local_60 +
                                          (int)(local_48[0] +
-                                              (((-(int)local_64 - (int)pcVar9) - (int)pcVar10) -
+                                              (((-(int)local_64 - (int)pcVar9) - (int)allocation) -
                                               (int)local_4c) + 1))));
     *pcVar20 = '\0';
     iVar16 = 0;
@@ -10139,24 +10141,24 @@ LAB_97c04c9c:
     *local_48[0] = '\0';
     ch = *pcVar9;
     while (ch != '\0') {
-      *(char *)(iVar13 + iVar16) = ch;
+      *(char *)(allocation2 + iVar16) = ch;
       iVar16 = iVar16 + 1;
       ch = pcVar9[iVar16];
     }
     iVar17 = 0;
     ch = *local_64;
     while (ch != '\0') {
-      *(char *)(iVar13 + iVar16 + iVar17) = ch;
+      *(char *)(allocation2 + iVar16 + iVar17) = ch;
       iVar17 = iVar17 + 1;
       ch = local_64[iVar17];
     }
-    iVar17 = iVar13 + iVar16 + iVar17;
+    iVar17 = allocation2 + iVar16 + iVar17;
     iVar16 = 0;
-    ch = *pcVar10;
+    ch = *allocation;
     while (ch != '\0') {
       *(char *)(iVar17 + iVar16) = ch;
       iVar16 = iVar16 + 1;
-      ch = pcVar10[iVar16];
+      ch = allocation[iVar16];
     }
     iVar17 = iVar17 + iVar16;
     iVar16 = 0;
@@ -10169,9 +10171,9 @@ LAB_97c04c9c:
     *(undefined1 *)(iVar17 + iVar16) = 0;
     _free(pcVar9);
     _free(local_64);
-    _free(pcVar10);
+    _free(allocation);
     _free(local_4c);
-    return iVar13;
+    return allocation2;
   }
   _free(local_64);
   _free(local_4c);
@@ -10433,7 +10435,7 @@ int _RecordFunctionCall(param_1, param_2, param_3)
   int *param_2;
   uint param_3;
 {
-  int iVar1;
+  int allocation;
   uint uVar2;
   
   uVar2 = 0;
@@ -10445,13 +10447,13 @@ int _RecordFunctionCall(param_1, param_2, param_3)
   }
   if (uVar2 == param_3) {
     if ((param_3 & 0x7f) == 0) {
-      iVar1 = _malloc(param_3 * 0x20 + 0x1000);
-      ((int (*)())_clearFuncInfoList)(iVar1,param_3 + 0x80);
-      _memcpy(iVar1,*param_2,param_3 * 0x20);
+      allocation = _malloc(param_3 * 0x20 + 0x1000);
+      ((int (*)())_clearFuncInfoList)(allocation,param_3 + 0x80);
+      _memcpy(allocation,*param_2,param_3 * 0x20);
       if (*param_2 != 0) {
         _free(*param_2);
       }
-      *param_2 = iVar1;
+      *param_2 = allocation;
     }
     param_3 = param_3 + 1;
     *(int *)(uVar2 * 0x20 + *param_2) = param_1;
@@ -10507,7 +10509,7 @@ int _AddOpToJumpTable(param_1, param_2)
 {
   int iVar1;
   uint uVar2;
-  int iVar3;
+  int allocation;
   uint uVar4;
   
   *(int *)(param_2 + 8) = *(int *)(param_2 + 8) + 1;
@@ -10527,15 +10529,15 @@ int _AddOpToJumpTable(param_1, param_2)
   case 0x6b:
     uVar2 = *(uint *)(param_2 + 0xc);
     if ((uVar2 & 0x7f) == 0) {
-      iVar3 = _malloc(uVar2 * 4 + 0x200);
-      _memset(iVar3,0,*(int *)(param_2 + 0xc) * 4 + 0x200);
+      allocation = _malloc(uVar2 * 4 + 0x200);
+      _memset(allocation,0,*(int *)(param_2 + 0xc) * 4 + 0x200);
       uVar2 = 0;
       uVar4 = 0;
       if (*(int *)(param_2 + 0xc) != 0) {
         do {
           iVar1 = uVar2 * 4;
           uVar2 = uVar2 + 1;
-          *(undefined4 *)(iVar1 + iVar3) = *(undefined4 *)(iVar1 + *(int *)(param_2 + 0x10));
+          *(undefined4 *)(iVar1 + allocation) = *(undefined4 *)(iVar1 + *(int *)(param_2 + 0x10));
           uVar4 = *(uint *)(param_2 + 0xc);
         } while (uVar2 < uVar4);
       }
@@ -10543,16 +10545,16 @@ int _AddOpToJumpTable(param_1, param_2)
         _free(*(int *)(param_2 + 0x10));
         uVar4 = *(uint *)(param_2 + 0xc);
       }
-      *(int *)(param_2 + 0x10) = iVar3;
-      iVar3 = _malloc(uVar4 * 4 + 0x200);
-      _memset(iVar3,0,*(int *)(param_2 + 0xc) * 4 + 0x200);
+      *(int *)(param_2 + 0x10) = allocation;
+      allocation = _malloc(uVar4 * 4 + 0x200);
+      _memset(allocation,0,*(int *)(param_2 + 0xc) * 4 + 0x200);
       uVar4 = 0;
       uVar2 = 0;
       if (*(int *)(param_2 + 0xc) != 0) {
         do {
           iVar1 = uVar4 * 4;
           uVar4 = uVar4 + 1;
-          *(undefined4 *)(iVar1 + iVar3) = *(undefined4 *)(iVar1 + *(int *)(param_2 + 0x14));
+          *(undefined4 *)(iVar1 + allocation) = *(undefined4 *)(iVar1 + *(int *)(param_2 + 0x14));
           uVar2 = *(uint *)(param_2 + 0xc);
         } while (uVar4 < uVar2);
       }
@@ -10560,7 +10562,7 @@ int _AddOpToJumpTable(param_1, param_2)
         _free(*(int *)(param_2 + 0x14));
         uVar2 = *(uint *)(param_2 + 0xc);
       }
-      *(int *)(param_2 + 0x14) = iVar3;
+      *(int *)(param_2 + 0x14) = allocation;
       uVar4 = *param_1;
     }
     *(uint *)(uVar2 * 4 + *(int *)(param_2 + 0x10)) = uVar4 & 0x3ffff;
@@ -11598,36 +11600,36 @@ int _EndLocalAvailableCopyList(param_1)
 int _LocalCopyPropagator(param_1)
   int param_1;
 {
-  uint *puVar1;
+  uint *allocation;
   int iVar2;
   int iVar3;
   int iVar4;
   uint uVar5;
   
   iVar4 = **(int **)(param_1 + 0x20);
-  puVar1 = (uint *)_malloc(8);
-  puVar1[1] = 0;
-  *puVar1 = 0;
+  allocation = (uint *)_malloc(8);
+  allocation[1] = 0;
+  *allocation = 0;
   for (; iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
     iVar2 = ((int (*)())_EndLocalAvailableCopyList)(iVar4 + 0xc);
-    if ((iVar2 != 0) && (uVar5 = 0, *puVar1 != 0)) {
+    if ((iVar2 != 0) && (uVar5 = 0, *allocation != 0)) {
       iVar2 = 0;
       do {
-        iVar3 = ((int (*)())_IsParamSampler)(*(undefined4 *)(iVar2 + puVar1[1] + 0xc),
-                                *(undefined4 *)(iVar2 + puVar1[1] + 0x10),param_1);
+        iVar3 = ((int (*)())_IsParamSampler)(*(undefined4 *)(iVar2 + allocation[1] + 0xc),
+                                *(undefined4 *)(iVar2 + allocation[1] + 0x10),param_1);
         if (iVar3 == 0) {
-          *(undefined4 *)(iVar2 + puVar1[1]) = 0;
+          *(undefined4 *)(iVar2 + allocation[1]) = 0;
         }
         uVar5 = uVar5 + 1;
         iVar2 = iVar2 + 0x48;
-      } while (uVar5 < *puVar1);
+      } while (uVar5 < *allocation);
     }
-    ((int (*)())_CopyPropagateOperation)(iVar4 + 0xc,puVar1,param_1);
+    ((int (*)())_CopyPropagateOperation)(iVar4 + 0xc,allocation,param_1);
   }
-  if (puVar1[1] != 0) {
-    _free(puVar1[1]);
+  if (allocation[1] != 0) {
+    _free(allocation[1]);
   }
-  return _free(puVar1);
+  return _free(allocation);
 }
 
 /* _EmbedSamplerParamIndices @ 0x97c076cc (144 bytes) */
@@ -11678,7 +11680,7 @@ int _LinearizeFixOutputReads(param_1)
   bool bVar2;
   int iVar3;
   int *piVar4;
-  undefined4 uVar5;
+  undefined4 maxIndex;
   uint uVar6;
   uint uVar7;
   int iVar8;
@@ -11735,8 +11737,8 @@ int _LinearizeFixOutputReads(param_1)
         local_80 = 0;
         local_78 = local_7c;
         local_74 = local_7c;
-        uVar5 = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(param_1 + 4));
-        local_7c = CONCAT22((*(unsigned short *)((unsigned char *)&(local_7c) + 0)),(short)uVar5 + 1);
+        maxIndex = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(param_1 + 4));
+        local_7c = CONCAT22((*(unsigned short *)((unsigned char *)&(local_7c) + 0)),(short)maxIndex + 1);
         local_80 = (*(uint *)(iVar9 + 0xc) >> 0x18 & 3) << 0x18 |
                    (*(uint *)(iVar9 + 0xc) >> 0x1a & 7) << 0x1a |
                    *(uint *)(iVar9 + 0xc) & 0xe0000000 | local_80 & 0xffffff;
@@ -11911,17 +11913,18 @@ int _glpFreePPShaderLinearize(param_1)
 int _BitSetNew(param_1)
   uint param_1;
 {
-  uint *puVar1;
+  uint allocation2;
+  uint *allocation;
   uint uVar2;
   
   uVar2 = (param_1 >> 3 & 0x1ffffffc) + 4;
-  puVar1 = (uint *)_malloc(0xc);
-  *puVar1 = param_1;
-  puVar1[1] = uVar2;
-  uVar2 = _malloc(uVar2);
-  puVar1[2] = uVar2;
-  ((int (*)())_BitSetSetRangeEqualsInternal)(puVar1,0,param_1,0);
-  return puVar1;
+  allocation = (uint *)_malloc(0xc);
+  *allocation = param_1;
+  allocation[1] = uVar2;
+  allocation2 = _malloc(uVar2);
+  allocation[2] = allocation2;
+  ((int (*)())_BitSetSetRangeEqualsInternal)(allocation,0,param_1,0);
+  return allocation;
 }
 
 /* _BitSetClone @ 0x97c07d40 (64 bytes) */
@@ -12051,13 +12054,13 @@ int _BitSetSetSizeEquals(bitSet, param_2)
   uint *bitSet;
   uint param_2;
 {
-  uint uVar1;
+  uint allocation;
   uint uVar2;
   
   if (*bitSet != param_2) {
     uVar2 = (param_2 >> 3 & 0x1ffffffc) + 4;
-    uVar1 = _realloc(bitSet[2],uVar2);
-    bitSet[2] = uVar1;
+    allocation = _realloc(bitSet[2],uVar2);
+    bitSet[2] = allocation;
     ((int (*)())_BitSetSetRangeEqualsInternal)(bitSet,*bitSet,param_2,0);
     *bitSet = param_2;
     bitSet[1] = uVar2;

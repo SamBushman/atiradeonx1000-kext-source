@@ -205,36 +205,37 @@ int _HashSetNew(param_1, param_2, param_3)
   uint param_2;
   uint param_3;
 {
+  uint allocation2;
   int iVar1;
-  uint *puVar2;
+  uint *allocation;
   uint uVar3;
-  undefined4 uVar4;
+  undefined4 allocation3;
   uint uVar5;
   
-  puVar2 = (uint *)_malloc(0x10);
+  allocation = (uint *)_malloc(0x10);
   if (param_2 == 0) {
     param_2 = DAT_a7b7bf70;
   }
-  puVar2[2] = param_2;
+  allocation[2] = param_2;
   if (param_3 == 0) {
     param_3 = DAT_a7b7bf6c;
   }
-  puVar2[3] = param_3;
-  *puVar2 = param_1;
-  uVar3 = _malloc(param_1 << 3);
+  allocation[3] = param_3;
+  *allocation = param_1;
+  allocation2 = _malloc(param_1 << 3);
   uVar5 = 0;
-  puVar2[1] = uVar3;
-  if (*puVar2 != 0) {
+  allocation[1] = allocation2;
+  if (*allocation != 0) {
     do {
-      uVar3 = puVar2[1];
+      uVar3 = allocation[1];
       iVar1 = uVar5 * 8;
       uVar5 = uVar5 + 1;
       *(undefined4 *)(uVar3 + iVar1) = 0;
-      uVar4 = _malloc(4);
-      *(undefined4 *)(uVar3 + iVar1 + 4) = uVar4;
-    } while (uVar5 < *puVar2);
+      allocation3 = _malloc(4);
+      *(undefined4 *)(uVar3 + iVar1 + 4) = allocation3;
+    } while (uVar5 < *allocation);
   }
-  return puVar2;
+  return allocation;
 }
 
 /* _HashSetFree @ 0x97c086ac (132 bytes) */
@@ -274,6 +275,7 @@ int _HashSetAdd(hashSet, param_2)
   uint *hashSet;
   undefined4 param_2;
 {
+  uint allocation;
   uint uVar1;
   int iVar2;
   undefined4 in_r5;
@@ -317,9 +319,9 @@ int _HashSetAdd(hashSet, param_2)
   if (uVar3 == 0xffffffff) {
     uVar3 = *puVar5;
     *puVar5 = uVar3 + 1;
-    uVar3 = _realloc(uVar1,(uVar3 + 1) * 4);
-    puVar5[1] = uVar3;
-    *(undefined4 *)(uVar3 + *puVar5 * 4 + -4) = param_2;
+    allocation = _realloc(uVar1,(uVar3 + 1) * 4);
+    puVar5[1] = allocation;
+    *(undefined4 *)(allocation + *puVar5 * 4 + -4) = param_2;
   }
   else {
     *(undefined4 *)(uVar1 + uVar3 * 4) = param_2;
@@ -454,13 +456,13 @@ int _HashTableNew(param_1, param_2, param_3)
   undefined4 param_2;
   undefined4 param_3;
 {
-  undefined4 *puVar1;
+  undefined4 *allocation;
   undefined4 uVar2;
   
-  puVar1 = (undefined4 *)_malloc(4);
+  allocation = (undefined4 *)_malloc(4);
   uVar2 = ((int (*)())_HashSetNew)(param_1,param_2,param_3);
-  *puVar1 = uVar2;
-  return puVar1;
+  *allocation = uVar2;
+  return allocation;
 }
 
 /* _HashTableFree @ 0x97c08ab4 (160 bytes) */
@@ -505,10 +507,11 @@ int _HashTableAdd(hashTable, param_2, param_3)
   undefined4 param_2;
   undefined4 param_3;
 {
+  uint allocation2;
   int iVar1;
   uint uVar2;
   int iVar3;
-  undefined4 *puVar4;
+  undefined4 *allocation;
   undefined4 a2;
   undefined4 in_r6;
   undefined4 in_r7;
@@ -555,18 +558,18 @@ int _HashTableAdd(hashTable, param_2, param_3)
   if (uVar5 == 0xffffffff) {
     uVar5 = *puVar8;
     *puVar8 = uVar5 + 1;
-    uVar5 = _realloc(uVar2,(uVar5 + 1) * 4);
-    puVar8[1] = uVar5;
-    iVar1 = uVar5 + *puVar8 * 4;
-    puVar4 = (undefined4 *)_malloc(8);
-    *(undefined4 **)(iVar1 + -4) = puVar4;
-    *puVar4 = param_2;
+    allocation2 = _realloc(uVar2,(uVar5 + 1) * 4);
+    puVar8[1] = allocation2;
+    iVar1 = allocation2 + *puVar8 * 4;
+    allocation = (undefined4 *)_malloc(8);
+    *(undefined4 **)(iVar1 + -4) = allocation;
+    *allocation = param_2;
     iVar1 = *(int *)(iVar1 + -4);
   }
   else {
-    puVar4 = (undefined4 *)_malloc(8);
-    *(undefined4 **)(uVar2 + uVar5 * 4) = puVar4;
-    *puVar4 = param_2;
+    allocation = (undefined4 *)_malloc(8);
+    *(undefined4 **)(uVar2 + uVar5 * 4) = allocation;
+    *allocation = param_2;
     iVar1 = *(int *)(uVar2 + uVar5 * 4);
   }
   *(undefined4 *)(iVar1 + 4) = param_3;
@@ -987,9 +990,9 @@ int _RegistersMerge(param_1)
   bool bVar2;
   int iVar3;
   int *piVar4;
-  int iVar5;
-  undefined4 uVar6;
-  int *piVar7;
+  int allocation2;
+  undefined4 allocation3;
+  int *allocation;
   int iVar8;
   uint uVar9;
   uint uVar10;
@@ -1001,14 +1004,14 @@ int _RegistersMerge(param_1)
   int iVar16;
   int local_50 [6];
   
-  iVar5 = _malloc(8);
+  allocation2 = _malloc(8);
   iVar11 = 0;
-  uVar6 = _malloc(0x10);
-  piVar7 = (int *)_realloc(uVar6,0x10);
+  allocation3 = _malloc(0x10);
+  allocation = (int *)_realloc(allocation3,0x10);
   iVar16 = 4;
   uVar13 = 1;
   iVar8 = 0;
-  piVar4 = piVar7;
+  piVar4 = allocation;
   do {
     iVar3 = *(int *)(param_1 + 0x10) + iVar8;
     iVar8 = iVar8 + 0x2c;
@@ -1033,7 +1036,7 @@ int _RegistersMerge(param_1)
       iVar16 = ((int (*)())_RegisterVectorIsFixed)(local_50);
       if (iVar16 == 0) {
         uVar14 = 0;
-        piVar4 = piVar7;
+        piVar4 = allocation;
         if (uVar13 != 0) {
 LAB_97c09514:
           iVar16 = ((int (*)())_RegisterVectorCanMerge)(piVar4,local_50);
@@ -1050,8 +1053,8 @@ LAB_97c09514:
             *(undefined4 *)(*(int *)(iVar3 + (int)local_50) + 0x18) = 1;
             ((int (*)())_RegistersReInterfere)(param_1,*(undefined4 *)(iVar3 + (int)local_50),
                        *(undefined4 *)(iVar3 + (int)piVar4));
-            iVar5 = _realloc(iVar5,iVar11 * 8);
-            iVar15 = iVar5 + iVar11 * 8;
+            allocation2 = _realloc(allocation2,iVar11 * 8);
+            iVar15 = allocation2 + iVar11 * 8;
             iVar16 = iVar16 + -1;
             *(undefined4 *)(iVar15 + -8) = *(undefined4 *)(iVar3 + (int)local_50);
             puVar1 = (undefined4 *)(iVar3 + (int)piVar4);
@@ -1076,11 +1079,11 @@ LAB_97c09618:
       else {
 LAB_97c09620:
         uVar13 = uVar13 + 1;
-        piVar7 = (int *)_realloc(piVar7,uVar13 * 0x10);
+        allocation = (int *)_realloc(allocation,uVar13 * 0x10);
         iVar3 = 4;
         iVar16 = 0;
         do {
-          *(undefined4 *)((int)piVar7 + iVar16 + uVar13 * 0x10 + -0x10) =
+          *(undefined4 *)((int)allocation + iVar16 + uVar13 * 0x10 + -0x10) =
                *(undefined4 *)(iVar16 + (int)local_50);
           iVar16 = iVar16 + 4;
           iVar3 = iVar3 + -1;
@@ -1090,12 +1093,12 @@ LAB_97c09620:
       iVar8 = iVar8 + 0xb0;
     } while (uVar12 < *(uint *)(param_1 + 0xc));
   }
-  if (piVar7 != (int *)0x0) {
-    _free(piVar7);
+  if (allocation != (int *)0x0) {
+    _free(allocation);
   }
-  ((int (*)())_RegistersReplace)(param_1,iVar11,iVar5);
-  if (iVar5 != 0) {
-    _free(iVar5);
+  ((int (*)())_RegistersReplace)(param_1,iVar11,allocation2);
+  if (allocation2 != 0) {
+    _free(allocation2);
   }
   return;
 LAB_97c09608:
@@ -1532,6 +1535,7 @@ int _RegisterAdd(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_5;
   undefined4 param_6;
 {
+  int allocation;
   int iVar1;
   int iVar2;
   int iVar3;
@@ -1540,9 +1544,9 @@ int _RegisterAdd(param_1, param_2, param_3, param_4, param_5, param_6)
   
   iVar4 = param_4 + param_5 * 4;
   if (*(uint *)(param_1 + 0xc) < iVar4 + 4U) {
-    iVar1 = _realloc(*(undefined4 *)(param_1 + 0x10),iVar4 * 0x2c + 0xb0);
-    *(int *)(param_1 + 0x10) = iVar1;
-    _memset(*(int *)(param_1 + 0xc) * 0x2c + iVar1,0,(iVar4 - *(int *)(param_1 + 0xc)) * 0x2c + 0xb0
+    allocation = _realloc(*(undefined4 *)(param_1 + 0x10),iVar4 * 0x2c + 0xb0);
+    *(int *)(param_1 + 0x10) = allocation;
+    _memset(*(int *)(param_1 + 0xc) * 0x2c + allocation,0,(iVar4 - *(int *)(param_1 + 0xc)) * 0x2c + 0xb0
            );
     *(uint *)(param_1 + 0xc) = iVar4 + 4U;
   }
@@ -1584,6 +1588,10 @@ int _InstructionAdd(param_1, param_2, param_3)
   int *param_2;
   int param_3;
 {
+  undefined4 allocation;
+  int allocation2;
+  int allocation4;
+  int allocation3;
   bool bVar1;
   uint uVar2;
   int iVar3;
@@ -1608,9 +1616,9 @@ int _InstructionAdd(param_1, param_2, param_3)
   *param_2 = iVar3 + 1;
   uVar9 = 0;
   bVar1 = false;
-  iVar3 = _realloc(param_2[1],(iVar3 + 1) * 0x1c);
-  param_2[1] = iVar3;
-  iVar3 = iVar3 + *param_2 * 0x1c;
+  allocation2 = _realloc(param_2[1],(iVar3 + 1) * 0x1c);
+  param_2[1] = allocation2;
+  iVar3 = allocation2 + *param_2 * 0x1c;
   piVar11 = (int *)(iVar3 + -0x1c);
   *(undefined4 *)(iVar3 + -0xc) = 0;
   *(int *)(iVar3 + -4) = param_3;
@@ -1638,8 +1646,8 @@ int _InstructionAdd(param_1, param_2, param_3)
   *piVar11 = 0;
   iVar10 = 0;
   *(undefined4 *)(iVar3 + -8) = 0;
-  uVar5 = _malloc(4);
-  *(undefined4 *)(iVar3 + -0x18) = uVar5;
+  allocation = _malloc(4);
+  *(undefined4 *)(iVar3 + -0x18) = allocation;
   iVar6 = ((int (*)())_GetValidArgs)(param_3);
   iVar12 = param_3;
   iVar15 = param_3;
@@ -1717,8 +1725,8 @@ LAB_97c0a29c:
   local_70[0] = uVar2 >> 0xd & 1;
   local_70[2] = uVar2 >> 0xf & 1;
   *(undefined4 *)(iVar3 + -0x14) = 0;
-  uVar5 = _malloc(4);
-  *(undefined4 *)(iVar3 + -0x10) = uVar5;
+  allocation = _malloc(4);
+  *(undefined4 *)(iVar3 + -0x10) = allocation;
   *(uint *)(iVar3 + -0xc) =
        *(uint *)(iVar3 + -0xc) | (uint)((*(uint *)(param_3 + 0x14) >> 0x11 & 7) == 3);
   uVar4 = *(uint *)(param_3 + 0x14);
@@ -1757,11 +1765,11 @@ LAB_97c0a29c:
              iVar6 != 0)) {
             iVar6 = *piVar11;
             *piVar11 = iVar6 + 1;
-            iVar10 = _realloc(*(undefined4 *)(iVar3 + -0x18),(iVar6 + 1) * 4);
+            allocation3 = _realloc(*(undefined4 *)(iVar3 + -0x18),(iVar6 + 1) * 4);
             iVar6 = *piVar11;
-            *(int *)(iVar3 + -0x18) = iVar10;
+            *(int *)(iVar3 + -0x18) = allocation3;
             uVar5 = ((int (*)())_GetRegister)(param_1,*(uint *)(param_3 + 0x14) >> 0x11 & 7,iVar12,iVar15);
-            *(undefined4 *)(iVar10 + iVar6 * 4 + -4) = uVar5;
+            *(undefined4 *)(allocation3 + iVar6 * 4 + -4) = uVar5;
           }
         }
         iVar15 = iVar15 + 1;
@@ -1772,11 +1780,11 @@ LAB_97c0a29c:
   if ((uVar9 != 0 || (int)uVar2 < 0) && (iVar12 = ((int (*)())_GetRegister)(param_1,4,0,0), iVar12 != 0)) {
     iVar12 = *piVar11;
     *piVar11 = iVar12 + 1;
-    iVar15 = _realloc(*(undefined4 *)(iVar3 + -0x18),(iVar12 + 1) * 4);
+    allocation4 = _realloc(*(undefined4 *)(iVar3 + -0x18),(iVar12 + 1) * 4);
     iVar12 = *piVar11;
-    *(int *)(iVar3 + -0x18) = iVar15;
+    *(int *)(iVar3 + -0x18) = allocation4;
     uVar5 = ((int (*)())_GetRegister)(param_1,4,0,0);
-    *(undefined4 *)(iVar15 + iVar12 * 4 + -4) = uVar5;
+    *(undefined4 *)(allocation4 + iVar12 * 4 + -4) = uVar5;
   }
   return piVar11;
 }
@@ -1799,24 +1807,25 @@ int _InstructionFree(param_1)
 int _BlockAdd(param_1)
   int param_1;
 {
+  int allocation2;
   int iVar1;
-  undefined4 uVar2;
+  undefined4 allocation;
   
   iVar1 = *(int *)(param_1 + 4) + 1;
   *(int *)(param_1 + 4) = iVar1;
-  iVar1 = _realloc(*(undefined4 *)(param_1 + 8),iVar1 * 0x2c);
-  *(int *)(param_1 + 8) = iVar1;
-  iVar1 = iVar1 + *(int *)(param_1 + 4) * 0x2c;
+  allocation2 = _realloc(*(undefined4 *)(param_1 + 8),iVar1 * 0x2c);
+  *(int *)(param_1 + 8) = allocation2;
+  iVar1 = allocation2 + *(int *)(param_1 + 4) * 0x2c;
   *(undefined4 *)(iVar1 + -0x2c) = 0;
-  uVar2 = _malloc(0x1c);
+  allocation = _malloc(0x1c);
   *(undefined4 *)(iVar1 + -0x24) = 0;
-  *(undefined4 *)(iVar1 + -0x28) = uVar2;
-  uVar2 = _malloc(4);
+  *(undefined4 *)(iVar1 + -0x28) = allocation;
+  allocation = _malloc(4);
   *(undefined4 *)(iVar1 + -0x1c) = 0;
-  *(undefined4 *)(iVar1 + -0x20) = uVar2;
-  uVar2 = _malloc(4);
+  *(undefined4 *)(iVar1 + -0x20) = allocation;
+  allocation = _malloc(4);
   *(undefined4 *)(iVar1 + -4) = 0;
-  *(undefined4 *)(iVar1 + -0x18) = uVar2;
+  *(undefined4 *)(iVar1 + -0x18) = allocation;
   *(undefined4 *)(iVar1 + -0x14) = 0;
   *(undefined4 *)(iVar1 + -0x10) = 0;
   *(undefined4 *)(iVar1 + -0xc) = 0;
@@ -2000,14 +2009,14 @@ int _GetOrAddBlock(param_1, param_2)
   int param_2;
 {
   int iVar1;
-  int iVar2;
+  int allocation;
   undefined4 uVar3;
   
   iVar1 = param_2 * 4;
   if (*(uint *)(param_1 + 0x14) < param_2 + 1U) {
-    iVar2 = _realloc(*(undefined4 *)(param_1 + 0x18),iVar1 + 4);
-    *(int *)(param_1 + 0x18) = iVar2;
-    _memset(*(int *)(param_1 + 0x14) * 4 + iVar2,0,(param_2 - *(int *)(param_1 + 0x14)) * 4 + 4);
+    allocation = _realloc(*(undefined4 *)(param_1 + 0x18),iVar1 + 4);
+    *(int *)(param_1 + 0x18) = allocation;
+    _memset(*(int *)(param_1 + 0x14) * 4 + allocation,0,(param_2 - *(int *)(param_1 + 0x14)) * 4 + 4);
     *(uint *)(param_1 + 0x14) = param_2 + 1U;
   }
   if (*(int *)(iVar1 + *(int *)(param_1 + 0x18)) == 0) {
@@ -2205,19 +2214,20 @@ int _BlockAddSuccessor(param_1, param_2)
   int param_1;
   int param_2;
 {
+  int allocation;
   int iVar1;
   
   if ((param_1 != 0) && (param_2 != 0)) {
     iVar1 = *(int *)(param_2 + 8) + 1;
     *(int *)(param_2 + 8) = iVar1;
-    iVar1 = _realloc(*(undefined4 *)(param_2 + 0xc),iVar1 * 4);
-    *(int *)(param_2 + 0xc) = iVar1;
-    *(int *)(iVar1 + *(int *)(param_2 + 8) * 4 + -4) = param_1;
+    allocation = _realloc(*(undefined4 *)(param_2 + 0xc),iVar1 * 4);
+    *(int *)(param_2 + 0xc) = allocation;
+    *(int *)(allocation + *(int *)(param_2 + 8) * 4 + -4) = param_1;
     iVar1 = *(int *)(param_1 + 0x10) + 1;
     *(int *)(param_1 + 0x10) = iVar1;
-    iVar1 = _realloc(*(undefined4 *)(param_1 + 0x14),iVar1 * 4);
-    *(int *)(param_1 + 0x14) = iVar1;
-    *(int *)(iVar1 + *(int *)(param_1 + 0x10) * 4 + -4) = param_2;
+    allocation = _realloc(*(undefined4 *)(param_1 + 0x14),iVar1 * 4);
+    *(int *)(param_1 + 0x14) = allocation;
+    *(int *)(allocation + *(int *)(param_1 + 0x10) * 4 + -4) = param_2;
   }
   return;
 }
@@ -2259,31 +2269,31 @@ int _BlocksFree(param_1)
 int _ProgramNew(param_1)
   undefined4 param_1;
 {
-  undefined4 *puVar1;
-  undefined4 uVar2;
+  undefined4 *allocation;
+  undefined4 allocation2;
   
-  puVar1 = (undefined4 *)_malloc(0x44);
-  *puVar1 = param_1;
-  puVar1[1] = 0;
-  uVar2 = _malloc(0x2c);
-  puVar1[2] = uVar2;
-  puVar1[3] = 0;
-  uVar2 = _malloc(0x2c);
-  puVar1[4] = uVar2;
-  puVar1[5] = 0;
-  uVar2 = _malloc(4);
-  puVar1[6] = uVar2;
-  puVar1[0x10] = 0;
-  puVar1[7] = 0;
-  puVar1[8] = 0;
-  puVar1[9] = 0;
-  puVar1[10] = 0;
-  puVar1[0xb] = 0;
-  puVar1[0xc] = 0;
-  puVar1[0xd] = 0;
-  puVar1[0xe] = 0;
-  puVar1[0xf] = 0;
-  return puVar1;
+  allocation = (undefined4 *)_malloc(0x44);
+  *allocation = param_1;
+  allocation[1] = 0;
+  allocation2 = _malloc(0x2c);
+  allocation[2] = allocation2;
+  allocation[3] = 0;
+  allocation2 = _malloc(0x2c);
+  allocation[4] = allocation2;
+  allocation[5] = 0;
+  allocation2 = _malloc(4);
+  allocation[6] = allocation2;
+  allocation[0x10] = 0;
+  allocation[7] = 0;
+  allocation[8] = 0;
+  allocation[9] = 0;
+  allocation[10] = 0;
+  allocation[0xb] = 0;
+  allocation[0xc] = 0;
+  allocation[0xd] = 0;
+  allocation[0xe] = 0;
+  allocation[0xf] = 0;
+  return allocation;
 }
 
 /* _ProgramFree @ 0x97c0b208 (76 bytes) */
@@ -2408,7 +2418,7 @@ int _AddTempRegister(param_1, param_2, param_3, param_4)
   uint param_3;
   uint param_4;
 {
-  undefined4 uVar1;
+  undefined4 maxIndex;
   uint local_30;
   undefined4 local_2c;
   undefined4 local_28;
@@ -2416,9 +2426,9 @@ int _AddTempRegister(param_1, param_2, param_3, param_4)
   local_30 = 0;
   local_2c = 0;
   local_28 = 0;
-  uVar1 = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(param_1 + 4));
+  maxIndex = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(param_1 + 4));
   local_30 = (param_4 & 3) << 0x18 | (param_3 & 7) << 0x1a | param_2 << 0x1d | local_30 & 0xffffff;
-  local_2c = CONCAT22((*(unsigned short *)((unsigned char *)&(local_2c) + 0)),(short)uVar1 + 1);
+  local_2c = CONCAT22((*(unsigned short *)((unsigned char *)&(local_2c) + 0)),(short)maxIndex + 1);
   _PPStreamAddTempUsage(param_1,&local_30);
   return local_2c & 0xffff;
 }

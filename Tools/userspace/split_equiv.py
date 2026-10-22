@@ -139,17 +139,34 @@ def warns(path):
 IDXREF = re.compile(r'^(lbz|lwz|lhz|lha|stb|sth|stw|lfs|lfd|stfs|stfd)\t(\S+),(-?\d+)\((r\d+)\)$')
 
 
+STORES = ('stw', 'stb', 'sth', 'stfs', 'stfd', 'stmw', 'stwx', 'stbx', 'sthx', 'stwu', 'cmpw', 'cmpwi', 'cmplw', 'cmplwi', 'fcmpu', 'mtctr', 'mtlr', 'b', 'bl', 'blr', 'bctr', 'bctrl')
+
+
 def prep(ins):
-    """-> (masked text, frame keys) per instruction. Frame displacements are masked; an element of a local array addressed as
-    `addi rA,r30,K / add rX,rA,rB / lbz rD,N(rX)` is the frame offset K+N (key 'A<K+N>')."""
+    """-> (masked text, frame keys) per instruction. Frame displacements are masked; an address derived from the frame (`addi rA,r30,K`, then
+    `add rX,rA,rI` / `addi rB,rA,N` / a load or store `N(rX)`) is the frame offset K+N (key 'A<K+N>', the index part is not tracked)."""
     masked, keys = [], []
+    fr = {}                                     # register -> frame offset of the address it holds
     for i, x in enumerate(ins):
+        mn = x.split('\t')[0]
         mx = IDXREF.match(x)
-        if mx and i >= 2 and re.match(r'add\t%s,' % mx.group(4), ins[i - 1]) and re.match(r'addi\t\S+,r30,(\d+)$', ins[i - 2]):
-            K = int(re.match(r'addi\t\S+,r30,(\d+)$', ins[i - 2]).group(1))
-            masked.append(canon('%s\t%s,<F>(%s)' % (mx.group(1), mx.group(2), mx.group(4)))); keys.append(['A%d' % (K + int(mx.group(3)))])
+        ma = re.match(r'addi\t(r\d+),(r\d+),(-?\d+)$', x)
+        md = re.match(r'add\t(r\d+),(r\d+),(r\d+)$', x)
+        if mx and mx.group(4) in fr:
+            masked.append(canon('%s\t%s,<F>(%s)' % (mx.group(1), mx.group(2), mx.group(4)))); keys.append(['A%d' % (fr[mx.group(4)] + int(mx.group(3)))])
+        elif ma and ma.group(2) in fr:
+            masked.append('addi\t%s,%s,<F>' % (ma.group(1), ma.group(2))); keys.append(['A%d' % (fr[ma.group(2)] + int(ma.group(3)))])
+            fr[ma.group(1)] = fr[ma.group(2)] + int(ma.group(3)); continue
+        elif md and (md.group(2) in fr or md.group(3) in fr):
+            masked.append(canon(x)); keys.append([])
+            fr[md.group(1)] = fr[md.group(2)] if md.group(2) in fr else fr[md.group(3)]; continue
         else:
             masked.append(canon(FR.sub('<F>', x))); keys.append([fx.group(1) or fx.group(3) or fx.group(4) for fx in FR.finditer(x)])
+        if ma and ma.group(2) == 'r30': fr[ma.group(1)] = int(ma.group(3)); continue
+        if mn in ('bl', 'bctrl') or mn.startswith('b'): fr.clear(); continue
+        if mn not in STORES:
+            m0 = re.match(r'[a-z.]+\t(r\d+)', x)
+            if m0: fr.pop(m0.group(1), None)
     return masked, keys
 
 

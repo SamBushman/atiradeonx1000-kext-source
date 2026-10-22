@@ -577,15 +577,15 @@ int __ZNSsC2EPKcRKSaIcE(this, str, param_3)
   char *str;
   unsigned char * param_3;
 {
-  size_t sVar1;
+  size_t length;
   char *pcVar2;
   
   if (str == (char *)0x0) {
     pcVar2 = (char *)0xffffffff;
   }
   else {
-    sVar1 = _strlen(str);
-    pcVar2 = str + sVar1;
+    length = _strlen(str);
+    pcVar2 = str + length;
   }
   pcVar2 = __ZNSs12_S_constructIPKcEEPcT_S3_RKSaIcESt20forward_iterator_tag
                      (str,pcVar2,param_3,0);
@@ -598,15 +598,15 @@ int __ZNSsC1EPKcRKSaIcE(this, str, param_3)
   char *str;
   unsigned char * param_3;
 {
-  size_t sVar1;
+  size_t length;
   char *pcVar2;
   
   if (str == (char *)0x0) {
     pcVar2 = (char *)0xffffffff;
   }
   else {
-    sVar1 = _strlen(str);
-    pcVar2 = str + sVar1;
+    length = _strlen(str);
+    pcVar2 = str + length;
   }
   pcVar2 = __ZNSs12_S_constructIPKcEEPcT_S3_RKSaIcESt20forward_iterator_tag
                      (str,pcVar2,param_3,0);
@@ -619,15 +619,15 @@ int __ZNSsC4EPKcRKSaIcE(this, param_2, param_3)
   char *param_2;
   unsigned char * param_3;
 {
-  int iVar1;
+  int length;
   char *pcVar2;
   
   if (param_2 == (char *)0x0) {
     pcVar2 = (char *)0xffffffff;
   }
   else {
-    iVar1 = _strlen(param_2);
-    pcVar2 = param_2 + iVar1;
+    length = _strlen(param_2);
+    pcVar2 = param_2 + length;
   }
   pcVar2 = __ZNSs12_S_constructIPKcEEPcT_S3_RKSaIcESt20forward_iterator_tag
                      (param_2,pcVar2,param_3,0);
@@ -768,14 +768,14 @@ int __ZNSs6assignEPKc(this, str)
   void *this;
   char *str;
 {
-  uint uVar1;
+  uint length;
   char *pcVar2;
   unsigned char * psVar3;
   undefined4 local_30;
   undefined4 local_2c [6];
   
-  uVar1 = _strlen(str);
-  if (0x3ffffffc < uVar1) {
+  length = _strlen(str);
+  if (0x3ffffffc < length) {
     std____throw_length_error("basic_string::assign");
   }
   pcVar2 = *(char **)this;
@@ -784,20 +784,20 @@ int __ZNSs6assignEPKc(this, str)
     __ZNKSs9_M_ibeginEv(&local_30,this);
     __ZNKSs7_M_iendEv(local_2c,this);
     psVar3 = __ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_
-                       (this,local_30,local_2c[0],str,str + uVar1);
+                       (this,local_30,local_2c[0],str,str + length);
     return psVar3;
   }
-  if ((uint)((int)str - (int)pcVar2) < uVar1) {
+  if ((uint)((int)str - (int)pcVar2) < length) {
     if (str == pcVar2) goto LAB_97c13c80;
-    _memmove(pcVar2,str,uVar1);
+    _memmove(pcVar2,str,length);
   }
   else {
-    _memcpy(pcVar2,str,uVar1);
+    _memcpy(pcVar2,str,length);
   }
   pcVar2 = *(char **)this;
 LAB_97c13c80:
-  *(uint *)(pcVar2 + -0xc) = uVar1;
-  *(undefined1 *)(*(int *)this + uVar1) = 0;
+  *(uint *)(pcVar2 + -0xc) = length;
+  *(undefined1 *)(*(int *)this + length) = 0;
   return this;
 }
 
@@ -806,14 +806,14 @@ int __ZNSsaSEPKc(this, param_2)
   void *this;
   char *param_2;
 {
-  uint uVar1;
+  uint length;
   char *pcVar2;
   unsigned char * psVar3;
   undefined4 local_30;
   undefined4 local_2c [6];
   
-  uVar1 = _strlen(param_2);
-  if (0x3ffffffc < uVar1) {
+  length = _strlen(param_2);
+  if (0x3ffffffc < length) {
     std____throw_length_error("basic_string::assign");
   }
   pcVar2 = *(char **)this;
@@ -822,20 +822,20 @@ int __ZNSsaSEPKc(this, param_2)
     __ZNKSs9_M_ibeginEv(&local_30,this);
     __ZNKSs7_M_iendEv(local_2c,this);
     psVar3 = __ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_
-                       (this,local_30,local_2c[0],param_2,param_2 + uVar1);
+                       (this,local_30,local_2c[0],param_2,param_2 + length);
     return psVar3;
   }
-  if ((uint)((int)param_2 - (int)pcVar2) < uVar1) {
+  if ((uint)((int)param_2 - (int)pcVar2) < length) {
     if (param_2 == pcVar2) goto LAB_97c13d84;
-    _memmove(pcVar2,param_2,uVar1);
+    _memmove(pcVar2,param_2,length);
   }
   else {
-    _memcpy(pcVar2,param_2,uVar1);
+    _memcpy(pcVar2,param_2,length);
   }
   pcVar2 = *(char **)this;
 LAB_97c13d84:
-  *(uint *)(pcVar2 + -0xc) = uVar1;
-  *(undefined1 *)(*(int *)this + uVar1) = 0;
+  *(uint *)(pcVar2 + -0xc) = length;
+  *(undefined1 *)(*(int *)this + length) = 0;
   return this;
 }
 

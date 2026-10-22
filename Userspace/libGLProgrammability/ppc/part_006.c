@@ -434,7 +434,7 @@ int TType__buildMangledName(this, param_2)
   unsigned char * param_2;
 {
   int iVar1;
-  ulong uVar2;
+  ulong length;
   undefined4 a1;
   undefined4 uVar3;
   char *pcVar4;
@@ -470,39 +470,39 @@ LAB_97ba2778:
     goto switchD_97ba270c_caseD_0;
   case 5:
     pcVar4 = "s1";
-    uVar2 = _strlen("s1");
+    length = _strlen("s1");
     break;
   case 6:
     pcVar4 = "s2";
-    uVar2 = _strlen("s2");
+    length = _strlen("s2");
     break;
   case 7:
     pcVar4 = "s3";
-    uVar2 = _strlen("s3");
+    length = _strlen("s3");
     break;
   case 8:
     pcVar4 = "sC";
-    uVar2 = _strlen("sC");
+    length = _strlen("sC");
     break;
   case 9:
     pcVar4 = "sS1";
-    uVar2 = _strlen("sS1");
+    length = _strlen("sS1");
     break;
   case 10:
     pcVar4 = "sS2";
-    uVar2 = _strlen("sS2");
+    length = _strlen("sS2");
     break;
   case 0xb:
     pcVar4 = "sR2";
-    uVar2 = _strlen("sR2");
+    length = _strlen("sR2");
     break;
   case 0xc:
     pcVar4 = "sSR2";
-    uVar2 = _strlen("sSR2");
+    length = _strlen("sSR2");
     break;
   case 0xe:
-    uVar2 = _strlen("struct-");
-    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm(param_2,"struct-",uVar2);
+    length = _strlen("struct-");
+    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm(param_2,"struct-",length);
     if (*(unsigned char **)(this + 0x10) != (unsigned char *)0x0) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendERKS3_(param_2,*(unsigned char **)(this + 0x10))
       ;
@@ -515,7 +515,7 @@ LAB_97ba2778:
     }
     goto switchD_97ba270c_caseD_0;
   }
-  __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm(param_2,pcVar4,uVar2);
+  __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm(param_2,pcVar4,length);
 switchD_97ba270c_caseD_0:
   uVar3 = (**(code **)(*(int *)this + 0x2c))(this);
   __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEmc(param_2,1,(int)(char)((char)uVar3 + '0'))
@@ -524,8 +524,8 @@ switchD_97ba270c_caseD_0:
   if (iVar1 != 0) {
     _sprintf(acStack_20,"%d",*(undefined4 *)(this + 4));
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEmc(param_2,1,0x5b);
-    uVar2 = _strlen(acStack_20);
-    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm(param_2,acStack_20,uVar2);
+    length = _strlen(acStack_20);
+    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm(param_2,acStack_20,length);
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEmc(param_2,1,0x5d);
   }
   return;
@@ -536,7 +536,8 @@ int TVariable__dump(this, param_2)
   unsigned char * this;
   unsigned char * param_2;
 {
-  char *pcVar1;
+  char *basicString;
+  char *qualifierString;
   int iVar2;
   int iVar3;
   unsigned char * this_00;
@@ -547,11 +548,11 @@ int TVariable__dump(this, param_2)
   *(undefined1 *)(iVar3 + *(int *)(iVar3 + -0xc)) = *DAT_a7b7ba80;
   __ZN13TInfoSinkBase6appendEPKc(this_00,*(char **)(iVar2 + 4));
   __ZN13TInfoSinkBase6appendEPKc(this_00,": ");
-  pcVar1 = (char *)getQualifierString(*(uint *)(this + 0x30) >> 0x19);
-  __ZN13TInfoSinkBase6appendEPKc(this_00,pcVar1);
+  qualifierString = (char *)getQualifierString(*(uint *)(this + 0x30) >> 0x19);
+  __ZN13TInfoSinkBase6appendEPKc(this_00,qualifierString);
   __ZN13TInfoSinkBase6appendEPKc(this_00," ");
-  pcVar1 = (char *)TType__getBasicString(*(uint *)(this + 0x30) >> 0x13 & 0x3f);
-  __ZN13TInfoSinkBase6appendEPKc(this_00,pcVar1);
+  basicString = (char *)TType__getBasicString(*(uint *)(this + 0x30) >> 0x13 & 0x3f);
+  __ZN13TInfoSinkBase6appendEPKc(this_00,basicString);
   if ((*(uint *)(this + 0x30) & 0x200) != 0) {
     __ZN13TInfoSinkBase6appendEPKc(this_00,"[0]");
   }
@@ -565,7 +566,7 @@ int TFunction__dump(this, param_2)
 {
   undefined1 *puVar1;
   int iVar2;
-  char *pcVar3;
+  char *basicString;
   int iVar4;
   unsigned char * this_00;
   
@@ -576,8 +577,8 @@ int TFunction__dump(this, param_2)
   *(undefined1 *)(iVar2 + *(int *)(iVar2 + -0xc)) = *DAT_a7b7ba80;
   __ZN13TInfoSinkBase6appendEPKc(this_00,*(char **)(iVar4 + 4));
   __ZN13TInfoSinkBase6appendEPKc(this_00,": ");
-  pcVar3 = (char *)TType__getBasicString(*(uint *)(this + 0x40) >> 0x13 & 0x3f);
-  __ZN13TInfoSinkBase6appendEPKc(this_00,pcVar3);
+  basicString = (char *)TType__getBasicString(*(uint *)(this + 0x40) >> 0x13 & 0x3f);
+  __ZN13TInfoSinkBase6appendEPKc(this_00,basicString);
   __ZN13TInfoSinkBase6appendEPKc(this_00," ");
   iVar2 = (**(code **)(*(int *)this + 8))(this);
   *(undefined1 *)(*(int *)(iVar2 + 4) + *(int *)(*(int *)(iVar2 + 4) + -0xc)) = *puVar1;
@@ -1160,6 +1161,7 @@ int __ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   unsigned char * param_2;
   unsigned char * param_3;
 {
+  undefined4 poolAllocator2;
   undefined1 *puVar1;
   int *piVar2;
   void *pvVar3;
@@ -1183,8 +1185,8 @@ int __ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   
   ((int (*)())__ZN7TSymbolC2ERKS_)(this,(unsigned char *)param_2);
   *(int *)this = DAT_a7b7ba7c + 8;
-  uVar4 = GetGlobalPoolAllocator();
-  *(undefined4 *)((int)this + 0xc) = uVar4;
+  poolAllocator2 = GetGlobalPoolAllocator();
+  *(undefined4 *)((int)this + 0xc) = poolAllocator2;
   iVar8 = DAT_a7b7ba74;
   *(undefined4 *)((int)this + 0x18) = 0;
   *(undefined4 *)((int)this + 0x10) = 0;
@@ -1198,8 +1200,8 @@ int __ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
-  uVar4 = GetGlobalPoolAllocator();
-  *(undefined4 *)((int)this + 0x44) = uVar4;
+  poolAllocator2 = GetGlobalPoolAllocator();
+  *(undefined4 *)((int)this + 0x44) = poolAllocator2;
   *(int *)((int)this + 0x48) = iVar8 + 0xc;
   puVar1 = DAT_a7b7ba80;
   for (uVar11 = 0; uVar11 < (uint)(*(int *)(param_2 + 0x14) - *(int *)(param_2 + 0x10) >> 3);
@@ -1256,6 +1258,7 @@ int __ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   unsigned char * param_2;
   unsigned char * param_3;
 {
+  undefined4 poolAllocator2;
   undefined1 *puVar1;
   int *piVar2;
   void *pvVar3;
@@ -1279,8 +1282,8 @@ int __ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   
   ((int (*)())__ZN7TSymbolC2ERKS_)(this,(unsigned char *)param_2);
   *(int *)this = DAT_a7b7ba7c + 8;
-  uVar4 = GetGlobalPoolAllocator();
-  *(undefined4 *)((int)this + 0xc) = uVar4;
+  poolAllocator2 = GetGlobalPoolAllocator();
+  *(undefined4 *)((int)this + 0xc) = poolAllocator2;
   iVar8 = DAT_a7b7ba74;
   *(undefined4 *)((int)this + 0x18) = 0;
   *(undefined4 *)((int)this + 0x10) = 0;
@@ -1294,8 +1297,8 @@ int __ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
-  uVar4 = GetGlobalPoolAllocator();
-  *(undefined4 *)((int)this + 0x44) = uVar4;
+  poolAllocator2 = GetGlobalPoolAllocator();
+  *(undefined4 *)((int)this + 0x44) = poolAllocator2;
   *(int *)((int)this + 0x48) = iVar8 + 0xc;
   puVar1 = DAT_a7b7ba80;
   for (uVar11 = 0; uVar11 < (uint)(*(int *)(param_2 + 0x14) - *(int *)(param_2 + 0x10) >> 3);
@@ -1352,6 +1355,7 @@ int __ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   unsigned char * param_2;
   unsigned char * param_3;
 {
+  undefined4 poolAllocator2;
   undefined1 *puVar1;
   int *piVar2;
   void *pvVar3;
@@ -1375,8 +1379,8 @@ int __ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   
   ((int (*)())__ZN7TSymbolC2ERKS_)(this,(unsigned char *)param_2);
   *(int *)this = DAT_a7b7ba7c + 8;
-  uVar4 = GetGlobalPoolAllocator();
-  *(undefined4 *)((int)this + 0xc) = uVar4;
+  poolAllocator2 = GetGlobalPoolAllocator();
+  *(undefined4 *)((int)this + 0xc) = poolAllocator2;
   iVar8 = DAT_a7b7ba74;
   *(undefined4 *)((int)this + 0x18) = 0;
   *(undefined4 *)((int)this + 0x10) = 0;
@@ -1390,8 +1394,8 @@ int __ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
-  uVar4 = GetGlobalPoolAllocator();
-  *(undefined4 *)((int)this + 0x44) = uVar4;
+  poolAllocator2 = GetGlobalPoolAllocator();
+  *(undefined4 *)((int)this + 0x44) = poolAllocator2;
   *(int *)((int)this + 0x48) = iVar8 + 0xc;
   puVar1 = DAT_a7b7ba80;
   for (uVar11 = 0; uVar11 < (uint)(*(int *)(param_2 + 0x14) - *(int *)(param_2 + 0x10) >> 3);
