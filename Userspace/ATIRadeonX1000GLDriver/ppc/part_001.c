@@ -37,19 +37,19 @@ int _gldReclaimContext(ctx)
 }
 
 /* FUN_00007020 @ 0x7020 (164 bytes) */
-int FUN_00007020(param_1)
-  int *param_1;
+int FUN_00007020(ctx)
+  int *ctx;
 {
-  char cVar1;
-  undefined *puVar2;
+  char useCount;
+  undefined *library;
   
-  if ((param_1[0x3e] != 0) &&
-     (param_1[0x3e] = 0, puVar2 = PTR_DAT_001e88ac, (param_1[0xf] & 0x20U) == 0)) {
-    cVar1 = PTR_DAT_001e88ac[*param_1 + 0x98];
-    PTR_DAT_001e88ac[*param_1 + 0x98] = cVar1 + -1;
-    if ((char)(cVar1 + -1) == '\0') {
-      _IOServiceClose(*(undefined4 *)(puVar2 + *param_1 * 4 + 0x18));
-      *(undefined4 *)(puVar2 + *param_1 * 4 + 0x18) = 0;
+  if ((ctx[0x3e] != 0) &&
+     (ctx[0x3e] = 0, library = PTR_DAT_001e88ac, (ctx[0xf] & 0x20U) == 0)) {
+    useCount = PTR_DAT_001e88ac[*ctx + 0x98];
+    PTR_DAT_001e88ac[*ctx + 0x98] = useCount + -1;
+    if ((char)(useCount + -1) == '\0') {
+      _IOServiceClose(*(undefined4 *)(library + *ctx * 4 + 0x18));
+      *(undefined4 *)(library + *ctx * 4 + 0x18) = 0;
     }
   }
   return;
@@ -640,111 +640,111 @@ LAB_00007e28:
 }
 
 /* FUN_00007ec0 @ 0x7ec0 (256 bytes) */
-int FUN_00007ec0(param_1)
-  uint param_1;
+int FUN_00007ec0(bitCount)
+  uint bitCount;
 {
-  if (0x7f < param_1) {
+  if (0x7f < bitCount) {
     return 0x10000;
   }
-  if (0x5f < param_1) {
+  if (0x5f < bitCount) {
     return 0x18000;
   }
-  if (0x3f < param_1) {
+  if (0x3f < bitCount) {
     return 0x1c000;
   }
-  if (0x2f < param_1) {
+  if (0x2f < bitCount) {
     return 0x1e000;
   }
-  if (0x1f < param_1) {
+  if (0x1f < bitCount) {
     return 0x1f000;
   }
-  if (0x17 < param_1) {
+  if (0x17 < bitCount) {
     return 0x1f800;
   }
-  if (0xf < param_1) {
+  if (0xf < bitCount) {
     return 0x1fc00;
   }
-  if (0xb < param_1) {
+  if (0xb < bitCount) {
     return 0x1fe00;
   }
-  if (9 < param_1) {
+  if (9 < bitCount) {
     return 0x1ff00;
   }
-  if (7 < param_1) {
+  if (7 < bitCount) {
     return 0x1ff80;
   }
-  if (5 < param_1) {
+  if (5 < bitCount) {
     return 0x1ffc0;
   }
-  if (param_1 == 5) {
+  if (bitCount == 5) {
     return 0x1ffe0;
   }
-  if (3 < param_1) {
+  if (3 < bitCount) {
     return 0x1fff0;
   }
-  if (param_1 == 3) {
+  if (bitCount == 3) {
     return 0x1fff8;
   }
-  if (1 < param_1) {
+  if (1 < bitCount) {
     return 0x1fffc;
   }
-  return (param_1 == 0) + 0x1fffe;
+  return (bitCount == 0) + 0x1fffe;
 }
 
 /* FUN_00007fc0 @ 0x7fc0 (112 bytes) */
-int FUN_00007fc0(param_1)
-  uint param_1;
+int FUN_00007fc0(bitCount)
+  uint bitCount;
 {
-  if (0x100 < param_1) {
+  if (0x100 < bitCount) {
     return 0;
   }
-  if (0x80 < param_1) {
+  if (0x80 < bitCount) {
     return 0x30000000;
   }
-  if (0x40 < param_1) {
+  if (0x40 < bitCount) {
     return 0xc000000;
   }
-  if (0x20 < param_1) {
+  if (0x20 < bitCount) {
     return 0x3ff00000;
   }
-  if (0x10 < param_1) {
+  if (0x10 < bitCount) {
     return 0x3fffc000;
   }
-  if (8 < param_1) {
+  if (8 < bitCount) {
     return 0x3fffffc0;
   }
-  if (param_1 != 0) {
+  if (bitCount != 0) {
     return 0x3ffffffc;
   }
   return 0xbffffffc;
 }
 
 /* FUN_00008030 @ 0x8030 (128 bytes) */
-int FUN_00008030(param_1)
-  uint param_1;
+int FUN_00008030(bitCount)
+  uint bitCount;
 {
-  if (0x20 < param_1) {
+  if (0x20 < bitCount) {
     return 0;
   }
-  if (0x10 < param_1) {
+  if (0x10 < bitCount) {
     return 0x8000000;
   }
-  if (0xc < param_1) {
+  if (0xc < bitCount) {
     return 0xa800000;
   }
-  if (8 < param_1) {
+  if (8 < bitCount) {
     return 0xaa00000;
   }
-  if (4 < param_1) {
+  if (4 < bitCount) {
     return 0xaa9a928;
   }
-  if (2 < param_1) {
+  if (2 < bitCount) {
     return 0xaa9a9a8;
   }
-  if (param_1 == 2) {
+  if (bitCount == 2) {
     return 0xaada9a8;
   }
-  if (param_1 != 0) {
+  if (bitCount != 0) {
     return 0xaadada8;
   }
   return 0xbffffffc;
@@ -2239,19 +2239,19 @@ int FUN_000098c8(param_1, param_2, param_3)
 }
 
 /* FUN_00009b70 @ 0x9b70 (88 bytes) */
-int FUN_00009b70(param_1)
-  int param_1;
+int FUN_00009b70(ctx)
+  int ctx;
 {
-  undefined4 uVar1;
-  int iVar2;
+  undefined4 returnCode;
+  int record;
   
-  iVar2 = _calloc(1,0x18);
-  uVar1 = 0x2720;
-  *(int *)(param_1 + 0x234) = iVar2;
-  if (iVar2 != 0) {
-    uVar1 = 0;
+  record = _calloc(1,0x18);
+  returnCode = 0x2720;
+  *(int *)(ctx + 0x234) = record;
+  if (record != 0) {
+    returnCode = 0;
   }
-  return uVar1;
+  return returnCode;
 }
 
 /* FUN_00009bd0 @ 0x9bd0 (164 bytes) */
@@ -2292,87 +2292,87 @@ int _gldDestroyQuery(ctx, query)
 }
 
 /* FUN_00009cd0 @ 0x9cd0 (152 bytes) */
-int FUN_00009cd0(param_1)
-  int param_1;
+int FUN_00009cd0(ctx)
+  int ctx;
 {
-  int iVar1;
-  int *piVar2;
-  int iVar3;
-  int iVar4;
+  int updatedRefCount;
+  int *refCountSlot;
+  int oldRefCount;
+  int memory;
   char in_RESERVE;
-  byte in_cr0;
+  byte crBits;
   
-  iVar4 = **(int **)(param_1 + 0x234);
-  if (iVar4 != 0) {
-    ((int (*)())FUN_00009bd0)(param_1);
-    piVar2 = (int *)(iVar4 + 0x10);
+  memory = **(int **)(ctx + 0x234);
+  if (memory != 0) {
+    ((int (*)())FUN_00009bd0)(ctx);
+    refCountSlot = (int *)(memory + 0x10);
     do {
-      iVar3 = *piVar2;
+      oldRefCount = *refCountSlot;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar3 + -0x10000,0,piVar2);
-        *piVar2 = iVar1;
-        in_cr0 = 2;
+        updatedRefCount = storeWordConditionalIndexed(oldRefCount + -0x10000,0,refCountSlot);
+        *refCountSlot = updatedRefCount;
+        crBits = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
-    if (iVar3 == 0x10000) {
-      _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 4),0xb,iVar4,1,0,0);
-      **(undefined4 **)(param_1 + 0x234) = 0;
+    } while (!(bool)(crBits >> 1 & 1));
+    if (oldRefCount == 0x10000) {
+      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,memory,1,0,0);
+      **(undefined4 **)(ctx + 0x234) = 0;
     }
   }
   return 0;
 }
 
 /* FUN_00009d70 @ 0x9d70 (248 bytes) */
-int FUN_00009d70(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  int *param_2;
-  int param_3;
-  int param_4;
-  int param_5;
+int FUN_00009d70(ctx, record, addressWord, sizeWord, limitWord)
+  int ctx;
+  int *record;
+  int addressWord;
+  int sizeWord;
+  int limitWord;
 {
-  int iVar1;
-  int *piVar2;
-  int iVar3;
-  int iVar4;
+  int updatedRefCount;
+  int *refCountSlot;
+  int status;
+  int oldMemory;
   char in_RESERVE;
-  byte in_cr0;
-  undefined4 local_28;
-  undefined1 auStack_24 [4];
-  int local_20;
+  byte crBits;
+  undefined4 structOutSize;
+  undefined1 structOut0 [4];
+  int newMemory;
   
-  param_2[2] = param_3;
-  param_2[3] = param_4;
-  param_2[1] = 6;
-  param_2[4] = param_5;
-  iVar4 = *param_2;
-  *param_2 = 0;
-  local_28 = 8;
-  iVar3 = _io_connect_method_structureI_structureO
-                    (*(undefined4 *)(param_1 + 4),10,param_2 + 1,0x14,auStack_24,&local_28);
-  if (iVar3 == 0) {
-    *param_2 = local_20;
-    piVar2 = (int *)(local_20 + 0x10);
+  record[2] = addressWord;
+  record[3] = sizeWord;
+  record[1] = 6;
+  record[4] = limitWord;
+  oldMemory = *record;
+  *record = 0;
+  structOutSize = 8;
+  status = _io_connect_method_structureI_structureO
+                    (*(undefined4 *)(ctx + 4),10,record + 1,0x14,structOut0,&structOutSize);
+  if (status == 0) {
+    *record = newMemory;
+    refCountSlot = (int *)(newMemory + 0x10);
     do {
       if (in_RESERVE != '\0') {
-        iVar3 = storeWordConditionalIndexed(*piVar2 + 0x10000,0,piVar2);
-        *piVar2 = iVar3;
-        in_cr0 = 2;
+        status = storeWordConditionalIndexed(*refCountSlot + 0x10000,0,refCountSlot);
+        *refCountSlot = status;
+        crBits = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
-    *(undefined1 *)(local_20 + 0x14) = 1;
+    } while (!(bool)(crBits >> 1 & 1));
+    *(undefined1 *)(newMemory + 0x14) = 1;
   }
-  if (iVar4 != 0) {
-    piVar2 = (int *)(iVar4 + 0x10);
+  if (oldMemory != 0) {
+    refCountSlot = (int *)(oldMemory + 0x10);
     do {
-      iVar3 = *piVar2;
+      status = *refCountSlot;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar3 + -0x10000,0,piVar2);
-        *piVar2 = iVar1;
-        in_cr0 = 2;
+        updatedRefCount = storeWordConditionalIndexed(status + -0x10000,0,refCountSlot);
+        *refCountSlot = updatedRefCount;
+        crBits = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
-    if (iVar3 == 0x10000) {
-      _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 4),0xb,iVar4,1,0,0);
+    } while (!(bool)(crBits >> 1 & 1));
+    if (status == 0x10000) {
+      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,oldMemory,1,0,0);
     }
   }
   return 1;

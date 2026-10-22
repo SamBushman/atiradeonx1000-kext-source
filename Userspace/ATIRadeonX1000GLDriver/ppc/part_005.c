@@ -1737,24 +1737,24 @@ int FUN_000305b0(param_1, param_2, param_3, param_4)
 }
 
 /* FUN_000307a0 @ 0x307a0 (148 bytes) */
-int FUN_000307a0(param_1, param_2)
-  int param_1;
-  int param_2;
+int FUN_000307a0(ctx, packetIndex)
+  int ctx;
+  int packetIndex;
 {
-  uint *puVar1;
-  int *piVar2;
+  uint *headerWord;
+  int *cursor;
   
-  piVar2 = *(int **)(param_1 + 0x1dc);
-  if (*(int **)(param_1 + 0x1e0) <= piVar2 + 1) {
-    FUN_0001a0f0(param_1,0x1000000);
-    piVar2 = *(int **)(param_1 + 0x1dc);
+  cursor = *(int **)(ctx + 0x1dc);
+  if (*(int **)(ctx + 0x1e0) <= cursor + 1) {
+    FUN_0001a0f0(ctx,0x1000000);
+    cursor = *(int **)(ctx + 0x1dc);
   }
-  puVar1 = *(uint **)(param_1 + 0x1d8);
-  *(int **)(param_1 + 0x1dc) = piVar2 + 1;
-  *puVar1 = (int)piVar2 - (int)puVar1 >> 2 | *puVar1;
-  *(int **)(param_1 + 0x1d8) = piVar2;
-  *piVar2 = param_2 * 0x1000000 + 0x16000000;
-  return FUN_000a8320(param_1,param_2);
+  headerWord = *(uint **)(ctx + 0x1d8);
+  *(int **)(ctx + 0x1dc) = cursor + 1;
+  *headerWord = (int)cursor - (int)headerWord >> 2 | *headerWord;
+  *(int **)(ctx + 0x1d8) = cursor;
+  *cursor = packetIndex * 0x1000000 + 0x16000000;
+  return FUN_000a8320(ctx,packetIndex);
 }
 
 /* FUN_00030840 @ 0x30840 (124 bytes) */

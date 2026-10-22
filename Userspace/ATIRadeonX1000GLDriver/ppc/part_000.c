@@ -2838,36 +2838,36 @@ int _gldCreateBuffer(ctx, bufferOut, initialWord0, initialWord1)
 }
 
 /* FUN_00005db0 @ 0x5db0 (244 bytes) */
-int FUN_00005db0(param_1, param_2)
-  int param_1;
-  int param_2;
+int FUN_00005db0(ctx, buffer)
+  int ctx;
+  int buffer;
 {
-  int iVar1;
-  undefined4 uVar2;
-  int iVar3;
+  int retired;
+  undefined4 connection;
+  int pluginRecord;
   
-  if ((*(int **)(param_2 + 8) != (int *)0x0) && (iVar3 = **(int **)(param_2 + 8), iVar3 != 0)) {
-    if (*(char *)(iVar3 + 0x16) == '\x06') {
-      if (0x1ffff < *(int *)(iVar3 + 0x10)) {
-        _gldFlush(param_1);
+  if ((*(int **)(buffer + 8) != (int *)0x0) && (pluginRecord = **(int **)(buffer + 8), pluginRecord != 0)) {
+    if (*(char *)(pluginRecord + 0x16) == '\x06') {
+      if (0x1ffff < *(int *)(pluginRecord + 0x10)) {
+        _gldFlush(ctx);
       }
-      iVar1 = FUN_0001a0d0(param_1,*(undefined4 *)(iVar3 + 8));
-      if (iVar1 == 0) {
-        uVar2 = *(undefined4 *)(param_1 + 4);
-        iVar3 = iVar3 + 8;
+      retired = FUN_0001a0d0(ctx,*(undefined4 *)(pluginRecord + 8));
+      if (retired == 0) {
+        connection = *(undefined4 *)(ctx + 4);
+        pluginRecord = pluginRecord + 8;
 LAB_00005e6c:
-        _io_connect_method_scalarI_structureI(uVar2,9,iVar3,1,0,0);
+        _io_connect_method_scalarI_structureI(connection,9,pluginRecord,1,0,0);
         return;
       }
     }
-    else if (*(char *)(iVar3 + 0x16) == '\a') {
-      if (0x1ffff < *(int *)(iVar3 + 0x10)) {
-        _gldFlush(param_1);
+    else if (*(char *)(pluginRecord + 0x16) == '\a') {
+      if (0x1ffff < *(int *)(pluginRecord + 0x10)) {
+        _gldFlush(ctx);
       }
-      iVar1 = FUN_0001a0d0(param_1,*(undefined4 *)(iVar3 + 0xc));
-      if (iVar1 == 0) {
-        uVar2 = *(undefined4 *)(param_1 + 4);
-        iVar3 = iVar3 + 0xc;
+      retired = FUN_0001a0d0(ctx,*(undefined4 *)(pluginRecord + 0xc));
+      if (retired == 0) {
+        connection = *(undefined4 *)(ctx + 4);
+        pluginRecord = pluginRecord + 0xc;
         goto LAB_00005e6c;
       }
     }
@@ -2876,27 +2876,27 @@ LAB_00005e6c:
 }
 
 /* FUN_00005eb0 @ 0x5eb0 (184 bytes) */
-int FUN_00005eb0(param_1, param_2)
-  undefined4 param_1;
-  int param_2;
+int FUN_00005eb0(ctx, buffer)
+  undefined4 ctx;
+  int buffer;
 {
-  undefined4 uVar1;
-  int iVar2;
+  undefined4 retired;
+  int pluginRecord;
   
-  if ((*(int **)(param_2 + 8) != (int *)0x0) && (iVar2 = **(int **)(param_2 + 8), iVar2 != 0)) {
-    if (*(char *)(iVar2 + 0x16) == '\x06') {
-      if (0x1ffff < *(int *)(iVar2 + 0x10)) {
-        _gldFlush(param_1);
+  if ((*(int **)(buffer + 8) != (int *)0x0) && (pluginRecord = **(int **)(buffer + 8), pluginRecord != 0)) {
+    if (*(char *)(pluginRecord + 0x16) == '\x06') {
+      if (0x1ffff < *(int *)(pluginRecord + 0x10)) {
+        _gldFlush(ctx);
       }
-      uVar1 = FUN_0001a0d0(param_1,*(undefined4 *)(iVar2 + 8));
-      return uVar1;
+      retired = FUN_0001a0d0(ctx,*(undefined4 *)(pluginRecord + 8));
+      return retired;
     }
-    if (*(char *)(iVar2 + 0x16) == '\a') {
-      if (0x1ffff < *(int *)(iVar2 + 0x10)) {
-        _gldFlush(param_1);
+    if (*(char *)(pluginRecord + 0x16) == '\a') {
+      if (0x1ffff < *(int *)(pluginRecord + 0x10)) {
+        _gldFlush(ctx);
       }
-      uVar1 = FUN_0001a0d0(param_1,*(undefined4 *)(iVar2 + 0xc));
-      return uVar1;
+      retired = FUN_0001a0d0(ctx,*(undefined4 *)(pluginRecord + 0xc));
+      return retired;
     }
   }
   return 1;

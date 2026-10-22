@@ -363,11 +363,11 @@ void FUN_00024970(int param_1,int param_2,int param_3,int param_4,undefined4 par
 }
 
 /* FUN_00024fb0 @ 0x24fb0 (16 bytes) */
-int FUN_00024fb0(param_1)
-  int param_1;
+int FUN_00024fb0(list)
+  int list;
 {
-  *(int *)(param_1 + 0x30) = param_1 + 0x2c;
-  *(int *)(param_1 + 0x2c) = param_1 + 0x2c;
+  *(int *)(list + 0x30) = list + 0x2c;
+  *(int *)(list + 0x2c) = list + 0x2c;
   return;
 }
 
@@ -913,65 +913,65 @@ switchD_00025774_caseD_1:
 }
 
 /* FUN_00025bf0 @ 0x25bf0 (408 bytes) */
-int FUN_00025bf0(param_1, param_2)
-  int param_1;
-  int param_2;
+int FUN_00025bf0(ctx, program)
+  int ctx;
+  int program;
 {
-  int iVar1;
-  int *piVar2;
-  int *piVar3;
-  int *piVar4;
+  int kind;
+  int *listNode;
+  int *nextNode;
+  int *savedNext;
   
-  if (*(int *)(param_2 + 0x1c) != 0) {
-    _pthread_mutex_lock(*(undefined4 *)(param_1 + 0xc));
-    if (*(int *)(param_2 + 0x2c) != 0) {
-      _glpFreePPShaderLinearize(*(int *)(param_2 + 0x2c));
-      *(undefined4 *)(param_2 + 0x2c) = 0;
+  if (*(int *)(program + 0x1c) != 0) {
+    _pthread_mutex_lock(*(undefined4 *)(ctx + 0xc));
+    if (*(int *)(program + 0x2c) != 0) {
+      _glpFreePPShaderLinearize(*(int *)(program + 0x2c));
+      *(undefined4 *)(program + 0x2c) = 0;
     }
-    if (*(int *)(param_2 + 0x30) != 0) {
-      _glpFreePPShaderToProgram(*(int *)(param_2 + 0x30));
-      *(undefined4 *)(param_2 + 0x30) = 0;
+    if (*(int *)(program + 0x30) != 0) {
+      _glpFreePPShaderToProgram(*(int *)(program + 0x30));
+      *(undefined4 *)(program + 0x30) = 0;
     }
-    if (*(int *)(param_2 + 0x34) != 0) {
-      *(undefined4 *)(param_2 + 0x34) = 0;
+    if (*(int *)(program + 0x34) != 0) {
+      *(undefined4 *)(program + 0x34) = 0;
     }
-    FUN_0003f5d0(*(undefined4 *)(param_2 + 0x38));
-    *(undefined4 *)(param_2 + 0x38) = 0;
-    piVar2 = *(int **)(param_2 + 0x24);
-    while (piVar2 != (int *)(param_2 + 0x20)) {
-      iVar1 = *(int *)(param_2 + 0x1c);
-      piVar4 = (int *)piVar2[1];
-      if (iVar1 == 2) {
-        FUN_000a0d70(piVar2[2] + 0x240,1,piVar2 + 5);
-        piVar3 = (int *)piVar2[1];
+    FUN_0003f5d0(*(undefined4 *)(program + 0x38));
+    *(undefined4 *)(program + 0x38) = 0;
+    listNode = *(int **)(program + 0x24);
+    while (listNode != (int *)(program + 0x20)) {
+      kind = *(int *)(program + 0x1c);
+      savedNext = (int *)listNode[1];
+      if (kind == 2) {
+        FUN_000a0d70(listNode[2] + 0x240,1,listNode + 5);
+        nextNode = (int *)listNode[1];
       }
-      else if (iVar1 == 3) {
-        FUN_0003e4c0(piVar2[2] + 0x240,piVar2 + 5);
-        piVar3 = (int *)piVar2[1];
+      else if (kind == 3) {
+        FUN_0003e4c0(listNode[2] + 0x240,listNode + 5);
+        nextNode = (int *)listNode[1];
       }
       else {
-        piVar3 = piVar4;
-        if (iVar1 == 1) {
-          FUN_0003c310(piVar2[2] + 0x240,piVar2 + 5);
-          piVar3 = (int *)piVar2[1];
+        nextNode = savedNext;
+        if (kind == 1) {
+          FUN_0003c310(listNode[2] + 0x240,listNode + 5);
+          nextNode = (int *)listNode[1];
         }
       }
-      iVar1 = *piVar2;
-      piVar2[2] = 0;
-      *(int **)(iVar1 + 4) = piVar3;
-      *(int *)piVar2[1] = iVar1;
-      _free(piVar2);
-      piVar2 = piVar4;
+      kind = *listNode;
+      listNode[2] = 0;
+      *(int **)(kind + 4) = nextNode;
+      *(int *)listNode[1] = kind;
+      _free(listNode);
+      listNode = savedNext;
     }
-    iVar1 = *(int *)(param_2 + 0xc);
-    if (iVar1 != 0) {
-      *(undefined4 *)(iVar1 + 4) = *(undefined4 *)(param_2 + 0x10);
-      piVar2 = *(int **)(param_2 + 0x10);
-      *(undefined4 *)(param_2 + 0x10) = 0;
-      *piVar2 = iVar1;
-      *(undefined4 *)(param_2 + 0xc) = 0;
+    kind = *(int *)(program + 0xc);
+    if (kind != 0) {
+      *(undefined4 *)(kind + 4) = *(undefined4 *)(program + 0x10);
+      listNode = *(int **)(program + 0x10);
+      *(undefined4 *)(program + 0x10) = 0;
+      *listNode = kind;
+      *(undefined4 *)(program + 0xc) = 0;
     }
-    _pthread_mutex_unlock(*(undefined4 *)(param_1 + 0xc));
+    _pthread_mutex_unlock(*(undefined4 *)(ctx + 0xc));
     return;
   }
   return;
@@ -4828,12 +4828,12 @@ LAB_0002a9a0:
 }
 
 /* FUN_0002b3b0 @ 0x2b3b0 (4 bytes) */
-int FUN_0002b3b0(param_1)
-  undefined4 param_1;
+int FUN_0002b3b0(value)
+  undefined4 value;
 {
   /* hidden-argument defect (hidden_params.py) - real body is a single `blr`: an identity function
-   * on r3, and its one real caller (part_001.c) does supply a real param_1. */
-  return param_1;
+   * on r3, and its one real caller (part_001.c) does supply a real value. */
+  return value;
 }
 
 /* FUN_0002b3c0 @ 0x2b3c0 (464 bytes) */
@@ -5927,41 +5927,41 @@ int FUN_0002c790(param_1, param_2)
 }
 
 /* FUN_0002cb40 @ 0x2cb40 (200 bytes) */
-int FUN_0002cb40(param_1)
-  int param_1;
+int FUN_0002cb40(ctx)
+  int ctx;
 {
-  if (*(int *)(((unsigned char *)0x000027cc) + param_1) != 0) {
-    _free(*(int *)(((unsigned char *)0x000027cc) + param_1));
+  if (*(int *)(((unsigned char *)0x000027cc) + ctx) != 0) {
+    _free(*(int *)(((unsigned char *)0x000027cc) + ctx));
   }
-  if (*(int *)(0x000027d0 + param_1) != 0) {
-    _free(*(int *)(0x000027d0 + param_1));
+  if (*(int *)(0x000027d0 + ctx) != 0) {
+    _free(*(int *)(0x000027d0 + ctx));
   }
-  if (*(char *)(param_1 + 0x2a6a) == '\0') {
-    FUN_00017e10(param_1);
+  if (*(char *)(ctx + 0x2a6a) == '\0') {
+    FUN_00017e10(ctx);
   }
-  ((int (*)())FUN_00025da0)(param_1);
-  if (*(int *)(param_1 + 0x1e4) + 0x28U < *(uint *)(param_1 + 0x1dc)) {
-    FUN_0001a0f0(param_1,0x1000000);
+  ((int (*)())FUN_00025da0)(ctx);
+  if (*(int *)(ctx + 0x1e4) + 0x28U < *(uint *)(ctx + 0x1dc)) {
+    FUN_0001a0f0(ctx,0x1000000);
   }
-  thunk_FUN_00054a90(param_1 + 0x240);
-  thunk_FUN_000a2330(param_1 + 0x240);
-  FUN_000a7970(param_1);
-  if (*(int *)(((unsigned char *)0x00002b74) + param_1) != 0) {
-    _vfree(*(int *)(((unsigned char *)0x00002b74) + param_1));
+  thunk_FUN_00054a90(ctx + 0x240);
+  thunk_FUN_000a2330(ctx + 0x240);
+  FUN_000a7970(ctx);
+  if (*(int *)(((unsigned char *)0x00002b74) + ctx) != 0) {
+    _vfree(*(int *)(((unsigned char *)0x00002b74) + ctx));
   }
-  *(undefined4 *)(((unsigned char *)0x00002b74) + param_1) = 0;
-  *(undefined4 *)(((unsigned char *)0x00002b78) + param_1) = 0;
+  *(undefined4 *)(((unsigned char *)0x00002b74) + ctx) = 0;
+  *(undefined4 *)(((unsigned char *)0x00002b78) + ctx) = 0;
   return;
 }
 
 /* FUN_0002cc10 @ 0x2cc10 (28 bytes) */
-int FUN_0002cc10(param_1)
-  int param_1;
+int FUN_0002cc10(ctx)
+  int ctx;
 {
-  if (*(uint *)(param_1 + 0x1dc) <= *(int *)(param_1 + 0x1e4) + 0x28U) {
+  if (*(uint *)(ctx + 0x1dc) <= *(int *)(ctx + 0x1e4) + 0x28U) {
     return;
   }
-  return FUN_0001a0f0(param_1,0x1000000);
+  return FUN_0001a0f0(ctx,0x1000000);
 }
 
 /* FUN_0002cc30 @ 0x2cc30 (276 bytes) - hidden-argument + read-before-write defect (found
@@ -5973,7 +5973,7 @@ int FUN_0002cc10(param_1)
  * call sites, only FUN_0001ecd0 supplies a genuine non-zero value here (a real field read);
  * every other caller (including this file's own dispatch-wrapper family) passes 0, matching
  * what real stock callers themselves forward. */
-uint FUN_0002cc30(int param_1,undefined4 param_2,uint param_3,uint param_4,undefined4 param_5,undefined4 param_6,uint param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
+uint FUN_0002cc30(int ctx,undefined4 param_2,uint param_3,uint param_4,undefined4 param_5,undefined4 param_6,uint param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
 {
   int iVar1;
   uint uVar2;
@@ -5986,7 +5986,7 @@ uint FUN_0002cc30(int param_1,undefined4 param_2,uint param_3,uint param_4,undef
   in_r9 = param_7;
   uVar3 = param_4;
   if ((int)param_4 < 4) {
-    uVar4 = ((int (*)())FUN_0002bf30)(param_1,param_3,param_4);
+    uVar4 = ((int (*)())FUN_0002bf30)(ctx,param_3,param_4);
     uVar2 = param_4;
     fparam_1 = extraout_f1;
   }
@@ -6010,14 +6010,14 @@ uint FUN_0002cc30(int param_1,undefined4 param_2,uint param_3,uint param_4,undef
     return 0;
   }
 LAB_0002cce8:
-  if (((unsigned char *)0x00002b80)[param_1] != '\0') {
-    fparam_1 = (double)FUN_000a3be0(param_1 + 0x240,param_3,uVar2,uVar3,param_5,param_6,in_r9);
+  if (((unsigned char *)0x00002b80)[ctx] != '\0') {
+    fparam_1 = (double)FUN_000a3be0(ctx + 0x240,param_3,uVar2,uVar3,param_5,param_6,in_r9);
   }
-  if (*(int *)(param_1 + 0x1b68) != 0) {
-    ((void (*)())FUN_0002c020)(param_1 + 0x240,param_3,uVar2,uVar3,param_5,param_6,in_r9,fparam_1,fparam_2,
+  if (*(int *)(ctx + 0x1b68) != 0) {
+    ((void (*)())FUN_0002c020)(ctx + 0x240,param_3,uVar2,uVar3,param_5,param_6,in_r9,fparam_1,fparam_2,
                  fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffffa8);
   }
-  *(undefined1 *)(param_1 + 0x2a5e) = 1;
+  *(undefined1 *)(ctx + 0x2a5e) = 1;
   return uVar4;
 }
 

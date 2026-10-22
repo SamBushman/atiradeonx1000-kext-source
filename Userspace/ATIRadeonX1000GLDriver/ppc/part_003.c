@@ -173,15 +173,15 @@ int FUN_0001a010(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 }
 
 /* FUN_0001a0d0 @ 0x1a0d0 (32 bytes) */
-int FUN_0001a0d0(param_1, param_2)
-  int param_1;
-  int param_2;
+int FUN_0001a0d0(ctx, stamp)
+  int ctx;
+  int stamp;
 {
-  byte *pbVar1;
+  byte *retireCounter;
   
-  pbVar1 = *(byte **)(param_1 + 0x238);
-  if ((int)(param_2 -
-           ((uint)pbVar1[3] << 0x18 | (uint)pbVar1[2] << 0x10 | (uint)pbVar1[1] << 8 | (uint)*pbVar1
+  retireCounter = *(byte **)(ctx + 0x238);
+  if ((int)(stamp -
+           ((uint)retireCounter[3] << 0x18 | (uint)retireCounter[2] << 0x10 | (uint)retireCounter[1] << 8 | (uint)*retireCounter
            )) < 1) {
     return 1;
   }
@@ -189,54 +189,54 @@ int FUN_0001a0d0(param_1, param_2)
 }
 
 /* FUN_0001a0f0 @ 0x1a0f0 (388 bytes) */
-int FUN_0001a0f0(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+int FUN_0001a0f0(ctx, terminatorWord)
+  int ctx;
+  undefined4 terminatorWord;
 {
-  char cVar1;
-  undefined *puVar2;
-  int iVar3;
-  undefined4 *puVar4;
-  uint *puVar5;
+  char hasPreamble;
+  undefined *taskPtr;
+  int mappedBuffer;
+  undefined4 *writeCursor;
+  uint *headerWord;
   
-  puVar4 = *(undefined4 **)(param_1 + 0x1dc);
-  cVar1 = ((unsigned char *)0x00002b7e)[param_1];
-  *puVar4 = ((unsigned char *)0x00001393U);
-  puVar4[1] = 0;
-  puVar4[2] = 0x5c8;
-  puVar4[3] = 0x20000;
-  puVar4 = puVar4 + 4;
-  if (cVar1 != '\0') {
-    puVar4 = (undefined4 *)FUN_0002b7f0(param_1,puVar4);
+  writeCursor = *(undefined4 **)(ctx + 0x1dc);
+  hasPreamble = ((unsigned char *)0x00002b7e)[ctx];
+  *writeCursor = ((unsigned char *)0x00001393U);
+  writeCursor[1] = 0;
+  writeCursor[2] = 0x5c8;
+  writeCursor[3] = 0x20000;
+  writeCursor = writeCursor + 4;
+  if (hasPreamble != '\0') {
+    writeCursor = (undefined4 *)FUN_0002b7f0(ctx,writeCursor);
   }
-  puVar5 = *(uint **)(param_1 + 0x1d8);
-  *(int *)(*(int *)(param_1 + 0x1e4) + 0x10) =
-       (*(int *)(param_1 + 0x1e0) - (int)puVar4 >> 2) +
-       (*(int *)(param_1 + 0x1f0) - *(int *)(param_1 + 0x1ec) >> 2) + 0x25;
-  puVar2 = PTR_001e88b4;
-  *puVar5 = (int)puVar4 - (int)puVar5 >> 2 | *puVar5;
-  *puVar4 = param_2;
-  _IOConnectMapMemory(*(undefined4 *)(param_1 + 4),1,*(undefined4 *)puVar2,param_1 + 0x1e4,
-                      param_1 + 0x1e8,1);
-  iVar3 = *(int *)(param_1 + 0x1e4);
-  puVar4 = (undefined4 *)(iVar3 + 0x20);
-  *(undefined4 **)(param_1 + 0x1e0) = puVar4 + *(int *)(iVar3 + 0x10) + -0x25;
-  *(undefined4 *)(iVar3 + 0x1c) = 0;
-  *(undefined4 *)(param_1 + 0x2838) = 0;
-  *(undefined4 *)(param_1 + 0x204) = 1;
-  *(undefined4 *)(param_1 + 0x1ec) = 0;
-  *(undefined4 *)(param_1 + 0x1f0) = 0;
-  *(undefined4 *)(param_1 + 0x2834) = 0;
-  *(int *)(param_1 + 0x23c) = *(int *)(param_1 + 0x23c) + 1;
-  if (cVar1 != '\0') {
-    *puVar4 = ((unsigned char *)0x000013d6U);
-    *(undefined4 *)(iVar3 + 0x24) = 0;
-    puVar4 = (undefined4 *)(iVar3 + 0x28);
+  headerWord = *(uint **)(ctx + 0x1d8);
+  *(int *)(*(int *)(ctx + 0x1e4) + 0x10) =
+       (*(int *)(ctx + 0x1e0) - (int)writeCursor >> 2) +
+       (*(int *)(ctx + 0x1f0) - *(int *)(ctx + 0x1ec) >> 2) + 0x25;
+  taskPtr = PTR_001e88b4;
+  *headerWord = (int)writeCursor - (int)headerWord >> 2 | *headerWord;
+  *writeCursor = terminatorWord;
+  _IOConnectMapMemory(*(undefined4 *)(ctx + 4),1,*(undefined4 *)taskPtr,ctx + 0x1e4,
+                      ctx + 0x1e8,1);
+  mappedBuffer = *(int *)(ctx + 0x1e4);
+  writeCursor = (undefined4 *)(mappedBuffer + 0x20);
+  *(undefined4 **)(ctx + 0x1e0) = writeCursor + *(int *)(mappedBuffer + 0x10) + -0x25;
+  *(undefined4 *)(mappedBuffer + 0x1c) = 0;
+  *(undefined4 *)(ctx + 0x2838) = 0;
+  *(undefined4 *)(ctx + 0x204) = 1;
+  *(undefined4 *)(ctx + 0x1ec) = 0;
+  *(undefined4 *)(ctx + 0x1f0) = 0;
+  *(undefined4 *)(ctx + 0x2834) = 0;
+  *(int *)(ctx + 0x23c) = *(int *)(ctx + 0x23c) + 1;
+  if (hasPreamble != '\0') {
+    *writeCursor = ((unsigned char *)0x000013d6U);
+    *(undefined4 *)(mappedBuffer + 0x24) = 0;
+    writeCursor = (undefined4 *)(mappedBuffer + 0x28);
   }
-  *(int *)(param_1 + 0x1d8) = iVar3 + 0x1c;
-  *(undefined4 **)(param_1 + 0x1dc) = puVar4;
-  *(undefined4 **)(param_1 + 0x2994) = puVar4 + 0x6000;
-  return FUN_0002c6c0(param_1);
+  *(int *)(ctx + 0x1d8) = mappedBuffer + 0x1c;
+  *(undefined4 **)(ctx + 0x1dc) = writeCursor;
+  *(undefined4 **)(ctx + 0x2994) = writeCursor + 0x6000;
+  return FUN_0002c6c0(ctx);
 }
 
 /* FUN_0001a280 @ 0x1a280 (588 bytes) */
@@ -593,64 +593,64 @@ int FUN_0001a9d0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 }
 
 /* FUN_0001ac30 @ 0x1ac30 (464 bytes) */
-int FUN_0001ac30(param_1)
-  int param_1;
+int FUN_0001ac30(pixelFormat)
+  int pixelFormat;
 {
-  bool bVar1;
-  ushort uVar2;
-  short sVar3;
-  int iVar4;
-  uint uVar5;
-  uint uVar6;
+  bool singleRenderer;
+  ushort sampleBuffers;
+  short samples;
+  int stencilMask;
+  uint displayMask;
+  uint surfaceFlags;
   
-  if (param_1 == 0) {
+  if (pixelFormat == 0) {
     return 0x271e;
   }
-  uVar5 = *(uint *)(param_1 + 0x30);
-  if ((uVar5 == 0) || ((uVar5 & ~*(uint *)PTR_DAT_001e88ac) != 0)) {
+  displayMask = *(uint *)(pixelFormat + 0x30);
+  if ((displayMask == 0) || ((displayMask & ~*(uint *)PTR_DAT_001e88ac) != 0)) {
     return 0x2716;
   }
-  uVar6 = *(uint *)(param_1 + 8);
-  bVar1 = (uVar6 >> 1 & 1) != 0;
-  if (bVar1) {
-    for (; (uVar5 & 1) == 0; uVar5 = uVar5 >> 1) {
+  surfaceFlags = *(uint *)(pixelFormat + 8);
+  singleRenderer = (surfaceFlags >> 1 & 1) != 0;
+  if (singleRenderer) {
+    for (; (displayMask & 1) == 0; displayMask = displayMask >> 1) {
     }
-    if (uVar5 != 1) {
+    if (displayMask != 1) {
       return 0x2716;
     }
   }
-  if ((((((*(uint *)(param_1 + 4) & 0xff00) == 0x1900) && (*(short *)(param_1 + 0x20) == 0)) &&
-       (((*(uint *)(param_1 + 0xc) & 2) == 0 || (bVar1)))) && (*(ushort *)(param_1 + 0x22) < 3)) &&
-     ((((uVar6 & 0x2000) == 0 || (*(int *)(param_1 + 0x24) == 0)) &&
-      (uVar2 = *(ushort *)(param_1 + 0x24), uVar2 < 2)))) {
-    if (uVar2 != 0) {
-      if (((uVar2 == 1) && (sVar3 = *(short *)(param_1 + 0x26), sVar3 != 6)) &&
-         ((sVar3 != 4 && (sVar3 != 2)))) {
+  if ((((((*(uint *)(pixelFormat + 4) & 0xff00) == 0x1900) && (*(short *)(pixelFormat + 0x20) == 0)) &&
+       (((*(uint *)(pixelFormat + 0xc) & 2) == 0 || (singleRenderer)))) && (*(ushort *)(pixelFormat + 0x22) < 3)) &&
+     ((((surfaceFlags & 0x2000) == 0 || (*(int *)(pixelFormat + 0x24) == 0)) &&
+      (sampleBuffers = *(ushort *)(pixelFormat + 0x24), sampleBuffers < 2)))) {
+    if (sampleBuffers != 0) {
+      if (((sampleBuffers == 1) && (samples = *(short *)(pixelFormat + 0x26), samples != 6)) &&
+         ((samples != 4 && (samples != 2)))) {
         return 0x2712;
       }
     }
-    else if (*(short *)(param_1 + 0x26) != 0) {
+    else if (*(short *)(pixelFormat + 0x26) != 0) {
       return 0x2712;
     }
-    if (((((uVar6 & 0xffffd064) == 0) &&
-         (((uVar6 & 8) == 0 || ((*(uint *)(param_1 + 0xc) & 8) != 0)))) &&
-        ((*(uint *)(param_1 + 0x10) & 0xf57f7bff) == 0)) &&
-       (((*(uint *)(param_1 + 0x10) & 0xa800000) == 0 || ((uVar2 == 0 && ((uVar6 & 0x400) == 0))))))
+    if (((((surfaceFlags & 0xffffd064) == 0) &&
+         (((surfaceFlags & 8) == 0 || ((*(uint *)(pixelFormat + 0xc) & 8) != 0)))) &&
+        ((*(uint *)(pixelFormat + 0x10) & 0xf57f7bff) == 0)) &&
+       (((*(uint *)(pixelFormat + 0x10) & 0xa800000) == 0 || ((sampleBuffers == 0 && ((surfaceFlags & 0x400) == 0))))))
     {
-      iVar4 = *(int *)(param_1 + 0x1c);
-      if (iVar4 != 1) {
-        if (iVar4 != 0x80) {
+      stencilMask = *(int *)(pixelFormat + 0x1c);
+      if (stencilMask != 1) {
+        if (stencilMask != 0x80) {
           return 0x2712;
         }
-        uVar5 = 0xfffff7ff;
+        displayMask = 0xfffff7ff;
       }
       else {
-        uVar5 = 0xffffe3fe;
+        displayMask = 0xffffe3fe;
       }
-      if (((*(uint *)(param_1 + 0x18) & uVar5) == 0) &&
-         ((((*(uint *)(param_1 + 0x18) != 1 || (iVar4 != 1)) || ((uVar6 & 0x800) == 0)) &&
-          ((uVar5 = *(uint *)(param_1 + 0x14), (uVar5 & 0xff7f7fff) == 0 &&
-           ((uVar5 & uVar5 - 1) == 0)))))) {
+      if (((*(uint *)(pixelFormat + 0x18) & displayMask) == 0) &&
+         ((((*(uint *)(pixelFormat + 0x18) != 1 || (stencilMask != 1)) || ((surfaceFlags & 0x800) == 0)) &&
+          ((displayMask = *(uint *)(pixelFormat + 0x14), (displayMask & 0xff7f7fff) == 0 &&
+           ((displayMask & displayMask - 1) == 0)))))) {
         return 0;
       }
     }
@@ -794,18 +794,18 @@ LAB_0001aff4:
 }
 
 /* FUN_0001b150 @ 0x1b150 (88 bytes) */
-int FUN_0001b150(param_1)
-  int param_1;
+int FUN_0001b150(pixelFormat)
+  int pixelFormat;
 {
-  *(undefined1 *)(param_1 + 0x2a) = 1;
-  *(undefined2 *)(param_1 + 0x26) = 1;
-  *(uint *)(param_1 + 0x10) = *(uint *)(param_1 + 0x10) | 0xa800000;
-  *(uint *)(param_1 + 0x1c) = *(uint *)(param_1 + 0x1c) | 1;
-  *(uint *)(param_1 + 8) = *(uint *)(param_1 + 8) | 0x5000;
-  *(uint *)(param_1 + 0xc) = *(uint *)(param_1 + 0xc) | 2;
-  *(undefined2 *)(param_1 + 0x24) = 2;
-  *(undefined4 *)(param_1 + 0x2c) = 3;
-  *(undefined2 *)(param_1 + 0x28) = 6;
+  *(undefined1 *)(pixelFormat + 0x2a) = 1;
+  *(undefined2 *)(pixelFormat + 0x26) = 1;
+  *(uint *)(pixelFormat + 0x10) = *(uint *)(pixelFormat + 0x10) | 0xa800000;
+  *(uint *)(pixelFormat + 0x1c) = *(uint *)(pixelFormat + 0x1c) | 1;
+  *(uint *)(pixelFormat + 8) = *(uint *)(pixelFormat + 8) | 0x5000;
+  *(uint *)(pixelFormat + 0xc) = *(uint *)(pixelFormat + 0xc) | 2;
+  *(undefined2 *)(pixelFormat + 0x24) = 2;
+  *(undefined4 *)(pixelFormat + 0x2c) = 3;
+  *(undefined2 *)(pixelFormat + 0x28) = 6;
   return;
 }
 
@@ -972,16 +972,16 @@ LAB_0001b468:
 }
 
 /* FUN_0001b4b0 @ 0x1b4b0 (44 bytes) */
-int FUN_0001b4b0(param_1)
-  int param_1;
+int FUN_0001b4b0(ctx)
+  int ctx;
 {
-  if ((*(uint *)(param_1 + 0x154) & 0x70000000) == 0) {
-    ((unsigned char *)0x00002b7c)[param_1] = 1;
+  if ((*(uint *)(ctx + 0x154) & 0x70000000) == 0) {
+    ((unsigned char *)0x00002b7c)[ctx] = 1;
   }
   else {
-    ((unsigned char *)0x00002b7c)[param_1] = 0;
+    ((unsigned char *)0x00002b7c)[ctx] = 0;
   }
-  ((unsigned char *)0x00002b7d)[param_1] = 1;
+  ((unsigned char *)0x00002b7d)[ctx] = 1;
   return;
 }
 
@@ -2847,30 +2847,30 @@ LAB_0001ddc0:
 }
 
 /* FUN_0001dff0 @ 0x1dff0 (140 bytes) */
-int FUN_0001dff0(param_1)
-  int param_1;
+int FUN_0001dff0(ctx)
+  int ctx;
 {
-  undefined4 *puVar1;
-  int iVar2;
-  uint *puVar3;
+  undefined4 *packet;
+  int ringPtr;
+  uint *headerWord;
   
-  iVar2 = (**(code **)(param_1 + 0x2998))(param_1 + 0x240,1);
-  *(int *)(param_1 + 0x298c) = iVar2;
-  puVar3 = *(uint **)(param_1 + 0x1d8);
-  *puVar3 = iVar2 - (int)puVar3 >> 2 | *puVar3;
-  puVar1 = *(undefined4 **)(param_1 + 0x298c);
-  *(undefined4 **)(param_1 + 0x1d8) = puVar1;
-  *puVar1 = 0x3a000000;
-  *(undefined4 **)(param_1 + 0x298c) = puVar1 + 1;
+  ringPtr = (**(code **)(ctx + 0x2998))(ctx + 0x240,1);
+  *(int *)(ctx + 0x298c) = ringPtr;
+  headerWord = *(uint **)(ctx + 0x1d8);
+  *headerWord = ringPtr - (int)headerWord >> 2 | *headerWord;
+  packet = *(undefined4 **)(ctx + 0x298c);
+  *(undefined4 **)(ctx + 0x1d8) = packet;
+  *packet = 0x3a000000;
+  *(undefined4 **)(ctx + 0x298c) = packet + 1;
   /* Ghidra dropped this tail-call's 2nd arg (bctr preserves whatever's in r4 - confirmed via stock
-   * disassembly 0x1e050-0x1e078: r4 is explicitly loaded as r2+4 (== puVar1+1, the just-advanced
+   * disassembly 0x1e050-0x1e078: r4 is explicitly loaded as r2+4 (== packet+1, the just-advanced
    * write pointer) right before the tail jump through the vtable slot at +0x299c, which is
-   * FUN_0002be60, the ring-buffer "set current pointer" setter (param_1, new_ptr). Without this arg,
+   * FUN_0002be60, the ring-buffer "set current pointer" setter (ctx, new_ptr). Without this arg,
    * whatever garbage was left in r4 (observed live: leftover "1" from this function's own earlier
    * call) got installed as the ring buffer's current write pointer, corrupting it for every
    * subsequent allocation through this object - root cause of the post-gldCreateContext GLDriver
    * crash tracked in issue #64. */
-  (**(code **)(param_1 + 0x299c))(param_1 + 0x240,puVar1 + 1);
+  (**(code **)(ctx + 0x299c))(ctx + 0x240,packet + 1);
   return;
 }
 

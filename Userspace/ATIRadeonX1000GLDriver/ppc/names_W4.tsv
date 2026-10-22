@@ -530,3 +530,746 @@ local	_gldGetQueryInfo	iVar4	result2	INFERRED	entry[3]
 local	_gldGetQueryInfo	uVar5	resultCount	INFERRED	ctx+0x2610 (promoted to 2 when mode word is 2)
 local	_gldGetQueryInfo	iVar6	result1	INFERRED	entry[2]
 local	_gldGetQueryInfo	piVar7	queryEntry	CONFIRMED	storage + 0x210 + id*0x20
+local	FUN_0001a0d0	param_1	ctx	CONFIRMED	retire counter: little-endian word assembled from the bytes at *(ctx+0x238)
+local	FUN_0001a0d0	param_2	stamp	CONFIRMED	returns 1 when stamp - retireCounter < 1, i.e. the stamp has been retired
+local	FUN_0001a0d0	pbVar1	retireCounter	CONFIRMED	retire counter: little-endian word assembled from the bytes at *(ctx+0x238)
+local	FUN_0001a0f0	param_1	ctx	INFERRED	command-buffer state: +0x1d8 header word, +0x1dc write cursor, +0x1e0 limit, +0x1e4 mapped buffer, +0x1e8 its size, +0x23c submit sequence
+local	FUN_0001a0f0	param_2	terminatorWord	INFERRED	written as the last word of the submitted buffer (0x1000000 from _gldFlush/_gldFinish)
+local	FUN_0001a0f0	cVar1	hasPreamble	INFERRED	byte at ctx+0x2b7e: extra 0x13d6 packet before and after
+local	FUN_0001a0f0	puVar2	taskPtr	CONFIRMED	PTR_001e88b4 task pointer for _IOConnectMapMemory
+local	FUN_0001a0f0	iVar3	mappedBuffer	CONFIRMED	*(ctx+0x1e4) after the selector 1 memory map
+local	FUN_0001a0f0	puVar4	writeCursor	CONFIRMED	command write cursor (words)
+local	FUN_0001a0f0	puVar5	headerWord	CONFIRMED	*(ctx+0x1d8): packet length word OR-ed with the word count
+local	FUN_0000aaf0	param_1	ctx	CONFIRMED	*(ctx+4) io_connect_t for selector 9
+local	FUN_0000aaf0	param_2	texture	INFERRED	texture record; +0x34 resident memory record
+local	FUN_0000aaf0	iVar1	retired	CONFIRMED	FUN_0001a0d0 result (1 = stamp retired)
+local	FUN_0000aaf0	uVar2	connection	CONFIRMED	io_connect_t
+local	FUN_0000aaf0	iVar3	resident	INFERRED	texture+0x34; kind byte at +0x16 (6 or 7), stamps at +8/+0xc, size at +0x10; later the stamp slot address passed to the kernel
+local	FUN_00005db0	param_1	ctx	CONFIRMED	*(ctx+4) io_connect_t for selector 9
+local	FUN_00005db0	param_2	buffer	INFERRED	buffer record, +8 plug-in data pointer
+local	FUN_00005db0	iVar1	retired	CONFIRMED	FUN_0001a0d0 result
+local	FUN_00005db0	uVar2	connection	CONFIRMED	io_connect_t
+local	FUN_00005db0	iVar3	pluginRecord	INFERRED	**(buffer+8); kind byte +0x16, stamps +8/+0xc, size +0x10; later the stamp slot address
+local	FUN_00007020	param_1	ctx	CONFIRMED	ctx[0x3e] attached drawable, ctx[0xf] flags, ctx[0] renderer index
+local	FUN_00007020	cVar1	useCount	CONFIRMED	library per-renderer use count byte before the decrement
+local	FUN_00007020	puVar2	library	CONFIRMED	PTR_DAT_001e88ac library record; +0x18+4*index connection closed when the count reaches 0
+local	FUN_0000b620	param_1	ctx	INFERRED	ctx+8 byte = data-cache block size
+local	FUN_0000b620	param_2	address	CONFIRMED	start of the range to flush from the data cache
+local	FUN_0000b620	param_3	length	CONFIRMED	range length in bytes
+local	FUN_0000b620	param_4	unused4	UNKNOWN	not used
+local	FUN_0000b620	param_5	unused5	UNKNOWN	not used
+local	FUN_0000b620	param_6	unused6	UNKNOWN	not used
+local	FUN_0000b620	param_7	unused7	UNKNOWN	not used
+local	FUN_0000b620	param_8	unused8	UNKNOWN	not used
+local	FUN_0000b620	iVar1	offset	CONFIRMED	byte offset stepping by the cache block size (dcbst loop)
+local	FUN_0000b620	iVar2	span	CONFIRMED	range length rounded out to cache blocks
+local	FUN_0000b620	uVar3	cacheBlockSize	CONFIRMED	byte at ctx+8; dataCacheBlockStore/Flush step
+local	FUN_00017260	param_1	ctx	INFERRED	ctx+0x150 bound framebuffer, +0x154 default, +0x2b7f derived byte
+local	FUN_00017260	iVar1	attachment	INFERRED	framebuffer attachment record
+local	FUN_00017260	uVar2	formatByte	INFERRED	FUN_0002f410 result stored at ctx+0x2b7f
+local	FUN_00017260	piVar3	framebuffer	CONFIRMED	*(ctx+0x150)
+local	FUN_00017260	iVar4	attachPoint	INFERRED	pointer stepping over four ushort attachment ids
+local	FUN_00017260	iVar5	attachLeft	CONFIRMED	counts four attachments down
+local	FUN_0000b880	param_1	ctx	CONFIRMED	*(ctx+4) io_connect_t for selector 9
+local	FUN_0000b880	param_2	vertexArray	INFERRED	vertex array record; +0x228 backing memory record
+local	FUN_0000b880	iVar1	retired	CONFIRMED	FUN_0001a0d0 result
+local	FUN_0000b880	uVar2	connection	CONFIRMED	io_connect_t
+local	FUN_0000b880	iVar3	backing	INFERRED	*(vertexArray+0x228); kind byte +0x16 (6/7), stamps +8/+0xc, size +0x10; later the stamp slot address
+local	FUN_00017100	param_1	ctx	INFERRED	ctx+0x2a80 enable byte; +0x142/+0x146 cached byte states
+local	FUN_00017100	param_2	pname	CONFIRMED	0xcb or 0xde: the two cached integer states
+local	FUN_00017100	param_3	values	CONFIRMED	low byte of *values cached; returns 1 when handled
+local	FUN_00017720	param_1	rendererIndex	INFERRED	passed to FUN_00039100; result OR-ed with 0x1900
+local	FUN_00017a40	param_1	flagsInOut	CONFIRMED	ctx flags word (ctx+0x3c): updated with the pixel-format derived bits
+local	FUN_00017a40	param_2	pixelFormat	CONFIRMED	pixel-format record: +8 surface flags, +0x18/+0x1c masks, +0x24 sample buffers, +0x26 samples, +0x28 antialias mode
+local	FUN_00017a40	param_3	unused3	UNKNOWN	not used
+local	FUN_00017a40	param_4	unused4	UNKNOWN	not used
+local	FUN_00017a40	param_5	unused5	UNKNOWN	not used
+local	FUN_00017a40	param_6	unused6	UNKNOWN	not used
+local	FUN_00017a40	param_7	unused7	UNKNOWN	not used
+local	FUN_00017a40	iVar1	depthMask	INFERRED	pixelFormat+0x18: 1, 0x400, 0x800 or other -> bits 0x10000/0x30000/0x20000
+local	FUN_00017a40	uVar2	flags	CONFIRMED	working copy of *flagsInOut
+local	FUN_0001ac30	param_1	pixelFormat	CONFIRMED	pixel-format record validated: 0 valid, 0x271e NULL, 0x2716 bad renderer mask, 0x2712 invalid combination
+local	FUN_0001ac30	bVar1	singleRenderer	INFERRED	surface flags bit 1 (kCGLPFASingleRenderer)
+local	FUN_0001ac30	uVar2	sampleBuffers	INFERRED	ushort at pixelFormat+0x24 (must be < 2)
+local	FUN_0001ac30	sVar3	samples	INFERRED	short at pixelFormat+0x26 (2, 4 or 6 when sample buffers == 1)
+local	FUN_0001ac30	iVar4	stencilMask	INFERRED	pixelFormat+0x1c: must be 1 or 0x80
+local	FUN_0001ac30	uVar5	displayMask	INFERRED	pixelFormat+0x30; later the allowed-bit mask for the colour/depth fields
+local	FUN_0001ac30	uVar6	surfaceFlags	INFERRED	pixelFormat+8 flags word
+local	FUN_00024fb0	param_1	list	CONFIRMED	initialises an empty circular list at +0x2c: both links point at the head
+local	FUN_0002cc10	param_1	ctx	CONFIRMED	submits the command buffer (FUN_0001a0f0) when ctx+0x1dc write cursor is beyond the start
+local	FUN_0002cb40	param_1	ctx	CONFIRMED	context teardown: frees buffers at +0x27cc/+0x27d0, flushes, releases +0x240 sub-state and +0x2b74 vm buffer
+local	FUN_00005eb0	param_1	ctx	CONFIRMED	ctx for FUN_0001a0d0 / _gldFlush
+local	FUN_00005eb0	param_2	buffer	INFERRED	record whose backing memory record is tested
+local	FUN_00005eb0	uVar1	retired	CONFIRMED	FUN_0001a0d0 result returned (1 when retired)
+local	FUN_00005eb0	iVar2	pluginRecord	INFERRED	**(buffer+8); kind byte +0x16 (6/7), stamps +8/+0xc, size +0x10
+local	FUN_0000abf0	param_1	ctx	CONFIRMED	ctx for FUN_0001a0d0 / _gldFlush
+local	FUN_0000abf0	param_2	texture	INFERRED	record whose backing memory record is tested
+local	FUN_0000abf0	uVar1	retired	CONFIRMED	FUN_0001a0d0 result returned (1 when retired)
+local	FUN_0000abf0	iVar2	resident	INFERRED	texture+0x34 resident memory record
+local	FUN_0000b980	param_1	ctx	CONFIRMED	ctx for FUN_0001a0d0 / _gldFlush
+local	FUN_0000b980	param_2	vertexArray	INFERRED	record whose backing memory record is tested
+local	FUN_0000b980	uVar1	retired	CONFIRMED	FUN_0001a0d0 result returned (1 when retired)
+local	FUN_0000b980	iVar2	backing	INFERRED	vertexArray+0x228 backing memory record
+local	FUN_00007ec0	param_1	bitCount	INFERRED	depth/stencil size in bits; returns the 17-bit mask of supported sizes at or above it (0x10000 for >=128 ... 0x1fffe for 1 bit)
+local	FUN_00007fc0	param_1	bitCount	INFERRED	colour/accum size in bits (> 0x100 returns 0); returns the capability mask for that size
+local	FUN_00008030	param_1	bitCount	INFERRED	alpha size in bits (> 0x20 returns 0); returns the capability mask for that size
+local	FUN_00017160	param_1	ctx	INFERRED	ctx+0x143 / 0x14 state, +0x150 bound framebuffer, +0x2b7c flag byte
+local	FUN_00017160	param_2	flagsInOut	CONFIRMED	ctx flags word (ctx+0x3c) updated with the drawable-target bits
+local	FUN_00017160	param_3	pbuffer	INFERRED	pixel-buffer record: +0xc texture target (0xde0/0xde1 -> 2D, 0x84f5 RECTANGLE, 0x8513 CUBE_MAP), +0x14 face/level
+local	FUN_00017160	uVar1	levelBits	INFERRED	(pbuffer+0x14) << 24 clipped to 0xc000000
+local	FUN_00017160	uVar2	flags	CONFIRMED	working copy of the flags word
+local	FUN_00017160	iVar3	target	CONFIRMED	pbuffer+0xc GL texture target
+local	FUN_0001b150	param_1	pixelFormat	CONFIRMED	fills a pixel-format record with the software-renderer defaults (flags 0x5000, masks 0xa800000, samples 6...)
+local	FUN_0001b4b0	param_1	ctx	INFERRED	sets ctx+0x2b7c from (ctx+0x154 & 0x70000000) and ctx+0x2b7d = 1
+local	FUN_000307a0	param_1	ctx	CONFIRMED	command buffer: +0x1d8 header, +0x1dc cursor, +0x1e0 limit
+local	FUN_000307a0	param_2	packetIndex	INFERRED	written as the packet word index*0x1000000 + 0x16000000 and passed to FUN_000a8320
+local	FUN_000307a0	puVar1	headerWord	CONFIRMED	*(ctx+0x1d8) length word
+local	FUN_000307a0	piVar2	cursor	CONFIRMED	*(ctx+0x1dc) write cursor
+local	FUN_00009b70	param_1	ctx	CONFIRMED	ctx+0x234 receives the calloc(1,0x18) record
+local	FUN_00009b70	uVar1	returnCode	CONFIRMED	0x2720 on allocation failure, else 0
+local	FUN_00009b70	iVar2	record	CONFIRMED	calloc(1,0x18) result
+local	FUN_00009cd0	param_1	ctx	CONFIRMED	*(ctx+0x234) is the pending record; selector 0xb releases its memory
+local	FUN_00009cd0	iVar1	updatedRefCount	INFERRED	store-conditional result
+local	FUN_00009cd0	piVar2	refCountSlot	INFERRED	&memory[+0x10]
+local	FUN_00009cd0	iVar3	oldRefCount	INFERRED	==0x10000 means last reference
+local	FUN_00009cd0	iVar4	memory	INFERRED	**(ctx+0x234) memory record
+local	FUN_00009cd0	in_cr0	crBits	UNKNOWN	Ghidra cr0 emulation for the lwarx/stwcx. loop
+local	FUN_00009d70	param_1	ctx	CONFIRMED	*(ctx+4) io_connect_t for selector 10 (structureI_structureO)
+local	FUN_00009d70	param_2	record	CONFIRMED	slot record: [0] memory, [1]=6 kind, [2..4] address/size/limit
+local	FUN_00009d70	param_3	addressWord	INFERRED	stored in record[2]
+local	FUN_00009d70	param_4	sizeWord	INFERRED	stored in record[3]
+local	FUN_00009d70	param_5	limitWord	INFERRED	stored in record[4]
+local	FUN_00009d70	iVar1	updatedRefCount	INFERRED	store-conditional result (release of the previous memory)
+local	FUN_00009d70	piVar2	refCountSlot	INFERRED	&memory[+0x10]
+local	FUN_00009d70	iVar3	status	CONFIRMED	_io_connect_method_structureI_structureO result; later old refcount
+local	FUN_00009d70	iVar4	oldMemory	CONFIRMED	previous record[0], released after the new one is installed
+local	FUN_00009d70	in_cr0	crBits	UNKNOWN	Ghidra cr0 emulation for the lwarx/stwcx. loop
+local	FUN_00009d70	local_28	structOutSize	CONFIRMED	output struct size (8) passed as &local_28
+local	FUN_00009d70	auStack_24	structOut0	CONFIRMED	first output word (unused)
+local	FUN_00009d70	local_20	newMemory	CONFIRMED	second output word: the new memory record stored in record[0]
+local	FUN_0000b750	param_1	ctx	INFERRED	ctx+0x1d4 bound vertex array, +0x18 shared state
+local	FUN_0000b750	iVar1	arrayState	INFERRED	*vertexArray header; +0x300/+0x308 and +0x304/+0x30c mask pairs; later FUN_0001dc10/FUN_0001e730 result
+local	FUN_0000b750	iVar2	previousArray	CONFIRMED	*(ctx+0x1d4) before the update
+local	FUN_0000b750	piVar3	vertexArray	INFERRED	*(*(ctx+0x18)+0x194) vertex array to bind (NULL when invalid)
+local	FUN_0001dff0	param_1	ctx	CONFIRMED	ctx+0x240 ring allocator; +0x2998/+0x299c vtable slots allocate/set the write pointer
+local	FUN_0001dff0	puVar1	packet	CONFIRMED	new packet word (0x3a000000) in the command ring
+local	FUN_0001dff0	iVar2	ringPtr	CONFIRMED	pointer returned by the allocate slot
+local	FUN_0001dff0	puVar3	headerWord	CONFIRMED	*(ctx+0x1d8) length word
+local	FUN_00025bf0	param_1	ctx	CONFIRMED	ctx+0xc mutex
+local	FUN_00025bf0	param_2	program	INFERRED	pipeline program record: +0x1c kind, +0x20 list head, +0x2c/+0x30 shader handles freed through _glpFreePPShader*
+local	FUN_00025bf0	iVar1	kind	INFERRED	program+0x1c (1, 2 or 3); also link neighbours
+local	FUN_00025bf0	piVar2	listNode	INFERRED	walks the program list from program+0x24 to program+0x20
+local	FUN_00025bf0	piVar3	nextNode	INFERRED	successor after the per-kind free call
+local	FUN_00025bf0	piVar4	savedNext	INFERRED	node[1] saved before unlinking
+local	FUN_0002b3b0	param_1	value	CONFIRMED	identity function (body is blr)
+local	FUN_00065ea0	param_1	ctx	CONFIRMED	token stream: count at ctx+0x754, capacity +0x758 (grows by 0x80 words), data +0x75c; allocator vtable at *(ctx+0x3d4) (+0xc allocate, +0x18 free)
+local	FUN_00065ea0	param_2	dstFile	INFERRED	low 6 bits of the destination operand header word (<<16); values 0x12/0x13 force the extended-word flag
+local	FUN_00065ea0	param_3	dstIndex	INFERRED	low 16 bits of the destination operand header word
+local	FUN_00065ea0	param_4	dstMask	INFERRED	int[4]: each nonzero element sets one write-mask bit (1,4,0x10,0x40) in the extended word
+local	FUN_00065ea0	param_5	src0File	INFERRED	low 6 bits of the first source header word (<<16)
+local	FUN_00065ea0	param_6	src0Index	INFERRED	low 16 bits of the first source header word
+local	FUN_00065ea0	param_7	src0Select	INFERRED	uint[4]: 3-bit component selects, packed at bits 0,4,8,12 of the extended word
+local	FUN_00065ea0	param_8	src0Negate	INFERRED	uint[4]: 1-bit negates, packed at bits 3,7,11,15 of the extended word
+local	FUN_00065ea0	param_9	src1File	INFERRED	low 6 bits of the second source header word (<<16)
+local	FUN_00065ea0	param_10	src1Index	INFERRED	low 16 bits of the second source header word
+local	FUN_00065ea0	param_11	src1Select	INFERRED	uint[4] component selects, as src0Select
+local	FUN_00065ea0	param_12	src1Negate	INFERRED	uint[4] component negates, as src0Negate
+local	FUN_00065ea0	puVar18	tokenCount	CONFIRMED	&ctx[0x754/4]: number of words in the token stream, incremented after each push
+local	FUN_00065ea0	uVar13	dstHeader	INFERRED	(dstFile&0x3f)<<16 | dstIndex&0xffff; bit 0x400000 = an extended word follows; later reused as the running token index
+local	FUN_00065ea0	uVar14	dstMaskWord	INFERRED	extended word for the destination (write mask, or 0x55 for file 0x12/0x13)
+local	FUN_00065ea0	uVar12	src0Header	INFERRED	(src0File&0x3f)<<16 | src0Index&0xffff, bit 0x400000 = extended word follows
+local	FUN_00065ea0	uVar17	src0SwizzleWord	INFERRED	extended word packing src0Select/src0Negate (0 when the select is the identity 0,1,2,3 and no negate)
+local	FUN_00065ea0	uVar1	src1Header	INFERRED	(src1File&0x3f)<<16 | src1Index&0xffff; earlier reused for a src0Select element
+local	FUN_00065ea0	uVar15	src1SwizzleWord	INFERRED	extended word packing src1Select/src1Negate
+local	FUN_00065ea0	uVar3	tokenIndex	INFERRED	current write index = *tokenCount; earlier reused for select elements
+local	FUN_00065ea0	uVar4	newStorage	CONFIRMED	storage returned by the allocator slot (+0xc) when the stream grows, old contents memcpy-ed across
+local	FUN_00066b80	param_1	ctx	CONFIRMED	token stream: count at ctx+0x754, capacity +0x758 (grows by 0x80 words), data +0x75c; allocator vtable at *(ctx+0x3d4) (+0xc allocate, +0x18 free) (same code shape as FUN_00065ea0)
+local	FUN_00066b80	param_2	dstFile	INFERRED	low 6 bits of the destination operand header word (<<16); values 0x12/0x13 force the extended-word flag (same code shape as FUN_00065ea0)
+local	FUN_00066b80	param_3	dstIndex	INFERRED	low 16 bits of the destination operand header word (same code shape as FUN_00065ea0)
+local	FUN_00066b80	param_4	dstMask	INFERRED	int[4]: each nonzero element sets one write-mask bit (1,4,0x10,0x40) in the extended word (same code shape as FUN_00065ea0)
+local	FUN_00066b80	param_5	src0File	INFERRED	low 6 bits of the first source header word (<<16) (same code shape as FUN_00065ea0)
+local	FUN_00066b80	param_6	src0Index	INFERRED	low 16 bits of the first source header word (same code shape as FUN_00065ea0)
+local	FUN_00066b80	param_7	src0Select	INFERRED	uint[4]: 3-bit component selects, packed at bits 0,4,8,12 of the extended word (same code shape as FUN_00065ea0)
+local	FUN_00066b80	param_8	src0Negate	INFERRED	uint[4]: 1-bit negates, packed at bits 3,7,11,15 of the extended word (same code shape as FUN_00065ea0)
+local	FUN_00066b80	param_9	src1File	INFERRED	low 6 bits of the second source header word (<<16) (same code shape as FUN_00065ea0)
+local	FUN_00066b80	param_10	src1Index	INFERRED	low 16 bits of the second source header word (same code shape as FUN_00065ea0)
+local	FUN_00066b80	param_11	src1Select	INFERRED	uint[4] component selects, as src0Select (same code shape as FUN_00065ea0)
+local	FUN_00066b80	param_12	src1Negate	INFERRED	uint[4] component negates, as src0Negate (same code shape as FUN_00065ea0)
+local	FUN_00066b80	puVar18	tokenCount	CONFIRMED	&ctx[0x754/4]: number of words in the token stream, incremented after each push (same code shape as FUN_00065ea0)
+local	FUN_00066b80	uVar13	dstHeader	INFERRED	(dstFile&0x3f)<<16 | dstIndex&0xffff; bit 0x400000 = an extended word follows; later reused as the running token index (same code shape as FUN_00065ea0)
+local	FUN_00066b80	uVar14	dstMaskWord	INFERRED	extended word for the destination (write mask, or 0x55 for file 0x12/0x13) (same code shape as FUN_00065ea0)
+local	FUN_00066b80	uVar12	src0Header	INFERRED	(src0File&0x3f)<<16 | src0Index&0xffff, bit 0x400000 = extended word follows (same code shape as FUN_00065ea0)
+local	FUN_00066b80	uVar17	src0SwizzleWord	INFERRED	extended word packing src0Select/src0Negate (0 when the select is the identity 0,1,2,3 and no negate) (same code shape as FUN_00065ea0)
+local	FUN_00066b80	uVar1	src1Header	INFERRED	(src1File&0x3f)<<16 | src1Index&0xffff; earlier reused for a src0Select element (same code shape as FUN_00065ea0)
+local	FUN_00066b80	uVar15	src1SwizzleWord	INFERRED	extended word packing src1Select/src1Negate (same code shape as FUN_00065ea0)
+local	FUN_00066b80	uVar3	tokenIndex	INFERRED	current write index = *tokenCount; earlier reused for select elements (same code shape as FUN_00065ea0)
+local	FUN_00066b80	uVar4	newStorage	CONFIRMED	storage returned by the allocator slot (+0xc) when the stream grows, old contents memcpy-ed across (same code shape as FUN_00065ea0)
+local	FUN_00067320	param_1	ctx	CONFIRMED	token stream: count at ctx+0x754, capacity +0x758 (grows by 0x80 words), data +0x75c; allocator vtable at *(ctx+0x3d4) (+0xc allocate, +0x18 free) (same code shape as FUN_00065ea0)
+local	FUN_00067320	param_2	dstFile	INFERRED	low 6 bits of the destination operand header word (<<16); values 0x12/0x13 force the extended-word flag (same code shape as FUN_00065ea0)
+local	FUN_00067320	param_3	dstIndex	INFERRED	low 16 bits of the destination operand header word (same code shape as FUN_00065ea0)
+local	FUN_00067320	param_4	dstMask	INFERRED	int[4]: each nonzero element sets one write-mask bit (1,4,0x10,0x40) in the extended word (same code shape as FUN_00065ea0)
+local	FUN_00067320	param_5	src0File	INFERRED	low 6 bits of the first source header word (<<16) (same code shape as FUN_00065ea0)
+local	FUN_00067320	param_6	src0Index	INFERRED	low 16 bits of the first source header word (same code shape as FUN_00065ea0)
+local	FUN_00067320	param_7	src0Select	INFERRED	uint[4]: 3-bit component selects, packed at bits 0,4,8,12 of the extended word (same code shape as FUN_00065ea0)
+local	FUN_00067320	param_8	src0Negate	INFERRED	uint[4]: 1-bit negates, packed at bits 3,7,11,15 of the extended word (same code shape as FUN_00065ea0)
+local	FUN_00067320	param_9	src1File	INFERRED	low 6 bits of the second source header word (<<16) (same code shape as FUN_00065ea0)
+local	FUN_00067320	param_10	src1Index	INFERRED	low 16 bits of the second source header word (same code shape as FUN_00065ea0)
+local	FUN_00067320	param_11	src1Select	INFERRED	uint[4] component selects, as src0Select (same code shape as FUN_00065ea0)
+local	FUN_00067320	param_12	src1Negate	INFERRED	uint[4] component negates, as src0Negate (same code shape as FUN_00065ea0)
+local	FUN_00067320	puVar18	tokenCount	CONFIRMED	&ctx[0x754/4]: number of words in the token stream, incremented after each push (same code shape as FUN_00065ea0)
+local	FUN_00067320	uVar13	dstHeader	INFERRED	(dstFile&0x3f)<<16 | dstIndex&0xffff; bit 0x400000 = an extended word follows; later reused as the running token index (same code shape as FUN_00065ea0)
+local	FUN_00067320	uVar14	dstMaskWord	INFERRED	extended word for the destination (write mask, or 0x55 for file 0x12/0x13) (same code shape as FUN_00065ea0)
+local	FUN_00067320	uVar12	src0Header	INFERRED	(src0File&0x3f)<<16 | src0Index&0xffff, bit 0x400000 = extended word follows (same code shape as FUN_00065ea0)
+local	FUN_00067320	uVar17	src0SwizzleWord	INFERRED	extended word packing src0Select/src0Negate (0 when the select is the identity 0,1,2,3 and no negate) (same code shape as FUN_00065ea0)
+local	FUN_00067320	uVar1	src1Header	INFERRED	(src1File&0x3f)<<16 | src1Index&0xffff; earlier reused for a src0Select element (same code shape as FUN_00065ea0)
+local	FUN_00067320	uVar15	src1SwizzleWord	INFERRED	extended word packing src1Select/src1Negate (same code shape as FUN_00065ea0)
+local	FUN_00067320	uVar3	tokenIndex	INFERRED	current write index = *tokenCount; earlier reused for select elements (same code shape as FUN_00065ea0)
+local	FUN_00067320	uVar4	newStorage	CONFIRMED	storage returned by the allocator slot (+0xc) when the stream grows, old contents memcpy-ed across (same code shape as FUN_00065ea0)
+local	FUN_0006a400	param_1	ctx	CONFIRMED	token stream: count at ctx+0x754, capacity +0x758 (grows by 0x80 words), data +0x75c; allocator vtable at *(ctx+0x3d4) (+0xc allocate, +0x18 free) (same code shape as FUN_00065ea0)
+local	FUN_0006a400	param_2	dstFile	INFERRED	low 6 bits of the destination operand header word (<<16); values 0x12/0x13 force the extended-word flag (same code shape as FUN_00065ea0)
+local	FUN_0006a400	param_3	dstIndex	INFERRED	low 16 bits of the destination operand header word (same code shape as FUN_00065ea0)
+local	FUN_0006a400	param_4	dstMask	INFERRED	int[4]: each nonzero element sets one write-mask bit (1,4,0x10,0x40) in the extended word (same code shape as FUN_00065ea0)
+local	FUN_0006a400	param_5	src0File	INFERRED	low 6 bits of the first source header word (<<16) (same code shape as FUN_00065ea0)
+local	FUN_0006a400	param_6	src0Index	INFERRED	low 16 bits of the first source header word (same code shape as FUN_00065ea0)
+local	FUN_0006a400	param_7	src0Select	INFERRED	uint[4]: 3-bit component selects, packed at bits 0,4,8,12 of the extended word (same code shape as FUN_00065ea0)
+local	FUN_0006a400	param_8	src0Negate	INFERRED	uint[4]: 1-bit negates, packed at bits 3,7,11,15 of the extended word (same code shape as FUN_00065ea0)
+local	FUN_0006a400	param_9	src1File	INFERRED	low 6 bits of the second source header word (<<16) (same code shape as FUN_00065ea0)
+local	FUN_0006a400	param_10	src1Index	INFERRED	low 16 bits of the second source header word (same code shape as FUN_00065ea0)
+local	FUN_0006a400	param_11	src1Select	INFERRED	uint[4] component selects, as src0Select (same code shape as FUN_00065ea0)
+local	FUN_0006a400	param_12	src1Negate	INFERRED	uint[4] component negates, as src0Negate (same code shape as FUN_00065ea0)
+local	FUN_0006a400	puVar18	tokenCount	CONFIRMED	&ctx[0x754/4]: number of words in the token stream, incremented after each push (same code shape as FUN_00065ea0)
+local	FUN_0006a400	uVar13	dstHeader	INFERRED	(dstFile&0x3f)<<16 | dstIndex&0xffff; bit 0x400000 = an extended word follows; later reused as the running token index (same code shape as FUN_00065ea0)
+local	FUN_0006a400	uVar14	dstMaskWord	INFERRED	extended word for the destination (write mask, or 0x55 for file 0x12/0x13) (same code shape as FUN_00065ea0)
+local	FUN_0006a400	uVar12	src0Header	INFERRED	(src0File&0x3f)<<16 | src0Index&0xffff, bit 0x400000 = extended word follows (same code shape as FUN_00065ea0)
+local	FUN_0006a400	uVar17	src0SwizzleWord	INFERRED	extended word packing src0Select/src0Negate (0 when the select is the identity 0,1,2,3 and no negate) (same code shape as FUN_00065ea0)
+local	FUN_0006a400	uVar1	src1Header	INFERRED	(src1File&0x3f)<<16 | src1Index&0xffff; earlier reused for a src0Select element (same code shape as FUN_00065ea0)
+local	FUN_0006a400	uVar15	src1SwizzleWord	INFERRED	extended word packing src1Select/src1Negate (same code shape as FUN_00065ea0)
+local	FUN_0006a400	uVar3	tokenIndex	INFERRED	current write index = *tokenCount; earlier reused for select elements (same code shape as FUN_00065ea0)
+local	FUN_0006a400	uVar4	newStorage	CONFIRMED	storage returned by the allocator slot (+0xc) when the stream grows, old contents memcpy-ed across (same code shape as FUN_00065ea0)
+local	FUN_0006aba0	param_1	ctx	CONFIRMED	token stream: count at ctx+0x754, capacity +0x758 (grows by 0x80 words), data +0x75c; allocator vtable at *(ctx+0x3d4) (+0xc allocate, +0x18 free) (same code shape as FUN_00065ea0)
+local	FUN_0006aba0	param_2	dstFile	INFERRED	low 6 bits of the destination operand header word (<<16); values 0x12/0x13 force the extended-word flag (same code shape as FUN_00065ea0)
+local	FUN_0006aba0	param_3	dstIndex	INFERRED	low 16 bits of the destination operand header word (same code shape as FUN_00065ea0)
+local	FUN_0006aba0	param_4	dstMask	INFERRED	int[4]: each nonzero element sets one write-mask bit (1,4,0x10,0x40) in the extended word (same code shape as FUN_00065ea0)
+local	FUN_0006aba0	param_5	src0File	INFERRED	low 6 bits of the first source header word (<<16) (same code shape as FUN_00065ea0)
+local	FUN_0006aba0	param_6	src0Index	INFERRED	low 16 bits of the first source header word (same code shape as FUN_00065ea0)
+local	FUN_0006aba0	param_7	src0Select	INFERRED	uint[4]: 3-bit component selects, packed at bits 0,4,8,12 of the extended word (same code shape as FUN_00065ea0)
+local	FUN_0006aba0	param_8	src0Negate	INFERRED	uint[4]: 1-bit negates, packed at bits 3,7,11,15 of the extended word (same code shape as FUN_00065ea0)
+local	FUN_0006aba0	param_9	src1File	INFERRED	low 6 bits of the second source header word (<<16) (same code shape as FUN_00065ea0)
+local	FUN_0006aba0	param_10	src1Index	INFERRED	low 16 bits of the second source header word (same code shape as FUN_00065ea0)
+local	FUN_0006aba0	param_11	src1Select	INFERRED	uint[4] component selects, as src0Select (same code shape as FUN_00065ea0)
+local	FUN_0006aba0	param_12	src1Negate	INFERRED	uint[4] component negates, as src0Negate (same code shape as FUN_00065ea0)
+local	FUN_0006aba0	puVar18	tokenCount	CONFIRMED	&ctx[0x754/4]: number of words in the token stream, incremented after each push (same code shape as FUN_00065ea0)
+local	FUN_0006aba0	uVar13	dstHeader	INFERRED	(dstFile&0x3f)<<16 | dstIndex&0xffff; bit 0x400000 = an extended word follows; later reused as the running token index (same code shape as FUN_00065ea0)
+local	FUN_0006aba0	uVar14	dstMaskWord	INFERRED	extended word for the destination (write mask, or 0x55 for file 0x12/0x13) (same code shape as FUN_00065ea0)
+local	FUN_0006aba0	uVar12	src0Header	INFERRED	(src0File&0x3f)<<16 | src0Index&0xffff, bit 0x400000 = extended word follows (same code shape as FUN_00065ea0)
+local	FUN_0006aba0	uVar17	src0SwizzleWord	INFERRED	extended word packing src0Select/src0Negate (0 when the select is the identity 0,1,2,3 and no negate) (same code shape as FUN_00065ea0)
+local	FUN_0006aba0	uVar1	src1Header	INFERRED	(src1File&0x3f)<<16 | src1Index&0xffff; earlier reused for a src0Select element (same code shape as FUN_00065ea0)
+local	FUN_0006aba0	uVar15	src1SwizzleWord	INFERRED	extended word packing src1Select/src1Negate (same code shape as FUN_00065ea0)
+local	FUN_0006aba0	uVar3	tokenIndex	INFERRED	current write index = *tokenCount; earlier reused for select elements (same code shape as FUN_00065ea0)
+local	FUN_0006aba0	uVar4	newStorage	CONFIRMED	storage returned by the allocator slot (+0xc) when the stream grows, old contents memcpy-ed across (same code shape as FUN_00065ea0)
+local	FUN_0006b340	param_1	ctx	CONFIRMED	token stream: count at ctx+0x754, capacity +0x758 (grows by 0x80 words), data +0x75c; allocator vtable at *(ctx+0x3d4) (+0xc allocate, +0x18 free) (same code shape as FUN_00065ea0)
+local	FUN_0006b340	param_2	dstFile	INFERRED	low 6 bits of the destination operand header word (<<16); values 0x12/0x13 force the extended-word flag (same code shape as FUN_00065ea0)
+local	FUN_0006b340	param_3	dstIndex	INFERRED	low 16 bits of the destination operand header word (same code shape as FUN_00065ea0)
+local	FUN_0006b340	param_4	dstMask	INFERRED	int[4]: each nonzero element sets one write-mask bit (1,4,0x10,0x40) in the extended word (same code shape as FUN_00065ea0)
+local	FUN_0006b340	param_5	src0File	INFERRED	low 6 bits of the first source header word (<<16) (same code shape as FUN_00065ea0)
+local	FUN_0006b340	param_6	src0Index	INFERRED	low 16 bits of the first source header word (same code shape as FUN_00065ea0)
+local	FUN_0006b340	param_7	src0Select	INFERRED	uint[4]: 3-bit component selects, packed at bits 0,4,8,12 of the extended word (same code shape as FUN_00065ea0)
+local	FUN_0006b340	param_8	src0Negate	INFERRED	uint[4]: 1-bit negates, packed at bits 3,7,11,15 of the extended word (same code shape as FUN_00065ea0)
+local	FUN_0006b340	param_9	src1File	INFERRED	low 6 bits of the second source header word (<<16) (same code shape as FUN_00065ea0)
+local	FUN_0006b340	param_10	src1Index	INFERRED	low 16 bits of the second source header word (same code shape as FUN_00065ea0)
+local	FUN_0006b340	param_11	src1Select	INFERRED	uint[4] component selects, as src0Select (same code shape as FUN_00065ea0)
+local	FUN_0006b340	param_12	src1Negate	INFERRED	uint[4] component negates, as src0Negate (same code shape as FUN_00065ea0)
+local	FUN_0006b340	puVar18	tokenCount	CONFIRMED	&ctx[0x754/4]: number of words in the token stream, incremented after each push (same code shape as FUN_00065ea0)
+local	FUN_0006b340	uVar13	dstHeader	INFERRED	(dstFile&0x3f)<<16 | dstIndex&0xffff; bit 0x400000 = an extended word follows; later reused as the running token index (same code shape as FUN_00065ea0)
+local	FUN_0006b340	uVar14	dstMaskWord	INFERRED	extended word for the destination (write mask, or 0x55 for file 0x12/0x13) (same code shape as FUN_00065ea0)
+local	FUN_0006b340	uVar12	src0Header	INFERRED	(src0File&0x3f)<<16 | src0Index&0xffff, bit 0x400000 = extended word follows (same code shape as FUN_00065ea0)
+local	FUN_0006b340	uVar17	src0SwizzleWord	INFERRED	extended word packing src0Select/src0Negate (0 when the select is the identity 0,1,2,3 and no negate) (same code shape as FUN_00065ea0)
+local	FUN_0006b340	uVar1	src1Header	INFERRED	(src1File&0x3f)<<16 | src1Index&0xffff; earlier reused for a src0Select element (same code shape as FUN_00065ea0)
+local	FUN_0006b340	uVar15	src1SwizzleWord	INFERRED	extended word packing src1Select/src1Negate (same code shape as FUN_00065ea0)
+local	FUN_0006b340	uVar3	tokenIndex	INFERRED	current write index = *tokenCount; earlier reused for select elements (same code shape as FUN_00065ea0)
+local	FUN_0006b340	uVar4	newStorage	CONFIRMED	storage returned by the allocator slot (+0xc) when the stream grows, old contents memcpy-ed across (same code shape as FUN_00065ea0)
+local	FUN_0006bae0	param_1	ctx	CONFIRMED	token stream: count at ctx+0x754, capacity +0x758 (grows by 0x80 words), data +0x75c; allocator vtable at *(ctx+0x3d4) (+0xc allocate, +0x18 free) (same code shape as FUN_00065ea0)
+local	FUN_0006bae0	param_2	dstFile	INFERRED	low 6 bits of the destination operand header word (<<16); values 0x12/0x13 force the extended-word flag (same code shape as FUN_00065ea0)
+local	FUN_0006bae0	param_3	dstIndex	INFERRED	low 16 bits of the destination operand header word (same code shape as FUN_00065ea0)
+local	FUN_0006bae0	param_4	dstMask	INFERRED	int[4]: each nonzero element sets one write-mask bit (1,4,0x10,0x40) in the extended word (same code shape as FUN_00065ea0)
+local	FUN_0006bae0	param_5	src0File	INFERRED	low 6 bits of the first source header word (<<16) (same code shape as FUN_00065ea0)
+local	FUN_0006bae0	param_6	src0Index	INFERRED	low 16 bits of the first source header word (same code shape as FUN_00065ea0)
+local	FUN_0006bae0	param_7	src0Select	INFERRED	uint[4]: 3-bit component selects, packed at bits 0,4,8,12 of the extended word (same code shape as FUN_00065ea0)
+local	FUN_0006bae0	param_8	src0Negate	INFERRED	uint[4]: 1-bit negates, packed at bits 3,7,11,15 of the extended word (same code shape as FUN_00065ea0)
+local	FUN_0006bae0	param_9	src1File	INFERRED	low 6 bits of the second source header word (<<16) (same code shape as FUN_00065ea0)
+local	FUN_0006bae0	param_10	src1Index	INFERRED	low 16 bits of the second source header word (same code shape as FUN_00065ea0)
+local	FUN_0006bae0	param_11	src1Select	INFERRED	uint[4] component selects, as src0Select (same code shape as FUN_00065ea0)
+local	FUN_0006bae0	param_12	src1Negate	INFERRED	uint[4] component negates, as src0Negate (same code shape as FUN_00065ea0)
+local	FUN_0006bae0	puVar18	tokenCount	CONFIRMED	&ctx[0x754/4]: number of words in the token stream, incremented after each push (same code shape as FUN_00065ea0)
+local	FUN_0006bae0	uVar13	dstHeader	INFERRED	(dstFile&0x3f)<<16 | dstIndex&0xffff; bit 0x400000 = an extended word follows; later reused as the running token index (same code shape as FUN_00065ea0)
+local	FUN_0006bae0	uVar14	dstMaskWord	INFERRED	extended word for the destination (write mask, or 0x55 for file 0x12/0x13) (same code shape as FUN_00065ea0)
+local	FUN_0006bae0	uVar12	src0Header	INFERRED	(src0File&0x3f)<<16 | src0Index&0xffff, bit 0x400000 = extended word follows (same code shape as FUN_00065ea0)
+local	FUN_0006bae0	uVar17	src0SwizzleWord	INFERRED	extended word packing src0Select/src0Negate (0 when the select is the identity 0,1,2,3 and no negate) (same code shape as FUN_00065ea0)
+local	FUN_0006bae0	uVar1	src1Header	INFERRED	(src1File&0x3f)<<16 | src1Index&0xffff; earlier reused for a src0Select element (same code shape as FUN_00065ea0)
+local	FUN_0006bae0	uVar15	src1SwizzleWord	INFERRED	extended word packing src1Select/src1Negate (same code shape as FUN_00065ea0)
+local	FUN_0006bae0	uVar3	tokenIndex	INFERRED	current write index = *tokenCount; earlier reused for select elements (same code shape as FUN_00065ea0)
+local	FUN_0006bae0	uVar4	newStorage	CONFIRMED	storage returned by the allocator slot (+0xc) when the stream grows, old contents memcpy-ed across (same code shape as FUN_00065ea0)
+local	FUN_0006dcc0	param_1	ctx	CONFIRMED	token stream: count at ctx+0x754, capacity +0x758 (grows by 0x80 words), data +0x75c; allocator vtable at *(ctx+0x3d4) (+0xc allocate, +0x18 free) (same code shape as FUN_00065ea0)
+local	FUN_0006dcc0	param_2	dstFile	INFERRED	low 6 bits of the destination operand header word (<<16); values 0x12/0x13 force the extended-word flag (same code shape as FUN_00065ea0)
+local	FUN_0006dcc0	param_3	dstIndex	INFERRED	low 16 bits of the destination operand header word (same code shape as FUN_00065ea0)
+local	FUN_0006dcc0	param_4	dstMask	INFERRED	int[4]: each nonzero element sets one write-mask bit (1,4,0x10,0x40) in the extended word (same code shape as FUN_00065ea0)
+local	FUN_0006dcc0	param_5	src0File	INFERRED	low 6 bits of the first source header word (<<16) (same code shape as FUN_00065ea0)
+local	FUN_0006dcc0	param_6	src0Index	INFERRED	low 16 bits of the first source header word (same code shape as FUN_00065ea0)
+local	FUN_0006dcc0	param_7	src0Select	INFERRED	uint[4]: 3-bit component selects, packed at bits 0,4,8,12 of the extended word (same code shape as FUN_00065ea0)
+local	FUN_0006dcc0	param_8	src0Negate	INFERRED	uint[4]: 1-bit negates, packed at bits 3,7,11,15 of the extended word (same code shape as FUN_00065ea0)
+local	FUN_0006dcc0	param_9	src1File	INFERRED	low 6 bits of the second source header word (<<16) (same code shape as FUN_00065ea0)
+local	FUN_0006dcc0	param_10	src1Index	INFERRED	low 16 bits of the second source header word (same code shape as FUN_00065ea0)
+local	FUN_0006dcc0	param_11	src1Select	INFERRED	uint[4] component selects, as src0Select (same code shape as FUN_00065ea0)
+local	FUN_0006dcc0	param_12	src1Negate	INFERRED	uint[4] component negates, as src0Negate (same code shape as FUN_00065ea0)
+local	FUN_0006dcc0	puVar18	tokenCount	CONFIRMED	&ctx[0x754/4]: number of words in the token stream, incremented after each push (same code shape as FUN_00065ea0)
+local	FUN_0006dcc0	uVar13	dstHeader	INFERRED	(dstFile&0x3f)<<16 | dstIndex&0xffff; bit 0x400000 = an extended word follows; later reused as the running token index (same code shape as FUN_00065ea0)
+local	FUN_0006dcc0	uVar14	dstMaskWord	INFERRED	extended word for the destination (write mask, or 0x55 for file 0x12/0x13) (same code shape as FUN_00065ea0)
+local	FUN_0006dcc0	uVar12	src0Header	INFERRED	(src0File&0x3f)<<16 | src0Index&0xffff, bit 0x400000 = extended word follows (same code shape as FUN_00065ea0)
+local	FUN_0006dcc0	uVar17	src0SwizzleWord	INFERRED	extended word packing src0Select/src0Negate (0 when the select is the identity 0,1,2,3 and no negate) (same code shape as FUN_00065ea0)
+local	FUN_0006dcc0	uVar1	src1Header	INFERRED	(src1File&0x3f)<<16 | src1Index&0xffff; earlier reused for a src0Select element (same code shape as FUN_00065ea0)
+local	FUN_0006dcc0	uVar15	src1SwizzleWord	INFERRED	extended word packing src1Select/src1Negate (same code shape as FUN_00065ea0)
+local	FUN_0006dcc0	uVar3	tokenIndex	INFERRED	current write index = *tokenCount; earlier reused for select elements (same code shape as FUN_00065ea0)
+local	FUN_0006dcc0	uVar4	newStorage	CONFIRMED	storage returned by the allocator slot (+0xc) when the stream grows, old contents memcpy-ed across (same code shape as FUN_00065ea0)
+local	FUN_000840d0	param_1	ctx	CONFIRMED	instruction array: data +0x3c8, count +0x3cc, capacity +0x3e0 (grows by 0x20 entries of 0x10 bytes), current entry pointer +0x3dc
+local	FUN_000840d0	param_2	dstFile	INFERRED	(&0xf)<<8 into word 0 of the 0x10-byte instruction
+local	FUN_000840d0	param_3	dstIndex	INFERRED	(&0x7f)<<13 into word 0
+local	FUN_000840d0	param_4	dstMask	INFERRED	uint[4]: bit 0 of each element -> write-mask bits 20..23 of word 0
+local	FUN_000840d0	param_5	src0File	INFERRED	&0xf, low bits of word 1
+local	FUN_000840d0	param_6	src0Index	INFERRED	(&0xff)<<5 into word 1
+local	FUN_000840d0	param_7	src0Select	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 1
+local	FUN_000840d0	param_8	src0Negate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 1
+local	FUN_000840d0	param_9	src1File	INFERRED	&0xf, low bits of word 2
+local	FUN_000840d0	param_10	src1Index	INFERRED	(&0xff)<<5 into word 2
+local	FUN_000840d0	param_11	src1Select	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 2
+local	FUN_000840d0	param_12	src1Negate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 2
+local	FUN_000840d0	iVar15	instr	INFERRED	instruction count on entry, then the pointer to the new 0x10-byte entry (stored at ctx+0x3dc)
+local	FUN_000840d0	iVar16	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array
+local	FUN_000840d0	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry
+local	FUN_000840d0	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across
+local	FUN_000840d0	uVar13	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed select field
+local	FUN_000840d0	uVar12	oldWord1	INFERRED	word 1 as read before packing
+local	FUN_000840d0	uVar17	oldWord2	INFERRED	word 2 as read before packing
+local	FUN_000840d0	uVar10	src0FileField	INFERRED	src0File & 0xf
+local	FUN_000840d0	uVar11	src1FileField	INFERRED	src1File & 0xf
+local	FUN_000844e0	param_1	ctx	CONFIRMED	instruction array: data +0x3c8, count +0x3cc, capacity +0x3e0 (grows by 0x20 entries of 0x10 bytes), current entry pointer +0x3dc (same code shape as FUN_000840d0)
+local	FUN_000844e0	param_2	dstFile	INFERRED	(&0xf)<<8 into word 0 of the 0x10-byte instruction (same code shape as FUN_000840d0)
+local	FUN_000844e0	param_3	dstIndex	INFERRED	(&0x7f)<<13 into word 0 (same code shape as FUN_000840d0)
+local	FUN_000844e0	param_4	dstMask	INFERRED	uint[4]: bit 0 of each element -> write-mask bits 20..23 of word 0 (same code shape as FUN_000840d0)
+local	FUN_000844e0	param_5	src0File	INFERRED	&0xf, low bits of word 1 (same code shape as FUN_000840d0)
+local	FUN_000844e0	param_6	src0Index	INFERRED	(&0xff)<<5 into word 1 (same code shape as FUN_000840d0)
+local	FUN_000844e0	param_7	src0Select	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 1 (same code shape as FUN_000840d0)
+local	FUN_000844e0	param_8	src0Negate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 1 (same code shape as FUN_000840d0)
+local	FUN_000844e0	param_9	src1File	INFERRED	&0xf, low bits of word 2 (same code shape as FUN_000840d0)
+local	FUN_000844e0	param_10	src1Index	INFERRED	(&0xff)<<5 into word 2 (same code shape as FUN_000840d0)
+local	FUN_000844e0	param_11	src1Select	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 2 (same code shape as FUN_000840d0)
+local	FUN_000844e0	param_12	src1Negate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 2 (same code shape as FUN_000840d0)
+local	FUN_000844e0	iVar15	instr	INFERRED	instruction count on entry, then the pointer to the new 0x10-byte entry (stored at ctx+0x3dc) (same code shape as FUN_000840d0)
+local	FUN_000844e0	iVar16	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_000840d0)
+local	FUN_000844e0	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_000840d0)
+local	FUN_000844e0	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_000840d0)
+local	FUN_000844e0	uVar13	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed select field (same code shape as FUN_000840d0)
+local	FUN_000844e0	uVar12	oldWord1	INFERRED	word 1 as read before packing (same code shape as FUN_000840d0)
+local	FUN_000844e0	uVar17	oldWord2	INFERRED	word 2 as read before packing (same code shape as FUN_000840d0)
+local	FUN_000844e0	uVar10	src0FileField	INFERRED	src0File & 0xf (same code shape as FUN_000840d0)
+local	FUN_000844e0	uVar11	src1FileField	INFERRED	src1File & 0xf (same code shape as FUN_000840d0)
+local	FUN_00084710	param_1	ctx	CONFIRMED	instruction array: data +0x3c8, count +0x3cc, capacity +0x3e0 (grows by 0x20 entries of 0x10 bytes), current entry pointer +0x3dc (same code shape as FUN_000840d0)
+local	FUN_00084710	param_2	dstFile	INFERRED	(&0xf)<<8 into word 0 of the 0x10-byte instruction (same code shape as FUN_000840d0)
+local	FUN_00084710	param_3	dstIndex	INFERRED	(&0x7f)<<13 into word 0 (same code shape as FUN_000840d0)
+local	FUN_00084710	param_4	dstMask	INFERRED	uint[4]: bit 0 of each element -> write-mask bits 20..23 of word 0 (same code shape as FUN_000840d0)
+local	FUN_00084710	param_5	src0File	INFERRED	&0xf, low bits of word 1 (same code shape as FUN_000840d0)
+local	FUN_00084710	param_6	src0Index	INFERRED	(&0xff)<<5 into word 1 (same code shape as FUN_000840d0)
+local	FUN_00084710	param_7	src0Select	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 1 (same code shape as FUN_000840d0)
+local	FUN_00084710	param_8	src0Negate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 1 (same code shape as FUN_000840d0)
+local	FUN_00084710	param_9	src1File	INFERRED	&0xf, low bits of word 2 (same code shape as FUN_000840d0)
+local	FUN_00084710	param_10	src1Index	INFERRED	(&0xff)<<5 into word 2 (same code shape as FUN_000840d0)
+local	FUN_00084710	param_11	src1Select	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 2 (same code shape as FUN_000840d0)
+local	FUN_00084710	param_12	src1Negate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 2 (same code shape as FUN_000840d0)
+local	FUN_00084710	iVar15	instr	INFERRED	instruction count on entry, then the pointer to the new 0x10-byte entry (stored at ctx+0x3dc) (same code shape as FUN_000840d0)
+local	FUN_00084710	iVar16	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_000840d0)
+local	FUN_00084710	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_000840d0)
+local	FUN_00084710	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_000840d0)
+local	FUN_00084710	uVar13	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed select field (same code shape as FUN_000840d0)
+local	FUN_00084710	uVar12	oldWord1	INFERRED	word 1 as read before packing (same code shape as FUN_000840d0)
+local	FUN_00084710	uVar17	oldWord2	INFERRED	word 2 as read before packing (same code shape as FUN_000840d0)
+local	FUN_00084710	uVar10	src0FileField	INFERRED	src0File & 0xf (same code shape as FUN_000840d0)
+local	FUN_00084710	uVar11	src1FileField	INFERRED	src1File & 0xf (same code shape as FUN_000840d0)
+local	FUN_00085180	param_1	ctx	CONFIRMED	instruction array: data +0x3c8, count +0x3cc, capacity +0x3e0 (grows by 0x20 entries of 0x10 bytes), current entry pointer +0x3dc (same code shape as FUN_000840d0)
+local	FUN_00085180	param_2	dstFile	INFERRED	(&0xf)<<8 into word 0 of the 0x10-byte instruction (same code shape as FUN_000840d0)
+local	FUN_00085180	param_3	dstIndex	INFERRED	(&0x7f)<<13 into word 0 (same code shape as FUN_000840d0)
+local	FUN_00085180	param_4	dstMask	INFERRED	uint[4]: bit 0 of each element -> write-mask bits 20..23 of word 0 (same code shape as FUN_000840d0)
+local	FUN_00085180	param_5	src0File	INFERRED	&0xf, low bits of word 1 (same code shape as FUN_000840d0)
+local	FUN_00085180	param_6	src0Index	INFERRED	(&0xff)<<5 into word 1 (same code shape as FUN_000840d0)
+local	FUN_00085180	param_7	src0Select	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 1 (same code shape as FUN_000840d0)
+local	FUN_00085180	param_8	src0Negate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 1 (same code shape as FUN_000840d0)
+local	FUN_00085180	param_9	src1File	INFERRED	&0xf, low bits of word 2 (same code shape as FUN_000840d0)
+local	FUN_00085180	param_10	src1Index	INFERRED	(&0xff)<<5 into word 2 (same code shape as FUN_000840d0)
+local	FUN_00085180	param_11	src1Select	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 2 (same code shape as FUN_000840d0)
+local	FUN_00085180	param_12	src1Negate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 2 (same code shape as FUN_000840d0)
+local	FUN_00085180	iVar15	instr	INFERRED	instruction count on entry, then the pointer to the new 0x10-byte entry (stored at ctx+0x3dc) (same code shape as FUN_000840d0)
+local	FUN_00085180	iVar16	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_000840d0)
+local	FUN_00085180	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_000840d0)
+local	FUN_00085180	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_000840d0)
+local	FUN_00085180	uVar13	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed select field (same code shape as FUN_000840d0)
+local	FUN_00085180	uVar12	oldWord1	INFERRED	word 1 as read before packing (same code shape as FUN_000840d0)
+local	FUN_00085180	uVar17	oldWord2	INFERRED	word 2 as read before packing (same code shape as FUN_000840d0)
+local	FUN_00085180	uVar10	src0FileField	INFERRED	src0File & 0xf (same code shape as FUN_000840d0)
+local	FUN_00085180	uVar11	src1FileField	INFERRED	src1File & 0xf (same code shape as FUN_000840d0)
+local	FUN_000853b0	param_1	ctx	CONFIRMED	instruction array: data +0x3c8, count +0x3cc, capacity +0x3e0 (grows by 0x20 entries of 0x10 bytes), current entry pointer +0x3dc (same code shape as FUN_000840d0)
+local	FUN_000853b0	param_2	dstFile	INFERRED	(&0xf)<<8 into word 0 of the 0x10-byte instruction (same code shape as FUN_000840d0)
+local	FUN_000853b0	param_3	dstIndex	INFERRED	(&0x7f)<<13 into word 0 (same code shape as FUN_000840d0)
+local	FUN_000853b0	param_4	dstMask	INFERRED	uint[4]: bit 0 of each element -> write-mask bits 20..23 of word 0 (same code shape as FUN_000840d0)
+local	FUN_000853b0	param_5	src0File	INFERRED	&0xf, low bits of word 1 (same code shape as FUN_000840d0)
+local	FUN_000853b0	param_6	src0Index	INFERRED	(&0xff)<<5 into word 1 (same code shape as FUN_000840d0)
+local	FUN_000853b0	param_7	src0Select	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 1 (same code shape as FUN_000840d0)
+local	FUN_000853b0	param_8	src0Negate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 1 (same code shape as FUN_000840d0)
+local	FUN_000853b0	param_9	src1File	INFERRED	&0xf, low bits of word 2 (same code shape as FUN_000840d0)
+local	FUN_000853b0	param_10	src1Index	INFERRED	(&0xff)<<5 into word 2 (same code shape as FUN_000840d0)
+local	FUN_000853b0	param_11	src1Select	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 2 (same code shape as FUN_000840d0)
+local	FUN_000853b0	param_12	src1Negate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 2 (same code shape as FUN_000840d0)
+local	FUN_000853b0	iVar15	instr	INFERRED	instruction count on entry, then the pointer to the new 0x10-byte entry (stored at ctx+0x3dc) (same code shape as FUN_000840d0)
+local	FUN_000853b0	iVar16	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_000840d0)
+local	FUN_000853b0	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_000840d0)
+local	FUN_000853b0	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_000840d0)
+local	FUN_000853b0	uVar13	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed select field (same code shape as FUN_000840d0)
+local	FUN_000853b0	uVar12	oldWord1	INFERRED	word 1 as read before packing (same code shape as FUN_000840d0)
+local	FUN_000853b0	uVar17	oldWord2	INFERRED	word 2 as read before packing (same code shape as FUN_000840d0)
+local	FUN_000853b0	uVar10	src0FileField	INFERRED	src0File & 0xf (same code shape as FUN_000840d0)
+local	FUN_000853b0	uVar11	src1FileField	INFERRED	src1File & 0xf (same code shape as FUN_000840d0)
+local	FUN_000855e0	param_1	ctx	CONFIRMED	instruction array: data +0x3c8, count +0x3cc, capacity +0x3e0 (grows by 0x20 entries of 0x10 bytes), current entry pointer +0x3dc (same code shape as FUN_000840d0)
+local	FUN_000855e0	param_2	dstFile	INFERRED	(&0xf)<<8 into word 0 of the 0x10-byte instruction (same code shape as FUN_000840d0)
+local	FUN_000855e0	param_3	dstIndex	INFERRED	(&0x7f)<<13 into word 0 (same code shape as FUN_000840d0)
+local	FUN_000855e0	param_4	dstMask	INFERRED	uint[4]: bit 0 of each element -> write-mask bits 20..23 of word 0 (same code shape as FUN_000840d0)
+local	FUN_000855e0	param_5	src0File	INFERRED	&0xf, low bits of word 1 (same code shape as FUN_000840d0)
+local	FUN_000855e0	param_6	src0Index	INFERRED	(&0xff)<<5 into word 1 (same code shape as FUN_000840d0)
+local	FUN_000855e0	param_7	src0Select	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 1 (same code shape as FUN_000840d0)
+local	FUN_000855e0	param_8	src0Negate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 1 (same code shape as FUN_000840d0)
+local	FUN_000855e0	param_9	src1File	INFERRED	&0xf, low bits of word 2 (same code shape as FUN_000840d0)
+local	FUN_000855e0	param_10	src1Index	INFERRED	(&0xff)<<5 into word 2 (same code shape as FUN_000840d0)
+local	FUN_000855e0	param_11	src1Select	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 2 (same code shape as FUN_000840d0)
+local	FUN_000855e0	param_12	src1Negate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 2 (same code shape as FUN_000840d0)
+local	FUN_000855e0	iVar15	instr	INFERRED	instruction count on entry, then the pointer to the new 0x10-byte entry (stored at ctx+0x3dc) (same code shape as FUN_000840d0)
+local	FUN_000855e0	iVar16	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_000840d0)
+local	FUN_000855e0	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_000840d0)
+local	FUN_000855e0	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_000840d0)
+local	FUN_000855e0	uVar13	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed select field (same code shape as FUN_000840d0)
+local	FUN_000855e0	uVar12	oldWord1	INFERRED	word 1 as read before packing (same code shape as FUN_000840d0)
+local	FUN_000855e0	uVar17	oldWord2	INFERRED	word 2 as read before packing (same code shape as FUN_000840d0)
+local	FUN_000855e0	uVar10	src0FileField	INFERRED	src0File & 0xf (same code shape as FUN_000840d0)
+local	FUN_000855e0	uVar11	src1FileField	INFERRED	src1File & 0xf (same code shape as FUN_000840d0)
+local	FUN_00085810	param_1	ctx	CONFIRMED	instruction array: data +0x3c8, count +0x3cc, capacity +0x3e0 (grows by 0x20 entries of 0x10 bytes), current entry pointer +0x3dc (same code shape as FUN_000840d0)
+local	FUN_00085810	param_2	dstFile	INFERRED	(&0xf)<<8 into word 0 of the 0x10-byte instruction (same code shape as FUN_000840d0)
+local	FUN_00085810	param_3	dstIndex	INFERRED	(&0x7f)<<13 into word 0 (same code shape as FUN_000840d0)
+local	FUN_00085810	param_4	dstMask	INFERRED	uint[4]: bit 0 of each element -> write-mask bits 20..23 of word 0 (same code shape as FUN_000840d0)
+local	FUN_00085810	param_5	src0File	INFERRED	&0xf, low bits of word 1 (same code shape as FUN_000840d0)
+local	FUN_00085810	param_6	src0Index	INFERRED	(&0xff)<<5 into word 1 (same code shape as FUN_000840d0)
+local	FUN_00085810	param_7	src0Select	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 1 (same code shape as FUN_000840d0)
+local	FUN_00085810	param_8	src0Negate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 1 (same code shape as FUN_000840d0)
+local	FUN_00085810	param_9	src1File	INFERRED	&0xf, low bits of word 2 (same code shape as FUN_000840d0)
+local	FUN_00085810	param_10	src1Index	INFERRED	(&0xff)<<5 into word 2 (same code shape as FUN_000840d0)
+local	FUN_00085810	param_11	src1Select	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 2 (same code shape as FUN_000840d0)
+local	FUN_00085810	param_12	src1Negate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 2 (same code shape as FUN_000840d0)
+local	FUN_00085810	iVar15	instr	INFERRED	instruction count on entry, then the pointer to the new 0x10-byte entry (stored at ctx+0x3dc) (same code shape as FUN_000840d0)
+local	FUN_00085810	iVar16	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_000840d0)
+local	FUN_00085810	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_000840d0)
+local	FUN_00085810	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_000840d0)
+local	FUN_00085810	uVar13	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed select field (same code shape as FUN_000840d0)
+local	FUN_00085810	uVar12	oldWord1	INFERRED	word 1 as read before packing (same code shape as FUN_000840d0)
+local	FUN_00085810	uVar17	oldWord2	INFERRED	word 2 as read before packing (same code shape as FUN_000840d0)
+local	FUN_00085810	uVar10	src0FileField	INFERRED	src0File & 0xf (same code shape as FUN_000840d0)
+local	FUN_00085810	uVar11	src1FileField	INFERRED	src1File & 0xf (same code shape as FUN_000840d0)
+local	FUN_000862b0	param_1	ctx	CONFIRMED	instruction array: data +0x3c8, count +0x3cc, capacity +0x3e0 (grows by 0x20 entries of 0x10 bytes), current entry pointer +0x3dc (same code shape as FUN_000840d0)
+local	FUN_000862b0	param_2	dstFile	INFERRED	(&0xf)<<8 into word 0 of the 0x10-byte instruction (same code shape as FUN_000840d0)
+local	FUN_000862b0	param_3	dstIndex	INFERRED	(&0x7f)<<13 into word 0 (same code shape as FUN_000840d0)
+local	FUN_000862b0	param_4	dstMask	INFERRED	uint[4]: bit 0 of each element -> write-mask bits 20..23 of word 0 (same code shape as FUN_000840d0)
+local	FUN_000862b0	param_5	src0File	INFERRED	&0xf, low bits of word 1 (same code shape as FUN_000840d0)
+local	FUN_000862b0	param_6	src0Index	INFERRED	(&0xff)<<5 into word 1 (same code shape as FUN_000840d0)
+local	FUN_000862b0	param_7	src0Select	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 1 (same code shape as FUN_000840d0)
+local	FUN_000862b0	param_8	src0Negate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 1 (same code shape as FUN_000840d0)
+local	FUN_000862b0	param_9	src1File	INFERRED	&0xf, low bits of word 2 (same code shape as FUN_000840d0)
+local	FUN_000862b0	param_10	src1Index	INFERRED	(&0xff)<<5 into word 2 (same code shape as FUN_000840d0)
+local	FUN_000862b0	param_11	src1Select	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 2 (same code shape as FUN_000840d0)
+local	FUN_000862b0	param_12	src1Negate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 2 (same code shape as FUN_000840d0)
+local	FUN_000862b0	iVar15	instr	INFERRED	instruction count on entry, then the pointer to the new 0x10-byte entry (stored at ctx+0x3dc) (same code shape as FUN_000840d0)
+local	FUN_000862b0	iVar16	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_000840d0)
+local	FUN_000862b0	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_000840d0)
+local	FUN_000862b0	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_000840d0)
+local	FUN_000862b0	uVar13	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed select field (same code shape as FUN_000840d0)
+local	FUN_000862b0	uVar12	oldWord1	INFERRED	word 1 as read before packing (same code shape as FUN_000840d0)
+local	FUN_000862b0	uVar17	oldWord2	INFERRED	word 2 as read before packing (same code shape as FUN_000840d0)
+local	FUN_000862b0	uVar10	src0FileField	INFERRED	src0File & 0xf (same code shape as FUN_000840d0)
+local	FUN_000862b0	uVar11	src1FileField	INFERRED	src1File & 0xf (same code shape as FUN_000840d0)
+local	FUN_000864e0	param_1	ctx	CONFIRMED	instruction array: data +0x3c8, count +0x3cc, capacity +0x3e0 (grows by 0x20 entries of 0x10 bytes), current entry pointer +0x3dc (same code shape as FUN_000840d0)
+local	FUN_000864e0	param_2	dstFile	INFERRED	(&0xf)<<8 into word 0 of the 0x10-byte instruction (same code shape as FUN_000840d0)
+local	FUN_000864e0	param_3	dstIndex	INFERRED	(&0x7f)<<13 into word 0 (same code shape as FUN_000840d0)
+local	FUN_000864e0	param_4	dstMask	INFERRED	uint[4]: bit 0 of each element -> write-mask bits 20..23 of word 0 (same code shape as FUN_000840d0)
+local	FUN_000864e0	param_5	src0File	INFERRED	&0xf, low bits of word 1 (same code shape as FUN_000840d0)
+local	FUN_000864e0	param_6	src0Index	INFERRED	(&0xff)<<5 into word 1 (same code shape as FUN_000840d0)
+local	FUN_000864e0	param_7	src0Select	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 1 (same code shape as FUN_000840d0)
+local	FUN_000864e0	param_8	src0Negate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 1 (same code shape as FUN_000840d0)
+local	FUN_000864e0	param_9	src1File	INFERRED	&0xf, low bits of word 2 (same code shape as FUN_000840d0)
+local	FUN_000864e0	param_10	src1Index	INFERRED	(&0xff)<<5 into word 2 (same code shape as FUN_000840d0)
+local	FUN_000864e0	param_11	src1Select	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 2 (same code shape as FUN_000840d0)
+local	FUN_000864e0	param_12	src1Negate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 2 (same code shape as FUN_000840d0)
+local	FUN_000864e0	iVar15	instr	INFERRED	instruction count on entry, then the pointer to the new 0x10-byte entry (stored at ctx+0x3dc) (same code shape as FUN_000840d0)
+local	FUN_000864e0	iVar16	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_000840d0)
+local	FUN_000864e0	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_000840d0)
+local	FUN_000864e0	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_000840d0)
+local	FUN_000864e0	uVar13	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed select field (same code shape as FUN_000840d0)
+local	FUN_000864e0	uVar12	oldWord1	INFERRED	word 1 as read before packing (same code shape as FUN_000840d0)
+local	FUN_000864e0	uVar17	oldWord2	INFERRED	word 2 as read before packing (same code shape as FUN_000840d0)
+local	FUN_000864e0	uVar10	src0FileField	INFERRED	src0File & 0xf (same code shape as FUN_000840d0)
+local	FUN_000864e0	uVar11	src1FileField	INFERRED	src1File & 0xf (same code shape as FUN_000840d0)
+local	FUN_00083e10	param_1	ctx	CONFIRMED	instruction array: data +0x3c8, count +0x3cc, capacity +0x3e0 (grows by 0x20 entries of 0x10 bytes), current entry pointer +0x3dc
+local	FUN_00083e10	param_2	dstFile	INFERRED	(&0xf)<<8 into word 0 of the 0x10-byte instruction
+local	FUN_00083e10	param_3	dstIndex	INFERRED	(&0x7f)<<13 into word 0
+local	FUN_00083e10	param_4	dstMask	INFERRED	uint[4]: bit 0 of each element -> write-mask bits 20..23 of word 0
+local	FUN_00083e10	param_5	src0File	INFERRED	&0xf, low bits of word 1
+local	FUN_00083e10	param_6	src0Index	INFERRED	(&0xff)<<5 into word 1
+local	FUN_00083e10	param_7	src0Select	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 1
+local	FUN_00083e10	param_8	src0Negate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 1
+local	FUN_00083e10	param_9	src1File	INFERRED	&0xf, low bits of word 2
+local	FUN_00083e10	param_10	src1Index	INFERRED	(&0xff)<<5 into word 2
+local	FUN_00083e10	param_11	src1Select	INFERRED	uint[4]: 3-bit selects of word 2
+local	FUN_00083e10	param_12	src1Negate	INFERRED	uint[4]: 1-bit negates of word 2
+local	FUN_00083e10	param_13	src2File	INFERRED	&0xf, low bits of word 3
+local	FUN_00083e10	param_14	src2Index	INFERRED	(&0xff)<<5 into word 3
+local	FUN_00083e10	param_15	src2Select	INFERRED	uint[4]: 3-bit selects of word 3
+local	FUN_00083e10	param_16	src2Negate	INFERRED	uint[4]: 1-bit negates of word 3
+local	FUN_00083e10	iVar18	instr	INFERRED	instruction count on entry, then pointer to the new 0x10-byte entry (stored at ctx+0x3dc)
+local	FUN_00083e10	iVar15	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array
+local	FUN_00083e10	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry
+local	FUN_00083e10	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across
+local	FUN_00083e10	uVar13	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed select field
+local	FUN_00083e10	uVar12	oldWord1	INFERRED	word 1 as read before packing
+local	FUN_00083e10	uVar16	oldWord2	INFERRED	word 2 as read before packing
+local	FUN_00083e10	uVar17	oldWord3	INFERRED	word 3 as read before packing
+local	FUN_00083e10	uVar10	src0FileField	INFERRED	src0File & 0xf; later reused for src2File & 0xf
+local	FUN_00083e10	uVar11	src1FileField	INFERRED	src1File & 0xf
+local	FUN_00084940	param_1	ctx	CONFIRMED	instruction array: data +0x3c8, count +0x3cc, capacity +0x3e0 (grows by 0x20 entries of 0x10 bytes), current entry pointer +0x3dc (same code shape as FUN_00083e10)
+local	FUN_00084940	param_2	dstFile	INFERRED	(&0xf)<<8 into word 0 of the 0x10-byte instruction (same code shape as FUN_00083e10)
+local	FUN_00084940	param_3	dstIndex	INFERRED	(&0x7f)<<13 into word 0 (same code shape as FUN_00083e10)
+local	FUN_00084940	param_4	dstMask	INFERRED	uint[4]: bit 0 of each element -> write-mask bits 20..23 of word 0 (same code shape as FUN_00083e10)
+local	FUN_00084940	param_5	src0File	INFERRED	&0xf, low bits of word 1 (same code shape as FUN_00083e10)
+local	FUN_00084940	param_6	src0Index	INFERRED	(&0xff)<<5 into word 1 (same code shape as FUN_00083e10)
+local	FUN_00084940	param_7	src0Select	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 1 (same code shape as FUN_00083e10)
+local	FUN_00084940	param_8	src0Negate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 1 (same code shape as FUN_00083e10)
+local	FUN_00084940	param_9	src1File	INFERRED	&0xf, low bits of word 2 (same code shape as FUN_00083e10)
+local	FUN_00084940	param_10	src1Index	INFERRED	(&0xff)<<5 into word 2 (same code shape as FUN_00083e10)
+local	FUN_00084940	param_11	src1Select	INFERRED	uint[4]: 3-bit selects of word 2 (same code shape as FUN_00083e10)
+local	FUN_00084940	param_12	src1Negate	INFERRED	uint[4]: 1-bit negates of word 2 (same code shape as FUN_00083e10)
+local	FUN_00084940	param_13	src2File	INFERRED	&0xf, low bits of word 3 (same code shape as FUN_00083e10)
+local	FUN_00084940	param_14	src2Index	INFERRED	(&0xff)<<5 into word 3 (same code shape as FUN_00083e10)
+local	FUN_00084940	param_15	src2Select	INFERRED	uint[4]: 3-bit selects of word 3 (same code shape as FUN_00083e10)
+local	FUN_00084940	param_16	src2Negate	INFERRED	uint[4]: 1-bit negates of word 3 (same code shape as FUN_00083e10)
+local	FUN_00084940	iVar18	instr	INFERRED	instruction count on entry, then pointer to the new 0x10-byte entry (stored at ctx+0x3dc) (same code shape as FUN_00083e10)
+local	FUN_00084940	iVar15	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_00083e10)
+local	FUN_00084940	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_00083e10)
+local	FUN_00084940	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_00083e10)
+local	FUN_00084940	uVar13	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed select field (same code shape as FUN_00083e10)
+local	FUN_00084940	uVar12	oldWord1	INFERRED	word 1 as read before packing (same code shape as FUN_00083e10)
+local	FUN_00084940	uVar16	oldWord2	INFERRED	word 2 as read before packing (same code shape as FUN_00083e10)
+local	FUN_00084940	uVar17	oldWord3	INFERRED	word 3 as read before packing (same code shape as FUN_00083e10)
+local	FUN_00084940	uVar10	src0FileField	INFERRED	src0File & 0xf; later reused for src2File & 0xf (same code shape as FUN_00083e10)
+local	FUN_00084940	uVar11	src1FileField	INFERRED	src1File & 0xf (same code shape as FUN_00083e10)
+local	FUN_00084c00	param_1	ctx	CONFIRMED	instruction array: data +0x3c8, count +0x3cc, capacity +0x3e0 (grows by 0x20 entries of 0x10 bytes), current entry pointer +0x3dc (same code shape as FUN_00083e10)
+local	FUN_00084c00	param_2	dstFile	INFERRED	(&0xf)<<8 into word 0 of the 0x10-byte instruction (same code shape as FUN_00083e10)
+local	FUN_00084c00	param_3	dstIndex	INFERRED	(&0x7f)<<13 into word 0 (same code shape as FUN_00083e10)
+local	FUN_00084c00	param_4	dstMask	INFERRED	uint[4]: bit 0 of each element -> write-mask bits 20..23 of word 0 (same code shape as FUN_00083e10)
+local	FUN_00084c00	param_5	src0File	INFERRED	&0xf, low bits of word 1 (same code shape as FUN_00083e10)
+local	FUN_00084c00	param_6	src0Index	INFERRED	(&0xff)<<5 into word 1 (same code shape as FUN_00083e10)
+local	FUN_00084c00	param_7	src0Select	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 1 (same code shape as FUN_00083e10)
+local	FUN_00084c00	param_8	src0Negate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 1 (same code shape as FUN_00083e10)
+local	FUN_00084c00	param_9	src1File	INFERRED	&0xf, low bits of word 2 (same code shape as FUN_00083e10)
+local	FUN_00084c00	param_10	src1Index	INFERRED	(&0xff)<<5 into word 2 (same code shape as FUN_00083e10)
+local	FUN_00084c00	param_11	src1Select	INFERRED	uint[4]: 3-bit selects of word 2 (same code shape as FUN_00083e10)
+local	FUN_00084c00	param_12	src1Negate	INFERRED	uint[4]: 1-bit negates of word 2 (same code shape as FUN_00083e10)
+local	FUN_00084c00	param_13	src2File	INFERRED	&0xf, low bits of word 3 (same code shape as FUN_00083e10)
+local	FUN_00084c00	param_14	src2Index	INFERRED	(&0xff)<<5 into word 3 (same code shape as FUN_00083e10)
+local	FUN_00084c00	param_15	src2Select	INFERRED	uint[4]: 3-bit selects of word 3 (same code shape as FUN_00083e10)
+local	FUN_00084c00	param_16	src2Negate	INFERRED	uint[4]: 1-bit negates of word 3 (same code shape as FUN_00083e10)
+local	FUN_00084c00	iVar18	instr	INFERRED	instruction count on entry, then pointer to the new 0x10-byte entry (stored at ctx+0x3dc) (same code shape as FUN_00083e10)
+local	FUN_00084c00	iVar15	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_00083e10)
+local	FUN_00084c00	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_00083e10)
+local	FUN_00084c00	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_00083e10)
+local	FUN_00084c00	uVar13	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed select field (same code shape as FUN_00083e10)
+local	FUN_00084c00	uVar12	oldWord1	INFERRED	word 1 as read before packing (same code shape as FUN_00083e10)
+local	FUN_00084c00	uVar16	oldWord2	INFERRED	word 2 as read before packing (same code shape as FUN_00083e10)
+local	FUN_00084c00	uVar17	oldWord3	INFERRED	word 3 as read before packing (same code shape as FUN_00083e10)
+local	FUN_00084c00	uVar10	src0FileField	INFERRED	src0File & 0xf; later reused for src2File & 0xf (same code shape as FUN_00083e10)
+local	FUN_00084c00	uVar11	src1FileField	INFERRED	src1File & 0xf (same code shape as FUN_00083e10)
+local	FUN_00084ec0	param_1	ctx	CONFIRMED	instruction array: data +0x3c8, count +0x3cc, capacity +0x3e0 (grows by 0x20 entries of 0x10 bytes), current entry pointer +0x3dc (same code shape as FUN_00083e10)
+local	FUN_00084ec0	param_2	dstFile	INFERRED	(&0xf)<<8 into word 0 of the 0x10-byte instruction (same code shape as FUN_00083e10)
+local	FUN_00084ec0	param_3	dstIndex	INFERRED	(&0x7f)<<13 into word 0 (same code shape as FUN_00083e10)
+local	FUN_00084ec0	param_4	dstMask	INFERRED	uint[4]: bit 0 of each element -> write-mask bits 20..23 of word 0 (same code shape as FUN_00083e10)
+local	FUN_00084ec0	param_5	src0File	INFERRED	&0xf, low bits of word 1 (same code shape as FUN_00083e10)
+local	FUN_00084ec0	param_6	src0Index	INFERRED	(&0xff)<<5 into word 1 (same code shape as FUN_00083e10)
+local	FUN_00084ec0	param_7	src0Select	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 1 (same code shape as FUN_00083e10)
+local	FUN_00084ec0	param_8	src0Negate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 1 (same code shape as FUN_00083e10)
+local	FUN_00084ec0	param_9	src1File	INFERRED	&0xf, low bits of word 2 (same code shape as FUN_00083e10)
+local	FUN_00084ec0	param_10	src1Index	INFERRED	(&0xff)<<5 into word 2 (same code shape as FUN_00083e10)
+local	FUN_00084ec0	param_11	src1Select	INFERRED	uint[4]: 3-bit selects of word 2 (same code shape as FUN_00083e10)
+local	FUN_00084ec0	param_12	src1Negate	INFERRED	uint[4]: 1-bit negates of word 2 (same code shape as FUN_00083e10)
+local	FUN_00084ec0	param_13	src2File	INFERRED	&0xf, low bits of word 3 (same code shape as FUN_00083e10)
+local	FUN_00084ec0	param_14	src2Index	INFERRED	(&0xff)<<5 into word 3 (same code shape as FUN_00083e10)
+local	FUN_00084ec0	param_15	src2Select	INFERRED	uint[4]: 3-bit selects of word 3 (same code shape as FUN_00083e10)
+local	FUN_00084ec0	param_16	src2Negate	INFERRED	uint[4]: 1-bit negates of word 3 (same code shape as FUN_00083e10)
+local	FUN_00084ec0	iVar18	instr	INFERRED	instruction count on entry, then pointer to the new 0x10-byte entry (stored at ctx+0x3dc) (same code shape as FUN_00083e10)
+local	FUN_00084ec0	iVar15	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_00083e10)
+local	FUN_00084ec0	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_00083e10)
+local	FUN_00084ec0	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_00083e10)
+local	FUN_00084ec0	uVar13	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed select field (same code shape as FUN_00083e10)
+local	FUN_00084ec0	uVar12	oldWord1	INFERRED	word 1 as read before packing (same code shape as FUN_00083e10)
+local	FUN_00084ec0	uVar16	oldWord2	INFERRED	word 2 as read before packing (same code shape as FUN_00083e10)
+local	FUN_00084ec0	uVar17	oldWord3	INFERRED	word 3 as read before packing (same code shape as FUN_00083e10)
+local	FUN_00084ec0	uVar10	src0FileField	INFERRED	src0File & 0xf; later reused for src2File & 0xf (same code shape as FUN_00083e10)
+local	FUN_00084ec0	uVar11	src1FileField	INFERRED	src1File & 0xf (same code shape as FUN_00083e10)
+local	FUN_00066640	param_1	ctx	CONFIRMED	token stream: count at ctx+0x754, capacity +0x758 (grows by 0x80 words), data +0x75c; allocator vtable at *(ctx+0x3d4) (+0xc allocate, +0x18 free)
+local	FUN_00066640	param_2	dstFile	INFERRED	low 6 bits of the destination operand header word (<<16); 0x12/0x13 force the extended-word flag
+local	FUN_00066640	param_3	dstIndex	INFERRED	low 16 bits of the destination operand header word
+local	FUN_00066640	param_4	dstMask	INFERRED	int[4]: each nonzero element sets one write-mask bit (1,4,0x10,0x40) in the extended word
+local	FUN_00066640	param_5	srcFile	INFERRED	low 6 bits of the source header word (<<16)
+local	FUN_00066640	param_6	srcIndex	INFERRED	low 16 bits of the source header word
+local	FUN_00066640	param_7	srcSelect	INFERRED	uint[4]: 3-bit component selects packed at bits 0,4,8,12
+local	FUN_00066640	param_8	srcNegate	INFERRED	uint[4]: 1-bit negates packed at bits 3,7,11,15
+local	FUN_00066640	puVar16	tokenCount	CONFIRMED	&ctx[0x754/4]: number of words in the token stream
+local	FUN_00066640	uVar12	dstHeader	INFERRED	(dstFile&0x3f)<<16 | dstIndex&0xffff; 0x400000 = extended word follows
+local	FUN_00066640	uVar13	dstMaskWord	INFERRED	extended destination word (write mask, or 0x55 for file 0x12/0x13)
+local	FUN_00066640	uVar11	srcHeader	INFERRED	(srcFile&0x3f)<<16 | srcIndex&0xffff
+local	FUN_00066640	uVar15	srcSwizzleWord	INFERRED	extended word packing srcSelect/srcNegate
+local	FUN_00066640	uVar1	tokenIndex	INFERRED	current write index = *tokenCount; earlier reused for a select element
+local	FUN_00066640	uVar4	newStorage	CONFIRMED	storage returned by the allocator slot (+0xc) when the stream grows
+local	FUN_0006c7c0	param_1	ctx	CONFIRMED	token stream: count at ctx+0x754, capacity +0x758 (grows by 0x80 words), data +0x75c; allocator vtable at *(ctx+0x3d4) (+0xc allocate, +0x18 free) (same code shape as FUN_00066640)
+local	FUN_0006c7c0	param_2	dstFile	INFERRED	low 6 bits of the destination operand header word (<<16); 0x12/0x13 force the extended-word flag (same code shape as FUN_00066640)
+local	FUN_0006c7c0	param_3	dstIndex	INFERRED	low 16 bits of the destination operand header word (same code shape as FUN_00066640)
+local	FUN_0006c7c0	param_4	dstMask	INFERRED	int[4]: each nonzero element sets one write-mask bit (1,4,0x10,0x40) in the extended word (same code shape as FUN_00066640)
+local	FUN_0006c7c0	param_5	srcFile	INFERRED	low 6 bits of the source header word (<<16) (same code shape as FUN_00066640)
+local	FUN_0006c7c0	param_6	srcIndex	INFERRED	low 16 bits of the source header word (same code shape as FUN_00066640)
+local	FUN_0006c7c0	param_7	srcSelect	INFERRED	uint[4]: 3-bit component selects packed at bits 0,4,8,12 (same code shape as FUN_00066640)
+local	FUN_0006c7c0	param_8	srcNegate	INFERRED	uint[4]: 1-bit negates packed at bits 3,7,11,15 (same code shape as FUN_00066640)
+local	FUN_0006c7c0	puVar16	tokenCount	CONFIRMED	&ctx[0x754/4]: number of words in the token stream (same code shape as FUN_00066640)
+local	FUN_0006c7c0	uVar12	dstHeader	INFERRED	(dstFile&0x3f)<<16 | dstIndex&0xffff; 0x400000 = extended word follows (same code shape as FUN_00066640)
+local	FUN_0006c7c0	uVar13	dstMaskWord	INFERRED	extended destination word (write mask, or 0x55 for file 0x12/0x13) (same code shape as FUN_00066640)
+local	FUN_0006c7c0	uVar11	srcHeader	INFERRED	(srcFile&0x3f)<<16 | srcIndex&0xffff (same code shape as FUN_00066640)
+local	FUN_0006c7c0	uVar15	srcSwizzleWord	INFERRED	extended word packing srcSelect/srcNegate (same code shape as FUN_00066640)
+local	FUN_0006c7c0	uVar1	tokenIndex	INFERRED	current write index = *tokenCount; earlier reused for a select element (same code shape as FUN_00066640)
+local	FUN_0006c7c0	uVar4	newStorage	CONFIRMED	storage returned by the allocator slot (+0xc) when the stream grows (same code shape as FUN_00066640)
+local	FUN_0006cd00	param_1	ctx	CONFIRMED	token stream: count at ctx+0x754, capacity +0x758 (grows by 0x80 words), data +0x75c; allocator vtable at *(ctx+0x3d4) (+0xc allocate, +0x18 free) (same code shape as FUN_00066640)
+local	FUN_0006cd00	param_2	dstFile	INFERRED	low 6 bits of the destination operand header word (<<16); 0x12/0x13 force the extended-word flag (same code shape as FUN_00066640)
+local	FUN_0006cd00	param_3	dstIndex	INFERRED	low 16 bits of the destination operand header word (same code shape as FUN_00066640)
+local	FUN_0006cd00	param_4	dstMask	INFERRED	int[4]: each nonzero element sets one write-mask bit (1,4,0x10,0x40) in the extended word (same code shape as FUN_00066640)
+local	FUN_0006cd00	param_5	srcFile	INFERRED	low 6 bits of the source header word (<<16) (same code shape as FUN_00066640)
+local	FUN_0006cd00	param_6	srcIndex	INFERRED	low 16 bits of the source header word (same code shape as FUN_00066640)
+local	FUN_0006cd00	param_7	srcSelect	INFERRED	uint[4]: 3-bit component selects packed at bits 0,4,8,12 (same code shape as FUN_00066640)
+local	FUN_0006cd00	param_8	srcNegate	INFERRED	uint[4]: 1-bit negates packed at bits 3,7,11,15 (same code shape as FUN_00066640)
+local	FUN_0006cd00	puVar16	tokenCount	CONFIRMED	&ctx[0x754/4]: number of words in the token stream (same code shape as FUN_00066640)
+local	FUN_0006cd00	uVar12	dstHeader	INFERRED	(dstFile&0x3f)<<16 | dstIndex&0xffff; 0x400000 = extended word follows (same code shape as FUN_00066640)
+local	FUN_0006cd00	uVar13	dstMaskWord	INFERRED	extended destination word (write mask, or 0x55 for file 0x12/0x13) (same code shape as FUN_00066640)
+local	FUN_0006cd00	uVar11	srcHeader	INFERRED	(srcFile&0x3f)<<16 | srcIndex&0xffff (same code shape as FUN_00066640)
+local	FUN_0006cd00	uVar15	srcSwizzleWord	INFERRED	extended word packing srcSelect/srcNegate (same code shape as FUN_00066640)
+local	FUN_0006cd00	uVar1	tokenIndex	INFERRED	current write index = *tokenCount; earlier reused for a select element (same code shape as FUN_00066640)
+local	FUN_0006cd00	uVar4	newStorage	CONFIRMED	storage returned by the allocator slot (+0xc) when the stream grows (same code shape as FUN_00066640)
+local	FUN_0006d240	param_1	ctx	CONFIRMED	token stream: count at ctx+0x754, capacity +0x758 (grows by 0x80 words), data +0x75c; allocator vtable at *(ctx+0x3d4) (+0xc allocate, +0x18 free) (same code shape as FUN_00066640)
+local	FUN_0006d240	param_2	dstFile	INFERRED	low 6 bits of the destination operand header word (<<16); 0x12/0x13 force the extended-word flag (same code shape as FUN_00066640)
+local	FUN_0006d240	param_3	dstIndex	INFERRED	low 16 bits of the destination operand header word (same code shape as FUN_00066640)
+local	FUN_0006d240	param_4	dstMask	INFERRED	int[4]: each nonzero element sets one write-mask bit (1,4,0x10,0x40) in the extended word (same code shape as FUN_00066640)
+local	FUN_0006d240	param_5	srcFile	INFERRED	low 6 bits of the source header word (<<16) (same code shape as FUN_00066640)
+local	FUN_0006d240	param_6	srcIndex	INFERRED	low 16 bits of the source header word (same code shape as FUN_00066640)
+local	FUN_0006d240	param_7	srcSelect	INFERRED	uint[4]: 3-bit component selects packed at bits 0,4,8,12 (same code shape as FUN_00066640)
+local	FUN_0006d240	param_8	srcNegate	INFERRED	uint[4]: 1-bit negates packed at bits 3,7,11,15 (same code shape as FUN_00066640)
+local	FUN_0006d240	puVar16	tokenCount	CONFIRMED	&ctx[0x754/4]: number of words in the token stream (same code shape as FUN_00066640)
+local	FUN_0006d240	uVar12	dstHeader	INFERRED	(dstFile&0x3f)<<16 | dstIndex&0xffff; 0x400000 = extended word follows (same code shape as FUN_00066640)
+local	FUN_0006d240	uVar13	dstMaskWord	INFERRED	extended destination word (write mask, or 0x55 for file 0x12/0x13) (same code shape as FUN_00066640)
+local	FUN_0006d240	uVar11	srcHeader	INFERRED	(srcFile&0x3f)<<16 | srcIndex&0xffff (same code shape as FUN_00066640)
+local	FUN_0006d240	uVar15	srcSwizzleWord	INFERRED	extended word packing srcSelect/srcNegate (same code shape as FUN_00066640)
+local	FUN_0006d240	uVar1	tokenIndex	INFERRED	current write index = *tokenCount; earlier reused for a select element (same code shape as FUN_00066640)
+local	FUN_0006d240	uVar4	newStorage	CONFIRMED	storage returned by the allocator slot (+0xc) when the stream grows (same code shape as FUN_00066640)
+local	FUN_0006d780	param_1	ctx	CONFIRMED	token stream: count at ctx+0x754, capacity +0x758 (grows by 0x80 words), data +0x75c; allocator vtable at *(ctx+0x3d4) (+0xc allocate, +0x18 free) (same code shape as FUN_00066640)
+local	FUN_0006d780	param_2	dstFile	INFERRED	low 6 bits of the destination operand header word (<<16); 0x12/0x13 force the extended-word flag (same code shape as FUN_00066640)
+local	FUN_0006d780	param_3	dstIndex	INFERRED	low 16 bits of the destination operand header word (same code shape as FUN_00066640)
+local	FUN_0006d780	param_4	dstMask	INFERRED	int[4]: each nonzero element sets one write-mask bit (1,4,0x10,0x40) in the extended word (same code shape as FUN_00066640)
+local	FUN_0006d780	param_5	srcFile	INFERRED	low 6 bits of the source header word (<<16) (same code shape as FUN_00066640)
+local	FUN_0006d780	param_6	srcIndex	INFERRED	low 16 bits of the source header word (same code shape as FUN_00066640)
+local	FUN_0006d780	param_7	srcSelect	INFERRED	uint[4]: 3-bit component selects packed at bits 0,4,8,12 (same code shape as FUN_00066640)
+local	FUN_0006d780	param_8	srcNegate	INFERRED	uint[4]: 1-bit negates packed at bits 3,7,11,15 (same code shape as FUN_00066640)
+local	FUN_0006d780	puVar16	tokenCount	CONFIRMED	&ctx[0x754/4]: number of words in the token stream (same code shape as FUN_00066640)
+local	FUN_0006d780	uVar12	dstHeader	INFERRED	(dstFile&0x3f)<<16 | dstIndex&0xffff; 0x400000 = extended word follows (same code shape as FUN_00066640)
+local	FUN_0006d780	uVar13	dstMaskWord	INFERRED	extended destination word (write mask, or 0x55 for file 0x12/0x13) (same code shape as FUN_00066640)
+local	FUN_0006d780	uVar11	srcHeader	INFERRED	(srcFile&0x3f)<<16 | srcIndex&0xffff (same code shape as FUN_00066640)
+local	FUN_0006d780	uVar15	srcSwizzleWord	INFERRED	extended word packing srcSelect/srcNegate (same code shape as FUN_00066640)
+local	FUN_0006d780	uVar1	tokenIndex	INFERRED	current write index = *tokenCount; earlier reused for a select element (same code shape as FUN_00066640)
+local	FUN_0006d780	uVar4	newStorage	CONFIRMED	storage returned by the allocator slot (+0xc) when the stream grows (same code shape as FUN_00066640)
+local	FUN_00085a40	param_1	ctx	CONFIRMED	instruction array: data +0x3c8, count +0x3cc, capacity +0x3e0 (grows by 0x20 entries of 0x10 bytes), current entry pointer +0x3dc
+local	FUN_00085a40	param_2	dstFile	INFERRED	(&0xf)<<8 into word 0; byte 3 of word 0 is the opcode constant stored first
+local	FUN_00085a40	param_3	dstIndex	INFERRED	(&0x7f)<<13 into word 0
+local	FUN_00085a40	param_4	dstMask	INFERRED	uint[4]: bit 0 of each element -> write-mask bits 20..23 of word 0
+local	FUN_00085a40	param_5	srcFile	INFERRED	&0xf, low bits of word 1 (also replicated to words 2 and 3)
+local	FUN_00085a40	param_6	srcIndex	INFERRED	(&0xff)<<5 into word 1
+local	FUN_00085a40	param_7	srcSelect	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 1
+local	FUN_00085a40	param_8	srcNegate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 1
+local	FUN_00085a40	iVar13	instr	INFERRED	instruction count on entry, then pointer to the new 0x10-byte entry (stored at ctx+0x3dc)
+local	FUN_00085a40	iVar14	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array
+local	FUN_00085a40	iVar8	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry
+local	FUN_00085a40	uVar12	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across
+local	FUN_00085a40	uVar11	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed negate field
+local	FUN_00085a40	uVar10	oldWord1	INFERRED	word 1 as read before packing
+local	FUN_00085a40	uVar9	srcFileField	INFERRED	srcFile & 0xf
+local	FUN_00085bf0	param_1	ctx	CONFIRMED	instruction array: data +0x3c8, count +0x3cc, capacity +0x3e0 (grows by 0x20 entries of 0x10 bytes), current entry pointer +0x3dc (same code shape as FUN_00085a40)
+local	FUN_00085bf0	param_2	dstFile	INFERRED	(&0xf)<<8 into word 0; byte 3 of word 0 is the opcode constant stored first (same code shape as FUN_00085a40)
+local	FUN_00085bf0	param_3	dstIndex	INFERRED	(&0x7f)<<13 into word 0 (same code shape as FUN_00085a40)
+local	FUN_00085bf0	param_4	dstMask	INFERRED	uint[4]: bit 0 of each element -> write-mask bits 20..23 of word 0 (same code shape as FUN_00085a40)
+local	FUN_00085bf0	param_5	srcFile	INFERRED	&0xf, low bits of word 1 (also replicated to words 2 and 3) (same code shape as FUN_00085a40)
+local	FUN_00085bf0	param_6	srcIndex	INFERRED	(&0xff)<<5 into word 1 (same code shape as FUN_00085a40)
+local	FUN_00085bf0	param_7	srcSelect	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 1 (same code shape as FUN_00085a40)
+local	FUN_00085bf0	param_8	srcNegate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 1 (same code shape as FUN_00085a40)
+local	FUN_00085bf0	iVar13	instr	INFERRED	instruction count on entry, then pointer to the new 0x10-byte entry (stored at ctx+0x3dc) (same code shape as FUN_00085a40)
+local	FUN_00085bf0	iVar14	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_00085a40)
+local	FUN_00085bf0	iVar8	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_00085a40)
+local	FUN_00085bf0	uVar12	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_00085a40)
+local	FUN_00085bf0	uVar11	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed negate field (same code shape as FUN_00085a40)
+local	FUN_00085bf0	uVar10	oldWord1	INFERRED	word 1 as read before packing (same code shape as FUN_00085a40)
+local	FUN_00085bf0	uVar9	srcFileField	INFERRED	srcFile & 0xf (same code shape as FUN_00085a40)
+local	FUN_00085da0	param_1	ctx	CONFIRMED	instruction array: data +0x3c8, count +0x3cc, capacity +0x3e0 (grows by 0x20 entries of 0x10 bytes), current entry pointer +0x3dc (same code shape as FUN_00085a40)
+local	FUN_00085da0	param_2	dstFile	INFERRED	(&0xf)<<8 into word 0; byte 3 of word 0 is the opcode constant stored first (same code shape as FUN_00085a40)
+local	FUN_00085da0	param_3	dstIndex	INFERRED	(&0x7f)<<13 into word 0 (same code shape as FUN_00085a40)
+local	FUN_00085da0	param_4	dstMask	INFERRED	uint[4]: bit 0 of each element -> write-mask bits 20..23 of word 0 (same code shape as FUN_00085a40)
+local	FUN_00085da0	param_5	srcFile	INFERRED	&0xf, low bits of word 1 (also replicated to words 2 and 3) (same code shape as FUN_00085a40)
+local	FUN_00085da0	param_6	srcIndex	INFERRED	(&0xff)<<5 into word 1 (same code shape as FUN_00085a40)
+local	FUN_00085da0	param_7	srcSelect	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 1 (same code shape as FUN_00085a40)
+local	FUN_00085da0	param_8	srcNegate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 1 (same code shape as FUN_00085a40)
+local	FUN_00085da0	iVar13	instr	INFERRED	instruction count on entry, then pointer to the new 0x10-byte entry (stored at ctx+0x3dc) (same code shape as FUN_00085a40)
+local	FUN_00085da0	iVar14	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_00085a40)
+local	FUN_00085da0	iVar8	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_00085a40)
+local	FUN_00085da0	uVar12	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_00085a40)
+local	FUN_00085da0	uVar11	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed negate field (same code shape as FUN_00085a40)
+local	FUN_00085da0	uVar10	oldWord1	INFERRED	word 1 as read before packing (same code shape as FUN_00085a40)
+local	FUN_00085da0	uVar9	srcFileField	INFERRED	srcFile & 0xf (same code shape as FUN_00085a40)
+local	FUN_00085f50	param_1	ctx	CONFIRMED	instruction array: data +0x3c8, count +0x3cc, capacity +0x3e0 (grows by 0x20 entries of 0x10 bytes), current entry pointer +0x3dc (same code shape as FUN_00085a40)
+local	FUN_00085f50	param_2	dstFile	INFERRED	(&0xf)<<8 into word 0; byte 3 of word 0 is the opcode constant stored first (same code shape as FUN_00085a40)
+local	FUN_00085f50	param_3	dstIndex	INFERRED	(&0x7f)<<13 into word 0 (same code shape as FUN_00085a40)
+local	FUN_00085f50	param_4	dstMask	INFERRED	uint[4]: bit 0 of each element -> write-mask bits 20..23 of word 0 (same code shape as FUN_00085a40)
+local	FUN_00085f50	param_5	srcFile	INFERRED	&0xf, low bits of word 1 (also replicated to words 2 and 3) (same code shape as FUN_00085a40)
+local	FUN_00085f50	param_6	srcIndex	INFERRED	(&0xff)<<5 into word 1 (same code shape as FUN_00085a40)
+local	FUN_00085f50	param_7	srcSelect	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 1 (same code shape as FUN_00085a40)
+local	FUN_00085f50	param_8	srcNegate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 1 (same code shape as FUN_00085a40)
+local	FUN_00085f50	iVar13	instr	INFERRED	instruction count on entry, then pointer to the new 0x10-byte entry (stored at ctx+0x3dc) (same code shape as FUN_00085a40)
+local	FUN_00085f50	iVar14	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_00085a40)
+local	FUN_00085f50	iVar8	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_00085a40)
+local	FUN_00085f50	uVar12	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_00085a40)
+local	FUN_00085f50	uVar11	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed negate field (same code shape as FUN_00085a40)
+local	FUN_00085f50	uVar10	oldWord1	INFERRED	word 1 as read before packing (same code shape as FUN_00085a40)
+local	FUN_00085f50	uVar9	srcFileField	INFERRED	srcFile & 0xf (same code shape as FUN_00085a40)
+local	FUN_00086100	param_1	ctx	CONFIRMED	instruction array: data +0x3c8, count +0x3cc, capacity +0x3e0 (grows by 0x20 entries of 0x10 bytes), current entry pointer +0x3dc (same code shape as FUN_00085a40)
+local	FUN_00086100	param_2	dstFile	INFERRED	(&0xf)<<8 into word 0; byte 3 of word 0 is the opcode constant stored first (same code shape as FUN_00085a40)
+local	FUN_00086100	param_3	dstIndex	INFERRED	(&0x7f)<<13 into word 0 (same code shape as FUN_00085a40)
+local	FUN_00086100	param_4	dstMask	INFERRED	uint[4]: bit 0 of each element -> write-mask bits 20..23 of word 0 (same code shape as FUN_00085a40)
+local	FUN_00086100	param_5	srcFile	INFERRED	&0xf, low bits of word 1 (also replicated to words 2 and 3) (same code shape as FUN_00085a40)
+local	FUN_00086100	param_6	srcIndex	INFERRED	(&0xff)<<5 into word 1 (same code shape as FUN_00085a40)
+local	FUN_00086100	param_7	srcSelect	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 1 (same code shape as FUN_00085a40)
+local	FUN_00086100	param_8	srcNegate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 1 (same code shape as FUN_00085a40)
+local	FUN_00086100	iVar13	instr	INFERRED	instruction count on entry, then pointer to the new 0x10-byte entry (stored at ctx+0x3dc) (same code shape as FUN_00085a40)
+local	FUN_00086100	iVar14	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_00085a40)
+local	FUN_00086100	iVar8	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_00085a40)
+local	FUN_00086100	uVar12	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_00085a40)
+local	FUN_00086100	uVar11	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed negate field (same code shape as FUN_00085a40)
+local	FUN_00086100	uVar10	oldWord1	INFERRED	word 1 as read before packing (same code shape as FUN_00085a40)
+local	FUN_00086100	uVar9	srcFileField	INFERRED	srcFile & 0xf (same code shape as FUN_00085a40)
