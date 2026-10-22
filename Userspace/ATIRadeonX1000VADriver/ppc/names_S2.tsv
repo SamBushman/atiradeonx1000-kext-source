@@ -1,0 +1,282 @@
+# local	FUNCTION	old	new	tier	evidence
+local	FUN_000010c0	param_1	state	CONFIRMED	twin of _cxa_atexit_check_2 (identical code shape); *state = 1: the check routine ran
+local	FUN_000010e8	param_1	state	CONFIRMED	twin of FUN_000017b8 (identical code shape); *state is set to -1 when the registration call fails (same crt atexit shim as GA _cxa_atexit_check_1)
+local	FUN_000010e8	iVar1	status	CONFIRMED	twin of FUN_000017b8 (identical code shape); result of state[1](0x650, state, state) (same crt atexit shim as GA _cxa_atexit_check_1)
+local	FUN_000010e8	puStack00000018	stateHome	CONFIRMED	twin of FUN_000017b8 (identical code shape); home-slot copy of param_1 (same crt atexit shim as GA _cxa_atexit_check_1)
+local	FUN_0000122c	local_38	imageIndex	CONFIRMED	twin of _find_atexit_10_3 (identical code shape); loop index over _dyld_image_count images
+local	FUN_0000122c	local_34	imageCountFn	CONFIRMED	twin of _find_atexit_10_3 (identical code shape); filled by __dyld_func_lookup("__dyld_image_count")
+local	FUN_0000122c	local_30	imageNameFn	CONFIRMED	twin of _find_atexit_10_3 (identical code shape); __dyld_get_image_name
+local	FUN_0000122c	local_2c	imageHeaderFn	CONFIRMED	twin of _find_atexit_10_3 (identical code shape); __dyld_get_image_header
+local	FUN_0000122c	local_28	lookupSymbolFn	CONFIRMED	twin of _find_atexit_10_3 (identical code shape); __dyld_NSLookupSymbolInImage
+local	FUN_0000122c	local_24	addressOfSymbolFn	CONFIRMED	twin of _find_atexit_10_3 (identical code shape); __dyld_NSAddressOfSymbol (array of 7 words, first used)
+local	FUN_0000122c	uVar2	imageCount	CONFIRMED	twin of _find_atexit_10_3 (identical code shape); result of the image-count function
+local	FUN_00001464	iVar1	libSystemHandle	CONFIRMED	twin of _get_globals (identical code shape); _dlopen("/usr/lib/libSystem.B.dylib") result, then reused for the atexit test
+local	FUN_00001464	uVar2	symbolAddress	CONFIRMED	twin of _get_globals (identical code shape); _dlsym / _find_atexit_10_3 result stored into the globals block
+local	FUN_00001464	iVar3	checkResult	CONFIRMED	twin of _get_globals (identical code shape); _check_cxa_atexit result (-1, 0 or other)
+local	FUN_00001464	local_20	globals	CONFIRMED	twin of _get_globals (identical code shape); processwide keymgr block (calloc 0x14): +2 running flag, +3 mode, +4 routine list, +8 __cxa_atexit, +0xc __cxa_finalize, +0x10 atexit
+local	FUN_00001464	local_18	result	CONFIRMED	twin of _get_globals (identical code shape); returned globals pointer or 0
+local	FUN_00001754	param_1	globals	CONFIRMED	twin of _add_routine (identical code shape); keymgr block: +4 is the routine list head
+local	FUN_00001754	param_2	routine	CONFIRMED	twin of _add_routine (identical code shape); 3-word record {function, kind, argument}
+local	FUN_00001754	uVar1	argument	CONFIRMED	twin of _add_routine (identical code shape); routine[2]
+local	FUN_00001754	puVar2	node	CONFIRMED	twin of _add_routine (identical code shape); malloc(0x10) list node: [0] next, [1..3] routine copy
+local	FUN_00001754	iVar3	unlockResult	CONFIRMED	twin of _add_routine (identical code shape); _keymgr_set_and_unlock result
+local	FUN_00001754	uVar4	kind	CONFIRMED	twin of _add_routine (identical code shape); routine[1]
+local	FUN_00001754	iStack00000018	globalsHome	CONFIRMED	twin of _add_routine (identical code shape); home-slot copy of param_1
+local	FUN_00001754	puStack0000001c	routineHome	CONFIRMED	twin of _add_routine (identical code shape); home-slot copy of param_2
+local	FUN_00001754	local_18	status	CONFIRMED	twin of _add_routine (identical code shape); 0 or -1
+local	FUN_00001754	local_14	result	CONFIRMED	twin of _add_routine (identical code shape); returned status
+local	FUN_000018a0	param_1	globals	CONFIRMED	twin of _run_routines (identical code shape); keymgr block: +4 is the routine list head
+local	FUN_000018a0	param_2	stopNode	CONFIRMED	twin of _run_routines (identical code shape); walk stops when this node is reached
+local	FUN_000018a0	puVar1	node	CONFIRMED	twin of _run_routines (identical code shape); current list node
+local	FUN_000018a0	uVar2	kindMask	CONFIRMED	twin of _run_routines (identical code shape); 1 << node[2]: tested against 0x15 and 0x2a
+local	FUN_000018a0	a0	unlockResult	INFERRED	twin of _run_routines (identical code shape); result of the keymgr unlock, first argument register
+local	FUN_000018a0	iStack00000018	globalsHome	CONFIRMED	twin of _run_routines (identical code shape); home-slot copy of param_1, updated on re-lock
+local	FUN_000018a0	puStack0000001c	stopNodeHome	CONFIRMED	twin of _run_routines (identical code shape); home-slot copy of param_2
+local	FUN_00001a24	param_1	entry	CONFIRMED	twin of _cxa_atexit_wrapper (identical code shape); 3-word record {function, argCount selector, argument}
+local	FUN_00001a24	local_28	savedRunning	CONFIRMED	twin of _cxa_atexit_wrapper (identical code shape); previous globals+2 flag
+local	FUN_00001a24	local_24	savedList	CONFIRMED	twin of _cxa_atexit_wrapper (identical code shape); globals+4 list head at entry, the stop node for _run_routines
+local	FUN_00001a24	local_20	globals	CONFIRMED	twin of _cxa_atexit_wrapper (identical code shape); keymgr block
+local	FUN_00001a24	puStack00000018	entryHome	CONFIRMED	twin of _cxa_atexit_wrapper (identical code shape); home-slot copy of param_1
+local	FUN_00001bbc	uVar1	savedRunning	CONFIRMED	twin of _our_atexit (identical code shape); previous running flag at +2
+local	FUN_00001bbc	psVar2	globals	CONFIRMED	twin of _our_atexit (identical code shape); keymgr block
+local	FUN_00001bbc	iVar3	relocked	CONFIRMED	twin of _our_atexit (identical code shape); _run_routines result (re-locked block)
+local	FUN_00001cd8	param_1	atexit_entry	CONFIRMED	twin of FUN_000023a8 (identical code shape); 3-word record {function, argument selector, argument} (same crt atexit shim as GA _atexit_common)
+local	FUN_00001cd8	param_2	dsoHandle	INFERRED	twin of FUN_000023a8 (identical code shape); forwarded as __cxa_atexit third argument (same crt atexit shim as GA _atexit_common)
+local	FUN_00001cd8	pcVar1	registerFn	CONFIRMED	twin of FUN_000023a8 (identical code shape); globals+8 (__cxa_atexit) or +0x10 (atexit) (same crt atexit shim as GA _atexit_common)
+local	FUN_00001cd8	iVar3	atexit_globals	CONFIRMED	twin of FUN_000023a8 (identical code shape); _get_globals result, later the unlock result (same crt atexit shim as GA _atexit_common)
+local	FUN_00001cd8	a1	entryCopy	CONFIRMED	twin of FUN_000023a8 (identical code shape); malloc(0xc) copy of the entry passed to the wrapper (same crt atexit shim as GA _atexit_common)
+local	FUN_00001cd8	puStack00000018	entryHome	CONFIRMED	twin of FUN_000023a8 (identical code shape); home-slot copy of param_1 (same crt atexit shim as GA _atexit_common)
+local	FUN_00001cd8	uStack0000001c	dsoHandleHome	CONFIRMED	twin of FUN_000023a8 (identical code shape); home-slot copy of param_2 (same crt atexit shim as GA _atexit_common)
+local	FUN_00001cd8	local_18	result	CONFIRMED	twin of FUN_000023a8 (identical code shape); returned status (same crt atexit shim as GA _atexit_common)
+local	FUN_00001ff8	param_1	function	CONFIRMED	twin of ___cxa_atexit (identical code shape); stored as the first word of the entry
+local	FUN_00001ff8	param_2	argument	CONFIRMED	twin of ___cxa_atexit (identical code shape); stored as the third word
+local	FUN_00001ff8	param_3	dsoHandle	INFERRED	twin of ___cxa_atexit (identical code shape); forwarded to _atexit_common
+local	FUN_00001ff8	local_28	entryFunction	CONFIRMED	twin of ___cxa_atexit (identical code shape); entry[0]
+local	FUN_00001ff8	local_24	entryKind	CONFIRMED	twin of ___cxa_atexit (identical code shape); entry[1] = 1
+local	FUN_00001ff8	local_20	entryArgument	CONFIRMED	twin of ___cxa_atexit (identical code shape); entry[2]
+local	FUN_00001ff8	uVar1	result	CONFIRMED	twin of ___cxa_atexit (identical code shape); _atexit_common result
+local	FUN_00002078	param_1	atexit_function	CONFIRMED	twin of FUN_00002748 (identical code shape); registered function (same crt atexit shim as GA _atexit)
+local	FUN_00002078	local_28	entryFunction	CONFIRMED	twin of FUN_00002748 (identical code shape); entry[0] (same crt atexit shim as GA _atexit)
+local	FUN_00002078	local_24	entryKind	CONFIRMED	twin of FUN_00002748 (identical code shape); entry[1] = 0 (same crt atexit shim as GA _atexit)
+local	FUN_00002078	uVar1	result	CONFIRMED	twin of FUN_00002748 (identical code shape); _atexit_common result (same crt atexit shim as GA _atexit)
+local	FUN_00001160	param_1	cxaAtexitFn	CONFIRMED	same crt atexit check shim as GA _check_cxa_atexit: called as __cxa_atexit(check routine, &state, &state)
+local	FUN_00001160	param_2	cxaFinalizeFn	CONFIRMED	called with &state to run/cancel the registration
+local	FUN_00001160	iVar1	status	CONFIRMED	result of cxaAtexitFn
+local	FUN_00001160	pcStack00000018	cxaAtexitFnHome	CONFIRMED	home-slot copy of param_1
+local	FUN_00001160	pcStack0000001c	cxaFinalizeFnHome	CONFIRMED	home-slot copy of param_2
+local	FUN_00001160	local_28	state	CONFIRMED	set by the check routine when it ran
+local	FUN_00001160	local_24	cxaAtexitFnCopy	CONFIRMED	copy of param_1, adjacent to state
+local	FUN_00001160	local_18	result	CONFIRMED	returned state or -1
+local	FUN_00001694	param_1	cxaAtexitFn	CONFIRMED	same crt atexit check shim as FUN_00001160
+local	FUN_00001694	param_2	cxaFinalizeFn	CONFIRMED	called with &state to run/cancel the registration
+local	FUN_00001694	iVar1	status	CONFIRMED	result of cxaAtexitFn
+local	FUN_00001694	pcStack00000018	cxaAtexitFnHome	CONFIRMED	home-slot copy of param_1
+local	FUN_00001694	pcStack0000001c	cxaFinalizeFnHome	CONFIRMED	home-slot copy of param_2
+local	FUN_00001694	iStack_28	state	CONFIRMED	set by the check routine when it ran
+local	FUN_00001694	pcStack_24	cxaAtexitFnCopy	CONFIRMED	copy of param_1, adjacent to state
+local	FUN_00001694	iStack_18	result	CONFIRMED	returned state or -1
+local	FUN_000016d4	pcStack_34	imageCountFn	CONFIRMED	looked up as "__dyld_image_count" through FUN_000010a0 (same as _find_atexit_10_3 in GA)
+local	FUN_000016d4	pcStack_30	imageNameFn	CONFIRMED	"__dyld_get_image_name"
+local	FUN_000016d4	pcStack_2c	imageHeaderFn	CONFIRMED	"__dyld_get_image_header"
+local	FUN_000016d4	pcStack_28	lookupSymbolFn	CONFIRMED	"__dyld_NSLookupSymbolInImage"
+local	FUN_000016d4	apcStack_24	addressOfSymbolFn	CONFIRMED	"__dyld_NSAddressOfSymbol" (array: the address is the first element)
+local	FUN_000016d4	uStack_38	imageIndex	CONFIRMED	loop index over the dyld images
+local	FUN_000016d4	uVar1	imageCount	CONFIRMED	result of imageCountFn
+local	FUN_000016d4	pcVar2	imageName	CONFIRMED	result of imageNameFn compared to libSystem.B.dylib
+local	FUN_000016d4	iVar3	headerOrSymbol	INFERRED	holds the strcmp result, then the image header, then the looked-up symbol
+local	FUN_000016d4	uVar4	atexitAddress	CONFIRMED	NSAddressOfSymbol of _atexit; returned
+local	FUN_0000122c	uVar1	scratchResult	UNKNOWN	first the result of the last symbol lookup, passed through as the unused argument of imageCountFn, then reused for the image name and for the returned atexit address
+local	FUN_0000122c	iVar3	headerOrSymbol	INFERRED	holds the strcmp result, then the image header, then the looked-up symbol
+local	FUN_00001c98	param_1	globals	CONFIRMED	the keymgr process-wide atexit record (key 0xe), same as FUN_000018a0's globals
+local	FUN_00001c98	param_2	stopNode	CONFIRMED	loop stops when the list head reaches this node
+local	FUN_00001c98	puVar1	node	CONFIRMED	head of the registered-routine list (globals+4)
+local	FUN_00001c98	uVar2	kindMask	CONFIRMED	1 << node kind, tested against 0x15 / 0x2a
+local	FUN_00001c98	iStack00000018	globalsHome	CONFIRMED	home-slot copy of param_1, reloaded from the keymgr lock after each callback
+local	FUN_00001c98	puStack0000001c	stopNodeHome	CONFIRMED	home-slot copy of param_2
+local	FUN_00001fb8	param_1	globals	CONFIRMED	keymgr atexit record (key 0xe)
+local	FUN_00001fb8	param_2	entry	CONFIRMED	3-word routine descriptor copied into the new node
+local	FUN_00001fb8	uVar1	word2	CONFIRMED	entry[2]
+local	FUN_00001fb8	puVar2	node	CONFIRMED	malloc(0x10) list node linked at globals+4
+local	FUN_00001fb8	iVar3	unlockResult	CONFIRMED	keymgr unlock result
+local	FUN_00001fb8	uVar4	word1	CONFIRMED	entry[1]
+local	FUN_00001fb8	iStack00000018	globalsHome	CONFIRMED	home-slot copy of param_1
+local	FUN_00001fb8	puStack0000001c	entryHome	CONFIRMED	home-slot copy of param_2
+local	FUN_00001fb8	uStack_18	status	CONFIRMED	0 on success, -1 otherwise
+local	FUN_00001fb8	uStack_14	result	CONFIRMED	returned value
+local	FUN_00001fd8	iVar1	libSystemHandle	CONFIRMED	dlopen("/usr/lib/libSystem.B.dylib")
+local	FUN_00001fd8	uVar2	symbolAddress	CONFIRMED	result of FUN_0000122c / dlsym of __cxa_atexit, __cxa_finalize, atexit
+local	FUN_00001fd8	iVar3	checkResult	CONFIRMED	FUN_00001160's result (-1 broken, 0 working, other = old-style)
+local	FUN_00001fd8	pvStack_20	globals	CONFIRMED	the keymgr atexit record (calloc 0x14)
+local	FUN_00001fd8	pvStack_18	result	CONFIRMED	returned record or NULL
+local	FUN_00001cd8	uVar2	word2	CONFIRMED	entryHome[2] copied into the heap node
+local	FUN_00001cd8	uVar4	word1	CONFIRMED	entryHome[1] copied into the heap node
+local	FUN_00001cd8	in_r6	passThroughR6	UNKNOWN	Ghidra: unspecified register argument forwarded to the registered function
+local	FUN_00001cd8	in_r7	passThroughR7	UNKNOWN	Ghidra: unspecified register argument forwarded to the registered function
+local	FUN_00001cd8	in_r8	passThroughR8	UNKNOWN	Ghidra: unspecified register argument forwarded to the registered function
+local	FUN_00001a24	extraout_r4	r4AfterLock	UNKNOWN	Ghidra: r4 left by __keymgr_get_and_lock_processwide_ptr
+local	FUN_00001a24	extraout_r4_00	r4AfterUnlock	UNKNOWN	Ghidra: r4 left by __keymgr_set_and_unlock_processwide_ptr
+local	FUN_00001a24	in_r5	passThroughR5	UNKNOWN	Ghidra: unspecified register argument forwarded to the routine
+local	FUN_00001a24	in_r6	passThroughR6	UNKNOWN	Ghidra: unspecified register argument forwarded to the routine
+local	FUN_00001a24	in_r7	passThroughR7	UNKNOWN	Ghidra: unspecified register argument forwarded to the routine
+local	FUN_00001a24	in_r8	passThroughR8	UNKNOWN	Ghidra: unspecified register argument forwarded to the routine
+local	FUN_000018a0	in_r5	passThroughR5	UNKNOWN	Ghidra: unspecified register argument forwarded to the routine
+local	FUN_000018a0	in_r6	passThroughR6	UNKNOWN	Ghidra: unspecified register argument forwarded to the routine
+local	FUN_000018a0	in_r7	passThroughR7	UNKNOWN	Ghidra: unspecified register argument forwarded to the routine
+local	FUN_000018a0	in_r8	passThroughR8	UNKNOWN	Ghidra: unspecified register argument forwarded to the routine
+local	FUN_000020d4	param_1	atexitEntry	INFERRED	forwarded as the first argument of FUN_00001cd8 (atexit registration)
+local	FUN_000020d4	param_2	dsoHandle	INFERRED	forwarded as the dso handle argument
+local	FUN_00002058	param_1	atexitEntry	INFERRED	forwarded as the first argument of FUN_00001cd8 (atexit registration)
+local	FUN_00002058	param_2	dsoHandle	INFERRED	forwarded as the dso handle argument
+local	FUN_00001b5c	param_1	globals	INFERRED	forwarded as FUN_000018a0's globals
+local	FUN_00001b5c	param_2	stopNode	INFERRED	forwarded as FUN_000018a0's stopNode
+local	FUN_00001424	param_1	s1	CONFIRMED	strcmp argument
+local	FUN_00001424	param_2	s2	CONFIRMED	strcmp argument
+local	FUN_00001f78	param_1	size	CONFIRMED	malloc size
+local	FUN_00002c70	param_2	unused1	UNKNOWN	not used in the body
+local	FUN_00002d00	param_2	unused1	UNKNOWN	not used in the body
+local	FUN_00002078	uStack00000018	atexitFunctionHome	INFERRED	home-slot copy of the atexit_function parameter
+local	FUN_00009c80	local_68	i2dHi1	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_00009c80	uStack_64	i2dLo1	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_00009c80	local_60	i2dHi2	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_00009c80	uStack_5c	i2dLo2	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000a110	local_48	i2dHi1	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000a110	uStack_44	i2dLo1	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000a110	local_40	i2dHi2	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000a110	uStack_3c	i2dLo2	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000a4e0	local_38	i2dHi1	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000a4e0	uStack_34	i2dLo1	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000a4e0	local_30	i2dHi2	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000a4e0	uStack_2c	i2dLo2	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000aa00	local_48	i2dHi1	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000aa00	uStack_44	i2dLo1	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000aa00	local_40	i2dHi2	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000aa00	uStack_3c	i2dLo2	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_1c8	i2dHi1	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	uStack_1c4	i2dLo1	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_1c0	i2dHi2	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	iStack_1bc	i2dLo2	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_1b8	i2dHi3	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	uStack_1b4	i2dLo3	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_1b0	i2dHi4	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	uStack_1ac	i2dLo4	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_198	i2dHi5	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	uStack_194	i2dLo5	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_190	i2dHi6	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	iStack_18c	i2dLo6	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_188	i2dHi7	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	uStack_184	i2dLo7	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_180	i2dHi8	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	uStack_17c	i2dLo8	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_168	i2dHi9	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	uStack_164	i2dLo9	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_160	i2dHi10	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	uStack_15c	i2dLo10	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_158	i2dHi11	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	iStack_154	i2dLo11	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_150	i2dHi12	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	uStack_14c	i2dLo12	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_148	i2dHi13	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	uStack_144	i2dLo13	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_140	i2dHi14	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	uStack_13c	i2dLo14	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_138	i2dHi15	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	iStack_134	i2dLo15	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_130	i2dHi16	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	uStack_12c	i2dLo16	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_128	i2dHi17	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	uStack_124	i2dLo17	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_120	i2dHi18	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	uStack_11c	i2dLo18	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_118	i2dHi19	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	uStack_114	i2dLo19	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_110	i2dHi20	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	uStack_10c	i2dLo20	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_108	i2dHi21	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	uStack_104	i2dLo21	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_100	i2dHi22	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	uStack_fc	i2dLo22	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_f8	i2dHi23	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	uStack_f4	i2dLo23	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_f0	i2dHi24	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	uStack_ec	i2dLo24	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_e8	i2dHi25	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	uStack_e4	i2dLo25	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_e0	i2dHi26	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	uStack_dc	i2dLo26	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_d8	i2dHi27	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	uStack_d4	i2dLo27	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_c8	i2dHi28	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	iStack_c4	i2dLo28	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_c0	i2dHi29	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	uStack_bc	i2dLo29	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_b8	i2dHi30	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	iStack_b4	i2dLo30	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_b0	i2dHi31	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	uStack_ac	i2dLo31	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_a8	i2dHi32	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	uStack_a4	i2dLo32	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_a0	i2dHi33	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	uStack_9c	i2dLo33	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_88	i2dHi34	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	uStack_84	i2dLo34	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	local_78	i2dHi35	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	uStack_74	i2dLo35	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000b7f0	local_58	i2dHi1	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000b7f0	uStack_54	i2dLo1	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000b7f0	local_50	i2dHi2	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000b7f0	uStack_4c	i2dLo2	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000b7f0	local_48	i2dHi3	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000b7f0	uStack_44	i2dLo3	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000b7f0	local_40	i2dHi4	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000b7f0	uStack_3c	i2dLo4	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000b7f0	local_38	i2dHi5	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000b7f0	uStack_34	i2dLo5	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000b7f0	local_30	i2dHi6	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000b7f0	uStack_2c	i2dLo6	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000bbc0	local_48	i2dHi1	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000bbc0	uStack_44	i2dLo1	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000bbc0	local_40	i2dHi2	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000bbc0	uStack_3c	i2dLo2	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000cb00	local_58	i2dHi1	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000cb00	uStack_54	i2dLo1	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000cb00	local_50	i2dHi2	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000cb00	uStack_4c	i2dLo2	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000cb00	local_48	i2dHi3	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000cb00	uStack_44	i2dLo3	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000cb00	local_40	i2dHi4	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000cb00	uStack_3c	i2dLo4	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000cb00	local_38	i2dHi5	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000cb00	uStack_34	i2dLo5	CONFIRMED	int-to-float scratch: the word pair {0x43300000, x^0x80000000} is the double 2^52+x that the compiler builds to convert an int (the CONCAT44 with 4503599627370496.0 / 4503601774854144.0 subtracts the bias)
+local	FUN_0000ae80	param_1	ctx	CONFIRMED	same VA context as the other FUN_0000xxxx command builders: +0x14 io_connect_t, +0x30 last-header, +0x34 write cursor, +0x38 limit
+local	FUN_0000ae80	fparam_1	fpPassThrough	UNKNOWN	Ghidra: float register argument; receives FUN_00009ac0's result and is forwarded to FUN_0000cfe8
+local	FUN_0000ae80	fparam_2	unusedFp2	UNKNOWN	never used
+local	FUN_0000ae80	fparam_3	unusedFp3	UNKNOWN	never used
+local	FUN_0000ae80	fparam_4	unusedFp4	UNKNOWN	never used
+local	FUN_0000ae80	puVar26	cmdWrite	CONFIRMED	command-stream write cursor (ctx+0x34 advanced after each packet)
+local	FUN_0000ae80	puVar20	lastHeader	CONFIRMED	previous packet header (ctx+0x30), OR-ed with the word count when the packet is closed
+local	FUN_0000ae80	puVar19	mapMemoryType	CONFIRMED	PTR_0000f1a0 global: the memory type passed to IOConnectMapMemory
+local	FUN_0000ae80	uVar22	cmdAfterClear	CONFIRMED	FUN_000096a0's return: cursor after the 10 clear words
+local	FUN_0000ae80	iVar23	surfaceHeight	INFERRED	ctx+0x57c, compared with the clip bottom (ctx+0x128) and used as the y scale numerator
+local	FUN_0000ae80	sVar7	clipLeft	INFERRED	ctx+0x126: 0 means no clip; clip rect = {+0x126 left, +0x124 top, +0x12a right, +0x128 bottom}, tested against surfaceWidth/surfaceHeight
+local	FUN_0000ae80	sVar10	clipTop	INFERRED	ctx+0x124
+local	FUN_0000ae80	sVar25	clipRight	INFERRED	ctx+0x12a, compared with surfaceWidth (ctx+0x578)
+local	FUN_0000ae80	sVar24	clipBottom	INFERRED	ctx+0x128, compared with surfaceHeight (ctx+0x57c)
+local	FUN_0000ae80	sVar9	srcLeft	INFERRED	ctx+0x10e: scaled by surfaceWidth/ctx+0x60 into the source x range; srcRight-srcLeft-1 is the packet width
+local	FUN_0000ae80	sVar8	srcRight	INFERRED	ctx+0x112
+local	FUN_0000ae80	fVar11	srcRightScaled	INFERRED	srcRight * surfaceWidth / ctx+0x60
+local	FUN_0000ae80	fVar14	srcBottomScaled	INFERRED	ctx+0x110 * surfaceHeight / ctx+0x64
+local	FUN_0000ae80	fVar17	scaleX	INFERRED	surfaceWidth / (clipRight - clipLeft)
+local	FUN_0000ae80	fVar18	scaleY	INFERRED	surfaceHeight / (clipBottom - clipTop)
+local	FUN_0000ae80	local_1e8	srcCoordLeft	INFERRED	first word of the 4-float array passed as &local_1e8 to FUN_00009ac0 (left, right, top, bottom)
+local	FUN_0000ae80	local_1e4	srcCoordRight	INFERRED	second word of that array
+local	FUN_0000ae80	local_1e0	srcCoordTop	INFERRED	third word
+local	FUN_0000ae80	local_1dc	srcCoordBottom	INFERRED	fourth word
+local	FUN_0000ae80	local_1d8	dstOffsetLeft	INFERRED	first word of the 4-float array passed as &local_1d8 (left, right, top, bottom)
+local	FUN_0000ae80	local_1d4	dstOffsetRight	INFERRED	second word
+local	FUN_0000ae80	local_1d0	dstOffsetTop	INFERRED	third word
+local	FUN_0000ae80	local_1cc	dstOffsetBottom	INFERRED	fourth word
+local	FUN_0000ae80	local_90	d2iScratch1	CONFIRMED	(longlong)(int) float-to-int conversion scratch
+local	FUN_0000ae80	local_80	d2iScratch2	CONFIRMED	(longlong)(int) float-to-int conversion scratch
+use	FUN_0000ae80	iVar21	surfaceWidth	INFERRED	ctx+0x578, compared with the clip right (ctx+0x12a) and used as the x scale numerator	iVar21 = \*\(int \*\)\(param_1 \+ 0x578\);	iVar21 = \*\(int \*\)\(param_1 \+ 0x40\);
+use	FUN_0000ae80	iVar21	mapBase	INFERRED	ctx+0x40 after IOConnectMapMemory: base of the remapped command buffer	iVar21 = \*\(int \*\)\(param_1 \+ 0x40\);	iVar21 = 10;
+use	FUN_0000ae80	iVar21	fillCount	INFERRED	loop counter of the 10 clear words	iVar21 = 10;	

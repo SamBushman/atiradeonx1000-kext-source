@@ -3432,10 +3432,10 @@ int FUN_00009c80(param_1, param_2, param_3)
   float local_74;
   undefined4 local_70;
   float local_6c;
-  undefined4 local_68;
-  uint uStack_64;
-  undefined4 local_60;
-  uint uStack_5c;
+  undefined4 i2dHi1;
+  uint i2dLo1;
+  undefined4 i2dHi2;
+  uint i2dLo2;
   
   puVar6 = PTR_0000f1a0;
   puVar9 = *(undefined4 **)(param_1 + 0x34);
@@ -3522,14 +3522,14 @@ int FUN_00009c80(param_1, param_2, param_3)
   puVar9[5] = 0xf;
   puVar9[6] = 0x11ac;
   puVar9[7] = 0xf;
-  uStack_64 = uVar4 ^ 0x80000000;
-  uStack_5c = uVar5 ^ 0x80000000;
-  local_60 = 0x43300000;
-  local_68 = 0x43300000;
+  i2dLo1 = uVar4 ^ 0x80000000;
+  i2dLo2 = uVar5 ^ 0x80000000;
+  i2dHi2 = 0x43300000;
+  i2dHi1 = 0x43300000;
   local_70 = 0;
   local_78 = 0;
-  local_6c = (float)((double)CONCAT44(0x43300000,uStack_5c) - 4503601774854144.0);
-  local_74 = (float)((double)CONCAT44(0x43300000,uStack_64) - 4503601774854144.0);
+  local_6c = (float)((double)CONCAT44(0x43300000,i2dLo2) - 4503601774854144.0);
+  local_74 = (float)((double)CONCAT44(0x43300000,i2dLo1) - 4503601774854144.0);
   ((int (*)())FUN_00009ac0)(puVar9 + 8,0,&local_78,uVar4,uVar5);
   puVar6 = PTR_0000f1a0;
   puVar7 = *(uint **)(param_1 + 0x30);
@@ -3564,10 +3564,10 @@ int FUN_0000a110(param_1, param_2, param_3)
   float local_54;
   undefined4 local_50;
   float local_4c;
-  undefined4 local_48;
-  uint uStack_44;
-  undefined4 local_40;
-  uint uStack_3c;
+  undefined4 i2dHi1;
+  uint i2dLo1;
+  undefined4 i2dHi2;
+  uint i2dLo2;
   
   puVar2 = PTR_0000f1a0;
   puVar5 = *(undefined4 **)(param_1 + 0x34);
@@ -3634,14 +3634,14 @@ int FUN_0000a110(param_1, param_2, param_3)
   puVar5[5] = 0xf;
   puVar5[6] = 0x11ac;
   puVar5[7] = 0xf;
-  uStack_44 = uVar1 ^ 0x80000000;
-  uStack_3c = uVar8 ^ 0x80000000;
-  local_40 = 0x43300000;
-  local_48 = 0x43300000;
+  i2dLo1 = uVar1 ^ 0x80000000;
+  i2dLo2 = uVar8 ^ 0x80000000;
+  i2dHi2 = 0x43300000;
+  i2dHi1 = 0x43300000;
   local_50 = 0;
   local_58 = 0;
-  local_4c = (float)((double)CONCAT44(0x43300000,uStack_3c) - 4503601774854144.0);
-  local_54 = (float)((double)CONCAT44(0x43300000,uStack_44) - 4503601774854144.0);
+  local_4c = (float)((double)CONCAT44(0x43300000,i2dLo2) - 4503601774854144.0);
+  local_54 = (float)((double)CONCAT44(0x43300000,i2dLo1) - 4503601774854144.0);
   ((int (*)())FUN_00009ac0)(puVar5 + 8,0,&local_58,uVar1,uVar8);
   puVar2 = PTR_0000f1a0;
   puVar3 = *(uint **)(param_1 + 0x30);
@@ -3676,10 +3676,10 @@ int FUN_0000a4e0(param_1, param_2, param_3)
   float local_44;
   undefined4 local_40;
   float local_3c;
-  undefined4 local_38;
-  undefined4 uStack_34;
-  undefined4 local_30;
-  undefined4 uStack_2c;
+  undefined4 i2dHi1;
+  undefined4 i2dLo1;
+  undefined4 i2dHi2;
+  undefined4 i2dLo2;
   
   puVar1 = PTR_0000f1a0;
   puVar8 = *(undefined4 **)(param_1 + 0x34);
@@ -3766,15 +3766,15 @@ int FUN_0000a4e0(param_1, param_2, param_3)
     puVar8[10] = 0x138e;
     puVar8[0xb] = *(uint *)(param_3 + 8) >> 2 & 0x3ffe | 0xd00000;
   }
-  uStack_34 = *(undefined4 *)(param_1 + 0x578);
-  uStack_2c = *(undefined4 *)(param_1 + 0x57c);
-  local_30 = 0x43300000;
-  local_38 = 0x43300000;
+  i2dLo1 = *(undefined4 *)(param_1 + 0x578);
+  i2dLo2 = *(undefined4 *)(param_1 + 0x57c);
+  i2dHi2 = 0x43300000;
+  i2dHi1 = 0x43300000;
   local_40 = 0;
   local_48 = 0;
-  local_44 = (float)((double)CONCAT44(0x43300000,uStack_34) - 4503599627370496.0);
-  local_3c = (float)((double)CONCAT44(0x43300000,uStack_2c) - 4503599627370496.0);
-  puVar8 = (undefined4 *)((int (*)())FUN_00009ac0)(puVar8 + 0xc,0,&local_48,uStack_34,uStack_2c);
+  local_44 = (float)((double)CONCAT44(0x43300000,i2dLo1) - 4503599627370496.0);
+  local_3c = (float)((double)CONCAT44(0x43300000,i2dLo2) - 4503599627370496.0);
+  puVar8 = (undefined4 *)((int (*)())FUN_00009ac0)(puVar8 + 0xc,0,&local_48,i2dLo1,i2dLo2);
   *puVar8 = 0x5c8;
   puVar8[1] = 0x10030000;
   puVar1 = PTR_0000f1a0;
@@ -3812,10 +3812,10 @@ int FUN_0000aa00(param_1, param_2, param_3)
   float local_54;
   undefined4 local_50;
   float local_4c;
-  undefined4 local_48;
-  uint uStack_44;
-  undefined4 local_40;
-  uint uStack_3c;
+  undefined4 i2dHi1;
+  uint i2dLo1;
+  undefined4 i2dHi2;
+  uint i2dLo2;
   
   puVar2 = PTR_0000f1a0;
   puVar6 = *(undefined4 **)(param_1 + 0x34);
@@ -3892,14 +3892,14 @@ int FUN_0000aa00(param_1, param_2, param_3)
   puVar6[9] = 10;
   puVar6[10] = 0x138e;
   puVar6[0xb] = *(uint *)(param_3 + 8) >> 2 & 0x3ffe | 0xd00000;
-  uStack_44 = uVar1 ^ 0x80000000;
-  uStack_3c = uVar8 ^ 0x80000000;
-  local_40 = 0x43300000;
-  local_48 = 0x43300000;
+  i2dLo1 = uVar1 ^ 0x80000000;
+  i2dLo2 = uVar8 ^ 0x80000000;
+  i2dHi2 = 0x43300000;
+  i2dHi1 = 0x43300000;
   local_50 = 0;
   local_58 = 0;
-  local_4c = (float)((double)CONCAT44(0x43300000,uStack_3c) - 4503601774854144.0);
-  local_54 = (float)((double)CONCAT44(0x43300000,uStack_44) - 4503601774854144.0);
+  local_4c = (float)((double)CONCAT44(0x43300000,i2dLo2) - 4503601774854144.0);
+  local_54 = (float)((double)CONCAT44(0x43300000,i2dLo1) - 4503601774854144.0);
   puVar6 = (undefined4 *)((int (*)())FUN_00009ac0)(puVar6 + 0xc,0,&local_58,uVar1,uVar8);
   *puVar6 = 0x5c8;
   puVar6[1] = 0x10030000;
@@ -3921,7 +3921,7 @@ int FUN_0000aa00(param_1, param_2, param_3)
 }
 
 /* FUN_0000ae80 @ 0xae80 (2380 bytes) */
-void FUN_0000ae80(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void FUN_0000ae80(int ctx,double fpPassThrough,double unusedFp2,double unusedFp3,double unusedFp4)
 {
   float fVar1;
   float fVar2;
@@ -3929,195 +3929,197 @@ void FUN_0000ae80(int param_1,double fparam_1,double fparam_2,double fparam_3,do
   float fVar4;
   float fVar5;
   float fVar6;
-  short sVar7;
-  short sVar8;
-  short sVar9;
-  short sVar10;
-  float fVar11;
+  short clipLeft;
+  short srcRight;
+  short srcLeft;
+  short clipTop;
+  float srcRightScaled;
   float fVar12;
   float fVar13;
-  float fVar14;
+  float srcBottomScaled;
   float fVar15;
   float fVar16;
-  float fVar17;
-  float fVar18;
-  undefined *puVar19;
-  uint *puVar20;
-  int iVar21;
-  undefined4 uVar22;
-  int iVar23;
-  short sVar24;
-  short sVar25;
-  undefined4 *puVar26;
-  float local_1e8;
-  float local_1e4;
-  float local_1e0;
-  float local_1dc;
-  float local_1d8;
-  float local_1d4;
-  float local_1d0;
-  float local_1cc;
-  undefined4 local_1c8;
-  uint uStack_1c4;
-  undefined4 local_1c0;
-  int iStack_1bc;
-  undefined4 local_1b8;
-  undefined4 uStack_1b4;
-  undefined4 local_1b0;
-  uint uStack_1ac;
-  undefined4 local_198;
-  uint uStack_194;
-  undefined4 local_190;
-  int iStack_18c;
-  undefined4 local_188;
-  undefined4 uStack_184;
-  undefined4 local_180;
-  uint uStack_17c;
-  undefined4 local_168;
-  uint uStack_164;
-  undefined4 local_160;
-  uint uStack_15c;
-  undefined4 local_158;
-  int iStack_154;
-  undefined4 local_150;
-  undefined4 uStack_14c;
-  undefined4 local_148;
-  uint uStack_144;
-  undefined4 local_140;
-  uint uStack_13c;
-  undefined4 local_138;
-  int iStack_134;
-  undefined4 local_130;
-  undefined4 uStack_12c;
-  undefined4 local_128;
-  uint uStack_124;
-  undefined4 local_120;
-  uint uStack_11c;
-  undefined4 local_118;
-  uint uStack_114;
-  undefined4 local_110;
-  uint uStack_10c;
-  undefined4 local_108;
-  uint uStack_104;
-  undefined4 local_100;
-  uint uStack_fc;
-  undefined4 local_f8;
-  uint uStack_f4;
-  undefined4 local_f0;
-  uint uStack_ec;
-  undefined4 local_e8;
-  uint uStack_e4;
-  undefined4 local_e0;
-  uint uStack_dc;
-  undefined4 local_d8;
-  uint uStack_d4;
-  undefined4 local_c8;
-  int iStack_c4;
-  undefined4 local_c0;
-  uint uStack_bc;
-  undefined4 local_b8;
-  int iStack_b4;
-  undefined4 local_b0;
-  uint uStack_ac;
-  undefined4 local_a8;
-  uint uStack_a4;
-  undefined4 local_a0;
-  uint uStack_9c;
-  longlong local_90;
-  undefined4 local_88;
-  uint uStack_84;
-  longlong local_80;
-  undefined4 local_78;
-  uint uStack_74;
+  float scaleX;
+  float scaleY;
+  undefined *mapMemoryType;
+  uint *lastHeader;
+  undefined4 cmdAfterClear;
+  int surfaceHeight;
+  short clipBottom;
+  short clipRight;
+  undefined4 *cmdWrite;
+  float srcCoordLeft;
+  float srcCoordRight;
+  float srcCoordTop;
+  float srcCoordBottom;
+  float dstOffsetLeft;
+  float dstOffsetRight;
+  float dstOffsetTop;
+  float dstOffsetBottom;
+  undefined4 i2dHi1;
+  uint i2dLo1;
+  undefined4 i2dHi2;
+  int i2dLo2;
+  undefined4 i2dHi3;
+  undefined4 i2dLo3;
+  undefined4 i2dHi4;
+  uint i2dLo4;
+  undefined4 i2dHi5;
+  uint i2dLo5;
+  undefined4 i2dHi6;
+  int i2dLo6;
+  undefined4 i2dHi7;
+  undefined4 i2dLo7;
+  undefined4 i2dHi8;
+  uint i2dLo8;
+  undefined4 i2dHi9;
+  uint i2dLo9;
+  undefined4 i2dHi10;
+  uint i2dLo10;
+  undefined4 i2dHi11;
+  int i2dLo11;
+  undefined4 i2dHi12;
+  undefined4 i2dLo12;
+  undefined4 i2dHi13;
+  uint i2dLo13;
+  undefined4 i2dHi14;
+  uint i2dLo14;
+  undefined4 i2dHi15;
+  int i2dLo15;
+  undefined4 i2dHi16;
+  undefined4 i2dLo16;
+  undefined4 i2dHi17;
+  uint i2dLo17;
+  undefined4 i2dHi18;
+  uint i2dLo18;
+  undefined4 i2dHi19;
+  uint i2dLo19;
+  undefined4 i2dHi20;
+  uint i2dLo20;
+  undefined4 i2dHi21;
+  uint i2dLo21;
+  undefined4 i2dHi22;
+  uint i2dLo22;
+  undefined4 i2dHi23;
+  uint i2dLo23;
+  undefined4 i2dHi24;
+  uint i2dLo24;
+  undefined4 i2dHi25;
+  uint i2dLo25;
+  undefined4 i2dHi26;
+  uint i2dLo26;
+  undefined4 i2dHi27;
+  uint i2dLo27;
+  undefined4 i2dHi28;
+  int i2dLo28;
+  undefined4 i2dHi29;
+  uint i2dLo29;
+  undefined4 i2dHi30;
+  int i2dLo30;
+  undefined4 i2dHi31;
+  uint i2dLo31;
+  undefined4 i2dHi32;
+  uint i2dLo32;
+  undefined4 i2dHi33;
+  uint i2dLo33;
+  longlong d2iScratch1;
+  undefined4 i2dHi34;
+  uint i2dLo34;
+  longlong d2iScratch2;
+  undefined4 i2dHi35;
+  uint i2dLo35;
+  int surfaceWidth;
+  int mapBase;
+  int fillCount;
   
-  sVar7 = *(short *)(param_1 + 0x126);
-  if ((int)sVar7 == 0) {
-    iVar21 = *(int *)(param_1 + 0x578);
-    if ((*(short *)(param_1 + 0x12a) != iVar21) || (*(short *)(param_1 + 0x124) != 0)) {
-      iVar23 = *(int *)(param_1 + 0x57c);
+  clipLeft = *(short *)(ctx + 0x126);
+  if ((int)clipLeft == 0) {
+    surfaceWidth = *(int *)(ctx + 0x578);
+    if ((*(short *)(ctx + 0x12a) != surfaceWidth) || (*(short *)(ctx + 0x124) != 0)) {
+      surfaceHeight = *(int *)(ctx + 0x57c);
       goto LAB_0000b054;
     }
-    iVar23 = *(int *)(param_1 + 0x57c);
-    if (*(short *)(param_1 + 0x128) != iVar23) goto LAB_0000b054;
-    local_1c8 = 0x43300000;
-    local_1c0 = 0x43300000;
-    local_1b0 = 0x43300000;
-    local_198 = 0x43300000;
-    local_190 = 0x43300000;
-    local_180 = 0x43300000;
-    uStack_1ac = (int)*(short *)(param_1 + 0x112) ^ 0x80000000;
-    uStack_1c4 = (int)*(short *)(param_1 + 0x10e) ^ 0x80000000;
-    uStack_17c = (int)*(short *)(param_1 + 0x110) ^ 0x80000000;
-    uStack_194 = (int)*(short *)(param_1 + 0x10c) ^ 0x80000000;
-    uStack_164 = (int)*(short *)(param_1 + 0x112) - (int)*(short *)(param_1 + 0x10e) ^ 0x80000000;
-    uStack_15c = (int)*(short *)(param_1 + 0x110) - (int)*(short *)(param_1 + 0x10c) ^ 0x80000000;
-    uStack_1b4 = *(undefined4 *)(param_1 + 0x60);
-    uStack_184 = *(undefined4 *)(param_1 + 100);
-    local_1b8 = 0x43300000;
-    local_188 = 0x43300000;
-    fVar1 = (float)((double)CONCAT44(0x43300000,iVar21) - 4503599627370496.0);
-    fVar2 = (float)((double)CONCAT44(0x43300000,iVar23) - 4503599627370496.0);
-    local_1e4 = (float)((double)CONCAT44(0x43300000,uStack_1b4) - 4503599627370496.0);
-    fVar3 = (float)((double)CONCAT44(0x43300000,uStack_184) - 4503599627370496.0);
-    local_1e8 = ((float)((double)CONCAT44(0x43300000,uStack_1c4) - 4503601774854144.0) * fVar1) /
-                local_1e4;
-    local_1e4 = ((float)((double)CONCAT44(0x43300000,uStack_1ac) - 4503601774854144.0) * fVar1) /
-                local_1e4;
-    local_1e0 = ((float)((double)CONCAT44(0x43300000,uStack_194) - 4503601774854144.0) * fVar2) /
+    surfaceHeight = *(int *)(ctx + 0x57c);
+    if (*(short *)(ctx + 0x128) != surfaceHeight) goto LAB_0000b054;
+    i2dHi1 = 0x43300000;
+    i2dHi2 = 0x43300000;
+    i2dHi4 = 0x43300000;
+    i2dHi5 = 0x43300000;
+    i2dHi6 = 0x43300000;
+    i2dHi8 = 0x43300000;
+    i2dLo4 = (int)*(short *)(ctx + 0x112) ^ 0x80000000;
+    i2dLo1 = (int)*(short *)(ctx + 0x10e) ^ 0x80000000;
+    i2dLo8 = (int)*(short *)(ctx + 0x110) ^ 0x80000000;
+    i2dLo5 = (int)*(short *)(ctx + 0x10c) ^ 0x80000000;
+    i2dLo9 = (int)*(short *)(ctx + 0x112) - (int)*(short *)(ctx + 0x10e) ^ 0x80000000;
+    i2dLo10 = (int)*(short *)(ctx + 0x110) - (int)*(short *)(ctx + 0x10c) ^ 0x80000000;
+    i2dLo3 = *(undefined4 *)(ctx + 0x60);
+    i2dLo7 = *(undefined4 *)(ctx + 100);
+    i2dHi3 = 0x43300000;
+    i2dHi7 = 0x43300000;
+    fVar1 = (float)((double)CONCAT44(0x43300000,surfaceWidth) - 4503599627370496.0);
+    fVar2 = (float)((double)CONCAT44(0x43300000,surfaceHeight) - 4503599627370496.0);
+    srcCoordRight = (float)((double)CONCAT44(0x43300000,i2dLo3) - 4503599627370496.0);
+    fVar3 = (float)((double)CONCAT44(0x43300000,i2dLo7) - 4503599627370496.0);
+    srcCoordLeft = ((float)((double)CONCAT44(0x43300000,i2dLo1) - 4503601774854144.0) * fVar1) /
+                srcCoordRight;
+    srcCoordRight = ((float)((double)CONCAT44(0x43300000,i2dLo4) - 4503601774854144.0) * fVar1) /
+                srcCoordRight;
+    srcCoordTop = ((float)((double)CONCAT44(0x43300000,i2dLo5) - 4503601774854144.0) * fVar2) /
                 fVar3;
-    local_160 = 0x43300000;
-    local_168 = 0x43300000;
-    local_1d0 = 0.0;
-    local_1d8 = 0.0;
-    local_1cc = (float)((double)CONCAT44(0x43300000,uStack_15c) - 4503601774854144.0);
-    local_1d4 = (float)((double)CONCAT44(0x43300000,uStack_164) - 4503601774854144.0);
-    local_1dc = ((float)((double)CONCAT44(0x43300000,uStack_17c) - 4503601774854144.0) * fVar2) /
+    i2dHi10 = 0x43300000;
+    i2dHi9 = 0x43300000;
+    dstOffsetTop = 0.0;
+    dstOffsetLeft = 0.0;
+    dstOffsetBottom = (float)((double)CONCAT44(0x43300000,i2dLo10) - 4503601774854144.0);
+    dstOffsetRight = (float)((double)CONCAT44(0x43300000,i2dLo9) - 4503601774854144.0);
+    srcCoordBottom = ((float)((double)CONCAT44(0x43300000,i2dLo8) - 4503601774854144.0) * fVar2) /
                 fVar3;
-    iStack_1bc = iVar21;
-    iStack_18c = iVar23;
+    i2dLo2 = surfaceWidth;
+    i2dLo6 = surfaceHeight;
   }
   else {
-    iVar23 = *(int *)(param_1 + 0x57c);
-    iVar21 = *(int *)(param_1 + 0x578);
+    surfaceHeight = *(int *)(ctx + 0x57c);
+    surfaceWidth = *(int *)(ctx + 0x578);
 LAB_0000b054:
-    sVar8 = *(short *)(param_1 + 0x112);
-    local_158 = 0x43300000;
-    local_140 = 0x43300000;
-    uStack_13c = (int)sVar8 ^ 0x80000000;
-    uStack_14c = *(undefined4 *)(param_1 + 0x60);
-    uStack_114 = (int)sVar7 ^ 0x80000000;
-    local_150 = 0x43300000;
-    sVar9 = *(short *)(param_1 + 0x10e);
-    local_118 = 0x43300000;
-    local_148 = 0x43300000;
-    local_138 = 0x43300000;
-    local_128 = 0x43300000;
-    local_120 = 0x43300000;
-    uStack_124 = (int)*(short *)(param_1 + 0x10c) ^ 0x80000000;
-    uStack_144 = (int)sVar9 ^ 0x80000000;
-    uStack_11c = (int)*(short *)(param_1 + 0x110) ^ 0x80000000;
-    fVar1 = (float)((double)CONCAT44(0x43300000,iVar21) - 4503599627370496.0);
-    uStack_12c = *(undefined4 *)(param_1 + 100);
-    local_130 = 0x43300000;
-    fVar2 = (float)((double)CONCAT44(0x43300000,uStack_14c) - 4503599627370496.0);
-    fVar11 = (fVar1 * (float)((double)CONCAT44(0x43300000,uStack_13c) - 4503601774854144.0)) / fVar2
+    srcRight = *(short *)(ctx + 0x112);
+    i2dHi11 = 0x43300000;
+    i2dHi14 = 0x43300000;
+    i2dLo14 = (int)srcRight ^ 0x80000000;
+    i2dLo12 = *(undefined4 *)(ctx + 0x60);
+    i2dLo19 = (int)clipLeft ^ 0x80000000;
+    i2dHi12 = 0x43300000;
+    srcLeft = *(short *)(ctx + 0x10e);
+    i2dHi19 = 0x43300000;
+    i2dHi13 = 0x43300000;
+    i2dHi15 = 0x43300000;
+    i2dHi17 = 0x43300000;
+    i2dHi18 = 0x43300000;
+    i2dLo17 = (int)*(short *)(ctx + 0x10c) ^ 0x80000000;
+    i2dLo13 = (int)srcLeft ^ 0x80000000;
+    i2dLo18 = (int)*(short *)(ctx + 0x110) ^ 0x80000000;
+    fVar1 = (float)((double)CONCAT44(0x43300000,surfaceWidth) - 4503599627370496.0);
+    i2dLo16 = *(undefined4 *)(ctx + 100);
+    i2dHi16 = 0x43300000;
+    fVar2 = (float)((double)CONCAT44(0x43300000,i2dLo12) - 4503599627370496.0);
+    srcRightScaled = (fVar1 * (float)((double)CONCAT44(0x43300000,i2dLo14) - 4503601774854144.0)) / fVar2
     ;
-    fVar3 = (float)((double)CONCAT44(0x43300000,uStack_114) - 4503601774854144.0);
-    fVar4 = (float)((double)CONCAT44(0x43300000,iVar23) - 4503599627370496.0);
-    fVar2 = ((float)((double)CONCAT44(0x43300000,uStack_144) - 4503601774854144.0) * fVar1) / fVar2;
-    fVar1 = (float)((double)CONCAT44(0x43300000,uStack_12c) - 4503599627370496.0);
-    fVar14 = (fVar4 * (float)((double)CONCAT44(0x43300000,uStack_11c) - 4503601774854144.0)) / fVar1
+    fVar3 = (float)((double)CONCAT44(0x43300000,i2dLo19) - 4503601774854144.0);
+    fVar4 = (float)((double)CONCAT44(0x43300000,surfaceHeight) - 4503599627370496.0);
+    fVar2 = ((float)((double)CONCAT44(0x43300000,i2dLo13) - 4503601774854144.0) * fVar1) / fVar2;
+    fVar1 = (float)((double)CONCAT44(0x43300000,i2dLo16) - 4503599627370496.0);
+    srcBottomScaled = (fVar4 * (float)((double)CONCAT44(0x43300000,i2dLo18) - 4503601774854144.0)) / fVar1
     ;
-    fVar1 = ((float)((double)CONCAT44(0x43300000,uStack_124) - 4503601774854144.0) * fVar4) / fVar1;
-    iStack_154 = iVar21;
-    iStack_134 = iVar23;
-    if (fVar11 <= fVar3) goto LAB_0000b7d0;
-    if (fVar11 <= fVar3) {
-      sVar25 = *(short *)(param_1 + 0x12a);
+    fVar1 = ((float)((double)CONCAT44(0x43300000,i2dLo17) - 4503601774854144.0) * fVar4) / fVar1;
+    i2dLo11 = surfaceWidth;
+    i2dLo15 = surfaceHeight;
+    if (srcRightScaled <= fVar3) goto LAB_0000b7d0;
+    if (srcRightScaled <= fVar3) {
+      clipRight = *(short *)(ctx + 0x12a);
 LAB_0000b1e4:
-      uStack_104 = (int)sVar25 ^ 0x80000000;
-      local_108 = 0x43300000;
-      fVar4 = (float)((double)CONCAT44(0x43300000,uStack_104) - 4503601774854144.0);
+      i2dLo21 = (int)clipRight ^ 0x80000000;
+      i2dHi21 = 0x43300000;
+      fVar4 = (float)((double)CONCAT44(0x43300000,i2dLo21) - 4503601774854144.0);
       if (fVar4 <= fVar2) goto LAB_0000b7d0;
       fVar12 = fVar2;
       if (fVar2 - fVar3 < 0.0) {
@@ -4128,28 +4130,28 @@ LAB_0000b1e4:
       }
     }
     else {
-      sVar25 = *(short *)(param_1 + 0x12a);
-      local_110 = 0x43300000;
-      uStack_10c = (int)sVar25 ^ 0x80000000;
-      if ((float)((double)CONCAT44(0x43300000,uStack_10c) - 4503601774854144.0) <= fVar11)
+      clipRight = *(short *)(ctx + 0x12a);
+      i2dHi20 = 0x43300000;
+      i2dLo20 = (int)clipRight ^ 0x80000000;
+      if ((float)((double)CONCAT44(0x43300000,i2dLo20) - 4503601774854144.0) <= srcRightScaled)
       goto LAB_0000b1e4;
       fVar12 = fVar3;
-      fVar4 = fVar11;
+      fVar4 = srcRightScaled;
       if (fVar3 <= fVar2) {
         fVar12 = fVar2;
       }
     }
-    sVar10 = *(short *)(param_1 + 0x124);
-    local_100 = 0x43300000;
-    uStack_fc = (int)sVar10 ^ 0x80000000;
-    fVar3 = (float)((double)CONCAT44(0x43300000,uStack_fc) - 4503601774854144.0);
-    if (fVar14 <= fVar3) goto LAB_0000b7d0;
-    if (fVar14 <= fVar3) {
-      sVar24 = *(short *)(param_1 + 0x128);
+    clipTop = *(short *)(ctx + 0x124);
+    i2dHi22 = 0x43300000;
+    i2dLo22 = (int)clipTop ^ 0x80000000;
+    fVar3 = (float)((double)CONCAT44(0x43300000,i2dLo22) - 4503601774854144.0);
+    if (srcBottomScaled <= fVar3) goto LAB_0000b7d0;
+    if (srcBottomScaled <= fVar3) {
+      clipBottom = *(short *)(ctx + 0x128);
 LAB_0000b2b8:
-      uStack_ec = (int)sVar24 ^ 0x80000000;
-      local_f0 = 0x43300000;
-      fVar5 = (float)((double)CONCAT44(0x43300000,uStack_ec) - 4503601774854144.0);
+      i2dLo24 = (int)clipBottom ^ 0x80000000;
+      i2dHi24 = 0x43300000;
+      fVar5 = (float)((double)CONCAT44(0x43300000,i2dLo24) - 4503601774854144.0);
       if (fVar5 <= fVar1) goto LAB_0000b7d0;
       fVar15 = fVar1;
       if (fVar1 - fVar3 < 0.0) {
@@ -4160,153 +4162,153 @@ LAB_0000b2b8:
       }
     }
     else {
-      sVar24 = *(short *)(param_1 + 0x128);
-      local_f8 = 0x43300000;
-      uStack_f4 = (int)sVar24 ^ 0x80000000;
-      if ((float)((double)CONCAT44(0x43300000,uStack_f4) - 4503601774854144.0) <= fVar14)
+      clipBottom = *(short *)(ctx + 0x128);
+      i2dHi23 = 0x43300000;
+      i2dLo23 = (int)clipBottom ^ 0x80000000;
+      if ((float)((double)CONCAT44(0x43300000,i2dLo23) - 4503601774854144.0) <= srcBottomScaled)
       goto LAB_0000b2b8;
       fVar15 = fVar3;
-      fVar5 = fVar14;
+      fVar5 = srcBottomScaled;
       if (fVar3 <= fVar1) {
         fVar15 = fVar1;
       }
     }
-    uStack_bc = (int)sVar25 - (int)sVar7 ^ 0x80000000;
-    local_c8 = 0x43300000;
-    local_c0 = 0x43300000;
-    local_b8 = 0x43300000;
-    local_b0 = 0x43300000;
-    local_a8 = 0x43300000;
-    local_a0 = 0x43300000;
-    local_e8 = 0x43300000;
-    local_e0 = 0x43300000;
-    local_d8 = 0x43300000;
-    uStack_ac = (int)sVar24 - (int)sVar10 ^ 0x80000000;
-    uStack_a4 = (int)sVar25 + (int)sVar7 ^ 0x80000000;
-    uStack_9c = (int)sVar24 + (int)sVar10 ^ 0x80000000;
-    uStack_e4 = (int)sVar8 - (int)sVar9 ^ 0x80000000;
-    uStack_d4 = (int)*(short *)(param_1 + 0x110) - (int)*(short *)(param_1 + 0x10c) ^ 0x80000000;
-    uStack_dc = (int)sVar8 - (int)sVar9 ^ 0x80000000;
-    fVar3 = (float)((double)CONCAT44(0x43300000,iVar21) - 4503599627370496.0);
-    fVar6 = (float)((double)CONCAT44(0x43300000,iVar23) - 4503599627370496.0);
-    fVar17 = fVar3 / (float)((double)CONCAT44(0x43300000,uStack_bc) - 4503601774854144.0);
-    local_1d0 = (float)((double)CONCAT44(0x43300000,uStack_d4) - 4503601774854144.0);
-    fVar18 = fVar6 / (float)((double)CONCAT44(0x43300000,uStack_ac) - 4503601774854144.0);
-    fVar13 = (float)((double)CONCAT44(0x43300000,uStack_a4) - 4503601774854144.0) * 0.5;
-    fVar16 = (float)((double)CONCAT44(0x43300000,uStack_9c) - 4503601774854144.0) * 0.5;
-    local_1d8 = ((fVar12 - fVar2) / (fVar11 - fVar2)) *
-                (float)((double)CONCAT44(0x43300000,uStack_e4) - 4503601774854144.0);
-    local_1d4 = (1.0 - (fVar11 - fVar4) / (fVar11 - fVar2)) *
-                (float)((double)CONCAT44(0x43300000,uStack_dc) - 4503601774854144.0);
-    local_1cc = (1.0 - (fVar14 - fVar5) / (fVar14 - fVar1)) * local_1d0;
-    local_1d0 = ((fVar15 - fVar1) / (fVar14 - fVar1)) * local_1d0;
-    local_78 = 0x43300000;
-    local_88 = 0x43300000;
-    local_1e4 = fVar17 * (fVar4 - fVar13) + fVar13;
-    fVar13 = fVar17 * (fVar12 - fVar13) + fVar13;
-    local_1e8 = fVar13;
+    i2dLo29 = (int)clipRight - (int)clipLeft ^ 0x80000000;
+    i2dHi28 = 0x43300000;
+    i2dHi29 = 0x43300000;
+    i2dHi30 = 0x43300000;
+    i2dHi31 = 0x43300000;
+    i2dHi32 = 0x43300000;
+    i2dHi33 = 0x43300000;
+    i2dHi25 = 0x43300000;
+    i2dHi26 = 0x43300000;
+    i2dHi27 = 0x43300000;
+    i2dLo31 = (int)clipBottom - (int)clipTop ^ 0x80000000;
+    i2dLo32 = (int)clipRight + (int)clipLeft ^ 0x80000000;
+    i2dLo33 = (int)clipBottom + (int)clipTop ^ 0x80000000;
+    i2dLo25 = (int)srcRight - (int)srcLeft ^ 0x80000000;
+    i2dLo27 = (int)*(short *)(ctx + 0x110) - (int)*(short *)(ctx + 0x10c) ^ 0x80000000;
+    i2dLo26 = (int)srcRight - (int)srcLeft ^ 0x80000000;
+    fVar3 = (float)((double)CONCAT44(0x43300000,surfaceWidth) - 4503599627370496.0);
+    fVar6 = (float)((double)CONCAT44(0x43300000,surfaceHeight) - 4503599627370496.0);
+    scaleX = fVar3 / (float)((double)CONCAT44(0x43300000,i2dLo29) - 4503601774854144.0);
+    dstOffsetTop = (float)((double)CONCAT44(0x43300000,i2dLo27) - 4503601774854144.0);
+    scaleY = fVar6 / (float)((double)CONCAT44(0x43300000,i2dLo31) - 4503601774854144.0);
+    fVar13 = (float)((double)CONCAT44(0x43300000,i2dLo32) - 4503601774854144.0) * 0.5;
+    fVar16 = (float)((double)CONCAT44(0x43300000,i2dLo33) - 4503601774854144.0) * 0.5;
+    dstOffsetLeft = ((fVar12 - fVar2) / (srcRightScaled - fVar2)) *
+                (float)((double)CONCAT44(0x43300000,i2dLo25) - 4503601774854144.0);
+    dstOffsetRight = (1.0 - (srcRightScaled - fVar4) / (srcRightScaled - fVar2)) *
+                (float)((double)CONCAT44(0x43300000,i2dLo26) - 4503601774854144.0);
+    dstOffsetBottom = (1.0 - (srcBottomScaled - fVar5) / (srcBottomScaled - fVar1)) * dstOffsetTop;
+    dstOffsetTop = ((fVar15 - fVar1) / (srcBottomScaled - fVar1)) * dstOffsetTop;
+    i2dHi35 = 0x43300000;
+    i2dHi34 = 0x43300000;
+    srcCoordRight = scaleX * (fVar4 - fVar13) + fVar13;
+    fVar13 = scaleX * (fVar12 - fVar13) + fVar13;
+    srcCoordLeft = fVar13;
     if (fVar13 < 0.0) {
-      local_1e8 = 0.0;
+      srcCoordLeft = 0.0;
     }
-    uStack_84 = (uint)(int)(fVar18 * (fVar15 - fVar16) + fVar16);
-    local_90 = (longlong)(int)uStack_84;
+    i2dLo34 = (uint)(int)(scaleY * (fVar15 - fVar16) + fVar16);
+    d2iScratch1 = (longlong)(int)i2dLo34;
     if (-fVar13 < 0.0) {
-      local_1e8 = fVar13;
+      srcCoordLeft = fVar13;
     }
-    uStack_74 = (uint)(int)(fVar18 * (fVar5 - fVar16) + fVar16);
-    local_80 = (longlong)(int)uStack_74;
+    i2dLo35 = (uint)(int)(scaleY * (fVar5 - fVar16) + fVar16);
+    d2iScratch2 = (longlong)(int)i2dLo35;
     fVar1 = fVar3;
-    if (local_1e4 - fVar3 < 0.0) {
-      fVar1 = local_1e4;
+    if (srcCoordRight - fVar3 < 0.0) {
+      fVar1 = srcCoordRight;
     }
-    if (-(local_1e4 - fVar3) < 0.0) {
-      local_1e4 = fVar1;
+    if (-(srcCoordRight - fVar3) < 0.0) {
+      srcCoordRight = fVar1;
     }
-    uStack_84 = uStack_84 ^ 0x80000000;
-    uStack_74 = uStack_74 ^ 0x80000000;
-    fVar1 = (float)((double)CONCAT44(0x43300000,uStack_84) - 4503601774854144.0);
-    local_1dc = (float)((double)CONCAT44(0x43300000,uStack_74) - 4503601774854144.0);
-    local_1e0 = fVar1;
+    i2dLo34 = i2dLo34 ^ 0x80000000;
+    i2dLo35 = i2dLo35 ^ 0x80000000;
+    fVar1 = (float)((double)CONCAT44(0x43300000,i2dLo34) - 4503601774854144.0);
+    srcCoordBottom = (float)((double)CONCAT44(0x43300000,i2dLo35) - 4503601774854144.0);
+    srcCoordTop = fVar1;
     if (fVar1 < 0.0) {
-      local_1e0 = 0.0;
+      srcCoordTop = 0.0;
     }
     if (-fVar1 < 0.0) {
-      local_1e0 = fVar1;
+      srcCoordTop = fVar1;
     }
     fVar1 = fVar6;
-    if (local_1dc - fVar6 < 0.0) {
-      fVar1 = local_1dc;
+    if (srcCoordBottom - fVar6 < 0.0) {
+      fVar1 = srcCoordBottom;
     }
-    iStack_c4 = iVar21;
-    iStack_b4 = iVar23;
-    if (-(local_1dc - fVar6) < 0.0) {
-      local_1dc = fVar1;
+    i2dLo28 = surfaceWidth;
+    i2dLo30 = surfaceHeight;
+    if (-(srcCoordBottom - fVar6) < 0.0) {
+      srcCoordBottom = fVar1;
     }
   }
-  puVar26 = *(undefined4 **)(param_1 + 0x34);
-  if (*(undefined4 **)(param_1 + 0x38) <= puVar26 + 0x70) {
-    puVar20 = *(uint **)(param_1 + 0x30);
-    *puVar20 = (int)puVar26 - (int)puVar20 >> 2 | *puVar20;
-    puVar19 = PTR_0000f1a0;
-    *(undefined4 **)(param_1 + 0x30) = *(undefined4 **)(param_1 + 0x34);
-    **(undefined4 **)(param_1 + 0x34) = 0x1000000;
-    _IOConnectMapMemory(*(undefined4 *)(param_1 + 0x14),1,*(undefined4 *)puVar19,param_1 + 0x40,
-                        param_1 + 0x44,1);
-    iVar21 = *(int *)(param_1 + 0x40);
-    *(int *)(param_1 + 0x34) = iVar21 + 0x20;
-    *(int *)(param_1 + 0x30) = iVar21 + 0x1c;
-    *(int *)(param_1 + 0x38) = iVar21 + 0x20 + *(int *)(iVar21 + 0x10) * 4;
-    *(undefined4 *)(iVar21 + 0x1c) = 0;
-    puVar26 = *(undefined4 **)(param_1 + 0x34);
+  cmdWrite = *(undefined4 **)(ctx + 0x34);
+  if (*(undefined4 **)(ctx + 0x38) <= cmdWrite + 0x70) {
+    lastHeader = *(uint **)(ctx + 0x30);
+    *lastHeader = (int)cmdWrite - (int)lastHeader >> 2 | *lastHeader;
+    mapMemoryType = PTR_0000f1a0;
+    *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
+    **(undefined4 **)(ctx + 0x34) = 0x1000000;
+    _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)mapMemoryType,ctx + 0x40,
+                        ctx + 0x44,1);
+    mapBase = *(int *)(ctx + 0x40);
+    *(int *)(ctx + 0x34) = mapBase + 0x20;
+    *(int *)(ctx + 0x30) = mapBase + 0x1c;
+    *(int *)(ctx + 0x38) = mapBase + 0x20 + *(int *)(mapBase + 0x10) * 4;
+    *(undefined4 *)(mapBase + 0x1c) = 0;
+    cmdWrite = *(undefined4 **)(ctx + 0x34);
   }
-  puVar20 = *(uint **)(param_1 + 0x30);
-  *(undefined4 **)(param_1 + 0x34) = puVar26 + 0x70;
-  *puVar20 = (int)puVar26 - (int)puVar20 >> 2 | *puVar20;
-  *(undefined4 **)(param_1 + 0x30) = puVar26;
-  *puVar26 = 0xb000000;
-  puVar26[1] = 2;
-  puVar26[2] = 1;
-  puVar26 = puVar26 + 3;
-  iVar21 = 10;
+  lastHeader = *(uint **)(ctx + 0x30);
+  *(undefined4 **)(ctx + 0x34) = cmdWrite + 0x70;
+  *lastHeader = (int)cmdWrite - (int)lastHeader >> 2 | *lastHeader;
+  *(undefined4 **)(ctx + 0x30) = cmdWrite;
+  *cmdWrite = 0xb000000;
+  cmdWrite[1] = 2;
+  cmdWrite[2] = 1;
+  cmdWrite = cmdWrite + 3;
+  fillCount = 10;
   do {
-    *puVar26 = 0x80000000;
-    puVar26 = puVar26 + 1;
-    iVar21 = iVar21 + -1;
-  } while (iVar21 != 0);
-  uVar22 = ((int (*)())FUN_000096a0)(puVar26);
-  puVar26 = (undefined4 *)((int (*)())FUN_00009700)(uVar22,1);
-  *puVar26 = 0x1100;
-  puVar26[1] = 0xa92;
-  puVar26[2] = 0x1110;
-  puVar26[3] = 0;
-  puVar26[4] = 0x1120;
-  puVar26[5] = ((int)*(short *)(param_1 + 0x112) - (int)*(short *)(param_1 + 0x10e)) - 1U |
-               (((int)*(short *)(param_1 + 0x110) - (int)*(short *)(param_1 + 0x10c)) + -1) * 0x800
+    *cmdWrite = 0x80000000;
+    cmdWrite = cmdWrite + 1;
+    fillCount = fillCount + -1;
+  } while (fillCount != 0);
+  cmdAfterClear = ((int (*)())FUN_000096a0)(cmdWrite);
+  cmdWrite = (undefined4 *)((int (*)())FUN_00009700)(cmdAfterClear,1);
+  *cmdWrite = 0x1100;
+  cmdWrite[1] = 0xa92;
+  cmdWrite[2] = 0x1110;
+  cmdWrite[3] = 0;
+  cmdWrite[4] = 0x1120;
+  cmdWrite[5] = ((int)*(short *)(ctx + 0x112) - (int)*(short *)(ctx + 0x10e)) - 1U |
+               (((int)*(short *)(ctx + 0x110) - (int)*(short *)(ctx + 0x10c)) + -1) * 0x800
                | 0x80000000;
-  puVar26[6] = 0x1130;
-  puVar26[7] = 0xa60c;
-  puVar26[8] = 0x1140;
-  puVar26[9] = *(int *)(param_1 + 0x68) + -1;
-  puVar26[10] = ((unsigned char *)0x00001041U);
-  puVar26[0xb] = 1;
-  puVar26 = (undefined4 *)((int (*)())FUN_000099b0)(puVar26 + 0xc,&DAT_0000ec84,2,0,0,1);
-  *puVar26 = 0x11a9;
-  puVar26[1] = 0x1b00;
-  puVar26[2] = 0x11aa;
-  puVar26[3] = 0xf;
-  puVar26[4] = 0x11ab;
-  puVar26[5] = 0xf;
-  puVar26[6] = 0x11ac;
-  puVar26[7] = 0xf;
-  puVar26[8] = 0x1381;
-  puVar26[9] = 0x27260005;
-  fparam_1 = (double)((int (*)())FUN_00009ac0)(puVar26 + 10,&local_1d8,&local_1e8,
-                                  (int)*(short *)(param_1 + 0x112) -
-                                  (int)*(short *)(param_1 + 0x10e),
-                                  (int)*(short *)(param_1 + 0x110) -
-                                  (int)*(short *)(param_1 + 0x10c));
+  cmdWrite[6] = 0x1130;
+  cmdWrite[7] = 0xa60c;
+  cmdWrite[8] = 0x1140;
+  cmdWrite[9] = *(int *)(ctx + 0x68) + -1;
+  cmdWrite[10] = ((unsigned char *)0x00001041U);
+  cmdWrite[0xb] = 1;
+  cmdWrite = (undefined4 *)((int (*)())FUN_000099b0)(cmdWrite + 0xc,&DAT_0000ec84,2,0,0,1);
+  *cmdWrite = 0x11a9;
+  cmdWrite[1] = 0x1b00;
+  cmdWrite[2] = 0x11aa;
+  cmdWrite[3] = 0xf;
+  cmdWrite[4] = 0x11ab;
+  cmdWrite[5] = 0xf;
+  cmdWrite[6] = 0x11ac;
+  cmdWrite[7] = 0xf;
+  cmdWrite[8] = 0x1381;
+  cmdWrite[9] = 0x27260005;
+  fpPassThrough = (double)((int (*)())FUN_00009ac0)(cmdWrite + 10,&dstOffsetLeft,&srcCoordLeft,
+                                  (int)*(short *)(ctx + 0x112) -
+                                  (int)*(short *)(ctx + 0x10e),
+                                  (int)*(short *)(ctx + 0x110) -
+                                  (int)*(short *)(ctx + 0x10c));
 LAB_0000b7d0:
-  ((int (*)())FUN_0000cfe8)(fparam_1);
+  ((int (*)())FUN_0000cfe8)(fpPassThrough);
   return;
 }
 
@@ -4331,18 +4333,18 @@ int FUN_0000b7f0(param_1, param_2, param_3)
   float local_64;
   undefined4 local_60;
   float local_5c;
-  undefined4 local_58;
-  uint uStack_54;
-  undefined4 local_50;
-  uint uStack_4c;
-  undefined4 local_48;
-  uint uStack_44;
-  undefined4 local_40;
-  uint uStack_3c;
-  undefined4 local_38;
-  undefined4 uStack_34;
-  undefined4 local_30;
-  undefined4 uStack_2c;
+  undefined4 i2dHi1;
+  uint i2dLo1;
+  undefined4 i2dHi2;
+  uint i2dLo2;
+  undefined4 i2dHi3;
+  uint i2dLo3;
+  undefined4 i2dHi4;
+  uint i2dLo4;
+  undefined4 i2dHi5;
+  undefined4 i2dLo5;
+  undefined4 i2dHi6;
+  undefined4 i2dLo6;
   
   puVar6 = *(undefined4 **)(param_1 + 0x34);
   if (*(undefined4 **)(param_1 + 0x38) <= puVar6 + 0xb0) {
@@ -4406,27 +4408,27 @@ int FUN_0000b7f0(param_1, param_2, param_3)
   puVar6[5] = 0xf;
   puVar6[6] = 0x11ac;
   puVar6[7] = 0xf;
-  uStack_2c = *(undefined4 *)(param_1 + 0x57c);
-  uStack_34 = *(undefined4 *)(param_1 + 0x578);
-  local_58 = 0x43300000;
-  local_50 = 0x43300000;
-  local_48 = 0x43300000;
-  local_40 = 0x43300000;
-  local_30 = 0x43300000;
-  local_38 = 0x43300000;
-  uStack_54 = (int)*(short *)(param_1 + 0x126) ^ 0x80000000;
-  uStack_4c = (int)*(short *)(param_1 + 0x12a) ^ 0x80000000;
-  uStack_44 = (int)*(short *)(param_1 + 0x124) ^ 0x80000000;
-  uStack_3c = (int)*(short *)(param_1 + 0x128) ^ 0x80000000;
+  i2dLo6 = *(undefined4 *)(param_1 + 0x57c);
+  i2dLo5 = *(undefined4 *)(param_1 + 0x578);
+  i2dHi1 = 0x43300000;
+  i2dHi2 = 0x43300000;
+  i2dHi3 = 0x43300000;
+  i2dHi4 = 0x43300000;
+  i2dHi6 = 0x43300000;
+  i2dHi5 = 0x43300000;
+  i2dLo1 = (int)*(short *)(param_1 + 0x126) ^ 0x80000000;
+  i2dLo2 = (int)*(short *)(param_1 + 0x12a) ^ 0x80000000;
+  i2dLo3 = (int)*(short *)(param_1 + 0x124) ^ 0x80000000;
+  i2dLo4 = (int)*(short *)(param_1 + 0x128) ^ 0x80000000;
   local_60 = 0;
   local_68 = 0;
-  local_5c = (float)((double)CONCAT44(0x43300000,uStack_2c) - 4503599627370496.0);
-  local_78 = (float)((double)CONCAT44(0x43300000,uStack_54) - 4503601774854144.0);
-  local_74 = (float)((double)CONCAT44(0x43300000,uStack_4c) - 4503601774854144.0);
-  local_6c = (float)((double)CONCAT44(0x43300000,uStack_3c) - 4503601774854144.0);
-  local_70 = (float)((double)CONCAT44(0x43300000,uStack_44) - 4503601774854144.0);
-  local_64 = (float)((double)CONCAT44(0x43300000,uStack_34) - 4503599627370496.0);
-  return ((int (*)())FUN_00009ac0)(puVar6 + 8,&local_78,&local_68,uStack_34,uStack_2c);
+  local_5c = (float)((double)CONCAT44(0x43300000,i2dLo6) - 4503599627370496.0);
+  local_78 = (float)((double)CONCAT44(0x43300000,i2dLo1) - 4503601774854144.0);
+  local_74 = (float)((double)CONCAT44(0x43300000,i2dLo2) - 4503601774854144.0);
+  local_6c = (float)((double)CONCAT44(0x43300000,i2dLo4) - 4503601774854144.0);
+  local_70 = (float)((double)CONCAT44(0x43300000,i2dLo3) - 4503601774854144.0);
+  local_64 = (float)((double)CONCAT44(0x43300000,i2dLo5) - 4503599627370496.0);
+  return ((int (*)())FUN_00009ac0)(puVar6 + 8,&local_78,&local_68,i2dLo5,i2dLo6);
 }
 
 /* FUN_0000bbc0 @ 0xbbc0 (864 bytes) */
@@ -4448,10 +4450,10 @@ int FUN_0000bbc0(param_1, param_2, param_3, param_4, param_5, param_6)
   float local_54;
   undefined4 local_50;
   float local_4c;
-  undefined4 local_48;
-  uint uStack_44;
-  undefined4 local_40;
-  uint uStack_3c;
+  undefined4 i2dHi1;
+  uint i2dLo1;
+  undefined4 i2dHi2;
+  uint i2dLo2;
   
   puVar1 = PTR_0000f1a0;
   if (param_6 < 5) {
@@ -4511,14 +4513,14 @@ int FUN_0000bbc0(param_1, param_2, param_3, param_4, param_5, param_6)
   puVar5[5] = 0xf;
   puVar5[6] = 0x11ac;
   puVar5[7] = 0xf;
-  uStack_44 = uVar6 ^ 0x80000000;
-  uStack_3c = param_5 ^ 0x80000000;
-  local_40 = 0x43300000;
-  local_48 = 0x43300000;
+  i2dLo1 = uVar6 ^ 0x80000000;
+  i2dLo2 = param_5 ^ 0x80000000;
+  i2dHi2 = 0x43300000;
+  i2dHi1 = 0x43300000;
   local_50 = 0;
   local_58 = 0;
-  local_4c = (float)((double)CONCAT44(0x43300000,uStack_3c) - 4503601774854144.0);
-  local_54 = (float)((double)CONCAT44(0x43300000,uStack_44) - 4503601774854144.0);
+  local_4c = (float)((double)CONCAT44(0x43300000,i2dLo2) - 4503601774854144.0);
+  local_54 = (float)((double)CONCAT44(0x43300000,i2dLo1) - 4503601774854144.0);
   ((int (*)())FUN_00009ac0)(puVar5 + 8,0,&local_58,uVar6,param_5);
   puVar1 = PTR_0000f1a0;
   puVar3 = *(uint **)(param_1 + 0x30);
@@ -4932,38 +4934,38 @@ int FUN_0000cb00(param_1, param_2, param_3, param_4, param_5)
   float local_64;
   float local_60;
   float local_5c;
-  undefined4 local_58;
-  uint uStack_54;
-  undefined4 local_50;
-  uint uStack_4c;
-  undefined4 local_48;
-  uint uStack_44;
-  undefined4 local_40;
-  uint uStack_3c;
-  undefined4 local_38;
-  uint uStack_34;
+  undefined4 i2dHi1;
+  uint i2dLo1;
+  undefined4 i2dHi2;
+  uint i2dLo2;
+  undefined4 i2dHi3;
+  uint i2dLo3;
+  undefined4 i2dHi4;
+  uint i2dLo4;
+  undefined4 i2dHi5;
+  uint i2dLo5;
   
   puVar2 = PTR_0000f1a0;
-  local_40 = 0x43300000;
-  local_50 = 0x43300000;
-  local_58 = 0x43300000;
-  local_48 = 0x43300000;
+  i2dHi4 = 0x43300000;
+  i2dHi2 = 0x43300000;
+  i2dHi1 = 0x43300000;
+  i2dHi3 = 0x43300000;
   (*(short *)((unsigned char *)ghidra_home + 10)) = (short)param_3;
   (*(short *)((unsigned char *)ghidra_home + 6)) = (short)param_2;
   (*(short *)((unsigned char *)ghidra_home + 8)) = (short)((uint)param_3 >> 0x10);
   (*(short *)((unsigned char *)ghidra_home + 4)) = (short)((uint)param_2 >> 0x10);
   puVar6 = *(undefined4 **)(param_1 + 0x34);
-  uStack_4c = (int)(*(short *)((unsigned char *)ghidra_home + 6)) ^ 0x80000000;
-  uStack_3c = (int)(*(short *)((unsigned char *)ghidra_home + 10)) ^ 0x80000000;
-  uStack_54 = (int)(*(short *)((unsigned char *)ghidra_home + 4)) ^ 0x80000000;
-  uStack_44 = (int)(*(short *)((unsigned char *)ghidra_home + 8)) ^ 0x80000000;
+  i2dLo2 = (int)(*(short *)((unsigned char *)ghidra_home + 6)) ^ 0x80000000;
+  i2dLo4 = (int)(*(short *)((unsigned char *)ghidra_home + 10)) ^ 0x80000000;
+  i2dLo1 = (int)(*(short *)((unsigned char *)ghidra_home + 4)) ^ 0x80000000;
+  i2dLo3 = (int)(*(short *)((unsigned char *)ghidra_home + 8)) ^ 0x80000000;
   uVar3 = *(uint *)(param_1 + 0x60);
   iVar8 = *(int *)(param_1 + 100);
   uVar1 = uVar3 >> 1;
-  local_70 = (float)((double)CONCAT44(0x43300000,uStack_54) - 4503601774854144.0);
-  local_6c = (float)((double)CONCAT44(0x43300000,uStack_44) - 4503601774854144.0);
-  local_78 = (float)((double)CONCAT44(0x43300000,uStack_4c) - 4503601774854144.0) * 0.5;
-  local_74 = (float)((double)CONCAT44(0x43300000,uStack_3c) - 4503601774854144.0) * 0.5;
+  local_70 = (float)((double)CONCAT44(0x43300000,i2dLo1) - 4503601774854144.0);
+  local_6c = (float)((double)CONCAT44(0x43300000,i2dLo3) - 4503601774854144.0);
+  local_78 = (float)((double)CONCAT44(0x43300000,i2dLo2) - 4503601774854144.0) * 0.5;
+  local_74 = (float)((double)CONCAT44(0x43300000,i2dLo4) - 4503601774854144.0) * 0.5;
   (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
   (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
   local_68 = local_78;
@@ -5023,12 +5025,12 @@ int FUN_0000cb00(param_1, param_2, param_3, param_4, param_5)
   puVar6[0x13] = 0xf;
   puVar6[0x14] = ((unsigned char *)0x00001041U);
   puVar6[0x15] = 3;
-  local_38 = 0x43300000;
+  i2dHi5 = 0x43300000;
   DAT_0000f0b4 = (float)((double)CONCAT44(0x43300000,uVar1) - 4503599627370496.0);
   DAT_0000f0b8 = DAT_0000f0b4;
   DAT_0000f0bc = DAT_0000f0b4;
   DAT_0000f0c0 = DAT_0000f0b4;
-  uStack_34 = uVar1;
+  i2dLo5 = uVar1;
   puVar6 = (undefined4 *)((int (*)())FUN_000099b0)(puVar6 + 0x16,&DAT_0000eef4,9,&DAT_0000f0b4,1,4);
   *puVar6 = 0x11a9;
   puVar6[1] = 0x1b05;
