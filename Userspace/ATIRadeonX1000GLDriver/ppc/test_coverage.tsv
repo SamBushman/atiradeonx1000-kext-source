@@ -2682,7 +2682,7 @@
 0x165d3c	Scheduler__createNode	584	no	indirect call (driver context / vtable / callback)
 0x165fa8	Scheduler__findOrCreateExternalNode	720	yes	
 0x16629c	FUN_0016629c	1448	no	indirect call (driver context / vtable / callback)
-0x166844	FUN_00166844	456	yes	
+0x166844	Scheduler__copyFetchInEdge	456	yes	
 0x166a0c	FUN_00166a0c	412	yes	
 0x166ba8	Scheduler__isNodeReady	340	no	indirect call (driver context / vtable / callback)
 0x166cfc	Scheduler__freeNodes	1024	no	indirect call (driver context / vtable / callback)
@@ -2690,7 +2690,7 @@
 0x167a74	SchedNode__getLastConsumerCycle	244	yes	
 0x167b68	Scheduler__findFreeTempRegister	692	no	indirect call (driver context / vtable / callback)
 0x167e1c	Scheduler__createCopyNode	216	yes	
-0x167ef4	FUN_00167ef4	1396	no	indirect call (driver context / vtable / callback)
+0x167ef4	Scheduler__insertOperandCopy	1396	no	indirect call (driver context / vtable / callback)
 0x168468	Scheduler__addOperandDependencyEdges	2328	no	indirect call (driver context / vtable / callback)
 0x168d80	Scheduler__transformDotProduct	3548	no	indirect call (driver context / vtable / callback)
 0x169b70	Scheduler__packDotProductCandidates	700	no	indirect call (driver context / vtable / callback)
@@ -2705,7 +2705,7 @@
 0x16d538	Scheduler__tryReuseAddressRegister	1996	no	indirect call (driver context / vtable / callback)
 0x16dd04	Scheduler__tryReuseLoopIndexLoad	616	no	indirect call (driver context / vtable / callback)
 0x16df8c	Scheduler__enqueueReadyNode	536	no	indirect call (driver context / vtable / callback)
-0x16e1a4	FUN_0016e1a4	1668	no	indirect call (driver context / vtable / callback)
+0x16e1a4	Scheduler__splitAddressRegisterUses	1668	no	indirect call (driver context / vtable / callback)
 0x16e828	Scheduler__advanceCycle	1640	no	indirect call (driver context / vtable / callback)
 0x16ee90	Scheduler__onNodeReady	284	no	indirect call (driver context / vtable / callback)
 0x16ff54	Scheduler__selectNextNode	6564	no	indirect call (driver context / vtable / callback)
@@ -2950,8 +2950,8 @@
 0x188f24	KhanVs__vslot29	200	no	indirect call (driver context / vtable / callback)
 0x188fec	KhanVs__vslot28	1280	no	indirect call (driver context / vtable / callback)
 0x1894ec	KhanVs__vslot27	116	yes	
-0x189560	FUN_00189560	64	yes	
-0x1895a0	FUN_001895a0	100	yes	
+0x189560	PackState__reset	64	yes	
+0x1895a0	PackState__copy	100	yes	
 0x189604	R520SchedModel__vslot2_reset	40	yes	
 0x18962c	KhanPs__vslot31	52	no	indirect call (driver context / vtable / callback)
 0x189660	KhanPs__vslot65	152	no	indirect call (driver context / vtable / callback)
@@ -2960,8 +2960,8 @@
 0x189788	FUN_00189788	104	yes	
 0x1897f0	KhanPs__vslot66	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x1897fc	FUN_001897fc	68	yes	
-0x189840	FUN_00189840	364	no	indirect call (driver context / vtable / callback)
-0x1899ac	FUN_001899ac	568	no	indirect call (driver context / vtable / callback)
+0x189840	SchedModel__fitsConstantLimit	364	no	indirect call (driver context / vtable / callback)
+0x1899ac	SchedModel__assignConstantSelectors	568	no	indirect call (driver context / vtable / callback)
 0x189be4	R300SchedModel__vslot15	64	yes	
 0x189c24	FUN_00189c24	188	no	indirect call (driver context / vtable / callback)
 0x189ce0	FUN_00189ce0	276	no	indirect call (driver context / vtable / callback)
@@ -2976,7 +2976,7 @@
 0x18b9cc	R300SchedModel__vslot14	712	no	indirect call (driver context / vtable / callback)
 0x18bc94	FUN_0018bc94	1332	yes	
 0x18c1c8	FUN_0018c1c8	1440	yes	
-0x18c768	FUN_0018c768	140	yes	
+0x18c768	PackState__countFreeSlots	140	yes	
 0x18c7f4	FUN_0018c7f4	396	no	indirect call (driver context / vtable / callback)
 0x18c980	FUN_0018c980	1112	no	indirect call (driver context / vtable / callback)
 0x18cdd8	FUN_0018cdd8	1456	no	indirect call (driver context / vtable / callback)

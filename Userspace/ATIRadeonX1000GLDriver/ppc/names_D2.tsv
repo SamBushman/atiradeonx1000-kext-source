@@ -146,3 +146,34 @@ local	FUN_0016dd04	param_1	scheduler	INFERRED	Scheduler object (see notes_compil
 local	FUN_0016dd04	param_2	node	INFERRED	Scheduler object (see notes_compiler_scheduler.md): [0]=compiler [1]=program [2]=resourceModel [3]=threadModel [4]=block [5],[6]=node vectors
 local	FUN_0016dd04	uVar7	inst	CONFIRMED	node.+0x38
 local	FUN_0016bd70	local_5c	compilerArena	CONFIRMED	compiler arena (+0x378) used for the group record and the work vector
+local	FUN_0016e1a4	param_1	scheduler	INFERRED	Scheduler object (see notes_compiler_scheduler.md)
+local	FUN_0016e1a4	iVar13	addressLoadNode	CONFIRMED	node in scheduler[0x5c+k] whose cycle is before the current one
+local	FUN_0016e1a4	iVar15	consumerNode	INFERRED	node of the consuming instruction taken from node+0x6c
+local	FUN_0016e1a4	uVar3	clonedInst	CONFIRMED	IRInst__clone of the consumer instruction
+local	FUN_0016e1a4	iVar8	clonedNode	CONFIRMED	Scheduler__createNode result for the clone
+local	FUN_00167ef4	param_1	scheduler	INFERRED	Scheduler object (see notes_compiler_scheduler.md)
+local	FUN_00167ef4	param_2	node	INFERRED	Scheduler object (see notes_compiler_scheduler.md)
+local	FUN_00167ef4	a0	inst	CONFIRMED	node.+0x38: the instruction whose operand is copied
+local	FUN_00167ef4	iVar1	copyNode	CONFIRMED	Scheduler__createCopyNode result (returned)
+local	FUN_00166844	param_1	scheduler	INFERRED	Scheduler object (see notes_compiler_scheduler.md)
+local	FUN_00166844	param_2	fromNode	INFERRED	node whose predecessor vector (+0x44) is searched
+local	FUN_00166844	param_3	toNode	INFERRED	node that receives the copied edge
+local	FUN_00166844	piVar11	sourceEdge	CONFIRMED	predecessor edge with edge+0x1c == 1
+local	FUN_00189560	param_1	state	INFERRED	R5xx ALU packing state used by R520SchedModel canAdd/addInstruction (notes_compiler_scheduler.md section 6)
+local	FUN_001895a0	param_1	dest	INFERRED	R5xx ALU packing state used by R520SchedModel canAdd/addInstruction (notes_compiler_scheduler.md section 6)
+local	FUN_001895a0	param_2	source	INFERRED	R5xx ALU packing state used by R520SchedModel canAdd/addInstruction (notes_compiler_scheduler.md section 6)
+local	FUN_0018c768	param_1	state	INFERRED	R5xx ALU packing state used by R520SchedModel canAdd/addInstruction (notes_compiler_scheduler.md section 6)
+local	FUN_0018c768	param_2	freeCounts	INFERRED	out[0], out[1]: free slots of each triple
+local	FUN_00189840	param_1	schedModel	INFERRED	R5xx ALU packing state used by R520SchedModel canAdd/addInstruction (notes_compiler_scheduler.md section 6)
+local	FUN_00189840	param_2	instA	INFERRED	first instruction of the ALU pair
+local	FUN_00189840	param_3	instB	INFERRED	second instruction of the pair
+local	FUN_00189840	param_4	inlineLimit	INFERRED	constants that fit as inline operands
+local	FUN_00189840	param_5	otherLimit	INFERRED	additional constants allowed
+local	FUN_001899ac	param_1	schedModel	INFERRED	R5xx ALU packing state used by R520SchedModel canAdd/addInstruction (notes_compiler_scheduler.md section 6)
+local	FUN_001899ac	param_2	instA	INFERRED	R5xx ALU packing state used by R520SchedModel canAdd/addInstruction (notes_compiler_scheduler.md section 6)
+local	FUN_001899ac	param_3	instB	INFERRED	R5xx ALU packing state used by R520SchedModel canAdd/addInstruction (notes_compiler_scheduler.md section 6)
+local	FUN_001899ac	param_5	inlineLimit	INFERRED	R5xx ALU packing state used by R520SchedModel canAdd/addInstruction (notes_compiler_scheduler.md section 6)
+local	R520SchedModel__vslot3_canAddInstruction	param_1	schedModel	INFERRED	R520SchedModel: +4 state code (0 none, 1 vector used, 2 scalar used, 3 both, 4 non-ALU), +0x18..0x24 slot usage, +0x28 PackState, +0x64 first instruction of the pair
+local	R520SchedModel__vslot3_canAddInstruction	param_2	inst	CONFIRMED	instruction to test; ALU flag 0x8000 skips the check
+local	R520SchedModel__vslot4_addInstruction	param_1	schedModel	INFERRED	R520SchedModel (see canAddInstruction)
+local	R520SchedModel__vslot4_addInstruction	param_2	inst	CONFIRMED	instruction added to the current ALU word

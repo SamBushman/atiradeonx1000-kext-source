@@ -374,7 +374,7 @@ int FudoPs__createSchedModels(this, compiler)
   *modelAllocation = puVar3;
   modelAllocation[1] = 0;
   *modelAllocation = puVar1 + 8;
-  FUN_00189560(modelAllocation + 10);
+  PackState__reset(modelAllocation + 10);
   R520SchedModel__vslot2_reset(modelAllocation);
   modelAllocation[0x1a] = 0;
   *modelAllocation = PTR_DAT_001e9148 + 8;

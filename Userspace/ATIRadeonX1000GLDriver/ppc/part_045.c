@@ -389,7 +389,7 @@ int Scheduler__issueNode(scheduler, node)
   ((int (*)())Scheduler__releaseOperandsOfIssuedNode)(scheduler,node);
   iVar1 = (**(code **)(**(int **)(*scheduler + 0x30c) + 0xd4))(*(int **)(*scheduler + 0x30c));
   if ((iVar1 != 0) && ((*(uint *)(*(int *)(node + 0x38) + 0x14) & 0x1000) != 0)) {
-    ((int (*)())FUN_0016e1a4)(scheduler);
+    ((int (*)())Scheduler__splitAddressRegisterUses)(scheduler);
   }
   ((int (*)())Scheduler__updateSuccessorsAfterIssue)(scheduler,node);
   iVar1 = (**(code **)(*(int *)scheduler[3] + 0x20))
@@ -858,25 +858,25 @@ LAB_0016e148:
   return DList__pushBack(iVar2,node);
 }
 
-/* FUN_0016e1a4 @ 0x16e1a4 (1668 bytes) */
-int FUN_0016e1a4(param_1)
-  undefined4 *param_1;
+/* Scheduler__splitAddressRegisterUses @ 0x16e1a4 (1668 bytes) */
+int Scheduler__splitAddressRegisterUses(scheduler)
+  undefined4 *scheduler;
 {
   uint uVar1;
   uint uVar2;
-  undefined4 uVar3;
+  undefined4 clonedInst;
   undefined4 uVar4;
   uint uVar5;
   undefined4 *puVar6;
   int iVar7;
-  int iVar8;
+  int clonedNode;
   int iVar9;
   uint uVar10;
   uint uVar11;
   undefined4 *puVar12;
-  int iVar13;
+  int addressLoadNode;
   int *piVar14;
-  int iVar15;
+  int consumerNode;
   uint uVar16;
   uint *puVar17;
   uint uVar18;
@@ -884,34 +884,34 @@ int FUN_0016e1a4(param_1)
   int iVar20;
   int iVar21;
   
-  iVar8 = param_1[0x61];
-  if (0 < iVar8) {
+  clonedNode = scheduler[0x61];
+  if (0 < clonedNode) {
     uVar10 = 0;
-    puVar12 = param_1;
+    puVar12 = scheduler;
     do {
-      iVar13 = puVar12[0x5c];
+      addressLoadNode = puVar12[0x5c];
       iVar9 = uVar10 + (((int)uVar10 >> 2) + (uint)((int)uVar10 < 0 && (uVar10 & 3) != 0)) * -4;
-      if ((iVar13 != 0) && (*(int *)(iVar13 + 0x2c) < (int)param_1[0xb])) {
+      if ((addressLoadNode != 0) && (*(int *)(addressLoadNode + 0x2c) < (int)scheduler[0xb])) {
         puVar12[0x5c] = 0;
-        if ((0 < *(int *)(iVar9 * 4 + iVar13 + 0x48)) &&
-           (iVar15 = *(int *)(iVar13 + 0x6c), iVar15 != 0)) {
+        if ((0 < *(int *)(iVar9 * 4 + addressLoadNode + 0x48)) &&
+           (consumerNode = *(int *)(addressLoadNode + 0x6c), consumerNode != 0)) {
           do {
-            iVar8 = IRInst__getOperandRecord(*(undefined4 *)(iVar15 + 0x38),1);
-            if (*(int *)(iVar8 + 0x10) == (DAT_001aa818)[iVar9]) {
+            clonedNode = IRInst__getOperandRecord(*(undefined4 *)(consumerNode + 0x38),1);
+            if (*(int *)(clonedNode + 0x10) == (DAT_001aa818)[iVar9]) {
               iVar19 = 4;
-              iVar8 = iVar15;
+              clonedNode = consumerNode;
 LAB_0016e258:
-              if (*(int *)(iVar8 + 0x48) < 1) goto code_r0x0016e264;
-              uVar3 = IRInst__clone(*(undefined4 *)(iVar15 + 0x38),*param_1,0);
-              uVar4 = IRInst__getOperandSource(*(undefined4 *)(iVar13 + 0x38),1);
-              IRInst__setOperandSource(uVar3,1,uVar4,0,*param_1);
-              iVar8 = IRInst__getOperandRecord(*(undefined4 *)(iVar13 + 0x38),1);
-              uVar4 = (DAT_001aa818)[*(byte *)(iVar9 + iVar8 + 0x10)];
-              iVar8 = IRInst__getOperandRecord(uVar3,1);
-              *(undefined4 *)(iVar8 + 0x10) = uVar4;
+              if (*(int *)(clonedNode + 0x48) < 1) goto code_r0x0016e264;
+              clonedInst = IRInst__clone(*(undefined4 *)(consumerNode + 0x38),*scheduler,0);
+              uVar4 = IRInst__getOperandSource(*(undefined4 *)(addressLoadNode + 0x38),1);
+              IRInst__setOperandSource(clonedInst,1,uVar4,0,*scheduler);
+              clonedNode = IRInst__getOperandRecord(*(undefined4 *)(addressLoadNode + 0x38),1);
+              uVar4 = (DAT_001aa818)[*(byte *)(iVar9 + clonedNode + 0x10)];
+              clonedNode = IRInst__getOperandRecord(clonedInst,1);
+              *(undefined4 *)(clonedNode + 0x10) = uVar4;
               uVar5 = 0;
-              iVar8 = Scheduler__createNode(param_1,uVar3,iVar15 + 0xc,param_1[0xb]);
-              puVar17 = *(uint **)(iVar15 + 0x40);
+              clonedNode = Scheduler__createNode(scheduler,clonedInst,consumerNode + 0xc,scheduler[0xb]);
+              puVar17 = *(uint **)(consumerNode + 0x40);
               uVar18 = puVar17[1];
               if (0 < (int)uVar18) {
                 while( true ) {
@@ -935,12 +935,12 @@ LAB_0016e258:
                                               (*(int **)(iVar19 + 0x38)), iVar7 <= iVar21;
                         iVar7 = iVar7 + 1) {
                       iVar21 = IRInst__getOperandSource(*(undefined4 *)(iVar19 + 0x38),iVar7);
-                      if (iVar21 == *(int *)(iVar15 + 0x38)) {
-                        IRInst__setOperandSource(*(undefined4 *)(iVar19 + 0x38),iVar7,uVar3,0,*param_1);
+                      if (iVar21 == *(int *)(consumerNode + 0x38)) {
+                        IRInst__setOperandSource(*(undefined4 *)(iVar19 + 0x38),iVar7,clonedInst,0,*scheduler);
                       }
                     }
-                    *piVar14 = iVar8;
-                    puVar17 = *(uint **)(iVar8 + 0x40);
+                    *piVar14 = clonedNode;
+                    puVar17 = *(uint **)(clonedNode + 0x40);
                     uVar1 = puVar17[1];
                     if (uVar1 < *puVar17) {
                       _memset(uVar1 * 4 + puVar17[2],0,4);
@@ -952,8 +952,8 @@ LAB_0016e258:
                     }
                     *puVar6 = piVar14;
                     iVar20 = 4;
-                    iVar7 = iVar8;
-                    iVar21 = iVar15;
+                    iVar7 = clonedNode;
+                    iVar21 = consumerNode;
                     do {
                       if (*(char *)(piVar14 + 6) != '\0') {
                         *(int *)(iVar7 + 0x48) = *(int *)(iVar7 + 0x48) + 1;
@@ -982,10 +982,10 @@ LAB_0016e258:
                         else {
                           puVar6 = (undefined4 *)Vector__elementRefGrow(puVar17,uVar16);
                         }
-                        if ((iVar13 == *(int *)*puVar6) &&
+                        if ((addressLoadNode == *(int *)*puVar6) &&
                            (*(char *)((int)*puVar6 + iVar9 + 0x18) != '\0')) {
                           Vector__removeAt(*(undefined4 *)(iVar19 + 0x44),uVar16);
-                          iVar21 = iVar9 * 4 + iVar13;
+                          iVar21 = iVar9 * 4 + addressLoadNode;
                           *(int *)(iVar21 + 0x48) = *(int *)(iVar21 + 0x48) + -1;
                         }
                         uVar11 = uVar11 + 1;
@@ -1003,38 +1003,38 @@ LAB_0016e258:
                     *(int *)(iVar19 + 0x34) = iVar7 + 1;
                   }
                   if (uVar18 == uVar5) break;
-                  puVar17 = *(uint **)(iVar15 + 0x40);
+                  puVar17 = *(uint **)(consumerNode + 0x40);
                 }
               }
-              ((int (*)())Scheduler__enqueueReadyNode)(param_1,iVar8);
+              ((int (*)())Scheduler__enqueueReadyNode)(scheduler,clonedNode);
             }
 LAB_0016e574:
-            iVar15 = *(int *)(iVar15 + 0x6c);
-          } while (iVar15 != 0);
-          iVar8 = param_1[0x61];
+            consumerNode = *(int *)(consumerNode + 0x6c);
+          } while (consumerNode != 0);
+          clonedNode = scheduler[0x61];
         }
       }
       uVar10 = uVar10 + 1;
       puVar12 = puVar12 + 1;
-    } while ((int)uVar10 < iVar8);
+    } while ((int)uVar10 < clonedNode);
   }
-  puVar12 = param_1;
+  puVar12 = scheduler;
   do {
-    iVar8 = puVar12[0x62];
-    if ((iVar8 != 0) && (*(int *)(iVar8 + 0x2c) < (int)param_1[0xb])) {
+    clonedNode = puVar12[0x62];
+    if ((clonedNode != 0) && (*(int *)(clonedNode + 0x2c) < (int)scheduler[0xb])) {
       puVar12[0x62] = 0;
-      for (iVar9 = *(int *)(iVar8 + 0x6c); iVar9 != 0; iVar9 = *(int *)(iVar9 + 0x6c)) {
-        iVar15 = 4;
-        iVar13 = iVar9;
-        while (*(int *)(iVar13 + 0x48) < 1) {
-          iVar13 = iVar13 + 4;
-          iVar15 = iVar15 + -1;
-          if (iVar15 == 0) goto LAB_0016e800;
+      for (iVar9 = *(int *)(clonedNode + 0x6c); iVar9 != 0; iVar9 = *(int *)(iVar9 + 0x6c)) {
+        consumerNode = 4;
+        addressLoadNode = iVar9;
+        while (*(int *)(addressLoadNode + 0x48) < 1) {
+          addressLoadNode = addressLoadNode + 4;
+          consumerNode = consumerNode + -1;
+          if (consumerNode == 0) goto LAB_0016e800;
         }
-        uVar3 = IRInst__clone(*(undefined4 *)(iVar9 + 0x38),*param_1,0);
-        uVar4 = IRInst__getOperandSource(*(undefined4 *)(iVar8 + 0x38),1);
-        IRInst__setOperandSource(uVar3,1,uVar4,0,*param_1);
-        iVar13 = Scheduler__createNode(param_1,uVar3,iVar9 + 0xc,param_1[0xb]);
+        clonedInst = IRInst__clone(*(undefined4 *)(iVar9 + 0x38),*scheduler,0);
+        uVar4 = IRInst__getOperandSource(*(undefined4 *)(clonedNode + 0x38),1);
+        IRInst__setOperandSource(clonedInst,1,uVar4,0,*scheduler);
+        addressLoadNode = Scheduler__createNode(scheduler,clonedInst,iVar9 + 0xc,scheduler[0xb]);
         puVar17 = *(uint **)(iVar9 + 0x40);
         uVar18 = 0;
         uVar10 = puVar17[1];
@@ -1054,18 +1054,18 @@ LAB_0016e574:
             uVar18 = uVar18 + 1;
             piVar14 = (int *)*puVar6;
             iVar19 = 1;
-            iVar15 = piVar14[1];
-            if (*(int *)(iVar15 + 0x2c) < 0) {
-              for (; iVar7 = (**(code **)(**(int **)(iVar15 + 0x38) + 0x14))
-                                       (*(int **)(iVar15 + 0x38)), iVar19 <= iVar7;
+            consumerNode = piVar14[1];
+            if (*(int *)(consumerNode + 0x2c) < 0) {
+              for (; iVar7 = (**(code **)(**(int **)(consumerNode + 0x38) + 0x14))
+                                       (*(int **)(consumerNode + 0x38)), iVar19 <= iVar7;
                   iVar19 = iVar19 + 1) {
-                iVar7 = IRInst__getOperandSource(*(undefined4 *)(iVar15 + 0x38),iVar19);
+                iVar7 = IRInst__getOperandSource(*(undefined4 *)(consumerNode + 0x38),iVar19);
                 if (iVar7 == *(int *)(iVar9 + 0x38)) {
-                  IRInst__setOperandSource(*(undefined4 *)(iVar15 + 0x38),iVar19,uVar3,0,*param_1);
+                  IRInst__setOperandSource(*(undefined4 *)(consumerNode + 0x38),iVar19,clonedInst,0,*scheduler);
                 }
               }
-              *piVar14 = iVar13;
-              puVar17 = *(uint **)(iVar13 + 0x40);
+              *piVar14 = addressLoadNode;
+              puVar17 = *(uint **)(addressLoadNode + 0x40);
               uVar5 = puVar17[1];
               if (uVar5 < *puVar17) {
                 _memset(uVar5 * 4 + puVar17[2],0,4);
@@ -1077,7 +1077,7 @@ LAB_0016e574:
               }
               *puVar6 = piVar14;
               iVar21 = 4;
-              iVar19 = iVar13;
+              iVar19 = addressLoadNode;
               iVar7 = iVar9;
               do {
                 if (*(char *)(piVar14 + 6) != '\0') {
@@ -1089,28 +1089,28 @@ LAB_0016e574:
                 iVar7 = iVar7 + 4;
                 iVar21 = iVar21 + -1;
               } while (iVar21 != 0);
-              iVar19 = *(int *)(iVar15 + 0x34);
+              iVar19 = *(int *)(consumerNode + 0x34);
               if (iVar19 == 0) {
-                DList__unlink(iVar15);
-                iVar19 = *(int *)(iVar15 + 0x34);
+                DList__unlink(consumerNode);
+                iVar19 = *(int *)(consumerNode + 0x34);
               }
-              *(int *)(iVar15 + 0x34) = iVar19 + 1;
+              *(int *)(consumerNode + 0x34) = iVar19 + 1;
             }
             if (uVar10 == uVar18) break;
             puVar17 = *(uint **)(iVar9 + 0x40);
           }
         }
-        ((int (*)())Scheduler__enqueueReadyNode)(param_1,iVar13);
+        ((int (*)())Scheduler__enqueueReadyNode)(scheduler,addressLoadNode);
 LAB_0016e800: ;
       }
     }
     puVar12 = puVar12 + 1;
-    if (param_1 + 2 == puVar12) {
+    if (scheduler + 2 == puVar12) {
       return;
     }
   } while( true );
 code_r0x0016e264:
-  iVar8 = iVar8 + 4;
+  clonedNode = clonedNode + 4;
   iVar19 = iVar19 + -1;
   if (iVar19 == 0) goto LAB_0016e574;
   goto LAB_0016e258;
@@ -1354,7 +1354,7 @@ LAB_0016ec14:
   iVar10 = (**(code **)(**(int **)(*scheduler + 0x30c) + 0xd4))(*(int **)(*scheduler + 0x30c));
   if ((iVar10 != 0) &&
      (iVar10 = (**(code **)(*(int *)scheduler[2] + 0x18))((int *)scheduler[2]), iVar10 != 0)) {
-    ((int (*)())FUN_0016e1a4)(scheduler);
+    ((int (*)())Scheduler__splitAddressRegisterUses)(scheduler);
   }
   FUN_00164a74(scheduler,iVar9,iVar8);
   return scheduler[0xb] - iVar7;
@@ -1525,7 +1525,7 @@ LAB_0017036c:
             if (iVar4 != 0) goto LAB_001705f8;
             iVar4 = (**(code **)(*(int *)scheduler[2] + 0x24))((int *)scheduler[2]);
             if (iVar4 != 0) {
-              iVar4 = FUN_00167ef4(scheduler,node);
+              iVar4 = Scheduler__insertOperandCopy(scheduler,node);
               if (iVar4 != 0) {
                 return iVar4;
               }
@@ -1960,7 +1960,7 @@ LAB_0016f574:
     if (node == 0) {
       node = (**(code **)(*(int *)scheduler[2] + 0x24))((int *)scheduler[2]);
       if (node != 0) {
-        node = FUN_00167ef4(scheduler,iVar4);
+        node = Scheduler__insertOperandCopy(scheduler,iVar4);
         if (node != 0) {
           return node;
         }

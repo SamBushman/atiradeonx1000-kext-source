@@ -7830,30 +7830,30 @@ LAB_001664ec:
   } while( true );
 }
 
-/* FUN_00166844 @ 0x166844 (456 bytes) */
-int FUN_00166844(param_1, param_2, param_3)
-  int *param_1;
-  int param_2;
-  int param_3;
+/* Scheduler__copyFetchInEdge @ 0x166844 (456 bytes) */
+int Scheduler__copyFetchInEdge(scheduler, fromNode, toNode)
+  int *scheduler;
+  int fromNode;
+  int toNode;
 {
   undefined4 uVar1;
   int iVar2;
   uint uVar3;
-  undefined4 *allocation;
+  undefined4 *edgeAlloc;
   undefined4 *puVar5;
   int iVar6;
   int iVar7;
   int iVar8;
   int *piVar9;
   uint uVar10;
-  int *piVar11;
+  int *sourceEdge;
   uint *puVar12;
   undefined4 arena;
   uint loopIndex;
   int iVar15;
   
   loopIndex = 0;
-  puVar12 = *(uint **)(param_2 + 0x44);
+  puVar12 = *(uint **)(fromNode + 0x44);
   uVar10 = puVar12[1];
   if (0 < (int)uVar10) {
     while( true ) {
@@ -7863,45 +7863,45 @@ int FUN_00166844(param_1, param_2, param_3)
           _memset(uVar3 * 4 + puVar12[2],0,(loopIndex - uVar3) * 4 + 4);
           puVar12[1] = loopIndex + 1;
         }
-        allocation = (undefined4 *)(loopIndex * 4 + puVar12[2]);
+        edgeAlloc = (undefined4 *)(loopIndex * 4 + puVar12[2]);
       }
       else {
-        allocation = (undefined4 *)Vector__elementRefGrow(puVar12,loopIndex);
+        edgeAlloc = (undefined4 *)Vector__elementRefGrow(puVar12,loopIndex);
       }
-      piVar11 = (int *)*allocation;
-      if (piVar11[7] == 1) {
-        arena = *(undefined4 *)(*param_1 + 0x378);
-        allocation = (undefined4 *)Arena__alloc(arena,0x24);
+      sourceEdge = (int *)*edgeAlloc;
+      if (sourceEdge[7] == 1) {
+        arena = *(undefined4 *)(*scheduler + 0x378);
+        edgeAlloc = (undefined4 *)Arena__alloc(arena,0x24);
         uVar1 = DAT_001b0194;
-        *allocation = arena;
-        allocation[1] = 0;
+        *edgeAlloc = arena;
+        edgeAlloc[1] = 0;
         iVar7 = 0;
-        allocation[7] = uVar1;
-        allocation[4] = 1;
-        iVar8 = piVar11[6];
-        iVar2 = *piVar11;
-        iVar6 = piVar11[3];
-        allocation[3] = 0;
-        allocation[5] = 0;
-        allocation[6] = 0;
-        allocation[8] = 0;
+        edgeAlloc[7] = uVar1;
+        edgeAlloc[4] = 1;
+        iVar8 = sourceEdge[6];
+        iVar2 = *sourceEdge;
+        iVar6 = sourceEdge[3];
+        edgeAlloc[3] = 0;
+        edgeAlloc[5] = 0;
+        edgeAlloc[6] = 0;
+        edgeAlloc[8] = 0;
         iVar15 = 4;
-        allocation[7] = iVar8;
-        allocation[1] = iVar2;
-        allocation[4] = iVar6;
-        allocation[2] = param_3;
-        piVar9 = piVar11;
+        edgeAlloc[7] = iVar8;
+        edgeAlloc[1] = iVar2;
+        edgeAlloc[4] = iVar6;
+        edgeAlloc[2] = toNode;
+        piVar9 = sourceEdge;
         do {
           if (*(char *)(piVar9 + 6) != '\0') {
-            iVar2 = iVar7 * 4 + *piVar11;
+            iVar2 = iVar7 * 4 + *sourceEdge;
             *(int *)(iVar2 + 0x48) = *(int *)(iVar2 + 0x48) + 1;
           }
           iVar7 = iVar7 + 1;
           piVar9 = (int *)((int)piVar9 + 1);
           iVar15 = iVar15 + -1;
         } while (iVar15 != 0);
-        allocation[8] = 1;
-        puVar12 = *(uint **)(param_3 + 0x44);
+        edgeAlloc[8] = 1;
+        puVar12 = *(uint **)(toNode + 0x44);
         uVar10 = puVar12[1];
         if (uVar10 < *puVar12) {
           _memset(uVar10 * 4 + puVar12[2],0,4);
@@ -7911,12 +7911,12 @@ int FUN_00166844(param_1, param_2, param_3)
         else {
           puVar5 = (undefined4 *)Vector__elementRefGrow(puVar12,uVar10);
         }
-        *puVar5 = allocation + 1;
+        *puVar5 = edgeAlloc + 1;
         return;
       }
       loopIndex = loopIndex + 1;
       if (uVar10 == loopIndex) break;
-      puVar12 = *(uint **)(param_2 + 0x44);
+      puVar12 = *(uint **)(fromNode + 0x44);
     }
   }
   return;
@@ -8826,13 +8826,13 @@ int Scheduler__createCopyNode(scheduler, sourceInst, writeMask, readyCycle, prio
   return callResult;
 }
 
-/* FUN_00167ef4 @ 0x167ef4 (1396 bytes) */
-int FUN_00167ef4(param_1, param_2)
-  int *param_1;
-  int param_2;
+/* Scheduler__insertOperandCopy @ 0x167ef4 (1396 bytes) */
+int Scheduler__insertOperandCopy(scheduler, node)
+  int *scheduler;
+  int node;
 {
   int loopIndex;
-  int iVar1;
+  int copyNode;
   int *operandVReg;
   undefined4 uVar3;
   int operandRecord;
@@ -8841,7 +8841,7 @@ int FUN_00167ef4(param_1, param_2)
   int iVar7;
   uint in_r9;
   uint uVar8;
-  int *a0;
+  int *inst;
   int iVar9;
   int *piVar10;
   undefined4 local_48;
@@ -8849,40 +8849,40 @@ int FUN_00167ef4(param_1, param_2)
   undefined4 local_40;
   undefined4 local_3c [3];
   
-  a0 = *(int **)(param_2 + 0x38);
-  iVar1 = (**(code **)(*a0 + 0x14))(a0,param_2);
-  if ((iVar1 < 3) || (*(int *)(a0[0x22] + 8) == 0x14)) goto LAB_00168120;
-  iVar1 = IRInst__getOperandSource(a0,1);
-  if (*(int *)(iVar1 + 0x98) != 0) {
-    operandVReg = (int *)IRInst__getOperandSource(a0,1);
-    iVar1 = (**(code **)(*operandVReg + 0x60))(operandVReg);
-    if (iVar1 == 0) goto LAB_00168120;
-    uVar3 = IRInst__getOperandSource(a0,1);
-    iVar1 = IRInst__getOperandSource(uVar3,1);
-    if (*(int *)(iVar1 + 0x98) != 0) goto LAB_00168120;
+  inst = *(int **)(node + 0x38);
+  copyNode = (**(code **)(*inst + 0x14))(inst,node);
+  if ((copyNode < 3) || (*(int *)(inst[0x22] + 8) == 0x14)) goto LAB_00168120;
+  copyNode = IRInst__getOperandSource(inst,1);
+  if (*(int *)(copyNode + 0x98) != 0) {
+    operandVReg = (int *)IRInst__getOperandSource(inst,1);
+    copyNode = (**(code **)(*operandVReg + 0x60))(operandVReg);
+    if (copyNode == 0) goto LAB_00168120;
+    uVar3 = IRInst__getOperandSource(inst,1);
+    copyNode = IRInst__getOperandSource(uVar3,1);
+    if (*(int *)(copyNode + 0x98) != 0) goto LAB_00168120;
   }
-  iVar1 = IRInst__getOperandSource(a0,2);
-  if (*(int *)(iVar1 + 0x98) != 0) {
-    operandVReg = (int *)IRInst__getOperandSource(a0,2);
-    iVar1 = (**(code **)(*operandVReg + 0x60))(operandVReg);
-    if (iVar1 == 0) goto LAB_00168120;
-    uVar3 = IRInst__getOperandSource(a0,2);
-    iVar1 = IRInst__getOperandSource(uVar3,1);
-    if (*(int *)(iVar1 + 0x98) != 0) goto LAB_00168120;
+  copyNode = IRInst__getOperandSource(inst,2);
+  if (*(int *)(copyNode + 0x98) != 0) {
+    operandVReg = (int *)IRInst__getOperandSource(inst,2);
+    copyNode = (**(code **)(*operandVReg + 0x60))(operandVReg);
+    if (copyNode == 0) goto LAB_00168120;
+    uVar3 = IRInst__getOperandSource(inst,2);
+    copyNode = IRInst__getOperandSource(uVar3,1);
+    if (*(int *)(copyNode + 0x98) != 0) goto LAB_00168120;
   }
-  iVar1 = IRInst__getOperandSource(a0,3);
-  if (*(int *)(iVar1 + 0x98) != 0) {
-    operandVReg = (int *)IRInst__getOperandSource(a0,3);
-    iVar1 = (**(code **)(*operandVReg + 0x60))(operandVReg);
-    if (iVar1 != 0) {
-      uVar3 = IRInst__getOperandSource(a0,3);
-      iVar1 = IRInst__getOperandSource(uVar3,1);
-      if (*(int *)(iVar1 + 0x98) == 0) goto LAB_00168060;
+  copyNode = IRInst__getOperandSource(inst,3);
+  if (*(int *)(copyNode + 0x98) != 0) {
+    operandVReg = (int *)IRInst__getOperandSource(inst,3);
+    copyNode = (**(code **)(*operandVReg + 0x60))(operandVReg);
+    if (copyNode != 0) {
+      uVar3 = IRInst__getOperandSource(inst,3);
+      copyNode = IRInst__getOperandSource(uVar3,1);
+      if (*(int *)(copyNode + 0x98) == 0) goto LAB_00168060;
     }
 LAB_00168120:
-    iVar1 = -1;
-    for (loopIndex = 1; iVar5 = (**(code **)(*a0 + 0x14))(a0), loopIndex <= iVar5; loopIndex = loopIndex + 1) {
-      operandVReg = (int *)IRInst__getOperandSource(a0,loopIndex);
+    copyNode = -1;
+    for (loopIndex = 1; iVar5 = (**(code **)(*inst + 0x14))(inst), loopIndex <= iVar5; loopIndex = loopIndex + 1) {
+      operandVReg = (int *)IRInst__getOperandSource(inst,loopIndex);
       iVar5 = (**(code **)(*operandVReg + 0x60))(operandVReg);
       if (iVar5 != 0) {
         operandVReg = (int *)IRInst__getOperandSource(operandVReg,1);
@@ -8890,30 +8890,30 @@ LAB_00168120:
       if (operandVReg[0x26] == 1) {
         iVar5 = operandVReg[0x25];
         if ((operandVReg[5] & 0x40U) == 0) {
-          iVar9 = *param_1;
+          iVar9 = *scheduler;
           piVar10 = *(int **)(iVar9 + 0x30c);
           iVar6 = (**(code **)(*piVar10 + 0x138))(piVar10,iVar9);
           iVar7 = (**(code **)(*piVar10 + 0x140))(piVar10,iVar9);
           iVar9 = (**(code **)(*piVar10 + 0x13c))(piVar10,iVar9);
           iVar5 = iVar5 + iVar6 + iVar7 + iVar9;
         }
-        if (iVar1 < 0) {
-          iVar1 = iVar5;
+        if (copyNode < 0) {
+          copyNode = iVar5;
         }
         if (((*(int *)(operandVReg[0x22] + 8) != 0x8e) || ((operandVReg[5] & 0x40U) != 0)) &&
-           ((operandVReg[0x56] == param_1[4] ||
-            (*(int *)(param_1[1] + 0x474) == *(int *)(operandVReg[0x56] + 0x118))))) {
-          iVar1 = iVar5;
+           ((operandVReg[0x56] == scheduler[4] ||
+            (*(int *)(scheduler[1] + 0x474) == *(int *)(operandVReg[0x56] + 0x118))))) {
+          copyNode = iVar5;
         }
       }
     }
     loopIndex = 1;
     do {
-      iVar5 = (**(code **)(*a0 + 0x14))(a0);
+      iVar5 = (**(code **)(*inst + 0x14))(inst);
       if (iVar5 < loopIndex) {
         return 0;
       }
-      operandVReg = (int *)IRInst__getOperandSource(a0,loopIndex);
+      operandVReg = (int *)IRInst__getOperandSource(inst,loopIndex);
       iVar5 = (**(code **)(*operandVReg + 0x60))(operandVReg);
       if (iVar5 != 0) {
         operandVReg = (int *)IRInst__getOperandSource(operandVReg,1);
@@ -8921,27 +8921,27 @@ LAB_00168120:
       if (operandVReg[0x26] == 1) {
         iVar5 = operandVReg[0x25];
         if ((operandVReg[5] & 0x40U) == 0) {
-          iVar9 = *param_1;
+          iVar9 = *scheduler;
           piVar10 = *(int **)(iVar9 + 0x30c);
           iVar6 = (**(code **)(*piVar10 + 0x138))(piVar10,iVar9);
           iVar7 = (**(code **)(*piVar10 + 0x140))(piVar10,iVar9);
           iVar9 = (**(code **)(*piVar10 + 0x13c))(piVar10,iVar9);
           iVar5 = iVar5 + iVar6 + iVar7 + iVar9;
         }
-        if (iVar5 != iVar1) {
+        if (iVar5 != copyNode) {
           if (((*(int *)(operandVReg[0x22] + 8) != 0x8e) || ((operandVReg[5] & 0x40U) != 0)) &&
-             ((uVar8 = operandVReg[0x56], uVar8 == param_1[4] ||
-              (uVar8 = *(uint *)(uVar8 + 0x118), *(uint *)(param_1[1] + 0x474) == uVar8)))) {
-            iVar1 = IRInst__getOperandRecord(a0,loopIndex);
-            FUN_000f32cc(&local_40,*(undefined4 *)(iVar1 + 0x10));
-            uVar3 = IRInst__getOperandSource(a0,loopIndex);
-            iVar1 = ((int (*)())Scheduler__createCopyNode)(param_1,uVar3,local_40,param_1[0xb],param_2 + 0xc);
-            IRInst__setOperandSource(a0,loopIndex,*(undefined4 *)(iVar1 + 0x38),0,*param_1);
-            iVar5 = IRInst__getOperandRecord(a0,loopIndex);
+             ((uVar8 = operandVReg[0x56], uVar8 == scheduler[4] ||
+              (uVar8 = *(uint *)(uVar8 + 0x118), *(uint *)(scheduler[1] + 0x474) == uVar8)))) {
+            copyNode = IRInst__getOperandRecord(inst,loopIndex);
+            FUN_000f32cc(&local_40,*(undefined4 *)(copyNode + 0x10));
+            uVar3 = IRInst__getOperandSource(inst,loopIndex);
+            copyNode = ((int (*)())Scheduler__createCopyNode)(scheduler,uVar3,local_40,scheduler[0xb],node + 0xc);
+            IRInst__setOperandSource(inst,loopIndex,*(undefined4 *)(copyNode + 0x38),0,*scheduler);
+            iVar5 = IRInst__getOperandRecord(inst,loopIndex);
             FUN_000f3398(local_3c,*(undefined4 *)(iVar5 + 0x10));
-            ((int (*)())Scheduler__addDataDependencyEdge)(param_1,iVar1,param_2,loopIndex,0,local_3c[0],uVar8);
-            DList__unlink(param_2);
-            return iVar1;
+            ((int (*)())Scheduler__addDataDependencyEdge)(scheduler,copyNode,node,loopIndex,0,local_3c[0],uVar8);
+            DList__unlink(node);
+            return copyNode;
           }
           operandVReg[0x26] = 0;
         }
@@ -8950,21 +8950,21 @@ LAB_00168120:
     } while( true );
   }
 LAB_00168060:
-  uVar3 = IRInst__getOperandSource(a0,1);
-  iVar1 = IRInst__getOperandRecord(a0,1);
-  FUN_000f32cc(&local_48,*(undefined4 *)(iVar1 + 0x10));
-  iVar1 = ((int (*)())Scheduler__createCopyNode)(param_1,uVar3,local_48,param_1[0xb],param_2 + 0xc);
-  IRInst__setOperandSource(a0,1,*(undefined4 *)(iVar1 + 0x38),0,*param_1);
-  operandRecord = IRInst__getOperandRecord(a0,1);
+  uVar3 = IRInst__getOperandSource(inst,1);
+  copyNode = IRInst__getOperandRecord(inst,1);
+  FUN_000f32cc(&local_48,*(undefined4 *)(copyNode + 0x10));
+  copyNode = ((int (*)())Scheduler__createCopyNode)(scheduler,uVar3,local_48,scheduler[0xb],node + 0xc);
+  IRInst__setOperandSource(inst,1,*(undefined4 *)(copyNode + 0x38),0,*scheduler);
+  operandRecord = IRInst__getOperandRecord(inst,1);
   FUN_000f3398(&local_44,*(undefined4 *)(operandRecord + 0x10));
-  ((int (*)())Scheduler__addDataDependencyEdge)(param_1,iVar1,param_2,1,0,local_44,in_r9);
-  uVar3 = *(undefined4 *)(*(int *)(iVar1 + 0x38) + 0x94);
-  operandRecord = IRInst__getOperandRecord(*(int *)(iVar1 + 0x38),0);
+  ((int (*)())Scheduler__addDataDependencyEdge)(scheduler,copyNode,node,1,0,local_44,in_r9);
+  uVar3 = *(undefined4 *)(*(int *)(copyNode + 0x38) + 0x94);
+  operandRecord = IRInst__getOperandRecord(*(int *)(copyNode + 0x38),0);
   *(undefined4 *)(operandRecord + 8) = uVar3;
   *(undefined4 *)(operandRecord + 0xc) = 1;
-  *(undefined4 *)(iVar1 + 100) = 1;
-  DList__unlink(param_2);
-  return iVar1;
+  *(undefined4 *)(copyNode + 100) = 1;
+  DList__unlink(node);
+  return copyNode;
 }
 
 /* Scheduler__addOperandDependencyEdges @ 0x168468 (2328 bytes) */
@@ -9567,7 +9567,7 @@ code_r0x001699c4:
         inst = (int *)Vector__elementRefGrow(puVar24,uVar4);
       }
       *inst = (int)(edgeAlloc + 1);
-      ((int (*)())FUN_00166844)(scheduler,node,helperNode);
+      ((int (*)())Scheduler__copyFetchInEdge)(scheduler,node,helperNode);
       iVar8 = *(int *)(node + 0x34);
       helperInst = *(int *)(node + 0x30);
       *(undefined4 *)(helperNode + 0x48) = 1;
@@ -9710,7 +9710,7 @@ LAB_00169620:
     puVar11 = (undefined4 *)Vector__elementRefGrow(puVar24,uVar4);
   }
   *puVar11 = puVar26;
-  ((int (*)())FUN_00166844)(scheduler,node,helperNode);
+  ((int (*)())Scheduler__copyFetchInEdge)(scheduler,node,helperNode);
   *(int *)(node + 0x34) = *(int *)(node + 0x34) + 1;
   *(undefined4 *)(outSelector * 4 + helperNode + 0x48) = 1;
   helperInst = *(int *)(node + 0x30);

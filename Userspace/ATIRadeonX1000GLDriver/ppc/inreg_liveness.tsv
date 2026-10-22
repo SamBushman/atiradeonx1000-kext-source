@@ -125,7 +125,7 @@
 161748	FUN_00161748	r7	PASS-indirect	161784 bctrl 
 161748	FUN_00161748	r8	PASS-indirect	161784 bctrl 
 161748	FUN_00161748	r9	PASS-indirect	161784 bctrl 
-167ef4	FUN_00167ef4	r9	PASS-indirect	167f24 bctrl 
+167ef4	Scheduler__insertOperandCopy	r9	PASS-indirect	167f24 bctrl 
 169e30	Scheduler__markGlobalValues	r7	PASS-indirect	169e60 bl 0x193e18
 169e30	Scheduler__markGlobalValues	r8	PASS-indirect	169e60 bl 0x193e18
 169e30	Scheduler__markGlobalValues	r10	PASS-indirect	169e60 bl 0x193e18

@@ -2682,7 +2682,7 @@
 0x165d3c	504	Scheduler__createNode	part_044	converted
 0x165fa8	632	Scheduler__findOrCreateExternalNode	part_044	converted
 0x16629c	1448	FUN_0016629c	part_044	converted
-0x166844	456	FUN_00166844	part_044	converted
+0x166844	456	Scheduler__copyFetchInEdge	part_044	converted
 0x166a0c	412	FUN_00166a0c	part_044	converted
 0x166ba8	340	Scheduler__isNodeReady	part_044	converted
 0x166cfc	1024	Scheduler__freeNodes	part_044	converted
@@ -2690,7 +2690,7 @@
 0x167a74	244	SchedNode__getLastConsumerCycle	part_044	converted
 0x167b68	692	Scheduler__findFreeTempRegister	part_044	converted
 0x167e1c	216	Scheduler__createCopyNode	part_044	converted
-0x167ef4	1396	FUN_00167ef4	part_044	converted
+0x167ef4	1396	Scheduler__insertOperandCopy	part_044	converted
 0x168468	2328	Scheduler__addOperandDependencyEdges	part_044	converted
 0x168d80	2668	Scheduler__transformDotProduct	part_044	converted
 0x169b70	680	Scheduler__packDotProductCandidates	part_044	converted
@@ -2705,7 +2705,7 @@
 0x16d538	1996	Scheduler__tryReuseAddressRegister	part_045	converted
 0x16dd04	596	Scheduler__tryReuseLoopIndexLoad	part_045	converted
 0x16df8c	536	Scheduler__enqueueReadyNode	part_045	converted
-0x16e1a4	1668	FUN_0016e1a4	part_045	converted
+0x16e1a4	1668	Scheduler__splitAddressRegisterUses	part_045	converted
 0x16e828	1640	Scheduler__advanceCycle	part_045	converted
 0x16ee90	284	Scheduler__onNodeReady	part_045	converted
 0x16ff54	6540	Scheduler__selectNextNode	part_045	converted
@@ -2950,8 +2950,8 @@
 0x188f24	200	KhanVs__vslot29	part_049	converted
 0x188fec	1280	KhanVs__vslot28	part_049	converted
 0x1894ec	116	KhanVs__vslot27	part_049	converted
-0x189560	64	FUN_00189560	part_049	converted
-0x1895a0	100	FUN_001895a0	part_049	converted
+0x189560	64	PackState__reset	part_049	converted
+0x1895a0	100	PackState__copy	part_049	converted
 0x189604	40	R520SchedModel__vslot2_reset	part_049	converted
 0x18962c	52	KhanPs__vslot31	part_049	converted
 0x189660	152	KhanPs__vslot65	part_049	converted
@@ -2960,8 +2960,8 @@
 0x189788	104	FUN_00189788	part_049	converted
 0x1897f0	8	KhanPs__vslot66	part_049	converted
 0x1897fc	68	FUN_001897fc	part_049	converted
-0x189840	364	FUN_00189840	part_049	converted
-0x1899ac	568	FUN_001899ac	part_049	converted
+0x189840	364	SchedModel__fitsConstantLimit	part_049	converted
+0x1899ac	568	SchedModel__assignConstantSelectors	part_049	converted
 0x189be4	64	R300SchedModel__vslot15	part_049	converted
 0x189c24	188	FUN_00189c24	part_049	converted
 0x189ce0	276	FUN_00189ce0	part_049	converted
@@ -2976,7 +2976,7 @@
 0x18b9cc	712	R300SchedModel__vslot14	part_049	converted
 0x18bc94	1332	FUN_0018bc94	part_049	converted
 0x18c1c8	1440	FUN_0018c1c8	part_049	converted
-0x18c768	140	FUN_0018c768	part_049	converted
+0x18c768	140	PackState__countFreeSlots	part_049	converted
 0x18c7f4	396	FUN_0018c7f4	part_049	converted
 0x18c980	1112	FUN_0018c980	part_049	converted
 0x18cdd8	1456	FUN_0018cdd8	part_049	converted

@@ -1366,7 +1366,7 @@ int R300MachineAssembler__assembleBlock(this, block, startOfShaderFlag)
     piVar12 = piVar13;
     if ((((iVar11 == 0) || (uVar9 = piVar13[5], (uVar9 & 4) != 0)) || ((int)uVar9 < 0)) ||
        ((uVar9 & 0x1000) != 0)) {
-      FUN_00189560(auStack_84);
+      PackState__reset(auStack_84);
       if (piVar13 == (int *)0x0) {
         bVar5 = false;
       }

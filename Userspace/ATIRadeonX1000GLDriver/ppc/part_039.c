@@ -28,7 +28,7 @@ int KhanPs__vslot6(this, param_2)
   *puVar2 = puVar3;
   puVar2[1] = 0;
   *puVar2 = puVar1 + 8;
-  FUN_00189560(puVar2 + 10);
+  PackState__reset(puVar2 + 10);
   R520SchedModel__vslot2_reset(puVar2);
   puVar2[0x1a] = 0;
   *(undefined4 **)(this + 0x60) = puVar2;

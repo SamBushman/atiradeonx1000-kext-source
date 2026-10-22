@@ -102,7 +102,7 @@
 161748	FUN_00161748	r7	PASS-indirect	GARBAGE	
 161748	FUN_00161748	r8	PASS-indirect	GARBAGE	
 161748	FUN_00161748	r9	PASS-indirect	GARBAGE	
-167ef4	FUN_00167ef4	r9	PASS-indirect	GARBAGE	
+167ef4	Scheduler__insertOperandCopy	r9	PASS-indirect	GARBAGE	
 169e30	Scheduler__markGlobalValues	r7	PASS-indirect	GARBAGE	
 169e30	Scheduler__markGlobalValues	r8	PASS-indirect	GARBAGE	
 169e30	Scheduler__markGlobalValues	r10	PASS-indirect	GARBAGE	
