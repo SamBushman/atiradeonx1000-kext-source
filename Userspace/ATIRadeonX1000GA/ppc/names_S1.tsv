@@ -996,3 +996,135 @@ use	_radeonFill	uVar33	batchEnd	INFERRED	batchStart + rectsPerBatch: first recta
 use	_radeonFill	uVar33	batchEnd	INFERRED	batchStart + rectsPerBatch: first rectangle of the next batch	^\s*uVar42\ =\ uVar33;$	+2
 local	_radeonFill	uVar35	nextTileLeft	INFERRED	left x of the next 8-wide tile
 local	_radeonFill	uVar37	tileLeft	INFERRED	left x of the current tile
+local	FUN_000055a4	dStack_304	srcDescWidth	INFERRED	srcDesc[2]: width field of the source descriptor (compared with the short width)
+local	FUN_000055a4	dStack_2fc	srcDescHeight	INFERRED	srcDesc[3]: height field of the source descriptor
+use	FUN_000055a4	iVar16	cmdBufferSize	INFERRED	size field (+0x10) of the command buffer	^\s*iVar16\ =\ \*\(int\ \*\)\(iVar56\ \+\ 0x10\);$	+1
+use	FUN_000055a4	iVar16	cmdBufferSize	INFERRED	size field (+0x10) of the command buffer	^\s*uVar39\ =\ iVar16\ \-\ 7;$	+1
+use	FUN_000055a4	iVar16	cmdBufferSize	INFERRED	size field (+0x10) of the command buffer	^\s*uVar48\ =\ iVar16\ \-\ 0xb;$	+1
+use	FUN_000055a4	iVar16	cmdBufferSize	INFERRED	size field (+0x10) of the command buffer	^\s*uVar48\ =\ iVar16\ \-\ 0xb;$@2	+1
+use	FUN_000055a4	iVar16	errorCode	CONFIRMED	-0x1ffffd42 (kIOReturn error) returned when no command buffer is mapped	^\s*iVar16\ =\ \-0x1ffffd42;$	+1
+use	FUN_000055a4	iVar16	errorCode	CONFIRMED	-0x1ffffd42 (kIOReturn error) returned when no command buffer is mapped	^\s*iVar16\ =\ 0;$@2	+1
+use	FUN_000055a4	iVar16	errorCode	CONFIRMED	-0x1ffffd42 (kIOReturn error) returned when no command buffer is mapped	^\s*return\ iVar16;$	+1
+use	FUN_000055a4	iVar16	offscreenResult	CONFIRMED	result of _createOffscreenBuffer	^\s*iVar16\ =\ \(\(int\ \(\*\)\(\)\)_createOffscreenBuffer\)\(param_1,local_d8,0\);$	+2
+use	FUN_000055a4	iVar16	mapResult	CONFIRMED	result of _IOConnectMapMemory when the command buffer is full	^\s*iVar16\ =\ _IOConnectMapMemory\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xc\),0,$	+3
+use	FUN_000055a4	iVar16	mapResult	CONFIRMED	result of _IOConnectMapMemory when the command buffer is full	^\s*iVar16\ =\ _IOConnectMapMemory\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xc\),0,$@2	+3
+use	FUN_000055a4	iVar16	regByteOffset	INFERRED	byte offset (index << 2) of the first register word of the group	^\s*iVar16\ =\ iVar26\ <<\ 2;$	+1
+use	FUN_000055a4	iVar16	regByteOffset	INFERRED	byte offset (index << 2) of the first register word of the group	^\s*iVar16\ =\ 0x18;$	+1
+use	FUN_000055a4	iVar16	regByteOffset	INFERRED	byte offset (index << 2) of the first register word of the group	^\s*\*\(undefined4\ \*\)\(\(int\)pdVar53\ \+\ iVar16\)\ =\ 0x10f8;$	+1
+use	FUN_000055a4	iVar16	regByteOffset	INFERRED	byte offset (index << 2) of the first register word of the group	^\s*iVar16\ =\ iVar20\ <<\ 2;$	+1
+use	FUN_000055a4	iVar16	regByteOffset	INFERRED	byte offset (index << 2) of the first register word of the group	^\s*iVar16\ =\ 0;$	+1
+use	FUN_000055a4	iVar16	regByteOffset	INFERRED	byte offset (index << 2) of the first register word of the group	^\s*\*\(undefined4\ \*\)\(\(int\)pdVar53\ \+\ iVar16\)\ =\ 0x10f8;$@2	+1
+use	FUN_000055a4	iVar16	offscreenHeightM1	CONFIRMED	offscreen descriptor height - 1	^\s*iVar16\ =\ \*\(short\ \*\)\(\(int\)local_d8\ \+\ 6\)\ \+\ \-1;$	+2
+use	FUN_000055a4	iVar16	offscreenHeightM1	CONFIRMED	offscreen descriptor height - 1	^\s*iVar16\ \*\ 0x20\ \&\ 0x10000U;$	+1
+use	FUN_000055a4	iVar19	setupWords2	CONFIRMED	words written by the second _radeon3DCopySetup call	^\s*iVar19\ =\ \(\(int\ \(\*\)\(\)\)_radeon3DCopySetup\)\(param_1,pdVar53,local_dc,local_f8,0,0,0,0\);$	+24
+use	FUN_000055a4	iVar19	setupWords2	CONFIRMED	words written by the second _radeon3DCopySetup call	^\s*iVar19\ =\ 0x1b;$	+1
+use	FUN_000055a4	iVar19	setupWords2	CONFIRMED	words written by the second _radeon3DCopySetup call	^\s*pdVar53\[iVar19\]\ =\ 0x20000;$	+1
+use	FUN_000055a4	iVar19	mapResult3	CONFIRMED	result of _IOConnectMapMemory when the command buffer is full	^\s*iVar19\ =\ _IOConnectMapMemory\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xc\),0,\*\(undefined4\ \*\)puVar15,$	+3
+use	FUN_000055a4	iVar20	setupWords3	CONFIRMED	words written by the third _radeon3DCopySetup call	^\s*iVar20\ =\ \(\(int\ \(\*\)\(\)\)_radeon3DCopySetup\)\(param_1,pdVar52,local_d8,local_f4,local_144,0,0,iVar16\);$	+24
+use	FUN_000055a4	iVar20	setupWords3	CONFIRMED	words written by the third _radeon3DCopySetup call	^\s*iVar20\ =\ 0x15;$	+1
+use	FUN_000055a4	iVar20	setupWords3	CONFIRMED	words written by the third _radeon3DCopySetup call	^\s*pdVar53\[iVar20\]\ =\ 0x20000;$	+1
+use	FUN_000055a4	iVar26	cmdHeaderBase	INFERRED	0x9000000 / 0xd000000: base of the blit command header word per source kind	^\s*iVar26\ =\ 0x9000000;$	+1
+use	FUN_000055a4	iVar26	cmdHeaderBase	INFERRED	0x9000000 / 0xd000000: base of the blit command header word per source kind	^\s*local_140\ =\ iVar26\ \+\ 0x1000000;$	+1
+use	FUN_000055a4	iVar26	cmdHeaderBase	INFERRED	0x9000000 / 0xd000000: base of the blit command header word per source kind	^\s*iVar26\ =\ 0xd000000;$	+1
+use	FUN_000055a4	iVar26	ioResult	CONFIRMED	result of _io_connect_method_scalarI_structureO (source from IO data)	^\s*iVar26\ =\ _io_connect_method_scalarI_structureO$	+1
+use	FUN_000055a4	iVar26	ioResult	CONFIRMED	result of _io_connect_method_scalarI_structureO (source from IO data)	^\s*if\ \(iVar26\ !=\ 0\)\ \{$	+2
+use	FUN_000055a4	iVar26	setupWords1	CONFIRMED	words written by the first _radeon3DCopySetup call	^\s*iVar26\ =\ \(\(int\ \(\*\)\(\)\)_radeon3DCopySetup\)\(param_1,pdVar53,local_d8,local_f4,0,0,0,0\);$	+24
+use	FUN_000055a4	iVar26	setupWords1	CONFIRMED	words written by the first _radeon3DCopySetup call	^\s*iVar26\ =\ 0x1b;$	+1
+use	FUN_000055a4	iVar26	setupWords1	CONFIRMED	words written by the first _radeon3DCopySetup call	^\s*pdVar53\[iVar26\]\ =\ 0x20000;$	+1
+use	FUN_000055a4	iVar26	mapResult2	CONFIRMED	result of _IOConnectMapMemory when the command buffer is full	^\s*iVar26\ =\ _IOConnectMapMemory\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xc\),0,\*\(undefined4\ \*\)puVar15,$	+3
+use	FUN_000055a4	iVar26	mapResult2	CONFIRMED	result of _IOConnectMapMemory when the command buffer is full	^\s*iVar26\ =\ _IOConnectMapMemory\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xc\),0,\*\(undefined4\ \*\)puVar15,$@2	+3
+use	FUN_000055a4	iVar26	mapResult2	CONFIRMED	result of _IOConnectMapMemory when the command buffer is full	^\s*iVar26\ =\ _IOConnectMapMemory\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xc\),0,\*\(undefined4\ \*\)puVar15,$@3	+3
+use	FUN_000055a4	iVar26	regByteOffset2	INFERRED	byte offset (index << 2) of the first register word of the group	^\s*iVar26\ =\ iVar19\ <<\ 2;$	+1
+use	FUN_000055a4	iVar26	regByteOffset2	INFERRED	byte offset (index << 2) of the first register word of the group	^\s*iVar26\ =\ 0x18;$	+1
+use	FUN_000055a4	iVar26	regByteOffset2	INFERRED	byte offset (index << 2) of the first register word of the group	^\s*\*\(undefined4\ \*\)\(\(int\)pdVar53\ \+\ iVar26\)\ =\ 0x10f8;$	+1
+use	FUN_000055a4	iVar26	regByteOffset2	INFERRED	byte offset (index << 2) of the first register word of the group	^\s*iVar26\ =\ iVar56\ <<\ 2;$	+1
+use	FUN_000055a4	iVar26	regByteOffset2	INFERRED	byte offset (index << 2) of the first register word of the group	^\s*iVar26\ =\ 0;$	+1
+use	FUN_000055a4	iVar26	regByteOffset2	INFERRED	byte offset (index << 2) of the first register word of the group	^\s*\*\(undefined4\ \*\)\(\(int\)pdVar53\ \+\ iVar26\)\ =\ 0x10f8;$@2	+1
+use	FUN_000055a4	iVar26	regByteOffset2	INFERRED	byte offset (index << 2) of the first register word of the group	^\s*iVar26\ =\ iVar56\ <<\ 2;$@2	+1
+use	FUN_000055a4	iVar26	regByteOffset2	INFERRED	byte offset (index << 2) of the first register word of the group	^\s*iVar26\ =\ 0;$@2	+1
+use	FUN_000055a4	iVar26	regByteOffset2	INFERRED	byte offset (index << 2) of the first register word of the group	^\s*\*\(undefined4\ \*\)\(\(int\)pdVar53\ \+\ iVar26\)\ =\ 0x10f8;$@3	+1
+use	FUN_000055a4	iVar26	srcHeightM1	CONFIRMED	source descriptor height - 1	^\s*iVar26\ =\ \*\(short\ \*\)\(\(int\)local_dc\ \+\ 6\)\ \+\ \-1;$	+2
+use	FUN_000055a4	iVar26	srcHeightM1	CONFIRMED	source descriptor height - 1	^\s*iVar26\ \*\ 0x20\ \&\ 0x10000U;$	+1
+use	FUN_000055a4	iVar56	cmdBuffer	INFERRED	accel+0x18: current command buffer mapping	^\s*iVar56\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x18\);$	+1
+use	FUN_000055a4	iVar56	cmdBuffer	INFERRED	accel+0x18: current command buffer mapping	^\s*iVar16\ =\ \*\(int\ \*\)\(iVar56\ \+\ 0x10\);$	+1
+use	FUN_000055a4	iVar56	cmdBuffer	INFERRED	accel+0x18: current command buffer mapping	^\s*uVar48\ =\ uVar39\ \-\ \(\(int\)pdVar53\ \-\ \(iVar56\ \+\ 0x20\)\ >>\ 2\);$	+1
+use	FUN_000055a4	iVar56	mapResult4	CONFIRMED	result of _IOConnectMapMemory when the command buffer is full	^\s*iVar56\ =\ _IOConnectMapMemory\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xc\),0,\*\(undefined4\ \*\)puVar15,$	+3
+use	FUN_000055a4	iVar56	mapResult4	CONFIRMED	result of _IOConnectMapMemory when the command buffer is full	^\s*iVar56\ =\ _IOConnectMapMemory\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xc\),0,$	+3
+use	FUN_000055a4	iVar56	mapResult4	CONFIRMED	result of _IOConnectMapMemory when the command buffer is full	^\s*iVar56\ =\ _IOConnectMapMemory\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xc\),0,$@2	+3
+use	FUN_000055a4	iVar56	mapResult4	CONFIRMED	result of _IOConnectMapMemory when the command buffer is full	^\s*iVar56\ =\ _IOConnectMapMemory\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xc\),0,$@3	+3
+use	FUN_000055a4	iVar56	mapResult4	CONFIRMED	result of _IOConnectMapMemory when the command buffer is full	^\s*iVar56\ =\ _IOConnectMapMemory\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xc\),0,$@4	+3
+use	FUN_000055a4	iVar56	offscreenWidth	CONFIRMED	(int)*(short*)(offscreenDesc+1): offscreen descriptor width	^\s*iVar56\ =\ \(int\)\*\(short\ \*\)\(local_d8\ \+\ 1\);$	+1
+use	FUN_000055a4	iVar56	offscreenWidth	CONFIRMED	(int)*(short*)(offscreenDesc+1): offscreen descriptor width	^\s*else\ if\ \(iVar56\ <\ 0x1001\)\ \{$	+1
+use	FUN_000055a4	iVar56	offscreenWidth	CONFIRMED	(int)*(short*)(offscreenDesc+1): offscreen descriptor width	^\s*local_120\ =\ iVar56\ >>\ 1\ \&\ 0xfffffe00;$	+2
+use	FUN_000055a4	iVar56	setupWords4	CONFIRMED	words written by the fourth/fifth _radeon3DCopySetup call	^\s*iVar56\ =\ \(\(int\ \(\*\)\(\)\)_radeon3DCopySetup\)\(param_1,pdVar52,local_d8,local_f4,local_144,0,local_118,0\)$	+1
+use	FUN_000055a4	iVar56	setupWords4	CONFIRMED	words written by the fourth/fifth _radeon3DCopySetup call	^\s*iVar19\ =\ iVar56\ \+\ 9;$	+23
+use	FUN_000055a4	iVar56	setupWords4	CONFIRMED	words written by the fourth/fifth _radeon3DCopySetup call	^\s*iVar56\ =\ \(\(int\ \(\*\)\(\)\)_radeon3DCopySetup\)\(param_1,pdVar52,local_d8,local_f4,local_144,0,local_118,$	+2
+use	FUN_000055a4	iVar56	setupWords4	CONFIRMED	words written by the fourth/fifth _radeon3DCopySetup call	^\s*iVar56\ =\ 0x15;$	+1
+use	FUN_000055a4	iVar56	setupWords4	CONFIRMED	words written by the fourth/fifth _radeon3DCopySetup call	^\s*pdVar53\[iVar56\]\ =\ 0x20000;$	+1
+use	FUN_000055a4	iVar56	setupWords4	CONFIRMED	words written by the fourth/fifth _radeon3DCopySetup call	^\s*iVar56\ =\ \(\(int\ \(\*\)\(\)\)_radeon3DCopySetup\)\(param_1,pdVar52,local_d8,local_f4,local_144,0,local_11c,0\)$	+1
+use	FUN_000055a4	iVar56	setupWords4	CONFIRMED	words written by the fourth/fifth _radeon3DCopySetup call	^\s*iVar19\ =\ iVar56\ \+\ 9;$@2	+23
+use	FUN_000055a4	iVar56	setupWords4	CONFIRMED	words written by the fourth/fifth _radeon3DCopySetup call	^\s*iVar56\ =\ \(\(int\ \(\*\)\(\)\)_radeon3DCopySetup\)\(param_1,pdVar52,local_d8,local_f4,local_144,0,local_11c,$	+2
+use	FUN_000055a4	iVar56	setupWords4	CONFIRMED	words written by the fourth/fifth _radeon3DCopySetup call	^\s*iVar56\ =\ 0x15;$@2	+1
+use	FUN_000055a4	iVar56	setupWords4	CONFIRMED	words written by the fourth/fifth _radeon3DCopySetup call	^\s*pdVar53\[iVar56\]\ =\ 0x20000;$@2	+1
+use	FUN_000055a4	pdVar29	cmdWord1	INFERRED	pointer to word 1 of the packet group (cmdWrite+0x4)	^\s*pdVar29\ =\ \(dword\ \*\)\(local_360\ \+\ 0x24\);$	+1
+use	FUN_000055a4	pdVar29	cmdWord1	INFERRED	pointer to word 1 of the packet group (cmdWrite+0x4)	^\s*pdVar29\ =\ \&__mh_bundle_header\.cputype;$	+1
+use	FUN_000055a4	pdVar29	cmdWord1	INFERRED	pointer to word 1 of the packet group (cmdWrite+0x4)	^\s*pdVar29\ =\ pdVar53\ \+\ 1;$	+1
+use	FUN_000055a4	pdVar29	cmdWord1	INFERRED	pointer to word 1 of the packet group (cmdWrite+0x4)	^\s*pdVar29\ =\ \(dword\ \*\)\(local_364\ \+\ 0x24\);$	+1
+use	FUN_000055a4	pdVar29	cmdWord1	INFERRED	pointer to word 1 of the packet group (cmdWrite+0x4)	^\s*pdVar29\ =\ pdVar53\ \+\ 1;$@2	+1
+use	FUN_000055a4	pdVar29	cmdWord1	INFERRED	pointer to word 1 of the packet group (cmdWrite+0x4)	^\s*pdVar53\ =\ pdVar29\ \+\ 5;$	+2
+use	FUN_000055a4	pdVar29	cmdWord1	INFERRED	pointer to word 1 of the packet group (cmdWrite+0x4)	^\s*\*puVar18\ =\ \(int\)\(pdVar29\ \+\ 1\)\ \-\ \(int\)puVar18\ >>\ 2\ \|\ \*puVar18;$	+4
+use	FUN_000055a4	pdVar29	cmdWord1	INFERRED	pointer to word 1 of the packet group (cmdWrite+0x4)	^\s*pdVar29\[4\]\ =\ 6;$	+2
+use	FUN_000055a4	pdVar29	cmdWord1	INFERRED	pointer to word 1 of the packet group (cmdWrite+0x4)	^\s*pdVar29\[6\]\ =\ \(int\)sVar7\ \-\ 1U\ \&\ 0x7ff\ \|\ iVar16\ \*\ 0x800\ \&\ 0x3ff800U\ \|\ 0x80000000;$	+5
+use	FUN_000055a4	pdVar29	cmdWord1	INFERRED	pointer to word 1 of the packet group (cmdWrite+0x4)	^\s*pdVar29\ =\ \(dword\ \*\)\(local_35c\ \+\ 0x24\);$	+1
+use	FUN_000055a4	pdVar29	cmdWord1	INFERRED	pointer to word 1 of the packet group (cmdWrite+0x4)	^\s*pdVar29\ =\ \&__mh_bundle_header\.cputype;$@2	+1
+use	FUN_000055a4	pdVar29	cmdWord1	INFERRED	pointer to word 1 of the packet group (cmdWrite+0x4)	^\s*pdVar29\ =\ pdVar53\ \+\ 1;$@3	+1
+use	FUN_000055a4	pdVar29	cmdWord1	INFERRED	pointer to word 1 of the packet group (cmdWrite+0x4)	^\s*pdVar29\[1\]\ =\ 0;$	+4
+use	FUN_000055a4	pdVar29	cmdWord1	INFERRED	pointer to word 1 of the packet group (cmdWrite+0x4)	^\s*\*puVar18\ =\ \(int\)\(pdVar29\ \+\ 3\)\ \-\ \(int\)puVar18\ >>\ 2\ \|\ \*puVar18;$	+4
+use	FUN_000055a4	pdVar29	cmdWord1	INFERRED	pointer to word 1 of the packet group (cmdWrite+0x4)	^\s*pdVar29\[6\]\ =\ \(int\)sVar7\ \-\ 1U\ \&\ 0x7ff\ \|\ iVar26\ \*\ 0x800\ \&\ 0x3ff800U\ \|\ 0x80000000;$	+5
+use	FUN_000055a4	pdVar29	cmdWord1	INFERRED	pointer to word 1 of the packet group (cmdWrite+0x4)	^\s*pdVar29\ =\ \(dword\ \*\)\(local_360\ \+\ 0x24\);$@2	+1
+use	FUN_000055a4	pdVar29	cmdWord1	INFERRED	pointer to word 1 of the packet group (cmdWrite+0x4)	^\s*pdVar29\ =\ \&__mh_bundle_header\.cputype;$@3	+1
+use	FUN_000055a4	pdVar29	cmdWord1	INFERRED	pointer to word 1 of the packet group (cmdWrite+0x4)	^\s*pdVar29\ =\ pdVar53\ \+\ 1;$@4	+1
+use	FUN_000055a4	pdVar29	cmdWord1	INFERRED	pointer to word 1 of the packet group (cmdWrite+0x4)	^\s*\*pdVar29\ =\ local_fc;$@3	+1
+use	FUN_000055a4	pdVar29	cmdWord1	INFERRED	pointer to word 1 of the packet group (cmdWrite+0x4)	^\s*pdVar29\ =\ \(dword\ \*\)\(local_364\ \+\ 0x24\);$@2	+1
+use	FUN_000055a4	pdVar29	cmdWord1	INFERRED	pointer to word 1 of the packet group (cmdWrite+0x4)	^\s*pdVar29\ =\ \(dword\ \*\)\(local_358\ \+\ 0x24\);$	+1
+use	FUN_000055a4	pdVar29	cmdWord1	INFERRED	pointer to word 1 of the packet group (cmdWrite+0x4)	^\s*pdVar29\ =\ \&__mh_bundle_header\.cputype;$@4	+1
+use	FUN_000055a4	pdVar29	cmdWord1	INFERRED	pointer to word 1 of the packet group (cmdWrite+0x4)	^\s*pdVar29\ =\ pdVar53\ \+\ 1;$@5	+1
+use	FUN_000055a4	pdVar29	cmdWord1	INFERRED	pointer to word 1 of the packet group (cmdWrite+0x4)	^\s*\*pdVar29\ =\ local_fc;$@4	+1
+use	FUN_000055a4	pdVar29	cmdWord1	INFERRED	pointer to word 1 of the packet group (cmdWrite+0x4)	^\s*pdVar29\ =\ \(dword\ \*\)\(local_360\ \+\ 0x24\);$@3	+1
+use	FUN_000055a4	pdVar29	cmdWord1	INFERRED	pointer to word 1 of the packet group (cmdWrite+0x4)	^\s*pdVar29\ =\ \&__mh_bundle_header\.cputype;$@5	+1
+use	FUN_000055a4	pdVar29	cmdWord1	INFERRED	pointer to word 1 of the packet group (cmdWrite+0x4)	^\s*pdVar29\ =\ pdVar53\ \+\ 1;$@6	+1
+use	FUN_000055a4	pdVar29	cmdWord1	INFERRED	pointer to word 1 of the packet group (cmdWrite+0x4)	^\s*\*pdVar29\ =\ local_fc;$@5	+1
+use	FUN_000055a4	pdVar29	cmdWord0	INFERRED	pointer to word 0 of the packet group (cmdWrite+0x0)	^\s*pdVar29\ =\ \(dword\ \*\)\(local_364\ \+\ 0x20\);$	+1
+use	FUN_000055a4	pdVar29	cmdWord0	INFERRED	pointer to word 0 of the packet group (cmdWrite+0x0)	^\s*pdVar29\ =\ \(dword\ \*\)0x0;$	+1
+use	FUN_000055a4	pdVar29	cmdWord0	INFERRED	pointer to word 0 of the packet group (cmdWrite+0x0)	^\s*\*puVar18\ =\ \(int\)pdVar29\ \-\ \(int\)puVar18\ >>\ 2\ \|\ \*puVar18;$	+3
+use	FUN_000055a4	pdVar29	cmdWord1	INFERRED	pointer to word 1 of the packet group (cmdWrite+0x4)	^\s*pdVar29\ =\ \(dword\ \*\)\(local_35c\ \+\ 0x24\);$@2	+1
+use	FUN_000055a4	pdVar29	cmdWord1	INFERRED	pointer to word 1 of the packet group (cmdWrite+0x4)	^\s*pdVar29\ =\ \&__mh_bundle_header\.cputype;$@6	+1
+use	FUN_000055a4	pdVar29	cmdWord1	INFERRED	pointer to word 1 of the packet group (cmdWrite+0x4)	^\s*pdVar29\ =\ pdVar53\ \+\ 1;$@7	+1
+use	FUN_000055a4	pdVar29	cmdWord1	INFERRED	pointer to word 1 of the packet group (cmdWrite+0x4)	^\s*\*pdVar29\ =\ local_fc;$@6	+1
+use	FUN_000055a4	pdVar29	cmdWord0	INFERRED	pointer to word 0 of the packet group (cmdWrite+0x0)	^\s*pdVar29\ =\ \(dword\ \*\)\(local_358\ \+\ 0x20\);$	+1
+use	FUN_000055a4	pdVar29	cmdWord0	INFERRED	pointer to word 0 of the packet group (cmdWrite+0x0)	^\s*pdVar29\ =\ \(dword\ \*\)0x0;$@2	+1
+use	FUN_000055a4	pdVar29	cmdWord0	INFERRED	pointer to word 0 of the packet group (cmdWrite+0x0)	^\s*\*puVar18\ =\ \(int\)pdVar29\ \-\ \(int\)puVar18\ >>\ 2\ \|\ \*puVar18;$@2	+3
+local	FUN_000055a4	pdVar23	cmdWord2	INFERRED	pointer to word 2 of the packet group
+local	FUN_000055a4	pdVar25	cmdWord3	INFERRED	pointer to word 3 of the packet group
+local	FUN_000055a4	pdVar30	cmdWord4	INFERRED	pointer to word 4 of the packet group
+local	FUN_000055a4	pdVar33	cmdWord5	INFERRED	pointer to word 5 of the packet group
+local	FUN_000055a4	local_160	rectYPtr	CONFIRMED	(short *)(rect + 2): y of the region rectangle
+local	FUN_000055a4	local_164	rectHeightPtr	CONFIRMED	(short *)(rect + 6): height of the region rectangle
+local	FUN_000055a4	local_168	srcDescCopy2	UNKNOWN	copy of the source descriptor pointer
+local	FUN_000055a4	local_a8	srcDescCopy1	UNKNOWN	copy of the source descriptor pointer
+use	FUN_000055a4	sVar7	offscreenWidth16	CONFIRMED	*(short*)(offscreenDesc+1)	^\s*sVar7\ =\ \*\(short\ \*\)\(local_d8\ \+\ 1\);$	+1
+use	FUN_000055a4	sVar7	offscreenWidth16	CONFIRMED	*(short*)(offscreenDesc+1)	^\s*pdVar29\[6\]\ =\ \(int\)sVar7\ \-\ 1U\ \&\ 0x7ff\ \|\ iVar16\ \*\ 0x800\ \&\ 0x3ff800U\ \|\ 0x80000000;$	+1
+use	FUN_000055a4	sVar7	offscreenWidth16	CONFIRMED	*(short*)(offscreenDesc+1)	^\s*pdVar29\[10\]\ =\ local_d8\[4\]\ \-\ 1\ \&\ 0x3fff\ \|\ \(\(int\)sVar7\ \-\ 1U\)\ \*\ 0x10\ \&\ 0x8000\ \|$	+1
+use	FUN_000055a4	sVar7	srcWidth16	CONFIRMED	*(short*)(srcDesc+1)	^\s*sVar7\ =\ \*\(short\ \*\)\(local_dc\ \+\ 1\);$	+1
+use	FUN_000055a4	sVar7	srcWidth16	CONFIRMED	*(short*)(srcDesc+1)	^\s*pdVar29\[6\]\ =\ \(int\)sVar7\ \-\ 1U\ \&\ 0x7ff\ \|\ iVar26\ \*\ 0x800\ \&\ 0x3ff800U\ \|\ 0x80000000;$	+1
+use	FUN_000055a4	sVar7	srcWidth16	CONFIRMED	*(short*)(srcDesc+1)	^\s*pdVar29\[10\]\ =\ local_dc\[4\]\ \-\ 1\ \&\ 0x3fff\ \|\ \(\(int\)sVar7\ \-\ 1U\)\ \*\ 0x10\ \&\ 0x8000\ \|$	+1
+local	FUN_000055a4	puVar17	srcSurface	INFERRED	*(srcRef + 0x28): source surface record (kind 0x3000)
+local	FUN_000055a4	local_bc	flushWaitWord	INFERRED	0xc000: flush/wait word written after 0x5c8
+local	FUN_000055a4	local_c0	flushWaitWord2	INFERRED	0xc000: flush/wait word
+local	FUN_000055a4	local_c8	flushWaitWord3	INFERRED	0xc000: flush/wait word
+local	FUN_000055a4	local_c4	surfaceFormatWord	INFERRED	srcFormat & 0x1f | 0x53000: colour format register word
+local	FUN_000055a4	local_cc	leftMasked	INFERRED	destination left & 0x1fff
+local	FUN_000055a4	local_d0	topMasked	INFERRED	destination top & 0x1fff
+local	FUN_000055a4	local_170	regionIndex	CONFIRMED	loop counter over the destination regions
+local	FUN_000055a4	local_174	regionIndex2	CONFIRMED	loop counter over the destination regions
+local	FUN_000055a4	local_178	regionIndex3	CONFIRMED	loop counter over the destination regions
