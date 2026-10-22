@@ -1,0 +1,123 @@
+use	FUN_0000bfa0	dVar11	roundedExponent	INFERRED	round(frexp exponent * log10(2)): first estimate of the decimal exponent	^\s*dVar11\ =\ _round\(\(\(double\)CONCAT44\(0x43300000,uStack_64\)\ \-\ DOUBLE_001aa1e0\)\ \*\ DOUBLE_001aa218\);$@1	+1	all	all
+use	FUN_0000bfa0	dVar11	negPow10	INFERRED	10^-exponent from FUN_0000be70(-exponent)	^\s*dVar11\ =\ \(double\)\(\(double\ \(\*\)\(\)\)FUN_0000be70\)\(\-local_78\[0\],extraout_r4_00,puVar4,param_4,in_r7,in_r8,puVar5\);$@1	+0	all	all
+use	FUN_0000bfa0	dVar11	negPow10	INFERRED	10^-exponent from FUN_0000be70(-exponent)	^\s*dVar11\ =\ fparam_1\ \*\ dVar11;$@1	+0	rhs	rhs
+use	FUN_0000bfa0	dVar11	digitBase	INFERRED	the constant 10.0 (DOUBLE_001aa238) used as the multiplier while generating fraction digits	^\s*dVar11\ =\ DOUBLE_001aa238;$@1	+7	all	all
+use	FUN_0000bfa0	dVar12	halfTolerance	INFERRED	tolerance * 0.5: the rounding allowance added before taking the integer part	^\s*dVar12\ =\ fparam_2\ \*\ DOUBLE_001aa240;$@1	+0	all	all
+use	FUN_0000bfa0	dVar12	pow10Exponent	INFERRED	10^exponent from FUN_0000be70(exponent)	^\s*dVar12\ =\ \(double\)\(\(double\ \(\*\)\(\)\)FUN_0000be70\)\(local_78\[0\],extraout_r4,puVar4,param_4,in_r7,in_r8,puVar5\);$@1	+3	all	all
+use	FUN_0000bfa0	dVar12	halfTolerance	INFERRED	tolerance * 0.5: the rounding allowance added before taking the integer part	^\s*dVar12\ =\ fparam_2\ \*\ DOUBLE_001aa240;$@2	+56	all	all
+use	FUN_0000bfa0	dVar12	fractionDigit	INFERRED	floor() of the fraction digit just generated	^\s*dVar12\ =\ _floor\(dVar10\);$@1	+3	all	all
+use	FUN_0000bfa0	dVar13	scaledTolerance	INFERRED	tolerance scaled together with the value; shrinks as digits are produced	^\s*dVar13\ =\ fparam_2\ \*\ dVar12;$@1	+20	all	all
+use	FUN_0000bfa0	dVar13	integerPartRemaining	INFERRED	integer part still to be converted to digits, divided by 10 per digit	^\s*dVar13\ =\ dVar10;$@1	+17	all	all
+use	FUN_0000bfa0	iVar3	integerDigit	INFERRED	the digit (0..9) of the integer part just produced	^\s*iVar3\ =\ \(int\)\(\(dVar14\ \-\ dVar13\)\ \*\ DOUBLE_001aa238\);$@1	+2	all	all
+use	FUN_0000bfa0	iVar3	digitRunLength	INFERRED	number of digits just written, used to size the in-place reversal	^\s*iVar3\ =\ \(int\)pcVar9\ \-\ \(int\)pcVar8;$@1	+4	all	all
+use	FUN_0000bfa0	iVar3	capacityLeft	INFERRED	bytes left before outEnd while writing the exponent digits	^\s*iVar3\ =\ \(int\)pcVar7\ \-\ \(int\)pcVar8;$@1	+7	all	all
+use	FUN_0000bfa0	iVar3	reversalSwaps	INFERRED	number of character swaps left in the in-place reversal of the exponent digits	^\s*iVar3\ =\ \(\(uint\)\(pcVar8\ \+\ \(\(\(int\)pcVar9\ \-\ \(int\)pcVar8\)\ \*\ 2\ \-\ \(int\)pcVar9\)\ \+\ \-2\)\ >>\ 1\)\ \+\ 1;$@1	+12	all	all
+local	FUN_0000bfa0	param_1	unusedArg1	UNKNOWN	not read: left over from the compiler passing the caller's r3 through
+local	FUN_0000bfa0	param_2	unusedArg2	UNKNOWN	not read (r4)
+local	FUN_0000bfa0	param_3	outBuffer	CONFIRMED	start of the output buffer; the text is written here and the function returns the pointer to the terminating NUL
+local	FUN_0000bfa0	param_4	outCapacity	CONFIRMED	size of the output buffer in bytes; outEnd = outBuffer + outCapacity; returns NULL if the text does not fit
+local	FUN_0000bfa0	fparam_1	value	CONFIRMED	the double to print (sign handled first, then |value|)
+local	FUN_0000bfa0	fparam_2	tolerance	INFERRED	relative precision: digit generation stops when the remainder is below it; <=0 selects the default DOUBLE_001aa208
+local	FUN_0000bfa0	cVar1	swapChar	CONFIRMED	temporary of the in-place reversal of a digit run
+local	FUN_0000bfa0	iVar2	swapsLeft	INFERRED	number of swaps left in the in-place reversal of the integer digits
+local	FUN_0000bfa0	puVar4	exponentPtr	CONFIRMED	&local_78: the int exponent out-parameter of frexp
+local	FUN_0000bfa0	puVar5	pow10Table	INFERRED	&DAT_001abfb4: table address passed to FUN_0000be70 (10^n)
+local	FUN_0000bfa0	in_r7	argReg7	UNKNOWN	Ghidra register input forwarded to FUN_0000be70
+local	FUN_0000bfa0	in_r8	argReg8	UNKNOWN	Ghidra register input forwarded to FUN_0000be70
+local	FUN_0000bfa0	pcVar6	reverseTail	CONFIRMED	tail pointer of the in-place reversal of a digit run
+local	FUN_0000bfa0	pcVar7	outEnd	CONFIRMED	outBuffer + outCapacity
+local	FUN_0000bfa0	pcVar8	runStart	INFERRED	start of the digit run being produced/reversed: after the sign, later the start of the exponent digits
+local	FUN_0000bfa0	pcVar9	outPos	CONFIRMED	current write position
+local	FUN_0000bfa0	dVar10	scaledSum	INFERRED	floor(scaledValue + halfTolerance) (integer digits), then the remaining fraction (scaledValue+halfTolerance) - integer
+local	FUN_0000bfa0	dVar14	integerQuotient	INFERRED	integerPartRemaining / 10 before the floor
+local	FUN_0000bfa0	dVar11	scaledValue	INFERRED	|value| scaled by 10^-exponent so its integer part is the leading digits (the other webs of the old variable carry their own names)
+local	FUN_0000bfa0	local_50	fixConvScratch3	UNKNOWN	stack slot of an fctiwz int conversion whose value is never read (Ghidra artifact)
+local	FUN_0000bfa0	local_58	fixConvScratch2	UNKNOWN	stack slot of an fctiwz int conversion whose value is never read (Ghidra artifact)
+local	FUN_0000bfa0	local_60	fixConvScratch1	UNKNOWN	stack slot of an fctiwz int conversion whose value is never read (Ghidra artifact)
+local	FUN_0000bfa0	local_78	decimalExponent	CONFIRMED	int exponent: frexp's out-parameter (&local_78), then the decimal exponent that is printed after 'e'; the array has 4 words, only [0] is used
+local	FUN_0000c930	param_1	cursor	CONFIRMED	output cursor (also the return value base)
+local	FUN_0000c930	param_2	updatesCC	CONFIRMED	bit 22 of instruction word 1: prints "C" (condition-code update, as in ADDC)
+local	FUN_0000c930	param_3	ccRegisterIndex	CONFIRMED	bit 21 of word 1: prints "1" after the C when the second CC register is written (C1)
+local	FUN_0000c930	param_4	saturate	CONFIRMED	bit 20 of word 1: prints "_SAT"
+local	FUN_0000c930	cVar1	copyChar	CONFIRMED	character of the inlined strcpy of the literal
+local	FUN_0000c930	pcVar2	copySrc	CONFIRMED	source pointer of the inlined strcpy
+local	FUN_0000c930	iVar3	emitLength	CONFIRMED	bytes written by the last copy; added to the cursor
+local	FUN_0000ca50	param_1	cursor	CONFIRMED	output cursor
+local	FUN_0000ca50	param_2	precisionCode	CONFIRMED	bits 18..19 of instruction word 1: 1 prints R (float32), 2 H (half), 3 X (fixed); 0 prints nothing
+local	FUN_0000ca50	cVar1	copyChar	CONFIRMED	character of the inlined strcpy of the literal
+local	FUN_0000ca50	pcVar2	copySrc	CONFIRMED	source pointer of the inlined strcpy
+local	FUN_0000ca50	iVar3	emitLength	CONFIRMED	bytes written by the last copy; added to the cursor
+local	FUN_0000cb90	param_1	cursorPtr	CONFIRMED	address of the write cursor (advanced as digits are stored)
+local	FUN_0000cb90	param_2	value	CONFIRMED	non-negative integer whose high digits are written first (recursive)
+local	FUN_0000cb90	iVar1	valueDiv10	CONFIRMED	value / 10
+local	FUN_0000cb90	iVar2	valueDiv100	CONFIRMED	value / 100
+local	FUN_0000cb90	iVar3	valueDiv1e3	CONFIRMED	value / 1000
+local	FUN_0000cb90	iVar4	valueDiv1e4	CONFIRMED	value / 10^4
+local	FUN_0000cb90	iVar5	valueDiv1e5	CONFIRMED	value / 10^5
+local	FUN_0000cb90	iVar6	valueDiv1e6	CONFIRMED	value / 10^6
+local	FUN_0000cb90	iVar7	valueDiv1e7	CONFIRMED	value / 10^7
+local	FUN_0000cb90	iVar8	valueDiv1e8	CONFIRMED	value / 10^8
+local	FUN_0000cb90	iVar9	valueDiv1e9	CONFIRMED	value / 10^9; recursed on when non-zero
+local	FUN_0000cb90	pcVar10	digitCursor	CONFIRMED	*cursorPtr: where the next digit is stored
+local	FUN_0000cdf0	param_1	outCursor	CONFIRMED	where the decimal text starts (a leading - is written for negatives)
+local	FUN_0000cdf0	param_2	value	CONFIRMED	signed integer to print; the function returns the number of characters written
+local	FUN_0000cdf0	local_28	cursorBox	CONFIRMED	one-element box holding the write cursor, passed by address to FUN_0000cb90
+local	FUN_0000cdf0	iVar1	valueDiv10	CONFIRMED	value / 10: the high digits, printed recursively before the last digit
+local	FUN_0000ce90	param_1	cursor	CONFIRMED	output cursor; the function returns the cursor after the suffix
+local	FUN_0000ce90	param_5	bitWidthCode	CONFIRMED	1 prints "32", 2 prints "16", 3 prints "12" (bit width of the element)
+local	FUN_0000ce90	param_4	elementType	CONFIRMED	1 prints F, 2 X, 3 I, 4 B (float, fixed, integer, boolean)
+local	FUN_0000ce90	param_3	hasSecondWidth	CONFIRMED	1: the ":n" size is printed twice (a matrix-like n:n)
+local	FUN_0000ce90	param_2	vectorWidthMinus1	CONFIRMED	component count - 1; printed as ":" (value+1)
+local	FUN_0000ce90	bVar1	colonNotEmpty	INFERRED	the ":" literal at 0x1a4444 is non-empty
+local	FUN_0000ce90	cVar2	copyChar	CONFIRMED	character of the inlined strcpy
+local	FUN_0000ce90	cVar7	copyChar2	CONFIRMED	character of the inlined strcpy (initially the saved ":" for the second copy)
+local	FUN_0000ce90	iVar4	emitLength	CONFIRMED	bytes written by the last copy
+local	FUN_0000ce90	iVar5	suffixCursor	CONFIRMED	cursor after the printed ":n" parts
+local	FUN_0000ce90	iVar6	secondNumberLength	CONFIRMED	digits of the second ":n"
+local	FUN_0000ce90	pcVar3	copySrc	CONFIRMED	source pointer of the inlined strcpy
+local	FUN_0000df50	param_1	cursor	CONFIRMED	output cursor; the function returns the cursor after the suffix
+local	FUN_0000df50	param_4	elementType	CONFIRMED	1 prints F, 2 X, 3 I, 4 B (float, fixed, integer, boolean)
+local	FUN_0000df50	param_3	hasSecondWidth	CONFIRMED	non-zero: the ":n" size is printed twice
+local	FUN_0000df50	param_2	vectorWidthMinus1	CONFIRMED	component count - 1; printed as ":" (value+1)
+local	FUN_0000df50	bVar1	colonNotEmpty	INFERRED	the ":" literal at 0x1a4444 is non-empty
+local	FUN_0000df50	cVar2	copyChar	CONFIRMED	character of the inlined strcpy
+local	FUN_0000df50	cVar7	copyChar2	CONFIRMED	character of the inlined strcpy (initially the saved ":" for the second copy)
+local	FUN_0000df50	iVar4	emitLength	CONFIRMED	bytes written by the last copy
+local	FUN_0000df50	iVar5	suffixCursor	CONFIRMED	cursor after the printed ":n" parts
+local	FUN_0000df50	iVar6	secondNumberLength	CONFIRMED	digits of the second ":n"
+local	FUN_0000df50	pcVar3	copySrc	CONFIRMED	source pointer of the inlined strcpy
+local	FUN_0000d240	param_1	cursor	CONFIRMED	output cursor; returned after the suffix
+local	FUN_0000d240	param_2	sizeMinus1	CONFIRMED	operand component count - 1 (bits 12..13 of the source operand word); 3 with no second flag prints nothing
+local	FUN_0000d240	param_3	hasSecondSize	CONFIRMED	bit 14: the ":n" is printed twice
+local	FUN_0000d240	bVar1	colonNotEmpty	INFERRED	the ":" literal is non-empty
+local	FUN_0000d240	cVar2	copyChar	CONFIRMED	character of the inlined strcpy
+local	FUN_0000d240	cVar6	copyChar2	CONFIRMED	character of the inlined strcpy (saved ":" for the second copy)
+local	FUN_0000d240	iVar4	emitLength	CONFIRMED	bytes written by the last copy
+local	FUN_0000d240	iVar5	numberLength	CONFIRMED	digits written by FUN_0000cdf0
+local	FUN_0000d240	pcVar3	copySrc	CONFIRMED	source pointer of the inlined strcpy
+local	FUN_0000f250	param_1	instrTable	CONFIRMED	instruction record: entries are 8 bytes
+local	FUN_0000f250	param_2	outCursor	CONFIRMED	output cursor
+local	FUN_0000f250	param_3	nameTable3	INFERRED	PARAM register numbering table (as FUN_0000e1f0)
+local	FUN_0000f250	param_4	nameTable4	INFERRED	PARAM group state table
+local	FUN_0000f250	param_5	nameTable5	INFERRED	TEMP register numbering table
+local	FUN_0000f250	param_6	nameTable6	INFERRED	TEMP group state table
+local	FUN_0000f250	param_7	instrIndex	CONFIRMED	entry index of the texture operand inside the record
+local	FUN_0000f250	param_8	unitIsOperand	INFERRED	0: the unit number is word & 0x1f; non-zero: it is printed as a source operand (texture[<operand>])
+local	FUN_0000f250	cVar1	copyChar	CONFIRMED	character of the inlined strcpy
+local	FUN_0000f250	pcVar2	copySrc	CONFIRMED	source pointer of the inlined strcpy
+local	FUN_0000f250	iVar3	cursor	CONFIRMED	current output cursor
+local	FUN_0000f250	iVar4	emitLength	CONFIRMED	bytes written by the last copy or FUN_0000cdf0
+local	FUN_0000f250	iVar5	targetEntryOffset	CONFIRMED	byte offset of the entry holding the target bits (bits 5..7: CUBE 3D RECT 2D 1D SHADOWRECT SHADOW2D SHADOW1D)
+local	FUN_0000c8a0	param_1	capacityPtr	CONFIRMED	address of the buffer capacity in bytes; grown by 0x800 when fewer than 0x100 bytes remain
+local	FUN_0000c8a0	param_2	bufferPtr	CONFIRMED	address of the buffer pointer (updated by realloc)
+local	FUN_0000c8a0	param_3	cursorPtr	CONFIRMED	address of the write cursor (rebased into the new buffer)
+local	FUN_0000c8a0	iVar1	oldBuffer	CONFIRMED	buffer pointer before the realloc
+local	FUN_0000c8a0	iVar2	newCapacity	CONFIRMED	capacity + 0x800
+local	FUN_0000c8a0	iVar3	oldCursor	CONFIRMED	write cursor before the realloc
+local	FUN_0000c8a0	uVar4	ok	CONFIRMED	1 unless realloc failed
+local	FUN_0000e1f0	param_8	useNames	INFERRED	non-zero for shader objects: swizzles are printed in the longer form; 0 in assembly mode
+local	FUN_0000e1f0	param_9	isSwizzleOperand	CONFIRMED	1 for the SWZ instruction: the per-component selectors come from the following entry
+local	FUN_0000e1f0	bVar1	lastComponent	INFERRED	component counter == 3 in the extended-swizzle loop
+local	FUN_0000e1f0	puVar9	swizzleEntry	CONFIRMED	entry following the operand: holds the four 4-bit component selectors (x y z w -x -y -z -w 1 0 -1)
+use	FUN_0000d380	uVar5	registerId	CONFIRMED	register number: halfword at operand entry +6	^\s*uVar5\ =\ \(uint\)\*\(ushort\ \*\)\(\(int\)puVar8\ \+\ 6\);$@1	+16	all	all
+local	FUN_0000d380	iVar4	emitLength	CONFIRMED	bytes written by the last copy or by FUN_0000cdf0; added to the cursor
