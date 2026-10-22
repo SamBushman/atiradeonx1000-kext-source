@@ -407,37 +407,37 @@ int FUN_0000a9f0(param_1, param_2)
 }
 
 /* FUN_0000aaf0 @ 0xaaf0 (244 bytes) */
-int FUN_0000aaf0(param_1, param_2)
-  int param_1;
-  int param_2;
+int FUN_0000aaf0(ctx, texture)
+  int ctx;
+  int texture;
 {
-  int iVar1;
-  undefined4 uVar2;
-  int iVar3;
+  int retired;
+  undefined4 connection;
+  int resident;
   
-  iVar3 = *(int *)(param_2 + 0x34);
-  if (iVar3 != 0) {
-    if (*(char *)(iVar3 + 0x16) == '\x06') {
-      if (0x1ffff < *(int *)(iVar3 + 0x10)) {
-        _gldFlush(param_1);
+  resident = *(int *)(texture + 0x34);
+  if (resident != 0) {
+    if (*(char *)(resident + 0x16) == '\x06') {
+      if (0x1ffff < *(int *)(resident + 0x10)) {
+        _gldFlush(ctx);
       }
-      iVar1 = FUN_0001a0d0(param_1,*(undefined4 *)(iVar3 + 8));
-      if (iVar1 == 0) {
-        uVar2 = *(undefined4 *)(param_1 + 4);
-        iVar3 = iVar3 + 8;
+      retired = FUN_0001a0d0(ctx,*(undefined4 *)(resident + 8));
+      if (retired == 0) {
+        connection = *(undefined4 *)(ctx + 4);
+        resident = resident + 8;
 LAB_0000abac:
-        _io_connect_method_scalarI_structureI(uVar2,9,iVar3,1,0,0);
+        _io_connect_method_scalarI_structureI(connection,9,resident,1,0,0);
         return;
       }
     }
-    else if (*(char *)(iVar3 + 0x16) == '\a') {
-      if (0x1ffff < *(int *)(iVar3 + 0x10)) {
-        _gldFlush(param_1);
+    else if (*(char *)(resident + 0x16) == '\a') {
+      if (0x1ffff < *(int *)(resident + 0x10)) {
+        _gldFlush(ctx);
       }
-      iVar1 = FUN_0001a0d0(param_1,*(undefined4 *)(iVar3 + 0xc));
-      if (iVar1 == 0) {
-        uVar2 = *(undefined4 *)(param_1 + 4);
-        iVar3 = iVar3 + 0xc;
+      retired = FUN_0001a0d0(ctx,*(undefined4 *)(resident + 0xc));
+      if (retired == 0) {
+        connection = *(undefined4 *)(ctx + 4);
+        resident = resident + 0xc;
         goto LAB_0000abac;
       }
     }
@@ -446,28 +446,28 @@ LAB_0000abac:
 }
 
 /* FUN_0000abf0 @ 0xabf0 (184 bytes) */
-int FUN_0000abf0(param_1, param_2)
-  undefined4 param_1;
-  int param_2;
+int FUN_0000abf0(ctx, texture)
+  undefined4 ctx;
+  int texture;
 {
-  undefined4 uVar1;
-  int iVar2;
+  undefined4 retired;
+  int resident;
   
-  iVar2 = *(int *)(param_2 + 0x34);
-  if (iVar2 != 0) {
-    if (*(char *)(iVar2 + 0x16) == '\x06') {
-      if (0x1ffff < *(int *)(iVar2 + 0x10)) {
-        _gldFlush(param_1);
+  resident = *(int *)(texture + 0x34);
+  if (resident != 0) {
+    if (*(char *)(resident + 0x16) == '\x06') {
+      if (0x1ffff < *(int *)(resident + 0x10)) {
+        _gldFlush(ctx);
       }
-      uVar1 = FUN_0001a0d0(param_1,*(undefined4 *)(iVar2 + 8));
-      return uVar1;
+      retired = FUN_0001a0d0(ctx,*(undefined4 *)(resident + 8));
+      return retired;
     }
-    if (*(char *)(iVar2 + 0x16) == '\a') {
-      if (0x1ffff < *(int *)(iVar2 + 0x10)) {
-        _gldFlush(param_1);
+    if (*(char *)(resident + 0x16) == '\a') {
+      if (0x1ffff < *(int *)(resident + 0x10)) {
+        _gldFlush(ctx);
       }
-      uVar1 = FUN_0001a0d0(param_1,*(undefined4 *)(iVar2 + 0xc));
-      return uVar1;
+      retired = FUN_0001a0d0(ctx,*(undefined4 *)(resident + 0xc));
+      return retired;
     }
   }
   return 1;
@@ -932,30 +932,30 @@ int FUN_0000b4f0(param_1, param_2, param_3)
 }
 
 /* FUN_0000b620 @ 0xb620 (72 bytes) */
-int FUN_0000b620(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int param_1;
-  uint param_2;
-  int param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int FUN_0000b620(ctx, address, length, unused4, unused5, unused6, unused7, unused8)
+  int ctx;
+  uint address;
+  int length;
+  undefined4 unused4;
+  undefined4 unused5;
+  undefined4 unused6;
+  undefined4 unused7;
+  undefined4 unused8;
 {
-  int iVar1;
-  int iVar2;
-  uint uVar3;
+  int offset;
+  int span;
+  uint cacheBlockSize;
   
-  uVar3 = (uint)*(byte *)(param_1 + 8);
-  iVar1 = 0;
-  iVar2 = (param_2 & uVar3 - 1) + (param_3 - uVar3);
-  if (0 < iVar2) {
+  cacheBlockSize = (uint)*(byte *)(ctx + 8);
+  offset = 0;
+  span = (address & cacheBlockSize - 1) + (length - cacheBlockSize);
+  if (0 < span) {
     do {
-      dataCacheBlockStore((-uVar3 & param_2) + iVar1);
-      iVar1 = iVar1 + uVar3;
-    } while (iVar1 < iVar2);
+      dataCacheBlockStore((-cacheBlockSize & address) + offset);
+      offset = offset + cacheBlockSize;
+    } while (offset < span);
   }
-  dataCacheBlockFlush((-uVar3 & param_2) + iVar1);
+  dataCacheBlockFlush((-cacheBlockSize & address) + offset);
   return;
 }
 
@@ -990,106 +990,106 @@ int FUN_0000b670(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
 }
 
 /* _gldCreateVertexArray @ 0xb6c0 (80 bytes) */
-int _gldCreateVertexArray(param_1, param_2, param_3, param_4)
-  undefined4 param_1;
-  int *param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+int _gldCreateVertexArray(ctx, vertexArrayOut, initialWord0, initialWord1)
+  undefined4 ctx;
+  int *vertexArrayOut;
+  undefined4 initialWord0;
+  undefined4 initialWord1;
 {
-  undefined4 *puVar1;
+  undefined4 *vertexArray;
   
-  puVar1 = (undefined4 *)_calloc(1,0x244);
-  *param_2 = (int)puVar1;
-  *puVar1 = param_3;
-  puVar1[1] = param_4;
+  vertexArray = (undefined4 *)_calloc(1,0x244);
+  *vertexArrayOut = (int)vertexArray;
+  *vertexArray = initialWord0;
+  vertexArray[1] = initialWord1;
   return 0;
 }
 
 /* _gldFlushVertexArray @ 0xb710 (56 bytes) */
-int _gldFlushVertexArray(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  int param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int _gldFlushVertexArray(ctx, unused2, flushArg2, flushArg3, doFlush, flushArg5, flushArg6, flushArg7)
+  undefined4 ctx;
+  undefined4 unused2;
+  undefined4 flushArg2;
+  undefined4 flushArg3;
+  int doFlush;
+  undefined4 flushArg5;
+  undefined4 flushArg6;
+  undefined4 flushArg7;
 {
-  if (param_5 != 0) {
-    ((int (*)())FUN_0000b620)(param_1,param_4,param_3,param_4,param_5,param_6,param_7,param_8);
+  if (doFlush != 0) {
+    ((int (*)())FUN_0000b620)(ctx,flushArg3,flushArg2,flushArg3,doFlush,flushArg5,flushArg6,flushArg7);
   }
-  return param_5 != 0;
+  return doFlush != 0;
 }
 
 /* FUN_0000b750 @ 0xb750 (276 bytes) */
-int FUN_0000b750(param_1)
-  int param_1;
+int FUN_0000b750(ctx)
+  int ctx;
 {
-  int iVar1;
-  int iVar2;
-  int *piVar3;
+  int arrayState;
+  int previousArray;
+  int *vertexArray;
   
-  iVar2 = *(int *)(param_1 + 0x1d4);
-  piVar3 = *(int **)(*(int *)(param_1 + 0x18) + 0x194);
-  iVar1 = *piVar3;
-  if ((*(uint *)(iVar1 + 0x308) & *(uint *)(iVar1 + 0x300)) == 0 &&
-      (*(uint *)(iVar1 + 0x30c) & *(uint *)(iVar1 + 0x304)) == 0) {
-    if ((((unsigned char *)0x000042fc)[*(int *)(param_1 + 0x10)] != '\0') ||
-       (*(short *)(iVar1 + 0x312) != -0x7a4c)) {
-      if (*(int *)(piVar3[1] + 0x84) == 0 && *(int *)(piVar3[1] + 0x88) == 0) goto LAB_0000b830;
-      iVar1 = FUN_0001dc10(param_1,piVar3);
+  previousArray = *(int *)(ctx + 0x1d4);
+  vertexArray = *(int **)(*(int *)(ctx + 0x18) + 0x194);
+  arrayState = *vertexArray;
+  if ((*(uint *)(arrayState + 0x308) & *(uint *)(arrayState + 0x300)) == 0 &&
+      (*(uint *)(arrayState + 0x30c) & *(uint *)(arrayState + 0x304)) == 0) {
+    if ((((unsigned char *)0x000042fc)[*(int *)(ctx + 0x10)] != '\0') ||
+       (*(short *)(arrayState + 0x312) != -0x7a4c)) {
+      if (*(int *)(vertexArray[1] + 0x84) == 0 && *(int *)(vertexArray[1] + 0x88) == 0) goto LAB_0000b830;
+      arrayState = FUN_0001dc10(ctx,vertexArray);
       goto joined_r0x0000b814;
     }
   }
   else {
-    if (*(int *)(piVar3[1] + 0x84) == 0 && *(int *)(piVar3[1] + 0x88) == 0) goto LAB_0000b830;
-    iVar1 = FUN_0001e730(param_1,piVar3);
+    if (*(int *)(vertexArray[1] + 0x84) == 0 && *(int *)(vertexArray[1] + 0x88) == 0) goto LAB_0000b830;
+    arrayState = FUN_0001e730(ctx,vertexArray);
 joined_r0x0000b814:
-    if (iVar1 != 0) goto LAB_0000b830;
+    if (arrayState != 0) goto LAB_0000b830;
   }
-  piVar3 = (int *)0x0;
+  vertexArray = (int *)0x0;
 LAB_0000b830:
-  *(int **)(param_1 + 0x1d4) = piVar3;
-  if ((iVar2 != 0) && (piVar3 == (int *)0x0)) {
-    FUN_0001dff0(param_1);
+  *(int **)(ctx + 0x1d4) = vertexArray;
+  if ((previousArray != 0) && (vertexArray == (int *)0x0)) {
+    FUN_0001dff0(ctx);
     return;
   }
   return;
 }
 
 /* FUN_0000b880 @ 0xb880 (244 bytes) */
-int FUN_0000b880(param_1, param_2)
-  int param_1;
-  int param_2;
+int FUN_0000b880(ctx, vertexArray)
+  int ctx;
+  int vertexArray;
 {
-  int iVar1;
-  undefined4 uVar2;
-  int iVar3;
+  int retired;
+  undefined4 connection;
+  int backing;
   
-  iVar3 = *(int *)(param_2 + 0x228);
-  if (iVar3 != 0) {
-    if (*(char *)(iVar3 + 0x16) == '\x06') {
-      if (0x1ffff < *(int *)(iVar3 + 0x10)) {
-        _gldFlush(param_1);
+  backing = *(int *)(vertexArray + 0x228);
+  if (backing != 0) {
+    if (*(char *)(backing + 0x16) == '\x06') {
+      if (0x1ffff < *(int *)(backing + 0x10)) {
+        _gldFlush(ctx);
       }
-      iVar1 = FUN_0001a0d0(param_1,*(undefined4 *)(iVar3 + 8));
-      if (iVar1 == 0) {
-        uVar2 = *(undefined4 *)(param_1 + 4);
-        iVar3 = iVar3 + 8;
+      retired = FUN_0001a0d0(ctx,*(undefined4 *)(backing + 8));
+      if (retired == 0) {
+        connection = *(undefined4 *)(ctx + 4);
+        backing = backing + 8;
 LAB_0000b93c:
-        _io_connect_method_scalarI_structureI(uVar2,9,iVar3,1,0,0);
+        _io_connect_method_scalarI_structureI(connection,9,backing,1,0,0);
         return;
       }
     }
-    else if (*(char *)(iVar3 + 0x16) == '\a') {
-      if (0x1ffff < *(int *)(iVar3 + 0x10)) {
-        _gldFlush(param_1);
+    else if (*(char *)(backing + 0x16) == '\a') {
+      if (0x1ffff < *(int *)(backing + 0x10)) {
+        _gldFlush(ctx);
       }
-      iVar1 = FUN_0001a0d0(param_1,*(undefined4 *)(iVar3 + 0xc));
-      if (iVar1 == 0) {
-        uVar2 = *(undefined4 *)(param_1 + 4);
-        iVar3 = iVar3 + 0xc;
+      retired = FUN_0001a0d0(ctx,*(undefined4 *)(backing + 0xc));
+      if (retired == 0) {
+        connection = *(undefined4 *)(ctx + 4);
+        backing = backing + 0xc;
         goto LAB_0000b93c;
       }
     }
@@ -1098,124 +1098,124 @@ LAB_0000b93c:
 }
 
 /* FUN_0000b980 @ 0xb980 (184 bytes) */
-int FUN_0000b980(param_1, param_2)
-  undefined4 param_1;
-  int param_2;
+int FUN_0000b980(ctx, vertexArray)
+  undefined4 ctx;
+  int vertexArray;
 {
-  undefined4 uVar1;
-  int iVar2;
+  undefined4 retired;
+  int backing;
   
-  iVar2 = *(int *)(param_2 + 0x228);
-  if (iVar2 != 0) {
-    if (*(char *)(iVar2 + 0x16) == '\x06') {
-      if (0x1ffff < *(int *)(iVar2 + 0x10)) {
-        _gldFlush(param_1);
+  backing = *(int *)(vertexArray + 0x228);
+  if (backing != 0) {
+    if (*(char *)(backing + 0x16) == '\x06') {
+      if (0x1ffff < *(int *)(backing + 0x10)) {
+        _gldFlush(ctx);
       }
-      uVar1 = FUN_0001a0d0(param_1,*(undefined4 *)(iVar2 + 8));
-      return uVar1;
+      retired = FUN_0001a0d0(ctx,*(undefined4 *)(backing + 8));
+      return retired;
     }
-    if (*(char *)(iVar2 + 0x16) == '\a') {
-      if (0x1ffff < *(int *)(iVar2 + 0x10)) {
-        _gldFlush(param_1);
+    if (*(char *)(backing + 0x16) == '\a') {
+      if (0x1ffff < *(int *)(backing + 0x10)) {
+        _gldFlush(ctx);
       }
-      uVar1 = FUN_0001a0d0(param_1,*(undefined4 *)(iVar2 + 0xc));
-      return uVar1;
+      retired = FUN_0001a0d0(ctx,*(undefined4 *)(backing + 0xc));
+      return retired;
     }
   }
   return 1;
 }
 
 /* _gldModifyVertexArray @ 0xba40 (248 bytes) */
-int _gldModifyVertexArray(param_1, param_2)
-  int param_1;
-  int *param_2;
+int _gldModifyVertexArray(ctx, vertexArray)
+  int ctx;
+  int *vertexArray;
 {
-  bool bVar1;
-  int iVar2;
-  uint uVar3;
-  int *piVar4;
-  int iVar5;
-  int iVar6;
+  bool retired;
+  int updatedRefCount;
+  uint stateMismatch;
+  int *refCountSlot;
+  int backing;
+  int oldRefCount;
   char in_RESERVE;
   
-  _pthread_mutex_lock(*(undefined4 *)(param_1 + 0xc));
-  iVar5 = param_2[0x8a];
-  if (iVar5 != 0) {
-    bVar1 = ((*(uint *)(param_2[1] + 0x88) ^ 1) & 1) == 0;
-    if (!bVar1) {
-      if (*(short *)(*param_2 + 0x312) == -0x7a42) {
-        uVar3 = param_2[0x8c] ^ 7;
+  _pthread_mutex_lock(*(undefined4 *)(ctx + 0xc));
+  backing = vertexArray[0x8a];
+  if (backing != 0) {
+    retired = ((*(uint *)(vertexArray[1] + 0x88) ^ 1) & 1) == 0;
+    if (!retired) {
+      if (*(short *)(*vertexArray + 0x312) == -0x7a42) {
+        stateMismatch = vertexArray[0x8c] ^ 7;
       }
       else {
-        uVar3 = param_2[0x8c] ^ 6;
+        stateMismatch = vertexArray[0x8c] ^ 6;
       }
-      if (uVar3 == 0) goto LAB_0000bb18;
+      if (stateMismatch == 0) goto LAB_0000bb18;
     }
-    piVar4 = (int *)(iVar5 + 0x10);
+    refCountSlot = (int *)(backing + 0x10);
     do {
-      iVar6 = *piVar4;
+      oldRefCount = *refCountSlot;
       if (in_RESERVE != '\0') {
-        iVar2 = storeWordConditionalIndexed(iVar6 + -0x10000,0,piVar4);
-        *piVar4 = iVar2;
-        bVar1 = true;
+        updatedRefCount = storeWordConditionalIndexed(oldRefCount + -0x10000,0,refCountSlot);
+        *refCountSlot = updatedRefCount;
+        retired = true;
       }
-    } while (!bVar1);
-    if (iVar6 == 0x10000) {
-      _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 4),0xb,iVar5,1,0,0);
+    } while (!retired);
+    if (oldRefCount == 0x10000) {
+      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,backing,1,0,0);
     }
-    param_2[0x8a] = 0;
+    vertexArray[0x8a] = 0;
   }
 LAB_0000bb18:
-  _pthread_mutex_unlock(*(undefined4 *)(param_1 + 0xc));
+  _pthread_mutex_unlock(*(undefined4 *)(ctx + 0xc));
   return 0;
 }
 
 /* _gldReclaimVertexArray @ 0xbb40 (220 bytes) */
-int _gldReclaimVertexArray(param_1, param_2)
-  int param_1;
-  int param_2;
+int _gldReclaimVertexArray(ctx, vertexArray)
+  int ctx;
+  int vertexArray;
 {
-  int iVar1;
-  int *piVar2;
-  int iVar3;
-  int iVar4;
+  int updatedRefCount;
+  int *refCountSlot;
+  int oldRefCount;
+  int backing;
   char in_RESERVE;
-  byte in_cr0;
+  byte crBits;
   
-  if (*(int *)(param_1 + 0x1d4) == param_2) {
-    *(undefined4 *)(param_1 + 0x1d4) = 0;
-    FUN_0001dff0(param_1);
+  if (*(int *)(ctx + 0x1d4) == vertexArray) {
+    *(undefined4 *)(ctx + 0x1d4) = 0;
+    FUN_0001dff0(ctx);
   }
-  iVar4 = *(int *)(param_2 + 0x228);
-  if (iVar4 != 0) {
-    if ((0x1ffff < (int)*(uint *)(iVar4 + 0x10)) || ((*(uint *)(iVar4 + 0x10) & 0xffff) != 0)) {
-      _gldFlush(param_1);
+  backing = *(int *)(vertexArray + 0x228);
+  if (backing != 0) {
+    if ((0x1ffff < (int)*(uint *)(backing + 0x10)) || ((*(uint *)(backing + 0x10) & 0xffff) != 0)) {
+      _gldFlush(ctx);
     }
-    ((int (*)())FUN_0000b880)(param_1,param_2);
-    piVar2 = (int *)(iVar4 + 0x10);
+    ((int (*)())FUN_0000b880)(ctx,vertexArray);
+    refCountSlot = (int *)(backing + 0x10);
     do {
-      iVar3 = *piVar2;
+      oldRefCount = *refCountSlot;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar3 + -0x10000,0,piVar2);
-        *piVar2 = iVar1;
-        in_cr0 = 2;
+        updatedRefCount = storeWordConditionalIndexed(oldRefCount + -0x10000,0,refCountSlot);
+        *refCountSlot = updatedRefCount;
+        crBits = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
-    if (iVar3 == 0x10000) {
-      _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 4),0xb,iVar4,1,0,0);
+    } while (!(bool)(crBits >> 1 & 1));
+    if (oldRefCount == 0x10000) {
+      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,backing,1,0,0);
     }
-    *(undefined4 *)(param_2 + 0x228) = 0;
+    *(undefined4 *)(vertexArray + 0x228) = 0;
   }
   return;
 }
 
 /* _gldDestroyVertexArray @ 0xbc20 (56 bytes) */
-int _gldDestroyVertexArray(param_1, param_2)
-  undefined4 param_1;
-  undefined4 param_2;
+int _gldDestroyVertexArray(ctx, vertexArray)
+  undefined4 ctx;
+  undefined4 vertexArray;
 {
-  ((int (*)())_gldReclaimVertexArray)(param_1,param_2);
-  _free(param_2);
+  ((int (*)())_gldReclaimVertexArray)(ctx,vertexArray);
+  _free(vertexArray);
   return 0;
 }
 
@@ -8611,104 +8611,104 @@ LAB_00017070:
 }
 
 /* FUN_00017100 @ 0x17100 (84 bytes) */
-int FUN_00017100(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  undefined4 *param_3;
+int FUN_00017100(ctx, pname, values)
+  int ctx;
+  int pname;
+  undefined4 *values;
 {
-  if (param_2 == 0xcb) {
-    if (*(char *)(param_1 + 0x2a80) != '\0') {
-      *(char *)(param_1 + 0x146) = (char)*param_3;
+  if (pname == 0xcb) {
+    if (*(char *)(ctx + 0x2a80) != '\0') {
+      *(char *)(ctx + 0x146) = (char)*values;
       return 1;
     }
   }
-  else if ((param_2 == 0xde) && (*(char *)(param_1 + 0x2a80) != '\0')) {
-    *(char *)(param_1 + 0x142) = (char)*param_3;
+  else if ((pname == 0xde) && (*(char *)(ctx + 0x2a80) != '\0')) {
+    *(char *)(ctx + 0x142) = (char)*values;
     return 1;
   }
   return 0;
 }
 
 /* FUN_00017160 @ 0x17160 (236 bytes) */
-int FUN_00017160(param_1, param_2, param_3)
-  int param_1;
-  uint *param_2;
-  int param_3;
+int FUN_00017160(ctx, flagsInOut, pbuffer)
+  int ctx;
+  uint *flagsInOut;
+  int pbuffer;
 {
-  uint uVar1;
-  uint uVar2;
-  int iVar3;
+  uint levelBits;
+  uint flags;
+  int target;
   
-  uVar2 = *param_2 & 0x80ffffff;
-  *param_2 = uVar2;
-  if (param_3 == 0) {
-    *(undefined1 *)(param_1 + 0x143) = 1;
+  flags = *flagsInOut & 0x80ffffff;
+  *flagsInOut = flags;
+  if (pbuffer == 0) {
+    *(undefined1 *)(ctx + 0x143) = 1;
   }
   else {
-    iVar3 = *(int *)(param_3 + 0xc);
-    if (iVar3 - 0xde0U < 2) {
-      uVar2 = uVar2 | 0x10000000;
-      *param_2 = uVar2;
+    target = *(int *)(pbuffer + 0xc);
+    if (target - 0xde0U < 2) {
+      flags = flags | 0x10000000;
+      *flagsInOut = flags;
     }
-    else if (iVar3 == 0x84f5) {
-      uVar2 = uVar2 | 0x20000000;
-      *param_2 = uVar2;
+    else if (target == 0x84f5) {
+      flags = flags | 0x20000000;
+      *flagsInOut = flags;
     }
-    else if (iVar3 == 0x8513) {
-      uVar2 = uVar2 | 0x30000000;
-      *param_2 = uVar2;
+    else if (target == 0x8513) {
+      flags = flags | 0x30000000;
+      *flagsInOut = flags;
     }
-    uVar1 = 0xc000000;
-    if (*(int *)(param_3 + 0x14) < 0xd) {
-      uVar1 = *(int *)(param_3 + 0x14) << 0x18;
+    levelBits = 0xc000000;
+    if (*(int *)(pbuffer + 0x14) < 0xd) {
+      levelBits = *(int *)(pbuffer + 0x14) << 0x18;
     }
-    *param_2 = uVar1 & 0xf000000 | uVar2;
-    *(undefined1 *)(param_1 + 0x143) = 0;
+    *flagsInOut = levelBits & 0xf000000 | flags;
+    *(undefined1 *)(ctx + 0x143) = 0;
   }
-  if (*(int *)(param_1 + 0x150) == 0) {
-    if (param_3 == 0) {
-      **(uint **)(param_1 + 0x14) = **(uint **)(param_1 + 0x14) | 2;
-      ((unsigned char *)0x00002b7c)[param_1] = 1;
+  if (*(int *)(ctx + 0x150) == 0) {
+    if (pbuffer == 0) {
+      **(uint **)(ctx + 0x14) = **(uint **)(ctx + 0x14) | 2;
+      ((unsigned char *)0x00002b7c)[ctx] = 1;
     }
     else {
-      **(uint **)(param_1 + 0x14) = **(uint **)(param_1 + 0x14) & 0xfffffffd;
-      ((unsigned char *)0x00002b7c)[param_1] = 0;
+      **(uint **)(ctx + 0x14) = **(uint **)(ctx + 0x14) & 0xfffffffd;
+      ((unsigned char *)0x00002b7c)[ctx] = 0;
     }
   }
-  FUN_000a7a60(param_1);
+  FUN_000a7a60(ctx);
   return;
 }
 
 /* FUN_00017260 @ 0x17260 (168 bytes) */
-int FUN_00017260(param_1)
-  int param_1;
+int FUN_00017260(ctx)
+  int ctx;
 {
-  int iVar1;
-  undefined1 uVar2;
-  int *piVar3;
-  int iVar4;
-  int iVar5;
+  int attachment;
+  undefined1 formatByte;
+  int *framebuffer;
+  int attachPoint;
+  int attachLeft;
   
-  piVar3 = *(int **)(param_1 + 0x150);
-  if (piVar3 == (int *)0x0) {
-    uVar2 = FUN_0002f410(*(undefined4 *)(param_1 + 0x154));
-    ((unsigned char *)0x00002b7f)[param_1] = uVar2;
+  framebuffer = *(int **)(ctx + 0x150);
+  if (framebuffer == (int *)0x0) {
+    formatByte = FUN_0002f410(*(undefined4 *)(ctx + 0x154));
+    ((unsigned char *)0x00002b7f)[ctx] = formatByte;
   }
   else {
-    iVar5 = 4;
-    ((unsigned char *)0x00002b7f)[param_1] = 0x2f;
-    iVar4 = *piVar3;
+    attachLeft = 4;
+    ((unsigned char *)0x00002b7f)[ctx] = 0x2f;
+    attachPoint = *framebuffer;
     do {
-      if ((*(ushort *)(iVar4 + 0x90) != 0) &&
-         (iVar1 = *(int *)((*(ushort *)(iVar4 + 0x90) - 0x8ce0) * 4 + piVar3[1]), iVar1 != 0)) {
-        ((unsigned char *)0x00002b7f)[param_1] = *(undefined1 *)(iVar1 + 0x38);
+      if ((*(ushort *)(attachPoint + 0x90) != 0) &&
+         (attachment = *(int *)((*(ushort *)(attachPoint + 0x90) - 0x8ce0) * 4 + framebuffer[1]), attachment != 0)) {
+        ((unsigned char *)0x00002b7f)[ctx] = *(undefined1 *)(attachment + 0x38);
         break;
       }
-      iVar4 = iVar4 + 2;
-      iVar5 = iVar5 + -1;
-    } while (iVar5 != 0);
+      attachPoint = attachPoint + 2;
+      attachLeft = attachLeft + -1;
+    } while (attachLeft != 0);
   }
-  return FUN_000a7a60(param_1);
+  return FUN_000a7a60(ctx);
 }
 
 /* FUN_00017310 @ 0x17310 (1008 bytes) */
@@ -8856,12 +8856,12 @@ int FUN_00017310(param_1, param_2, param_3)
 }
 
 /* FUN_00017720 @ 0x17720 (36 bytes) */
-int FUN_00017720(param_1)
-  undefined4 param_1;
+int FUN_00017720(rendererIndex)
+  undefined4 rendererIndex;
 {
   uint uVar1;
   
-  uVar1 = FUN_00039100(param_1);
+  uVar1 = FUN_00039100(rendererIndex);
   return uVar1 | 0x1900;
 }
 
@@ -8990,54 +8990,54 @@ int FUN_00017750(param_1, param_2, param_3)
 }
 
 /* FUN_00017a40 @ 0x17a40 (200 bytes) */
-int FUN_00017a40(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  uint *param_1;
-  int param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int FUN_00017a40(flagsInOut, pixelFormat, unused3, unused4, unused5, unused6, unused7)
+  uint *flagsInOut;
+  int pixelFormat;
+  undefined4 unused3;
+  undefined4 unused4;
+  undefined4 unused5;
+  undefined4 unused6;
+  undefined4 unused7;
 {
-  int iVar1;
-  uint uVar2;
+  int depthMask;
+  uint flags;
   
-  iVar1 = *(int *)(param_2 + 0x18);
-  uVar2 = *param_1;
-  if (iVar1 != 1) {
-    if (iVar1 == 0x400) {
-      uVar2 = uVar2 | 0x10000;
+  depthMask = *(int *)(pixelFormat + 0x18);
+  flags = *flagsInOut;
+  if (depthMask != 1) {
+    if (depthMask == 0x400) {
+      flags = flags | 0x10000;
     }
-    else if (iVar1 == 0x800) {
-      uVar2 = uVar2 | 0x30000;
+    else if (depthMask == 0x800) {
+      flags = flags | 0x30000;
     }
     else {
-      uVar2 = uVar2 | 0x20000;
+      flags = flags | 0x20000;
     }
   }
-  if ((*(uint *)(param_2 + 8) & 8) != 0) {
-    uVar2 = uVar2 | 0x80000000;
+  if ((*(uint *)(pixelFormat + 8) & 8) != 0) {
+    flags = flags | 0x80000000;
   }
-  if (*(short *)(param_2 + 0x24) != 0) {
-    if (((uVar2 & 0xf) == 4) && (*(int *)(param_2 + 0x28) != 1)) {
-      if (*(short *)(param_2 + 0x26) == 6) {
-        uVar2 = uVar2 | 0x400000;
+  if (*(short *)(pixelFormat + 0x24) != 0) {
+    if (((flags & 0xf) == 4) && (*(int *)(pixelFormat + 0x28) != 1)) {
+      if (*(short *)(pixelFormat + 0x26) == 6) {
+        flags = flags | 0x400000;
       }
-      else if (*(short *)(param_2 + 0x26) == 4) {
-        uVar2 = uVar2 | 0x200000;
+      else if (*(short *)(pixelFormat + 0x26) == 4) {
+        flags = flags | 0x200000;
       }
       else {
-        uVar2 = uVar2 | 0x100000;
+        flags = flags | 0x100000;
       }
     }
-    else if ((*(short *)(param_2 + 0x26) == 4) || (*(short *)(param_2 + 0x26) == 6)) {
-      uVar2 = uVar2 | 0x80000;
+    else if ((*(short *)(pixelFormat + 0x26) == 4) || (*(short *)(pixelFormat + 0x26) == 6)) {
+      flags = flags | 0x80000;
     }
     else {
-      uVar2 = uVar2 | 0x40000;
+      flags = flags | 0x40000;
     }
   }
-  *param_1 = uVar2;
+  *flagsInOut = flags;
   return;
 }
 

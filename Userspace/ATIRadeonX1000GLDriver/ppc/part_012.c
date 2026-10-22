@@ -516,23 +516,23 @@ int FUN_00083c90(param_1, param_2)
 }
 
 /* FUN_00083e10 @ 0x83e10 (692 bytes) */
-int FUN_00083e10(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12, param_13, param_14, param_15, param_16)
-  int param_1;
-  uint param_2;
-  uint param_3;
-  uint *param_4;
-  uint param_5;
-  uint param_6;
-  uint *param_7;
-  uint *param_8;
-  uint param_9;
-  uint param_10;
-  uint *param_11;
-  uint *param_12;
-  uint param_13;
-  uint param_14;
-  uint *param_15;
-  uint *param_16;
+int FUN_00083e10(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate, src2File, src2Index, src2Select, src2Negate)
+  int ctx;
+  uint dstFile;
+  uint dstIndex;
+  uint *dstMask;
+  uint src0File;
+  uint src0Index;
+  uint *src0Select;
+  uint *src0Negate;
+  uint src1File;
+  uint src1Index;
+  uint *src1Select;
+  uint *src1Negate;
+  uint src2File;
+  uint src2Index;
+  uint *src2Select;
+  uint *src2Negate;
 {
   uint uVar1;
   uint uVar2;
@@ -542,143 +542,143 @@ int FUN_00083e10(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint uVar6;
   uint uVar7;
   uint uVar8;
-  int iVar9;
-  uint uVar10;
-  uint uVar11;
-  uint uVar12;
-  uint uVar13;
-  undefined4 uVar14;
-  int iVar15;
-  uint uVar16;
-  uint uVar17;
-  int iVar18;
+  int instrOffset;
+  uint src0FileField;
+  uint src1FileField;
+  uint oldWord1;
+  uint oldWord0;
+  undefined4 newStorage;
+  int instrArray;
+  uint oldWord2;
+  uint oldWord3;
+  int instr;
   
-  iVar18 = *(int *)(param_1 + 0x3cc);
-  if (*(uint *)(param_1 + 0x3e0) < iVar18 + 1U) {
-    iVar18 = *(uint *)(param_1 + 0x3e0) * 0x10;
-    uVar14 = _calloc(iVar18 + 0x200,1);
-    if (iVar18 != 0) {
-      _memcpy(uVar14,*(undefined4 *)(param_1 + 0x3c8),iVar18);
-      _free(*(undefined4 *)(param_1 + 0x3c8));
+  instr = *(int *)(ctx + 0x3cc);
+  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
+    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+    newStorage = _calloc(instr + 0x200,1);
+    if (instr != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
+      _free(*(undefined4 *)(ctx + 0x3c8));
     }
-    *(undefined4 *)(param_1 + 0x3c8) = uVar14;
-    iVar18 = *(int *)(param_1 + 0x3cc);
-    *(int *)(param_1 + 0x3e0) = *(int *)(param_1 + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + 0x3c8) = newStorage;
+    instr = *(int *)(ctx + 0x3cc);
+    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
   }
-  iVar15 = *(int *)(param_1 + 0x3c8);
-  iVar9 = iVar18 * 0x10;
-  *(int *)(param_1 + 0x3cc) = iVar18 + 1;
-  iVar18 = iVar9 + iVar15;
-  *(int *)(param_1 + 0x3dc) = iVar18;
-  *(undefined4 *)(iVar9 + iVar15) = 0;
-  *(undefined1 *)(iVar18 + 3) = 0x44;
-  uVar13 = *(uint *)(iVar9 + iVar15);
-  uVar1 = (param_2 & 0xf) << 8;
-  uVar2 = (param_3 & 0x7f) << 0xd;
-  *(uint *)(iVar9 + iVar15) = uVar2 | uVar1 | uVar13 & 0xfff010ff;
-  uVar3 = (*param_4 & 1) << 0x14;
-  *(uint *)(iVar9 + iVar15) = uVar3 | uVar2 | uVar1 | uVar13 & 0xffe010ff;
-  uVar4 = (param_4[1] & 1) << 0x15;
-  *(uint *)(iVar9 + iVar15) = uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xffc010ff;
-  uVar5 = (param_4[2] & 1) << 0x16;
-  *(uint *)(iVar9 + iVar15) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xff8010ff;
-  *(uint *)(iVar9 + iVar15) =
-       (param_4[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xff0010ff;
-  uVar12 = *(uint *)(iVar18 + 4);
-  uVar16 = *(uint *)(iVar18 + 8);
-  uVar10 = param_5 & 0xf;
-  uVar11 = param_9 & 0xf;
-  uVar1 = (param_6 & 0xff) << 5;
-  uVar2 = (param_10 & 0xff) << 5;
-  *(uint *)(iVar18 + 4) = uVar1 | uVar10 | uVar12 & 0xffffe000;
-  uVar3 = (*param_7 & 7) << 0xd;
-  *(uint *)(iVar18 + 4) = uVar3 | uVar1 | uVar10 | uVar12 & 0xffff0000;
-  uVar4 = (param_7[1] & 7) << 0x10;
-  *(uint *)(iVar18 + 4) = uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfff80000;
-  uVar5 = (param_7[2] & 7) << 0x13;
-  *(uint *)(iVar18 + 4) = uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xffc00000;
-  uVar13 = (param_7[3] & 7) << 0x16;
-  *(uint *)(iVar18 + 4) = uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfe000000;
-  uVar6 = (*param_8 & 1) << 0x19;
-  *(uint *)(iVar18 + 4) =
-       uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfc000000;
-  uVar7 = (param_8[1] & 1) << 0x1a;
-  *(uint *)(iVar18 + 4) =
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xf8000000;
-  uVar8 = (param_8[2] & 1) << 0x1b;
-  *(uint *)(iVar18 + 4) =
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xf0000000
+  instrArray = *(int *)(ctx + 0x3c8);
+  instrOffset = instr * 0x10;
+  *(int *)(ctx + 0x3cc) = instr + 1;
+  instr = instrOffset + instrArray;
+  *(int *)(ctx + 0x3dc) = instr;
+  *(undefined4 *)(instrOffset + instrArray) = 0;
+  *(undefined1 *)(instr + 3) = 0x44;
+  oldWord0 = *(uint *)(instrOffset + instrArray);
+  uVar1 = (dstFile & 0xf) << 8;
+  uVar2 = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
+  uVar3 = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
+  uVar4 = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
+  uVar5 = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  *(uint *)(instrOffset + instrArray) =
+       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+  oldWord1 = *(uint *)(instr + 4);
+  oldWord2 = *(uint *)(instr + 8);
+  src0FileField = src0File & 0xf;
+  src1FileField = src1File & 0xf;
+  uVar1 = (src0Index & 0xff) << 5;
+  uVar2 = (src1Index & 0xff) << 5;
+  *(uint *)(instr + 4) = uVar1 | src0FileField | oldWord1 & 0xffffe000;
+  uVar3 = (*src0Select & 7) << 0xd;
+  *(uint *)(instr + 4) = uVar3 | uVar1 | src0FileField | oldWord1 & 0xffff0000;
+  uVar4 = (src0Select[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfff80000;
+  uVar5 = (src0Select[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xffc00000;
+  oldWord0 = (src0Select[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfe000000;
+  uVar6 = (*src0Negate & 1) << 0x19;
+  *(uint *)(instr + 4) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfc000000;
+  uVar7 = (src0Negate[1] & 1) << 0x1a;
+  *(uint *)(instr + 4) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf8000000;
+  uVar8 = (src0Negate[2] & 1) << 0x1b;
+  *(uint *)(instr + 4) =
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf0000000
   ;
-  uVar12 = param_8[3];
-  *(uint *)(iVar18 + 8) = uVar2 | uVar11 | uVar16 & 0xffffe000;
-  uVar17 = *(uint *)(iVar18 + 0xc);
-  *(uint *)(iVar18 + 4) =
-       (uVar12 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10;
-  uVar1 = (*param_11 & 7) << 0xd;
-  uVar10 = param_13 & 0xf;
-  *(uint *)(iVar18 + 8) = uVar1 | uVar2 | uVar11 | uVar16 & 0xffff0000;
-  uVar3 = (param_14 & 0xff) << 5;
-  uVar4 = (param_11[1] & 7) << 0x10;
-  *(uint *)(iVar18 + 8) = uVar4 | uVar1 | uVar2 | uVar11 | uVar16 & 0xfff80000;
-  uVar5 = (param_11[2] & 7) << 0x13;
-  *(uint *)(iVar18 + 8) = uVar5 | uVar4 | uVar1 | uVar2 | uVar11 | uVar16 & 0xffc00000;
-  uVar13 = (param_11[3] & 7) << 0x16;
-  *(uint *)(iVar18 + 8) = uVar13 | uVar5 | uVar4 | uVar1 | uVar2 | uVar11 | uVar16 & 0xfe000000;
-  uVar6 = (*param_12 & 1) << 0x19;
-  *(uint *)(iVar18 + 8) =
-       uVar6 | uVar13 | uVar5 | uVar4 | uVar1 | uVar2 | uVar11 | uVar16 & 0xfc000000;
-  uVar7 = (param_12[1] & 1) << 0x1a;
-  *(uint *)(iVar18 + 8) =
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar1 | uVar2 | uVar11 | uVar16 & 0xf8000000;
-  uVar8 = (param_12[2] & 1) << 0x1b;
-  *(uint *)(iVar18 + 8) =
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar1 | uVar2 | uVar11 | uVar16 & 0xf0000000
+  oldWord1 = src0Negate[3];
+  *(uint *)(instr + 8) = uVar2 | src1FileField | oldWord2 & 0xffffe000;
+  oldWord3 = *(uint *)(instr + 0xc);
+  *(uint *)(instr + 4) =
+       (oldWord1 & 1) << 0x1c |
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField;
+  uVar1 = (*src1Select & 7) << 0xd;
+  src0FileField = src2File & 0xf;
+  *(uint *)(instr + 8) = uVar1 | uVar2 | src1FileField | oldWord2 & 0xffff0000;
+  uVar3 = (src2Index & 0xff) << 5;
+  uVar4 = (src1Select[1] & 7) << 0x10;
+  *(uint *)(instr + 8) = uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfff80000;
+  uVar5 = (src1Select[2] & 7) << 0x13;
+  *(uint *)(instr + 8) = uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xffc00000;
+  oldWord0 = (src1Select[3] & 7) << 0x16;
+  *(uint *)(instr + 8) = oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfe000000;
+  uVar6 = (*src1Negate & 1) << 0x19;
+  *(uint *)(instr + 8) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfc000000;
+  uVar7 = (src1Negate[1] & 1) << 0x1a;
+  *(uint *)(instr + 8) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf8000000;
+  uVar8 = (src1Negate[2] & 1) << 0x1b;
+  *(uint *)(instr + 8) =
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf0000000
   ;
-  uVar12 = param_12[3];
-  *(uint *)(iVar18 + 0xc) = uVar3 | uVar10 | uVar17 & 0xffffe000;
-  *(uint *)(iVar18 + 8) =
-       (uVar12 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar1 | uVar2 | uVar11;
-  uVar1 = (*param_15 & 7) << 0xd;
-  *(uint *)(iVar18 + 0xc) = uVar1 | uVar3 | uVar10 | uVar17 & 0xffff0000;
-  uVar2 = (param_15[1] & 7) << 0x10;
-  *(uint *)(iVar18 + 0xc) = uVar2 | uVar1 | uVar3 | uVar10 | uVar17 & 0xfff80000;
-  uVar4 = (param_15[2] & 7) << 0x13;
-  *(uint *)(iVar18 + 0xc) = uVar4 | uVar2 | uVar1 | uVar3 | uVar10 | uVar17 & 0xffc00000;
-  uVar5 = (param_15[3] & 7) << 0x16;
-  *(uint *)(iVar18 + 0xc) = uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar10 | uVar17 & 0xfe000000;
-  uVar13 = (*param_16 & 1) << 0x19;
-  *(uint *)(iVar18 + 0xc) =
-       uVar13 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar10 | uVar17 & 0xfc000000;
-  uVar6 = (param_16[1] & 1) << 0x1a;
-  *(uint *)(iVar18 + 0xc) =
-       uVar6 | uVar13 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar10 | uVar17 & 0xf8000000;
-  uVar7 = (param_16[2] & 1) << 0x1b;
-  *(uint *)(iVar18 + 0xc) =
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar10 | uVar17 & 0xf0000000
+  oldWord1 = src1Negate[3];
+  *(uint *)(instr + 0xc) = uVar3 | src0FileField | oldWord3 & 0xffffe000;
+  *(uint *)(instr + 8) =
+       (oldWord1 & 1) << 0x1c |
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField;
+  uVar1 = (*src2Select & 7) << 0xd;
+  *(uint *)(instr + 0xc) = uVar1 | uVar3 | src0FileField | oldWord3 & 0xffff0000;
+  uVar2 = (src2Select[1] & 7) << 0x10;
+  *(uint *)(instr + 0xc) = uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xfff80000;
+  uVar4 = (src2Select[2] & 7) << 0x13;
+  *(uint *)(instr + 0xc) = uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xffc00000;
+  uVar5 = (src2Select[3] & 7) << 0x16;
+  *(uint *)(instr + 0xc) = uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xfe000000;
+  oldWord0 = (*src2Negate & 1) << 0x19;
+  *(uint *)(instr + 0xc) =
+       oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xfc000000;
+  uVar6 = (src2Negate[1] & 1) << 0x1a;
+  *(uint *)(instr + 0xc) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xf8000000;
+  uVar7 = (src2Negate[2] & 1) << 0x1b;
+  *(uint *)(instr + 0xc) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xf0000000
   ;
-  *(uint *)(iVar18 + 0xc) =
-       (param_16[3] & 1) << 0x1c |
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar10;
-  *(int *)(param_1 + 0x3dc) = *(int *)(param_1 + 0x3dc) + 0x10;
+  *(uint *)(instr + 0xc) =
+       (src2Negate[3] & 1) << 0x1c |
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField;
+  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
   return;
 }
 
 /* FUN_000840d0 @ 0x840d0 (548 bytes) */
-int FUN_000840d0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
-  int param_1;
-  uint param_2;
-  uint param_3;
-  uint *param_4;
-  uint param_5;
-  uint param_6;
-  uint *param_7;
-  uint *param_8;
-  uint param_9;
-  uint param_10;
-  uint *param_11;
-  uint *param_12;
+int FUN_000840d0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
+  int ctx;
+  uint dstFile;
+  uint dstIndex;
+  uint *dstMask;
+  uint src0File;
+  uint src0Index;
+  uint *src0Select;
+  uint *src0Negate;
+  uint src1File;
+  uint src1Index;
+  uint *src1Select;
+  uint *src1Negate;
 {
   uint uVar1;
   uint uVar2;
@@ -688,100 +688,100 @@ int FUN_000840d0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint uVar6;
   uint uVar7;
   uint uVar8;
-  int iVar9;
-  uint uVar10;
-  uint uVar11;
-  uint uVar12;
-  uint uVar13;
-  undefined4 uVar14;
-  int iVar15;
-  int iVar16;
-  uint uVar17;
+  int instrOffset;
+  uint src0FileField;
+  uint src1FileField;
+  uint oldWord1;
+  uint oldWord0;
+  undefined4 newStorage;
+  int instr;
+  int instrArray;
+  uint oldWord2;
   
-  iVar15 = *(int *)(param_1 + 0x3cc);
-  if (*(uint *)(param_1 + 0x3e0) < iVar15 + 1U) {
-    iVar15 = *(uint *)(param_1 + 0x3e0) * 0x10;
-    uVar14 = _calloc(iVar15 + 0x200,1);
-    if (iVar15 != 0) {
-      _memcpy(uVar14,*(undefined4 *)(param_1 + 0x3c8),iVar15);
-      _free(*(undefined4 *)(param_1 + 0x3c8));
+  instr = *(int *)(ctx + 0x3cc);
+  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
+    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+    newStorage = _calloc(instr + 0x200,1);
+    if (instr != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
+      _free(*(undefined4 *)(ctx + 0x3c8));
     }
-    *(undefined4 *)(param_1 + 0x3c8) = uVar14;
-    iVar15 = *(int *)(param_1 + 0x3cc);
-    *(int *)(param_1 + 0x3e0) = *(int *)(param_1 + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + 0x3c8) = newStorage;
+    instr = *(int *)(ctx + 0x3cc);
+    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
   }
-  iVar16 = *(int *)(param_1 + 0x3c8);
-  iVar9 = iVar15 * 0x10;
-  *(int *)(param_1 + 0x3cc) = iVar15 + 1;
-  iVar15 = iVar9 + iVar16;
-  *(int *)(param_1 + 0x3dc) = iVar15;
-  *(undefined4 *)(iVar9 + iVar16) = 0;
-  *(undefined1 *)(iVar15 + 3) = 1;
-  uVar13 = *(uint *)(iVar9 + iVar16);
-  uVar1 = (param_2 & 0xf) << 8;
-  uVar2 = (param_3 & 0x7f) << 0xd;
-  *(uint *)(iVar9 + iVar16) = uVar2 | uVar1 | uVar13 & 0xfff010ff;
-  uVar3 = (*param_4 & 1) << 0x14;
-  *(uint *)(iVar9 + iVar16) = uVar3 | uVar2 | uVar1 | uVar13 & 0xffe010ff;
-  uVar4 = (param_4[1] & 1) << 0x15;
-  *(uint *)(iVar9 + iVar16) = uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xffc010ff;
-  uVar5 = (param_4[2] & 1) << 0x16;
-  *(uint *)(iVar9 + iVar16) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xff8010ff;
-  *(uint *)(iVar9 + iVar16) =
-       (param_4[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xff0010ff;
-  uVar12 = *(uint *)(iVar15 + 4);
-  uVar17 = *(uint *)(iVar15 + 8);
-  uVar10 = param_5 & 0xf;
-  uVar11 = param_9 & 0xf;
-  uVar1 = (param_6 & 0xff) << 5;
-  uVar2 = (param_10 & 0xff) << 5;
-  *(uint *)(iVar15 + 4) = uVar1 | uVar10 | uVar12 & 0xffffe000;
-  uVar3 = (*param_7 & 7) << 0xd;
-  *(uint *)(iVar15 + 4) = uVar3 | uVar1 | uVar10 | uVar12 & 0xffff0000;
-  uVar4 = (param_7[1] & 7) << 0x10;
-  *(uint *)(iVar15 + 4) = uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfff80000;
-  uVar5 = (param_7[2] & 7) << 0x13;
-  *(uint *)(iVar15 + 4) = uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xffc00000;
-  uVar13 = (param_7[3] & 7) << 0x16;
-  *(uint *)(iVar15 + 4) = uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfe000000;
-  uVar6 = (*param_8 & 1) << 0x19;
-  *(uint *)(iVar15 + 4) =
-       uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfc000000;
-  uVar7 = (param_8[1] & 1) << 0x1a;
-  *(uint *)(iVar15 + 4) =
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xf8000000;
-  uVar8 = (param_8[2] & 1) << 0x1b;
-  *(uint *)(iVar15 + 4) =
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xf0000000
+  instrArray = *(int *)(ctx + 0x3c8);
+  instrOffset = instr * 0x10;
+  *(int *)(ctx + 0x3cc) = instr + 1;
+  instr = instrOffset + instrArray;
+  *(int *)(ctx + 0x3dc) = instr;
+  *(undefined4 *)(instrOffset + instrArray) = 0;
+  *(undefined1 *)(instr + 3) = 1;
+  oldWord0 = *(uint *)(instrOffset + instrArray);
+  uVar1 = (dstFile & 0xf) << 8;
+  uVar2 = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
+  uVar3 = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
+  uVar4 = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
+  uVar5 = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  *(uint *)(instrOffset + instrArray) =
+       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+  oldWord1 = *(uint *)(instr + 4);
+  oldWord2 = *(uint *)(instr + 8);
+  src0FileField = src0File & 0xf;
+  src1FileField = src1File & 0xf;
+  uVar1 = (src0Index & 0xff) << 5;
+  uVar2 = (src1Index & 0xff) << 5;
+  *(uint *)(instr + 4) = uVar1 | src0FileField | oldWord1 & 0xffffe000;
+  uVar3 = (*src0Select & 7) << 0xd;
+  *(uint *)(instr + 4) = uVar3 | uVar1 | src0FileField | oldWord1 & 0xffff0000;
+  uVar4 = (src0Select[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfff80000;
+  uVar5 = (src0Select[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xffc00000;
+  oldWord0 = (src0Select[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfe000000;
+  uVar6 = (*src0Negate & 1) << 0x19;
+  *(uint *)(instr + 4) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfc000000;
+  uVar7 = (src0Negate[1] & 1) << 0x1a;
+  *(uint *)(instr + 4) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf8000000;
+  uVar8 = (src0Negate[2] & 1) << 0x1b;
+  *(uint *)(instr + 4) =
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf0000000
   ;
-  uVar12 = param_8[3];
-  *(uint *)(iVar15 + 8) = uVar2 | uVar11 | uVar17 & 0xffffe000;
-  *(uint *)(iVar15 + 4) =
-       (uVar12 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10;
-  uVar1 = (*param_11 & 7) << 0xd;
-  *(uint *)(iVar15 + 8) = uVar1 | uVar2 | uVar11 | uVar17 & 0xffff0000;
-  uVar3 = (param_11[1] & 7) << 0x10;
-  *(uint *)(iVar15 + 8) = uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xfff80000;
-  uVar4 = (param_11[2] & 7) << 0x13;
-  *(uint *)(iVar15 + 8) = uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xffc00000;
-  uVar5 = (param_11[3] & 7) << 0x16;
-  *(uint *)(iVar15 + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xfe000000;
-  uVar13 = (*param_12 & 1) << 0x19;
-  *(uint *)(iVar15 + 8) =
-       uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xfc000000;
-  uVar6 = (param_12[1] & 1) << 0x1a;
-  *(uint *)(iVar15 + 8) =
-       uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xf8000000;
-  uVar7 = (param_12[2] & 1) << 0x1b;
-  *(uint *)(iVar15 + 8) =
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xf0000000
+  oldWord1 = src0Negate[3];
+  *(uint *)(instr + 8) = uVar2 | src1FileField | oldWord2 & 0xffffe000;
+  *(uint *)(instr + 4) =
+       (oldWord1 & 1) << 0x1c |
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField;
+  uVar1 = (*src1Select & 7) << 0xd;
+  *(uint *)(instr + 8) = uVar1 | uVar2 | src1FileField | oldWord2 & 0xffff0000;
+  uVar3 = (src1Select[1] & 7) << 0x10;
+  *(uint *)(instr + 8) = uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfff80000;
+  uVar4 = (src1Select[2] & 7) << 0x13;
+  *(uint *)(instr + 8) = uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xffc00000;
+  uVar5 = (src1Select[3] & 7) << 0x16;
+  *(uint *)(instr + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfe000000;
+  oldWord0 = (*src1Negate & 1) << 0x19;
+  *(uint *)(instr + 8) =
+       oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfc000000;
+  uVar6 = (src1Negate[1] & 1) << 0x1a;
+  *(uint *)(instr + 8) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf8000000;
+  uVar7 = (src1Negate[2] & 1) << 0x1b;
+  *(uint *)(instr + 8) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf0000000
   ;
-  uVar1 = (param_12[3] & 1) << 0x1c |
-          uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11;
-  *(uint *)(iVar15 + 0xc) = uVar1;
-  *(uint *)(iVar15 + 8) = uVar1;
-  *(int *)(param_1 + 0x3dc) = *(int *)(param_1 + 0x3dc) + 0x10;
+  uVar1 = (src1Negate[3] & 1) << 0x1c |
+          uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField;
+  *(uint *)(instr + 0xc) = uVar1;
+  *(uint *)(instr + 8) = uVar1;
+  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
   return;
 }
 
@@ -876,19 +876,19 @@ int FUN_00084300(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
 }
 
 /* FUN_000844e0 @ 0x844e0 (548 bytes) */
-int FUN_000844e0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
-  int param_1;
-  uint param_2;
-  uint param_3;
-  uint *param_4;
-  uint param_5;
-  uint param_6;
-  uint *param_7;
-  uint *param_8;
-  uint param_9;
-  uint param_10;
-  uint *param_11;
-  uint *param_12;
+int FUN_000844e0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
+  int ctx;
+  uint dstFile;
+  uint dstIndex;
+  uint *dstMask;
+  uint src0File;
+  uint src0Index;
+  uint *src0Select;
+  uint *src0Negate;
+  uint src1File;
+  uint src1Index;
+  uint *src1Select;
+  uint *src1Negate;
 {
   uint uVar1;
   uint uVar2;
@@ -898,117 +898,117 @@ int FUN_000844e0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint uVar6;
   uint uVar7;
   uint uVar8;
-  int iVar9;
-  uint uVar10;
-  uint uVar11;
-  uint uVar12;
-  uint uVar13;
-  undefined4 uVar14;
-  int iVar15;
-  int iVar16;
-  uint uVar17;
+  int instrOffset;
+  uint src0FileField;
+  uint src1FileField;
+  uint oldWord1;
+  uint oldWord0;
+  undefined4 newStorage;
+  int instr;
+  int instrArray;
+  uint oldWord2;
   
-  iVar15 = *(int *)(param_1 + 0x3cc);
-  if (*(uint *)(param_1 + 0x3e0) < iVar15 + 1U) {
-    iVar15 = *(uint *)(param_1 + 0x3e0) * 0x10;
-    uVar14 = _calloc(iVar15 + 0x200,1);
-    if (iVar15 != 0) {
-      _memcpy(uVar14,*(undefined4 *)(param_1 + 0x3c8),iVar15);
-      _free(*(undefined4 *)(param_1 + 0x3c8));
+  instr = *(int *)(ctx + 0x3cc);
+  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
+    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+    newStorage = _calloc(instr + 0x200,1);
+    if (instr != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
+      _free(*(undefined4 *)(ctx + 0x3c8));
     }
-    *(undefined4 *)(param_1 + 0x3c8) = uVar14;
-    iVar15 = *(int *)(param_1 + 0x3cc);
-    *(int *)(param_1 + 0x3e0) = *(int *)(param_1 + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + 0x3c8) = newStorage;
+    instr = *(int *)(ctx + 0x3cc);
+    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
   }
-  iVar16 = *(int *)(param_1 + 0x3c8);
-  iVar9 = iVar15 * 0x10;
-  *(int *)(param_1 + 0x3cc) = iVar15 + 1;
-  iVar15 = iVar9 + iVar16;
-  *(int *)(param_1 + 0x3dc) = iVar15;
-  *(undefined4 *)(iVar9 + iVar16) = 0;
-  *(undefined1 *)(iVar15 + 3) = 2;
-  uVar13 = *(uint *)(iVar9 + iVar16);
-  uVar1 = (param_2 & 0xf) << 8;
-  uVar2 = (param_3 & 0x7f) << 0xd;
-  *(uint *)(iVar9 + iVar16) = uVar2 | uVar1 | uVar13 & 0xfff010ff;
-  uVar3 = (*param_4 & 1) << 0x14;
-  *(uint *)(iVar9 + iVar16) = uVar3 | uVar2 | uVar1 | uVar13 & 0xffe010ff;
-  uVar4 = (param_4[1] & 1) << 0x15;
-  *(uint *)(iVar9 + iVar16) = uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xffc010ff;
-  uVar5 = (param_4[2] & 1) << 0x16;
-  *(uint *)(iVar9 + iVar16) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xff8010ff;
-  *(uint *)(iVar9 + iVar16) =
-       (param_4[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xff0010ff;
-  uVar12 = *(uint *)(iVar15 + 4);
-  uVar17 = *(uint *)(iVar15 + 8);
-  uVar10 = param_5 & 0xf;
-  uVar11 = param_9 & 0xf;
-  uVar1 = (param_6 & 0xff) << 5;
-  uVar2 = (param_10 & 0xff) << 5;
-  *(uint *)(iVar15 + 4) = uVar1 | uVar10 | uVar12 & 0xffffe000;
-  uVar3 = (*param_7 & 7) << 0xd;
-  *(uint *)(iVar15 + 4) = uVar3 | uVar1 | uVar10 | uVar12 & 0xffff0000;
-  uVar4 = (param_7[1] & 7) << 0x10;
-  *(uint *)(iVar15 + 4) = uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfff80000;
-  uVar5 = (param_7[2] & 7) << 0x13;
-  *(uint *)(iVar15 + 4) = uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xffc00000;
-  uVar13 = (param_7[3] & 7) << 0x16;
-  *(uint *)(iVar15 + 4) = uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfe000000;
-  uVar6 = (*param_8 & 1) << 0x19;
-  *(uint *)(iVar15 + 4) =
-       uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfc000000;
-  uVar7 = (param_8[1] & 1) << 0x1a;
-  *(uint *)(iVar15 + 4) =
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xf8000000;
-  uVar8 = (param_8[2] & 1) << 0x1b;
-  *(uint *)(iVar15 + 4) =
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xf0000000
+  instrArray = *(int *)(ctx + 0x3c8);
+  instrOffset = instr * 0x10;
+  *(int *)(ctx + 0x3cc) = instr + 1;
+  instr = instrOffset + instrArray;
+  *(int *)(ctx + 0x3dc) = instr;
+  *(undefined4 *)(instrOffset + instrArray) = 0;
+  *(undefined1 *)(instr + 3) = 2;
+  oldWord0 = *(uint *)(instrOffset + instrArray);
+  uVar1 = (dstFile & 0xf) << 8;
+  uVar2 = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
+  uVar3 = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
+  uVar4 = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
+  uVar5 = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  *(uint *)(instrOffset + instrArray) =
+       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+  oldWord1 = *(uint *)(instr + 4);
+  oldWord2 = *(uint *)(instr + 8);
+  src0FileField = src0File & 0xf;
+  src1FileField = src1File & 0xf;
+  uVar1 = (src0Index & 0xff) << 5;
+  uVar2 = (src1Index & 0xff) << 5;
+  *(uint *)(instr + 4) = uVar1 | src0FileField | oldWord1 & 0xffffe000;
+  uVar3 = (*src0Select & 7) << 0xd;
+  *(uint *)(instr + 4) = uVar3 | uVar1 | src0FileField | oldWord1 & 0xffff0000;
+  uVar4 = (src0Select[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfff80000;
+  uVar5 = (src0Select[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xffc00000;
+  oldWord0 = (src0Select[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfe000000;
+  uVar6 = (*src0Negate & 1) << 0x19;
+  *(uint *)(instr + 4) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfc000000;
+  uVar7 = (src0Negate[1] & 1) << 0x1a;
+  *(uint *)(instr + 4) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf8000000;
+  uVar8 = (src0Negate[2] & 1) << 0x1b;
+  *(uint *)(instr + 4) =
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf0000000
   ;
-  uVar12 = param_8[3];
-  *(uint *)(iVar15 + 8) = uVar2 | uVar11 | uVar17 & 0xffffe000;
-  *(uint *)(iVar15 + 4) =
-       (uVar12 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10;
-  uVar1 = (*param_11 & 7) << 0xd;
-  *(uint *)(iVar15 + 8) = uVar1 | uVar2 | uVar11 | uVar17 & 0xffff0000;
-  uVar3 = (param_11[1] & 7) << 0x10;
-  *(uint *)(iVar15 + 8) = uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xfff80000;
-  uVar4 = (param_11[2] & 7) << 0x13;
-  *(uint *)(iVar15 + 8) = uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xffc00000;
-  uVar5 = (param_11[3] & 7) << 0x16;
-  *(uint *)(iVar15 + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xfe000000;
-  uVar13 = (*param_12 & 1) << 0x19;
-  *(uint *)(iVar15 + 8) =
-       uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xfc000000;
-  uVar6 = (param_12[1] & 1) << 0x1a;
-  *(uint *)(iVar15 + 8) =
-       uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xf8000000;
-  uVar7 = (param_12[2] & 1) << 0x1b;
-  *(uint *)(iVar15 + 8) =
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xf0000000
+  oldWord1 = src0Negate[3];
+  *(uint *)(instr + 8) = uVar2 | src1FileField | oldWord2 & 0xffffe000;
+  *(uint *)(instr + 4) =
+       (oldWord1 & 1) << 0x1c |
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField;
+  uVar1 = (*src1Select & 7) << 0xd;
+  *(uint *)(instr + 8) = uVar1 | uVar2 | src1FileField | oldWord2 & 0xffff0000;
+  uVar3 = (src1Select[1] & 7) << 0x10;
+  *(uint *)(instr + 8) = uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfff80000;
+  uVar4 = (src1Select[2] & 7) << 0x13;
+  *(uint *)(instr + 8) = uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xffc00000;
+  uVar5 = (src1Select[3] & 7) << 0x16;
+  *(uint *)(instr + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfe000000;
+  oldWord0 = (*src1Negate & 1) << 0x19;
+  *(uint *)(instr + 8) =
+       oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfc000000;
+  uVar6 = (src1Negate[1] & 1) << 0x1a;
+  *(uint *)(instr + 8) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf8000000;
+  uVar7 = (src1Negate[2] & 1) << 0x1b;
+  *(uint *)(instr + 8) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf0000000
   ;
-  uVar1 = (param_12[3] & 1) << 0x1c |
-          uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11;
-  *(uint *)(iVar15 + 0xc) = uVar1;
-  *(uint *)(iVar15 + 8) = uVar1;
-  *(int *)(param_1 + 0x3dc) = *(int *)(param_1 + 0x3dc) + 0x10;
+  uVar1 = (src1Negate[3] & 1) << 0x1c |
+          uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField;
+  *(uint *)(instr + 0xc) = uVar1;
+  *(uint *)(instr + 8) = uVar1;
+  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
   return;
 }
 
 /* FUN_00084710 @ 0x84710 (548 bytes) */
-int FUN_00084710(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
-  int param_1;
-  uint param_2;
-  uint param_3;
-  uint *param_4;
-  uint param_5;
-  uint param_6;
-  uint *param_7;
-  uint *param_8;
-  uint param_9;
-  uint param_10;
-  uint *param_11;
-  uint *param_12;
+int FUN_00084710(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
+  int ctx;
+  uint dstFile;
+  uint dstIndex;
+  uint *dstMask;
+  uint src0File;
+  uint src0Index;
+  uint *src0Select;
+  uint *src0Negate;
+  uint src1File;
+  uint src1Index;
+  uint *src1Select;
+  uint *src1Negate;
 {
   uint uVar1;
   uint uVar2;
@@ -1018,121 +1018,121 @@ int FUN_00084710(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint uVar6;
   uint uVar7;
   uint uVar8;
-  int iVar9;
-  uint uVar10;
-  uint uVar11;
-  uint uVar12;
-  uint uVar13;
-  undefined4 uVar14;
-  int iVar15;
-  int iVar16;
-  uint uVar17;
+  int instrOffset;
+  uint src0FileField;
+  uint src1FileField;
+  uint oldWord1;
+  uint oldWord0;
+  undefined4 newStorage;
+  int instr;
+  int instrArray;
+  uint oldWord2;
   
-  iVar15 = *(int *)(param_1 + 0x3cc);
-  if (*(uint *)(param_1 + 0x3e0) < iVar15 + 1U) {
-    iVar15 = *(uint *)(param_1 + 0x3e0) * 0x10;
-    uVar14 = _calloc(iVar15 + 0x200,1);
-    if (iVar15 != 0) {
-      _memcpy(uVar14,*(undefined4 *)(param_1 + 0x3c8),iVar15);
-      _free(*(undefined4 *)(param_1 + 0x3c8));
+  instr = *(int *)(ctx + 0x3cc);
+  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
+    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+    newStorage = _calloc(instr + 0x200,1);
+    if (instr != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
+      _free(*(undefined4 *)(ctx + 0x3c8));
     }
-    *(undefined4 *)(param_1 + 0x3c8) = uVar14;
-    iVar15 = *(int *)(param_1 + 0x3cc);
-    *(int *)(param_1 + 0x3e0) = *(int *)(param_1 + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + 0x3c8) = newStorage;
+    instr = *(int *)(ctx + 0x3cc);
+    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
   }
-  iVar16 = *(int *)(param_1 + 0x3c8);
-  iVar9 = iVar15 * 0x10;
-  *(int *)(param_1 + 0x3cc) = iVar15 + 1;
-  iVar15 = iVar9 + iVar16;
-  *(int *)(param_1 + 0x3dc) = iVar15;
-  *(undefined4 *)(iVar9 + iVar16) = 0;
-  *(undefined1 *)(iVar15 + 3) = 3;
-  uVar13 = *(uint *)(iVar9 + iVar16);
-  uVar1 = (param_2 & 0xf) << 8;
-  uVar2 = (param_3 & 0x7f) << 0xd;
-  *(uint *)(iVar9 + iVar16) = uVar2 | uVar1 | uVar13 & 0xfff010ff;
-  uVar3 = (*param_4 & 1) << 0x14;
-  *(uint *)(iVar9 + iVar16) = uVar3 | uVar2 | uVar1 | uVar13 & 0xffe010ff;
-  uVar4 = (param_4[1] & 1) << 0x15;
-  *(uint *)(iVar9 + iVar16) = uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xffc010ff;
-  uVar5 = (param_4[2] & 1) << 0x16;
-  *(uint *)(iVar9 + iVar16) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xff8010ff;
-  *(uint *)(iVar9 + iVar16) =
-       (param_4[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xff0010ff;
-  uVar12 = *(uint *)(iVar15 + 4);
-  uVar17 = *(uint *)(iVar15 + 8);
-  uVar10 = param_5 & 0xf;
-  uVar11 = param_9 & 0xf;
-  uVar1 = (param_6 & 0xff) << 5;
-  uVar2 = (param_10 & 0xff) << 5;
-  *(uint *)(iVar15 + 4) = uVar1 | uVar10 | uVar12 & 0xffffe000;
-  uVar3 = (*param_7 & 7) << 0xd;
-  *(uint *)(iVar15 + 4) = uVar3 | uVar1 | uVar10 | uVar12 & 0xffff0000;
-  uVar4 = (param_7[1] & 7) << 0x10;
-  *(uint *)(iVar15 + 4) = uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfff80000;
-  uVar5 = (param_7[2] & 7) << 0x13;
-  *(uint *)(iVar15 + 4) = uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xffc00000;
-  uVar13 = (param_7[3] & 7) << 0x16;
-  *(uint *)(iVar15 + 4) = uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfe000000;
-  uVar6 = (*param_8 & 1) << 0x19;
-  *(uint *)(iVar15 + 4) =
-       uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfc000000;
-  uVar7 = (param_8[1] & 1) << 0x1a;
-  *(uint *)(iVar15 + 4) =
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xf8000000;
-  uVar8 = (param_8[2] & 1) << 0x1b;
-  *(uint *)(iVar15 + 4) =
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xf0000000
+  instrArray = *(int *)(ctx + 0x3c8);
+  instrOffset = instr * 0x10;
+  *(int *)(ctx + 0x3cc) = instr + 1;
+  instr = instrOffset + instrArray;
+  *(int *)(ctx + 0x3dc) = instr;
+  *(undefined4 *)(instrOffset + instrArray) = 0;
+  *(undefined1 *)(instr + 3) = 3;
+  oldWord0 = *(uint *)(instrOffset + instrArray);
+  uVar1 = (dstFile & 0xf) << 8;
+  uVar2 = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
+  uVar3 = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
+  uVar4 = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
+  uVar5 = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  *(uint *)(instrOffset + instrArray) =
+       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+  oldWord1 = *(uint *)(instr + 4);
+  oldWord2 = *(uint *)(instr + 8);
+  src0FileField = src0File & 0xf;
+  src1FileField = src1File & 0xf;
+  uVar1 = (src0Index & 0xff) << 5;
+  uVar2 = (src1Index & 0xff) << 5;
+  *(uint *)(instr + 4) = uVar1 | src0FileField | oldWord1 & 0xffffe000;
+  uVar3 = (*src0Select & 7) << 0xd;
+  *(uint *)(instr + 4) = uVar3 | uVar1 | src0FileField | oldWord1 & 0xffff0000;
+  uVar4 = (src0Select[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfff80000;
+  uVar5 = (src0Select[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xffc00000;
+  oldWord0 = (src0Select[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfe000000;
+  uVar6 = (*src0Negate & 1) << 0x19;
+  *(uint *)(instr + 4) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfc000000;
+  uVar7 = (src0Negate[1] & 1) << 0x1a;
+  *(uint *)(instr + 4) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf8000000;
+  uVar8 = (src0Negate[2] & 1) << 0x1b;
+  *(uint *)(instr + 4) =
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf0000000
   ;
-  uVar12 = param_8[3];
-  *(uint *)(iVar15 + 8) = uVar2 | uVar11 | uVar17 & 0xffffe000;
-  *(uint *)(iVar15 + 4) =
-       (uVar12 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10;
-  uVar1 = (*param_11 & 7) << 0xd;
-  *(uint *)(iVar15 + 8) = uVar1 | uVar2 | uVar11 | uVar17 & 0xffff0000;
-  uVar3 = (param_11[1] & 7) << 0x10;
-  *(uint *)(iVar15 + 8) = uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xfff80000;
-  uVar4 = (param_11[2] & 7) << 0x13;
-  *(uint *)(iVar15 + 8) = uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xffc00000;
-  uVar5 = (param_11[3] & 7) << 0x16;
-  *(uint *)(iVar15 + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xfe000000;
-  uVar13 = (*param_12 & 1) << 0x19;
-  *(uint *)(iVar15 + 8) =
-       uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xfc000000;
-  uVar6 = (param_12[1] & 1) << 0x1a;
-  *(uint *)(iVar15 + 8) =
-       uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xf8000000;
-  uVar7 = (param_12[2] & 1) << 0x1b;
-  *(uint *)(iVar15 + 8) =
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xf0000000
+  oldWord1 = src0Negate[3];
+  *(uint *)(instr + 8) = uVar2 | src1FileField | oldWord2 & 0xffffe000;
+  *(uint *)(instr + 4) =
+       (oldWord1 & 1) << 0x1c |
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField;
+  uVar1 = (*src1Select & 7) << 0xd;
+  *(uint *)(instr + 8) = uVar1 | uVar2 | src1FileField | oldWord2 & 0xffff0000;
+  uVar3 = (src1Select[1] & 7) << 0x10;
+  *(uint *)(instr + 8) = uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfff80000;
+  uVar4 = (src1Select[2] & 7) << 0x13;
+  *(uint *)(instr + 8) = uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xffc00000;
+  uVar5 = (src1Select[3] & 7) << 0x16;
+  *(uint *)(instr + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfe000000;
+  oldWord0 = (*src1Negate & 1) << 0x19;
+  *(uint *)(instr + 8) =
+       oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfc000000;
+  uVar6 = (src1Negate[1] & 1) << 0x1a;
+  *(uint *)(instr + 8) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf8000000;
+  uVar7 = (src1Negate[2] & 1) << 0x1b;
+  *(uint *)(instr + 8) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf0000000
   ;
-  uVar1 = (param_12[3] & 1) << 0x1c |
-          uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11;
-  *(uint *)(iVar15 + 0xc) = uVar1;
-  *(uint *)(iVar15 + 8) = uVar1;
-  *(int *)(param_1 + 0x3dc) = *(int *)(param_1 + 0x3dc) + 0x10;
+  uVar1 = (src1Negate[3] & 1) << 0x1c |
+          uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField;
+  *(uint *)(instr + 0xc) = uVar1;
+  *(uint *)(instr + 8) = uVar1;
+  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
   return;
 }
 
 /* FUN_00084940 @ 0x84940 (692 bytes) */
-int FUN_00084940(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12, param_13, param_14, param_15, param_16)
-  int param_1;
-  uint param_2;
-  uint param_3;
-  uint *param_4;
-  uint param_5;
-  uint param_6;
-  uint *param_7;
-  uint *param_8;
-  uint param_9;
-  uint param_10;
-  uint *param_11;
-  uint *param_12;
-  uint param_13;
-  uint param_14;
-  uint *param_15;
-  uint *param_16;
+int FUN_00084940(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate, src2File, src2Index, src2Select, src2Negate)
+  int ctx;
+  uint dstFile;
+  uint dstIndex;
+  uint *dstMask;
+  uint src0File;
+  uint src0Index;
+  uint *src0Select;
+  uint *src0Negate;
+  uint src1File;
+  uint src1Index;
+  uint *src1Select;
+  uint *src1Negate;
+  uint src2File;
+  uint src2Index;
+  uint *src2Select;
+  uint *src2Negate;
 {
   uint uVar1;
   uint uVar2;
@@ -1142,147 +1142,147 @@ int FUN_00084940(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint uVar6;
   uint uVar7;
   uint uVar8;
-  int iVar9;
-  uint uVar10;
-  uint uVar11;
-  uint uVar12;
-  uint uVar13;
-  undefined4 uVar14;
-  int iVar15;
-  uint uVar16;
-  uint uVar17;
-  int iVar18;
+  int instrOffset;
+  uint src0FileField;
+  uint src1FileField;
+  uint oldWord1;
+  uint oldWord0;
+  undefined4 newStorage;
+  int instrArray;
+  uint oldWord2;
+  uint oldWord3;
+  int instr;
   
-  iVar18 = *(int *)(param_1 + 0x3cc);
-  if (*(uint *)(param_1 + 0x3e0) < iVar18 + 1U) {
-    iVar18 = *(uint *)(param_1 + 0x3e0) * 0x10;
-    uVar14 = _calloc(iVar18 + 0x200,1);
-    if (iVar18 != 0) {
-      _memcpy(uVar14,*(undefined4 *)(param_1 + 0x3c8),iVar18);
-      _free(*(undefined4 *)(param_1 + 0x3c8));
+  instr = *(int *)(ctx + 0x3cc);
+  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
+    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+    newStorage = _calloc(instr + 0x200,1);
+    if (instr != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
+      _free(*(undefined4 *)(ctx + 0x3c8));
     }
-    *(undefined4 *)(param_1 + 0x3c8) = uVar14;
-    iVar18 = *(int *)(param_1 + 0x3cc);
-    *(int *)(param_1 + 0x3e0) = *(int *)(param_1 + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + 0x3c8) = newStorage;
+    instr = *(int *)(ctx + 0x3cc);
+    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
   }
-  iVar15 = *(int *)(param_1 + 0x3c8);
-  iVar9 = iVar18 * 0x10;
-  *(int *)(param_1 + 0x3cc) = iVar18 + 1;
-  iVar18 = iVar9 + iVar15;
-  *(int *)(param_1 + 0x3dc) = iVar18;
-  *(undefined4 *)(iVar9 + iVar15) = 0;
-  *(undefined1 *)(iVar18 + 3) = 4;
-  uVar13 = *(uint *)(iVar9 + iVar15);
-  uVar1 = (param_2 & 0xf) << 8;
-  uVar2 = (param_3 & 0x7f) << 0xd;
-  *(uint *)(iVar9 + iVar15) = uVar2 | uVar1 | uVar13 & 0xfff010ff;
-  uVar3 = (*param_4 & 1) << 0x14;
-  *(uint *)(iVar9 + iVar15) = uVar3 | uVar2 | uVar1 | uVar13 & 0xffe010ff;
-  uVar4 = (param_4[1] & 1) << 0x15;
-  *(uint *)(iVar9 + iVar15) = uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xffc010ff;
-  uVar5 = (param_4[2] & 1) << 0x16;
-  *(uint *)(iVar9 + iVar15) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xff8010ff;
-  *(uint *)(iVar9 + iVar15) =
-       (param_4[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xff0010ff;
-  uVar12 = *(uint *)(iVar18 + 4);
-  uVar16 = *(uint *)(iVar18 + 8);
-  uVar10 = param_5 & 0xf;
-  uVar11 = param_9 & 0xf;
-  uVar1 = (param_6 & 0xff) << 5;
-  uVar2 = (param_10 & 0xff) << 5;
-  *(uint *)(iVar18 + 4) = uVar1 | uVar10 | uVar12 & 0xffffe000;
-  uVar3 = (*param_7 & 7) << 0xd;
-  *(uint *)(iVar18 + 4) = uVar3 | uVar1 | uVar10 | uVar12 & 0xffff0000;
-  uVar4 = (param_7[1] & 7) << 0x10;
-  *(uint *)(iVar18 + 4) = uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfff80000;
-  uVar5 = (param_7[2] & 7) << 0x13;
-  *(uint *)(iVar18 + 4) = uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xffc00000;
-  uVar13 = (param_7[3] & 7) << 0x16;
-  *(uint *)(iVar18 + 4) = uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfe000000;
-  uVar6 = (*param_8 & 1) << 0x19;
-  *(uint *)(iVar18 + 4) =
-       uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfc000000;
-  uVar7 = (param_8[1] & 1) << 0x1a;
-  *(uint *)(iVar18 + 4) =
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xf8000000;
-  uVar8 = (param_8[2] & 1) << 0x1b;
-  *(uint *)(iVar18 + 4) =
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xf0000000
+  instrArray = *(int *)(ctx + 0x3c8);
+  instrOffset = instr * 0x10;
+  *(int *)(ctx + 0x3cc) = instr + 1;
+  instr = instrOffset + instrArray;
+  *(int *)(ctx + 0x3dc) = instr;
+  *(undefined4 *)(instrOffset + instrArray) = 0;
+  *(undefined1 *)(instr + 3) = 4;
+  oldWord0 = *(uint *)(instrOffset + instrArray);
+  uVar1 = (dstFile & 0xf) << 8;
+  uVar2 = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
+  uVar3 = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
+  uVar4 = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
+  uVar5 = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  *(uint *)(instrOffset + instrArray) =
+       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+  oldWord1 = *(uint *)(instr + 4);
+  oldWord2 = *(uint *)(instr + 8);
+  src0FileField = src0File & 0xf;
+  src1FileField = src1File & 0xf;
+  uVar1 = (src0Index & 0xff) << 5;
+  uVar2 = (src1Index & 0xff) << 5;
+  *(uint *)(instr + 4) = uVar1 | src0FileField | oldWord1 & 0xffffe000;
+  uVar3 = (*src0Select & 7) << 0xd;
+  *(uint *)(instr + 4) = uVar3 | uVar1 | src0FileField | oldWord1 & 0xffff0000;
+  uVar4 = (src0Select[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfff80000;
+  uVar5 = (src0Select[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xffc00000;
+  oldWord0 = (src0Select[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfe000000;
+  uVar6 = (*src0Negate & 1) << 0x19;
+  *(uint *)(instr + 4) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfc000000;
+  uVar7 = (src0Negate[1] & 1) << 0x1a;
+  *(uint *)(instr + 4) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf8000000;
+  uVar8 = (src0Negate[2] & 1) << 0x1b;
+  *(uint *)(instr + 4) =
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf0000000
   ;
-  uVar12 = param_8[3];
-  *(uint *)(iVar18 + 8) = uVar2 | uVar11 | uVar16 & 0xffffe000;
-  uVar17 = *(uint *)(iVar18 + 0xc);
-  *(uint *)(iVar18 + 4) =
-       (uVar12 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10;
-  uVar1 = (*param_11 & 7) << 0xd;
-  uVar10 = param_13 & 0xf;
-  *(uint *)(iVar18 + 8) = uVar1 | uVar2 | uVar11 | uVar16 & 0xffff0000;
-  uVar3 = (param_14 & 0xff) << 5;
-  uVar4 = (param_11[1] & 7) << 0x10;
-  *(uint *)(iVar18 + 8) = uVar4 | uVar1 | uVar2 | uVar11 | uVar16 & 0xfff80000;
-  uVar5 = (param_11[2] & 7) << 0x13;
-  *(uint *)(iVar18 + 8) = uVar5 | uVar4 | uVar1 | uVar2 | uVar11 | uVar16 & 0xffc00000;
-  uVar13 = (param_11[3] & 7) << 0x16;
-  *(uint *)(iVar18 + 8) = uVar13 | uVar5 | uVar4 | uVar1 | uVar2 | uVar11 | uVar16 & 0xfe000000;
-  uVar6 = (*param_12 & 1) << 0x19;
-  *(uint *)(iVar18 + 8) =
-       uVar6 | uVar13 | uVar5 | uVar4 | uVar1 | uVar2 | uVar11 | uVar16 & 0xfc000000;
-  uVar7 = (param_12[1] & 1) << 0x1a;
-  *(uint *)(iVar18 + 8) =
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar1 | uVar2 | uVar11 | uVar16 & 0xf8000000;
-  uVar8 = (param_12[2] & 1) << 0x1b;
-  *(uint *)(iVar18 + 8) =
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar1 | uVar2 | uVar11 | uVar16 & 0xf0000000
+  oldWord1 = src0Negate[3];
+  *(uint *)(instr + 8) = uVar2 | src1FileField | oldWord2 & 0xffffe000;
+  oldWord3 = *(uint *)(instr + 0xc);
+  *(uint *)(instr + 4) =
+       (oldWord1 & 1) << 0x1c |
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField;
+  uVar1 = (*src1Select & 7) << 0xd;
+  src0FileField = src2File & 0xf;
+  *(uint *)(instr + 8) = uVar1 | uVar2 | src1FileField | oldWord2 & 0xffff0000;
+  uVar3 = (src2Index & 0xff) << 5;
+  uVar4 = (src1Select[1] & 7) << 0x10;
+  *(uint *)(instr + 8) = uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfff80000;
+  uVar5 = (src1Select[2] & 7) << 0x13;
+  *(uint *)(instr + 8) = uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xffc00000;
+  oldWord0 = (src1Select[3] & 7) << 0x16;
+  *(uint *)(instr + 8) = oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfe000000;
+  uVar6 = (*src1Negate & 1) << 0x19;
+  *(uint *)(instr + 8) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfc000000;
+  uVar7 = (src1Negate[1] & 1) << 0x1a;
+  *(uint *)(instr + 8) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf8000000;
+  uVar8 = (src1Negate[2] & 1) << 0x1b;
+  *(uint *)(instr + 8) =
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf0000000
   ;
-  uVar12 = param_12[3];
-  *(uint *)(iVar18 + 0xc) = uVar3 | uVar10 | uVar17 & 0xffffe000;
-  *(uint *)(iVar18 + 8) =
-       (uVar12 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar1 | uVar2 | uVar11;
-  uVar1 = (*param_15 & 7) << 0xd;
-  *(uint *)(iVar18 + 0xc) = uVar1 | uVar3 | uVar10 | uVar17 & 0xffff0000;
-  uVar2 = (param_15[1] & 7) << 0x10;
-  *(uint *)(iVar18 + 0xc) = uVar2 | uVar1 | uVar3 | uVar10 | uVar17 & 0xfff80000;
-  uVar4 = (param_15[2] & 7) << 0x13;
-  *(uint *)(iVar18 + 0xc) = uVar4 | uVar2 | uVar1 | uVar3 | uVar10 | uVar17 & 0xffc00000;
-  uVar5 = (param_15[3] & 7) << 0x16;
-  *(uint *)(iVar18 + 0xc) = uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar10 | uVar17 & 0xfe000000;
-  uVar13 = (*param_16 & 1) << 0x19;
-  *(uint *)(iVar18 + 0xc) =
-       uVar13 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar10 | uVar17 & 0xfc000000;
-  uVar6 = (param_16[1] & 1) << 0x1a;
-  *(uint *)(iVar18 + 0xc) =
-       uVar6 | uVar13 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar10 | uVar17 & 0xf8000000;
-  uVar7 = (param_16[2] & 1) << 0x1b;
-  *(uint *)(iVar18 + 0xc) =
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar10 | uVar17 & 0xf0000000
+  oldWord1 = src1Negate[3];
+  *(uint *)(instr + 0xc) = uVar3 | src0FileField | oldWord3 & 0xffffe000;
+  *(uint *)(instr + 8) =
+       (oldWord1 & 1) << 0x1c |
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField;
+  uVar1 = (*src2Select & 7) << 0xd;
+  *(uint *)(instr + 0xc) = uVar1 | uVar3 | src0FileField | oldWord3 & 0xffff0000;
+  uVar2 = (src2Select[1] & 7) << 0x10;
+  *(uint *)(instr + 0xc) = uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xfff80000;
+  uVar4 = (src2Select[2] & 7) << 0x13;
+  *(uint *)(instr + 0xc) = uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xffc00000;
+  uVar5 = (src2Select[3] & 7) << 0x16;
+  *(uint *)(instr + 0xc) = uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xfe000000;
+  oldWord0 = (*src2Negate & 1) << 0x19;
+  *(uint *)(instr + 0xc) =
+       oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xfc000000;
+  uVar6 = (src2Negate[1] & 1) << 0x1a;
+  *(uint *)(instr + 0xc) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xf8000000;
+  uVar7 = (src2Negate[2] & 1) << 0x1b;
+  *(uint *)(instr + 0xc) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xf0000000
   ;
-  *(uint *)(iVar18 + 0xc) =
-       (param_16[3] & 1) << 0x1c |
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar10;
-  *(int *)(param_1 + 0x3dc) = *(int *)(param_1 + 0x3dc) + 0x10;
+  *(uint *)(instr + 0xc) =
+       (src2Negate[3] & 1) << 0x1c |
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField;
+  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
   return;
 }
 
 /* FUN_00084c00 @ 0x84c00 (692 bytes) */
-int FUN_00084c00(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12, param_13, param_14, param_15, param_16)
-  int param_1;
-  uint param_2;
-  uint param_3;
-  uint *param_4;
-  uint param_5;
-  uint param_6;
-  uint *param_7;
-  uint *param_8;
-  uint param_9;
-  uint param_10;
-  uint *param_11;
-  uint *param_12;
-  uint param_13;
-  uint param_14;
-  uint *param_15;
-  uint *param_16;
+int FUN_00084c00(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate, src2File, src2Index, src2Select, src2Negate)
+  int ctx;
+  uint dstFile;
+  uint dstIndex;
+  uint *dstMask;
+  uint src0File;
+  uint src0Index;
+  uint *src0Select;
+  uint *src0Negate;
+  uint src1File;
+  uint src1Index;
+  uint *src1Select;
+  uint *src1Negate;
+  uint src2File;
+  uint src2Index;
+  uint *src2Select;
+  uint *src2Negate;
 {
   uint uVar1;
   uint uVar2;
@@ -1292,147 +1292,147 @@ int FUN_00084c00(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint uVar6;
   uint uVar7;
   uint uVar8;
-  int iVar9;
-  uint uVar10;
-  uint uVar11;
-  uint uVar12;
-  uint uVar13;
-  undefined4 uVar14;
-  int iVar15;
-  uint uVar16;
-  uint uVar17;
-  int iVar18;
+  int instrOffset;
+  uint src0FileField;
+  uint src1FileField;
+  uint oldWord1;
+  uint oldWord0;
+  undefined4 newStorage;
+  int instrArray;
+  uint oldWord2;
+  uint oldWord3;
+  int instr;
   
-  iVar18 = *(int *)(param_1 + 0x3cc);
-  if (*(uint *)(param_1 + 0x3e0) < iVar18 + 1U) {
-    iVar18 = *(uint *)(param_1 + 0x3e0) * 0x10;
-    uVar14 = _calloc(iVar18 + 0x200,1);
-    if (iVar18 != 0) {
-      _memcpy(uVar14,*(undefined4 *)(param_1 + 0x3c8),iVar18);
-      _free(*(undefined4 *)(param_1 + 0x3c8));
+  instr = *(int *)(ctx + 0x3cc);
+  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
+    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+    newStorage = _calloc(instr + 0x200,1);
+    if (instr != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
+      _free(*(undefined4 *)(ctx + 0x3c8));
     }
-    *(undefined4 *)(param_1 + 0x3c8) = uVar14;
-    iVar18 = *(int *)(param_1 + 0x3cc);
-    *(int *)(param_1 + 0x3e0) = *(int *)(param_1 + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + 0x3c8) = newStorage;
+    instr = *(int *)(ctx + 0x3cc);
+    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
   }
-  iVar15 = *(int *)(param_1 + 0x3c8);
-  iVar9 = iVar18 * 0x10;
-  *(int *)(param_1 + 0x3cc) = iVar18 + 1;
-  iVar18 = iVar9 + iVar15;
-  *(int *)(param_1 + 0x3dc) = iVar18;
-  *(undefined4 *)(iVar9 + iVar15) = 0;
-  *(undefined1 *)(iVar18 + 3) = 0xb;
-  uVar13 = *(uint *)(iVar9 + iVar15);
-  uVar1 = (param_2 & 0xf) << 8;
-  uVar2 = (param_3 & 0x7f) << 0xd;
-  *(uint *)(iVar9 + iVar15) = uVar2 | uVar1 | uVar13 & 0xfff010ff;
-  uVar3 = (*param_4 & 1) << 0x14;
-  *(uint *)(iVar9 + iVar15) = uVar3 | uVar2 | uVar1 | uVar13 & 0xffe010ff;
-  uVar4 = (param_4[1] & 1) << 0x15;
-  *(uint *)(iVar9 + iVar15) = uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xffc010ff;
-  uVar5 = (param_4[2] & 1) << 0x16;
-  *(uint *)(iVar9 + iVar15) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xff8010ff;
-  *(uint *)(iVar9 + iVar15) =
-       (param_4[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xff0010ff;
-  uVar12 = *(uint *)(iVar18 + 4);
-  uVar16 = *(uint *)(iVar18 + 8);
-  uVar10 = param_5 & 0xf;
-  uVar11 = param_9 & 0xf;
-  uVar1 = (param_6 & 0xff) << 5;
-  uVar2 = (param_10 & 0xff) << 5;
-  *(uint *)(iVar18 + 4) = uVar1 | uVar10 | uVar12 & 0xffffe000;
-  uVar3 = (*param_7 & 7) << 0xd;
-  *(uint *)(iVar18 + 4) = uVar3 | uVar1 | uVar10 | uVar12 & 0xffff0000;
-  uVar4 = (param_7[1] & 7) << 0x10;
-  *(uint *)(iVar18 + 4) = uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfff80000;
-  uVar5 = (param_7[2] & 7) << 0x13;
-  *(uint *)(iVar18 + 4) = uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xffc00000;
-  uVar13 = (param_7[3] & 7) << 0x16;
-  *(uint *)(iVar18 + 4) = uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfe000000;
-  uVar6 = (*param_8 & 1) << 0x19;
-  *(uint *)(iVar18 + 4) =
-       uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfc000000;
-  uVar7 = (param_8[1] & 1) << 0x1a;
-  *(uint *)(iVar18 + 4) =
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xf8000000;
-  uVar8 = (param_8[2] & 1) << 0x1b;
-  *(uint *)(iVar18 + 4) =
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xf0000000
+  instrArray = *(int *)(ctx + 0x3c8);
+  instrOffset = instr * 0x10;
+  *(int *)(ctx + 0x3cc) = instr + 1;
+  instr = instrOffset + instrArray;
+  *(int *)(ctx + 0x3dc) = instr;
+  *(undefined4 *)(instrOffset + instrArray) = 0;
+  *(undefined1 *)(instr + 3) = 0xb;
+  oldWord0 = *(uint *)(instrOffset + instrArray);
+  uVar1 = (dstFile & 0xf) << 8;
+  uVar2 = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
+  uVar3 = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
+  uVar4 = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
+  uVar5 = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  *(uint *)(instrOffset + instrArray) =
+       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+  oldWord1 = *(uint *)(instr + 4);
+  oldWord2 = *(uint *)(instr + 8);
+  src0FileField = src0File & 0xf;
+  src1FileField = src1File & 0xf;
+  uVar1 = (src0Index & 0xff) << 5;
+  uVar2 = (src1Index & 0xff) << 5;
+  *(uint *)(instr + 4) = uVar1 | src0FileField | oldWord1 & 0xffffe000;
+  uVar3 = (*src0Select & 7) << 0xd;
+  *(uint *)(instr + 4) = uVar3 | uVar1 | src0FileField | oldWord1 & 0xffff0000;
+  uVar4 = (src0Select[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfff80000;
+  uVar5 = (src0Select[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xffc00000;
+  oldWord0 = (src0Select[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfe000000;
+  uVar6 = (*src0Negate & 1) << 0x19;
+  *(uint *)(instr + 4) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfc000000;
+  uVar7 = (src0Negate[1] & 1) << 0x1a;
+  *(uint *)(instr + 4) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf8000000;
+  uVar8 = (src0Negate[2] & 1) << 0x1b;
+  *(uint *)(instr + 4) =
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf0000000
   ;
-  uVar12 = param_8[3];
-  *(uint *)(iVar18 + 8) = uVar2 | uVar11 | uVar16 & 0xffffe000;
-  uVar17 = *(uint *)(iVar18 + 0xc);
-  *(uint *)(iVar18 + 4) =
-       (uVar12 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10;
-  uVar1 = (*param_11 & 7) << 0xd;
-  uVar10 = param_13 & 0xf;
-  *(uint *)(iVar18 + 8) = uVar1 | uVar2 | uVar11 | uVar16 & 0xffff0000;
-  uVar3 = (param_14 & 0xff) << 5;
-  uVar4 = (param_11[1] & 7) << 0x10;
-  *(uint *)(iVar18 + 8) = uVar4 | uVar1 | uVar2 | uVar11 | uVar16 & 0xfff80000;
-  uVar5 = (param_11[2] & 7) << 0x13;
-  *(uint *)(iVar18 + 8) = uVar5 | uVar4 | uVar1 | uVar2 | uVar11 | uVar16 & 0xffc00000;
-  uVar13 = (param_11[3] & 7) << 0x16;
-  *(uint *)(iVar18 + 8) = uVar13 | uVar5 | uVar4 | uVar1 | uVar2 | uVar11 | uVar16 & 0xfe000000;
-  uVar6 = (*param_12 & 1) << 0x19;
-  *(uint *)(iVar18 + 8) =
-       uVar6 | uVar13 | uVar5 | uVar4 | uVar1 | uVar2 | uVar11 | uVar16 & 0xfc000000;
-  uVar7 = (param_12[1] & 1) << 0x1a;
-  *(uint *)(iVar18 + 8) =
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar1 | uVar2 | uVar11 | uVar16 & 0xf8000000;
-  uVar8 = (param_12[2] & 1) << 0x1b;
-  *(uint *)(iVar18 + 8) =
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar1 | uVar2 | uVar11 | uVar16 & 0xf0000000
+  oldWord1 = src0Negate[3];
+  *(uint *)(instr + 8) = uVar2 | src1FileField | oldWord2 & 0xffffe000;
+  oldWord3 = *(uint *)(instr + 0xc);
+  *(uint *)(instr + 4) =
+       (oldWord1 & 1) << 0x1c |
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField;
+  uVar1 = (*src1Select & 7) << 0xd;
+  src0FileField = src2File & 0xf;
+  *(uint *)(instr + 8) = uVar1 | uVar2 | src1FileField | oldWord2 & 0xffff0000;
+  uVar3 = (src2Index & 0xff) << 5;
+  uVar4 = (src1Select[1] & 7) << 0x10;
+  *(uint *)(instr + 8) = uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfff80000;
+  uVar5 = (src1Select[2] & 7) << 0x13;
+  *(uint *)(instr + 8) = uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xffc00000;
+  oldWord0 = (src1Select[3] & 7) << 0x16;
+  *(uint *)(instr + 8) = oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfe000000;
+  uVar6 = (*src1Negate & 1) << 0x19;
+  *(uint *)(instr + 8) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfc000000;
+  uVar7 = (src1Negate[1] & 1) << 0x1a;
+  *(uint *)(instr + 8) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf8000000;
+  uVar8 = (src1Negate[2] & 1) << 0x1b;
+  *(uint *)(instr + 8) =
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf0000000
   ;
-  uVar12 = param_12[3];
-  *(uint *)(iVar18 + 0xc) = uVar3 | uVar10 | uVar17 & 0xffffe000;
-  *(uint *)(iVar18 + 8) =
-       (uVar12 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar1 | uVar2 | uVar11;
-  uVar1 = (*param_15 & 7) << 0xd;
-  *(uint *)(iVar18 + 0xc) = uVar1 | uVar3 | uVar10 | uVar17 & 0xffff0000;
-  uVar2 = (param_15[1] & 7) << 0x10;
-  *(uint *)(iVar18 + 0xc) = uVar2 | uVar1 | uVar3 | uVar10 | uVar17 & 0xfff80000;
-  uVar4 = (param_15[2] & 7) << 0x13;
-  *(uint *)(iVar18 + 0xc) = uVar4 | uVar2 | uVar1 | uVar3 | uVar10 | uVar17 & 0xffc00000;
-  uVar5 = (param_15[3] & 7) << 0x16;
-  *(uint *)(iVar18 + 0xc) = uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar10 | uVar17 & 0xfe000000;
-  uVar13 = (*param_16 & 1) << 0x19;
-  *(uint *)(iVar18 + 0xc) =
-       uVar13 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar10 | uVar17 & 0xfc000000;
-  uVar6 = (param_16[1] & 1) << 0x1a;
-  *(uint *)(iVar18 + 0xc) =
-       uVar6 | uVar13 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar10 | uVar17 & 0xf8000000;
-  uVar7 = (param_16[2] & 1) << 0x1b;
-  *(uint *)(iVar18 + 0xc) =
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar10 | uVar17 & 0xf0000000
+  oldWord1 = src1Negate[3];
+  *(uint *)(instr + 0xc) = uVar3 | src0FileField | oldWord3 & 0xffffe000;
+  *(uint *)(instr + 8) =
+       (oldWord1 & 1) << 0x1c |
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField;
+  uVar1 = (*src2Select & 7) << 0xd;
+  *(uint *)(instr + 0xc) = uVar1 | uVar3 | src0FileField | oldWord3 & 0xffff0000;
+  uVar2 = (src2Select[1] & 7) << 0x10;
+  *(uint *)(instr + 0xc) = uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xfff80000;
+  uVar4 = (src2Select[2] & 7) << 0x13;
+  *(uint *)(instr + 0xc) = uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xffc00000;
+  uVar5 = (src2Select[3] & 7) << 0x16;
+  *(uint *)(instr + 0xc) = uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xfe000000;
+  oldWord0 = (*src2Negate & 1) << 0x19;
+  *(uint *)(instr + 0xc) =
+       oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xfc000000;
+  uVar6 = (src2Negate[1] & 1) << 0x1a;
+  *(uint *)(instr + 0xc) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xf8000000;
+  uVar7 = (src2Negate[2] & 1) << 0x1b;
+  *(uint *)(instr + 0xc) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xf0000000
   ;
-  *(uint *)(iVar18 + 0xc) =
-       (param_16[3] & 1) << 0x1c |
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar10;
-  *(int *)(param_1 + 0x3dc) = *(int *)(param_1 + 0x3dc) + 0x10;
+  *(uint *)(instr + 0xc) =
+       (src2Negate[3] & 1) << 0x1c |
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField;
+  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
   return;
 }
 
 /* FUN_00084ec0 @ 0x84ec0 (692 bytes) */
-int FUN_00084ec0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12, param_13, param_14, param_15, param_16)
-  int param_1;
-  uint param_2;
-  uint param_3;
-  uint *param_4;
-  uint param_5;
-  uint param_6;
-  uint *param_7;
-  uint *param_8;
-  uint param_9;
-  uint param_10;
-  uint *param_11;
-  uint *param_12;
-  uint param_13;
-  uint param_14;
-  uint *param_15;
-  uint *param_16;
+int FUN_00084ec0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate, src2File, src2Index, src2Select, src2Negate)
+  int ctx;
+  uint dstFile;
+  uint dstIndex;
+  uint *dstMask;
+  uint src0File;
+  uint src0Index;
+  uint *src0Select;
+  uint *src0Negate;
+  uint src1File;
+  uint src1Index;
+  uint *src1Select;
+  uint *src1Negate;
+  uint src2File;
+  uint src2Index;
+  uint *src2Select;
+  uint *src2Negate;
 {
   uint uVar1;
   uint uVar2;
@@ -1442,143 +1442,143 @@ int FUN_00084ec0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint uVar6;
   uint uVar7;
   uint uVar8;
-  int iVar9;
-  uint uVar10;
-  uint uVar11;
-  uint uVar12;
-  uint uVar13;
-  undefined4 uVar14;
-  int iVar15;
-  uint uVar16;
-  uint uVar17;
-  int iVar18;
+  int instrOffset;
+  uint src0FileField;
+  uint src1FileField;
+  uint oldWord1;
+  uint oldWord0;
+  undefined4 newStorage;
+  int instrArray;
+  uint oldWord2;
+  uint oldWord3;
+  int instr;
   
-  iVar18 = *(int *)(param_1 + 0x3cc);
-  if (*(uint *)(param_1 + 0x3e0) < iVar18 + 1U) {
-    iVar18 = *(uint *)(param_1 + 0x3e0) * 0x10;
-    uVar14 = _calloc(iVar18 + 0x200,1);
-    if (iVar18 != 0) {
-      _memcpy(uVar14,*(undefined4 *)(param_1 + 0x3c8),iVar18);
-      _free(*(undefined4 *)(param_1 + 0x3c8));
+  instr = *(int *)(ctx + 0x3cc);
+  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
+    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+    newStorage = _calloc(instr + 0x200,1);
+    if (instr != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
+      _free(*(undefined4 *)(ctx + 0x3c8));
     }
-    *(undefined4 *)(param_1 + 0x3c8) = uVar14;
-    iVar18 = *(int *)(param_1 + 0x3cc);
-    *(int *)(param_1 + 0x3e0) = *(int *)(param_1 + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + 0x3c8) = newStorage;
+    instr = *(int *)(ctx + 0x3cc);
+    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
   }
-  iVar15 = *(int *)(param_1 + 0x3c8);
-  iVar9 = iVar18 * 0x10;
-  *(int *)(param_1 + 0x3cc) = iVar18 + 1;
-  iVar18 = iVar9 + iVar15;
-  *(int *)(param_1 + 0x3dc) = iVar18;
-  *(undefined4 *)(iVar9 + iVar15) = 0;
-  *(undefined1 *)(iVar18 + 3) = 0xc;
-  uVar13 = *(uint *)(iVar9 + iVar15);
-  uVar1 = (param_2 & 0xf) << 8;
-  uVar2 = (param_3 & 0x7f) << 0xd;
-  *(uint *)(iVar9 + iVar15) = uVar2 | uVar1 | uVar13 & 0xfff010ff;
-  uVar3 = (*param_4 & 1) << 0x14;
-  *(uint *)(iVar9 + iVar15) = uVar3 | uVar2 | uVar1 | uVar13 & 0xffe010ff;
-  uVar4 = (param_4[1] & 1) << 0x15;
-  *(uint *)(iVar9 + iVar15) = uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xffc010ff;
-  uVar5 = (param_4[2] & 1) << 0x16;
-  *(uint *)(iVar9 + iVar15) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xff8010ff;
-  *(uint *)(iVar9 + iVar15) =
-       (param_4[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xff0010ff;
-  uVar12 = *(uint *)(iVar18 + 4);
-  uVar16 = *(uint *)(iVar18 + 8);
-  uVar10 = param_5 & 0xf;
-  uVar11 = param_9 & 0xf;
-  uVar1 = (param_6 & 0xff) << 5;
-  uVar2 = (param_10 & 0xff) << 5;
-  *(uint *)(iVar18 + 4) = uVar1 | uVar10 | uVar12 & 0xffffe000;
-  uVar3 = (*param_7 & 7) << 0xd;
-  *(uint *)(iVar18 + 4) = uVar3 | uVar1 | uVar10 | uVar12 & 0xffff0000;
-  uVar4 = (param_7[1] & 7) << 0x10;
-  *(uint *)(iVar18 + 4) = uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfff80000;
-  uVar5 = (param_7[2] & 7) << 0x13;
-  *(uint *)(iVar18 + 4) = uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xffc00000;
-  uVar13 = (param_7[3] & 7) << 0x16;
-  *(uint *)(iVar18 + 4) = uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfe000000;
-  uVar6 = (*param_8 & 1) << 0x19;
-  *(uint *)(iVar18 + 4) =
-       uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfc000000;
-  uVar7 = (param_8[1] & 1) << 0x1a;
-  *(uint *)(iVar18 + 4) =
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xf8000000;
-  uVar8 = (param_8[2] & 1) << 0x1b;
-  *(uint *)(iVar18 + 4) =
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xf0000000
+  instrArray = *(int *)(ctx + 0x3c8);
+  instrOffset = instr * 0x10;
+  *(int *)(ctx + 0x3cc) = instr + 1;
+  instr = instrOffset + instrArray;
+  *(int *)(ctx + 0x3dc) = instr;
+  *(undefined4 *)(instrOffset + instrArray) = 0;
+  *(undefined1 *)(instr + 3) = 0xc;
+  oldWord0 = *(uint *)(instrOffset + instrArray);
+  uVar1 = (dstFile & 0xf) << 8;
+  uVar2 = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
+  uVar3 = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
+  uVar4 = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
+  uVar5 = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  *(uint *)(instrOffset + instrArray) =
+       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+  oldWord1 = *(uint *)(instr + 4);
+  oldWord2 = *(uint *)(instr + 8);
+  src0FileField = src0File & 0xf;
+  src1FileField = src1File & 0xf;
+  uVar1 = (src0Index & 0xff) << 5;
+  uVar2 = (src1Index & 0xff) << 5;
+  *(uint *)(instr + 4) = uVar1 | src0FileField | oldWord1 & 0xffffe000;
+  uVar3 = (*src0Select & 7) << 0xd;
+  *(uint *)(instr + 4) = uVar3 | uVar1 | src0FileField | oldWord1 & 0xffff0000;
+  uVar4 = (src0Select[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfff80000;
+  uVar5 = (src0Select[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xffc00000;
+  oldWord0 = (src0Select[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfe000000;
+  uVar6 = (*src0Negate & 1) << 0x19;
+  *(uint *)(instr + 4) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfc000000;
+  uVar7 = (src0Negate[1] & 1) << 0x1a;
+  *(uint *)(instr + 4) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf8000000;
+  uVar8 = (src0Negate[2] & 1) << 0x1b;
+  *(uint *)(instr + 4) =
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf0000000
   ;
-  uVar12 = param_8[3];
-  *(uint *)(iVar18 + 8) = uVar2 | uVar11 | uVar16 & 0xffffe000;
-  uVar17 = *(uint *)(iVar18 + 0xc);
-  *(uint *)(iVar18 + 4) =
-       (uVar12 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10;
-  uVar1 = (*param_11 & 7) << 0xd;
-  uVar10 = param_13 & 0xf;
-  *(uint *)(iVar18 + 8) = uVar1 | uVar2 | uVar11 | uVar16 & 0xffff0000;
-  uVar3 = (param_14 & 0xff) << 5;
-  uVar4 = (param_11[1] & 7) << 0x10;
-  *(uint *)(iVar18 + 8) = uVar4 | uVar1 | uVar2 | uVar11 | uVar16 & 0xfff80000;
-  uVar5 = (param_11[2] & 7) << 0x13;
-  *(uint *)(iVar18 + 8) = uVar5 | uVar4 | uVar1 | uVar2 | uVar11 | uVar16 & 0xffc00000;
-  uVar13 = (param_11[3] & 7) << 0x16;
-  *(uint *)(iVar18 + 8) = uVar13 | uVar5 | uVar4 | uVar1 | uVar2 | uVar11 | uVar16 & 0xfe000000;
-  uVar6 = (*param_12 & 1) << 0x19;
-  *(uint *)(iVar18 + 8) =
-       uVar6 | uVar13 | uVar5 | uVar4 | uVar1 | uVar2 | uVar11 | uVar16 & 0xfc000000;
-  uVar7 = (param_12[1] & 1) << 0x1a;
-  *(uint *)(iVar18 + 8) =
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar1 | uVar2 | uVar11 | uVar16 & 0xf8000000;
-  uVar8 = (param_12[2] & 1) << 0x1b;
-  *(uint *)(iVar18 + 8) =
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar1 | uVar2 | uVar11 | uVar16 & 0xf0000000
+  oldWord1 = src0Negate[3];
+  *(uint *)(instr + 8) = uVar2 | src1FileField | oldWord2 & 0xffffe000;
+  oldWord3 = *(uint *)(instr + 0xc);
+  *(uint *)(instr + 4) =
+       (oldWord1 & 1) << 0x1c |
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField;
+  uVar1 = (*src1Select & 7) << 0xd;
+  src0FileField = src2File & 0xf;
+  *(uint *)(instr + 8) = uVar1 | uVar2 | src1FileField | oldWord2 & 0xffff0000;
+  uVar3 = (src2Index & 0xff) << 5;
+  uVar4 = (src1Select[1] & 7) << 0x10;
+  *(uint *)(instr + 8) = uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfff80000;
+  uVar5 = (src1Select[2] & 7) << 0x13;
+  *(uint *)(instr + 8) = uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xffc00000;
+  oldWord0 = (src1Select[3] & 7) << 0x16;
+  *(uint *)(instr + 8) = oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfe000000;
+  uVar6 = (*src1Negate & 1) << 0x19;
+  *(uint *)(instr + 8) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfc000000;
+  uVar7 = (src1Negate[1] & 1) << 0x1a;
+  *(uint *)(instr + 8) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf8000000;
+  uVar8 = (src1Negate[2] & 1) << 0x1b;
+  *(uint *)(instr + 8) =
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf0000000
   ;
-  uVar12 = param_12[3];
-  *(uint *)(iVar18 + 0xc) = uVar3 | uVar10 | uVar17 & 0xffffe000;
-  *(uint *)(iVar18 + 8) =
-       (uVar12 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar1 | uVar2 | uVar11;
-  uVar1 = (*param_15 & 7) << 0xd;
-  *(uint *)(iVar18 + 0xc) = uVar1 | uVar3 | uVar10 | uVar17 & 0xffff0000;
-  uVar2 = (param_15[1] & 7) << 0x10;
-  *(uint *)(iVar18 + 0xc) = uVar2 | uVar1 | uVar3 | uVar10 | uVar17 & 0xfff80000;
-  uVar4 = (param_15[2] & 7) << 0x13;
-  *(uint *)(iVar18 + 0xc) = uVar4 | uVar2 | uVar1 | uVar3 | uVar10 | uVar17 & 0xffc00000;
-  uVar5 = (param_15[3] & 7) << 0x16;
-  *(uint *)(iVar18 + 0xc) = uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar10 | uVar17 & 0xfe000000;
-  uVar13 = (*param_16 & 1) << 0x19;
-  *(uint *)(iVar18 + 0xc) =
-       uVar13 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar10 | uVar17 & 0xfc000000;
-  uVar6 = (param_16[1] & 1) << 0x1a;
-  *(uint *)(iVar18 + 0xc) =
-       uVar6 | uVar13 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar10 | uVar17 & 0xf8000000;
-  uVar7 = (param_16[2] & 1) << 0x1b;
-  *(uint *)(iVar18 + 0xc) =
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar10 | uVar17 & 0xf0000000
+  oldWord1 = src1Negate[3];
+  *(uint *)(instr + 0xc) = uVar3 | src0FileField | oldWord3 & 0xffffe000;
+  *(uint *)(instr + 8) =
+       (oldWord1 & 1) << 0x1c |
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField;
+  uVar1 = (*src2Select & 7) << 0xd;
+  *(uint *)(instr + 0xc) = uVar1 | uVar3 | src0FileField | oldWord3 & 0xffff0000;
+  uVar2 = (src2Select[1] & 7) << 0x10;
+  *(uint *)(instr + 0xc) = uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xfff80000;
+  uVar4 = (src2Select[2] & 7) << 0x13;
+  *(uint *)(instr + 0xc) = uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xffc00000;
+  uVar5 = (src2Select[3] & 7) << 0x16;
+  *(uint *)(instr + 0xc) = uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xfe000000;
+  oldWord0 = (*src2Negate & 1) << 0x19;
+  *(uint *)(instr + 0xc) =
+       oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xfc000000;
+  uVar6 = (src2Negate[1] & 1) << 0x1a;
+  *(uint *)(instr + 0xc) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xf8000000;
+  uVar7 = (src2Negate[2] & 1) << 0x1b;
+  *(uint *)(instr + 0xc) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xf0000000
   ;
-  *(uint *)(iVar18 + 0xc) =
-       (param_16[3] & 1) << 0x1c |
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar10;
-  *(int *)(param_1 + 0x3dc) = *(int *)(param_1 + 0x3dc) + 0x10;
+  *(uint *)(instr + 0xc) =
+       (src2Negate[3] & 1) << 0x1c |
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField;
+  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
   return;
 }
 
 /* FUN_00085180 @ 0x85180 (548 bytes) */
-int FUN_00085180(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
-  int param_1;
-  uint param_2;
-  uint param_3;
-  uint *param_4;
-  uint param_5;
-  uint param_6;
-  uint *param_7;
-  uint *param_8;
-  uint param_9;
-  uint param_10;
-  uint *param_11;
-  uint *param_12;
+int FUN_00085180(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
+  int ctx;
+  uint dstFile;
+  uint dstIndex;
+  uint *dstMask;
+  uint src0File;
+  uint src0Index;
+  uint *src0Select;
+  uint *src0Negate;
+  uint src1File;
+  uint src1Index;
+  uint *src1Select;
+  uint *src1Negate;
 {
   uint uVar1;
   uint uVar2;
@@ -1588,117 +1588,117 @@ int FUN_00085180(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint uVar6;
   uint uVar7;
   uint uVar8;
-  int iVar9;
-  uint uVar10;
-  uint uVar11;
-  uint uVar12;
-  uint uVar13;
-  undefined4 uVar14;
-  int iVar15;
-  int iVar16;
-  uint uVar17;
+  int instrOffset;
+  uint src0FileField;
+  uint src1FileField;
+  uint oldWord1;
+  uint oldWord0;
+  undefined4 newStorage;
+  int instr;
+  int instrArray;
+  uint oldWord2;
   
-  iVar15 = *(int *)(param_1 + 0x3cc);
-  if (*(uint *)(param_1 + 0x3e0) < iVar15 + 1U) {
-    iVar15 = *(uint *)(param_1 + 0x3e0) * 0x10;
-    uVar14 = _calloc(iVar15 + 0x200,1);
-    if (iVar15 != 0) {
-      _memcpy(uVar14,*(undefined4 *)(param_1 + 0x3c8),iVar15);
-      _free(*(undefined4 *)(param_1 + 0x3c8));
+  instr = *(int *)(ctx + 0x3cc);
+  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
+    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+    newStorage = _calloc(instr + 0x200,1);
+    if (instr != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
+      _free(*(undefined4 *)(ctx + 0x3c8));
     }
-    *(undefined4 *)(param_1 + 0x3c8) = uVar14;
-    iVar15 = *(int *)(param_1 + 0x3cc);
-    *(int *)(param_1 + 0x3e0) = *(int *)(param_1 + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + 0x3c8) = newStorage;
+    instr = *(int *)(ctx + 0x3cc);
+    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
   }
-  iVar16 = *(int *)(param_1 + 0x3c8);
-  iVar9 = iVar15 * 0x10;
-  *(int *)(param_1 + 0x3cc) = iVar15 + 1;
-  iVar15 = iVar9 + iVar16;
-  *(int *)(param_1 + 0x3dc) = iVar15;
-  *(undefined4 *)(iVar9 + iVar16) = 0;
-  *(undefined1 *)(iVar15 + 3) = 8;
-  uVar13 = *(uint *)(iVar9 + iVar16);
-  uVar1 = (param_2 & 0xf) << 8;
-  uVar2 = (param_3 & 0x7f) << 0xd;
-  *(uint *)(iVar9 + iVar16) = uVar2 | uVar1 | uVar13 & 0xfff010ff;
-  uVar3 = (*param_4 & 1) << 0x14;
-  *(uint *)(iVar9 + iVar16) = uVar3 | uVar2 | uVar1 | uVar13 & 0xffe010ff;
-  uVar4 = (param_4[1] & 1) << 0x15;
-  *(uint *)(iVar9 + iVar16) = uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xffc010ff;
-  uVar5 = (param_4[2] & 1) << 0x16;
-  *(uint *)(iVar9 + iVar16) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xff8010ff;
-  *(uint *)(iVar9 + iVar16) =
-       (param_4[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xff0010ff;
-  uVar12 = *(uint *)(iVar15 + 4);
-  uVar17 = *(uint *)(iVar15 + 8);
-  uVar10 = param_5 & 0xf;
-  uVar11 = param_9 & 0xf;
-  uVar1 = (param_6 & 0xff) << 5;
-  uVar2 = (param_10 & 0xff) << 5;
-  *(uint *)(iVar15 + 4) = uVar1 | uVar10 | uVar12 & 0xffffe000;
-  uVar3 = (*param_7 & 7) << 0xd;
-  *(uint *)(iVar15 + 4) = uVar3 | uVar1 | uVar10 | uVar12 & 0xffff0000;
-  uVar4 = (param_7[1] & 7) << 0x10;
-  *(uint *)(iVar15 + 4) = uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfff80000;
-  uVar5 = (param_7[2] & 7) << 0x13;
-  *(uint *)(iVar15 + 4) = uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xffc00000;
-  uVar13 = (param_7[3] & 7) << 0x16;
-  *(uint *)(iVar15 + 4) = uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfe000000;
-  uVar6 = (*param_8 & 1) << 0x19;
-  *(uint *)(iVar15 + 4) =
-       uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfc000000;
-  uVar7 = (param_8[1] & 1) << 0x1a;
-  *(uint *)(iVar15 + 4) =
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xf8000000;
-  uVar8 = (param_8[2] & 1) << 0x1b;
-  *(uint *)(iVar15 + 4) =
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xf0000000
+  instrArray = *(int *)(ctx + 0x3c8);
+  instrOffset = instr * 0x10;
+  *(int *)(ctx + 0x3cc) = instr + 1;
+  instr = instrOffset + instrArray;
+  *(int *)(ctx + 0x3dc) = instr;
+  *(undefined4 *)(instrOffset + instrArray) = 0;
+  *(undefined1 *)(instr + 3) = 8;
+  oldWord0 = *(uint *)(instrOffset + instrArray);
+  uVar1 = (dstFile & 0xf) << 8;
+  uVar2 = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
+  uVar3 = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
+  uVar4 = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
+  uVar5 = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  *(uint *)(instrOffset + instrArray) =
+       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+  oldWord1 = *(uint *)(instr + 4);
+  oldWord2 = *(uint *)(instr + 8);
+  src0FileField = src0File & 0xf;
+  src1FileField = src1File & 0xf;
+  uVar1 = (src0Index & 0xff) << 5;
+  uVar2 = (src1Index & 0xff) << 5;
+  *(uint *)(instr + 4) = uVar1 | src0FileField | oldWord1 & 0xffffe000;
+  uVar3 = (*src0Select & 7) << 0xd;
+  *(uint *)(instr + 4) = uVar3 | uVar1 | src0FileField | oldWord1 & 0xffff0000;
+  uVar4 = (src0Select[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfff80000;
+  uVar5 = (src0Select[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xffc00000;
+  oldWord0 = (src0Select[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfe000000;
+  uVar6 = (*src0Negate & 1) << 0x19;
+  *(uint *)(instr + 4) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfc000000;
+  uVar7 = (src0Negate[1] & 1) << 0x1a;
+  *(uint *)(instr + 4) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf8000000;
+  uVar8 = (src0Negate[2] & 1) << 0x1b;
+  *(uint *)(instr + 4) =
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf0000000
   ;
-  uVar12 = param_8[3];
-  *(uint *)(iVar15 + 8) = uVar2 | uVar11 | uVar17 & 0xffffe000;
-  *(uint *)(iVar15 + 4) =
-       (uVar12 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10;
-  uVar1 = (*param_11 & 7) << 0xd;
-  *(uint *)(iVar15 + 8) = uVar1 | uVar2 | uVar11 | uVar17 & 0xffff0000;
-  uVar3 = (param_11[1] & 7) << 0x10;
-  *(uint *)(iVar15 + 8) = uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xfff80000;
-  uVar4 = (param_11[2] & 7) << 0x13;
-  *(uint *)(iVar15 + 8) = uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xffc00000;
-  uVar5 = (param_11[3] & 7) << 0x16;
-  *(uint *)(iVar15 + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xfe000000;
-  uVar13 = (*param_12 & 1) << 0x19;
-  *(uint *)(iVar15 + 8) =
-       uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xfc000000;
-  uVar6 = (param_12[1] & 1) << 0x1a;
-  *(uint *)(iVar15 + 8) =
-       uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xf8000000;
-  uVar7 = (param_12[2] & 1) << 0x1b;
-  *(uint *)(iVar15 + 8) =
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xf0000000
+  oldWord1 = src0Negate[3];
+  *(uint *)(instr + 8) = uVar2 | src1FileField | oldWord2 & 0xffffe000;
+  *(uint *)(instr + 4) =
+       (oldWord1 & 1) << 0x1c |
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField;
+  uVar1 = (*src1Select & 7) << 0xd;
+  *(uint *)(instr + 8) = uVar1 | uVar2 | src1FileField | oldWord2 & 0xffff0000;
+  uVar3 = (src1Select[1] & 7) << 0x10;
+  *(uint *)(instr + 8) = uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfff80000;
+  uVar4 = (src1Select[2] & 7) << 0x13;
+  *(uint *)(instr + 8) = uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xffc00000;
+  uVar5 = (src1Select[3] & 7) << 0x16;
+  *(uint *)(instr + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfe000000;
+  oldWord0 = (*src1Negate & 1) << 0x19;
+  *(uint *)(instr + 8) =
+       oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfc000000;
+  uVar6 = (src1Negate[1] & 1) << 0x1a;
+  *(uint *)(instr + 8) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf8000000;
+  uVar7 = (src1Negate[2] & 1) << 0x1b;
+  *(uint *)(instr + 8) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf0000000
   ;
-  uVar1 = (param_12[3] & 1) << 0x1c |
-          uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11;
-  *(uint *)(iVar15 + 0xc) = uVar1;
-  *(uint *)(iVar15 + 8) = uVar1;
-  *(int *)(param_1 + 0x3dc) = *(int *)(param_1 + 0x3dc) + 0x10;
+  uVar1 = (src1Negate[3] & 1) << 0x1c |
+          uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField;
+  *(uint *)(instr + 0xc) = uVar1;
+  *(uint *)(instr + 8) = uVar1;
+  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
   return;
 }
 
 /* FUN_000853b0 @ 0x853b0 (548 bytes) */
-int FUN_000853b0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
-  int param_1;
-  uint param_2;
-  uint param_3;
-  uint *param_4;
-  uint param_5;
-  uint param_6;
-  uint *param_7;
-  uint *param_8;
-  uint param_9;
-  uint param_10;
-  uint *param_11;
-  uint *param_12;
+int FUN_000853b0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
+  int ctx;
+  uint dstFile;
+  uint dstIndex;
+  uint *dstMask;
+  uint src0File;
+  uint src0Index;
+  uint *src0Select;
+  uint *src0Negate;
+  uint src1File;
+  uint src1Index;
+  uint *src1Select;
+  uint *src1Negate;
 {
   uint uVar1;
   uint uVar2;
@@ -1708,117 +1708,117 @@ int FUN_000853b0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint uVar6;
   uint uVar7;
   uint uVar8;
-  int iVar9;
-  uint uVar10;
-  uint uVar11;
-  uint uVar12;
-  uint uVar13;
-  undefined4 uVar14;
-  int iVar15;
-  int iVar16;
-  uint uVar17;
+  int instrOffset;
+  uint src0FileField;
+  uint src1FileField;
+  uint oldWord1;
+  uint oldWord0;
+  undefined4 newStorage;
+  int instr;
+  int instrArray;
+  uint oldWord2;
   
-  iVar15 = *(int *)(param_1 + 0x3cc);
-  if (*(uint *)(param_1 + 0x3e0) < iVar15 + 1U) {
-    iVar15 = *(uint *)(param_1 + 0x3e0) * 0x10;
-    uVar14 = _calloc(iVar15 + 0x200,1);
-    if (iVar15 != 0) {
-      _memcpy(uVar14,*(undefined4 *)(param_1 + 0x3c8),iVar15);
-      _free(*(undefined4 *)(param_1 + 0x3c8));
+  instr = *(int *)(ctx + 0x3cc);
+  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
+    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+    newStorage = _calloc(instr + 0x200,1);
+    if (instr != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
+      _free(*(undefined4 *)(ctx + 0x3c8));
     }
-    *(undefined4 *)(param_1 + 0x3c8) = uVar14;
-    iVar15 = *(int *)(param_1 + 0x3cc);
-    *(int *)(param_1 + 0x3e0) = *(int *)(param_1 + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + 0x3c8) = newStorage;
+    instr = *(int *)(ctx + 0x3cc);
+    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
   }
-  iVar16 = *(int *)(param_1 + 0x3c8);
-  iVar9 = iVar15 * 0x10;
-  *(int *)(param_1 + 0x3cc) = iVar15 + 1;
-  iVar15 = iVar9 + iVar16;
-  *(int *)(param_1 + 0x3dc) = iVar15;
-  *(undefined4 *)(iVar9 + iVar16) = 0;
-  *(undefined1 *)(iVar15 + 3) = 7;
-  uVar13 = *(uint *)(iVar9 + iVar16);
-  uVar1 = (param_2 & 0xf) << 8;
-  uVar2 = (param_3 & 0x7f) << 0xd;
-  *(uint *)(iVar9 + iVar16) = uVar2 | uVar1 | uVar13 & 0xfff010ff;
-  uVar3 = (*param_4 & 1) << 0x14;
-  *(uint *)(iVar9 + iVar16) = uVar3 | uVar2 | uVar1 | uVar13 & 0xffe010ff;
-  uVar4 = (param_4[1] & 1) << 0x15;
-  *(uint *)(iVar9 + iVar16) = uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xffc010ff;
-  uVar5 = (param_4[2] & 1) << 0x16;
-  *(uint *)(iVar9 + iVar16) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xff8010ff;
-  *(uint *)(iVar9 + iVar16) =
-       (param_4[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xff0010ff;
-  uVar12 = *(uint *)(iVar15 + 4);
-  uVar17 = *(uint *)(iVar15 + 8);
-  uVar10 = param_5 & 0xf;
-  uVar11 = param_9 & 0xf;
-  uVar1 = (param_6 & 0xff) << 5;
-  uVar2 = (param_10 & 0xff) << 5;
-  *(uint *)(iVar15 + 4) = uVar1 | uVar10 | uVar12 & 0xffffe000;
-  uVar3 = (*param_7 & 7) << 0xd;
-  *(uint *)(iVar15 + 4) = uVar3 | uVar1 | uVar10 | uVar12 & 0xffff0000;
-  uVar4 = (param_7[1] & 7) << 0x10;
-  *(uint *)(iVar15 + 4) = uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfff80000;
-  uVar5 = (param_7[2] & 7) << 0x13;
-  *(uint *)(iVar15 + 4) = uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xffc00000;
-  uVar13 = (param_7[3] & 7) << 0x16;
-  *(uint *)(iVar15 + 4) = uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfe000000;
-  uVar6 = (*param_8 & 1) << 0x19;
-  *(uint *)(iVar15 + 4) =
-       uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfc000000;
-  uVar7 = (param_8[1] & 1) << 0x1a;
-  *(uint *)(iVar15 + 4) =
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xf8000000;
-  uVar8 = (param_8[2] & 1) << 0x1b;
-  *(uint *)(iVar15 + 4) =
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xf0000000
+  instrArray = *(int *)(ctx + 0x3c8);
+  instrOffset = instr * 0x10;
+  *(int *)(ctx + 0x3cc) = instr + 1;
+  instr = instrOffset + instrArray;
+  *(int *)(ctx + 0x3dc) = instr;
+  *(undefined4 *)(instrOffset + instrArray) = 0;
+  *(undefined1 *)(instr + 3) = 7;
+  oldWord0 = *(uint *)(instrOffset + instrArray);
+  uVar1 = (dstFile & 0xf) << 8;
+  uVar2 = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
+  uVar3 = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
+  uVar4 = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
+  uVar5 = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  *(uint *)(instrOffset + instrArray) =
+       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+  oldWord1 = *(uint *)(instr + 4);
+  oldWord2 = *(uint *)(instr + 8);
+  src0FileField = src0File & 0xf;
+  src1FileField = src1File & 0xf;
+  uVar1 = (src0Index & 0xff) << 5;
+  uVar2 = (src1Index & 0xff) << 5;
+  *(uint *)(instr + 4) = uVar1 | src0FileField | oldWord1 & 0xffffe000;
+  uVar3 = (*src0Select & 7) << 0xd;
+  *(uint *)(instr + 4) = uVar3 | uVar1 | src0FileField | oldWord1 & 0xffff0000;
+  uVar4 = (src0Select[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfff80000;
+  uVar5 = (src0Select[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xffc00000;
+  oldWord0 = (src0Select[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfe000000;
+  uVar6 = (*src0Negate & 1) << 0x19;
+  *(uint *)(instr + 4) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfc000000;
+  uVar7 = (src0Negate[1] & 1) << 0x1a;
+  *(uint *)(instr + 4) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf8000000;
+  uVar8 = (src0Negate[2] & 1) << 0x1b;
+  *(uint *)(instr + 4) =
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf0000000
   ;
-  uVar12 = param_8[3];
-  *(uint *)(iVar15 + 8) = uVar2 | uVar11 | uVar17 & 0xffffe000;
-  *(uint *)(iVar15 + 4) =
-       (uVar12 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10;
-  uVar1 = (*param_11 & 7) << 0xd;
-  *(uint *)(iVar15 + 8) = uVar1 | uVar2 | uVar11 | uVar17 & 0xffff0000;
-  uVar3 = (param_11[1] & 7) << 0x10;
-  *(uint *)(iVar15 + 8) = uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xfff80000;
-  uVar4 = (param_11[2] & 7) << 0x13;
-  *(uint *)(iVar15 + 8) = uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xffc00000;
-  uVar5 = (param_11[3] & 7) << 0x16;
-  *(uint *)(iVar15 + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xfe000000;
-  uVar13 = (*param_12 & 1) << 0x19;
-  *(uint *)(iVar15 + 8) =
-       uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xfc000000;
-  uVar6 = (param_12[1] & 1) << 0x1a;
-  *(uint *)(iVar15 + 8) =
-       uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xf8000000;
-  uVar7 = (param_12[2] & 1) << 0x1b;
-  *(uint *)(iVar15 + 8) =
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xf0000000
+  oldWord1 = src0Negate[3];
+  *(uint *)(instr + 8) = uVar2 | src1FileField | oldWord2 & 0xffffe000;
+  *(uint *)(instr + 4) =
+       (oldWord1 & 1) << 0x1c |
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField;
+  uVar1 = (*src1Select & 7) << 0xd;
+  *(uint *)(instr + 8) = uVar1 | uVar2 | src1FileField | oldWord2 & 0xffff0000;
+  uVar3 = (src1Select[1] & 7) << 0x10;
+  *(uint *)(instr + 8) = uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfff80000;
+  uVar4 = (src1Select[2] & 7) << 0x13;
+  *(uint *)(instr + 8) = uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xffc00000;
+  uVar5 = (src1Select[3] & 7) << 0x16;
+  *(uint *)(instr + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfe000000;
+  oldWord0 = (*src1Negate & 1) << 0x19;
+  *(uint *)(instr + 8) =
+       oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfc000000;
+  uVar6 = (src1Negate[1] & 1) << 0x1a;
+  *(uint *)(instr + 8) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf8000000;
+  uVar7 = (src1Negate[2] & 1) << 0x1b;
+  *(uint *)(instr + 8) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf0000000
   ;
-  uVar1 = (param_12[3] & 1) << 0x1c |
-          uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11;
-  *(uint *)(iVar15 + 0xc) = uVar1;
-  *(uint *)(iVar15 + 8) = uVar1;
-  *(int *)(param_1 + 0x3dc) = *(int *)(param_1 + 0x3dc) + 0x10;
+  uVar1 = (src1Negate[3] & 1) << 0x1c |
+          uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField;
+  *(uint *)(instr + 0xc) = uVar1;
+  *(uint *)(instr + 8) = uVar1;
+  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
   return;
 }
 
 /* FUN_000855e0 @ 0x855e0 (548 bytes) */
-int FUN_000855e0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
-  int param_1;
-  uint param_2;
-  uint param_3;
-  uint *param_4;
-  uint param_5;
-  uint param_6;
-  uint *param_7;
-  uint *param_8;
-  uint param_9;
-  uint param_10;
-  uint *param_11;
-  uint *param_12;
+int FUN_000855e0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
+  int ctx;
+  uint dstFile;
+  uint dstIndex;
+  uint *dstMask;
+  uint src0File;
+  uint src0Index;
+  uint *src0Select;
+  uint *src0Negate;
+  uint src1File;
+  uint src1Index;
+  uint *src1Select;
+  uint *src1Negate;
 {
   uint uVar1;
   uint uVar2;
@@ -1828,117 +1828,117 @@ int FUN_000855e0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint uVar6;
   uint uVar7;
   uint uVar8;
-  int iVar9;
-  uint uVar10;
-  uint uVar11;
-  uint uVar12;
-  uint uVar13;
-  undefined4 uVar14;
-  int iVar15;
-  int iVar16;
-  uint uVar17;
+  int instrOffset;
+  uint src0FileField;
+  uint src1FileField;
+  uint oldWord1;
+  uint oldWord0;
+  undefined4 newStorage;
+  int instr;
+  int instrArray;
+  uint oldWord2;
   
-  iVar15 = *(int *)(param_1 + 0x3cc);
-  if (*(uint *)(param_1 + 0x3e0) < iVar15 + 1U) {
-    iVar15 = *(uint *)(param_1 + 0x3e0) * 0x10;
-    uVar14 = _calloc(iVar15 + 0x200,1);
-    if (iVar15 != 0) {
-      _memcpy(uVar14,*(undefined4 *)(param_1 + 0x3c8),iVar15);
-      _free(*(undefined4 *)(param_1 + 0x3c8));
+  instr = *(int *)(ctx + 0x3cc);
+  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
+    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+    newStorage = _calloc(instr + 0x200,1);
+    if (instr != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
+      _free(*(undefined4 *)(ctx + 0x3c8));
     }
-    *(undefined4 *)(param_1 + 0x3c8) = uVar14;
-    iVar15 = *(int *)(param_1 + 0x3cc);
-    *(int *)(param_1 + 0x3e0) = *(int *)(param_1 + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + 0x3c8) = newStorage;
+    instr = *(int *)(ctx + 0x3cc);
+    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
   }
-  iVar16 = *(int *)(param_1 + 0x3c8);
-  iVar9 = iVar15 * 0x10;
-  *(int *)(param_1 + 0x3cc) = iVar15 + 1;
-  iVar15 = iVar9 + iVar16;
-  *(int *)(param_1 + 0x3dc) = iVar15;
-  *(undefined4 *)(iVar9 + iVar16) = 0;
-  *(undefined1 *)(iVar15 + 3) = 10;
-  uVar13 = *(uint *)(iVar9 + iVar16);
-  uVar1 = (param_2 & 0xf) << 8;
-  uVar2 = (param_3 & 0x7f) << 0xd;
-  *(uint *)(iVar9 + iVar16) = uVar2 | uVar1 | uVar13 & 0xfff010ff;
-  uVar3 = (*param_4 & 1) << 0x14;
-  *(uint *)(iVar9 + iVar16) = uVar3 | uVar2 | uVar1 | uVar13 & 0xffe010ff;
-  uVar4 = (param_4[1] & 1) << 0x15;
-  *(uint *)(iVar9 + iVar16) = uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xffc010ff;
-  uVar5 = (param_4[2] & 1) << 0x16;
-  *(uint *)(iVar9 + iVar16) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xff8010ff;
-  *(uint *)(iVar9 + iVar16) =
-       (param_4[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xff0010ff;
-  uVar12 = *(uint *)(iVar15 + 4);
-  uVar17 = *(uint *)(iVar15 + 8);
-  uVar10 = param_5 & 0xf;
-  uVar11 = param_9 & 0xf;
-  uVar1 = (param_6 & 0xff) << 5;
-  uVar2 = (param_10 & 0xff) << 5;
-  *(uint *)(iVar15 + 4) = uVar1 | uVar10 | uVar12 & 0xffffe000;
-  uVar3 = (*param_7 & 7) << 0xd;
-  *(uint *)(iVar15 + 4) = uVar3 | uVar1 | uVar10 | uVar12 & 0xffff0000;
-  uVar4 = (param_7[1] & 7) << 0x10;
-  *(uint *)(iVar15 + 4) = uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfff80000;
-  uVar5 = (param_7[2] & 7) << 0x13;
-  *(uint *)(iVar15 + 4) = uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xffc00000;
-  uVar13 = (param_7[3] & 7) << 0x16;
-  *(uint *)(iVar15 + 4) = uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfe000000;
-  uVar6 = (*param_8 & 1) << 0x19;
-  *(uint *)(iVar15 + 4) =
-       uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfc000000;
-  uVar7 = (param_8[1] & 1) << 0x1a;
-  *(uint *)(iVar15 + 4) =
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xf8000000;
-  uVar8 = (param_8[2] & 1) << 0x1b;
-  *(uint *)(iVar15 + 4) =
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xf0000000
+  instrArray = *(int *)(ctx + 0x3c8);
+  instrOffset = instr * 0x10;
+  *(int *)(ctx + 0x3cc) = instr + 1;
+  instr = instrOffset + instrArray;
+  *(int *)(ctx + 0x3dc) = instr;
+  *(undefined4 *)(instrOffset + instrArray) = 0;
+  *(undefined1 *)(instr + 3) = 10;
+  oldWord0 = *(uint *)(instrOffset + instrArray);
+  uVar1 = (dstFile & 0xf) << 8;
+  uVar2 = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
+  uVar3 = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
+  uVar4 = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
+  uVar5 = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  *(uint *)(instrOffset + instrArray) =
+       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+  oldWord1 = *(uint *)(instr + 4);
+  oldWord2 = *(uint *)(instr + 8);
+  src0FileField = src0File & 0xf;
+  src1FileField = src1File & 0xf;
+  uVar1 = (src0Index & 0xff) << 5;
+  uVar2 = (src1Index & 0xff) << 5;
+  *(uint *)(instr + 4) = uVar1 | src0FileField | oldWord1 & 0xffffe000;
+  uVar3 = (*src0Select & 7) << 0xd;
+  *(uint *)(instr + 4) = uVar3 | uVar1 | src0FileField | oldWord1 & 0xffff0000;
+  uVar4 = (src0Select[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfff80000;
+  uVar5 = (src0Select[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xffc00000;
+  oldWord0 = (src0Select[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfe000000;
+  uVar6 = (*src0Negate & 1) << 0x19;
+  *(uint *)(instr + 4) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfc000000;
+  uVar7 = (src0Negate[1] & 1) << 0x1a;
+  *(uint *)(instr + 4) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf8000000;
+  uVar8 = (src0Negate[2] & 1) << 0x1b;
+  *(uint *)(instr + 4) =
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf0000000
   ;
-  uVar12 = param_8[3];
-  *(uint *)(iVar15 + 8) = uVar2 | uVar11 | uVar17 & 0xffffe000;
-  *(uint *)(iVar15 + 4) =
-       (uVar12 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10;
-  uVar1 = (*param_11 & 7) << 0xd;
-  *(uint *)(iVar15 + 8) = uVar1 | uVar2 | uVar11 | uVar17 & 0xffff0000;
-  uVar3 = (param_11[1] & 7) << 0x10;
-  *(uint *)(iVar15 + 8) = uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xfff80000;
-  uVar4 = (param_11[2] & 7) << 0x13;
-  *(uint *)(iVar15 + 8) = uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xffc00000;
-  uVar5 = (param_11[3] & 7) << 0x16;
-  *(uint *)(iVar15 + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xfe000000;
-  uVar13 = (*param_12 & 1) << 0x19;
-  *(uint *)(iVar15 + 8) =
-       uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xfc000000;
-  uVar6 = (param_12[1] & 1) << 0x1a;
-  *(uint *)(iVar15 + 8) =
-       uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xf8000000;
-  uVar7 = (param_12[2] & 1) << 0x1b;
-  *(uint *)(iVar15 + 8) =
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xf0000000
+  oldWord1 = src0Negate[3];
+  *(uint *)(instr + 8) = uVar2 | src1FileField | oldWord2 & 0xffffe000;
+  *(uint *)(instr + 4) =
+       (oldWord1 & 1) << 0x1c |
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField;
+  uVar1 = (*src1Select & 7) << 0xd;
+  *(uint *)(instr + 8) = uVar1 | uVar2 | src1FileField | oldWord2 & 0xffff0000;
+  uVar3 = (src1Select[1] & 7) << 0x10;
+  *(uint *)(instr + 8) = uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfff80000;
+  uVar4 = (src1Select[2] & 7) << 0x13;
+  *(uint *)(instr + 8) = uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xffc00000;
+  uVar5 = (src1Select[3] & 7) << 0x16;
+  *(uint *)(instr + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfe000000;
+  oldWord0 = (*src1Negate & 1) << 0x19;
+  *(uint *)(instr + 8) =
+       oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfc000000;
+  uVar6 = (src1Negate[1] & 1) << 0x1a;
+  *(uint *)(instr + 8) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf8000000;
+  uVar7 = (src1Negate[2] & 1) << 0x1b;
+  *(uint *)(instr + 8) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf0000000
   ;
-  uVar1 = (param_12[3] & 1) << 0x1c |
-          uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11;
-  *(uint *)(iVar15 + 0xc) = uVar1;
-  *(uint *)(iVar15 + 8) = uVar1;
-  *(int *)(param_1 + 0x3dc) = *(int *)(param_1 + 0x3dc) + 0x10;
+  uVar1 = (src1Negate[3] & 1) << 0x1c |
+          uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField;
+  *(uint *)(instr + 0xc) = uVar1;
+  *(uint *)(instr + 8) = uVar1;
+  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
   return;
 }
 
 /* FUN_00085810 @ 0x85810 (548 bytes) */
-int FUN_00085810(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
-  int param_1;
-  uint param_2;
-  uint param_3;
-  uint *param_4;
-  uint param_5;
-  uint param_6;
-  uint *param_7;
-  uint *param_8;
-  uint param_9;
-  uint param_10;
-  uint *param_11;
-  uint *param_12;
+int FUN_00085810(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
+  int ctx;
+  uint dstFile;
+  uint dstIndex;
+  uint *dstMask;
+  uint src0File;
+  uint src0Index;
+  uint *src0Select;
+  uint *src0Negate;
+  uint src1File;
+  uint src1Index;
+  uint *src1Select;
+  uint *src1Negate;
 {
   uint uVar1;
   uint uVar2;
@@ -1948,113 +1948,113 @@ int FUN_00085810(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint uVar6;
   uint uVar7;
   uint uVar8;
-  int iVar9;
-  uint uVar10;
-  uint uVar11;
-  uint uVar12;
-  uint uVar13;
-  undefined4 uVar14;
-  int iVar15;
-  int iVar16;
-  uint uVar17;
+  int instrOffset;
+  uint src0FileField;
+  uint src1FileField;
+  uint oldWord1;
+  uint oldWord0;
+  undefined4 newStorage;
+  int instr;
+  int instrArray;
+  uint oldWord2;
   
-  iVar15 = *(int *)(param_1 + 0x3cc);
-  if (*(uint *)(param_1 + 0x3e0) < iVar15 + 1U) {
-    iVar15 = *(uint *)(param_1 + 0x3e0) * 0x10;
-    uVar14 = _calloc(iVar15 + 0x200,1);
-    if (iVar15 != 0) {
-      _memcpy(uVar14,*(undefined4 *)(param_1 + 0x3c8),iVar15);
-      _free(*(undefined4 *)(param_1 + 0x3c8));
+  instr = *(int *)(ctx + 0x3cc);
+  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
+    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+    newStorage = _calloc(instr + 0x200,1);
+    if (instr != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
+      _free(*(undefined4 *)(ctx + 0x3c8));
     }
-    *(undefined4 *)(param_1 + 0x3c8) = uVar14;
-    iVar15 = *(int *)(param_1 + 0x3cc);
-    *(int *)(param_1 + 0x3e0) = *(int *)(param_1 + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + 0x3c8) = newStorage;
+    instr = *(int *)(ctx + 0x3cc);
+    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
   }
-  iVar16 = *(int *)(param_1 + 0x3c8);
-  iVar9 = iVar15 * 0x10;
-  *(int *)(param_1 + 0x3cc) = iVar15 + 1;
-  iVar15 = iVar9 + iVar16;
-  *(int *)(param_1 + 0x3dc) = iVar15;
-  *(undefined4 *)(iVar9 + iVar16) = 0;
-  *(undefined1 *)(iVar15 + 3) = 9;
-  uVar13 = *(uint *)(iVar9 + iVar16);
-  uVar1 = (param_2 & 0xf) << 8;
-  uVar2 = (param_3 & 0x7f) << 0xd;
-  *(uint *)(iVar9 + iVar16) = uVar2 | uVar1 | uVar13 & 0xfff010ff;
-  uVar3 = (*param_4 & 1) << 0x14;
-  *(uint *)(iVar9 + iVar16) = uVar3 | uVar2 | uVar1 | uVar13 & 0xffe010ff;
-  uVar4 = (param_4[1] & 1) << 0x15;
-  *(uint *)(iVar9 + iVar16) = uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xffc010ff;
-  uVar5 = (param_4[2] & 1) << 0x16;
-  *(uint *)(iVar9 + iVar16) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xff8010ff;
-  *(uint *)(iVar9 + iVar16) =
-       (param_4[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xff0010ff;
-  uVar12 = *(uint *)(iVar15 + 4);
-  uVar17 = *(uint *)(iVar15 + 8);
-  uVar10 = param_5 & 0xf;
-  uVar11 = param_9 & 0xf;
-  uVar1 = (param_6 & 0xff) << 5;
-  uVar2 = (param_10 & 0xff) << 5;
-  *(uint *)(iVar15 + 4) = uVar1 | uVar10 | uVar12 & 0xffffe000;
-  uVar3 = (*param_7 & 7) << 0xd;
-  *(uint *)(iVar15 + 4) = uVar3 | uVar1 | uVar10 | uVar12 & 0xffff0000;
-  uVar4 = (param_7[1] & 7) << 0x10;
-  *(uint *)(iVar15 + 4) = uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfff80000;
-  uVar5 = (param_7[2] & 7) << 0x13;
-  *(uint *)(iVar15 + 4) = uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xffc00000;
-  uVar13 = (param_7[3] & 7) << 0x16;
-  *(uint *)(iVar15 + 4) = uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfe000000;
-  uVar6 = (*param_8 & 1) << 0x19;
-  *(uint *)(iVar15 + 4) =
-       uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfc000000;
-  uVar7 = (param_8[1] & 1) << 0x1a;
-  *(uint *)(iVar15 + 4) =
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xf8000000;
-  uVar8 = (param_8[2] & 1) << 0x1b;
-  *(uint *)(iVar15 + 4) =
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xf0000000
+  instrArray = *(int *)(ctx + 0x3c8);
+  instrOffset = instr * 0x10;
+  *(int *)(ctx + 0x3cc) = instr + 1;
+  instr = instrOffset + instrArray;
+  *(int *)(ctx + 0x3dc) = instr;
+  *(undefined4 *)(instrOffset + instrArray) = 0;
+  *(undefined1 *)(instr + 3) = 9;
+  oldWord0 = *(uint *)(instrOffset + instrArray);
+  uVar1 = (dstFile & 0xf) << 8;
+  uVar2 = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
+  uVar3 = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
+  uVar4 = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
+  uVar5 = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  *(uint *)(instrOffset + instrArray) =
+       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+  oldWord1 = *(uint *)(instr + 4);
+  oldWord2 = *(uint *)(instr + 8);
+  src0FileField = src0File & 0xf;
+  src1FileField = src1File & 0xf;
+  uVar1 = (src0Index & 0xff) << 5;
+  uVar2 = (src1Index & 0xff) << 5;
+  *(uint *)(instr + 4) = uVar1 | src0FileField | oldWord1 & 0xffffe000;
+  uVar3 = (*src0Select & 7) << 0xd;
+  *(uint *)(instr + 4) = uVar3 | uVar1 | src0FileField | oldWord1 & 0xffff0000;
+  uVar4 = (src0Select[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfff80000;
+  uVar5 = (src0Select[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xffc00000;
+  oldWord0 = (src0Select[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfe000000;
+  uVar6 = (*src0Negate & 1) << 0x19;
+  *(uint *)(instr + 4) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfc000000;
+  uVar7 = (src0Negate[1] & 1) << 0x1a;
+  *(uint *)(instr + 4) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf8000000;
+  uVar8 = (src0Negate[2] & 1) << 0x1b;
+  *(uint *)(instr + 4) =
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf0000000
   ;
-  uVar12 = param_8[3];
-  *(uint *)(iVar15 + 8) = uVar2 | uVar11 | uVar17 & 0xffffe000;
-  *(uint *)(iVar15 + 4) =
-       (uVar12 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10;
-  uVar1 = (*param_11 & 7) << 0xd;
-  *(uint *)(iVar15 + 8) = uVar1 | uVar2 | uVar11 | uVar17 & 0xffff0000;
-  uVar3 = (param_11[1] & 7) << 0x10;
-  *(uint *)(iVar15 + 8) = uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xfff80000;
-  uVar4 = (param_11[2] & 7) << 0x13;
-  *(uint *)(iVar15 + 8) = uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xffc00000;
-  uVar5 = (param_11[3] & 7) << 0x16;
-  *(uint *)(iVar15 + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xfe000000;
-  uVar13 = (*param_12 & 1) << 0x19;
-  *(uint *)(iVar15 + 8) =
-       uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xfc000000;
-  uVar6 = (param_12[1] & 1) << 0x1a;
-  *(uint *)(iVar15 + 8) =
-       uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xf8000000;
-  uVar7 = (param_12[2] & 1) << 0x1b;
-  *(uint *)(iVar15 + 8) =
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xf0000000
+  oldWord1 = src0Negate[3];
+  *(uint *)(instr + 8) = uVar2 | src1FileField | oldWord2 & 0xffffe000;
+  *(uint *)(instr + 4) =
+       (oldWord1 & 1) << 0x1c |
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField;
+  uVar1 = (*src1Select & 7) << 0xd;
+  *(uint *)(instr + 8) = uVar1 | uVar2 | src1FileField | oldWord2 & 0xffff0000;
+  uVar3 = (src1Select[1] & 7) << 0x10;
+  *(uint *)(instr + 8) = uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfff80000;
+  uVar4 = (src1Select[2] & 7) << 0x13;
+  *(uint *)(instr + 8) = uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xffc00000;
+  uVar5 = (src1Select[3] & 7) << 0x16;
+  *(uint *)(instr + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfe000000;
+  oldWord0 = (*src1Negate & 1) << 0x19;
+  *(uint *)(instr + 8) =
+       oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfc000000;
+  uVar6 = (src1Negate[1] & 1) << 0x1a;
+  *(uint *)(instr + 8) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf8000000;
+  uVar7 = (src1Negate[2] & 1) << 0x1b;
+  *(uint *)(instr + 8) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf0000000
   ;
-  uVar1 = (param_12[3] & 1) << 0x1c |
-          uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11;
-  *(uint *)(iVar15 + 0xc) = uVar1;
-  *(uint *)(iVar15 + 8) = uVar1;
-  *(int *)(param_1 + 0x3dc) = *(int *)(param_1 + 0x3dc) + 0x10;
+  uVar1 = (src1Negate[3] & 1) << 0x1c |
+          uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField;
+  *(uint *)(instr + 0xc) = uVar1;
+  *(uint *)(instr + 8) = uVar1;
+  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
   return;
 }
 
 /* FUN_00085a40 @ 0x85a40 (424 bytes) */
-int FUN_00085a40(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int param_1;
-  uint param_2;
-  uint param_3;
-  uint *param_4;
-  uint param_5;
-  uint param_6;
-  uint *param_7;
-  uint *param_8;
+int FUN_00085a40(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, srcNegate)
+  int ctx;
+  uint dstFile;
+  uint dstIndex;
+  uint *dstMask;
+  uint srcFile;
+  uint srcIndex;
+  uint *srcSelect;
+  uint *srcNegate;
 {
   uint uVar1;
   uint uVar2;
@@ -2063,85 +2063,85 @@ int FUN_00085a40(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint uVar5;
   uint uVar6;
   uint uVar7;
-  int iVar8;
-  uint uVar9;
-  uint uVar10;
-  uint uVar11;
-  undefined4 uVar12;
-  int iVar13;
-  int iVar14;
+  int instrOffset;
+  uint srcFileField;
+  uint oldWord1;
+  uint oldWord0;
+  undefined4 newStorage;
+  int instr;
+  int instrArray;
   
-  iVar13 = *(int *)(param_1 + 0x3cc);
-  if (*(uint *)(param_1 + 0x3e0) < iVar13 + 1U) {
-    iVar13 = *(uint *)(param_1 + 0x3e0) * 0x10;
-    uVar12 = _calloc(iVar13 + 0x200,1);
-    if (iVar13 != 0) {
-      _memcpy(uVar12,*(undefined4 *)(param_1 + 0x3c8),iVar13);
-      _free(*(undefined4 *)(param_1 + 0x3c8));
+  instr = *(int *)(ctx + 0x3cc);
+  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
+    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+    newStorage = _calloc(instr + 0x200,1);
+    if (instr != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
+      _free(*(undefined4 *)(ctx + 0x3c8));
     }
-    *(undefined4 *)(param_1 + 0x3c8) = uVar12;
-    iVar13 = *(int *)(param_1 + 0x3cc);
-    *(int *)(param_1 + 0x3e0) = *(int *)(param_1 + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + 0x3c8) = newStorage;
+    instr = *(int *)(ctx + 0x3cc);
+    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
   }
-  iVar14 = *(int *)(param_1 + 0x3c8);
-  iVar8 = iVar13 * 0x10;
-  *(int *)(param_1 + 0x3cc) = iVar13 + 1;
-  iVar13 = iVar8 + iVar14;
-  *(int *)(param_1 + 0x3dc) = iVar13;
-  *(undefined4 *)(iVar8 + iVar14) = 0;
-  *(undefined1 *)(iVar13 + 3) = 0xe;
-  uVar11 = *(uint *)(iVar8 + iVar14);
-  uVar1 = (param_2 & 0xf) << 8;
-  uVar2 = (param_3 & 0x7f) << 0xd;
-  *(uint *)(iVar8 + iVar14) = uVar2 | uVar1 | uVar11 & 0xfff010ff;
-  uVar3 = (*param_4 & 1) << 0x14;
-  *(uint *)(iVar8 + iVar14) = uVar3 | uVar2 | uVar1 | uVar11 & 0xffe010ff;
-  uVar4 = (param_4[1] & 1) << 0x15;
-  *(uint *)(iVar8 + iVar14) = uVar4 | uVar3 | uVar2 | uVar1 | uVar11 & 0xffc010ff;
-  uVar5 = (param_4[2] & 1) << 0x16;
-  *(uint *)(iVar8 + iVar14) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar11 & 0xff8010ff;
-  *(uint *)(iVar8 + iVar14) =
-       (param_4[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar11 & 0xff0010ff;
-  uVar10 = *(uint *)(iVar13 + 4);
-  uVar9 = param_5 & 0xf;
-  uVar1 = (param_6 & 0xff) << 5;
-  *(uint *)(iVar13 + 4) = uVar1 | uVar9 | uVar10 & 0xffffe000;
-  uVar2 = (*param_7 & 7) << 0xd;
-  *(uint *)(iVar13 + 4) = uVar2 | uVar1 | uVar9 | uVar10 & 0xffff0000;
-  uVar3 = (param_7[1] & 7) << 0x10;
-  *(uint *)(iVar13 + 4) = uVar3 | uVar2 | uVar1 | uVar9 | uVar10 & 0xfff80000;
-  uVar4 = (param_7[2] & 7) << 0x13;
-  *(uint *)(iVar13 + 4) = uVar4 | uVar3 | uVar2 | uVar1 | uVar9 | uVar10 & 0xffc00000;
-  uVar5 = (param_7[3] & 7) << 0x16;
-  *(uint *)(iVar13 + 4) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar9 | uVar10 & 0xfe000000;
-  uVar11 = (*param_8 & 1) << 0x19;
-  *(uint *)(iVar13 + 4) =
-       uVar11 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar9 | uVar10 & 0xfc000000;
-  uVar6 = (param_8[1] & 1) << 0x1a;
-  *(uint *)(iVar13 + 4) =
-       uVar6 | uVar11 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar9 | uVar10 & 0xf8000000;
-  uVar7 = (param_8[2] & 1) << 0x1b;
-  *(uint *)(iVar13 + 4) =
-       uVar7 | uVar6 | uVar11 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar9 | uVar10 & 0xf0000000;
-  uVar1 = (param_8[3] & 1) << 0x1c |
-          uVar7 | uVar6 | uVar11 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar9;
-  *(uint *)(iVar13 + 4) = uVar1;
-  *(uint *)(iVar13 + 8) = uVar1;
-  *(uint *)(iVar13 + 0xc) = uVar1;
-  *(int *)(param_1 + 0x3dc) = *(int *)(param_1 + 0x3dc) + 0x10;
+  instrArray = *(int *)(ctx + 0x3c8);
+  instrOffset = instr * 0x10;
+  *(int *)(ctx + 0x3cc) = instr + 1;
+  instr = instrOffset + instrArray;
+  *(int *)(ctx + 0x3dc) = instr;
+  *(undefined4 *)(instrOffset + instrArray) = 0;
+  *(undefined1 *)(instr + 3) = 0xe;
+  oldWord0 = *(uint *)(instrOffset + instrArray);
+  uVar1 = (dstFile & 0xf) << 8;
+  uVar2 = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
+  uVar3 = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
+  uVar4 = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
+  uVar5 = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  *(uint *)(instrOffset + instrArray) =
+       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+  oldWord1 = *(uint *)(instr + 4);
+  srcFileField = srcFile & 0xf;
+  uVar1 = (srcIndex & 0xff) << 5;
+  *(uint *)(instr + 4) = uVar1 | srcFileField | oldWord1 & 0xffffe000;
+  uVar2 = (*srcSelect & 7) << 0xd;
+  *(uint *)(instr + 4) = uVar2 | uVar1 | srcFileField | oldWord1 & 0xffff0000;
+  uVar3 = (srcSelect[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xfff80000;
+  uVar4 = (srcSelect[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xffc00000;
+  uVar5 = (srcSelect[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xfe000000;
+  oldWord0 = (*srcNegate & 1) << 0x19;
+  *(uint *)(instr + 4) =
+       oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xfc000000;
+  uVar6 = (srcNegate[1] & 1) << 0x1a;
+  *(uint *)(instr + 4) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xf8000000;
+  uVar7 = (srcNegate[2] & 1) << 0x1b;
+  *(uint *)(instr + 4) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xf0000000;
+  uVar1 = (srcNegate[3] & 1) << 0x1c |
+          uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField;
+  *(uint *)(instr + 4) = uVar1;
+  *(uint *)(instr + 8) = uVar1;
+  *(uint *)(instr + 0xc) = uVar1;
+  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
   return;
 }
 
 /* FUN_00085bf0 @ 0x85bf0 (424 bytes) */
-int FUN_00085bf0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int param_1;
-  uint param_2;
-  uint param_3;
-  uint *param_4;
-  uint param_5;
-  uint param_6;
-  uint *param_7;
-  uint *param_8;
+int FUN_00085bf0(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, srcNegate)
+  int ctx;
+  uint dstFile;
+  uint dstIndex;
+  uint *dstMask;
+  uint srcFile;
+  uint srcIndex;
+  uint *srcSelect;
+  uint *srcNegate;
 {
   uint uVar1;
   uint uVar2;
@@ -2150,85 +2150,85 @@ int FUN_00085bf0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint uVar5;
   uint uVar6;
   uint uVar7;
-  int iVar8;
-  uint uVar9;
-  uint uVar10;
-  uint uVar11;
-  undefined4 uVar12;
-  int iVar13;
-  int iVar14;
+  int instrOffset;
+  uint srcFileField;
+  uint oldWord1;
+  uint oldWord0;
+  undefined4 newStorage;
+  int instr;
+  int instrArray;
   
-  iVar13 = *(int *)(param_1 + 0x3cc);
-  if (*(uint *)(param_1 + 0x3e0) < iVar13 + 1U) {
-    iVar13 = *(uint *)(param_1 + 0x3e0) * 0x10;
-    uVar12 = _calloc(iVar13 + 0x200,1);
-    if (iVar13 != 0) {
-      _memcpy(uVar12,*(undefined4 *)(param_1 + 0x3c8),iVar13);
-      _free(*(undefined4 *)(param_1 + 0x3c8));
+  instr = *(int *)(ctx + 0x3cc);
+  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
+    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+    newStorage = _calloc(instr + 0x200,1);
+    if (instr != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
+      _free(*(undefined4 *)(ctx + 0x3c8));
     }
-    *(undefined4 *)(param_1 + 0x3c8) = uVar12;
-    iVar13 = *(int *)(param_1 + 0x3cc);
-    *(int *)(param_1 + 0x3e0) = *(int *)(param_1 + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + 0x3c8) = newStorage;
+    instr = *(int *)(ctx + 0x3cc);
+    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
   }
-  iVar14 = *(int *)(param_1 + 0x3c8);
-  iVar8 = iVar13 * 0x10;
-  *(int *)(param_1 + 0x3cc) = iVar13 + 1;
-  iVar13 = iVar8 + iVar14;
-  *(int *)(param_1 + 0x3dc) = iVar13;
-  *(undefined4 *)(iVar8 + iVar14) = 0;
-  *(undefined1 *)(iVar13 + 3) = 0x47;
-  uVar11 = *(uint *)(iVar8 + iVar14);
-  uVar1 = (param_2 & 0xf) << 8;
-  uVar2 = (param_3 & 0x7f) << 0xd;
-  *(uint *)(iVar8 + iVar14) = uVar2 | uVar1 | uVar11 & 0xfff010ff;
-  uVar3 = (*param_4 & 1) << 0x14;
-  *(uint *)(iVar8 + iVar14) = uVar3 | uVar2 | uVar1 | uVar11 & 0xffe010ff;
-  uVar4 = (param_4[1] & 1) << 0x15;
-  *(uint *)(iVar8 + iVar14) = uVar4 | uVar3 | uVar2 | uVar1 | uVar11 & 0xffc010ff;
-  uVar5 = (param_4[2] & 1) << 0x16;
-  *(uint *)(iVar8 + iVar14) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar11 & 0xff8010ff;
-  *(uint *)(iVar8 + iVar14) =
-       (param_4[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar11 & 0xff0010ff;
-  uVar10 = *(uint *)(iVar13 + 4);
-  uVar9 = param_5 & 0xf;
-  uVar1 = (param_6 & 0xff) << 5;
-  *(uint *)(iVar13 + 4) = uVar1 | uVar9 | uVar10 & 0xffffe000;
-  uVar2 = (*param_7 & 7) << 0xd;
-  *(uint *)(iVar13 + 4) = uVar2 | uVar1 | uVar9 | uVar10 & 0xffff0000;
-  uVar3 = (param_7[1] & 7) << 0x10;
-  *(uint *)(iVar13 + 4) = uVar3 | uVar2 | uVar1 | uVar9 | uVar10 & 0xfff80000;
-  uVar4 = (param_7[2] & 7) << 0x13;
-  *(uint *)(iVar13 + 4) = uVar4 | uVar3 | uVar2 | uVar1 | uVar9 | uVar10 & 0xffc00000;
-  uVar5 = (param_7[3] & 7) << 0x16;
-  *(uint *)(iVar13 + 4) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar9 | uVar10 & 0xfe000000;
-  uVar11 = (*param_8 & 1) << 0x19;
-  *(uint *)(iVar13 + 4) =
-       uVar11 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar9 | uVar10 & 0xfc000000;
-  uVar6 = (param_8[1] & 1) << 0x1a;
-  *(uint *)(iVar13 + 4) =
-       uVar6 | uVar11 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar9 | uVar10 & 0xf8000000;
-  uVar7 = (param_8[2] & 1) << 0x1b;
-  *(uint *)(iVar13 + 4) =
-       uVar7 | uVar6 | uVar11 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar9 | uVar10 & 0xf0000000;
-  uVar1 = (param_8[3] & 1) << 0x1c |
-          uVar7 | uVar6 | uVar11 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar9;
-  *(uint *)(iVar13 + 4) = uVar1;
-  *(uint *)(iVar13 + 8) = uVar1;
-  *(uint *)(iVar13 + 0xc) = uVar1;
-  *(int *)(param_1 + 0x3dc) = *(int *)(param_1 + 0x3dc) + 0x10;
+  instrArray = *(int *)(ctx + 0x3c8);
+  instrOffset = instr * 0x10;
+  *(int *)(ctx + 0x3cc) = instr + 1;
+  instr = instrOffset + instrArray;
+  *(int *)(ctx + 0x3dc) = instr;
+  *(undefined4 *)(instrOffset + instrArray) = 0;
+  *(undefined1 *)(instr + 3) = 0x47;
+  oldWord0 = *(uint *)(instrOffset + instrArray);
+  uVar1 = (dstFile & 0xf) << 8;
+  uVar2 = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
+  uVar3 = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
+  uVar4 = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
+  uVar5 = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  *(uint *)(instrOffset + instrArray) =
+       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+  oldWord1 = *(uint *)(instr + 4);
+  srcFileField = srcFile & 0xf;
+  uVar1 = (srcIndex & 0xff) << 5;
+  *(uint *)(instr + 4) = uVar1 | srcFileField | oldWord1 & 0xffffe000;
+  uVar2 = (*srcSelect & 7) << 0xd;
+  *(uint *)(instr + 4) = uVar2 | uVar1 | srcFileField | oldWord1 & 0xffff0000;
+  uVar3 = (srcSelect[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xfff80000;
+  uVar4 = (srcSelect[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xffc00000;
+  uVar5 = (srcSelect[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xfe000000;
+  oldWord0 = (*srcNegate & 1) << 0x19;
+  *(uint *)(instr + 4) =
+       oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xfc000000;
+  uVar6 = (srcNegate[1] & 1) << 0x1a;
+  *(uint *)(instr + 4) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xf8000000;
+  uVar7 = (srcNegate[2] & 1) << 0x1b;
+  *(uint *)(instr + 4) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xf0000000;
+  uVar1 = (srcNegate[3] & 1) << 0x1c |
+          uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField;
+  *(uint *)(instr + 4) = uVar1;
+  *(uint *)(instr + 8) = uVar1;
+  *(uint *)(instr + 0xc) = uVar1;
+  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
   return;
 }
 
 /* FUN_00085da0 @ 0x85da0 (424 bytes) */
-int FUN_00085da0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int param_1;
-  uint param_2;
-  uint param_3;
-  uint *param_4;
-  uint param_5;
-  uint param_6;
-  uint *param_7;
-  uint *param_8;
+int FUN_00085da0(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, srcNegate)
+  int ctx;
+  uint dstFile;
+  uint dstIndex;
+  uint *dstMask;
+  uint srcFile;
+  uint srcIndex;
+  uint *srcSelect;
+  uint *srcNegate;
 {
   uint uVar1;
   uint uVar2;
@@ -2237,85 +2237,85 @@ int FUN_00085da0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint uVar5;
   uint uVar6;
   uint uVar7;
-  int iVar8;
-  uint uVar9;
-  uint uVar10;
-  uint uVar11;
-  undefined4 uVar12;
-  int iVar13;
-  int iVar14;
+  int instrOffset;
+  uint srcFileField;
+  uint oldWord1;
+  uint oldWord0;
+  undefined4 newStorage;
+  int instr;
+  int instrArray;
   
-  iVar13 = *(int *)(param_1 + 0x3cc);
-  if (*(uint *)(param_1 + 0x3e0) < iVar13 + 1U) {
-    iVar13 = *(uint *)(param_1 + 0x3e0) * 0x10;
-    uVar12 = _calloc(iVar13 + 0x200,1);
-    if (iVar13 != 0) {
-      _memcpy(uVar12,*(undefined4 *)(param_1 + 0x3c8),iVar13);
-      _free(*(undefined4 *)(param_1 + 0x3c8));
+  instr = *(int *)(ctx + 0x3cc);
+  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
+    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+    newStorage = _calloc(instr + 0x200,1);
+    if (instr != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
+      _free(*(undefined4 *)(ctx + 0x3c8));
     }
-    *(undefined4 *)(param_1 + 0x3c8) = uVar12;
-    iVar13 = *(int *)(param_1 + 0x3cc);
-    *(int *)(param_1 + 0x3e0) = *(int *)(param_1 + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + 0x3c8) = newStorage;
+    instr = *(int *)(ctx + 0x3cc);
+    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
   }
-  iVar14 = *(int *)(param_1 + 0x3c8);
-  iVar8 = iVar13 * 0x10;
-  *(int *)(param_1 + 0x3cc) = iVar13 + 1;
-  iVar13 = iVar8 + iVar14;
-  *(int *)(param_1 + 0x3dc) = iVar13;
-  *(undefined4 *)(iVar8 + iVar14) = 0;
-  *(undefined1 *)(iVar13 + 3) = 0x49;
-  uVar11 = *(uint *)(iVar8 + iVar14);
-  uVar1 = (param_2 & 0xf) << 8;
-  uVar2 = (param_3 & 0x7f) << 0xd;
-  *(uint *)(iVar8 + iVar14) = uVar2 | uVar1 | uVar11 & 0xfff010ff;
-  uVar3 = (*param_4 & 1) << 0x14;
-  *(uint *)(iVar8 + iVar14) = uVar3 | uVar2 | uVar1 | uVar11 & 0xffe010ff;
-  uVar4 = (param_4[1] & 1) << 0x15;
-  *(uint *)(iVar8 + iVar14) = uVar4 | uVar3 | uVar2 | uVar1 | uVar11 & 0xffc010ff;
-  uVar5 = (param_4[2] & 1) << 0x16;
-  *(uint *)(iVar8 + iVar14) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar11 & 0xff8010ff;
-  *(uint *)(iVar8 + iVar14) =
-       (param_4[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar11 & 0xff0010ff;
-  uVar10 = *(uint *)(iVar13 + 4);
-  uVar9 = param_5 & 0xf;
-  uVar1 = (param_6 & 0xff) << 5;
-  *(uint *)(iVar13 + 4) = uVar1 | uVar9 | uVar10 & 0xffffe000;
-  uVar2 = (*param_7 & 7) << 0xd;
-  *(uint *)(iVar13 + 4) = uVar2 | uVar1 | uVar9 | uVar10 & 0xffff0000;
-  uVar3 = (param_7[1] & 7) << 0x10;
-  *(uint *)(iVar13 + 4) = uVar3 | uVar2 | uVar1 | uVar9 | uVar10 & 0xfff80000;
-  uVar4 = (param_7[2] & 7) << 0x13;
-  *(uint *)(iVar13 + 4) = uVar4 | uVar3 | uVar2 | uVar1 | uVar9 | uVar10 & 0xffc00000;
-  uVar5 = (param_7[3] & 7) << 0x16;
-  *(uint *)(iVar13 + 4) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar9 | uVar10 & 0xfe000000;
-  uVar11 = (*param_8 & 1) << 0x19;
-  *(uint *)(iVar13 + 4) =
-       uVar11 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar9 | uVar10 & 0xfc000000;
-  uVar6 = (param_8[1] & 1) << 0x1a;
-  *(uint *)(iVar13 + 4) =
-       uVar6 | uVar11 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar9 | uVar10 & 0xf8000000;
-  uVar7 = (param_8[2] & 1) << 0x1b;
-  *(uint *)(iVar13 + 4) =
-       uVar7 | uVar6 | uVar11 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar9 | uVar10 & 0xf0000000;
-  uVar1 = (param_8[3] & 1) << 0x1c |
-          uVar7 | uVar6 | uVar11 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar9;
-  *(uint *)(iVar13 + 4) = uVar1;
-  *(uint *)(iVar13 + 8) = uVar1;
-  *(uint *)(iVar13 + 0xc) = uVar1;
-  *(int *)(param_1 + 0x3dc) = *(int *)(param_1 + 0x3dc) + 0x10;
+  instrArray = *(int *)(ctx + 0x3c8);
+  instrOffset = instr * 0x10;
+  *(int *)(ctx + 0x3cc) = instr + 1;
+  instr = instrOffset + instrArray;
+  *(int *)(ctx + 0x3dc) = instr;
+  *(undefined4 *)(instrOffset + instrArray) = 0;
+  *(undefined1 *)(instr + 3) = 0x49;
+  oldWord0 = *(uint *)(instrOffset + instrArray);
+  uVar1 = (dstFile & 0xf) << 8;
+  uVar2 = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
+  uVar3 = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
+  uVar4 = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
+  uVar5 = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  *(uint *)(instrOffset + instrArray) =
+       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+  oldWord1 = *(uint *)(instr + 4);
+  srcFileField = srcFile & 0xf;
+  uVar1 = (srcIndex & 0xff) << 5;
+  *(uint *)(instr + 4) = uVar1 | srcFileField | oldWord1 & 0xffffe000;
+  uVar2 = (*srcSelect & 7) << 0xd;
+  *(uint *)(instr + 4) = uVar2 | uVar1 | srcFileField | oldWord1 & 0xffff0000;
+  uVar3 = (srcSelect[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xfff80000;
+  uVar4 = (srcSelect[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xffc00000;
+  uVar5 = (srcSelect[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xfe000000;
+  oldWord0 = (*srcNegate & 1) << 0x19;
+  *(uint *)(instr + 4) =
+       oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xfc000000;
+  uVar6 = (srcNegate[1] & 1) << 0x1a;
+  *(uint *)(instr + 4) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xf8000000;
+  uVar7 = (srcNegate[2] & 1) << 0x1b;
+  *(uint *)(instr + 4) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xf0000000;
+  uVar1 = (srcNegate[3] & 1) << 0x1c |
+          uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField;
+  *(uint *)(instr + 4) = uVar1;
+  *(uint *)(instr + 8) = uVar1;
+  *(uint *)(instr + 0xc) = uVar1;
+  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
   return;
 }
 
 /* FUN_00085f50 @ 0x85f50 (424 bytes) */
-int FUN_00085f50(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int param_1;
-  uint param_2;
-  uint param_3;
-  uint *param_4;
-  uint param_5;
-  uint param_6;
-  uint *param_7;
-  uint *param_8;
+int FUN_00085f50(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, srcNegate)
+  int ctx;
+  uint dstFile;
+  uint dstIndex;
+  uint *dstMask;
+  uint srcFile;
+  uint srcIndex;
+  uint *srcSelect;
+  uint *srcNegate;
 {
   uint uVar1;
   uint uVar2;
@@ -2324,85 +2324,85 @@ int FUN_00085f50(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint uVar5;
   uint uVar6;
   uint uVar7;
-  int iVar8;
-  uint uVar9;
-  uint uVar10;
-  uint uVar11;
-  undefined4 uVar12;
-  int iVar13;
-  int iVar14;
+  int instrOffset;
+  uint srcFileField;
+  uint oldWord1;
+  uint oldWord0;
+  undefined4 newStorage;
+  int instr;
+  int instrArray;
   
-  iVar13 = *(int *)(param_1 + 0x3cc);
-  if (*(uint *)(param_1 + 0x3e0) < iVar13 + 1U) {
-    iVar13 = *(uint *)(param_1 + 0x3e0) * 0x10;
-    uVar12 = _calloc(iVar13 + 0x200,1);
-    if (iVar13 != 0) {
-      _memcpy(uVar12,*(undefined4 *)(param_1 + 0x3c8),iVar13);
-      _free(*(undefined4 *)(param_1 + 0x3c8));
+  instr = *(int *)(ctx + 0x3cc);
+  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
+    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+    newStorage = _calloc(instr + 0x200,1);
+    if (instr != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
+      _free(*(undefined4 *)(ctx + 0x3c8));
     }
-    *(undefined4 *)(param_1 + 0x3c8) = uVar12;
-    iVar13 = *(int *)(param_1 + 0x3cc);
-    *(int *)(param_1 + 0x3e0) = *(int *)(param_1 + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + 0x3c8) = newStorage;
+    instr = *(int *)(ctx + 0x3cc);
+    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
   }
-  iVar14 = *(int *)(param_1 + 0x3c8);
-  iVar8 = iVar13 * 0x10;
-  *(int *)(param_1 + 0x3cc) = iVar13 + 1;
-  iVar13 = iVar8 + iVar14;
-  *(int *)(param_1 + 0x3dc) = iVar13;
-  *(undefined4 *)(iVar8 + iVar14) = 0;
-  *(undefined1 *)(iVar13 + 3) = 0x4b;
-  uVar11 = *(uint *)(iVar8 + iVar14);
-  uVar1 = (param_2 & 0xf) << 8;
-  uVar2 = (param_3 & 0x7f) << 0xd;
-  *(uint *)(iVar8 + iVar14) = uVar2 | uVar1 | uVar11 & 0xfff010ff;
-  uVar3 = (*param_4 & 1) << 0x14;
-  *(uint *)(iVar8 + iVar14) = uVar3 | uVar2 | uVar1 | uVar11 & 0xffe010ff;
-  uVar4 = (param_4[1] & 1) << 0x15;
-  *(uint *)(iVar8 + iVar14) = uVar4 | uVar3 | uVar2 | uVar1 | uVar11 & 0xffc010ff;
-  uVar5 = (param_4[2] & 1) << 0x16;
-  *(uint *)(iVar8 + iVar14) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar11 & 0xff8010ff;
-  *(uint *)(iVar8 + iVar14) =
-       (param_4[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar11 & 0xff0010ff;
-  uVar10 = *(uint *)(iVar13 + 4);
-  uVar9 = param_5 & 0xf;
-  uVar1 = (param_6 & 0xff) << 5;
-  *(uint *)(iVar13 + 4) = uVar1 | uVar9 | uVar10 & 0xffffe000;
-  uVar2 = (*param_7 & 7) << 0xd;
-  *(uint *)(iVar13 + 4) = uVar2 | uVar1 | uVar9 | uVar10 & 0xffff0000;
-  uVar3 = (param_7[1] & 7) << 0x10;
-  *(uint *)(iVar13 + 4) = uVar3 | uVar2 | uVar1 | uVar9 | uVar10 & 0xfff80000;
-  uVar4 = (param_7[2] & 7) << 0x13;
-  *(uint *)(iVar13 + 4) = uVar4 | uVar3 | uVar2 | uVar1 | uVar9 | uVar10 & 0xffc00000;
-  uVar5 = (param_7[3] & 7) << 0x16;
-  *(uint *)(iVar13 + 4) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar9 | uVar10 & 0xfe000000;
-  uVar11 = (*param_8 & 1) << 0x19;
-  *(uint *)(iVar13 + 4) =
-       uVar11 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar9 | uVar10 & 0xfc000000;
-  uVar6 = (param_8[1] & 1) << 0x1a;
-  *(uint *)(iVar13 + 4) =
-       uVar6 | uVar11 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar9 | uVar10 & 0xf8000000;
-  uVar7 = (param_8[2] & 1) << 0x1b;
-  *(uint *)(iVar13 + 4) =
-       uVar7 | uVar6 | uVar11 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar9 | uVar10 & 0xf0000000;
-  uVar1 = (param_8[3] & 1) << 0x1c |
-          uVar7 | uVar6 | uVar11 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar9;
-  *(uint *)(iVar13 + 4) = uVar1;
-  *(uint *)(iVar13 + 8) = uVar1;
-  *(uint *)(iVar13 + 0xc) = uVar1;
-  *(int *)(param_1 + 0x3dc) = *(int *)(param_1 + 0x3dc) + 0x10;
+  instrArray = *(int *)(ctx + 0x3c8);
+  instrOffset = instr * 0x10;
+  *(int *)(ctx + 0x3cc) = instr + 1;
+  instr = instrOffset + instrArray;
+  *(int *)(ctx + 0x3dc) = instr;
+  *(undefined4 *)(instrOffset + instrArray) = 0;
+  *(undefined1 *)(instr + 3) = 0x4b;
+  oldWord0 = *(uint *)(instrOffset + instrArray);
+  uVar1 = (dstFile & 0xf) << 8;
+  uVar2 = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
+  uVar3 = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
+  uVar4 = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
+  uVar5 = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  *(uint *)(instrOffset + instrArray) =
+       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+  oldWord1 = *(uint *)(instr + 4);
+  srcFileField = srcFile & 0xf;
+  uVar1 = (srcIndex & 0xff) << 5;
+  *(uint *)(instr + 4) = uVar1 | srcFileField | oldWord1 & 0xffffe000;
+  uVar2 = (*srcSelect & 7) << 0xd;
+  *(uint *)(instr + 4) = uVar2 | uVar1 | srcFileField | oldWord1 & 0xffff0000;
+  uVar3 = (srcSelect[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xfff80000;
+  uVar4 = (srcSelect[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xffc00000;
+  uVar5 = (srcSelect[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xfe000000;
+  oldWord0 = (*srcNegate & 1) << 0x19;
+  *(uint *)(instr + 4) =
+       oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xfc000000;
+  uVar6 = (srcNegate[1] & 1) << 0x1a;
+  *(uint *)(instr + 4) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xf8000000;
+  uVar7 = (srcNegate[2] & 1) << 0x1b;
+  *(uint *)(instr + 4) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xf0000000;
+  uVar1 = (srcNegate[3] & 1) << 0x1c |
+          uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField;
+  *(uint *)(instr + 4) = uVar1;
+  *(uint *)(instr + 8) = uVar1;
+  *(uint *)(instr + 0xc) = uVar1;
+  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
   return;
 }
 
 /* FUN_00086100 @ 0x86100 (424 bytes) */
-int FUN_00086100(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int param_1;
-  uint param_2;
-  uint param_3;
-  uint *param_4;
-  uint param_5;
-  uint param_6;
-  uint *param_7;
-  uint *param_8;
+int FUN_00086100(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, srcNegate)
+  int ctx;
+  uint dstFile;
+  uint dstIndex;
+  uint *dstMask;
+  uint srcFile;
+  uint srcIndex;
+  uint *srcSelect;
+  uint *srcNegate;
 {
   uint uVar1;
   uint uVar2;
@@ -2411,89 +2411,89 @@ int FUN_00086100(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint uVar5;
   uint uVar6;
   uint uVar7;
-  int iVar8;
-  uint uVar9;
-  uint uVar10;
-  uint uVar11;
-  undefined4 uVar12;
-  int iVar13;
-  int iVar14;
+  int instrOffset;
+  uint srcFileField;
+  uint oldWord1;
+  uint oldWord0;
+  undefined4 newStorage;
+  int instr;
+  int instrArray;
   
-  iVar13 = *(int *)(param_1 + 0x3cc);
-  if (*(uint *)(param_1 + 0x3e0) < iVar13 + 1U) {
-    iVar13 = *(uint *)(param_1 + 0x3e0) * 0x10;
-    uVar12 = _calloc(iVar13 + 0x200,1);
-    if (iVar13 != 0) {
-      _memcpy(uVar12,*(undefined4 *)(param_1 + 0x3c8),iVar13);
-      _free(*(undefined4 *)(param_1 + 0x3c8));
+  instr = *(int *)(ctx + 0x3cc);
+  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
+    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+    newStorage = _calloc(instr + 0x200,1);
+    if (instr != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
+      _free(*(undefined4 *)(ctx + 0x3c8));
     }
-    *(undefined4 *)(param_1 + 0x3c8) = uVar12;
-    iVar13 = *(int *)(param_1 + 0x3cc);
-    *(int *)(param_1 + 0x3e0) = *(int *)(param_1 + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + 0x3c8) = newStorage;
+    instr = *(int *)(ctx + 0x3cc);
+    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
   }
-  iVar14 = *(int *)(param_1 + 0x3c8);
-  iVar8 = iVar13 * 0x10;
-  *(int *)(param_1 + 0x3cc) = iVar13 + 1;
-  iVar13 = iVar8 + iVar14;
-  *(int *)(param_1 + 0x3dc) = iVar13;
-  *(undefined4 *)(iVar8 + iVar14) = 0;
-  *(undefined1 *)(iVar13 + 3) = 0x43;
-  uVar11 = *(uint *)(iVar8 + iVar14);
-  uVar1 = (param_2 & 0xf) << 8;
-  uVar2 = (param_3 & 0x7f) << 0xd;
-  *(uint *)(iVar8 + iVar14) = uVar2 | uVar1 | uVar11 & 0xfff010ff;
-  uVar3 = (*param_4 & 1) << 0x14;
-  *(uint *)(iVar8 + iVar14) = uVar3 | uVar2 | uVar1 | uVar11 & 0xffe010ff;
-  uVar4 = (param_4[1] & 1) << 0x15;
-  *(uint *)(iVar8 + iVar14) = uVar4 | uVar3 | uVar2 | uVar1 | uVar11 & 0xffc010ff;
-  uVar5 = (param_4[2] & 1) << 0x16;
-  *(uint *)(iVar8 + iVar14) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar11 & 0xff8010ff;
-  *(uint *)(iVar8 + iVar14) =
-       (param_4[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar11 & 0xff0010ff;
-  uVar10 = *(uint *)(iVar13 + 4);
-  uVar9 = param_5 & 0xf;
-  uVar1 = (param_6 & 0xff) << 5;
-  *(uint *)(iVar13 + 4) = uVar1 | uVar9 | uVar10 & 0xffffe000;
-  uVar2 = (*param_7 & 7) << 0xd;
-  *(uint *)(iVar13 + 4) = uVar2 | uVar1 | uVar9 | uVar10 & 0xffff0000;
-  uVar3 = (param_7[1] & 7) << 0x10;
-  *(uint *)(iVar13 + 4) = uVar3 | uVar2 | uVar1 | uVar9 | uVar10 & 0xfff80000;
-  uVar4 = (param_7[2] & 7) << 0x13;
-  *(uint *)(iVar13 + 4) = uVar4 | uVar3 | uVar2 | uVar1 | uVar9 | uVar10 & 0xffc00000;
-  uVar5 = (param_7[3] & 7) << 0x16;
-  *(uint *)(iVar13 + 4) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar9 | uVar10 & 0xfe000000;
-  uVar11 = (*param_8 & 1) << 0x19;
-  *(uint *)(iVar13 + 4) =
-       uVar11 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar9 | uVar10 & 0xfc000000;
-  uVar6 = (param_8[1] & 1) << 0x1a;
-  *(uint *)(iVar13 + 4) =
-       uVar6 | uVar11 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar9 | uVar10 & 0xf8000000;
-  uVar7 = (param_8[2] & 1) << 0x1b;
-  *(uint *)(iVar13 + 4) =
-       uVar7 | uVar6 | uVar11 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar9 | uVar10 & 0xf0000000;
-  uVar1 = (param_8[3] & 1) << 0x1c |
-          uVar7 | uVar6 | uVar11 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar9;
-  *(uint *)(iVar13 + 4) = uVar1;
-  *(uint *)(iVar13 + 8) = uVar1;
-  *(uint *)(iVar13 + 0xc) = uVar1;
-  *(int *)(param_1 + 0x3dc) = *(int *)(param_1 + 0x3dc) + 0x10;
+  instrArray = *(int *)(ctx + 0x3c8);
+  instrOffset = instr * 0x10;
+  *(int *)(ctx + 0x3cc) = instr + 1;
+  instr = instrOffset + instrArray;
+  *(int *)(ctx + 0x3dc) = instr;
+  *(undefined4 *)(instrOffset + instrArray) = 0;
+  *(undefined1 *)(instr + 3) = 0x43;
+  oldWord0 = *(uint *)(instrOffset + instrArray);
+  uVar1 = (dstFile & 0xf) << 8;
+  uVar2 = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
+  uVar3 = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
+  uVar4 = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
+  uVar5 = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  *(uint *)(instrOffset + instrArray) =
+       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+  oldWord1 = *(uint *)(instr + 4);
+  srcFileField = srcFile & 0xf;
+  uVar1 = (srcIndex & 0xff) << 5;
+  *(uint *)(instr + 4) = uVar1 | srcFileField | oldWord1 & 0xffffe000;
+  uVar2 = (*srcSelect & 7) << 0xd;
+  *(uint *)(instr + 4) = uVar2 | uVar1 | srcFileField | oldWord1 & 0xffff0000;
+  uVar3 = (srcSelect[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xfff80000;
+  uVar4 = (srcSelect[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xffc00000;
+  uVar5 = (srcSelect[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xfe000000;
+  oldWord0 = (*srcNegate & 1) << 0x19;
+  *(uint *)(instr + 4) =
+       oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xfc000000;
+  uVar6 = (srcNegate[1] & 1) << 0x1a;
+  *(uint *)(instr + 4) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xf8000000;
+  uVar7 = (srcNegate[2] & 1) << 0x1b;
+  *(uint *)(instr + 4) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xf0000000;
+  uVar1 = (srcNegate[3] & 1) << 0x1c |
+          uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField;
+  *(uint *)(instr + 4) = uVar1;
+  *(uint *)(instr + 8) = uVar1;
+  *(uint *)(instr + 0xc) = uVar1;
+  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
   return;
 }
 
 /* FUN_000862b0 @ 0x862b0 (548 bytes) */
-int FUN_000862b0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
-  int param_1;
-  uint param_2;
-  uint param_3;
-  uint *param_4;
-  uint param_5;
-  uint param_6;
-  uint *param_7;
-  uint *param_8;
-  uint param_9;
-  uint param_10;
-  uint *param_11;
-  uint *param_12;
+int FUN_000862b0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
+  int ctx;
+  uint dstFile;
+  uint dstIndex;
+  uint *dstMask;
+  uint src0File;
+  uint src0Index;
+  uint *src0Select;
+  uint *src0Negate;
+  uint src1File;
+  uint src1Index;
+  uint *src1Select;
+  uint *src1Negate;
 {
   uint uVar1;
   uint uVar2;
@@ -2503,117 +2503,117 @@ int FUN_000862b0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint uVar6;
   uint uVar7;
   uint uVar8;
-  int iVar9;
-  uint uVar10;
-  uint uVar11;
-  uint uVar12;
-  uint uVar13;
-  undefined4 uVar14;
-  int iVar15;
-  int iVar16;
-  uint uVar17;
+  int instrOffset;
+  uint src0FileField;
+  uint src1FileField;
+  uint oldWord1;
+  uint oldWord0;
+  undefined4 newStorage;
+  int instr;
+  int instrArray;
+  uint oldWord2;
   
-  iVar15 = *(int *)(param_1 + 0x3cc);
-  if (*(uint *)(param_1 + 0x3e0) < iVar15 + 1U) {
-    iVar15 = *(uint *)(param_1 + 0x3e0) * 0x10;
-    uVar14 = _calloc(iVar15 + 0x200,1);
-    if (iVar15 != 0) {
-      _memcpy(uVar14,*(undefined4 *)(param_1 + 0x3c8),iVar15);
-      _free(*(undefined4 *)(param_1 + 0x3c8));
+  instr = *(int *)(ctx + 0x3cc);
+  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
+    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+    newStorage = _calloc(instr + 0x200,1);
+    if (instr != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
+      _free(*(undefined4 *)(ctx + 0x3c8));
     }
-    *(undefined4 *)(param_1 + 0x3c8) = uVar14;
-    iVar15 = *(int *)(param_1 + 0x3cc);
-    *(int *)(param_1 + 0x3e0) = *(int *)(param_1 + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + 0x3c8) = newStorage;
+    instr = *(int *)(ctx + 0x3cc);
+    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
   }
-  iVar16 = *(int *)(param_1 + 0x3c8);
-  iVar9 = iVar15 * 0x10;
-  *(int *)(param_1 + 0x3cc) = iVar15 + 1;
-  iVar15 = iVar9 + iVar16;
-  *(int *)(param_1 + 0x3dc) = iVar15;
-  *(undefined4 *)(iVar9 + iVar16) = 0;
-  *(undefined1 *)(iVar15 + 3) = 0x45;
-  uVar13 = *(uint *)(iVar9 + iVar16);
-  uVar1 = (param_2 & 0xf) << 8;
-  uVar2 = (param_3 & 0x7f) << 0xd;
-  *(uint *)(iVar9 + iVar16) = uVar2 | uVar1 | uVar13 & 0xfff010ff;
-  uVar3 = (*param_4 & 1) << 0x14;
-  *(uint *)(iVar9 + iVar16) = uVar3 | uVar2 | uVar1 | uVar13 & 0xffe010ff;
-  uVar4 = (param_4[1] & 1) << 0x15;
-  *(uint *)(iVar9 + iVar16) = uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xffc010ff;
-  uVar5 = (param_4[2] & 1) << 0x16;
-  *(uint *)(iVar9 + iVar16) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xff8010ff;
-  *(uint *)(iVar9 + iVar16) =
-       (param_4[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xff0010ff;
-  uVar12 = *(uint *)(iVar15 + 4);
-  uVar17 = *(uint *)(iVar15 + 8);
-  uVar10 = param_5 & 0xf;
-  uVar11 = param_9 & 0xf;
-  uVar1 = (param_6 & 0xff) << 5;
-  uVar2 = (param_10 & 0xff) << 5;
-  *(uint *)(iVar15 + 4) = uVar1 | uVar10 | uVar12 & 0xffffe000;
-  uVar3 = (*param_7 & 7) << 0xd;
-  *(uint *)(iVar15 + 4) = uVar3 | uVar1 | uVar10 | uVar12 & 0xffff0000;
-  uVar4 = (param_7[1] & 7) << 0x10;
-  *(uint *)(iVar15 + 4) = uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfff80000;
-  uVar5 = (param_7[2] & 7) << 0x13;
-  *(uint *)(iVar15 + 4) = uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xffc00000;
-  uVar13 = (param_7[3] & 7) << 0x16;
-  *(uint *)(iVar15 + 4) = uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfe000000;
-  uVar6 = (*param_8 & 1) << 0x19;
-  *(uint *)(iVar15 + 4) =
-       uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfc000000;
-  uVar7 = (param_8[1] & 1) << 0x1a;
-  *(uint *)(iVar15 + 4) =
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xf8000000;
-  uVar8 = (param_8[2] & 1) << 0x1b;
-  *(uint *)(iVar15 + 4) =
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xf0000000
+  instrArray = *(int *)(ctx + 0x3c8);
+  instrOffset = instr * 0x10;
+  *(int *)(ctx + 0x3cc) = instr + 1;
+  instr = instrOffset + instrArray;
+  *(int *)(ctx + 0x3dc) = instr;
+  *(undefined4 *)(instrOffset + instrArray) = 0;
+  *(undefined1 *)(instr + 3) = 0x45;
+  oldWord0 = *(uint *)(instrOffset + instrArray);
+  uVar1 = (dstFile & 0xf) << 8;
+  uVar2 = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
+  uVar3 = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
+  uVar4 = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
+  uVar5 = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  *(uint *)(instrOffset + instrArray) =
+       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+  oldWord1 = *(uint *)(instr + 4);
+  oldWord2 = *(uint *)(instr + 8);
+  src0FileField = src0File & 0xf;
+  src1FileField = src1File & 0xf;
+  uVar1 = (src0Index & 0xff) << 5;
+  uVar2 = (src1Index & 0xff) << 5;
+  *(uint *)(instr + 4) = uVar1 | src0FileField | oldWord1 & 0xffffe000;
+  uVar3 = (*src0Select & 7) << 0xd;
+  *(uint *)(instr + 4) = uVar3 | uVar1 | src0FileField | oldWord1 & 0xffff0000;
+  uVar4 = (src0Select[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfff80000;
+  uVar5 = (src0Select[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xffc00000;
+  oldWord0 = (src0Select[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfe000000;
+  uVar6 = (*src0Negate & 1) << 0x19;
+  *(uint *)(instr + 4) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfc000000;
+  uVar7 = (src0Negate[1] & 1) << 0x1a;
+  *(uint *)(instr + 4) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf8000000;
+  uVar8 = (src0Negate[2] & 1) << 0x1b;
+  *(uint *)(instr + 4) =
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf0000000
   ;
-  uVar12 = param_8[3];
-  *(uint *)(iVar15 + 8) = uVar2 | uVar11 | uVar17 & 0xffffe000;
-  *(uint *)(iVar15 + 4) =
-       (uVar12 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10;
-  uVar1 = (*param_11 & 7) << 0xd;
-  *(uint *)(iVar15 + 8) = uVar1 | uVar2 | uVar11 | uVar17 & 0xffff0000;
-  uVar3 = (param_11[1] & 7) << 0x10;
-  *(uint *)(iVar15 + 8) = uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xfff80000;
-  uVar4 = (param_11[2] & 7) << 0x13;
-  *(uint *)(iVar15 + 8) = uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xffc00000;
-  uVar5 = (param_11[3] & 7) << 0x16;
-  *(uint *)(iVar15 + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xfe000000;
-  uVar13 = (*param_12 & 1) << 0x19;
-  *(uint *)(iVar15 + 8) =
-       uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xfc000000;
-  uVar6 = (param_12[1] & 1) << 0x1a;
-  *(uint *)(iVar15 + 8) =
-       uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xf8000000;
-  uVar7 = (param_12[2] & 1) << 0x1b;
-  *(uint *)(iVar15 + 8) =
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xf0000000
+  oldWord1 = src0Negate[3];
+  *(uint *)(instr + 8) = uVar2 | src1FileField | oldWord2 & 0xffffe000;
+  *(uint *)(instr + 4) =
+       (oldWord1 & 1) << 0x1c |
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField;
+  uVar1 = (*src1Select & 7) << 0xd;
+  *(uint *)(instr + 8) = uVar1 | uVar2 | src1FileField | oldWord2 & 0xffff0000;
+  uVar3 = (src1Select[1] & 7) << 0x10;
+  *(uint *)(instr + 8) = uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfff80000;
+  uVar4 = (src1Select[2] & 7) << 0x13;
+  *(uint *)(instr + 8) = uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xffc00000;
+  uVar5 = (src1Select[3] & 7) << 0x16;
+  *(uint *)(instr + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfe000000;
+  oldWord0 = (*src1Negate & 1) << 0x19;
+  *(uint *)(instr + 8) =
+       oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfc000000;
+  uVar6 = (src1Negate[1] & 1) << 0x1a;
+  *(uint *)(instr + 8) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf8000000;
+  uVar7 = (src1Negate[2] & 1) << 0x1b;
+  *(uint *)(instr + 8) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf0000000
   ;
-  uVar1 = (param_12[3] & 1) << 0x1c |
-          uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11;
-  *(uint *)(iVar15 + 0xc) = uVar1;
-  *(uint *)(iVar15 + 8) = uVar1;
-  *(int *)(param_1 + 0x3dc) = *(int *)(param_1 + 0x3dc) + 0x10;
+  uVar1 = (src1Negate[3] & 1) << 0x1c |
+          uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField;
+  *(uint *)(instr + 0xc) = uVar1;
+  *(uint *)(instr + 8) = uVar1;
+  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
   return;
 }
 
 /* FUN_000864e0 @ 0x864e0 (548 bytes) */
-int FUN_000864e0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
-  int param_1;
-  uint param_2;
-  uint param_3;
-  uint *param_4;
-  uint param_5;
-  uint param_6;
-  uint *param_7;
-  uint *param_8;
-  uint param_9;
-  uint param_10;
-  uint *param_11;
-  uint *param_12;
+int FUN_000864e0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
+  int ctx;
+  uint dstFile;
+  uint dstIndex;
+  uint *dstMask;
+  uint src0File;
+  uint src0Index;
+  uint *src0Select;
+  uint *src0Negate;
+  uint src1File;
+  uint src1Index;
+  uint *src1Select;
+  uint *src1Negate;
 {
   uint uVar1;
   uint uVar2;
@@ -2623,100 +2623,100 @@ int FUN_000864e0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint uVar6;
   uint uVar7;
   uint uVar8;
-  int iVar9;
-  uint uVar10;
-  uint uVar11;
-  uint uVar12;
-  uint uVar13;
-  undefined4 uVar14;
-  int iVar15;
-  int iVar16;
-  uint uVar17;
+  int instrOffset;
+  uint src0FileField;
+  uint src1FileField;
+  uint oldWord1;
+  uint oldWord0;
+  undefined4 newStorage;
+  int instr;
+  int instrArray;
+  uint oldWord2;
   
-  iVar15 = *(int *)(param_1 + 0x3cc);
-  if (*(uint *)(param_1 + 0x3e0) < iVar15 + 1U) {
-    iVar15 = *(uint *)(param_1 + 0x3e0) * 0x10;
-    uVar14 = _calloc(iVar15 + 0x200,1);
-    if (iVar15 != 0) {
-      _memcpy(uVar14,*(undefined4 *)(param_1 + 0x3c8),iVar15);
-      _free(*(undefined4 *)(param_1 + 0x3c8));
+  instr = *(int *)(ctx + 0x3cc);
+  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
+    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+    newStorage = _calloc(instr + 0x200,1);
+    if (instr != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
+      _free(*(undefined4 *)(ctx + 0x3c8));
     }
-    *(undefined4 *)(param_1 + 0x3c8) = uVar14;
-    iVar15 = *(int *)(param_1 + 0x3cc);
-    *(int *)(param_1 + 0x3e0) = *(int *)(param_1 + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + 0x3c8) = newStorage;
+    instr = *(int *)(ctx + 0x3cc);
+    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
   }
-  iVar16 = *(int *)(param_1 + 0x3c8);
-  iVar9 = iVar15 * 0x10;
-  *(int *)(param_1 + 0x3cc) = iVar15 + 1;
-  iVar15 = iVar9 + iVar16;
-  *(int *)(param_1 + 0x3dc) = iVar15;
-  *(undefined4 *)(iVar9 + iVar16) = 0;
-  *(undefined1 *)(iVar15 + 3) = 0x4f;
-  uVar13 = *(uint *)(iVar9 + iVar16);
-  uVar1 = (param_2 & 0xf) << 8;
-  uVar2 = (param_3 & 0x7f) << 0xd;
-  *(uint *)(iVar9 + iVar16) = uVar2 | uVar1 | uVar13 & 0xfff010ff;
-  uVar3 = (*param_4 & 1) << 0x14;
-  *(uint *)(iVar9 + iVar16) = uVar3 | uVar2 | uVar1 | uVar13 & 0xffe010ff;
-  uVar4 = (param_4[1] & 1) << 0x15;
-  *(uint *)(iVar9 + iVar16) = uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xffc010ff;
-  uVar5 = (param_4[2] & 1) << 0x16;
-  *(uint *)(iVar9 + iVar16) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xff8010ff;
-  *(uint *)(iVar9 + iVar16) =
-       (param_4[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar13 & 0xff0010ff;
-  uVar12 = *(uint *)(iVar15 + 4);
-  uVar17 = *(uint *)(iVar15 + 8);
-  uVar10 = param_5 & 0xf;
-  uVar11 = param_9 & 0xf;
-  uVar1 = (param_6 & 0xff) << 5;
-  uVar2 = (param_10 & 0xff) << 5;
-  *(uint *)(iVar15 + 4) = uVar1 | uVar10 | uVar12 & 0xffffe000;
-  uVar3 = (*param_7 & 7) << 0xd;
-  *(uint *)(iVar15 + 4) = uVar3 | uVar1 | uVar10 | uVar12 & 0xffff0000;
-  uVar4 = (param_7[1] & 7) << 0x10;
-  *(uint *)(iVar15 + 4) = uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfff80000;
-  uVar5 = (param_7[2] & 7) << 0x13;
-  *(uint *)(iVar15 + 4) = uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xffc00000;
-  uVar13 = (param_7[3] & 7) << 0x16;
-  *(uint *)(iVar15 + 4) = uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfe000000;
-  uVar6 = (*param_8 & 1) << 0x19;
-  *(uint *)(iVar15 + 4) =
-       uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xfc000000;
-  uVar7 = (param_8[1] & 1) << 0x1a;
-  *(uint *)(iVar15 + 4) =
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xf8000000;
-  uVar8 = (param_8[2] & 1) << 0x1b;
-  *(uint *)(iVar15 + 4) =
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10 | uVar12 & 0xf0000000
+  instrArray = *(int *)(ctx + 0x3c8);
+  instrOffset = instr * 0x10;
+  *(int *)(ctx + 0x3cc) = instr + 1;
+  instr = instrOffset + instrArray;
+  *(int *)(ctx + 0x3dc) = instr;
+  *(undefined4 *)(instrOffset + instrArray) = 0;
+  *(undefined1 *)(instr + 3) = 0x4f;
+  oldWord0 = *(uint *)(instrOffset + instrArray);
+  uVar1 = (dstFile & 0xf) << 8;
+  uVar2 = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
+  uVar3 = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
+  uVar4 = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
+  uVar5 = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  *(uint *)(instrOffset + instrArray) =
+       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+  oldWord1 = *(uint *)(instr + 4);
+  oldWord2 = *(uint *)(instr + 8);
+  src0FileField = src0File & 0xf;
+  src1FileField = src1File & 0xf;
+  uVar1 = (src0Index & 0xff) << 5;
+  uVar2 = (src1Index & 0xff) << 5;
+  *(uint *)(instr + 4) = uVar1 | src0FileField | oldWord1 & 0xffffe000;
+  uVar3 = (*src0Select & 7) << 0xd;
+  *(uint *)(instr + 4) = uVar3 | uVar1 | src0FileField | oldWord1 & 0xffff0000;
+  uVar4 = (src0Select[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfff80000;
+  uVar5 = (src0Select[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xffc00000;
+  oldWord0 = (src0Select[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfe000000;
+  uVar6 = (*src0Negate & 1) << 0x19;
+  *(uint *)(instr + 4) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfc000000;
+  uVar7 = (src0Negate[1] & 1) << 0x1a;
+  *(uint *)(instr + 4) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf8000000;
+  uVar8 = (src0Negate[2] & 1) << 0x1b;
+  *(uint *)(instr + 4) =
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf0000000
   ;
-  uVar12 = param_8[3];
-  *(uint *)(iVar15 + 8) = uVar2 | uVar11 | uVar17 & 0xffffe000;
-  *(uint *)(iVar15 + 4) =
-       (uVar12 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar10;
-  uVar1 = (*param_11 & 7) << 0xd;
-  *(uint *)(iVar15 + 8) = uVar1 | uVar2 | uVar11 | uVar17 & 0xffff0000;
-  uVar3 = (param_11[1] & 7) << 0x10;
-  *(uint *)(iVar15 + 8) = uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xfff80000;
-  uVar4 = (param_11[2] & 7) << 0x13;
-  *(uint *)(iVar15 + 8) = uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xffc00000;
-  uVar5 = (param_11[3] & 7) << 0x16;
-  *(uint *)(iVar15 + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xfe000000;
-  uVar13 = (*param_12 & 1) << 0x19;
-  *(uint *)(iVar15 + 8) =
-       uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xfc000000;
-  uVar6 = (param_12[1] & 1) << 0x1a;
-  *(uint *)(iVar15 + 8) =
-       uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xf8000000;
-  uVar7 = (param_12[2] & 1) << 0x1b;
-  *(uint *)(iVar15 + 8) =
-       uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11 | uVar17 & 0xf0000000
+  oldWord1 = src0Negate[3];
+  *(uint *)(instr + 8) = uVar2 | src1FileField | oldWord2 & 0xffffe000;
+  *(uint *)(instr + 4) =
+       (oldWord1 & 1) << 0x1c |
+       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField;
+  uVar1 = (*src1Select & 7) << 0xd;
+  *(uint *)(instr + 8) = uVar1 | uVar2 | src1FileField | oldWord2 & 0xffff0000;
+  uVar3 = (src1Select[1] & 7) << 0x10;
+  *(uint *)(instr + 8) = uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfff80000;
+  uVar4 = (src1Select[2] & 7) << 0x13;
+  *(uint *)(instr + 8) = uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xffc00000;
+  uVar5 = (src1Select[3] & 7) << 0x16;
+  *(uint *)(instr + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfe000000;
+  oldWord0 = (*src1Negate & 1) << 0x19;
+  *(uint *)(instr + 8) =
+       oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfc000000;
+  uVar6 = (src1Negate[1] & 1) << 0x1a;
+  *(uint *)(instr + 8) =
+       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf8000000;
+  uVar7 = (src1Negate[2] & 1) << 0x1b;
+  *(uint *)(instr + 8) =
+       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf0000000
   ;
-  uVar1 = (param_12[3] & 1) << 0x1c |
-          uVar7 | uVar6 | uVar13 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar11;
-  *(uint *)(iVar15 + 0xc) = uVar1;
-  *(uint *)(iVar15 + 8) = uVar1;
-  *(int *)(param_1 + 0x3dc) = *(int *)(param_1 + 0x3dc) + 0x10;
+  uVar1 = (src1Negate[3] & 1) << 0x1c |
+          uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField;
+  *(uint *)(instr + 0xc) = uVar1;
+  *(uint *)(instr + 8) = uVar1;
+  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
   return;
 }
 

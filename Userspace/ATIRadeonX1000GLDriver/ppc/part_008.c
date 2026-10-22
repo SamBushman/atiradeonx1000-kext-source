@@ -2756,306 +2756,306 @@ int FUN_00058450(param_1, param_2, param_3)
 }
 
 /* FUN_000587d0 @ 0x587d0 (824 bytes) */
-int FUN_000587d0(param_1, param_2, param_3)
-  int param_1;
-  int *param_2;
-  int param_3;
+int FUN_000587d0(compiler, program, irInstruction)
+  int compiler;
+  int *program;
+  int irInstruction;
 {
-  uint uVar1;
-  int iVar2;
-  undefined4 uVar3;
-  int iVar4;
-  int iVar5;
-  int *piVar6;
-  int iVar7;
-  undefined4 uStack_78;
-  undefined4 uStack_74;
-  undefined4 uStack_70;
-  undefined4 uStack_6c;
-  undefined4 uStack_68;
-  undefined4 uStack_64;
-  undefined1 uStack_60;
-  undefined4 uStack_5c;
-  undefined4 uStack_58;
-  undefined4 uStack_54;
-  undefined4 uStack_50;
-  undefined4 uStack_4c;
-  undefined4 uStack_48;
-  undefined1 uStack_44;
+  uint packedWord;
+  int block;
+  undefined4 emitResult;
+  int src1Operand;
+  int src0Operand;
+  int *operandState;
+  int instrCount;
+  undefined4 tempDstFile;
+  undefined4 tempDstIndex;
+  undefined4 tempDstMask0;
+  undefined4 tempDstMask1;
+  undefined4 tempDstMask2;
+  undefined4 tempDstMask3;
+  undefined1 tempDstFlag;
+  undefined4 tempSrcFile;
+  undefined4 tempSrcIndex;
+  undefined4 tempSrcSel0;
+  undefined4 tempSrcSel1;
+  undefined4 tempSrcSel2;
+  undefined4 tempSrcSel3;
+  undefined1 tempSrcFlag;
   
-  iVar5 = param_3 + 0x20;
-  piVar6 = param_2 + 7;
-  iVar4 = param_3 + 0x3c;
-  iVar2 = ((int (*)())FUN_00057af0)(piVar6,iVar5,iVar4);
-  if (iVar2 == 0) {
-    iVar2 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-    iVar7 = *(int *)(iVar2 + 0x18);
-    if (0x100 < iVar7 + 1U) {
-      *(undefined1 *)(param_2 + 4) = 0;
-      iVar7 = *(int *)(iVar2 + 0x18);
-      if (*(uint *)(iVar2 + 0x20) < iVar7 + 1U) {
-        uVar3 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar2 + 0x20) * 0x10 + 0x100);
-        (**(code **)(((unsigned char *)0x00001344) + param_1))
-                  (uVar3,*(undefined4 *)(iVar2 + 0x1c),*(int *)(iVar2 + 0x20) << 4);
-        (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar2 + 0x1c));
-        *(undefined4 *)(iVar2 + 0x1c) = uVar3;
-        iVar7 = *(int *)(iVar2 + 0x18);
-        *(int *)(iVar2 + 0x20) = *(int *)(iVar2 + 0x20) + 0x10;
+  src0Operand = irInstruction + 0x20;
+  operandState = program + 7;
+  src1Operand = irInstruction + 0x3c;
+  block = ((int (*)())FUN_00057af0)(operandState,src0Operand,src1Operand);
+  if (block == 0) {
+    block = **(int **)(*(int *)(((unsigned char *)0x0000118c) + compiler) * 4 + *program);
+    instrCount = *(int *)(block + 0x18);
+    if (0x100 < instrCount + 1U) {
+      *(undefined1 *)(program + 4) = 0;
+      instrCount = *(int *)(block + 0x18);
+      if (*(uint *)(block + 0x20) < instrCount + 1U) {
+        emitResult = (**(code **)(compiler + 0xc))(*(uint *)(block + 0x20) * 0x10 + 0x100);
+        (**(code **)(((unsigned char *)0x00001344) + compiler))
+                  (emitResult,*(undefined4 *)(block + 0x1c),*(int *)(block + 0x20) << 4);
+        (**(code **)(compiler + 0x18))(*(undefined4 *)(block + 0x1c));
+        *(undefined4 *)(block + 0x1c) = emitResult;
+        instrCount = *(int *)(block + 0x18);
+        *(int *)(block + 0x20) = *(int *)(block + 0x20) + 0x10;
       }
     }
-    iVar2 = iVar7 * 0x10 + *(int *)(iVar2 + 0x1c);
-    ((int (*)())FUN_00056f20)(param_1,param_2,param_3 + 4,iVar2,1,0,0);
-    ((int (*)())FUN_00057340)(param_2,piVar6,iVar5,iVar2 + 4,0);
-    ((int (*)())FUN_00057340)(param_2,piVar6,iVar4,iVar2 + 8,0);
-    uVar3 = 1;
-    *(undefined4 *)(iVar2 + 0xc) = *(undefined4 *)(iVar2 + 8);
+    block = instrCount * 0x10 + *(int *)(block + 0x1c);
+    ((int (*)())FUN_00056f20)(compiler,program,irInstruction + 4,block,1,0,0);
+    ((int (*)())FUN_00057340)(program,operandState,src0Operand,block + 4,0);
+    ((int (*)())FUN_00057340)(program,operandState,src1Operand,block + 8,0);
+    emitResult = 1;
+    *(undefined4 *)(block + 0xc) = *(undefined4 *)(block + 8);
   }
   else {
-    iVar2 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-    iVar7 = *(int *)(iVar2 + 0x18);
-    if (0x100 < iVar7 + 2U) {
-      *(undefined1 *)(param_2 + 4) = 0;
-      iVar7 = *(int *)(iVar2 + 0x18);
-      if (*(uint *)(iVar2 + 0x20) < iVar7 + 2U) {
-        uVar3 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar2 + 0x20) * 0x10 + 0x100);
-        (**(code **)(((unsigned char *)0x00001344) + param_1))
-                  (uVar3,*(undefined4 *)(iVar2 + 0x1c),*(int *)(iVar2 + 0x20) << 4);
-        (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar2 + 0x1c));
-        *(undefined4 *)(iVar2 + 0x1c) = uVar3;
-        iVar7 = *(int *)(iVar2 + 0x18);
-        *(int *)(iVar2 + 0x20) = *(int *)(iVar2 + 0x20) + 0x10;
+    block = **(int **)(*(int *)(((unsigned char *)0x0000118c) + compiler) * 4 + *program);
+    instrCount = *(int *)(block + 0x18);
+    if (0x100 < instrCount + 2U) {
+      *(undefined1 *)(program + 4) = 0;
+      instrCount = *(int *)(block + 0x18);
+      if (*(uint *)(block + 0x20) < instrCount + 2U) {
+        emitResult = (**(code **)(compiler + 0xc))(*(uint *)(block + 0x20) * 0x10 + 0x100);
+        (**(code **)(((unsigned char *)0x00001344) + compiler))
+                  (emitResult,*(undefined4 *)(block + 0x1c),*(int *)(block + 0x20) << 4);
+        (**(code **)(compiler + 0x18))(*(undefined4 *)(block + 0x1c));
+        *(undefined4 *)(block + 0x1c) = emitResult;
+        instrCount = *(int *)(block + 0x18);
+        *(int *)(block + 0x20) = *(int *)(block + 0x20) + 0x10;
       }
     }
-    iVar2 = iVar7 * 0x10 + *(int *)(iVar2 + 0x1c);
-    uVar3 = ((int (*)())FUN_00057b80)(param_1,param_2);
-    uStack_78 = 3;
-    uStack_60 = 0;
-    uStack_64 = 1;
-    uStack_70 = 1;
-    uStack_6c = 1;
-    uStack_68 = 1;
-    uStack_74 = uVar3;
-    ((int (*)())FUN_00056f20)(param_1,param_2,&uStack_78,iVar2,3,0,0);
-    ((int (*)())FUN_00057340)(param_2,piVar6,iVar5,iVar2 + 4,0);
-    uVar1 = *(uint *)(iVar2 + 4) & 0xfe001fff | 0x1248000;
-    *(uint *)(iVar2 + 0xc) = uVar1;
-    *(uint *)(iVar2 + 8) = uVar1;
-    ((int (*)())FUN_00056f20)(param_1,param_2,param_3 + 4,iVar2 + 0x10,1,0,0);
-    uStack_5c = 3;
-    uStack_44 = 0;
-    uStack_54 = 0x87d5;
-    uStack_50 = 0x87d6;
-    uStack_4c = 0x87d7;
-    uStack_48 = 0x87d8;
-    uStack_58 = uVar3;
-    ((int (*)())FUN_00057340)(param_2,piVar6,&uStack_5c,iVar2 + 0x14,0);
-    ((int (*)())FUN_00057340)(param_2,piVar6,iVar4,iVar2 + 0x18,0);
-    uVar3 = 2;
-    *(undefined4 *)(iVar2 + 0x1c) = *(undefined4 *)(iVar2 + 0x18);
+    block = instrCount * 0x10 + *(int *)(block + 0x1c);
+    emitResult = ((int (*)())FUN_00057b80)(compiler,program);
+    tempDstFile = 3;
+    tempDstFlag = 0;
+    tempDstMask3 = 1;
+    tempDstMask0 = 1;
+    tempDstMask1 = 1;
+    tempDstMask2 = 1;
+    tempDstIndex = emitResult;
+    ((int (*)())FUN_00056f20)(compiler,program,&tempDstFile,block,3,0,0);
+    ((int (*)())FUN_00057340)(program,operandState,src0Operand,block + 4,0);
+    packedWord = *(uint *)(block + 4) & 0xfe001fff | 0x1248000;
+    *(uint *)(block + 0xc) = packedWord;
+    *(uint *)(block + 8) = packedWord;
+    ((int (*)())FUN_00056f20)(compiler,program,irInstruction + 4,block + 0x10,1,0,0);
+    tempSrcFile = 3;
+    tempSrcFlag = 0;
+    tempSrcSel0 = 0x87d5;
+    tempSrcSel1 = 0x87d6;
+    tempSrcSel2 = 0x87d7;
+    tempSrcSel3 = 0x87d8;
+    tempSrcIndex = emitResult;
+    ((int (*)())FUN_00057340)(program,operandState,&tempSrcFile,block + 0x14,0);
+    ((int (*)())FUN_00057340)(program,operandState,src1Operand,block + 0x18,0);
+    emitResult = 2;
+    *(undefined4 *)(block + 0x1c) = *(undefined4 *)(block + 0x18);
   }
-  return uVar3;
+  return emitResult;
 }
 
 /* FUN_00058b10 @ 0x58b10 (824 bytes) */
-int FUN_00058b10(param_1, param_2, param_3)
-  int param_1;
-  int *param_2;
-  int param_3;
+int FUN_00058b10(compiler, program, irInstruction)
+  int compiler;
+  int *program;
+  int irInstruction;
 {
-  uint uVar1;
-  int iVar2;
-  undefined4 uVar3;
-  int iVar4;
-  int iVar5;
-  int *piVar6;
-  int iVar7;
-  undefined4 uStack_78;
-  undefined4 uStack_74;
-  undefined4 uStack_70;
-  undefined4 uStack_6c;
-  undefined4 uStack_68;
-  undefined4 uStack_64;
-  undefined1 uStack_60;
-  undefined4 uStack_5c;
-  undefined4 uStack_58;
-  undefined4 uStack_54;
-  undefined4 uStack_50;
-  undefined4 uStack_4c;
-  undefined4 uStack_48;
-  undefined1 uStack_44;
+  uint packedWord;
+  int block;
+  undefined4 emitResult;
+  int src1Operand;
+  int src0Operand;
+  int *operandState;
+  int instrCount;
+  undefined4 tempDstFile;
+  undefined4 tempDstIndex;
+  undefined4 tempDstMask0;
+  undefined4 tempDstMask1;
+  undefined4 tempDstMask2;
+  undefined4 tempDstMask3;
+  undefined1 tempDstFlag;
+  undefined4 tempSrcFile;
+  undefined4 tempSrcIndex;
+  undefined4 tempSrcSel0;
+  undefined4 tempSrcSel1;
+  undefined4 tempSrcSel2;
+  undefined4 tempSrcSel3;
+  undefined1 tempSrcFlag;
   
-  iVar5 = param_3 + 0x20;
-  piVar6 = param_2 + 7;
-  iVar4 = param_3 + 0x3c;
-  iVar2 = ((int (*)())FUN_00057af0)(piVar6,iVar5,iVar4);
-  if (iVar2 == 0) {
-    iVar2 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-    iVar7 = *(int *)(iVar2 + 0x18);
-    if (0x100 < iVar7 + 1U) {
-      *(undefined1 *)(param_2 + 4) = 0;
-      iVar7 = *(int *)(iVar2 + 0x18);
-      if (*(uint *)(iVar2 + 0x20) < iVar7 + 1U) {
-        uVar3 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar2 + 0x20) * 0x10 + 0x100);
-        (**(code **)(((unsigned char *)0x00001344) + param_1))
-                  (uVar3,*(undefined4 *)(iVar2 + 0x1c),*(int *)(iVar2 + 0x20) << 4);
-        (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar2 + 0x1c));
-        *(undefined4 *)(iVar2 + 0x1c) = uVar3;
-        iVar7 = *(int *)(iVar2 + 0x18);
-        *(int *)(iVar2 + 0x20) = *(int *)(iVar2 + 0x20) + 0x10;
+  src0Operand = irInstruction + 0x20;
+  operandState = program + 7;
+  src1Operand = irInstruction + 0x3c;
+  block = ((int (*)())FUN_00057af0)(operandState,src0Operand,src1Operand);
+  if (block == 0) {
+    block = **(int **)(*(int *)(((unsigned char *)0x0000118c) + compiler) * 4 + *program);
+    instrCount = *(int *)(block + 0x18);
+    if (0x100 < instrCount + 1U) {
+      *(undefined1 *)(program + 4) = 0;
+      instrCount = *(int *)(block + 0x18);
+      if (*(uint *)(block + 0x20) < instrCount + 1U) {
+        emitResult = (**(code **)(compiler + 0xc))(*(uint *)(block + 0x20) * 0x10 + 0x100);
+        (**(code **)(((unsigned char *)0x00001344) + compiler))
+                  (emitResult,*(undefined4 *)(block + 0x1c),*(int *)(block + 0x20) << 4);
+        (**(code **)(compiler + 0x18))(*(undefined4 *)(block + 0x1c));
+        *(undefined4 *)(block + 0x1c) = emitResult;
+        instrCount = *(int *)(block + 0x18);
+        *(int *)(block + 0x20) = *(int *)(block + 0x20) + 0x10;
       }
     }
-    iVar2 = iVar7 * 0x10 + *(int *)(iVar2 + 0x1c);
-    ((int (*)())FUN_00056f20)(param_1,param_2,param_3 + 4,iVar2,2,0,0);
-    ((int (*)())FUN_00057340)(param_2,piVar6,iVar5,iVar2 + 4,0);
-    ((int (*)())FUN_00057340)(param_2,piVar6,iVar4,iVar2 + 8,0);
-    uVar3 = 1;
-    *(undefined4 *)(iVar2 + 0xc) = *(undefined4 *)(iVar2 + 8);
+    block = instrCount * 0x10 + *(int *)(block + 0x1c);
+    ((int (*)())FUN_00056f20)(compiler,program,irInstruction + 4,block,2,0,0);
+    ((int (*)())FUN_00057340)(program,operandState,src0Operand,block + 4,0);
+    ((int (*)())FUN_00057340)(program,operandState,src1Operand,block + 8,0);
+    emitResult = 1;
+    *(undefined4 *)(block + 0xc) = *(undefined4 *)(block + 8);
   }
   else {
-    iVar2 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-    iVar7 = *(int *)(iVar2 + 0x18);
-    if (0x100 < iVar7 + 2U) {
-      *(undefined1 *)(param_2 + 4) = 0;
-      iVar7 = *(int *)(iVar2 + 0x18);
-      if (*(uint *)(iVar2 + 0x20) < iVar7 + 2U) {
-        uVar3 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar2 + 0x20) * 0x10 + 0x100);
-        (**(code **)(((unsigned char *)0x00001344) + param_1))
-                  (uVar3,*(undefined4 *)(iVar2 + 0x1c),*(int *)(iVar2 + 0x20) << 4);
-        (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar2 + 0x1c));
-        *(undefined4 *)(iVar2 + 0x1c) = uVar3;
-        iVar7 = *(int *)(iVar2 + 0x18);
-        *(int *)(iVar2 + 0x20) = *(int *)(iVar2 + 0x20) + 0x10;
+    block = **(int **)(*(int *)(((unsigned char *)0x0000118c) + compiler) * 4 + *program);
+    instrCount = *(int *)(block + 0x18);
+    if (0x100 < instrCount + 2U) {
+      *(undefined1 *)(program + 4) = 0;
+      instrCount = *(int *)(block + 0x18);
+      if (*(uint *)(block + 0x20) < instrCount + 2U) {
+        emitResult = (**(code **)(compiler + 0xc))(*(uint *)(block + 0x20) * 0x10 + 0x100);
+        (**(code **)(((unsigned char *)0x00001344) + compiler))
+                  (emitResult,*(undefined4 *)(block + 0x1c),*(int *)(block + 0x20) << 4);
+        (**(code **)(compiler + 0x18))(*(undefined4 *)(block + 0x1c));
+        *(undefined4 *)(block + 0x1c) = emitResult;
+        instrCount = *(int *)(block + 0x18);
+        *(int *)(block + 0x20) = *(int *)(block + 0x20) + 0x10;
       }
     }
-    iVar2 = iVar7 * 0x10 + *(int *)(iVar2 + 0x1c);
-    uVar3 = ((int (*)())FUN_00057b80)(param_1,param_2);
-    uStack_78 = 3;
-    uStack_60 = 0;
-    uStack_64 = 1;
-    uStack_70 = 1;
-    uStack_6c = 1;
-    uStack_68 = 1;
-    uStack_74 = uVar3;
-    ((int (*)())FUN_00056f20)(param_1,param_2,&uStack_78,iVar2,3,0,0);
-    ((int (*)())FUN_00057340)(param_2,piVar6,iVar5,iVar2 + 4,0);
-    uVar1 = *(uint *)(iVar2 + 4) & 0xfe001fff | 0x1248000;
-    *(uint *)(iVar2 + 0xc) = uVar1;
-    *(uint *)(iVar2 + 8) = uVar1;
-    ((int (*)())FUN_00056f20)(param_1,param_2,param_3 + 4,iVar2 + 0x10,2,0,0);
-    uStack_5c = 3;
-    uStack_44 = 0;
-    uStack_54 = 0x87d5;
-    uStack_50 = 0x87d6;
-    uStack_4c = 0x87d7;
-    uStack_48 = 0x87d8;
-    uStack_58 = uVar3;
-    ((int (*)())FUN_00057340)(param_2,piVar6,&uStack_5c,iVar2 + 0x14,0);
-    ((int (*)())FUN_00057340)(param_2,piVar6,iVar4,iVar2 + 0x18,0);
-    uVar3 = 2;
-    *(undefined4 *)(iVar2 + 0x1c) = *(undefined4 *)(iVar2 + 0x18);
+    block = instrCount * 0x10 + *(int *)(block + 0x1c);
+    emitResult = ((int (*)())FUN_00057b80)(compiler,program);
+    tempDstFile = 3;
+    tempDstFlag = 0;
+    tempDstMask3 = 1;
+    tempDstMask0 = 1;
+    tempDstMask1 = 1;
+    tempDstMask2 = 1;
+    tempDstIndex = emitResult;
+    ((int (*)())FUN_00056f20)(compiler,program,&tempDstFile,block,3,0,0);
+    ((int (*)())FUN_00057340)(program,operandState,src0Operand,block + 4,0);
+    packedWord = *(uint *)(block + 4) & 0xfe001fff | 0x1248000;
+    *(uint *)(block + 0xc) = packedWord;
+    *(uint *)(block + 8) = packedWord;
+    ((int (*)())FUN_00056f20)(compiler,program,irInstruction + 4,block + 0x10,2,0,0);
+    tempSrcFile = 3;
+    tempSrcFlag = 0;
+    tempSrcSel0 = 0x87d5;
+    tempSrcSel1 = 0x87d6;
+    tempSrcSel2 = 0x87d7;
+    tempSrcSel3 = 0x87d8;
+    tempSrcIndex = emitResult;
+    ((int (*)())FUN_00057340)(program,operandState,&tempSrcFile,block + 0x14,0);
+    ((int (*)())FUN_00057340)(program,operandState,src1Operand,block + 0x18,0);
+    emitResult = 2;
+    *(undefined4 *)(block + 0x1c) = *(undefined4 *)(block + 0x18);
   }
-  return uVar3;
+  return emitResult;
 }
 
 /* FUN_00058e50 @ 0x58e50 (824 bytes) */
-int FUN_00058e50(param_1, param_2, param_3)
-  int param_1;
-  int *param_2;
-  int param_3;
+int FUN_00058e50(compiler, program, irInstruction)
+  int compiler;
+  int *program;
+  int irInstruction;
 {
-  uint uVar1;
-  int iVar2;
-  undefined4 uVar3;
-  int iVar4;
-  int iVar5;
-  int *piVar6;
-  int iVar7;
-  undefined4 uStack_78;
-  undefined4 uStack_74;
-  undefined4 uStack_70;
-  undefined4 uStack_6c;
-  undefined4 uStack_68;
-  undefined4 uStack_64;
-  undefined1 uStack_60;
-  undefined4 uStack_5c;
-  undefined4 uStack_58;
-  undefined4 uStack_54;
-  undefined4 uStack_50;
-  undefined4 uStack_4c;
-  undefined4 uStack_48;
-  undefined1 uStack_44;
+  uint packedWord;
+  int block;
+  undefined4 emitResult;
+  int src1Operand;
+  int src0Operand;
+  int *operandState;
+  int instrCount;
+  undefined4 tempDstFile;
+  undefined4 tempDstIndex;
+  undefined4 tempDstMask0;
+  undefined4 tempDstMask1;
+  undefined4 tempDstMask2;
+  undefined4 tempDstMask3;
+  undefined1 tempDstFlag;
+  undefined4 tempSrcFile;
+  undefined4 tempSrcIndex;
+  undefined4 tempSrcSel0;
+  undefined4 tempSrcSel1;
+  undefined4 tempSrcSel2;
+  undefined4 tempSrcSel3;
+  undefined1 tempSrcFlag;
   
-  iVar5 = param_3 + 0x20;
-  piVar6 = param_2 + 7;
-  iVar4 = param_3 + 0x3c;
-  iVar2 = ((int (*)())FUN_00057af0)(piVar6,iVar5,iVar4);
-  if (iVar2 == 0) {
-    iVar2 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-    iVar7 = *(int *)(iVar2 + 0x18);
-    if (0x100 < iVar7 + 1U) {
-      *(undefined1 *)(param_2 + 4) = 0;
-      iVar7 = *(int *)(iVar2 + 0x18);
-      if (*(uint *)(iVar2 + 0x20) < iVar7 + 1U) {
-        uVar3 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar2 + 0x20) * 0x10 + 0x100);
-        (**(code **)(((unsigned char *)0x00001344) + param_1))
-                  (uVar3,*(undefined4 *)(iVar2 + 0x1c),*(int *)(iVar2 + 0x20) << 4);
-        (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar2 + 0x1c));
-        *(undefined4 *)(iVar2 + 0x1c) = uVar3;
-        iVar7 = *(int *)(iVar2 + 0x18);
-        *(int *)(iVar2 + 0x20) = *(int *)(iVar2 + 0x20) + 0x10;
+  src0Operand = irInstruction + 0x20;
+  operandState = program + 7;
+  src1Operand = irInstruction + 0x3c;
+  block = ((int (*)())FUN_00057af0)(operandState,src0Operand,src1Operand);
+  if (block == 0) {
+    block = **(int **)(*(int *)(((unsigned char *)0x0000118c) + compiler) * 4 + *program);
+    instrCount = *(int *)(block + 0x18);
+    if (0x100 < instrCount + 1U) {
+      *(undefined1 *)(program + 4) = 0;
+      instrCount = *(int *)(block + 0x18);
+      if (*(uint *)(block + 0x20) < instrCount + 1U) {
+        emitResult = (**(code **)(compiler + 0xc))(*(uint *)(block + 0x20) * 0x10 + 0x100);
+        (**(code **)(((unsigned char *)0x00001344) + compiler))
+                  (emitResult,*(undefined4 *)(block + 0x1c),*(int *)(block + 0x20) << 4);
+        (**(code **)(compiler + 0x18))(*(undefined4 *)(block + 0x1c));
+        *(undefined4 *)(block + 0x1c) = emitResult;
+        instrCount = *(int *)(block + 0x18);
+        *(int *)(block + 0x20) = *(int *)(block + 0x20) + 0x10;
       }
     }
-    iVar2 = iVar7 * 0x10 + *(int *)(iVar2 + 0x1c);
-    ((int (*)())FUN_00056f20)(param_1,param_2,param_3 + 4,iVar2,3,0,0);
-    ((int (*)())FUN_00057340)(param_2,piVar6,iVar5,iVar2 + 4,0);
-    ((int (*)())FUN_00057340)(param_2,piVar6,iVar4,iVar2 + 8,0);
-    uVar3 = 1;
-    *(undefined4 *)(iVar2 + 0xc) = *(undefined4 *)(iVar2 + 8);
+    block = instrCount * 0x10 + *(int *)(block + 0x1c);
+    ((int (*)())FUN_00056f20)(compiler,program,irInstruction + 4,block,3,0,0);
+    ((int (*)())FUN_00057340)(program,operandState,src0Operand,block + 4,0);
+    ((int (*)())FUN_00057340)(program,operandState,src1Operand,block + 8,0);
+    emitResult = 1;
+    *(undefined4 *)(block + 0xc) = *(undefined4 *)(block + 8);
   }
   else {
-    iVar2 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-    iVar7 = *(int *)(iVar2 + 0x18);
-    if (0x100 < iVar7 + 2U) {
-      *(undefined1 *)(param_2 + 4) = 0;
-      iVar7 = *(int *)(iVar2 + 0x18);
-      if (*(uint *)(iVar2 + 0x20) < iVar7 + 2U) {
-        uVar3 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar2 + 0x20) * 0x10 + 0x100);
-        (**(code **)(((unsigned char *)0x00001344) + param_1))
-                  (uVar3,*(undefined4 *)(iVar2 + 0x1c),*(int *)(iVar2 + 0x20) << 4);
-        (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar2 + 0x1c));
-        *(undefined4 *)(iVar2 + 0x1c) = uVar3;
-        iVar7 = *(int *)(iVar2 + 0x18);
-        *(int *)(iVar2 + 0x20) = *(int *)(iVar2 + 0x20) + 0x10;
+    block = **(int **)(*(int *)(((unsigned char *)0x0000118c) + compiler) * 4 + *program);
+    instrCount = *(int *)(block + 0x18);
+    if (0x100 < instrCount + 2U) {
+      *(undefined1 *)(program + 4) = 0;
+      instrCount = *(int *)(block + 0x18);
+      if (*(uint *)(block + 0x20) < instrCount + 2U) {
+        emitResult = (**(code **)(compiler + 0xc))(*(uint *)(block + 0x20) * 0x10 + 0x100);
+        (**(code **)(((unsigned char *)0x00001344) + compiler))
+                  (emitResult,*(undefined4 *)(block + 0x1c),*(int *)(block + 0x20) << 4);
+        (**(code **)(compiler + 0x18))(*(undefined4 *)(block + 0x1c));
+        *(undefined4 *)(block + 0x1c) = emitResult;
+        instrCount = *(int *)(block + 0x18);
+        *(int *)(block + 0x20) = *(int *)(block + 0x20) + 0x10;
       }
     }
-    iVar2 = iVar7 * 0x10 + *(int *)(iVar2 + 0x1c);
-    uVar3 = ((int (*)())FUN_00057b80)(param_1,param_2);
-    uStack_78 = 3;
-    uStack_60 = 0;
-    uStack_64 = 1;
-    uStack_70 = 1;
-    uStack_6c = 1;
-    uStack_68 = 1;
-    uStack_74 = uVar3;
-    ((int (*)())FUN_00056f20)(param_1,param_2,&uStack_78,iVar2,3,0,0);
-    ((int (*)())FUN_00057340)(param_2,piVar6,iVar5,iVar2 + 4,0);
-    uVar1 = *(uint *)(iVar2 + 4) & 0xfe001fff | 0x1248000;
-    *(uint *)(iVar2 + 0xc) = uVar1;
-    *(uint *)(iVar2 + 8) = uVar1;
-    ((int (*)())FUN_00056f20)(param_1,param_2,param_3 + 4,iVar2 + 0x10,3,0,0);
-    uStack_5c = 3;
-    uStack_44 = 0;
-    uStack_54 = 0x87d5;
-    uStack_50 = 0x87d6;
-    uStack_4c = 0x87d7;
-    uStack_48 = 0x87d8;
-    uStack_58 = uVar3;
-    ((int (*)())FUN_00057340)(param_2,piVar6,&uStack_5c,iVar2 + 0x14,0);
-    ((int (*)())FUN_00057340)(param_2,piVar6,iVar4,iVar2 + 0x18,0);
-    uVar3 = 2;
-    *(undefined4 *)(iVar2 + 0x1c) = *(undefined4 *)(iVar2 + 0x18);
+    block = instrCount * 0x10 + *(int *)(block + 0x1c);
+    emitResult = ((int (*)())FUN_00057b80)(compiler,program);
+    tempDstFile = 3;
+    tempDstFlag = 0;
+    tempDstMask3 = 1;
+    tempDstMask0 = 1;
+    tempDstMask1 = 1;
+    tempDstMask2 = 1;
+    tempDstIndex = emitResult;
+    ((int (*)())FUN_00056f20)(compiler,program,&tempDstFile,block,3,0,0);
+    ((int (*)())FUN_00057340)(program,operandState,src0Operand,block + 4,0);
+    packedWord = *(uint *)(block + 4) & 0xfe001fff | 0x1248000;
+    *(uint *)(block + 0xc) = packedWord;
+    *(uint *)(block + 8) = packedWord;
+    ((int (*)())FUN_00056f20)(compiler,program,irInstruction + 4,block + 0x10,3,0,0);
+    tempSrcFile = 3;
+    tempSrcFlag = 0;
+    tempSrcSel0 = 0x87d5;
+    tempSrcSel1 = 0x87d6;
+    tempSrcSel2 = 0x87d7;
+    tempSrcSel3 = 0x87d8;
+    tempSrcIndex = emitResult;
+    ((int (*)())FUN_00057340)(program,operandState,&tempSrcFile,block + 0x14,0);
+    ((int (*)())FUN_00057340)(program,operandState,src1Operand,block + 0x18,0);
+    emitResult = 2;
+    *(undefined4 *)(block + 0x1c) = *(undefined4 *)(block + 0x18);
   }
-  return uVar3;
+  return emitResult;
 }
 
 /* FUN_00059190 @ 0x59190 (2512 bytes) */
@@ -3450,306 +3450,306 @@ int FUN_00059cb0(param_1, param_2, param_3)
 }
 
 /* FUN_00059ff0 @ 0x59ff0 (824 bytes) */
-int FUN_00059ff0(param_1, param_2, param_3)
-  int param_1;
-  int *param_2;
-  int param_3;
+int FUN_00059ff0(compiler, program, irInstruction)
+  int compiler;
+  int *program;
+  int irInstruction;
 {
-  uint uVar1;
-  int iVar2;
-  undefined4 uVar3;
-  int iVar4;
-  int iVar5;
-  int *piVar6;
-  int iVar7;
-  undefined4 uStack_78;
-  undefined4 uStack_74;
-  undefined4 uStack_70;
-  undefined4 uStack_6c;
-  undefined4 uStack_68;
-  undefined4 uStack_64;
-  undefined1 uStack_60;
-  undefined4 uStack_5c;
-  undefined4 uStack_58;
-  undefined4 uStack_54;
-  undefined4 uStack_50;
-  undefined4 uStack_4c;
-  undefined4 uStack_48;
-  undefined1 uStack_44;
+  uint packedWord;
+  int block;
+  undefined4 emitResult;
+  int src1Operand;
+  int src0Operand;
+  int *operandState;
+  int instrCount;
+  undefined4 tempDstFile;
+  undefined4 tempDstIndex;
+  undefined4 tempDstMask0;
+  undefined4 tempDstMask1;
+  undefined4 tempDstMask2;
+  undefined4 tempDstMask3;
+  undefined1 tempDstFlag;
+  undefined4 tempSrcFile;
+  undefined4 tempSrcIndex;
+  undefined4 tempSrcSel0;
+  undefined4 tempSrcSel1;
+  undefined4 tempSrcSel2;
+  undefined4 tempSrcSel3;
+  undefined1 tempSrcFlag;
   
-  iVar5 = param_3 + 0x20;
-  piVar6 = param_2 + 7;
-  iVar4 = param_3 + 0x3c;
-  iVar2 = ((int (*)())FUN_00057af0)(piVar6,iVar5,iVar4);
-  if (iVar2 == 0) {
-    iVar2 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-    iVar7 = *(int *)(iVar2 + 0x18);
-    if (0x100 < iVar7 + 1U) {
-      *(undefined1 *)(param_2 + 4) = 0;
-      iVar7 = *(int *)(iVar2 + 0x18);
-      if (*(uint *)(iVar2 + 0x20) < iVar7 + 1U) {
-        uVar3 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar2 + 0x20) * 0x10 + 0x100);
-        (**(code **)(((unsigned char *)0x00001344) + param_1))
-                  (uVar3,*(undefined4 *)(iVar2 + 0x1c),*(int *)(iVar2 + 0x20) << 4);
-        (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar2 + 0x1c));
-        *(undefined4 *)(iVar2 + 0x1c) = uVar3;
-        iVar7 = *(int *)(iVar2 + 0x18);
-        *(int *)(iVar2 + 0x20) = *(int *)(iVar2 + 0x20) + 0x10;
+  src0Operand = irInstruction + 0x20;
+  operandState = program + 7;
+  src1Operand = irInstruction + 0x3c;
+  block = ((int (*)())FUN_00057af0)(operandState,src0Operand,src1Operand);
+  if (block == 0) {
+    block = **(int **)(*(int *)(((unsigned char *)0x0000118c) + compiler) * 4 + *program);
+    instrCount = *(int *)(block + 0x18);
+    if (0x100 < instrCount + 1U) {
+      *(undefined1 *)(program + 4) = 0;
+      instrCount = *(int *)(block + 0x18);
+      if (*(uint *)(block + 0x20) < instrCount + 1U) {
+        emitResult = (**(code **)(compiler + 0xc))(*(uint *)(block + 0x20) * 0x10 + 0x100);
+        (**(code **)(((unsigned char *)0x00001344) + compiler))
+                  (emitResult,*(undefined4 *)(block + 0x1c),*(int *)(block + 0x20) << 4);
+        (**(code **)(compiler + 0x18))(*(undefined4 *)(block + 0x1c));
+        *(undefined4 *)(block + 0x1c) = emitResult;
+        instrCount = *(int *)(block + 0x18);
+        *(int *)(block + 0x20) = *(int *)(block + 0x20) + 0x10;
       }
     }
-    iVar2 = iVar7 * 0x10 + *(int *)(iVar2 + 0x1c);
-    ((int (*)())FUN_00056f20)(param_1,param_2,param_3 + 4,iVar2,8,0,0);
-    ((int (*)())FUN_00057340)(param_2,piVar6,iVar5,iVar2 + 4,0);
-    ((int (*)())FUN_00057340)(param_2,piVar6,iVar4,iVar2 + 8,0);
-    uVar3 = 1;
-    *(undefined4 *)(iVar2 + 0xc) = *(undefined4 *)(iVar2 + 8);
+    block = instrCount * 0x10 + *(int *)(block + 0x1c);
+    ((int (*)())FUN_00056f20)(compiler,program,irInstruction + 4,block,8,0,0);
+    ((int (*)())FUN_00057340)(program,operandState,src0Operand,block + 4,0);
+    ((int (*)())FUN_00057340)(program,operandState,src1Operand,block + 8,0);
+    emitResult = 1;
+    *(undefined4 *)(block + 0xc) = *(undefined4 *)(block + 8);
   }
   else {
-    iVar2 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-    iVar7 = *(int *)(iVar2 + 0x18);
-    if (0x100 < iVar7 + 2U) {
-      *(undefined1 *)(param_2 + 4) = 0;
-      iVar7 = *(int *)(iVar2 + 0x18);
-      if (*(uint *)(iVar2 + 0x20) < iVar7 + 2U) {
-        uVar3 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar2 + 0x20) * 0x10 + 0x100);
-        (**(code **)(((unsigned char *)0x00001344) + param_1))
-                  (uVar3,*(undefined4 *)(iVar2 + 0x1c),*(int *)(iVar2 + 0x20) << 4);
-        (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar2 + 0x1c));
-        *(undefined4 *)(iVar2 + 0x1c) = uVar3;
-        iVar7 = *(int *)(iVar2 + 0x18);
-        *(int *)(iVar2 + 0x20) = *(int *)(iVar2 + 0x20) + 0x10;
+    block = **(int **)(*(int *)(((unsigned char *)0x0000118c) + compiler) * 4 + *program);
+    instrCount = *(int *)(block + 0x18);
+    if (0x100 < instrCount + 2U) {
+      *(undefined1 *)(program + 4) = 0;
+      instrCount = *(int *)(block + 0x18);
+      if (*(uint *)(block + 0x20) < instrCount + 2U) {
+        emitResult = (**(code **)(compiler + 0xc))(*(uint *)(block + 0x20) * 0x10 + 0x100);
+        (**(code **)(((unsigned char *)0x00001344) + compiler))
+                  (emitResult,*(undefined4 *)(block + 0x1c),*(int *)(block + 0x20) << 4);
+        (**(code **)(compiler + 0x18))(*(undefined4 *)(block + 0x1c));
+        *(undefined4 *)(block + 0x1c) = emitResult;
+        instrCount = *(int *)(block + 0x18);
+        *(int *)(block + 0x20) = *(int *)(block + 0x20) + 0x10;
       }
     }
-    iVar2 = iVar7 * 0x10 + *(int *)(iVar2 + 0x1c);
-    uVar3 = ((int (*)())FUN_00057b80)(param_1,param_2);
-    uStack_78 = 3;
-    uStack_60 = 0;
-    uStack_64 = 1;
-    uStack_70 = 1;
-    uStack_6c = 1;
-    uStack_68 = 1;
-    uStack_74 = uVar3;
-    ((int (*)())FUN_00056f20)(param_1,param_2,&uStack_78,iVar2,3,0,0);
-    ((int (*)())FUN_00057340)(param_2,piVar6,iVar5,iVar2 + 4,0);
-    uVar1 = *(uint *)(iVar2 + 4) & 0xfe001fff | 0x1248000;
-    *(uint *)(iVar2 + 0xc) = uVar1;
-    *(uint *)(iVar2 + 8) = uVar1;
-    ((int (*)())FUN_00056f20)(param_1,param_2,param_3 + 4,iVar2 + 0x10,8,0,0);
-    uStack_5c = 3;
-    uStack_44 = 0;
-    uStack_54 = 0x87d5;
-    uStack_50 = 0x87d6;
-    uStack_4c = 0x87d7;
-    uStack_48 = 0x87d8;
-    uStack_58 = uVar3;
-    ((int (*)())FUN_00057340)(param_2,piVar6,&uStack_5c,iVar2 + 0x14,0);
-    ((int (*)())FUN_00057340)(param_2,piVar6,iVar4,iVar2 + 0x18,0);
-    uVar3 = 2;
-    *(undefined4 *)(iVar2 + 0x1c) = *(undefined4 *)(iVar2 + 0x18);
+    block = instrCount * 0x10 + *(int *)(block + 0x1c);
+    emitResult = ((int (*)())FUN_00057b80)(compiler,program);
+    tempDstFile = 3;
+    tempDstFlag = 0;
+    tempDstMask3 = 1;
+    tempDstMask0 = 1;
+    tempDstMask1 = 1;
+    tempDstMask2 = 1;
+    tempDstIndex = emitResult;
+    ((int (*)())FUN_00056f20)(compiler,program,&tempDstFile,block,3,0,0);
+    ((int (*)())FUN_00057340)(program,operandState,src0Operand,block + 4,0);
+    packedWord = *(uint *)(block + 4) & 0xfe001fff | 0x1248000;
+    *(uint *)(block + 0xc) = packedWord;
+    *(uint *)(block + 8) = packedWord;
+    ((int (*)())FUN_00056f20)(compiler,program,irInstruction + 4,block + 0x10,8,0,0);
+    tempSrcFile = 3;
+    tempSrcFlag = 0;
+    tempSrcSel0 = 0x87d5;
+    tempSrcSel1 = 0x87d6;
+    tempSrcSel2 = 0x87d7;
+    tempSrcSel3 = 0x87d8;
+    tempSrcIndex = emitResult;
+    ((int (*)())FUN_00057340)(program,operandState,&tempSrcFile,block + 0x14,0);
+    ((int (*)())FUN_00057340)(program,operandState,src1Operand,block + 0x18,0);
+    emitResult = 2;
+    *(undefined4 *)(block + 0x1c) = *(undefined4 *)(block + 0x18);
   }
-  return uVar3;
+  return emitResult;
 }
 
 /* FUN_0005a330 @ 0x5a330 (824 bytes) */
-int FUN_0005a330(param_1, param_2, param_3)
-  int param_1;
-  int *param_2;
-  int param_3;
+int FUN_0005a330(compiler, program, irInstruction)
+  int compiler;
+  int *program;
+  int irInstruction;
 {
-  uint uVar1;
-  int iVar2;
-  undefined4 uVar3;
-  int iVar4;
-  int iVar5;
-  int *piVar6;
-  int iVar7;
-  undefined4 uStack_78;
-  undefined4 uStack_74;
-  undefined4 uStack_70;
-  undefined4 uStack_6c;
-  undefined4 uStack_68;
-  undefined4 uStack_64;
-  undefined1 uStack_60;
-  undefined4 uStack_5c;
-  undefined4 uStack_58;
-  undefined4 uStack_54;
-  undefined4 uStack_50;
-  undefined4 uStack_4c;
-  undefined4 uStack_48;
-  undefined1 uStack_44;
+  uint packedWord;
+  int block;
+  undefined4 emitResult;
+  int src1Operand;
+  int src0Operand;
+  int *operandState;
+  int instrCount;
+  undefined4 tempDstFile;
+  undefined4 tempDstIndex;
+  undefined4 tempDstMask0;
+  undefined4 tempDstMask1;
+  undefined4 tempDstMask2;
+  undefined4 tempDstMask3;
+  undefined1 tempDstFlag;
+  undefined4 tempSrcFile;
+  undefined4 tempSrcIndex;
+  undefined4 tempSrcSel0;
+  undefined4 tempSrcSel1;
+  undefined4 tempSrcSel2;
+  undefined4 tempSrcSel3;
+  undefined1 tempSrcFlag;
   
-  iVar5 = param_3 + 0x20;
-  piVar6 = param_2 + 7;
-  iVar4 = param_3 + 0x3c;
-  iVar2 = ((int (*)())FUN_00057af0)(piVar6,iVar5,iVar4);
-  if (iVar2 == 0) {
-    iVar2 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-    iVar7 = *(int *)(iVar2 + 0x18);
-    if (0x100 < iVar7 + 1U) {
-      *(undefined1 *)(param_2 + 4) = 0;
-      iVar7 = *(int *)(iVar2 + 0x18);
-      if (*(uint *)(iVar2 + 0x20) < iVar7 + 1U) {
-        uVar3 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar2 + 0x20) * 0x10 + 0x100);
-        (**(code **)(((unsigned char *)0x00001344) + param_1))
-                  (uVar3,*(undefined4 *)(iVar2 + 0x1c),*(int *)(iVar2 + 0x20) << 4);
-        (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar2 + 0x1c));
-        *(undefined4 *)(iVar2 + 0x1c) = uVar3;
-        iVar7 = *(int *)(iVar2 + 0x18);
-        *(int *)(iVar2 + 0x20) = *(int *)(iVar2 + 0x20) + 0x10;
+  src0Operand = irInstruction + 0x20;
+  operandState = program + 7;
+  src1Operand = irInstruction + 0x3c;
+  block = ((int (*)())FUN_00057af0)(operandState,src0Operand,src1Operand);
+  if (block == 0) {
+    block = **(int **)(*(int *)(((unsigned char *)0x0000118c) + compiler) * 4 + *program);
+    instrCount = *(int *)(block + 0x18);
+    if (0x100 < instrCount + 1U) {
+      *(undefined1 *)(program + 4) = 0;
+      instrCount = *(int *)(block + 0x18);
+      if (*(uint *)(block + 0x20) < instrCount + 1U) {
+        emitResult = (**(code **)(compiler + 0xc))(*(uint *)(block + 0x20) * 0x10 + 0x100);
+        (**(code **)(((unsigned char *)0x00001344) + compiler))
+                  (emitResult,*(undefined4 *)(block + 0x1c),*(int *)(block + 0x20) << 4);
+        (**(code **)(compiler + 0x18))(*(undefined4 *)(block + 0x1c));
+        *(undefined4 *)(block + 0x1c) = emitResult;
+        instrCount = *(int *)(block + 0x18);
+        *(int *)(block + 0x20) = *(int *)(block + 0x20) + 0x10;
       }
     }
-    iVar2 = iVar7 * 0x10 + *(int *)(iVar2 + 0x1c);
-    ((int (*)())FUN_00056f20)(param_1,param_2,param_3 + 4,iVar2,9,0,0);
-    ((int (*)())FUN_00057340)(param_2,piVar6,iVar5,iVar2 + 4,0);
-    ((int (*)())FUN_00057340)(param_2,piVar6,iVar4,iVar2 + 8,0);
-    uVar3 = 1;
-    *(undefined4 *)(iVar2 + 0xc) = *(undefined4 *)(iVar2 + 8);
+    block = instrCount * 0x10 + *(int *)(block + 0x1c);
+    ((int (*)())FUN_00056f20)(compiler,program,irInstruction + 4,block,9,0,0);
+    ((int (*)())FUN_00057340)(program,operandState,src0Operand,block + 4,0);
+    ((int (*)())FUN_00057340)(program,operandState,src1Operand,block + 8,0);
+    emitResult = 1;
+    *(undefined4 *)(block + 0xc) = *(undefined4 *)(block + 8);
   }
   else {
-    iVar2 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-    iVar7 = *(int *)(iVar2 + 0x18);
-    if (0x100 < iVar7 + 2U) {
-      *(undefined1 *)(param_2 + 4) = 0;
-      iVar7 = *(int *)(iVar2 + 0x18);
-      if (*(uint *)(iVar2 + 0x20) < iVar7 + 2U) {
-        uVar3 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar2 + 0x20) * 0x10 + 0x100);
-        (**(code **)(((unsigned char *)0x00001344) + param_1))
-                  (uVar3,*(undefined4 *)(iVar2 + 0x1c),*(int *)(iVar2 + 0x20) << 4);
-        (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar2 + 0x1c));
-        *(undefined4 *)(iVar2 + 0x1c) = uVar3;
-        iVar7 = *(int *)(iVar2 + 0x18);
-        *(int *)(iVar2 + 0x20) = *(int *)(iVar2 + 0x20) + 0x10;
+    block = **(int **)(*(int *)(((unsigned char *)0x0000118c) + compiler) * 4 + *program);
+    instrCount = *(int *)(block + 0x18);
+    if (0x100 < instrCount + 2U) {
+      *(undefined1 *)(program + 4) = 0;
+      instrCount = *(int *)(block + 0x18);
+      if (*(uint *)(block + 0x20) < instrCount + 2U) {
+        emitResult = (**(code **)(compiler + 0xc))(*(uint *)(block + 0x20) * 0x10 + 0x100);
+        (**(code **)(((unsigned char *)0x00001344) + compiler))
+                  (emitResult,*(undefined4 *)(block + 0x1c),*(int *)(block + 0x20) << 4);
+        (**(code **)(compiler + 0x18))(*(undefined4 *)(block + 0x1c));
+        *(undefined4 *)(block + 0x1c) = emitResult;
+        instrCount = *(int *)(block + 0x18);
+        *(int *)(block + 0x20) = *(int *)(block + 0x20) + 0x10;
       }
     }
-    iVar2 = iVar7 * 0x10 + *(int *)(iVar2 + 0x1c);
-    uVar3 = ((int (*)())FUN_00057b80)(param_1,param_2);
-    uStack_78 = 3;
-    uStack_60 = 0;
-    uStack_64 = 1;
-    uStack_70 = 1;
-    uStack_6c = 1;
-    uStack_68 = 1;
-    uStack_74 = uVar3;
-    ((int (*)())FUN_00056f20)(param_1,param_2,&uStack_78,iVar2,3,0,0);
-    ((int (*)())FUN_00057340)(param_2,piVar6,iVar5,iVar2 + 4,0);
-    uVar1 = *(uint *)(iVar2 + 4) & 0xfe001fff | 0x1248000;
-    *(uint *)(iVar2 + 0xc) = uVar1;
-    *(uint *)(iVar2 + 8) = uVar1;
-    ((int (*)())FUN_00056f20)(param_1,param_2,param_3 + 4,iVar2 + 0x10,9,0,0);
-    uStack_5c = 3;
-    uStack_44 = 0;
-    uStack_54 = 0x87d5;
-    uStack_50 = 0x87d6;
-    uStack_4c = 0x87d7;
-    uStack_48 = 0x87d8;
-    uStack_58 = uVar3;
-    ((int (*)())FUN_00057340)(param_2,piVar6,&uStack_5c,iVar2 + 0x14,0);
-    ((int (*)())FUN_00057340)(param_2,piVar6,iVar4,iVar2 + 0x18,0);
-    uVar3 = 2;
-    *(undefined4 *)(iVar2 + 0x1c) = *(undefined4 *)(iVar2 + 0x18);
+    block = instrCount * 0x10 + *(int *)(block + 0x1c);
+    emitResult = ((int (*)())FUN_00057b80)(compiler,program);
+    tempDstFile = 3;
+    tempDstFlag = 0;
+    tempDstMask3 = 1;
+    tempDstMask0 = 1;
+    tempDstMask1 = 1;
+    tempDstMask2 = 1;
+    tempDstIndex = emitResult;
+    ((int (*)())FUN_00056f20)(compiler,program,&tempDstFile,block,3,0,0);
+    ((int (*)())FUN_00057340)(program,operandState,src0Operand,block + 4,0);
+    packedWord = *(uint *)(block + 4) & 0xfe001fff | 0x1248000;
+    *(uint *)(block + 0xc) = packedWord;
+    *(uint *)(block + 8) = packedWord;
+    ((int (*)())FUN_00056f20)(compiler,program,irInstruction + 4,block + 0x10,9,0,0);
+    tempSrcFile = 3;
+    tempSrcFlag = 0;
+    tempSrcSel0 = 0x87d5;
+    tempSrcSel1 = 0x87d6;
+    tempSrcSel2 = 0x87d7;
+    tempSrcSel3 = 0x87d8;
+    tempSrcIndex = emitResult;
+    ((int (*)())FUN_00057340)(program,operandState,&tempSrcFile,block + 0x14,0);
+    ((int (*)())FUN_00057340)(program,operandState,src1Operand,block + 0x18,0);
+    emitResult = 2;
+    *(undefined4 *)(block + 0x1c) = *(undefined4 *)(block + 0x18);
   }
-  return uVar3;
+  return emitResult;
 }
 
 /* FUN_0005a670 @ 0x5a670 (824 bytes) */
-int FUN_0005a670(param_1, param_2, param_3)
-  int param_1;
-  int *param_2;
-  int param_3;
+int FUN_0005a670(compiler, program, irInstruction)
+  int compiler;
+  int *program;
+  int irInstruction;
 {
-  uint uVar1;
-  int iVar2;
-  undefined4 uVar3;
-  int iVar4;
-  int iVar5;
-  int *piVar6;
-  int iVar7;
-  undefined4 uStack_78;
-  undefined4 uStack_74;
-  undefined4 uStack_70;
-  undefined4 uStack_6c;
-  undefined4 uStack_68;
-  undefined4 uStack_64;
-  undefined1 uStack_60;
-  undefined4 uStack_5c;
-  undefined4 uStack_58;
-  undefined4 uStack_54;
-  undefined4 uStack_50;
-  undefined4 uStack_4c;
-  undefined4 uStack_48;
-  undefined1 uStack_44;
+  uint packedWord;
+  int block;
+  undefined4 emitResult;
+  int src1Operand;
+  int src0Operand;
+  int *operandState;
+  int instrCount;
+  undefined4 tempDstFile;
+  undefined4 tempDstIndex;
+  undefined4 tempDstMask0;
+  undefined4 tempDstMask1;
+  undefined4 tempDstMask2;
+  undefined4 tempDstMask3;
+  undefined1 tempDstFlag;
+  undefined4 tempSrcFile;
+  undefined4 tempSrcIndex;
+  undefined4 tempSrcSel0;
+  undefined4 tempSrcSel1;
+  undefined4 tempSrcSel2;
+  undefined4 tempSrcSel3;
+  undefined1 tempSrcFlag;
   
-  iVar5 = param_3 + 0x20;
-  piVar6 = param_2 + 7;
-  iVar4 = param_3 + 0x3c;
-  iVar2 = ((int (*)())FUN_00057af0)(piVar6,iVar5,iVar4);
-  if (iVar2 == 0) {
-    iVar2 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-    iVar7 = *(int *)(iVar2 + 0x18);
-    if (0x100 < iVar7 + 1U) {
-      *(undefined1 *)(param_2 + 4) = 0;
-      iVar7 = *(int *)(iVar2 + 0x18);
-      if (*(uint *)(iVar2 + 0x20) < iVar7 + 1U) {
-        uVar3 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar2 + 0x20) * 0x10 + 0x100);
-        (**(code **)(((unsigned char *)0x00001344) + param_1))
-                  (uVar3,*(undefined4 *)(iVar2 + 0x1c),*(int *)(iVar2 + 0x20) << 4);
-        (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar2 + 0x1c));
-        *(undefined4 *)(iVar2 + 0x1c) = uVar3;
-        iVar7 = *(int *)(iVar2 + 0x18);
-        *(int *)(iVar2 + 0x20) = *(int *)(iVar2 + 0x20) + 0x10;
+  src0Operand = irInstruction + 0x20;
+  operandState = program + 7;
+  src1Operand = irInstruction + 0x3c;
+  block = ((int (*)())FUN_00057af0)(operandState,src0Operand,src1Operand);
+  if (block == 0) {
+    block = **(int **)(*(int *)(((unsigned char *)0x0000118c) + compiler) * 4 + *program);
+    instrCount = *(int *)(block + 0x18);
+    if (0x100 < instrCount + 1U) {
+      *(undefined1 *)(program + 4) = 0;
+      instrCount = *(int *)(block + 0x18);
+      if (*(uint *)(block + 0x20) < instrCount + 1U) {
+        emitResult = (**(code **)(compiler + 0xc))(*(uint *)(block + 0x20) * 0x10 + 0x100);
+        (**(code **)(((unsigned char *)0x00001344) + compiler))
+                  (emitResult,*(undefined4 *)(block + 0x1c),*(int *)(block + 0x20) << 4);
+        (**(code **)(compiler + 0x18))(*(undefined4 *)(block + 0x1c));
+        *(undefined4 *)(block + 0x1c) = emitResult;
+        instrCount = *(int *)(block + 0x18);
+        *(int *)(block + 0x20) = *(int *)(block + 0x20) + 0x10;
       }
     }
-    iVar2 = iVar7 * 0x10 + *(int *)(iVar2 + 0x1c);
-    ((int (*)())FUN_00056f20)(param_1,param_2,param_3 + 4,iVar2,10,0,0);
-    ((int (*)())FUN_00057340)(param_2,piVar6,iVar5,iVar2 + 4,0);
-    ((int (*)())FUN_00057340)(param_2,piVar6,iVar4,iVar2 + 8,0);
-    uVar3 = 1;
-    *(undefined4 *)(iVar2 + 0xc) = *(undefined4 *)(iVar2 + 8);
+    block = instrCount * 0x10 + *(int *)(block + 0x1c);
+    ((int (*)())FUN_00056f20)(compiler,program,irInstruction + 4,block,10,0,0);
+    ((int (*)())FUN_00057340)(program,operandState,src0Operand,block + 4,0);
+    ((int (*)())FUN_00057340)(program,operandState,src1Operand,block + 8,0);
+    emitResult = 1;
+    *(undefined4 *)(block + 0xc) = *(undefined4 *)(block + 8);
   }
   else {
-    iVar2 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-    iVar7 = *(int *)(iVar2 + 0x18);
-    if (0x100 < iVar7 + 2U) {
-      *(undefined1 *)(param_2 + 4) = 0;
-      iVar7 = *(int *)(iVar2 + 0x18);
-      if (*(uint *)(iVar2 + 0x20) < iVar7 + 2U) {
-        uVar3 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar2 + 0x20) * 0x10 + 0x100);
-        (**(code **)(((unsigned char *)0x00001344) + param_1))
-                  (uVar3,*(undefined4 *)(iVar2 + 0x1c),*(int *)(iVar2 + 0x20) << 4);
-        (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar2 + 0x1c));
-        *(undefined4 *)(iVar2 + 0x1c) = uVar3;
-        iVar7 = *(int *)(iVar2 + 0x18);
-        *(int *)(iVar2 + 0x20) = *(int *)(iVar2 + 0x20) + 0x10;
+    block = **(int **)(*(int *)(((unsigned char *)0x0000118c) + compiler) * 4 + *program);
+    instrCount = *(int *)(block + 0x18);
+    if (0x100 < instrCount + 2U) {
+      *(undefined1 *)(program + 4) = 0;
+      instrCount = *(int *)(block + 0x18);
+      if (*(uint *)(block + 0x20) < instrCount + 2U) {
+        emitResult = (**(code **)(compiler + 0xc))(*(uint *)(block + 0x20) * 0x10 + 0x100);
+        (**(code **)(((unsigned char *)0x00001344) + compiler))
+                  (emitResult,*(undefined4 *)(block + 0x1c),*(int *)(block + 0x20) << 4);
+        (**(code **)(compiler + 0x18))(*(undefined4 *)(block + 0x1c));
+        *(undefined4 *)(block + 0x1c) = emitResult;
+        instrCount = *(int *)(block + 0x18);
+        *(int *)(block + 0x20) = *(int *)(block + 0x20) + 0x10;
       }
     }
-    iVar2 = iVar7 * 0x10 + *(int *)(iVar2 + 0x1c);
-    uVar3 = ((int (*)())FUN_00057b80)(param_1,param_2);
-    uStack_78 = 3;
-    uStack_60 = 0;
-    uStack_64 = 1;
-    uStack_70 = 1;
-    uStack_6c = 1;
-    uStack_68 = 1;
-    uStack_74 = uVar3;
-    ((int (*)())FUN_00056f20)(param_1,param_2,&uStack_78,iVar2,3,0,0);
-    ((int (*)())FUN_00057340)(param_2,piVar6,iVar5,iVar2 + 4,0);
-    uVar1 = *(uint *)(iVar2 + 4) & 0xfe001fff | 0x1248000;
-    *(uint *)(iVar2 + 0xc) = uVar1;
-    *(uint *)(iVar2 + 8) = uVar1;
-    ((int (*)())FUN_00056f20)(param_1,param_2,param_3 + 4,iVar2 + 0x10,10,0,0);
-    uStack_5c = 3;
-    uStack_44 = 0;
-    uStack_54 = 0x87d5;
-    uStack_50 = 0x87d6;
-    uStack_4c = 0x87d7;
-    uStack_48 = 0x87d8;
-    uStack_58 = uVar3;
-    ((int (*)())FUN_00057340)(param_2,piVar6,&uStack_5c,iVar2 + 0x14,0);
-    ((int (*)())FUN_00057340)(param_2,piVar6,iVar4,iVar2 + 0x18,0);
-    uVar3 = 2;
-    *(undefined4 *)(iVar2 + 0x1c) = *(undefined4 *)(iVar2 + 0x18);
+    block = instrCount * 0x10 + *(int *)(block + 0x1c);
+    emitResult = ((int (*)())FUN_00057b80)(compiler,program);
+    tempDstFile = 3;
+    tempDstFlag = 0;
+    tempDstMask3 = 1;
+    tempDstMask0 = 1;
+    tempDstMask1 = 1;
+    tempDstMask2 = 1;
+    tempDstIndex = emitResult;
+    ((int (*)())FUN_00056f20)(compiler,program,&tempDstFile,block,3,0,0);
+    ((int (*)())FUN_00057340)(program,operandState,src0Operand,block + 4,0);
+    packedWord = *(uint *)(block + 4) & 0xfe001fff | 0x1248000;
+    *(uint *)(block + 0xc) = packedWord;
+    *(uint *)(block + 8) = packedWord;
+    ((int (*)())FUN_00056f20)(compiler,program,irInstruction + 4,block + 0x10,10,0,0);
+    tempSrcFile = 3;
+    tempSrcFlag = 0;
+    tempSrcSel0 = 0x87d5;
+    tempSrcSel1 = 0x87d6;
+    tempSrcSel2 = 0x87d7;
+    tempSrcSel3 = 0x87d8;
+    tempSrcIndex = emitResult;
+    ((int (*)())FUN_00057340)(program,operandState,&tempSrcFile,block + 0x14,0);
+    ((int (*)())FUN_00057340)(program,operandState,src1Operand,block + 0x18,0);
+    emitResult = 2;
+    *(undefined4 *)(block + 0x1c) = *(undefined4 *)(block + 0x18);
   }
-  return uVar3;
+  return emitResult;
 }
 
 /* FUN_0005a9b0 @ 0x5a9b0 (1112 bytes) */
