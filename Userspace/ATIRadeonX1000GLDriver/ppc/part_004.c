@@ -3525,29 +3525,42 @@ LAB_00029bd0:
 }
 
 /* FUN_00029294 @ 0x29294 (2376 bytes) */
-int FUN_00029294(ctx, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
+int FUN_00029294(ctx, rectX, rectY, width, height, format, pixelType, pixels, transferMode, surfaceInfo)
   int ctx;
-  int param_2;
-  int param_3;
-  int param_4;
-  int param_5;
-  int param_6;
-  int param_7;
-  int param_8;
-  uint param_9;
-  int param_10;
+  int rectX;
+  int rectY;
+  int width;
+  int height;
+  int format;
+  int pixelType;
+  int pixels;
+  uint transferMode;
+  int surfaceInfo;
 {
+  undefined4 fallbackResult;
+  undefined4 result;
+  undefined4 requestBytes;
+  uint scratchBytes;
+  uint dstOffsetAddress;
+  undefined *packState;
+  int *attachObject;
+  int *requestPtr;
+  int bytesPerPixel;
+  int levelBuffer;
+  int prepareResult;
+  int yOffsetBytes0;
+  bool directCopy;
   int *boundFramebuffer;
-  bool bVar1;
-  byte bVar2;
-  ushort uVar3;
-  bool bVar4;
-  undefined *puVar5;
+  bool convertPixels;
+  byte formatIndex;
+  ushort sliceCount;
+  bool sendAttachments;
+  undefined *packStateArg;
   int iVar6;
-  dword *pdVar7;
-  undefined4 uVar8;
-  int iVar9;
-  undefined4 *puVar10;
+  dword *readSurfaceCode;
+  undefined4 scratchBuffer;
+  int savedHeight;
+  undefined4 *ropPacket;
   dword *a2;
   undefined1 *a3;
   undefined4 uVar11;
@@ -3555,36 +3568,36 @@ int FUN_00029294(ctx, param_2, param_3, param_4, param_5, param_6, param_7, para
   undefined4 *a1;
   uint uVar12;
   uint uVar13;
-  int iVar14;
-  int iVar15;
+  int attachLevel;
+  int attachFace;
   int ring;
-  uint uVar17;
-  uint uVar18;
+  uint surfaceFormat;
+  uint surfaceType;
   int renderHeight;
   int ctxState;
-  int iVar21;
+  int attachZOffset;
   uint flags;
-  int *piVar23;
+  int *replySizePtr;
   int *piVar24;
   uint uStack_e8;
   int iStack_e4;
   int aiStack_e0 [3];
-  int iStack_d4;
-  int iStack_d0;
-  int iStack_cc;
+  int requestY;
+  int requestWidth;
+  int requestHeight;
   dword *pdStack_c8;
-  uint uStack_c4;
-  uint uStack_c0;
+  uint requestAddress;
+  uint requestPitch;
   uint uStack_bc;
-  uint uStack_b8;
+  uint procPitch;
   uint uStack_b4;
   uint uStack_b0;
-  uint uStack_ac;
-  uint uStack_a8;
+  uint dstAddress;
+  uint srcRowBytes;
   dword dStack_a4;
   undefined1 auStack_a0 [4];
   undefined4 uStack_9c;
-  uint uStack_98;
+  uint procFlags;
   undefined *puStack_94;
   int iStack_90;
   int iStack_8c;
@@ -3608,107 +3621,107 @@ int FUN_00029294(ctx, param_2, param_3, param_4, param_5, param_6, param_7, para
   uStack_84 = 0;
   aiStack_e0[1] = 0;
   uStack_88 = 0;
-  flags = param_9 & 0xff;
+  flags = transferMode & 0xff;
   ctxState = *(int *)(ctx + GLD_engineState);
-  pdVar7 = (dword *)FUN_0000a2f0((uint)*(ushort *)(((unsigned char *)0x00002db8) + ctxState),
+  readSurfaceCode = (dword *)FUN_0000a2f0((uint)*(ushort *)(((unsigned char *)0x00002db8) + ctxState),
                                  *(undefined4 *)(ctx + GLD_renderFlags));
   if (((((*(uint *)(((unsigned char *)0x000030b0) + ctxState) & 0x1ff) == 0) &&
-       ((*(uint *)(((unsigned char *)0x000030b4) + ctxState) & 0xff0000) == 0)) || (param_6 - 0x1901U < 2)) ||
+       ((*(uint *)(((unsigned char *)0x000030b4) + ctxState) & 0xff0000) == 0)) || (format - 0x1901U < 2)) ||
      (flags == 2)) {
     iVar6 = 0;
-    bVar4 = false;
+    sendAttachments = false;
   }
   else if ((*(uint *)(((unsigned char *)0x000030b0) + ctxState) & 2) == 0) {
     if (((*(uint *)(((unsigned char *)0x000030b0) + ctxState) & 4) == 0) ||
        (*(short *)(((unsigned char *)0x00002fe8) + ctxState) != -0x7fea)) goto LAB_000293b0;
-    bVar4 = true;
+    sendAttachments = true;
     iVar6 = *(int *)(((unsigned char *)0x00002ff0) + ctxState) + -1;
   }
   else if (*(short *)(((unsigned char *)0x00002fa8) + ctxState) == -0x7fea) {
-    bVar4 = true;
+    sendAttachments = true;
     iVar6 = *(int *)(((unsigned char *)0x00002fb0) + ctxState) + -1;
   }
   else {
 LAB_000293b0:
     iVar6 = 0;
-    bVar4 = true;
+    sendAttachments = true;
   }
-  if (param_10 == 0) {
-    bVar1 = flags != 2;
-    if (bVar1) {
-      puVar5 = ((unsigned char *)0x00002e50) + ctxState;
+  if (surfaceInfo == 0) {
+    convertPixels = flags != 2;
+    if (convertPixels) {
+      packStateArg = ((unsigned char *)0x00002e50) + ctxState;
     }
     else {
-      puVar5 = (undefined *)0x0;
+      packStateArg = (undefined *)0x0;
     }
     a5 = &uStack_e8;
     piVar24 = &iStack_e4;
-    iVar9 = param_5;
-    FUN_0000a6e0(ctx,param_6,param_7,param_4 - iVar6,param_5,a5,piVar24,aiStack_e0,puVar5);
-    uVar12 = param_8 + aiStack_e0[0];
-    if (param_3 < 0) {
-      param_5 = param_5 + param_3;
-      iVar6 = param_3 * uStack_e8;
-      param_3 = 0;
-      uVar12 = uVar12 - iVar6;
+    savedHeight = height;
+    FUN_0000a6e0(ctx,format,pixelType,width - iVar6,height,a5,piVar24,aiStack_e0,packStateArg);
+    dstOffsetAddress = pixels + aiStack_e0[0];
+    if (rectY < 0) {
+      height = height + rectY;
+      yOffsetBytes0 = rectY * uStack_e8;
+      rectY = 0;
+      dstOffsetAddress = dstOffsetAddress - yOffsetBytes0;
     }
-    if (param_2 < 0) {
-      param_4 = param_4 + param_2;
-      iStack_e4 = param_2 * iStack_e4;
-      param_2 = 0;
-      uVar12 = uVar12 - iStack_e4;
+    if (rectX < 0) {
+      width = width + rectX;
+      iStack_e4 = rectX * iStack_e4;
+      rectX = 0;
+      dstOffsetAddress = dstOffsetAddress - iStack_e4;
     }
-    if (*(int *)(ctx + GLD_renderHeight) < param_3 + param_5) {
-      param_5 = *(int *)(ctx + GLD_renderHeight) - param_3;
+    if (*(int *)(ctx + GLD_renderHeight) < rectY + height) {
+      height = *(int *)(ctx + GLD_renderHeight) - rectY;
     }
-    if (*(int *)(ctx + GLD_renderWidth) < param_2 + param_4) {
-      param_4 = *(int *)(ctx + GLD_renderWidth) - param_2;
+    if (*(int *)(ctx + GLD_renderWidth) < rectX + width) {
+      width = *(int *)(ctx + GLD_renderWidth) - rectX;
     }
-    if ((0 < param_4) && (0 < param_5)) {
-      if (bVar1) {
+    if ((0 < width) && (0 < height)) {
+      if (convertPixels) {
         if (flags == 0) {
-          uStack_98 = 0x20000;
+          procFlags = 0x20000;
         }
         else {
-          uStack_98 = 0;
+          procFlags = 0;
         }
-        puVar5 = ((unsigned char *)0x00002e48) + ctxState;
+        packState = ((unsigned char *)0x00002e48) + ctxState;
         puStack_94 = ((unsigned char *)0x0007efffU);
         if (((unsigned char *)0x00002e68)[ctxState] != '\0') {
-          uStack_98 = uStack_98 | 2;
+          procFlags = procFlags | 2;
         }
         if (((unsigned char *)0x00002e69)[ctxState] != '\0') {
-          uStack_98 = uStack_98 | 8;
+          procFlags = procFlags | 8;
         }
       }
       else {
-        puVar5 = (undefined *)0x0;
+        packState = (undefined *)0x0;
         puStack_94 = (undefined *)0x0;
-        uStack_98 = 0;
+        procFlags = 0;
       }
       uStack_50 = 0;
       uStack_9c = 2;
       a2 = &dStack_a4;
       a3 = auStack_a0;
-      uStack_a8 = uStack_e8;
-      uStack_ac = uVar12;
-      iStack_90 = param_4;
-      iStack_8c = param_5;
-      _glgConvertType(param_6,param_7,a2,a3,iVar9,a5,piVar24,uVar12);
+      srcRowBytes = uStack_e8;
+      dstAddress = dstOffsetAddress;
+      iStack_90 = width;
+      iStack_8c = height;
+      _glgConvertType(format,pixelType,a2,a3,savedHeight,a5,piVar24,dstOffsetAddress);
       boundFramebuffer = *(int **)(ctx + GLD_boundFramebuffer);
       if (boundFramebuffer == (int *)0x0) {
-        aiStack_e0[2] = param_2;
-        iStack_d4 = param_3;
-        iStack_d0 = param_4;
-        iStack_cc = param_5;
-        if (param_6 == 0x1901) {
+        aiStack_e0[2] = rectX;
+        requestY = rectY;
+        requestWidth = width;
+        requestHeight = height;
+        if (format == 0x1901) {
           flags = *(uint *)(ctx + GLD_renderFlags);
           if ((flags & 0x30000) == 0x30000) {
             if (*(int *)(ctx + GLD_ringMap) + 0x28U < *(uint *)(ctx + GLD_writeCursor)) {
               FUN_0001a0f0(ctx,0x1000000);
               flags = *(uint *)(ctx + GLD_renderFlags);
             }
-            uStack_b8 = (param_4 + 0xf) * 4 & 0xffffffc0;
+            procPitch = (width + 0xf) * 4 & 0xffffffc0;
             uStack_b0 = 0x14;
             uStack_b4 = 0xf;
             if ((flags & 0x2000) == 0) {
@@ -3717,50 +3730,50 @@ LAB_000298a4:
             }
             else {
 LAB_00029878:
-              if (pdVar7 == (dword *)((int)((unsigned char *)0x4) + 3)) {
+              if (readSurfaceCode == (dword *)((int)((unsigned char *)0x4) + 3)) {
                 pdStack_c8 = (dword *)((int)((unsigned char *)0x8) + 2);
               }
               else {
-                if (pdVar7 != ((unsigned char *)0x8)) goto LAB_000298a4;
+                if (readSurfaceCode != ((unsigned char *)0x8)) goto LAB_000298a4;
                 pdStack_c8 = (dword *)((int)((unsigned char *)0x8) + 3);
               }
             }
 LAB_000299f8:
             uVar12 = flags & 0xf;
-            if ((bVar4) ||
-               ((((bVar1 && (((*(uint *)(((unsigned char *)0x000030b4) + ctxState) & 0xff1) != 0 ||
+            if ((sendAttachments) ||
+               ((((convertPixels && (((*(uint *)(((unsigned char *)0x000030b4) + ctxState) & 0xff1) != 0 ||
                              ((*(uint *)(((unsigned char *)0x00002e68U) + ctxState) & 0xffff0000) != 0)))) ||
-                 (param_6 - 0x1901U < 2)) ||
-                ((((uStack_a8 & 0x3f) != 0 || (0x1fff < (int)uStack_a8)) ||
-                 ((uStack_ac & 0x1f) != 0)))))) {
+                 (format - 0x1901U < 2)) ||
+                ((((srcRowBytes & 0x3f) != 0 || (0x1fff < (int)srcRowBytes)) ||
+                 ((dstAddress & 0x1f) != 0)))))) {
 LAB_00029a74:
               uVar12 = *(uint *)(((unsigned char *)0x00002b78) + ctx);
-              uStack_c0 = uStack_b8;
-              uVar13 = param_5 * uStack_b8 + 0xfff & 0xfffff000;
-              if (uVar12 < uVar13) {
+              requestPitch = procPitch;
+              scratchBytes = height * procPitch + 0xfff & 0xfffff000;
+              if (uVar12 < scratchBytes) {
                 if (*(int *)(((unsigned char *)0x00002b74) + ctx) != 0) {
                   _vfree(*(int *)(((unsigned char *)0x00002b74) + ctx));
                 }
-                uVar8 = _valloc(uVar13);
-                *(uint *)(((unsigned char *)0x00002b78) + ctx) = uVar13;
-                *(undefined4 *)(((unsigned char *)0x00002b74) + ctx) = uVar8;
+                scratchBuffer = _valloc(scratchBytes);
+                *(uint *)(((unsigned char *)0x00002b78) + ctx) = scratchBytes;
+                *(undefined4 *)(((unsigned char *)0x00002b74) + ctx) = scratchBuffer;
               }
-              uStack_c4 = *(uint *)(((unsigned char *)0x00002b74) + ctx);
-              if (uStack_c4 == 0) goto LAB_00029bd0;
-              bVar1 = false;
+              requestAddress = *(uint *)(((unsigned char *)0x00002b74) + ctx);
+              if (requestAddress == 0) goto LAB_00029bd0;
+              directCopy = false;
             }
             else {
               if (uVar12 == 4) {
-                if ((param_6 != 0x80e1) || (param_7 != 0x8367)) goto LAB_00029a74;
+                if ((format != 0x80e1) || (pixelType != 0x8367)) goto LAB_00029a74;
               }
-              else if (((uVar12 != 3) || (param_6 != 0x80e1)) || (param_7 != 0x8366))
+              else if (((uVar12 != 3) || (format != 0x80e1)) || (pixelType != 0x8366))
               goto LAB_00029a74;
-              bVar1 = true;
-              uStack_c0 = uStack_a8;
-              uStack_c4 = uStack_ac;
+              directCopy = true;
+              requestPitch = srcRowBytes;
+              requestAddress = dstAddress;
             }
-            uStack_bc = uStack_c4;
-            if (bVar4) {
+            uStack_bc = requestAddress;
+            if (sendAttachments) {
               flags = *(uint *)(ctx + GLD_engineObjects);
               ring = *(int *)(*(int *)(flags + 0x140) + 0x30);
               uStack_80 = (uint)*(ushort *)(ring + 0x98);
@@ -3779,55 +3792,55 @@ LAB_00029a74:
               uStack_58 = (uint)*(ushort *)(ring + 0x8c);
               uStack_54 = *(undefined4 *)(ring + 0x9c);
             }
-            piVar24 = aiStack_e0 + 2;
-            uVar8 = 0x1c;
+            requestPtr = aiStack_e0 + 2;
+            requestBytes = 0x1c;
             uVar11 = 0;
-            piVar23 = aiStack_e0 + 1;
+            replySizePtr = aiStack_e0 + 1;
             ring = _io_connect_method_structureI_structureO
-                               (*(undefined4 *)(ctx + GLD_connect),7,piVar24,0x1c,0,piVar23);
+                               (*(undefined4 *)(ctx + GLD_connect),7,requestPtr,0x1c,0,replySizePtr);
             if (ring != 0) goto LAB_00029bd0;
-            if (!bVar1) {
-              _glgProcessPixels(puVar5,&uStack_bc,piVar24,uVar8,uVar11,piVar23,uVar12,flags);
+            if (!directCopy) {
+              _glgProcessPixels(packState,&uStack_bc,requestPtr,requestBytes,uVar11,replySizePtr,uVar12,flags);
               return 1;
             }
           }
         }
         else {
-          if (param_6 != 0x1902) {
-            iVar6 = FUN_0001a010(ctx,pdVar7,a2,a3,iVar9,a5,piVar24);
-            if (iVar6 != 0) {
+          if (format != 0x1902) {
+            prepareResult = FUN_0001a010(ctx,readSurfaceCode,a2,a3,savedHeight,a5,piVar24);
+            if (prepareResult != 0) {
               a3 = (undefined1 *)0x0;
-              iVar9 = 0;
+              savedHeight = 0;
               a5 = (uint *)0x0;
-              a2 = pdVar7;
-              FUN_000230d0(ctx,0,pdVar7,0,0,0,*(undefined4 *)(ctx + GLD_renderWidth),
+              a2 = readSurfaceCode;
+              FUN_000230d0(ctx,0,readSurfaceCode,0,0,0,*(undefined4 *)(ctx + GLD_renderWidth),
                            *(undefined4 *)(ctx + GLD_renderHeight));
             }
             if (*(int *)(ctx + GLD_rb3d_ropcntl) != 0) {
-              puVar10 = (undefined4 *)(**(code **)(ctx + GLD_streamAllocate))(ring,2);
-              puVar10[1] = 0;
-              *puVar10 = ((unsigned char *)0x00001386U);
-              *(undefined4 **)(ctx + GLD_streamCurrent) = puVar10 + 2;
-              (**(code **)(ctx + GLD_streamSetCurrent))(ring,puVar10 + 2);
+              ropPacket = (undefined4 *)(**(code **)(ctx + GLD_streamAllocate))(ring,2);
+              ropPacket[1] = 0;
+              *ropPacket = ((unsigned char *)0x00001386U);
+              *(undefined4 **)(ctx + GLD_streamCurrent) = ropPacket + 2;
+              (**(code **)(ctx + GLD_streamSetCurrent))(ring,ropPacket + 2);
             }
             if (*(int *)(ctx + GLD_ringMap) + 0x28U < *(uint *)(ctx + GLD_writeCursor)) {
               FUN_0001a0f0(ctx,0x1000000);
             }
             if (*(int *)(ctx + GLD_rb3d_ropcntl) != 0) {
-              puVar10 = (undefined4 *)(**(code **)(ctx + GLD_streamAllocate))(ring,2);
-              a1 = puVar10 + 2;
-              *puVar10 = ((unsigned char *)0x00001386U);
-              puVar10[1] = *(undefined4 *)(ctx + GLD_rb3d_ropcntl);
+              ropPacket = (undefined4 *)(**(code **)(ctx + GLD_streamAllocate))(ring,2);
+              a1 = ropPacket + 2;
+              *ropPacket = ((unsigned char *)0x00001386U);
+              ropPacket[1] = *(undefined4 *)(ctx + GLD_rb3d_ropcntl);
               *(undefined4 **)(ctx + GLD_streamCurrent) = a1;
-              (**(code **)(ctx + GLD_streamSetCurrent))(ring,a1,a2,a3,iVar9,a5,a1);
+              (**(code **)(ctx + GLD_streamSetCurrent))(ring,a1,a2,a3,savedHeight,a5,a1);
             }
-            bVar2 = ((unsigned char *)0x00002b7f)[ctx];
+            formatIndex = ((unsigned char *)0x00002b7f)[ctx];
             flags = *(uint *)(ctx + GLD_renderFlags);
-            uStack_b8 = (param_4 << (*(uint *)(PTR_DAT_001e88c8 + (uint)bVar2 * 0x24 + 0x14) & 7)) +
+            procPitch = (width << (*(uint *)(PTR_DAT_001e88c8 + (uint)formatIndex * 0x24 + 0x14) & 7)) +
                         0x1fU & 0xffffffe0;
-            uStack_b0 = *(uint *)(PTR_DAT_001e88c8 + (uint)bVar2 * 0x24 + 0x10) >> 0x16 & 0x1f;
-            uStack_b4 = *(uint *)(PTR_DAT_001e88c8 + (uint)bVar2 * 0x24 + 0x10) >> 0x1b;
-            pdStack_c8 = pdVar7;
+            uStack_b0 = *(uint *)(PTR_DAT_001e88c8 + (uint)formatIndex * 0x24 + 0x10) >> 0x16 & 0x1f;
+            uStack_b4 = *(uint *)(PTR_DAT_001e88c8 + (uint)formatIndex * 0x24 + 0x10) >> 0x1b;
+            pdStack_c8 = readSurfaceCode;
             goto LAB_000299f8;
           }
           flags = *(uint *)(ctx + GLD_renderFlags);
@@ -3838,11 +3851,11 @@ LAB_00029a74:
             }
             if ((flags & 0x20000) == 0) {
               uStack_b0 = 2;
-              uStack_b8 = (param_4 + 0x1f) * 2 & 0xffffffc0;
+              procPitch = (width + 0x1f) * 2 & 0xffffffc0;
               uStack_b4 = 0xd;
             }
             else {
-              uStack_b8 = (param_4 + 0xf) * 4 & 0xffffffc0;
+              procPitch = (width + 0xf) * 4 & 0xffffffc0;
               if ((flags & 0x30000) == 0x30000) {
                 uStack_b4 = 0xf;
                 uStack_b0 = 0x14;
@@ -3859,73 +3872,73 @@ LAB_00029a74:
       }
       else {
         ring = 5;
-        if ((param_6 != 0x1901) && (ring = 4, param_6 != 0x1902)) {
-          uStack_98 = uStack_98 | 0x60000;
+        if ((format != 0x1901) && (ring = 4, format != 0x1902)) {
+          procFlags = procFlags | 0x60000;
           puStack_94 = (undefined *)((uint)puStack_94 | 0x68002);
           ring = *(ushort *)(*boundFramebuffer + 0x98) - 0x8ce0;
-          if ((bVar1) &&
-             (((*(uint *)(puVar5 + 0x268) & 0x1ff) != 0 ||
-              ((*(uint *)(puVar5 + 0x26c) & 0xff0000) != 0)))) {
-            uVar12 = *(uint *)(ctx + GLD_engineObjects);
-            ctxState = *(int *)(*(int *)(uVar12 + 0x140) + 0x30);
+          if ((convertPixels) &&
+             (((*(uint *)(packState + 0x268) & 0x1ff) != 0 ||
+              ((*(uint *)(packState + 0x26c) & 0xff0000) != 0)))) {
+            dstOffsetAddress = *(uint *)(ctx + GLD_engineObjects);
+            ctxState = *(int *)(*(int *)(dstOffsetAddress + 0x140) + 0x30);
             uStack_80 = (uint)*(ushort *)(ctxState + 0x98);
             uStack_7c = (uint)*(ushort *)(ctxState + 0x9a);
             uStack_78 = (uint)*(ushort *)(ctxState + 0x8c);
             uStack_74 = *(undefined4 *)(ctxState + 0x9c);
-            ctxState = *(int *)(*(int *)(uVar12 + 0x148) + 0x30);
+            ctxState = *(int *)(*(int *)(dstOffsetAddress + 0x148) + 0x30);
             uStack_70 = (uint)*(ushort *)(ctxState + 0x98);
             uStack_6c = (uint)*(ushort *)(ctxState + 0x9a);
             uStack_68 = (uint)*(ushort *)(ctxState + 0x8c);
             uStack_64 = *(undefined4 *)(ctxState + 0x9c);
-            ctxState = *(int *)(*(int *)(uVar12 + 0x144) + 0x30);
+            ctxState = *(int *)(*(int *)(dstOffsetAddress + 0x144) + 0x30);
             uStack_60 = (uint)*(ushort *)(ctxState + 0x98);
             uStack_5c = (uint)*(ushort *)(ctxState + 0x9a);
             uStack_58 = (uint)*(ushort *)(ctxState + 0x8c);
             uStack_54 = *(undefined4 *)(ctxState + 0x9c);
           }
         }
-        piVar24 = *(int **)(boundFramebuffer[1] + ring * 4);
-        if (piVar24 != (int *)0x0) {
+        attachObject = *(int **)(boundFramebuffer[1] + ring * 4);
+        if (attachObject != (int *)0x0) {
           ctxState = ring * 0x18 + *boundFramebuffer;
-          uVar3 = *(ushort *)(*piVar24 + 0x18);
-          iVar15 = *(int *)(ctxState + 4);
-          iVar14 = *(int *)(ctxState + 8);
-          iVar21 = *(int *)(ctxState + 0xc);
-          ctxState = iVar14 * 0x18 + iVar15 * 0x168 + piVar24[0xc];
-          uVar18 = (uint)*(ushort *)(ctxState + 0xb2);
-          uVar17 = (uint)*(ushort *)(ctxState + 0xb0);
-          _glgConvertType(uVar17,uVar18,&uStack_b4,&uStack_b0,iVar9,ring,*piVar24,uVar12);
+          sliceCount = *(ushort *)(*attachObject + 0x18);
+          attachFace = *(int *)(ctxState + 4);
+          attachLevel = *(int *)(ctxState + 8);
+          attachZOffset = *(int *)(ctxState + 0xc);
+          ctxState = attachLevel * 0x18 + attachFace * 0x168 + attachObject[0xc];
+          surfaceType = (uint)*(ushort *)(ctxState + 0xb2);
+          surfaceFormat = (uint)*(ushort *)(ctxState + 0xb0);
+          _glgConvertType(surfaceFormat,surfaceType,&uStack_b4,&uStack_b0,savedHeight,ring,*attachObject,dstOffsetAddress);
           ctxState = *(int *)(ctx + GLD_renderWidth);
-          ring = FUN_0000a3f0(uVar17,uVar18);
-          uStack_b8 = ctxState * ring;
-          renderHeight = uStack_b8 * *(int *)(ctx + GLD_renderHeight);
-          iVar6 = _valloc((uint)uVar3 * renderHeight);
-          flags = uVar17;
-          uVar12 = uVar18;
-          ring = iVar6;
-          uVar13 = uStack_b8;
-          FUN_00031340(ctx,piVar24,iVar15,iVar14,uVar17,uVar18,iVar6,uStack_b8);
-          ctxState = param_3 * uStack_b8;
-          iVar9 = FUN_0000a3f0(uVar17,uVar18);
-          uStack_bc = iVar6 + iVar21 * renderHeight + ctxState + param_2 * iVar9;
-          _glgProcessPixels(puVar5,&uStack_bc,iVar15,iVar14,flags,uVar12,ring,uVar13);
-          _vfree(iVar6);
+          ring = FUN_0000a3f0(surfaceFormat,surfaceType);
+          procPitch = ctxState * ring;
+          renderHeight = procPitch * *(int *)(ctx + GLD_renderHeight);
+          levelBuffer = _valloc((uint)sliceCount * renderHeight);
+          flags = surfaceFormat;
+          uVar12 = surfaceType;
+          ring = levelBuffer;
+          uVar13 = procPitch;
+          FUN_00031340(ctx,attachObject,attachFace,attachLevel,surfaceFormat,surfaceType,levelBuffer,procPitch);
+          ctxState = rectY * procPitch;
+          bytesPerPixel = FUN_0000a3f0(surfaceFormat,surfaceType);
+          uStack_bc = levelBuffer + attachZOffset * renderHeight + ctxState + rectX * bytesPerPixel;
+          _glgProcessPixels(packState,&uStack_bc,attachFace,attachLevel,flags,uVar12,ring,uVar13);
+          _vfree(levelBuffer);
           return 1;
         }
       }
     }
-    uVar8 = 1;
+    result = 1;
   }
   else {
-    if (!bVar4) {
-      uVar8 = ((int (*)())FUN_00028350)(ctx,param_2,param_3,param_4,param_5,param_6,param_7,param_8,flags,
-                           param_10);
-      return uVar8;
+    if (!sendAttachments) {
+      fallbackResult = ((int (*)())FUN_00028350)(ctx,rectX,rectY,width,height,format,pixelType,pixels,flags,
+                           surfaceInfo);
+      return fallbackResult;
     }
 LAB_00029bd0:
-    uVar8 = 0;
+    result = 0;
   }
-  return uVar8;
+  return result;
 }
 
 /* FUN_00029c00 @ 0x29c00 (1624 bytes) */
