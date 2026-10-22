@@ -1,0 +1,179 @@
+# local	FUNCTION	old	new	tier	evidence (round 3 fork D2: scheduler)
+local	FUN_001648ac	param_1	scheduler	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)
+local	FUN_001648ac	param_2	nodeA	INFERRED	first SchedNode compared (fields +0xc,+0x10,+0x14,+0x1c,+0x5c)
+local	FUN_001648ac	param_3	nodeB	INFERRED	second SchedNode compared
+local	FUN_001648ac	param_4	rankArg	UNKNOWN	forwarded unchanged to the resource model rank slot (+0x60/+0x64)
+local	FUN_001648ac	iVar2	rankA	INFERRED	resource model rank slot result for nodeA
+local	FUN_001648ac	iVar1	rankBOrDifference	INFERRED	rank of nodeB, then reused as the field differences that are returned
+local	FUN_00164bac	param_1	instA	INFERRED	instruction whose register id (+0x94) and class (+0x98) are compared
+local	FUN_00164bac	param_2	instB	INFERRED	second instruction
+local	FUN_00164bd8	param_1	inst	INFERRED	instruction whose register class/id forms the hash
+local	FUN_00164e7c	param_1	scheduler	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)
+local	FUN_00164e7c	param_2	producerInst	INFERRED	instruction that produces the value / comes first
+local	FUN_00164e7c	param_3	consumerInst	INFERRED	instruction that consumes it / comes second
+local	FUN_00164e7c	param_4	operandIndexA	UNKNOWN	operand index passed by buildDependencyGraph (0 or the source operand index); only forwarded
+local	FUN_00164e7c	param_5	operandIndexB	UNKNOWN	second operand index; callers pass 0 or the operand index
+local	FUN_00164e7c	param_6	dependencyKind	CONFIRMED	0 = data (asks the resource model), 1 = ordering (latency 1), others return 0; the kind stored at edge+8
+local	FUN_00164e7c	local_28	modelLatency	INFERRED	out value of resource model slot 0x54 (returned when the slot reports a model latency)
+local	FUN_00165b7c	param_1	scheduler	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)
+local	FUN_00165b7c	param_2	fromNode	CONFIRMED	stored at edge+0; its successor vector (+0x40) gets the edge
+local	FUN_00165b7c	param_3	toNode	CONFIRMED	stored at edge+4; its predecessor vector (+0x44) gets the edge and its +0x34 is incremented
+local	FUN_00165b7c	param_4	operandIndex	INFERRED	stored at edge+0x10
+local	FUN_00165b7c	param_5	subOperandIndex	INFERRED	stored at edge+0x14
+local	FUN_00165b7c	param_6	componentMask	CONFIRMED	four per-component bytes stored at edge+0x18; each nonzero byte increments fromNode.+0x48+4*i
+local	FUN_00165b7c	uVar2	latency	CONFIRMED	Scheduler__getDependencyLatency result stored at edge+0xc
+local	FUN_00165b7c	pcVar4	maskByte	INFERRED	walks the four component mask bytes
+local	FUN_00165d3c	param_1	scheduler	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)
+local	FUN_00165d3c	param_2	inst	CONFIRMED	stored at node+0x38
+local	FUN_00165d3c	param_3	priorityRecord	INFERRED	8-word record copied into node +0xc..+0x28
+local	FUN_00165d3c	param_4	readyCycle	INFERRED	stored at node+0x30 (earliest cycle)
+local	FUN_00165d3c	puVar12	node	CONFIRMED	allocation+1: the SchedNode
+local	FUN_00165d3c	puVar10	nodeVector	CONFIRMED	scheduler[6]: vector of all nodes
+local	FUN_00165fa8	param_1	scheduler	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)
+local	FUN_00165fa8	param_2	inst	CONFIRMED	compared with node+0x38
+local	FUN_00165fa8	puVar12	externalNodes	CONFIRMED	scheduler[5] vector
+local	FUN_00165fa8	puVar8	node	CONFIRMED	allocation+1: new SchedNode
+local	FUN_00166ba8	param_1	scheduler	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)
+local	FUN_00166ba8	param_2	node	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)
+local	FUN_00166ba8	puVar8	predecessorEdges	CONFIRMED	node+0x44 vector
+local	FUN_00166ba8	piVar9	edge	CONFIRMED	edge record from the predecessor vector
+local	FUN_00166cfc	param_1	scheduler	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)
+local	FUN_00166cfc	piVar7	node	CONFIRMED	node being destroyed (vtable slot 1 called)
+local	FUN_00166cfc	puVar10	vector	CONFIRMED	node vector or edge vector being walked
+local	FUN_00167a74	param_1	node	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)
+local	FUN_00167a74	param_2	component	INFERRED	byte index into the edge component mask at edge+0x18
+local	FUN_00167a74	iVar5	latestCycle	INFERRED	running maximum, initial value node+0x2c
+local	FUN_00167a74	iVar3	edge	CONFIRMED	edge from node+0x40
+local	FUN_00167a74	puVar7	successorEdges	CONFIRMED	node+0x40 vector
+local	FUN_00167b68	param_1	scheduler	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)
+local	FUN_00167b68	param_2	registerFile	INFERRED	1 selects the upper range (starting at the target description slot 0x138), anything else the lower range
+local	FUN_00167b68	param_3	componentMask	INFERRED	four component bytes (home slot) that must be free
+local	FUN_00167b68	uVar4	firstReg	INFERRED	start of the register range
+local	FUN_00167b68	uVar5	endReg	INFERRED	end of the register range
+local	FUN_00167b68	uVar10	bestReg	INFERRED	selected register, -1 if none
+local	FUN_00167b68	uVar13	reg	INFERRED	register being tested
+local	FUN_00167b68	piVar3	hwLimits	CONFIRMED	*(compiler+0x30c): target description (HwLimits)
+local	FUN_00167e1c	param_1	scheduler	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)
+local	FUN_00167e1c	param_2	sourceInst	CONFIRMED	operand 1 of the new copy instruction
+local	FUN_00167e1c	param_3	writeMask	INFERRED	component mask passed to FUN_000f3908 and stored at inst+0xc
+local	FUN_00167e1c	param_4	readyCycle	INFERRED	forwarded as the cycle of the new node
+local	FUN_00167e1c	param_5	priorityRecord	INFERRED	forwarded record of the new node
+local	FUN_00168468	param_1	scheduler	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)
+local	FUN_00168468	param_2	consumerNode	CONFIRMED	node whose predecessor vector (+0x44) receives the edge
+local	FUN_00168468	param_4	operandIndex	CONFIRMED	source operand index of inst
+local	FUN_00168468	param_5	subOperandIndex	INFERRED	>0 when the operand is one source of a nested instruction
+local	FUN_00168468	iVar4	producerNode	CONFIRMED	node of the producer: from the registry scheduler[6] or an external node
+local	FUN_00168468	bVar1	hasSubOperand	INFERRED	param_5 > 0
+local	FUN_00168468	iVar5	effectiveOperandIndex	INFERRED	operand index used for the edge
+local	FUN_00168468	puVar13	edge	CONFIRMED	allocation+1
+local	FUN_00169e30	iVar7	unionFindParents	INFERRED	arena array of virtual register ids passed to disjointSetFindRoot / storeIndexedWord
+local	FUN_00169e30	iVar8	rootIsGlobal	INFERRED	arena array indexed by union-find root, 1 = some member is global
+local	FUN_0016a568	param_2	block	CONFIRMED	stored in scheduler[4]; its instruction list at block+0x98 is walked
+local	FUN_0016a568	piVar14	inst	CONFIRMED	current instruction (node.+0x38)
+local	FUN_0016a568	puVar25	lastWriterSet	INFERRED	register-keyed hash set (callbacks VRegKey__equals / VRegKey__hash)
+local	FUN_0016a568	uVar20	nodeIndex	CONFIRMED	position of the instruction in the block, stored at node+0x3c / inst+0x150
+local	FUN_0016a568	bVar2	needsRegisterHash	INFERRED	set when any instruction has ordering constraints
+local	FUN_0016a568	uVar19	dotProductLimit	UNKNOWN	0x7fffffff or 0 depending on option 0x24
+local	FUN_0016c640	param_1	scheduler	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)
+local	FUN_0016cdc4	param_1	scheduler	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)
+local	FUN_0016cdc4	param_2	node	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)
+local	FUN_0016cdc4	piVar9	inst	CONFIRMED	node.+0x38
+local	FUN_0016cdc4	piVar14	edge	CONFIRMED	predecessor edge
+local	FUN_0016cdc4	iVar12	producerNode	CONFIRMED	edge.from
+local	FUN_0016cdc4	puVar13	predecessorEdges	CONFIRMED	node+0x44 vector
+local	FUN_0016d3b0	param_1	scheduler	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)
+local	FUN_0016d3b0	param_2	node	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)
+local	FUN_0016df8c	param_1	scheduler	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)
+local	FUN_0016df8c	param_2	node	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)
+local	FUN_0016e828	param_1	scheduler	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)
+local	FUN_0016ee90	param_1	scheduler	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)
+local	FUN_0016ee90	param_2	node	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)
+local	FUN_0016ff54	param_2	cycleLimit	INFERRED	node.+0x10 is compared with it when scanning the sorted list
+local	FUN_0016ff54	iVar30	node	INFERRED	candidate node being examined
+local	FUN_00170990	param_1	scheduler	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)
+local	FUN_00170bcc	param_1	scheduler	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)
+local	FUN_00170bcc	param_2	node	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)
+local	FUN_00170bcc	puVar10	successorEdges	CONFIRMED	node+0x40 vector
+local	FUN_00170bcc	iVar9	successorNode	CONFIRMED	edge.to
+local	FUN_00170da0	param_1	scheduler	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)
+local	FUN_00170da0	param_2	node	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)
+local	FUN_00170e6c	param_2	block	CONFIRMED	the basic block being scheduled (block+0x104, +0xd0 used)
+local	FUN_00171e68	param_1	program	CONFIRMED	passed through as the program argument
+local	FUN_0016a568	puVar24	schedNode	CONFIRMED	Scheduler node of the instruction being processed (allocation+1 of the 0x74-byte Arena__alloc)
+local	FUN_001670fc	iVar12	node	CONFIRMED	current SchedNode of the reverse walk (vector scheduler[6])
+local	FUN_001670fc	uVar15	nodeIndex	CONFIRMED	reverse index stored at node+0x10
+local	FUN_001670fc	uVar18	nodeCount	CONFIRMED	size of scheduler[6]
+local	FUN_001670fc	iVar6	descendantMasks	INFERRED	arena array of one 32-bit mask per node (bit k = node index+k+1 is a descendant)
+local	FUN_001670fc	puVar16	descendantMask	INFERRED	cursor into descendantMasks for the current node
+local	FUN_001670fc	iVar8	edge	CONFIRMED	edge of the successor or predecessor vector
+local	FUN_001670fc	iVar22	neighbourNode	CONFIRMED	edge.to / edge.from
+local	FUN_001670fc	local_58	maxDepth	CONFIRMED	maximum node+0x14, stored in scheduler[0x44]
+local	FUN_001670fc	iVar21	maxHeight	CONFIRMED	maximum node+0xc; compared with the target limit hwLimits+0x54
+local	FUN_00168d80	param_1	scheduler	INFERRED	Scheduler object (see notes_compiler_scheduler.md): [0]=compiler [1]=program [2]=resourceModel [3]=threadModel [4]=block [5],[6]=node vectors
+local	FUN_00168d80	param_2	node	INFERRED	Scheduler object (see notes_compiler_scheduler.md): [0]=compiler [1]=program [2]=resourceModel [3]=threadModel [4]=block [5],[6]=node vectors
+local	FUN_00168d80	piVar25	inst	CONFIRMED	node.+0x38: instruction being transformed
+local	FUN_00168d80	iVar6	helperInst	CONFIRMED	instruction returned by resource model slot 0x40
+local	FUN_00168d80	iVar7	helperNode	CONFIRMED	Scheduler__createNode of helperInst
+local	FUN_00168d80	local_88	outCount	UNKNOWN	out parameter 1 of resource model slot 0x40
+local	FUN_00168d80	local_84	outSelector	UNKNOWN	out parameter 2 of resource model slot 0x40, passed to inst slot 0x88
+local	FUN_00169b70	param_1	scheduler	INFERRED	Scheduler object (see notes_compiler_scheduler.md): [0]=compiler [1]=program [2]=resourceModel [3]=threadModel [4]=block [5],[6]=node vectors
+local	FUN_0016bd70	param_1	scheduler	INFERRED	Scheduler object (see notes_compiler_scheduler.md): [0]=compiler [1]=program [2]=resourceModel [3]=threadModel [4]=block [5],[6]=node vectors
+local	FUN_0016bd70	puVar10	groupRecord	INFERRED	0x2c-byte record stored at node+0x60: [0]=component mask union, [4]=-1 register, [0x10]=member count
+local	FUN_0016bd70	iVar13	node	CONFIRMED	node examined from scheduler[6]
+local	FUN_00164bec	param_1	scheduler	INFERRED	Scheduler object (see notes_compiler_scheduler.md): [0]=compiler [1]=program [2]=resourceModel [3]=threadModel [4]=block [5],[6]=node vectors
+local	FUN_00164bec	param_2	componentMask	INFERRED	four component flag bytes that the register must be free for
+local	FUN_00164bec	param_3	cycle	INFERRED	cycle that the register must be free at
+local	FUN_00164bec	param_4	useConstantFile	INFERRED	0 = temporary file (arrays scheduler[0x54..], live-out set, high-water [0x68]), non-0 = the other file (arrays [0x58..], count hwLimits+0x13c, high-water [0x69])
+local	FUN_00164bec	uVar5	registerCount	INFERRED	number of registers in the chosen file
+local	FUN_00164bec	uVar8	reg	INFERRED	register being tested
+local	FUN_00164bec	uVar7	bestReg	INFERRED	register with the least slack so far, -1 if none
+local	FUN_00164bec	iVar13	bestSlack	INFERRED	slack of bestReg
+local	FUN_00164bec	iVar11	minSlack	INFERRED	smallest cycle - lastUse over the masked components
+local	FUN_00164bec	bVar2	isTempFile	INFERRED	param_4 == 0
+local	FUN_001659fc	param_1	scheduler	INFERRED	Scheduler object (see notes_compiler_scheduler.md): [0]=compiler [1]=program [2]=resourceModel [3]=threadModel [4]=block [5],[6]=node vectors
+local	FUN_001659fc	param_2	node	INFERRED	Scheduler object (see notes_compiler_scheduler.md): [0]=compiler [1]=program [2]=resourceModel [3]=threadModel [4]=block [5],[6]=node vectors
+local	FUN_001659fc	piVar7	inst	CONFIRMED	node.+0x38
+local	FUN_0016c970	param_1	scheduler	INFERRED	Scheduler object (see notes_compiler_scheduler.md): [0]=compiler [1]=program [2]=resourceModel [3]=threadModel [4]=block [5],[6]=node vectors
+local	FUN_0016c970	param_2	node	INFERRED	Scheduler object (see notes_compiler_scheduler.md): [0]=compiler [1]=program [2]=resourceModel [3]=threadModel [4]=block [5],[6]=node vectors
+local	FUN_0016c970	pcVar10	groupRecord	INFERRED	node+0x60 (Scheduler__buildCoScheduleGroups record)
+local	FUN_0016c970	piVar9	inst	CONFIRMED	node.+0x38
+local	FUN_00164df4	param_1	inst	INFERRED	instruction whose virtual slot 0x7c and class +0x88 are tested
+local	FUN_0016d538	param_1	scheduler	INFERRED	Scheduler object (see notes_compiler_scheduler.md): [0]=compiler [1]=program [2]=resourceModel [3]=threadModel [4]=block [5],[6]=node vectors
+local	FUN_0016d538	param_2	node	INFERRED	Scheduler object (see notes_compiler_scheduler.md): [0]=compiler [1]=program [2]=resourceModel [3]=threadModel [4]=block [5],[6]=node vectors
+local	FUN_0016d538	piVar5	addressRegisterSlot	INFERRED	cursor over scheduler[0x5c..]: current address-register load node
+local	FUN_0016d538	uVar6	componentSelect	INFERRED	component byte of the load selected from the operand record
+local	FUN_0016dd04	param_1	scheduler	INFERRED	Scheduler object (see notes_compiler_scheduler.md): [0]=compiler [1]=program [2]=resourceModel [3]=threadModel [4]=block [5],[6]=node vectors
+local	FUN_0016dd04	param_2	node	INFERRED	Scheduler object (see notes_compiler_scheduler.md): [0]=compiler [1]=program [2]=resourceModel [3]=threadModel [4]=block [5],[6]=node vectors
+local	FUN_0016dd04	uVar7	inst	CONFIRMED	node.+0x38
+local	FUN_0016bd70	local_5c	compilerArena	CONFIRMED	compiler arena (+0x378) used for the group record and the work vector
+local	FUN_0016e1a4	param_1	scheduler	INFERRED	Scheduler object (see notes_compiler_scheduler.md)
+local	FUN_0016e1a4	iVar13	addressLoadNode	CONFIRMED	node in scheduler[0x5c+k] whose cycle is before the current one
+local	FUN_0016e1a4	iVar15	consumerNode	INFERRED	node of the consuming instruction taken from node+0x6c
+local	FUN_0016e1a4	uVar3	clonedInst	CONFIRMED	IRInst__clone of the consumer instruction
+local	FUN_0016e1a4	iVar8	clonedNode	CONFIRMED	Scheduler__createNode result for the clone
+local	FUN_00167ef4	param_1	scheduler	INFERRED	Scheduler object (see notes_compiler_scheduler.md)
+local	FUN_00167ef4	param_2	node	INFERRED	Scheduler object (see notes_compiler_scheduler.md)
+local	FUN_00167ef4	a0	inst	CONFIRMED	node.+0x38: the instruction whose operand is copied
+local	FUN_00167ef4	iVar1	copyNode	CONFIRMED	Scheduler__createCopyNode result (returned)
+local	FUN_00166844	param_1	scheduler	INFERRED	Scheduler object (see notes_compiler_scheduler.md)
+local	FUN_00166844	param_2	fromNode	INFERRED	node whose predecessor vector (+0x44) is searched
+local	FUN_00166844	param_3	toNode	INFERRED	node that receives the copied edge
+local	FUN_00166844	piVar11	sourceEdge	CONFIRMED	predecessor edge with edge+0x1c == 1
+local	FUN_00189560	param_1	state	INFERRED	R5xx ALU packing state used by R520SchedModel canAdd/addInstruction (notes_compiler_scheduler.md section 6)
+local	FUN_001895a0	param_1	dest	INFERRED	R5xx ALU packing state used by R520SchedModel canAdd/addInstruction (notes_compiler_scheduler.md section 6)
+local	FUN_001895a0	param_2	source	INFERRED	R5xx ALU packing state used by R520SchedModel canAdd/addInstruction (notes_compiler_scheduler.md section 6)
+local	FUN_0018c768	param_1	state	INFERRED	R5xx ALU packing state used by R520SchedModel canAdd/addInstruction (notes_compiler_scheduler.md section 6)
+local	FUN_0018c768	param_2	freeCounts	INFERRED	out[0], out[1]: free slots of each triple
+local	FUN_00189840	param_1	schedModel	INFERRED	R5xx ALU packing state used by R520SchedModel canAdd/addInstruction (notes_compiler_scheduler.md section 6)
+local	FUN_00189840	param_2	instA	INFERRED	first instruction of the ALU pair
+local	FUN_00189840	param_3	instB	INFERRED	second instruction of the pair
+local	FUN_00189840	param_4	inlineLimit	INFERRED	constants that fit as inline operands
+local	FUN_00189840	param_5	otherLimit	INFERRED	additional constants allowed
+local	FUN_001899ac	param_1	schedModel	INFERRED	R5xx ALU packing state used by R520SchedModel canAdd/addInstruction (notes_compiler_scheduler.md section 6)
+local	FUN_001899ac	param_2	instA	INFERRED	R5xx ALU packing state used by R520SchedModel canAdd/addInstruction (notes_compiler_scheduler.md section 6)
+local	FUN_001899ac	param_3	instB	INFERRED	R5xx ALU packing state used by R520SchedModel canAdd/addInstruction (notes_compiler_scheduler.md section 6)
+local	FUN_001899ac	param_5	inlineLimit	INFERRED	R5xx ALU packing state used by R520SchedModel canAdd/addInstruction (notes_compiler_scheduler.md section 6)
+local	R520SchedModel__vslot3_canAddInstruction	param_1	schedModel	INFERRED	R520SchedModel: +4 state code (0 none, 1 vector used, 2 scalar used, 3 both, 4 non-ALU), +0x18..0x24 slot usage, +0x28 PackState, +0x64 first instruction of the pair
+local	R520SchedModel__vslot3_canAddInstruction	param_2	inst	CONFIRMED	instruction to test; ALU flag 0x8000 skips the check
+local	R520SchedModel__vslot4_addInstruction	param_1	schedModel	INFERRED	R520SchedModel (see canAddInstruction)
+local	R520SchedModel__vslot4_addInstruction	param_2	inst	CONFIRMED	instruction added to the current ALU word

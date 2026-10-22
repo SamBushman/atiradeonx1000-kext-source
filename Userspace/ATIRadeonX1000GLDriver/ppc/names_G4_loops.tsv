@@ -106,7 +106,7 @@ use	FUN_0016629c	uVar15	loopIndex	INFERRED	initialised to a literal, stepped by 
 use	FUN_00166844	uVar14	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#0	+63	all	all
 use	FUN_00166a0c	uVar6	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#0	+48	all	all
 use	FUN_00166a0c	uVar8	loopIndex2	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#19	+23	all	all
-use	FUN_00166ba8	uVar7	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#9	+24	all	all
+use	FUN_00166ba8	uVar7	edgeIndex	INFERRED	index into predecessorEdges	#9	+24	all	all
 use	FUN_00166cfc	uVar8	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#0	+138	all	all
 use	FUN_00166cfc	uVar9	loopIndex2	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#26	+89	all	all
 use	FUN_00167a74	uVar6	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#0	+23	all	all
@@ -124,7 +124,7 @@ use	FUN_0016d538	uVar10	loopIndex	INFERRED	initialised to a literal, stepped by 
 use	FUN_0016d538	uVar10	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#221	+26	all	all
 use	FUN_0016d538	uVar4	loopIndex2	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#97	+16	all	all
 use	FUN_0016dd04	iVar9	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#37	+34	all	all
-use	FUN_00170bcc	uVar8	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#3	+59	all	all
+use	FUN_00170bcc	uVar8	edgeIndex	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)	#3	+59	all	all
 use	FUN_00171714	iVar10	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#195	+5	all	all
 use	FUN_0017281c	uVar7	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#9	+37	all	all
 use	FUN_001729bc	iVar3	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#0	+24	all	all

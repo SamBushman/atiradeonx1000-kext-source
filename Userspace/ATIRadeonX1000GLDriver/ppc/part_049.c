@@ -1683,35 +1683,35 @@ int KhanVs__vslot27(this, inst, param_3)
   return;
 }
 
-/* FUN_00189560 @ 0x189560 (64 bytes) */
-int FUN_00189560(param_1)
-  undefined4 *param_1;
+/* PackState__reset @ 0x189560 (64 bytes) */
+int PackState__reset(state)
+  undefined4 *state;
 {
   bool bVar1;
   int loopIndex;
   
   loopIndex = 0;
-  param_1[5] = 0;
-  *param_1 = 0;
-  param_1[1] = 0;
-  param_1[2] = 0;
-  param_1[3] = 0;
-  param_1[4] = 0;
+  state[5] = 0;
+  *state = 0;
+  state[1] = 0;
+  state[2] = 0;
+  state[3] = 0;
+  state[4] = 0;
   do {
     bVar1 = loopIndex != 2;
-    param_1[6] = 0;
-    param_1[9] = 0;
+    state[6] = 0;
+    state[9] = 0;
     loopIndex = loopIndex + 1;
-    param_1[0xc] = 0;
-    param_1 = param_1 + 1;
+    state[0xc] = 0;
+    state = state + 1;
   } while (bVar1);
   return;
 }
 
-/* FUN_001895a0 @ 0x1895a0 (100 bytes) */
-int FUN_001895a0(param_1, param_2)
-  undefined4 *param_1;
-  undefined4 *param_2;
+/* PackState__copy @ 0x1895a0 (100 bytes) */
+int PackState__copy(dest, source)
+  undefined4 *dest;
+  undefined4 *source;
 {
   undefined4 *puVar1;
   bool bVar2;
@@ -1719,27 +1719,27 @@ int FUN_001895a0(param_1, param_2)
   undefined4 uVar4;
   int loopIndex;
   
-  uVar4 = *param_2;
-  param_1[2] = param_2[2];
-  uVar3 = param_2[3];
-  *param_1 = uVar4;
+  uVar4 = *source;
+  dest[2] = source[2];
+  uVar3 = source[3];
+  *dest = uVar4;
   loopIndex = 0;
-  param_1[3] = uVar3;
-  uVar4 = param_2[1];
-  param_1[4] = param_2[4];
-  uVar3 = param_2[5];
-  param_1[1] = uVar4;
-  param_1[5] = uVar3;
+  dest[3] = uVar3;
+  uVar4 = source[1];
+  dest[4] = source[4];
+  uVar3 = source[5];
+  dest[1] = uVar4;
+  dest[5] = uVar3;
   do {
     bVar2 = loopIndex != 2;
     loopIndex = loopIndex + 1;
-    param_1[6] = param_2[6];
-    puVar1 = param_2 + 9;
-    uVar3 = param_2[0xc];
-    param_2 = param_2 + 1;
-    param_1[9] = *puVar1;
-    param_1[0xc] = uVar3;
-    param_1 = param_1 + 1;
+    dest[6] = source[6];
+    puVar1 = source + 9;
+    uVar3 = source[0xc];
+    source = source + 1;
+    dest[9] = *puVar1;
+    dest[0xc] = uVar3;
+    dest = dest + 1;
   } while (bVar2);
   return;
 }
@@ -1754,7 +1754,7 @@ int R520SchedModel__vslot2_reset(param_1)
   *(undefined4 *)(param_1 + 0x18) = 0xffffffff;
   *(undefined4 *)(param_1 + 0x1c) = 0xffffffff;
   *(undefined4 *)(param_1 + 0x20) = 0xffffffff;
-  return ((int (*)())FUN_00189560)(param_1 + 0x28);
+  return ((int (*)())PackState__reset)(param_1 + 0x28);
 }
 
 /* KhanPs__vslot31 @ 0x18962c (52 bytes) */
@@ -1852,13 +1852,13 @@ int FUN_001897fc(inst, param_2)
   return bVar2;
 }
 
-/* FUN_00189840 @ 0x189840 (364 bytes) */
-int FUN_00189840(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  int *param_2;
-  int *param_3;
-  int param_4;
-  int param_5;
+/* SchedModel__fitsConstantLimit @ 0x189840 (364 bytes) */
+int SchedModel__fitsConstantLimit(schedModel, instA, instB, inlineLimit, otherLimit)
+  int schedModel;
+  int *instA;
+  int *instB;
+  int inlineLimit;
+  int otherLimit;
 {
   int *a0;
   int loopRemaining;
@@ -1872,7 +1872,7 @@ int FUN_00189840(param_1, param_2, param_3, param_4, param_5)
   iVar4 = 0;
   do {
     loopRemaining2 = 2;
-    piVar6 = param_2;
+    piVar6 = instA;
     do {
       for (iVar5 = 1; loopRemaining = (**(code **)(*piVar6 + 0x14))(piVar6), iVar5 <= loopRemaining;
           iVar5 = iVar5 + 1) {
@@ -1887,7 +1887,7 @@ LAB_00189934:
               loopRemaining = iVar4 + 1;
               local_58[iVar4] = a0;
               iVar4 = loopRemaining;
-              if (param_4 + param_5 < loopRemaining) {
+              if (inlineLimit + otherLimit < loopRemaining) {
                 return 0;
               }
             }
@@ -1903,7 +1903,7 @@ LAB_00189934:
           }
         }
         else {
-          loopRemaining = IRInst__hasSingleUse(a0,*(undefined4 *)(*(int *)(param_1 + 8) + 0x6c4));
+          loopRemaining = IRInst__hasSingleUse(a0,*(undefined4 *)(*(int *)(schedModel + 8) + 0x6c4));
           if (loopRemaining != 0) {
             a0 = (int *)IRInst__getOperandSource(a0,1);
             goto LAB_001898e0;
@@ -1914,18 +1914,18 @@ LAB_00189934:
       if (loopRemaining2 == 0) {
         return 1;
       }
-      piVar6 = param_3;
+      piVar6 = instB;
     } while (loopRemaining2 != 2);
   } while( true );
 }
 
-/* FUN_001899ac @ 0x1899ac (568 bytes) */
-int FUN_001899ac(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  int *param_2;
-  int *param_3;
+/* SchedModel__assignConstantSelectors @ 0x1899ac (568 bytes) */
+int SchedModel__assignConstantSelectors(schedModel, instA, instB, param_4, inlineLimit)
+  int schedModel;
+  int *instA;
+  int *instB;
   undefined4 param_4;
-  int param_5;
+  int inlineLimit;
 {
   int *operandVReg;
   bool bVar1;
@@ -1944,7 +1944,7 @@ int FUN_001899ac(param_1, param_2, param_3, param_4, param_5)
   loopIndex2 = 0;
   do {
     loopIndex3 = 0;
-    piVar10 = param_2;
+    piVar10 = instA;
     do {
       iVar7 = 1;
       if (piVar10 != (int *)0x0) {
@@ -1975,7 +1975,7 @@ LAB_00189ab0:
                 }
               }
               loopIndex4 = 0;
-              if (loopIndex < param_5) {
+              if (loopIndex < inlineLimit) {
                 do {
                   loopIndex = IRInst__getOperandRecord(piVar9,iVar4);
                   if (*(char *)(loopIndex4 + loopIndex + 0x10) != '\x04') {
@@ -2000,7 +2000,7 @@ LAB_00189ab0:
             }
           }
           else {
-            iVar4 = IRInst__hasSingleUse(a0,*(undefined4 *)(*(int *)(param_1 + 8) + 0x6c4));
+            iVar4 = IRInst__hasSingleUse(a0,*(undefined4 *)(*(int *)(schedModel + 8) + 0x6c4));
             if (iVar4 != 0) {
               operandVReg = (int *)IRInst__getOperandSource(a0,1);
               iVar4 = 1;
@@ -2016,7 +2016,7 @@ LAB_00189ab0:
       if (bVar1) {
         return;
       }
-      piVar10 = param_3;
+      piVar10 = instB;
     } while (loopIndex3 != 0);
   } while( true );
 }
@@ -3447,27 +3447,27 @@ LAB_0018c6a0:
   } while( true );
 }
 
-/* FUN_0018c768 @ 0x18c768 (140 bytes) */
-int FUN_0018c768(param_1, param_2)
-  undefined4 param_1;
-  int *param_2;
+/* PackState__countFreeSlots @ 0x18c768 (140 bytes) */
+int PackState__countFreeSlots(state, freeCounts)
+  undefined4 state;
+  int *freeCounts;
 {
   int callResult;
   int *loopIndex;
   int local_38 [3];
   int local_2c [9];
   
-  callResult = ((int (*)())FUN_0018c1c8)(param_1,local_38);
-  param_2[1] = 0;
-  *param_2 = 0;
+  callResult = ((int (*)())FUN_0018c1c8)(state,local_38);
+  freeCounts[1] = 0;
+  *freeCounts = 0;
   if (callResult != 0) {
     loopIndex = local_38;
     do {
       if (*loopIndex == 0) {
-        *param_2 = *param_2 + 1;
+        *freeCounts = *freeCounts + 1;
       }
       if (loopIndex[3] == 0) {
-        param_2[1] = param_2[1] + 1;
+        freeCounts[1] = freeCounts[1] + 1;
       }
       loopIndex = loopIndex + 1;
     } while (loopIndex != local_2c);
@@ -3965,11 +3965,11 @@ int FUN_0018da48(param_1, param_2)
   
   local_64 = 0xffffffff;
   local_68 = 0xffffffff;
-  ((int (*)())FUN_00189560)(auStack_58);
+  ((int (*)())PackState__reset)(auStack_58);
   callResult = ((int (*)())FUN_0018d4b4)(param_1,&local_68,&local_64,auStack_58,param_2);
   uVar2 = 0;
   if (callResult != 0) {
-    uVar2 = ((int (*)())FUN_0018c768)(auStack_58,auStack_60);
+    uVar2 = ((int (*)())PackState__countFreeSlots)(auStack_58,auStack_60);
   }
   return uVar2;
 }
@@ -4795,57 +4795,57 @@ code_r0x0018eb5c: ;
 #undef local_88
 
 /* R520SchedModel__vslot4_addInstruction @ 0x18f42c (304 bytes) */
-int R520SchedModel__vslot4_addInstruction(param_1, param_2)
-  int param_1;
-  int *param_2;
+int R520SchedModel__vslot4_addInstruction(schedModel, inst)
+  int schedModel;
+  int *inst;
 {
   int callResult;
   undefined4 uVar2;
   undefined4 local_38;
   undefined4 local_34;
   
-  if ((param_2[5] & 0x8000U) == 0) {
-    callResult = (**(code **)(*param_2 + 0x28))(param_2);
+  if ((inst[5] & 0x8000U) == 0) {
+    callResult = (**(code **)(*inst + 0x28))(inst);
     if (callResult == 0) {
-      ((int (*)())FUN_00189df4)(param_2,param_1 + 0x18,param_1 + 0x20);
-      ((int (*)())FUN_0018d4b4)(param_2,param_1 + 0x1c,param_1 + 0x24,param_1 + 0x28,*(undefined4 *)(param_1 + 8)
+      ((int (*)())FUN_00189df4)(inst,schedModel + 0x18,schedModel + 0x20);
+      ((int (*)())FUN_0018d4b4)(inst,schedModel + 0x1c,schedModel + 0x24,schedModel + 0x28,*(undefined4 *)(schedModel + 8)
                   );
-      ((int (*)())FUN_0018c768)(param_1 + 0x28,&local_38);
+      ((int (*)())PackState__countFreeSlots)(schedModel + 0x28,&local_38);
       uVar2 = 0;
-      if (*(int *)(param_1 + 100) != 0) {
-        ((int (*)())FUN_00189840)(param_1,*(int *)(param_1 + 100),param_2,local_38,local_34);
-        uVar2 = *(undefined4 *)(param_1 + 100);
+      if (*(int *)(schedModel + 100) != 0) {
+        ((int (*)())SchedModel__fitsConstantLimit)(schedModel,*(int *)(schedModel + 100),inst,local_38,local_34);
+        uVar2 = *(undefined4 *)(schedModel + 100);
       }
-      ((int (*)())FUN_001899ac)(param_1,uVar2,param_2,local_38,local_34);
-      if (*(int *)(param_1 + 100) == 0) {
-        *(int **)(param_1 + 100) = param_2;
+      ((int (*)())SchedModel__assignConstantSelectors)(schedModel,uVar2,inst,local_38,local_34);
+      if (*(int *)(schedModel + 100) == 0) {
+        *(int **)(schedModel + 100) = inst;
       }
-      if (*(int *)(param_1 + 0x18) < 0) {
-        if (*(int *)(param_1 + 0x20) < 0) {
-          *(undefined4 *)(param_1 + 4) = 0;
+      if (*(int *)(schedModel + 0x18) < 0) {
+        if (*(int *)(schedModel + 0x20) < 0) {
+          *(undefined4 *)(schedModel + 4) = 0;
         }
         else {
-          *(undefined4 *)(param_1 + 4) = 2;
+          *(undefined4 *)(schedModel + 4) = 2;
         }
       }
-      else if (*(int *)(param_1 + 0x20) < 0) {
-        *(undefined4 *)(param_1 + 4) = 1;
+      else if (*(int *)(schedModel + 0x20) < 0) {
+        *(undefined4 *)(schedModel + 4) = 1;
       }
       else {
-        *(undefined4 *)(param_1 + 4) = 3;
+        *(undefined4 *)(schedModel + 4) = 3;
       }
     }
     else {
-      *(undefined4 *)(param_1 + 4) = 4;
+      *(undefined4 *)(schedModel + 4) = 4;
     }
   }
   return;
 }
 
 /* R520SchedModel__vslot3_canAddInstruction @ 0x18f55c (280 bytes) */
-int R520SchedModel__vslot3_canAddInstruction(param_1, param_2)
-  int param_1;
-  int *param_2;
+int R520SchedModel__vslot3_canAddInstruction(schedModel, inst)
+  int schedModel;
+  int *inst;
 {
   int callResult;
   undefined4 local_78;
@@ -4856,22 +4856,22 @@ int R520SchedModel__vslot3_canAddInstruction(param_1, param_2)
   undefined4 local_64;
   undefined1 auStack_60 [80];
   
-  if ((param_2[5] & 0x8000U) == 0) {
-    callResult = (**(code **)(*param_2 + 0x28))(param_2);
+  if ((inst[5] & 0x8000U) == 0) {
+    callResult = (**(code **)(*inst + 0x28))(inst);
     if (callResult != 0) {
-      return *(int *)(param_1 + 4) == 0;
+      return *(int *)(schedModel + 4) == 0;
     }
-    local_78 = *(undefined4 *)(param_1 + 0x18);
-    local_74 = *(undefined4 *)(param_1 + 0x1c);
-    local_70 = *(undefined4 *)(param_1 + 0x20);
-    local_6c = *(undefined4 *)(param_1 + 0x24);
-    ((int (*)())FUN_001895a0)(auStack_60,param_1 + 0x28);
-    callResult = ((int (*)())FUN_00189df4)(param_2,&local_78,&local_70);
+    local_78 = *(undefined4 *)(schedModel + 0x18);
+    local_74 = *(undefined4 *)(schedModel + 0x1c);
+    local_70 = *(undefined4 *)(schedModel + 0x20);
+    local_6c = *(undefined4 *)(schedModel + 0x24);
+    ((int (*)())PackState__copy)(auStack_60,schedModel + 0x28);
+    callResult = ((int (*)())FUN_00189df4)(inst,&local_78,&local_70);
     if ((((callResult == 0) ||
-         (callResult = ((int (*)())FUN_0018d4b4)(param_2,&local_74,&local_6c,auStack_60,*(undefined4 *)(param_1 + 8)),
-         callResult == 0)) || (callResult = ((int (*)())FUN_0018c768)(auStack_60,&local_68), callResult == 0)) ||
-       ((*(int *)(param_1 + 100) != 0 &&
-        (callResult = ((int (*)())FUN_00189840)(param_1,*(int *)(param_1 + 100),param_2,local_68,local_64), callResult == 0
+         (callResult = ((int (*)())FUN_0018d4b4)(inst,&local_74,&local_6c,auStack_60,*(undefined4 *)(schedModel + 8)),
+         callResult == 0)) || (callResult = ((int (*)())PackState__countFreeSlots)(auStack_60,&local_68), callResult == 0)) ||
+       ((*(int *)(schedModel + 100) != 0 &&
+        (callResult = ((int (*)())SchedModel__fitsConstantLimit)(schedModel,*(int *)(schedModel + 100),inst,local_68,local_64), callResult == 0
         )))) {
       return false;
     }

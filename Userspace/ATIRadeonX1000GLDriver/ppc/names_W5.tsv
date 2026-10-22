@@ -459,21 +459,21 @@ local	FUN_0013fc38	puVar7	allocation	INFERRED	result of FUN_00193e18; *allocatio
 local	FUN_00165014	uVar18	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
 local	FUN_00165014	puVar7	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
 local	FUN_00165b7c	uVar7	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
-local	FUN_00165b7c	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00165b7c	puVar1	edgeAlloc	CONFIRMED	Arena__alloc(0x24): edge header word + edge
 local	FUN_00165d3c	uVar11	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
-local	FUN_00165d3c	puVar3	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00165d3c	puVar3	nodeAlloc	CONFIRMED	Arena__alloc(0x74): arena word + node
 local	FUN_00165fa8	uVar10	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
-local	FUN_00165fa8	puVar6	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00165fa8	puVar6	nodeAlloc	CONFIRMED	Arena__alloc(0x74)
 local	FUN_00166844	uVar13	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
-local	FUN_00166844	puVar4	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00166844	puVar4	edgeAlloc	CONFIRMED	Arena__alloc(0x24)
 local	FUN_001670fc	uVar19	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
 local	FUN_001670fc	puVar5	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
 local	FUN_00168468	uVar18	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
-local	FUN_00168468	puVar9	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00168468	puVar9	edgeAlloc	CONFIRMED	Arena__alloc(0x24)
 local	FUN_00168d80	uVar22	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
-local	FUN_00168d80	puVar10	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00168d80	puVar10	edgeAlloc	CONFIRMED	Arena__alloc(0x24) edge helperNode -> node
 local	FUN_0016a568	uVar26	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
-local	FUN_0016a568	puVar15	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0016a568	puVar15	nodeAlloc	CONFIRMED	Arena__alloc(0x74)
 local	FUN_0016bd70	uVar18	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
 local	FUN_0016bd70	puVar6	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
 local	FUN_0016dd04	uVar14	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object

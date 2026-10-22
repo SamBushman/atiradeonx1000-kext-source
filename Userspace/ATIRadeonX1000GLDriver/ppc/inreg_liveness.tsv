@@ -125,21 +125,21 @@
 161748	FUN_00161748	r7	PASS-indirect	161784 bctrl 
 161748	FUN_00161748	r8	PASS-indirect	161784 bctrl 
 161748	FUN_00161748	r9	PASS-indirect	161784 bctrl 
-167ef4	FUN_00167ef4	r9	PASS-indirect	167f24 bctrl 
-169e30	FUN_00169e30	r7	PASS-indirect	169e60 bl 0x193e18
-169e30	FUN_00169e30	r8	PASS-indirect	169e60 bl 0x193e18
-169e30	FUN_00169e30	r10	PASS-indirect	169e60 bl 0x193e18
-16d538	FUN_0016d538	r7	PASS-indirect	16d55c bl 0x1045e4
-16d538	FUN_0016d538	r8	PASS-indirect	16d55c bl 0x1045e4
+167ef4	Scheduler__insertOperandCopy	r9	PASS-indirect	167f24 bctrl 
+169e30	Scheduler__markGlobalValues	r7	PASS-indirect	169e60 bl 0x193e18
+169e30	Scheduler__markGlobalValues	r8	PASS-indirect	169e60 bl 0x193e18
+169e30	Scheduler__markGlobalValues	r10	PASS-indirect	169e60 bl 0x193e18
+16d538	Scheduler__tryReuseAddressRegister	r7	PASS-indirect	16d55c bl 0x1045e4
+16d538	Scheduler__tryReuseAddressRegister	r8	PASS-indirect	16d55c bl 0x1045e4
 171714	pass_sched_preprocess_and_schedule_inst	r6	PASS-no	171750 bl 0x10ddcc
 171714	pass_sched_preprocess_and_schedule_inst	r7	PASS-no	171750 bl 0x10ddcc
 171714	pass_sched_preprocess_and_schedule_inst	r8	PASS-no	171750 bl 0x10ddcc
 171714	pass_sched_preprocess_and_schedule_inst	r10	PASS-no	171750 bl 0x10ddcc
-171e68	FUN_00171e68	r5	PASS-no	171e88 bl 0x1940a8
-171e68	FUN_00171e68	r6	PASS-no	171e88 bl 0x1940a8
-171e68	FUN_00171e68	r7	PASS-no	171e88 bl 0x1940a8
-171e68	FUN_00171e68	r8	PASS-no	171e88 bl 0x1940a8
-171e68	FUN_00171e68	r9	PASS-no	171e88 bl 0x1940a8
+171e68	Scheduler__run	r5	PASS-no	171e88 bl 0x1940a8
+171e68	Scheduler__run	r6	PASS-no	171e88 bl 0x1940a8
+171e68	Scheduler__run	r7	PASS-no	171e88 bl 0x1940a8
+171e68	Scheduler__run	r8	PASS-no	171e88 bl 0x1940a8
+171e68	Scheduler__run	r9	PASS-no	171e88 bl 0x1940a8
 173b98	FUN_00173b98	r7	PASS-indirect	173bd4 bl 0xe9c00
 173b98	FUN_00173b98	r8	PASS-indirect	173bd4 bl 0xe9c00
 173f1c	FUN_00173f1c	r5	PASS-indirect	173f50 bl 0x126760
