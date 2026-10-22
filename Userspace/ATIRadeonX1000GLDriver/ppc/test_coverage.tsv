@@ -165,7 +165,7 @@
 0x17100	FUN_00017100	84	yes	
 0x17160	FUN_00017160	236	yes	
 0x17260	FUN_00017260	168	yes	
-0x17310	FUN_00017310	1008	no	calls an import (io_connect_method_scalarI_scalarO)
+0x17310	gld_setIntegerEngineParam	1008	no	calls an import (io_connect_method_scalarI_scalarO)
 0x17720	FUN_00017720	36	yes	
 0x17750	gld_fillCapsBlock	748	yes	
 0x17a40	FUN_00017a40	200	yes	

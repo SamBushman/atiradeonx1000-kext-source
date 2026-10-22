@@ -258,10 +258,10 @@ ffc4	ffd0	padding	FUN_0000f620	3
 171fc	17200	padding	FUN_00017160	1	
 17254	17260	padding	FUN_00017160	3	
 17308	17310	padding	FUN_00017260	2	
-1734c	17350	padding	FUN_00017310	1	
-17368	17370	padding	FUN_00017310	2	
-17674	17680	padding	FUN_00017310	3	
-17718	17720	padding	FUN_00017310	2	
+1734c	17350	padding	gld_setIntegerEngineParam	1	
+17368	17370	padding	gld_setIntegerEngineParam	2	
+17674	17680	padding	gld_setIntegerEngineParam	3	
+17718	17720	padding	gld_setIntegerEngineParam	2	
 17744	17750	padding	FUN_00017720	3	
 17a3c	17a40	padding	gld_fillCapsBlock	1	
 17ad4	17ae0	padding	FUN_00017a40	3	

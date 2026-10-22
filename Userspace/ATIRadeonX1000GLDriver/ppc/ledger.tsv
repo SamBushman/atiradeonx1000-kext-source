@@ -164,7 +164,7 @@
 0x17100	84	FUN_00017100	part_002	converted
 0x17160	236	FUN_00017160	part_002	converted
 0x17260	168	FUN_00017260	part_002	converted
-0x17310	1008	FUN_00017310	part_002	converted
+0x17310	1008	gld_setIntegerEngineParam	part_002	converted
 0x17720	36	FUN_00017720	part_002	converted
 0x17750	748	gld_fillCapsBlock	part_002	converted
 0x17a40	200	FUN_00017a40	part_002	converted

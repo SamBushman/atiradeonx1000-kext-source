@@ -8811,8 +8811,8 @@ int FUN_00017260(ctx)
   return FUN_000a7a60(ctx);
 }
 
-/* FUN_00017310 @ 0x17310 (1008 bytes) */
-int FUN_00017310(param_1, param_2, param_3)
+/* gld_setIntegerEngineParam @ 0x17310 (1008 bytes) */
+int gld_setIntegerEngineParam(param_1, param_2, param_3)
   int param_1;
   uint param_2;
   undefined4 *param_3;

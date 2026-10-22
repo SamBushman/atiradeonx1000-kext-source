@@ -2616,7 +2616,7 @@ joined_r0x000058fc:
         }
       }
 LAB_00005690:
-      connectionOrError = FUN_00017310(ctx,pname,values);
+      connectionOrError = gld_setIntegerEngineParam(ctx,pname,values);
       return connectionOrError;
     }
     if (pname == 0x29a) {

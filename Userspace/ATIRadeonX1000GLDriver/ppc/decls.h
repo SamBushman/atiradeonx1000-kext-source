@@ -371,7 +371,7 @@ extern int gld_bufferEnumToIndex();
 extern int FUN_00017100();
 extern int FUN_00017160();
 extern int FUN_00017260();
-extern int FUN_00017310();
+extern int gld_setIntegerEngineParam();
 extern int FUN_00017720();
 extern int gld_fillCapsBlock();
 extern int FUN_00017a40();

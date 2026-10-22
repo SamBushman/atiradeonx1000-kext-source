@@ -13934,7 +13934,7 @@ const unsigned int sectTEXT___eh_frame[25852] = {
     0x00000000, /* +0xd9ac */
     0x00000014, /* +0xd9b0 */
     0x00000658, /* +0xd9b4 */
-    0x00017310, /* -> FUN_00017310 */ /* +0xd9b8 */
+    0x00017310, /* -> gld_setIntegerEngineParam */ /* +0xd9b8 */
     0x00000034, /* +0xd9bc */
     0x04000000, /* +0xd9c0 */
     0x00000000, /* +0xd9c4 */
