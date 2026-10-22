@@ -1681,6 +1681,7 @@ int _InterpreterNoiseGeneratorCalculate1D(param_1, param_2, param_3)
   float *param_2;
   float *param_3;
 {
+  uint loopIndex;
   double exp2Result;
   float fVar1;
   double dVar2;
@@ -1691,12 +1692,12 @@ int _InterpreterNoiseGeneratorCalculate1D(param_1, param_2, param_3)
   uint uStack_4c;
   
   dVar2 = DOUBLE_97c30a68;
-  uStack_4c = 0;
+  loopIndex = 0;
   fVar1 = TAllocation__guardBlockSize;
   do {
-    uVar3 = uStack_4c + 1;
+    uVar3 = loopIndex + 1;
     local_60[4] = 176.0;
-    exp2Result = _exp2((double)(float)((double)CONCAT44(0x43300000,uStack_4c) - dVar2));
+    exp2Result = _exp2((double)(float)((double)CONCAT44(0x43300000,loopIndex) - dVar2));
     local_60[4] = 176.0;
     uStack_4c = uVar3;
     powResult = _pow(DOUBLE_97c30a88,(double)CONCAT44(0x43300000,uVar3) - dVar2);
@@ -1706,7 +1707,7 @@ int _InterpreterNoiseGeneratorCalculate1D(param_1, param_2, param_3)
     local_60[3] = 0.0;
     dVar4 = (double)((double (*)())_InterpreterNoiseGeneratorInterpolatedNoise1D)(param_1,local_60);
     fVar1 = (float)(dVar4 * (double)(float)powResult + (double)fVar1);
-    uStack_4c = uVar3;
+    loopIndex = uVar3;
   } while (uVar3 < 8);
   param_3[3] = fVar1;
   *param_3 = fVar1;
@@ -1721,6 +1722,7 @@ int _InterpreterNoiseGeneratorCalculate2D(param_1, param_2, param_3)
   float *param_2;
   float *param_3;
 {
+  uint loopIndex;
   double exp2Result;
   float fVar1;
   double dVar2;
@@ -1735,12 +1737,12 @@ int _InterpreterNoiseGeneratorCalculate2D(param_1, param_2, param_3)
   uint uStack_4c;
   
   dVar2 = DOUBLE_97c30a68;
-  uStack_4c = 0;
+  loopIndex = 0;
   fVar1 = TAllocation__guardBlockSize;
   do {
-    uVar3 = uStack_4c + 1;
+    uVar3 = loopIndex + 1;
     local_50 = 0x43300000;
-    exp2Result = _exp2((double)(float)((double)CONCAT44(0x43300000,uStack_4c) - dVar2));
+    exp2Result = _exp2((double)(float)((double)CONCAT44(0x43300000,loopIndex) - dVar2));
     local_50 = 0x43300000;
     uStack_4c = uVar3;
     powResult = _pow(DOUBLE_97c30a88,(double)CONCAT44(0x43300000,uVar3) - dVar2);
@@ -1750,7 +1752,7 @@ int _InterpreterNoiseGeneratorCalculate2D(param_1, param_2, param_3)
     local_54 = 0;
     dVar4 = (double)((double (*)())_InterpreterNoiseGeneratorInterpolatedNoise2D)(param_1,&local_60);
     fVar1 = (float)(dVar4 * (double)(float)powResult + (double)fVar1);
-    uStack_4c = uVar3;
+    loopIndex = uVar3;
   } while (uVar3 < 8);
   param_3[3] = fVar1;
   *param_3 = fVar1;
@@ -1765,6 +1767,7 @@ int _InterpreterNoiseGeneratorCalculate3D(param_1, param_2, param_3)
   float *param_2;
   float *param_3;
 {
+  uint loopIndex;
   double powResult;
   float fVar1;
   float fVar2;
@@ -1780,12 +1783,12 @@ int _InterpreterNoiseGeneratorCalculate3D(param_1, param_2, param_3)
   uint uStack_4c;
   
   dVar3 = DOUBLE_97c30a68;
-  uStack_4c = 0;
+  loopIndex = 0;
   fVar1 = TAllocation__guardBlockSize;
   do {
-    uVar4 = uStack_4c + 1;
+    uVar4 = loopIndex + 1;
     local_50 = 0x43300000;
-    exp2Result = _exp2((double)(float)((double)CONCAT44(0x43300000,uStack_4c) - dVar3));
+    exp2Result = _exp2((double)(float)((double)CONCAT44(0x43300000,loopIndex) - dVar3));
     local_50 = 0x43300000;
     fVar2 = (float)exp2Result;
     uStack_4c = uVar4;
@@ -1796,7 +1799,7 @@ int _InterpreterNoiseGeneratorCalculate3D(param_1, param_2, param_3)
     local_54 = 0;
     dVar6 = (double)((double (*)())_InterpreterNoiseGeneratorInterpolatedNoise3D)(param_1,&local_60);
     fVar1 = (float)(dVar6 * (double)(float)powResult + (double)fVar1);
-    uStack_4c = uVar4;
+    loopIndex = uVar4;
   } while (uVar4 < 8);
   param_3[3] = fVar1;
   *param_3 = fVar1;
@@ -3290,6 +3293,7 @@ int _PPCRuntimeCompilerBackupRegister(compiler, regIndex)
   int *compiler;
   uint regIndex;
 {
+  uint loopIndex3;
   uint *vectorInstWord2;
   undefined4 *vectorInstWord;
   uint registerLimit;
@@ -3299,7 +3303,6 @@ int _PPCRuntimeCompilerBackupRegister(compiler, regIndex)
   int componentsRemaining;
   uint targetReg;
   uint bankFirstReg;
-  uint candidateReg;
   int variableInfo;
   int componentUsed;
   int vectorRecordOffset;
@@ -3323,7 +3326,7 @@ int _PPCRuntimeCompilerBackupRegister(compiler, regIndex)
   uint vectorInstWord3;
   int iVar15;
   int bestAge;
-  uint loopIndex3;
+  uint candidateReg;
   int iVar18;
   uint vectorRegIndex;
   uint uVar20;

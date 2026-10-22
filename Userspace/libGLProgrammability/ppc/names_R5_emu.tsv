@@ -948,3 +948,59 @@ use	_InterpreterEmulateOp	uVar8	textureTarget	INFERRED	inst word 0x44: texture t
 use	_InterpreterEmulateOp	uVar8	textureTarget	INFERRED	inst word 0x44: texture target selector (1D/2D/3D/CUBE/RECT) for the TEX opcodes	^\s*else\ if\ \(uVar8\ <\ 3\)\ \{$	+2
 use	_InterpreterEmulateOp	uVar8	textureTarget	INFERRED	inst word 0x44: texture target selector (1D/2D/3D/CUBE/RECT) for the TEX opcodes	^\s*else\ if\ \(uVar8\ ==\ 3\)\ \{$	+1
 use	_InterpreterEmulateOp	uVar8	textureTarget	INFERRED	inst word 0x44: texture target selector (1D/2D/3D/CUBE/RECT) for the TEX opcodes	^\s*else\ if\ \(uVar8\ ==\ 4\)\ \{$	+1
+
+
+
+
+
+use	_InterpreterNoiseGeneratorCalculate1D	uStack_4c	loopIndex	INFERRED	up-counting loop index	^\s*uStack_4c\ =\ 0;$	+1
+use	_InterpreterNoiseGeneratorCalculate1D	uStack_4c	loopIndex	INFERRED	up-counting loop index	^\s*uVar3\ =\ uStack_4c\ \+\ 1;$	+1
+use	_InterpreterNoiseGeneratorCalculate1D	uStack_4c	loopIndex	INFERRED	up-counting loop index	^\s*dVar4\ =\ _exp2\(\(double\)\(float\)\(\(double\)CONCAT44\(0x43300000,uStack_4c\)\ \-\ dVar2\)\);$	+1
+use	_InterpreterNoiseGeneratorCalculate1D	uStack_4c	loopIndex	INFERRED	up-counting loop index	^\s*uStack_4c\ =\ uVar3;$@2	+1
+use	_InterpreterNoiseGeneratorCalculate2D	uStack_4c	loopIndex	INFERRED	up-counting loop index	^\s*uStack_4c\ =\ 0;$	+1
+use	_InterpreterNoiseGeneratorCalculate2D	uStack_4c	loopIndex	INFERRED	up-counting loop index	^\s*uVar3\ =\ uStack_4c\ \+\ 1;$	+1
+use	_InterpreterNoiseGeneratorCalculate2D	uStack_4c	loopIndex	INFERRED	up-counting loop index	^\s*dVar4\ =\ _exp2\(\(double\)\(float\)\(\(double\)CONCAT44\(0x43300000,uStack_4c\)\ \-\ dVar2\)\);$	+1
+use	_InterpreterNoiseGeneratorCalculate2D	uStack_4c	loopIndex	INFERRED	up-counting loop index	^\s*uStack_4c\ =\ uVar3;$@2	+1
+use	_InterpreterNoiseGeneratorCalculate3D	uStack_4c	loopIndex	INFERRED	up-counting loop index	^\s*uStack_4c\ =\ 0;$	+1
+use	_InterpreterNoiseGeneratorCalculate3D	uStack_4c	loopIndex	INFERRED	up-counting loop index	^\s*uVar4\ =\ uStack_4c\ \+\ 1;$	+1
+use	_InterpreterNoiseGeneratorCalculate3D	uStack_4c	loopIndex	INFERRED	up-counting loop index	^\s*dVar5\ =\ _exp2\(\(double\)\(float\)\(\(double\)CONCAT44\(0x43300000,uStack_4c\)\ \-\ dVar3\)\);$	+1
+use	_InterpreterNoiseGeneratorCalculate3D	uStack_4c	loopIndex	INFERRED	up-counting loop index	^\s*uStack_4c\ =\ uVar4;$@2	+1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
