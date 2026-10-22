@@ -282,8 +282,8 @@ int FUN_000e9cc8(param_1)
 }
 
 /* FUN_000e9d68 @ 0xe9d68 (252 bytes) */
-int FUN_000e9d68(param_1, param_2)
-  undefined4 *param_1;
+int FUN_000e9d68(this, param_2)
+  undefined4 *this;
   int param_2;
 {
   undefined4 uVar1;
@@ -297,41 +297,41 @@ int FUN_000e9d68(param_1, param_2)
   undefined4 uVar5;
   undefined4 uVar6;
   
-  param_1[1] = 0;
-  param_1[2] = 0;
+  this[1] = 0;
+  this[2] = 0;
   uVar1 = *(undefined4 *)(param_2 + 0xc);
-  *param_1 = &PTR_FUN_001e9b08;
-  param_1[3] = uVar1;
-  FUN_001940a8(param_1 + 0x24);
+  *this = &PTR_FUN_001e9b08;
+  this[3] = uVar1;
+  FUN_001940a8(this + 0x24);
   iVar2 = *(int *)(param_2 + 0xa8);
   uVar1 = *(undefined4 *)(param_2 + 0xac);
-  param_1[0x2a] = iVar2;
-  param_1[0x2b] = uVar1;
+  this[0x2a] = iVar2;
+  this[0x2b] = uVar1;
   iVar4 = *(int *)(iVar2 + 0x32c);
-  param_1[0x2c] = iVar4;
+  this[0x2c] = iVar4;
   *(int *)(iVar2 + 0x32c) = iVar4 + 1;
   uVar3 = *(undefined4 *)(param_2 + 0x110);
   uVar1 = *(undefined4 *)(param_2 + 0xc0);
   uVar5 = *(undefined4 *)(param_2 + 0xdc);
   uVar6 = *(undefined4 *)(param_2 + 0x10c);
-  param_1[0x2e] = *(undefined4 *)(param_2 + 0xb8);
-  param_1[0x30] = uVar1;
-  param_1[0x37] = uVar5;
-  param_1[0x3a] = 0x7fffffff;
-  param_1[0x42] = 0;
-  param_1[0x43] = uVar6;
-  param_1[0x44] = uVar3;
-  param_1[0x46] = 0xffffffff;
-  param_1[0x39] = 0x7fffffff;
-  param_1[0x3b] = 0;
-  param_1[0x3c] = 0;
-  param_1[0x3f] = 0;
-  param_1[0x40] = 0;
-  param_1[0x41] = 0;
-  FUN_000e8a08(param_1);
-  FUN_000e8938(param_1);
-  uVar1 = FUN_000e8124(param_1[0x2b],extraout_r4,in_r5,in_r6,in_r7,uVar3,uVar5);
-  param_1[0x2d] = uVar1;
+  this[0x2e] = *(undefined4 *)(param_2 + 0xb8);
+  this[0x30] = uVar1;
+  this[0x37] = uVar5;
+  this[0x3a] = 0x7fffffff;
+  this[0x42] = 0;
+  this[0x43] = uVar6;
+  this[0x44] = uVar3;
+  this[0x46] = 0xffffffff;
+  this[0x39] = 0x7fffffff;
+  this[0x3b] = 0;
+  this[0x3c] = 0;
+  this[0x3f] = 0;
+  this[0x40] = 0;
+  this[0x41] = 0;
+  FUN_000e8a08(this);
+  FUN_000e8938(this);
+  uVar1 = FUN_000e8124(this[0x2b],extraout_r4,in_r5,in_r6,in_r7,uVar3,uVar5);
+  this[0x2d] = uVar1;
   return;
 }
 
@@ -339,19 +339,19 @@ int FUN_000e9d68(param_1, param_2)
 int FUN_000e9e88(param_1)
   int param_1;
 {
-  undefined4 *puVar1;
-  undefined4 uVar2;
+  undefined4 *allocation;
+  undefined4 arena;
   
-  uVar2 = *(undefined4 *)(*(int *)(param_1 + 0xa8) + 0x374);
-  puVar1 = (undefined4 *)FUN_00193e18(uVar2,0x130);
-  *puVar1 = uVar2;
-  ((int (*)())FUN_000e9d68)(puVar1 + 1,param_1);
-  return puVar1 + 1;
+  arena = *(undefined4 *)(*(int *)(param_1 + 0xa8) + 0x374);
+  allocation = (undefined4 *)FUN_00193e18(arena,0x130);
+  *allocation = arena;
+  ((int (*)())FUN_000e9d68)(allocation + 1,param_1);
+  return allocation + 1;
 }
 
 /* FUN_000e9f00 @ 0xe9f00 (252 bytes) */
-int FUN_000e9f00(param_1, param_2)
-  undefined4 *param_1;
+int FUN_000e9f00(this, param_2)
+  undefined4 *this;
   int param_2;
 {
   undefined4 uVar1;
@@ -365,47 +365,47 @@ int FUN_000e9f00(param_1, param_2)
   undefined4 uVar5;
   undefined4 uVar6;
   
-  param_1[1] = 0;
-  param_1[2] = 0;
+  this[1] = 0;
+  this[2] = 0;
   uVar1 = *(undefined4 *)(param_2 + 0xc);
-  *param_1 = &PTR_FUN_001e9b08;
-  param_1[3] = uVar1;
-  FUN_001940a8(param_1 + 0x24);
+  *this = &PTR_FUN_001e9b08;
+  this[3] = uVar1;
+  FUN_001940a8(this + 0x24);
   iVar2 = *(int *)(param_2 + 0xa8);
   uVar1 = *(undefined4 *)(param_2 + 0xac);
-  param_1[0x2a] = iVar2;
-  param_1[0x2b] = uVar1;
+  this[0x2a] = iVar2;
+  this[0x2b] = uVar1;
   iVar4 = *(int *)(iVar2 + 0x32c);
-  param_1[0x2c] = iVar4;
+  this[0x2c] = iVar4;
   *(int *)(iVar2 + 0x32c) = iVar4 + 1;
   uVar3 = *(undefined4 *)(param_2 + 0x110);
   uVar1 = *(undefined4 *)(param_2 + 0xc0);
   uVar5 = *(undefined4 *)(param_2 + 0xdc);
   uVar6 = *(undefined4 *)(param_2 + 0x10c);
-  param_1[0x2e] = *(undefined4 *)(param_2 + 0xb8);
-  param_1[0x30] = uVar1;
-  param_1[0x37] = uVar5;
-  param_1[0x3a] = 0x7fffffff;
-  param_1[0x42] = 0;
-  param_1[0x43] = uVar6;
-  param_1[0x44] = uVar3;
-  param_1[0x46] = 0xffffffff;
-  param_1[0x39] = 0x7fffffff;
-  param_1[0x3b] = 0;
-  param_1[0x3c] = 0;
-  param_1[0x3f] = 0;
-  param_1[0x40] = 0;
-  param_1[0x41] = 0;
-  FUN_000e8a08(param_1);
-  FUN_000e8938(param_1);
-  uVar1 = FUN_000e8124(param_1[0x2b],extraout_r4,in_r5,in_r6,in_r7,uVar3,uVar5);
-  param_1[0x2d] = uVar1;
+  this[0x2e] = *(undefined4 *)(param_2 + 0xb8);
+  this[0x30] = uVar1;
+  this[0x37] = uVar5;
+  this[0x3a] = 0x7fffffff;
+  this[0x42] = 0;
+  this[0x43] = uVar6;
+  this[0x44] = uVar3;
+  this[0x46] = 0xffffffff;
+  this[0x39] = 0x7fffffff;
+  this[0x3b] = 0;
+  this[0x3c] = 0;
+  this[0x3f] = 0;
+  this[0x40] = 0;
+  this[0x41] = 0;
+  FUN_000e8a08(this);
+  FUN_000e8938(this);
+  uVar1 = FUN_000e8124(this[0x2b],extraout_r4,in_r5,in_r6,in_r7,uVar3,uVar5);
+  this[0x2d] = uVar1;
   return;
 }
 
 /* FUN_000ea020 @ 0xea020 (260 bytes) */
-int FUN_000ea020(param_1, param_2)
-  undefined4 *param_1;
+int FUN_000ea020(this, param_2)
+  undefined4 *this;
   int param_2;
 {
   undefined4 *puVar1;
@@ -417,50 +417,50 @@ int FUN_000ea020(param_1, param_2)
   undefined4 in_r8;
   int iVar3;
   
-  param_1[1] = 0;
-  param_1[2] = 0;
-  param_1[3] = 0;
-  *param_1 = &PTR_FUN_001e9b08;
-  FUN_001940a8(param_1 + 0x24);
-  param_1[0x2a] = param_2;
-  param_1[0x2b] = 0;
+  this[1] = 0;
+  this[2] = 0;
+  this[3] = 0;
+  *this = &PTR_FUN_001e9b08;
+  FUN_001940a8(this + 0x24);
+  this[0x2a] = param_2;
+  this[0x2b] = 0;
   iVar3 = *(int *)(param_2 + 0x32c);
-  param_1[0x2c] = iVar3;
+  this[0x2c] = iVar3;
   *(int *)(param_2 + 0x32c) = iVar3 + 1;
-  param_1[0x3a] = 0x7fffffff;
-  param_1[0x46] = 0xffffffff;
-  param_1[0x4a] = 0;
-  param_1[0x2e] = 0;
-  param_1[0x30] = 0xffffffff;
-  param_1[0x37] = 0;
-  param_1[0x39] = 0x7fffffff;
-  param_1[0x3b] = 0;
-  param_1[0x3c] = 0;
-  param_1[0x3f] = 0;
-  param_1[0x40] = 0;
-  param_1[0x41] = 0;
-  param_1[0x42] = 0;
-  param_1[0x43] = 0;
-  param_1[0x44] = 0;
-  param_1[0x45] = 0;
-  FUN_000e8a08(param_1);
-  FUN_000e8938(param_1);
+  this[0x3a] = 0x7fffffff;
+  this[0x46] = 0xffffffff;
+  this[0x4a] = 0;
+  this[0x2e] = 0;
+  this[0x30] = 0xffffffff;
+  this[0x37] = 0;
+  this[0x39] = 0x7fffffff;
+  this[0x3b] = 0;
+  this[0x3c] = 0;
+  this[0x3f] = 0;
+  this[0x40] = 0;
+  this[0x41] = 0;
+  this[0x42] = 0;
+  this[0x43] = 0;
+  this[0x44] = 0;
+  this[0x45] = 0;
+  FUN_000e8a08(this);
+  FUN_000e8938(this);
   iVar3 = 0x20;
-  puVar1 = param_1;
+  puVar1 = this;
   do {
     puVar1[4] = 0;
     puVar1 = puVar1 + 1;
     iVar3 = iVar3 + -1;
   } while (iVar3 != 0);
-  uVar2 = FUN_000e8124(*(undefined4 *)(param_1[0x2a] + 0x6c4),extraout_r4,in_r5,in_r6,in_r7,in_r8,
+  uVar2 = FUN_000e8124(*(undefined4 *)(this[0x2a] + 0x6c4),extraout_r4,in_r5,in_r6,in_r7,in_r8,
                        0x20);
-  param_1[0x2d] = uVar2;
+  this[0x2d] = uVar2;
   return;
 }
 
 /* FUN_000ea148 @ 0xea148 (260 bytes) */
-int FUN_000ea148(param_1, param_2)
-  undefined4 *param_1;
+int FUN_000ea148(this, param_2)
+  undefined4 *this;
   int param_2;
 {
   undefined4 *puVar1;
@@ -472,284 +472,284 @@ int FUN_000ea148(param_1, param_2)
   undefined4 in_r8;
   int iVar3;
   
-  param_1[1] = 0;
-  param_1[2] = 0;
-  param_1[3] = 0;
-  *param_1 = &PTR_FUN_001e9b08;
-  FUN_001940a8(param_1 + 0x24);
-  param_1[0x2a] = param_2;
-  param_1[0x2b] = 0;
+  this[1] = 0;
+  this[2] = 0;
+  this[3] = 0;
+  *this = &PTR_FUN_001e9b08;
+  FUN_001940a8(this + 0x24);
+  this[0x2a] = param_2;
+  this[0x2b] = 0;
   iVar3 = *(int *)(param_2 + 0x32c);
-  param_1[0x2c] = iVar3;
+  this[0x2c] = iVar3;
   *(int *)(param_2 + 0x32c) = iVar3 + 1;
-  param_1[0x3a] = 0x7fffffff;
-  param_1[0x46] = 0xffffffff;
-  param_1[0x4a] = 0;
-  param_1[0x2e] = 0;
-  param_1[0x30] = 0xffffffff;
-  param_1[0x37] = 0;
-  param_1[0x39] = 0x7fffffff;
-  param_1[0x3b] = 0;
-  param_1[0x3c] = 0;
-  param_1[0x3f] = 0;
-  param_1[0x40] = 0;
-  param_1[0x41] = 0;
-  param_1[0x42] = 0;
-  param_1[0x43] = 0;
-  param_1[0x44] = 0;
-  param_1[0x45] = 0;
-  FUN_000e8a08(param_1);
-  FUN_000e8938(param_1);
+  this[0x3a] = 0x7fffffff;
+  this[0x46] = 0xffffffff;
+  this[0x4a] = 0;
+  this[0x2e] = 0;
+  this[0x30] = 0xffffffff;
+  this[0x37] = 0;
+  this[0x39] = 0x7fffffff;
+  this[0x3b] = 0;
+  this[0x3c] = 0;
+  this[0x3f] = 0;
+  this[0x40] = 0;
+  this[0x41] = 0;
+  this[0x42] = 0;
+  this[0x43] = 0;
+  this[0x44] = 0;
+  this[0x45] = 0;
+  FUN_000e8a08(this);
+  FUN_000e8938(this);
   iVar3 = 0x20;
-  puVar1 = param_1;
+  puVar1 = this;
   do {
     puVar1[4] = 0;
     puVar1 = puVar1 + 1;
     iVar3 = iVar3 + -1;
   } while (iVar3 != 0);
-  uVar2 = FUN_000e8124(*(undefined4 *)(param_1[0x2a] + 0x6c4),extraout_r4,in_r5,in_r6,in_r7,in_r8,
+  uVar2 = FUN_000e8124(*(undefined4 *)(this[0x2a] + 0x6c4),extraout_r4,in_r5,in_r6,in_r7,in_r8,
                        0x20);
-  param_1[0x2d] = uVar2;
+  this[0x2d] = uVar2;
   return;
 }
 
 /* FUN_000ea270 @ 0xea270 (260 bytes) */
-int FUN_000ea270(param_1)
-  undefined4 *param_1;
+int FUN_000ea270(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   int iVar2;
   
-  iVar2 = param_1[0x35];
-  *param_1 = &PTR_FUN_001e9b08;
+  iVar2 = this[0x35];
+  *this = &PTR_FUN_001e9b08;
   if (iVar2 != 0) {
     FUN_00193cc0(*(undefined4 *)(iVar2 + 0xc),*(undefined4 *)(iVar2 + 8));
     FUN_00193cc0(*(undefined4 *)(iVar2 + -4),iVar2 + -4);
   }
-  iVar2 = param_1[0x34];
+  iVar2 = this[0x34];
   if (iVar2 != 0) {
     FUN_00193cc0(*(undefined4 *)(iVar2 + 0xc),*(undefined4 *)(iVar2 + 8));
     FUN_00193cc0(*(undefined4 *)(iVar2 + -4),iVar2 + -4);
   }
-  iVar2 = param_1[0x3d];
+  iVar2 = this[0x3d];
   if (iVar2 != 0) {
     FUN_00193cc0(*(undefined4 *)(iVar2 + 0xc),*(undefined4 *)(iVar2 + 8));
     FUN_00193cc0(*(undefined4 *)(iVar2 + -4),iVar2 + -4);
   }
-  iVar2 = param_1[0x3e];
+  iVar2 = this[0x3e];
   if (iVar2 != 0) {
     FUN_00193cc0(*(undefined4 *)(iVar2 + 0xc),*(undefined4 *)(iVar2 + 8));
     FUN_00193cc0(*(undefined4 *)(iVar2 + -4),iVar2 + -4);
   }
-  iVar2 = param_1[0x31];
+  iVar2 = this[0x31];
   if (iVar2 != 0) {
     FUN_00193cc0(*(undefined4 *)(iVar2 + 0xc),*(undefined4 *)(iVar2 + 8));
     FUN_00193cc0(*(undefined4 *)(iVar2 + -4),iVar2 + -4);
   }
-  FUN_00193fb4(param_1 + 0x24);
+  FUN_00193fb4(this + 0x24);
   puVar1 = PTR_DAT_001e8b48 + 8;
-  param_1[0x24] = puVar1;
-  param_1[0x27] = puVar1;
-  *param_1 = puVar1;
+  this[0x24] = puVar1;
+  this[0x27] = puVar1;
+  *this = puVar1;
   return;
 }
 
 /* FUN_000ea3c0 @ 0xea3c0 (136 bytes) */
-int FUN_000ea3c0(param_1, param_2)
-  undefined4 *param_1;
-  int param_2;
+int FUN_000ea3c0(this, compiler)
+  undefined4 *this;
+  int compiler;
 {
-  undefined4 *puVar1;
-  undefined4 uVar2;
+  undefined4 *allocation;
+  undefined4 arena;
   
-  ((int (*)())FUN_000ea148)(param_1,param_2);
-  *param_1 = PTR_DAT_001e8b58 + 8;
-  uVar2 = *(undefined4 *)(param_2 + 0x374);
-  puVar1 = (undefined4 *)FUN_00193e18(uVar2,0x14);
-  puVar1[1] = 2;
-  *puVar1 = uVar2;
-  puVar1[2] = 0;
-  puVar1[4] = uVar2;
-  uVar2 = FUN_00193e18(uVar2,8);
-  puVar1[3] = uVar2;
-  param_1[0x4b] = puVar1 + 1;
+  ((int (*)())FUN_000ea148)(this,compiler);
+  *this = PTR_DAT_001e8b58 + 8;
+  arena = *(undefined4 *)(compiler + 0x374);
+  allocation = (undefined4 *)FUN_00193e18(arena,0x14);
+  allocation[1] = 2;
+  *allocation = arena;
+  allocation[2] = 0;
+  allocation[4] = arena;
+  arena = FUN_00193e18(arena,8);
+  allocation[3] = arena;
+  this[0x4b] = allocation + 1;
   return;
 }
 
 /* FUN_000ea478 @ 0xea478 (136 bytes) */
-int FUN_000ea478(param_1, param_2)
-  undefined4 *param_1;
-  int param_2;
+int FUN_000ea478(this, compiler)
+  undefined4 *this;
+  int compiler;
 {
-  undefined4 *puVar1;
-  undefined4 uVar2;
+  undefined4 *allocation;
+  undefined4 arena;
   
-  ((int (*)())FUN_000ea148)(param_1,param_2);
-  *param_1 = PTR_DAT_001e8b58 + 8;
-  uVar2 = *(undefined4 *)(param_2 + 0x374);
-  puVar1 = (undefined4 *)FUN_00193e18(uVar2,0x14);
-  puVar1[1] = 2;
-  *puVar1 = uVar2;
-  puVar1[2] = 0;
-  puVar1[4] = uVar2;
-  uVar2 = FUN_00193e18(uVar2,8);
-  puVar1[3] = uVar2;
-  param_1[0x4b] = puVar1 + 1;
+  ((int (*)())FUN_000ea148)(this,compiler);
+  *this = PTR_DAT_001e8b58 + 8;
+  arena = *(undefined4 *)(compiler + 0x374);
+  allocation = (undefined4 *)FUN_00193e18(arena,0x14);
+  allocation[1] = 2;
+  *allocation = arena;
+  allocation[2] = 0;
+  allocation[4] = arena;
+  arena = FUN_00193e18(arena,8);
+  allocation[3] = arena;
+  this[0x4b] = allocation + 1;
   return;
 }
 
 /* FUN_000ea530 @ 0xea530 (140 bytes) */
-int FUN_000ea530(param_1, param_2)
-  undefined4 *param_1;
-  int param_2;
+int FUN_000ea530(this, compiler)
+  undefined4 *this;
+  int compiler;
 {
-  undefined4 *puVar1;
-  undefined4 uVar2;
+  undefined4 *allocation;
+  undefined4 arena;
   undefined4 *puVar3;
   
-  ((int (*)())FUN_000ea148)(param_1,param_2);
-  *param_1 = &PTR_FUN_001e9cc0;
-  param_1[0x50] = 0;
-  param_1[0x52] = 1;
-  param_1[0x4c] = 0;
-  param_1[0x4d] = 0;
-  param_1[0x4e] = 0;
-  param_1[0x51] = 1;
-  uVar2 = *(undefined4 *)(param_2 + 0x374);
-  puVar1 = (undefined4 *)FUN_00193e18(uVar2,0x130);
-  puVar3 = puVar1 + 1;
-  *puVar1 = uVar2;
-  ((int (*)())FUN_000ea020)(puVar3,param_2);
-  param_1[0x4d] = puVar3;
-  return FUN_000e8e4c(param_1,puVar3);
+  ((int (*)())FUN_000ea148)(this,compiler);
+  *this = &PTR_FUN_001e9cc0;
+  this[0x50] = 0;
+  this[0x52] = 1;
+  this[0x4c] = 0;
+  this[0x4d] = 0;
+  this[0x4e] = 0;
+  this[0x51] = 1;
+  arena = *(undefined4 *)(compiler + 0x374);
+  allocation = (undefined4 *)FUN_00193e18(arena,0x130);
+  puVar3 = allocation + 1;
+  *allocation = arena;
+  ((int (*)())FUN_000ea020)(puVar3,compiler);
+  this[0x4d] = puVar3;
+  return FUN_000e8e4c(this,puVar3);
 }
 
 /* FUN_000ea600 @ 0xea600 (140 bytes) */
-int FUN_000ea600(param_1, param_2)
-  undefined4 *param_1;
-  int param_2;
+int FUN_000ea600(this, compiler)
+  undefined4 *this;
+  int compiler;
 {
-  undefined4 *puVar1;
-  undefined4 uVar2;
+  undefined4 *allocation;
+  undefined4 arena;
   undefined4 *puVar3;
   
-  ((int (*)())FUN_000ea148)(param_1,param_2);
-  *param_1 = &PTR_FUN_001e9cc0;
-  param_1[0x50] = 0;
-  param_1[0x52] = 1;
-  param_1[0x4c] = 0;
-  param_1[0x4d] = 0;
-  param_1[0x4e] = 0;
-  param_1[0x51] = 1;
-  uVar2 = *(undefined4 *)(param_2 + 0x374);
-  puVar1 = (undefined4 *)FUN_00193e18(uVar2,0x130);
-  puVar3 = puVar1 + 1;
-  *puVar1 = uVar2;
-  ((int (*)())FUN_000ea020)(puVar3,param_2);
-  param_1[0x4d] = puVar3;
-  return FUN_000e8e4c(param_1,puVar3);
+  ((int (*)())FUN_000ea148)(this,compiler);
+  *this = &PTR_FUN_001e9cc0;
+  this[0x50] = 0;
+  this[0x52] = 1;
+  this[0x4c] = 0;
+  this[0x4d] = 0;
+  this[0x4e] = 0;
+  this[0x51] = 1;
+  arena = *(undefined4 *)(compiler + 0x374);
+  allocation = (undefined4 *)FUN_00193e18(arena,0x130);
+  puVar3 = allocation + 1;
+  *allocation = arena;
+  ((int (*)())FUN_000ea020)(puVar3,compiler);
+  this[0x4d] = puVar3;
+  return FUN_000e8e4c(this,puVar3);
 }
 
 /* FUN_000ea6d0 @ 0xea6d0 (268 bytes) */
-int FUN_000ea6d0(param_1, param_2, param_3, param_4, param_5)
-  undefined4 *param_1;
+int FUN_000ea6d0(this, param_2, param_3, param_4, compiler)
+  undefined4 *this;
   undefined4 param_2;
   undefined4 param_3;
   int param_4;
-  int param_5;
+  int compiler;
 {
-  undefined4 *puVar1;
-  undefined4 uVar2;
+  undefined4 *allocation;
+  undefined4 arena;
   
-  ((int (*)())FUN_000ea148)(param_1,param_5);
-  param_1[0x4c] = param_2;
-  *param_1 = &PTR_FUN_001e9cc0;
-  param_1[0x50] = param_3;
-  param_1[0x52] = 1;
-  param_1[0x55] = 0;
-  param_1[0x4d] = param_4;
-  param_1[0x4e] = 0;
-  param_1[0x51] = 1;
-  param_1[0x54] = 0;
+  ((int (*)())FUN_000ea148)(this,compiler);
+  this[0x4c] = param_2;
+  *this = &PTR_FUN_001e9cc0;
+  this[0x50] = param_3;
+  this[0x52] = 1;
+  this[0x55] = 0;
+  this[0x4d] = param_4;
+  this[0x4e] = 0;
+  this[0x51] = 1;
+  this[0x54] = 0;
   if (param_4 == 0) {
-    uVar2 = *(undefined4 *)(param_5 + 0x374);
-    puVar1 = (undefined4 *)FUN_00193e18(uVar2,0x130);
-    *puVar1 = uVar2;
-    ((int (*)())FUN_000ea020)(puVar1 + 1,param_5);
-    param_1[0x4d] = puVar1 + 1;
+    arena = *(undefined4 *)(compiler + 0x374);
+    allocation = (undefined4 *)FUN_00193e18(arena,0x130);
+    *allocation = arena;
+    ((int (*)())FUN_000ea020)(allocation + 1,compiler);
+    this[0x4d] = allocation + 1;
   }
-  FUN_000e8e4c(param_1,param_1[0x4d]);
-  FUN_000e7688(param_1,param_1[0x4c]);
-  uVar2 = *(undefined4 *)(param_5 + 0x374);
-  puVar1 = (undefined4 *)FUN_00193e18(uVar2,0x134);
-  *puVar1 = uVar2;
-  ((int (*)())FUN_000ea148)(puVar1 + 1,param_5);
-  puVar1[0x4c] = param_1;
-  puVar1[1] = &PTR_FUN_001e9d70;
-  param_1[0x4f] = puVar1 + 1;
+  FUN_000e8e4c(this,this[0x4d]);
+  FUN_000e7688(this,this[0x4c]);
+  arena = *(undefined4 *)(compiler + 0x374);
+  allocation = (undefined4 *)FUN_00193e18(arena,0x134);
+  *allocation = arena;
+  ((int (*)())FUN_000ea148)(allocation + 1,compiler);
+  allocation[0x4c] = this;
+  allocation[1] = &PTR_FUN_001e9d70;
+  this[0x4f] = allocation + 1;
   return;
 }
 
 /* FUN_000ea828 @ 0xea828 (580 bytes) */
-int FUN_000ea828(param_1, param_2, param_3, param_4, param_5)
-  undefined4 *param_1;
+int FUN_000ea828(this, param_2, param_3, param_4, compiler)
+  undefined4 *this;
   undefined4 param_2;
   undefined4 param_3;
   int param_4;
-  int param_5;
+  int compiler;
 {
-  undefined4 *puVar1;
+  undefined4 *allocation;
   int iVar2;
   int *piVar3;
   int iVar4;
-  undefined4 uVar5;
+  undefined4 arena;
   undefined4 *puVar6;
   
-  ((int (*)())FUN_000ea148)(param_1,param_5);
-  param_1[0x50] = 0;
-  *param_1 = &PTR_FUN_001e9bb8;
-  param_1[0x53] = param_3;
-  param_1[0x4b] = 0;
-  param_1[0x4d] = 0;
-  param_1[0x4e] = 0;
-  param_1[0x4f] = 0;
-  param_1[0x51] = param_4;
-  uVar5 = *(undefined4 *)(param_5 + 0x374);
-  puVar1 = (undefined4 *)FUN_00193e18(uVar5,0x134);
-  *puVar1 = uVar5;
-  ((int (*)())FUN_000ea148)(puVar1 + 1,param_5);
-  puVar1[0x4c] = param_1;
-  puVar1[1] = &PTR_FUN_001e9c10;
-  param_1[0x54] = puVar1 + 1;
-  uVar5 = *(undefined4 *)(param_5 + 0x374);
-  puVar1 = (undefined4 *)FUN_00193e18(uVar5,0x134);
-  puVar6 = puVar1 + 1;
-  *puVar1 = uVar5;
-  ((int (*)())FUN_000ea148)(puVar6,param_5);
-  puVar1[0x4c] = param_1;
+  ((int (*)())FUN_000ea148)(this,compiler);
+  this[0x50] = 0;
+  *this = &PTR_FUN_001e9bb8;
+  this[0x53] = param_3;
+  this[0x4b] = 0;
+  this[0x4d] = 0;
+  this[0x4e] = 0;
+  this[0x4f] = 0;
+  this[0x51] = param_4;
+  arena = *(undefined4 *)(compiler + 0x374);
+  allocation = (undefined4 *)FUN_00193e18(arena,0x134);
+  *allocation = arena;
+  ((int (*)())FUN_000ea148)(allocation + 1,compiler);
+  allocation[0x4c] = this;
+  allocation[1] = &PTR_FUN_001e9c10;
+  this[0x54] = allocation + 1;
+  arena = *(undefined4 *)(compiler + 0x374);
+  allocation = (undefined4 *)FUN_00193e18(arena,0x134);
+  puVar6 = allocation + 1;
+  *allocation = arena;
+  ((int (*)())FUN_000ea148)(puVar6,compiler);
+  allocation[0x4c] = this;
   *puVar6 = &PTR_FUN_001e9c68;
-  param_1[0x55] = puVar6;
-  FUN_000e8e4c(param_1[0x54],param_1);
+  this[0x55] = puVar6;
+  FUN_000e8e4c(this[0x54],this);
   if (param_4 == 0) {
-    uVar5 = FUN_001043f0(0x81,param_5);
-    param_1[0x52] = uVar5;
-    iVar2 = FUN_001054ec(uVar5,0);
+    arena = FUN_001043f0(0x81,compiler);
+    this[0x52] = arena;
+    iVar2 = FUN_001054ec(arena,0);
     *(undefined4 *)(iVar2 + 8) = param_2;
     *(undefined4 *)(iVar2 + 0xc) = 0x27;
-    uVar5 = FUN_00127608(*(undefined4 *)(*(int *)(param_5 + 0x6c4) + 0x3ac),4,param_2,0);
-    FUN_001046c8(param_1[0x52],1,uVar5);
+    arena = FUN_00127608(*(undefined4 *)(*(int *)(compiler + 0x6c4) + 0x3ac),4,param_2,0);
+    FUN_001046c8(this[0x52],1,arena);
   }
   else {
-    uVar5 = *(undefined4 *)(param_5 + 0x374);
-    puVar1 = (undefined4 *)FUN_00193e18(uVar5,0x168);
-    puVar6 = puVar1 + 1;
-    *puVar1 = uVar5;
-    FUN_0010502c(puVar6,0xfd,param_5);
-    param_1[0x52] = puVar6;
+    arena = *(undefined4 *)(compiler + 0x374);
+    allocation = (undefined4 *)FUN_00193e18(arena,0x168);
+    puVar6 = allocation + 1;
+    *allocation = arena;
+    FUN_0010502c(puVar6,0xfd,compiler);
+    this[0x52] = puVar6;
     iVar2 = FUN_001054ec(puVar6,0);
     *(undefined4 *)(iVar2 + 8) = param_2;
     *(undefined4 *)(iVar2 + 0xc) = 0x27;
-    iVar2 = FUN_00127608(*(undefined4 *)(*(int *)(param_5 + 0x6c4) + 0x3ac),4,0,0);
+    iVar2 = FUN_00127608(*(undefined4 *)(*(int *)(compiler + 0x6c4) + 0x3ac),4,0,0);
     piVar3 = *(int **)(iVar2 + 0x18);
     if (*piVar3 == 0) {
       piVar3 = (int *)FUN_0019423c(piVar3,0);
@@ -765,99 +765,99 @@ int FUN_000ea828(param_1, param_2, param_3, param_4, param_5)
     *(undefined4 *)(iVar4 + 0x20) = 0xffffffff;
     *(byte *)(iVar4 + 0x15c) = *(byte *)(iVar4 + 0x15c) | 1;
     *(undefined4 *)(iVar4 + 0x1c) = 3;
-    FUN_001046c8(param_1[0x52],1,iVar2);
-    uVar5 = DAT_001aa7fc;
-    iVar2 = FUN_001054ec(param_1[0x52],1);
-    *(undefined4 *)(iVar2 + 0x10) = uVar5;
+    FUN_001046c8(this[0x52],1,iVar2);
+    arena = DAT_001aa7fc;
+    iVar2 = FUN_001054ec(this[0x52],1);
+    *(undefined4 *)(iVar2 + 0x10) = arena;
   }
-  FUN_000e7688(param_1,param_1[0x52]);
+  FUN_000e7688(this,this[0x52]);
   return;
 }
 
 /* FUN_000eaae8 @ 0xeaae8 (68 bytes) */
-int FUN_000eaae8(param_1, param_2)
-  undefined4 *param_1;
+int FUN_000eaae8(this, param_2)
+  undefined4 *this;
   undefined4 param_2;
 {
-  ((int (*)())FUN_000ea148)(param_1,param_2);
-  *param_1 = &PTR_FUN_001e9ed0;
+  ((int (*)())FUN_000ea148)(this,param_2);
+  *this = &PTR_FUN_001e9ed0;
   return;
 }
 
 /* FUN_000eab2c @ 0xeab2c (68 bytes) */
-int FUN_000eab2c(param_1, param_2)
-  undefined4 *param_1;
+int FUN_000eab2c(this, param_2)
+  undefined4 *this;
   undefined4 param_2;
 {
-  ((int (*)())FUN_000ea148)(param_1,param_2);
-  *param_1 = &PTR_FUN_001e9ed0;
+  ((int (*)())FUN_000ea148)(this,param_2);
+  *this = &PTR_FUN_001e9ed0;
   return;
 }
 
 /* FUN_000eab70 @ 0xeab70 (76 bytes) */
-int FUN_000eab70(param_1, param_2)
-  undefined4 *param_1;
+int FUN_000eab70(this, param_2)
+  undefined4 *this;
   undefined4 param_2;
 {
-  ((int (*)())FUN_000ea148)(param_1,param_2);
-  param_1[0x4b] = param_1[0x32];
-  *param_1 = &PTR_FUN_001e9f28;
+  ((int (*)())FUN_000ea148)(this,param_2);
+  this[0x4b] = this[0x32];
+  *this = &PTR_FUN_001e9f28;
   return;
 }
 
 /* FUN_000eabbc @ 0xeabbc (76 bytes) */
-int FUN_000eabbc(param_1, param_2)
-  undefined4 *param_1;
+int FUN_000eabbc(this, param_2)
+  undefined4 *this;
   undefined4 param_2;
 {
-  ((int (*)())FUN_000ea148)(param_1,param_2);
-  param_1[0x4b] = param_1[0x32];
-  *param_1 = &PTR_FUN_001e9f28;
+  ((int (*)())FUN_000ea148)(this,param_2);
+  this[0x4b] = this[0x32];
+  *this = &PTR_FUN_001e9f28;
   return;
 }
 
 /* FUN_000eac08 @ 0xeac08 (88 bytes) */
-int FUN_000eac08(param_1, param_2)
-  undefined4 *param_1;
+int FUN_000eac08(this, param_2)
+  undefined4 *this;
   int param_2;
 {
   undefined *puVar1;
   undefined4 uVar2;
   
-  ((int (*)())FUN_000e9f00)(param_1,param_2);
+  ((int (*)())FUN_000e9f00)(this,param_2);
   uVar2 = *(undefined4 *)(param_2 + 300);
   puVar1 = PTR_DAT_001e8b54 + 8;
-  param_1[0x4c] = *(undefined4 *)(param_2 + 0x130);
-  *param_1 = puVar1;
-  param_1[0x4b] = uVar2;
+  this[0x4c] = *(undefined4 *)(param_2 + 0x130);
+  *this = puVar1;
+  this[0x4b] = uVar2;
   return;
 }
 
 /* FUN_000eac60 @ 0xeac60 (88 bytes) */
-int FUN_000eac60(param_1, param_2)
-  undefined4 *param_1;
+int FUN_000eac60(this, param_2)
+  undefined4 *this;
   int param_2;
 {
   undefined *puVar1;
   undefined4 uVar2;
   
-  ((int (*)())FUN_000e9f00)(param_1,param_2);
+  ((int (*)())FUN_000e9f00)(this,param_2);
   uVar2 = *(undefined4 *)(param_2 + 300);
   puVar1 = PTR_DAT_001e8b54 + 8;
-  param_1[0x4c] = *(undefined4 *)(param_2 + 0x130);
-  *param_1 = puVar1;
-  param_1[0x4b] = uVar2;
+  this[0x4c] = *(undefined4 *)(param_2 + 0x130);
+  *this = puVar1;
+  this[0x4b] = uVar2;
   return;
 }
 
 /* FUN_000eacb8 @ 0xeacb8 (80 bytes) */
-int FUN_000eacb8(param_1, param_2)
-  undefined4 *param_1;
+int FUN_000eacb8(this, param_2)
+  undefined4 *this;
   undefined4 param_2;
 {
-  ((int (*)())FUN_000e9f00)(param_1,param_2);
-  param_1[3] = param_1[3] | 0x20;
-  *param_1 = &PTR_FUN_001e9c68;
+  ((int (*)())FUN_000e9f00)(this,param_2);
+  this[3] = this[3] | 0x20;
+  *this = &PTR_FUN_001e9c68;
   return;
 }
 
@@ -865,35 +865,35 @@ int FUN_000eacb8(param_1, param_2)
 int FUN_000ead08(param_1)
   int param_1;
 {
-  undefined4 *puVar1;
-  undefined4 uVar2;
+  undefined4 *allocation;
+  undefined4 arena;
   
-  uVar2 = *(undefined4 *)(*(int *)(param_1 + 0xa8) + 0x374);
-  puVar1 = (undefined4 *)FUN_00193e18(uVar2,0x134);
-  *puVar1 = uVar2;
-  ((int (*)())FUN_000eacb8)(puVar1 + 1,param_1);
-  return puVar1 + 1;
+  arena = *(undefined4 *)(*(int *)(param_1 + 0xa8) + 0x374);
+  allocation = (undefined4 *)FUN_00193e18(arena,0x134);
+  *allocation = arena;
+  ((int (*)())FUN_000eacb8)(allocation + 1,param_1);
+  return allocation + 1;
 }
 
 /* FUN_000ead80 @ 0xead80 (80 bytes) */
-int FUN_000ead80(param_1, param_2)
-  undefined4 *param_1;
+int FUN_000ead80(this, param_2)
+  undefined4 *this;
   undefined4 param_2;
 {
-  ((int (*)())FUN_000e9f00)(param_1,param_2);
-  param_1[3] = param_1[3] | 0x20;
-  *param_1 = &PTR_FUN_001e9c68;
+  ((int (*)())FUN_000e9f00)(this,param_2);
+  this[3] = this[3] | 0x20;
+  *this = &PTR_FUN_001e9c68;
   return;
 }
 
 /* FUN_000eadd0 @ 0xeadd0 (80 bytes) */
-int FUN_000eadd0(param_1, param_2)
-  undefined4 *param_1;
+int FUN_000eadd0(this, param_2)
+  undefined4 *this;
   undefined4 param_2;
 {
-  ((int (*)())FUN_000e9f00)(param_1,param_2);
-  param_1[3] = param_1[3] | 0x20;
-  *param_1 = &PTR_FUN_001e9c10;
+  ((int (*)())FUN_000e9f00)(this,param_2);
+  this[3] = this[3] | 0x20;
+  *this = &PTR_FUN_001e9c10;
   return;
 }
 
@@ -901,30 +901,30 @@ int FUN_000eadd0(param_1, param_2)
 int FUN_000eae20(param_1)
   int param_1;
 {
-  undefined4 *puVar1;
-  undefined4 uVar2;
+  undefined4 *allocation;
+  undefined4 arena;
   
-  uVar2 = *(undefined4 *)(*(int *)(param_1 + 0xa8) + 0x374);
-  puVar1 = (undefined4 *)FUN_00193e18(uVar2,0x134);
-  *puVar1 = uVar2;
-  ((int (*)())FUN_000eadd0)(puVar1 + 1,param_1);
-  return puVar1 + 1;
+  arena = *(undefined4 *)(*(int *)(param_1 + 0xa8) + 0x374);
+  allocation = (undefined4 *)FUN_00193e18(arena,0x134);
+  *allocation = arena;
+  ((int (*)())FUN_000eadd0)(allocation + 1,param_1);
+  return allocation + 1;
 }
 
 /* FUN_000eae98 @ 0xeae98 (80 bytes) */
-int FUN_000eae98(param_1, param_2)
-  undefined4 *param_1;
+int FUN_000eae98(this, param_2)
+  undefined4 *this;
   undefined4 param_2;
 {
-  ((int (*)())FUN_000e9f00)(param_1,param_2);
-  param_1[3] = param_1[3] | 0x20;
-  *param_1 = &PTR_FUN_001e9c10;
+  ((int (*)())FUN_000e9f00)(this,param_2);
+  this[3] = this[3] | 0x20;
+  *this = &PTR_FUN_001e9c10;
   return;
 }
 
 /* FUN_000eaee8 @ 0xeaee8 (132 bytes) */
-int FUN_000eaee8(param_1, param_2)
-  undefined4 *param_1;
+int FUN_000eaee8(this, param_2)
+  undefined4 *this;
   int param_2;
 {
   undefined4 uVar1;
@@ -934,21 +934,21 @@ int FUN_000eaee8(param_1, param_2)
   undefined4 uVar5;
   undefined4 uVar6;
   
-  ((int (*)())FUN_000e9f00)(param_1,param_2);
+  ((int (*)())FUN_000e9f00)(this,param_2);
   uVar1 = *(undefined4 *)(param_2 + 0x144);
   uVar4 = *(undefined4 *)(param_2 + 300);
   uVar6 = *(undefined4 *)(param_2 + 0x134);
   uVar5 = *(undefined4 *)(param_2 + 0x138);
   uVar3 = *(undefined4 *)(param_2 + 0x13c);
   uVar2 = *(undefined4 *)(param_2 + 0x140);
-  param_1[3] = param_1[3] | 0x20;
-  *param_1 = &PTR_FUN_001e9bb8;
-  param_1[0x4b] = uVar4;
-  param_1[0x4d] = uVar6;
-  param_1[0x4e] = uVar5;
-  param_1[0x4f] = uVar3;
-  param_1[0x50] = uVar2;
-  param_1[0x51] = uVar1;
+  this[3] = this[3] | 0x20;
+  *this = &PTR_FUN_001e9bb8;
+  this[0x4b] = uVar4;
+  this[0x4d] = uVar6;
+  this[0x4e] = uVar5;
+  this[0x4f] = uVar3;
+  this[0x50] = uVar2;
+  this[0x51] = uVar1;
   return;
 }
 
@@ -956,19 +956,19 @@ int FUN_000eaee8(param_1, param_2)
 int FUN_000eaf6c(param_1)
   int param_1;
 {
-  undefined4 *puVar1;
-  undefined4 uVar2;
+  undefined4 *allocation;
+  undefined4 arena;
   
-  uVar2 = *(undefined4 *)(*(int *)(param_1 + 0xa8) + 0x374);
-  puVar1 = (undefined4 *)FUN_00193e18(uVar2,0x15c);
-  *puVar1 = uVar2;
-  ((int (*)())FUN_000eaee8)(puVar1 + 1,param_1);
-  return puVar1 + 1;
+  arena = *(undefined4 *)(*(int *)(param_1 + 0xa8) + 0x374);
+  allocation = (undefined4 *)FUN_00193e18(arena,0x15c);
+  *allocation = arena;
+  ((int (*)())FUN_000eaee8)(allocation + 1,param_1);
+  return allocation + 1;
 }
 
 /* FUN_000eafe4 @ 0xeafe4 (132 bytes) */
-int FUN_000eafe4(param_1, param_2)
-  undefined4 *param_1;
+int FUN_000eafe4(this, param_2)
+  undefined4 *this;
   int param_2;
 {
   undefined4 uVar1;
@@ -978,31 +978,31 @@ int FUN_000eafe4(param_1, param_2)
   undefined4 uVar5;
   undefined4 uVar6;
   
-  ((int (*)())FUN_000e9f00)(param_1,param_2);
+  ((int (*)())FUN_000e9f00)(this,param_2);
   uVar1 = *(undefined4 *)(param_2 + 0x144);
   uVar4 = *(undefined4 *)(param_2 + 300);
   uVar6 = *(undefined4 *)(param_2 + 0x134);
   uVar5 = *(undefined4 *)(param_2 + 0x138);
   uVar3 = *(undefined4 *)(param_2 + 0x13c);
   uVar2 = *(undefined4 *)(param_2 + 0x140);
-  param_1[3] = param_1[3] | 0x20;
-  *param_1 = &PTR_FUN_001e9bb8;
-  param_1[0x4b] = uVar4;
-  param_1[0x4d] = uVar6;
-  param_1[0x4e] = uVar5;
-  param_1[0x4f] = uVar3;
-  param_1[0x50] = uVar2;
-  param_1[0x51] = uVar1;
+  this[3] = this[3] | 0x20;
+  *this = &PTR_FUN_001e9bb8;
+  this[0x4b] = uVar4;
+  this[0x4d] = uVar6;
+  this[0x4e] = uVar5;
+  this[0x4f] = uVar3;
+  this[0x50] = uVar2;
+  this[0x51] = uVar1;
   return;
 }
 
 /* FUN_000eb068 @ 0xeb068 (68 bytes) */
-int FUN_000eb068(param_1, param_2)
-  undefined4 *param_1;
+int FUN_000eb068(this, param_2)
+  undefined4 *this;
   undefined4 param_2;
 {
-  ((int (*)())FUN_000e9f00)(param_1,param_2);
-  *param_1 = &PTR_FUN_001e9d70;
+  ((int (*)())FUN_000e9f00)(this,param_2);
+  *this = &PTR_FUN_001e9d70;
   return;
 }
 
@@ -1010,43 +1010,43 @@ int FUN_000eb068(param_1, param_2)
 int FUN_000eb0ac(param_1)
   int param_1;
 {
-  undefined4 *puVar1;
-  undefined4 uVar2;
+  undefined4 *allocation;
+  undefined4 arena;
   
-  uVar2 = *(undefined4 *)(*(int *)(param_1 + 0xa8) + 0x374);
-  puVar1 = (undefined4 *)FUN_00193e18(uVar2,0x134);
-  *puVar1 = uVar2;
-  ((int (*)())FUN_000eb068)(puVar1 + 1,param_1);
-  return puVar1 + 1;
+  arena = *(undefined4 *)(*(int *)(param_1 + 0xa8) + 0x374);
+  allocation = (undefined4 *)FUN_00193e18(arena,0x134);
+  *allocation = arena;
+  ((int (*)())FUN_000eb068)(allocation + 1,param_1);
+  return allocation + 1;
 }
 
 /* FUN_000eb124 @ 0xeb124 (68 bytes) */
-int FUN_000eb124(param_1, param_2)
-  undefined4 *param_1;
+int FUN_000eb124(this, param_2)
+  undefined4 *this;
   undefined4 param_2;
 {
-  ((int (*)())FUN_000e9f00)(param_1,param_2);
-  *param_1 = &PTR_FUN_001e9d70;
+  ((int (*)())FUN_000e9f00)(this,param_2);
+  *this = &PTR_FUN_001e9d70;
   return;
 }
 
 /* FUN_000eb168 @ 0xeb168 (104 bytes) */
-int FUN_000eb168(param_1, param_2)
-  undefined4 *param_1;
+int FUN_000eb168(this, param_2)
+  undefined4 *this;
   int param_2;
 {
   undefined4 uVar1;
   undefined4 uVar2;
   
-  ((int (*)())FUN_000e9f00)(param_1,param_2);
+  ((int (*)())FUN_000e9f00)(this,param_2);
   uVar2 = *(undefined4 *)(param_2 + 0x148);
   uVar1 = *(undefined4 *)(param_2 + 0x144);
-  param_1[0x55] = 0;
-  *param_1 = &PTR_FUN_001e9cc0;
-  param_1[0x51] = uVar1;
-  param_1[0x52] = uVar2;
-  param_1[0x53] = 0;
-  param_1[0x54] = 0;
+  this[0x55] = 0;
+  *this = &PTR_FUN_001e9cc0;
+  this[0x51] = uVar1;
+  this[0x52] = uVar2;
+  this[0x53] = 0;
+  this[0x54] = 0;
   return;
 }
 
@@ -1054,44 +1054,44 @@ int FUN_000eb168(param_1, param_2)
 int FUN_000eb1d0(param_1)
   int param_1;
 {
-  undefined4 *puVar1;
-  undefined4 uVar2;
+  undefined4 *allocation;
+  undefined4 arena;
   
-  uVar2 = *(undefined4 *)(*(int *)(param_1 + 0xa8) + 0x374);
-  puVar1 = (undefined4 *)FUN_00193e18(uVar2,0x15c);
-  *puVar1 = uVar2;
-  ((int (*)())FUN_000eb168)(puVar1 + 1,param_1);
-  return puVar1 + 1;
+  arena = *(undefined4 *)(*(int *)(param_1 + 0xa8) + 0x374);
+  allocation = (undefined4 *)FUN_00193e18(arena,0x15c);
+  *allocation = arena;
+  ((int (*)())FUN_000eb168)(allocation + 1,param_1);
+  return allocation + 1;
 }
 
 /* FUN_000eb248 @ 0xeb248 (104 bytes) */
-int FUN_000eb248(param_1, param_2)
-  undefined4 *param_1;
+int FUN_000eb248(this, param_2)
+  undefined4 *this;
   int param_2;
 {
   undefined4 uVar1;
   undefined4 uVar2;
   
-  ((int (*)())FUN_000e9f00)(param_1,param_2);
+  ((int (*)())FUN_000e9f00)(this,param_2);
   uVar2 = *(undefined4 *)(param_2 + 0x148);
   uVar1 = *(undefined4 *)(param_2 + 0x144);
-  param_1[0x55] = 0;
-  *param_1 = &PTR_FUN_001e9cc0;
-  param_1[0x51] = uVar1;
-  param_1[0x52] = uVar2;
-  param_1[0x53] = 0;
-  param_1[0x54] = 0;
+  this[0x55] = 0;
+  *this = &PTR_FUN_001e9cc0;
+  this[0x51] = uVar1;
+  this[0x52] = uVar2;
+  this[0x53] = 0;
+  this[0x54] = 0;
   return;
 }
 
 /* FUN_000eb2b0 @ 0xeb2b0 (80 bytes) */
-int FUN_000eb2b0(param_1, param_2)
-  undefined4 *param_1;
+int FUN_000eb2b0(this, param_2)
+  undefined4 *this;
   int param_2;
 {
-  ((int (*)())FUN_000e9f00)(param_1,param_2);
-  param_1[0x4b] = *(undefined4 *)(param_2 + 300);
-  *param_1 = &PTR_FUN_001e9b60;
+  ((int (*)())FUN_000e9f00)(this,param_2);
+  this[0x4b] = *(undefined4 *)(param_2 + 300);
+  *this = &PTR_FUN_001e9b60;
   return;
 }
 
@@ -1099,87 +1099,87 @@ int FUN_000eb2b0(param_1, param_2)
 int FUN_000eb300(param_1)
   int param_1;
 {
-  undefined4 *puVar1;
-  undefined4 uVar2;
+  undefined4 *allocation;
+  undefined4 arena;
   
-  uVar2 = *(undefined4 *)(*(int *)(param_1 + 0xa8) + 0x374);
-  puVar1 = (undefined4 *)FUN_00193e18(uVar2,0x134);
-  *puVar1 = uVar2;
-  ((int (*)())FUN_000eb2b0)(puVar1 + 1,param_1);
-  return puVar1 + 1;
+  arena = *(undefined4 *)(*(int *)(param_1 + 0xa8) + 0x374);
+  allocation = (undefined4 *)FUN_00193e18(arena,0x134);
+  *allocation = arena;
+  ((int (*)())FUN_000eb2b0)(allocation + 1,param_1);
+  return allocation + 1;
 }
 
 /* FUN_000eb378 @ 0xeb378 (80 bytes) */
-int FUN_000eb378(param_1, param_2)
-  undefined4 *param_1;
+int FUN_000eb378(this, param_2)
+  undefined4 *this;
   int param_2;
 {
-  ((int (*)())FUN_000e9f00)(param_1,param_2);
-  param_1[0x4b] = *(undefined4 *)(param_2 + 300);
-  *param_1 = &PTR_FUN_001e9b60;
+  ((int (*)())FUN_000e9f00)(this,param_2);
+  this[0x4b] = *(undefined4 *)(param_2 + 300);
+  *this = &PTR_FUN_001e9b60;
   return;
 }
 
 /* FUN_000eb3c8 @ 0xeb3c8 (580 bytes) */
-int FUN_000eb3c8(param_1, param_2, param_3, param_4, param_5)
-  undefined4 *param_1;
+int FUN_000eb3c8(this, param_2, param_3, param_4, compiler)
+  undefined4 *this;
   undefined4 param_2;
   undefined4 param_3;
   int param_4;
-  int param_5;
+  int compiler;
 {
-  undefined4 *puVar1;
+  undefined4 *allocation;
   int iVar2;
   int *piVar3;
   int iVar4;
-  undefined4 uVar5;
+  undefined4 arena;
   undefined4 *puVar6;
   
-  ((int (*)())FUN_000ea148)(param_1,param_5);
-  param_1[0x50] = 0;
-  *param_1 = &PTR_FUN_001e9bb8;
-  param_1[0x53] = param_3;
-  param_1[0x4b] = 0;
-  param_1[0x4d] = 0;
-  param_1[0x4e] = 0;
-  param_1[0x4f] = 0;
-  param_1[0x51] = param_4;
-  uVar5 = *(undefined4 *)(param_5 + 0x374);
-  puVar1 = (undefined4 *)FUN_00193e18(uVar5,0x134);
-  *puVar1 = uVar5;
-  ((int (*)())FUN_000ea148)(puVar1 + 1,param_5);
-  puVar1[0x4c] = param_1;
-  puVar1[1] = &PTR_FUN_001e9c10;
-  param_1[0x54] = puVar1 + 1;
-  uVar5 = *(undefined4 *)(param_5 + 0x374);
-  puVar1 = (undefined4 *)FUN_00193e18(uVar5,0x134);
-  puVar6 = puVar1 + 1;
-  *puVar1 = uVar5;
-  ((int (*)())FUN_000ea148)(puVar6,param_5);
-  puVar1[0x4c] = param_1;
+  ((int (*)())FUN_000ea148)(this,compiler);
+  this[0x50] = 0;
+  *this = &PTR_FUN_001e9bb8;
+  this[0x53] = param_3;
+  this[0x4b] = 0;
+  this[0x4d] = 0;
+  this[0x4e] = 0;
+  this[0x4f] = 0;
+  this[0x51] = param_4;
+  arena = *(undefined4 *)(compiler + 0x374);
+  allocation = (undefined4 *)FUN_00193e18(arena,0x134);
+  *allocation = arena;
+  ((int (*)())FUN_000ea148)(allocation + 1,compiler);
+  allocation[0x4c] = this;
+  allocation[1] = &PTR_FUN_001e9c10;
+  this[0x54] = allocation + 1;
+  arena = *(undefined4 *)(compiler + 0x374);
+  allocation = (undefined4 *)FUN_00193e18(arena,0x134);
+  puVar6 = allocation + 1;
+  *allocation = arena;
+  ((int (*)())FUN_000ea148)(puVar6,compiler);
+  allocation[0x4c] = this;
   *puVar6 = &PTR_FUN_001e9c68;
-  param_1[0x55] = puVar6;
-  FUN_000e8e4c(param_1[0x54],param_1);
+  this[0x55] = puVar6;
+  FUN_000e8e4c(this[0x54],this);
   if (param_4 == 0) {
-    uVar5 = FUN_001043f0(0x81,param_5);
-    param_1[0x52] = uVar5;
-    iVar2 = FUN_001054ec(uVar5,0);
+    arena = FUN_001043f0(0x81,compiler);
+    this[0x52] = arena;
+    iVar2 = FUN_001054ec(arena,0);
     *(undefined4 *)(iVar2 + 8) = param_2;
     *(undefined4 *)(iVar2 + 0xc) = 0x27;
-    uVar5 = FUN_00127608(*(undefined4 *)(*(int *)(param_5 + 0x6c4) + 0x3ac),4,param_2,0);
-    FUN_001046c8(param_1[0x52],1,uVar5);
+    arena = FUN_00127608(*(undefined4 *)(*(int *)(compiler + 0x6c4) + 0x3ac),4,param_2,0);
+    FUN_001046c8(this[0x52],1,arena);
   }
   else {
-    uVar5 = *(undefined4 *)(param_5 + 0x374);
-    puVar1 = (undefined4 *)FUN_00193e18(uVar5,0x168);
-    puVar6 = puVar1 + 1;
-    *puVar1 = uVar5;
-    FUN_0010502c(puVar6,0xfd,param_5);
-    param_1[0x52] = puVar6;
+    arena = *(undefined4 *)(compiler + 0x374);
+    allocation = (undefined4 *)FUN_00193e18(arena,0x168);
+    puVar6 = allocation + 1;
+    *allocation = arena;
+    FUN_0010502c(puVar6,0xfd,compiler);
+    this[0x52] = puVar6;
     iVar2 = FUN_001054ec(puVar6,0);
     *(undefined4 *)(iVar2 + 8) = param_2;
     *(undefined4 *)(iVar2 + 0xc) = 0x27;
-    iVar2 = FUN_00127608(*(undefined4 *)(*(int *)(param_5 + 0x6c4) + 0x3ac),4,0,0);
+    iVar2 = FUN_00127608(*(undefined4 *)(*(int *)(compiler + 0x6c4) + 0x3ac),4,0,0);
     piVar3 = *(int **)(iVar2 + 0x18);
     if (*piVar3 == 0) {
       piVar3 = (int *)FUN_0019423c(piVar3,0);
@@ -1195,72 +1195,72 @@ int FUN_000eb3c8(param_1, param_2, param_3, param_4, param_5)
     *(undefined4 *)(iVar4 + 0x20) = 0xffffffff;
     *(byte *)(iVar4 + 0x15c) = *(byte *)(iVar4 + 0x15c) | 1;
     *(undefined4 *)(iVar4 + 0x1c) = 3;
-    FUN_001046c8(param_1[0x52],1,iVar2);
-    uVar5 = DAT_001aa7fc;
-    iVar2 = FUN_001054ec(param_1[0x52],1);
-    *(undefined4 *)(iVar2 + 0x10) = uVar5;
+    FUN_001046c8(this[0x52],1,iVar2);
+    arena = DAT_001aa7fc;
+    iVar2 = FUN_001054ec(this[0x52],1);
+    *(undefined4 *)(iVar2 + 0x10) = arena;
   }
-  FUN_000e7688(param_1,param_1[0x52]);
+  FUN_000e7688(this,this[0x52]);
   return;
 }
 
 /* FUN_000eb688 @ 0xeb688 (268 bytes) */
-int FUN_000eb688(param_1, param_2, param_3, param_4, param_5)
-  undefined4 *param_1;
+int FUN_000eb688(this, param_2, param_3, param_4, compiler)
+  undefined4 *this;
   undefined4 param_2;
   undefined4 param_3;
   int param_4;
-  int param_5;
+  int compiler;
 {
-  undefined4 *puVar1;
-  undefined4 uVar2;
+  undefined4 *allocation;
+  undefined4 arena;
   
-  ((int (*)())FUN_000ea148)(param_1,param_5);
-  param_1[0x4c] = param_2;
-  *param_1 = &PTR_FUN_001e9cc0;
-  param_1[0x50] = param_3;
-  param_1[0x52] = 1;
-  param_1[0x55] = 0;
-  param_1[0x4d] = param_4;
-  param_1[0x4e] = 0;
-  param_1[0x51] = 1;
-  param_1[0x54] = 0;
+  ((int (*)())FUN_000ea148)(this,compiler);
+  this[0x4c] = param_2;
+  *this = &PTR_FUN_001e9cc0;
+  this[0x50] = param_3;
+  this[0x52] = 1;
+  this[0x55] = 0;
+  this[0x4d] = param_4;
+  this[0x4e] = 0;
+  this[0x51] = 1;
+  this[0x54] = 0;
   if (param_4 == 0) {
-    uVar2 = *(undefined4 *)(param_5 + 0x374);
-    puVar1 = (undefined4 *)FUN_00193e18(uVar2,0x130);
-    *puVar1 = uVar2;
-    ((int (*)())FUN_000ea020)(puVar1 + 1,param_5);
-    param_1[0x4d] = puVar1 + 1;
+    arena = *(undefined4 *)(compiler + 0x374);
+    allocation = (undefined4 *)FUN_00193e18(arena,0x130);
+    *allocation = arena;
+    ((int (*)())FUN_000ea020)(allocation + 1,compiler);
+    this[0x4d] = allocation + 1;
   }
-  FUN_000e8e4c(param_1,param_1[0x4d]);
-  FUN_000e7688(param_1,param_1[0x4c]);
-  uVar2 = *(undefined4 *)(param_5 + 0x374);
-  puVar1 = (undefined4 *)FUN_00193e18(uVar2,0x134);
-  *puVar1 = uVar2;
-  ((int (*)())FUN_000ea148)(puVar1 + 1,param_5);
-  puVar1[0x4c] = param_1;
-  puVar1[1] = &PTR_FUN_001e9d70;
-  param_1[0x4f] = puVar1 + 1;
+  FUN_000e8e4c(this,this[0x4d]);
+  FUN_000e7688(this,this[0x4c]);
+  arena = *(undefined4 *)(compiler + 0x374);
+  allocation = (undefined4 *)FUN_00193e18(arena,0x134);
+  *allocation = arena;
+  ((int (*)())FUN_000ea148)(allocation + 1,compiler);
+  allocation[0x4c] = this;
+  allocation[1] = &PTR_FUN_001e9d70;
+  this[0x4f] = allocation + 1;
   return;
 }
 
 /* FUN_000eb7e0 @ 0xeb7e0 (68 bytes) */
-int FUN_000eb7e0(param_1, param_2)
-  undefined4 *param_1;
+int FUN_000eb7e0(this, param_2)
+  undefined4 *this;
   undefined4 param_2;
 {
-  ((int (*)())FUN_000eb124)(param_1,param_2);
-  *param_1 = &PTR_FUN_001e9dc8;
+  ((int (*)())FUN_000eb124)(this,param_2);
+  *this = &PTR_FUN_001e9dc8;
   return;
 }
 
 /* FUN_000eb824 @ 0xeb824 (68 bytes) */
-int FUN_000eb824(param_1, param_2)
-  undefined4 *param_1;
+int FUN_000eb824(this, param_2)
+  undefined4 *this;
   undefined4 param_2;
 {
-  ((int (*)())FUN_000eb124)(param_1,param_2);
-  *param_1 = &PTR_FUN_001e9dc8;
+  ((int (*)())FUN_000eb124)(this,param_2);
+  *this = &PTR_FUN_001e9dc8;
   return;
 }
 
@@ -1268,33 +1268,33 @@ int FUN_000eb824(param_1, param_2)
 int FUN_000eb868(param_1)
   int param_1;
 {
-  undefined4 *puVar1;
-  undefined4 uVar2;
+  undefined4 *allocation;
+  undefined4 arena;
   
-  uVar2 = *(undefined4 *)(*(int *)(param_1 + 0xa8) + 0x374);
-  puVar1 = (undefined4 *)FUN_00193e18(uVar2,0x134);
-  *puVar1 = uVar2;
-  ((int (*)())FUN_000eb824)(puVar1 + 1,param_1);
-  return puVar1 + 1;
+  arena = *(undefined4 *)(*(int *)(param_1 + 0xa8) + 0x374);
+  allocation = (undefined4 *)FUN_00193e18(arena,0x134);
+  *allocation = arena;
+  ((int (*)())FUN_000eb824)(allocation + 1,param_1);
+  return allocation + 1;
 }
 
 /* FUN_000eb8e0 @ 0xeb8e0 (68 bytes) */
-int FUN_000eb8e0(param_1, param_2)
-  undefined4 *param_1;
+int FUN_000eb8e0(this, param_2)
+  undefined4 *this;
   undefined4 param_2;
 {
-  ((int (*)())FUN_000eb248)(param_1,param_2);
-  *param_1 = &PTR_FUN_001e9d18;
+  ((int (*)())FUN_000eb248)(this,param_2);
+  *this = &PTR_FUN_001e9d18;
   return;
 }
 
 /* FUN_000eb924 @ 0xeb924 (68 bytes) */
-int FUN_000eb924(param_1, param_2)
-  undefined4 *param_1;
+int FUN_000eb924(this, param_2)
+  undefined4 *this;
   undefined4 param_2;
 {
-  ((int (*)())FUN_000eb248)(param_1,param_2);
-  *param_1 = &PTR_FUN_001e9d18;
+  ((int (*)())FUN_000eb248)(this,param_2);
+  *this = &PTR_FUN_001e9d18;
   return;
 }
 
@@ -1302,152 +1302,152 @@ int FUN_000eb924(param_1, param_2)
 int FUN_000eb968(param_1)
   int param_1;
 {
-  undefined4 *puVar1;
-  undefined4 uVar2;
+  undefined4 *allocation;
+  undefined4 arena;
   
-  uVar2 = *(undefined4 *)(*(int *)(param_1 + 0xa8) + 0x374);
-  puVar1 = (undefined4 *)FUN_00193e18(uVar2,0x15c);
-  *puVar1 = uVar2;
-  ((int (*)())FUN_000eb924)(puVar1 + 1,param_1);
-  return puVar1 + 1;
+  arena = *(undefined4 *)(*(int *)(param_1 + 0xa8) + 0x374);
+  allocation = (undefined4 *)FUN_00193e18(arena,0x15c);
+  *allocation = arena;
+  ((int (*)())FUN_000eb924)(allocation + 1,param_1);
+  return allocation + 1;
 }
 
 /* FUN_000eb9e0 @ 0xeb9e0 (168 bytes) */
-int FUN_000eb9e0(param_1, param_2, param_3, param_4)
-  undefined4 *param_1;
+int FUN_000eb9e0(this, param_2, param_3, compiler)
+  undefined4 *this;
   undefined4 param_2;
   undefined4 param_3;
-  int param_4;
+  int compiler;
 {
-  undefined4 *puVar1;
-  undefined4 uVar2;
+  undefined4 *allocation;
+  undefined4 arena;
   
-  ((int (*)())FUN_000ea600)(param_1,param_4);
-  param_1[0x4c] = param_2;
-  *param_1 = &PTR_FUN_001e9d18;
-  FUN_000e7688(param_1,param_2);
-  param_1[0x50] = param_3;
-  uVar2 = *(undefined4 *)(param_4 + 0x374);
-  puVar1 = (undefined4 *)FUN_00193e18(uVar2,0x134);
-  *puVar1 = uVar2;
-  ((int (*)())FUN_000ea148)(puVar1 + 1,param_4);
-  puVar1[0x4c] = param_1;
-  puVar1[1] = &PTR_FUN_001e9dc8;
-  param_1[0x4f] = puVar1 + 1;
+  ((int (*)())FUN_000ea600)(this,compiler);
+  this[0x4c] = param_2;
+  *this = &PTR_FUN_001e9d18;
+  FUN_000e7688(this,param_2);
+  this[0x50] = param_3;
+  arena = *(undefined4 *)(compiler + 0x374);
+  allocation = (undefined4 *)FUN_00193e18(arena,0x134);
+  *allocation = arena;
+  ((int (*)())FUN_000ea148)(allocation + 1,compiler);
+  allocation[0x4c] = this;
+  allocation[1] = &PTR_FUN_001e9dc8;
+  this[0x4f] = allocation + 1;
   return;
 }
 
 /* FUN_000ebac8 @ 0xebac8 (168 bytes) */
-int FUN_000ebac8(param_1, param_2, param_3, param_4)
-  undefined4 *param_1;
+int FUN_000ebac8(this, param_2, param_3, compiler)
+  undefined4 *this;
   undefined4 param_2;
   undefined4 param_3;
-  int param_4;
+  int compiler;
 {
-  undefined4 *puVar1;
-  undefined4 uVar2;
+  undefined4 *allocation;
+  undefined4 arena;
   
-  ((int (*)())FUN_000ea600)(param_1,param_4);
-  param_1[0x4c] = param_2;
-  *param_1 = &PTR_FUN_001e9d18;
-  FUN_000e7688(param_1,param_2);
-  param_1[0x50] = param_3;
-  uVar2 = *(undefined4 *)(param_4 + 0x374);
-  puVar1 = (undefined4 *)FUN_00193e18(uVar2,0x134);
-  *puVar1 = uVar2;
-  ((int (*)())FUN_000ea148)(puVar1 + 1,param_4);
-  puVar1[0x4c] = param_1;
-  puVar1[1] = &PTR_FUN_001e9dc8;
-  param_1[0x4f] = puVar1 + 1;
+  ((int (*)())FUN_000ea600)(this,compiler);
+  this[0x4c] = param_2;
+  *this = &PTR_FUN_001e9d18;
+  FUN_000e7688(this,param_2);
+  this[0x50] = param_3;
+  arena = *(undefined4 *)(compiler + 0x374);
+  allocation = (undefined4 *)FUN_00193e18(arena,0x134);
+  *allocation = arena;
+  ((int (*)())FUN_000ea148)(allocation + 1,compiler);
+  allocation[0x4c] = this;
+  allocation[1] = &PTR_FUN_001e9dc8;
+  this[0x4f] = allocation + 1;
   return;
 }
 
 /* FUN_000ebbb0 @ 0xebbb0 (260 bytes) */
-int FUN_000ebbb0(param_1)
-  undefined4 *param_1;
+int FUN_000ebbb0(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   int iVar2;
   
-  iVar2 = param_1[0x35];
-  *param_1 = &PTR_FUN_001e9b08;
+  iVar2 = this[0x35];
+  *this = &PTR_FUN_001e9b08;
   if (iVar2 != 0) {
     FUN_00193cc0(*(undefined4 *)(iVar2 + 0xc),*(undefined4 *)(iVar2 + 8));
     FUN_00193cc0(*(undefined4 *)(iVar2 + -4),iVar2 + -4);
   }
-  iVar2 = param_1[0x34];
+  iVar2 = this[0x34];
   if (iVar2 != 0) {
     FUN_00193cc0(*(undefined4 *)(iVar2 + 0xc),*(undefined4 *)(iVar2 + 8));
     FUN_00193cc0(*(undefined4 *)(iVar2 + -4),iVar2 + -4);
   }
-  iVar2 = param_1[0x3d];
+  iVar2 = this[0x3d];
   if (iVar2 != 0) {
     FUN_00193cc0(*(undefined4 *)(iVar2 + 0xc),*(undefined4 *)(iVar2 + 8));
     FUN_00193cc0(*(undefined4 *)(iVar2 + -4),iVar2 + -4);
   }
-  iVar2 = param_1[0x3e];
+  iVar2 = this[0x3e];
   if (iVar2 != 0) {
     FUN_00193cc0(*(undefined4 *)(iVar2 + 0xc),*(undefined4 *)(iVar2 + 8));
     FUN_00193cc0(*(undefined4 *)(iVar2 + -4),iVar2 + -4);
   }
-  iVar2 = param_1[0x31];
+  iVar2 = this[0x31];
   if (iVar2 != 0) {
     FUN_00193cc0(*(undefined4 *)(iVar2 + 0xc),*(undefined4 *)(iVar2 + 8));
     FUN_00193cc0(*(undefined4 *)(iVar2 + -4),iVar2 + -4);
   }
-  FUN_00193fb4(param_1 + 0x24);
+  FUN_00193fb4(this + 0x24);
   puVar1 = PTR_DAT_001e8b48 + 8;
-  param_1[0x24] = puVar1;
-  param_1[0x27] = puVar1;
-  *param_1 = puVar1;
+  this[0x24] = puVar1;
+  this[0x27] = puVar1;
+  *this = puVar1;
   return;
 }
 
 /* FUN_000ebd00 @ 0xebd00 (312 bytes) */
-int FUN_000ebd00(param_1)
-  undefined4 *param_1;
+int FUN_000ebd00(this)
+  undefined4 *this;
 {
   undefined *puVar1;
   undefined4 *puVar2;
   int iVar3;
   
-  iVar3 = param_1[0x35];
-  *param_1 = &PTR_FUN_001e9b08;
+  iVar3 = this[0x35];
+  *this = &PTR_FUN_001e9b08;
   if (iVar3 != 0) {
     FUN_00193cc0(*(undefined4 *)(iVar3 + 0xc),*(undefined4 *)(iVar3 + 8));
     FUN_00193cc0(*(undefined4 *)(iVar3 + -4),iVar3 + -4);
   }
-  iVar3 = param_1[0x34];
+  iVar3 = this[0x34];
   if (iVar3 != 0) {
     FUN_00193cc0(*(undefined4 *)(iVar3 + 0xc),*(undefined4 *)(iVar3 + 8));
     FUN_00193cc0(*(undefined4 *)(iVar3 + -4),iVar3 + -4);
   }
-  iVar3 = param_1[0x3d];
+  iVar3 = this[0x3d];
   if (iVar3 != 0) {
     FUN_00193cc0(*(undefined4 *)(iVar3 + 0xc),*(undefined4 *)(iVar3 + 8));
     FUN_00193cc0(*(undefined4 *)(iVar3 + -4),iVar3 + -4);
   }
-  iVar3 = param_1[0x3e];
+  iVar3 = this[0x3e];
   if (iVar3 != 0) {
     FUN_00193cc0(*(undefined4 *)(iVar3 + 0xc),*(undefined4 *)(iVar3 + 8));
     FUN_00193cc0(*(undefined4 *)(iVar3 + -4),iVar3 + -4);
   }
-  iVar3 = param_1[0x31];
+  iVar3 = this[0x31];
   if (iVar3 != 0) {
     FUN_00193cc0(*(undefined4 *)(iVar3 + 0xc),*(undefined4 *)(iVar3 + 8));
     FUN_00193cc0(*(undefined4 *)(iVar3 + -4),iVar3 + -4);
   }
-  FUN_00193fb4(param_1 + 0x24);
+  FUN_00193fb4(this + 0x24);
   puVar1 = PTR_DAT_001e8b48 + 8;
-  param_1[0x27] = puVar1;
-  *param_1 = puVar1;
-  param_1[0x24] = puVar1;
-  if (param_1 == (undefined4 *)0x0) {
+  this[0x27] = puVar1;
+  *this = puVar1;
+  this[0x24] = puVar1;
+  if (this == (undefined4 *)0x0) {
     return;
   }
-  iVar3 = param_1[-1];
+  iVar3 = this[-1];
   if ((*(int *)(iVar3 + 0x28) != 0) &&
-     (puVar2 = *(undefined4 **)(iVar3 + 0x14), puVar2 == param_1 + -1)) {
+     (puVar2 = *(undefined4 **)(iVar3 + 0x14), puVar2 == this + -1)) {
     _memset(puVar2,0,*(int *)(iVar3 + 8) - (int)puVar2);
     *(undefined4 *)(iVar3 + 8) = *(undefined4 *)(iVar3 + 0x14);
   }
@@ -1455,22 +1455,22 @@ int FUN_000ebd00(param_1)
 }
 
 /* FUN_000ebe70 @ 0xebe70 (68 bytes) */
-int FUN_000ebe70(param_1, param_2)
-  undefined4 *param_1;
+int FUN_000ebe70(this, param_2)
+  undefined4 *this;
   undefined4 param_2;
 {
-  ((int (*)())FUN_000eac60)(param_1,param_2);
-  *param_1 = &PTR_FUN_001e9e20;
+  ((int (*)())FUN_000eac60)(this,param_2);
+  *this = &PTR_FUN_001e9e20;
   return;
 }
 
 /* FUN_000ebeb4 @ 0xebeb4 (68 bytes) */
-int FUN_000ebeb4(param_1, param_2)
-  undefined4 *param_1;
+int FUN_000ebeb4(this, param_2)
+  undefined4 *this;
   undefined4 param_2;
 {
-  ((int (*)())FUN_000eac60)(param_1,param_2);
-  *param_1 = &PTR_FUN_001e9e20;
+  ((int (*)())FUN_000eac60)(this,param_2);
+  *this = &PTR_FUN_001e9e20;
   return;
 }
 
@@ -1478,33 +1478,33 @@ int FUN_000ebeb4(param_1, param_2)
 int FUN_000ebef8(param_1)
   int param_1;
 {
-  undefined4 *puVar1;
-  undefined4 uVar2;
+  undefined4 *allocation;
+  undefined4 arena;
   
-  uVar2 = *(undefined4 *)(*(int *)(param_1 + 0xa8) + 0x374);
-  puVar1 = (undefined4 *)FUN_00193e18(uVar2,0x138);
-  *puVar1 = uVar2;
-  ((int (*)())FUN_000ebeb4)(puVar1 + 1,param_1);
-  return puVar1 + 1;
+  arena = *(undefined4 *)(*(int *)(param_1 + 0xa8) + 0x374);
+  allocation = (undefined4 *)FUN_00193e18(arena,0x138);
+  *allocation = arena;
+  ((int (*)())FUN_000ebeb4)(allocation + 1,param_1);
+  return allocation + 1;
 }
 
 /* FUN_000ebf70 @ 0xebf70 (68 bytes) */
-int FUN_000ebf70(param_1, param_2)
-  undefined4 *param_1;
+int FUN_000ebf70(this, param_2)
+  undefined4 *this;
   undefined4 param_2;
 {
-  ((int (*)())FUN_000eac60)(param_1,param_2);
-  *param_1 = &PTR_FUN_001e9e78;
+  ((int (*)())FUN_000eac60)(this,param_2);
+  *this = &PTR_FUN_001e9e78;
   return;
 }
 
 /* FUN_000ebfb4 @ 0xebfb4 (68 bytes) */
-int FUN_000ebfb4(param_1, param_2)
-  undefined4 *param_1;
+int FUN_000ebfb4(this, param_2)
+  undefined4 *this;
   undefined4 param_2;
 {
-  ((int (*)())FUN_000eac60)(param_1,param_2);
-  *param_1 = &PTR_FUN_001e9e78;
+  ((int (*)())FUN_000eac60)(this,param_2);
+  *this = &PTR_FUN_001e9e78;
   return;
 }
 

@@ -4247,12 +4247,12 @@ int FUN_0014e6e4(param_1, param_2)
   int iVar12;
   uint *puVar13;
   uint uVar14;
-  /* issue #64 (auto): growable-vector header (capacity/count/data-pointer/arena) used with FUN_0019423c - local_48/local_44/local_40/local_3c are its four words by their own hex offsets. FUN_0019423c unconditionally reads all four on every call (even its "no grow needed" path reallocs+copies+frees), so they must be one contiguous buffer; left as four separate locals, an -O0 rebuild does not place them contiguously. Merged into one 0x10-byte buffer (part of the issue #64 live-differential sweep). */
+  /* issue #64 (auto): growable-vector header (capacity/count/data-pointer/arena) used with FUN_0019423c - vecCapacity/vecCount/vecData/vecArena are its four words by their own hex offsets. FUN_0019423c unconditionally reads all four on every call (even its "no grow needed" path reallocs+copies+frees), so they must be one contiguous buffer; left as four separate locals, an -O0 rebuild does not place them contiguously. Merged into one 0x10-byte buffer (part of the issue #64 live-differential sweep). */
   unsigned char local_48_buf [0x10];
-  #define local_48 (*(uint *)(local_48_buf + 0x00))
-  #define local_44 (*(uint *)(local_48_buf + 0x04))
-  #define local_40 (*(int *)(local_48_buf + 0x08))
-  #define local_3c (*(undefined4 *)(local_48_buf + 0x0c))
+  #define vecCapacity (*(uint *)(local_48_buf + 0x00))
+  #define vecCount (*(uint *)(local_48_buf + 0x04))
+  #define vecData (*(int *)(local_48_buf + 0x08))
+  #define vecArena (*(undefined4 *)(local_48_buf + 0x0c))
   
   iVar1 = *(int *)(*(int *)(param_1 + 0x88) + 8);
   if ((iVar1 == 0x12) || (iVar1 == 0x13)) {
@@ -4262,10 +4262,10 @@ int FUN_0014e6e4(param_1, param_2)
     if ((iVar1 == 0) &&
        (((iVar1 = FUN_001049c4(uVar7,param_2,in_r5,in_r6,in_r7,in_r8,in_r9), iVar1 == 0 &&
          (iVar1 = FUN_0010497c(uVar8,param_2), iVar1 == 0)) &&
-        (local_44 = FUN_001049c4(uVar8,param_2,in_r5,in_r6,in_r7,in_r8,in_r9), local_44 == 0)))) {
-      local_3c = *(undefined4 *)(*(int *)(param_2 + 8) + 0x378);
-      local_48 = 2;
-      local_40 = FUN_00193e18(local_3c,8);
+        (vecCount = FUN_001049c4(uVar8,param_2,in_r5,in_r6,in_r7,in_r8,in_r9), vecCount == 0)))) {
+      vecArena = *(undefined4 *)(*(int *)(param_2 + 8) + 0x378);
+      vecCapacity = 2;
+      vecData = FUN_00193e18(vecArena,8);
       iVar9 = *(int *)(*(int *)(param_1 + 0x88) + 8);
       iVar1 = FUN_00105594(param_1,1);
       puVar13 = *(uint **)(iVar1 + 0x10);
@@ -4295,15 +4295,15 @@ int FUN_0014e6e4(param_1, param_2)
               iVar6 = FUN_00105594(param_1,2);
               if (iVar5 != iVar6) goto LAB_0014e874;
 LAB_0014e8bc:
-              uVar3 = local_44;
-              if (local_44 < local_48) {
-                iVar5 = local_44 * 4;
-                _memset(iVar5 + local_40,0,4);
-                local_44 = uVar3 + 1;
-                piVar4 = (int *)(iVar5 + local_40);
+              uVar3 = vecCount;
+              if (vecCount < vecCapacity) {
+                iVar5 = vecCount * 4;
+                _memset(iVar5 + vecData,0,4);
+                vecCount = uVar3 + 1;
+                piVar4 = (int *)(iVar5 + vecData);
               }
               else {
-                piVar4 = (int *)FUN_0019423c(&local_48,local_44);
+                piVar4 = (int *)FUN_0019423c(&vecCapacity,vecCount);
               }
               *piVar4 = iVar12;
             }
@@ -4325,27 +4325,27 @@ LAB_0014e874:
           puVar13 = *(uint **)(iVar1 + 0x10);
         } while( true );
       }
-      while (local_44 != 0) {
-        uVar2 = local_44 - 1;
+      while (vecCount != 0) {
+        uVar2 = vecCount - 1;
         piVar4 = (int *)0x0;
-        if (uVar2 < local_44) {
-          piVar4 = (int *)(uVar2 * 4 + local_40);
+        if (uVar2 < vecCount) {
+          piVar4 = (int *)(uVar2 * 4 + vecData);
         }
         iVar1 = *piVar4;
-        FUN_00194208(&local_48,uVar2);
+        FUN_00194208(&vecCapacity,uVar2);
         if ((*(uint *)(iVar1 + 0x14) & 1) != 0) {
           ((int (*)())FUN_0014e2dc)(param_1,iVar1,param_2);
         }
       }
-      FUN_00193cc0(local_3c,local_40);
+      FUN_00193cc0(vecArena,vecData);
     }
   }
   return;
 }
-#undef local_48
-#undef local_44
-#undef local_40
-#undef local_3c
+#undef vecCapacity
+#undef vecCount
+#undef vecData
+#undef vecArena
 
 /* FUN_0014e9e4 @ 0x14e9e4 (2620 bytes) */
 int FUN_0014e9e4(param_1, param_2, param_3, param_4, param_5)
@@ -8660,12 +8660,12 @@ int FUN_00156d48(param_1, param_2, param_3)
   int local_bc;
   undefined4 local_b8;
   undefined4 local_b4;
-  /* issue #64 (auto): growable-vector header (capacity/count/data-pointer/arena) used with FUN_0019423c - local_b0/local_ac/local_a8/local_a4 are its four words by their own hex offsets. FUN_0019423c unconditionally reads all four on every call (even its "no grow needed" path reallocs+copies+frees), so they must be one contiguous buffer; left as four separate locals, an -O0 rebuild does not place them contiguously. Merged into one 0x10-byte buffer (part of the issue #64 live-differential sweep). */
+  /* issue #64 (auto): growable-vector header (capacity/count/data-pointer/arena) used with FUN_0019423c - vecCapacity/vecCount/vecData/vecArena are its four words by their own hex offsets. FUN_0019423c unconditionally reads all four on every call (even its "no grow needed" path reallocs+copies+frees), so they must be one contiguous buffer; left as four separate locals, an -O0 rebuild does not place them contiguously. Merged into one 0x10-byte buffer (part of the issue #64 live-differential sweep). */
   unsigned char local_b0_buf [0x10];
-  #define local_b0 (*(uint *)(local_b0_buf + 0x00))
-  #define local_ac (*(uint *)(local_b0_buf + 0x04))
-  #define local_a8 (*(int *)(local_b0_buf + 0x08))
-  #define local_a4 (*(undefined4 *)(local_b0_buf + 0x0c))
+  #define vecCapacity (*(uint *)(local_b0_buf + 0x00))
+  #define vecCount (*(uint *)(local_b0_buf + 0x04))
+  #define vecData (*(int *)(local_b0_buf + 0x08))
+  #define vecArena (*(undefined4 *)(local_b0_buf + 0x0c))
   int local_98;
   int local_94;
   undefined4 local_90;
@@ -8822,10 +8822,10 @@ int FUN_00156d48(param_1, param_2, param_3)
     } while (piVar9 != local_c0);
     piVar22 = local_c0;
     piVar11[5] = piVar11[5] | 0x100000;
-    local_a4 = *(undefined4 *)(*(int *)(param_2 + 8) + 0x374);
-    local_b0 = 2;
-    local_ac = 0;
-    local_a8 = FUN_00193e18(local_a4,8);
+    vecArena = *(undefined4 *)(*(int *)(param_2 + 8) + 0x374);
+    vecCapacity = 2;
+    vecCount = 0;
+    vecData = FUN_00193e18(vecArena,8);
     *(int *)(param_2 + 0x1c8) = *(int *)(param_2 + 0x1c8) + 1;
     piVar11 = param_1;
     piVar9 = param_1;
@@ -8833,14 +8833,14 @@ int FUN_00156d48(param_1, param_2, param_3)
       iVar8 = 0;
       do {
         iVar7 = piVar22[0x53];
-        if (local_ac < local_b0) {
-          iVar23 = local_ac * 4;
-          local_ac = local_ac + 1;
-          *(undefined4 *)(iVar23 + local_a8) = 0;
-          piVar10 = (int *)(iVar23 + local_a8);
+        if (vecCount < vecCapacity) {
+          iVar23 = vecCount * 4;
+          vecCount = vecCount + 1;
+          *(undefined4 *)(iVar23 + vecData) = 0;
+          piVar10 = (int *)(iVar23 + vecData);
         }
         else {
-          piVar10 = (int *)FUN_0019423c(&local_b0,local_ac);
+          piVar10 = (int *)FUN_0019423c(&vecCapacity,vecCount);
         }
         *piVar10 = iVar7;
         piVar22[0x53] = iVar8;
@@ -8922,15 +8922,15 @@ int FUN_00156d48(param_1, param_2, param_3)
     }
     for (; param_1 != piVar22; piVar22 = (int *)piVar22[2]) {
       uVar2 = piVar22[0x53];
-      if (uVar2 < local_b0) {
-        if (local_ac <= uVar2) {
-          _memset(local_ac * 4 + local_a8,0,(uVar2 - local_ac) * 4 + 4);
-          local_ac = uVar2 + 1;
+      if (uVar2 < vecCapacity) {
+        if (vecCount <= uVar2) {
+          _memset(vecCount * 4 + vecData,0,(uVar2 - vecCount) * 4 + 4);
+          vecCount = uVar2 + 1;
         }
-        piVar11 = (int *)(uVar2 * 4 + local_a8);
+        piVar11 = (int *)(uVar2 * 4 + vecData);
       }
       else {
-        piVar11 = (int *)FUN_0019423c(&local_b0,uVar2);
+        piVar11 = (int *)FUN_0019423c(&vecCapacity,uVar2);
       }
       piVar22[0x53] = *piVar11;
       if ((piVar22[5] & 0x100000U) != 0) {
@@ -9095,14 +9095,14 @@ LAB_001576d0:
       }
       FUN_000e7738(*(undefined4 *)(iVar7 + 0x158),iVar7,param_1);
     }
-    FUN_00193cc0(local_a4,local_a8);
+    FUN_00193cc0(vecArena,vecData);
   }
   return param_1;
 }
-#undef local_b0
-#undef local_ac
-#undef local_a8
-#undef local_a4
+#undef vecCapacity
+#undef vecCount
+#undef vecData
+#undef vecArena
 
 /* FUN_00157b78 @ 0x157b78 (1172 bytes) */
 int FUN_00157b78(param_1, param_2, param_3)

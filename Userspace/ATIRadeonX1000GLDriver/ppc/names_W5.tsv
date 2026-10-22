@@ -1,0 +1,789 @@
+# local	FUNCTION	old	new	tier	evidence
+local	FUN_000e9d68	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000e9e88	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000e9e88	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000e9f00	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000ea020	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000ea148	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000ea270	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000ea3c0	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000ea3c0	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000ea3c0	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000ea478	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000ea478	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000ea478	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000ea530	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000ea530	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000ea530	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000ea600	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000ea600	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000ea600	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000ea6d0	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000ea6d0	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000ea6d0	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000ea828	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000ea828	uVar5	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000ea828	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000eaae8	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000eab2c	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000eab70	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000eabbc	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000eac08	param_1	this	CONFIRMED	constructor: *param_1 = vtable pointer (PTR_DAT + 8)
+local	FUN_000eac60	param_1	this	CONFIRMED	constructor: *param_1 = vtable pointer (PTR_DAT + 8)
+local	FUN_000eacb8	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000ead08	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000ead08	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000ead80	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000eadd0	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000eae20	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000eae20	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000eae98	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000eaee8	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000eaf6c	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000eaf6c	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000eafe4	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000eb068	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000eb0ac	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000eb0ac	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000eb124	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000eb168	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000eb1d0	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000eb1d0	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000eb248	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000eb2b0	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000eb300	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000eb300	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000eb378	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000eb3c8	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000eb3c8	uVar5	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000eb3c8	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000eb688	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000eb688	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000eb688	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000eb7e0	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000eb824	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000eb868	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000eb868	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000eb8e0	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000eb924	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000eb968	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000eb968	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000eb9e0	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000eb9e0	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000eb9e0	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000ebac8	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000ebac8	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000ebac8	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000ebbb0	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000ebd00	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000ebe70	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000ebeb4	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000ebef8	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000ebef8	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000ebf70	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000ebfb4	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000ebff8	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000ebff8	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000ec070	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000ec0c8	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000ec120	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000ec178	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_000ec4f0	uVar3	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000ec4f0	puVar2	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000eced0	uVar4	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000eced0	puVar3	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000ed89c	uVar16	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000ed89c	puVar6	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000edd98	uVar3	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000edd98	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000ee29c	uVar3	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000ee29c	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000ee7a0	uVar7	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000ee7a0	puVar2	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000eec50	uVar9	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000eec50	puVar8	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000eee4c	uVar9	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000eee4c	puVar5	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000ef498	uVar9	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000ef498	puVar4	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000efa4c	uVar10	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000efa4c	puVar3	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000efde4	uVar9	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000efde4	puVar2	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000f019c	uVar12	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000f019c	puVar4	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000f07a8	uVar16	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000f07a8	puVar5	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000f14f8	uVar14	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000f14f8	puVar3	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000f4fdc	uVar1	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000f4fdc	puVar4	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000f6a04	uVar4	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000f6a04	puVar6	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000f816c	iVar6	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000f816c	piVar2	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000f83cc	iVar9	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000f83cc	piVar3	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000f85d0	uVar10	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000f85d0	puVar3	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000f88b4	iVar3	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000f88b4	piVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000f94dc	uVar14	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000f94dc	puVar3	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000f9a58	uVar6	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000f9a58	puVar7	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000fadc4	uVar7	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000fadc4	puVar3	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000fb3d4	uVar8	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000fb3d4	puVar9	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000fd50c	uVar4	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000fd50c	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_000fd5c8	uVar46	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_000fd5c8	puVar13	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0010502c	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_0010502c	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0010502c	puVar3	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_001051b0	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001051b0	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_001051b0	puVar3	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00105334	uVar4	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00105334	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_001062c0	uVar1	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_001062c0	puVar2	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00107250	param_1	this	CONFIRMED	constructor: *param_1 = vtable pointer (PTR_DAT + 8)
+local	FUN_001072d0	param_1	this	CONFIRMED	constructor: *param_1 = vtable pointer (PTR_DAT + 8)
+local	FUN_00107350	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00107350	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_001073dc	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00107420	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00107464	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00107464	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0010776c	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0010776c	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_001077e8	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_001077e8	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_001078b0	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_001078b0	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00107a74	param_1	this	CONFIRMED	constructor: *param_1 = vtable pointer (PTR_DAT + 8)
+local	FUN_00107ad0	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00107ad0	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00107b4c	param_1	this	CONFIRMED	constructor: *param_1 = vtable pointer (PTR_DAT + 8)
+local	FUN_00107bf4	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00107bf4	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00107c70	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00107c70	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00107df4	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00107df4	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00107e70	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00107e70	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00107f38	param_1	this	CONFIRMED	constructor: *param_1 = vtable pointer (PTR_DAT + 8)
+local	FUN_00108064	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00108064	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_001081c0	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_001081c0	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0010823c	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0010823c	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00108350	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00108350	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_001083cc	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_001083cc	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_001084b8	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_001084b8	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00108534	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00108534	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_001085b0	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00108918	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00108ad8	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00108ad8	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00108b54	param_1	this	CONFIRMED	constructor: *param_1 = vtable pointer (PTR_DAT + 8)
+local	FUN_00108bec	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00108bec	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00108d10	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00108d5c	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00108da8	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00108df4	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00108ee0	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00108ee0	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00109068	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001090b4	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00109100	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_0010914c	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00109198	param_1	this	CONFIRMED	constructor: *param_1 = vtable pointer (PTR_DAT + 8)
+local	FUN_00109270	param_1	this	CONFIRMED	constructor: *param_1 = vtable pointer (PTR_DAT + 8)
+local	FUN_00109480	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00109480	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00109614	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001096bc	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00109810	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00109810	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00109938	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001099dc	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00109b74	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00109b74	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00109d50	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00109d50	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00109dcc	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00109e28	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00109e84	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00109e84	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00109f00	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00109f50	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00109fa0	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00109fa0	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0010a01c	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_0010a070	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_0010a0c4	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0010a0c4	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0010a140	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_0010a1c0	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_0010a240	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0010a240	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0010a2bc	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_0010a398	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_0010a5a4	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0010a5a4	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0010a620	param_1	this	CONFIRMED	constructor: *param_1 = vtable pointer (PTR_DAT + 8)
+local	FUN_0010a6bc	param_1	this	CONFIRMED	constructor: *param_1 = vtable pointer (PTR_DAT + 8)
+local	FUN_0010a758	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0010a758	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0010a974	param_1	this	CONFIRMED	constructor: *param_1 = vtable pointer (PTR_DAT + 8)
+local	FUN_0010a9cc	param_1	this	CONFIRMED	constructor: *param_1 = vtable pointer (PTR_DAT + 8)
+local	FUN_0010aa24	param_1	this	CONFIRMED	constructor: *param_1 = vtable pointer (PTR_DAT + 8)
+local	FUN_0010aa7c	param_1	this	CONFIRMED	constructor: *param_1 = vtable pointer (PTR_DAT + 8)
+local	FUN_0010ad68	uVar3	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0010ad68	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0010af38	uVar6	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0010af38	puVar3	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0010bd50	uVar4	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0010bd50	puVar2	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0010dad8	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_0010db58	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_0010e050	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_0010e114	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_0010e1d8	param_1	this	CONFIRMED	constructor: *param_1 = vtable pointer (PTR_DAT + 8)
+local	FUN_0010e2a0	param_1	this	CONFIRMED	constructor: *param_1 = vtable pointer (PTR_DAT + 8)
+local	FUN_0010f704	uVar9	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0010f704	puVar3	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00110020	uVar12	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00110020	puVar3	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_001102e0	uVar25	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_001102e0	puVar6	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_001121b4	iVar26	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_001121b4	piVar4	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0011eaa0	uVar16	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0011eaa0	puVar4	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00120cd4	uVar13	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00120cd4	puVar3	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_001214fc	uVar19	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_001214fc	puVar8	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_001230e4	uVar7	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_001230e4	puVar2	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00123288	uVar5	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00123288	puVar2	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0012379c	uVar4	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0012379c	puVar3	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_001238e8	uVar4	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_001238e8	puVar3	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00123a34	uVar6	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00123a34	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00123c08	uVar13	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00123c08	puVar6	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_001240a8	uVar5	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_001240a8	puVar2	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_001241fc	uVar4	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_001241fc	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0012434c	uVar4	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0012434c	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0012447c	uVar4	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0012447c	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_001245a8	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001245a8	uVar4	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_001245a8	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00124724	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00124724	uVar4	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00124724	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_001248a0	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001248ec	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00124938	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_0012499c	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_0012499c	uVar5	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0012499c	puVar2	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00124b24	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00124b24	uVar4	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00124b24	puVar3	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00124c94	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00124c94	uVar4	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00124c94	puVar3	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00124e04	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00124e68	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00124e68	uVar3	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00124e68	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_001250dc	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001250dc	uVar3	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_001250dc	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00125350	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00125350	uVar8	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00125350	puVar3	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_001257b0	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001257b0	uVar8	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_001257b0	puVar3	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00125c10	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00125c8c	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00125d08	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00125d60	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00125db8	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00125db8	uVar5	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00125db8	puVar2	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00126080	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001261a4	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001261e8	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_0012622c	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_0012622c	uVar4	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0012622c	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00126378	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00126378	uVar4	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00126378	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_001264c4	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00126538	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001265ac	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00126620	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00126694	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_001267ec	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_001267ec	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_001268f8	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_001268f8	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00126984	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00126984	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00126a10	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00126a10	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00126a9c	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00126a9c	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00126b28	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00126b28	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00126bb4	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00126bb4	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00126c40	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00126c40	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00126ccc	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00126ccc	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00126d58	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00126d58	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00126de4	uVar3	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00126de4	puVar2	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00126e90	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00126e90	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00126f1c	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00126f1c	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00126fa8	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00126fa8	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00127034	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00127034	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_001270c0	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_001270c0	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0012714c	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0012714c	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_001271d8	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_001271d8	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00127994	uVar4	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00127994	puVar2	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00128fd0	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_00129130	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_0012a00c	uVar8	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0012a00c	puVar6	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0012a578	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_0012a6c0	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_0012a808	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_0012a8bc	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
+local	FUN_0012b6a8	uVar10	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0012b6a8	puVar5	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0012bb48	uVar10	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0012bb48	puVar6	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0012e488	uVar5	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0012e488	puVar3	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0012e56c	uVar13	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0012e56c	puVar3	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0012e8c0	uVar5	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0012e8c0	puVar4	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0012eacc	uVar25	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0012eacc	puVar4	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0012f0f8	uVar26	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0012f0f8	puVar12	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00130ec0	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00130ec0	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00130f64	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00130f64	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_001311cc	uVar3	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_001311cc	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_001312f4	uVar6	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_001312f4	puVar4	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_001315f8	uVar7	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_001315f8	puVar8	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00131a80	uVar5	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00131a80	puVar2	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00131d08	uVar5	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00131d08	puVar7	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_001322a8	uVar18	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_001322a8	puVar6	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0013323c	uVar25	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0013323c	puVar15	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00133fe4	uVar17	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00133fe4	puVar2	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00134658	uVar11	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00134658	puVar6	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00134ef4	uVar3	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00134ef4	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00135110	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00135110	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_001351c4	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_001351c4	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00135fb0	uVar27	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00135fb0	puVar12	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00136ec4	uVar6	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00136ec4	puVar2	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0013719c	uVar6	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0013719c	puVar2	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00137474	uVar10	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00137474	puVar2	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00137694	uVar9	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00137694	puVar2	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00138130	uVar6	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00138130	puVar3	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00138694	uVar19	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00138694	puVar11	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0013b3f0	uVar21	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0013b3f0	puVar5	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0013da3c	uVar19	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0013da3c	puVar9	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0013fc38	uVar34	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0013fc38	puVar7	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00165014	uVar18	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00165014	puVar7	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00165b7c	uVar7	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00165b7c	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00165d3c	uVar11	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00165d3c	puVar3	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00165fa8	uVar10	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00165fa8	puVar6	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00166844	uVar13	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00166844	puVar4	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_001670fc	uVar19	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_001670fc	puVar5	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00168468	uVar18	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00168468	puVar9	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00168d80	uVar22	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00168d80	puVar10	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0016a568	uVar26	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0016a568	puVar15	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0016bd70	uVar18	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0016bd70	puVar6	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0016dd04	uVar14	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0016dd04	puVar5	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0016ff54	uVar32	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_0016ff54	puVar8	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00171714	uVar12	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00171714	puVar5	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00172474	uVar3	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00172474	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_00107350	param_2	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_001072d0
+local	FUN_001072d0	param_3	compiler	INFERRED	receives the compiler pointer forwarded by the allocation wrapper FUN_00107350 (whose +0x374 is the arena)
+local	FUN_00107464	param_2	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_00107420
+local	FUN_00107420	param_3	compiler	INFERRED	receives the compiler pointer forwarded by the allocation wrapper FUN_00107464 (whose +0x374 is the arena)
+local	FUN_0010776c	param_2	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_0010764c
+local	FUN_0010764c	param_3	compiler	INFERRED	receives the compiler pointer forwarded by the allocation wrapper FUN_0010776c (whose +0x374 is the arena)
+local	FUN_001077e8	param_2	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_0010764c
+local	FUN_001078b0	param_2	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_00107864
+local	FUN_00107864	param_3	compiler	INFERRED	receives the compiler pointer forwarded by the allocation wrapper FUN_001078b0 (whose +0x374 is the arena)
+local	FUN_00107ad0	param_2	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_00107a74
+local	FUN_00107a74	param_3	compiler	INFERRED	receives the compiler pointer forwarded by the allocation wrapper FUN_00107ad0 (whose +0x374 is the arena)
+local	FUN_00107bf4	param_2	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_00107ba8
+local	FUN_00107ba8	param_3	compiler	INFERRED	receives the compiler pointer forwarded by the allocation wrapper FUN_00107bf4 (whose +0x374 is the arena)
+local	FUN_00107c70	param_2	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_00107ba8
+local	FUN_00108064	param_2	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_00107fd0
+local	FUN_00107fd0	param_3	compiler	INFERRED	receives the compiler pointer forwarded by the allocation wrapper FUN_00108064 (whose +0x374 is the arena)
+local	FUN_001081c0	param_2	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_00108174
+local	FUN_00108174	param_3	compiler	INFERRED	receives the compiler pointer forwarded by the allocation wrapper FUN_001081c0 (whose +0x374 is the arena)
+local	FUN_0010823c	param_2	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_00108174
+local	FUN_00108350	param_2	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_00108304
+local	FUN_00108304	param_3	compiler	INFERRED	receives the compiler pointer forwarded by the allocation wrapper FUN_00108350 (whose +0x374 is the arena)
+local	FUN_001083cc	param_2	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_00108304
+local	FUN_001084b8	param_2	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_00108448
+local	FUN_00108448	param_3	compiler	INFERRED	receives the compiler pointer forwarded by the allocation wrapper FUN_001084b8 (whose +0x374 is the arena)
+local	FUN_00108534	param_2	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_00108448
+local	FUN_00108ad8	param_2	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_00108a50
+local	FUN_00108a50	param_3	compiler	INFERRED	receives the compiler pointer forwarded by the allocation wrapper FUN_00108ad8 (whose +0x374 is the arena)
+local	FUN_00108bec	param_2	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_00108b54
+local	FUN_00108b54	param_3	compiler	INFERRED	receives the compiler pointer forwarded by the allocation wrapper FUN_00108bec (whose +0x374 is the arena)
+local	FUN_00108ee0	param_2	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_00108e8c
+local	FUN_00108e8c	param_3	compiler	INFERRED	receives the compiler pointer forwarded by the allocation wrapper FUN_00108ee0 (whose +0x374 is the arena)
+local	FUN_00109480	param_2	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_00109428
+local	FUN_00109428	param_3	compiler	INFERRED	receives the compiler pointer forwarded by the allocation wrapper FUN_00109480 (whose +0x374 is the arena)
+local	FUN_00109810	param_2	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_00109764
+local	FUN_00109764	param_3	compiler	INFERRED	receives the compiler pointer forwarded by the allocation wrapper FUN_00109810 (whose +0x374 is the arena)
+local	FUN_00109b74	param_2	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_00109b20
+local	FUN_00109b20	param_3	compiler	INFERRED	receives the compiler pointer forwarded by the allocation wrapper FUN_00109b74 (whose +0x374 is the arena)
+local	FUN_00109d50	param_2	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_00109cfc
+local	FUN_00109cfc	param_3	compiler	INFERRED	receives the compiler pointer forwarded by the allocation wrapper FUN_00109d50 (whose +0x374 is the arena)
+local	FUN_00109e84	param_2	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_00109e28
+local	FUN_00109e28	param_3	compiler	INFERRED	receives the compiler pointer forwarded by the allocation wrapper FUN_00109e84 (whose +0x374 is the arena)
+local	FUN_00109fa0	param_2	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_00109f50
+local	FUN_00109f50	param_3	compiler	INFERRED	receives the compiler pointer forwarded by the allocation wrapper FUN_00109fa0 (whose +0x374 is the arena)
+local	FUN_0010a0c4	param_2	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_0010a070
+local	FUN_0010a070	param_3	compiler	INFERRED	receives the compiler pointer forwarded by the allocation wrapper FUN_0010a0c4 (whose +0x374 is the arena)
+local	FUN_0010a240	param_2	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_0010a1c0
+local	FUN_0010a1c0	param_3	compiler	INFERRED	receives the compiler pointer forwarded by the allocation wrapper FUN_0010a240 (whose +0x374 is the arena)
+local	FUN_0010a5a4	param_2	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_0010a50c
+local	FUN_0010a50c	param_3	compiler	INFERRED	receives the compiler pointer forwarded by the allocation wrapper FUN_0010a5a4 (whose +0x374 is the arena)
+local	FUN_0010a758	param_2	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_0010a6bc
+local	FUN_0010a6bc	param_3	compiler	INFERRED	receives the compiler pointer forwarded by the allocation wrapper FUN_0010a758 (whose +0x374 is the arena)
+local	FUN_001267ec	param_4	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_001261e8
+local	FUN_001261e8	param_5	compiler	INFERRED	receives the compiler pointer forwarded by the allocation wrapper FUN_001267ec (whose +0x374 is the arena)
+local	FUN_00126f1c	param_4	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_00126620
+local	FUN_00126620	param_5	compiler	INFERRED	receives the compiler pointer forwarded by the allocation wrapper FUN_00126f1c (whose +0x374 is the arena)
+local	FUN_00126fa8	param_4	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_00126538
+local	FUN_00126538	param_5	compiler	INFERRED	receives the compiler pointer forwarded by the allocation wrapper FUN_00126fa8 (whose +0x374 is the arena)
+local	FUN_00127034	param_4	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_0012614c
+local	FUN_0012614c	param_5	compiler	INFERRED	receives the compiler pointer forwarded by the allocation wrapper FUN_00127034 (whose +0x374 is the arena)
+local	FUN_001270c0	param_4	compiler	INFERRED	its +0x374 field is the arena handed to the bump allocator FUN_00193e18, and it is forwarded to the constructor FUN_00126378
+local	FUN_00126378	param_5	compiler	INFERRED	receives the compiler pointer forwarded by the allocation wrapper FUN_001270c0 (whose +0x374 is the arena)
+local	FUN_000f1d7c	local_88	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_000f1d7c	local_84	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_000f1d7c	local_80	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_000f1d7c	local_7c	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_000f1d7c	local_78	vec2Capacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_000f1d7c	local_74	vec2Count	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_000f1d7c	local_70	vec2Data	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_000f1d7c	local_6c	vec2Arena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_000f1d7c	local_68	vec3Capacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_000f1d7c	local_64	vec3Count	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_000f1d7c	local_60	vec3Data	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_000f1d7c	local_5c	vec3Arena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_000f1d7c	local_58	vec4Capacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_000f1d7c	local_54	vec4Count	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_000f1d7c	local_50	vec4Data	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_000f1d7c	local_4c	vec4Arena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0011fb94	local_38	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0011fb94	local_34	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0011fb94	local_30	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0011fb94	local_2c	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00121000	local_78	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00121000	local_74	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00121000	local_70	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00121000	local_6c	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00121000	local_68	vec2Capacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00121000	local_64	vec2Count	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00121000	local_60	vec2Data	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00121000	local_5c	vec2Arena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0012cfa4	local_54	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0012cfa4	local_50	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0012cfa4	local_4c	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0012cfa4	local_48	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0012dd58	local_44	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0012dd58	local_40	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0012dd58	local_3c	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0012dd58	local_38	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0012df90	local_64	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0012df90	local_60	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0012df90	local_5c	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0012df90	local_58	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0012fe8c	local_44	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0012fe8c	local_40	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0012fe8c	local_3c	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0012fe8c	local_38	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013323c	local_90	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013323c	local_8c	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013323c	local_88	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013323c	local_84	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013323c	local_80	vec2Capacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013323c	local_7c	vec2Count	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013323c	local_78	vec2Data	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013323c	local_74	vec2Arena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00139d40	local_48	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00139d40	local_44	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00139d40	local_40	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00139d40	local_3c	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013bd68	local_54	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013bd68	local_50	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013bd68	local_4c	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013bd68	local_48	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013c210	local_54	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013c210	local_50	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013c210	local_4c	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013c210	local_48	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013c210	local_44	vec2Capacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013c210	local_40	vec2Count	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013c210	local_3c	vec2Data	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013c210	local_38	vec2Arena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013c60c	local_54	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013c60c	local_50	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013c60c	local_4c	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013c60c	local_48	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013c60c	local_44	vec2Capacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013c60c	local_40	vec2Count	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013c60c	local_3c	vec2Data	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013c60c	local_38	vec2Arena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013da3c	local_b4	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013da3c	local_b0	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013da3c	local_ac	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013da3c	local_a8	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013da3c	local_a4	vec2Capacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013da3c	local_a0	vec2Count	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013da3c	local_9c	vec2Data	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013da3c	local_98	vec2Arena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013fc38	local_78	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013fc38	local_74	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013fc38	local_70	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0013fc38	local_6c	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00142974	local_6c	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00142974	local_68	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00142974	local_64	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00142974	local_60	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0014375c	local_70	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0014375c	local_6c	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0014375c	local_68	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0014375c	local_64	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0014375c	local_60	vec2Capacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0014375c	local_5c	vec2Count	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0014375c	local_58	vec2Data	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0014375c	local_54	vec2Arena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0014e6e4	local_48	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0014e6e4	local_44	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0014e6e4	local_40	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0014e6e4	local_3c	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00156d48	local_b0	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00156d48	local_ac	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00156d48	local_a8	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_00156d48	local_a4	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0016ff54	local_78	vecCapacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0016ff54	local_74	vecCount	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0016ff54	local_70	vecData	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0016ff54	local_6c	vecArena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0016ff54	local_68	vec2Capacity	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0016ff54	local_64	vec2Count	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0016ff54	local_60	vec2Data	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_0016ff54	local_5c	vec2Arena	CONFIRMED	four-word growable-vector header read by FUN_0019423c (capacity,count,data,arena); roles from the issue #64 note in the source
+local	FUN_000ea3c0	param_2	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_000ea478	param_2	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_000ea530	param_2	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_000ea600	param_2	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_000ea6d0	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_000ea828	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_000eb3c8	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_000eb688	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_000eb9e0	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_000ebac8	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_000f94dc	param_1	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_0010445c	param_2	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001044e0	param_3	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_0010502c	param_3	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001051b0	param_3	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00105334	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001062c0	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001074e0	param_3	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00107df4	param_2	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00107e70	param_2	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00108c68	param_1	this	INFERRED	first argument of the node base constructor FUN_001070f8 (the object being built)
+local	FUN_00108c68	param_2	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_00108cbc	param_1	this	INFERRED	first argument of the node base constructor FUN_001070f8 (the object being built)
+local	FUN_00108cbc	param_2	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_00108d10	param_2	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_00108d5c	param_2	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_00108da8	param_2	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_00108df4	param_2	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_00108e40	param_1	this	INFERRED	first argument of the node base constructor FUN_001070f8 (the object being built)
+local	FUN_00108e40	param_2	kind	INFERRED	second argument of FUN_001070f8; the sibling constructors pass distinct literals (0x81, 0x83, 0x8d, 0x8e ...) here
+local	FUN_00108e40	param_3	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_00109a80	param_1	this	INFERRED	first argument of the node base constructor FUN_001070f8 (the object being built)
+local	FUN_00109a80	param_2	kind	INFERRED	second argument of FUN_001070f8; the sibling constructors pass distinct literals (0x81, 0x83, 0x8d, 0x8e ...) here
+local	FUN_00109a80	param_3	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_00109acc	param_1	this	INFERRED	first argument of the node base constructor FUN_001070f8 (the object being built)
+local	FUN_00109acc	param_2	kind	INFERRED	second argument of FUN_001070f8; the sibling constructors pass distinct literals (0x81, 0x83, 0x8d, 0x8e ...) here
+local	FUN_00109acc	param_3	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_00109b20	param_1	this	INFERRED	first argument of the node base constructor FUN_001070f8 (the object being built)
+local	FUN_00109b20	param_2	kind	INFERRED	second argument of FUN_001070f8; the sibling constructors pass distinct literals (0x81, 0x83, 0x8d, 0x8e ...) here
+local	FUN_00109bf0	param_1	this	INFERRED	first argument of the node base constructor FUN_001070f8 (the object being built)
+local	FUN_00109bf0	param_2	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_00109c4c	param_1	this	INFERRED	first argument of the node base constructor FUN_001070f8 (the object being built)
+local	FUN_00109c4c	param_2	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_00109ca8	param_1	this	INFERRED	first argument of the node base constructor FUN_001070f8 (the object being built)
+local	FUN_00109ca8	param_2	kind	INFERRED	second argument of FUN_001070f8; the sibling constructors pass distinct literals (0x81, 0x83, 0x8d, 0x8e ...) here
+local	FUN_00109ca8	param_3	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_00109cfc	param_1	this	INFERRED	first argument of the node base constructor FUN_001070f8 (the object being built)
+local	FUN_00109cfc	param_2	kind	INFERRED	second argument of FUN_001070f8; the sibling constructors pass distinct literals (0x81, 0x83, 0x8d, 0x8e ...) here
+local	FUN_00109dcc	param_2	kind	INFERRED	second argument of FUN_001070f8; the sibling constructors pass distinct literals (0x81, 0x83, 0x8d, 0x8e ...) here
+local	FUN_00109dcc	param_3	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_00109e28	param_2	kind	INFERRED	second argument of FUN_001070f8; the sibling constructors pass distinct literals (0x81, 0x83, 0x8d, 0x8e ...) here
+local	FUN_00109f00	param_2	kind	INFERRED	second argument of FUN_001070f8; the sibling constructors pass distinct literals (0x81, 0x83, 0x8d, 0x8e ...) here
+local	FUN_00109f00	param_3	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_00109f50	param_2	kind	INFERRED	second argument of FUN_001070f8; the sibling constructors pass distinct literals (0x81, 0x83, 0x8d, 0x8e ...) here
+local	FUN_0010a01c	param_2	kind	INFERRED	second argument of FUN_001070f8; the sibling constructors pass distinct literals (0x81, 0x83, 0x8d, 0x8e ...) here
+local	FUN_0010a01c	param_3	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_0010a070	param_2	kind	INFERRED	second argument of FUN_001070f8; the sibling constructors pass distinct literals (0x81, 0x83, 0x8d, 0x8e ...) here
+local	FUN_0010a140	param_2	kind	INFERRED	second argument of FUN_001070f8; the sibling constructors pass distinct literals (0x81, 0x83, 0x8d, 0x8e ...) here
+local	FUN_0010a140	param_3	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_0010a1c0	param_2	kind	INFERRED	second argument of FUN_001070f8; the sibling constructors pass distinct literals (0x81, 0x83, 0x8d, 0x8e ...) here
+local	FUN_0010a2bc	param_2	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_0010a398	param_2	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_0010a474	param_1	this	INFERRED	first argument of the node base constructor FUN_001070f8 (the object being built)
+local	FUN_0010a474	param_3	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_0010a50c	param_1	this	INFERRED	first argument of the node base constructor FUN_001070f8 (the object being built)
+local	FUN_0010a620	param_3	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_0010a7d4	param_1	this	INFERRED	first argument of the node base constructor FUN_001070f8 (the object being built)
+local	FUN_0010a7d4	param_4	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_0010a83c	param_1	this	INFERRED	first argument of the node base constructor FUN_001070f8 (the object being built)
+local	FUN_0010a83c	param_4	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_0010a8a4	param_1	this	INFERRED	first argument of the node base constructor FUN_001070f8 (the object being built)
+local	FUN_0010a8a4	param_4	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_0010a90c	param_1	this	INFERRED	first argument of the node base constructor FUN_001070f8 (the object being built)
+local	FUN_0010a90c	param_4	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_0010a974	param_2	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_0010a9cc	param_2	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_0010aa24	param_2	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_0010aa7c	param_2	compiler	INFERRED	third argument of FUN_001070f8; the same object whose +0x374 field is the bump-allocator arena in the allocation wrappers
+local	FUN_0010ad68	param_2	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_0010bd50	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_0010f704	param_3	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001230e4	param_3	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00123288	param_3	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_0012379c	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001238e8	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00123c08	param_1	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001240a8	param_3	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001241fc	param_3	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_0012434c	param_3	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_0012447c	param_3	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001245a8	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00124724	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_0012499c	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00124b24	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00124c94	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00124e68	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001250dc	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00125350	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001257b0	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00125db8	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_0012622c	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001268f8	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00126984	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00126a10	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00126a9c	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00126b28	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00126bb4	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00126c40	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00126ccc	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00126d58	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00126de4	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00126e90	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_0012714c	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001271d8	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_0012e56c	param_3	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00130ec0	param_3	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00130f64	param_3	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001311cc	param_6	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001312f4	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001322a8	param_6	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00134ef4	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00135110	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_001351c4	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00136ec4	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_0013719c	param_5	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
+local	FUN_00138694	param_4	compiler	INFERRED	its +0x374/+0x378 fields are bump-allocator arenas passed to FUN_00193e18, as in the node allocation wrappers
