@@ -117,6 +117,8 @@ def build_cfg(body, brace):
         if t.startswith('if'):
             c, rest = cond_then(t[2:].strip())
             cn = new(lines, c, 'cond')
+            if rest == '' and pos[0] < len(units) and re.match(r'(goto |return|break;|continue;)', units[pos[0]][1]):
+                rest = units[pos[0]][1]; pos[0] += 1               # `if (long condition)` and its one-line body on the next line
             if rest == '{':
                 te, tx = block(loopstack)
                 if te: cn.succ.append(te)
