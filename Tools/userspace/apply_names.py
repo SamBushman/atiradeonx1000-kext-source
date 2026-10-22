@@ -76,7 +76,7 @@ def apply_uses(lines, s, e, name, uses, allrows, declset):
     DECL = r'\s+(?!return\b)[\w ]+?[ *]([A-Za-z_]\w*)(\[\w+\])?;$'
     def declblock():                           # (first, last+1) line of the declarations right after the `{`
         i = brace + 1
-        while i < len(lines) and (re.match(DECL, lines[i]) or not lines[i].strip() or re.match(r'\s*(/\*|\*)', lines[i])): i += 1
+        while i < len(lines) and (re.match(DECL, lines[i]) or not lines[i].strip() or re.match(r'\s*(/\*|\*)', lines[i]) or re.match(r'\s+[\w ]+ \w+\[\d+\] = \{.*\};', lines[i])): i += 1
         return brace + 1, i
     N = [norm(l) for l in lines]               # renames are taken back, so N only changes when a declaration line is inserted
     for (f, n, fn, old, new, tier, frm, to) in uses:
@@ -91,23 +91,26 @@ def apply_uses(lines, s, e, name, uses, allrows, declset):
         seg = lines[a:z]
         has_old = any(re.search(wb(old), strip_strings(l)) for l in seg)
         has_new = any(re.search(wb(new), strip_strings(l)) for l in seg)
-        if not has_old:
-            if has_new: napp += 1
-            else: print('%s:%d: %s: neither %s nor %s in the segment' % (f, n, fn, old, new)); nerr += 1
-            continue
-        if new in declset: print('%s:%d: %s: new name %s collides with a declaration' % (f, n, fn, new)); nerr += 1; continue
-        for i in range(a, z): lines[i] = re.sub(wb(old), new, lines[i])
-        npend += 1
-        # declaration of new, beside old's
+        if not has_old and not has_new:
+            print('%s:%d: %s: neither %s nor %s in the segment' % (f, n, fn, old, new)); nerr += 1; continue
+        if has_old and new in declset:
+            print('%s:%d: %s: new name %s collides with a declaration' % (f, n, fn, new)); nerr += 1; continue
+        # declaration of new, beside old's (checked BEFORE any line is touched, so an error leaves the text as it was; also repairs a missing one)
         d0, d1 = declblock()
         if not any(re.match(r'\s+[\w ]+[ *]%s;$' % re.escape(new), l) for l in lines[d0:d1]):
-            di = next((i for i in range(d0, d1) if re.match(r'(\s+)([\w ]+?[ *])%s;$' % re.escape(old), lines[i])), None)
+            m = None
+            di = next((i for i in range(d0, d1) if (m := re.match(r'(\s+)([\w ]+?[ *])%s;$' % re.escape(old), lines[i]))), None)
             if di is None: print('%s:%d: %s: no simple declaration of %s' % (f, n, fn, old)); nerr += 1; continue
-            m = re.match(r'(\s+)([\w ]+?[ *])%s;$' % re.escape(old), lines[di])
             at = di + 1
             if os.environ.get('USE_DECL', 'end') == 'end':    # after the last simple declaration: gcc allocates -O0 slots in declaration order
                 at = max(i for i in range(d0, d1) if re.match(DECL, lines[i])) + 1
             lines.insert(at, '%s%s%s;' % (m.group(1), m.group(2), new)); N.insert(at, norm(lines[at])); e += 1
+            if at <= a: a += 1; z += 1
+            npend += 1
+        if not has_old:
+            napp += 1; continue
+        for i in range(a, z): lines[i] = re.sub(wb(old), new, lines[i])
+        npend += 1
     # drop old declarations nothing uses any more
     for old in {r[3] for r in uses}:
         d0, d1 = declblock()

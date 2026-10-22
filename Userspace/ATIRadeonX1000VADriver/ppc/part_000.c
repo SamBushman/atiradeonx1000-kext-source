@@ -19,92 +19,92 @@ int FUN_000010a0()
 }
 
 /* FUN_000010c0 @ 0x10c0 (40 bytes) */
-int FUN_000010c0(param_1)
-  undefined4 *param_1;
+int FUN_000010c0(state)
+  undefined4 *state;
 {
-  *param_1 = 1;
+  *state = 1;
   return;
 }
 
 /* FUN_000010e8 @ 0x10e8 (120 bytes) */
-int FUN_000010e8(param_1)
-  undefined4 *param_1;
+int FUN_000010e8(state)
+  undefined4 *state;
 {
-  int iVar1;
-  undefined4 *puStack00000018;
+  int status;
+  undefined4 *stateHome;
   
-  puStack00000018 = param_1;
-  iVar1 = (*(code *)param_1[1])(FUN_000010c0,param_1,param_1);
-  if (iVar1 != 0) {
-    *param_1 = 0xffffffff;
+  stateHome = state;
+  status = (*(code *)state[1])(FUN_000010c0,state,state);
+  if (status != 0) {
+    *state = 0xffffffff;
   }
   return;
 }
 
 /* FUN_00001160 @ 0x1160 (204 bytes) */
-int FUN_00001160(param_1, param_2)
-  code *param_1;
-  code *param_2;
+int FUN_00001160(cxaAtexitFn, cxaFinalizeFn)
+  code *cxaAtexitFn;
+  code *cxaFinalizeFn;
 {
-  int iVar1;
-  code *pcStack00000018;
-  code *pcStack0000001c;
-  int local_28;
-  code *local_24;
-  int local_18;
+  int status;
+  code *cxaAtexitFnHome;
+  code *cxaFinalizeFnHome;
+  int state;
+  code *cxaAtexitFnCopy;
+  int result;
   
-  local_28 = 0;
-  pcStack00000018 = param_1;
-  pcStack0000001c = param_2;
-  local_24 = param_1;
-  iVar1 = (*param_1)(FUN_000010e8,&local_28,&local_28);
-  if (iVar1 == 0) {
-    (*pcStack0000001c)(&local_28);
-    if (local_28 == 0) {
-      (*pcStack0000001c)(&local_28);
-      local_28 = 0;
+  state = 0;
+  cxaAtexitFnHome = cxaAtexitFn;
+  cxaFinalizeFnHome = cxaFinalizeFn;
+  cxaAtexitFnCopy = cxaAtexitFn;
+  status = (*cxaAtexitFn)(FUN_000010e8,&state,&state);
+  if (status == 0) {
+    (*cxaFinalizeFnHome)(&state);
+    if (state == 0) {
+      (*cxaFinalizeFnHome)(&state);
+      state = 0;
     }
-    local_18 = local_28;
+    result = state;
   }
   else {
-    local_18 = -1;
+    result = -1;
   }
-  return local_18;
+  return result;
 }
 
 /* FUN_0000122c @ 0x122c (504 bytes) */
 int FUN_0000122c()
 {
-  undefined4 uVar1;
-  uint uVar2;
-  int iVar3;
-  uint local_38;
-  code *local_34;
-  code *local_30;
-  code *local_2c;
-  code *local_28;
-  code *local_24 [7];
+  undefined4 scratchResult;
+  uint imageCount;
+  int headerOrSymbol;
+  uint imageIndex;
+  code *imageCountFn;
+  code *imageNameFn;
+  code *imageHeaderFn;
+  code *lookupSymbolFn;
+  code *addressOfSymbolFn [7];
   
-  ((int (*)())FUN_000010a0)("__dyld_image_count",&local_34);
-  ((int (*)())FUN_000010a0)("__dyld_get_image_name",&local_30);
-  ((int (*)())FUN_000010a0)("__dyld_get_image_header",&local_2c);
-  ((int (*)())FUN_000010a0)("__dyld_NSLookupSymbolInImage",&local_28);
-  uVar1 = ((int (*)())FUN_000010a0)("__dyld_NSAddressOfSymbol",local_24);
-  if ((((local_34 != (code *)0x0) && (local_30 != (code *)0x0)) && (local_2c != (code *)0x0)) &&
-     ((local_28 != (code *)0x0 && (local_24[0] != (code *)0x0)))) {
-    uVar2 = (*local_34)(uVar1);
-    for (local_38 = 0; local_38 < uVar2; local_38 = local_38 + 1) {
-      uVar1 = (*local_30)(local_38);
-      iVar3 = _strcmp(uVar1,"/usr/lib/libSystem.B.dylib");
-      if (iVar3 == 0) {
-        iVar3 = (*local_2c)(local_38);
-        if (iVar3 == 0) {
+  ((int (*)())FUN_000010a0)("__dyld_image_count",&imageCountFn);
+  ((int (*)())FUN_000010a0)("__dyld_get_image_name",&imageNameFn);
+  ((int (*)())FUN_000010a0)("__dyld_get_image_header",&imageHeaderFn);
+  ((int (*)())FUN_000010a0)("__dyld_NSLookupSymbolInImage",&lookupSymbolFn);
+  scratchResult = ((int (*)())FUN_000010a0)("__dyld_NSAddressOfSymbol",addressOfSymbolFn);
+  if ((((imageCountFn != (code *)0x0) && (imageNameFn != (code *)0x0)) && (imageHeaderFn != (code *)0x0)) &&
+     ((lookupSymbolFn != (code *)0x0 && (addressOfSymbolFn[0] != (code *)0x0)))) {
+    imageCount = (*imageCountFn)(scratchResult);
+    for (imageIndex = 0; imageIndex < imageCount; imageIndex = imageIndex + 1) {
+      scratchResult = (*imageNameFn)(imageIndex);
+      headerOrSymbol = _strcmp(scratchResult,"/usr/lib/libSystem.B.dylib");
+      if (headerOrSymbol == 0) {
+        headerOrSymbol = (*imageHeaderFn)(imageIndex);
+        if (headerOrSymbol == 0) {
           return 0;
         }
-        iVar3 = (*local_28)(iVar3,"_atexit",4);
-        if (iVar3 != 0) {
-          uVar1 = (*local_24[0])(iVar3);
-          return uVar1;
+        headerOrSymbol = (*lookupSymbolFn)(headerOrSymbol,"_atexit",4);
+        if (headerOrSymbol != 0) {
+          scratchResult = (*addressOfSymbolFn[0])(headerOrSymbol);
+          return scratchResult;
         }
         return 0;
       }
@@ -114,11 +114,11 @@ int FUN_0000122c()
 }
 
 /* FUN_00001424 @ 0x1424 (32 bytes) */
-int FUN_00001424(param_1, param_2)
-  char *param_1;
-  char *param_2;
+int FUN_00001424(s1, s2)
+  char *s1;
+  char *s2;
 {
-  _strcmp(param_1,param_2);
+  _strcmp(s1,s2);
   return;
 }
 
@@ -134,54 +134,54 @@ int FUN_00001444()
 /* FUN_00001464 @ 0x1464 (528 bytes) */
 int FUN_00001464()
 {
-  int iVar1;
-  undefined4 uVar2;
-  int iVar3;
-  int local_20;
-  int local_18;
+  int libSystemHandle;
+  undefined4 symbolAddress;
+  int checkResult;
+  int globals;
+  int result;
   
-  local_20 = __keymgr_get_and_lock_processwide_ptr(0xe);
-  if ((local_20 == 0) && (local_20 = _calloc(0x14,1), local_20 == 0)) {
+  globals = __keymgr_get_and_lock_processwide_ptr(0xe);
+  if ((globals == 0) && (globals = _calloc(0x14,1), globals == 0)) {
     return 0;
   }
-  if (*(char *)(local_20 + 3) == '\0') {
-    iVar1 = _dlopen("/usr/lib/libSystem.B.dylib",0x10);
-    if (iVar1 == 0) {
-      *(undefined1 *)(local_20 + 3) = 1;
-      uVar2 = ((int (*)())FUN_0000122c)();
-      *(undefined4 *)(local_20 + 0x10) = uVar2;
-      if ((*(int *)(local_20 + 0x10) != 0) &&
-         (iVar1 = (**(code **)(local_20 + 0x10))(FUN_00001bbc), iVar1 == 0)) goto LAB_00001638;
+  if (*(char *)(globals + 3) == '\0') {
+    libSystemHandle = _dlopen("/usr/lib/libSystem.B.dylib",0x10);
+    if (libSystemHandle == 0) {
+      *(undefined1 *)(globals + 3) = 1;
+      symbolAddress = ((int (*)())FUN_0000122c)();
+      *(undefined4 *)(globals + 0x10) = symbolAddress;
+      if ((*(int *)(globals + 0x10) != 0) &&
+         (libSystemHandle = (**(code **)(globals + 0x10))(FUN_00001bbc), libSystemHandle == 0)) goto LAB_00001638;
     }
     else {
-      uVar2 = _dlsym(iVar1,"__cxa_atexit");
-      *(undefined4 *)(local_20 + 8) = uVar2;
-      uVar2 = _dlsym(iVar1,"__cxa_finalize");
-      *(undefined4 *)(local_20 + 0xc) = uVar2;
-      if (((*(int *)(local_20 + 8) != 0) && (*(int *)(local_20 + 0xc) != 0)) &&
-         (iVar3 = ((int (*)())FUN_00001160)(*(undefined4 *)(local_20 + 8),*(undefined4 *)(local_20 + 0xc)),
-         iVar3 != -1)) {
-        if (iVar3 == 0) {
-          *(undefined1 *)(local_20 + 3) = 2;
+      symbolAddress = _dlsym(libSystemHandle,"__cxa_atexit");
+      *(undefined4 *)(globals + 8) = symbolAddress;
+      symbolAddress = _dlsym(libSystemHandle,"__cxa_finalize");
+      *(undefined4 *)(globals + 0xc) = symbolAddress;
+      if (((*(int *)(globals + 8) != 0) && (*(int *)(globals + 0xc) != 0)) &&
+         (checkResult = ((int (*)())FUN_00001160)(*(undefined4 *)(globals + 8),*(undefined4 *)(globals + 0xc)),
+         checkResult != -1)) {
+        if (checkResult == 0) {
+          *(undefined1 *)(globals + 3) = 2;
         }
         else {
-          uVar2 = _dlsym(iVar1,"atexit");
-          *(undefined4 *)(local_20 + 0x10) = uVar2;
-          if (*(int *)(local_20 + 0x10) == 0) goto LAB_00001644;
-          *(undefined1 *)(local_20 + 3) = 0x10;
+          symbolAddress = _dlsym(libSystemHandle,"atexit");
+          *(undefined4 *)(globals + 0x10) = symbolAddress;
+          if (*(int *)(globals + 0x10) == 0) goto LAB_00001644;
+          *(undefined1 *)(globals + 3) = 0x10;
         }
         goto LAB_00001638;
       }
     }
 LAB_00001644:
-    __keymgr_set_and_unlock_processwide_ptr(0xe,local_20);
-    local_18 = 0;
+    __keymgr_set_and_unlock_processwide_ptr(0xe,globals);
+    result = 0;
   }
   else {
 LAB_00001638:
-    local_18 = local_20;
+    result = globals;
   }
-  return local_18;
+  return result;
 }
 
 /* FUN_00001674 @ 0x1674 (32 bytes) */
@@ -192,34 +192,34 @@ int FUN_00001674()
 }
 
 /* FUN_00001694 @ 0x1694 (32 bytes) */
-int FUN_00001694(param_1, param_2)
-  code *param_1;
-  code *param_2;
+int FUN_00001694(cxaAtexitFn, cxaFinalizeFn)
+  code *cxaAtexitFn;
+  code *cxaFinalizeFn;
 {
-  int iVar1;
-  code *pcStack00000018;
-  code *pcStack0000001c;
-  int iStack_28;
-  code *pcStack_24;
-  int iStack_18;
+  int status;
+  code *cxaAtexitFnHome;
+  code *cxaFinalizeFnHome;
+  int state;
+  code *cxaAtexitFnCopy;
+  int result;
   
-  iStack_28 = 0;
-  pcStack00000018 = param_1;
-  pcStack0000001c = param_2;
-  pcStack_24 = param_1;
-  iVar1 = (*param_1)(FUN_000010e8,&iStack_28,&iStack_28);
-  if (iVar1 == 0) {
-    (*pcStack0000001c)(&iStack_28);
-    if (iStack_28 == 0) {
-      (*pcStack0000001c)(&iStack_28);
-      iStack_28 = 0;
+  state = 0;
+  cxaAtexitFnHome = cxaAtexitFn;
+  cxaFinalizeFnHome = cxaFinalizeFn;
+  cxaAtexitFnCopy = cxaAtexitFn;
+  status = (*cxaAtexitFn)(FUN_000010e8,&state,&state);
+  if (status == 0) {
+    (*cxaFinalizeFnHome)(&state);
+    if (state == 0) {
+      (*cxaFinalizeFnHome)(&state);
+      state = 0;
     }
-    iStack_18 = iStack_28;
+    result = state;
   }
   else {
-    iStack_18 = -1;
+    result = -1;
   }
-  return iStack_18;
+  return result;
 }
 
 /* FUN_000016b4 @ 0x16b4 (32 bytes) */
@@ -234,37 +234,37 @@ int FUN_000016b4()
 /* FUN_000016d4 @ 0x16d4 (32 bytes) */
 int FUN_000016d4()
 {
-  uint uVar1;
-  char *pcVar2;
-  int iVar3;
-  undefined4 uVar4;
-  uint uStack_38;
-  code *pcStack_34;
-  code *pcStack_30;
-  code *pcStack_2c;
-  code *pcStack_28;
-  code *apcStack_24 [7];
+  uint imageCount;
+  char *imageName;
+  int headerOrSymbol;
+  undefined4 atexitAddress;
+  uint imageIndex;
+  code *imageCountFn;
+  code *imageNameFn;
+  code *imageHeaderFn;
+  code *lookupSymbolFn;
+  code *addressOfSymbolFn [7];
   
-  ((int (*)())FUN_000010a0)("__dyld_image_count",&pcStack_34);
-  ((int (*)())FUN_000010a0)("__dyld_get_image_name",&pcStack_30);
-  ((int (*)())FUN_000010a0)("__dyld_get_image_header",&pcStack_2c);
-  ((int (*)())FUN_000010a0)("__dyld_NSLookupSymbolInImage",&pcStack_28);
-  ((int (*)())FUN_000010a0)("__dyld_NSAddressOfSymbol",apcStack_24);
-  if ((((pcStack_34 != (code *)0x0) && (pcStack_30 != (code *)0x0)) && (pcStack_2c != (code *)0x0))
-     && ((pcStack_28 != (code *)0x0 && (apcStack_24[0] != (code *)0x0)))) {
-    uVar1 = (*pcStack_34)();
-    for (uStack_38 = 0; uStack_38 < uVar1; uStack_38 = uStack_38 + 1) {
-      pcVar2 = (char *)(*pcStack_30)(uStack_38);
-      iVar3 = _strcmp(pcVar2,"/usr/lib/libSystem.B.dylib");
-      if (iVar3 == 0) {
-        iVar3 = (*pcStack_2c)(uStack_38);
-        if (iVar3 == 0) {
+  ((int (*)())FUN_000010a0)("__dyld_image_count",&imageCountFn);
+  ((int (*)())FUN_000010a0)("__dyld_get_image_name",&imageNameFn);
+  ((int (*)())FUN_000010a0)("__dyld_get_image_header",&imageHeaderFn);
+  ((int (*)())FUN_000010a0)("__dyld_NSLookupSymbolInImage",&lookupSymbolFn);
+  ((int (*)())FUN_000010a0)("__dyld_NSAddressOfSymbol",addressOfSymbolFn);
+  if ((((imageCountFn != (code *)0x0) && (imageNameFn != (code *)0x0)) && (imageHeaderFn != (code *)0x0))
+     && ((lookupSymbolFn != (code *)0x0 && (addressOfSymbolFn[0] != (code *)0x0)))) {
+    imageCount = (*imageCountFn)();
+    for (imageIndex = 0; imageIndex < imageCount; imageIndex = imageIndex + 1) {
+      imageName = (char *)(*imageNameFn)(imageIndex);
+      headerOrSymbol = _strcmp(imageName,"/usr/lib/libSystem.B.dylib");
+      if (headerOrSymbol == 0) {
+        headerOrSymbol = (*imageHeaderFn)(imageIndex);
+        if (headerOrSymbol == 0) {
           return 0;
         }
-        iVar3 = (*pcStack_28)(iVar3,"_atexit",4);
-        if (iVar3 != 0) {
-          uVar4 = (*apcStack_24[0])(iVar3);
-          return uVar4;
+        headerOrSymbol = (*lookupSymbolFn)(headerOrSymbol,"_atexit",4);
+        if (headerOrSymbol != 0) {
+          atexitAddress = (*addressOfSymbolFn[0])(headerOrSymbol);
+          return atexitAddress;
         }
         return 0;
       }
@@ -301,44 +301,44 @@ int FUN_00001734()
 }
 
 /* FUN_00001754 @ 0x1754 (268 bytes) */
-int FUN_00001754(param_1, param_2)
-  int param_1;
-  undefined4 *param_2;
+int FUN_00001754(globals, routine)
+  int globals;
+  undefined4 *routine;
 {
-  undefined4 uVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  undefined4 uVar4;
-  int iStack00000018;
-  undefined4 *puStack0000001c;
-  undefined4 local_18;
-  undefined4 local_14;
+  undefined4 argument;
+  undefined4 *node;
+  int unlockResult;
+  undefined4 kind;
+  int globalsHome;
+  undefined4 *routineHome;
+  undefined4 status;
+  undefined4 result;
   
-  iStack00000018 = param_1;
-  puStack0000001c = param_2;
-  puVar2 = (undefined4 *)_malloc(0x10);
-  if (puVar2 == (undefined4 *)0x0) {
-    __keymgr_set_and_unlock_processwide_ptr(0xe,iStack00000018);
-    local_14 = 0xffffffff;
+  globalsHome = globals;
+  routineHome = routine;
+  node = (undefined4 *)_malloc(0x10);
+  if (node == (undefined4 *)0x0) {
+    __keymgr_set_and_unlock_processwide_ptr(0xe,globalsHome);
+    result = 0xffffffff;
   }
   else {
-    uVar4 = puStack0000001c[1];
-    uVar1 = puStack0000001c[2];
-    puVar2[1] = *puStack0000001c;
-    puVar2[2] = uVar4;
-    puVar2[3] = uVar1;
-    *puVar2 = *(undefined4 *)(iStack00000018 + 4);
-    *(undefined4 **)(iStack00000018 + 4) = puVar2;
-    iVar3 = __keymgr_set_and_unlock_processwide_ptr(0xe,iStack00000018);
-    if ((*(ushort *)(*(int *)(PTR_0000f124 + 8) + 4) < 4) || (iVar3 == 0)) {
-      local_18 = 0;
+    kind = routineHome[1];
+    argument = routineHome[2];
+    node[1] = *routineHome;
+    node[2] = kind;
+    node[3] = argument;
+    *node = *(undefined4 *)(globalsHome + 4);
+    *(undefined4 **)(globalsHome + 4) = node;
+    unlockResult = __keymgr_set_and_unlock_processwide_ptr(0xe,globalsHome);
+    if ((*(ushort *)(*(int *)(PTR_0000f124 + 8) + 4) < 4) || (unlockResult == 0)) {
+      status = 0;
     }
     else {
-      local_18 = 0xffffffff;
+      status = 0xffffffff;
     }
-    local_14 = local_18;
+    result = status;
   }
-  return local_14;
+  return result;
 }
 
 /* FUN_00001860 @ 0x1860 (32 bytes) */
@@ -358,49 +358,49 @@ int FUN_00001880()
 }
 
 /* FUN_000018a0 @ 0x18a0 (292 bytes) */
-int FUN_000018a0(param_1, param_2)
-  int param_1;
-  undefined4 *param_2;
+int FUN_000018a0(globals, stopNode)
+  int globals;
+  undefined4 *stopNode;
 {
-  undefined4 *puVar1;
-  uint uVar2;
-  undefined4 a0;
+  undefined4 *node;
+  uint kindMask;
+  undefined4 unlockResult;
   undefined4 a1;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  int iStack00000018;
-  undefined4 *puStack0000001c;
+  undefined4 passThroughR5;
+  undefined4 passThroughR6;
+  undefined4 passThroughR7;
+  undefined4 passThroughR8;
+  int globalsHome;
+  undefined4 *stopNodeHome;
   
-  iStack00000018 = param_1;
-  puStack0000001c = param_2;
+  globalsHome = globals;
+  stopNodeHome = stopNode;
   while( true ) {
-    puVar1 = *(undefined4 **)(iStack00000018 + 4);
-    if (puVar1 == (undefined4 *)0x0) {
-      return iStack00000018;
+    node = *(undefined4 **)(globalsHome + 4);
+    if (node == (undefined4 *)0x0) {
+      return globalsHome;
     }
-    if (puVar1 == puStack0000001c) break;
-    *(undefined4 *)(iStack00000018 + 4) = *puVar1;
-    a0 = __keymgr_set_and_unlock_processwide_ptr(0xe,iStack00000018);
-    if ((uint)puVar1[2] < 6) {
-      uVar2 = 1 << (puVar1[2] & 0x3f);
-      if ((uVar2 & 0x15) == 0) {
-        if ((uVar2 & 0x2a) != 0) {
-          (*(code *)puVar1[1])(puVar1[3],a1,in_r5,in_r6,in_r7,in_r8,(code *)puVar1[1]);
+    if (node == stopNodeHome) break;
+    *(undefined4 *)(globalsHome + 4) = *node;
+    unlockResult = __keymgr_set_and_unlock_processwide_ptr(0xe,globalsHome);
+    if ((uint)node[2] < 6) {
+      kindMask = 1 << (node[2] & 0x3f);
+      if ((kindMask & 0x15) == 0) {
+        if ((kindMask & 0x2a) != 0) {
+          (*(code *)node[1])(node[3],a1,passThroughR5,passThroughR6,passThroughR7,passThroughR8,(code *)node[1]);
         }
       }
       else {
-        (*(code *)puVar1[1])(a0);
+        (*(code *)node[1])(unlockResult);
       }
     }
-    _free(puVar1);
-    iStack00000018 = __keymgr_get_and_lock_processwide_ptr(0xe);
-    if (iStack00000018 == 0) {
+    _free(node);
+    globalsHome = __keymgr_get_and_lock_processwide_ptr(0xe);
+    if (globalsHome == 0) {
       return 0;
     }
   }
-  return iStack00000018;
+  return globalsHome;
 }
 
 /* FUN_000019c4 @ 0x19c4 (32 bytes) */
@@ -429,60 +429,60 @@ int FUN_00001a04()
 }
 
 /* FUN_00001a24 @ 0x1a24 (312 bytes) */
-int FUN_00001a24(param_1)
-  undefined4 *param_1;
+int FUN_00001a24(entry)
+  undefined4 *entry;
 {
   undefined4 a0;
-  undefined4 extraout_r4;
-  undefined4 extraout_r4_00;
+  undefined4 r4AfterLock;
+  undefined4 r4AfterUnlock;
   undefined4 a1;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  undefined4 *puStack00000018;
-  undefined1 local_28;
-  undefined4 local_24;
-  int local_20;
+  undefined4 passThroughR5;
+  undefined4 passThroughR6;
+  undefined4 passThroughR7;
+  undefined4 passThroughR8;
+  undefined4 *entryHome;
+  undefined1 savedRunning;
+  undefined4 savedList;
+  int globals;
   
-  local_24 = 0;
-  local_28 = 0;
-  puStack00000018 = param_1;
-  local_20 = __keymgr_get_and_lock_processwide_ptr(0xe);
+  savedList = 0;
+  savedRunning = 0;
+  entryHome = entry;
+  globals = __keymgr_get_and_lock_processwide_ptr(0xe);
   a0 = 0;
-  a1 = extraout_r4;
-  if (local_20 != 0) {
-    local_28 = *(undefined1 *)(local_20 + 2);
-    *(undefined1 *)(local_20 + 2) = 1;
-    local_24 = *(undefined4 *)(local_20 + 4);
-    a0 = __keymgr_set_and_unlock_processwide_ptr(0xe,local_20);
-    a1 = extraout_r4_00;
+  a1 = r4AfterLock;
+  if (globals != 0) {
+    savedRunning = *(undefined1 *)(globals + 2);
+    *(undefined1 *)(globals + 2) = 1;
+    savedList = *(undefined4 *)(globals + 4);
+    a0 = __keymgr_set_and_unlock_processwide_ptr(0xe,globals);
+    a1 = r4AfterUnlock;
   }
-  if (param_1[1] == 0) {
-    (*(code *)*param_1)(a0);
+  if (entry[1] == 0) {
+    (*(code *)*entry)(a0);
   }
   else {
-    (*(code *)*param_1)(param_1[2],a1,in_r5,in_r6,in_r7,in_r8,(code *)*param_1);
+    (*(code *)*entry)(entry[2],a1,passThroughR5,passThroughR6,passThroughR7,passThroughR8,(code *)*entry);
   }
-  if (local_20 != 0) {
-    local_20 = __keymgr_get_and_lock_processwide_ptr(0xe);
+  if (globals != 0) {
+    globals = __keymgr_get_and_lock_processwide_ptr(0xe);
   }
-  if (local_20 != 0) {
-    local_20 = ((int (*)())FUN_000018a0)(local_20,local_24);
+  if (globals != 0) {
+    globals = ((int (*)())FUN_000018a0)(globals,savedList);
   }
-  if (local_20 != 0) {
-    *(undefined1 *)(local_20 + 2) = local_28;
-    __keymgr_set_and_unlock_processwide_ptr(0xe,local_20);
+  if (globals != 0) {
+    *(undefined1 *)(globals + 2) = savedRunning;
+    __keymgr_set_and_unlock_processwide_ptr(0xe,globals);
   }
   return;
 }
 
 /* FUN_00001b5c @ 0x1b5c (32 bytes) */
-int FUN_00001b5c(param_1, param_2)
-  undefined4 param_1;
-  undefined4 param_2;
+int FUN_00001b5c(globals, stopNode)
+  undefined4 globals;
+  undefined4 stopNode;
 {
-  ((int (*)())FUN_000018a0)(param_1,param_2);
+  ((int (*)())FUN_000018a0)(globals,stopNode);
   return;
 }
 
@@ -507,18 +507,18 @@ int FUN_00001b9c()
 /* FUN_00001bbc @ 0x1bbc (188 bytes) */
 int FUN_00001bbc()
 {
-  undefined1 uVar1;
-  short *psVar2;
-  int iVar3;
+  undefined1 savedRunning;
+  short *globals;
+  int relocked;
   
-  psVar2 = (short *)__keymgr_get_and_lock_processwide_ptr(0xe);
-  if (((psVar2 != (short *)0x0) && (*psVar2 == 0)) && (*(char *)((int)psVar2 + 3) == '\x01')) {
-    uVar1 = *(undefined1 *)(psVar2 + 1);
-    *(undefined1 *)(psVar2 + 1) = 1;
-    iVar3 = ((int (*)())FUN_000018a0)(psVar2,0);
-    if (iVar3 != 0) {
-      *(undefined1 *)(iVar3 + 2) = uVar1;
-      __keymgr_set_and_unlock_processwide_ptr(0xe,iVar3);
+  globals = (short *)__keymgr_get_and_lock_processwide_ptr(0xe);
+  if (((globals != (short *)0x0) && (*globals == 0)) && (*(char *)((int)globals + 3) == '\x01')) {
+    savedRunning = *(undefined1 *)(globals + 1);
+    *(undefined1 *)(globals + 1) = 1;
+    relocked = ((int (*)())FUN_000018a0)(globals,0);
+    if (relocked != 0) {
+      *(undefined1 *)(relocked + 2) = savedRunning;
+      __keymgr_set_and_unlock_processwide_ptr(0xe,relocked);
     }
   }
   return;
@@ -532,43 +532,43 @@ int FUN_00001c78()
 }
 
 /* FUN_00001c98 @ 0x1c98 (32 bytes) */
-int FUN_00001c98(param_1, param_2)
-  int param_1;
-  undefined4 *param_2;
+int FUN_00001c98(globals, stopNode)
+  int globals;
+  undefined4 *stopNode;
 {
-  undefined4 *puVar1;
-  uint uVar2;
-  int iStack00000018;
-  undefined4 *puStack0000001c;
+  undefined4 *node;
+  uint kindMask;
+  int globalsHome;
+  undefined4 *stopNodeHome;
   
-  iStack00000018 = param_1;
-  puStack0000001c = param_2;
+  globalsHome = globals;
+  stopNodeHome = stopNode;
   while( true ) {
-    puVar1 = *(undefined4 **)(iStack00000018 + 4);
-    if (puVar1 == (undefined4 *)0x0) {
-      return iStack00000018;
+    node = *(undefined4 **)(globalsHome + 4);
+    if (node == (undefined4 *)0x0) {
+      return globalsHome;
     }
-    if (puVar1 == puStack0000001c) break;
-    *(undefined4 *)(iStack00000018 + 4) = *puVar1;
-    __keymgr_set_and_unlock_processwide_ptr(0xe,iStack00000018);
-    if ((uint)puVar1[2] < 6) {
-      uVar2 = 1 << (puVar1[2] & 0x3f);
-      if ((uVar2 & 0x15) == 0) {
-        if ((uVar2 & 0x2a) != 0) {
-          (*(code *)puVar1[1])(puVar1[3]);
+    if (node == stopNodeHome) break;
+    *(undefined4 *)(globalsHome + 4) = *node;
+    __keymgr_set_and_unlock_processwide_ptr(0xe,globalsHome);
+    if ((uint)node[2] < 6) {
+      kindMask = 1 << (node[2] & 0x3f);
+      if ((kindMask & 0x15) == 0) {
+        if ((kindMask & 0x2a) != 0) {
+          (*(code *)node[1])(node[3]);
         }
       }
       else {
-        (*(code *)puVar1[1])();
+        (*(code *)node[1])();
       }
     }
-    _free(puVar1);
-    iStack00000018 = __keymgr_get_and_lock_processwide_ptr(0xe);
-    if (iStack00000018 == 0) {
+    _free(node);
+    globalsHome = __keymgr_get_and_lock_processwide_ptr(0xe);
+    if (globalsHome == 0) {
       return 0;
     }
   }
-  return iStack00000018;
+  return globalsHome;
 }
 
 /* FUN_00001cb8 @ 0x1cb8 (32 bytes) */
@@ -581,83 +581,83 @@ int FUN_00001cb8()
 }
 
 /* FUN_00001cd8 @ 0x1cd8 (672 bytes) */
-int FUN_00001cd8(param_1, param_2)
-  undefined4 *param_1;
-  undefined4 param_2;
+int FUN_00001cd8(atexit_entry, dsoHandle)
+  undefined4 *atexit_entry;
+  undefined4 dsoHandle;
 {
-  code *pcVar1;
-  undefined4 uVar2;
-  int iVar3;
-  undefined4 *a1;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  undefined4 uVar4;
-  undefined4 *puStack00000018;
-  undefined4 uStack0000001c;
-  undefined4 local_18;
+  code *registerFn;
+  undefined4 word2;
+  int atexit_globals;
+  undefined4 *entryCopy;
+  undefined4 passThroughR6;
+  undefined4 passThroughR7;
+  undefined4 passThroughR8;
+  undefined4 word1;
+  undefined4 *entryHome;
+  undefined4 dsoHandleHome;
+  undefined4 result;
   
-  puStack00000018 = param_1;
-  uStack0000001c = param_2;
-  iVar3 = ((int (*)())FUN_00001464)();
-  if (iVar3 == 0) {
-    local_18 = 0xffffffff;
+  entryHome = atexit_entry;
+  dsoHandleHome = dsoHandle;
+  atexit_globals = ((int (*)())FUN_00001464)();
+  if (atexit_globals == 0) {
+    result = 0xffffffff;
   }
-  else if ((*(char *)(iVar3 + 2) == '\0') && (*(char *)(iVar3 + 3) != '\x01')) {
-    if (*(byte *)(iVar3 + 3) < 0x10) {
-      pcVar1 = *(code **)(iVar3 + 8);
-      iVar3 = __keymgr_set_and_unlock_processwide_ptr(0xe,iVar3);
-      if ((*(ushort *)(*(int *)(PTR_0000f124 + 8) + 4) < 4) || (iVar3 == 0)) {
-        a1 = (undefined4 *)_malloc(0xc);
-        if (a1 == (undefined4 *)0x0) {
-          local_18 = 0xffffffff;
+  else if ((*(char *)(atexit_globals + 2) == '\0') && (*(char *)(atexit_globals + 3) != '\x01')) {
+    if (*(byte *)(atexit_globals + 3) < 0x10) {
+      registerFn = *(code **)(atexit_globals + 8);
+      atexit_globals = __keymgr_set_and_unlock_processwide_ptr(0xe,atexit_globals);
+      if ((*(ushort *)(*(int *)(PTR_0000f124 + 8) + 4) < 4) || (atexit_globals == 0)) {
+        entryCopy = (undefined4 *)_malloc(0xc);
+        if (entryCopy == (undefined4 *)0x0) {
+          result = 0xffffffff;
         }
         else {
-          uVar4 = puStack00000018[1];
-          uVar2 = puStack00000018[2];
-          *a1 = *puStack00000018;
-          a1[1] = uVar4;
-          a1[2] = uVar2;
-          local_18 = (*pcVar1)(FUN_00001a24,a1,uStack0000001c,in_r6,in_r7,in_r8,a1);
+          word1 = entryHome[1];
+          word2 = entryHome[2];
+          *entryCopy = *entryHome;
+          entryCopy[1] = word1;
+          entryCopy[2] = word2;
+          result = (*registerFn)(FUN_00001a24,entryCopy,dsoHandleHome,passThroughR6,passThroughR7,passThroughR8,entryCopy);
         }
       }
       else {
-        local_18 = 0xffffffff;
+        result = 0xffffffff;
       }
     }
-    else if (puStack00000018[1] == 0) {
-      pcVar1 = *(code **)(iVar3 + 0x10);
-      iVar3 = __keymgr_set_and_unlock_processwide_ptr(0xe,iVar3);
-      if ((*(ushort *)(*(int *)(PTR_0000f124 + 8) + 4) < 4) || (iVar3 == 0)) {
-        local_18 = (*pcVar1)(*puStack00000018);
+    else if (entryHome[1] == 0) {
+      registerFn = *(code **)(atexit_globals + 0x10);
+      atexit_globals = __keymgr_set_and_unlock_processwide_ptr(0xe,atexit_globals);
+      if ((*(ushort *)(*(int *)(PTR_0000f124 + 8) + 4) < 4) || (atexit_globals == 0)) {
+        result = (*registerFn)(*entryHome);
       }
       else {
-        local_18 = 0xffffffff;
+        result = 0xffffffff;
       }
     }
     else {
-      pcVar1 = *(code **)(iVar3 + 8);
-      iVar3 = __keymgr_set_and_unlock_processwide_ptr(0xe,iVar3);
-      if ((*(ushort *)(*(int *)(PTR_0000f124 + 8) + 4) < 4) || (iVar3 == 0)) {
-        local_18 = (*pcVar1)(*puStack00000018,puStack00000018[2],uStack0000001c,in_r6,in_r7,in_r8,
-                             *puStack00000018);
+      registerFn = *(code **)(atexit_globals + 8);
+      atexit_globals = __keymgr_set_and_unlock_processwide_ptr(0xe,atexit_globals);
+      if ((*(ushort *)(*(int *)(PTR_0000f124 + 8) + 4) < 4) || (atexit_globals == 0)) {
+        result = (*registerFn)(*entryHome,entryHome[2],dsoHandleHome,passThroughR6,passThroughR7,passThroughR8,
+                             *entryHome);
       }
       else {
-        local_18 = 0xffffffff;
+        result = 0xffffffff;
       }
     }
   }
   else {
-    local_18 = ((int (*)())FUN_00001754)(iVar3,puStack00000018);
+    result = ((int (*)())FUN_00001754)(atexit_globals,entryHome);
   }
-  return local_18;
+  return result;
 }
 
 /* FUN_00001f78 @ 0x1f78 (32 bytes) */
-int FUN_00001f78(param_1)
-  size_t param_1;
+int FUN_00001f78(size)
+  size_t size;
 {
-  _malloc(param_1);
+  _malloc(size);
   return;
 }
 
@@ -671,155 +671,155 @@ int FUN_00001f98()
 }
 
 /* FUN_00001fb8 @ 0x1fb8 (32 bytes) */
-int FUN_00001fb8(param_1, param_2)
-  int param_1;
-  undefined4 *param_2;
+int FUN_00001fb8(globals, entry)
+  int globals;
+  undefined4 *entry;
 {
-  undefined4 uVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  undefined4 uVar4;
-  int iStack00000018;
-  undefined4 *puStack0000001c;
-  undefined4 uStack_18;
-  undefined4 uStack_14;
+  undefined4 word2;
+  undefined4 *node;
+  int unlockResult;
+  undefined4 word1;
+  int globalsHome;
+  undefined4 *entryHome;
+  undefined4 status;
+  undefined4 result;
   
-  iStack00000018 = param_1;
-  puStack0000001c = param_2;
-  puVar2 = _malloc(0x10);
-  if (puVar2 == (undefined4 *)0x0) {
-    __keymgr_set_and_unlock_processwide_ptr(0xe,iStack00000018);
-    uStack_14 = 0xffffffff;
+  globalsHome = globals;
+  entryHome = entry;
+  node = _malloc(0x10);
+  if (node == (undefined4 *)0x0) {
+    __keymgr_set_and_unlock_processwide_ptr(0xe,globalsHome);
+    result = 0xffffffff;
   }
   else {
-    uVar4 = puStack0000001c[1];
-    uVar1 = puStack0000001c[2];
-    puVar2[1] = *puStack0000001c;
-    puVar2[2] = uVar4;
-    puVar2[3] = uVar1;
-    *puVar2 = *(undefined4 *)(iStack00000018 + 4);
-    *(undefined4 **)(iStack00000018 + 4) = puVar2;
-    iVar3 = __keymgr_set_and_unlock_processwide_ptr(0xe,iStack00000018);
-    if ((*(ushort *)(*(int *)(PTR_0000f124 + 8) + 4) < 4) || (iVar3 == 0)) {
-      uStack_18 = 0;
+    word1 = entryHome[1];
+    word2 = entryHome[2];
+    node[1] = *entryHome;
+    node[2] = word1;
+    node[3] = word2;
+    *node = *(undefined4 *)(globalsHome + 4);
+    *(undefined4 **)(globalsHome + 4) = node;
+    unlockResult = __keymgr_set_and_unlock_processwide_ptr(0xe,globalsHome);
+    if ((*(ushort *)(*(int *)(PTR_0000f124 + 8) + 4) < 4) || (unlockResult == 0)) {
+      status = 0;
     }
     else {
-      uStack_18 = 0xffffffff;
+      status = 0xffffffff;
     }
-    uStack_14 = uStack_18;
+    result = status;
   }
-  return uStack_14;
+  return result;
 }
 
 /* FUN_00001fd8 @ 0x1fd8 (32 bytes) */
 int FUN_00001fd8()
 {
-  int iVar1;
-  undefined4 uVar2;
-  int iVar3;
-  void *pvStack_20;
-  void *pvStack_18;
+  int libSystemHandle;
+  undefined4 symbolAddress;
+  int checkResult;
+  void *globals;
+  void *result;
   
-  pvStack_20 = (void *)__keymgr_get_and_lock_processwide_ptr(0xe);
-  if ((pvStack_20 == (void *)0x0) && (pvStack_20 = _calloc(0x14,1), pvStack_20 == (void *)0x0)) {
+  globals = (void *)__keymgr_get_and_lock_processwide_ptr(0xe);
+  if ((globals == (void *)0x0) && (globals = _calloc(0x14,1), globals == (void *)0x0)) {
     return (void *)0x0;
   }
-  if (*(char *)((int)pvStack_20 + 3) == '\0') {
-    iVar1 = _dlopen("/usr/lib/libSystem.B.dylib",0x10);
-    if (iVar1 == 0) {
-      *(undefined1 *)((int)pvStack_20 + 3) = 1;
-      uVar2 = ((int (*)())FUN_0000122c)();
-      *(undefined4 *)((int)pvStack_20 + 0x10) = uVar2;
-      if ((*(int *)((int)pvStack_20 + 0x10) != 0) &&
-         (iVar1 = (**(code **)((int)pvStack_20 + 0x10))(FUN_00001bbc), iVar1 == 0))
+  if (*(char *)((int)globals + 3) == '\0') {
+    libSystemHandle = _dlopen("/usr/lib/libSystem.B.dylib",0x10);
+    if (libSystemHandle == 0) {
+      *(undefined1 *)((int)globals + 3) = 1;
+      symbolAddress = ((int (*)())FUN_0000122c)();
+      *(undefined4 *)((int)globals + 0x10) = symbolAddress;
+      if ((*(int *)((int)globals + 0x10) != 0) &&
+         (libSystemHandle = (**(code **)((int)globals + 0x10))(FUN_00001bbc), libSystemHandle == 0))
       goto LAB_00001638;
     }
     else {
-      uVar2 = _dlsym(iVar1,"__cxa_atexit");
-      *(undefined4 *)((int)pvStack_20 + 8) = uVar2;
-      uVar2 = _dlsym(iVar1,"__cxa_finalize");
-      *(undefined4 *)((int)pvStack_20 + 0xc) = uVar2;
-      if (((*(int *)((int)pvStack_20 + 8) != 0) && (*(int *)((int)pvStack_20 + 0xc) != 0)) &&
-         (iVar3 = ((int (*)())FUN_00001160)(*(undefined4 *)((int)pvStack_20 + 8),
-                               *(undefined4 *)((int)pvStack_20 + 0xc)), iVar3 != -1)) {
-        if (iVar3 == 0) {
-          *(undefined1 *)((int)pvStack_20 + 3) = 2;
+      symbolAddress = _dlsym(libSystemHandle,"__cxa_atexit");
+      *(undefined4 *)((int)globals + 8) = symbolAddress;
+      symbolAddress = _dlsym(libSystemHandle,"__cxa_finalize");
+      *(undefined4 *)((int)globals + 0xc) = symbolAddress;
+      if (((*(int *)((int)globals + 8) != 0) && (*(int *)((int)globals + 0xc) != 0)) &&
+         (checkResult = ((int (*)())FUN_00001160)(*(undefined4 *)((int)globals + 8),
+                               *(undefined4 *)((int)globals + 0xc)), checkResult != -1)) {
+        if (checkResult == 0) {
+          *(undefined1 *)((int)globals + 3) = 2;
         }
         else {
-          uVar2 = _dlsym(iVar1,"atexit");
-          *(undefined4 *)((int)pvStack_20 + 0x10) = uVar2;
-          if (*(int *)((int)pvStack_20 + 0x10) == 0) goto LAB_00001644;
-          *(undefined1 *)((int)pvStack_20 + 3) = 0x10;
+          symbolAddress = _dlsym(libSystemHandle,"atexit");
+          *(undefined4 *)((int)globals + 0x10) = symbolAddress;
+          if (*(int *)((int)globals + 0x10) == 0) goto LAB_00001644;
+          *(undefined1 *)((int)globals + 3) = 0x10;
         }
         goto LAB_00001638;
       }
     }
 LAB_00001644:
-    __keymgr_set_and_unlock_processwide_ptr(0xe,pvStack_20);
-    pvStack_18 = (void *)0x0;
+    __keymgr_set_and_unlock_processwide_ptr(0xe,globals);
+    result = (void *)0x0;
   }
   else {
 LAB_00001638:
-    pvStack_18 = pvStack_20;
+    result = globals;
   }
-  return pvStack_18;
+  return result;
 }
 
 /* FUN_00001ff8 @ 0x1ff8 (96 bytes) */
-int FUN_00001ff8(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+int FUN_00001ff8(function, argument, dsoHandle)
+  undefined4 function;
+  undefined4 argument;
+  undefined4 dsoHandle;
 {
-  undefined4 uVar1;
-  undefined4 uStack00000018;
-  undefined4 uStack0000001c;
-  undefined4 uStack00000020;
-  undefined4 local_28;
-  undefined4 local_24;
-  undefined4 local_20;
+  undefined4 result;
+  undefined4 functionHome;
+  undefined4 argumentHome;
+  undefined4 dsoHandleHome;
+  undefined4 entryFunction;
+  undefined4 entryKind;
+  undefined4 entryArgument;
   
-  local_24 = 1;
-  uStack00000018 = param_1;
-  uStack0000001c = param_2;
-  uStack00000020 = param_3;
-  local_28 = param_1;
-  local_20 = param_2;
-  uVar1 = ((int (*)())FUN_00001cd8)(&local_28,param_3);
-  return uVar1;
+  entryKind = 1;
+  functionHome = function;
+  argumentHome = argument;
+  dsoHandleHome = dsoHandle;
+  entryFunction = function;
+  entryArgument = argument;
+  result = ((int (*)())FUN_00001cd8)(&entryFunction,dsoHandle);
+  return result;
 }
 
 /* FUN_00002058 @ 0x2058 (32 bytes) */
-int FUN_00002058(param_1, param_2)
-  undefined4 param_1;
-  undefined4 param_2;
+int FUN_00002058(atexitEntry, dsoHandle)
+  undefined4 atexitEntry;
+  undefined4 dsoHandle;
 {
-  ((int (*)())FUN_00001cd8)(param_1,param_2);
+  ((int (*)())FUN_00001cd8)(atexitEntry,dsoHandle);
   return;
 }
 
 /* FUN_00002078 @ 0x2078 (92 bytes) */
-int FUN_00002078(param_1)
-  undefined4 param_1;
+int FUN_00002078(atexit_function)
+  undefined4 atexit_function;
 {
-  undefined4 uVar1;
-  undefined4 uStack00000018;
-  undefined4 local_28;
-  undefined4 local_24;
+  undefined4 result;
+  undefined4 atexitFunctionHome;
+  undefined4 entryFunction;
+  undefined4 entryKind;
   
-  local_24 = 0;
-  uStack00000018 = param_1;
-  local_28 = param_1;
-  uVar1 = ((int (*)())FUN_00001cd8)(&local_28,PTR_0000f128);
-  return uVar1;
+  entryKind = 0;
+  atexitFunctionHome = atexit_function;
+  entryFunction = atexit_function;
+  result = ((int (*)())FUN_00001cd8)(&entryFunction,PTR_0000f128);
+  return result;
 }
 
 /* FUN_000020d4 @ 0x20d4 (32 bytes) */
-int FUN_000020d4(param_1, param_2)
-  undefined4 param_1;
-  undefined4 param_2;
+int FUN_000020d4(atexitEntry, dsoHandle)
+  undefined4 atexitEntry;
+  undefined4 dsoHandle;
 {
-  ((int (*)())FUN_00001cd8)(param_1,param_2);
+  ((int (*)())FUN_00001cd8)(atexitEntry,dsoHandle);
   return;
 }
 
@@ -1243,9 +1243,9 @@ int FUN_00002b70(ctx)
 }
 
 /* FUN_00002c70 @ 0x2c70 (132 bytes) */
-int FUN_00002c70(ctx, param_2, slot)
+int FUN_00002c70(ctx, unused1, slot)
   int ctx;
-  undefined4 param_2;
+  undefined4 unused1;
   uint slot;
 {
   int entry;
@@ -1267,9 +1267,9 @@ int FUN_00002c70(ctx, param_2, slot)
 }
 
 /* FUN_00002d00 @ 0x2d00 (120 bytes) */
-int FUN_00002d00(ctx, param_2, slot)
+int FUN_00002d00(ctx, unused1, slot)
   int ctx;
-  undefined4 param_2;
+  undefined4 unused1;
   uint slot;
 {
   int entry;
