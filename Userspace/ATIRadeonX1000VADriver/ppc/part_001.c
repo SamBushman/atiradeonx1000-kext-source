@@ -336,25 +336,25 @@ LAB_000041dc:
 }
 
 /* FUN_00004280 @ 0x4280 (192 bytes) */
-int FUN_00004280(param_1, param_2, param_3, param_4)
-  int param_1;
-  undefined4 param_2;
-  int param_3;
-  undefined4 *param_4;
+int FUN_00004280(ctx, arg, opcodeBase, outSlot)
+  int ctx;
+  undefined4 arg;
+  int opcodeBase;
+  undefined4 *outSlot;
 {
-  uint uVar1;
-  undefined4 uVar2;
+  uint packetIndex;
+  undefined4 slotIndex;
   
-  uVar1 = param_3 + 0xcU & 0xff;
-  *(undefined4 *)(*(int *)(param_1 + 0xac4) * 8 + param_1 + 0x55c + 0x56c) = 0;
-  *(undefined4 *)(*(int *)(param_1 + 0xac4) * 8 + param_1 + 0x55c + 0x570) = 0;
-  ((int (*)())FUN_00003cd0)(param_1,uVar1);
-  ((int (*)())FUN_00009690)(param_1,param_2,param_3);
-  FUN_000029c0(param_1,uVar1);
-  uVar2 = *(undefined4 *)(param_1 + 0xac4);
-  *param_4 = 0;
-  param_4[1] = uVar2;
-  *(uint *)(param_1 + 0xac4) = (*(int *)(param_1 + 0xac4) + 1U) % 10000;
+  packetIndex = opcodeBase + 0xcU & 0xff;
+  *(undefined4 *)(*(int *)(ctx + 0xac4) * 8 + ctx + 0x55c + 0x56c) = 0;
+  *(undefined4 *)(*(int *)(ctx + 0xac4) * 8 + ctx + 0x55c + 0x570) = 0;
+  ((int (*)())FUN_00003cd0)(ctx,packetIndex);
+  ((int (*)())FUN_00009690)(ctx,arg,opcodeBase);
+  FUN_000029c0(ctx,packetIndex);
+  slotIndex = *(undefined4 *)(ctx + 0xac4);
+  *outSlot = 0;
+  outSlot[1] = slotIndex;
+  *(uint *)(ctx + 0xac4) = (*(int *)(ctx + 0xac4) + 1U) % 10000;
   return 0;
 }
 
@@ -666,47 +666,47 @@ int FUN_00004a00()
 }
 
 /* FUN_00004a10 @ 0x4a10 (296 bytes) */
-int FUN_00004a10(param_1, param_2, param_3, param_4)
-  int param_1;
-  char *param_2;
-  undefined4 *param_3;
-  undefined4 *param_4;
+int FUN_00004a10(ctx, srcRect, dstRect, outSlot)
+  int ctx;
+  char *srcRect;
+  undefined4 *dstRect;
+  undefined4 *outSlot;
 {
-  undefined4 uVar1;
-  int iVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  undefined4 uVar5;
-  int iVar6;
+  undefined4 srcWord0;
+  int entry;
+  undefined4 slotIndex;
+  undefined4 srcWord3;
+  undefined4 srcWord2;
+  int table;
   
-  iVar6 = param_1 + 0x55c;
-  *(undefined4 *)(*(int *)(param_1 + 0xac4) * 8 + iVar6 + 0x56c) = 0;
-  *(undefined4 *)(*(int *)(param_1 + 0xac4) * 8 + iVar6 + 0x570) = 0;
-  uVar1 = *(undefined4 *)param_2;
-  uVar5 = *(undefined4 *)(param_2 + 8);
-  uVar4 = *(undefined4 *)(param_2 + 0xc);
-  uVar3 = *(undefined4 *)(param_1 + 0xac4);
-  iVar2 = *param_2 * 0x14 + iVar6;
-  *(undefined4 *)(iVar2 + 0x13df0) = *(undefined4 *)(param_2 + 4);
-  *(undefined4 *)(iVar2 + 0x13dec) = uVar1;
-  *(undefined4 *)(iVar2 + 0x13df4) = uVar5;
-  *(undefined4 *)(iVar2 + 0x13df8) = uVar4;
-  *(undefined4 *)(iVar2 + 0x13dfc) = *(undefined4 *)(param_2 + 0x10);
-  uVar5 = param_3[1];
-  uVar4 = param_3[2];
-  uVar1 = param_3[3];
-  iVar2 = *param_2 * 0x18 + iVar6;
-  *(undefined4 *)(iVar2 + 0x13e50) = *param_3;
-  *(undefined4 *)(iVar2 + 0x13e54) = uVar5;
-  *(undefined4 *)(iVar2 + 0x13e58) = uVar4;
-  *(undefined4 *)(iVar2 + 0x13e5c) = uVar1;
-  uVar1 = param_3[4];
-  *(undefined4 *)(iVar2 + 0x13e64) = param_3[5];
-  *(undefined4 *)(iVar2 + 0x13e60) = uVar1;
-  *(undefined4 *)(*param_2 * 4 + iVar6 + 0x540) = 1;
-  param_4[1] = uVar3;
-  *param_4 = 0;
-  *(uint *)(param_1 + 0xac4) = (*(int *)(param_1 + 0xac4) + 1U) % 10000;
+  table = ctx + 0x55c;
+  *(undefined4 *)(*(int *)(ctx + 0xac4) * 8 + table + 0x56c) = 0;
+  *(undefined4 *)(*(int *)(ctx + 0xac4) * 8 + table + 0x570) = 0;
+  srcWord0 = *(undefined4 *)srcRect;
+  srcWord2 = *(undefined4 *)(srcRect + 8);
+  srcWord3 = *(undefined4 *)(srcRect + 0xc);
+  slotIndex = *(undefined4 *)(ctx + 0xac4);
+  entry = *srcRect * 0x14 + table;
+  *(undefined4 *)(entry + 0x13df0) = *(undefined4 *)(srcRect + 4);
+  *(undefined4 *)(entry + 0x13dec) = srcWord0;
+  *(undefined4 *)(entry + 0x13df4) = srcWord2;
+  *(undefined4 *)(entry + 0x13df8) = srcWord3;
+  *(undefined4 *)(entry + 0x13dfc) = *(undefined4 *)(srcRect + 0x10);
+  srcWord2 = dstRect[1];
+  srcWord3 = dstRect[2];
+  srcWord0 = dstRect[3];
+  entry = *srcRect * 0x18 + table;
+  *(undefined4 *)(entry + 0x13e50) = *dstRect;
+  *(undefined4 *)(entry + 0x13e54) = srcWord2;
+  *(undefined4 *)(entry + 0x13e58) = srcWord3;
+  *(undefined4 *)(entry + 0x13e5c) = srcWord0;
+  srcWord0 = dstRect[4];
+  *(undefined4 *)(entry + 0x13e64) = dstRect[5];
+  *(undefined4 *)(entry + 0x13e60) = srcWord0;
+  *(undefined4 *)(*srcRect * 4 + table + 0x540) = 1;
+  outSlot[1] = slotIndex;
+  *outSlot = 0;
+  *(uint *)(ctx + 0xac4) = (*(int *)(ctx + 0xac4) + 1U) % 10000;
   return 0;
 }
 
@@ -939,47 +939,47 @@ LAB_000051c0:
 }
 
 /* FUN_000051f0 @ 0x51f0 (136 bytes) */
-int FUN_000051f0(param_1)
-  int param_1;
+int FUN_000051f0(ctx)
+  int ctx;
 {
-  uint uVar1;
-  int iVar2;
+  uint index;
+  int mapping;
   
-  FUN_000029c0(param_1,3);
-  FUN_00002930(param_1,param_1 + 0x1b0,1);
-  if (*(int *)(param_1 + 0x5c) != 0) {
-    uVar1 = 0;
-    iVar2 = param_1 + 0x218;
+  FUN_000029c0(ctx,3);
+  FUN_00002930(ctx,ctx + 0x1b0,1);
+  if (*(int *)(ctx + 0x5c) != 0) {
+    index = 0;
+    mapping = ctx + 0x218;
     do {
-      uVar1 = uVar1 + 1;
-      FUN_00002930(param_1,iVar2,0);
-      iVar2 = iVar2 + 100;
-    } while (uVar1 < *(uint *)(param_1 + 0x5c));
+      index = index + 1;
+      FUN_00002930(ctx,mapping,0);
+      mapping = mapping + 100;
+    } while (index < *(uint *)(ctx + 0x5c));
   }
   return 0;
 }
 
 /* FUN_00005280 @ 0x5280 (108 bytes) */
-int FUN_00005280(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+int FUN_00005280(ctx, value)
+  int ctx;
+  undefined4 value;
 {
-  undefined4 uVar1;
-  int iVar2;
-  undefined4 local_28;
-  undefined4 local_24;
-  undefined4 local_20;
+  undefined4 status;
+  int kr;
+  undefined4 outCount;
+  undefined4 scalarIn0;
+  undefined4 scalarIn1;
   
-  local_28 = 0;
-  local_24 = 0x92;
-  local_20 = param_2;
-  iVar2 = _io_connect_method_scalarI_scalarO
-                    (*(undefined4 *)(param_1 + 0x14),0x10,&local_24,2,0,&local_28);
-  uVar1 = 0xfffffffb;
-  if ((iVar2 != -0x11) && (uVar1 = 0xfffffff9, iVar2 != -0x32)) {
-    uVar1 = 0;
+  outCount = 0;
+  scalarIn0 = 0x92;
+  scalarIn1 = value;
+  kr = _io_connect_method_scalarI_scalarO
+                    (*(undefined4 *)(ctx + 0x14),0x10,&scalarIn0,2,0,&outCount);
+  status = 0xfffffffb;
+  if ((kr != -0x11) && (status = 0xfffffff9, kr != -0x32)) {
+    status = 0;
   }
-  return uVar1;
+  return status;
 }
 
 /* FUN_000052f0 @ 0x52f0 (924 bytes) */
@@ -2757,10 +2757,10 @@ int FUN_00008690(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* FUN_00008800 @ 0x8800 (28 bytes) */
-int FUN_00008800(param_1)
-  int param_1;
+int FUN_00008800(ctx)
+  int ctx;
 {
-  *(undefined4 *)(*(int *)(param_1 + 0x15164) + -0xc) = 0;
+  *(undefined4 *)(*(int *)(ctx + 0x15164) + -0xc) = 0;
   return;
 }
 
@@ -3186,18 +3186,18 @@ int FUN_00009690()
 }
 
 /* FUN_000096a0 @ 0x96a0 (96 bytes) */
-int FUN_000096a0(param_1)
-  undefined4 *param_1;
+int FUN_000096a0(cmdPtr)
+  undefined4 *cmdPtr;
 {
-  *param_1 = 0x5c8;
-  param_1[1] = 0x10030000;
-  param_1[2] = ((unsigned char *)0x00001002U);
-  param_1[3] = 0;
-  param_1[4] = 0x1381;
-  param_1[5] = 0;
-  param_1[6] = ((unsigned char *)0x00001040U);
-  param_1[7] = 0;
-  return param_1 + 8;
+  *cmdPtr = 0x5c8;
+  cmdPtr[1] = 0x10030000;
+  cmdPtr[2] = ((unsigned char *)0x00001002U);
+  cmdPtr[3] = 0;
+  cmdPtr[4] = 0x1381;
+  cmdPtr[5] = 0;
+  cmdPtr[6] = ((unsigned char *)0x00001040U);
+  cmdPtr[7] = 0;
+  return cmdPtr + 8;
 }
 
 /* FUN_00009700 @ 0x9700 (528 bytes) */
@@ -3282,36 +3282,36 @@ int FUN_00009700(param_1, param_2)
 }
 
 /* FUN_00009930 @ 0x9930 (80 bytes) */
-int FUN_00009930(param_1, param_2, param_3, param_4)
-  uint *param_1;
-  uint param_2;
-  uint *param_3;
-  int param_4;
+int FUN_00009930(cmdPtr, registerHeader, data, count)
+  uint *cmdPtr;
+  uint registerHeader;
+  uint *data;
+  int count;
 {
-  uint uVar1;
+  uint word;
   
-  *param_1 = (param_4 + -1) * 0x10000 | param_2 | 0x8000;
-  for (; param_1 = param_1 + 1, param_4 != 0; param_4 = param_4 + -1) {
-    uVar1 = *param_3;
-    param_3 = param_3 + 1;
-    *param_1 = uVar1;
+  *cmdPtr = (count + -1) * 0x10000 | registerHeader | 0x8000;
+  for (; cmdPtr = cmdPtr + 1, count != 0; count = count + -1) {
+    word = *data;
+    data = data + 1;
+    *cmdPtr = word;
   }
-  return param_1;
+  return cmdPtr;
 }
 
 /* FUN_00009980 @ 0x9980 (48 bytes) */
-int FUN_00009980(param_1, param_2, param_3, param_4)
-  undefined4 *param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+int FUN_00009980(cmdPtr, registerValue, count, data)
+  undefined4 *cmdPtr;
+  undefined4 registerValue;
+  undefined4 count;
+  undefined4 data;
 {
-  undefined4 uVar1;
+  undefined4 nextPtr;
   
-  *param_1 = 0x1094;
-  param_1[1] = param_2;
-  uVar1 = ((int (*)())FUN_00009930)(param_1 + 2,0x1095,param_4,param_3);
-  return uVar1;
+  *cmdPtr = 0x1094;
+  cmdPtr[1] = registerValue;
+  nextPtr = ((int (*)())FUN_00009930)(cmdPtr + 2,0x1095,data,count);
+  return nextPtr;
 }
 
 /* FUN_000099b0 @ 0x99b0 (264 bytes) */
@@ -4536,58 +4536,58 @@ int FUN_0000bbc0(param_1, param_2, param_3, param_4, param_5, param_6)
 }
 
 /* FUN_0000bf20 @ 0xbf20 (72 bytes) */
-int FUN_0000bf20(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int param_1;
-  uint param_2;
-  int param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int FUN_0000bf20(ctx, address, length, unused1, unused2, unused3, unused4, unused5)
+  int ctx;
+  uint address;
+  int length;
+  undefined4 unused1;
+  undefined4 unused2;
+  undefined4 unused3;
+  undefined4 unused4;
+  undefined4 unused5;
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
+  int offset;
+  int span;
+  int lineSize;
   
-  iVar3 = *(int *)(param_1 + 0x144);
-  iVar1 = 0;
-  iVar2 = (param_2 & iVar3 - 1U) + (param_3 - iVar3);
-  if (0 < iVar2) {
+  lineSize = *(int *)(ctx + 0x144);
+  offset = 0;
+  span = (address & lineSize - 1U) + (length - lineSize);
+  if (0 < span) {
     do {
-      dataCacheBlockStore((-iVar3 & param_2) + iVar1);
-      iVar1 = iVar3 + iVar1;
-    } while (iVar1 < iVar2);
+      dataCacheBlockStore((-lineSize & address) + offset);
+      offset = lineSize + offset;
+    } while (offset < span);
   }
-  dataCacheBlockFlush((-iVar3 & param_2) + iVar1);
+  dataCacheBlockFlush((-lineSize & address) + offset);
   return;
 }
 
 /* FUN_0000bf70 @ 0xbf70 (80 bytes) */
-int FUN_0000bf70(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int param_1;
-  uint param_2;
-  int param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int FUN_0000bf70(ctx, address, length, unused1, unused2, unused3, unused4, unused5)
+  int ctx;
+  uint address;
+  int length;
+  undefined4 unused1;
+  undefined4 unused2;
+  undefined4 unused3;
+  undefined4 unused4;
+  undefined4 unused5;
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
+  int offset;
+  int span;
+  int lineSize;
   
-  iVar3 = *(int *)(param_1 + 0x144);
-  iVar1 = 0;
-  iVar2 = ((param_2 & iVar3 - 1U) + param_3) - iVar3;
-  if (0 < iVar2) {
+  lineSize = *(int *)(ctx + 0x144);
+  offset = 0;
+  span = ((address & lineSize - 1U) + length) - lineSize;
+  if (0 < span) {
     do {
-      dataCacheBlockFlush((-iVar3 & param_2) + iVar1);
-      iVar1 = iVar1 + iVar3;
-    } while (iVar1 < iVar2);
+      dataCacheBlockFlush((-lineSize & address) + offset);
+      offset = offset + lineSize;
+    } while (offset < span);
   }
-  dataCacheBlockFlush((-iVar3 & param_2) + iVar1);
+  dataCacheBlockFlush((-lineSize & address) + offset);
   sync(0);
   instructionSynchronize();
   return;
@@ -4893,17 +4893,17 @@ int FUN_0000c4b0(param_1, param_2, param_3, param_4)
 }
 
 /* FUN_0000caa0 @ 0xcaa0 (92 bytes) */
-int FUN_0000caa0(param_1, param_2, param_3, param_4)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+int FUN_0000caa0(ctx, arg1, arg2, arg3)
+  int ctx;
+  undefined4 arg1;
+  undefined4 arg2;
+  undefined4 arg3;
 {
-  if (*(int *)(param_1 + 0x120) == 4) {
-    ((int (*)())FUN_0000c4b0)(param_1,param_2,param_3,param_4);
+  if (*(int *)(ctx + 0x120) == 4) {
+    ((int (*)())FUN_0000c4b0)(ctx,arg1,arg2,arg3);
   }
-  *(undefined4 *)(*(int *)(param_1 + 0xac4) * 8 + param_1 + 0xacc) =
-       *(undefined4 *)(*(int *)(param_1 + 0x40) + 0x18);
+  *(undefined4 *)(*(int *)(ctx + 0xac4) * 8 + ctx + 0xacc) =
+       *(undefined4 *)(*(int *)(ctx + 0x40) + 0x18);
   return;
 }
 
