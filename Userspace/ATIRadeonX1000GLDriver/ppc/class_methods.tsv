@@ -1,0 +1,873 @@
+address	corpus_name	class	role	evidence
+0xe7cf0	FUN_000e7cf0	EntryBlock	virtual-slot3	vtable slot of EntryBlock[3]
+0xe9d68	FUN_000e9d68	Block	ctor	stores vtable of Block at *this
+0xe9e88	FUN_000e9e88	AnyBlock	virtual-slot2	vtable slot of Block[2],ExitBlock[2],EntryBlock[2],BreakOrContinueBlock[2],AnyBlock[2]
+0xe9f00	FUN_000e9f00	Block	ctor	stores vtable of Block at *this
+0xea020	FUN_000ea020	Block	ctor	stores vtable of Block at *this
+0xea148	FUN_000ea148	Block	ctor	stores vtable of Block at *this
+0xea270	FUN_000ea270	Block	dtor (complete, non-deleting)	stores vtable of Block at *this
+0xea3c0	FUN_000ea3c0	AnyBlock	ctor	stores vtable of AnyBlock at *this
+0xea478	FUN_000ea478	AnyBlock	ctor	stores vtable of AnyBlock at *this
+0xea530	FUN_000ea530	IfHeader	ctor	stores vtable of IfHeader at *this
+0xea600	FUN_000ea600	IfHeader	ctor	stores vtable of IfHeader at *this
+0xea6d0	FUN_000ea6d0	IfHeader	ctor	stores vtable of IfHeader at *this
+0xea828	FUN_000ea828	PostLoopFooter	ctor	stores vtable of LoopHeader>PostLoopFooter at *this
+0xeaae8	FUN_000eaae8	ExitBlock	ctor	stores vtable of ExitBlock at *this
+0xeab2c	FUN_000eab2c	ExitBlock	ctor	stores vtable of ExitBlock at *this
+0xeab70	FUN_000eab70	EntryBlock	ctor	stores vtable of EntryBlock at *this
+0xeabbc	FUN_000eabbc	EntryBlock	ctor	stores vtable of EntryBlock at *this
+0xeacb8	FUN_000eacb8	PostLoopFooter	ctor	stores vtable of PostLoopFooter at *this
+0xead08	FUN_000ead08	PostLoopFooter	virtual-slot2	vtable slot of PostLoopFooter[2]
+0xead80	FUN_000ead80	PostLoopFooter	ctor	stores vtable of PostLoopFooter at *this
+0xeadd0	FUN_000eadd0	LoopFooter	ctor	stores vtable of LoopFooter at *this
+0xeae20	FUN_000eae20	LoopFooter	virtual-slot2	vtable slot of LoopFooter[2]
+0xeae98	FUN_000eae98	LoopFooter	ctor	stores vtable of LoopFooter at *this
+0xeaee8	FUN_000eaee8	LoopHeader	ctor	stores vtable of LoopHeader at *this
+0xeaf6c	FUN_000eaf6c	LoopHeader	virtual-slot2	vtable slot of LoopHeader[2]
+0xeafe4	FUN_000eafe4	LoopHeader	ctor	stores vtable of LoopHeader at *this
+0xeb068	FUN_000eb068	IfFooter	ctor	stores vtable of IfFooter at *this
+0xeb0ac	FUN_000eb0ac	IfFooter	virtual-slot2	vtable slot of IfFooter[2]
+0xeb124	FUN_000eb124	IfFooter	ctor	stores vtable of IfFooter at *this
+0xeb168	FUN_000eb168	IfHeader	ctor	stores vtable of IfHeader at *this
+0xeb1d0	FUN_000eb1d0	IfHeader	virtual-slot2	vtable slot of IfHeader[2]
+0xeb248	FUN_000eb248	IfHeader	ctor	stores vtable of IfHeader at *this
+0xeb2b0	FUN_000eb2b0	FuncEndBlock	ctor	stores vtable of FuncEndBlock at *this
+0xeb300	FUN_000eb300	FuncEndBlock	virtual-slot2	vtable slot of FuncEndBlock[2]
+0xeb378	FUN_000eb378	FuncEndBlock	ctor	stores vtable of FuncEndBlock at *this
+0xeb3c8	FUN_000eb3c8	PostLoopFooter	ctor	stores vtable of LoopHeader>PostLoopFooter at *this
+0xeb688	FUN_000eb688	IfHeader	ctor	stores vtable of IfHeader at *this
+0xeb7e0	FUN_000eb7e0	IfFooterStatic	ctor	stores vtable of IfFooterStatic at *this
+0xeb824	FUN_000eb824	IfFooterStatic	ctor	stores vtable of IfFooterStatic at *this
+0xeb868	FUN_000eb868	IfFooterStatic	virtual-slot2	vtable slot of IfFooterStatic[2]
+0xeb8e0	FUN_000eb8e0	IfHeaderStatic	ctor	stores vtable of IfHeaderStatic at *this
+0xeb924	FUN_000eb924	IfHeaderStatic	ctor	stores vtable of IfHeaderStatic at *this
+0xeb968	FUN_000eb968	IfHeaderStatic	virtual-slot2	vtable slot of IfHeaderStatic[2]
+0xeb9e0	FUN_000eb9e0	IfHeaderStatic	ctor	stores vtable of IfHeaderStatic at *this
+0xebac8	FUN_000ebac8	IfHeaderStatic	ctor	stores vtable of IfHeaderStatic at *this
+0xebbb0	FUN_000ebbb0	Block	virtual-slot0 (dtor)	stores vtable of Block at *this; vtable slot of Block[0]
+0xebd00	FUN_000ebd00	Block	virtual-slot1 (deleting dtor)	stores vtable of Block at *this; vtable slot of Block[1]
+0xebe70	FUN_000ebe70	BreakBlock	ctor	stores vtable of BreakBlock at *this
+0xebeb4	FUN_000ebeb4	BreakBlock	ctor	stores vtable of BreakBlock at *this
+0xebef8	FUN_000ebef8	BreakBlock	virtual-slot2	vtable slot of BreakBlock[2]
+0xebf70	FUN_000ebf70	ContinueBlock	ctor	stores vtable of ContinueBlock at *this
+0xebfb4	FUN_000ebfb4	ContinueBlock	ctor	stores vtable of ContinueBlock at *this
+0xebff8	FUN_000ebff8	ContinueBlock	virtual-slot2	vtable slot of ContinueBlock[2]
+0xec070	FUN_000ec070	BreakBlock	ctor	stores vtable of BreakBlock at *this
+0xec0c8	FUN_000ec0c8	BreakBlock	ctor	stores vtable of BreakBlock at *this
+0xec120	FUN_000ec120	ContinueBlock	ctor	stores vtable of ContinueBlock at *this
+0xec178	FUN_000ec178	ContinueBlock	ctor	stores vtable of ContinueBlock at *this
+0x104e20	FUN_00104e20	IRLoadConst	virtual-slot3	vtable slot of IRLoadConst[3]
+0x10502c	FUN_0010502c	IRInst	ctor	stores vtable of IRInst at *this
+0x1051b0	FUN_001051b0	IRInst	ctor	stores vtable of IRInst at *this
+0x105a44	FUN_00105a44	IRAlu	virtual-slot4	vtable slot of IRStartCallRoutine[4],IREndCallRoutine[4],IRStartMakeCall[4],IREndMakeCall[4],IRInst[4]
+0x105b7c	FUN_00105b7c	IRAlu	virtual-slot3	vtable slot of IRStartCallRoutine[3],IREndCallRoutine[3],IRStartMakeCall[3],IREndMakeCall[3],IRInst[3]
+0x10647c	FUN_0010647c	IRAlu	virtual-slot2	vtable slot of IRStartCallRoutine[2],IREndCallRoutine[2],IRStartMakeCall[2],IREndMakeCall[2],IRInst[2]
+0x1066e8	FUN_001066e8	IRProjection	virtual-slot2	vtable slot of IRProjection[2]
+0x10673c	FUN_0010673c	IRPresub2	virtual-slot2	vtable slot of IRPresub2[2]
+0x106780	FUN_00106780	IRPhiNode	virtual-slot2	vtable slot of IRPhiNode[2]
+0x106ba0	FUN_00106ba0	IRMix	virtual-slot2	vtable slot of IRMix[2]
+0x106cb4	FUN_00106cb4	IRPresub1	virtual-slot2	vtable slot of IRPresub1[2]
+0x1073dc	FUN_001073dc	IRVertexFetch	ctor	stores vtable of IRVertexFetch at *this
+0x107420	FUN_00107420	IRVertexFetch	ctor	stores vtable of IRVertexFetch at *this
+0x1085b0	FUN_001085b0	IRExport	ctor	stores vtable of IRExport at *this
+0x108918	FUN_00108918	IRExport	ctor	stores vtable of IRExport at *this
+0x108d10	FUN_00108d10	IREntry	ctor	stores vtable of IREntry at *this
+0x108d5c	FUN_00108d5c	IREntry	ctor	stores vtable of IREntry at *this
+0x108da8	FUN_00108da8	IRExit	ctor	stores vtable of IRExit at *this
+0x108df4	FUN_00108df4	IRExit	ctor	stores vtable of IRExit at *this
+0x109068	FUN_00109068	IRLoadMemBufferIndex	ctor	stores vtable of IRLoadMemBufferIndex at *this
+0x1090b4	FUN_001090b4	IRLoadMemBufferIndex	ctor	stores vtable of IRLoadMemBufferIndex at *this
+0x109100	FUN_00109100	IRLoadMemBuffer	ctor	stores vtable of IRLoadMemBuffer at *this
+0x10914c	FUN_0010914c	IRLoadMemBuffer	ctor	stores vtable of IRLoadMemBuffer at *this
+0x109614	FUN_00109614	IRLoadConst	ctor	stores vtable of IRLoadConst at *this
+0x1096bc	FUN_001096bc	IRLoadConst	ctor	stores vtable of IRLoadConst at *this
+0x109938	FUN_00109938	IRLoadConst	ctor	stores vtable of IRLoadConst at *this
+0x1099dc	FUN_001099dc	IRLoadConst	ctor	stores vtable of IRLoadConst at *this
+0x109dcc	FUN_00109dcc	IRProjection	ctor	stores vtable of IRProjection at *this
+0x109e28	FUN_00109e28	IRProjection	ctor	stores vtable of IRProjection at *this
+0x109f00	FUN_00109f00	IRPresub1	ctor	stores vtable of IRPresub1 at *this
+0x109f50	FUN_00109f50	IRPresub1	ctor	stores vtable of IRPresub1 at *this
+0x10a01c	FUN_0010a01c	IRPresub2	ctor	stores vtable of IRPresub2 at *this
+0x10a070	FUN_0010a070	IRPresub2	ctor	stores vtable of IRPresub2 at *this
+0x10a140	FUN_0010a140	IRMix	ctor	stores vtable of IRMix at *this
+0x10a1c0	FUN_0010a1c0	IRMix	ctor	stores vtable of IRMix at *this
+0x10a2bc	FUN_0010a2bc	IRPhiNode	ctor	stores vtable of IRPhiNode at *this
+0x10a398	FUN_0010a398	IRPhiNode	ctor	stores vtable of IRPhiNode at *this
+0x10dad8	FUN_0010dad8	HwLimits	dtor (complete, non-deleting)	stores vtable of HwLimits at *this
+0x10db58	FUN_0010db58	HwLimits	dtor (complete, non-deleting)	stores vtable of HwLimits at *this
+0x10e050	FUN_0010e050	KhanChip	ctor	stores vtable of KhanChip at *this
+0x10e114	FUN_0010e114	KhanChip	ctor	stores vtable of KhanChip at *this
+0x1230e4	FUN_001230e4	ImmedConstBuffer	virtual-slot2	vtable slot of ImmedConstBuffer[2]
+0x123288	FUN_00123288	VertexRegister	virtual-slot2	vtable slot of VertexRegister[2]
+0x1240a8	FUN_001240a8	PrimitiveIndex	virtual-slot2	vtable slot of TempValue[2],PrimitiveIndex[2],StandardIndex[2]
+0x1241fc	FUN_001241fc	ExportSlot	virtual-slot2	vtable slot of ExportSlot[2]
+0x12434c	FUN_0012434c	Resource	virtual-slot2	vtable slot of Resource[2]
+0x12447c	FUN_0012447c	FixedValue	virtual-slot2	vtable slot of FixedValue[2]
+0x1245a8	FUN_001245a8	FixedValue	ctor	stores vtable of FixedValue at *this
+0x124724	FUN_00124724	FixedValue	ctor	stores vtable of FixedValue at *this
+0x1248a0	FUN_001248a0	VertexRegister	ctor	stores vtable of VertexRegister at *this
+0x1248ec	FUN_001248ec	VertexRegister	ctor	stores vtable of VertexRegister at *this
+0x124938	FUN_00124938	TempValue	ctor	stores vtable of TempValue at *this
+0x12499c	FUN_0012499c	PrimitiveIndex	ctor	stores vtable of PrimitiveIndex at *this
+0x124b24	FUN_00124b24	StandardIndex	ctor	stores vtable of StandardIndex at *this
+0x124c94	FUN_00124c94	StandardIndex	ctor	stores vtable of StandardIndex at *this
+0x124e04	FUN_00124e04	TempValue	ctor	stores vtable of TempValue at *this
+0x124e68	FUN_00124e68	ExportValue	ctor	stores vtable of ExportValue at *this
+0x1250dc	FUN_001250dc	ExportValue	ctor	stores vtable of ExportValue at *this
+0x125350	FUN_00125350	Interpolator	ctor	stores vtable of Interpolator at *this
+0x1257b0	FUN_001257b0	Interpolator	ctor	stores vtable of Interpolator at *this
+0x125c10	FUN_00125c10	Physical	ctor	stores vtable of Physical at *this
+0x125c8c	FUN_00125c8c	Physical	ctor	stores vtable of Physical at *this
+0x125d08	FUN_00125d08	Resource	ctor	stores vtable of Resource at *this
+0x125d60	FUN_00125d60	Resource	ctor	stores vtable of Resource at *this
+0x125db8	FUN_00125db8	PrimitiveIndex	ctor	stores vtable of PrimitiveIndex at *this
+0x126080	FUN_00126080	LoopIndexedOutputSet	ctor	stores vtable of LoopIndexedOutputSet at *this
+0x1261a4	FUN_001261a4	ImmedConstBuffer	ctor	stores vtable of ImmedConstBuffer at *this
+0x1261e8	FUN_001261e8	ImmedConstBuffer	ctor	stores vtable of ImmedConstBuffer at *this
+0x12622c	FUN_0012622c	ExportSlot	ctor	stores vtable of ExportSlot at *this
+0x126378	FUN_00126378	ExportSlot	ctor	stores vtable of ExportSlot at *this
+0x1264c4	FUN_001264c4	LoopIndexedConstSet	ctor	stores vtable of LoopIndexedConstSet at *this
+0x126538	FUN_00126538	LoopIndexedConstSet	ctor	stores vtable of LoopIndexedConstSet at *this
+0x1265ac	FUN_001265ac	LoopIndexedInputSet	ctor	stores vtable of LoopIndexedInputSet at *this
+0x126620	FUN_00126620	LoopIndexedInputSet	ctor	stores vtable of LoopIndexedInputSet at *this
+0x126694	FUN_00126694	LoopIndexedOutputSet	ctor	stores vtable of LoopIndexedOutputSet at *this
+0x128fd0	FUN_00128fd0	KhanPs	ctor	stores vtable of KhanPs at *this
+0x129130	FUN_00129130	KhanPs	ctor	stores vtable of KhanPs at *this
+0x12a578	FUN_0012a578	KhanVs	ctor	stores vtable of KhanVs at *this
+0x12a6c0	FUN_0012a6c0	KhanVs	ctor	stores vtable of KhanVs at *this
+0x12a808	FUN_0012a808	FudoVs	ctor	stores vtable of FudoVs at *this
+0x12a8bc	FUN_0012a8bc	FudoVs	ctor	stores vtable of FudoVs at *this
+0x12e56c	FUN_0012e56c	IfFooter	ctor	stores vtable of IfFooter at *this
+0x171e68	FUN_00171e68	DListNode	dtor (complete, non-deleting)	stores vtable of DListNode at *this
+0x189604	FUN_00189604	R520SchedModel	virtual-slot2	vtable slot of R520SchedModel[2]
+0x18f42c	FUN_0018f42c	R520SchedModel	virtual-slot4	vtable slot of R520SchedModel[4]
+0x18f55c	FUN_0018f55c	R520SchedModel	virtual-slot3	vtable slot of R520SchedModel[3]
+0x18f824	FUN_0018f824	R300VSchedModel	virtual-slot2	vtable slot of R300VSchedModel[2]
+0x1904b8	FUN_001904b8	R300VSchedModel	virtual-slot4	vtable slot of R300VSchedModel[4]
+0x1906c8	FUN_001906c8	R300VSchedModel	virtual-slot3	vtable slot of R300VSchedModel[3]
+0x191c6c	FUN_00191c6c	FudoChip	virtual-slot2	vtable slot of FudoChip[2]
+0x191e28	FUN_00191e28	R520SchedModel	ctor	stores vtable of R520SchedModel at *this
+0x191efc	FUN_00191efc	FudoPs	ctor	stores vtable of FudoPs at *this
+0x1920e0	FUN_001920e0	FudoPs	ctor	stores vtable of FudoPs at *this
+0x195574	FUN_00195574	R300MachineAssembler	virtual-slot6	vtable slot of R300MachineAssembler[6],R520MachineAssembler[6]
+0x195578	FUN_00195578	R300MachineAssembler	virtual-slot8	vtable slot of R300MachineAssembler[8],R520MachineAssembler[8]
+0x195580	FUN_00195580	R300MachineAssembler	virtual-slot3	vtable slot of R300MachineAssembler[3],R520MachineAssembler[3]
+0x195584	FUN_00195584	R300MachineAssembler	virtual-slot9	vtable slot of R300MachineAssembler[9]
+0x1955f8	FUN_001955f8	R300MachineAssembler	virtual-slot2	vtable slot of R300MachineAssembler[2],R520MachineAssembler[2]
+0x1961c8	FUN_001961c8	R300MachineAssembler	virtual-slot4	vtable slot of R300MachineAssembler[4]
+0x1963b0	FUN_001963b0	R300MachineAssembler	virtual-slot5	vtable slot of R300MachineAssembler[5]
+0x196dbc	FUN_00196dbc	R300MachineAssembler	dtor (complete, non-deleting)	stores vtable of R300MachineAssembler at *this
+0x196dfc	FUN_00196dfc	R300MachineAssembler	virtual-slot0 (dtor)	stores vtable of R300MachineAssembler at *this; vtable slot of R300MachineAssembler[0]
+0x196e3c	FUN_00196e3c	MachineAssembler	dtor (complete, non-deleting)	stores vtable of R300MachineAssembler>MachineAssembler at *this; vtable slot of R300MachineAssembler[1]
+0x19a618	FUN_0019a618	R300VMachineAssembler	virtual-slot2	vtable slot of R300VMachineAssembler[2],R520VMachineAssembler[2]
+0x19b91c	FUN_0019b91c	MachineAssembler	dtor (complete, non-deleting)	stores vtable of R300VMachineAssembler>MachineAssembler at *this
+0x19b9ac	FUN_0019b9ac	MachineAssembler	dtor (complete, non-deleting)	stores vtable of R300VMachineAssembler>MachineAssembler at *this; vtable slot of R300VMachineAssembler[0]
+0x19ba3c	FUN_0019ba3c	R300VMachineAssembler	virtual-slot1 (deleting dtor)	stores vtable of R300VMachineAssembler at *this; vtable slot of R300VMachineAssembler[1]
+0x19dcb0	FUN_0019dcb0	R520VMachineAssembler	virtual-slot1 (deleting dtor)	stores vtable of R520VMachineAssembler at *this; vtable slot of R520VMachineAssembler[1]
+0x19deb0	FUN_0019deb0	MachineAssembler	dtor (complete, non-deleting)	stores vtable of R520VMachineAssembler>R300VMachineAssembler>MachineAssembler at *this
+0x19df54	FUN_0019df54	MachineAssembler	dtor (complete, non-deleting)	stores vtable of R520VMachineAssembler>R300VMachineAssembler>MachineAssembler at *this; vtable slot of R520VMachineAssembler[0]
+0x19ef50	FUN_0019ef50	R520MachineAssembler	virtual-slot5	vtable slot of R520MachineAssembler[5]
+0x19f860	FUN_0019f860	R520MachineAssembler	virtual-slot9	vtable slot of R520MachineAssembler[9]
+0x19fccc	FUN_0019fccc	R520MachineAssembler	virtual-slot4	vtable slot of R520MachineAssembler[4]
+0x1cd7ec	FUN_001cd7ec	MachineAssembler	virtual-slot0 (dtor)	stores vtable of MachineAssembler at *this; vtable slot of MachineAssembler[0]
+0x1cd810	FUN_001cd810	DListNode	virtual-slot0 (dtor)	stores vtable of DListNode at *this; vtable slot of DListNode[0]
+0x1cd834	FUN_001cd834	DListNode	virtual-slot1 (deleting dtor)	stores vtable of DListNode at *this; vtable slot of DListNode[1]
+0x1cd86c	FUN_001cd86c	IRPseudo	virtual-slot0 (dtor)	stores vtable of IRPseudo at *this; vtable slot of IRPseudo[0]
+0x1cd8b0	FUN_001cd8b0	IRPseudo	virtual-slot1 (deleting dtor)	stores vtable of IRPseudo at *this; vtable slot of IRPseudo[1]
+0x1cd908	FUN_001cd908	IRInst	dtor (complete, non-deleting)	stores vtable of IREndMakeCall>IRInst at *this; vtable slot of IREndMakeCall[1]
+0x1cd970	FUN_001cd970	IRInst	dtor (complete, non-deleting)	stores vtable of IRStartCallRoutine>IRInst at *this; vtable slot of IRStartCallRoutine[0]
+0x1cd9c4	FUN_001cd9c4	IRInst	dtor (complete, non-deleting)	stores vtable of IRStartCallRoutine>IRInst at *this; vtable slot of IRStartCallRoutine[1]
+0x1cda2c	FUN_001cda2c	IRInst	dtor (complete, non-deleting)	stores vtable of IREndCallRoutine>IRInst at *this; vtable slot of IREndCallRoutine[0]
+0x1cda80	FUN_001cda80	IRInst	dtor (complete, non-deleting)	stores vtable of IREndCallRoutine>IRInst at *this; vtable slot of IREndCallRoutine[1]
+0x1cdae8	FUN_001cdae8	IRInst	dtor (complete, non-deleting)	stores vtable of IRStartMakeCall>IRInst at *this; vtable slot of IRStartMakeCall[0]
+0x1cdb3c	FUN_001cdb3c	IRInst	dtor (complete, non-deleting)	stores vtable of IRStartMakeCall>IRInst at *this; vtable slot of IRStartMakeCall[1]
+0x1cdba4	FUN_001cdba4	IRInst	dtor (complete, non-deleting)	stores vtable of IREndMakeCall>IRInst at *this; vtable slot of IREndMakeCall[0]
+0x1cde34	FUN_001cde34	EntryBlock	virtual-slot1 (deleting dtor)	stores vtable of EntryBlock at *this; vtable slot of EntryBlock[1]
+0x1cde9c	FUN_001cde9c	AnyBlock	virtual-slot0 (dtor)	stores vtable of AnyBlock at *this; vtable slot of AnyBlock[0]
+0x1cdec0	FUN_001cdec0	AnyBlock	virtual-slot1 (deleting dtor)	stores vtable of AnyBlock at *this; vtable slot of AnyBlock[1]
+0x1cdf28	FUN_001cdf28	FuncEndBlock	virtual-slot0 (dtor)	stores vtable of FuncEndBlock at *this; vtable slot of FuncEndBlock[0]
+0x1cdf4c	FUN_001cdf4c	FuncEndBlock	virtual-slot1 (deleting dtor)	stores vtable of FuncEndBlock at *this; vtable slot of FuncEndBlock[1]
+0x1cdfb4	FUN_001cdfb4	LoopHeader	virtual-slot0 (dtor)	stores vtable of LoopHeader at *this; vtable slot of LoopHeader[0]
+0x1cdfd8	FUN_001cdfd8	LoopHeader	virtual-slot1 (deleting dtor)	stores vtable of LoopHeader at *this; vtable slot of LoopHeader[1]
+0x1ce040	FUN_001ce040	LoopFooter	virtual-slot0 (dtor)	stores vtable of LoopFooter at *this; vtable slot of LoopFooter[0]
+0x1ce064	FUN_001ce064	LoopFooter	virtual-slot1 (deleting dtor)	stores vtable of LoopFooter at *this; vtable slot of LoopFooter[1]
+0x1ce0cc	FUN_001ce0cc	PostLoopFooter	virtual-slot0 (dtor)	stores vtable of PostLoopFooter at *this; vtable slot of PostLoopFooter[0]
+0x1ce0f0	FUN_001ce0f0	PostLoopFooter	virtual-slot1 (deleting dtor)	stores vtable of PostLoopFooter at *this; vtable slot of PostLoopFooter[1]
+0x1ce158	FUN_001ce158	IfHeader	virtual-slot0 (dtor)	stores vtable of IfHeader at *this; vtable slot of IfHeader[0]
+0x1ce17c	FUN_001ce17c	IfHeader	virtual-slot1 (deleting dtor)	stores vtable of IfHeader at *this; vtable slot of IfHeader[1]
+0x1ce1e4	FUN_001ce1e4	IfHeader	dtor (complete, non-deleting)	stores vtable of IfHeader at *this; vtable slot of IfHeaderStatic[0]
+0x1ce208	FUN_001ce208	IfHeader	dtor (complete, non-deleting)	stores vtable of IfHeader at *this; vtable slot of IfHeaderStatic[1]
+0x1ce270	FUN_001ce270	IfFooter	virtual-slot0 (dtor)	stores vtable of IfFooter at *this; vtable slot of IfFooter[0]
+0x1ce294	FUN_001ce294	IfFooter	virtual-slot1 (deleting dtor)	stores vtable of IfFooter at *this; vtable slot of IfFooter[1]
+0x1ce2fc	FUN_001ce2fc	IfFooter	dtor (complete, non-deleting)	stores vtable of IfFooter at *this; vtable slot of IfFooterStatic[0]
+0x1ce320	FUN_001ce320	IfFooter	dtor (complete, non-deleting)	stores vtable of IfFooter at *this; vtable slot of IfFooterStatic[1]
+0x1ce388	FUN_001ce388	BreakOrContinueBlock	virtual-slot0 (dtor)	stores vtable of BreakOrContinueBlock at *this; vtable slot of BreakOrContinueBlock[0]
+0x1ce3ac	FUN_001ce3ac	BreakOrContinueBlock	virtual-slot1 (deleting dtor)	stores vtable of BreakOrContinueBlock at *this; vtable slot of BreakOrContinueBlock[1]
+0x1ce414	FUN_001ce414	ContinueBlock	virtual-slot1 (deleting dtor)	stores vtable of ContinueBlock at *this; vtable slot of ContinueBlock[1]
+0x1ce48c	FUN_001ce48c	ExitBlock	virtual-slot0 (dtor)	stores vtable of ExitBlock at *this; vtable slot of ExitBlock[0]
+0x1ce4b0	FUN_001ce4b0	ExitBlock	virtual-slot1 (deleting dtor)	stores vtable of ExitBlock at *this; vtable slot of ExitBlock[1]
+0x1ce518	FUN_001ce518	EntryBlock	virtual-slot0 (dtor)	stores vtable of EntryBlock at *this; vtable slot of EntryBlock[0]
+0x1ce53c	FUN_001ce53c	BreakBlock	virtual-slot0 (dtor)	stores vtable of BreakBlock at *this; vtable slot of BreakBlock[0]
+0x1ce570	FUN_001ce570	BreakBlock	virtual-slot1 (deleting dtor)	stores vtable of BreakBlock at *this; vtable slot of BreakBlock[1]
+0x1ce5e8	FUN_001ce5e8	ContinueBlock	virtual-slot0 (dtor)	stores vtable of ContinueBlock at *this; vtable slot of ContinueBlock[0]
+0x1cecc0	FUN_001cecc0	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRFetch[0]
+0x1cecf4	FUN_001cecf4	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRFetch[1]
+0x1ced3c	FUN_001ced3c	IRInst	virtual-slot0 (dtor)	stores vtable of IRInst at *this; vtable slot of IRInst[0]
+0x1ced70	FUN_001ced70	IRInst	virtual-slot1 (deleting dtor)	stores vtable of IRInst at *this; vtable slot of IRInst[1]
+0x1cedb8	FUN_001cedb8	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRAlu[0]
+0x1cedec	FUN_001cedec	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRAlu[1]
+0x1cee34	FUN_001cee34	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRExport[1]
+0x1cee7c	FUN_001cee7c	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRLoadConst[1]
+0x1ceec4	FUN_001ceec4	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRTextureFetchGradients[1]
+0x1cef0c	FUN_001cef0c	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRTextureFetchGradients[0]
+0x1cef40	FUN_001cef40	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRVertexFetch[0]
+0x1cef74	FUN_001cef74	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRVertexFetch[1]
+0x1cefbc	FUN_001cefbc	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRTextureFetch[0]
+0x1ceff0	FUN_001ceff0	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRTextureFetch[1]
+0x1cf038	FUN_001cf038	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRMemLoad[0]
+0x1cf06c	FUN_001cf06c	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRMemLoad[1]
+0x1cf0b4	FUN_001cf0b4	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRMemStore[0]
+0x1cf0e8	FUN_001cf0e8	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRMemStore[1]
+0x1cf130	FUN_001cf130	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRGeomExport[1]
+0x1cf178	FUN_001cf178	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRGeomExport[0]
+0x1cf1ac	FUN_001cf1ac	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRExportColorAndFog[1]
+0x1cf1f4	FUN_001cf1f4	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRExportColorAndFog[0]
+0x1cf228	FUN_001cf228	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRKill2[1]
+0x1cf270	FUN_001cf270	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRKill2[0]
+0x1cf2a4	FUN_001cf2a4	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRCmp2[1]
+0x1cf2ec	FUN_001cf2ec	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRCmp2[0]
+0x1cf320	FUN_001cf320	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRMov[1]
+0x1cf368	FUN_001cf368	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRMov[0]
+0x1cf39c	FUN_001cf39c	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRNop[1]
+0x1cf3e4	FUN_001cf3e4	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRNop[0]
+0x1cf418	FUN_001cf418	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRZeroary[0]
+0x1cf44c	FUN_001cf44c	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRZeroary[1]
+0x1cf494	FUN_001cf494	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRTrinary[0]
+0x1cf4c8	FUN_001cf4c8	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRTrinary[1]
+0x1cf510	FUN_001cf510	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRUnary[0]
+0x1cf544	FUN_001cf544	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRUnary[1]
+0x1cf58c	FUN_001cf58c	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRBinary[0]
+0x1cf5c0	FUN_001cf5c0	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRBinary[1]
+0x1cf608	FUN_001cf608	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRExport[0]
+0x1cf63c	FUN_001cf63c	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRLoadConst[0]
+0x1cf670	FUN_001cf670	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRUndefined[1]
+0x1cf6b8	FUN_001cf6b8	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRUndefined[0]
+0x1cf6ec	FUN_001cf6ec	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRLoadMemBufferIndex[1]
+0x1cf734	FUN_001cf734	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRLoadMemBufferIndex[0]
+0x1cf768	FUN_001cf768	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRLoadMemBuffer[1]
+0x1cf7b0	FUN_001cf7b0	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRLoadMemBuffer[0]
+0x1cf7e4	FUN_001cf7e4	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRLoadInterp[1]
+0x1cf82c	FUN_001cf82c	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRLoadInterp[0]
+0x1cf860	FUN_001cf860	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRLoadTemp[1]
+0x1cf8a8	FUN_001cf8a8	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRLoadTemp[0]
+0x1cf8dc	FUN_001cf8dc	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRLoadVertex[1]
+0x1cf924	FUN_001cf924	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRLoadVertex[0]
+0x1cf958	FUN_001cf958	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRHeader[0]
+0x1cf98c	FUN_001cf98c	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRHeader[1]
+0x1cf9d4	FUN_001cf9d4	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IREntry[0]
+0x1cfa08	FUN_001cfa08	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IREntry[1]
+0x1cfa50	FUN_001cfa50	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRExit[0]
+0x1cfa84	FUN_001cfa84	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRExit[1]
+0x1cfacc	FUN_001cfacc	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRImmedConstBuff[0]
+0x1cfb00	FUN_001cfb00	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRImmedConstBuff[1]
+0x1cfb48	FUN_001cfb48	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRMerge[0]
+0x1cfb7c	FUN_001cfb7c	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRMerge[1]
+0x1cfbc4	FUN_001cfbc4	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRLoopStart[0]
+0x1cfbf8	FUN_001cfbf8	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRLoopStart[1]
+0x1cfc40	FUN_001cfc40	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRCmp1S[0]
+0x1cfc74	FUN_001cfc74	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRCmp1S[1]
+0x1cfcbc	FUN_001cfcbc	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRMix[0]
+0x1cfcf0	FUN_001cfcf0	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRMix[1]
+0x1cfd38	FUN_001cfd38	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRPhiNode[0]
+0x1cfd6c	FUN_001cfd6c	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRPhiNode[1]
+0x1cfdb4	FUN_001cfdb4	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRPresub1[0]
+0x1cfde8	FUN_001cfde8	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRPresub1[1]
+0x1cfe30	FUN_001cfe30	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRPresub2[0]
+0x1cfe64	FUN_001cfe64	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRPresub2[1]
+0x1cfeac	FUN_001cfeac	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRProjection[0]
+0x1cfee0	FUN_001cfee0	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRProjection[1]
+0x1cff28	FUN_001cff28	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRLoad[0]
+0x1cff5c	FUN_001cff5c	IRInst	dtor (complete, non-deleting)	stores vtable of IRInst at *this; vtable slot of IRLoad[1]
+0x1cffa4	FUN_001cffa4	HwLimits	virtual-slot0 (dtor)	stores vtable of HwLimits at *this; vtable slot of HwLimits[0]
+0x1cffc8	FUN_001cffc8	HwLimits	deleting-dtor	stores vtable of HwLimits at *this; vtable slot of HwLimits[1]
+0x1d01b0	FUN_001d01b0	HwChip	virtual-slot0 (dtor)	stores vtable of HwChip at *this; vtable slot of HwChip[0]
+0x1d01d4	FUN_001d01d4	HwChip	deleting-dtor	stores vtable of HwChip at *this; vtable slot of HwChip[1]
+0x1d0208	FUN_001d0208	OpcodeInfo	dtor (complete, non-deleting)	stores vtable of OpcodeInfo at *this
+0x1d022c	FUN_001d022c	OpcodeInfo	deleting-dtor	stores vtable of OpcodeInfo at *this
+0x1d0f28	FUN_001d0f28	IrRecipSqrtClamp	deleting-dtor	stores vtable of IrRecipSqrtClamp at *this
+0x1d0f6c	FUN_001d0f6c	IrRecipSqrtClamp	dtor (complete, non-deleting)	stores vtable of IrRecipSqrtClamp at *this
+0x1d0fb0	FUN_001d0fb0	IrRecipSqrtFF	deleting-dtor	stores vtable of IrRecipSqrtFF at *this
+0x1d0ff4	FUN_001d0ff4	IrRecipSqrtFF	dtor (complete, non-deleting)	stores vtable of IrRecipSqrtFF at *this
+0x1d1038	FUN_001d1038	IrRecipSqrtIEEE	deleting-dtor	stores vtable of IrRecipSqrtIEEE at *this
+0x1d107c	FUN_001d107c	IrRecipSqrtIEEE	dtor (complete, non-deleting)	stores vtable of IrRecipSqrtIEEE at *this
+0x1d10c0	FUN_001d10c0	IrRecipClamp	deleting-dtor	stores vtable of IrRecipClamp at *this
+0x1d1104	FUN_001d1104	IrRecipClamp	dtor (complete, non-deleting)	stores vtable of IrRecipClamp at *this
+0x1d1148	FUN_001d1148	IrRecipFF	deleting-dtor	stores vtable of IrRecipFF at *this
+0x1d118c	FUN_001d118c	IrRecipFF	dtor (complete, non-deleting)	stores vtable of IrRecipFF at *this
+0x1d11d0	FUN_001d11d0	IrRecipIEEE	deleting-dtor	stores vtable of IrRecipIEEE at *this
+0x1d1214	FUN_001d1214	IrRecipIEEE	dtor (complete, non-deleting)	stores vtable of IrRecipIEEE at *this
+0x1d1258	FUN_001d1258	IrMulFloat	deleting-dtor	stores vtable of IrMulFloat at *this
+0x1d129c	FUN_001d129c	IrMulFloat	dtor (complete, non-deleting)	stores vtable of IrMulFloat at *this
+0x1d12e0	FUN_001d12e0	IrMul	deleting-dtor	stores vtable of IrMul at *this
+0x1d1324	FUN_001d1324	IrMul	dtor (complete, non-deleting)	stores vtable of IrMul at *this
+0x1d1368	FUN_001d1368	IrLogClamp	deleting-dtor	stores vtable of IrLogClamp at *this
+0x1d13ac	FUN_001d13ac	IrLogClamp	dtor (complete, non-deleting)	stores vtable of IrLogClamp at *this
+0x1d13f0	FUN_001d13f0	IrLogIEEE	deleting-dtor	stores vtable of IrLogIEEE at *this
+0x1d1434	FUN_001d1434	IrLogIEEE	dtor (complete, non-deleting)	stores vtable of IrLogIEEE at *this
+0x1d1478	FUN_001d1478	IrDot2Add	deleting-dtor	stores vtable of IrDot2Add at *this
+0x1d14bc	FUN_001d14bc	IrDot2Add	dtor (complete, non-deleting)	stores vtable of IrDot2Add at *this
+0x1d1500	FUN_001d1500	IrAdd	deleting-dtor	stores vtable of IrAdd at *this
+0x1d1544	FUN_001d1544	IrAdd	dtor (complete, non-deleting)	stores vtable of IrAdd at *this
+0x1d1588	FUN_001d1588	IrImmedConstLoad	dtor (complete, non-deleting)	stores vtable of IrImmedConstLoad at *this
+0x1d15bc	FUN_001d15bc	IrImmedConstLoad	deleting-dtor	stores vtable of IrImmedConstLoad at *this
+0x1d15f0	FUN_001d15f0	IrImmedConstBuffer	dtor (complete, non-deleting)	stores vtable of IrImmedConstBuffer at *this
+0x1d1624	FUN_001d1624	IrImmedConstBuffer	deleting-dtor	stores vtable of IrImmedConstBuffer at *this
+0x1d1658	FUN_001d1658	IrGetResource	dtor (complete, non-deleting)	stores vtable of IrGetResource at *this
+0x1d168c	FUN_001d168c	IrGetResource	deleting-dtor	stores vtable of IrGetResource at *this
+0x1d16c0	FUN_001d16c0	IrEmitThenCut	dtor (complete, non-deleting)	stores vtable of IrEmitThenCut at *this
+0x1d16f4	FUN_001d16f4	IrEmitThenCut	deleting-dtor	stores vtable of IrEmitThenCut at *this
+0x1d1728	FUN_001d1728	IrDyamicReturnSwitch	dtor (complete, non-deleting)	stores vtable of IrDyamicReturnSwitch at *this
+0x1d175c	FUN_001d175c	IrDyamicReturnSwitch	deleting-dtor	stores vtable of IrDyamicReturnSwitch at *this
+0x1d1790	FUN_001d1790	IrCut	dtor (complete, non-deleting)	stores vtable of IrCut at *this
+0x1d17c4	FUN_001d17c4	IrCut	deleting-dtor	stores vtable of IrCut at *this
+0x1d17f8	FUN_001d17f8	IrLdBuffer	dtor (complete, non-deleting)	stores vtable of IrLdBuffer at *this
+0x1d182c	FUN_001d182c	IrLdBuffer	deleting-dtor	stores vtable of IrLdBuffer at *this
+0x1d1860	FUN_001d1860	IrSampleG	dtor (complete, non-deleting)	stores vtable of IrSampleG at *this
+0x1d1894	FUN_001d1894	IrSampleG	deleting-dtor	stores vtable of IrSampleG at *this
+0x1d18c8	FUN_001d18c8	IrSampleCLZ	dtor (complete, non-deleting)	stores vtable of IrSampleCLZ at *this
+0x1d18fc	FUN_001d18fc	IrSampleCLZ	deleting-dtor	stores vtable of IrSampleCLZ at *this
+0x1d1930	FUN_001d1930	IrSampleL	dtor (complete, non-deleting)	stores vtable of IrSampleL at *this
+0x1d1964	FUN_001d1964	IrSampleL	deleting-dtor	stores vtable of IrSampleL at *this
+0x1d1998	FUN_001d1998	IrSampleC	dtor (complete, non-deleting)	stores vtable of IrSampleC at *this
+0x1d19cc	FUN_001d19cc	IrSampleC	deleting-dtor	stores vtable of IrSampleC at *this
+0x1d1a00	FUN_001d1a00	IrFetchLoad	dtor (complete, non-deleting)	stores vtable of IrFetchLoad at *this
+0x1d1a34	FUN_001d1a34	IrFetchLoad	deleting-dtor	stores vtable of IrFetchLoad at *this
+0x1d1a68	FUN_001d1a68	IrCbLoad	dtor (complete, non-deleting)	stores vtable of IrCbLoad at *this
+0x1d1a9c	FUN_001d1a9c	IrCbLoad	deleting-dtor	stores vtable of IrCbLoad at *this
+0x1d1ad0	FUN_001d1ad0	IrWhileStart	dtor (complete, non-deleting)	stores vtable of IrWhileStart at *this
+0x1d1b04	FUN_001d1b04	IrWhileStart	deleting-dtor	stores vtable of IrWhileStart at *this
+0x1d1b38	FUN_001d1b38	IrScratchStore	dtor (complete, non-deleting)	stores vtable of IrScratchStore at *this
+0x1d1b6c	FUN_001d1b6c	IrScratchStore	deleting-dtor	stores vtable of IrScratchStore at *this
+0x1d1ba0	FUN_001d1ba0	IrScratchLoad	dtor (complete, non-deleting)	stores vtable of IrScratchLoad at *this
+0x1d1bd4	FUN_001d1bd4	IrScratchLoad	deleting-dtor	stores vtable of IrScratchLoad at *this
+0x1d1c08	FUN_001d1c08	IrMemInit	dtor (complete, non-deleting)	stores vtable of IrMemInit at *this
+0x1d1c3c	FUN_001d1c3c	IrMemInit	deleting-dtor	stores vtable of IrMemInit at *this
+0x1d1c70	FUN_001d1c70	IrDyamicReturn	dtor (complete, non-deleting)	stores vtable of IrDyamicReturn at *this
+0x1d1ca4	FUN_001d1ca4	IrDyamicReturn	deleting-dtor	stores vtable of IrDyamicReturn at *this
+0x1d1cd8	FUN_001d1cd8	IrEmit	dtor (complete, non-deleting)	stores vtable of IrEmit at *this
+0x1d1d0c	FUN_001d1d0c	IrEmit	deleting-dtor	stores vtable of IrEmit at *this
+0x1d1d40	FUN_001d1d40	IrPsColorFog	dtor (complete, non-deleting)	stores vtable of IrPsColorFog at *this
+0x1d1d74	FUN_001d1d74	IrPsColorFog	deleting-dtor	stores vtable of IrPsColorFog at *this
+0x1d1da8	FUN_001d1da8	IrMulLit	dtor (complete, non-deleting)	stores vtable of IrMulLit at *this
+0x1d1ddc	FUN_001d1ddc	IrMulLit	deleting-dtor	stores vtable of IrMulLit at *this
+0x1d1e10	FUN_001d1e10	IrNotInt	dtor (complete, non-deleting)	stores vtable of IrNotInt at *this
+0x1d1e44	FUN_001d1e44	IrNotInt	deleting-dtor	stores vtable of IrNotInt at *this
+0x1d1e78	FUN_001d1e78	IrXorInt	dtor (complete, non-deleting)	stores vtable of IrXorInt at *this
+0x1d1eac	FUN_001d1eac	IrXorInt	deleting-dtor	stores vtable of IrXorInt at *this
+0x1d1ee0	FUN_001d1ee0	IrOrInt	dtor (complete, non-deleting)	stores vtable of IrOrInt at *this
+0x1d1f14	FUN_001d1f14	IrOrInt	deleting-dtor	stores vtable of IrOrInt at *this
+0x1d1f48	FUN_001d1f48	IrAndInt	dtor (complete, non-deleting)	stores vtable of IrAndInt at *this
+0x1d1f7c	FUN_001d1f7c	IrAndInt	deleting-dtor	stores vtable of IrAndInt at *this
+0x1d1fb0	FUN_001d1fb0	IrRoundNearestEven	dtor (complete, non-deleting)	stores vtable of IrRoundNearestEven at *this
+0x1d1fe4	FUN_001d1fe4	IrRoundNearestEven	deleting-dtor	stores vtable of IrRoundNearestEven at *this
+0x1d2018	FUN_001d2018	IrCeil	dtor (complete, non-deleting)	stores vtable of IrCeil at *this
+0x1d204c	FUN_001d204c	IrCeil	deleting-dtor	stores vtable of IrCeil at *this
+0x1d2080	FUN_001d2080	IrSetNE_Dx10	dtor (complete, non-deleting)	stores vtable of IrSetNE_Dx10 at *this
+0x1d20b4	FUN_001d20b4	IrSetNE_Dx10	deleting-dtor	stores vtable of IrSetNE_Dx10 at *this
+0x1d20e8	FUN_001d20e8	IrSetGE_Dx10	dtor (complete, non-deleting)	stores vtable of IrSetGE_Dx10 at *this
+0x1d211c	FUN_001d211c	IrSetGE_Dx10	deleting-dtor	stores vtable of IrSetGE_Dx10 at *this
+0x1d2150	FUN_001d2150	IrSetE_Dx10	dtor (complete, non-deleting)	stores vtable of IrSetE_Dx10 at *this
+0x1d2184	FUN_001d2184	IrSetE_Dx10	deleting-dtor	stores vtable of IrSetE_Dx10 at *this
+0x1d21b8	FUN_001d21b8	IrFetchShaderCall	dtor (complete, non-deleting)	stores vtable of IrFetchShaderCall at *this
+0x1d21ec	FUN_001d21ec	IrFetchShaderCall	deleting-dtor	stores vtable of IrFetchShaderCall at *this
+0x1d2220	FUN_001d2220	IrScatter	dtor (complete, non-deleting)	stores vtable of IrScatter at *this
+0x1d2254	FUN_001d2254	IrScatter	deleting-dtor	stores vtable of IrScatter at *this
+0x1d2288	FUN_001d2288	IrCmovNE	dtor (complete, non-deleting)	stores vtable of IrCmovNE at *this
+0x1d22bc	FUN_001d22bc	IrCmovNE	deleting-dtor	stores vtable of IrCmovNE at *this
+0x1d22f0	FUN_001d22f0	IrCmovGT	dtor (complete, non-deleting)	stores vtable of IrCmovGT at *this
+0x1d2324	FUN_001d2324	IrCmovGT	deleting-dtor	stores vtable of IrCmovGT at *this
+0x1d2358	FUN_001d2358	IrCmovGE	dtor (complete, non-deleting)	stores vtable of IrCmovGE at *this
+0x1d238c	FUN_001d238c	IrCmovGE	deleting-dtor	stores vtable of IrCmovGE at *this
+0x1d23c0	FUN_001d23c0	IrCmovEQ	dtor (complete, non-deleting)	stores vtable of IrCmovEQ at *this
+0x1d23f4	FUN_001d23f4	IrCmovEQ	deleting-dtor	stores vtable of IrCmovEQ at *this
+0x1d2428	FUN_001d2428	IrFetchTextureUncached	dtor (complete, non-deleting)	stores vtable of IrFetchTextureUncached at *this
+0x1d245c	FUN_001d245c	IrFetchTextureUncached	deleting-dtor	stores vtable of IrFetchTextureUncached at *this
+0x1d2490	FUN_001d2490	IrFetchTextureLOD	dtor (complete, non-deleting)	stores vtable of IrFetchTextureLOD at *this
+0x1d24c4	FUN_001d24c4	IrFetchTextureLOD	deleting-dtor	stores vtable of IrFetchTextureLOD at *this
+0x1d24f8	FUN_001d24f8	IrCndGEInt	dtor (complete, non-deleting)	stores vtable of IrCndGEInt at *this
+0x1d252c	FUN_001d252c	IrCndGEInt	deleting-dtor	stores vtable of IrCndGEInt at *this
+0x1d2560	FUN_001d2560	IrCndGE1	dtor (complete, non-deleting)	stores vtable of IrCndGE1 at *this
+0x1d2594	FUN_001d2594	IrCndGE1	deleting-dtor	stores vtable of IrCndGE1 at *this
+0x1d25c8	FUN_001d25c8	IrCndGE	dtor (complete, non-deleting)	stores vtable of IrCndGE at *this
+0x1d25fc	FUN_001d25fc	IrCndGE	deleting-dtor	stores vtable of IrCndGE at *this
+0x1d2630	FUN_001d2630	IrCndGEFloat	dtor (complete, non-deleting)	stores vtable of IrCndGEFloat at *this
+0x1d2664	FUN_001d2664	IrCndGEFloat	deleting-dtor	stores vtable of IrCndGEFloat at *this
+0x1d2698	FUN_001d2698	IrMad	dtor (complete, non-deleting)	stores vtable of IrMad at *this
+0x1d26cc	FUN_001d26cc	IrMad	deleting-dtor	stores vtable of IrMad at *this
+0x1d2700	FUN_001d2700	IrR300ExpBaseE	dtor (complete, non-deleting)	stores vtable of IrR300ExpBaseE at *this
+0x1d2734	FUN_001d2734	IrR300ExpBaseE	deleting-dtor	stores vtable of IrR300ExpBaseE at *this
+0x1d2768	FUN_001d2768	IrDxLogp	dtor (complete, non-deleting)	stores vtable of IrDxLogp at *this
+0x1d279c	FUN_001d279c	IrDxLogp	deleting-dtor	stores vtable of IrDxLogp at *this
+0x1d27d0	FUN_001d27d0	IrR300Expp	dtor (complete, non-deleting)	stores vtable of IrR300Expp at *this
+0x1d2804	FUN_001d2804	IrR300Expp	deleting-dtor	stores vtable of IrR300Expp at *this
+0x1d2838	FUN_001d2838	IrPow	dtor (complete, non-deleting)	stores vtable of IrPow at *this
+0x1d286c	FUN_001d286c	IrPow	deleting-dtor	stores vtable of IrPow at *this
+0x1d28a0	FUN_001d28a0	IrLoad	dtor (complete, non-deleting)	stores vtable of IrLoad at *this
+0x1d28d4	FUN_001d28d4	IrLoad	deleting-dtor	stores vtable of IrLoad at *this
+0x1d2908	FUN_001d2908	IrDp3Add	dtor (complete, non-deleting)	stores vtable of IrDp3Add at *this
+0x1d293c	FUN_001d293c	IrDp3Add	deleting-dtor	stores vtable of IrDp3Add at *this
+0x1d2970	FUN_001d2970	IrMix	dtor (complete, non-deleting)	stores vtable of IrMix at *this
+0x1d29a4	FUN_001d29a4	IrMix	deleting-dtor	stores vtable of IrMix at *this
+0x1d29d8	FUN_001d29d8	IrDsy1	dtor (complete, non-deleting)	stores vtable of IrDsy1 at *this
+0x1d2a0c	FUN_001d2a0c	IrDsy1	deleting-dtor	stores vtable of IrDsy1 at *this
+0x1d2a40	FUN_001d2a40	IrDsy	dtor (complete, non-deleting)	stores vtable of IrDsy at *this
+0x1d2a74	FUN_001d2a74	IrDsy	deleting-dtor	stores vtable of IrDsy at *this
+0x1d2aa8	FUN_001d2aa8	IrDsx1	dtor (complete, non-deleting)	stores vtable of IrDsx1 at *this
+0x1d2adc	FUN_001d2adc	IrDsx1	deleting-dtor	stores vtable of IrDsx1 at *this
+0x1d2b10	FUN_001d2b10	IrDsx	dtor (complete, non-deleting)	stores vtable of IrDsx at *this
+0x1d2b44	FUN_001d2b44	IrDsx	deleting-dtor	stores vtable of IrDsx at *this
+0x1d2b78	FUN_001d2b78	IrCnd05	dtor (complete, non-deleting)	stores vtable of IrCnd05 at *this
+0x1d2bac	FUN_001d2bac	IrCnd05	deleting-dtor	stores vtable of IrCnd05 at *this
+0x1d2be0	FUN_001d2be0	IrPresubInvert	dtor (complete, non-deleting)	stores vtable of IrPresubInvert at *this
+0x1d2c14	FUN_001d2c14	IrPresubInvert	deleting-dtor	stores vtable of IrPresubInvert at *this
+0x1d2c48	FUN_001d2c48	IrPresubAdd	dtor (complete, non-deleting)	stores vtable of IrPresubAdd at *this
+0x1d2c7c	FUN_001d2c7c	IrPresubAdd	deleting-dtor	stores vtable of IrPresubAdd at *this
+0x1d2cb0	FUN_001d2cb0	IrPresubSub	dtor (complete, non-deleting)	stores vtable of IrPresubSub at *this
+0x1d2ce4	FUN_001d2ce4	IrPresubSub	deleting-dtor	stores vtable of IrPresubSub at *this
+0x1d2d18	FUN_001d2d18	IrPresubBX2Neg	dtor (complete, non-deleting)	stores vtable of IrPresubBX2Neg at *this
+0x1d2d4c	FUN_001d2d4c	IrPresubBX2Neg	deleting-dtor	stores vtable of IrPresubBX2Neg at *this
+0x1d2d80	FUN_001d2d80	IrOpSop	dtor (complete, non-deleting)	stores vtable of IrOpSop at *this
+0x1d2db4	FUN_001d2db4	IrOpSop	deleting-dtor	stores vtable of IrOpSop at *this
+0x1d2de8	FUN_001d2de8	IrOpDp	dtor (complete, non-deleting)	stores vtable of IrOpDp at *this
+0x1d2e1c	FUN_001d2e1c	IrOpDp	deleting-dtor	stores vtable of IrOpDp at *this
+0x1d2e50	FUN_001d2e50	IrAllocInterp	dtor (complete, non-deleting)	stores vtable of IrAllocInterp at *this
+0x1d2e84	FUN_001d2e84	IrAllocInterp	deleting-dtor	stores vtable of IrAllocInterp at *this
+0x1d2eb8	FUN_001d2eb8	IrAllocColor	dtor (complete, non-deleting)	stores vtable of IrAllocColor at *this
+0x1d2eec	FUN_001d2eec	IrAllocColor	deleting-dtor	stores vtable of IrAllocColor at *this
+0x1d2f20	FUN_001d2f20	IrAllocMem	dtor (complete, non-deleting)	stores vtable of IrAllocMem at *this
+0x1d2f54	FUN_001d2f54	IrAllocMem	deleting-dtor	stores vtable of IrAllocMem at *this
+0x1d2f88	FUN_001d2f88	IrAllocPos	dtor (complete, non-deleting)	stores vtable of IrAllocPos at *this
+0x1d2fbc	FUN_001d2fbc	IrAllocPos	deleting-dtor	stores vtable of IrAllocPos at *this
+0x1d2ff0	FUN_001d2ff0	IrEndMakeCall	dtor (complete, non-deleting)	stores vtable of IrEndMakeCall at *this
+0x1d3024	FUN_001d3024	IrEndMakeCall	deleting-dtor	stores vtable of IrEndMakeCall at *this
+0x1d3058	FUN_001d3058	IrEndCall	dtor (complete, non-deleting)	stores vtable of IrEndCall at *this
+0x1d308c	FUN_001d308c	IrEndCall	deleting-dtor	stores vtable of IrEndCall at *this
+0x1d30c0	FUN_001d30c0	IrStartMakeCall	dtor (complete, non-deleting)	stores vtable of IrStartMakeCall at *this
+0x1d30f4	FUN_001d30f4	IrStartMakeCall	deleting-dtor	stores vtable of IrStartMakeCall at *this
+0x1d3128	FUN_001d3128	IrStartCallRoutine	dtor (complete, non-deleting)	stores vtable of IrStartCallRoutine at *this
+0x1d315c	FUN_001d315c	IrStartCallRoutine	deleting-dtor	stores vtable of IrStartCallRoutine at *this
+0x1d3190	FUN_001d3190	IrPhi	dtor (complete, non-deleting)	stores vtable of IrPhi at *this
+0x1d31c4	FUN_001d31c4	IrPhi	deleting-dtor	stores vtable of IrPhi at *this
+0x1d31f8	FUN_001d31f8	IrCmp1S	dtor (complete, non-deleting)	stores vtable of IrCmp1S at *this
+0x1d322c	FUN_001d322c	IrCmp1S	deleting-dtor	stores vtable of IrCmp1S at *this
+0x1d3260	FUN_001d3260	IrCmp1D	dtor (complete, non-deleting)	stores vtable of IrCmp1D at *this
+0x1d3294	FUN_001d3294	IrCmp1D	deleting-dtor	stores vtable of IrCmp1D at *this
+0x1d32c8	FUN_001d32c8	IrCmp2	dtor (complete, non-deleting)	stores vtable of IrCmp2 at *this
+0x1d32fc	FUN_001d32fc	IrCmp2	deleting-dtor	stores vtable of IrCmp2 at *this
+0x1d3330	FUN_001d3330	IrEpilog	dtor (complete, non-deleting)	stores vtable of IrEpilog at *this
+0x1d3364	FUN_001d3364	IrEpilog	deleting-dtor	stores vtable of IrEpilog at *this
+0x1d3398	FUN_001d3398	IrProlog	dtor (complete, non-deleting)	stores vtable of IrProlog at *this
+0x1d33cc	FUN_001d33cc	IrProlog	deleting-dtor	stores vtable of IrProlog at *this
+0x1d3400	FUN_001d3400	IrExit	dtor (complete, non-deleting)	stores vtable of IrExit at *this
+0x1d3434	FUN_001d3434	IrExit	deleting-dtor	stores vtable of IrExit at *this
+0x1d3468	FUN_001d3468	IrEntry	dtor (complete, non-deleting)	stores vtable of IrEntry at *this
+0x1d349c	FUN_001d349c	IrEntry	deleting-dtor	stores vtable of IrEntry at *this
+0x1d34d0	FUN_001d34d0	IrHeader	dtor (complete, non-deleting)	stores vtable of IrHeader at *this
+0x1d3504	FUN_001d3504	IrHeader	deleting-dtor	stores vtable of IrHeader at *this
+0x1d3538	FUN_001d3538	IrUndefined	dtor (complete, non-deleting)	stores vtable of IrUndefined at *this
+0x1d356c	FUN_001d356c	IrUndefined	deleting-dtor	stores vtable of IrUndefined at *this
+0x1d35a0	FUN_001d35a0	IrProjection	dtor (complete, non-deleting)	stores vtable of IrProjection at *this
+0x1d35d4	FUN_001d35d4	IrProjection	deleting-dtor	stores vtable of IrProjection at *this
+0x1d3608	FUN_001d3608	IrMerge	dtor (complete, non-deleting)	stores vtable of IrMerge at *this
+0x1d363c	FUN_001d363c	IrMerge	deleting-dtor	stores vtable of IrMerge at *this
+0x1d3670	FUN_001d3670	IrLoopIndex	dtor (complete, non-deleting)	stores vtable of IrLoopIndex at *this
+0x1d36a4	FUN_001d36a4	IrLoopIndex	deleting-dtor	stores vtable of IrLoopIndex at *this
+0x1d36d8	FUN_001d36d8	IrLoopStart	dtor (complete, non-deleting)	stores vtable of IrLoopStart at *this
+0x1d370c	FUN_001d370c	IrLoopStart	deleting-dtor	stores vtable of IrLoopStart at *this
+0x1d3740	FUN_001d3740	IrPixelLoopFetch	dtor (complete, non-deleting)	stores vtable of IrPixelLoopFetch at *this
+0x1d3774	FUN_001d3774	IrPixelLoopFetch	deleting-dtor	stores vtable of IrPixelLoopFetch at *this
+0x1d37a8	FUN_001d37a8	IrVertexLoopFetch	dtor (complete, non-deleting)	stores vtable of IrVertexLoopFetch at *this
+0x1d37dc	FUN_001d37dc	IrVertexLoopFetch	deleting-dtor	stores vtable of IrVertexLoopFetch at *this
+0x1d3810	FUN_001d3810	IrLoadInterp	dtor (complete, non-deleting)	stores vtable of IrLoadInterp at *this
+0x1d3844	FUN_001d3844	IrLoadInterp	deleting-dtor	stores vtable of IrLoadInterp at *this
+0x1d3878	FUN_001d3878	IrLoadTempDefault	dtor (complete, non-deleting)	stores vtable of IrLoadTempDefault at *this
+0x1d38ac	FUN_001d38ac	IrLoadTempDefault	deleting-dtor	stores vtable of IrLoadTempDefault at *this
+0x1d38e0	FUN_001d38e0	IrLoadAbstractState	dtor (complete, non-deleting)	stores vtable of IrLoadAbstractState at *this
+0x1d3914	FUN_001d3914	IrLoadAbstractState	deleting-dtor	stores vtable of IrLoadAbstractState at *this
+0x1d3948	FUN_001d3948	IrLoadPhysical	dtor (complete, non-deleting)	stores vtable of IrLoadPhysical at *this
+0x1d397c	FUN_001d397c	IrLoadPhysical	deleting-dtor	stores vtable of IrLoadPhysical at *this
+0x1d39b0	FUN_001d39b0	IrLoadTemp	dtor (complete, non-deleting)	stores vtable of IrLoadTemp at *this
+0x1d39e4	FUN_001d39e4	IrLoadTemp	deleting-dtor	stores vtable of IrLoadTemp at *this
+0x1d3a18	FUN_001d3a18	IrLoadConst	dtor (complete, non-deleting)	stores vtable of IrLoadConst at *this
+0x1d3a4c	FUN_001d3a4c	IrLoadConst	deleting-dtor	stores vtable of IrLoadConst at *this
+0x1d3a80	FUN_001d3a80	IrMovaFloorInt	dtor (complete, non-deleting)	stores vtable of IrMovaFloorInt at *this
+0x1d3ab4	FUN_001d3ab4	IrMovaFloorInt	deleting-dtor	stores vtable of IrMovaFloorInt at *this
+0x1d3ae8	FUN_001d3ae8	IrMovaFloorGprInt	dtor (complete, non-deleting)	stores vtable of IrMovaFloorGprInt at *this
+0x1d3b1c	FUN_001d3b1c	IrMovaFloorGprInt	deleting-dtor	stores vtable of IrMovaFloorGprInt at *this
+0x1d3b50	FUN_001d3b50	IrMovaFloorFloat	dtor (complete, non-deleting)	stores vtable of IrMovaFloorFloat at *this
+0x1d3b84	FUN_001d3b84	IrMovaFloorFloat	deleting-dtor	stores vtable of IrMovaFloorFloat at *this
+0x1d3bb8	FUN_001d3bb8	IrMovaFlr	dtor (complete, non-deleting)	stores vtable of IrMovaFlr at *this
+0x1d3bec	FUN_001d3bec	IrMovaFlr	deleting-dtor	stores vtable of IrMovaFlr at *this
+0x1d3c20	FUN_001d3c20	IrMovaFloor	dtor (complete, non-deleting)	stores vtable of IrMovaFloor at *this
+0x1d3c54	FUN_001d3c54	IrMovaFloor	deleting-dtor	stores vtable of IrMovaFloor at *this
+0x1d3c88	FUN_001d3c88	IrSubPrev	dtor (complete, non-deleting)	stores vtable of IrSubPrev at *this
+0x1d3cbc	FUN_001d3cbc	IrSubPrev	deleting-dtor	stores vtable of IrSubPrev at *this
+0x1d3cf0	FUN_001d3cf0	IrMulPrev2	dtor (complete, non-deleting)	stores vtable of IrMulPrev2 at *this
+0x1d3d24	FUN_001d3d24	IrMulPrev2	deleting-dtor	stores vtable of IrMulPrev2 at *this
+0x1d3d58	FUN_001d3d58	IrMulPrev	dtor (complete, non-deleting)	stores vtable of IrMulPrev at *this
+0x1d3d8c	FUN_001d3d8c	IrMulPrev	deleting-dtor	stores vtable of IrMulPrev at *this
+0x1d3dc0	FUN_001d3dc0	IrAddPrev	dtor (complete, non-deleting)	stores vtable of IrAddPrev at *this
+0x1d3df4	FUN_001d3df4	IrAddPrev	deleting-dtor	stores vtable of IrAddPrev at *this
+0x1d3e28	FUN_001d3e28	IrPredSetRst	dtor (complete, non-deleting)	stores vtable of IrPredSetRst at *this
+0x1d3e5c	FUN_001d3e5c	IrPredSetRst	deleting-dtor	stores vtable of IrPredSetRst at *this
+0x1d3e90	FUN_001d3e90	IrPredSetClr	dtor (complete, non-deleting)	stores vtable of IrPredSetClr at *this
+0x1d3ec4	FUN_001d3ec4	IrPredSetClr	deleting-dtor	stores vtable of IrPredSetClr at *this
+0x1d3ef8	FUN_001d3ef8	IrPredSetPop	dtor (complete, non-deleting)	stores vtable of IrPredSetPop at *this
+0x1d3f2c	FUN_001d3f2c	IrPredSetPop	deleting-dtor	stores vtable of IrPredSetPop at *this
+0x1d3f60	FUN_001d3f60	IrPredSetInv	dtor (complete, non-deleting)	stores vtable of IrPredSetInv at *this
+0x1d3f94	FUN_001d3f94	IrPredSetInv	deleting-dtor	stores vtable of IrPredSetInv at *this
+0x1d3fc8	FUN_001d3fc8	IrPredSetGEInt	dtor (complete, non-deleting)	stores vtable of IrPredSetGEInt at *this
+0x1d3ffc	FUN_001d3ffc	IrPredSetGEInt	deleting-dtor	stores vtable of IrPredSetGEInt at *this
+0x1d4030	FUN_001d4030	IrPredSetGE	dtor (complete, non-deleting)	stores vtable of IrPredSetGE at *this
+0x1d4064	FUN_001d4064	IrPredSetGE	deleting-dtor	stores vtable of IrPredSetGE at *this
+0x1d4098	FUN_001d4098	IrPredSetLEInt	dtor (complete, non-deleting)	stores vtable of IrPredSetLEInt at *this
+0x1d40cc	FUN_001d40cc	IrPredSetLEInt	deleting-dtor	stores vtable of IrPredSetLEInt at *this
+0x1d4100	FUN_001d4100	IrPredSetLTInt	dtor (complete, non-deleting)	stores vtable of IrPredSetLTInt at *this
+0x1d4134	FUN_001d4134	IrPredSetLTInt	deleting-dtor	stores vtable of IrPredSetLTInt at *this
+0x1d4168	FUN_001d4168	IrPredSetGTInt	dtor (complete, non-deleting)	stores vtable of IrPredSetGTInt at *this
+0x1d419c	FUN_001d419c	IrPredSetGTInt	deleting-dtor	stores vtable of IrPredSetGTInt at *this
+0x1d41d0	FUN_001d41d0	IrPredSetGT	dtor (complete, non-deleting)	stores vtable of IrPredSetGT at *this
+0x1d4204	FUN_001d4204	IrPredSetGT	deleting-dtor	stores vtable of IrPredSetGT at *this
+0x1d4238	FUN_001d4238	IrPredSetNEInt	dtor (complete, non-deleting)	stores vtable of IrPredSetNEInt at *this
+0x1d426c	FUN_001d426c	IrPredSetNEInt	deleting-dtor	stores vtable of IrPredSetNEInt at *this
+0x1d42a0	FUN_001d42a0	IrPredSetNE	dtor (complete, non-deleting)	stores vtable of IrPredSetNE at *this
+0x1d42d4	FUN_001d42d4	IrPredSetNE	deleting-dtor	stores vtable of IrPredSetNE at *this
+0x1d4308	FUN_001d4308	IrPredSetEInt	dtor (complete, non-deleting)	stores vtable of IrPredSetEInt at *this
+0x1d433c	FUN_001d433c	IrPredSetEInt	deleting-dtor	stores vtable of IrPredSetEInt at *this
+0x1d4370	FUN_001d4370	IrPredSetE	dtor (complete, non-deleting)	stores vtable of IrPredSetE at *this
+0x1d43a4	FUN_001d43a4	IrPredSetE	deleting-dtor	stores vtable of IrPredSetE at *this
+0x1d43d8	FUN_001d43d8	IrKillOne	dtor (complete, non-deleting)	stores vtable of IrKillOne at *this
+0x1d440c	FUN_001d440c	IrKillOne	deleting-dtor	stores vtable of IrKillOne at *this
+0x1d4440	FUN_001d4440	IrCos	dtor (complete, non-deleting)	stores vtable of IrCos at *this
+0x1d4474	FUN_001d4474	IrCos	deleting-dtor	stores vtable of IrCos at *this
+0x1d44a8	FUN_001d44a8	IrSin	dtor (complete, non-deleting)	stores vtable of IrSin at *this
+0x1d44dc	FUN_001d44dc	IrSin	deleting-dtor	stores vtable of IrSin at *this
+0x1d4510	FUN_001d4510	IrSubConst1	dtor (complete, non-deleting)	stores vtable of IrSubConst1 at *this
+0x1d4544	FUN_001d4544	IrSubConst1	deleting-dtor	stores vtable of IrSubConst1 at *this
+0x1d4578	FUN_001d4578	IrMulConst1	dtor (complete, non-deleting)	stores vtable of IrMulConst1 at *this
+0x1d45ac	FUN_001d45ac	IrMulConst1	deleting-dtor	stores vtable of IrMulConst1 at *this
+0x1d45e0	FUN_001d45e0	IrAddConst1	dtor (complete, non-deleting)	stores vtable of IrAddConst1 at *this
+0x1d4614	FUN_001d4614	IrAddConst1	deleting-dtor	stores vtable of IrAddConst1 at *this
+0x1d4648	FUN_001d4648	IrSubConst0	dtor (complete, non-deleting)	stores vtable of IrSubConst0 at *this
+0x1d467c	FUN_001d467c	IrSubConst0	deleting-dtor	stores vtable of IrSubConst0 at *this
+0x1d46b0	FUN_001d46b0	IrMulConst0	dtor (complete, non-deleting)	stores vtable of IrMulConst0 at *this
+0x1d46e4	FUN_001d46e4	IrMulConst0	deleting-dtor	stores vtable of IrMulConst0 at *this
+0x1d4718	FUN_001d4718	IrAddConst0	dtor (complete, non-deleting)	stores vtable of IrAddConst0 at *this
+0x1d474c	FUN_001d474c	IrAddConst0	deleting-dtor	stores vtable of IrAddConst0 at *this
+0x1d4780	FUN_001d4780	IrFetchTextureMapGradients	dtor (complete, non-deleting)	stores vtable of IrFetchTextureMapGradients at *this
+0x1d47b4	FUN_001d47b4	IrFetchTextureMapGradients	deleting-dtor	stores vtable of IrFetchTextureMapGradients at *this
+0x1d47e8	FUN_001d47e8	IrFetchTextureMapKill	dtor (complete, non-deleting)	stores vtable of IrFetchTextureMapKill at *this
+0x1d481c	FUN_001d481c	IrFetchTextureMapKill	deleting-dtor	stores vtable of IrFetchTextureMapKill at *this
+0x1d4850	FUN_001d4850	IrFetchTextureMapBias	dtor (complete, non-deleting)	stores vtable of IrFetchTextureMapBias at *this
+0x1d4884	FUN_001d4884	IrFetchTextureMapBias	deleting-dtor	stores vtable of IrFetchTextureMapBias at *this
+0x1d48b8	FUN_001d48b8	IrFetchTextureMapProj	dtor (complete, non-deleting)	stores vtable of IrFetchTextureMapProj at *this
+0x1d48ec	FUN_001d48ec	IrFetchTextureMapProj	deleting-dtor	stores vtable of IrFetchTextureMapProj at *this
+0x1d4920	FUN_001d4920	IrSetFilter4Weights	dtor (complete, non-deleting)	stores vtable of IrSetFilter4Weights at *this
+0x1d4954	FUN_001d4954	IrSetFilter4Weights	deleting-dtor	stores vtable of IrSetFilter4Weights at *this
+0x1d4988	FUN_001d4988	IrSetGradientsV	dtor (complete, non-deleting)	stores vtable of IrSetGradientsV at *this
+0x1d49bc	FUN_001d49bc	IrSetGradientsV	deleting-dtor	stores vtable of IrSetGradientsV at *this
+0x1d49f0	FUN_001d49f0	IrSetGradientsH	dtor (complete, non-deleting)	stores vtable of IrSetGradientsH at *this
+0x1d4a24	FUN_001d4a24	IrSetGradientsH	deleting-dtor	stores vtable of IrSetGradientsH at *this
+0x1d4a58	FUN_001d4a58	IrSetTexLod	dtor (complete, non-deleting)	stores vtable of IrSetTexLod at *this
+0x1d4a8c	FUN_001d4a8c	IrSetTexLod	deleting-dtor	stores vtable of IrSetTexLod at *this
+0x1d4ac0	FUN_001d4ac0	IrGetWeights	dtor (complete, non-deleting)	stores vtable of IrGetWeights at *this
+0x1d4af4	FUN_001d4af4	IrGetWeights	deleting-dtor	stores vtable of IrGetWeights at *this
+0x1d4b28	FUN_001d4b28	IrGetGradients	dtor (complete, non-deleting)	stores vtable of IrGetGradients at *this
+0x1d4b5c	FUN_001d4b5c	IrGetGradients	deleting-dtor	stores vtable of IrGetGradients at *this
+0x1d4b90	FUN_001d4b90	IrGetCompTexLod	dtor (complete, non-deleting)	stores vtable of IrGetCompTexLod at *this
+0x1d4bc4	FUN_001d4bc4	IrGetCompTexLod	deleting-dtor	stores vtable of IrGetCompTexLod at *this
+0x1d4bf8	FUN_001d4bf8	IrGetBorderColorFraction	dtor (complete, non-deleting)	stores vtable of IrGetBorderColorFraction at *this
+0x1d4c2c	FUN_001d4c2c	IrGetBorderColorFraction	deleting-dtor	stores vtable of IrGetBorderColorFraction at *this
+0x1d4c60	FUN_001d4c60	IrFetchMultiSample	dtor (complete, non-deleting)	stores vtable of IrFetchMultiSample at *this
+0x1d4c94	FUN_001d4c94	IrFetchMultiSample	deleting-dtor	stores vtable of IrFetchMultiSample at *this
+0x1d4cc8	FUN_001d4cc8	IrFetchShadowMap	dtor (complete, non-deleting)	stores vtable of IrFetchShadowMap at *this
+0x1d4cfc	FUN_001d4cfc	IrFetchShadowMap	deleting-dtor	stores vtable of IrFetchShadowMap at *this
+0x1d4d30	FUN_001d4d30	IrFetch3DNoiseMap	dtor (complete, non-deleting)	stores vtable of IrFetch3DNoiseMap at *this
+0x1d4d64	FUN_001d4d64	IrFetch3DNoiseMap	deleting-dtor	stores vtable of IrFetch3DNoiseMap at *this
+0x1d4d98	FUN_001d4d98	IrFetchTextureMap	dtor (complete, non-deleting)	stores vtable of IrFetchTextureMap at *this
+0x1d4dcc	FUN_001d4dcc	IrFetchTextureMap	deleting-dtor	stores vtable of IrFetchTextureMap at *this
+0x1d4e00	FUN_001d4e00	IrFetchVertex	dtor (complete, non-deleting)	stores vtable of IrFetchVertex at *this
+0x1d4e34	FUN_001d4e34	IrFetchVertex	deleting-dtor	stores vtable of IrFetchVertex at *this
+0x1d4e68	FUN_001d4e68	IrSqrt	dtor (complete, non-deleting)	stores vtable of IrSqrt at *this
+0x1d4e9c	FUN_001d4e9c	IrSqrt	deleting-dtor	stores vtable of IrSqrt at *this
+0x1d4ed0	FUN_001d4ed0	IrRecipSqrtInternal	dtor (complete, non-deleting)	stores vtable of IrRecipSqrtInternal at *this
+0x1d4f04	FUN_001d4f04	IrRecipSqrtInternal	deleting-dtor	stores vtable of IrRecipSqrtInternal at *this
+0x1d4f38	FUN_001d4f38	IrLogInternal	dtor (complete, non-deleting)	stores vtable of IrLogInternal at *this
+0x1d4f6c	FUN_001d4f6c	IrLogInternal	deleting-dtor	stores vtable of IrLogInternal at *this
+0x1d4fa0	FUN_001d4fa0	IrExp	dtor (complete, non-deleting)	stores vtable of IrExp at *this
+0x1d4fd4	FUN_001d4fd4	IrExp	deleting-dtor	stores vtable of IrExp at *this
+0x1d5008	FUN_001d5008	IrSub	dtor (complete, non-deleting)	stores vtable of IrSub at *this
+0x1d503c	FUN_001d503c	IrSub	deleting-dtor	stores vtable of IrSub at *this
+0x1d5070	FUN_001d5070	IrNop1	dtor (complete, non-deleting)	stores vtable of IrNop1 at *this
+0x1d50a4	FUN_001d50a4	IrNop1	deleting-dtor	stores vtable of IrNop1 at *this
+0x1d50d8	FUN_001d50d8	IrNop	dtor (complete, non-deleting)	stores vtable of IrNop at *this
+0x1d510c	FUN_001d510c	IrNop	deleting-dtor	stores vtable of IrNop at *this
+0x1d5140	FUN_001d5140	IrLit	dtor (complete, non-deleting)	stores vtable of IrLit at *this
+0x1d5174	FUN_001d5174	IrLit	deleting-dtor	stores vtable of IrLit at *this
+0x1d51a8	FUN_001d51a8	IrMov	dtor (complete, non-deleting)	stores vtable of IrMov at *this
+0x1d51dc	FUN_001d51dc	IrMov	deleting-dtor	stores vtable of IrMov at *this
+0x1d5210	FUN_001d5210	IrMovFloat	dtor (complete, non-deleting)	stores vtable of IrMovFloat at *this
+0x1d5244	FUN_001d5244	IrMovFloat	deleting-dtor	stores vtable of IrMovFloat at *this
+0x1d5278	FUN_001d5278	IrExportRing	dtor (complete, non-deleting)	stores vtable of IrExportRing at *this
+0x1d52ac	FUN_001d52ac	IrExportRing	deleting-dtor	stores vtable of IrExportRing at *this
+0x1d52e0	FUN_001d52e0	IrExport	dtor (complete, non-deleting)	stores vtable of IrExport at *this
+0x1d5314	FUN_001d5314	IrExport	deleting-dtor	stores vtable of IrExport at *this
+0x1d5348	FUN_001d5348	IrExportFloat	dtor (complete, non-deleting)	stores vtable of IrExportFloat at *this
+0x1d537c	FUN_001d537c	IrExportFloat	deleting-dtor	stores vtable of IrExportFloat at *this
+0x1d53b0	FUN_001d53b0	IrPredSetGEPushInt	dtor (complete, non-deleting)	stores vtable of IrPredSetGEPushInt at *this
+0x1d53e4	FUN_001d53e4	IrPredSetGEPushInt	deleting-dtor	stores vtable of IrPredSetGEPushInt at *this
+0x1d5418	FUN_001d5418	IrPredSetGEPush	dtor (complete, non-deleting)	stores vtable of IrPredSetGEPush at *this
+0x1d544c	FUN_001d544c	IrPredSetGEPush	deleting-dtor	stores vtable of IrPredSetGEPush at *this
+0x1d5480	FUN_001d5480	IrPredSetGTPushInt	dtor (complete, non-deleting)	stores vtable of IrPredSetGTPushInt at *this
+0x1d54b4	FUN_001d54b4	IrPredSetGTPushInt	deleting-dtor	stores vtable of IrPredSetGTPushInt at *this
+0x1d54e8	FUN_001d54e8	IrPredSetGTPush	dtor (complete, non-deleting)	stores vtable of IrPredSetGTPush at *this
+0x1d551c	FUN_001d551c	IrPredSetGTPush	deleting-dtor	stores vtable of IrPredSetGTPush at *this
+0x1d5550	FUN_001d5550	IrPredSetNEPushInt	dtor (complete, non-deleting)	stores vtable of IrPredSetNEPushInt at *this
+0x1d5584	FUN_001d5584	IrPredSetNEPushInt	deleting-dtor	stores vtable of IrPredSetNEPushInt at *this
+0x1d55b8	FUN_001d55b8	IrPredSetNEPush	dtor (complete, non-deleting)	stores vtable of IrPredSetNEPush at *this
+0x1d55ec	FUN_001d55ec	IrPredSetNEPush	deleting-dtor	stores vtable of IrPredSetNEPush at *this
+0x1d5620	FUN_001d5620	IrPredSetLEPushInt	dtor (complete, non-deleting)	stores vtable of IrPredSetLEPushInt at *this
+0x1d5654	FUN_001d5654	IrPredSetLEPushInt	deleting-dtor	stores vtable of IrPredSetLEPushInt at *this
+0x1d5688	FUN_001d5688	IrPredSetLTPushInt	dtor (complete, non-deleting)	stores vtable of IrPredSetLTPushInt at *this
+0x1d56bc	FUN_001d56bc	IrPredSetLTPushInt	deleting-dtor	stores vtable of IrPredSetLTPushInt at *this
+0x1d56f0	FUN_001d56f0	IrPredSetEPushInt	dtor (complete, non-deleting)	stores vtable of IrPredSetEPushInt at *this
+0x1d5724	FUN_001d5724	IrPredSetEPushInt	deleting-dtor	stores vtable of IrPredSetEPushInt at *this
+0x1d5758	FUN_001d5758	IrPredSetEPush	dtor (complete, non-deleting)	stores vtable of IrPredSetEPush at *this
+0x1d578c	FUN_001d578c	IrPredSetEPush	deleting-dtor	stores vtable of IrPredSetEPush at *this
+0x1d57c0	FUN_001d57c0	IrMovaRound	dtor (complete, non-deleting)	stores vtable of IrMovaRound at *this
+0x1d57f4	FUN_001d57f4	IrMovaRound	deleting-dtor	stores vtable of IrMovaRound at *this
+0x1d5828	FUN_001d5828	IrMovaRoundFloat	dtor (complete, non-deleting)	stores vtable of IrMovaRoundFloat at *this
+0x1d585c	FUN_001d585c	IrMovaRoundFloat	deleting-dtor	stores vtable of IrMovaRoundFloat at *this
+0x1d5890	FUN_001d5890	IrSetNEInt	dtor (complete, non-deleting)	stores vtable of IrSetNEInt at *this
+0x1d58c4	FUN_001d58c4	IrSetNEInt	deleting-dtor	stores vtable of IrSetNEInt at *this
+0x1d58f8	FUN_001d58f8	IrSetNE	dtor (complete, non-deleting)	stores vtable of IrSetNE at *this
+0x1d592c	FUN_001d592c	IrSetNE	deleting-dtor	stores vtable of IrSetNE at *this
+0x1d5960	FUN_001d5960	IrSetNEFloat	dtor (complete, non-deleting)	stores vtable of IrSetNEFloat at *this
+0x1d5994	FUN_001d5994	IrSetNEFloat	deleting-dtor	stores vtable of IrSetNEFloat at *this
+0x1d59c8	FUN_001d59c8	IrSetGE_uint	dtor (complete, non-deleting)	stores vtable of IrSetGE_uint at *this
+0x1d59fc	FUN_001d59fc	IrSetGE_uint	deleting-dtor	stores vtable of IrSetGE_uint at *this
+0x1d5a30	FUN_001d5a30	IrSetGEInt	dtor (complete, non-deleting)	stores vtable of IrSetGEInt at *this
+0x1d5a64	FUN_001d5a64	IrSetGEInt	deleting-dtor	stores vtable of IrSetGEInt at *this
+0x1d5a98	FUN_001d5a98	IrSetGE	dtor (complete, non-deleting)	stores vtable of IrSetGE at *this
+0x1d5acc	FUN_001d5acc	IrSetGE	deleting-dtor	stores vtable of IrSetGE at *this
+0x1d5b00	FUN_001d5b00	IrSetGEFloat	dtor (complete, non-deleting)	stores vtable of IrSetGEFloat at *this
+0x1d5b34	FUN_001d5b34	IrSetGEFloat	deleting-dtor	stores vtable of IrSetGEFloat at *this
+0x1d5b68	FUN_001d5b68	IrSetGTUint	dtor (complete, non-deleting)	stores vtable of IrSetGTUint at *this
+0x1d5b9c	FUN_001d5b9c	IrSetGTUint	deleting-dtor	stores vtable of IrSetGTUint at *this
+0x1d5bd0	FUN_001d5bd0	IrSetGTInt	dtor (complete, non-deleting)	stores vtable of IrSetGTInt at *this
+0x1d5c04	FUN_001d5c04	IrSetGTInt	deleting-dtor	stores vtable of IrSetGTInt at *this
+0x1d5c38	FUN_001d5c38	IrSetGTDx10	dtor (complete, non-deleting)	stores vtable of IrSetGTDx10 at *this
+0x1d5c6c	FUN_001d5c6c	IrSetGTDx10	deleting-dtor	stores vtable of IrSetGTDx10 at *this
+0x1d5ca0	FUN_001d5ca0	IrSetGT	dtor (complete, non-deleting)	stores vtable of IrSetGT at *this
+0x1d5cd4	FUN_001d5cd4	IrSetGT	deleting-dtor	stores vtable of IrSetGT at *this
+0x1d5d08	FUN_001d5d08	IrSetGTFloat	dtor (complete, non-deleting)	stores vtable of IrSetGTFloat at *this
+0x1d5d3c	FUN_001d5d3c	IrSetGTFloat	deleting-dtor	stores vtable of IrSetGTFloat at *this
+0x1d5d70	FUN_001d5d70	IrSetEInt	dtor (complete, non-deleting)	stores vtable of IrSetEInt at *this
+0x1d5da4	FUN_001d5da4	IrSetEInt	deleting-dtor	stores vtable of IrSetEInt at *this
+0x1d5dd8	FUN_001d5dd8	IrSetE	dtor (complete, non-deleting)	stores vtable of IrSetE at *this
+0x1d5e0c	FUN_001d5e0c	IrSetE	deleting-dtor	stores vtable of IrSetE at *this
+0x1d5e40	FUN_001d5e40	IrSetEFloat	dtor (complete, non-deleting)	stores vtable of IrSetEFloat at *this
+0x1d5e74	FUN_001d5e74	IrSetEFloat	deleting-dtor	stores vtable of IrSetEFloat at *this
+0x1d5ea8	FUN_001d5ea8	IrCndGT1	dtor (complete, non-deleting)	stores vtable of IrCndGT1 at *this
+0x1d5edc	FUN_001d5edc	IrCndGT1	deleting-dtor	stores vtable of IrCndGT1 at *this
+0x1d5f10	FUN_001d5f10	IrCndGTInt	dtor (complete, non-deleting)	stores vtable of IrCndGTInt at *this
+0x1d5f44	FUN_001d5f44	IrCndGTInt	deleting-dtor	stores vtable of IrCndGTInt at *this
+0x1d5f78	FUN_001d5f78	IrCndGT	dtor (complete, non-deleting)	stores vtable of IrCndGT at *this
+0x1d5fac	FUN_001d5fac	IrCndGT	deleting-dtor	stores vtable of IrCndGT at *this
+0x1d5fe0	FUN_001d5fe0	IrCndGTFloat	dtor (complete, non-deleting)	stores vtable of IrCndGTFloat at *this
+0x1d6014	FUN_001d6014	IrCndGTFloat	deleting-dtor	stores vtable of IrCndGTFloat at *this
+0x1d6048	FUN_001d6048	IrCndE1	dtor (complete, non-deleting)	stores vtable of IrCndE1 at *this
+0x1d607c	FUN_001d607c	IrCndE1	deleting-dtor	stores vtable of IrCndE1 at *this
+0x1d60b0	FUN_001d60b0	IrCndEInt	dtor (complete, non-deleting)	stores vtable of IrCndEInt at *this
+0x1d60e4	FUN_001d60e4	IrCndEInt	deleting-dtor	stores vtable of IrCndEInt at *this
+0x1d6118	FUN_001d6118	IrCndE	dtor (complete, non-deleting)	stores vtable of IrCndE at *this
+0x1d614c	FUN_001d614c	IrCndE	deleting-dtor	stores vtable of IrCndE at *this
+0x1d6180	FUN_001d6180	IrCndEFloat	dtor (complete, non-deleting)	stores vtable of IrCndEFloat at *this
+0x1d61b4	FUN_001d61b4	IrCndEFloat	deleting-dtor	stores vtable of IrCndEFloat at *this
+0x1d61e8	FUN_001d61e8	IrKillNE	dtor (complete, non-deleting)	stores vtable of IrKillNE at *this
+0x1d621c	FUN_001d621c	IrKillNE	deleting-dtor	stores vtable of IrKillNE at *this
+0x1d6250	FUN_001d6250	IrKillNEFloat	dtor (complete, non-deleting)	stores vtable of IrKillNEFloat at *this
+0x1d6284	FUN_001d6284	IrKillNEFloat	deleting-dtor	stores vtable of IrKillNEFloat at *this
+0x1d62b8	FUN_001d62b8	IrKillGE	dtor (complete, non-deleting)	stores vtable of IrKillGE at *this
+0x1d62ec	FUN_001d62ec	IrKillGE	deleting-dtor	stores vtable of IrKillGE at *this
+0x1d6320	FUN_001d6320	IrKillGEFloat	dtor (complete, non-deleting)	stores vtable of IrKillGEFloat at *this
+0x1d6354	FUN_001d6354	IrKillGEFloat	deleting-dtor	stores vtable of IrKillGEFloat at *this
+0x1d6388	FUN_001d6388	IrKillGT	dtor (complete, non-deleting)	stores vtable of IrKillGT at *this
+0x1d63bc	FUN_001d63bc	IrKillGT	deleting-dtor	stores vtable of IrKillGT at *this
+0x1d63f0	FUN_001d63f0	IrKillGTFloat	dtor (complete, non-deleting)	stores vtable of IrKillGTFloat at *this
+0x1d6424	FUN_001d6424	IrKillGTFloat	deleting-dtor	stores vtable of IrKillGTFloat at *this
+0x1d6458	FUN_001d6458	IrKillE	dtor (complete, non-deleting)	stores vtable of IrKillE at *this
+0x1d648c	FUN_001d648c	IrKillE	deleting-dtor	stores vtable of IrKillE at *this
+0x1d64c0	FUN_001d64c0	IrKillEFloat	dtor (complete, non-deleting)	stores vtable of IrKillEFloat at *this
+0x1d64f4	FUN_001d64f4	IrKillEFloat	deleting-dtor	stores vtable of IrKillEFloat at *this
+0x1d6528	FUN_001d6528	IrDst	dtor (complete, non-deleting)	stores vtable of IrDst at *this
+0x1d655c	FUN_001d655c	IrDst	deleting-dtor	stores vtable of IrDst at *this
+0x1d6590	FUN_001d6590	IrDot2AddIEEE	dtor (complete, non-deleting)	stores vtable of IrDot2AddIEEE at *this
+0x1d65c4	FUN_001d65c4	IrDot2AddIEEE	deleting-dtor	stores vtable of IrDot2AddIEEE at *this
+0x1d65f8	FUN_001d65f8	IrDot4IEEE	dtor (complete, non-deleting)	stores vtable of IrDot4IEEE at *this
+0x1d662c	FUN_001d662c	IrDot4IEEE	deleting-dtor	stores vtable of IrDot4IEEE at *this
+0x1d6660	FUN_001d6660	IrDot4	dtor (complete, non-deleting)	stores vtable of IrDot4 at *this
+0x1d6694	FUN_001d6694	IrDot4	deleting-dtor	stores vtable of IrDot4 at *this
+0x1d66c8	FUN_001d66c8	IrMulHiUInt	dtor (complete, non-deleting)	stores vtable of IrMulHiUInt at *this
+0x1d66fc	FUN_001d66fc	IrMulHiUInt	deleting-dtor	stores vtable of IrMulHiUInt at *this
+0x1d6730	FUN_001d6730	IrMulLowUInt	dtor (complete, non-deleting)	stores vtable of IrMulLowUInt at *this
+0x1d6764	FUN_001d6764	IrMulLowUInt	deleting-dtor	stores vtable of IrMulLowUInt at *this
+0x1d6798	FUN_001d6798	IrMulHiInt	dtor (complete, non-deleting)	stores vtable of IrMulHiInt at *this
+0x1d67cc	FUN_001d67cc	IrMulHiInt	deleting-dtor	stores vtable of IrMulHiInt at *this
+0x1d6800	FUN_001d6800	IrMulLowInt	dtor (complete, non-deleting)	stores vtable of IrMulLowInt at *this
+0x1d6834	FUN_001d6834	IrMulLowInt	deleting-dtor	stores vtable of IrMulLowInt at *this
+0x1d6868	FUN_001d6868	IrLshlInt	dtor (complete, non-deleting)	stores vtable of IrLshlInt at *this
+0x1d689c	FUN_001d689c	IrLshlInt	deleting-dtor	stores vtable of IrLshlInt at *this
+0x1d68d0	FUN_001d68d0	IrLshrInt	dtor (complete, non-deleting)	stores vtable of IrLshrInt at *this
+0x1d6904	FUN_001d6904	IrLshrInt	deleting-dtor	stores vtable of IrLshrInt at *this
+0x1d6938	FUN_001d6938	IrAshrInt	dtor (complete, non-deleting)	stores vtable of IrAshrInt at *this
+0x1d696c	FUN_001d696c	IrAshrInt	deleting-dtor	stores vtable of IrAshrInt at *this
+0x1d69a0	FUN_001d69a0	IrUInt2F	dtor (complete, non-deleting)	stores vtable of IrUInt2F at *this
+0x1d69d4	FUN_001d69d4	IrUInt2F	deleting-dtor	stores vtable of IrUInt2F at *this
+0x1d6a08	FUN_001d6a08	IrInt2F	dtor (complete, non-deleting)	stores vtable of IrInt2F at *this
+0x1d6a3c	FUN_001d6a3c	IrInt2F	deleting-dtor	stores vtable of IrInt2F at *this
+0x1d6a70	FUN_001d6a70	IrF2UInt	dtor (complete, non-deleting)	stores vtable of IrF2UInt at *this
+0x1d6aa4	FUN_001d6aa4	IrF2UInt	deleting-dtor	stores vtable of IrF2UInt at *this
+0x1d6ad8	FUN_001d6ad8	IrF2Int	dtor (complete, non-deleting)	stores vtable of IrF2Int at *this
+0x1d6b0c	FUN_001d6b0c	IrF2Int	deleting-dtor	stores vtable of IrF2Int at *this
+0x1d6b40	FUN_001d6b40	IrDot3IEEE	dtor (complete, non-deleting)	stores vtable of IrDot3IEEE at *this
+0x1d6b74	FUN_001d6b74	IrDot3IEEE	deleting-dtor	stores vtable of IrDot3IEEE at *this
+0x1d6ba8	FUN_001d6ba8	IrDot3	dtor (complete, non-deleting)	stores vtable of IrDot3 at *this
+0x1d6bdc	FUN_001d6bdc	IrDot3	deleting-dtor	stores vtable of IrDot3 at *this
+0x1d6c10	FUN_001d6c10	IrCube	dtor (complete, non-deleting)	stores vtable of IrCube at *this
+0x1d6c44	FUN_001d6c44	IrCube	deleting-dtor	stores vtable of IrCube at *this
+0x1d6c78	FUN_001d6c78	IrTrunc	dtor (complete, non-deleting)	stores vtable of IrTrunc at *this
+0x1d6cac	FUN_001d6cac	IrTrunc	deleting-dtor	stores vtable of IrTrunc at *this
+0x1d6ce0	FUN_001d6ce0	IrTruncFloat	dtor (complete, non-deleting)	stores vtable of IrTruncFloat at *this
+0x1d6d14	FUN_001d6d14	IrTruncFloat	deleting-dtor	stores vtable of IrTruncFloat at *this
+0x1d6d48	FUN_001d6d48	IrRecipUInt	dtor (complete, non-deleting)	stores vtable of IrRecipUInt at *this
+0x1d6d7c	FUN_001d6d7c	IrRecipUInt	deleting-dtor	stores vtable of IrRecipUInt at *this
+0x1d6db0	FUN_001d6db0	IrRecipInt	dtor (complete, non-deleting)	stores vtable of IrRecipInt at *this
+0x1d6de4	FUN_001d6de4	IrRecipInt	deleting-dtor	stores vtable of IrRecipInt at *this
+0x1d6e18	FUN_001d6e18	IrRecipInternal	dtor (complete, non-deleting)	stores vtable of IrRecipInternal at *this
+0x1d6e4c	FUN_001d6e4c	IrRecipInternal	deleting-dtor	stores vtable of IrRecipInternal at *this
+0x1d6e80	FUN_001d6e80	IrMinDx10	dtor (complete, non-deleting)	stores vtable of IrMinDx10 at *this
+0x1d6eb4	FUN_001d6eb4	IrMinDx10	deleting-dtor	stores vtable of IrMinDx10 at *this
+0x1d6ee8	FUN_001d6ee8	IrMinUInt	dtor (complete, non-deleting)	stores vtable of IrMinUInt at *this
+0x1d6f1c	FUN_001d6f1c	IrMinUInt	deleting-dtor	stores vtable of IrMinUInt at *this
+0x1d6f50	FUN_001d6f50	IrMinInt	dtor (complete, non-deleting)	stores vtable of IrMinInt at *this
+0x1d6f84	FUN_001d6f84	IrMinInt	deleting-dtor	stores vtable of IrMinInt at *this
+0x1d6fb8	FUN_001d6fb8	IrMin	dtor (complete, non-deleting)	stores vtable of IrMin at *this
+0x1d6fec	FUN_001d6fec	IrMin	deleting-dtor	stores vtable of IrMin at *this
+0x1d7020	FUN_001d7020	IrMinFloat	dtor (complete, non-deleting)	stores vtable of IrMinFloat at *this
+0x1d7054	FUN_001d7054	IrMinFloat	deleting-dtor	stores vtable of IrMinFloat at *this
+0x1d7088	FUN_001d7088	IrMax4	dtor (complete, non-deleting)	stores vtable of IrMax4 at *this
+0x1d70bc	FUN_001d70bc	IrMax4	deleting-dtor	stores vtable of IrMax4 at *this
+0x1d70f0	FUN_001d70f0	IrMaxDx10	dtor (complete, non-deleting)	stores vtable of IrMaxDx10 at *this
+0x1d7124	FUN_001d7124	IrMaxDx10	deleting-dtor	stores vtable of IrMaxDx10 at *this
+0x1d7158	FUN_001d7158	IrMax	dtor (complete, non-deleting)	stores vtable of IrMax at *this
+0x1d718c	FUN_001d718c	IrMax	deleting-dtor	stores vtable of IrMax at *this
+0x1d71c0	FUN_001d71c0	IrMaxUInt	dtor (complete, non-deleting)	stores vtable of IrMaxUInt at *this
+0x1d71f4	FUN_001d71f4	IrMaxUInt	deleting-dtor	stores vtable of IrMaxUInt at *this
+0x1d7228	FUN_001d7228	IrMaxInt	dtor (complete, non-deleting)	stores vtable of IrMaxInt at *this
+0x1d725c	FUN_001d725c	IrMaxInt	deleting-dtor	stores vtable of IrMaxInt at *this
+0x1d7290	FUN_001d7290	IrMaxFloat	dtor (complete, non-deleting)	stores vtable of IrMaxFloat at *this
+0x1d72c4	FUN_001d72c4	IrMaxFloat	deleting-dtor	stores vtable of IrMaxFloat at *this
+0x1d72f8	FUN_001d72f8	IrFract	dtor (complete, non-deleting)	stores vtable of IrFract at *this
+0x1d732c	FUN_001d732c	IrFract	deleting-dtor	stores vtable of IrFract at *this
+0x1d7360	FUN_001d7360	IrFractFloat	dtor (complete, non-deleting)	stores vtable of IrFractFloat at *this
+0x1d7394	FUN_001d7394	IrFractFloat	deleting-dtor	stores vtable of IrFractFloat at *this
+0x1d73c8	FUN_001d73c8	IrFloor	dtor (complete, non-deleting)	stores vtable of IrFloor at *this
+0x1d73fc	FUN_001d73fc	IrFloor	deleting-dtor	stores vtable of IrFloor at *this
+0x1d7430	FUN_001d7430	IrFloorFloat	dtor (complete, non-deleting)	stores vtable of IrFloorFloat at *this
+0x1d7464	FUN_001d7464	IrFloorFloat	deleting-dtor	stores vtable of IrFloorFloat at *this
+0x1d7498	FUN_001d7498	IrMulAddIEEE	dtor (complete, non-deleting)	stores vtable of IrMulAddIEEE at *this
+0x1d74cc	FUN_001d74cc	IrMulAddIEEE	deleting-dtor	stores vtable of IrMulAddIEEE at *this
+0x1d7500	FUN_001d7500	IrMulAdd	dtor (complete, non-deleting)	stores vtable of IrMulAdd at *this
+0x1d7534	FUN_001d7534	IrMulAdd	deleting-dtor	stores vtable of IrMulAdd at *this
+0x1d7568	FUN_001d7568	IrMulAddFloat	dtor (complete, non-deleting)	stores vtable of IrMulAddFloat at *this
+0x1d759c	FUN_001d759c	IrMulAddFloat	deleting-dtor	stores vtable of IrMulAddFloat at *this
+0x1d75d0	FUN_001d75d0	IrMulIEEE	dtor (complete, non-deleting)	stores vtable of IrMulIEEE at *this
+0x1d7604	FUN_001d7604	IrMulIEEE	deleting-dtor	stores vtable of IrMulIEEE at *this
+0x1d7638	FUN_001d7638	IrSubInt	dtor (complete, non-deleting)	stores vtable of IrSubInt at *this
+0x1d766c	FUN_001d766c	IrSubInt	deleting-dtor	stores vtable of IrSubInt at *this
+0x1d76a0	FUN_001d76a0	IrAddInt	dtor (complete, non-deleting)	stores vtable of IrAddInt at *this
+0x1d76d4	FUN_001d76d4	IrAddInt	deleting-dtor	stores vtable of IrAddInt at *this
+0x1d7708	FUN_001d7708	IrAddFloat	dtor (complete, non-deleting)	stores vtable of IrAddFloat at *this
+0x1d773c	FUN_001d773c	IrAddFloat	deleting-dtor	stores vtable of IrAddFloat at *this
+0x1d7770	FUN_001d7770	IrAlloc	dtor (complete, non-deleting)	stores vtable of IrAlloc at *this
+0x1d77a4	FUN_001d77a4	IrAlloc	deleting-dtor	stores vtable of IrAlloc at *this
+0x1d77d8	FUN_001d77d8	IrCondJmp	dtor (complete, non-deleting)	stores vtable of IrCondJmp at *this
+0x1d780c	FUN_001d780c	IrCondJmp	deleting-dtor	stores vtable of IrCondJmp at *this
+0x1d7840	FUN_001d7840	IrRet	dtor (complete, non-deleting)	stores vtable of IrRet at *this
+0x1d7874	FUN_001d7874	IrRet	deleting-dtor	stores vtable of IrRet at *this
+0x1d7950	FUN_001d7950	VRegInfo	virtual-slot0 (dtor)	stores vtable of VRegInfo at *this; vtable slot of VRegInfo[0]
+0x1d7974	FUN_001d7974	VRegInfo	virtual-slot1 (deleting dtor)	stores vtable of VRegInfo at *this; vtable slot of VRegInfo[1]
+0x1d79ac	FUN_001d79ac	ImmedConstBuffer	virtual-slot1 (deleting dtor)	stores vtable of ImmedConstBuffer at *this; vtable slot of ImmedConstBuffer[1]
+0x1d79f4	FUN_001d79f4	TempValue	dtor (complete, non-deleting)	stores vtable of TempValue at *this; vtable slot of PrimitiveIndex[1]
+0x1d7a3c	FUN_001d7a3c	TempValue	dtor (complete, non-deleting)	stores vtable of TempValue at *this; vtable slot of PrimitiveIndex[0]
+0x1d7a70	FUN_001d7a70	TempValue	dtor (complete, non-deleting)	stores vtable of TempValue at *this; vtable slot of StandardIndex[1]
+0x1d7ab8	FUN_001d7ab8	TempValue	dtor (complete, non-deleting)	stores vtable of TempValue at *this; vtable slot of StandardIndex[0]
+0x1d7aec	FUN_001d7aec	Physical	virtual-slot0 (dtor)	stores vtable of Physical at *this; vtable slot of Physical[0]
+0x1d7b20	FUN_001d7b20	Physical	virtual-slot1 (deleting dtor)	stores vtable of Physical at *this; vtable slot of Physical[1]
+0x1d7b68	FUN_001d7b68	AddrIndexedSet	virtual-slot0 (dtor)	stores vtable of AddrIndexedSet at *this; vtable slot of AddrIndexedSet[0]
+0x1d7b9c	FUN_001d7b9c	AddrIndexedSet	virtual-slot1 (deleting dtor)	stores vtable of AddrIndexedSet at *this; vtable slot of AddrIndexedSet[1]
+0x1d7be4	FUN_001d7be4	LoopRegister	virtual-slot0 (dtor)	stores vtable of LoopRegister at *this; vtable slot of LoopRegister[0]
+0x1d7c18	FUN_001d7c18	LoopRegister	virtual-slot1 (deleting dtor)	stores vtable of LoopRegister at *this; vtable slot of LoopRegister[1]
+0x1d7c60	FUN_001d7c60	LoopIndexedSet	virtual-slot0 (dtor)	stores vtable of LoopIndexedSet at *this; vtable slot of LoopIndexedSet[0]
+0x1d7c94	FUN_001d7c94	LoopIndexedSet	virtual-slot1 (deleting dtor)	stores vtable of LoopIndexedSet at *this; vtable slot of LoopIndexedSet[1]
+0x1d7cdc	FUN_001d7cdc	ExportAddress	virtual-slot0 (dtor)	stores vtable of ExportAddress at *this; vtable slot of ExportAddress[0]
+0x1d7d10	FUN_001d7d10	ExportAddress	virtual-slot1 (deleting dtor)	stores vtable of ExportAddress at *this; vtable slot of ExportAddress[1]
+0x1d7d58	FUN_001d7d58	ExportValue	virtual-slot0 (dtor)	stores vtable of ExportValue at *this; vtable slot of ExportValue[0]
+0x1d7d8c	FUN_001d7d8c	ExportValue	virtual-slot1 (deleting dtor)	stores vtable of ExportValue at *this; vtable slot of ExportValue[1]
+0x1d7dd4	FUN_001d7dd4	Interpolator	virtual-slot0 (dtor)	stores vtable of Interpolator at *this; vtable slot of Interpolator[0]
+0x1d7e08	FUN_001d7e08	Interpolator	virtual-slot1 (deleting dtor)	stores vtable of Interpolator at *this; vtable slot of Interpolator[1]
+0x1d7e50	FUN_001d7e50	TempValue	virtual-slot0 (dtor)	stores vtable of TempValue at *this; vtable slot of TempValue[0]
+0x1d7e84	FUN_001d7e84	TempValue	virtual-slot1 (deleting dtor)	stores vtable of TempValue at *this; vtable slot of TempValue[1]
+0x1d7ecc	FUN_001d7ecc	ExportSlot	virtual-slot0 (dtor)	stores vtable of ExportSlot at *this; vtable slot of ExportSlot[0]
+0x1d7f00	FUN_001d7f00	ExportSlot	virtual-slot1 (deleting dtor)	stores vtable of ExportSlot at *this; vtable slot of ExportSlot[1]
+0x1d7f48	FUN_001d7f48	Resource	virtual-slot0 (dtor)	stores vtable of Resource at *this; vtable slot of Resource[0]
+0x1d7f7c	FUN_001d7f7c	Resource	virtual-slot1 (deleting dtor)	stores vtable of Resource at *this; vtable slot of Resource[1]
+0x1d7fc4	FUN_001d7fc4	VertexRegister	virtual-slot0 (dtor)	stores vtable of VertexRegister at *this; vtable slot of VertexRegister[0]
+0x1d7ff8	FUN_001d7ff8	VertexRegister	virtual-slot1 (deleting dtor)	stores vtable of VertexRegister at *this; vtable slot of VertexRegister[1]
+0x1d8040	FUN_001d8040	FixedValue	virtual-slot0 (dtor)	stores vtable of FixedValue at *this; vtable slot of FixedValue[0]
+0x1d8074	FUN_001d8074	FixedValue	virtual-slot1 (deleting dtor)	stores vtable of FixedValue at *this; vtable slot of FixedValue[1]
+0x1d80bc	FUN_001d80bc	ImmedConstBuffer	virtual-slot0 (dtor)	stores vtable of ImmedConstBuffer at *this; vtable slot of ImmedConstBuffer[0]
+0x1d80f0	FUN_001d80f0	LoopIndexedConstSet	virtual-slot0 (dtor)	stores vtable of LoopIndexedConstSet at *this; vtable slot of LoopIndexedConstSet[0]
+0x1d8134	FUN_001d8134	LoopIndexedConstSet	virtual-slot1 (deleting dtor)	stores vtable of LoopIndexedConstSet at *this; vtable slot of LoopIndexedConstSet[1]
+0x1d818c	FUN_001d818c	LoopIndexedInputSet	virtual-slot0 (dtor)	stores vtable of LoopIndexedInputSet at *this; vtable slot of LoopIndexedInputSet[0]
+0x1d81d0	FUN_001d81d0	LoopIndexedInputSet	virtual-slot1 (deleting dtor)	stores vtable of LoopIndexedInputSet at *this; vtable slot of LoopIndexedInputSet[1]
+0x1d8228	FUN_001d8228	LoopIndexedOutputSet	virtual-slot0 (dtor)	stores vtable of LoopIndexedOutputSet at *this; vtable slot of LoopIndexedOutputSet[0]
+0x1d826c	FUN_001d826c	LoopIndexedOutputSet	virtual-slot1 (deleting dtor)	stores vtable of LoopIndexedOutputSet at *this; vtable slot of LoopIndexedOutputSet[1]
+0x1d8318	FUN_001d8318	KhanPs	deleting-dtor	stores vtable of KhanPs at *this; vtable slot of KhanPs[1]
+0x1d834c	FUN_001d834c	KhanChip	deleting-dtor	stores vtable of KhanChip at *this; vtable slot of KhanChip[1]
+0x1d8380	FUN_001d8380	KhanChip	virtual-slot0 (dtor)	stores vtable of KhanChip at *this; vtable slot of KhanChip[0]
+0x1d83b4	FUN_001d83b4	KhanPs	virtual-slot0 (dtor)	stores vtable of KhanPs at *this; vtable slot of KhanPs[0]
+0x1d84ac	FUN_001d84ac	KhanVs	deleting-dtor	stores vtable of KhanVs at *this; vtable slot of FudoVs[1]
+0x1d84e0	FUN_001d84e0	KhanVs	virtual-slot0 (dtor)	stores vtable of KhanVs at *this; vtable slot of KhanVs[0]
+0x1d8514	FUN_001d8514	KhanVs	deleting-dtor	stores vtable of KhanVs at *this; vtable slot of KhanVs[1]
+0x1d8548	FUN_001d8548	KhanVs	dtor (complete, non-deleting)	stores vtable of KhanVs at *this; vtable slot of FudoVs[0]
+0x1d85a0	FUN_001d85a0	MirrorBlock	virtual-slot1 (deleting dtor)	stores vtable of MirrorBlock at *this; vtable slot of MirrorBlock[1]
+0x1d8608	FUN_001d8608	MirrorBlock	virtual-slot0 (dtor)	stores vtable of MirrorBlock at *this; vtable slot of MirrorBlock[0]
+0x1d862c	FUN_001d862c	SchedNode	virtual-slot0 (dtor)	stores vtable of SchedNode at *this; vtable slot of SchedNode[0]
+0x1d8660	FUN_001d8660	SchedNode	virtual-slot1 (deleting dtor)	stores vtable of SchedNode at *this; vtable slot of SchedNode[1]
+0x1d86b4	FUN_001d86b4	ResourceModel	virtual-slot1 (deleting dtor)	stores vtable of ResourceModel at *this; vtable slot of ResourceModel[1]
+0x1d87a8	FUN_001d87a8	ThreadModel	virtual-slot1 (deleting dtor)	stores vtable of ThreadModel at *this; vtable slot of ThreadModel[1]
+0x1d8850	FUN_001d8850	ThreadModel	virtual-slot0 (dtor)	stores vtable of ThreadModel at *this; vtable slot of ThreadModel[0]
+0x1d8874	FUN_001d8874	ResourceModel	virtual-slot0 (dtor)	stores vtable of ResourceModel at *this; vtable slot of ResourceModel[0]
+0x1d8944	FUN_001d8944	R300SchedModel	dtor (complete, non-deleting)	stores vtable of R300SchedModel at *this
+0x1d8a28	FUN_001d8a28	R300VSchedModel	virtual-slot0 (dtor)	stores vtable of R300VSchedModel at *this; vtable slot of R300VSchedModel[0]
+0x1d8a5c	FUN_001d8a5c	R300VSchedModel	virtual-slot1 (deleting dtor)	stores vtable of R300VSchedModel at *this; vtable slot of R300VSchedModel[1]
+0x1d8af4	FUN_001d8af4	FudoChip	deleting-dtor	stores vtable of FudoChip at *this; vtable slot of FudoChip[1]
+0x1d8b38	FUN_001d8b38	FudoPs	deleting-dtor	stores vtable of FudoPs at *this; vtable slot of FudoPs[1]
+0x1d8b7c	FUN_001d8b7c	FudoChip	virtual-slot0 (dtor)	stores vtable of FudoChip at *this; vtable slot of FudoChip[0]
+0x1d8bc0	FUN_001d8bc0	FudoPs	virtual-slot0 (dtor)	stores vtable of FudoPs at *this; vtable slot of FudoPs[0]
+0x1d8c18	FUN_001d8c18	R520SchedModel	virtual-slot1 (deleting dtor)	stores vtable of R520SchedModel at *this; vtable slot of R520SchedModel[1]
+0x1d8c70	FUN_001d8c70	R520SchedModel	virtual-slot0 (dtor)	stores vtable of R520SchedModel at *this; vtable slot of R520SchedModel[0]
+0x1d8f58	FUN_001d8f58	R520MachineAssembler	virtual-slot1 (deleting dtor)	stores vtable of R520MachineAssembler at *this; vtable slot of R520MachineAssembler[1]
+0x1d8fc0	FUN_001d8fc0	R520MachineAssembler	virtual-slot0 (dtor)	stores vtable of R520MachineAssembler at *this; vtable slot of R520MachineAssembler[0]
