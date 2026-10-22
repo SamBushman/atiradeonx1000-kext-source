@@ -9,7 +9,7 @@ Passes when, function by function:
      value went into the new one, shows up as 'may be used uninitialized').
 Exit 0 = pass. Usage inside verify_names.sh; the .dis files are `otool -arch ppc -tV` output, the .warn files are gcc stderr."""
 import re, sys
-FR = re.compile(r'(-?0x[0-9a-f]+|-?\d+)\((r30|r1)\)|(?<=,r30,)(0x[0-9a-f]+)|(?<=,r1,)(0x[0-9a-f]+)')
+FR = re.compile(r'([^\s,()]+)\((r30|r1)\)|(?<=,r30,)([^\s,]+)|(?<=,r1,)([^\s,]+)')   # otool prints a displacement equal to a symbol address as that symbol
 
 
 def funcs(path):

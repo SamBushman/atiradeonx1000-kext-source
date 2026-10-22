@@ -1,0 +1,81 @@
+# local	FUNCTION	old	new	tier	evidence   |   use	FUNCTION	old	new	tier	evidence	from	to
+local	FUN_00000c24	param_1	cxaAtexitFn	CONFIRMED	crt atexit shim clone of _check_cxa_atexit: called as __cxa_atexit(check routine, &state, &state)
+local	FUN_00000c24	param_2	cxaFinalizeFn	CONFIRMED	crt atexit shim clone of _check_cxa_atexit: called with &state to run/cancel the registered check
+local	FUN_00000c24	iVar1	status	CONFIRMED	crt atexit shim clone of _check_cxa_atexit: result of cxaAtexitFn
+local	FUN_00000c24	pcStack00000018	cxaAtexitFnHome	CONFIRMED	crt atexit shim clone of _check_cxa_atexit: home-slot copy of param_1
+local	FUN_00000c24	pcStack0000001c	cxaFinalizeFnHome	CONFIRMED	crt atexit shim clone of _check_cxa_atexit: home-slot copy of param_2
+local	FUN_00000c24	iStack_28	state	CONFIRMED	crt atexit shim clone of _check_cxa_atexit: flag set to 1 by the check routine when it ran
+local	FUN_00000c24	pcStack_24	cxaAtexitFnCopy	CONFIRMED	crt atexit shim clone of _check_cxa_atexit: copy of param_1 at &state+4
+local	FUN_00000c24	iStack_18	result	CONFIRMED	crt atexit shim clone of _check_cxa_atexit: returned state or -1
+local	FUN_00000c64	uVar1	imageCount	CONFIRMED	crt atexit shim clone of _find_atexit_10_3: result of __dyld_image_count
+local	FUN_00000c64	pcVar2	imageName	CONFIRMED	crt atexit shim clone of _find_atexit_10_3: __dyld_get_image_name(imageIndex), compared with libSystem.B.dylib
+local	FUN_00000c64	uVar4	symbolAddress	CONFIRMED	crt atexit shim clone of _find_atexit_10_3: __dyld_NSAddressOfSymbol result, returned
+local	FUN_00000c64	uStack_38	imageIndex	CONFIRMED	crt atexit shim clone of _find_atexit_10_3: loop counter 0..imageCount
+local	FUN_00000c64	pcStack_34	imageCountFn	CONFIRMED	crt atexit shim clone of _find_atexit_10_3: out of __dyld_func_lookup("__dyld_image_count")
+local	FUN_00000c64	pcStack_30	imageNameFn	CONFIRMED	crt atexit shim clone of _find_atexit_10_3: "__dyld_get_image_name"
+local	FUN_00000c64	pcStack_2c	imageHeaderFn	CONFIRMED	crt atexit shim clone of _find_atexit_10_3: "__dyld_get_image_header"
+local	FUN_00000c64	pcStack_28	lookupSymbolFn	CONFIRMED	crt atexit shim clone of _find_atexit_10_3: "__dyld_NSLookupSymbolInImage"
+local	FUN_00000c64	apcStack_24	addressOfSymbolFn	CONFIRMED	crt atexit shim clone of _find_atexit_10_3: "__dyld_NSAddressOfSymbol"
+use	FUN_00000c64	iVar3	compareResult	CONFIRMED	strcmp of the image name with libSystem.B.dylib	iVar3 = _strcmp	iVar3 = \(\*pcStack_2c\)
+use	FUN_00000c64	iVar3	machHeaderOrSymbol	INFERRED	mach_header from __dyld_get_image_header, then the NSSymbol of _atexit looked up in it (one local, two roles in one line)	iVar3 = \(\*pcStack_2c\)
+use	_find_atexit_10_3	uVar1	lookupResult	UNKNOWN	result of the last __dyld_func_lookup call, passed unused as the argument of __dyld_image_count	uVar1 = \(\(int \(\*\)\(\)\)__dyld_func_lookup\)\("__dyld_NSAddressOfSymbol"	uVar1 = \(\*local_30\)
+use	_find_atexit_10_3	uVar1	imageName	CONFIRMED	__dyld_get_image_name(imageIndex), compared with libSystem.B.dylib	uVar1 = \(\*local_30\)	uVar1 = \(\*local_24\[0\]\)
+use	_find_atexit_10_3	uVar1	symbolAddress	CONFIRMED	__dyld_NSAddressOfSymbol result, returned	uVar1 = \(\*local_24\[0\]\)
+use	_find_atexit_10_3	iVar3	compareResult	CONFIRMED	strcmp of the image name with libSystem.B.dylib	iVar3 = _strcmp	iVar3 = \(\*local_2c\)
+use	_find_atexit_10_3	iVar3	machHeaderOrSymbol	INFERRED	mach_header from __dyld_get_image_header, then the NSSymbol of _atexit looked up in it (one local, two roles in one line)	iVar3 = \(\*local_2c\)
+local	FUN_000010ec	param_1	globals	CONFIRMED	crt atexit shim clone of _run_routines: the keymgr process-wide atexit record
+local	FUN_000010ec	param_2	stopNode	CONFIRMED	crt atexit shim clone of _run_routines: list node at which to stop
+local	FUN_000010ec	puVar1	node	CONFIRMED	crt atexit shim clone of _run_routines: head of the routine list
+local	FUN_000010ec	uVar2	kindMask	CONFIRMED	crt atexit shim clone of _run_routines: 1 << kind, tested against 0x15 / 0x2a
+local	FUN_000010ec	iStack00000018	globalsHome	CONFIRMED	crt atexit shim clone of _run_routines: home-slot copy of param_1
+local	FUN_000010ec	puStack0000001c	stopNodeHome	CONFIRMED	crt atexit shim clone of _run_routines: home-slot copy of param_2
+local	FUN_00001228	param_1	globals	CONFIRMED	crt atexit shim clone of _run_routines: the keymgr process-wide atexit record
+local	FUN_00001228	param_2	stopNode	CONFIRMED	crt atexit shim clone of _run_routines: list node at which to stop
+local	FUN_00001228	puVar1	node	CONFIRMED	crt atexit shim clone of _run_routines: head of the routine list
+local	FUN_00001228	uVar2	kindMask	CONFIRMED	crt atexit shim clone of _run_routines: 1 << kind, tested against 0x15 / 0x2a
+local	FUN_00001228	iStack00000018	globalsHome	CONFIRMED	crt atexit shim clone of _run_routines: home-slot copy of param_1
+local	FUN_00001228	puStack0000001c	stopNodeHome	CONFIRMED	crt atexit shim clone of _run_routines: home-slot copy of param_2
+local	FUN_00001548	param_1	globals	CONFIRMED	crt atexit shim clone of _add_routine: keymgr record
+local	FUN_00001548	param_2	routine	CONFIRMED	crt atexit shim clone of _add_routine: entry {function, kind, argument} to add
+local	FUN_00001548	uVar1	argument	CONFIRMED	crt atexit shim clone of _add_routine: routine[2]
+local	FUN_00001548	puVar2	node	CONFIRMED	crt atexit shim clone of _add_routine: malloc(0x10) list node
+local	FUN_00001548	iVar3	unlockResult	CONFIRMED	crt atexit shim clone of _add_routine: result of __keymgr_set_and_unlock_processwide_ptr
+local	FUN_00001548	uVar4	kind	CONFIRMED	crt atexit shim clone of _add_routine: routine[1]
+local	FUN_00001548	iStack00000018	globalsHome	CONFIRMED	crt atexit shim clone of _add_routine: home-slot copy of param_1
+local	FUN_00001548	puStack0000001c	routineHome	CONFIRMED	crt atexit shim clone of _add_routine: home-slot copy of param_2
+local	FUN_00001548	uStack_18	status	CONFIRMED	crt atexit shim clone of _add_routine: 0 or -1 depending on the unlock result
+local	FUN_00001548	uStack_14	result	CONFIRMED	crt atexit shim clone of _add_routine: returned value
+local	FUN_00001568	iVar1	libSystemHandle	CONFIRMED	crt atexit shim clone of _get_globals: dlopen("/usr/lib/libSystem.B.dylib")
+local	FUN_00001568	uVar2	symbolAddress	CONFIRMED	crt atexit shim clone of _get_globals: dlsym / _find_atexit_10_3 result stored in globals
+local	FUN_00001568	iVar3	checkResult	CONFIRMED	crt atexit shim clone of _get_globals: result of _check_cxa_atexit
+local	FUN_00001568	pvStack_20	globals	CONFIRMED	crt atexit shim clone of _get_globals: keymgr record (calloc(0x14) if absent)
+local	FUN_00001568	pvStack_18	result	CONFIRMED	crt atexit shim clone of _get_globals: returned record
+local	FUN_000009b4	param_1	string1	CONFIRMED	tail call strcmp(param_1, param_2)
+local	FUN_000009b4	param_2	string2	CONFIRMED	tail call strcmp
+local	FUN_00001508	param_1	size	CONFIRMED	tail call malloc(param_1)
+local	FUN_000015e8	param_1	entry	CONFIRMED	forwarded as _atexit_common first argument
+local	FUN_000015e8	param_2	dsoHandle	INFERRED	forwarded as _atexit_common second argument
+local	FUN_00001664	param_1	entry	CONFIRMED	forwarded as _atexit_common first argument
+local	FUN_00001664	param_2	dsoHandle	INFERRED	forwarded as _atexit_common second argument
+local	_atexit_common	uVar2	entryArgument	CONFIRMED	entryHome[2] copied into the new entry
+local	_atexit_common	uVar4	entryKind	CONFIRMED	entryHome[1] copied into the new entry
+local	_atexit_common	in_r6	fwdReg6	CONFIRMED	incoming r6 forwarded unchanged to the callee (Ghidra declares it as an extra argument)
+local	_atexit_common	in_r7	fwdReg7	CONFIRMED	incoming r7 forwarded unchanged to the callee (Ghidra declares it as an extra argument)
+local	_atexit_common	in_r8	fwdReg8	CONFIRMED	incoming r8 forwarded unchanged to the callee (Ghidra declares it as an extra argument)
+local	___cxa_atexit	uStack00000018	functionHome	CONFIRMED	home-slot copy of param_1
+local	___cxa_atexit	uStack0000001c	argumentHome	CONFIRMED	home-slot copy of param_2
+local	___cxa_atexit	uStack00000020	dsoHandleHome	CONFIRMED	home-slot copy of param_3
+local	_atexit	pvStack00000018	functionHome	CONFIRMED	home-slot copy of param_1
+local	_run_routines	a1	fwdReg4	CONFIRMED	r4 forwarded as second argument of the node routine
+local	_run_routines	in_r5	fwdReg5	CONFIRMED	incoming r5 forwarded unchanged to the callee
+local	_run_routines	in_r6	fwdReg6	CONFIRMED	incoming r6 forwarded unchanged to the callee
+local	_run_routines	in_r7	fwdReg7	CONFIRMED	incoming r7 forwarded unchanged to the callee
+local	_run_routines	in_r8	fwdReg8	CONFIRMED	incoming r8 forwarded unchanged to the callee
+local	_cxa_atexit_wrapper	a0	unlockResult	INFERRED	result of __keymgr_set_and_unlock_processwide_ptr, passed to the routine
+local	_cxa_atexit_wrapper	a1	fwdReg4	CONFIRMED	r4 forwarded as second argument of the routine
+local	_cxa_atexit_wrapper	extraout_r4	r4AfterLock	CONFIRMED	Ghidra extraout: r4 left by the first keymgr call
+local	_cxa_atexit_wrapper	extraout_r4_00	r4AfterUnlock	CONFIRMED	Ghidra extraout: r4 left by the unlock call
+local	_cxa_atexit_wrapper	in_r5	fwdReg5	CONFIRMED	incoming r5 forwarded unchanged to the callee
+local	_cxa_atexit_wrapper	in_r6	fwdReg6	CONFIRMED	incoming r6 forwarded unchanged to the callee
+local	_cxa_atexit_wrapper	in_r7	fwdReg7	CONFIRMED	incoming r7 forwarded unchanged to the callee
+local	_cxa_atexit_wrapper	in_r8	fwdReg8	CONFIRMED	incoming r8 forwarded unchanged to the callee
