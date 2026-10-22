@@ -1441,9 +1441,9 @@ int FUN_000ddbcc(disassembler, passThroughR4, passThroughR5, fmtArgR6, fmtArgR7,
   int literalCountCopy;
   int literalCount;
   int fieldLength;
-  char cVar1;
+  char commentStreamChar;
   undefined4 *defPtrAlias;
-  float *pfVar3;
+  float *defFloatPtr;
   undefined4 extraout_r4;
   undefined4 extraout_r4_00;
   undefined4 extraout_r4_01;
@@ -1704,10 +1704,10 @@ int FUN_000ddbcc(disassembler, passThroughR4, passThroughR5, fmtArgR6, fmtArgR7,
   float defFloat1;
   uint instructionToken;
   int copiedCount;
-  int iVar20;
+  int commentCharIndex;
   int fieldOffset;
   uint scratchText;
-  undefined4 local_194;
+  undefined4 scratchTextWord1;
   char textBuffer;
   char textBufferByte1;
   uint *instructionPtr;
@@ -1832,22 +1832,22 @@ int FUN_000ddbcc(disassembler, passThroughR4, passThroughR5, fmtArgR6, fmtArgR7,
       copiedCount = 0;
       lastReturnR4 = extraout_r4_x00241;
       if ((commentWordCount & 0xffff) != 0) {
-        cVar1 = *mnemonic;
+        commentStreamChar = *mnemonic;
         mnemonic = mnemonic + 1;
-        commentChar = (char *)(int)cVar1;
+        commentChar = (char *)(int)commentStreamChar;
         copiedCount = 1;
         if (commentChar != (char *)0x0) {
-          iVar20 = 1;
+          commentCharIndex = 1;
           do {
             FUN_000da904(disassembler,"%c",commentChar,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
             copiedCount = commentBytes;
             lastReturnR4 = extraout_r4_x00242;
-            if (iVar20 == commentBytes) break;
-            cVar1 = *mnemonic;
-            iVar20 = iVar20 + 1;
+            if (commentCharIndex == commentBytes) break;
+            commentStreamChar = *mnemonic;
+            commentCharIndex = commentCharIndex + 1;
             mnemonic = mnemonic + 1;
-            commentChar = (char *)(int)cVar1;
-            copiedCount = iVar20;
+            commentChar = (char *)(int)commentStreamChar;
+            copiedCount = commentCharIndex;
           } while (commentChar != (char *)0x0);
         }
       }
@@ -1900,9 +1900,9 @@ int FUN_000ddbcc(disassembler, passThroughR4, passThroughR5, fmtArgR6, fmtArgR7,
     case 0x15:
       scratchText = instructionToken;
       FUN_000da9fc(disassembler,disassembler[0x87],"dcldef",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
-      ((int (*)())FUN_000dc4bc)(disassembler,scratchText,local_194,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
-      ((int (*)())FUN_000dd6bc)(disassembler,extraout_r4_x00202,local_194,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
-      FUN_000da984(disassembler,extraout_r4_x00203,local_194,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ((int (*)())FUN_000dc4bc)(disassembler,scratchText,scratchTextWord1,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ((int (*)())FUN_000dd6bc)(disassembler,extraout_r4_x00202,scratchTextWord1,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      FUN_000da984(disassembler,extraout_r4_x00203,scratchTextWord1,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x16:
@@ -1962,16 +1962,16 @@ int FUN_000ddbcc(disassembler, passThroughR4, passThroughR5, fmtArgR6, fmtArgR7,
         fmtArgR5 = &scratchText;
         declResult = ((int (*)())FUN_000dd6bc)(disassembler,extraout_r4_x00204,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,
                              nextWordPtr);
-        pfVar3 = (float *)disassembler[2];
+        defFloatPtr = (float *)disassembler[2];
         nextWordPtr = (uint *)0x19dbd8;
-        defFloat0 = *pfVar3;
-        disassembler[2] = (int)(pfVar3 + 1);
-        defFloat1 = pfVar3[1];
-        disassembler[2] = (int)(pfVar3 + 2);
-        defFloat2 = pfVar3[2];
-        disassembler[2] = (int)(pfVar3 + 3);
-        defFloat3Bits = (*(undefined4 * *)(pfVar3 + (3)));
-        disassembler[2] = (int)(pfVar3 + 4);
+        defFloat0 = *defFloatPtr;
+        disassembler[2] = (int)(defFloatPtr + 1);
+        defFloat1 = defFloatPtr[1];
+        disassembler[2] = (int)(defFloatPtr + 2);
+        defFloat2 = defFloatPtr[2];
+        disassembler[2] = (int)(defFloatPtr + 3);
+        defFloat3Bits = (*(undefined4 * *)(defFloatPtr + (3)));
+        disassembler[2] = (int)(defFloatPtr + 4);
         textBuffer = s___001a44f4[0];
         textBufferByte1 = s___001a44f4[1];
         acStack_132[0] = s___001a44f4[2];

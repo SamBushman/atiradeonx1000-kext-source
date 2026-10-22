@@ -45,3 +45,7 @@ local	FUN_000ddbcc	param_7	fmtArgR9	UNKNOWN	sprintf argument register r9; also r
 local	FUN_000ddbcc	local_134	textBuffer	INFERRED	second sprintf text buffer (local_134 .. acStack_132); holds e.g. "0xNN, 0xNN" or the float list
 local	FUN_000ddbcc	local_133	textBufferByte1	INFERRED	second byte of textBuffer: the copy of the ", " separator literal is written byte by byte
 local	FUN_000ddbcc	local_198	scratchText	INFERRED	first sprintf text buffer (local_198 .. local_135): "_id(%d)", "(%d)", "count = %d " ...
+local	FUN_000ddbcc	pfVar3	defFloatPtr	CONFIRMED	pointer into the instruction stream at the four float literals of a float def (advanced by one float per read)
+local	FUN_000ddbcc	iVar20	commentCharIndex	CONFIRMED	1-based index of the inline comment character being printed
+local	FUN_000ddbcc	cVar1	commentStreamChar	CONFIRMED	character read from the instruction stream while printing the inline comment
+local	FUN_000ddbcc	local_194	scratchTextWord1	UNKNOWN	second word of scratchText (the buffer is addressed by &local_198); passed along as a call argument by the dcldef case
