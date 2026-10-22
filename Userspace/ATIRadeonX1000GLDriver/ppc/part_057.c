@@ -139,7 +139,7 @@ int FUN_001d0278(param_1, param_2, param_3, param_4)
   int iVar4;
   undefined4 uVar5;
   undefined4 uVar6;
-  int iVar7;
+  int loopIndex;
   
   iVar2 = FUN_0017d610(param_2);
   if (((iVar2 == 0) && (iVar2 = FUN_0017cdbc(param_2), iVar2 == 0)) &&
@@ -149,22 +149,22 @@ int FUN_001d0278(param_1, param_2, param_3, param_4)
     iVar2 = *(int *)(*(int *)(param_4 + 0x6c4) + 0xa8);
     uVar5 = *(undefined4 *)(param_2 + 0xb0);
     uVar6 = 2;
-    iVar7 = 0;
+    loopIndex = 0;
     do {
       iVar3 = FUN_001054ec(uVar5,0);
-      if (*(char *)(iVar7 + iVar3 + 0x10) != '\x01') {
+      if (*(char *)(loopIndex + iVar3 + 0x10) != '\x01') {
         if (iVar4 <= iVar2) {
           return uVar6;
         }
         if ((*param_3 == 0x7ffffffe) &&
-           ((iVar3 = FUN_00179b28(param_2,iVar7), iVar3 != 0 ||
-            (iVar3 = FUN_00179cc0(param_2,iVar7), iVar3 != 0)))) {
+           ((iVar3 = FUN_00179b28(param_2,loopIndex), iVar3 != 0 ||
+            (iVar3 = FUN_00179cc0(param_2,loopIndex), iVar3 != 0)))) {
           uVar6 = 1;
         }
       }
-      bVar1 = iVar7 != 3;
+      bVar1 = loopIndex != 3;
       param_3 = param_3 + 1;
-      iVar7 = iVar7 + 1;
+      loopIndex = loopIndex + 1;
     } while (bVar1);
   }
   else {
@@ -520,7 +520,7 @@ int FUN_001d0e0c(param_1, param_2, param_3, param_4)
   int iVar4;
   undefined4 uVar5;
   undefined4 uVar6;
-  int iVar7;
+  int loopIndex;
   
   iVar2 = FUN_0017cdbc(param_2);
   uVar5 = 0;
@@ -529,20 +529,20 @@ int FUN_001d0e0c(param_1, param_2, param_3, param_4)
     iVar2 = *(int *)(*(int *)(param_4 + 0x6c4) + 0xa8);
     uVar6 = *(undefined4 *)(param_2 + 0xb0);
     uVar5 = 2;
-    iVar7 = 0;
+    loopIndex = 0;
     do {
       iVar3 = FUN_001054ec(uVar6,0);
-      if (*(char *)(iVar7 + iVar3 + 0x10) != '\x01') {
+      if (*(char *)(loopIndex + iVar3 + 0x10) != '\x01') {
         if (iVar4 <= iVar2) {
           return uVar5;
         }
-        if ((*param_3 == 0x7ffffffe) && (iVar3 = FUN_00179cc0(param_2,iVar7), iVar3 != 0)) {
+        if ((*param_3 == 0x7ffffffe) && (iVar3 = FUN_00179cc0(param_2,loopIndex), iVar3 != 0)) {
           uVar5 = 1;
         }
       }
-      bVar1 = iVar7 != 3;
+      bVar1 = loopIndex != 3;
       param_3 = param_3 + 1;
-      iVar7 = iVar7 + 1;
+      loopIndex = loopIndex + 1;
     } while (bVar1);
   }
   return uVar5;

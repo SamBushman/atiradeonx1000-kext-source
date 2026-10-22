@@ -83,21 +83,21 @@ int FUN_00197de4(param_1, param_2, param_3, param_4, param_5)
   float fVar1;
   uint uVar2;
   int iVar3;
-  int iVar4;
-  int iVar5;
+  int loopRemaining;
+  int loopIndex;
   undefined4 local_38 [9];
   
   iVar3 = FUN_00105594(param_5,param_2);
-  iVar4 = FUN_001054ec(param_5,param_2);
-  iVar5 = 0;
-  local_38[0] = *(undefined4 *)(iVar4 + 0x10);
-  iVar4 = 4;
+  loopRemaining = FUN_001054ec(param_5,param_2);
+  loopIndex = 0;
+  local_38[0] = *(undefined4 *)(loopRemaining + 0x10);
+  loopRemaining = 4;
   do {
-    uVar2 = (uint)*(byte *)((int)local_38 + iVar5);
+    uVar2 = (uint)*(byte *)((int)local_38 + loopIndex);
     if (uVar2 < 4) goto LAB_00197e50;
-    iVar5 = iVar5 + 1;
-    iVar4 = iVar4 + -1;
-  } while (iVar4 != 0);
+    loopIndex = loopIndex + 1;
+    loopRemaining = loopRemaining + -1;
+  } while (loopRemaining != 0);
   uVar2 = 0;
 LAB_00197e50:
   fVar1 = *(float *)(uVar2 * 0x18 + iVar3 + 0x20);
@@ -124,21 +124,21 @@ int FUN_00197ecc(param_1, param_2, param_3, param_4, param_5)
   float fVar1;
   uint uVar2;
   int iVar3;
-  int iVar4;
-  int iVar5;
+  int loopRemaining;
+  int loopIndex;
   undefined4 local_38 [9];
   
   iVar3 = FUN_00105594(param_5,param_2);
-  iVar4 = FUN_001054ec(param_5,param_2);
-  iVar5 = 0;
-  local_38[0] = *(undefined4 *)(iVar4 + 0x10);
-  iVar4 = 4;
+  loopRemaining = FUN_001054ec(param_5,param_2);
+  loopIndex = 0;
+  local_38[0] = *(undefined4 *)(loopRemaining + 0x10);
+  loopRemaining = 4;
   do {
-    uVar2 = (uint)*(byte *)((int)local_38 + iVar5);
+    uVar2 = (uint)*(byte *)((int)local_38 + loopIndex);
     if (uVar2 < 4) goto LAB_00197f38;
-    iVar5 = iVar5 + 1;
-    iVar4 = iVar4 + -1;
-  } while (iVar4 != 0);
+    loopIndex = loopIndex + 1;
+    loopRemaining = loopRemaining + -1;
+  } while (loopRemaining != 0);
   uVar2 = 0;
 LAB_00197f38:
   fVar1 = *(float *)(uVar2 * 0x18 + iVar3 + 0x20);
@@ -257,19 +257,19 @@ int FUN_001981ac(param_1, param_2)
   undefined4 uVar14;
   undefined4 a1;
   int *piVar15;
-  int *piVar16;
-  int *piVar17;
+  int *loopIndex;
+  int *loopIndex2;
   uint uVar18;
   int *piVar19;
   int iVar20;
   int *a4;
-  uint uVar21;
+  uint loopIndex3;
   int *piVar22;
   int *piVar23;
   undefined4 uVar24;
   int *piVar25;
   byte in_xer_so = 0;
-  int iVar26;
+  int loopRemaining;
   undefined8 uVar27;
   int local_f8;
   int local_f4;
@@ -295,16 +295,16 @@ int FUN_001981ac(param_1, param_2)
   undefined *local_60;
   int *local_5c;
   
-  piVar16 = &local_ac;
+  loopIndex = &local_ac;
   a4 = &local_f8;
   piVar25 = &local_f4;
-  piVar17 = param_2;
-  uVar10 = FUN_0019786c(param_1,&local_9c,piVar16,param_2,a4,piVar25);
+  loopIndex2 = param_2;
+  uVar10 = FUN_0019786c(param_1,&local_9c,loopIndex,param_2,a4,piVar25);
   local_6c = uVar10 & 1;
   local_70 = uVar10 >> 1 & 1;
   local_68 = *(int *)(param_2[0x22] + 8);
   local_5c = local_cc;
-  iVar26 = 4;
+  loopRemaining = 4;
   local_78 = uVar10 >> 4 & 1;
   local_74 = uVar10 >> 2 & 1;
   iVar8 = 0;
@@ -314,8 +314,8 @@ int FUN_001981ac(param_1, param_2)
     *(undefined4 *)(iVar8 + (int)local_ec) = 0;
     *(undefined4 *)(iVar8 + (int)local_5c) = 0;
     iVar8 = iVar8 + 4;
-    iVar26 = iVar26 + -1;
-  } while (iVar26 != 0);
+    loopRemaining = loopRemaining + -1;
+  } while (loopRemaining != 0);
   iVar8 = (**(code **)(*param_2 + 0x14))(param_2);
   uVar6 = local_6c;
   uVar10 = local_70;
@@ -330,48 +330,48 @@ LAB_00198290:
                             (local_78 == 0) << 1 | in_xer_so & 1) << 0x1c;
     local_60 = &DAT_001b81b8;
     do {
-      iVar26 = FUN_001054ec(param_2,piVar22);
-      piVar23 = *(int **)(iVar26 + 0x10);
+      loopRemaining = FUN_001054ec(param_2,piVar22);
+      piVar23 = *(int **)(loopRemaining + 0x10);
       local_f0 = -1;
       uVar27 = FUN_00105594(param_2,piVar22);
       a0 = (int *)((ulonglong)uVar27 >> 0x20);
       iVar20 = *(int *)(local_60 + -0x56f8);
-      iVar26 = (**(code **)(*a0 + 0x60))(a0,(int)uVar27,piVar16,piVar17,a4,piVar25,local_60);
-      if (iVar26 == 0) {
+      loopRemaining = (**(code **)(*a0 + 0x60))(a0,(int)uVar27,loopIndex,loopIndex2,a4,piVar25,local_60);
+      if (loopRemaining == 0) {
         local_7c = 0;
         local_80 = (int *)0x0;
       }
       else {
         local_80 = a0;
-        iVar26 = FUN_001054ec(a0,1);
-        uVar14 = *(undefined4 *)(iVar26 + 0x10);
-        iVar26 = FUN_001054ec(param_2,piVar22);
-        iVar20 = *(int *)(iVar26 + 0x10);
+        loopRemaining = FUN_001054ec(a0,1);
+        uVar14 = *(undefined4 *)(loopRemaining + 0x10);
+        loopRemaining = FUN_001054ec(param_2,piVar22);
+        iVar20 = *(int *)(loopRemaining + 0x10);
         FUN_000f2bdc(&local_88,uVar14,iVar20);
         piVar23 = local_88;
         a0 = (int *)FUN_00105594(local_80,1);
         a4 = (int *)param_1[3];
-        piVar17 = (int *)0x0;
-        piVar16 = a0;
+        loopIndex2 = (int *)0x0;
+        loopIndex = a0;
         FUN_00106004(param_2,piVar22,a0,0,a4);
         if (piVar22 == (int *)0x0) {
           local_7c = 1;
           param_2[0x27] = (int)piVar23;
         }
         else {
-          iVar26 = FUN_001054ec(param_2,piVar22);
-          *(int **)(iVar26 + 0x10) = piVar23;
+          loopRemaining = FUN_001054ec(param_2,piVar22);
+          *(int **)(loopRemaining + 0x10) = piVar23;
           local_7c = 1;
         }
       }
-      iVar26 = a0[0x26];
-      if (iVar26 != 0x2c) {
-        if (iVar26 == 0x29) {
-          piVar17 = (int *)param_1[3];
-          piVar16 = piVar22;
+      loopRemaining = a0[0x26];
+      if (loopRemaining != 0x2c) {
+        if (loopRemaining == 0x29) {
+          loopIndex2 = (int *)param_1[3];
+          loopIndex = piVar22;
           /* dropped 2 args (found auditing #70 via ExtendIndirectCalls.java / ground-truth
-           * disassembly): stock passes piVar22 and piVar17 (the value just computed above) too. */
-          local_f0 = (**(code **)(*param_1 + 0x158))(param_1,param_2,piVar22,piVar17);
+           * disassembly): stock passes piVar22 and loopIndex2 (the value just computed above) too. */
+          local_f0 = (**(code **)(*param_1 + 0x158))(param_1,param_2,piVar22,loopIndex2);
 LAB_0019852c:
           bVar3 = piVar22 == (int *)((int)((unsigned char *)0x0) + 3);
           bVar5 = (byte)((uint)local_64 >> 0x18);
@@ -386,37 +386,37 @@ LAB_0019852c:
                 uVar14 = local_98;
               }
             }
-            iVar26 = FUN_0019534c(piVar23,uVar14);
+            loopRemaining = FUN_0019534c(piVar23,uVar14);
             iVar13 = FUN_001953b8(piVar23,uVar14);
             local_bc[(int)piVar22] = 0x14;
             piVar15 = piVar22;
-            if (iVar26 == 0) {
+            if (loopRemaining == 0) {
               if (iVar13 != 0) {
-                uVar21 = 1;
-                piVar17 = param_1 + 0xe;
-                piVar16 = param_1;
+                loopIndex3 = 1;
+                loopIndex2 = param_1 + 0xe;
+                loopIndex = param_1;
                 do {
-                  piVar25 = (int *)piVar16[7];
-                  a4 = (int *)(uVar21 - 1);
+                  piVar25 = (int *)loopIndex[7];
+                  a4 = (int *)(loopIndex3 - 1);
                   if ((a0 == piVar25) ||
                      ((((((((piVar25 != (int *)0x0 && (a0 != (int *)0x0)) && (piVar25[0x20] != 0))
-                          && ((iVar26 = FUN_00126760(piVar25[0x26]), iVar26 != 0 &&
+                          && ((loopRemaining = FUN_00126760(piVar25[0x26]), loopRemaining != 0 &&
                               ((piVar25[5] & 2U) == 0)))) &&
-                         ((iVar26 = (**(code **)(*piVar25 + 0x50))(piVar25), iVar26 == 0 &&
-                          ((a0[0x20] != 0 && (iVar26 = FUN_00126760(a0[0x26]), iVar26 != 0)))))) &&
+                         ((loopRemaining = (**(code **)(*piVar25 + 0x50))(piVar25), loopRemaining == 0 &&
+                          ((a0[0x20] != 0 && (loopRemaining = FUN_00126760(a0[0x26]), loopRemaining != 0)))))) &&
                         ((a0[5] & 2U) == 0)) &&
-                       (((iVar26 = (**(code **)(*a0 + 0x50))(a0), iVar26 == 0 &&
-                         ((*(uint *)(piVar16[7] + 0x14) & 0x40) != 0)) && ((a0[5] & 0x40U) != 0))))
-                      && (*(int *)(piVar16[7] + 0x94) == a0[0x25])))) {
+                       (((loopRemaining = (**(code **)(*a0 + 0x50))(a0), loopRemaining == 0 &&
+                         ((*(uint *)(loopIndex[7] + 0x14) & 0x40) != 0)) && ((a0[5] & 0x40U) != 0))))
+                      && (*(int *)(loopIndex[7] + 0x94) == a0[0x25])))) {
                     uVar9 = param_1[0x20];
-                    *piVar17 = local_f0;
-                    param_1[0x20] = 1 << (uVar21 & 0x3f) | uVar9;
+                    *loopIndex2 = local_f0;
+                    param_1[0x20] = 1 << (loopIndex3 & 0x3f) | uVar9;
                     goto LAB_00199c88;
                   }
-                  bVar4 = uVar21 != 3;
-                  piVar17 = piVar17 + 1;
-                  piVar16 = piVar16 + 1;
-                  uVar21 = uVar21 + 1;
+                  bVar4 = loopIndex3 != 3;
+                  loopIndex2 = loopIndex2 + 1;
+                  loopIndex = loopIndex + 1;
+                  loopIndex3 = loopIndex3 + 1;
                 } while (bVar4);
                 a4 = (int *)((int)((unsigned char *)0x0) + 3);
 LAB_00199c88:
@@ -426,78 +426,78 @@ LAB_00199c88:
             }
             else {
               if (iVar13 == 0) {
-                uVar21 = 1;
-                piVar17 = param_1 + 0x12;
-                piVar16 = param_1;
+                loopIndex3 = 1;
+                loopIndex2 = param_1 + 0x12;
+                loopIndex = param_1;
                 do {
-                  piVar25 = (int *)piVar16[10];
-                  a4 = (int *)(uVar21 - 1);
+                  piVar25 = (int *)loopIndex[10];
+                  a4 = (int *)(loopIndex3 - 1);
                   if ((a0 == piVar25) ||
                      ((((((piVar25 != (int *)0x0 && (a0 != (int *)0x0)) &&
                          ((piVar25[0x20] != 0 &&
-                          ((iVar26 = FUN_00126760(piVar25[0x26]), iVar26 != 0 &&
+                          ((loopRemaining = FUN_00126760(piVar25[0x26]), loopRemaining != 0 &&
                            ((piVar25[5] & 2U) == 0)))))) &&
-                        (iVar26 = (**(code **)(*piVar25 + 0x50))(piVar25), iVar26 == 0)) &&
-                       (((a0[0x20] != 0 && (iVar26 = FUN_00126760(a0[0x26]), iVar26 != 0)) &&
+                        (loopRemaining = (**(code **)(*piVar25 + 0x50))(piVar25), loopRemaining == 0)) &&
+                       (((a0[0x20] != 0 && (loopRemaining = FUN_00126760(a0[0x26]), loopRemaining != 0)) &&
                         ((a0[5] & 2U) == 0)))) &&
-                      (((iVar26 = (**(code **)(*a0 + 0x50))(a0), iVar26 == 0 &&
-                        ((*(uint *)(piVar16[10] + 0x14) & 0x40) != 0)) &&
-                       (((a0[5] & 0x40U) != 0 && (*(int *)(piVar16[10] + 0x94) == a0[0x25])))))))) {
+                      (((loopRemaining = (**(code **)(*a0 + 0x50))(a0), loopRemaining == 0 &&
+                        ((*(uint *)(loopIndex[10] + 0x14) & 0x40) != 0)) &&
+                       (((a0[5] & 0x40U) != 0 && (*(int *)(loopIndex[10] + 0x94) == a0[0x25])))))))) {
                     uVar9 = param_1[0x21];
-                    *piVar17 = local_f0;
-                    param_1[0x21] = 1 << (uVar21 & 0x3f) | uVar9;
+                    *loopIndex2 = local_f0;
+                    param_1[0x21] = 1 << (loopIndex3 & 0x3f) | uVar9;
                     goto LAB_00199b44;
                   }
-                  bVar4 = uVar21 != 3;
-                  piVar17 = piVar17 + 1;
-                  piVar16 = piVar16 + 1;
-                  uVar21 = uVar21 + 1;
+                  bVar4 = loopIndex3 != 3;
+                  loopIndex2 = loopIndex2 + 1;
+                  loopIndex = loopIndex + 1;
+                  loopIndex3 = loopIndex3 + 1;
                 } while (bVar4);
                 a4 = (int *)((int)((unsigned char *)0x0) + 3);
 LAB_00199b44:
                 pcVar7 = *(code **)(*param_1 + 0xf4);
               }
               else {
-                uVar21 = 1;
-                piVar17 = param_1;
-                piVar16 = param_1;
+                loopIndex3 = 1;
+                loopIndex2 = param_1;
+                loopIndex = param_1;
                 do {
-                  piVar25 = (int *)piVar17[7];
-                  a4 = (int *)(uVar21 - 1);
+                  piVar25 = (int *)loopIndex2[7];
+                  a4 = (int *)(loopIndex3 - 1);
                   if (((a0 == piVar25) ||
                       ((((piVar25 != (int *)0x0 && (a0 != (int *)0x0)) &&
                         ((piVar25[0x20] != 0 &&
-                         ((((((iVar26 = FUN_00126760(piVar25[0x26]), iVar26 != 0 &&
+                         ((((((loopRemaining = FUN_00126760(piVar25[0x26]), loopRemaining != 0 &&
                               ((piVar25[5] & 2U) == 0)) &&
-                             (iVar26 = (**(code **)(*piVar25 + 0x50))(piVar25), iVar26 == 0)) &&
-                            ((a0[0x20] != 0 && (iVar26 = FUN_00126760(a0[0x26]), iVar26 != 0)))) &&
+                             (loopRemaining = (**(code **)(*piVar25 + 0x50))(piVar25), loopRemaining == 0)) &&
+                            ((a0[0x20] != 0 && (loopRemaining = FUN_00126760(a0[0x26]), loopRemaining != 0)))) &&
                            ((a0[5] & 2U) == 0)) &&
-                          ((iVar26 = (**(code **)(*a0 + 0x50))(a0), iVar26 == 0 &&
-                           ((*(uint *)(piVar17[7] + 0x14) & 0x40) != 0)))))))) &&
-                       (((a0[5] & 0x40U) != 0 && (*(int *)(piVar17[7] + 0x94) == a0[0x25])))))) &&
-                     ((piVar25 = (int *)piVar17[10], a0 == piVar25 ||
+                          ((loopRemaining = (**(code **)(*a0 + 0x50))(a0), loopRemaining == 0 &&
+                           ((*(uint *)(loopIndex2[7] + 0x14) & 0x40) != 0)))))))) &&
+                       (((a0[5] & 0x40U) != 0 && (*(int *)(loopIndex2[7] + 0x94) == a0[0x25])))))) &&
+                     ((piVar25 = (int *)loopIndex2[10], a0 == piVar25 ||
                       ((((((piVar25 != (int *)0x0 && (a0 != (int *)0x0)) && (piVar25[0x20] != 0)) &&
-                         ((iVar26 = FUN_00126760(piVar25[0x26]), iVar26 != 0 &&
+                         ((loopRemaining = FUN_00126760(piVar25[0x26]), loopRemaining != 0 &&
                           ((piVar25[5] & 2U) == 0)))) &&
-                        (((iVar26 = (**(code **)(*piVar25 + 0x50))(piVar25), iVar26 == 0 &&
-                          ((a0[0x20] != 0 && (iVar26 = FUN_00126760(a0[0x26]), iVar26 != 0)))) &&
+                        (((loopRemaining = (**(code **)(*piVar25 + 0x50))(piVar25), loopRemaining == 0 &&
+                          ((a0[0x20] != 0 && (loopRemaining = FUN_00126760(a0[0x26]), loopRemaining != 0)))) &&
                          ((a0[5] & 2U) == 0)))) &&
-                       ((((iVar26 = (**(code **)(*a0 + 0x50))(a0), iVar26 == 0 &&
-                          ((*(uint *)(piVar17[10] + 0x14) & 0x40) != 0)) && ((a0[5] & 0x40U) != 0))
-                        && (*(int *)(piVar17[10] + 0x94) == a0[0x25])))))))) {
+                       ((((loopRemaining = (**(code **)(*a0 + 0x50))(a0), loopRemaining == 0 &&
+                          ((*(uint *)(loopIndex2[10] + 0x14) & 0x40) != 0)) && ((a0[5] & 0x40U) != 0))
+                        && (*(int *)(loopIndex2[10] + 0x94) == a0[0x25])))))))) {
                     uVar18 = param_1[0x20];
                     uVar9 = param_1[0x21];
-                    uVar21 = 1 << (uVar21 & 0x3f);
-                    piVar16[0x12] = local_f0;
-                    param_1[0x20] = uVar21 | uVar18;
-                    param_1[0x21] = uVar21 | uVar9;
-                    piVar16[0xe] = local_f0;
+                    loopIndex3 = 1 << (loopIndex3 & 0x3f);
+                    loopIndex[0x12] = local_f0;
+                    param_1[0x20] = loopIndex3 | uVar18;
+                    param_1[0x21] = loopIndex3 | uVar9;
+                    loopIndex[0xe] = local_f0;
                     goto LAB_001999e8;
                   }
-                  bVar4 = uVar21 != 3;
-                  piVar17 = piVar17 + 1;
-                  uVar21 = uVar21 + 1;
-                  piVar16 = piVar16 + 1;
+                  bVar4 = loopIndex3 != 3;
+                  loopIndex2 = loopIndex2 + 1;
+                  loopIndex3 = loopIndex3 + 1;
+                  loopIndex = loopIndex + 1;
                 } while (bVar4);
                 a4 = (int *)((int)((unsigned char *)0x0) + 3);
 LAB_001999e8:
@@ -513,35 +513,35 @@ joined_r0x00199c90:
                   }
                 }
               }
-              piVar16 = local_bc;
-              piVar17 = local_dc;
+              loopIndex = local_bc;
+              loopIndex2 = local_dc;
               /* dropped 4 args (found auditing #70 via ExtendIndirectCalls.java / ground-truth
-               * disassembly): stock passes piVar16, piVar17, r21 (== a4: the search loop's
+               * disassembly): stock passes loopIndex, loopIndex2, r21 (== a4: the search loop's
                * `r23 - 1`, or 3 only when the loop runs out - NOT a literal 3, #80), and piVar23
                * too - piVar23's real register (r27) is set once, early in the function, and never
                * reassigned before this call, same as the already-fixed 0xec/0xf0 calls above. */
-              (*pcVar7)(param_1,piVar15,piVar16,piVar17,a4,piVar23);
+              (*pcVar7)(param_1,piVar15,loopIndex,loopIndex2,a4,piVar23);
               piVar25 = piVar23;
             }
           }
 LAB_00199cdc:
           if (bVar2) {
-            iVar26 = FUN_001054ec(param_2,piVar22);
-            piVar23 = *(int **)(iVar26 + 0x10);
-            iVar26 = local_ac;
+            loopRemaining = FUN_001054ec(param_2,piVar22);
+            piVar23 = *(int **)(loopRemaining + 0x10);
+            loopRemaining = local_ac;
             if ((bVar3) && (local_74 != 0)) {
-              iVar26 = local_a8;
+              loopRemaining = local_a8;
             }
-            iVar13 = FUN_0019534c(piVar23,iVar26);
-            iVar26 = FUN_001953b8(piVar23,iVar26);
+            iVar13 = FUN_0019534c(piVar23,loopRemaining);
+            loopRemaining = FUN_001953b8(piVar23,loopRemaining);
             local_ec[(int)piVar22] = 0x10;
             if (iVar13 != 0) {
-              uVar21 = 1;
-              piVar17 = param_1 + 0x12;
-              piVar16 = param_1;
+              loopIndex3 = 1;
+              loopIndex2 = param_1 + 0x12;
+              loopIndex = param_1;
               do {
-                piVar25 = (int *)piVar16[10];
-                a4 = (int *)(uVar21 - 1);
+                piVar25 = (int *)loopIndex[10];
+                a4 = (int *)(loopIndex3 - 1);
                 if ((a0 == piVar25) ||
                    ((((piVar25 != (int *)0x0 && (a0 != (int *)0x0)) &&
                      ((piVar25[0x20] != 0 &&
@@ -551,17 +551,17 @@ LAB_00199cdc:
                        ((a0[0x20] != 0 && (iVar13 = FUN_00126760(a0[0x26]), iVar13 != 0)))))))) &&
                     ((((a0[5] & 2U) == 0 &&
                       ((iVar13 = (**(code **)(*a0 + 0x50))(a0), iVar13 == 0 &&
-                       ((*(uint *)(piVar16[10] + 0x14) & 0x40) != 0)))) &&
-                     (((a0[5] & 0x40U) != 0 && (*(int *)(piVar16[10] + 0x94) == a0[0x25])))))))) {
+                       ((*(uint *)(loopIndex[10] + 0x14) & 0x40) != 0)))) &&
+                     (((a0[5] & 0x40U) != 0 && (*(int *)(loopIndex[10] + 0x94) == a0[0x25])))))))) {
                   uVar9 = param_1[0x21];
-                  *piVar17 = local_f0;
-                  param_1[0x21] = 1 << (uVar21 & 0x3f) | uVar9;
+                  *loopIndex2 = local_f0;
+                  param_1[0x21] = 1 << (loopIndex3 & 0x3f) | uVar9;
                   goto LAB_00199e60;
                 }
-                bVar4 = uVar21 != 3;
-                piVar17 = piVar17 + 1;
-                piVar16 = piVar16 + 1;
-                uVar21 = uVar21 + 1;
+                bVar4 = loopIndex3 != 3;
+                loopIndex2 = loopIndex2 + 1;
+                loopIndex = loopIndex + 1;
+                loopIndex3 = loopIndex3 + 1;
               } while (bVar4);
               a4 = (int *)((int)((unsigned char *)0x0) + 3);
 LAB_00199e60:
@@ -574,39 +574,39 @@ LAB_00199e60:
                   piVar15 = (int *)((int)((unsigned char *)0x0) + 1);
                 }
               }
-              piVar16 = local_ec;
-              piVar17 = local_5c;
+              loopIndex = local_ec;
+              loopIndex2 = local_5c;
               piVar25 = piVar23;
               /* dropped 4 args (found auditing #70 via ExtendIndirectCalls.java / ground-truth
-               * disassembly): stock passes piVar16, piVar17, r21 (== a4, search-loop r23-1 / 3 on exhaustion - not a literal 3, #80), and piVar25 too. */
-              (**(code **)(*param_1 + 0xfc))(param_1,piVar15,piVar16,piVar17,a4,piVar25);
+               * disassembly): stock passes loopIndex, loopIndex2, r21 (== a4, search-loop r23-1 / 3 on exhaustion - not a literal 3, #80), and piVar25 too. */
+              (**(code **)(*param_1 + 0xfc))(param_1,piVar15,loopIndex,loopIndex2,a4,piVar25);
             }
-            if (iVar26 != 0) {
-              uVar21 = 1;
-              piVar17 = param_1 + 0xe;
-              piVar16 = param_1;
+            if (loopRemaining != 0) {
+              loopIndex3 = 1;
+              loopIndex2 = param_1 + 0xe;
+              loopIndex = param_1;
               do {
-                piVar25 = (int *)piVar16[7];
-                a4 = (int *)(uVar21 - 1);
+                piVar25 = (int *)loopIndex[7];
+                a4 = (int *)(loopIndex3 - 1);
                 if ((a0 == piVar25) ||
                    (((((piVar25 != (int *)0x0 && (a0 != (int *)0x0)) && (piVar25[0x20] != 0)) &&
-                     ((((iVar26 = FUN_00126760(piVar25[0x26]), iVar26 != 0 &&
+                     ((((loopRemaining = FUN_00126760(piVar25[0x26]), loopRemaining != 0 &&
                         ((piVar25[5] & 2U) == 0)) &&
-                       ((iVar26 = (**(code **)(*piVar25 + 0x50))(piVar25), iVar26 == 0 &&
-                        ((a0[0x20] != 0 && (iVar26 = FUN_00126760(a0[0x26]), iVar26 != 0)))))) &&
+                       ((loopRemaining = (**(code **)(*piVar25 + 0x50))(piVar25), loopRemaining == 0 &&
+                        ((a0[0x20] != 0 && (loopRemaining = FUN_00126760(a0[0x26]), loopRemaining != 0)))))) &&
                       ((a0[5] & 2U) == 0)))) &&
-                    ((((iVar26 = (**(code **)(*a0 + 0x50))(a0), iVar26 == 0 &&
-                       ((*(uint *)(piVar16[7] + 0x14) & 0x40) != 0)) && ((a0[5] & 0x40U) != 0)) &&
-                     (*(int *)(piVar16[7] + 0x94) == a0[0x25])))))) {
+                    ((((loopRemaining = (**(code **)(*a0 + 0x50))(a0), loopRemaining == 0 &&
+                       ((*(uint *)(loopIndex[7] + 0x14) & 0x40) != 0)) && ((a0[5] & 0x40U) != 0)) &&
+                     (*(int *)(loopIndex[7] + 0x94) == a0[0x25])))))) {
                   uVar9 = param_1[0x20];
-                  *piVar17 = local_f0;
-                  param_1[0x20] = 1 << (uVar21 & 0x3f) | uVar9;
+                  *loopIndex2 = local_f0;
+                  param_1[0x20] = 1 << (loopIndex3 & 0x3f) | uVar9;
                   goto LAB_00199fdc;
                 }
-                bVar4 = uVar21 != 3;
-                piVar17 = piVar17 + 1;
-                piVar16 = piVar16 + 1;
-                uVar21 = uVar21 + 1;
+                bVar4 = loopIndex3 != 3;
+                loopIndex2 = loopIndex2 + 1;
+                loopIndex = loopIndex + 1;
+                loopIndex3 = loopIndex3 + 1;
               } while (bVar4);
               a4 = (int *)((int)((unsigned char *)0x0) + 3);
 LAB_00199fdc:
@@ -619,66 +619,66 @@ LAB_00199fdc:
                   piVar25 = (int *)((int)((unsigned char *)0x0) + 1);
                 }
               }
-              piVar16 = local_ec;
-              piVar17 = local_5c;
+              loopIndex = local_ec;
+              loopIndex2 = local_5c;
               /* dropped 4 args (found auditing #70 via ExtendIndirectCalls.java / ground-truth
-               * disassembly): stock passes piVar16, piVar17, r21 (== a4, not a literal 3, #80), and piVar23 too -
+               * disassembly): stock passes loopIndex, loopIndex2, r21 (== a4, not a literal 3, #80), and piVar23 too -
                * piVar23 directly, not piVar25 (reassigned below, diverged from piVar23 by here). */
-              (**(code **)(*param_1 + 0x100))(param_1,piVar25,piVar16,piVar17,a4,piVar23);
+              (**(code **)(*param_1 + 0x100))(param_1,piVar25,loopIndex,loopIndex2,a4,piVar23);
               piVar25 = piVar23;
             }
           }
         }
         else {
-          if ((((a0[0x20] != 0) && (iVar26 = FUN_00126760(iVar26), iVar26 != 0)) &&
-              ((a0[5] & 2U) == 0)) && (iVar26 = (**(code **)(*a0 + 0x50))(a0), iVar26 == 0)) {
+          if ((((a0[0x20] != 0) && (loopRemaining = FUN_00126760(loopRemaining), loopRemaining != 0)) &&
+              ((a0[5] & 2U) == 0)) && (loopRemaining = (**(code **)(*a0 + 0x50))(a0), loopRemaining == 0)) {
             local_f0 = FUN_00134de8(*(undefined4 *)(param_1[3] + 0x6c4),a0);
-            iVar26 = (**(code **)(*a0 + 0x80))(a0);
-            if (iVar26 != 0) {
-              piVar17 = (int *)param_1[3];
-              piVar16 = param_2;
+            loopRemaining = (**(code **)(*a0 + 0x80))(a0);
+            if (loopRemaining != 0) {
+              loopIndex2 = (int *)param_1[3];
+              loopIndex = param_2;
               /* dropped 2 args (found auditing #70 via ExtendIndirectCalls.java / ground-truth
-               * disassembly): stock passes param_2 and piVar17 too. */
-              (**(code **)(*param_1 + 0x154))(param_1,piVar22,param_2,piVar17);
+               * disassembly): stock passes param_2 and loopIndex2 too. */
+              (**(code **)(*param_1 + 0x154))(param_1,piVar22,param_2,loopIndex2);
             }
             goto LAB_0019852c;
           }
-          iVar26 = (**(code **)(*a0 + 0x50))(a0);
-          if (iVar26 != 0) {
+          loopRemaining = (**(code **)(*a0 + 0x50))(a0);
+          if (loopRemaining != 0) {
             local_f0 = thunk_FUN_00134de8(*(undefined4 *)(param_1[3] + 0x6c4),a0);
             goto LAB_0019852c;
           }
-          iVar26 = (**(code **)(*a0 + 0x48))(a0);
-          if (iVar26 != 0) {
+          loopRemaining = (**(code **)(*a0 + 0x48))(a0);
+          if (loopRemaining != 0) {
             if (a0[0x26] == 0x33) {
-              piVar16 = &local_f0;
+              loopIndex = &local_f0;
               /* dropped 1 arg (found auditing #70 via ExtendIndirectCalls.java / ground-truth
-               * disassembly): stock passes &local_f0 (piVar16) too. */
-              iVar26 = (**(code **)(*param_1 + 0xdc))(param_1,a0,piVar16);
-              if (iVar26 == 0) {
+               * disassembly): stock passes &local_f0 (loopIndex) too. */
+              loopRemaining = (**(code **)(*param_1 + 0xdc))(param_1,a0,loopIndex);
+              if (loopRemaining == 0) {
                 if ((piVar22 != (int *)((int)((unsigned char *)0x0) + 3)) ||
                    ((bool)((byte)((uint)local_64 >> 0x1d) & 1))) {
                   if (bVar1) {
-                    piVar16 = local_bc;
-                    piVar17 = local_dc;
+                    loopIndex = local_bc;
+                    loopIndex2 = local_dc;
                     a4 = param_2;
                     /* dropped 3 args (found auditing #70 via ExtendIndirectCalls.java /
-                     * ground-truth disassembly): stock passes piVar16, piVar17, a4 too. */
-                    (**(code **)(*param_1 + 0xd4))(param_1,piVar22,piVar16,piVar17,a4);
+                     * ground-truth disassembly): stock passes loopIndex, loopIndex2, a4 too. */
+                    (**(code **)(*param_1 + 0xd4))(param_1,piVar22,loopIndex,loopIndex2,a4);
                   }
                   if (bVar2) {
-                    piVar16 = local_ec;
-                    piVar17 = local_5c;
+                    loopIndex = local_ec;
+                    loopIndex2 = local_5c;
                     a4 = param_2;
                     /* dropped 3 args (found auditing #70 via ExtendIndirectCalls.java /
-                     * ground-truth disassembly): stock passes piVar16, piVar17, a4 too. */
-                    (**(code **)(*param_1 + 0xd8))(param_1,piVar22,piVar16,piVar17,a4);
+                     * ground-truth disassembly): stock passes loopIndex, loopIndex2, a4 too. */
+                    (**(code **)(*param_1 + 0xd8))(param_1,piVar22,loopIndex,loopIndex2,a4);
                   }
                 }
                 else {
                   local_ec[2] = 0x11;
-                  piVar16 = local_ec;
-                  piVar17 = local_5c;
+                  loopIndex = local_ec;
+                  loopIndex2 = local_5c;
                   a4 = param_2;
                   (**(code **)(*param_1 + 0xd8))
                             (param_1,3,local_ec,local_5c,param_2,piVar25,*(code **)(*param_1 + 0xd8)
@@ -690,77 +690,77 @@ LAB_00199fdc:
             }
             else {
               local_f0 = a0[0x25];
-              piVar16 = a0;
+              loopIndex = a0;
               FUN_00196370(param_1,local_f0,a0);
               local_f0 = (**(code **)(*param_1 + 0xe0))(param_1,local_f0);
             }
             goto LAB_0019852c;
           }
-          iVar26 = (**(code **)(*a0 + 0x5c))(a0);
-          if (iVar26 == 0) goto LAB_0019852c;
+          loopRemaining = (**(code **)(*a0 + 0x5c))(a0);
+          if (loopRemaining == 0) goto LAB_0019852c;
           if ((piVar22 != (int *)((int)((unsigned char *)0x0) + 3)) ||
              ((bool)((byte)((uint)local_64 >> 0x1d) & 1))) {
             if (bVar1) {
-              piVar16 = local_bc;
-              piVar17 = local_dc;
+              loopIndex = local_bc;
+              loopIndex2 = local_dc;
               a4 = piVar23;
               /* dropped 3 args (found auditing #70 via ExtendIndirectCalls.java /
-               * ground-truth disassembly): stock passes piVar16, piVar17, a4 too. */
-              (**(code **)(*param_1 + 0xec))(param_1,piVar22,piVar16,piVar17,a4);
+               * ground-truth disassembly): stock passes loopIndex, loopIndex2, a4 too. */
+              (**(code **)(*param_1 + 0xec))(param_1,piVar22,loopIndex,loopIndex2,a4);
             }
             if (bVar2) {
-              piVar16 = local_ec;
-              piVar17 = local_5c;
+              loopIndex = local_ec;
+              loopIndex2 = local_5c;
               a4 = piVar23;
               /* dropped 3 args (found auditing #70 via ExtendIndirectCalls.java /
-               * ground-truth disassembly): stock passes piVar16, piVar17, a4 too. */
-              (**(code **)(*param_1 + 0xf0))(param_1,piVar22,piVar16,piVar17,a4);
+               * ground-truth disassembly): stock passes loopIndex, loopIndex2, a4 too. */
+              (**(code **)(*param_1 + 0xf0))(param_1,piVar22,loopIndex,loopIndex2,a4);
             }
           }
           else {
             local_ec[2] = 0x11;
-            piVar16 = local_ec;
-            piVar17 = local_5c;
+            loopIndex = local_ec;
+            loopIndex2 = local_5c;
             a4 = piVar23;
             (**(code **)(*param_1 + 0xf0))
                       (param_1,1,local_ec,local_5c,piVar23,piVar25,*(code **)(*param_1 + 0xf0));
           }
           FUN_000f3398(&local_84,piVar23);
-          uVar21 = local_84 & 0xff;
+          loopIndex3 = local_84 & 0xff;
           bVar3 = (local_84 & 0xffffff00) == 0;
           iVar13 = *(int *)(a0[0x22] + 8);
-          iVar26 = (**(code **)(*a0 + 0x14))
-                             (a0,a1,piVar16,piVar17,a4,piVar25,a0[0x22],*(code **)(*a0 + 0x14));
+          loopRemaining = (**(code **)(*a0 + 0x14))
+                             (a0,a1,loopIndex,loopIndex2,a4,piVar25,a0[0x22],*(code **)(*a0 + 0x14));
           if (!bVar3) {
-            param_1[0x20] = iVar26 * 4 - 2U | param_1[0x20];
+            param_1[0x20] = loopRemaining * 4 - 2U | param_1[0x20];
             (**(code **)(*param_1 + 0xe4))
-                      (param_1,*(undefined4 *)(PTR_DAT_001e913c + iVar13 * 0x38 + 0xc),piVar16,
-                       piVar17,a4,piVar25,PTR_DAT_001e913c + iVar13 * 0x38);
+                      (param_1,*(undefined4 *)(PTR_DAT_001e913c + iVar13 * 0x38 + 0xc),loopIndex,
+                       loopIndex2,a4,piVar25,PTR_DAT_001e913c + iVar13 * 0x38);
           }
-          bVar4 = -1 < (int)-uVar21;
+          bVar4 = -1 < (int)-loopIndex3;
           if (!bVar4) {
-            param_1[0x21] = iVar26 * 4 - 2U | param_1[0x21];
+            param_1[0x21] = loopRemaining * 4 - 2U | param_1[0x21];
             (**(code **)(*param_1 + 0xe8))
-                      (param_1,*(undefined4 *)(PTR_DAT_001e913c + iVar13 * 0x38 + 0xc),piVar16,
-                       piVar17,a4,piVar25,PTR_DAT_001e913c + iVar13 * 0x38);
+                      (param_1,*(undefined4 *)(PTR_DAT_001e913c + iVar13 * 0x38 + 0xc),loopIndex,
+                       loopIndex2,a4,piVar25,PTR_DAT_001e913c + iVar13 * 0x38);
           }
-          if (iVar26 < 2) {
-            if (iVar26 != 1) goto LAB_0019a030;
+          if (loopRemaining < 2) {
+            if (loopRemaining != 1) goto LAB_0019a030;
             piVar23 = (int *)FUN_00105594(a0,1);
-            if ((((piVar23[0x20] == 0) || (iVar26 = FUN_00126760(piVar23[0x26]), iVar26 == 0)) ||
+            if ((((piVar23[0x20] == 0) || (loopRemaining = FUN_00126760(piVar23[0x26]), loopRemaining == 0)) ||
                 ((piVar23[5] & 2U) != 0)) ||
-               (iVar26 = (**(code **)(*piVar23 + 0x50))(piVar23), iVar26 != 0)) {
+               (loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining != 0)) {
               piVar23 = (int *)FUN_00105594(a0,1);
-              iVar26 = (**(code **)(*piVar23 + 0x50))(piVar23);
-              if (iVar26 != 0) goto LAB_001994a8;
+              loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23);
+              if (loopRemaining != 0) goto LAB_001994a8;
               piVar23 = (int *)FUN_00105594(a0,1);
               iVar13 = 0;
-              iVar26 = (**(code **)(*piVar23 + 0x48))(piVar23);
-              if (iVar26 != 0) {
-                iVar26 = FUN_00105594(a0,1);
-                uVar14 = *(undefined4 *)(iVar26 + 0x94);
-                piVar16 = (int *)FUN_00105594(a0,1);
-                FUN_00196370(param_1,uVar14,piVar16);
+              loopRemaining = (**(code **)(*piVar23 + 0x48))(piVar23);
+              if (loopRemaining != 0) {
+                loopRemaining = FUN_00105594(a0,1);
+                uVar14 = *(undefined4 *)(loopRemaining + 0x94);
+                loopIndex = (int *)FUN_00105594(a0,1);
+                FUN_00196370(param_1,uVar14,loopIndex);
                 iVar13 = (**(code **)(*param_1 + 0xe0))(param_1,uVar14);
               }
             }
@@ -771,36 +771,36 @@ LAB_001994a8:
               iVar13 = thunk_FUN_00134de8(uVar24,uVar14);
             }
             if (!bVar3) {
-              iVar26 = FUN_00105594(a0,1);
-              if ((((((iVar26 != param_1[7]) && (iVar26 = FUN_00105594(a0,1), iVar26 != 0)) &&
+              loopRemaining = FUN_00105594(a0,1);
+              if ((((((loopRemaining != param_1[7]) && (loopRemaining = FUN_00105594(a0,1), loopRemaining != 0)) &&
                     ((param_1[7] != 0 &&
                      ((piVar23 = (int *)FUN_00105594(a0,1), piVar23[0x20] != 0 &&
-                      (iVar26 = FUN_00126760(piVar23[0x26]), iVar26 != 0)))))) &&
+                      (loopRemaining = FUN_00126760(piVar23[0x26]), loopRemaining != 0)))))) &&
                    ((piVar23[5] & 2U) == 0)) &&
-                  (((iVar26 = (**(code **)(*piVar23 + 0x50))(piVar23), iVar26 == 0 &&
+                  (((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0 &&
                     (piVar23 = (int *)param_1[7], piVar23[0x20] != 0)) &&
-                   (iVar26 = FUN_00126760(piVar23[0x26]), iVar26 != 0)))) &&
+                   (loopRemaining = FUN_00126760(piVar23[0x26]), loopRemaining != 0)))) &&
                  ((((piVar23[5] & 2U) == 0 &&
-                   (iVar26 = (**(code **)(*piVar23 + 0x50))(piVar23), iVar26 == 0)) &&
-                  ((iVar26 = FUN_00105594(a0,1), (*(uint *)(iVar26 + 0x14) & 0x40) != 0 &&
+                   (loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0)) &&
+                  ((loopRemaining = FUN_00105594(a0,1), (*(uint *)(loopRemaining + 0x14) & 0x40) != 0 &&
                    ((*(uint *)(param_1[7] + 0x14) & 0x40) != 0)))))) {
                 FUN_00105594(a0,1);
               }
               param_1[0xe] = iVar13;
             }
             if (!bVar4) {
-              iVar26 = FUN_00105594(a0,1);
-              if (((((iVar26 != param_1[10]) && (iVar26 = FUN_00105594(a0,1), iVar26 != 0)) &&
+              loopRemaining = FUN_00105594(a0,1);
+              if (((((loopRemaining != param_1[10]) && (loopRemaining = FUN_00105594(a0,1), loopRemaining != 0)) &&
                    ((param_1[10] != 0 &&
                     (((piVar23 = (int *)FUN_00105594(a0,1), piVar23[0x20] != 0 &&
-                      (iVar26 = FUN_00126760(piVar23[0x26]), iVar26 != 0)) &&
+                      (loopRemaining = FUN_00126760(piVar23[0x26]), loopRemaining != 0)) &&
                      ((piVar23[5] & 2U) == 0)))))) &&
-                  ((iVar26 = (**(code **)(*piVar23 + 0x50))(piVar23), iVar26 == 0 &&
+                  ((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0 &&
                    (piVar23 = (int *)param_1[10], piVar23[0x20] != 0)))) &&
-                 ((iVar26 = FUN_00126760(piVar23[0x26]), iVar26 != 0 &&
+                 ((loopRemaining = FUN_00126760(piVar23[0x26]), loopRemaining != 0 &&
                   ((((piVar23[5] & 2U) == 0 &&
-                    (iVar26 = (**(code **)(*piVar23 + 0x50))(piVar23), iVar26 == 0)) &&
-                   ((iVar26 = FUN_00105594(a0,1), (*(uint *)(iVar26 + 0x14) & 0x40) != 0 &&
+                    (loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0)) &&
+                   ((loopRemaining = FUN_00105594(a0,1), (*(uint *)(loopRemaining + 0x14) & 0x40) != 0 &&
                     ((*(uint *)(param_1[10] + 0x14) & 0x40) != 0)))))))) {
                 FUN_00105594(a0,1);
               }
@@ -809,20 +809,20 @@ LAB_001994a8:
           }
           else {
             piVar23 = (int *)FUN_00105594(a0,1);
-            if ((((piVar23[0x20] == 0) || (iVar26 = FUN_00126760(piVar23[0x26]), iVar26 == 0)) ||
+            if ((((piVar23[0x20] == 0) || (loopRemaining = FUN_00126760(piVar23[0x26]), loopRemaining == 0)) ||
                 ((piVar23[5] & 2U) != 0)) ||
-               (iVar26 = (**(code **)(*piVar23 + 0x50))(piVar23), iVar26 != 0)) {
+               (loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining != 0)) {
               piVar23 = (int *)FUN_00105594(a0,1);
-              iVar26 = (**(code **)(*piVar23 + 0x50))(piVar23);
-              if (iVar26 != 0) goto LAB_00198950;
+              loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23);
+              if (loopRemaining != 0) goto LAB_00198950;
               piVar23 = (int *)FUN_00105594(a0,1);
               iVar11 = 0;
-              iVar26 = (**(code **)(*piVar23 + 0x48))(piVar23);
-              if (iVar26 != 0) {
-                iVar26 = FUN_00105594(a0,1);
-                uVar14 = *(undefined4 *)(iVar26 + 0x94);
-                piVar16 = (int *)FUN_00105594(a0,1);
-                FUN_00196370(param_1,uVar14,piVar16);
+              loopRemaining = (**(code **)(*piVar23 + 0x48))(piVar23);
+              if (loopRemaining != 0) {
+                loopRemaining = FUN_00105594(a0,1);
+                uVar14 = *(undefined4 *)(loopRemaining + 0x94);
+                loopIndex = (int *)FUN_00105594(a0,1);
+                FUN_00196370(param_1,uVar14,loopIndex);
                 iVar11 = (**(code **)(*param_1 + 0xe0))(param_1,uVar14);
               }
             }
@@ -833,20 +833,20 @@ LAB_00198950:
               iVar11 = thunk_FUN_00134de8(uVar24,uVar14);
             }
             piVar23 = (int *)FUN_00105594(a0,2);
-            if (((piVar23[0x20] == 0) || (iVar26 = FUN_00126760(piVar23[0x26]), iVar26 == 0)) ||
+            if (((piVar23[0x20] == 0) || (loopRemaining = FUN_00126760(piVar23[0x26]), loopRemaining == 0)) ||
                (((piVar23[5] & 2U) != 0 ||
-                (iVar26 = (**(code **)(*piVar23 + 0x50))(piVar23), iVar26 != 0)))) {
+                (loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining != 0)))) {
               piVar23 = (int *)FUN_00105594(a0,2);
-              iVar26 = (**(code **)(*piVar23 + 0x50))(piVar23);
-              if (iVar26 != 0) goto LAB_00198a1c;
+              loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23);
+              if (loopRemaining != 0) goto LAB_00198a1c;
               piVar23 = (int *)FUN_00105594(a0,2);
               iVar12 = 0;
-              iVar26 = (**(code **)(*piVar23 + 0x48))(piVar23);
-              if (iVar26 != 0) {
-                iVar26 = FUN_00105594(a0,2);
-                uVar14 = *(undefined4 *)(iVar26 + 0x94);
-                piVar16 = (int *)FUN_00105594(a0,2);
-                FUN_00196370(param_1,uVar14,piVar16);
+              loopRemaining = (**(code **)(*piVar23 + 0x48))(piVar23);
+              if (loopRemaining != 0) {
+                loopRemaining = FUN_00105594(a0,2);
+                uVar14 = *(undefined4 *)(loopRemaining + 0x94);
+                loopIndex = (int *)FUN_00105594(a0,2);
+                FUN_00196370(param_1,uVar14,loopIndex);
                 iVar12 = (**(code **)(*param_1 + 0xe0))(param_1,uVar14);
               }
             }
@@ -861,63 +861,63 @@ LAB_00198f54:
               bVar3 = false;
             }
             else {
-              iVar26 = FUN_00105594(a0,1);
-              if (((iVar26 != param_1[8]) &&
-                  (((((iVar26 = FUN_00105594(a0,1), iVar26 == 0 || (param_1[8] == 0)) ||
+              loopRemaining = FUN_00105594(a0,1);
+              if (((loopRemaining != param_1[8]) &&
+                  (((((loopRemaining = FUN_00105594(a0,1), loopRemaining == 0 || (param_1[8] == 0)) ||
                      ((piVar23 = (int *)FUN_00105594(a0,1), piVar23[0x20] == 0 ||
-                      (((iVar26 = FUN_00126760(piVar23[0x26]), iVar26 == 0 ||
+                      (((loopRemaining = FUN_00126760(piVar23[0x26]), loopRemaining == 0 ||
                         ((piVar23[5] & 2U) != 0)) ||
-                       (iVar26 = (**(code **)(*piVar23 + 0x50))(piVar23), iVar26 != 0)))))) ||
+                       (loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining != 0)))))) ||
                     ((piVar23 = (int *)param_1[8], piVar23[0x20] == 0 ||
-                     (iVar26 = FUN_00126760(piVar23[0x26]), iVar26 == 0)))) ||
+                     (loopRemaining = FUN_00126760(piVar23[0x26]), loopRemaining == 0)))) ||
                    (((piVar23[5] & 2U) != 0 ||
-                    (((iVar26 = (**(code **)(*piVar23 + 0x50))(piVar23), iVar26 != 0 ||
-                      (iVar26 = FUN_00105594(a0,1), (*(uint *)(iVar26 + 0x14) & 0x40) == 0)) ||
+                    (((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining != 0 ||
+                      (loopRemaining = FUN_00105594(a0,1), (*(uint *)(loopRemaining + 0x14) & 0x40) == 0)) ||
                      (((*(uint *)(param_1[8] + 0x14) & 0x40) == 0 ||
-                      (iVar26 = FUN_00105594(a0,1),
-                      *(int *)(iVar26 + 0x94) != *(int *)(param_1[8] + 0x94))))))))))) ||
-                 ((iVar26 = FUN_00105594(a0,2), iVar26 != param_1[7] &&
-                  ((((iVar26 = FUN_00105594(a0,2), iVar26 == 0 || (param_1[7] == 0)) ||
+                      (loopRemaining = FUN_00105594(a0,1),
+                      *(int *)(loopRemaining + 0x94) != *(int *)(param_1[8] + 0x94))))))))))) ||
+                 ((loopRemaining = FUN_00105594(a0,2), loopRemaining != param_1[7] &&
+                  ((((loopRemaining = FUN_00105594(a0,2), loopRemaining == 0 || (param_1[7] == 0)) ||
                     (piVar23 = (int *)FUN_00105594(a0,2), piVar23[0x20] == 0)) ||
-                   (((iVar26 = FUN_00126760(piVar23[0x26]), iVar26 == 0 || ((piVar23[5] & 2U) != 0))
-                    || ((((iVar26 = (**(code **)(*piVar23 + 0x50))(piVar23), iVar26 != 0 ||
+                   (((loopRemaining = FUN_00126760(piVar23[0x26]), loopRemaining == 0 || ((piVar23[5] & 2U) != 0))
+                    || ((((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining != 0 ||
                           ((piVar23 = (int *)param_1[7], piVar23[0x20] == 0 ||
-                           (iVar26 = FUN_00126760(piVar23[0x26]), iVar26 == 0)))) ||
+                           (loopRemaining = FUN_00126760(piVar23[0x26]), loopRemaining == 0)))) ||
                          ((piVar23[5] & 2U) != 0)) ||
-                        ((((iVar26 = (**(code **)(*piVar23 + 0x50))(piVar23), iVar26 != 0 ||
-                           (iVar26 = FUN_00105594(a0,2), (*(uint *)(iVar26 + 0x14) & 0x40) == 0)) ||
+                        ((((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining != 0 ||
+                           (loopRemaining = FUN_00105594(a0,2), (*(uint *)(loopRemaining + 0x14) & 0x40) == 0)) ||
                           ((*(uint *)(param_1[7] + 0x14) & 0x40) == 0)) ||
-                         (iVar26 = FUN_00105594(a0,2),
-                         *(int *)(iVar26 + 0x94) != *(int *)(param_1[7] + 0x94))))))))))))) {
-                iVar26 = FUN_00105594(a0,1);
-                if (((iVar26 == param_1[7]) ||
-                    ((((iVar26 = FUN_00105594(a0,1), iVar26 != 0 && (param_1[7] != 0)) &&
+                         (loopRemaining = FUN_00105594(a0,2),
+                         *(int *)(loopRemaining + 0x94) != *(int *)(param_1[7] + 0x94))))))))))))) {
+                loopRemaining = FUN_00105594(a0,1);
+                if (((loopRemaining == param_1[7]) ||
+                    ((((loopRemaining = FUN_00105594(a0,1), loopRemaining != 0 && (param_1[7] != 0)) &&
                       ((piVar23 = (int *)FUN_00105594(a0,1), piVar23[0x20] != 0 &&
-                       ((iVar26 = FUN_00126760(piVar23[0x26]), iVar26 != 0 &&
+                       ((loopRemaining = FUN_00126760(piVar23[0x26]), loopRemaining != 0 &&
                         ((piVar23[5] & 2U) == 0)))))) &&
-                     (((iVar26 = (**(code **)(*piVar23 + 0x50))(piVar23), iVar26 == 0 &&
+                     (((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0 &&
                        ((((piVar23 = (int *)param_1[7], piVar23[0x20] != 0 &&
-                          (iVar26 = FUN_00126760(piVar23[0x26]), iVar26 != 0)) &&
+                          (loopRemaining = FUN_00126760(piVar23[0x26]), loopRemaining != 0)) &&
                          ((piVar23[5] & 2U) == 0)) &&
-                        ((iVar26 = (**(code **)(*piVar23 + 0x50))(piVar23), iVar26 == 0 &&
-                         (iVar26 = FUN_00105594(a0,1), (*(uint *)(iVar26 + 0x14) & 0x40) != 0))))))
+                        ((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0 &&
+                         (loopRemaining = FUN_00105594(a0,1), (*(uint *)(loopRemaining + 0x14) & 0x40) != 0))))))
                       && (((*(uint *)(param_1[7] + 0x14) & 0x40) != 0 &&
-                          (iVar26 = FUN_00105594(a0,1),
-                          *(int *)(iVar26 + 0x94) == *(int *)(param_1[7] + 0x94))))))))) &&
-                   ((iVar26 = FUN_00105594(a0,2), iVar26 == param_1[8] ||
-                    (((((iVar26 = FUN_00105594(a0,2), iVar26 != 0 && (param_1[8] != 0)) &&
+                          (loopRemaining = FUN_00105594(a0,1),
+                          *(int *)(loopRemaining + 0x94) == *(int *)(param_1[7] + 0x94))))))))) &&
+                   ((loopRemaining = FUN_00105594(a0,2), loopRemaining == param_1[8] ||
+                    (((((loopRemaining = FUN_00105594(a0,2), loopRemaining != 0 && (param_1[8] != 0)) &&
                        ((piVar23 = (int *)FUN_00105594(a0,2), piVar23[0x20] != 0 &&
-                        (((iVar26 = FUN_00126760(piVar23[0x26]), iVar26 != 0 &&
+                        (((loopRemaining = FUN_00126760(piVar23[0x26]), loopRemaining != 0 &&
                           ((piVar23[5] & 2U) == 0)) &&
-                         (iVar26 = (**(code **)(*piVar23 + 0x50))(piVar23), iVar26 == 0)))))) &&
+                         (loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0)))))) &&
                       ((piVar23 = (int *)param_1[8], piVar23[0x20] != 0 &&
-                       (iVar26 = FUN_00126760(piVar23[0x26]), iVar26 != 0)))) &&
+                       (loopRemaining = FUN_00126760(piVar23[0x26]), loopRemaining != 0)))) &&
                      (((piVar23[5] & 2U) == 0 &&
-                      (((iVar26 = (**(code **)(*piVar23 + 0x50))(piVar23), iVar26 == 0 &&
-                        (iVar26 = FUN_00105594(a0,2), (*(uint *)(iVar26 + 0x14) & 0x40) != 0)) &&
+                      (((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0 &&
+                        (loopRemaining = FUN_00105594(a0,2), (*(uint *)(loopRemaining + 0x14) & 0x40) != 0)) &&
                        (((*(uint *)(param_1[8] + 0x14) & 0x40) != 0 &&
-                        (iVar26 = FUN_00105594(a0,2),
-                        *(int *)(iVar26 + 0x94) == *(int *)(param_1[8] + 0x94))))))))))))) {
+                        (loopRemaining = FUN_00105594(a0,2),
+                        *(int *)(loopRemaining + 0x94) == *(int *)(param_1[8] + 0x94))))))))))))) {
                   param_1[0xe] = iVar11;
                   param_1[0xf] = iVar12;
                   if ((iVar13 == 0x9a) && (bVar3 = true, (piVar19[8] & 2U) == 0)) goto LAB_00198f58;
@@ -934,64 +934,64 @@ LAB_0019941c:
               bVar4 = false;
             }
             else {
-              iVar26 = FUN_00105594(a0,1);
-              if (((iVar26 != param_1[0xb]) &&
-                  (((((((iVar26 = FUN_00105594(a0,1), iVar26 == 0 || (param_1[0xb] == 0)) ||
+              loopRemaining = FUN_00105594(a0,1);
+              if (((loopRemaining != param_1[0xb]) &&
+                  (((((((loopRemaining = FUN_00105594(a0,1), loopRemaining == 0 || (param_1[0xb] == 0)) ||
                        (piVar23 = (int *)FUN_00105594(a0,1), piVar23[0x20] == 0)) ||
-                      ((iVar26 = FUN_00126760(piVar23[0x26]), iVar26 == 0 ||
+                      ((loopRemaining = FUN_00126760(piVar23[0x26]), loopRemaining == 0 ||
                        ((piVar23[5] & 2U) != 0)))) ||
-                     (iVar26 = (**(code **)(*piVar23 + 0x50))(piVar23), iVar26 != 0)) ||
+                     (loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining != 0)) ||
                     (((piVar23 = (int *)param_1[0xb], piVar23[0x20] == 0 ||
-                      (iVar26 = FUN_00126760(piVar23[0x26]), iVar26 == 0)) ||
+                      (loopRemaining = FUN_00126760(piVar23[0x26]), loopRemaining == 0)) ||
                      (((piVar23[5] & 2U) != 0 ||
-                      (((iVar26 = (**(code **)(*piVar23 + 0x50))(piVar23), iVar26 != 0 ||
-                        (iVar26 = FUN_00105594(a0,1), (*(uint *)(iVar26 + 0x14) & 0x40) == 0)) ||
+                      (((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining != 0 ||
+                        (loopRemaining = FUN_00105594(a0,1), (*(uint *)(loopRemaining + 0x14) & 0x40) == 0)) ||
                        ((*(uint *)(param_1[0xb] + 0x14) & 0x40) == 0)))))))) ||
-                   (iVar26 = FUN_00105594(a0,1),
-                   *(int *)(iVar26 + 0x94) != *(int *)(param_1[0xb] + 0x94))))) ||
-                 ((iVar26 = FUN_00105594(a0,2), iVar26 != param_1[10] &&
-                  ((((iVar26 = FUN_00105594(a0,2), iVar26 == 0 || (param_1[10] == 0)) ||
+                   (loopRemaining = FUN_00105594(a0,1),
+                   *(int *)(loopRemaining + 0x94) != *(int *)(param_1[0xb] + 0x94))))) ||
+                 ((loopRemaining = FUN_00105594(a0,2), loopRemaining != param_1[10] &&
+                  ((((loopRemaining = FUN_00105594(a0,2), loopRemaining == 0 || (param_1[10] == 0)) ||
                     ((piVar23 = (int *)FUN_00105594(a0,2), piVar23[0x20] == 0 ||
-                     ((iVar26 = FUN_00126760(piVar23[0x26]), iVar26 == 0 || ((piVar23[5] & 2U) != 0)
+                     ((loopRemaining = FUN_00126760(piVar23[0x26]), loopRemaining == 0 || ((piVar23[5] & 2U) != 0)
                       ))))) ||
-                   (((iVar26 = (**(code **)(*piVar23 + 0x50))(piVar23), iVar26 != 0 ||
+                   (((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining != 0 ||
                      (((piVar23 = (int *)param_1[10], piVar23[0x20] == 0 ||
-                       (iVar26 = FUN_00126760(piVar23[0x26]), iVar26 == 0)) ||
+                       (loopRemaining = FUN_00126760(piVar23[0x26]), loopRemaining == 0)) ||
                       ((piVar23[5] & 2U) != 0)))) ||
-                    (((iVar26 = (**(code **)(*piVar23 + 0x50))(piVar23), iVar26 != 0 ||
-                      (iVar26 = FUN_00105594(a0,2), (*(uint *)(iVar26 + 0x14) & 0x40) == 0)) ||
+                    (((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining != 0 ||
+                      (loopRemaining = FUN_00105594(a0,2), (*(uint *)(loopRemaining + 0x14) & 0x40) == 0)) ||
                      (((*(uint *)(param_1[10] + 0x14) & 0x40) == 0 ||
-                      (iVar26 = FUN_00105594(a0,2),
-                      *(int *)(iVar26 + 0x94) != *(int *)(param_1[10] + 0x94))))))))))))) {
-                iVar26 = FUN_00105594(a0,1);
-                if (((iVar26 == param_1[10]) ||
-                    ((((iVar26 = FUN_00105594(a0,1), iVar26 != 0 && (param_1[10] != 0)) &&
+                      (loopRemaining = FUN_00105594(a0,2),
+                      *(int *)(loopRemaining + 0x94) != *(int *)(param_1[10] + 0x94))))))))))))) {
+                loopRemaining = FUN_00105594(a0,1);
+                if (((loopRemaining == param_1[10]) ||
+                    ((((loopRemaining = FUN_00105594(a0,1), loopRemaining != 0 && (param_1[10] != 0)) &&
                       (((piVar23 = (int *)FUN_00105594(a0,1), piVar23[0x20] != 0 &&
-                        ((((iVar26 = FUN_00126760(piVar23[0x26]), iVar26 != 0 &&
+                        ((((loopRemaining = FUN_00126760(piVar23[0x26]), loopRemaining != 0 &&
                            ((piVar23[5] & 2U) == 0)) &&
-                          (iVar26 = (**(code **)(*piVar23 + 0x50))(piVar23), iVar26 == 0)) &&
+                          (loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0)) &&
                          ((piVar23 = (int *)param_1[10], piVar23[0x20] != 0 &&
-                          (iVar26 = FUN_00126760(piVar23[0x26]), iVar26 != 0)))))) &&
+                          (loopRemaining = FUN_00126760(piVar23[0x26]), loopRemaining != 0)))))) &&
                        ((piVar23[5] & 2U) == 0)))) &&
-                     (((iVar26 = (**(code **)(*piVar23 + 0x50))(piVar23), iVar26 == 0 &&
-                       (iVar26 = FUN_00105594(a0,1), (*(uint *)(iVar26 + 0x14) & 0x40) != 0)) &&
+                     (((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0 &&
+                       (loopRemaining = FUN_00105594(a0,1), (*(uint *)(loopRemaining + 0x14) & 0x40) != 0)) &&
                       (((*(uint *)(param_1[10] + 0x14) & 0x40) != 0 &&
-                       (iVar26 = FUN_00105594(a0,1),
-                       *(int *)(iVar26 + 0x94) == *(int *)(param_1[10] + 0x94))))))))) &&
-                   ((iVar26 = FUN_00105594(a0,2), iVar26 == param_1[0xb] ||
-                    (((((iVar26 = FUN_00105594(a0,2), iVar26 != 0 && (param_1[0xb] != 0)) &&
+                       (loopRemaining = FUN_00105594(a0,1),
+                       *(int *)(loopRemaining + 0x94) == *(int *)(param_1[10] + 0x94))))))))) &&
+                   ((loopRemaining = FUN_00105594(a0,2), loopRemaining == param_1[0xb] ||
+                    (((((loopRemaining = FUN_00105594(a0,2), loopRemaining != 0 && (param_1[0xb] != 0)) &&
                        (piVar23 = (int *)FUN_00105594(a0,2), piVar23[0x20] != 0)) &&
-                      (((iVar26 = FUN_00126760(piVar23[0x26]), iVar26 != 0 &&
+                      (((loopRemaining = FUN_00126760(piVar23[0x26]), loopRemaining != 0 &&
                         ((piVar23[5] & 2U) == 0)) &&
-                       ((iVar26 = (**(code **)(*piVar23 + 0x50))(piVar23), iVar26 == 0 &&
+                       ((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0 &&
                         ((piVar23 = (int *)param_1[0xb], piVar23[0x20] != 0 &&
-                         (iVar26 = FUN_00126760(piVar23[0x26]), iVar26 != 0)))))))) &&
+                         (loopRemaining = FUN_00126760(piVar23[0x26]), loopRemaining != 0)))))))) &&
                      (((piVar23[5] & 2U) == 0 &&
-                      ((((iVar26 = (**(code **)(*piVar23 + 0x50))(piVar23), iVar26 == 0 &&
-                         (iVar26 = FUN_00105594(a0,2), (*(uint *)(iVar26 + 0x14) & 0x40) != 0)) &&
+                      ((((loopRemaining = (**(code **)(*piVar23 + 0x50))(piVar23), loopRemaining == 0 &&
+                         (loopRemaining = FUN_00105594(a0,2), (*(uint *)(loopRemaining + 0x14) & 0x40) != 0)) &&
                         ((*(uint *)(param_1[0xb] + 0x14) & 0x40) != 0)) &&
-                       (iVar26 = FUN_00105594(a0,2),
-                       *(int *)(iVar26 + 0x94) == *(int *)(param_1[0xb] + 0x94))))))))))) {
+                       (loopRemaining = FUN_00105594(a0,2),
+                       *(int *)(loopRemaining + 0x94) == *(int *)(param_1[0xb] + 0x94))))))))))) {
                   param_1[0x12] = iVar11;
                   param_1[0x13] = iVar12;
                   if ((iVar13 == 0x9a) && (bVar4 = true, (piVar19[8] & 2U) == 0)) goto LAB_00199420;
@@ -1004,8 +1004,8 @@ LAB_0019941c:
             }
 LAB_00199420:
             if ((bVar3) || (bVar4)) {
-              piVar16 = (int *)(piVar19[8] & 1U ^ 1);
-              FUN_00103d50(piVar19 + 3,1,piVar16);
+              loopIndex = (int *)(piVar19[8] & 1U ^ 1);
+              FUN_00103d50(piVar19 + 3,1,loopIndex);
             }
           }
         }
@@ -1018,15 +1018,15 @@ LAB_0019a030:
             (**(code **)(*param_1 + 0x108))(param_1,piVar22,local_dc,local_80,iVar20);
           }
           a4 = (int *)param_1[3];
-          piVar17 = (int *)0x0;
-          piVar16 = local_80;
+          loopIndex2 = (int *)0x0;
+          loopIndex = local_80;
           FUN_00106004(param_2,piVar22,local_80,0,a4);
           if (piVar22 == (int *)0x0) {
             param_2[0x27] = iVar20;
           }
           else {
-            iVar26 = FUN_001054ec(param_2,piVar22);
-            *(int *)(iVar26 + 0x10) = iVar20;
+            loopRemaining = FUN_001054ec(param_2,piVar22);
+            *(int *)(loopRemaining + 0x10) = iVar20;
           }
         }
       }
@@ -1152,7 +1152,7 @@ int FUN_0019a484(param_1)
 {
   undefined4 *puVar1;
   undefined4 uVar2;
-  int iVar3;
+  int loopIndex;
   int iVar4;
   undefined4 uVar5;
   int iVar6;
@@ -1163,10 +1163,10 @@ int FUN_0019a484(param_1)
   if (*(int *)(param_1 + 0x5c) < 1) {
     return;
   }
-  iVar3 = 0;
+  loopIndex = 0;
   iVar4 = 0;
   do {
-    iVar3 = iVar3 + 1;
+    loopIndex = loopIndex + 1;
     iVar8 = iVar4 + *(int *)(param_1 + 0x40);
     puVar1 = (undefined4 *)(iVar4 + *(int *)(param_1 + 0x40));
     uVar2 = *(undefined4 *)(iVar8 + 4);
@@ -1183,7 +1183,7 @@ int FUN_0019a484(param_1)
     *(undefined4 *)(iVar6 + 0x1c) = *(undefined4 *)(iVar8 + 0x18);
     *(undefined4 *)(iVar6 + 0x14) = uVar2;
     *(undefined4 *)(iVar6 + 0x18) = uVar5;
-  } while (iVar3 < *(int *)(param_1 + 0x5c));
+  } while (loopIndex < *(int *)(param_1 + 0x5c));
   return;
 }
 
@@ -1228,33 +1228,33 @@ int FUN_0019a568(param_1, param_2)
   int param_1;
   int param_2;
 {
-  int iVar1;
-  int iVar2;
+  int loopIndex;
+  int loopRemaining;
   
-  iVar2 = (param_2 * 5 + *(int *)(param_1 + 0x1c)) * 4;
-  iVar1 = *(int *)(&DAT_001e6668 + iVar2);
-  iVar2 = *(int *)(&DAT_001e66cc + iVar2);
-  *(int *)(param_1 + 0x1c) = iVar1;
-  if (iVar1 == -1) {
+  loopRemaining = (param_2 * 5 + *(int *)(param_1 + 0x1c)) * 4;
+  loopIndex = *(int *)(&DAT_001e6668 + loopRemaining);
+  loopRemaining = *(int *)(&DAT_001e66cc + loopRemaining);
+  *(int *)(param_1 + 0x1c) = loopIndex;
+  if (loopIndex == -1) {
     *(undefined4 *)(param_1 + 0x1c) = 2;
   }
-  else if (iVar2 < 1) {
-    if (iVar2 < 0) {
-      iVar2 = -iVar2;
-      iVar1 = *(int *)(param_1 + 0x58);
+  else if (loopRemaining < 1) {
+    if (loopRemaining < 0) {
+      loopRemaining = -loopRemaining;
+      loopIndex = *(int *)(param_1 + 0x58);
       do {
-        iVar1 = iVar1 + -1;
-        iVar2 = iVar2 + -1;
-      } while (iVar2 != 0);
-      *(int *)(param_1 + 0x58) = iVar1;
+        loopIndex = loopIndex + -1;
+        loopRemaining = loopRemaining + -1;
+      } while (loopRemaining != 0);
+      *(int *)(param_1 + 0x58) = loopIndex;
     }
   }
   else {
-    iVar1 = 0;
+    loopIndex = 0;
     do {
-      iVar1 = iVar1 + 1;
+      loopIndex = loopIndex + 1;
       ((int (*)())FUN_0019a384)(param_1);
-    } while (iVar1 != iVar2);
+    } while (loopIndex != loopRemaining);
   }
   return;
 }
@@ -1361,11 +1361,11 @@ int FUN_0019a80c(param_1, param_2, param_3, param_4)
   undefined4 param_4;
 {
   int *a0;
-  int iVar1;
+  int callResult;
   
   a0 = (int *)FUN_00105594(param_2,1);
-  iVar1 = (**(code **)(*a0 + 0x50))(a0);
-  if ((iVar1 != 0) && (*(int *)(param_2 + 0x144) != 0)) {
+  callResult = (**(code **)(*a0 + 0x50))(a0);
+  if ((callResult != 0) && (*(int *)(param_2 + 0x144) != 0)) {
     return;
   }
                     
@@ -1495,10 +1495,10 @@ int FUN_0019aaf4(param_1, param_2, param_3, param_4, param_5, param_6)
   undefined4 param_5;
   undefined4 param_6;
 {
-  int iVar1;
+  int callResult;
   
-  iVar1 = (**(code **)(*param_2 + 0x40))(param_2,param_2,param_3,param_4,param_5,param_6);
-  if (iVar1 == 0) {
+  callResult = (**(code **)(*param_2 + 0x40))(param_2,param_2,param_3,param_4,param_5,param_6);
+  if (callResult == 0) {
     FUN_000e1534(param_6,0xf);
     return;
   }
@@ -1512,10 +1512,10 @@ int FUN_0019ab60(param_1, param_2, param_3, param_4)
   undefined4 param_3;
   undefined4 param_4;
 {
-  int iVar1;
+  int callResult;
   
-  iVar1 = (**(code **)(*param_2 + 0x40))(param_2,param_2,param_3,param_4);
-  if (iVar1 == 0) {
+  callResult = (**(code **)(*param_2 + 0x40))(param_2,param_2,param_3,param_4);
+  if (callResult == 0) {
     FUN_000e1534(param_4,0xf);
     return;
   }
@@ -1529,11 +1529,11 @@ int FUN_0019abc4(param_1, param_2, param_3, param_4)
   undefined4 param_3;
   undefined4 param_4;
 {
-  int iVar1;
+  int callResult;
   
-  iVar1 = (**(code **)(**(int **)(param_2 + 300) + 0x40))
+  callResult = (**(code **)(**(int **)(param_2 + 300) + 0x40))
                     (*(int **)(param_2 + 300),param_2,param_3,param_4);
-  if (iVar1 == 0) {
+  if (callResult == 0) {
     FUN_000e1534(param_4,0xf);
     return;
   }
@@ -2132,7 +2132,7 @@ int FUN_0019baf4(param_1, param_2, param_3)
   int iVar5;
   undefined4 uVar6;
   int iVar7;
-  int iVar8;
+  int callResult;
   int iVar9;
   int iVar10;
   int iVar11;
@@ -2218,11 +2218,11 @@ LAB_0019bc7c:
     iVar7 = *(int *)(iVar7 + 0x98);
   }
   piVar4 = (int *)FUN_00105594(param_2,2);
-  iVar8 = (**(code **)(*piVar4 + 0x60))(piVar4);
-  if (iVar8 == 0) {
+  callResult = (**(code **)(*piVar4 + 0x60))(piVar4);
+  if (callResult == 0) {
     uVar16 = *(undefined4 *)(*(int *)(param_1 + 0xc) + 0x6c4);
     uVar6 = FUN_00105594(param_2,2);
-    iVar8 = thunk_FUN_00134de8(uVar16,uVar6);
+    callResult = thunk_FUN_00134de8(uVar16,uVar6);
     iVar9 = FUN_00105594(param_2,2);
     iVar9 = *(int *)(iVar9 + 0x98);
   }
@@ -2230,7 +2230,7 @@ LAB_0019bc7c:
     uVar16 = *(undefined4 *)(*(int *)(param_1 + 0xc) + 0x6c4);
     uVar6 = FUN_00105594(param_2,2);
     uVar6 = FUN_00105594(uVar6,1);
-    iVar8 = thunk_FUN_00134de8(uVar16,uVar6);
+    callResult = thunk_FUN_00134de8(uVar16,uVar6);
     uVar6 = FUN_00105594(param_2,2);
     iVar9 = FUN_00105594(uVar6,1);
     iVar9 = *(int *)(iVar9 + 0x98);
@@ -2253,7 +2253,7 @@ LAB_0019bc7c:
     iVar10 = FUN_00105594(uVar6,1);
     iVar10 = *(int *)(iVar10 + 0x98);
   }
-  if (((((iVar7 != 0) || (iVar9 != 0)) || (iVar10 != 0)) || ((iVar2 == iVar8 || (iVar8 == iVar11))))
+  if (((((iVar7 != 0) || (iVar9 != 0)) || (iVar10 != 0)) || ((iVar2 == callResult || (callResult == iVar11))))
      || (iVar2 == iVar11)) goto LAB_0019bee4;
   uVar3 = 0;
   if (iVar5 == 4) {
@@ -2362,14 +2362,14 @@ int FUN_0019c130(param_1, param_2, param_3, param_4, param_5)
   int *a0;
   int iVar10;
   uint uVar11;
-  int iVar12;
+  int loopIndex;
   int iVar13;
   int *piVar14;
   int iVar15;
-  int iVar16;
+  int callResult;
   undefined4 uVar17;
   undefined4 in_r8;
-  int iVar18;
+  int loopIndex2;
   uint uVar19;
   uint *puVar20;
   undefined8 uVar21;
@@ -2387,7 +2387,7 @@ int FUN_0019c130(param_1, param_2, param_3, param_4, param_5)
     puVar20 = (uint *)(param_3 + 4);
   }
   iVar10 = param_3;
-  iVar18 = param_4;
+  loopIndex2 = param_4;
   a0 = (int *)FUN_00105594(param_2,param_4);
   if (a0[0x26] == 0x33) {
     if (param_4 < 2) {
@@ -2470,9 +2470,9 @@ int FUN_0019c130(param_1, param_2, param_3, param_4, param_5)
     *puVar20 = uVar11 << 0x1c | uVar19 | uVar8 & 0xee3fffff;
     return;
   }
-  iVar12 = (**(code **)(*a0 + 0x60))(a0);
-  if (iVar12 == 0) {
-    iVar12 = FUN_00105dbc(param_2,param_4);
+  loopIndex = (**(code **)(*a0 + 0x60))(a0);
+  if (loopIndex == 0) {
+    loopIndex = FUN_00105dbc(param_2,param_4);
     iVar13 = a0[0x26];
     uVar17 = *(undefined4 *)(*(int *)(param_1 + 0xc) + 0x6c4);
     piVar14 = a0;
@@ -2489,7 +2489,7 @@ LAB_0019c490:
     }
   }
   else {
-    iVar12 = FUN_00105dbc(a0,1);
+    loopIndex = FUN_00105dbc(a0,1);
     iVar13 = FUN_00105594(a0,1);
     iVar13 = *(int *)(iVar13 + 0x98);
     if (iVar13 != 0x33) {
@@ -2515,8 +2515,8 @@ LAB_0019c490:
     }
   }
   iVar15 = FUN_00126708(a0[0x26]);
-  iVar16 = (**(code **)(*a0 + 0x60))(a0);
-  if (iVar16 != 0) {
+  callResult = (**(code **)(*a0 + 0x60))(a0);
+  if (callResult != 0) {
     iVar15 = FUN_00105594(a0,1);
     if (iVar15 == 0) {
       iVar15 = a0[0x2c];
@@ -2530,9 +2530,9 @@ LAB_0019c490:
   if ((iVar15 != 0) && (*(uint *)(param_1 + 0x4c) < uVar19)) {
     *(uint *)(param_1 + 0x4c) = uVar19;
   }
-  if (iVar12 - 1U < 2) {
-    iVar12 = (**(code **)(*a0 + 0x60))(a0);
-    if (iVar12 == 0) {
+  if (loopIndex - 1U < 2) {
+    loopIndex = (**(code **)(*a0 + 0x60))(a0);
+    if (loopIndex == 0) {
       uVar21 = FUN_00105c5c(param_2,param_4);
     }
     else {
@@ -2548,7 +2548,7 @@ LAB_0019c490:
         *(undefined4 *)(param_1 + 0x4c) = 0xff;
         uVar9 = *puVar20;
         *puVar20 = uVar9 | 0x10;
-        iVar10 = (**(code **)(*a0 + 0x60))(a0,(int)uVar21,iVar10,iVar18,param_5,in_r8,uVar9 | 0x10);
+        iVar10 = (**(code **)(*a0 + 0x60))(a0,(int)uVar21,iVar10,loopIndex2,param_5,in_r8,uVar9 | 0x10);
         if (iVar10 == 0) {
           iVar10 = FUN_001054ec(a0,1);
           uVar17 = *(undefined4 *)(iVar10 + 0x10);
@@ -2613,20 +2613,20 @@ LAB_0019c710:
     local_84 = local_88;
     FUN_000f2bdc(&local_58,*(undefined4 *)(iVar10 + 0x10),local_88);
     local_88 = local_58;
-    iVar18 = 0;
+    loopIndex2 = 0;
     iVar10 = 0;
     local_54 = local_7c;
     do {
-      bVar2 = *(byte *)((int)&local_84 + iVar18);
+      bVar2 = *(byte *)((int)&local_84 + loopIndex2);
       if (bVar2 != 4) {
-        if ((iVar13 == 0x33) || (bVar3 = *(byte *)((int)&local_88 + iVar18), bVar3 == 4)) {
+        if ((iVar13 == 0x33) || (bVar3 = *(byte *)((int)&local_88 + loopIndex2), bVar3 == 4)) {
           if (0 < a0[0x21]) {
-            iVar12 = 1;
+            loopIndex = 1;
             do {
-              iVar15 = FUN_001054ec(a0,iVar12);
+              iVar15 = FUN_001054ec(a0,loopIndex);
               uVar9 = (uint)*(byte *)((uint)bVar2 + iVar15 + 0x10);
               if (uVar9 != 4) {
-                uVar17 = FUN_00105594(a0,iVar12);
+                uVar17 = FUN_00105594(a0,loopIndex);
                 uVar17 = ((int (*)())FUN_0019a6f0)(uVar17,uVar9,&local_80);
                 *(undefined4 *)(iVar10 + (int)local_54) = uVar17;
                 uVar9 = uVar19;
@@ -2636,8 +2636,8 @@ LAB_0019c710:
                 *(uint *)((int)local_6c + iVar10) = uVar9;
                 break;
               }
-              iVar12 = iVar12 + 1;
-            } while (iVar12 <= a0[0x21]);
+              loopIndex = loopIndex + 1;
+            } while (loopIndex <= a0[0x21]);
           }
         }
         else {
@@ -2646,9 +2646,9 @@ LAB_0019c710:
           ;
         }
       }
-      bVar1 = iVar18 != 3;
+      bVar1 = loopIndex2 != 3;
       iVar10 = iVar10 + 4;
-      iVar18 = iVar18 + 1;
+      loopIndex2 = loopIndex2 + 1;
     } while (bVar1);
   }
   iVar10 = ((int (*)())FUN_0019a538)(*(undefined4 *)(param_1 + 0x88),param_2);
@@ -2727,7 +2727,7 @@ int FUN_0019ca78(param_1, param_2, param_3)
   byte bVar1;
   uint uVar2;
   uint uVar3;
-  int iVar4;
+  int loopIndex;
   int *piVar5;
   int iVar6;
   undefined4 uVar7;
@@ -2750,20 +2750,20 @@ int FUN_0019ca78(param_1, param_2, param_3)
   *param_3 = *param_3 | 0x10000000;
   a2 = param_3;
   FUN_00105dbc(param_2,1);
-  iVar4 = (**(code **)(*param_2 + 0x14))(param_2);
-  if (iVar4 == 2) {
+  loopIndex = (**(code **)(*param_2 + 0x14))(param_2);
+  if (loopIndex == 2) {
     FUN_00105dbc(param_2,2);
   }
   piVar5 = (int *)FUN_00105594(param_2,1);
-  iVar4 = (**(code **)(*piVar5 + 0x60))(piVar5);
-  if (iVar4 == 0) {
-    iVar4 = piVar5[0x26];
+  loopIndex = (**(code **)(*piVar5 + 0x60))(piVar5);
+  if (loopIndex == 0) {
+    loopIndex = piVar5[0x26];
   }
   else {
-    iVar4 = FUN_00105594(piVar5,1);
-    iVar4 = *(int *)(iVar4 + 0x98);
+    loopIndex = FUN_00105594(piVar5,1);
+    loopIndex = *(int *)(loopIndex + 0x98);
   }
-  if (iVar4 == 0x37) {
+  if (loopIndex == 0x37) {
     *(undefined4 *)(param_1 + 0x30) = *(undefined4 *)(param_1 + 0x58);
   }
   iVar6 = (**(code **)(*piVar5 + 0x60))(piVar5);
@@ -2776,14 +2776,14 @@ int FUN_0019ca78(param_1, param_2, param_3)
     uVar13 = thunk_FUN_00134de8(uVar12,uVar7);
   }
   iVar6 = (int)((ulonglong)uVar13 >> 0x20);
-  if (iVar4 == 1) {
+  if (loopIndex == 1) {
     piVar8 = *(int **)(*(int *)(param_1 + 0xc) + 0x30c);
     iVar9 = (**(code **)(*piVar8 + 0x138))(piVar8,0);
     uVar14 = ((int (*)())FUN_0019a2e0)(*(undefined4 *)(param_1 + 0x38),iVar6 - iVar9);
     uVar13 = CONCAT44(iVar6 - iVar9,(int)uVar14);
     *(int *)(param_1 + 0x38) = (int)((ulonglong)uVar14 >> 0x20);
   }
-  else if (iVar4 == 0) {
+  else if (loopIndex == 0) {
     uVar14 = ((int (*)())FUN_0019a2e0)(*(undefined4 *)(param_1 + 0x34),iVar6);
     uVar13 = CONCAT44(iVar6,(int)uVar14);
     *(int *)(param_1 + 0x34) = (int)((ulonglong)uVar14 >> 0x20);
@@ -2826,8 +2826,8 @@ int FUN_0019ca78(param_1, param_2, param_3)
       }
     }
     *(undefined4 *)(param_1 + 0x84) = 1;
-    iVar4 = FUN_001054ec(param_2,1);
-    uVar2 = ((int (*)())FUN_0019a6f0)(piVar5,(uint)*(byte *)(iVar4 + 0x13),local_48);
+    loopIndex = FUN_001054ec(param_2,1);
+    uVar2 = ((int (*)())FUN_0019a6f0)(piVar5,(uint)*(byte *)(loopIndex + 0x13),local_48);
     uVar3 = *puVar11;
     uVar2 = (uVar2 & 7) << 0xd;
     *puVar11 = uVar2 | uVar3 & 0xffff1fff;
@@ -2836,11 +2836,11 @@ int FUN_0019ca78(param_1, param_2, param_3)
       uVar10 = 1 - uVar10;
     }
     *puVar11 = (uVar10 & 1) << 0x19 | uVar2 | uVar3 & 0xfdff1fff;
-    iVar4 = (**(code **)(*param_2 + 0x14))(param_2);
-    if (1 < iVar4) {
+    loopIndex = (**(code **)(*param_2 + 0x14))(param_2);
+    if (1 < loopIndex) {
       uVar7 = FUN_00105594(param_2,2);
-      iVar4 = FUN_001054ec(param_2,2);
-      uVar2 = ((int (*)())FUN_0019a6f0)(uVar7,(uint)*(byte *)(iVar4 + 0x10),local_48);
+      loopIndex = FUN_001054ec(param_2,2);
+      uVar2 = ((int (*)())FUN_0019a6f0)(uVar7,(uint)*(byte *)(loopIndex + 0x10),local_48);
       uVar3 = *puVar11;
       uVar2 = (uVar2 & 7) << 0x10;
       *puVar11 = uVar2 | uVar3 & 0xfff8ffff;
@@ -2852,31 +2852,31 @@ int FUN_0019ca78(param_1, param_2, param_3)
     }
     goto LAB_0019d024;
   }
-  *puVar11 = *(uint *)(&DAT_001b2c14 + iVar4 * 4) & 3 | uVar10 & 0xfffffffc;
-  iVar4 = (**(code **)(*piVar5 + 0x60))(piVar5,(int)uVar13,a2,in_r6,in_r7,in_r8,iVar4 * 4);
-  if (iVar4 == 0) {
-    iVar4 = FUN_00126708(piVar5[0x26]);
+  *puVar11 = *(uint *)(&DAT_001b2c14 + loopIndex * 4) & 3 | uVar10 & 0xfffffffc;
+  loopIndex = (**(code **)(*piVar5 + 0x60))(piVar5,(int)uVar13,a2,in_r6,in_r7,in_r8,loopIndex * 4);
+  if (loopIndex == 0) {
+    loopIndex = FUN_00126708(piVar5[0x26]);
   }
   else {
-    iVar4 = FUN_00105594(piVar5,1);
-    iVar4 = FUN_00126708(*(undefined4 *)(iVar4 + 0x98));
+    loopIndex = FUN_00105594(piVar5,1);
+    loopIndex = FUN_00126708(*(undefined4 *)(loopIndex + 0x98));
   }
-  if ((iVar4 != 0) && (*(uint *)(param_1 + 0x4c) < uVar3)) {
+  if ((loopIndex != 0) && (*(uint *)(param_1 + 0x4c) < uVar3)) {
     *(uint *)(param_1 + 0x4c) = uVar3;
   }
   *puVar11 = (uVar3 & 0xff) << 5 | *puVar11 & 0xffffe01f;
-  iVar4 = FUN_001054ec(param_2,1);
-  uVar3 = *(uint *)(iVar4 + 0x10);
-  iVar4 = (**(code **)(*param_2 + 0x14))(param_2);
+  loopIndex = FUN_001054ec(param_2,1);
+  uVar3 = *(uint *)(loopIndex + 0x10);
+  loopIndex = (**(code **)(*param_2 + 0x14))(param_2);
   uVar2 = uVar3;
-  if (1 < iVar4) {
-    iVar4 = FUN_001054ec(param_2,2);
-    uVar2 = *(uint *)(iVar4 + 0x10);
+  if (1 < loopIndex) {
+    loopIndex = FUN_001054ec(param_2,2);
+    uVar2 = *(uint *)(loopIndex + 0x10);
   }
-  iVar4 = (**(code **)(*piVar5 + 0x60))(piVar5);
-  if (iVar4 == 0) {
-    iVar4 = (**(code **)(*param_2 + 0x14))(param_2);
-    if (iVar4 < 2) {
+  loopIndex = (**(code **)(*piVar5 + 0x60))(piVar5);
+  if (loopIndex == 0) {
+    loopIndex = (**(code **)(*param_2 + 0x14))(param_2);
+    if (loopIndex < 2) {
       uVar3 = *(uint *)(&DAT_001b2be8 + (uVar3 & 0xff) * 4);
       uVar2 = uVar3;
     }
@@ -2886,22 +2886,22 @@ int FUN_0019ca78(param_1, param_2, param_3)
     }
   }
   else {
-    iVar4 = FUN_001054ec(piVar5,1);
-    uVar7 = *(undefined4 *)(iVar4 + 0x10);
+    loopIndex = FUN_001054ec(piVar5,1);
+    uVar7 = *(undefined4 *)(loopIndex + 0x10);
     FUN_000f2bdc(&local_38,uVar7,uVar3);
     if (((uVar3 & 0xff) == 4) || ((local_38 & 0xff) == 4)) {
-      iVar4 = 1;
+      loopIndex = 1;
       if (0 < piVar5[0x21]) {
         do {
-          iVar6 = FUN_001054ec(piVar5,iVar4);
+          iVar6 = FUN_001054ec(piVar5,loopIndex);
           bVar1 = *(byte *)(iVar6 + 0x13);
           if (bVar1 != 4) {
-            uVar12 = FUN_00105594(piVar5,iVar4);
+            uVar12 = FUN_00105594(piVar5,loopIndex);
             uVar3 = ((int (*)())FUN_0019a6f0)(uVar12,(uint)bVar1,local_48);
             goto LAB_0019cf10;
           }
-          iVar4 = iVar4 + 1;
-        } while (iVar4 <= piVar5[0x21]);
+          loopIndex = loopIndex + 1;
+        } while (loopIndex <= piVar5[0x21]);
       }
       uVar3 = 0;
     }
@@ -2909,25 +2909,25 @@ int FUN_0019ca78(param_1, param_2, param_3)
       uVar3 = *(uint *)(&DAT_001b2be8 + (local_38 & 0xff) * 4);
     }
 LAB_0019cf10:
-    iVar4 = (**(code **)(*param_2 + 0x14))(param_2);
-    if (1 < iVar4) {
+    loopIndex = (**(code **)(*param_2 + 0x14))(param_2);
+    if (1 < loopIndex) {
       FUN_000f2bdc(local_34,uVar7,uVar2);
       if ((uVar2 >> 0x18 != 4) && (local_34[0] >> 0x18 != 4)) {
         uVar2 = *(uint *)(&DAT_001b2be8 + (local_34[0] >> 0x18) * 4);
         goto LAB_0019d014;
       }
-      iVar4 = 1;
+      loopIndex = 1;
       if (0 < piVar5[0x21]) {
         do {
-          iVar6 = FUN_001054ec(piVar5,iVar4);
+          iVar6 = FUN_001054ec(piVar5,loopIndex);
           bVar1 = *(byte *)(iVar6 + 0x10);
           if (bVar1 != 4) {
-            uVar7 = FUN_00105594(piVar5,iVar4);
+            uVar7 = FUN_00105594(piVar5,loopIndex);
             uVar2 = ((int (*)())FUN_0019a6f0)(uVar7,(uint)bVar1,local_48);
             goto LAB_0019d014;
           }
-          iVar4 = iVar4 + 1;
-        } while (iVar4 <= piVar5[0x21]);
+          loopIndex = loopIndex + 1;
+        } while (loopIndex <= piVar5[0x21]);
       }
     }
     uVar2 = 0;
@@ -2936,8 +2936,8 @@ LAB_0019d014:
   *puVar11 = (uVar2 & 7) << 0x10 | (uVar3 & 7) << 0xd | *puVar11 & 0xfff81fff;
 LAB_0019d024:
   piVar5 = *(int **)(*(int *)(param_1 + 0xc) + 0x30c);
-  iVar4 = (**(code **)(*piVar5 + 0x16c))(piVar5);
-  uVar2 = *(uint *)(*(int *)(param_2[0x22] + 8) * 0x38 + iVar4 + 0xc);
+  loopIndex = (**(code **)(*piVar5 + 0x16c))(piVar5);
+  uVar2 = *(uint *)(*(int *)(param_2[0x22] + 8) * 0x38 + loopIndex + 0xc);
   if (uVar2 == 0xffffffff) {
     if (*(int *)(param_2[0x22] + 8) == 0x66) {
       *puVar11 = *puVar11 & 0xfe18ffff | 0x1450000;
@@ -2950,24 +2950,24 @@ LAB_0019d024:
       *puVar11 = uVar3 | 4;
     }
   }
-  iVar4 = FUN_001054ec(param_2,0);
-  iVar4 = *(int *)(iVar4 + 0x10);
-  if (iVar4 == 0x10101) {
+  loopIndex = FUN_001054ec(param_2,0);
+  loopIndex = *(int *)(loopIndex + 0x10);
+  if (loopIndex == 0x10101) {
     *puVar11 = *puVar11 & 0xe7ffffff;
   }
-  else if (iVar4 == 0x1000101) {
+  else if (loopIndex == 0x1000101) {
     *puVar11 = *puVar11 & 0xe7ffffff | 0x8000000;
   }
-  else if (iVar4 == 0x1010001) {
+  else if (loopIndex == 0x1010001) {
     *puVar11 = *puVar11 & 0xe7ffffff | 0x10000000;
   }
-  else if (iVar4 == 0x1010100) {
+  else if (loopIndex == 0x1010100) {
     *puVar11 = *puVar11 & 0xe7ffffff | 0x18000000;
   }
-  iVar4 = thunk_FUN_00134de8(*(undefined4 *)(*(int *)(param_1 + 0xc) + 0x6c4),param_2);
+  loopIndex = thunk_FUN_00134de8(*(undefined4 *)(*(int *)(param_1 + 0xc) + 0x6c4),param_2);
   piVar5 = *(int **)(*(int *)(param_1 + 0xc) + 0x30c);
   iVar6 = (**(code **)(*piVar5 + 0x138))(piVar5,0);
-  *puVar11 = (iVar4 - iVar6) * 0x80000 & 0x180000U | *puVar11 & 0xffe7ffff;
+  *puVar11 = (loopIndex - iVar6) * 0x80000 & 0x180000U | *puVar11 & 0xffe7ffff;
   if (param_2[0x48] != 0) {
     piVar5 = *(int **)(*(int *)(param_1 + 0xc) + 0x30c);
     (**(code **)(*piVar5 + 0x80))(piVar5);
