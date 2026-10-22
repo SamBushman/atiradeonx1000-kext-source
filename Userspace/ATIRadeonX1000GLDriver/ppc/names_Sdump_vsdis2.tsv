@@ -1,0 +1,156 @@
+# local rows: VS disassembler decoders (FUN_000cdc3c, cd404, cf2ec, ced58, d002c, ce514)
+local	FUN_000cdc3c	param_1	unusedArg	UNKNOWN	not used by the body (carried from the caller)
+local	FUN_000cdc3c	param_2	significantDigits	CONFIRMED	digit count passed to ecvt
+local	FUN_000cdc3c	param_3	outText	CONFIRMED	destination text (plain decimal or d.dddde[-]xx)
+local	FUN_000cdc3c	fparam_1	value	CONFIRMED	the double being formatted (passed to ecvt)
+local	FUN_000cdc3c	local_94	ecvtSign	CONFIRMED	ecvt sign output: non-zero = negative
+local	FUN_000cdc3c	local_98	decimalPointOrRemainder	INFERRED	ecvt decimal-point position, then reused as the running remainder of the exponent digits
+local	FUN_000cdc3c	pcVar7	digitsOrOutCursor	INFERRED	ecvt digit string, then the output cursor in the exponent branch
+local	FUN_000cdc3c	bVar1	isNegative	CONFIRMED	ecvtSign != 0: a leading "-" was written
+local	FUN_000cdc3c	uVar13	signOffsetOrExponent	INFERRED	1 when a sign was written, else 0; in the exponent branch the absolute exponent
+local	FUN_000cdc3c	iVar4	outPosition	INFERRED	write index into outText
+local	FUN_000cdc3c	iVar8	scratchIndex	INFERRED	running write index / temporary integer
+local	FUN_000cdc3c	pcVar9	copyCursor	INFERRED	cursor while copying digits
+local	FUN_000cdc3c	cVar6	digitChar	INFERRED	digit being written (digit value + 0x30)
+local	FUN_000cdc3c	uVar5	powerOfTen	INFERRED	integer value of 10^k used to extract an exponent digit
+local	FUN_000cdc3c	uVar10	exponentDigitCount	INFERRED	number of exponent digits minus one (log10 of the exponent)
+local	FUN_000cdc3c	uVar12	digitExponent	INFERRED	exponent of the digit being extracted, counted down
+local	FUN_000cdc3c	dVar2	i2dMagic	CONFIRMED	DOUBLE_001aa1e0: 2^52 + 2^31, int-to-double conversion constant
+local	FUN_000cdc3c	dVar3	twoPow31	CONFIRMED	DOUBLE_001aa1e8: 2^31, the fctiwz range split
+local	FUN_000cdc3c	dVar14	logValue	INFERRED	log(exponent)/log(10)
+local	FUN_000cdc3c	dVar15	powValue	INFERRED	10^digitExponent
+local	FUN_000cdc3c	dVar16	digitExponentAsDouble	INFERRED	digitExponent converted to double
+local	FUN_000cdc3c	local_80	fctiwzScratch1	INFERRED	long long store slot of a double -> int conversion
+local	FUN_000cdc3c	local_78	fctiwzScratch2	INFERRED	long long store slot
+local	FUN_000cdc3c	local_68	fctiwzScratch3	INFERRED	long long store slot
+local	FUN_000cdc3c	local_60	fctiwzScratch4	INFERRED	long long store slot
+local	FUN_000cdc3c	local_58	fctiwzScratch5	INFERRED	long long store slot
+local	FUN_000cdc3c	local_50	fctiwzScratch6	INFERRED	long long store slot
+local	FUN_000cd404	param_1	sinkContext	INFERRED	first argument forwarded to FUN_000cd3a4 (the sink function argument)
+local	FUN_000cd404	param_2	shaderState	CONFIRMED	SC_SHADERSTATE: int const arrays [0..2] (VS PS GS, 16 bytes each: count, loop start, loop step) with counts [3..5], bool arrays [6..8] counts [9..0xb], float const arrays [0xc..0xe] counts [0xf..0x11], u32Copts [0x15], available-constant tables [0x16], [0x1e], [0x26]
+local	FUN_000cd404	param_3	sinkRecord	INFERRED	record whose first word is the sink function pointer (see FUN_000cd3a4)
+local	FUN_000cd404	param_4	argR6	UNKNOWN	printf pass-through slot
+local	FUN_000cd404	param_5	argR7Text	INFERRED	printf slot reused as a text pointer / value argument
+local	FUN_000cd404	param_6	argR8Text	INFERRED	printf slot reused as a value argument
+local	FUN_000cd404	param_7	argR9Text	INFERRED	printf slot reused as a value argument
+local	FUN_000cd404	param_8	argR10Text	INFERRED	printf slot reused as a value argument
+local	FUN_000cd404	uVar1	floatTextResult	INFERRED	return value of the float formatter / sink call, passed along
+local	FUN_000cd404	uVar2	constIndex	INFERRED	index of the constant being printed
+local	FUN_000cd404	uVar4	nextConstIndex	INFERRED	constIndex + 1 / loop counter
+local	FUN_000cd404	iVar3	constEntryOffset	INFERRED	byte offset or pointer of the current constant entry
+local	FUN_000cd404	acStack_238	componentText0	CONFIRMED	text of float component x (FUN_000cdc3c, 10 digits)
+local	FUN_000cd404	auStack_1b8	componentText1	CONFIRMED	text of float component y
+local	FUN_000cd404	auStack_138	componentText2	CONFIRMED	text of float component z
+local	FUN_000cd404	auStack_b8	componentText3	CONFIRMED	text of float component w
+local	FUN_000cf2ec	param_1	disasmCtx	INFERRED	unused
+local	FUN_000cf2ec	param_2	instructionWordPtr	CONFIRMED	pointer to the vector-engine instruction word; opcode = word & 0xff
+local	FUN_000cf2ec	param_3	mnemonicText	CONFIRMED	written: 4-byte prefix ("   ", "!p ", " p ") then the 10-character mnemonic (NOPve DP4 MULve ADD MAD DST FRC ... Prd_EQ ... MADmac M2xADDmac)
+local	FUN_000cf2ec	param_4	flagOut	INFERRED	set to 1 when bit 28 of the word is set
+local	FUN_000cf2ec	param_5	sourceCountOut	CONFIRMED	number of source operands of the opcode (0..3)
+local	FUN_000cf2ec	uVar1	instructionWord	CONFIRMED	*instructionWordPtr: bits 26/27 select the predicate prefix
+local	FUN_000cf2ec	local_18	returnCode	INFERRED	always 0 in the decoded cases
+local	FUN_000ced58	param_1	disasmCtx	INFERRED	unused
+local	FUN_000ced58	param_2	instructionWordPtr	CONFIRMED	pointer to the math-engine instruction word (the previous vector word is at [-3]); returns the pointer + 1
+local	FUN_000ced58	param_3	mnemonicText	CONFIRMED	written: "Du" prefix then the 10-character mnemonic (NOPme EXPP LOGP EXPPE LIT POW RCP ...)
+local	FUN_000ced58	param_4	operandText0	INFERRED	first source operand text
+local	FUN_000ced58	param_5	operandText1	INFERRED	second source operand text, then the .xyzw swizzle characters
+local	FUN_000ced58	uVar12	instructionWord	CONFIRMED	the math-engine instruction word
+local	FUN_000ced58	uVar9	previousWord	INFERRED	param_2[-3]: the paired vector instruction word
+local	FUN_000ced58	uVar10	negateBits	CONFIRMED	word & 0x18000000: negate bits of the sources
+local	FUN_000ced58	uVar3	opcodeIndex	CONFIRMED	word>>21 & 0xf | (word & 4)<<2 | 0x40: math-engine opcode 0x40..0x5c
+local	FUN_000ced58	uVar8	opcodeOffset	INFERRED	opcodeIndex - 0x40
+local	FUN_000ced58	uVar11	registerTypeOrLoopIndex	INFERRED	word & 0xf (register type), later the swizzle loop counter
+local	FUN_000ced58	uVar2	prefixHigh	INFERRED	upper word of the "Du" prefix constant
+local	FUN_000ced58	iVar7	prefixLowOrZero	INFERRED	lower word of the "Du" prefix constant, later 0 (pass-through)
+local	FUN_000ced58	puVar5	operandText0Copy	INFERRED	copy of param_4
+local	FUN_000ced58	puVar6	operandText1Copy	INFERRED	copy of param_5
+local	FUN_000ced58	in_r8	argR8	UNKNOWN	Ghidra register input
+local	FUN_000ced58	in_r10	argR10	UNKNOWN	Ghidra register input
+local	FUN_000ced58	bVar1	moreComponents	INFERRED	swizzle loop counter != 1
+local	FUN_000ced58	auStack_48	indexText	CONFIRMED	"%d" of the register index
+local	FUN_000ced58	auStack_43	indexTextTail	INFERRED	bytes after the first of the index text buffer
+local	FUN_000d002c	param_3	mnemonicTextPtr	INFERRED	pointer to the instruction text buffer (printf slot)
+local	FUN_000d002c	param_4	operandText0Ptr	INFERRED	printf slot holding the first operand text
+local	FUN_000d002c	param_5	operandText1Ptr	INFERRED	printf slot holding the second operand text
+local	FUN_000d002c	param_6	operandText2Ptr	INFERRED	printf slot holding the third operand text
+local	FUN_000d002c	param_7	operandText3Ptr	INFERRED	printf slot holding the fourth operand text
+local	FUN_000d002c	param_8	argR10	UNKNOWN	printf pass-through slot
+local	FUN_000d002c	iVar5	instructionPtr	CONFIRMED	current instruction word pointer
+local	FUN_000d002c	iVar1	decodeResult	INFERRED	return of FUN_000cff30: non-zero = the instruction is a flow-control word
+local	FUN_000d002c	iVar3	instructionCount	CONFIRMED	shaderState+0x65c
+local	FUN_000d002c	uVar2	nextWordPtr	INFERRED	pointer returned by the operand decoders (next word)
+local	FUN_000d002c	local_d8	isMathEngineOp	INFERRED	output flag of FUN_000cff30/FUN_000cf2ec
+local	FUN_000d002c	local_d4	sourceCount	CONFIRMED	number of source operands (0..3)
+local	FUN_000d002c	auStack_ba	mnemonicText	CONFIRMED	mnemonic and destination text
+local	FUN_000d002c	aiStack_78	operandText0	CONFIRMED	first operand text (FUN_000cea6c destination)
+local	FUN_000d002c	aiStack_d0	operandText1	CONFIRMED	second operand text (FUN_000ce148 source)
+local	FUN_000d002c	auStack_8e	operandText2	CONFIRMED	third operand text
+local	FUN_000d002c	auStack_a4	operandText3	CONFIRMED	fourth operand text
+local	FUN_000ce514	param_1	disasmCtx	CONFIRMED	disassembler context for the sink
+local	FUN_000ce514	param_2	outputMapEntry	INFERRED	12-byte output semantic mapping: +0 semantic kind (0 IL_pos, 1 IL_pointsize, 2 IL_color, 3 IL_backcolor, 4 IL_fog, 5 IL_generic, else IL_unknown), +1 index, +4..+7 destination o registers, +8..+0xb component selects, bit 0 of the first word = valid
+local	FUN_000ce514	param_3	argR5	UNKNOWN	pass-through slot
+local	FUN_000ce514	param_4	argR6	UNKNOWN	pass-through slot
+local	FUN_000ce514	param_5	argR7	UNKNOWN	pass-through slot
+local	FUN_000ce514	param_6	argR8	UNKNOWN	pass-through slot
+local	FUN_000ce514	param_7	argR9	UNKNOWN	pass-through slot
+local	FUN_000ce514	param_8	argR10Value	INFERRED	printf slot reused for string bytes
+local	FUN_000ce514	pcVar7	semanticNameOrValue	INFERRED	pointer to the semantic name ("IL_pos"...), later reused as a pass-through value
+local	FUN_000ce514	local_1f8	semanticNameText	CONFIRMED	copy of the semantic name characters
+local	FUN_000ce514	local_1f4	semanticNameText4	INFERRED	bytes 4.. of the copied name
+local	FUN_000ce514	local_1f0	semanticNameText8	INFERRED	bytes 8.. of the copied name
+local	FUN_000ce514	local_1ec	semanticNameText12	INFERRED	byte 12 of the copied name
+local	FUN_000ce514	local_218	componentLetters	CONFIRMED	"xyzw" followed by the "%d" index text
+local	FUN_000ce514	local_20c	componentSources	INFERRED	per-component source indices
+local	FUN_000ce514	uVar11	componentMask	CONFIRMED	*entry >> 4 & 0xf: which of the four output components are written
+local	FUN_000ce514	uVar9	componentBit	INFERRED	bit number of the component being examined
+local	FUN_000ce514	bVar1	sourcesDiffer	INFERRED	components come from different source registers (needs one text per component)
+local	FUN_000ce514	bVar2	componentSource	INFERRED	source byte of the current component
+local	FUN_000ce514	pcVar8	componentCursorA	INFERRED	cursor over the component records
+local	FUN_000ce514	pcVar6	entryCursor	INFERRED	cursor over the entry bytes
+local	FUN_000ce514	puVar10	componentTextCursor	INFERRED	cursor over the per-component text buffers
+local	FUN_000ce514	iVar12	componentsRemaining	INFERRED	countdown of the 4 components
+local	FUN_000ce514	acVar3	nameCopyCursor	INFERRED	address of the name copy buffer tail
+local	FUN_000ce514	uVar4	oneArg	INFERRED	constant 1 passed as a printf argument
+local	FUN_000ce514	auStack_1b8	destinationText	CONFIRMED	destination text: "o%d.xyzw" or the per-component list
+local	FUN_000ce514	auStack_138	componentText0	INFERRED	text of output component 0
+local	FUN_000ce514	auStack_f8	componentText1	INFERRED	text of output component 1
+local	FUN_000ce514	auStack_b8	componentText2	INFERRED	text of output component 2
+local	FUN_000ce514	acStack_78	componentText3	INFERRED	text of output component 3
+local	FUN_000d0304	param_1	sinkArg	INFERRED	stored at sink record +0xc (argument given to the sink function)
+local	FUN_000d0304	param_2	shaderState	CONFIRMED	passed to FUN_000ce88c, which prints "VS Data" from it
+local	FUN_000d0304	param_3	sinkFn	CONFIRMED	stored at sink record +8 and as the sink record's function
+local	FUN_000d0304	param_4	argR6	UNKNOWN	pass-through slot
+local	FUN_000d0304	param_5	argR7	UNKNOWN	pass-through slot
+local	FUN_000d0304	param_6	argR8	UNKNOWN	pass-through slot
+local	FUN_000d0304	param_7	argR9	UNKNOWN	pass-through slot
+local	FUN_000d0304	uVar1	sinkFnCopy	INFERRED	copy of param_3 kept as the third call argument
+local	FUN_000d0304	in_r10	argR10	UNKNOWN	Ghidra register input
+local	FUN_000d0304	auStack_38	sinkRecordHeader	INFERRED	first 8 bytes of the on-stack sink record (zeroed by FUN_000ce038)
+local	FUN_000d0304	local_30	sinkRecordFn	CONFIRMED	sink record +8: the sink function
+local	FUN_000d0304	local_2c	sinkRecordArg	CONFIRMED	sink record +0xc: its argument
+local	FUN_000d035c	param_1	sinkArg	INFERRED	stored at sink record +0xc
+local	FUN_000d035c	param_2	shaderState	CONFIRMED	passed to FUN_000d002c, which prints "VS Disassembly" from it
+local	FUN_000d035c	param_3	optionsArg	UNKNOWN	forwarded to FUN_000d002c unchanged
+local	FUN_000d035c	param_4	sinkFn	CONFIRMED	stored at sink record +8
+local	FUN_000d035c	param_5	argR7	UNKNOWN	pass-through slot
+local	FUN_000d035c	param_6	argR8	UNKNOWN	pass-through slot
+local	FUN_000d035c	param_7	argR9	UNKNOWN	pass-through slot
+local	FUN_000d035c	uVar1	sinkFnCopy	INFERRED	copy of param_4
+local	FUN_000d035c	in_r10	argR10	UNKNOWN	Ghidra register input
+local	FUN_000d035c	auStack_38	sinkRecordHeader	INFERRED	first 8 bytes of the on-stack sink record
+local	FUN_000d035c	local_30	sinkRecordFn	CONFIRMED	sink record +8: the sink function
+local	FUN_000d035c	local_2c	sinkRecordArg	CONFIRMED	sink record +0xc: its argument
+local	FUN_000cdbe4	param_1	sinkArg	INFERRED	forwarded as the sink argument
+local	FUN_000cdbe4	param_2	shaderState	CONFIRMED	+0xfc = shader type (1..3), +0xf8 = 0 vertex / 1 pixel dump path
+local	FUN_000cdbe4	param_3	sinkFn	CONFIRMED	must be non-NULL
+local	FUN_000cdbe4	param_4	argR6	UNKNOWN	pass-through slot
+local	FUN_000cdbe4	param_5	argR7	UNKNOWN	pass-through slot
+local	FUN_000cdbe4	param_6	argR8	UNKNOWN	pass-through slot
+local	FUN_000cdbe4	param_7	argR9	UNKNOWN	pass-through slot
+local	FUN_000cdba4	param_1	sinkArg	INFERRED	forwarded as the sink argument
+local	FUN_000cdba4	param_2	shaderState	CONFIRMED	+0xfc = shader type (1..3), +0xf8 = 0 vertex / 1 pixel disassembly path
+local	FUN_000cdba4	param_3	optionsArg	UNKNOWN	forwarded unchanged
+local	FUN_000cdba4	param_4	argR6	UNKNOWN	pass-through slot
+local	FUN_000cdba4	param_5	sinkFn	CONFIRMED	must be non-NULL and is forwarded as the sink function
+local	FUN_000cdba4	param_6	argR8	UNKNOWN	pass-through slot
+local	FUN_000cdba4	param_7	argR9	UNKNOWN	pass-through slot
