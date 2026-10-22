@@ -1,7 +1,7 @@
 #include "decls.h"
 
-/* FUN_00083100 @ 0x83100 (4 bytes) */
-int FUN_00083100()
+/* noop_83100 @ 0x83100 (4 bytes) */
+int noop_83100()
 {
   return;
 }
@@ -3428,8 +3428,8 @@ int FUN_00087960(param_1)
   return;
 }
 
-/* FUN_000879e0 @ 0x879e0 (4 bytes) */
-int FUN_000879e0()
+/* noop_879e0 @ 0x879e0 (4 bytes) */
+int noop_879e0()
 {
   return;
 }
@@ -4723,7 +4723,7 @@ asm(".set FUN_000864e0, _FUN_000864e0");
 asm(".globl FUN_00087960");
 asm(".set FUN_00087960, _FUN_00087960");
 asm(".globl FUN_000879e0");
-asm(".set FUN_000879e0, _FUN_000879e0");
+asm(".set FUN_000879e0, _noop_879e0");
 asm(".globl FUN_00087cd0");
 asm(".set FUN_00087cd0, _FUN_00087cd0");
 asm(".globl FUN_00087da0");

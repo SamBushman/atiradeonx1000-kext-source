@@ -1,12 +1,12 @@
 entry	function	register	class	callers setting it	first reader
-1ecd0	FUN_0001ecd0	f1	RET	callers set it 0/0	1fcfc blr 
-1ecd0	FUN_0001ecd0	f2	RET	callers set it 0/0	1fcfc blr 
-1ecd0	FUN_0001ecd0	f3	PASS-indirect	callers set it 0/0	1ef5c bl 0x2cc30
-1ecd0	FUN_0001ecd0	f4	PASS-indirect	callers set it 0/0	1ef5c bl 0x2cc30
-1ecd0	FUN_0001ecd0	f5	PASS-indirect	callers set it 0/0	1ef5c bl 0x2cc30
-1ecd0	FUN_0001ecd0	f6	PASS-indirect	callers set it 0/0	1ef5c bl 0x2cc30
-1ecd0	FUN_0001ecd0	f7	PASS-indirect	callers set it 0/0	1ef5c bl 0x2cc30
-1ecd0	FUN_0001ecd0	f8	PASS-indirect	callers set it 0/0	1ef5c bl 0x2cc30
+1ecd0	gld_drawVertexArray	f1	RET	callers set it 0/0	1fcfc blr 
+1ecd0	gld_drawVertexArray	f2	RET	callers set it 0/0	1fcfc blr 
+1ecd0	gld_drawVertexArray	f3	PASS-indirect	callers set it 0/0	1ef5c bl 0x2cc30
+1ecd0	gld_drawVertexArray	f4	PASS-indirect	callers set it 0/0	1ef5c bl 0x2cc30
+1ecd0	gld_drawVertexArray	f5	PASS-indirect	callers set it 0/0	1ef5c bl 0x2cc30
+1ecd0	gld_drawVertexArray	f6	PASS-indirect	callers set it 0/0	1ef5c bl 0x2cc30
+1ecd0	gld_drawVertexArray	f7	PASS-indirect	callers set it 0/0	1ef5c bl 0x2cc30
+1ecd0	gld_drawVertexArray	f8	PASS-indirect	callers set it 0/0	1ef5c bl 0x2cc30
 22ce0	_gldInitDispatch	f2	PASS-yes	callers set it 0/0	22d78 bl 0xa82c0
 22ce0	_gldInitDispatch	f3	PASS-no	callers set it 0/0	22d78 bl 0xa82c0
 22ce0	_gldInitDispatch	f4	PASS-no	callers set it 0/0	22d78 bl 0xa82c0
@@ -14,13 +14,13 @@ entry	function	register	class	callers setting it	first reader
 22ce0	_gldInitDispatch	f6	PASS-no	callers set it 0/0	22d78 bl 0xa82c0
 22ce0	_gldInitDispatch	f7	PASS-no	callers set it 0/0	22d78 bl 0xa82c0
 22ce0	_gldInitDispatch	f8	PASS-no	callers set it 0/0	22d78 bl 0xa82c0
-2c790	FUN_0002c790	f2	PASS-no	callers set it 0/1	2c7c8 bl 0x1a3760	; symbol stub for: _memset
-2c790	FUN_0002c790	f3	PASS-no	callers set it 0/1	2c7c8 bl 0x1a3760	; symbol stub for: _memset
-2c790	FUN_0002c790	f4	PASS-no	callers set it 0/1	2c7c8 bl 0x1a3760	; symbol stub for: _memset
-2c790	FUN_0002c790	f5	PASS-no	callers set it 0/1	2c7c8 bl 0x1a3760	; symbol stub for: _memset
-2c790	FUN_0002c790	f6	PASS-no	callers set it 0/1	2c7c8 bl 0x1a3760	; symbol stub for: _memset
-2c790	FUN_0002c790	f7	PASS-no	callers set it 0/1	2c7c8 bl 0x1a3760	; symbol stub for: _memset
-2c790	FUN_0002c790	f8	PASS-no	callers set it 0/1	2c7c8 bl 0x1a3760	; symbol stub for: _memset
+2c790	gld_initContextHardwareState	f2	PASS-no	callers set it 0/1	2c7c8 bl 0x1a3760	; symbol stub for: _memset
+2c790	gld_initContextHardwareState	f3	PASS-no	callers set it 0/1	2c7c8 bl 0x1a3760	; symbol stub for: _memset
+2c790	gld_initContextHardwareState	f4	PASS-no	callers set it 0/1	2c7c8 bl 0x1a3760	; symbol stub for: _memset
+2c790	gld_initContextHardwareState	f5	PASS-no	callers set it 0/1	2c7c8 bl 0x1a3760	; symbol stub for: _memset
+2c790	gld_initContextHardwareState	f6	PASS-no	callers set it 0/1	2c7c8 bl 0x1a3760	; symbol stub for: _memset
+2c790	gld_initContextHardwareState	f7	PASS-no	callers set it 0/1	2c7c8 bl 0x1a3760	; symbol stub for: _memset
+2c790	gld_initContextHardwareState	f8	PASS-no	callers set it 0/1	2c7c8 bl 0x1a3760	; symbol stub for: _memset
 4eba0	FUN_0004eba0	f2	PASS-yes	callers set it 0/1	4ebf4 bl 0x1a010
 4eba0	FUN_0004eba0	f3	PASS-no	callers set it 0/1	4ebf4 bl 0x1a010
 4eba0	FUN_0004eba0	f4	PASS-no	callers set it 0/1	4ebf4 bl 0x1a010

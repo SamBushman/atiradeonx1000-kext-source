@@ -2629,120 +2629,120 @@ int FUN_0011379c(param_1, param_2)
   return uVar3;
 }
 
-/* FUN_00113818 @ 0x113818 (40 bytes) */
-int FUN_00113818()
+/* IrRecipSqrtClamp__opcodeInfo_atexit_dtor_op65 @ 0x113818 (40 bytes) */
+int IrRecipSqrtClamp__opcodeInfo_atexit_dtor_op65()
 {
   DAT_001fb93c = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113840 @ 0x113840 (40 bytes) */
-int FUN_00113840()
+/* IrRecipSqrtFF__opcodeInfo_atexit_dtor_op66 @ 0x113840 (40 bytes) */
+int IrRecipSqrtFF__opcodeInfo_atexit_dtor_op66()
 {
   DAT_001fb928 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113868 @ 0x113868 (40 bytes) */
-int FUN_00113868()
+/* IrRecipSqrtIEEE__opcodeInfo_atexit_dtor_op67 @ 0x113868 (40 bytes) */
+int IrRecipSqrtIEEE__opcodeInfo_atexit_dtor_op67()
 {
   DAT_001fb914 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113890 @ 0x113890 (40 bytes) */
-int FUN_00113890()
+/* IrRecipClamp__opcodeInfo_atexit_dtor_op62 @ 0x113890 (40 bytes) */
+int IrRecipClamp__opcodeInfo_atexit_dtor_op62()
 {
   DAT_001fbf90 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_001138b8 @ 0x1138b8 (40 bytes) */
-int FUN_001138b8()
+/* IrRecipFF__opcodeInfo_atexit_dtor_op63 @ 0x1138b8 (40 bytes) */
+int IrRecipFF__opcodeInfo_atexit_dtor_op63()
 {
   DAT_001fbf7c = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_001138e0 @ 0x1138e0 (40 bytes) */
-int FUN_001138e0()
+/* IrRecipIEEE__opcodeInfo_atexit_dtor_op64 @ 0x1138e0 (40 bytes) */
+int IrRecipIEEE__opcodeInfo_atexit_dtor_op64()
 {
   DAT_001fbf68 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113908 @ 0x113908 (40 bytes) */
-int FUN_00113908()
+/* IrMulFloat__opcodeInfo_atexit_dtor_op19 @ 0x113908 (40 bytes) */
+int IrMulFloat__opcodeInfo_atexit_dtor_op19()
 {
   DAT_001fc134 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113930 @ 0x113930 (40 bytes) */
-int FUN_00113930()
+/* IrMul__opcodeInfo_atexit_dtor_op54 @ 0x113930 (40 bytes) */
+int IrMul__opcodeInfo_atexit_dtor_op54()
 {
   DAT_001fc120 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113958 @ 0x113958 (40 bytes) */
-int FUN_00113958()
+/* IrLogClamp__opcodeInfo_atexit_dtor_op58 @ 0x113958 (40 bytes) */
+int IrLogClamp__opcodeInfo_atexit_dtor_op58()
 {
   DAT_001fb964 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113980 @ 0x113980 (40 bytes) */
-int FUN_00113980()
+/* IrLogIEEE__opcodeInfo_atexit_dtor_op59 @ 0x113980 (40 bytes) */
+int IrLogIEEE__opcodeInfo_atexit_dtor_op59()
 {
   DAT_001fb950 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_001139a8 @ 0x1139a8 (40 bytes) */
-int FUN_001139a8()
+/* IrLoopStart__opcodeInfo_atexit_dtor_001fb478 @ 0x1139a8 (40 bytes) */
+int IrLoopStart__opcodeInfo_atexit_dtor_001fb478()
 {
   DAT_001fb464 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_001139d0 @ 0x1139d0 (40 bytes) */
-int FUN_001139d0()
+/* IrLoopStart__opcodeInfo_atexit_dtor_op129 @ 0x1139d0 (40 bytes) */
+int IrLoopStart__opcodeInfo_atexit_dtor_op129()
 {
   DAT_001fb478 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_001139f8 @ 0x1139f8 (40 bytes) */
-int FUN_001139f8()
+/* IrDot2Add__opcodeInfo_atexit_dtor_op30 @ 0x1139f8 (40 bytes) */
+int IrDot2Add__opcodeInfo_atexit_dtor_op30()
 {
   DAT_001fbdc4 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113a20 @ 0x113a20 (40 bytes) */
-int FUN_00113a20()
+/* IrAdd__opcodeInfo_atexit_dtor_op52 @ 0x113a20 (40 bytes) */
+int IrAdd__opcodeInfo_atexit_dtor_op52()
 {
   DAT_001fc170 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113a48 @ 0x113a48 (40 bytes) */
-int FUN_00113a48()
+/* IrOpDp__opcodeInfo_atexit_dtor_op151 @ 0x113a48 (40 bytes) */
+int IrOpDp__opcodeInfo_atexit_dtor_op151()
 {
   DAT_001fb2c0 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113a70 @ 0x113a70 (40 bytes) */
-int FUN_00113a70()
+/* IrAllocInterp__opcodeInfo_atexit_dtor_op150 @ 0x113a70 (40 bytes) */
+int IrAllocInterp__opcodeInfo_atexit_dtor_op150()
 {
   DAT_001fb2d4 = PTR_DAT_001e8f28 + 8;
   return;
 }
 
-/* FUN_00113a98 @ 0x113a98 (40 bytes) */
-int FUN_00113a98()
+/* IrAllocColor__opcodeInfo_atexit_dtor_op149 @ 0x113a98 (40 bytes) */
+int IrAllocColor__opcodeInfo_atexit_dtor_op149()
 {
   DAT_001fb2e8 = PTR_DAT_001e8f28 + 8;
   return;

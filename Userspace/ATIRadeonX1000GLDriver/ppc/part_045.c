@@ -3827,8 +3827,8 @@ int FUN_00172dc4(param_1, param_2)
   return (compareResult == 0) - 1;
 }
 
-/* FUN_00172dfc @ 0x172dfc (8 bytes) */
-int FUN_00172dfc()
+/* returnZero_172dfc @ 0x172dfc (8 bytes) */
+int returnZero_172dfc()
 {
   return 0;
 }
@@ -3934,8 +3934,8 @@ int FUN_00172f0c(param_1)
   return;
 }
 
-/* FUN_00172f24 @ 0x172f24 (8 bytes) */
-int FUN_00172f24()
+/* returnZero_172f24 @ 0x172f24 (8 bytes) */
+int returnZero_172f24()
 {
   return 0;
 }
@@ -3968,14 +3968,14 @@ int FUN_00172f34(param_1)
   return;
 }
 
-/* FUN_00172fb0 @ 0x172fb0 (4 bytes) */
-int FUN_00172fb0()
+/* noop_172fb0 @ 0x172fb0 (4 bytes) */
+int noop_172fb0()
 {
   return;
 }
 
-/* FUN_00172fb4 @ 0x172fb4 (4 bytes) */
-int FUN_00172fb4()
+/* noop_172fb4 @ 0x172fb4 (4 bytes) */
+int noop_172fb4()
 {
   return;
 }
@@ -4209,7 +4209,7 @@ asm(".set FUN_00172d1c, _FUN_00172d1c");
 asm(".globl FUN_00172dc4");
 asm(".set FUN_00172dc4, _FUN_00172dc4");
 asm(".globl FUN_00172dfc");
-asm(".set FUN_00172dfc, _FUN_00172dfc");
+asm(".set FUN_00172dfc, _returnZero_172dfc");
 asm(".globl FUN_00172e04");
 asm(".set FUN_00172e04, _FUN_00172e04");
 asm(".globl FUN_00172e78");

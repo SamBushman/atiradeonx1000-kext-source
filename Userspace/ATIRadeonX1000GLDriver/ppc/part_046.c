@@ -1311,7 +1311,7 @@ LAB_00174efc:
      ((loopIndex2 = ((int (*)())FUN_00173a48)(param_1[0x2c],param_1[0x8e]), loopIndex2 == 0 &&
       (loopIndex2 = ((int (*)())FUN_0017356c)(param_1), loopIndex2 == 0)))) {
     loopIndex2 = param_1[0x2c];
-    iVar9 = FUN_00172f24(loopIndex2);
+    iVar9 = returnZero_172f24(loopIndex2);
     if (iVar9 == 0) {
       uVar1 = 0;
       loopIndex = 0;
@@ -1960,8 +1960,8 @@ int FUN_0017629c(param_1, param_2)
   return;
 }
 
-/* FUN_001762bc @ 0x1762bc (4 bytes) */
-int FUN_001762bc()
+/* noop_1762bc @ 0x1762bc (4 bytes) */
+int noop_1762bc()
 {
   return;
 }

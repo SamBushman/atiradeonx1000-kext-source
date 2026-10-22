@@ -2120,7 +2120,7 @@ LAB_0008d2d0:
   uVar10 = (**(code **)(callbacks + 0xc))(iVar12 + 0xb);
   *(undefined4 *)(((unsigned char *)0x00001128) + callbacks) = uVar10;
   if ((uint)workArea[0xb] < 10000) {
-    FUN_001a32d0(uVar10,"line %d: %s",workArea[0xb],workArea[0xc],in_r7,in_r8,piVar13,piVar15);
+    printf_LDBLStub_1a32d0(uVar10,"line %d: %s",workArea[0xb],workArea[0xc],in_r7,in_r8,piVar13,piVar15);
   }
   else {
     _strcpy(uVar10,workArea[0xc]);

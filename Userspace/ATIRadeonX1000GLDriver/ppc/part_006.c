@@ -7893,7 +7893,7 @@ int FUN_0004ac90(param_1)
                  (((unsigned char *)0x0000387c) + *(int *)(((unsigned char *)0x000036c0) + *(int *)(param_1 + 0x1e5c))),&local_48,1,
                1);
   }
-  FUN_000b5190(param_1,*(int *)(param_1 + 0x1e5c) + 0x1784,
+  noop_b5190(param_1,*(int *)(param_1 + 0x1e5c) + 0x1784,
                ((unsigned char *)0x00001660) + *(int *)(param_1 + 0x1e5c));
   uVar11 = (uint)*(byte *)(param_1 + 0x20);
   if (uVar11 != 0) {

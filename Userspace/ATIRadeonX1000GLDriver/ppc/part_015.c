@@ -1815,7 +1815,7 @@ LAB_000a41d0:
       *(undefined4 **)(0x00002748 + param_1 + 4) = puVar6 + 1;
       iVar11 = iVar11 + -1;
     } while (iVar11 != 0);
-    /* dropped 2nd arg, same defect class as FUN_0001dff0 (issue #64) - stock stores the
+    /* dropped 2nd arg, same defect class as gld_startPacket (issue #64) - stock stores the
      * just-advanced pointer to +0x274c then loads it right back into r4 before the bctr
      * tail-jump. */
     (**(code **)(param_1 + 0x275c))(param_1,puVar6 + 1);
@@ -3552,8 +3552,8 @@ int FUN_000a6f70(param_1)
   return (int)_calloc(param_1,1);
 }
 
-/* FUN_000a6f80 @ 0xa6f80 (4 bytes) */
-int FUN_000a6f80()
+/* noop_a6f80 @ 0xa6f80 (4 bytes) */
+int noop_a6f80()
 {
   return;
 }
@@ -3881,7 +3881,7 @@ int FUN_000a7050(param_1)
   *(undefined **)(((unsigned char *)0x000013e0) + param_1) = PTR_FUN_001e89c4;
   *(undefined **)(((unsigned char *)0x00001398) + param_1) = puVar2;
   puVar2 = PTR_FUN_001e89fc;
-  *(code **)(((unsigned char *)0x0000139c) + param_1) = FUN_000a6f80;
+  *(code **)(((unsigned char *)0x0000139c) + param_1) = noop_a6f80;
   puVar3 = PTR_FUN_001e8a6c;
   *(undefined **)(((unsigned char *)0x000014b4) + param_1) = puVar2;
   puVar2 = PTR_FUN_001e8a68;

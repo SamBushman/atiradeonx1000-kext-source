@@ -8,7 +8,7 @@ int _gldDestroyShared(shared)
   
   returnCode = 0x2714;
   if (shared != 0) {
-    FUN_00024fc0();
+    noop_24fc0();
     _pthread_mutex_destroy(shared);
     _free(shared);
     returnCode = 0;
@@ -453,7 +453,7 @@ int _gldTestObject(ctx, objectKind, object)
         entryIndex = *object;
         table = *(int *)(ctx + GLD_statusRegion);
       }
-      completed = FUN_0001a0d0(ctx,*(undefined4 *)(entryIndex * 8 + table));
+      completed = gld_isStampRetired(ctx,*(undefined4 *)(entryIndex * 8 + table));
       *(byte *)(object + 1) = completed;
     }
     isDone = (uint)completed;
@@ -481,7 +481,7 @@ int _gldFinishObject(ctx, objectKind, object)
   int entryIndex;
   
   if (objectKind == 1) {
-    FUN_0000aaf0(ctx,object);
+    gld_waitTextureStamp(ctx,object);
     returnCode = 0;
   }
   else if (objectKind == 0) {
@@ -493,7 +493,7 @@ int _gldFinishObject(ctx, objectKind, object)
         entryIndex = *object;
         table = *(int *)(ctx + GLD_statusRegion);
       }
-      table = FUN_0001a0d0(ctx,*(undefined4 *)(entryIndex * 8 + table));
+      table = gld_isStampRetired(ctx,*(undefined4 *)(entryIndex * 8 + table));
       *(char *)(object + 1) = (char)table;
       if (table == 0) {
         _io_connect_method_scalarI_structureI
@@ -505,13 +505,13 @@ int _gldFinishObject(ctx, objectKind, object)
     returnCode = 0;
   }
   else if (objectKind == 2) {
-    FUN_0000b880(ctx,object);
+    gld_waitVertexArrayStamp(ctx,object);
     returnCode = 0;
   }
   else {
     returnCode = 0x271a;
     if (objectKind == 3) {
-      FUN_00005db0(ctx,object);
+      gld_waitBufferStamp(ctx,object);
       returnCode = 0;
     }
   }
@@ -1483,7 +1483,7 @@ int _gldModifyTextureLevel(ctx, texture, face, level)
     if (0x1ffff < *(int *)(resident + 0x10)) {
       _gldFlush(ctx);
     }
-    FUN_0000aaf0(ctx,texture);
+    gld_waitTextureStamp(ctx,texture);
   }
   return 0;
 }
@@ -1658,7 +1658,7 @@ int _gldReclaimTexture(ctx, texture)
     if ((0x1ffff < (int)*(uint *)(unitSlotCursor + 0x10)) || ((*(uint *)(unitSlotCursor + 0x10) & 0xffff) != 0)) {
       _gldFlush(ctx);
     }
-    FUN_0000aaf0(ctx,texture);
+    gld_waitTextureStamp(ctx,texture);
     refCountSlot = (int *)(unitSlotCursor + 0x10);
     do {
       unitOrOldRefCount = *refCountSlot;
@@ -1735,7 +1735,7 @@ int _gldModifyPipelineProgram(ctx, program, changeFlags)
   uint changeFlags;
 {
   *(uint *)(program + 0x3c) = changeFlags | *(uint *)(program + 0x3c);
-  FUN_00024fd0();
+  noop_24fd0();
   return 0;
 }
 
@@ -2254,8 +2254,8 @@ int FUN_00009b70(ctx)
   return returnCode;
 }
 
-/* FUN_00009bd0 @ 0x9bd0 (164 bytes) */
-int FUN_00009bd0(param_1)
+/* gld_waitQueryStamp @ 0x9bd0 (164 bytes) */
+int gld_waitQueryStamp(param_1)
   int param_1;
 {
   int iVar1;
@@ -2266,7 +2266,7 @@ int FUN_00009bd0(param_1)
     if ((0x1ffff < (int)*(uint *)(iVar2 + 0x10)) || ((*(uint *)(iVar2 + 0x10) & 0xffff) != 0)) {
       _gldFlush(param_1);
     }
-    iVar1 = FUN_0001a0d0(param_1,*(undefined4 *)(iVar2 + 8));
+    iVar1 = gld_isStampRetired(param_1,*(undefined4 *)(iVar2 + 8));
     if (iVar1 == 0) {
       _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 4),9,iVar2 + 8,1,0,0);
       return;
@@ -2291,8 +2291,8 @@ int _gldDestroyQuery(ctx, query)
   return 0;
 }
 
-/* FUN_00009cd0 @ 0x9cd0 (152 bytes) */
-int FUN_00009cd0(ctx)
+/* gld_releaseQueryMemory @ 0x9cd0 (152 bytes) */
+int gld_releaseQueryMemory(ctx)
   int ctx;
 {
   int updatedRefCount;
@@ -2304,7 +2304,7 @@ int FUN_00009cd0(ctx)
   
   memory = **(int **)(ctx + GLD_queryRecord);
   if (memory != 0) {
-    ((int (*)())FUN_00009bd0)(ctx);
+    ((int (*)())gld_waitQueryStamp)(ctx);
     refCountSlot = (int *)(memory + 0x10);
     do {
       oldRefCount = *refCountSlot;
@@ -2322,8 +2322,8 @@ int FUN_00009cd0(ctx)
   return 0;
 }
 
-/* FUN_00009d70 @ 0x9d70 (248 bytes) */
-int FUN_00009d70(ctx, record, addressWord, sizeWord, limitWord)
+/* gld_setQueryAgpRefBacking @ 0x9d70 (248 bytes) */
+int gld_setQueryAgpRefBacking(ctx, record, addressWord, sizeWord, limitWord)
   int ctx;
   int *record;
   int addressWord;
@@ -2436,7 +2436,7 @@ LAB_0000a010:
     }
     else {
       if (**(int **)(ctx + GLD_queryRecord) != 0) {
-        ((int (*)())FUN_00009cd0)(ctx);
+        ((int (*)())gld_releaseQueryMemory)(ctx);
       }
       wordByteOffset = *(int *)(ctx + GLD_queryCapacity) * 0x40 + 0x210;
       *(int *)(ctx + GLD_queryCapacity) = *(int *)(ctx + GLD_queryCapacity) << 1;
@@ -2445,10 +2445,10 @@ LAB_0000a010:
       *(int *)(ctx + GLD_queryPool) = wordByteOffset;
       if (wordByteOffset == 0) goto LAB_0000a010;
     }
-    wordByteOffset = ((int (*)())FUN_00009d70)(ctx,*(undefined4 *)(ctx + GLD_queryRecord),*(undefined4 *)(ctx + GLD_queryPool),
+    wordByteOffset = ((int (*)())gld_setQueryAgpRefBacking)(ctx,*(undefined4 *)(ctx + GLD_queryRecord),*(undefined4 *)(ctx + GLD_queryPool),
                          *(undefined4 *)(ctx + GLD_queryPool),*(undefined4 *)(ctx + GLD_queryPoolBytes));
     if (wordByteOffset != 1) goto LAB_0000a010;
-    FUN_0002b3b0(ctx);
+    noop_2b3b0(ctx);
     bitmapWord = *(uint *)(ctx + GLD_queryCapacity);
     scanCounter = bitmapWord >> 3;
     if (*(int *)(ctx + GLD_queryBitmap) == 0) {

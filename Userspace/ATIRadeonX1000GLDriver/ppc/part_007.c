@@ -168,8 +168,8 @@ int FUN_0004c260(param_1, param_2, param_3)
   return param_1;
 }
 
-/* FUN_0004c540 @ 0x4c540 (4 bytes) */
-int FUN_0004c540()
+/* noop_4c540 @ 0x4c540 (4 bytes) */
+int noop_4c540()
 {
   return;
 }
@@ -4334,8 +4334,8 @@ int FUN_00053040(param_1, param_2)
   return 4;
 }
 
-/* FUN_00053060 @ 0x53060 (4 bytes) */
-int FUN_00053060(param_1)
+/* noop_53060 @ 0x53060 (4 bytes) */
+int noop_53060(param_1)
   undefined4 param_1;
 {
   /* hidden-argument defect (hidden_params.py) - real body is a single `blr`: an identity function
@@ -4836,7 +4836,7 @@ int FUN_00053b60(param_1, param_2)
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_0004c540");
-asm(".set FUN_0004c540, _FUN_0004c540");
+asm(".set FUN_0004c540, _noop_4c540");
 asm(".globl FUN_0004c560");
 asm(".set FUN_0004c560, _FUN_0004c560");
 asm(".globl FUN_0004c720");
