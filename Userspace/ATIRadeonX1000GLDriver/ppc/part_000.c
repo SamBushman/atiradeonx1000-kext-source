@@ -3276,280 +3276,280 @@ int FUN_000065b0(param_1, param_2, param_3, param_4, param_5, param_6)
 }
 
 /* _gldCreateContext @ 0x6700 (1696 bytes) */
-int _gldCreateContext(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int *param_1;
-  int param_2;
-  uint param_3;
-  int param_4;
-  uint param_5;
-  uint param_6;
-  uint param_7;
+int _gldCreateContext(contextOut, pixelFormat, contextArg3, shareContext, stateBlock, contextArg6, contextArg7)
+  int *contextOut;
+  int pixelFormat;
+  uint contextArg3;
+  int shareContext;
+  uint stateBlock;
+  uint contextArg6;
+  uint contextArg7;
 {
-  short sVar1;
-  undefined *puVar2;
-  uint uVar3;
-  int iVar4;
-  uint *puVar5;
-  uint uVar6;
-  uint uVar7;
-  undefined4 uVar8;
-  uint *puVar9;
-  uint *puVar10;
-  undefined4 uVar11;
-  int iVar12;
-  uint local_48 [6];
+  short auxBuffers;
+  undefined *libraryOrTaskPtr;
+  uint scratch1;
+  int status;
+  uint *ctx;
+  uint scratch0;
+  uint scratch2;
+  undefined4 task;
+  uint *fenceTablePtr;
+  uint *fenceTableSize;
+  undefined4 mapOptions;
+  int clearCount;
+  uint scalarOut [6];
   
-  if (param_1 == (int *)0x0) {
+  if (contextOut == (int *)0x0) {
     return 0x271e;
   }
-  *param_1 = 0;
-  iVar4 = FUN_0001ac30(param_2);
-  puVar2 = PTR_DAT_001e88ac;
-  if (iVar4 != 0) {
-    return iVar4;
+  *contextOut = 0;
+  status = FUN_0001ac30(pixelFormat);
+  libraryOrTaskPtr = PTR_DAT_001e88ac;
+  if (status != 0) {
+    return status;
   }
-  if (((*(uint *)(param_2 + 0x30) & *(uint *)PTR_DAT_001e88ac) == 0) ||
-     ((*(uint *)(param_2 + 0x30) & ~*(uint *)PTR_DAT_001e88ac) != 0)) {
+  if (((*(uint *)(pixelFormat + 0x30) & *(uint *)PTR_DAT_001e88ac) == 0) ||
+     ((*(uint *)(pixelFormat + 0x30) & ~*(uint *)PTR_DAT_001e88ac) != 0)) {
     return 0x2716;
   }
-  puVar5 = (uint *)_malloc(((unsigned char *)0x00002b98U));
-  if (*(int *)(puVar2 + 4) != 0) {
-    local_48[0] = 0;
-    if ((*(uint *)(param_2 + 0x30) & 1) == 0) {
+  ctx = (uint *)_malloc(((unsigned char *)0x00002b98U));
+  if (*(int *)(libraryOrTaskPtr + 4) != 0) {
+    scalarOut[0] = 0;
+    if ((*(uint *)(pixelFormat + 0x30) & 1) == 0) {
       do {
-        local_48[0] = local_48[0] + 1;
-        if (*(uint *)(PTR_DAT_001e88ac + 4) <= local_48[0]) break;
-      } while ((1 << (local_48[0] & 0x3f) & *(uint *)(param_2 + 0x30)) == 0);
+        scalarOut[0] = scalarOut[0] + 1;
+        if (*(uint *)(PTR_DAT_001e88ac + 4) <= scalarOut[0]) break;
+      } while ((1 << (scalarOut[0] & 0x3f) & *(uint *)(pixelFormat + 0x30)) == 0);
       goto LAB_00006798;
     }
   }
-  local_48[0] = 0;
+  scalarOut[0] = 0;
 LAB_00006798:
-  *puVar5 = local_48[0];
-  puVar2 = PTR_DAT_001e88ac;
-  puVar5[1] = 0;
-  iVar4 = _IOServiceOpen(*(undefined4 *)(local_48[0] * 4 + *(int *)(puVar2 + 8)),
-                         *(undefined4 *)PTR_001e88b4,1,puVar5 + 1);
-  if (iVar4 == 0) {
-    if ((param_4 == 0) ||
-       (iVar4 = _IOConnectAddClient(puVar5[1],*(undefined4 *)(param_4 + 4)), iVar4 == 0)) {
-      local_48[0] = 3;
-      iVar4 = _io_connect_method_scalarI_scalarO(puVar5[1],3,0,0,puVar5 + 9,local_48);
-      puVar2 = PTR_001e88b4;
-      if (iVar4 == 0) {
-        uVar8 = *(undefined4 *)PTR_001e88b4;
-        puVar5[0x8e] = 0;
-        iVar4 = _IOConnectMapMemory(puVar5[1],0,uVar8,puVar5 + 0x8e,local_48,0x101);
-        if (iVar4 == 0) {
-          uVar8 = *(undefined4 *)puVar2;
-          puVar5[0x79] = 0;
-          iVar4 = _IOConnectMapMemory(puVar5[1],1,uVar8,puVar5 + 0x79,puVar5 + 0x7a,1);
-          if (iVar4 == 0) {
-            uVar8 = *(undefined4 *)puVar2;
-            puVar5[0x82] = 0;
-            puVar5[0x7f] = 0;
-            puVar5[0x80] = 0;
-            puVar5[0x7d] = 0;
-            puVar5[0x7e] = 0;
-            puVar5[0x81] = 0;
-            iVar4 = _IOConnectMapMemory(puVar5[1],2,uVar8,puVar5 + 0x82,puVar5 + 0x83,1);
-            if (iVar4 == 0) {
-              uVar8 = *(undefined4 *)puVar2;
-              puVar9 = puVar5 + 0x86;
-              puVar10 = puVar5 + 0x87;
-              uVar11 = 1;
-              puVar5[0x86] = 0;
-              iVar4 = _IOConnectMapMemory(puVar5[1],4,uVar8,puVar9,puVar10,1);
-              if (iVar4 == 0) {
-                uVar6 = _malloc(puVar5[0x87] >> 5);
-                puVar5[0x88] = uVar6;
-                uVar7 = puVar5[0x87] >> 5;
-                _memset(uVar6,0,uVar7);
-                puVar5[0x8d] = 0;
-                puVar5[0x89] = 0;
-                puVar5[0x8a] = 0;
-                puVar5[0x8b] = 0;
-                uVar6 = *(uint *)PTR_001e88b0;
-                puVar5[0x8c] = 0;
-                if ((uVar6 & 8) == 0) {
-                  if ((uVar6 & 0x10) == 0) {
-                    *(undefined1 *)(puVar5 + 2) = 0x20;
+  *ctx = scalarOut[0];
+  libraryOrTaskPtr = PTR_DAT_001e88ac;
+  ctx[1] = 0;
+  status = _IOServiceOpen(*(undefined4 *)(scalarOut[0] * 4 + *(int *)(libraryOrTaskPtr + 8)),
+                         *(undefined4 *)PTR_001e88b4,1,ctx + 1);
+  if (status == 0) {
+    if ((shareContext == 0) ||
+       (status = _IOConnectAddClient(ctx[1],*(undefined4 *)(shareContext + 4)), status == 0)) {
+      scalarOut[0] = 3;
+      status = _io_connect_method_scalarI_scalarO(ctx[1],3,0,0,ctx + 9,scalarOut);
+      libraryOrTaskPtr = PTR_001e88b4;
+      if (status == 0) {
+        task = *(undefined4 *)PTR_001e88b4;
+        ctx[0x8e] = 0;
+        status = _IOConnectMapMemory(ctx[1],0,task,ctx + 0x8e,scalarOut,0x101);
+        if (status == 0) {
+          task = *(undefined4 *)libraryOrTaskPtr;
+          ctx[0x79] = 0;
+          status = _IOConnectMapMemory(ctx[1],1,task,ctx + 0x79,ctx + 0x7a,1);
+          if (status == 0) {
+            task = *(undefined4 *)libraryOrTaskPtr;
+            ctx[0x82] = 0;
+            ctx[0x7f] = 0;
+            ctx[0x80] = 0;
+            ctx[0x7d] = 0;
+            ctx[0x7e] = 0;
+            ctx[0x81] = 0;
+            status = _IOConnectMapMemory(ctx[1],2,task,ctx + 0x82,ctx + 0x83,1);
+            if (status == 0) {
+              task = *(undefined4 *)libraryOrTaskPtr;
+              fenceTablePtr = ctx + 0x86;
+              fenceTableSize = ctx + 0x87;
+              mapOptions = 1;
+              ctx[0x86] = 0;
+              status = _IOConnectMapMemory(ctx[1],4,task,fenceTablePtr,fenceTableSize,1);
+              if (status == 0) {
+                scratch0 = _malloc(ctx[0x87] >> 5);
+                ctx[0x88] = scratch0;
+                scratch2 = ctx[0x87] >> 5;
+                _memset(scratch0,0,scratch2);
+                ctx[0x8d] = 0;
+                ctx[0x89] = 0;
+                ctx[0x8a] = 0;
+                ctx[0x8b] = 0;
+                scratch0 = *(uint *)PTR_001e88b0;
+                ctx[0x8c] = 0;
+                if ((scratch0 & 8) == 0) {
+                  if ((scratch0 & 0x10) == 0) {
+                    *(undefined1 *)(ctx + 2) = 0x20;
                   }
                   else {
-                    *(undefined1 *)(puVar5 + 2) = 0x80;
+                    *(undefined1 *)(ctx + 2) = 0x80;
                   }
                 }
                 else {
-                  *(undefined1 *)(puVar5 + 2) = 0x40;
+                  *(undefined1 *)(ctx + 2) = 0x40;
                 }
-                uVar6 = (uint)DAT_001f65e0;
-                puVar5[0x8f] = 0;
-                DAT_001f65e0 = puVar5 + 0xae4;
-                puVar5[0xae4] = (uint)puVar5;
-                puVar5[0xae5] = uVar6;
-                puVar5[3] = param_3;
-                puVar5[4] = param_6;
-                puVar5[6] = param_7;
-                puVar5[0xd] = 0;
-                uVar6 = *(uint *)(param_2 + 8);
-                puVar5[0x45] = 0x19;
-                puVar5[0x46] = 0x32;
-                puVar5[0xf] = 0;
-                *(undefined1 *)((int)puVar5 + 0x143) = 1;
-                puVar5[5] = param_5;
-                puVar5[7] = 0;
-                puVar5[0xc] = 0;
-                puVar5[0xe] = 0;
-                puVar5[0x41] = 0;
-                puVar5[0x42] = 0;
-                puVar5[0x43] = 0;
-                puVar5[0x44] = 0;
-                puVar5[0x54] = 0;
-                puVar5[0x85] = 0;
-                puVar5[0x84] = 0;
-                puVar5[0x5e] = 0;
-                if ((uVar6 & 0x800) != 0) {
-                  puVar5[0xf] = 0x2000;
+                scratch0 = (uint)DAT_001f65e0;
+                ctx[0x8f] = 0;
+                DAT_001f65e0 = ctx + 0xae4;
+                ctx[0xae4] = (uint)ctx;
+                ctx[0xae5] = scratch0;
+                ctx[3] = contextArg3;
+                ctx[4] = contextArg6;
+                ctx[6] = contextArg7;
+                ctx[0xd] = 0;
+                scratch0 = *(uint *)(pixelFormat + 8);
+                ctx[0x45] = 0x19;
+                ctx[0x46] = 0x32;
+                ctx[0xf] = 0;
+                *(undefined1 *)((int)ctx + 0x143) = 1;
+                ctx[5] = stateBlock;
+                ctx[7] = 0;
+                ctx[0xc] = 0;
+                ctx[0xe] = 0;
+                ctx[0x41] = 0;
+                ctx[0x42] = 0;
+                ctx[0x43] = 0;
+                ctx[0x44] = 0;
+                ctx[0x54] = 0;
+                ctx[0x85] = 0;
+                ctx[0x84] = 0;
+                ctx[0x5e] = 0;
+                if ((scratch0 & 0x800) != 0) {
+                  ctx[0xf] = 0x2000;
                 }
-                uVar3 = *(uint *)(param_2 + 0xc);
-                if ((uVar3 & 8) == 0) {
-                  if ((uVar6 & 2) == 0) {
-                    puVar5[0xf] = puVar5[0xf] | 0x800;
+                scratch1 = *(uint *)(pixelFormat + 0xc);
+                if ((scratch1 & 8) == 0) {
+                  if ((scratch0 & 2) == 0) {
+                    ctx[0xf] = ctx[0xf] | 0x800;
                   }
                 }
                 else {
-                  puVar5[0xf] = puVar5[0xf] | 0x400;
+                  ctx[0xf] = ctx[0xf] | 0x400;
                 }
-                uVar3 = uVar3 & 2;
-                if (uVar3 != 0) {
-                  puVar5[0xf] = puVar5[0xf] | 0x10;
+                scratch1 = scratch1 & 2;
+                if (scratch1 != 0) {
+                  ctx[0xf] = ctx[0xf] | 0x10;
                 }
-                uVar6 = *(uint *)(param_2 + 0x10);
-                if ((uVar6 & 0xfffffc) == 0) {
-                  if ((uVar6 & 0x3f000000) != 0) {
-                    uVar3 = uVar6 & 0x3f00000;
-                    if (uVar3 == 0) {
-                      if ((uVar6 & 0xc000000) != 0) {
-                        puVar5[0xf] = puVar5[0xf] | 0xd;
+                scratch0 = *(uint *)(pixelFormat + 0x10);
+                if ((scratch0 & 0xfffffc) == 0) {
+                  if ((scratch0 & 0x3f000000) != 0) {
+                    scratch1 = scratch0 & 0x3f00000;
+                    if (scratch1 == 0) {
+                      if ((scratch0 & 0xc000000) != 0) {
+                        ctx[0xf] = ctx[0xf] | 0xd;
                       }
                     }
                     else {
-                      puVar5[0xf] = puVar5[0xf] | 0xc;
+                      ctx[0xf] = ctx[0xf] | 0xc;
                     }
                   }
                 }
                 else {
-                  uVar3 = uVar6 & 0x3fc0;
-                  if (uVar3 == 0) {
-                    if ((uVar6 & 0xfc000) == 0) {
-                      uVar3 = uVar6 & 0x3f00000;
-                      if (uVar3 != 0) {
-                        puVar5[0xf] = puVar5[0xf] | 0xb;
+                  scratch1 = scratch0 & 0x3fc0;
+                  if (scratch1 == 0) {
+                    if ((scratch0 & 0xfc000) == 0) {
+                      scratch1 = scratch0 & 0x3f00000;
+                      if (scratch1 != 0) {
+                        ctx[0xf] = ctx[0xf] | 0xb;
                       }
                     }
                     else {
-                      puVar5[0xf] = puVar5[0xf] | 4;
+                      ctx[0xf] = ctx[0xf] | 4;
                     }
                   }
                   else {
-                    puVar5[0xf] = puVar5[0xf] | 3;
+                    ctx[0xf] = ctx[0xf] | 3;
                   }
                 }
-                if (*(int *)(param_2 + 0x18) != 1) {
-                  puVar5[0xf] = puVar5[0xf] | 0x40;
+                if (*(int *)(pixelFormat + 0x18) != 1) {
+                  ctx[0xf] = ctx[0xf] | 0x40;
                 }
-                if (*(int *)(param_2 + 0x1c) != 1) {
-                  puVar5[0xf] = puVar5[0xf] | 0x80;
+                if (*(int *)(pixelFormat + 0x1c) != 1) {
+                  ctx[0xf] = ctx[0xf] | 0x80;
                 }
-                if (*(int *)(param_2 + 0x14) == 0x8000) {
-                  *(undefined1 *)((int)puVar5 + 0x141) = 1;
+                if (*(int *)(pixelFormat + 0x14) == 0x8000) {
+                  *(undefined1 *)((int)ctx + 0x141) = 1;
                 }
-                else if (*(int *)(param_2 + 0x14) == 0x800000) {
-                  *(undefined1 *)((int)puVar5 + 0x141) = 2;
-                }
-                else {
-                  *(undefined1 *)((int)puVar5 + 0x141) = 0;
-                }
-                sVar1 = *(short *)(param_2 + 0x22);
-                *(undefined1 *)(puVar5 + 0x50) = 0;
-                puVar5[0x52] = 0;
-                puVar5[0x53] = 0;
-                if (sVar1 == 1) {
-                  puVar5[0xf] = puVar5[0xf] | 0x100;
-                }
-                else if (sVar1 == 2) {
-                  puVar5[0xf] = puVar5[0xf] | 0x200;
-                }
-                if (0 < *(short *)(param_2 + 0x24)) {
-                  puVar5[0xf] = puVar5[0xf] | 0x1000;
-                }
-                FUN_00017a40(puVar5 + 0xf,param_2,uVar7,puVar9,puVar10,uVar11,uVar3);
-                uVar7 = puVar5[0xf];
-                puVar5[0xe] = 0x4000;
-                if ((uVar7 & 0x40) != 0) {
-                  puVar5[0xe] = (uint)((unsigned char *)0x00004100U);
-                }
-                if ((uVar7 & 0x80) == 0) {
-                  uVar6 = puVar5[0xe];
+                else if (*(int *)(pixelFormat + 0x14) == 0x800000) {
+                  *(undefined1 *)((int)ctx + 0x141) = 2;
                 }
                 else {
-                  uVar6 = puVar5[0xe] | 0x400;
-                  puVar5[0xe] = uVar6;
+                  *(undefined1 *)((int)ctx + 0x141) = 0;
                 }
-                if (*(char *)((int)puVar5 + 0x141) != '\0') {
-                  uVar6 = uVar6 | 0x200;
-                  puVar5[0xe] = uVar6;
+                auxBuffers = *(short *)(pixelFormat + 0x22);
+                *(undefined1 *)(ctx + 0x50) = 0;
+                ctx[0x52] = 0;
+                ctx[0x53] = 0;
+                if (auxBuffers == 1) {
+                  ctx[0xf] = ctx[0xf] | 0x100;
                 }
-                *(undefined1 *)((int)puVar5 + 0x146) = 1;
-                puVar5[0x55] = uVar7;
-                puVar5[0x56] = uVar6;
-                puVar5[0x58] = puVar5[0x42];
-                puVar5[0x59] = puVar5[0x43];
-                puVar5[0x5a] = puVar5[0x44];
-                puVar5[0x5b] = puVar5[0x45];
-                puVar5[0x5c] = puVar5[0x46];
-                *(undefined1 *)((int)puVar5 + 0x21) = 1;
-                *(undefined1 *)((int)puVar5 + 0x147) = 0;
-                puVar5[0x3e] = 0;
-                *(undefined1 *)(puVar5 + 8) = 0;
-                puVar5[0x49] = 0;
-                puVar5[0x4a] = 0;
-                puVar5[0x4b] = 0;
-                puVar5[0x4c] = 0;
-                *(undefined1 *)(puVar5 + 0x51) = 0;
-                *(undefined1 *)((int)puVar5 + 0x142) = 0;
-                *(undefined1 *)((int)puVar5 + 0x145) = 0;
-                puVar5[0x47] = 0;
-                puVar5[0x48] = 0;
-                puVar5[0x5d] = 3;
-                puVar5[0x57] = puVar5[0x41];
-                iVar12 = 0x10;
-                iVar4 = 0;
+                else if (auxBuffers == 2) {
+                  ctx[0xf] = ctx[0xf] | 0x200;
+                }
+                if (0 < *(short *)(pixelFormat + 0x24)) {
+                  ctx[0xf] = ctx[0xf] | 0x1000;
+                }
+                FUN_00017a40(ctx + 0xf,pixelFormat,scratch2,fenceTablePtr,fenceTableSize,mapOptions,scratch1);
+                scratch2 = ctx[0xf];
+                ctx[0xe] = 0x4000;
+                if ((scratch2 & 0x40) != 0) {
+                  ctx[0xe] = (uint)((unsigned char *)0x00004100U);
+                }
+                if ((scratch2 & 0x80) == 0) {
+                  scratch0 = ctx[0xe];
+                }
+                else {
+                  scratch0 = ctx[0xe] | 0x400;
+                  ctx[0xe] = scratch0;
+                }
+                if (*(char *)((int)ctx + 0x141) != '\0') {
+                  scratch0 = scratch0 | 0x200;
+                  ctx[0xe] = scratch0;
+                }
+                *(undefined1 *)((int)ctx + 0x146) = 1;
+                ctx[0x55] = scratch2;
+                ctx[0x56] = scratch0;
+                ctx[0x58] = ctx[0x42];
+                ctx[0x59] = ctx[0x43];
+                ctx[0x5a] = ctx[0x44];
+                ctx[0x5b] = ctx[0x45];
+                ctx[0x5c] = ctx[0x46];
+                *(undefined1 *)((int)ctx + 0x21) = 1;
+                *(undefined1 *)((int)ctx + 0x147) = 0;
+                ctx[0x3e] = 0;
+                *(undefined1 *)(ctx + 8) = 0;
+                ctx[0x49] = 0;
+                ctx[0x4a] = 0;
+                ctx[0x4b] = 0;
+                ctx[0x4c] = 0;
+                *(undefined1 *)(ctx + 0x51) = 0;
+                *(undefined1 *)((int)ctx + 0x142) = 0;
+                *(undefined1 *)((int)ctx + 0x145) = 0;
+                ctx[0x47] = 0;
+                ctx[0x48] = 0;
+                ctx[0x5d] = 3;
+                ctx[0x57] = ctx[0x41];
+                clearCount = 0x10;
+                status = 0;
                 do {
-                  puVar5[iVar4 + 99] = 0;
-                  iVar12 = iVar12 + -1;
-                  iVar4 = iVar4 + 1;
-                } while (iVar12 != 0);
-                uVar7 = 0;
+                  ctx[status + 99] = 0;
+                  clearCount = clearCount + -1;
+                  status = status + 1;
+                } while (clearCount != 0);
+                scratch2 = 0;
                 do {
-                  local_48[0] = uVar7 + 1;
-                  puVar5[uVar7 + 0x73] = 0;
-                  uVar7 = local_48[0];
-                } while (local_48[0] < 2);
-                puVar5[0x62] = 0;
-                puVar5[0x5f] = 0;
-                puVar5[0x60] = 0;
-                puVar5[0x61] = 0;
-                if ((puVar5[9] & 2) == 0) {
-                  *(undefined4 *)(param_5 + 0x94) = 3;
+                  scalarOut[0] = scratch2 + 1;
+                  ctx[scratch2 + 0x73] = 0;
+                  scratch2 = scalarOut[0];
+                } while (scalarOut[0] < 2);
+                ctx[0x62] = 0;
+                ctx[0x5f] = 0;
+                ctx[0x60] = 0;
+                ctx[0x61] = 0;
+                if ((ctx[9] & 2) == 0) {
+                  *(undefined4 *)(stateBlock + 0x94) = 3;
                 }
                 else {
-                  *(undefined4 *)(param_5 + 0x94) = 1;
+                  *(undefined4 *)(stateBlock + 0x94) = 1;
                 }
-                FUN_00017750(puVar5,param_5,param_2);
-                _memcpy(puVar5 + 0x10,param_5 + 0x24,0x3c);
-                FUN_0002c790(puVar5,param_2);
-                *param_1 = (int)puVar5;
+                FUN_00017750(ctx,stateBlock,pixelFormat);
+                _memcpy(ctx + 0x10,stateBlock + 0x24,0x3c);
+                FUN_0002c790(ctx,pixelFormat);
+                *contextOut = (int)ctx;
                 return 0;
               }
             }
@@ -3557,11 +3557,11 @@ LAB_00006798:
         }
       }
     }
-    _IOServiceClose(puVar5[1]);
-    _free(puVar5);
+    _IOServiceClose(ctx[1]);
+    _free(ctx);
   }
   else {
-    _free(puVar5);
+    _free(ctx);
   }
   return 0x271f;
 }

@@ -4948,57 +4948,57 @@ int FUN_0002b3c0(param_1, param_2)
 }
 
 /* _gldGetQueryInfo @ 0x2b5a0 (404 bytes) */
-int _gldGetQueryInfo(param_1, param_2, param_3, param_4)
-  int param_1;
-  int *param_2;
-  int param_3;
-  int *param_4;
+int _gldGetQueryInfo(ctx, query, pname, valueOut)
+  int ctx;
+  int *query;
+  int pname;
+  int *valueOut;
 {
-  bool bVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  uint uVar5;
-  int iVar6;
-  int *piVar7;
+  bool slot0Pending;
+  int available;
+  int result3;
+  int result2;
+  uint resultCount;
+  int result1;
+  int *queryEntry;
   
-  uVar5 = *(uint *)(param_1 + 0x2610);
-  iVar2 = *(int *)(param_1 + 0x224) + 0x210;
-  piVar7 = (int *)(iVar2 + *param_2 * 0x20);
-  iVar6 = piVar7[2];
-  iVar3 = piVar7[4];
-  iVar4 = piVar7[3];
-  if ((uVar5 == 1) && (*(int *)(param_1 + 0x261c) == 2)) {
-    uVar5 = 2;
+  resultCount = *(uint *)(ctx + 0x2610);
+  available = *(int *)(ctx + 0x224) + 0x210;
+  queryEntry = (int *)(available + *query * 0x20);
+  result1 = queryEntry[2];
+  result3 = queryEntry[4];
+  result2 = queryEntry[3];
+  if ((resultCount == 1) && (*(int *)(ctx + 0x261c) == 2)) {
+    resultCount = 2;
   }
-  bVar1 = *(int *)(iVar2 + *param_2 * 0x20) == -1;
-  if ((((bVar1) || ((1 < uVar5 && (iVar3 == -1)))) || ((2 < uVar5 && (iVar6 == -1)))) ||
-     ((3 < uVar5 && (iVar4 == -1)))) {
-    iVar2 = 0;
+  slot0Pending = *(int *)(available + *query * 0x20) == -1;
+  if ((((slot0Pending) || ((1 < resultCount && (result3 == -1)))) || ((2 < resultCount && (result1 == -1)))) ||
+     ((3 < resultCount && (result2 == -1)))) {
+    available = 0;
   }
   else {
-    iVar2 = 1;
+    available = 1;
   }
-  if (param_3 == 0x8866) {
-    iVar2 = 0;
-    while ((((bVar1 || ((1 < uVar5 && (iVar3 == -1)))) ||
-            (((2 < uVar5 && (iVar6 == -1)) || ((3 < uVar5 && (iVar4 == -1)))))) &&
-           (bVar1 = iVar2 != 10000, iVar2 = iVar2 + 1, bVar1))) {
-      FUN_00009bd0(param_1);
+  if (pname == 0x8866) {
+    available = 0;
+    while ((((slot0Pending || ((1 < resultCount && (result3 == -1)))) ||
+            (((2 < resultCount && (result1 == -1)) || ((3 < resultCount && (result2 == -1)))))) &&
+           (slot0Pending = available != 10000, available = available + 1, slot0Pending))) {
+      FUN_00009bd0(ctx);
       _usleep(100);
-      iVar3 = piVar7[4];
-      iVar6 = piVar7[2];
-      iVar4 = piVar7[3];
-      bVar1 = *piVar7 == -1;
+      result3 = queryEntry[4];
+      result1 = queryEntry[2];
+      result2 = queryEntry[3];
+      slot0Pending = *queryEntry == -1;
     }
-    iVar2 = ((int (*)())FUN_0002b3c0)(param_1,param_2);
-    *param_4 = iVar2;
+    available = ((int (*)())FUN_0002b3c0)(ctx,query);
+    *valueOut = available;
   }
-  else if (param_3 == 0x8867) {
-    if (iVar2 == 0) {
-      _gldFlush(param_1);
+  else if (pname == 0x8867) {
+    if (available == 0) {
+      _gldFlush(ctx);
     }
-    *param_4 = iVar2;
+    *valueOut = available;
   }
   return 0;
 }

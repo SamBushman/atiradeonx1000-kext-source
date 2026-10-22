@@ -432,3 +432,101 @@ local	_gldChoosePixelFormat	local_167	pfPad0	CONFIRMED	record +0x2d, cleared
 local	_gldChoosePixelFormat	local_166	pfPad1	CONFIRMED	record +0x2e, cleared
 local	_gldChoosePixelFormat	local_165	pfPad2	CONFIRMED	record +0x2f, cleared
 local	_gldChoosePixelFormat	local_164	pfDisplayMask	CONFIRMED	record +0x30 = renderer display mask
+local	_gldCreateContext	param_1	contextOut	CONFIRMED	*param_1 receives the malloc(0x2b98) context (NULL -> 0x271e)
+local	_gldCreateContext	param_2	pixelFormat	CONFIRMED	0x34-byte record built by _gldChoosePixelFormat; +0x30 display mask is checked against the library mask
+local	_gldCreateContext	param_3	contextArg3	UNKNOWN	stored at ctx[3]
+local	_gldCreateContext	param_4	shareContext	INFERRED	nonzero -> _IOConnectAddClient(ctx[1], *(shareContext+4)): the context to share with
+local	_gldCreateContext	param_5	stateBlock	INFERRED	state block: 0x3c bytes at +0x24 copied to ctx+0x40, +0x94 set to 1 or 3
+local	_gldCreateContext	param_6	contextArg6	UNKNOWN	stored at ctx[4]
+local	_gldCreateContext	param_7	contextArg7	UNKNOWN	stored at ctx[6]
+local	_gldCreateContext	sVar1	auxBuffers	INFERRED	pixelFormat+0x22 (1 -> flag 0x100, 2 -> 0x200)
+local	_gldCreateContext	puVar2	libraryOrTaskPtr	CONFIRMED	PTR_DAT_001e88ac library record, then PTR_001e88b4 task pointer
+local	_gldCreateContext	uVar3	scratch1	UNKNOWN	reused: pixelFormat+0xc bits, format-mask sub-tests
+local	_gldCreateContext	iVar4	status	CONFIRMED	result of the IOKit calls (0 = success); later loop index
+local	_gldCreateContext	puVar5	ctx	CONFIRMED	malloc(0x2b98) context; [0]=renderer index, [1]=io_connect_t, +0x24 chip scalars, +0x218 fence table, +0x22c query bitmap
+local	_gldCreateContext	uVar6	scratch0	UNKNOWN	reused: bitmap allocation, library flags, pixelFormat words
+local	_gldCreateContext	uVar7	scratch2	UNKNOWN	reused: bitmap byte size, then ctx flags word ctx[0xf]
+local	_gldCreateContext	uVar8	task	CONFIRMED	*PTR_001e88b4 mach task passed to _IOConnectMapMemory
+local	_gldCreateContext	puVar9	fenceTablePtr	CONFIRMED	&ctx[0x86] = ctx+0x218, memory map address output of selector 4
+local	_gldCreateContext	puVar10	fenceTableSize	CONFIRMED	&ctx[0x87] = ctx+0x21c, size output of selector 4
+local	_gldCreateContext	uVar11	mapOptions	CONFIRMED	options word 1 passed to _IOConnectMapMemory
+local	_gldCreateContext	iVar12	clearCount	CONFIRMED	counts the 16 words cleared at ctx[99..]
+local	_gldCreateContext	local_48	scalarOut	CONFIRMED	scalarO count in [0] (3) then the outputs; also reused as the renderer search index
+local	_gldAttachDrawable	param_1	ctx	CONFIRMED	context from _gldCreateContext: [0] renderer index, [1] io_connect_t, [0xf] flags word, +0x41.. drawable size
+local	_gldAttachDrawable	param_2	drawableType	CONFIRMED	CGL pixel-format attribute value: 0x50 kCGLPFAWindow, 0x5a PixelBuffer, 0x36 FullScreen, 0x35 OffScreen, 0x5b remote/restore, 0 detach
+local	_gldAttachDrawable	param_3	drawable	INFERRED	drawable record; [2] is the first scalar passed to the kernel (drawable id), stored at ctx[0x3e]; NULL -> 0x2715
+local	_gldAttachDrawable	param_4	drawableIds	INFERRED	two packed bytes: bits 8..15 (drawableHigh) and bits 0..7 passed to selector 0, stored at ctx[0x3f]/[0x40]
+local	_gldAttachDrawable	uVar1	rectField9c	UNKNOWN	ushort at (*drawable)+0x9c on the 0x5b path, stored at ctx[0x58]
+local	_gldAttachDrawable	puVar2	library	CONFIRMED	PTR_DAT_001e88ac library record (+8 service list, +0xc per-service use counts, +0x14 attach callback, +0x18 per-renderer connections)
+local	_gldAttachDrawable	pcVar3	attachCallback	CONFIRMED	function pointer at library+0x14 (set by _gldInitializeLibrary), called to attach the drawable
+local	_gldAttachDrawable	iVar4	status	CONFIRMED	result of the IOKit call / callback; also a drawable x offset and byte offset (reused)
+local	_gldAttachDrawable	iVar5	rendererIndex	INFERRED	ctx[0] renderer index, or drawable[1]
+local	_gldAttachDrawable	piVar6	pbufferArg	INFERRED	drawable passed to FUN_00017160 only for type 0x5a
+local	_gldAttachDrawable	uVar7	ctxFlags	CONFIRMED	ctx[0xf] flags word; low nibble compared with the kernel-reported low nibble
+local	_gldAttachDrawable	iVar8	ownRendererIndex	INFERRED	*ctx: index into the library service list
+local	_gldAttachDrawable	iVar9	serviceList	INFERRED	library+8 renderer service list
+local	_gldAttachDrawable	uVar10	drawableHigh	CONFIRMED	(drawableIds >> 8) & 0xff, passed as scalar input 2
+local	_gldAttachDrawable	uVar11	returnCode	CONFIRMED	0, 1, 2, 3 (drawable change codes) or an error such as 0x2715/0x271a/0x2720
+local	_gldAttachDrawable	local_68	outCount	CONFIRMED	scalarO count passed as &local_68
+local	_gldAttachDrawable	local_64	callWords	CONFIRMED	three consecutive words: [0] scalar in / count, [1] output count (&local_64[1]), [2] output word (local_64+2)
+local	_gldAttachDrawable	local_58	scalarIn0	CONFIRMED	first word of the scalar-in array passed as &local_58
+local	_gldAttachDrawable	local_54	scalarIn1	CONFIRMED	second word: ctx flags & 0xffff3fc0 (or & 0x803f for selector 7)
+local	_gldAttachDrawable	local_50	scalarIn2	CONFIRMED	third word: drawableHigh
+local	_gldAttachDrawable	local_4c	scalarIn3	CONFIRMED	fourth word: drawableIds & 0xff
+local	_gldAttachDrawable	local_48	drawableWidth	INFERRED	first scalarO word, stored in ctx[0x41]; used as width in the 4/8-byte-per-pixel buffer size
+local	_gldAttachDrawable	local_44	drawableHeight	INFERRED	second scalarO word, stored in ctx[0x42]
+local	_gldAttachDrawable	local_40	drawableExtra0	UNKNOWN	third scalarO word, stored in ctx[0x47]
+local	_gldAttachDrawable	local_3c	drawableExtra1	UNKNOWN	fourth scalarO word, stored in ctx[0x48]
+local	_gldAllocVertexBuffer	param_1	ctx	INFERRED	ctx+0x20 enable byte, +0x210 current vertex-buffer chunk, +0x214 chunk count, +0x238/+0x23c retire counter
+local	_gldAllocVertexBuffer	param_2	bufferKind	INFERRED	low 15 bits 1..6 map to kernel kinds 9..0xe
+local	_gldAllocVertexBuffer	param_3	sizeInOut	CONFIRMED	*param_3 is the requested size on entry (must be <= 0x800) and 0x800 on success, 0 on failure
+local	_gldAllocVertexBuffer	piVar1	refCountSlot	INFERRED	&memory[+0x10], incremented atomically by 0x10000
+local	_gldAllocVertexBuffer	iVar2	spinCount	CONFIRMED	retire-counter wait loop counter starting at 1000001
+local	_gldAllocVertexBuffer	uVar3	retiredStamp	INFERRED	little-endian word read from the retire counter bytes
+local	_gldAllocVertexBuffer	iVar4	requestedSize	INFERRED	*param_3 on entry; later reused for call results and previous-chunk stamps
+local	_gldAllocVertexBuffer	uVar5	chunkStamp	INFERRED	stamp stored in the chunk (+8) compared with the retire counter
+local	_gldAllocVertexBuffer	pbVar6	retireCounter	INFERRED	byte pointer to ctx[0x238]: the retire counter assembled byte by byte
+local	_gldAllocVertexBuffer	uVar7	kernelKind	CONFIRMED	9..0xe stored at chunk+0xc
+local	_gldAllocVertexBuffer	iVar8	currentChunk	INFERRED	*(ctx+0x210)+0x10: head chunk record
+local	_gldAllocVertexBuffer	in_cr0	crBits	UNKNOWN	Ghidra cr0 emulation for the lwarx/stwcx. loop
+local	_gldAllocVertexBuffer	local_48	structOutSize	CONFIRMED	output struct size (8) passed as &local_48
+local	_gldAllocVertexBuffer	local_44	chunk	CONFIRMED	first output word: new chunk record; stored at ctx+0x210
+local	_gldAllocVertexBuffer	local_40	chunkMemory	CONFIRMED	second output word: memory record, refcount at +0x10, flag at +0x14
+local	_gldAllocVertexBuffer	local_3c	structIn0	CONFIRMED	first word of the 0x14-byte input struct (value 2)
+local	_gldAllocVertexBuffer	local_38	structIn1	CONFIRMED	second word of the input struct (0x16000, the chunk byte size)
+local	_gldPageoffBuffer	param_1	ctx	CONFIRMED	*(ctx+4) io_connect_t; ctx+0xc mutex
+local	_gldPageoffBuffer	param_2	buffer	INFERRED	buffer record: +8 holds the memory-plugin data pointer
+local	_gldPageoffBuffer	cVar1	kind	INFERRED	record kind byte at +0x16 (6 or 7)
+local	_gldPageoffBuffer	iVar2	waitStatus	INFERRED	FUN_0001a0d0 result for the second handle
+local	_gldPageoffBuffer	puVar3	pluginRecord	INFERRED	**(buffer+8)
+local	_gldPageoffBuffer	iVar4	handleOwner	INFERRED	memory-handle holder; kind 6 path status, kind 7 path *(pluginData+4)
+local	_gldPageoffBuffer	local_28	scalarIn0	CONFIRMED	first scalar of selector 0xd (record id)
+local	_gldPageoffBuffer	local_24	scalarIn1	CONFIRMED	second scalar of selector 0xd (0)
+local	_gldInitDispatch	param_1	ctx	INFERRED	ctx+0x104..0x118 snapshot copied to savedState; ctx+0x1c receives dispatch
+local	_gldInitDispatch	param_2	dispatch	CONFIRMED	GL dispatch table of function pointers being filled
+local	_gldInitDispatch	param_3	savedState	CONFIRMED	receives six words copied from ctx+0x104..0x118
+local	_gldInitDispatch	param_4	updateArg3	UNKNOWN	forwarded to _gldUpdateDispatch
+local	_gldInitDispatch	param_5	updateArg4	UNKNOWN	forwarded to _gldUpdateDispatch
+local	_gldInitDispatch	bVar1	moreUnits	CONFIRMED	loop continues while index != 0xf
+local	_gldInitDispatch	puVar2	entry	INFERRED	function pointer loaded from the PTR_FUN_ table
+local	_gldInitDispatch	puVar3	altEntry	INFERRED	second function pointer choice
+local	_gldInitDispatch	uVar4	word0	UNKNOWN	copied state word
+local	_gldInitDispatch	uVar5	word1	UNKNOWN	copied state word
+local	_gldInitDispatch	uVar6	word2	UNKNOWN	copied state word
+local	_gldInitDispatch	iVar7	unit	CONFIRMED	0..0xf counter passed to FUN_000a82c0
+local	_gldInitDispatch	local_38	defaultState0	CONFIRMED	first of five words copied from DAT_001aa4b0..c0 and passed as &local_38
+local	_gldInitDispatch	local_34	defaultState1	CONFIRMED	second word
+local	_gldInitDispatch	local_30	defaultState2	CONFIRMED	third word
+local	_gldInitDispatch	local_2c	defaultState3	CONFIRMED	fourth word
+local	_gldInitDispatch	local_28	defaultState4	CONFIRMED	fifth word
+local	_gldGetQueryInfo	param_1	ctx	INFERRED	ctx+0x224 query storage, +0x2610 result count, +0x261c mode
+local	_gldGetQueryInfo	param_2	query	CONFIRMED	query record; *query is the id indexing 0x20-byte entries
+local	_gldGetQueryInfo	param_3	pname	CONFIRMED	GL enum: 0x8866 GL_QUERY_RESULT_ARB, 0x8867 GL_QUERY_RESULT_AVAILABLE_ARB
+local	_gldGetQueryInfo	param_4	valueOut	CONFIRMED	receives the result / availability
+local	_gldGetQueryInfo	bVar1	slot0Pending	INFERRED	entry[0] == -1 (result slot not yet written)
+local	_gldGetQueryInfo	iVar2	available	INFERRED	storage base + 0x210, then the availability flag 0/1, also the retry counter of the 0x8866 wait loop
+local	_gldGetQueryInfo	iVar3	result3	INFERRED	entry[4]
+local	_gldGetQueryInfo	iVar4	result2	INFERRED	entry[3]
+local	_gldGetQueryInfo	uVar5	resultCount	INFERRED	ctx+0x2610 (promoted to 2 when mode word is 2)
+local	_gldGetQueryInfo	iVar6	result1	INFERRED	entry[2]
+local	_gldGetQueryInfo	piVar7	queryEntry	CONFIRMED	storage + 0x210 + id*0x20

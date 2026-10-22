@@ -56,164 +56,164 @@ int FUN_00007020(param_1)
 }
 
 /* _gldAttachDrawable @ 0x70d0 (1804 bytes) */
-int _gldAttachDrawable(param_1, param_2, param_3, param_4)
-  int *param_1;
-  int param_2;
-  int *param_3;
-  uint param_4;
+int _gldAttachDrawable(ctx, drawableType, drawable, drawableIds)
+  int *ctx;
+  int drawableType;
+  int *drawable;
+  uint drawableIds;
 {
-  ushort uVar1;
-  undefined *puVar2;
-  code *pcVar3;
-  int iVar4;
-  int iVar5;
-  int *piVar6;
-  uint uVar7;
-  int iVar8;
-  int iVar9;
-  uint uVar10;
-  undefined4 uVar11;
-  undefined4 local_68;
-  int local_64 [3];
-  uint local_58;
-  uint local_54;
-  uint local_50;
-  uint local_4c;
-  uint local_48;
-  int local_44;
-  int local_40;
-  int local_3c;
+  ushort rectField9c;
+  undefined *library;
+  code *attachCallback;
+  int status;
+  int rendererIndex;
+  int *pbufferArg;
+  uint ctxFlags;
+  int ownRendererIndex;
+  int serviceList;
+  uint drawableHigh;
+  undefined4 returnCode;
+  undefined4 outCount;
+  int callWords [3];
+  uint scalarIn0;
+  uint scalarIn1;
+  uint scalarIn2;
+  uint scalarIn3;
+  uint drawableWidth;
+  int drawableHeight;
+  int drawableExtra0;
+  int drawableExtra1;
   
-  if (param_1 == (int *)0x0) {
+  if (ctx == (int *)0x0) {
     return 0x271e;
   }
-  uVar10 = param_4 >> 8 & 0xff;
-  if ((param_2 == 0x50) || (param_2 == 0x5a)) {
-    if (param_3 == (int *)0x0) {
+  drawableHigh = drawableIds >> 8 & 0xff;
+  if ((drawableType == 0x50) || (drawableType == 0x5a)) {
+    if (drawable == (int *)0x0) {
       return 0x2715;
     }
-    param_1[0xf] = param_1[0xf] | 0x20;
-    piVar6 = param_3;
-    if (param_2 != 0x5a) {
-      piVar6 = (int *)0x0;
+    ctx[0xf] = ctx[0xf] | 0x20;
+    pbufferArg = drawable;
+    if (drawableType != 0x5a) {
+      pbufferArg = (int *)0x0;
     }
-    FUN_00017160(param_1,param_1 + 0xf,piVar6);
-    local_64[0] = param_3[2];
-    local_64[1] = 3;
-    iVar4 = _io_connect_method_scalarI_scalarO(param_1[1],6,local_64,1,&local_48,local_64 + 1);
-    if (iVar4 == 0) {
-      uVar7 = param_1[0xf];
-      if ((local_48 & 0xf) != (uVar7 & 0xf)) {
-        if ((uVar7 & 0x33c0) != 0) {
-          if (param_1[0x54] != 0) {
+    FUN_00017160(ctx,ctx + 0xf,pbufferArg);
+    callWords[0] = drawable[2];
+    callWords[1] = 3;
+    status = _io_connect_method_scalarI_scalarO(ctx[1],6,callWords,1,&drawableWidth,callWords + 1);
+    if (status == 0) {
+      ctxFlags = ctx[0xf];
+      if ((drawableWidth & 0xf) != (ctxFlags & 0xf)) {
+        if ((ctxFlags & 0x33c0) != 0) {
+          if (ctx[0x54] != 0) {
             return 0x2715;
           }
-          param_1[0x55] = uVar7;
+          ctx[0x55] = ctxFlags;
           return 0x2715;
         }
-        uVar7 = local_48 & 0xf | uVar7 & 0xfffffff0;
-        param_1[0xf] = uVar7;
-        if (param_1[0x54] == 0) {
-          param_1[0x55] = uVar7;
-          FUN_00017260(param_1);
-          uVar7 = param_1[0xf];
+        ctxFlags = drawableWidth & 0xf | ctxFlags & 0xfffffff0;
+        ctx[0xf] = ctxFlags;
+        if (ctx[0x54] == 0) {
+          ctx[0x55] = ctxFlags;
+          FUN_00017260(ctx);
+          ctxFlags = ctx[0xf];
         }
       }
     }
     else {
-      uVar7 = param_1[0xf];
+      ctxFlags = ctx[0xf];
     }
-    if (param_2 != 0x5a) {
-      iVar8 = *param_1;
-      iVar4 = *param_3;
-      iVar5 = param_3[1];
-      pcVar3 = *(code **)(PTR_DAT_001e88ac + 0x14);
-      iVar9 = *(int *)(PTR_DAT_001e88ac + 8);
+    if (drawableType != 0x5a) {
+      ownRendererIndex = *ctx;
+      status = *drawable;
+      rendererIndex = drawable[1];
+      attachCallback = *(code **)(PTR_DAT_001e88ac + 0x14);
+      serviceList = *(int *)(PTR_DAT_001e88ac + 8);
     }
     else {
-      iVar8 = *param_1;
-      iVar4 = 0;
-      iVar5 = 0;
-      pcVar3 = *(code **)(PTR_DAT_001e88ac + 0x14);
-      iVar9 = *(int *)(PTR_DAT_001e88ac + 8);
+      ownRendererIndex = *ctx;
+      status = 0;
+      rendererIndex = 0;
+      attachCallback = *(code **)(PTR_DAT_001e88ac + 0x14);
+      serviceList = *(int *)(PTR_DAT_001e88ac + 8);
     }
-    iVar4 = (*pcVar3)(iVar4,iVar5,param_3[2],uVar7 & 0x803f,*(undefined4 *)(iVar8 * 4 + iVar9));
-    if (iVar4 == 0) {
-      local_58 = param_3[2];
-      local_54 = param_1[0xf] & 0xffff3fc0;
-      local_50 = uVar10;
-      local_4c = param_4 & 0xff;
-      iVar4 = _io_connect_method_scalarI_structureI(param_1[1],0,&local_58,4,0,0);
-      if ((iVar4 == 0) &&
-         ((*(char *)((int)param_1 + 0x145) == '\0' ||
-          (iVar4 = _io_connect_method_scalarI_structureI(param_1[1],0xe,param_1 + 0x4d,3,0,0),
-          iVar4 == 0)))) {
-        local_58 = (uint)*(byte *)((int)param_1 + 0x147);
-        _io_connect_method_scalarI_structureI(param_1[1],0x10,&local_58,1,0,0);
+    status = (*attachCallback)(status,rendererIndex,drawable[2],ctxFlags & 0x803f,*(undefined4 *)(ownRendererIndex * 4 + serviceList));
+    if (status == 0) {
+      scalarIn0 = drawable[2];
+      scalarIn1 = ctx[0xf] & 0xffff3fc0;
+      scalarIn2 = drawableHigh;
+      scalarIn3 = drawableIds & 0xff;
+      status = _io_connect_method_scalarI_structureI(ctx[1],0,&scalarIn0,4,0,0);
+      if ((status == 0) &&
+         ((*(char *)((int)ctx + 0x145) == '\0' ||
+          (status = _io_connect_method_scalarI_structureI(ctx[1],0xe,ctx + 0x4d,3,0,0),
+          status == 0)))) {
+        scalarIn0 = (uint)*(byte *)((int)ctx + 0x147);
+        _io_connect_method_scalarI_structureI(ctx[1],0x10,&scalarIn0,1,0,0);
 LAB_00007320:
-        local_68 = 4;
-        uVar11 = 0x2715;
-        iVar4 = _io_connect_method_scalarI_scalarO(param_1[1],5,0,0,&local_48,&local_68);
-        if (iVar4 == 0) {
-          local_68 = 3;
-          uVar11 = 0x2715;
-          iVar4 = _io_connect_method_scalarI_scalarO(param_1[1],3,0,0,param_1 + 9,&local_68);
-          if (iVar4 == 0) {
-            local_68 = 1;
-            _io_connect_method_scalarI_scalarO(param_1[1],4,0,0,local_64 + 2,&local_68);
-            if ((local_64[2] & 1U) == 0) {
-              uVar11 = 0x2720;
-              param_1[0x47] = local_40;
-              param_1[0x48] = local_3c;
-              param_1[0x41] = local_48;
-              param_1[0x42] = local_44;
+        outCount = 4;
+        returnCode = 0x2715;
+        status = _io_connect_method_scalarI_scalarO(ctx[1],5,0,0,&drawableWidth,&outCount);
+        if (status == 0) {
+          outCount = 3;
+          returnCode = 0x2715;
+          status = _io_connect_method_scalarI_scalarO(ctx[1],3,0,0,ctx + 9,&outCount);
+          if (status == 0) {
+            outCount = 1;
+            _io_connect_method_scalarI_scalarO(ctx[1],4,0,0,callWords + 2,&outCount);
+            if ((callWords[2] & 1U) == 0) {
+              returnCode = 0x2720;
+              ctx[0x47] = drawableExtra0;
+              ctx[0x48] = drawableExtra1;
+              ctx[0x41] = drawableWidth;
+              ctx[0x42] = drawableHeight;
             }
-            else if (param_3 == (int *)param_1[0x3e]) {
-              if ((local_48 != param_1[0x41]) || (uVar11 = 0, local_44 != param_1[0x42])) {
-                param_1[0x47] = local_40;
-                param_1[0x48] = local_3c;
-                uVar11 = 3;
-                param_1[0x41] = local_48;
-                param_1[0x42] = local_44;
+            else if (drawable == (int *)ctx[0x3e]) {
+              if ((drawableWidth != ctx[0x41]) || (returnCode = 0, drawableHeight != ctx[0x42])) {
+                ctx[0x47] = drawableExtra0;
+                ctx[0x48] = drawableExtra1;
+                returnCode = 3;
+                ctx[0x41] = drawableWidth;
+                ctx[0x42] = drawableHeight;
               }
             }
             else {
-              uVar11 = 2;
-              param_1[0x47] = local_40;
-              param_1[0x48] = local_3c;
-              param_1[0x41] = local_48;
-              param_1[0x42] = local_44;
+              returnCode = 2;
+              ctx[0x47] = drawableExtra0;
+              ctx[0x48] = drawableExtra1;
+              ctx[0x41] = drawableWidth;
+              ctx[0x42] = drawableHeight;
             }
-            if (*(char *)((int)param_1 + 0x141) != '\0') {
-              iVar4 = 4;
-              if (*(char *)((int)param_1 + 0x141) != '\x01') {
-                iVar4 = 8;
+            if (*(char *)((int)ctx + 0x141) != '\0') {
+              status = 4;
+              if (*(char *)((int)ctx + 0x141) != '\x01') {
+                status = 8;
               }
-              iVar4 = iVar4 * (local_48 + 7 & 0xfffffff8) * local_44;
-              if (iVar4 != param_1[0x53]) {
-                if (param_1[0x52] != 0) {
-                  _free(param_1[0x52]);
+              status = status * (drawableWidth + 7 & 0xfffffff8) * drawableHeight;
+              if (status != ctx[0x53]) {
+                if (ctx[0x52] != 0) {
+                  _free(ctx[0x52]);
                 }
-                iVar5 = _malloc(iVar4);
-                param_1[0x53] = iVar4;
-                param_1[0x52] = iVar5;
+                rendererIndex = _malloc(status);
+                ctx[0x53] = status;
+                ctx[0x52] = rendererIndex;
               }
             }
-            ((int (*)())FUN_00007020)(param_1);
-            param_1[0x3e] = (int)param_3;
-            param_1[0x3f] = uVar10;
-            param_1[0x40] = param_4 & 0xff;
-            if (param_1[0x54] == 0) {
-              param_1[0x55] = param_1[0xf];
-              param_1[0x57] = param_1[0x41];
-              param_1[0x58] = param_1[0x42];
-              param_1[0x59] = param_1[0x43];
-              param_1[0x5a] = param_1[0x44];
-              param_1[0x5b] = param_1[0x45];
-              param_1[0x5c] = param_1[0x46];
-              return uVar11;
+            ((int (*)())FUN_00007020)(ctx);
+            ctx[0x3e] = (int)drawable;
+            ctx[0x3f] = drawableHigh;
+            ctx[0x40] = drawableIds & 0xff;
+            if (ctx[0x54] == 0) {
+              ctx[0x55] = ctx[0xf];
+              ctx[0x57] = ctx[0x41];
+              ctx[0x58] = ctx[0x42];
+              ctx[0x59] = ctx[0x43];
+              ctx[0x5a] = ctx[0x44];
+              ctx[0x5b] = ctx[0x45];
+              ctx[0x5c] = ctx[0x46];
+              return returnCode;
             }
-            return uVar11;
+            return returnCode;
           }
         }
         goto LAB_000077a0;
@@ -222,94 +222,94 @@ LAB_00007320:
     }
   }
   else {
-    if (param_2 == 0x36) {
-      if (param_3 == (int *)0x0) {
+    if (drawableType == 0x36) {
+      if (drawable == (int *)0x0) {
         return 0x2715;
       }
-      uVar7 = param_1[0xf];
-      param_1[0xf] = uVar7 & 0xffffffdf;
-      if (((uVar7 & 0x400) != 0) || ((uVar7 & 0x10) != 0)) {
-        param_1[0xf] = uVar7 & 0xffffffdf | 0x8000;
+      ctxFlags = ctx[0xf];
+      ctx[0xf] = ctxFlags & 0xffffffdf;
+      if (((ctxFlags & 0x400) != 0) || ((ctxFlags & 0x10) != 0)) {
+        ctx[0xf] = ctxFlags & 0xffffffdf | 0x8000;
       }
-      FUN_00017160(param_1,param_1 + 0xf,0);
-      iVar5 = *param_1;
-      iVar4 = iVar5 * 4;
-      if (*(int *)(PTR_DAT_001e88ac + iVar4 + 0x18) == 0) {
-        iVar4 = _IOServiceOpen(*(undefined4 *)(*(int *)(PTR_DAT_001e88ac + 8) + iVar4),
-                               *(undefined4 *)PTR_001e88b4,0,PTR_DAT_001e88ac + iVar4 + 0x18);
-        if (iVar4 != 0) goto LAB_00007780;
-        iVar5 = *param_1;
+      FUN_00017160(ctx,ctx + 0xf,0);
+      rendererIndex = *ctx;
+      status = rendererIndex * 4;
+      if (*(int *)(PTR_DAT_001e88ac + status + 0x18) == 0) {
+        status = _IOServiceOpen(*(undefined4 *)(*(int *)(PTR_DAT_001e88ac + 8) + status),
+                               *(undefined4 *)PTR_001e88b4,0,PTR_DAT_001e88ac + status + 0x18);
+        if (status != 0) goto LAB_00007780;
+        rendererIndex = *ctx;
       }
-      puVar2 = PTR_DAT_001e88ac;
-      iVar4 = *(int *)(PTR_DAT_001e88ac + 0xc);
-      PTR_DAT_001e88ac[iVar5 + 0x98] = PTR_DAT_001e88ac[iVar5 + 0x98] + '\x01';
-      local_58 = (uint)*(byte *)(iVar4 + *param_1);
-      local_64[0] = 0;
-      local_54 = param_1[0xf] & 0x803f;
-      uVar7 = _io_connect_method_scalarI_scalarO
-                        (*(undefined4 *)(puVar2 + *param_1 * 4 + 0x18),7,&local_58,2,0,local_64);
-      if (uVar7 == 0) {
-        local_58 = ~(uint)*(byte *)(*(int *)(puVar2 + 0xc) + *param_1);
-        local_54 = param_1[0xf] & 0xffff3fc0;
-        local_50 = uVar7;
-        local_4c = uVar7;
-        iVar4 = _io_connect_method_scalarI_structureI(param_1[1],0,&local_58,4,0,0);
-        if (iVar4 == 0) goto LAB_00007320;
+      library = PTR_DAT_001e88ac;
+      status = *(int *)(PTR_DAT_001e88ac + 0xc);
+      PTR_DAT_001e88ac[rendererIndex + 0x98] = PTR_DAT_001e88ac[rendererIndex + 0x98] + '\x01';
+      scalarIn0 = (uint)*(byte *)(status + *ctx);
+      callWords[0] = 0;
+      scalarIn1 = ctx[0xf] & 0x803f;
+      ctxFlags = _io_connect_method_scalarI_scalarO
+                        (*(undefined4 *)(library + *ctx * 4 + 0x18),7,&scalarIn0,2,0,callWords);
+      if (ctxFlags == 0) {
+        scalarIn0 = ~(uint)*(byte *)(*(int *)(library + 0xc) + *ctx);
+        scalarIn1 = ctx[0xf] & 0xffff3fc0;
+        scalarIn2 = ctxFlags;
+        scalarIn3 = ctxFlags;
+        status = _io_connect_method_scalarI_structureI(ctx[1],0,&scalarIn0,4,0,0);
+        if (status == 0) goto LAB_00007320;
       }
 LAB_00007790:
-      uVar11 = 0x2715;
+      returnCode = 0x2715;
       goto LAB_000077a0;
     }
-    if (param_2 != 0x35) {
-      if (param_2 != 0) {
-        if (param_2 == 0x5b) {
-          if (param_3 != (int *)0x0) {
-            param_1[0x55] = param_3[3];
-            param_1[0x56] = param_3[2];
-            param_1[0x57] = (uint)*(ushort *)(*param_3 + 0x9a);
-            uVar1 = *(ushort *)(*param_3 + 0x9c);
-            param_1[0x5c] = 0;
-            param_1[0x59] = 0;
-            param_1[0x5a] = 0;
-            param_1[0x5b] = 0;
-            param_1[0x58] = (uint)uVar1;
-            _memcpy(param_1[5] + 0x24,param_3 + 4,0x3c);
-            *(uint *)param_1[5] = *(uint *)param_1[5] & 0xfffffffd;
+    if (drawableType != 0x35) {
+      if (drawableType != 0) {
+        if (drawableType == 0x5b) {
+          if (drawable != (int *)0x0) {
+            ctx[0x55] = drawable[3];
+            ctx[0x56] = drawable[2];
+            ctx[0x57] = (uint)*(ushort *)(*drawable + 0x9a);
+            rectField9c = *(ushort *)(*drawable + 0x9c);
+            ctx[0x5c] = 0;
+            ctx[0x59] = 0;
+            ctx[0x5a] = 0;
+            ctx[0x5b] = 0;
+            ctx[0x58] = (uint)rectField9c;
+            _memcpy(ctx[5] + 0x24,drawable + 4,0x3c);
+            *(uint *)ctx[5] = *(uint *)ctx[5] & 0xfffffffd;
             return 0;
           }
-          param_1[0x55] = param_1[0xf];
-          param_1[0x56] = param_1[0xe];
-          param_1[0x57] = param_1[0x41];
-          param_1[0x58] = param_1[0x42];
-          param_1[0x59] = param_1[0x43];
-          param_1[0x5a] = param_1[0x44];
-          param_1[0x5b] = param_1[0x45];
-          param_1[0x5c] = param_1[0x46];
-          _memcpy(param_1[5] + 0x24,param_1 + 0x10,0x3c);
-          if (*(char *)((int)param_1 + 0x143) == '\0') {
-            *(uint *)param_1[5] = *(uint *)param_1[5] & 0xfffffffd;
+          ctx[0x55] = ctx[0xf];
+          ctx[0x56] = ctx[0xe];
+          ctx[0x57] = ctx[0x41];
+          ctx[0x58] = ctx[0x42];
+          ctx[0x59] = ctx[0x43];
+          ctx[0x5a] = ctx[0x44];
+          ctx[0x5b] = ctx[0x45];
+          ctx[0x5c] = ctx[0x46];
+          _memcpy(ctx[5] + 0x24,ctx + 0x10,0x3c);
+          if (*(char *)((int)ctx + 0x143) == '\0') {
+            *(uint *)ctx[5] = *(uint *)ctx[5] & 0xfffffffd;
             return 0;
           }
-          *(uint *)param_1[5] = *(uint *)param_1[5] | 2;
+          *(uint *)ctx[5] = *(uint *)ctx[5] | 2;
           return 0;
         }
-        uVar11 = 0x271a;
+        returnCode = 0x271a;
         goto LAB_000077a0;
       }
-      if (param_3 == (int *)0x0) {
-        uVar11 = 1;
+      if (drawable == (int *)0x0) {
+        returnCode = 1;
         goto LAB_000077a0;
       }
     }
   }
 LAB_00007780:
-  uVar11 = 0x2715;
+  returnCode = 0x2715;
 LAB_000077a0:
-  ((int (*)())FUN_00007020)(param_1);
-  local_54 = 0;
-  local_58 = 0;
-  _io_connect_method_scalarI_structureI(param_1[1],0,&local_58,4,0,0);
-  return uVar11;
+  ((int (*)())FUN_00007020)(ctx);
+  scalarIn1 = 0;
+  scalarIn0 = 0;
+  _io_connect_method_scalarI_structureI(ctx[1],0,&scalarIn0,4,0,0);
+  return returnCode;
 }
 
 /* FUN_00007810 @ 0x7810 (20 bytes) */
