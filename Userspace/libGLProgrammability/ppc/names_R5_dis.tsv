@@ -1127,22 +1127,6 @@ use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined strin
 use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,puVar21\[iVar22\ \*\ 2\]\ >>\ 0xc\ \&\ 3\);$	+1
 use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*pfVar24\ =\ \(float\ \*\)\(param_1\ \+\ param_1\[0x1b\]\ \*\ 2\ \+\ \(puVar21\[iVar22\ \*\ 2\]\ \&\ 0xffff\)\ \*\ 4\);$	+2
 use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*if\ \(\*\(int\ \*\)\(local_84\ \+\ \(uint\)\*\(ushort\ \*\)\(\(int\)puVar21\ \+\ iVar9\ \+\ 6\)\ \*\ 4\)\ ==\ \-1\)\ \{$	+1
-use	_glpPPDisassemble	uVar20	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar20\ =\ 0xffffffff;$	+1
-use	_glpPPDisassemble	uVar20	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*if\ \(\(int\)uVar20\ <\ \(int\)\(uVar25\ \&\ 0xffff\)\)\ \{$	+2
-use	_glpPPDisassemble	uVar20	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*if\ \(uVar20\ ==\ 0xffffffff\)\ goto\ LAB_97beb670;$	+2
-use	_glpPPDisassemble	uVar20	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar20\ =\ 0xffffffff;$@2	+1
-use	_glpPPDisassemble	uVar20	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*if\ \(uVar20\ ==\ 0xffffffff\)\ \{$	+1
-use	_glpPPDisassemble	uVar20	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar20\ =\ \(uint\)\*\(ushort\ \*\)\(\(int\)puVar11\ \+\ 6\);$	+2
-use	_glpPPDisassemble	uVar20	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar20\ =\ 0xffffffff;$@3	+1
-use	_glpPPDisassemble	uVar20	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*\(uint\ \*\)\(\(uint\)\*\(ushort\ \*\)\(\(int\)puVar11\ \+\ 6\)\ \*\ 4\ \+\ local_88\)\ =\ uVar20;$	+1
-use	_glpPPDisassemble	uVar23	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar23\ =\ 0xffffffff;$	+1
-use	_glpPPDisassemble	uVar23	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*if\ \(\(int\)uVar23\ <\ \(int\)\(uVar7\ \&\ 0xffff\)\)\ \{$	+2
-use	_glpPPDisassemble	uVar23	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*if\ \(uVar23\ ==\ 0xffffffff\)\ goto\ LAB_97bea680;$	+2
-use	_glpPPDisassemble	uVar23	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar23\ =\ 0xffffffff;$@2	+1
-use	_glpPPDisassemble	uVar23	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*if\ \(uVar23\ ==\ 0xffffffff\)\ \{$	+1
-use	_glpPPDisassemble	uVar23	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar23\ =\ \(uint\)\*\(ushort\ \*\)\(\(int\)puVar11\ \+\ 6\);$	+2
-use	_glpPPDisassemble	uVar23	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar23\ =\ 0xffffffff;$@3	+1
-use	_glpPPDisassemble	uVar23	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*\(uint\ \*\)\(\(uint\)\*\(ushort\ \*\)\(\(int\)puVar11\ \+\ 6\)\ \*\ 4\ \+\ local_80\)\ =\ uVar23;$	+1
 use	_glpPPDisassemble	uVar23	loopIndex10	INFERRED	up-counting loop index	^\s*uVar23\ =\ 0;$	+1
 use	_glpPPDisassemble	uVar23	loopIndex10	INFERRED	up-counting loop index	^\s*iVar22\ =\ uVar23\ \*\ 8;$	+1
 use	_glpPPDisassemble	uVar23	loopIndex10	INFERRED	up-counting loop index	^\s*uVar6\ =\ puVar21\[uVar23\ \*\ 2\]\ >>\ 0x1d;$	+1
@@ -1414,15 +1398,22 @@ use	_glpPPShaderToProgramString	piVar15	allocation10	CONFIRMED	memory returned b
 use	_glpPPShaderToProgramString	piVar15	allocation10	CONFIRMED	memory returned by the allocator call	^\s*iVar16,piVar15,0,\&local_50,\&local_70,iVar17,param_2\);$	+1
 use	_glpPPShaderToProgramString	piVar15	allocation10	CONFIRMED	memory returned by the allocator call	^\s*if\ \(piVar15\ !=\ \(int\ \*\)0x0\)\ \{$@2	+2
 use	_glpPPShaderToProgramString	piVar15	allocation10	CONFIRMED	memory returned by the allocator call	^\s*if\ \(piVar15\ !=\ \(int\ \*\)0x0\)\ \{$@3	+2
-use	_glpPPShaderToProgramString	uVar23	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar23\ =\ 0xffffffff;$	+1
-use	_glpPPShaderToProgramString	uVar23	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*if\ \(\(int\)uVar23\ <\ \(int\)\(uVar1\ \&\ 0xffff\)\)\ \{$	+2
-use	_glpPPShaderToProgramString	uVar23	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*if\ \(uVar23\ !=\ 0xffffffff\)\ \{$	+2
-use	_glpPPShaderToProgramString	uVar23	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar23\ =\ 0xffffffff;$@2	+1
-use	_glpPPShaderToProgramString	uVar23	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*if\ \(uVar23\ ==\ 0xffffffff\)\ \{$	+1
-use	_glpPPShaderToProgramString	uVar23	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar23\ =\ \(uint\)\*\(ushort\ \*\)\(\(int\)param_1\ \+\ iVar5\ \+\ 6\);$	+2
-use	_glpPPShaderToProgramString	uVar23	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*\(uint\ \*\)\(uVar1\ \*\ 4\ \+\ iVar16\)\ =\ uVar23;$	+1
-use	_glpPPShaderToProgramString	uVar23	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar23\ =\ 0xffffffff;$@3	+1
 use	_glpPPShaderToProgram	uVar2	allocation2	CONFIRMED	memory returned by the allocator call	^\s*uVar2\ =\ 0;$	+1
 use	_glpPPShaderToProgram	uVar2	allocation2	CONFIRMED	memory returned by the allocator call	^\s*uVar2\ =\ 0;$@2	+1
 use	_glpPPShaderToProgram	uVar2	allocation2	CONFIRMED	memory returned by the allocator call	^\s*uVar2\ =\ _calloc\(local_30\[0\],8\);$	+2
 use	_glpPPShaderToProgram	uVar2	allocation2	CONFIRMED	memory returned by the allocator call	^\s*return\ uVar2;$	+1
+local	_glpPPShaderToProgramString	param_2	printOptions	UNKNOWN	forwarded unchanged as the last argument of _glpDisassemble2Op
+local	_glpPPShaderToProgramString	param_3	printFlags	INFERRED	bit0/bit1/bit2/bit3 select what the program text includes (they build local_6c: 0x100000/0x300000/0x400000/0xc00000)
+local	_glpPPShaderToProgramString	local_60	outCursor	CONFIRMED	running write pointer into the generated program text
+local	_glpPPShaderToProgramString	local_64	outBuffer	CONFIRMED	0x1000-byte text buffer from malloc, grown by _adjustAllocation
+local	_glpPPShaderToProgramString	local_68	outCapacity	CONFIRMED	current capacity of outBuffer (0x1000 initially)
+local	_glpPPShaderToProgramString	local_6c	requestedFlags	INFERRED	program-text flags built from param_3 (0x100000, 0x300000, 0x400000, 0xc00000)
+local	_glpPPShaderToProgramString	local_70	usageFlags	INFERRED	flag word filled by _glpDisassemble2Op through its stateFlags pointer: bits 0x100000..0x1000000 and 0x1000.. select which OPTION/STATE lines are emitted afterwards
+local	_glpPPShaderToProgramString	local_5c	arrayEnd	CONFIRMED	last register id of the parameter array found by _isParamArrayStart (-1 outside an array)
+local	_glpPPShaderToProgramString	local_58	wordsConsumed	CONFIRMED	instruction words consumed by the last _glpDisassemble2Op call
+local	_glpPPShaderToProgramString	local_54	charsWritten	CONFIRMED	characters written by the last _glpDisassemble2Op call
+local	_glpPPShaderToProgramString	local_50	outFlagWord	UNKNOWN	scratch word passed as _glpDisassemble2Op's param_8, initialised to 1
+local	_glpPPShaderToProgramString	local_4c	bodyStart	CONFIRMED	start of the instruction text inside the output buffer
+local	_glpPPShaderToProgramString	local_48	bodyCursor	CONFIRMED	write pointer of the instruction text (local_48[0])
+local	_glpPPShaderToProgramString	iVar17	shaderTarget	CONFIRMED	*shader: target enum, passed to _glpDisassemble2Op as the shader type
+local	_glpPPDisassemble	local_a4	registerId	INFERRED	id compared with the ushort at +6 of each attribute record

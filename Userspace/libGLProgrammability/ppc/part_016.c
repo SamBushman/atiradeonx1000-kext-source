@@ -2807,8 +2807,6 @@ int _glpPPDisassemble(program)
   uint *program;
 {
   uint loopIndex10;
-  uint ppcInstWord2;
-  uint ppcInstWord;
   uint *nextIndex5;
   int loopIndex5;
   int nextIndex4;
@@ -2903,7 +2901,7 @@ int _glpPPDisassemble(program)
   int outBufCapacity;
   int *outBuf;
   int *outCursor;
-  uint local_a4;
+  uint registerId;
   uint local_a0;
   int local_9c;
   int local_98;
@@ -3253,7 +3251,7 @@ switchD_97bea038_default:
   tempCount = program[4];
   puVar21 = program + program[5] * 2;
   if (!bVar2) {
-    ppcInstWord2 = 0xffffffff;
+    uVar23 = 0xffffffff;
     if ((int)tempCount < 1) {
 LAB_97bea680:
       local_5c = (uint)(byte)((local_80 < 0) << 3 | (0 < local_80) << 2 | (local_80 == 0) << 1 |
@@ -3268,40 +3266,40 @@ LAB_97bea698:
       uVar26 = CONCAT44(local_78,uVar16);
       loopIndex = 0;
       iVar9 = -1;
-      local_a4 = 0xffffffff;
-      ppcInstWord2 = 0xffffffff;
+      registerId = 0xffffffff;
+      uVar23 = 0xffffffff;
       if (0 < (int)tempCount) {
         iVar10 = 0;
         piVar15 = local_78;
         puVar11 = puVar21;
         do {
-          if (ppcInstWord2 == 0xffffffff) {
+          if (uVar23 == 0xffffffff) {
             *(uint *)((uint)*(ushort *)((int)puVar11 + 6) * 4 + local_80) =
                  (uint)*(ushort *)((int)puVar11 + 6);
-            uVar26 = ((int (*)())_isTempArrayStart)(program,(uint)*(ushort *)((int)puVar11 + 6),&local_a4);
+            uVar26 = ((int (*)())_isTempArrayStart)(program,(uint)*(ushort *)((int)puVar11 + 6),&registerId);
             if ((int)((ulonglong)uVar26 >> 0x20) == 0) {
               *(int *)(local_7c + (uint)*(ushort *)((int)puVar11 + 6) * 4) = iVar9;
             }
             else {
-              ppcInstWord2 = (uint)*(ushort *)((int)puVar11 + 6);
-              *(undefined4 *)(local_7c + ppcInstWord2 * 4) = 0;
+              uVar23 = (uint)*(ushort *)((int)puVar11 + 6);
+              *(undefined4 *)(local_7c + uVar23 * 4) = 0;
               iVar9 = 1;
             }
-            bVar1 = *(ushort *)((int)puVar21 + iVar10 + 6) == local_a4;
+            bVar1 = *(ushort *)((int)puVar21 + iVar10 + 6) == registerId;
 LAB_97bea790:
             if (bVar1) {
-              local_a4 = 0xffffffff;
-              ppcInstWord2 = 0xffffffff;
+              registerId = 0xffffffff;
+              uVar23 = 0xffffffff;
               *piVar15 = iVar9;
               piVar15 = piVar15 + 1;
               iVar9 = -1;
             }
           }
-          else if ((int)(uint)*(ushort *)((int)puVar11 + 6) <= (int)local_a4) {
-            *(uint *)((uint)*(ushort *)((int)puVar11 + 6) * 4 + local_80) = ppcInstWord2;
+          else if ((int)(uint)*(ushort *)((int)puVar11 + 6) <= (int)registerId) {
+            *(uint *)((uint)*(ushort *)((int)puVar11 + 6) * 4 + local_80) = uVar23;
             *(int *)(local_7c + (uint)*(ushort *)((int)puVar11 + 6) * 4) = iVar9;
             iVar9 = iVar9 + 1;
-            bVar1 = *(ushort *)((int)puVar11 + 6) == local_a4;
+            bVar1 = *(ushort *)((int)puVar11 + 6) == registerId;
             goto LAB_97bea790;
           }
           loopIndex = loopIndex + 1;
@@ -3317,13 +3315,13 @@ LAB_97bea790:
     do {
       uVar7 = *puVar11;
       puVar11 = puVar11 + 2;
-      if ((int)ppcInstWord2 < (int)(uVar7 & 0xffff)) {
-        ppcInstWord2 = uVar7 & 0xffff;
+      if ((int)uVar23 < (int)(uVar7 & 0xffff)) {
+        uVar23 = uVar7 & 0xffff;
       }
       uVar25 = uVar25 - 1;
     } while (uVar25 != 0);
-    if (ppcInstWord2 == 0xffffffff) goto LAB_97bea680;
-    allocation2 = ppcInstWord2 * 4 + 4;
+    if (uVar23 == 0xffffffff) goto LAB_97bea680;
+    allocation2 = uVar23 * 4 + 4;
     local_80 = _malloc(allocation2);
     local_5c = (uint)(byte)((local_80 < 0) << 3 | (0 < local_80) << 2 | (local_80 == 0) << 1 |
                            in_xer_so & 1) << 0x1c;
@@ -3869,7 +3867,7 @@ switchD_97beaef4_caseD_0:
     bVar3 = local_88 == 0;
     goto LAB_97bed528;
   }
-  ppcInstWord = 0xffffffff;
+  uVar20 = 0xffffffff;
   if ((int)paramCount < 1) {
 LAB_97beb670:
     bVar3 = local_88 == 0;
@@ -3880,13 +3878,13 @@ LAB_97beb670:
     do {
       uVar25 = *puVar11;
       puVar11 = puVar11 + 2;
-      if ((int)ppcInstWord < (int)(uVar25 & 0xffff)) {
-        ppcInstWord = uVar25 & 0xffff;
+      if ((int)uVar20 < (int)(uVar25 & 0xffff)) {
+        uVar20 = uVar25 & 0xffff;
       }
       uVar23 = uVar23 - 1;
     } while (uVar23 != 0);
-    if (ppcInstWord == 0xffffffff) goto LAB_97beb670;
-    allocation2 = ppcInstWord * 4 + 4;
+    if (uVar20 == 0xffffffff) goto LAB_97beb670;
+    allocation2 = uVar20 * 4 + 4;
     local_88 = _malloc(allocation2);
     bVar1 = local_88 == 0;
     local_84 = _malloc(allocation2);
@@ -3913,13 +3911,13 @@ LAB_97bf0c18:
   loopIndex = 0;
   iVar9 = -1;
   local_a0 = 0xffffffff;
-  ppcInstWord = 0xffffffff;
+  uVar20 = 0xffffffff;
   piVar15 = local_78;
   puVar11 = nextIndex5;
   if (0 < (int)paramCount) {
     do {
       if ((*puVar11 & 0x1f0000) != 0) {
-        if (ppcInstWord == 0xffffffff) {
+        if (uVar20 == 0xffffffff) {
           *(uint *)((uint)*(ushort *)((int)puVar11 + 6) * 4 + local_88) =
                (uint)*(ushort *)((int)puVar11 + 6);
           uVar26 = ((int (*)())_isParamArrayStart_97be9b80)(program,(uint)*(ushort *)((int)puVar11 + 6),&local_a0);
@@ -3927,21 +3925,21 @@ LAB_97bf0c18:
             *(int *)(local_84 + (uint)*(ushort *)((int)puVar11 + 6) * 4) = iVar9;
           }
           else {
-            ppcInstWord = (uint)*(ushort *)((int)puVar11 + 6);
-            *(undefined4 *)(local_84 + ppcInstWord * 4) = 0;
+            uVar20 = (uint)*(ushort *)((int)puVar11 + 6);
+            *(undefined4 *)(local_84 + uVar20 * 4) = 0;
             iVar9 = 1;
           }
           if (*(ushort *)((int)puVar11 + 6) == local_a0) {
 LAB_97beb790:
             local_a0 = 0xffffffff;
             *piVar15 = iVar9;
-            ppcInstWord = 0xffffffff;
+            uVar20 = 0xffffffff;
             piVar15 = piVar15 + 1;
             iVar9 = -1;
           }
         }
         else if ((int)(uint)*(ushort *)((int)puVar11 + 6) <= (int)local_a0) {
-          *(uint *)((uint)*(ushort *)((int)puVar11 + 6) * 4 + local_88) = ppcInstWord;
+          *(uint *)((uint)*(ushort *)((int)puVar11 + 6) * 4 + local_88) = uVar20;
           *(int *)(local_84 + (uint)*(ushort *)((int)puVar11 + 6) * 4) = iVar9;
           iVar9 = iVar9 + 1;
           if (*(ushort *)((int)puVar11 + 6) == local_a0) goto LAB_97beb790;
