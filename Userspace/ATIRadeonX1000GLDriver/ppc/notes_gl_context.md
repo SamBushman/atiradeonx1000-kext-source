@@ -137,3 +137,37 @@ glBitmap), +0x2b7c (y axis inverted: set to 1 when the drawable is not a pbuffer
 * Registers: pair detection (`value` follows `reg id`, or follows a count header) validated across four independent builders.
 * `names_R4_shadow.tsv`, `names_R4_copies.tsv`, `names_R4_bitmap.tsv`, `names_R4_misc.tsv`: row sources; `find_webs.py` now also parses
   wrapped `if (...)` conditions (`if (cond)` with the body or the brace on the next line).
+
+## 8. Fork X additions (state update, pixel transfer, texture upload, program constants)
+
+**Dirty-bit protocol (`_gldUpdateDispatch`).** The `dirtyBits` argument is five words: word 0 (bit 31 = full validate, 0x80/0x100 framebuffer changes),
+word 1 (low 16 bits = texture units to re-resolve), words 2 and 3 (program, framebuffer, vertex-program mode: 0x5400000, 0x4500000, 0x10000000), word 4.
+Pending bits accumulated since the last validate live in `ctx+0x26c0` (word 2), `ctx+0x26c4` (word 3) and `ctx+0x26c8` (update flags). For every dirty unit
+the bound texture is found in `engineObjects[unit row (stride 0x14)][target]` (first target whose enable bit in the engine state record, stride 0x7c, is set;
+5 targets: cube map, 3D, rectangle, 2D, 1D), made complete with FUN_00032100 when its flags say so, and the unit object `ctx+0x18c+unit*4` is set to it
+(or 0); `ctx+0x26b8` collects the units whose texture was modified and FUN_000a7ee0 applies them. The function then rewrites the dispatch table
+(`param_2`: +0x18..+0x3c entry points chosen by the program flag, +0x58/+0x5c/+0x60 finish/flush/clear chosen by the render flags) and returns 4 + flags.
+
+**Pixel transfer and texture functions identified (basis in brackets):**
+
+| function | role | basis |
+|---|---|---|
+| `FUN_00029290`, `FUN_00029294` | glReadPixels (two decompiles of the same code, entry stub at 0x29290) | GL enums 0x1901/0x1902/0x80e1, kernel selector 7 with a 7-word request {x, y, w, h, format, address, pitch}, scratch buffer at +0x2b74 |
+| `FUN_00028350` | read-back through a textured blit into a client-memory surface (`surfaceInfo`) | RGBA/float special case, 0x35000000 setup packet, float rectangle clip, 32-byte alignment test |
+| `FUN_00018a40` | glDrawPixels with pixel zoom | raster position, zoom factors, `_glgPixelCenters`, 0x7fe-wide tiles handed to FUN_00029c00 |
+| `FUN_0002a3d0` | draw from a client-memory surface | same packet as FUN_00028350 with the unpack state (+0x2e6c) and a raster origin |
+| `FUN_000369f0` | glTexSubImage-style upload | hardware chunk upload (0x44000000 packet, 0x1e000-byte chunks), textured-quad path (0x35000000) and surface-to-texture copy (`sourceSurface`) |
+| `FUN_00034200` | glGenerateMipmap | 0x37000000 packet, per-level quads with half-texel bias 1/128, halves width/height/depth per pass |
+| `FUN_0001ecd0` | vertex-array draw (DrawArrays/DrawElements) | primitive mode switch (1/8 even, 4 triangles, 7 quads), index types 0x1401/0x1403/0x1405, 0x39000000 packet |
+| `FUN_00024fe0`, `FUN_0003b870`, `FUN_0003d590` | fill the program constant table from operand descriptors | operand word: bits 16..20 file (1 literal pool, 2 environment, 3 state), state groups with strides 0x80 / 0x240, matrices at +0x1860/+0x1e60 |
+| `FUN_0003c400` | translate a shader object into a hardware program | target enum 0x8b30/0x8b31, per-instruction opcode field >>0x12 & 0xff |
+
+**Engine state (`ctx+0x10`) offsets used by these functions** (INFERRED unless a kernel/GL name fixes them): +0x2e48/+0x2e4c pixel zoom x/y (floats),
++0x2e6c.. unpack state (row length, skip rows/pixels, alignment, swap bytes +0x2e84, LSB first +0x2e85), +0x2e50 pack state, +0x2db8 read buffer enum,
++0x2d66/+0x2d84/+0x2ddc/+0x2dc8/+0x2e0a/+0x2e33 enable bytes read when rebuilding `drawPixelsFlags`, +0x30b0/+0x30b4 framebuffer-object attachment flags,
++0x31d4 + unit*0x7c target enable bits, +0x4308/+0x4310 program environment/local parameter arrays, +0x24c0..+0x24f8, +0x28c0 state parameter blocks.
+
+**ARB program assembler (`arb_scope.txt`, prefix `ARB_`).** The 38 emitters keep an instruction array (`instrArray` +0x3c8, `instrCount` +0x3cc,
+`currentInstr` +0x3dc, `instrCapacity` +0x3e0, 0x10-byte records) and a token stream (`tokenCount` +0x754, `tokenCapacity` +0x758, `tokenBuffer` +0x75c), both
+grown with `allocator` (+0x3d4: alloc at +0xc, free at +0x18). The emitter parameters follow one layout: dst (file, index, write mask[4]) then per source
+(file, index, select[4], negate[4]); the files are 6-bit, indexes 16-bit, and a source packs 3-bit selects and 1-bit negates into one swizzle word.

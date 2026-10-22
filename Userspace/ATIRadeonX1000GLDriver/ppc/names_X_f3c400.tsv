@@ -1,0 +1,36 @@
+# FUN_0003c400 (shader to hardware program): fork X
+use	FUN_0003c400	bVar2	isGLSLShader	CONFIRMED	shaderObject[0] - 0x8b30 < 2: GL_FRAGMENT_SHADER (0x8b30) or GL_VERTEX_SHADER (0x8b31)	^\s*bVar2\ =\ \*param_2\ \-\ 0x8b30U\ <\ 2;$	+1
+use	FUN_0003c400	bVar2	isGLSLShader	CONFIRMED	shaderObject[0] - 0x8b30 < 2: GL_FRAGMENT_SHADER (0x8b30) or GL_VERTEX_SHADER (0x8b31)	^\s*if\ \(\(bVar2\)\ \&\&\ \(\(uVar24\ \&\ 0x7000\)\ !=\ 0x3000\)\)\ goto\ switchD_0003cbec_caseD_3;$	+1
+use	FUN_0003c400	bVar2	isGLSLShader	CONFIRMED	shaderObject[0] - 0x8b30 < 2: GL_FRAGMENT_SHADER (0x8b30) or GL_VERTEX_SHADER (0x8b31)	^\s*if\ \(\(bVar2\)\ \&\&\ \(\(uVar6\ \&\ 0x7000\)\ !=\ 0x3000\)\)\ goto\ switchD_0003cbec_caseD_3;$	+1
+use	FUN_0003c400	iVar14	loopIndex	CONFIRMED	loop counter: starts at 0 and is incremented once per table entry	^\s*iVar14\ =\ 0;$	+1
+use	FUN_0003c400	iVar14	loopIndex	CONFIRMED	loop counter: starts at 0 and is incremented once per table entry	^\s*cStack_95\ =\ \(char\)param_2\[iVar5\ \*\ 2\ \+\ iVar14\ \*\ 2\];$	+1
+use	FUN_0003c400	iVar14	loopIndex	CONFIRMED	loop counter: starts at 0 and is incremented once per table entry	^\s*iVar14\ =\ iVar14\ \+\ 1;$	+1
+use	FUN_0003c400	iVar14	loopIndex	CONFIRMED	loop counter: starts at 0 and is incremented once per table entry	^\s*iVar14\ =\ 0;$@2	+1
+use	FUN_0003c400	iVar14	loopIndex	CONFIRMED	loop counter: starts at 0 and is incremented once per table entry	^\s*iVar17\ =\ iVar14\ \*\ 4;$	+3
+use	FUN_0003c400	iVar14	loopIndex	CONFIRMED	loop counter: starts at 0 and is incremented once per table entry	^\s*iVar14\ =\ 0;$@3	+1
+use	FUN_0003c400	iVar14	loopIndex	CONFIRMED	loop counter: starts at 0 and is incremented once per table entry	^\s*uVar15\ =\ param_2\[iVar5\ \*\ 2\ \+\ iVar14\ \*\ 2\ \+\ 1\];$	+2
+use	FUN_0003c400	iVar14	loopIndex	CONFIRMED	loop counter: starts at 0 and is incremented once per table entry	^\s*iVar14\ =\ iVar14\ \+\ 1;$@3	+2
+use	FUN_0003c400	iVar14	loopIndex	CONFIRMED	loop counter: starts at 0 and is incremented once per table entry	^\s*iVar14\ =\ 0;$@4	+1
+use	FUN_0003c400	iVar14	loopIndex	CONFIRMED	loop counter: starts at 0 and is incremented once per table entry	^\s*iVar14\ =\ iVar14\ \+\ 1;$@4	+1
+use	FUN_0003c400	iVar14	loopIndex	CONFIRMED	loop counter: starts at 0 and is incremented once per table entry	^\s*\}\ while\ \(iVar12\ !=\ iVar14\);$@2	+1
+use	FUN_0003c400	puVar21	instructionPtr	INFERRED	shaderObject + shaderObject[0x15] * 2: start of the 8-byte instruction records, advanced by puVar22	^\s*puVar21\ =\ \(uint\ \*\)\(param_2\ \+\ param_2\[0x15\]\ \*\ 2\);$	+1
+use	FUN_0003c400	puVar21	instructionPtr	INFERRED	shaderObject + shaderObject[0x15] * 2: start of the 8-byte instruction records, advanced by puVar22	^\s*puVar22\ =\ puVar21\ \+\ 2;$	+4
+use	FUN_0003c400	puVar21	instructionPtr	INFERRED	shaderObject + shaderObject[0x15] * 2: start of the 8-byte instruction records, advanced by puVar22	^\s*iVar17\ =\ \*\(int\ \*\)\(\(puVar21\[3\]\ \&\ 0xffff\)\ \*\ 4\ \+\ param_3\[2\]\);$	+1
+use	FUN_0003c400	puVar21	instructionPtr	INFERRED	shaderObject + shaderObject[0x15] * 2: start of the 8-byte instruction records, advanced by puVar22	^\s*uVar6\ =\ param_2\[iVar5\ \*\ 2\ \+\ \(puVar21\[3\]\ \&\ 0xffff\)\ \*\ 2\];$	+1
+use	FUN_0003c400	puVar21	instructionPtr	INFERRED	shaderObject + shaderObject[0x15] * 2: start of the 8-byte instruction records, advanced by puVar22	^\s*puVar22\ =\ puVar21\ \+\ 4;$	+1
+use	FUN_0003c400	puVar21	instructionPtr	INFERRED	shaderObject + shaderObject[0x15] * 2: start of the 8-byte instruction records, advanced by puVar22	^\s*puVar21\ =\ puVar22;$@2	+1
+local	FUN_0003c400	puVar22	nextInstruction	INFERRED	instructionPtr + 2 words: the following record
+use	FUN_0003c400	uVar15	opcode	INFERRED	*instructionPtr >> 0x12 & 0xff: the 8-bit opcode field (0x48 and 0x4d are tested)	^\s*uVar15\ =\ \*puVar21\ >>\ 0x12\ \&\ 0xff;$	+1
+use	FUN_0003c400	uVar15	opcode	INFERRED	*instructionPtr >> 0x12 & 0xff: the 8-bit opcode field (0x48 and 0x4d are tested)	^\s*if\ \(0x4d\ <\ uVar15\)\ goto\ switchD_0003cbec_caseD_3;$	+2
+use	FUN_0003c400	uVar15	opcode	INFERRED	*instructionPtr >> 0x12 & 0xff: the 8-bit opcode field (0x48 and 0x4d are tested)	^\s*if\ \(\(uVar15\ <\ 0x1f\)\ \|\|\ \(\(iVar18\ =\ 2,\ 0x3a\ <\ uVar15\ \&\&\ \(iVar18\ =\ 3,\ 0x40\ <\ uVar15\)\)\)\)\ \{$	+1
+use	FUN_0003c400	uVar15	opcode	INFERRED	*instructionPtr >> 0x12 & 0xff: the 8-bit opcode field (0x48 and 0x4d are tested)	^\s*switch\(uVar15\)\ \{$	+1
+use	FUN_0003c400	uVar24	operandWord	INFERRED	instructionPtr[2]: operand word with the source type in bits 17..19 (1 = temp table, 3 = state table)	^\s*uVar24\ =\ puVar21\[2\];$	+1
+use	FUN_0003c400	uVar24	operandWord	INFERRED	instructionPtr[2]: operand word with the source type in bits 17..19 (1 = temp table, 3 = state table)	^\s*if\ \(\(bVar2\)\ \&\&\ \(\(uVar24\ \&\ 0x7000\)\ !=\ 0x3000\)\)\ goto\ switchD_0003cbec_caseD_3;$	+2
+use	FUN_0003c400	uVar24	operandWord	INFERRED	instructionPtr[2]: operand word with the source type in bits 17..19 (1 = temp table, 3 = state table)	^\s*if\ \(\(\(uVar24\ \&\ 0x1e000\)\ !=\ 0x1e000\)\ \&\&\ \(!bVar1\)\)\ \{$	+1
+use	FUN_0003c400	uVar24	operandWord	INFERRED	instructionPtr[2]: operand word with the source type in bits 17..19 (1 = temp table, 3 = state table)	^\s*if\ \(\(\(uVar24\ \&\ 0x1e000\)\ !=\ 0x1e000\)\ \&\&\ \(!bVar1\)\)\ \{$@2	+3
+use	FUN_0003c400	uVar6	instructionWord	INFERRED	*instructionPtr: the instruction word (>>0x15 & 3, >>0x13 &3, >>0x11 & 3, >>0xf & 3 are the four source selectors)	^\s*uVar6\ =\ \*puVar21;$	+1
+use	FUN_0003c400	uVar6	instructionWord	INFERRED	*instructionPtr: the instruction word (>>0x15 & 3, >>0x13 &3, >>0x11 & 3, >>0xf & 3 are the four source selectors)	^\s*if\ \(\(bVar2\)\ \&\&\ \(\(uVar6\ \&\ 0x7000\)\ !=\ 0x3000\)\)\ goto\ switchD_0003cbec_caseD_3;$	+2
+use	FUN_0003c400	uVar6	instructionWord	INFERRED	*instructionPtr: the instruction word (>>0x15 & 3, >>0x13 &3, >>0x11 & 3, >>0xf & 3 are the four source selectors)	^\s*if\ \(\(int\)uVar6\ <\ 0\)\ \{$	+2
+use	FUN_0003c400	uVar6	instructionWord	INFERRED	*instructionPtr: the instruction word (>>0x15 & 3, >>0x13 &3, >>0x11 & 3, >>0xf & 3 are the four source selectors)	^\s*if\ \(\(uVar6\ \&\ 0x8000000\)\ ==\ 0\)\ \{$	+5
+use	FUN_0003c400	uVar6	instructionWord	INFERRED	*instructionPtr: the instruction word (>>0x15 & 3, >>0x13 &3, >>0x11 & 3, >>0xf & 3 are the four source selectors)	^\s*iVar8\ =\ \(uVar6\ >>\ 0x15\ \&\ 3\)\ \+\ 0x87d9;$	+4
+local	FUN_0003c400	uVar16	dstIndex	INFERRED	instructionPtr[1] & 0xffff: index into the hardware register table (hwProgram[2])

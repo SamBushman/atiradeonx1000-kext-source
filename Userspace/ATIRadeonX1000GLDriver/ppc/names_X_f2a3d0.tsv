@@ -1,0 +1,164 @@
+# FUN_0002a3d0: fork X
+local	FUN_0002a3d0	param_2	rasterPosition	INFERRED	pointer whose floats at +0x20/+0x24 are the destination origin added to the rectangle (current raster position)
+local	FUN_0002a3d0	param_7	pixels	INFERRED	client memory source: dstAddress = pixels + the skip offset FUN_0000a6e0 returns
+local	FUN_0002a3d0	param_8	rawTransfer	INFERRED	when 0 the unpack state engineState+0x2e6c is passed to FUN_0000a6e0, else 0 (no pixel-store processing)
+use	FUN_0002a3d0	puVar18	unpackState	INFERRED	engineState + 0x2e6c (unpack pixel-store state) or 0: last argument of FUN_0000a6e0	^\s*puVar18\ =\ \(\(unsigned\ char\ \*\)0x00002e6c\)\ \+\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\);$	+1
+use	FUN_0002a3d0	puVar18	unpackState	INFERRED	engineState + 0x2e6c (unpack pixel-store state) or 0: last argument of FUN_0000a6e0	^\s*puVar18\ =\ \(undefined\ \*\)0x0;$	+1
+use	FUN_0002a3d0	puVar18	unpackState	INFERRED	engineState + 0x2e6c (unpack pixel-store state) or 0: last argument of FUN_0000a6e0	^\s*FUN_0000a6e0\(param_1,param_5,param_6,param_3,param_4,\&local_108,auStack_104,local_100,puVar18\);$	+1
+use	FUN_0002a3d0	puVar18	formatTable	CONFIRMED	PTR_DAT_001e88c8: the 0x24-byte-per-entry pixel format table	^\s*if\ \(\(\(\(\(\*\(int\ \*\)param_9\[1\]\ !=\ 0\)\ \&\&\ \(iVar22\ =\ FUN_0001e280\(param_1,param_9,1\),\ iVar22\ ==\ 0\)\)$	+6
+use	FUN_0002a3d0	puVar18	formatTable	CONFIRMED	PTR_DAT_001e88c8: the 0x24-byte-per-entry pixel format table	^\s*puVar24\[0xa4\]\ =\ \*\(uint\ \*\)\(puVar18\ \+\ iVar32\ \*\ 0x24\ \+\ 0x18\)\ >>\ 0x1e\ \|\ puVar24\[0xa4\]\ \&\ 0xfffffffc$	+1
+use	FUN_0002a3d0	puVar18	formatTable	CONFIRMED	PTR_DAT_001e88c8: the 0x24-byte-per-entry pixel format table	^\s*uVar20\ =\ \*\(uint\ \*\)\(puVar18\ \+\ iVar32\ \*\ 0x24\ \+\ 0x1c\);$	+2
+use	FUN_0002a3d0	puVar18	formatTable	CONFIRMED	PTR_DAT_001e88c8: the 0x24-byte-per-entry pixel format table	^\s*\(\(int\)local_108\ >>\ \(\*\(uint\ \*\)\(puVar18\ \+\ iVar32\ \*\ 0x24\ \+\ 0x14\)\ \&\ 7\)\)\ \-\ 1U\ \&\ 0x3fff\ \|$	+1
+use	FUN_0002a3d0	puVar16	hwContextTemplate	INFERRED	PTR_DAT_001e88d0: the 0x2f4-byte hardware context template copied into the textured-draw packet	^\s*puVar16\ =\ PTR_DAT_001e88d0;$	+1
+use	FUN_0002a3d0	puVar16	hwContextTemplate	INFERRED	PTR_DAT_001e88d0: the 0x2f4-byte hardware context template copied into the textured-draw packet	^\s*_memcpy\(puVar24\ \+\ 4,puVar16,0x2f4\);$	+1
+use	FUN_0002a3d0	puVar16	formatTableB	CONFIRMED	PTR_DAT_001e88c8 again: the 0x24-byte pixel format table indexed by the colour format index	^\s*puVar16\ =\ PTR_DAT_001e88c8;$	+1
+use	FUN_0002a3d0	puVar16	formatTableB	CONFIRMED	PTR_DAT_001e88c8 again: the 0x24-byte pixel format table indexed by the colour format index	^\s*uVar31\ =\ \(\*\(uint\ \*\)\(puVar16\ \+\ \(uint\)bVar35\ \*\ 0x24\ \+\ 0x18\)\ \&\ 0x18\)\ <<\ 5;$	+1
+use	FUN_0002a3d0	puVar16	formatTableB	CONFIRMED	PTR_DAT_001e88c8 again: the 0x24-byte pixel format table indexed by the colour format index	^\s*uVar20\ =\ \(\*\(uint\ \*\)\(puVar16\ \+\ \(uint\)bVar35\ \*\ 0x24\ \+\ 0x18\)\ \&\ 6\)\ <<\ 9;$	+1
+use	FUN_0002a3d0	puVar16	formatTableB	CONFIRMED	PTR_DAT_001e88c8 again: the 0x24-byte pixel format table indexed by the colour format index	^\s*uVar28\ =\ \*\(uint\ \*\)\(puVar16\ \+\ \(uint\)bVar35\ \*\ 0x24\ \+\ 0x1c\)\ >>\ 0x12\ \&\ 0x3000;$	+1
+use	FUN_0002a3d0	puVar16	formatTableB	CONFIRMED	PTR_DAT_001e88c8 again: the 0x24-byte pixel format table indexed by the colour format index	^\s*uVar7\ =\ \*\(uint\ \*\)\(puVar16\ \+\ \(uint\)bVar35\ \*\ 0x24\ \+\ 0x1c\)\ >>\ 0xe\ \&\ 0xc000;$	+1
+use	FUN_0002a3d0	puVar16	formatTableB	CONFIRMED	PTR_DAT_001e88c8 again: the 0x24-byte pixel format table indexed by the colour format index	^\s*\*\(uint\ \*\)\(puVar16\ \+\ \(uint\)bVar35\ \*\ 0x24\ \+\ 0x18\)\ >>\ 5\ \&\ 0x1f\ \|$	+1
+use	FUN_0002a3d0	puVar16	formatTableB	CONFIRMED	PTR_DAT_001e88c8 again: the 0x24-byte pixel format table indexed by the colour format index	^\s*if\ \(\(\*\(uint\ \*\)\(puVar16\ \+\ \(uint\)bVar35\ \*\ 0x24\ \+\ 0x14\)\ \&\ 0xfc000000\)\ ==\ 0\)\ \{$	+1
+use	FUN_0002a3d0	puVar16	formatTableB	CONFIRMED	PTR_DAT_001e88c8 again: the 0x24-byte pixel format table indexed by the colour format index	^\s*if\ \(\(\*\(uint\ \*\)\(puVar16\ \+\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x00002b7f\)\[param_1\]\ \*\ 0x24\ \+\ 0x18\)\ \&\ 0x8000\)\ ==\ 0\)\ \{$	+1
+use	FUN_0002a3d0	puVar16	formatTableB	CONFIRMED	PTR_DAT_001e88c8 again: the 0x24-byte pixel format table indexed by the colour format index	^\s*if\ \(\(\*\(uint\ \*\)\(puVar16\ \+\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x00002b7f\)\[param_1\]\ \*\ 0x24\ \+\ 0x18\)\ \&\ 0x8000\)\ ==\ 0\)\ \{$@2	+1
+use	FUN_0002a3d0	puVar16	formatTableB	CONFIRMED	PTR_DAT_001e88c8 again: the 0x24-byte pixel format table indexed by the colour format index	^\s*if\ \(\(\*\(uint\ \*\)\(puVar16\ \+\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x00002b7f\)\[param_1\]\ \*\ 0x24\ \+\ 0x18\)\ \&\ 0x4000\)\ ==\ 0\)\ \{$	+1
+use	FUN_0002a3d0	bVar35	formatIndex	INFERRED	byte at ctx+0x2b7f indexes the 0x24-byte format table	^\s*bVar35\ =\ \(\(unsigned\ char\ \*\)0x00002b7f\)\[param_1\];$	+2
+use	FUN_0002a3d0	bVar35	formatIndex	INFERRED	byte at ctx+0x2b7f indexes the 0x24-byte format table	^\s*uVar20\ =\ \(\*\(uint\ \*\)\(puVar16\ \+\ \(uint\)bVar35\ \*\ 0x24\ \+\ 0x18\)\ \&\ 6\)\ <<\ 9;$	+1
+use	FUN_0002a3d0	bVar35	formatIndex	INFERRED	byte at ctx+0x2b7f indexes the 0x24-byte format table	^\s*uVar28\ =\ \*\(uint\ \*\)\(puVar16\ \+\ \(uint\)bVar35\ \*\ 0x24\ \+\ 0x1c\)\ >>\ 0x12\ \&\ 0x3000;$	+1
+use	FUN_0002a3d0	bVar35	formatIndex	INFERRED	byte at ctx+0x2b7f indexes the 0x24-byte format table	^\s*uVar7\ =\ \*\(uint\ \*\)\(puVar16\ \+\ \(uint\)bVar35\ \*\ 0x24\ \+\ 0x1c\)\ >>\ 0xe\ \&\ 0xc000;$	+1
+use	FUN_0002a3d0	bVar35	formatIndex	INFERRED	byte at ctx+0x2b7f indexes the 0x24-byte format table	^\s*\*\(uint\ \*\)\(puVar16\ \+\ \(uint\)bVar35\ \*\ 0x24\ \+\ 0x18\)\ >>\ 5\ \&\ 0x1f\ \|$	+1
+use	FUN_0002a3d0	bVar35	formatIndex	INFERRED	byte at ctx+0x2b7f indexes the 0x24-byte format table	^\s*if\ \(\(\*\(uint\ \*\)\(puVar16\ \+\ \(uint\)bVar35\ \*\ 0x24\ \+\ 0x14\)\ \&\ 0xfc000000\)\ ==\ 0\)\ \{$	+1
+local	FUN_0002a3d0	uVar31	dstAddress	INFERRED	pixels + the skip offset FUN_0000a6e0 returns; must be 0x1f-aligned together with the row bytes
+local	FUN_0002a3d0	uVar27	renderWidthClamped	CONFIRMED	GLD_renderWidth, or 1 when < 1
+local	FUN_0002a3d0	uVar29	renderHeightClamped	CONFIRMED	GLD_renderHeight, or 1 when < 1
+use	FUN_0002a3d0	iVar22	prepareResult	INFERRED	return value of FUN_0001e280(ctx, surfaceInfo, 1), tested against 0	^\s*if\ \(\(\(\(\(\*\(int\ \*\)param_9\[1\]\ !=\ 0\)\ \&\&\ \(iVar22\ =\ FUN_0001e280\(param_1,param_9,1\),\ iVar22\ ==\ 0\)\)$	+6
+use	FUN_0002a3d0	iVar22	unitSlotPtr	CONFIRMED	ctx, then -4 per iteration: walks the unit object slots from the top	^\s*iVar22\ =\ param_1;$	+1
+use	FUN_0002a3d0	iVar22	unitSlotPtr	CONFIRMED	ctx, then -4 per iteration: walks the unit object slots from the top	^\s*if\ \(\*\(int\ \*\)\(iVar22\ \+\ 0x1c8\)\ !=\ 0\)\ \{$	+1
+use	FUN_0002a3d0	iVar22	unitSlotPtr	CONFIRMED	ctx, then -4 per iteration: walks the unit object slots from the top	^\s*iVar22\ =\ iVar22\ \+\ \-4;$	+1
+use	FUN_0002a3d0	iVar22	storeResult	CONFIRMED	result of the store-conditional that bumps the +0x10 word of the surface object	^\s*iVar22\ =\ storeWordConditionalIndexed\(\*piVar21\ \+\ 0x10000,0,piVar21\);$	+2
+use	FUN_0002a3d0	iVar22	unitOffset	CONFIRMED	starts at 0 and steps by 0x14: byte offset of the unit row in the engineObjects table	^\s*iVar22\ =\ 0;$	+1
+use	FUN_0002a3d0	iVar22	unitOffset	CONFIRMED	starts at 0 and steps by 0x14: byte offset of the unit row in the engineObjects table	^\s*if\ \(\(iVar22\ ==\ 0\)\ \|\|\ \(iVar34\ !=\ 0\)\)\ \{$	+2
+use	FUN_0002a3d0	iVar22	unitOffset	CONFIRMED	starts at 0 and steps by 0x14: byte offset of the unit row in the engineObjects table	^\s*bVar1\ =\ iVar22\ !=\ 0xf;$	+1
+use	FUN_0002a3d0	iVar22	unitOffset	CONFIRMED	starts at 0 and steps by 0x14: byte offset of the unit row in the engineObjects table	^\s*iVar22\ =\ iVar22\ \+\ 1;$	+1
+use	FUN_0002a3d0	iVar34	unitIndex	CONFIRMED	texture unit loop counter 15 down to 1 in the packet-size loop	^\s*iVar34\ =\ 0xf;$	+1
+use	FUN_0002a3d0	iVar34	unitIndex	CONFIRMED	texture unit loop counter 15 down to 1 in the packet-size loop	^\s*uVar25\ =\ \(\(int\ \(\*\)\(\)\)FUN_0002cd50\)\(param_1,0,iVar34,uVar25\);$	+1
+use	FUN_0002a3d0	iVar34	unitIndex	CONFIRMED	texture unit loop counter 15 down to 1 in the packet-size loop	^\s*iVar34\ =\ iVar34\ \+\ \-1;$	+2
+use	FUN_0002a3d0	iVar34	unitIndex	CONFIRMED	texture unit loop counter 15 down to 1 in the packet-size loop	^\s*\}\ while\ \(iVar34\ !=\ 0\);$	+1
+use	FUN_0002a3d0	iVar34	unitObject	CONFIRMED	ctx + 0x18c + unit*4: the bound texture object of the unit	^\s*iVar34\ =\ \*\(int\ \*\)\(iVar32\ \+\ 0x18c\);$	+2
+use	FUN_0002a3d0	iVar34	unitObject	CONFIRMED	ctx + 0x18c + unit*4: the bound texture object of the unit	^\s*if\ \(iVar34\ ==\ \*piVar21\)\ \{$	+2
+use	FUN_0002a3d0	iVar34	unitObject	CONFIRMED	ctx + 0x18c + unit*4: the bound texture object of the unit	^\s*iVar34\ =\ 0;$	+1
+use	FUN_0002a3d0	iVar34	unitObject	CONFIRMED	ctx + 0x18c + unit*4: the bound texture object of the unit	^\s*if\ \(\(iVar22\ ==\ 0\)\ \|\|\ \(iVar34\ !=\ 0\)\)\ \{$	+2
+local	FUN_0002a3d0	iVar36	targetsLeft	CONFIRMED	5 targets per unit row: loop counter over the 5 slots
+use	FUN_0002a3d0	piVar21	surfaceRefPtr	INFERRED	surfaceObject + 4 words: the +0x10 reference word bumped with a store-conditional	^\s*piVar21\ =\ puVar30\ \+\ 4;$	+1
+use	FUN_0002a3d0	piVar21	surfaceRefPtr	INFERRED	surfaceObject + 4 words: the +0x10 reference word bumped with a store-conditional	^\s*iVar22\ =\ storeWordConditionalIndexed\(\*piVar21\ \+\ 0x10000,0,piVar21\);$	+2
+use	FUN_0002a3d0	piVar21	targetSlot	CONFIRMED	pointer into the unit row of ctx->engineObjects	^\s*piVar21\ =\ \(int\ \*\)\(iVar26\ \+\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineObjects\)\);$	+1
+use	FUN_0002a3d0	piVar21	targetSlot	CONFIRMED	pointer into the unit row of ctx->engineObjects	^\s*if\ \(iVar34\ ==\ \*piVar21\)\ \{$	+1
+use	FUN_0002a3d0	piVar21	targetSlot	CONFIRMED	pointer into the unit row of ctx->engineObjects	^\s*piVar21\ =\ piVar21\ \+\ 1;$	+1
+use	FUN_0002a3d0	puVar30	surfaceObject	INFERRED	*surfaceInfo[2]: the source surface object	^\s*puVar30\ =\ \*\(undefined4\ \*\*\)param_9\[2\];$	+2
+use	FUN_0002a3d0	puVar30	surfaceObject	INFERRED	*surfaceInfo[2]: the source surface object	^\s*puVar24\[2\]\ =\ \*puVar30;$	+1
+use	FUN_0002a3d0	puVar30	packetEnd	CONFIRMED	packet + 0xcd: end of the textured-draw setup packet	^\s*puVar30\ =\ puVar24\ \+\ 0xcd;$	+1
+use	FUN_0002a3d0	puVar30	packetEnd	CONFIRMED	packet + 0xcd: end of the textured-draw setup packet	^\s*puVar24\[1\]\ =\ \(int\)puVar30\ \-\ \(int\)puVar23\ >>\ 2;$	+1
+use	FUN_0002a3d0	puVar30	packetEnd	CONFIRMED	packet + 0xcd: end of the textured-draw setup packet	^\s*\*puVar19\ =\ \(int\)puVar30\ \-\ \(int\)puVar19\ >>\ 2\ \|\ \*puVar19;$	+2
+use	FUN_0002a3d0	iVar26	surfaceBase	INFERRED	*(int *)*surfaceInfo: base address of the source surface	^\s*iVar26\ =\ \*\(int\ \*\)\*param_9;$	+1
+use	FUN_0002a3d0	iVar26	surfaceBase	INFERRED	*(int *)*surfaceInfo: base address of the source surface	^\s*puVar24\[0xa4\]\ =\ \(uVar31\ \-\ iVar26\)\ \*\ 0x20\ \|\ puVar24\[0xa4\]\ \&\ 0x1f;$	+1
+use	FUN_0002a3d0	fVar5	rasterX	INFERRED	*(float *)(rasterPosition + 0x20)	^\s*fVar5\ =\ \*\(float\ \*\)\(param_2\ \+\ 0x20\);$	+1
+use	FUN_0002a3d0	fVar5	rasterX	INFERRED	*(float *)(rasterPosition + 0x20)	^\s*fVar8\ =\ fVar5\ \+\ FLOAT_001aa0d4\ \+\ FLOAT_001aa0d4;$	+1
+use	FUN_0002a3d0	fVar5	rasterX	INFERRED	*(float *)(rasterPosition + 0x20)	^\s*fVar11\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_e4\)\ \-\ DOUBLE_001aa1e0\)\ \+\ fVar5\ \+$	+1
+use	FUN_0002a3d0	fVar5	rasterX	INFERRED	*(float *)(rasterPosition + 0x20)	^\s*fVar8\ =\ \-fVar5\ \+\ fVar12\ \+\ FLOAT_001aa0d4;$	+2
+use	FUN_0002a3d0	fVar6	rasterY	INFERRED	*(float *)(rasterPosition + 0x24)	^\s*fVar6\ =\ \*\(float\ \*\)\(param_2\ \+\ 0x24\);$	+1
+use	FUN_0002a3d0	fVar6	rasterY	INFERRED	*(float *)(rasterPosition + 0x24)	^\s*fVar2\ =\ fVar4\ \-\ \(fVar6\ \+\ FLOAT_001aa0d4\);$	+2
+use	FUN_0002a3d0	fVar6	rasterY	INFERRED	*(float *)(rasterPosition + 0x24)	^\s*fVar5\ =\ \-fVar6\ \+\ \(FLOAT_001aa0d4\ \-\ \(fVar11\ \+\ fVar4\)\);$	+2
+use	FUN_0002a3d0	fVar3	renderWidthF	CONFIRMED	(float)renderWidthClamped, or 1.0	^\s*fVar3\ =\ FLOAT_001aa0e8;$	+1
+use	FUN_0002a3d0	fVar3	renderWidthF	CONFIRMED	(float)renderWidthClamped, or 1.0	^\s*fVar3\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_f4\)\ \-\ DOUBLE_001aa1e0\);$	+1
+use	FUN_0002a3d0	fVar3	renderWidthF	CONFIRMED	(float)renderWidthClamped, or 1.0	^\s*fVar8\ =\ fVar11\ \-\ fVar3;$	+1
+use	FUN_0002a3d0	fVar3	renderWidthF	CONFIRMED	(float)renderWidthClamped, or 1.0	^\s*fVar9\ =\ fVar3;$	+1
+use	FUN_0002a3d0	fVar3	renderWidthF	CONFIRMED	(float)renderWidthClamped, or 1.0	^\s*fVar9\ =\ fVar3;$@2	+1
+use	FUN_0002a3d0	fVar4	renderHeightF	CONFIRMED	(float)renderHeightClamped, or 1.0	^\s*fVar4\ =\ FLOAT_001aa0e8;$	+1
+use	FUN_0002a3d0	fVar4	renderHeightF	CONFIRMED	(float)renderHeightClamped, or 1.0	^\s*fVar4\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_ec\)\ \-\ DOUBLE_001aa1e0\);$	+1
+use	FUN_0002a3d0	fVar4	renderHeightF	CONFIRMED	(float)renderHeightClamped, or 1.0	^\s*fVar2\ =\ fVar4\ \-\ \(fVar6\ \+\ FLOAT_001aa0d4\);$	+2
+use	FUN_0002a3d0	fVar4	renderHeightF	CONFIRMED	(float)renderHeightClamped, or 1.0	^\s*fVar14\ =\ fVar2\ \-\ fVar4;$	+1
+use	FUN_0002a3d0	fVar4	renderHeightF	CONFIRMED	(float)renderHeightClamped, or 1.0	^\s*fVar11\ =\ fVar4;$	+1
+use	FUN_0002a3d0	fVar4	renderHeightF	CONFIRMED	(float)renderHeightClamped, or 1.0	^\s*fVar11\ =\ fVar4;$@2	+1
+use	FUN_0002a3d0	bVar1	lastUnit	CONFIRMED	unitIndex != 0xf test of the binding loop	^\s*bVar1\ =\ iVar22\ !=\ 0xf;$	+1
+use	FUN_0002a3d0	bVar1	lastUnit	CONFIRMED	unitIndex != 0xf test of the binding loop	^\s*\}\ while\ \(bVar1\);$	+1
+local	FUN_0002a3d0	uStack_f4	renderWidthI2dLo	CONFIRMED	GCC int-to-double idiom: the word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant DOUBLE_001aa1e0: renderWidthClamped
+local	FUN_0002a3d0	local_f8	renderWidthI2dHi	CONFIRMED	GCC int-to-double idiom: the word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant DOUBLE_001aa1e0: renderWidthClamped (high word)
+local	FUN_0002a3d0	uStack_ec	renderHeightI2dLo	CONFIRMED	GCC int-to-double idiom: the word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant DOUBLE_001aa1e0: renderHeightClamped
+local	FUN_0002a3d0	local_f0	renderHeightI2dHi	CONFIRMED	GCC int-to-double idiom: the word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant DOUBLE_001aa1e0: renderHeightClamped (high word)
+local	FUN_0002a3d0	uStack_e4	widthI2dLo	CONFIRMED	GCC int-to-double idiom: the word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant DOUBLE_001aa1e0: width
+local	FUN_0002a3d0	local_e8	widthI2dHi	CONFIRMED	GCC int-to-double idiom: the word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant DOUBLE_001aa1e0: width (high word)
+local	FUN_0002a3d0	uStack_dc	heightI2dLo	CONFIRMED	GCC int-to-double idiom: the word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant DOUBLE_001aa1e0: height
+local	FUN_0002a3d0	local_e0	heightI2dHi	CONFIRMED	GCC int-to-double idiom: the word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant DOUBLE_001aa1e0: height (high word)
+local	FUN_0002a3d0	uStack_d4	negRenderHeightI2dLo	CONFIRMED	GCC int-to-double idiom: the word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant DOUBLE_001aa1e0: -renderHeightClamped
+local	FUN_0002a3d0	local_d8	negRenderHeightI2dHi	CONFIRMED	GCC int-to-double idiom: the word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant DOUBLE_001aa1e0: -renderHeightClamped (high word)
+use	FUN_0002a3d0	uVar25	sc_edgerule	CONFIRMED	copy of ctx+GLD_sc_edgerule (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_sc_edgerule\);$	+1
+use	FUN_0002a3d0	uVar25	sc_edgerule	CONFIRMED	copy of ctx+GLD_sc_edgerule (register shadow) written into the packet	^\s*puVar24\[0xd6\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	sc_screendoor	CONFIRMED	copy of ctx+GLD_sc_screendoor (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_sc_screendoor\);$	+1
+use	FUN_0002a3d0	uVar25	sc_screendoor	CONFIRMED	copy of ctx+GLD_sc_screendoor (register shadow) written into the packet	^\s*puVar24\[0xd8\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	gb_mspos1	CONFIRMED	copy of ctx+GLD_gb_mspos1 (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_gb_mspos1\);$	+1
+use	FUN_0002a3d0	uVar25	gb_mspos1	CONFIRMED	copy of ctx+GLD_gb_mspos1 (register shadow) written into the packet	^\s*puVar24\[0xdd\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	gb_aa_config	CONFIRMED	copy of ctx+GLD_gb_aa_config (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_gb_aa_config\);$	+1
+use	FUN_0002a3d0	uVar25	gb_aa_config	CONFIRMED	copy of ctx+GLD_gb_aa_config (register shadow) written into the packet	^\s*puVar24\[0xdf\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	sc_hyperz_en	CONFIRMED	copy of ctx+GLD_sc_hyperz_en (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_sc_hyperz_en\);$	+1
+use	FUN_0002a3d0	uVar25	sc_hyperz_en	CONFIRMED	copy of ctx+GLD_sc_hyperz_en (register shadow) written into the packet	^\s*puVar24\[0xe1\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	zb_bw_cntl	CONFIRMED	copy of ctx+GLD_zb_bw_cntl (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_zb_bw_cntl\);$	+1
+use	FUN_0002a3d0	uVar25	zb_bw_cntl	CONFIRMED	copy of ctx+GLD_zb_bw_cntl (register shadow) written into the packet	^\s*puVar24\[0xe3\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	zb_zstencilcntl	CONFIRMED	copy of ctx+GLD_zb_zstencilcntl (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_zb_zstencilcntl\);$	+1
+use	FUN_0002a3d0	uVar25	zb_zstencilcntl	CONFIRMED	copy of ctx+GLD_zb_zstencilcntl (register shadow) written into the packet	^\s*puVar24\[0xe5\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	vap_cntl_status	CONFIRMED	copy of ctx+GLD_vap_cntl_status (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_vap_cntl_status\);$	+1
+use	FUN_0002a3d0	uVar25	vap_cntl_status	CONFIRMED	copy of ctx+GLD_vap_cntl_status (register shadow) written into the packet	^\s*puVar24\[0xe7\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	vap_clip_cntl	CONFIRMED	copy of ctx+GLD_vap_clip_cntl (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_vap_clip_cntl\);$	+1
+use	FUN_0002a3d0	uVar25	vap_clip_cntl	CONFIRMED	copy of ctx+GLD_vap_clip_cntl (register shadow) written into the packet	^\s*puVar24\[0xe9\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	vap_vte_cntl	CONFIRMED	copy of ctx+GLD_vap_vte_cntl (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(GLD_vap_vte_cntl\ \+\ param_1\);$	+1
+use	FUN_0002a3d0	uVar25	vap_vte_cntl	CONFIRMED	copy of ctx+GLD_vap_vte_cntl (register shadow) written into the packet	^\s*puVar24\[0x18b\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	su_cull_mode	CONFIRMED	copy of ctx+GLD_su_cull_mode (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_su_cull_mode\);$	+1
+use	FUN_0002a3d0	uVar25	su_cull_mode	CONFIRMED	copy of ctx+GLD_su_cull_mode (register shadow) written into the packet	^\s*puVar24\[0xeb\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	rb3d_dither_ctl	CONFIRMED	copy of ctx+GLD_rb3d_dither_ctl (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_rb3d_dither_ctl\);$	+1
+use	FUN_0002a3d0	uVar25	rb3d_dither_ctl	CONFIRMED	copy of ctx+GLD_rb3d_dither_ctl (register shadow) written into the packet	^\s*puVar24\[0xed\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	gb_enable	CONFIRMED	copy of ctx+GLD_gb_enable (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_gb_enable\);$	+1
+use	FUN_0002a3d0	uVar25	gb_enable	CONFIRMED	copy of ctx+GLD_gb_enable (register shadow) written into the packet	^\s*puVar24\[0xf1\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	vap_out_vtx_fmt_0	CONFIRMED	copy of ctx+GLD_vap_out_vtx_fmt_0 (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_vap_out_vtx_fmt_0\);$	+1
+use	FUN_0002a3d0	uVar25	vap_out_vtx_fmt_0	CONFIRMED	copy of ctx+GLD_vap_out_vtx_fmt_0 (register shadow) written into the packet	^\s*puVar24\[0xf3\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	vap_out_vtx_fmt_1	CONFIRMED	copy of ctx+GLD_vap_out_vtx_fmt_1 (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_vap_out_vtx_fmt_1\);$	+1
+use	FUN_0002a3d0	uVar25	vap_out_vtx_fmt_1	CONFIRMED	copy of ctx+GLD_vap_out_vtx_fmt_1 (register shadow) written into the packet	^\s*puVar24\[0xf5\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	vap_prog_stream_cntl_0_ptr	CONFIRMED	copy of ctx+GLD_vap_prog_stream_cntl_0_ptr (register shadow) written into the packet	^\s*uVar25\ =\ \*\*\(undefined4\ \*\*\)\(param_1\ \+\ GLD_vap_prog_stream_cntl_0_ptr\);$	+1
+use	FUN_0002a3d0	uVar25	vap_prog_stream_cntl_0_ptr	CONFIRMED	copy of ctx+GLD_vap_prog_stream_cntl_0_ptr (register shadow) written into the packet	^\s*puVar24\[0xf9\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	vap_prog_stream_cntl_ext_0_ptr	CONFIRMED	copy of ctx+GLD_vap_prog_stream_cntl_ext_0_ptr (register shadow) written into the packet	^\s*uVar25\ =\ \*\*\(undefined4\ \*\*\)\(param_1\ \+\ GLD_vap_prog_stream_cntl_ext_0_ptr\);$	+1
+use	FUN_0002a3d0	uVar25	vap_prog_stream_cntl_ext_0_ptr	CONFIRMED	copy of ctx+GLD_vap_prog_stream_cntl_ext_0_ptr (register shadow) written into the packet	^\s*puVar24\[0xfb\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	zb_cntl	CONFIRMED	copy of ctx+GLD_zb_cntl (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_zb_cntl\);$	+1
+use	FUN_0002a3d0	uVar25	zb_cntl	CONFIRMED	copy of ctx+GLD_zb_cntl (register shadow) written into the packet	^\s*puVar24\[0xfd\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	ga_poly_mode	CONFIRMED	copy of ctx+GLD_ga_poly_mode (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_ga_poly_mode\);$	+1
+use	FUN_0002a3d0	uVar25	ga_poly_mode	CONFIRMED	copy of ctx+GLD_ga_poly_mode (register shadow) written into the packet	^\s*puVar24\[0x103\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	ga_color_control	CONFIRMED	copy of ctx+GLD_ga_color_control (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_ga_color_control\);$	+1
+use	FUN_0002a3d0	uVar25	ga_color_control	CONFIRMED	copy of ctx+GLD_ga_color_control (register shadow) written into the packet	^\s*puVar24\[0x107\]\ =\ uVar25;$@2	+1
+use	FUN_0002a3d0	uVar25	tx_enable	CONFIRMED	copy of ctx+GLD_tx_enable (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_tx_enable\);$	+1
+use	FUN_0002a3d0	uVar25	tx_enable	CONFIRMED	copy of ctx+GLD_tx_enable (register shadow) written into the packet	^\s*puVar24\[0x10b\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	gb_ps3_enable	CONFIRMED	copy of ctx+GLD_gb_ps3_enable (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_gb_ps3_enable\);$	+1
+use	FUN_0002a3d0	uVar25	gb_ps3_enable	CONFIRMED	copy of ctx+GLD_gb_ps3_enable (register shadow) written into the packet	^\s*puVar24\[0x10d\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	us_out_fmt_0	CONFIRMED	copy of ctx+GLD_us_out_fmt_0 (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_us_out_fmt_0\);$	+1
+use	FUN_0002a3d0	uVar25	us_out_fmt_0	CONFIRMED	copy of ctx+GLD_us_out_fmt_0 (register shadow) written into the packet	^\s*puVar24\[0x159\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	us_out_fmt_1	CONFIRMED	copy of ctx+GLD_us_out_fmt_1 (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_us_out_fmt_1\);$	+1
+use	FUN_0002a3d0	uVar25	us_out_fmt_1	CONFIRMED	copy of ctx+GLD_us_out_fmt_1 (register shadow) written into the packet	^\s*puVar24\[0x15b\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	us_out_fmt_2	CONFIRMED	copy of ctx+GLD_us_out_fmt_2 (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_us_out_fmt_2\);$	+1
+use	FUN_0002a3d0	uVar25	us_out_fmt_2	CONFIRMED	copy of ctx+GLD_us_out_fmt_2 (register shadow) written into the packet	^\s*puVar24\[0x15d\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	us_out_fmt_3	CONFIRMED	copy of ctx+GLD_us_out_fmt_3 (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_us_out_fmt_3\);$	+1
+use	FUN_0002a3d0	uVar25	us_out_fmt_3	CONFIRMED	copy of ctx+GLD_us_out_fmt_3 (register shadow) written into the packet	^\s*puVar24\[0x15f\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	rs_count	CONFIRMED	copy of ctx+GLD_rs_count (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_rs_count\);$	+1
+use	FUN_0002a3d0	uVar25	rs_count	CONFIRMED	copy of ctx+GLD_rs_count (register shadow) written into the packet	^\s*puVar24\[0x161\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	rs_ip_0	CONFIRMED	copy of ctx+GLD_rs_ip_0 (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_rs_ip_0\);$	+1
+use	FUN_0002a3d0	uVar25	rs_ip_0	CONFIRMED	copy of ctx+GLD_rs_ip_0 (register shadow) written into the packet	^\s*puVar24\[0x167\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	tx_filter0	CONFIRMED	copy of ctx+GLD_tx_filter0 (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_tx_filter0\);$	+1
+use	FUN_0002a3d0	uVar25	tx_filter0	CONFIRMED	copy of ctx+GLD_tx_filter0 (register shadow) written into the packet	^\s*puVar24\[0x171\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	tx_format0	CONFIRMED	copy of ctx+GLD_tx_format0 (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_tx_format0\);$	+1
+use	FUN_0002a3d0	uVar25	tx_format0	CONFIRMED	copy of ctx+GLD_tx_format0 (register shadow) written into the packet	^\s*puVar24\[0x175\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	tx_format1	CONFIRMED	copy of ctx+GLD_tx_format1 (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_tx_format1\);$	+1
+use	FUN_0002a3d0	uVar25	tx_format1	CONFIRMED	copy of ctx+GLD_tx_format1 (register shadow) written into the packet	^\s*puVar24\[0x177\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	tx_format2	CONFIRMED	copy of ctx+GLD_tx_format2 (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_tx_format2\);$	+1
+use	FUN_0002a3d0	uVar25	tx_format2	CONFIRMED	copy of ctx+GLD_tx_format2 (register shadow) written into the packet	^\s*puVar24\[0x179\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	rb3d_color_channel_mask	CONFIRMED	copy of ctx+GLD_rb3d_color_channel_mask (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_rb3d_color_channel_mask\);$	+1
+use	FUN_0002a3d0	uVar25	rb3d_color_channel_mask	CONFIRMED	copy of ctx+GLD_rb3d_color_channel_mask (register shadow) written into the packet	^\s*puVar24\[0x17d\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	rb3d_ropcntl	CONFIRMED	copy of ctx+GLD_rb3d_ropcntl (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_rb3d_ropcntl\);$	+1
+use	FUN_0002a3d0	uVar25	rb3d_ropcntl	CONFIRMED	copy of ctx+GLD_rb3d_ropcntl (register shadow) written into the packet	^\s*puVar24\[0x17f\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	sc_scissor1	CONFIRMED	copy of ctx+GLD_sc_scissor1 (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_sc_scissor1\);$	+1
+use	FUN_0002a3d0	uVar25	sc_scissor1	CONFIRMED	copy of ctx+GLD_sc_scissor1 (register shadow) written into the packet	^\s*puVar24\[0x182\]\ =\ uVar25;$	+1
+use	FUN_0002a3d0	uVar25	ga_point_size	CONFIRMED	copy of ctx+GLD_ga_point_size (register shadow) written into the packet	^\s*uVar25\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_ga_point_size\);$	+1
+use	FUN_0002a3d0	uVar25	ga_point_size	CONFIRMED	copy of ctx+GLD_ga_point_size (register shadow) written into the packet	^\s*puVar24\[0x184\]\ =\ uVar25;$	+1

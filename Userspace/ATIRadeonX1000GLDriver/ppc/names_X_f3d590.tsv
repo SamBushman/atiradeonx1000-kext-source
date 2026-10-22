@@ -1,0 +1,48 @@
+# FUN_0003d590 (program constant update): fork X
+local	FUN_0003d590	param_2	passThroughArg2	UNKNOWN	forwarded unchanged to FUN_0003b620
+local	FUN_0003d590	param_3	passThroughArg3	UNKNOWN	forwarded unchanged to FUN_0003b620
+local	FUN_0003d590	param_4	operandTable	CONFIRMED	table of 8-byte operand descriptors indexed by the entry state index
+local	FUN_0003d590	param_5	literalConstants	CONFIRMED	literal vec4 pool: literalConstants + (operandWord & 0xffff) * 0x10
+local	FUN_0003d590	param_6	updateMask	INFERRED	bitmask indexed by the entry slot: ((mask[slot >> 3 & 0x1c] >> (slot & 0x1f)) & 1) selects the entries that are refreshed
+local	FUN_0003d590	local_78	operandWord	CONFIRMED	first word of the operand descriptor
+local	FUN_0003d590	local_74	operandWord2	INFERRED	second word of the operand descriptor
+local	FUN_0003d590	local_70	operandWordCopy	INFERRED	copy of operandWord kept for the state-parameter path
+local	FUN_0003d590	local_6c	operandWord2Copy	INFERRED	copy of operandWord2
+local	FUN_0003d590	pfVar32	outSlot	CONFIRMED	constant slot vec4 being written (slot base + 3 words)
+local	FUN_0003d590	pfVar23	srcVec	CONFIRMED	pointer to the 4-float source vector selected from the operand
+local	FUN_0003d590	pdVar30	srcYPtr	CONFIRMED	pointer to the y component of the source vec4
+local	FUN_0003d590	pdVar14	srcZPtr	CONFIRMED	pointer to the z component of the source vec4
+local	FUN_0003d590	pdVar26	srcWPtr	CONFIRMED	pointer to the w component of the source vec4
+local	FUN_0003d590	puVar1	entryStateIndexPtr	CONFIRMED	entryCursor + 2: the 16-bit state index of the entry
+use	FUN_0003d590	puVar13	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*puVar13\ =\ \(\(unsigned\ char\ \*\)0x000039a0\)\ \+\ uVar29\ \*\ 0x94;$	+1
+use	FUN_0003d590	puVar13	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*pdVar26\ =\ \(dword\ \*\)\(puVar13\ \+\ iVar25\ \+\ 0x1c\);$	+4
+use	FUN_0003d590	puVar13	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*puVar13\ =\ \(\(unsigned\ char\ \*\)0x000039b0\)\ \+\ uVar29\ \*\ 0x94;$	+1
+use	FUN_0003d590	puVar13	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*puVar13\ =\ \(\(unsigned\ char\ \*\)0x00003980\)\ \+\ uVar29\ \*\ 0x94;$	+1
+use	FUN_0003d590	puVar13	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*puVar13\ =\ \(\(unsigned\ char\ \*\)0x00003990\)\ \+\ uVar29\ \*\ 0x94;$	+1
+use	FUN_0003d590	puVar13	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*puVar13\ =\ \(\(unsigned\ char\ \*\)0x00003e20\)\ \+\ \(local_78\ \&\ 0xff\)\ \*\ 0x10;$	+1
+use	FUN_0003d590	puVar13	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*pdVar26\ =\ \(dword\ \*\)\(puVar13\ \+\ iVar25\ \+\ 0x18\);$	+4
+use	FUN_0003d590	puVar13	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*puVar13\ =\ \(\(unsigned\ char\ \*\)0x000039c0\)\ \+\ uVar29\ \*\ 0x94;$	+1
+use	FUN_0003d590	puVar13	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*pdVar26\ =\ \(dword\ \*\)\(puVar13\ \+\ iVar25\ \+\ 0x20\);$	+4
+use	FUN_0003d590	puVar13	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*puVar13\ =\ \(\(unsigned\ char\ \*\)0x000039d0\)\ \+\ uVar29\ \*\ 0x94;$	+1
+use	FUN_0003d590	puVar13	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*puVar13\ =\ \(\(unsigned\ char\ \*\)0x000039e0\)\ \+\ uVar29\ \*\ 0x94;$	+1
+use	FUN_0003d590	puVar13	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*pdVar26\ =\ \(dword\ \*\)\(puVar13\ \+\ iVar25\ \+\ 0x24\);$	+4
+use	FUN_0003d590	puVar13	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*puVar13\ =\ \(\(unsigned\ char\ \*\)0x000039f0\)\ \+\ uVar29\ \*\ 0x94;$	+1
+use	FUN_0003d590	iVar15	status	CONFIRMED	return value of FUN_00054470 (program/constant table lookup)	^\s*iVar15\ =\ FUN_00054470\(iVar31,\&local_88,\&local_84,local_80\);$	+2
+use	FUN_0003d590	iVar15	entryCountA	CONFIRMED	*(program + 0x800): count of the first entry group	^\s*iVar15\ =\ \*\(int\ \*\)\(local_88\ \+\ 0x800\);$	+1
+use	FUN_0003d590	iVar15	entryCountA	CONFIRMED	*(program + 0x800): count of the first entry group	^\s*if\ \(local_88\ <\ local_88\ \+\ iVar15\ \*\ 8\)\ \{$	+1
+use	FUN_0003d590	iVar15	entryCountA	CONFIRMED	*(program + 0x800): count of the first entry group	^\s*\}\ while\ \(pbVar33\ <\ local_88\ \+\ iVar15\ \*\ 8\);$	+1
+use	FUN_0003d590	iVar15	entryCountB	CONFIRMED	*(program + 0x804): count of the second entry group	^\s*iVar15\ =\ \*\(int\ \*\)\(local_88\ \+\ 0x804\);$	+2
+use	FUN_0003d590	iVar15	entryCountC	CONFIRMED	*(program + 0x808): count of the third entry group	^\s*iVar15\ =\ \*\(int\ \*\)\(local_88\ \+\ 0x808\);$	+1
+use	FUN_0003d590	iVar15	entryCountC	CONFIRMED	*(program + 0x808): count of the third entry group	^\s*if\ \(local_88\ \+\ iVar15\ \*\ 8\ <=\ pbVar34\)\ \{$	+1
+use	FUN_0003d590	uVar3	constW	CONFIRMED	w of the state constant row	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(iVar12\ \+\ 0x30\);$	+1
+use	FUN_0003d590	uVar3	constW	CONFIRMED	w of the state constant row	^\s*\*\(undefined4\ \*\)\(iVar12\ \+\ 0xc\)\ =\ uVar3;$	+1
+use	FUN_0003d590	uVar3	constW	CONFIRMED	w of the state constant row	^\s*puVar16\[3\]\ =\ uVar3;$	+1
+use	FUN_0003d590	uVar3	constW	CONFIRMED	w of the state constant row	^\s*puVar24\[6\]\ =\ uVar3;$	+1
+use	FUN_0003d590	uVar4	constY	CONFIRMED	y of the state constant row	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(iVar12\ \+\ 0x10\);$	+1
+use	FUN_0003d590	uVar4	constY	CONFIRMED	y of the state constant row	^\s*\*\(undefined4\ \*\)\(iVar12\ \+\ 4\)\ =\ uVar4;$	+1
+use	FUN_0003d590	uVar4	constY	CONFIRMED	y of the state constant row	^\s*puVar16\[1\]\ =\ uVar4;$	+1
+use	FUN_0003d590	uVar4	constY	CONFIRMED	y of the state constant row	^\s*puVar24\[4\]\ =\ uVar4;$	+1
+use	FUN_0003d590	uVar5	constZ	CONFIRMED	z of the state constant row	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(iVar12\ \+\ 0x20\);$	+1
+use	FUN_0003d590	uVar5	constZ	CONFIRMED	z of the state constant row	^\s*\*\(undefined4\ \*\)\(iVar12\ \+\ 8\)\ =\ uVar5;$	+1
+use	FUN_0003d590	uVar5	constZ	CONFIRMED	z of the state constant row	^\s*puVar16\[2\]\ =\ uVar5;$	+1
+use	FUN_0003d590	uVar5	constZ	CONFIRMED	z of the state constant row	^\s*puVar24\[5\]\ =\ uVar5;$	+1

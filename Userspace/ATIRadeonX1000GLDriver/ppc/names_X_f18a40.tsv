@@ -1,0 +1,220 @@
+# FUN_00018a40 (glDrawPixels): fork X
+local	FUN_00018a40	param_8	rawTransfer	INFERRED	when 0 the unpack state engineState+0x2e6c is used (puVar8) and swapBytes/lsbFirst go into the descriptor flags
+local	FUN_00018a40	param_9	transferMode	INFERRED	low byte kept in local_64; non-zero skips the pixel-store conversion
+local	FUN_00018a40	local_64	transferMode8	INFERRED	param_9 & 0xff
+local	FUN_00018a40	bVar1	skipPixelStore	INFERRED	transferMode8 != 0: _glgProcessPixels is called without pixel-store state
+local	FUN_00018a40	bVar2	notStencil	CONFIRMED	format != 0x1901 (GL_STENCIL_INDEX): 4 bytes per pixel, else 1
+use	FUN_00018a40	uVar19	pathFlags	CONFIRMED	running copy of ctx+0x26b0: the draw-pixels path flags rebuilt from the engine state bits	^\s*uVar19\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x26b0\)\ \&\ 0xfffffffd;$	+2
+use	FUN_00018a40	uVar19	pathFlags	CONFIRMED	running copy of ctx+0x26b0: the draw-pixels path flags rebuilt from the engine state bits	^\s*uVar19\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x26b0\)\ \|\ 2;$	+2
+use	FUN_00018a40	uVar19	pathFlags	CONFIRMED	running copy of ctx+0x26b0: the draw-pixels path flags rebuilt from the engine state bits	^\s*uVar19\ =\ uVar19\ \&\ 0xfffffffe;$	+2
+use	FUN_00018a40	uVar19	pathFlags	CONFIRMED	running copy of ctx+0x26b0: the draw-pixels path flags rebuilt from the engine state bits	^\s*uVar19\ =\ uVar19\ \|\ 1;$	+2
+use	FUN_00018a40	uVar19	pathFlags	CONFIRMED	running copy of ctx+0x26b0: the draw-pixels path flags rebuilt from the engine state bits	^\s*uVar19\ =\ uVar19\ \&\ 0xfffff7ff;$	+2
+use	FUN_00018a40	uVar19	pathFlags	CONFIRMED	running copy of ctx+0x26b0: the draw-pixels path flags rebuilt from the engine state bits	^\s*uVar19\ =\ uVar19\ \|\ 0x800;$	+2
+use	FUN_00018a40	uVar19	pathFlags	CONFIRMED	running copy of ctx+0x26b0: the draw-pixels path flags rebuilt from the engine state bits	^\s*uVar19\ =\ uVar19\ \&\ 0xffffffdf;$	+2
+use	FUN_00018a40	uVar19	pathFlags	CONFIRMED	running copy of ctx+0x26b0: the draw-pixels path flags rebuilt from the engine state bits	^\s*uVar19\ =\ uVar19\ \|\ 0x20;$	+2
+use	FUN_00018a40	uVar19	pathFlags	CONFIRMED	running copy of ctx+0x26b0: the draw-pixels path flags rebuilt from the engine state bits	^\s*uVar19\ =\ uVar19\ \&\ 0xfffeffff;$	+2
+use	FUN_00018a40	uVar19	pathFlags	CONFIRMED	running copy of ctx+0x26b0: the draw-pixels path flags rebuilt from the engine state bits	^\s*uVar19\ =\ uVar19\ \|\ 0x10000;$	+2
+use	FUN_00018a40	uVar19	pathFlags	CONFIRMED	running copy of ctx+0x26b0: the draw-pixels path flags rebuilt from the engine state bits	^\s*uVar19\ =\ uVar19\ \&\ 0xffffffef;$	+2
+use	FUN_00018a40	uVar19	pathFlags	CONFIRMED	running copy of ctx+0x26b0: the draw-pixels path flags rebuilt from the engine state bits	^\s*uVar19\ =\ uVar19\ \|\ 0x10;$	+2
+use	FUN_00018a40	uVar19	pathFlags	CONFIRMED	running copy of ctx+0x26b0: the draw-pixels path flags rebuilt from the engine state bits	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x26b0\)\ =\ uVar19\ \&\ 0xffffffbf;$	+1
+use	FUN_00018a40	uVar19	pathFlags	CONFIRMED	running copy of ctx+0x26b0: the draw-pixels path flags rebuilt from the engine state bits	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x26b0\)\ =\ uVar19\ \|\ 0x40;$	+1
+use	FUN_00018a40	uVar19	widthCopy	CONFIRMED	copy of width passed to FUN_0001a010	^\s*uVar19\ =\ param_3;$	+1
+use	FUN_00018a40	uVar19	widthCopy	CONFIRMED	copy of width passed to FUN_0001a010	^\s*FUN_0001a010\(param_1,\*\(undefined4\ \*\)\(param_1\ \+\ 0x26a0\),uVar19,uVar29,iVar28,uVar12,iVar33\);$	+1
+use	FUN_00018a40	uVar19	heightCopy	CONFIRMED	copy of height passed to _glgConvertType	^\s*uVar19\ =\ param_4;$	+1
+use	FUN_00018a40	uVar19	heightCopy	CONFIRMED	copy of height passed to _glgConvertType	^\s*uVar12\ =\ _glgConvertType\(param_5,param_6,puVar16,puVar17,uVar19,piVar18,puVar21,piVar25\);$	+1
+use	FUN_00018a40	uVar19	heightCopy	CONFIRMED	copy of height passed to _glgConvertType	^\s*uVar13\ =\ _glgPixelCenters\(uVar12,extraout_r4,puVar16,puVar17,uVar19,piVar18,pcVar22,pcVar26\);$	+1
+use	FUN_00018a40	uVar19	heightCopy	CONFIRMED	copy of height passed to _glgConvertType	^\s*uVar20\ =\ _glgPixelCenters\(uVar13,extraout_r4_00,puVar16,puVar17,uVar19,piVar18,pcVar22,pcVar26\);$	+1
+use	FUN_00018a40	uVar19	heightCopy	CONFIRMED	copy of height passed to _glgConvertType	^\s*_glgProcessPixels\(0,\&local_420,puVar16,puVar17,uVar19,piVar18,pcVar22,pcVar26\);$	+1
+use	FUN_00018a40	uVar19	heightCopy	CONFIRMED	copy of height passed to _glgConvertType	^\s*_glgProcessPixels\(\&local_3b0,\&local_420,uVar12,puVar17,uVar19,piVar18,"ret_logicalnz\ ",pcVar26$	+2
+use	FUN_00018a40	uVar19	tileWidth	CONFIRMED	min(scaled width, 0x7fe): tile width of the block copy	^\s*uVar19\ =\ uVar13;$	+1
+use	FUN_00018a40	uVar19	tileWidth	CONFIRMED	min(scaled width, 0x7fe): tile width of the block copy	^\s*uVar19\ =\ 0x7fe;$	+1
+use	FUN_00018a40	uVar19	tileWidth	CONFIRMED	min(scaled width, 0x7fe): tile width of the block copy	^\s*uVar9\ =\ 0x7fe\ /\ uVar19;$	+2
+use	FUN_00018a40	uVar19	tileWidth	CONFIRMED	min(scaled width, 0x7fe): tile width of the block copy	^\s*uVar24\ =\ uVar13\ /\ uVar19;$	+1
+use	FUN_00018a40	uVar19	tileWidth	CONFIRMED	min(scaled width, 0x7fe): tile width of the block copy	^\s*uVar13\ =\ uVar13\ \-\ uVar24\ \*\ uVar19;$	+1
+use	FUN_00018a40	uVar19	tileWidth	CONFIRMED	min(scaled width, 0x7fe): tile width of the block copy	^\s*uVar13\ =\ uVar19;$	+1
+use	FUN_00018a40	uVar19	tileWidth	CONFIRMED	min(scaled width, 0x7fe): tile width of the block copy	^\s*local_3f4\ =\ uVar19;$	+1
+use	FUN_00018a40	uVar19	tileWidth	CONFIRMED	min(scaled width, 0x7fe): tile width of the block copy	^\s*iVar23\ =\ uVar32\ \*\ uVar19;$	+1
+use	FUN_00018a40	uVar20	pathFlagsB	CONFIRMED	running copy of ctx+0x26b0 (continued)	^\s*uVar20\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x26b0\)\ \&\ 0xfffdffff;$	+2
+use	FUN_00018a40	uVar20	pathFlagsB	CONFIRMED	running copy of ctx+0x26b0 (continued)	^\s*uVar20\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x26b0\)\ \|\ 0x20000;$	+2
+use	FUN_00018a40	uVar20	pathFlagsB	CONFIRMED	running copy of ctx+0x26b0 (continued)	^\s*uVar20\ =\ uVar20\ \&\ 0xfffffdff;$	+2
+use	FUN_00018a40	uVar20	pathFlagsB	CONFIRMED	running copy of ctx+0x26b0 (continued)	^\s*uVar20\ =\ uVar20\ \|\ 0x200;$	+2
+use	FUN_00018a40	uVar20	pathFlagsB	CONFIRMED	running copy of ctx+0x26b0 (continued)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x26b0\)\ =\ uVar20\ \|\ 0x400;$	+1
+use	FUN_00018a40	uVar20	pathFlagsB	CONFIRMED	running copy of ctx+0x26b0 (continued)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x26b0\)\ =\ uVar20\ \&\ 0xfffffbff;$	+1
+use	FUN_00018a40	uVar20	scaledHeight	INFERRED	height after the pixel-zoom centre mapping; tile rows are cut from it	^\s*uVar20\ =\ param_4;$	+1
+use	FUN_00018a40	uVar20	scaledHeight	INFERRED	height after the pixel-zoom centre mapping; tile rows are cut from it	^\s*uVar20\ =\ _glgPixelCenters\(uVar13,extraout_r4_00,puVar16,puVar17,uVar19,piVar18,pcVar22,pcVar26\);$	+2
+use	FUN_00018a40	uVar20	scaledHeight	INFERRED	height after the pixel-zoom centre mapping; tile rows are cut from it	^\s*uVar20\ =\ \(uVar20\ \-\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00002ff4\)\ \+\ iVar15\)\)\ \+\ 1;$	+1
+use	FUN_00018a40	uVar20	scaledHeight	INFERRED	height after the pixel-zoom centre mapping; tile rows are cut from it	^\s*uVar20\ =\ \(uVar20\ \-\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00002fb4\)\ \+\ iVar15\)\)\ \+\ 1;$	+1
+use	FUN_00018a40	uVar20	scaledHeight	INFERRED	height after the pixel-zoom centre mapping; tile rows are cut from it	^\s*if\ \(uVar20\ <\ 0x7fe\ /\ uVar19\)\ \{$	+2
+use	FUN_00018a40	uVar20	scaledHeight	INFERRED	height after the pixel-zoom centre mapping; tile rows are cut from it	^\s*uVar27\ =\ uVar20\ /\ uVar9;$	+1
+use	FUN_00018a40	uVar20	scaledHeight	INFERRED	height after the pixel-zoom centre mapping; tile rows are cut from it	^\s*uVar20\ =\ uVar20\ \-\ uVar27\ \*\ uVar9;$	+1
+use	FUN_00018a40	uVar20	scaledHeight	INFERRED	height after the pixel-zoom centre mapping; tile rows are cut from it	^\s*if\ \(uVar20\ ==\ 0\)\ \{$	+2
+use	FUN_00018a40	uVar20	scaledHeight	INFERRED	height after the pixel-zoom centre mapping; tile rows are cut from it	^\s*local_3f0\ =\ uVar20;$	+1
+local	FUN_00018a40	uVar13	scaledWidth	INFERRED	width after the pixel-zoom centre mapping (_glgPixelCenters); tile columns are cut from it
+use	FUN_00018a40	uVar29	heightArg	CONFIRMED	copy of height passed to FUN_0001a010	^\s*uVar29\ =\ param_4;$	+1
+use	FUN_00018a40	uVar29	heightArg	CONFIRMED	copy of height passed to FUN_0001a010	^\s*FUN_0001a010\(param_1,\*\(undefined4\ \*\)\(param_1\ \+\ 0x26a0\),uVar19,uVar29,iVar28,uVar12,iVar33\);$	+1
+use	FUN_00018a40	uVar29	windowY	INFERRED	raster position y * window scale (ctx+0x2a58) rounded: the destination y, minus one for downward zoom	^\s*uVar29\ =\ \(uint\)\(int\)fVar5;$	+2
+use	FUN_00018a40	uVar29	windowY	INFERRED	raster position y * window scale (ctx+0x2a58) rounded: the destination y, minus one for downward zoom	^\s*uVar29\ =\ \(uint\)\(int\)\(fVar5\ \-\ 0\.999975\);$	+2
+use	FUN_00018a40	uVar29	windowY	INFERRED	raster position y * window scale (ctx+0x2a58) rounded: the destination y, minus one for downward zoom	^\s*uVar29\ =\ \(uint\)\(int\)fVar5;$@2	+2
+use	FUN_00018a40	uVar29	windowY	INFERRED	raster position y * window scale (ctx+0x2a58) rounded: the destination y, minus one for downward zoom	^\s*uVar29\ =\ \(uint\)\(int\)\(fVar5\ \+\ 0\.999975\);$	+2
+use	FUN_00018a40	uVar29	windowY	INFERRED	raster position y * window scale (ctx+0x2a58) rounded: the destination y, minus one for downward zoom	^\s*uVar29\ =\ \(uint\)\(int\)fVar3;$	+2
+use	FUN_00018a40	uVar29	windowY	INFERRED	raster position y * window scale (ctx+0x2a58) rounded: the destination y, minus one for downward zoom	^\s*uVar29\ =\ \(uint\)\(int\)\(fVar3\ \+\ 0\.999975\);$	+2
+use	FUN_00018a40	uVar29	windowY	INFERRED	raster position y * window scale (ctx+0x2a58) rounded: the destination y, minus one for downward zoom	^\s*uVar29\ =\ \(uint\)\(int\)fVar3;$@2	+2
+use	FUN_00018a40	uVar29	windowY	INFERRED	raster position y * window scale (ctx+0x2a58) rounded: the destination y, minus one for downward zoom	^\s*uVar29\ =\ \(uint\)\(int\)\(fVar3\ \+\ 0\.999975\);$@2	+2
+use	FUN_00018a40	uVar29	windowY	INFERRED	raster position y * window scale (ctx+0x2a58) rounded: the destination y, minus one for downward zoom	^\s*uVar29\ =\ \(uint\)\(int\)fVar3;$@3	+2
+use	FUN_00018a40	uVar29	windowY	INFERRED	raster position y * window scale (ctx+0x2a58) rounded: the destination y, minus one for downward zoom	^\s*uVar29\ =\ \(uint\)\(int\)\(fVar3\ \+\ 0\.999975\);$@3	+2
+use	FUN_00018a40	uVar29	windowY	INFERRED	raster position y * window scale (ctx+0x2a58) rounded: the destination y, minus one for downward zoom	^\s*uStack_bc\ =\ uVar29\ \^\ 0x80000000;$	+1
+use	FUN_00018a40	uVar29	windowY	INFERRED	raster position y * window scale (ctx+0x2a58) rounded: the destination y, minus one for downward zoom	^\s*uVar29\ =\ \(uint\)\(int\)fVar3;$@4	+2
+use	FUN_00018a40	uVar29	windowY	INFERRED	raster position y * window scale (ctx+0x2a58) rounded: the destination y, minus one for downward zoom	^\s*uVar29\ =\ \(uint\)\(int\)\(fVar3\ \+\ 0\.999975\);$@4	+2
+use	FUN_00018a40	uVar29	windowY	INFERRED	raster position y * window scale (ctx+0x2a58) rounded: the destination y, minus one for downward zoom	^\s*uStack_d4\ =\ uVar29\ \^\ 0x80000000;$	+1
+use	FUN_00018a40	uVar29	windowY	INFERRED	raster position y * window scale (ctx+0x2a58) rounded: the destination y, minus one for downward zoom	^\s*uVar29\ =\ uVar29\ \-\ 1;$	+1
+use	FUN_00018a40	uVar29	windowY	INFERRED	raster position y * window scale (ctx+0x2a58) rounded: the destination y, minus one for downward zoom	^\s*FUN_00029c00\(param_1,local_420,local_3f4,local_3f0,local_41c,iVar28,$	+2
+use	FUN_00018a40	iVar28	formatArg	CONFIRMED	copy of format passed to FUN_0001a010	^\s*iVar28\ =\ param_5;$	+1
+use	FUN_00018a40	iVar28	formatArg	CONFIRMED	copy of format passed to FUN_0001a010	^\s*FUN_0001a010\(param_1,\*\(undefined4\ \*\)\(param_1\ \+\ 0x26a0\),uVar19,uVar29,iVar28,uVar12,iVar33\);$	+1
+use	FUN_00018a40	iVar28	bytesPerPixel	CONFIRMED	4, or 1 for GL_STENCIL_INDEX	^\s*iVar28\ =\ 4;$	+1
+use	FUN_00018a40	iVar28	bytesPerPixel	CONFIRMED	4, or 1 for GL_STENCIL_INDEX	^\s*iVar28\ =\ 1;$	+1
+use	FUN_00018a40	iVar28	bytesPerPixel	CONFIRMED	4, or 1 for GL_STENCIL_INDEX	^\s*iVar31\ =\ iVar28\ \*\ param_3;$	+1
+use	FUN_00018a40	iVar28	bytesPerPixel	CONFIRMED	4, or 1 for GL_STENCIL_INDEX	^\s*iVar31\ =\ iVar28\ \*\ uVar13;$	+1
+use	FUN_00018a40	iVar28	bytesPerPixel	CONFIRMED	4, or 1 for GL_STENCIL_INDEX	^\s*local_420\ =\ iVar15\ \*\ local_41c\ \+\ iVar28\ \*\ iVar23;$	+1
+use	FUN_00018a40	iVar28	bytesPerPixel	CONFIRMED	4, or 1 for GL_STENCIL_INDEX	^\s*local_420\ =\ iVar28\ \*\ iVar23\ \-\ local_41c\ \*\ iVar10;$	+1
+use	FUN_00018a40	iVar28	bytesPerPixel	CONFIRMED	4, or 1 for GL_STENCIL_INDEX	^\s*FUN_00029c00\(param_1,local_420,local_3f4,local_3f0,local_41c,iVar28,$	+2
+use	FUN_00018a40	iVar31	convRowBytes	CONFIRMED	bytesPerPixel * (scaled) width: row bytes of the converted buffer	^\s*iVar31\ =\ iVar28\ \*\ param_3;$	+1
+use	FUN_00018a40	iVar31	convRowBytes	CONFIRMED	bytesPerPixel * (scaled) width: row bytes of the converted buffer	^\s*iVar14\ =\ param_4\ \*\ iVar31;$	+1
+use	FUN_00018a40	iVar31	convRowBytes	CONFIRMED	bytesPerPixel * (scaled) width: row bytes of the converted buffer	^\s*iVar31\ =\ iVar28\ \*\ uVar13;$	+1
+use	FUN_00018a40	iVar31	convRowBytes	CONFIRMED	bytesPerPixel * (scaled) width: row bytes of the converted buffer	^\s*iVar14\ =\ uVar20\ \*\ iVar31;$	+1
+use	FUN_00018a40	iVar31	convRowBytes	CONFIRMED	bytesPerPixel * (scaled) width: row bytes of the converted buffer	^\s*local_40c\ =\ iVar31;$	+1
+use	FUN_00018a40	iVar31	convRowBytes	CONFIRMED	bytesPerPixel * (scaled) width: row bytes of the converted buffer	^\s*local_41c\ =\ iVar31;$	+1
+use	FUN_00018a40	iVar31	convRowBytes	CONFIRMED	bytesPerPixel * (scaled) width: row bytes of the converted buffer	^\s*local_41c\ =\ \-iVar31;$	+1
+use	FUN_00018a40	iVar31	tileRowOffset	INFERRED	yDir * tile row start: row offset of the tile in the converted buffer	^\s*iVar31\ =\ local_68\ \*\ iVar15;$	+1
+use	FUN_00018a40	iVar31	tileRowOffset	INFERRED	yDir * tile row start: row offset of the tile in the converted buffer	^\s*iVar10\ =\ iVar31;$	+1
+local	FUN_00018a40	iVar14	convBuffer	CONFIRMED	holds height * rowBytes, then the _malloc result: the converted pixel buffer, freed at the end
+use	FUN_00018a40	iVar11	xDir	INFERRED	+1 or -1: direction of the x pixel zoom	^\s*iVar11\ =\ 1;$	+1
+use	FUN_00018a40	iVar11	xDir	INFERRED	+1 or -1: direction of the x pixel zoom	^\s*iVar11\ =\ \-1;$	+1
+use	FUN_00018a40	iVar11	xDir	INFERRED	+1 or -1: direction of the x pixel zoom	^\s*iVar11\ =\ \-1;$@2	+1
+use	FUN_00018a40	iVar11	xDir	INFERRED	+1 or -1: direction of the x pixel zoom	^\s*iVar11\ =\ 1;$@2	+1
+use	FUN_00018a40	iVar11	xDir	INFERRED	+1 or -1: direction of the x pixel zoom	^\s*iVar11\ =\ 1;$@3	+1
+use	FUN_00018a40	iVar11	xDir	INFERRED	+1 or -1: direction of the x pixel zoom	^\s*iVar11\ =\ \-1;$@3	+1
+use	FUN_00018a40	iVar11	xDir	INFERRED	+1 or -1: direction of the x pixel zoom	^\s*iVar11\ =\ \-1;$@4	+1
+use	FUN_00018a40	iVar11	xDir	INFERRED	+1 or -1: direction of the x pixel zoom	^\s*FUN_00029c00\(param_1,local_420,local_3f4,local_3f0,local_41c,iVar28,$	+2
+local	FUN_00018a40	local_68	yDir	INFERRED	+1 or -1: direction of the y pixel zoom
+use	FUN_00018a40	iVar15	tileRowStart	CONFIRMED	tileHeight * tileRow: first row of the tile	^\s*iVar15\ =\ uVar9\ \*\ uVar27;$	+1
+use	FUN_00018a40	iVar15	tileRowStart	CONFIRMED	tileHeight * tileRow: first row of the tile	^\s*iVar31\ =\ local_68\ \*\ iVar15;$	+1
+use	FUN_00018a40	iVar15	tileRowStart	CONFIRMED	tileHeight * tileRow: first row of the tile	^\s*local_420\ =\ iVar15\ \*\ local_41c\ \+\ iVar28\ \*\ iVar23;$	+1
+use	FUN_00018a40	iVar15	tileRowStart	CONFIRMED	tileHeight * tileRow: first row of the tile	^\s*iVar10\ =\ iVar15\ \+\ local_3f0\ \+\ \-1;$	+1
+use	FUN_00018a40	iVar23	tileX	CONFIRMED	tileColumn * tileWidth: x offset of the tile	^\s*iVar23\ =\ uVar32\ \*\ uVar19;$	+1
+use	FUN_00018a40	iVar23	tileX	CONFIRMED	tileColumn * tileWidth: x offset of the tile	^\s*local_420\ =\ iVar15\ \*\ local_41c\ \+\ iVar28\ \*\ iVar23;$	+1
+use	FUN_00018a40	iVar23	tileX	CONFIRMED	tileColumn * tileWidth: x offset of the tile	^\s*local_420\ =\ iVar28\ \*\ iVar23\ \-\ local_41c\ \*\ iVar10;$	+1
+use	FUN_00018a40	iVar23	tileX	CONFIRMED	tileColumn * tileWidth: x offset of the tile	^\s*FUN_00029c00\(param_1,local_420,local_3f4,local_3f0,local_41c,iVar28,$	+2
+use	FUN_00018a40	fVar4	rasterXScaled	INFERRED	raster position x * ctx+0x2a54 (window x scale)	^\s*fVar4\ =\ local_3ec\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x2a54\);$	+2
+use	FUN_00018a40	fVar4	rasterXScaled	INFERRED	raster position x * ctx+0x2a54 (window x scale)	^\s*fVar4\ =\ fVar4\ \-\ 0\.5;$	+3
+use	FUN_00018a40	fVar4	rasterXScaled	INFERRED	raster position x * ctx+0x2a54 (window x scale)	^\s*iVar33\ =\ \(int\)\(fVar4\ \+\ 0\.999975\);$	+1
+use	FUN_00018a40	fVar4	zoomXScaledB	INFERRED	engineState pixel-zoom x (+0x2e48) * ctx+0x2a54	^\s*fVar4\ =\ \*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00002e48\)\ \+\ iVar15\)\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x2a54\);$	+1
+use	FUN_00018a40	fVar4	zoomXScaledB	INFERRED	engineState pixel-zoom x (+0x2e48) * ctx+0x2a54	^\s*if\ \(fVar4\ ==\ 1\.0\)\ \{$	+1
+use	FUN_00018a40	fVar4	zoomXScaledB	INFERRED	engineState pixel-zoom x (+0x2e48) * ctx+0x2a54	^\s*local_3b0\ =\ fVar4;$	+1
+use	FUN_00018a40	fVar5	zoomXScaled	INFERRED	ctx+0x2a54 * engineState pixel-zoom x (+0x2e48): zoom 1.0 takes the unscaled fast path	^\s*fVar5\ =\ \*\(float\ \*\)\(param_1\ \+\ 0x2a54\)\ \*\ \*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00002e48\)\ \+\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\)\);$	+1
+use	FUN_00018a40	fVar5	zoomXScaled	INFERRED	ctx+0x2a54 * engineState pixel-zoom x (+0x2e48): zoom 1.0 takes the unscaled fast path	^\s*if\ \(\(fVar5\ ==\ 1\.0\)\ \&\&\ \(fVar7\ ==\ 1\.0\)\)\ \{$	+1
+use	FUN_00018a40	fVar5	zoomXScaled	INFERRED	ctx+0x2a54 * engineState pixel-zoom x (+0x2e48): zoom 1.0 takes the unscaled fast path	^\s*if\ \(fVar5\ <\ 0\.0\)\ \{$	+1
+use	FUN_00018a40	fVar6	rasterXRounded	CONFIRMED	rasterXScaled + 0.5 before truncation	^\s*fVar6\ =\ fVar4\ \+\ 0\.5;$	+3
+use	FUN_00018a40	fVar6	rasterXRounded	CONFIRMED	rasterXScaled + 0.5 before truncation	^\s*iVar33\ =\ \(int\)\(fVar6\ \-\ 0\.999975\);$	+1
+use	FUN_00018a40	fVar6	rasterXRounded	CONFIRMED	rasterXScaled + 0.5 before truncation	^\s*else\ if\ \(0\.0\ <=\ fVar6\)\ \{$	+2
+use	FUN_00018a40	fVar6	rasterXRounded	CONFIRMED	rasterXScaled + 0.5 before truncation	^\s*iVar33\ =\ \(int\)\(fVar6\ \+\ 0\.999975\);$	+1
+use	FUN_00018a40	fVar6	zoomYScaledB	INFERRED	engineState pixel-zoom y (+0x2e4c) * ctx+0x2a58	^\s*fVar6\ =\ \*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00002e4c\)\ \+\ iVar15\)\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x2a58\);$	+1
+use	FUN_00018a40	fVar6	zoomYScaledB	INFERRED	engineState pixel-zoom y (+0x2e4c) * ctx+0x2a58	^\s*local_144\ =\ \(uint\)\(fVar6\ !=\ 1\.0\)\ <<\ 0xf\ \|\ uVar9\ \|\ local_144\ \&\ 0xffff3fff;$	+1
+use	FUN_00018a40	fVar6	zoomYScaledB	INFERRED	engineState pixel-zoom y (+0x2e4c) * ctx+0x2a58	^\s*local_3ac\ =\ fVar6;$	+1
+local	FUN_00018a40	fVar7	zoomYScaled	INFERRED	ctx+0x2a58 * engineState pixel-zoom y (+0x2e4c)
+local	FUN_00018a40	puVar8	unpackState	INFERRED	engineState + 0x2e6c (unpack pixel-store state) or 0: last argument of FUN_0000a6e0
+use	FUN_00018a40	uVar12	typeArg	CONFIRMED	copy of pixelType passed to FUN_0001a010	^\s*uVar12\ =\ param_6;$	+1
+use	FUN_00018a40	uVar12	typeArg	CONFIRMED	copy of pixelType passed to FUN_0001a010	^\s*FUN_0001a010\(param_1,\*\(undefined4\ \*\)\(param_1\ \+\ 0x26a0\),uVar19,uVar29,iVar28,uVar12,iVar33\);$	+1
+use	FUN_00018a40	uVar12	convResult	INFERRED	return value of _glgConvertType	^\s*uVar12\ =\ _glgConvertType\(param_5,param_6,puVar16,puVar17,uVar19,piVar18,puVar21,piVar25\);$	+1
+use	FUN_00018a40	uVar12	convResult	INFERRED	return value of _glgConvertType	^\s*uVar13\ =\ _glgPixelCenters\(uVar12,extraout_r4,puVar16,puVar17,uVar19,piVar18,pcVar22,pcVar26\);$	+1
+use	FUN_00018a40	uVar12	stateBytes	CONFIRMED	0x274: size of the pixel-store state block copied into the descriptor	^\s*uVar12\ =\ 0x274;$	+1
+use	FUN_00018a40	uVar12	stateBytes	CONFIRMED	0x274: size of the pixel-store state block copied into the descriptor	^\s*_glgProcessPixels\(\&local_3b0,\&local_420,uVar12,puVar17,uVar19,piVar18,"ret_logicalnz\ ",pcVar26$	+2
+use	FUN_00018a40	uVar9	zoomXFlag	INFERRED	0x4000 when the x zoom is not 1.0	^\s*uVar9\ =\ 0x4000;$	+1
+use	FUN_00018a40	uVar9	zoomXFlag	INFERRED	0x4000 when the x zoom is not 1.0	^\s*uVar9\ =\ 0;$	+1
+use	FUN_00018a40	uVar9	zoomXFlag	INFERRED	0x4000 when the x zoom is not 1.0	^\s*local_144\ =\ \(uint\)\(fVar6\ !=\ 1\.0\)\ <<\ 0xf\ \|\ uVar9\ \|\ local_144\ \&\ 0xffff3fff;$	+1
+use	FUN_00018a40	uVar9	tileHeight	CONFIRMED	0x7fe / tileWidth, at most the scaled height: rows per tile	^\s*uVar9\ =\ 0x7fe\ /\ uVar19;$	+1
+use	FUN_00018a40	uVar9	tileHeight	CONFIRMED	0x7fe / tileWidth, at most the scaled height: rows per tile	^\s*uVar9\ =\ uVar20;$	+1
+use	FUN_00018a40	uVar9	tileHeight	CONFIRMED	0x7fe / tileWidth, at most the scaled height: rows per tile	^\s*uVar27\ =\ uVar20\ /\ uVar9;$	+1
+use	FUN_00018a40	uVar9	tileHeight	CONFIRMED	0x7fe / tileWidth, at most the scaled height: rows per tile	^\s*uVar20\ =\ uVar20\ \-\ uVar27\ \*\ uVar9;$	+1
+use	FUN_00018a40	uVar9	tileHeight	CONFIRMED	0x7fe / tileWidth, at most the scaled height: rows per tile	^\s*uVar20\ =\ uVar9;$	+1
+use	FUN_00018a40	uVar9	tileHeight	CONFIRMED	0x7fe / tileWidth, at most the scaled height: rows per tile	^\s*iVar15\ =\ uVar9\ \*\ uVar27;$	+1
+use	FUN_00018a40	uVar9	tileHeight	CONFIRMED	0x7fe / tileWidth, at most the scaled height: rows per tile	^\s*local_3f0\ =\ uVar9;$	+1
+use	FUN_00018a40	uVar24	fullColumns	CONFIRMED	scaledWidth / tileWidth: number of full tile columns	^\s*uVar24\ =\ uVar13\ /\ uVar19;$	+1
+use	FUN_00018a40	uVar24	fullColumns	CONFIRMED	scaledWidth / tileWidth: number of full tile columns	^\s*uVar13\ =\ uVar13\ \-\ uVar24\ \*\ uVar19;$	+1
+use	FUN_00018a40	uVar24	fullColumns	CONFIRMED	scaledWidth / tileWidth: number of full tile columns	^\s*uVar30\ =\ uVar24\ \+\ 1;$	+1
+use	FUN_00018a40	uVar24	fullColumns	CONFIRMED	scaledWidth / tileWidth: number of full tile columns	^\s*uVar30\ =\ uVar24;$	+1
+use	FUN_00018a40	uVar24	tileRows	CONFIRMED	number of tile rows (full rows + remainder)	^\s*uVar24\ =\ uVar27\ \+\ 1;$	+1
+use	FUN_00018a40	uVar24	tileRows	CONFIRMED	number of tile rows (full rows + remainder)	^\s*uVar24\ =\ uVar27;$	+1
+use	FUN_00018a40	uVar24	tileRows	CONFIRMED	number of tile rows (full rows + remainder)	^\s*if\ \(uVar24\ !=\ 0\)\ \{$	+1
+use	FUN_00018a40	uVar24	tileRows	CONFIRMED	number of tile rows (full rows + remainder)	^\s*if\ \(uVar27\ ==\ uVar24\ \-\ 1\)\ \{$	+1
+use	FUN_00018a40	uVar24	tileRows	CONFIRMED	number of tile rows (full rows + remainder)	^\s*\}\ while\ \(uVar24\ !=\ uVar27\);$	+1
+use	FUN_00018a40	uVar27	fullRows	CONFIRMED	scaledHeight / tileHeight: number of full tile rows	^\s*uVar27\ =\ uVar20\ /\ uVar9;$	+1
+use	FUN_00018a40	uVar27	fullRows	CONFIRMED	scaledHeight / tileHeight: number of full tile rows	^\s*uVar20\ =\ uVar20\ \-\ uVar27\ \*\ uVar9;$	+1
+use	FUN_00018a40	uVar27	fullRows	CONFIRMED	scaledHeight / tileHeight: number of full tile rows	^\s*uVar24\ =\ uVar27\ \+\ 1;$	+1
+use	FUN_00018a40	uVar27	fullRows	CONFIRMED	scaledHeight / tileHeight: number of full tile rows	^\s*uVar24\ =\ uVar27;$	+1
+use	FUN_00018a40	uVar27	tileRow	CONFIRMED	tile row loop counter	^\s*uVar27\ =\ 0;$	+1
+use	FUN_00018a40	uVar27	tileRow	CONFIRMED	tile row loop counter	^\s*iVar15\ =\ uVar9\ \*\ uVar27;$	+1
+use	FUN_00018a40	uVar27	tileRow	CONFIRMED	tile row loop counter	^\s*if\ \(uVar27\ ==\ uVar24\ \-\ 1\)\ \{$	+1
+use	FUN_00018a40	uVar27	tileRow	CONFIRMED	tile row loop counter	^\s*uVar27\ =\ uVar27\ \+\ 1;$	+2
+local	FUN_00018a40	uVar30	tileColumns	CONFIRMED	number of tile columns (full columns + remainder)
+local	FUN_00018a40	uVar32	tileColumn	CONFIRMED	tile column loop counter
+local	FUN_00018a40	pcVar22	scratchR9	UNKNOWN	Ghidra pass-through of a caller-saved register into _glgProcessPixels (the string-looking value is a stray constant)
+local	FUN_00018a40	pcVar26	scratchR10	UNKNOWN	Ghidra pass-through of a caller-saved register into _glgProcessPixels
+local	FUN_00018a40	local_424	srcSkipBytes	INFERRED	FUN_0000a6e0 output: skip bytes added to the client pointer
+local	FUN_00018a40	local_41c	srcRowBytes	INFERRED	FUN_0000a6e0 output: source row bytes; negated for the y-inverted drawable and re-used as the tile row stride
+local	FUN_00018a40	local_410	procPixels	INFERRED	destination (converted buffer) pointer of the pixel-store descriptor
+local	FUN_00018a40	local_40c	procPitch	INFERRED	destination row bytes of the descriptor
+use	FUN_00018a40	local_3f4	procWidth	INFERRED	width of the descriptor (full width, then the tile width)	^\s*local_3f4\ =\ param_3;$	+1
+use	FUN_00018a40	local_3f4	procWidth	INFERRED	width of the descriptor (full width, then the tile width)	^\s*local_3f4\ =\ uVar13;$	+1
+use	FUN_00018a40	local_3f4	procWidth	INFERRED	width of the descriptor (full width, then the tile width)	^\s*local_3f4\ =\ uVar19;$	+1
+use	FUN_00018a40	local_3f4	procWidth	INFERRED	width of the descriptor (full width, then the tile width)	^\s*FUN_00029c00\(param_1,local_420,local_3f4,local_3f0,local_41c,iVar28,$	+2
+use	FUN_00018a40	local_3f0	procHeight	INFERRED	height of the descriptor (full height, then the tile height)	^\s*local_3f0\ =\ param_4;$	+1
+use	FUN_00018a40	local_3f0	procHeight	INFERRED	height of the descriptor (full height, then the tile height)	^\s*local_3f0\ =\ uVar9;$	+1
+use	FUN_00018a40	local_3f0	procHeight	INFERRED	height of the descriptor (full height, then the tile height)	^\s*local_3f0\ =\ uVar20;$	+1
+use	FUN_00018a40	local_3f0	procHeight	INFERRED	height of the descriptor (full height, then the tile height)	^\s*iVar10\ =\ iVar15\ \+\ local_3f0\ \+\ \-1;$	+1
+use	FUN_00018a40	local_3f0	procHeight	INFERRED	height of the descriptor (full height, then the tile height)	^\s*FUN_00029c00\(param_1,local_420,local_3f4,local_3f0,local_41c,iVar28,$	+2
+use	FUN_00018a40	local_3fc	procFlags	INFERRED	pixel-store flags: 1 swapBytes, 4 lsbFirst (engineState+0x2e84/0x2e85)	^\s*local_3fc\ =\ 0;$	+1
+use	FUN_00018a40	local_3fc	procFlags	INFERRED	pixel-store flags: 1 swapBytes, 4 lsbFirst (engineState+0x2e84/0x2e85)	^\s*local_3fc\ =\ \(uint\)\(\(\(unsigned\ char\ \*\)0x00002e84\)\[iVar33\]\ !=\ '\\0'\);$	+1
+use	FUN_00018a40	local_3fc	procFlags	INFERRED	pixel-store flags: 1 swapBytes, 4 lsbFirst (engineState+0x2e84/0x2e85)	^\s*local_3fc\ =\ local_3fc\ \|\ 4;$	+1
+local	FUN_00018a40	local_3f8	procMask	INFERRED	0x7ffff channel mask of the descriptor
+local	FUN_00018a40	local_400	procMode	INFERRED	constant 2 in the descriptor
+use	FUN_00018a40	local_408	procChannelFormat	INFERRED	descriptor channel format: 0xd depth, 6 colour, 0xe stencil	^\s*local_408\ =\ 0xd;$	+1
+use	FUN_00018a40	local_408	procChannelFormat	INFERRED	descriptor channel format: 0xd depth, 6 colour, 0xe stencil	^\s*local_408\ =\ 6;$	+1
+use	FUN_00018a40	local_408	procChannelFormat	INFERRED	descriptor channel format: 0xd depth, 6 colour, 0xe stencil	^\s*local_408\ =\ 0xe;$	+1
+use	FUN_00018a40	local_404	procChannelSize	INFERRED	descriptor channel size: 7 depth, 0x11 colour, 0 stencil	^\s*local_404\ =\ 7;$	+1
+use	FUN_00018a40	local_404	procChannelSize	INFERRED	descriptor channel size: 7 depth, 0x11 colour, 0 stencil	^\s*local_404\ =\ 0x11;$	+1
+use	FUN_00018a40	local_404	procChannelSize	INFERRED	descriptor channel size: 7 depth, 0x11 colour, 0 stencil	^\s*local_404\ =\ 0;$	+1
+local	FUN_00018a40	local_3b0	procZoomX	INFERRED	pixel zoom x copied over the first float of the 0x274-byte pixel-store state
+local	FUN_00018a40	local_3ac	procZoomY	INFERRED	pixel zoom y copied over the second float
+local	FUN_00018a40	local_144	procZoomFlags	INFERRED	bit 14 = zoom x != 1.0, bit 15 = zoom y != 1.0 inside the copied state
+local	FUN_00018a40	uStack_6c	heightI2dLo	CONFIRMED	GCC int-to-double idiom: word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by 4503601774854144.0: height
+local	FUN_00018a40	local_70	heightI2dHi	CONFIRMED	GCC int-to-double idiom: word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by 4503601774854144.0: height (high word)
+local	FUN_00018a40	uStack_74	widthI2dLo	CONFIRMED	GCC int-to-double idiom: word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by 4503601774854144.0: width
+local	FUN_00018a40	local_78	widthI2dHi	CONFIRMED	GCC int-to-double idiom: word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by 4503601774854144.0: width (high word)
+local	FUN_00018a40	uStack_7c	rasterYTruncI2dLo	CONFIRMED	GCC int-to-double idiom: word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by 4503601774854144.0: (int)raster y
+local	FUN_00018a40	local_80	rasterYTruncI2dHi	CONFIRMED	GCC int-to-double idiom: word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by 4503601774854144.0: (int)raster y (high word)
+local	FUN_00018a40	uStack_8c	rasterXTruncI2dLo	CONFIRMED	GCC int-to-double idiom: word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by 4503601774854144.0: (int)raster x
+local	FUN_00018a40	local_90	rasterXTruncI2dHi	CONFIRMED	GCC int-to-double idiom: word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by 4503601774854144.0: (int)raster x (high word)
+local	FUN_00018a40	uStack_bc	windowYI2dLo	CONFIRMED	GCC int-to-double idiom: word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by 4503601774854144.0: windowY (downward zoom)
+local	FUN_00018a40	local_c0	windowYI2dHi	CONFIRMED	GCC int-to-double idiom: word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by 4503601774854144.0: windowY (high word)
+local	FUN_00018a40	uStack_d4	windowYI2dLoB	CONFIRMED	GCC int-to-double idiom: word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by 4503601774854144.0: windowY (upward zoom)
+local	FUN_00018a40	local_d8	windowYI2dHiB	CONFIRMED	GCC int-to-double idiom: word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by 4503601774854144.0: windowY (upward zoom, high word)
+local	FUN_00018a40	local_138	fctiwzSlot0	CONFIRMED	(longlong) store of a float->int conversion (fctiwz) kept in a stack pair by the compiler
+local	FUN_00018a40	local_130	fctiwzSlot1	CONFIRMED	(longlong) store of a float->int conversion (fctiwz) kept in a stack pair by the compiler
+local	FUN_00018a40	local_128	fctiwzSlot2	CONFIRMED	(longlong) store of a float->int conversion (fctiwz) kept in a stack pair by the compiler
+local	FUN_00018a40	local_120	fctiwzSlot3	CONFIRMED	(longlong) store of a float->int conversion (fctiwz) kept in a stack pair by the compiler
+local	FUN_00018a40	local_118	fctiwzSlot4	CONFIRMED	(longlong) store of a float->int conversion (fctiwz) kept in a stack pair by the compiler
+local	FUN_00018a40	local_110	fctiwzSlot5	CONFIRMED	(longlong) store of a float->int conversion (fctiwz) kept in a stack pair by the compiler
+local	FUN_00018a40	local_108	fctiwzSlot6	CONFIRMED	(longlong) store of a float->int conversion (fctiwz) kept in a stack pair by the compiler
+local	FUN_00018a40	local_100	fctiwzSlot7	CONFIRMED	(longlong) store of a float->int conversion (fctiwz) kept in a stack pair by the compiler
+local	FUN_00018a40	local_f8	fctiwzSlot8	CONFIRMED	(longlong) store of a float->int conversion (fctiwz) kept in a stack pair by the compiler
+local	FUN_00018a40	local_f0	fctiwzSlot9	CONFIRMED	(longlong) store of a float->int conversion (fctiwz) kept in a stack pair by the compiler
+local	FUN_00018a40	local_e8	fctiwzSlot10	CONFIRMED	(longlong) store of a float->int conversion (fctiwz) kept in a stack pair by the compiler
+local	FUN_00018a40	local_e0	fctiwzSlot11	CONFIRMED	(longlong) store of a float->int conversion (fctiwz) kept in a stack pair by the compiler
+local	FUN_00018a40	local_d0	fctiwzSlot12	CONFIRMED	(longlong) store of a float->int conversion (fctiwz) kept in a stack pair by the compiler
+local	FUN_00018a40	local_c8	fctiwzSlot13	CONFIRMED	(longlong) store of a float->int conversion (fctiwz) kept in a stack pair by the compiler
+local	FUN_00018a40	local_b8	fctiwzSlot14	CONFIRMED	(longlong) store of a float->int conversion (fctiwz) kept in a stack pair by the compiler
+local	FUN_00018a40	local_b0	fctiwzSlot15	CONFIRMED	(longlong) store of a float->int conversion (fctiwz) kept in a stack pair by the compiler
+local	FUN_00018a40	local_a8	fctiwzSlot16	CONFIRMED	(longlong) store of a float->int conversion (fctiwz) kept in a stack pair by the compiler
+local	FUN_00018a40	local_a0	fctiwzSlot17	CONFIRMED	(longlong) store of a float->int conversion (fctiwz) kept in a stack pair by the compiler
+local	FUN_00018a40	local_98	fctiwzSlot18	CONFIRMED	(longlong) store of a float->int conversion (fctiwz) kept in a stack pair by the compiler
+local	FUN_00018a40	local_88	fctiwzSlot19	CONFIRMED	(longlong) store of a float->int conversion (fctiwz) kept in a stack pair by the compiler

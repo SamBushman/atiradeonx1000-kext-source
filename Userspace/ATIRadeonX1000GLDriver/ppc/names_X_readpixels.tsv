@@ -1,0 +1,114 @@
+# FUN_00029290 (read pixels): fork X
+local	FUN_00029290	param_2	rectX	INFERRED	x of the read rectangle: clipped to the render size in place; first scalar of kernel selector 7 request
+local	FUN_00029290	param_3	rectY	INFERRED	y of the read rectangle (clipped in place, second request word)
+local	FUN_00029290	param_4	width	INFERRED	rectangle width: clipped against GLD_renderWidth - x, third request word; passed to FUN_0000a6e0 as the row width
+local	FUN_00029290	param_5	height	INFERRED	rectangle height: clipped against GLD_renderHeight - y, fourth request word
+local	FUN_00029290	param_6	format	CONFIRMED	compared with the GL enums 0x1901 GL_STENCIL_INDEX, 0x1902 GL_DEPTH_COMPONENT, 0x80e1 GL_BGRA; passed to _glgConvertType
+local	FUN_00029290	param_7	pixelType	CONFIRMED	compared with 0x8366/0x8367 (GL_UNSIGNED_SHORT_1_5_5_5_REV / GL_UNSIGNED_INT_8_8_8_8_REV); second argument of _glgConvertType
+local	FUN_00029290	param_8	pixels	INFERRED	client memory destination: uStack_ac = pixels + the skip offset FUN_0000a6e0 returns, then passed as the destination of the kernel read request
+local	FUN_00029290	param_9	transferMode	INFERRED	low byte tested against 0/2 (2 = raw, no pixel-store conversion: puVar5 = 0); forwarded unchanged to FUN_00028350
+local	FUN_00029290	param_10	surfaceInfo	INFERRED	forwarded as the last argument of FUN_00028350 (surfaceInfo there); the path with a non-null value runs the fallback render path
+use	FUN_00029290	uVar18	transferMode8	INFERRED	param_9 & 0xff, tested against 0 and 2	^\s*uVar18\ =\ param_9\ \&\ 0xff;$	+1
+use	FUN_00029290	uVar18	transferMode8	INFERRED	param_9 & 0xff, tested against 0 and 2	^\s*if\ \(\(\(\(\(\*\(uint\ \*\)\(\(\(unsigned\ char\ \*\)0x000030b0\)\ \+\ iVar16\)\ \&\ 0x1ff\)\ ==\ 0\)\ \&\&$	+3
+use	FUN_00029290	uVar18	transferMode8	INFERRED	param_9 & 0xff, tested against 0 and 2	^\s*bVar1\ =\ uVar18\ !=\ 2;$	+1
+use	FUN_00029290	uVar18	transferMode8	INFERRED	param_9 & 0xff, tested against 0 and 2	^\s*if\ \(uVar18\ ==\ 0\)\ \{$	+1
+use	FUN_00029290	uVar18	transferMode8	INFERRED	param_9 & 0xff, tested against 0 and 2	^\s*uVar8\ =\ \(\(int\ \(\*\)\(\)\)FUN_00028350\)\(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,uVar18,$	+2
+use	FUN_00029290	uVar18	scratchBytes	CONFIRMED	pitch*height rounded up to 0x1000, compared with the scratch size at ctx+0x2b78 and passed to valloc	^\s*uVar18\ =\ param_5\ \*\ uStack_b8\ \+\ 0xfff\ \&\ 0xfffff000;$	+2
+use	FUN_00029290	uVar18	scratchBytes	CONFIRMED	pitch*height rounded up to 0x1000, compared with the scratch size at ctx+0x2b78 and passed to valloc	^\s*pvVar9\ =\ _valloc\(uVar18\);$	+2
+use	FUN_00029290	uVar18	surfaceFormat	INFERRED	ushort at +0xb0 of the attachment level record, first argument of _glgConvertType (a GL format)	^\s*uVar18\ =\ \(uint\)\*\(ushort\ \*\)\(iVar7\ \+\ 0xb0\);$	+2
+use	FUN_00029290	uVar18	surfaceFormat	INFERRED	ushort at +0xb0 of the attachment level record, first argument of _glgConvertType (a GL format)	^\s*iVar7\ =\ FUN_0000a3f0\(uVar18,uVar15\);$	+1
+use	FUN_00029290	uVar18	surfaceFormat	INFERRED	ushort at +0xb0 of the attachment level record, first argument of _glgConvertType (a GL format)	^\s*FUN_00031340\(param_1,piVar20,iVar16,iVar14,uVar18,uVar15,pvVar9,uStack_b8\);$	+1
+use	FUN_00029290	uVar18	surfaceFormat	INFERRED	ushort at +0xb0 of the attachment level record, first argument of _glgConvertType (a GL format)	^\s*iVar14\ =\ FUN_0000a3f0\(uVar18,uVar15\);$	+1
+local	FUN_00029290	uVar15	surfaceType	INFERRED	ushort at +0xb2 of the attachment level record, second argument of _glgConvertType (a GL type)
+use	FUN_00029290	iVar7	readSurfaceCode	INFERRED	FUN_0000a2f0(read buffer enum at engineState+0x2db8, renderFlags): result compared with 7 and 8, selects the hardware format 10/0xb	^\s*iVar7\ =\ FUN_0000a2f0\(\(uint\)\*\(ushort\ \*\)\(\(\(unsigned\ char\ \*\)0x00002db8\)\ \+\ iVar16\),\*\(undefined4\ \*\)\(param_1\ \+\ GLD_renderFlags\)\);$	+1
+use	FUN_00029290	iVar7	readSurfaceCode	INFERRED	FUN_0000a2f0(read buffer enum at engineState+0x2db8, renderFlags): result compared with 7 and 8, selects the hardware format 10/0xb	^\s*if\ \(iVar7\ ==\ 7\)\ \{$	+1
+use	FUN_00029290	iVar7	readSurfaceCode	INFERRED	FUN_0000a2f0(read buffer enum at engineState+0x2db8, renderFlags): result compared with 7 and 8, selects the hardware format 10/0xb	^\s*if\ \(iVar7\ !=\ 8\)\ goto\ LAB_000298a4;$	+1
+use	FUN_00029290	iVar7	readSurfaceCode	INFERRED	FUN_0000a2f0(read buffer enum at engineState+0x2db8, renderFlags): result compared with 7 and 8, selects the hardware format 10/0xb	^\s*iVar6\ =\ FUN_0001a010\(param_1,iVar7,puVar11,puVar12,iVar17,puVar13,piVar20\);$	+1
+use	FUN_00029290	iVar7	readSurfaceCode	INFERRED	FUN_0000a2f0(read buffer enum at engineState+0x2db8, renderFlags): result compared with 7 and 8, selects the hardware format 10/0xb	^\s*FUN_000230d0\(param_1,0,iVar7,0,0,0,\*\(undefined4\ \*\)\(param_1\ \+\ GLD_renderWidth\),$	+2
+use	FUN_00029290	iVar7	readSurfaceCode	INFERRED	FUN_0000a2f0(read buffer enum at engineState+0x2db8, renderFlags): result compared with 7 and 8, selects the hardware format 10/0xb	^\s*iStack_c8\ =\ iVar7;$	+1
+use	FUN_00029290	iVar7	status	CONFIRMED	return value of _io_connect_method_structureI_structureO, tested against 0	^\s*iVar7\ =\ _io_connect_method_structureI_structureO$	+1
+use	FUN_00029290	iVar7	status	CONFIRMED	return value of _io_connect_method_structureI_structureO, tested against 0	^\s*if\ \(iVar7\ !=\ 0\)\ goto\ LAB_00029bd0;$	+1
+use	FUN_00029290	iVar7	attachmentIndex	CONFIRMED	5 for GL_STENCIL_INDEX, 4 for GL_DEPTH_COMPONENT, else colour attachment enum - 0x8ce0 (GL_COLOR_ATTACHMENT0_EXT); indexes the framebuffer attachment table	^\s*iVar7\ =\ 5;$	+1
+use	FUN_00029290	iVar7	attachmentIndex	CONFIRMED	5 for GL_STENCIL_INDEX, 4 for GL_DEPTH_COMPONENT, else colour attachment enum - 0x8ce0 (GL_COLOR_ATTACHMENT0_EXT); indexes the framebuffer attachment table	^\s*if\ \(\(param_6\ !=\ 0x1901\)\ \&\&\ \(iVar7\ =\ 4,\ param_6\ !=\ 0x1902\)\)\ \{$	+1
+use	FUN_00029290	iVar7	attachmentIndex	CONFIRMED	5 for GL_STENCIL_INDEX, 4 for GL_DEPTH_COMPONENT, else colour attachment enum - 0x8ce0 (GL_COLOR_ATTACHMENT0_EXT); indexes the framebuffer attachment table	^\s*iVar7\ =\ \*\(ushort\ \*\)\(\*piVar19\ \+\ 0x98\)\ \-\ 0x8ce0;$	+1
+use	FUN_00029290	iVar7	attachmentIndex	CONFIRMED	5 for GL_STENCIL_INDEX, 4 for GL_DEPTH_COMPONENT, else colour attachment enum - 0x8ce0 (GL_COLOR_ATTACHMENT0_EXT); indexes the framebuffer attachment table	^\s*piVar20\ =\ \*\(int\ \*\*\)\(piVar19\[1\]\ \+\ iVar7\ \*\ 4\);$	+1
+use	FUN_00029290	iVar7	attachmentIndex	CONFIRMED	5 for GL_STENCIL_INDEX, 4 for GL_DEPTH_COMPONENT, else colour attachment enum - 0x8ce0 (GL_COLOR_ATTACHMENT0_EXT); indexes the framebuffer attachment table	^\s*iVar7\ =\ iVar7\ \*\ 0x18\ \+\ \*piVar19;$	+1
+use	FUN_00029290	iVar7	attachmentIndex	CONFIRMED	5 for GL_STENCIL_INDEX, 4 for GL_DEPTH_COMPONENT, else colour attachment enum - 0x8ce0 (GL_COLOR_ATTACHMENT0_EXT); indexes the framebuffer attachment table	^\s*iVar16\ =\ \*\(int\ \*\)\(iVar7\ \+\ 4\);$	+3
+use	FUN_00029290	iVar7	levelRecord	INFERRED	face*0x168 + level*0x18 + level table: 15 levels per face; ushorts +0xb0/+0xb2 are its format and type	^\s*iVar7\ =\ iVar14\ \*\ 0x18\ \+\ iVar16\ \*\ 0x168\ \+\ piVar20\[0xc\];$	+3
+use	FUN_00029290	iVar7	bytesPerPixel	INFERRED	FUN_0000a3f0(format, type); row pitch = renderWidth * this	^\s*iVar7\ =\ FUN_0000a3f0\(uVar18,uVar15\);$	+2
+use	FUN_00029290	iVar7	yOffsetBytes	CONFIRMED	y * pitch	^\s*iVar7\ =\ param_3\ \*\ uStack_b8;$	+1
+use	FUN_00029290	iVar7	yOffsetBytes	CONFIRMED	y * pitch	^\s*uStack_bc\ =\ \(int\)pvVar9\ \+\ param_2\ \*\ iVar14\ \+\ iVar17\ \*\ iVar6\ \+\ iVar7;$	+1
+use	FUN_00029290	iVar14	commandStream	CONFIRMED	ctx + GLD_commandStream: first argument of the streamAllocate/streamSetCurrent callbacks	^\s*iVar14\ =\ param_1\ \+\ GLD_commandStream;$	+1
+use	FUN_00029290	iVar14	commandStream	CONFIRMED	ctx + GLD_commandStream: first argument of the streamAllocate/streamSetCurrent callbacks	^\s*puVar10\ =\ \(undefined4\ \*\)\(\*\*\(code\ \*\*\)\(param_1\ \+\ GLD_streamAllocate\)\)\(iVar14,2\);$	+1
+use	FUN_00029290	iVar14	commandStream	CONFIRMED	ctx + GLD_commandStream: first argument of the streamAllocate/streamSetCurrent callbacks	^\s*\(\*\*\(code\ \*\*\)\(param_1\ \+\ GLD_streamSetCurrent\)\)\(iVar14,puVar10\ \+\ 2\);$	+1
+use	FUN_00029290	iVar14	commandStream	CONFIRMED	ctx + GLD_commandStream: first argument of the streamAllocate/streamSetCurrent callbacks	^\s*puVar10\ =\ \(undefined4\ \*\)\(\*\*\(code\ \*\*\)\(param_1\ \+\ GLD_streamAllocate\)\)\(iVar14,2\);$@2	+1
+use	FUN_00029290	iVar14	commandStream	CONFIRMED	ctx + GLD_commandStream: first argument of the streamAllocate/streamSetCurrent callbacks	^\s*\(\*\*\(code\ \*\*\)\(param_1\ \+\ GLD_streamSetCurrent\)\)\(iVar14,puVar10\ \+\ 2\);$@2	+1
+use	FUN_00029290	iVar14	attachLevel	CONFIRMED	attachment entry +8; indexes the level table with stride 0x18 (15 levels per 0x168-byte face)	^\s*iVar14\ =\ \*\(int\ \*\)\(iVar7\ \+\ 8\);$	+1
+use	FUN_00029290	iVar14	attachLevel	CONFIRMED	attachment entry +8; indexes the level table with stride 0x18 (15 levels per 0x168-byte face)	^\s*iVar7\ =\ iVar14\ \*\ 0x18\ \+\ iVar16\ \*\ 0x168\ \+\ piVar20\[0xc\];$	+1
+use	FUN_00029290	iVar14	attachLevel	CONFIRMED	attachment entry +8; indexes the level table with stride 0x18 (15 levels per 0x168-byte face)	^\s*FUN_00031340\(param_1,piVar20,iVar16,iVar14,uVar18,uVar15,pvVar9,uStack_b8\);$	+1
+use	FUN_00029290	iVar14	bytesPerPixel2	INFERRED	FUN_0000a3f0(format, type): used to place x in the destination	^\s*iVar14\ =\ FUN_0000a3f0\(uVar18,uVar15\);$	+2
+use	FUN_00029290	iVar16	engineState	CONFIRMED	ctx + GLD_engineState: all the +0x2db8/+0x30b0/+0x2e68 state reads	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\);$	+5
+use	FUN_00029290	iVar16	engineState	CONFIRMED	ctx + GLD_engineState: all the +0x2db8/+0x30b0/+0x2e68 state reads	^\s*else\ if\ \(\(\*\(uint\ \*\)\(\(\(unsigned\ char\ \*\)0x000030b0\)\ \+\ iVar16\)\ \&\ 2\)\ ==\ 0\)\ \{$	+3
+use	FUN_00029290	iVar16	engineState	CONFIRMED	ctx + GLD_engineState: all the +0x2db8/+0x30b0/+0x2e68 state reads	^\s*iVar6\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00002ff0\)\ \+\ iVar16\)\ \+\ \-1;$	+1
+use	FUN_00029290	iVar16	engineState	CONFIRMED	ctx + GLD_engineState: all the +0x2db8/+0x30b0/+0x2e68 state reads	^\s*else\ if\ \(\*\(short\ \*\)\(\(\(unsigned\ char\ \*\)0x00002fa8\)\ \+\ iVar16\)\ ==\ \-0x7fea\)\ \{$	+1
+use	FUN_00029290	iVar16	engineState	CONFIRMED	ctx + GLD_engineState: all the +0x2db8/+0x30b0/+0x2e68 state reads	^\s*iVar6\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00002fb0\)\ \+\ iVar16\)\ \+\ \-1;$	+1
+use	FUN_00029290	iVar16	engineState	CONFIRMED	ctx + GLD_engineState: all the +0x2db8/+0x30b0/+0x2e68 state reads	^\s*puVar5\ =\ \(\(unsigned\ char\ \*\)0x00002e50\)\ \+\ iVar16;$	+1
+use	FUN_00029290	iVar16	engineState	CONFIRMED	ctx + GLD_engineState: all the +0x2db8/+0x30b0/+0x2e68 state reads	^\s*puVar5\ =\ \(\(unsigned\ char\ \*\)0x00002e48\)\ \+\ iVar16;$	+1
+use	FUN_00029290	iVar16	engineState	CONFIRMED	ctx + GLD_engineState: all the +0x2db8/+0x30b0/+0x2e68 state reads	^\s*if\ \(\(\(unsigned\ char\ \*\)0x00002e68\)\[iVar16\]\ !=\ '\\0'\)\ \{$	+1
+use	FUN_00029290	iVar16	engineState	CONFIRMED	ctx + GLD_engineState: all the +0x2db8/+0x30b0/+0x2e68 state reads	^\s*if\ \(\(\(unsigned\ char\ \*\)0x00002e69\)\[iVar16\]\ !=\ '\\0'\)\ \{$	+1
+use	FUN_00029290	iVar16	engineState	CONFIRMED	ctx + GLD_engineState: all the +0x2db8/+0x30b0/+0x2e68 state reads	^\s*if\ \(\(bVar4\)\ \|\|$	+6
+use	FUN_00029290	iVar16	attachFace	CONFIRMED	attachment entry +4; indexes the level table with stride 0x168 (15 levels x 0x18)	^\s*iVar16\ =\ \*\(int\ \*\)\(iVar7\ \+\ 4\);$	+1
+use	FUN_00029290	iVar16	attachFace	CONFIRMED	attachment entry +4; indexes the level table with stride 0x168 (15 levels x 0x18)	^\s*iVar7\ =\ iVar14\ \*\ 0x18\ \+\ iVar16\ \*\ 0x168\ \+\ piVar20\[0xc\];$	+1
+use	FUN_00029290	iVar16	attachFace	CONFIRMED	attachment entry +4; indexes the level table with stride 0x168 (15 levels x 0x18)	^\s*FUN_00031340\(param_1,piVar20,iVar16,iVar14,uVar18,uVar15,pvVar9,uStack_b8\);$	+1
+use	FUN_00029290	iVar17	attachZOffset	INFERRED	attachment entry +0xc, multiplied by the slice size to place the 3D/array slice	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar7\ \+\ 0xc\);$	+1
+use	FUN_00029290	iVar17	attachZOffset	INFERRED	attachment entry +0xc, multiplied by the slice size to place the 3D/array slice	^\s*uStack_bc\ =\ \(int\)pvVar9\ \+\ param_2\ \*\ iVar14\ \+\ iVar17\ \*\ iVar6\ \+\ iVar7;$	+1
+use	FUN_00029290	iVar6	yOffsetBytes0	CONFIRMED	y * row bytes returned by FUN_0000a6e0: subtracted from the destination offset when y < 0	^\s*iVar6\ =\ param_3\ \*\ uStack_e8;$	+1
+use	FUN_00029290	iVar6	yOffsetBytes0	CONFIRMED	y * row bytes returned by FUN_0000a6e0: subtracted from the destination offset when y < 0	^\s*uStack_ac\ =\ uStack_ac\ \-\ iVar6;$	+1
+use	FUN_00029290	iVar6	prepareResult	INFERRED	return value of FUN_0001a010, tested before FUN_000230d0	^\s*iVar6\ =\ FUN_0001a010\(param_1,iVar7,puVar11,puVar12,iVar17,puVar13,piVar20\);$	+2
+use	FUN_00029290	pvVar9	scratchBuffer	CONFIRMED	valloc result stored at ctx+0x2b74 (with its size at +0x2b78): the cached readback scratch buffer	^\s*pvVar9\ =\ _valloc\(uVar18\);$	+1
+use	FUN_00029290	pvVar9	scratchBuffer	CONFIRMED	valloc result stored at ctx+0x2b74 (with its size at +0x2b78): the cached readback scratch buffer	^\s*\*\(void\ \*\*\)\(\(\(unsigned\ char\ \*\)0x00002b74\)\ \+\ param_1\)\ =\ pvVar9;$	+1
+use	FUN_00029290	pvVar9	levelBuffer	CONFIRMED	valloc(slices * sliceBytes) filled by FUN_00031340, read through _glgProcessPixels and vfree()d	^\s*pvVar9\ =\ _valloc\(\(uint\)uVar3\ \*\ iVar6\);$	+2
+use	FUN_00029290	pvVar9	levelBuffer	CONFIRMED	valloc(slices * sliceBytes) filled by FUN_00031340, read through _glgProcessPixels and vfree()d	^\s*uStack_bc\ =\ \(int\)pvVar9\ \+\ param_2\ \*\ iVar14\ \+\ iVar17\ \*\ iVar6\ \+\ iVar7;$	+1
+use	FUN_00029290	pvVar9	levelBuffer	CONFIRMED	valloc(slices * sliceBytes) filled by FUN_00031340, read through _glgProcessPixels and vfree()d	^\s*_vfree\(pvVar9\);$	+1
+local	FUN_00029290	uVar3	sliceCount	INFERRED	ushort at +0x18 of the attachment object, multiplies the slice size in the valloc
+use	FUN_00029290	uVar8	result	CONFIRMED	1 on success, 0 on failure: the return value	^\s*uVar8\ =\ 1;$	+1
+use	FUN_00029290	uVar8	result	CONFIRMED	1 on success, 0 on failure: the return value	^\s*uVar8\ =\ 0;$	+1
+use	FUN_00029290	uVar8	result	CONFIRMED	1 on success, 0 on failure: the return value	^\s*return\ uVar8;$@2	+1
+use	FUN_00029290	uVar8	fallbackResult	CONFIRMED	return value of FUN_00028350 returned directly	^\s*uVar8\ =\ \(\(int\ \(\*\)\(\)\)FUN_00028350\)\(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,uVar18,$	+3
+use	FUN_00029290	bVar1	convertPixels	INFERRED	transferMode != 2: pixel-store conversion (the _glgProcessPixels path) is wanted	^\s*bVar1\ =\ uVar18\ !=\ 2;$	+2
+use	FUN_00029290	bVar1	convertPixels	INFERRED	transferMode != 2: pixel-store conversion (the _glgProcessPixels path) is wanted	^\s*if\ \(bVar1\)\ \{$@2	+1
+use	FUN_00029290	bVar1	convertPixels	INFERRED	transferMode != 2: pixel-store conversion (the _glgProcessPixels path) is wanted	^\s*if\ \(\(bVar4\)\ \|\|$	+6
+use	FUN_00029290	bVar1	convertPixels	INFERRED	transferMode != 2: pixel-store conversion (the _glgProcessPixels path) is wanted	^\s*if\ \(\(bVar1\)\ \&\&$	+3
+use	FUN_00029290	bVar1	directCopy	INFERRED	true when format/type already match the surface (BGRA 8888_REV / 1555_REV): no conversion	^\s*bVar1\ =\ false;$	+1
+use	FUN_00029290	bVar1	directCopy	INFERRED	true when format/type already match the surface (BGRA 8888_REV / 1555_REV): no conversion	^\s*bVar1\ =\ true;$	+1
+use	FUN_00029290	bVar1	directCopy	INFERRED	true when format/type already match the surface (BGRA 8888_REV / 1555_REV): no conversion	^\s*if\ \(!bVar1\)\ \{$	+1
+local	FUN_00029290	bVar4	sendAttachments	INFERRED	set when the read state carries depth/stencil sources: the three attachment records are sent in the kernel request
+local	FUN_00029290	bVar2	formatIndex	INFERRED	byte at ctx+0x2b7f indexes the 0x24-byte format table PTR_DAT_001e88c8
+use	FUN_00029290	puVar10	ropPacket	CONFIRMED	two words {0x1386 = RB3D_ROPCNTL register id, value} allocated from the command stream	^\s*puVar10\ =\ \(undefined4\ \*\)\(\*\*\(code\ \*\*\)\(param_1\ \+\ GLD_streamAllocate\)\)\(iVar14,2\);$	+5
+use	FUN_00029290	puVar10	ropPacket	CONFIRMED	two words {0x1386 = RB3D_ROPCNTL register id, value} allocated from the command stream	^\s*puVar10\ =\ \(undefined4\ \*\)\(\*\*\(code\ \*\*\)\(param_1\ \+\ GLD_streamAllocate\)\)\(iVar14,2\);$@2	+5
+use	FUN_00029290	piVar20	attachObject	INFERRED	pointer from the framebuffer attachment table: +0x18 ushort is its slice count, +0xc its level table	^\s*piVar20\ =\ \*\(int\ \*\*\)\(piVar19\[1\]\ \+\ iVar7\ \*\ 4\);$	+2
+use	FUN_00029290	piVar20	attachObject	INFERRED	pointer from the framebuffer attachment table: +0x18 ushort is its slice count, +0xc its level table	^\s*uVar3\ =\ \*\(ushort\ \*\)\(\*piVar20\ \+\ 0x18\);$	+1
+use	FUN_00029290	piVar20	attachObject	INFERRED	pointer from the framebuffer attachment table: +0x18 ushort is its slice count, +0xc its level table	^\s*iVar7\ =\ iVar14\ \*\ 0x18\ \+\ iVar16\ \*\ 0x168\ \+\ piVar20\[0xc\];$	+1
+use	FUN_00029290	piVar20	attachObject	INFERRED	pointer from the framebuffer attachment table: +0x18 ushort is its slice count, +0xc its level table	^\s*FUN_00031340\(param_1,piVar20,iVar16,iVar14,uVar18,uVar15,pvVar9,uStack_b8\);$	+1
+use	FUN_00029290	puVar5	packStateArg	INFERRED	engineState + 0x2e50 (pixel-store state) or 0 when transferMode == 2: last argument of FUN_0000a6e0	^\s*puVar5\ =\ \(\(unsigned\ char\ \*\)0x00002e50\)\ \+\ iVar16;$	+1
+use	FUN_00029290	puVar5	packStateArg	INFERRED	engineState + 0x2e50 (pixel-store state) or 0 when transferMode == 2: last argument of FUN_0000a6e0	^\s*puVar5\ =\ \(undefined\ \*\)0x0;$	+1
+use	FUN_00029290	puVar5	packStateArg	INFERRED	engineState + 0x2e50 (pixel-store state) or 0 when transferMode == 2: last argument of FUN_0000a6e0	^\s*FUN_0000a6e0\(param_1,param_6,param_7,param_4\ \-\ iVar6,param_5,puVar13,piVar20,aiStack_e0,puVar5\);$	+1
+use	FUN_00029290	puVar5	packState	INFERRED	engineState + 0x2e48 (pixel-store state) or 0: first argument of _glgProcessPixels	^\s*puVar5\ =\ \(\(unsigned\ char\ \*\)0x00002e48\)\ \+\ iVar16;$	+1
+use	FUN_00029290	puVar5	packState	INFERRED	engineState + 0x2e48 (pixel-store state) or 0: first argument of _glgProcessPixels	^\s*puVar5\ =\ \(undefined\ \*\)0x0;$@2	+1
+use	FUN_00029290	puVar5	packState	INFERRED	engineState + 0x2e48 (pixel-store state) or 0: first argument of _glgProcessPixels	^\s*_glgProcessPixels\(puVar5,\&uStack_bc\);$	+1
+use	FUN_00029290	puVar5	packState	INFERRED	engineState + 0x2e48 (pixel-store state) or 0: first argument of _glgProcessPixels	^\s*if\ \(\(bVar1\)\ \&\&$	+3
+use	FUN_00029290	puVar5	packState	INFERRED	engineState + 0x2e48 (pixel-store state) or 0: first argument of _glgProcessPixels	^\s*_glgProcessPixels\(puVar5,\&uStack_bc\);$@2	+1
+local	FUN_00029290	iStack_c8	requestFormat	INFERRED	5th word of the 7-word request: hardware surface format 4 / 10 / 0xb (surface code from FUN_0000a2f0)
+local	FUN_00029290	uStack_c4	requestAddress	INFERRED	6th word of the request: destination address (scratch buffer or pixels + offset)
+local	FUN_00029290	uStack_c0	requestPitch	INFERRED	7th word of the request: destination pitch
+local	FUN_00029290	iStack_d4	requestY	CONFIRMED	request word 2 = rectY
+local	FUN_00029290	iStack_d0	requestWidth	CONFIRMED	request word 3 = width
+local	FUN_00029290	iStack_cc	requestHeight	CONFIRMED	request word 4 = height
+local	FUN_00029290	uStack_bc	procPixels	INFERRED	first word of the descriptor passed to _glgProcessPixels (source pointer)
+local	FUN_00029290	uStack_b8	procPitch	INFERRED	second descriptor word: row pitch in bytes
+local	FUN_00029290	uStack_b4	procChannelFormat	INFERRED	third descriptor word: pixel format code (_glgConvertType output / format table bits 27..31)
+local	FUN_00029290	uStack_b0	procChannelSize	INFERRED	fourth descriptor word (_glgConvertType output / format table bits 22..26)
+local	FUN_00029290	uStack_ac	dstAddress	INFERRED	pixels + offset returned by FUN_0000a6e0 (adjusted for negative x/y)
+local	FUN_00029290	uStack_a8	srcRowBytes	INFERRED	copy of the row bytes FUN_0000a6e0 returned; compared with 0x3f / 0x1fff for the alignment test
+local	FUN_00029290	uStack_98	procFlags	INFERRED	pixel-store flags: 0x20000 when transferMode == 0, |2 / |8 from engineState+0x2e68/0x2e69, |0x60000 for depth/stencil
+local	FUN_00029290	puStack_94	procMask	INFERRED	0x7efff / |0x68002 mask word of the pixel-store descriptor

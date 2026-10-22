@@ -1,0 +1,429 @@
+# FUN_000369f0 (texture sub-image upload): fork X
+local	FUN_000369f0	param_5	xOffset	INFERRED	texture sub-image x offset: shifted by the level bytes-per-pixel shift into the destination rect word and converted to float for the quad path
+local	FUN_000369f0	param_6	yOffset	INFERRED	texture sub-image y offset: (rowsDone + yoffset) << 16 in the destination rect word
+local	FUN_000369f0	param_7	zOffset	INFERRED	slice index multiplied by the level mapping pitch (+0x14) and added to its base (+8)
+local	FUN_000369f0	param_13	pixels	CONFIRMED	client data pointer: srcRowPtr = pixels + skip bytes + rowsDone * row bytes
+local	FUN_000369f0	param_14	rawTransfer	INFERRED	low byte zero = apply the unpack pixel-store state (engineState+0x2e6c), else no pixel-store processing
+local	FUN_000369f0	param_15	sourceSurface	INFERRED	non-null = copy from a surface (+0 base address, +4/+8 objects) instead of client memory
+use	FUN_000369f0	iVar39	levelRecord	CONFIRMED	FUN_00031220(ctx, texture, face, level, 0): the level record; +0x10/+0x14/+0x18 are format/layout words (+0x14 & 7 = bytes-per-pixel shift)	^\s*iVar39\ =\ \(\(int\ \(\*\)\(\)\)FUN_00031220\)\(param_1,param_2,param_3,param_4,0\);$	+3
+use	FUN_000369f0	iVar39	levelRecord	CONFIRMED	FUN_00031220(ctx, texture, face, level, 0): the level record; +0x10/+0x14/+0x18 are format/layout words (+0x14 & 7 = bytes-per-pixel shift)	^\s*uVar42\ =\ \*\(uint\ \*\)\(iVar39\ \+\ 0x14\)\ \&\ 7;$	+1
+use	FUN_000369f0	iVar39	levelRecord	CONFIRMED	FUN_00031220(ctx, texture, face, level, 0): the level record; +0x10/+0x14/+0x18 are format/layout words (+0x14 & 7 = bytes-per-pixel shift)	^\s*if\ \(\(\(\(param_10\ ==\ 1\)\ \&\&\ \(\(int\)param_8\ <\ 0x1001\)\)\ \&\&$	+2
+use	FUN_000369f0	iVar39	levelRecord	CONFIRMED	FUN_00031220(ctx, texture, face, level, 0): the level record; +0x10/+0x14/+0x18 are format/layout words (+0x14 & 7 = bytes-per-pixel shift)	^\s*if\ \(\(uVar42\ ==\ \*\(byte\ \*\)\(param_2\ \+\ 0xe\)\)\ \&\&\ \(\(\*\(uint\ \*\)\(iVar39\ \+\ 0x14\)\ \&\ 7\)\ <\ 3\)\)\ \{$	+1
+use	FUN_000369f0	iVar39	levelRecord	CONFIRMED	FUN_00031220(ctx, texture, face, level, 0): the level record; +0x10/+0x14/+0x18 are format/layout words (+0x14 & 7 = bytes-per-pixel shift)	^\s*uVar26\ =\ \*\(uint\ \*\)\(iVar39\ \+\ 0x18\)\ >>\ 0x1e\ \^\ 2;$	+1
+use	FUN_000369f0	iVar39	levelRecord	CONFIRMED	FUN_00031220(ctx, texture, face, level, 0): the level record; +0x10/+0x14/+0x18 are format/layout words (+0x14 & 7 = bytes-per-pixel shift)	^\s*uStack_234\ =\ \*\(uint\ \*\)\(iVar39\ \+\ 0x10\)\ >>\ 0x1b;$	+1
+use	FUN_000369f0	iVar39	levelRecord	CONFIRMED	FUN_00031220(ctx, texture, face, level, 0): the level record; +0x10/+0x14/+0x18 are format/layout words (+0x14 & 7 = bytes-per-pixel shift)	^\s*uStack_230\ =\ \*\(uint\ \*\)\(iVar39\ \+\ 0x10\)\ >>\ 0x16\ \&\ 0x1f;$	+1
+use	FUN_000369f0	iVar39	levelRecord	CONFIRMED	FUN_00031220(ctx, texture, face, level, 0): the level record; +0x10/+0x14/+0x18 are format/layout words (+0x14 & 7 = bytes-per-pixel shift)	^\s*uVar26\ =\ \*\(uint\ \*\)\(iVar39\ \+\ 0x18\);$	+1
+use	FUN_000369f0	iVar39	levelRecord	CONFIRMED	FUN_00031220(ctx, texture, face, level, 0): the level record; +0x10/+0x14/+0x18 are format/layout words (+0x14 & 7 = bytes-per-pixel shift)	^\s*uVar26\ =\ \*\(uint\ \*\)\(iVar39\ \+\ 0x14\)\ \&\ 7;$	+1
+use	FUN_000369f0	iVar39	levelRecord	CONFIRMED	FUN_00031220(ctx, texture, face, level, 0): the level record; +0x10/+0x14/+0x18 are format/layout words (+0x14 & 7 = bytes-per-pixel shift)	^\s*iVar22\ =\ \(uint\)\*\(ushort\ \*\)\(\(int\)param_2\ \+\ 0x3e\)\ <<\ \(\*\(uint\ \*\)\(iVar39\ \+\ 0x14\)\ \&\ 7\);$	+1
+use	FUN_000369f0	iVar39	levelRecord	CONFIRMED	FUN_00031220(ctx, texture, face, level, 0): the level record; +0x10/+0x14/+0x18 are format/layout words (+0x14 & 7 = bytes-per-pixel shift)	^\s*uVar26\ =\ \*\(uint\ \*\)\(iVar39\ \+\ 0x18\)\ >>\ 0x17\ \&\ 0x1f;$	+1
+use	FUN_000369f0	iVar39	levelRecord	CONFIRMED	FUN_00031220(ctx, texture, face, level, 0): the level record; +0x10/+0x14/+0x18 are format/layout words (+0x14 & 7 = bytes-per-pixel shift)	^\s*uVar35\ =\ \(\*\(uint\ \*\)\(iVar39\ \+\ 0x14\)\ \&\ 7\)\ \-\ iVar22;$	+1
+use	FUN_000369f0	iVar39	levelRecord	CONFIRMED	FUN_00031220(ctx, texture, face, level, 0): the level record; +0x10/+0x14/+0x18 are format/layout words (+0x14 & 7 = bytes-per-pixel shift)	^\s*uVar26\ =\ \(param_8\ <<\ \(\*\(uint\ \*\)\(iVar39\ \+\ 0x14\)\ \&\ 7\)\)\ \+\ 0x23\ \&\ 0xffffffe0;$	+1
+use	FUN_000369f0	iVar39	levelRecord	CONFIRMED	FUN_00031220(ctx, texture, face, level, 0): the level record; +0x10/+0x14/+0x18 are format/layout words (+0x14 & 7 = bytes-per-pixel shift)	^\s*uVar44\ =\ \*\(uint\ \*\)\(iVar39\ \+\ 0x18\);$	+1
+use	FUN_000369f0	iVar39	levelRecord	CONFIRMED	FUN_00031220(ctx, texture, face, level, 0): the level record; +0x10/+0x14/+0x18 are format/layout words (+0x14 & 7 = bytes-per-pixel shift)	^\s*uVar44\ =\ \*\(uint\ \*\)\(\(\(unsigned\ char\ \*\)0x00003c14\)\ \+$	+2
+use	FUN_000369f0	iVar39	levelRecord	CONFIRMED	FUN_00031220(ctx, texture, face, level, 0): the level record; +0x10/+0x14/+0x18 are format/layout words (+0x14 & 7 = bytes-per-pixel shift)	^\s*uVar24\ =\ \*\(uint\ \*\)\(iVar39\ \+\ 0x14\);$	+1
+use	FUN_000369f0	iVar39	levelRecord	CONFIRMED	FUN_00031220(ctx, texture, face, level, 0): the level record; +0x10/+0x14/+0x18 are format/layout words (+0x14 & 7 = bytes-per-pixel shift)	^\s*uVar24\ =\ \*\(uint\ \*\)\(iVar39\ \+\ 0x14\);$@2	+1
+use	FUN_000369f0	iVar39	levelRecord	CONFIRMED	FUN_00031220(ctx, texture, face, level, 0): the level record; +0x10/+0x14/+0x18 are format/layout words (+0x14 & 7 = bytes-per-pixel shift)	^\s*\*\(uint\ \*\)\(pcStack_d4\ \+\ \(\*\(uint\ \*\)\(iVar39\ \+\ 0x14\)\ \&\ 7\)\ \*\ 4\ \+\ 0x3c00\)\ \&\ 0x1f\ \|$	+1
+use	FUN_000369f0	iVar39	levelRecord	CONFIRMED	FUN_00031220(ctx, texture, face, level, 0): the level record; +0x10/+0x14/+0x18 are format/layout words (+0x14 & 7 = bytes-per-pixel shift)	^\s*iVar27\ =\ iVar27\ >>\ \(\*\(uint\ \*\)\(iVar39\ \+\ 0x14\)\ \&\ 7\);$	+1
+use	FUN_000369f0	iVar39	levelRecord	CONFIRMED	FUN_00031220(ctx, texture, face, level, 0): the level record; +0x10/+0x14/+0x18 are format/layout words (+0x14 & 7 = bytes-per-pixel shift)	^\s*uVar44\ =\ \*\(uint\ \*\)\(iVar39\ \+\ 0x18\)\ >>\ 0xb\ \&\ 0x180000;$	+1
+use	FUN_000369f0	iVar39	levelRecord	CONFIRMED	FUN_00031220(ctx, texture, face, level, 0): the level record; +0x10/+0x14/+0x18 are format/layout words (+0x14 & 7 = bytes-per-pixel shift)	^\s*if\ \(\(\(\*\(uint\ \*\)\(iVar39\ \+\ 0x18\)\ \&\ 0x30000000\)\ ==\ 0\)\ \|\|\ \(iVar45\ ==\ 0\)\)\ \{$	+1
+use	FUN_000369f0	iVar39	levelRecord	CONFIRMED	FUN_00031220(ctx, texture, face, level, 0): the level record; +0x10/+0x14/+0x18 are format/layout words (+0x14 & 7 = bytes-per-pixel shift)	^\s*uVar21\ =\ \*\(uint\ \*\)\(\(\(unsigned\ char\ \*\)0x00003bec\)\ \+$	+2
+use	FUN_000369f0	iVar39	levelRecord	CONFIRMED	FUN_00031220(ctx, texture, face, level, 0): the level record; +0x10/+0x14/+0x18 are format/layout words (+0x14 & 7 = bytes-per-pixel shift)	^\s*iVar45\ =\ \(\(int\)\(\(param_8\ <<\ \(\*\(uint\ \*\)\(iVar39\ \+\ 0x14\)\ \&\ 7\)\)\ \+\ 3\)\ >>\ 2\)\ \+$	+1
+use	FUN_000369f0	iVar39	levelRecord	CONFIRMED	FUN_00031220(ctx, texture, face, level, 0): the level record; +0x10/+0x14/+0x18 are format/layout words (+0x14 & 7 = bytes-per-pixel shift)	^\s*uStack_224\ =\ \*\(uint\ \*\)\(iVar39\ \+\ 0x10\)\ >>\ 0x1b;$	+1
+use	FUN_000369f0	iVar39	levelRecord	CONFIRMED	FUN_00031220(ctx, texture, face, level, 0): the level record; +0x10/+0x14/+0x18 are format/layout words (+0x14 & 7 = bytes-per-pixel shift)	^\s*uStack_220\ =\ \*\(uint\ \*\)\(iVar39\ \+\ 0x10\)\ >>\ 0x16\ \&\ 0x1f;$	+1
+use	FUN_000369f0	iVar39	sourceBase	INFERRED	*(int *)*sourceSurface: base address of the source surface	^\s*iVar39\ =\ \*\(int\ \*\)\*param_15;$	+1
+use	FUN_000369f0	iVar39	sourceBase	INFERRED	*(int *)*sourceSurface: base address of the source surface	^\s*puVar30\[0xa5\]\ =\ \(uVar44\ \-\ iVar39\)\ \*\ 0x20\ \|\ puVar30\[0xa5\]\ \&\ 0x1f;$	+1
+use	FUN_000369f0	iVar39	storageRecord	INFERRED	texture[0xd]: the storage/backing record (+0x15 flags, +0x16 == 6 marks surface-backed)	^\s*iVar39\ =\ param_2\[0xd\];$	+2
+use	FUN_000369f0	iVar39	storageRecord	INFERRED	texture[0xd]: the storage/backing record (+0x15 flags, +0x16 == 6 marks surface-backed)	^\s*if\ \(\(\*\(byte\ \*\)\(iVar39\ \+\ 0x15\)\ \&\ 0x18\)\ ==\ 0\)\ \{$	+1
+use	FUN_000369f0	iVar39	storageRecord	INFERRED	texture[0xd]: the storage/backing record (+0x15 flags, +0x16 == 6 marks surface-backed)	^\s*if\ \(iVar39\ !=\ 0\)\ \{$	+2
+use	FUN_000369f0	iVar43	faceArg	CONFIRMED	copy of face passed to FUN_00032100	^\s*iVar43\ =\ param_3;$	+1
+use	FUN_000369f0	iVar43	faceArg	CONFIRMED	copy of face passed to FUN_00032100	^\s*iVar43\ =\ \(\(int\ \(\*\)\(\)\)FUN_00032100\)\(param_1,param_2,iVar43,uVar26,uVar44,uVar42\);$	+2
+use	FUN_000369f0	iVar43	commandStream	CONFIRMED	ctx + GLD_commandStream: first argument of the streamAllocate/streamSetCurrent callbacks	^\s*iVar43\ =\ param_1\ \+\ GLD_commandStream;$	+2
+use	FUN_000369f0	iVar43	commandStream	CONFIRMED	ctx + GLD_commandStream: first argument of the streamAllocate/streamSetCurrent callbacks	^\s*\(\*\*\(code\ \*\*\)\(param_1\ \+\ GLD_streamSetCurrent\)\)\(iVar43,uVar28\);$	+1
+use	FUN_000369f0	iVar43	commandStream	CONFIRMED	ctx + GLD_commandStream: first argument of the streamAllocate/streamSetCurrent callbacks	^\s*\(\*\*\(code\ \*\*\)\(param_1\ \+\ GLD_streamAllocate\)\)\(iVar43,0x2a,a2,puStack_10c,iStack_d8\);$	+1
+use	FUN_000369f0	iVar43	commandStream	CONFIRMED	ctx + GLD_commandStream: first argument of the streamAllocate/streamSetCurrent callbacks	^\s*\(iVar43,puVar30\ \+\ 0x2a,a2,0,uVar44,uVar42,uVar21,puVar30\ \+\ 0x24\);$	+1
+use	FUN_000369f0	iVar43	commandStream	CONFIRMED	ctx + GLD_commandStream: first argument of the streamAllocate/streamSetCurrent callbacks	^\s*\(\*\*\(code\ \*\*\)\(param_1\ \+\ GLD_streamAllocate\)\)\(iVar43,\(uVar26\ \*\ uVar42\ >>\ 2\)\ \+\ 0x193\);$	+1
+use	FUN_000369f0	iVar43	commandStream	CONFIRMED	ctx + GLD_commandStream: first argument of the streamAllocate/streamSetCurrent callbacks	^\s*FUN_0004c100\(puVar30\ \+\ 0xce,iVar43\);$	+1
+use	FUN_000369f0	iVar43	commandStream	CONFIRMED	ctx + GLD_commandStream: first argument of the streamAllocate/streamSetCurrent callbacks	^\s*\(\*\*\(code\ \*\*\)\(param_1\ \+\ GLD_streamSetCurrent\)\)\(iVar43,puVar29\);$	+1
+use	FUN_000369f0	iVar43	commandStream	CONFIRMED	ctx + GLD_commandStream: first argument of the streamAllocate/streamSetCurrent callbacks	^\s*uVar28\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ GLD_streamAllocate\)\)\(iVar43,0xe0\);$@2	+1
+use	FUN_000369f0	iVar43	commandStream	CONFIRMED	ctx + GLD_commandStream: first argument of the streamAllocate/streamSetCurrent callbacks	^\s*\(\*\*\(code\ \*\*\)\(param_1\ \+\ GLD_streamSetCurrent\)\)\(iVar43,uVar28\);$@2	+1
+use	FUN_000369f0	iVar43	textureState	INFERRED	texture[0xc]: the texture state record (+0x69 base level, +0x6d NPOT flag, +0x5e last level, +0xa4/+0xa6 per-level width/height)	^\s*iVar43\ =\ param_2\[0xc\];$	+1
+use	FUN_000369f0	iVar43	textureState	INFERRED	texture[0xc]: the texture state record (+0x69 base level, +0x6d NPOT flag, +0x5e last level, +0xa4/+0xa6 per-level width/height)	^\s*sVar8\ =\ \*\(short\ \*\)\(iVar43\ \+\ 2\);$	+1
+use	FUN_000369f0	iVar45	commandStreamB	CONFIRMED	ctx + GLD_commandStream in the surface-copy path	^\s*iVar45\ =\ param_1\ \+\ GLD_commandStream;$	+2
+use	FUN_000369f0	iVar45	commandStreamB	CONFIRMED	ctx + GLD_commandStream in the surface-copy path	^\s*FUN_0004c100\(puVar30\ \+\ 0xd0,iVar45\);$	+1
+use	FUN_000369f0	iVar45	commandStreamB	CONFIRMED	ctx + GLD_commandStream in the surface-copy path	^\s*\(\*\*\(code\ \*\*\)\(param_1\ \+\ GLD_streamSetCurrent\)\)\(iVar45,uVar28\);$	+1
+use	FUN_000369f0	iVar45	levelOffset	CONFIRMED	level * 0x18 + face * 0x168: byte offset of the level in the texture state (15 levels per face)	^\s*iVar45\ =\ param_4\ \*\ 0x18\ \+\ param_3\ \*\ 0x168;$	+2
+use	FUN_000369f0	iVar45	levelOffset	CONFIRMED	level * 0x18 + face * 0x168: byte offset of the level in the texture state (15 levels per face)	^\s*iVar45\ =\ iVar45\ \+\ param_2\[0xc\];$	+3
+use	FUN_000369f0	iVar45	engineStateB	CONFIRMED	ctx + GLD_engineState	^\s*iVar45\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\);$	+4
+use	FUN_000369f0	iVar45	levelStateRec	CONFIRMED	levelByteOffset + faceByteOffset + textureState: the level entry; +0xa4/+0xa6 are its width/height	^\s*iVar45\ =\ iStack_a4\ \+\ iStack_cc\ \+\ param_2\[0xc\];$	+3
+use	FUN_000369f0	iVar45	levelMappingRec	CONFIRMED	*texture + 0x40 + mappingOffset: per-level mapping {+8 base, +0x14 pitch}	^\s*iVar45\ =\ \*param_2\ \+\ 0x40\ \+\ iStack_f4;$	+2
+use	FUN_000369f0	iVar45	levelMappingRec	CONFIRMED	*texture + 0x40 + mappingOffset: per-level mapping {+8 base, +0x14 pitch}	^\s*iVar45\ =\ 0;$@2	+1
+use	FUN_000369f0	iVar45	levelMappingRec	CONFIRMED	*texture + 0x40 + mappingOffset: per-level mapping {+8 base, +0x14 pitch}	^\s*puVar30\[0x9d\]\ =\ iVar45;$	+1
+use	FUN_000369f0	iVar45	rowWords	INFERRED	((width << bppShift) + 3) >> 2 + alignment words: data words per row in the upload stream	^\s*iVar45\ =\ \(\(int\)\(\(param_8\ <<\ \(\*\(uint\ \*\)\(iVar39\ \+\ 0x14\)\ \&\ 7\)\)\ \+\ 3\)\ >>\ 2\)\ \+$	+1
+use	FUN_000369f0	iVar45	rowWords	INFERRED	((width << bppShift) + 3) >> 2 + alignment words: data words per row in the upload stream	^\s*if\ \(iVar45\ !=\ 1\)\ \{$	+2
+use	FUN_000369f0	iVar45	rowWords	INFERRED	((width << bppShift) + 3) >> 2 + alignment words: data words per row in the upload stream	^\s*puVar29\ =\ puVar29\ \+\ iVar45;$	+1
+use	FUN_000369f0	iVar45	headerRowsLeft	CONFIRMED	chunk rows - 1: loop counter of the repeated row headers	^\s*iVar45\ =\ uVar42\ \-\ 1;$	+1
+use	FUN_000369f0	iVar45	headerRowsLeft	CONFIRMED	chunk rows - 1: loop counter of the repeated row headers	^\s*iVar45\ =\ iVar45\ \+\ \-1;$@3	+2
+use	FUN_000369f0	iVar22	engineState	CONFIRMED	ctx + GLD_engineState	^\s*iVar22\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\);$	+3
+use	FUN_000369f0	iVar22	engineState	CONFIRMED	ctx + GLD_engineState	^\s*if\ \(\(\(unsigned\ char\ \*\)0x00002e85\)\[iVar22\]\ !=\ '\\0'\)\ \{$	+1
+use	FUN_000369f0	iVar22	dataOffset	CONFIRMED	destination cursor - GLD_dataBase: the offset stored into packet[4] of the upload packet	^\s*iVar22\ =\ \(int\)puStack_10c\ \-\ \*\(int\ \*\)\(param_1\ \+\ GLD_dataBase\);$	+1
+use	FUN_000369f0	iVar22	dataOffset	CONFIRMED	destination cursor - GLD_dataBase: the offset stored into packet[4] of the upload packet	^\s*puVar30\[4\]\ =\ iVar22;$	+1
+use	FUN_000369f0	iVar22	levelMappingRecB	CONFIRMED	*texture + 0x40 + mappingOffset	^\s*iVar22\ =\ \*param_2\ \+\ 0x40\ \+\ iStack_dc;$	+2
+use	FUN_000369f0	iVar22	levelStateRecB	CONFIRMED	level entry in the texture state: +0xa4/+0xa6 width/height	^\s*iVar22\ =\ iStack_a4\ \+\ iStack_cc\ \+\ param_2\[0xc\];$	+2
+use	FUN_000369f0	iVar22	levelStateRecB	CONFIRMED	level entry in the texture state: +0xa4/+0xa6 width/height	^\s*uVar10\ =\ \*\(ushort\ \*\)\(iVar22\ \+\ 0xa4\);$	+1
+use	FUN_000369f0	iVar22	rowStart	INFERRED	first row of the current chunk in the quad-upload loop	^\s*iVar22\ =\ 0;$@2	+1
+use	FUN_000369f0	iVar22	rowStart	INFERRED	first row of the current chunk in the quad-upload loop	^\s*iStack_110\ =\ iVar22\ \+\ uStack_e0;$	+1
+use	FUN_000369f0	iVar22	rowStart	INFERRED	first row of the current chunk in the quad-upload loop	^\s*uVar42\ =\ param_9\ \-\ iVar22;$	+1
+use	FUN_000369f0	iVar22	rowStart	INFERRED	first row of the current chunk in the quad-upload loop	^\s*uStack_144\ =\ iVar22\ \+\ param_6\ \^\ 0x80000000;$	+2
+use	FUN_000369f0	iVar22	rowStart	INFERRED	first row of the current chunk in the quad-upload loop	^\s*puStack_23c\ =\ \(uint\ \*\)\(param_13\ \+\ uStack_240\ \+\ iVar22\ \*\ uStack_238\);$	+1
+use	FUN_000369f0	iVar22	rowStart	INFERRED	first row of the current chunk in the quad-upload loop	^\s*_glgProcessPixels\(\(\(unsigned\ char\ \*\)0x00002e48\)\ \+\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\),ppuStack_c0,puVar33,$	+2
+use	FUN_000369f0	iVar22	rowStart	INFERRED	first row of the current chunk in the quad-upload loop	^\s*iVar22\ =\ iStack_110;$	+1
+use	FUN_000369f0	iVar22	levelStateRecC	CONFIRMED	level entry in the texture state	^\s*iVar22\ =\ iVar45\ \+\ param_2\[0xc\];$	+2
+use	FUN_000369f0	iVar22	levelStateRecC	CONFIRMED	level entry in the texture state	^\s*if\ \(0x1000\ <\ \*\(ushort\ \*\)\(iVar22\ \+\ 0xa6\)\)\ \{$	+1
+use	FUN_000369f0	iVar27	alignPixels	INFERRED	0x20 (bytes) or 0x20 / pixel size, >> bppShift: pitch alignment in pixels	^\s*iVar27\ =\ 0x20;$	+1
+use	FUN_000369f0	iVar27	alignPixels	INFERRED	0x20 (bytes) or 0x20 / pixel size, >> bppShift: pitch alignment in pixels	^\s*iVar27\ =\ 0x20\ /\ \(1\ <<\ \(\*\(uint\ \*\)\(\(\(unsigned\ char\ \*\)0x00003544\)\ \+$	+4
+use	FUN_000369f0	iVar27	alignPixels	INFERRED	0x20 (bytes) or 0x20 / pixel size, >> bppShift: pitch alignment in pixels	^\s*iVar27\ =\ iVar27\ >>\ \(\*\(uint\ \*\)\(iVar39\ \+\ 0x14\)\ \&\ 7\);$	+1
+use	FUN_000369f0	iVar27	alignPixels	INFERRED	0x20 (bytes) or 0x20 / pixel size, >> bppShift: pitch alignment in pixels	^\s*uVar24\ =\ \(\(uint\)uVar9\ \+\ iVar27\)\ \-\ 1\ \&\ \-iVar27;$	+1
+use	FUN_000369f0	iVar27	tiledFlag	INFERRED	0 or 1: bit 16 of the texture size word (set when the level fits the tile size)	^\s*iVar27\ =\ 0;$	+1
+use	FUN_000369f0	iVar27	tiledFlag	INFERRED	0 or 1: bit 16 of the texture size word (set when the level fits the tile size)	^\s*iVar27\ =\ 0x100;$	+1
+use	FUN_000369f0	iVar27	tiledFlag	INFERRED	0 or 1: bit 16 of the texture size word (set when the level fits the tile size)	^\s*iVar27\ =\ 0x20\ /\ iVar20\ <<\ 3;$	+1
+use	FUN_000369f0	iVar27	tiledFlag	INFERRED	0 or 1: bit 16 of the texture size word (set when the level fits the tile size)	^\s*if\ \(\(\*\(int\ \*\)\(\*param_2\ \+\ 0xc\)\ >>\ \(uVar35\ \&\ 0x3f\)\ <\ iVar27\)\ \|\|$	+4
+use	FUN_000369f0	iVar27	tiledFlag	INFERRED	0 or 1: bit 16 of the texture size word (set when the level fits the tile size)	^\s*uVar35\ \|\ uVar24\ \&\ 0x3ffe\ \|\ iVar27\ <<\ 0x10\ \|\ uVar44\ \|\ \(uVar21\ \&\ 0xf\)\ <<\ 0x15;$	+1
+use	FUN_000369f0	iVar27	levelRecordB	CONFIRMED	FUN_00031220(ctx, texture, face, level, 0) in the surface-copy path	^\s*iVar27\ =\ \(\(int\ \(\*\)\(\)\)FUN_00031220\)\(param_1,param_2,param_3,param_4,0\);$	+2
+use	FUN_000369f0	iVar27	levelRecordB	CONFIRMED	FUN_00031220(ctx, texture, face, level, 0) in the surface-copy path	^\s*iVar34\ =\ iVar34\ >>\ \(\*\(uint\ \*\)\(iVar27\ \+\ 0x14\)\ \&\ 7\);$	+1
+use	FUN_000369f0	iVar27	levelRecordB	CONFIRMED	FUN_00031220(ctx, texture, face, level, 0) in the surface-copy path	^\s*uVar44\ \|\ uVar26\ \&\ 0x3ffe\ \|\ iVar22\ <<\ 0x10\ \|\ \*\(uint\ \*\)\(iVar27\ \+\ 0x18\)\ >>\ 0xb\ \&\ 0x180000\ \|$	+3
+use	FUN_000369f0	iVar27	levelRecordB	CONFIRMED	FUN_00031220(ctx, texture, face, level, 0) in the surface-copy path	^\s*uVar44\ =\ \(\*\(uint\ \*\)\(iVar27\ \+\ 0x18\)\ \&\ 6\)\ <<\ 9;$	+1
+use	FUN_000369f0	iVar27	levelRecordB	CONFIRMED	FUN_00031220(ctx, texture, face, level, 0) in the surface-copy path	^\s*uVar24\ =\ \*\(uint\ \*\)\(iVar27\ \+\ 0x1c\)\ >>\ 0x12\ \&\ 0x3000;$	+1
+use	FUN_000369f0	iVar27	levelRecordB	CONFIRMED	FUN_00031220(ctx, texture, face, level, 0) in the surface-copy path	^\s*uVar35\ =\ \*\(uint\ \*\)\(iVar27\ \+\ 0x1c\)\ >>\ 0xe\ \&\ 0xc000;$	+1
+use	FUN_000369f0	iVar27	levelRecordB	CONFIRMED	FUN_00031220(ctx, texture, face, level, 0) in the surface-copy path	^\s*\*\(uint\ \*\)\(iVar27\ \+\ 0x18\)\ >>\ 5\ \&\ 0x1f\ \|$	+1
+use	FUN_000369f0	iVar27	levelRecordB	CONFIRMED	FUN_00031220(ctx, texture, face, level, 0) in the surface-copy path	^\s*if\ \(\(\*\(uint\ \*\)\(iVar27\ \+\ 0x20\)\ \&\ 0x400000\)\ !=\ 0\)\ \{$	+1
+use	FUN_000369f0	uVar24	rowPitch	CONFIRMED	(width << bppShift) + 0x23 & ~0x1f: row pitch of the upload stream; chunk rows = 0x1e000 / rowPitch	^\s*uVar24\ =\ \(param_8\ <<\ uVar42\)\ \+\ 0x23\ \&\ 0xffffffe0;$	+1
+use	FUN_000369f0	uVar24	rowPitch	CONFIRMED	(width << bppShift) + 0x23 & ~0x1f: row pitch of the upload stream; chunk rows = 0x1e000 / rowPitch	^\s*uStack_e0\ =\ 0x1e000\ /\ uVar24;$	+1
+use	FUN_000369f0	uVar24	rowPitch	CONFIRMED	(width << bppShift) + 0x23 & ~0x1f: row pitch of the upload stream; chunk rows = 0x1e000 / rowPitch	^\s*uStack_118\ =\ 0x10000\ /\ uVar24;$	+1
+use	FUN_000369f0	uVar24	rowPitch	CONFIRMED	(width << bppShift) + 0x23 & ~0x1f: row pitch of the upload stream; chunk rows = 0x1e000 / rowPitch	^\s*iStack_d8\ =\ uVar24\ \*\ uStack_ec;$	+1
+use	FUN_000369f0	uVar24	rowPitch	CONFIRMED	(width << bppShift) + 0x23 & ~0x1f: row pitch of the upload stream; chunk rows = 0x1e000 / rowPitch	^\s*uStack_228\ =\ uVar24;$	+1
+use	FUN_000369f0	uVar24	rowPitch	CONFIRMED	(width << bppShift) + 0x23 & ~0x1f: row pitch of the upload stream; chunk rows = 0x1e000 / rowPitch	^\s*puVar30\[0x12\]\ =\ uVar24;$	+1
+use	FUN_000369f0	uVar24	alignedPitchPixels	INFERRED	(levelWidth + alignPixels) - 1 & -alignPixels: aligned level pitch	^\s*uVar24\ =\ \(\(uint\)uVar9\ \+\ iVar27\)\ \-\ 1\ \&\ \-iVar27;$	+1
+use	FUN_000369f0	uVar24	alignedPitchPixels	INFERRED	(levelWidth + alignPixels) - 1 & -alignPixels: aligned level pitch	^\s*puVar30\[0xb6\]\ =\ uVar24\ \-\ 1\ \&\ 0x1fff\ \|\ \(uStack_f8\ \-\ 1\)\ \*\ 0x2000\ \&\ 0x3ffe000;$	+1
+use	FUN_000369f0	uVar24	alignedPitchPixels	INFERRED	(levelWidth + alignPixels) - 1 & -alignPixels: aligned level pitch	^\s*uVar35\ \|\ uVar24\ \&\ 0x3ffe\ \|\ iVar27\ <<\ 0x10\ \|\ uVar44\ \|\ \(uVar21\ \&\ 0xf\)\ <<\ 0x15;$	+1
+use	FUN_000369f0	uVar26	levelArg	CONFIRMED	copy of level passed to FUN_00032100	^\s*uVar26\ =\ param_4;$	+1
+use	FUN_000369f0	uVar26	levelArg	CONFIRMED	copy of level passed to FUN_00032100	^\s*iVar43\ =\ \(\(int\ \(\*\)\(\)\)FUN_00032100\)\(param_1,param_2,iVar43,uVar26,uVar44,uVar42\);$	+1
+use	FUN_000369f0	uVar26	levelArg	CONFIRMED	copy of level passed to FUN_00032100	^\s*uVar26\ =\ 0;$@2	+1
+use	FUN_000369f0	uVar26	levelArg	CONFIRMED	copy of level passed to FUN_00032100	^\s*uVar26\ =\ param_13;$	+1
+use	FUN_000369f0	uVar26	levelArg	CONFIRMED	copy of level passed to FUN_00032100	^\s*\(\(int\ \(\*\)\(\)\)FUN_00034200\)\(param_1,param_2,param_3,uVar26,uVar44\);$	+1
+use	FUN_000369f0	uVar26	swapMode	CONFIRMED	levelRecord+0x18 >> 0x1e ^ 2 xor the unpack swap-bytes bit: selects the byte-swap loop (1 swap16, 2 swap32, 3 swap halves)	^\s*uVar26\ =\ \*\(uint\ \*\)\(iVar39\ \+\ 0x18\)\ >>\ 0x1e\ \^\ 2;$	+1
+use	FUN_000369f0	uVar26	swapMode	CONFIRMED	levelRecord+0x18 >> 0x1e ^ 2 xor the unpack swap-bytes bit: selects the byte-swap loop (1 swap16, 2 swap32, 3 swap halves)	^\s*uVar26\ =\ uVar26\ \^\ uVar44;$	+1
+use	FUN_000369f0	uVar26	swapMode	CONFIRMED	levelRecord+0x18 >> 0x1e ^ 2 xor the unpack swap-bytes bit: selects the byte-swap loop (1 swap16, 2 swap32, 3 swap halves)	^\s*if\ \(uVar26\ ==\ 2\)\ \{$	+1
+use	FUN_000369f0	uVar26	swapMode	CONFIRMED	levelRecord+0x18 >> 0x1e ^ 2 xor the unpack swap-bytes bit: selects the byte-swap loop (1 swap16, 2 swap32, 3 swap halves)	^\s*else\ if\ \(uVar26\ ==\ 3\)\ \{$	+1
+use	FUN_000369f0	uVar26	swapMode	CONFIRMED	levelRecord+0x18 >> 0x1e ^ 2 xor the unpack swap-bytes bit: selects the byte-swap loop (1 swap16, 2 swap32, 3 swap halves)	^\s*else\ if\ \(uVar26\ ==\ 1\)\ \{$	+1
+use	FUN_000369f0	uVar26	rowsLeft	CONFIRMED	copy of the chunk row count, counted down per row in the conversion loops	^\s*uVar26\ =\ uStack_20c;$	+1
+use	FUN_000369f0	uVar26	rowsLeft	CONFIRMED	copy of the chunk row count, counted down per row in the conversion loops	^\s*uVar26\ =\ uVar26\ \-\ 1;$	+1
+use	FUN_000369f0	uVar26	rowsLeft	CONFIRMED	copy of the chunk row count, counted down per row in the conversion loops	^\s*\}\ while\ \(0\ <\ \(int\)uVar26\);$	+1
+use	FUN_000369f0	uVar26	rowsLeft	CONFIRMED	copy of the chunk row count, counted down per row in the conversion loops	^\s*uVar26\ =\ uStack_20c;$@2	+1
+use	FUN_000369f0	uVar26	rowsLeft	CONFIRMED	copy of the chunk row count, counted down per row in the conversion loops	^\s*uVar26\ =\ uVar26\ \-\ 1;$@2	+1
+use	FUN_000369f0	uVar26	rowsLeft	CONFIRMED	copy of the chunk row count, counted down per row in the conversion loops	^\s*\}\ while\ \(0\ <\ \(int\)uVar26\);$@2	+1
+use	FUN_000369f0	uVar26	rowsLeft	CONFIRMED	copy of the chunk row count, counted down per row in the conversion loops	^\s*uVar26\ =\ uStack_20c;$@3	+1
+use	FUN_000369f0	uVar26	rowsLeft	CONFIRMED	copy of the chunk row count, counted down per row in the conversion loops	^\s*uVar26\ =\ uVar26\ \-\ 1;$@3	+1
+use	FUN_000369f0	uVar26	rowsLeft	CONFIRMED	copy of the chunk row count, counted down per row in the conversion loops	^\s*\}\ while\ \(0\ <\ \(int\)uVar26\);$@3	+1
+use	FUN_000369f0	uVar26	rowsLeft	CONFIRMED	copy of the chunk row count, counted down per row in the conversion loops	^\s*uVar26\ =\ uStack_20c;$@4	+1
+use	FUN_000369f0	uVar26	rowsLeft	CONFIRMED	copy of the chunk row count, counted down per row in the conversion loops	^\s*while\ \(0\ <\ \(int\)uVar26\)\ \{$	+1
+use	FUN_000369f0	uVar26	rowsLeft	CONFIRMED	copy of the chunk row count, counted down per row in the conversion loops	^\s*uVar26\ =\ uVar26\ \-\ 1;$@4	+1
+use	FUN_000369f0	uVar26	rowsLeft	CONFIRMED	copy of the chunk row count, counted down per row in the conversion loops	^\s*for\ \(;\ 0\ <\ \(int\)uVar26;\ uVar26\ =\ uVar26\ \-\ 1\)\ \{$	+1
+use	FUN_000369f0	uVar26	bppShift	CONFIRMED	levelRecord+0x14 & 7: log2 of the bytes per pixel / texel block	^\s*uVar26\ =\ \*\(uint\ \*\)\(iVar39\ \+\ 0x14\)\ \&\ 7;$	+3
+use	FUN_000369f0	uVar26	rowPitchB	CONFIRMED	(width << bppShift) + 0x23 & ~0x1f: row pitch of the quad-upload chunk	^\s*uVar26\ =\ \(param_8\ <<\ \(\*\(uint\ \*\)\(iVar39\ \+\ 0x14\)\ \&\ 7\)\)\ \+\ 0x23\ \&\ 0xffffffe0;$	+1
+use	FUN_000369f0	uVar26	rowPitchB	CONFIRMED	(width << bppShift) + 0x23 & ~0x1f: row pitch of the quad-upload chunk	^\s*\(\*\*\(code\ \*\*\)\(param_1\ \+\ GLD_streamAllocate\)\)\(iVar43,\(uVar26\ \*\ uVar42\ >>\ 2\)\ \+\ 0x193\);$	+1
+use	FUN_000369f0	uVar26	rowPitchB	CONFIRMED	(width << bppShift) + 0x23 & ~0x1f: row pitch of the quad-upload chunk	^\s*\(uint\)\(0x800\ <\ \(int\)param_8\)\ <<\ 0xf\ \|\ \(uVar26\ >>\ \(uVar24\ \&\ 7\)\)\ \-\ 1\ \&\ 0x3fff;$	+1
+use	FUN_000369f0	uVar26	rowPitchB	CONFIRMED	(width << bppShift) + 0x23 & ~0x1f: row pitch of the quad-upload chunk	^\s*uVar44\ =\ uVar26\ >>\ 2;$	+1
+use	FUN_000369f0	uVar26	rowPitchB	CONFIRMED	(width << bppShift) + 0x23 & ~0x1f: row pitch of the quad-upload chunk	^\s*uStack_228\ =\ uVar26;$	+1
+use	FUN_000369f0	uVar26	srcHwFormat	INFERRED	FUN_0002f7c0(pixelFormat, pixelType): hardware format of the source, 0 = unsupported	^\s*uVar26\ =\ \(\(int\ \(\*\)\(\)\)FUN_0002f7c0\)\(param_11,param_12\);$	+2
+use	FUN_000369f0	uVar26	srcHwFormat	INFERRED	FUN_0002f7c0(pixelFormat, pixelType): hardware format of the source, 0 = unsupported	^\s*iVar22\ =\ \(uVar26\ \&\ 0xff\)\ \*\ 0x24;$	+1
+use	FUN_000369f0	uVar42	yoffsetArg	CONFIRMED	copy of yoffset passed to FUN_00032100	^\s*uVar42\ =\ param_6;$	+1
+use	FUN_000369f0	uVar42	yoffsetArg	CONFIRMED	copy of yoffset passed to FUN_00032100	^\s*iVar43\ =\ \(\(int\ \(\*\)\(\)\)FUN_00032100\)\(param_1,param_2,iVar43,uVar26,uVar44,uVar42\);$	+1
+use	FUN_000369f0	uVar42	bppShiftB	CONFIRMED	levelRecord+0x14 & 7	^\s*uVar42\ =\ \*\(uint\ \*\)\(iVar39\ \+\ 0x14\)\ \&\ 7;$	+4
+use	FUN_000369f0	uVar42	srcHwFormatB	INFERRED	FUN_0002f7c0(pixelFormat, pixelType), compared with the texture format byte (texture+0x38)	^\s*uVar42\ =\ \(\(int\ \(\*\)\(\)\)FUN_0002f7c0\)\(param_11,param_12\);$	+2
+use	FUN_000369f0	uVar44	srcRowBytesCopy	CONFIRMED	copy of uStack_238 (source row bytes) used by the memcpy path	^\s*uVar44\ =\ uStack_238;$	+1
+use	FUN_000369f0	uVar44	srcRowBytesCopy	CONFIRMED	copy of uStack_238 (source row bytes) used by the memcpy path	^\s*puVar23\ =\ \(uint\ \*\)\(\(int\)puVar23\ \+\ uVar44\);$	+1
+use	FUN_000369f0	uVar44	srcWord	CONFIRMED	the source word loaded for byte swapping	^\s*uVar44\ =\ \*puVar33;$	+1
+use	FUN_000369f0	uVar44	srcWord	CONFIRMED	the source word loaded for byte swapping	^\s*\*puVar37\ =\ uVar44\ >>\ 0x18\ \|\ uVar44\ >>\ 8\ \&\ 0xff00\ \|\ \(uVar44\ \&\ 0xff00\)\ <<\ 8$	+2
+use	FUN_000369f0	uVar44	srcWord	CONFIRMED	the source word loaded for byte swapping	^\s*uVar44\ =\ \*puVar33;$@2	+1
+use	FUN_000369f0	uVar44	srcWord	CONFIRMED	the source word loaded for byte swapping	^\s*\*puVar37\ =\ uVar44\ <<\ 0x10\ \|\ uVar44\ >>\ 0x10;$	+1
+use	FUN_000369f0	uVar44	srcData	INFERRED	pixels + skip bytes: source pointer of the surface-copy path	^\s*uVar44\ =\ param_13\ \+\ iStack_244;$	+1
+use	FUN_000369f0	uVar44	srcData	INFERRED	pixels + skip bytes: source pointer of the surface-copy path	^\s*bVar1\ =\ \(\(uVar44\ \|\ uStack_248\)\ \&\ 0x1f\)\ ==\ 0;$	+1
+use	FUN_000369f0	uVar44	srcData	INFERRED	pixels + skip bytes: source pointer of the surface-copy path	^\s*puVar30\[3\]\ =\ uVar44\ \-\ iVar20;$	+1
+use	FUN_000369f0	uVar44	srcData	INFERRED	pixels + skip bytes: source pointer of the surface-copy path	^\s*puVar30\[0xa5\]\ =\ \(uVar44\ \-\ iVar39\)\ \*\ 0x20\ \|\ puVar30\[0xa5\]\ \&\ 0x1f;$	+1
+use	FUN_000369f0	puVar23	srcRow	CONFIRMED	start of the current source row, advanced by the source row bytes	^\s*puVar23\ =\ puStack_23c;$@2	+1
+use	FUN_000369f0	puVar23	srcRow	CONFIRMED	start of the current source row, advanced by the source row bytes	^\s*puVar33\ =\ puVar23;$	+1
+use	FUN_000369f0	puVar23	srcRow	CONFIRMED	start of the current source row, advanced by the source row bytes	^\s*puVar23\ =\ \(uint\ \*\)\(\(int\)puVar23\ \+\ uStack_238\);$	+1
+use	FUN_000369f0	puVar23	srcRow	CONFIRMED	start of the current source row, advanced by the source row bytes	^\s*puVar23\ =\ puStack_23c;$@3	+1
+use	FUN_000369f0	puVar23	srcRow	CONFIRMED	start of the current source row, advanced by the source row bytes	^\s*puVar33\ =\ puVar23;$@2	+1
+use	FUN_000369f0	puVar23	srcRow	CONFIRMED	start of the current source row, advanced by the source row bytes	^\s*puVar23\ =\ \(uint\ \*\)\(\(int\)puVar23\ \+\ uStack_238\);$@2	+1
+use	FUN_000369f0	puVar23	srcRow	CONFIRMED	start of the current source row, advanced by the source row bytes	^\s*puVar23\ =\ puStack_23c;$@4	+1
+use	FUN_000369f0	puVar23	srcRow	CONFIRMED	start of the current source row, advanced by the source row bytes	^\s*puVar33\ =\ puVar23;$@3	+1
+use	FUN_000369f0	puVar23	srcRow	CONFIRMED	start of the current source row, advanced by the source row bytes	^\s*puVar23\ =\ \(uint\ \*\)\(\(int\)puVar23\ \+\ uStack_238\);$@3	+1
+use	FUN_000369f0	puVar23	srcRow	CONFIRMED	start of the current source row, advanced by the source row bytes	^\s*puVar23\ =\ puStack_23c;$@5	+1
+use	FUN_000369f0	puVar23	srcRow	CONFIRMED	start of the current source row, advanced by the source row bytes	^\s*puVar33\ =\ puVar23;$@4	+1
+use	FUN_000369f0	puVar23	srcRow	CONFIRMED	start of the current source row, advanced by the source row bytes	^\s*\*\(undefined1\ \*\)puVar29\ =\ \*\(undefined1\ \*\)puVar23;$	+2
+use	FUN_000369f0	puVar23	srcRow	CONFIRMED	start of the current source row, advanced by the source row bytes	^\s*puVar23\ =\ \(uint\ \*\)\(\(int\)puVar23\ \+\ uStack_238\);$@4	+1
+use	FUN_000369f0	puVar23	srcRow	CONFIRMED	start of the current source row, advanced by the source row bytes	^\s*_memcpy\(puVar29,puVar23,puVar25\);$	+2
+use	FUN_000369f0	puVar23	dataCursorPtr	CONFIRMED	*(ctx + GLD_dataCursor): current write position in the data buffer	^\s*puVar23\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ GLD_dataCursor\);$	+1
+use	FUN_000369f0	puVar23	dataCursorPtr	CONFIRMED	*(ctx + GLD_dataCursor): current write position in the data buffer	^\s*if\ \(\*\(undefined1\ \*\*\)\(param_1\ \+\ GLD_dataLimit\)\ <=$	+2
+use	FUN_000369f0	puVar23	dataCursorPtr	CONFIRMED	*(ctx + GLD_dataCursor): current write position in the data buffer	^\s*puVar23\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ GLD_dataCursor\);$@2	+1
+use	FUN_000369f0	puVar23	dataCursorPtr	CONFIRMED	*(ctx + GLD_dataCursor): current write position in the data buffer	^\s*\(int\)puVar23\ \-\ \*\(int\ \*\)\(param_1\ \+\ GLD_dataBase\)\ >>\ 2;$	+1
+use	FUN_000369f0	puVar23	dataCursorPtr	CONFIRMED	*(ctx + GLD_dataCursor): current write position in the data buffer	^\s*puVar23\ =\ puStack_23c;$	+1
+use	FUN_000369f0	puVar23	dataCursorPtr	CONFIRMED	*(ctx + GLD_dataCursor): current write position in the data buffer	^\s*puStack_22c\ =\ \(uint\ \*\)\(\(uint\)\(\(int\)puVar23\ \+\ 0x7f\)\ \&\ 0xffffff80\);$	+1
+use	FUN_000369f0	puVar23	alignedPtr	INFERRED	packet + 0x18c rounded up to 32 bytes: start of the inline row data	^\s*for\ \(puVar23\ =\ puVar30\ \+\ 0x18c;\ \(\(uint\)puVar23\ \&\ 0x1f\)\ !=\ 0;\ puVar23\ =\ puVar23\ \+\ 1\)\ \{$	+1
+use	FUN_000369f0	puVar23	alignedPtr	INFERRED	packet + 0x18c rounded up to 32 bytes: start of the inline row data	^\s*puVar30\[0xa3\]\ =\ \(\(int\)puVar23\ \-\ \(int\)puVar30\)\ \*\ 8\ \&\ 0xffffffe0U\ \|\ puVar30\[0xa3\]\ \&\ 0x1f$	+1
+use	FUN_000369f0	puVar23	alignedPtr	INFERRED	packet + 0x18c rounded up to 32 bytes: start of the inline row data	^\s*\(\(int\)puVar23\ \-\ \(int\)puVar29\ >>\ 2\);$	+1
+use	FUN_000369f0	puVar23	alignedPtr	INFERRED	packet + 0x18c rounded up to 32 bytes: start of the inline row data	^\s*puStack_22c\ =\ puVar23;$	+1
+use	FUN_000369f0	puVar23	sizeOutPtr	CONFIRMED	&uStack_248: first output of FUN_0000a6e0	^\s*puVar23\ =\ \&uStack_248;$	+3
+use	FUN_000369f0	puVar23	sizeOutPtr	CONFIRMED	&uStack_248: first output of FUN_0000a6e0	^\s*if\ \(\(\(\(\(\*\(byte\ \*\)\(\(int\)param_2\ \+\ 0x39\)\ \&\ 7\)\ !=\ 0\)\ \&\&$	+6
+use	FUN_000369f0	puVar29	dstRow	CONFIRMED	start of the current destination row in the data buffer, advanced by the destination pitch	^\s*puVar29\ =\ puStack_22c;$	+1
+use	FUN_000369f0	puVar29	dstRow	CONFIRMED	start of the current destination row in the data buffer, advanced by the destination pitch	^\s*puVar37\ =\ puVar29;$	+1
+use	FUN_000369f0	puVar29	dstRow	CONFIRMED	start of the current destination row in the data buffer, advanced by the destination pitch	^\s*puVar29\ =\ \(uint\ \*\)\(\(int\)puVar29\ \+\ uStack_228\);$	+1
+use	FUN_000369f0	puVar29	dstRow	CONFIRMED	start of the current destination row in the data buffer, advanced by the destination pitch	^\s*puVar29\ =\ puStack_22c;$@2	+1
+use	FUN_000369f0	puVar29	dstRow	CONFIRMED	start of the current destination row in the data buffer, advanced by the destination pitch	^\s*puVar37\ =\ puVar29;$@2	+1
+use	FUN_000369f0	puVar29	dstRow	CONFIRMED	start of the current destination row in the data buffer, advanced by the destination pitch	^\s*puVar29\ =\ \(uint\ \*\)\(\(int\)puVar29\ \+\ uStack_228\);$@2	+1
+use	FUN_000369f0	puVar29	dstRow	CONFIRMED	start of the current destination row in the data buffer, advanced by the destination pitch	^\s*puVar29\ =\ puStack_22c;$@3	+1
+use	FUN_000369f0	puVar29	dstRow	CONFIRMED	start of the current destination row in the data buffer, advanced by the destination pitch	^\s*puVar37\ =\ puVar29;$@3	+1
+use	FUN_000369f0	puVar29	dstRow	CONFIRMED	start of the current destination row in the data buffer, advanced by the destination pitch	^\s*puVar29\ =\ \(uint\ \*\)\(\(int\)puVar29\ \+\ uStack_228\);$@3	+1
+use	FUN_000369f0	puVar29	dstRow	CONFIRMED	start of the current destination row in the data buffer, advanced by the destination pitch	^\s*puVar29\ =\ puStack_22c;$@4	+1
+use	FUN_000369f0	puVar29	dstRow	CONFIRMED	start of the current destination row in the data buffer, advanced by the destination pitch	^\s*puVar37\ =\ puVar29;$@4	+1
+use	FUN_000369f0	puVar29	dstRow	CONFIRMED	start of the current destination row in the data buffer, advanced by the destination pitch	^\s*if\ \(\(\(\(uint\)puVar29\ \&\ 1\)\ !=\ 0\)\ \&\&\ \(puVar25\ !=\ \(undefined\ \*\)0x0\)\)\ \{$	+2
+use	FUN_000369f0	puVar29	dstRow	CONFIRMED	start of the current destination row in the data buffer, advanced by the destination pitch	^\s*puVar37\ =\ \(uint\ \*\)\(\(int\)puVar29\ \+\ 1\);$	+1
+use	FUN_000369f0	puVar29	dstRow	CONFIRMED	start of the current destination row in the data buffer, advanced by the destination pitch	^\s*puVar29\ =\ \(uint\ \*\)\(\(int\)puVar29\ \+\ uStack_228\);$@4	+1
+use	FUN_000369f0	puVar29	dstRow	CONFIRMED	start of the current destination row in the data buffer, advanced by the destination pitch	^\s*_memcpy\(puVar29,puVar23,puVar25\);$	+1
+use	FUN_000369f0	puVar29	dstRow	CONFIRMED	start of the current destination row in the data buffer, advanced by the destination pitch	^\s*puVar29\ =\ \(uint\ \*\)\(\(int\)puVar29\ \+\ uStack_f0\);$	+1
+use	FUN_000369f0	puVar29	packetWrite	CONFIRMED	packet + 0x18b: write position of the row data words	^\s*puVar29\ =\ puVar30\ \+\ 0x18b;$	+1
+use	FUN_000369f0	puVar29	packetWrite	CONFIRMED	packet + 0x18b: write position of the row data words	^\s*\(\(int\)puVar23\ \-\ \(int\)puVar29\ >>\ 2\);$	+1
+use	FUN_000369f0	puVar29	packetWrite	CONFIRMED	packet + 0x18b: write position of the row data words	^\s*\*puVar29\ =\ uVar44;$	+2
+use	FUN_000369f0	puVar29	packetWrite	CONFIRMED	packet + 0x18b: write position of the row data words	^\s*\*puVar29\ =\ uVar24;$	+2
+use	FUN_000369f0	puVar29	packetWrite	CONFIRMED	packet + 0x18b: write position of the row data words	^\s*\*\(uint\ \*\*\)\(param_1\ \+\ GLD_streamCurrent\)\ =\ puVar29;$	+2
+use	FUN_000369f0	puVar33	srcCursor	CONFIRMED	source read cursor inside a row	^\s*puVar33\ =\ puVar23;$	+1
+use	FUN_000369f0	puVar33	srcCursor	CONFIRMED	source read cursor inside a row	^\s*uVar44\ =\ \*puVar33;$	+2
+use	FUN_000369f0	puVar33	srcCursor	CONFIRMED	source read cursor inside a row	^\s*puVar33\ =\ puVar23;$@2	+1
+use	FUN_000369f0	puVar33	srcCursor	CONFIRMED	source read cursor inside a row	^\s*uVar44\ =\ \*puVar33;$@2	+2
+use	FUN_000369f0	puVar33	srcCursor	CONFIRMED	source read cursor inside a row	^\s*puVar33\ =\ puVar23;$@3	+1
+use	FUN_000369f0	puVar33	srcCursor	CONFIRMED	source read cursor inside a row	^\s*uVar9\ =\ \*\(ushort\ \*\)puVar33;$	+2
+use	FUN_000369f0	puVar33	srcCursor	CONFIRMED	source read cursor inside a row	^\s*puVar33\ =\ puVar23;$@4	+1
+use	FUN_000369f0	puVar33	srcCursor	CONFIRMED	source read cursor inside a row	^\s*puVar33\ =\ \(uint\ \*\)\(\(int\)puVar23\ \+\ 1\);$	+1
+use	FUN_000369f0	puVar33	srcCursor	CONFIRMED	source read cursor inside a row	^\s*uVar9\ =\ \*\(ushort\ \*\)puVar33;$@2	+1
+use	FUN_000369f0	puVar33	srcCursor	CONFIRMED	source read cursor inside a row	^\s*puVar33\ =\ \(uint\ \*\)\(\(int\)puVar33\ \+\ 2\);$@2	+1
+use	FUN_000369f0	puVar33	srcCursor	CONFIRMED	source read cursor inside a row	^\s*\*\(undefined4\ \*\)\(\(int\)puVar33\ \+\ iVar45\);$	+1
+use	FUN_000369f0	puVar33	srcCursor	CONFIRMED	source read cursor inside a row	^\s*puVar33\ =\ \(uint\ \*\)\(\(int\)puVar33\ \+\ iVar45\);$	+1
+use	FUN_000369f0	puVar33	srcCursor	CONFIRMED	source read cursor inside a row	^\s*uVar9\ =\ \*\(ushort\ \*\)puVar33;$@3	+1
+use	FUN_000369f0	puVar33	srcCursor	CONFIRMED	source read cursor inside a row	^\s*puVar33\ =\ \(uint\ \*\)\(\(int\)puVar33\ \+\ 2\);$@3	+1
+use	FUN_000369f0	puVar33	srcCursor	CONFIRMED	source read cursor inside a row	^\s*\*\(undefined1\ \*\)puVar37\ =\ \*\(undefined1\ \*\)puVar33;$	+1
+use	FUN_000369f0	puVar37	dstCursor	CONFIRMED	destination write cursor inside a row	^\s*puVar37\ =\ puVar29;$	+1
+use	FUN_000369f0	puVar37	dstCursor	CONFIRMED	destination write cursor inside a row	^\s*\*puVar37\ =\ uVar44\ >>\ 0x18\ \|\ uVar44\ >>\ 8\ \&\ 0xff00\ \|\ \(uVar44\ \&\ 0xff00\)\ <<\ 8$	+1
+use	FUN_000369f0	puVar37	dstCursor	CONFIRMED	destination write cursor inside a row	^\s*puVar37\ =\ puVar37\ \+\ 1;$	+1
+use	FUN_000369f0	puVar37	dstCursor	CONFIRMED	destination write cursor inside a row	^\s*puVar37\ =\ puVar29;$@2	+1
+use	FUN_000369f0	puVar37	dstCursor	CONFIRMED	destination write cursor inside a row	^\s*\*puVar37\ =\ uVar44\ <<\ 0x10\ \|\ uVar44\ >>\ 0x10;$	+2
+use	FUN_000369f0	puVar37	dstCursor	CONFIRMED	destination write cursor inside a row	^\s*puVar37\ =\ puVar29;$@3	+1
+use	FUN_000369f0	puVar37	dstCursor	CONFIRMED	destination write cursor inside a row	^\s*\*\(ushort\ \*\)puVar37\ =\ uVar9\ >>\ 8\ \|\ uVar9\ <<\ 8;$	+2
+use	FUN_000369f0	puVar37	dstCursor	CONFIRMED	destination write cursor inside a row	^\s*puVar37\ =\ puVar29;$@4	+1
+use	FUN_000369f0	puVar37	dstCursor	CONFIRMED	destination write cursor inside a row	^\s*puVar37\ =\ \(uint\ \*\)\(\(int\)puVar29\ \+\ 1\);$	+1
+use	FUN_000369f0	puVar37	dstCursor	CONFIRMED	destination write cursor inside a row	^\s*if\ \(\(\(\(uint\)puVar37\ \&\ 2\)\ !=\ 0\)\ \&\&\ \(\(undefined\ \*\)0x1\ <\ puVar41\)\)\ \{$	+1
+use	FUN_000369f0	puVar37	dstCursor	CONFIRMED	destination write cursor inside a row	^\s*\*\(ushort\ \*\)puVar37\ =\ uVar9;$	+2
+use	FUN_000369f0	puVar37	dstCursor	CONFIRMED	destination write cursor inside a row	^\s*\*\(undefined4\ \*\)\(\(int\)puVar37\ \+\ iVar45\)\ =$	+1
+use	FUN_000369f0	puVar37	dstCursor	CONFIRMED	destination write cursor inside a row	^\s*puVar37\ =\ \(uint\ \*\)\(\(int\)puVar37\ \+\ iVar45\);$	+1
+use	FUN_000369f0	puVar37	dstCursor	CONFIRMED	destination write cursor inside a row	^\s*\*\(ushort\ \*\)puVar37\ =\ uVar9;$@2	+2
+use	FUN_000369f0	puVar37	dstCursor	CONFIRMED	destination write cursor inside a row	^\s*\*\(undefined1\ \*\)puVar37\ =\ \*\(undefined1\ \*\)puVar33;$	+1
+local	FUN_000369f0	puVar41	bytesLeft	CONFIRMED	remaining bytes in the row copy (counts down in 4/2/1 steps)
+use	FUN_000369f0	puVar25	unpackState	INFERRED	engineState + 0x2e6c (unpack pixel-store state) or 0: last argument of FUN_0000a6e0	^\s*puVar25\ =\ \(\(unsigned\ char\ \*\)0x00002e6c\)\ \+\ iVar22;$	+1
+use	FUN_000369f0	puVar25	unpackState	INFERRED	engineState + 0x2e6c (unpack pixel-store state) or 0: last argument of FUN_0000a6e0	^\s*puVar25\ =\ \(undefined\ \*\)0x0;$	+1
+use	FUN_000369f0	puVar25	unpackState	INFERRED	engineState + 0x2e6c (unpack pixel-store state) or 0: last argument of FUN_0000a6e0	^\s*FUN_0000a6e0\(param_1,param_11,param_12,param_8,param_9,puStack_bc,puStack_c4,$	+2
+use	FUN_000369f0	puVar25	unpackState	INFERRED	engineState + 0x2e6c (unpack pixel-store state) or 0: last argument of FUN_0000a6e0	^\s*puVar25\ =\ \(\(unsigned\ char\ \*\)0x00002e6c\)\ \+\ iVar45;$	+1
+use	FUN_000369f0	puVar25	unpackState	INFERRED	engineState + 0x2e6c (unpack pixel-store state) or 0: last argument of FUN_0000a6e0	^\s*puVar25\ =\ \(undefined\ \*\)0x0;$@2	+1
+use	FUN_000369f0	puVar25	unpackState	INFERRED	engineState + 0x2e6c (unpack pixel-store state) or 0: last argument of FUN_0000a6e0	^\s*FUN_0000a6e0\(param_1,param_11,param_12,param_8,param_9,puStack_bc,piStack_c8,$	+2
+use	FUN_000369f0	puVar25	rowBytesTotal	CONFIRMED	srcBytesPerPixel * procWidth: bytes copied per row	^\s*puVar25\ =\ \(undefined\ \*\)\(uStack_240\ \*\ uStack_210\);$	+1
+use	FUN_000369f0	puVar25	rowBytesTotal	CONFIRMED	srcBytesPerPixel * procWidth: bytes copied per row	^\s*if\ \(\(int\)puVar25\ <\ 0x11\)\ \{$	+1
+use	FUN_000369f0	puVar25	rowBytesTotal	CONFIRMED	srcBytesPerPixel * procWidth: bytes copied per row	^\s*puVar41\ =\ puVar25;$	+2
+use	FUN_000369f0	puVar25	rowBytesTotal	CONFIRMED	srcBytesPerPixel * procWidth: bytes copied per row	^\s*puVar41\ =\ puVar25\ \+\ \-1;$	+1
+use	FUN_000369f0	puVar25	rowBytesTotal	CONFIRMED	srcBytesPerPixel * procWidth: bytes copied per row	^\s*a2\ =\ puVar25;$	+2
+use	FUN_000369f0	puVar25	hwContextTemplate	INFERRED	PTR_DAT_001e88d0: the 0x2f4-byte hardware context template	^\s*puVar25\ =\ PTR_DAT_001e88d0;$	+1
+use	FUN_000369f0	puVar25	hwContextTemplate	INFERRED	PTR_DAT_001e88d0: the 0x2f4-byte hardware context template	^\s*_memcpy\(puVar30\ \+\ 5,puVar25,0x2f4\);$	+1
+use	FUN_000369f0	puVar40	packetEndA	CONFIRMED	packet + 0xcc: end of the textured-draw setup in the quad path	^\s*puVar40\ =\ puVar30\ \+\ 0xcc;$	+1
+use	FUN_000369f0	puVar40	packetEndA	CONFIRMED	packet + 0xcc: end of the textured-draw setup in the quad path	^\s*\*piStack_fc\ =\ \(int\)puVar40\ \-\ \(int\)puVar30\ >>\ 2;$	+1
+use	FUN_000369f0	puVar40	packetEndA	CONFIRMED	packet + 0xcc: end of the textured-draw setup in the quad path	^\s*\*puVar23\ =\ \(int\)puVar40\ \-\ \(int\)puVar23\ >>\ 2\ \|\ \*puVar23;$	+2
+use	FUN_000369f0	puVar40	surfaceObjectRef	INFERRED	*sourceSurface[2]: the source surface object whose +0x10 word is bumped	^\s*puVar40\ =\ \*\(undefined4\ \*\*\)param_15\[2\];$	+2
+use	FUN_000369f0	puVar40	surfaceObjectRef	INFERRED	*sourceSurface[2]: the source surface object whose +0x10 word is bumped	^\s*puVar30\[2\]\ =\ \*puVar40;$	+1
+use	FUN_000369f0	puVar40	packetEndB	CONFIRMED	packet + 0xce: end of the textured-draw setup in the surface-copy path	^\s*puVar40\ =\ puVar30\ \+\ 0xce;$	+1
+use	FUN_000369f0	puVar40	packetEndB	CONFIRMED	packet + 0xce: end of the textured-draw setup in the surface-copy path	^\s*puVar30\[1\]\ =\ \(int\)puVar40\ \-\ \(int\)puVar29\ >>\ 2;$	+1
+use	FUN_000369f0	puVar40	packetEndB	CONFIRMED	packet + 0xce: end of the textured-draw setup in the surface-copy path	^\s*\*puVar23\ =\ \(int\)puVar40\ \-\ \(int\)puVar23\ >>\ 2\ \|\ \*puVar23;$@2	+2
+use	FUN_000369f0	piVar36	surfaceRefPtr	INFERRED	surfaceObject + 4 words: the +0x10 reference word bumped with a store-conditional	^\s*piVar36\ =\ puVar40\ \+\ 4;$	+1
+use	FUN_000369f0	piVar36	surfaceRefPtr	INFERRED	surfaceObject + 4 words: the +0x10 reference word bumped with a store-conditional	^\s*iVar20\ =\ storeWordConditionalIndexed\(\*piVar36\ \+\ 0x10000,0,piVar36\);$	+2
+local	FUN_000369f0	puVar30	texPacket	CONFIRMED	pointer to each packet allocated with streamAllocate: header word, then the register-write pairs
+use	FUN_000369f0	bVar1	lastChunk	CONFIRMED	(height <= rowEnd): the final chunk of the upload loop	^\s*bVar1\ =\ \(int\)param_9\ <=\ iStack_114;$	+1
+use	FUN_000369f0	bVar1	lastChunk	CONFIRMED	(height <= rowEnd): the final chunk of the upload loop	^\s*if\ \(bVar1\)\ break;$	+1
+use	FUN_000369f0	bVar1	lastChunkB	CONFIRMED	(rowEnd < height) in the quad-upload loop	^\s*bVar1\ =\ iStack_110\ <\ \(int\)param_9;$	+1
+use	FUN_000369f0	bVar1	lastChunkB	CONFIRMED	(rowEnd < height) in the quad-upload loop	^\s*\}\ while\ \(bVar1\);$	+1
+use	FUN_000369f0	bVar1	alignedOk	INFERRED	((address | row bytes) & 0x1f) == 0: the surface copy is 32-byte aligned	^\s*bVar1\ =\ \(\(uVar44\ \|\ uStack_248\)\ \&\ 0x1f\)\ ==\ 0;$	+3
+use	FUN_000369f0	iStack_a4	levelByteOffset	CONFIRMED	level * 0x18: level entry offset	^\s*iStack_a4\ =\ param_4\ \*\ 0x18;$	+1
+use	FUN_000369f0	iStack_a4	levelByteOffset	CONFIRMED	level * 0x18: level entry offset	^\s*iVar22\ =\ iStack_a4\ \+\ iStack_cc\ \+\ param_2\[0xc\];$	+1
+use	FUN_000369f0	iStack_a4	levelByteOffset	CONFIRMED	level * 0x18: level entry offset	^\s*iStack_a4\ =\ param_4\ \*\ 0x18;$@2	+1
+use	FUN_000369f0	iStack_a4	levelByteOffset	CONFIRMED	level * 0x18: level entry offset	^\s*iVar45\ =\ iStack_a4\ \+\ iStack_cc\ \+\ param_2\[0xc\];$	+1
+use	FUN_000369f0	iStack_cc	faceByteOffset	CONFIRMED	face * 0x168: face offset (15 levels of 0x18)	^\s*iStack_cc\ =\ param_3\ \*\ 0x168;$	+1
+use	FUN_000369f0	iStack_cc	faceByteOffset	CONFIRMED	face * 0x168: face offset (15 levels of 0x18)	^\s*iVar22\ =\ iStack_a4\ \+\ iStack_cc\ \+\ param_2\[0xc\];$	+1
+use	FUN_000369f0	iStack_cc	faceByteOffset	CONFIRMED	face * 0x168: face offset (15 levels of 0x18)	^\s*iStack_cc\ =\ param_3\ \*\ 0x168;$@2	+1
+use	FUN_000369f0	iStack_cc	faceByteOffset	CONFIRMED	face * 0x168: face offset (15 levels of 0x18)	^\s*iVar45\ =\ iStack_a4\ \+\ iStack_cc\ \+\ param_2\[0xc\];$	+1
+local	FUN_000369f0	iStack_dc	mappingOffset	CONFIRMED	(face * 13 + level) * 0x20: offset of the per-level mapping record
+local	FUN_000369f0	iStack_f4	mappingOffsetB	CONFIRMED	(face * 13 + level) * 0x20
+local	FUN_000369f0	uStack_ac	levelId	CONFIRMED	level & 0xffff: low half of the upload descriptor word
+local	FUN_000369f0	uStack_a0	faceId	CONFIRMED	face << 16: high half of the upload descriptor word
+local	FUN_000369f0	uStack_100	levelFaceWord	CONFIRMED	level | face << 16
+local	FUN_000369f0	uStack_104	widthMask	CONFIRMED	(width - 1) & 0x7ff
+local	FUN_000369f0	uStack_e0	chunkRows	CONFIRMED	0x1e000 / rowPitchB: rows per 0x1e000-byte chunk
+local	FUN_000369f0	uStack_118	chunkRowsHw	CONFIRMED	0x10000 / rowPitch: rows per 0x10000-byte chunk of the blit path
+local	FUN_000369f0	uStack_ec	chunkHeight	CONFIRMED	rows in the current chunk (the remainder on the last one)
+local	FUN_000369f0	iStack_d8	chunkBytes	CONFIRMED	rowPitch * chunkHeight
+local	FUN_000369f0	iStack_e4	rowsDone	CONFIRMED	rows uploaded so far
+local	FUN_000369f0	iStack_114	rowEnd	CONFIRMED	rowsDone + chunkRowsHw
+local	FUN_000369f0	iStack_110	rowEndB	CONFIRMED	rowStart + chunkRows
+local	FUN_000369f0	uStack_238	srcRowBytes	INFERRED	FUN_0000a6e0 output: bytes per source row (stride)
+local	FUN_000369f0	uStack_240	srcBytesPerPixel	INFERRED	FUN_0000a6e0 output: bytes per source pixel (times width = bytes copied per row)
+local	FUN_000369f0	iStack_244	srcSkipBytes	INFERRED	FUN_0000a6e0 output: skip bytes added to the client pointer
+use	FUN_000369f0	uStack_228	procPitch	INFERRED	destination row pitch of the descriptor	^\s*uStack_228\ =\ uVar24;$	+1
+use	FUN_000369f0	uStack_228	procPitch	INFERRED	destination row pitch of the descriptor	^\s*puVar29\ =\ \(uint\ \*\)\(\(int\)puVar29\ \+\ uStack_228\);$	+1
+use	FUN_000369f0	uStack_228	procPitch	INFERRED	destination row pitch of the descriptor	^\s*puVar29\ =\ \(uint\ \*\)\(\(int\)puVar29\ \+\ uStack_228\);$@2	+1
+use	FUN_000369f0	uStack_228	procPitch	INFERRED	destination row pitch of the descriptor	^\s*puVar29\ =\ \(uint\ \*\)\(\(int\)puVar29\ \+\ uStack_228\);$@3	+1
+use	FUN_000369f0	uStack_228	procPitch	INFERRED	destination row pitch of the descriptor	^\s*uStack_f0\ =\ uStack_228;$	+1
+use	FUN_000369f0	uStack_228	procPitch	INFERRED	destination row pitch of the descriptor	^\s*puVar29\ =\ \(uint\ \*\)\(\(int\)puVar29\ \+\ uStack_228\);$@4	+1
+use	FUN_000369f0	uStack_228	procPitch	INFERRED	destination row pitch of the descriptor	^\s*uStack_228\ =\ uVar26;$	+1
+local	FUN_000369f0	uStack_224	procChannelFormat	INFERRED	levelRecord+0x10 >> 0x1b: channel format code of the descriptor
+local	FUN_000369f0	uStack_220	procChannelSize	INFERRED	levelRecord+0x10 >> 0x16 & 0x1f: channel size code
+local	FUN_000369f0	uStack_218	procFlags	INFERRED	pixel-store flags: 1 swapBytes, 4 lsbFirst (engineState+0x2e84/0x2e85), 0x8000 for the non-RGBA formats
+local	FUN_000369f0	uStack_210	procWidth	INFERRED	width of the descriptor
+local	FUN_000369f0	uStack_20c	procHeight	INFERRED	rows of the descriptor (chunk height)
+local	FUN_000369f0	uStack_f0	dstPitchCopy	CONFIRMED	copy of uStack_228 used by the memcpy path
+local	FUN_000369f0	uStack_f8	levelHeight	INFERRED	ushort at +0xa6 of the level entry: level height (packet size word high half)
+local	FUN_000369f0	uStack_e8	levelWidth	INFERRED	ushort at +0xa4 of the level entry: level width
+local	FUN_000369f0	uVar10	levelWidthB	INFERRED	ushort at +0xa4 of the level entry
+use	FUN_000369f0	uVar9	levelHeightB	INFERRED	ushort at +0xa6 of the level entry: level height	^\s*uVar9\ =\ \*\(ushort\ \*\)\(iVar22\ \+\ 0xa6\);$	+2
+use	FUN_000369f0	uVar9	levelHeightB	INFERRED	ushort at +0xa6 of the level entry: level height	^\s*puVar30\[0x1e\]\ =\ CONCAT22\(uVar9,uVar10\);$	+1
+use	FUN_000369f0	uVar9	levelWidthC	INFERRED	ushort at +0xa4 of the level entry	^\s*uVar9\ =\ \*\(ushort\ \*\)\(iVar45\ \+\ 0xa4\);$	+1
+use	FUN_000369f0	uVar9	levelWidthC	INFERRED	ushort at +0xa4 of the level entry	^\s*uVar9\ =\ \*\(ushort\ \*\)\(\(int\)param_2\ \+\ 0x3e\);$	+1
+use	FUN_000369f0	uVar9	levelWidthC	INFERRED	ushort at +0xa4 of the level entry	^\s*uVar24\ =\ \(\(uint\)uVar9\ \+\ iVar27\)\ \-\ 1\ \&\ \-iVar27;$	+1
+local	FUN_000369f0	uStack_12c	xoffsetI2dLo	CONFIRMED	GCC int-to-double idiom: word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant 4503601774854144.0: xoffset
+local	FUN_000369f0	uStack_130	xoffsetI2dHi	CONFIRMED	GCC int-to-double idiom: word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant 4503601774854144.0: xoffset (high word)
+local	FUN_000369f0	uStack_124	xEndI2dLo	CONFIRMED	GCC int-to-double idiom: word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant 4503601774854144.0: width + xoffset
+local	FUN_000369f0	uStack_128	xEndI2dHi	CONFIRMED	GCC int-to-double idiom: word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant 4503601774854144.0: width + xoffset (high word)
+local	FUN_000369f0	uStack_144	yStartI2dLo	CONFIRMED	GCC int-to-double idiom: word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant 4503601774854144.0: rowStart + yoffset
+local	FUN_000369f0	uStack_148	yStartI2dHi	CONFIRMED	GCC int-to-double idiom: word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant 4503601774854144.0: rowStart + yoffset (high word)
+local	FUN_000369f0	uStack_13c	yEndI2dLo	CONFIRMED	GCC int-to-double idiom: word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant 4503601774854144.0: rows + rowStart + yoffset
+local	FUN_000369f0	uStack_140	yEndI2dHi	CONFIRMED	GCC int-to-double idiom: word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant 4503601774854144.0: rows + rowStart + yoffset (high word)
+local	FUN_000369f0	uStack_1b4	xoffsetI2dLoB	CONFIRMED	GCC int-to-double idiom: word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant 4503601774854144.0: xoffset (surface copy)
+local	FUN_000369f0	uStack_1b8	xoffsetI2dHiB	CONFIRMED	GCC int-to-double idiom: word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant 4503601774854144.0: xoffset (surface copy, high word)
+local	FUN_000369f0	uStack_1ac	yoffsetI2dLoB	CONFIRMED	GCC int-to-double idiom: word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant 4503601774854144.0: yoffset (surface copy)
+local	FUN_000369f0	uStack_1b0	yoffsetI2dHiB	CONFIRMED	GCC int-to-double idiom: word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant 4503601774854144.0: yoffset (surface copy, high word)
+local	FUN_000369f0	uStack_1a4	widthI2dLoB	CONFIRMED	GCC int-to-double idiom: word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant 4503601774854144.0: width (surface copy)
+local	FUN_000369f0	uStack_1a8	widthI2dHiB	CONFIRMED	GCC int-to-double idiom: word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant 4503601774854144.0: width (surface copy, high word)
+local	FUN_000369f0	uStack_19c	heightI2dLoB	CONFIRMED	GCC int-to-double idiom: word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant 4503601774854144.0: height (surface copy)
+local	FUN_000369f0	uStack_1a0	heightI2dHiB	CONFIRMED	GCC int-to-double idiom: word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant 4503601774854144.0: height (surface copy, high word)
+use	FUN_000369f0	fVar4	xBeginF	CONFIRMED	(float)xoffset	^\s*fVar4\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_12c\)\ \-\ 4503601774854144\.0\);$	+1
+use	FUN_000369f0	fVar4	xBeginF	CONFIRMED	(float)xoffset	^\s*iVar22\ =\ \(int\)\(\(fVar5\ \-\ fVar4\)\ \*\ 6\.0\);$	+1
+use	FUN_000369f0	fVar4	xBeginF	CONFIRMED	(float)xoffset	^\s*puVar30\[0xc9\]\ =\ \(fVar5\ \+\ fVar4\)\ \*\ 0\.5;$	+1
+use	FUN_000369f0	fVar5	xEndF	CONFIRMED	(float)(width + xoffset)	^\s*fVar5\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_124\)\ \-\ 4503601774854144\.0\);$	+2
+use	FUN_000369f0	fVar5	xEndF	CONFIRMED	(float)(width + xoffset)	^\s*puVar30\[0xc9\]\ =\ \(fVar5\ \+\ fVar4\)\ \*\ 0\.5;$	+1
+use	FUN_000369f0	fVar3	yBeginF	CONFIRMED	(float)(rowStart + yoffset)	^\s*fVar3\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_144\)\ \-\ 4503601774854144\.0\);$	+2
+use	FUN_000369f0	fVar3	yBeginF	CONFIRMED	(float)(rowStart + yoffset)	^\s*puVar30\[0xca\]\ =\ \(fVar3\ \+\ fVar2\)\ \*\ 0\.5;$	+1
+use	FUN_000369f0	fVar2	yEndF	CONFIRMED	(float)(rows + rowStart + yoffset)	^\s*fVar2\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_13c\)\ \-\ 4503601774854144\.0\);$	+1
+use	FUN_000369f0	fVar2	yEndF	CONFIRMED	(float)(rows + rowStart + yoffset)	^\s*uVar44\ =\ \(uint\)\(int\)\(\(fVar2\ \-\ fVar3\)\ \*\ 6\.0\);$	+1
+use	FUN_000369f0	fVar2	yEndF	CONFIRMED	(float)(rows + rowStart + yoffset)	^\s*puVar30\[0xca\]\ =\ \(fVar3\ \+\ fVar2\)\ \*\ 0\.5;$	+1
+use	FUN_000369f0	fVar2	xoffsetF	CONFIRMED	(float)xoffset in the surface-copy path	^\s*fVar2\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_1b4\)\ \-\ 4503601774854144\.0\);$	+1
+use	FUN_000369f0	fVar2	xoffsetF	CONFIRMED	(float)xoffset in the surface-copy path	^\s*fVar7\ =\ fVar2\ \+\ 0\.0;$	+1
+use	FUN_000369f0	fVar2	xoffsetF	CONFIRMED	(float)xoffset in the surface-copy path	^\s*fVar14\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_1a4\)\ \-\ 4503601774854144\.0\)\ \+\ fVar2;$	+1
+use	FUN_000369f0	fVar2	xoffsetF	CONFIRMED	(float)xoffset in the surface-copy path	^\s*fVar15\ =\ fVar2\ \+\ fVar7;$	+1
+use	FUN_000369f0	fVar2	xoffsetF	CONFIRMED	(float)xoffset in the surface-copy path	^\s*fVar4\ =\ \(fVar13\ \+\ fVar2\)\ \-\ fVar15;$	+1
+use	FUN_000369f0	fVar2	xoffsetF	CONFIRMED	(float)xoffset in the surface-copy path	^\s*puVar30\[0xc5\]\ =\ \(fVar13\ \+\ fVar2\)\ \*\ \(1\.0\ /\ fVar4\);$	+1
+use	FUN_000369f0	fVar3	yoffsetF	CONFIRMED	(float)yoffset in the surface-copy path	^\s*fVar3\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_1ac\)\ \-\ 4503601774854144\.0\);$	+1
+use	FUN_000369f0	fVar3	yoffsetF	CONFIRMED	(float)yoffset in the surface-copy path	^\s*fVar16\ =\ fVar3\ \+\ 0\.0;$	+2
+use	FUN_000369f0	fVar3	yoffsetF	CONFIRMED	(float)yoffset in the surface-copy path	^\s*fVar16\ =\ fVar3\ \+\ fVar16;$	+1
+use	FUN_000369f0	fVar3	yoffsetF	CONFIRMED	(float)yoffset in the surface-copy path	^\s*fVar5\ =\ \(fVar14\ \+\ fVar3\)\ \-\ fVar16;$	+1
+use	FUN_000369f0	fVar3	yoffsetF	CONFIRMED	(float)yoffset in the surface-copy path	^\s*puVar30\[0xc4\]\ =\ \(fVar14\ \+\ fVar3\)\ \*\ \(1\.0\ /\ fVar5\);$	+1
+local	FUN_000369f0	lStack_198	fctiwzSlot0	CONFIRMED	(longlong) store of a float->int conversion (fctiwz) kept in a stack pair by the compiler: the converted value is used from a register
+local	FUN_000369f0	lStack_190	fctiwzSlot1	CONFIRMED	(longlong) store of a float->int conversion (fctiwz) kept in a stack pair by the compiler: the converted value is used from a register
+local	FUN_000369f0	lStack_188	fctiwzSlot2	CONFIRMED	(longlong) store of a float->int conversion (fctiwz) kept in a stack pair by the compiler: the converted value is used from a register
+local	FUN_000369f0	lStack_180	fctiwzSlot3	CONFIRMED	(longlong) store of a float->int conversion (fctiwz) kept in a stack pair by the compiler: the converted value is used from a register
+local	FUN_000369f0	lStack_178	fctiwzSlot4	CONFIRMED	(longlong) store of a float->int conversion (fctiwz) kept in a stack pair by the compiler: the converted value is used from a register
+local	FUN_000369f0	lStack_170	fctiwzSlot5	CONFIRMED	(longlong) store of a float->int conversion (fctiwz) kept in a stack pair by the compiler: the converted value is used from a register
+local	FUN_000369f0	lStack_168	fctiwzSlot6	CONFIRMED	(longlong) store of a float->int conversion (fctiwz) kept in a stack pair by the compiler: the converted value is used from a register
+local	FUN_000369f0	lStack_160	fctiwzSlot7	CONFIRMED	(longlong) store of a float->int conversion (fctiwz) kept in a stack pair by the compiler: the converted value is used from a register
+local	FUN_000369f0	lStack_158	fctiwzSlot8	CONFIRMED	(longlong) store of a float->int conversion (fctiwz) kept in a stack pair by the compiler: the converted value is used from a register
+local	FUN_000369f0	lStack_150	fctiwzSlot9	CONFIRMED	(longlong) store of a float->int conversion (fctiwz) kept in a stack pair by the compiler: the converted value is used from a register
+local	FUN_000369f0	lStack_138	fctiwzSlot10	CONFIRMED	(longlong) fctiwz store: converted quad width
+local	FUN_000369f0	lStack_120	fctiwzSlot11	CONFIRMED	(longlong) fctiwz store: converted quad x extent
+use	FUN_000369f0	uVar28	sc_edgerule	CONFIRMED	copy of ctx+GLD_sc_edgerule (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_sc_edgerule\);$	+1
+use	FUN_000369f0	uVar28	sc_edgerule	CONFIRMED	copy of ctx+GLD_sc_edgerule (register shadow) written into the packet	^\s*puVar30\[0xd5\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	sc_screendoor	CONFIRMED	copy of ctx+GLD_sc_screendoor (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_sc_screendoor\);$	+1
+use	FUN_000369f0	uVar28	sc_screendoor	CONFIRMED	copy of ctx+GLD_sc_screendoor (register shadow) written into the packet	^\s*puVar30\[0xd7\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	gb_mspos1	CONFIRMED	copy of ctx+GLD_gb_mspos1 (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_gb_mspos1\);$	+1
+use	FUN_000369f0	uVar28	gb_mspos1	CONFIRMED	copy of ctx+GLD_gb_mspos1 (register shadow) written into the packet	^\s*puVar30\[0xdc\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	gb_aa_config	CONFIRMED	copy of ctx+GLD_gb_aa_config (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_gb_aa_config\);$	+1
+use	FUN_000369f0	uVar28	gb_aa_config	CONFIRMED	copy of ctx+GLD_gb_aa_config (register shadow) written into the packet	^\s*puVar30\[0xde\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	sc_hyperz_en	CONFIRMED	copy of ctx+GLD_sc_hyperz_en (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_sc_hyperz_en\);$	+1
+use	FUN_000369f0	uVar28	sc_hyperz_en	CONFIRMED	copy of ctx+GLD_sc_hyperz_en (register shadow) written into the packet	^\s*puVar30\[0xe0\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	zb_bw_cntl	CONFIRMED	copy of ctx+GLD_zb_bw_cntl (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_zb_bw_cntl\);$	+1
+use	FUN_000369f0	uVar28	zb_bw_cntl	CONFIRMED	copy of ctx+GLD_zb_bw_cntl (register shadow) written into the packet	^\s*puVar30\[0xe2\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	zb_zstencilcntl	CONFIRMED	copy of ctx+GLD_zb_zstencilcntl (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_zb_zstencilcntl\);$	+1
+use	FUN_000369f0	uVar28	zb_zstencilcntl	CONFIRMED	copy of ctx+GLD_zb_zstencilcntl (register shadow) written into the packet	^\s*puVar30\[0xe4\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	vap_cntl_status	CONFIRMED	copy of ctx+GLD_vap_cntl_status (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_vap_cntl_status\);$	+1
+use	FUN_000369f0	uVar28	vap_cntl_status	CONFIRMED	copy of ctx+GLD_vap_cntl_status (register shadow) written into the packet	^\s*puVar30\[0xe6\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	vap_clip_cntl	CONFIRMED	copy of ctx+GLD_vap_clip_cntl (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_vap_clip_cntl\);$	+1
+use	FUN_000369f0	uVar28	vap_clip_cntl	CONFIRMED	copy of ctx+GLD_vap_clip_cntl (register shadow) written into the packet	^\s*puVar30\[0xe8\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	vap_vte_cntl	CONFIRMED	copy of ctx+GLD_vap_vte_cntl (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(GLD_vap_vte_cntl\ \+\ param_1\);$	+1
+use	FUN_000369f0	uVar28	vap_vte_cntl	CONFIRMED	copy of ctx+GLD_vap_vte_cntl (register shadow) written into the packet	^\s*puVar30\[0x18a\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	su_cull_mode	CONFIRMED	copy of ctx+GLD_su_cull_mode (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_su_cull_mode\);$	+1
+use	FUN_000369f0	uVar28	su_cull_mode	CONFIRMED	copy of ctx+GLD_su_cull_mode (register shadow) written into the packet	^\s*puVar30\[0xea\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	rb3d_dither_ctl	CONFIRMED	copy of ctx+GLD_rb3d_dither_ctl (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_rb3d_dither_ctl\);$	+1
+use	FUN_000369f0	uVar28	rb3d_dither_ctl	CONFIRMED	copy of ctx+GLD_rb3d_dither_ctl (register shadow) written into the packet	^\s*puVar30\[0xec\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	gb_enable	CONFIRMED	copy of ctx+GLD_gb_enable (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_gb_enable\);$	+1
+use	FUN_000369f0	uVar28	gb_enable	CONFIRMED	copy of ctx+GLD_gb_enable (register shadow) written into the packet	^\s*puVar30\[0xf0\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	vap_out_vtx_fmt_0	CONFIRMED	copy of ctx+GLD_vap_out_vtx_fmt_0 (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_vap_out_vtx_fmt_0\);$	+1
+use	FUN_000369f0	uVar28	vap_out_vtx_fmt_0	CONFIRMED	copy of ctx+GLD_vap_out_vtx_fmt_0 (register shadow) written into the packet	^\s*puVar30\[0xf2\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	vap_out_vtx_fmt_1	CONFIRMED	copy of ctx+GLD_vap_out_vtx_fmt_1 (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_vap_out_vtx_fmt_1\);$	+1
+use	FUN_000369f0	uVar28	vap_out_vtx_fmt_1	CONFIRMED	copy of ctx+GLD_vap_out_vtx_fmt_1 (register shadow) written into the packet	^\s*puVar30\[0xf4\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	vap_prog_stream_cntl_0_ptr	CONFIRMED	copy of ctx+GLD_vap_prog_stream_cntl_0_ptr (register shadow) written into the packet	^\s*uVar28\ =\ \*\*\(undefined4\ \*\*\)\(param_1\ \+\ GLD_vap_prog_stream_cntl_0_ptr\);$	+1
+use	FUN_000369f0	uVar28	vap_prog_stream_cntl_0_ptr	CONFIRMED	copy of ctx+GLD_vap_prog_stream_cntl_0_ptr (register shadow) written into the packet	^\s*puVar30\[0xf8\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	vap_prog_stream_cntl_ext_0_ptr	CONFIRMED	copy of ctx+GLD_vap_prog_stream_cntl_ext_0_ptr (register shadow) written into the packet	^\s*uVar28\ =\ \*\*\(undefined4\ \*\*\)\(param_1\ \+\ GLD_vap_prog_stream_cntl_ext_0_ptr\);$	+1
+use	FUN_000369f0	uVar28	vap_prog_stream_cntl_ext_0_ptr	CONFIRMED	copy of ctx+GLD_vap_prog_stream_cntl_ext_0_ptr (register shadow) written into the packet	^\s*puVar30\[0xfa\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	zb_cntl	CONFIRMED	copy of ctx+GLD_zb_cntl (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_zb_cntl\);$	+1
+use	FUN_000369f0	uVar28	zb_cntl	CONFIRMED	copy of ctx+GLD_zb_cntl (register shadow) written into the packet	^\s*puVar30\[0xfc\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	ga_poly_mode	CONFIRMED	copy of ctx+GLD_ga_poly_mode (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_ga_poly_mode\);$	+1
+use	FUN_000369f0	uVar28	ga_poly_mode	CONFIRMED	copy of ctx+GLD_ga_poly_mode (register shadow) written into the packet	^\s*puVar30\[0x102\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	ga_color_control	CONFIRMED	copy of ctx+GLD_ga_color_control (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_ga_color_control\);$	+1
+use	FUN_000369f0	uVar28	ga_color_control	CONFIRMED	copy of ctx+GLD_ga_color_control (register shadow) written into the packet	^\s*puVar30\[0x106\]\ =\ uVar28;$@2	+1
+use	FUN_000369f0	uVar28	gb_ps3_enable	CONFIRMED	copy of ctx+GLD_gb_ps3_enable (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_gb_ps3_enable\);$	+1
+use	FUN_000369f0	uVar28	gb_ps3_enable	CONFIRMED	copy of ctx+GLD_gb_ps3_enable (register shadow) written into the packet	^\s*puVar30\[0x10c\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	us_out_fmt_0	CONFIRMED	copy of ctx+GLD_us_out_fmt_0 (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_us_out_fmt_0\);$	+1
+use	FUN_000369f0	uVar28	us_out_fmt_0	CONFIRMED	copy of ctx+GLD_us_out_fmt_0 (register shadow) written into the packet	^\s*puVar30\[0x158\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	us_out_fmt_1	CONFIRMED	copy of ctx+GLD_us_out_fmt_1 (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_us_out_fmt_1\);$	+1
+use	FUN_000369f0	uVar28	us_out_fmt_1	CONFIRMED	copy of ctx+GLD_us_out_fmt_1 (register shadow) written into the packet	^\s*puVar30\[0x15a\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	us_out_fmt_2	CONFIRMED	copy of ctx+GLD_us_out_fmt_2 (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_us_out_fmt_2\);$	+1
+use	FUN_000369f0	uVar28	us_out_fmt_2	CONFIRMED	copy of ctx+GLD_us_out_fmt_2 (register shadow) written into the packet	^\s*puVar30\[0x15c\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	us_out_fmt_3	CONFIRMED	copy of ctx+GLD_us_out_fmt_3 (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_us_out_fmt_3\);$	+1
+use	FUN_000369f0	uVar28	us_out_fmt_3	CONFIRMED	copy of ctx+GLD_us_out_fmt_3 (register shadow) written into the packet	^\s*puVar30\[0x15e\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	rs_count	CONFIRMED	copy of ctx+GLD_rs_count (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_rs_count\);$	+1
+use	FUN_000369f0	uVar28	rs_count	CONFIRMED	copy of ctx+GLD_rs_count (register shadow) written into the packet	^\s*puVar30\[0x160\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	rs_ip_0	CONFIRMED	copy of ctx+GLD_rs_ip_0 (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_rs_ip_0\);$	+1
+use	FUN_000369f0	uVar28	rs_ip_0	CONFIRMED	copy of ctx+GLD_rs_ip_0 (register shadow) written into the packet	^\s*puVar30\[0x166\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	tx_filter0	CONFIRMED	copy of ctx+GLD_tx_filter0 (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_tx_filter0\);$	+1
+use	FUN_000369f0	uVar28	tx_filter0	CONFIRMED	copy of ctx+GLD_tx_filter0 (register shadow) written into the packet	^\s*puVar30\[0x170\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	tx_format0	CONFIRMED	copy of ctx+GLD_tx_format0 (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_tx_format0\);$	+1
+use	FUN_000369f0	uVar28	tx_format0	CONFIRMED	copy of ctx+GLD_tx_format0 (register shadow) written into the packet	^\s*puVar30\[0x174\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	tx_format1	CONFIRMED	copy of ctx+GLD_tx_format1 (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_tx_format1\);$	+1
+use	FUN_000369f0	uVar28	tx_format1	CONFIRMED	copy of ctx+GLD_tx_format1 (register shadow) written into the packet	^\s*puVar30\[0x176\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	tx_format2	CONFIRMED	copy of ctx+GLD_tx_format2 (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_tx_format2\);$	+1
+use	FUN_000369f0	uVar28	tx_format2	CONFIRMED	copy of ctx+GLD_tx_format2 (register shadow) written into the packet	^\s*puVar30\[0x178\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	rb3d_color_channel_mask	CONFIRMED	copy of ctx+GLD_rb3d_color_channel_mask (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_rb3d_color_channel_mask\);$	+1
+use	FUN_000369f0	uVar28	rb3d_color_channel_mask	CONFIRMED	copy of ctx+GLD_rb3d_color_channel_mask (register shadow) written into the packet	^\s*puVar30\[0x17c\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	rb3d_ropcntl	CONFIRMED	copy of ctx+GLD_rb3d_ropcntl (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_rb3d_ropcntl\);$	+1
+use	FUN_000369f0	uVar28	rb3d_ropcntl	CONFIRMED	copy of ctx+GLD_rb3d_ropcntl (register shadow) written into the packet	^\s*puVar30\[0x17e\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	sc_scissor1	CONFIRMED	copy of ctx+GLD_sc_scissor1 (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_sc_scissor1\);$	+1
+use	FUN_000369f0	uVar28	sc_scissor1	CONFIRMED	copy of ctx+GLD_sc_scissor1 (register shadow) written into the packet	^\s*puVar30\[0x181\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	ga_point_size	CONFIRMED	copy of ctx+GLD_ga_point_size (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ GLD_ga_point_size\);$	+1
+use	FUN_000369f0	uVar28	ga_point_size	CONFIRMED	copy of ctx+GLD_ga_point_size (register shadow) written into the packet	^\s*puVar30\[0x183\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar28	vap_vte_cntlB	CONFIRMED	copy of ctx+GLD_vap_vte_cntlB (register shadow) written into the packet	^\s*uVar28\ =\ \*\(undefined4\ \*\)\(GLD_vap_vte_cntl\ \+\ param_1\);$@2	+1
+use	FUN_000369f0	uVar28	vap_vte_cntlB	CONFIRMED	copy of ctx+GLD_vap_vte_cntlB (register shadow) written into the packet	^\s*puVar30\[0x18c\]\ =\ uVar28;$	+1
+use	FUN_000369f0	uVar44	fg_fog_blendC	CONFIRMED	copy of ctx+GLD_fg_fog_blend (register shadow) written into the packet	^\s*uVar44\ =\ \*\(uint\ \*\)\(param_1\ \+\ GLD_fg_fog_blend\);$	+2
+use	FUN_000369f0	uVar44	fg_fog_blendC	CONFIRMED	copy of ctx+GLD_fg_fog_blend (register shadow) written into the packet	^\s*puVar30\[0xfe\]\ =\ uVar44\ \&\ 0xfffffffe;$	+1
+use	FUN_000369f0	uVar44	fg_alpha_func	CONFIRMED	copy of ctx+GLD_fg_alpha_func (register shadow) written into the packet	^\s*uVar44\ =\ \*\(uint\ \*\)\(param_1\ \+\ GLD_fg_alpha_func\);$	+2
+use	FUN_000369f0	uVar44	fg_alpha_func	CONFIRMED	copy of ctx+GLD_fg_alpha_func (register shadow) written into the packet	^\s*puVar30\[0x100\]\ =\ uVar44\ \&\ 0xfffff7ff;$	+1

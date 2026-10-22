@@ -1,0 +1,42 @@
+# FUN_0003b870 (program constant update): fork X
+local	FUN_0003b870	param_2	passThroughArg2	UNKNOWN	forwarded unchanged to FUN_0003b620
+local	FUN_0003b870	param_3	passThroughArg3	UNKNOWN	forwarded unchanged to FUN_0003b620
+local	FUN_0003b870	param_4	operandTable	CONFIRMED	table of 8-byte operand descriptors indexed by the entry state index: operandTable + index * 8
+local	FUN_0003b870	param_5	literalConstants	CONFIRMED	literal vec4 pool: literalConstants + (operandWord & 0xffff) * 0x10 for file 1 operands
+local	FUN_0003b870	local_58	operandWord	CONFIRMED	first word of the operand descriptor (>>16 & 0x1f = source file, & 0xff = index, >>8 &7 = group, >>12 & 3 = component)
+local	FUN_0003b870	local_54	operandWord2	INFERRED	second word of the operand descriptor
+local	FUN_0003b870	local_50	operandWordCopy	INFERRED	copy of operandWord kept for the state-parameter path
+local	FUN_0003b870	local_4c	operandWord2Copy	INFERRED	copy of operandWord2
+local	FUN_0003b870	pfVar27	outSlot	CONFIRMED	constantTable + entry slot * 0x10: the hardware constant slot vec4 being written
+local	FUN_0003b870	pfVar21	srcVec	CONFIRMED	pointer to the 4-float source vector selected from the operand
+local	FUN_0003b870	pdVar25	srcYPtr	CONFIRMED	pointer to the y component of the source vec4
+local	FUN_0003b870	pdVar13	srcZPtr	CONFIRMED	pointer to the z component of the source vec4
+local	FUN_0003b870	pdVar23	srcWPtr	CONFIRMED	pointer to the w component of the source vec4
+local	FUN_0003b870	puVar1	entryStateIndexPtr	CONFIRMED	entryCursor + 2: the 16-bit state index of the entry
+local	FUN_0003b870	uVar9	constX	CONFIRMED	x of the state constant row copied into the slot and the destination
+local	FUN_0003b870	uVar4	constY	CONFIRMED	y of the state constant (row + 0x10)
+local	FUN_0003b870	uVar5	constZ	CONFIRMED	z of the state constant (row + 0x20)
+local	FUN_0003b870	uVar3	constW	CONFIRMED	w of the state constant (row + 0x30)
+use	FUN_0003b870	puVar12	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*puVar12\ =\ \(\(unsigned\ char\ \*\)0x000039a0\)\ \+\ local_58\ \*\ 0x94;$	+1
+use	FUN_0003b870	puVar12	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*pdVar23\ =\ \(dword\ \*\)\(puVar12\ \+\ iVar16\ \+\ 0x1c\);$	+4
+use	FUN_0003b870	puVar12	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*puVar12\ =\ \(\(unsigned\ char\ \*\)0x000039b0\)\ \+\ local_58\ \*\ 0x94;$	+1
+use	FUN_0003b870	puVar12	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*puVar12\ =\ \(\(unsigned\ char\ \*\)0x00003980\)\ \+\ local_58\ \*\ 0x94;$	+1
+use	FUN_0003b870	puVar12	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*puVar12\ =\ \(\(unsigned\ char\ \*\)0x00003990\)\ \+\ local_58\ \*\ 0x94;$	+1
+use	FUN_0003b870	puVar12	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*puVar12\ =\ \(\(unsigned\ char\ \*\)0x00003e20\)\ \+\ \(local_58\ \&\ 0xff\)\ \*\ 0x10;$	+1
+use	FUN_0003b870	puVar12	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*pdVar23\ =\ \(dword\ \*\)\(puVar12\ \+\ iVar16\ \+\ 0x18\);$	+4
+use	FUN_0003b870	puVar12	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*puVar12\ =\ \(\(unsigned\ char\ \*\)0x000039c0\)\ \+\ local_58\ \*\ 0x94;$	+1
+use	FUN_0003b870	puVar12	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*pdVar23\ =\ \(dword\ \*\)\(puVar12\ \+\ iVar16\ \+\ 0x20\);$	+4
+use	FUN_0003b870	puVar12	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*puVar12\ =\ \(\(unsigned\ char\ \*\)0x000039d0\)\ \+\ local_58\ \*\ 0x94;$	+1
+use	FUN_0003b870	puVar12	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*puVar12\ =\ \(\(unsigned\ char\ \*\)0x000039e0\)\ \+\ local_58\ \*\ 0x94;$	+1
+use	FUN_0003b870	puVar12	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*pdVar23\ =\ \(dword\ \*\)\(puVar12\ \+\ iVar16\ \+\ 0x24\);$	+4
+use	FUN_0003b870	puVar12	stateRecord	INFERRED	engineState + 0x3980/0x39a0/0x39c0/0x39e0 + index * 0x94: per-index state record of the selected state group	^\s*puVar12\ =\ \(\(unsigned\ char\ \*\)0x000039f0\)\ \+\ local_58\ \*\ 0x94;$	+1
+use	FUN_0003b870	uVar20	fileSelect	CONFIRMED	operandWord >> 16 & 0x1f: source file selector (1 literal pool, 2 environment parameters, 3 state parameters)	^\s*uVar20\ =\ local_58\ >>\ 0x10\ \&\ 0x1f;$	+2
+use	FUN_0003b870	uVar20	fileSelect	CONFIRMED	operandWord >> 16 & 0x1f: source file selector (1 literal pool, 2 environment parameters, 3 state parameters)	^\s*switch\(uVar20\)\ \{$	+1
+use	FUN_0003b870	uVar26	operandIndex	CONFIRMED	operandWord & 0xff	^\s*uVar26\ =\ local_58\ \&\ 0xff;$	+1
+use	FUN_0003b870	uVar26	operandIndex	CONFIRMED	operandWord & 0xff	^\s*iVar16\ =\ \(uVar26\ \+\ 4\)\ \*\ 0x40;$	+1
+use	FUN_0003b870	uVar26	operandIndex	CONFIRMED	operandWord & 0xff	^\s*iVar16\ =\ \(uVar26\ \+\ 0x10\)\ \*\ 0x40;$	+1
+use	FUN_0003b870	uVar26	operandIndex	CONFIRMED	operandWord & 0xff	^\s*iVar16\ =\ \(uVar26\ \+\ 8\)\ \*\ 0x40;$	+1
+use	FUN_0003b870	uVar26	matrixMode	INFERRED	operandWord >> 14 & 3: row/inverse/transpose selector of the state matrix	^\s*uVar26\ =\ local_58\ >>\ 0xe\ \&\ 3;$	+1
+use	FUN_0003b870	uVar26	matrixMode	INFERRED	operandWord >> 14 & 3: row/inverse/transpose selector of the state matrix	^\s*if\ \(\(1\ <\ uVar26\)\ \&\&\ \(iVar11\ =\ iVar16\ \+\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\)\ \+\ 0x1e60,\ 3\ <\ uVar26\)\)\ \{$	+1
+use	FUN_0003b870	uVar26	matrixMode	INFERRED	operandWord >> 14 & 3: row/inverse/transpose selector of the state matrix	^\s*if\ \(uVar26\ <\ 3\)\ \{$	+2
+use	FUN_0003b870	uVar26	matrixMode	INFERRED	operandWord >> 14 & 3: row/inverse/transpose selector of the state matrix	^\s*else\ if\ \(uVar26\ ==\ 3\)\ goto\ LAB_0003bef8;$	+1

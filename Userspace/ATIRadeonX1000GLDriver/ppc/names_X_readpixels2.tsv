@@ -1,0 +1,90 @@
+# FUN_00029294 (read pixels, second decompile): fork X
+local	FUN_00029294	param_2	rectX	INFERRED	x of the read rectangle: clipped to the render size in place; first scalar of kernel selector 7 request
+local	FUN_00029294	param_3	rectY	INFERRED	y of the read rectangle (clipped in place, second request word)
+local	FUN_00029294	param_4	width	INFERRED	rectangle width: clipped against GLD_renderWidth - x, third request word; passed to FUN_0000a6e0 as the row width
+local	FUN_00029294	param_5	height	INFERRED	rectangle height: clipped against GLD_renderHeight - y, fourth request word
+local	FUN_00029294	param_6	format	CONFIRMED	compared with the GL enums 0x1901 GL_STENCIL_INDEX, 0x1902 GL_DEPTH_COMPONENT, 0x80e1 GL_BGRA; passed to _glgConvertType
+local	FUN_00029294	param_7	pixelType	CONFIRMED	compared with 0x8366/0x8367 (GL_UNSIGNED_SHORT_1_5_5_5_REV / GL_UNSIGNED_INT_8_8_8_8_REV); second argument of _glgConvertType
+local	FUN_00029294	param_8	pixels	INFERRED	client memory destination: uStack_ac = pixels + the skip offset FUN_0000a6e0 returns, then passed as the destination of the kernel read request
+local	FUN_00029294	param_9	transferMode	INFERRED	low byte tested against 0/2 (2 = raw, no pixel-store conversion: puVar5 = 0); forwarded unchanged to FUN_00028350
+local	FUN_00029294	param_10	surfaceInfo	INFERRED	forwarded as the last argument of FUN_00028350 (surfaceInfo there); the path with a non-null value runs the fallback render path
+use	FUN_00029294	bVar1	convertPixels	INFERRED	transferMode != 2: pixel-store conversion (the _glgProcessPixels path) is wanted	^\s*bVar1\ =\ uVar22\ !=\ 2;$	+2
+use	FUN_00029294	bVar1	convertPixels	INFERRED	transferMode != 2: pixel-store conversion (the _glgProcessPixels path) is wanted	^\s*if\ \(bVar1\)\ \{$@2	+1
+use	FUN_00029294	bVar1	convertPixels	INFERRED	transferMode != 2: pixel-store conversion (the _glgProcessPixels path) is wanted	^\s*if\ \(\(bVar4\)\ \|\|$	+6
+use	FUN_00029294	bVar1	convertPixels	INFERRED	transferMode != 2: pixel-store conversion (the _glgProcessPixels path) is wanted	^\s*if\ \(\(bVar1\)\ \&\&$	+3
+use	FUN_00029294	bVar1	directCopy	INFERRED	true when format/type already match the surface (BGRA 8888_REV / 1555_REV): no conversion	^\s*bVar1\ =\ false;$	+1
+use	FUN_00029294	bVar1	directCopy	INFERRED	true when format/type already match the surface (BGRA 8888_REV / 1555_REV): no conversion	^\s*bVar1\ =\ true;$	+1
+use	FUN_00029294	bVar1	directCopy	INFERRED	true when format/type already match the surface (BGRA 8888_REV / 1555_REV): no conversion	^\s*if\ \(!bVar1\)\ \{$	+1
+local	FUN_00029294	bVar4	sendAttachments	INFERRED	set when the read state carries depth/stencil sources: the three attachment records are sent in the kernel request
+local	FUN_00029294	bVar2	formatIndex	INFERRED	byte at ctx+0x2b7f indexes the 0x24-byte format table PTR_DAT_001e88c8
+use	FUN_00029294	iVar6	yOffsetBytes0	CONFIRMED	y * row bytes returned by FUN_0000a6e0: subtracted from the destination offset when y < 0	^\s*iVar6\ =\ param_3\ \*\ uStack_e8;$	+1
+use	FUN_00029294	iVar6	yOffsetBytes0	CONFIRMED	y * row bytes returned by FUN_0000a6e0: subtracted from the destination offset when y < 0	^\s*uVar12\ =\ uVar12\ \-\ iVar6;$	+1
+use	FUN_00029294	iVar6	prepareResult	INFERRED	return value of FUN_0001a010, tested before FUN_000230d0	^\s*iVar6\ =\ FUN_0001a010\(param_1,pdVar7,a2,a3,iVar9,a5,piVar24\);$	+2
+use	FUN_00029294	iVar6	levelBuffer	CONFIRMED	valloc(slices * slice size) filled by FUN_00031340 and read through _glgProcessPixels	^\s*iVar6\ =\ _valloc\(\(uint\)uVar3\ \*\ iVar19\);$	+1
+use	FUN_00029294	iVar6	levelBuffer	CONFIRMED	valloc(slices * slice size) filled by FUN_00031340 and read through _glgProcessPixels	^\s*iVar16\ =\ iVar6;$	+1
+use	FUN_00029294	iVar6	levelBuffer	CONFIRMED	valloc(slices * slice size) filled by FUN_00031340 and read through _glgProcessPixels	^\s*FUN_00031340\(param_1,piVar24,iVar15,iVar14,uVar17,uVar18,iVar6,uStack_b8\);$	+1
+use	FUN_00029294	iVar6	levelBuffer	CONFIRMED	valloc(slices * slice size) filled by FUN_00031340 and read through _glgProcessPixels	^\s*uStack_bc\ =\ iVar6\ \+\ iVar21\ \*\ iVar19\ \+\ iVar20\ \+\ param_2\ \*\ iVar9;$	+1
+use	FUN_00029294	iVar6	levelBuffer	CONFIRMED	valloc(slices * slice size) filled by FUN_00031340 and read through _glgProcessPixels	^\s*_vfree\(iVar6\);$	+1
+use	FUN_00029294	iVar9	savedHeight	INFERRED	copy of the unclipped height passed as the 5th argument of FUN_0001a010	^\s*iVar9\ =\ param_5;$	+1
+use	FUN_00029294	iVar9	savedHeight	INFERRED	copy of the unclipped height passed as the 5th argument of FUN_0001a010	^\s*_glgConvertType\(param_6,param_7,a2,a3,iVar9,a5,piVar24,uVar12\);$	+1
+use	FUN_00029294	iVar9	savedHeight	INFERRED	copy of the unclipped height passed as the 5th argument of FUN_0001a010	^\s*iVar6\ =\ FUN_0001a010\(param_1,pdVar7,a2,a3,iVar9,a5,piVar24\);$	+1
+use	FUN_00029294	iVar9	savedHeight	INFERRED	copy of the unclipped height passed as the 5th argument of FUN_0001a010	^\s*iVar9\ =\ 0;$	+1
+use	FUN_00029294	iVar9	savedHeight	INFERRED	copy of the unclipped height passed as the 5th argument of FUN_0001a010	^\s*\(\*\*\(code\ \*\*\)\(param_1\ \+\ GLD_streamSetCurrent\)\)\(iVar16,a1,a2,a3,iVar9,a5,a1\);$	+1
+use	FUN_00029294	iVar9	savedHeight	INFERRED	copy of the unclipped height passed as the 5th argument of FUN_0001a010	^\s*_glgConvertType\(uVar17,uVar18,\&uStack_b4,\&uStack_b0,iVar9,iVar16,\*piVar24,uVar12\);$	+1
+use	FUN_00029294	iVar9	bytesPerPixel	INFERRED	FUN_0000a3f0(format, type): the pitch is renderWidth * this	^\s*iVar9\ =\ FUN_0000a3f0\(uVar17,uVar18\);$	+2
+local	FUN_00029294	iVar14	attachLevel	CONFIRMED	attachment entry +8; indexes the level table with stride 0x18 (15 levels per 0x168-byte face)
+local	FUN_00029294	iVar15	attachFace	CONFIRMED	attachment entry +4; indexes the level table with stride 0x168
+local	FUN_00029294	iVar21	attachZOffset	INFERRED	attachment entry +0xc, multiplied by the slice size
+local	FUN_00029294	pdVar7	readSurfaceCode	INFERRED	FUN_0000a2f0(read buffer enum at engineState+0x2db8, renderFlags): selects hardware format 10/0xb
+use	FUN_00029294	piVar24	requestPtr	CONFIRMED	aiStack_e0 + 2: the 7-word request passed to kernel selector 7 and then to _glgProcessPixels	^\s*piVar24\ =\ aiStack_e0\ \+\ 2;$	+1
+use	FUN_00029294	piVar24	requestPtr	CONFIRMED	aiStack_e0 + 2: the 7-word request passed to kernel selector 7 and then to _glgProcessPixels	^\s*\(\*\(undefined4\ \*\)\(param_1\ \+\ GLD_connect\),7,piVar24,0x1c,0,piVar23\);$	+1
+use	FUN_00029294	piVar24	requestPtr	CONFIRMED	aiStack_e0 + 2: the 7-word request passed to kernel selector 7 and then to _glgProcessPixels	^\s*_glgProcessPixels\(puVar5,\&uStack_bc,piVar24,uVar8,uVar11,piVar23,uVar12,uVar22\);$	+1
+use	FUN_00029294	piVar24	attachObject	INFERRED	pointer from the framebuffer attachment table: +0x18 ushort is its slice count	^\s*piVar24\ =\ \*\(int\ \*\*\)\(piVar23\[1\]\ \+\ iVar16\ \*\ 4\);$	+2
+use	FUN_00029294	piVar24	attachObject	INFERRED	pointer from the framebuffer attachment table: +0x18 ushort is its slice count	^\s*uVar3\ =\ \*\(ushort\ \*\)\(\*piVar24\ \+\ 0x18\);$	+1
+use	FUN_00029294	piVar24	attachObject	INFERRED	pointer from the framebuffer attachment table: +0x18 ushort is its slice count	^\s*iVar20\ =\ iVar14\ \*\ 0x18\ \+\ iVar15\ \*\ 0x168\ \+\ piVar24\[0xc\];$	+1
+use	FUN_00029294	piVar24	attachObject	INFERRED	pointer from the framebuffer attachment table: +0x18 ushort is its slice count	^\s*_glgConvertType\(uVar17,uVar18,\&uStack_b4,\&uStack_b0,iVar9,iVar16,\*piVar24,uVar12\);$	+1
+use	FUN_00029294	piVar24	attachObject	INFERRED	pointer from the framebuffer attachment table: +0x18 ushort is its slice count	^\s*FUN_00031340\(param_1,piVar24,iVar15,iVar14,uVar17,uVar18,iVar6,uStack_b8\);$	+1
+use	FUN_00029294	piVar23	replySizePtr	CONFIRMED	aiStack_e0 + 1: the output size of the selector 7 call	^\s*piVar23\ =\ aiStack_e0\ \+\ 1;$	+1
+use	FUN_00029294	piVar23	replySizePtr	CONFIRMED	aiStack_e0 + 1: the output size of the selector 7 call	^\s*\(\*\(undefined4\ \*\)\(param_1\ \+\ GLD_connect\),7,piVar24,0x1c,0,piVar23\);$	+1
+use	FUN_00029294	piVar23	replySizePtr	CONFIRMED	aiStack_e0 + 1: the output size of the selector 7 call	^\s*_glgProcessPixels\(puVar5,\&uStack_bc,piVar24,uVar8,uVar11,piVar23,uVar12,uVar22\);$	+1
+use	FUN_00029294	puVar10	ropPacket	CONFIRMED	two words {0x1386 = RB3D_ROPCNTL register id, value} allocated from the command stream	^\s*puVar10\ =\ \(undefined4\ \*\)\(\*\*\(code\ \*\*\)\(param_1\ \+\ GLD_streamAllocate\)\)\(iVar16,2\);$	+5
+use	FUN_00029294	puVar10	ropPacket	CONFIRMED	two words {0x1386 = RB3D_ROPCNTL register id, value} allocated from the command stream	^\s*puVar10\ =\ \(undefined4\ \*\)\(\*\*\(code\ \*\*\)\(param_1\ \+\ GLD_streamAllocate\)\)\(iVar16,2\);$@2	+4
+use	FUN_00029294	puVar5	packStateArg	INFERRED	engineState + 0x2e50 (pixel-store state) or 0 when transferMode == 2: last argument of FUN_0000a6e0	^\s*puVar5\ =\ \(\(unsigned\ char\ \*\)0x00002e50\)\ \+\ iVar20;$	+1
+use	FUN_00029294	puVar5	packStateArg	INFERRED	engineState + 0x2e50 (pixel-store state) or 0 when transferMode == 2: last argument of FUN_0000a6e0	^\s*puVar5\ =\ \(undefined\ \*\)0x0;$	+1
+use	FUN_00029294	puVar5	packStateArg	INFERRED	engineState + 0x2e50 (pixel-store state) or 0 when transferMode == 2: last argument of FUN_0000a6e0	^\s*FUN_0000a6e0\(param_1,param_6,param_7,param_4\ \-\ iVar6,param_5,a5,piVar24,aiStack_e0,puVar5\);$	+1
+use	FUN_00029294	puVar5	packState	INFERRED	engineState + 0x2e48 (pixel-store state) or 0: first argument of _glgProcessPixels	^\s*puVar5\ =\ \(\(unsigned\ char\ \*\)0x00002e48\)\ \+\ iVar20;$	+1
+use	FUN_00029294	puVar5	packState	INFERRED	engineState + 0x2e48 (pixel-store state) or 0: first argument of _glgProcessPixels	^\s*puVar5\ =\ \(undefined\ \*\)0x0;$@2	+1
+use	FUN_00029294	puVar5	packState	INFERRED	engineState + 0x2e48 (pixel-store state) or 0: first argument of _glgProcessPixels	^\s*_glgProcessPixels\(puVar5,\&uStack_bc,piVar24,uVar8,uVar11,piVar23,uVar12,uVar22\);$	+1
+use	FUN_00029294	puVar5	packState	INFERRED	engineState + 0x2e48 (pixel-store state) or 0: first argument of _glgProcessPixels	^\s*if\ \(\(bVar1\)\ \&\&$	+3
+use	FUN_00029294	puVar5	packState	INFERRED	engineState + 0x2e48 (pixel-store state) or 0: first argument of _glgProcessPixels	^\s*_glgProcessPixels\(puVar5,\&uStack_bc,iVar15,iVar14,uVar22,uVar12,iVar16,uVar13\);$	+1
+local	FUN_00029294	iStack_d4	requestY	CONFIRMED	request word 2 = rectY
+local	FUN_00029294	iStack_d0	requestWidth	CONFIRMED	request word 3 = width
+local	FUN_00029294	iStack_cc	requestHeight	CONFIRMED	request word 4 = height
+local	FUN_00029294	uStack_c4	requestAddress	INFERRED	6th word of the request: destination address
+local	FUN_00029294	uStack_c0	requestPitch	INFERRED	7th word of the request: destination pitch
+local	FUN_00029294	uStack_b8	procPitch	INFERRED	second word of the descriptor passed to _glgProcessPixels: row pitch in bytes
+local	FUN_00029294	uStack_a8	srcRowBytes	INFERRED	copy of the row bytes FUN_0000a6e0 returned
+local	FUN_00029294	uStack_98	procFlags	INFERRED	pixel-store flags: 0x20000 when transferMode == 0, |2/|8 from engineState+0x2e68/0x2e69, |0x60000 for depth/stencil
+local	FUN_00029294	uStack_ac	dstAddress	INFERRED	pixels + offset returned by FUN_0000a6e0 (adjusted for negative x/y)
+use	FUN_00029294	uVar12	dstOffsetAddress	INFERRED	param_8 + the skip offset, reduced for negative rect origin; stored in uStack_ac	^\s*uVar12\ =\ param_8\ \+\ aiStack_e0\[0\];$	+1
+use	FUN_00029294	uVar12	dstOffsetAddress	INFERRED	param_8 + the skip offset, reduced for negative rect origin; stored in uStack_ac	^\s*uVar12\ =\ uVar12\ \-\ iVar6;$	+1
+use	FUN_00029294	uVar12	dstOffsetAddress	INFERRED	param_8 + the skip offset, reduced for negative rect origin; stored in uStack_ac	^\s*uVar12\ =\ uVar12\ \-\ iStack_e4;$	+1
+use	FUN_00029294	uVar12	dstOffsetAddress	INFERRED	param_8 + the skip offset, reduced for negative rect origin; stored in uStack_ac	^\s*uStack_ac\ =\ uVar12;$	+1
+use	FUN_00029294	uVar12	dstOffsetAddress	INFERRED	param_8 + the skip offset, reduced for negative rect origin; stored in uStack_ac	^\s*_glgConvertType\(param_6,param_7,a2,a3,iVar9,a5,piVar24,uVar12\);$	+1
+use	FUN_00029294	uVar12	dstOffsetAddress	INFERRED	param_8 + the skip offset, reduced for negative rect origin; stored in uStack_ac	^\s*uVar12\ =\ \*\(uint\ \*\)\(param_1\ \+\ GLD_engineObjects\);$	+2
+use	FUN_00029294	uVar12	dstOffsetAddress	INFERRED	param_8 + the skip offset, reduced for negative rect origin; stored in uStack_ac	^\s*iVar20\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(uVar12\ \+\ 0x148\)\ \+\ 0x30\);$	+1
+use	FUN_00029294	uVar12	dstOffsetAddress	INFERRED	param_8 + the skip offset, reduced for negative rect origin; stored in uStack_ac	^\s*iVar20\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(uVar12\ \+\ 0x144\)\ \+\ 0x30\);$	+1
+use	FUN_00029294	uVar12	dstOffsetAddress	INFERRED	param_8 + the skip offset, reduced for negative rect origin; stored in uStack_ac	^\s*_glgConvertType\(uVar17,uVar18,\&uStack_b4,\&uStack_b0,iVar9,iVar16,\*piVar24,uVar12\);$	+1
+use	FUN_00029294	uVar13	scratchBytes	CONFIRMED	pitch*height rounded up to 0x1000, compared with the scratch size at ctx+0x2b78 and passed to valloc	^\s*uVar13\ =\ param_5\ \*\ uStack_b8\ \+\ 0xfff\ \&\ 0xfffff000;$	+2
+use	FUN_00029294	uVar13	scratchBytes	CONFIRMED	pitch*height rounded up to 0x1000, compared with the scratch size at ctx+0x2b78 and passed to valloc	^\s*uVar8\ =\ _valloc\(uVar13\);$	+2
+local	FUN_00029294	uVar17	surfaceFormat	INFERRED	ushort at +0xb0 of the attachment level record, first argument of _glgConvertType (a GL format)
+local	FUN_00029294	uVar18	surfaceType	INFERRED	ushort at +0xb2 of the attachment level record, second argument of _glgConvertType (a GL type)
+local	FUN_00029294	uVar3	sliceCount	INFERRED	ushort at +0x18 of the attachment object, multiplies the slice size in the valloc
+use	FUN_00029294	uVar8	scratchBuffer	CONFIRMED	valloc result stored at ctx+0x2b74 (size at +0x2b78): the cached readback scratch buffer	^\s*uVar8\ =\ _valloc\(uVar13\);$	+1
+use	FUN_00029294	uVar8	scratchBuffer	CONFIRMED	valloc result stored at ctx+0x2b74 (size at +0x2b78): the cached readback scratch buffer	^\s*\*\(undefined4\ \*\)\(\(\(unsigned\ char\ \*\)0x00002b74\)\ \+\ param_1\)\ =\ uVar8;$	+1
+use	FUN_00029294	uVar8	requestBytes	CONFIRMED	0x1c = 7 words: the structure size of the selector 7 call	^\s*uVar8\ =\ 0x1c;$	+1
+use	FUN_00029294	uVar8	requestBytes	CONFIRMED	0x1c = 7 words: the structure size of the selector 7 call	^\s*_glgProcessPixels\(puVar5,\&uStack_bc,piVar24,uVar8,uVar11,piVar23,uVar12,uVar22\);$	+1
+use	FUN_00029294	uVar8	result	CONFIRMED	1 on success: the return value	^\s*uVar8\ =\ 1;$	+1
+use	FUN_00029294	uVar8	result	CONFIRMED	1 on success: the return value	^\s*uVar8\ =\ 0;$	+1
+use	FUN_00029294	uVar8	result	CONFIRMED	1 on success: the return value	^\s*return\ uVar8;$@2	+1
+use	FUN_00029294	uVar8	fallbackResult	CONFIRMED	return value of FUN_00028350 returned directly	^\s*uVar8\ =\ \(\(int\ \(\*\)\(\)\)FUN_00028350\)\(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,uVar22,$	+3

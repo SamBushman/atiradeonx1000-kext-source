@@ -554,23 +554,23 @@ int FUN_00083e10(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   uint oldWord3;
   int instr;
   
-  instr = *(int *)(ctx + 0x3cc);
-  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
-    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+  instr = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
+    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
     newStorage = _calloc(instr + 0x200,1);
     if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
-      _free(*(undefined4 *)(ctx + 0x3c8));
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+      _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
-    *(undefined4 *)(ctx + 0x3c8) = newStorage;
-    instr = *(int *)(ctx + 0x3cc);
-    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
+    instr = *(int *)(ctx + ARB_instrCount);
+    *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
-  instrArray = *(int *)(ctx + 0x3c8);
+  instrArray = *(int *)(ctx + ARB_instrArray);
   instrOffset = instr * 0x10;
-  *(int *)(ctx + 0x3cc) = instr + 1;
+  *(int *)(ctx + ARB_instrCount) = instr + 1;
   instr = instrOffset + instrArray;
-  *(int *)(ctx + 0x3dc) = instr;
+  *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 0x44;
   oldWord0 = *(uint *)(instrOffset + instrArray);
@@ -662,7 +662,7 @@ int FUN_00083e10(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   *(uint *)(instr + 0xc) =
        (src2Negate[3] & 1) << 0x1c |
        uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField;
-  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
+  *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
 
@@ -699,23 +699,23 @@ int FUN_000840d0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   int instrArray;
   uint oldWord2;
   
-  instr = *(int *)(ctx + 0x3cc);
-  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
-    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+  instr = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
+    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
     newStorage = _calloc(instr + 0x200,1);
     if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
-      _free(*(undefined4 *)(ctx + 0x3c8));
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+      _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
-    *(undefined4 *)(ctx + 0x3c8) = newStorage;
-    instr = *(int *)(ctx + 0x3cc);
-    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
+    instr = *(int *)(ctx + ARB_instrCount);
+    *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
-  instrArray = *(int *)(ctx + 0x3c8);
+  instrArray = *(int *)(ctx + ARB_instrArray);
   instrOffset = instr * 0x10;
-  *(int *)(ctx + 0x3cc) = instr + 1;
+  *(int *)(ctx + ARB_instrCount) = instr + 1;
   instr = instrOffset + instrArray;
-  *(int *)(ctx + 0x3dc) = instr;
+  *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 1;
   oldWord0 = *(uint *)(instrOffset + instrArray);
@@ -782,20 +782,20 @@ int FUN_000840d0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
           uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField;
   *(uint *)(instr + 0xc) = uVar1;
   *(uint *)(instr + 8) = uVar1;
-  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
+  *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
 
 /* FUN_00084300 @ 0x84300 (472 bytes) */
-int FUN_00084300(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int FUN_00084300(param_1, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate)
   int param_1;
-  uint param_2;
-  uint param_3;
-  uint *param_4;
-  uint param_5;
-  uint param_6;
-  uint *param_7;
-  uint *param_8;
+  uint dstFile;
+  uint dstIndex;
+  uint *dstMask;
+  uint src0File;
+  uint src0Index;
+  uint *src0Select;
+  uint *src0Negate;
 {
   uint uVar1;
   uint uVar2;
@@ -827,48 +827,48 @@ int FUN_00084300(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   }
   iVar15 = *(int *)(param_1 + 0x3c8);
   iVar7 = iVar14 * 0x10;
-  uVar8 = param_5 & 0xf;
+  uVar8 = src0File & 0xf;
   *(int *)(param_1 + 0x3cc) = iVar14 + 1;
   iVar14 = iVar7 + iVar15;
   *(int *)(param_1 + 0x3dc) = iVar14;
   *(undefined4 *)(iVar7 + iVar15) = 0;
   *(undefined1 *)(iVar14 + 3) = 2;
   uVar11 = *(uint *)(iVar7 + iVar15);
-  uVar1 = (param_2 & 0xf) << 8;
-  uVar2 = (param_3 & 0x7f) << 0xd;
+  uVar1 = (dstFile & 0xf) << 8;
+  uVar2 = (dstIndex & 0x7f) << 0xd;
   *(uint *)(iVar7 + iVar15) = uVar2 | uVar1 | uVar11 & 0xfff010ff;
-  uVar3 = (*param_4 & 1) << 0x14;
+  uVar3 = (*dstMask & 1) << 0x14;
   *(uint *)(iVar7 + iVar15) = uVar3 | uVar2 | uVar1 | uVar11 & 0xffe010ff;
-  uVar4 = (param_4[1] & 1) << 0x15;
+  uVar4 = (dstMask[1] & 1) << 0x15;
   *(uint *)(iVar7 + iVar15) = uVar4 | uVar3 | uVar2 | uVar1 | uVar11 & 0xffc010ff;
-  uVar5 = (param_4[2] & 1) << 0x16;
+  uVar5 = (dstMask[2] & 1) << 0x16;
   *(uint *)(iVar7 + iVar15) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar11 & 0xff8010ff;
   *(uint *)(iVar7 + iVar15) =
-       (param_4[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar11 & 0xff0010ff;
+       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar11 & 0xff0010ff;
   uVar12 = *(uint *)(iVar14 + 4);
-  uVar10 = (param_6 & 0xff) << 5;
+  uVar10 = (src0Index & 0xff) << 5;
   *(uint *)(iVar14 + 4) = uVar10 | uVar8 | uVar12 & 0xffffe000;
-  uVar1 = (*param_7 & 7) << 0xd;
-  uVar9 = (param_6 & 0xff) << 5 | uVar8 | 0x16da000;
+  uVar1 = (*src0Select & 7) << 0xd;
+  uVar9 = (src0Index & 0xff) << 5 | uVar8 | 0x16da000;
   *(uint *)(iVar14 + 4) = uVar1 | uVar10 | uVar8 | uVar12 & 0xffff0000;
-  uVar2 = (param_7[1] & 7) << 0x10;
+  uVar2 = (src0Select[1] & 7) << 0x10;
   *(uint *)(iVar14 + 4) = uVar2 | uVar1 | uVar10 | uVar8 | uVar12 & 0xfff80000;
-  uVar3 = (param_7[2] & 7) << 0x13;
+  uVar3 = (src0Select[2] & 7) << 0x13;
   *(uint *)(iVar14 + 4) = uVar3 | uVar2 | uVar1 | uVar10 | uVar8 | uVar12 & 0xffc00000;
-  uVar4 = (param_7[3] & 7) << 0x16;
+  uVar4 = (src0Select[3] & 7) << 0x16;
   *(uint *)(iVar14 + 4) = uVar4 | uVar3 | uVar2 | uVar1 | uVar10 | uVar8 | uVar12 & 0xfe000000;
-  uVar5 = (*param_8 & 1) << 0x19;
+  uVar5 = (*src0Negate & 1) << 0x19;
   *(uint *)(iVar14 + 4) =
        uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar10 | uVar8 | uVar12 & 0xfc000000;
-  uVar11 = (param_8[1] & 1) << 0x1a;
+  uVar11 = (src0Negate[1] & 1) << 0x1a;
   *(uint *)(iVar14 + 4) =
        uVar11 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar10 | uVar8 | uVar12 & 0xf8000000;
-  uVar6 = (param_8[2] & 1) << 0x1b;
+  uVar6 = (src0Negate[2] & 1) << 0x1b;
   *(uint *)(iVar14 + 4) =
        uVar6 | uVar11 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar10 | uVar8 | uVar12 & 0xf0000000
   ;
   *(uint *)(iVar14 + 4) =
-       (param_8[3] & 1) << 0x1c |
+       (src0Negate[3] & 1) << 0x1c |
        uVar6 | uVar11 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar10 | uVar8;
   *(uint *)(iVar14 + 8) = uVar9;
   *(uint *)(iVar14 + 0xc) = uVar9;
@@ -909,23 +909,23 @@ int FUN_000844e0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   int instrArray;
   uint oldWord2;
   
-  instr = *(int *)(ctx + 0x3cc);
-  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
-    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+  instr = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
+    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
     newStorage = _calloc(instr + 0x200,1);
     if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
-      _free(*(undefined4 *)(ctx + 0x3c8));
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+      _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
-    *(undefined4 *)(ctx + 0x3c8) = newStorage;
-    instr = *(int *)(ctx + 0x3cc);
-    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
+    instr = *(int *)(ctx + ARB_instrCount);
+    *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
-  instrArray = *(int *)(ctx + 0x3c8);
+  instrArray = *(int *)(ctx + ARB_instrArray);
   instrOffset = instr * 0x10;
-  *(int *)(ctx + 0x3cc) = instr + 1;
+  *(int *)(ctx + ARB_instrCount) = instr + 1;
   instr = instrOffset + instrArray;
-  *(int *)(ctx + 0x3dc) = instr;
+  *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 2;
   oldWord0 = *(uint *)(instrOffset + instrArray);
@@ -992,7 +992,7 @@ int FUN_000844e0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
           uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField;
   *(uint *)(instr + 0xc) = uVar1;
   *(uint *)(instr + 8) = uVar1;
-  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
+  *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
 
@@ -1029,23 +1029,23 @@ int FUN_00084710(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   int instrArray;
   uint oldWord2;
   
-  instr = *(int *)(ctx + 0x3cc);
-  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
-    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+  instr = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
+    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
     newStorage = _calloc(instr + 0x200,1);
     if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
-      _free(*(undefined4 *)(ctx + 0x3c8));
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+      _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
-    *(undefined4 *)(ctx + 0x3c8) = newStorage;
-    instr = *(int *)(ctx + 0x3cc);
-    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
+    instr = *(int *)(ctx + ARB_instrCount);
+    *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
-  instrArray = *(int *)(ctx + 0x3c8);
+  instrArray = *(int *)(ctx + ARB_instrArray);
   instrOffset = instr * 0x10;
-  *(int *)(ctx + 0x3cc) = instr + 1;
+  *(int *)(ctx + ARB_instrCount) = instr + 1;
   instr = instrOffset + instrArray;
-  *(int *)(ctx + 0x3dc) = instr;
+  *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 3;
   oldWord0 = *(uint *)(instrOffset + instrArray);
@@ -1112,7 +1112,7 @@ int FUN_00084710(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
           uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField;
   *(uint *)(instr + 0xc) = uVar1;
   *(uint *)(instr + 8) = uVar1;
-  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
+  *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
 
@@ -1154,23 +1154,23 @@ int FUN_00084940(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   uint oldWord3;
   int instr;
   
-  instr = *(int *)(ctx + 0x3cc);
-  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
-    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+  instr = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
+    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
     newStorage = _calloc(instr + 0x200,1);
     if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
-      _free(*(undefined4 *)(ctx + 0x3c8));
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+      _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
-    *(undefined4 *)(ctx + 0x3c8) = newStorage;
-    instr = *(int *)(ctx + 0x3cc);
-    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
+    instr = *(int *)(ctx + ARB_instrCount);
+    *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
-  instrArray = *(int *)(ctx + 0x3c8);
+  instrArray = *(int *)(ctx + ARB_instrArray);
   instrOffset = instr * 0x10;
-  *(int *)(ctx + 0x3cc) = instr + 1;
+  *(int *)(ctx + ARB_instrCount) = instr + 1;
   instr = instrOffset + instrArray;
-  *(int *)(ctx + 0x3dc) = instr;
+  *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 4;
   oldWord0 = *(uint *)(instrOffset + instrArray);
@@ -1262,7 +1262,7 @@ int FUN_00084940(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   *(uint *)(instr + 0xc) =
        (src2Negate[3] & 1) << 0x1c |
        uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField;
-  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
+  *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
 
@@ -1304,23 +1304,23 @@ int FUN_00084c00(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   uint oldWord3;
   int instr;
   
-  instr = *(int *)(ctx + 0x3cc);
-  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
-    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+  instr = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
+    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
     newStorage = _calloc(instr + 0x200,1);
     if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
-      _free(*(undefined4 *)(ctx + 0x3c8));
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+      _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
-    *(undefined4 *)(ctx + 0x3c8) = newStorage;
-    instr = *(int *)(ctx + 0x3cc);
-    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
+    instr = *(int *)(ctx + ARB_instrCount);
+    *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
-  instrArray = *(int *)(ctx + 0x3c8);
+  instrArray = *(int *)(ctx + ARB_instrArray);
   instrOffset = instr * 0x10;
-  *(int *)(ctx + 0x3cc) = instr + 1;
+  *(int *)(ctx + ARB_instrCount) = instr + 1;
   instr = instrOffset + instrArray;
-  *(int *)(ctx + 0x3dc) = instr;
+  *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 0xb;
   oldWord0 = *(uint *)(instrOffset + instrArray);
@@ -1412,7 +1412,7 @@ int FUN_00084c00(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   *(uint *)(instr + 0xc) =
        (src2Negate[3] & 1) << 0x1c |
        uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField;
-  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
+  *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
 
@@ -1454,23 +1454,23 @@ int FUN_00084ec0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   uint oldWord3;
   int instr;
   
-  instr = *(int *)(ctx + 0x3cc);
-  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
-    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+  instr = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
+    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
     newStorage = _calloc(instr + 0x200,1);
     if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
-      _free(*(undefined4 *)(ctx + 0x3c8));
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+      _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
-    *(undefined4 *)(ctx + 0x3c8) = newStorage;
-    instr = *(int *)(ctx + 0x3cc);
-    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
+    instr = *(int *)(ctx + ARB_instrCount);
+    *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
-  instrArray = *(int *)(ctx + 0x3c8);
+  instrArray = *(int *)(ctx + ARB_instrArray);
   instrOffset = instr * 0x10;
-  *(int *)(ctx + 0x3cc) = instr + 1;
+  *(int *)(ctx + ARB_instrCount) = instr + 1;
   instr = instrOffset + instrArray;
-  *(int *)(ctx + 0x3dc) = instr;
+  *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 0xc;
   oldWord0 = *(uint *)(instrOffset + instrArray);
@@ -1562,7 +1562,7 @@ int FUN_00084ec0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   *(uint *)(instr + 0xc) =
        (src2Negate[3] & 1) << 0x1c |
        uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField;
-  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
+  *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
 
@@ -1599,23 +1599,23 @@ int FUN_00085180(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   int instrArray;
   uint oldWord2;
   
-  instr = *(int *)(ctx + 0x3cc);
-  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
-    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+  instr = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
+    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
     newStorage = _calloc(instr + 0x200,1);
     if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
-      _free(*(undefined4 *)(ctx + 0x3c8));
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+      _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
-    *(undefined4 *)(ctx + 0x3c8) = newStorage;
-    instr = *(int *)(ctx + 0x3cc);
-    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
+    instr = *(int *)(ctx + ARB_instrCount);
+    *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
-  instrArray = *(int *)(ctx + 0x3c8);
+  instrArray = *(int *)(ctx + ARB_instrArray);
   instrOffset = instr * 0x10;
-  *(int *)(ctx + 0x3cc) = instr + 1;
+  *(int *)(ctx + ARB_instrCount) = instr + 1;
   instr = instrOffset + instrArray;
-  *(int *)(ctx + 0x3dc) = instr;
+  *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 8;
   oldWord0 = *(uint *)(instrOffset + instrArray);
@@ -1682,7 +1682,7 @@ int FUN_00085180(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
           uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField;
   *(uint *)(instr + 0xc) = uVar1;
   *(uint *)(instr + 8) = uVar1;
-  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
+  *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
 
@@ -1719,23 +1719,23 @@ int FUN_000853b0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   int instrArray;
   uint oldWord2;
   
-  instr = *(int *)(ctx + 0x3cc);
-  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
-    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+  instr = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
+    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
     newStorage = _calloc(instr + 0x200,1);
     if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
-      _free(*(undefined4 *)(ctx + 0x3c8));
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+      _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
-    *(undefined4 *)(ctx + 0x3c8) = newStorage;
-    instr = *(int *)(ctx + 0x3cc);
-    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
+    instr = *(int *)(ctx + ARB_instrCount);
+    *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
-  instrArray = *(int *)(ctx + 0x3c8);
+  instrArray = *(int *)(ctx + ARB_instrArray);
   instrOffset = instr * 0x10;
-  *(int *)(ctx + 0x3cc) = instr + 1;
+  *(int *)(ctx + ARB_instrCount) = instr + 1;
   instr = instrOffset + instrArray;
-  *(int *)(ctx + 0x3dc) = instr;
+  *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 7;
   oldWord0 = *(uint *)(instrOffset + instrArray);
@@ -1802,7 +1802,7 @@ int FUN_000853b0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
           uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField;
   *(uint *)(instr + 0xc) = uVar1;
   *(uint *)(instr + 8) = uVar1;
-  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
+  *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
 
@@ -1839,23 +1839,23 @@ int FUN_000855e0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   int instrArray;
   uint oldWord2;
   
-  instr = *(int *)(ctx + 0x3cc);
-  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
-    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+  instr = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
+    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
     newStorage = _calloc(instr + 0x200,1);
     if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
-      _free(*(undefined4 *)(ctx + 0x3c8));
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+      _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
-    *(undefined4 *)(ctx + 0x3c8) = newStorage;
-    instr = *(int *)(ctx + 0x3cc);
-    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
+    instr = *(int *)(ctx + ARB_instrCount);
+    *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
-  instrArray = *(int *)(ctx + 0x3c8);
+  instrArray = *(int *)(ctx + ARB_instrArray);
   instrOffset = instr * 0x10;
-  *(int *)(ctx + 0x3cc) = instr + 1;
+  *(int *)(ctx + ARB_instrCount) = instr + 1;
   instr = instrOffset + instrArray;
-  *(int *)(ctx + 0x3dc) = instr;
+  *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 10;
   oldWord0 = *(uint *)(instrOffset + instrArray);
@@ -1922,7 +1922,7 @@ int FUN_000855e0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
           uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField;
   *(uint *)(instr + 0xc) = uVar1;
   *(uint *)(instr + 8) = uVar1;
-  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
+  *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
 
@@ -1959,23 +1959,23 @@ int FUN_00085810(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   int instrArray;
   uint oldWord2;
   
-  instr = *(int *)(ctx + 0x3cc);
-  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
-    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+  instr = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
+    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
     newStorage = _calloc(instr + 0x200,1);
     if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
-      _free(*(undefined4 *)(ctx + 0x3c8));
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+      _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
-    *(undefined4 *)(ctx + 0x3c8) = newStorage;
-    instr = *(int *)(ctx + 0x3cc);
-    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
+    instr = *(int *)(ctx + ARB_instrCount);
+    *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
-  instrArray = *(int *)(ctx + 0x3c8);
+  instrArray = *(int *)(ctx + ARB_instrArray);
   instrOffset = instr * 0x10;
-  *(int *)(ctx + 0x3cc) = instr + 1;
+  *(int *)(ctx + ARB_instrCount) = instr + 1;
   instr = instrOffset + instrArray;
-  *(int *)(ctx + 0x3dc) = instr;
+  *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 9;
   oldWord0 = *(uint *)(instrOffset + instrArray);
@@ -2042,7 +2042,7 @@ int FUN_00085810(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
           uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField;
   *(uint *)(instr + 0xc) = uVar1;
   *(uint *)(instr + 8) = uVar1;
-  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
+  *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
 
@@ -2072,23 +2072,23 @@ int FUN_00085a40(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, 
   int instr;
   int instrArray;
   
-  instr = *(int *)(ctx + 0x3cc);
-  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
-    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+  instr = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
+    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
     newStorage = _calloc(instr + 0x200,1);
     if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
-      _free(*(undefined4 *)(ctx + 0x3c8));
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+      _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
-    *(undefined4 *)(ctx + 0x3c8) = newStorage;
-    instr = *(int *)(ctx + 0x3cc);
-    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
+    instr = *(int *)(ctx + ARB_instrCount);
+    *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
-  instrArray = *(int *)(ctx + 0x3c8);
+  instrArray = *(int *)(ctx + ARB_instrArray);
   instrOffset = instr * 0x10;
-  *(int *)(ctx + 0x3cc) = instr + 1;
+  *(int *)(ctx + ARB_instrCount) = instr + 1;
   instr = instrOffset + instrArray;
-  *(int *)(ctx + 0x3dc) = instr;
+  *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 0xe;
   oldWord0 = *(uint *)(instrOffset + instrArray);
@@ -2129,7 +2129,7 @@ int FUN_00085a40(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, 
   *(uint *)(instr + 4) = uVar1;
   *(uint *)(instr + 8) = uVar1;
   *(uint *)(instr + 0xc) = uVar1;
-  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
+  *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
 
@@ -2159,23 +2159,23 @@ int FUN_00085bf0(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, 
   int instr;
   int instrArray;
   
-  instr = *(int *)(ctx + 0x3cc);
-  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
-    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+  instr = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
+    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
     newStorage = _calloc(instr + 0x200,1);
     if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
-      _free(*(undefined4 *)(ctx + 0x3c8));
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+      _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
-    *(undefined4 *)(ctx + 0x3c8) = newStorage;
-    instr = *(int *)(ctx + 0x3cc);
-    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
+    instr = *(int *)(ctx + ARB_instrCount);
+    *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
-  instrArray = *(int *)(ctx + 0x3c8);
+  instrArray = *(int *)(ctx + ARB_instrArray);
   instrOffset = instr * 0x10;
-  *(int *)(ctx + 0x3cc) = instr + 1;
+  *(int *)(ctx + ARB_instrCount) = instr + 1;
   instr = instrOffset + instrArray;
-  *(int *)(ctx + 0x3dc) = instr;
+  *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 0x47;
   oldWord0 = *(uint *)(instrOffset + instrArray);
@@ -2216,7 +2216,7 @@ int FUN_00085bf0(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, 
   *(uint *)(instr + 4) = uVar1;
   *(uint *)(instr + 8) = uVar1;
   *(uint *)(instr + 0xc) = uVar1;
-  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
+  *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
 
@@ -2246,23 +2246,23 @@ int FUN_00085da0(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, 
   int instr;
   int instrArray;
   
-  instr = *(int *)(ctx + 0x3cc);
-  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
-    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+  instr = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
+    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
     newStorage = _calloc(instr + 0x200,1);
     if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
-      _free(*(undefined4 *)(ctx + 0x3c8));
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+      _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
-    *(undefined4 *)(ctx + 0x3c8) = newStorage;
-    instr = *(int *)(ctx + 0x3cc);
-    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
+    instr = *(int *)(ctx + ARB_instrCount);
+    *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
-  instrArray = *(int *)(ctx + 0x3c8);
+  instrArray = *(int *)(ctx + ARB_instrArray);
   instrOffset = instr * 0x10;
-  *(int *)(ctx + 0x3cc) = instr + 1;
+  *(int *)(ctx + ARB_instrCount) = instr + 1;
   instr = instrOffset + instrArray;
-  *(int *)(ctx + 0x3dc) = instr;
+  *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 0x49;
   oldWord0 = *(uint *)(instrOffset + instrArray);
@@ -2303,7 +2303,7 @@ int FUN_00085da0(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, 
   *(uint *)(instr + 4) = uVar1;
   *(uint *)(instr + 8) = uVar1;
   *(uint *)(instr + 0xc) = uVar1;
-  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
+  *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
 
@@ -2333,23 +2333,23 @@ int FUN_00085f50(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, 
   int instr;
   int instrArray;
   
-  instr = *(int *)(ctx + 0x3cc);
-  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
-    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+  instr = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
+    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
     newStorage = _calloc(instr + 0x200,1);
     if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
-      _free(*(undefined4 *)(ctx + 0x3c8));
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+      _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
-    *(undefined4 *)(ctx + 0x3c8) = newStorage;
-    instr = *(int *)(ctx + 0x3cc);
-    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
+    instr = *(int *)(ctx + ARB_instrCount);
+    *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
-  instrArray = *(int *)(ctx + 0x3c8);
+  instrArray = *(int *)(ctx + ARB_instrArray);
   instrOffset = instr * 0x10;
-  *(int *)(ctx + 0x3cc) = instr + 1;
+  *(int *)(ctx + ARB_instrCount) = instr + 1;
   instr = instrOffset + instrArray;
-  *(int *)(ctx + 0x3dc) = instr;
+  *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 0x4b;
   oldWord0 = *(uint *)(instrOffset + instrArray);
@@ -2390,7 +2390,7 @@ int FUN_00085f50(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, 
   *(uint *)(instr + 4) = uVar1;
   *(uint *)(instr + 8) = uVar1;
   *(uint *)(instr + 0xc) = uVar1;
-  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
+  *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
 
@@ -2420,23 +2420,23 @@ int FUN_00086100(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, 
   int instr;
   int instrArray;
   
-  instr = *(int *)(ctx + 0x3cc);
-  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
-    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+  instr = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
+    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
     newStorage = _calloc(instr + 0x200,1);
     if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
-      _free(*(undefined4 *)(ctx + 0x3c8));
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+      _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
-    *(undefined4 *)(ctx + 0x3c8) = newStorage;
-    instr = *(int *)(ctx + 0x3cc);
-    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
+    instr = *(int *)(ctx + ARB_instrCount);
+    *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
-  instrArray = *(int *)(ctx + 0x3c8);
+  instrArray = *(int *)(ctx + ARB_instrArray);
   instrOffset = instr * 0x10;
-  *(int *)(ctx + 0x3cc) = instr + 1;
+  *(int *)(ctx + ARB_instrCount) = instr + 1;
   instr = instrOffset + instrArray;
-  *(int *)(ctx + 0x3dc) = instr;
+  *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 0x43;
   oldWord0 = *(uint *)(instrOffset + instrArray);
@@ -2477,7 +2477,7 @@ int FUN_00086100(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, 
   *(uint *)(instr + 4) = uVar1;
   *(uint *)(instr + 8) = uVar1;
   *(uint *)(instr + 0xc) = uVar1;
-  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
+  *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
 
@@ -2514,23 +2514,23 @@ int FUN_000862b0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   int instrArray;
   uint oldWord2;
   
-  instr = *(int *)(ctx + 0x3cc);
-  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
-    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+  instr = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
+    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
     newStorage = _calloc(instr + 0x200,1);
     if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
-      _free(*(undefined4 *)(ctx + 0x3c8));
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+      _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
-    *(undefined4 *)(ctx + 0x3c8) = newStorage;
-    instr = *(int *)(ctx + 0x3cc);
-    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
+    instr = *(int *)(ctx + ARB_instrCount);
+    *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
-  instrArray = *(int *)(ctx + 0x3c8);
+  instrArray = *(int *)(ctx + ARB_instrArray);
   instrOffset = instr * 0x10;
-  *(int *)(ctx + 0x3cc) = instr + 1;
+  *(int *)(ctx + ARB_instrCount) = instr + 1;
   instr = instrOffset + instrArray;
-  *(int *)(ctx + 0x3dc) = instr;
+  *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 0x45;
   oldWord0 = *(uint *)(instrOffset + instrArray);
@@ -2597,7 +2597,7 @@ int FUN_000862b0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
           uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField;
   *(uint *)(instr + 0xc) = uVar1;
   *(uint *)(instr + 8) = uVar1;
-  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
+  *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
 
@@ -2634,23 +2634,23 @@ int FUN_000864e0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   int instrArray;
   uint oldWord2;
   
-  instr = *(int *)(ctx + 0x3cc);
-  if (*(uint *)(ctx + 0x3e0) < instr + 1U) {
-    instr = *(uint *)(ctx + 0x3e0) * 0x10;
+  instr = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
+    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
     newStorage = _calloc(instr + 0x200,1);
     if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + 0x3c8),instr);
-      _free(*(undefined4 *)(ctx + 0x3c8));
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+      _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
-    *(undefined4 *)(ctx + 0x3c8) = newStorage;
-    instr = *(int *)(ctx + 0x3cc);
-    *(int *)(ctx + 0x3e0) = *(int *)(ctx + 0x3e0) + 0x20;
+    *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
+    instr = *(int *)(ctx + ARB_instrCount);
+    *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
-  instrArray = *(int *)(ctx + 0x3c8);
+  instrArray = *(int *)(ctx + ARB_instrArray);
   instrOffset = instr * 0x10;
-  *(int *)(ctx + 0x3cc) = instr + 1;
+  *(int *)(ctx + ARB_instrCount) = instr + 1;
   instr = instrOffset + instrArray;
-  *(int *)(ctx + 0x3dc) = instr;
+  *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 0x4f;
   oldWord0 = *(uint *)(instrOffset + instrArray);
@@ -2717,7 +2717,7 @@ int FUN_000864e0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
           uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField;
   *(uint *)(instr + 0xc) = uVar1;
   *(uint *)(instr + 8) = uVar1;
-  *(int *)(ctx + 0x3dc) = *(int *)(ctx + 0x3dc) + 0x10;
+  *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
 

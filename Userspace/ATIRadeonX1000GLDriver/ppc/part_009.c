@@ -5619,17 +5619,22 @@ int FUN_00065ea0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   uint *src1Select;
   uint *src1Negate;
 {
+  uint src1Select3;
+  uint src1Negate2;
+  uint src1Negate3;
+  uint src1Select1;
+  uint src1Negate1;
   uint src1Header;
-  int iVar2;
+  int dstMask2;
   uint tokenIndex;
   undefined4 newStorage;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  int iVar8;
-  uint uVar9;
-  uint uVar10;
-  uint uVar11;
+  uint src0Negate3;
+  uint src0Negate2;
+  uint src0Negate1;
+  int dstMask1;
+  uint src0Select3;
+  uint src0SelectX;
+  uint src1SelectX;
   uint src0Header;
   uint dstHeader;
   uint dstMaskWord;
@@ -5639,7 +5644,7 @@ int FUN_00065ea0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   uint *tokenCount;
   
   dstHeader = (dstFile & 0x3f) << 0x10 | dstIndex & 0xffff;
-  tokenCount = (uint *)(ctx + 0x754);
+  tokenCount = (uint *)(ctx + ARB_tokenCount);
   src1SwizzleWord = 0;
   src0SwizzleWord = 0;
   dstMaskWord = 0;
@@ -5649,22 +5654,22 @@ int FUN_00065ea0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   }
   if (*dstMask == 0) {
     iVar16 = dstMask[3];
-    iVar8 = dstMask[1];
-    iVar2 = dstMask[2];
+    dstMask1 = dstMask[1];
+    dstMask2 = dstMask[2];
 LAB_00065f90:
     dstHeader = dstHeader | 0x400000;
     dstMaskWord = (uint)(iVar16 != 0) * 0x40 |
-             (uint)(iVar2 != 0) * 0x10 | (uint)(iVar8 != 0) * 4 | (uint)(*dstMask != 0);
+             (uint)(dstMask2 != 0) * 0x10 | (uint)(dstMask1 != 0) * 4 | (uint)(*dstMask != 0);
   }
   else {
-    iVar8 = dstMask[1];
-    if (iVar8 == 0) {
+    dstMask1 = dstMask[1];
+    if (dstMask1 == 0) {
       iVar16 = dstMask[3];
-      iVar2 = dstMask[2];
+      dstMask2 = dstMask[2];
       goto LAB_00065f90;
     }
-    iVar2 = dstMask[2];
-    if (iVar2 == 0) {
+    dstMask2 = dstMask[2];
+    if (dstMask2 == 0) {
       iVar16 = dstMask[3];
       goto LAB_00065f90;
     }
@@ -5675,244 +5680,244 @@ LAB_00065f90:
   }
   src0Header = (src0File & 0x3f) << 0x10 | src0Index & 0xffff;
   if (*src0Negate == 0) {
-    uVar7 = src0Negate[1];
-    if (uVar7 != 0) {
-      uVar5 = src0Negate[3];
-      uVar9 = src0Select[3];
-      uVar6 = src0Negate[2];
-      uVar10 = *src0Select;
+    src0Negate1 = src0Negate[1];
+    if (src0Negate1 != 0) {
+      src0Negate3 = src0Negate[3];
+      src0Select3 = src0Select[3];
+      src0Negate2 = src0Negate[2];
+      src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
       goto LAB_000660e0;
     }
-    uVar6 = src0Negate[2];
-    if (uVar6 != 0) {
-      uVar5 = src0Negate[3];
-      uVar9 = src0Select[3];
-      uVar10 = *src0Select;
+    src0Negate2 = src0Negate[2];
+    if (src0Negate2 != 0) {
+      src0Negate3 = src0Negate[3];
+      src0Select3 = src0Select[3];
+      src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
       goto LAB_000660e0;
     }
-    uVar5 = src0Negate[3];
-    if (uVar5 != 0) {
-      uVar9 = src0Select[3];
-      uVar10 = *src0Select;
+    src0Negate3 = src0Negate[3];
+    if (src0Negate3 != 0) {
+      src0Select3 = src0Select[3];
+      src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
       goto LAB_000660e0;
     }
-    uVar10 = *src0Select;
-    if (uVar10 != 0) {
-      uVar9 = src0Select[3];
+    src0SelectX = *src0Select;
+    if (src0SelectX != 0) {
+      src0Select3 = src0Select[3];
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
       goto LAB_000660e0;
     }
     tokenIndex = src0Select[1];
     if (tokenIndex != 1) {
-      uVar9 = src0Select[3];
+      src0Select3 = src0Select[3];
       src1Header = src0Select[2];
       goto LAB_000660e0;
     }
     src1Header = src0Select[2];
     if (src1Header != 2) {
-      uVar9 = src0Select[3];
+      src0Select3 = src0Select[3];
       goto LAB_000660e0;
     }
-    uVar9 = src0Select[3];
-    if (uVar9 != 3) goto LAB_000660e0;
+    src0Select3 = src0Select[3];
+    if (src0Select3 != 3) goto LAB_000660e0;
   }
   else {
-    uVar5 = src0Negate[3];
-    uVar9 = src0Select[3];
-    uVar7 = src0Negate[1];
-    uVar6 = src0Negate[2];
-    uVar10 = *src0Select;
+    src0Negate3 = src0Negate[3];
+    src0Select3 = src0Select[3];
+    src0Negate1 = src0Negate[1];
+    src0Negate2 = src0Negate[2];
+    src0SelectX = *src0Select;
     tokenIndex = src0Select[1];
     src1Header = src0Select[2];
 LAB_000660e0:
     src0Header = src0Header | 0x400000;
-    src0SwizzleWord = (uVar5 & 1) << 0xf |
-             (uVar9 & 7) << 0xc |
-             (uVar6 & 1) << 0xb |
+    src0SwizzleWord = (src0Negate3 & 1) << 0xf |
+             (src0Select3 & 7) << 0xc |
+             (src0Negate2 & 1) << 0xb |
              (src1Header & 7) << 8 |
-             (uVar7 & 1) << 7 | (tokenIndex & 7) << 4 | (*src0Negate & 1) << 3 | uVar10 & 7;
+             (src0Negate1 & 1) << 7 | (tokenIndex & 7) << 4 | (*src0Negate & 1) << 3 | src0SelectX & 7;
   }
   src1Header = (src1File & 0x3f) << 0x10 | src1Index & 0xffff;
   if (*src1Negate == 0) {
-    uVar10 = src1Negate[1];
-    if (uVar10 == 0) {
-      uVar7 = src1Negate[2];
-      if (uVar7 == 0) {
-        uVar6 = src1Negate[3];
-        if (uVar6 == 0) {
-          uVar11 = *src1Select;
-          if (uVar11 == 0) {
-            uVar5 = src1Select[1];
-            if (uVar5 == 1) {
+    src1Negate1 = src1Negate[1];
+    if (src1Negate1 == 0) {
+      src1Negate2 = src1Negate[2];
+      if (src1Negate2 == 0) {
+        src1Negate3 = src1Negate[3];
+        if (src1Negate3 == 0) {
+          src1SelectX = *src1Select;
+          if (src1SelectX == 0) {
+            src1Select1 = src1Select[1];
+            if (src1Select1 == 1) {
               tokenIndex = src1Select[2];
               if (tokenIndex == 2) {
-                uVar9 = src1Select[3];
-                if (uVar9 == 3) goto LAB_00066234;
+                src1Select3 = src1Select[3];
+                if (src1Select3 == 3) goto LAB_00066234;
               }
               else {
-                uVar9 = src1Select[3];
+                src1Select3 = src1Select[3];
               }
             }
             else {
-              uVar9 = src1Select[3];
+              src1Select3 = src1Select[3];
               tokenIndex = src1Select[2];
             }
           }
           else {
-            uVar9 = src1Select[3];
-            uVar5 = src1Select[1];
+            src1Select3 = src1Select[3];
+            src1Select1 = src1Select[1];
             tokenIndex = src1Select[2];
           }
         }
         else {
-          uVar9 = src1Select[3];
-          uVar11 = *src1Select;
-          uVar5 = src1Select[1];
+          src1Select3 = src1Select[3];
+          src1SelectX = *src1Select;
+          src1Select1 = src1Select[1];
           tokenIndex = src1Select[2];
         }
       }
       else {
-        uVar6 = src1Negate[3];
-        uVar9 = src1Select[3];
-        uVar11 = *src1Select;
-        uVar5 = src1Select[1];
+        src1Negate3 = src1Negate[3];
+        src1Select3 = src1Select[3];
+        src1SelectX = *src1Select;
+        src1Select1 = src1Select[1];
         tokenIndex = src1Select[2];
       }
     }
     else {
-      uVar6 = src1Negate[3];
-      uVar9 = src1Select[3];
-      uVar7 = src1Negate[2];
-      uVar11 = *src1Select;
-      uVar5 = src1Select[1];
+      src1Negate3 = src1Negate[3];
+      src1Select3 = src1Select[3];
+      src1Negate2 = src1Negate[2];
+      src1SelectX = *src1Select;
+      src1Select1 = src1Select[1];
       tokenIndex = src1Select[2];
     }
   }
   else {
-    uVar6 = src1Negate[3];
-    uVar9 = src1Select[3];
-    uVar10 = src1Negate[1];
-    uVar7 = src1Negate[2];
-    uVar11 = *src1Select;
-    uVar5 = src1Select[1];
+    src1Negate3 = src1Negate[3];
+    src1Select3 = src1Select[3];
+    src1Negate1 = src1Negate[1];
+    src1Negate2 = src1Negate[2];
+    src1SelectX = *src1Select;
+    src1Select1 = src1Select[1];
     tokenIndex = src1Select[2];
   }
   src1Header = src1Header | 0x400000;
-  src1SwizzleWord = (uVar6 & 1) << 0xf |
-           (uVar9 & 7) << 0xc |
-           (uVar7 & 1) << 0xb |
+  src1SwizzleWord = (src1Negate3 & 1) << 0xf |
+           (src1Select3 & 7) << 0xc |
+           (src1Negate2 & 1) << 0xb |
            (tokenIndex & 7) << 8 |
-           (uVar10 & 1) << 7 | (uVar5 & 7) << 4 | (*src1Negate & 1) << 3 | uVar11 & 7;
+           (src1Negate1 & 1) << 7 | (src1Select1 & 7) << 4 | (*src1Negate & 1) << 3 | src1SelectX & 7;
 LAB_00066234:
   tokenIndex = *tokenCount;
-  iVar16 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar16 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(undefined4 *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = 0x23;
+  *(undefined4 *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = 0x23;
   tokenIndex = *tokenCount + 1;
   *tokenCount = tokenIndex;
-  iVar16 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar16 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = dstHeader;
+  *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = dstHeader;
   tokenIndex = *tokenCount + 1;
   *tokenCount = tokenIndex;
   if ((dstHeader & 0x400000) != 0) {
-    iVar16 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar16 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       tokenIndex = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = dstMaskWord;
+    *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = dstMaskWord;
     tokenIndex = *tokenCount + 1;
     *tokenCount = tokenIndex;
   }
-  iVar16 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar16 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = src0Header;
+  *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = src0Header;
   dstHeader = *tokenCount + 1;
   *tokenCount = dstHeader;
   if ((src0Header & 0x400000) != 0) {
-    iVar16 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= dstHeader) {
-      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar16 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= dstHeader) {
+      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       dstHeader = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(dstHeader * 4 + *(int *)(ctx + 0x75c)) = src0SwizzleWord;
+    *(uint *)(dstHeader * 4 + *(int *)(ctx + ARB_tokenBuffer)) = src0SwizzleWord;
     dstHeader = *tokenCount + 1;
     *tokenCount = dstHeader;
   }
-  iVar16 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= dstHeader) {
-    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar16 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= dstHeader) {
+    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     dstHeader = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(dstHeader * 4 + *(int *)(ctx + 0x75c)) = src1Header;
+  *(uint *)(dstHeader * 4 + *(int *)(ctx + ARB_tokenBuffer)) = src1Header;
   dstHeader = *tokenCount + 1;
   *tokenCount = dstHeader;
   if ((src1Header & 0x400000) != 0) {
-    iVar16 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= dstHeader) {
-      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar16 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= dstHeader) {
+      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       dstHeader = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(dstHeader * 4 + *(int *)(ctx + 0x75c)) = src1SwizzleWord;
+    *(uint *)(dstHeader * 4 + *(int *)(ctx + ARB_tokenBuffer)) = src1SwizzleWord;
     *tokenCount = *tokenCount + 1;
   }
   return;
@@ -5930,15 +5935,15 @@ int FUN_00066640(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, 
   uint *srcNegate;
 {
   uint tokenIndex;
-  int iVar2;
-  uint uVar3;
+  int dstMask2;
+  uint srcSelect1;
   undefined4 newStorage;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  int iVar8;
-  uint uVar9;
-  uint uVar10;
+  uint srcNegate3;
+  uint srcNegate2;
+  uint srcNegate1;
+  int dstMask1;
+  uint srcSelect3;
+  uint srcSelectX;
   uint srcHeader;
   uint dstHeader;
   uint dstMaskWord;
@@ -5947,7 +5952,7 @@ int FUN_00066640(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, 
   uint *tokenCount;
   
   dstHeader = (dstFile & 0x3f) << 0x10 | dstIndex & 0xffff;
-  tokenCount = (uint *)(ctx + 0x754);
+  tokenCount = (uint *)(ctx + ARB_tokenCount);
   srcSwizzleWord = 0;
   dstMaskWord = 0;
   if ((dstFile == 0x12) || (dstFile == 0x13)) {
@@ -5956,22 +5961,22 @@ int FUN_00066640(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, 
   }
   if (*dstMask == 0) {
     iVar14 = dstMask[3];
-    iVar8 = dstMask[1];
-    iVar2 = dstMask[2];
+    dstMask1 = dstMask[1];
+    dstMask2 = dstMask[2];
 LAB_00066720:
     dstHeader = dstHeader | 0x400000;
     dstMaskWord = (uint)(iVar14 != 0) * 0x40 |
-             (uint)(iVar2 != 0) * 0x10 | (uint)(iVar8 != 0) * 4 | (uint)(*dstMask != 0);
+             (uint)(dstMask2 != 0) * 0x10 | (uint)(dstMask1 != 0) * 4 | (uint)(*dstMask != 0);
   }
   else {
-    iVar8 = dstMask[1];
-    if (iVar8 == 0) {
+    dstMask1 = dstMask[1];
+    if (dstMask1 == 0) {
       iVar14 = dstMask[3];
-      iVar2 = dstMask[2];
+      dstMask2 = dstMask[2];
       goto LAB_00066720;
     }
-    iVar2 = dstMask[2];
-    if (iVar2 == 0) {
+    dstMask2 = dstMask[2];
+    if (dstMask2 == 0) {
       iVar14 = dstMask[3];
       goto LAB_00066720;
     }
@@ -5982,148 +5987,148 @@ LAB_00066720:
   }
   srcHeader = (srcFile & 0x3f) << 0x10 | srcIndex & 0xffff;
   if (*srcNegate == 0) {
-    uVar7 = srcNegate[1];
-    if (uVar7 == 0) {
-      uVar6 = srcNegate[2];
-      if (uVar6 == 0) {
-        uVar5 = srcNegate[3];
-        if (uVar5 == 0) {
-          uVar10 = *srcSelect;
-          if (uVar10 == 0) {
-            uVar3 = srcSelect[1];
-            if (uVar3 == 1) {
+    srcNegate1 = srcNegate[1];
+    if (srcNegate1 == 0) {
+      srcNegate2 = srcNegate[2];
+      if (srcNegate2 == 0) {
+        srcNegate3 = srcNegate[3];
+        if (srcNegate3 == 0) {
+          srcSelectX = *srcSelect;
+          if (srcSelectX == 0) {
+            srcSelect1 = srcSelect[1];
+            if (srcSelect1 == 1) {
               tokenIndex = srcSelect[2];
               if (tokenIndex == 2) {
-                uVar9 = srcSelect[3];
-                if (uVar9 == 3) goto LAB_00066894;
+                srcSelect3 = srcSelect[3];
+                if (srcSelect3 == 3) goto LAB_00066894;
               }
               else {
-                uVar9 = srcSelect[3];
+                srcSelect3 = srcSelect[3];
               }
             }
             else {
-              uVar9 = srcSelect[3];
+              srcSelect3 = srcSelect[3];
               tokenIndex = srcSelect[2];
             }
           }
           else {
-            uVar9 = srcSelect[3];
-            uVar3 = srcSelect[1];
+            srcSelect3 = srcSelect[3];
+            srcSelect1 = srcSelect[1];
             tokenIndex = srcSelect[2];
           }
         }
         else {
-          uVar9 = srcSelect[3];
-          uVar10 = *srcSelect;
-          uVar3 = srcSelect[1];
+          srcSelect3 = srcSelect[3];
+          srcSelectX = *srcSelect;
+          srcSelect1 = srcSelect[1];
           tokenIndex = srcSelect[2];
         }
       }
       else {
-        uVar5 = srcNegate[3];
-        uVar9 = srcSelect[3];
-        uVar10 = *srcSelect;
-        uVar3 = srcSelect[1];
+        srcNegate3 = srcNegate[3];
+        srcSelect3 = srcSelect[3];
+        srcSelectX = *srcSelect;
+        srcSelect1 = srcSelect[1];
         tokenIndex = srcSelect[2];
       }
     }
     else {
-      uVar5 = srcNegate[3];
-      uVar9 = srcSelect[3];
-      uVar6 = srcNegate[2];
-      uVar10 = *srcSelect;
-      uVar3 = srcSelect[1];
+      srcNegate3 = srcNegate[3];
+      srcSelect3 = srcSelect[3];
+      srcNegate2 = srcNegate[2];
+      srcSelectX = *srcSelect;
+      srcSelect1 = srcSelect[1];
       tokenIndex = srcSelect[2];
     }
   }
   else {
-    uVar5 = srcNegate[3];
-    uVar9 = srcSelect[3];
-    uVar7 = srcNegate[1];
-    uVar6 = srcNegate[2];
-    uVar10 = *srcSelect;
-    uVar3 = srcSelect[1];
+    srcNegate3 = srcNegate[3];
+    srcSelect3 = srcSelect[3];
+    srcNegate1 = srcNegate[1];
+    srcNegate2 = srcNegate[2];
+    srcSelectX = *srcSelect;
+    srcSelect1 = srcSelect[1];
     tokenIndex = srcSelect[2];
   }
   srcHeader = srcHeader | 0x400000;
-  srcSwizzleWord = (uVar5 & 1) << 0xf |
-           (uVar9 & 7) << 0xc |
-           (uVar6 & 1) << 0xb |
-           (tokenIndex & 7) << 8 | (uVar7 & 1) << 7 | (uVar3 & 7) << 4 | (*srcNegate & 1) << 3 | uVar10 & 7
+  srcSwizzleWord = (srcNegate3 & 1) << 0xf |
+           (srcSelect3 & 7) << 0xc |
+           (srcNegate2 & 1) << 0xb |
+           (tokenIndex & 7) << 8 | (srcNegate1 & 1) << 7 | (srcSelect1 & 7) << 4 | (*srcNegate & 1) << 3 | srcSelectX & 7
   ;
 LAB_00066894:
   tokenIndex = *tokenCount;
-  iVar14 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar14 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(undefined4 *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = 0x47;
+  *(undefined4 *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = 0x47;
   tokenIndex = *tokenCount + 1;
   *tokenCount = tokenIndex;
-  iVar14 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar14 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = dstHeader;
+  *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = dstHeader;
   tokenIndex = *tokenCount + 1;
   *tokenCount = tokenIndex;
   if ((dstHeader & 0x400000) != 0) {
-    iVar14 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-      newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar14 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+      newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       tokenIndex = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = dstMaskWord;
+    *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = dstMaskWord;
     tokenIndex = *tokenCount + 1;
     *tokenCount = tokenIndex;
   }
-  iVar14 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar14 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = srcHeader;
+  *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = srcHeader;
   dstHeader = *tokenCount + 1;
   *tokenCount = dstHeader;
   if ((srcHeader & 0x400000) != 0) {
-    iVar14 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= dstHeader) {
-      newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar14 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= dstHeader) {
+      newStorage = (**(code **)(iVar14 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar14 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       dstHeader = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(dstHeader * 4 + *(int *)(ctx + 0x75c)) = srcSwizzleWord;
+    *(uint *)(dstHeader * 4 + *(int *)(ctx + ARB_tokenBuffer)) = srcSwizzleWord;
     *tokenCount = *tokenCount + 1;
   }
   return;
@@ -6144,17 +6149,22 @@ int FUN_00066b80(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   uint *src1Select;
   uint *src1Negate;
 {
+  uint src1Select3;
+  uint src1Negate2;
+  uint src1Negate3;
+  uint src1Select1;
+  uint src1Negate1;
   uint src1Header;
-  int iVar2;
+  int dstMask2;
   uint tokenIndex;
   undefined4 newStorage;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  int iVar8;
-  uint uVar9;
-  uint uVar10;
-  uint uVar11;
+  uint src0Negate3;
+  uint src0Negate2;
+  uint src0Negate1;
+  int dstMask1;
+  uint src0Select3;
+  uint src0SelectX;
+  uint src1SelectX;
   uint src0Header;
   uint dstHeader;
   uint dstMaskWord;
@@ -6164,7 +6174,7 @@ int FUN_00066b80(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   uint *tokenCount;
   
   dstHeader = (dstFile & 0x3f) << 0x10 | dstIndex & 0xffff;
-  tokenCount = (uint *)(ctx + 0x754);
+  tokenCount = (uint *)(ctx + ARB_tokenCount);
   src1SwizzleWord = 0;
   src0SwizzleWord = 0;
   dstMaskWord = 0;
@@ -6174,22 +6184,22 @@ int FUN_00066b80(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   }
   if (*dstMask == 0) {
     iVar16 = dstMask[3];
-    iVar8 = dstMask[1];
-    iVar2 = dstMask[2];
+    dstMask1 = dstMask[1];
+    dstMask2 = dstMask[2];
 LAB_00066c70:
     dstHeader = dstHeader | 0x400000;
     dstMaskWord = (uint)(iVar16 != 0) * 0x40 |
-             (uint)(iVar2 != 0) * 0x10 | (uint)(iVar8 != 0) * 4 | (uint)(*dstMask != 0);
+             (uint)(dstMask2 != 0) * 0x10 | (uint)(dstMask1 != 0) * 4 | (uint)(*dstMask != 0);
   }
   else {
-    iVar8 = dstMask[1];
-    if (iVar8 == 0) {
+    dstMask1 = dstMask[1];
+    if (dstMask1 == 0) {
       iVar16 = dstMask[3];
-      iVar2 = dstMask[2];
+      dstMask2 = dstMask[2];
       goto LAB_00066c70;
     }
-    iVar2 = dstMask[2];
-    if (iVar2 == 0) {
+    dstMask2 = dstMask[2];
+    if (dstMask2 == 0) {
       iVar16 = dstMask[3];
       goto LAB_00066c70;
     }
@@ -6200,244 +6210,244 @@ LAB_00066c70:
   }
   src0Header = (src0File & 0x3f) << 0x10 | src0Index & 0xffff;
   if (*src0Negate == 0) {
-    uVar7 = src0Negate[1];
-    if (uVar7 != 0) {
-      uVar5 = src0Negate[3];
-      uVar9 = src0Select[3];
-      uVar6 = src0Negate[2];
-      uVar10 = *src0Select;
+    src0Negate1 = src0Negate[1];
+    if (src0Negate1 != 0) {
+      src0Negate3 = src0Negate[3];
+      src0Select3 = src0Select[3];
+      src0Negate2 = src0Negate[2];
+      src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
       goto LAB_00066dc0;
     }
-    uVar6 = src0Negate[2];
-    if (uVar6 != 0) {
-      uVar5 = src0Negate[3];
-      uVar9 = src0Select[3];
-      uVar10 = *src0Select;
+    src0Negate2 = src0Negate[2];
+    if (src0Negate2 != 0) {
+      src0Negate3 = src0Negate[3];
+      src0Select3 = src0Select[3];
+      src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
       goto LAB_00066dc0;
     }
-    uVar5 = src0Negate[3];
-    if (uVar5 != 0) {
-      uVar9 = src0Select[3];
-      uVar10 = *src0Select;
+    src0Negate3 = src0Negate[3];
+    if (src0Negate3 != 0) {
+      src0Select3 = src0Select[3];
+      src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
       goto LAB_00066dc0;
     }
-    uVar10 = *src0Select;
-    if (uVar10 != 0) {
-      uVar9 = src0Select[3];
+    src0SelectX = *src0Select;
+    if (src0SelectX != 0) {
+      src0Select3 = src0Select[3];
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
       goto LAB_00066dc0;
     }
     tokenIndex = src0Select[1];
     if (tokenIndex != 1) {
-      uVar9 = src0Select[3];
+      src0Select3 = src0Select[3];
       src1Header = src0Select[2];
       goto LAB_00066dc0;
     }
     src1Header = src0Select[2];
     if (src1Header != 2) {
-      uVar9 = src0Select[3];
+      src0Select3 = src0Select[3];
       goto LAB_00066dc0;
     }
-    uVar9 = src0Select[3];
-    if (uVar9 != 3) goto LAB_00066dc0;
+    src0Select3 = src0Select[3];
+    if (src0Select3 != 3) goto LAB_00066dc0;
   }
   else {
-    uVar5 = src0Negate[3];
-    uVar9 = src0Select[3];
-    uVar7 = src0Negate[1];
-    uVar6 = src0Negate[2];
-    uVar10 = *src0Select;
+    src0Negate3 = src0Negate[3];
+    src0Select3 = src0Select[3];
+    src0Negate1 = src0Negate[1];
+    src0Negate2 = src0Negate[2];
+    src0SelectX = *src0Select;
     tokenIndex = src0Select[1];
     src1Header = src0Select[2];
 LAB_00066dc0:
     src0Header = src0Header | 0x400000;
-    src0SwizzleWord = (uVar5 & 1) << 0xf |
-             (uVar9 & 7) << 0xc |
-             (uVar6 & 1) << 0xb |
+    src0SwizzleWord = (src0Negate3 & 1) << 0xf |
+             (src0Select3 & 7) << 0xc |
+             (src0Negate2 & 1) << 0xb |
              (src1Header & 7) << 8 |
-             (uVar7 & 1) << 7 | (tokenIndex & 7) << 4 | (*src0Negate & 1) << 3 | uVar10 & 7;
+             (src0Negate1 & 1) << 7 | (tokenIndex & 7) << 4 | (*src0Negate & 1) << 3 | src0SelectX & 7;
   }
   src1Header = (src1File & 0x3f) << 0x10 | src1Index & 0xffff;
   if (*src1Negate == 0) {
-    uVar10 = src1Negate[1];
-    if (uVar10 == 0) {
-      uVar7 = src1Negate[2];
-      if (uVar7 == 0) {
-        uVar6 = src1Negate[3];
-        if (uVar6 == 0) {
-          uVar11 = *src1Select;
-          if (uVar11 == 0) {
-            uVar5 = src1Select[1];
-            if (uVar5 == 1) {
+    src1Negate1 = src1Negate[1];
+    if (src1Negate1 == 0) {
+      src1Negate2 = src1Negate[2];
+      if (src1Negate2 == 0) {
+        src1Negate3 = src1Negate[3];
+        if (src1Negate3 == 0) {
+          src1SelectX = *src1Select;
+          if (src1SelectX == 0) {
+            src1Select1 = src1Select[1];
+            if (src1Select1 == 1) {
               tokenIndex = src1Select[2];
               if (tokenIndex == 2) {
-                uVar9 = src1Select[3];
-                if (uVar9 == 3) goto LAB_00066f14;
+                src1Select3 = src1Select[3];
+                if (src1Select3 == 3) goto LAB_00066f14;
               }
               else {
-                uVar9 = src1Select[3];
+                src1Select3 = src1Select[3];
               }
             }
             else {
-              uVar9 = src1Select[3];
+              src1Select3 = src1Select[3];
               tokenIndex = src1Select[2];
             }
           }
           else {
-            uVar9 = src1Select[3];
-            uVar5 = src1Select[1];
+            src1Select3 = src1Select[3];
+            src1Select1 = src1Select[1];
             tokenIndex = src1Select[2];
           }
         }
         else {
-          uVar9 = src1Select[3];
-          uVar11 = *src1Select;
-          uVar5 = src1Select[1];
+          src1Select3 = src1Select[3];
+          src1SelectX = *src1Select;
+          src1Select1 = src1Select[1];
           tokenIndex = src1Select[2];
         }
       }
       else {
-        uVar6 = src1Negate[3];
-        uVar9 = src1Select[3];
-        uVar11 = *src1Select;
-        uVar5 = src1Select[1];
+        src1Negate3 = src1Negate[3];
+        src1Select3 = src1Select[3];
+        src1SelectX = *src1Select;
+        src1Select1 = src1Select[1];
         tokenIndex = src1Select[2];
       }
     }
     else {
-      uVar6 = src1Negate[3];
-      uVar9 = src1Select[3];
-      uVar7 = src1Negate[2];
-      uVar11 = *src1Select;
-      uVar5 = src1Select[1];
+      src1Negate3 = src1Negate[3];
+      src1Select3 = src1Select[3];
+      src1Negate2 = src1Negate[2];
+      src1SelectX = *src1Select;
+      src1Select1 = src1Select[1];
       tokenIndex = src1Select[2];
     }
   }
   else {
-    uVar6 = src1Negate[3];
-    uVar9 = src1Select[3];
-    uVar10 = src1Negate[1];
-    uVar7 = src1Negate[2];
-    uVar11 = *src1Select;
-    uVar5 = src1Select[1];
+    src1Negate3 = src1Negate[3];
+    src1Select3 = src1Select[3];
+    src1Negate1 = src1Negate[1];
+    src1Negate2 = src1Negate[2];
+    src1SelectX = *src1Select;
+    src1Select1 = src1Select[1];
     tokenIndex = src1Select[2];
   }
   src1Header = src1Header | 0x400000;
-  src1SwizzleWord = (uVar6 & 1) << 0xf |
-           (uVar9 & 7) << 0xc |
-           (uVar7 & 1) << 0xb |
+  src1SwizzleWord = (src1Negate3 & 1) << 0xf |
+           (src1Select3 & 7) << 0xc |
+           (src1Negate2 & 1) << 0xb |
            (tokenIndex & 7) << 8 |
-           (uVar10 & 1) << 7 | (uVar5 & 7) << 4 | (*src1Negate & 1) << 3 | uVar11 & 7;
+           (src1Negate1 & 1) << 7 | (src1Select1 & 7) << 4 | (*src1Negate & 1) << 3 | src1SelectX & 7;
 LAB_00066f14:
   tokenIndex = *tokenCount;
-  iVar16 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar16 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(undefined4 *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = 0x49;
+  *(undefined4 *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = 0x49;
   tokenIndex = *tokenCount + 1;
   *tokenCount = tokenIndex;
-  iVar16 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar16 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = dstHeader;
+  *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = dstHeader;
   tokenIndex = *tokenCount + 1;
   *tokenCount = tokenIndex;
   if ((dstHeader & 0x400000) != 0) {
-    iVar16 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar16 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       tokenIndex = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = dstMaskWord;
+    *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = dstMaskWord;
     tokenIndex = *tokenCount + 1;
     *tokenCount = tokenIndex;
   }
-  iVar16 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar16 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = src0Header;
+  *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = src0Header;
   dstHeader = *tokenCount + 1;
   *tokenCount = dstHeader;
   if ((src0Header & 0x400000) != 0) {
-    iVar16 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= dstHeader) {
-      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar16 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= dstHeader) {
+      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       dstHeader = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(dstHeader * 4 + *(int *)(ctx + 0x75c)) = src0SwizzleWord;
+    *(uint *)(dstHeader * 4 + *(int *)(ctx + ARB_tokenBuffer)) = src0SwizzleWord;
     dstHeader = *tokenCount + 1;
     *tokenCount = dstHeader;
   }
-  iVar16 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= dstHeader) {
-    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar16 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= dstHeader) {
+    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     dstHeader = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(dstHeader * 4 + *(int *)(ctx + 0x75c)) = src1Header;
+  *(uint *)(dstHeader * 4 + *(int *)(ctx + ARB_tokenBuffer)) = src1Header;
   dstHeader = *tokenCount + 1;
   *tokenCount = dstHeader;
   if ((src1Header & 0x400000) != 0) {
-    iVar16 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= dstHeader) {
-      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar16 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= dstHeader) {
+      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       dstHeader = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(dstHeader * 4 + *(int *)(ctx + 0x75c)) = src1SwizzleWord;
+    *(uint *)(dstHeader * 4 + *(int *)(ctx + ARB_tokenBuffer)) = src1SwizzleWord;
     *tokenCount = *tokenCount + 1;
   }
   return;
@@ -6458,17 +6468,22 @@ int FUN_00067320(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   uint *src1Select;
   uint *src1Negate;
 {
+  uint src1Select3;
+  uint src1Negate2;
+  uint src1Negate3;
+  uint src1Select1;
+  uint src1Negate1;
   uint src1Header;
-  int iVar2;
+  int dstMask2;
   uint tokenIndex;
   undefined4 newStorage;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  int iVar8;
-  uint uVar9;
-  uint uVar10;
-  uint uVar11;
+  uint src0Negate3;
+  uint src0Negate2;
+  uint src0Negate1;
+  int dstMask1;
+  uint src0Select3;
+  uint src0SelectX;
+  uint src1SelectX;
   uint src0Header;
   uint dstHeader;
   uint dstMaskWord;
@@ -6478,7 +6493,7 @@ int FUN_00067320(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   uint *tokenCount;
   
   dstHeader = (dstFile & 0x3f) << 0x10 | dstIndex & 0xffff;
-  tokenCount = (uint *)(ctx + 0x754);
+  tokenCount = (uint *)(ctx + ARB_tokenCount);
   src1SwizzleWord = 0;
   src0SwizzleWord = 0;
   dstMaskWord = 0;
@@ -6488,22 +6503,22 @@ int FUN_00067320(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   }
   if (*dstMask == 0) {
     iVar16 = dstMask[3];
-    iVar8 = dstMask[1];
-    iVar2 = dstMask[2];
+    dstMask1 = dstMask[1];
+    dstMask2 = dstMask[2];
 LAB_00067410:
     dstHeader = dstHeader | 0x400000;
     dstMaskWord = (uint)(iVar16 != 0) * 0x40 |
-             (uint)(iVar2 != 0) * 0x10 | (uint)(iVar8 != 0) * 4 | (uint)(*dstMask != 0);
+             (uint)(dstMask2 != 0) * 0x10 | (uint)(dstMask1 != 0) * 4 | (uint)(*dstMask != 0);
   }
   else {
-    iVar8 = dstMask[1];
-    if (iVar8 == 0) {
+    dstMask1 = dstMask[1];
+    if (dstMask1 == 0) {
       iVar16 = dstMask[3];
-      iVar2 = dstMask[2];
+      dstMask2 = dstMask[2];
       goto LAB_00067410;
     }
-    iVar2 = dstMask[2];
-    if (iVar2 == 0) {
+    dstMask2 = dstMask[2];
+    if (dstMask2 == 0) {
       iVar16 = dstMask[3];
       goto LAB_00067410;
     }
@@ -6514,268 +6529,269 @@ LAB_00067410:
   }
   src0Header = (src0File & 0x3f) << 0x10 | src0Index & 0xffff;
   if (*src0Negate == 0) {
-    uVar7 = src0Negate[1];
-    if (uVar7 != 0) {
-      uVar5 = src0Negate[3];
-      uVar9 = src0Select[3];
-      uVar6 = src0Negate[2];
-      uVar10 = *src0Select;
+    src0Negate1 = src0Negate[1];
+    if (src0Negate1 != 0) {
+      src0Negate3 = src0Negate[3];
+      src0Select3 = src0Select[3];
+      src0Negate2 = src0Negate[2];
+      src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
       goto LAB_00067560;
     }
-    uVar6 = src0Negate[2];
-    if (uVar6 != 0) {
-      uVar5 = src0Negate[3];
-      uVar9 = src0Select[3];
-      uVar10 = *src0Select;
+    src0Negate2 = src0Negate[2];
+    if (src0Negate2 != 0) {
+      src0Negate3 = src0Negate[3];
+      src0Select3 = src0Select[3];
+      src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
       goto LAB_00067560;
     }
-    uVar5 = src0Negate[3];
-    if (uVar5 != 0) {
-      uVar9 = src0Select[3];
-      uVar10 = *src0Select;
+    src0Negate3 = src0Negate[3];
+    if (src0Negate3 != 0) {
+      src0Select3 = src0Select[3];
+      src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
       goto LAB_00067560;
     }
-    uVar10 = *src0Select;
-    if (uVar10 != 0) {
-      uVar9 = src0Select[3];
+    src0SelectX = *src0Select;
+    if (src0SelectX != 0) {
+      src0Select3 = src0Select[3];
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
       goto LAB_00067560;
     }
     tokenIndex = src0Select[1];
     if (tokenIndex != 1) {
-      uVar9 = src0Select[3];
+      src0Select3 = src0Select[3];
       src1Header = src0Select[2];
       goto LAB_00067560;
     }
     src1Header = src0Select[2];
     if (src1Header != 2) {
-      uVar9 = src0Select[3];
+      src0Select3 = src0Select[3];
       goto LAB_00067560;
     }
-    uVar9 = src0Select[3];
-    if (uVar9 != 3) goto LAB_00067560;
+    src0Select3 = src0Select[3];
+    if (src0Select3 != 3) goto LAB_00067560;
   }
   else {
-    uVar5 = src0Negate[3];
-    uVar9 = src0Select[3];
-    uVar7 = src0Negate[1];
-    uVar6 = src0Negate[2];
-    uVar10 = *src0Select;
+    src0Negate3 = src0Negate[3];
+    src0Select3 = src0Select[3];
+    src0Negate1 = src0Negate[1];
+    src0Negate2 = src0Negate[2];
+    src0SelectX = *src0Select;
     tokenIndex = src0Select[1];
     src1Header = src0Select[2];
 LAB_00067560:
     src0Header = src0Header | 0x400000;
-    src0SwizzleWord = (uVar5 & 1) << 0xf |
-             (uVar9 & 7) << 0xc |
-             (uVar6 & 1) << 0xb |
+    src0SwizzleWord = (src0Negate3 & 1) << 0xf |
+             (src0Select3 & 7) << 0xc |
+             (src0Negate2 & 1) << 0xb |
              (src1Header & 7) << 8 |
-             (uVar7 & 1) << 7 | (tokenIndex & 7) << 4 | (*src0Negate & 1) << 3 | uVar10 & 7;
+             (src0Negate1 & 1) << 7 | (tokenIndex & 7) << 4 | (*src0Negate & 1) << 3 | src0SelectX & 7;
   }
   src1Header = (src1File & 0x3f) << 0x10 | src1Index & 0xffff;
   if (*src1Negate == 0) {
-    uVar10 = src1Negate[1];
-    if (uVar10 == 0) {
-      uVar7 = src1Negate[2];
-      if (uVar7 == 0) {
-        uVar6 = src1Negate[3];
-        if (uVar6 == 0) {
-          uVar11 = *src1Select;
-          if (uVar11 == 0) {
-            uVar5 = src1Select[1];
-            if (uVar5 == 1) {
+    src1Negate1 = src1Negate[1];
+    if (src1Negate1 == 0) {
+      src1Negate2 = src1Negate[2];
+      if (src1Negate2 == 0) {
+        src1Negate3 = src1Negate[3];
+        if (src1Negate3 == 0) {
+          src1SelectX = *src1Select;
+          if (src1SelectX == 0) {
+            src1Select1 = src1Select[1];
+            if (src1Select1 == 1) {
               tokenIndex = src1Select[2];
               if (tokenIndex == 2) {
-                uVar9 = src1Select[3];
-                if (uVar9 == 3) goto LAB_000676b4;
+                src1Select3 = src1Select[3];
+                if (src1Select3 == 3) goto LAB_000676b4;
               }
               else {
-                uVar9 = src1Select[3];
+                src1Select3 = src1Select[3];
               }
             }
             else {
-              uVar9 = src1Select[3];
+              src1Select3 = src1Select[3];
               tokenIndex = src1Select[2];
             }
           }
           else {
-            uVar9 = src1Select[3];
-            uVar5 = src1Select[1];
+            src1Select3 = src1Select[3];
+            src1Select1 = src1Select[1];
             tokenIndex = src1Select[2];
           }
         }
         else {
-          uVar9 = src1Select[3];
-          uVar11 = *src1Select;
-          uVar5 = src1Select[1];
+          src1Select3 = src1Select[3];
+          src1SelectX = *src1Select;
+          src1Select1 = src1Select[1];
           tokenIndex = src1Select[2];
         }
       }
       else {
-        uVar6 = src1Negate[3];
-        uVar9 = src1Select[3];
-        uVar11 = *src1Select;
-        uVar5 = src1Select[1];
+        src1Negate3 = src1Negate[3];
+        src1Select3 = src1Select[3];
+        src1SelectX = *src1Select;
+        src1Select1 = src1Select[1];
         tokenIndex = src1Select[2];
       }
     }
     else {
-      uVar6 = src1Negate[3];
-      uVar9 = src1Select[3];
-      uVar7 = src1Negate[2];
-      uVar11 = *src1Select;
-      uVar5 = src1Select[1];
+      src1Negate3 = src1Negate[3];
+      src1Select3 = src1Select[3];
+      src1Negate2 = src1Negate[2];
+      src1SelectX = *src1Select;
+      src1Select1 = src1Select[1];
       tokenIndex = src1Select[2];
     }
   }
   else {
-    uVar6 = src1Negate[3];
-    uVar9 = src1Select[3];
-    uVar10 = src1Negate[1];
-    uVar7 = src1Negate[2];
-    uVar11 = *src1Select;
-    uVar5 = src1Select[1];
+    src1Negate3 = src1Negate[3];
+    src1Select3 = src1Select[3];
+    src1Negate1 = src1Negate[1];
+    src1Negate2 = src1Negate[2];
+    src1SelectX = *src1Select;
+    src1Select1 = src1Select[1];
     tokenIndex = src1Select[2];
   }
   src1Header = src1Header | 0x400000;
-  src1SwizzleWord = (uVar6 & 1) << 0xf |
-           (uVar9 & 7) << 0xc |
-           (uVar7 & 1) << 0xb |
+  src1SwizzleWord = (src1Negate3 & 1) << 0xf |
+           (src1Select3 & 7) << 0xc |
+           (src1Negate2 & 1) << 0xb |
            (tokenIndex & 7) << 8 |
-           (uVar10 & 1) << 7 | (uVar5 & 7) << 4 | (*src1Negate & 1) << 3 | uVar11 & 7;
+           (src1Negate1 & 1) << 7 | (src1Select1 & 7) << 4 | (*src1Negate & 1) << 3 | src1SelectX & 7;
 LAB_000676b4:
   tokenIndex = *tokenCount;
-  iVar16 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar16 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(undefined4 *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = 3;
+  *(undefined4 *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = 3;
   tokenIndex = *tokenCount + 1;
   *tokenCount = tokenIndex;
-  iVar16 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar16 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = dstHeader;
+  *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = dstHeader;
   tokenIndex = *tokenCount + 1;
   *tokenCount = tokenIndex;
   if ((dstHeader & 0x400000) != 0) {
-    iVar16 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar16 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       tokenIndex = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = dstMaskWord;
+    *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = dstMaskWord;
     tokenIndex = *tokenCount + 1;
     *tokenCount = tokenIndex;
   }
-  iVar16 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar16 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = src0Header;
+  *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = src0Header;
   dstHeader = *tokenCount + 1;
   *tokenCount = dstHeader;
   if ((src0Header & 0x400000) != 0) {
-    iVar16 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= dstHeader) {
-      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar16 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= dstHeader) {
+      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       dstHeader = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(dstHeader * 4 + *(int *)(ctx + 0x75c)) = src0SwizzleWord;
+    *(uint *)(dstHeader * 4 + *(int *)(ctx + ARB_tokenBuffer)) = src0SwizzleWord;
     dstHeader = *tokenCount + 1;
     *tokenCount = dstHeader;
   }
-  iVar16 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= dstHeader) {
-    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar16 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= dstHeader) {
+    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     dstHeader = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(dstHeader * 4 + *(int *)(ctx + 0x75c)) = src1Header;
+  *(uint *)(dstHeader * 4 + *(int *)(ctx + ARB_tokenBuffer)) = src1Header;
   dstHeader = *tokenCount + 1;
   *tokenCount = dstHeader;
   if ((src1Header & 0x400000) != 0) {
-    iVar16 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= dstHeader) {
-      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar16 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= dstHeader) {
+      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       dstHeader = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(dstHeader * 4 + *(int *)(ctx + 0x75c)) = src1SwizzleWord;
+    *(uint *)(dstHeader * 4 + *(int *)(ctx + ARB_tokenBuffer)) = src1SwizzleWord;
     *tokenCount = *tokenCount + 1;
   }
   return;
 }
 
 /* FUN_00067ac0 @ 0x67ac0 (2516 bytes) */
-int FUN_00067ac0(ctx, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12, param_13, param_14, param_15, param_16)
+int FUN_00067ac0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate, src2File, src2Index, src2Select, src2Negate)
   int ctx;
-  uint param_2;
-  uint param_3;
-  int *param_4;
-  uint param_5;
-  uint param_6;
-  uint *param_7;
-  uint *param_8;
-  uint param_9;
-  uint param_10;
-  uint *param_11;
-  uint *param_12;
-  uint param_13;
-  uint param_14;
-  uint *param_15;
-  uint *param_16;
+  uint dstFile;
+  uint dstIndex;
+  int *dstMask;
+  uint src0File;
+  uint src0Index;
+  uint *src0Select;
+  uint *src0Negate;
+  uint src1File;
+  uint src1Index;
+  uint *src1Select;
+  uint *src1Negate;
+  uint src2File;
+  uint src2Index;
+  uint *src2Select;
+  uint *src2Negate;
 {
+  uint instrCountPtrValue;
   uint uVar1;
   int iVar2;
   uint uVar3;
@@ -6797,416 +6813,430 @@ int FUN_00067ac0(ctx, param_2, param_3, param_4, param_5, param_6, param_7, para
   int allocator;
   uint *instrCountPtr;
   
-  uVar13 = (param_2 & 0x3f) << 0x10 | param_3 & 0xffff;
-  instrCountPtr = (uint *)(ctx + 0x754);
+  uVar13 = (dstFile & 0x3f) << 0x10 | dstIndex & 0xffff;
+  instrCountPtr = (uint *)(ctx + ARB_tokenCount);
   uVar16 = 0;
   uVar17 = 0;
   uVar18 = 0;
   uVar15 = 0;
-  if ((param_2 == 0x12) || (param_2 == 0x13)) {
+  if ((dstFile == 0x12) || (dstFile == 0x13)) {
     uVar13 = uVar13 | 0x400000;
     uVar15 = 0x55;
   }
-  if (*param_4 == 0) {
-    allocator = param_4[3];
-    iVar8 = param_4[1];
-    iVar2 = param_4[2];
+  if (*dstMask == 0) {
+    allocator = dstMask[3];
+    iVar8 = dstMask[1];
+    iVar2 = dstMask[2];
 LAB_00067bc0:
     uVar13 = uVar13 | 0x400000;
     uVar15 = (uint)(allocator != 0) * 0x40 |
-             (uint)(iVar2 != 0) * 0x10 | (uint)(iVar8 != 0) * 4 | (uint)(*param_4 != 0);
+             (uint)(iVar2 != 0) * 0x10 | (uint)(iVar8 != 0) * 4 | (uint)(*dstMask != 0);
   }
   else {
-    iVar8 = param_4[1];
+    iVar8 = dstMask[1];
     if (iVar8 == 0) {
-      allocator = param_4[3];
-      iVar2 = param_4[2];
+      allocator = dstMask[3];
+      iVar2 = dstMask[2];
       goto LAB_00067bc0;
     }
-    iVar2 = param_4[2];
+    iVar2 = dstMask[2];
     if (iVar2 == 0) {
-      allocator = param_4[3];
+      allocator = dstMask[3];
       goto LAB_00067bc0;
     }
-    if (param_4[3] == 0) {
+    if (dstMask[3] == 0) {
       allocator = 0;
       goto LAB_00067bc0;
     }
   }
-  uVar14 = (param_5 & 0x3f) << 0x10 | param_6 & 0xffff;
-  if (*param_8 == 0) {
-    uVar7 = param_8[1];
+  uVar14 = (src0File & 0x3f) << 0x10 | src0Index & 0xffff;
+  if (*src0Negate == 0) {
+    uVar7 = src0Negate[1];
     if (uVar7 != 0) {
-      uVar5 = param_8[3];
-      uVar9 = param_7[3];
-      uVar6 = param_8[2];
-      uVar10 = *param_7;
-      uVar3 = param_7[1];
-      uVar1 = param_7[2];
+      uVar5 = src0Negate[3];
+      uVar9 = src0Select[3];
+      uVar6 = src0Negate[2];
+      uVar10 = *src0Select;
+      uVar3 = src0Select[1];
+      uVar1 = src0Select[2];
       goto LAB_00067d10;
     }
-    uVar6 = param_8[2];
+    uVar6 = src0Negate[2];
     if (uVar6 != 0) {
-      uVar5 = param_8[3];
-      uVar9 = param_7[3];
-      uVar10 = *param_7;
-      uVar3 = param_7[1];
-      uVar1 = param_7[2];
+      uVar5 = src0Negate[3];
+      uVar9 = src0Select[3];
+      uVar10 = *src0Select;
+      uVar3 = src0Select[1];
+      uVar1 = src0Select[2];
       goto LAB_00067d10;
     }
-    uVar5 = param_8[3];
+    uVar5 = src0Negate[3];
     if (uVar5 != 0) {
-      uVar9 = param_7[3];
-      uVar10 = *param_7;
-      uVar3 = param_7[1];
-      uVar1 = param_7[2];
+      uVar9 = src0Select[3];
+      uVar10 = *src0Select;
+      uVar3 = src0Select[1];
+      uVar1 = src0Select[2];
       goto LAB_00067d10;
     }
-    uVar10 = *param_7;
+    uVar10 = *src0Select;
     if (uVar10 != 0) {
-      uVar9 = param_7[3];
-      uVar3 = param_7[1];
-      uVar1 = param_7[2];
+      uVar9 = src0Select[3];
+      uVar3 = src0Select[1];
+      uVar1 = src0Select[2];
       goto LAB_00067d10;
     }
-    uVar3 = param_7[1];
+    uVar3 = src0Select[1];
     if (uVar3 != 1) {
-      uVar9 = param_7[3];
-      uVar1 = param_7[2];
+      uVar9 = src0Select[3];
+      uVar1 = src0Select[2];
       goto LAB_00067d10;
     }
-    uVar1 = param_7[2];
+    uVar1 = src0Select[2];
     if (uVar1 != 2) {
-      uVar9 = param_7[3];
+      uVar9 = src0Select[3];
       goto LAB_00067d10;
     }
-    uVar9 = param_7[3];
+    uVar9 = src0Select[3];
     if (uVar9 != 3) goto LAB_00067d10;
   }
   else {
-    uVar5 = param_8[3];
-    uVar9 = param_7[3];
-    uVar7 = param_8[1];
-    uVar6 = param_8[2];
-    uVar10 = *param_7;
-    uVar3 = param_7[1];
-    uVar1 = param_7[2];
+    uVar5 = src0Negate[3];
+    uVar9 = src0Select[3];
+    uVar7 = src0Negate[1];
+    uVar6 = src0Negate[2];
+    uVar10 = *src0Select;
+    uVar3 = src0Select[1];
+    uVar1 = src0Select[2];
 LAB_00067d10:
     uVar14 = uVar14 | 0x400000;
     uVar18 = (uVar5 & 1) << 0xf |
              (uVar9 & 7) << 0xc |
              (uVar6 & 1) << 0xb |
              (uVar1 & 7) << 8 |
-             (uVar7 & 1) << 7 | (uVar3 & 7) << 4 | (*param_8 & 1) << 3 | uVar10 & 7;
+             (uVar7 & 1) << 7 | (uVar3 & 7) << 4 | (*src0Negate & 1) << 3 | uVar10 & 7;
   }
-  uVar1 = (param_9 & 0x3f) << 0x10 | param_10 & 0xffff;
-  if (*param_12 == 0) {
-    uVar10 = param_12[1];
+  uVar1 = (src1File & 0x3f) << 0x10 | src1Index & 0xffff;
+  if (*src1Negate == 0) {
+    uVar10 = src1Negate[1];
     if (uVar10 != 0) {
-      uVar6 = param_12[3];
-      uVar9 = param_11[3];
-      uVar7 = param_12[2];
-      uVar11 = *param_11;
-      uVar5 = param_11[1];
-      uVar3 = param_11[2];
+      uVar6 = src1Negate[3];
+      uVar9 = src1Select[3];
+      uVar7 = src1Negate[2];
+      uVar11 = *src1Select;
+      uVar5 = src1Select[1];
+      uVar3 = src1Select[2];
       goto LAB_00067e40;
     }
-    uVar7 = param_12[2];
+    uVar7 = src1Negate[2];
     if (uVar7 != 0) {
-      uVar6 = param_12[3];
-      uVar9 = param_11[3];
-      uVar11 = *param_11;
-      uVar5 = param_11[1];
-      uVar3 = param_11[2];
+      uVar6 = src1Negate[3];
+      uVar9 = src1Select[3];
+      uVar11 = *src1Select;
+      uVar5 = src1Select[1];
+      uVar3 = src1Select[2];
       goto LAB_00067e40;
     }
-    uVar6 = param_12[3];
+    uVar6 = src1Negate[3];
     if (uVar6 != 0) {
-      uVar9 = param_11[3];
-      uVar11 = *param_11;
-      uVar5 = param_11[1];
-      uVar3 = param_11[2];
+      uVar9 = src1Select[3];
+      uVar11 = *src1Select;
+      uVar5 = src1Select[1];
+      uVar3 = src1Select[2];
       goto LAB_00067e40;
     }
-    uVar11 = *param_11;
+    uVar11 = *src1Select;
     if (uVar11 != 0) {
-      uVar9 = param_11[3];
-      uVar5 = param_11[1];
-      uVar3 = param_11[2];
+      uVar9 = src1Select[3];
+      uVar5 = src1Select[1];
+      uVar3 = src1Select[2];
       goto LAB_00067e40;
     }
-    uVar5 = param_11[1];
+    uVar5 = src1Select[1];
     if (uVar5 != 1) {
-      uVar9 = param_11[3];
-      uVar3 = param_11[2];
+      uVar9 = src1Select[3];
+      uVar3 = src1Select[2];
       goto LAB_00067e40;
     }
-    uVar3 = param_11[2];
+    uVar3 = src1Select[2];
     if (uVar3 != 2) {
-      uVar9 = param_11[3];
+      uVar9 = src1Select[3];
       goto LAB_00067e40;
     }
-    uVar9 = param_11[3];
+    uVar9 = src1Select[3];
     if (uVar9 != 3) goto LAB_00067e40;
   }
   else {
-    uVar6 = param_12[3];
-    uVar9 = param_11[3];
-    uVar10 = param_12[1];
-    uVar7 = param_12[2];
-    uVar11 = *param_11;
-    uVar5 = param_11[1];
-    uVar3 = param_11[2];
+    uVar6 = src1Negate[3];
+    uVar9 = src1Select[3];
+    uVar10 = src1Negate[1];
+    uVar7 = src1Negate[2];
+    uVar11 = *src1Select;
+    uVar5 = src1Select[1];
+    uVar3 = src1Select[2];
 LAB_00067e40:
     uVar1 = uVar1 | 0x400000;
     uVar17 = (uVar6 & 1) << 0xf |
              (uVar9 & 7) << 0xc |
              (uVar7 & 1) << 0xb |
              (uVar3 & 7) << 8 |
-             (uVar10 & 1) << 7 | (uVar5 & 7) << 4 | (*param_12 & 1) << 3 | uVar11 & 7;
+             (uVar10 & 1) << 7 | (uVar5 & 7) << 4 | (*src1Negate & 1) << 3 | uVar11 & 7;
   }
-  uVar3 = (param_13 & 0x3f) << 0x10 | param_14 & 0xffff;
-  if (*param_16 == 0) {
-    uVar11 = param_16[1];
+  uVar3 = (src2File & 0x3f) << 0x10 | src2Index & 0xffff;
+  if (*src2Negate == 0) {
+    uVar11 = src2Negate[1];
     if (uVar11 == 0) {
-      uVar9 = param_16[2];
+      uVar9 = src2Negate[2];
       if (uVar9 == 0) {
-        uVar7 = param_16[3];
+        uVar7 = src2Negate[3];
         if (uVar7 == 0) {
-          uVar12 = *param_15;
+          uVar12 = *src2Select;
           if (uVar12 == 0) {
-            uVar6 = param_15[1];
+            uVar6 = src2Select[1];
             if (uVar6 == 1) {
-              uVar5 = param_15[2];
+              uVar5 = src2Select[2];
               if (uVar5 == 2) {
-                uVar10 = param_15[3];
+                uVar10 = src2Select[3];
                 if (uVar10 == 3) goto LAB_00067f94;
               }
               else {
-                uVar10 = param_15[3];
+                uVar10 = src2Select[3];
               }
             }
             else {
-              uVar10 = param_15[3];
-              uVar5 = param_15[2];
+              uVar10 = src2Select[3];
+              uVar5 = src2Select[2];
             }
           }
           else {
-            uVar10 = param_15[3];
-            uVar6 = param_15[1];
-            uVar5 = param_15[2];
+            uVar10 = src2Select[3];
+            uVar6 = src2Select[1];
+            uVar5 = src2Select[2];
           }
         }
         else {
-          uVar10 = param_15[3];
-          uVar12 = *param_15;
-          uVar6 = param_15[1];
-          uVar5 = param_15[2];
+          uVar10 = src2Select[3];
+          uVar12 = *src2Select;
+          uVar6 = src2Select[1];
+          uVar5 = src2Select[2];
         }
       }
       else {
-        uVar7 = param_16[3];
-        uVar10 = param_15[3];
-        uVar12 = *param_15;
-        uVar6 = param_15[1];
-        uVar5 = param_15[2];
+        uVar7 = src2Negate[3];
+        uVar10 = src2Select[3];
+        uVar12 = *src2Select;
+        uVar6 = src2Select[1];
+        uVar5 = src2Select[2];
       }
     }
     else {
-      uVar7 = param_16[3];
-      uVar10 = param_15[3];
-      uVar9 = param_16[2];
-      uVar12 = *param_15;
-      uVar6 = param_15[1];
-      uVar5 = param_15[2];
+      uVar7 = src2Negate[3];
+      uVar10 = src2Select[3];
+      uVar9 = src2Negate[2];
+      uVar12 = *src2Select;
+      uVar6 = src2Select[1];
+      uVar5 = src2Select[2];
     }
   }
   else {
-    uVar7 = param_16[3];
-    uVar10 = param_15[3];
-    uVar11 = param_16[1];
-    uVar9 = param_16[2];
-    uVar12 = *param_15;
-    uVar6 = param_15[1];
-    uVar5 = param_15[2];
+    uVar7 = src2Negate[3];
+    uVar10 = src2Select[3];
+    uVar11 = src2Negate[1];
+    uVar9 = src2Negate[2];
+    uVar12 = *src2Select;
+    uVar6 = src2Select[1];
+    uVar5 = src2Select[2];
   }
   uVar3 = uVar3 | 0x400000;
   uVar16 = (uVar7 & 1) << 0xf |
            (uVar10 & 7) << 0xc |
            (uVar9 & 1) << 0xb |
            (uVar5 & 7) << 8 |
-           (uVar11 & 1) << 7 | (uVar6 & 7) << 4 | (*param_16 & 1) << 3 | uVar12 & 7;
+           (uVar11 & 1) << 7 | (uVar6 & 7) << 4 | (*src2Negate & 1) << 3 | uVar12 & 7;
 LAB_00067f94:
-  uVar5 = *instrCountPtr;
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= uVar5) {
-    uVar4 = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  instrCountPtrValue = *instrCountPtr;
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrCountPtrValue) {
+    uVar4 = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(uVar4,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = uVar4;
-    uVar5 = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = uVar4;
+    instrCountPtrValue = *instrCountPtr;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(undefined4 *)(uVar5 * 4 + *(int *)(ctx + 0x75c)) = 0x40;
+  *(undefined4 *)(instrCountPtrValue * 4 + *(int *)(ctx + ARB_tokenBuffer)) = 0x40;
   uVar5 = *instrCountPtr + 1;
   *instrCountPtr = uVar5;
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= uVar5) {
-    uVar4 = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= uVar5) {
+    uVar4 = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(uVar4,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = uVar4;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = uVar4;
     uVar5 = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(uVar5 * 4 + *(int *)(ctx + 0x75c)) = uVar13;
+  *(uint *)(uVar5 * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar13;
   uVar5 = *instrCountPtr + 1;
   *instrCountPtr = uVar5;
   if ((uVar13 & 0x400000) != 0) {
-    allocator = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= uVar5) {
-      uVar4 = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(uVar4,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    allocator = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= uVar5) {
+      uVar4 = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(uVar4,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = uVar4;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = uVar4;
       uVar5 = *instrCountPtr;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(uVar5 * 4 + *(int *)(ctx + 0x75c)) = uVar15;
+    *(uint *)(uVar5 * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar15;
     uVar5 = *instrCountPtr + 1;
     *instrCountPtr = uVar5;
   }
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= uVar5) {
-    uVar4 = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= uVar5) {
+    uVar4 = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(uVar4,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = uVar4;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = uVar4;
     uVar5 = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(uVar5 * 4 + *(int *)(ctx + 0x75c)) = uVar14;
+  *(uint *)(uVar5 * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar14;
   uVar13 = *instrCountPtr + 1;
   *instrCountPtr = uVar13;
   if ((uVar14 & 0x400000) != 0) {
-    allocator = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= uVar13) {
-      uVar4 = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(uVar4,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    allocator = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= uVar13) {
+      uVar4 = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(uVar4,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = uVar4;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = uVar4;
       uVar13 = *instrCountPtr;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(uVar13 * 4 + *(int *)(ctx + 0x75c)) = uVar18;
+    *(uint *)(uVar13 * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar18;
     uVar13 = *instrCountPtr + 1;
     *instrCountPtr = uVar13;
   }
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= uVar13) {
-    uVar4 = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= uVar13) {
+    uVar4 = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(uVar4,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = uVar4;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = uVar4;
     uVar13 = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(uVar13 * 4 + *(int *)(ctx + 0x75c)) = uVar1;
+  *(uint *)(uVar13 * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar1;
   uVar13 = *instrCountPtr + 1;
   *instrCountPtr = uVar13;
   if ((uVar1 & 0x400000) != 0) {
-    allocator = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= uVar13) {
-      uVar4 = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(uVar4,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    allocator = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= uVar13) {
+      uVar4 = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(uVar4,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = uVar4;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = uVar4;
       uVar13 = *instrCountPtr;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(uVar13 * 4 + *(int *)(ctx + 0x75c)) = uVar17;
+    *(uint *)(uVar13 * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar17;
     uVar13 = *instrCountPtr + 1;
     *instrCountPtr = uVar13;
   }
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= uVar13) {
-    uVar4 = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(uVar4,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= uVar13) {
+    uVar4 = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(uVar4,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = uVar4;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = uVar4;
     uVar13 = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(uVar13 * 4 + *(int *)(ctx + 0x75c)) = uVar3;
+  *(uint *)(uVar13 * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar3;
   uVar13 = *instrCountPtr + 1;
   *instrCountPtr = uVar13;
   if ((uVar3 & 0x400000) != 0) {
-    allocator = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= uVar13) {
-      uVar4 = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(uVar4,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    allocator = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= uVar13) {
+      uVar4 = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(uVar4,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = uVar4;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = uVar4;
       uVar13 = *instrCountPtr;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(uVar13 * 4 + *(int *)(ctx + 0x75c)) = uVar16;
+    *(uint *)(uVar13 * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar16;
     *instrCountPtr = *instrCountPtr + 1;
   }
   return;
 }
 
 /* FUN_000684c0 @ 0x684c0 (3632 bytes) */
-int FUN_000684c0(ctx, param_2, param_3, param_4, param_5, param_6, src0Words, src0Flags, param_9, param_10, src1Words, src1Flags, param_13, param_14, src2Words, src2Flags)
+int FUN_000684c0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Words, src0Flags, src1File, src1Index, src1Words, src1Flags, src2File, src2Index, src2Words, src2Flags)
   int ctx;
-  uint param_2;
-  uint param_3;
-  int *param_4;
-  uint param_5;
-  uint param_6;
+  uint dstFile;
+  uint dstIndex;
+  int *dstMask;
+  uint src0File;
+  uint src0Index;
   uint *src0Words;
   uint *src0Flags;
-  uint param_9;
-  uint param_10;
+  uint src1File;
+  uint src1Index;
   uint *src1Words;
   uint *src1Flags;
-  uint param_13;
-  uint param_14;
+  uint src2File;
+  uint src2Index;
   uint *src2Words;
   uint *src2Flags;
 {
+  uint src2Words2;
+  uint src1Words1;
+  uint src2Words3;
+  uint src1Words2;
+  uint src2Flags1;
+  uint src1Words3;
+  uint src2Flags3;
+  uint src1Flags1;
+  uint src1Flags3;
+  uint src0Words1;
+  uint src2Flags2;
+  uint src2Words1;
+  uint src1Flags2;
+  uint src0Words2;
   uint uVar1;
   int iVar2;
   uint uVar3;
   undefined4 newBuffer;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
+  uint src0Flags3;
+  uint src0Flags2;
+  uint src0Flags1;
   int iVar8;
-  uint uVar9;
+  uint src0Words3;
   uint uVar10;
   uint instrWord;
-  uint uVar12;
-  uint uVar13;
-  uint uVar14;
+  uint src0WordsValue;
+  uint src1WordsValue;
+  uint src2WordsValue;
   uint uVar15;
   uint uVar16;
   uint uVar17;
@@ -7220,69 +7250,69 @@ int FUN_000684c0(ctx, param_2, param_3, param_4, param_5, param_6, src0Words, sr
   uint uStack_84;
   uint uStack_58;
   
-  instrCountPtr = (uint *)(ctx + 0x754);
+  instrCountPtr = (uint *)(ctx + ARB_tokenCount);
   uVar17 = 0;
   uVar16 = 0;
   uVar18 = 0;
   uVar15 = 0;
-  uStack0000001c = param_2;
-  uStack00000020 = param_3;
-  (**(code **)(ctx + 0x748))(ctx,0,auStack_88,param_4,param_5,param_6,src0Words,src0Flags);
+  uStack0000001c = dstFile;
+  uStack00000020 = dstIndex;
+  (**(code **)(ctx + 0x748))(ctx,0,auStack_88,dstMask,src0File,src0Index,src0Words,src0Flags);
   instrWord = uStack_84 & 0xffff;
   uStack_58 = 3;
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= *(uint *)(ctx + 0x754)) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*(int *)(ctx + 0x754) << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= *(uint *)(ctx + ARB_tokenCount)) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*(int *)(ctx + ARB_tokenCount) << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(*instrCountPtr * 4 + *(int *)(ctx + 0x75c)) = uStack_58;
+  *(uint *)(*instrCountPtr * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uStack_58;
   uVar10 = *instrCountPtr + 1;
   *instrCountPtr = uVar10;
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= uVar10) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= uVar10) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     uVar10 = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(uVar10 * 4 + *(int *)(ctx + 0x75c)) = instrWord | 0x40000;
+  *(uint *)(uVar10 * 4 + *(int *)(ctx + ARB_tokenBuffer)) = instrWord | 0x40000;
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = (param_5 & 0x3f) << 0x10 | param_6 & 0xffff;
+  *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = (src0File & 0x3f) << 0x10 | src0Index & 0xffff;
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = (param_5 & 0x3f) << 0x10 | param_6 & 0xffff;
+  *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = (src0File & 0x3f) << 0x10 | src0Index & 0xffff;
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
   uStack_58 = uStack_58 & 0xffff0000 | 0x40;
@@ -7291,396 +7321,415 @@ int FUN_000684c0(ctx, param_2, param_3, param_4, param_5, param_6, src0Words, sr
     uVar10 = uVar10 | 0x400000;
     uVar15 = 0x55;
   }
-  if (*param_4 == 0) {
-    allocator = param_4[3];
-    iVar8 = param_4[1];
-    iVar2 = param_4[2];
+  if (*dstMask == 0) {
+    allocator = dstMask[3];
+    iVar8 = dstMask[1];
+    iVar2 = dstMask[2];
 LAB_00068a20:
     uVar10 = uVar10 | 0x400000;
     uVar15 = (uint)(allocator != 0) * 0x40 |
-             (uint)(iVar2 != 0) * 0x10 | (uint)(iVar8 != 0) * 4 | (uint)(*param_4 != 0);
+             (uint)(iVar2 != 0) * 0x10 | (uint)(iVar8 != 0) * 4 | (uint)(*dstMask != 0);
   }
   else {
-    iVar8 = param_4[1];
+    iVar8 = dstMask[1];
     if (iVar8 == 0) {
-      allocator = param_4[3];
-      iVar2 = param_4[2];
+      allocator = dstMask[3];
+      iVar2 = dstMask[2];
       goto LAB_00068a20;
     }
-    iVar2 = param_4[2];
+    iVar2 = dstMask[2];
     if (iVar2 == 0) {
-      allocator = param_4[3];
+      allocator = dstMask[3];
       goto LAB_00068a20;
     }
-    if (param_4[3] == 0) {
+    if (dstMask[3] == 0) {
       allocator = 0;
       goto LAB_00068a20;
     }
   }
-  uVar19 = (param_5 & 0x3f) << 0x10 | uStack_84 & 0xffff;
+  uVar19 = (src0File & 0x3f) << 0x10 | uStack_84 & 0xffff;
   if (*src0Flags == 0) {
-    uVar7 = src0Flags[1];
-    if (uVar7 != 0) {
-      uVar5 = src0Flags[3];
-      uVar9 = src0Words[3];
-      uVar6 = src0Flags[2];
-      uVar12 = *src0Words;
-      uVar3 = src0Words[1];
-      uVar1 = src0Words[2];
+    src0Flags1 = src0Flags[1];
+    if (src0Flags1 != 0) {
+      src0Flags3 = src0Flags[3];
+      src0Words3 = src0Words[3];
+      src0Flags2 = src0Flags[2];
+      src0WordsValue = *src0Words;
+      src0Words1 = src0Words[1];
+      src0Words2 = src0Words[2];
       goto LAB_00068b70;
     }
-    uVar6 = src0Flags[2];
-    if (uVar6 != 0) {
-      uVar5 = src0Flags[3];
-      uVar9 = src0Words[3];
-      uVar12 = *src0Words;
-      uVar3 = src0Words[1];
-      uVar1 = src0Words[2];
+    src0Flags2 = src0Flags[2];
+    if (src0Flags2 != 0) {
+      src0Flags3 = src0Flags[3];
+      src0Words3 = src0Words[3];
+      src0WordsValue = *src0Words;
+      src0Words1 = src0Words[1];
+      src0Words2 = src0Words[2];
       goto LAB_00068b70;
     }
-    uVar5 = src0Flags[3];
-    if (uVar5 != 0) {
-      uVar9 = src0Words[3];
-      uVar12 = *src0Words;
-      uVar3 = src0Words[1];
-      uVar1 = src0Words[2];
+    src0Flags3 = src0Flags[3];
+    if (src0Flags3 != 0) {
+      src0Words3 = src0Words[3];
+      src0WordsValue = *src0Words;
+      src0Words1 = src0Words[1];
+      src0Words2 = src0Words[2];
       goto LAB_00068b70;
     }
-    uVar12 = *src0Words;
-    if (uVar12 != 0) {
-      uVar9 = src0Words[3];
-      uVar3 = src0Words[1];
-      uVar1 = src0Words[2];
+    src0WordsValue = *src0Words;
+    if (src0WordsValue != 0) {
+      src0Words3 = src0Words[3];
+      src0Words1 = src0Words[1];
+      src0Words2 = src0Words[2];
       goto LAB_00068b70;
     }
-    uVar3 = src0Words[1];
-    if (uVar3 != 1) {
-      uVar9 = src0Words[3];
-      uVar1 = src0Words[2];
+    src0Words1 = src0Words[1];
+    if (src0Words1 != 1) {
+      src0Words3 = src0Words[3];
+      src0Words2 = src0Words[2];
       goto LAB_00068b70;
     }
-    uVar1 = src0Words[2];
-    if (uVar1 != 2) {
-      uVar9 = src0Words[3];
+    src0Words2 = src0Words[2];
+    if (src0Words2 != 2) {
+      src0Words3 = src0Words[3];
       goto LAB_00068b70;
     }
-    uVar9 = src0Words[3];
-    if (uVar9 != 3) goto LAB_00068b70;
+    src0Words3 = src0Words[3];
+    if (src0Words3 != 3) goto LAB_00068b70;
   }
   else {
-    uVar5 = src0Flags[3];
-    uVar9 = src0Words[3];
-    uVar7 = src0Flags[1];
-    uVar6 = src0Flags[2];
-    uVar12 = *src0Words;
-    uVar3 = src0Words[1];
-    uVar1 = src0Words[2];
+    src0Flags3 = src0Flags[3];
+    src0Words3 = src0Words[3];
+    src0Flags1 = src0Flags[1];
+    src0Flags2 = src0Flags[2];
+    src0WordsValue = *src0Words;
+    src0Words1 = src0Words[1];
+    src0Words2 = src0Words[2];
 LAB_00068b70:
     uVar19 = uVar19 | 0x400000;
-    uVar18 = (uVar5 & 1) << 0xf |
-             (uVar9 & 7) << 0xc |
-             (uVar6 & 1) << 0xb |
-             (uVar1 & 7) << 8 |
-             (uVar7 & 1) << 7 | (uVar3 & 7) << 4 | (*src0Flags & 1) << 3 | uVar12 & 7;
+    uVar18 = (src0Flags3 & 1) << 0xf |
+             (src0Words3 & 7) << 0xc |
+             (src0Flags2 & 1) << 0xb |
+             (src0Words2 & 7) << 8 |
+             (src0Flags1 & 1) << 7 | (src0Words1 & 7) << 4 | (*src0Flags & 1) << 3 | src0WordsValue & 7;
   }
-  uVar1 = (param_9 & 0x3f) << 0x10 | param_10 & 0xffff;
+  uVar1 = (src1File & 0x3f) << 0x10 | src1Index & 0xffff;
   if (*src1Flags == 0) {
-    uVar5 = src1Flags[1];
-    if (uVar5 != 0) {
-      uVar6 = src1Words[3];
-      uVar3 = src1Flags[3];
+    src1Flags1 = src1Flags[1];
+    if (src1Flags1 != 0) {
+      src1Words3 = src1Words[3];
+      src1Flags3 = src1Flags[3];
       goto LAB_00068c4c;
     }
-    uVar12 = src1Flags[2];
-    if (uVar12 != 0) {
-      uVar6 = src1Words[3];
-      uVar13 = *src1Words;
-      uVar7 = src1Words[2];
-      uVar3 = src1Flags[3];
-      uVar9 = src1Words[1];
+    src1Flags2 = src1Flags[2];
+    if (src1Flags2 != 0) {
+      src1Words3 = src1Words[3];
+      src1WordsValue = *src1Words;
+      src1Words2 = src1Words[2];
+      src1Flags3 = src1Flags[3];
+      src1Words1 = src1Words[1];
       goto LAB_00068cb0;
     }
-    uVar3 = src1Flags[3];
-    if (uVar3 != 0) {
-      uVar6 = src1Words[3];
-      uVar13 = *src1Words;
-      uVar9 = src1Words[1];
-      uVar7 = src1Words[2];
+    src1Flags3 = src1Flags[3];
+    if (src1Flags3 != 0) {
+      src1Words3 = src1Words[3];
+      src1WordsValue = *src1Words;
+      src1Words1 = src1Words[1];
+      src1Words2 = src1Words[2];
       goto LAB_00068cb0;
     }
-    uVar13 = *src1Words;
-    if (uVar13 != 0) {
-      uVar6 = src1Words[3];
-      uVar9 = src1Words[1];
-      uVar7 = src1Words[2];
+    src1WordsValue = *src1Words;
+    if (src1WordsValue != 0) {
+      src1Words3 = src1Words[3];
+      src1Words1 = src1Words[1];
+      src1Words2 = src1Words[2];
       goto LAB_00068cb0;
     }
-    uVar9 = src1Words[1];
-    if (uVar9 != 1) {
-      uVar6 = src1Words[3];
-      uVar7 = src1Words[2];
+    src1Words1 = src1Words[1];
+    if (src1Words1 != 1) {
+      src1Words3 = src1Words[3];
+      src1Words2 = src1Words[2];
       goto LAB_00068cb0;
     }
-    uVar7 = src1Words[2];
-    if (uVar7 != 2) {
-      uVar6 = src1Words[3];
+    src1Words2 = src1Words[2];
+    if (src1Words2 != 2) {
+      src1Words3 = src1Words[3];
       goto LAB_00068cb0;
     }
-    uVar6 = src1Words[3];
-    if (uVar6 != 3) goto LAB_00068cb0;
+    src1Words3 = src1Words[3];
+    if (src1Words3 != 3) goto LAB_00068cb0;
   }
   else {
-    uVar6 = src1Words[3];
-    uVar3 = src1Flags[3];
-    uVar5 = src1Flags[1];
+    src1Words3 = src1Words[3];
+    src1Flags3 = src1Flags[3];
+    src1Flags1 = src1Flags[1];
 LAB_00068c4c:
-    uVar12 = src1Flags[2];
-    uVar13 = *src1Words;
-    uVar9 = src1Words[1];
-    uVar7 = src1Words[2];
+    src1Flags2 = src1Flags[2];
+    src1WordsValue = *src1Words;
+    src1Words1 = src1Words[1];
+    src1Words2 = src1Words[2];
 LAB_00068cb0:
     uVar1 = uVar1 | 0x400000;
-    uVar16 = (uVar3 & 1) << 0xf |
-             (uVar6 & 7) << 0xc |
-             (uVar12 & 1) << 0xb |
-             (uVar7 & 7) << 8 |
-             (uVar5 & 1) << 7 | (uVar9 & 7) << 4 | (*src1Flags & 1) << 3 | uVar13 & 7;
+    uVar16 = (src1Flags3 & 1) << 0xf |
+             (src1Words3 & 7) << 0xc |
+             (src1Flags2 & 1) << 0xb |
+             (src1Words2 & 7) << 8 |
+             (src1Flags1 & 1) << 7 | (src1Words1 & 7) << 4 | (*src1Flags & 1) << 3 | src1WordsValue & 7;
   }
-  uVar3 = (param_13 & 0x3f) << 0x10 | param_14 & 0xffff;
+  uVar3 = (src2File & 0x3f) << 0x10 | src2Index & 0xffff;
   if (*src2Flags == 0) {
-    uVar6 = src2Flags[1];
-    if (uVar6 != 0) {
-      uVar7 = src2Words[3];
-      uVar5 = src2Flags[3];
+    src2Flags1 = src2Flags[1];
+    if (src2Flags1 != 0) {
+      src2Words3 = src2Words[3];
+      src2Flags3 = src2Flags[3];
       goto LAB_00068d8c;
     }
-    uVar13 = src2Flags[2];
-    if (uVar13 == 0) {
-      uVar5 = src2Flags[3];
-      if (uVar5 == 0) {
-        uVar14 = *src2Words;
-        if (uVar14 == 0) {
-          uVar12 = src2Words[1];
-          if (uVar12 == 1) {
-            uVar9 = src2Words[2];
-            if (uVar9 == 2) {
-              uVar7 = src2Words[3];
-              if (uVar7 == 3) goto LAB_00068e14;
+    src2Flags2 = src2Flags[2];
+    if (src2Flags2 == 0) {
+      src2Flags3 = src2Flags[3];
+      if (src2Flags3 == 0) {
+        src2WordsValue = *src2Words;
+        if (src2WordsValue == 0) {
+          src2Words1 = src2Words[1];
+          if (src2Words1 == 1) {
+            src2Words2 = src2Words[2];
+            if (src2Words2 == 2) {
+              src2Words3 = src2Words[3];
+              if (src2Words3 == 3) goto LAB_00068e14;
             }
             else {
-              uVar7 = src2Words[3];
+              src2Words3 = src2Words[3];
             }
           }
           else {
-            uVar7 = src2Words[3];
-            uVar9 = src2Words[2];
+            src2Words3 = src2Words[3];
+            src2Words2 = src2Words[2];
           }
         }
         else {
-          uVar7 = src2Words[3];
-          uVar12 = src2Words[1];
-          uVar9 = src2Words[2];
+          src2Words3 = src2Words[3];
+          src2Words1 = src2Words[1];
+          src2Words2 = src2Words[2];
         }
       }
       else {
-        uVar7 = src2Words[3];
-        uVar14 = *src2Words;
-        uVar12 = src2Words[1];
-        uVar9 = src2Words[2];
+        src2Words3 = src2Words[3];
+        src2WordsValue = *src2Words;
+        src2Words1 = src2Words[1];
+        src2Words2 = src2Words[2];
       }
     }
     else {
-      uVar7 = src2Words[3];
-      uVar14 = *src2Words;
-      uVar9 = src2Words[2];
-      uVar5 = src2Flags[3];
-      uVar12 = src2Words[1];
+      src2Words3 = src2Words[3];
+      src2WordsValue = *src2Words;
+      src2Words2 = src2Words[2];
+      src2Flags3 = src2Flags[3];
+      src2Words1 = src2Words[1];
     }
   }
   else {
-    uVar7 = src2Words[3];
-    uVar5 = src2Flags[3];
-    uVar6 = src2Flags[1];
+    src2Words3 = src2Words[3];
+    src2Flags3 = src2Flags[3];
+    src2Flags1 = src2Flags[1];
 LAB_00068d8c:
-    uVar13 = src2Flags[2];
-    uVar14 = *src2Words;
-    uVar12 = src2Words[1];
-    uVar9 = src2Words[2];
+    src2Flags2 = src2Flags[2];
+    src2WordsValue = *src2Words;
+    src2Words1 = src2Words[1];
+    src2Words2 = src2Words[2];
   }
   uVar3 = uVar3 | 0x400000;
-  uVar17 = (uVar5 & 1) << 0xf |
-           (uVar7 & 7) << 0xc |
-           (uVar13 & 1) << 0xb |
-           (uVar9 & 7) << 8 |
-           (uVar6 & 1) << 7 | (uVar12 & 7) << 4 | (*src2Flags & 1) << 3 | uVar14 & 7;
+  uVar17 = (src2Flags3 & 1) << 0xf |
+           (src2Words3 & 7) << 0xc |
+           (src2Flags2 & 1) << 0xb |
+           (src2Words2 & 7) << 8 |
+           (src2Flags1 & 1) << 7 | (src2Words1 & 7) << 4 | (*src2Flags & 1) << 3 | src2WordsValue & 7;
 LAB_00068e14:
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uStack_58;
+  *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uStack_58;
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar10;
+  *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar10;
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
   if ((uVar10 & 0x400000) != 0) {
-    allocator = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= instrWord) {
-      newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    allocator = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+      newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newBuffer;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
       instrWord = *instrCountPtr;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar15;
+    *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar15;
     instrWord = *instrCountPtr + 1;
     *instrCountPtr = instrWord;
   }
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar19;
+  *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar19;
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
   if ((uVar19 & 0x400000) != 0) {
-    allocator = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= instrWord) {
-      newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    allocator = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+      newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newBuffer;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
       instrWord = *instrCountPtr;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar18;
+    *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar18;
     instrWord = *instrCountPtr + 1;
     *instrCountPtr = instrWord;
   }
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar1;
+  *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar1;
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
   if ((uVar1 & 0x400000) != 0) {
-    allocator = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= instrWord) {
-      newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    allocator = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+      newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newBuffer;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
       instrWord = *instrCountPtr;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar16;
+    *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar16;
     instrWord = *instrCountPtr + 1;
     *instrCountPtr = instrWord;
   }
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar3;
+  *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar3;
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
   if ((uVar3 & 0x400000) != 0) {
-    allocator = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= instrWord) {
-      newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    allocator = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+      newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newBuffer;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
       instrWord = *instrCountPtr;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar17;
+    *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar17;
     *instrCountPtr = *instrCountPtr + 1;
   }
   return;
 }
 
 /* FUN_00069330 @ 0x69330 (4280 bytes) */
-int FUN_00069330(ctx, param_2, param_3, param_4, param_5, param_6, src0Words, src0Flags, param_9, param_10, src1Words, src1Flags, param_13, param_14, src2Words, src2Flags)
+int FUN_00069330(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Words, src0Flags, src1File, src1Index, src1Words, src1Flags, src2File, src2Index, src2Words, src2Flags)
   int ctx;
-  uint param_2;
-  uint param_3;
-  int *param_4;
-  uint param_5;
-  uint param_6;
+  uint dstFile;
+  uint dstIndex;
+  int *dstMask;
+  uint src0File;
+  uint src0Index;
   uint *src0Words;
   uint *src0Flags;
-  uint param_9;
-  uint param_10;
+  uint src1File;
+  uint src1Index;
   uint *src1Words;
   uint *src1Flags;
-  uint param_13;
-  uint param_14;
+  uint src2File;
+  uint src2Index;
   uint *src2Words;
   uint *src2Flags;
 {
+  uint src2Flags2A;
+  uint src1Flags2;
+  uint src2Flags1A;
+  uint src1Flags3;
+  uint src2Flags1;
+  uint src2WordsValue;
+  uint src1Words1;
+  uint src2Flags2;
+  uint src2FlagsValueA;
+  uint instrCountPtrValue;
+  uint src1Words2;
+  uint src0Words1;
+  uint src2FlagsValue;
+  uint src2Words3;
+  uint src1Flags1;
+  uint src2Flags3A;
+  uint src1Words3;
+  uint src2Flags3;
+  uint src0Words2;
   uint uVar1;
   uint uVar2;
   int iVar3;
   undefined4 newBuffer;
   uint instrWord;
-  uint uVar6;
-  uint uVar7;
-  uint uVar8;
+  uint src0Flags3;
+  uint src0Flags2;
+  uint src0Words3;
   int iVar9;
-  uint uVar10;
-  uint uVar11;
-  uint uVar12;
+  uint src0Flags1;
+  uint src0WordsValue;
+  uint src1WordsValue;
   uint uVar13;
   uint uVar14;
   uint uVar15;
@@ -7690,468 +7739,468 @@ int FUN_00069330(ctx, param_2, param_3, param_4, param_5, param_6, src0Words, sr
   undefined1 auStack_88 [4];
   uint uStack_84;
   
-  instrCountPtr = (uint *)(ctx + 0x754);
+  instrCountPtr = (uint *)(ctx + ARB_tokenCount);
   uVar15 = 0;
   uVar13 = 0;
-  uVar14 = (param_5 & 0x3f) << 0x10 | param_6 & 0xffff;
+  uVar14 = (src0File & 0x3f) << 0x10 | src0Index & 0xffff;
   uVar16 = 0;
-  (**(code **)(ctx + 0x748))(ctx,0,auStack_88,param_4,param_5,param_6,src0Words,src0Flags);
+  (**(code **)(ctx + 0x748))(ctx,0,auStack_88,dstMask,src0File,src0Index,src0Words,src0Flags);
   instrWord = uStack_84 & 0xffff;
   if (*src0Flags == 0) {
-    uVar10 = src0Flags[1];
-    if (uVar10 != 0) {
-      uVar6 = src0Flags[3];
-      uVar8 = src0Words[3];
-      uVar7 = src0Flags[2];
-      uVar11 = *src0Words;
-      uVar2 = src0Words[1];
-      uVar1 = src0Words[2];
+    src0Flags1 = src0Flags[1];
+    if (src0Flags1 != 0) {
+      src0Flags3 = src0Flags[3];
+      src0Words3 = src0Words[3];
+      src0Flags2 = src0Flags[2];
+      src0WordsValue = *src0Words;
+      src0Words1 = src0Words[1];
+      src0Words2 = src0Words[2];
       goto LAB_000694c0;
     }
-    uVar7 = src0Flags[2];
-    if (uVar7 != 0) {
-      uVar6 = src0Flags[3];
-      uVar8 = src0Words[3];
-      uVar11 = *src0Words;
-      uVar2 = src0Words[1];
-      uVar1 = src0Words[2];
+    src0Flags2 = src0Flags[2];
+    if (src0Flags2 != 0) {
+      src0Flags3 = src0Flags[3];
+      src0Words3 = src0Words[3];
+      src0WordsValue = *src0Words;
+      src0Words1 = src0Words[1];
+      src0Words2 = src0Words[2];
       goto LAB_000694c0;
     }
-    uVar6 = src0Flags[3];
-    if (uVar6 != 0) {
-      uVar8 = src0Words[3];
-      uVar11 = *src0Words;
-      uVar2 = src0Words[1];
-      uVar1 = src0Words[2];
+    src0Flags3 = src0Flags[3];
+    if (src0Flags3 != 0) {
+      src0Words3 = src0Words[3];
+      src0WordsValue = *src0Words;
+      src0Words1 = src0Words[1];
+      src0Words2 = src0Words[2];
       goto LAB_000694c0;
     }
-    uVar11 = *src0Words;
-    if (uVar11 != 0) {
-      uVar8 = src0Words[3];
-      uVar2 = src0Words[1];
-      uVar1 = src0Words[2];
+    src0WordsValue = *src0Words;
+    if (src0WordsValue != 0) {
+      src0Words3 = src0Words[3];
+      src0Words1 = src0Words[1];
+      src0Words2 = src0Words[2];
       goto LAB_000694c0;
     }
-    uVar2 = src0Words[1];
-    if (uVar2 != 1) {
-      uVar8 = src0Words[3];
-      uVar1 = src0Words[2];
+    src0Words1 = src0Words[1];
+    if (src0Words1 != 1) {
+      src0Words3 = src0Words[3];
+      src0Words2 = src0Words[2];
       goto LAB_000694c0;
     }
-    uVar1 = src0Words[2];
-    if (uVar1 != 2) {
-      uVar8 = src0Words[3];
+    src0Words2 = src0Words[2];
+    if (src0Words2 != 2) {
+      src0Words3 = src0Words[3];
       goto LAB_000694c0;
     }
-    uVar8 = src0Words[3];
-    if (uVar8 != 3) goto LAB_000694c0;
+    src0Words3 = src0Words[3];
+    if (src0Words3 != 3) goto LAB_000694c0;
   }
   else {
-    uVar6 = src0Flags[3];
-    uVar8 = src0Words[3];
-    uVar10 = src0Flags[1];
-    uVar7 = src0Flags[2];
-    uVar11 = *src0Words;
-    uVar2 = src0Words[1];
-    uVar1 = src0Words[2];
+    src0Flags3 = src0Flags[3];
+    src0Words3 = src0Words[3];
+    src0Flags1 = src0Flags[1];
+    src0Flags2 = src0Flags[2];
+    src0WordsValue = *src0Words;
+    src0Words1 = src0Words[1];
+    src0Words2 = src0Words[2];
 LAB_000694c0:
     uVar14 = uVar14 | 0x400000;
-    uVar15 = (uVar6 & 1) << 0xf |
-             (uVar8 & 7) << 0xc |
-             (uVar7 & 1) << 0xb |
-             (uVar1 & 7) << 8 |
-             (uVar10 & 1) << 7 | (uVar2 & 7) << 4 | (*src0Flags & 1) << 3 | uVar11 & 7;
+    uVar15 = (src0Flags3 & 1) << 0xf |
+             (src0Words3 & 7) << 0xc |
+             (src0Flags2 & 1) << 0xb |
+             (src0Words2 & 7) << 8 |
+             (src0Flags1 & 1) << 7 | (src0Words1 & 7) << 4 | (*src0Flags & 1) << 3 | src0WordsValue & 7;
   }
-  uVar1 = (param_9 & 0x3f) << 0x10 | param_10 & 0xffff;
+  uVar1 = (src1File & 0x3f) << 0x10 | src1Index & 0xffff;
   if (*src1Flags == 0) {
-    uVar11 = src1Flags[1];
-    if (uVar11 != 0) {
-      uVar7 = src1Flags[3];
-      uVar10 = src1Words[3];
-      uVar8 = src1Flags[2];
-      uVar12 = *src1Words;
-      uVar6 = src1Words[1];
-      uVar2 = src1Words[2];
+    src1Flags1 = src1Flags[1];
+    if (src1Flags1 != 0) {
+      src1Flags3 = src1Flags[3];
+      src1Words3 = src1Words[3];
+      src1Flags2 = src1Flags[2];
+      src1WordsValue = *src1Words;
+      src1Words1 = src1Words[1];
+      src1Words2 = src1Words[2];
       goto LAB_000695f0;
     }
-    uVar8 = src1Flags[2];
-    if (uVar8 != 0) {
-      uVar7 = src1Flags[3];
-      uVar10 = src1Words[3];
-      uVar12 = *src1Words;
-      uVar6 = src1Words[1];
-      uVar2 = src1Words[2];
+    src1Flags2 = src1Flags[2];
+    if (src1Flags2 != 0) {
+      src1Flags3 = src1Flags[3];
+      src1Words3 = src1Words[3];
+      src1WordsValue = *src1Words;
+      src1Words1 = src1Words[1];
+      src1Words2 = src1Words[2];
       goto LAB_000695f0;
     }
-    uVar7 = src1Flags[3];
-    if (uVar7 != 0) {
-      uVar10 = src1Words[3];
-      uVar12 = *src1Words;
-      uVar6 = src1Words[1];
-      uVar2 = src1Words[2];
+    src1Flags3 = src1Flags[3];
+    if (src1Flags3 != 0) {
+      src1Words3 = src1Words[3];
+      src1WordsValue = *src1Words;
+      src1Words1 = src1Words[1];
+      src1Words2 = src1Words[2];
       goto LAB_000695f0;
     }
-    uVar12 = *src1Words;
-    if (uVar12 != 0) {
-      uVar10 = src1Words[3];
-      uVar6 = src1Words[1];
-      uVar2 = src1Words[2];
+    src1WordsValue = *src1Words;
+    if (src1WordsValue != 0) {
+      src1Words3 = src1Words[3];
+      src1Words1 = src1Words[1];
+      src1Words2 = src1Words[2];
       goto LAB_000695f0;
     }
-    uVar6 = src1Words[1];
-    if (uVar6 != 1) {
-      uVar10 = src1Words[3];
-      uVar2 = src1Words[2];
+    src1Words1 = src1Words[1];
+    if (src1Words1 != 1) {
+      src1Words3 = src1Words[3];
+      src1Words2 = src1Words[2];
       goto LAB_000695f0;
     }
-    uVar2 = src1Words[2];
-    if (uVar2 != 2) {
-      uVar10 = src1Words[3];
+    src1Words2 = src1Words[2];
+    if (src1Words2 != 2) {
+      src1Words3 = src1Words[3];
       goto LAB_000695f0;
     }
-    uVar10 = src1Words[3];
-    if (uVar10 != 3) goto LAB_000695f0;
+    src1Words3 = src1Words[3];
+    if (src1Words3 != 3) goto LAB_000695f0;
   }
   else {
-    uVar7 = src1Flags[3];
-    uVar10 = src1Words[3];
-    uVar11 = src1Flags[1];
-    uVar8 = src1Flags[2];
-    uVar12 = *src1Words;
-    uVar6 = src1Words[1];
-    uVar2 = src1Words[2];
+    src1Flags3 = src1Flags[3];
+    src1Words3 = src1Words[3];
+    src1Flags1 = src1Flags[1];
+    src1Flags2 = src1Flags[2];
+    src1WordsValue = *src1Words;
+    src1Words1 = src1Words[1];
+    src1Words2 = src1Words[2];
 LAB_000695f0:
     uVar1 = uVar1 | 0x400000;
-    uVar16 = (uVar7 & 1) << 0xf |
-             (uVar10 & 7) << 0xc |
-             (uVar8 & 1) << 0xb |
-             (uVar2 & 7) << 8 |
-             (uVar11 & 1) << 7 | (uVar6 & 7) << 4 | (*src1Flags & 1) << 3 | uVar12 & 7;
+    uVar16 = (src1Flags3 & 1) << 0xf |
+             (src1Words3 & 7) << 0xc |
+             (src1Flags2 & 1) << 0xb |
+             (src1Words2 & 7) << 8 |
+             (src1Flags1 & 1) << 7 | (src1Words1 & 7) << 4 | (*src1Flags & 1) << 3 | src1WordsValue & 7;
   }
-  uVar2 = *instrCountPtr;
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= uVar2) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  instrCountPtrValue = *instrCountPtr;
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrCountPtrValue) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
-    uVar2 = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
+    instrCountPtrValue = *instrCountPtr;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(undefined4 *)(uVar2 * 4 + *(int *)(ctx + 0x75c)) = 0x49;
+  *(undefined4 *)(instrCountPtrValue * 4 + *(int *)(ctx + ARB_tokenBuffer)) = 0x49;
   uVar2 = *instrCountPtr + 1;
   *instrCountPtr = uVar2;
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= uVar2) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= uVar2) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     uVar2 = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(uVar2 * 4 + *(int *)(ctx + 0x75c)) = instrWord | 0x40000;
+  *(uint *)(uVar2 * 4 + *(int *)(ctx + ARB_tokenBuffer)) = instrWord | 0x40000;
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar14;
+  *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar14;
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
   if ((uVar14 & 0x400000) != 0) {
-    allocator = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= instrWord) {
-      newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    allocator = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+      newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newBuffer;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
       instrWord = *instrCountPtr;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar15;
+    *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar15;
     instrWord = *instrCountPtr + 1;
     *instrCountPtr = instrWord;
   }
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar1;
+  *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar1;
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
   if ((uVar1 & 0x400000) != 0) {
-    allocator = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= instrWord) {
-      newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    allocator = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+      newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newBuffer;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
       instrWord = *instrCountPtr;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar16;
+    *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar16;
     instrWord = *instrCountPtr + 1;
     *instrCountPtr = instrWord;
   }
-  uVar6 = *src2Words;
-  uVar2 = *src2Flags;
-  uVar7 = src2Flags[1];
-  uVar8 = src2Flags[2];
-  allocator = *(int *)(ctx + 0x3d4);
+  src2WordsValue = *src2Words;
+  src2FlagsValueA = *src2Flags;
+  src2Flags1A = src2Flags[1];
+  src2Flags2A = src2Flags[2];
+  allocator = *(int *)(ctx + ARB_allocator);
   uVar15 = uStack_84 & 0xffff;
   uVar16 = uStack_84 & 0xffff;
-  uVar10 = src2Flags[3];
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  src2Flags3A = src2Flags[3];
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(undefined4 *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = 0x41;
+  *(undefined4 *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = 0x41;
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar16 | 0x40000;
+  *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar16 | 0x40000;
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar15 | uVar14 & 0xfe400000 | 0x440000;
+  *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar15 | uVar14 & 0xfe400000 | 0x440000;
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(undefined **)(instrWord * 4 + *(int *)(ctx + 0x75c)) = ((unsigned char *)0x00003333);
+  *(undefined **)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = ((unsigned char *)0x00003333);
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) =
-       (param_13 & 0x3f) << 0x10 | param_14 & 0xffff | uVar1 & 0xfe400000 | 0x400000;
+  *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) =
+       (src2File & 0x3f) << 0x10 | src2Index & 0xffff | uVar1 & 0xfe400000 | 0x400000;
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) =
-       (uVar10 & 1) << 0xf |
-       (uVar6 & 7) << 0xc |
-       (uVar8 & 1) << 0xb |
-       (uVar6 & 7) << 8 | (uVar7 & 1) << 7 | (uVar6 & 7) << 4 | (uVar2 & 1) << 3 | uVar6 & 7;
+  *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) =
+       (src2Flags3A & 1) << 0xf |
+       (src2WordsValue & 7) << 0xc |
+       (src2Flags2A & 1) << 0xb |
+       (src2WordsValue & 7) << 8 | (src2Flags1A & 1) << 7 | (src2WordsValue & 7) << 4 | (src2FlagsValueA & 1) << 3 | src2WordsValue & 7;
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
-  uVar14 = src2Words[3];
-  uVar15 = (param_2 & 0x3f) << 0x10 | param_3 & 0xffff;
-  if ((param_2 == 0x12) || (param_2 == 0x13)) {
+  src2Words3 = src2Words[3];
+  uVar15 = (dstFile & 0x3f) << 0x10 | dstIndex & 0xffff;
+  if ((dstFile == 0x12) || (dstFile == 0x13)) {
     uVar15 = uVar15 | 0x400000;
     uVar13 = 0x55;
   }
-  if (*param_4 == 0) {
-    allocator = param_4[3];
-    iVar9 = param_4[1];
-    iVar3 = param_4[2];
+  if (*dstMask == 0) {
+    allocator = dstMask[3];
+    iVar9 = dstMask[1];
+    iVar3 = dstMask[2];
   }
   else {
-    iVar9 = param_4[1];
+    iVar9 = dstMask[1];
     if (iVar9 == 0) {
-      allocator = param_4[3];
-      iVar3 = param_4[2];
+      allocator = dstMask[3];
+      iVar3 = dstMask[2];
     }
     else {
-      iVar3 = param_4[2];
+      iVar3 = dstMask[2];
       if (iVar3 == 0) {
-        allocator = param_4[3];
+        allocator = dstMask[3];
       }
       else {
-        if (param_4[3] != 0) goto LAB_00069f70;
+        if (dstMask[3] != 0) goto LAB_00069f70;
         allocator = 0;
       }
     }
   }
   uVar15 = uVar15 | 0x400000;
   uVar13 = (uint)(allocator != 0) * 0x40 |
-           (uint)(iVar3 != 0) * 0x10 | (uint)(iVar9 != 0) * 4 | (uint)(*param_4 != 0);
+           (uint)(iVar3 != 0) * 0x10 | (uint)(iVar9 != 0) * 4 | (uint)(*dstMask != 0);
 LAB_00069f70:
-  uVar16 = *src2Flags;
-  uVar6 = src2Flags[1];
-  uVar2 = src2Flags[2];
-  allocator = *(int *)(ctx + 0x3d4);
-  uVar1 = src2Flags[3];
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  src2FlagsValue = *src2Flags;
+  src2Flags1 = src2Flags[1];
+  src2Flags2 = src2Flags[2];
+  allocator = *(int *)(ctx + ARB_allocator);
+  src2Flags3 = src2Flags[3];
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(undefined4 *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = 0x44;
+  *(undefined4 *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = 0x44;
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar15;
+  *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar15;
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
   if ((uVar15 & 0x400000) != 0) {
-    allocator = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= instrWord) {
-      newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    allocator = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+      newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+        (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newBuffer;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
       instrWord = *instrCountPtr;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uVar13;
+    *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uVar13;
     instrWord = *instrCountPtr + 1;
     *instrCountPtr = instrWord;
   }
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) = uStack_84 & 0xffff | 0x440000;
+  *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = uStack_84 & 0xffff | 0x440000;
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(undefined **)(instrWord * 4 + *(int *)(ctx + 0x75c)) = ((unsigned char *)0x00003333);
+  *(undefined **)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) = ((unsigned char *)0x00003333);
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) =
-       (param_13 & 0x3f) << 0x10 | param_14 & 0xffff | 0x400000 | 0x400000;
+  *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) =
+       (src2File & 0x3f) << 0x10 | src2Index & 0xffff | 0x400000 | 0x400000;
   instrWord = *instrCountPtr + 1;
   *instrCountPtr = instrWord;
-  allocator = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= instrWord) {
-    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newBuffer,*(int *)(ctx + 0x75c),*instrCountPtr << 2);
-      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  allocator = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= instrWord) {
+    newBuffer = (**(code **)(allocator + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newBuffer,*(int *)(ctx + ARB_tokenBuffer),*instrCountPtr << 2);
+      (**(code **)(allocator + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newBuffer;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newBuffer;
     instrWord = *instrCountPtr;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(instrWord * 4 + *(int *)(ctx + 0x75c)) =
-       (uVar1 & 1) << 0xf |
-       (uVar14 & 7) << 0xc |
-       (uVar2 & 1) << 0xb |
-       (uVar14 & 7) << 8 | (uVar6 & 1) << 7 | (uVar14 & 7) << 4 | (uVar16 & 1) << 3 | uVar14 & 7;
+  *(uint *)(instrWord * 4 + *(int *)(ctx + ARB_tokenBuffer)) =
+       (src2Flags3 & 1) << 0xf |
+       (src2Words3 & 7) << 0xc |
+       (src2Flags2 & 1) << 0xb |
+       (src2Words3 & 7) << 8 | (src2Flags1 & 1) << 7 | (src2Words3 & 7) << 4 | (src2FlagsValue & 1) << 3 | src2Words3 & 7;
   *instrCountPtr = *instrCountPtr + 1;
   (**(code **)(ctx + 0x74c))(ctx,auStack_88);
   return;
@@ -8172,17 +8221,22 @@ int FUN_0006a400(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   uint *src1Select;
   uint *src1Negate;
 {
+  uint src1Select3;
+  uint src1Negate2;
+  uint src1Negate3;
+  uint src1Select1;
+  uint src1Negate1;
   uint src1Header;
-  int iVar2;
+  int dstMask2;
   uint tokenIndex;
   undefined4 newStorage;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  int iVar8;
-  uint uVar9;
-  uint uVar10;
-  uint uVar11;
+  uint src0Negate3;
+  uint src0Negate2;
+  uint src0Negate1;
+  int dstMask1;
+  uint src0Select3;
+  uint src0SelectX;
+  uint src1SelectX;
   uint src0Header;
   uint dstHeader;
   uint dstMaskWord;
@@ -8192,7 +8246,7 @@ int FUN_0006a400(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   uint *tokenCount;
   
   dstHeader = (dstFile & 0x3f) << 0x10 | dstIndex & 0xffff;
-  tokenCount = (uint *)(ctx + 0x754);
+  tokenCount = (uint *)(ctx + ARB_tokenCount);
   src1SwizzleWord = 0;
   src0SwizzleWord = 0;
   dstMaskWord = 0;
@@ -8202,22 +8256,22 @@ int FUN_0006a400(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   }
   if (*dstMask == 0) {
     iVar16 = dstMask[3];
-    iVar8 = dstMask[1];
-    iVar2 = dstMask[2];
+    dstMask1 = dstMask[1];
+    dstMask2 = dstMask[2];
 LAB_0006a4f0:
     dstHeader = dstHeader | 0x400000;
     dstMaskWord = (uint)(iVar16 != 0) * 0x40 |
-             (uint)(iVar2 != 0) * 0x10 | (uint)(iVar8 != 0) * 4 | (uint)(*dstMask != 0);
+             (uint)(dstMask2 != 0) * 0x10 | (uint)(dstMask1 != 0) * 4 | (uint)(*dstMask != 0);
   }
   else {
-    iVar8 = dstMask[1];
-    if (iVar8 == 0) {
+    dstMask1 = dstMask[1];
+    if (dstMask1 == 0) {
       iVar16 = dstMask[3];
-      iVar2 = dstMask[2];
+      dstMask2 = dstMask[2];
       goto LAB_0006a4f0;
     }
-    iVar2 = dstMask[2];
-    if (iVar2 == 0) {
+    dstMask2 = dstMask[2];
+    if (dstMask2 == 0) {
       iVar16 = dstMask[3];
       goto LAB_0006a4f0;
     }
@@ -8228,244 +8282,244 @@ LAB_0006a4f0:
   }
   src0Header = (src0File & 0x3f) << 0x10 | src0Index & 0xffff;
   if (*src0Negate == 0) {
-    uVar7 = src0Negate[1];
-    if (uVar7 != 0) {
-      uVar5 = src0Negate[3];
-      uVar9 = src0Select[3];
-      uVar6 = src0Negate[2];
-      uVar10 = *src0Select;
+    src0Negate1 = src0Negate[1];
+    if (src0Negate1 != 0) {
+      src0Negate3 = src0Negate[3];
+      src0Select3 = src0Select[3];
+      src0Negate2 = src0Negate[2];
+      src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
       goto LAB_0006a640;
     }
-    uVar6 = src0Negate[2];
-    if (uVar6 != 0) {
-      uVar5 = src0Negate[3];
-      uVar9 = src0Select[3];
-      uVar10 = *src0Select;
+    src0Negate2 = src0Negate[2];
+    if (src0Negate2 != 0) {
+      src0Negate3 = src0Negate[3];
+      src0Select3 = src0Select[3];
+      src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
       goto LAB_0006a640;
     }
-    uVar5 = src0Negate[3];
-    if (uVar5 != 0) {
-      uVar9 = src0Select[3];
-      uVar10 = *src0Select;
+    src0Negate3 = src0Negate[3];
+    if (src0Negate3 != 0) {
+      src0Select3 = src0Select[3];
+      src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
       goto LAB_0006a640;
     }
-    uVar10 = *src0Select;
-    if (uVar10 != 0) {
-      uVar9 = src0Select[3];
+    src0SelectX = *src0Select;
+    if (src0SelectX != 0) {
+      src0Select3 = src0Select[3];
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
       goto LAB_0006a640;
     }
     tokenIndex = src0Select[1];
     if (tokenIndex != 1) {
-      uVar9 = src0Select[3];
+      src0Select3 = src0Select[3];
       src1Header = src0Select[2];
       goto LAB_0006a640;
     }
     src1Header = src0Select[2];
     if (src1Header != 2) {
-      uVar9 = src0Select[3];
+      src0Select3 = src0Select[3];
       goto LAB_0006a640;
     }
-    uVar9 = src0Select[3];
-    if (uVar9 != 3) goto LAB_0006a640;
+    src0Select3 = src0Select[3];
+    if (src0Select3 != 3) goto LAB_0006a640;
   }
   else {
-    uVar5 = src0Negate[3];
-    uVar9 = src0Select[3];
-    uVar7 = src0Negate[1];
-    uVar6 = src0Negate[2];
-    uVar10 = *src0Select;
+    src0Negate3 = src0Negate[3];
+    src0Select3 = src0Select[3];
+    src0Negate1 = src0Negate[1];
+    src0Negate2 = src0Negate[2];
+    src0SelectX = *src0Select;
     tokenIndex = src0Select[1];
     src1Header = src0Select[2];
 LAB_0006a640:
     src0Header = src0Header | 0x400000;
-    src0SwizzleWord = (uVar5 & 1) << 0xf |
-             (uVar9 & 7) << 0xc |
-             (uVar6 & 1) << 0xb |
+    src0SwizzleWord = (src0Negate3 & 1) << 0xf |
+             (src0Select3 & 7) << 0xc |
+             (src0Negate2 & 1) << 0xb |
              (src1Header & 7) << 8 |
-             (uVar7 & 1) << 7 | (tokenIndex & 7) << 4 | (*src0Negate & 1) << 3 | uVar10 & 7;
+             (src0Negate1 & 1) << 7 | (tokenIndex & 7) << 4 | (*src0Negate & 1) << 3 | src0SelectX & 7;
   }
   src1Header = (src1File & 0x3f) << 0x10 | src1Index & 0xffff;
   if (*src1Negate == 0) {
-    uVar10 = src1Negate[1];
-    if (uVar10 == 0) {
-      uVar7 = src1Negate[2];
-      if (uVar7 == 0) {
-        uVar6 = src1Negate[3];
-        if (uVar6 == 0) {
-          uVar11 = *src1Select;
-          if (uVar11 == 0) {
-            uVar5 = src1Select[1];
-            if (uVar5 == 1) {
+    src1Negate1 = src1Negate[1];
+    if (src1Negate1 == 0) {
+      src1Negate2 = src1Negate[2];
+      if (src1Negate2 == 0) {
+        src1Negate3 = src1Negate[3];
+        if (src1Negate3 == 0) {
+          src1SelectX = *src1Select;
+          if (src1SelectX == 0) {
+            src1Select1 = src1Select[1];
+            if (src1Select1 == 1) {
               tokenIndex = src1Select[2];
               if (tokenIndex == 2) {
-                uVar9 = src1Select[3];
-                if (uVar9 == 3) goto LAB_0006a794;
+                src1Select3 = src1Select[3];
+                if (src1Select3 == 3) goto LAB_0006a794;
               }
               else {
-                uVar9 = src1Select[3];
+                src1Select3 = src1Select[3];
               }
             }
             else {
-              uVar9 = src1Select[3];
+              src1Select3 = src1Select[3];
               tokenIndex = src1Select[2];
             }
           }
           else {
-            uVar9 = src1Select[3];
-            uVar5 = src1Select[1];
+            src1Select3 = src1Select[3];
+            src1Select1 = src1Select[1];
             tokenIndex = src1Select[2];
           }
         }
         else {
-          uVar9 = src1Select[3];
-          uVar11 = *src1Select;
-          uVar5 = src1Select[1];
+          src1Select3 = src1Select[3];
+          src1SelectX = *src1Select;
+          src1Select1 = src1Select[1];
           tokenIndex = src1Select[2];
         }
       }
       else {
-        uVar6 = src1Negate[3];
-        uVar9 = src1Select[3];
-        uVar11 = *src1Select;
-        uVar5 = src1Select[1];
+        src1Negate3 = src1Negate[3];
+        src1Select3 = src1Select[3];
+        src1SelectX = *src1Select;
+        src1Select1 = src1Select[1];
         tokenIndex = src1Select[2];
       }
     }
     else {
-      uVar6 = src1Negate[3];
-      uVar9 = src1Select[3];
-      uVar7 = src1Negate[2];
-      uVar11 = *src1Select;
-      uVar5 = src1Select[1];
+      src1Negate3 = src1Negate[3];
+      src1Select3 = src1Select[3];
+      src1Negate2 = src1Negate[2];
+      src1SelectX = *src1Select;
+      src1Select1 = src1Select[1];
       tokenIndex = src1Select[2];
     }
   }
   else {
-    uVar6 = src1Negate[3];
-    uVar9 = src1Select[3];
-    uVar10 = src1Negate[1];
-    uVar7 = src1Negate[2];
-    uVar11 = *src1Select;
-    uVar5 = src1Select[1];
+    src1Negate3 = src1Negate[3];
+    src1Select3 = src1Select[3];
+    src1Negate1 = src1Negate[1];
+    src1Negate2 = src1Negate[2];
+    src1SelectX = *src1Select;
+    src1Select1 = src1Select[1];
     tokenIndex = src1Select[2];
   }
   src1Header = src1Header | 0x400000;
-  src1SwizzleWord = (uVar6 & 1) << 0xf |
-           (uVar9 & 7) << 0xc |
-           (uVar7 & 1) << 0xb |
+  src1SwizzleWord = (src1Negate3 & 1) << 0xf |
+           (src1Select3 & 7) << 0xc |
+           (src1Negate2 & 1) << 0xb |
            (tokenIndex & 7) << 8 |
-           (uVar10 & 1) << 7 | (uVar5 & 7) << 4 | (*src1Negate & 1) << 3 | uVar11 & 7;
+           (src1Negate1 & 1) << 7 | (src1Select1 & 7) << 4 | (*src1Negate & 1) << 3 | src1SelectX & 7;
 LAB_0006a794:
   tokenIndex = *tokenCount;
-  iVar16 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar16 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(undefined4 *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = 0x44;
+  *(undefined4 *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = 0x44;
   tokenIndex = *tokenCount + 1;
   *tokenCount = tokenIndex;
-  iVar16 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar16 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = dstHeader;
+  *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = dstHeader;
   tokenIndex = *tokenCount + 1;
   *tokenCount = tokenIndex;
   if ((dstHeader & 0x400000) != 0) {
-    iVar16 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar16 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       tokenIndex = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = dstMaskWord;
+    *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = dstMaskWord;
     tokenIndex = *tokenCount + 1;
     *tokenCount = tokenIndex;
   }
-  iVar16 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar16 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = src0Header;
+  *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = src0Header;
   dstHeader = *tokenCount + 1;
   *tokenCount = dstHeader;
   if ((src0Header & 0x400000) != 0) {
-    iVar16 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= dstHeader) {
-      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar16 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= dstHeader) {
+      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       dstHeader = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(dstHeader * 4 + *(int *)(ctx + 0x75c)) = src0SwizzleWord;
+    *(uint *)(dstHeader * 4 + *(int *)(ctx + ARB_tokenBuffer)) = src0SwizzleWord;
     dstHeader = *tokenCount + 1;
     *tokenCount = dstHeader;
   }
-  iVar16 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= dstHeader) {
-    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar16 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= dstHeader) {
+    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     dstHeader = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(dstHeader * 4 + *(int *)(ctx + 0x75c)) = src1Header;
+  *(uint *)(dstHeader * 4 + *(int *)(ctx + ARB_tokenBuffer)) = src1Header;
   dstHeader = *tokenCount + 1;
   *tokenCount = dstHeader;
   if ((src1Header & 0x400000) != 0) {
-    iVar16 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= dstHeader) {
-      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar16 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= dstHeader) {
+      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       dstHeader = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(dstHeader * 4 + *(int *)(ctx + 0x75c)) = src1SwizzleWord;
+    *(uint *)(dstHeader * 4 + *(int *)(ctx + ARB_tokenBuffer)) = src1SwizzleWord;
     *tokenCount = *tokenCount + 1;
   }
   return;
@@ -8486,17 +8540,22 @@ int FUN_0006aba0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   uint *src1Select;
   uint *src1Negate;
 {
+  uint src1Select3;
+  uint src1Negate2;
+  uint src1Negate3;
+  uint src1Select1;
+  uint src1Negate1;
   uint src1Header;
-  int iVar2;
+  int dstMask2;
   uint tokenIndex;
   undefined4 newStorage;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  int iVar8;
-  uint uVar9;
-  uint uVar10;
-  uint uVar11;
+  uint src0Negate3;
+  uint src0Negate2;
+  uint src0Negate1;
+  int dstMask1;
+  uint src0Select3;
+  uint src0SelectX;
+  uint src1SelectX;
   uint src0Header;
   uint dstHeader;
   uint dstMaskWord;
@@ -8506,7 +8565,7 @@ int FUN_0006aba0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   uint *tokenCount;
   
   dstHeader = (dstFile & 0x3f) << 0x10 | dstIndex & 0xffff;
-  tokenCount = (uint *)(ctx + 0x754);
+  tokenCount = (uint *)(ctx + ARB_tokenCount);
   src1SwizzleWord = 0;
   src0SwizzleWord = 0;
   dstMaskWord = 0;
@@ -8516,22 +8575,22 @@ int FUN_0006aba0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   }
   if (*dstMask == 0) {
     iVar16 = dstMask[3];
-    iVar8 = dstMask[1];
-    iVar2 = dstMask[2];
+    dstMask1 = dstMask[1];
+    dstMask2 = dstMask[2];
 LAB_0006ac90:
     dstHeader = dstHeader | 0x400000;
     dstMaskWord = (uint)(iVar16 != 0) * 0x40 |
-             (uint)(iVar2 != 0) * 0x10 | (uint)(iVar8 != 0) * 4 | (uint)(*dstMask != 0);
+             (uint)(dstMask2 != 0) * 0x10 | (uint)(dstMask1 != 0) * 4 | (uint)(*dstMask != 0);
   }
   else {
-    iVar8 = dstMask[1];
-    if (iVar8 == 0) {
+    dstMask1 = dstMask[1];
+    if (dstMask1 == 0) {
       iVar16 = dstMask[3];
-      iVar2 = dstMask[2];
+      dstMask2 = dstMask[2];
       goto LAB_0006ac90;
     }
-    iVar2 = dstMask[2];
-    if (iVar2 == 0) {
+    dstMask2 = dstMask[2];
+    if (dstMask2 == 0) {
       iVar16 = dstMask[3];
       goto LAB_0006ac90;
     }
@@ -8542,244 +8601,244 @@ LAB_0006ac90:
   }
   src0Header = (src0File & 0x3f) << 0x10 | src0Index & 0xffff;
   if (*src0Negate == 0) {
-    uVar7 = src0Negate[1];
-    if (uVar7 != 0) {
-      uVar5 = src0Negate[3];
-      uVar9 = src0Select[3];
-      uVar6 = src0Negate[2];
-      uVar10 = *src0Select;
+    src0Negate1 = src0Negate[1];
+    if (src0Negate1 != 0) {
+      src0Negate3 = src0Negate[3];
+      src0Select3 = src0Select[3];
+      src0Negate2 = src0Negate[2];
+      src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
       goto LAB_0006ade0;
     }
-    uVar6 = src0Negate[2];
-    if (uVar6 != 0) {
-      uVar5 = src0Negate[3];
-      uVar9 = src0Select[3];
-      uVar10 = *src0Select;
+    src0Negate2 = src0Negate[2];
+    if (src0Negate2 != 0) {
+      src0Negate3 = src0Negate[3];
+      src0Select3 = src0Select[3];
+      src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
       goto LAB_0006ade0;
     }
-    uVar5 = src0Negate[3];
-    if (uVar5 != 0) {
-      uVar9 = src0Select[3];
-      uVar10 = *src0Select;
+    src0Negate3 = src0Negate[3];
+    if (src0Negate3 != 0) {
+      src0Select3 = src0Select[3];
+      src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
       goto LAB_0006ade0;
     }
-    uVar10 = *src0Select;
-    if (uVar10 != 0) {
-      uVar9 = src0Select[3];
+    src0SelectX = *src0Select;
+    if (src0SelectX != 0) {
+      src0Select3 = src0Select[3];
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
       goto LAB_0006ade0;
     }
     tokenIndex = src0Select[1];
     if (tokenIndex != 1) {
-      uVar9 = src0Select[3];
+      src0Select3 = src0Select[3];
       src1Header = src0Select[2];
       goto LAB_0006ade0;
     }
     src1Header = src0Select[2];
     if (src1Header != 2) {
-      uVar9 = src0Select[3];
+      src0Select3 = src0Select[3];
       goto LAB_0006ade0;
     }
-    uVar9 = src0Select[3];
-    if (uVar9 != 3) goto LAB_0006ade0;
+    src0Select3 = src0Select[3];
+    if (src0Select3 != 3) goto LAB_0006ade0;
   }
   else {
-    uVar5 = src0Negate[3];
-    uVar9 = src0Select[3];
-    uVar7 = src0Negate[1];
-    uVar6 = src0Negate[2];
-    uVar10 = *src0Select;
+    src0Negate3 = src0Negate[3];
+    src0Select3 = src0Select[3];
+    src0Negate1 = src0Negate[1];
+    src0Negate2 = src0Negate[2];
+    src0SelectX = *src0Select;
     tokenIndex = src0Select[1];
     src1Header = src0Select[2];
 LAB_0006ade0:
     src0Header = src0Header | 0x400000;
-    src0SwizzleWord = (uVar5 & 1) << 0xf |
-             (uVar9 & 7) << 0xc |
-             (uVar6 & 1) << 0xb |
+    src0SwizzleWord = (src0Negate3 & 1) << 0xf |
+             (src0Select3 & 7) << 0xc |
+             (src0Negate2 & 1) << 0xb |
              (src1Header & 7) << 8 |
-             (uVar7 & 1) << 7 | (tokenIndex & 7) << 4 | (*src0Negate & 1) << 3 | uVar10 & 7;
+             (src0Negate1 & 1) << 7 | (tokenIndex & 7) << 4 | (*src0Negate & 1) << 3 | src0SelectX & 7;
   }
   src1Header = (src1File & 0x3f) << 0x10 | src1Index & 0xffff;
   if (*src1Negate == 0) {
-    uVar10 = src1Negate[1];
-    if (uVar10 == 0) {
-      uVar7 = src1Negate[2];
-      if (uVar7 == 0) {
-        uVar6 = src1Negate[3];
-        if (uVar6 == 0) {
-          uVar11 = *src1Select;
-          if (uVar11 == 0) {
-            uVar5 = src1Select[1];
-            if (uVar5 == 1) {
+    src1Negate1 = src1Negate[1];
+    if (src1Negate1 == 0) {
+      src1Negate2 = src1Negate[2];
+      if (src1Negate2 == 0) {
+        src1Negate3 = src1Negate[3];
+        if (src1Negate3 == 0) {
+          src1SelectX = *src1Select;
+          if (src1SelectX == 0) {
+            src1Select1 = src1Select[1];
+            if (src1Select1 == 1) {
               tokenIndex = src1Select[2];
               if (tokenIndex == 2) {
-                uVar9 = src1Select[3];
-                if (uVar9 == 3) goto LAB_0006af34;
+                src1Select3 = src1Select[3];
+                if (src1Select3 == 3) goto LAB_0006af34;
               }
               else {
-                uVar9 = src1Select[3];
+                src1Select3 = src1Select[3];
               }
             }
             else {
-              uVar9 = src1Select[3];
+              src1Select3 = src1Select[3];
               tokenIndex = src1Select[2];
             }
           }
           else {
-            uVar9 = src1Select[3];
-            uVar5 = src1Select[1];
+            src1Select3 = src1Select[3];
+            src1Select1 = src1Select[1];
             tokenIndex = src1Select[2];
           }
         }
         else {
-          uVar9 = src1Select[3];
-          uVar11 = *src1Select;
-          uVar5 = src1Select[1];
+          src1Select3 = src1Select[3];
+          src1SelectX = *src1Select;
+          src1Select1 = src1Select[1];
           tokenIndex = src1Select[2];
         }
       }
       else {
-        uVar6 = src1Negate[3];
-        uVar9 = src1Select[3];
-        uVar11 = *src1Select;
-        uVar5 = src1Select[1];
+        src1Negate3 = src1Negate[3];
+        src1Select3 = src1Select[3];
+        src1SelectX = *src1Select;
+        src1Select1 = src1Select[1];
         tokenIndex = src1Select[2];
       }
     }
     else {
-      uVar6 = src1Negate[3];
-      uVar9 = src1Select[3];
-      uVar7 = src1Negate[2];
-      uVar11 = *src1Select;
-      uVar5 = src1Select[1];
+      src1Negate3 = src1Negate[3];
+      src1Select3 = src1Select[3];
+      src1Negate2 = src1Negate[2];
+      src1SelectX = *src1Select;
+      src1Select1 = src1Select[1];
       tokenIndex = src1Select[2];
     }
   }
   else {
-    uVar6 = src1Negate[3];
-    uVar9 = src1Select[3];
-    uVar10 = src1Negate[1];
-    uVar7 = src1Negate[2];
-    uVar11 = *src1Select;
-    uVar5 = src1Select[1];
+    src1Negate3 = src1Negate[3];
+    src1Select3 = src1Select[3];
+    src1Negate1 = src1Negate[1];
+    src1Negate2 = src1Negate[2];
+    src1SelectX = *src1Select;
+    src1Select1 = src1Select[1];
     tokenIndex = src1Select[2];
   }
   src1Header = src1Header | 0x400000;
-  src1SwizzleWord = (uVar6 & 1) << 0xf |
-           (uVar9 & 7) << 0xc |
-           (uVar7 & 1) << 0xb |
+  src1SwizzleWord = (src1Negate3 & 1) << 0xf |
+           (src1Select3 & 7) << 0xc |
+           (src1Negate2 & 1) << 0xb |
            (tokenIndex & 7) << 8 |
-           (uVar10 & 1) << 7 | (uVar5 & 7) << 4 | (*src1Negate & 1) << 3 | uVar11 & 7;
+           (src1Negate1 & 1) << 7 | (src1Select1 & 7) << 4 | (*src1Negate & 1) << 3 | src1SelectX & 7;
 LAB_0006af34:
   tokenIndex = *tokenCount;
-  iVar16 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar16 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(undefined4 *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = 0x41;
+  *(undefined4 *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = 0x41;
   tokenIndex = *tokenCount + 1;
   *tokenCount = tokenIndex;
-  iVar16 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar16 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = dstHeader;
+  *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = dstHeader;
   tokenIndex = *tokenCount + 1;
   *tokenCount = tokenIndex;
   if ((dstHeader & 0x400000) != 0) {
-    iVar16 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar16 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       tokenIndex = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = dstMaskWord;
+    *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = dstMaskWord;
     tokenIndex = *tokenCount + 1;
     *tokenCount = tokenIndex;
   }
-  iVar16 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar16 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = src0Header;
+  *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = src0Header;
   dstHeader = *tokenCount + 1;
   *tokenCount = dstHeader;
   if ((src0Header & 0x400000) != 0) {
-    iVar16 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= dstHeader) {
-      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar16 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= dstHeader) {
+      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       dstHeader = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(dstHeader * 4 + *(int *)(ctx + 0x75c)) = src0SwizzleWord;
+    *(uint *)(dstHeader * 4 + *(int *)(ctx + ARB_tokenBuffer)) = src0SwizzleWord;
     dstHeader = *tokenCount + 1;
     *tokenCount = dstHeader;
   }
-  iVar16 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= dstHeader) {
-    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar16 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= dstHeader) {
+    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     dstHeader = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(dstHeader * 4 + *(int *)(ctx + 0x75c)) = src1Header;
+  *(uint *)(dstHeader * 4 + *(int *)(ctx + ARB_tokenBuffer)) = src1Header;
   dstHeader = *tokenCount + 1;
   *tokenCount = dstHeader;
   if ((src1Header & 0x400000) != 0) {
-    iVar16 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= dstHeader) {
-      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar16 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= dstHeader) {
+      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       dstHeader = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(dstHeader * 4 + *(int *)(ctx + 0x75c)) = src1SwizzleWord;
+    *(uint *)(dstHeader * 4 + *(int *)(ctx + ARB_tokenBuffer)) = src1SwizzleWord;
     *tokenCount = *tokenCount + 1;
   }
   return;
@@ -8800,17 +8859,22 @@ int FUN_0006b340(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   uint *src1Select;
   uint *src1Negate;
 {
+  uint src1Select3;
+  uint src1Negate2;
+  uint src1Negate3;
+  uint src1Select1;
+  uint src1Negate1;
   uint src1Header;
-  int iVar2;
+  int dstMask2;
   uint tokenIndex;
   undefined4 newStorage;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  int iVar8;
-  uint uVar9;
-  uint uVar10;
-  uint uVar11;
+  uint src0Negate3;
+  uint src0Negate2;
+  uint src0Negate1;
+  int dstMask1;
+  uint src0Select3;
+  uint src0SelectX;
+  uint src1SelectX;
   uint src0Header;
   uint dstHeader;
   uint dstMaskWord;
@@ -8820,7 +8884,7 @@ int FUN_0006b340(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   uint *tokenCount;
   
   dstHeader = (dstFile & 0x3f) << 0x10 | dstIndex & 0xffff;
-  tokenCount = (uint *)(ctx + 0x754);
+  tokenCount = (uint *)(ctx + ARB_tokenCount);
   src1SwizzleWord = 0;
   src0SwizzleWord = 0;
   dstMaskWord = 0;
@@ -8830,22 +8894,22 @@ int FUN_0006b340(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   }
   if (*dstMask == 0) {
     iVar16 = dstMask[3];
-    iVar8 = dstMask[1];
-    iVar2 = dstMask[2];
+    dstMask1 = dstMask[1];
+    dstMask2 = dstMask[2];
 LAB_0006b430:
     dstHeader = dstHeader | 0x400000;
     dstMaskWord = (uint)(iVar16 != 0) * 0x40 |
-             (uint)(iVar2 != 0) * 0x10 | (uint)(iVar8 != 0) * 4 | (uint)(*dstMask != 0);
+             (uint)(dstMask2 != 0) * 0x10 | (uint)(dstMask1 != 0) * 4 | (uint)(*dstMask != 0);
   }
   else {
-    iVar8 = dstMask[1];
-    if (iVar8 == 0) {
+    dstMask1 = dstMask[1];
+    if (dstMask1 == 0) {
       iVar16 = dstMask[3];
-      iVar2 = dstMask[2];
+      dstMask2 = dstMask[2];
       goto LAB_0006b430;
     }
-    iVar2 = dstMask[2];
-    if (iVar2 == 0) {
+    dstMask2 = dstMask[2];
+    if (dstMask2 == 0) {
       iVar16 = dstMask[3];
       goto LAB_0006b430;
     }
@@ -8856,244 +8920,244 @@ LAB_0006b430:
   }
   src0Header = (src0File & 0x3f) << 0x10 | src0Index & 0xffff;
   if (*src0Negate == 0) {
-    uVar7 = src0Negate[1];
-    if (uVar7 != 0) {
-      uVar5 = src0Negate[3];
-      uVar9 = src0Select[3];
-      uVar6 = src0Negate[2];
-      uVar10 = *src0Select;
+    src0Negate1 = src0Negate[1];
+    if (src0Negate1 != 0) {
+      src0Negate3 = src0Negate[3];
+      src0Select3 = src0Select[3];
+      src0Negate2 = src0Negate[2];
+      src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
       goto LAB_0006b580;
     }
-    uVar6 = src0Negate[2];
-    if (uVar6 != 0) {
-      uVar5 = src0Negate[3];
-      uVar9 = src0Select[3];
-      uVar10 = *src0Select;
+    src0Negate2 = src0Negate[2];
+    if (src0Negate2 != 0) {
+      src0Negate3 = src0Negate[3];
+      src0Select3 = src0Select[3];
+      src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
       goto LAB_0006b580;
     }
-    uVar5 = src0Negate[3];
-    if (uVar5 != 0) {
-      uVar9 = src0Select[3];
-      uVar10 = *src0Select;
+    src0Negate3 = src0Negate[3];
+    if (src0Negate3 != 0) {
+      src0Select3 = src0Select[3];
+      src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
       goto LAB_0006b580;
     }
-    uVar10 = *src0Select;
-    if (uVar10 != 0) {
-      uVar9 = src0Select[3];
+    src0SelectX = *src0Select;
+    if (src0SelectX != 0) {
+      src0Select3 = src0Select[3];
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
       goto LAB_0006b580;
     }
     tokenIndex = src0Select[1];
     if (tokenIndex != 1) {
-      uVar9 = src0Select[3];
+      src0Select3 = src0Select[3];
       src1Header = src0Select[2];
       goto LAB_0006b580;
     }
     src1Header = src0Select[2];
     if (src1Header != 2) {
-      uVar9 = src0Select[3];
+      src0Select3 = src0Select[3];
       goto LAB_0006b580;
     }
-    uVar9 = src0Select[3];
-    if (uVar9 != 3) goto LAB_0006b580;
+    src0Select3 = src0Select[3];
+    if (src0Select3 != 3) goto LAB_0006b580;
   }
   else {
-    uVar5 = src0Negate[3];
-    uVar9 = src0Select[3];
-    uVar7 = src0Negate[1];
-    uVar6 = src0Negate[2];
-    uVar10 = *src0Select;
+    src0Negate3 = src0Negate[3];
+    src0Select3 = src0Select[3];
+    src0Negate1 = src0Negate[1];
+    src0Negate2 = src0Negate[2];
+    src0SelectX = *src0Select;
     tokenIndex = src0Select[1];
     src1Header = src0Select[2];
 LAB_0006b580:
     src0Header = src0Header | 0x400000;
-    src0SwizzleWord = (uVar5 & 1) << 0xf |
-             (uVar9 & 7) << 0xc |
-             (uVar6 & 1) << 0xb |
+    src0SwizzleWord = (src0Negate3 & 1) << 0xf |
+             (src0Select3 & 7) << 0xc |
+             (src0Negate2 & 1) << 0xb |
              (src1Header & 7) << 8 |
-             (uVar7 & 1) << 7 | (tokenIndex & 7) << 4 | (*src0Negate & 1) << 3 | uVar10 & 7;
+             (src0Negate1 & 1) << 7 | (tokenIndex & 7) << 4 | (*src0Negate & 1) << 3 | src0SelectX & 7;
   }
   src1Header = (src1File & 0x3f) << 0x10 | src1Index & 0xffff;
   if (*src1Negate == 0) {
-    uVar10 = src1Negate[1];
-    if (uVar10 == 0) {
-      uVar7 = src1Negate[2];
-      if (uVar7 == 0) {
-        uVar6 = src1Negate[3];
-        if (uVar6 == 0) {
-          uVar11 = *src1Select;
-          if (uVar11 == 0) {
-            uVar5 = src1Select[1];
-            if (uVar5 == 1) {
+    src1Negate1 = src1Negate[1];
+    if (src1Negate1 == 0) {
+      src1Negate2 = src1Negate[2];
+      if (src1Negate2 == 0) {
+        src1Negate3 = src1Negate[3];
+        if (src1Negate3 == 0) {
+          src1SelectX = *src1Select;
+          if (src1SelectX == 0) {
+            src1Select1 = src1Select[1];
+            if (src1Select1 == 1) {
               tokenIndex = src1Select[2];
               if (tokenIndex == 2) {
-                uVar9 = src1Select[3];
-                if (uVar9 == 3) goto LAB_0006b6d4;
+                src1Select3 = src1Select[3];
+                if (src1Select3 == 3) goto LAB_0006b6d4;
               }
               else {
-                uVar9 = src1Select[3];
+                src1Select3 = src1Select[3];
               }
             }
             else {
-              uVar9 = src1Select[3];
+              src1Select3 = src1Select[3];
               tokenIndex = src1Select[2];
             }
           }
           else {
-            uVar9 = src1Select[3];
-            uVar5 = src1Select[1];
+            src1Select3 = src1Select[3];
+            src1Select1 = src1Select[1];
             tokenIndex = src1Select[2];
           }
         }
         else {
-          uVar9 = src1Select[3];
-          uVar11 = *src1Select;
-          uVar5 = src1Select[1];
+          src1Select3 = src1Select[3];
+          src1SelectX = *src1Select;
+          src1Select1 = src1Select[1];
           tokenIndex = src1Select[2];
         }
       }
       else {
-        uVar6 = src1Negate[3];
-        uVar9 = src1Select[3];
-        uVar11 = *src1Select;
-        uVar5 = src1Select[1];
+        src1Negate3 = src1Negate[3];
+        src1Select3 = src1Select[3];
+        src1SelectX = *src1Select;
+        src1Select1 = src1Select[1];
         tokenIndex = src1Select[2];
       }
     }
     else {
-      uVar6 = src1Negate[3];
-      uVar9 = src1Select[3];
-      uVar7 = src1Negate[2];
-      uVar11 = *src1Select;
-      uVar5 = src1Select[1];
+      src1Negate3 = src1Negate[3];
+      src1Select3 = src1Select[3];
+      src1Negate2 = src1Negate[2];
+      src1SelectX = *src1Select;
+      src1Select1 = src1Select[1];
       tokenIndex = src1Select[2];
     }
   }
   else {
-    uVar6 = src1Negate[3];
-    uVar9 = src1Select[3];
-    uVar10 = src1Negate[1];
-    uVar7 = src1Negate[2];
-    uVar11 = *src1Select;
-    uVar5 = src1Select[1];
+    src1Negate3 = src1Negate[3];
+    src1Select3 = src1Select[3];
+    src1Negate1 = src1Negate[1];
+    src1Negate2 = src1Negate[2];
+    src1SelectX = *src1Select;
+    src1Select1 = src1Select[1];
     tokenIndex = src1Select[2];
   }
   src1Header = src1Header | 0x400000;
-  src1SwizzleWord = (uVar6 & 1) << 0xf |
-           (uVar9 & 7) << 0xc |
-           (uVar7 & 1) << 0xb |
+  src1SwizzleWord = (src1Negate3 & 1) << 0xf |
+           (src1Select3 & 7) << 0xc |
+           (src1Negate2 & 1) << 0xb |
            (tokenIndex & 7) << 8 |
-           (uVar10 & 1) << 7 | (uVar5 & 7) << 4 | (*src1Negate & 1) << 3 | uVar11 & 7;
+           (src1Negate1 & 1) << 7 | (src1Select1 & 7) << 4 | (*src1Negate & 1) << 3 | src1SelectX & 7;
 LAB_0006b6d4:
   tokenIndex = *tokenCount;
-  iVar16 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar16 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(undefined4 *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = 0x50056;
+  *(undefined4 *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = 0x50056;
   tokenIndex = *tokenCount + 1;
   *tokenCount = tokenIndex;
-  iVar16 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar16 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = dstHeader;
+  *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = dstHeader;
   tokenIndex = *tokenCount + 1;
   *tokenCount = tokenIndex;
   if ((dstHeader & 0x400000) != 0) {
-    iVar16 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar16 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       tokenIndex = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = dstMaskWord;
+    *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = dstMaskWord;
     tokenIndex = *tokenCount + 1;
     *tokenCount = tokenIndex;
   }
-  iVar16 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar16 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = src0Header;
+  *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = src0Header;
   dstHeader = *tokenCount + 1;
   *tokenCount = dstHeader;
   if ((src0Header & 0x400000) != 0) {
-    iVar16 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= dstHeader) {
-      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar16 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= dstHeader) {
+      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       dstHeader = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(dstHeader * 4 + *(int *)(ctx + 0x75c)) = src0SwizzleWord;
+    *(uint *)(dstHeader * 4 + *(int *)(ctx + ARB_tokenBuffer)) = src0SwizzleWord;
     dstHeader = *tokenCount + 1;
     *tokenCount = dstHeader;
   }
-  iVar16 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= dstHeader) {
-    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar16 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= dstHeader) {
+    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     dstHeader = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(dstHeader * 4 + *(int *)(ctx + 0x75c)) = src1Header;
+  *(uint *)(dstHeader * 4 + *(int *)(ctx + ARB_tokenBuffer)) = src1Header;
   dstHeader = *tokenCount + 1;
   *tokenCount = dstHeader;
   if ((src1Header & 0x400000) != 0) {
-    iVar16 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= dstHeader) {
-      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar16 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= dstHeader) {
+      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       dstHeader = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(dstHeader * 4 + *(int *)(ctx + 0x75c)) = src1SwizzleWord;
+    *(uint *)(dstHeader * 4 + *(int *)(ctx + ARB_tokenBuffer)) = src1SwizzleWord;
     *tokenCount = *tokenCount + 1;
   }
   return;
@@ -9114,17 +9178,22 @@ int FUN_0006bae0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   uint *src1Select;
   uint *src1Negate;
 {
+  uint src1Select3;
+  uint src1Negate2;
+  uint src1Negate3;
+  uint src1Select1;
+  uint src1Negate1;
   uint src1Header;
-  int iVar2;
+  int dstMask2;
   uint tokenIndex;
   undefined4 newStorage;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  int iVar8;
-  uint uVar9;
-  uint uVar10;
-  uint uVar11;
+  uint src0Negate3;
+  uint src0Negate2;
+  uint src0Negate1;
+  int dstMask1;
+  uint src0Select3;
+  uint src0SelectX;
+  uint src1SelectX;
   uint src0Header;
   uint dstHeader;
   uint dstMaskWord;
@@ -9134,7 +9203,7 @@ int FUN_0006bae0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   uint *tokenCount;
   
   dstHeader = (dstFile & 0x3f) << 0x10 | dstIndex & 0xffff;
-  tokenCount = (uint *)(ctx + 0x754);
+  tokenCount = (uint *)(ctx + ARB_tokenCount);
   src1SwizzleWord = 0;
   src0SwizzleWord = 0;
   dstMaskWord = 0;
@@ -9144,22 +9213,22 @@ int FUN_0006bae0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   }
   if (*dstMask == 0) {
     iVar16 = dstMask[3];
-    iVar8 = dstMask[1];
-    iVar2 = dstMask[2];
+    dstMask1 = dstMask[1];
+    dstMask2 = dstMask[2];
 LAB_0006bbd0:
     dstHeader = dstHeader | 0x400000;
     dstMaskWord = (uint)(iVar16 != 0) * 0x40 |
-             (uint)(iVar2 != 0) * 0x10 | (uint)(iVar8 != 0) * 4 | (uint)(*dstMask != 0);
+             (uint)(dstMask2 != 0) * 0x10 | (uint)(dstMask1 != 0) * 4 | (uint)(*dstMask != 0);
   }
   else {
-    iVar8 = dstMask[1];
-    if (iVar8 == 0) {
+    dstMask1 = dstMask[1];
+    if (dstMask1 == 0) {
       iVar16 = dstMask[3];
-      iVar2 = dstMask[2];
+      dstMask2 = dstMask[2];
       goto LAB_0006bbd0;
     }
-    iVar2 = dstMask[2];
-    if (iVar2 == 0) {
+    dstMask2 = dstMask[2];
+    if (dstMask2 == 0) {
       iVar16 = dstMask[3];
       goto LAB_0006bbd0;
     }
@@ -9170,259 +9239,259 @@ LAB_0006bbd0:
   }
   src0Header = (src0File & 0x3f) << 0x10 | src0Index & 0xffff;
   if (*src0Negate == 0) {
-    uVar7 = src0Negate[1];
-    if (uVar7 != 0) {
-      uVar5 = src0Negate[3];
-      uVar9 = src0Select[3];
-      uVar6 = src0Negate[2];
-      uVar10 = *src0Select;
+    src0Negate1 = src0Negate[1];
+    if (src0Negate1 != 0) {
+      src0Negate3 = src0Negate[3];
+      src0Select3 = src0Select[3];
+      src0Negate2 = src0Negate[2];
+      src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
       goto LAB_0006bd20;
     }
-    uVar6 = src0Negate[2];
-    if (uVar6 != 0) {
-      uVar5 = src0Negate[3];
-      uVar9 = src0Select[3];
-      uVar10 = *src0Select;
+    src0Negate2 = src0Negate[2];
+    if (src0Negate2 != 0) {
+      src0Negate3 = src0Negate[3];
+      src0Select3 = src0Select[3];
+      src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
       goto LAB_0006bd20;
     }
-    uVar5 = src0Negate[3];
-    if (uVar5 != 0) {
-      uVar9 = src0Select[3];
-      uVar10 = *src0Select;
+    src0Negate3 = src0Negate[3];
+    if (src0Negate3 != 0) {
+      src0Select3 = src0Select[3];
+      src0SelectX = *src0Select;
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
       goto LAB_0006bd20;
     }
-    uVar10 = *src0Select;
-    if (uVar10 != 0) {
-      uVar9 = src0Select[3];
+    src0SelectX = *src0Select;
+    if (src0SelectX != 0) {
+      src0Select3 = src0Select[3];
       tokenIndex = src0Select[1];
       src1Header = src0Select[2];
       goto LAB_0006bd20;
     }
     tokenIndex = src0Select[1];
     if (tokenIndex != 1) {
-      uVar9 = src0Select[3];
+      src0Select3 = src0Select[3];
       src1Header = src0Select[2];
       goto LAB_0006bd20;
     }
     src1Header = src0Select[2];
     if (src1Header != 2) {
-      uVar9 = src0Select[3];
+      src0Select3 = src0Select[3];
       goto LAB_0006bd20;
     }
-    uVar9 = src0Select[3];
-    if (uVar9 != 3) goto LAB_0006bd20;
+    src0Select3 = src0Select[3];
+    if (src0Select3 != 3) goto LAB_0006bd20;
   }
   else {
-    uVar5 = src0Negate[3];
-    uVar9 = src0Select[3];
-    uVar7 = src0Negate[1];
-    uVar6 = src0Negate[2];
-    uVar10 = *src0Select;
+    src0Negate3 = src0Negate[3];
+    src0Select3 = src0Select[3];
+    src0Negate1 = src0Negate[1];
+    src0Negate2 = src0Negate[2];
+    src0SelectX = *src0Select;
     tokenIndex = src0Select[1];
     src1Header = src0Select[2];
 LAB_0006bd20:
     src0Header = src0Header | 0x400000;
-    src0SwizzleWord = (uVar5 & 1) << 0xf |
-             (uVar9 & 7) << 0xc |
-             (uVar6 & 1) << 0xb |
+    src0SwizzleWord = (src0Negate3 & 1) << 0xf |
+             (src0Select3 & 7) << 0xc |
+             (src0Negate2 & 1) << 0xb |
              (src1Header & 7) << 8 |
-             (uVar7 & 1) << 7 | (tokenIndex & 7) << 4 | (*src0Negate & 1) << 3 | uVar10 & 7;
+             (src0Negate1 & 1) << 7 | (tokenIndex & 7) << 4 | (*src0Negate & 1) << 3 | src0SelectX & 7;
   }
   src1Header = (src1File & 0x3f) << 0x10 | src1Index & 0xffff;
   if (*src1Negate == 0) {
-    uVar10 = src1Negate[1];
-    if (uVar10 == 0) {
-      uVar7 = src1Negate[2];
-      if (uVar7 == 0) {
-        uVar6 = src1Negate[3];
-        if (uVar6 == 0) {
-          uVar11 = *src1Select;
-          if (uVar11 == 0) {
-            uVar5 = src1Select[1];
-            if (uVar5 == 1) {
+    src1Negate1 = src1Negate[1];
+    if (src1Negate1 == 0) {
+      src1Negate2 = src1Negate[2];
+      if (src1Negate2 == 0) {
+        src1Negate3 = src1Negate[3];
+        if (src1Negate3 == 0) {
+          src1SelectX = *src1Select;
+          if (src1SelectX == 0) {
+            src1Select1 = src1Select[1];
+            if (src1Select1 == 1) {
               tokenIndex = src1Select[2];
               if (tokenIndex == 2) {
-                uVar9 = src1Select[3];
-                if (uVar9 == 3) goto LAB_0006be74;
+                src1Select3 = src1Select[3];
+                if (src1Select3 == 3) goto LAB_0006be74;
               }
               else {
-                uVar9 = src1Select[3];
+                src1Select3 = src1Select[3];
               }
             }
             else {
-              uVar9 = src1Select[3];
+              src1Select3 = src1Select[3];
               tokenIndex = src1Select[2];
             }
           }
           else {
-            uVar9 = src1Select[3];
-            uVar5 = src1Select[1];
+            src1Select3 = src1Select[3];
+            src1Select1 = src1Select[1];
             tokenIndex = src1Select[2];
           }
         }
         else {
-          uVar9 = src1Select[3];
-          uVar11 = *src1Select;
-          uVar5 = src1Select[1];
+          src1Select3 = src1Select[3];
+          src1SelectX = *src1Select;
+          src1Select1 = src1Select[1];
           tokenIndex = src1Select[2];
         }
       }
       else {
-        uVar6 = src1Negate[3];
-        uVar9 = src1Select[3];
-        uVar11 = *src1Select;
-        uVar5 = src1Select[1];
+        src1Negate3 = src1Negate[3];
+        src1Select3 = src1Select[3];
+        src1SelectX = *src1Select;
+        src1Select1 = src1Select[1];
         tokenIndex = src1Select[2];
       }
     }
     else {
-      uVar6 = src1Negate[3];
-      uVar9 = src1Select[3];
-      uVar7 = src1Negate[2];
-      uVar11 = *src1Select;
-      uVar5 = src1Select[1];
+      src1Negate3 = src1Negate[3];
+      src1Select3 = src1Select[3];
+      src1Negate2 = src1Negate[2];
+      src1SelectX = *src1Select;
+      src1Select1 = src1Select[1];
       tokenIndex = src1Select[2];
     }
   }
   else {
-    uVar6 = src1Negate[3];
-    uVar9 = src1Select[3];
-    uVar10 = src1Negate[1];
-    uVar7 = src1Negate[2];
-    uVar11 = *src1Select;
-    uVar5 = src1Select[1];
+    src1Negate3 = src1Negate[3];
+    src1Select3 = src1Select[3];
+    src1Negate1 = src1Negate[1];
+    src1Negate2 = src1Negate[2];
+    src1SelectX = *src1Select;
+    src1Select1 = src1Select[1];
     tokenIndex = src1Select[2];
   }
   src1Header = src1Header | 0x400000;
-  src1SwizzleWord = (uVar6 & 1) << 0xf |
-           (uVar9 & 7) << 0xc |
-           (uVar7 & 1) << 0xb |
+  src1SwizzleWord = (src1Negate3 & 1) << 0xf |
+           (src1Select3 & 7) << 0xc |
+           (src1Negate2 & 1) << 0xb |
            (tokenIndex & 7) << 8 |
-           (uVar10 & 1) << 7 | (uVar5 & 7) << 4 | (*src1Negate & 1) << 3 | uVar11 & 7;
+           (src1Negate1 & 1) << 7 | (src1Select1 & 7) << 4 | (*src1Negate & 1) << 3 | src1SelectX & 7;
 LAB_0006be74:
   tokenIndex = *tokenCount;
-  iVar16 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar16 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(undefined4 *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = 0x20056;
+  *(undefined4 *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = 0x20056;
   tokenIndex = *tokenCount + 1;
   *tokenCount = tokenIndex;
-  iVar16 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar16 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = dstHeader;
+  *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = dstHeader;
   tokenIndex = *tokenCount + 1;
   *tokenCount = tokenIndex;
   if ((dstHeader & 0x400000) != 0) {
-    iVar16 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar16 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       tokenIndex = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = dstMaskWord;
+    *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = dstMaskWord;
     tokenIndex = *tokenCount + 1;
     *tokenCount = tokenIndex;
   }
-  iVar16 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= tokenIndex) {
-    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar16 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= tokenIndex) {
+    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     tokenIndex = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(tokenIndex * 4 + *(int *)(ctx + 0x75c)) = src0Header;
+  *(uint *)(tokenIndex * 4 + *(int *)(ctx + ARB_tokenBuffer)) = src0Header;
   dstHeader = *tokenCount + 1;
   *tokenCount = dstHeader;
   if ((src0Header & 0x400000) != 0) {
-    iVar16 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= dstHeader) {
-      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar16 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= dstHeader) {
+      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       dstHeader = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(dstHeader * 4 + *(int *)(ctx + 0x75c)) = src0SwizzleWord;
+    *(uint *)(dstHeader * 4 + *(int *)(ctx + ARB_tokenBuffer)) = src0SwizzleWord;
     dstHeader = *tokenCount + 1;
     *tokenCount = dstHeader;
   }
-  iVar16 = *(int *)(ctx + 0x3d4);
-  if (*(uint *)(ctx + 0x758) <= dstHeader) {
-    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-    if (*(int *)(ctx + 0x75c) != 0) {
-      _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+  iVar16 = *(int *)(ctx + ARB_allocator);
+  if (*(uint *)(ctx + ARB_tokenCapacity) <= dstHeader) {
+    newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+    if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+      _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+      (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
     }
-    *(undefined4 *)(ctx + 0x75c) = newStorage;
+    *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
     dstHeader = *tokenCount;
-    *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+    *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
   }
-  *(uint *)(dstHeader * 4 + *(int *)(ctx + 0x75c)) = src1Header;
+  *(uint *)(dstHeader * 4 + *(int *)(ctx + ARB_tokenBuffer)) = src1Header;
   dstHeader = *tokenCount + 1;
   *tokenCount = dstHeader;
   if ((src1Header & 0x400000) != 0) {
-    iVar16 = *(int *)(ctx + 0x3d4);
-    if (*(uint *)(ctx + 0x758) <= dstHeader) {
-      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + 0x758) * 4 + 0x200);
-      if (*(int *)(ctx + 0x75c) != 0) {
-        _memcpy(newStorage,*(int *)(ctx + 0x75c),*tokenCount << 2);
-        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + 0x75c));
+    iVar16 = *(int *)(ctx + ARB_allocator);
+    if (*(uint *)(ctx + ARB_tokenCapacity) <= dstHeader) {
+      newStorage = (**(code **)(iVar16 + 0xc))(*(uint *)(ctx + ARB_tokenCapacity) * 4 + 0x200);
+      if (*(int *)(ctx + ARB_tokenBuffer) != 0) {
+        _memcpy(newStorage,*(int *)(ctx + ARB_tokenBuffer),*tokenCount << 2);
+        (**(code **)(iVar16 + 0x18))(*(undefined4 *)(ctx + ARB_tokenBuffer));
       }
-      *(undefined4 *)(ctx + 0x75c) = newStorage;
+      *(undefined4 *)(ctx + ARB_tokenBuffer) = newStorage;
       dstHeader = *tokenCount;
-      *(int *)(ctx + 0x758) = *(int *)(ctx + 0x758) + 0x80;
+      *(int *)(ctx + ARB_tokenCapacity) = *(int *)(ctx + ARB_tokenCapacity) + 0x80;
     }
-    *(uint *)(dstHeader * 4 + *(int *)(ctx + 0x75c)) = src1SwizzleWord;
+    *(uint *)(dstHeader * 4 + *(int *)(ctx + ARB_tokenBuffer)) = src1SwizzleWord;
     *tokenCount = *tokenCount + 1;
   }
   return;
 }
 
 /* FUN_0006c280 @ 0x6c280 (1308 bytes) */
-int FUN_0006c280(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int FUN_0006c280(param_1, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate)
   int param_1;
-  uint param_2;
-  uint param_3;
-  int *param_4;
-  uint param_5;
-  uint param_6;
-  uint *param_7;
-  uint *param_8;
+  uint dstFile;
+  uint dstIndex;
+  int *dstMask;
+  uint src0File;
+  uint src0Index;
+  uint *src0Select;
+  uint *src0Negate;
 {
   uint uVar1;
   int iVar2;
@@ -9441,110 +9510,110 @@ int FUN_0006c280(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint uVar15;
   uint *puVar16;
   
-  uVar12 = (param_2 & 0x3f) << 0x10 | param_3 & 0xffff;
+  uVar12 = (dstFile & 0x3f) << 0x10 | dstIndex & 0xffff;
   puVar16 = (uint *)(param_1 + 0x754);
   uVar15 = 0;
   uVar13 = 0;
-  if ((param_2 == 0x12) || (param_2 == 0x13)) {
+  if ((dstFile == 0x12) || (dstFile == 0x13)) {
     uVar12 = uVar12 | 0x400000;
     uVar13 = 0x55;
   }
-  if (*param_4 == 0) {
-    iVar14 = param_4[3];
-    iVar8 = param_4[1];
-    iVar2 = param_4[2];
+  if (*dstMask == 0) {
+    iVar14 = dstMask[3];
+    iVar8 = dstMask[1];
+    iVar2 = dstMask[2];
 LAB_0006c360:
     uVar12 = uVar12 | 0x400000;
     uVar13 = (uint)(iVar14 != 0) * 0x40 |
-             (uint)(iVar2 != 0) * 0x10 | (uint)(iVar8 != 0) * 4 | (uint)(*param_4 != 0);
+             (uint)(iVar2 != 0) * 0x10 | (uint)(iVar8 != 0) * 4 | (uint)(*dstMask != 0);
   }
   else {
-    iVar8 = param_4[1];
+    iVar8 = dstMask[1];
     if (iVar8 == 0) {
-      iVar14 = param_4[3];
-      iVar2 = param_4[2];
+      iVar14 = dstMask[3];
+      iVar2 = dstMask[2];
       goto LAB_0006c360;
     }
-    iVar2 = param_4[2];
+    iVar2 = dstMask[2];
     if (iVar2 == 0) {
-      iVar14 = param_4[3];
+      iVar14 = dstMask[3];
       goto LAB_0006c360;
     }
-    if (param_4[3] == 0) {
+    if (dstMask[3] == 0) {
       iVar14 = 0;
       goto LAB_0006c360;
     }
   }
-  uVar11 = (param_5 & 0x3f) << 0x10 | param_6 & 0xffff;
-  if (*param_8 == 0) {
-    uVar7 = param_8[1];
+  uVar11 = (src0File & 0x3f) << 0x10 | src0Index & 0xffff;
+  if (*src0Negate == 0) {
+    uVar7 = src0Negate[1];
     if (uVar7 == 0) {
-      uVar6 = param_8[2];
+      uVar6 = src0Negate[2];
       if (uVar6 == 0) {
-        uVar5 = param_8[3];
+        uVar5 = src0Negate[3];
         if (uVar5 == 0) {
-          uVar10 = *param_7;
+          uVar10 = *src0Select;
           if (uVar10 == 0) {
-            uVar3 = param_7[1];
+            uVar3 = src0Select[1];
             if (uVar3 == 1) {
-              uVar1 = param_7[2];
+              uVar1 = src0Select[2];
               if (uVar1 == 2) {
-                uVar9 = param_7[3];
+                uVar9 = src0Select[3];
                 if (uVar9 == 3) goto LAB_0006c4d4;
               }
               else {
-                uVar9 = param_7[3];
+                uVar9 = src0Select[3];
               }
             }
             else {
-              uVar9 = param_7[3];
-              uVar1 = param_7[2];
+              uVar9 = src0Select[3];
+              uVar1 = src0Select[2];
             }
           }
           else {
-            uVar9 = param_7[3];
-            uVar3 = param_7[1];
-            uVar1 = param_7[2];
+            uVar9 = src0Select[3];
+            uVar3 = src0Select[1];
+            uVar1 = src0Select[2];
           }
         }
         else {
-          uVar9 = param_7[3];
-          uVar10 = *param_7;
-          uVar3 = param_7[1];
-          uVar1 = param_7[2];
+          uVar9 = src0Select[3];
+          uVar10 = *src0Select;
+          uVar3 = src0Select[1];
+          uVar1 = src0Select[2];
         }
       }
       else {
-        uVar5 = param_8[3];
-        uVar9 = param_7[3];
-        uVar10 = *param_7;
-        uVar3 = param_7[1];
-        uVar1 = param_7[2];
+        uVar5 = src0Negate[3];
+        uVar9 = src0Select[3];
+        uVar10 = *src0Select;
+        uVar3 = src0Select[1];
+        uVar1 = src0Select[2];
       }
     }
     else {
-      uVar5 = param_8[3];
-      uVar9 = param_7[3];
-      uVar6 = param_8[2];
-      uVar10 = *param_7;
-      uVar3 = param_7[1];
-      uVar1 = param_7[2];
+      uVar5 = src0Negate[3];
+      uVar9 = src0Select[3];
+      uVar6 = src0Negate[2];
+      uVar10 = *src0Select;
+      uVar3 = src0Select[1];
+      uVar1 = src0Select[2];
     }
   }
   else {
-    uVar5 = param_8[3];
-    uVar9 = param_7[3];
-    uVar7 = param_8[1];
-    uVar6 = param_8[2];
-    uVar10 = *param_7;
-    uVar3 = param_7[1];
-    uVar1 = param_7[2];
+    uVar5 = src0Negate[3];
+    uVar9 = src0Select[3];
+    uVar7 = src0Negate[1];
+    uVar6 = src0Negate[2];
+    uVar10 = *src0Select;
+    uVar3 = src0Select[1];
+    uVar1 = src0Select[2];
   }
   uVar11 = uVar11 | 0x400000;
   uVar15 = (uVar5 & 1) << 0xf |
            (uVar9 & 7) << 0xc |
            (uVar6 & 1) << 0xb |
-           (uVar1 & 7) << 8 | (uVar7 & 1) << 7 | (uVar3 & 7) << 4 | (*param_8 & 1) << 3 | uVar10 & 7
+           (uVar1 & 7) << 8 | (uVar7 & 1) << 7 | (uVar3 & 7) << 4 | (*src0Negate & 1) << 3 | uVar10 & 7
   ;
 LAB_0006c4d4:
   uVar1 = *puVar16;

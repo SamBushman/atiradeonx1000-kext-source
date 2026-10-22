@@ -1,0 +1,103 @@
+# FUN_00028350: fork X
+use	FUN_00028350	iVar24	prepareResult	INFERRED	return value of FUN_0001e280(ctx, surfaceInfo, 1), tested against 0	^\s*if\ \(\(\(\(\(\*\(int\ \*\)param_10\[1\]\ !=\ 0\)\ \&\&\ \(iVar24\ =\ FUN_0001e280\(param_1,param_10,1\),\ iVar24\ ==\ 0\)\)\ \|\|$	+6
+use	FUN_00028350	iVar24	storeResult	CONFIRMED	result of the store-conditional that bumps the +0x10 word of the surface object (reservation loop)	^\s*iVar24\ =\ storeWordConditionalIndexed\(\*piVar23\ \+\ 0x10000,0,piVar23\);$	+2
+use	FUN_00028350	iVar24	unitOffset	CONFIRMED	starts at 0 and steps by 0x14: byte offset of the unit row in the engineObjects table (5 target slots of 4 bytes)	^\s*iVar24\ =\ 0;$	+1
+use	FUN_00028350	iVar24	unitOffset	CONFIRMED	starts at 0 and steps by 0x14: byte offset of the unit row in the engineObjects table (5 target slots of 4 bytes)	^\s*piVar23\ =\ \(int\ \*\)\(iVar24\ \+\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineObjects\)\);$	+1
+use	FUN_00028350	iVar24	unitOffset	CONFIRMED	starts at 0 and steps by 0x14: byte offset of the unit row in the engineObjects table (5 target slots of 4 bytes)	^\s*iVar24\ =\ iVar24\ \+\ 0x14;$	+1
+use	FUN_00028350	iVar39	unitIndex	CONFIRMED	texture unit loop counter (15 down to 1 in the packet-size loop, 0..15 up in the binding loop)	^\s*iVar39\ =\ 0xf;$	+1
+use	FUN_00028350	iVar39	unitIndex	CONFIRMED	texture unit loop counter (15 down to 1 in the packet-size loop, 0..15 up in the binding loop)	^\s*uVar34\ =\ \(\(int\ \(\*\)\(\)\)FUN_0002cd50\)\(param_1,0,iVar39,uVar34\);$	+1
+use	FUN_00028350	iVar39	unitIndex	CONFIRMED	texture unit loop counter (15 down to 1 in the packet-size loop, 0..15 up in the binding loop)	^\s*iVar39\ =\ iVar39\ \+\ \-1;$	+2
+use	FUN_00028350	iVar39	unitIndex	CONFIRMED	texture unit loop counter (15 down to 1 in the packet-size loop, 0..15 up in the binding loop)	^\s*\}\ while\ \(iVar39\ !=\ 0\);$	+1
+use	FUN_00028350	iVar39	unitIndex	CONFIRMED	texture unit loop counter (15 down to 1 in the packet-size loop, 0..15 up in the binding loop)	^\s*iVar39\ =\ 0;$	+1
+use	FUN_00028350	iVar39	unitIndex	CONFIRMED	texture unit loop counter (15 down to 1 in the packet-size loop, 0..15 up in the binding loop)	^\s*if\ \(\(iVar39\ ==\ 0\)\ \|\|\ \(iVar28\ !=\ 0\)\)\ \{$	+2
+use	FUN_00028350	iVar39	unitIndex	CONFIRMED	texture unit loop counter (15 down to 1 in the packet-size loop, 0..15 up in the binding loop)	^\s*bVar1\ =\ iVar39\ ==\ 0xf;$	+1
+use	FUN_00028350	iVar39	unitIndex	CONFIRMED	texture unit loop counter (15 down to 1 in the packet-size loop, 0..15 up in the binding loop)	^\s*iVar39\ =\ iVar39\ \+\ 1;$	+1
+use	FUN_00028350	iVar28	unitObject	CONFIRMED	ctx + 0x18c + unit*4: the bound texture object of the unit (GLD_unitObject0..), cleared when it is not found in the unit row	^\s*iVar28\ =\ \*\(int\ \*\)\(iVar41\ \+\ 0x18c\);$	+2
+use	FUN_00028350	iVar28	unitObject	CONFIRMED	ctx + 0x18c + unit*4: the bound texture object of the unit (GLD_unitObject0..), cleared when it is not found in the unit row	^\s*if\ \(iVar28\ ==\ \*piVar23\)\ \{$	+2
+use	FUN_00028350	iVar28	unitObject	CONFIRMED	ctx + 0x18c + unit*4: the bound texture object of the unit (GLD_unitObject0..), cleared when it is not found in the unit row	^\s*iVar28\ =\ 0;$	+1
+use	FUN_00028350	iVar28	unitObject	CONFIRMED	ctx + 0x18c + unit*4: the bound texture object of the unit (GLD_unitObject0..), cleared when it is not found in the unit row	^\s*if\ \(\(iVar39\ ==\ 0\)\ \|\|\ \(iVar28\ !=\ 0\)\)\ \{$	+2
+use	FUN_00028350	iVar43	targetsLeft	CONFIRMED	5 targets per unit row: loop counter over the 5 slots	^\s*iVar43\ =\ 5;$	+1
+use	FUN_00028350	iVar43	targetsLeft	CONFIRMED	5 targets per unit row: loop counter over the 5 slots	^\s*iVar43\ =\ iVar43\ \+\ \-1;$	+2
+use	FUN_00028350	piVar23	surfaceRefPtr	INFERRED	surfaceObject + 4 words: the +0x10 reference word bumped with a store-conditional	^\s*piVar23\ =\ puVar32\ \+\ 4;$	+1
+use	FUN_00028350	piVar23	surfaceRefPtr	INFERRED	surfaceObject + 4 words: the +0x10 reference word bumped with a store-conditional	^\s*iVar24\ =\ storeWordConditionalIndexed\(\*piVar23\ \+\ 0x10000,0,piVar23\);$	+2
+use	FUN_00028350	piVar23	targetSlot	CONFIRMED	pointer into the unit row of ctx->engineObjects, compared with the unit object	^\s*piVar23\ =\ \(int\ \*\)\(iVar24\ \+\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineObjects\)\);$	+1
+use	FUN_00028350	piVar23	targetSlot	CONFIRMED	pointer into the unit row of ctx->engineObjects, compared with the unit object	^\s*if\ \(iVar28\ ==\ \*piVar23\)\ \{$	+1
+use	FUN_00028350	piVar23	targetSlot	CONFIRMED	pointer into the unit row of ctx->engineObjects, compared with the unit object	^\s*piVar23\ =\ piVar23\ \+\ 1;$	+1
+use	FUN_00028350	puVar32	surfaceObject	INFERRED	*surfaceInfo[2]: the destination surface object (its +0x10 word is the reference word, +0 is stored in packet[2])	^\s*puVar32\ =\ \*\(undefined4\ \*\*\)param_10\[2\];$	+2
+use	FUN_00028350	puVar32	surfaceObject	INFERRED	*surfaceInfo[2]: the destination surface object (its +0x10 word is the reference word, +0 is stored in packet[2])	^\s*puVar26\[2\]\ =\ \*puVar32;$	+1
+use	FUN_00028350	puVar32	packetEnd	CONFIRMED	packet + 0xce: end of the textured-draw setup packet, linked into the ring as the new last header	^\s*puVar32\ =\ puVar26\ \+\ 0xce;$	+1
+use	FUN_00028350	puVar32	packetEnd	CONFIRMED	packet + 0xce: end of the textured-draw setup packet, linked into the ring as the new last header	^\s*puVar26\[1\]\ =\ \(int\)puVar32\ \-\ \(int\)puVar25\ >>\ 2;$	+1
+use	FUN_00028350	puVar32	packetEnd	CONFIRMED	packet + 0xce: end of the textured-draw setup packet, linked into the ring as the new last header	^\s*\*puVar22\ =\ \(int\)puVar32\ \-\ \(int\)puVar22\ >>\ 2\ \|\ \*puVar22;$	+2
+local	FUN_00028350	puVar20	formatTable	CONFIRMED	PTR_DAT_001e88c8: the 0x24-byte-per-entry pixel format table indexed by hwFormat / the colour format index
+use	FUN_00028350	uVar38	dstAddress	INFERRED	param_8 + the skip offset FUN_0000a6e0 returns: the destination address, compared with the surface base and 0x1f-aligned	^\s*uVar38\ =\ param_8\ \+\ local_100\[0\];$	+1
+use	FUN_00028350	uVar38	dstAddress	INFERRED	param_8 + the skip offset FUN_0000a6e0 returns: the destination address, compared with the surface base and 0x1f-aligned	^\s*if\ \(\(\(\(\(\*\(int\ \*\)param_10\[1\]\ !=\ 0\)\ \&\&\ \(iVar24\ =\ FUN_0001e280\(param_1,param_10,1\),\ iVar24\ ==\ 0\)\)\ \|\|$	+6
+use	FUN_00028350	uVar38	dstAddress	INFERRED	param_8 + the skip offset FUN_0000a6e0 returns: the destination address, compared with the surface base and 0x1f-aligned	^\s*puVar26\[3\]\ =\ uVar38\ \-\ \*\(int\ \*\)\*param_10;$	+1
+use	FUN_00028350	uVar27	surfaceBase	INFERRED	*(uint *)*surfaceInfo: base address of the destination surface; must equal dstAddress	^\s*if\ \(\(\(\(\(\*\(int\ \*\)param_10\[1\]\ !=\ 0\)\ \&\&\ \(iVar24\ =\ FUN_0001e280\(param_1,param_10,1\),\ iVar24\ ==\ 0\)\)\ \|\|$	+6
+use	FUN_00028350	uVar27	surfaceBase	INFERRED	*(uint *)*surfaceInfo: base address of the destination surface; must equal dstAddress	^\s*if\ \(uVar27\ !=\ 0\)\ \{$	+2
+use	FUN_00028350	uVar29	heightArg	INFERRED	copy of the height argument passed on to FUN_0000b670	^\s*uVar29\ =\ param_5;$	+1
+use	FUN_00028350	uVar29	heightArg	INFERRED	copy of the height argument passed on to FUN_0000b670	^\s*FUN_0000b670\(param_1,uVar27,uVar37\ \*\ local_108,uVar33,uVar29,puVar22,0,uVar34\);$	+1
+use	FUN_00028350	uVar33	widthArg	INFERRED	copy of the width argument passed on to FUN_0000b670	^\s*uVar33\ =\ param_4;$	+1
+use	FUN_00028350	uVar33	widthArg	INFERRED	copy of the width argument passed on to FUN_0000b670	^\s*FUN_0000b670\(param_1,uVar27,uVar37\ \*\ local_108,uVar33,uVar29,puVar22,0,uVar34\);$	+1
+local	FUN_00028350	uVar36	clampedWidth	CONFIRMED	width, or 1 when width < 1
+local	FUN_00028350	uVar37	clampedHeight	CONFIRMED	height, or 1 when height < 1
+local	FUN_00028350	local_108	rowBytes	INFERRED	first output of FUN_0000a6e0 (row bytes of the destination): must be 0x20-aligned with the address
+local	FUN_00028350	local_100	packOffsets	INFERRED	FUN_0000a6e0 output array: [0] = the skip offset added to param_8
+use	FUN_00028350	uVar34	streamPtr	CONFIRMED	result of streamAllocate(commandStream, 0x343 words)	^\s*uVar34\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ GLD_streamAllocate\)\)\(iVar40,0x343\);$	+2
+use	FUN_00028350	uVar34	streamPtr	CONFIRMED	result of streamAllocate(commandStream, 0x343 words)	^\s*uVar34\ =\ \(\(int\ \(\*\)\(\)\)FUN_0002cd50\)\(param_1,0,iVar39,uVar34\);$	+1
+use	FUN_00028350	uVar34	streamPtr	CONFIRMED	result of streamAllocate(commandStream, 0x343 words)	^\s*puVar25\ =\ \(uint\ \*\)\(\(int\ \(\*\)\(\)\)FUN_0002cd50\)\(param_1,0,0,uVar34\);$	+1
+use	FUN_00028350	uVar34	readSurfaceCode	INFERRED	FUN_0000a2f0(read buffer enum, renderFlags), stored in packet[4]	^\s*uVar34\ =\ FUN_0000a2f0\(\(uint\)\*\(ushort\ \*\)\(\(\(unsigned\ char\ \*\)0x00002db8\)\ \+\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\)\),$	+3
+local	FUN_00028350	bVar1	lastUnit	CONFIRMED	unitIndex == 0xf: the final texture unit of the binding loop
+local	FUN_00028350	dVar19	i2dMagic	CONFIRMED	DOUBLE_001aa1e0: the magic constant of the GCC int-to-double conversion
+use	FUN_00028350	fVar7	widthF	CONFIRMED	(float)width, or 1.0 when width < 1	^\s*fVar7\ =\ FLOAT_001aa0e8;$	+1
+use	FUN_00028350	fVar7	widthF	CONFIRMED	(float)width, or 1.0 when width < 1	^\s*fVar7\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_f4\)\ \-\ DOUBLE_001aa1e0\);$	+1
+use	FUN_00028350	fVar7	widthF	CONFIRMED	(float)width, or 1.0 when width < 1	^\s*fVar2\ =\ fVar3\ \-\ fVar7;$	+1
+use	FUN_00028350	fVar7	widthF	CONFIRMED	(float)width, or 1.0 when width < 1	^\s*fVar8\ =\ fVar7;$	+1
+use	FUN_00028350	fVar7	widthF	CONFIRMED	(float)width, or 1.0 when width < 1	^\s*fVar8\ =\ fVar7;$@2	+1
+use	FUN_00028350	fVar2	heightF	CONFIRMED	(float)height, or 1.0 when height < 1	^\s*fVar2\ =\ FLOAT_001aa0e8;$	+1
+use	FUN_00028350	fVar2	heightF	CONFIRMED	(float)height, or 1.0 when height < 1	^\s*fVar2\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_ec\)\ \-\ DOUBLE_001aa1e0\);$	+1
+use	FUN_00028350	fVar2	heightF	CONFIRMED	(float)height, or 1.0 when height < 1	^\s*fVar9\ =\ fVar2\ \-\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_ac\)\ \-\ DOUBLE_001aa1e0\);$	+1
+use	FUN_00028350	fVar2	heightF	CONFIRMED	(float)height, or 1.0 when height < 1	^\s*fVar12\ =\ fVar2\ \-\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_b4\)\ \-\ DOUBLE_001aa1e0\);$	+1
+use	FUN_00028350	fVar2	heightF	CONFIRMED	(float)height, or 1.0 when height < 1	^\s*fVar13\ =\ fVar18\ \-\ fVar2;$	+1
+use	FUN_00028350	fVar2	heightF	CONFIRMED	(float)height, or 1.0 when height < 1	^\s*fVar11\ =\ fVar2;$	+1
+use	FUN_00028350	fVar2	heightF	CONFIRMED	(float)height, or 1.0 when height < 1	^\s*fVar11\ =\ fVar2;$@2	+1
+use	FUN_00028350	fVar12	rectXF	CONFIRMED	(float)rectX	^\s*fVar12\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_e4\)\ \-\ DOUBLE_001aa1e0\)\ \+\ FLOAT_001aa0d4;$	+1
+use	FUN_00028350	fVar12	rectXF	CONFIRMED	(float)rectX	^\s*fVar14\ =\ fVar12;$	+2
+use	FUN_00028350	fVar12	rectXF	CONFIRMED	(float)rectX	^\s*if\ \(\-fVar12\ <\ 0\.0\)\ \{$	+1
+use	FUN_00028350	fVar11	rectRightF	CONFIRMED	(float)(rectX + width)	^\s*fVar11\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_dc\)\ \-\ DOUBLE_001aa1e0\)\ \+\ FLOAT_001aa0d4;$	+1
+use	FUN_00028350	fVar11	rectRightF	CONFIRMED	(float)(rectX + width)	^\s*fVar8\ =\ fVar5\ \-\ fVar11;$	+1
+use	FUN_00028350	fVar11	rectRightF	CONFIRMED	(float)(rectX + width)	^\s*fVar11\ =\ fVar5;$	+1
+use	FUN_00028350	fVar11	rectRightF	CONFIRMED	(float)(rectX + width)	^\s*fVar15\ =\ fVar11;$	+1
+use	FUN_00028350	fVar3	negRectXF	CONFIRMED	(float)(-rectX)	^\s*fVar3\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_c4\)\ \-\ DOUBLE_001aa1e0\);$	+1
+use	FUN_00028350	fVar3	negRectXF	CONFIRMED	(float)(-rectX)	^\s*fVar17\ =\ fVar16\ \+\ fVar3;$	+1
+use	FUN_00028350	fVar3	negRectXF	CONFIRMED	(float)(-rectX)	^\s*fVar3\ =\ fVar15\ \+\ fVar3;$	+1
+use	FUN_00028350	fVar3	negRectXF	CONFIRMED	(float)(-rectX)	^\s*fVar2\ =\ fVar3\ \-\ fVar7;$	+1
+use	FUN_00028350	fVar3	negRectXF	CONFIRMED	(float)(-rectX)	^\s*fVar8\ =\ fVar3;$	+1
+use	FUN_00028350	fVar4	flippedYF	INFERRED	(float)(clampedHeight - rectY): the y origin flipped against the height	^\s*fVar4\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_bc\)\ \-\ DOUBLE_001aa1e0\);$	+1
+use	FUN_00028350	fVar4	flippedYF	INFERRED	(float)(clampedHeight - rectY): the y origin flipped against the height	^\s*fVar18\ =\ fVar4\ \+\ fVar18;$	+1
+use	FUN_00028350	fVar4	flippedYF	INFERRED	(float)(clampedHeight - rectY): the y origin flipped against the height	^\s*fVar4\ =\ fVar4\ \-\ fVar18;$	+1
+use	FUN_00028350	fVar4	flippedYF	INFERRED	(float)(clampedHeight - rectY): the y origin flipped against the height	^\s*fVar12\ =\ fVar4;$	+2
+use	FUN_00028350	fVar4	flippedYF	INFERRED	(float)(clampedHeight - rectY): the y origin flipped against the height	^\s*if\ \(\-fVar4\ <\ 0\.0\)\ \{$	+1
+local	FUN_00028350	uStack_f4	widthI2dLo	CONFIRMED	GCC int-to-double idiom: the word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant DOUBLE_001aa1e0: width
+local	FUN_00028350	local_f8	widthI2dHi	CONFIRMED	GCC int-to-double idiom: the word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant DOUBLE_001aa1e0: width (high word 0x43300000)
+local	FUN_00028350	uStack_ec	heightI2dLo	CONFIRMED	GCC int-to-double idiom: the word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant DOUBLE_001aa1e0: height
+local	FUN_00028350	local_f0	heightI2dHi	CONFIRMED	GCC int-to-double idiom: the word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant DOUBLE_001aa1e0: height (high word)
+local	FUN_00028350	uStack_e4	rectXI2dLo	CONFIRMED	GCC int-to-double idiom: the word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant DOUBLE_001aa1e0: rectX
+local	FUN_00028350	local_e8	rectXI2dHi	CONFIRMED	GCC int-to-double idiom: the word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant DOUBLE_001aa1e0: rectX (high word)
+local	FUN_00028350	uStack_dc	rectRightI2dLo	CONFIRMED	GCC int-to-double idiom: the word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant DOUBLE_001aa1e0: width + rectX
+local	FUN_00028350	local_e0	rectRightI2dHi	CONFIRMED	GCC int-to-double idiom: the word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant DOUBLE_001aa1e0: width + rectX (high word)
+local	FUN_00028350	uStack_d4	renderWidthI2dLo	CONFIRMED	GCC int-to-double idiom: the word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant DOUBLE_001aa1e0: GLD_renderWidth
+local	FUN_00028350	local_d8	renderWidthI2dHi	CONFIRMED	GCC int-to-double idiom: the word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant DOUBLE_001aa1e0: GLD_renderWidth (high word)
+local	FUN_00028350	uStack_cc	renderHeightI2dLo	CONFIRMED	GCC int-to-double idiom: the word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant DOUBLE_001aa1e0: GLD_renderHeight
+local	FUN_00028350	local_d0	renderHeightI2dHi	CONFIRMED	GCC int-to-double idiom: the word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant DOUBLE_001aa1e0: GLD_renderHeight (high word)
+local	FUN_00028350	uStack_c4	negRectXI2dLo	CONFIRMED	GCC int-to-double idiom: the word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant DOUBLE_001aa1e0: -rectX
+local	FUN_00028350	local_c8	negRectXI2dHi	CONFIRMED	GCC int-to-double idiom: the word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant DOUBLE_001aa1e0: -rectX (high word)
+local	FUN_00028350	uStack_bc	flippedYI2dLo	CONFIRMED	GCC int-to-double idiom: the word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant DOUBLE_001aa1e0: clampedHeight - rectY
+local	FUN_00028350	local_c0	flippedYI2dHi	CONFIRMED	GCC int-to-double idiom: the word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant DOUBLE_001aa1e0: clampedHeight - rectY (high word)
+local	FUN_00028350	uStack_b4	rectYI2dLo	CONFIRMED	GCC int-to-double idiom: the word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant DOUBLE_001aa1e0: rectY
+local	FUN_00028350	local_b8	rectYI2dHi	CONFIRMED	GCC int-to-double idiom: the word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant DOUBLE_001aa1e0: rectY (high word)
+local	FUN_00028350	uStack_ac	rectBottomI2dLo	CONFIRMED	GCC int-to-double idiom: the word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant DOUBLE_001aa1e0: height + rectY
+local	FUN_00028350	local_b0	rectBottomI2dHi	CONFIRMED	GCC int-to-double idiom: the word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant DOUBLE_001aa1e0: height + rectY (high word)
+local	FUN_00028350	uStack_a4	heightI2dLo2	CONFIRMED	GCC int-to-double idiom: the word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant DOUBLE_001aa1e0: height (second conversion, xor 0x80000000)
+local	FUN_00028350	local_a8	heightI2dHi2	CONFIRMED	GCC int-to-double idiom: the word pair {0x43300000, value ^ 0x80000000} read back as a double and reduced by the magic constant DOUBLE_001aa1e0: height (second conversion, high word)
+local	FUN_00028350	local_a0	fctiwzScratch0	CONFIRMED	(longlong)(int) store of the float->int conversion of the quad width in register pairs (the hardware size word)
+local	FUN_00028350	local_98	fctiwzScratch1	CONFIRMED	(longlong)(int) store of the float->int conversion of the quad height

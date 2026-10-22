@@ -1,0 +1,71 @@
+# FUN_00034200 (glGenerateMipmap): fork X
+use	FUN_00034200	iVar16	faceArg	CONFIRMED	copy of face passed to FUN_00030b50 / FUN_00032100	^\s*iVar16\ =\ param_3;$	+1
+use	FUN_00034200	iVar16	faceArg	CONFIRMED	copy of face passed to FUN_00030b50 / FUN_00032100	^\s*iVar16\ =\ \(\(int\ \(\*\)\(\)\)FUN_00030b50\)\(param_2,extraout_r4,iVar16,param_4,param_5,in_r8\);$	+2
+use	FUN_00034200	iVar16	faceArg	CONFIRMED	copy of face passed to FUN_00030b50 / FUN_00032100	^\s*iVar16\ =\ param_3;$@2	+1
+use	FUN_00034200	iVar16	faceArg	CONFIRMED	copy of face passed to FUN_00030b50 / FUN_00032100	^\s*if\ \(\(\(iVar17\ ==\ 0\)\ \|\|\ \(\(\*\(uint\ \*\)\(iVar17\ \+\ 0x18\)\ \&\ 0x10000\)\ ==\ 0\)\)\ \|\|$	+4
+use	FUN_00034200	iVar16	levelCountPlus1	INFERRED	levelCount + 1 (or the slice-count sum + 1): table words in the packet size	^\s*iVar16\ =\ uVar37\ \+\ 1;$	+1
+use	FUN_00034200	iVar16	levelCountPlus1	INFERRED	levelCount + 1 (or the slice-count sum + 1): table words in the packet size	^\s*iVar16\ =\ uVar37\ \*\ 2;$	+1
+use	FUN_00034200	iVar16	levelCountPlus1	INFERRED	levelCount + 1 (or the slice-count sum + 1): table words in the packet size	^\s*iVar16\ =\ 1;$	+1
+use	FUN_00034200	iVar16	levelCountPlus1	INFERRED	levelCount + 1 (or the slice-count sum + 1): table words in the packet size	^\s*iVar16\ =\ uVar13\ \+\ 1;$	+1
+use	FUN_00034200	iVar16	levelCountPlus1	INFERRED	levelCount + 1 (or the slice-count sum + 1): table words in the packet size	^\s*\(a0,iVar15\ \+\ iVar16\ \+\ 0x340,uStack_80,uVar12,uVar20,in_r8,a6\);$	+1
+use	FUN_00034200	iVar16	sliceCount	INFERRED	halfDepth >> level: slices of this level in the 3D mip chain	^\s*iVar16\ =\ \(int\)uVar14\ >>\ \(uVar24\ \&\ 0x3f\);$	+3
+use	FUN_00034200	iVar16	sliceCount	INFERRED	halfDepth >> level: slices of this level in the 3D mip chain	^\s*uVar13\ =\ uVar13\ \+\ iVar16;$	+1
+use	FUN_00034200	iVar16	pitchAlign	INFERRED	0x20 or 0x20 / bytes per texel: pitch alignment in pixels	^\s*iVar16\ =\ 0x20;$	+1
+use	FUN_00034200	iVar16	pitchAlign	INFERRED	0x20 or 0x20 / bytes per texel: pitch alignment in pixels	^\s*iVar16\ =\ 0x20\ /\ \(1\ <<\ \(\*\(uint\ \*\)\(\&DAT_001d9f4c\ \+\ \(uint\)\*\(byte\ \*\)\(param_2\ \+\ 0xe\)\ \*\ 0x24\)\ >>\ 0x1c$	+2
+use	FUN_00034200	iVar16	pitchAlign	INFERRED	0x20 or 0x20 / bytes per texel: pitch alignment in pixels	^\s*iVar16\ =\ iVar16\ >>\ \(\*\(uint\ \*\)\(iVar17\ \+\ 0x14\)\ \&\ 7\);$	+1
+use	FUN_00034200	iVar16	pitchAlign	INFERRED	0x20 or 0x20 / bytes per texel: pitch alignment in pixels	^\s*uVar35\ \|\ \(uStack_84\ \+\ iVar16\)\ \-\ 1\ \&\ \-iVar16\ \&\ 0x3ffe\ \|\ iVar30\ <<\ 0x10\ \|$	+1
+use	FUN_00034200	iVar16	pitchAlign	INFERRED	0x20 or 0x20 / bytes per texel: pitch alignment in pixels	^\s*piVar19\[3\]\ =\ uVar35\ \|\ \(iVar16\ \+\ uStack_84\)\ \-\ 1\ \&\ \-iVar16\ \&\ 0x3ffe\ \|\ iVar25\ <<\ 0x10\ \|$	+1
+use	FUN_00034200	iVar15	drawWords	INFERRED	packet size term: 0x1e words per level (or 0x28 per slice) minus 0x12	^\s*iVar15\ =\ uVar37\ \*\ 0x1e;$	+1
+use	FUN_00034200	iVar15	drawWords	INFERRED	packet size term: 0x1e words per level (or 0x28 per slice) minus 0x12	^\s*iVar15\ =\ uVar37\ \*\ 0x2c\ \+\ \-0x16;$	+1
+use	FUN_00034200	iVar15	drawWords	INFERRED	packet size term: 0x1e words per level (or 0x28 per slice) minus 0x12	^\s*iVar15\ =\ 0;$	+1
+use	FUN_00034200	iVar15	drawWords	INFERRED	packet size term: 0x1e words per level (or 0x28 per slice) minus 0x12	^\s*iVar15\ =\ uVar13\ \*\ 0x28;$	+1
+use	FUN_00034200	iVar15	drawWords	INFERRED	packet size term: 0x1e words per level (or 0x28 per slice) minus 0x12	^\s*iVar15\ =\ iVar15\ \+\ \-0x12;$	+1
+use	FUN_00034200	iVar15	drawWords	INFERRED	packet size term: 0x1e words per level (or 0x28 per slice) minus 0x12	^\s*\(a0,iVar15\ \+\ iVar16\ \+\ 0x340,uStack_80,uVar12,uVar20,in_r8,a6\);$	+1
+use	FUN_00034200	iVar15	levelMappingRec	CONFIRMED	*texture + 0x40 + (face*13 + level)*0x20: per-level mapping {+8 base, +0x14 pitch}; zero when the level has no mapping	^\s*iVar15\ =\ \*param_2\ \+\ 0x40\ \+\ \(param_3\ \*\ 0xd\ \+\ uVar33\)\ \*\ 0x20;$	+1
+use	FUN_00034200	iVar15	levelMappingRec	CONFIRMED	*texture + 0x40 + (face*13 + level)*0x20: per-level mapping {+8 base, +0x14 pitch}; zero when the level has no mapping	^\s*iVar15\ =\ 0;$@2	+1
+use	FUN_00034200	iVar15	levelMappingRec	CONFIRMED	*texture + 0x40 + (face*13 + level)*0x20: per-level mapping {+8 base, +0x14 pitch}; zero when the level has no mapping	^\s*bVar1\ =\ iVar15\ ==\ 0;$	+1
+use	FUN_00034200	iVar15	levelMappingRec	CONFIRMED	*texture + 0x40 + (face*13 + level)*0x20: per-level mapping {+8 base, +0x14 pitch}; zero when the level has no mapping	^\s*piVar34\[0x9a\]\ =\ \*\(int\ \*\)\(iVar15\ \+\ 8\);$	+1
+use	FUN_00034200	iVar15	levelMappingRec	CONFIRMED	*texture + 0x40 + (face*13 + level)*0x20: per-level mapping {+8 base, +0x14 pitch}; zero when the level has no mapping	^\s*piVar19\[0x19\]\ =\ uVar35\ \*\ \*\(int\ \*\)\(iVar15\ \+\ 0x14\)\ \+\ \*\(int\ \*\)\(iVar15\ \+\ 8\);$	+1
+use	FUN_00034200	iVar15	levelMappingRec	CONFIRMED	*texture + 0x40 + (face*13 + level)*0x20: per-level mapping {+8 base, +0x14 pitch}; zero when the level has no mapping	^\s*piVar38\[7\]\ =\ \*\(int\ \*\)\(iVar15\ \+\ 8\);$	+1
+use	FUN_00034200	iVar15	levelMappingRec	CONFIRMED	*texture + 0x40 + (face*13 + level)*0x20: per-level mapping {+8 base, +0x14 pitch}; zero when the level has no mapping	^\s*iVar15\ =\ 0;$@3	+1
+use	FUN_00034200	iVar15	levelMappingRec	CONFIRMED	*texture + 0x40 + (face*13 + level)*0x20: per-level mapping {+8 base, +0x14 pitch}; zero when the level has no mapping	^\s*iVar15\ =\ iVar29\ \+\ \*param_2\ \+\ 0x40;$	+1
+use	FUN_00034200	iVar15	levelMappingRec	CONFIRMED	*texture + 0x40 + (face*13 + level)*0x20: per-level mapping {+8 base, +0x14 pitch}; zero when the level has no mapping	^\s*bVar1\ =\ iVar15\ ==\ 0;$@2	+1
+use	FUN_00034200	iVar15	levelMappingRec	CONFIRMED	*texture + 0x40 + (face*13 + level)*0x20: per-level mapping {+8 base, +0x14 pitch}; zero when the level has no mapping	^\s*piVar19\[1\]\ =\ \*\(int\ \*\)\(iVar15\ \+\ 8\);$	+1
+local	FUN_00034200	bVar1	noMapping	CONFIRMED	levelMappingRec == 0: use the level/face id word instead of the mapping base
+local	FUN_00034200	bVar8	lastLevel	INFERRED	last mip level of the texture (+0x5f, or +0x6b for the alternate chain)
+local	FUN_00034200	uVar33	nextLevel	CONFIRMED	destination level of the current pass: starts at baseLevel + 1
+use	FUN_00034200	iVar29	storageRecord	INFERRED	texture[0xd]: the storage/backing record (+0x15 flags)	^\s*iVar29\ =\ param_2\[0xd\];$	+2
+use	FUN_00034200	iVar29	storageRecord	INFERRED	texture[0xd]: the storage/backing record (+0x15 flags)	^\s*if\ \(\(\*\(byte\ \*\)\(iVar29\ \+\ 0x15\)\ \&\ 0x18\)\ ==\ 0\)\ \{$	+1
+use	FUN_00034200	iVar29	storageRecord	INFERRED	texture[0xd]: the storage/backing record (+0x15 flags)	^\s*if\ \(iVar29\ ==\ 0\)\ \{$	+1
+use	FUN_00034200	iVar29	storageRecord	INFERRED	texture[0xd]: the storage/backing record (+0x15 flags)	^\s*uVar35\ =\ \(\*\(byte\ \*\)\(iVar29\ \+\ 0x15\)\ \&\ 0x18\)\ <<\ 0xe;$	+1
+use	FUN_00034200	iVar29	mappingOffset	CONFIRMED	(level + face*13) * 0x20, advanced by 0x20 per pass: offset of the per-level mapping record	^\s*iVar29\ =\ \(uVar33\ \+\ param_3\ \*\ 0xd\)\ \*\ 0x20;$	+1
+use	FUN_00034200	iVar29	mappingOffset	CONFIRMED	(level + face*13) * 0x20, advanced by 0x20 per pass: offset of the per-level mapping record	^\s*iVar29\ =\ iVar29\ \+\ 0x20;$	+1
+use	FUN_00034200	iVar29	mappingOffset	CONFIRMED	(level + face*13) * 0x20, advanced by 0x20 per pass: offset of the per-level mapping record	^\s*iVar15\ =\ iVar29\ \+\ \*param_2\ \+\ 0x40;$	+1
+use	FUN_00034200	iVar30	storageRecordB	INFERRED	texture[0xd]: the storage/backing record	^\s*iVar30\ =\ param_2\[0xd\];$	+2
+use	FUN_00034200	iVar30	storageRecordB	INFERRED	texture[0xd]: the storage/backing record	^\s*if\ \(\(\*\(byte\ \*\)\(iVar30\ \+\ 0x15\)\ \&\ 0x18\)\ ==\ 0\)\ \{$	+1
+use	FUN_00034200	iVar30	storageRecordB	INFERRED	texture[0xd]: the storage/backing record	^\s*if\ \(iVar30\ ==\ 0\)\ \{$	+1
+use	FUN_00034200	iVar30	storageRecordB	INFERRED	texture[0xd]: the storage/backing record	^\s*uVar35\ =\ \(\*\(byte\ \*\)\(iVar30\ \+\ 0x15\)\ \&\ 0x18\)\ <<\ 0xe;$	+1
+local	FUN_00034200	piVar21	levelOffsetTable	INFERRED	packet + 5: table of word offsets of each level section
+local	FUN_00034200	piVar31	passOffsetTable	INFERRED	piVar38 + 1: table of word offsets of each per-pass section
+local	FUN_00034200	piVar38	tailCursor	CONFIRMED	packet + 4 + count: first the pass table, then the running write position for the per-pass register writes, finally the end of the packet
+local	FUN_00034200	piVar19	drawCursor	CONFIRMED	packetState + 0xbd: write position of the per-level draw commands after the hardware context copy
+local	FUN_00034200	uStack_80	depthLevelCount	INFERRED	texture depth levels (levelTable+0x31 - baseLevel, at least 0): the 3D depth log2; halved each pass
+local	FUN_00034200	fVar2	texelBiasX	CONFIRMED	0.0078125 / baseWidth: x half-texel bias (1/128 of a texel)
+local	FUN_00034200	fVar3	texelBiasY	CONFIRMED	0.0078125 / baseHeight: y half-texel bias
+local	FUN_00034200	fVar10	texelBiasXPlusOne	CONFIRMED	texelBiasX + 1.0
+use	FUN_00034200	fVar4	halfWidthF	CONFIRMED	(float)halfWidth	^\s*fVar4\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_84\ \^\ 0x80000000\)\ \-\ 4503601774854144\.0\);$	+1
+use	FUN_00034200	fVar4	halfWidthF	CONFIRMED	(float)halfWidth	^\s*piVar19\[9\]\ =\ \(int\)GH_F2U\(\(float\)\(\(\(fVar4\ \+\ 0\.0\)\ \*\ 0\.5\)\)\);$	+1
+use	FUN_00034200	fVar4	halfWidthF	CONFIRMED	(float)halfWidth	^\s*piVar19\[6\]\ =\ \(int\)\(fVar4\ \*\ 6\.0\)\ <<\ 0x10\ \|\ \(int\)\(fVar7\ \*\ 6\.0\);$	+1
+use	FUN_00034200	fVar7	halfHeightF	CONFIRMED	(float)halfHeight	^\s*fVar7\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_88\ \^\ 0x80000000\)\ \-\ 4503601774854144\.0\);$	+1
+use	FUN_00034200	fVar7	halfHeightF	CONFIRMED	(float)halfHeight	^\s*piVar19\[10\]\ =\ \(int\)GH_F2U\(\(float\)\(\(\(fVar7\ \+\ 0\.0\)\ \*\ 0\.5\)\)\);$	+1
+use	FUN_00034200	fVar7	halfHeightF	CONFIRMED	(float)halfHeight	^\s*piVar19\[6\]\ =\ \(int\)\(fVar4\ \*\ 6\.0\)\ <<\ 0x10\ \|\ \(int\)\(fVar7\ \*\ 6\.0\);$	+1
+local	FUN_00034200	fVar5	halfHeightFB	CONFIRMED	(float)halfHeight in the 3D path
+local	FUN_00034200	fVar6	halfWidthFB	CONFIRMED	(float)halfWidth in the 3D path
+use	FUN_00034200	fVar4	sliceStep	INFERRED	1.0 / halfDepth: r texture-coordinate step between slices	^\s*fVar4\ =\ \(float\)\(1\.0\ /\ \(\(double\)CONCAT44\(0x43300000,uVar14\ \^\ 0x80000000\)\ \-\ 4503601774854144\.0\)\)$	+1
+use	FUN_00034200	fVar4	sliceStep	INFERRED	1.0 / halfDepth: r texture-coordinate step between slices	^\s*fVar7\ =\ fVar4\ \*\ 0\.5\ \+$	+1
+use	FUN_00034200	fVar4	sliceStep	INFERRED	1.0 / halfDepth: r texture-coordinate step between slices	^\s*fVar7\ =\ fVar7\ \+\ fVar4;$	+1
+use	FUN_00034200	fVar7	sliceCoord	INFERRED	r texture coordinate of the current slice: sliceStep * 0.5 + bias	^\s*fVar7\ =\ fVar4\ \*\ 0\.5\ \+$	+1
+use	FUN_00034200	fVar7	sliceCoord	INFERRED	r texture coordinate of the current slice: sliceStep * 0.5 + bias	^\s*piVar19\[6\]\ =\ \(int\)GH_F2U\(\(float\)\(fVar7\)\);$	+4
+use	FUN_00034200	fVar7	sliceCoord	INFERRED	r texture coordinate of the current slice: sliceStep * 0.5 + bias	^\s*fVar7\ =\ fVar7\ \+\ fVar4;$	+1
+use	FUN_00034200	iVar16	vap_vte_cntl	CONFIRMED	copy of ctx+GLD_vap_vte_cntl (register shadow) written into the packet	^\s*iVar16\ =\ \*\(int\ \*\)\(GLD_vap_vte_cntl\ \+\ param_1\);$	+1
+use	FUN_00034200	iVar16	vap_vte_cntl	CONFIRMED	copy of ctx+GLD_vap_vte_cntl (register shadow) written into the packet	^\s*piVar38\[0xbe\]\ =\ iVar16;$	+1

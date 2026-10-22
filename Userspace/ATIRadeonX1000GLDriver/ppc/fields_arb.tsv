@@ -1,0 +1,9 @@
+# field	STRUCT	OFFSET	name	tier	evidence   - ARB program assembler object (ctx of the emitters in arb_scope.txt): an instruction array and a token stream
+field	ARB	0x3c8	instrArray	CONFIRMED	FUN_00083e10: calloc'd array of 0x10-byte instruction records, grown by 0x20 records (memcpy of the old array, free, store back)
+field	ARB	0x3cc	instrCount	CONFIRMED	FUN_00083e10: record index = *(ctx+0x3cc), incremented after the record is claimed
+field	ARB	0x3d4	allocator	CONFIRMED	FUN_00065ea0: iVar16 = *(ctx+0x3d4), then (*(iVar16+0xc))(bytes) allocates and (*(iVar16+0x18))(ptr) frees the token buffer
+field	ARB	0x3dc	currentInstr	CONFIRMED	FUN_00083e10: *(ctx+0x3dc) = &instrArray[count]: the record being filled by the emitter
+field	ARB	0x3e0	instrCapacity	CONFIRMED	FUN_00083e10: compared with count + 1 to decide the growth; += 0x20 after growing
+field	ARB	0x754	tokenCount	CONFIRMED	FUN_00065ea0: tokenCount = ctx+0x754: the write index of each emitted token word
+field	ARB	0x758	tokenCapacity	CONFIRMED	FUN_00065ea0: compared with the write index; += 0x80 after growing the token buffer with the allocator
+field	ARB	0x75c	tokenBuffer	CONFIRMED	FUN_00065ea0: the uint token array: tokenBuffer[tokenCount++] = word; reallocated through allocator+0xc/+0x18

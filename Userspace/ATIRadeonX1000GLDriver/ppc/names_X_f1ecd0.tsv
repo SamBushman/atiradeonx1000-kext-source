@@ -1,0 +1,118 @@
+# FUN_0001ecd0 (vertex array draw): fork X
+local	FUN_0001ecd0	param_3	primitiveMode	CONFIRMED	switch on the GL primitive enum: 1/8 keep an even count, 4 (GL_TRIANGLES) divides by 3, 7 (GL_QUADS) keeps a multiple of 4
+local	FUN_0001ecd0	param_4	first	INFERRED	first vertex / index offset: chunk start = first + chunkIndex * chunkCount
+local	FUN_0001ecd0	param_5	count	INFERRED	number of vertices / indices to draw (compared with 0x20, passed twice to FUN_0002cc30)
+local	FUN_0001ecd0	param_6	indexType	CONFIRMED	compared with GL_UNSIGNED_BYTE 0x1401, GL_UNSIGNED_SHORT 0x1403, GL_UNSIGNED_INT 0x1405; 0x14ff marks non-indexed drawing
+local	FUN_0001ecd0	param_7	drawFlags	INFERRED	bit 0 selects the alternate path; stored to the stack argument of FUN_0002cc30
+local	FUN_0001ecd0	param_8	currentAttribs	INFERRED	current vertex attribute values (+0x30 colour, +0x40/+0x44/+0x48 ..., +0x80 texcoord array of 4-float records) copied into the packet when the arrays are not enabled
+use	FUN_0001ecd0	iVar31	arrayState	CONFIRMED	*currentVertexArray: the vertex array state record (+0x304 flags, +0x308/+0x30c buffer masks)	^\s*iVar31\ =\ \*piVar28;$	+1
+use	FUN_0001ecd0	iVar31	arrayState	CONFIRMED	*currentVertexArray: the vertex array state record (+0x304 flags, +0x308/+0x30c buffer masks)	^\s*uVar6\ =\ \(uint\)\(\*\(int\ \*\)\(iVar31\ \+\ 0x308\)\ !=\ 0\ \|\|\ \*\(int\ \*\)\(iVar31\ \+\ 0x30c\)\ !=\ 0\);$	+2
+use	FUN_0001ecd0	iVar31	arrayState	CONFIRMED	*currentVertexArray: the vertex array state record (+0x304 flags, +0x308/+0x30c buffer masks)	^\s*iStack_60\ =\ \*\(int\ \*\)\(iVar31\ \+\ 0x314\);$	+1
+use	FUN_0001ecd0	iVar31	chunkIndex	CONFIRMED	chunk counter of the draw loop	^\s*iVar31\ =\ 0;$	+1
+use	FUN_0001ecd0	iVar31	chunkIndex	CONFIRMED	chunk counter of the draw loop	^\s*iVar20\ =\ param_4\ \+\ iVar31\ \*\ \(int\)puVar32;$	+1
+use	FUN_0001ecd0	iVar31	chunkIndex	CONFIRMED	chunk counter of the draw loop	^\s*iVar31\ =\ iVar31\ \+\ 1;$	+1
+use	FUN_0001ecd0	iVar26	arrayStateB	CONFIRMED	*currentVertexArray	^\s*iVar26\ =\ \*piVar28;$	+1
+use	FUN_0001ecd0	iVar26	arrayStateB	CONFIRMED	*currentVertexArray	^\s*puVar19\ =\ \(undefined\ \*\)\(\*\(uint\ \*\)\(iVar26\ \+\ 0x308\)\ \|\ \*\(uint\ \*\)\(iVar26\ \+\ 0x30c\)\);$	+1
+use	FUN_0001ecd0	iVar26	arrayStateB	CONFIRMED	*currentVertexArray	^\s*puVar19\ =\ \(undefined\ \*\)\(\*\(uint\ \*\)\(iVar26\ \+\ 0x308\)\ \|\ \*\(uint\ \*\)\(iVar26\ \+\ 0x30c\)\);$@2	+3
+use	FUN_0001ecd0	iVar26	arrayStateB	CONFIRMED	*currentVertexArray	^\s*if\ \(\(\*\(uint\ \*\)\(iVar26\ \+\ 0x314\)\ <=\ \*\(uint\ \*\)\(iVar26\ \+\ 0xa8\)\)\ \&\&$	+2
+use	FUN_0001ecd0	iVar26	elementsInBuffer	INFERRED	0 or 1: the indices come from a bound element buffer (adds a buffer reference word to the packet)	^\s*iVar26\ =\ 0;$	+1
+use	FUN_0001ecd0	iVar26	elementsInBuffer	INFERRED	0 or 1: the indices come from a bound element buffer (adds a buffer reference word to the packet)	^\s*if\ \(\(\*\(int\ \*\)\(iVar20\ \+\ 0x10\)\ !=\ 7\)\ \|\|\ \(iVar26\ =\ 1,\ \*\(char\ \*\)\(iVar20\ \+\ 0xc\)\ !=\ '\\0'\)\)$	+2
+use	FUN_0001ecd0	iVar26	elementsInBuffer	INFERRED	0 or 1: the indices come from a bound element buffer (adds a buffer reference word to the packet)	^\s*iVar26\ =\ 1;$	+1
+use	FUN_0001ecd0	iVar26	elementsInBuffer	INFERRED	0 or 1: the indices come from a bound element buffer (adds a buffer reference word to the packet)	^\s*iVar26\ =\ 0;$@2	+1
+use	FUN_0001ecd0	iVar26	elementsInBuffer	INFERRED	0 or 1: the indices come from a bound element buffer (adds a buffer reference word to the packet)	^\s*if\ \(iVar26\ ==\ 0\)\ goto\ LAB_0001ef14;$	+1
+use	FUN_0001ecd0	iVar26	elementsInBuffer	INFERRED	0 or 1: the indices come from a bound element buffer (adds a buffer reference word to the packet)	^\s*iVar26\ =\ 1;$@2	+1
+use	FUN_0001ecd0	iVar26	elementsInBuffer	INFERRED	0 or 1: the indices come from a bound element buffer (adds a buffer reference word to the packet)	^\s*iVar26\ =\ 0;$@3	+1
+use	FUN_0001ecd0	iVar26	elementsInBuffer	INFERRED	0 or 1: the indices come from a bound element buffer (adds a buffer reference word to the packet)	^\s*if\ \(\(\(bVar3\)\ \|\|\ \(\*\(int\ \*\)\(param_1\ \+\ 0x2720\)\ !=\ 0\)\)\ \|\|\ \(iVar26\ !=\ 0\)\)\ \{$	+1
+use	FUN_0001ecd0	iVar26	elementsInBuffer	INFERRED	0 or 1: the indices come from a bound element buffer (adds a buffer reference word to the packet)	^\s*if\ \(iVar26\ !=\ 0\)\ \{$	+1
+use	FUN_0001ecd0	iVar26	elementsInBuffer	INFERRED	0 or 1: the indices come from a bound element buffer (adds a buffer reference word to the packet)	^\s*if\ \(iVar26\ ==\ 0\)\ \{$	+1
+use	FUN_0001ecd0	iVar26	elementsInBuffer	INFERRED	0 or 1: the indices come from a bound element buffer (adds a buffer reference word to the packet)	^\s*if\ \(iVar26\ !=\ 0\)\ goto\ code_r0x0001f1f0;$	+1
+use	FUN_0001ecd0	iVar26	elementsInBuffer	INFERRED	0 or 1: the indices come from a bound element buffer (adds a buffer reference word to the packet)	^\s*puVar30\[3\]\ =\ iVar26;$	+1
+use	FUN_0001ecd0	iVar26	elementsInBuffer	INFERRED	0 or 1: the indices come from a bound element buffer (adds a buffer reference word to the packet)	^\s*if\ \(iVar26\ !=\ 0\)\ \{$@2	+1
+use	FUN_0001ecd0	iVar26	elementsInBuffer	INFERRED	0 or 1: the indices come from a bound element buffer (adds a buffer reference word to the packet)	^\s*if\ \(iVar26\ !=\ 0\)\ \{$@3	+1
+use	FUN_0001ecd0	iVar26	elementsInBuffer	INFERRED	0 or 1: the indices come from a bound element buffer (adds a buffer reference word to the packet)	^\s*if\ \(iVar26\ ==\ 0\)\ \{$@2	+1
+use	FUN_0001ecd0	iVar26	elementsInBuffer	INFERRED	0 or 1: the indices come from a bound element buffer (adds a buffer reference word to the packet)	^\s*if\ \(iVar26\ ==\ 0\)\ \{$@3	+1
+use	FUN_0001ecd0	iVar20	elementBinding	INFERRED	*(currentVertexArray[1] + 0x80): the element array binding record	^\s*iVar20\ =\ \*\(int\ \*\)\(piVar28\[1\]\ \+\ 0x80\);$	+1
+use	FUN_0001ecd0	iVar20	elementBinding	INFERRED	*(currentVertexArray[1] + 0x80): the element array binding record	^\s*if\ \(\(\(puVar19\ !=\ \(undefined\ \*\)0x0\)\ \&\&\ \(iVar20\ !=\ 0\)\)\ \&\&$	+2
+use	FUN_0001ecd0	iVar20	elementBinding	INFERRED	*(currentVertexArray[1] + 0x80): the element array binding record	^\s*if\ \(\(\*\(int\ \*\)\(iVar20\ \+\ 0x10\)\ !=\ 7\)\ \|\|\ \(iVar26\ =\ 1,\ \*\(char\ \*\)\(iVar20\ \+\ 0xc\)\ !=\ '\\0'\)\)$	+2
+use	FUN_0001ecd0	iVar20	elementBinding	INFERRED	*(currentVertexArray[1] + 0x80): the element array binding record	^\s*\*\(undefined1\ \*\)\(iVar20\ \+\ 0xc\)\ =\ 1;$	+1
+use	FUN_0001ecd0	iVar20	packetWords	INFERRED	state words counted for the packet size	^\s*iVar20\ =\ uVar21\ \+\ 0x14;$	+1
+use	FUN_0001ecd0	iVar20	packetWords	INFERRED	state words counted for the packet size	^\s*iVar20\ =\ uVar8\ \+\ uVar21\ \+\ 0x13;$	+1
+use	FUN_0001ecd0	iVar20	packetWords	INFERRED	state words counted for the packet size	^\s*iVar20\ =\ iVar20\ \+\ 1;$	+1
+use	FUN_0001ecd0	iVar20	packetWords	INFERRED	state words counted for the packet size	^\s*uVar21\ =\ iVar20\ \+\ \(uVar8\ \+\ 1\ >>\ 1\)\ \*\ 3\ \+\ 3;$	+1
+use	FUN_0001ecd0	iVar20	chunkFirst	CONFIRMED	first + chunkIndex * chunkCount: first element of the chunk	^\s*iVar20\ =\ param_4\ \+\ iVar31\ \*\ \(int\)puVar32;$	+1
+use	FUN_0001ecd0	iVar20	chunkFirst	CONFIRMED	first + chunkIndex * chunkCount: first element of the chunk	^\s*puVar15\ =\ \(uint\ \*\)\(iVar20\ \*\ 2\ \+\ uStack00000030\);$	+1
+use	FUN_0001ecd0	iVar20	chunkFirst	CONFIRMED	first + chunkIndex * chunkCount: first element of the chunk	^\s*pvVar18\ =\ \(void\ \*\)\(iVar20\ \*\ 4\ \+\ uStack00000030\);$	+1
+use	FUN_0001ecd0	iVar20	chunkFirst	CONFIRMED	first + chunkIndex * chunkCount: first element of the chunk	^\s*pbVar25\ =\ \(byte\ \*\)\(iVar20\ \+\ uStack00000030\);$	+1
+use	FUN_0001ecd0	iVar20	chunkFirst	CONFIRMED	first + chunkIndex * chunkCount: first element of the chunk	^\s*\*puVar33\ =\ \(uint\)\(\(byte\ \*\)\(iVar20\ \+\ uStack00000030\)\)\[\(int\)\(puVar32\ \+\ \-1\)\];$	+1
+local	FUN_0001ecd0	puVar32	chunkCount	CONFIRMED	elements per chunk: capped at 0xffff / 0x7ffa / 0x3ffd and by the remaining count, rounded to the primitive size
+local	FUN_0001ecd0	puVar11	indexWords	CONFIRMED	words of index data in the packet: (count + 1) / 2 + 4 for 16-bit, count + 4 for 32-bit, 8 with a buffer
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar16\ =\ puVar15;$	+1
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar16\ =\ puVar15\ \+\ 2;$	+1
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar16\ =\ \(uint\ \*\)FUN_0002c0c0\(param_1,puVar16\);$	+1
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar30\ =\ \(undefined4\ \*\)\(\(uint\)\(puVar16\ \+\ 0xb\)\ \&\ 0xffffffe0\);$	+1
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*\*puVar16\ =\ \(\(\(int\)puVar30\ \-\ \(int\)puVar16\)\ \+\ \-8\)\ \*\ 0x4000\ \|\ 0xc0001000;$	+2
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar16\ =\ puVar30\ \+\ 8;$	+1
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar16\ =\ puVar30\ \+\ 9;$	+1
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar16\ =\ puVar30\ \+\ 10;$	+1
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*\*puVar16\ =\ \*puVar15;$	+2
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*\*puVar16\ =\ \*\(uint\ \*\)\*\*\(undefined4\ \*\*\)$	+1
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar16\ =\ puVar16\ \+\ 1;$@2	+1
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar30\[5\]\ =\ \(\(int\)puVar16\ \-\ \(int\)puVar30\ >>\ 2\)\ \+\ 2;$	+1
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar15\ =\ puVar16\ \+\ 1;$	+2
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar16\ =\ puVar15\ \+\ 2;$@2	+1
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar16\ =\ \(uint\ \*\)FUN_0002c180\(param_1,puVar16\);$	+1
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar30\[6\]\ =\ \(int\)puVar16\ \+\ \(4\ \-\ \(int\)puVar30\)\ >>\ 2;$	+1
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar15\ =\ puVar16\ \+\ 1;$@2	+2
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar16\[1\]\ =\ \*\(uint\ \*\)\(param_8\ \+\ 0x40\);$	+3
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar16\[4\]\ =\ 0x3f800000;$	+2
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar16\ =\ puVar15;$@2	+1
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar16\ =\ puVar15\ \+\ 4;$	+1
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar16\ =\ puVar15;$@3	+1
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*\*puVar16\ =\ \*\(uint\ \*\)\(param_8\ \+\ uVar23\ \*\ 0x10\);$	+5
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*\*puVar16\ =\ 0x82c;$	+2
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar16\[2\]\ =\ \(\(uint\)\(puVar32\ \+\ 1\)\ >>\ 1\)\ <<\ 0x10\ \|\ 0xc0003600;$	+3
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*\*puVar16\ =\ 0x82c;$@2	+1
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar16\[2\]\ =\ 0xc0003600;$	+4
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar16\[4\]\ =\ 0xc0023300;$	+2
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar16\[6\]\ =\ \(int\)puVar15\ \-\ iStack_60;$	+1
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar16\[6\]\ =\ \(int\)puVar15\ \-\ \*\(int\ \*\)\*puVar10;$	+1
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar33\ =\ puVar16\ \+\ 8;$	+2
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*\*puVar16\ =\ 0x82c;$@3	+2
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar16\[2\]\ =\ \(int\)puVar32\ <<\ 0x10\ \|\ 0xc0003600;$	+4
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*\*puVar16\ =\ 0x82c;$@4	+1
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar16\[2\]\ =\ 0xc0003600;$@2	+6
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar16\[6\]\ =\ \(int\)pvVar18\ \-\ iStack_60;$	+1
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar16\[6\]\ =\ \(int\)pvVar18\ \-\ \*\(int\ \*\)\*puVar10;$	+1
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar33\ =\ puVar16\ \+\ 8;$@2	+2
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar33\ =\ puVar16\ \+\ 4;$@2	+1
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*\*puVar16\ =\ 0x82c;$@5	+1
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar16\[2\]\ =\ 0xc0003400;$	+3
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*\*puVar16\ =\ 0x82c;$@6	+2
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar16\[2\]\ =\ \(int\)\(puVar32\ \+\ 1\)\ \*\ 0x8000\ \&\ 0xffff0000U\ \|\ 0xc0003600;$	+3
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*puVar16\ =\ puVar15;$@4	+1
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*uVar24\ =\ \*puVar16;$	+5
+use	FUN_0001ecd0	puVar16	packetPtr	CONFIRMED	write position of the packet being filled	^\s*uVar24\ =\ \*puVar16;$@2	+2
+local	FUN_0001ecd0	puVar30	drawPacket	CONFIRMED	the 0x39000000 vertex-array draw packet (32-byte aligned after the state words)
+use	FUN_0001ecd0	piVar28	ringHeaderZero	INFERRED	null before the first chunk	^\s*piVar28\ =\ \(int\ \*\)0x0;$	+1
+use	FUN_0001ecd0	piVar28	ringHeaderZero	INFERRED	null before the first chunk	^\s*piVar28\ =\ puVar30\ \+\ 7;$	+1
+use	FUN_0001ecd0	piVar28	ringHeaderZero	INFERRED	null before the first chunk	^\s*\*piVar28\ =\ \(int\)puVar16\ \+\ \(0x10\ \-\ \(int\)puVar30\)\ >>\ 2;$	+2
+use	FUN_0001ecd0	piVar28	ringHeaderZero	INFERRED	null before the first chunk	^\s*\*piVar28\ =\ \(int\)puVar16\ \+\ \(0x10\ \-\ \(int\)puVar30\)\ >>\ 2;$@2	+1
+use	FUN_0001ecd0	piVar28	ringHeaderZero	INFERRED	null before the first chunk	^\s*piVar28\ =\ piVar28\ \+\ 1;$@2	+1
+local	FUN_0001ecd0	uVar8	enabledArrays	INFERRED	ctx+0x27c8 & 0x1f: number of enabled vertex arrays
+local	FUN_0001ecd0	uVar6	usesBuffers	CONFIRMED	arrayState+0x308 | +0x30c != 0: some array comes from a buffer object
+local	FUN_0001ecd0	uVar7	arrayPairs	CONFIRMED	(enabledArrays + 1) >> 1: array descriptor pairs
+local	FUN_0001ecd0	uVar21	packetStateWords	INFERRED	extra words for the program-stream state and the pending clear
+use	FUN_0001ecd0	bVar2	indexIsShort	CONFIRMED	indexType == GL_UNSIGNED_SHORT	^\s*bVar2\ =\ param_6\ ==\ \(\(unsigned\ char\ \*\)0x00001403\);$	+2
+use	FUN_0001ecd0	bVar2	indexIsShort	CONFIRMED	indexType == GL_UNSIGNED_SHORT	^\s*if\ \(bVar2\)\ \{$@2	+1
+use	FUN_0001ecd0	bVar2	indexIsShort	CONFIRMED	indexType == GL_UNSIGNED_SHORT	^\s*if\ \(bVar2\)\ \{$@3	+1
+use	FUN_0001ecd0	bVar3	hasElements	CONFIRMED	remaining != 0	^\s*bVar3\ =\ puVar19\ !=\ \(undefined\ \*\)0x0;$	+2
+use	FUN_0001ecd0	bVar3	hasElements	CONFIRMED	remaining != 0	^\s*bVar14\ =\ bVar3;$@2	+1
+use	FUN_0001ecd0	bVar3	notIndexed	CONFIRMED	indexType == 0x14ff	^\s*bVar3\ =\ param_6\ ==\ \(\(unsigned\ char\ \*\)0x000014ff\);$	+2
+use	FUN_0001ecd0	bVar3	notIndexed	CONFIRMED	indexType == 0x14ff	^\s*if\ \(!bVar3\)\ goto\ code_r0x0001f1ac;$	+1
+use	FUN_0001ecd0	bVar3	notIndexed	CONFIRMED	indexType == 0x14ff	^\s*if\ \(bVar3\)\ \{$	+1
+use	FUN_0001ecd0	bVar3	notIndexed	CONFIRMED	indexType == 0x14ff	^\s*if\ \(!bVar3\)\ goto\ LAB_0001f7f0;$	+1
+local	FUN_0001ecd0	bVar14	needStatePacket	INFERRED	true while the vertex array state packet still has to be emitted for this draw
+local	FUN_0001ecd0	bVar9	keepStateCache	INFERRED	state cache pointers ctx+0x26d4/0x26d8 stay set
+use	FUN_0001ecd0	pbVar25	indexBytes	INFERRED	pointer into the client index data: chunkFirst + client index base	^\s*pbVar25\ =\ \(byte\ \*\)\(iVar20\ \+\ uStack00000030\);$	+1
+use	FUN_0001ecd0	pbVar25	indexBytes	INFERRED	pointer into the client index data: chunkFirst + client index base	^\s*pbVar1\ =\ pbVar25\ \+\ 1;$	+1
+use	FUN_0001ecd0	pbVar25	indexBytes	INFERRED	pointer into the client index data: chunkFirst + client index base	^\s*bVar5\ =\ \*pbVar25;$	+2
