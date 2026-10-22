@@ -1,0 +1,144 @@
+local	FUN_00088480	param_1	parser	CONFIRMED	the parser state: +8 token start, +0xc cursor, +0x14 token kind, +0x18 token value (same fields all arbfp* functions use)
+local	FUN_00088480	iVar8	low	INFERRED	binary-search low index
+local	FUN_00088480	iVar5	high	INFERRED	binary-search high index
+local	FUN_00088480	iVar6	mid	INFERRED	binary-search midpoint
+local	FUN_00088480	iVar9	tokenLength	INFERRED	cursor - token start
+local	FUN_00088480	pbVar4	tokenText	INFERRED	binary search of the current token text against the keyword table at __DATA,__const+8 ({name, token kind, value}, 130 entries: 1D..XPD, ambient..transpose) ; sets token kind/value
+local	FUN_00088480	iVar3	compareResult	INFERRED	binary search of the current token text against the keyword table at __DATA,__const+8 ({name, token kind, value}, 130 entries: 1D..XPD, ambient..transpose) ; sets token kind/value
+local	FUN_00088480	iVar7	matchIndex	INFERRED	index into the token text while comparing
+local	FUN_00088480	iVar10	remaining	INFERRED	binary search of the current token text against the keyword table at __DATA,__const+8 ({name, token kind, value}, 130 entries: 1D..XPD, ambient..transpose) ; sets token kind/value
+local	FUN_00088480	uVar2	sum	INFERRED	low+high used for the midpoint
+local	FUN_000885b0	param_1	parser	CONFIRMED	scans digits, '.', fraction, exponent; errors 'Invalid scientific notation.' and 'invalid suffix on number'
+local	FUN_00088920	param_1	parser	CONFIRMED	skips blanks/newlines/'#' comments counting tokens, then dispatches on the next character to build the next token (punctuation kinds 0x11 '.', 0x12 '..', 0x13 ',', 0x14 ';', 0x15 '[', 0x16 ']', 0x17 '{', 0x19 '+', 0x1a '-', 0x1b '='; identifiers via arbfpLookupKeyword, numbers via arbfpLexNumber); 'invalid character' error otherwise
+local	FUN_00088920	puVar7	cursor	INFERRED	current character pointer
+local	FUN_00088920	puVar5	sourceEnd	INFERRED	parser+0x10
+local	FUN_00088920	iVar6	remaining	INFERRED	skips blanks/newlines/'#' comments counting tokens, then dispatches on the next character to build the next token (punctuation kinds 0x11 '.', 0x12 '..', 0x13 ',', 0x14 ';', 0x15 '[', 0x16 ']', 0x17 '{', 0x19 '+', 0x1a '-', 0x1b '='; identifiers via arbfpLookupKeyword, numbers via arbfpLexNumber); 'invalid character' error otherwise
+local	FUN_00088920	bVar2	sawCarriageReturn	INFERRED	set by 0xd
+local	FUN_00088920	bVar3	sawNewline	INFERRED	set by 0xa
+local	FUN_00088920	bVar4	inComment	INFERRED	set by '#' (0x23)
+local	FUN_00088920	cVar1	ch	INFERRED	identifier character during scan
+local	FUN_00088e70	param_1	parser	CONFIRMED	records the first error only (message, token index, source offset), moves the cursor to the end of the source and stores GL_INVALID_OPERATION (0x502) in the program object's error word (*parser)
+local	FUN_00088e70	param_2	message	CONFIRMED	a C string such as 'unexpected token'
+local	FUN_00088ee0	param_1	parser	CONFIRMED	calls arbfpError with 'out of memory'
+local	FUN_00088f00	param_1	parser	CONFIRMED	allocates a 0x2c-byte variable entry (callbacks allocator slot +0xc), links it on the anonymous list parser+0x44/+0x48
+local	FUN_00088f00	puVar1	variable	INFERRED	the new entry
+local	FUN_00088fd0	param_1	parser	CONFIRMED	looks the token text up in the declared-variable list (parser+0x3c) and the alias list (parser+0x4c)
+local	FUN_00088fd0	pcVar2	tokenText	INFERRED	looks the token text up in the declared-variable list (parser+0x3c) and the alias list (parser+0x4c)
+local	FUN_00088fd0	iVar4	tokenLength	INFERRED	looks the token text up in the declared-variable list (parser+0x3c) and the alias list (parser+0x4c)
+local	FUN_00088fd0	piVar1	entry	INFERRED	list cursor
+local	FUN_00088fd0	iVar3	charIndex	INFERRED	looks the token text up in the declared-variable list (parser+0x3c) and the alias list (parser+0x4c)
+local	FUN_00088fd0	iVar5	remaining	INFERRED	looks the token text up in the declared-variable list (parser+0x3c) and the alias list (parser+0x4c)
+local	FUN_00089140	param_1	parser	CONFIRMED	calls arbfpError with 'internal error'
+local	FUN_00089160	param_1	parser	CONFIRMED	consumes the current token if its kind equals param_2, else error 'unexpected token'
+local	FUN_00089190	param_1	parser	CONFIRMED	r/x -> 0, g/y -> 1, b/z -> 2, a/w -> 3, error 'invalid component'
+local	FUN_00089190	uVar1	componentIndex	CONFIRMED	r/x -> 0, g/y -> 1, b/z -> 2, a/w -> 3, error 'invalid component'
+local	FUN_00089280	param_1	parser	CONFIRMED	hands out the next 0x14-byte element of a PARAM array ('too many array initializers')
+local	FUN_00089280	param_2	variable	CONFIRMED	the PARAM variable whose +0xc is the declared array size, +0x10 the used count, +0x14 the element array
+local	FUN_00089280	puVar1	element	CONFIRMED	hands out the next 0x14-byte element of a PARAM array ('too many array initializers')
+local	FUN_00089280	uVar2	used	INFERRED	hands out the next 0x14-byte element of a PARAM array ('too many array initializers')
+local	FUN_00089320	param_1	parser	CONFIRMED	finds or appends a literal vec4 in the program constant table (parser+0x9016*4, 0x10 bytes each), error 'too many constants' beyond the hardware limit
+local	FUN_00089320	iVar7	constantCount	INFERRED	finds or appends a literal vec4 in the program constant table (parser+0x9016*4, 0x10 bytes each), error 'too many constants' beyond the hardware limit
+local	FUN_00089320	pfVar4	entry	INFERRED	finds or appends a literal vec4 in the program constant table (parser+0x9016*4, 0x10 bytes each), error 'too many constants' beyond the hardware limit
+local	FUN_00089320	iVar5	constantIndex	INFERRED	finds or appends a literal vec4 in the program constant table (parser+0x9016*4, 0x10 bytes each), error 'too many constants' beyond the hardware limit
+local	FUN_00089320	iVar6	foundCount	INFERRED	finds or appends a literal vec4 in the program constant table (parser+0x9016*4, 0x10 bytes each), error 'too many constants' beyond the hardware limit
+local	FUN_00089320	iVar8	remaining	INFERRED	finds or appends a literal vec4 in the program constant table (parser+0x9016*4, 0x10 bytes each), error 'too many constants' beyond the hardware limit
+local	FUN_00089320	fVar1	valueX	INFERRED	finds or appends a literal vec4 in the program constant table (parser+0x9016*4, 0x10 bytes each), error 'too many constants' beyond the hardware limit
+local	FUN_00089320	fVar2	valueY	INFERRED	finds or appends a literal vec4 in the program constant table (parser+0x9016*4, 0x10 bytes each), error 'too many constants' beyond the hardware limit
+local	FUN_00089320	fVar3	valueZ	INFERRED	finds or appends a literal vec4 in the program constant table (parser+0x9016*4, 0x10 bytes each), error 'too many constants' beyond the hardware limit
+local	FUN_00089430	param_1	parser	CONFIRMED	declares a new named variable (errors 'reserved variable name', 'redeclared variable name'); allocates a 0x2c-byte entry and appends it to the variable list parser+0x3c/+0x40
+local	FUN_00089430	iVar1	keywordOrFound	INFERRED	declares a new named variable (errors 'reserved variable name', 'redeclared variable name'); allocates a 0x2c-byte entry and appends it to the variable list parser+0x3c/+0x40
+local	FUN_00089430	puVar2	variable	CONFIRMED	declares a new named variable (errors 'reserved variable name', 'redeclared variable name'); allocates a 0x2c-byte entry and appends it to the variable list parser+0x3c/+0x40
+local	FUN_00089740	param_1	parser	CONFIRMED	consumes '+' or '-' and returns +1 or -1 (+1 when none)
+local	FUN_00089740	uVar1	sign	CONFIRMED	consumes '+' or '-' and returns +1 or -1 (+1 when none)
+local	FUN_000897b0	param_1	parser	CONFIRMED	sign, then an integer or float literal token, else 'invalid constant'; returns the signed double
+local	FUN_000897b0	uVar1	sign	INFERRED	sign, then an integer or float literal token, else 'invalid constant'; returns the signed double
+local	FUN_000897b0	dVar2	value	INFERRED	sign, then an integer or float literal token, else 'invalid constant'; returns the signed double
+local	FUN_000897b0	dVar3	signAsDouble	INFERRED	sign, then an integer or float literal token, else 'invalid constant'; returns the signed double
+local	FUN_000895b0	param_1	parser	CONFIRMED	'result.color[...]' / 'result.depth' binding of an OUTPUT variable (errors 'invalid result binding', 'invalid output color')
+local	FUN_000895b0	param_2	binding	CONFIRMED	4-word output binding record
+local	FUN_000895b0	iVar1	colorIndex	INFERRED	'result.color[...]' / 'result.depth' binding of an OUTPUT variable (errors 'invalid result binding', 'invalid output color')
+local	FUN_00089a20	param_1	parser	CONFIRMED	integer < program.local limit else 'invalid program local parameter number'
+local	FUN_00089a20	iVar1	localParamIndex	CONFIRMED	integer < program.local limit else 'invalid program local parameter number'
+local	FUN_00089ac0	param_1	parser	CONFIRMED	integer < program.env limit else 'invalid program environment parameter number'
+local	FUN_00089ac0	iVar1	envParamIndex	CONFIRMED	integer < program.env limit else 'invalid program environment parameter number'
+local	FUN_00089b60	param_1	parser	CONFIRMED	optional '[n]' with n < number of texture coordinates, else 'invalid texture coordinate'
+local	FUN_00089b60	iVar1	texCoordIndex	CONFIRMED	optional '[n]' with n < number of texture coordinates, else 'invalid texture coordinate'
+local	FUN_00089c10	param_1	parser	CONFIRMED	integer 0..3 else 'invalid matrix row number'
+local	FUN_00089c10	uVar1	row	CONFIRMED	integer 0..3 else 'invalid matrix row number'
+local	FUN_00089ca0	param_1	parser	CONFIRMED	integer < number of lights else 'invalid light number'
+local	FUN_00089ca0	iVar1	light	CONFIRMED	integer < number of lights else 'invalid light number'
+local	FUN_0008aa40	param_1	parser	CONFIRMED	parses program.env/local[...] and state.* bindings (fog, depth, light, lightmodel, material, matrix, texenv, ...) into PARAM array elements
+local	FUN_0008aa40	param_2	variable	CONFIRMED	the PARAM variable receiving the elements
+local	FUN_0008aa40	param_3	allowRange	INFERRED	nonzero when 'a..b' ranges are allowed
+local	FUN_0008aa40	uVar4	stateKind	INFERRED	state enumerator stored at element+8
+local	FUN_0008aa40	iVar6	firstIndex	INFERRED	parses program.env/local[...] and state.* bindings (fog, depth, light, lightmodel, material, matrix, texenv, ...) into PARAM array elements
+local	FUN_0008aa40	iVar7	lastIndex	INFERRED	parses program.env/local[...] and state.* bindings (fog, depth, light, lightmodel, material, matrix, texenv, ...) into PARAM array elements
+local	FUN_0008aa40	pcVar9	errorMessage	CONFIRMED	parses program.env/local[...] and state.* bindings (fog, depth, light, lightmodel, material, matrix, texenv, ...) into PARAM array elements
+local	FUN_0008aa40	uVar2	tokenBit	INFERRED	parses program.env/local[...] and state.* bindings (fog, depth, light, lightmodel, material, matrix, texenv, ...) into PARAM array elements
+local	FUN_0008aa40	uVar10	elementField8	INFERRED	parses program.env/local[...] and state.* bindings (fog, depth, light, lightmodel, material, matrix, texenv, ...) into PARAM array elements
+local	FUN_0008aa40	uVar11	elementField12	INFERRED	parses program.env/local[...] and state.* bindings (fog, depth, light, lightmodel, material, matrix, texenv, ...) into PARAM array elements
+local	FUN_0008aa40	iVar5	modifier	INFERRED	parses program.env/local[...] and state.* bindings (fog, depth, light, lightmodel, material, matrix, texenv, ...) into PARAM array elements
+local	FUN_0008ace0	param_1	parser	CONFIRMED	'fragment.color[.primary|.secondary]', 'fragment.fogcoord', 'fragment.position', 'fragment.texcoord[n]' (errors 'invalid fragment attribute binding[ item]')
+local	FUN_0008ace0	param_2	variable	CONFIRMED	the ATTRIB variable receiving the binding (+0x18 kind, +0x20 attribute, +0x24 sub-index)
+local	FUN_0008ace0	uVar1	attribute	CONFIRMED	'fragment.color[.primary|.secondary]', 'fragment.fogcoord', 'fragment.position', 'fragment.texcoord[n]' (errors 'invalid fragment attribute binding[ item]')
+local	FUN_0008ace0	uVar2	colorType	CONFIRMED	0 primary, 1 secondary
+local	FUN_0008ace0	pcVar3	errorMessage	CONFIRMED	'fragment.color[.primary|.secondary]', 'fragment.fogcoord', 'fragment.position', 'fragment.texcoord[n]' (errors 'invalid fragment attribute binding[ item]')
+local	FUN_0008aec0	param_1	parser	CONFIRMED	one swizzle component letter token
+local	FUN_0008aec0	uVar1	componentIndex	CONFIRMED	one swizzle component letter token
+local	FUN_0008b160	param_1	parser	CONFIRMED	a source variable reference: declared variable, anonymous program.*/state.*/fragment.* binding, or array element with '[n]' ('undefined variable', 'invalid source register type', 'invalid array index', 'invalid array addressing')
+local	FUN_0008b160	param_2	operand	CONFIRMED	source operand record: +0 variable, +0x18 array index
+local	FUN_0008b160	param_3	unused	UNKNOWN	a source variable reference: declared variable, anonymous program.*/state.*/fragment.* binding, or array element with '[n]' ('undefined variable', 'invalid source register type', 'invalid array index', 'invalid array addressing')
+local	FUN_0008b160	uVar4	tokenKind	INFERRED	a source variable reference: declared variable, anonymous program.*/state.*/fragment.* binding, or array element with '[n]' ('undefined variable', 'invalid source register type', 'invalid array index', 'invalid array addressing')
+local	FUN_0008b160	iVar1	variable	CONFIRMED	a source variable reference: declared variable, anonymous program.*/state.*/fragment.* binding, or array element with '[n]' ('undefined variable', 'invalid source register type', 'invalid array index', 'invalid array addressing')
+local	FUN_0008b160	iVar2	variableKind	INFERRED	a source variable reference: declared variable, anonymous program.*/state.*/fragment.* binding, or array element with '[n]' ('undefined variable', 'invalid source register type', 'invalid array index', 'invalid array addressing')
+local	FUN_0008b160	pcVar3	errorMessage	CONFIRMED	a source variable reference: declared variable, anonymous program.*/state.*/fragment.* binding, or array element with '[n]' ('undefined variable', 'invalid source register type', 'invalid array index', 'invalid array addressing')
+local	FUN_0008b300	param_1	parser	CONFIRMED	one SWZ selector: optional sign then 0, 1 or a component; returns 4 (zero), 5 (one) or component, with the negated forms mapped to 6-10
+local	FUN_0008b300	param_2	signState	CONFIRMED	in/out: -1 first selector seen, then the sign every selector must share
+local	FUN_0008b300	iVar3	sign	CONFIRMED	one SWZ selector: optional sign then 0, 1 or a component; returns 4 (zero), 5 (one) or component, with the negated forms mapped to 6-10
+local	FUN_0008b300	bVar4	letterIndex	INFERRED	one SWZ selector: optional sign then 0, 1 or a component; returns 4 (zero), 5 (one) or component, with the negated forms mapped to 6-10
+local	FUN_0008b300	iVar5	selectorSign	INFERRED	one SWZ selector: optional sign then 0, 1 or a component; returns 4 (zero), 5 (one) or component, with the negated forms mapped to 6-10
+local	FUN_0008b300	uVar1	letterBit	INFERRED	one SWZ selector: optional sign then 0, 1 or a component; returns 4 (zero), 5 (one) or component, with the negated forms mapped to 6-10
+local	FUN_0008b300	uVar6	selector	CONFIRMED	one SWZ selector: optional sign then 0, 1 or a component; returns 4 (zero), 5 (one) or component, with the negated forms mapped to 6-10
+local	FUN_0008b300	iVar2	expectedSign	INFERRED	one SWZ selector: optional sign then 0, 1 or a component; returns 4 (zero), 5 (one) or component, with the negated forms mapped to 6-10
+local	FUN_0008b4b0	param_1	parser	CONFIRMED	destination register plus optional '.xyzw' write mask ('invalid destination register[ type]', 'invalid writemask[ order|components]')
+local	FUN_0008b4b0	param_2	destination	CONFIRMED	2-word record: variable, write mask
+local	FUN_0008b4b0	iVar2	variable	CONFIRMED	destination register plus optional '.xyzw' write mask ('invalid destination register[ type]', 'invalid writemask[ order|components]')
+local	FUN_0008b4b0	uVar6	writeMask	CONFIRMED	destination register plus optional '.xyzw' write mask ('invalid destination register[ type]', 'invalid writemask[ order|components]')
+local	FUN_0008b4b0	uVar3	componentBit	CONFIRMED	destination register plus optional '.xyzw' write mask ('invalid destination register[ type]', 'invalid writemask[ order|components]')
+local	FUN_0008b4b0	cVar4	maskStyle	INFERRED	2 unknown, 0 xyzw letters, 1 rgba letters
+local	FUN_0008b4b0	cVar5	letterStyle	INFERRED	destination register plus optional '.xyzw' write mask ('invalid destination register[ type]', 'invalid writemask[ order|components]')
+local	FUN_0008b4b0	bVar1	sameStyle	INFERRED	destination register plus optional '.xyzw' write mask ('invalid destination register[ type]', 'invalid writemask[ order|components]')
+local	FUN_0008b4b0	pbVar7	letter	INFERRED	destination register plus optional '.xyzw' write mask ('invalid destination register[ type]', 'invalid writemask[ order|components]')
+local	FUN_0008b6d0	param_1	parser	CONFIRMED	optional sign, variable reference, optional '.xyzw' swizzle suffix ('invalid swizzle suffix')
+local	FUN_0008b6d0	param_2	operand	CONFIRMED	7-word source operand: +0 variable, +4/+8/+0xc/+0x10 swizzle x/y/z/w, +0x14 negate, +0x18 array index
+local	FUN_0008b6d0	iVar2	signOrSuffixLength	INFERRED	sign result of arbfpParseOptionalSign, then reused for the swizzle suffix length
+local	FUN_0008b6d0	uVar3	componentIndex	INFERRED	optional sign, variable reference, optional '.xyzw' swizzle suffix ('invalid swizzle suffix')
+local	FUN_0008b6d0	cVar1	letter	INFERRED	optional sign, variable reference, optional '.xyzw' swizzle suffix ('invalid swizzle suffix')
+local	FUN_0008b6d0	pcVar4	suffixText	INFERRED	optional sign, variable reference, optional '.xyzw' swizzle suffix ('invalid swizzle suffix')
+local	FUN_0008b960	param_1	parser	CONFIRMED	sign, variable reference, '.c' single-component suffix (replicated to all four swizzle slots)
+local	FUN_0008b960	param_2	operand	CONFIRMED	sign, variable reference, '.c' single-component suffix (replicated to all four swizzle slots)
+local	FUN_0008b960	iVar1	sign	INFERRED	sign, variable reference, '.c' single-component suffix (replicated to all four swizzle slots)
+local	FUN_0008b960	uVar2	componentIndex	CONFIRMED	sign, variable reference, '.c' single-component suffix (replicated to all four swizzle slots)
+local	FUN_0008b9f0	param_1	parser	CONFIRMED	the program grammar: '!!ARBfp1.0' header, OPTION lines, then declarations (TEMP/ATTRIB/PARAM/OUTPUT/ALIAS) and ALU/TEX/KIL instructions into the 0x60-byte instruction array at parser+0x50, until END
+local	FUN_0008b9f0	uVar7	tokenKind	CONFIRMED	the program grammar: '!!ARBfp1.0' header, OPTION lines, then declarations (TEMP/ATTRIB/PARAM/OUTPUT/ALIAS) and ALU/TEX/KIL instructions into the 0x60-byte instruction array at parser+0x50, until END
+local	FUN_0008b9f0	piVar6	instructionRecord	CONFIRMED	the current 0x60-byte instruction record
+local	FUN_0008b9f0	uVar2	kindBit	INFERRED	the program grammar: '!!ARBfp1.0' header, OPTION lines, then declarations (TEMP/ATTRIB/PARAM/OUTPUT/ALIAS) and ALU/TEX/KIL instructions into the 0x60-byte instruction array at parser+0x50, until END
+local	FUN_0008b9f0	iVar3	value	INFERRED	the program grammar: '!!ARBfp1.0' header, OPTION lines, then declarations (TEMP/ATTRIB/PARAM/OUTPUT/ALIAS) and ALU/TEX/KIL instructions into the 0x60-byte instruction array at parser+0x50, until END
+local	FUN_0008b9f0	iVar8	texImageUnit	INFERRED	the program grammar: '!!ARBfp1.0' header, OPTION lines, then declarations (TEMP/ATTRIB/PARAM/OUTPUT/ALIAS) and ALU/TEX/KIL instructions into the 0x60-byte instruction array at parser+0x50, until END
+local	FUN_0008b9f0	cVar1	headerChar	CONFIRMED	the program grammar: '!!ARBfp1.0' header, OPTION lines, then declarations (TEMP/ATTRIB/PARAM/OUTPUT/ALIAS) and ALU/TEX/KIL instructions into the 0x60-byte instruction array at parser+0x50, until END
+local	FUN_0008b9f0	pcVar4	cursor	INFERRED	the program grammar: '!!ARBfp1.0' header, OPTION lines, then declarations (TEMP/ATTRIB/PARAM/OUTPUT/ALIAS) and ALU/TEX/KIL instructions into the 0x60-byte instruction array at parser+0x50, until END
+local	FUN_0008b9f0	pcVar5	nextCursor	INFERRED	the program grammar: '!!ARBfp1.0' header, OPTION lines, then declarations (TEMP/ATTRIB/PARAM/OUTPUT/ALIAS) and ALU/TEX/KIL instructions into the 0x60-byte instruction array at parser+0x50, until END
+local	FUN_0008b9f0	local_38	selectorSign	CONFIRMED	in/out sign state passed to arbfpParseExtendedSwizzleSelector
+local	FUN_0008b9f0	in_r5	passThroughR5	UNKNOWN	the program grammar: '!!ARBfp1.0' header, OPTION lines, then declarations (TEMP/ATTRIB/PARAM/OUTPUT/ALIAS) and ALU/TEX/KIL instructions into the 0x60-byte instruction array at parser+0x50, until END
+local	FUN_0008c490	param_1	parser	CONFIRMED	finds or appends a 0x14-byte parameter entry (compare words 2-4), error text param_5 when the table is full
+local	FUN_0008c490	param_2	table	CONFIRMED	finds or appends a 0x14-byte parameter entry (compare words 2-4), error text param_5 when the table is full
+local	FUN_0008c490	param_3	countPtr	CONFIRMED	finds or appends a 0x14-byte parameter entry (compare words 2-4), error text param_5 when the table is full
+local	FUN_0008c490	param_4	capacity	CONFIRMED	finds or appends a 0x14-byte parameter entry (compare words 2-4), error text param_5 when the table is full
+local	FUN_0008c490	param_5	fullMessage	CONFIRMED	finds or appends a 0x14-byte parameter entry (compare words 2-4), error text param_5 when the table is full
+local	FUN_0008c490	param_6	entry	CONFIRMED	the candidate entry; +4 receives the table index
+local	FUN_0008c490	uVar1	count	CONFIRMED	finds or appends a 0x14-byte parameter entry (compare words 2-4), error text param_5 when the table is full
+local	FUN_0008c490	uVar4	tableIndex	CONFIRMED	finds or appends a 0x14-byte parameter entry (compare words 2-4), error text param_5 when the table is full
+local	FUN_0008c490	iVar2	cursor	INFERRED	finds or appends a 0x14-byte parameter entry (compare words 2-4), error text param_5 when the table is full
+local	FUN_0008c490	uVar6	remaining	INFERRED	finds or appends a 0x14-byte parameter entry (compare words 2-4), error text param_5 when the table is full
+local	FUN_0008c490	uVar5	key2	INFERRED	finds or appends a 0x14-byte parameter entry (compare words 2-4), error text param_5 when the table is full
+local	FUN_0008c490	uVar3	key3	INFERRED	finds or appends a 0x14-byte parameter entry (compare words 2-4), error text param_5 when the table is full

@@ -1,0 +1,54 @@
+local	FUN_0008ebb0	param_1	context	CONFIRMED	GL context; (context+4)->+0x10 is the GL state block read for every case
+local	FUN_0008ebb0	param_2	element	CONFIRMED	the 0x14-byte PARAM element: +8 kind, +0xc index (light/face/matrix number), +0x10 modifier
+local	FUN_0008ebb0	param_3	outValue	CONFIRMED	receives the 4 floats
+local	FUN_0008ebb0	param_4	unused	UNKNOWN	never read
+local	FUN_0008ebb0	iVar18	kind	CONFIRMED	element kind
+local	FUN_0008ebb0	iVar9	lightOrFace	CONFIRMED	element+0xc: light/matrix number or front/back selector
+local	FUN_0008ebb0	iVar13	stateOwner	INFERRED	*(context+4)
+local	FUN_0008ebb0	iVar16	stateBlock	CONFIRMED	the state block base (lights at +0x24c0 stride 0x80, material front +0x28c0 / back +0x2b00)
+local	FUN_0008ebb0	dVar21	length	INFERRED	sqrt of the half-vector length
+local	FUN_0008ebb0	dVar22	depthNear	INFERRED	resolves one PARAM element (state binding, env or local parameter) to a vec4: switch on the element kind written by arbfpParseParameterBinding (5..9 material, 0xa..0x10 light, 0x11/0x12 light model, 0x13..0x15 light products, 0x16 fog color, 0x17 fog params, 0x18 depth range, 0x19 texenv color, 0x1a..0x31 matrix rows incl. inverse/transpose, 0x32 env, 0x33 local)
+local	FUN_0008dbd0	param_1	context	CONFIRMED	makes program slot param_2 current: stores it, fetches the program object from the slot table and re-evaluates the context state
+local	FUN_0008dbd0	param_2	programSlot	CONFIRMED	makes program slot param_2 current: stores it, fetches the program object from the slot table and re-evaluates the context state
+local	FUN_0008dbd0	uVar1	programObject	INFERRED	makes program slot param_2 current: stores it, fetches the program object from the slot table and re-evaluates the context state
+local	FUN_0008d470	param_1	context	CONFIRMED	sets per-texture-unit usage bits and fragment/texture dirty bits in the context from the bound program's flags
+local	FUN_0008d470	uVar11	dirtyFlags	INFERRED	context+0x44
+local	FUN_0008d470	pcVar8	programObject	INFERRED	sets per-texture-unit usage bits and fragment/texture dirty bits in the context from the bound program's flags
+local	FUN_0008d470	iVar17	stateBlock	INFERRED	sets per-texture-unit usage bits and fragment/texture dirty bits in the context from the bound program's flags
+local	FUN_0008d470	puVar7	programState	INFERRED	context+0x11d0
+local	FUN_0008dc50	param_1	context	CONFIRMED	zeroes a 0x78-byte program object and allocates its instance table (+0x70) and a 0x98-byte compiled-program record (+0x74)
+local	FUN_0008dc50	param_2	programObject	CONFIRMED	zeroes a 0x78-byte program object and allocates its instance table (+0x70) and a 0x98-byte compiled-program record (+0x74)
+local	FUN_0008dc50	uVar2	instanceTable	CONFIRMED	zeroes a 0x78-byte program object and allocates its instance table (+0x70) and a 0x98-byte compiled-program record (+0x74)
+local	FUN_0008dc50	iVar3	compiledProgram	CONFIRMED	zeroes a 0x78-byte program object and allocates its instance table (+0x70) and a 0x98-byte compiled-program record (+0x74)
+local	FUN_0008dc50	iVar4	compiledProgramCopy	INFERRED	zeroes a 0x78-byte program object and allocates its instance table (+0x70) and a 0x98-byte compiled-program record (+0x74)
+local	FUN_0008dc50	a0	unitCount	INFERRED	zeroes a 0x78-byte program object and allocates its instance table (+0x70) and a 0x98-byte compiled-program record (+0x74)
+local	FUN_0008dda0	param_1	context	CONFIRMED	releases every instance, the instance table, the compiled program's code buffer (+0x60), unit table (+0x94) and the record itself
+local	FUN_0008dda0	param_2	programObject	CONFIRMED	releases every instance, the instance table, the compiled program's code buffer (+0x60), unit table (+0x94) and the record itself
+local	FUN_0008dda0	iVar3	instanceTable	CONFIRMED	releases every instance, the instance table, the compiled program's code buffer (+0x60), unit table (+0x94) and the record itself
+local	FUN_0008dda0	iVar4	stateHolder	INFERRED	releases every instance, the instance table, the compiled program's code buffer (+0x60), unit table (+0x94) and the record itself
+local	FUN_0008dda0	iVar1	instanceCount	INFERRED	releases every instance, the instance table, the compiled program's code buffer (+0x60), unit table (+0x94) and the record itself
+local	FUN_0008dda0	iVar6	instance	CONFIRMED	releases every instance, the instance table, the compiled program's code buffer (+0x60), unit table (+0x94) and the record itself
+local	FUN_0008df50	param_1	context	CONFIRMED	loads program text into the current fragment program slot: text starting '!!ILfs1.0' is kept as IL, anything else is compiled by arbfpCompileProgram; GL_INVALID_OPERATION (0x502) on a parse error, 0x505 on allocation failure
+local	FUN_0008df50	param_2	format	CONFIRMED	GL_PROGRAM_FORMAT_ASCII_ARB (0x8875)
+local	FUN_0008df50	param_3	length	CONFIRMED	loads program text into the current fragment program slot: text starting '!!ILfs1.0' is kept as IL, anything else is compiled by arbfpCompileProgram; GL_INVALID_OPERATION (0x502) on a parse error, 0x505 on allocation failure
+local	FUN_0008df50	param_4	text	CONFIRMED	loads program text into the current fragment program slot: text starting '!!ILfs1.0' is kept as IL, anything else is compiled by arbfpCompileProgram; GL_INVALID_OPERATION (0x502) on a parse error, 0x505 on allocation failure
+local	FUN_0008df50	puVar16	currentProgram	INFERRED	the program object being replaced
+local	FUN_0008df50	iVar4	newProgram	INFERRED	loads program text into the current fragment program slot: text starting '!!ILfs1.0' is kept as IL, anything else is compiled by arbfpCompileProgram; GL_INVALID_OPERATION (0x502) on a parse error, 0x505 on allocation failure
+local	FUN_0008df50	iVar18	compiledProgram	INFERRED	loads program text into the current fragment program slot: text starting '!!ILfs1.0' is kept as IL, anything else is compiled by arbfpCompileProgram; GL_INVALID_OPERATION (0x502) on a parse error, 0x505 on allocation failure
+local	FUN_0008df50	iVar15	stateHolder	INFERRED	loads program text into the current fragment program slot: text starting '!!ILfs1.0' is kept as IL, anything else is compiled by arbfpCompileProgram; GL_INVALID_OPERATION (0x502) on a parse error, 0x505 on allocation failure
+local	FUN_0008e2e0	param_1	context	CONFIRMED	wraps raw IL words in a '!!ILfs1.0\n' header and loads them through arbfpProgramString
+local	FUN_0008e2e0	param_2	unused	UNKNOWN	wraps raw IL words in a '!!ILfs1.0\n' header and loads them through arbfpProgramString
+local	FUN_0008e2e0	param_3	wordCount	CONFIRMED	wraps raw IL words in a '!!ILfs1.0\n' header and loads them through arbfpProgramString
+local	FUN_0008e2e0	param_4	words	CONFIRMED	wraps raw IL words in a '!!ILfs1.0\n' header and loads them through arbfpProgramString
+local	FUN_0008e2e0	iVar1	byteCount	CONFIRMED	wraps raw IL words in a '!!ILfs1.0\n' header and loads them through arbfpProgramString
+local	FUN_0008f520	param_1	context	CONFIRMED	allocates the two default fragment program objects (current and default slots) with target 0x8804 (GL_FRAGMENT_PROGRAM_ARB)
+local	FUN_0008f520	iVar4	stateHolder	INFERRED	allocates the two default fragment program objects (current and default slots) with target 0x8804 (GL_FRAGMENT_PROGRAM_ARB)
+local	FUN_0008f520	iVar2	slotIndex	INFERRED	allocates the two default fragment program objects (current and default slots) with target 0x8804 (GL_FRAGMENT_PROGRAM_ARB)
+local	FUN_0008f520	iVar3	slotTable	INFERRED	allocates the two default fragment program objects (current and default slots) with target 0x8804 (GL_FRAGMENT_PROGRAM_ARB)
+local	FUN_0008f6f0	param_1	context	CONFIRMED	allocates a new instance table, copies the old entries and frees the old table
+local	FUN_0008f6f0	param_2	programObject	CONFIRMED	allocates a new instance table, copies the old entries and frees the old table
+local	FUN_0008f6f0	iVar3	stateHolder	INFERRED	allocates a new instance table, copies the old entries and frees the old table
+local	FUN_0008f6f0	uVar2	oldTable	CONFIRMED	allocates a new instance table, copies the old entries and frees the old table
+local	FUN_0008f6f0	uVar1	newTable	CONFIRMED	allocates a new instance table, copies the old entries and frees the old table
+local	FUN_0008f760	param_1	context	CONFIRMED	compiles the minimal program '!!ARBfp1.0\nEND\n' into the current slot and binds it
+local	FUN_0008f760	pcVar2	defaultText	CONFIRMED	compiles the minimal program '!!ARBfp1.0\nEND\n' into the current slot and binds it

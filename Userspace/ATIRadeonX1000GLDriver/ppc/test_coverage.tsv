@@ -428,9 +428,9 @@
 0x4d100	FUN_0004d100	1264	no	indirect call (driver context / vtable / callback)
 0x4d620	FUN_0004d620	328	yes	
 0x4d770	FUN_0004d770	840	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x4dac0	FUN_0004dac0	272	yes	
+0x4dac0	gldValidateDepthTest	272	yes	
 0x4dbe0	FUN_0004dbe0	76	yes	
-0x4dc30	FUN_0004dc30	220	yes	
+0x4dc30	gldValidateTexEnvColor	220	yes	
 0x4dd10	FUN_0004dd10	40	yes	
 0x4dd40	FUN_0004dd40	116	yes	
 0x4ddc0	FUN_0004ddc0	104	no	indirect call (driver context / vtable / callback)
@@ -441,19 +441,19 @@
 0x4ea70	FUN_0004ea70	260	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x4eba0	FUN_0004eba0	476	yes	
 0x4ed90	FUN_0004ed90	692	yes	
-0x4f080	FUN_0004f080	192	yes	
+0x4f080	gldValidateCullFace	192	yes	
 0x4f160	FUN_0004f160	352	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x4f2e0	FUN_0004f2e0	616	no	indirect call (driver context / vtable / callback)
-0x4f550	FUN_0004f550	452	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x4f550	gldValidateScissor	452	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x4f720	FUN_0004f720	1348	yes	
 0x4fc80	FUN_0004fc80	252	yes	
 0x4fd80	FUN_0004fd80	492	no	indirect call (driver context / vtable / callback)
-0x4ff70	FUN_0004ff70	416	yes	
+0x4ff70	gldValidateAlphaTest	416	yes	
 0x50140	FUN_00050140	424	yes	
 0x50300	FUN_00050300	3048	no	indirect call (driver context / vtable / callback)
 0x50ef0	FUN_00050ef0	284	no	indirect call (driver context / vtable / callback)
-0x51010	FUN_00051010	1024	yes	
-0x51420	FUN_00051420	3152	yes	
+0x51010	gldValidateStencil	1024	yes	
+0x51420	gldValidateBlend	3152	yes	
 0x520c0	FUN_000520c0	436	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x52280	FUN_00052280	2608	no	indirect call (driver context / vtable / callback)
 0x52cc0	FUN_00052cc0	372	no	no static blocker: a test could reach it (needs arguments / state no test builds)
@@ -617,42 +617,42 @@
 0x70cd0	FUN_00070cd0	144	yes	
 0x70d80	FUN_00070d80	3624	no	indirect call (driver context / vtable / callback)
 0x71bc0	FUN_00071bc0	7188	no	indirect call (driver context / vtable / callback)
-0x738c0	FUN_000738c0	2852	no	indirect call (driver context / vtable / callback)
-0x744d0	FUN_000744d0	1412	no	indirect call (driver context / vtable / callback)
-0x74a70	FUN_00074a70	192	yes	
-0x74b30	FUN_00074b30	204	yes	
-0x74c00	FUN_00074c00	188	yes	
-0x74cc0	FUN_00074cc0	156	yes	
-0x74d60	FUN_00074d60	204	yes	
-0x74e30	FUN_00074e30	156	yes	
+0x738c0	evsEncodeSource	2852	no	indirect call (driver context / vtable / callback)
+0x744d0	evsEncodeDestination	1412	no	indirect call (driver context / vtable / callback)
+0x74a70	evsAppendInstruction	192	yes	
+0x74b30	evsEmitMova	204	yes	
+0x74c00	evsEmitLogp	188	yes	
+0x74cc0	evsEmitExpp	156	yes	
+0x74d60	evsEmitDst	204	yes	
+0x74e30	evsEmitLit	156	yes	
 0x74ed0	FUN_00074ed0	392	yes	
 0x75060	FUN_00075060	584	yes	
 0x752c0	FUN_000752c0	156	yes	
 0x75360	FUN_00075360	156	yes	
 0x75400	FUN_00075400	156	yes	
-0x754a0	FUN_000754a0	204	yes	
-0x75570	FUN_00075570	204	yes	
-0x75640	FUN_00075640	204	yes	
-0x75710	FUN_00075710	156	yes	
-0x757b0	FUN_000757b0	156	yes	
-0x75850	FUN_00075850	204	yes	
-0x75920	FUN_00075920	156	yes	
-0x759c0	FUN_000759c0	156	yes	
-0x75a60	FUN_00075a60	156	yes	
-0x75b00	FUN_00075b00	156	yes	
-0x75ba0	FUN_00075ba0	236	yes	
-0x75c90	FUN_00075c90	204	yes	
-0x75d60	FUN_00075d60	204	yes	
-0x75e30	FUN_00075e30	204	yes	
-0x75f00	FUN_00075f00	204	yes	
-0x75fd0	FUN_00075fd0	156	yes	
-0x76070	FUN_00076070	236	yes	
-0x76160	FUN_00076160	204	yes	
-0x76230	FUN_00076230	204	yes	
-0x76300	FUN_00076300	204	yes	
-0x763d0	FUN_000763d0	204	yes	
-0x764a0	FUN_000764a0	188	yes	
-0x76560	FUN_00076560	524	no	indirect call (driver context / vtable / callback)
+0x754a0	evsEmitMmul	204	yes	
+0x75570	evsEmitCrs	204	yes	
+0x75640	evsEmitSub	204	yes	
+0x75710	evsEmitRsq	156	yes	
+0x757b0	evsEmitRcp	156	yes	
+0x75850	evsEmitPow	204	yes	
+0x75920	evsEmitLog	156	yes	
+0x759c0	evsEmitExp	156	yes	
+0x75a60	evsEmitRnd	156	yes	
+0x75b00	evsEmitFlr	156	yes	
+0x75ba0	evsEmitClamp	236	yes	
+0x75c90	evsEmitSetCompare5	204	yes	
+0x75d60	evsEmitSetCompare2	204	yes	
+0x75e30	evsEmitMin	204	yes	
+0x75f00	evsEmitMax	204	yes	
+0x75fd0	evsEmitFrc	156	yes	
+0x76070	evsEmitMad	236	yes	
+0x76160	evsEmitAdd	204	yes	
+0x76230	evsEmitMul	204	yes	
+0x76300	evsEmitDp4	204	yes	
+0x763d0	evsEmitDp3	204	yes	
+0x764a0	evsEmitMov	188	yes	
+0x76560	evsEmitIndexOrMove	524	no	indirect call (driver context / vtable / callback)
 0x76770	FUN_00076770	352	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x768e0	FUN_000768e0	384	no	indirect call (driver context / vtable / callback)
 0x76ac0	FUN_00076ac0	188	yes	
@@ -715,7 +715,7 @@
 0x7c760	FUN_0007c760	4940	yes	
 0x7dcd0	FUN_0007dcd0	88	no	indirect call (driver context / vtable / callback)
 0x7dd30	FUN_0007dd30	160	no	indirect call (driver context / vtable / callback)
-0x7dde0	FUN_0007dde0	14156	yes	
+0x7dde0	evsFoldConstantMoves	14156	yes	
 0x82900	FUN_00082900	812	no	indirect call (driver context / vtable / callback)
 0x82c50	FUN_00082c50	760	no	indirect call (driver context / vtable / callback)
 0x82f60	FUN_00082f60	416	no	indirect call (driver context / vtable / callback)
@@ -763,7 +763,7 @@
 0x87e70	FUN_00087e70	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x87e80	FUN_00087e80	764	yes	
 0x88190	FUN_00088190	740	no	indirect call (driver context / vtable / callback)
-0x88480	FUN_00088480	268	yes	
+0x88480	arbfpLookupKeyword	268	yes	
 0x885b0	arbLexNumber	860	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x88920	arbNextToken	892	yes	
 0x88e70	arbSetError	112	yes	
@@ -791,26 +791,26 @@
 0x8b300	arbParseExtendedSwizzleSelector	396	yes	
 0x8b4b0	arbParseDestRegister	496	yes	
 0x8b6d0	arbParseSwizzleSuffix	624	yes	
-0x8b960	FUN_0008b960	132	yes	
+0x8b960	arbfpParseScalarSourceOperand	132	yes	
 0x8b9f0	arbParseProgramText	2664	no	indirect call (driver context / vtable / callback)
-0x8c490	FUN_0008c490	248	yes	
+0x8c490	arbfpInternParameter	248	yes	
 0x8c590	arbValidateProgram	3768	no	indirect call (driver context / vtable / callback)
-0x8d470	FUN_0008d470	1744	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x8dbd0	FUN_0008dbd0	100	yes	
+0x8d470	arbfpUpdateStateForProgram	1744	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x8dbd0	arbfpBindProgram	100	yes	
 0x8dc40	FUN_0008dc40	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x8dc50	FUN_0008dc50	336	no	indirect call (driver context / vtable / callback)
-0x8dda0	FUN_0008dda0	408	no	indirect call (driver context / vtable / callback)
-0x8df50	FUN_0008df50	880	no	indirect call (driver context / vtable / callback)
-0x8e2e0	FUN_0008e2e0	168	no	calls an import (malloc)
-0x8ebb0	FUN_0008ebb0	4284	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x8f520	FUN_0008f520	456	no	indirect call (driver context / vtable / callback)
-0x8f6f0	FUN_0008f6f0	108	no	indirect call (driver context / vtable / callback)
-0x8f760	FUN_0008f760	144	yes	
+0x8dc50	arbfpProgramObjectInit	336	no	indirect call (driver context / vtable / callback)
+0x8dda0	arbfpProgramObjectFree	408	no	indirect call (driver context / vtable / callback)
+0x8df50	arbfpProgramString	880	no	indirect call (driver context / vtable / callback)
+0x8e2e0	arbfpProgramStringIL	168	no	calls an import (malloc)
+0x8ebb0	arbfpFetchParameterValue	4284	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x8f520	arbfpInitProgramState	456	no	indirect call (driver context / vtable / callback)
+0x8f6f0	arbfpGrowInstanceTable	108	no	indirect call (driver context / vtable / callback)
+0x8f760	arbfpLoadDefaultProgram	144	yes	
 0x8f7f0	FUN_0008f7f0	884	no	indirect call (driver context / vtable / callback)
 0x8fb70	FUN_0008fb70	248	no	indirect call (driver context / vtable / callback)
 0x8fc70	FUN_0008fc70	1028	yes	
 0x900a0	FUN_000900a0	944	no	indirect call (driver context / vtable / callback)
-0x90470	FUN_00090470	952	no	indirect call (driver context / vtable / callback)
+0x90470	gldValidateState	952	no	indirect call (driver context / vtable / callback)
 0x90840	FUN_00090840	264	no	indirect call (driver context / vtable / callback)
 0x90960	FUN_00090960	48	yes	
 0x90990	FUN_00090990	772	yes	

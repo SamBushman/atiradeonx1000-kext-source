@@ -1,0 +1,1 @@
+func	FUN_0007dde0	evsFoldConstantMoves	INFERRED	peephole pass over an EXT_vertex_shader program: a GL_OP_MOV_EXT (0x8799) of a local-constant vector (0x87c3/0x87bf) with an identity swizzle, followed by a write to GL_OUTPUT_COLOR0_EXT (0x879b), is rewritten with constant ZERO/ONE swizzle selectors (0x87dd/0x87de) when every constant component is 0, 1 or -1

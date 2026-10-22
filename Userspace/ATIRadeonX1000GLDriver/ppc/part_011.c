@@ -4700,42 +4700,42 @@ LAB_0007ddc0:
   return uVar1;
 }
 
-/* FUN_0007dde0 @ 0x7dde0 (3504 bytes) */
-int FUN_0007dde0(param_1, param_2)
-  undefined4 param_1;
-  int param_2;
+/* evsFoldConstantMoves @ 0x7dde0 (3504 bytes) */
+int evsFoldConstantMoves(compiler, shaderProgram)
+  undefined4 compiler;
+  int shaderProgram;
 {
   bool bVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
+  float constantX;
+  float constantW;
+  float constantY;
+  float constantZ;
   bool bVar6;
   byte bVar7;
-  float *pfVar8;
+  float *constantValue;
   undefined4 uVar9;
   byte bVar10;
-  int iVar11;
+  int instructions;
   byte bVar12;
   byte bVar14;
   int iVar13;
-  uint uVar15;
-  uint uVar16;
+  uint instructionIndex;
+  uint instructionCount;
   undefined4 *puVar17;
   uint uVar18;
   undefined4 uVar19;
   undefined4 uVar20;
   int *piVar21;
   undefined4 uVar22;
-  int iVar23;
-  undefined4 uVar24;
+  int symbol;
+  undefined4 selectorEnumerant;
   uint uVar25;
   uint uVar26;
   uint uVar27;
   byte bVar29;
   uint uVar28;
   uint uVar30;
-  int iVar31;
+  int currentInstruction;
   int iVar32;
   byte in_xer_so = 0;
   bool bVar33;
@@ -4753,63 +4753,63 @@ int FUN_0007dde0(param_1, param_2)
   undefined4 uStack_70;
   undefined4 uStack_60;
   
-  uVar16 = *(uint *)(param_2 + 0x14);
-  if (uVar16 != 0) {
-    uVar15 = 0;
-    uVar24 = 0x87df;
+  instructionCount = *(uint *)(shaderProgram + 0x14);
+  if (instructionCount != 0) {
+    instructionIndex = 0;
+    selectorEnumerant = 0x87df;
 LAB_0007de3c:
-    iVar11 = *(int *)(param_2 + 0x18);
-    iVar31 = uVar15 * 0x74 + iVar11;
-    if ((((((*(int *)(uVar15 * 0x74 + iVar11) == 0x8799) && (*(int *)(iVar31 + 0x20) == 2)) &&
-          (*(int *)(iVar31 + 0x28) == 0x87d5)) &&
-         ((*(int *)(iVar31 + 0x2c) == 0x87d6 && (*(int *)(iVar31 + 0x30) == 0x87d7)))) &&
-        (*(int *)(iVar31 + 0x34) == 0x87d8)) &&
-       ((iVar23 = *(int *)(iVar31 + 0x24) * 0x54 + *(int *)(param_2 + 0x20),
-        *(int *)(iVar23 + 0x28) == 0x87c3 && (*(int *)(iVar23 + 0x24) == 0x87bf)))) {
-      pfVar8 = *(float **)(iVar23 + 0x38);
-      fVar2 = *pfVar8;
-      fVar3 = pfVar8[3];
-      fVar4 = pfVar8[1];
-      fVar5 = pfVar8[2];
+    instructions = *(int *)(shaderProgram + 0x18);
+    currentInstruction = instructionIndex * 0x74 + instructions;
+    if ((((((*(int *)(instructionIndex * 0x74 + instructions) == 0x8799) && (*(int *)(currentInstruction + 0x20) == 2)) &&
+          (*(int *)(currentInstruction + 0x28) == 0x87d5)) &&
+         ((*(int *)(currentInstruction + 0x2c) == 0x87d6 && (*(int *)(currentInstruction + 0x30) == 0x87d7)))) &&
+        (*(int *)(currentInstruction + 0x34) == 0x87d8)) &&
+       ((symbol = *(int *)(currentInstruction + 0x24) * 0x54 + *(int *)(shaderProgram + 0x20),
+        *(int *)(symbol + 0x28) == 0x87c3 && (*(int *)(symbol + 0x24) == 0x87bf)))) {
+      constantValue = *(float **)(symbol + 0x38);
+      constantX = *constantValue;
+      constantW = constantValue[3];
+      constantY = constantValue[1];
+      constantZ = constantValue[2];
       uStack_60 = 0;
-      bVar33 = fVar2 == 1.0;
-      bVar34 = fVar4 == 1.0;
-      bVar35 = fVar3 == 1.0;
-      uVar30 = (uint)(byte)((fVar2 == 0.0) << 2 | (fVar2 != 0.0) << 1 | in_xer_so & 1);
+      bVar33 = constantX == 1.0;
+      bVar34 = constantY == 1.0;
+      bVar35 = constantW == 1.0;
+      uVar30 = (uint)(byte)((constantX == 0.0) << 2 | (constantX != 0.0) << 1 | in_xer_so & 1);
       iStack_78 = uVar30 << 0x1c;
-      bVar36 = fVar5 == 1.0;
-      bVar37 = fVar5 == 0.0;
-      bVar38 = fVar4 == 0.0;
-      bVar39 = fVar3 == 0.0;
+      bVar36 = constantZ == 1.0;
+      bVar37 = constantZ == 0.0;
+      bVar38 = constantY == 0.0;
+      bVar39 = constantW == 0.0;
       if (((((!(bool)((byte)((uVar30 << 0xc) >> 8) >> 5 & 1)) ||
-            (((bVar33 || (fVar2 == -1.0)) || (bVar38)))) ||
-           (((bVar34 || (fVar4 == -1.0)) || (bVar37)))) ||
-          (((bVar36 || (fVar5 == -1.0)) || ((bVar39 || ((bVar35 || (fVar3 == -1.0)))))))) &&
-         (uVar30 = uVar15 + 1, uVar30 < uVar16)) {
+            (((bVar33 || (constantX == -1.0)) || (bVar38)))) ||
+           (((bVar34 || (constantY == -1.0)) || (bVar37)))) ||
+          (((bVar36 || (constantZ == -1.0)) || ((bVar39 || ((bVar35 || (constantW == -1.0)))))))) &&
+         (uVar30 = instructionIndex + 1, uVar30 < instructionCount)) {
         iVar32 = uVar30 * 0x74;
         bVar6 = false;
         uVar18 = uVar30;
-        iVar23 = iVar32;
+        symbol = iVar32;
         do {
-          iVar13 = iVar23 + iVar11;
-          if (((*(int *)(iVar23 + iVar11) == 0x879b) && (*(int *)(iVar13 + 4) == 2)) &&
-             (*(int *)(iVar13 + 8) == *(int *)(iVar31 + 8))) {
+          iVar13 = symbol + instructions;
+          if (((*(int *)(symbol + instructions) == 0x879b) && (*(int *)(iVar13 + 4) == 2)) &&
+             (*(int *)(iVar13 + 8) == *(int *)(currentInstruction + 8))) {
             bVar1 = *(int *)(iVar13 + 0xc) != 0;
             bVar10 = (byte)((uint)iStack_78 >> 0x18);
-            if (((bVar1) || (!(bool)(bVar10 >> 5 & 1))) || ((bVar33 || (bVar12 = 0, fVar2 == -1.0)))
+            if (((bVar1) || (!(bool)(bVar10 >> 5 & 1))) || ((bVar33 || (bVar12 = 0, constantX == -1.0)))
                ) {
               bVar12 = 1;
             }
             if (((*(int *)(iVar13 + 0x10) != 0) || (bVar38)) ||
-               ((bVar34 || (bVar14 = 0, fVar4 == -1.0)))) {
+               ((bVar34 || (bVar14 = 0, constantY == -1.0)))) {
               bVar14 = 1;
             }
             if ((((*(int *)(iVar13 + 0x14) != 0) || (bVar37)) || (bVar36)) ||
-               (bVar29 = 0, fVar5 == -1.0)) {
+               (bVar29 = 0, constantZ == -1.0)) {
               bVar29 = 1;
             }
             if (((*(int *)(iVar13 + 0x18) != 0) || (bVar39)) ||
-               ((bVar35 || (bVar7 = 0, fVar3 == -1.0)))) {
+               ((bVar35 || (bVar7 = 0, constantW == -1.0)))) {
               bVar7 = 1;
             }
             bVar6 = (bool)(bVar7 & bVar29 & bVar14 & bVar12);
@@ -4821,7 +4821,7 @@ LAB_0007de3c:
                     *(undefined4 *)(iVar13 + 0x28) = 0x87de;
                   }
                   else {
-                    *(undefined4 *)(iVar13 + 0x28) = uVar24;
+                    *(undefined4 *)(iVar13 + 0x28) = selectorEnumerant;
                   }
                 }
                 else {
@@ -4837,7 +4837,7 @@ LAB_0007de3c:
                   *(undefined4 *)(iVar13 + 0x2c) = 0x87de;
                 }
                 else {
-                  *(undefined4 *)(iVar13 + 0x2c) = uVar24;
+                  *(undefined4 *)(iVar13 + 0x2c) = selectorEnumerant;
                 }
               }
               if (*(int *)(iVar13 + 0x14) == 0) {
@@ -4849,7 +4849,7 @@ LAB_0007de3c:
                   *(undefined4 *)(iVar13 + 0x30) = 0x87de;
                 }
                 else {
-                  *(undefined4 *)(iVar13 + 0x30) = uVar24;
+                  *(undefined4 *)(iVar13 + 0x30) = selectorEnumerant;
                 }
               }
               if (*(int *)(iVar13 + 0x18) == 0) {
@@ -4857,21 +4857,21 @@ LAB_0007de3c:
                 if (bVar39) {
                   *(undefined4 *)(iVar13 + 0x34) = 0x87dd;
                   bVar1 = true;
-                  uVar16 = *(uint *)(param_2 + 0x14);
+                  instructionCount = *(uint *)(shaderProgram + 0x14);
                 }
                 else if (bVar35) {
                   *(undefined4 *)(iVar13 + 0x34) = 0x87de;
                   bVar1 = true;
-                  uVar16 = *(uint *)(param_2 + 0x14);
+                  instructionCount = *(uint *)(shaderProgram + 0x14);
                 }
                 else {
-                  *(undefined4 *)(iVar13 + 0x34) = uVar24;
+                  *(undefined4 *)(iVar13 + 0x34) = selectorEnumerant;
                   bVar1 = true;
-                  uVar16 = *(uint *)(param_2 + 0x14);
+                  instructionCount = *(uint *)(shaderProgram + 0x14);
                 }
                 goto LAB_0007e2bc;
               }
-              uVar16 = *(uint *)(param_2 + 0x14);
+              instructionCount = *(uint *)(shaderProgram + 0x14);
             }
             bVar1 = true;
           }
@@ -4880,45 +4880,45 @@ LAB_0007de3c:
           }
 LAB_0007e2bc:
           uVar18 = uVar18 + 1;
-          if ((uVar16 <= uVar18) || (iVar23 = iVar23 + 0x74, bVar1)) goto LAB_0007e2d4;
-          iVar11 = *(int *)(param_2 + 0x18);
+          if ((instructionCount <= uVar18) || (symbol = symbol + 0x74, bVar1)) goto LAB_0007e2d4;
+          instructions = *(int *)(shaderProgram + 0x18);
         } while( true );
       }
     }
     goto LAB_0007e2e0;
   }
 LAB_0007e330:
-  uVar15 = 0;
+  instructionIndex = 0;
   do {
     bVar33 = false;
-    for (uVar30 = uVar16; 1 < uVar30; uVar30 = uVar30 - 1) {
-      iVar31 = uVar30 * 0x74;
-      iVar11 = *(int *)(param_2 + 0x18) + iVar31;
-      if (((((*(int *)(iVar11 + -0x74) == 0x879b) || (*(int *)(iVar11 + -0x74) == 0x8799)) &&
-           (*(int *)(iVar11 + -0x54) == 2)) &&
-          ((*(char *)(iVar11 + -0x3c) == '\0' &&
-           ((*(char *)(param_2 + 0x7b) == '\0' ||
-            (*(int *)(*(int *)(iVar11 + -0x6c) * 0x54 + *(int *)(param_2 + 0x20) + 0x28) != 0x87c4))
-           )))) && ((*(int *)(iVar11 + -0x4c) == 0x87d5 &&
-                    (((*(int *)(iVar11 + -0x48) == 0x87d6 && (*(int *)(iVar11 + -0x44) == 0x87d7))
-                     && (*(int *)(iVar11 + -0x40) == 0x87d8)))))) {
-        if (uVar30 < uVar16) {
-          iVar23 = uVar16 - uVar30;
-          piVar21 = (int *)(iVar11 + 0x20);
+    for (uVar30 = instructionCount; 1 < uVar30; uVar30 = uVar30 - 1) {
+      currentInstruction = uVar30 * 0x74;
+      instructions = *(int *)(shaderProgram + 0x18) + currentInstruction;
+      if (((((*(int *)(instructions + -0x74) == 0x879b) || (*(int *)(instructions + -0x74) == 0x8799)) &&
+           (*(int *)(instructions + -0x54) == 2)) &&
+          ((*(char *)(instructions + -0x3c) == '\0' &&
+           ((*(char *)(shaderProgram + 0x7b) == '\0' ||
+            (*(int *)(*(int *)(instructions + -0x6c) * 0x54 + *(int *)(shaderProgram + 0x20) + 0x28) != 0x87c4))
+           )))) && ((*(int *)(instructions + -0x4c) == 0x87d5 &&
+                    (((*(int *)(instructions + -0x48) == 0x87d6 && (*(int *)(instructions + -0x44) == 0x87d7))
+                     && (*(int *)(instructions + -0x40) == 0x87d8)))))) {
+        if (uVar30 < instructionCount) {
+          symbol = instructionCount - uVar30;
+          piVar21 = (int *)(instructions + 0x20);
           bVar29 = 0;
           bVar10 = 0;
           bVar12 = 0;
           bVar14 = 0;
           bVar34 = true;
           do {
-            if (((*piVar21 == 2) && (piVar21[1] == *(int *)(iVar11 + -0x50))) ||
-               (((piVar21[7] == 2 && (piVar21[8] == *(int *)(iVar11 + -0x50))) ||
-                ((piVar21[0xe] == 2 && (piVar21[0xf] == *(int *)(iVar11 + -0x50))))))) {
+            if (((*piVar21 == 2) && (piVar21[1] == *(int *)(instructions + -0x50))) ||
+               (((piVar21[7] == 2 && (piVar21[8] == *(int *)(instructions + -0x50))) ||
+                ((piVar21[0xe] == 2 && (piVar21[0xf] == *(int *)(instructions + -0x50))))))) {
               bVar35 = true;
               bVar34 = false;
             }
             else {
-              if ((piVar21[-7] == 2) && (piVar21[-6] == *(int *)(iVar11 + -0x50))) {
+              if ((piVar21[-7] == 2) && (piVar21[-6] == *(int *)(instructions + -0x50))) {
                 bVar29 = bVar29 | *(byte *)((int)piVar21 + -0x11);
                 bVar10 = bVar10 | *(byte *)((int)piVar21 + -0xd);
                 bVar12 = bVar12 | *(byte *)((int)piVar21 + -9);
@@ -4931,8 +4931,8 @@ LAB_0007e330:
               bVar35 = false;
             }
 LAB_0007e530:
-            iVar23 = iVar23 + -1;
-          } while ((iVar23 != 0) && (piVar21 = piVar21 + 0x1d, !bVar35));
+            symbol = symbol + -1;
+          } while ((symbol != 0) && (piVar21 = piVar21 + 0x1d, !bVar35));
           if (!bVar34) goto LAB_0007e760;
         }
         uVar18 = uVar30 - 1;
@@ -4943,20 +4943,20 @@ LAB_0007e530:
           uVar25 = 0;
           bVar34 = false;
           do {
-            iVar23 = *(int *)(param_2 + 0x18) + uVar18 * 0x74;
-            bVar35 = *(int *)(iVar23 + -0x54) == 2;
-            if ((((bVar35) && (*(int *)(iVar23 + -0x50) == *(int *)(iVar11 + -0x50))) ||
-                ((bVar36 = *(int *)(iVar23 + -0x38) == 2, bVar36 &&
-                 (*(int *)(iVar23 + -0x34) == *(int *)(iVar11 + -0x50))))) ||
-               ((bVar37 = *(int *)(iVar23 + -0x1c) == 2, bVar37 &&
-                (*(int *)(iVar23 + -0x18) == *(int *)(iVar11 + -0x50))))) {
-              uVar15 = uVar18 - 1;
+            symbol = *(int *)(shaderProgram + 0x18) + uVar18 * 0x74;
+            bVar35 = *(int *)(symbol + -0x54) == 2;
+            if ((((bVar35) && (*(int *)(symbol + -0x50) == *(int *)(instructions + -0x50))) ||
+                ((bVar36 = *(int *)(symbol + -0x38) == 2, bVar36 &&
+                 (*(int *)(symbol + -0x34) == *(int *)(instructions + -0x50))))) ||
+               ((bVar37 = *(int *)(symbol + -0x1c) == 2, bVar37 &&
+                (*(int *)(symbol + -0x18) == *(int *)(instructions + -0x50))))) {
+              instructionIndex = uVar18 - 1;
               bVar35 = true;
               bVar34 = true;
             }
-            else if ((((bVar35) && (*(int *)(iVar23 + -0x50) == *(int *)(iVar11 + -0x6c))) ||
-                     ((bVar36 && (*(int *)(iVar23 + -0x34) == *(int *)(iVar11 + -0x6c))))) ||
-                    ((bVar37 && (*(int *)(iVar23 + -0x18) == *(int *)(iVar11 + -0x6c))))) {
+            else if ((((bVar35) && (*(int *)(symbol + -0x50) == *(int *)(instructions + -0x6c))) ||
+                     ((bVar36 && (*(int *)(symbol + -0x34) == *(int *)(instructions + -0x6c))))) ||
+                    ((bVar37 && (*(int *)(symbol + -0x18) == *(int *)(instructions + -0x6c))))) {
               bVar35 = true;
               bVar34 = false;
             }
@@ -4964,99 +4964,99 @@ LAB_0007e530:
               bVar35 = false;
             }
             uVar18 = uVar18 - 1;
-            if (((*(int *)(iVar23 + -0x74) != 0x879c) && (*(int *)(iVar23 + -0x70) == 2)) &&
-               (*(int *)(iVar23 + -0x6c) == *(int *)(iVar11 + -0x50))) {
-              uVar25 = uVar25 | *(byte *)(iVar23 + -0x65);
-              uVar26 = uVar26 | *(byte *)(iVar23 + -0x61);
-              uVar28 = uVar28 | *(byte *)(iVar23 + -0x59);
-              uVar27 = uVar27 | *(byte *)(iVar23 + -0x5d);
-              if (((*(uint *)(iVar11 + -0x68) <= uVar25) && (*(uint *)(iVar11 + -100) <= uVar26)) &&
-                 ((*(uint *)(iVar11 + -0x60) <= uVar27 && (*(uint *)(iVar11 + -0x5c) <= uVar28)))) {
+            if (((*(int *)(symbol + -0x74) != 0x879c) && (*(int *)(symbol + -0x70) == 2)) &&
+               (*(int *)(symbol + -0x6c) == *(int *)(instructions + -0x50))) {
+              uVar25 = uVar25 | *(byte *)(symbol + -0x65);
+              uVar26 = uVar26 | *(byte *)(symbol + -0x61);
+              uVar28 = uVar28 | *(byte *)(symbol + -0x59);
+              uVar27 = uVar27 | *(byte *)(symbol + -0x5d);
+              if (((*(uint *)(instructions + -0x68) <= uVar25) && (*(uint *)(instructions + -100) <= uVar26)) &&
+                 ((*(uint *)(instructions + -0x60) <= uVar27 && (*(uint *)(instructions + -0x5c) <= uVar28)))) {
                 bVar35 = true;
                 bVar34 = true;
-                uVar15 = uVar18;
+                instructionIndex = uVar18;
               }
             }
           } while ((uVar18 != 0) && (!bVar35));
           if (bVar34) {
-            extvsInstReadsTempComponents(param_2 + 0x1c,iVar11 + -0x74,*(undefined4 *)(iVar11 + -0x50),&cStack_88,
+            extvsInstReadsTempComponents(shaderProgram + 0x1c,instructions + -0x74,*(undefined4 *)(instructions + -0x50),&cStack_88,
                          &cStack_87,&cStack_86,acStack_85);
             if (((((cStack_88 == '\0') || (uVar25 != 0)) && ((cStack_87 == '\0' || (uVar26 != 0))))
                 && ((cStack_86 == '\0' || (uVar27 != 0)))) &&
                ((acStack_85[0] == '\0' || (uVar28 != 0)))) {
-              if (uVar15 < uVar30) {
-                iVar23 = uVar30 - uVar15;
-                iVar32 = uVar15 * 0x74;
+              if (instructionIndex < uVar30) {
+                symbol = uVar30 - instructionIndex;
+                iVar32 = instructionIndex * 0x74;
                 do {
-                  iVar13 = iVar32 + *(int *)(param_2 + 0x18);
-                  if (((*(int *)(iVar32 + *(int *)(param_2 + 0x18)) != 0x879c) &&
+                  iVar13 = iVar32 + *(int *)(shaderProgram + 0x18);
+                  if (((*(int *)(iVar32 + *(int *)(shaderProgram + 0x18)) != 0x879c) &&
                       (*(int *)(iVar13 + 4) == 2)) &&
-                     (*(int *)(iVar13 + 8) == *(int *)(iVar11 + -0x50))) {
-                    uVar24 = *(undefined4 *)(iVar11 + -0x6c);
-                    *(undefined4 *)(iVar13 + 4) = *(undefined4 *)(iVar11 + -0x70);
-                    *(undefined4 *)(iVar13 + 8) = uVar24;
-                    uVar16 = *(uint *)(iVar11 + -0x5c);
-                    uVar25 = *(uint *)(iVar11 + -100);
-                    uVar18 = *(uint *)(iVar11 + -0x60);
-                    *(uint *)(iVar13 + 0xc) = *(uint *)(iVar13 + 0xc) & *(uint *)(iVar11 + -0x68);
+                     (*(int *)(iVar13 + 8) == *(int *)(instructions + -0x50))) {
+                    selectorEnumerant = *(undefined4 *)(instructions + -0x6c);
+                    *(undefined4 *)(iVar13 + 4) = *(undefined4 *)(instructions + -0x70);
+                    *(undefined4 *)(iVar13 + 8) = selectorEnumerant;
+                    instructionCount = *(uint *)(instructions + -0x5c);
+                    uVar25 = *(uint *)(instructions + -100);
+                    uVar18 = *(uint *)(instructions + -0x60);
+                    *(uint *)(iVar13 + 0xc) = *(uint *)(iVar13 + 0xc) & *(uint *)(instructions + -0x68);
                     *(uint *)(iVar13 + 0x10) = *(uint *)(iVar13 + 0x10) & uVar25;
                     *(uint *)(iVar13 + 0x14) = *(uint *)(iVar13 + 0x14) & uVar18;
-                    *(uint *)(iVar13 + 0x18) = *(uint *)(iVar13 + 0x18) & uVar16;
+                    *(uint *)(iVar13 + 0x18) = *(uint *)(iVar13 + 0x18) & instructionCount;
                   }
                   iVar32 = iVar32 + 0x74;
-                  iVar23 = iVar23 + -1;
-                } while (iVar23 != 0);
+                  symbol = symbol + -1;
+                } while (symbol != 0);
               }
-              uVar16 = *(uint *)(param_2 + 0x14);
+              instructionCount = *(uint *)(shaderProgram + 0x14);
               uVar18 = uVar30;
-              if (uVar30 < uVar16) {
+              if (uVar30 < instructionCount) {
                 do {
                   uVar18 = uVar18 + 1;
-                  iVar11 = iVar31 + *(int *)(param_2 + 0x18);
-                  iVar31 = iVar31 + 0x74;
-                  _memcpy(iVar11 + -0x74,iVar11,0x74);
-                  uVar16 = *(uint *)(param_2 + 0x14);
-                } while (uVar18 < uVar16);
+                  instructions = currentInstruction + *(int *)(shaderProgram + 0x18);
+                  currentInstruction = currentInstruction + 0x74;
+                  _memcpy(instructions + -0x74,instructions,0x74);
+                  instructionCount = *(uint *)(shaderProgram + 0x14);
+                } while (uVar18 < instructionCount);
               }
-              uVar16 = uVar16 - 1;
+              instructionCount = instructionCount - 1;
               bVar33 = true;
-              *(uint *)(param_2 + 0x14) = uVar16;
+              *(uint *)(shaderProgram + 0x14) = instructionCount;
             }
             else {
-              uVar16 = *(uint *)(param_2 + 0x14);
+              instructionCount = *(uint *)(shaderProgram + 0x14);
             }
           }
         }
       }
 LAB_0007e760: ;
     }
-    if (uVar16 != 0) {
+    if (instructionCount != 0) {
       uVar30 = 0;
       do {
-        iVar31 = *(int *)(param_2 + 0x18);
-        iVar23 = uVar30 * 0x74;
-        iVar11 = *(int *)(iVar31 + iVar23);
-        iVar32 = iVar31 + iVar23;
-        if ((((iVar11 == 0x879b) || (iVar11 == 0x8799)) || (iVar11 == 0x879a)) &&
+        currentInstruction = *(int *)(shaderProgram + 0x18);
+        symbol = uVar30 * 0x74;
+        instructions = *(int *)(currentInstruction + symbol);
+        iVar32 = currentInstruction + symbol;
+        if ((((instructions == 0x879b) || (instructions == 0x8799)) || (instructions == 0x879a)) &&
            ((((*(char *)(iVar32 + 0x38) == '\0' && (*(int *)(iVar32 + 4) == 2)) &&
-             ((*(char *)(param_2 + 0x7b) == '\0' ||
-              (*(int *)(*(int *)(iVar32 + 8) * 0x54 + *(int *)(param_2 + 0x20) + 0x28) != 0x87c4))))
+             ((*(char *)(shaderProgram + 0x7b) == '\0' ||
+              (*(int *)(*(int *)(iVar32 + 8) * 0x54 + *(int *)(shaderProgram + 0x20) + 0x28) != 0x87c4))))
             && ((((*(int *)(iVar32 + 0xc) != 0 && (*(int *)(iVar32 + 0x10) != 0)) &&
                  (*(int *)(iVar32 + 0x14) != 0)) && (*(int *)(iVar32 + 0x18) != 0)))))) {
           uVar25 = uVar30 + 1;
           uVar18 = uVar25;
-          uVar15 = uVar16;
-          if (uVar25 < uVar16) {
+          instructionIndex = instructionCount;
+          if (uVar25 < instructionCount) {
             bVar34 = true;
             do {
-              iVar11 = iVar31 + uVar18 * 0x74;
-              if (*(int *)(iVar11 + 4) == 2) {
-                iVar11 = *(int *)(iVar11 + 8);
-                bVar35 = iVar11 == *(int *)(iVar32 + 8);
+              instructions = currentInstruction + uVar18 * 0x74;
+              if (*(int *)(instructions + 4) == 2) {
+                instructions = *(int *)(instructions + 8);
+                bVar35 = instructions == *(int *)(iVar32 + 8);
                 if (bVar35) {
-                  uVar15 = uVar18 + 1;
+                  instructionIndex = uVar18 + 1;
                 }
-                if (*(int *)(iVar32 + 0x24) == iVar11) {
+                if (*(int *)(iVar32 + 0x24) == instructions) {
                   bVar35 = true;
                   bVar34 = false;
                 }
@@ -5065,121 +5065,121 @@ LAB_0007e760: ;
                 bVar35 = false;
               }
               uVar18 = uVar18 + 1;
-            } while ((uVar18 < uVar16) && (!bVar35));
+            } while ((uVar18 < instructionCount) && (!bVar35));
             if (!bVar34) goto LAB_00080860;
           }
           bVar34 = true;
-          iVar11 = iVar31 + uVar18 * 0x74;
-          bVar10 = *(byte *)(iVar11 + -0x59);
-          bVar12 = *(byte *)(iVar11 + -0x65);
-          bVar14 = *(byte *)(iVar11 + -0x61);
-          bVar29 = *(byte *)(iVar11 + -0x5d);
-          if (uVar15 < uVar16) {
-            iVar11 = uVar15 * 0x74;
-            uVar18 = uVar15;
+          instructions = currentInstruction + uVar18 * 0x74;
+          bVar10 = *(byte *)(instructions + -0x59);
+          bVar12 = *(byte *)(instructions + -0x65);
+          bVar14 = *(byte *)(instructions + -0x61);
+          bVar29 = *(byte *)(instructions + -0x5d);
+          if (instructionIndex < instructionCount) {
+            instructions = instructionIndex * 0x74;
+            uVar18 = instructionIndex;
             while( true ) {
-              iVar31 = iVar11 + iVar31;
-              if ((((*(int *)(iVar31 + 0x20) == 2) &&
-                   (iVar13 = *(int *)(iVar32 + 8), *(int *)(iVar31 + 0x24) == iVar13)) ||
-                  ((*(int *)(iVar31 + 0x3c) == 2 &&
-                   (iVar13 = *(int *)(iVar32 + 8), *(int *)(iVar31 + 0x40) == iVar13)))) ||
-                 ((*(int *)(iVar31 + 0x58) == 2 &&
-                  (iVar13 = *(int *)(iVar32 + 8), *(int *)(iVar31 + 0x5c) == iVar13)))) {
-                extvsInstReadsTempComponents(param_2 + 0x1c,iVar31,iVar13,&cStack_88,&cStack_87,&cStack_86,
+              currentInstruction = instructions + currentInstruction;
+              if ((((*(int *)(currentInstruction + 0x20) == 2) &&
+                   (iVar13 = *(int *)(iVar32 + 8), *(int *)(currentInstruction + 0x24) == iVar13)) ||
+                  ((*(int *)(currentInstruction + 0x3c) == 2 &&
+                   (iVar13 = *(int *)(iVar32 + 8), *(int *)(currentInstruction + 0x40) == iVar13)))) ||
+                 ((*(int *)(currentInstruction + 0x58) == 2 &&
+                  (iVar13 = *(int *)(iVar32 + 8), *(int *)(currentInstruction + 0x5c) == iVar13)))) {
+                extvsInstReadsTempComponents(shaderProgram + 0x1c,currentInstruction,iVar13,&cStack_88,&cStack_87,&cStack_86,
                              acStack_85);
                 if (((cStack_88 == '\0') || (bVar12 != 0)) &&
                    ((((cStack_87 == '\0' || (bVar14 != 0)) && ((cStack_86 == '\0' || (bVar29 != 0)))
                      ) && ((acStack_85[0] == '\0' || (bVar10 != 0)))))) {
-                  uVar16 = *(uint *)(param_2 + 0x14);
+                  instructionCount = *(uint *)(shaderProgram + 0x14);
                 }
                 else {
-                  uVar16 = *(uint *)(param_2 + 0x14);
+                  instructionCount = *(uint *)(shaderProgram + 0x14);
                   bVar34 = false;
                 }
               }
-              if ((*(int *)(iVar31 + 4) == 2) && (*(int *)(iVar31 + 8) == *(int *)(iVar32 + 8))) {
-                bVar10 = bVar10 | *(byte *)(iVar31 + 0x1b);
-                bVar12 = bVar12 | *(byte *)(iVar31 + 0xf);
-                bVar14 = bVar14 | *(byte *)(iVar31 + 0x13);
-                bVar29 = bVar29 | *(byte *)(iVar31 + 0x17);
+              if ((*(int *)(currentInstruction + 4) == 2) && (*(int *)(currentInstruction + 8) == *(int *)(iVar32 + 8))) {
+                bVar10 = bVar10 | *(byte *)(currentInstruction + 0x1b);
+                bVar12 = bVar12 | *(byte *)(currentInstruction + 0xf);
+                bVar14 = bVar14 | *(byte *)(currentInstruction + 0x13);
+                bVar29 = bVar29 | *(byte *)(currentInstruction + 0x17);
               }
               uVar18 = uVar18 + 1;
-              iVar11 = iVar11 + 0x74;
-              if (uVar16 <= uVar18) break;
-              iVar31 = *(int *)(param_2 + 0x18);
+              instructions = instructions + 0x74;
+              if (instructionCount <= uVar18) break;
+              currentInstruction = *(int *)(shaderProgram + 0x18);
             }
             if (!bVar34) goto LAB_00080860;
           }
-          if (uVar25 < uVar15) {
-            iVar31 = uVar25 * 0x74;
-            iVar11 = uVar15 - uVar25;
+          if (uVar25 < instructionIndex) {
+            currentInstruction = uVar25 * 0x74;
+            instructions = instructionIndex - uVar25;
             do {
-              iVar13 = iVar31 + *(int *)(param_2 + 0x18);
+              iVar13 = currentInstruction + *(int *)(shaderProgram + 0x18);
               if ((*(int *)(iVar13 + 0x20) == 2) &&
                  (*(int *)(iVar13 + 0x24) == *(int *)(iVar32 + 8))) {
-                uVar24 = *(undefined4 *)(iVar13 + 0x28);
+                selectorEnumerant = *(undefined4 *)(iVar13 + 0x28);
                 puVar17 = (undefined4 *)(iVar32 + 0x28);
                 *(undefined4 *)(iVar13 + 0x24) = *(undefined4 *)(iVar32 + 0x24);
-                switch(uVar24) {
+                switch(selectorEnumerant) {
                 case 0x87d5:
-                  uVar24 = *puVar17;
+                  selectorEnumerant = *puVar17;
                   break;
                 case 0x87d6:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x2c);
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
                   break;
                 case 0x87d7:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x30);
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
                   break;
                 case 0x87d8:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x34);
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
                   break;
                 case 0x87d9:
-                  uVar24 = *puVar17;
-                  switch(uVar24) {
+                  selectorEnumerant = *puVar17;
+                  switch(selectorEnumerant) {
                   case 0x87d5:
 code_r0x0007ed7c:
-                    uVar24 = 0x87d9;
+                    selectorEnumerant = 0x87d9;
                     break;
                   case 0x87d6:
 code_r0x0007ed70:
-                    uVar24 = 0x87da;
+                    selectorEnumerant = 0x87da;
                     break;
                   case 0x87d7:
 code_r0x0007eddc:
-                    uVar24 = 0x87db;
+                    selectorEnumerant = 0x87db;
                     break;
                   case 0x87d8:
 code_r0x0007edd0:
-                    uVar24 = 0x87dc;
+                    selectorEnumerant = 0x87dc;
                     break;
                   case 0x87d9:
 code_r0x0007edc4:
-                    uVar24 = 0x87d5;
+                    selectorEnumerant = 0x87d5;
                     break;
                   case 0x87da:
 code_r0x0007edb8:
-                    uVar24 = 0x87d6;
+                    selectorEnumerant = 0x87d6;
                     break;
                   case 0x87db:
 code_r0x0007edac:
-                    uVar24 = 0x87d7;
+                    selectorEnumerant = 0x87d7;
                     break;
                   case 0x87dc:
 code_r0x0007eda0:
-                    uVar24 = 0x87d8;
+                    selectorEnumerant = 0x87d8;
                     break;
                   case 0x87de:
 code_r0x0007ed94:
-                    uVar24 = 0x87df;
+                    selectorEnumerant = 0x87df;
                     break;
                   case 0x87df:
 code_r0x0007ed88:
-                    uVar24 = 0x87de;
+                    selectorEnumerant = 0x87de;
                   }
                   break;
                 case 0x87da:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x2c);
-                  switch(uVar24) {
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
+                  switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007ed7c;
                   case 0x87d6:
@@ -5203,8 +5203,8 @@ code_r0x0007ed88:
                   }
                   break;
                 case 0x87db:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x30);
-                  switch(uVar24) {
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
+                  switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007ed7c;
                   case 0x87d6:
@@ -5228,8 +5228,8 @@ code_r0x0007ed88:
                   }
                   break;
                 case 0x87dc:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x34);
-                  switch(uVar24) {
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
+                  switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007ed7c;
                   case 0x87d6:
@@ -5253,7 +5253,7 @@ code_r0x0007ed88:
                   }
                 }
                 uVar9 = *(undefined4 *)(iVar13 + 0x2c);
-                *(undefined4 *)(iVar13 + 0x28) = uVar24;
+                *(undefined4 *)(iVar13 + 0x28) = selectorEnumerant;
                 switch(uVar9) {
                 case 0x87d5:
                   uVar9 = *puVar17;
@@ -5386,68 +5386,68 @@ code_r0x0007efe0:
                     goto code_r0x0007efe0;
                   }
                 }
-                uVar24 = *(undefined4 *)(iVar13 + 0x30);
+                selectorEnumerant = *(undefined4 *)(iVar13 + 0x30);
                 *(undefined4 *)(iVar13 + 0x2c) = uVar9;
-                switch(uVar24) {
+                switch(selectorEnumerant) {
                 case 0x87d5:
-                  uVar24 = *puVar17;
+                  selectorEnumerant = *puVar17;
                   break;
                 case 0x87d6:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x2c);
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
                   break;
                 case 0x87d7:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x30);
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
                   break;
                 case 0x87d8:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x34);
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
                   break;
                 case 0x87d9:
-                  uVar24 = *puVar17;
-                  switch(uVar24) {
+                  selectorEnumerant = *puVar17;
+                  switch(selectorEnumerant) {
                   case 0x87d5:
 code_r0x0007f22c:
-                    uVar24 = 0x87d9;
+                    selectorEnumerant = 0x87d9;
                     break;
                   case 0x87d6:
 code_r0x0007f220:
-                    uVar24 = 0x87da;
+                    selectorEnumerant = 0x87da;
                     break;
                   case 0x87d7:
 code_r0x0007f28c:
-                    uVar24 = 0x87db;
+                    selectorEnumerant = 0x87db;
                     break;
                   case 0x87d8:
 code_r0x0007f280:
-                    uVar24 = 0x87dc;
+                    selectorEnumerant = 0x87dc;
                     break;
                   case 0x87d9:
 code_r0x0007f274:
-                    uVar24 = 0x87d5;
+                    selectorEnumerant = 0x87d5;
                     break;
                   case 0x87da:
 code_r0x0007f268:
-                    uVar24 = 0x87d6;
+                    selectorEnumerant = 0x87d6;
                     break;
                   case 0x87db:
 code_r0x0007f25c:
-                    uVar24 = 0x87d7;
+                    selectorEnumerant = 0x87d7;
                     break;
                   case 0x87dc:
 code_r0x0007f250:
-                    uVar24 = 0x87d8;
+                    selectorEnumerant = 0x87d8;
                     break;
                   case 0x87de:
 code_r0x0007f244:
-                    uVar24 = 0x87df;
+                    selectorEnumerant = 0x87df;
                     break;
                   case 0x87df:
 code_r0x0007f238:
-                    uVar24 = 0x87de;
+                    selectorEnumerant = 0x87de;
                   }
                   break;
                 case 0x87da:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x2c);
-                  switch(uVar24) {
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
+                  switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007f22c;
                   case 0x87d6:
@@ -5471,8 +5471,8 @@ code_r0x0007f238:
                   }
                   break;
                 case 0x87db:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x30);
-                  switch(uVar24) {
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
+                  switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007f22c;
                   case 0x87d6:
@@ -5496,8 +5496,8 @@ code_r0x0007f238:
                   }
                   break;
                 case 0x87dc:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x34);
-                  switch(uVar24) {
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
+                  switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007f22c;
                   case 0x87d6:
@@ -5521,7 +5521,7 @@ code_r0x0007f238:
                   }
                 }
                 uVar9 = *(undefined4 *)(iVar13 + 0x34);
-                *(undefined4 *)(iVar13 + 0x30) = uVar24;
+                *(undefined4 *)(iVar13 + 0x30) = selectorEnumerant;
                 switch(uVar9) {
                 case 0x87d5:
                   uVar9 = *puVar17;
@@ -5658,69 +5658,69 @@ code_r0x0007f490:
               }
               if ((*(int *)(iVar13 + 0x3c) == 2) &&
                  (*(int *)(iVar13 + 0x40) == *(int *)(iVar32 + 8))) {
-                uVar24 = *(undefined4 *)(iVar13 + 0x44);
+                selectorEnumerant = *(undefined4 *)(iVar13 + 0x44);
                 puVar17 = (undefined4 *)(iVar32 + 0x28);
                 *(undefined4 *)(iVar13 + 0x40) = *(undefined4 *)(iVar32 + 0x24);
-                switch(uVar24) {
+                switch(selectorEnumerant) {
                 case 0x87d5:
-                  uVar24 = *puVar17;
+                  selectorEnumerant = *puVar17;
                   break;
                 case 0x87d6:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x2c);
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
                   break;
                 case 0x87d7:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x30);
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
                   break;
                 case 0x87d8:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x34);
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
                   break;
                 case 0x87d9:
-                  uVar24 = *puVar17;
-                  switch(uVar24) {
+                  selectorEnumerant = *puVar17;
+                  switch(selectorEnumerant) {
                   case 0x87d5:
 code_r0x0007f708:
-                    uVar24 = 0x87d9;
+                    selectorEnumerant = 0x87d9;
                     break;
                   case 0x87d6:
 code_r0x0007f6fc:
-                    uVar24 = 0x87da;
+                    selectorEnumerant = 0x87da;
                     break;
                   case 0x87d7:
 code_r0x0007f768:
-                    uVar24 = 0x87db;
+                    selectorEnumerant = 0x87db;
                     break;
                   case 0x87d8:
 code_r0x0007f75c:
-                    uVar24 = 0x87dc;
+                    selectorEnumerant = 0x87dc;
                     break;
                   case 0x87d9:
 code_r0x0007f750:
-                    uVar24 = 0x87d5;
+                    selectorEnumerant = 0x87d5;
                     break;
                   case 0x87da:
 code_r0x0007f744:
-                    uVar24 = 0x87d6;
+                    selectorEnumerant = 0x87d6;
                     break;
                   case 0x87db:
 code_r0x0007f738:
-                    uVar24 = 0x87d7;
+                    selectorEnumerant = 0x87d7;
                     break;
                   case 0x87dc:
 code_r0x0007f72c:
-                    uVar24 = 0x87d8;
+                    selectorEnumerant = 0x87d8;
                     break;
                   case 0x87de:
 code_r0x0007f720:
-                    uVar24 = 0x87df;
+                    selectorEnumerant = 0x87df;
                     break;
                   case 0x87df:
 code_r0x0007f714:
-                    uVar24 = 0x87de;
+                    selectorEnumerant = 0x87de;
                   }
                   break;
                 case 0x87da:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x2c);
-                  switch(uVar24) {
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
+                  switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007f708;
                   case 0x87d6:
@@ -5744,8 +5744,8 @@ code_r0x0007f714:
                   }
                   break;
                 case 0x87db:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x30);
-                  switch(uVar24) {
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
+                  switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007f708;
                   case 0x87d6:
@@ -5769,8 +5769,8 @@ code_r0x0007f714:
                   }
                   break;
                 case 0x87dc:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x34);
-                  switch(uVar24) {
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
+                  switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007f708;
                   case 0x87d6:
@@ -5794,7 +5794,7 @@ code_r0x0007f714:
                   }
                 }
                 uVar9 = *(undefined4 *)(iVar13 + 0x48);
-                *(undefined4 *)(iVar13 + 0x44) = uVar24;
+                *(undefined4 *)(iVar13 + 0x44) = selectorEnumerant;
                 switch(uVar9) {
                 case 0x87d5:
                   uVar9 = *puVar17;
@@ -5927,68 +5927,68 @@ code_r0x0007f96c:
                     goto code_r0x0007f96c;
                   }
                 }
-                uVar24 = *(undefined4 *)(iVar13 + 0x4c);
+                selectorEnumerant = *(undefined4 *)(iVar13 + 0x4c);
                 *(undefined4 *)(iVar13 + 0x48) = uVar9;
-                switch(uVar24) {
+                switch(selectorEnumerant) {
                 case 0x87d5:
-                  uVar24 = *puVar17;
+                  selectorEnumerant = *puVar17;
                   break;
                 case 0x87d6:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x2c);
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
                   break;
                 case 0x87d7:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x30);
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
                   break;
                 case 0x87d8:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x34);
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
                   break;
                 case 0x87d9:
-                  uVar24 = *puVar17;
-                  switch(uVar24) {
+                  selectorEnumerant = *puVar17;
+                  switch(selectorEnumerant) {
                   case 0x87d5:
 code_r0x0007fbb8:
-                    uVar24 = 0x87d9;
+                    selectorEnumerant = 0x87d9;
                     break;
                   case 0x87d6:
 code_r0x0007fbac:
-                    uVar24 = 0x87da;
+                    selectorEnumerant = 0x87da;
                     break;
                   case 0x87d7:
 code_r0x0007fc18:
-                    uVar24 = 0x87db;
+                    selectorEnumerant = 0x87db;
                     break;
                   case 0x87d8:
 code_r0x0007fc0c:
-                    uVar24 = 0x87dc;
+                    selectorEnumerant = 0x87dc;
                     break;
                   case 0x87d9:
 code_r0x0007fc00:
-                    uVar24 = 0x87d5;
+                    selectorEnumerant = 0x87d5;
                     break;
                   case 0x87da:
 code_r0x0007fbf4:
-                    uVar24 = 0x87d6;
+                    selectorEnumerant = 0x87d6;
                     break;
                   case 0x87db:
 code_r0x0007fbe8:
-                    uVar24 = 0x87d7;
+                    selectorEnumerant = 0x87d7;
                     break;
                   case 0x87dc:
 code_r0x0007fbdc:
-                    uVar24 = 0x87d8;
+                    selectorEnumerant = 0x87d8;
                     break;
                   case 0x87de:
 code_r0x0007fbd0:
-                    uVar24 = 0x87df;
+                    selectorEnumerant = 0x87df;
                     break;
                   case 0x87df:
 code_r0x0007fbc4:
-                    uVar24 = 0x87de;
+                    selectorEnumerant = 0x87de;
                   }
                   break;
                 case 0x87da:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x2c);
-                  switch(uVar24) {
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
+                  switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007fbb8;
                   case 0x87d6:
@@ -6012,8 +6012,8 @@ code_r0x0007fbc4:
                   }
                   break;
                 case 0x87db:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x30);
-                  switch(uVar24) {
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
+                  switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007fbb8;
                   case 0x87d6:
@@ -6037,8 +6037,8 @@ code_r0x0007fbc4:
                   }
                   break;
                 case 0x87dc:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x34);
-                  switch(uVar24) {
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
+                  switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x0007fbb8;
                   case 0x87d6:
@@ -6062,7 +6062,7 @@ code_r0x0007fbc4:
                   }
                 }
                 uVar9 = *(undefined4 *)(iVar13 + 0x50);
-                *(undefined4 *)(iVar13 + 0x4c) = uVar24;
+                *(undefined4 *)(iVar13 + 0x4c) = selectorEnumerant;
                 switch(uVar9) {
                 case 0x87d5:
                   uVar9 = *puVar17;
@@ -6199,69 +6199,69 @@ code_r0x0007fe1c:
               }
               if ((*(int *)(iVar13 + 0x58) == 2) &&
                  (*(int *)(iVar13 + 0x5c) == *(int *)(iVar32 + 8))) {
-                uVar24 = *(undefined4 *)(iVar13 + 0x60);
+                selectorEnumerant = *(undefined4 *)(iVar13 + 0x60);
                 puVar17 = (undefined4 *)(iVar32 + 0x28);
                 *(undefined4 *)(iVar13 + 0x5c) = *(undefined4 *)(iVar32 + 0x24);
-                switch(uVar24) {
+                switch(selectorEnumerant) {
                 case 0x87d5:
-                  uVar24 = *puVar17;
+                  selectorEnumerant = *puVar17;
                   break;
                 case 0x87d6:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x2c);
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
                   break;
                 case 0x87d7:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x30);
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
                   break;
                 case 0x87d8:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x34);
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
                   break;
                 case 0x87d9:
-                  uVar24 = *puVar17;
-                  switch(uVar24) {
+                  selectorEnumerant = *puVar17;
+                  switch(selectorEnumerant) {
                   case 0x87d5:
 code_r0x00080094:
-                    uVar24 = 0x87d9;
+                    selectorEnumerant = 0x87d9;
                     break;
                   case 0x87d6:
 code_r0x00080088:
-                    uVar24 = 0x87da;
+                    selectorEnumerant = 0x87da;
                     break;
                   case 0x87d7:
 code_r0x000800f4:
-                    uVar24 = 0x87db;
+                    selectorEnumerant = 0x87db;
                     break;
                   case 0x87d8:
 code_r0x000800e8:
-                    uVar24 = 0x87dc;
+                    selectorEnumerant = 0x87dc;
                     break;
                   case 0x87d9:
 code_r0x000800dc:
-                    uVar24 = 0x87d5;
+                    selectorEnumerant = 0x87d5;
                     break;
                   case 0x87da:
 code_r0x000800d0:
-                    uVar24 = 0x87d6;
+                    selectorEnumerant = 0x87d6;
                     break;
                   case 0x87db:
 code_r0x000800c4:
-                    uVar24 = 0x87d7;
+                    selectorEnumerant = 0x87d7;
                     break;
                   case 0x87dc:
 code_r0x000800b8:
-                    uVar24 = 0x87d8;
+                    selectorEnumerant = 0x87d8;
                     break;
                   case 0x87de:
 code_r0x000800ac:
-                    uVar24 = 0x87df;
+                    selectorEnumerant = 0x87df;
                     break;
                   case 0x87df:
 code_r0x000800a0:
-                    uVar24 = 0x87de;
+                    selectorEnumerant = 0x87de;
                   }
                   break;
                 case 0x87da:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x2c);
-                  switch(uVar24) {
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
+                  switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x00080094;
                   case 0x87d6:
@@ -6285,8 +6285,8 @@ code_r0x000800a0:
                   }
                   break;
                 case 0x87db:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x30);
-                  switch(uVar24) {
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
+                  switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x00080094;
                   case 0x87d6:
@@ -6310,8 +6310,8 @@ code_r0x000800a0:
                   }
                   break;
                 case 0x87dc:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x34);
-                  switch(uVar24) {
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
+                  switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x00080094;
                   case 0x87d6:
@@ -6335,7 +6335,7 @@ code_r0x000800a0:
                   }
                 }
                 uVar9 = *(undefined4 *)(iVar13 + 100);
-                *(undefined4 *)(iVar13 + 0x60) = uVar24;
+                *(undefined4 *)(iVar13 + 0x60) = selectorEnumerant;
                 switch(uVar9) {
                 case 0x87d5:
                   uVar9 = *puVar17;
@@ -6468,68 +6468,68 @@ code_r0x000802f8:
                     goto code_r0x000802f8;
                   }
                 }
-                uVar24 = *(undefined4 *)(iVar13 + 0x68);
+                selectorEnumerant = *(undefined4 *)(iVar13 + 0x68);
                 *(undefined4 *)(iVar13 + 100) = uVar9;
-                switch(uVar24) {
+                switch(selectorEnumerant) {
                 case 0x87d5:
-                  uVar24 = *puVar17;
+                  selectorEnumerant = *puVar17;
                   break;
                 case 0x87d6:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x2c);
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
                   break;
                 case 0x87d7:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x30);
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
                   break;
                 case 0x87d8:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x34);
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
                   break;
                 case 0x87d9:
-                  uVar24 = *puVar17;
-                  switch(uVar24) {
+                  selectorEnumerant = *puVar17;
+                  switch(selectorEnumerant) {
                   case 0x87d5:
 code_r0x00080544:
-                    uVar24 = 0x87d9;
+                    selectorEnumerant = 0x87d9;
                     break;
                   case 0x87d6:
 code_r0x00080538:
-                    uVar24 = 0x87da;
+                    selectorEnumerant = 0x87da;
                     break;
                   case 0x87d7:
 code_r0x000805a4:
-                    uVar24 = 0x87db;
+                    selectorEnumerant = 0x87db;
                     break;
                   case 0x87d8:
 code_r0x00080598:
-                    uVar24 = 0x87dc;
+                    selectorEnumerant = 0x87dc;
                     break;
                   case 0x87d9:
 code_r0x0008058c:
-                    uVar24 = 0x87d5;
+                    selectorEnumerant = 0x87d5;
                     break;
                   case 0x87da:
 code_r0x00080580:
-                    uVar24 = 0x87d6;
+                    selectorEnumerant = 0x87d6;
                     break;
                   case 0x87db:
 code_r0x00080574:
-                    uVar24 = 0x87d7;
+                    selectorEnumerant = 0x87d7;
                     break;
                   case 0x87dc:
 code_r0x00080568:
-                    uVar24 = 0x87d8;
+                    selectorEnumerant = 0x87d8;
                     break;
                   case 0x87de:
 code_r0x0008055c:
-                    uVar24 = 0x87df;
+                    selectorEnumerant = 0x87df;
                     break;
                   case 0x87df:
 code_r0x00080550:
-                    uVar24 = 0x87de;
+                    selectorEnumerant = 0x87de;
                   }
                   break;
                 case 0x87da:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x2c);
-                  switch(uVar24) {
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
+                  switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x00080544;
                   case 0x87d6:
@@ -6553,8 +6553,8 @@ code_r0x00080550:
                   }
                   break;
                 case 0x87db:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x30);
-                  switch(uVar24) {
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x30);
+                  switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x00080544;
                   case 0x87d6:
@@ -6578,8 +6578,8 @@ code_r0x00080550:
                   }
                   break;
                 case 0x87dc:
-                  uVar24 = *(undefined4 *)(iVar32 + 0x34);
-                  switch(uVar24) {
+                  selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
+                  switch(selectorEnumerant) {
                   case 0x87d5:
                     goto code_r0x00080544;
                   case 0x87d6:
@@ -6603,7 +6603,7 @@ code_r0x00080550:
                   }
                 }
                 uVar9 = *(undefined4 *)(iVar13 + 0x6c);
-                *(undefined4 *)(iVar13 + 0x68) = uVar24;
+                *(undefined4 *)(iVar13 + 0x68) = selectorEnumerant;
                 switch(uVar9) {
                 case 0x87d5:
                   uVar9 = *puVar17;
@@ -6738,58 +6738,58 @@ code_r0x000807a8:
                 }
                 *(undefined4 *)(iVar13 + 0x6c) = uVar9;
               }
-              iVar11 = iVar11 + -1;
-              iVar31 = iVar31 + 0x74;
-            } while (iVar11 != 0);
-            uVar16 = *(uint *)(param_2 + 0x14);
+              instructions = instructions + -1;
+              currentInstruction = currentInstruction + 0x74;
+            } while (instructions != 0);
+            instructionCount = *(uint *)(shaderProgram + 0x14);
           }
-          uVar16 = uVar16 - 1;
-          *(uint *)(param_2 + 0x14) = uVar16;
+          instructionCount = instructionCount - 1;
+          *(uint *)(shaderProgram + 0x14) = instructionCount;
           uVar18 = uVar30;
-          if (uVar30 < uVar16) {
+          if (uVar30 < instructionCount) {
             do {
               uVar18 = uVar18 + 1;
-              iVar11 = iVar23 + *(int *)(param_2 + 0x18);
-              iVar23 = iVar23 + 0x74;
-              _memcpy(iVar11,iVar11 + 0x74,0x74);
-              uVar16 = *(uint *)(param_2 + 0x14);
-            } while (uVar18 < uVar16);
+              instructions = symbol + *(int *)(shaderProgram + 0x18);
+              symbol = symbol + 0x74;
+              _memcpy(instructions,instructions + 0x74,0x74);
+              instructionCount = *(uint *)(shaderProgram + 0x14);
+            } while (uVar18 < instructionCount);
           }
           bVar33 = true;
         }
 LAB_00080860:
         uVar30 = uVar30 + 1;
-      } while (uVar30 < uVar16);
+      } while (uVar30 < instructionCount);
     }
   } while (bVar33);
-  uVar15 = 0;
-  if (uVar16 != 0) {
-    iVar11 = uVar16 * 0x74;
-    uVar15 = 0;
+  instructionIndex = 0;
+  if (instructionCount != 0) {
+    instructions = instructionCount * 0x74;
+    instructionIndex = 0;
     do {
-      uVar30 = uVar16 - uVar15;
-      iVar31 = iVar11 + *(int *)(param_2 + 0x18);
-      if (((*(int *)(iVar31 + -0x74) == 0x879d) && (*(int *)(iVar31 + -0x70) == 2)) &&
-         (iVar23 = extvsOperandDataType(param_2 + 0x1c,iVar31 + -0x54), iVar23 == 0x87bf)) {
-        uVar18 = *(uint *)(param_2 + 0x14);
+      uVar30 = instructionCount - instructionIndex;
+      currentInstruction = instructions + *(int *)(shaderProgram + 0x18);
+      if (((*(int *)(currentInstruction + -0x74) == 0x879d) && (*(int *)(currentInstruction + -0x70) == 2)) &&
+         (symbol = extvsOperandDataType(shaderProgram + 0x1c,currentInstruction + -0x54), symbol == 0x87bf)) {
+        uVar18 = *(uint *)(shaderProgram + 0x14);
         if (uVar30 < uVar18) {
-          iVar23 = uVar18 - uVar30;
+          symbol = uVar18 - uVar30;
           bVar34 = true;
           bVar33 = false;
-          piVar21 = (int *)(iVar11 + *(int *)(param_2 + 0x18) + 4);
+          piVar21 = (int *)(instructions + *(int *)(shaderProgram + 0x18) + 4);
           do {
-            if ((*piVar21 != 2) || (piVar21[1] != *(int *)(iVar31 + -0x6c))) {
+            if ((*piVar21 != 2) || (piVar21[1] != *(int *)(currentInstruction + -0x6c))) {
               if (bVar33) {
-                if ((((piVar21[7] == 2) && (piVar21[8] == *(int *)(iVar31 + -0x6c))) ||
-                    ((piVar21[0xe] == 2 && (piVar21[0xf] == *(int *)(iVar31 + -0x6c))))) ||
-                   ((piVar21[0x15] == 2 && (piVar21[0x16] == *(int *)(iVar31 + -0x6c)))))
+                if ((((piVar21[7] == 2) && (piVar21[8] == *(int *)(currentInstruction + -0x6c))) ||
+                    ((piVar21[0xe] == 2 && (piVar21[0xf] == *(int *)(currentInstruction + -0x6c))))) ||
+                   ((piVar21[0x15] == 2 && (piVar21[0x16] == *(int *)(currentInstruction + -0x6c)))))
                 goto code_r0x00080a40;
                 bVar35 = false;
               }
               else {
-                if (((*piVar21 == 2) && (*(int *)(iVar31 + -0x54) == 2)) &&
-                   (piVar21[1] == *(int *)(iVar31 + -0x50))) {
-                  iVar32 = *(int *)(iVar31 + -0x34);
+                if (((*piVar21 == 2) && (*(int *)(currentInstruction + -0x54) == 2)) &&
+                   (piVar21[1] == *(int *)(currentInstruction + -0x50))) {
+                  iVar32 = *(int *)(currentInstruction + -0x34);
                   if (iVar32 == 0) {
                     iVar32 = piVar21[2];
                   }
@@ -6821,31 +6821,31 @@ code_r0x00080a40:
               bVar34 = false;
             }
 code_r0x00080a54:
-            iVar23 = iVar23 + -1;
-          } while ((iVar23 != 0) && (piVar21 = piVar21 + 0x1d, !bVar35));
+            symbol = symbol + -1;
+          } while ((symbol != 0) && (piVar21 = piVar21 + 0x1d, !bVar35));
           if (!bVar34) goto code_r0x00082600;
         }
-        iVar23 = *(int *)(iVar31 + -0x34);
-        if (iVar23 == 1) {
-          uVar24 = *(undefined4 *)(iVar31 + -0x48);
+        symbol = *(int *)(currentInstruction + -0x34);
+        if (symbol == 1) {
+          selectorEnumerant = *(undefined4 *)(currentInstruction + -0x48);
         }
-        else if (iVar23 == 0) {
-          uVar24 = *(undefined4 *)(iVar31 + -0x4c);
+        else if (symbol == 0) {
+          selectorEnumerant = *(undefined4 *)(currentInstruction + -0x4c);
         }
-        else if (iVar23 == 2) {
-          uVar24 = *(undefined4 *)(iVar31 + -0x44);
+        else if (symbol == 2) {
+          selectorEnumerant = *(undefined4 *)(currentInstruction + -0x44);
         }
         else {
-          uVar24 = *(undefined4 *)(iVar31 + -0x40);
+          selectorEnumerant = *(undefined4 *)(currentInstruction + -0x40);
         }
-        iVar23 = iVar11;
+        symbol = instructions;
         uVar25 = uVar30;
         if (uVar30 < uVar18) {
           do {
-            iVar32 = iVar23 + *(int *)(param_2 + 0x18);
+            iVar32 = symbol + *(int *)(shaderProgram + 0x18);
             if ((*(int *)(iVar32 + 0x20) != 2) ||
-               (*(int *)(iVar32 + 0x24) != *(int *)(iVar31 + -0x6c))) goto code_r0x000813a8;
-            *(undefined4 *)(iVar32 + 0x24) = *(undefined4 *)(iVar31 + -0x50);
+               (*(int *)(iVar32 + 0x24) != *(int *)(currentInstruction + -0x6c))) goto code_r0x000813a8;
+            *(undefined4 *)(iVar32 + 0x24) = *(undefined4 *)(currentInstruction + -0x50);
             uVar9 = *(undefined4 *)(iVar32 + 0x28);
             switch(*(undefined4 *)(iVar32 + 0x28)) {
             case 0x87d5:
@@ -6854,7 +6854,7 @@ code_r0x00080a54:
             case 0x87d8:
               break;
             case 0x87d9:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
 code_r0x00080cac:
                 uVar9 = 0x87d9;
@@ -6899,7 +6899,7 @@ code_r0x00080cb8:
               }
               goto code_r0x00080d14;
             case 0x87da:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x00080cac;
               case 0x87d6:
@@ -6923,7 +6923,7 @@ code_r0x00080cb8:
               }
               break;
             case 0x87db:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x00080cac;
               case 0x87d6:
@@ -6947,7 +6947,7 @@ code_r0x00080cb8:
               }
               break;
             case 0x87dc:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x00080cac;
               case 0x87d6:
@@ -6974,7 +6974,7 @@ code_r0x00080cb8:
               goto code_r0x00080d14;
             }
 code_r0x00080c98:
-            uVar9 = uVar24;
+            uVar9 = selectorEnumerant;
 code_r0x00080d14:
             *(undefined4 *)(iVar32 + 0x28) = uVar9;
             uVar9 = *(undefined4 *)(iVar32 + 0x2c);
@@ -6985,7 +6985,7 @@ code_r0x00080d14:
             case 0x87d8:
               break;
             case 0x87d9:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
 code_r0x00080edc:
                 uVar9 = 0x87d9;
@@ -7030,7 +7030,7 @@ code_r0x00080ee8:
               }
               goto code_r0x00080f44;
             case 0x87da:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x00080edc;
               case 0x87d6:
@@ -7054,7 +7054,7 @@ code_r0x00080ee8:
               }
               break;
             case 0x87db:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x00080edc;
               case 0x87d6:
@@ -7078,7 +7078,7 @@ code_r0x00080ee8:
               }
               break;
             case 0x87dc:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x00080edc;
               case 0x87d6:
@@ -7105,7 +7105,7 @@ code_r0x00080ee8:
               goto code_r0x00080f44;
             }
 code_r0x00080ec8:
-            uVar9 = uVar24;
+            uVar9 = selectorEnumerant;
 code_r0x00080f44:
             *(undefined4 *)(iVar32 + 0x2c) = uVar9;
             uVar9 = *(undefined4 *)(iVar32 + 0x30);
@@ -7116,7 +7116,7 @@ code_r0x00080f44:
             case 0x87d8:
               break;
             case 0x87d9:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
 code_r0x0008110c:
                 uVar9 = 0x87d9;
@@ -7161,7 +7161,7 @@ code_r0x00081118:
               }
               goto code_r0x00081174;
             case 0x87da:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x0008110c;
               case 0x87d6:
@@ -7185,7 +7185,7 @@ code_r0x00081118:
               }
               break;
             case 0x87db:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x0008110c;
               case 0x87d6:
@@ -7209,7 +7209,7 @@ code_r0x00081118:
               }
               break;
             case 0x87dc:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x0008110c;
               case 0x87d6:
@@ -7236,7 +7236,7 @@ code_r0x00081118:
               goto code_r0x00081174;
             }
 code_r0x000810f8:
-            uVar9 = uVar24;
+            uVar9 = selectorEnumerant;
 code_r0x00081174:
             *(undefined4 *)(iVar32 + 0x30) = uVar9;
             uVar9 = *(undefined4 *)(iVar32 + 0x34);
@@ -7247,7 +7247,7 @@ code_r0x00081174:
             case 0x87d8:
               break;
             case 0x87d9:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
 code_r0x0008133c:
                 uVar9 = 0x87d9;
@@ -7292,7 +7292,7 @@ code_r0x00081348:
               }
               goto code_r0x000813a4;
             case 0x87da:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x0008133c;
               case 0x87d6:
@@ -7316,7 +7316,7 @@ code_r0x00081348:
               }
               break;
             case 0x87db:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x0008133c;
               case 0x87d6:
@@ -7340,7 +7340,7 @@ code_r0x00081348:
               }
               break;
             case 0x87dc:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x0008133c;
               case 0x87d6:
@@ -7367,13 +7367,13 @@ code_r0x00081348:
               goto code_r0x000813a4;
             }
 code_r0x00081328:
-            uVar9 = uVar24;
+            uVar9 = selectorEnumerant;
 code_r0x000813a4:
             *(undefined4 *)(iVar32 + 0x34) = uVar9;
 code_r0x000813a8:
             if ((*(int *)(iVar32 + 0x3c) != 2) ||
-               (*(int *)(iVar32 + 0x40) != *(int *)(iVar31 + -0x6c))) goto code_r0x00081c90;
-            *(undefined4 *)(iVar32 + 0x40) = *(undefined4 *)(iVar31 + -0x50);
+               (*(int *)(iVar32 + 0x40) != *(int *)(currentInstruction + -0x6c))) goto code_r0x00081c90;
+            *(undefined4 *)(iVar32 + 0x40) = *(undefined4 *)(currentInstruction + -0x50);
             uVar9 = *(undefined4 *)(iVar32 + 0x44);
             switch(*(undefined4 *)(iVar32 + 0x44)) {
             case 0x87d5:
@@ -7382,7 +7382,7 @@ code_r0x000813a8:
             case 0x87d8:
               break;
             case 0x87d9:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
 code_r0x00081594:
                 uVar9 = 0x87d9;
@@ -7427,7 +7427,7 @@ code_r0x000815a0:
               }
               goto code_r0x000815fc;
             case 0x87da:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x00081594;
               case 0x87d6:
@@ -7451,7 +7451,7 @@ code_r0x000815a0:
               }
               break;
             case 0x87db:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x00081594;
               case 0x87d6:
@@ -7475,7 +7475,7 @@ code_r0x000815a0:
               }
               break;
             case 0x87dc:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x00081594;
               case 0x87d6:
@@ -7502,7 +7502,7 @@ code_r0x000815a0:
               goto code_r0x000815fc;
             }
 code_r0x00081580:
-            uVar9 = uVar24;
+            uVar9 = selectorEnumerant;
 code_r0x000815fc:
             *(undefined4 *)(iVar32 + 0x44) = uVar9;
             uVar9 = *(undefined4 *)(iVar32 + 0x48);
@@ -7513,7 +7513,7 @@ code_r0x000815fc:
             case 0x87d8:
               break;
             case 0x87d9:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
 code_r0x000817c4:
                 uVar9 = 0x87d9;
@@ -7558,7 +7558,7 @@ code_r0x000817d0:
               }
               goto code_r0x0008182c;
             case 0x87da:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x000817c4;
               case 0x87d6:
@@ -7582,7 +7582,7 @@ code_r0x000817d0:
               }
               break;
             case 0x87db:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x000817c4;
               case 0x87d6:
@@ -7606,7 +7606,7 @@ code_r0x000817d0:
               }
               break;
             case 0x87dc:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x000817c4;
               case 0x87d6:
@@ -7633,7 +7633,7 @@ code_r0x000817d0:
               goto code_r0x0008182c;
             }
 code_r0x000817b0:
-            uVar9 = uVar24;
+            uVar9 = selectorEnumerant;
 code_r0x0008182c:
             *(undefined4 *)(iVar32 + 0x48) = uVar9;
             uVar9 = *(undefined4 *)(iVar32 + 0x4c);
@@ -7644,7 +7644,7 @@ code_r0x0008182c:
             case 0x87d8:
               break;
             case 0x87d9:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
 code_r0x000819f4:
                 uVar9 = 0x87d9;
@@ -7689,7 +7689,7 @@ code_r0x00081a00:
               }
               goto code_r0x00081a5c;
             case 0x87da:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x000819f4;
               case 0x87d6:
@@ -7713,7 +7713,7 @@ code_r0x00081a00:
               }
               break;
             case 0x87db:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x000819f4;
               case 0x87d6:
@@ -7737,7 +7737,7 @@ code_r0x00081a00:
               }
               break;
             case 0x87dc:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x000819f4;
               case 0x87d6:
@@ -7764,7 +7764,7 @@ code_r0x00081a00:
               goto code_r0x00081a5c;
             }
 code_r0x000819e0:
-            uVar9 = uVar24;
+            uVar9 = selectorEnumerant;
 code_r0x00081a5c:
             *(undefined4 *)(iVar32 + 0x4c) = uVar9;
             uVar9 = *(undefined4 *)(iVar32 + 0x50);
@@ -7775,7 +7775,7 @@ code_r0x00081a5c:
             case 0x87d8:
               break;
             case 0x87d9:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
 code_r0x00081c24:
                 uVar9 = 0x87d9;
@@ -7820,7 +7820,7 @@ code_r0x00081c30:
               }
               goto code_r0x00081c8c;
             case 0x87da:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x00081c24;
               case 0x87d6:
@@ -7844,7 +7844,7 @@ code_r0x00081c30:
               }
               break;
             case 0x87db:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x00081c24;
               case 0x87d6:
@@ -7868,7 +7868,7 @@ code_r0x00081c30:
               }
               break;
             case 0x87dc:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x00081c24;
               case 0x87d6:
@@ -7895,13 +7895,13 @@ code_r0x00081c30:
               goto code_r0x00081c8c;
             }
 code_r0x00081c10:
-            uVar9 = uVar24;
+            uVar9 = selectorEnumerant;
 code_r0x00081c8c:
             *(undefined4 *)(iVar32 + 0x50) = uVar9;
 code_r0x00081c90:
             if ((*(int *)(iVar32 + 0x58) != 2) ||
-               (*(int *)(iVar32 + 0x5c) != *(int *)(iVar31 + -0x6c))) goto code_r0x00082578;
-            *(undefined4 *)(iVar32 + 0x5c) = *(undefined4 *)(iVar31 + -0x50);
+               (*(int *)(iVar32 + 0x5c) != *(int *)(currentInstruction + -0x6c))) goto code_r0x00082578;
+            *(undefined4 *)(iVar32 + 0x5c) = *(undefined4 *)(currentInstruction + -0x50);
             uVar9 = *(undefined4 *)(iVar32 + 0x60);
             switch(*(undefined4 *)(iVar32 + 0x60)) {
             case 0x87d5:
@@ -7910,7 +7910,7 @@ code_r0x00081c90:
             case 0x87d8:
               break;
             case 0x87d9:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
 code_r0x00081e7c:
                 uVar9 = 0x87d9;
@@ -7955,7 +7955,7 @@ code_r0x00081e88:
               }
               goto code_r0x00081ee4;
             case 0x87da:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x00081e7c;
               case 0x87d6:
@@ -7979,7 +7979,7 @@ code_r0x00081e88:
               }
               break;
             case 0x87db:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x00081e7c;
               case 0x87d6:
@@ -8003,7 +8003,7 @@ code_r0x00081e88:
               }
               break;
             case 0x87dc:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x00081e7c;
               case 0x87d6:
@@ -8030,7 +8030,7 @@ code_r0x00081e88:
               goto code_r0x00081ee4;
             }
 code_r0x00081e68:
-            uVar9 = uVar24;
+            uVar9 = selectorEnumerant;
 code_r0x00081ee4:
             *(undefined4 *)(iVar32 + 0x60) = uVar9;
             uVar9 = *(undefined4 *)(iVar32 + 100);
@@ -8041,7 +8041,7 @@ code_r0x00081ee4:
             case 0x87d8:
               break;
             case 0x87d9:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
 code_r0x000820ac:
                 uVar9 = 0x87d9;
@@ -8086,7 +8086,7 @@ code_r0x000820b8:
               }
               goto code_r0x00082114;
             case 0x87da:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x000820ac;
               case 0x87d6:
@@ -8110,7 +8110,7 @@ code_r0x000820b8:
               }
               break;
             case 0x87db:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x000820ac;
               case 0x87d6:
@@ -8134,7 +8134,7 @@ code_r0x000820b8:
               }
               break;
             case 0x87dc:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x000820ac;
               case 0x87d6:
@@ -8161,7 +8161,7 @@ code_r0x000820b8:
               goto code_r0x00082114;
             }
 code_r0x00082098:
-            uVar9 = uVar24;
+            uVar9 = selectorEnumerant;
 code_r0x00082114:
             *(undefined4 *)(iVar32 + 100) = uVar9;
             uVar9 = *(undefined4 *)(iVar32 + 0x68);
@@ -8172,7 +8172,7 @@ code_r0x00082114:
             case 0x87d8:
               break;
             case 0x87d9:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
 code_r0x000822dc:
                 uVar9 = 0x87d9;
@@ -8217,7 +8217,7 @@ code_r0x000822e8:
               }
               goto code_r0x00082344;
             case 0x87da:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x000822dc;
               case 0x87d6:
@@ -8241,7 +8241,7 @@ code_r0x000822e8:
               }
               break;
             case 0x87db:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x000822dc;
               case 0x87d6:
@@ -8265,7 +8265,7 @@ code_r0x000822e8:
               }
               break;
             case 0x87dc:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x000822dc;
               case 0x87d6:
@@ -8292,7 +8292,7 @@ code_r0x000822e8:
               goto code_r0x00082344;
             }
 code_r0x000822c8:
-            uVar9 = uVar24;
+            uVar9 = selectorEnumerant;
 code_r0x00082344:
             *(undefined4 *)(iVar32 + 0x68) = uVar9;
             uVar9 = *(undefined4 *)(iVar32 + 0x6c);
@@ -8303,7 +8303,7 @@ code_r0x00082344:
             case 0x87d8:
               break;
             case 0x87d9:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
 code_r0x0008250c:
                 uVar9 = 0x87d9;
@@ -8348,7 +8348,7 @@ code_r0x00082518:
               }
               goto code_r0x00082574;
             case 0x87da:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x0008250c;
               case 0x87d6:
@@ -8372,7 +8372,7 @@ code_r0x00082518:
               }
               break;
             case 0x87db:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x0008250c;
               case 0x87d6:
@@ -8396,7 +8396,7 @@ code_r0x00082518:
               }
               break;
             case 0x87dc:
-              switch(uVar24) {
+              switch(selectorEnumerant) {
               case 0x87d5:
                 goto code_r0x0008250c;
               case 0x87d6:
@@ -8423,90 +8423,90 @@ code_r0x00082518:
               goto code_r0x00082574;
             }
 code_r0x000824f8:
-            uVar9 = uVar24;
+            uVar9 = selectorEnumerant;
 code_r0x00082574:
             *(undefined4 *)(iVar32 + 0x6c) = uVar9;
 code_r0x00082578:
             if ((*(int *)(iVar32 + 4) != 2) ||
-               (bVar33 = true, *(int *)(iVar32 + 8) != *(int *)(iVar31 + -0x6c))) {
+               (bVar33 = true, *(int *)(iVar32 + 8) != *(int *)(currentInstruction + -0x6c))) {
               bVar33 = false;
             }
-            uVar18 = *(uint *)(param_2 + 0x14);
-          } while ((uVar25 + 1 < uVar18) && (iVar23 = iVar23 + 0x74, uVar25 = uVar25 + 1, !bVar33));
-          iVar31 = iVar11;
+            uVar18 = *(uint *)(shaderProgram + 0x14);
+          } while ((uVar25 + 1 < uVar18) && (symbol = symbol + 0x74, uVar25 = uVar25 + 1, !bVar33));
+          currentInstruction = instructions;
           if (uVar30 < uVar18) {
             do {
               uVar30 = uVar30 + 1;
-              iVar23 = iVar31 + *(int *)(param_2 + 0x18);
-              _memcpy(iVar23 + -0x74,iVar23,0x74);
-              uVar18 = *(uint *)(param_2 + 0x14);
-              iVar31 = iVar31 + 0x74;
+              symbol = currentInstruction + *(int *)(shaderProgram + 0x18);
+              _memcpy(symbol + -0x74,symbol,0x74);
+              uVar18 = *(uint *)(shaderProgram + 0x14);
+              currentInstruction = currentInstruction + 0x74;
             } while (uVar30 < uVar18);
           }
         }
-        *(uint *)(param_2 + 0x14) = uVar18 - 1;
+        *(uint *)(shaderProgram + 0x14) = uVar18 - 1;
       }
 code_r0x00082600:
-      uVar15 = uVar15 + 1;
-      iVar11 = iVar11 + -0x74;
-    } while (uVar16 != uVar15);
-    uVar15 = *(uint *)(param_2 + 0x14);
+      instructionIndex = instructionIndex + 1;
+      instructions = instructions + -0x74;
+    } while (instructionCount != instructionIndex);
+    instructionIndex = *(uint *)(shaderProgram + 0x14);
   }
   do {
     while( true ) {
-      uVar16 = uVar15;
-      if (uVar16 < 2) {
+      instructionCount = instructionIndex;
+      if (instructionCount < 2) {
         return;
       }
-      iVar31 = uVar16 * 0x74;
-      iVar11 = iVar31 + *(int *)(param_2 + 0x18);
-      if (((*(int *)(iVar11 + -0x74) == 0x879c) && (*(int *)(iVar11 + -0x54) == 2)) &&
-         (iVar23 = extvsOperandDataType(param_2 + 0x1c,iVar11 + -0x54), iVar23 == 0x87be)) break;
+      currentInstruction = instructionCount * 0x74;
+      instructions = currentInstruction + *(int *)(shaderProgram + 0x18);
+      if (((*(int *)(instructions + -0x74) == 0x879c) && (*(int *)(instructions + -0x54) == 2)) &&
+         (symbol = extvsOperandDataType(shaderProgram + 0x1c,instructions + -0x54), symbol == 0x87be)) break;
 code_r0x00082770:
-      uVar15 = uVar16 - 1;
+      instructionIndex = instructionCount - 1;
     }
-    if (uVar16 < *(uint *)(param_2 + 0x14)) {
-      iVar23 = *(uint *)(param_2 + 0x14) - uVar16;
+    if (instructionCount < *(uint *)(shaderProgram + 0x14)) {
+      symbol = *(uint *)(shaderProgram + 0x14) - instructionCount;
       bVar33 = true;
-      piVar21 = (int *)(iVar31 + *(int *)(param_2 + 0x18) + 0x20);
+      piVar21 = (int *)(currentInstruction + *(int *)(shaderProgram + 0x18) + 0x20);
       do {
-        if ((((*piVar21 == 2) && (piVar21[1] == *(int *)(iVar11 + -0x50))) ||
-            ((piVar21[7] == 2 && (piVar21[8] == *(int *)(iVar11 + -0x50))))) ||
-           ((piVar21[0xe] == 2 && (piVar21[0xf] == *(int *)(iVar11 + -0x50))))) {
+        if ((((*piVar21 == 2) && (piVar21[1] == *(int *)(instructions + -0x50))) ||
+            ((piVar21[7] == 2 && (piVar21[8] == *(int *)(instructions + -0x50))))) ||
+           ((piVar21[0xe] == 2 && (piVar21[0xf] == *(int *)(instructions + -0x50))))) {
           bVar34 = true;
           bVar33 = false;
         }
-        else if ((piVar21[-7] != 2) || (bVar34 = true, piVar21[-6] != *(int *)(iVar11 + -0x50))) {
+        else if ((piVar21[-7] != 2) || (bVar34 = true, piVar21[-6] != *(int *)(instructions + -0x50))) {
           bVar34 = false;
         }
-        iVar23 = iVar23 + -1;
-      } while ((iVar23 != 0) && (piVar21 = piVar21 + 0x1d, !bVar34));
+        symbol = symbol + -1;
+      } while ((symbol != 0) && (piVar21 = piVar21 + 0x1d, !bVar34));
       if (!bVar33) goto code_r0x00082770;
     }
-    uVar15 = uVar16 - 1;
-    if (uVar15 != 0) {
-      iVar23 = uVar15 * 0x74;
+    instructionIndex = instructionCount - 1;
+    if (instructionIndex != 0) {
+      symbol = instructionIndex * 0x74;
       bVar33 = false;
-      uVar30 = uVar15;
+      uVar30 = instructionIndex;
       do {
-        iVar32 = iVar23 + *(int *)(param_2 + 0x18);
+        iVar32 = symbol + *(int *)(shaderProgram + 0x18);
         if ((*(int *)(iVar32 + -0x70) == 2) &&
-           (*(int *)(iVar32 + -0x6c) == *(int *)(iVar11 + -0x50))) {
+           (*(int *)(iVar32 + -0x6c) == *(int *)(instructions + -0x50))) {
           if (*(int *)(iVar32 + -0x74) - 0x879bU < 2) {
 code_r0x0008286c:
             bVar34 = true;
           }
           else {
-            uVar22 = *(undefined4 *)(iVar11 + -100);
+            uVar22 = *(undefined4 *)(instructions + -100);
             bVar34 = true;
             bVar33 = true;
-            uVar19 = *(undefined4 *)(iVar11 + -0x60);
-            uVar24 = *(undefined4 *)(iVar11 + -0x5c);
-            uVar9 = *(undefined4 *)(iVar11 + -0x70);
-            uVar20 = *(undefined4 *)(iVar11 + -0x6c);
-            *(undefined4 *)(iVar32 + -0x68) = *(undefined4 *)(iVar11 + -0x68);
+            uVar19 = *(undefined4 *)(instructions + -0x60);
+            selectorEnumerant = *(undefined4 *)(instructions + -0x5c);
+            uVar9 = *(undefined4 *)(instructions + -0x70);
+            uVar20 = *(undefined4 *)(instructions + -0x6c);
+            *(undefined4 *)(iVar32 + -0x68) = *(undefined4 *)(instructions + -0x68);
             *(undefined4 *)(iVar32 + -100) = uVar22;
-            *(undefined4 *)(iVar32 + -0x5c) = uVar24;
+            *(undefined4 *)(iVar32 + -0x5c) = selectorEnumerant;
             *(undefined4 *)(iVar32 + -0x60) = uVar19;
             *(undefined4 *)(iVar32 + -0x70) = uVar9;
             *(undefined4 *)(iVar32 + -0x6c) = uVar20;
@@ -8514,49 +8514,49 @@ code_r0x0008286c:
         }
         else {
           if ((((*(int *)(iVar32 + -0x54) == 2) &&
-               (*(int *)(iVar32 + -0x50) == *(int *)(iVar11 + -0x50))) ||
+               (*(int *)(iVar32 + -0x50) == *(int *)(instructions + -0x50))) ||
               ((*(int *)(iVar32 + -0x38) == 2 &&
-               (*(int *)(iVar32 + -0x34) == *(int *)(iVar11 + -0x50))))) ||
+               (*(int *)(iVar32 + -0x34) == *(int *)(instructions + -0x50))))) ||
              ((*(int *)(iVar32 + -0x1c) == 2 &&
-              (*(int *)(iVar32 + -0x18) == *(int *)(iVar11 + -0x50))))) goto code_r0x0008286c;
+              (*(int *)(iVar32 + -0x18) == *(int *)(instructions + -0x50))))) goto code_r0x0008286c;
           bVar34 = false;
         }
         uVar30 = uVar30 - 1;
-      } while ((uVar30 != 0) && (iVar23 = iVar23 + -0x74, !bVar34));
+      } while ((uVar30 != 0) && (symbol = symbol + -0x74, !bVar34));
       if (bVar33) {
-        uVar30 = *(uint *)(param_2 + 0x14);
-        if (uVar16 < uVar30) {
+        uVar30 = *(uint *)(shaderProgram + 0x14);
+        if (instructionCount < uVar30) {
           do {
-            uVar16 = uVar16 + 1;
-            iVar11 = iVar31 + *(int *)(param_2 + 0x18);
-            iVar31 = iVar31 + 0x74;
-            _memcpy(iVar11 + -0x74,iVar11,0x74);
-            uVar30 = *(uint *)(param_2 + 0x14);
-          } while (uVar16 < uVar30);
+            instructionCount = instructionCount + 1;
+            instructions = currentInstruction + *(int *)(shaderProgram + 0x18);
+            currentInstruction = currentInstruction + 0x74;
+            _memcpy(instructions + -0x74,instructions,0x74);
+            uVar30 = *(uint *)(shaderProgram + 0x14);
+          } while (instructionCount < uVar30);
         }
-        *(uint *)(param_2 + 0x14) = uVar30 - 1;
+        *(uint *)(shaderProgram + 0x14) = uVar30 - 1;
       }
     }
   } while( true );
 LAB_0007e2d4:
   if (bVar6) {
-    if (uVar30 < uVar16) {
+    if (uVar30 < instructionCount) {
       do {
         uVar30 = uVar30 + 1;
-        iVar11 = iVar32 + *(int *)(param_2 + 0x18);
+        instructions = iVar32 + *(int *)(shaderProgram + 0x18);
         iVar32 = iVar32 + 0x74;
-        uStack_70 = uVar24;
-        _memcpy(iVar11 + -0x74,iVar11,0x74);
-        uVar16 = *(uint *)(param_2 + 0x14);
-        uVar24 = uStack_70;
-      } while (uVar30 < uVar16);
+        uStack_70 = selectorEnumerant;
+        _memcpy(instructions + -0x74,instructions,0x74);
+        instructionCount = *(uint *)(shaderProgram + 0x14);
+        selectorEnumerant = uStack_70;
+      } while (uVar30 < instructionCount);
     }
-    uVar16 = uVar16 - 1;
-    *(uint *)(param_2 + 0x14) = uVar16;
+    instructionCount = instructionCount - 1;
+    *(uint *)(shaderProgram + 0x14) = instructionCount;
   }
 LAB_0007e2e0:
-  uVar15 = uVar15 + 1;
-  if (uVar16 <= uVar15) goto LAB_0007e330;
+  instructionIndex = instructionIndex + 1;
+  if (instructionCount <= instructionIndex) goto LAB_0007e330;
   goto LAB_0007de3c;
 }
 
@@ -8944,7 +8944,7 @@ asm(".set FUN_00078990, _FUN_00078990");
 asm(".globl FUN_000789d0");
 asm(".set FUN_000789d0, _FUN_000789d0");
 asm(".globl FUN_0007dde0");
-asm(".set FUN_0007dde0, _FUN_0007dde0");
+asm(".set FUN_0007dde0, _evsFoldConstantMoves");
 asm(".globl FUN_00082900");
 asm(".set FUN_00082900, _FUN_00082900");
 asm(".globl FUN_00082c50");

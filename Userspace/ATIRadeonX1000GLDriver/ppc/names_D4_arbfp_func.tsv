@@ -1,0 +1,3 @@
+func	FUN_00088480	arbfpLookupKeyword	INFERRED	binary search of the current token text against the keyword table at __DATA,__const+8 ({name, token kind, value}, 130 entries: 1D..XPD, ambient..transpose) ; sets token kind/value
+func	FUN_0008b960	arbfpParseScalarSourceOperand	CONFIRMED	sign, variable reference, '.c' single-component suffix (replicated to all four swizzle slots)
+func	FUN_0008c490	arbfpInternParameter	CONFIRMED	finds or appends a 0x14-byte parameter entry (compare words 2-4), error text param_5 when the table is full

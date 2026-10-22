@@ -7442,7 +7442,7 @@ int FUN_000a0300(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   if (param_2 != 0x8804) {
     return;
   }
-  return FUN_0008df50(param_1,0x8875,param_4,param_5);
+  return arbfpProgramString(param_1,0x8875,param_4,param_5);
 }
 
 /* FUN_000a0350 @ 0xa0350 (36 bytes) */
@@ -7504,9 +7504,9 @@ int FUN_000a0380(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
           iVar4 = *(int *)(iVar5 + 4) * 0x18 + iVar2;
           uVar3 = (**(code **)(param_1 + 0xc))(0x78,a1,a2,param_4,param_5,param_6,iVar2);
           *(undefined4 *)(iVar4 + 0x14) = uVar3;
-          FUN_0008dc50(param_1,*(undefined4 *)
+          arbfpProgramObjectInit(param_1,*(undefined4 *)
                                 (*(int *)(iVar5 + 4) * 0x18 + *(int *)(iVar5 + 8) + 0x14));
-          FUN_0008dbd0(param_1,*(undefined4 *)(iVar5 + 4),a2,param_4,param_5,param_6,iVar2,in_r10);
+          arbfpBindProgram(param_1,*(undefined4 *)(iVar5 + 4),a2,param_4,param_5,param_6,iVar2,in_r10);
         }
         *(int *)(iVar5 + 4) = *(int *)(iVar5 + 4) + 1;
         return;
@@ -7522,7 +7522,7 @@ int FUN_000a0380(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
       if (iVar2 == 0) {
         iVar2 = *(int *)(((unsigned char *)0x0000126c) + param_1);
       }
-      FUN_0008dbd0(param_1,iVar2,a2,param_4,param_5,param_6,param_7,in_r10);
+      arbfpBindProgram(param_1,iVar2,a2,param_4,param_5,param_6,param_7,in_r10);
       return;
     }
   }
@@ -7858,7 +7858,7 @@ int FUN_000a0ba0(param_1, param_2)
   iVar1 = param_2[5];
   if (iVar1 != 0) {
     if (param_2[1] == 0x8804) {
-      FUN_0008dda0(param_1,iVar1);
+      arbfpProgramObjectFree(param_1,iVar1);
       iVar1 = param_2[5];
     }
     (**(code **)(param_1 + 0x18))(iVar1);
@@ -7984,7 +7984,7 @@ int FUN_000a0ef0(param_1)
   *(undefined1 **)(((unsigned char *)0x00001128) + param_1) = puVar2;
   *puVar2 = 0;
   *(undefined4 *)(((unsigned char *)0x00001130) + param_1) = 0;
-  return FUN_0008f520(param_1);
+  return arbfpInitProgramState(param_1);
 }
 
 /* noop_a0f80 @ 0xa0f80 (4 bytes) */

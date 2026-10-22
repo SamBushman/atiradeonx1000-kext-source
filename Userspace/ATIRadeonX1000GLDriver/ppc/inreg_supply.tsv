@@ -245,22 +245,22 @@
 872e0	FUN_000872e0	r7	PASS-indirect	GARBAGE	
 872e0	FUN_000872e0	r8	PASS-indirect	GARBAGE	
 8b6d0	arbParseSwizzleSuffix	r5	PASS-deep	GARBAGE	
-8b960	FUN_0008b960	r5	PASS-deep	GARBAGE	
+8b960	arbfpParseScalarSourceOperand	r5	PASS-deep	GARBAGE	
 8b9f0	arbParseProgramText	r5	PASS-deep	GARBAGE	
 8c590	arbValidateProgram	r7	PASS-indirect	GARBAGE	
 8c590	arbValidateProgram	r8	PASS-indirect	GARBAGE	
-8dc50	FUN_0008dc50	r5	PASS-indirect	GARBAGE-UNSUPPLIED	supply=GARBAGE []; 8dce8 bctrl via +0x10 (argument registers up to r5)
-8dc50	FUN_0008dc50	r6	PASS-indirect	GARBAGE	
-8dc50	FUN_0008dc50	r7	PASS-indirect	GARBAGE	
-8dc50	FUN_0008dc50	r8	PASS-indirect	GARBAGE	
-8f520	FUN_0008f520	r4	PASS-indirect	GARBAGE-REVIEWED (single caller FUN_000a0ef0 tail-calls with r4 clobbered by its own calls; it has one parameter)	supply=SUPPLIED [DEF:a0f7c in a0ef0]; 8f558 bctrl via +0xa4 (argument registers up to r5)
-8f520	FUN_0008f520	r5	PASS-indirect	GARBAGE-UNSUPPLIED	supply=GARBAGE []; 8f558 bctrl via +0xa4 (argument registers up to r5)
-8f520	FUN_0008f520	r6	PASS-indirect	GARBAGE	
-8f520	FUN_0008f520	r7	PASS-indirect	GARBAGE	
-8f520	FUN_0008f520	r8	PASS-indirect	GARBAGE	
-8f760	FUN_0008f760	r7	PASS-indirect	GARBAGE	
-8f760	FUN_0008f760	r8	PASS-indirect	GARBAGE	
-8f760	FUN_0008f760	r10	PASS-indirect	GARBAGE	
+8dc50	arbfpProgramObjectInit	r5	PASS-indirect	GARBAGE-UNSUPPLIED	supply=GARBAGE []; 8dce8 bctrl via +0x10 (argument registers up to r5)
+8dc50	arbfpProgramObjectInit	r6	PASS-indirect	GARBAGE	
+8dc50	arbfpProgramObjectInit	r7	PASS-indirect	GARBAGE	
+8dc50	arbfpProgramObjectInit	r8	PASS-indirect	GARBAGE	
+8f520	arbfpInitProgramState	r4	PASS-indirect	GARBAGE-REVIEWED (single caller FUN_000a0ef0 tail-calls with r4 clobbered by its own calls; it has one parameter)	supply=SUPPLIED [DEF:a0f7c in a0ef0]; 8f558 bctrl via +0xa4 (argument registers up to r5)
+8f520	arbfpInitProgramState	r5	PASS-indirect	GARBAGE-UNSUPPLIED	supply=GARBAGE []; 8f558 bctrl via +0xa4 (argument registers up to r5)
+8f520	arbfpInitProgramState	r6	PASS-indirect	GARBAGE	
+8f520	arbfpInitProgramState	r7	PASS-indirect	GARBAGE	
+8f520	arbfpInitProgramState	r8	PASS-indirect	GARBAGE	
+8f760	arbfpLoadDefaultProgram	r7	PASS-indirect	GARBAGE	
+8f760	arbfpLoadDefaultProgram	r8	PASS-indirect	GARBAGE	
+8f760	arbfpLoadDefaultProgram	r10	PASS-indirect	GARBAGE	
 8fb70	FUN_0008fb70	r6	PASS-indirect	GARBAGE	
 8fb70	FUN_0008fb70	r7	PASS-indirect	GARBAGE	
 8fb70	FUN_0008fb70	r8	PASS-indirect	GARBAGE	

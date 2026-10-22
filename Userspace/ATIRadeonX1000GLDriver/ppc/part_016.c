@@ -1453,7 +1453,7 @@ LAB_000a9de4:
             param_6 = (char *)((uint)pcVar17 & 0xfffddfff);
             *(char **)(param_1 + 0x44) = param_6;
             *(uint *)(param_1 + 0x1874) = *(uint *)(param_1 + 0x1874) & 0xffffbfff;
-            fparam_1 = (double)FUN_0008d470(param_1,puVar16,param_3,param_4,uVar10,param_6,uVar20,
+            fparam_1 = (double)arbfpUpdateStateForProgram(param_1,puVar16,param_3,param_4,uVar10,param_6,uVar20,
                                             pcVar17);
             puVar16 = extraout_r4_01;
           }
@@ -1463,7 +1463,7 @@ LAB_000a9de4:
             if (uVar6 != 0) {
               *(uint *)(param_1 + 0x44) = (uint)pcVar17 & 0xfffddfff;
               *(uint *)(param_1 + 0x1874) = *(uint *)(param_1 + 0x1874) & 0xffffbfff;
-              FUN_0008d470(param_1,puVar16,param_3,param_4,uVar10,(uint)pcVar17 & 0xfffddfff,0,
+              arbfpUpdateStateForProgram(param_1,puVar16,param_3,param_4,uVar10,(uint)pcVar17 & 0xfffddfff,0,
                            pcVar17);
               pcVar17 = *(char **)(param_1 + 0x44);
             }
@@ -1507,7 +1507,7 @@ LAB_000a9de4:
           *(uint *)(param_1 + 0x1874) = uVar6 | 0x4000;
           *(char **)(param_1 + 0x44) = param_6;
           *(uint *)(param_1 + 0x8c) = *(uint *)(param_1 + 0x8c) | 0x80000000;
-          fparam_1 = (double)FUN_0008d470(param_1,puVar16,param_3,param_4,uVar10,param_6,uVar20,
+          fparam_1 = (double)arbfpUpdateStateForProgram(param_1,puVar16,param_3,param_4,uVar10,param_6,uVar20,
                                           pcVar17);
           puVar16 = extraout_r4_03;
         }
@@ -2239,7 +2239,7 @@ LAB_000ab18c:
         uVar10 = uVar12 & 0xfffddfff;
         *(uint *)(param_1 + 0x44) = uVar10;
         *(uint *)(param_1 + 0x1874) = *(uint *)(param_1 + 0x1874) & 0xffffbfff;
-        fparam_1 = (double)FUN_0008d470(param_1,puVar16,param_3,param_4,uVar20,uVar10,puVar21,uVar12
+        fparam_1 = (double)arbfpUpdateStateForProgram(param_1,puVar16,param_3,param_4,uVar20,uVar10,puVar21,uVar12
                                        );
       }
     }
@@ -2248,7 +2248,7 @@ LAB_000ab18c:
         if (uVar24 != 0) {
           *(uint *)(param_1 + 0x44) = uVar12 & 0xfffddfff;
           *(uint *)(param_1 + 0x1874) = *(uint *)(param_1 + 0x1874) & 0xffffbfff;
-          FUN_0008d470(param_1,puVar16,param_3,param_4,uVar20,uVar12 & 0xfffddfff,0,uVar12);
+          arbfpUpdateStateForProgram(param_1,puVar16,param_3,param_4,uVar20,uVar12 & 0xfffddfff,0,uVar12);
           uVar12 = *(uint *)(param_1 + 0x44);
         }
         iVar19 = *(int *)(((unsigned char *)0x00001144) + (int)param_1);
@@ -2291,7 +2291,7 @@ LAB_000ab18c:
       *(uint *)(param_1 + 0x1874) = uVar24 | 0x4000;
       *(undefined **)(param_1 + 0x44) = puVar21;
       *(uint *)(param_1 + 0x8c) = *(uint *)(param_1 + 0x8c) | 0x80000000;
-      fparam_1 = (double)FUN_0008d470(param_1,puVar16,param_3,param_4,uVar20,uVar10,puVar21,uVar12);
+      fparam_1 = (double)arbfpUpdateStateForProgram(param_1,puVar16,param_3,param_4,uVar20,uVar10,puVar21,uVar12);
     }
     param_1[0x2475] = '\x01';
   }
@@ -5929,7 +5929,7 @@ LAB_000b0028:
           }
         }
         else {
-          FUN_0008ebb0(param_1,iVar15,&local_1e0,param_4);
+          arbfpFetchParameterValue(param_1,iVar15,&local_1e0,param_4);
           param_4 = *(uint **)(iVar15 + 4);
           (**(code **)(((unsigned char *)0x00001280) + param_1))(param_1,a2,iVar11,param_4,&local_1e0,1,1);
           iVar19 = *(int *)(a1 + 0x74);

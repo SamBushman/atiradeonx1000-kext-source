@@ -1,0 +1,31 @@
+func	FUN_00074a70	evsAppendInstruction	INFERRED	appends one 32-bit token ((modifier & 0x3fff) << 16 | opcode & 0xffff) to the growable instruction array {count, capacity, data} (grows by 0x80 entries)
+func	FUN_000744d0	evsEncodeDestination	INFERRED	encodes the destination operand of an EXT_vertex_shader op: write-mask bits plus the output register class (GL_OUTPUT_VERTEX_EXT 0x879a, OUTPUT_COLOR0/1 0x879b/c, OUTPUT_TEXTURE_COORDn 0x879d.., OUTPUT_FOG_EXT 0x87bd, variants/locals via the symbol table)
+func	FUN_000738c0	evsEncodeSource	INFERRED	encodes one source operand: four 3-bit swizzle selectors from the EXT swizzle enumerants (GL_X_EXT 0x87d5 .. GL_W_EXT 0x87d8, NEGATIVE_X..W 0x87d9..0x87dc, ZERO_EXT 0x87dd, ONE_EXT 0x87de), negate/abs bits, then the register class from the symbol (variant 0x87c1, invariant 0x87c2, local constant 0x87c3, local 0x87c4; scalar 0x87be, vector 0x87bf, matrix 0x87c0)
+func	FUN_00076560	evsEmitIndexOrMove	INFERRED	emits mova then mov (index/addressing form of the op)
+func	FUN_000764a0	evsEmitMov	INFERRED	IL mov (0x47), one destination, one source
+func	FUN_000763d0	evsEmitDp3	INFERRED	IL dp3 (0x22), destination plus two sources
+func	FUN_00076300	evsEmitDp4	INFERRED	IL dp4 (0x23)
+func	FUN_00076230	evsEmitMul	INFERRED	IL mul (0x49)
+func	FUN_00076160	evsEmitAdd	INFERRED	IL add (3)
+func	FUN_00076070	evsEmitMad	INFERRED	IL mad (0x40), three sources
+func	FUN_00075fd0	evsEmitFrc	INFERRED	IL frc (0x31), one source
+func	FUN_00075f00	evsEmitMax	INFERRED	IL max (0x41)
+func	FUN_00075e30	evsEmitMin	INFERRED	IL min (0x44)
+func	FUN_00075ba0	evsEmitClamp	INFERRED	IL clamp (10), three sources
+func	FUN_00075b00	evsEmitFlr	INFERRED	IL flr (0x30)
+func	FUN_00075a60	evsEmitRnd	INFERRED	IL rnd (0x54)
+func	FUN_000759c0	evsEmitExp	INFERRED	IL exp (0x2d)
+func	FUN_00075920	evsEmitLog	INFERRED	IL log (0x3c)
+func	FUN_00075850	evsEmitPow	INFERRED	IL pow (0x4e), two sources
+func	FUN_000757b0	evsEmitRcp	INFERRED	IL rcp (0x51)
+func	FUN_00075710	evsEmitRsq	INFERRED	IL rsq (0x55)
+func	FUN_00075640	evsEmitSub	INFERRED	IL sub (0x5b)
+func	FUN_00075570	evsEmitCrs	INFERRED	IL crs (0x13), cross product
+func	FUN_000754a0	evsEmitMmul	INFERRED	IL mmul (0x45), matrix multiply
+func	FUN_00074e30	evsEmitLit	INFERRED	IL lit (0x39)
+func	FUN_00074d60	evsEmitDst	INFERRED	IL dst (0x24)
+func	FUN_00074cc0	evsEmitExpp	INFERRED	IL expp (0x2e), source taken as scalar
+func	FUN_00074c00	evsEmitLogp	INFERRED	IL logp (0x3d) with an x-replicating swizzle override
+func	FUN_00074b30	evsEmitMova	INFERRED	IL mova (0x48), address register load
+func	FUN_00075d60	evsEmitSetCompare2	INFERRED	IL set (0x56) with comparison modifier 2
+func	FUN_00075c90	evsEmitSetCompare5	INFERRED	IL set (0x56) with comparison modifier 5

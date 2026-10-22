@@ -1,0 +1,10 @@
+func	FUN_0008ebb0	arbfpFetchParameterValue	CONFIRMED	resolves one PARAM element (state binding, env or local parameter) to a vec4: switch on the element kind written by arbfpParseParameterBinding (5..9 material, 0xa..0x10 light, 0x11/0x12 light model, 0x13..0x15 light products, 0x16 fog color, 0x17 fog params, 0x18 depth range, 0x19 texenv color, 0x1a..0x31 matrix rows incl. inverse/transpose, 0x32 env, 0x33 local)
+func	FUN_0008dbd0	arbfpBindProgram	INFERRED	makes program slot param_2 current: stores it, fetches the program object from the slot table and re-evaluates the context state
+func	FUN_0008d470	arbfpUpdateStateForProgram	INFERRED	sets per-texture-unit usage bits and fragment/texture dirty bits in the context from the bound program's flags
+func	FUN_0008dc50	arbfpProgramObjectInit	CONFIRMED	zeroes a 0x78-byte program object and allocates its instance table (+0x70) and a 0x98-byte compiled-program record (+0x74)
+func	FUN_0008dda0	arbfpProgramObjectFree	CONFIRMED	releases every instance, the instance table, the compiled program's code buffer (+0x60), unit table (+0x94) and the record itself
+func	FUN_0008df50	arbfpProgramString	CONFIRMED	loads program text into the current fragment program slot: text starting '!!ILfs1.0' is kept as IL, anything else is compiled by arbfpCompileProgram; GL_INVALID_OPERATION (0x502) on a parse error, 0x505 on allocation failure
+func	FUN_0008e2e0	arbfpProgramStringIL	INFERRED	wraps raw IL words in a '!!ILfs1.0\n' header and loads them through arbfpProgramString
+func	FUN_0008f520	arbfpInitProgramState	INFERRED	allocates the two default fragment program objects (current and default slots) with target 0x8804 (GL_FRAGMENT_PROGRAM_ARB)
+func	FUN_0008f6f0	arbfpGrowInstanceTable	INFERRED	allocates a new instance table, copies the old entries and frees the old table
+func	FUN_0008f760	arbfpLoadDefaultProgram	CONFIRMED	compiles the minimal program '!!ARBfp1.0\nEND\n' into the current slot and binds it

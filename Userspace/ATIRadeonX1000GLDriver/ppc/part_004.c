@@ -1174,7 +1174,7 @@ LAB_000260dc:
         iVar9 = FUN_00048da0(piVar7);
         if (iVar9 == 0) {
           *piVar15 = 0;
-          FUN_0008e2e0(piVar15,0,piVar7[0xb],piVar7[10]);
+          arbfpProgramStringIL(piVar15,0,piVar7[0xb],piVar7[10]);
           bVar3 = *piVar15 == 0;
           bVar4 = !bVar3;
           if (!bVar4) {
@@ -5193,7 +5193,7 @@ void FUN_0002b740(int param_1,int *param_2,undefined4 param_3,undefined4 param_4
   puVar3[1] = 0;
   *puVar3 = ((unsigned char *)0x000013d6U);
   ((unsigned char *)0x00002b7e)[param_1] = 1;
-  ((void (*)())FUN_00090470)(param_1 + 0x240,param_2,param_3,param_4,param_5,param_6,puVar3,fparam_1,fparam_2,
+  ((void (*)())gldValidateState)(param_1 + 0x240,param_2,param_3,param_4,param_5,param_6,puVar3,fparam_1,fparam_2,
                fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,
                (double)CONCAT44(in_LR,(*(unsigned int *)((unsigned char *)&(fparam_9) + 4))));
   return;
@@ -5484,7 +5484,7 @@ void FUN_0002bbc4(int param_1,undefined4 *param_2,undefined4 param_3,undefined4 
   }
   *(undefined4 **)(param_1 + 0x1dc) = puVar12;
   ((unsigned char *)0x00002b7e)[param_1] = 0;
-  ((void (*)())FUN_00090470)(param_1 + 0x240,puVar7,param_3,param_4,puVar8,puVar9,puVar11,fparam_1,fparam_2,
+  ((void (*)())gldValidateState)(param_1 + 0x240,puVar7,param_3,param_4,puVar8,puVar9,puVar11,fparam_1,fparam_2,
                fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,
                (double)CONCAT44(in_LR,(*(unsigned int *)((unsigned char *)&(fparam_9) + 4))));
   return;

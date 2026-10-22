@@ -3904,7 +3904,7 @@ int FUN_000a7050(param_1)
   *(int *)(iVar9 + 0x112c) = ((int (*)())FUN_000a6f70)(0x14);
   ((int (*)())FUN_000a2530)(iVar9);
   FUN_000a0ef0(iVar9);
-  FUN_0008f760(iVar9);
+  arbfpLoadDefaultProgram(iVar9);
   *(undefined1 *)(param_1 + 0x26f) = 1;
   puVar2 = PTR_FUN_001e8a04;
   *(undefined **)(((unsigned char *)0x00001570) + param_1) = PTR_FUN_001e8ac8;

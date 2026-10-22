@@ -873,7 +873,7 @@ PTR_DAT_001e8998	0x1e8998	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char 
 PTR_DAT_001e899c	0x1e899c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e899c asm("PTR_DAT_001e899c");	pointer -> LD_1da6d0	data.s
 PTR_FUN_001e89a0	0x1e89a0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89a0 asm("PTR_FUN_001e89a0");	pointer -> noop_70c50	data.s
 PTR_FUN_001e89a4	0x1e89a4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89a4 asm("PTR_FUN_001e89a4");	pointer -> FUN_00064a10	data.s
-PTR_FUN_001e89a8	0x1e89a8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89a8 asm("PTR_FUN_001e89a8");	pointer -> FUN_0007dde0	data.s
+PTR_FUN_001e89a8	0x1e89a8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89a8 asm("PTR_FUN_001e89a8");	pointer -> evsFoldConstantMoves	data.s
 PTR_FUN_001e89ac	0x1e89ac	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89ac asm("PTR_FUN_001e89ac");	pointer -> FUN_00077430	data.s
 PTR_FUN_001e89b0	0x1e89b0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89b0 asm("PTR_FUN_001e89b0");	pointer -> FUN_00077030	data.s
 PTR_FUN_001e89b4	0x1e89b4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89b4 asm("PTR_FUN_001e89b4");	pointer -> FUN_0005f810	data.s
@@ -912,7 +912,7 @@ PTR_FUN_001e8a34	0x1e8a34	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char 
 PTR_FUN_001e8a38	0x1e8a38	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a38 asm("PTR_FUN_001e8a38");	pointer -> FUN_00065610	data.s
 PTR_001e8a3c	0x1e8a3c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_001e8a3c asm("PTR_001e8a3c");	pointer -> _free	data.s
 PTR_FUN_001e8a40	0x1e8a40	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a40 asm("PTR_FUN_001e8a40");	pointer -> FUN_0006aba0	data.s
-PTR_FUN_001e8a44	0x1e8a44	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a44 asm("PTR_FUN_001e8a44");	pointer -> FUN_00090470	data.s
+PTR_FUN_001e8a44	0x1e8a44	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a44 asm("PTR_FUN_001e8a44");	pointer -> gldValidateState	data.s
 PTR_FUN_001e8a48	0x1e8a48	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a48 asm("PTR_FUN_001e8a48");	pointer -> FUN_000640f0	data.s
 PTR_FUN_001e8a4c	0x1e8a4c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a4c asm("PTR_FUN_001e8a4c");	pointer -> FUN_000840d0	data.s
 PTR_FUN_001e8a50	0x1e8a50	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a50 asm("PTR_FUN_001e8a50");	pointer -> FUN_000659d0	data.s

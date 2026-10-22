@@ -4056,625 +4056,625 @@ LAB_00073754:
   return *(undefined1 *)(param_2 + 4);
 }
 
-/* FUN_000738c0 @ 0x738c0 (2852 bytes) */
-int FUN_000738c0(param_1, param_2, param_3, param_4, param_5, param_6)
-  int param_1;
-  uint *param_2;
-  int param_3;
-  int *param_4;
-  int param_5;
-  uint *param_6;
+/* evsEncodeSource @ 0x738c0 (2852 bytes) */
+int evsEncodeSource(compiler, instructionArray, compileState, operand, isScalarSource, swizzleOverride)
+  int compiler;
+  uint *instructionArray;
+  int compileState;
+  int *operand;
+  int isScalarSource;
+  uint *swizzleOverride;
 {
   uint uVar1;
-  uint uVar2;
+  uint registerWord;
   undefined4 uVar3;
-  int iVar4;
+  int symbol;
   uint uVar5;
   uint uVar6;
-  int iVar7;
-  undefined *puVar8;
+  int dataType;
+  undefined *swizzleWord;
   uint uVar9;
   undefined *puVar10;
   
-  puVar8 = ((unsigned char *)0x00003210);
-  switch(param_4[2]) {
+  swizzleWord = ((unsigned char *)0x00003210);
+  switch(operand[2]) {
   case 0x87d9:
-    puVar8 = ((unsigned char *)0x00003218);
+    swizzleWord = ((unsigned char *)0x00003218);
   case 0x87d5:
     break;
   case 0x87da:
-    puVar8 = ((unsigned char *)0x00003218);
+    swizzleWord = ((unsigned char *)0x00003218);
   case 0x87d6:
-    puVar8 = (undefined *)((uint)puVar8 | 1);
+    swizzleWord = (undefined *)((uint)swizzleWord | 1);
     break;
   case 0x87db:
-    puVar8 = ((unsigned char *)0x00003218);
+    swizzleWord = ((unsigned char *)0x00003218);
   case 0x87d7:
-    puVar8 = (undefined *)((uint)puVar8 | 2);
+    swizzleWord = (undefined *)((uint)swizzleWord | 2);
     break;
   case 0x87dc:
-    puVar8 = ((unsigned char *)0x00003218);
+    swizzleWord = ((unsigned char *)0x00003218);
   case 0x87d8:
-    puVar8 = (undefined *)((uint)puVar8 | 3);
+    swizzleWord = (undefined *)((uint)swizzleWord | 3);
     break;
   case 0x87dd:
-    puVar8 = ((unsigned char *)0x00003214);
+    swizzleWord = ((unsigned char *)0x00003214);
     break;
   case 0x87de:
-    puVar8 = ((unsigned char *)0x00003215);
+    swizzleWord = ((unsigned char *)0x00003215);
   }
-  switch(param_4[3]) {
+  switch(operand[3]) {
   case 0x87d9:
-    puVar8 = (undefined *)((uint)puVar8 | 0x80);
+    swizzleWord = (undefined *)((uint)swizzleWord | 0x80);
   case 0x87d5:
-    puVar8 = (undefined *)((uint)puVar8 & 0xffffff8f);
+    swizzleWord = (undefined *)((uint)swizzleWord & 0xffffff8f);
     break;
   case 0x87da:
-    puVar8 = (undefined *)((uint)puVar8 | 0x80);
+    swizzleWord = (undefined *)((uint)swizzleWord | 0x80);
   case 0x87d6:
-    puVar8 = (undefined *)((uint)puVar8 & 0xffffff8f | 0x10);
+    swizzleWord = (undefined *)((uint)swizzleWord & 0xffffff8f | 0x10);
     break;
   case 0x87db:
-    puVar8 = (undefined *)((uint)puVar8 | 0x80);
+    swizzleWord = (undefined *)((uint)swizzleWord | 0x80);
   case 0x87d7:
-    puVar8 = (undefined *)((uint)puVar8 & 0xffffff8f | 0x20);
+    swizzleWord = (undefined *)((uint)swizzleWord & 0xffffff8f | 0x20);
     break;
   case 0x87dc:
-    puVar8 = (undefined *)((uint)puVar8 | 0x80);
+    swizzleWord = (undefined *)((uint)swizzleWord | 0x80);
   case 0x87d8:
-    puVar8 = (undefined *)((uint)puVar8 & 0xffffff8f | 0x30);
+    swizzleWord = (undefined *)((uint)swizzleWord & 0xffffff8f | 0x30);
     break;
   case 0x87dd:
-    puVar8 = (undefined *)((uint)puVar8 & 0xffffff8f | 0x40);
+    swizzleWord = (undefined *)((uint)swizzleWord & 0xffffff8f | 0x40);
     break;
   case 0x87de:
-    puVar8 = (undefined *)((uint)puVar8 & 0xffffff8f | 0x50);
+    swizzleWord = (undefined *)((uint)swizzleWord & 0xffffff8f | 0x50);
   }
-  switch(param_4[4]) {
+  switch(operand[4]) {
   case 0x87d9:
-    puVar8 = (undefined *)((uint)puVar8 | 0x800);
+    swizzleWord = (undefined *)((uint)swizzleWord | 0x800);
   case 0x87d5:
-    puVar8 = (undefined *)((uint)puVar8 & 0xfffff8ff);
+    swizzleWord = (undefined *)((uint)swizzleWord & 0xfffff8ff);
     break;
   case 0x87da:
-    puVar8 = (undefined *)((uint)puVar8 | 0x800);
+    swizzleWord = (undefined *)((uint)swizzleWord | 0x800);
   case 0x87d6:
-    puVar8 = (undefined *)((uint)puVar8 & 0xfffff8ff | 0x100);
+    swizzleWord = (undefined *)((uint)swizzleWord & 0xfffff8ff | 0x100);
     break;
   case 0x87db:
-    puVar8 = (undefined *)((uint)puVar8 | 0x800);
+    swizzleWord = (undefined *)((uint)swizzleWord | 0x800);
   case 0x87d7:
-    puVar8 = (undefined *)((uint)puVar8 & 0xfffff8ff | 0x200);
+    swizzleWord = (undefined *)((uint)swizzleWord & 0xfffff8ff | 0x200);
     break;
   case 0x87dc:
-    puVar8 = (undefined *)((uint)puVar8 | 0x800);
+    swizzleWord = (undefined *)((uint)swizzleWord | 0x800);
   case 0x87d8:
-    puVar8 = (undefined *)((uint)puVar8 & 0xfffff8ff | 0x300);
+    swizzleWord = (undefined *)((uint)swizzleWord & 0xfffff8ff | 0x300);
     break;
   case 0x87dd:
-    puVar8 = (undefined *)((uint)puVar8 & 0xfffff8ff | 0x400);
+    swizzleWord = (undefined *)((uint)swizzleWord & 0xfffff8ff | 0x400);
     break;
   case 0x87de:
-    puVar8 = (undefined *)((uint)puVar8 & 0xfffff8ff | 0x500);
+    swizzleWord = (undefined *)((uint)swizzleWord & 0xfffff8ff | 0x500);
   }
-  switch(param_4[5]) {
+  switch(operand[5]) {
   case 0x87d9:
-    puVar8 = (undefined *)((uint)puVar8 | 0x8000);
+    swizzleWord = (undefined *)((uint)swizzleWord | 0x8000);
   case 0x87d5:
-    puVar8 = (undefined *)((uint)puVar8 & 0xffff8fff);
+    swizzleWord = (undefined *)((uint)swizzleWord & 0xffff8fff);
     break;
   case 0x87da:
-    puVar8 = (undefined *)((uint)puVar8 | 0x8000);
+    swizzleWord = (undefined *)((uint)swizzleWord | 0x8000);
   case 0x87d6:
-    puVar8 = (undefined *)((uint)puVar8 & 0xffff8fff | 0x1000);
+    swizzleWord = (undefined *)((uint)swizzleWord & 0xffff8fff | 0x1000);
     break;
   case 0x87db:
-    puVar8 = (undefined *)((uint)puVar8 | 0x8000);
+    swizzleWord = (undefined *)((uint)swizzleWord | 0x8000);
   case 0x87d7:
-    puVar8 = (undefined *)((uint)puVar8 & 0xffff8fff | 0x2000);
+    swizzleWord = (undefined *)((uint)swizzleWord & 0xffff8fff | 0x2000);
     break;
   case 0x87dc:
-    puVar8 = (undefined *)((uint)puVar8 | 0x8000);
+    swizzleWord = (undefined *)((uint)swizzleWord | 0x8000);
   case 0x87d8:
-    puVar8 = (undefined *)((uint)puVar8 & 0xffff8fff | 0x3000);
+    swizzleWord = (undefined *)((uint)swizzleWord & 0xffff8fff | 0x3000);
     break;
   case 0x87dd:
-    puVar8 = (undefined *)((uint)puVar8 & 0xffff8fff | 0x4000);
+    swizzleWord = (undefined *)((uint)swizzleWord & 0xffff8fff | 0x4000);
     break;
   case 0x87de:
-    puVar8 = (undefined *)((uint)puVar8 & 0xffff8fff | 0x5000);
+    swizzleWord = (undefined *)((uint)swizzleWord & 0xffff8fff | 0x5000);
   }
-  if (param_6 != (uint *)0x0) {
-    uVar9 = *param_6;
-    uVar2 = uVar9 & 3;
-    if (uVar2 == 2) {
-      puVar8 = (undefined *)((uint)puVar8 >> 8 & 7 | (uint)puVar8 & 0xfffffff8);
+  if (swizzleOverride != (uint *)0x0) {
+    uVar9 = *swizzleOverride;
+    registerWord = uVar9 & 3;
+    if (registerWord == 2) {
+      swizzleWord = (undefined *)((uint)swizzleWord >> 8 & 7 | (uint)swizzleWord & 0xfffffff8);
     }
-    else if (uVar2 == 3) {
-      puVar8 = (undefined *)((uint)puVar8 >> 0xc & 7 | (uint)puVar8 & 0xfffffff8);
+    else if (registerWord == 3) {
+      swizzleWord = (undefined *)((uint)swizzleWord >> 0xc & 7 | (uint)swizzleWord & 0xfffffff8);
     }
-    else if (uVar2 == 1) {
-      puVar8 = (undefined *)((uint)puVar8 >> 4 & 7 | (uint)puVar8 & 0xfffffff8);
+    else if (registerWord == 1) {
+      swizzleWord = (undefined *)((uint)swizzleWord >> 4 & 7 | (uint)swizzleWord & 0xfffffff8);
     }
-    uVar6 = param_6[1];
-    uVar2 = uVar6 & 3;
-    if (uVar2 != 1) {
-      if (uVar2 == 0) {
-        puVar8 = (undefined *)(((uint)puVar8 & 7) << 4 | (uint)puVar8 & 0xffffff8f);
+    uVar6 = swizzleOverride[1];
+    registerWord = uVar6 & 3;
+    if (registerWord != 1) {
+      if (registerWord == 0) {
+        swizzleWord = (undefined *)(((uint)swizzleWord & 7) << 4 | (uint)swizzleWord & 0xffffff8f);
       }
-      else if (uVar2 == 2) {
-        puVar8 = (undefined *)((uint)puVar8 >> 4 & 0x70 | (uint)puVar8 & 0xffffff8f);
+      else if (registerWord == 2) {
+        swizzleWord = (undefined *)((uint)swizzleWord >> 4 & 0x70 | (uint)swizzleWord & 0xffffff8f);
       }
-      else if (uVar2 == 3) {
-        puVar8 = (undefined *)((uint)puVar8 >> 8 & 0x70 | (uint)puVar8 & 0xffffff8f);
+      else if (registerWord == 3) {
+        swizzleWord = (undefined *)((uint)swizzleWord >> 8 & 0x70 | (uint)swizzleWord & 0xffffff8f);
       }
     }
-    uVar1 = param_6[2];
-    uVar2 = uVar1 & 3;
-    if (uVar2 == 1) {
-      puVar8 = (undefined *)(((uint)puVar8 & 0x70) << 4 | (uint)puVar8 & 0xfffff8ff);
+    uVar1 = swizzleOverride[2];
+    registerWord = uVar1 & 3;
+    if (registerWord == 1) {
+      swizzleWord = (undefined *)(((uint)swizzleWord & 0x70) << 4 | (uint)swizzleWord & 0xfffff8ff);
     }
-    else if (uVar2 == 0) {
-      puVar8 = (undefined *)(((uint)puVar8 & 7) << 8 | (uint)puVar8 & 0xfffff8ff);
+    else if (registerWord == 0) {
+      swizzleWord = (undefined *)(((uint)swizzleWord & 7) << 8 | (uint)swizzleWord & 0xfffff8ff);
     }
-    else if ((uVar2 != 2) && (uVar2 == 3)) {
-      puVar8 = (undefined *)((uint)puVar8 >> 4 & 0x700 | (uint)puVar8 & 0xfffff8ff);
+    else if ((registerWord != 2) && (registerWord == 3)) {
+      swizzleWord = (undefined *)((uint)swizzleWord >> 4 & 0x700 | (uint)swizzleWord & 0xfffff8ff);
     }
-    uVar5 = param_6[3];
-    uVar2 = uVar5 & 3;
-    if (uVar2 == 1) {
-      puVar8 = (undefined *)(((uint)puVar8 & 0x70) << 8 | (uint)puVar8 & 0xffff8fff);
+    uVar5 = swizzleOverride[3];
+    registerWord = uVar5 & 3;
+    if (registerWord == 1) {
+      swizzleWord = (undefined *)(((uint)swizzleWord & 0x70) << 8 | (uint)swizzleWord & 0xffff8fff);
     }
-    else if (uVar2 == 0) {
-      puVar8 = (undefined *)(((uint)puVar8 & 7) << 0xc | (uint)puVar8 & 0xffff8fff);
+    else if (registerWord == 0) {
+      swizzleWord = (undefined *)(((uint)swizzleWord & 7) << 0xc | (uint)swizzleWord & 0xffff8fff);
     }
-    else if (uVar2 == 2) {
-      puVar8 = (undefined *)(((uint)puVar8 & 0x700) << 4 | (uint)puVar8 & 0xffff8fff);
+    else if (registerWord == 2) {
+      swizzleWord = (undefined *)(((uint)swizzleWord & 0x700) << 4 | (uint)swizzleWord & 0xffff8fff);
     }
     if ((uVar9 & 4) != 0) {
-      puVar8 = (undefined *)(((uint)puVar8 ^ 8) & 8 | (uint)puVar8 & 0xfffffff7);
+      swizzleWord = (undefined *)(((uint)swizzleWord ^ 8) & 8 | (uint)swizzleWord & 0xfffffff7);
     }
     if ((uVar6 & 4) != 0) {
-      puVar8 = (undefined *)(((uint)puVar8 ^ 0x80) & 0x80 | (uint)puVar8 & 0xffffff7f);
+      swizzleWord = (undefined *)(((uint)swizzleWord ^ 0x80) & 0x80 | (uint)swizzleWord & 0xffffff7f);
     }
     if ((uVar1 & 4) != 0) {
-      puVar8 = (undefined *)(((uint)puVar8 ^ 0x800) & 0x800 | (uint)puVar8 & 0xfffff7ff);
+      swizzleWord = (undefined *)(((uint)swizzleWord ^ 0x800) & 0x800 | (uint)swizzleWord & 0xfffff7ff);
     }
     if ((uVar5 & 4) != 0) {
-      puVar8 = (undefined *)(((uint)puVar8 ^ 0x8000) & 0x8000 | (uint)puVar8 & 0xffff7fff);
+      swizzleWord = (undefined *)(((uint)swizzleWord ^ 0x8000) & 0x8000 | (uint)swizzleWord & 0xffff7fff);
     }
     if ((uVar9 & 8) != 0) {
-      puVar8 = (undefined *)((uint)puVar8 & 0xffff7777 | 0x100000);
+      swizzleWord = (undefined *)((uint)swizzleWord & 0xffff7777 | 0x100000);
     }
     if ((uVar6 & 8) != 0) {
-      puVar8 = (undefined *)((uint)puVar8 & 0xffff7777 | 0x100000);
+      swizzleWord = (undefined *)((uint)swizzleWord & 0xffff7777 | 0x100000);
     }
     if ((uVar1 & 8) != 0) {
-      puVar8 = (undefined *)((uint)puVar8 & 0xffff7777 | 0x100000);
+      swizzleWord = (undefined *)((uint)swizzleWord & 0xffff7777 | 0x100000);
     }
     if ((uVar5 & 8) != 0) {
-      puVar8 = (undefined *)((uint)puVar8 & 0xffff7777 | 0x100000);
+      swizzleWord = (undefined *)((uint)swizzleWord & 0xffff7777 | 0x100000);
     }
   }
-  puVar10 = puVar8;
-  if (*param_4 != 2) {
-    if (*param_4 != 0) {
+  puVar10 = swizzleWord;
+  if (*operand != 2) {
+    if (*operand != 0) {
       return 0;
     }
-    uVar2 = 0x40000;
+    registerWord = 0x40000;
     goto LAB_00074014;
   }
-  iVar4 = param_4[1] * 0x54 + *(int *)(param_3 + 0x20);
-  uVar2 = *(uint *)(iVar4 + 0x28);
-  iVar7 = *(int *)(iVar4 + 0x24);
-  if (uVar2 < 0x87c4) {
-    if (uVar2 < 0x87c2) {
-      if (uVar2 != 0x87c1) {
+  symbol = operand[1] * 0x54 + *(int *)(compileState + 0x20);
+  registerWord = *(uint *)(symbol + 0x28);
+  dataType = *(int *)(symbol + 0x24);
+  if (registerWord < 0x87c4) {
+    if (registerWord < 0x87c2) {
+      if (registerWord != 0x87c1) {
         return 0;
       }
-      if (iVar7 == 0x87bf) {
-        uVar2 = *(uint *)(iVar4 + 4) & 0xffff | 0x50000;
-        if ((*(char *)(iVar4 + 0x44) != '\0') && (*(int *)(iVar4 + 0x48) == 1)) {
-          puVar10 = (undefined *)((uint)puVar8 & 0xffff8fff | 0x4000);
+      if (dataType == 0x87bf) {
+        registerWord = *(uint *)(symbol + 4) & 0xffff | 0x50000;
+        if ((*(char *)(symbol + 0x44) != '\0') && (*(int *)(symbol + 0x48) == 1)) {
+          puVar10 = (undefined *)((uint)swizzleWord & 0xffff8fff | 0x4000);
         }
       }
-      else if (iVar7 == 0x87c0) {
-        uVar2 = *(uint *)(iVar4 + 0x10) & 0xffff | 0x50000;
+      else if (dataType == 0x87c0) {
+        registerWord = *(uint *)(symbol + 0x10) & 0xffff | 0x50000;
       }
       else {
-        if (iVar7 != 0x87be) {
+        if (dataType != 0x87be) {
           return 0;
         }
-        uVar9 = *(uint *)(iVar4 + 8);
-        uVar2 = *(uint *)(iVar4 + 4) & 0xffff | 0x50000;
+        uVar9 = *(uint *)(symbol + 8);
+        registerWord = *(uint *)(symbol + 4) & 0xffff | 0x50000;
         puVar10 = (undefined *)
                   ((uVar9 & 7) << 0xc |
-                  (uVar9 & 7) << 8 | (uVar9 & 7) << 4 | uVar9 & 7 | (uint)puVar8 & 0xffff8888);
-        if ((*(char *)(iVar4 + 0x44) != '\0') && (*(int *)(iVar4 + 0x48) == 0xf)) {
-          puVar10 = (undefined *)((uint)puVar8 & 0xffff8888 | 0x5441);
+                  (uVar9 & 7) << 8 | (uVar9 & 7) << 4 | uVar9 & 7 | (uint)swizzleWord & 0xffff8888);
+        if ((*(char *)(symbol + 0x44) != '\0') && (*(int *)(symbol + 0x48) == 0xf)) {
+          puVar10 = (undefined *)((uint)swizzleWord & 0xffff8888 | 0x5441);
         }
       }
       goto LAB_00074014;
     }
-    if (iVar7 == 0x87bf) {
-      uVar2 = *(uint *)(iVar4 + 4) & 0xffff | 0x10000;
+    if (dataType == 0x87bf) {
+      registerWord = *(uint *)(symbol + 4) & 0xffff | 0x10000;
       goto LAB_00074014;
     }
-    if (iVar7 == 0x87c0) {
-      uVar2 = *(uint *)(iVar4 + 0x10) & 0xffff | 0x10000;
+    if (dataType == 0x87c0) {
+      registerWord = *(uint *)(symbol + 0x10) & 0xffff | 0x10000;
       goto LAB_00074014;
     }
-    if (iVar7 != 0x87be) {
+    if (dataType != 0x87be) {
       return 0;
     }
-    uVar9 = *(uint *)(iVar4 + 8);
-    uVar2 = *(uint *)(iVar4 + 4);
-    iVar4 = 1;
+    uVar9 = *(uint *)(symbol + 8);
+    registerWord = *(uint *)(symbol + 4);
+    symbol = 1;
   }
   else {
-    if (uVar2 != 0x87c4) {
+    if (registerWord != 0x87c4) {
       return 0;
     }
-    if (iVar7 == 0x87bf) {
-      uVar2 = *(uint *)(iVar4 + 4) & 0xffff | 0x40000;
+    if (dataType == 0x87bf) {
+      registerWord = *(uint *)(symbol + 4) & 0xffff | 0x40000;
       goto LAB_00074014;
     }
-    if (iVar7 == 0x87c0) {
-      uVar2 = *(uint *)(iVar4 + 0x10) & 0xffff | 0x40000;
+    if (dataType == 0x87c0) {
+      registerWord = *(uint *)(symbol + 0x10) & 0xffff | 0x40000;
       goto LAB_00074014;
     }
-    if (iVar7 != 0x87be) {
+    if (dataType != 0x87be) {
       return 0;
     }
-    uVar9 = *(uint *)(iVar4 + 8);
-    uVar2 = *(uint *)(iVar4 + 4);
-    iVar4 = 4;
+    uVar9 = *(uint *)(symbol + 8);
+    registerWord = *(uint *)(symbol + 4);
+    symbol = 4;
   }
-  uVar2 = uVar2 & 0xffff | iVar4 << 0x10;
+  registerWord = registerWord & 0xffff | symbol << 0x10;
   puVar10 = (undefined *)
             ((uVar9 & 7) << 0xc |
-            (uVar9 & 7) << 8 | (uVar9 & 7) << 4 | uVar9 & 7 | (uint)puVar8 & 0xffff8888);
+            (uVar9 & 7) << 8 | (uVar9 & 7) << 4 | uVar9 & 7 | (uint)swizzleWord & 0xffff8888);
 LAB_00074014:
-  if ((param_5 == 0) && (puVar10 == ((unsigned char *)0x00003210))) {
-    if (*(char *)(param_4 + 6) == '\0') {
-      uVar9 = *param_2;
-      if (param_2[1] <= uVar9) {
-        uVar9 = (**(code **)(param_1 + 0xc))(param_2[1] * 4 + 0x200);
-        if (param_2[2] != 0) {
-          _memcpy(uVar9,param_2[2],*param_2 << 2);
-          (**(code **)(param_1 + 0x18))(param_2[2]);
+  if ((isScalarSource == 0) && (puVar10 == ((unsigned char *)0x00003210))) {
+    if (*(char *)(operand + 6) == '\0') {
+      uVar9 = *instructionArray;
+      if (instructionArray[1] <= uVar9) {
+        uVar9 = (**(code **)(compiler + 0xc))(instructionArray[1] * 4 + 0x200);
+        if (instructionArray[2] != 0) {
+          _memcpy(uVar9,instructionArray[2],*instructionArray << 2);
+          (**(code **)(compiler + 0x18))(instructionArray[2]);
         }
-        param_2[2] = uVar9;
-        uVar9 = *param_2;
-        param_2[1] = param_2[1] + 0x80;
+        instructionArray[2] = uVar9;
+        uVar9 = *instructionArray;
+        instructionArray[1] = instructionArray[1] + 0x80;
       }
       uVar3 = 1;
-      *(uint *)(uVar9 * 4 + param_2[2]) = uVar2;
-      *param_2 = *param_2 + 1;
+      *(uint *)(uVar9 * 4 + instructionArray[2]) = registerWord;
+      *instructionArray = *instructionArray + 1;
     }
     else {
-      uVar9 = *param_2;
-      if (param_2[1] <= uVar9) {
-        uVar9 = (**(code **)(param_1 + 0xc))(param_2[1] * 4 + 0x200);
-        if (param_2[2] != 0) {
-          _memcpy(uVar9,param_2[2],*param_2 << 2);
-          (**(code **)(param_1 + 0x18))(param_2[2]);
+      uVar9 = *instructionArray;
+      if (instructionArray[1] <= uVar9) {
+        uVar9 = (**(code **)(compiler + 0xc))(instructionArray[1] * 4 + 0x200);
+        if (instructionArray[2] != 0) {
+          _memcpy(uVar9,instructionArray[2],*instructionArray << 2);
+          (**(code **)(compiler + 0x18))(instructionArray[2]);
         }
-        param_2[2] = uVar9;
-        uVar9 = *param_2;
-        param_2[1] = param_2[1] + 0x80;
+        instructionArray[2] = uVar9;
+        uVar9 = *instructionArray;
+        instructionArray[1] = instructionArray[1] + 0x80;
       }
-      *(uint *)(uVar9 * 4 + param_2[2]) = uVar2 | 0x800000;
-      uVar2 = *param_2 + 1;
-      *param_2 = uVar2;
-      if (param_2[1] <= uVar2) {
-        uVar2 = (**(code **)(param_1 + 0xc))(param_2[1] * 4 + 0x200);
-        if (param_2[2] != 0) {
-          _memcpy(uVar2,param_2[2],*param_2 << 2);
-          (**(code **)(param_1 + 0x18))(param_2[2]);
+      *(uint *)(uVar9 * 4 + instructionArray[2]) = registerWord | 0x800000;
+      registerWord = *instructionArray + 1;
+      *instructionArray = registerWord;
+      if (instructionArray[1] <= registerWord) {
+        registerWord = (**(code **)(compiler + 0xc))(instructionArray[1] * 4 + 0x200);
+        if (instructionArray[2] != 0) {
+          _memcpy(registerWord,instructionArray[2],*instructionArray << 2);
+          (**(code **)(compiler + 0x18))(instructionArray[2]);
         }
-        param_2[2] = uVar2;
-        uVar2 = *param_2;
-        param_2[1] = param_2[1] + 0x80;
+        instructionArray[2] = registerWord;
+        registerWord = *instructionArray;
+        instructionArray[1] = instructionArray[1] + 0x80;
       }
       uVar3 = 2;
-      *(undefined4 *)(uVar2 * 4 + param_2[2]) = 0;
-      *param_2 = *param_2 + 1;
+      *(undefined4 *)(registerWord * 4 + instructionArray[2]) = 0;
+      *instructionArray = *instructionArray + 1;
     }
   }
-  else if (*(char *)(param_4 + 6) == '\0') {
-    uVar9 = *param_2;
-    if (param_2[1] <= uVar9) {
-      uVar9 = (**(code **)(param_1 + 0xc))(param_2[1] * 4 + 0x200);
-      if (param_2[2] != 0) {
-        _memcpy(uVar9,param_2[2],*param_2 << 2);
-        (**(code **)(param_1 + 0x18))(param_2[2]);
+  else if (*(char *)(operand + 6) == '\0') {
+    uVar9 = *instructionArray;
+    if (instructionArray[1] <= uVar9) {
+      uVar9 = (**(code **)(compiler + 0xc))(instructionArray[1] * 4 + 0x200);
+      if (instructionArray[2] != 0) {
+        _memcpy(uVar9,instructionArray[2],*instructionArray << 2);
+        (**(code **)(compiler + 0x18))(instructionArray[2]);
       }
-      param_2[2] = uVar9;
-      uVar9 = *param_2;
-      param_2[1] = param_2[1] + 0x80;
+      instructionArray[2] = uVar9;
+      uVar9 = *instructionArray;
+      instructionArray[1] = instructionArray[1] + 0x80;
     }
-    *(uint *)(uVar9 * 4 + param_2[2]) = uVar2 | 0x400000;
-    uVar2 = *param_2 + 1;
-    *param_2 = uVar2;
-    if (param_2[1] <= uVar2) {
-      uVar2 = (**(code **)(param_1 + 0xc))(param_2[1] * 4 + 0x200);
-      if (param_2[2] != 0) {
-        _memcpy(uVar2,param_2[2],*param_2 << 2);
-        (**(code **)(param_1 + 0x18))(param_2[2]);
+    *(uint *)(uVar9 * 4 + instructionArray[2]) = registerWord | 0x400000;
+    registerWord = *instructionArray + 1;
+    *instructionArray = registerWord;
+    if (instructionArray[1] <= registerWord) {
+      registerWord = (**(code **)(compiler + 0xc))(instructionArray[1] * 4 + 0x200);
+      if (instructionArray[2] != 0) {
+        _memcpy(registerWord,instructionArray[2],*instructionArray << 2);
+        (**(code **)(compiler + 0x18))(instructionArray[2]);
       }
-      param_2[2] = uVar2;
-      uVar2 = *param_2;
-      param_2[1] = param_2[1] + 0x80;
+      instructionArray[2] = registerWord;
+      registerWord = *instructionArray;
+      instructionArray[1] = instructionArray[1] + 0x80;
     }
     uVar3 = 2;
-    *(undefined **)(uVar2 * 4 + param_2[2]) = puVar10;
-    *param_2 = *param_2 + 1;
+    *(undefined **)(registerWord * 4 + instructionArray[2]) = puVar10;
+    *instructionArray = *instructionArray + 1;
   }
   else {
-    uVar9 = *param_2;
-    if (param_2[1] <= uVar9) {
-      uVar9 = (**(code **)(param_1 + 0xc))(param_2[1] * 4 + 0x200);
-      if (param_2[2] != 0) {
-        _memcpy(uVar9,param_2[2],*param_2 << 2);
-        (**(code **)(param_1 + 0x18))(param_2[2]);
+    uVar9 = *instructionArray;
+    if (instructionArray[1] <= uVar9) {
+      uVar9 = (**(code **)(compiler + 0xc))(instructionArray[1] * 4 + 0x200);
+      if (instructionArray[2] != 0) {
+        _memcpy(uVar9,instructionArray[2],*instructionArray << 2);
+        (**(code **)(compiler + 0x18))(instructionArray[2]);
       }
-      param_2[2] = uVar9;
-      uVar9 = *param_2;
-      param_2[1] = param_2[1] + 0x80;
+      instructionArray[2] = uVar9;
+      uVar9 = *instructionArray;
+      instructionArray[1] = instructionArray[1] + 0x80;
     }
-    *(uint *)(uVar9 * 4 + param_2[2]) = uVar2 | 0xc00000;
-    uVar2 = *param_2 + 1;
-    *param_2 = uVar2;
-    if (param_2[1] <= uVar2) {
-      uVar2 = (**(code **)(param_1 + 0xc))(param_2[1] * 4 + 0x200);
-      if (param_2[2] != 0) {
-        _memcpy(uVar2,param_2[2],*param_2 << 2);
-        (**(code **)(param_1 + 0x18))(param_2[2]);
+    *(uint *)(uVar9 * 4 + instructionArray[2]) = registerWord | 0xc00000;
+    registerWord = *instructionArray + 1;
+    *instructionArray = registerWord;
+    if (instructionArray[1] <= registerWord) {
+      registerWord = (**(code **)(compiler + 0xc))(instructionArray[1] * 4 + 0x200);
+      if (instructionArray[2] != 0) {
+        _memcpy(registerWord,instructionArray[2],*instructionArray << 2);
+        (**(code **)(compiler + 0x18))(instructionArray[2]);
       }
-      param_2[2] = uVar2;
-      uVar2 = *param_2;
-      param_2[1] = param_2[1] + 0x80;
+      instructionArray[2] = registerWord;
+      registerWord = *instructionArray;
+      instructionArray[1] = instructionArray[1] + 0x80;
     }
-    *(undefined **)(uVar2 * 4 + param_2[2]) = puVar10;
-    uVar2 = *param_2 + 1;
-    *param_2 = uVar2;
-    if (param_2[1] <= uVar2) {
-      uVar2 = (**(code **)(param_1 + 0xc))(param_2[1] * 4 + 0x200);
-      if (param_2[2] != 0) {
-        _memcpy(uVar2,param_2[2],*param_2 << 2);
-        (**(code **)(param_1 + 0x18))(param_2[2]);
+    *(undefined **)(registerWord * 4 + instructionArray[2]) = puVar10;
+    registerWord = *instructionArray + 1;
+    *instructionArray = registerWord;
+    if (instructionArray[1] <= registerWord) {
+      registerWord = (**(code **)(compiler + 0xc))(instructionArray[1] * 4 + 0x200);
+      if (instructionArray[2] != 0) {
+        _memcpy(registerWord,instructionArray[2],*instructionArray << 2);
+        (**(code **)(compiler + 0x18))(instructionArray[2]);
       }
-      param_2[2] = uVar2;
-      uVar2 = *param_2;
-      param_2[1] = param_2[1] + 0x80;
+      instructionArray[2] = registerWord;
+      registerWord = *instructionArray;
+      instructionArray[1] = instructionArray[1] + 0x80;
     }
     uVar3 = 3;
-    *(undefined4 *)(uVar2 * 4 + param_2[2]) = 0;
-    *param_2 = *param_2 + 1;
+    *(undefined4 *)(registerWord * 4 + instructionArray[2]) = 0;
+    *instructionArray = *instructionArray + 1;
   }
   return uVar3;
 }
 
-/* FUN_000744d0 @ 0x744d0 (1412 bytes) */
-int FUN_000744d0(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  uint *param_2;
-  int *param_3;
-  int *param_4;
-  int param_5;
+/* evsEncodeDestination @ 0x744d0 (1412 bytes) */
+int evsEncodeDestination(compiler, instructionArray, compileState, destination, asSource)
+  int compiler;
+  uint *instructionArray;
+  int *compileState;
+  int *destination;
+  int asSource;
 {
   undefined4 uVar1;
   int iVar2;
-  uint uVar3;
-  int iVar4;
-  uint uVar5;
-  uint uVar6;
+  uint symbolKind;
+  int stateBlock;
+  uint maskBits;
+  uint registerWord;
   
-  uVar5 = 0x55;
-  iVar4 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_3);
-  if (param_4[2] == 0) {
-    uVar5 = 0x54;
+  maskBits = 0x55;
+  stateBlock = **(int **)(*(int *)(((unsigned char *)0x0000118c) + compiler) * 4 + *compileState);
+  if (destination[2] == 0) {
+    maskBits = 0x54;
   }
-  iVar2 = param_4[3];
+  iVar2 = destination[3];
   if (iVar2 == 0) {
-    uVar5 = uVar5 & 0xfffffff3;
+    maskBits = maskBits & 0xfffffff3;
   }
-  if (param_4[4] == 0) {
-    uVar5 = uVar5 & 0xffffffcf;
+  if (destination[4] == 0) {
+    maskBits = maskBits & 0xffffffcf;
   }
-  if (param_4[5] == 0) {
-    uVar5 = uVar5 & 0xffffff3f;
+  if (destination[5] == 0) {
+    maskBits = maskBits & 0xffffff3f;
   }
-  if (*param_4 == 1) {
-    uVar3 = param_4[1];
-    if (uVar3 == 0x879b) {
-      uVar5 = uVar5 | 0x100;
-      *(undefined1 *)((int)param_3 + 0x6d) = 1;
-      uVar6 = 0x120000;
+  if (*destination == 1) {
+    symbolKind = destination[1];
+    if (symbolKind == 0x879b) {
+      maskBits = maskBits | 0x100;
+      *(undefined1 *)((int)compileState + 0x6d) = 1;
+      registerWord = 0x120000;
     }
-    else if (uVar3 < 0x879c) {
-      if (uVar3 == 0x610f) {
-        uVar5 = uVar5 | 0x100;
-        *(undefined1 *)((int)param_3 + 0x6f) = 1;
-        uVar6 = 0x120001;
+    else if (symbolKind < 0x879c) {
+      if (symbolKind == 0x610f) {
+        maskBits = maskBits | 0x100;
+        *(undefined1 *)((int)compileState + 0x6f) = 1;
+        registerWord = 0x120001;
       }
-      else if (uVar3 < 0x6110) {
-        if (uVar3 != 0x610e) {
+      else if (symbolKind < 0x6110) {
+        if (symbolKind != 0x610e) {
           return 0;
         }
-        *(undefined1 *)((int)param_3 + 0x79) = 1;
-        uVar6 = 0xd0000;
-        uVar5 = uVar5 & 0xffffff03;
+        *(undefined1 *)((int)compileState + 0x79) = 1;
+        registerWord = 0xd0000;
+        maskBits = maskBits & 0xffffff03;
       }
-      else if (uVar3 == 0x6110) {
-        uVar5 = uVar5 | 0x100;
-        *(undefined1 *)(param_3 + 0x1c) = 1;
-        uVar6 = 0x130001;
+      else if (symbolKind == 0x6110) {
+        maskBits = maskBits | 0x100;
+        *(undefined1 *)(compileState + 0x1c) = 1;
+        registerWord = 0x130001;
       }
       else {
-        if (uVar3 != 0x879a) {
+        if (symbolKind != 0x879a) {
           return 0;
         }
-        uVar6 = 0xe0000;
+        registerWord = 0xe0000;
       }
     }
-    else if (uVar3 < 0x87a5) {
-      if (uVar3 < 0x879d) {
-        uVar5 = uVar5 | 0x100;
-        *(undefined1 *)((int)param_3 + 0x6e) = 1;
-        uVar6 = 0x130000;
+    else if (symbolKind < 0x87a5) {
+      if (symbolKind < 0x879d) {
+        maskBits = maskBits | 0x100;
+        *(undefined1 *)((int)compileState + 0x6e) = 1;
+        registerWord = 0x130000;
       }
       else {
-        uVar6 = uVar3 + 0x7863 & 0xffff | 0x110000;
-        if (param_4[2] == 1) {
-          *(byte *)((int)param_3 + (uVar3 - 0x872c)) =
-               *(byte *)((int)param_3 + (uVar3 - 0x872c)) | 1;
-          iVar2 = param_4[3];
+        registerWord = symbolKind + 0x7863 & 0xffff | 0x110000;
+        if (destination[2] == 1) {
+          *(byte *)((int)compileState + (symbolKind - 0x872c)) =
+               *(byte *)((int)compileState + (symbolKind - 0x872c)) | 1;
+          iVar2 = destination[3];
         }
         if (iVar2 == 1) {
-          *(byte *)((int)param_3 + param_4[1] + -0x872c) =
-               *(byte *)((int)param_3 + param_4[1] + -0x872c) | 2;
+          *(byte *)((int)compileState + destination[1] + -0x872c) =
+               *(byte *)((int)compileState + destination[1] + -0x872c) | 2;
         }
-        if (param_4[4] == 1) {
-          *(byte *)((int)param_3 + param_4[1] + -0x872c) =
-               *(byte *)((int)param_3 + param_4[1] + -0x872c) | 4;
+        if (destination[4] == 1) {
+          *(byte *)((int)compileState + destination[1] + -0x872c) =
+               *(byte *)((int)compileState + destination[1] + -0x872c) | 4;
         }
-        if (param_4[5] == 1) {
-          *(byte *)((int)param_3 + param_4[1] + -0x872c) =
-               *(byte *)((int)param_3 + param_4[1] + -0x872c) | 8;
+        if (destination[5] == 1) {
+          *(byte *)((int)compileState + destination[1] + -0x872c) =
+               *(byte *)((int)compileState + destination[1] + -0x872c) | 8;
         }
       }
     }
     else {
-      if (uVar3 != 0x87bd) {
+      if (symbolKind != 0x87bd) {
         return 0;
       }
-      uVar3 = *(uint *)(((unsigned char *)0x000013c0) + iVar4);
-      *(undefined1 *)((int)param_3 + 0x7a) = 1;
-      *(undefined1 *)(iVar4 + 0x33) = 1;
-      uVar6 = uVar3 & 0xffff | 0x40000;
-      uVar5 = uVar5 & 0xffffff03;
+      symbolKind = *(uint *)(((unsigned char *)0x000013c0) + stateBlock);
+      *(undefined1 *)((int)compileState + 0x7a) = 1;
+      *(undefined1 *)(stateBlock + 0x33) = 1;
+      registerWord = symbolKind & 0xffff | 0x40000;
+      maskBits = maskBits & 0xffffff03;
     }
   }
   else {
-    if (*param_4 != 2) {
+    if (*destination != 2) {
       return 0;
     }
-    iVar4 = param_4[1] * 0x54 + param_3[8];
-    iVar2 = *(int *)(iVar4 + 0x24);
-    if (*(int *)(iVar4 + 0x28) == 0x87c4) {
+    stateBlock = destination[1] * 0x54 + compileState[8];
+    iVar2 = *(int *)(stateBlock + 0x24);
+    if (*(int *)(stateBlock + 0x28) == 0x87c4) {
       if (iVar2 == 0x87bf) {
-        uVar6 = *(uint *)(iVar4 + 4) & 0xffff | 0x40000;
+        registerWord = *(uint *)(stateBlock + 4) & 0xffff | 0x40000;
       }
       else if (iVar2 == 0x87c0) {
-        uVar6 = *(uint *)(iVar4 + 0x10) & 0xffff | 0x40000;
+        registerWord = *(uint *)(stateBlock + 0x10) & 0xffff | 0x40000;
       }
       else {
         if (iVar2 != 0x87be) {
           return 0;
         }
-        iVar2 = *(int *)(iVar4 + 8);
-        uVar6 = *(uint *)(iVar4 + 4) & 0xffff | 0x40000;
+        iVar2 = *(int *)(stateBlock + 8);
+        registerWord = *(uint *)(stateBlock + 4) & 0xffff | 0x40000;
         if (iVar2 == 1) {
-          uVar5 = uVar5 & 0xffffff0c;
+          maskBits = maskBits & 0xffffff0c;
         }
         else if (iVar2 == 0) {
-          uVar5 = uVar5 & 0xffffff03;
+          maskBits = maskBits & 0xffffff03;
         }
         else if (iVar2 == 2) {
-          uVar5 = uVar5 & 0xffffff30;
+          maskBits = maskBits & 0xffffff30;
         }
         else {
           if (iVar2 != 3) {
             return 0;
           }
-          uVar5 = uVar5 & 0xffffffc0;
+          maskBits = maskBits & 0xffffffc0;
         }
       }
     }
     else {
-      if (*(int *)(iVar4 + 0x28) != -1) {
+      if (*(int *)(stateBlock + 0x28) != -1) {
         return 0;
       }
-      uVar6 = 0x30000;
+      registerWord = 0x30000;
     }
   }
-  if ((param_5 == 0) && (uVar5 == 0x55)) {
-    uVar5 = *param_2;
-    if (param_2[1] <= uVar5) {
-      uVar5 = (**(code **)(param_1 + 0xc))(param_2[1] * 4 + 0x200);
-      if (param_2[2] != 0) {
-        _memcpy(uVar5,param_2[2],*param_2 << 2);
-        (**(code **)(param_1 + 0x18))(param_2[2]);
+  if ((asSource == 0) && (maskBits == 0x55)) {
+    maskBits = *instructionArray;
+    if (instructionArray[1] <= maskBits) {
+      maskBits = (**(code **)(compiler + 0xc))(instructionArray[1] * 4 + 0x200);
+      if (instructionArray[2] != 0) {
+        _memcpy(maskBits,instructionArray[2],*instructionArray << 2);
+        (**(code **)(compiler + 0x18))(instructionArray[2]);
       }
-      param_2[2] = uVar5;
-      uVar5 = *param_2;
-      param_2[1] = param_2[1] + 0x80;
+      instructionArray[2] = maskBits;
+      maskBits = *instructionArray;
+      instructionArray[1] = instructionArray[1] + 0x80;
     }
     uVar1 = 1;
-    *(uint *)(uVar5 * 4 + param_2[2]) = uVar6;
-    *param_2 = *param_2 + 1;
+    *(uint *)(maskBits * 4 + instructionArray[2]) = registerWord;
+    *instructionArray = *instructionArray + 1;
   }
   else {
-    uVar3 = *param_2;
-    if (param_2[1] <= uVar3) {
-      uVar3 = (**(code **)(param_1 + 0xc))(param_2[1] * 4 + 0x200);
-      if (param_2[2] != 0) {
-        _memcpy(uVar3,param_2[2],*param_2 << 2);
-        (**(code **)(param_1 + 0x18))(param_2[2]);
+    symbolKind = *instructionArray;
+    if (instructionArray[1] <= symbolKind) {
+      symbolKind = (**(code **)(compiler + 0xc))(instructionArray[1] * 4 + 0x200);
+      if (instructionArray[2] != 0) {
+        _memcpy(symbolKind,instructionArray[2],*instructionArray << 2);
+        (**(code **)(compiler + 0x18))(instructionArray[2]);
       }
-      param_2[2] = uVar3;
-      uVar3 = *param_2;
-      param_2[1] = param_2[1] + 0x80;
+      instructionArray[2] = symbolKind;
+      symbolKind = *instructionArray;
+      instructionArray[1] = instructionArray[1] + 0x80;
     }
-    *(uint *)(uVar3 * 4 + param_2[2]) = uVar6 | 0x400000;
-    uVar3 = *param_2 + 1;
-    *param_2 = uVar3;
-    if (param_2[1] <= uVar3) {
-      uVar3 = (**(code **)(param_1 + 0xc))(param_2[1] * 4 + 0x200);
-      if (param_2[2] != 0) {
-        _memcpy(uVar3,param_2[2],*param_2 << 2);
-        (**(code **)(param_1 + 0x18))(param_2[2]);
+    *(uint *)(symbolKind * 4 + instructionArray[2]) = registerWord | 0x400000;
+    symbolKind = *instructionArray + 1;
+    *instructionArray = symbolKind;
+    if (instructionArray[1] <= symbolKind) {
+      symbolKind = (**(code **)(compiler + 0xc))(instructionArray[1] * 4 + 0x200);
+      if (instructionArray[2] != 0) {
+        _memcpy(symbolKind,instructionArray[2],*instructionArray << 2);
+        (**(code **)(compiler + 0x18))(instructionArray[2]);
       }
-      param_2[2] = uVar3;
-      uVar3 = *param_2;
-      param_2[1] = param_2[1] + 0x80;
+      instructionArray[2] = symbolKind;
+      symbolKind = *instructionArray;
+      instructionArray[1] = instructionArray[1] + 0x80;
     }
     uVar1 = 2;
-    *(uint *)(uVar3 * 4 + param_2[2]) = uVar5;
-    *param_2 = *param_2 + 1;
+    *(uint *)(symbolKind * 4 + instructionArray[2]) = maskBits;
+    *instructionArray = *instructionArray + 1;
   }
   return uVar1;
 }
 
-/* FUN_00074a70 @ 0x74a70 (192 bytes) */
-int FUN_00074a70(param_1, param_2, param_3, param_4)
-  int param_1;
-  uint *param_2;
-  uint param_3;
-  uint param_4;
+/* evsAppendInstruction @ 0x74a70 (192 bytes) */
+int evsAppendInstruction(compiler, instructionArray, opcode, modifier)
+  int compiler;
+  uint *instructionArray;
+  uint opcode;
+  uint modifier;
 {
-  uint uVar1;
+  uint count;
   
-  uVar1 = *param_2;
-  if (param_2[1] <= uVar1) {
-    uVar1 = (**(code **)(param_1 + 0xc))(param_2[1] * 4 + 0x200);
-    if (param_2[2] != 0) {
-      _memcpy(uVar1,param_2[2],*param_2 << 2);
-      (**(code **)(param_1 + 0x18))(param_2[2]);
+  count = *instructionArray;
+  if (instructionArray[1] <= count) {
+    count = (**(code **)(compiler + 0xc))(instructionArray[1] * 4 + 0x200);
+    if (instructionArray[2] != 0) {
+      _memcpy(count,instructionArray[2],*instructionArray << 2);
+      (**(code **)(compiler + 0x18))(instructionArray[2]);
     }
-    param_2[2] = uVar1;
-    uVar1 = *param_2;
-    param_2[1] = param_2[1] + 0x80;
+    instructionArray[2] = count;
+    count = *instructionArray;
+    instructionArray[1] = instructionArray[1] + 0x80;
   }
-  *(uint *)(uVar1 * 4 + param_2[2]) = (param_4 & 0x3fff) << 0x10 | param_3 & 0xffff;
-  *param_2 = *param_2 + 1;
+  *(uint *)(count * 4 + instructionArray[2]) = (modifier & 0x3fff) << 0x10 | opcode & 0xffff;
+  *instructionArray = *instructionArray + 1;
   return 1;
 }
 
-/* FUN_00074b30 @ 0x74b30 (204 bytes) */
-int FUN_00074b30(param_1, param_2, param_3, param_4)
+/* evsEmitMova @ 0x74b30 (204 bytes) */
+int evsEmitMova(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   int param_2;
   undefined4 param_3;
@@ -4691,7 +4691,7 @@ int FUN_00074b30(param_1, param_2, param_3, param_4)
   undefined4 local_30;
   
   iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())FUN_00074a70)(param_1,iVar2,0x48,0);
+  iVar1 = ((int (*)())evsAppendInstruction)(param_1,iVar2,0x48,0);
   if (iVar1 != 0) {
     local_48 = *(undefined4 *)(param_4 + 4);
     local_44 = *(undefined4 *)(param_4 + 8);
@@ -4700,8 +4700,8 @@ int FUN_00074b30(param_1, param_2, param_3, param_4)
     local_3c = 0;
     local_38 = 0;
     local_40 = 1;
-    iVar1 = ((int (*)())FUN_000744d0)(param_1,iVar2,param_3,&local_48,1);
-    if ((iVar1 != 0) && (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)
+    iVar1 = ((int (*)())evsEncodeDestination)(param_1,iVar2,param_3,&local_48,1);
+    if ((iVar1 != 0) && (iVar1 = ((int (*)())evsEncodeSource)(param_1,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)
        ) {
       return 1;
     }
@@ -4709,8 +4709,8 @@ int FUN_00074b30(param_1, param_2, param_3, param_4)
   return 0xffffffff;
 }
 
-/* FUN_00074c00 @ 0x74c00 (188 bytes) */
-int FUN_00074c00(param_1, param_2, param_3, param_4)
+/* evsEmitLogp @ 0x74c00 (188 bytes) */
+int evsEmitLogp(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   int param_2;
   undefined4 param_3;
@@ -4724,13 +4724,13 @@ int FUN_00074c00(param_1, param_2, param_3, param_4)
   undefined4 uStack_2c;
   
   iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())FUN_00074a70)(param_1,iVar2,0x3d,0);
-  if ((iVar1 != 0) && (iVar1 = ((int (*)())FUN_000744d0)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) {
+  iVar1 = ((int (*)())evsAppendInstruction)(param_1,iVar2,0x3d,0);
+  if ((iVar1 != 0) && (iVar1 = ((int (*)())evsEncodeDestination)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) {
     uStack_2c = 4;
     uStack_34 = 4;
     uStack_30 = 4;
     uStack_38 = 0xc;
-    iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x20,1,&uStack_38);
+    iVar1 = ((int (*)())evsEncodeSource)(param_1,iVar2,param_3,param_4 + 0x20,1,&uStack_38);
     if (iVar1 != 0) {
       return 1;
     }
@@ -4738,8 +4738,8 @@ int FUN_00074c00(param_1, param_2, param_3, param_4)
   return 0xffffffff;
 }
 
-/* FUN_00074cc0 @ 0x74cc0 (156 bytes) */
-int FUN_00074cc0(compiler, program, compileState, irInstruction)
+/* evsEmitExpp @ 0x74cc0 (156 bytes) */
+int evsEmitExpp(compiler, program, compileState, irInstruction)
   undefined4 compiler;
   int program;
   undefined4 compileState;
@@ -4749,16 +4749,16 @@ int FUN_00074cc0(compiler, program, compileState, irInstruction)
   int code;
   
   code = program + 4;
-  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x2e,0);
-  if (((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
-     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,1,0), emitted != 0)) {
+  emitted = ((int (*)())evsAppendInstruction)(compiler,code,0x2e,0);
+  if (((emitted != 0) && (emitted = ((int (*)())evsEncodeDestination)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+     (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x20,1,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
-/* FUN_00074d60 @ 0x74d60 (204 bytes) */
-int FUN_00074d60(compiler, program, compileState, irInstruction)
+/* evsEmitDst @ 0x74d60 (204 bytes) */
+int evsEmitDst(compiler, program, compileState, irInstruction)
   undefined4 compiler;
   int program;
   undefined4 compileState;
@@ -4768,17 +4768,17 @@ int FUN_00074d60(compiler, program, compileState, irInstruction)
   int code;
   
   code = program + 4;
-  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x24,0);
-  if ((((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
-      (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
-     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
+  emitted = ((int (*)())evsAppendInstruction)(compiler,code,0x24,0);
+  if ((((emitted != 0) && (emitted = ((int (*)())evsEncodeDestination)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+      (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
+     (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
-/* FUN_00074e30 @ 0x74e30 (156 bytes) */
-int FUN_00074e30(compiler, program, compileState, irInstruction)
+/* evsEmitLit @ 0x74e30 (156 bytes) */
+int evsEmitLit(compiler, program, compileState, irInstruction)
   undefined4 compiler;
   int program;
   undefined4 compileState;
@@ -4788,9 +4788,9 @@ int FUN_00074e30(compiler, program, compileState, irInstruction)
   int code;
   
   code = program + 4;
-  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x39,0);
-  if (((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
-     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
+  emitted = ((int (*)())evsAppendInstruction)(compiler,code,0x39,0);
+  if (((emitted != 0) && (emitted = ((int (*)())evsEncodeDestination)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+     (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
@@ -4825,11 +4825,11 @@ int FUN_00074ed0(param_1, param_2, param_3, param_4)
     return 0xffffffff;
   }
   iVar3 = param_2 + 4;
-  iVar2 = ((int (*)())FUN_00074a70)(param_1,iVar3,0x47,0);
+  iVar2 = ((int (*)())evsAppendInstruction)(param_1,iVar3,0x47,0);
   if (iVar2 == 0) {
     return 0xffffffff;
   }
-  iVar2 = ((int (*)())FUN_000744d0)(param_1,iVar3,param_3,param_4 + 4,0);
+  iVar2 = ((int (*)())evsEncodeDestination)(param_1,iVar3,param_3,param_4 + 4,0);
   if (iVar2 == 0) {
     return 0xffffffff;
   }
@@ -4842,7 +4842,7 @@ int FUN_00074ed0(param_1, param_2, param_3, param_4)
   uStack_40 = *(undefined4 *)(param_4 + 0x28);
   if (iVar1 != 0x87be) {
     iStack_44 = uVar4 + iStack_44;
-    iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar3,param_3,&uStack_48,1,0);
+    iVar1 = ((int (*)())evsEncodeSource)(param_1,iVar3,param_3,&uStack_48,1,0);
     goto LAB_00075028;
   }
   if (uVar4 == 1) {
@@ -4859,7 +4859,7 @@ LAB_00074fd4:
     uStack_50 = 0;
   }
   else if ((uVar4 == 2) || (uVar4 == 3)) goto LAB_00074fd4;
-  iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar3,param_3,&uStack_48,1,&uStack_58);
+  iVar1 = ((int (*)())evsEncodeSource)(param_1,iVar3,param_3,&uStack_48,1,&uStack_58);
 LAB_00075028:
   if (iVar1 == 0) {
     return 0xffffffff;
@@ -4892,7 +4892,7 @@ int FUN_00075060(param_1, param_2, param_3, param_4)
     return 0xffffffff;
   }
   iVar3 = param_2 + 4;
-  iVar2 = ((int (*)())FUN_00074a70)(param_1,iVar3,0x47,0);
+  iVar2 = ((int (*)())evsAppendInstruction)(param_1,iVar3,0x47,0);
   if (iVar2 == 0) {
     return 0xffffffff;
   }
@@ -4924,7 +4924,7 @@ int FUN_00075060(param_1, param_2, param_3, param_4)
       uStack_40 = 0;
       uStack_3c = 0;
     }
-    iVar2 = ((int (*)())FUN_000744d0)(param_1,iVar3,param_3,&uStack_48,1);
+    iVar2 = ((int (*)())evsEncodeDestination)(param_1,iVar3,param_3,&uStack_48,1);
   }
   else {
     uStack_48 = *(uint *)(param_4 + 4);
@@ -4934,13 +4934,13 @@ int FUN_00075060(param_1, param_2, param_3, param_4)
     uStack_34 = *(undefined4 *)(param_4 + 0x18);
     uStack_30 = *(undefined4 *)(param_4 + 0x1c);
     uStack_44 = uVar4 + *(int *)(param_4 + 8);
-    iVar2 = ((int (*)())FUN_000744d0)(param_1,iVar3,param_3,&uStack_48,1);
+    iVar2 = ((int (*)())evsEncodeDestination)(param_1,iVar3,param_3,&uStack_48,1);
   }
   if (iVar2 == 0) {
     return 0xffffffff;
   }
   if (iVar1 != 0x87bf) {
-    ((int (*)())FUN_000738c0)(param_1,iVar3,param_3,param_4 + 0x20,1,0);
+    ((int (*)())evsEncodeSource)(param_1,iVar3,param_3,param_4 + 0x20,1,0);
     return 1;
   }
   if (uVar4 != 1) {
@@ -4958,7 +4958,7 @@ int FUN_00075060(param_1, param_2, param_3, param_4)
   uStack_40 = uVar4;
   uStack_3c = uVar4;
 LAB_00075258:
-  ((int (*)())FUN_000738c0)(param_1,iVar3,param_3,param_4 + 0x20,1,&uStack_48);
+  ((int (*)())evsEncodeSource)(param_1,iVar3,param_3,param_4 + 0x20,1,&uStack_48);
   return 1;
 }
 
@@ -4973,9 +4973,9 @@ int FUN_000752c0(compiler, program, compileState, irInstruction)
   int code;
   
   code = program + 4;
-  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x47,0);
-  if (((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,1), emitted != 0)) &&
-     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
+  emitted = ((int (*)())evsAppendInstruction)(compiler,code,0x47,0);
+  if (((emitted != 0) && (emitted = ((int (*)())evsEncodeDestination)(compiler,code,compileState,irInstruction + 4,1), emitted != 0)) &&
+     (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
@@ -4992,9 +4992,9 @@ int FUN_00075360(compiler, program, compileState, irInstruction)
   int code;
   
   code = program + 4;
-  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x47,0);
-  if (((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
-     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
+  emitted = ((int (*)())evsAppendInstruction)(compiler,code,0x47,0);
+  if (((emitted != 0) && (emitted = ((int (*)())evsEncodeDestination)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+     (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
@@ -5011,16 +5011,16 @@ int FUN_00075400(compiler, program, compileState, irInstruction)
   int code;
   
   code = program + 4;
-  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x47,0);
-  if (((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
-     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
+  emitted = ((int (*)())evsAppendInstruction)(compiler,code,0x47,0);
+  if (((emitted != 0) && (emitted = ((int (*)())evsEncodeDestination)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+     (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
-/* FUN_000754a0 @ 0x754a0 (204 bytes) */
-int FUN_000754a0(compiler, program, compileState, irInstruction)
+/* evsEmitMmul @ 0x754a0 (204 bytes) */
+int evsEmitMmul(compiler, program, compileState, irInstruction)
   undefined4 compiler;
   int program;
   undefined4 compileState;
@@ -5030,17 +5030,17 @@ int FUN_000754a0(compiler, program, compileState, irInstruction)
   int code;
   
   code = program + 4;
-  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x45,0);
-  if ((((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
-      (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) &&
-     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
+  emitted = ((int (*)())evsAppendInstruction)(compiler,code,0x45,0);
+  if ((((emitted != 0) && (emitted = ((int (*)())evsEncodeDestination)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+      (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) &&
+     (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
-/* FUN_00075570 @ 0x75570 (204 bytes) */
-int FUN_00075570(compiler, program, compileState, irInstruction)
+/* evsEmitCrs @ 0x75570 (204 bytes) */
+int evsEmitCrs(compiler, program, compileState, irInstruction)
   undefined4 compiler;
   int program;
   undefined4 compileState;
@@ -5050,17 +5050,17 @@ int FUN_00075570(compiler, program, compileState, irInstruction)
   int code;
   
   code = program + 4;
-  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x13,0);
-  if ((((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
-      (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
-     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
+  emitted = ((int (*)())evsAppendInstruction)(compiler,code,0x13,0);
+  if ((((emitted != 0) && (emitted = ((int (*)())evsEncodeDestination)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+      (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
+     (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
-/* FUN_00075640 @ 0x75640 (204 bytes) */
-int FUN_00075640(compiler, program, compileState, irInstruction)
+/* evsEmitSub @ 0x75640 (204 bytes) */
+int evsEmitSub(compiler, program, compileState, irInstruction)
   undefined4 compiler;
   int program;
   undefined4 compileState;
@@ -5070,17 +5070,17 @@ int FUN_00075640(compiler, program, compileState, irInstruction)
   int code;
   
   code = program + 4;
-  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x5b,0);
-  if ((((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
-      (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
-     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
+  emitted = ((int (*)())evsAppendInstruction)(compiler,code,0x5b,0);
+  if ((((emitted != 0) && (emitted = ((int (*)())evsEncodeDestination)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+      (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
+     (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
-/* FUN_00075710 @ 0x75710 (156 bytes) */
-int FUN_00075710(compiler, program, compileState, irInstruction)
+/* evsEmitRsq @ 0x75710 (156 bytes) */
+int evsEmitRsq(compiler, program, compileState, irInstruction)
   undefined4 compiler;
   int program;
   undefined4 compileState;
@@ -5090,16 +5090,16 @@ int FUN_00075710(compiler, program, compileState, irInstruction)
   int code;
   
   code = program + 4;
-  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x55,3);
-  if (((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
-     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
+  emitted = ((int (*)())evsAppendInstruction)(compiler,code,0x55,3);
+  if (((emitted != 0) && (emitted = ((int (*)())evsEncodeDestination)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+     (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
-/* FUN_000757b0 @ 0x757b0 (156 bytes) */
-int FUN_000757b0(compiler, program, compileState, irInstruction)
+/* evsEmitRcp @ 0x757b0 (156 bytes) */
+int evsEmitRcp(compiler, program, compileState, irInstruction)
   undefined4 compiler;
   int program;
   undefined4 compileState;
@@ -5109,16 +5109,16 @@ int FUN_000757b0(compiler, program, compileState, irInstruction)
   int code;
   
   code = program + 4;
-  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x51,3);
-  if (((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
-     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
+  emitted = ((int (*)())evsAppendInstruction)(compiler,code,0x51,3);
+  if (((emitted != 0) && (emitted = ((int (*)())evsEncodeDestination)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+     (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
-/* FUN_00075850 @ 0x75850 (204 bytes) */
-int FUN_00075850(compiler, program, compileState, irInstruction)
+/* evsEmitPow @ 0x75850 (204 bytes) */
+int evsEmitPow(compiler, program, compileState, irInstruction)
   undefined4 compiler;
   int program;
   undefined4 compileState;
@@ -5128,17 +5128,17 @@ int FUN_00075850(compiler, program, compileState, irInstruction)
   int code;
   
   code = program + 4;
-  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x4e,0);
-  if ((((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
-      (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
-     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
+  emitted = ((int (*)())evsAppendInstruction)(compiler,code,0x4e,0);
+  if ((((emitted != 0) && (emitted = ((int (*)())evsEncodeDestination)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+      (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
+     (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
-/* FUN_00075920 @ 0x75920 (156 bytes) */
-int FUN_00075920(compiler, program, compileState, irInstruction)
+/* evsEmitLog @ 0x75920 (156 bytes) */
+int evsEmitLog(compiler, program, compileState, irInstruction)
   undefined4 compiler;
   int program;
   undefined4 compileState;
@@ -5148,16 +5148,16 @@ int FUN_00075920(compiler, program, compileState, irInstruction)
   int code;
   
   code = program + 4;
-  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x3c,0);
-  if (((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
-     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
+  emitted = ((int (*)())evsAppendInstruction)(compiler,code,0x3c,0);
+  if (((emitted != 0) && (emitted = ((int (*)())evsEncodeDestination)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+     (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
-/* FUN_000759c0 @ 0x759c0 (156 bytes) */
-int FUN_000759c0(compiler, program, compileState, irInstruction)
+/* evsEmitExp @ 0x759c0 (156 bytes) */
+int evsEmitExp(compiler, program, compileState, irInstruction)
   undefined4 compiler;
   int program;
   undefined4 compileState;
@@ -5167,16 +5167,16 @@ int FUN_000759c0(compiler, program, compileState, irInstruction)
   int code;
   
   code = program + 4;
-  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x2d,0);
-  if (((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
-     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
+  emitted = ((int (*)())evsAppendInstruction)(compiler,code,0x2d,0);
+  if (((emitted != 0) && (emitted = ((int (*)())evsEncodeDestination)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+     (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
-/* FUN_00075a60 @ 0x75a60 (156 bytes) */
-int FUN_00075a60(compiler, program, compileState, irInstruction)
+/* evsEmitRnd @ 0x75a60 (156 bytes) */
+int evsEmitRnd(compiler, program, compileState, irInstruction)
   undefined4 compiler;
   int program;
   undefined4 compileState;
@@ -5186,16 +5186,16 @@ int FUN_00075a60(compiler, program, compileState, irInstruction)
   int code;
   
   code = program + 4;
-  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x54,0);
-  if (((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
-     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
+  emitted = ((int (*)())evsAppendInstruction)(compiler,code,0x54,0);
+  if (((emitted != 0) && (emitted = ((int (*)())evsEncodeDestination)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+     (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
-/* FUN_00075b00 @ 0x75b00 (156 bytes) */
-int FUN_00075b00(compiler, program, compileState, irInstruction)
+/* evsEmitFlr @ 0x75b00 (156 bytes) */
+int evsEmitFlr(compiler, program, compileState, irInstruction)
   undefined4 compiler;
   int program;
   undefined4 compileState;
@@ -5205,16 +5205,16 @@ int FUN_00075b00(compiler, program, compileState, irInstruction)
   int code;
   
   code = program + 4;
-  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x30,0);
-  if (((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
-     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
+  emitted = ((int (*)())evsAppendInstruction)(compiler,code,0x30,0);
+  if (((emitted != 0) && (emitted = ((int (*)())evsEncodeDestination)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+     (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
-/* FUN_00075ba0 @ 0x75ba0 (236 bytes) */
-int FUN_00075ba0(param_1, param_2, param_3, param_4)
+/* evsEmitClamp @ 0x75ba0 (236 bytes) */
+int evsEmitClamp(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   int param_2;
   undefined4 param_3;
@@ -5224,18 +5224,18 @@ int FUN_00075ba0(param_1, param_2, param_3, param_4)
   int iVar2;
   
   iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())FUN_00074a70)(param_1,iVar2,10,0);
-  if ((((iVar1 != 0) && (iVar1 = ((int (*)())FUN_000744d0)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) &&
-      (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)) &&
-     ((iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x3c,0,0), iVar1 != 0 &&
-      (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x58,0,0), iVar1 != 0)))) {
+  iVar1 = ((int (*)())evsAppendInstruction)(param_1,iVar2,10,0);
+  if ((((iVar1 != 0) && (iVar1 = ((int (*)())evsEncodeDestination)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) &&
+      (iVar1 = ((int (*)())evsEncodeSource)(param_1,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)) &&
+     ((iVar1 = ((int (*)())evsEncodeSource)(param_1,iVar2,param_3,param_4 + 0x3c,0,0), iVar1 != 0 &&
+      (iVar1 = ((int (*)())evsEncodeSource)(param_1,iVar2,param_3,param_4 + 0x58,0,0), iVar1 != 0)))) {
     return 1;
   }
   return 0xffffffff;
 }
 
-/* FUN_00075c90 @ 0x75c90 (204 bytes) */
-int FUN_00075c90(compiler, program, compileState, irInstruction)
+/* evsEmitSetCompare5 @ 0x75c90 (204 bytes) */
+int evsEmitSetCompare5(compiler, program, compileState, irInstruction)
   undefined4 compiler;
   int program;
   undefined4 compileState;
@@ -5245,17 +5245,17 @@ int FUN_00075c90(compiler, program, compileState, irInstruction)
   int code;
   
   code = program + 4;
-  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x56,5);
-  if ((((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
-      (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
-     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
+  emitted = ((int (*)())evsAppendInstruction)(compiler,code,0x56,5);
+  if ((((emitted != 0) && (emitted = ((int (*)())evsEncodeDestination)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+      (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
+     (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
-/* FUN_00075d60 @ 0x75d60 (204 bytes) */
-int FUN_00075d60(compiler, program, compileState, irInstruction)
+/* evsEmitSetCompare2 @ 0x75d60 (204 bytes) */
+int evsEmitSetCompare2(compiler, program, compileState, irInstruction)
   undefined4 compiler;
   int program;
   undefined4 compileState;
@@ -5265,17 +5265,17 @@ int FUN_00075d60(compiler, program, compileState, irInstruction)
   int code;
   
   code = program + 4;
-  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x56,2);
-  if ((((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
-      (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
-     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
+  emitted = ((int (*)())evsAppendInstruction)(compiler,code,0x56,2);
+  if ((((emitted != 0) && (emitted = ((int (*)())evsEncodeDestination)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+      (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
+     (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
-/* FUN_00075e30 @ 0x75e30 (204 bytes) */
-int FUN_00075e30(compiler, program, compileState, irInstruction)
+/* evsEmitMin @ 0x75e30 (204 bytes) */
+int evsEmitMin(compiler, program, compileState, irInstruction)
   undefined4 compiler;
   int program;
   undefined4 compileState;
@@ -5285,17 +5285,17 @@ int FUN_00075e30(compiler, program, compileState, irInstruction)
   int code;
   
   code = program + 4;
-  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x44,0);
-  if ((((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
-      (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
-     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
+  emitted = ((int (*)())evsAppendInstruction)(compiler,code,0x44,0);
+  if ((((emitted != 0) && (emitted = ((int (*)())evsEncodeDestination)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+      (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
+     (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
-/* FUN_00075f00 @ 0x75f00 (204 bytes) */
-int FUN_00075f00(compiler, program, compileState, irInstruction)
+/* evsEmitMax @ 0x75f00 (204 bytes) */
+int evsEmitMax(compiler, program, compileState, irInstruction)
   undefined4 compiler;
   int program;
   undefined4 compileState;
@@ -5305,17 +5305,17 @@ int FUN_00075f00(compiler, program, compileState, irInstruction)
   int code;
   
   code = program + 4;
-  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x41,0);
-  if ((((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
-      (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
-     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
+  emitted = ((int (*)())evsAppendInstruction)(compiler,code,0x41,0);
+  if ((((emitted != 0) && (emitted = ((int (*)())evsEncodeDestination)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+      (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
+     (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
-/* FUN_00075fd0 @ 0x75fd0 (156 bytes) */
-int FUN_00075fd0(compiler, program, compileState, irInstruction)
+/* evsEmitFrc @ 0x75fd0 (156 bytes) */
+int evsEmitFrc(compiler, program, compileState, irInstruction)
   undefined4 compiler;
   int program;
   undefined4 compileState;
@@ -5325,16 +5325,16 @@ int FUN_00075fd0(compiler, program, compileState, irInstruction)
   int code;
   
   code = program + 4;
-  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x31,0);
-  if (((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
-     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
+  emitted = ((int (*)())evsAppendInstruction)(compiler,code,0x31,0);
+  if (((emitted != 0) && (emitted = ((int (*)())evsEncodeDestination)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+     (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
-/* FUN_00076070 @ 0x76070 (236 bytes) */
-int FUN_00076070(param_1, param_2, param_3, param_4)
+/* evsEmitMad @ 0x76070 (236 bytes) */
+int evsEmitMad(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   int param_2;
   undefined4 param_3;
@@ -5344,18 +5344,18 @@ int FUN_00076070(param_1, param_2, param_3, param_4)
   int iVar2;
   
   iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())FUN_00074a70)(param_1,iVar2,0x40,0);
-  if ((((iVar1 != 0) && (iVar1 = ((int (*)())FUN_000744d0)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) &&
-      (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)) &&
-     ((iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x3c,0,0), iVar1 != 0 &&
-      (iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x58,0,0), iVar1 != 0)))) {
+  iVar1 = ((int (*)())evsAppendInstruction)(param_1,iVar2,0x40,0);
+  if ((((iVar1 != 0) && (iVar1 = ((int (*)())evsEncodeDestination)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) &&
+      (iVar1 = ((int (*)())evsEncodeSource)(param_1,iVar2,param_3,param_4 + 0x20,0,0), iVar1 != 0)) &&
+     ((iVar1 = ((int (*)())evsEncodeSource)(param_1,iVar2,param_3,param_4 + 0x3c,0,0), iVar1 != 0 &&
+      (iVar1 = ((int (*)())evsEncodeSource)(param_1,iVar2,param_3,param_4 + 0x58,0,0), iVar1 != 0)))) {
     return 1;
   }
   return 0xffffffff;
 }
 
-/* FUN_00076160 @ 0x76160 (204 bytes) */
-int FUN_00076160(compiler, program, compileState, irInstruction)
+/* evsEmitAdd @ 0x76160 (204 bytes) */
+int evsEmitAdd(compiler, program, compileState, irInstruction)
   undefined4 compiler;
   int program;
   undefined4 compileState;
@@ -5365,17 +5365,17 @@ int FUN_00076160(compiler, program, compileState, irInstruction)
   int code;
   
   code = program + 4;
-  emitted = ((int (*)())FUN_00074a70)(compiler,code,3,0);
-  if ((((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
-      (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
-     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
+  emitted = ((int (*)())evsAppendInstruction)(compiler,code,3,0);
+  if ((((emitted != 0) && (emitted = ((int (*)())evsEncodeDestination)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+      (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
+     (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
-/* FUN_00076230 @ 0x76230 (204 bytes) */
-int FUN_00076230(compiler, program, compileState, irInstruction)
+/* evsEmitMul @ 0x76230 (204 bytes) */
+int evsEmitMul(compiler, program, compileState, irInstruction)
   undefined4 compiler;
   int program;
   undefined4 compileState;
@@ -5385,17 +5385,17 @@ int FUN_00076230(compiler, program, compileState, irInstruction)
   int code;
   
   code = program + 4;
-  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x49,0);
-  if ((((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
-      (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
-     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
+  emitted = ((int (*)())evsAppendInstruction)(compiler,code,0x49,0);
+  if ((((emitted != 0) && (emitted = ((int (*)())evsEncodeDestination)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+      (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
+     (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
-/* FUN_00076300 @ 0x76300 (204 bytes) */
-int FUN_00076300(compiler, program, compileState, irInstruction)
+/* evsEmitDp4 @ 0x76300 (204 bytes) */
+int evsEmitDp4(compiler, program, compileState, irInstruction)
   undefined4 compiler;
   int program;
   undefined4 compileState;
@@ -5405,17 +5405,17 @@ int FUN_00076300(compiler, program, compileState, irInstruction)
   int code;
   
   code = program + 4;
-  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x23,0);
-  if ((((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
-      (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
-     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
+  emitted = ((int (*)())evsAppendInstruction)(compiler,code,0x23,0);
+  if ((((emitted != 0) && (emitted = ((int (*)())evsEncodeDestination)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+      (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
+     (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
-/* FUN_000763d0 @ 0x763d0 (204 bytes) */
-int FUN_000763d0(compiler, program, compileState, irInstruction)
+/* evsEmitDp3 @ 0x763d0 (204 bytes) */
+int evsEmitDp3(compiler, program, compileState, irInstruction)
   undefined4 compiler;
   int program;
   undefined4 compileState;
@@ -5425,17 +5425,17 @@ int FUN_000763d0(compiler, program, compileState, irInstruction)
   int code;
   
   code = program + 4;
-  emitted = ((int (*)())FUN_00074a70)(compiler,code,0x22,0);
-  if ((((emitted != 0) && (emitted = ((int (*)())FUN_000744d0)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
-      (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
-     (emitted = ((int (*)())FUN_000738c0)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
+  emitted = ((int (*)())evsAppendInstruction)(compiler,code,0x22,0);
+  if ((((emitted != 0) && (emitted = ((int (*)())evsEncodeDestination)(compiler,code,compileState,irInstruction + 4,0), emitted != 0)) &&
+      (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x20,0,0), emitted != 0)) &&
+     (emitted = ((int (*)())evsEncodeSource)(compiler,code,compileState,irInstruction + 0x3c,0,0), emitted != 0)) {
     return 1;
   }
   return 0xffffffff;
 }
 
-/* FUN_000764a0 @ 0x764a0 (188 bytes) */
-int FUN_000764a0(param_1, param_2, param_3, param_4)
+/* evsEmitMov @ 0x764a0 (188 bytes) */
+int evsEmitMov(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   int param_2;
   undefined4 param_3;
@@ -5449,13 +5449,13 @@ int FUN_000764a0(param_1, param_2, param_3, param_4)
   undefined4 uStack_2c;
   
   iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())FUN_00074a70)(param_1,iVar2,0x47,0);
-  if ((iVar1 != 0) && (iVar1 = ((int (*)())FUN_000744d0)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) {
+  iVar1 = ((int (*)())evsAppendInstruction)(param_1,iVar2,0x47,0);
+  if ((iVar1 != 0) && (iVar1 = ((int (*)())evsEncodeDestination)(param_1,iVar2,param_3,param_4 + 4,0), iVar1 != 0)) {
     uStack_38 = 4;
     uStack_34 = 5;
     uStack_30 = 6;
     uStack_2c = 7;
-    iVar1 = ((int (*)())FUN_000738c0)(param_1,iVar2,param_3,param_4 + 0x20,1,&uStack_38);
+    iVar1 = ((int (*)())evsEncodeSource)(param_1,iVar2,param_3,param_4 + 0x20,1,&uStack_38);
     if (iVar1 != 0) {
       return 1;
     }
@@ -5463,8 +5463,8 @@ int FUN_000764a0(param_1, param_2, param_3, param_4)
   return 0xffffffff;
 }
 
-/* FUN_00076560 @ 0x76560 (524 bytes) */
-int FUN_00076560(param_1, param_2, param_3, param_4)
+/* evsEmitIndexOrMove @ 0x76560 (524 bytes) */
+int evsEmitIndexOrMove(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -5476,7 +5476,7 @@ int FUN_00076560(param_1, param_2, param_3, param_4)
   uint *puVar4;
   
   puVar4 = (uint *)(param_2 + 4);
-  iVar1 = ((int (*)())FUN_00074a70)(param_1,puVar4,0x48,0);
+  iVar1 = ((int (*)())evsAppendInstruction)(param_1,puVar4,0x48,0);
   if (iVar1 != 0) {
     if (*(uint *)(param_2 + 8) <= *(uint *)(param_2 + 4)) {
       uVar2 = (**(code **)(param_1 + 0xc))(*(uint *)(param_2 + 8) * 4 + 0x200);
@@ -5502,13 +5502,13 @@ int FUN_00076560(param_1, param_2, param_3, param_4)
     }
     *(undefined4 *)(uVar3 * 4 + *(int *)(param_2 + 0xc)) = 1;
     *puVar4 = *puVar4 + 1;
-    iVar1 = ((int (*)())FUN_000738c0)(param_1,puVar4,param_3,param_4 + 0x20,0,0);
+    iVar1 = ((int (*)())evsEncodeSource)(param_1,puVar4,param_3,param_4 + 0x20,0,0);
     if (iVar1 != 0) {
-      ((int (*)())FUN_00074a70)(param_1,puVar4,0x47,0);
-      iVar1 = ((int (*)())FUN_000744d0)(param_1,puVar4,param_3,param_4 + 4,0);
+      ((int (*)())evsAppendInstruction)(param_1,puVar4,0x47,0);
+      iVar1 = ((int (*)())evsEncodeDestination)(param_1,puVar4,param_3,param_4 + 4,0);
       if (iVar1 != 0) {
         *(undefined1 *)(param_4 + 0x54) = 1;
-        iVar1 = ((int (*)())FUN_000738c0)(param_1,puVar4,param_3,param_4 + 0x3c,0,0);
+        iVar1 = ((int (*)())evsEncodeSource)(param_1,puVar4,param_3,param_4 + 0x3c,0,0);
         if (iVar1 != 0) {
           return 1;
         }
@@ -5742,15 +5742,15 @@ asm(".set FUN_00070c60, _noop_70c60");
 asm(".globl FUN_00071bc0");
 asm(".set FUN_00071bc0, _FUN_00071bc0");
 asm(".globl FUN_00074b30");
-asm(".set FUN_00074b30, _FUN_00074b30");
+asm(".set FUN_00074b30, _evsEmitMova");
 asm(".globl FUN_00074c00");
-asm(".set FUN_00074c00, _FUN_00074c00");
+asm(".set FUN_00074c00, _evsEmitLogp");
 asm(".globl FUN_00074cc0");
-asm(".set FUN_00074cc0, _FUN_00074cc0");
+asm(".set FUN_00074cc0, _evsEmitExpp");
 asm(".globl FUN_00074d60");
-asm(".set FUN_00074d60, _FUN_00074d60");
+asm(".set FUN_00074d60, _evsEmitDst");
 asm(".globl FUN_00074e30");
-asm(".set FUN_00074e30, _FUN_00074e30");
+asm(".set FUN_00074e30, _evsEmitLit");
 asm(".globl FUN_00074ed0");
 asm(".set FUN_00074ed0, _FUN_00074ed0");
 asm(".globl FUN_00075060");
@@ -5762,50 +5762,50 @@ asm(".set FUN_00075360, _FUN_00075360");
 asm(".globl FUN_00075400");
 asm(".set FUN_00075400, _FUN_00075400");
 asm(".globl FUN_000754a0");
-asm(".set FUN_000754a0, _FUN_000754a0");
+asm(".set FUN_000754a0, _evsEmitMmul");
 asm(".globl FUN_00075570");
-asm(".set FUN_00075570, _FUN_00075570");
+asm(".set FUN_00075570, _evsEmitCrs");
 asm(".globl FUN_00075640");
-asm(".set FUN_00075640, _FUN_00075640");
+asm(".set FUN_00075640, _evsEmitSub");
 asm(".globl FUN_00075710");
-asm(".set FUN_00075710, _FUN_00075710");
+asm(".set FUN_00075710, _evsEmitRsq");
 asm(".globl FUN_000757b0");
-asm(".set FUN_000757b0, _FUN_000757b0");
+asm(".set FUN_000757b0, _evsEmitRcp");
 asm(".globl FUN_00075850");
-asm(".set FUN_00075850, _FUN_00075850");
+asm(".set FUN_00075850, _evsEmitPow");
 asm(".globl FUN_00075920");
-asm(".set FUN_00075920, _FUN_00075920");
+asm(".set FUN_00075920, _evsEmitLog");
 asm(".globl FUN_000759c0");
-asm(".set FUN_000759c0, _FUN_000759c0");
+asm(".set FUN_000759c0, _evsEmitExp");
 asm(".globl FUN_00075a60");
-asm(".set FUN_00075a60, _FUN_00075a60");
+asm(".set FUN_00075a60, _evsEmitRnd");
 asm(".globl FUN_00075b00");
-asm(".set FUN_00075b00, _FUN_00075b00");
+asm(".set FUN_00075b00, _evsEmitFlr");
 asm(".globl FUN_00075ba0");
-asm(".set FUN_00075ba0, _FUN_00075ba0");
+asm(".set FUN_00075ba0, _evsEmitClamp");
 asm(".globl FUN_00075c90");
-asm(".set FUN_00075c90, _FUN_00075c90");
+asm(".set FUN_00075c90, _evsEmitSetCompare5");
 asm(".globl FUN_00075d60");
-asm(".set FUN_00075d60, _FUN_00075d60");
+asm(".set FUN_00075d60, _evsEmitSetCompare2");
 asm(".globl FUN_00075e30");
-asm(".set FUN_00075e30, _FUN_00075e30");
+asm(".set FUN_00075e30, _evsEmitMin");
 asm(".globl FUN_00075f00");
-asm(".set FUN_00075f00, _FUN_00075f00");
+asm(".set FUN_00075f00, _evsEmitMax");
 asm(".globl FUN_00075fd0");
-asm(".set FUN_00075fd0, _FUN_00075fd0");
+asm(".set FUN_00075fd0, _evsEmitFrc");
 asm(".globl FUN_00076070");
-asm(".set FUN_00076070, _FUN_00076070");
+asm(".set FUN_00076070, _evsEmitMad");
 asm(".globl FUN_00076160");
-asm(".set FUN_00076160, _FUN_00076160");
+asm(".set FUN_00076160, _evsEmitAdd");
 asm(".globl FUN_00076230");
-asm(".set FUN_00076230, _FUN_00076230");
+asm(".set FUN_00076230, _evsEmitMul");
 asm(".globl FUN_00076300");
-asm(".set FUN_00076300, _FUN_00076300");
+asm(".set FUN_00076300, _evsEmitDp4");
 asm(".globl FUN_000763d0");
-asm(".set FUN_000763d0, _FUN_000763d0");
+asm(".set FUN_000763d0, _evsEmitDp3");
 asm(".globl FUN_000764a0");
-asm(".set FUN_000764a0, _FUN_000764a0");
+asm(".set FUN_000764a0, _evsEmitMov");
 asm(".globl FUN_00076560");
-asm(".set FUN_00076560, _FUN_00076560");
+asm(".set FUN_00076560, _evsEmitIndexOrMove");
 asm(".globl FUN_000768e0");
 asm(".set FUN_000768e0, _FUN_000768e0");

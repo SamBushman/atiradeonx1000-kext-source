@@ -329,22 +329,22 @@
 872e0	FUN_000872e0	r7	PASS-indirect	87428 bctrl 
 872e0	FUN_000872e0	r8	PASS-indirect	87428 bctrl 
 8b6d0	arbParseSwizzleSuffix	r5	PASS-deep	8b6f0 bl 0x89740
-8b960	FUN_0008b960	r5	PASS-deep	8b978 bl 0x89740
+8b960	arbfpParseScalarSourceOperand	r5	PASS-deep	8b978 bl 0x89740
 8b9f0	arbParseProgramText	r5	PASS-deep	8baf4 bl 0x88e70
 8c590	arbValidateProgram	r7	PASS-indirect	8c5d8 bctrl 
 8c590	arbValidateProgram	r8	PASS-indirect	8c5d8 bctrl 
-8dc50	FUN_0008dc50	r5	PASS-indirect	8dce8 bctrl 
-8dc50	FUN_0008dc50	r6	PASS-indirect	8dce8 bctrl 
-8dc50	FUN_0008dc50	r7	PASS-indirect	8dce8 bctrl 
-8dc50	FUN_0008dc50	r8	PASS-indirect	8dce8 bctrl 
-8f520	FUN_0008f520	r4	PASS-indirect	8f558 bctrl 
-8f520	FUN_0008f520	r5	PASS-indirect	8f558 bctrl 
-8f520	FUN_0008f520	r6	PASS-indirect	8f558 bctrl 
-8f520	FUN_0008f520	r7	PASS-indirect	8f558 bctrl 
-8f520	FUN_0008f520	r8	PASS-indirect	8f558 bctrl 
-8f760	FUN_0008f760	r7	PASS-indirect	8f7d0 bl 0x8c590
-8f760	FUN_0008f760	r8	PASS-indirect	8f7d0 bl 0x8c590
-8f760	FUN_0008f760	r10	PASS-indirect	8f7d0 bl 0x8c590
+8dc50	arbfpProgramObjectInit	r5	PASS-indirect	8dce8 bctrl 
+8dc50	arbfpProgramObjectInit	r6	PASS-indirect	8dce8 bctrl 
+8dc50	arbfpProgramObjectInit	r7	PASS-indirect	8dce8 bctrl 
+8dc50	arbfpProgramObjectInit	r8	PASS-indirect	8dce8 bctrl 
+8f520	arbfpInitProgramState	r4	PASS-indirect	8f558 bctrl 
+8f520	arbfpInitProgramState	r5	PASS-indirect	8f558 bctrl 
+8f520	arbfpInitProgramState	r6	PASS-indirect	8f558 bctrl 
+8f520	arbfpInitProgramState	r7	PASS-indirect	8f558 bctrl 
+8f520	arbfpInitProgramState	r8	PASS-indirect	8f558 bctrl 
+8f760	arbfpLoadDefaultProgram	r7	PASS-indirect	8f7d0 bl 0x8c590
+8f760	arbfpLoadDefaultProgram	r8	PASS-indirect	8f7d0 bl 0x8c590
+8f760	arbfpLoadDefaultProgram	r10	PASS-indirect	8f7d0 bl 0x8c590
 8fb70	FUN_0008fb70	r6	PASS-indirect	8fba0 bl 0x86840
 8fb70	FUN_0008fb70	r7	PASS-indirect	8fba0 bl 0x86840
 8fb70	FUN_0008fb70	r8	PASS-indirect	8fba0 bl 0x86840
