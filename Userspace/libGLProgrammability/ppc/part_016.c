@@ -2904,45 +2904,45 @@ int _glpPPDisassemble(program)
   int *outBuf;
   int *outCursor;
   uint registerId;
-  uint local_a0;
-  int local_9c;
-  int local_98;
-  int local_94;
-  int local_90;
-  int local_8c;
-  int local_88;
-  int local_84;
-  int local_80;
-  int local_7c;
-  int *local_78;
-  int local_74;
+  uint paramRegisterId;
+  int indentDepth;
+  int outWordCount;
+  int outTextLength;
+  int arrayIndex;
+  int elementInArray;
+  int paramNumbers;
+  int paramArrayPos;
+  int tempNumbers;
+  int tempArrayPos;
+  int *arraySizes;
+  int reserved9;
   int local_70;
   int local_6c;
-  int local_68;
-  uint local_64;
-  char *local_60;
-  int local_5c;
-  int local_58;
+  int nextLabelNumber;
+  uint printOptions;
+  char *dataBase;
+  int cr0Image;
+  int cr0Image2;
   
   outBufCapacity = 0x800;
-  local_9c = 1;
+  indentDepth = 1;
   outBuf = (int *)_malloc(0x800);
   uVar26 = CONCAT44(outBuf,extraout_r4);
-  local_90 = 0;
-  local_88 = 0;
-  local_84 = 0;
-  local_80 = 0;
-  local_7c = 0;
-  local_78 = (int *)0x0;
-  local_74 = 0;
+  arrayIndex = 0;
+  paramNumbers = 0;
+  paramArrayPos = 0;
+  tempNumbers = 0;
+  tempArrayPos = 0;
+  arraySizes = (int *)0x0;
+  reserved9 = 0;
   local_70 = 0;
   local_6c = 0;
-  local_68 = 0;
+  nextLabelNumber = 0;
   if (outBuf == (int *)0x0) {
     return (void *)0x0;
   }
   programTarget = *program;
-  local_64 = (uint)(programTarget - 0x8b30 < 2);
+  printOptions = (uint)(programTarget - 0x8b30 < 2);
   if (programTarget == 0x8804) {
     ch = '!';
     copyIndex4 = 0;
@@ -2998,7 +2998,7 @@ LAB_97be9f08:
     } while (ch != '\0');
   }
   outCursor = (int *)((int)outBuf + copyLength3);
-  bVar2 = local_64 == 0;
+  bVar2 = printOptions == 0;
   if (!bVar2) {
     ch = '\n';
     copyIndex4 = 0;
@@ -3014,7 +3014,7 @@ LAB_97be9f08:
   loopIndex = 0;
   optionsOffset = program[0x13];
   if (0 < (int)optionCount) {
-    local_60 = "o intialize the Preprocessor";
+    dataBase = "o intialize the Preprocessor";
     do {
       ch = 'O';
       copyIndex2 = 0;
@@ -3172,11 +3172,11 @@ LAB_97be9f08:
       outBytePtr = outBytePtr + copyLength2;
 switchD_97bea038_default:
       copyIndex5 = 0;
-      ch = local_60[0x3bbc];
+      ch = dataBase[0x3bbc];
       while (ch != '\0') {
         outBytePtr[copyIndex5] = ch;
         copyIndex5 = copyIndex5 + 1;
-        ch = (local_60 + 0x3bbc)[copyIndex5];
+        ch = (dataBase + 0x3bbc)[copyIndex5];
       }
       outCursor = (int *)(outBytePtr + copyIndex5);
       uVar26 = ((int (*)())_adjustAllocation_97be9cb4)(&outBufCapacity,&outBuf,&outCursor);
@@ -3256,35 +3256,35 @@ switchD_97bea038_default:
     uVar23 = 0xffffffff;
     if ((int)tempCount < 1) {
 LAB_97bea680:
-      local_5c = (uint)(byte)((local_80 < 0) << 3 | (0 < local_80) << 2 | (local_80 == 0) << 1 |
+      cr0Image = (uint)(byte)((tempNumbers < 0) << 3 | (0 < tempNumbers) << 2 | (tempNumbers == 0) << 1 |
                              in_xer_so & 1) << 0x1c;
-      local_58 = local_5c;
+      cr0Image2 = cr0Image;
 LAB_97bea698:
-      local_78 = (int *)0x0;
+      arraySizes = (int *)0x0;
       if (program[0x10] != 0) {
-        local_78 = (int *)_malloc(program[0x10] << 2);
+        arraySizes = (int *)_malloc(program[0x10] << 2);
         uVar16 = extraout_r4_01;
       }
-      uVar26 = CONCAT44(local_78,uVar16);
+      uVar26 = CONCAT44(arraySizes,uVar16);
       loopIndex = 0;
       iVar9 = -1;
       registerId = 0xffffffff;
       uVar23 = 0xffffffff;
       if (0 < (int)tempCount) {
         iVar10 = 0;
-        piVar15 = local_78;
+        piVar15 = arraySizes;
         puVar11 = puVar21;
         do {
           if (uVar23 == 0xffffffff) {
-            *(uint *)((uint)*(ushort *)((int)puVar11 + 6) * 4 + local_80) =
+            *(uint *)((uint)*(ushort *)((int)puVar11 + 6) * 4 + tempNumbers) =
                  (uint)*(ushort *)((int)puVar11 + 6);
             uVar26 = ((int (*)())_isTempArrayStart)(program,(uint)*(ushort *)((int)puVar11 + 6),&registerId);
             if ((int)((ulonglong)uVar26 >> 0x20) == 0) {
-              *(int *)(local_7c + (uint)*(ushort *)((int)puVar11 + 6) * 4) = iVar9;
+              *(int *)(tempArrayPos + (uint)*(ushort *)((int)puVar11 + 6) * 4) = iVar9;
             }
             else {
               uVar23 = (uint)*(ushort *)((int)puVar11 + 6);
-              *(undefined4 *)(local_7c + uVar23 * 4) = 0;
+              *(undefined4 *)(tempArrayPos + uVar23 * 4) = 0;
               iVar9 = 1;
             }
             bVar1 = *(ushort *)((int)puVar21 + iVar10 + 6) == registerId;
@@ -3298,8 +3298,8 @@ LAB_97bea790:
             }
           }
           else if ((int)(uint)*(ushort *)((int)puVar11 + 6) <= (int)registerId) {
-            *(uint *)((uint)*(ushort *)((int)puVar11 + 6) * 4 + local_80) = uVar23;
-            *(int *)(local_7c + (uint)*(ushort *)((int)puVar11 + 6) * 4) = iVar9;
+            *(uint *)((uint)*(ushort *)((int)puVar11 + 6) * 4 + tempNumbers) = uVar23;
+            *(int *)(tempArrayPos + (uint)*(ushort *)((int)puVar11 + 6) * 4) = iVar9;
             iVar9 = iVar9 + 1;
             bVar1 = *(ushort *)((int)puVar11 + 6) == registerId;
             goto LAB_97bea790;
@@ -3309,7 +3309,7 @@ LAB_97bea790:
           puVar11 = puVar11 + 2;
         } while (loopIndex < (int)tempCount);
       }
-      local_90 = 0;
+      arrayIndex = 0;
       goto LAB_97bea7e0;
     }
     puVar11 = puVar21 + 1;
@@ -3324,26 +3324,26 @@ LAB_97bea790:
     } while (uVar25 != 0);
     if (uVar23 == 0xffffffff) goto LAB_97bea680;
     allocation2 = uVar23 * 4 + 4;
-    local_80 = _malloc(allocation2);
-    local_5c = (uint)(byte)((local_80 < 0) << 3 | (0 < local_80) << 2 | (local_80 == 0) << 1 |
+    tempNumbers = _malloc(allocation2);
+    cr0Image = (uint)(byte)((tempNumbers < 0) << 3 | (0 < tempNumbers) << 2 | (tempNumbers == 0) << 1 |
                            in_xer_so & 1) << 0x1c;
-    local_7c = _malloc(allocation2);
-    bVar5 = (byte)((uint)local_5c >> 0x18);
+    tempArrayPos = _malloc(allocation2);
+    bVar5 = (byte)((uint)cr0Image >> 0x18);
     if (!(bool)(bVar5 >> 5 & 1)) {
-      local_58 = (uint)(byte)((local_7c < 0) << 3 | (0 < local_7c) << 2 | (local_7c == 0) << 1 |
+      cr0Image2 = (uint)(byte)((tempArrayPos < 0) << 3 | (0 < tempArrayPos) << 2 | (tempArrayPos == 0) << 1 |
                              in_xer_so & 1) << 0x1c;
       uVar16 = extraout_r4_00;
-      if (local_7c == 0) goto joined_r0x97bea678;
+      if (tempArrayPos == 0) goto joined_r0x97bea678;
       goto LAB_97bea698;
     }
-    local_58 = (uint)(byte)((local_7c < 0) << 3 | (0 < local_7c) << 2 | (local_7c == 0) << 1 |
+    cr0Image2 = (uint)(byte)((tempArrayPos < 0) << 3 | (0 < tempArrayPos) << 2 | (tempArrayPos == 0) << 1 |
                            in_xer_so & 1) << 0x1c;
 joined_r0x97bea678:
     if (!(bool)(bVar5 >> 5 & 1)) {
-      _free(local_80);
+      _free(tempNumbers);
     }
-    iVar22 = local_7c;
-    if (!(bool)((byte)((uint)local_58 >> 0x1d) & 1)) {
+    iVar22 = tempArrayPos;
+    if (!(bool)((byte)((uint)cr0Image2 >> 0x1d) & 1)) {
 LAB_97bee10c:
       _free(iVar22);
     }
@@ -3351,12 +3351,12 @@ LAB_97bf0cec:
     _free(outBuf);
     return (void *)0x0;
   }
-  local_5c = (uint)(byte)((local_80 < 0) << 3 | (0 < local_80) << 2 | (local_80 == 0) << 1 |
+  cr0Image = (uint)(byte)((tempNumbers < 0) << 3 | (0 < tempNumbers) << 2 | (tempNumbers == 0) << 1 |
                          in_xer_so & 1) << 0x1c;
-  local_58 = local_5c;
+  cr0Image2 = cr0Image;
 LAB_97bea7e0:
   loopIndex10 = 0;
-  local_8c = -1;
+  elementInArray = -1;
   if (0 < (int)tempCount) {
     do {
       iVar22 = loopIndex10 * 8;
@@ -3415,7 +3415,7 @@ LAB_97bea920:
         outCursor = (int *)((int)outCursor + copyEnd4);
       }
       else {
-        iVar9 = *(int *)(local_7c + (uint)*(ushort *)((int)puVar21 + iVar22 + 6) * 4);
+        iVar9 = *(int *)(tempArrayPos + (uint)*(ushort *)((int)puVar21 + iVar22 + 6) * 4);
         if (iVar9 == -1) {
           ch = 't';
           copyIndex2 = 0;
@@ -3427,7 +3427,7 @@ LAB_97bea920:
           } while (ch != '\0');
           outCursor = (int *)((int)outCursor + copyLength2);
           copyEnd4 = ((int (*)())_ncpy_97be5f58)(outCursor,*(undefined4 *)
-                                            (local_80 +
+                                            (tempNumbers +
                                             (uint)*(ushort *)((int)puVar21 + iVar22 + 6) * 4));
           outCursor = (int *)((int)outCursor + copyEnd4);
           uVar25 = puVar21[loopIndex10 * 2];
@@ -3437,7 +3437,7 @@ LAB_97bea920:
         else {
           if (iVar9 == 0) {
             ch = 't';
-            local_8c = 0;
+            elementInArray = 0;
             copyIndex2 = 0;
             do {
               *(char *)((int)outCursor + copyIndex2) = ch;
@@ -3447,7 +3447,7 @@ LAB_97bea920:
             } while (ch != '\0');
             outCursor = (int *)((int)outCursor + copyLength2);
             copyEnd3 = ((int (*)())_ncpy_97be5f58)(outCursor,*(undefined4 *)
-                                             (local_80 +
+                                             (tempNumbers +
                                              (uint)*(ushort *)((int)puVar21 + iVar22 + 6) * 4));
             ch = '[';
             copyIndex4 = 0;
@@ -3458,8 +3458,8 @@ LAB_97bea920:
               copyIndex4 = copyLength2;
             } while (ch != '\0');
             outCursor = (int *)((int)outCursor + copyLength2 + copyEnd3);
-            iVar22 = local_90 * 4;
-            copyEnd = ((int (*)())_ncpy_97be5f58)(outCursor,local_78[local_90]);
+            iVar22 = arrayIndex * 4;
+            copyEnd = ((int (*)())_ncpy_97be5f58)(outCursor,arraySizes[arrayIndex]);
             ch = ']';
             copyIndex2 = 0;
             do {
@@ -3474,12 +3474,12 @@ LAB_97bea920:
                                          uVar25 >> 0x1d);
           }
           else {
-            local_8c = local_8c + 1;
-            iVar22 = local_90 << 2;
+            elementInArray = elementInArray + 1;
+            iVar22 = arrayIndex << 2;
           }
-          if (local_8c + 1 == *(int *)(iVar22 + (int)local_78)) {
-            local_8c = -1;
-            local_90 = local_90 + 1;
+          if (elementInArray + 1 == *(int *)(iVar22 + (int)arraySizes)) {
+            elementInArray = -1;
+            arrayIndex = arrayIndex + 1;
           }
         }
       }
@@ -3498,7 +3498,7 @@ LAB_97beacc8:
       }
       else {
         if (puVar21[loopIndex10 * 2 + 2] >> 0x1d != uVar6) {
-          local_60 = "o intialize the Preprocessor";
+          dataBase = "o intialize the Preprocessor";
           ch = ';';
           copyIndex4 = 0;
           do {
@@ -3510,7 +3510,7 @@ LAB_97beacc8:
           bVar3 = true;
           goto LAB_97beacc8;
         }
-        if (local_8c == -1) {
+        if (elementInArray == -1) {
           ch = ',';
           copyIndex4 = 0;
           do {
@@ -3527,8 +3527,8 @@ LAB_97beacc8:
       loopIndex10 = uVar25;
     } while ((int)uVar25 < (int)tempCount);
   }
-  if (local_78 != (int *)0x0) {
-    _free(local_78);
+  if (arraySizes != (int *)0x0) {
+    _free(arraySizes);
     uVar26 = CONCAT44(extraout_r3,extraout_r4_02);
   }
   if ((tempCount != 0) && (!bVar2)) {
@@ -3866,13 +3866,13 @@ switchD_97beaef4_caseD_0:
   paramCount = program[10];
   nextIndex5 = program + program[0xb] * 2;
   if (paramCount == 0) {
-    bVar3 = local_88 == 0;
+    bVar3 = paramNumbers == 0;
     goto LAB_97bed528;
   }
   uVar20 = 0xffffffff;
   if ((int)paramCount < 1) {
 LAB_97beb670:
-    bVar3 = local_88 == 0;
+    bVar3 = paramNumbers == 0;
   }
   else {
     puVar11 = nextIndex5 + 1;
@@ -3887,64 +3887,64 @@ LAB_97beb670:
     } while (uVar23 != 0);
     if (uVar20 == 0xffffffff) goto LAB_97beb670;
     allocation2 = uVar20 * 4 + 4;
-    local_88 = _malloc(allocation2);
-    bVar1 = local_88 == 0;
-    local_84 = _malloc(allocation2);
-    if ((bVar1) || (bVar3 = false, uVar16 = extraout_r4_03, local_84 == 0)) {
-      bVar3 = local_84 == 0;
+    paramNumbers = _malloc(allocation2);
+    bVar1 = paramNumbers == 0;
+    paramArrayPos = _malloc(allocation2);
+    if ((bVar1) || (bVar3 = false, uVar16 = extraout_r4_03, paramArrayPos == 0)) {
+      bVar3 = paramArrayPos == 0;
 joined_r0x97beb668:
       if (!bVar1) {
-        _free(local_88);
+        _free(paramNumbers);
       }
       if (!bVar3) {
-        _free(local_84);
+        _free(paramArrayPos);
       }
 LAB_97bf0c18:
-      bVar5 = (byte)((uint)local_5c >> 0x18);
+      bVar5 = (byte)((uint)cr0Image >> 0x18);
       goto joined_r0x97bea678;
     }
   }
-  local_78 = (int *)0x0;
+  arraySizes = (int *)0x0;
   if (program[0xe] != 0) {
-    local_78 = (int *)_malloc(program[0xe] << 2);
+    arraySizes = (int *)_malloc(program[0xe] << 2);
     uVar16 = extraout_r4_04;
   }
-  uVar26 = CONCAT44(local_78,uVar16);
+  uVar26 = CONCAT44(arraySizes,uVar16);
   loopIndex = 0;
   iVar9 = -1;
-  local_a0 = 0xffffffff;
+  paramRegisterId = 0xffffffff;
   uVar20 = 0xffffffff;
-  piVar15 = local_78;
+  piVar15 = arraySizes;
   puVar11 = nextIndex5;
   if (0 < (int)paramCount) {
     do {
       if ((*puVar11 & 0x1f0000) != 0) {
         if (uVar20 == 0xffffffff) {
-          *(uint *)((uint)*(ushort *)((int)puVar11 + 6) * 4 + local_88) =
+          *(uint *)((uint)*(ushort *)((int)puVar11 + 6) * 4 + paramNumbers) =
                (uint)*(ushort *)((int)puVar11 + 6);
-          uVar26 = ((int (*)())_isParamArrayStart_97be9b80)(program,(uint)*(ushort *)((int)puVar11 + 6),&local_a0);
+          uVar26 = ((int (*)())_isParamArrayStart_97be9b80)(program,(uint)*(ushort *)((int)puVar11 + 6),&paramRegisterId);
           if ((int)((ulonglong)uVar26 >> 0x20) == 0) {
-            *(int *)(local_84 + (uint)*(ushort *)((int)puVar11 + 6) * 4) = iVar9;
+            *(int *)(paramArrayPos + (uint)*(ushort *)((int)puVar11 + 6) * 4) = iVar9;
           }
           else {
             uVar20 = (uint)*(ushort *)((int)puVar11 + 6);
-            *(undefined4 *)(local_84 + uVar20 * 4) = 0;
+            *(undefined4 *)(paramArrayPos + uVar20 * 4) = 0;
             iVar9 = 1;
           }
-          if (*(ushort *)((int)puVar11 + 6) == local_a0) {
+          if (*(ushort *)((int)puVar11 + 6) == paramRegisterId) {
 LAB_97beb790:
-            local_a0 = 0xffffffff;
+            paramRegisterId = 0xffffffff;
             *piVar15 = iVar9;
             uVar20 = 0xffffffff;
             piVar15 = piVar15 + 1;
             iVar9 = -1;
           }
         }
-        else if ((int)(uint)*(ushort *)((int)puVar11 + 6) <= (int)local_a0) {
-          *(uint *)((uint)*(ushort *)((int)puVar11 + 6) * 4 + local_88) = uVar20;
-          *(int *)(local_84 + (uint)*(ushort *)((int)puVar11 + 6) * 4) = iVar9;
+        else if ((int)(uint)*(ushort *)((int)puVar11 + 6) <= (int)paramRegisterId) {
+          *(uint *)((uint)*(ushort *)((int)puVar11 + 6) * 4 + paramNumbers) = uVar20;
+          *(int *)(paramArrayPos + (uint)*(ushort *)((int)puVar11 + 6) * 4) = iVar9;
           iVar9 = iVar9 + 1;
-          if (*(ushort *)((int)puVar11 + 6) == local_a0) goto LAB_97beb790;
+          if (*(ushort *)((int)puVar11 + 6) == paramRegisterId) goto LAB_97beb790;
         }
       }
       loopIndex = loopIndex + 1;
@@ -3952,13 +3952,13 @@ LAB_97beb790:
     } while (loopIndex < (int)paramCount);
   }
   loopIndex = 0;
-  local_90 = 0;
+  arrayIndex = 0;
   if (0 < (int)paramCount) {
     do {
       iVar9 = loopIndex * 8;
       uVar20 = nextIndex5[loopIndex * 2] >> 0x10 & 0x1f;
       if (uVar20 == 0) goto LAB_97bed4a8;
-      iVar10 = *(int *)(local_84 + (uint)*(ushort *)((int)nextIndex5 + iVar9 + 6) * 4);
+      iVar10 = *(int *)(paramArrayPos + (uint)*(ushort *)((int)nextIndex5 + iVar9 + 6) * 4);
       if (iVar10 == -1) {
         ch = 'P';
         copyIndex = 0;
@@ -3970,7 +3970,7 @@ LAB_97beb790:
         } while (ch != '\0');
         outCursor = (int *)((int)outCursor + copyLength);
         uVar26 = ((int (*)())_ncpy_97be5f58)(outCursor,*(undefined4 *)
-                                          (local_88 +
+                                          (paramNumbers +
                                           (uint)*(ushort *)((int)nextIndex5 + iVar9 + 6) * 4));
         outCursor = (int *)((int)outCursor + (int)((ulonglong)uVar26 >> 0x20));
         if (!bVar2) {
@@ -3989,7 +3989,7 @@ LAB_97beb790:
       }
       else if (iVar10 == 0) {
         ch = 'P';
-        local_8c = 0;
+        elementInArray = 0;
         copyIndex = 0;
         do {
           *(char *)((int)outCursor + copyIndex) = ch;
@@ -3999,7 +3999,7 @@ LAB_97beb790:
         } while (ch != '\0');
         outCursor = (int *)((int)outCursor + copyLength);
         copyEnd2 = ((int (*)())_ncpy_97be5f58)(outCursor,*(undefined4 *)
-                                          (local_88 +
+                                          (paramNumbers +
                                           (uint)*(ushort *)((int)nextIndex5 + iVar9 + 6) * 4));
         ch = '[';
         copyIndex = 0;
@@ -4010,7 +4010,7 @@ LAB_97beb790:
           copyIndex = copyLength4;
         } while (ch != '\0');
         outCursor = (int *)((int)outCursor + copyLength4 + copyEnd2);
-        uVar26 = ((int (*)())_ncpy_97be5f58)(outCursor,local_78[local_90]);
+        uVar26 = ((int (*)())_ncpy_97be5f58)(outCursor,arraySizes[arrayIndex]);
         ch = ']';
         outBytePtr = (undefined1 *)((int)outCursor + (int)((ulonglong)uVar26 >> 0x20));
         copyIndex = 0;
@@ -4037,7 +4037,7 @@ LAB_97beb790:
       }
       else {
         ch = ' ';
-        local_8c = local_8c + 1;
+        elementInArray = elementInArray + 1;
         copyIndex = 0;
         do {
           *(char *)((int)outCursor + copyIndex) = ch;
@@ -4976,7 +4976,7 @@ LAB_97bed34c:
       }
       outCursor = (int *)((int)outCursor + nextIndex2);
 switchD_97bebb8c_caseD_0:
-      if (*(int *)(local_84 + (uint)*(ushort *)((int)nextIndex5 + iVar9 + 6) * 4) == -1) {
+      if (*(int *)(paramArrayPos + (uint)*(ushort *)((int)nextIndex5 + iVar9 + 6) * 4) == -1) {
         ch = ';';
         copyIndex2 = 0;
         do {
@@ -4986,9 +4986,9 @@ switchD_97bebb8c_caseD_0:
           copyIndex2 = copyLength2;
         } while (ch != '\0');
       }
-      else if (local_8c + 1 == local_78[local_90]) {
+      else if (elementInArray + 1 == arraySizes[arrayIndex]) {
         ch = '\n';
-        local_90 = local_90 + 1;
+        arrayIndex = arrayIndex + 1;
         copyIndex2 = 0;
         do {
           *(char *)((int)outCursor + copyIndex2) = ch;
@@ -5015,8 +5015,8 @@ LAB_97bed4a8:
       loopIndex = loopIndex + 1;
     } while (loopIndex < (int)paramCount);
   }
-  if (local_78 != (int *)0x0) {
-    _free(local_78);
+  if (arraySizes != (int *)0x0) {
+    _free(arraySizes);
     uVar26 = CONCAT44(extraout_r3_00,extraout_r4_05);
   }
   ch = '\n';
@@ -5333,8 +5333,8 @@ LAB_97bedcb4:
     allocation2 = local_6c << 2;
     loopIndex2 = 0;
     loopIndex4 = 0;
-    local_74 = _malloc(allocation2);
-    _memset(local_74,0,local_6c);
+    reserved9 = _malloc(allocation2);
+    _memset(reserved9,0,local_6c);
     local_70 = _malloc(allocation2);
     memsetResult = _memset(local_70,0,local_6c);
     uVar26 = CONCAT44(memsetResult,extraout_r4_06);
@@ -5344,7 +5344,7 @@ LAB_97bedcb4:
       do {
         uVar19 = program[instructionOffset * 2 + loopIndex4 * 2];
         if ((uVar19 >> 0x12 & 0xff) - 0x4b < 2) {
-          uVar26 = ((int (*)())_InsertLabel)(local_74,local_70,program[instructionOffset * 2 + loopIndex4 * 2 + 1] & 0x3ffff,
+          uVar26 = ((int (*)())_InsertLabel)(reserved9,local_70,program[instructionOffset * 2 + loopIndex4 * 2 + 1] & 0x3ffff,
                                 uVar19 & 0x3ffff,local_6c);
           local_6c = (int)((ulonglong)uVar26 >> 0x20);
           uVar19 = program[instructionOffset * 2 + loopIndex4 * 2];
@@ -5358,7 +5358,7 @@ LAB_97bedcb4:
   loopIndex = 0;
   loopIndex5 = 0;
   if (0 < (int)instructionCount) {
-    puVar21 = (uint *)(local_68 * 4 + local_74);
+    puVar21 = (uint *)(nextLabelNumber * 4 + reserved9);
     do {
       if (((program[instructionOffset * 2 + loopIndex5 * 2] & 0x3ffff) == 0) && (!bVar2)) {
         ch = 'm';
@@ -5371,11 +5371,11 @@ LAB_97bedcb4:
         } while (ch != '\0');
         outCursor = (int *)((int)outCursor + copyLength);
       }
-      if (((!bVar4) && (local_68 < local_6c)) &&
+      if (((!bVar4) && (nextLabelNumber < local_6c)) &&
          ((program[instructionOffset * 2 + loopIndex5 * 2] & 0x3ffff) == *puVar21)) {
         loopIndex3 = 0;
-        local_9c = local_9c + -1;
-        if (0 < local_9c) {
+        indentDepth = indentDepth + -1;
+        if (0 < indentDepth) {
           do {
             ch = ' ';
             copyIndex3 = 0;
@@ -5387,7 +5387,7 @@ LAB_97bedcb4:
             } while (ch != '\0');
             loopIndex3 = loopIndex3 + 1;
             outCursor = (int *)((int)outCursor + copyLength4);
-          } while (loopIndex3 < local_9c);
+          } while (loopIndex3 < indentDepth);
         }
         ch = 'l';
         copyIndex = 0;
@@ -5398,9 +5398,9 @@ LAB_97bedcb4:
           copyIndex = copyLength;
         } while (ch != '\0');
         outCursor = (int *)((int)outCursor + copyLength);
-        copyEnd2 = ((int (*)())_ncpy_97be5f58)(outCursor,local_68);
+        copyEnd2 = ((int (*)())_ncpy_97be5f58)(outCursor,nextLabelNumber);
         ch = ':';
-        local_68 = local_68 + 1;
+        nextLabelNumber = nextLabelNumber + 1;
         puVar21 = puVar21 + 1;
         copyIndex = 0;
         do {
@@ -5410,31 +5410,31 @@ LAB_97bedcb4:
           copyIndex = nextIndex3;
         } while (ch != '\0');
         outCursor = (int *)((int)outCursor + nextIndex3 + copyEnd2);
-        local_9c = local_9c + 1;
+        indentDepth = indentDepth + 1;
       }
       uVar19 = program[instructionOffset * 2 + loopIndex5 * 2] >> 0x12 & 0xff;
       if (((uVar19 == 0x6b) || (uVar19 == 0x58)) ||
          ((uVar19 == 0x59 || ((uVar19 == 0x5a || (uVar19 == 0x5b)))))) {
-        local_9c = local_9c + -1;
+        indentDepth = indentDepth + -1;
       }
-      ((int (*)())_glpDisassemble1Op)(program + instructionOffset * 2 + loopIndex5 * 2,outCursor,&local_98,&local_94,local_88,
-                         local_84,local_80,local_7c,local_74,&local_9c,local_64);
-      outCursor = (int *)((int)outCursor + local_94);
-      loopIndex5 = loopIndex5 + local_98;
+      ((int (*)())_glpDisassemble1Op)(program + instructionOffset * 2 + loopIndex5 * 2,outCursor,&outWordCount,&outTextLength,paramNumbers,
+                         paramArrayPos,tempNumbers,tempArrayPos,reserved9,&indentDepth,printOptions);
+      outCursor = (int *)((int)outCursor + outTextLength);
+      loopIndex5 = loopIndex5 + outWordCount;
       uVar26 = ((int (*)())_adjustAllocation_97be9cb4)(&outBufCapacity,&outBuf,&outCursor);
       if ((int)((ulonglong)uVar26 >> 0x20) == 0) {
         if (!bVar3) {
-          _free(local_88);
-          _free(local_84);
+          _free(paramNumbers);
+          _free(paramArrayPos);
         }
-        if (!(bool)((byte)((uint)local_5c >> 0x1d) & 1)) {
-          _free(local_80);
+        if (!(bool)((byte)((uint)cr0Image >> 0x1d) & 1)) {
+          _free(tempNumbers);
         }
-        if (!(bool)((byte)((uint)local_58 >> 0x1d) & 1)) {
-          _free(local_7c);
+        if (!(bool)((byte)((uint)cr0Image2 >> 0x1d) & 1)) {
+          _free(tempArrayPos);
         }
         if (bVar4) goto LAB_97bf0cec;
-        _free(local_74);
+        _free(reserved9);
         iVar22 = local_70;
         goto LAB_97bee10c;
       }
@@ -5443,7 +5443,7 @@ LAB_97bedcb4:
     } while (loopIndex < (int)instructionCount);
   }
   if (!bVar4) {
-    if ((local_68 < local_6c) && (loopIndex + 1 == *(int *)(local_74 + local_68 * 4))) {
+    if ((nextLabelNumber < local_6c) && (loopIndex + 1 == *(int *)(reserved9 + nextLabelNumber * 4))) {
       ch = ' ';
       copyIndex4 = 0;
       do {
@@ -5453,7 +5453,7 @@ LAB_97bedcb4:
         copyIndex4 = copyLength3;
       } while (ch != '\0');
       outCursor = (int *)((int)outCursor + copyLength3);
-      copyEnd3 = ((int (*)())_ncpy_97be5f58)(outCursor,local_68);
+      copyEnd3 = ((int (*)())_ncpy_97be5f58)(outCursor,nextLabelNumber);
       ch = ':';
       copyIndex4 = 0;
       do {
@@ -5464,7 +5464,7 @@ LAB_97bedcb4:
       } while (ch != '\0');
       outCursor = (int *)((int)outCursor + copyLength2 + copyEnd3);
     }
-    _free(local_74);
+    _free(reserved9);
     _free(local_70);
     uVar26 = CONCAT44(extraout_r3_01,extraout_r4_07);
   }
@@ -5482,7 +5482,7 @@ LAB_97bedcb4:
   outCursor = (int *)((int)outCursor + copyLength3);
   loopIndex5 = 0;
   if (0 < (int)stateCount) {
-    local_60 = "o intialize the Preprocessor";
+    dataBase = "o intialize the Preprocessor";
     do {
       ch = 'S';
       uVar20 = program[stateOffset * 2 + loopIndex5 * 2];
@@ -7135,11 +7135,11 @@ switchD_97befd84_default:
       outCursor = (int *)((int)outCursor + nextIndex);
 switchD_97bee2f0_default:
       copyIndex6 = 0;
-      ch = local_60[0x3bbc];
+      ch = dataBase[0x3bbc];
       while (ch != '\0') {
         *(char *)((int)outCursor + copyIndex6) = ch;
         copyIndex6 = copyIndex6 + 1;
-        ch = (local_60 + 0x3bbc)[copyIndex6];
+        ch = (dataBase + 0x3bbc)[copyIndex6];
       }
       outCursor = (int *)((int)outCursor + copyIndex6);
       uVar26 = ((int (*)())_adjustAllocation_97be9cb4)(&outBufCapacity,&outBuf,&outCursor);
@@ -7152,14 +7152,14 @@ switchD_97bee2f0_default:
   *(undefined1 *)outCursor = 0;
   outCursor = piVar15;
   if (!bVar3) {
-    _free(local_88);
-    _free(local_84);
+    _free(paramNumbers);
+    _free(paramArrayPos);
   }
-  if (!(bool)((byte)((uint)local_5c >> 0x1d) & 1)) {
-    _free(local_80);
+  if (!(bool)((byte)((uint)cr0Image >> 0x1d) & 1)) {
+    _free(tempNumbers);
   }
-  if (!(bool)((byte)((uint)local_58 >> 0x1d) & 1)) {
-    _free(local_7c);
+  if (!(bool)((byte)((uint)cr0Image2 >> 0x1d) & 1)) {
+    _free(tempArrayPos);
   }
   if (0 < (int)outCursor - (int)outBuf) {
     allocation = (void *)_realloc(outBuf,(int)outCursor - (int)outBuf);
