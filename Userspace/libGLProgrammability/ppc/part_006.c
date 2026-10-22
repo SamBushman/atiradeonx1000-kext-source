@@ -1643,6 +1643,17 @@ int yyparse(parseContext, scratchR4, scratchR5, scratchR6, scratchR7, scratchR8,
   undefined *scratchR9;
   uint scratchR10;
 {
+  int loopIndex4;
+  int stringData3;
+  int stringData2;
+  uint loopIndex3;
+  int *symbolTable2;
+  uint qualifierBits2;
+  unsigned char * newType3;
+  int loopIndex2;
+  uint loopIndex;
+  int *symbolTable;
+  int stringData;
   uint functionPrototypeTypeOrFunction;
   unsigned char * newTypedNode;
   uint expressionNode;
@@ -1726,7 +1737,7 @@ int yyparse(parseContext, scratchR4, scratchR5, scratchR6, scratchR7, scratchR8,
   unsigned char * this;
   unsigned char * pcVar9;
   unsigned char * stackNode;
-  unsigned char * psVar10;
+  unsigned char * newString;
   unsigned char * paVar11;
   unsigned char * pTVar12;
   void *pvVar13;
@@ -1807,7 +1818,7 @@ int yyparse(parseContext, scratchR4, scratchR5, scratchR6, scratchR7, scratchR8,
   int yystateOrYylen;
   undefined4 uVar49;
   int *piVar50;
-  unsigned char * pvVar51;
+  unsigned char * symbolTable3;
   unsigned char * structDeclarationListTypeOrFunction;
   uint uVar53;
   int iVar54;
@@ -2003,7 +2014,7 @@ int yyparse(parseContext, scratchR4, scratchR5, scratchR6, scratchR7, scratchR8,
   unsigned char * pTStack_70;
   int yyruleByteOffset;
   undefined *local_68;
-  unsigned char * local_64;
+  unsigned char * picBase3;
   unsigned char * yyssBytes;
   unsigned char * picBase2;
   int *local_58;
@@ -2163,13 +2174,13 @@ LAB_97ba3970:
     if (pTVar3 == (unsigned char *)0x0) {
       identifierString = *(uint *)(yyvsp + 4);
       picBase = (unsigned char *)0xa7b8374c;
-      iVar55 = *(int *)(identifierString + 4);
+      stringData = *(int *)(identifierString + 4);
       emptyText = "";
       pcVar62 = "undeclared identifier";
-      *(unsigned char *)(iVar55 + *(int *)(iVar55 + -0xc)) = *DAT_a7b7ba88;
+      *(unsigned char *)(stringData + *(int *)(stringData + -0xc)) = *DAT_a7b7ba88;
       pcVar29 = *(char **)(identifierString + 4);
       TParseContext__error
-                ((int)parseContext,*(char **)yyvsp,"undeclared identifier",pcVar29,"",pTVar33,iVar55,
+                ((int)parseContext,*(char **)yyvsp,"undeclared identifier",pcVar29,"",pTVar33,stringData,
                  identifierString);
       TParseContext__recover(parseContext);
       picBase2 = (unsigned char *)0xa7b8374c;
@@ -2213,15 +2224,15 @@ LAB_97ba3970:
       *(uint *)(pTVar7 + 0x34) = 0;
       *(uint *)(pTVar7 + 0x38) = 0;
       *(uint *)(pTVar7 + 0x3c) = 0;
-      piVar61 = *(int **)((int)parseContext + 4);
-      iVar55 = piVar61[3];
-      piVar61[3] = iVar55 + 1U;
+      symbolTable = *(int **)((int)parseContext + 4);
+      iVar55 = symbolTable[3];
+      symbolTable[3] = iVar55 + 1U;
       *(uint *)(pTVar7 + 8) = iVar55 + 1U;
-      uVar16 = *(undefined4 *)(*piVar61 + ((piVar61[1] - *piVar61 & 0xfffffffcU) - 4));
+      uVar16 = *(undefined4 *)(*symbolTable + ((symbolTable[1] - *symbolTable & 0xfffffffcU) - 4));
       local_81c = pTVar3;
       psVar21 = (unsigned char *)
                 (**(code **)(*(uint *)pTVar7 + 8))
-                          (pTVar7,(int)uVar64,pcVar62,pcVar29,emptyText,pTVar33,piVar61);
+                          (pTVar7,(int)uVar64,pcVar62,pcVar29,emptyText,pTVar33,symbolTable);
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&local_800,psVar21);
       local_7f8 = pTVar7;
       std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_810,uVar16,&local_800);
@@ -2249,11 +2260,11 @@ LAB_97ba3970:
       if (iVar55 == 0) {
         identifierString = *(uint *)(yyvsp + 4);
         picBase = (unsigned char *)0xa7b8374c;
-        iVar55 = *(int *)(identifierString + 4);
-        *(unsigned char *)(iVar55 + *(int *)(iVar55 + -0xc)) = *DAT_a7b7ba88;
+        stringData = *(int *)(identifierString + 4);
+        *(unsigned char *)(stringData + *(int *)(stringData + -0xc)) = *DAT_a7b7ba88;
         TParseContext__error
                   ((int)parseContext,*(char **)yyvsp,"variable expected",*(char **)(identifierString + 4),"",
-                   pTVar33,iVar55,identifierString);
+                   pTVar33,stringData,identifierString);
         TParseContext__recover(parseContext);
       }
     }
@@ -2784,7 +2795,7 @@ LAB_97ba4bc0:
           scratchR6 = "Internal Error";
           goto LAB_97ba5548;
         }
-        uVar57 = 0;
+        loopIndex = 0;
         uVar16 = r4Out7;
         goto LAB_97ba55dc;
       }
@@ -3172,9 +3183,9 @@ switchD_97ba39c8_caseD_6:
       piVar61 = (int *)(**(code **)(*(unsigned char **)yyvalNode + 0x1c))(yyvalNode);
       this = (unsigned char *)(**(code **)(*piVar61 + 0x78))(piVar61);
       piVar61 = r4Out11;
-      for (iVar55 = 0; iVar55 < (int)(*(uint *)(pTVar3 + 0x14) - *(uint *)(pTVar3 + 0x10)) >> 3;
-          iVar55 = iVar55 + 1) {
-        piVar50 = *(int **)(*(uint *)(pTVar3 + 0x10) + iVar55 * 8 + 4);
+      for (loopIndex2 = 0; loopIndex2 < (int)(*(uint *)(pTVar3 + 0x14) - *(uint *)(pTVar3 + 0x10)) >> 3;
+          loopIndex2 = loopIndex2 + 1) {
+        piVar50 = *(int **)(*(uint *)(pTVar3 + 0x10) + loopIndex2 * 8 + 4);
         iVar54 = *piVar50;
         iVar54 = (**(code **)(iVar54 + 0x24))
                            (piVar50,piVar61,pcVar62,scratchR6,scratchR7,pTVar33,iVar54);
@@ -3182,7 +3193,7 @@ switchD_97ba39c8_caseD_6:
           piVar61 = (int *)(**(code **)(*(unsigned char **)yyvalNode + 0x1c))(yyvalNode);
           iVar60 = (**(code **)(*piVar61 + 100))(piVar61);
           iVar6 = *(int *)(iVar60 + 4);
-          piVar61 = *(int **)(iVar6 + iVar55 * 4);
+          piVar61 = *(int **)(iVar6 + loopIndex2 * 4);
           scratchR6 = (char *)(**(code **)(*piVar61 + 0x14))
                                       (piVar61,r4In8,pcVar62,scratchR6,scratchR7,pTVar33,iVar6);
           iVar60 = (**(code **)*(unsigned char **)yyvalNode)(yyvalNode);
@@ -3327,14 +3338,14 @@ LAB_97ba5e64:
     iVar55 = *(int *)(local_84c + 0x14);
     if (iVar55 == 0) {
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-      psVar10 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
-      cr0 = (psVar10 == (unsigned char *)0x0) << 1;
+      newString = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
+      cr0 = (newString == (unsigned char *)0x0) << 1;
       psVar21 = (unsigned char *)0x0;
-      if (psVar10 != (unsigned char *)0x0) {
+      if (newString != (unsigned char *)0x0) {
         local_6b0[0] = GetGlobalPoolAllocator();
-        __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(psVar10,"",(unsigned char *)local_6b0)
+        __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(newString,"",(unsigned char *)local_6b0)
         ;
-        psVar21 = psVar10;
+        psVar21 = newString;
       }
       *(unsigned char **)(pTVar3 + 0x14) = psVar21;
       ((int (*)())TType__buildMangledName)((unsigned char *)pTVar3,psVar21);
@@ -3392,14 +3403,14 @@ LAB_97ba5e64:
     iVar55 = *(int *)(local_84c + 0x14);
     if (iVar55 == 0) {
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-      psVar10 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
-      cr0 = (psVar10 == (unsigned char *)0x0) << 1;
+      newString = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
+      cr0 = (newString == (unsigned char *)0x0) << 1;
       psVar21 = (unsigned char *)0x0;
-      if (psVar10 != (unsigned char *)0x0) {
+      if (newString != (unsigned char *)0x0) {
         local_690[0] = GetGlobalPoolAllocator();
-        __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(psVar10,"",(unsigned char *)local_690)
+        __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(newString,"",(unsigned char *)local_690)
         ;
-        psVar21 = psVar10;
+        psVar21 = newString;
       }
       *(unsigned char **)(pTVar3 + 0x14) = psVar21;
       ((int (*)())TType__buildMangledName)((unsigned char *)pTVar3,psVar21);
@@ -5172,10 +5183,10 @@ LAB_97ba82e8:
     }
     break;
   case 0x62:
-    piVar61 = *(int **)((int)parseContext + 4);
+    symbolTable = *(int **)((int)parseContext + 4);
     pcVar62 = (char *)(**(code **)(**(int **)(yyvsp + -0x1c) + 8))(*(int **)(yyvsp + -0x1c));
-    iVar55 = *piVar61;
-    iVar54 = (piVar61[1] - iVar55 >> 2) + -1;
+    iVar55 = *symbolTable;
+    iVar54 = (symbolTable[1] - iVar55 >> 2) + -1;
     goto LAB_97ba8338;
   case 99:
   case 100:
@@ -5217,14 +5228,14 @@ LAB_97ba86ec:
     iVar55 = *(int *)(pTVar12 + 0x14);
     if (iVar55 == 0) {
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-      psVar10 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
-      cr0 = (psVar10 == (unsigned char *)0x0) << 1;
+      newString = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
+      cr0 = (newString == (unsigned char *)0x0) << 1;
       psVar21 = (unsigned char *)0x0;
-      if (psVar10 != (unsigned char *)0x0) {
+      if (newString != (unsigned char *)0x0) {
         local_2f0[0] = GetGlobalPoolAllocator();
-        __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(psVar10,"",(unsigned char *)local_2f0)
+        __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(newString,"",(unsigned char *)local_2f0)
         ;
-        psVar21 = psVar10;
+        psVar21 = newString;
       }
       *(unsigned char **)(pTVar12 + 0x14) = psVar21;
       ((int (*)())TType__buildMangledName)(pTVar12,psVar21);
@@ -5294,14 +5305,14 @@ LAB_97ba8824:
     iVar55 = *(int *)(parameterDeclarationQualifierOrParamType2 + 0x14);
     if (iVar55 == 0) {
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-      psVar10 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
-      cr0 = (psVar10 == (unsigned char *)0x0) << 1;
+      newString = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
+      cr0 = (newString == (unsigned char *)0x0) << 1;
       psVar21 = (unsigned char *)0x0;
-      if (psVar10 != (unsigned char *)0x0) {
+      if (newString != (unsigned char *)0x0) {
         local_2d0[0] = GetGlobalPoolAllocator();
-        __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(psVar10,"",(unsigned char *)local_2d0)
+        __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(newString,"",(unsigned char *)local_2d0)
         ;
-        psVar21 = psVar10;
+        psVar21 = newString;
       }
       *(unsigned char **)(parameterDeclarationQualifierOrParamType2 + 0x14) = psVar21;
       ((int (*)())TType__buildMangledName)(parameterDeclarationQualifierOrParamType2,psVar21);
@@ -5446,11 +5457,11 @@ LAB_97ba8824:
     if (*(uint *)(yyvsp + -0x1c) == 0) {
       identifierString = *(uint *)(yyvsp + 4);
       picBase = (unsigned char *)0xa7b8374c;
-      iVar55 = *(int *)(identifierString + 4);
-      *(unsigned char *)(iVar55 + *(int *)(iVar55 + -0xc)) = *DAT_a7b7ba88;
+      stringData = *(int *)(identifierString + 4);
+      *(unsigned char *)(stringData + *(int *)(stringData + -0xc)) = *DAT_a7b7ba88;
       TParseContext__error
                 ((int)parseContext,*(char **)yyvsp,"illegal use of type \'void\'",
-                 *(char **)(identifierString + 4),"",pTVar33,iVar55,identifierString);
+                 *(char **)(identifierString + 4),"",pTVar33,stringData,identifierString);
       TParseContext__recover(parseContext);
     }
     reservedError = TParseContext__reservedErrorCheck(parseContext,*(uint *)yyvsp,*(unsigned char **)(yyvsp + 4));
@@ -5460,7 +5471,7 @@ LAB_97ba8824:
     local_840 = *(unsigned char **)(yyvsp + 4);
     picBase2 = (unsigned char *)0xa7b8374c;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-    pTVar12 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
+    newType3 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
     local_830 = *(unsigned char **)(yyvsp + -0x1c);
     local_82c = *(unsigned char **)(yyvsp + -0x18);
     typeSpecifierSize = *(unsigned char **)(yyvsp + -0x14);
@@ -5468,26 +5479,26 @@ LAB_97ba8824:
     scratchR7 = *(char **)(yyvsp + -0xc);
     scratchR6 = *(char **)(yyvsp + -8);
     local_818 = *(unsigned char **)(yyvsp + -4);
-    *(unsigned char **)pTVar12 = picBase2 + -0x610c;
-    *(undefined4 *)(pTVar12 + 0x20) = 0;
-    *(undefined4 *)(pTVar12 + 4) = 0;
-    *(undefined4 *)(pTVar12 + 8) = 0;
-    *(undefined4 *)(pTVar12 + 0xc) = 0;
-    *(undefined4 *)(pTVar12 + 0x10) = 0;
-    *(undefined4 *)(pTVar12 + 0x14) = 0;
-    *(undefined4 *)(pTVar12 + 0x18) = 0;
-    *(undefined4 *)(pTVar12 + 0x1c) = 0;
-    uVar2 = *(uint *)(pTVar12 + 0x24);
-    uVar57 = (int)local_82c << 0x19;
-    *(uint *)(pTVar12 + 0x24) = uVar57 | uVar2 & 0x1ffffff;
+    *(unsigned char **)newType3 = picBase2 + -0x610c;
+    *(undefined4 *)(newType3 + 0x20) = 0;
+    *(undefined4 *)(newType3 + 4) = 0;
+    *(undefined4 *)(newType3 + 8) = 0;
+    *(undefined4 *)(newType3 + 0xc) = 0;
+    *(undefined4 *)(newType3 + 0x10) = 0;
+    *(undefined4 *)(newType3 + 0x14) = 0;
+    *(undefined4 *)(newType3 + 0x18) = 0;
+    *(undefined4 *)(newType3 + 0x1c) = 0;
+    uVar2 = *(uint *)(newType3 + 0x24);
+    qualifierBits2 = (int)local_82c << 0x19;
+    *(uint *)(newType3 + 0x24) = qualifierBits2 | uVar2 & 0x1ffffff;
     basicTypeBits2 = ((uint)local_830 & 0x3f) << 0x13;
-    *(uint *)(pTVar12 + 0x24) = basicTypeBits2 | uVar57 | uVar2 & 0x7ffff;
+    *(uint *)(newType3 + 0x24) = basicTypeBits2 | qualifierBits2 | uVar2 & 0x7ffff;
     sizeBits = ((uint)typeSpecifierSize & 0xff) << 0xb;
-    *(uint *)(pTVar12 + 0x24) = sizeBits | basicTypeBits2 | uVar57 | uVar2 & 0x7ff;
+    *(uint *)(newType3 + 0x24) = sizeBits | basicTypeBits2 | qualifierBits2 | uVar2 & 0x7ff;
     uVar58 = ((uint)typeSpecifierMatrix & 1) << 10;
-    *(uint *)(pTVar12 + 0x24) = uVar58 | sizeBits | basicTypeBits2 | uVar57 | uVar2 & 0x3ff;
-    *(uint *)(pTVar12 + 0x24) =
-         ((uint)scratchR7 & 1) << 9 | uVar58 | sizeBits | basicTypeBits2 | uVar57 | uVar2 & 0x1ff;
+    *(uint *)(newType3 + 0x24) = uVar58 | sizeBits | basicTypeBits2 | qualifierBits2 | uVar2 & 0x3ff;
+    *(uint *)(newType3 + 0x24) =
+         ((uint)scratchR7 & 1) << 9 | uVar58 | sizeBits | basicTypeBits2 | qualifierBits2 | uVar2 & 0x1ff;
     local_820 = (unsigned char *)scratchR7;
     local_81c = (unsigned char *)scratchR6;
     local_810 = local_830;
@@ -5499,9 +5510,9 @@ LAB_97ba8824:
     local_7f8 = local_818;
     if ((unsigned char *)scratchR6 != (unsigned char *)0x0) {
       picBase = (unsigned char *)0xa7b8374c;
-      *(uint *)(pTVar12 + 8) = *(uint *)(scratchR6 + 8);
-      uVar16 = TType__setStructSize(pTVar12,*(unsigned char **)(scratchR6 + 8));
-      *(undefined4 *)(pTVar12 + 0x18) = uVar16;
+      *(uint *)(newType3 + 8) = *(uint *)(scratchR6 + 8);
+      uVar16 = TType__setStructSize(newType3,*(unsigned char **)(scratchR6 + 8));
+      *(undefined4 *)(newType3 + 0x18) = uVar16;
       iVar55 = (**(code **)(*(uint *)local_7fc + 0x18))(local_7fc);
       *(undefined1 *)(*(int *)(iVar55 + 4) + *(int *)(*(int *)(iVar55 + 4) + -0xc)) =
            **(undefined1 **)(picBase + -0x7cc4);
@@ -5516,15 +5527,15 @@ LAB_97ba8824:
                   (pvVar13,pcVar62,(unsigned char *)local_290);
         pvVar23 = pvVar13;
       }
-      *(void **)(pTVar12 + 0x10) = pvVar23;
+      *(void **)(newType3 + 0x10) = pvVar23;
     }
     local_850 = local_840;
     yyval = *(uint *)yyvsp;
     pTVar3 = yyvalNode;
     yyvalTypeOrFunction = local_850;
-    yyvalQualifierOrParamType = (unsigned char *)pTVar12;
-    local_84c = (unsigned char *)pTVar12;
-    local_83c = (unsigned char *)pTVar12;
+    yyvalQualifierOrParamType = (unsigned char *)newType3;
+    local_84c = (unsigned char *)newType3;
+    local_83c = (unsigned char *)newType3;
     pTVar31 = local_7f0;
     pTVar32 = local_750[0];
     break;
@@ -5618,7 +5629,7 @@ LAB_97ba8824:
     }
     *(uint *)(yyvsp + -0x90) = 1;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-    pTVar12 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
+    newType3 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
     local_850 = *(unsigned char **)(yyvsp + -0xa0);
     typeSpecifierQualifierOrParamType2 = *(unsigned char **)(yyvsp + -0x9c);
     local_848 = *(unsigned char **)(yyvsp + -0x98);
@@ -5626,26 +5637,26 @@ LAB_97ba8824:
     scratchR7 = *(char **)(yyvsp + -0x90);
     scratchR6 = *(char **)(yyvsp + -0x8c);
     typeSpecifierTypeLine2 = *(unsigned char **)(yyvsp + -0x88);
-    *(unsigned char **)pTVar12 = picBase2 + -0x610c;
-    *(undefined4 *)(pTVar12 + 0x20) = 0;
-    *(undefined4 *)(pTVar12 + 4) = 0;
-    *(undefined4 *)(pTVar12 + 8) = 0;
-    *(undefined4 *)(pTVar12 + 0xc) = 0;
-    *(undefined4 *)(pTVar12 + 0x10) = 0;
-    *(undefined4 *)(pTVar12 + 0x14) = 0;
-    *(undefined4 *)(pTVar12 + 0x18) = 0;
-    *(undefined4 *)(pTVar12 + 0x1c) = 0;
-    uVar2 = *(uint *)(pTVar12 + 0x24);
-    uVar57 = (int)typeSpecifierQualifierOrParamType2 << 0x19;
-    *(uint *)(pTVar12 + 0x24) = uVar57 | uVar2 & 0x1ffffff;
+    *(unsigned char **)newType3 = picBase2 + -0x610c;
+    *(undefined4 *)(newType3 + 0x20) = 0;
+    *(undefined4 *)(newType3 + 4) = 0;
+    *(undefined4 *)(newType3 + 8) = 0;
+    *(undefined4 *)(newType3 + 0xc) = 0;
+    *(undefined4 *)(newType3 + 0x10) = 0;
+    *(undefined4 *)(newType3 + 0x14) = 0;
+    *(undefined4 *)(newType3 + 0x18) = 0;
+    *(undefined4 *)(newType3 + 0x1c) = 0;
+    uVar2 = *(uint *)(newType3 + 0x24);
+    qualifierBits2 = (int)typeSpecifierQualifierOrParamType2 << 0x19;
+    *(uint *)(newType3 + 0x24) = qualifierBits2 | uVar2 & 0x1ffffff;
     basicTypeBits2 = ((uint)local_850 & 0x3f) << 0x13;
-    *(uint *)(pTVar12 + 0x24) = basicTypeBits2 | uVar57 | uVar2 & 0x7ffff;
+    *(uint *)(newType3 + 0x24) = basicTypeBits2 | qualifierBits2 | uVar2 & 0x7ffff;
     sizeBits = ((uint)local_848 & 0xff) << 0xb;
-    *(uint *)(pTVar12 + 0x24) = sizeBits | basicTypeBits2 | uVar57 | uVar2 & 0x7ff;
+    *(uint *)(newType3 + 0x24) = sizeBits | basicTypeBits2 | qualifierBits2 | uVar2 & 0x7ff;
     uVar58 = ((uint)local_844 & 1) << 10;
-    *(uint *)(pTVar12 + 0x24) = uVar58 | sizeBits | basicTypeBits2 | uVar57 | uVar2 & 0x3ff;
-    *(uint *)(pTVar12 + 0x24) =
-         ((uint)scratchR7 & 1) << 9 | uVar58 | sizeBits | basicTypeBits2 | uVar57 | uVar2 & 0x1ff;
+    *(uint *)(newType3 + 0x24) = uVar58 | sizeBits | basicTypeBits2 | qualifierBits2 | uVar2 & 0x3ff;
+    *(uint *)(newType3 + 0x24) =
+         ((uint)scratchR7 & 1) << 9 | uVar58 | sizeBits | basicTypeBits2 | qualifierBits2 | uVar2 & 0x1ff;
     local_840 = (unsigned char *)scratchR7;
     local_83c = (unsigned char *)scratchR6;
     local_830 = local_850;
@@ -5657,9 +5668,9 @@ LAB_97ba8824:
     local_818 = typeSpecifierTypeLine2;
     if ((unsigned char *)scratchR6 != (unsigned char *)0x0) {
       picBase = (unsigned char *)0xa7b8374c;
-      *(uint *)(pTVar12 + 8) = *(uint *)(scratchR6 + 8);
-      uVar16 = TType__setStructSize(pTVar12,*(unsigned char **)(scratchR6 + 8));
-      *(undefined4 *)(pTVar12 + 0x18) = uVar16;
+      *(uint *)(newType3 + 8) = *(uint *)(scratchR6 + 8);
+      uVar16 = TType__setStructSize(newType3,*(unsigned char **)(scratchR6 + 8));
+      *(undefined4 *)(newType3 + 0x18) = uVar16;
       iVar55 = (**(code **)(*(uint *)local_81c + 0x18))(local_81c);
       *(undefined1 *)(*(int *)(iVar55 + 4) + *(int *)(*(int *)(iVar55 + 4) + -0xc)) =
            **(undefined1 **)(picBase + -0x7cc4);
@@ -5674,23 +5685,23 @@ LAB_97ba8824:
                   (pvVar13,pcVar62,(unsigned char *)local_260);
         pvVar23 = pvVar13;
       }
-      *(void **)(pTVar12 + 0x10) = pvVar23;
+      *(void **)(newType3 + 0x10) = pvVar23;
     }
     constantUnion = (**(code **)(**(int **)(yyvsp + -0x24) + 0x18))(*(int **)(yyvsp + -0x24));
     if (constantUnion != 0) {
       constantUnion = (**(code **)(**(int **)(yyvsp + -0x24) + 0x18))(*(int **)(yyvsp + -0x24));
       uVar16 = **(undefined4 **)(constantUnion + 0x30);
-      *(uint *)(pTVar12 + 0x24) = *(uint *)(pTVar12 + 0x24) | 0x200;
-      *(undefined4 *)(pTVar12 + 4) = uVar16;
+      *(uint *)(newType3 + 0x24) = *(uint *)(newType3 + 0x24) | 0x200;
+      *(undefined4 *)(newType3 + 4) = uVar16;
     }
     local_840 = *(unsigned char **)(yyvsp + -0x80);
     yyval = *(uint *)(yyvsp + -0x84);
     pTVar3 = yyvalNode;
     yyvalTypeOrFunction = local_840;
-    yyvalQualifierOrParamType = (unsigned char *)pTVar12;
+    yyvalQualifierOrParamType = (unsigned char *)newType3;
     local_850 = local_840;
-    local_84c = (unsigned char *)pTVar12;
-    local_83c = (unsigned char *)pTVar12;
+    local_84c = (unsigned char *)newType3;
+    local_83c = (unsigned char *)newType3;
     pTVar31 = local_7f0;
     pTVar32 = local_750[0];
     break;
@@ -5759,16 +5770,16 @@ LAB_97bab5f4:
     *(undefined4 *)(newType + 0x18) = 0;
     *(undefined4 *)(newType + 0x1c) = 0;
     uVar2 = *(uint *)(newType + 0x24);
-    uVar57 = (int)local_82c << 0x19;
-    *(uint *)(newType + 0x24) = uVar57 | uVar2 & 0x1ffffff;
+    qualifierBits2 = (int)local_82c << 0x19;
+    *(uint *)(newType + 0x24) = qualifierBits2 | uVar2 & 0x1ffffff;
     basicTypeBits2 = ((uint)local_830 & 0x3f) << 0x13;
-    *(uint *)(newType + 0x24) = basicTypeBits2 | uVar57 | uVar2 & 0x7ffff;
+    *(uint *)(newType + 0x24) = basicTypeBits2 | qualifierBits2 | uVar2 & 0x7ffff;
     sizeBits = ((uint)typeSpecifierSize & 0xff) << 0xb;
-    *(uint *)(newType + 0x24) = sizeBits | basicTypeBits2 | uVar57 | uVar2 & 0x7ff;
+    *(uint *)(newType + 0x24) = sizeBits | basicTypeBits2 | qualifierBits2 | uVar2 & 0x7ff;
     uVar58 = ((uint)typeSpecifierMatrix & 1) << 10;
-    *(uint *)(newType + 0x24) = uVar58 | sizeBits | basicTypeBits2 | uVar57 | uVar2 & 0x3ff;
+    *(uint *)(newType + 0x24) = uVar58 | sizeBits | basicTypeBits2 | qualifierBits2 | uVar2 & 0x3ff;
     *(uint *)(newType + 0x24) =
-         ((uint)local_820 & 1) << 9 | uVar58 | sizeBits | basicTypeBits2 | uVar57 | uVar2 & 0x1ff;
+         ((uint)local_820 & 1) << 9 | uVar58 | sizeBits | basicTypeBits2 | qualifierBits2 | uVar2 & 0x1ff;
     local_81c = (unsigned char *)scratchR7;
     local_818 = (unsigned char *)scratchR6;
     local_810 = local_830;
@@ -5893,7 +5904,7 @@ LAB_97bab5f4:
     }
     *(uint *)(yyvsp + -100) = 1;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-    pTVar12 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
+    newType3 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
     local_850 = *(unsigned char **)(yyvsp + -0x74);
     typeSpecifierQualifierOrParamType2 = *(unsigned char **)(yyvsp + -0x70);
     local_848 = *(unsigned char **)(yyvsp + -0x6c);
@@ -5901,26 +5912,26 @@ LAB_97bab5f4:
     scratchR7 = *(char **)(yyvsp + -100);
     scratchR6 = *(char **)(yyvsp + -0x60);
     typeSpecifierTypeLine2 = *(unsigned char **)(yyvsp + -0x5c);
-    *(unsigned char **)pTVar12 = picBase2 + -0x610c;
-    *(undefined4 *)(pTVar12 + 0x20) = 0;
-    *(undefined4 *)(pTVar12 + 4) = 0;
-    *(undefined4 *)(pTVar12 + 8) = 0;
-    *(undefined4 *)(pTVar12 + 0xc) = 0;
-    *(undefined4 *)(pTVar12 + 0x10) = 0;
-    *(undefined4 *)(pTVar12 + 0x14) = 0;
-    *(undefined4 *)(pTVar12 + 0x18) = 0;
-    *(undefined4 *)(pTVar12 + 0x1c) = 0;
-    uVar2 = *(uint *)(pTVar12 + 0x24);
-    uVar57 = (int)typeSpecifierQualifierOrParamType2 << 0x19;
-    *(uint *)(pTVar12 + 0x24) = uVar57 | uVar2 & 0x1ffffff;
+    *(unsigned char **)newType3 = picBase2 + -0x610c;
+    *(undefined4 *)(newType3 + 0x20) = 0;
+    *(undefined4 *)(newType3 + 4) = 0;
+    *(undefined4 *)(newType3 + 8) = 0;
+    *(undefined4 *)(newType3 + 0xc) = 0;
+    *(undefined4 *)(newType3 + 0x10) = 0;
+    *(undefined4 *)(newType3 + 0x14) = 0;
+    *(undefined4 *)(newType3 + 0x18) = 0;
+    *(undefined4 *)(newType3 + 0x1c) = 0;
+    uVar2 = *(uint *)(newType3 + 0x24);
+    qualifierBits2 = (int)typeSpecifierQualifierOrParamType2 << 0x19;
+    *(uint *)(newType3 + 0x24) = qualifierBits2 | uVar2 & 0x1ffffff;
     basicTypeBits2 = ((uint)local_850 & 0x3f) << 0x13;
-    *(uint *)(pTVar12 + 0x24) = basicTypeBits2 | uVar57 | uVar2 & 0x7ffff;
+    *(uint *)(newType3 + 0x24) = basicTypeBits2 | qualifierBits2 | uVar2 & 0x7ffff;
     sizeBits = ((uint)local_848 & 0xff) << 0xb;
-    *(uint *)(pTVar12 + 0x24) = sizeBits | basicTypeBits2 | uVar57 | uVar2 & 0x7ff;
+    *(uint *)(newType3 + 0x24) = sizeBits | basicTypeBits2 | qualifierBits2 | uVar2 & 0x7ff;
     uVar58 = ((uint)local_844 & 1) << 10;
-    *(uint *)(pTVar12 + 0x24) = uVar58 | sizeBits | basicTypeBits2 | uVar57 | uVar2 & 0x3ff;
-    *(uint *)(pTVar12 + 0x24) =
-         ((uint)scratchR7 & 1) << 9 | uVar58 | sizeBits | basicTypeBits2 | uVar57 | uVar2 & 0x1ff;
+    *(uint *)(newType3 + 0x24) = uVar58 | sizeBits | basicTypeBits2 | qualifierBits2 | uVar2 & 0x3ff;
+    *(uint *)(newType3 + 0x24) =
+         ((uint)scratchR7 & 1) << 9 | uVar58 | sizeBits | basicTypeBits2 | qualifierBits2 | uVar2 & 0x1ff;
     local_840 = (unsigned char *)scratchR7;
     local_83c = (unsigned char *)scratchR6;
     local_830 = local_850;
@@ -5932,9 +5943,9 @@ LAB_97bab5f4:
     local_818 = typeSpecifierTypeLine2;
     if ((unsigned char *)scratchR6 != (unsigned char *)0x0) {
       picBase = (unsigned char *)0xa7b8374c;
-      *(uint *)(pTVar12 + 8) = *(uint *)(scratchR6 + 8);
-      uVar16 = TType__setStructSize(pTVar12,*(unsigned char **)(scratchR6 + 8));
-      *(undefined4 *)(pTVar12 + 0x18) = uVar16;
+      *(uint *)(newType3 + 8) = *(uint *)(scratchR6 + 8);
+      uVar16 = TType__setStructSize(newType3,*(unsigned char **)(scratchR6 + 8));
+      *(undefined4 *)(newType3 + 0x18) = uVar16;
       iVar55 = (**(code **)(*(uint *)local_81c + 0x18))(local_81c);
       *(undefined1 *)(*(int *)(iVar55 + 4) + *(int *)(*(int *)(iVar55 + 4) + -0xc)) =
            **(undefined1 **)(picBase + -0x7cc4);
@@ -5949,21 +5960,21 @@ LAB_97bab5f4:
                   (pvVar13,pcVar62,(unsigned char *)local_220);
         pvVar23 = pvVar13;
       }
-      *(void **)(pTVar12 + 0x10) = pvVar23;
+      *(void **)(newType3 + 0x10) = pvVar23;
     }
     constantUnion = (**(code **)(**(int **)(yyvsp + -0x24) + 0x18))(*(int **)(yyvsp + -0x24));
     if (constantUnion != 0) {
       constantUnion = (**(code **)(**(int **)(yyvsp + -0x24) + 0x18))(*(int **)(yyvsp + -0x24));
       uVar16 = **(undefined4 **)(constantUnion + 0x30);
-      *(uint *)(pTVar12 + 0x24) = *(uint *)(pTVar12 + 0x24) | 0x200;
-      *(undefined4 *)(pTVar12 + 4) = uVar16;
+      *(uint *)(newType3 + 0x24) = *(uint *)(newType3 + 0x24) | 0x200;
+      *(undefined4 *)(newType3 + 4) = uVar16;
     }
     local_850 = (unsigned char *)0x0;
     yyval = *(uint *)(yyvsp + -0x58);
     pTVar3 = yyvalNode;
     yyvalTypeOrFunction = local_850;
-    yyvalQualifierOrParamType = (unsigned char *)pTVar12;
-    local_84c = (unsigned char *)pTVar12;
+    yyvalQualifierOrParamType = (unsigned char *)newType3;
+    local_84c = (unsigned char *)newType3;
     pTVar31 = local_7f0;
     pTVar32 = local_750[0];
     break;
@@ -6313,64 +6324,64 @@ LAB_97ba9da4:
     local_818 = yyvalTypeLine;
     break;
   case 0x85:
-    piVar61 = *(int **)((int)parseContext + 4);
+    symbolTable = *(int **)((int)parseContext + 4);
     local_830 = (unsigned char *)0x1;
     goto LAB_97ba9f0c;
   case 0x86:
-    piVar61 = *(int **)((int)parseContext + 4);
+    symbolTable = *(int **)((int)parseContext + 4);
     local_830 = (unsigned char *)0x2;
     goto LAB_97baa3fc;
   case 0x87:
-    piVar61 = *(int **)((int)parseContext + 4);
+    symbolTable = *(int **)((int)parseContext + 4);
     local_830 = (unsigned char *)0x3;
     goto LAB_97baa3fc;
   case 0x88:
-    piVar61 = *(int **)((int)parseContext + 4);
+    symbolTable = *(int **)((int)parseContext + 4);
     local_830 = (unsigned char *)0x1;
     goto LAB_97ba9eec;
   case 0x89:
-    piVar61 = *(int **)((int)parseContext + 4);
+    symbolTable = *(int **)((int)parseContext + 4);
     local_830 = (unsigned char *)0x1;
     goto LAB_97ba9fa8;
   case 0x8a:
-    piVar61 = *(int **)((int)parseContext + 4);
+    symbolTable = *(int **)((int)parseContext + 4);
     local_830 = (unsigned char *)0x1;
     goto LAB_97ba9fc8;
   case 0x8b:
-    piVar61 = *(int **)((int)parseContext + 4);
+    symbolTable = *(int **)((int)parseContext + 4);
     local_830 = (unsigned char *)0x3;
 LAB_97ba9eec:
-    iVar55 = piVar61[1] - *piVar61;
+    iVar55 = symbolTable[1] - *symbolTable;
     local_828 = (unsigned char *)0x2;
     goto LAB_97baa40c;
   case 0x8c:
-    piVar61 = *(int **)((int)parseContext + 4);
+    symbolTable = *(int **)((int)parseContext + 4);
     local_830 = (unsigned char *)0x3;
     goto LAB_97ba9f0c;
   case 0x8d:
-    piVar61 = *(int **)((int)parseContext + 4);
+    symbolTable = *(int **)((int)parseContext + 4);
     local_830 = (unsigned char *)0x3;
     goto LAB_97ba9fc8;
   case 0x8e:
-    piVar61 = *(int **)((int)parseContext + 4);
+    symbolTable = *(int **)((int)parseContext + 4);
     local_830 = (unsigned char *)0x2;
 LAB_97ba9f0c:
-    iVar55 = piVar61[1] - *piVar61;
+    iVar55 = symbolTable[1] - *symbolTable;
     local_818 = *(unsigned char **)yyvsp;
     local_828 = local_830;
     goto LAB_97baa46c;
   case 0x8f:
-    piVar61 = *(int **)((int)parseContext + 4);
+    symbolTable = *(int **)((int)parseContext + 4);
     local_830 = (unsigned char *)0x2;
 LAB_97ba9fa8:
-    iVar55 = piVar61[1] - *piVar61;
+    iVar55 = symbolTable[1] - *symbolTable;
     local_828 = (unsigned char *)0x3;
     goto LAB_97baa40c;
   case 0x90:
-    piVar61 = *(int **)((int)parseContext + 4);
+    symbolTable = *(int **)((int)parseContext + 4);
     local_830 = (unsigned char *)0x2;
 LAB_97ba9fc8:
-    iVar55 = piVar61[1] - *piVar61;
+    iVar55 = symbolTable[1] - *symbolTable;
     local_828 = (unsigned char *)0x4;
     goto LAB_97baa40c;
   case 0x91:
@@ -6442,7 +6453,7 @@ LAB_97baa0ec:
                  "sampler1D","","",pTVar34,scratchR10);
       TParseContext__recover(parseContext);
     }
-    piVar61 = *(int **)((int)parseContext + 4);
+    symbolTable = *(int **)((int)parseContext + 4);
     local_830 = (unsigned char *)0x5;
     goto LAB_97baa3fc;
   case 0x95:
@@ -6454,7 +6465,7 @@ LAB_97baa0ec:
                  "sampler2D","","",pTVar34,scratchR10);
       TParseContext__recover(parseContext);
     }
-    piVar61 = *(int **)((int)parseContext + 4);
+    symbolTable = *(int **)((int)parseContext + 4);
     local_830 = (unsigned char *)0x6;
     goto LAB_97baa3fc;
   case 0x96:
@@ -6466,7 +6477,7 @@ LAB_97baa0ec:
                  "sampler3D","","",pTVar34,scratchR10);
       TParseContext__recover(parseContext);
     }
-    piVar61 = *(int **)((int)parseContext + 4);
+    symbolTable = *(int **)((int)parseContext + 4);
     local_830 = (unsigned char *)0x7;
     goto LAB_97baa3fc;
   case 0x97:
@@ -6478,7 +6489,7 @@ LAB_97baa0ec:
                  "samplerCube","","",pTVar34,scratchR10);
       TParseContext__recover(parseContext);
     }
-    piVar61 = *(int **)((int)parseContext + 4);
+    symbolTable = *(int **)((int)parseContext + 4);
     local_830 = (unsigned char *)0x8;
     goto LAB_97baa3fc;
   case 0x98:
@@ -6490,7 +6501,7 @@ LAB_97baa0ec:
                  "sampler1DShadow","","",pTVar34,scratchR10);
       TParseContext__recover(parseContext);
     }
-    piVar61 = *(int **)((int)parseContext + 4);
+    symbolTable = *(int **)((int)parseContext + 4);
     local_830 = (unsigned char *)0x9;
     goto LAB_97baa3fc;
   case 0x99:
@@ -6502,7 +6513,7 @@ LAB_97baa0ec:
                  "sampler2DShadow","","",pTVar34,scratchR10);
       TParseContext__recover(parseContext);
     }
-    piVar61 = *(int **)((int)parseContext + 4);
+    symbolTable = *(int **)((int)parseContext + 4);
     local_830 = (unsigned char *)0xa;
     goto LAB_97baa3fc;
   case 0x9a:
@@ -6519,7 +6530,7 @@ LAB_97baa0ec:
     if (extensionError != 0) {
       TParseContext__recover(parseContext);
     }
-    piVar61 = *(int **)((int)parseContext + 4);
+    symbolTable = *(int **)((int)parseContext + 4);
     local_830 = (unsigned char *)0xb;
     goto LAB_97baa3fc;
   case 0x9b:
@@ -6536,10 +6547,10 @@ LAB_97baa0ec:
     if (extensionError != 0) {
       TParseContext__recover(parseContext);
     }
-    piVar61 = *(int **)((int)parseContext + 4);
+    symbolTable = *(int **)((int)parseContext + 4);
     local_830 = (unsigned char *)0xc;
 LAB_97baa3fc:
-    iVar55 = piVar61[1] - *piVar61;
+    iVar55 = symbolTable[1] - *symbolTable;
     local_828 = (unsigned char *)0x1;
 LAB_97baa40c:
     local_818 = *(unsigned char **)yyvsp;
@@ -6709,14 +6720,14 @@ LAB_97baa46c:
     piVar61[0xd] = 1;
     piVar61[0xe] = 0;
     piVar61[0xf] = 0;
-    piVar50 = *(int **)((int)parseContext + 4);
-    iVar55 = piVar50[3];
-    piVar50[3] = iVar55 + 1;
+    symbolTable2 = *(int **)((int)parseContext + 4);
+    iVar55 = symbolTable2[3];
+    symbolTable2[3] = iVar55 + 1;
     piVar61[2] = iVar55 + 1;
-    uVar16 = *(undefined4 *)(*piVar50 + ((piVar50[1] - *piVar50 & 0xfffffffcU) - 4));
+    uVar16 = *(undefined4 *)(*symbolTable2 + ((symbolTable2[1] - *symbolTable2 & 0xfffffffcU) - 4));
     local_84c = (unsigned char *)0x0;
     psVar21 = (unsigned char *)
-              (**(code **)(*piVar61 + 8))(piVar61,iVar60,iVar6,scratchR6,scratchR7,iVar26,piVar50);
+              (**(code **)(*piVar61 + 8))(piVar61,iVar60,iVar6,scratchR6,scratchR7,iVar26,symbolTable2);
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&local_1e0,psVar21);
     local_1d8 = piVar61;
     std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_840,uVar16,&local_1e0);
@@ -6738,13 +6749,13 @@ LAB_97baa46c:
     }
     if (local_84c == (unsigned char *)0x0) {
       identifierString = *(uint *)(yyvsp + -0x80);
-      iVar55 = *(int *)(identifierString + 4);
+      stringData = *(int *)(identifierString + 4);
       scratchR7 = "struct";
-      *(unsigned char *)(iVar55 + *(int *)(iVar55 + -0xc)) = *DAT_a7b7ba88;
+      *(unsigned char *)(stringData + *(int *)(stringData + -0xc)) = *DAT_a7b7ba88;
       scratchR6 = *(char **)(identifierString + 4);
       TParseContext__error
                 ((int)parseContext,*(char **)(yyvsp + -0x84),"redefinition",scratchR6,"struct",iVar26,
-                 iVar55,identifierString);
+                 stringData,identifierString);
       TParseContext__recover(parseContext);
     }
     local_82c = (unsigned char *)0x0;
@@ -6860,16 +6871,16 @@ LAB_97baa46c:
     break;
   case 0xa1:
     yyvalTypeOrFunction = *(unsigned char **)(yyvsp + -0x1c);
-    for (uVar57 = 0; yyssBase = DAT_a7b7ba88, pTVar3 = yyvalNode, pTVar31 = local_7f0,
+    for (loopIndex = 0; yyssBase = DAT_a7b7ba88, pTVar3 = yyvalNode, pTVar31 = local_7f0,
         pTVar32 = local_750[0],
-        uVar57 < (uint)(*(int *)(*(uint *)(yyvsp + 0x10) + 8) -
-                        *(int *)(*(uint *)(yyvsp + 0x10) + 4) >> 3); uVar57 = uVar57 + 1) {
-      uVar28 = 0;
-      iVar55 = uVar57 * 8;
+        loopIndex < (uint)(*(int *)(*(uint *)(yyvsp + 0x10) + 8) -
+                        *(int *)(*(uint *)(yyvsp + 0x10) + 4) >> 3); loopIndex = loopIndex + 1) {
+      loopIndex3 = 0;
+      iVar55 = loopIndex * 8;
       while( true ) {
         puVar18 = *(undefined4 **)(yyvalTypeOrFunction + 8);
-        if ((uint)((int)puVar18 - *(int *)(yyvalTypeOrFunction + 4) >> 3) <= uVar28) break;
-        piVar61 = *(int **)(*(int *)(yyvalTypeOrFunction + 4) + uVar28 * 8);
+        if ((uint)((int)puVar18 - *(int *)(yyvalTypeOrFunction + 4) >> 3) <= loopIndex3) break;
+        piVar61 = *(int **)(*(int *)(yyvalTypeOrFunction + 4) + loopIndex3 * 8);
         iVar54 = *piVar61;
         iVar54 = (**(code **)(iVar54 + 0x1c))
                            (piVar61,puVar18,scratchR5,scratchR6,scratchR7,pTVar33,iVar54);
@@ -6906,7 +6917,7 @@ LAB_97baa46c:
                      *(uint *)(yyvsp + 0x10),scratchR10);
           TParseContext__recover(parseContext);
         }
-        uVar28 = uVar28 + 1;
+        loopIndex3 = loopIndex3 + 1;
       }
       scratchR5 = (char *)(*(int *)(*(uint *)(yyvsp + 0x10) + 4) + iVar55);
       if (puVar18 == *(undefined4 **)(yyvalTypeOrFunction + 0xc)) {
@@ -6936,17 +6947,17 @@ LAB_97baa46c:
     if (iVar55 != 0) {
       TParseContext__recover(parseContext);
     }
-    for (uVar57 = 0; pTVar3 = yyvalNode, pTVar31 = local_7f0, pTVar32 = local_750[0],
-        uVar57 < (uint)((int)(*(uint *)(yyvalTypeOrFunction + 8) - *(uint *)(yyvalTypeOrFunction + 4)) >> 3);
-        uVar57 = uVar57 + 1) {
-      piVar61 = *(int **)(*(uint *)(yyvalTypeOrFunction + 4) + uVar57 * 8);
+    for (loopIndex = 0; pTVar3 = yyvalNode, pTVar31 = local_7f0, pTVar32 = local_750[0],
+        loopIndex < (uint)((int)(*(uint *)(yyvalTypeOrFunction + 8) - *(uint *)(yyvalTypeOrFunction + 4)) >> 3);
+        loopIndex = loopIndex + 1) {
+      piVar61 = *(int **)(*(uint *)(yyvalTypeOrFunction + 4) + loopIndex * 8);
       typeSpecifierSize4 = *(uint *)(yyvsp + -0x40);
       scratchR6 = *(char **)(yyvsp + -0x3c);
       scratchR7 = *(char **)(yyvsp + -0x34);
       (**(code **)(*piVar61 + 0xc))(piVar61,*(uint *)(yyvsp + -0x48),typeSpecifierSize4,scratchR6,scratchR7);
       typeSpecifierUserDef2 = *(int **)(yyvsp + -0x34);
       if (typeSpecifierUserDef2 != (int *)0x0) {
-        piVar50 = *(int **)(*(uint *)(yyvalTypeOrFunction + 4) + uVar57 * 8);
+        piVar50 = *(int **)(*(uint *)(yyvalTypeOrFunction + 4) + loopIndex * 8);
         iVar55 = *piVar50;
         uVar16 = (**(code **)(*typeSpecifierUserDef2 + 0x18))
                            (typeSpecifierUserDef2,r4In12,typeSpecifierSize4,scratchR6,scratchR7,pTVar33,*typeSpecifierUserDef2);
@@ -7067,7 +7078,7 @@ LAB_97baadbc:
     pcVar62 = *(char **)(yyvsp + -0x58);
     goto LAB_97bab5e8;
   case 0xb1:
-    pvVar51 = *(unsigned char **)((int)parseContext + 4);
+    symbolTable3 = *(unsigned char **)((int)parseContext + 4);
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     puVar18 = (undefined4 *)TPoolAllocator__allocate(poolAllocator,0x10);
     local_170 = (unsigned char *)GetGlobalPoolAllocator();
@@ -7080,11 +7091,11 @@ LAB_97baadbc:
     *(undefined4 *)(puVar18[1] + 4) = 0;
     *(undefined4 *)(puVar18[1] + 8) = puVar18[1];
     *(undefined4 *)(puVar18[1] + 0xc) = puVar18[1];
-    piVar61 = *(int **)(pvVar51 + 4);
+    piVar61 = *(int **)(symbolTable3 + 4);
     local_160[0] = puVar18;
-    if (piVar61 == *(int **)(pvVar51 + 8)) {
+    if (piVar61 == *(int **)(symbolTable3 + 8)) {
       std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_insert_aux
-                (pvVar51,piVar61,local_160);
+                (symbolTable3,piVar61,local_160);
       pTVar3 = yyvalNode;
       pTVar31 = local_7f0;
       pTVar32 = local_750[0];
@@ -7093,23 +7104,23 @@ LAB_97baadbc:
       iVar55 = 0;
       if (piVar61 != (int *)0x0) {
         *piVar61 = (int)puVar18;
-        iVar55 = *(int *)(pvVar51 + 4);
+        iVar55 = *(int *)(symbolTable3 + 4);
       }
-      *(int *)(pvVar51 + 4) = iVar55 + 4;
+      *(int *)(symbolTable3 + 4) = iVar55 + 4;
       pTVar3 = yyvalNode;
       pTVar31 = local_7f0;
       pTVar32 = local_750[0];
     }
     break;
   case 0xb2:
-    piVar61 = *(int **)((int)parseContext + 4);
-    iVar55 = piVar61[1];
-    pvVar23 = *(void **)(*piVar61 + ((iVar55 - *piVar61 & 0xfffffffcU) - 4));
+    symbolTable = *(int **)((int)parseContext + 4);
+    iVar55 = symbolTable[1];
+    pvVar23 = *(void **)(*symbolTable + ((iVar55 - *symbolTable & 0xfffffffcU) - 4));
     if (pvVar23 != (void *)0x0) {
       ((int (*)())__ZN17TSymbolTableLevelD1Ev)(pvVar23);
-      iVar55 = piVar61[1];
+      iVar55 = symbolTable[1];
     }
-    piVar61[1] = iVar55 + -4;
+    symbolTable[1] = iVar55 + -4;
     pTVar3 = yyvalNode;
     pTVar31 = local_7f0;
     pTVar32 = local_750[0];
@@ -7198,21 +7209,21 @@ LAB_97bab1f4:
     pTVar32 = local_750[0];
     break;
   case 0xc1:
-    pvVar51 = *(unsigned char **)((int)parseContext + 4);
+    symbolTable3 = *(unsigned char **)((int)parseContext + 4);
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     puVar18 = (undefined4 *)TPoolAllocator__allocate(poolAllocator,0x10);
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     local_150 = poolAllocator;
     goto LAB_97bab2e8;
   case 0xc2:
-    piVar61 = *(int **)((int)parseContext + 4);
-    iVar55 = piVar61[1];
-    pvVar23 = *(void **)(*piVar61 + ((iVar55 - *piVar61 & 0xfffffffcU) - 4));
+    symbolTable = *(int **)((int)parseContext + 4);
+    iVar55 = symbolTable[1];
+    pvVar23 = *(void **)(*symbolTable + ((iVar55 - *symbolTable & 0xfffffffcU) - 4));
     if (pvVar23 != (void *)0x0) {
       ((int (*)())__ZN17TSymbolTableLevelD1Ev)(pvVar23);
-      iVar55 = piVar61[1];
+      iVar55 = symbolTable[1];
     }
-    piVar61[1] = iVar55 + -4;
+    symbolTable[1] = iVar55 + -4;
     scratchR7 = (char *)0x1;
     pTVar15 = *(unsigned char **)parseContext;
     pTVar20 = *(unsigned char **)(yyvsp + 8);
@@ -7242,7 +7253,7 @@ LAB_97bab40c:
     iVar55 = iVar55 + -1;
     goto LAB_97bab410;
   case 0xc5:
-    pvVar51 = *(unsigned char **)((int)parseContext + 4);
+    symbolTable3 = *(unsigned char **)((int)parseContext + 4);
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     puVar18 = (undefined4 *)TPoolAllocator__allocate(poolAllocator,0x10);
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
@@ -7257,19 +7268,19 @@ LAB_97bab2e8:
     *(undefined4 *)(puVar18[1] + 4) = 0;
     *(undefined4 *)(puVar18[1] + 8) = puVar18[1];
     *(undefined4 *)(puVar18[1] + 0xc) = puVar18[1];
-    puVar19 = *(undefined4 **)(pvVar51 + 4);
+    puVar19 = *(undefined4 **)(symbolTable3 + 4);
     local_160[0] = puVar18;
-    if (puVar19 == *(undefined4 **)(pvVar51 + 8)) {
+    if (puVar19 == *(undefined4 **)(symbolTable3 + 8)) {
       std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_insert_aux
-                (pvVar51,puVar19,local_160);
+                (symbolTable3,puVar19,local_160);
     }
     else {
       iVar55 = 0;
       if (puVar19 != (undefined4 *)0x0) {
         *puVar19 = puVar18;
-        iVar55 = *(int *)(pvVar51 + 4);
+        iVar55 = *(int *)(symbolTable3 + 4);
       }
-      *(int *)(pvVar51 + 4) = iVar55 + 4;
+      *(int *)(symbolTable3 + 4) = iVar55 + 4;
     }
 switchD_97ba39c8_caseD_c3:
     iVar55 = *(int *)((int)parseContext + 0x20) + 1;
@@ -7280,14 +7291,14 @@ LAB_97bab410:
     pTVar32 = local_750[0];
     break;
   case 0xc6:
-    piVar61 = *(int **)((int)parseContext + 4);
-    iVar55 = piVar61[1];
-    pvVar23 = *(void **)(*piVar61 + ((iVar55 - *piVar61 & 0xfffffffcU) - 4));
+    symbolTable = *(int **)((int)parseContext + 4);
+    iVar55 = symbolTable[1];
+    pvVar23 = *(void **)(*symbolTable + ((iVar55 - *symbolTable & 0xfffffffcU) - 4));
     if (pvVar23 != (void *)0x0) {
       ((int (*)())__ZN17TSymbolTableLevelD1Ev)(pvVar23);
-      iVar55 = piVar61[1];
+      iVar55 = symbolTable[1];
     }
-    piVar61[1] = iVar55 + -4;
+    symbolTable[1] = iVar55 + -4;
     yyvalNode = (unsigned char *)
                 TIntermediate__makeAggregate
                           (*(unsigned char **)parseContext,*(unsigned char **)(yyvsp + -0x7c),
@@ -7423,10 +7434,10 @@ LAB_97bab674:
     break;
   case 0xd6:
     piVar61 = *(int **)(yyvsp + 0x10);
-    piVar50 = *(int **)((int)parseContext + 4);
+    symbolTable2 = *(int **)((int)parseContext + 4);
     uVar16 = (**(code **)(*piVar61 + 8))(piVar61);
-    iVar55 = *piVar50;
-    iVar54 = (piVar50[1] - iVar55 >> 2) + -1;
+    iVar55 = *symbolTable2;
+    iVar54 = (symbolTable2[1] - iVar55 >> 2) + -1;
     while( true ) {
       iVar60 = *(int *)(iVar55 + iVar54 * 4);
       iVar55 = 0;
@@ -7436,17 +7447,17 @@ LAB_97bab674:
       }
       iVar54 = iVar54 + -1;
       if ((iVar55 != 0) || (iVar54 < 0)) break;
-      iVar55 = *piVar50;
+      iVar55 = *symbolTable2;
     }
     if (*(int *)(iVar55 + 0x50) != 0) {
       iVar60 = piVar61[1];
       picBase = (unsigned char *)0xa7b8374c;
-      iVar54 = *(int *)(iVar60 + 4);
+      stringData2 = *(int *)(iVar60 + 4);
       scratchR7 = "";
-      *(unsigned char *)(iVar54 + *(int *)(iVar54 + -0xc)) = *DAT_a7b7ba88;
+      *(unsigned char *)(stringData2 + *(int *)(stringData2 + -0xc)) = *DAT_a7b7ba88;
       TParseContext__error
                 ((int)parseContext,*(char **)yyvsp,"function already has a body",*(char **)(iVar60 + 4)
-                 ,"",pTVar33,iVar54,iVar60);
+                 ,"",pTVar33,stringData2,iVar60);
       TParseContext__recover(parseContext);
     }
     *(undefined4 *)(iVar55 + 0x50) = 1;
@@ -7457,28 +7468,28 @@ LAB_97bab674:
       cr0 = (iVar54 == 0) << 1;
       if (0 < iVar54) {
         iVar60 = piVar61[1];
-        iVar54 = *(int *)(iVar60 + 4);
+        stringData2 = *(int *)(iVar60 + 4);
         scratchR7 = "";
-        *(unsigned char *)(iVar54 + *(int *)(iVar54 + -0xc)) = *DAT_a7b7ba88;
+        *(unsigned char *)(stringData2 + *(int *)(stringData2 + -0xc)) = *DAT_a7b7ba88;
         TParseContext__error
                   ((int)parseContext,*(char **)yyvsp,"function cannot take any parameter(s)",
-                   *(char **)(iVar60 + 4),"",pTVar33,iVar54,iVar60);
+                   *(char **)(iVar60 + 4),"",pTVar33,stringData2,iVar60);
         TParseContext__recover(parseContext);
       }
       iVar54 = (**(code **)(piVar61[7] + 0x20))(piVar61 + 7);
       if (iVar54 != 0) {
         iVar60 = piVar61[1];
         picBase = (unsigned char *)0xa7b8374c;
-        iVar54 = *(int *)(iVar60 + 4);
+        stringData2 = *(int *)(iVar60 + 4);
         scratchR7 = "";
-        *(unsigned char *)(iVar54 + *(int *)(iVar54 + -0xc)) = *DAT_a7b7ba88;
+        *(unsigned char *)(stringData2 + *(int *)(stringData2 + -0xc)) = *DAT_a7b7ba88;
         TParseContext__error
                   ((int)parseContext,*(char **)yyvsp,"function cannot return a value",
-                   *(char **)(iVar60 + 4),"",pTVar33,iVar54,iVar60);
+                   *(char **)(iVar60 + 4),"",pTVar33,stringData2,iVar60);
         TParseContext__recover(parseContext);
       }
     }
-    pvVar51 = *(unsigned char **)((int)parseContext + 4);
+    symbolTable3 = *(unsigned char **)((int)parseContext + 4);
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     puVar18 = (undefined4 *)TPoolAllocator__allocate(poolAllocator,0x10);
     local_130 = (unsigned char *)GetGlobalPoolAllocator();
@@ -7491,19 +7502,19 @@ LAB_97bab674:
     *(undefined4 *)(puVar18[1] + 4) = 0;
     *(undefined4 *)(puVar18[1] + 8) = puVar18[1];
     *(undefined4 *)(puVar18[1] + 0xc) = puVar18[1];
-    puVar19 = *(undefined4 **)(pvVar51 + 4);
+    puVar19 = *(undefined4 **)(symbolTable3 + 4);
     local_160[0] = puVar18;
-    if (puVar19 == *(undefined4 **)(pvVar51 + 8)) {
+    if (puVar19 == *(undefined4 **)(symbolTable3 + 8)) {
       std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_insert_aux
-                (pvVar51,puVar19,local_160);
+                (symbolTable3,puVar19,local_160);
     }
     else {
       iVar54 = 0;
       if (puVar19 != (undefined4 *)0x0) {
         *puVar19 = puVar18;
-        iVar54 = *(int *)(pvVar51 + 4);
+        iVar54 = *(int *)(symbolTable3 + 4);
       }
-      *(int *)(pvVar51 + 4) = iVar54 + 4;
+      *(int *)(symbolTable3 + 4) = iVar54 + 4;
     }
     *(int *)((int)parseContext + 0x28) = iVar55 + 0x1c;
     *(undefined4 *)((int)parseContext + 0x2c) = 0;
@@ -7634,13 +7645,13 @@ LAB_97bab674:
         newNode[0xd] = 0;
         newNode[0xe] = 0;
         newNode[0xf] = 0;
-        piVar50 = *(int **)((int)parseContext + 4);
-        iVar6 = piVar50[3];
-        piVar50[3] = iVar6 + 1;
+        symbolTable2 = *(int **)((int)parseContext + 4);
+        iVar6 = symbolTable2[3];
+        symbolTable2[3] = iVar6 + 1;
         newNode[2] = iVar6 + 1;
-        uVar16 = *(undefined4 *)(*piVar50 + ((piVar50[1] - *piVar50 & 0xfffffffcU) - 4));
+        uVar16 = *(undefined4 *)(*symbolTable2 + ((symbolTable2[1] - *symbolTable2 & 0xfffffffcU) - 4));
         local_84c = (unsigned char *)0x0;
-        psVar21 = (unsigned char *)(**(code **)(*newNode + 8))(newNode,iVar26,iVar30,r6Pass,r7Pass,r8Pass,piVar50);
+        psVar21 = (unsigned char *)(**(code **)(*newNode + 8))(newNode,iVar26,iVar30,r6Pass,r7Pass,r8Pass,symbolTable2);
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&local_f0,psVar21);
         local_e8 = newNode;
         std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_840,uVar16,&local_f0);
@@ -7662,11 +7673,11 @@ LAB_97bab674:
         }
         if (local_84c == (unsigned char *)0x0) {
           iVar26 = newNode[1];
-          iVar6 = *(int *)(iVar26 + 4);
-          *(undefined1 *)(iVar6 + *(int *)(iVar6 + -0xc)) = **(undefined1 **)(local_54 + -0x7cc4);
+          stringData3 = *(int *)(iVar26 + 4);
+          *(undefined1 *)(stringData3 + *(int *)(stringData3 + -0xc)) = **(undefined1 **)(local_54 + -0x7cc4);
           TParseContext__error
                     ((int)parseContext,*(char **)yyvsp,"redefinition",*(char **)(iVar26 + 4),"",
-                     local_54,iVar6,iVar26);
+                     local_54,stringData3,iVar26);
           TParseContext__recover(parseContext);
           (**(code **)(*newNode + 4))(newNode);
         }
@@ -7690,10 +7701,10 @@ LAB_97bab674:
     pTVar32 = local_750[0];
     break;
   case 0xd7:
-    local_64 = (unsigned char *)0xa7b8374c;
+    picBase3 = (unsigned char *)0xa7b8374c;
     iVar55 = (**(code **)(**(int **)((int)parseContext + 0x28) + 0x20))(*(int **)((int)parseContext + 0x28));
     pTVar3 = DAT_a7b7ba88;
-    if ((iVar55 != 0) && (local_64 = (unsigned char *)0xa7b8374c, *(int *)((int)parseContext + 0x2c) == 0)
+    if ((iVar55 != 0) && (picBase3 = (unsigned char *)0xa7b8374c, *(int *)((int)parseContext + 0x2c) == 0)
        ) {
       iVar55 = *(int *)(*(uint *)(yyvsp + -0x48) + 4);
       scratchR7 = "";
@@ -7704,14 +7715,14 @@ LAB_97bab674:
                  *(char **)(iVar55 + 4),"",0xa7b8374c,pTVar3,iVar55);
       TParseContext__recover(parseContext);
     }
-    piVar61 = *(int **)((int)parseContext + 4);
-    iVar55 = piVar61[1];
-    pvVar23 = *(void **)(*piVar61 + ((iVar55 - *piVar61 & 0xfffffffcU) - 4));
+    symbolTable = *(int **)((int)parseContext + 4);
+    iVar55 = symbolTable[1];
+    pvVar23 = *(void **)(*symbolTable + ((iVar55 - *symbolTable & 0xfffffffcU) - 4));
     if (pvVar23 != (void *)0x0) {
       ((int (*)())__ZN17TSymbolTableLevelD1Ev)(pvVar23);
-      iVar55 = piVar61[1];
+      iVar55 = symbolTable[1];
     }
-    piVar61[1] = iVar55 + -4;
+    symbolTable[1] = iVar55 + -4;
     yyvalNode = (unsigned char *)
                 TIntermediate__growAggregate
                           (*(unsigned char **)parseContext,*(unsigned char **)(yyvsp + -0x50),
@@ -7721,7 +7732,7 @@ LAB_97bab674:
               (*(unsigned char **)parseContext,(unsigned char *)yyvalNode,3,scratchR6);
     iVar55 = (**(code **)(**(int **)(yyvsp + -0x48) + 8))(*(int **)(yyvsp + -0x48));
     *(undefined1 *)(*(int *)(iVar55 + 4) + *(int *)(*(int *)(iVar55 + 4) + -0xc)) =
-         **(undefined1 **)(local_64 + -0x7cc4);
+         **(undefined1 **)(picBase3 + -0x7cc4);
     pcVar62 = *(char **)(iVar55 + 4);
     local_b0[0] = GetGlobalPoolAllocator();
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
@@ -7809,9 +7820,9 @@ LAB_97ba8338:
       TParseContext__recover(parseContext);
       uVar16 = r4Out14;
     }
-    for (iVar54 = 0; iVar54 < *(int *)(iVar55 + 0x14) - *(int *)(iVar55 + 0x10) >> 3;
-        iVar54 = iVar54 + 1) {
-      iVar60 = iVar54 * 8;
+    for (loopIndex4 = 0; loopIndex4 < *(int *)(iVar55 + 0x14) - *(int *)(iVar55 + 0x10) >> 3;
+        loopIndex4 = loopIndex4 + 1) {
+      iVar60 = loopIndex4 * 8;
       piVar61 = *(int **)(*(int *)(iVar55 + 0x10) + iVar60 + 4);
       iVar6 = *piVar61;
       iVar6 = (**(code **)(iVar6 + 0x24))(piVar61,uVar16,pcVar29,scratchR6,scratchR7,pTVar33,iVar6);
@@ -7835,21 +7846,21 @@ LAB_97ba8338:
   }
   goto LAB_97ba84b0;
 LAB_97ba8334:
-  iVar55 = *piVar61;
+  iVar55 = *symbolTable;
   goto LAB_97ba8338;
 LAB_97ba84b0:
   pTVar3 = *(unsigned char **)(yyvsp + -0x1c);
-  piVar61 = *(int **)((int)parseContext + 4);
+  symbolTable = *(int **)((int)parseContext + 4);
   yyval = *(uint *)yyvsp;
-  iVar55 = piVar61[3];
-  piVar61[3] = (int)(iVar55 + 1U);
+  iVar55 = symbolTable[3];
+  symbolTable[3] = (int)(iVar55 + 1U);
   *(unsigned char **)(pTVar3 + 8) = (unsigned char *)(iVar55 + 1U);
-  uVar49 = *(undefined4 *)(*piVar61 + ((piVar61[1] - *piVar61 & 0xfffffffcU) - 4));
+  uVar49 = *(undefined4 *)(*symbolTable + ((symbolTable[1] - *symbolTable & 0xfffffffcU) - 4));
   local_84c = (unsigned char *)0x0;
   yyvalTypeOrFunction = pTVar3;
   psVar21 = (unsigned char *)
             (**(code **)(*(unsigned char **)pTVar3 + 8))
-                      (pTVar3,uVar16,pcVar29,scratchR6,scratchR7,pTVar33,piVar61);
+                      (pTVar3,uVar16,pcVar29,scratchR6,scratchR7,pTVar33,symbolTable);
   __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&local_310,psVar21);
   local_308 = pTVar3;
   std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_840,uVar49,&local_310);
@@ -7876,9 +7887,9 @@ switchD_97ba39c8_caseD_60:
   pTVar32 = local_750[0];
   goto switchD_97ba39c8_caseD_0;
 LAB_97ba55dc:
-  if ((uint)((int)(*(uint *)(pTVar7 + 8) - *(uint *)(pTVar7 + 4)) >> 3) <= uVar57)
+  if ((uint)((int)(*(uint *)(pTVar7 + 8) - *(uint *)(pTVar7 + 4)) >> 3) <= loopIndex)
   goto LAB_97ba5740;
-  piVar61 = *(int **)(*(uint *)(pTVar7 + 4) + uVar57 * 8);
+  piVar61 = *(int **)(*(uint *)(pTVar7 + 4) + loopIndex * 8);
   iVar55 = *piVar61;
   iVar55 = (**(code **)(iVar55 + 0x1c))(piVar61,uVar16,scratchR5,scratchR6,scratchR7,pTVar33,iVar55);
   uVar28 = *(uint *)(*(int *)(iVar55 + 4) + -0xc);
@@ -7896,7 +7907,7 @@ LAB_97ba55dc:
     iVar55 = uVar28 - uVar53;
   }
   if (iVar55 != 0) {
-    uVar57 = uVar57 + 1;
+    loopIndex = loopIndex + 1;
     uVar16 = r4Out8;
     goto LAB_97ba55dc;
   }
@@ -7914,7 +7925,7 @@ LAB_97ba55dc:
     if (yyvalNode == (unsigned char *)0x0) goto LAB_97ba5554;
     ppuVar35 = *(undefined ***)(pTVar7 + 4);
     (**(code **)(*(int *)yyvalNode + 0x34))
-              (yyvalNode,ppuVar35[uVar57 * 2],scratchR5,scratchR6,scratchR7,pTVar3,ppuVar35);
+              (yyvalNode,ppuVar35[loopIndex * 2],scratchR5,scratchR6,scratchR7,pTVar3,ppuVar35);
     newType2 = (unsigned char *)(**(code **)(*(uint *)yyvalNode + 0x3c))(yyvalNode);
     puVar5 = (undefined *)0x2;
     pcVar40 = *(code **)(*(unsigned char **)newType2 + 0x28);
@@ -7922,7 +7933,7 @@ LAB_97ba55dc:
   else {
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     pcVar9 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,4);
-    *(uint *)pcVar9 = uVar57;
+    *(uint *)pcVar9 = loopIndex;
     local_81c = (unsigned char *)0x0;
     local_818 = (unsigned char *)0x0;
     local_7fc = (unsigned char *)((uint)local_7fc & 0x9ff | 0x4100800);
@@ -7942,7 +7953,7 @@ LAB_97ba55dc:
     newType2 = (unsigned char *)
               TIntermediate__addIndex(*(unsigned char **)parseContext,0x2f,scratchR5,scratchR6,scratchR7);
     ppuVar35 = *(undefined ***)(pTVar7 + 4);
-    puVar5 = ppuVar35[uVar57 * 2];
+    puVar5 = ppuVar35[loopIndex * 2];
     pcVar40 = *(code **)(*(unsigned char **)newType2 + 0x34);
     yyvalNode = newType2;
   }
