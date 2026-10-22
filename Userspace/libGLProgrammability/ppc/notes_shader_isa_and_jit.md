@@ -15,8 +15,8 @@ program's last instruction, `*(*(emulator+0xd80)+4)`).
 | +0x0c..+0x2f | destination operand (9 words, section 2) | `_InterpreterWriteDestination(machine, inst[3..0xb], ...)` |
 | +0x30 | source operand count | `iVar14 = inst[0xc]` |
 | +0x34 + 0x24*k | source operand k (9 words) | `_InterpreterLoadSource(machine, inst[0xd + 9k .. 0x15 + 9k], ...)` |
-| +0x118 | link to the next instruction in the compile-time list (the JIT walks a list from program info +0x120) | `puVar5 = *(iVar9 + 0x120)` loop in CompileAV |
-| +0x118 (0x46 words) | code offset of the generated code for this instruction | `instruction[0x46] = codeCursor - codeBuffer` in CompileAV |
+| +0x118 (word 0x46) | offset of this instruction's generated code inside the code buffer | `instruction[0x46] = codeCursor - codeBuffer` in CompileAV |
+| (array) | the instructions are a contiguous array with stride 0x11c, starting at program info +0x120; `inst + 0x47` words is the next one | `instructionCursor = inst + 0x47` at the end of the CompileAV loop; branch targets are `index * 0x11c` |
 
 ### Opcode table (`_ppstreamOpString`, 0x71 entries, `__DATA,__data +0xda8`)
 
@@ -140,6 +140,29 @@ The names are the ARB/NV fragment-program mnemonics extended with GLSL-compiler 
 `ANL/ORL/XRL`, `NSE` (noise), `SMS`, `RFR`, `WHILE/ENDWHILE`, ...). The interpreter switch (`_InterpreterEmulateOp`) and the constant folder
 (`_EmulateOp`) are indexed directly by this opcode; e.g. case 0x22 (`MUL`) generalises to scalar*vector, vector*matrix, matrix*vector and
 matrix*matrix products depending on the operands' dimension bytes.
+
+### The packed program ("pp" program / shader) used by the printers
+
+`_glpPPDisassemble(program)` and `_glpPPShaderToProgramString(shader, ...)` print the compact form: header words (index in 32-bit words), each
+table entry is 8 bytes (two words; the register id is the ushort at byte +6 of the second word):
+
+| header word | meaning | evidence |
+|---|---|---|
+| 0 | target: 0x8804 ARB fragment program, 0x8620 ARB vertex program, 0x8b30 fragment shader, 0x8b31 vertex shader | the `!!ARBfp1.0` / `!!ARBvp1.0` / `!!ARBfragmentshader` / `!!ARBvertexshader` header strings |
+| 4 | temporary count (`TEMP tmpN`) | printed with the TEMP strings |
+| 6 | address register count (`ADDRESS adr0, adr1`) | |
+| 8 / 9 | attribute count / offset (`ATTRIB attN = fragment.* / vertex.*`) | |
+| 10 / 0xb | parameter count / offset (`PARAM prmN`, `prmN[size]` for arrays) | |
+| 0xc / 0xd | output count / offset (`OUTPUT resN = result.*`) | |
+| 0xe | number of parameter arrays (array-size table) | `piVar14 = malloc(shader[0xe] << 2)` |
+| 0x12 / 0x13 | option count / offset (`OPTION ARB_position_invariant`, `ARB_fog_exp`, `ARB_fog_exp2`, `ARB_fog_linear`, `ARB_precision_hint_fastest/nicest`, `APPLE_no_runtime_compile`, `APPLE_no_altivec`, `NV_fragment_program/2`, `NV_vertex_program2/3`, `ARB_draw_buffers`) | switch on the option byte |
+| 0x14 / 0x15 | instruction count / offset (compact instructions of 2..10 words printed by `_glpDisassemble1Op` / `_glpDisassemble2Op`) | |
+| 0x18 / 0x19 | raster-state record count / offset (`STATE ALPHA_TEST PP_LESS ...`, blend factors `PP_BLEND_*`, stencil ops `PP_STENCIL_*`, `PP_FUNC_*`) | the state records fixed-function raster state folded into the program |
+
+The compact instruction: word 0 bits 31..29 source count, bits 25..18 opcode; word 1 bits 23..20 saturate/clamp flags, 19..18 precision,
+28..23 size/type; word 2 bits 11..10 vector size - 1, bits 16..13 write mask; words 3.. destination and sources (2 words each, high bit =
+invalid operand). `_glpPPShaderToProgramString` first builds two tables (`paramNumbers`, `paramArrayPos`) that renumber constant registers into
+`prmN` names and mark parameter-array heads, then prints each instruction through `_glpDisassemble2Op`.
 
 ## 2. The 9-word operand descriptor (36 bytes)
 

@@ -803,3 +803,626 @@ use	_glpPPShaderToProgramString	iVar19	instructionCount	CONFIRMED	program header
 
 
 
+use	_glpPPDisassemble	iVar10	loopIndex4	INFERRED	up-counting loop index	^\s*iVar10\ =\ 0;$@92	+1
+use	_glpPPDisassemble	iVar10	loopIndex4	INFERRED	up-counting loop index	^\s*uVar19\ =\ param_1\[uVar6\ \*\ 2\ \+\ iVar10\ \*\ 2\];$	+1
+use	_glpPPDisassemble	iVar10	loopIndex4	INFERRED	up-counting loop index	^\s*uVar26\ =\ \(\(int\ \(\*\)\(\)\)_InsertLabel\)\(local_74,local_70,param_1\[uVar6\ \*\ 2\ \+\ iVar10\ \*\ 2\ \+\ 1\]\ \&\ 0x3ffff,$	+1
+use	_glpPPDisassemble	iVar10	loopIndex4	INFERRED	up-counting loop index	^\s*uVar19\ =\ param_1\[uVar6\ \*\ 2\ \+\ iVar10\ \*\ 2\];$@2	+1
+use	_glpPPDisassemble	iVar10	loopIndex4	INFERRED	up-counting loop index	^\s*iVar10\ =\ iVar10\ \+\ \(uVar19\ >>\ 0x1d\)\ \+\ 2;$	+1
+use	_glpPPDisassemble	iVar10	loopIndex4	INFERRED	up-counting loop index	^\s*iVar10\ =\ 0;$@97	+1
+use	_glpPPDisassemble	iVar10	loopIndex4	INFERRED	up-counting loop index	^\s*\*\(char\ \*\)\(\(int\)local_a8\ \+\ iVar10\)\ =\ cVar8;$@79	+4
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ 0;$@144	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*\*\(char\ \*\)\(\(int\)local_a8\ \+\ iVar10\)\ =\ cVar8;$@90	+3
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@2	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@2	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@3	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@3	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@4	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@4	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@5	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@5	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@6	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@6	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@7	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@7	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@8	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@8	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@9	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@9	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@10	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@10	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@11	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@11	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@12	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@12	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@13	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@13	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@14	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@14	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@15	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@15	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@16	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@16	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@17	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@17	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@18	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@18	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@19	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@19	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@20	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@20	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@21	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@21	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@22	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@22	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@23	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@23	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@24	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@24	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@25	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@25	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@26	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@26	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@27	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@27	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@28	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@28	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@29	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@29	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@30	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@30	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@31	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@31	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@32	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@32	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@33	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@33	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@34	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@34	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@35	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@35	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@36	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@36	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@37	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@37	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@38	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@38	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@39	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@39	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12\ \+\ 1;$@40	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10;$@40	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ 0;$@214	+1
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*\*\(char\ \*\)\(\(int\)local_a8\ \+\ iVar10\)\ =\ cVar8;$@100	+3
+use	_glpPPDisassemble	iVar10	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*local_a8\ =\ \(int\ \*\)\(\(int\)local_a8\ \+\ iVar10\);$@35	+1
+use	_glpPPDisassemble	iVar10	loopIndex4	INFERRED	up-counting loop index	^\s*iVar10\ =\ 0;$@145	+1
+use	_glpPPDisassemble	iVar10	loopIndex4	INFERRED	up-counting loop index	^\s*\*\(char\ \*\)\(\(int\)local_a8\ \+\ iVar10\)\ =\ cVar8;$@91	+4
+use	_glpPPDisassemble	iVar10	loopIndex4	INFERRED	up-counting loop index	^\s*iVar10\ =\ 0;$@206	+1
+use	_glpPPDisassemble	iVar10	loopIndex4	INFERRED	up-counting loop index	^\s*puVar18\[iVar10\]\ =\ cVar8;$@79	+4
+use	_glpPPDisassemble	iVar10	loopIndex4	INFERRED	up-counting loop index	^\s*iVar10\ =\ 0;$@207	+1
+use	_glpPPDisassemble	iVar10	loopIndex4	INFERRED	up-counting loop index	^\s*\*\(char\ \*\)\(\(int\)local_a8\ \+\ iVar10\)\ =\ cVar8;$@93	+4
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@2	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@2	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@5	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@5	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@6	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@6	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*\*\(char\ \*\)\(\(int\)local_a8\ \+\ iVar10\ \+\ iVar12\)\ =\ cVar8;$@2	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*\*\(char\ \*\)\(\(int\)local_a8\ \+\ iVar10\ \+\ iVar12\)\ =\ cVar8;$@3	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*local_a8\ =\ \(int\ \*\)\(\(int\)local_a8\ \+\ iVar13\ \+\ iVar12\);$@2	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@12	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@12	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@13	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@13	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@14	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@14	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@15	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@15	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@16	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@16	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@17	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@17	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@18	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@18	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@19	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@19	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@23	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@23	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@24	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@24	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@25	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@25	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@30	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@30	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@31	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@31	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@32	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@32	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@33	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@33	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@34	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@34	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@35	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@35	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@36	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@36	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@38	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@38	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@39	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@39	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@40	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@40	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@41	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@41	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@43	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@43	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@44	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@44	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@45	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@45	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@46	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@46	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@51	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@51	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@52	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@52	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@53	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@53	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@54	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@54	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@55	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@55	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@73	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@73	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@74	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@74	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@77	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@77	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*local_a8\ =\ \(int\ \*\)\(\(int\)local_a8\ \+\ iVar12\);$@26	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@26	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@26	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@27	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@27	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*local_a8\ =\ \(int\ \*\)\(\(int\)local_a8\ \+\ iVar12\);$@8	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@28	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@28	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*local_a8\ =\ \(int\ \*\)\(\(int\)local_a8\ \+\ iVar12\);$@9	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ iVar10\ \+\ 1;$@29	+1
+use	_glpPPDisassemble	iVar12	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar12;$@29	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar13\ =\ iVar10\ \+\ 1;$@2	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar13;$@2	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar13\ =\ iVar10\ \+\ 1;$@3	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar13;$@3	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar13\ =\ 0;$	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*local_a8\ =\ \(int\ \*\)\(\(int\)local_a8\ \+\ iVar13\ \+\ iVar12\);$@2	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar13\ =\ iVar10\ \+\ 1;$@4	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar13;$@4	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*local_a8\ =\ \(int\ \*\)\(\(int\)local_a8\ \+\ iVar13\ \+\ iVar12\);$@3	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar13\ =\ iVar10\ \+\ 1;$@5	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar13;$@5	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*local_a8\ =\ \(int\ \*\)\(\(int\)local_a8\ \+\ iVar13\ \+\ iVar12\);$@4	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar13\ =\ iVar10\ \+\ 1;$@6	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar13;$@6	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*local_a8\ =\ \(int\ \*\)\(\(int\)local_a8\ \+\ iVar13\ \+\ iVar12\);$@5	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar13\ =\ iVar10\ \+\ 1;$@7	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar13;$@7	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*local_a8\ =\ \(int\ \*\)\(\(int\)local_a8\ \+\ iVar13\ \+\ iVar12\);$@6	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar13\ =\ iVar10\ \+\ 1;$@10	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar13;$@10	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*local_a8\ =\ \(int\ \*\)\(iVar12\ \+\ iVar13\);$@3	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar13\ =\ iVar10\ \+\ 1;$@13	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar13;$@13	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*local_a8\ =\ \(int\ \*\)\(\(int\)local_a8\ \+\ iVar13\ \+\ iVar12\);$@9	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar13\ =\ iVar10\ \+\ 1;$@14	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar13;$@14	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*local_a8\ =\ \(int\ \*\)\(\(int\)local_a8\ \+\ iVar13\ \+\ iVar12\);$@10	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar13\ =\ iVar10\ \+\ 1;$@15	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar13;$@15	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar13\ =\ iVar10\ \+\ 1;$@16	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar13;$@16	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar13\ =\ iVar10\ \+\ 1;$@17	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar13;$@17	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar13\ =\ iVar10\ \+\ 1;$@18	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar13;$@18	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar13\ =\ iVar10\ \+\ 1;$@19	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar13;$@19	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar13\ =\ iVar10\ \+\ 1;$@20	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar13;$@20	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar13\ =\ iVar10\ \+\ 1;$@21	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar13;$@21	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar13\ =\ iVar10\ \+\ 1;$@22	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar13;$@22	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*\*\(char\ \*\)\(\(int\)local_a8\ \+\ iVar10\ \+\ iVar13\ \+\ iVar12\)\ =\ cVar8;$	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*local_a8\ =\ \(int\ \*\)\(\(int\)local_a8\ \+\ iVar14\ \+\ iVar13\ \+\ iVar12\);$	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar13\ =\ iVar10\ \+\ 1;$@23	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar13;$@23	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar13\ =\ iVar10\ \+\ 1;$@24	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar13;$@24	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar13\ =\ iVar10\ \+\ 1;$@25	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar13;$@25	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar13\ =\ iVar10\ \+\ 1;$@26	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar13;$@26	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar13\ =\ iVar10\ \+\ 1;$@27	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar13;$@27	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar13\ =\ iVar10\ \+\ 1;$@28	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar13;$@28	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar13\ =\ iVar10\ \+\ 1;$@29	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar13;$@29	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar13\ =\ iVar10\ \+\ 1;$@30	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ iVar13;$@30	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*\*\(char\ \*\)\(\(int\)local_a8\ \+\ iVar10\ \+\ iVar13\ \+\ iVar12\)\ =\ cVar8;$@2	+1
+use	_glpPPDisassemble	iVar13	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*puVar18\ =\ \(undefined1\ \*\)\(\(int\)local_a8\ \+\ iVar14\ \+\ iVar13\ \+\ iVar12\);$	+1
+use	_glpPPDisassemble	iVar22	allocation2	CONFIRMED	memory returned by the allocator call	^\s*iVar22\ =\ uVar23\ \*\ 4\ \+\ 4;$	+2
+use	_glpPPDisassemble	iVar22	allocation2	CONFIRMED	memory returned by the allocator call	^\s*local_7c\ =\ _malloc\(iVar22\);$	+1
+use	_glpPPDisassemble	iVar22	allocation2	CONFIRMED	memory returned by the allocator call	^\s*iVar22\ =\ uVar20\ \*\ 4\ \+\ 4;$	+2
+use	_glpPPDisassemble	iVar22	allocation2	CONFIRMED	memory returned by the allocator call	^\s*local_84\ =\ _malloc\(iVar22\);$	+1
+use	_glpPPDisassemble	iVar22	allocation2	CONFIRMED	memory returned by the allocator call	^\s*iVar22\ =\ local_6c\ <<\ 2;$	+1
+use	_glpPPDisassemble	iVar22	allocation2	CONFIRMED	memory returned by the allocator call	^\s*local_74\ =\ _malloc\(iVar22\);$	+1
+use	_glpPPDisassemble	iVar22	allocation2	CONFIRMED	memory returned by the allocator call	^\s*local_70\ =\ _malloc\(iVar22\);$	+1
+use	_glpPPDisassemble	iVar9	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar9\ =\ iVar22\ \+\ 1;$@9	+1
+use	_glpPPDisassemble	iVar9	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar22\ =\ iVar9;$@9	+2
+use	_glpPPDisassemble	iVar9	loopIndex5	INFERRED	up-counting loop index	^\s*iVar9\ =\ 0;$@78	+1
+use	_glpPPDisassemble	iVar9	loopIndex5	INFERRED	up-counting loop index	^\s*if\ \(\(\(param_1\[uVar6\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ \&\ 0x3ffff\)\ ==\ 0\)\ \&\&\ \(!bVar2\)\)\ \{$	+1
+use	_glpPPDisassemble	iVar9	loopIndex5	INFERRED	up-counting loop index	^\s*\(\(param_1\[uVar6\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ \&\ 0x3ffff\)\ ==\ \*puVar21\)\)\ \{$	+1
+use	_glpPPDisassemble	iVar9	loopIndex5	INFERRED	up-counting loop index	^\s*uVar19\ =\ param_1\[uVar6\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ >>\ 0x12\ \&\ 0xff;$	+1
+use	_glpPPDisassemble	iVar9	loopIndex5	INFERRED	up-counting loop index	^\s*\(\(int\ \(\*\)\(\)\)_glpDisassemble1Op\)\(param_1\ \+\ uVar6\ \*\ 2\ \+\ iVar9\ \*\ 2,local_a8,\&local_98,\&local_94,local_88,$	+1
+use	_glpPPDisassemble	iVar9	loopIndex5	INFERRED	up-counting loop index	^\s*iVar9\ =\ iVar9\ \+\ local_98;$	+1
+use	_glpPPDisassemble	iVar9	loopIndex5	INFERRED	up-counting loop index	^\s*iVar9\ =\ iVar9\ \+\ 1;$@5	+1
+use	_glpPPDisassemble	iVar9	loopIndex5	INFERRED	up-counting loop index	^\s*iVar9\ =\ 0;$@79	+1
+use	_glpPPDisassemble	iVar9	loopIndex5	INFERRED	up-counting loop index	^\s*uVar20\ =\ param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\];$	+1
+use	_glpPPDisassemble	iVar9	loopIndex5	INFERRED	up-counting loop index	^\s*switch\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ \&\ 7\)\ \{$	+1
+use	_glpPPDisassemble	iVar9	loopIndex5	INFERRED	up-counting loop index	^\s*\(double\)GH_U2F\(\(unsigned\ int\)\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\ \+\ 1\]\)\),1e\-07,in_f3$	+1
+use	_glpPPDisassemble	iVar9	loopIndex5	INFERRED	up-counting loop index	^\s*switch\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ >>\ 0xc\ \&\ 7\)\ \{$	+1
+use	_glpPPDisassemble	iVar9	loopIndex5	INFERRED	up-counting loop index	^\s*switch\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ >>\ 0xf\ \&\ 7\)\ \{$	+1
+use	_glpPPDisassemble	iVar9	loopIndex5	INFERRED	up-counting loop index	^\s*switch\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ >>\ 0x12\ \&\ 7\)\ \{$	+1
+use	_glpPPDisassemble	iVar9	loopIndex5	INFERRED	up-counting loop index	^\s*switch\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ >>\ 0x15\ \&\ 7\)\ \{$	+1
+use	_glpPPDisassemble	iVar9	loopIndex5	INFERRED	up-counting loop index	^\s*_sprintf\(\&local_2b0,"ref=\ %\#x\ mask\ =\ %\#x\ ",param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\ \+\ 1\]\ >>\ 0x18,$	+2
+use	_glpPPDisassemble	iVar9	loopIndex5	INFERRED	up-counting loop index	^\s*switch\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ \&\ 7\)\ \{$@2	+1
+use	_glpPPDisassemble	iVar9	loopIndex5	INFERRED	up-counting loop index	^\s*switch\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ >>\ 0x13\ \&\ 7\)\ \{$	+1
+use	_glpPPDisassemble	iVar9	loopIndex5	INFERRED	up-counting loop index	^\s*switch\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ >>\ 0x10\ \&\ 7\)\ \{$	+1
+use	_glpPPDisassemble	iVar9	loopIndex5	INFERRED	up-counting loop index	^\s*switch\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ \&\ 0xf\)\ \{$	+1
+use	_glpPPDisassemble	iVar9	loopIndex5	INFERRED	up-counting loop index	^\s*switch\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ >>\ 4\ \&\ 0xf\)\ \{$	+1
+use	_glpPPDisassemble	iVar9	loopIndex5	INFERRED	up-counting loop index	^\s*switch\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ >>\ 8\ \&\ 0xf\)\ \{$	+1
+use	_glpPPDisassemble	iVar9	loopIndex5	INFERRED	up-counting loop index	^\s*switch\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ >>\ 0xc\ \&\ 0xf\)\ \{$	+1
+use	_glpPPDisassemble	iVar9	loopIndex5	INFERRED	up-counting loop index	^\s*switch\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ \&\ 0xf\)\ \{$@2	+1
+use	_glpPPDisassemble	iVar9	loopIndex5	INFERRED	up-counting loop index	^\s*if\ \(\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ \&\ 0x20000\)\ ==\ 0\)\ \{$	+1
+use	_glpPPDisassemble	iVar9	loopIndex5	INFERRED	up-counting loop index	^\s*if\ \(\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ \&\ 0x40000\)\ ==\ 0\)\ \{$	+1
+use	_glpPPDisassemble	iVar9	loopIndex5	INFERRED	up-counting loop index	^\s*if\ \(\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ \&\ 0x80000\)\ ==\ 0\)\ \{$	+1
+use	_glpPPDisassemble	iVar9	loopIndex5	INFERRED	up-counting loop index	^\s*if\ \(\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ \&\ 0x100000\)\ ==\ 0\)\ \{$	+1
+use	_glpPPDisassemble	iVar9	loopIndex5	INFERRED	up-counting loop index	^\s*if\ \(\(param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ \&\ 0x10000\)\ ==\ 0\)\ \{$	+1
+use	_glpPPDisassemble	iVar9	loopIndex5	INFERRED	up-counting loop index	^\s*if\ \(\*\(char\ \*\)\(\(int\)param_1\ \+\ iVar9\ \*\ 8\ \+\ uVar19\ \*\ 8\ \+\ 2\)\ !=\ \-1\)\ \{$	+2
+use	_glpPPDisassemble	iVar9	loopIndex5	INFERRED	up-counting loop index	^\s*iVar9\ =\ iVar9\ \+\ 1;$@6	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*puVar21\ =\ param_1\ \+\ param_1\[0xb\]\ \*\ 2;$	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*puVar11\ =\ puVar21\ \+\ 1;$@2	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*puVar11\ =\ puVar21;$@2	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*uVar20\ =\ puVar21\[iVar22\ \*\ 2\]\ >>\ 0x10\ \&\ 0x1f;$	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ \*\(int\ \*\)\(local_84\ \+\ \(uint\)\*\(ushort\ \*\)\(\(int\)puVar21\ \+\ iVar9\ \+\ 6\)\ \*\ 4\);$	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*\(uint\)\*\(ushort\ \*\)\(\(int\)puVar21\ \+\ iVar9\ \+\ 6\)\ \*\ 4\)\);$	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*uVar23\ =\ puVar21\[iVar22\ \*\ 2\];$	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*\(uint\)\*\(ushort\ \*\)\(\(int\)puVar21\ \+\ iVar9\ \+\ 6\)\ \*\ 4\)\);$@2	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*uVar23\ =\ puVar21\[iVar22\ \*\ 2\];$@2	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,puVar21\[iVar22\ \*\ 2\]\ \&\ 0xffff\);$	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,puVar21\[iVar22\ \*\ 2\]\ \&\ 0xffff\);$@2	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,puVar21\[iVar22\ \*\ 2\]\ \&\ 0xff\);$	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*switch\(puVar21\[iVar22\ \*\ 2\]\ >>\ 8\ \&\ 0xf\)\ \{$	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,puVar21\[iVar22\ \*\ 2\]\ \&\ 0xff\);$@2	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*uVar20\ =\ puVar21\[iVar22\ \*\ 2\]\ >>\ 8\ \&\ 1;$	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*uVar20\ =\ puVar21\[iVar22\ \*\ 2\]\ >>\ 9\ \&\ 3;$	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*if\ \(\(puVar21\[iVar22\ \*\ 2\]\ >>\ 1\ \&\ 7\)\ ==\ 5\)\ \{$	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*if\ \(\(puVar21\[iVar22\ \*\ 2\]\ \&\ 1\)\ ==\ 0\)\ \{$	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*else\ if\ \(\(puVar21\[iVar22\ \*\ 2\]\ \&\ 1\)\ ==\ 1\)\ \{$	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*switch\(puVar21\[iVar22\ \*\ 2\]\ >>\ 1\ \&\ 7\)\ \{$	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,puVar21\[iVar22\ \*\ 2\]\ \&\ 0x1f\);$	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*uVar20\ =\ puVar21\[iVar22\ \*\ 2\]\ >>\ 5\ \&\ 7;$	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar12\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,puVar21\[iVar22\ \*\ 2\]\ \&\ 0x1f\);$@2	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*uVar20\ =\ puVar21\[iVar22\ \*\ 2\]\ >>\ 5\ \&\ 7;$@2	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,puVar21\[iVar22\ \*\ 2\]\ \&\ 0x1f\);$	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,puVar21\[iVar22\ \*\ 2\]\ \&\ 0xff\);$	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*switch\(puVar21\[iVar22\ \*\ 2\]\ >>\ 8\ \&\ 7\)\ \{$	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,puVar21\[iVar22\ \*\ 2\]\ \&\ 0xff\);$@2	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,puVar21\[iVar22\ \*\ 2\]\ \&\ 0xff\);$@3	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,puVar21\[iVar22\ \*\ 2\]\ \&\ 0xff\);$@4	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,puVar21\[iVar22\ \*\ 2\]\ \&\ 0xff\);$@5	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*uVar20\ =\ puVar21\[iVar22\ \*\ 2\]\ >>\ 0xe\ \&\ 3;$	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar10\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,puVar21\[iVar22\ \*\ 2\]\ >>\ 0xc\ \&\ 3\);$	+1
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*pfVar24\ =\ \(float\ \*\)\(param_1\ \+\ param_1\[0x1b\]\ \*\ 2\ \+\ \(puVar21\[iVar22\ \*\ 2\]\ \&\ 0xffff\)\ \*\ 4\);$	+2
+use	_glpPPDisassemble	puVar21	nextIndex5	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*if\ \(\*\(int\ \*\)\(local_84\ \+\ \(uint\)\*\(ushort\ \*\)\(\(int\)puVar21\ \+\ iVar9\ \+\ 6\)\ \*\ 4\)\ ==\ \-1\)\ \{$	+1
+use	_glpPPDisassemble	uVar20	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar20\ =\ 0xffffffff;$	+1
+use	_glpPPDisassemble	uVar20	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*if\ \(\(int\)uVar20\ <\ \(int\)\(uVar25\ \&\ 0xffff\)\)\ \{$	+2
+use	_glpPPDisassemble	uVar20	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*if\ \(uVar20\ ==\ 0xffffffff\)\ goto\ LAB_97beb670;$	+2
+use	_glpPPDisassemble	uVar20	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar20\ =\ 0xffffffff;$@2	+1
+use	_glpPPDisassemble	uVar20	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*if\ \(uVar20\ ==\ 0xffffffff\)\ \{$	+1
+use	_glpPPDisassemble	uVar20	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar20\ =\ \(uint\)\*\(ushort\ \*\)\(\(int\)puVar11\ \+\ 6\);$	+2
+use	_glpPPDisassemble	uVar20	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar20\ =\ 0xffffffff;$@3	+1
+use	_glpPPDisassemble	uVar20	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*\(uint\ \*\)\(\(uint\)\*\(ushort\ \*\)\(\(int\)puVar11\ \+\ 6\)\ \*\ 4\ \+\ local_88\)\ =\ uVar20;$	+1
+use	_glpPPDisassemble	uVar23	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar23\ =\ 0xffffffff;$	+1
+use	_glpPPDisassemble	uVar23	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*if\ \(\(int\)uVar23\ <\ \(int\)\(uVar7\ \&\ 0xffff\)\)\ \{$	+2
+use	_glpPPDisassemble	uVar23	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*if\ \(uVar23\ ==\ 0xffffffff\)\ goto\ LAB_97bea680;$	+2
+use	_glpPPDisassemble	uVar23	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar23\ =\ 0xffffffff;$@2	+1
+use	_glpPPDisassemble	uVar23	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*if\ \(uVar23\ ==\ 0xffffffff\)\ \{$	+1
+use	_glpPPDisassemble	uVar23	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar23\ =\ \(uint\)\*\(ushort\ \*\)\(\(int\)puVar11\ \+\ 6\);$	+2
+use	_glpPPDisassemble	uVar23	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar23\ =\ 0xffffffff;$@3	+1
+use	_glpPPDisassemble	uVar23	ppcInstWord2	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*\(uint\ \*\)\(\(uint\)\*\(ushort\ \*\)\(\(int\)puVar11\ \+\ 6\)\ \*\ 4\ \+\ local_80\)\ =\ uVar23;$	+1
+use	_glpPPDisassemble	uVar23	loopIndex10	INFERRED	up-counting loop index	^\s*uVar23\ =\ 0;$	+1
+use	_glpPPDisassemble	uVar23	loopIndex10	INFERRED	up-counting loop index	^\s*iVar22\ =\ uVar23\ \*\ 8;$	+1
+use	_glpPPDisassemble	uVar23	loopIndex10	INFERRED	up-counting loop index	^\s*uVar6\ =\ puVar21\[uVar23\ \*\ 2\]\ >>\ 0x1d;$	+1
+use	_glpPPDisassemble	uVar23	loopIndex10	INFERRED	up-counting loop index	^\s*uVar6\ =\ puVar21\[uVar23\ \*\ 2\]\ >>\ 0x1d;$@2	+1
+use	_glpPPDisassemble	uVar23	loopIndex10	INFERRED	up-counting loop index	^\s*uVar25\ =\ puVar21\[uVar23\ \*\ 2\];$	+1
+use	_glpPPDisassemble	uVar23	loopIndex10	INFERRED	up-counting loop index	^\s*uVar25\ =\ puVar21\[uVar23\ \*\ 2\];$@2	+1
+use	_glpPPDisassemble	uVar23	loopIndex10	INFERRED	up-counting loop index	^\s*uVar25\ =\ uVar23\ \+\ 1;$	+1
+use	_glpPPDisassemble	uVar23	loopIndex10	INFERRED	up-counting loop index	^\s*if\ \(puVar21\[uVar23\ \*\ 2\ \+\ 2\]\ >>\ 0x1d\ !=\ uVar6\)\ \{$	+1
+use	_glpPPDisassemble	uVar23	loopIndex10	INFERRED	up-counting loop index	^\s*uVar23\ =\ uVar25;$	+1
+use	_glpPPShaderToProgramString	iVar13	loopIndex5	INFERRED	up-counting loop index	^\s*iVar13\ =\ 0;$	+1
+use	_glpPPShaderToProgramString	iVar13	loopIndex5	INFERRED	up-counting loop index	^\s*iVar13\ =\ 0;$@2	+1
+use	_glpPPShaderToProgramString	iVar13	loopIndex5	INFERRED	up-counting loop index	^\s*iVar13\ =\ iVar13\ \+\ 1;$	+1
+use	_glpPPShaderToProgramString	iVar13	loopIndex5	INFERRED	up-counting loop index	^\s*else\ if\ \(iVar13\ \+\ 1\ ==\ piVar14\[iVar3\]\)\ \{$	+1
+use	_glpPPShaderToProgramString	iVar13	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar13\ =\ iVar16\ \+\ 1;$@16	+1
+use	_glpPPShaderToProgramString	iVar13	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar16\ =\ iVar13;$@16	+1
+use	_glpPPShaderToProgramString	iVar13	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*pcVar22\[iVar16\ \+\ iVar13\]\ =\ cVar2;$	+1
+use	_glpPPShaderToProgramString	iVar13	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar17\ =\ iVar17\ \+\ iVar13;$@5	+1
+use	_glpPPShaderToProgramString	iVar13	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar13\ =\ iVar16\ \+\ 1;$@19	+1
+use	_glpPPShaderToProgramString	iVar13	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar16\ =\ iVar13;$@19	+1
+use	_glpPPShaderToProgramString	iVar13	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*pcVar22\[iVar16\ \+\ iVar13\]\ =\ cVar2;$@3	+1
+use	_glpPPShaderToProgramString	iVar13	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar17\ =\ iVar17\ \+\ iVar13;$@7	+1
+use	_glpPPShaderToProgramString	iVar13	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar13\ =\ iVar16\ \+\ 1;$@22	+1
+use	_glpPPShaderToProgramString	iVar13	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar16\ =\ iVar13;$@22	+1
+use	_glpPPShaderToProgramString	iVar13	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*pcVar22\[iVar16\ \+\ iVar13\]\ =\ cVar2;$@5	+1
+use	_glpPPShaderToProgramString	iVar13	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar17\ =\ iVar17\ \+\ iVar13;$@9	+1
+use	_glpPPShaderToProgramString	iVar13	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar13\ =\ iVar16\ \+\ 1;$@28	+1
+use	_glpPPShaderToProgramString	iVar13	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar16\ =\ iVar13;$@28	+1
+use	_glpPPShaderToProgramString	iVar13	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*pcVar22\[iVar16\ \+\ iVar13\]\ =\ cVar2;$@9	+1
+use	_glpPPShaderToProgramString	iVar13	nextIndex	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar17\ =\ iVar17\ \+\ iVar13;$@13	+1
+use	_glpPPShaderToProgramString	iVar16	allocation3	CONFIRMED	memory returned by the allocator call	^\s*iVar16\ =\ 0;$	+1
+use	_glpPPShaderToProgramString	iVar16	allocation3	CONFIRMED	memory returned by the allocator call	^\s*iVar16\ =\ _malloc\(iVar3\);$	+1
+use	_glpPPShaderToProgramString	iVar16	allocation3	CONFIRMED	memory returned by the allocator call	^\s*if\ \(\(iVar16\ ==\ 0\)\ \|\|\ \(uVar11\ =\ extraout_r4_00,\ piVar15\ ==\ \(int\ \*\)0x0\)\)\ \{$	+1
+use	_glpPPShaderToProgramString	iVar16	allocation3	CONFIRMED	memory returned by the allocator call	^\s*if\ \(iVar16\ !=\ 0\)\ \{$	+2
+use	_glpPPShaderToProgramString	iVar16	allocation3	CONFIRMED	memory returned by the allocator call	^\s*\*\(uint\ \*\)\(uVar1\ \*\ 4\ \+\ iVar16\)\ =\ uVar1;$	+1
+use	_glpPPShaderToProgramString	iVar16	allocation3	CONFIRMED	memory returned by the allocator call	^\s*\*\(uint\ \*\)\(uVar1\ \*\ 4\ \+\ iVar16\)\ =\ uVar23;$	+1
+use	_glpPPShaderToProgramString	iVar16	allocation3	CONFIRMED	memory returned by the allocator call	^\s*\(iVar16\ \+\ \(uint\)\*\(ushort\ \*\)$	+1
+use	_glpPPShaderToProgramString	iVar16	allocation3	CONFIRMED	memory returned by the allocator call	^\s*\(iVar16\ \+\ \(uint\)\*\(ushort\ \*\)$@2	+1
+use	_glpPPShaderToProgramString	iVar16	allocation3	CONFIRMED	memory returned by the allocator call	^\s*if\ \(iVar16\ !=\ 0\)\ \{$@2	+2
+use	_glpPPShaderToProgramString	iVar16	allocation3	CONFIRMED	memory returned by the allocator call	^\s*if\ \(iVar16\ !=\ 0\)\ \{$@3	+2
+use	_glpPPShaderToProgramString	iVar16	allocation3	CONFIRMED	memory returned by the allocator call	^\s*iVar16,piVar15,0,\&local_50,\&local_70,iVar17,param_2\);$	+1
+use	_glpPPShaderToProgramString	iVar16	allocation3	CONFIRMED	memory returned by the allocator call	^\s*if\ \(iVar16\ !=\ 0\)\ \{$@4	+2
+use	_glpPPShaderToProgramString	iVar16	allocation3	CONFIRMED	memory returned by the allocator call	^\s*if\ \(iVar16\ !=\ 0\)\ \{$@5	+2
+use	_glpPPShaderToProgramString	iVar16	loopIndex6	INFERRED	up-counting loop index	^\s*iVar16\ =\ 0;$@22	+1
+use	_glpPPShaderToProgramString	iVar16	loopIndex6	INFERRED	up-counting loop index	^\s*pcVar22\[iVar16\]\ =\ cVar2;$	+2
+use	_glpPPShaderToProgramString	iVar16	loopIndex6	INFERRED	up-counting loop index	^\s*\[iVar16\ \+\ 1\];$	+2
+use	_glpPPShaderToProgramString	iVar16	loopIndex6	INFERRED	up-counting loop index	^\s*iVar16\ =\ 0;$@27	+1
+use	_glpPPShaderToProgramString	iVar16	loopIndex6	INFERRED	up-counting loop index	^\s*pcVar22\[iVar16\]\ =\ cVar2;$@2	+2
+use	_glpPPShaderToProgramString	iVar16	loopIndex6	INFERRED	up-counting loop index	^\s*\[iVar16\ \+\ 1\];$@2	+2
+use	_glpPPShaderToProgramString	iVar16	loopIndex6	INFERRED	up-counting loop index	^\s*iVar16\ =\ 0;$@32	+1
+use	_glpPPShaderToProgramString	iVar16	loopIndex6	INFERRED	up-counting loop index	^\s*pcVar22\[iVar16\]\ =\ cVar2;$@3	+2
+use	_glpPPShaderToProgramString	iVar16	loopIndex6	INFERRED	up-counting loop index	^\s*\[iVar16\ \+\ 1\];$@3	+2
+use	_glpPPShaderToProgramString	iVar16	loopIndex6	INFERRED	up-counting loop index	^\s*iVar16\ =\ 0;$@42	+1
+use	_glpPPShaderToProgramString	iVar16	loopIndex6	INFERRED	up-counting loop index	^\s*pcVar22\[iVar16\]\ =\ cVar2;$@5	+2
+use	_glpPPShaderToProgramString	iVar16	loopIndex6	INFERRED	up-counting loop index	^\s*\[iVar16\ \+\ 1\];$@4	+2
+use	_glpPPShaderToProgramString	iVar3	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar3\ =\ iVar21\ \+\ 1;$@2	+1
+use	_glpPPShaderToProgramString	iVar3	nextIndex2	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar21\ =\ iVar3;$@2	+2
+use	_glpPPShaderToProgramString	iVar3	allocation4	CONFIRMED	memory returned by the allocator call	^\s*iVar3\ =\ uVar23\ \*\ 4\ \+\ 4;$	+3
+use	_glpPPShaderToProgramString	iVar3	loopIndex7	INFERRED	up-counting loop index	^\s*iVar3\ =\ 0;$@7	+1
+use	_glpPPShaderToProgramString	iVar3	loopIndex7	INFERRED	up-counting loop index	^\s*uVar25\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97bf2850\)\(local_60,piVar14\[iVar3\]\);$	+1
+use	_glpPPShaderToProgramString	iVar3	loopIndex7	INFERRED	up-counting loop index	^\s*else\ if\ \(iVar13\ \+\ 1\ ==\ piVar14\[iVar3\]\)\ \{$	+2
+use	_glpPPShaderToProgramString	iVar3	loopIndex7	INFERRED	up-counting loop index	^\s*iVar3\ =\ 0;$@29	+1
+use	_glpPPShaderToProgramString	iVar3	loopIndex7	INFERRED	up-counting loop index	^\s*iVar4\ =\ \(\(int\ \(\*\)\(\)\)_glpDisassemble2Op\)\(param_1\ \+\ iVar13\ \*\ 2\ \+\ iVar3\ \*\ 2,local_48\[0\],\&local_58,\&local_54,$	+1
+use	_glpPPShaderToProgramString	iVar3	loopIndex7	INFERRED	up-counting loop index	^\s*iVar3\ =\ iVar3\ \+\ local_58;$	+1
+use	_glpPPShaderToProgramString	iVar3	loopIndex7	INFERRED	up-counting loop index	^\s*iVar3\ =\ iVar3\ \+\ 1;$@4	+1
+use	_glpPPShaderToProgramString	iVar4	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar4\ =\ iVar3\ \+\ 1;$@4	+1
+use	_glpPPShaderToProgramString	iVar4	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar3\ =\ iVar4;$@4	+1
+use	_glpPPShaderToProgramString	iVar4	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar4\ =\ iVar3\ \+\ 1;$@5	+1
+use	_glpPPShaderToProgramString	iVar4	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar3\ =\ iVar4;$@5	+1
+use	_glpPPShaderToProgramString	iVar4	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar4\ =\ iVar3\ \+\ 1;$@6	+1
+use	_glpPPShaderToProgramString	iVar4	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar3\ =\ iVar4;$@6	+1
+use	_glpPPShaderToProgramString	iVar4	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar4\ =\ iVar3\ \+\ 1;$@8	+1
+use	_glpPPShaderToProgramString	iVar4	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar3\ =\ iVar4;$@8	+1
+use	_glpPPShaderToProgramString	iVar4	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar4\ =\ iVar3\ \+\ 1;$@9	+1
+use	_glpPPShaderToProgramString	iVar4	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar3\ =\ iVar4;$@9	+1
+use	_glpPPShaderToProgramString	iVar4	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar4\ =\ iVar3\ \+\ 1;$@13	+1
+use	_glpPPShaderToProgramString	iVar4	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar3\ =\ iVar4;$@13	+1
+use	_glpPPShaderToProgramString	iVar4	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar4\ =\ iVar3\ \+\ 1;$@14	+1
+use	_glpPPShaderToProgramString	iVar4	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar3\ =\ iVar4;$@14	+1
+use	_glpPPShaderToProgramString	iVar4	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar4\ =\ iVar3\ \+\ 1;$@17	+1
+use	_glpPPShaderToProgramString	iVar4	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar3\ =\ iVar4;$@17	+1
+use	_glpPPShaderToProgramString	iVar4	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar4\ =\ iVar3\ \+\ 1;$@18	+1
+use	_glpPPShaderToProgramString	iVar4	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar3\ =\ iVar4;$@18	+1
+use	_glpPPShaderToProgramString	iVar4	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar4\ =\ iVar3\ \+\ 1;$@19	+1
+use	_glpPPShaderToProgramString	iVar4	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar3\ =\ iVar4;$@19	+1
+use	_glpPPShaderToProgramString	iVar4	nextIndex3	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*local_60\ =\ local_60\ \+\ iVar4;$@14	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@7	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@7	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@8	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@8	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ 0;$	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*local_60\ =\ local_60\ \+\ iVar7;$@4	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@14	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@14	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@15	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@15	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@16	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@16	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@17	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@17	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@18	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@18	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@19	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@19	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@20	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@20	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@21	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@21	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@25	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@25	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@26	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@26	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@27	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@27	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@32	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@32	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@33	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@33	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@34	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@34	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@35	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@35	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@36	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@36	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@37	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@37	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@38	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@38	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@40	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@40	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@41	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@41	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@42	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@42	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@43	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@43	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@45	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@45	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@46	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@46	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@47	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@47	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@48	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@48	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@53	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@53	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@54	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@54	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@55	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@55	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@56	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@56	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@57	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@57	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@75	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@75	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@76	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@76	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@79	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@79	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*local_60\ =\ local_60\ \+\ iVar7;$@28	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@28	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@28	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@29	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@29	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*local_60\ =\ local_60\ \+\ iVar7;$@10	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@30	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@30	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*local_60\ =\ local_60\ \+\ iVar7;$@11	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar7\ =\ iVar8\ \+\ 1;$@31	+1
+use	_glpPPShaderToProgramString	iVar7	nextIndex4	INFERRED	next index of an inlined string-copy loop (index + 1, then copied back)	^\s*iVar8\ =\ iVar7;$@31	+1
+use	_glpPPShaderToProgramString	pcVar20	allocation6	CONFIRMED	memory returned by the allocator call	^\s*pcVar20\ =\ pcVar9\ \+\ iVar13;$	+1
+use	_glpPPShaderToProgramString	pcVar20	allocation6	CONFIRMED	memory returned by the allocator call	^\s*pcVar20\[iVar16\]\ =\ cVar2;$	+1
+use	_glpPPShaderToProgramString	pcVar20	allocation6	CONFIRMED	memory returned by the allocator call	^\s*pcVar20\[iVar16\]\ =\ cVar2;$@2	+1
+use	_glpPPShaderToProgramString	pcVar20	allocation6	CONFIRMED	memory returned by the allocator call	^\s*pcVar20\ =\ pcVar20\ \+\ iVar13;$	+1
+use	_glpPPShaderToProgramString	pcVar20	allocation6	CONFIRMED	memory returned by the allocator call	^\s*pcVar20\[iVar16\]\ =\ cVar2;$@3	+1
+use	_glpPPShaderToProgramString	pcVar20	allocation6	CONFIRMED	memory returned by the allocator call	^\s*pcVar20\[iVar16\]\ =\ cVar2;$@4	+1
+use	_glpPPShaderToProgramString	pcVar20	allocation6	CONFIRMED	memory returned by the allocator call	^\s*pcVar20\ =\ pcVar20\ \+\ iVar13;$@2	+1
+use	_glpPPShaderToProgramString	pcVar20	allocation6	CONFIRMED	memory returned by the allocator call	^\s*pcVar20\[iVar16\]\ =\ cVar2;$@5	+1
+use	_glpPPShaderToProgramString	pcVar20	allocation6	CONFIRMED	memory returned by the allocator call	^\s*pcVar20\ =\ pcVar20\ \+\ iVar13;$@3	+1
+use	_glpPPShaderToProgramString	pcVar20	allocation6	CONFIRMED	memory returned by the allocator call	^\s*pcVar20\[iVar16\]\ =\ cVar2;$@6	+1
+use	_glpPPShaderToProgramString	pcVar20	allocation6	CONFIRMED	memory returned by the allocator call	^\s*pcVar20\ =\ pcVar20\ \+\ iVar13;$@4	+1
+use	_glpPPShaderToProgramString	pcVar20	allocation6	CONFIRMED	memory returned by the allocator call	^\s*iVar13\ =\ _malloc\(pcVar22\ \+\ \(int\)\(pcVar20\ \+$	+1
+use	_glpPPShaderToProgramString	pcVar20	allocation6	CONFIRMED	memory returned by the allocator call	^\s*\*pcVar20\ =\ '\\0';$	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\ =\ pcVar10;$	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\ =\ pcVar10\ \+\ iVar17\ \+\ iVar13;$	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\[iVar16\]\ =\ cVar2;$	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\[iVar16\ \+\ iVar13\]\ =\ cVar2;$	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\[iVar16\ \+\ iVar17\]\ =\ cVar2;$	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\[iVar16\ \+\ iVar13\]\ =\ cVar2;$@2	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\[iVar16\ \+\ iVar17\]\ =\ cVar2;$@2	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\ =\ pcVar22\ \+\ iVar13\ \+\ iVar17;$	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\[iVar16\]\ =\ cVar2;$@2	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\[iVar16\ \+\ iVar13\]\ =\ cVar2;$@3	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\[iVar16\ \+\ iVar17\]\ =\ cVar2;$@3	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\[iVar16\ \+\ iVar13\]\ =\ cVar2;$@4	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\[iVar16\ \+\ iVar17\]\ =\ cVar2;$@4	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\ =\ pcVar22\ \+\ iVar13\ \+\ iVar17;$@2	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\[iVar16\]\ =\ cVar2;$@3	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\[iVar16\ \+\ iVar13\]\ =\ cVar2;$@5	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\[iVar16\ \+\ iVar17\]\ =\ cVar2;$@5	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\[iVar16\ \+\ iVar13\]\ =\ cVar2;$@6	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\[iVar16\ \+\ iVar17\]\ =\ cVar2;$@6	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\ =\ pcVar22\ \+\ iVar13\ \+\ iVar17;$@3	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\[iVar16\]\ =\ cVar2;$@4	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\[iVar16\ \+\ iVar13\]\ =\ cVar2;$@7	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\[iVar16\ \+\ iVar17\]\ =\ cVar2;$@7	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\[iVar16\ \+\ iVar13\]\ =\ cVar2;$@8	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\[iVar16\ \+\ iVar17\]\ =\ cVar2;$@8	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\ =\ pcVar22\ \+\ iVar13\ \+\ iVar17;$@4	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\[iVar16\]\ =\ cVar2;$@5	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\[iVar16\ \+\ iVar13\]\ =\ cVar2;$@9	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\[iVar16\ \+\ iVar17\]\ =\ cVar2;$@9	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\[iVar16\ \+\ iVar13\]\ =\ cVar2;$@10	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\ =\ pcVar22\ \+\ iVar17\ \+\ iVar13;$	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\[iVar16\]\ =\ cVar2;$@6	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\ =\ pcVar22\ \+\ iVar13;$	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\[iVar16\]\ =\ cVar2;$@7	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\ =\ pcVar22\ \+\ iVar13;$@2	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*iVar16\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97bf2850\)\(pcVar22,uVar23\);$	+2
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\[iVar16\]\ =\ cVar2;$@8	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\ =\ pcVar22\ \+\ iVar13;$@3	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\[iVar16\]\ =\ cVar2;$@9	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*pcVar22\ =\ pcVar22\ \+\ iVar13;$@4	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*iVar13\ =\ _malloc\(pcVar22\ \+\ \(int\)\(pcVar20\ \+$	+1
+use	_glpPPShaderToProgramString	pcVar22	allocation7	CONFIRMED	memory returned by the allocator call	^\s*\*pcVar22\ =\ '\\0';$	+1
+use	_glpPPShaderToProgramString	pcVar9	allocation8	CONFIRMED	memory returned by the allocator call	^\s*pcVar9\ =\ local_64;$	+1
+use	_glpPPShaderToProgramString	pcVar9	allocation8	CONFIRMED	memory returned by the allocator call	^\s*pcVar9\ =\ local_64;$@2	+1
+use	_glpPPShaderToProgramString	pcVar9	allocation8	CONFIRMED	memory returned by the allocator call	^\s*pcVar9\ =\ local_64;$@3	+1
+use	_glpPPShaderToProgramString	pcVar9	allocation8	CONFIRMED	memory returned by the allocator call	^\s*pcVar9\ =\ local_64;$@4	+1
+use	_glpPPShaderToProgramString	pcVar9	allocation8	CONFIRMED	memory returned by the allocator call	^\s*pcVar9\ =\ local_64;$@5	+1
+use	_glpPPShaderToProgramString	pcVar9	allocation8	CONFIRMED	memory returned by the allocator call	^\s*local_64\ =\ pcVar9;$	+1
+use	_glpPPShaderToProgramString	pcVar9	allocation8	CONFIRMED	memory returned by the allocator call	^\s*pcVar9\ =\ local_64;$@6	+1
+use	_glpPPShaderToProgramString	pcVar9	allocation8	CONFIRMED	memory returned by the allocator call	^\s*pcVar9\ =\ local_64;$@7	+1
+use	_glpPPShaderToProgramString	pcVar9	allocation8	CONFIRMED	memory returned by the allocator call	^\s*pcVar9\ =\ local_64;$@8	+1
+use	_glpPPShaderToProgramString	pcVar9	allocation8	CONFIRMED	memory returned by the allocator call	^\s*pcVar9\ =\ local_64;$@9	+1
+use	_glpPPShaderToProgramString	pcVar9	allocation8	CONFIRMED	memory returned by the allocator call	^\s*pcVar9\ =\ local_64;$@10	+1
+use	_glpPPShaderToProgramString	pcVar9	allocation8	CONFIRMED	memory returned by the allocator call	^\s*pcVar9\ =\ local_64;$@11	+1
+use	_glpPPShaderToProgramString	pcVar9	allocation8	CONFIRMED	memory returned by the allocator call	^\s*pcVar9\ =\ \(char\ \*\)_malloc\(local_68\);$	+2
+use	_glpPPShaderToProgramString	pcVar9	allocation8	CONFIRMED	memory returned by the allocator call	^\s*pcVar9\ =\ local_4c;$	+1
+use	_glpPPShaderToProgramString	pcVar9	allocation8	CONFIRMED	memory returned by the allocator call	^\s*pcVar9\[iVar16\]\ =\ cVar2;$	+1
+use	_glpPPShaderToProgramString	pcVar9	allocation8	CONFIRMED	memory returned by the allocator call	^\s*pcVar9\[iVar16\]\ =\ cVar2;$@2	+1
+use	_glpPPShaderToProgramString	pcVar9	allocation8	CONFIRMED	memory returned by the allocator call	^\s*pcVar9\[iVar16\]\ =\ cVar2;$@3	+1
+use	_glpPPShaderToProgramString	pcVar9	allocation8	CONFIRMED	memory returned by the allocator call	^\s*pcVar20\ =\ pcVar9\ \+\ iVar13;$	+1
+use	_glpPPShaderToProgramString	pcVar9	allocation8	CONFIRMED	memory returned by the allocator call	^\s*\(\(\(\-\(int\)local_64\ \-\ \(int\)pcVar9\)\ \-\ \(int\)pcVar10\)\ \-$	+1
+use	_glpPPShaderToProgramString	pcVar9	allocation8	CONFIRMED	memory returned by the allocator call	^\s*cVar2\ =\ \*pcVar9;$	+1
+use	_glpPPShaderToProgramString	pcVar9	allocation8	CONFIRMED	memory returned by the allocator call	^\s*cVar2\ =\ pcVar9\[iVar16\];$	+1
+use	_glpPPShaderToProgramString	pcVar9	allocation8	CONFIRMED	memory returned by the allocator call	^\s*_free\(pcVar9\);$	+1
+use	_glpPPShaderToProgramString	pcVar9	allocation8	CONFIRMED	memory returned by the allocator call	^\s*_free\(pcVar9\);$@2	+1
+use	_glpPPShaderToProgramString	piVar14	allocation9	CONFIRMED	memory returned by the allocator call	^\s*piVar14\ =\ \(int\ \*\)0x0;$	+1
+use	_glpPPShaderToProgramString	piVar14	allocation9	CONFIRMED	memory returned by the allocator call	^\s*piVar14\ =\ piVar15;$	+1
+use	_glpPPShaderToProgramString	piVar14	allocation9	CONFIRMED	memory returned by the allocator call	^\s*if\ \(piVar14\ !=\ \(int\ \*\)0x0\)\ \{$	+2
+use	_glpPPShaderToProgramString	piVar14	allocation9	CONFIRMED	memory returned by the allocator call	^\s*piVar14\ =\ \(int\ \*\)_malloc\(param_1\[0xe\]\ <<\ 2\);$	+1
+use	_glpPPShaderToProgramString	piVar14	allocation9	CONFIRMED	memory returned by the allocator call	^\s*uVar25\ =\ CONCAT44\(piVar14,uVar11\);$	+1
+use	_glpPPShaderToProgramString	piVar14	allocation9	CONFIRMED	memory returned by the allocator call	^\s*piVar18\ =\ piVar14;$	+1
+use	_glpPPShaderToProgramString	piVar14	allocation9	CONFIRMED	memory returned by the allocator call	^\s*uVar25\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97bf2850\)\(local_60,piVar14\[iVar3\]\);$	+1
+use	_glpPPShaderToProgramString	piVar14	allocation9	CONFIRMED	memory returned by the allocator call	^\s*else\ if\ \(iVar13\ \+\ 1\ ==\ piVar14\[iVar3\]\)\ \{$	+1
+use	_glpPPShaderToProgramString	piVar14	allocation9	CONFIRMED	memory returned by the allocator call	^\s*if\ \(piVar14\ !=\ \(int\ \*\)0x0\)\ \{$@2	+2
+use	_glpPPShaderToProgramString	piVar14	allocation9	CONFIRMED	memory returned by the allocator call	^\s*piVar14\ =\ piVar15;$@2	+1
+use	_glpPPShaderToProgramString	piVar15	allocation10	CONFIRMED	memory returned by the allocator call	^\s*piVar15\ =\ \(int\ \*\)0x0;$	+1
+use	_glpPPShaderToProgramString	piVar15	allocation10	CONFIRMED	memory returned by the allocator call	^\s*piVar15\ =\ \(int\ \*\)_malloc\(iVar3\);$	+3
+use	_glpPPShaderToProgramString	piVar15	allocation10	CONFIRMED	memory returned by the allocator call	^\s*piVar15\[\*\(ushort\ \*\)\(\(int\)param_1\ \+\ iVar5\ \+\ 6\)\]\ =\ iVar4;$	+1
+use	_glpPPShaderToProgramString	piVar15	allocation10	CONFIRMED	memory returned by the allocator call	^\s*piVar15\[uVar23\]\ =\ 0;$	+1
+use	_glpPPShaderToProgramString	piVar15	allocation10	CONFIRMED	memory returned by the allocator call	^\s*piVar15\[\*\(ushort\ \*\)\(\(int\)param_1\ \+\ iVar5\ \+\ 6\)\]\ =\ iVar4;$@2	+1
+use	_glpPPShaderToProgramString	piVar15	allocation10	CONFIRMED	memory returned by the allocator call	^\s*if\ \(piVar15\[\*\(ushort\ \*\)\(\(int\)param_1\ \+\ iVar5\ \+\ iVar19\ \*\ 8\ \+\ 6\)\]\ ==\ \-1\)\ \{$	+1
+use	_glpPPShaderToProgramString	piVar15	allocation10	CONFIRMED	memory returned by the allocator call	^\s*if\ \(piVar15\[\*\(ushort\ \*\)\(\(int\)param_1\ \+\ iVar5\ \+\ iVar19\ \*\ 8\ \+\ 6\)\]\ ==\ 0\)\ \{$	+1
+use	_glpPPShaderToProgramString	piVar15	allocation10	CONFIRMED	memory returned by the allocator call	^\s*if\ \(piVar15\[\*\(ushort\ \*\)\(\(int\)param_1\ \+\ iVar5\ \+\ iVar19\ \*\ 8\ \+\ 6\)\]\ ==\ \-1\)\ \{$@2	+1
+use	_glpPPShaderToProgramString	piVar15	allocation10	CONFIRMED	memory returned by the allocator call	^\s*if\ \(piVar15\ !=\ \(int\ \*\)0x0\)\ \{$	+2
+use	_glpPPShaderToProgramString	piVar15	allocation10	CONFIRMED	memory returned by the allocator call	^\s*piVar14\ =\ piVar15;$@2	+1
+use	_glpPPShaderToProgramString	piVar15	allocation10	CONFIRMED	memory returned by the allocator call	^\s*iVar16,piVar15,0,\&local_50,\&local_70,iVar17,param_2\);$	+1
+use	_glpPPShaderToProgramString	piVar15	allocation10	CONFIRMED	memory returned by the allocator call	^\s*if\ \(piVar15\ !=\ \(int\ \*\)0x0\)\ \{$@2	+2
+use	_glpPPShaderToProgramString	piVar15	allocation10	CONFIRMED	memory returned by the allocator call	^\s*if\ \(piVar15\ !=\ \(int\ \*\)0x0\)\ \{$@3	+2
+use	_glpPPShaderToProgramString	uVar23	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar23\ =\ 0xffffffff;$	+1
+use	_glpPPShaderToProgramString	uVar23	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*if\ \(\(int\)uVar23\ <\ \(int\)\(uVar1\ \&\ 0xffff\)\)\ \{$	+2
+use	_glpPPShaderToProgramString	uVar23	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*if\ \(uVar23\ !=\ 0xffffffff\)\ \{$	+2
+use	_glpPPShaderToProgramString	uVar23	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar23\ =\ 0xffffffff;$@2	+1
+use	_glpPPShaderToProgramString	uVar23	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*if\ \(uVar23\ ==\ 0xffffffff\)\ \{$	+1
+use	_glpPPShaderToProgramString	uVar23	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar23\ =\ \(uint\)\*\(ushort\ \*\)\(\(int\)param_1\ \+\ iVar5\ \+\ 6\);$	+2
+use	_glpPPShaderToProgramString	uVar23	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*\*\(uint\ \*\)\(uVar1\ \*\ 4\ \+\ iVar16\)\ =\ uVar23;$	+1
+use	_glpPPShaderToProgramString	uVar23	ppcInstWord	CONFIRMED	PowerPC instruction word stored into the code buffer	^\s*uVar23\ =\ 0xffffffff;$@3	+1
+use	_glpPPShaderToProgram	uVar2	allocation2	CONFIRMED	memory returned by the allocator call	^\s*uVar2\ =\ 0;$	+1
+use	_glpPPShaderToProgram	uVar2	allocation2	CONFIRMED	memory returned by the allocator call	^\s*uVar2\ =\ 0;$@2	+1
+use	_glpPPShaderToProgram	uVar2	allocation2	CONFIRMED	memory returned by the allocator call	^\s*uVar2\ =\ _calloc\(local_30\[0\],8\);$	+2
+use	_glpPPShaderToProgram	uVar2	allocation2	CONFIRMED	memory returned by the allocator call	^\s*return\ uVar2;$	+1
