@@ -3369,31 +3369,31 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 1615f8	1615fc	millicode	FUN_00160eb0	1	
 1616c8	1616cc	eh-pad	FUN_00160eb0	1	__Unwind_Resume
 162b2c	162b30	eh-pad	FUN_001621c8	1	__Unwind_Resume
-165f24	165f28	millicode	FUN_00165d3c	1	
-165f38	165f58	eh-pad	FUN_00165d3c	8	0x193cc0,__Unwind_Resume
-166220	166224	millicode	FUN_00165fa8	1	
-166238	166258	eh-pad	FUN_00165fa8	8	0x193cc0,__Unwind_Resume
+165f24	165f28	millicode	Scheduler__createNode	1	
+165f38	165f58	eh-pad	Scheduler__createNode	8	0x193cc0,__Unwind_Resume
+166220	166224	millicode	Scheduler__findOrCreateExternalNode	1	
+166238	166258	eh-pad	Scheduler__findOrCreateExternalNode	8	0x193cc0,__Unwind_Resume
 168f84	168f88	millicode	FUN_00168d80	1	
 1690f8	1690fc	millicode	FUN_00168d80	1	
 169358	16935c	millicode	FUN_00168d80	1	
 1693b8	1693bc	millicode	FUN_00168d80	1	
 1697fc	169800	eh-pad	FUN_00168d80	1	__Unwind_Resume
 169e18	169e1c	eh-pad	FUN_00169b70	1	__Unwind_Resume
-16a874	16a878	millicode	FUN_0016a568	1	
-16a890	16a8ac	other	FUN_0016a568	7	0x193cc0
-16b0e8	16b104	other	FUN_0016a568	7	0x193cc0
-16bd48	16bd54	eh-pad	FUN_0016a568	3	__Unwind_Resume
+16a874	16a878	millicode	Scheduler__buildDependencyGraph	1	
+16a890	16a8ac	other	Scheduler__buildDependencyGraph	7	0x193cc0
+16b0e8	16b104	other	Scheduler__buildDependencyGraph	7	0x193cc0
+16bd48	16bd54	eh-pad	Scheduler__buildDependencyGraph	3	__Unwind_Resume
 16c1e4	16c1fc	eh-pad	FUN_0016bd70	6	0x193cc0,__Unwind_Resume
 16df58	16df78	eh-pad	FUN_0016dd04	8	0x193cc0,__Unwind_Resume
-16fee8	16ff10	other	FUN_0016ff54	10	0x193cc0
-16ff24	16ff3c	eh-pad	FUN_0016ff54	6	0x193cc0,__Unwind_Resume
-1716ec	1716f0	eh-pad	FUN_00170e6c	1	__Unwind_Resume
+16fee8	16ff10	other	Scheduler__selectNextNode	10	0x193cc0
+16ff24	16ff3c	eh-pad	Scheduler__selectNextNode	6	0x193cc0,__Unwind_Resume
+1716ec	1716f0	eh-pad	Scheduler__scheduleBlock	1	__Unwind_Resume
 171808	17180c	millicode	pass_sched_preprocess_and_schedule_inst	1	
 17182c	171848	other	pass_sched_preprocess_and_schedule_inst	7	0x193cc0
 1718cc	1718ec	eh-pad	pass_sched_preprocess_and_schedule_inst	8	0x193cc0,__Unwind_Resume
-171ee4	171f1c	other	FUN_00171e68	14	
-171f2c	171f64	other	FUN_00171e68	14	
-171fa0	171fd0	eh-pad	FUN_00171e68	12	__Unwind_Resume
+171ee4	171f1c	other	Scheduler__run	14	
+171f2c	171f64	other	Scheduler__run	14	
+171fa0	171fd0	eh-pad	Scheduler__run	12	__Unwind_Resume
 1724d4	1724f4	eh-pad	ResourceModel__vslot32	8	0x193cc0,__Unwind_Resume
 172f04	172f0c	millicode	FUN_00172efc	2	
 172f20	172f24	millicode	FUN_00172f0c	1	

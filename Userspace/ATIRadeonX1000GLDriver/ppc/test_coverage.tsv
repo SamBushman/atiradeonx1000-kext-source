@@ -2666,55 +2666,55 @@
 0x1633f8	FUN_001633f8	128	yes	
 0x163478	FUN_00163478	1308	no	indirect call (driver context / vtable / callback)
 0x163994	FUN_00163994	3864	no	indirect call (driver context / vtable / callback)
-0x1648ac	FUN_001648ac	456	no	indirect call (driver context / vtable / callback)
+0x1648ac	Scheduler__compareNodes	456	no	indirect call (driver context / vtable / callback)
 0x164a74	FUN_00164a74	312	yes	
-0x164bac	FUN_00164bac	44	yes	
-0x164bd8	FUN_00164bd8	20	yes	
+0x164bac	VRegKey__equals	44	yes	
+0x164bd8	VRegKey__hash	20	yes	
 0x164bec	FUN_00164bec	520	no	indirect call (driver context / vtable / callback)
 0x164df4	FUN_00164df4	136	no	indirect call (driver context / vtable / callback)
-0x164e7c	FUN_00164e7c	324	no	indirect call (driver context / vtable / callback)
+0x164e7c	Scheduler__getDependencyLatency	324	no	indirect call (driver context / vtable / callback)
 0x164fc0	FUN_00164fc0	84	yes	
 0x165014	FUN_00165014	1520	no	indirect call (driver context / vtable / callback)
 0x165604	FUN_00165604	388	no	indirect call (driver context / vtable / callback)
 0x165788	FUN_00165788	628	no	indirect call (driver context / vtable / callback)
 0x1659fc	FUN_001659fc	384	no	indirect call (driver context / vtable / callback)
-0x165b7c	FUN_00165b7c	448	no	indirect call (driver context / vtable / callback)
-0x165d3c	FUN_00165d3c	584	no	indirect call (driver context / vtable / callback)
-0x165fa8	FUN_00165fa8	720	yes	
+0x165b7c	Scheduler__addDataDependencyEdge	448	no	indirect call (driver context / vtable / callback)
+0x165d3c	Scheduler__createNode	584	no	indirect call (driver context / vtable / callback)
+0x165fa8	Scheduler__findOrCreateExternalNode	720	yes	
 0x16629c	FUN_0016629c	1448	no	indirect call (driver context / vtable / callback)
 0x166844	FUN_00166844	456	yes	
 0x166a0c	FUN_00166a0c	412	yes	
-0x166ba8	FUN_00166ba8	340	no	indirect call (driver context / vtable / callback)
-0x166cfc	FUN_00166cfc	1024	no	indirect call (driver context / vtable / callback)
+0x166ba8	Scheduler__isNodeReady	340	no	indirect call (driver context / vtable / callback)
+0x166cfc	Scheduler__freeNodes	1024	no	indirect call (driver context / vtable / callback)
 0x1670fc	FUN_001670fc	2424	no	indirect call (driver context / vtable / callback)
-0x167a74	FUN_00167a74	244	yes	
-0x167b68	FUN_00167b68	692	no	indirect call (driver context / vtable / callback)
-0x167e1c	FUN_00167e1c	216	yes	
+0x167a74	SchedNode__getLastConsumerCycle	244	yes	
+0x167b68	Scheduler__findFreeTempRegister	692	no	indirect call (driver context / vtable / callback)
+0x167e1c	Scheduler__createCopyNode	216	yes	
 0x167ef4	FUN_00167ef4	1396	no	indirect call (driver context / vtable / callback)
-0x168468	FUN_00168468	2328	no	indirect call (driver context / vtable / callback)
+0x168468	Scheduler__addOperandDependencyEdges	2328	no	indirect call (driver context / vtable / callback)
 0x168d80	FUN_00168d80	3548	no	indirect call (driver context / vtable / callback)
 0x169b70	FUN_00169b70	700	no	indirect call (driver context / vtable / callback)
-0x169e30	FUN_00169e30	1848	no	indirect call (driver context / vtable / callback)
-0x16a568	FUN_0016a568	6080	no	indirect call (driver context / vtable / callback)
+0x169e30	Scheduler__markGlobalValues	1848	no	indirect call (driver context / vtable / callback)
+0x16a568	Scheduler__buildDependencyGraph	6080	no	indirect call (driver context / vtable / callback)
 0x16bd70	FUN_0016bd70	1140	no	indirect call (driver context / vtable / callback)
 0x16c1fc	FUN_0016c1fc	1092	no	indirect call (driver context / vtable / callback)
-0x16c640	FUN_0016c640	816	no	indirect call (driver context / vtable / callback)
+0x16c640	Scheduler__commitBundle	816	no	indirect call (driver context / vtable / callback)
 0x16c970	FUN_0016c970	1108	no	indirect call (driver context / vtable / callback)
-0x16cdc4	FUN_0016cdc4	1516	no	indirect call (driver context / vtable / callback)
-0x16d3b0	FUN_0016d3b0	392	no	indirect call (driver context / vtable / callback)
+0x16cdc4	Scheduler__releaseOperandsOfIssuedNode	1516	no	indirect call (driver context / vtable / callback)
+0x16d3b0	Scheduler__issueNode	392	no	indirect call (driver context / vtable / callback)
 0x16d538	FUN_0016d538	1996	no	indirect call (driver context / vtable / callback)
 0x16dd04	FUN_0016dd04	616	no	indirect call (driver context / vtable / callback)
-0x16df8c	FUN_0016df8c	536	no	indirect call (driver context / vtable / callback)
+0x16df8c	Scheduler__enqueueReadyNode	536	no	indirect call (driver context / vtable / callback)
 0x16e1a4	FUN_0016e1a4	1668	no	indirect call (driver context / vtable / callback)
-0x16e828	FUN_0016e828	1640	no	indirect call (driver context / vtable / callback)
-0x16ee90	FUN_0016ee90	284	no	indirect call (driver context / vtable / callback)
-0x16ff54	FUN_0016ff54	6564	no	indirect call (driver context / vtable / callback)
-0x170990	FUN_00170990	572	no	indirect call (driver context / vtable / callback)
-0x170bcc	FUN_00170bcc	468	yes	
-0x170da0	FUN_00170da0	204	no	indirect call (driver context / vtable / callback)
-0x170e6c	FUN_00170e6c	2212	no	indirect call (driver context / vtable / callback)
+0x16e828	Scheduler__advanceCycle	1640	no	indirect call (driver context / vtable / callback)
+0x16ee90	Scheduler__onNodeReady	284	no	indirect call (driver context / vtable / callback)
+0x16ff54	Scheduler__selectNextNode	6564	no	indirect call (driver context / vtable / callback)
+0x170990	Scheduler__scheduleCycle	572	no	indirect call (driver context / vtable / callback)
+0x170bcc	Scheduler__updateSuccessorsAfterIssue	468	yes	
+0x170da0	Scheduler__issueDeadNode	204	no	indirect call (driver context / vtable / callback)
+0x170e6c	Scheduler__scheduleBlock	2212	no	indirect call (driver context / vtable / callback)
 0x171714	pass_sched_preprocess_and_schedule_inst	1812	no	indirect call (driver context / vtable / callback)
-0x171e68	FUN_00171e68	248	yes	
+0x171e68	Scheduler__run	248	yes	
 0x172000	FUN_00172000	20	yes	
 0x172014	ResourceModel__vslot23	100	yes	
 0x172078	FUN_00172078	180	no	indirect call (driver context / vtable / callback)
