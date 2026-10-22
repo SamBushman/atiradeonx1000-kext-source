@@ -1,0 +1,218 @@
+# local rows for the pixel-shader dump helpers FUN_000d0450..FUN_000d1624 and FUN_000d0b68 (see notes_shader_formats.md section 7)
+local	FUN_000d0450	param_1	outText	CONFIRMED	sprintf destination
+local	FUN_000d0450	param_2	registerWord	CONFIRMED	bit 15 selects "c%02u" (constant register) else "r%02u"
+local	FUN_000d0450	param_3	unusedArg5	UNKNOWN	not used by the body (printf pass-through slot)
+local	FUN_000d0450	param_4	argR6	UNKNOWN	printf pass-through slot, as named by FUN_000d183c
+local	FUN_000d0450	param_5	argR7	UNKNOWN	printf pass-through slot
+local	FUN_000d0450	param_6	argR8	UNKNOWN	printf pass-through slot
+local	FUN_000d0450	param_7	argR9	UNKNOWN	printf pass-through slot
+local	FUN_000d0488	param_1	outText	CONFIRMED	destination text buffer: written with the modifier prefix then the operand text
+local	FUN_000d0488	param_2	rgbAddrA	INFERRED	caller passes the RGB source address A of the ALU record (FUN_000d183c: rgbAddrA); used for selects of the A bank
+local	FUN_000d0488	param_3	rgbAddrB	INFERRED	caller passes RGB source address B; used for the B bank selects
+local	FUN_000d0488	param_4	rgbAddrC	INFERRED	caller passes RGB source address C; used for the C bank selects
+local	FUN_000d0488	param_5	alphaAddrA	INFERRED	caller passes alpha source address A; used for the alpha A selects
+local	FUN_000d0488	param_6	alphaAddrB	INFERRED	caller passes alpha source address B
+local	FUN_000d0488	param_7	alphaAddrC	INFERRED	caller passes alpha source address C
+local	FUN_000d0488	param_8	sourceSelect	CONFIRMED	0..0x1f: which source and swizzle to print: 0-3 A.rgb/rrr/ggg/bbb, 4-7 B, 8-0xb C, 0xc-0xe alpha A/B/C .aaa, 0xf-0x13 srcp, 0x14-0x16 0.0 1.0 0.5, 0x17-0x1c gbr/brg swizzles, 0x1d-0x1f paired alpha:rgb forms
+local	FUN_000d0488	param_9	sourceModifier	CONFIRMED	0 none, 1 "neg(", 2 "abs(", 3 "nab(", else "???(": prefix written first, ")" appended at the end
+local	FUN_000d0488	cVar1	negPrefixTerm	INFERRED	byte 4 (the NUL) of the 5-byte string s_neg_ at 0x1a6f80, copied with the prefix
+local	FUN_000d0488	cVar2	absPrefixTerm	INFERRED	byte 4 of s_abs_ (0x1a6f88)
+local	FUN_000d0488	cVar3	nabPrefixTerm	INFERRED	byte 4 of s_nab_ (0x1a6f90)
+local	FUN_000d0488	cVar4	unknownPrefixTerm	INFERRED	byte 4 of s_???_ (0x1a6f98)
+local	FUN_000d0488	iVar7	padArgZero	INFERRED	0 passed as the unused 7th argument of FUN_000d0450
+local	FUN_000d0488	local_38	operandText	CONFIRMED	text of the selected register (r%02u / c%02u / srcp / 0.0 / 1.0 / 0.5)
+local	FUN_000d0488	auStack_32	operandTextSecond	INFERRED	second register text at operandText+6 for the paired selects 0x1d-0x1f
+local	FUN_000d0488	uVar6	addrCopy	INFERRED	copy of param_3/param_4 kept as a call argument
+local	FUN_000d0488	uVar9	sourceSelectCopy	CONFIRMED	param_8 kept for the second switch
+local	FUN_000d0488	pcVar5	textEnd	CONFIRMED	outText + strlen(outText): where the swizzle suffix is appended
+local	FUN_000d0488	puVar8	swizzleJumpAddr	CONFIRMED	address of the jump-table target used by the second switch (0xd0730 table)
+local	FUN_000d0888	param_1	outText	CONFIRMED	destination text buffer: written with the modifier prefix then the operand text
+local	FUN_000d0888	param_2	rgbAddrA	INFERRED	caller passes the RGB source address A of the ALU record (FUN_000d183c: rgbAddrA); used for selects of the A bank
+local	FUN_000d0888	param_3	rgbAddrB	INFERRED	caller passes RGB source address B; used for the B bank selects
+local	FUN_000d0888	param_4	rgbAddrC	INFERRED	caller passes RGB source address C; used for the C bank selects
+local	FUN_000d0888	param_5	alphaAddrA	INFERRED	caller passes alpha source address A; used for the alpha A selects
+local	FUN_000d0888	param_6	alphaAddrB	INFERRED	caller passes alpha source address B
+local	FUN_000d0888	param_7	alphaAddrC	INFERRED	caller passes alpha source address C
+local	FUN_000d0888	param_8	sourceSelect	CONFIRMED	0..0x12: 0-2 RGB A bank (.r .g .b), 3-5 B, 6-8 C, 9-0xb alpha A/B/C .a, 0xc-0xf srcp, 0x10-0x12 0.0 1.0 0.5
+local	FUN_000d0888	param_9	sourceModifier	CONFIRMED	0 none, 1 "neg(", 2 "abs(", 3 "nab(", else "???(": prefix written first, ")" appended at the end
+local	FUN_000d0888	cVar1	negPrefixTerm	INFERRED	byte 4 (the NUL) of s_neg_ (0x1a6f80)
+local	FUN_000d0888	cVar2	absPrefixTerm	INFERRED	byte 4 of s_abs_
+local	FUN_000d0888	cVar3	nabPrefixTerm	INFERRED	byte 4 of s_nab_
+local	FUN_000d0888	cVar4	unknownPrefixTerm	INFERRED	byte 4 of s_???_
+local	FUN_000d0888	iVar6	padArgZero	INFERRED	0 passed as the unused 7th argument of FUN_000d0450
+local	FUN_000d0888	local_28	operandText	CONFIRMED	text of the selected register
+local	FUN_000d0888	uVar8	sourceSelectCopy	CONFIRMED	param_8 kept for the second switch
+local	FUN_000d0888	pcVar5	textEnd	CONFIRMED	outText + strlen(outText): where the component suffix is appended
+local	FUN_000d0888	puVar7	componentJumpAddr	CONFIRMED	jump-table target address of the 0xd0aa4 table
+local	FUN_000d13a4	param_1	outText	CONFIRMED	destination text buffer
+local	FUN_000d13a4	param_2	rgbAddrA	INFERRED	RGB source address A (caller passes rgbAddrA)
+local	FUN_000d13a4	param_3	rgbAddrB	INFERRED	RGB source address B
+local	FUN_000d13a4	param_4	rgbAddrC	INFERRED	RGB source address C
+local	FUN_000d13a4	param_5	alphaAddrA	INFERRED	alpha source address A
+local	FUN_000d13a4	param_6	alphaAddrB	INFERRED	alpha source address B
+local	FUN_000d13a4	param_7	alphaAddrC	INFERRED	alpha source address C (also forwarded as a stale argument)
+local	FUN_000d13a4	param_8	sourceSelect	CONFIRMED	0 A, 1 B, 2 C, 3 srcp: selects which address to print
+local	FUN_000d13a4	param_9	sourceModifier	CONFIRMED	0 none, 1 "neg(", 2 "abs(", 3 "nab(", else "???("
+local	FUN_000d13a4	param_10	swizzleWord	INFERRED	packed swizzle: 5-bit selects at >>11, >>8, >>5 index the component text table (0x1dc259); also tested by FUN_000d10a8
+local	FUN_000d13a4	param_11	rgbOpcode	INFERRED	RGB opcode: 0xb/0xc (mdh/mdv) always print the first register
+local	FUN_000d13a4	cVar3	negPrefixTerm	INFERRED	byte 4 of s_neg_
+local	FUN_000d13a4	cVar4	absPrefixTerm	INFERRED	byte 4 of s_abs_
+local	FUN_000d13a4	cVar5	nabPrefixTerm	INFERRED	byte 4 of s_nab_
+local	FUN_000d13a4	cVar6	unknownPrefixTerm	INFERRED	byte 4 of s_???_
+local	FUN_000d13a4	iVar7	auxCheckResult	INFERRED	result of FUN_000d10a8(swizzleWord & 0xffff)
+local	FUN_000d13a4	iVar8	sourceSelectCopy	CONFIRMED	param_8 copy passed through to FUN_000d10dc
+local	FUN_000d13a4	uVar9	rgbAddrBSaved	INFERRED	copy of param_3 kept across the switch
+local	FUN_000d13a4	uVar10	rgbAddrCSaved	INFERRED	copy of param_4
+local	FUN_000d13a4	uVar11	alphaAddrASaved	INFERRED	copy of param_5
+local	FUN_000d13a4	uVar12	alphaAddrBSaved	INFERRED	copy of param_6
+local	FUN_000d13a4	uVar1	swizzleLow16	CONFIRMED	swizzleWord & 0xffff
+local	FUN_000d13a4	uVar2	swizzleKind	INFERRED	swizzleWord & 0xff80: 0x9200/0xdb00/0xb680 = whole-register forms printed as one text
+local	FUN_000d13a4	pcVar13	modifierPrefix	INFERRED	the prefix literal ("neg(" "abs(" "nab(" "???(") or param_7, passed as a stale argument
+local	FUN_000d13a4	local_58	operandText	CONFIRMED	register text built by FUN_000d10dc
+local	FUN_000d13a4	in_f1	floatArg1	INFERRED	floating-point register carried into the FUN_000d10dc call
+local	FUN_000d13a4	fparam_1	floatArg1Saved	INFERRED	saved copy of the floating-point argument
+local	FUN_000d1624	param_1	outText	CONFIRMED	destination text buffer
+local	FUN_000d1624	param_2	rgbAddrA	INFERRED	RGB source address A (caller passes rgbAddrA)
+local	FUN_000d1624	param_3	rgbAddrB	INFERRED	RGB source address B
+local	FUN_000d1624	param_4	rgbAddrC	INFERRED	RGB source address C
+local	FUN_000d1624	param_5	alphaAddrA	INFERRED	alpha source address A
+local	FUN_000d1624	param_6	alphaAddrB	INFERRED	alpha source address B
+local	FUN_000d1624	param_7	alphaAddrC	INFERRED	alpha source address C (also forwarded as a stale argument)
+local	FUN_000d1624	param_8	sourceSelect	CONFIRMED	0 A, 1 B, 2 C, 3 srcp: selects which address to print
+local	FUN_000d1624	param_9	sourceModifier	CONFIRMED	0 none, 1 "neg(", 2 "abs(", 3 "nab(", else "???("
+local	FUN_000d1624	param_10	componentCode	INFERRED	alpha component: 3 = alpha, 4..6 select the 0x1dc259 text directly, other values index the text table
+local	FUN_000d1624	param_11	alphaOpcode	INFERRED	alpha opcode: 0xe/0xf special-case the first register
+local	FUN_000d1624	cVar1	negPrefixTerm	INFERRED	byte 4 of s_neg_
+local	FUN_000d1624	cVar2	absPrefixTerm	INFERRED	byte 4 of s_abs_
+local	FUN_000d1624	cVar3	nabPrefixTerm	INFERRED	byte 4 of s_nab_
+local	FUN_000d1624	cVar4	unknownPrefixTerm	INFERRED	byte 4 of s_???_
+local	FUN_000d1624	pcVar6	modifierPrefix	INFERRED	the prefix literal or param_7, passed as a stale argument
+local	FUN_000d1624	local_38	operandText	CONFIRMED	register text built by FUN_000d10dc
+local	FUN_000d1624	in_f1	floatArg1	INFERRED	floating-point register carried into the FUN_000d10dc call
+local	FUN_000d10dc	param_1	outText	CONFIRMED	sprintf destination
+local	FUN_000d10dc	param_2	registerWord	CONFIRMED	bit 15 = constant register "c%02u", bit 14 = relative "r[AL+%02u]", bit 13 = immediate float printed as (+d.dddddddE+dd), else "r%02u"
+local	FUN_000d10dc	param_3	argR5	UNKNOWN	printf pass-through slot
+local	FUN_000d10dc	param_4	argR6	UNKNOWN	printf pass-through slot
+local	FUN_000d10dc	param_5	argR7	UNKNOWN	printf pass-through slot
+local	FUN_000d10dc	param_6	argR8	UNKNOWN	printf pass-through slot
+local	FUN_000d10dc	param_7	argR9	UNKNOWN	printf pass-through slot
+local	FUN_000d10dc	param_8	argR10	UNKNOWN	printf pass-through slot
+local	FUN_000d10dc	fparam_1	floatArg1	INFERRED	floating-point argument passed through
+local	FUN_000d10dc	dVar9	immediateValue	CONFIRMED	FUN_000da78c(registerWord & ~0x2000): the immediate constant being printed
+local	FUN_000d10dc	dVar2	i2dMagic	CONFIRMED	DOUBLE_001aa1e0: the int-to-double magic constant 2^52+2^31
+local	FUN_000d10dc	dVar3	ten	CONFIRMED	DOUBLE_001aa238: 10.0, base of the decimal exponent search
+local	FUN_000d10dc	dVar10	exponentEstimate	INFERRED	log10-style estimate of the decimal exponent (floor(log(2^e)/log(10)))
+local	FUN_000d10dc	dVar11	scaledMantissa	INFERRED	value / 10^exponent, successively multiplied by 10 to extract digits
+local	FUN_000d10dc	iVar4	zeroFillIndex	INFERRED	index into numberText while filling the 7 mantissa zeros
+local	FUN_000d10dc	iVar6	digitIndex	INFERRED	index of the mantissa digit being written (3..9); also the last exponent digit value
+local	FUN_000d10dc	iVar8	zeroFillRemaining	INFERRED	countdown of the 7 zero digits
+local	FUN_000d10dc	uVar5	digitValue	INFERRED	integer part of the current mantissa digit
+local	FUN_000d10dc	uVar7	decimalExponent	CONFIRMED	floor(log10(value)), negated for the sign; printed as two digits
+local	FUN_000d10dc	bVar1	moreDigits	INFERRED	iVar6 != 9: continue the digit loop
+local	FUN_000d10dc	local_50	valueAsFloat	INFERRED	float copy of the value whose exponent bits give the binary exponent
+local	FUN_000d10dc	local_98	numberText	CONFIRMED	"+d.ddddddd" sign, digit, dot and seven digits
+local	FUN_000d10dc	local_8e	expMarker	CONFIRMED	'E' written after the mantissa
+local	FUN_000d10dc	local_8d	expSign	CONFIRMED	'+' or '-' of the decimal exponent
+local	FUN_000d10dc	local_8c	expTensDigit	CONFIRMED	tens digit of the decimal exponent
+local	FUN_000d10dc	local_8b	expOnesDigit	CONFIRMED	ones digit of the decimal exponent
+local	FUN_000d10dc	local_8a	numberTextEnd	CONFIRMED	NUL terminator of the number text
+local	FUN_000d10dc	local_80	fctiwzScratch1	INFERRED	long long store slot of the fctiwz (double -> int) conversion; never read
+local	FUN_000d10dc	local_68	fctiwzScratch2	INFERRED	long long store slot of the second fctiwz conversion
+local	FUN_000d10dc	local_58	fctiwzScratch3	INFERRED	long long store slot of the third fctiwz conversion
+local	FUN_000d10dc	local_78	i2dHi4	INFERRED	high word 0x43300000 of the int-to-double conversion of the decimal exponent
+local	FUN_000d10dc	uStack_74	i2dLo4	INFERRED	low word (exponent ^ 0x80000000) of that conversion
+local	FUN_000d0b68	param_1	pixelShader	CONFIRMED	array of 0x48-byte records: header at +0, count at +8, format flags byte at +0xf, as in FUN_000d183c
+local	FUN_000d0b68	param_2	requestedLevel	INFERRED	normalisation level: returns if (*(shader+0xf) & 0xf) >= it; stored back in both nibbles of shader+0xf
+local	FUN_000d0b68	param_3	dumpIdArg	CONFIRMED	dumpId passed by FUN_000d183c
+local	FUN_000d0b68	param_4	argR6	UNKNOWN	printf pass-through slot as named by FUN_000d183c
+local	FUN_000d0b68	param_5	argR7	UNKNOWN	printf pass-through slot
+local	FUN_000d0b68	param_6	argR8	UNKNOWN	printf pass-through slot
+local	FUN_000d0b68	param_7	argR9Scratch	UNKNOWN	pass-through slot reused as scratch for record flag bytes
+local	FUN_000d0b68	param_8	argR10	UNKNOWN	printf pass-through slot
+local	FUN_000d0b68	uVar12	recordCount	CONFIRMED	*(shader+8): number of records
+local	FUN_000d0b68	piVar7	rsScanCursor	INFERRED	walks the leading RS records (kind 1) starting at record 2
+local	FUN_000d0b68	uVar10	waitFlagsOr	INFERRED	OR of the sem_wait/sem_grab flag bytes (+4, +0x1b) of the TEX/ALU/CF records
+local	FUN_000d0b68	uVar9	texCustomEnables	INFERRED	1 if a TEX record has non-default component enables/flags (+0x1d/+0x1e)
+local	FUN_000d0b68	bVar3	r300Compatible	INFERRED	cleared when a CF record needs flow control the R300 format cannot express
+local	FUN_000d0b68	uVar8	cfOpB	INFERRED	byte rec+0x15 of a CF record
+local	FUN_000d0b68	puVar14	prevRecordFlagPtr	INFERRED	pointer to a flag byte of the previous record (rec - 3 = prev + 0x45): set when a CF result test follows an ALU
+local	FUN_000d0b68	iVar6	pendingTexRecord	INFERRED	param_1 + pendingTexIndex * 0x48: the TEX record whose sem_wait/sem_grab flags (+4, +0x1b) are set
+local	FUN_000d0b68	bVar2	texFlagsByte	INFERRED	byte rec+0x1f of a TEX record (bits 1/2/3 move component fields)
+use	FUN_000d0b68	uVar4	recordKind	CONFIRMED	*record: 2 TEX, 3/4 ALU, 5 CF; anything else prints "Bad Instruction Type!"	^\s*uVar4\ =\ \*puVar17;$	+4
+use	FUN_000d0b68	uVar4	recordKind	CONFIRMED	*record: 2 TEX, 3/4 ALU, 5 CF; anything else prints "Bad Instruction Type!"	^\s*else\ if\ \(uVar4\ ==\ 5\)\ \{$	+1
+use	FUN_000d0b68	uVar4	cfWordMask	INFERRED	puVar17[4] & 0xff00ff00: non-zero when the CF record has a branch/loop word	^\s*uVar4\ =\ puVar17\[4\]\ \&\ 0xff00ff00;$	+3
+use	FUN_000d0b68	uVar4	cfWordMask	INFERRED	puVar17[4] & 0xff00ff00: non-zero when the CF record has a branch/loop word	^\s*if\ \(\(uVar4\ !=\ 0\)\ \&\&\ \(param_7\ =\ uVar8,\ uVar4\ ==\ 0x100ff00\)\)\ \{$	+1
+use	FUN_000d0b68	uVar4	cfOpSelect	INFERRED	copy of the scratch flag byte, tested against 2 and 1	^\s*uVar4\ =\ param_7;$	+1
+use	FUN_000d0b68	uVar4	cfOpSelect	INFERRED	CF op code (rec+0x14 or +0x15): 2 = increments, 1 = subtracts the depth	^\s*if\ \(\(uVar5\ ==\ 1\)\ \|\|\ \(uVar4\ =\ uVar5,\ uVar5\ !=\ 0\)\)\ \{$	+3
+use	FUN_000d0b68	uVar4	nextPendingTexIndex	INFERRED	pending TEX record index carried to the next iteration (100000 = none)	^\s*uVar4\ =\ uVar15;$	+1
+use	FUN_000d0b68	uVar4	nextPendingTexIndex	INFERRED	pending TEX record index carried to the next iteration (100000 = none)	^\s*uVar4\ =\ uVar16;$	+1
+use	FUN_000d0b68	uVar4	nextPendingTexIndex	INFERRED	pending TEX record index carried to the next iteration (100000 = none)	^\s*uVar4\ =\ 100000;$	+1
+use	FUN_000d0b68	uVar4	nextPendingTexIndex	INFERRED	pending TEX record index carried to the next iteration (100000 = none)	^\s*uVar4\ =\ 100000;$@2	+1
+use	FUN_000d0b68	uVar4	nextPendingTexIndex	INFERRED	pending TEX record index carried to the next iteration (100000 = none)	^\s*uVar4\ =\ 100000;$@3	+1
+use	FUN_000d0b68	uVar4	nextPendingTexIndex	INFERRED	pending TEX record index carried to the next iteration (100000 = none)	^\s*uVar4\ =\ 100000;$@4	+1
+use	FUN_000d0b68	uVar4	nextPendingTexIndex	INFERRED	pending TEX record index carried to the next iteration (100000 = none)	^\s*uVar4\ =\ 100000;$@5	+1
+use	FUN_000d0b68	uVar4	nextPendingTexIndex	INFERRED	pending TEX record index carried to the next iteration (100000 = none)	^\s*uVar15\ =\ uVar4;$	+1
+use	FUN_000d0b68	uVar5	cfOpA	INFERRED	byte rec+0x14 of a CF record	^\s*uVar5\ =\ \(uint\)\*\(byte\ \*\)\(puVar17\ \+\ 5\);$	+1
+use	FUN_000d0b68	uVar5	cfOpA	INFERRED	byte rec+0x14 of a CF record	^\s*param_7\ =\ uVar5;$	+1
+use	FUN_000d0b68	uVar5	cfOpA	INFERRED	byte rec+0x14 of a CF record	^\s*uVar5\ =\ uVar8;$	+1
+use	FUN_000d0b68	uVar5	cfOpA	INFERRED	byte rec+0x14 of a CF record	^\s*if\ \(\(uVar5\ ==\ 1\)\ \|\|\ \(uVar4\ =\ uVar5,\ uVar5\ !=\ 0\)\)\ \{$	+1
+use	FUN_000d0b68	uVar5	recordKind2	CONFIRMED	*record in the second pass	^\s*uVar5\ =\ \*puVar17;$	+1
+use	FUN_000d0b68	uVar5	recordKind2	CONFIRMED	*record in the second pass	^\s*if\ \(uVar5\ <\ 5\)\ \{$	+3
+use	FUN_000d0b68	uVar5	recordKind2	CONFIRMED	*record in the second pass	^\s*else\ if\ \(uVar5\ ==\ 5\)\ \{$	+1
+use	FUN_000d0b68	uVar13	usInstructionNumber	INFERRED	index of the US instruction within the program, compared with record +0xc	^\s*uVar13\ =\ 0;$	+1
+use	FUN_000d0b68	uVar13	usInstructionNumber	INFERRED	index of the US instruction within the program, compared with record +0xc	^\s*if\ \(\(uVar4\ !=\ 0\)\ \&\&$	+2
+use	FUN_000d0b68	uVar13	usInstructionNumber	INFERRED	index of the US instruction within the program, compared with record +0xc	^\s*uVar13\ =\ uVar13\ \+\ 1;$	+1
+use	FUN_000d0b68	uVar13	usInstructionNumber	INFERRED	index of the US instruction within the program, compared with record +0xc	^\s*if\ \(uVar13\ !=\ 0\)\ goto\ LAB_000d0be8;$	+1
+use	FUN_000d0b68	uVar13	usInstructionNumber	INFERRED	index of the US instruction within the program, compared with record +0xc	^\s*uVar13\ =\ 1;$	+1
+use	FUN_000d0b68	uVar13	usInstructionNumber	INFERRED	index of the US instruction within the program, compared with record +0xc	^\s*\*\(short\ \*\)\(param_1\ \+\ 0x12\)\ =\ \(short\)uVar13\ \+\ \-1;$	+1
+use	FUN_000d0b68	uVar15	scanRecordIndex	INFERRED	running record index of the first pass	^\s*uVar15\ =\ uVar11;$	+1
+use	FUN_000d0b68	uVar15	scanRecordIndex	INFERRED	running record index of the first pass	^\s*uVar15\ =\ uVar15\ \+\ 1;$	+1
+use	FUN_000d0b68	uVar15	scanRecordIndex	INFERRED	running record index of the first pass	^\s*\}\ while\ \(uVar15\ <=\ uVar12\);$	+1
+use	FUN_000d0b68	uVar15	pendingTexIndex	INFERRED	index of the TEX record waiting for its semaphores; 100000 = none	^\s*uVar15\ =\ 100000;$	+1
+use	FUN_000d0b68	uVar15	pendingTexIndex	INFERRED	index of the TEX record waiting for its semaphores; 100000 = none	^\s*uVar4\ =\ uVar15;$	+1
+use	FUN_000d0b68	uVar15	pendingTexIndex	INFERRED	index of the TEX record waiting for its semaphores; 100000 = none	^\s*if\ \(\(\(!bVar1\)\ \&\&\ \(\*\(char\ \*\)\(puVar17\ \+\ 8\)\ !=\ '\\0'\)\)\ \&\&\ \(uVar15\ !=\ 100000\)\)\ \{$	+2
+use	FUN_000d0b68	uVar15	pendingTexIndex	INFERRED	index of the TEX record waiting for its semaphores; 100000 = none	^\s*if\ \(\(bVar1\)\ \|\|\ \(uVar15\ ==\ 100000\)\)\ \{$	+1
+use	FUN_000d0b68	uVar15	pendingTexIndex	INFERRED	index of the TEX record waiting for its semaphores; 100000 = none	^\s*iVar6\ =\ param_1\ \+\ uVar15\ \*\ 0x48;$@2	+1
+use	FUN_000d0b68	uVar15	pendingTexIndex	INFERRED	index of the TEX record waiting for its semaphores; 100000 = none	^\s*if\ \(\(!bVar1\)\ \&\&\ \(uVar15\ !=\ 100000\)\)\ \{$	+2
+use	FUN_000d0b68	uVar15	pendingTexIndex	INFERRED	index of the TEX record waiting for its semaphores; 100000 = none	^\s*uVar15\ =\ uVar4;$	+1
+use	FUN_000d0b68	uVar16	cfDepth	INFERRED	nesting count of flow-control records: +1 on type-2 ops, minus rec+0x13 on type-1; more than 4 forces the neutral format	^\s*uVar16\ =\ 0;$	+1
+use	FUN_000d0b68	uVar16	cfDepth	INFERRED	nesting count of flow-control records: +1 on type-2 ops, minus rec+0x13 on type-1; more than 4 forces the neutral format	^\s*uVar16\ =\ uVar16\ \-\ \*\(byte\ \*\)\(\(int\)puVar17\ \+\ 0x13\);$	+1
+use	FUN_000d0b68	uVar16	cfDepth	INFERRED	nesting count of flow-control records: +1 on type-2 ops, minus rec+0x13 on type-1; more than 4 forces the neutral format	^\s*uVar16\ =\ uVar16\ \+\ 1;$	+1
+use	FUN_000d0b68	uVar16	cfDepth	INFERRED	nesting count of flow-control records: +1 on type-2 ops, minus rec+0x13 on type-1; more than 4 forces the neutral format	^\s*if\ \(4\ <\ uVar16\)\ \{$	+1
+use	FUN_000d0b68	uVar16	fixupRecordIndex	INFERRED	record index of the second pass	^\s*uVar16\ =\ uVar11;$	+1
+use	FUN_000d0b68	uVar16	fixupRecordIndex	INFERRED	record index of the second pass	^\s*uVar4\ =\ uVar16;$	+1
+use	FUN_000d0b68	uVar16	fixupRecordIndex	INFERRED	record index of the second pass	^\s*uVar16\ =\ uVar16\ \+\ 1;$@2	+1
+use	FUN_000d0b68	uVar16	fixupRecordIndex	INFERRED	record index of the second pass	^\s*\}\ while\ \(uVar16\ <=\ uVar12\);$	+1
+use	FUN_000d0b68	puVar17	scanRecord	CONFIRMED	record pointer walked by the first pass	^\s*puVar17\ =\ \(uint\ \*\)\(param_1\ \+\ uVar11\ \*\ 0x48\);$	+1
+use	FUN_000d0b68	puVar17	scanRecord	CONFIRMED	record pointer walked by the first pass	^\s*uVar4\ =\ \*puVar17;$	+1
+use	FUN_000d0b68	puVar17	scanRecord	CONFIRMED	record pointer walked by the first pass	^\s*param_7\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)puVar17\ \+\ 0x1b\);$	+4
+use	FUN_000d0b68	puVar17	scanRecord	CONFIRMED	record pointer walked by the first pass	^\s*uVar10\ =\ uVar10\ \|\ \*\(byte\ \*\)\(puVar17\ \+\ 1\);$	+1
+use	FUN_000d0b68	puVar17	scanRecord	CONFIRMED	record pointer walked by the first pass	^\s*uVar10\ =\ uVar10\ \|\ \*\(byte\ \*\)\(puVar17\ \+\ 1\);$@2	+1
+use	FUN_000d0b68	puVar17	scanRecord	CONFIRMED	record pointer walked by the first pass	^\s*if\ \(\(\*\(char\ \*\)\(\(int\)puVar17\ \+\ 0xe\)\ !=\ '\\0'\)\ \|\|\ \(\*\(char\ \*\)\(\(int\)puVar17\ \+\ 0x11\)\ !=\ '\\0'\)\)\ \{$	+1
+use	FUN_000d0b68	puVar17	scanRecord	CONFIRMED	record pointer walked by the first pass	^\s*uVar4\ =\ puVar17\[4\]\ \&\ 0xff00ff00;$	+3
+use	FUN_000d0b68	puVar17	scanRecord	CONFIRMED	record pointer walked by the first pass	^\s*uVar5\ =\ \(uint\)\*\(byte\ \*\)\(puVar17\ \+\ 5\);$	+2
+use	FUN_000d0b68	puVar17	scanRecord	CONFIRMED	record pointer walked by the first pass	^\s*uVar16\ =\ uVar16\ \-\ \*\(byte\ \*\)\(\(int\)puVar17\ \+\ 0x13\);$	+1
+use	FUN_000d0b68	puVar17	scanRecord	CONFIRMED	record pointer walked by the first pass	^\s*puVar17\ =\ puVar17\ \+\ 0x12;$	+1
+use	FUN_000d0b68	puVar17	fixupRecord	CONFIRMED	record pointer walked by the second pass	^\s*puVar17\ =\ \(uint\ \*\)\(param_1\ \+\ uVar11\ \*\ 0x48\);$@2	+2
+use	FUN_000d0b68	puVar17	fixupRecord	CONFIRMED	record pointer walked by the second pass	^\s*uVar5\ =\ \*puVar17;$	+1
+use	FUN_000d0b68	puVar17	fixupRecord	CONFIRMED	record pointer walked by the second pass	^\s*\*\(undefined1\ \*\)\(\(int\)puVar17\ \+\ 0x1e\)\ =\ 1;$	+3
+use	FUN_000d0b68	puVar17	fixupRecord	CONFIRMED	record pointer walked by the second pass	^\s*bVar2\ =\ \*\(byte\ \*\)\(\(int\)puVar17\ \+\ 0x1f\);$	+1
+use	FUN_000d0b68	puVar17	fixupRecord	CONFIRMED	record pointer walked by the second pass	^\s*puVar17\[5\]\ =\ puVar17\[5\]\ >>\ 2\ \&\ 0x300000\ \|\ puVar17\[5\]\ \&\ 0xffcfffff;$	+1
+use	FUN_000d0b68	puVar17	fixupRecord	CONFIRMED	record pointer walked by the second pass	^\s*puVar17\[5\]\ =\ puVar17\[5\]\ >>\ 4\ \&\ 0xc0000\ \|\ puVar17\[5\]\ \&\ 0xfff3ffff;$	+1
+use	FUN_000d0b68	puVar17	fixupRecord	CONFIRMED	record pointer walked by the second pass	^\s*puVar17\[5\]\ =\ puVar17\[5\]\ >>\ 6\ \&\ 0x30000\ \|\ puVar17\[5\]\ \&\ 0xfffcffff;$	+1
+use	FUN_000d0b68	puVar17	fixupRecord	CONFIRMED	record pointer walked by the second pass	^\s*if\ \(\(\(!bVar1\)\ \&\&\ \(\*\(char\ \*\)\(puVar17\ \+\ 8\)\ !=\ '\\0'\)\)\ \&\&\ \(uVar15\ !=\ 100000\)\)\ \{$	+1
+use	FUN_000d0b68	puVar17	fixupRecord	CONFIRMED	record pointer walked by the second pass	^\s*\*\(undefined1\ \*\)\(puVar17\ \+\ 1\)\ =\ 1;$	+1
+use	FUN_000d0b68	puVar17	fixupRecord	CONFIRMED	record pointer walked by the second pass	^\s*if\ \(\(\(\*\(char\ \*\)\(\(int\)puVar17\ \+\ 0x15\)\ ==\ '\\0'\)\ \&\&$	+4
+use	FUN_000d0b68	puVar17	fixupRecord	CONFIRMED	record pointer walked by the second pass	^\s*\*\(undefined1\ \*\)\(puVar17\ \+\ 1\)\ =\ 1;$@2	+1
+use	FUN_000d0b68	puVar17	fixupRecord	CONFIRMED	record pointer walked by the second pass	^\s*\*\(undefined1\ \*\)\(puVar17\ \+\ 1\)\ =\ 1;$@3	+1
+use	FUN_000d0b68	puVar17	fixupRecord	CONFIRMED	record pointer walked by the second pass	^\s*if\ \(\(byte\)\(\*\(byte\ \*\)\(\(int\)puVar17\ \+\ 0x12\)\ \&\ 0xf0\)\ ==$	+2
+use	FUN_000d0b68	puVar17	fixupRecord	CONFIRMED	record pointer walked by the second pass	^\s*puVar17\ =\ puVar17\ \+\ 0x12;$@2	+1
+use	FUN_000d0b68	bVar1	needsFlowControl	INFERRED	set when the shader needs flow control (CF with a result test or depth > 4)	^\s*bVar1\ =\ false;$	+1
+use	FUN_000d0b68	bVar1	needsFlowControl	INFERRED	set when the shader needs flow control (CF with a result test or depth > 4)	^\s*bVar1\ =\ true;$	+1
+use	FUN_000d0b68	bVar1	needsFlowControl	INFERRED	set when the shader needs flow control (CF with a result test or depth > 4)	^\s*bVar1\ =\ true;$@2	+1
+use	FUN_000d0b68	bVar1	needsFlowControl	INFERRED	set when the shader needs flow control (CF with a result test or depth > 4)	^\s*bVar3\ =\ !bVar1;$	+1
+use	FUN_000d0b68	bVar1	needsFlowControl	INFERRED	set when the shader needs flow control (CF with a result test or depth > 4)	^\s*bVar1\ =\ true;$@3	+1
+use	FUN_000d0b68	bVar1	hasWaitFlags	INFERRED	waitFlagsOr != 0	^\s*bVar1\ =\ uVar10\ !=\ 0;$	+1
+use	FUN_000d0b68	bVar1	hasWaitFlags	INFERRED	waitFlagsOr != 0	^\s*if\ \(\(\(!bVar1\)\ \&\&\ \(\*\(char\ \*\)\(puVar17\ \+\ 8\)\ !=\ '\\0'\)\)\ \&\&\ \(uVar15\ !=\ 100000\)\)\ \{$	+1
+use	FUN_000d0b68	bVar1	hasWaitFlags	INFERRED	waitFlagsOr != 0	^\s*if\ \(\(bVar1\)\ \|\|\ \(uVar15\ ==\ 100000\)\)\ \{$	+1
+use	FUN_000d0b68	bVar1	hasWaitFlags	INFERRED	waitFlagsOr != 0	^\s*if\ \(\(!bVar1\)\ \&\&\ \(uVar15\ !=\ 100000\)\)\ \{$	+1
