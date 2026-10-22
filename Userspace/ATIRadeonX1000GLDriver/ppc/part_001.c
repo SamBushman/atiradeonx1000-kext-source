@@ -1338,12 +1338,12 @@ LAB_00008ad4:
 }
 
 /* _gldInitializeLibrary @ 0x8c60 (156 bytes) */
-int _gldInitializeLibrary(libArg0, libArg1, displayMask, libArg3, libArg4)
+int _gldInitializeLibrary(libArg0, libArg1, displayMask, libArg3, attachCallback)
   undefined4 libArg0;
   undefined4 libArg1;
   uint displayMask;
   undefined4 libArg3;
-  undefined4 libArg4;
+  undefined4 attachCallback;
 {
   undefined *library;
   undefined *libraryAlias;
@@ -1367,7 +1367,7 @@ int _gldInitializeLibrary(libArg0, libArg1, displayMask, libArg3, libArg4)
     slotCursor = slotCursor + 1;
     bitIndex = bitIndex + 1;
   } while ((int)bitIndex < 0x20);
-  *(undefined4 *)(PTR_DAT_001e88ac + 0x14) = libArg4;
+  *(undefined4 *)(PTR_DAT_001e88ac + 0x14) = attachCallback;
   *(undefined4 *)(libraryAlias + 0x10) = libArg3;
   return;
 }

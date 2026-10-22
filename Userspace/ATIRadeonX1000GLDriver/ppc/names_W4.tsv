@@ -1687,3 +1687,4 @@ local	FUN_0003aba0	uVar1	element1	INFERRED	second word of the 16-byte element be
 local	FUN_0003aba0	uVar2	element2	INFERRED	third word of the element (same code shape as FUN_00039a60)
 local	FUN_0003aba0	uVar3	element3	INFERRED	fourth word of the element (same code shape as FUN_00039a60)
 local	FUN_0003aba0	uVar4	weightWord	INFERRED	word read through weightCursor, stored before the element (same code shape as FUN_00039a60)
+local	_gldInitializeLibrary	libArg4	attachCallback	INFERRED	stored at library+0x14, which _gldAttachDrawable calls as the drawable attach callback
