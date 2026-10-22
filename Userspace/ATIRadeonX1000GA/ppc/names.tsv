@@ -2,7 +2,7 @@
 local	__AllocateSurface	param_1	accel	CONFIRMED	*(param_1+0xc) is the io_connect_t passed to _io_connect_method_* in every GA entry point
 local	__AllocateSurface	param_2	flags	INFERRED	bit tests 1/2/8/0x10 select destination / clear / texture / ... paths; also forwarded as scalar input 0
 local	__AllocateSurface	param_3	surfaceDesc	INFERRED	caller-supplied descriptor: [0] data, [1] pixel format (DecodePixelFormat arg), [4] width, [5] height, [6] pitch, [10] receives the record
-local	__AllocateSurface	param_4	userArg	UNKNOWN	stored in record[2] on the flags&1 path only
+local	__AllocateSurface	param_4	vramAddress	INFERRED	stored in record[2], which __SetSurface sends as scalar input 0
 local	__AllocateSurface	puVar3	record	CONFIRMED	calloc(1,0x3c) result; stored back into surfaceDesc[10] and freed on failure
 local	__AllocateSurface	iVar4	status	CONFIRMED	holds the kern_return_t/__DecodePixelFormat result returned at the end
 local	__AllocateSurface	local_70	formatCode	INFERRED	5th output of __DecodePixelFormat; (x&0xf)<<8 goes into the hardware format word; ==3 selects the 3-plane path

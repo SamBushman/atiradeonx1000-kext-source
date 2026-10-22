@@ -380,7 +380,6 @@ local	_radeonSolidScanlines	pdVar39	cmdWrite	CONFIRMED	loaded from accel+0x80 an
 local	_radeonSolidScanlines	uVar34	cmdWordsLeft	CONFIRMED	capacity minus words written; compared with each block size before a flush
 local	_radeonSolidScanlines	uVar29	cmdCapacity	CONFIRMED	(*(accel+0x18)+0x10)-7: usable words of the mapped command buffer
 local	_radeonSolidScanlines	puVar6	taskPtr	INFERRED	PTR_0000e694: target task argument of _IOConnectMapMemory
-local	__AllocateSurface	userArg	vramAddress	INFERRED	stored in record[2], which __SetSurface sends as scalar input 0
 local	_radeonCopy	iVar10	idxPlus22Or10Block1	CONFIRMED	assigned base+22Or10 (command word index) on every path
 local	_radeonCopy	pdVar12	cmdPtrPlus36Or1Block2	CONFIRMED	assigned base+36Or1 (command word pointer) on every path
 local	_radeonCopy	iVar13	idxPlus1Or20Block1	CONFIRMED	assigned base+1Or20 (command word index) on every path
@@ -680,3 +679,95 @@ local	_radeonSolidScanlines	uStack_124	i2dLo7	CONFIRMED	x ^ 0x80000000: low word
 local	_radeonSolidScanlines	local_120	i2dHi12	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
 local	_radeonSolidScanlines	uStack_11c	i2dLo8	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
 local	_radeonSolidScanlines	local_114	idxPlus8Block4	CONFIRMED	assigned base+8 (command word index) on every path
+local	__AllocateSurface	uVar5	width	CONFIRMED	surfaceDesc[4]
+local	__AllocateSurface	uVar9	rowBytes	CONFIRMED	bytes per pixel * width
+local	__AllocateSurface	uVar6	paddedRowBytes	CONFIRMED	max(0x20, rowBytes)
+local	__AllocateSurface	iVar7	hwTileMode	UNKNOWN	3 when formatCode==3 else 0
+local	__AllocateSurface	iVar8	repeatIndex	CONFIRMED	loop counter over the repeated blocks
+local	__AllocateSurface	uVar13	rowIndex	CONFIRMED	loop counter over rows copied by _bcopy
+local	__AllocateSurface	uVar10	srcNext	CONFIRMED	next source row pointer
+local	__AllocateSurface	uVar11	srcRow	CONFIRMED	current source row pointer
+local	__AllocateSurface	piVar14	cmdCursor	CONFIRMED	write cursor into the returned command buffer
+local	_find_atexit_10_3	local_38	imageIndex	CONFIRMED	loop index over _dyld_image_count images
+local	_find_atexit_10_3	local_34	imageCountFn	CONFIRMED	filled by __dyld_func_lookup("__dyld_image_count")
+local	_find_atexit_10_3	local_30	imageNameFn	CONFIRMED	__dyld_get_image_name
+local	_find_atexit_10_3	local_2c	imageHeaderFn	CONFIRMED	__dyld_get_image_header
+local	_find_atexit_10_3	local_28	lookupSymbolFn	CONFIRMED	__dyld_NSLookupSymbolInImage
+local	_find_atexit_10_3	local_24	addressOfSymbolFn	CONFIRMED	__dyld_NSAddressOfSymbol (array of 7 words, first used)
+local	_find_atexit_10_3	uVar2	imageCount	CONFIRMED	result of the image-count function
+local	_get_globals	iVar1	libSystemHandle	CONFIRMED	_dlopen("/usr/lib/libSystem.B.dylib") result, then reused for the atexit test
+local	_get_globals	uVar2	symbolAddress	CONFIRMED	_dlsym / _find_atexit_10_3 result stored into the globals block
+local	_get_globals	iVar3	checkResult	CONFIRMED	_check_cxa_atexit result (-1, 0 or other)
+local	_get_globals	local_20	globals	CONFIRMED	processwide keymgr block (calloc 0x14): +2 running flag, +3 mode, +4 routine list, +8 __cxa_atexit, +0xc __cxa_finalize, +0x10 atexit
+local	_get_globals	local_18	result	CONFIRMED	returned globals pointer or 0
+local	_check_cxa_atexit	param_1	cxaAtexitFn	CONFIRMED	called as __cxa_atexit(0x678 check routine, &state, &state)
+local	_check_cxa_atexit	param_2	cxaFinalizeFn	CONFIRMED	called with &state to run/cancel the registered check
+local	_check_cxa_atexit	iVar1	status	CONFIRMED	result of cxaAtexitFn
+local	_check_cxa_atexit	pcStack00000018	cxaAtexitFnHome	CONFIRMED	home-slot copy of param_1
+local	_check_cxa_atexit	pcStack0000001c	cxaFinalizeFnHome	CONFIRMED	home-slot copy of param_2
+local	_check_cxa_atexit	local_28	state	CONFIRMED	set to 1 by _cxa_atexit_check_2 when the check routine ran
+local	_check_cxa_atexit	local_24	cxaAtexitFnCopy	CONFIRMED	copy of param_1
+local	_check_cxa_atexit	local_18	result	CONFIRMED	returned state or -1
+local	_add_routine	param_1	globals	CONFIRMED	keymgr block: +4 is the routine list head
+local	_add_routine	param_2	routine	CONFIRMED	3-word record {function, kind, argument}
+local	_add_routine	uVar1	argument	CONFIRMED	routine[2]
+local	_add_routine	puVar2	node	CONFIRMED	malloc(0x10) list node: [0] next, [1..3] routine copy
+local	_add_routine	iVar3	unlockResult	CONFIRMED	_keymgr_set_and_unlock result
+local	_add_routine	uVar4	kind	CONFIRMED	routine[1]
+local	_add_routine	iStack00000018	globalsHome	CONFIRMED	home-slot copy of param_1
+local	_add_routine	puStack0000001c	routineHome	CONFIRMED	home-slot copy of param_2
+local	_add_routine	local_18	status	CONFIRMED	0 or -1
+local	_add_routine	local_14	result	CONFIRMED	returned status
+local	_run_routines	param_1	globals	CONFIRMED	keymgr block: +4 is the routine list head
+local	_run_routines	param_2	stopNode	CONFIRMED	walk stops when this node is reached
+local	_run_routines	puVar1	node	CONFIRMED	current list node
+local	_run_routines	uVar2	kindMask	CONFIRMED	1 << node[2]: tested against 0x15 and 0x2a
+local	_run_routines	a0	unlockResult	INFERRED	result of the keymgr unlock, first argument register
+local	_run_routines	iStack00000018	globalsHome	CONFIRMED	home-slot copy of param_1, updated on re-lock
+local	_run_routines	puStack0000001c	stopNodeHome	CONFIRMED	home-slot copy of param_2
+local	_cxa_atexit_wrapper	param_1	entry	CONFIRMED	3-word record {function, argCount selector, argument}
+local	_cxa_atexit_wrapper	local_28	savedRunning	CONFIRMED	previous globals+2 flag
+local	_cxa_atexit_wrapper	local_24	savedList	CONFIRMED	globals+4 list head at entry, the stop node for _run_routines
+local	_cxa_atexit_wrapper	local_20	globals	CONFIRMED	keymgr block
+local	_cxa_atexit_wrapper	puStack00000018	entryHome	CONFIRMED	home-slot copy of param_1
+local	_our_atexit	uVar1	savedRunning	CONFIRMED	previous running flag at +2
+local	_our_atexit	psVar2	globals	CONFIRMED	keymgr block
+local	_our_atexit	iVar3	relocked	CONFIRMED	_run_routines result (re-locked block)
+local	_atexit_common	param_1	entry	CONFIRMED	3-word record {function, argument selector, argument}
+local	_atexit_common	param_2	dsoHandle	INFERRED	forwarded as __cxa_atexit third argument
+local	_atexit_common	pcVar1	registerFn	CONFIRMED	globals+8 (__cxa_atexit) or +0x10 (atexit)
+local	_atexit_common	iVar3	globals	CONFIRMED	_get_globals result, later the unlock result
+local	_atexit_common	a1	entryCopy	CONFIRMED	malloc(0xc) copy of the entry passed to the wrapper
+local	_atexit_common	puStack00000018	entryHome	CONFIRMED	home-slot copy of param_1
+local	_atexit_common	uStack0000001c	dsoHandleHome	CONFIRMED	home-slot copy of param_2
+local	_atexit_common	local_18	result	CONFIRMED	returned status
+local	___cxa_atexit	param_1	function	CONFIRMED	stored as the first word of the entry
+local	___cxa_atexit	param_2	argument	CONFIRMED	stored as the third word
+local	___cxa_atexit	param_3	dsoHandle	INFERRED	forwarded to _atexit_common
+local	___cxa_atexit	local_28	entryFunction	CONFIRMED	entry[0]
+local	___cxa_atexit	local_24	entryKind	CONFIRMED	entry[1] = 1
+local	___cxa_atexit	local_20	entryArgument	CONFIRMED	entry[2]
+local	___cxa_atexit	uVar1	result	CONFIRMED	_atexit_common result
+local	_atexit	param_1	function	CONFIRMED	registered function
+local	_atexit	local_28	entryFunction	CONFIRMED	entry[0]
+local	_atexit	local_24	entryKind	CONFIRMED	entry[1] = 0
+local	_atexit	iVar1	result	CONFIRMED	_atexit_common result
+local	_cxa_atexit_check_1	param_1	state	CONFIRMED	*state is set to -1 when the registration call fails
+local	_cxa_atexit_check_1	iVar1	status	CONFIRMED	result of state[1](0x650, state, state)
+local	_cxa_atexit_check_1	puStack00000018	stateHome	CONFIRMED	home-slot copy of param_1
+local	_cxa_atexit_check_2	param_1	state	CONFIRMED	*state = 1: the check routine ran
+local	_printf_LDBLStub	param_1	printfArg1	CONFIRMED	forwarded unchanged to the real printf
+local	_printf_LDBLStub	param_2	printfArg2	CONFIRMED	forwarded unchanged to the real printf
+local	_printf_LDBLStub	param_3	printfArg3	CONFIRMED	forwarded unchanged to the real printf
+local	_printf_LDBLStub	param_4	printfArg4	CONFIRMED	forwarded unchanged to the real printf
+local	_printf_LDBLStub	param_5	printfArg5	CONFIRMED	forwarded unchanged to the real printf
+local	_printf_LDBLStub	param_6	printfArg6	CONFIRMED	forwarded unchanged to the real printf
+local	_printf_LDBLStub	param_7	printfArg7	CONFIRMED	forwarded unchanged to the real printf
+local	_printf_LDBLStub	param_8	printfArg8	CONFIRMED	forwarded unchanged to the real printf
+local	___stub_getrealaddr	param_1	symbolName	CONFIRMED	copied after an underscore and suffixed with $LDBL128
+local	___stub_getrealaddr	iVar1	nameLength	CONFIRMED	_strlen of the underscore-prefixed name
+local	___stub_getrealaddr	iVar2	isDefined	CONFIRMED	_NSIsSymbolNameDefinedWithHint result
+local	___stub_getrealaddr	uVar3	symbol	CONFIRMED	NSSymbol, then its address (returned)
+local	___stub_getrealaddr	local_58	nameBuffer	CONFIRMED	"_<name>" built here
+local	___stub_getrealaddr	acStack_54	nameBufferTail	CONFIRMED	overlaps nameBuffer for the "L128" suffix store
+local	___stub_getrealaddr	acStack_50	nameBufferEnd	CONFIRMED	overlaps nameBuffer for the terminating NUL

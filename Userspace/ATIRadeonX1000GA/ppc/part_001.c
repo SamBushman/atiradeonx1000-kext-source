@@ -11,16 +11,16 @@ int __AllocateSurface(accel, flags, surfaceDesc, vramAddress)
   uint uVar2;
   undefined4 *record;
   int status;
-  uint uVar5;
-  uint uVar6;
-  int iVar7;
-  int iVar8;
-  uint uVar9;
-  uint uVar10;
-  uint uVar11;
+  uint width;
+  uint paddedRowBytes;
+  int hwTileMode;
+  int repeatIndex;
+  uint rowBytes;
+  uint srcNext;
+  uint srcRow;
   uint uVar12;
-  uint uVar13;
-  int *piVar14;
+  uint rowIndex;
+  int *cmdCursor;
   uint tiledFormatCode;
   int outCount;
   uint formatCode;
@@ -59,11 +59,11 @@ int __AllocateSurface(accel, flags, surfaceDesc, vramAddress)
                         (*(undefined4 *)(accel + 0xc),9,&scalarIn0,2,&scalarOut0,&outCount);
       if (status == 0) {
         *record = scalarOut1;
-        uVar5 = surfaceDesc[4];
+        width = surfaceDesc[4];
         uVar2 = surfaceDesc[5];
-        uVar10 = *surfaceDesc;
-        uVar9 = uVar12 * uVar5;
-        uVar1 = uVar12 * uVar5 * uVar2 >> 2;
+        srcNext = *surfaceDesc;
+        rowBytes = uVar12 * width;
+        uVar1 = uVar12 * width * uVar2 >> 2;
         uVar12 = uVar2;
         if (uVar1 < 0x4000) {
           status = 1;
@@ -77,58 +77,58 @@ int __AllocateSurface(accel, flags, surfaceDesc, vramAddress)
             status = status << 1;
           } while (0x3fff < uVar1);
         }
-        uVar6 = 0x20;
-        if (0x1f < uVar9) {
-          uVar6 = uVar9;
+        paddedRowBytes = 0x20;
+        if (0x1f < rowBytes) {
+          paddedRowBytes = rowBytes;
         }
         *scalarOut0 = (uVar1 + 0xd) * status + 8;
         scalarOut0[6] = uVar1 + 0xd;
         scalarOut0[7] = status;
-        scalarOut0[5] = uVar6 * uVar2;
+        scalarOut0[5] = paddedRowBytes * uVar2;
         scalarOut0[0x20] = 0x1393;
         scalarOut0[0x21] = 10;
         scalarOut0[0x22] = 0x5c8;
-        piVar14 = scalarOut0 + 0x24;
+        cmdCursor = scalarOut0 + 0x24;
         scalarOut0[0x23] = 0x20000;
-        iVar7 = 3;
+        hwTileMode = 3;
         if (formatCode != 3) {
-          iVar7 = 0;
+          hwTileMode = 0;
         }
         if (status != 0) {
-          iVar8 = 0;
+          repeatIndex = 0;
           do {
-            *piVar14 = 0x5cb;
-            piVar14[1] = iVar7;
-            piVar14[2] = 0x51b;
-            piVar14[3] = (formatCode & 0xf) << 8 | 0x53cc30f2;
-            piVar14[4] = 0x10501;
-            piVar14[5] = 0;
-            piVar14[6] = uVar6;
-            piVar14[7] = 0x5c0;
-            piVar14[8] = 0;
-            piVar14[9] = 0x1050e;
-            piVar14[10] = 0;
-            piVar14[0xb] = uVar5 | uVar2 << 0x10;
-            piVar14[0xc] = (uVar1 - 1) * 0x10000 | 0x85f0;
-            piVar14 = piVar14 + 0xd;
+            *cmdCursor = 0x5cb;
+            cmdCursor[1] = hwTileMode;
+            cmdCursor[2] = 0x51b;
+            cmdCursor[3] = (formatCode & 0xf) << 8 | 0x53cc30f2;
+            cmdCursor[4] = 0x10501;
+            cmdCursor[5] = 0;
+            cmdCursor[6] = paddedRowBytes;
+            cmdCursor[7] = 0x5c0;
+            cmdCursor[8] = 0;
+            cmdCursor[9] = 0x1050e;
+            cmdCursor[10] = 0;
+            cmdCursor[0xb] = width | uVar2 << 0x10;
+            cmdCursor[0xc] = (uVar1 - 1) * 0x10000 | 0x85f0;
+            cmdCursor = cmdCursor + 0xd;
             if (uVar12 != 0) {
-              uVar13 = 0;
-              uVar11 = uVar10;
+              rowIndex = 0;
+              srcRow = srcNext;
               do {
-                uVar13 = uVar13 + 1;
-                uVar10 = uVar11 + uVar9;
-                _bcopy(uVar11,piVar14,uVar9);
-                piVar14 = (int *)((int)piVar14 + (uVar9 & 0xfffffffc));
-                uVar11 = uVar10;
-              } while (uVar13 != uVar12);
+                rowIndex = rowIndex + 1;
+                srcNext = srcRow + rowBytes;
+                _bcopy(srcRow,cmdCursor,rowBytes);
+                cmdCursor = (int *)((int)cmdCursor + (rowBytes & 0xfffffffc));
+                srcRow = srcNext;
+              } while (rowIndex != uVar12);
             }
-            iVar8 = iVar8 + 1;
-          } while (status != iVar8);
+            repeatIndex = repeatIndex + 1;
+          } while (status != repeatIndex);
         }
-        *piVar14 = 0xd0b;
-        piVar14[1] = 5;
-        piVar14[2] = 0x5c8;
-        piVar14[3] = 0x10000;
+        *cmdCursor = 0xd0b;
+        cmdCursor[1] = 5;
+        cmdCursor[2] = 0x5c8;
+        cmdCursor[3] = 0x10000;
         status = 0;
         goto LAB_00002ce0;
       }
@@ -5466,22 +5466,22 @@ LAB_0000c820:
 }
 
 /* _printf_LDBLStub @ 0xc89c (172 bytes) */
-int _printf_LDBLStub(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int _printf_LDBLStub(printfArg1, printfArg2, printfArg3, printfArg4, printfArg5, printfArg6, printfArg7, printfArg8)
+  undefined4 printfArg1;
+  undefined4 printfArg2;
+  undefined4 printfArg3;
+  undefined4 printfArg4;
+  undefined4 printfArg5;
+  undefined4 printfArg6;
+  undefined4 printfArg7;
+  undefined4 printfArg8;
 {
   if (_funcptr == (code *)0x0) {
     _funcptr = (code *)((int (*)())___stub_getrealaddr)("printf");
   }
                     
                     
-  (*_funcptr)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8);
+  (*_funcptr)(printfArg1,printfArg2,printfArg3,printfArg4,printfArg5,printfArg6,printfArg7,printfArg8);
   return;
 }
 
@@ -5510,28 +5510,28 @@ int FUN_0000c974()
 }
 
 /* ___stub_getrealaddr @ 0xc9ec (164 bytes) */
-int ___stub_getrealaddr(param_1)
-  undefined4 param_1;
+int ___stub_getrealaddr(symbolName)
+  undefined4 symbolName;
 {
-  int iVar1;
-  int iVar2;
-  undefined4 uVar3;
-  char local_58 [4];
-  char acStack_54 [4];
-  char acStack_50 [64];
+  int nameLength;
+  int isDefined;
+  undefined4 symbol;
+  char nameBuffer [4];
+  char nameBufferTail [4];
+  char nameBufferEnd [64];
   
-  local_58[0] = '_';
-  _strcpy(local_58 + 1,param_1);
-  iVar1 = _strlen(local_58);
-  builtin_strncpy(local_58 + iVar1,"$LDB",4);
-  acStack_50[iVar1] = '\0';
-  builtin_strncpy(acStack_54 + iVar1,"L128",4);
-  iVar2 = _NSIsSymbolNameDefinedWithHint(local_58,"libSystem.");
-  if (iVar2 == 0) {
-    local_58[iVar1] = '\0';
+  nameBuffer[0] = '_';
+  _strcpy(nameBuffer + 1,symbolName);
+  nameLength = _strlen(nameBuffer);
+  builtin_strncpy(nameBuffer + nameLength,"$LDB",4);
+  nameBufferEnd[nameLength] = '\0';
+  builtin_strncpy(nameBufferTail + nameLength,"L128",4);
+  isDefined = _NSIsSymbolNameDefinedWithHint(nameBuffer,"libSystem.");
+  if (isDefined == 0) {
+    nameBuffer[nameLength] = '\0';
   }
-  uVar3 = _NSLookupAndBindSymbolWithHint(local_58,"libSystem.");
-  uVar3 = _NSAddressOfSymbol(uVar3);
-  return uVar3;
+  symbol = _NSLookupAndBindSymbolWithHint(nameBuffer,"libSystem.");
+  symbol = _NSAddressOfSymbol(symbol);
+  return symbol;
 }
 
