@@ -1,0 +1,149 @@
+# use rows: webs that only ever hold a copy of one ctx field (named after the field) or the packet returned by the stream-allocate callback; generated from find_webs
+use	FUN_00016670	iVar10	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*iVar10\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\);$	+1
+use	FUN_00016670	iVar10	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*if\ \(\(\(unsigned\ char\ \*\)0x00002e0a\)\[iVar10\]\ !=\ '\\0'\)\ \{$	+1
+use	FUN_00016670	iVar10	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*fStack_184\ =\ \(float\)\(dVar27\ \*\ \(double\)\*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00002de0\)\ \+\ iVar10\)\ \+$	+8
+use	FUN_00016670	iVar21	writeCursor	INFERRED	copy of ctx field GLD_writeCursor	^\s*iVar21\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_writeCursor\);$	+3
+use	FUN_00016670	iVar21	writeCursor	INFERRED	copy of ctx field GLD_writeCursor	^\s*\*\(undefined4\ \*\)\(iVar21\ \+\ 4\ \+\ iVar10\)\ =\ uVar15;$	+1
+use	FUN_00018a40	iVar15	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*iVar15\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\);$	+9
+use	FUN_00018a40	iVar15	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*else\ if\ \(\*\(short\ \*\)\(\(\(unsigned\ char\ \*\)0x00002fa8\)\ \+\ iVar15\)\ ==\ \-0x7fea\)\ \{$	+3
+use	FUN_00018a40	iVar15	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*fVar4\ =\ \*\(float\ \*\)\(\(\(unsigned\ char\ \*\)0x00002e48\)\ \+\ iVar15\)\ \*\ \*\(float\ \*\)\(param_1\ \+\ 0x2a54\);$	+3
+use	FUN_0001ecd0	iVar12	currentVertexArray	INFERRED	copy of ctx field GLD_currentVertexArray	^\s*iVar12\ =\ \*\*\(int\ \*\*\)\(param_1\ \+\ GLD_currentVertexArray\);$	+2
+use	FUN_0001ecd0	iVar12	currentProgram	INFERRED	copy of ctx field GLD_currentProgram	^\s*iVar12\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_currentProgram\);$	+2
+use	FUN_0001ecd0	iVar12	currentProgram	INFERRED	copy of ctx field GLD_currentProgram	^\s*iVar12\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_currentProgram\);$@2	+1
+use	FUN_0001ecd0	iVar12	currentProgram	INFERRED	copy of ctx field GLD_currentProgram	^\s*if\ \(\(iVar12\ ==\ 0\)\ \|\|\ \(iVar36\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x29e8\)\ \+\ 0x28\),\ iVar36\ !=\ 0\)\)$	+1
+use	FUN_0001ecd0	pbVar25	retireCounter	INFERRED	copy of ctx field GLD_retireCounter	^\s*pbVar25\ =\ \*\(byte\ \*\*\)\(param_1\ \+\ GLD_retireCounter\);$	+3
+use	FUN_0001ecd0	puVar16	headerWord	INFERRED	copy of ctx field GLD_lastHeader	^\s*puVar16\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ GLD_lastHeader\);$	+2
+use	FUN_00024fe0	iVar23	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*iVar23\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\);$@2	+5
+use	FUN_00024fe0	iVar23	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*iVar23\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\);$@3	+1
+use	FUN_00024fe0	iVar23	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*pdVar17\ =\ \(dword\ \*\)\(puVar8\ \+\ iVar23\ \+\ 0x1c\);$	+4
+use	FUN_00024fe0	iVar23	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*iVar23\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\);$@7	+1
+use	FUN_00024fe0	iVar23	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*iVar23\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\);$@4	+1
+use	FUN_00024fe0	iVar23	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*iVar23\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\);$@8	+1
+use	FUN_00024fe0	iVar23	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*iVar23\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\);$@11	+1
+use	FUN_00024fe0	iVar23	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*pdVar17\ =\ \(dword\ \*\)\(puVar8\ \+\ iVar23\ \+\ 0x18\);$	+4
+use	FUN_00024fe0	iVar23	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*iVar23\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\);$@5	+1
+use	FUN_00024fe0	iVar23	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*pdVar17\ =\ \(dword\ \*\)\(puVar8\ \+\ iVar23\ \+\ 0x20\);$	+4
+use	FUN_00024fe0	iVar23	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*iVar23\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\);$@9	+1
+use	FUN_00024fe0	iVar23	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*iVar23\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\);$@6	+1
+use	FUN_00024fe0	iVar23	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*pdVar17\ =\ \(dword\ \*\)\(puVar8\ \+\ iVar23\ \+\ 0x24\);$	+4
+use	FUN_00024fe0	iVar23	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*iVar23\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\);$@10	+1
+use	FUN_00024fe0	iVar23	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*iVar23\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\);$@12	+5
+use	FUN_00024fe0	iVar23	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*iVar23\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\);$@13	+5
+use	FUN_00024fe0	iVar23	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*iVar23\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\);$@14	+5
+use	FUN_00024fe0	iVar23	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*iVar23\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\);$@15	+5
+use	FUN_00029290	iVar14	engineObjects	INFERRED	copy of ctx field GLD_engineObjects	^\s*iVar14\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineObjects\);$	+2
+use	FUN_00029290	iVar14	engineObjects	INFERRED	copy of ctx field GLD_engineObjects	^\s*iVar7\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar14\ \+\ 0x148\)\ \+\ 0x30\);$	+1
+use	FUN_00029290	iVar14	engineObjects	INFERRED	copy of ctx field GLD_engineObjects	^\s*iVar7\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar14\ \+\ 0x144\)\ \+\ 0x30\);$	+1
+use	FUN_00029290	iVar16	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*iVar16\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_engineState\);$	+5
+use	FUN_00029290	iVar16	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*else\ if\ \(\(\*\(uint\ \*\)\(\(\(unsigned\ char\ \*\)0x000030b0\)\ \+\ iVar16\)\ \&\ 2\)\ ==\ 0\)\ \{$	+3
+use	FUN_00029290	iVar16	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*iVar6\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00002ff0\)\ \+\ iVar16\)\ \+\ \-1;$	+1
+use	FUN_00029290	iVar16	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*else\ if\ \(\*\(short\ \*\)\(\(\(unsigned\ char\ \*\)0x00002fa8\)\ \+\ iVar16\)\ ==\ \-0x7fea\)\ \{$	+1
+use	FUN_00029290	iVar16	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*iVar6\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00002fb0\)\ \+\ iVar16\)\ \+\ \-1;$	+1
+use	FUN_00029290	iVar16	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*puVar5\ =\ \(\(unsigned\ char\ \*\)0x00002e50\)\ \+\ iVar16;$	+1
+use	FUN_00029290	iVar16	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*puVar5\ =\ \(\(unsigned\ char\ \*\)0x00002e48\)\ \+\ iVar16;$	+1
+use	FUN_00029290	iVar16	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*if\ \(\(\(unsigned\ char\ \*\)0x00002e68\)\[iVar16\]\ !=\ '\\0'\)\ \{$	+1
+use	FUN_00029290	iVar16	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*if\ \(\(\(unsigned\ char\ \*\)0x00002e69\)\[iVar16\]\ !=\ '\\0'\)\ \{$	+1
+use	FUN_00029290	iVar16	engineState	INFERRED	copy of ctx field GLD_engineState	^\s*if\ \(\(bVar4\)\ \|\|$	+6
+use	FUN_00029290	iVar6	renderWidth	INFERRED	copy of ctx field GLD_renderWidth	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ GLD_renderWidth\);$	+1
+use	FUN_00029290	iVar6	renderWidth	INFERRED	copy of ctx field GLD_renderWidth	^\s*uStack_b8\ =\ iVar6\ \*\ iVar7;$	+1
+use	FUN_00029290	iVar6	renderHeight	INFERRED	copy of ctx field GLD_renderHeight	^\s*iVar6\ =\ uStack_b8\ \*\ \*\(int\ \*\)\(param_1\ \+\ GLD_renderHeight\);$	+2
+use	FUN_00029290	iVar6	renderHeight	INFERRED	copy of ctx field GLD_renderHeight	^\s*uStack_bc\ =\ \(int\)pvVar9\ \+\ param_2\ \*\ iVar14\ \+\ iVar17\ \*\ iVar6\ \+\ iVar7;$	+1
+use	FUN_00029290	piVar19	boundFramebuffer	INFERRED	copy of ctx field GLD_boundFramebuffer	^\s*piVar19\ =\ \*\(int\ \*\*\)\(param_1\ \+\ GLD_boundFramebuffer\);$	+2
+use	FUN_00029290	piVar19	boundFramebuffer	INFERRED	copy of ctx field GLD_boundFramebuffer	^\s*iVar7\ =\ \*\(ushort\ \*\)\(\*piVar19\ \+\ 0x98\)\ \-\ 0x8ce0;$	+1
+use	FUN_00029290	piVar19	boundFramebuffer	INFERRED	copy of ctx field GLD_boundFramebuffer	^\s*piVar20\ =\ \*\(int\ \*\*\)\(piVar19\[1\]\ \+\ iVar7\ \*\ 4\);$	+1
+use	FUN_00029290	piVar19	boundFramebuffer	INFERRED	copy of ctx field GLD_boundFramebuffer	^\s*iVar7\ =\ iVar7\ \*\ 0x18\ \+\ \*piVar19;$	+1
+use	FUN_00029290	uVar18	renderFlags	INFERRED	copy of ctx field GLD_renderFlags	^\s*uVar18\ =\ \*\(uint\ \*\)\(param_1\ \+\ GLD_renderFlags\);$	+2
+use	FUN_00029290	uVar18	renderFlags	INFERRED	copy of ctx field GLD_renderFlags	^\s*uVar18\ =\ \*\(uint\ \*\)\(param_1\ \+\ GLD_renderFlags\);$@2	+1
+use	FUN_00029290	uVar18	renderFlags	INFERRED	copy of ctx field GLD_renderFlags	^\s*if\ \(\(uVar18\ \&\ 0x2000\)\ ==\ 0\)\ \{$	+1
+use	FUN_00029290	uVar18	renderFlags	INFERRED	copy of ctx field GLD_renderFlags	^\s*if\ \(\(uVar18\ \&\ 0xf\)\ ==\ 4\)\ \{$	+1
+use	FUN_00029290	uVar18	renderFlags	INFERRED	copy of ctx field GLD_renderFlags	^\s*else\ if\ \(\(\(\(uVar18\ \&\ 0xf\)\ !=\ 3\)\ \|\|\ \(param_6\ !=\ 0x80e1\)\)\ \|\|\ \(param_7\ !=\ 0x8366\)\)$	+1
+use	FUN_00029290	uVar18	renderFlags	INFERRED	copy of ctx field GLD_renderFlags	^\s*uVar18\ =\ \*\(uint\ \*\)\(param_1\ \+\ GLD_renderFlags\);$@3	+1
+use	FUN_00029290	uVar18	renderFlags	INFERRED	copy of ctx field GLD_renderFlags	^\s*uVar18\ =\ \*\(uint\ \*\)\(param_1\ \+\ GLD_renderFlags\);$@4	+2
+use	FUN_00029290	uVar18	renderFlags	INFERRED	copy of ctx field GLD_renderFlags	^\s*uVar18\ =\ \*\(uint\ \*\)\(param_1\ \+\ GLD_renderFlags\);$@5	+1
+use	FUN_00029290	uVar18	renderFlags	INFERRED	copy of ctx field GLD_renderFlags	^\s*if\ \(\(uVar18\ \&\ 0x20000\)\ ==\ 0\)\ \{$	+1
+use	FUN_00029290	uVar18	renderFlags	INFERRED	copy of ctx field GLD_renderFlags	^\s*if\ \(\(uVar18\ \&\ 0x30000\)\ ==\ 0x30000\)\ \{$@2	+1
+use	FUN_00029290	uVar18	renderFlags	INFERRED	copy of ctx field GLD_renderFlags	^\s*if\ \(\(uVar18\ \&\ 0x2000\)\ !=\ 0\)\ goto\ LAB_00029878;$	+1
+use	FUN_00029294	iVar19	renderHeight	INFERRED	copy of ctx field GLD_renderHeight	^\s*iVar19\ =\ uStack_b8\ \*\ \*\(int\ \*\)\(param_1\ \+\ GLD_renderHeight\);$	+2
+use	FUN_00029294	iVar19	renderHeight	INFERRED	copy of ctx field GLD_renderHeight	^\s*uStack_bc\ =\ iVar6\ \+\ iVar21\ \*\ iVar19\ \+\ iVar20\ \+\ param_2\ \*\ iVar9;$	+1
+use	FUN_00029294	piVar23	boundFramebuffer	INFERRED	copy of ctx field GLD_boundFramebuffer	^\s*piVar23\ =\ \*\(int\ \*\*\)\(param_1\ \+\ GLD_boundFramebuffer\);$	+2
+use	FUN_00029294	piVar23	boundFramebuffer	INFERRED	copy of ctx field GLD_boundFramebuffer	^\s*iVar16\ =\ \*\(ushort\ \*\)\(\*piVar23\ \+\ 0x98\)\ \-\ 0x8ce0;$	+1
+use	FUN_00029294	piVar23	boundFramebuffer	INFERRED	copy of ctx field GLD_boundFramebuffer	^\s*piVar24\ =\ \*\(int\ \*\*\)\(piVar23\[1\]\ \+\ iVar16\ \*\ 4\);$	+1
+use	FUN_00029294	piVar23	boundFramebuffer	INFERRED	copy of ctx field GLD_boundFramebuffer	^\s*iVar20\ =\ iVar16\ \*\ 0x18\ \+\ \*piVar23;$	+1
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\ =\ \(undefined4\ \*\)$	+1
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*\*\(undefined4\ \*\*\)\(param_1\ \+\ GLD_streamCurrent\)\ =\ puVar30;$	+1
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*\*puVar23\ =\ \(int\)puVar30\ \-\ \(int\)puVar23\ >>\ 2\ \|\ \*puVar23;$	+5
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[9\]\ =\ 0xd07;$	+11
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0xf\]\ =\ 0x56b;$	+8
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x16\]\ =\ param_7\ \*\ \*\(int\ \*\)\(iVar22\ \+\ 0x14\)\ \+\ \*\(int\ \*\)\(iVar22\ \+\ 8\);$	+1
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x16\]\ =\ 0;$	+1
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x18\]\ =\ iVar22;$	+1
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x17\]\ =\ 0x502;$	+2
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x1a\]\ =\ uVar26;$	+5
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x24\]\ =\ 0xd0b;$	+12
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*\(iVar43,puVar30\ \+\ 0x2a,a2,0,uVar44,uVar42,uVar21,puVar30\ \+\ 0x24\);$	+1
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\ =\ \(undefined4\ \*\)$@2	+1
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*piStack_fc\ =\ puVar30\ \+\ 1;$	+2
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*\*puVar23\ =\ \(int\)puVar30\ \-\ \(int\)puVar23\ >>\ 2\ \|\ \*puVar23;$@2	+5
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0xa9\]\ =\ \(uVar42\ \-\ 1\)\ \*\ 0x800\ \&\ 0x3ff800\ \|\ uStack_104\ \|\ 0x80000000;$	+2
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0xab\]\ =\ uVar44\ \&\ 0x1f\ \|\ 0xa600;$	+1
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0xab\]\ =\ uVar44\ \&\ 0x1f\ \|\ 0x8600;$	+1
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0xad\]\ =$	+1
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x8d\]\ =$	+1
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x8d\]\ \&\ 0xffffffe0;$	+1
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x9d\]\ =\ iVar45;$	+1
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0xb6\]\ =\ uVar24\ \-\ 1\ \&\ 0x1fff\ \|\ \(uStack_f8\ \-\ 1\)\ \*\ 0x2000\ \&\ 0x3ffe000;$	+3
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0xc0\]\ =\ 0x31080;$	+6
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[199\]\ =\ 0xc0033500;$	+7
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0xcd\]\ =\ 0;$	+9
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0xd6\]\ =\ \(\(unsigned\ char\ \*\)0x000010faU\);$	+2
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0xd8\]\ =\ 0xc0001000;$	+4
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0xdd\]\ =\ \(\(unsigned\ char\ \*\)0x00001008U\);$	+2
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0xdf\]\ =\ \(\(unsigned\ char\ \*\)0x000010e9U\);$	+2
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0xe1\]\ =\ \(\(unsigned\ char\ \*\)0x000013c7U\);$	+2
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0xe3\]\ =\ \(\(unsigned\ char\ \*\)0x000013c1U\);$	+2
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0xe5\]\ =\ 0x850;$	+2
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0xe7\]\ =\ 0x887;$	+2
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x189\]\ =\ 0x82c;$	+2
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0xe9\]\ =\ \(\(unsigned\ char\ \*\)0x000010aeU\);$	+2
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0xeb\]\ =\ \(\(unsigned\ char\ \*\)0x00001394U\);$	+2
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0xed\]\ =\ \(\(unsigned\ char\ \*\)0x00001380U\);$	+5
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0xf1\]\ =\ 0x824;$	+2
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0xf3\]\ =\ 0x825;$	+2
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0xf5\]\ =\ 0x82d;$	+2
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0xf7\]\ =\ 0x854;$	+2
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0xf9\]\ =\ 0x878;$	+2
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0xfb\]\ =\ \(\(unsigned\ char\ \*\)0x000013c0U\);$	+2
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0xfd\]\ =\ \(\(unsigned\ char\ \*\)0x000012f0U\);$	+2
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0xfe\]\ =\ uVar44;$	+1
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0xfe\]\ =\ uVar44\ \&\ 0xfffffffe;$	+1
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0xff\]\ =\ \(\(unsigned\ char\ \*\)0x000012f5U\);$	+1
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x100\]\ =\ uVar44;$	+1
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x100\]\ =\ uVar44\ \&\ 0xfffff7ff;$	+1
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x101\]\ =\ \(\(unsigned\ char\ \*\)0x000010a2U\);$	+1
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x103\]\ =\ \(\(unsigned\ char\ \*\)0x00001381U\);$	+2
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x104\]\ =\ uVar44;$	+1
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x104\]\ =\ uVar44\ \&\ 0xfffffffc;$	+1
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x105\]\ =\ \(\(unsigned\ char\ \*\)0x0000109eU\);$	+1
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x107\]\ =\ \(\(unsigned\ char\ \*\)0x00001096U\);$	+2
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x109\]\ =\ \(\(unsigned\ char\ \*\)0x00001041U\);$	+2
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x10b\]\ =\ \(\(unsigned\ char\ \*\)0x00001046U\);$	+2
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x10d\]\ =\ \(\(unsigned\ char\ \*\)0x00001094U\);$	+24
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x159\]\ =\ \(\(unsigned\ char\ \*\)0x000011aaU\);$	+2
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x15b\]\ =\ \(\(unsigned\ char\ \*\)0x000011abU\);$	+2
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x15d\]\ =\ \(\(unsigned\ char\ \*\)0x000011acU\);$	+2
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x15f\]\ =\ \(\(unsigned\ char\ \*\)0x000010c0U\);$	+2
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x161\]\ =\ \(\(unsigned\ char\ \*\)0x000010c1U\);$	+4
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x167\]\ =\ \(\(unsigned\ char\ \*\)0x0000138aU\);$	+10
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x171\]\ =\ \(\(unsigned\ char\ \*\)0x00001110U\);$	+4
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x175\]\ =\ \(\(unsigned\ char\ \*\)0x00001130U\);$	+2
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x177\]\ =\ \(\(unsigned\ char\ \*\)0x00001140U\);$	+2
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x179\]\ =\ \(\(unsigned\ char\ \*\)0x000010f4U\);$	+4
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x17d\]\ =\ \(\(unsigned\ char\ \*\)0x00001386U\);$	+2
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x17f\]\ =\ 0x110f8;$	+3
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x182\]\ =\ \(\(unsigned\ char\ \*\)0x00001087U\);$	+2
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0x184\]\ =\ 0x31080;$	+9
+use	FUN_000369f0	puVar30	packet	INFERRED	result of the stream-allocate callback: the packet being built	^\s*puVar30\[0xa3\]\ =\ \(\(int\)puVar23\ \-\ \(int\)puVar30\)\ \*\ 8\ \&\ 0xffffffe0U\ \|\ puVar30\[0xa3\]\ \&\ 0x1f$	+1
+use	_gldUpdateDispatch	uVar22	renderFlags	INFERRED	copy of ctx field GLD_renderFlags	^\s*uVar22\ =\ \*\(uint\ \*\)\(param_1\ \+\ GLD_renderFlags\);$	+3
+use	_gldUpdateDispatch	uVar22	renderFlags	INFERRED	copy of ctx field GLD_renderFlags	^\s*else\ if\ \(\(uVar22\ \&\ 0x400\)\ ==\ 0\)\ \{$	+1
+use	_gldUpdateDispatch	uVar22	renderFlags	INFERRED	copy of ctx field GLD_renderFlags	^\s*else\ if\ \(\(uVar22\ \&\ 0x800\)\ ==\ 0\)\ \{$	+1
+use	_gldUpdateDispatch	uVar22	renderFlags	INFERRED	copy of ctx field GLD_renderFlags	^\s*\(\(int\ \(\*\)\(\)\)FUN_0001a9d0\)\(param_1,piVar10,puVar11,param_4,uVar20,uVar9,uVar22\ \&\ 0x800\);$	+1

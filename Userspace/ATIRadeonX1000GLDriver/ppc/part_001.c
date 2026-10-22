@@ -23,16 +23,16 @@ int _gldReclaimContext(ctx)
   int status;
   
   FUN_0002cc10(ctx);
-  status = _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0x11,0,0,0,0);
+  status = _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),0x11,0,0,0,0);
   if (status != 0) {
     _free(ctx);
     return;
   }
-  *(undefined4 *)(ctx + 0x204) = 0;
-  *(undefined4 *)(ctx + 0x1fc) = 0;
-  *(undefined4 *)(ctx + 0x200) = 0;
-  *(undefined4 *)(ctx + 500) = 0;
-  *(undefined4 *)(ctx + 0x1f8) = 0;
+  *(undefined4 *)(ctx + GLD_dataRefillCount) = 0;
+  *(undefined4 *)(ctx + GLD_dataBase) = 0;
+  *(undefined4 *)(ctx + GLD_dataBufferId) = 0;
+  *(undefined4 *)(ctx + GLD_dataCursor) = 0;
+  *(undefined4 *)(ctx + GLD_dataLimit) = 0;
   return;
 }
 
@@ -43,8 +43,8 @@ int FUN_00007020(ctx)
   char useCount;
   undefined *library;
   
-  if ((ctx[0x3e] != 0) &&
-     (ctx[0x3e] = 0, library = PTR_DAT_001e88ac, (ctx[0xf] & 0x20U) == 0)) {
+  if ((ctx[GLD_attachedDrawable / 4] != 0) &&
+     (ctx[GLD_attachedDrawable / 4] = 0, library = PTR_DAT_001e88ac, (ctx[GLD_drawableFlags / 4] & 0x20U) == 0)) {
     useCount = PTR_DAT_001e88ac[*ctx + 0x98];
     PTR_DAT_001e88ac[*ctx + 0x98] = useCount + -1;
     if ((char)(useCount + -1) == '\0') {
@@ -92,36 +92,36 @@ int _gldAttachDrawable(ctx, drawableType, drawable, drawableIds)
     if (drawable == (int *)0x0) {
       return 0x2715;
     }
-    ctx[0xf] = ctx[0xf] | 0x20;
+    ctx[GLD_drawableFlags / 4] = ctx[GLD_drawableFlags / 4] | 0x20;
     pbufferArg = drawable;
     if (drawableType != 0x5a) {
       pbufferArg = (int *)0x0;
     }
-    FUN_00017160(ctx,ctx + 0xf,pbufferArg);
+    FUN_00017160(ctx,ctx + GLD_drawableFlags / 4,pbufferArg);
     callWords[0] = drawable[2];
     callWords[1] = 3;
-    status = _io_connect_method_scalarI_scalarO(ctx[1],6,callWords,1,&drawableWidth,callWords + 1);
+    status = _io_connect_method_scalarI_scalarO(ctx[GLD_connect / 4],6,callWords,1,&drawableWidth,callWords + 1);
     if (status == 0) {
-      ctxFlags = ctx[0xf];
+      ctxFlags = ctx[GLD_drawableFlags / 4];
       if ((drawableWidth & 0xf) != (ctxFlags & 0xf)) {
         if ((ctxFlags & 0x33c0) != 0) {
-          if (ctx[0x54] != 0) {
+          if (ctx[GLD_boundFramebuffer / 4] != 0) {
             return 0x2715;
           }
-          ctx[0x55] = ctxFlags;
+          ctx[GLD_renderFlags / 4] = ctxFlags;
           return 0x2715;
         }
         ctxFlags = drawableWidth & 0xf | ctxFlags & 0xfffffff0;
-        ctx[0xf] = ctxFlags;
-        if (ctx[0x54] == 0) {
-          ctx[0x55] = ctxFlags;
+        ctx[GLD_drawableFlags / 4] = ctxFlags;
+        if (ctx[GLD_boundFramebuffer / 4] == 0) {
+          ctx[GLD_renderFlags / 4] = ctxFlags;
           FUN_00017260(ctx);
-          ctxFlags = ctx[0xf];
+          ctxFlags = ctx[GLD_drawableFlags / 4];
         }
       }
     }
     else {
-      ctxFlags = ctx[0xf];
+      ctxFlags = ctx[GLD_drawableFlags / 4];
     }
     if (drawableType != 0x5a) {
       ownRendererIndex = *ctx;
@@ -140,73 +140,73 @@ int _gldAttachDrawable(ctx, drawableType, drawable, drawableIds)
     status = (*attachCallback)(status,rendererIndex,drawable[2],ctxFlags & 0x803f,*(undefined4 *)(ownRendererIndex * 4 + serviceList));
     if (status == 0) {
       scalarIn0 = drawable[2];
-      scalarIn1 = ctx[0xf] & 0xffff3fc0;
+      scalarIn1 = ctx[GLD_drawableFlags / 4] & 0xffff3fc0;
       scalarIn2 = drawableHigh;
       scalarIn3 = drawableIds & 0xff;
-      status = _io_connect_method_scalarI_structureI(ctx[1],0,&scalarIn0,4,0,0);
+      status = _io_connect_method_scalarI_structureI(ctx[GLD_connect / 4],0,&scalarIn0,4,0,0);
       if ((status == 0) &&
-         ((*(char *)((int)ctx + 0x145) == '\0' ||
-          (status = _io_connect_method_scalarI_structureI(ctx[1],0xe,ctx + 0x4d,3,0,0),
+         ((*(char *)((int)ctx + GLD_scaleEnabled) == '\0' ||
+          (status = _io_connect_method_scalarI_structureI(ctx[GLD_connect / 4],0xe,ctx + GLD_scaleFlags / 4,3,0,0),
           status == 0)))) {
-        scalarIn0 = (uint)*(byte *)((int)ctx + 0x147);
-        _io_connect_method_scalarI_structureI(ctx[1],0x10,&scalarIn0,1,0,0);
+        scalarIn0 = (uint)*(byte *)((int)ctx + GLD_surfaceVolatile);
+        _io_connect_method_scalarI_structureI(ctx[GLD_connect / 4],0x10,&scalarIn0,1,0,0);
 LAB_00007320:
         outCount = 4;
         returnCode = 0x2715;
-        status = _io_connect_method_scalarI_scalarO(ctx[1],5,0,0,&drawableWidth,&outCount);
+        status = _io_connect_method_scalarI_scalarO(ctx[GLD_connect / 4],5,0,0,&drawableWidth,&outCount);
         if (status == 0) {
           outCount = 3;
           returnCode = 0x2715;
-          status = _io_connect_method_scalarI_scalarO(ctx[1],3,0,0,ctx + 9,&outCount);
+          status = _io_connect_method_scalarI_scalarO(ctx[GLD_connect / 4],3,0,0,ctx + GLD_hwConfig0 / 4,&outCount);
           if (status == 0) {
             outCount = 1;
-            _io_connect_method_scalarI_scalarO(ctx[1],4,0,0,callWords + 2,&outCount);
+            _io_connect_method_scalarI_scalarO(ctx[GLD_connect / 4],4,0,0,callWords + 2,&outCount);
             if ((callWords[2] & 1U) == 0) {
               returnCode = 0x2720;
               ctx[0x47] = drawableExtra0;
               ctx[0x48] = drawableExtra1;
-              ctx[0x41] = drawableWidth;
-              ctx[0x42] = drawableHeight;
+              ctx[GLD_drawableWidth / 4] = drawableWidth;
+              ctx[GLD_drawableHeight / 4] = drawableHeight;
             }
-            else if (drawable == (int *)ctx[0x3e]) {
-              if ((drawableWidth != ctx[0x41]) || (returnCode = 0, drawableHeight != ctx[0x42])) {
+            else if (drawable == (int *)ctx[GLD_attachedDrawable / 4]) {
+              if ((drawableWidth != ctx[GLD_drawableWidth / 4]) || (returnCode = 0, drawableHeight != ctx[GLD_drawableHeight / 4])) {
                 ctx[0x47] = drawableExtra0;
                 ctx[0x48] = drawableExtra1;
                 returnCode = 3;
-                ctx[0x41] = drawableWidth;
-                ctx[0x42] = drawableHeight;
+                ctx[GLD_drawableWidth / 4] = drawableWidth;
+                ctx[GLD_drawableHeight / 4] = drawableHeight;
               }
             }
             else {
               returnCode = 2;
               ctx[0x47] = drawableExtra0;
               ctx[0x48] = drawableExtra1;
-              ctx[0x41] = drawableWidth;
-              ctx[0x42] = drawableHeight;
+              ctx[GLD_drawableWidth / 4] = drawableWidth;
+              ctx[GLD_drawableHeight / 4] = drawableHeight;
             }
-            if (*(char *)((int)ctx + 0x141) != '\0') {
+            if (*(char *)((int)ctx + GLD_softwareBufferFormat) != '\0') {
               status = 4;
-              if (*(char *)((int)ctx + 0x141) != '\x01') {
+              if (*(char *)((int)ctx + GLD_softwareBufferFormat) != '\x01') {
                 status = 8;
               }
               status = status * (drawableWidth + 7 & 0xfffffff8) * drawableHeight;
-              if (status != ctx[0x53]) {
-                if (ctx[0x52] != 0) {
-                  _free(ctx[0x52]);
+              if (status != ctx[GLD_softwareBufferSize / 4]) {
+                if (ctx[GLD_softwareBuffer / 4] != 0) {
+                  _free(ctx[GLD_softwareBuffer / 4]);
                 }
                 rendererIndex = _malloc(status);
-                ctx[0x53] = status;
-                ctx[0x52] = rendererIndex;
+                ctx[GLD_softwareBufferSize / 4] = status;
+                ctx[GLD_softwareBuffer / 4] = rendererIndex;
               }
             }
             ((int (*)())FUN_00007020)(ctx);
-            ctx[0x3e] = (int)drawable;
-            ctx[0x3f] = drawableHigh;
-            ctx[0x40] = drawableIds & 0xff;
-            if (ctx[0x54] == 0) {
-              ctx[0x55] = ctx[0xf];
-              ctx[0x57] = ctx[0x41];
-              ctx[0x58] = ctx[0x42];
+            ctx[GLD_attachedDrawable / 4] = (int)drawable;
+            ctx[GLD_drawableIdHigh / 4] = drawableHigh;
+            ctx[GLD_drawableIdLow / 4] = drawableIds & 0xff;
+            if (ctx[GLD_boundFramebuffer / 4] == 0) {
+              ctx[GLD_renderFlags / 4] = ctx[GLD_drawableFlags / 4];
+              ctx[GLD_renderWidth / 4] = ctx[GLD_drawableWidth / 4];
+              ctx[GLD_renderHeight / 4] = ctx[GLD_drawableHeight / 4];
               ctx[0x59] = ctx[0x43];
               ctx[0x5a] = ctx[0x44];
               ctx[0x5b] = ctx[0x45];
@@ -226,12 +226,12 @@ LAB_00007320:
       if (drawable == (int *)0x0) {
         return 0x2715;
       }
-      ctxFlags = ctx[0xf];
-      ctx[0xf] = ctxFlags & 0xffffffdf;
+      ctxFlags = ctx[GLD_drawableFlags / 4];
+      ctx[GLD_drawableFlags / 4] = ctxFlags & 0xffffffdf;
       if (((ctxFlags & 0x400) != 0) || ((ctxFlags & 0x10) != 0)) {
-        ctx[0xf] = ctxFlags & 0xffffffdf | 0x8000;
+        ctx[GLD_drawableFlags / 4] = ctxFlags & 0xffffffdf | 0x8000;
       }
-      FUN_00017160(ctx,ctx + 0xf,0);
+      FUN_00017160(ctx,ctx + GLD_drawableFlags / 4,0);
       rendererIndex = *ctx;
       status = rendererIndex * 4;
       if (*(int *)(PTR_DAT_001e88ac + status + 0x18) == 0) {
@@ -245,15 +245,15 @@ LAB_00007320:
       PTR_DAT_001e88ac[rendererIndex + 0x98] = PTR_DAT_001e88ac[rendererIndex + 0x98] + '\x01';
       scalarIn0 = (uint)*(byte *)(status + *ctx);
       callWords[0] = 0;
-      scalarIn1 = ctx[0xf] & 0x803f;
+      scalarIn1 = ctx[GLD_drawableFlags / 4] & 0x803f;
       ctxFlags = _io_connect_method_scalarI_scalarO
                         (*(undefined4 *)(library + *ctx * 4 + 0x18),7,&scalarIn0,2,0,callWords);
       if (ctxFlags == 0) {
         scalarIn0 = ~(uint)*(byte *)(*(int *)(library + 0xc) + *ctx);
-        scalarIn1 = ctx[0xf] & 0xffff3fc0;
+        scalarIn1 = ctx[GLD_drawableFlags / 4] & 0xffff3fc0;
         scalarIn2 = ctxFlags;
         scalarIn3 = ctxFlags;
-        status = _io_connect_method_scalarI_structureI(ctx[1],0,&scalarIn0,4,0,0);
+        status = _io_connect_method_scalarI_structureI(ctx[GLD_connect / 4],0,&scalarIn0,4,0,0);
         if (status == 0) goto LAB_00007320;
       }
 LAB_00007790:
@@ -264,33 +264,33 @@ LAB_00007790:
       if (drawableType != 0) {
         if (drawableType == 0x5b) {
           if (drawable != (int *)0x0) {
-            ctx[0x55] = drawable[3];
-            ctx[0x56] = drawable[2];
-            ctx[0x57] = (uint)*(ushort *)(*drawable + 0x9a);
+            ctx[GLD_renderFlags / 4] = drawable[3];
+            ctx[GLD_renderBufferMask / 4] = drawable[2];
+            ctx[GLD_renderWidth / 4] = (uint)*(ushort *)(*drawable + 0x9a);
             rectField9c = *(ushort *)(*drawable + 0x9c);
             ctx[0x5c] = 0;
             ctx[0x59] = 0;
             ctx[0x5a] = 0;
             ctx[0x5b] = 0;
-            ctx[0x58] = (uint)rectField9c;
-            _memcpy(ctx[5] + 0x24,drawable + 4,0x3c);
-            *(uint *)ctx[5] = *(uint *)ctx[5] & 0xfffffffd;
+            ctx[GLD_renderHeight / 4] = (uint)rectField9c;
+            _memcpy(ctx[GLD_capsBlock / 4] + 0x24,drawable + 4,0x3c);
+            *(uint *)ctx[GLD_capsBlock / 4] = *(uint *)ctx[GLD_capsBlock / 4] & 0xfffffffd;
             return 0;
           }
-          ctx[0x55] = ctx[0xf];
-          ctx[0x56] = ctx[0xe];
-          ctx[0x57] = ctx[0x41];
-          ctx[0x58] = ctx[0x42];
+          ctx[GLD_renderFlags / 4] = ctx[GLD_drawableFlags / 4];
+          ctx[GLD_renderBufferMask / 4] = ctx[0xe];
+          ctx[GLD_renderWidth / 4] = ctx[GLD_drawableWidth / 4];
+          ctx[GLD_renderHeight / 4] = ctx[GLD_drawableHeight / 4];
           ctx[0x59] = ctx[0x43];
           ctx[0x5a] = ctx[0x44];
           ctx[0x5b] = ctx[0x45];
           ctx[0x5c] = ctx[0x46];
-          _memcpy(ctx[5] + 0x24,ctx + 0x10,0x3c);
+          _memcpy(ctx[GLD_capsBlock / 4] + 0x24,ctx + GLD_stateCopy / 4,0x3c);
           if (*(char *)((int)ctx + 0x143) == '\0') {
-            *(uint *)ctx[5] = *(uint *)ctx[5] & 0xfffffffd;
+            *(uint *)ctx[GLD_capsBlock / 4] = *(uint *)ctx[GLD_capsBlock / 4] & 0xfffffffd;
             return 0;
           }
-          *(uint *)ctx[5] = *(uint *)ctx[5] | 2;
+          *(uint *)ctx[GLD_capsBlock / 4] = *(uint *)ctx[GLD_capsBlock / 4] | 2;
           return 0;
         }
         returnCode = 0x271a;
@@ -308,7 +308,7 @@ LAB_000077a0:
   ((int (*)())FUN_00007020)(ctx);
   scalarIn1 = 0;
   scalarIn0 = 0;
-  _io_connect_method_scalarI_structureI(ctx[1],0,&scalarIn0,4,0,0);
+  _io_connect_method_scalarI_structureI(ctx[GLD_connect / 4],0,&scalarIn0,4,0,0);
   return returnCode;
 }
 
@@ -330,8 +330,8 @@ int _gldGetError(ctx)
 {
   undefined4 error;
   
-  error = *(undefined4 *)(ctx + 0x178);
-  *(undefined4 *)(ctx + 0x178) = 0;
+  error = *(undefined4 *)(ctx + GLD_lastError);
+  *(undefined4 *)(ctx + GLD_lastError) = 0;
   return error;
 }
 
@@ -356,9 +356,9 @@ int _gldCreateFence(ctx, fenceOut)
   *fence = 0;
   taskPtr = PTR_001e88b4;
   do {
-    scanCounter = *(uint *)(ctx + 0x21c) >> 8;
+    scanCounter = *(uint *)(ctx + GLD_statusRegionSize) >> 8;
     if (scanCounter != 0) {
-      bitmap = *(uint **)(ctx + 0x220);
+      bitmap = *(uint **)(ctx + GLD_fenceBitmap);
       bitmapWord = *bitmap;
       if (bitmapWord != 0xffffffff) {
         wordIndex = 0;
@@ -380,16 +380,16 @@ LAB_00007950:
         if (bitmapWord != 0xffffffff) goto LAB_00007950;
       }
     }
-    wordByteOffset = _IOConnectMapMemory(*(undefined4 *)(ctx + 4),4,*(undefined4 *)taskPtr,ctx + 0x218
-                                ,ctx + 0x21c,1);
+    wordByteOffset = _IOConnectMapMemory(*(undefined4 *)(ctx + GLD_connect),4,*(undefined4 *)taskPtr,ctx + GLD_statusRegion
+                                ,ctx + GLD_statusRegionSize,1);
     if (wordByteOffset != 0) {
       _free(fence);
       *fenceOut = 0;
       return 0x2720;
     }
-    wordByteOffset = _realloc(*(undefined4 *)(ctx + 0x220),*(uint *)(ctx + 0x21c) >> 5);
-    *(int *)(ctx + 0x220) = wordByteOffset;
-    scanCounter = *(uint *)(ctx + 0x21c) >> 6;
+    wordByteOffset = _realloc(*(undefined4 *)(ctx + GLD_fenceBitmap),*(uint *)(ctx + GLD_statusRegionSize) >> 5);
+    *(int *)(ctx + GLD_fenceBitmap) = wordByteOffset;
+    scanCounter = *(uint *)(ctx + GLD_statusRegionSize) >> 6;
     _memset(wordByteOffset + scanCounter,0,scanCounter);
   } while( true );
   while( true ) {
@@ -405,9 +405,9 @@ LAB_0000797c:
   wordIndex = freeBitIndex + wordIndex * 0x20;
   *(uint *)((int)bitmap + wordByteOffset) = 1 << (scanCounter & 0x3f) | *(uint *)((int)bitmap + wordByteOffset);
   *fence = wordIndex;
-  *(undefined4 *)(wordIndex * 8 + *(int *)(ctx + 0x218)) =
-       *(undefined4 *)(*(int *)(ctx + 0x1e4) + 0x18);
-  *(undefined4 *)(*fence * 8 + *(int *)(ctx + 0x218) + 4) = 0;
+  *(undefined4 *)(wordIndex * 8 + *(int *)(ctx + GLD_statusRegion)) =
+       *(undefined4 *)(*(int *)(ctx + GLD_ringMap) + 0x18);
+  *(undefined4 *)(*fence * 8 + *(int *)(ctx + GLD_statusRegion) + 4) = 0;
   *fenceOut = fence;
   *(undefined1 *)(fence + 1) = 1;
   return 0;
@@ -423,8 +423,8 @@ int _gldDestroyFence(ctx, fence)
   
   wordOffset = *fence >> 3 & 0x1ffffffc;
   bitIndex = *fence & 0x1f;
-  *(uint *)(wordOffset + *(int *)(ctx + 0x220)) =
-       (-2 << bitIndex | 0xfffffffeU >> 0x20 - bitIndex) & *(uint *)(wordOffset + *(int *)(ctx + 0x220));
+  *(uint *)(wordOffset + *(int *)(ctx + GLD_fenceBitmap)) =
+       (-2 << bitIndex | 0xfffffffeU >> 0x20 - bitIndex) & *(uint *)(wordOffset + *(int *)(ctx + GLD_fenceBitmap));
   _free(fence);
   return 0;
 }
@@ -447,11 +447,11 @@ int _gldTestObject(ctx, objectKind, object)
     completed = *(byte *)(object + 1);
     if (completed == 0) {
       entryIndex = *object;
-      table = *(int *)(ctx + 0x218);
+      table = *(int *)(ctx + GLD_statusRegion);
       if (*(int *)(entryIndex * 8 + table + 4) != 0) {
         _gldFlush(ctx);
         entryIndex = *object;
-        table = *(int *)(ctx + 0x218);
+        table = *(int *)(ctx + GLD_statusRegion);
       }
       completed = FUN_0001a0d0(ctx,*(undefined4 *)(entryIndex * 8 + table));
       *(byte *)(object + 1) = completed;
@@ -487,17 +487,17 @@ int _gldFinishObject(ctx, objectKind, object)
   else if (objectKind == 0) {
     if (*(char *)(object + 1) == '\0') {
       entryIndex = *object;
-      table = *(int *)(ctx + 0x218);
+      table = *(int *)(ctx + GLD_statusRegion);
       if (*(int *)(entryIndex * 8 + table + 4) != 0) {
         _gldFlush(ctx);
         entryIndex = *object;
-        table = *(int *)(ctx + 0x218);
+        table = *(int *)(ctx + GLD_statusRegion);
       }
       table = FUN_0001a0d0(ctx,*(undefined4 *)(entryIndex * 8 + table));
       *(char *)(object + 1) = (char)table;
       if (table == 0) {
         _io_connect_method_scalarI_structureI
-                  (*(undefined4 *)(ctx + 4),9,*object * 8 + *(int *)(ctx + 0x218),1,0,0);
+                  (*(undefined4 *)(ctx + GLD_connect),9,*object * 8 + *(int *)(ctx + GLD_statusRegion),1,0,0);
         *(undefined1 *)(object + 1) = 1;
         return 0;
       }
@@ -554,9 +554,9 @@ int _gldDestroyFramebuffer(ctx, framebuffer)
   int ctx;
   int framebuffer;
 {
-  if (*(int *)(ctx + 0x150) == framebuffer) {
+  if (*(int *)(ctx + GLD_boundFramebuffer) == framebuffer) {
     FUN_0001b4b0(ctx);
-    *(undefined4 *)(ctx + 0x150) = 0;
+    *(undefined4 *)(ctx + GLD_boundFramebuffer) = 0;
   }
   _free(framebuffer);
   return 0;
@@ -1521,8 +1521,8 @@ int _gldGetTextureLevelInfo(ctx, texture, face, level, pname, valueOut)
         residentSize = residentSize + boundTextureSize;
       }
       boundSlotCursor = boundSlotCursor + 4;
-    } while (ctx + 0x40 != boundSlotCursor);
-    if (*(uint *)(ctx + 0x28) < residentSize) {
+    } while (ctx + GLD_stateCopy != boundSlotCursor);
+    if (*(uint *)(ctx + GLD_hwConfig1) < residentSize) {
       *valueOut = 0;
       return 0x2720;
     }
@@ -1594,7 +1594,7 @@ int _gldDeleteTextureLevel(ctx, texture, face, level)
   int *refCountSlot;
   int oldRefCount;
   int faceEntry;
-  char in_RESERVE;
+  char reservation;
   byte crBits;
   
   if (level == 0xffffffff) {
@@ -1614,14 +1614,14 @@ int _gldDeleteTextureLevel(ctx, texture, face, level)
     refCountSlot = (int *)(faceEntry + 0x10);
     do {
       oldRefCount = *refCountSlot;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         updatedRefCount = storeWordConditionalIndexed(oldRefCount + -0x10000,0,refCountSlot);
         *refCountSlot = updatedRefCount;
         crBits = 2;
       }
     } while (!(bool)(crBits >> 1 & 1));
     if (oldRefCount == 0x10000) {
-      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,faceEntry,1,0,0);
+      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),0xb,faceEntry,1,0,0);
     }
     *(undefined4 *)(texture + 0x34) = 0;
   }
@@ -1639,7 +1639,7 @@ int _gldReclaimTexture(ctx, texture)
   int *listNeighbour;
   int unitOrOldRefCount;
   int unitSlotCursor;
-  char in_RESERVE;
+  char reservation;
   byte crBits;
   
   unitOrOldRefCount = 0;
@@ -1662,14 +1662,14 @@ int _gldReclaimTexture(ctx, texture)
     refCountSlot = (int *)(unitSlotCursor + 0x10);
     do {
       unitOrOldRefCount = *refCountSlot;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         updatedRefCount = storeWordConditionalIndexed(unitOrOldRefCount + -0x10000,0,refCountSlot);
         *refCountSlot = updatedRefCount;
         crBits = 2;
       }
     } while (!(bool)(crBits >> 1 & 1));
     if (unitOrOldRefCount == 0x10000) {
-      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,unitSlotCursor,1,0,0);
+      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),0xb,unitSlotCursor,1,0,0);
     }
     *(undefined4 *)(texture + 0x34) = 0;
   }
@@ -1687,14 +1687,14 @@ int _gldReclaimTexture(ctx, texture)
     listNeighbour = (int *)(unitSlotCursor + 0x10);
     do {
       unitOrOldRefCount = *listNeighbour;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         updatedRefCount = storeWordConditionalIndexed(unitOrOldRefCount + -0x10000,0,listNeighbour);
         *listNeighbour = updatedRefCount;
         crBits = 2;
       }
     } while (!(bool)(crBits >> 1 & 1));
     if (unitOrOldRefCount == 0x10000) {
-      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,unitSlotCursor,1,0,0);
+      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),0xb,unitSlotCursor,1,0,0);
     }
     refCountSlot[4] = 0;
     _free(refCountSlot);
@@ -2247,7 +2247,7 @@ int FUN_00009b70(ctx)
   
   record = _calloc(1,0x18);
   returnCode = 0x2720;
-  *(int *)(ctx + 0x234) = record;
+  *(int *)(ctx + GLD_queryRecord) = record;
   if (record != 0) {
     returnCode = 0;
   }
@@ -2285,8 +2285,8 @@ int _gldDestroyQuery(ctx, query)
   
   wordOffset = *query >> 3 & 0x1ffffffc;
   bitIndex = *query & 0x1f;
-  *(uint *)(wordOffset + *(int *)(ctx + 0x22c)) =
-       (-2 << bitIndex | 0xfffffffeU >> 0x20 - bitIndex) & *(uint *)(wordOffset + *(int *)(ctx + 0x22c));
+  *(uint *)(wordOffset + *(int *)(ctx + GLD_queryBitmap)) =
+       (-2 << bitIndex | 0xfffffffeU >> 0x20 - bitIndex) & *(uint *)(wordOffset + *(int *)(ctx + GLD_queryBitmap));
   _free(query);
   return 0;
 }
@@ -2299,24 +2299,24 @@ int FUN_00009cd0(ctx)
   int *refCountSlot;
   int oldRefCount;
   int memory;
-  char in_RESERVE;
+  char reservation;
   byte crBits;
   
-  memory = **(int **)(ctx + 0x234);
+  memory = **(int **)(ctx + GLD_queryRecord);
   if (memory != 0) {
     ((int (*)())FUN_00009bd0)(ctx);
     refCountSlot = (int *)(memory + 0x10);
     do {
       oldRefCount = *refCountSlot;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         updatedRefCount = storeWordConditionalIndexed(oldRefCount + -0x10000,0,refCountSlot);
         *refCountSlot = updatedRefCount;
         crBits = 2;
       }
     } while (!(bool)(crBits >> 1 & 1));
     if (oldRefCount == 0x10000) {
-      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,memory,1,0,0);
-      **(undefined4 **)(ctx + 0x234) = 0;
+      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),0xb,memory,1,0,0);
+      **(undefined4 **)(ctx + GLD_queryRecord) = 0;
     }
   }
   return 0;
@@ -2334,7 +2334,7 @@ int FUN_00009d70(ctx, record, addressWord, sizeWord, limitWord)
   int *refCountSlot;
   int status;
   int oldMemory;
-  char in_RESERVE;
+  char reservation;
   byte crBits;
   undefined4 structOutSize;
   undefined1 structOut0 [4];
@@ -2348,12 +2348,12 @@ int FUN_00009d70(ctx, record, addressWord, sizeWord, limitWord)
   *record = 0;
   structOutSize = 8;
   status = _io_connect_method_structureI_structureO
-                    (*(undefined4 *)(ctx + 4),10,record + 1,0x14,structOut0,&structOutSize);
+                    (*(undefined4 *)(ctx + GLD_connect),10,record + 1,0x14,structOut0,&structOutSize);
   if (status == 0) {
     *record = newMemory;
     refCountSlot = (int *)(newMemory + 0x10);
     do {
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         status = storeWordConditionalIndexed(*refCountSlot + 0x10000,0,refCountSlot);
         *refCountSlot = status;
         crBits = 2;
@@ -2365,14 +2365,14 @@ int FUN_00009d70(ctx, record, addressWord, sizeWord, limitWord)
     refCountSlot = (int *)(oldMemory + 0x10);
     do {
       status = *refCountSlot;
-      if (in_RESERVE != '\0') {
+      if (reservation != '\0') {
         updatedRefCount = storeWordConditionalIndexed(status + -0x10000,0,refCountSlot);
         *refCountSlot = updatedRefCount;
         crBits = 2;
       }
     } while (!(bool)(crBits >> 1 & 1));
     if (status == 0x10000) {
-      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,oldMemory,1,0,0);
+      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),0xb,oldMemory,1,0,0);
     }
   }
   return 1;
@@ -2397,9 +2397,9 @@ int _gldCreateQuery(ctx, queryOut)
   query = (int *)_malloc(4);
   *query = 0;
   do {
-    scanCounter = *(uint *)(ctx + 0x230) >> 5;
+    scanCounter = *(uint *)(ctx + GLD_queryCapacity) >> 5;
     if (scanCounter != 0) {
-      bitmap = *(uint **)(ctx + 0x22c);
+      bitmap = *(uint **)(ctx + GLD_queryBitmap);
       bitmapWord = *bitmap;
       if (bitmapWord != 0xffffffff) {
         wordIndex = 0;
@@ -2421,45 +2421,45 @@ LAB_0000a030:
         if (bitmapWord != 0xffffffff) goto LAB_0000a030;
       }
     }
-    if ((*(int *)(ctx + 0x234) == 0) && (wordByteOffset = ((int (*)())FUN_00009b70)(ctx), wordByteOffset == 0x2720)) {
+    if ((*(int *)(ctx + GLD_queryRecord) == 0) && (wordByteOffset = ((int (*)())FUN_00009b70)(ctx), wordByteOffset == 0x2720)) {
 LAB_0000a010:
       _free(query);
       *queryOut = 0;
       return 0x2720;
     }
-    if (*(int *)(ctx + 0x228) == 0) {
-      *(undefined4 *)(ctx + 0x230) = 0x20;
-      *(undefined4 *)(ctx + 0x228) = 0x610;
+    if (*(int *)(ctx + GLD_queryPoolBytes) == 0) {
+      *(undefined4 *)(ctx + GLD_queryCapacity) = 0x20;
+      *(undefined4 *)(ctx + GLD_queryPoolBytes) = 0x610;
       allocation = _malloc(0x610);
-      *(undefined4 *)(ctx + 0x224) = allocation;
-      _memset(allocation,0,*(undefined4 *)(ctx + 0x228));
+      *(undefined4 *)(ctx + GLD_queryPool) = allocation;
+      _memset(allocation,0,*(undefined4 *)(ctx + GLD_queryPoolBytes));
     }
     else {
-      if (**(int **)(ctx + 0x234) != 0) {
+      if (**(int **)(ctx + GLD_queryRecord) != 0) {
         ((int (*)())FUN_00009cd0)(ctx);
       }
-      wordByteOffset = *(int *)(ctx + 0x230) * 0x40 + 0x210;
-      *(int *)(ctx + 0x230) = *(int *)(ctx + 0x230) << 1;
-      *(int *)(ctx + 0x228) = wordByteOffset;
-      wordByteOffset = _realloc(*(undefined4 *)(ctx + 0x224),wordByteOffset);
-      *(int *)(ctx + 0x224) = wordByteOffset;
+      wordByteOffset = *(int *)(ctx + GLD_queryCapacity) * 0x40 + 0x210;
+      *(int *)(ctx + GLD_queryCapacity) = *(int *)(ctx + GLD_queryCapacity) << 1;
+      *(int *)(ctx + GLD_queryPoolBytes) = wordByteOffset;
+      wordByteOffset = _realloc(*(undefined4 *)(ctx + GLD_queryPool),wordByteOffset);
+      *(int *)(ctx + GLD_queryPool) = wordByteOffset;
       if (wordByteOffset == 0) goto LAB_0000a010;
     }
-    wordByteOffset = ((int (*)())FUN_00009d70)(ctx,*(undefined4 *)(ctx + 0x234),*(undefined4 *)(ctx + 0x224),
-                         *(undefined4 *)(ctx + 0x224),*(undefined4 *)(ctx + 0x228));
+    wordByteOffset = ((int (*)())FUN_00009d70)(ctx,*(undefined4 *)(ctx + GLD_queryRecord),*(undefined4 *)(ctx + GLD_queryPool),
+                         *(undefined4 *)(ctx + GLD_queryPool),*(undefined4 *)(ctx + GLD_queryPoolBytes));
     if (wordByteOffset != 1) goto LAB_0000a010;
     FUN_0002b3b0(ctx);
-    bitmapWord = *(uint *)(ctx + 0x230);
+    bitmapWord = *(uint *)(ctx + GLD_queryCapacity);
     scanCounter = bitmapWord >> 3;
-    if (*(int *)(ctx + 0x22c) == 0) {
+    if (*(int *)(ctx + GLD_queryBitmap) == 0) {
       allocation = _malloc(scanCounter);
-      *(undefined4 *)(ctx + 0x22c) = allocation;
+      *(undefined4 *)(ctx + GLD_queryBitmap) = allocation;
       _memset(allocation,0,scanCounter);
     }
     else {
-      wordByteOffset = _realloc(*(int *)(ctx + 0x22c),scanCounter);
+      wordByteOffset = _realloc(*(int *)(ctx + GLD_queryBitmap),scanCounter);
       bitmapWord = bitmapWord >> 4;
-      *(int *)(ctx + 0x22c) = wordByteOffset;
+      *(int *)(ctx + GLD_queryBitmap) = wordByteOffset;
       _memset(wordByteOffset + bitmapWord,0,bitmapWord);
     }
   } while( true );

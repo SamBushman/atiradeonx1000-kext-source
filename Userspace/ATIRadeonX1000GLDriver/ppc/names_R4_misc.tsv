@@ -1,0 +1,16 @@
+# local	FUNCTION	old	new	tier	evidence
+local	_gldDestroyMemoryPluginData	in_RESERVE	reservation	CONFIRMED	the lwarx/stwcx. reservation flag Ghidra reads before a storeWordConditionalIndexed retry loop (`if (reservation != 0) ... crBits = 2`)
+local	_gldReclaimBuffer	in_RESERVE	reservation	CONFIRMED	the lwarx/stwcx. reservation flag Ghidra reads before a storeWordConditionalIndexed retry loop (`if (reservation != 0) ... crBits = 2`)
+local	_gldDeleteTextureLevel	in_RESERVE	reservation	CONFIRMED	the lwarx/stwcx. reservation flag Ghidra reads before a storeWordConditionalIndexed retry loop (`if (reservation != 0) ... crBits = 2`)
+local	_gldReclaimTexture	in_RESERVE	reservation	CONFIRMED	the lwarx/stwcx. reservation flag Ghidra reads before a storeWordConditionalIndexed retry loop (`if (reservation != 0) ... crBits = 2`)
+local	FUN_00009cd0	in_RESERVE	reservation	CONFIRMED	the lwarx/stwcx. reservation flag Ghidra reads before a storeWordConditionalIndexed retry loop (`if (reservation != 0) ... crBits = 2`)
+local	FUN_00009d70	in_RESERVE	reservation	CONFIRMED	the lwarx/stwcx. reservation flag Ghidra reads before a storeWordConditionalIndexed retry loop (`if (reservation != 0) ... crBits = 2`)
+local	_gldModifyVertexArray	in_RESERVE	reservation	CONFIRMED	the lwarx/stwcx. reservation flag Ghidra reads before a storeWordConditionalIndexed retry loop (`if (reservation != 0) ... crBits = 2`)
+local	_gldReclaimVertexArray	in_RESERVE	reservation	CONFIRMED	the lwarx/stwcx. reservation flag Ghidra reads before a storeWordConditionalIndexed retry loop (`if (reservation != 0) ... crBits = 2`)
+local	_gldAllocVertexBuffer	in_RESERVE	reservation	CONFIRMED	the lwarx/stwcx. reservation flag Ghidra reads before a storeWordConditionalIndexed retry loop (`if (reservation != 0) ... crBits = 2`)
+local	FUN_0001ecd0	in_RESERVE	reservation	CONFIRMED	the lwarx/stwcx. reservation flag Ghidra reads before a storeWordConditionalIndexed retry loop (`if (reservation != 0) ... crBits = 2`)
+local	FUN_00028350	in_RESERVE	reservation	CONFIRMED	the lwarx/stwcx. reservation flag Ghidra reads before a storeWordConditionalIndexed retry loop (`if (reservation != 0) ... crBits = 2`)
+local	FUN_0002a3d0	in_RESERVE	reservation	CONFIRMED	the lwarx/stwcx. reservation flag Ghidra reads before a storeWordConditionalIndexed retry loop (`if (reservation != 0) ... crBits = 2`)
+local	FUN_000369f0	in_RESERVE	reservation	CONFIRMED	the lwarx/stwcx. reservation flag Ghidra reads before a storeWordConditionalIndexed retry loop (`if (reservation != 0) ... crBits = 2`)
+local	FUN_00016fc0	param_1	bufferEnum	CONFIRMED	the GL buffer enum compared against 0x400..0x40b (GL_FRONT_LEFT, FRONT_RIGHT, BACK_LEFT, BACK_RIGHT, FRONT, BACK, LEFT, RIGHT, FRONT_AND_BACK, AUX0..2); 0 = GL_NONE
+local	FUN_00016fc0	param_2	drawableFlags	INFERRED	tested with 0x10 (stereo), 0x300 (aux count) and 0x400 (double buffer) like the drawable flags at ctx+0x3c

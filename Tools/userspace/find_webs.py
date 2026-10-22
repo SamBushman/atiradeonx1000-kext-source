@@ -119,6 +119,8 @@ def build_cfg(body, brace):
             cn = new(lines, c, 'cond')
             if rest == '' and pos[0] < len(units) and re.match(r'(goto |return|break;|continue;)', units[pos[0]][1]):
                 rest = units[pos[0]][1]; pos[0] += 1               # `if (long condition)` and its one-line body on the next line
+            if rest == '' and pos[0] < len(units) and units[pos[0]][1] == '{':
+                pos[0] += 1; rest = '{'      # Ghidra puts the brace of a wrapped condition on its own line
             if rest == '{':
                 te, tx = block(loopstack)
                 if te: cn.succ.append(te)
@@ -144,6 +146,10 @@ def build_cfg(body, brace):
                 return cn, [cn]
             if rest.startswith('break') and loopstack:
                 loopstack[-1][1].append(cn); return cn, [cn]
+            if rest == '' and pos[0] < len(units) and units[pos[0]][1] not in ('{', '}'):
+                te, tx = stmt(loopstack)            # `if (cond)` with the one-statement body on the next line (Ghidra wraps long conditions)
+                cn.succ.append(te)
+                return cn, list(tx) + [cn]
             raise SystemExit('unhandled if form: ' + t)
         if t.startswith('while') or t.startswith('for'):
             kw = t.split('(')[0].strip()

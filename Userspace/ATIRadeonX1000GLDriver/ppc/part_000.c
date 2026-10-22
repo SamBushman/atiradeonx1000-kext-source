@@ -2546,7 +2546,7 @@ int _gldSetInteger(ctx, pname, values)
   }
   if (pname == 0x124) {
     scalarIn0 = *values;
-    statusOrObject = _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xc,&scalarIn0,1,0,0);
+    statusOrObject = _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),0xc,&scalarIn0,1,0,0);
     connectionOrError = 0x2719;
 joined_r0x000058fc:
     if (statusOrObject != 0) {
@@ -2556,42 +2556,42 @@ joined_r0x000058fc:
   else {
     if (pname < 0x125) {
       if (pname == 0xcb) {
-        scalarIn0 = (uint)*(byte *)(ctx + 0x142);
+        scalarIn0 = (uint)*(byte *)(ctx + GLD_swapIntervalNumerator);
         scalarIn1 = *values;
-        *(char *)(ctx + 0x146) = (char)scalarIn1;
-        _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),2,&scalarIn0,2,0,0);
+        *(char *)(ctx + GLD_swapIntervalDenominator) = (char)scalarIn1;
+        _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),2,&scalarIn0,2,0,0);
         return 0;
       }
       if (pname < 0xcc) {
         if (pname == 200) {
           if ((-1 < (int)values[2]) && (-1 < (int)values[3])) {
             scalarIn0 = *values;
-            *(uint *)(ctx + 0x124) = scalarIn0;
+            *(uint *)(ctx + GLD_swapRectX) = scalarIn0;
             scalarIn1 = values[1];
-            *(uint *)(ctx + 0x128) = scalarIn1;
+            *(uint *)(ctx + GLD_swapRectY) = scalarIn1;
             scalarIn2 = values[2];
-            *(uint *)(ctx + 300) = scalarIn2;
+            *(uint *)(ctx + GLD_swapRectWidth) = scalarIn2;
             scalarIn3 = values[3];
-            *(uint *)(ctx + 0x130) = scalarIn3;
-            if (*(char *)(ctx + 0x144) == '\0') {
+            *(uint *)(ctx + GLD_swapRectHeight) = scalarIn3;
+            if (*(char *)(ctx + GLD_swapRectEnabled) == '\0') {
               return 0;
             }
-            _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),1,&scalarIn0,4,0,0);
+            _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),1,&scalarIn0,4,0,0);
             return 0;
           }
           return 0x2718;
         }
         if (pname == 0xc9) {
           enable = *values != 0;
-          if (enable == (bool)*(char *)(ctx + 0x144)) {
+          if (enable == (bool)*(char *)(ctx + GLD_swapRectEnabled)) {
             return 0;
           }
-          *(bool *)(ctx + 0x144) = enable;
+          *(bool *)(ctx + GLD_swapRectEnabled) = enable;
           if (enable) {
-            scalarIn0 = *(uint *)(ctx + 0x124);
-            scalarIn1 = *(undefined4 *)(ctx + 0x128);
-            scalarIn2 = *(undefined4 *)(ctx + 300);
-            scalarIn3 = *(undefined4 *)(ctx + 0x130);
+            scalarIn0 = *(uint *)(ctx + GLD_swapRectX);
+            scalarIn1 = *(undefined4 *)(ctx + GLD_swapRectY);
+            scalarIn2 = *(undefined4 *)(ctx + GLD_swapRectWidth);
+            scalarIn3 = *(undefined4 *)(ctx + GLD_swapRectHeight);
           }
           else {
             scalarIn0 = 0;
@@ -2599,16 +2599,16 @@ joined_r0x000058fc:
             scalarIn2 = 0;
             scalarIn3 = 0;
           }
-          _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),1,&scalarIn0,4,0,0);
+          _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),1,&scalarIn0,4,0,0);
           return 0;
         }
       }
       else {
         if (pname == 0xde) {
           scalarIn0 = *values;
-          scalarIn1 = (uint)*(byte *)(ctx + 0x146);
-          *(char *)(ctx + 0x142) = (char)scalarIn0;
-          _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),2,&scalarIn0,2,0,0);
+          scalarIn1 = (uint)*(byte *)(ctx + GLD_swapIntervalDenominator);
+          *(char *)(ctx + GLD_swapIntervalNumerator) = (char)scalarIn0;
+          _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),2,&scalarIn0,2,0,0);
           return 0;
         }
         if (pname == 0xec) {
@@ -2625,21 +2625,21 @@ LAB_00005690:
     }
     if (pname < 0x29b) {
       if (pname == 0x12a) {
-        *(undefined1 *)(ctx + 0x145) = 1;
-        *(uint *)(ctx + 0x134) = *values;
-        *(uint *)(ctx + 0x138) = values[1];
-        *(uint *)(ctx + 0x13c) = values[2];
+        *(undefined1 *)(ctx + GLD_scaleEnabled) = 1;
+        *(uint *)(ctx + GLD_scaleFlags) = *values;
+        *(uint *)(ctx + GLD_scaleX) = values[1];
+        *(uint *)(ctx + GLD_scaleY) = values[2];
         return 0;
       }
       if (pname != 0x132) goto LAB_00005690;
-      connectionOrError = *(undefined4 *)(ctx + 4);
+      connectionOrError = *(undefined4 *)(ctx + GLD_connect);
       selector = 0x10;
       scalarIn0 = (uint)(*values != 0);
-      *(bool *)(ctx + 0x147) = *values != 0;
+      *(bool *)(ctx + GLD_surfaceVolatile) = *values != 0;
     }
     else {
       if (pname == 0x29d) {
-        statusOrObject = *(int *)(*(int *)(ctx + 0x18) + 0x194);
+        statusOrObject = *(int *)(*(int *)(ctx + GLD_engineObjects) + 0x194);
         if (statusOrObject == 0) {
           return 0;
         }
@@ -2650,15 +2650,15 @@ LAB_00005690:
           scalarIn0 = *values;
           scalarIn1 = values[1];
           if (scalarIn0 == 0) {
-            *(uint *)(ctx + 0x3c) = *(uint *)(ctx + 0x3c) & 0xffffffef;
-            *(undefined1 *)(*(int *)(ctx + 0x14) + 0x26) = 0;
+            *(uint *)(ctx + GLD_drawableFlags) = *(uint *)(ctx + GLD_drawableFlags) & 0xffffffef;
+            *(undefined1 *)(*(int *)(ctx + GLD_capsBlock) + 0x26) = 0;
           }
           else {
-            *(uint *)(ctx + 0x3c) = *(uint *)(ctx + 0x3c) | 0x10;
-            *(undefined1 *)(*(int *)(ctx + 0x14) + 0x26) = 1;
+            *(uint *)(ctx + GLD_drawableFlags) = *(uint *)(ctx + GLD_drawableFlags) | 0x10;
+            *(undefined1 *)(*(int *)(ctx + GLD_capsBlock) + 0x26) = 1;
           }
           statusOrObject = _io_connect_method_scalarI_structureI
-                            (*(undefined4 *)(ctx + 4),0x13,&scalarIn0,2,0,0);
+                            (*(undefined4 *)(ctx + GLD_connect),0x13,&scalarIn0,2,0,0);
           connectionOrError = 0x2712;
           goto joined_r0x000058fc;
         }
@@ -2690,7 +2690,7 @@ LAB_00005690:
           }
           statusOrObject = 0;
         }
-        statusOrObject = *(int *)(*(int *)(ctx + 0x18) + (*values * 5 + statusOrObject) * 4);
+        statusOrObject = *(int *)(*(int *)(ctx + GLD_engineObjects) + (*values * 5 + statusOrObject) * 4);
         if (statusOrObject == 0) {
           return 0;
         }
@@ -2699,7 +2699,7 @@ LAB_00005690:
       if (scalarIn0 == 0) {
         return 0;
       }
-      connectionOrError = *(undefined4 *)(ctx + 4);
+      connectionOrError = *(undefined4 *)(ctx + GLD_connect);
       selector = 0xf;
     }
     _io_connect_method_scalarI_structureI(connectionOrError,selector,&scalarIn0,1,0,0);
@@ -2728,29 +2728,29 @@ int _gldGetInteger(ctx, pname, values, extraArg3, extraArg4, extraArg5)
     return 0x271e;
   }
   if (pname == 0xde) {
-    *values = (uint)*(byte *)(ctx + 0x142);
+    *values = (uint)*(byte *)(ctx + GLD_swapIntervalNumerator);
     return 0;
   }
   if (pname < 0xdf) {
     if (pname == 0xc9) {
-      *values = (uint)*(byte *)(ctx + 0x144);
+      *values = (uint)*(byte *)(ctx + GLD_swapRectEnabled);
       return 0;
     }
     if (pname != 0xcb) {
       if (pname != 200) {
         return 0x271a;
       }
-      *values = *(uint *)(ctx + 0x124);
-      values[1] = *(uint *)(ctx + 0x128);
-      values[2] = *(uint *)(ctx + 300);
-      values[3] = *(uint *)(ctx + 0x130);
+      *values = *(uint *)(ctx + GLD_swapRectX);
+      values[1] = *(uint *)(ctx + GLD_swapRectY);
+      values[2] = *(uint *)(ctx + GLD_swapRectWidth);
+      values[3] = *(uint *)(ctx + GLD_swapRectHeight);
       return 0;
     }
-    *values = (uint)*(byte *)(ctx + 0x146);
+    *values = (uint)*(byte *)(ctx + GLD_swapIntervalDenominator);
     return 0;
   }
   if (pname == 0x132) {
-    *values = (uint)*(byte *)(ctx + 0x147);
+    *values = (uint)*(byte *)(ctx + GLD_surfaceVolatile);
     return 0;
   }
   if (pname < 0x133) {
@@ -2775,7 +2775,7 @@ int _gldGetInteger(ctx, pname, values, extraArg3, extraArg4, extraArg5)
   }
   outCount = 3;
   status = _io_connect_method_scalarI_scalarO
-                    (*(undefined4 *)(ctx + 4),6,values,1,&scalarOut0,&outCount);
+                    (*(undefined4 *)(ctx + GLD_connect),6,values,1,&scalarOut0,&outCount);
   if (status == 0) {
     switch(scalarOut0 & 0xf) {
     case 3:
@@ -2856,7 +2856,7 @@ int FUN_00005db0(ctx, buffer)
       }
       retired = FUN_0001a0d0(ctx,*(undefined4 *)(pluginRecord + 8));
       if (retired == 0) {
-        connection = *(undefined4 *)(ctx + 4);
+        connection = *(undefined4 *)(ctx + GLD_connect);
         pluginRecord = pluginRecord + 8;
 LAB_00005e6c:
         _io_connect_method_scalarI_structureI(connection,9,pluginRecord,1,0,0);
@@ -2869,7 +2869,7 @@ LAB_00005e6c:
       }
       retired = FUN_0001a0d0(ctx,*(undefined4 *)(pluginRecord + 0xc));
       if (retired == 0) {
-        connection = *(undefined4 *)(ctx + 4);
+        connection = *(undefined4 *)(ctx + GLD_connect);
         pluginRecord = pluginRecord + 0xc;
         goto LAB_00005e6c;
       }
@@ -2998,7 +2998,7 @@ int _gldFinishMemoryPluginData(ctx, pluginData)
     if (busy != 0) {
       return;
     }
-    connection = *(undefined4 *)(ctx + 4);
+    connection = *(undefined4 *)(ctx + GLD_connect);
     pluginRecord = pluginRecord + 8;
   }
   else {
@@ -3009,7 +3009,7 @@ int _gldFinishMemoryPluginData(ctx, pluginData)
     if (busy != 0) {
       return;
     }
-    connection = *(undefined4 *)(ctx + 4);
+    connection = *(undefined4 *)(ctx + GLD_connect);
     pluginRecord = pluginRecord + 0xc;
   }
   _io_connect_method_scalarI_structureI(connection,9,pluginRecord,1,0,0);
@@ -3056,7 +3056,7 @@ int _gldDestroyMemoryPluginData(ctx, pluginData)
   int *refCountSlot;
   int oldRefCount;
   int pluginRecord;
-  char in_RESERVE;
+  char reservation;
   byte crBits;
   
   crBits = (pluginData == (int *)0x0) << 1;
@@ -3070,14 +3070,14 @@ int _gldDestroyMemoryPluginData(ctx, pluginData)
       refCountSlot = (int *)(pluginRecord + 0x10);
       do {
         oldRefCount = *refCountSlot;
-        if (in_RESERVE != '\0') {
+        if (reservation != '\0') {
           updatedRefCount = storeWordConditionalIndexed(oldRefCount + -0x10000,0,refCountSlot);
           *refCountSlot = updatedRefCount;
           crBits = 2;
         }
       } while (!(bool)(crBits >> 1 & 1));
       if (oldRefCount == 0x10000) {
-        _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,pluginRecord,1,0,0);
+        _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),0xb,pluginRecord,1,0,0);
       }
       *pluginData = 0;
     }
@@ -3096,7 +3096,7 @@ int _gldReclaimBuffer(ctx, buffer)
   int *pluginData;
   int oldRefCount;
   int pluginRecord;
-  char in_RESERVE;
+  char reservation;
   byte crBits;
   
   pluginData = *(int **)(buffer + 8);
@@ -3110,14 +3110,14 @@ int _gldReclaimBuffer(ctx, buffer)
       pluginData = (int *)(pluginRecord + 0x10);
       do {
         oldRefCount = *pluginData;
-        if (in_RESERVE != '\0') {
+        if (reservation != '\0') {
           updatedRefCount = storeWordConditionalIndexed(oldRefCount + -0x10000,0,pluginData);
           *pluginData = updatedRefCount;
           crBits = 2;
         }
       } while (!(bool)(crBits >> 1 & 1));
       if (oldRefCount == 0x10000) {
-        _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,pluginRecord,1,0,0);
+        _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + GLD_connect),0xb,pluginRecord,1,0,0);
       }
       **(undefined4 **)(buffer + 8) = 0;
       *(undefined4 *)(*(int *)(buffer + 8) + 4) = 0;
@@ -3330,102 +3330,102 @@ int _gldCreateContext(contextOut, pixelFormat, contextArg3, shareContext, stateB
 LAB_00006798:
   *ctx = scalarOut[0];
   libraryOrTaskPtr = PTR_DAT_001e88ac;
-  ctx[1] = 0;
+  ctx[GLD_connect / 4] = 0;
   status = _IOServiceOpen(*(undefined4 *)(scalarOut[0] * 4 + *(int *)(libraryOrTaskPtr + 8)),
-                         *(undefined4 *)PTR_001e88b4,1,ctx + 1);
+                         *(undefined4 *)PTR_001e88b4,1,ctx + GLD_connect / 4);
   if (status == 0) {
     if ((shareContext == 0) ||
-       (status = _IOConnectAddClient(ctx[1],*(undefined4 *)(shareContext + 4)), status == 0)) {
+       (status = _IOConnectAddClient(ctx[GLD_connect / 4],*(undefined4 *)(shareContext + 4)), status == 0)) {
       scalarOut[0] = 3;
-      status = _io_connect_method_scalarI_scalarO(ctx[1],3,0,0,ctx + 9,scalarOut);
+      status = _io_connect_method_scalarI_scalarO(ctx[GLD_connect / 4],3,0,0,ctx + GLD_hwConfig0 / 4,scalarOut);
       libraryOrTaskPtr = PTR_001e88b4;
       if (status == 0) {
         task = *(undefined4 *)PTR_001e88b4;
-        ctx[0x8e] = 0;
-        status = _IOConnectMapMemory(ctx[1],0,task,ctx + 0x8e,scalarOut,0x101);
+        ctx[GLD_retireCounter / 4] = 0;
+        status = _IOConnectMapMemory(ctx[GLD_connect / 4],0,task,ctx + GLD_retireCounter / 4,scalarOut,0x101);
         if (status == 0) {
           task = *(undefined4 *)libraryOrTaskPtr;
-          ctx[0x79] = 0;
-          status = _IOConnectMapMemory(ctx[1],1,task,ctx + 0x79,ctx + 0x7a,1);
+          ctx[GLD_ringMap / 4] = 0;
+          status = _IOConnectMapMemory(ctx[GLD_connect / 4],1,task,ctx + GLD_ringMap / 4,ctx + GLD_ringMapSize / 4,1);
           if (status == 0) {
             task = *(undefined4 *)libraryOrTaskPtr;
-            ctx[0x82] = 0;
-            ctx[0x7f] = 0;
-            ctx[0x80] = 0;
-            ctx[0x7d] = 0;
-            ctx[0x7e] = 0;
-            ctx[0x81] = 0;
-            status = _IOConnectMapMemory(ctx[1],2,task,ctx + 0x82,ctx + 0x83,1);
+            ctx[GLD_contextBufferMap / 4] = 0;
+            ctx[GLD_dataBase / 4] = 0;
+            ctx[GLD_dataBufferId / 4] = 0;
+            ctx[GLD_dataCursor / 4] = 0;
+            ctx[GLD_dataLimit / 4] = 0;
+            ctx[GLD_dataRefillCount / 4] = 0;
+            status = _IOConnectMapMemory(ctx[GLD_connect / 4],2,task,ctx + GLD_contextBufferMap / 4,ctx + GLD_contextBufferMapSize / 4,1);
             if (status == 0) {
               task = *(undefined4 *)libraryOrTaskPtr;
-              fenceTablePtr = ctx + 0x86;
-              fenceTableSize = ctx + 0x87;
+              fenceTablePtr = ctx + GLD_statusRegion / 4;
+              fenceTableSize = ctx + GLD_statusRegionSize / 4;
               mapOptions = 1;
-              ctx[0x86] = 0;
-              status = _IOConnectMapMemory(ctx[1],4,task,fenceTablePtr,fenceTableSize,1);
+              ctx[GLD_statusRegion / 4] = 0;
+              status = _IOConnectMapMemory(ctx[GLD_connect / 4],4,task,fenceTablePtr,fenceTableSize,1);
               if (status == 0) {
-                scratch0 = _malloc(ctx[0x87] >> 5);
-                ctx[0x88] = scratch0;
-                scratch2 = ctx[0x87] >> 5;
+                scratch0 = _malloc(ctx[GLD_statusRegionSize / 4] >> 5);
+                ctx[GLD_fenceBitmap / 4] = scratch0;
+                scratch2 = ctx[GLD_statusRegionSize / 4] >> 5;
                 _memset(scratch0,0,scratch2);
-                ctx[0x8d] = 0;
-                ctx[0x89] = 0;
-                ctx[0x8a] = 0;
-                ctx[0x8b] = 0;
+                ctx[GLD_queryRecord / 4] = 0;
+                ctx[GLD_queryPool / 4] = 0;
+                ctx[GLD_queryPoolBytes / 4] = 0;
+                ctx[GLD_queryBitmap / 4] = 0;
                 scratch0 = *(uint *)PTR_001e88b0;
-                ctx[0x8c] = 0;
+                ctx[GLD_queryCapacity / 4] = 0;
                 if ((scratch0 & 8) == 0) {
                   if ((scratch0 & 0x10) == 0) {
-                    *(undefined1 *)(ctx + 2) = 0x20;
+                    *(undefined1 *)(ctx + GLD_cacheLineSize / 4) = 0x20;
                   }
                   else {
-                    *(undefined1 *)(ctx + 2) = 0x80;
+                    *(undefined1 *)(ctx + GLD_cacheLineSize / 4) = 0x80;
                   }
                 }
                 else {
-                  *(undefined1 *)(ctx + 2) = 0x40;
+                  *(undefined1 *)(ctx + GLD_cacheLineSize / 4) = 0x40;
                 }
                 scratch0 = (uint)DAT_001f65e0;
-                ctx[0x8f] = 0;
-                DAT_001f65e0 = ctx + 0xae4;
-                ctx[0xae4] = (uint)ctx;
-                ctx[0xae5] = scratch0;
-                ctx[3] = contextArg3;
-                ctx[4] = contextArg6;
-                ctx[6] = contextArg7;
+                ctx[GLD_submitEpoch / 4] = 0;
+                DAT_001f65e0 = ctx + GLD_listSelf / 4;
+                ctx[GLD_listSelf / 4] = (uint)ctx;
+                ctx[GLD_listNext / 4] = scratch0;
+                ctx[GLD_mutex / 4] = contextArg3;
+                ctx[GLD_engineState / 4] = contextArg6;
+                ctx[GLD_engineObjects / 4] = contextArg7;
                 ctx[0xd] = 0;
                 scratch0 = *(uint *)(pixelFormat + 8);
                 ctx[0x45] = 0x19;
                 ctx[0x46] = 0x32;
-                ctx[0xf] = 0;
+                ctx[GLD_drawableFlags / 4] = 0;
                 *(undefined1 *)((int)ctx + 0x143) = 1;
-                ctx[5] = stateBlock;
-                ctx[7] = 0;
+                ctx[GLD_capsBlock / 4] = stateBlock;
+                ctx[GLD_dispatchTable / 4] = 0;
                 ctx[0xc] = 0;
                 ctx[0xe] = 0;
-                ctx[0x41] = 0;
-                ctx[0x42] = 0;
+                ctx[GLD_drawableWidth / 4] = 0;
+                ctx[GLD_drawableHeight / 4] = 0;
                 ctx[0x43] = 0;
                 ctx[0x44] = 0;
-                ctx[0x54] = 0;
-                ctx[0x85] = 0;
-                ctx[0x84] = 0;
-                ctx[0x5e] = 0;
+                ctx[GLD_boundFramebuffer / 4] = 0;
+                ctx[GLD_vertexChunkCount / 4] = 0;
+                ctx[GLD_vertexChunkList / 4] = 0;
+                ctx[GLD_lastError / 4] = 0;
                 if ((scratch0 & 0x800) != 0) {
-                  ctx[0xf] = 0x2000;
+                  ctx[GLD_drawableFlags / 4] = 0x2000;
                 }
                 scratch1 = *(uint *)(pixelFormat + 0xc);
                 if ((scratch1 & 8) == 0) {
                   if ((scratch0 & 2) == 0) {
-                    ctx[0xf] = ctx[0xf] | 0x800;
+                    ctx[GLD_drawableFlags / 4] = ctx[GLD_drawableFlags / 4] | 0x800;
                   }
                 }
                 else {
-                  ctx[0xf] = ctx[0xf] | 0x400;
+                  ctx[GLD_drawableFlags / 4] = ctx[GLD_drawableFlags / 4] | 0x400;
                 }
                 scratch1 = scratch1 & 2;
                 if (scratch1 != 0) {
-                  ctx[0xf] = ctx[0xf] | 0x10;
+                  ctx[GLD_drawableFlags / 4] = ctx[GLD_drawableFlags / 4] | 0x10;
                 }
                 scratch0 = *(uint *)(pixelFormat + 0x10);
                 if ((scratch0 & 0xfffffc) == 0) {
@@ -3433,11 +3433,11 @@ LAB_00006798:
                     scratch1 = scratch0 & 0x3f00000;
                     if (scratch1 == 0) {
                       if ((scratch0 & 0xc000000) != 0) {
-                        ctx[0xf] = ctx[0xf] | 0xd;
+                        ctx[GLD_drawableFlags / 4] = ctx[GLD_drawableFlags / 4] | 0xd;
                       }
                     }
                     else {
-                      ctx[0xf] = ctx[0xf] | 0xc;
+                      ctx[GLD_drawableFlags / 4] = ctx[GLD_drawableFlags / 4] | 0xc;
                     }
                   }
                 }
@@ -3447,47 +3447,47 @@ LAB_00006798:
                     if ((scratch0 & 0xfc000) == 0) {
                       scratch1 = scratch0 & 0x3f00000;
                       if (scratch1 != 0) {
-                        ctx[0xf] = ctx[0xf] | 0xb;
+                        ctx[GLD_drawableFlags / 4] = ctx[GLD_drawableFlags / 4] | 0xb;
                       }
                     }
                     else {
-                      ctx[0xf] = ctx[0xf] | 4;
+                      ctx[GLD_drawableFlags / 4] = ctx[GLD_drawableFlags / 4] | 4;
                     }
                   }
                   else {
-                    ctx[0xf] = ctx[0xf] | 3;
+                    ctx[GLD_drawableFlags / 4] = ctx[GLD_drawableFlags / 4] | 3;
                   }
                 }
                 if (*(int *)(pixelFormat + 0x18) != 1) {
-                  ctx[0xf] = ctx[0xf] | 0x40;
+                  ctx[GLD_drawableFlags / 4] = ctx[GLD_drawableFlags / 4] | 0x40;
                 }
                 if (*(int *)(pixelFormat + 0x1c) != 1) {
-                  ctx[0xf] = ctx[0xf] | 0x80;
+                  ctx[GLD_drawableFlags / 4] = ctx[GLD_drawableFlags / 4] | 0x80;
                 }
                 if (*(int *)(pixelFormat + 0x14) == 0x8000) {
-                  *(undefined1 *)((int)ctx + 0x141) = 1;
+                  *(undefined1 *)((int)ctx + GLD_softwareBufferFormat) = 1;
                 }
                 else if (*(int *)(pixelFormat + 0x14) == 0x800000) {
-                  *(undefined1 *)((int)ctx + 0x141) = 2;
+                  *(undefined1 *)((int)ctx + GLD_softwareBufferFormat) = 2;
                 }
                 else {
-                  *(undefined1 *)((int)ctx + 0x141) = 0;
+                  *(undefined1 *)((int)ctx + GLD_softwareBufferFormat) = 0;
                 }
                 auxBuffers = *(short *)(pixelFormat + 0x22);
                 *(undefined1 *)(ctx + 0x50) = 0;
-                ctx[0x52] = 0;
-                ctx[0x53] = 0;
+                ctx[GLD_softwareBuffer / 4] = 0;
+                ctx[GLD_softwareBufferSize / 4] = 0;
                 if (auxBuffers == 1) {
-                  ctx[0xf] = ctx[0xf] | 0x100;
+                  ctx[GLD_drawableFlags / 4] = ctx[GLD_drawableFlags / 4] | 0x100;
                 }
                 else if (auxBuffers == 2) {
-                  ctx[0xf] = ctx[0xf] | 0x200;
+                  ctx[GLD_drawableFlags / 4] = ctx[GLD_drawableFlags / 4] | 0x200;
                 }
                 if (0 < *(short *)(pixelFormat + 0x24)) {
-                  ctx[0xf] = ctx[0xf] | 0x1000;
+                  ctx[GLD_drawableFlags / 4] = ctx[GLD_drawableFlags / 4] | 0x1000;
                 }
-                FUN_00017a40(ctx + 0xf,pixelFormat,scratch2,fenceTablePtr,fenceTableSize,mapOptions,scratch1);
-                scratch2 = ctx[0xf];
+                FUN_00017a40(ctx + GLD_drawableFlags / 4,pixelFormat,scratch2,fenceTablePtr,fenceTableSize,mapOptions,scratch1);
+                scratch2 = ctx[GLD_drawableFlags / 4];
                 ctx[0xe] = 0x4000;
                 if ((scratch2 & 0x40) != 0) {
                   ctx[0xe] = (uint)((unsigned char *)0x00004100U);
@@ -3499,33 +3499,33 @@ LAB_00006798:
                   scratch0 = ctx[0xe] | 0x400;
                   ctx[0xe] = scratch0;
                 }
-                if (*(char *)((int)ctx + 0x141) != '\0') {
+                if (*(char *)((int)ctx + GLD_softwareBufferFormat) != '\0') {
                   scratch0 = scratch0 | 0x200;
                   ctx[0xe] = scratch0;
                 }
-                *(undefined1 *)((int)ctx + 0x146) = 1;
-                ctx[0x55] = scratch2;
-                ctx[0x56] = scratch0;
-                ctx[0x58] = ctx[0x42];
+                *(undefined1 *)((int)ctx + GLD_swapIntervalDenominator) = 1;
+                ctx[GLD_renderFlags / 4] = scratch2;
+                ctx[GLD_renderBufferMask / 4] = scratch0;
+                ctx[GLD_renderHeight / 4] = ctx[GLD_drawableHeight / 4];
                 ctx[0x59] = ctx[0x43];
                 ctx[0x5a] = ctx[0x44];
                 ctx[0x5b] = ctx[0x45];
                 ctx[0x5c] = ctx[0x46];
                 *(undefined1 *)((int)ctx + 0x21) = 1;
-                *(undefined1 *)((int)ctx + 0x147) = 0;
-                ctx[0x3e] = 0;
+                *(undefined1 *)((int)ctx + GLD_surfaceVolatile) = 0;
+                ctx[GLD_attachedDrawable / 4] = 0;
                 *(undefined1 *)(ctx + 8) = 0;
-                ctx[0x49] = 0;
-                ctx[0x4a] = 0;
-                ctx[0x4b] = 0;
-                ctx[0x4c] = 0;
-                *(undefined1 *)(ctx + 0x51) = 0;
-                *(undefined1 *)((int)ctx + 0x142) = 0;
-                *(undefined1 *)((int)ctx + 0x145) = 0;
+                ctx[GLD_swapRectX / 4] = 0;
+                ctx[GLD_swapRectY / 4] = 0;
+                ctx[GLD_swapRectWidth / 4] = 0;
+                ctx[GLD_swapRectHeight / 4] = 0;
+                *(undefined1 *)(ctx + GLD_swapRectEnabled / 4) = 0;
+                *(undefined1 *)((int)ctx + GLD_swapIntervalNumerator) = 0;
+                *(undefined1 *)((int)ctx + GLD_scaleEnabled) = 0;
                 ctx[0x47] = 0;
                 ctx[0x48] = 0;
                 ctx[0x5d] = 3;
-                ctx[0x57] = ctx[0x41];
+                ctx[GLD_renderWidth / 4] = ctx[GLD_drawableWidth / 4];
                 clearCount = 0x10;
                 status = 0;
                 do {
@@ -3543,14 +3543,14 @@ LAB_00006798:
                 ctx[0x5f] = 0;
                 ctx[0x60] = 0;
                 ctx[0x61] = 0;
-                if ((ctx[9] & 2) == 0) {
+                if ((ctx[GLD_hwConfig0 / 4] & 2) == 0) {
                   *(undefined4 *)(stateBlock + 0x94) = 3;
                 }
                 else {
                   *(undefined4 *)(stateBlock + 0x94) = 1;
                 }
                 FUN_00017750(ctx,stateBlock,pixelFormat);
-                _memcpy(ctx + 0x10,stateBlock + 0x24,0x3c);
+                _memcpy(ctx + GLD_stateCopy / 4,stateBlock + 0x24,0x3c);
                 FUN_0002c790(ctx,pixelFormat);
                 *contextOut = (int)ctx;
                 return 0;
@@ -3560,7 +3560,7 @@ LAB_00006798:
         }
       }
     }
-    _IOServiceClose(ctx[1]);
+    _IOServiceClose(ctx[GLD_connect / 4]);
     _free(ctx);
   }
   else {
@@ -3581,7 +3581,7 @@ int _gldDestroyContext(ctx)
   if (ctx != 0) {
     FUN_00007020(ctx);
     FUN_0002cb40(ctx);
-    _IOServiceClose(*(undefined4 *)(ctx + 4));
+    _IOServiceClose(*(undefined4 *)(ctx + GLD_connect));
     if (DAT_001f65e0 != (int *)0x0) {
       listNode = DAT_001f65e0;
       if (ctx == *DAT_001f65e0) {
@@ -3597,11 +3597,11 @@ int _gldDestroyContext(ctx)
       }
     }
 LAB_00006e50:
-    if (*(int *)(ctx + 0x148) != 0) {
-      _free(*(int *)(ctx + 0x148));
+    if (*(int *)(ctx + GLD_softwareBuffer) != 0) {
+      _free(*(int *)(ctx + GLD_softwareBuffer));
     }
-    if (*(int *)(ctx + 0x220) != 0) {
-      _free(*(int *)(ctx + 0x220));
+    if (*(int *)(ctx + GLD_fenceBitmap) != 0) {
+      _free(*(int *)(ctx + GLD_fenceBitmap));
     }
     _free(ctx);
     returnCode = 0;
