@@ -1004,3 +1004,30 @@ use	_InterpreterNoiseGeneratorCalculate3D	uStack_4c	loopIndex	INFERRED	up-counti
 
 
 
+local	_InterpreterTextureSamplerSampleTexel1DFromLevel	param_1	sampler	CONFIRMED	texture sampler state: [1] current texture object, [2] current level record, [8] projective coordinates enabled, [10] level-of-detail computed
+local	_InterpreterTextureSamplerSampleTexel1DFromLevel	param_2	textureUnit	CONFIRMED	clamped to 7: index into the 8-entry texture object table at *sampler
+local	_InterpreterTextureSamplerSampleTexel1DFromLevel	param_3	level	CONFIRMED	mip level: level records are 0xd0 bytes (0x34 words) apart starting at texture object +0x120
+local	_InterpreterTextureSamplerSampleTexel1DFromLevel	param_4	texCoord	CONFIRMED	texture coordinate (s,t,r,q); divided by q when projection is enabled
+local	_InterpreterTextureSamplerSampleTexel1DFromLevel	param_5	texelOut	CONFIRMED	receives the filtered RGBA texel as float[4]
+local	_InterpreterTextureSamplerSampleTexel1DFromLevel	piVar6	textureObject	CONFIRMED	texture object bound to the unit: *(sampler->table + unit*4)
+local	_InterpreterTextureSamplerSampleTexel1DFromLevel	pfVar7	levelInfo	CONFIRMED	record of the selected mip level (texture object + level*0xd0 + 0x120)
+local	_InterpreterTextureSamplerSampleTexel2DFromLevel	param_1	sampler	CONFIRMED	texture sampler state: [1] current texture object, [2] current level record, [8] projective coordinates enabled, [10] level-of-detail computed
+local	_InterpreterTextureSamplerSampleTexel2DFromLevel	param_2	textureUnit	CONFIRMED	clamped to 7: index into the 8-entry texture object table at *sampler
+local	_InterpreterTextureSamplerSampleTexel2DFromLevel	param_3	level	CONFIRMED	mip level: level records are 0xd0 bytes (0x34 words) apart starting at texture object +0x120
+local	_InterpreterTextureSamplerSampleTexel2DFromLevel	param_4	texCoord	CONFIRMED	texture coordinate (s,t,r,q); divided by q when projection is enabled
+local	_InterpreterTextureSamplerSampleTexel2DFromLevel	param_5	texelOut	CONFIRMED	receives the filtered RGBA texel as float[4]
+local	_InterpreterTextureSamplerSampleTexel2DFromLevel	piVar7	textureObject	CONFIRMED	texture object bound to the unit: *(sampler->table + unit*4)
+local	_InterpreterTextureSamplerSampleTexel2DFromLevel	pfVar9	levelInfo	CONFIRMED	record of the selected mip level (texture object + level*0xd0 + 0x120)
+local	_InterpreterTextureSamplerSampleTexel3DFromLevel	param_1	sampler	CONFIRMED	texture sampler state: [1] current texture object, [2] current level record, [8] projective coordinates enabled, [10] level-of-detail computed
+local	_InterpreterTextureSamplerSampleTexel3DFromLevel	param_2	textureUnit	CONFIRMED	clamped to 7: index into the 8-entry texture object table at *sampler
+local	_InterpreterTextureSamplerSampleTexel3DFromLevel	param_3	level	CONFIRMED	mip level: level records are 0xd0 bytes (0x34 words) apart starting at texture object +0x120
+local	_InterpreterTextureSamplerSampleTexel3DFromLevel	param_4	texCoord	CONFIRMED	texture coordinate (s,t,r,q); divided by q when projection is enabled
+local	_InterpreterTextureSamplerSampleTexel3DFromLevel	param_5	texelOut	CONFIRMED	receives the filtered RGBA texel as float[4]
+local	_InterpreterTextureSamplerSampleTexel3DFromLevel	piVar12	textureObject	CONFIRMED	texture object bound to the unit: *(sampler->table + unit*4)
+local	_InterpreterTextureSamplerSampleTexel3DFromLevel	pfVar13	levelInfo	CONFIRMED	record of the selected mip level (texture object + level*0xd0 + 0x120)
+local	_InterpreterTextureSamplerSampleTexelRECTFromLevel	param_1	sampler	CONFIRMED	texture sampler state: [1] current texture object, [2] current level record, [8] projective coordinates enabled, [10] level-of-detail computed
+local	_InterpreterTextureSamplerSampleTexelRECTFromLevel	param_2	textureUnit	CONFIRMED	clamped to 7: index into the 8-entry texture object table at *sampler
+local	_InterpreterTextureSamplerSampleTexelRECTFromLevel	param_3	level	CONFIRMED	mip level: level records are 0xd0 bytes (0x34 words) apart starting at texture object +0x120
+local	_InterpreterTextureSamplerSampleTexelRECTFromLevel	param_4	texCoord	CONFIRMED	texture coordinate (s,t,r,q); divided by q when projection is enabled
+local	_InterpreterTextureSamplerSampleTexelRECTFromLevel	param_5	texelOut	CONFIRMED	receives the filtered RGBA texel as float[4]
+local	_InterpreterTextureSamplerSampleTexelRECTFromLevel	piVar7	textureObject	CONFIRMED	texture object bound to the unit: *(sampler->table + unit*4)
