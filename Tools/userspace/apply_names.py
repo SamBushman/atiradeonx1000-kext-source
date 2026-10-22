@@ -74,7 +74,7 @@ def apply_uses(lines, s, e, name, uses, allrows, declset):
     if brace is None: print('%s: no body' % name); return 0, 0, 1
     norm = (lambda l: IDENT.sub(lambda m: back.get(m.group(0), m.group(0)), l)) if back else (lambda l: l)
     napp = npend = nerr = 0
-    DECL = r'\s+(?!return\b)[\w ]+?[ *]([A-Za-z_]\w*)(\[\w+\])?;$'
+    DECL = r'\s+(?!return\b)[\w ]+?[ *]([A-Za-z_]\w*)\s*(\[\w+\])?;$'
     def declblock():                           # (first, last+1) line of the declarations right after the `{`
         i = brace + 1
         while i < len(lines) and (re.match(DECL, lines[i]) or not lines[i].strip() or re.match(r'\s*(/\*|\*)', lines[i])): i += 1

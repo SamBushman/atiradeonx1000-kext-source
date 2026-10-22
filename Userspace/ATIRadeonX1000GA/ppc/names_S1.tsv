@@ -437,3 +437,170 @@ use	_radeonSolidScanlines	uVar9	tileLeft	INFERRED	left x of the current tile	^\s
 use	_radeonSolidScanlines	uVar9	tileLeft	INFERRED	left x of the current tile	^\s*local_110\ =\ uVar9\ \+\ 8;$@2	+1
 use	_radeonSolidScanlines	uVar9	nextTileBottom	INFERRED	tileTop + 16: candidate bottom for the next row	^\s*uVar9\ =\ uVar19\ \+\ 0x10;$	+1
 use	_radeonSolidScanlines	uVar9	nextTileBottom	INFERRED	tileTop + 16: candidate bottom for the next row	^\s*if\ \(uVar9\ <\ uVar35\)\ \{$	+2
+use	_radeonHighlight	dVar15	v1Bits	INFERRED	saved bits (*scratchWord0Ptr) of dstBottom / pass-2 texture height	^\s*dVar15\ =\ \*local_ac;$	+2
+use	_radeonHighlight	dVar15	v1Bits	INFERRED	saved bits (*scratchWord0Ptr) of dstBottom / pass-2 texture height	^\s*pdVar32\[iVar33\ \+\ 0xd\]\ =\ dVar15;$	+1
+use	_radeonHighlight	dVar18	u0Bits	INFERRED	saved bits (*scratchWord1Ptr) of dstLeft / pass-2 texture width	^\s*dVar18\ =\ \*local_b0;$	+2
+use	_radeonHighlight	dVar18	u0Bits	INFERRED	saved bits (*scratchWord1Ptr) of dstLeft / pass-2 texture width	^\s*pdVar32\[iVar33\ \+\ 6\]\ =\ dVar18;$	+1
+use	_radeonHighlight	dVar3	color1Red5D	INFERRED	(double)CONCAT44(0x43300000, red5 of highlightColor): int to double trick input	^\s*dVar3\ =\ \(double\)CONCAT44\(0x43300000,uStack_1dc\);$	+1
+use	_radeonHighlight	dVar3	color1Red5D	INFERRED	(double)CONCAT44(0x43300000, red5 of highlightColor): int to double trick input	^\s*fVar20\ =\ \(float\)\(dVar3\ \-\ 4503599627370496\.0\)\ /\ 31\.0;$	+1
+use	_radeonHighlight	dVar4	color1AlphaD	INFERRED	(double)CONCAT44(0x43300000, alpha byte of highlightColor)	^\s*dVar4\ =\ \(double\)CONCAT44\(0x43300000,uStack_1c4\);$	+1
+use	_radeonHighlight	dVar4	color1AlphaD	INFERRED	(double)CONCAT44(0x43300000, alpha byte of highlightColor)	^\s*fVar14\ =\ \(float\)\(dVar4\ \-\ 4503599627370496\.0\)\ /\ 255\.0;$	+1
+use	_radeonHighlight	fVar13	color1BlueF	CONFIRMED	blue channel of highlightColor normalised (/255 or /31)	^\s*fVar13\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_1ac\)\ \-\ 4503599627370496\.0\)\ /\ 255\.0;$	+1
+use	_radeonHighlight	fVar13	color1BlueF	CONFIRMED	blue channel of highlightColor normalised (/255 or /31)	^\s*fVar13\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_1cc\)\ \-\ 4503599627370496\.0\)\ /\ 31\.0;$	+1
+use	_radeonHighlight	fVar13	color1BlueF	CONFIRMED	blue channel of highlightColor normalised (/255 or /31)	^\s*pdVar10\[0x49\]\ =\ \(dword\)GH_F2U\(fVar13\);$	+1
+use	_radeonHighlight	fVar13	color2BlueF	CONFIRMED	blue channel of fillColor normalised	^\s*fVar13\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_16c\)\ \-\ 4503599627370496\.0\)\ /\ 255\.0;$	+2
+use	_radeonHighlight	fVar13	color2BlueF	CONFIRMED	blue channel of fillColor normalised	^\s*fVar13\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_18c\)\ \-\ 4503599627370496\.0\)\ /\ 31\.0;$	+1
+use	_radeonHighlight	fVar13	color2BlueF	CONFIRMED	blue channel of fillColor normalised	^\s*pdVar10\[0x51\]\ =\ \(dword\)GH_F2U\(fVar13\);$	+1
+use	_radeonHighlight	fVar14	color1AlphaF	CONFIRMED	alpha of highlightColor (/255, or the single 1555 alpha bit)	^\s*fVar14\ =\ \(float\)\(dVar4\ \-\ 4503599627370496\.0\)\ /\ 255\.0;$	+1
+use	_radeonHighlight	fVar14	color1AlphaF	CONFIRMED	alpha of highlightColor (/255, or the single 1555 alpha bit)	^\s*fVar14\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_1e4\)\ \-\ 4503599627370496\.0\);$	+1
+use	_radeonHighlight	fVar14	color1AlphaF	CONFIRMED	alpha of highlightColor (/255, or the single 1555 alpha bit)	^\s*pdVar10\[0x4b\]\ =\ \(dword\)GH_F2U\(fVar14\);$	+1
+use	_radeonHighlight	fVar14	color2AlphaF	CONFIRMED	alpha of fillColor	^\s*fVar14\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_184\)\ \-\ 4503599627370496\.0\)\ /\ 255\.0;$	+1
+use	_radeonHighlight	fVar14	color2AlphaF	CONFIRMED	alpha of fillColor	^\s*fVar14\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_1a4\)\ \-\ 4503599627370496\.0\);$	+1
+use	_radeonHighlight	fVar14	color2AlphaF	CONFIRMED	alpha of fillColor	^\s*local_a0\ =\ fVar14;$	+1
+use	_radeonHighlight	fVar14	color2AlphaF	CONFIRMED	alpha of fillColor	^\s*pdVar10\[0x53\]\ =\ \(dword\)GH_F2U\(fVar14\);$	+1
+use	_radeonHighlight	fVar14	scrV1	INFERRED	*local_d8: screen-normalised bottom edge v of the rectangle (reload)	^\s*fVar14\ =\ \*local_d8;$	+2
+use	_radeonHighlight	fVar14	scrV1	INFERRED	*local_d8: screen-normalised bottom edge v of the rectangle (reload)	^\s*pdVar10\[0xcd\]\ =\ \(dword\)GH_F2U\(fVar14\);$	+1
+use	_radeonHighlight	fVar14	texV0	INFERRED	*local_e4: pass-2 normalised top edge v (reload)	^\s*fVar14\ =\ \*local_e4;$	+2
+use	_radeonHighlight	fVar14	texV0	INFERRED	*local_e4: pass-2 normalised top edge v (reload)	^\s*pdVar32\[iVar33\ \+\ 10\]\ =\ \(dword\)GH_F2U\(fVar14\);$	+1
+use	_radeonHighlight	fVar20	color1RedF	CONFIRMED	red channel of highlightColor normalised	^\s*fVar20\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_1bc\)\ \-\ 4503599627370496\.0\)\ /\ 255\.0;$	+1
+use	_radeonHighlight	fVar20	color1RedF	CONFIRMED	red channel of highlightColor normalised	^\s*fVar20\ =\ \(float\)\(dVar3\ \-\ 4503599627370496\.0\)\ /\ 31\.0;$	+1
+use	_radeonHighlight	fVar20	color1RedF	CONFIRMED	red channel of highlightColor normalised	^\s*pdVar10\[0x45\]\ =\ \(dword\)GH_F2U\(fVar20\);$	+1
+use	_radeonHighlight	fVar20	color2RedF	CONFIRMED	red channel of fillColor normalised	^\s*fVar20\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_17c\)\ \-\ 4503599627370496\.0\)\ /\ 255\.0;$	+1
+use	_radeonHighlight	fVar20	color2RedF	CONFIRMED	red channel of fillColor normalised	^\s*fVar20\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_19c\)\ \-\ 4503599627370496\.0\)\ /\ 31\.0;$	+1
+use	_radeonHighlight	fVar20	color2RedF	CONFIRMED	red channel of fillColor normalised	^\s*pdVar10\[0x4d\]\ =\ \(dword\)GH_F2U\(fVar20\);$	+1
+use	_radeonHighlight	fVar20	scrU0	INFERRED	*local_d4: screen-normalised left edge u (reload)	^\s*fVar20\ =\ \*local_d4;$	+2
+use	_radeonHighlight	fVar20	scrU0	INFERRED	*local_d4: screen-normalised left edge u (reload)	^\s*pdVar10\[0xc6\]\ =\ \(dword\)GH_F2U\(fVar20\);$	+1
+use	_radeonHighlight	fVar20	scrV0	INFERRED	*local_dc: screen-normalised top edge v (reload)	^\s*fVar20\ =\ \*local_dc;$	+2
+use	_radeonHighlight	fVar20	scrV0	INFERRED	*local_dc: screen-normalised top edge v (reload)	^\s*pdVar10\[0xca\]\ =\ \(dword\)GH_F2U\(fVar20\);$	+1
+use	_radeonHighlight	fVar20	texU1	INFERRED	*local_e8: pass-2 normalised right edge u (reload)	^\s*fVar20\ =\ \*local_e8;$	+2
+use	_radeonHighlight	fVar20	texU1	INFERRED	*local_e8: pass-2 normalised right edge u (reload)	^\s*pdVar32\[iVar33\ \+\ 0xc\]\ =\ \(dword\)GH_F2U\(fVar20\);$	+1
+use	_radeonHighlight	fVar21	color1GreenF	CONFIRMED	green channel of highlightColor normalised	^\s*fVar21\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_1b4\)\ \-\ 4503599627370496\.0\)\ /\ 255\.0;$	+1
+use	_radeonHighlight	fVar21	color1GreenF	CONFIRMED	green channel of highlightColor normalised	^\s*fVar21\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_1d4\)\ \-\ 4503599627370496\.0\)\ /\ 31\.0;$	+1
+use	_radeonHighlight	fVar21	color1GreenF	CONFIRMED	green channel of highlightColor normalised	^\s*pdVar10\[0x47\]\ =\ \(dword\)GH_F2U\(fVar21\);$	+1
+use	_radeonHighlight	fVar21	color2GreenF	CONFIRMED	green channel of fillColor normalised	^\s*fVar21\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_174\)\ \-\ 4503599627370496\.0\)\ /\ 255\.0;$	+1
+use	_radeonHighlight	fVar21	color2GreenF	CONFIRMED	green channel of fillColor normalised	^\s*fVar21\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_194\)\ \-\ 4503599627370496\.0\)\ /\ 31\.0;$	+1
+use	_radeonHighlight	fVar21	color2GreenF	CONFIRMED	green channel of fillColor normalised	^\s*pdVar10\[0x4f\]\ =\ \(dword\)GH_F2U\(fVar21\);$	+1
+use	_radeonHighlight	fVar21	scrU1	INFERRED	*local_e0: screen-normalised right edge u (reload)	^\s*fVar21\ =\ \*local_e0;$	+2
+use	_radeonHighlight	fVar21	scrU1	INFERRED	*local_e0: screen-normalised right edge u (reload)	^\s*pdVar10\[0xcc\]\ =\ \(dword\)GH_F2U\(fVar21\);$	+1
+use	_radeonHighlight	iVar33	cmdBuffer	INFERRED	accel+0x18: current command buffer mapping	^\s*iVar33\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x18\);$	+2
+use	_radeonHighlight	iVar33	cmdBuffer	INFERRED	accel+0x18: current command buffer mapping	^\s*uVar8\ =\ local_cc\ \-\ \(\(int\)pdVar32\ \-\ \(iVar33\ \+\ 0x20\)\ >>\ 2\);$	+1
+use	_radeonHighlight	iVar33	mapResult	CONFIRMED	result of _IOConnectMapMemory	^\s*iVar33\ =\ _IOConnectMapMemory\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xc\),0,\*\(undefined4\ \*\)PTR_0000e694,$	+2
+use	_radeonHighlight	iVar33	mapResult	CONFIRMED	result of _IOConnectMapMemory	^\s*if\ \(iVar33\ ==\ 0\)\ \{$	+1
+use	_radeonHighlight	iVar33	mapResult	CONFIRMED	result of _IOConnectMapMemory	^\s*iVar33\ =\ _IOConnectMapMemory\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xc\),0,\*\(undefined4\ \*\)PTR_0000e694,$@2	+2
+use	_radeonHighlight	iVar33	mapResult	CONFIRMED	result of _IOConnectMapMemory	^\s*if\ \(iVar33\ ==\ 0\)\ \{$@2	+1
+use	_radeonHighlight	iVar33	screenFormat	INFERRED	accel+0x70: surface format code (3 selects the 1555 path)	^\s*iVar33\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x70\);$	+1
+use	_radeonHighlight	iVar33	screenFormat	INFERRED	accel+0x70: surface format code (3 selects the 1555 path)	^\s*pdVar10\[0x3f\]\ =\ 0x5300c\ \-\ \(uint\)\(iVar33\ ==\ 3\);$	+1
+use	_radeonHighlight	iVar33	screenFormat	INFERRED	accel+0x70: surface format code (3 selects the 1555 path)	^\s*if\ \(iVar33\ !=\ 3\)\ \{$	+1
+use	_radeonHighlight	iVar33	screenFormat	INFERRED	accel+0x70: surface format code (3 selects the 1555 path)	^\s*if\ \(iVar33\ !=\ 3\)\ \{$@2	+1
+use	_radeonHighlight	iVar33	pass2FormatOrWords	UNKNOWN	pattern descriptor format code, then overwritten by the word count _radeon3DCopySetup returns	^\s*iVar33\ =\ DAT_0000e6e4\[0xc\];$	+3
+use	_radeonHighlight	iVar33	pass2FormatOrWords	UNKNOWN	pattern descriptor format code, then overwritten by the word count _radeon3DCopySetup returns	^\s*else\ if\ \(iVar33\ ==\ 6\)\ \{$	+2
+use	_radeonHighlight	iVar33	pass2FormatOrWords	UNKNOWN	pattern descriptor format code, then overwritten by the word count _radeon3DCopySetup returns	^\s*iVar33\ =\ \(\(int\ \(\*\)\(\)\)_radeon3DCopySetup\)\(param_1,pdVar32,DAT_0000e6e4\ \+\ 3,iVar33,0,0,0,0\);$	+1
+use	_radeonHighlight	iVar33	pass2FormatOrWords	UNKNOWN	pattern descriptor format code, then overwritten by the word count _radeon3DCopySetup returns	^\s*pdVar32\[iVar33\]\ =\ 0xc00c3500;$	+2
+use	_radeonHighlight	iVar33	pass2FormatOrWords	UNKNOWN	pattern descriptor format code, then overwritten by the word count _radeon3DCopySetup returns	^\s*pdVar32\[iVar33\ \+\ 2\]\ =\ uVar28;$	+1
+use	_radeonHighlight	iVar33	pass2FormatOrWords	UNKNOWN	pattern descriptor format code, then overwritten by the word count _radeon3DCopySetup returns	^\s*pdVar32\[iVar33\ \+\ 3\]\ =\ dVar18;$	+1
+use	_radeonHighlight	iVar33	pass2FormatOrWords	UNKNOWN	pattern descriptor format code, then overwritten by the word count _radeon3DCopySetup returns	^\s*pdVar32\[iVar33\ \+\ 4\]\ =\ dVar15;$	+3
+use	_radeonHighlight	iVar33	pass2FormatOrWords	UNKNOWN	pattern descriptor format code, then overwritten by the word count _radeon3DCopySetup returns	^\s*pdVar32\[iVar33\ \+\ 7\]\ =\ \(dword\)GH_F2U\(fVar14\);$	+2
+use	_radeonHighlight	iVar33	pass2FormatOrWords	UNKNOWN	pattern descriptor format code, then overwritten by the word count _radeon3DCopySetup returns	^\s*pdVar32\[iVar33\ \+\ 9\]\ =\ \(dword\)GH_F2U\(fVar20\);$	+10
+use	_radeonHighlight	iVar33	pass2FormatOrWords	UNKNOWN	pattern descriptor format code, then overwritten by the word count _radeon3DCopySetup returns	^\s*pdVar32\ =\ pdVar32\ \+\ iVar33\ \+\ 0x12;$	+1
+use	_radeonHighlight	iVar6	offscreenResult	CONFIRMED	result of _createOffscreenBuffer	^\s*if\ \(\(pdVar32\ ==\ \(dword\ \*\)0x0\)\ \|\|$	+4
+use	_radeonHighlight	iVar6	heightM1	CONFIRMED	screenHeight - 1 for the 0x3ff800 / 0x10000 packing	^\s*iVar6\ =\ sVar2\ \+\ \-1;$	+2
+use	_radeonHighlight	iVar6	heightM1	CONFIRMED	screenHeight - 1 for the 0x3ff800 / 0x10000 packing	^\s*iVar6\ \*\ 0x20\ \&\ 0x10000U;$	+1
+local	_radeonHighlight	local_1ec	scrU0Pair	INFERRED	float[2] on the stack: [0] screen-normalised left u, [1] = 176.0 constant (aliased by pointers)
+local	_radeonHighlight	local_1f0	texU1Slot	INFERRED	pass-2 normalised right u, reached through texU1Ptr
+local	_radeonHighlight	local_1f4	texV0Slot	INFERRED	pass-2 normalised top v, reached through texV0Ptr
+local	_radeonHighlight	local_200	scrV1Slot	INFERRED	screen-normalised bottom v, reached through scrV1Ptr
+local	_radeonHighlight	local_204	scrV0Slot	INFERRED	screen-normalised top v, reached through scrV0Ptr
+local	_radeonHighlight	local_208	scrU1Slot	INFERRED	screen-normalised right u, reached through scrU1Ptr
+use	_radeonHighlight	local_a0	colourSpill	UNKNOWN	dead store of the last normalised colour channel (Ghidra stack spill)	^\s*local_a0\ =\ fVar13;$	+1
+use	_radeonHighlight	local_a0	colourSpill	UNKNOWN	dead store of the last normalised colour channel (Ghidra stack spill)	^\s*local_a0\ =\ fVar14;$	+1
+use	_radeonHighlight	local_d0	rectIndex	CONFIRMED	loop counter over the fill request's rectangles	^\s*local_d0\ =\ 0;$	+1
+use	_radeonHighlight	local_d0	rectIndex	CONFIRMED	loop counter over the fill request's rectangles	^\s*local_d0\ =\ local_d0\ \+\ 1;$	+1
+use	_radeonHighlight	local_d0	rectIndex	CONFIRMED	loop counter over the fill request's rectangles	^\s*\}\ while\ \(local_d0\ <\ puStack00000028\[0x16\]\);$	+1
+local	_radeonHighlight	local_d4	scrU0Ptr	CONFIRMED	= local_1ec (address of screen u0)
+local	_radeonHighlight	local_d8	scrV1Ptr	CONFIRMED	= &local_200
+local	_radeonHighlight	local_dc	scrV0Ptr	CONFIRMED	= &local_204
+local	_radeonHighlight	local_e0	scrU1Ptr	CONFIRMED	= &local_208
+local	_radeonHighlight	local_e4	texV0Ptr	CONFIRMED	= &local_1f4
+local	_radeonHighlight	local_e8	texU1Ptr	CONFIRMED	= &local_1f0
+local	_radeonHighlight	pdVar10	streamCursor	INFERRED	command-stream pointer: cmdWrite+6 in pass 1 (register stream), advanced past it as pass 2 base
+use	_radeonHighlight	pdVar11	pass1Word3	INFERRED	pass 1 packet word 3	^\s*pdVar11\ =\ \(dword\ \*\)\(local_1f8\ \+\ 0x2c\);$	+1
+use	_radeonHighlight	pdVar11	pass1Word3	INFERRED	pass 1 packet word 3	^\s*pdVar11\ =\ \&__mh_bundle_header\.filetype;$	+1
+use	_radeonHighlight	pdVar11	pass1Word3	INFERRED	pass 1 packet word 3	^\s*pdVar11\ =\ pdVar32\ \+\ 3;$	+1
+use	_radeonHighlight	pdVar11	pass1Word3	INFERRED	pass 1 packet word 3	^\s*\*pdVar11\ =\ \*\(dword\ \*\)\*DAT_0000e6e4;$	+1
+use	_radeonHighlight	pdVar11	pass2Word2	INFERRED	pass 2 packet word 2	^\s*pdVar11\ =\ \(dword\ \*\)\(local_1fc\ \+\ 0x28\);$	+1
+use	_radeonHighlight	pdVar11	pass2Word2	INFERRED	pass 2 packet word 2	^\s*pdVar11\ =\ \&__mh_bundle_header\.cpusubtype;$	+1
+use	_radeonHighlight	pdVar11	pass2Word2	INFERRED	pass 2 packet word 2	^\s*pdVar11\ =\ pdVar10\ \+\ 0xd4;$	+1
+use	_radeonHighlight	pdVar11	pass2Word2	INFERRED	pass 2 packet word 2	^\s*\*pdVar11\ =\ 0;$	+1
+use	_radeonHighlight	pdVar12	pass1Word4	INFERRED	pass 1 packet word 4	^\s*pdVar12\ =\ \(dword\ \*\)\(local_1f8\ \+\ 0x30\);$	+1
+use	_radeonHighlight	pdVar12	pass1Word4	INFERRED	pass 1 packet word 4	^\s*pdVar12\ =\ \&__mh_bundle_header\.ncmds;$	+1
+use	_radeonHighlight	pdVar12	pass1Word4	INFERRED	pass 1 packet word 4	^\s*pdVar12\ =\ pdVar32\ \+\ 4;$	+1
+use	_radeonHighlight	pdVar12	pass1Word4	INFERRED	pass 1 packet word 4	^\s*\*pdVar12\ =\ DAT_0000e6e4\[7\];$	+1
+use	_radeonHighlight	pdVar12	pass2Word3	INFERRED	pass 2 packet word 3	^\s*pdVar12\ =\ \(dword\ \*\)\(local_1fc\ \+\ 0x2c\);$	+1
+use	_radeonHighlight	pdVar12	pass2Word3	INFERRED	pass 2 packet word 3	^\s*pdVar12\ =\ \&__mh_bundle_header\.filetype;$	+1
+use	_radeonHighlight	pdVar12	pass2Word3	INFERRED	pass 2 packet word 3	^\s*pdVar12\ =\ pdVar10\ \+\ 0xd5;$	+1
+use	_radeonHighlight	pdVar12	pass2Word3	INFERRED	pass 2 packet word 3	^\s*\*pdVar12\ =\ 0;$	+1
+use	_radeonHighlight	pdVar17	pass1Word1	INFERRED	pass 1 packet word 1	^\s*pdVar17\ =\ \(dword\ \*\)\(local_1f8\ \+\ 0x24\);$	+1
+use	_radeonHighlight	pdVar17	pass1Word1	INFERRED	pass 1 packet word 1	^\s*pdVar17\ =\ \&__mh_bundle_header\.cputype;$	+1
+use	_radeonHighlight	pdVar17	pass1Word1	INFERRED	pass 1 packet word 1	^\s*pdVar17\ =\ pdVar32\ \+\ 1;$	+1
+use	_radeonHighlight	pdVar17	pass1Word1	INFERRED	pass 1 packet word 1	^\s*\*pdVar17\ =\ \*\(dword\ \*\)\(param_1\ \+\ 0x84\);$	+1
+use	_radeonHighlight	pdVar17	pass2Word4	INFERRED	pass 2 packet word 4 (the 0x4000000 header)	^\s*pdVar17\ =\ \(dword\ \*\)\(local_1fc\ \+\ 0x30\);$	+1
+use	_radeonHighlight	pdVar17	pass2Word4	INFERRED	pass 2 packet word 4 (the 0x4000000 header)	^\s*pdVar17\ =\ \&__mh_bundle_header\.ncmds;$	+1
+use	_radeonHighlight	pdVar17	pass2Word4	INFERRED	pass 2 packet word 4 (the 0x4000000 header)	^\s*pdVar17\ =\ pdVar10\ \+\ 0xd6;$	+1
+use	_radeonHighlight	pdVar17	pass2Word4	INFERRED	pass 2 packet word 4 (the 0x4000000 header)	^\s*\*puVar5\ =\ \(int\)pdVar17\ \-\ \(int\)puVar5\ >>\ 2\ \|\ \*puVar5;$	+3
+use	_radeonHighlight	pdVar19	pass1Word2	INFERRED	pass 1 packet word 2 (the 0x10000000 header)	^\s*pdVar19\ =\ \(dword\ \*\)\(local_1f8\ \+\ 0x28\);$	+1
+use	_radeonHighlight	pdVar19	pass1Word2	INFERRED	pass 1 packet word 2 (the 0x10000000 header)	^\s*pdVar19\ =\ \&__mh_bundle_header\.cpusubtype;$	+1
+use	_radeonHighlight	pdVar19	pass1Word2	INFERRED	pass 1 packet word 2 (the 0x10000000 header)	^\s*pdVar19\ =\ pdVar32\ \+\ 2;$	+1
+use	_radeonHighlight	pdVar19	pass1Word2	INFERRED	pass 1 packet word 2 (the 0x10000000 header)	^\s*\*puVar5\ =\ \(int\)pdVar19\ \-\ \(int\)puVar5\ >>\ 2\ \|\ \*puVar5;$	+3
+use	_radeonHighlight	pdVar9	pass1Word5	INFERRED	pass 1 packet word 5	^\s*pdVar9\ =\ \(dword\ \*\)\(local_1f8\ \+\ 0x34\);$	+1
+use	_radeonHighlight	pdVar9	pass1Word5	INFERRED	pass 1 packet word 5	^\s*pdVar9\ =\ \&__mh_bundle_header\.sizeofcmds;$	+1
+use	_radeonHighlight	pdVar9	pass1Word5	INFERRED	pass 1 packet word 5	^\s*pdVar9\ =\ pdVar32\ \+\ 5;$	+1
+use	_radeonHighlight	pdVar9	pass1Word5	INFERRED	pass 1 packet word 5	^\s*\*pdVar9\ =\ 3;$	+1
+use	_radeonHighlight	pdVar9	pass1Word5	INFERRED	pass 1 packet word 5	^\s*\*pdVar9\ =\ 6;$	+1
+use	_radeonHighlight	pdVar9	pass2Word1	INFERRED	pass 2 packet word 1	^\s*pdVar9\ =\ \(dword\ \*\)\(local_1fc\ \+\ 0x24\);$	+1
+use	_radeonHighlight	pdVar9	pass2Word1	INFERRED	pass 2 packet word 1	^\s*pdVar9\ =\ \&__mh_bundle_header\.cputype;$	+1
+use	_radeonHighlight	pdVar9	pass2Word1	INFERRED	pass 2 packet word 1	^\s*pdVar9\ =\ pdVar10\ \+\ 0xd3;$	+1
+use	_radeonHighlight	pdVar9	pass2Word1	INFERRED	pass 2 packet word 1	^\s*\*pdVar9\ =\ \*\(dword\ \*\)\(param_1\ \+\ 0x84\);$	+1
+use	_radeonHighlight	puVar22	pass2Start	INFERRED	pass 2 packet group start (pass 1 stream + 0xd2)	^\s*puVar22\ =\ pdVar10\ \+\ 0xd2;$	+1
+use	_radeonHighlight	puVar22	pass2Start	INFERRED	pass 2 packet group start (pass 1 stream + 0xd2)	^\s*\*puVar22\ =\ 0x5c8;$	+1
+use	_radeonHighlight	puVar22	pass2Start	INFERRED	pass 2 packet group start (pass 1 stream + 0xd2)	^\s*puVar22\[local_1f8\]\ =\ 0x1000000;$	+1
+use	_radeonHighlight	puVar22	pass2Start	INFERRED	pass 2 packet group start (pass 1 stream + 0xd2)	^\s*\*puVar5\ =\ \(\(int\)puVar22\ \-\ \(int\)puVar5\ >>\ 2\)\ \+\ local_1f8\ \|\ \*puVar5;$	+1
+use	_radeonHighlight	puVar22	pass2Start	INFERRED	pass 2 packet group start (pass 1 stream + 0xd2)	^\s*puVar22\ =\ \(undefined4\ \*\)\(local_1fc\ \+\ 0x20\);$	+1
+use	_radeonHighlight	puVar22	pass2Start	INFERRED	pass 2 packet group start (pass 1 stream + 0xd2)	^\s*puVar22\ =\ \(undefined4\ \*\)0x0;$	+1
+use	_radeonHighlight	puVar22	pass2Start	INFERRED	pass 2 packet group start (pass 1 stream + 0xd2)	^\s*\*puVar5\ =\ \(int\)puVar22\ \-\ \(int\)puVar5\ >>\ 2\ \|\ \*puVar5;$	+3
+use	_radeonHighlight	puVar22	patternDesc	INFERRED	pattern descriptor table entry (DAT_0000e6e4)	^\s*puVar22\ =\ DAT_0000e6e4;$	+1
+use	_radeonHighlight	puVar22	patternDesc	INFERRED	pattern descriptor table entry (DAT_0000e6e4)	^\s*uStack_104\ =\ \(int\)\*\(short\ \*\)\(puVar22\ \+\ 4\)\ \^\ 0x80000000;$	+1
+use	_radeonHighlight	puVar22	patternDesc	INFERRED	pattern descriptor table entry (DAT_0000e6e4)	^\s*uStack_fc\ =\ \(int\)\*\(short\ \*\)\(puVar22\ \+\ 4\)\ \^\ 0x80000000;$	+1
+use	_radeonHighlight	puVar22	patternDesc	INFERRED	pattern descriptor table entry (DAT_0000e6e4)	^\s*uStack_f4\ =\ \(int\)\*\(short\ \*\)\(\(int\)puVar22\ \+\ 0x12\)\ \^\ 0x80000000;$	+1
+use	_radeonHighlight	puVar22	patternDesc	INFERRED	pattern descriptor table entry (DAT_0000e6e4)	^\s*uStack_ec\ =\ \(int\)\*\(short\ \*\)\(\(int\)puVar22\ \+\ 0x12\)\ \^\ 0x80000000;$	+1
+local	_radeonHighlight	uStack0000002c	highlightColorHome	CONFIRMED	home-slot copy of the highlightColor argument
+local	_radeonHighlight	uStack_10c	dstBottomSpill	UNKNOWN	dead store of the rectangle bottom (Ghidra stack spill)
+local	_radeonHighlight	uStack_114	dstTopSpill	UNKNOWN	dead store of dstTop (Ghidra stack spill)
+local	_radeonHighlight	uStack_11c	dstRightSpill	UNKNOWN	dead store of dstRight (Ghidra stack spill)
+local	_radeonHighlight	uStack_124	dstLeftSpill	UNKNOWN	dead store of dstLeft (Ghidra stack spill)
+local	_radeonHighlight	uStack_1c4	color1Alpha8	CONFIRMED	highlightColor >> 24
+local	_radeonHighlight	uStack_1bc	color1Red8	CONFIRMED	highlightColor >> 16 & 0xff
+local	_radeonHighlight	uStack_1b4	color1Green8	CONFIRMED	highlightColor >> 8 & 0xff
+local	_radeonHighlight	uStack_1ac	color1Blue8	CONFIRMED	highlightColor & 0xff
+local	_radeonHighlight	uStack_1e4	color1Alpha1	CONFIRMED	highlightColor >> 15 & 1 (1555 alpha)
+local	_radeonHighlight	uStack_1dc	color1Red5	CONFIRMED	highlightColor >> 10 & 0x1f
+local	_radeonHighlight	uStack_1d4	color1Green5	CONFIRMED	highlightColor >> 5 & 0x1f
+local	_radeonHighlight	uStack_1cc	color1Blue5	CONFIRMED	highlightColor & 0x1f
+local	_radeonHighlight	uStack_184	color2Alpha8	CONFIRMED	fillColor >> 24
+local	_radeonHighlight	uStack_17c	color2Red8	CONFIRMED	fillColor >> 16 & 0xff
+local	_radeonHighlight	uStack_174	color2Green8	CONFIRMED	fillColor >> 8 & 0xff
+local	_radeonHighlight	uStack_16c	color2Blue8	CONFIRMED	fillColor & 0xff
+local	_radeonHighlight	uStack_1a4	color2Alpha1	CONFIRMED	fillColor >> 15 & 1
+local	_radeonHighlight	uStack_19c	color2Red5	CONFIRMED	fillColor >> 10 & 0x1f
+local	_radeonHighlight	uStack_194	color2Green5	CONFIRMED	fillColor >> 5 & 0x1f
+local	_radeonHighlight	uStack_18c	color2Blue5	CONFIRMED	fillColor & 0x1f
+use	_radeonHighlight	uVar16	screenWidthM1	CONFIRMED	screenWidth - 1 for the 0x7ff / 0x8000 packing	^\s*uVar16\ =\ \(int\)sVar1\ \-\ 1;$	+1
+use	_radeonHighlight	uVar16	screenWidthM1	CONFIRMED	screenWidth - 1 for the 0x7ff / 0x8000 packing	^\s*pdVar10\[0x3d\]\ =\ uVar16\ \&\ 0x7ff\ \|\ iVar6\ \*\ 0x800\ \&\ 0x3ff800U\ \|\ 0x80000000;$	+1
+use	_radeonHighlight	uVar16	screenWidthM1	CONFIRMED	screenWidth - 1 for the 0x7ff / 0x8000 packing	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x5c\)\ \-\ 1U\ \&\ 0x3fff\ \|\ uVar16\ \*\ 0x10\ \&\ 0x8000\ \|$	+1
+use	_radeonHighlight	uVar16	dstBottom	CONFIRMED	dstTop + rectEntry[0x1a]	^\s*uVar16\ =\ uVar29\ \+\ puVar24\[0x1a\];$	+1
+use	_radeonHighlight	uVar16	dstBottom	CONFIRMED	dstTop + rectEntry[0x1a]	^\s*uStack_14c\ =\ uVar16\ \^\ 0x80000000;$	+1
+use	_radeonHighlight	uVar16	dstBottom	CONFIRMED	dstTop + rectEntry[0x1a]	^\s*uVar28\ =\ uVar31\ \|\ uVar16\ \*\ 0x10000;$	+1
+use	_radeonHighlight	uVar16	dstBottom	CONFIRMED	dstTop + rectEntry[0x1a]	^\s*uVar25\ =\ uVar30\ \|\ uVar16\ \*\ 0x10000;$	+1
+use	_radeonHighlight	uVar16	dstBottom	CONFIRMED	dstTop + rectEntry[0x1a]	^\s*local_1f8\ =\ \(uint\)GH_F2U\(\(float\)\(\(double\)\(float\)\(\(double\)CONCAT44\(0x43300000,uVar16\)\ \-$	+4
+use	_radeonHighlight	uVar16	dstBottom	CONFIRMED	dstTop + rectEntry[0x1a]	^\s*uStack_10c\ =\ uVar16;$	+1
+local	_radeonHighlight	uVar23	fillColor	CONFIRMED	*fillReq: the second colour
+local	_radeonHighlight	uVar7	result	CONFIRMED	return code: 0xe00002be on failure, 0 on success

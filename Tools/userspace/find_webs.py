@@ -50,7 +50,7 @@ def build_cfg(body, brace):
     while end > 0 and body[end - 1].strip() == '': end -= 1
     if body[end - 1].strip() == '}': end -= 1
     units = []; i = brace + 1
-    DECL = re.compile(r'\s+(?!return\b)[\w ]+?[ *][A-Za-z_]\w*(\[\w+\])?;$')
+    DECL = re.compile(r'\s+(?!return\b)[\w ]+?[ *][A-Za-z_]\w*\s*(\[\w+\])?;$')
     while i < end and (DECL.match(body[i]) or not body[i].strip() or re.match(r'\s*(/\*|\*)', body[i])): i += 1
     while i < end:                                  # join continuation lines of one statement
         s = body[i]
@@ -316,6 +316,8 @@ def main():
         for l in open(a[3]):
             if not l.strip() or l.startswith('#'): continue
             var, wl, new, tier, ev = l.rstrip('\n').split('\t')[:5]
+            if wl == '*':                                    # whole-function rename (one role, or address taken)
+                rows.append('local\t%s\t%s\t%s\t%s\t%s' % (fn, var, new, tier, ev)); continue
             if var not in cache: cache[var] = webs(nodes, entry, var)[0]
             for w in wl.split(','):
                 lines = cache[var][int(w)]
