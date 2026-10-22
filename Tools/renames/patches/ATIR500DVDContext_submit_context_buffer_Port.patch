@@ -1,6 +1,6 @@
---- a/Sources/ATIR500DVDContext_submit_context_buffer_Port.cpp	2026-10-20 20:43:22.140525516 -0700
-+++ b/Sources/ATIR500DVDContext_submit_context_buffer_Port.cpp	2026-10-20 20:43:22.141314885 -0700
-@@ -31,29 +31,14 @@
+--- a/Sources/ATIR500DVDContext_submit_context_buffer_Port.cpp	2026-10-22 08:25:09.467738266 -0700
++++ b/Sources/ATIR500DVDContext_submit_context_buffer_Port.cpp	2026-10-22 08:25:09.469127479 -0700
+@@ -31,29 +31,13 @@
  void ATIR500DVDContext::submit_context_buffer() {
      UInt8 *self = reinterpret_cast<UInt8 *>(this);
  
@@ -24,13 +24,13 @@
    UInt8 *textureSlot;
    SInt32 *accel;
 -  SInt32 iVar20;
-   UInt8 *pAVar21;
+-  UInt8 *pAVar21;
 -  SInt32 iVar22;
 -  SInt32 iVar23;
    UInt8 *slotCursor;
    UInt8 *ringEntry;
    SInt32 slotTexture;
-@@ -94,10 +79,10 @@
+@@ -94,10 +78,10 @@
          if (M<SInt32>(texture + 4) == 0) {
            ((IOATIR500DVDContext *)(self))->map_transfer_to_GART((VendorTransferBuffer *)(texture));
            texture = M<UInt8 *>(slotCursor + 0x104);

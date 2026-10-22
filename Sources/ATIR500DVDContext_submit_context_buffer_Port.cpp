@@ -38,7 +38,6 @@ void ATIR500DVDContext::submit_context_buffer() {
   SInt32 payload;
   UInt8 *textureSlot;
   SInt32 *accel;
-  UInt8 *pAVar21;
   UInt8 *slotCursor;
   UInt8 *ringEntry;
   SInt32 slotTexture;

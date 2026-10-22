@@ -37,7 +37,7 @@ bool IOATIR5002DContext::allocAllContextBuffers(UInt32 size) {
   UInt32 result;
   SInt32 released;
   SInt32 bufferIndex;
-  UInt8 *pIVar7;
+  UInt8 *slotCursor;
   
   descriptor = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(0x10023,size,GH_page_size);
   result = 0;
@@ -47,26 +47,26 @@ bool IOATIR5002DContext::allocAllContextBuffers(UInt32 size) {
     header = (VendorContextBufferHeader *)VCALL(*descriptor, 0x1cc)(descriptor);
     M<VendorContextBufferHeader *>(self + kIOATIR5002DContext_contextBufferHeader) = header;
     this->init_context_buffer_header((VendorContextBufferHeader *)(header),size);
-    pIVar7 = self;
+    slotCursor = self;
     do {
       descriptor = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(M<UInt32>(M<SInt32>(self + kIOATIR5002DContext_accelerator) + 0x82c) | 0x10023,size,
                                    GH_page_size);
-      M<SInt32 *>(pIVar7 + 0xd4) = descriptor;
+      M<SInt32 *>(slotCursor + 0xd4) = descriptor;
       if (descriptor == (SInt32 *)0x0) {
         if (-1 < bufferIndex + -1) {
           released = 0;
-          pIVar7 = self + (bufferIndex + -1) * 0x18 + 0xd4;
+          slotCursor = self + (bufferIndex + -1) * 0x18 + 0xd4;
           do {
             released = released + 1;
-            VCALL(*M<SInt32 *>(pIVar7), 0x18)(M<SInt32 *>(pIVar7));
-            M<UInt32>(pIVar7 + -8) = 0;
-            M<UInt32>(pIVar7 + -4) = 0;
-            M<UInt32>(pIVar7) = 0;
-            M<UInt16>(pIVar7 + 6) = 0;
-            M<UInt16>(pIVar7 + 4) = 0;
-            M<UInt32>(pIVar7 + 8) = 0;
-            M<UInt32>(pIVar7 + 0xc) = 0;
-            pIVar7 = pIVar7 + -0x18;
+            VCALL(*M<SInt32 *>(slotCursor), 0x18)(M<SInt32 *>(slotCursor));
+            M<UInt32>(slotCursor + -8) = 0;
+            M<UInt32>(slotCursor + -4) = 0;
+            M<UInt32>(slotCursor) = 0;
+            M<UInt16>(slotCursor + 6) = 0;
+            M<UInt16>(slotCursor + 4) = 0;
+            M<UInt32>(slotCursor + 8) = 0;
+            M<UInt32>(slotCursor + 0xc) = 0;
+            slotCursor = slotCursor + -0x18;
           } while (released != bufferIndex);
         }
         VCALL(*M<SInt32 *>(self + kIOATIR5002DContext_contextBufferDescriptor), 0x18)(M<SInt32 *>(self + kIOATIR5002DContext_contextBufferDescriptor));
@@ -80,8 +80,8 @@ bool IOATIR5002DContext::allocAllContextBuffers(UInt32 size) {
         return 0;
       }
       header = (VendorContextBufferHeader *)VCALL(*descriptor, 0x1cc)(descriptor);
-      M<VendorContextBufferHeader *>(pIVar7 + 0xe0) = header;
-      pIVar7 = pIVar7 + 0x18;
+      M<VendorContextBufferHeader *>(slotCursor + 0xe0) = header;
+      slotCursor = slotCursor + 0x18;
       this->init_context_buffer_header((VendorContextBufferHeader *)(header),size);
       more = bufferIndex != 1;
       bufferIndex = bufferIndex + 1;
