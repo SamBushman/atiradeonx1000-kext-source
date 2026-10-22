@@ -604,3 +604,395 @@ use	_radeonHighlight	uVar16	dstBottom	CONFIRMED	dstTop + rectEntry[0x1a]	^\s*loc
 use	_radeonHighlight	uVar16	dstBottom	CONFIRMED	dstTop + rectEntry[0x1a]	^\s*uStack_10c\ =\ uVar16;$	+1
 local	_radeonHighlight	uVar23	fillColor	CONFIRMED	*fillReq: the second colour
 local	_radeonHighlight	uVar7	result	CONFIRMED	return code: 0xe00002be on failure, 0 on success
+use	_radeonFill	dVar11	maskWord	INFERRED	value of register 0x118d/0x118c: 0x10000, or 0x40000 when a mask is used	^\s*dVar11\ =\ 0x10000;$	+1
+use	_radeonFill	dVar11	maskWord	INFERRED	value of register 0x118d/0x118c: 0x10000, or 0x40000 when a mask is used	^\s*dVar11\ =\ 0x40000;$	+1
+use	_radeonFill	dVar11	maskWord	INFERRED	value of register 0x118d/0x118c: 0x10000, or 0x40000 when a mask is used	^\s*pdVar44\[iVar12\ \+\ 5\]\ =\ dVar11;$	+1
+use	_radeonFill	dVar11	maskWord	INFERRED	value of register 0x118d/0x118c: 0x10000, or 0x40000 when a mask is used	^\s*dVar11\ =\ 0x10000;$@2	+1
+use	_radeonFill	dVar11	maskWord	INFERRED	value of register 0x118d/0x118c: 0x10000, or 0x40000 when a mask is used	^\s*dVar11\ =\ 0x40000;$@2	+1
+use	_radeonFill	dVar11	maskWord	INFERRED	value of register 0x118d/0x118c: 0x10000, or 0x40000 when a mask is used	^\s*pdVar44\[iVar12\ \+\ 9\]\ =\ dVar11;$	+1
+use	_radeonFill	dVar11	texV1Bits	INFERRED	*local_d0: saved bits of the tile bottom v	^\s*dVar11\ =\ \*local_d0;$	+2
+use	_radeonFill	dVar11	texV1Bits	INFERRED	*local_d0: saved bits of the tile bottom v	^\s*pdVar44\[iVar43\]\ =\ dVar11;$	+1
+use	_radeonFill	dVar18	scrV1Bits	INFERRED	*local_e0: saved bits of the screen-normalised bottom v	^\s*dVar18\ =\ \*local_e0;$	+2
+use	_radeonFill	dVar18	scrV1Bits	INFERRED	*local_e0: saved bits of the screen-normalised bottom v	^\s*pdVar44\[iVar40\]\ =\ dVar18;$	+1
+use	_radeonFill	dVar6	fillRed5D	INFERRED	(double)CONCAT44(0x43300000, red5 of the fill colour)	^\s*dVar6\ =\ \(double\)CONCAT44\(0x43300000,uStack_28c\);$	+1
+use	_radeonFill	dVar6	fillRed5D	INFERRED	(double)CONCAT44(0x43300000, red5 of the fill colour)	^\s*local_128\ =\ \(float\)\(dVar6\ \-\ 4503599627370496\.0\)\ /\ 31\.0;$	+1
+use	_radeonFill	fVar1	texOriginV	INFERRED	float of (dstTop & 7) + fillReq[3]: v origin inside the 8x8 pattern tile	^\s*fVar1\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,iStack_2ac\)\ \-\ 4503599627370496\.0\);$	+1
+use	_radeonFill	fVar1	texOriginV	INFERRED	float of (dstTop & 7) + fillReq[3]: v origin inside the 8x8 pattern tile	^\s*local_2f0\ =\ \(fVar1\ \+\ 0\.0\)\ \*$	+1
+use	_radeonFill	fVar1	texOriginV	INFERRED	float of (dstTop & 7) + fillReq[3]: v origin inside the 8x8 pattern tile	^\s*local_2e4\ =\ \(uint\)GH_F2U\(\(float\)\(\(\(fVar1\ \+\ 8\.0\)\ \*$	+3
+use	_radeonFill	fVar1	texOriginV	INFERRED	float of (dstTop & 7) + fillReq[3]: v origin inside the 8x8 pattern tile	^\s*local_2f0\ =\ \(fVar1\ \+\ 0\.0\)\ \*$@2	+1
+use	_radeonFill	fVar1	texOriginV	INFERRED	float of (dstTop & 7) + fillReq[3]: v origin inside the 8x8 pattern tile	^\s*local_2e4\ =\ \(uint\)GH_F2U\(\(float\)\(\(\(fVar1\ \+\ \(float\)\(\(double\)CONCAT44\(0x43300000,local_f4\)\ \-$	+4
+use	_radeonFill	fVar2	tileTopF	INFERRED	tileTop converted to float	^\s*fVar2\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,local_11c\)\ \-\ 4503599627370496\.0\);$	+1
+use	_radeonFill	fVar2	tileTopF	INFERRED	tileTop converted to float	^\s*fVar2\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,local_11c\)\ \-\ 4503599627370496\.0\);$@2	+1
+use	_radeonFill	fVar2	tileTopF	INFERRED	tileTop converted to float	^\s*local_300\ =\ local_300\ \*\ fVar2;$	+1
+use	_radeonFill	fVar3	tileBottomF	INFERRED	tileBottom converted to float	^\s*fVar3\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,local_120\)\ \-\ 4503599627370496\.0\);$	+1
+use	_radeonFill	fVar3	tileBottomF	INFERRED	tileBottom converted to float	^\s*fVar3\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,local_120\)\ \-\ 4503599627370496\.0\);$@2	+1
+use	_radeonFill	fVar3	tileBottomF	INFERRED	tileBottom converted to float	^\s*local_2fc\ =\ \(uint\)GH_F2U\(\(float\)\(\(local_300\ \*\ fVar3\)\)\);$	+1
+use	_radeonFill	fVar9	texOriginU	INFERRED	float of (dstLeft & 7) + fillReq[2]: u origin inside the 8x8 pattern tile	^\s*fVar9\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,iStack_2b4\)\ \-\ 4503599627370496\.0\);$	+1
+use	_radeonFill	fVar9	texOriginU	INFERRED	float of (dstLeft & 7) + fillReq[2]: u origin inside the 8x8 pattern tile	^\s*local_2f8\ =\ \(fVar9\ \+\ 0\.0\)\ \*$	+1
+use	_radeonFill	fVar9	texOriginU	INFERRED	float of (dstLeft & 7) + fillReq[2]: u origin inside the 8x8 pattern tile	^\s*local_2f4\ =\ \(fVar9\ \+\ 8\.0\)\ \*$	+1
+use	_radeonFill	fVar9	texOriginU	INFERRED	float of (dstLeft & 7) + fillReq[2]: u origin inside the 8x8 pattern tile	^\s*local_2f8\ =\ \(fVar9\ \+\ 0\.0\)\ \*$@2	+1
+use	_radeonFill	fVar9	texOriginU	INFERRED	float of (dstLeft & 7) + fillReq[2]: u origin inside the 8x8 pattern tile	^\s*local_2f4\ =\ \(fVar9\ \+\ \(float\)\(\(double\)CONCAT44\(0x43300000,iVar49\)\ \-$	+2
+use	_radeonFill	fVar9	quadRightF	INFERRED	*local_c0: right x of the rectangle as float (fast fill path)	^\s*fVar9\ =\ \*local_c0;$	+2
+use	_radeonFill	fVar9	quadRightF	INFERRED	*local_c0: right x of the rectangle as float (fast fill path)	^\s*\*\(float\ \*\)\(\(int\)puVar48\ \+\ iVar41\)\ =\ fVar9;$	+1
+use	_radeonFill	fVar22	texU0	INFERRED	*local_dc: normalised u of the tile near edge (reload)	^\s*fVar22\ =\ \*local_dc;$	+2
+use	_radeonFill	fVar22	texU0	INFERRED	*local_dc: normalised u of the tile near edge (reload)	^\s*pdVar44\[local_154\]\ =\ \(dword\)GH_F2U\(fVar22\);$	+1
+use	_radeonFill	fVar22	scrU1	INFERRED	*local_e8: screen-normalised right u (reload)	^\s*fVar22\ =\ \*local_e8;$	+2
+use	_radeonFill	fVar22	scrU1	INFERRED	*local_e8: screen-normalised right u (reload)	^\s*pdVar44\[iVar39\]\ =\ \(dword\)GH_F2U\(fVar22\);$	+1
+use	_radeonFill	fVar27	scrU0	INFERRED	*local_ec: screen-normalised left u (reload)	^\s*fVar27\ =\ \*local_ec;$	+2
+use	_radeonFill	fVar27	scrU0	INFERRED	*local_ec: screen-normalised left u (reload)	^\s*pdVar44\[local_14c\]\ =\ \(dword\)GH_F2U\(fVar27\);$	+1
+use	_radeonFill	fVar27	texV0	INFERRED	*local_d4: normalised v of the tile near edge (reload)	^\s*fVar27\ =\ \*local_d4;$	+2
+use	_radeonFill	fVar27	texV0	INFERRED	*local_d4: normalised v of the tile near edge (reload)	^\s*pdVar44\[iVar23\]\ =\ \(dword\)GH_F2U\(fVar27\);$	+1
+use	_radeonFill	fVar28	scrV0	INFERRED	*local_e4: screen-normalised top v (reload)	^\s*fVar28\ =\ \*local_e4;$	+2
+use	_radeonFill	fVar28	scrV0	INFERRED	*local_e4: screen-normalised top v (reload)	^\s*pdVar44\[local_160\]\ =\ \(dword\)GH_F2U\(fVar28\);$	+1
+use	_radeonFill	fVar28	texU1	INFERRED	*local_d8: normalised u of the tile far edge (reload)	^\s*fVar28\ =\ \*local_d8;$	+2
+use	_radeonFill	fVar28	texU1	INFERRED	*local_d8: normalised u of the tile far edge (reload)	^\s*pdVar44\[iVar41\]\ =\ \(dword\)GH_F2U\(fVar28\);$	+1
+local	_radeonFill	iStack_1f4	tileHeightSpill	UNKNOWN	dead store of tileHeight (Ghidra stack spill)
+local	_radeonFill	iStack_20c	tileWidthSpill	UNKNOWN	dead store of the tile width (Ghidra stack spill)
+local	_radeonFill	iStack_2ac	texOriginVInt	INFERRED	(dstTop & 7) + fillReq[3]
+local	_radeonFill	iStack_2b4	texOriginUInt	INFERRED	(dstLeft & 7) + fillReq[2]
+use	_radeonFill	iVar10	progIdx103	INFERRED	index of shader-program word slot 103 in the unmasked layout (the masked layout shifts it)	^\s*iVar10\ =\ 0x67;$	+1
+use	_radeonFill	iVar10	progIdx103	INFERRED	index of shader-program word slot 103 in the unmasked layout (the masked layout shifts it)	^\s*iVar10\ =\ 0x71;$	+1
+use	_radeonFill	iVar10	progIdx103	INFERRED	index of shader-program word slot 103 in the unmasked layout (the masked layout shifts it)	^\s*pdVar44\[iVar10\]\ =\ 0xdb0220;$	+1
+use	_radeonFill	iVar10	progIdx103	INFERRED	index of shader-program word slot 103 in the unmasked layout (the masked layout shifts it)	^\s*pdVar44\[iVar10\]\ =\ 0;$	+1
+use	_radeonFill	iVar10	tileIdx24	INFERRED	word 24 of the tile quad packet (reset layout; first iteration adds the setup base)	^\s*iVar10\ =\ iVar12\ \+\ 0x2e;$	+1
+use	_radeonFill	iVar10	tileIdx24	INFERRED	word 24 of the tile quad packet (reset layout; first iteration adds the setup base)	^\s*pdVar44\[iVar10\]\ =\ 0x5c8;$	+1
+use	_radeonFill	iVar10	tileIdx24	INFERRED	word 24 of the tile quad packet (reset layout; first iteration adds the setup base)	^\s*iVar10\ =\ 0x18;$	+1
+use	_radeonFill	iVar10	vtxIdxZ3	INFERRED	index of z of vertex 3 in the fast fill quad (iVar12+0xb)	^\s*iVar10\ =\ iVar12\ \+\ 0xb;$	+1
+use	_radeonFill	iVar10	vtxIdxZ3	INFERRED	index of z of vertex 3 in the fast fill quad (iVar12+0xb)	^\s*puVar48\[iVar10\]\ =\ 0;$	+1
+use	_radeonFill	iVar12	offscreenResult	CONFIRMED	result of _createOffscreenBuffer	^\s*if\ \(\(pdVar44\ !=\ \(dword\ \*\)0x0\)\ \&\&$	+5
+use	_radeonFill	iVar12	screenFormat	INFERRED	accel+0x70: surface format code (3 selects the 1555 path)	^\s*iVar12\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x70\);$	+1
+use	_radeonFill	iVar12	screenFormat	INFERRED	accel+0x70: surface format code (3 selects the 1555 path)	^\s*iVar23\ =\ 0x5300c\ \-\ \(uint\)\(iVar12\ ==\ 3\);$	+1
+use	_radeonFill	iVar12	screenFormat	INFERRED	accel+0x70: surface format code (3 selects the 1555 path)	^\s*if\ \(iVar12\ ==\ 3\)\ \{$	+1
+use	_radeonFill	iVar12	streamIdxBase	UNKNOWN	running register-stream index: shader-program slot 108, then the base of the tile packet words	^\s*iVar12\ =\ 0x6c;$	+1
+use	_radeonFill	iVar12	streamIdxBase	UNKNOWN	running register-stream index: shader-program slot 108, then the base of the tile packet words	^\s*iVar12\ =\ 0x76;$	+1
+use	_radeonFill	iVar12	streamIdxBase	UNKNOWN	running register-stream index: shader-program slot 108, then the base of the tile packet words	^\s*pdVar44\[iVar12\]\ =\ 0x1095;$	+1
+use	_radeonFill	iVar12	streamIdxBase	UNKNOWN	running register-stream index: shader-program slot 108, then the base of the tile packet words	^\s*iVar12\ =\ iVar31\ \+\ 0x3e;$	+1
+use	_radeonFill	iVar12	streamIdxBase	UNKNOWN	running register-stream index: shader-program slot 108, then the base of the tile packet words	^\s*pdVar44\[iVar12\]\ =\ 0x1189;$	+5
+use	_radeonFill	iVar12	streamIdxBase	UNKNOWN	running register-stream index: shader-program slot 108, then the base of the tile packet words	^\s*pdVar44\[iVar12\ \+\ 5\]\ =\ dVar11;$	+4
+use	_radeonFill	iVar12	streamIdxBase	UNKNOWN	running register-stream index: shader-program slot 108, then the base of the tile packet words	^\s*pdVar44\[iVar12\ \+\ 9\]\ =\ dVar11;$	+16
+use	_radeonFill	iVar12	streamIdxBase	UNKNOWN	running register-stream index: shader-program slot 108, then the base of the tile packet words	^\s*iVar14\ =\ iVar12\ \+\ 0x1a;$	+2
+use	_radeonFill	iVar12	streamIdxBase	UNKNOWN	running register-stream index: shader-program slot 108, then the base of the tile packet words	^\s*local_14c\ =\ iVar12\ \+\ 0x1e;$	+22
+use	_radeonFill	iVar12	streamIdxBase	UNKNOWN	running register-stream index: shader-program slot 108, then the base of the tile packet words	^\s*pdVar44\[iVar12\]\ =\ 0x20000;$	+1
+use	_radeonFill	iVar12	streamIdxBase	UNKNOWN	running register-stream index: shader-program slot 108, then the base of the tile packet words	^\s*iVar12\ =\ 0x19;$	+1
+use	_radeonFill	iVar12	vtxIdxX0	INFERRED	index of x of vertex 0 in the fast fill quad (fillSetupWords+2)	^\s*iVar12\ =\ iVar23\ \+\ 2;$	+1
+use	_radeonFill	iVar12	vtxIdxX0	INFERRED	index of x of vertex 0 in the fast fill quad (fillSetupWords+2)	^\s*iVar23\ =\ iVar12\ \*\ 4;$	+1
+use	_radeonFill	iVar12	vtxIdxX0	INFERRED	index of x of vertex 0 in the fast fill quad (fillSetupWords+2)	^\s*puVar48\[iVar12\]\ =\ local_2fc;$	+1
+use	_radeonFill	iVar12	vtxIdxX0	INFERRED	index of x of vertex 0 in the fast fill quad (fillSetupWords+2)	^\s*iVar10\ =\ iVar12\ \+\ 0xb;$	+1
+use	_radeonFill	iVar12	vtxIdxX0	INFERRED	index of x of vertex 0 in the fast fill quad (fillSetupWords+2)	^\s*iVar12\ =\ iVar12\ \+\ 0xc;$	+1
+use	_radeonFill	iVar12	vtxIdxX0	INFERRED	index of x of vertex 0 in the fast fill quad (fillSetupWords+2)	^\s*puVar48\[iVar12\]\ =\ 0x1393;$	+4
+use	_radeonFill	iVar12	vtxIdxX0	INFERRED	index of x of vertex 0 in the fast fill quad (fillSetupWords+2)	^\s*uVar32\ =\ uVar32\ \-\ \(iVar12\ \+\ 4\);$	+2
+use	_radeonFill	iVar13	progIdx107	INFERRED	index of shader-program word slot 107 in the unmasked layout (the masked layout shifts it)	^\s*iVar13\ =\ 0x6b;$	+1
+use	_radeonFill	iVar13	progIdx107	INFERRED	index of shader-program word slot 107 in the unmasked layout (the masked layout shifts it)	^\s*iVar13\ =\ 0x75;$	+1
+use	_radeonFill	iVar13	progIdx107	INFERRED	index of shader-program word slot 107 in the unmasked layout (the masked layout shifts it)	^\s*pdVar44\[iVar13\]\ =\ 0x20490000;$	+1
+use	_radeonFill	iVar13	progIdx107	INFERRED	index of shader-program word slot 107 in the unmasked layout (the masked layout shifts it)	^\s*pdVar44\[iVar13\]\ =\ 0;$	+1
+use	_radeonFill	iVar13	tileIdx6	INFERRED	word 6 of the tile quad packet	^\s*iVar13\ =\ iVar12\ \+\ 0x1c;$	+1
+use	_radeonFill	iVar13	tileIdx6	INFERRED	word 6 of the tile quad packet	^\s*pdVar44\[iVar13\]\ =\ dVar11;$	+1
+use	_radeonFill	iVar13	tileIdx6	INFERRED	word 6 of the tile quad packet	^\s*iVar13\ =\ 6;$	+1
+use	_radeonFill	iVar13	vtxByteOffY1	INFERRED	byte offset of y of vertex 1 in the fast fill quad	^\s*iVar13\ =\ iVar23\ \+\ 0x10;$	+1
+use	_radeonFill	iVar13	vtxByteOffY1	INFERRED	byte offset of y of vertex 1 in the fast fill quad	^\s*\*\(float\ \*\)\(\(int\)puVar48\ \+\ iVar13\)\ =\ local_304;$	+1
+use	_radeonFill	iVar13	vtxByteOffY1	INFERRED	byte offset of y of vertex 1 in the fast fill quad	^\s*iVar13\ =\ iVar13\ \+\ 0x30;$	+1
+use	_radeonFill	iVar14	progByteOff82	INFERRED	byte offset (index 82 * 4) of the 0x1094 program header	^\s*iVar14\ =\ 0x148;$	+1
+use	_radeonFill	iVar14	progByteOff82	INFERRED	byte offset (index 82 * 4) of the 0x1094 program header	^\s*iVar14\ =\ 0x170;$	+1
+use	_radeonFill	iVar14	progByteOff82	INFERRED	byte offset (index 82 * 4) of the 0x1094 program header	^\s*\*\(undefined4\ \*\)\(\(int\)pdVar44\ \+\ iVar14\)\ =\ 0x1094;$	+1
+use	_radeonFill	iVar14	tileIdx4	INFERRED	word 4 of the tile quad packet	^\s*iVar14\ =\ iVar12\ \+\ 0x1a;$	+1
+use	_radeonFill	iVar14	tileIdx4	INFERRED	word 4 of the tile quad packet	^\s*pdVar44\[iVar14\]\ =\ dVar18;$	+1
+use	_radeonFill	iVar14	tileIdx4	INFERRED	word 4 of the tile quad packet	^\s*iVar14\ =\ 4;$	+1
+use	_radeonFill	iVar14	vtxByteOffX1	INFERRED	byte offset of x of vertex 1 in the fast fill quad	^\s*iVar14\ =\ iVar23\ \+\ 0xc;$	+1
+use	_radeonFill	iVar14	vtxByteOffX1	INFERRED	byte offset of x of vertex 1 in the fast fill quad	^\s*\*\(uint\ \*\)\(\(int\)puVar48\ \+\ iVar14\)\ =\ local_2fc;$	+1
+use	_radeonFill	iVar14	vtxByteOffX1	INFERRED	byte offset of x of vertex 1 in the fast fill quad	^\s*iVar14\ =\ iVar14\ \+\ 0x30;$	+1
+use	_radeonFill	iVar23	cmdBuffer	INFERRED	accel+0x18: current command buffer mapping	^\s*iVar23\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x18\);$	+1
+use	_radeonFill	iVar23	cmdBuffer	INFERRED	accel+0x18: current command buffer mapping	^\s*uVar29\ =\ \*\(int\ \*\)\(iVar23\ \+\ 0x10\)\ \-\ 7;$	+1
+use	_radeonFill	iVar23	cmdBuffer	INFERRED	accel+0x18: current command buffer mapping	^\s*uVar32\ =\ uVar29\ \-\ \(\(int\)pdVar44\ \-\ \(iVar23\ \+\ 0x20\)\ >>\ 2\);$	+1
+use	_radeonFill	iVar23	mapResult	CONFIRMED	result of _IOConnectMapMemory	^\s*iVar23\ =\ _IOConnectMapMemory\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xc\),0,$	+2
+use	_radeonFill	iVar23	mapResult	CONFIRMED	result of _IOConnectMapMemory	^\s*if\ \(iVar23\ ==\ 0\)\ \{$	+1
+use	_radeonFill	iVar23	mapResult	CONFIRMED	result of _IOConnectMapMemory	^\s*iVar23\ =\ _IOConnectMapMemory\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xc\),0,$@2	+3
+use	_radeonFill	iVar23	mapResult	CONFIRMED	result of _IOConnectMapMemory	^\s*iVar23\ =\ _IOConnectMapMemory\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xc\),0,$@3	+3
+use	_radeonFill	iVar23	mapResult	CONFIRMED	result of _IOConnectMapMemory	^\s*iVar23\ =\ _IOConnectMapMemory\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xc\),0,$@4	+2
+use	_radeonFill	iVar23	mapResult	CONFIRMED	result of _IOConnectMapMemory	^\s*if\ \(iVar23\ ==\ 0\)\ \{$@4	+1
+use	_radeonFill	iVar23	surfaceFormatWord	INFERRED	0x5300c - (format == 3): register 0x1130 colour format word	^\s*iVar23\ =\ 0x5300c\ \-\ \(uint\)\(iVar12\ ==\ 3\);$	+2
+use	_radeonFill	iVar23	surfaceFormatWord	INFERRED	0x5300c - (format == 3): register 0x1130 colour format word	^\s*pdVar21\[0x51\]\ =\ iVar23;$	+1
+use	_radeonFill	iVar23	progIdx105	INFERRED	index of shader-program word slot 105 in the unmasked layout (the masked layout shifts it)	^\s*iVar23\ =\ 0x69;$	+1
+use	_radeonFill	iVar23	progIdx105	INFERRED	index of shader-program word slot 105 in the unmasked layout (the masked layout shifts it)	^\s*iVar23\ =\ 0x73;$	+1
+use	_radeonFill	iVar23	progIdx105	INFERRED	index of shader-program word slot 105 in the unmasked layout (the masked layout shifts it)	^\s*pdVar44\[iVar23\]\ =\ 0xc0c006;$	+1
+use	_radeonFill	iVar23	progIdx105	INFERRED	index of shader-program word slot 105 in the unmasked layout (the masked layout shifts it)	^\s*pdVar44\[iVar23\]\ =\ 0;$	+1
+use	_radeonFill	iVar23	tileIdx16	INFERRED	word 16 of the tile quad packet	^\s*iVar23\ =\ iVar12\ \+\ 0x26;$	+1
+use	_radeonFill	iVar23	tileIdx16	INFERRED	word 16 of the tile quad packet	^\s*pdVar44\[iVar23\]\ =\ \(dword\)GH_F2U\(fVar27\);$	+1
+use	_radeonFill	iVar23	tileIdx16	INFERRED	word 16 of the tile quad packet	^\s*iVar23\ =\ 0x10;$	+1
+use	_radeonFill	iVar23	pass2FormatOrWords	UNKNOWN	pattern descriptor format code, then overwritten by the word count _radeon3DCopySetup returns	^\s*iVar23\ =\ DAT_0000e6e4\[0xc\];$	+3
+use	_radeonFill	iVar23	pass2FormatOrWords	UNKNOWN	pattern descriptor format code, then overwritten by the word count _radeon3DCopySetup returns	^\s*else\ if\ \(iVar23\ ==\ 6\)\ \{$	+2
+use	_radeonFill	iVar23	pass2FormatOrWords	UNKNOWN	pattern descriptor format code, then overwritten by the word count _radeon3DCopySetup returns	^\s*iVar23\ =\ \(\(int\ \(\*\)\(\)\)_radeon3DCopySetup\)\(param_1,pdVar30,DAT_0000e6e4\ \+\ 3,iVar23,0,0,0,0\);$	+1
+use	_radeonFill	iVar23	pass2FormatOrWords	UNKNOWN	pattern descriptor format code, then overwritten by the word count _radeon3DCopySetup returns	^\s*pdVar30\[iVar23\]\ =\ 0xc00c3500;$	+2
+use	_radeonFill	iVar23	pass2FormatOrWords	UNKNOWN	pattern descriptor format code, then overwritten by the word count _radeon3DCopySetup returns	^\s*pdVar30\[iVar23\ \+\ 2\]\ =\ local_10c\ \|\ local_118\ <<\ 0x10;$	+17
+use	_radeonFill	iVar23	pass2FormatOrWords	UNKNOWN	pattern descriptor format code, then overwritten by the word count _radeon3DCopySetup returns	^\s*pdVar44\ =\ pdVar30\ \+\ iVar23\ \+\ 0x12;$	+1
+use	_radeonFill	iVar23	cmdBufferSize	INFERRED	size field (+0x10) of the command buffer	^\s*iVar23\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x18\)\ \+\ 0x10\);$	+2
+use	_radeonFill	iVar23	cmdBufferSize	INFERRED	size field (+0x10) of the command buffer	^\s*local_100\ =\ \(iVar23\ \-\ 0x75U\)\ /\ 0xc\ \-\ 1;$	+1
+use	_radeonFill	iVar23	fillSetupWords	CONFIRMED	words written by _radeon3DFillSetup	^\s*iVar23\ =\ \(\(int\ \(\*\)\(\)\)_radeon3DFillSetup\)\(puVar48,0,param_6,param_1\);$	+1
+use	_radeonFill	iVar23	fillSetupWords	CONFIRMED	words written by _radeon3DFillSetup	^\s*puVar48\[iVar23\]\ =\ iVar25\ \*\ 0xc0000\ \|\ 0xc0003500;$	+3
+use	_radeonFill	iVar23	vtxByteOffZ0	INFERRED	byte offset of z of vertex 0 in the fast fill quad (word index * 4 + 8)	^\s*iVar23\ =\ iVar12\ \*\ 4;$	+1
+use	_radeonFill	iVar23	vtxByteOffZ0	INFERRED	byte offset of z of vertex 0 in the fast fill quad (word index * 4 + 8)	^\s*iVar39\ =\ iVar23\ \+\ 4;$	+3
+use	_radeonFill	iVar23	vtxByteOffZ0	INFERRED	byte offset of z of vertex 0 in the fast fill quad (word index * 4 + 8)	^\s*iVar43\ =\ iVar23\ \+\ 0x20;$	+7
+use	_radeonFill	iVar23	vtxByteOffZ0	INFERRED	byte offset of z of vertex 0 in the fast fill quad (word index * 4 + 8)	^\s*\*\(undefined4\ \*\)\(\(int\)puVar48\ \+\ iVar23\)\ =\ 0;$	+1
+use	_radeonFill	iVar23	vtxByteOffZ0	INFERRED	byte offset of z of vertex 0 in the fast fill quad (word index * 4 + 8)	^\s*iVar23\ =\ iVar23\ \+\ 0x30;$	+1
+use	_radeonFill	iVar25	textureHeightM1	CONFIRMED	pattern descriptor height - 1	^\s*iVar25\ =\ \*\(short\ \*\)\(local_108\ \+\ 6\)\ \+\ \-1;$	+2
+use	_radeonFill	iVar25	textureHeightM1	CONFIRMED	pattern descriptor height - 1	^\s*iVar25\ \*\ 0x20\ \&\ 0x10000U;$	+1
+use	_radeonFill	iVar25	progIdx106	INFERRED	index of shader-program word slot 106 in the unmasked layout (the masked layout shifts it)	^\s*iVar25\ =\ 0x6a;$	+1
+use	_radeonFill	iVar25	progIdx106	INFERRED	index of shader-program word slot 106 in the unmasked layout (the masked layout shifts it)	^\s*iVar25\ =\ 0x74;$	+1
+use	_radeonFill	iVar25	progIdx106	INFERRED	index of shader-program word slot 106 in the unmasked layout (the masked layout shifts it)	^\s*pdVar44\[iVar25\]\ =\ 0x1095;$	+1
+use	_radeonFill	iVar25	progIdx106	INFERRED	index of shader-program word slot 106 in the unmasked layout (the masked layout shifts it)	^\s*pdVar44\[iVar25\]\ =\ 0x1095;$@2	+1
+use	_radeonFill	iVar25	tileIdx26	INFERRED	words consumed by the tile quad packet (26)	^\s*iVar25\ =\ iVar12\ \+\ 0x30;$	+1
+use	_radeonFill	iVar25	tileIdx26	INFERRED	words consumed by the tile quad packet (26)	^\s*uVar32\ =\ uVar32\ \-\ iVar25;$	+2
+use	_radeonFill	iVar25	tileIdx26	INFERRED	words consumed by the tile quad packet (26)	^\s*iVar25\ =\ 0x1a;$	+1
+use	_radeonFill	iVar25	batchRemaining	INFERRED	rectangles left in the current batch	^\s*iVar25\ =\ uVar29\ \-\ uVar42;$	+2
+use	_radeonFill	iVar25	batchRemaining	INFERRED	rectangles left in the current batch	^\s*puVar48\[iVar23\ \+\ 1\]\ =\ iVar25\ \*\ 0x40000\ \|\ 0x3d;$	+1
+use	_radeonFill	iVar25	batchRemaining	INFERRED	rectangles left in the current batch	^\s*iVar25\ =\ iVar25\ \+\ \-1;$	+2
+use	_radeonFill	iVar31	progIdx82	INFERRED	index of shader-program word slot 82 in the unmasked layout (the masked layout shifts it)	^\s*iVar31\ =\ 0x52;$	+1
+use	_radeonFill	iVar31	progIdx82	INFERRED	index of shader-program word slot 82 in the unmasked layout (the masked layout shifts it)	^\s*iVar31\ =\ 0x5c;$	+1
+use	_radeonFill	iVar31	progIdx82	INFERRED	index of shader-program word slot 82 in the unmasked layout (the masked layout shifts it)	^\s*pdVar44\[iVar31\ \+\ 0x1b\]\ =\ 0x7804;$	+26
+use	_radeonFill	iVar31	progIdx82	INFERRED	index of shader-program word slot 82 in the unmasked layout (the masked layout shifts it)	^\s*pdVar44\[iVar31\ \+\ 0x35\]\ =\ uVar17;$	+10
+use	_radeonFill	iVar31	tileIdx13	INFERRED	word 13 of the tile quad packet	^\s*iVar31\ =\ iVar12\ \+\ 0x23;$	+1
+use	_radeonFill	iVar31	tileIdx13	INFERRED	word 13 of the tile quad packet	^\s*pdVar44\[iVar31\]\ =\ \(dword\)GH_F2U\(fVar22\);$	+1
+use	_radeonFill	iVar31	tileIdx13	INFERRED	word 13 of the tile quad packet	^\s*iVar31\ =\ 0xd;$	+1
+use	_radeonFill	iVar31	vtxByteOffZ1	INFERRED	byte offset of z of vertex 1 in the fast fill quad	^\s*iVar31\ =\ iVar23\ \+\ 0x14;$	+1
+use	_radeonFill	iVar31	vtxByteOffZ1	INFERRED	byte offset of z of vertex 1 in the fast fill quad	^\s*\*\(undefined4\ \*\)\(\(int\)puVar48\ \+\ iVar31\)\ =\ 0;$	+1
+use	_radeonFill	iVar31	vtxByteOffZ1	INFERRED	byte offset of z of vertex 1 in the fast fill quad	^\s*iVar31\ =\ iVar31\ \+\ 0x30;$	+1
+use	_radeonFill	iVar34	progIdx83	INFERRED	index of shader-program word slot 83 in the unmasked layout (the masked layout shifts it)	^\s*iVar34\ =\ 0x53;$	+1
+use	_radeonFill	iVar34	progIdx83	INFERRED	index of shader-program word slot 83 in the unmasked layout (the masked layout shifts it)	^\s*iVar34\ =\ 0x5d;$	+1
+use	_radeonFill	iVar34	progIdx83	INFERRED	index of shader-program word slot 83 in the unmasked layout (the masked layout shifts it)	^\s*pdVar44\[iVar34\]\ =\ 0;$	+1
+use	_radeonFill	iVar34	tileIdx15	INFERRED	word 15 of the tile quad packet	^\s*iVar34\ =\ iVar12\ \+\ 0x25;$	+1
+use	_radeonFill	iVar34	tileIdx15	INFERRED	word 15 of the tile quad packet	^\s*pdVar44\[iVar34\]\ =\ \(dword\)GH_F2U\(fVar28\);$	+1
+use	_radeonFill	iVar34	tileIdx15	INFERRED	word 15 of the tile quad packet	^\s*iVar34\ =\ 0xf;$	+1
+use	_radeonFill	iVar34	originX	INFERRED	accel+0x60 / accel+100: screen origin added to every rectangle	^\s*iVar34\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x60\);$	+1
+use	_radeonFill	iVar34	originX	INFERRED	accel+0x60 / accel+100: screen origin added to every rectangle	^\s*uStack_2d4\ =\ \*piVar20\ \+\ iVar34\ \^\ 0x80000000;$	+1
+use	_radeonFill	iVar34	originX	INFERRED	accel+0x60 / accel+100: screen origin added to every rectangle	^\s*uStack_2cc\ =\ \*piVar20\ \+\ iVar34\ \+\ piVar20\[2\]\ \^\ 0x80000000;$	+1
+use	_radeonFill	iVar36	progIdx84	INFERRED	index of shader-program word slot 84 in the unmasked layout (the masked layout shifts it)	^\s*iVar36\ =\ 0x54;$	+1
+use	_radeonFill	iVar36	progIdx84	INFERRED	index of shader-program word slot 84 in the unmasked layout (the masked layout shifts it)	^\s*iVar36\ =\ 0x5e;$	+1
+use	_radeonFill	iVar36	progIdx84	INFERRED	index of shader-program word slot 84 in the unmasked layout (the masked layout shifts it)	^\s*pdVar44\[iVar36\]\ =\ 0x1095;$	+1
+use	_radeonFill	iVar36	tileIdx3	INFERRED	word 3 of the tile quad packet	^\s*iVar36\ =\ iVar12\ \+\ 0x19;$	+1
+use	_radeonFill	iVar36	tileIdx3	INFERRED	word 3 of the tile quad packet	^\s*pdVar44\[iVar36\]\ =\ \(dword\)GH_F2U\(fVar27\);$	+1
+use	_radeonFill	iVar36	tileIdx3	INFERRED	word 3 of the tile quad packet	^\s*iVar36\ =\ 3;$	+1
+use	_radeonFill	iVar36	originY	INFERRED	accel+0x60 / accel+100: screen origin added to every rectangle	^\s*iVar36\ =\ \*\(int\ \*\)\(param_1\ \+\ 100\);$	+1
+use	_radeonFill	iVar36	originY	INFERRED	accel+0x60 / accel+100: screen origin added to every rectangle	^\s*uStack_2c4\ =\ piVar20\[1\]\ \+\ iVar36\ \^\ 0x80000000;$	+1
+use	_radeonFill	iVar36	originY	INFERRED	accel+0x60 / accel+100: screen origin added to every rectangle	^\s*uStack_2bc\ =\ piVar20\[1\]\ \+\ iVar36\ \+\ piVar20\[3\]\ \^\ 0x80000000;$	+1
+use	_radeonFill	iVar39	progIdx85	INFERRED	index of shader-program word slot 85 in the unmasked layout (the masked layout shifts it)	^\s*iVar39\ =\ 0x55;$	+1
+use	_radeonFill	iVar39	progIdx85	INFERRED	index of shader-program word slot 85 in the unmasked layout (the masked layout shifts it)	^\s*iVar39\ =\ 0x5f;$	+1
+use	_radeonFill	iVar39	progIdx85	INFERRED	index of shader-program word slot 85 in the unmasked layout (the masked layout shifts it)	^\s*pdVar44\[iVar39\]\ =\ 0x7803;$	+1
+use	_radeonFill	iVar39	tileIdx18	INFERRED	word 18 of the tile quad packet	^\s*iVar39\ =\ iVar12\ \+\ 0x28;$	+1
+use	_radeonFill	iVar39	tileIdx18	INFERRED	word 18 of the tile quad packet	^\s*pdVar44\[iVar39\]\ =\ \(dword\)GH_F2U\(fVar22\);$	+1
+use	_radeonFill	iVar39	tileIdx18	INFERRED	word 18 of the tile quad packet	^\s*iVar39\ =\ 0x12;$	+1
+use	_radeonFill	iVar39	vtxByteOffY0	INFERRED	byte offset of Y0 in the fast fill quad	^\s*iVar39\ =\ iVar23\ \+\ 4;$	+1
+use	_radeonFill	iVar39	vtxByteOffY0	INFERRED	byte offset of Y0 in the fast fill quad	^\s*\*\(float\ \*\)\(\(int\)puVar48\ \+\ iVar39\)\ =\ local_308;$	+1
+use	_radeonFill	iVar39	vtxByteOffY0	INFERRED	byte offset of Y0 in the fast fill quad	^\s*iVar39\ =\ iVar39\ \+\ 0x30;$	+1
+use	_radeonFill	iVar40	progIdx98	INFERRED	index of shader-program word slot 98 in the unmasked layout (the masked layout shifts it)	^\s*iVar40\ =\ 0x62;$	+1
+use	_radeonFill	iVar40	progIdx98	INFERRED	index of shader-program word slot 98 in the unmasked layout (the masked layout shifts it)	^\s*iVar40\ =\ 0x6c;$	+1
+use	_radeonFill	iVar40	progIdx98	INFERRED	index of shader-program word slot 98 in the unmasked layout (the masked layout shifts it)	^\s*pdVar44\[iVar40\]\ =\ 0x1095;$	+1
+use	_radeonFill	iVar40	progIdx98	INFERRED	index of shader-program word slot 98 in the unmasked layout (the masked layout shifts it)	^\s*pdVar44\[iVar40\]\ =\ 0x1095;$@2	+1
+use	_radeonFill	iVar40	tileIdx19	INFERRED	word 19 of the tile quad packet	^\s*iVar40\ =\ iVar12\ \+\ 0x29;$	+1
+use	_radeonFill	iVar40	tileIdx19	INFERRED	word 19 of the tile quad packet	^\s*pdVar44\[iVar40\]\ =\ dVar18;$	+1
+use	_radeonFill	iVar40	tileIdx19	INFERRED	word 19 of the tile quad packet	^\s*iVar40\ =\ 0x13;$	+1
+use	_radeonFill	iVar40	vtxByteOffY3	INFERRED	byte offset of Y3 in the fast fill quad	^\s*iVar40\ =\ iVar23\ \+\ 0x28;$	+1
+use	_radeonFill	iVar40	vtxByteOffY3	INFERRED	byte offset of Y3 in the fast fill quad	^\s*\*\(float\ \*\)\(\(int\)puVar48\ \+\ iVar40\)\ =\ local_308;$	+1
+use	_radeonFill	iVar40	vtxByteOffY3	INFERRED	byte offset of Y3 in the fast fill quad	^\s*iVar40\ =\ iVar40\ \+\ 0x30;$	+1
+use	_radeonFill	iVar41	progIdx99	INFERRED	index of shader-program word slot 99 in the unmasked layout (the masked layout shifts it)	^\s*iVar41\ =\ 99;$	+1
+use	_radeonFill	iVar41	progIdx99	INFERRED	index of shader-program word slot 99 in the unmasked layout (the masked layout shifts it)	^\s*iVar41\ =\ 0x6d;$	+1
+use	_radeonFill	iVar41	progIdx99	INFERRED	index of shader-program word slot 99 in the unmasked layout (the masked layout shifts it)	^\s*pdVar44\[iVar41\]\ =\ 1;$	+1
+use	_radeonFill	iVar41	progIdx99	INFERRED	index of shader-program word slot 99 in the unmasked layout (the masked layout shifts it)	^\s*pdVar44\[iVar41\]\ =\ 0x2400000;$	+1
+use	_radeonFill	iVar41	tileIdx20	INFERRED	word 20 of the tile quad packet	^\s*iVar41\ =\ iVar12\ \+\ 0x2a;$	+1
+use	_radeonFill	iVar41	tileIdx20	INFERRED	word 20 of the tile quad packet	^\s*pdVar44\[iVar41\]\ =\ \(dword\)GH_F2U\(fVar28\);$	+1
+use	_radeonFill	iVar41	tileIdx20	INFERRED	word 20 of the tile quad packet	^\s*iVar41\ =\ 0x14;$	+1
+use	_radeonFill	iVar41	vtxByteOffX3	INFERRED	byte offset of X3 in the fast fill quad	^\s*iVar41\ =\ iVar23\ \+\ 0x24;$	+1
+use	_radeonFill	iVar41	vtxByteOffX3	INFERRED	byte offset of X3 in the fast fill quad	^\s*\*\(float\ \*\)\(\(int\)puVar48\ \+\ iVar41\)\ =\ fVar9;$	+1
+use	_radeonFill	iVar41	vtxByteOffX3	INFERRED	byte offset of X3 in the fast fill quad	^\s*iVar41\ =\ iVar41\ \+\ 0x30;$	+1
+use	_radeonFill	iVar43	progIdx100	INFERRED	index of shader-program word slot 100 in the unmasked layout (the masked layout shifts it)	^\s*iVar43\ =\ 100;$	+1
+use	_radeonFill	iVar43	progIdx100	INFERRED	index of shader-program word slot 100 in the unmasked layout (the masked layout shifts it)	^\s*iVar43\ =\ 0x6e;$	+1
+use	_radeonFill	iVar43	progIdx100	INFERRED	index of shader-program word slot 100 in the unmasked layout (the masked layout shifts it)	^\s*pdVar44\[iVar43\]\ =\ 0x1095;$	+1
+use	_radeonFill	iVar43	progIdx100	INFERRED	index of shader-program word slot 100 in the unmasked layout (the masked layout shifts it)	^\s*pdVar44\[iVar43\]\ =\ 0x1095;$@2	+1
+use	_radeonFill	iVar43	tileIdx21	INFERRED	word 21 of the tile quad packet	^\s*iVar43\ =\ iVar12\ \+\ 0x2b;$	+1
+use	_radeonFill	iVar43	tileIdx21	INFERRED	word 21 of the tile quad packet	^\s*pdVar44\[iVar43\]\ =\ dVar11;$	+1
+use	_radeonFill	iVar43	tileIdx21	INFERRED	word 21 of the tile quad packet	^\s*iVar43\ =\ 0x15;$	+1
+use	_radeonFill	iVar43	vtxByteOffZ2	INFERRED	byte offset of Z2 in the fast fill quad	^\s*iVar43\ =\ iVar23\ \+\ 0x20;$	+1
+use	_radeonFill	iVar43	vtxByteOffZ2	INFERRED	byte offset of Z2 in the fast fill quad	^\s*\*\(undefined4\ \*\)\(\(int\)puVar48\ \+\ iVar43\)\ =\ 0;$	+1
+use	_radeonFill	iVar43	vtxByteOffZ2	INFERRED	byte offset of Z2 in the fast fill quad	^\s*iVar43\ =\ iVar43\ \+\ 0x30;$	+1
+use	_radeonFill	iVar45	progIdx101	INFERRED	index of shader-program word slot 101 in the unmasked layout (the masked layout shifts it)	^\s*iVar45\ =\ 0x65;$	+1
+use	_radeonFill	iVar45	progIdx101	INFERRED	index of shader-program word slot 101 in the unmasked layout (the masked layout shifts it)	^\s*iVar45\ =\ 0x6f;$	+1
+use	_radeonFill	iVar45	progIdx101	INFERRED	index of shader-program word slot 101 in the unmasked layout (the masked layout shifts it)	^\s*pdVar44\[iVar45\]\ =\ 1;$	+1
+use	_radeonFill	iVar45	progIdx101	INFERRED	index of shader-program word slot 101 in the unmasked layout (the masked layout shifts it)	^\s*pdVar44\[iVar45\]\ =\ 0x3900e400;$	+1
+use	_radeonFill	iVar45	tileIdx22	INFERRED	word 22 of the tile quad packet	^\s*iVar45\ =\ iVar12\ \+\ 0x2c;$	+1
+use	_radeonFill	iVar45	tileIdx22	INFERRED	word 22 of the tile quad packet	^\s*pdVar44\[iVar45\]\ =\ 0x1393;$	+1
+use	_radeonFill	iVar45	tileIdx22	INFERRED	word 22 of the tile quad packet	^\s*iVar45\ =\ 0x16;$	+1
+use	_radeonFill	iVar45	vtxByteOffY2	INFERRED	byte offset of Y2 in the fast fill quad	^\s*iVar45\ =\ iVar23\ \+\ 0x1c;$	+1
+use	_radeonFill	iVar45	vtxByteOffY2	INFERRED	byte offset of Y2 in the fast fill quad	^\s*\*\(float\ \*\)\(\(int\)puVar48\ \+\ iVar45\)\ =\ local_304;$	+1
+use	_radeonFill	iVar45	vtxByteOffY2	INFERRED	byte offset of Y2 in the fast fill quad	^\s*iVar45\ =\ iVar45\ \+\ 0x30;$	+1
+use	_radeonFill	iVar46	progIdx102	INFERRED	index of shader-program word slot 102 in the unmasked layout (the masked layout shifts it)	^\s*iVar46\ =\ 0x66;$	+1
+use	_radeonFill	iVar46	progIdx102	INFERRED	index of shader-program word slot 102 in the unmasked layout (the masked layout shifts it)	^\s*iVar46\ =\ 0x70;$	+1
+use	_radeonFill	iVar46	progIdx102	INFERRED	index of shader-program word slot 102 in the unmasked layout (the masked layout shifts it)	^\s*pdVar44\[iVar46\]\ =\ 0x1095;$	+1
+use	_radeonFill	iVar46	progIdx102	INFERRED	index of shader-program word slot 102 in the unmasked layout (the masked layout shifts it)	^\s*pdVar44\[iVar46\]\ =\ 0x1095;$@2	+1
+use	_radeonFill	iVar46	tileIdx23	INFERRED	word 23 of the tile quad packet	^\s*iVar46\ =\ iVar12\ \+\ 0x2d;$	+1
+use	_radeonFill	iVar46	tileIdx23	INFERRED	word 23 of the tile quad packet	^\s*pdVar44\[iVar46\]\ =\ 10;$	+1
+use	_radeonFill	iVar46	tileIdx23	INFERRED	word 23 of the tile quad packet	^\s*iVar46\ =\ 0x17;$	+1
+use	_radeonFill	iVar46	vtxByteOffX2	INFERRED	byte offset of X2 in the fast fill quad	^\s*iVar46\ =\ iVar23\ \+\ 0x18;$	+1
+use	_radeonFill	iVar46	vtxByteOffX2	INFERRED	byte offset of X2 in the fast fill quad	^\s*\*\(float\ \*\)\(\(int\)puVar48\ \+\ iVar46\)\ =\ fVar9;$	+1
+use	_radeonFill	iVar46	vtxByteOffX2	INFERRED	byte offset of X2 in the fast fill quad	^\s*iVar46\ =\ iVar46\ \+\ 0x30;$	+1
+use	_radeonFill	iVar47	progIdx104	INFERRED	index of shader-program word slot 104 in the unmasked layout (the masked layout shifts it)	^\s*iVar47\ =\ 0x68;$	+1
+use	_radeonFill	iVar47	progIdx104	INFERRED	index of shader-program word slot 104 in the unmasked layout (the masked layout shifts it)	^\s*iVar47\ =\ 0x72;$	+1
+use	_radeonFill	iVar47	progIdx104	INFERRED	index of shader-program word slot 104 in the unmasked layout (the masked layout shifts it)	^\s*pdVar44\[iVar47\]\ =\ 0x1095;$	+1
+use	_radeonFill	iVar47	progIdx104	INFERRED	index of shader-program word slot 104 in the unmasked layout (the masked layout shifts it)	^\s*pdVar44\[iVar47\]\ =\ 0x1095;$@2	+1
+use	_radeonFill	iVar47	tileIdx17	INFERRED	word 17 of the tile quad packet	^\s*iVar47\ =\ iVar12\ \+\ 0x27;$	+1
+use	_radeonFill	iVar47	tileIdx17	INFERRED	word 17 of the tile quad packet	^\s*pdVar44\[iVar47\]\ =\ local_124\ \|\ local_cc;$	+1
+use	_radeonFill	iVar47	tileIdx17	INFERRED	word 17 of the tile quad packet	^\s*iVar47\ =\ 0x11;$	+1
+use	_radeonFill	iVar49	progIdx97	INFERRED	index of shader-program word slot 97 in the unmasked layout (the masked layout shifts it)	^\s*iVar49\ =\ 0x61;$	+1
+use	_radeonFill	iVar49	progIdx97	INFERRED	index of shader-program word slot 97 in the unmasked layout (the masked layout shifts it)	^\s*iVar49\ =\ 0x6b;$	+1
+use	_radeonFill	iVar49	progIdx97	INFERRED	index of shader-program word slot 97 in the unmasked layout (the masked layout shifts it)	^\s*pdVar44\[iVar49\]\ =\ 0x78105;$	+1
+use	_radeonFill	iVar49	progIdx97	INFERRED	index of shader-program word slot 97 in the unmasked layout (the masked layout shifts it)	^\s*pdVar44\[iVar49\]\ =\ 0x7807;$	+1
+use	_radeonFill	iVar49	tileWidth	INFERRED	tileRight - curTileLeft	^\s*iVar49\ =\ local_124\ \-\ uStack_244;$	+2
+use	_radeonFill	iVar49	tileWidth	INFERRED	tileRight - curTileLeft	^\s*local_2f4\ =\ \(fVar9\ \+\ \(float\)\(\(double\)CONCAT44\(0x43300000,iVar49\)\ \-$	+2
+use	_radeonFill	iVar49	tileWidth	INFERRED	tileRight - curTileLeft	^\s*iStack_20c\ =\ iVar49;$	+1
+local	_radeonFill	iVar50	progIdx95	INFERRED	index of shader-program word slot 95 in the unmasked layout (the masked layout shifts it)
+local	_radeonFill	iVar51	progIdx96	INFERRED	index of shader-program word slot 96 in the unmasked layout (the masked layout shifts it)
+local	_radeonFill	local_164	progIdx86	INFERRED	index of shader-program word slot 86 in the unmasked layout (the masked layout shifts it)
+local	_radeonFill	local_168	progIdx87	INFERRED	index of shader-program word slot 87 in the unmasked layout (the masked layout shifts it)
+local	_radeonFill	local_16c	progIdx88	INFERRED	index of shader-program word slot 88 in the unmasked layout (the masked layout shifts it)
+local	_radeonFill	local_170	progIdx89	INFERRED	index of shader-program word slot 89 in the unmasked layout (the masked layout shifts it)
+local	_radeonFill	local_174	progIdx90	INFERRED	index of shader-program word slot 90 in the unmasked layout (the masked layout shifts it)
+local	_radeonFill	local_178	progIdx91	INFERRED	index of shader-program word slot 91 in the unmasked layout (the masked layout shifts it)
+local	_radeonFill	local_17c	progIdx92	INFERRED	index of shader-program word slot 92 in the unmasked layout (the masked layout shifts it)
+local	_radeonFill	local_180	progIdx93	INFERRED	index of shader-program word slot 93 in the unmasked layout (the masked layout shifts it)
+local	_radeonFill	local_184	progIdx94	INFERRED	index of shader-program word slot 94 in the unmasked layout (the masked layout shifts it)
+local	_radeonFill	local_100	rectsPerBatch	INFERRED	(command buffer size - 0x75) / 0xc - 1: how many rectangles fit in one buffer (fast fill)
+local	_radeonFill	local_104	rectIndex	CONFIRMED	loop counter over the rectangles (tile path)
+local	_radeonFill	local_128	fillRedF	CONFIRMED	red of the fill colour normalised
+local	_radeonFill	local_12c	fillGreenF	CONFIRMED	green of the fill colour normalised
+local	_radeonFill	local_130	fillBlueF	CONFIRMED	blue of the fill colour normalised
+local	_radeonFill	local_134	fillAlphaF	CONFIRMED	alpha of the fill colour normalised
+local	_radeonFill	local_138	tileHdrByteOff	INFERRED	byte offset of the 0xc0143500 packet header ((base+0x16)*4, or 0 after a buffer switch)
+local	_radeonFill	local_188	batchWords	INFERRED	rectsPerBatch * 0xc + 0x6e: words needed for a full batch
+local	_radeonFill	local_308	quadSlot0	INFERRED	stack slot reached through a pointer: screen/texture u,v values in the tile path, reused as rectangle x/y floats in the fast fill path
+local	_radeonFill	local_304	quadSlot1	INFERRED	stack slot reached through a pointer: screen/texture u,v values in the tile path, reused as rectangle x/y floats in the fast fill path
+local	_radeonFill	local_300	quadSlot2	INFERRED	stack slot reached through a pointer: screen/texture u,v values in the tile path, reused as rectangle x/y floats in the fast fill path
+local	_radeonFill	local_2fc	quadSlot3	INFERRED	stack slot reached through a pointer: screen/texture u,v values in the tile path, reused as rectangle x/y floats in the fast fill path
+local	_radeonFill	local_2f8	quadSlot4	INFERRED	stack slot reached through a pointer: screen/texture u,v values in the tile path, reused as rectangle x/y floats in the fast fill path
+local	_radeonFill	local_2f4	quadSlot5	INFERRED	stack slot reached through a pointer: screen/texture u,v values in the tile path, reused as rectangle x/y floats in the fast fill path
+local	_radeonFill	local_2f0	quadSlot6	INFERRED	stack slot reached through a pointer: screen/texture u,v values in the tile path, reused as rectangle x/y floats in the fast fill path
+local	_radeonFill	local_ec	quadSlot0Ptr	CONFIRMED	address of the stack slot it is named after (taken to force a memory home)
+local	_radeonFill	local_e8	quadSlot1Ptr	CONFIRMED	address of the stack slot it is named after (taken to force a memory home)
+local	_radeonFill	local_e4	quadSlot2Ptr	CONFIRMED	address of the stack slot it is named after (taken to force a memory home)
+local	_radeonFill	local_e0	quadSlot3Ptr	CONFIRMED	address of the stack slot it is named after (taken to force a memory home)
+local	_radeonFill	local_dc	quadSlot4Ptr	CONFIRMED	address of the stack slot it is named after (taken to force a memory home)
+local	_radeonFill	local_d8	quadSlot5Ptr	CONFIRMED	address of the stack slot it is named after (taken to force a memory home)
+local	_radeonFill	local_d4	quadSlot6Ptr	CONFIRMED	address of the stack slot it is named after (taken to force a memory home)
+local	_radeonFill	local_d0	scratchWord2Ref	CONFIRMED	address of the stack slot it is named after (taken to force a memory home)
+local	_radeonFill	local_c0	quadSlot2PtrB	CONFIRMED	address of the stack slot it is named after (taken to force a memory home)
+local	_radeonFill	local_f0	picOffset	INFERRED	0x8284: PIC offset of the pattern descriptor table entry
+local	_radeonFill	local_fc	cmdCapacityFast	INFERRED	command buffer size - 7 (fast fill path)
+use	_radeonFill	pdVar15	tileWord1	INFERRED	packet word of the per-tile group	^\s*pdVar15\ =\ \(dword\ \*\)\(local_2ec\ \+\ 0x24\);$	+1
+use	_radeonFill	pdVar15	tileWord1	INFERRED	packet word of the per-tile group	^\s*pdVar15\ =\ \&__mh_bundle_header\.cputype;$	+1
+use	_radeonFill	pdVar15	tileWord1	INFERRED	packet word of the per-tile group	^\s*pdVar15\ =\ pdVar44\ \+\ 1;$	+1
+use	_radeonFill	pdVar15	tileWord1	INFERRED	packet word of the per-tile group	^\s*\*pdVar15\ =\ \*\(dword\ \*\)\(param_1\ \+\ 0x84\);$	+1
+use	_radeonFill	pdVar15	tileWord1	INFERRED	packet word of the per-tile group	^\s*pdVar15\ =\ \(dword\ \*\)\(local_2e8\ \+\ 0x24\);$	+1
+use	_radeonFill	pdVar15	tileWord1	INFERRED	packet word of the per-tile group	^\s*pdVar15\ =\ \&__mh_bundle_header\.cputype;$@2	+1
+use	_radeonFill	pdVar15	finalWord1	INFERRED	packet word / cursor of the final group	^\s*pdVar15\ =\ \(dword\ \*\)\(local_2ec\ \+\ 0x24\);$@2	+1
+use	_radeonFill	pdVar15	finalWord1	INFERRED	packet word / cursor of the final group	^\s*pdVar15\ =\ \&__mh_bundle_header\.cputype;$@3	+1
+use	_radeonFill	pdVar15	finalWord1	INFERRED	packet word / cursor of the final group	^\s*pdVar15\ =\ pdVar44\ \+\ 1;$@2	+1
+use	_radeonFill	pdVar15	finalWord1	INFERRED	packet word / cursor of the final group	^\s*\*pdVar15\ =\ \*\(dword\ \*\)\(param_1\ \+\ 0x84\);$@2	+1
+use	_radeonFill	pdVar16	tileWord3	INFERRED	packet word of the per-tile group	^\s*pdVar16\ =\ \(dword\ \*\)\(local_2ec\ \+\ 0x2c\);$	+1
+use	_radeonFill	pdVar16	tileWord3	INFERRED	packet word of the per-tile group	^\s*pdVar16\ =\ \&__mh_bundle_header\.filetype;$	+1
+use	_radeonFill	pdVar16	tileWord3	INFERRED	packet word of the per-tile group	^\s*pdVar16\ =\ pdVar44\ \+\ 3;$	+1
+use	_radeonFill	pdVar16	tileWord3	INFERRED	packet word of the per-tile group	^\s*\*pdVar16\ =\ \*\(dword\ \*\)\*DAT_0000e6e4;$	+1
+use	_radeonFill	pdVar16	tileWord3	INFERRED	packet word of the per-tile group	^\s*pdVar16\ =\ \(dword\ \*\)\(local_2e8\ \+\ 0x2c\);$	+1
+use	_radeonFill	pdVar16	tileWord3	INFERRED	packet word of the per-tile group	^\s*pdVar16\ =\ \&__mh_bundle_header\.filetype;$@2	+1
+use	_radeonFill	pdVar16	finalWord2	INFERRED	packet word / cursor of the final group	^\s*pdVar16\ =\ \(dword\ \*\)\(local_2ec\ \+\ 0x28\);$	+1
+use	_radeonFill	pdVar16	finalWord2	INFERRED	packet word / cursor of the final group	^\s*pdVar16\ =\ \&__mh_bundle_header\.cpusubtype;$	+1
+use	_radeonFill	pdVar16	finalWord2	INFERRED	packet word / cursor of the final group	^\s*pdVar16\ =\ pdVar44\ \+\ 2;$	+1
+use	_radeonFill	pdVar16	finalWord2	INFERRED	packet word / cursor of the final group	^\s*\*pdVar16\ =\ 0;$	+1
+use	_radeonFill	pdVar19	tileWord4	INFERRED	packet word of the per-tile group	^\s*pdVar19\ =\ \(dword\ \*\)\(local_2ec\ \+\ 0x30\);$	+1
+use	_radeonFill	pdVar19	tileWord4	INFERRED	packet word of the per-tile group	^\s*pdVar19\ =\ \&__mh_bundle_header\.ncmds;$	+1
+use	_radeonFill	pdVar19	tileWord4	INFERRED	packet word of the per-tile group	^\s*pdVar19\ =\ pdVar44\ \+\ 4;$	+1
+use	_radeonFill	pdVar19	tileWord4	INFERRED	packet word of the per-tile group	^\s*\*pdVar19\ =\ DAT_0000e6e4\[7\];$	+1
+use	_radeonFill	pdVar19	tileWord4	INFERRED	packet word of the per-tile group	^\s*pdVar19\ =\ \(dword\ \*\)\(local_2e8\ \+\ 0x30\);$	+1
+use	_radeonFill	pdVar19	tileWord4	INFERRED	packet word of the per-tile group	^\s*pdVar19\ =\ \&__mh_bundle_header\.ncmds;$@2	+1
+use	_radeonFill	pdVar19	finalWord3	INFERRED	packet word / cursor of the final group	^\s*pdVar19\ =\ \(dword\ \*\)\(local_2ec\ \+\ 0x2c\);$	+1
+use	_radeonFill	pdVar19	finalWord3	INFERRED	packet word / cursor of the final group	^\s*pdVar19\ =\ \&__mh_bundle_header\.filetype;$	+1
+use	_radeonFill	pdVar19	finalWord3	INFERRED	packet word / cursor of the final group	^\s*pdVar19\ =\ pdVar44\ \+\ 3;$	+1
+use	_radeonFill	pdVar19	finalWord3	INFERRED	packet word / cursor of the final group	^\s*\*pdVar19\ =\ 0;$	+1
+use	_radeonFill	pdVar26	tileWord5	INFERRED	packet word of the per-tile group	^\s*pdVar26\ =\ \(dword\ \*\)\(local_2ec\ \+\ 0x34\);$	+1
+use	_radeonFill	pdVar26	tileWord5	INFERRED	packet word of the per-tile group	^\s*pdVar26\ =\ \&__mh_bundle_header\.sizeofcmds;$	+1
+use	_radeonFill	pdVar26	tileWord5	INFERRED	packet word of the per-tile group	^\s*pdVar26\ =\ pdVar44\ \+\ 5;$	+1
+use	_radeonFill	pdVar26	tileWord5	INFERRED	packet word of the per-tile group	^\s*\*pdVar26\ =\ 3;$	+1
+use	_radeonFill	pdVar26	tileWord5	INFERRED	packet word of the per-tile group	^\s*\*pdVar26\ =\ 6;$	+1
+use	_radeonFill	pdVar26	tileWord5	INFERRED	packet word of the per-tile group	^\s*pdVar26\ =\ \(dword\ \*\)\(local_2e8\ \+\ 0x34\);$	+1
+use	_radeonFill	pdVar26	tileWord5	INFERRED	packet word of the per-tile group	^\s*pdVar26\ =\ \&__mh_bundle_header\.sizeofcmds;$@2	+1
+use	_radeonFill	pdVar26	finalWord4	INFERRED	packet word / cursor of the final group	^\s*pdVar26\ =\ \(dword\ \*\)\(local_2ec\ \+\ 0x30\);$	+1
+use	_radeonFill	pdVar26	finalWord4	INFERRED	packet word / cursor of the final group	^\s*pdVar26\ =\ \&__mh_bundle_header\.ncmds;$	+1
+use	_radeonFill	pdVar26	finalWord4	INFERRED	packet word / cursor of the final group	^\s*pdVar26\ =\ pdVar44\ \+\ 4;$	+1
+use	_radeonFill	pdVar26	finalWord4	INFERRED	packet word / cursor of the final group	^\s*\*puVar24\ =\ \(int\)pdVar26\ \-\ \(int\)puVar24\ >>\ 2\ \|\ \*puVar24;$	+3
+use	_radeonFill	pdVar30	tileWord2	INFERRED	packet word of the per-tile group	^\s*pdVar30\ =\ \(dword\ \*\)\(local_2ec\ \+\ 0x28\);$	+1
+use	_radeonFill	pdVar30	tileWord2	INFERRED	packet word of the per-tile group	^\s*pdVar30\ =\ \&__mh_bundle_header\.cpusubtype;$	+1
+use	_radeonFill	pdVar30	tileWord2	INFERRED	packet word of the per-tile group	^\s*pdVar30\ =\ pdVar44\ \+\ 2;$	+1
+use	_radeonFill	pdVar30	tileWord2	INFERRED	packet word of the per-tile group	^\s*\*puVar24\ =\ \(int\)pdVar30\ \-\ \(int\)puVar24\ >>\ 2\ \|\ \*puVar24;$	+3
+use	_radeonFill	pdVar30	tileWord2	INFERRED	packet word of the per-tile group	^\s*pdVar30\ =\ \(dword\ \*\)\(local_2e8\ \+\ 0x28\);$	+1
+use	_radeonFill	pdVar30	tileWord2	INFERRED	packet word of the per-tile group	^\s*pdVar30\ =\ \&__mh_bundle_header\.cpusubtype;$@2	+1
+use	_radeonFill	pdVar30	finalCursor	INFERRED	packet word / cursor of the final group	^\s*pdVar30\ =\ \(dword\ \*\)\(local_2ec\ \+\ 0x38\);$	+1
+use	_radeonFill	pdVar30	finalCursor	INFERRED	packet word / cursor of the final group	^\s*pdVar30\ =\ \&__mh_bundle_header\.flags;$	+1
+use	_radeonFill	pdVar30	finalCursor	INFERRED	packet word / cursor of the final group	^\s*pdVar30\ =\ pdVar44\ \+\ 6;$	+1
+use	_radeonFill	pdVar30	finalCursor	INFERRED	packet word / cursor of the final group	^\s*iVar23\ =\ \(\(int\ \(\*\)\(\)\)_radeon3DCopySetup\)\(param_1,pdVar30,DAT_0000e6e4\ \+\ 3,iVar23,0,0,0,0\);$	+1
+use	_radeonFill	pdVar30	finalCursor	INFERRED	packet word / cursor of the final group	^\s*pdVar30\[iVar23\]\ =\ 0xc00c3500;$	+2
+use	_radeonFill	pdVar30	finalCursor	INFERRED	packet word / cursor of the final group	^\s*pdVar30\[iVar23\ \+\ 2\]\ =\ local_10c\ \|\ local_118\ <<\ 0x10;$	+16
+use	_radeonFill	pdVar30	finalCursor	INFERRED	packet word / cursor of the final group	^\s*pdVar44\ =\ pdVar30\ \+\ iVar23\ \+\ 0x12;$	+1
+use	_radeonFill	pdVar21	streamCursor	INFERRED	command-stream pointer: cmdWrite+6 (register stream) of the current group, advanced as the group is filled	^\s*pdVar21\ =\ \(dword\ \*\)\(local_2ec\ \+\ 0x38\);$	+1
+use	_radeonFill	pdVar21	streamCursor	INFERRED	command-stream pointer: cmdWrite+6 (register stream) of the current group, advanced as the group is filled	^\s*pdVar21\ =\ \&__mh_bundle_header\.flags;$	+1
+use	_radeonFill	pdVar21	streamCursor	INFERRED	command-stream pointer: cmdWrite+6 (register stream) of the current group, advanced as the group is filled	^\s*pdVar21\ =\ pdVar44\ \+\ 6;$	+1
+use	_radeonFill	pdVar21	streamCursor	INFERRED	command-stream pointer: cmdWrite+6 (register stream) of the current group, advanced as the group is filled	^\s*\*puVar24\ =\ \(int\)pdVar21\ \-\ \(int\)puVar24\ >>\ 2\ \|\ \*puVar24;$	+7
+use	_radeonFill	pdVar21	streamCursor	INFERRED	command-stream pointer: cmdWrite+6 (register stream) of the current group, advanced as the group is filled	^\s*pdVar21\[5\]\ =\ 0x100;$	+45
+use	_radeonFill	pdVar21	streamCursor	INFERRED	command-stream pointer: cmdWrite+6 (register stream) of the current group, advanced as the group is filled	^\s*pdVar21\[0x32\]\ =\ 0x13c0;$	+25
+use	_radeonFill	pdVar21	streamCursor	INFERRED	command-stream pointer: cmdWrite+6 (register stream) of the current group, advanced as the group is filled	^\s*pdVar21\[0x4b\]\ =$	+1
+use	_radeonFill	pdVar21	streamCursor	INFERRED	command-stream pointer: cmdWrite+6 (register stream) of the current group, advanced as the group is filled	^\s*pdVar21\[0x4c\]\ =\ 0x1121;$	+1
+use	_radeonFill	pdVar21	streamCursor	INFERRED	command-stream pointer: cmdWrite+6 (register stream) of the current group, advanced as the group is filled	^\s*pdVar21\[0x4d\]\ =\ uVar17\ \&\ 0x7ff\ \|\ iVar25\ \*\ 0x800\ \&\ 0x3ff800U\ \|\ 0x80000000;$	+2
+use	_radeonFill	pdVar21	streamCursor	INFERRED	command-stream pointer: cmdWrite+6 (register stream) of the current group, advanced as the group is filled	^\s*pdVar21\[0x4f\]\ =\ iVar23;$	+5
+use	_radeonFill	pdVar21	streamCursor	INFERRED	command-stream pointer: cmdWrite+6 (register stream) of the current group, advanced as the group is filled	^\s*pdVar21\[0x54\]\ =\ 0x1141;$	+2
+use	_radeonFill	pdVar21	streamCursor	INFERRED	command-stream pointer: cmdWrite+6 (register stream) of the current group, advanced as the group is filled	^\s*pdVar21\[0x56\]\ =\ 0x1094;$	+10
+use	_radeonFill	pdVar21	streamCursor	INFERRED	command-stream pointer: cmdWrite+6 (register stream) of the current group, advanced as the group is filled	^\s*pdVar21\ =\ \(dword\ \*\)\(local_2e8\ \+\ 0x38\);$	+1
+use	_radeonFill	pdVar21	streamCursor	INFERRED	command-stream pointer: cmdWrite+6 (register stream) of the current group, advanced as the group is filled	^\s*pdVar21\ =\ \&__mh_bundle_header\.flags;$@2	+1
+use	_radeonFill	pdVar21	finalWord5	INFERRED	packet word 5 of the final group	^\s*pdVar21\ =\ \(dword\ \*\)\(local_2ec\ \+\ 0x34\);$	+1
+use	_radeonFill	pdVar21	finalWord5	INFERRED	packet word 5 of the final group	^\s*pdVar21\ =\ \&__mh_bundle_header\.sizeofcmds;$	+1
+use	_radeonFill	pdVar21	finalWord5	INFERRED	packet word 5 of the final group	^\s*pdVar21\ =\ pdVar44\ \+\ 5;$	+1
+use	_radeonFill	pdVar21	finalWord5	INFERRED	packet word 5 of the final group	^\s*\*pdVar21\ =\ \*\(dword\ \*\)\*DAT_0000e6e4;$	+1
+local	_radeonFill	piVar20	rectPtr	INFERRED	fillReq + batchStart*4 + 0x17: current rectangle entry in the fast fill path
+local	_radeonFill	puVar8	patternDesc	INFERRED	pattern descriptor table entry (DAT_0000e6e4)
+local	_radeonFill	uStack_1c4	dstLeftSpill	UNKNOWN	dead store (Ghidra stack spill)
+local	_radeonFill	uStack_1b4	dstTopSpill	UNKNOWN	dead store (Ghidra stack spill)
+local	_radeonFill	uStack_1bc	dstRightSpill	UNKNOWN	dead store (Ghidra stack spill)
+local	_radeonFill	uStack_1ac	dstBottomSpill	UNKNOWN	dead store (Ghidra stack spill)
+local	_radeonFill	uStack_23c	tileRightSpill	UNKNOWN	dead store (Ghidra stack spill)
+local	_radeonFill	uStack_24c	tileBottomSpill	UNKNOWN	dead store (Ghidra stack spill)
+local	_radeonFill	uStack_254	tileTopSpill	UNKNOWN	dead store (Ghidra stack spill)
+local	_radeonFill	uStack_2a4	tileTopSpill2	UNKNOWN	dead store (Ghidra stack spill)
+local	_radeonFill	uStack_29c	tileBottomSpill2	UNKNOWN	dead store (Ghidra stack spill)
+local	_radeonFill	uStack_244	curTileLeft	INFERRED	left x of the tile being drawn
+local	_radeonFill	uStack_274	fillAlpha8	CONFIRMED	fillColor >> 24
+local	_radeonFill	uStack_26c	fillRed8	CONFIRMED	fillColor >> 16 & 0xff
+local	_radeonFill	uStack_264	fillGreen8	CONFIRMED	fillColor >> 8 & 0xff
+local	_radeonFill	uStack_25c	fillBlue8	CONFIRMED	fillColor & 0xff
+local	_radeonFill	uStack_294	fillAlpha1	CONFIRMED	fillColor >> 15 & 1
+local	_radeonFill	uStack_28c	fillRed5	CONFIRMED	red5 of the fill colour (colorBits >> 10)
+local	_radeonFill	uStack_284	fillGreen5	CONFIRMED	fillColor >> 5 & 0x1f
+local	_radeonFill	uStack_27c	fillBlue5	CONFIRMED	fillColor & 0x1f
+use	_radeonFill	uVar17	tileRowTop	INFERRED	top y of the tile row	^\s*uVar17\ =\ local_114;$	+1
+use	_radeonFill	uVar17	tileRowTop	INFERRED	top y of the tile row	^\s*local_11c\ =\ uVar17;$	+1
+use	_radeonFill	uVar17	tileRowTop	INFERRED	top y of the tile row	^\s*uVar17\ =\ local_11c\ \+\ 8;$	+1
+use	_radeonFill	uVar17	tileRowTopNext	INFERRED	top y of the next tile row	^\s*uVar17\ =\ uVar38;$	+1
+use	_radeonFill	uVar17	tileRowTopNext	INFERRED	top y of the next tile row	^\s*uVar17\ =\ uVar35\ \+\ 8;$	+1
+use	_radeonFill	uVar17	tileRowTopNext	INFERRED	top y of the next tile row	^\s*uVar35\ =\ uVar17;$	+1
+use	_radeonFill	uVar17	textureWidthM1	CONFIRMED	pattern descriptor width - 1	^\s*uVar17\ =\ \(int\)\*\(short\ \*\)\(local_108\ \+\ 4\)\ \-\ 1;$	+1
+use	_radeonFill	uVar17	textureWidthM1	CONFIRMED	pattern descriptor width - 1	^\s*pdVar21\[0x4d\]\ =\ uVar17\ \&\ 0x7ff\ \|\ iVar25\ \*\ 0x800\ \&\ 0x3ff800U\ \|\ 0x80000000;$	+1
+use	_radeonFill	uVar17	textureWidthM1	CONFIRMED	pattern descriptor width - 1	^\s*\*\(int\ \*\)\(local_108\ \+\ 0x10\)\ \-\ 1U\ \&\ 0x3fff\ \|\ uVar17\ \*\ 0x10\ \&\ 0x8000\ \|$	+1
+use	_radeonFill	uVar17	maskCtlWord	INFERRED	(maskBit ^ 1) << 10 | maskBit | 0x200000	^\s*uVar17\ =\ \(local_c4\ \^\ 1\)\ <<\ 10\ \|\ local_c4\ \|\ 0x200000;$	+2
+use	_radeonFill	uVar17	maskCtlWord	INFERRED	(maskBit ^ 1) << 10 | maskBit | 0x200000	^\s*pdVar44\[iVar31\ \+\ 0x37\]\ =\ uVar17;$	+1
+use	_radeonFill	uVar33	tileRightLimit	INFERRED	min(dstRight, dstLeft + 8)	^\s*uVar33\ =\ local_110;$	+1
+use	_radeonFill	uVar33	tileRightLimit	INFERRED	min(dstRight, dstLeft + 8)	^\s*uVar33\ =\ uVar38;$	+1
+use	_radeonFill	uVar33	tileRightLimit	INFERRED	min(dstRight, dstLeft + 8)	^\s*local_124\ =\ uVar33;$	+1
+use	_radeonFill	uVar33	tileRightLimit	INFERRED	min(dstRight, dstLeft + 8)	^\s*local_124\ =\ uVar33;$@2	+1
+use	_radeonFill	uVar33	tileRightLimit	INFERRED	min(dstRight, dstLeft + 8)	^\s*local_124\ =\ uVar33;$@3	+1
+use	_radeonFill	uVar33	tileRightLimit	INFERRED	min(dstRight, dstLeft + 8)	^\s*local_124\ =\ uVar33;$@4	+1
+use	_radeonFill	uVar33	batchEnd	INFERRED	batchStart + rectsPerBatch: first rectangle of the next batch	^\s*uVar33\ =\ uVar42\ \+\ local_100;$	+3
+use	_radeonFill	uVar33	batchEnd	INFERRED	batchStart + rectsPerBatch: first rectangle of the next batch	^\s*uVar42\ =\ uVar33;$	+2
+local	_radeonFill	uVar35	nextTileLeft	INFERRED	left x of the next 8-wide tile
+local	_radeonFill	uVar37	tileLeft	INFERRED	left x of the current tile

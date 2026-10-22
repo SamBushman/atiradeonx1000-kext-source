@@ -3083,64 +3083,29 @@ int _radeonFill(accel, unusedArg2, fillFlags, blitFlags, fillReq, patternBuf)
   undefined4 *fillReq;
   undefined4 patternBuf;
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
   bool firstTile;
   bool noMaskFlags;
-  double dVar6;
   undefined *taskPtr;
-  undefined4 *puVar8;
-  float fVar9;
-  int iVar10;
-  dword dVar11;
-  int iVar12;
-  int iVar13;
-  int iVar14;
-  dword *pdVar15;
-  dword *pdVar16;
-  uint uVar17;
-  dword dVar18;
-  dword *pdVar19;
-  int *piVar20;
-  dword *pdVar21;
-  float fVar22;
-  int iVar23;
+  undefined4 *patternDesc;
+  int *rectPtr;
   uint *lastHeader;
-  int iVar25;
-  dword *pdVar26;
-  float fVar27;
-  float fVar28;
   uint cmdCapacity;
-  dword *pdVar30;
-  int iVar31;
   uint cmdWordsLeft;
-  uint uVar33;
-  int iVar34;
-  uint uVar35;
-  int iVar36;
-  uint uVar37;
+  uint nextTileLeft;
+  uint tileLeft;
   uint idxPlus8Block1;
-  int iVar39;
-  int iVar40;
-  int iVar41;
   uint fillColor;
-  int iVar43;
   dword *cmdWrite;
-  int iVar45;
-  int iVar46;
-  int iVar47;
   undefined4 *rectEntry;
-  int iVar49;
-  int iVar50;
-  int iVar51;
-  float local_308;
-  float local_304;
-  float local_300;
-  uint local_2fc;
-  float local_2f8;
-  float local_2f4;
-  float local_2f0;
+  int progIdx95;
+  int progIdx96;
+  float quadSlot0;
+  float quadSlot1;
+  float quadSlot2;
+  uint quadSlot3;
+  float quadSlot4;
+  float quadSlot5;
+  float quadSlot6;
   uint scratchWord0;
   uint scratchWord1;
   uint scratchWord2;
@@ -3153,37 +3118,37 @@ int _radeonFill(accel, unusedArg2, fillFlags, blitFlags, fillReq, patternBuf)
   undefined4 i2dHi4;
   uint i2dLo4;
   undefined4 i2dHi5;
-  int iStack_2b4;
+  int texOriginUInt;
   undefined4 i2dHi6;
-  int iStack_2ac;
+  int texOriginVInt;
   undefined4 i2dHi7;
-  uint uStack_2a4;
+  uint tileTopSpill2;
   undefined4 i2dHi8;
-  uint uStack_29c;
+  uint tileBottomSpill2;
   undefined4 i2dHi9;
-  uint uStack_294;
+  uint fillAlpha1;
   undefined4 i2dHi10;
-  uint uStack_28c;
+  uint fillRed5;
   undefined4 i2dHi11;
-  uint uStack_284;
+  uint fillGreen5;
   undefined4 i2dHi12;
-  uint uStack_27c;
+  uint fillBlue5;
   undefined4 i2dHi13;
-  uint uStack_274;
+  uint fillAlpha8;
   undefined4 i2dHi14;
-  uint uStack_26c;
+  uint fillRed8;
   undefined4 i2dHi15;
-  uint uStack_264;
+  uint fillGreen8;
   undefined4 i2dHi16;
-  uint uStack_25c;
+  uint fillBlue8;
   undefined4 i2dHi17;
-  uint uStack_254;
+  uint tileTopSpill;
   undefined4 i2dHi18;
-  uint uStack_24c;
+  uint tileBottomSpill;
   undefined4 i2dHi19;
-  uint uStack_244;
+  uint curTileLeft;
   undefined4 i2dHi20;
-  uint uStack_23c;
+  uint tileRightSpill;
   undefined4 i2dHi21;
   uint i2dLo5;
   undefined4 i2dHi22;
@@ -3191,13 +3156,13 @@ int _radeonFill(accel, unusedArg2, fillFlags, blitFlags, fillReq, patternBuf)
   undefined4 i2dHi23;
   uint i2dLo7;
   undefined4 i2dHi24;
-  int iStack_20c;
+  int tileWidthSpill;
   undefined4 i2dHi25;
   uint i2dLo8;
   undefined4 i2dHi26;
   uint i2dLo9;
   undefined4 i2dHi27;
-  int iStack_1f4;
+  int tileHeightSpill;
   undefined4 i2dHi28;
   uint i2dLo10;
   undefined4 i2dHi29;
@@ -3209,13 +3174,13 @@ int _radeonFill(accel, unusedArg2, fillFlags, blitFlags, fillReq, patternBuf)
   undefined4 i2dHi32;
   uint i2dLo14;
   undefined4 i2dHi33;
-  uint uStack_1c4;
+  uint dstLeftSpill;
   undefined4 i2dHi34;
-  uint uStack_1bc;
+  uint dstRightSpill;
   undefined4 i2dHi35;
-  uint uStack_1b4;
+  uint dstTopSpill;
   undefined4 i2dHi36;
-  uint uStack_1ac;
+  uint dstBottomSpill;
   undefined4 i2dHi37;
   uint i2dLo15;
   undefined4 i2dHi38;
@@ -3224,16 +3189,16 @@ int _radeonFill(accel, unusedArg2, fillFlags, blitFlags, fillReq, patternBuf)
   uint i2dLo17;
   undefined4 i2dHi40;
   uint i2dLo18;
-  uint local_188;
-  int local_184;
-  int local_180;
-  int local_17c;
-  int local_178;
-  int local_174;
-  int local_170;
-  int local_16c;
-  int local_168;
-  int local_164;
+  uint batchWords;
+  int progIdx94;
+  int progIdx93;
+  int progIdx92;
+  int progIdx91;
+  int progIdx90;
+  int progIdx89;
+  int progIdx88;
+  int progIdx87;
+  int progIdx86;
   int idxPlus36Block2;
   int idxPlus34Block2;
   int idxPlus33Block2;
@@ -3244,11 +3209,11 @@ int _radeonFill(accel, unusedArg2, fillFlags, blitFlags, fillReq, patternBuf)
   int idxPlus27Block2;
   int idxPlus24Block2;
   int idxPlus23Block2;
-  int local_138;
-  float local_134;
-  float local_130;
-  float local_12c;
-  float local_128;
+  int tileHdrByteOff;
+  float fillAlphaF;
+  float fillBlueF;
+  float fillGreenF;
+  float fillRedF;
   uint tileRight;
   uint tileBottom;
   uint tileTop;
@@ -3257,39 +3222,129 @@ int _radeonFill(accel, unusedArg2, fillFlags, blitFlags, fillReq, patternBuf)
   uint dstRight;
   uint dstLeft;
   int textureDesc;
-  uint local_104;
-  int local_100;
-  uint local_fc;
+  uint rectIndex;
+  int rectsPerBatch;
+  uint cmdCapacityFast;
   short screenWidth;
   short screenHeight;
   int tileHeight;
-  int local_f0;
-  float *local_ec;
-  float *local_e8;
-  float *local_e4;
-  dword *local_e0;
-  float *local_dc;
-  float *local_d8;
-  float *local_d4;
-  dword *local_d0;
+  int picOffset;
+  float *quadSlot0Ptr;
+  float *quadSlot1Ptr;
+  float *quadSlot2Ptr;
+  dword *quadSlot3Ptr;
+  float *quadSlot4Ptr;
+  float *quadSlot5Ptr;
+  float *quadSlot6Ptr;
+  dword *scratchWord2Ref;
   uint tileBottomHi;
   uint tileTopHi;
   uint maskBit;
-  float *local_c0;
+  float *quadSlot2PtrB;
   uint colorBits;
+  dword maskWord;
+  dword texV1Bits;
+  dword scrV1Bits;
+  double fillRed5D;
+  float texOriginV;
+  float tileTopF;
+  float tileBottomF;
+  float texOriginU;
+  float quadRightF;
+  float texU0;
+  float scrU1;
+  float scrU0;
+  float texV0;
+  float scrV0;
+  float texU1;
+  int progIdx103;
+  int tileIdx24;
+  int vtxIdxZ3;
+  int offscreenResult;
+  int screenFormat;
+  int streamIdxBase;
+  int vtxIdxX0;
+  int progIdx107;
+  int tileIdx6;
+  int vtxByteOffY1;
+  int progByteOff82;
+  int tileIdx4;
+  int vtxByteOffX1;
+  int cmdBuffer;
+  int mapResult;
+  int surfaceFormatWord;
+  int progIdx105;
+  int tileIdx16;
+  int pass2FormatOrWords;
+  int cmdBufferSize;
+  int fillSetupWords;
+  int vtxByteOffZ0;
+  int textureHeightM1;
+  int progIdx106;
+  int tileIdx26;
+  int batchRemaining;
+  int progIdx82;
+  int tileIdx13;
+  int vtxByteOffZ1;
+  int progIdx83;
+  int tileIdx15;
+  int originX;
+  int progIdx84;
+  int tileIdx3;
+  int originY;
+  int progIdx85;
+  int tileIdx18;
+  int vtxByteOffY0;
+  int progIdx98;
+  int tileIdx19;
+  int vtxByteOffY3;
+  int progIdx99;
+  int tileIdx20;
+  int vtxByteOffX3;
+  int progIdx100;
+  int tileIdx21;
+  int vtxByteOffZ2;
+  int progIdx101;
+  int tileIdx22;
+  int vtxByteOffY2;
+  int progIdx102;
+  int tileIdx23;
+  int vtxByteOffX2;
+  int progIdx104;
+  int tileIdx17;
+  int progIdx97;
+  int tileWidth;
+  dword *tileWord1;
+  dword *finalWord1;
+  dword *tileWord3;
+  dword *finalWord2;
+  dword *tileWord4;
+  dword *finalWord3;
+  dword *tileWord5;
+  dword *finalWord4;
+  dword *tileWord2;
+  dword *finalCursor;
+  dword *streamCursor;
+  dword *finalWord5;
+  uint tileRowTop;
+  uint tileRowTopNext;
+  uint textureWidthM1;
+  uint maskCtlWord;
+  uint tileRightLimit;
+  uint batchEnd;
   
   cmdWordsLeft = blitFlags & 0x7ffff000;
   if ((cmdWordsLeft != 0x6000) || ((fillFlags & 0xf000) != 0)) {
     cmdWrite = *(dword **)(accel + 0x80);
-    iVar23 = *(int *)(accel + 0x18);
+    cmdBuffer = *(int *)(accel + 0x18);
     fillColor = fillReq[5];
-    cmdCapacity = *(int *)(iVar23 + 0x10) - 7;
+    cmdCapacity = *(int *)(cmdBuffer + 0x10) - 7;
     if ((cmdWrite != (dword *)0x0) &&
-       ((iVar12 = ((int (*)())_createOffscreenBuffer)(accel,accel + 0x4c,(uint)(*(int *)(accel + 0x70) == 3)),
-        iVar12 != 0 &&
-        (iVar12 = ((int (*)())_createTextureBuffer)(accel,0x40,0x40,(uint)(*(int *)(accel + 0x70) == 3)),
-        iVar12 != 0)))) {
-      local_f0 = 0x8284;
+       ((offscreenResult = ((int (*)())_createOffscreenBuffer)(accel,accel + 0x4c,(uint)(*(int *)(accel + 0x70) == 3)),
+        offscreenResult != 0 &&
+        (offscreenResult = ((int (*)())_createTextureBuffer)(accel,0x40,0x40,(uint)(*(int *)(accel + 0x70) == 3)),
+        offscreenResult != 0)))) {
+      picOffset = 0x8284;
       textureDesc = DAT_0000e748 + 0xc;
       if (cmdWordsLeft != 0x6000) {
         _fillTextureWithPattern(patternBuf,cmdWordsLeft,*fillReq,fillReq[1]);
@@ -3297,11 +3352,11 @@ int _radeonFill(accel, unusedArg2, fillFlags, blitFlags, fillReq, patternBuf)
       else {
         _fillTextureWithPattern(patternBuf,0x6000,patternBuf,patternBuf);
       }
-      cmdWordsLeft = cmdCapacity - ((int)cmdWrite - (iVar23 + 0x20) >> 2);
+      cmdWordsLeft = cmdCapacity - ((int)cmdWrite - (cmdBuffer + 0x20) >> 2);
       if (fillReq[0x16] != 0) {
         colorBits = fillColor & 0x7c00;
         maskBit = (fillFlags & 0xc000) >> 0xe & 1;
-        local_104 = 0;
+        rectIndex = 0;
         noMaskFlags = (fillFlags & 0xc000) == 0;
         rectEntry = fillReq;
         do {
@@ -3313,50 +3368,50 @@ int _radeonFill(accel, unusedArg2, fillFlags, blitFlags, fillReq, patternBuf)
           if (dstTop + 8 < dstBottom) {
             tileBottom = dstTop + 8;
           }
-          iStack_2b4 = (dstLeft & 7) + fillReq[2];
-          iStack_2ac = (dstTop & 7) + fillReq[3];
+          texOriginUInt = (dstLeft & 7) + fillReq[2];
+          texOriginVInt = (dstTop & 7) + fillReq[3];
           i2dHi5 = 0x43300000;
           i2dHi6 = 0x43300000;
-          fVar9 = (float)((double)CONCAT44(0x43300000,iStack_2b4) - 4503599627370496.0);
-          fVar1 = (float)((double)CONCAT44(0x43300000,iStack_2ac) - 4503599627370496.0);
+          texOriginU = (float)((double)CONCAT44(0x43300000,texOriginUInt) - 4503599627370496.0);
+          texOriginV = (float)((double)CONCAT44(0x43300000,texOriginVInt) - 4503599627370496.0);
           if (dstTop < dstBottom) {
             idxPlus8Block1 = dstLeft + 8;
-            uVar33 = dstRight;
+            tileRightLimit = dstRight;
             if (idxPlus8Block1 < dstRight) {
-              uVar33 = idxPlus8Block1;
+              tileRightLimit = idxPlus8Block1;
             }
             i2dHi10 = 0x43300000;
             firstTile = true;
-            uStack_28c = colorBits >> 10;
-            dVar6 = (double)CONCAT44(0x43300000,uStack_28c);
-            uVar17 = dstTop;
+            fillRed5 = colorBits >> 10;
+            fillRed5D = (double)CONCAT44(0x43300000,fillRed5);
+            tileRowTop = dstTop;
             do {
-              tileTop = uVar17;
+              tileTop = tileRowTop;
               if (dstLeft < dstRight) {
                 if (!firstTile) {
-                  local_ec = &local_308;
+                  quadSlot0Ptr = &quadSlot0;
                   i2dHi7 = 0x43300000;
                   i2dHi8 = 0x43300000;
-                  uStack_2a4 = tileTop;
-                  uStack_29c = tileBottom;
+                  tileTopSpill2 = tileTop;
+                  tileBottomSpill2 = tileBottom;
                   tileBottomHi = tileBottom << 0x10;
-                  local_e0 = &local_2fc;
-                  local_dc = &local_2f8;
+                  quadSlot3Ptr = &quadSlot3;
+                  quadSlot4Ptr = &quadSlot4;
                   tileTopHi = tileTop << 0x10;
-                  local_e4 = &local_300;
-                  local_d4 = &local_2f0;
-                  local_d0 = &scratchWord2;
-                  local_d8 = &local_2f4;
-                  local_e8 = &local_304;
+                  quadSlot2Ptr = &quadSlot2;
+                  quadSlot6Ptr = &quadSlot6;
+                  scratchWord2Ref = &scratchWord2;
+                  quadSlot5Ptr = &quadSlot5;
+                  quadSlot1Ptr = &quadSlot1;
                   tileHeight = tileBottom - tileTop;
-                  fVar2 = (float)((double)CONCAT44(0x43300000,tileTop) - 4503599627370496.0);
-                  fVar3 = (float)((double)CONCAT44(0x43300000,tileBottom) - 4503599627370496.0);
-                  uVar17 = idxPlus8Block1;
-                  uVar37 = dstLeft;
-                  tileRight = uVar33;
+                  tileTopF = (float)((double)CONCAT44(0x43300000,tileTop) - 4503599627370496.0);
+                  tileBottomF = (float)((double)CONCAT44(0x43300000,tileBottom) - 4503599627370496.0);
+                  tileRowTopNext = idxPlus8Block1;
+                  tileLeft = dstLeft;
+                  tileRight = tileRightLimit;
                   goto LAB_00008bec;
                 }
-                uVar35 = idxPlus8Block1;
+                nextTileLeft = idxPlus8Block1;
                 if (cmdWordsLeft < 0xd4) {
                   scratchWord0 = *(uint *)(accel + 0x18);
                   scratchWord1 = 0;
@@ -3370,495 +3425,495 @@ int _radeonFill(accel, unusedArg2, fillFlags, blitFlags, fillReq, patternBuf)
                   taskPtr = PTR_0000e694;
                   lastHeader = *(uint **)(accel + 0x7c);
                   *lastHeader = ((int)cmdWrite - (int)lastHeader >> 2) + scratchWord1 | *lastHeader;
-                  iVar23 = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,
+                  mapResult = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,
                                                *(undefined4 *)taskPtr,&scratchWord0,&scratchWord1,1);
-                  uStack_244 = dstLeft;
-                  if (iVar23 == 0) {
-                    local_e8 = &local_304;
-                    local_e0 = &local_2fc;
-                    local_d0 = &scratchWord2;
+                  curTileLeft = dstLeft;
+                  if (mapResult == 0) {
+                    quadSlot1Ptr = &quadSlot1;
+                    quadSlot3Ptr = &quadSlot3;
+                    scratchWord2Ref = &scratchWord2;
                     *(undefined4 *)(scratchWord0 + 0x1c) = 0;
-                    local_ec = &local_308;
-                    local_e4 = &local_300;
-                    local_dc = &local_2f8;
-                    local_d4 = &local_2f0;
+                    quadSlot0Ptr = &quadSlot0;
+                    quadSlot2Ptr = &quadSlot2;
+                    quadSlot4Ptr = &quadSlot4;
+                    quadSlot6Ptr = &quadSlot6;
                     tileTopHi = tileTop << 0x10;
                     tileBottomHi = tileBottom << 0x10;
                     cmdWrite = (dword *)(scratchWord0 + 0x20);
-                    pdVar21 = (dword *)(scratchWord0 + 0x38);
-                    pdVar15 = (dword *)(scratchWord0 + 0x24);
-                    local_d8 = &local_2f4;
-                    pdVar16 = (dword *)(scratchWord0 + 0x2c);
-                    pdVar30 = (dword *)(scratchWord0 + 0x28);
+                    streamCursor = (dword *)(scratchWord0 + 0x38);
+                    tileWord1 = (dword *)(scratchWord0 + 0x24);
+                    quadSlot5Ptr = &quadSlot5;
+                    tileWord3 = (dword *)(scratchWord0 + 0x2c);
+                    tileWord2 = (dword *)(scratchWord0 + 0x28);
                     tileHeight = tileBottom - tileTop;
-                    pdVar19 = (dword *)(scratchWord0 + 0x30);
-                    pdVar26 = (dword *)(scratchWord0 + 0x34);
+                    tileWord4 = (dword *)(scratchWord0 + 0x30);
+                    tileWord5 = (dword *)(scratchWord0 + 0x34);
                     *(uint *)(accel + 0x7c) = scratchWord0 + 0x1c;
                     *(uint *)(accel + 0x18) = scratchWord0;
                     cmdWordsLeft = cmdCapacity;
-                    tileRight = uVar33;
+                    tileRight = tileRightLimit;
                   }
                   else {
-                    local_d0 = &scratchWord2;
-                    local_e0 = &local_2fc;
-                    local_e8 = &local_304;
-                    local_ec = &local_308;
+                    scratchWord2Ref = &scratchWord2;
+                    quadSlot3Ptr = &quadSlot3;
+                    quadSlot1Ptr = &quadSlot1;
+                    quadSlot0Ptr = &quadSlot0;
                     cmdWrite = (dword *)0x0;
-                    local_e4 = &local_300;
-                    local_dc = &local_2f8;
-                    pdVar15 = &__mh_bundle_header.cputype;
+                    quadSlot2Ptr = &quadSlot2;
+                    quadSlot4Ptr = &quadSlot4;
+                    tileWord1 = &__mh_bundle_header.cputype;
                     tileBottomHi = tileBottom << 0x10;
-                    local_d4 = &local_2f0;
-                    pdVar30 = &__mh_bundle_header.cpusubtype;
-                    pdVar16 = &__mh_bundle_header.filetype;
-                    pdVar19 = &__mh_bundle_header.ncmds;
-                    pdVar26 = &__mh_bundle_header.sizeofcmds;
-                    pdVar21 = &__mh_bundle_header.flags;
+                    quadSlot6Ptr = &quadSlot6;
+                    tileWord2 = &__mh_bundle_header.cpusubtype;
+                    tileWord3 = &__mh_bundle_header.filetype;
+                    tileWord4 = &__mh_bundle_header.ncmds;
+                    tileWord5 = &__mh_bundle_header.sizeofcmds;
+                    streamCursor = &__mh_bundle_header.flags;
                     tileTopHi = tileTop << 0x10;
-                    local_d8 = &local_2f4;
+                    quadSlot5Ptr = &quadSlot5;
                     tileHeight = tileBottom - tileTop;
                     *(undefined4 *)(accel + 0x7c) = 0;
                     *(undefined4 *)(accel + 0x18) = 0;
                     cmdWordsLeft = cmdCapacity;
-                    tileRight = uVar33;
+                    tileRight = tileRightLimit;
                   }
                 }
                 else {
-                  local_d0 = &scratchWord2;
-                  local_e0 = &local_2fc;
-                  local_e8 = &local_304;
-                  local_ec = &local_308;
-                  pdVar15 = cmdWrite + 1;
-                  pdVar30 = cmdWrite + 2;
-                  local_e4 = &local_300;
-                  pdVar16 = cmdWrite + 3;
-                  local_dc = &local_2f8;
-                  pdVar19 = cmdWrite + 4;
+                  scratchWord2Ref = &scratchWord2;
+                  quadSlot3Ptr = &quadSlot3;
+                  quadSlot1Ptr = &quadSlot1;
+                  quadSlot0Ptr = &quadSlot0;
+                  tileWord1 = cmdWrite + 1;
+                  tileWord2 = cmdWrite + 2;
+                  quadSlot2Ptr = &quadSlot2;
+                  tileWord3 = cmdWrite + 3;
+                  quadSlot4Ptr = &quadSlot4;
+                  tileWord4 = cmdWrite + 4;
                   tileBottomHi = tileBottom << 0x10;
-                  local_d4 = &local_2f0;
-                  pdVar26 = cmdWrite + 5;
-                  pdVar21 = cmdWrite + 6;
+                  quadSlot6Ptr = &quadSlot6;
+                  tileWord5 = cmdWrite + 5;
+                  streamCursor = cmdWrite + 6;
                   tileTopHi = tileTop << 0x10;
-                  local_d8 = &local_2f4;
+                  quadSlot5Ptr = &quadSlot5;
                   tileHeight = tileBottom - tileTop;
-                  uStack_244 = dstLeft;
-                  tileRight = uVar33;
+                  curTileLeft = dstLeft;
+                  tileRight = tileRightLimit;
                 }
                 do {
                   lastHeader = *(uint **)(accel + 0x7c);
                   *lastHeader = (int)cmdWrite - (int)lastHeader >> 2 | *lastHeader;
                   *(dword **)(accel + 0x7c) = cmdWrite;
                   *cmdWrite = 0xa000000;
-                  *pdVar15 = *(dword *)(accel + 0x84);
+                  *tileWord1 = *(dword *)(accel + 0x84);
                   lastHeader = *(uint **)(accel + 0x7c);
-                  *lastHeader = (int)pdVar30 - (int)lastHeader >> 2 | *lastHeader;
-                  *(dword **)(accel + 0x7c) = pdVar30;
-                  *pdVar30 = 0x10000000;
-                  *pdVar16 = *(dword *)*DAT_0000e6e4;
-                  *pdVar19 = DAT_0000e6e4[7];
+                  *lastHeader = (int)tileWord2 - (int)lastHeader >> 2 | *lastHeader;
+                  *(dword **)(accel + 0x7c) = tileWord2;
+                  *tileWord2 = 0x10000000;
+                  *tileWord3 = *(dword *)*DAT_0000e6e4;
+                  *tileWord4 = DAT_0000e6e4[7];
                   if (DAT_0000e6c0 == 0x10) {
-                    *pdVar26 = 3;
+                    *tileWord5 = 3;
                   }
                   else {
-                    *pdVar26 = 6;
+                    *tileWord5 = 6;
                   }
                   lastHeader = *(uint **)(accel + 0x7c);
-                  *lastHeader = (int)pdVar21 - (int)lastHeader >> 2 | *lastHeader;
-                  *(dword **)(accel + 0x7c) = pdVar21;
-                  *pdVar21 = 0x13000000;
-                  pdVar21[1] = *(undefined4 *)**(undefined4 **)(local_f0 + 0x64c4);
-                  pdVar21[2] = 0;
-                  cmdWrite = pdVar21 + 4;
-                  pdVar21[3] = 0;
-                  iVar12 = *(int *)(accel + 0x70);
+                  *lastHeader = (int)streamCursor - (int)lastHeader >> 2 | *lastHeader;
+                  *(dword **)(accel + 0x7c) = streamCursor;
+                  *streamCursor = 0x13000000;
+                  streamCursor[1] = *(undefined4 *)**(undefined4 **)(picOffset + 0x64c4);
+                  streamCursor[2] = 0;
+                  cmdWrite = streamCursor + 4;
+                  streamCursor[3] = 0;
+                  screenFormat = *(int *)(accel + 0x70);
                   cmdWordsLeft = cmdWordsLeft - 10;
                   *cmdWrite = 0x850;
-                  pdVar21[5] = 0x100;
-                  pdVar21[6] = 0x887;
-                  pdVar21[7] = 0x1c000;
-                  pdVar21[8] = 0x82c;
-                  pdVar21[9] = 0;
-                  pdVar21[10] = 0x1002;
-                  pdVar21[0xb] = 0;
-                  pdVar21[0xc] = 0x824;
-                  pdVar21[0xd] = 1;
-                  pdVar21[0xe] = 0x825;
-                  pdVar21[0xf] = 0x12;
-                  pdVar21[0x10] = 0x82d;
-                  pdVar21[0x11] = 5;
-                  pdVar21[0x12] = 0x854;
-                  pdVar21[0x13] = 0x6010006;
-                  pdVar21[0x14] = 0x855;
-                  pdVar21[0x15] = 0x2701;
-                  pdVar21[0x16] = 0x878;
-                  pdVar21[0x17] = 0xf688f688;
-                  pdVar21[0x18] = 0x879;
-                  pdVar21[0x19] = 0xfb24f688;
-                  pdVar21[0x1a] = 0x10a2;
-                  pdVar21[0x1b] = 0;
-                  pdVar21[0x1c] = 0x1381;
-                  pdVar21[0x1d] = 0;
-                  pdVar21[0x1e] = 0x109e;
-                  pdVar21[0x1f] = 5;
-                  pdVar21[0x20] = 0x1383;
-                  pdVar21[0x21] = 0xf;
-                  pdVar21[0x22] = 0x1004;
-                  pdVar21[0x23] = 0x66666666;
-                  pdVar21[0x24] = 0x1005;
-                  pdVar21[0x25] = 0x66666666;
-                  pdVar21[0x26] = 0x10ae;
-                  pdVar21[0x27] = 0;
-                  pdVar21[0x28] = 0x10ea;
-                  pdVar21[0x29] = 0x2da49525;
-                  pdVar21[0x2a] = 0x10fa;
-                  pdVar21[0x2b] = 0xffffff;
-                  pdVar21[0x2c] = 0x10f4;
-                  pdVar21[0x2d] = 0xffff;
-                  pdVar21[0x2e] = 0x10f8;
-                  pdVar21[0x2f] = 0;
-                  pdVar21[0x30] = 0x10f9;
-                  pdVar21[0x31] =
+                  streamCursor[5] = 0x100;
+                  streamCursor[6] = 0x887;
+                  streamCursor[7] = 0x1c000;
+                  streamCursor[8] = 0x82c;
+                  streamCursor[9] = 0;
+                  streamCursor[10] = 0x1002;
+                  streamCursor[0xb] = 0;
+                  streamCursor[0xc] = 0x824;
+                  streamCursor[0xd] = 1;
+                  streamCursor[0xe] = 0x825;
+                  streamCursor[0xf] = 0x12;
+                  streamCursor[0x10] = 0x82d;
+                  streamCursor[0x11] = 5;
+                  streamCursor[0x12] = 0x854;
+                  streamCursor[0x13] = 0x6010006;
+                  streamCursor[0x14] = 0x855;
+                  streamCursor[0x15] = 0x2701;
+                  streamCursor[0x16] = 0x878;
+                  streamCursor[0x17] = 0xf688f688;
+                  streamCursor[0x18] = 0x879;
+                  streamCursor[0x19] = 0xfb24f688;
+                  streamCursor[0x1a] = 0x10a2;
+                  streamCursor[0x1b] = 0;
+                  streamCursor[0x1c] = 0x1381;
+                  streamCursor[0x1d] = 0;
+                  streamCursor[0x1e] = 0x109e;
+                  streamCursor[0x1f] = 5;
+                  streamCursor[0x20] = 0x1383;
+                  streamCursor[0x21] = 0xf;
+                  streamCursor[0x22] = 0x1004;
+                  streamCursor[0x23] = 0x66666666;
+                  streamCursor[0x24] = 0x1005;
+                  streamCursor[0x25] = 0x66666666;
+                  streamCursor[0x26] = 0x10ae;
+                  streamCursor[0x27] = 0;
+                  streamCursor[0x28] = 0x10ea;
+                  streamCursor[0x29] = 0x2da49525;
+                  streamCursor[0x2a] = 0x10fa;
+                  streamCursor[0x2b] = 0xffffff;
+                  streamCursor[0x2c] = 0x10f4;
+                  streamCursor[0x2d] = 0xffff;
+                  streamCursor[0x2e] = 0x10f8;
+                  streamCursor[0x2f] = 0;
+                  streamCursor[0x30] = 0x10f9;
+                  streamCursor[0x31] =
                        *(uint *)(accel + 0x54) & 0x1fff |
                        (*(uint *)(accel + 0x58) & 0x1fff) << 0xd;
-                  pdVar21[0x32] = 0x13c0;
-                  pdVar21[0x33] = 0;
-                  pdVar21[0x34] = 0x13c1;
-                  pdVar21[0x35] = 0;
-                  pdVar21[0x36] = 0x10c0;
-                  pdVar21[0x37] = 0x40004;
-                  pdVar21[0x38] = 0x10c1;
-                  pdVar21[0x39] = 1;
-                  pdVar21[0x3a] = 0x10c8;
-                  pdVar21[0x3b] = 0x10;
-                  pdVar21[0x3c] = 0x10c9;
-                  pdVar21[0x3d] = 0x31;
-                  pdVar21[0x3e] = 0x101d;
-                  pdVar21[0x3f] = 0x28ffe040;
-                  pdVar21[0x40] = 0x101e;
-                  pdVar21[0x41] = 0x28ffe0c2;
-                  pdVar21[0x42] = 0x1041;
-                  pdVar21[0x43] = 3;
-                  pdVar21[0x44] = 0x1040;
-                  pdVar21[0x45] = 0;
-                  pdVar21[0x46] = 0x1100;
-                  pdVar21[0x47] = 0x2a92;
-                  pdVar21[0x48] = 0x1101;
-                  pdVar21[0x49] = 0x10002a92;
-                  pdVar21[0x4a] = 0x1120;
+                  streamCursor[0x32] = 0x13c0;
+                  streamCursor[0x33] = 0;
+                  streamCursor[0x34] = 0x13c1;
+                  streamCursor[0x35] = 0;
+                  streamCursor[0x36] = 0x10c0;
+                  streamCursor[0x37] = 0x40004;
+                  streamCursor[0x38] = 0x10c1;
+                  streamCursor[0x39] = 1;
+                  streamCursor[0x3a] = 0x10c8;
+                  streamCursor[0x3b] = 0x10;
+                  streamCursor[0x3c] = 0x10c9;
+                  streamCursor[0x3d] = 0x31;
+                  streamCursor[0x3e] = 0x101d;
+                  streamCursor[0x3f] = 0x28ffe040;
+                  streamCursor[0x40] = 0x101e;
+                  streamCursor[0x41] = 0x28ffe0c2;
+                  streamCursor[0x42] = 0x1041;
+                  streamCursor[0x43] = 3;
+                  streamCursor[0x44] = 0x1040;
+                  streamCursor[0x45] = 0;
+                  streamCursor[0x46] = 0x1100;
+                  streamCursor[0x47] = 0x2a92;
+                  streamCursor[0x48] = 0x1101;
+                  streamCursor[0x49] = 0x10002a92;
+                  streamCursor[0x4a] = 0x1120;
                   screenWidth = *(short *)(accel + 0x50);
                   screenHeight = *(short *)(accel + 0x52);
-                  pdVar21[0x4b] =
+                  streamCursor[0x4b] =
                        (int)screenWidth - 1U & 0x7ff | (screenHeight + -1) * 0x800 & 0x3ff800U | 0x80000000
                   ;
-                  pdVar21[0x4c] = 0x1121;
-                  uVar17 = (int)*(short *)(textureDesc + 4) - 1;
-                  iVar25 = *(short *)(textureDesc + 6) + -1;
-                  pdVar21[0x4d] = uVar17 & 0x7ff | iVar25 * 0x800 & 0x3ff800U | 0x80000000;
-                  pdVar21[0x4e] = 0x1130;
-                  iVar23 = 0x5300c - (uint)(iVar12 == 3);
-                  pdVar21[0x4f] = iVar23;
-                  pdVar21[0x50] = 0x1131;
-                  pdVar21[0x51] = iVar23;
-                  pdVar21[0x52] = 0x1140;
-                  pdVar21[0x53] =
+                  streamCursor[0x4c] = 0x1121;
+                  textureWidthM1 = (int)*(short *)(textureDesc + 4) - 1;
+                  textureHeightM1 = *(short *)(textureDesc + 6) + -1;
+                  streamCursor[0x4d] = textureWidthM1 & 0x7ff | textureHeightM1 * 0x800 & 0x3ff800U | 0x80000000;
+                  streamCursor[0x4e] = 0x1130;
+                  surfaceFormatWord = 0x5300c - (uint)(screenFormat == 3);
+                  streamCursor[0x4f] = surfaceFormatWord;
+                  streamCursor[0x50] = 0x1131;
+                  streamCursor[0x51] = surfaceFormatWord;
+                  streamCursor[0x52] = 0x1140;
+                  streamCursor[0x53] =
                        *(int *)(accel + 0x5c) - 1U & 0x3fff | ((int)screenWidth - 1U) * 0x10 & 0x8000
                        | (screenHeight + -1) * 0x20 & 0x10000U;
-                  pdVar21[0x54] = 0x1141;
-                  pdVar21[0x55] =
-                       *(int *)(textureDesc + 0x10) - 1U & 0x3fff | uVar17 * 0x10 & 0x8000 |
-                       iVar25 * 0x20 & 0x10000U;
+                  streamCursor[0x54] = 0x1141;
+                  streamCursor[0x55] =
+                       *(int *)(textureDesc + 0x10) - 1U & 0x3fff | textureWidthM1 * 0x10 & 0x8000 |
+                       textureHeightM1 * 0x20 & 0x10000U;
                   if (noMaskFlags) {
-                    iVar31 = 0x52;
-                    iVar14 = 0x148;
-                    local_164 = 0x56;
-                    local_168 = 0x57;
-                    local_16c = 0x58;
-                    local_170 = 0x59;
-                    local_174 = 0x5a;
-                    local_178 = 0x5b;
-                    local_17c = 0x5c;
-                    local_180 = 0x5d;
-                    iVar50 = 0x5f;
-                    local_184 = 0x5e;
-                    iVar34 = 0x53;
-                    iVar36 = 0x54;
-                    iVar51 = 0x60;
-                    iVar39 = 0x55;
-                    iVar49 = 0x61;
-                    iVar40 = 0x62;
-                    iVar41 = 99;
-                    iVar43 = 100;
-                    iVar45 = 0x65;
-                    iVar46 = 0x66;
-                    iVar10 = 0x67;
-                    iVar47 = 0x68;
-                    iVar23 = 0x69;
-                    iVar25 = 0x6a;
-                    iVar13 = 0x6b;
-                    iVar12 = 0x6c;
+                    progIdx82 = 0x52;
+                    progByteOff82 = 0x148;
+                    progIdx86 = 0x56;
+                    progIdx87 = 0x57;
+                    progIdx88 = 0x58;
+                    progIdx89 = 0x59;
+                    progIdx90 = 0x5a;
+                    progIdx91 = 0x5b;
+                    progIdx92 = 0x5c;
+                    progIdx93 = 0x5d;
+                    progIdx95 = 0x5f;
+                    progIdx94 = 0x5e;
+                    progIdx83 = 0x53;
+                    progIdx84 = 0x54;
+                    progIdx96 = 0x60;
+                    progIdx85 = 0x55;
+                    progIdx97 = 0x61;
+                    progIdx98 = 0x62;
+                    progIdx99 = 99;
+                    progIdx100 = 100;
+                    progIdx101 = 0x65;
+                    progIdx102 = 0x66;
+                    progIdx103 = 0x67;
+                    progIdx104 = 0x68;
+                    progIdx105 = 0x69;
+                    progIdx106 = 0x6a;
+                    progIdx107 = 0x6b;
+                    streamIdxBase = 0x6c;
                   }
                   else {
-                    if (iVar12 == 3) {
-                      uStack_284 = fillColor >> 5 & 0x1f;
-                      uStack_27c = fillColor & 0x1f;
-                      uStack_294 = fillColor >> 0xf & 1;
+                    if (screenFormat == 3) {
+                      fillGreen5 = fillColor >> 5 & 0x1f;
+                      fillBlue5 = fillColor & 0x1f;
+                      fillAlpha1 = fillColor >> 0xf & 1;
                       i2dHi11 = 0x43300000;
                       i2dHi12 = 0x43300000;
                       i2dHi9 = 0x43300000;
-                      local_128 = (float)(dVar6 - 4503599627370496.0) / 31.0;
-                      local_12c = (float)((double)CONCAT44(0x43300000,uStack_284) -
+                      fillRedF = (float)(fillRed5D - 4503599627370496.0) / 31.0;
+                      fillGreenF = (float)((double)CONCAT44(0x43300000,fillGreen5) -
                                          4503599627370496.0) / 31.0;
-                      local_130 = (float)((double)CONCAT44(0x43300000,uStack_27c) -
+                      fillBlueF = (float)((double)CONCAT44(0x43300000,fillBlue5) -
                                          4503599627370496.0) / 31.0;
-                      local_134 = (float)((double)CONCAT44(0x43300000,uStack_294) -
+                      fillAlphaF = (float)((double)CONCAT44(0x43300000,fillAlpha1) -
                                          4503599627370496.0);
                     }
                     else {
-                      uStack_274 = fillColor >> 0x18;
-                      uStack_26c = fillColor >> 0x10 & 0xff;
-                      uStack_25c = fillColor & 0xff;
-                      uStack_264 = fillColor >> 8 & 0xff;
+                      fillAlpha8 = fillColor >> 0x18;
+                      fillRed8 = fillColor >> 0x10 & 0xff;
+                      fillBlue8 = fillColor & 0xff;
+                      fillGreen8 = fillColor >> 8 & 0xff;
                       i2dHi13 = 0x43300000;
                       i2dHi14 = 0x43300000;
                       i2dHi15 = 0x43300000;
                       i2dHi16 = 0x43300000;
-                      local_134 = (float)((double)CONCAT44(0x43300000,uStack_274) -
+                      fillAlphaF = (float)((double)CONCAT44(0x43300000,fillAlpha8) -
                                          4503599627370496.0) / 255.0;
-                      local_128 = (float)((double)CONCAT44(0x43300000,uStack_26c) -
+                      fillRedF = (float)((double)CONCAT44(0x43300000,fillRed8) -
                                          4503599627370496.0) / 255.0;
-                      local_130 = (float)((double)CONCAT44(0x43300000,uStack_25c) -
+                      fillBlueF = (float)((double)CONCAT44(0x43300000,fillBlue8) -
                                          4503599627370496.0) / 255.0;
-                      local_12c = (float)((double)CONCAT44(0x43300000,uStack_264) -
+                      fillGreenF = (float)((double)CONCAT44(0x43300000,fillGreen8) -
                                          4503599627370496.0) / 255.0;
                     }
-                    pdVar21[0x56] = 0x1094;
-                    pdVar21[0x57] = 0x10000;
-                    pdVar21[0x58] = 0x1095;
-                    pdVar21[0x59] = (dword)GH_F2U(local_128);
-                    pdVar21[0x5a] = 0x1095;
-                    pdVar21[0x5b] = (dword)GH_F2U(local_12c);
-                    pdVar21[0x5c] = 0x1095;
-                    pdVar21[0x5d] = (dword)GH_F2U(local_130);
-                    pdVar21[0x5e] = 0x1095;
-                    pdVar21[0x5f] = (dword)GH_F2U(local_134);
-                    iVar31 = 0x5c;
-                    iVar14 = 0x170;
-                    local_164 = 0x60;
-                    local_168 = 0x61;
-                    local_16c = 0x62;
-                    local_170 = 99;
-                    local_174 = 100;
-                    local_178 = 0x65;
-                    local_17c = 0x66;
-                    local_180 = 0x67;
-                    iVar50 = 0x69;
-                    local_184 = 0x68;
-                    iVar34 = 0x5d;
-                    iVar36 = 0x5e;
-                    iVar51 = 0x6a;
-                    iVar39 = 0x5f;
-                    iVar49 = 0x6b;
-                    iVar40 = 0x6c;
-                    iVar41 = 0x6d;
-                    iVar43 = 0x6e;
-                    iVar45 = 0x6f;
-                    iVar46 = 0x70;
-                    iVar10 = 0x71;
-                    iVar47 = 0x72;
-                    iVar23 = 0x73;
-                    iVar25 = 0x74;
-                    iVar13 = 0x75;
-                    iVar12 = 0x76;
+                    streamCursor[0x56] = 0x1094;
+                    streamCursor[0x57] = 0x10000;
+                    streamCursor[0x58] = 0x1095;
+                    streamCursor[0x59] = (dword)GH_F2U(fillRedF);
+                    streamCursor[0x5a] = 0x1095;
+                    streamCursor[0x5b] = (dword)GH_F2U(fillGreenF);
+                    streamCursor[0x5c] = 0x1095;
+                    streamCursor[0x5d] = (dword)GH_F2U(fillBlueF);
+                    streamCursor[0x5e] = 0x1095;
+                    streamCursor[0x5f] = (dword)GH_F2U(fillAlphaF);
+                    progIdx82 = 0x5c;
+                    progByteOff82 = 0x170;
+                    progIdx86 = 0x60;
+                    progIdx87 = 0x61;
+                    progIdx88 = 0x62;
+                    progIdx89 = 99;
+                    progIdx90 = 100;
+                    progIdx91 = 0x65;
+                    progIdx92 = 0x66;
+                    progIdx93 = 0x67;
+                    progIdx95 = 0x69;
+                    progIdx94 = 0x68;
+                    progIdx83 = 0x5d;
+                    progIdx84 = 0x5e;
+                    progIdx96 = 0x6a;
+                    progIdx85 = 0x5f;
+                    progIdx97 = 0x6b;
+                    progIdx98 = 0x6c;
+                    progIdx99 = 0x6d;
+                    progIdx100 = 0x6e;
+                    progIdx101 = 0x6f;
+                    progIdx102 = 0x70;
+                    progIdx103 = 0x71;
+                    progIdx104 = 0x72;
+                    progIdx105 = 0x73;
+                    progIdx106 = 0x74;
+                    progIdx107 = 0x75;
+                    streamIdxBase = 0x76;
                   }
-                  *(undefined4 *)((int)cmdWrite + iVar14) = 0x1094;
-                  cmdWrite[iVar34] = 0;
-                  cmdWrite[iVar36] = 0x1095;
-                  cmdWrite[iVar39] = 0x7803;
-                  cmdWrite[local_164] = 0x1095;
-                  cmdWrite[local_168] = 0x2410000;
-                  cmdWrite[local_16c] = 0x1095;
-                  cmdWrite[local_170] = 0x3901e401;
-                  cmdWrite[local_174] = 0x1095;
-                  cmdWrite[local_178] = 0;
-                  cmdWrite[local_17c] = 0x1095;
-                  cmdWrite[local_180] = 0;
-                  cmdWrite[local_184] = 0x1095;
-                  cmdWrite[iVar50] = 0;
+                  *(undefined4 *)((int)cmdWrite + progByteOff82) = 0x1094;
+                  cmdWrite[progIdx83] = 0;
+                  cmdWrite[progIdx84] = 0x1095;
+                  cmdWrite[progIdx85] = 0x7803;
+                  cmdWrite[progIdx86] = 0x1095;
+                  cmdWrite[progIdx87] = 0x2410000;
+                  cmdWrite[progIdx88] = 0x1095;
+                  cmdWrite[progIdx89] = 0x3901e401;
+                  cmdWrite[progIdx90] = 0x1095;
+                  cmdWrite[progIdx91] = 0;
+                  cmdWrite[progIdx92] = 0x1095;
+                  cmdWrite[progIdx93] = 0;
+                  cmdWrite[progIdx94] = 0x1095;
+                  cmdWrite[progIdx95] = 0;
                   if (noMaskFlags) {
-                    cmdWrite[iVar51] = 0x1095;
-                    cmdWrite[iVar49] = 0x78105;
-                    cmdWrite[iVar40] = 0x1095;
-                    cmdWrite[iVar41] = 1;
-                    cmdWrite[iVar43] = 0x1095;
-                    cmdWrite[iVar45] = 1;
-                    cmdWrite[iVar46] = 0x1095;
-                    cmdWrite[iVar10] = 0xdb0220;
-                    cmdWrite[iVar47] = 0x1095;
-                    cmdWrite[iVar23] = 0xc0c006;
-                    cmdWrite[iVar25] = 0x1095;
-                    cmdWrite[iVar13] = 0x20490000;
+                    cmdWrite[progIdx96] = 0x1095;
+                    cmdWrite[progIdx97] = 0x78105;
+                    cmdWrite[progIdx98] = 0x1095;
+                    cmdWrite[progIdx99] = 1;
+                    cmdWrite[progIdx100] = 0x1095;
+                    cmdWrite[progIdx101] = 1;
+                    cmdWrite[progIdx102] = 0x1095;
+                    cmdWrite[progIdx103] = 0xdb0220;
+                    cmdWrite[progIdx104] = 0x1095;
+                    cmdWrite[progIdx105] = 0xc0c006;
+                    cmdWrite[progIdx106] = 0x1095;
+                    cmdWrite[progIdx107] = 0x20490000;
                   }
                   else {
-                    cmdWrite[iVar51] = 0x1095;
-                    cmdWrite[iVar49] = 0x7807;
-                    cmdWrite[iVar40] = 0x1095;
-                    cmdWrite[iVar41] = 0x2400000;
-                    cmdWrite[iVar43] = 0x1095;
-                    cmdWrite[iVar45] = 0x3900e400;
-                    cmdWrite[iVar46] = 0x1095;
-                    cmdWrite[iVar10] = 0;
-                    cmdWrite[iVar47] = 0x1095;
-                    cmdWrite[iVar23] = 0;
-                    cmdWrite[iVar25] = 0x1095;
-                    cmdWrite[iVar13] = 0;
-                    cmdWrite[iVar12] = 0x1095;
-                    cmdWrite[iVar31 + 0x1b] = 0x7804;
-                    cmdWrite[iVar31 + 0x1c] = 0x1095;
-                    cmdWrite[iVar31 + 0x1d] = 0x40040000;
-                    cmdWrite[iVar31 + 0x1e] = 0x1095;
-                    cmdWrite[iVar31 + 0x1f] = 0x40040000;
-                    cmdWrite[iVar31 + 0x20] = 0x1095;
-                    cmdWrite[iVar31 + 0x21] = 0xdb0490;
-                    cmdWrite[iVar31 + 0x22] = 0x1095;
-                    cmdWrite[iVar31 + 0x23] = 0xc10026;
-                    cmdWrite[iVar31 + 0x24] = 0x1095;
-                    cmdWrite[iVar31 + 0x25] = 0xdfa23028;
-                    cmdWrite[iVar31 + 0x26] = 0x1095;
-                    cmdWrite[iVar31 + 0x27] = 0x7800;
-                    cmdWrite[iVar31 + 0x28] = 0x1095;
-                    cmdWrite[iVar31 + 0x29] = 2;
-                    cmdWrite[iVar31 + 0x2a] = 0x1095;
-                    cmdWrite[iVar31 + 0x2b] = 2;
-                    cmdWrite[iVar31 + 0x2c] = 0x1095;
-                    cmdWrite[iVar31 + 0x2d] = 0xdb0220;
-                    cmdWrite[iVar31 + 0x2e] = 0x1095;
-                    cmdWrite[iVar31 + 0x2f] = 0xc0c021;
-                    cmdWrite[iVar31 + 0x30] = 0x1095;
-                    cmdWrite[iVar31 + 0x31] = 0x22;
-                    cmdWrite[iVar31 + 0x32] = 0x1095;
-                    cmdWrite[iVar31 + 0x33] = 0x78101;
-                    cmdWrite[iVar31 + 0x34] = 0x1095;
-                    uVar17 = (maskBit ^ 1) << 10 | maskBit | 0x200000;
-                    cmdWrite[iVar31 + 0x35] = uVar17;
-                    cmdWrite[iVar31 + 0x36] = 0x1095;
-                    cmdWrite[iVar31 + 0x37] = uVar17;
-                    cmdWrite[iVar31 + 0x38] = 0x1095;
-                    cmdWrite[iVar31 + 0x39] = 0x440221;
-                    cmdWrite[iVar31 + 0x3a] = 0x1095;
-                    cmdWrite[iVar31 + 0x3b] = 0x60d006;
-                    cmdWrite[iVar31 + 0x3c] = 0x1095;
-                    iVar12 = iVar31 + 0x3e;
-                    cmdWrite[iVar31 + 0x3d] = 0xdda22008;
+                    cmdWrite[progIdx96] = 0x1095;
+                    cmdWrite[progIdx97] = 0x7807;
+                    cmdWrite[progIdx98] = 0x1095;
+                    cmdWrite[progIdx99] = 0x2400000;
+                    cmdWrite[progIdx100] = 0x1095;
+                    cmdWrite[progIdx101] = 0x3900e400;
+                    cmdWrite[progIdx102] = 0x1095;
+                    cmdWrite[progIdx103] = 0;
+                    cmdWrite[progIdx104] = 0x1095;
+                    cmdWrite[progIdx105] = 0;
+                    cmdWrite[progIdx106] = 0x1095;
+                    cmdWrite[progIdx107] = 0;
+                    cmdWrite[streamIdxBase] = 0x1095;
+                    cmdWrite[progIdx82 + 0x1b] = 0x7804;
+                    cmdWrite[progIdx82 + 0x1c] = 0x1095;
+                    cmdWrite[progIdx82 + 0x1d] = 0x40040000;
+                    cmdWrite[progIdx82 + 0x1e] = 0x1095;
+                    cmdWrite[progIdx82 + 0x1f] = 0x40040000;
+                    cmdWrite[progIdx82 + 0x20] = 0x1095;
+                    cmdWrite[progIdx82 + 0x21] = 0xdb0490;
+                    cmdWrite[progIdx82 + 0x22] = 0x1095;
+                    cmdWrite[progIdx82 + 0x23] = 0xc10026;
+                    cmdWrite[progIdx82 + 0x24] = 0x1095;
+                    cmdWrite[progIdx82 + 0x25] = 0xdfa23028;
+                    cmdWrite[progIdx82 + 0x26] = 0x1095;
+                    cmdWrite[progIdx82 + 0x27] = 0x7800;
+                    cmdWrite[progIdx82 + 0x28] = 0x1095;
+                    cmdWrite[progIdx82 + 0x29] = 2;
+                    cmdWrite[progIdx82 + 0x2a] = 0x1095;
+                    cmdWrite[progIdx82 + 0x2b] = 2;
+                    cmdWrite[progIdx82 + 0x2c] = 0x1095;
+                    cmdWrite[progIdx82 + 0x2d] = 0xdb0220;
+                    cmdWrite[progIdx82 + 0x2e] = 0x1095;
+                    cmdWrite[progIdx82 + 0x2f] = 0xc0c021;
+                    cmdWrite[progIdx82 + 0x30] = 0x1095;
+                    cmdWrite[progIdx82 + 0x31] = 0x22;
+                    cmdWrite[progIdx82 + 0x32] = 0x1095;
+                    cmdWrite[progIdx82 + 0x33] = 0x78101;
+                    cmdWrite[progIdx82 + 0x34] = 0x1095;
+                    maskCtlWord = (maskBit ^ 1) << 10 | maskBit | 0x200000;
+                    cmdWrite[progIdx82 + 0x35] = maskCtlWord;
+                    cmdWrite[progIdx82 + 0x36] = 0x1095;
+                    cmdWrite[progIdx82 + 0x37] = maskCtlWord;
+                    cmdWrite[progIdx82 + 0x38] = 0x1095;
+                    cmdWrite[progIdx82 + 0x39] = 0x440221;
+                    cmdWrite[progIdx82 + 0x3a] = 0x1095;
+                    cmdWrite[progIdx82 + 0x3b] = 0x60d006;
+                    cmdWrite[progIdx82 + 0x3c] = 0x1095;
+                    streamIdxBase = progIdx82 + 0x3e;
+                    cmdWrite[progIdx82 + 0x3d] = 0xdda22008;
                   }
-                  cmdWrite[iVar12] = 0x1189;
-                  cmdWrite[iVar12 + 1] = 0;
-                  cmdWrite[iVar12 + 2] = 0x1181;
-                  cmdWrite[iVar12 + 3] = 5;
-                  cmdWrite[iVar12 + 4] = 0x118d;
+                  cmdWrite[streamIdxBase] = 0x1189;
+                  cmdWrite[streamIdxBase + 1] = 0;
+                  cmdWrite[streamIdxBase + 2] = 0x1181;
+                  cmdWrite[streamIdxBase + 3] = 5;
+                  cmdWrite[streamIdxBase + 4] = 0x118d;
                   if (noMaskFlags) {
-                    dVar11 = 0x10000;
+                    maskWord = 0x10000;
                   }
                   else {
-                    dVar11 = 0x40000;
+                    maskWord = 0x40000;
                   }
-                  cmdWrite[iVar12 + 5] = dVar11;
-                  cmdWrite[iVar12 + 6] = 0x118e;
-                  cmdWrite[iVar12 + 7] = 0;
-                  cmdWrite[iVar12 + 8] = 0x118c;
+                  cmdWrite[streamIdxBase + 5] = maskWord;
+                  cmdWrite[streamIdxBase + 6] = 0x118e;
+                  cmdWrite[streamIdxBase + 7] = 0;
+                  cmdWrite[streamIdxBase + 8] = 0x118c;
                   if (noMaskFlags) {
-                    dVar11 = 0x10000;
+                    maskWord = 0x10000;
                   }
                   else {
-                    dVar11 = 0x40000;
+                    maskWord = 0x40000;
                   }
-                  cmdWrite[iVar12 + 9] = dVar11;
-                  cmdWrite[iVar12 + 10] = 0x11a9;
-                  cmdWrite[iVar12 + 0xb] = 0x1b01;
-                  cmdWrite[iVar12 + 0xc] = 0x11aa;
-                  cmdWrite[iVar12 + 0xd] = 0xf;
-                  cmdWrite[iVar12 + 0xe] = 0x11ab;
-                  cmdWrite[iVar12 + 0xf] = 0xf;
-                  cmdWrite[iVar12 + 0x10] = 0x11ac;
-                  cmdWrite[iVar12 + 0x11] = 0xf;
-                  cmdWrite[iVar12 + 0x12] = 0x12f0;
-                  cmdWrite[iVar12 + 0x13] = 0;
-                  cmdWrite[iVar12 + 0x14] = 0x12f5;
-                  cmdWrite[iVar12 + 0x15] = 0;
-                  idxPlus23Block2 = iVar12 + 0x17;
-                  idxPlus24Block2 = iVar12 + 0x18;
-                  iVar25 = iVar12 + 0x30;
+                  cmdWrite[streamIdxBase + 9] = maskWord;
+                  cmdWrite[streamIdxBase + 10] = 0x11a9;
+                  cmdWrite[streamIdxBase + 0xb] = 0x1b01;
+                  cmdWrite[streamIdxBase + 0xc] = 0x11aa;
+                  cmdWrite[streamIdxBase + 0xd] = 0xf;
+                  cmdWrite[streamIdxBase + 0xe] = 0x11ab;
+                  cmdWrite[streamIdxBase + 0xf] = 0xf;
+                  cmdWrite[streamIdxBase + 0x10] = 0x11ac;
+                  cmdWrite[streamIdxBase + 0x11] = 0xf;
+                  cmdWrite[streamIdxBase + 0x12] = 0x12f0;
+                  cmdWrite[streamIdxBase + 0x13] = 0;
+                  cmdWrite[streamIdxBase + 0x14] = 0x12f5;
+                  cmdWrite[streamIdxBase + 0x15] = 0;
+                  idxPlus23Block2 = streamIdxBase + 0x17;
+                  idxPlus24Block2 = streamIdxBase + 0x18;
+                  tileIdx26 = streamIdxBase + 0x30;
                   i2dHi17 = 0x43300000;
                   i2dHi18 = 0x43300000;
-                  iVar14 = iVar12 + 0x1a;
-                  iVar36 = iVar12 + 0x19;
-                  uStack_254 = tileTop;
-                  uStack_24c = tileBottom;
-                  idxPlus30Block2 = iVar12 + 0x1e;
-                  idxPlus31Block2 = iVar12 + 0x1f;
-                  idxPlus27Block2 = iVar12 + 0x1b;
-                  idxPlus34Block2 = iVar12 + 0x22;
-                  idxPlus36Block2 = iVar12 + 0x24;
-                  local_138 = (iVar12 + 0x16) * 4;
-                  idxPlus29Block2 = iVar12 + 0x1d;
-                  idxPlus32Block2 = iVar12 + 0x20;
-                  iVar13 = iVar12 + 0x1c;
-                  idxPlus33Block2 = iVar12 + 0x21;
-                  iVar34 = iVar12 + 0x25;
-                  iVar23 = iVar12 + 0x26;
-                  iVar31 = iVar12 + 0x23;
-                  iVar47 = iVar12 + 0x27;
-                  iVar39 = iVar12 + 0x28;
-                  iVar40 = iVar12 + 0x29;
-                  iVar41 = iVar12 + 0x2a;
-                  iVar43 = iVar12 + 0x2b;
-                  iVar45 = iVar12 + 0x2c;
-                  iVar46 = iVar12 + 0x2d;
-                  iVar10 = iVar12 + 0x2e;
-                  iVar12 = iVar12 + 0x2f;
-                  fVar2 = (float)((double)CONCAT44(0x43300000,tileTop) - 4503599627370496.0);
-                  fVar3 = (float)((double)CONCAT44(0x43300000,tileBottom) - 4503599627370496.0);
+                  tileIdx4 = streamIdxBase + 0x1a;
+                  tileIdx3 = streamIdxBase + 0x19;
+                  tileTopSpill = tileTop;
+                  tileBottomSpill = tileBottom;
+                  idxPlus30Block2 = streamIdxBase + 0x1e;
+                  idxPlus31Block2 = streamIdxBase + 0x1f;
+                  idxPlus27Block2 = streamIdxBase + 0x1b;
+                  idxPlus34Block2 = streamIdxBase + 0x22;
+                  idxPlus36Block2 = streamIdxBase + 0x24;
+                  tileHdrByteOff = (streamIdxBase + 0x16) * 4;
+                  idxPlus29Block2 = streamIdxBase + 0x1d;
+                  idxPlus32Block2 = streamIdxBase + 0x20;
+                  tileIdx6 = streamIdxBase + 0x1c;
+                  idxPlus33Block2 = streamIdxBase + 0x21;
+                  tileIdx15 = streamIdxBase + 0x25;
+                  tileIdx16 = streamIdxBase + 0x26;
+                  tileIdx13 = streamIdxBase + 0x23;
+                  tileIdx17 = streamIdxBase + 0x27;
+                  tileIdx18 = streamIdxBase + 0x28;
+                  tileIdx19 = streamIdxBase + 0x29;
+                  tileIdx20 = streamIdxBase + 0x2a;
+                  tileIdx21 = streamIdxBase + 0x2b;
+                  tileIdx22 = streamIdxBase + 0x2c;
+                  tileIdx23 = streamIdxBase + 0x2d;
+                  tileIdx24 = streamIdxBase + 0x2e;
+                  streamIdxBase = streamIdxBase + 0x2f;
+                  tileTopF = (float)((double)CONCAT44(0x43300000,tileTop) - 4503599627370496.0);
+                  tileBottomF = (float)((double)CONCAT44(0x43300000,tileBottom) - 4503599627370496.0);
                   while( true ) {
-                    uStack_23c = tileRight;
+                    tileRightSpill = tileRight;
                     i2dHi21 = 0x43300000;
                     i2dHi22 = 0x43300000;
                     i2dHi19 = 0x43300000;
                     i2dHi20 = 0x43300000;
                     i2dLo5 = (int)screenWidth ^ 0x80000000;
                     i2dLo6 = (int)screenHeight ^ 0x80000000;
-                    local_304 = 1.0 / (float)((double)CONCAT44(0x43300000,i2dLo5) -
+                    quadSlot1 = 1.0 / (float)((double)CONCAT44(0x43300000,i2dLo5) -
                                              4503601774854144.0);
-                    local_300 = 1.0 / (float)((double)CONCAT44(0x43300000,i2dLo6) -
+                    quadSlot2 = 1.0 / (float)((double)CONCAT44(0x43300000,i2dLo6) -
                                              4503601774854144.0);
-                    local_308 = local_304 *
-                                (float)((double)CONCAT44(0x43300000,uStack_244) - 4503599627370496.0
+                    quadSlot0 = quadSlot1 *
+                                (float)((double)CONCAT44(0x43300000,curTileLeft) - 4503599627370496.0
                                        );
-                    local_304 = local_304 *
+                    quadSlot1 = quadSlot1 *
                                 (float)((double)CONCAT44(0x43300000,tileRight) - 4503599627370496.0)
                     ;
-                    local_2fc = (uint)GH_F2U((float)((local_300 * fVar3)));
-                    local_300 = local_300 * fVar2;
-                    *(undefined4 *)((int)cmdWrite + local_138) = 0xc0143500;
+                    quadSlot3 = (uint)GH_F2U((float)((quadSlot2 * tileBottomF)));
+                    quadSlot2 = quadSlot2 * tileTopF;
+                    *(undefined4 *)((int)cmdWrite + tileHdrByteOff) = 0xc0143500;
                     cmdWrite[idxPlus23Block2] = 0x4003d;
-                    iVar49 = tileRight - uStack_244;
-                    if ((iVar49 == 8) && (tileHeight == 8)) {
+                    tileWidth = tileRight - curTileLeft;
+                    if ((tileWidth == 8) && (tileHeight == 8)) {
                       i2dHi29 = 0x43300000;
                       i2dLo11 = (int)*(short *)(textureDesc + 4) ^ 0x80000000;
-                      local_2f8 = (fVar9 + 0.0) *
+                      quadSlot4 = (texOriginU + 0.0) *
                                   (1.0 / (float)((double)CONCAT44(0x43300000,i2dLo11) -
                                                 4503601774854144.0));
                       i2dHi30 = 0x43300000;
                       i2dLo12 = (int)*(short *)(textureDesc + 4) ^ 0x80000000;
-                      local_2f4 = (fVar9 + 8.0) *
+                      quadSlot5 = (texOriginU + 8.0) *
                                   (1.0 / (float)((double)CONCAT44(0x43300000,i2dLo12) -
                                                 4503601774854144.0));
                       i2dHi31 = 0x43300000;
                       i2dLo13 = (int)*(short *)(textureDesc + 6) ^ 0x80000000;
-                      local_2f0 = (fVar1 + 0.0) *
+                      quadSlot6 = (texOriginV + 0.0) *
                                   (1.0 / (float)((double)CONCAT44(0x43300000,i2dLo13) -
                                                 4503601774854144.0));
                       i2dHi32 = 0x43300000;
                       i2dLo14 = (int)*(short *)(textureDesc + 6) ^ 0x80000000;
-                      scratchWord2 = (uint)GH_F2U((float)(((fVar1 + 8.0) *
+                      scratchWord2 = (uint)GH_F2U((float)(((texOriginV + 8.0) *
                                         (1.0 / (float)((double)CONCAT44(0x43300000,i2dLo14) -
                                                       4503601774854144.0)))));
                     }
@@ -3866,90 +3921,90 @@ int _radeonFill(accel, unusedArg2, fillFlags, blitFlags, fillReq, patternBuf)
                       i2dHi23 = 0x43300000;
                       i2dHi24 = 0x43300000;
                       i2dLo7 = (int)*(short *)(textureDesc + 4) ^ 0x80000000;
-                      local_2f8 = (fVar9 + 0.0) *
+                      quadSlot4 = (texOriginU + 0.0) *
                                   (1.0 / (float)((double)CONCAT44(0x43300000,i2dLo7) -
                                                 4503601774854144.0));
                       i2dHi25 = 0x43300000;
                       i2dLo8 = (int)*(short *)(textureDesc + 4) ^ 0x80000000;
-                      local_2f4 = (fVar9 + (float)((double)CONCAT44(0x43300000,iVar49) -
+                      quadSlot5 = (texOriginU + (float)((double)CONCAT44(0x43300000,tileWidth) -
                                                   4503599627370496.0)) *
                                   (1.0 / (float)((double)CONCAT44(0x43300000,i2dLo8) -
                                                 4503601774854144.0));
                       i2dHi26 = 0x43300000;
-                      iStack_1f4 = tileHeight;
+                      tileHeightSpill = tileHeight;
                       i2dHi27 = 0x43300000;
                       i2dLo9 = (int)*(short *)(textureDesc + 6) ^ 0x80000000;
-                      local_2f0 = (fVar1 + 0.0) *
+                      quadSlot6 = (texOriginV + 0.0) *
                                   (1.0 / (float)((double)CONCAT44(0x43300000,i2dLo9) -
                                                 4503601774854144.0));
                       i2dHi28 = 0x43300000;
                       i2dLo10 = (int)*(short *)(textureDesc + 6) ^ 0x80000000;
-                      scratchWord2 = (uint)GH_F2U((float)(((fVar1 + (float)((double)CONCAT44(0x43300000,tileHeight) -
+                      scratchWord2 = (uint)GH_F2U((float)(((texOriginV + (float)((double)CONCAT44(0x43300000,tileHeight) -
                                                          4503599627370496.0)) *
                                         (1.0 / (float)((double)CONCAT44(0x43300000,i2dLo10) -
                                                       4503601774854144.0)))));
-                      iStack_20c = iVar49;
+                      tileWidthSpill = tileWidth;
                     }
-                    cmdWrite[idxPlus24Block2] = uStack_244 | tileBottomHi;
-                    fVar27 = *local_ec;
-                    cmdWrite[iVar36] = (dword)GH_F2U(fVar27);
-                    dVar18 = *local_e0;
-                    cmdWrite[iVar14] = dVar18;
-                    fVar22 = *local_dc;
-                    cmdWrite[idxPlus27Block2] = (dword)GH_F2U(fVar22);
-                    dVar11 = *local_d0;
-                    cmdWrite[iVar13] = dVar11;
-                    cmdWrite[idxPlus29Block2] = uStack_244 | tileTopHi;
-                    cmdWrite[idxPlus30Block2] = (dword)GH_F2U(fVar27);
-                    fVar28 = *local_e4;
-                    cmdWrite[idxPlus31Block2] = (dword)GH_F2U(fVar28);
-                    cmdWrite[idxPlus32Block2] = (dword)GH_F2U(fVar22);
-                    fVar27 = *local_d4;
-                    cmdWrite[idxPlus33Block2] = (dword)GH_F2U(fVar27);
+                    cmdWrite[idxPlus24Block2] = curTileLeft | tileBottomHi;
+                    scrU0 = *quadSlot0Ptr;
+                    cmdWrite[tileIdx3] = (dword)GH_F2U(scrU0);
+                    scrV1Bits = *quadSlot3Ptr;
+                    cmdWrite[tileIdx4] = scrV1Bits;
+                    texU0 = *quadSlot4Ptr;
+                    cmdWrite[idxPlus27Block2] = (dword)GH_F2U(texU0);
+                    texV1Bits = *scratchWord2Ref;
+                    cmdWrite[tileIdx6] = texV1Bits;
+                    cmdWrite[idxPlus29Block2] = curTileLeft | tileTopHi;
+                    cmdWrite[idxPlus30Block2] = (dword)GH_F2U(scrU0);
+                    scrV0 = *quadSlot2Ptr;
+                    cmdWrite[idxPlus31Block2] = (dword)GH_F2U(scrV0);
+                    cmdWrite[idxPlus32Block2] = (dword)GH_F2U(texU0);
+                    texV0 = *quadSlot6Ptr;
+                    cmdWrite[idxPlus33Block2] = (dword)GH_F2U(texV0);
                     cmdWrite[idxPlus34Block2] = tileRight | tileTopHi;
-                    fVar22 = *local_e8;
-                    cmdWrite[iVar31] = (dword)GH_F2U(fVar22);
-                    cmdWrite[idxPlus36Block2] = (dword)GH_F2U(fVar28);
-                    fVar28 = *local_d8;
-                    cmdWrite[iVar34] = (dword)GH_F2U(fVar28);
-                    cmdWrite[iVar23] = (dword)GH_F2U(fVar27);
-                    cmdWrite[iVar47] = tileRight | tileBottomHi;
-                    cmdWrite[iVar39] = (dword)GH_F2U(fVar22);
-                    cmdWrite[iVar40] = dVar18;
-                    cmdWrite[iVar41] = (dword)GH_F2U(fVar28);
-                    cmdWrite[iVar43] = dVar11;
-                    cmdWrite[iVar45] = 0x1393;
-                    cmdWrite[iVar46] = 10;
-                    cmdWrite[iVar10] = 0x5c8;
-                    cmdWrite[iVar12] = 0x20000;
-                    cmdWordsLeft = cmdWordsLeft - iVar25;
-                    cmdWrite = cmdWrite + iVar25;
+                    scrU1 = *quadSlot1Ptr;
+                    cmdWrite[tileIdx13] = (dword)GH_F2U(scrU1);
+                    cmdWrite[idxPlus36Block2] = (dword)GH_F2U(scrV0);
+                    texU1 = *quadSlot5Ptr;
+                    cmdWrite[tileIdx15] = (dword)GH_F2U(texU1);
+                    cmdWrite[tileIdx16] = (dword)GH_F2U(texV0);
+                    cmdWrite[tileIdx17] = tileRight | tileBottomHi;
+                    cmdWrite[tileIdx18] = (dword)GH_F2U(scrU1);
+                    cmdWrite[tileIdx19] = scrV1Bits;
+                    cmdWrite[tileIdx20] = (dword)GH_F2U(texU1);
+                    cmdWrite[tileIdx21] = texV1Bits;
+                    cmdWrite[tileIdx22] = 0x1393;
+                    cmdWrite[tileIdx23] = 10;
+                    cmdWrite[tileIdx24] = 0x5c8;
+                    cmdWrite[streamIdxBase] = 0x20000;
+                    cmdWordsLeft = cmdWordsLeft - tileIdx26;
+                    cmdWrite = cmdWrite + tileIdx26;
                     tileRight = dstRight;
-                    if (uStack_244 + 0x10 < dstRight) {
-                      tileRight = uStack_244 + 0x10;
+                    if (curTileLeft + 0x10 < dstRight) {
+                      tileRight = curTileLeft + 0x10;
                     }
                     firstTile = false;
-                    if (dstRight <= uVar35) goto LAB_0000a09c;
-                    uVar17 = uVar35 + 8;
-                    uVar37 = uVar35;
+                    if (dstRight <= nextTileLeft) goto LAB_0000a09c;
+                    tileRowTopNext = nextTileLeft + 8;
+                    tileLeft = nextTileLeft;
 LAB_00008bec:
                     if (cmdWordsLeft < 0x1a) break;
                     screenWidth = *(short *)(accel + 0x50);
-                    iVar23 = 0x10;
-                    iVar25 = 0x1a;
-                    iVar34 = 0xf;
-                    iVar12 = 0x19;
-                    iVar10 = 0x18;
-                    iVar46 = 0x17;
-                    iVar45 = 0x16;
-                    iVar43 = 0x15;
-                    iVar41 = 0x14;
-                    iVar40 = 0x13;
-                    iVar39 = 0x12;
-                    iVar47 = 0x11;
-                    iVar31 = 0xd;
-                    iVar13 = 6;
-                    iVar14 = 4;
+                    tileIdx16 = 0x10;
+                    tileIdx26 = 0x1a;
+                    tileIdx15 = 0xf;
+                    streamIdxBase = 0x19;
+                    tileIdx24 = 0x18;
+                    tileIdx23 = 0x17;
+                    tileIdx22 = 0x16;
+                    tileIdx21 = 0x15;
+                    tileIdx20 = 0x14;
+                    tileIdx19 = 0x13;
+                    tileIdx18 = 0x12;
+                    tileIdx17 = 0x11;
+                    tileIdx13 = 0xd;
+                    tileIdx6 = 6;
+                    tileIdx4 = 4;
                     screenHeight = *(short *)(accel + 0x52);
                     idxPlus36Block2 = 0xe;
                     idxPlus34Block2 = 0xc;
@@ -3959,12 +4014,12 @@ LAB_00008bec:
                     idxPlus29Block2 = 7;
                     idxPlus33Block2 = 0xb;
                     idxPlus24Block2 = 2;
-                    iVar36 = 3;
+                    tileIdx3 = 3;
                     idxPlus27Block2 = 5;
                     idxPlus23Block2 = 1;
-                    local_138 = 0;
-                    uVar35 = uVar17;
-                    uStack_244 = uVar37;
+                    tileHdrByteOff = 0;
+                    nextTileLeft = tileRowTopNext;
+                    curTileLeft = tileLeft;
                   }
                   scratchWord1 = *(uint *)(accel + 0x18);
                   scratchWord0 = 0;
@@ -3978,35 +4033,35 @@ LAB_00008bec:
                   taskPtr = PTR_0000e694;
                   lastHeader = *(uint **)(accel + 0x7c);
                   *lastHeader = ((int)cmdWrite - (int)lastHeader >> 2) + scratchWord0 | *lastHeader;
-                  iVar23 = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,
+                  mapResult = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,
                                                *(undefined4 *)taskPtr,&scratchWord1,&scratchWord0,1);
-                  if (iVar23 == 0) {
+                  if (mapResult == 0) {
                     *(undefined4 *)(scratchWord1 + 0x1c) = 0;
                     *(uint *)(accel + 0x18) = scratchWord1;
                     cmdWrite = (dword *)(scratchWord1 + 0x20);
-                    pdVar21 = (dword *)(scratchWord1 + 0x38);
+                    streamCursor = (dword *)(scratchWord1 + 0x38);
                     *(uint *)(accel + 0x7c) = scratchWord1 + 0x1c;
-                    pdVar15 = (dword *)(scratchWord1 + 0x24);
-                    pdVar30 = (dword *)(scratchWord1 + 0x28);
-                    pdVar16 = (dword *)(scratchWord1 + 0x2c);
-                    pdVar19 = (dword *)(scratchWord1 + 0x30);
-                    pdVar26 = (dword *)(scratchWord1 + 0x34);
-                    uVar35 = uVar37 + 8;
-                    uStack_244 = uVar37;
+                    tileWord1 = (dword *)(scratchWord1 + 0x24);
+                    tileWord2 = (dword *)(scratchWord1 + 0x28);
+                    tileWord3 = (dword *)(scratchWord1 + 0x2c);
+                    tileWord4 = (dword *)(scratchWord1 + 0x30);
+                    tileWord5 = (dword *)(scratchWord1 + 0x34);
+                    nextTileLeft = tileLeft + 8;
+                    curTileLeft = tileLeft;
                     cmdWordsLeft = cmdCapacity;
                   }
                   else {
-                    pdVar21 = &__mh_bundle_header.flags;
+                    streamCursor = &__mh_bundle_header.flags;
                     *(undefined4 *)(accel + 0x7c) = 0;
                     *(undefined4 *)(accel + 0x18) = 0;
-                    pdVar26 = &__mh_bundle_header.sizeofcmds;
-                    pdVar19 = &__mh_bundle_header.ncmds;
-                    pdVar16 = &__mh_bundle_header.filetype;
-                    pdVar30 = &__mh_bundle_header.cpusubtype;
-                    pdVar15 = &__mh_bundle_header.cputype;
+                    tileWord5 = &__mh_bundle_header.sizeofcmds;
+                    tileWord4 = &__mh_bundle_header.ncmds;
+                    tileWord3 = &__mh_bundle_header.filetype;
+                    tileWord2 = &__mh_bundle_header.cpusubtype;
+                    tileWord1 = &__mh_bundle_header.cputype;
                     cmdWrite = (dword *)0x0;
-                    uVar35 = uVar37 + 8;
-                    uStack_244 = uVar37;
+                    nextTileLeft = tileLeft + 8;
+                    curTileLeft = tileLeft;
                     cmdWordsLeft = cmdCapacity;
                   }
                 } while( true );
@@ -4016,7 +4071,7 @@ LAB_0000a09c:
               if (tileTop + 0x10 < dstBottom) {
                 tileBottom = tileTop + 0x10;
               }
-              uVar17 = tileTop + 8;
+              tileRowTop = tileTop + 8;
             } while (tileTop + 8 < dstBottom);
           }
           if (cmdWordsLeft < 0x86) {
@@ -4031,118 +4086,118 @@ LAB_0000a09c:
             cmdWrite[scratchWord1] = 0x1000000;
             lastHeader = *(uint **)(accel + 0x7c);
             *lastHeader = ((int)cmdWrite - (int)lastHeader >> 2) + scratchWord1 | *lastHeader;
-            iVar23 = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,
+            mapResult = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,
                                          *(undefined4 *)PTR_0000e694,&scratchWord0,&scratchWord1,1);
-            if (iVar23 == 0) {
+            if (mapResult == 0) {
               *(undefined4 *)(scratchWord0 + 0x1c) = 0;
               *(uint *)(accel + 0x18) = scratchWord0;
               cmdWrite = (dword *)(scratchWord0 + 0x20);
-              pdVar30 = (dword *)(scratchWord0 + 0x38);
+              finalCursor = (dword *)(scratchWord0 + 0x38);
               *(uint *)(accel + 0x7c) = scratchWord0 + 0x1c;
-              pdVar15 = (dword *)(scratchWord0 + 0x24);
-              pdVar16 = (dword *)(scratchWord0 + 0x28);
-              pdVar19 = (dword *)(scratchWord0 + 0x2c);
-              pdVar26 = (dword *)(scratchWord0 + 0x30);
-              pdVar21 = (dword *)(scratchWord0 + 0x34);
+              finalWord1 = (dword *)(scratchWord0 + 0x24);
+              finalWord2 = (dword *)(scratchWord0 + 0x28);
+              finalWord3 = (dword *)(scratchWord0 + 0x2c);
+              finalWord4 = (dword *)(scratchWord0 + 0x30);
+              finalWord5 = (dword *)(scratchWord0 + 0x34);
               cmdWordsLeft = cmdCapacity;
             }
             else {
               cmdWrite = (dword *)0x0;
               *(undefined4 *)(accel + 0x7c) = 0;
               *(undefined4 *)(accel + 0x18) = 0;
-              pdVar15 = &__mh_bundle_header.cputype;
-              pdVar16 = &__mh_bundle_header.cpusubtype;
-              pdVar19 = &__mh_bundle_header.filetype;
-              pdVar26 = &__mh_bundle_header.ncmds;
-              pdVar21 = &__mh_bundle_header.sizeofcmds;
-              pdVar30 = &__mh_bundle_header.flags;
+              finalWord1 = &__mh_bundle_header.cputype;
+              finalWord2 = &__mh_bundle_header.cpusubtype;
+              finalWord3 = &__mh_bundle_header.filetype;
+              finalWord4 = &__mh_bundle_header.ncmds;
+              finalWord5 = &__mh_bundle_header.sizeofcmds;
+              finalCursor = &__mh_bundle_header.flags;
               cmdWordsLeft = cmdCapacity;
             }
           }
           else {
-            pdVar15 = cmdWrite + 1;
-            pdVar16 = cmdWrite + 2;
-            pdVar19 = cmdWrite + 3;
-            pdVar26 = cmdWrite + 4;
-            pdVar21 = cmdWrite + 5;
-            pdVar30 = cmdWrite + 6;
+            finalWord1 = cmdWrite + 1;
+            finalWord2 = cmdWrite + 2;
+            finalWord3 = cmdWrite + 3;
+            finalWord4 = cmdWrite + 4;
+            finalWord5 = cmdWrite + 5;
+            finalCursor = cmdWrite + 6;
           }
           lastHeader = *(uint **)(accel + 0x7c);
           *lastHeader = (int)cmdWrite - (int)lastHeader >> 2 | *lastHeader;
           *(dword **)(accel + 0x7c) = cmdWrite;
           *cmdWrite = 0x11000000;
-          *pdVar15 = *(dword *)(accel + 0x84);
-          *pdVar16 = 0;
-          *pdVar19 = 0;
+          *finalWord1 = *(dword *)(accel + 0x84);
+          *finalWord2 = 0;
+          *finalWord3 = 0;
           lastHeader = *(uint **)(accel + 0x7c);
-          *lastHeader = (int)pdVar26 - (int)lastHeader >> 2 | *lastHeader;
-          *(dword **)(accel + 0x7c) = pdVar26;
-          *pdVar26 = 0x4000000;
-          *pdVar21 = *(dword *)*DAT_0000e6e4;
-          puVar8 = DAT_0000e6e4;
-          iVar23 = DAT_0000e6e4[0xc];
-          if (iVar23 == 3) {
-            iVar23 = 0xb;
+          *lastHeader = (int)finalWord4 - (int)lastHeader >> 2 | *lastHeader;
+          *(dword **)(accel + 0x7c) = finalWord4;
+          *finalWord4 = 0x4000000;
+          *finalWord5 = *(dword *)*DAT_0000e6e4;
+          patternDesc = DAT_0000e6e4;
+          pass2FormatOrWords = DAT_0000e6e4[0xc];
+          if (pass2FormatOrWords == 3) {
+            pass2FormatOrWords = 0xb;
           }
-          else if (iVar23 == 6) {
-            iVar23 = 0xc;
+          else if (pass2FormatOrWords == 6) {
+            pass2FormatOrWords = 0xc;
           }
-          iVar23 = ((int (*)())_radeon3DCopySetup)(accel,pdVar30,DAT_0000e6e4 + 3,iVar23,0,0,0,0);
-          uStack_1c4 = dstLeft;
-          uStack_1b4 = dstTop;
-          uStack_1bc = dstRight;
-          uStack_1ac = dstBottom;
+          pass2FormatOrWords = ((int (*)())_radeon3DCopySetup)(accel,finalCursor,DAT_0000e6e4 + 3,pass2FormatOrWords,0,0,0,0);
+          dstLeftSpill = dstLeft;
+          dstTopSpill = dstTop;
+          dstRightSpill = dstRight;
+          dstBottomSpill = dstBottom;
           i2dHi33 = 0x43300000;
           i2dHi34 = 0x43300000;
           i2dHi35 = 0x43300000;
           i2dHi36 = 0x43300000;
-          pdVar30[iVar23] = 0xc00c3500;
-          pdVar30[iVar23 + 1] = 0x4003d;
+          finalCursor[pass2FormatOrWords] = 0xc00c3500;
+          finalCursor[pass2FormatOrWords + 1] = 0x4003d;
           i2dHi37 = 0x43300000;
-          i2dLo15 = (int)*(short *)(puVar8 + 4) ^ 0x80000000;
-          local_2fc = (uint)GH_F2U((float)((double)(float)((double)CONCAT44(0x43300000,dstLeft) -
+          i2dLo15 = (int)*(short *)(patternDesc + 4) ^ 0x80000000;
+          quadSlot3 = (uint)GH_F2U((float)((double)(float)((double)CONCAT44(0x43300000,dstLeft) -
                                                    4503599627370496.0) *
                                    (1.0 / ((double)CONCAT44(0x43300000,i2dLo15) -
                                           4503601774854144.0))));
           i2dHi38 = 0x43300000;
-          i2dLo16 = (int)*(short *)(puVar8 + 4) ^ 0x80000000;
+          i2dLo16 = (int)*(short *)(patternDesc + 4) ^ 0x80000000;
           scratchWord2 = (uint)GH_F2U((float)((double)(float)((double)CONCAT44(0x43300000,dstRight) -
                                                    4503599627370496.0) *
                                    (1.0 / ((double)CONCAT44(0x43300000,i2dLo16) -
                                           4503601774854144.0))));
           i2dHi39 = 0x43300000;
-          i2dLo17 = (int)*(short *)((int)puVar8 + 0x12) ^ 0x80000000;
+          i2dLo17 = (int)*(short *)((int)patternDesc + 0x12) ^ 0x80000000;
           scratchWord1 = (uint)GH_F2U((float)((double)(float)((double)CONCAT44(0x43300000,dstTop) -
                                                    4503599627370496.0) *
                                    (1.0 / ((double)CONCAT44(0x43300000,i2dLo17) -
                                           4503601774854144.0))));
           i2dHi40 = 0x43300000;
-          i2dLo18 = (int)*(short *)((int)puVar8 + 0x12) ^ 0x80000000;
+          i2dLo18 = (int)*(short *)((int)patternDesc + 0x12) ^ 0x80000000;
           scratchWord0 = (uint)GH_F2U((float)((double)(float)((double)CONCAT44(0x43300000,dstBottom) -
                                                    4503599627370496.0) *
                                    (1.0 / ((double)CONCAT44(0x43300000,i2dLo18) -
                                           4503601774854144.0))));
-          pdVar30[iVar23 + 2] = dstLeft | dstBottom << 0x10;
-          pdVar30[iVar23 + 3] = local_2fc;
-          pdVar30[iVar23 + 4] = scratchWord0;
-          pdVar30[iVar23 + 5] = dstLeft | dstTop << 0x10;
-          pdVar30[iVar23 + 6] = local_2fc;
-          pdVar30[iVar23 + 7] = scratchWord1;
-          pdVar30[iVar23 + 8] = dstRight | dstTop << 0x10;
-          pdVar30[iVar23 + 9] = scratchWord2;
-          pdVar30[iVar23 + 10] = scratchWord1;
-          pdVar30[iVar23 + 0xb] = dstRight | dstBottom << 0x10;
-          pdVar30[iVar23 + 0xc] = scratchWord2;
-          pdVar30[iVar23 + 0xd] = scratchWord0;
-          pdVar30[iVar23 + 0xe] = 0x1393;
-          pdVar30[iVar23 + 0xf] = 10;
-          pdVar30[iVar23 + 0x10] = 0x5c8;
-          pdVar30[iVar23 + 0x11] = 0x20000;
-          cmdWordsLeft = (cmdWordsLeft - 6) - (iVar23 + 0x12);
+          finalCursor[pass2FormatOrWords + 2] = dstLeft | dstBottom << 0x10;
+          finalCursor[pass2FormatOrWords + 3] = quadSlot3;
+          finalCursor[pass2FormatOrWords + 4] = scratchWord0;
+          finalCursor[pass2FormatOrWords + 5] = dstLeft | dstTop << 0x10;
+          finalCursor[pass2FormatOrWords + 6] = quadSlot3;
+          finalCursor[pass2FormatOrWords + 7] = scratchWord1;
+          finalCursor[pass2FormatOrWords + 8] = dstRight | dstTop << 0x10;
+          finalCursor[pass2FormatOrWords + 9] = scratchWord2;
+          finalCursor[pass2FormatOrWords + 10] = scratchWord1;
+          finalCursor[pass2FormatOrWords + 0xb] = dstRight | dstBottom << 0x10;
+          finalCursor[pass2FormatOrWords + 0xc] = scratchWord2;
+          finalCursor[pass2FormatOrWords + 0xd] = scratchWord0;
+          finalCursor[pass2FormatOrWords + 0xe] = 0x1393;
+          finalCursor[pass2FormatOrWords + 0xf] = 10;
+          finalCursor[pass2FormatOrWords + 0x10] = 0x5c8;
+          finalCursor[pass2FormatOrWords + 0x11] = 0x20000;
+          cmdWordsLeft = (cmdWordsLeft - 6) - (pass2FormatOrWords + 0x12);
           rectEntry = rectEntry + 4;
-          cmdWrite = pdVar30 + iVar23 + 0x12;
-          local_104 = local_104 + 1;
-        } while (local_104 < (uint)fillReq[0x16]);
+          cmdWrite = finalCursor + pass2FormatOrWords + 0x12;
+          rectIndex = rectIndex + 1;
+        } while (rectIndex < (uint)fillReq[0x16]);
       }
       *(dword **)(accel + 0x80) = cmdWrite;
       return 0;
@@ -4150,19 +4205,19 @@ LAB_0000a09c:
   }
   else {
     rectEntry = *(undefined4 **)(accel + 0x80);
-    iVar23 = *(int *)(*(int *)(accel + 0x18) + 0x10);
-    local_fc = iVar23 - 7;
+    cmdBufferSize = *(int *)(*(int *)(accel + 0x18) + 0x10);
+    cmdCapacityFast = cmdBufferSize - 7;
     if (rectEntry != (undefined4 *)0x0) {
       cmdCapacity = fillReq[0x16];
-      cmdWordsLeft = local_fc - ((int)rectEntry - (*(int *)(accel + 0x18) + 0x20) >> 2);
-      local_100 = (iVar23 - 0x75U) / 0xc - 1;
+      cmdWordsLeft = cmdCapacityFast - ((int)rectEntry - (*(int *)(accel + 0x18) + 0x20) >> 2);
+      rectsPerBatch = (cmdBufferSize - 0x75U) / 0xc - 1;
       if (cmdCapacity != 0) {
-        local_c0 = &local_300;
-        local_188 = local_100 * 0xc + 0x6e;
+        quadSlot2PtrB = &quadSlot2;
+        batchWords = rectsPerBatch * 0xc + 0x6e;
         fillColor = 0;
         do {
-          if (cmdWordsLeft < local_188) {
-            local_2fc = *(uint *)(accel + 0x18);
+          if (cmdWordsLeft < batchWords) {
+            quadSlot3 = *(uint *)(accel + 0x18);
             scratchWord2 = 0;
             if (*(int *)(accel + 0x8c) == 0) {
               *rectEntry = 0x5c8;
@@ -4173,14 +4228,14 @@ LAB_0000a09c:
             rectEntry[scratchWord2] = 0x1000000;
             lastHeader = *(uint **)(accel + 0x7c);
             *lastHeader = ((int)rectEntry - (int)lastHeader >> 2) + scratchWord2 | *lastHeader;
-            iVar23 = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,
-                                         *(undefined4 *)PTR_0000e694,&local_2fc,&scratchWord2,1);
-            cmdWordsLeft = local_fc;
-            if (iVar23 == 0) {
-              *(undefined4 *)(local_2fc + 0x1c) = 0;
-              *(uint *)(accel + 0x18) = local_2fc;
-              rectEntry = (undefined4 *)(local_2fc + 0x20);
-              *(uint *)(accel + 0x7c) = local_2fc + 0x1c;
+            mapResult = _IOConnectMapMemory(*(undefined4 *)(accel + 0xc),0,
+                                         *(undefined4 *)PTR_0000e694,&quadSlot3,&scratchWord2,1);
+            cmdWordsLeft = cmdCapacityFast;
+            if (mapResult == 0) {
+              *(undefined4 *)(quadSlot3 + 0x1c) = 0;
+              *(uint *)(accel + 0x18) = quadSlot3;
+              rectEntry = (undefined4 *)(quadSlot3 + 0x20);
+              *(uint *)(accel + 0x7c) = quadSlot3 + 0x1c;
               cmdCapacity = fillReq[0x16];
             }
             else {
@@ -4190,82 +4245,82 @@ LAB_0000a09c:
               cmdCapacity = fillReq[0x16];
             }
           }
-          uVar33 = fillColor + local_100;
-          if (uVar33 < cmdCapacity) {
-            cmdCapacity = uVar33;
+          batchEnd = fillColor + rectsPerBatch;
+          if (batchEnd < cmdCapacity) {
+            cmdCapacity = batchEnd;
           }
-          iVar23 = ((int (*)())_radeon3DFillSetup)(rectEntry,0,patternBuf,accel);
-          iVar25 = cmdCapacity - fillColor;
-          rectEntry[iVar23] = iVar25 * 0xc0000 | 0xc0003500;
-          iVar12 = iVar23 + 2;
-          rectEntry[iVar23 + 1] = iVar25 * 0x40000 | 0x3d;
+          fillSetupWords = ((int (*)())_radeon3DFillSetup)(rectEntry,0,patternBuf,accel);
+          batchRemaining = cmdCapacity - fillColor;
+          rectEntry[fillSetupWords] = batchRemaining * 0xc0000 | 0xc0003500;
+          vtxIdxX0 = fillSetupWords + 2;
+          rectEntry[fillSetupWords + 1] = batchRemaining * 0x40000 | 0x3d;
           if (fillColor < cmdCapacity) {
-            iVar23 = iVar12 * 4;
-            iVar34 = *(int *)(accel + 0x60);
-            iVar36 = *(int *)(accel + 100);
-            iVar39 = iVar23 + 4;
-            iVar40 = iVar23 + 0x28;
-            iVar41 = iVar23 + 0x24;
-            piVar20 = fillReq + fillColor * 4 + 0x17;
-            iVar43 = iVar23 + 0x20;
-            iVar45 = iVar23 + 0x1c;
-            iVar46 = iVar23 + 0x18;
-            iVar31 = iVar23 + 0x14;
-            iVar13 = iVar23 + 0x10;
-            iVar14 = iVar23 + 0xc;
-            iVar23 = iVar23 + 8;
+            vtxByteOffZ0 = vtxIdxX0 * 4;
+            originX = *(int *)(accel + 0x60);
+            originY = *(int *)(accel + 100);
+            vtxByteOffY0 = vtxByteOffZ0 + 4;
+            vtxByteOffY3 = vtxByteOffZ0 + 0x28;
+            vtxByteOffX3 = vtxByteOffZ0 + 0x24;
+            rectPtr = fillReq + fillColor * 4 + 0x17;
+            vtxByteOffZ2 = vtxByteOffZ0 + 0x20;
+            vtxByteOffY2 = vtxByteOffZ0 + 0x1c;
+            vtxByteOffX2 = vtxByteOffZ0 + 0x18;
+            vtxByteOffZ1 = vtxByteOffZ0 + 0x14;
+            vtxByteOffY1 = vtxByteOffZ0 + 0x10;
+            vtxByteOffX1 = vtxByteOffZ0 + 0xc;
+            vtxByteOffZ0 = vtxByteOffZ0 + 8;
             do {
               i2dHi1 = 0x43300000;
-              i2dLo1 = *piVar20 + iVar34 ^ 0x80000000;
-              local_2fc = (uint)GH_F2U((float)((double)CONCAT44(0x43300000,i2dLo1) - 4503601774854144.0
+              i2dLo1 = *rectPtr + originX ^ 0x80000000;
+              quadSlot3 = (uint)GH_F2U((float)((double)CONCAT44(0x43300000,i2dLo1) - 4503601774854144.0
                                        ));
               i2dHi2 = 0x43300000;
-              i2dLo2 = *piVar20 + iVar34 + piVar20[2] ^ 0x80000000;
-              local_300 = (float)((double)CONCAT44(0x43300000,i2dLo2) - 4503601774854144.0);
+              i2dLo2 = *rectPtr + originX + rectPtr[2] ^ 0x80000000;
+              quadSlot2 = (float)((double)CONCAT44(0x43300000,i2dLo2) - 4503601774854144.0);
               i2dHi3 = 0x43300000;
-              i2dLo3 = piVar20[1] + iVar36 ^ 0x80000000;
-              local_304 = (float)((double)CONCAT44(0x43300000,i2dLo3) - 4503601774854144.0);
+              i2dLo3 = rectPtr[1] + originY ^ 0x80000000;
+              quadSlot1 = (float)((double)CONCAT44(0x43300000,i2dLo3) - 4503601774854144.0);
               i2dHi4 = 0x43300000;
-              i2dLo4 = piVar20[1] + iVar36 + piVar20[3] ^ 0x80000000;
-              local_308 = (float)((double)CONCAT44(0x43300000,i2dLo4) - 4503601774854144.0);
-              rectEntry[iVar12] = local_2fc;
-              *(float *)((int)rectEntry + iVar39) = local_308;
-              *(undefined4 *)((int)rectEntry + iVar23) = 0;
-              *(uint *)((int)rectEntry + iVar14) = local_2fc;
-              *(float *)((int)rectEntry + iVar13) = local_304;
-              *(undefined4 *)((int)rectEntry + iVar31) = 0;
-              fVar9 = *local_c0;
-              *(float *)((int)rectEntry + iVar46) = fVar9;
-              *(float *)((int)rectEntry + iVar45) = local_304;
-              *(undefined4 *)((int)rectEntry + iVar43) = 0;
-              *(float *)((int)rectEntry + iVar41) = fVar9;
-              *(float *)((int)rectEntry + iVar40) = local_308;
-              iVar10 = iVar12 + 0xb;
-              iVar39 = iVar39 + 0x30;
-              iVar12 = iVar12 + 0xc;
-              iVar23 = iVar23 + 0x30;
-              iVar14 = iVar14 + 0x30;
-              iVar13 = iVar13 + 0x30;
-              iVar31 = iVar31 + 0x30;
-              iVar46 = iVar46 + 0x30;
-              iVar45 = iVar45 + 0x30;
-              iVar43 = iVar43 + 0x30;
-              iVar41 = iVar41 + 0x30;
-              iVar40 = iVar40 + 0x30;
-              rectEntry[iVar10] = 0;
-              piVar20 = piVar20 + 4;
-              iVar25 = iVar25 + -1;
-            } while (iVar25 != 0);
+              i2dLo4 = rectPtr[1] + originY + rectPtr[3] ^ 0x80000000;
+              quadSlot0 = (float)((double)CONCAT44(0x43300000,i2dLo4) - 4503601774854144.0);
+              rectEntry[vtxIdxX0] = quadSlot3;
+              *(float *)((int)rectEntry + vtxByteOffY0) = quadSlot0;
+              *(undefined4 *)((int)rectEntry + vtxByteOffZ0) = 0;
+              *(uint *)((int)rectEntry + vtxByteOffX1) = quadSlot3;
+              *(float *)((int)rectEntry + vtxByteOffY1) = quadSlot1;
+              *(undefined4 *)((int)rectEntry + vtxByteOffZ1) = 0;
+              quadRightF = *quadSlot2PtrB;
+              *(float *)((int)rectEntry + vtxByteOffX2) = quadRightF;
+              *(float *)((int)rectEntry + vtxByteOffY2) = quadSlot1;
+              *(undefined4 *)((int)rectEntry + vtxByteOffZ2) = 0;
+              *(float *)((int)rectEntry + vtxByteOffX3) = quadRightF;
+              *(float *)((int)rectEntry + vtxByteOffY3) = quadSlot0;
+              vtxIdxZ3 = vtxIdxX0 + 0xb;
+              vtxByteOffY0 = vtxByteOffY0 + 0x30;
+              vtxIdxX0 = vtxIdxX0 + 0xc;
+              vtxByteOffZ0 = vtxByteOffZ0 + 0x30;
+              vtxByteOffX1 = vtxByteOffX1 + 0x30;
+              vtxByteOffY1 = vtxByteOffY1 + 0x30;
+              vtxByteOffZ1 = vtxByteOffZ1 + 0x30;
+              vtxByteOffX2 = vtxByteOffX2 + 0x30;
+              vtxByteOffY2 = vtxByteOffY2 + 0x30;
+              vtxByteOffZ2 = vtxByteOffZ2 + 0x30;
+              vtxByteOffX3 = vtxByteOffX3 + 0x30;
+              vtxByteOffY3 = vtxByteOffY3 + 0x30;
+              rectEntry[vtxIdxZ3] = 0;
+              rectPtr = rectPtr + 4;
+              batchRemaining = batchRemaining + -1;
+            } while (batchRemaining != 0);
           }
-          rectEntry[iVar12] = 0x1393;
-          rectEntry[iVar12 + 1] = 10;
-          rectEntry[iVar12 + 2] = 0x5c8;
-          rectEntry[iVar12 + 3] = 0x20000;
+          rectEntry[vtxIdxX0] = 0x1393;
+          rectEntry[vtxIdxX0 + 1] = 10;
+          rectEntry[vtxIdxX0 + 2] = 0x5c8;
+          rectEntry[vtxIdxX0 + 3] = 0x20000;
           cmdCapacity = fillReq[0x16];
-          cmdWordsLeft = cmdWordsLeft - (iVar12 + 4);
-          rectEntry = rectEntry + iVar12 + 4;
-          fillColor = uVar33;
-        } while (uVar33 < cmdCapacity);
+          cmdWordsLeft = cmdWordsLeft - (vtxIdxX0 + 4);
+          rectEntry = rectEntry + vtxIdxX0 + 4;
+          fillColor = batchEnd;
+        } while (batchEnd < cmdCapacity);
       }
       *(undefined4 **)(accel + 0x80) = rectEntry;
       return 0;

@@ -330,6 +330,15 @@ def main():
                     rows.append('use\t%s\t%s\t%s\t%s\t%s\t%s\t+%d' % (fn, var, new, tier, ev, frm, y - x + 1))
         print('\n'.join(rows))
         return
+    if a[2] == '--multi':                            # variables already given one name for the whole function that really hold several roles
+        rows = A.load_rows(d)
+        for r in rows:
+            if r[2] != fn or len(r) != 6: continue
+            try: ws, er = webs(nodes, entry, r[3])
+            except SystemExit: continue
+            if len(ws) > 1:
+                print('%s -> %s: %d webs: %s' % (r[3], r[4], len(ws), ' | '.join('%d-%d' % (w[0], w[-1]) for w in ws)))
+        return
     if a[2] == '--all':                              # every placeholder variable still present, one line per web
         P = re.compile(r'\b(param_[0-9]+|[a-zA-Z]{0,4}Var[0-9]+|local_[0-9a-f]+|[a-z]Stack_?[0-9a-f]+|fparam_[0-9]+|in_[A-Za-z0-9]+|extraout_\w+)\b')
         names = sorted({m for l in CURRENT[brace + 1:] if not re.match(r'\s*(/\*|\*|//)', l) for m in P.findall(l)})
