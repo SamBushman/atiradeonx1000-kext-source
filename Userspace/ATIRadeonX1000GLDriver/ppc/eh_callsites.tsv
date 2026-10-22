@@ -437,9 +437,9 @@ fd5c8	FUN_000fd5c8	103cf4	103cf8	-	no-handler
 1051b0	IRInst__ctor_1051b0	105258	1052b8	105304	cleanup
 1051b0	IRInst__ctor_1051b0	1052d8	1052dc	1052e8	cleanup
 1051b0	IRInst__ctor_1051b0	10531c	105320	-	no-handler
-105334	FUN_00105334	105384	105388	-	no-handler
-105334	FUN_00105334	1053a8	1053ac	1053cc	cleanup
-105334	FUN_00105334	1053e8	1054d0	-	no-handler
+105334	IRInst__setOperandSourceRaw	105384	105388	-	no-handler
+105334	IRInst__setOperandSourceRaw	1053a8	1053ac	1053cc	cleanup
+105334	IRInst__setOperandSourceRaw	1053e8	1054d0	-	no-handler
 1062c0	FUN_001062c0	106314	106318	-	no-handler
 1062c0	FUN_001062c0	106338	10633c	10635c	cleanup
 1062c0	FUN_001062c0	106378	106460	-	no-handler

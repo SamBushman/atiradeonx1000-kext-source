@@ -3046,7 +3046,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 10451c	10453c	other	FUN_001044e0	8	
 105164	10519c	eh-pad	IRInst__ctor_10502c	14	0x193cc0,__Unwind_Resume
 1052e8	105320	eh-pad	IRInst__ctor_1051b0	14	0x193cc0,__Unwind_Resume
-1053cc	1053ec	eh-pad	FUN_00105334	8	0x193cc0,__Unwind_Resume
+1053cc	1053ec	eh-pad	IRInst__setOperandSourceRaw	8	0x193cc0,__Unwind_Resume
 10635c	10637c	eh-pad	FUN_001062c0	8	0x193cc0,__Unwind_Resume
 106800	106804	millicode	IRPhiNode__vslot2	1	
 1073a4	1073c4	eh-pad	FUN_00107350	8	0x193cc0,__Unwind_Resume
@@ -3106,7 +3106,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 10adb4	10add4	eh-pad	FUN_0010ad68	8	0x193cc0,__Unwind_Resume
 10b000	10b020	eh-pad	FUN_0010af38	8	0x193cc0,__Unwind_Resume
 10b384	10b39c	table	FUN_0010b32c	6	
-10b638	10b7f0	table	FUN_0010b5f8	110	
+10b638	10b7f0	table	IRInst__getCompareCondition	110	
 10b874	10b88c	table	FUN_0010b820	6	
 10b9c0	10ba40	table	FUN_0010b93c	32	
 10be9c	10bebc	eh-pad	FUN_0010bd50	8	0x193cc0,__Unwind_Resume

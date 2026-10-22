@@ -24,7 +24,7 @@ int IRInst__dtor_1cf06c(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cf0b4 @ 0x1cf0b4 (52 bytes) */
@@ -51,7 +51,7 @@ int IRInst__dtor_1cf0e8(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cf130 @ 0x1cf130 (72 bytes) */
@@ -66,7 +66,7 @@ int IRInst__dtor_1cf130(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cf178 @ 0x1cf178 (52 bytes) */
@@ -93,7 +93,7 @@ int IRInst__dtor_1cf1ac(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cf1f4 @ 0x1cf1f4 (52 bytes) */
@@ -120,7 +120,7 @@ int IRInst__dtor_1cf228(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cf270 @ 0x1cf270 (52 bytes) */
@@ -147,7 +147,7 @@ int IRInst__dtor_1cf2a4(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cf2ec @ 0x1cf2ec (52 bytes) */
@@ -174,7 +174,7 @@ int IRInst__dtor_1cf320(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cf368 @ 0x1cf368 (52 bytes) */
@@ -201,7 +201,7 @@ int IRInst__dtor_1cf39c(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cf3e4 @ 0x1cf3e4 (52 bytes) */
@@ -240,7 +240,7 @@ int IRInst__dtor_1cf44c(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cf494 @ 0x1cf494 (52 bytes) */
@@ -267,7 +267,7 @@ int IRInst__dtor_1cf4c8(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cf510 @ 0x1cf510 (52 bytes) */
@@ -294,7 +294,7 @@ int IRInst__dtor_1cf544(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cf58c @ 0x1cf58c (52 bytes) */
@@ -321,7 +321,7 @@ int IRInst__dtor_1cf5c0(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cf608 @ 0x1cf608 (52 bytes) */
@@ -360,7 +360,7 @@ int IRInst__dtor_1cf670(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cf6b8 @ 0x1cf6b8 (52 bytes) */
@@ -387,7 +387,7 @@ int IRInst__dtor_1cf6ec(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cf734 @ 0x1cf734 (52 bytes) */
@@ -414,7 +414,7 @@ int IRInst__dtor_1cf768(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cf7b0 @ 0x1cf7b0 (52 bytes) */
@@ -441,7 +441,7 @@ int IRInst__dtor_1cf7e4(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cf82c @ 0x1cf82c (52 bytes) */
@@ -468,7 +468,7 @@ int IRInst__dtor_1cf860(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cf8a8 @ 0x1cf8a8 (52 bytes) */
@@ -495,7 +495,7 @@ int IRInst__dtor_1cf8dc(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cf924 @ 0x1cf924 (52 bytes) */
@@ -534,7 +534,7 @@ int IRInst__dtor_1cf98c(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cf9d4 @ 0x1cf9d4 (52 bytes) */
@@ -561,7 +561,7 @@ int IRInst__dtor_1cfa08(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cfa50 @ 0x1cfa50 (52 bytes) */
@@ -588,7 +588,7 @@ int IRInst__dtor_1cfa84(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cfacc @ 0x1cfacc (52 bytes) */
@@ -615,7 +615,7 @@ int IRInst__dtor_1cfb00(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cfb48 @ 0x1cfb48 (52 bytes) */
@@ -642,7 +642,7 @@ int IRInst__dtor_1cfb7c(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cfbc4 @ 0x1cfbc4 (52 bytes) */
@@ -669,7 +669,7 @@ int IRInst__dtor_1cfbf8(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cfc40 @ 0x1cfc40 (52 bytes) */
@@ -696,7 +696,7 @@ int IRInst__dtor_1cfc74(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cfcbc @ 0x1cfcbc (52 bytes) */
@@ -723,7 +723,7 @@ int IRInst__dtor_1cfcf0(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cfd38 @ 0x1cfd38 (52 bytes) */
@@ -750,7 +750,7 @@ int IRInst__dtor_1cfd6c(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cfdb4 @ 0x1cfdb4 (52 bytes) */
@@ -777,7 +777,7 @@ int IRInst__dtor_1cfde8(this)
   if (this == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this[-1],this + -1);
+  return Arena__free(this[-1],this + -1);
 }
 
 /* IRInst__dtor_1cfe30 @ 0x1cfe30 (52 bytes) */
@@ -804,7 +804,7 @@ int IRInst__dtor_1cfe64(this2)
   if (this2 == (undefined4 *)0x0) {
     return;
   }
-  return FUN_00193cc0(this2[-1],this2 + -1);
+  return Arena__free(this2[-1],this2 + -1);
 }
 
 

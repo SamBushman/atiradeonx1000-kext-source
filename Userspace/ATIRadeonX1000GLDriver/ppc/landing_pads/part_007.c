@@ -9,8 +9,8 @@ int eh_pad_13c5d4(param_1)
   undefined4 in_stack_00000054;
   undefined4 in_stack_00000058;
   
-  FUN_00193cc0(in_stack_00000058,in_stack_00000054);
-  FUN_00193cc0(in_stack_00000048,in_stack_00000044);
+  Arena__free(in_stack_00000058,in_stack_00000054);
+  Arena__free(in_stack_00000048,in_stack_00000044);
                     
   __Unwind_Resume(param_1);
 }
@@ -22,7 +22,7 @@ int eh_pad_13c5e8(param_1)
   undefined4 in_stack_00000044;
   undefined4 in_stack_00000048;
   
-  FUN_00193cc0(in_stack_00000048,in_stack_00000044);
+  Arena__free(in_stack_00000048,in_stack_00000044);
                     
   __Unwind_Resume(param_1);
 }
@@ -36,8 +36,8 @@ int eh_pad_13ca48(param_1)
   undefined4 in_stack_00000054;
   undefined4 in_stack_00000058;
   
-  FUN_00193cc0(in_stack_00000058,in_stack_00000054);
-  FUN_00193cc0(in_stack_00000048,in_stack_00000044);
+  Arena__free(in_stack_00000058,in_stack_00000054);
+  Arena__free(in_stack_00000048,in_stack_00000044);
                     
   __Unwind_Resume(param_1);
 }
@@ -49,7 +49,7 @@ int eh_pad_13ca5c(param_1)
   undefined4 in_stack_00000044;
   undefined4 in_stack_00000048;
   
-  FUN_00193cc0(in_stack_00000048,in_stack_00000044);
+  Arena__free(in_stack_00000048,in_stack_00000044);
                     
   __Unwind_Resume(param_1);
 }
@@ -61,7 +61,7 @@ int eh_pad_13d2d8(param_1)
   undefined4 in_stack_00000040;
   undefined4 in_stack_00000044;
   
-  FUN_00193cc0(in_stack_00000044,in_stack_00000040);
+  Arena__free(in_stack_00000044,in_stack_00000040);
                     
   __Unwind_Resume(param_1);
 }
@@ -73,7 +73,7 @@ int eh_pad_13dba4(param_1)
   undefined4 in_stack_00000064;
   undefined4 in_stack_00000068;
   
-  FUN_00193cc0(in_stack_00000068,in_stack_00000064);
+  Arena__free(in_stack_00000068,in_stack_00000064);
                     
   __Unwind_Resume(param_1);
 }
@@ -85,7 +85,7 @@ int eh_pad_13dd38(param_1)
   undefined4 in_stack_00000064;
   undefined4 in_stack_00000068;
   
-  FUN_00193cc0(in_stack_00000068,in_stack_00000064);
+  Arena__free(in_stack_00000068,in_stack_00000064);
                     
   __Unwind_Resume(param_1);
 }
@@ -100,9 +100,9 @@ int eh_pad_13de58(param_1)
   undefined4 in_stack_00000058;
   
   if (unaff_r30 != 0) {
-    FUN_00193cc0(unaff_r28,unaff_r30);
+    Arena__free(unaff_r28,unaff_r30);
   }
-  FUN_00193cc0(in_stack_00000058,in_stack_00000054);
+  Arena__free(in_stack_00000058,in_stack_00000054);
                     
   __Unwind_Resume(param_1);
 }
@@ -117,9 +117,9 @@ int eh_pad_13e7c8(param_1)
   undefined4 in_stack_00000058;
   
   if (unaff_r30 != 0) {
-    FUN_00193cc0(unaff_r27,unaff_r30);
+    Arena__free(unaff_r27,unaff_r30);
   }
-  FUN_00193cc0(in_stack_00000058,in_stack_00000054);
+  Arena__free(in_stack_00000058,in_stack_00000054);
                     
   __Unwind_Resume(param_1);
 }
@@ -134,9 +134,9 @@ int eh_pad_13eda8(param_1)
   undefined4 in_stack_00000058;
   
   if (unaff_r30 != 0) {
-    FUN_00193cc0(unaff_r27,unaff_r30);
+    Arena__free(unaff_r27,unaff_r30);
   }
-  FUN_00193cc0(in_stack_00000058,in_stack_00000054);
+  Arena__free(in_stack_00000058,in_stack_00000054);
                     
   __Unwind_Resume(param_1);
 }
@@ -148,7 +148,7 @@ int eh_pad_13ee04(param_1)
   undefined4 in_stack_00000054;
   undefined4 in_stack_00000058;
   
-  FUN_00193cc0(in_stack_00000058,in_stack_00000054);
+  Arena__free(in_stack_00000058,in_stack_00000054);
                     
   __Unwind_Resume(param_1);
 }
@@ -160,7 +160,7 @@ int eh_pad_13f3bc(param_1)
   undefined4 in_stack_00000054;
   undefined4 in_stack_00000058;
   
-  FUN_00193cc0(in_stack_00000058,in_stack_00000054);
+  Arena__free(in_stack_00000058,in_stack_00000054);
                     
   __Unwind_Resume(param_1);
 }
@@ -173,7 +173,7 @@ int eh_pad_13fd28(param_1)
   undefined4 unaff_r30;
   
   if (unaff_r23 != 0) {
-    FUN_00193cc0(unaff_r30,unaff_r23);
+    Arena__free(unaff_r30,unaff_r23);
   }
                     
   __Unwind_Resume(param_1);
@@ -187,7 +187,7 @@ int eh_pad_13fd5c(param_1)
   undefined4 unaff_r30;
   
   if (unaff_r15 != 0) {
-    FUN_00193cc0(unaff_r30,unaff_r15);
+    Arena__free(unaff_r30,unaff_r15);
   }
                     
   __Unwind_Resume(param_1);
@@ -205,10 +205,10 @@ int eh_pad_1407a0(param_1)
   undefined4 in_stack_00000064;
   
   if (unaff_r30 != 0) {
-    FUN_00193cc0(unaff_r28,unaff_r30);
+    Arena__free(unaff_r28,unaff_r30);
   }
-  FUN_00193cc0(in_stack_00000064,in_stack_00000060);
-  FUN_00193cc0(in_stack_00000054,in_stack_00000050);
+  Arena__free(in_stack_00000064,in_stack_00000060);
+  Arena__free(in_stack_00000054,in_stack_00000050);
                     
   __Unwind_Resume(param_1);
 }
@@ -222,8 +222,8 @@ int eh_pad_140dfc(param_1)
   undefined4 in_stack_00000060;
   undefined4 in_stack_00000064;
   
-  FUN_00193cc0(in_stack_00000064,in_stack_00000060);
-  FUN_00193cc0(in_stack_00000054,in_stack_00000050);
+  Arena__free(in_stack_00000064,in_stack_00000060);
+  Arena__free(in_stack_00000054,in_stack_00000050);
                     
   __Unwind_Resume(param_1);
 }
@@ -235,7 +235,7 @@ int eh_pad_140e44(param_1)
   undefined4 in_stack_00000050;
   undefined4 in_stack_00000054;
   
-  FUN_00193cc0(in_stack_00000054,in_stack_00000050);
+  Arena__free(in_stack_00000054,in_stack_00000050);
                     
   __Unwind_Resume(param_1);
 }
@@ -247,7 +247,7 @@ int eh_pad_142f70(param_1)
   undefined4 in_stack_0000004c;
   undefined4 in_stack_00000050;
   
-  FUN_00193cc0(in_stack_00000050,in_stack_0000004c);
+  Arena__free(in_stack_00000050,in_stack_0000004c);
                     
   __Unwind_Resume(param_1);
 }
@@ -261,8 +261,8 @@ int eh_pad_143de4(param_1)
   undefined4 in_stack_00000058;
   undefined4 in_stack_0000005c;
   
-  FUN_00193cc0(in_stack_0000005c,in_stack_00000058);
-  FUN_00193cc0(in_stack_0000004c,in_stack_00000048);
+  Arena__free(in_stack_0000005c,in_stack_00000058);
+  Arena__free(in_stack_0000004c,in_stack_00000048);
                     
   __Unwind_Resume(param_1);
 }
@@ -274,7 +274,7 @@ int eh_pad_143e18(param_1)
   undefined4 in_stack_00000048;
   undefined4 in_stack_0000004c;
   
-  FUN_00193cc0(in_stack_0000004c,in_stack_00000048);
+  Arena__free(in_stack_0000004c,in_stack_00000048);
                     
   __Unwind_Resume(param_1);
 }
@@ -286,7 +286,7 @@ int eh_pad_146564(param_1)
   undefined4 unaff_r15;
   undefined4 unaff_r21;
   
-  FUN_00193cc0(unaff_r15,unaff_r21);
+  Arena__free(unaff_r15,unaff_r21);
                     
   __Unwind_Resume(param_1);
 }
@@ -298,7 +298,7 @@ int eh_pad_1465d8(param_1)
   undefined4 in_stack_00000044;
   undefined4 in_stack_00000050;
   
-  FUN_00193cc0(in_stack_00000044,in_stack_00000050);
+  Arena__free(in_stack_00000044,in_stack_00000050);
                     
   __Unwind_Resume(param_1);
 }
@@ -366,7 +366,7 @@ int eh_pad_14e984(param_1)
   undefined4 in_stack_00000040;
   undefined4 in_stack_00000044;
   
-  FUN_00193cc0(in_stack_00000044,in_stack_00000040);
+  Arena__free(in_stack_00000044,in_stack_00000040);
                     
   __Unwind_Resume(param_1);
 }
@@ -458,7 +458,7 @@ int eh_pad_1579dc(param_1)
   undefined4 in_stack_00000058;
   undefined4 in_stack_0000005c;
   
-  FUN_00193cc0(in_stack_0000005c,in_stack_00000058);
+  Arena__free(in_stack_0000005c,in_stack_00000058);
                     
   __Unwind_Resume(param_1);
 }
@@ -470,7 +470,7 @@ int eh_pad_157b48(param_1)
   undefined4 in_stack_00000058;
   undefined4 in_stack_0000005c;
   
-  FUN_00193cc0(in_stack_0000005c,in_stack_00000058);
+  Arena__free(in_stack_0000005c,in_stack_00000058);
                     
   __Unwind_Resume(param_1);
 }
@@ -490,7 +490,7 @@ int eh_pad_1595b4(param_1)
   undefined4 in_stack_00000040;
   undefined4 in_stack_00000044;
   
-  FUN_00193cc0(in_stack_00000044,in_stack_00000040);
+  Arena__free(in_stack_00000044,in_stack_00000040);
                     
   __Unwind_Resume(param_1);
 }
@@ -607,7 +607,7 @@ int eh_pad_165f24(param_1)
   int unaff_r29;
   
   if (unaff_r29 != 0) {
-    FUN_00193cc0(unaff_r28,unaff_r29);
+    Arena__free(unaff_r28,unaff_r29);
   }
                     
   __Unwind_Resume(param_1);
@@ -621,7 +621,7 @@ int eh_pad_165f38(param_1)
   int unaff_r29;
   
   if (unaff_r29 != 0) {
-    FUN_00193cc0(unaff_r28,unaff_r29);
+    Arena__free(unaff_r28,unaff_r29);
   }
                     
   __Unwind_Resume(param_1);
@@ -635,7 +635,7 @@ int eh_pad_166220(param_1)
   int unaff_r30;
   
   if (unaff_r30 != 0) {
-    FUN_00193cc0(unaff_r29,unaff_r30);
+    Arena__free(unaff_r29,unaff_r30);
   }
                     
   __Unwind_Resume(param_1);

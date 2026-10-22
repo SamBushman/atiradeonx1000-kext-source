@@ -436,7 +436,7 @@ local	FUN_00135110	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00
 local	FUN_00135110	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
 local	FUN_001351c4	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
 local	FUN_001351c4	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
-local	FUN_00135fb0	uVar27	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
+local	FUN_00135fb0	uVar27	arenaOrScratch	INFERRED	pass_color_graph: iterative graph-colouring register allocator (see notes_compiler_passes.md); role read from its use
 local	FUN_00135fb0	puVar12	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
 local	FUN_00136ec4	uVar6	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
 local	FUN_00136ec4	puVar2	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1

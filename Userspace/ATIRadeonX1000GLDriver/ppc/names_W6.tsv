@@ -491,7 +491,7 @@ local	FUN_0019286c	iVar9	loopRemaining	INFERRED	rule R1: decremented by 1 inside
 local	FUN_0019286c	pcVar2	loopIndex4	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00193944	iVar1	callResult	INFERRED	rule R2: holds a call result that is tested or returned
 local	FUN_00193e74	uVar1	callResult	INFERRED	rule R2: holds a call result that is tested or returned
-local	FUN_00194034	iVar2	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00194034	iVar2	count	CONFIRMED	counts the nodes of the circular list from list+8 up to the sentinel list+0xc
 local	FUN_001940f0	iVar7	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_001940f0	puVar4	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_001940f0	uVar5	loopIndex3	INFERRED	rule R1: incremented by 1 inside a loop

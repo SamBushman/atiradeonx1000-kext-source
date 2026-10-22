@@ -3319,15 +3319,15 @@ int FUN_000e07b8(param_1, param_2)
   return;
 }
 
-/* FUN_000e07dc @ 0xe07dc (84 bytes) */
-int FUN_000e07dc(param_1, param_2)
-  int param_1;
-  uint param_2;
+/* Compiler__isOptionEnabled @ 0xe07dc (84 bytes) */
+int Compiler__isOptionEnabled(compiler, optionId)
+  int compiler;
+  uint optionId;
 {
   int iVar1;
   
-  if ((((int)*(char *)(((int)param_2 >> 3) + param_1 + 0x59c) >> (param_2 & 7) & 1U) != 0) &&
-     (iVar1 = FUN_0010dc9c(*(undefined4 *)(param_1 + 0x30c),param_2), iVar1 != 0)) {
+  if ((((int)*(char *)(((int)optionId >> 3) + compiler + 0x59c) >> (optionId & 7) & 1U) != 0) &&
+     (iVar1 = FUN_0010dc9c(*(undefined4 *)(compiler + 0x30c),optionId), iVar1 != 0)) {
     return 1;
   }
   return 0;
@@ -3903,19 +3903,19 @@ int FUN_000e14e4(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_000e1534 @ 0xe1534 (48 bytes) */
-int FUN_000e1534(param_1, param_2)
-  int param_1;
-  int param_2;
+/* Compiler__fail @ 0xe1534 (48 bytes) */
+int Compiler__fail(compiler, errorCode)
+  int compiler;
+  int errorCode;
 {
-  if (param_2 == 0) {
-    *(undefined4 *)(param_1 + 0x314) = 1;
+  if (errorCode == 0) {
+    *(undefined4 *)(compiler + 0x314) = 1;
   }
   else {
-    *(int *)(param_1 + 0x314) = param_2;
+    *(int *)(compiler + 0x314) = errorCode;
   }
                     
-  _longjmp(*(undefined4 *)(param_1 + 4),1);
+  _longjmp(*(undefined4 *)(compiler + 4),1);
 }
 
 /* FUN_000e1564 @ 0xe1564 (84 bytes) */
@@ -3927,7 +3927,7 @@ int FUN_000e1564(param_1, param_2)
   
   iVar1 = (**(code **)(param_1 + 0x350))(*(undefined4 *)(param_1 + 0x354),param_2);
   if (iVar1 == 0) {
-    ((int (*)())FUN_000e1534)(param_1,2);
+    ((int (*)())Compiler__fail)(param_1,2);
   }
   return iVar1;
 }

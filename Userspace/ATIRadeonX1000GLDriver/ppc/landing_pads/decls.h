@@ -568,6 +568,6 @@ extern int eh_pad_19dfcc();
 extern int eh_pad_1a2874();
 extern int FUN_000e3308();
 extern int Block__dtor_ea270();
-extern int FUN_00193cc0();
+extern int Arena__free();
 extern int MachineAssembler__dtor_19b91c();
 extern int __Unwind_Resume();

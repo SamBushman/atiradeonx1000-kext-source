@@ -1,0 +1,48 @@
+func	FUN_00135d24	ColorGraph__removeNodeUpdateDegrees	INFERRED	color_graph simplify step: for each neighbour of a node of the same class with degree>0, decrement the degree; push the neighbour on the worklist when it reaches colorLimit-1; class name from pass_color_graph's own parameter name
+func	FUN_00134ce8	ColorGraph__countSameClassNeighbors	INFERRED	counts neighbours (7-id chunks linked at +0x1c) whose register class equals the node's; used as the initial degree in pass_color_graph
+func	FUN_001309dc	Program__isHwRegAllowed	INFERRED	tests a bit of the bitset at program+0x430; pass_color_graph marks the colour used when it is clear
+func	FUN_00130444	Program__markHwRegUsed	INFERRED	clears a bit of the bitset at program+0x42c and sets program+0x30 |= 0x8000, called when a colour is assigned
+func	FUN_00193f44	DList__insertBefore	CONFIRMED	node+4 prev, node+8 next; links node before ref (R2b notes section 2: DListNode)
+func	FUN_00193f74	DList__insertAfter	CONFIRMED	links node after ref
+func	FUN_00193f64	DList__pushBack	CONFIRMED	insertBefore the sentinel at list+0xc
+func	FUN_00193f94	DList__pushFront	CONFIRMED	insertAfter the list head
+func	FUN_0019401c	DList__unlink	CONFIRMED	prev.next = next; next.prev = prev
+func	FUN_00194034	DList__count	CONFIRMED	counts nodes from list+8 until the sentinel list+0xc
+func	FUN_00193e18	Arena__alloc	CONFIRMED	bump allocator (R2b section 2)
+func	FUN_00193cc0	Arena__free	CONFIRMED	rewinds only for the last allocation, zeroing the freed bytes
+func	FUN_0019423c	Vector__elementRefGrow	CONFIRMED	growable array {capacity,count,data,arena}: grows to fit the index and returns its address
+func	FUN_00194208	Vector__removeAt	CONFIRMED	removes one element and shifts the tail down
+func	FUN_001054ec	IRInst__getOperandRecord	CONFIRMED	operand record n: inline at +0x8c+n*0x18 (n<5) else element n-5 of the vector at +0x118
+func	FUN_00105594	IRInst__getOperandSource	INFERRED	returns record+4, the value or instruction feeding operand n
+func	FUN_00105334	IRInst__setOperandSourceRaw	CONFIRMED	stores record+4 of operand n, allocating records >=5 on demand
+func	FUN_001046c8	IRInst__setOperandRef	CONFIRMED	operand n: record+0 = reference object, +0xc = ref[1], +8 = ref[2]; operand 0 caches ref->vfn[9]() at inst+0x128
+func	FUN_00106004	IRInst__setOperandSource	CONFIRMED	sets operand n source with def-use list upkeep (user vector at +0x10, use count at +0x160)
+func	FUN_00106804	IRInst__setExtraOperandSource	CONFIRMED	sets the single trailing operand (index inst+0x84, flag 0x200) with the same upkeep
+func	FUN_00105f04	IRInst__addToUseLists	CONFIRMED	adds inst to the user vector of every operand source when the program keeps def-use lists
+func	FUN_001049e8	IRInst__appendSource	INFERRED	sets operand count+1 from a reference object and bumps inst+0x84
+func	FUN_0010445c	IRInst__clone	CONFIRMED	copies 0x164 bytes into a fresh arena block, new id unless keepId
+func	FUN_001043f0	IRInst__create	CONFIRMED	instruction factory by opcode (constructor table 0x1ea4fc), sets inst+0x88
+func	FUN_00103d50	IROperand__setModifierBits	CONFIRMED	sets or clears mask bits in the operand record flag word at +0x14
+func	FUN_00104054	IRInst__useCount	CONFIRMED	+0x160 minus the program epoch at +0x478, clamped at 0
+func	FUN_0010497c	IRInst__hasSingleUse	CONFIRMED	useCount == 1
+func	FUN_00103f18	IRInst__saveCounters	INFERRED	snapshots +0x160 and +0x14c under a mask
+func	FUN_00103f44	IRInst__restoreCounters	INFERRED	restores what saveCounters stored
+func	FUN_00112f54	Opcode__getInfo	CONFIRMED	table lookup at 0x1fc2b0
+func	FUN_000e07dc	Compiler__isOptionEnabled	INFERRED	bit test in compiler+0x59c and the target description
+func	FUN_000e1534	Compiler__fail	CONFIRMED	stores the error code and longjmps to compiler+4
+func	FUN_000ee9ac	Program__addInst	CONFIRMED	appends to the instruction vector at program+0x3c4
+func	FUN_000ef970	Program__removeInst	CONFIRMED	removes from the instruction vector at program+0x3c4
+func	FUN_000ec2e8	Program__freeWorkArrays	INFERRED	frees and zeroes program+0x394/+0x398/+0x39c
+func	FUN_000e7738	Block__insertInstAfter	CONFIRMED	links inst after a given instruction and sets inst+0x158
+func	FUN_000e7700	Block__insertInstBefore	CONFIRMED	links inst before a given instruction and sets inst+0x158
+func	FUN_000e7688	Block__appendInst	CONFIRMED	links inst before the exit pseudo instruction (+0xcc)
+func	FUN_000e76c4	Block__prependInst	CONFIRMED	links inst after the entry pseudo instruction (+0xc8)
+func	FUN_000e7658	Block__detach	INFERRED	frees the slot id bit and unlinks the block
+func	FUN_000e920c	Block__getSuccessor	CONFIRMED	element of the successor vector at +0xd0
+func	FUN_000e9184	Block__getPredecessor	CONFIRMED	element of the predecessor vector at +0xd4
+func	FUN_000e8e4c	Block__connect	INFERRED	adds the edge a->b if absent
+func	FUN_000e7804	Block__getBranchInst	INFERRED	returns the block branch instruction at +0x130 after a cleanup walk
+func	FUN_000e87e4	IfHeader__canFlatten	INFERRED	flatten_ifs gate: small arms, single successors, join at +0x13c
+func	FUN_0010b498	IRInst__isOperandConstZero	INFERRED	every used lane of source n resolves to constant 0.0
+func	FUN_0010b5f8	IRInst__getCompareCondition	INFERRED	condition code per opcode; inst+0x12c for 0x8b..0x8d
+func	FUN_0010b914	IRInst__setCompareCondition	INFERRED	writes inst+0x12c for 0x8b..0x8d

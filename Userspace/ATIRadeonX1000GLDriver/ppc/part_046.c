@@ -54,8 +54,8 @@ int FUN_0017343c(ctx, param_2)
        (((*(uint *)(iVar2 + 0xb8) & 1) != 0 && ((*(uint *)(iVar2 + 0xd0) & 1) == 0)))) {
       iVar2 = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
       *(int *)(iVar2 + 0xa8) = *(int *)(iVar2 + 0xa8) + 1;
-      FUN_00103d50(*(int *)(ctx + 0xb0) + 0xa4,1,0);
-      FUN_00103d50(*(int *)(ctx + 0xb0) + 0xbc,1,1);
+      IROperand__setModifierBits(*(int *)(ctx + 0xb0) + 0xa4,1,0);
+      IROperand__setModifierBits(*(int *)(ctx + 0xb0) + 0xbc,1,1);
       iVar1 = (uVar3 >> 3 & 0x1ffffffc) + iVar1;
       *(uint *)(*(int *)(ctx + 0xb0) + 0x14) =
            *(uint *)(*(int *)(ctx + 0xb0) + 0x14) | 0x200000;
@@ -113,7 +113,7 @@ int FUN_00173638(ctx)
   
   iVar2 = *(int *)(ctx + 0xb0);
   if (*(int *)(*(int *)(iVar2 + 0x88) + 8) == 0x77) {
-    iVar2 = FUN_001054ec(iVar2,0);
+    iVar2 = IRInst__getOperandRecord(iVar2,0);
     if (*(int *)(iVar2 + 0x10) == DAT_001b01b4) {
       *(uint *)(*(int *)(ctx + 0xb0) + 0x14) =
            *(uint *)(*(int *)(ctx + 0xb0) + 0x14) & 0xfffffff7;
@@ -131,7 +131,7 @@ int FUN_00173638(ctx)
   *(uint *)(iVar2 + 0x14) = *(uint *)(iVar2 + 0x14) & 0xffffffef;
   iVar2 = *(int *)(ctx + 0x238);
   if ((*(uint *)(*(int *)(iVar2 + 0x6c4) + 0x30) & 0x4000) == 0) {
-    FUN_000ef970(*(int *)(iVar2 + 0x6c4),*(undefined4 *)(ctx + 0xb0));
+    Program__removeInst(*(int *)(iVar2 + 0x6c4),*(undefined4 *)(ctx + 0xb0));
     iVar2 = *(int *)(ctx + 0x238);
   }
   piVar3 = *(int **)(ctx + 0xb0);
@@ -154,7 +154,7 @@ int FUN_00173754(ctx, param_2)
   undefined4 local_28;
   undefined4 local_24 [6];
   
-  iVar1 = FUN_000e07dc(*(undefined4 *)(ctx + 0x238),9);
+  iVar1 = Compiler__isOptionEnabled(*(undefined4 *)(ctx + 0x238),9);
   if (((iVar1 == 0) ||
       (*(int *)(*(int *)(ctx + 0x238) + 0x658) <=
        *(int *)(*(int *)(*(int *)(ctx + 0x238) + 0x6c4) + 0xa8))) ||
@@ -163,9 +163,9 @@ LAB_00173854:
     uVar4 = 0;
   }
   else {
-    loopIndex = FUN_001054ec(iVar1,0);
+    loopIndex = IRInst__getOperandRecord(iVar1,0);
     local_28 = *(undefined4 *)(loopIndex + 0x10);
-    loopRemaining = FUN_001054ec(*(undefined4 *)(ctx + 0xb0),0);
+    loopRemaining = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0);
     loopIndex = 0;
     local_24[0] = *(undefined4 *)(loopRemaining + 0x10);
     loopRemaining = 4;
@@ -213,7 +213,7 @@ int FUN_0017386c(ctx)
     if (callResult < loopIndex) break;
     uVar1 = *(undefined4 *)(ctx + 0xb0);
     uVar4 = *(undefined4 *)(*(int *)(ctx + 0x238) + 0x6c4);
-    callResult = FUN_001054ec(uVar1,0);
+    callResult = IRInst__getOperandRecord(uVar1,0);
     FUN_000f3c30(local_28,uVar1,loopIndex,uVar4,*(undefined4 *)(callResult + 0x10));
     a0 = *(int **)(ctx + 0xb0);
     *(undefined4 *)(iVar5 + 0x228) = local_28[0];
@@ -305,7 +305,7 @@ int FUN_00173a48(inst, param_2)
         if (callResult < loopIndex) {
           return 1;
         }
-        callResult = FUN_001054ec(inst,loopIndex);
+        callResult = IRInst__getOperandRecord(inst,loopIndex);
         callResult = FUN_000f2c5c(*(undefined4 *)(callResult + 0x10));
         if (callResult == 0) break;
         loopIndex = loopIndex + 1;
@@ -330,7 +330,7 @@ int FUN_00173af8(ctx, param_2)
   {
     loopIndex = 0;
     do {
-      operandRecord = FUN_001054ec(*(undefined4 *)(ctx + 0xb0),0);
+      operandRecord = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0);
       local_38[0] = *(undefined4 *)(operandRecord + 0x10);
       if ((*(char *)((int)local_38 + loopIndex) == '\0') && (*param_2 != 0)) {
         return;
@@ -400,7 +400,7 @@ int FUN_00173cdc(ctx, param_2)
   undefined4 local_38 [4];
   undefined4 local_28 [4];
   
-  iVar1 = FUN_000e07dc(*(undefined4 *)(ctx + 0x238),8);
+  iVar1 = Compiler__isOptionEnabled(*(undefined4 *)(ctx + 0x238),8);
   if ((iVar1 == 0) ||
      (*(int *)(*(int *)(ctx + 0x238) + 0x658) <=
       *(int *)(*(int *)(*(int *)(ctx + 0x238) + 0x6c4) + 0xa8))) {
@@ -420,7 +420,7 @@ int FUN_00173cdc(ctx, param_2)
         piVar2 = (int *)(uVar6 * 4 + puVar7[2]);
       }
       else {
-        piVar2 = (int *)FUN_0019423c(puVar7,uVar6);
+        piVar2 = (int *)Vector__elementRefGrow(puVar7,uVar6);
       }
       iVar1 = *(int *)(*piVar2 + 0xb0);
     }
@@ -455,7 +455,7 @@ int FUN_00173e10(param_1, param_2)
            FUN_00194834(*(undefined4 *)(param_1 + 0x3e4),*(undefined4 *)(param_1 + 0x3f0));
   if (puVar1 == (undefined4 *)0x0) {
     arenaAt378 = *(undefined4 *)(param_1 + 0x378);
-    puVar2 = (undefined4 *)FUN_00193e18(arenaAt378,0x2c);
+    puVar2 = (undefined4 *)Arena__alloc(arenaAt378,0x2c);
     puVar1 = puVar2 + 1;
     *puVar2 = arenaAt378;
     puVar2[1] = param_2;
@@ -478,7 +478,7 @@ int FUN_00173e10(param_1, param_2)
       puVar6[1] = uVar4 + 1;
     }
     else {
-      piVar3 = (int *)FUN_0019423c(puVar6,uVar4);
+      piVar3 = (int *)Vector__elementRefGrow(puVar6,uVar4);
     }
     *piVar3 = (int)puVar1;
   }
@@ -577,11 +577,11 @@ LAB_00173fa0:
             in_r5 = (dword *)(uVar14 * 4 + loopIndex7[2]);
           }
           else {
-            in_r5 = (dword *)FUN_0019423c(loopIndex7,uVar14);
+            in_r5 = (dword *)Vector__elementRefGrow(loopIndex7,uVar14);
             loopIndex = *(int *)(ctx + 0xb0);
           }
           dVar10 = *in_r5;
-          loopIndex = FUN_001054ec(loopIndex,pdVar11);
+          loopIndex = IRInst__getOperandRecord(loopIndex,pdVar11);
           local_58[0] = *(undefined4 *)(loopIndex + 0x10);
           loopIndex5 = (int *)((int)pdVar11 * 0x10 + ctx + 0x168);
           loopIndex7 = (uint *)((int)pdVar11 * 0x20 + ctx + 200);
@@ -635,7 +635,7 @@ LAB_00173fa0:
         loopIndex6 = (int *)(uVar12 * 4 + loopIndex7[2]);
       }
       else {
-        loopIndex6 = (int *)FUN_0019423c(loopIndex7,uVar12);
+        loopIndex6 = (int *)Vector__elementRefGrow(loopIndex7,uVar12);
         loopIndex5 = *(int **)(ctx + 0xb0);
       }
       loopIndex3 = *loopIndex6;
@@ -646,7 +646,7 @@ LAB_00173fa0:
       loopIndex = ctx;
       do {
         if (*loopIndex4 != '\0') {
-          loopRemaining = FUN_001054ec(loopIndex5,pdVar11);
+          loopRemaining = IRInst__getOperandRecord(loopIndex5,pdVar11);
           uVar12 = (uint)*(byte *)(loopIndex2 + loopRemaining + 0x10);
           if (uVar12 == 4) {
             loopIndex5 = *(int **)(ctx + 0xb0);
@@ -687,7 +687,7 @@ LAB_00173fa0:
     uVar4 = extraout_r4;
     if (0 < *(int *)(loopIndex + 0x84)) {
       do {
-        uVar17 = FUN_00105594(loopIndex,loopIndex3);
+        uVar17 = IRInst__getOperandSource(loopIndex,loopIndex3);
         uVar4 = (undefined4)uVar17;
         if ((int)((ulonglong)uVar17 >> 0x20) == 0) {
           loopIndex2 = 4;
@@ -784,7 +784,7 @@ int FUN_001745f0(ctx)
   int callResult;
   undefined4 uVar2;
   
-  callResult = FUN_000e07dc(*(undefined4 *)(ctx + 0x238),9);
+  callResult = Compiler__isOptionEnabled(*(undefined4 *)(ctx + 0x238),9);
   uVar2 = 0;
   if (callResult != 0) {
     callResult = FUN_00180250(ctx);
@@ -829,7 +829,7 @@ int FUN_001746c8(compiler, param_2)
            FUN_00194834(*(undefined4 *)(compiler + 1000),*(undefined4 *)(compiler + 0x3f4));
   if (puVar1 == (undefined4 *)0x0) {
     arena = *(undefined4 *)(compiler + 0x378);
-    allocation = (undefined4 *)FUN_00193e18(arena,0x34);
+    allocation = (undefined4 *)Arena__alloc(arena,0x34);
     puVar1 = allocation + 1;
     *allocation = arena;
     allocation[3] = 0xffffffff;
@@ -853,7 +853,7 @@ int FUN_001746c8(compiler, param_2)
       puVar6[1] = uVar4 + 1;
     }
     else {
-      piVar3 = (int *)FUN_0019423c(puVar6,uVar4);
+      piVar3 = (int *)Vector__elementRefGrow(puVar6,uVar4);
     }
     *piVar3 = (int)puVar1;
   }
@@ -886,7 +886,7 @@ int FUN_001747c4(param_1, param_2, param_3, param_4)
         puVar2 = (undefined4 *)(iVar4 + puVar5[2]);
       }
       else {
-        puVar2 = (undefined4 *)FUN_0019423c(puVar5,param_2);
+        puVar2 = (undefined4 *)Vector__elementRefGrow(puVar5,param_2);
       }
       callResult = FUN_00194834(*puVar2,param_1);
       if (callResult != 0) {
@@ -925,7 +925,7 @@ int FUN_00174888(param_1, param_2, param_3, param_4)
         puVar2 = (undefined4 *)(iVar4 + puVar5[2]);
       }
       else {
-        puVar2 = (undefined4 *)FUN_0019423c(puVar5,param_2);
+        puVar2 = (undefined4 *)Vector__elementRefGrow(puVar5,param_2);
       }
       callResult = FUN_00194834(*puVar2,param_1);
       if (callResult != 0) {
@@ -956,19 +956,19 @@ int FUN_0017494c(ctx, param_2, param_3)
   uint uVar10;
   uint *puVar11;
   
-  iVar2 = FUN_000e07dc(*(undefined4 *)(ctx + 0x238),9);
+  iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(ctx + 0x238),9);
   if ((iVar2 != 0) &&
      (iVar2 = *(int *)(ctx + 0x238),
      *(int *)(*(int *)(iVar2 + 0x6c4) + 0xa8) < *(int *)(iVar2 + 0x658))) {
     arena = *(undefined4 *)(iVar2 + 0x378);
     loopIndex = 0;
-    allocation = (undefined4 *)FUN_00193e18(arena,0x240);
+    allocation = (undefined4 *)Arena__alloc(arena,0x240);
     *allocation = arena;
     allocation[0x2d] = *(undefined4 *)(ctx + 0xb0);
     loopIndex2 = allocation + 1;
     iVar2 = ctx;
     do {
-      operandRecord = FUN_001054ec(*(undefined4 *)(ctx + 0xb0),0);
+      operandRecord = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0);
       if (*(char *)(loopIndex + operandRecord + 0x10) == '\x01') {
         loopIndex2[8] = 3;
       }
@@ -996,7 +996,7 @@ int FUN_0017494c(ctx, param_2, param_3)
           piVar5 = (int *)(uVar10 * 4 + puVar11[2]);
         }
         else {
-          piVar5 = (int *)FUN_0019423c(puVar11,uVar10);
+          piVar5 = (int *)Vector__elementRefGrow(puVar11,uVar10);
         }
         iVar2 = *(int *)(*piVar5 + 0xb0);
       }
@@ -1055,7 +1055,7 @@ int FUN_00174b04(ctx, param_2, param_3)
           piVar4 = (int *)(iVar5 + puVar11[2]);
         }
         else {
-          piVar4 = (int *)FUN_0019423c(puVar11,uVar12);
+          piVar4 = (int *)Vector__elementRefGrow(puVar11,uVar12);
         }
         iVar7 = *(int *)(*piVar4 + 0xc4);
         uVar3 = *(uint *)(iVar7 + 4);
@@ -1075,7 +1075,7 @@ int FUN_00174b04(ctx, param_2, param_3)
                   iVar5 = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
                   *(int *)(iVar5 + 0xa8) = *(int *)(iVar5 + 0xa8) + 1;
                   iVar5 = *(int *)(ctx + 0xb0) + iVar9 + 0x80;
-                  FUN_00103d50(iVar5 + 0xc,1,*(uint *)(iVar5 + 0x20) & 1 ^ 1);
+                  IROperand__setModifierBits(iVar5 + 0xc,1,*(uint *)(iVar5 + 0x20) & 1 ^ 1);
                   piVar2 = *(int **)(ctx + 0xb0);
                 }
                 goto LAB_00174ca8;
@@ -1117,7 +1117,7 @@ int FUN_00174ce0(param_1, param_2, param_3)
            FUN_00194834(*(undefined4 *)(param_1 + 0x3ec),*(undefined4 *)(param_1 + 0x3f4));
   if (puVar1 == (undefined4 *)0x0) {
     arenaAt378 = *(undefined4 *)(param_1 + 0x378);
-    puVar2 = (undefined4 *)FUN_00193e18(arenaAt378,0x34);
+    puVar2 = (undefined4 *)Arena__alloc(arenaAt378,0x34);
     puVar1 = puVar2 + 1;
     *puVar2 = arenaAt378;
     puVar2[3] = 0xffffffff;
@@ -1146,7 +1146,7 @@ int FUN_00174ce0(param_1, param_2, param_3)
       puVar6[1] = uVar5 + 1;
     }
     else {
-      piVar3 = (int *)FUN_0019423c(puVar6,uVar5);
+      piVar3 = (int *)Vector__elementRefGrow(puVar6,uVar5);
     }
     *piVar3 = (int)puVar1;
   }
@@ -1219,7 +1219,7 @@ LAB_00174efc:
     loopIndex2 = 0;
     loopIndex3 = param_1;
     do {
-      iVar9 = FUN_001054ec(iVar9,0);
+      iVar9 = IRInst__getOperandRecord(iVar9,0);
       if (*(char *)(loopIndex2 + iVar9 + 0x10) == '\x01') {
         iVar9 = param_1[0x2c];
       }
@@ -1229,7 +1229,7 @@ LAB_00174efc:
           loopIndex = 1;
           loopIndex4 = param_1 + loopIndex2 + 0x5e;
           do {
-            iVar9 = FUN_001054ec(iVar9,loopIndex);
+            iVar9 = IRInst__getOperandRecord(iVar9,loopIndex);
             if (*(char *)(loopIndex2 + iVar9 + 0x10) != '\x04') {
               iVar9 = param_1[0x2c];
               *loopIndex3 = *loopIndex4;
@@ -1248,7 +1248,7 @@ LAB_00174efc:
         loopIndex2 = 0;
         loopIndex3 = param_1;
         while( true ) {
-          iVar9 = FUN_001054ec(iVar9,0);
+          iVar9 = IRInst__getOperandRecord(iVar9,0);
           if (*(char *)(loopIndex2 + iVar9 + 0x10) == '\x01') {
             *loopIndex3 = 2;
           }
@@ -1318,7 +1318,7 @@ LAB_00174efc:
       iVar9 = 0;
       loopIndex3 = param_1;
       do {
-        loopIndex2 = FUN_001054ec(loopIndex2,0);
+        loopIndex2 = IRInst__getOperandRecord(loopIndex2,0);
         if (*(char *)(loopIndex + loopIndex2 + 0x10) != '\x01') {
           loopIndex4 = (int *)param_1[0x2c];
           if (*(int *)(loopIndex4[0x22] + 8) == 0x8e) {
@@ -1386,7 +1386,7 @@ LAB_001756e4:
 LAB_001756ec:
                 loopIndex2 = ((int (*)())FUN_00173e10)(param_1[0x8e],loopIndex2);
                 loopRemaining = *(int *)(loopIndex2 + 4);
-                loopIndex2 = FUN_001054ec(param_1[0x2c],0);
+                loopIndex2 = IRInst__getOperandRecord(param_1[0x2c],0);
                 if (*(char *)(loopIndex + loopIndex2 + 0x10) == '\0') {
                   *(undefined4 *)((int)local_68 + iVar9) = uVar1;
                 }
@@ -1420,10 +1420,10 @@ LAB_001757d8:
   else {
     loopIndex2 = param_1[0x2c];
   }
-  loopIndex2 = FUN_001054ec(loopIndex2,0);
+  loopIndex2 = IRInst__getOperandRecord(loopIndex2,0);
   iVar9 = 0;
   if (*(int *)(loopIndex2 + 0x10) != 0x1010101) {
-    loopIndex2 = FUN_001054ec(param_1[0x2c],0);
+    loopIndex2 = IRInst__getOperandRecord(param_1[0x2c],0);
     iVar9 = FUN_000f30d4(*(undefined4 *)(loopIndex2 + 0x10));
   }
   loopIndex2 = (**(code **)(*(int *)param_1[0x2c] + 100))((int *)param_1[0x2c]);
@@ -1597,7 +1597,7 @@ int FUN_001758d8(param_1, param_2, param_3, param_4)
         puVar4 = (undefined4 *)(loopRemaining + puVar5[2]);
       }
       else {
-        puVar4 = (undefined4 *)FUN_0019423c(puVar5,uVar6);
+        puVar4 = (undefined4 *)Vector__elementRefGrow(puVar5,uVar6);
       }
       puVar4 = (undefined4 *)FUN_00194834(*puVar4,param_1);
       if (puVar4 != (undefined4 *)0x0) {
@@ -1627,7 +1627,7 @@ int FUN_001758d8(param_1, param_2, param_3, param_4)
     puVar4 = (undefined4 *)(param_2 * 4 + puVar5[2]);
   }
   else {
-    puVar4 = (undefined4 *)FUN_0019423c(puVar5,param_2);
+    puVar4 = (undefined4 *)Vector__elementRefGrow(puVar5,param_2);
   }
   FUN_00194d44(*puVar4,param_1);
   return (undefined4 *)0x0;
@@ -1649,7 +1649,7 @@ undefined4 * FUN_00175a3c(int compiler,undefined4 param_2,undefined4 param_3,dou
            FUN_00194834(*(undefined4 *)(compiler + 0x3e4),*(undefined4 *)(compiler + 0x3f0));
   if (puVar1 == (undefined4 *)0x0) {
     arena = *(undefined4 *)(compiler + 0x378);
-    allocation = (undefined4 *)FUN_00193e18(arena,0x2c);
+    allocation = (undefined4 *)Arena__alloc(arena,0x2c);
     puVar1 = allocation + 1;
     *allocation = arena;
     allocation[1] = (float)fparam_1;
@@ -1670,7 +1670,7 @@ undefined4 * FUN_00175a3c(int compiler,undefined4 param_2,undefined4 param_3,dou
       puVar6[1] = uVar4 + 1;
     }
     else {
-      piVar3 = (int *)FUN_0019423c(puVar6,uVar4);
+      piVar3 = (int *)Vector__elementRefGrow(puVar6,uVar4);
     }
     *piVar3 = (int)puVar1;
   }
@@ -1721,11 +1721,11 @@ int FUN_00175b40(param_1)
       piVar5 = (int *)(uVar8 * 4 + puVar12[2]);
     }
     else {
-      piVar5 = (int *)FUN_0019423c(puVar12,uVar8);
+      piVar5 = (int *)Vector__elementRefGrow(puVar12,uVar8);
       loopRemaining = param_1[0x2c];
     }
     iVar11 = *piVar5;
-    loopRemaining = FUN_001054ec(loopRemaining,0);
+    loopRemaining = IRInst__getOperandRecord(loopRemaining,0);
     loopIndex = 0;
     local_38[0] = *(undefined4 *)(loopRemaining + 0x10);
     loopIndex2 = param_1;
@@ -1746,7 +1746,7 @@ LAB_00175c7c:
           loopRemaining = FUN_0011320c(*(undefined4 *)(iVar6 + 8),param_1[0x8e]);
           if (loopRemaining != 0) goto LAB_00175c7c;
         }
-        loopRemaining = FUN_000e07dc(param_1[0x8e],0x30);
+        loopRemaining = Compiler__isOptionEnabled(param_1[0x8e],0x30);
         if (((loopRemaining == 0) || (loopIndex != 3)) &&
            (loopRemaining = FUN_00113734(param_1[0x8e],param_1[0x2c],piVar5,in_r6,in_r7,in_r8,iVar6),
            loopRemaining == 0)) {
@@ -1771,7 +1771,7 @@ LAB_00175ce8:
       *(int *)(*(int *)(param_1[0x8e] + 0x6c4) + 0xa8) =
            *(int *)(*(int *)(param_1[0x8e] + 0x6c4) + 0xa8) + 1;
       loopRemaining = param_1[0x2c];
-      FUN_00106004(loopRemaining,*(undefined4 *)(loopRemaining + 0x84),0,0,param_1[0x8e]);
+      IRInst__setOperandSource(loopRemaining,*(undefined4 *)(loopRemaining + 0x84),0,0,param_1[0x8e]);
       *(int *)(loopRemaining + 0x84) = *(int *)(loopRemaining + 0x84) + -1;
       *(uint *)(loopRemaining + 0x14) = *(uint *)(loopRemaining + 0x14) & 0xfffffdff;
     }
@@ -1796,7 +1796,7 @@ int FUN_00175dac(param_1, param_2, param_3, param_4, param_5)
   int iVar7;
   uint *puVar8;
   
-  iVar1 = FUN_000e07dc(*(undefined4 *)(param_1 + 8),7);
+  iVar1 = Compiler__isOptionEnabled(*(undefined4 *)(param_1 + 8),7);
   if ((iVar1 == 0) || (*(int *)(*(int *)(param_1 + 8) + 0x654) <= *(int *)(param_1 + 0x14c))) {
 LAB_00176244:
     uVar5 = 0;
@@ -1824,7 +1824,7 @@ LAB_00175e58:
                (iVar2 = (**(code **)(**(int **)(*param_4 + 0xb0) + 0x68))
                                   (*(int **)(*param_4 + 0xb0)), iVar2 == 0)) &&
               (iVar2 = FUN_00172fb8(*param_4), iVar2 == 0)) &&
-             (iVar2 = FUN_000e07dc(*(undefined4 *)(param_1 + 8),8), iVar2 != 0)) {
+             (iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(param_1 + 8),8), iVar2 != 0)) {
             iVar2 = ((int (*)())FUN_001747c4)(*param_4,param_2,param_3,param_1);
             if ((iVar2 != 0) && (iVar2 = ((int (*)())FUN_00173cdc)(*param_4,iVar2), iVar2 != 0)) {
               iVar7 = *(int *)(*param_4 + 0xb0);
@@ -1851,7 +1851,7 @@ LAB_00175e58:
                 puVar4 = (undefined4 *)(param_2 * 4 + puVar8[2]);
               }
               else {
-                puVar4 = (undefined4 *)FUN_0019423c(puVar8,param_2);
+                puVar4 = (undefined4 *)Vector__elementRefGrow(puVar8,param_2);
               }
               FUN_00194d44(*puVar4,*param_4);
               iVar2 = *param_4;
@@ -1886,7 +1886,7 @@ LAB_001760e4:
               puVar4 = (undefined4 *)(param_2 * 4 + puVar8[2]);
             }
             else {
-              puVar4 = (undefined4 *)FUN_0019423c(puVar8,param_2);
+              puVar4 = (undefined4 *)Vector__elementRefGrow(puVar8,param_2);
             }
             FUN_00194d44(*puVar4,*param_4);
             return 0;
@@ -2196,7 +2196,7 @@ int FUN_0017662c(ctx)
   loopIndex = 0;
   iVar4 = ctx;
   do {
-    iVar2 = FUN_001054ec(*(undefined4 *)(ctx + 0xb0),0);
+    iVar2 = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0);
     if ((*(char *)(loopIndex + iVar2 + 0x10) != '\x01') && (*(int *)(iVar4 + 0x30) == 0)) {
       iVar2 = *(int *)(iVar4 + 0x40);
       if (iVar2 == 0) {
@@ -2223,7 +2223,7 @@ int FUN_001766bc(ctx)
   if ((*(int *)(iVar1 + 4) == *(int *)(ctx + 0x184)) ||
      (uVar2 = 0, *(int *)(iVar1 + 4) == *(int *)(ctx + 0x194))) {
     iVar1 = *(int *)(ctx + 0xb0);
-    uVar2 = FUN_00112f54(0x1c);
+    uVar2 = Opcode__getInfo(0x1c);
     *(undefined4 *)(iVar1 + 0x88) = uVar2;
     ((int (*)())FUN_001745ac)(ctx);
     uVar2 = 1;

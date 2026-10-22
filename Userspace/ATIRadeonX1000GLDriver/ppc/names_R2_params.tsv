@@ -173,7 +173,7 @@ local	FUN_001312f4	param_1	inst	INFERRED	FUN_001312f4 passes it as arg 0 of FUN_
 local	FUN_001315f8	param_2	inst	INFERRED	FUN_001315f8 passes it as arg 0 of FUN_00106804 (typed Inst)
 local	FUN_001330f4	param_2	inst	INFERRED	FUN_001330f4 passes it as arg 0 of FUN_00105594 (typed Inst)
 local	FUN_00134de8	param_2	inst	INFERRED	FUN_00134de8 passes it as arg 0 of FUN_001054ec (typed Inst)
-local	FUN_00135d24	param_3	vector	INFERRED	FUN_00135d24 passes it as arg 0 of FUN_0019423c (typed Vector)
+local	FUN_00135d24	param_3	workList	INFERRED	ColorGraph::removeNode helper: for each neighbour of the node, same class, degree>0: --degree; when degree==colorLimit-1 push on the worklist (Chaitin-Briggs simplify step)
 local	FUN_00137e98	param_1	inst	INFERRED	FUN_00137e98 passes it as arg 0 of FUN_00105594 (typed Inst)
 local	FUN_00138240	param_1	inst	INFERRED	FUN_00138240 passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_001382b8	param_1	inst	INFERRED	FUN_001382b8 passes it as arg 0 of FUN_001054ec (typed Inst)

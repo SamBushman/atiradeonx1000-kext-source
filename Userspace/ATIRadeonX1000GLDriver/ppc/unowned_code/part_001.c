@@ -65,7 +65,7 @@ int orph_10dcfc(param_1, param_2)
   undefined4 param_1;
   int param_2;
 {
-  FUN_000e1534(*(undefined4 *)(param_2 + 8),0xf);
+  Compiler__fail(*(undefined4 *)(param_2 + 8),0xf);
   return;
 }
 
@@ -217,7 +217,7 @@ int orph_1961b0(param_1)
   if (*(int *)(*(int *)(param_1 + 0xc) + 0x6c4) == 0) {
     return;
   }
-  FUN_000e1534(*(int *)(param_1 + 0xc),0xf);
+  Compiler__fail(*(int *)(param_1 + 0xc),0xf);
   return;
 }
 

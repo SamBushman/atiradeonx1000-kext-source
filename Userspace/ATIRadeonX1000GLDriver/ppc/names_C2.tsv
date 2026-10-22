@@ -1,0 +1,210 @@
+local	FUN_00135fb0	a1	hwRegsPerClass	INFERRED	pass_color_graph: iterative graph-colouring register allocator (see notes_compiler_passes.md); role read from its use
+local	FUN_00135fb0	iVar7	colorLimit	INFERRED	pass_color_graph: iterative graph-colouring register allocator (see notes_compiler_passes.md); role read from its use
+local	FUN_00135fb0	iVar8	maxColorUsed	INFERRED	pass_color_graph: iterative graph-colouring register allocator (see notes_compiler_passes.md); role read from its use
+local	FUN_00135fb0	iVar9	lowDegreeWorklists	INFERRED	pass_color_graph: iterative graph-colouring register allocator (see notes_compiler_passes.md); role read from its use
+local	FUN_00135fb0	piVar6	simplifiedStacks	INFERRED	pass_color_graph: iterative graph-colouring register allocator (see notes_compiler_passes.md); role read from its use
+local	FUN_00135fb0	iVar10	usedColorBits	INFERRED	pass_color_graph: iterative graph-colouring register allocator (see notes_compiler_passes.md); role read from its use
+local	FUN_00135fb0	piVar11	classNodeCount	INFERRED	pass_color_graph: iterative graph-colouring register allocator (see notes_compiler_passes.md); role read from its use
+local	FUN_00135fb0	piVar22	simplifiedStackSlot	INFERRED	pass_color_graph: iterative graph-colouring register allocator (see notes_compiler_passes.md); role read from its use
+local	FUN_00135fb0	piVar24	workSlot	INFERRED	pass_color_graph: iterative graph-colouring register allocator (see notes_compiler_passes.md); role read from its use
+local	FUN_00135fb0	piVar13	elementRef	INFERRED	pass_color_graph: iterative graph-colouring register allocator (see notes_compiler_passes.md); role read from its use
+local	FUN_00135fb0	piVar14	neighborElementRef	INFERRED	pass_color_graph: iterative graph-colouring register allocator (see notes_compiler_passes.md); role read from its use
+local	FUN_00135fb0	puVar28	vectorHeader	INFERRED	pass_color_graph: iterative graph-colouring register allocator (see notes_compiler_passes.md); role read from its use
+local	FUN_00135fb0	puVar29	elementDest	INFERRED	pass_color_graph: iterative graph-colouring register allocator (see notes_compiler_passes.md); role read from its use
+local	FUN_00135fb0	local_5c	uncolorableCount	INFERRED	pass_color_graph: iterative graph-colouring register allocator (see notes_compiler_passes.md); role read from its use
+local	FUN_00135fb0	bVar1	slotWrapped	INFERRED	pass_color_graph: iterative graph-colouring register allocator (see notes_compiler_passes.md); role read from its use
+local	FUN_00135fb0	iVar18	neighborCount	INFERRED	pass_color_graph: iterative graph-colouring register allocator (see notes_compiler_passes.md); role read from its use
+local	FUN_00135fb0	iVar19	slotInChunk	INFERRED	pass_color_graph: iterative graph-colouring register allocator (see notes_compiler_passes.md); role read from its use
+local	FUN_00135fb0	iVar17	neighborScanIndex	INFERRED	pass_color_graph: iterative graph-colouring register allocator (see notes_compiler_passes.md); role read from its use
+local	FUN_00135fb0	iVar2	neighborByteOffset	INFERRED	pass_color_graph: iterative graph-colouring register allocator (see notes_compiler_passes.md); role read from its use
+local	FUN_00135fb0	uVar23	nextIdOrAffinityIndex	INFERRED	pass_color_graph: iterative graph-colouring register allocator (see notes_compiler_passes.md); role read from its use
+local	FUN_00135fb0	uVar16	colorOrNextId	INFERRED	pass_color_graph: iterative graph-colouring register allocator (see notes_compiler_passes.md); role read from its use
+local	FUN_00135fb0	uVar5	nodeOrCount	INFERRED	pass_color_graph: iterative graph-colouring register allocator (see notes_compiler_passes.md); role read from its use
+local	FUN_00135fb0	iVar4	programOrClassOffset	INFERRED	pass_color_graph: iterative graph-colouring register allocator (see notes_compiler_passes.md); role read from its use
+local	FUN_00135fb0	iVar15	programOrNodeRecord	INFERRED	pass_color_graph: iterative graph-colouring register allocator (see notes_compiler_passes.md); role read from its use
+local	FUN_00135fb0	iVar30	chunkOrBitsetOrCount	INFERRED	pass_color_graph: iterative graph-colouring register allocator (see notes_compiler_passes.md); role read from its use
+local	FUN_00135d24	param_1	graph	INFERRED	ColorGraph::removeNode helper: for each neighbour of the node, same class, degree>0: --degree; when degree==colorLimit-1 push on the worklist (Chaitin-Briggs simplify step)
+local	FUN_00135d24	param_2	node	INFERRED	ColorGraph::removeNode helper: for each neighbour of the node, same class, degree>0: --degree; when degree==colorLimit-1 push on the worklist (Chaitin-Briggs simplify step)
+local	FUN_00135d24	param_4	colorLimit	INFERRED	ColorGraph::removeNode helper: for each neighbour of the node, same class, degree>0: --degree; when degree==colorLimit-1 push on the worklist (Chaitin-Briggs simplify step)
+local	FUN_00135d24	param_5	registerClass	INFERRED	ColorGraph::removeNode helper: for each neighbour of the node, same class, degree>0: --degree; when degree==colorLimit-1 push on the worklist (Chaitin-Briggs simplify step)
+local	FUN_00135d24	iVar7	nodeRecord	INFERRED	ColorGraph::removeNode helper: for each neighbour of the node, same class, degree>0: --degree; when degree==colorLimit-1 push on the worklist (Chaitin-Briggs simplify step)
+local	FUN_00135d24	iVar8	chunk	INFERRED	ColorGraph::removeNode helper: for each neighbour of the node, same class, degree>0: --degree; when degree==colorLimit-1 push on the worklist (Chaitin-Briggs simplify step)
+local	FUN_00135d24	iVar9	slotInChunk	INFERRED	ColorGraph::removeNode helper: for each neighbour of the node, same class, degree>0: --degree; when degree==colorLimit-1 push on the worklist (Chaitin-Briggs simplify step)
+local	FUN_00135d24	uVar3	neighbor	INFERRED	ColorGraph::removeNode helper: for each neighbour of the node, same class, degree>0: --degree; when degree==colorLimit-1 push on the worklist (Chaitin-Briggs simplify step)
+local	FUN_00135d24	puVar10	vectorHeader	INFERRED	ColorGraph::removeNode helper: for each neighbour of the node, same class, degree>0: --degree; when degree==colorLimit-1 push on the worklist (Chaitin-Briggs simplify step)
+local	FUN_00135d24	piVar4	elementRef	INFERRED	ColorGraph::removeNode helper: for each neighbour of the node, same class, degree>0: --degree; when degree==colorLimit-1 push on the worklist (Chaitin-Briggs simplify step)
+local	FUN_00135d24	uVar5	countOrScratch	INFERRED	ColorGraph::removeNode helper: for each neighbour of the node, same class, degree>0: --degree; when degree==colorLimit-1 push on the worklist (Chaitin-Briggs simplify step)
+local	FUN_00135d24	iVar2	neighborByteOffset	INFERRED	ColorGraph::removeNode helper: for each neighbour of the node, same class, degree>0: --degree; when degree==colorLimit-1 push on the worklist (Chaitin-Briggs simplify step)
+local	FUN_00135d24	bVar1	slotWrapped	INFERRED	ColorGraph::removeNode helper: for each neighbour of the node, same class, degree>0: --degree; when degree==colorLimit-1 push on the worklist (Chaitin-Briggs simplify step)
+local	FUN_00134ce8	param_1	nodeRecord	INFERRED	counts the neighbours of a node that have the same register class (neighbour list = chunks of 7 ids, next chunk at +0x1c)
+local	FUN_00134ce8	param_2	node	INFERRED	counts the neighbours of a node that have the same register class (neighbour list = chunks of 7 ids, next chunk at +0x1c)
+local	FUN_00134ce8	param_3	classArray	INFERRED	counts the neighbours of a node that have the same register class (neighbour list = chunks of 7 ids, next chunk at +0x1c)
+local	FUN_00134ce8	param_4	graph	INFERRED	counts the neighbours of a node that have the same register class (neighbour list = chunks of 7 ids, next chunk at +0x1c)
+local	FUN_00134ce8	iVar2	remaining	INFERRED	counts the neighbours of a node that have the same register class (neighbour list = chunks of 7 ids, next chunk at +0x1c)
+local	FUN_00134ce8	iVar3	sameClassCount	INFERRED	counts the neighbours of a node that have the same register class (neighbour list = chunks of 7 ids, next chunk at +0x1c)
+local	FUN_00134ce8	iVar1	signBits	INFERRED	counts the neighbours of a node that have the same register class (neighbour list = chunks of 7 ids, next chunk at +0x1c)
+local	FUN_00134ce8	iVar5	chunk	INFERRED	counts the neighbours of a node that have the same register class (neighbour list = chunks of 7 ids, next chunk at +0x1c)
+local	FUN_001309dc	param_1	program	INFERRED	tests bit hwReg of the bitset at program+0x430 (register allowed/free to allocate; color_graph marks the colour used when it is 0)
+local	FUN_001309dc	param_2	hwReg	INFERRED	tests bit hwReg of the bitset at program+0x430 (register allowed/free to allocate; color_graph marks the colour used when it is 0)
+local	FUN_00130444	param_1	program	INFERRED	clears bit hwReg of the bitset at program+0x42c and sets bit 0x8000 of program+0x30 (register now used)
+local	FUN_00130444	param_2	hwReg	INFERRED	clears bit hwReg of the bitset at program+0x42c and sets bit 0x8000 of program+0x30 (register now used)
+local	FUN_00130444	iVar1	bitsetWord	INFERRED	clears bit hwReg of the bitset at program+0x42c and sets bit 0x8000 of program+0x30 (register now used)
+local	FUN_00193f44	param_1	node	CONFIRMED	doubly linked list: node+4 prev, node+8 next; inserts node before ref
+local	FUN_00193f44	param_2	ref	CONFIRMED	doubly linked list: node+4 prev, node+8 next; inserts node before ref
+local	FUN_00193f44	iVar1	prev	CONFIRMED	doubly linked list: node+4 prev, node+8 next; inserts node before ref
+local	FUN_00193f74	param_1	node	CONFIRMED	doubly linked list: node+4 prev, node+8 next; inserts node after ref
+local	FUN_00193f74	param_2	ref	CONFIRMED	doubly linked list: node+4 prev, node+8 next; inserts node after ref
+local	FUN_00193f74	iVar1	next	CONFIRMED	doubly linked list: node+4 prev, node+8 next; inserts node after ref
+local	FUN_00193f64	param_1	list	CONFIRMED	inserts node before the sentinel at list+0xc (push back)
+local	FUN_00193f64	param_2	node	CONFIRMED	inserts node before the sentinel at list+0xc (push back)
+local	FUN_00193f94	param_1	list	CONFIRMED	inserts node after the list head (push front)
+local	FUN_00193f94	param_2	node	CONFIRMED	inserts node after the list head (push front)
+local	FUN_0019401c	param_1	node	CONFIRMED	unlinks node: prev.next=next, next.prev=prev
+local	FUN_0019401c	iVar1	prev	CONFIRMED	unlinks node: prev.next=next, next.prev=prev
+local	FUN_00194034	param_1	list	CONFIRMED	counts the nodes of the circular list from list+8 up to the sentinel list+0xc
+local	FUN_00194034	iVar1	node	CONFIRMED	counts the nodes of the circular list from list+8 up to the sentinel list+0xc
+local	FUN_00193e18	param_2	size	CONFIRMED	bump allocator: size rounded to 4, cursor at +8, limit at +0x10, last allocation at +0x14; grows with FUN_00193d98
+local	FUN_00193e18	uVar1	alignedSize	CONFIRMED	bump allocator: size rounded to 4, cursor at +8, limit at +0x10, last allocation at +0x14; grows with FUN_00193d98
+local	FUN_00193e18	iVar2	result	CONFIRMED	bump allocator: size rounded to 4, cursor at +8, limit at +0x10, last allocation at +0x14; grows with FUN_00193d98
+local	FUN_00193cc0	param_2	ptr	CONFIRMED	only rewinds the cursor when p is the last allocation; zeroes [p,cursor)
+local	FUN_00193cc0	iVar1	lastAllocation	CONFIRMED	only rewinds the cursor when p is the last allocation; zeroes [p,cursor)
+local	FUN_0019423c	param_2	index	CONFIRMED	growable array header {capacity,count,data,arena}: doubles capacity until index fits, copies, frees old data, returns &data[index]
+local	FUN_0019423c	uVar1	capacity	CONFIRMED	growable array header {capacity,count,data,arena}: doubles capacity until index fits, copies, frees old data, returns &data[index]
+local	FUN_0019423c	uVar2	oldData	CONFIRMED	growable array header {capacity,count,data,arena}: doubles capacity until index fits, copies, frees old data, returns &data[index]
+local	FUN_00194208	param_1	vector	CONFIRMED	removes element index of the array {capacity,count,data}: shifts the tail down, count--
+local	FUN_00194208	param_2	index	CONFIRMED	removes element index of the array {capacity,count,data}: shifts the tail down, count--
+local	FUN_00194208	iVar1	newCount	CONFIRMED	removes element index of the array {capacity,count,data}: shifts the tail down, count--
+local	FUN_00194208	iVar2	elementPtr	CONFIRMED	removes element index of the array {capacity,count,data}: shifts the tail down, count--
+local	FUN_001054ec	param_2	operandIndex	CONFIRMED	operand record n of the instruction: inline records at inst+0x8c+n*0x18 for n<5, else element n-5 of the vector at inst+0x118
+local	FUN_001054ec	iVar1	record	CONFIRMED	operand record n of the instruction: inline records at inst+0x8c+n*0x18 for n<5, else element n-5 of the vector at inst+0x118
+local	FUN_001054ec	uVar2	count	CONFIRMED	operand record n of the instruction: inline records at inst+0x8c+n*0x18 for n<5, else element n-5 of the vector at inst+0x118
+local	FUN_001054ec	uVar4	extraIndex	CONFIRMED	operand record n of the instruction: inline records at inst+0x8c+n*0x18 for n<5, else element n-5 of the vector at inst+0x118
+local	FUN_001054ec	puVar5	vectorHeader	CONFIRMED	operand record n of the instruction: inline records at inst+0x8c+n*0x18 for n<5, else element n-5 of the vector at inst+0x118
+local	FUN_001054ec	piVar3	elementRef	CONFIRMED	operand record n of the instruction: inline records at inst+0x8c+n*0x18 for n<5, else element n-5 of the vector at inst+0x118
+local	FUN_00105594	param_2	operandIndex	INFERRED	returns the record's field +4: the value/instruction feeding operand n (0 when absent)
+local	FUN_00105594	iVar1	record	INFERRED	returns the record's field +4: the value/instruction feeding operand n (0 when absent)
+local	FUN_00105334	param_1	inst	CONFIRMED	stores the source (record+4) of operand n; operand records >=5 are allocated on demand in the vector at inst+0x118
+local	FUN_00105334	param_2	operandIndex	CONFIRMED	stores the source (record+4) of operand n; operand records >=5 are allocated on demand in the vector at inst+0x118
+local	FUN_00105334	param_3	source	CONFIRMED	stores the source (record+4) of operand n; operand records >=5 are allocated on demand in the vector at inst+0x118
+local	FUN_001046c8	param_2	operandIndex	CONFIRMED	operand n: record+0 = reference object, +0xc = ref[1], +8 = ref[2]; for operand 0 caches ref->vfn[9] at inst+0x128
+local	FUN_001046c8	param_3	operandRef	CONFIRMED	operand n: record+0 = reference object, +0xc = ref[1], +8 = ref[2]; for operand 0 caches ref->vfn[9] at inst+0x128
+local	FUN_001046c8	iVar1	refWord2	CONFIRMED	operand n: record+0 = reference object, +0xc = ref[1], +8 = ref[2]; for operand 0 caches ref->vfn[9] at inst+0x128
+local	FUN_001046c8	iVar2	record	CONFIRMED	operand n: record+0 = reference object, +0xc = ref[1], +8 = ref[2]; for operand 0 caches ref->vfn[9] at inst+0x128
+local	FUN_001046c8	uVar3	destKind	CONFIRMED	operand n: record+0 = reference object, +0xc = ref[1], +8 = ref[2]; for operand 0 caches ref->vfn[9] at inst+0x128
+local	FUN_00103d50	param_1	operandRecord	CONFIRMED	sets (set!=0) or clears the mask bits of the flag word at +0x14 of an operand record (bit0 negate, bit1 absolute-value as used by flatten_ifs)
+local	FUN_00103d50	param_2	mask	CONFIRMED	sets (set!=0) or clears the mask bits of the flag word at +0x14 of an operand record (bit0 negate, bit1 absolute-value as used by flatten_ifs)
+local	FUN_00103d50	param_3	set	CONFIRMED	sets (set!=0) or clears the mask bits of the flag word at +0x14 of an operand record (bit0 negate, bit1 absolute-value as used by flatten_ifs)
+local	FUN_00104054	param_1	obj	CONFIRMED	use count of an object: (+0x160 minus the program epoch at +0x478), clamped at 0
+local	FUN_00104054	param_2	program	CONFIRMED	use count of an object: (+0x160 minus the program epoch at +0x478), clamped at 0
+local	FUN_00104054	iVar1	count	CONFIRMED	use count of an object: (+0x160 minus the program epoch at +0x478), clamped at 0
+local	FUN_0010497c	param_1	obj	CONFIRMED	true when the object has exactly one use (see FUN_00104054)
+local	FUN_0010497c	param_2	program	CONFIRMED	true when the object has exactly one use (see FUN_00104054)
+local	FUN_0010497c	iVar1	useCount	CONFIRMED	true when the object has exactly one use (see FUN_00104054)
+local	FUN_00106004	param_2	operandIndex	CONFIRMED	sets the source of operand n; with use tracking (param_4) it removes inst from the old source's user vector (+0x10), decrements its use count (+0x160), then adds inst to the new source's user vector and bumps its count
+local	FUN_00106004	param_3	newSource	CONFIRMED	sets the source of operand n; with use tracking (param_4) it removes inst from the old source's user vector (+0x10), decrements its use count (+0x160), then adds inst to the new source's user vector and bumps its count
+local	FUN_00106004	param_4	trackUses	CONFIRMED	sets the source of operand n; with use tracking (param_4) it removes inst from the old source's user vector (+0x10), decrements its use count (+0x160), then adds inst to the new source's user vector and bumps its count
+local	FUN_00106004	param_5	compilerCtx	CONFIRMED	sets the source of operand n; with use tracking (param_4) it removes inst from the old source's user vector (+0x10), decrements its use count (+0x160), then adds inst to the new source's user vector and bumps its count
+local	FUN_00106004	iVar4	options	CONFIRMED	sets the source of operand n; with use tracking (param_4) it removes inst from the old source's user vector (+0x10), decrements its use count (+0x160), then adds inst to the new source's user vector and bumps its count
+local	FUN_00106004	piVar3	elementRef	CONFIRMED	sets the source of operand n; with use tracking (param_4) it removes inst from the old source's user vector (+0x10), decrements its use count (+0x160), then adds inst to the new source's user vector and bumps its count
+local	FUN_00106004	puVar6	vectorHeader	CONFIRMED	sets the source of operand n; with use tracking (param_4) it removes inst from the old source's user vector (+0x10), decrements its use count (+0x160), then adds inst to the new source's user vector and bumps its count
+local	FUN_00106004	uVar2	count	CONFIRMED	sets the source of operand n; with use tracking (param_4) it removes inst from the old source's user vector (+0x10), decrements its use count (+0x160), then adds inst to the new source's user vector and bumps its count
+local	FUN_00106804	param_2	newSource	CONFIRMED	sets the trailing extra operand (index inst+0x84) once: sets flag 0x200, ++inst+0x84, with use tracking like FUN_00106004
+local	FUN_00106804	param_3	trackUses	CONFIRMED	sets the trailing extra operand (index inst+0x84) once: sets flag 0x200, ++inst+0x84, with use tracking like FUN_00106004
+local	FUN_00106804	param_4	compilerCtx	CONFIRMED	sets the trailing extra operand (index inst+0x84) once: sets flag 0x200, ++inst+0x84, with use tracking like FUN_00106004
+local	FUN_00106804	iVar5	options	CONFIRMED	sets the trailing extra operand (index inst+0x84) once: sets flag 0x200, ++inst+0x84, with use tracking like FUN_00106004
+local	FUN_00106804	iVar3	oldSource	CONFIRMED	sets the trailing extra operand (index inst+0x84) once: sets flag 0x200, ++inst+0x84, with use tracking like FUN_00106004
+local	FUN_00106804	piVar4	elementRef	CONFIRMED	sets the trailing extra operand (index inst+0x84) once: sets flag 0x200, ++inst+0x84, with use tracking like FUN_00106004
+local	FUN_00106804	puVar7	vectorHeader	CONFIRMED	sets the trailing extra operand (index inst+0x84) once: sets flag 0x200, ++inst+0x84, with use tracking like FUN_00106004
+local	FUN_00106804	uVar2	flagsOrCount	CONFIRMED	sets the trailing extra operand (index inst+0x84) once: sets flag 0x200, ++inst+0x84, with use tracking like FUN_00106004
+local	FUN_00106804	uVar1	extraOperandSwizzle	CONFIRMED	sets the trailing extra operand (index inst+0x84) once: sets flag 0x200, ++inst+0x84, with use tracking like FUN_00106004
+local	FUN_00105f04	param_2	program	CONFIRMED	when the program keeps def-use lists (flag 0x80 at +0x30) adds inst to the user vector of every operand source and bumps their use counts
+local	FUN_00105f04	iVar3	operandIndex	CONFIRMED	when the program keeps def-use lists (flag 0x80 at +0x30) adds inst to the user vector of every operand source and bumps their use counts
+local	FUN_00105f04	piVar2	elementRef	CONFIRMED	when the program keeps def-use lists (flag 0x80 at +0x30) adds inst to the user vector of every operand source and bumps their use counts
+local	FUN_00105f04	uVar4	count	CONFIRMED	when the program keeps def-use lists (flag 0x80 at +0x30) adds inst to the user vector of every operand source and bumps their use counts
+local	FUN_00105f04	puVar5	vectorHeader	CONFIRMED	when the program keeps def-use lists (flag 0x80 at +0x30) adds inst to the user vector of every operand source and bumps their use counts
+local	FUN_001049e8	param_1	inst	INFERRED	appends a source operand after the current count (inst+0x84) and bumps the count
+local	FUN_001049e8	param_2	operandRef	INFERRED	appends a source operand after the current count (inst+0x84) and bumps the count
+local	FUN_001049e8	iVar2	oldCount	INFERRED	appends a source operand after the current count (inst+0x84) and bumps the count
+local	FUN_001049e8	iVar3	newCount	INFERRED	appends a source operand after the current count (inst+0x84) and bumps the count
+local	FUN_001049e8	iVar4	virtualCallResult	INFERRED	appends a source operand after the current count (inst+0x84) and bumps the count
+local	FUN_001049e8	iVar1	flagsAddr	INFERRED	appends a source operand after the current count (inst+0x84) and bumps the count
+local	FUN_0010445c	param_1	srcInst	CONFIRMED	copies an instruction (0x164 bytes) into a fresh arena block, gives it a new id (compiler+0x324) unless keepId, clears its list links
+local	FUN_0010445c	param_3	keepId	CONFIRMED	copies an instruction (0x164 bytes) into a fresh arena block, gives it a new id (compiler+0x324) unless keepId, clears its list links
+local	FUN_0010445c	puVar2	newBlock	CONFIRMED	copies an instruction (0x164 bytes) into a fresh arena block, gives it a new id (compiler+0x324) unless keepId, clears its list links
+local	FUN_0010445c	iVar1	newId	CONFIRMED	copies an instruction (0x164 bytes) into a fresh arena block, gives it a new id (compiler+0x324) unless keepId, clears its list links
+local	FUN_001043f0	param_1	opcode	CONFIRMED	instruction factory: class index from the target description, registered constructor table at 0x1ea4fc, then inst+0x88 = opcode info
+local	FUN_001043f0	iVar1	inst	CONFIRMED	instruction factory: class index from the target description, registered constructor table at 0x1ea4fc, then inst+0x88 = opcode info
+local	FUN_000e07dc	param_1	compiler	INFERRED	option bit test: bit optionId of the byte array at compiler+0x59c and the target description accepts it
+local	FUN_000e07dc	param_2	optionId	INFERRED	option bit test: bit optionId of the byte array at compiler+0x59c and the target description accepts it
+local	FUN_000e1534	param_1	compiler	CONFIRMED	compiler failure exit: stores the error code at compiler+0x314 (1 when 0) and longjmps to the jmp_buf at compiler+4
+local	FUN_000e1534	param_2	errorCode	CONFIRMED	compiler failure exit: stores the error code at compiler+0x314 (1 when 0) and longjmps to the jmp_buf at compiler+4
+local	FUN_000ee9ac	param_1	program	CONFIRMED	appends inst to the program's instruction vector at program+0x3c4
+local	FUN_000ee9ac	param_2	inst	CONFIRMED	appends inst to the program's instruction vector at program+0x3c4
+local	FUN_000ee9ac	puVar3	vectorHeader	CONFIRMED	appends inst to the program's instruction vector at program+0x3c4
+local	FUN_000ee9ac	puVar1	elementRef	CONFIRMED	appends inst to the program's instruction vector at program+0x3c4
+local	FUN_000ee9ac	uVar2	count	CONFIRMED	appends inst to the program's instruction vector at program+0x3c4
+local	FUN_000ef970	param_1	program	CONFIRMED	removes inst from the program's instruction vector at program+0x3c4
+local	FUN_000ef970	param_2	inst	CONFIRMED	removes inst from the program's instruction vector at program+0x3c4
+local	FUN_000ef970	uVar3	index	CONFIRMED	removes inst from the program's instruction vector at program+0x3c4
+local	FUN_000ef970	puVar5	vectorHeader	CONFIRMED	removes inst from the program's instruction vector at program+0x3c4
+local	FUN_000ef970	puVar6	vectorHeaderAlias	CONFIRMED	removes inst from the program's instruction vector at program+0x3c4
+local	FUN_000ef970	piVar2	elementRef	CONFIRMED	removes inst from the program's instruction vector at program+0x3c4
+local	FUN_000ef970	uVar1	count	CONFIRMED	removes inst from the program's instruction vector at program+0x3c4
+local	FUN_000ef970	uVar4	nextIndex	CONFIRMED	removes inst from the program's instruction vector at program+0x3c4
+local	FUN_00112f54	param_1	opcode	CONFIRMED	opcode info table lookup at 0x1fc2b0
+local	FUN_000e7738	param_1	block	CONFIRMED	links inst after afterInst (FUN_00193f74) and sets inst+0x158 = block
+local	FUN_000e7738	param_2	afterInst	CONFIRMED	links inst after afterInst (FUN_00193f74) and sets inst+0x158 = block
+local	FUN_000e7738	param_3	inst	CONFIRMED	links inst after afterInst (FUN_00193f74) and sets inst+0x158 = block
+local	FUN_000e7700	param_1	block	CONFIRMED	links inst before beforeInst (FUN_00193f44) and sets inst+0x158 = block
+local	FUN_000e7700	param_2	beforeInst	CONFIRMED	links inst before beforeInst (FUN_00193f44) and sets inst+0x158 = block
+local	FUN_000e7700	param_3	inst	CONFIRMED	links inst before beforeInst (FUN_00193f44) and sets inst+0x158 = block
+local	FUN_000e7688	param_1	block	CONFIRMED	links inst before the block's exit pseudo instruction (block+0xcc) and sets inst+0x158 = block
+local	FUN_000e7688	param_2	inst	CONFIRMED	links inst before the block's exit pseudo instruction (block+0xcc) and sets inst+0x158 = block
+local	FUN_000e76c4	param_1	block	CONFIRMED	links inst after the block's entry pseudo instruction (block+0xc8) and sets inst+0x158 = block
+local	FUN_000e76c4	param_2	inst	CONFIRMED	links inst after the block's entry pseudo instruction (block+0xc8) and sets inst+0x158 = block
+local	FUN_000e7658	param_1	block	INFERRED	clears this block's slot id bit (+0xb4) in the bit set at owner+0x3bc and unlinks the block (FUN_00193f20)
+local	FUN_000e7658	uVar1	bitIndex	INFERRED	clears this block's slot id bit (+0xb4) in the bit set at owner+0x3bc and unlinks the block (FUN_00193f20)
+local	FUN_000e7658	iVar2	bitsetWord	INFERRED	clears this block's slot id bit (+0xb4) in the bit set at owner+0x3bc and unlinks the block (FUN_00193f20)
+local	FUN_000e920c	param_1	block	CONFIRMED	element index of the block's successor vector at +0xd0 (flatten_ifs: footer successor; pred/succ vectors at +0xd4/+0xd0)
+local	FUN_000e920c	param_2	index	CONFIRMED	element index of the block's successor vector at +0xd0 (flatten_ifs: footer successor; pred/succ vectors at +0xd4/+0xd0)
+local	FUN_000e920c	uVar1	count	CONFIRMED	element index of the block's successor vector at +0xd0 (flatten_ifs: footer successor; pred/succ vectors at +0xd4/+0xd0)
+local	FUN_000e920c	puVar2	elementRef	CONFIRMED	element index of the block's successor vector at +0xd0 (flatten_ifs: footer successor; pred/succ vectors at +0xd4/+0xd0)
+local	FUN_000e920c	puVar3	vectorHeader	CONFIRMED	element index of the block's successor vector at +0xd0 (flatten_ifs: footer successor; pred/succ vectors at +0xd4/+0xd0)
+local	FUN_000e9184	param_1	block	CONFIRMED	element index of the block's predecessor vector at +0xd4
+local	FUN_000e9184	param_2	index	CONFIRMED	element index of the block's predecessor vector at +0xd4
+local	FUN_000e9184	uVar1	count	CONFIRMED	element index of the block's predecessor vector at +0xd4
+local	FUN_000e9184	puVar2	elementRef	CONFIRMED	element index of the block's predecessor vector at +0xd4
+local	FUN_000e9184	puVar3	vectorHeader	CONFIRMED	element index of the block's predecessor vector at +0xd4
+local	FUN_000e8e4c	param_1	fromBlock	INFERRED	adds the edge a->b when FUN_000e7de4 says it is absent: FUN_000e8dd4 (successor side) and FUN_000e8d5c (predecessor side)
+local	FUN_000e8e4c	param_2	toBlock	INFERRED	adds the edge a->b when FUN_000e7de4 says it is absent: FUN_000e8dd4 (successor side) and FUN_000e8d5c (predecessor side)
+local	FUN_000e8e4c	iVar1	alreadyLinked	INFERRED	adds the edge a->b when FUN_000e7de4 says it is absent: FUN_000e8dd4 (successor side) and FUN_000e8d5c (predecessor side)
+local	FUN_000e87e4	param_1	ifHeader	INFERRED	if-header flattenability test: both arms (+0x134/+0x138) have <3 instructions and one successor each, the else arm leads to header+0x13c, no break/continue conflict; *out set when the then arm ends in a continue
+local	FUN_000e87e4	param_2	outFlag	INFERRED	if-header flattenability test: both arms (+0x134/+0x138) have <3 instructions and one successor each, the else arm leads to header+0x13c, no break/continue conflict; *out set when the then arm ends in a continue
+local	FUN_000e87e4	piVar1	successorEntry	INFERRED	if-header flattenability test: both arms (+0x134/+0x138) have <3 instructions and one successor each, the else arm leads to header+0x13c, no break/continue conflict; *out set when the then arm ends in a continue
+local	FUN_000e87e4	iVar2	count	INFERRED	if-header flattenability test: both arms (+0x134/+0x138) have <3 instructions and one successor each, the else arm leads to header+0x13c, no break/continue conflict; *out set when the then arm ends in a continue
+local	FUN_000e87e4	puVar3	successorRef	INFERRED	if-header flattenability test: both arms (+0x134/+0x138) have <3 instructions and one successor each, the else arm leads to header+0x13c, no break/continue conflict; *out set when the then arm ends in a continue
+local	FUN_000e87e4	iVar4	elseBlock	INFERRED	if-header flattenability test: both arms (+0x134/+0x138) have <3 instructions and one successor each, the else arm leads to header+0x13c, no break/continue conflict; *out set when the then arm ends in a continue
+local	FUN_000e7f38	param_1	block	INFERRED	first successor (vector at +0xd0) for which FUN_000e7770 or virtual slot 8 (isExit) holds
+local	FUN_000e7f38	a0	successor	INFERRED	first successor (vector at +0xd0) for which FUN_000e7770 or virtual slot 8 (isExit) holds
+local	FUN_000e7f38	iVar1	successorVector	INFERRED	first successor (vector at +0xd0) for which FUN_000e7770 or virtual slot 8 (isExit) holds
+local	FUN_000e7f38	iVar2	byteOffset	INFERRED	first successor (vector at +0xd0) for which FUN_000e7770 or virtual slot 8 (isExit) holds
+local	FUN_000e7804	param_1	block	INFERRED	walks the block's instruction list (head at +0x98), runs virtual slot 6 on marked ordinary instructions, returns the block's branch instruction at +0x130
+local	FUN_000e7804	piVar1	inst	INFERRED	walks the block's instruction list (head at +0x98), runs virtual slot 6 on marked ordinary instructions, returns the block's branch instruction at +0x130
+local	FUN_000e7804	piVar2	nextInst	INFERRED	walks the block's instruction list (head at +0x98), runs virtual slot 6 on marked ordinary instructions, returns the block's branch instruction at +0x130
+local	FUN_000e7804	iVar3	isPseudo	INFERRED	walks the block's instruction list (head at +0x98), runs virtual slot 6 on marked ordinary instructions, returns the block's branch instruction at +0x130
+local	FUN_00103f18	param_1	inst	INFERRED	snapshots inst+0x160 (use count) when mask bit 0 and inst+0x14c (id) when bit 1 into a 3-word record
+local	FUN_00103f18	param_2	snapshot	INFERRED	snapshots inst+0x160 (use count) when mask bit 0 and inst+0x14c (id) when bit 1 into a 3-word record
+local	FUN_00103f18	param_3	mask	INFERRED	snapshots inst+0x160 (use count) when mask bit 0 and inst+0x14c (id) when bit 1 into a 3-word record
+local	FUN_00103f44	param_1	inst	INFERRED	restores inst+0x160 / inst+0x14c from the snapshot taken by FUN_00103f18 and clears it
+local	FUN_00103f44	param_2	snapshot	INFERRED	restores inst+0x160 / inst+0x14c from the snapshot taken by FUN_00103f18 and clears it
+local	FUN_00103f44	uVar1	mask	INFERRED	restores inst+0x160 / inst+0x14c from the snapshot taken by FUN_00103f18 and clears it
+local	FUN_00126760	param_1	kind	CONFIRMED	bit 0 of the flags word of register kind k (0x10-byte entries at 0x1ea904)
+local	FUN_0010b498	param_2	operandIndex	INFERRED	true when every lane the destination uses of source operand n resolves, through copy chains, to a constant whose component equals FLOAT_001aa0d4 (= 0.0 in __literal4)
+local	FUN_0010b498	iVar5	lane	INFERRED	true when every lane the destination uses of source operand n resolves, through copy chains, to a constant whose component equals FLOAT_001aa0d4 (= 0.0 in __literal4)
+local	FUN_0010b5f8	param_1	inst	INFERRED	per-opcode compare condition: 0x20/0x24/0x27 -> 0, 0x21/0x26/0x28 -> 2, 0x22/0x25/0x29 -> 3, 0x23/0x2a -> 1, 0x8b..0x8d -> inst+0x12c, else 8
+local	FUN_0010b914	param_1	inst	INFERRED	stores the condition code at inst+0x12c when the opcode is 0x8b, 0x8c or 0x8d
+local	FUN_0010b914	param_2	condition	INFERRED	stores the condition code at inst+0x12c when the opcode is 0x8b, 0x8c or 0x8d
+local	FUN_0010b914	iVar1	opcode	INFERRED	stores the condition code at inst+0x12c when the opcode is 0x8b, 0x8c or 0x8d
+local	FUN_00105894	param_1	inst	INFERRED	decrements inst+0x160 then calls FUN_0010564c(inst, arg, 0)
+local	FUN_00105894	param_2	arg	INFERRED	decrements inst+0x160 then calls FUN_0010564c(inst, arg, 0)
+local	FUN_000ec2e8	param_1	program	INFERRED	frees (arena at compiler+0x374) and zeroes the three work arrays at program+0x394, +0x398, +0x39c

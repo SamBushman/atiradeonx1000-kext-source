@@ -3974,7 +3974,7 @@ LAB_0011e764:
     loopIndex = 1;
     iVar2 = 0;
     do {
-      callResult = FUN_00105594(inst,loopIndex);
+      callResult = IRInst__getOperandSource(inst,loopIndex);
       iVar3 = iVar2;
       if ((((callResult != 0) && (inst != callResult)) && (iVar3 = callResult, iVar2 != 0)) &&
          (iVar3 = iVar2, iVar2 != callResult)) goto LAB_0011e764;
@@ -3995,7 +3995,7 @@ int FUN_0011e780(inst)
   if (0 < *(int *)(inst + 0x84)) {
     loopIndex = 1;
     do {
-      callResult = FUN_00105594(inst,loopIndex);
+      callResult = IRInst__getOperandSource(inst,loopIndex);
       if (callResult == 0) {
         return 0;
       }
