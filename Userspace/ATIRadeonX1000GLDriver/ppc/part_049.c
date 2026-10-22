@@ -1483,10 +1483,10 @@ int FUN_00188f24(param_1, param_2)
     if (iVar1 != 0) {
       iVar2 = piVar3[0x4d];
       iVar1 = DList__count(iVar2 + 0x90);
-      if ((((iVar1 < 3) && (iVar1 = FUN_000e79d0(iVar2), iVar1 == 1)) &&
+      if ((((iVar1 < 3) && (iVar1 = Block__successorCount(iVar2), iVar1 == 1)) &&
           (iVar1 = Block__getSuccessor(iVar2,0), iVar1 == piVar3[0x4f])) &&
          (iVar1 = IfHeader__canFlatten(piVar3,auStack_28), iVar1 == 0)) {
-        piVar3 = (int *)FUN_0012abd8(param_2,piVar3);
+        piVar3 = (int *)IfHeader__swapArms(param_2,piVar3);
       }
     }
     piVar3 = (int *)piVar3[2];

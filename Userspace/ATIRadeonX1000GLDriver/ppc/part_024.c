@@ -328,8 +328,8 @@ int FUN_000ec6b0(param_1)
     if (iVar1 == 0) {
       return 0;
     }
-    iVar1 = FUN_000e79dc(iVar2);
-    if ((1 < iVar1) || (iVar1 = FUN_000e79d0(iVar2), 1 < iVar1)) break;
+    iVar1 = Block__predecessorCount(iVar2);
+    if ((1 < iVar1) || (iVar1 = Block__successorCount(iVar2), 1 < iVar1)) break;
     iVar2 = *(int *)(iVar2 + 8);
     iVar1 = *(int *)(iVar2 + 8);
   }

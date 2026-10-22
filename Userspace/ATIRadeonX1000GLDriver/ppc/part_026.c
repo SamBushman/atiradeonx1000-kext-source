@@ -780,15 +780,15 @@ int FUN_000f60c4(param_1, param_2)
         puVar6 = *(undefined1 **)(iVar11 + 0x14c);
         uVar4 = *(undefined4 *)(iVar11 + 0x94);
         pcVar8 = "k";
-        FUN_000e0e0c(param_2,"(%d)  %d, regnum = %s[%d]: ",puVar6,uVar7,"k",uVar4,in_r9,in_r10);
+        Compiler__logf(param_2,"(%d)  %d, regnum = %s[%d]: ",puVar6,uVar7,"k",uVar4,in_r9,in_r10);
         do {
           if (((int)*(char *)(iVar11 + 0x15c) >> (uVar2 & 0x3f) & 1U) == 0) break;
           puVar6 = auStack_b8;
-          FUN_000e0e0c(param_2,"  %s ",puVar6,uVar7,pcVar8,uVar4,in_r9,in_r10);
+          Compiler__logf(param_2,"  %s ",puVar6,uVar7,pcVar8,uVar4,in_r9,in_r10);
           bVar1 = uVar2 != 3;
           uVar2 = uVar2 + 1;
         } while (bVar1);
-        FUN_000e0e0c(param_2,"\n",puVar6,uVar7,pcVar8,uVar4,in_r9,in_r10);
+        Compiler__logf(param_2,"\n",puVar6,uVar7,pcVar8,uVar4,in_r9,in_r10);
       }
       uVar2 = puVar10[1];
       uVar7 = uVar9;
@@ -2802,7 +2802,7 @@ int FUN_000f94dc(compiler, param_2, param_3, param_4, param_5, param_6, param_7)
     case 4:
       uVar9 = 6;
     }
-    FUN_000e79d0(*(undefined4 *)(compiler + 0x3a0));
+    Block__successorCount(*(undefined4 *)(compiler + 0x3a0));
     uVar2 = Block__getSuccessor(*(undefined4 *)(compiler + 0x3a0),0);
     arena = *(undefined4 *)(*(int *)(compiler + 8) + 0x374);
     allocation = (undefined4 *)Arena__alloc(arena,0x168);
@@ -7615,7 +7615,7 @@ code_r0x00103300:
         if (*(int **)(iVar20 + 0x154) != (int *)0x0) {
           (**(code **)(**(int **)(iVar20 + 0x154) + 4))();
         }
-        FUN_00194374(local_184[0x34],iVar20);
+        Vector__removeValue(local_184[0x34],iVar20);
         do {
           ppppppuVar48 = (uint ******)local_184[2];
           pppppuVar15 = ppppppuVar48[0x26];
@@ -7770,7 +7770,7 @@ code_r0x001022b4:
       bVar4 = *(byte *)((int)param_2 + 0x8d);
       pppppuVar15 = (uint *****)(uint)bVar4;
       if ((*(uint *)((int)local_a0 + (bVar4 >> 3 & 0x1c) + 8) >> (bVar4 & 0x1f) & 1) == 0) {
-        FUN_000e0e0c(*(undefined4 *)(param_1 + 8),"TextureStage %d misses DCLPT\n",pppppuVar15,in_r6
+        Compiler__logf(*(undefined4 *)(param_1 + 8),"TextureStage %d misses DCLPT\n",pppppuVar15,in_r6
                      ,in_r7,in_r8,bVar4 & 0x1f,0);
       }
       pppppuVar52 = *(uint ******)(param_1 + 0x7c);

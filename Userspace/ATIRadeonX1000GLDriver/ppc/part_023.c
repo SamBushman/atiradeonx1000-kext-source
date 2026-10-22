@@ -1,16 +1,16 @@
 #include "decls.h"
 
-/* FUN_000e9730 @ 0xe9730 (76 bytes) */
-int FUN_000e9730(param_1, param_2, param_3)
-  int param_1;
-  undefined4 param_2;
-  int param_3;
+/* Block__bypassAndDetach @ 0xe9730 (76 bytes) */
+int Block__bypassAndDetach(block, predBlock, succBlock)
+  int block;
+  undefined4 predBlock;
+  int succBlock;
 {
-  if (*(int *)(param_3 + 0xf0) == param_1) {
-    *(undefined4 *)(param_3 + 0xf0) = *(undefined4 *)(param_1 + 0xf0);
+  if (*(int *)(succBlock + 0xf0) == block) {
+    *(undefined4 *)(succBlock + 0xf0) = *(undefined4 *)(block + 0xf0);
   }
-  FUN_000e93ac(param_1,param_2,param_3);
-  Block__detach(param_1);
+  Block__bypass(block,predBlock,succBlock);
+  Block__detach(block);
   return 1;
 }
 

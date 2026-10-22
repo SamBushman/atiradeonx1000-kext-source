@@ -1184,15 +1184,15 @@ int FUN_0010dd54(param_1)
   return;
 }
 
-/* FUN_0010ddcc @ 0x10ddcc (12 bytes) */
-int FUN_0010ddcc(param_1)
+/* Compiler__getResourceModel @ 0x10ddcc (12 bytes) */
+int Compiler__getResourceModel(param_1)
   int param_1;
 {
   return *(undefined4 *)(*(int *)(param_1 + 0x30c) + 0x60);
 }
 
-/* FUN_0010ddd8 @ 0x10ddd8 (12 bytes) */
-int FUN_0010ddd8(param_1)
+/* Compiler__getThreadModel @ 0x10ddd8 (12 bytes) */
+int Compiler__getThreadModel(param_1)
   int param_1;
 {
   return *(undefined4 *)(*(int *)(param_1 + 0x30c) + 100);

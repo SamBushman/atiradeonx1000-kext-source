@@ -395,7 +395,7 @@ local	FUN_0012a6c0	param_1	this	CONFIRMED	constructor/initializer: stores a vtab
 local	FUN_0012a808	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
 local	FUN_0012a8bc	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
 local	FUN_0012b6a8	uVar10	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
-local	FUN_0012b6a8	puVar5	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
+local	FUN_0012b6a8	puVar5	newConstInst	INFERRED	builds an IRLoadConst loop-control constant (type 5: init/bound/step words, or type 3: count) replacing source 1 of the loop-start instruction and removes the counter, compare and break blocks
 local	FUN_0012bb48	uVar10	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
 local	FUN_0012bb48	puVar6	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
 local	FUN_0012e488	uVar5	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object

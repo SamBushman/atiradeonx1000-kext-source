@@ -2846,7 +2846,7 @@ LAB_0015cf80:
             *(int *)(iVar16 + 0x160) = *(int *)(iVar16 + 0x160) + -1;
             if (uVar17 != 0) {
               iVar16 = IRInst__getOperandSource(node,iVar14);
-              FUN_00194374(*(undefined4 *)(iVar16 + 0x10),node);
+              Vector__removeValue(*(undefined4 *)(iVar16 + 0x10),node);
             }
             iVar14 = iVar14 + 1;
           } while (iVar14 <= node[0x21]);
@@ -10113,7 +10113,7 @@ LAB_0016a42c:
       iVar2 = iVar6;
     } while (*(int *)(iVar6 + 8) != 0);
   }
-  FUN_000e0e0c(*compiler,"Scheduler : %d out of %d instructions are marked global\n",iVar9,iVar10,
+  Compiler__logf(*compiler,"Scheduler : %d out of %d instructions are marked global\n",iVar9,iVar10,
                in_r7,in_r8,0,in_r10);
   Arena__free(*(undefined4 *)(*compiler + 0x378),iVar8);
   return Arena__free(*(undefined4 *)(*compiler + 0x378),iVar7);

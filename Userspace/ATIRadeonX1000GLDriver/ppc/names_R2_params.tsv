@@ -306,7 +306,7 @@ local	FUN_0016a568	param_1	compiler	INFERRED	accessed at Compiler-only field off
 local	FUN_0016c1fc	param_1	compiler	INFERRED	accessed at Compiler-only field offsets
 local	FUN_0016ff54	param_1	compiler	INFERRED	accessed at Compiler-only field offsets
 local	FUN_00170e6c	param_1	compiler	INFERRED	FUN_00170e6c passes it as arg 0 of FUN_0016a568 (typed Compiler)
-local	FUN_00171714	param_1	compiler	INFERRED	FUN_00171714 passes it as arg 0 of FUN_00169e30 (typed Compiler)
+local	FUN_00171714	param_1	scheduler	INFERRED	param_1 is the scheduler object, not the compiler: [0] = compiler, [1] = program, [2]/[3] = target+0x60/+0x64, strings 'Scheduler : Total cycles %d' at [100]=+0x190 and 'Total dot-product transformed %d' at [0x6a]=+0x1a8
 local	FUN_00171714	param_2	program	INFERRED	FUN_00171714 passes it as arg 1 of FUN_00184ab4 (typed Program)
 local	FUN_00172474	param_2	inst	INFERRED	FUN_00172474 passes it as arg 0 of FUN_0010502c (typed Inst)
 local	FUN_001725c4	param_1	inst	INFERRED	FUN_001725c4 passes it as arg 0 of FUN_00105594 (typed Inst)

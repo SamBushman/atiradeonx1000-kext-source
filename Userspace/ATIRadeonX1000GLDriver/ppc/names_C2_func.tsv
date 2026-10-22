@@ -46,3 +46,22 @@ func	FUN_000e87e4	IfHeader__canFlatten	INFERRED	flatten_ifs gate: small arms, si
 func	FUN_0010b498	IRInst__isOperandConstZero	INFERRED	every used lane of source n resolves to constant 0.0
 func	FUN_0010b5f8	IRInst__getCompareCondition	INFERRED	condition code per opcode; inst+0x12c for 0x8b..0x8d
 func	FUN_0010b914	IRInst__setCompareCondition	INFERRED	writes inst+0x12c for 0x8b..0x8d
+func	FUN_0012fe8c	Program__isRegionTrivial	INFERRED	region flood-fill test used by remove_empty_graphs: every block up to the boundary is tiny and not break/continue
+func	FUN_0012abd8	IfHeader__swapArms	CONFIRMED	swaps +0x134/+0x138, re-links the moved arm before the footer and inverts the compare condition through the table at 0x1e912c
+func	FUN_000e93ac	Block__bypass	INFERRED	rewires pred->block->succ to pred->succ in the successor/predecessor vectors
+func	FUN_000e9730	Block__bypassAndDetach	INFERRED	Block__bypass then Block__detach (also fixes +0xf0)
+func	FUN_00194374	Vector__removeValue	CONFIRMED	finds the first element equal to value and removes it (Vector__removeAt), returns 1 when found
+func	FUN_000e7770	Block__isSimple	CONFIRMED	virtual getName() == "SIMPLE"
+func	FUN_000e79dc	Block__predecessorCount	CONFIRMED	count of the vector at +0xd4
+func	FUN_000e79d0	Block__successorCount	CONFIRMED	count of the vector at +0xd0
+func	FUN_000e79a0	Block__hasMultipleSuccessors	CONFIRMED	successor count > 1
+func	FUN_0012ba58	LoopInfo__init	INFERRED	loop shape test and loop-start (opcode 0x81) discovery for pass_loop_trans
+func	FUN_0012b35c	LoopInfo__setCounterPhi	INFERRED	records the counter phi and lane at info+0x34/+0x38
+func	FUN_0012c59c	LoopInfo__matchCounterInit	INFERRED	counter initial value (constant 0.0 or a register)
+func	FUN_0012c7c0	LoopInfo__matchCounterStep	CONFIRMED	opcode 0x12 adding the constant 1.0 to the counter lane
+func	FUN_0012c908	LoopInfo__matchExit	INFERRED	exit compare 0x8b/0x8c against the counter, bound and break target
+func	FUN_0012b6a8	LoopInfo__convertToHardwareLoop	INFERRED	creates the loop-control IRLoadConst and removes counter, compare and break blocks
+func	FUN_0013bd68	Program__eliminateDeadInstsAndRecountUses	INFERRED	mark-and-sweep dead code removal with recount of instruction use counts; run after every transform pass (loop_trans, flatten_ifs, remove_empty_graphs, rewrite)
+func	FUN_000e0e0c	Compiler__logf	CONFIRMED	body is a bare return: the scheduler's verbose-log calls (format strings 'Scheduler : Total cycles %d' ...) compile to nothing in this build
+func	FUN_0010ddcc	Compiler__getResourceModel	INFERRED	target description (compiler+0x30c) field +0x60 - stored by the scheduler at scheduler+8
+func	FUN_0010ddd8	Compiler__getThreadModel	INFERRED	target description (compiler+0x30c) field +0x64 - stored by the scheduler at scheduler+0xc

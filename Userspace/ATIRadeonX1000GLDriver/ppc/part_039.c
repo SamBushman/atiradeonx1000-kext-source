@@ -1893,36 +1893,36 @@ int FUN_0012ab04(inst)
 int pass_optimize_control_flow(program)
   int program;
 {
-  int *piVar1;
+  int *targetDescription;
   
-  piVar1 = *(int **)(*(int *)(program + 8) + 0x30c);
-  (**(code **)(*piVar1 + 0x74))(piVar1,program);
+  targetDescription = *(int **)(*(int *)(program + 8) + 0x30c);
+  (**(code **)(*targetDescription + 0x74))(targetDescription,program);
   return FUN_000ed7e4(program,(int)"optimize_control_flow");
 }
 
-/* FUN_0012abd8 @ 0x12abd8 (128 bytes) */
-int FUN_0012abd8(param_1, param_2)
-  undefined4 param_1;
-  int param_2;
+/* IfHeader__swapArms @ 0x12abd8 (128 bytes) */
+int IfHeader__swapArms(program, ifHeader)
+  undefined4 program;
+  int ifHeader;
 {
-  int iVar1;
+  int condition;
   undefined4 extraout_r4;
   undefined4 in_r5;
   undefined4 in_r6;
   undefined4 in_r7;
   undefined4 in_r8;
   undefined4 in_r9;
-  undefined4 uVar2;
+  undefined4 branchInst;
   
-  uVar2 = *(undefined4 *)(param_2 + 0x134);
-  *(undefined4 *)(param_2 + 0x134) = *(undefined4 *)(param_2 + 0x138);
-  *(undefined4 *)(param_2 + 0x138) = uVar2;
-  DList__unlink(uVar2);
-  DList__insertBefore(uVar2,*(undefined4 *)(param_2 + 0x13c));
-  uVar2 = Block__getBranchInst(param_2,extraout_r4,in_r5,in_r6,in_r7,in_r8,in_r9);
-  iVar1 = IRInst__getCompareCondition(uVar2);
-  IRInst__setCompareCondition(uVar2,*(undefined4 *)(PTR_DAT_001e912c + iVar1 * 4));
-  return param_2;
+  branchInst = *(undefined4 *)(ifHeader + 0x134);
+  *(undefined4 *)(ifHeader + 0x134) = *(undefined4 *)(ifHeader + 0x138);
+  *(undefined4 *)(ifHeader + 0x138) = branchInst;
+  DList__unlink(branchInst);
+  DList__insertBefore(branchInst,*(undefined4 *)(ifHeader + 0x13c));
+  branchInst = Block__getBranchInst(ifHeader,extraout_r4,in_r5,in_r6,in_r7,in_r8,in_r9);
+  condition = IRInst__getCompareCondition(branchInst);
+  IRInst__setCompareCondition(branchInst,*(undefined4 *)(PTR_DAT_001e912c + condition * 4));
+  return ifHeader;
 }
 
 /* FUN_0012ac58 @ 0x12ac58 (452 bytes) */
@@ -2026,10 +2026,10 @@ int FUN_0012aef0(param_1, param_2, param_3)
   int *piVar3;
   int *piVar4;
   
-  iVar1 = FUN_000e7770(param_2);
-  if ((((iVar1 == 0) || (iVar1 = FUN_000e7770(param_3), iVar1 == 0)) ||
-      (iVar1 = FUN_000e79d0(param_2), iVar1 != 1)) ||
-     ((iVar1 = FUN_000e79dc(param_3), iVar1 != 1 || (iVar1 = FUN_000e79e8(param_3), iVar1 == 0)))) {
+  iVar1 = Block__isSimple(param_2);
+  if ((((iVar1 == 0) || (iVar1 = Block__isSimple(param_3), iVar1 == 0)) ||
+      (iVar1 = Block__successorCount(param_2), iVar1 != 1)) ||
+     ((iVar1 = Block__predecessorCount(param_3), iVar1 != 1 || (iVar1 = FUN_000e79e8(param_3), iVar1 == 0)))) {
     uVar2 = 0;
   }
   else {
@@ -2042,7 +2042,7 @@ int FUN_0012aef0(param_1, param_2, param_3)
       }
     }
     uVar2 = Block__getSuccessor(param_3,0);
-    FUN_000e9730(param_3,param_2,uVar2);
+    Block__bypassAndDetach(param_3,param_2,uVar2);
     uVar2 = 1;
   }
   return uVar2;

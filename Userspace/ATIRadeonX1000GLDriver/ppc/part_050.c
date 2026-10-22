@@ -1773,34 +1773,34 @@ int FUN_001942d4(param_1, param_2)
   return iVar3;
 }
 
-/* FUN_00194374 @ 0x194374 (124 bytes) */
-int FUN_00194374(param_1, param_2)
-  int param_1;
-  int param_2;
+/* Vector__removeValue @ 0x194374 (124 bytes) */
+int Vector__removeValue(vector, value)
+  int vector;
+  int value;
 {
-  int loopRemaining;
-  undefined4 uVar2;
+  int remaining;
+  undefined4 found;
   int loopIndex;
   
-  loopRemaining = *(int *)(param_1 + 4);
-  if (loopRemaining == 0) {
+  remaining = *(int *)(vector + 4);
+  if (remaining == 0) {
 LAB_001943c4:
-    uVar2 = 0;
+    found = 0;
   }
   else {
     loopIndex = 0;
-    if (param_2 != **(int **)(param_1 + 8)) {
+    if (value != **(int **)(vector + 8)) {
       loopIndex = 0;
       do {
         loopIndex = loopIndex + 1;
-        loopRemaining = loopRemaining + -1;
-        if (loopRemaining == 0) goto LAB_001943c4;
-      } while (param_2 != (*(int **)(param_1 + 8))[loopIndex]);
+        remaining = remaining + -1;
+        if (remaining == 0) goto LAB_001943c4;
+      } while (value != (*(int **)(vector + 8))[loopIndex]);
     }
-    ((int (*)())Vector__removeAt)(param_1,loopIndex);
-    uVar2 = 1;
+    ((int (*)())Vector__removeAt)(vector,loopIndex);
+    found = 1;
   }
-  return uVar2;
+  return found;
 }
 
 /* FUN_001943f0 @ 0x1943f0 (276 bytes) */

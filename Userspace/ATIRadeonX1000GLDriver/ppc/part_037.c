@@ -43,7 +43,7 @@ int FUN_0011e894(param_1)
       iVar1 = 0;
       for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(iVar4 + 0xd4) + 4); loopIndex = loopIndex + 1) {
         iVar2 = *(int *)(*(int *)(*(int *)(iVar4 + 0xd4) + 8) + iVar1);
-        if ((iVar2 != 0) && (iVar2 = FUN_000e79a0(iVar2), iVar2 != 0)) {
+        if ((iVar2 != 0) && (iVar2 = Block__hasMultipleSuccessors(iVar2), iVar2 != 0)) {
           return 0;
         }
         iVar1 = iVar1 + 4;
@@ -242,7 +242,7 @@ int FUN_0011eaa0(param_1)
               *instAlloc = arena;
               puVar14 = instAlloc + 1;
               IRPhiNode__ctor_10a398(puVar14,*(undefined4 *)(param_1 + 8));
-              arena = FUN_000e79dc(piVar8);
+              arena = Block__predecessorCount(piVar8);
               instAlloc[0x22] = arena;
               IRInst__setOperandRef(puVar14,0,iVar13);
               if (*(int *)(iVar13 + 4) == 0x2c) {
@@ -1459,7 +1459,7 @@ int FUN_00120cd4(param_1)
     Arena__free(*allocation,allocation);
   }
   if (local_48[0] != 0) {
-    FUN_000e0e0c(*(undefined4 *)(param_1 + 8),
+    Compiler__logf(*(undefined4 *)(param_1 + 8),
                  "SSA : Phi Replace -> %d added temps to break cycles\n",local_48[0],in_r6,in_r7,
                  in_r8,in_r9,in_r10);
   }

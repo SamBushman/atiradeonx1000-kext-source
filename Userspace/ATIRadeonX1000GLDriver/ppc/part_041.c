@@ -540,7 +540,7 @@ LAB_00131f98:
   arena = 0;
   *(undefined4 *)(param_1 + 0x34) = 4;
   Arena__free(*(undefined4 *)(iVar4 + 0x378),piVar6);
-  return FUN_000e0e0c(*(undefined4 *)(param_1 + 8),
+  return Compiler__logf(*(undefined4 *)(param_1 + 8),
                "Register allocation : Repartition -> %d physical + %d virtual = %d regs\n",param_3,
                param_2,param_4,in_r8,arena,in_r10);
 }

@@ -2267,7 +2267,7 @@ LAB_0016fb44:
                         iVar14 = iVar14 + 4;
                         iVar33 = iVar33 + -1;
                       } while (iVar33 != 0);
-                      FUN_00194374(*(undefined4 *)(iVar13 + 0x40),piVar9);
+                      Vector__removeValue(*(undefined4 *)(iVar13 + 0x40),piVar9);
                       if (-1 < *(int *)(*piVar9 + 0x2c)) {
                         *(int *)(iVar23 + 0x34) = *(int *)(iVar23 + 0x34) + 1;
                       }
@@ -2854,8 +2854,8 @@ int FUN_00170e6c(compiler, param_2)
 }
 
 /* pass_sched_preprocess_and_schedule_inst @ 0x171714 (408 bytes) */
-int pass_sched_preprocess_and_schedule_inst(compiler, program)
-  int *compiler;
+int pass_sched_preprocess_and_schedule_inst(scheduler, program)
+  int *scheduler;
   int program;
 {
   int *operandVReg;
@@ -2880,14 +2880,14 @@ int pass_sched_preprocess_and_schedule_inst(compiler, program)
   int *piVar14;
   int *piVar15;
   
-  compiler[1] = program;
+  scheduler[1] = program;
   iVar4 = *(int *)(program + 8);
-  *compiler = iVar4;
-  iVar4 = FUN_0010ddcc(iVar4);
-  compiler[2] = iVar4;
-  iVar4 = FUN_0010ddd8(*compiler);
-  compiler[3] = iVar4;
-  arena = *(undefined4 *)(*compiler + 0x378);
+  *scheduler = iVar4;
+  iVar4 = Compiler__getResourceModel(iVar4);
+  scheduler[2] = iVar4;
+  iVar4 = Compiler__getThreadModel(*scheduler);
+  scheduler[3] = iVar4;
+  arena = *(undefined4 *)(*scheduler + 0x378);
   allocation = (undefined4 *)Arena__alloc(arena,0x14);
   *allocation = arena;
   allocation[1] = 2;
@@ -2895,8 +2895,8 @@ int pass_sched_preprocess_and_schedule_inst(compiler, program)
   allocation[2] = 0;
   arena = Arena__alloc(arena,8);
   allocation[3] = arena;
-  compiler[5] = (int)(allocation + 1);
-  arena = *(undefined4 *)(*compiler + 0x378);
+  scheduler[5] = (int)(allocation + 1);
+  arena = *(undefined4 *)(*scheduler + 0x378);
   allocation = (undefined4 *)Arena__alloc(arena,0x14);
   *allocation = arena;
   allocation[1] = 2;
@@ -2904,8 +2904,8 @@ int pass_sched_preprocess_and_schedule_inst(compiler, program)
   allocation[4] = arena;
   arena = Arena__alloc(arena,8);
   allocation[3] = arena;
-  compiler[6] = (int)(allocation + 1);
-  arena = *(undefined4 *)(*compiler + 0x378);
+  scheduler[6] = (int)(allocation + 1);
+  arena = *(undefined4 *)(*scheduler + 0x378);
   puVar6 = (undefined4 *)Arena__alloc(arena,0x30);
   *puVar6 = arena;
   FUN_001940a8(puVar6 + 6);
@@ -2916,15 +2916,15 @@ int pass_sched_preprocess_and_schedule_inst(compiler, program)
     allocation = allocation + 1;
     iVar4 = iVar4 + -1;
   } while (iVar4 != 0);
-  compiler[0xc] = (int)(puVar6 + 1);
-  piVar7 = *(int **)(*compiler + 0x30c);
-  iVar4 = (**(code **)(*piVar7 + 0x138))(piVar7,*compiler);
-  piVar7 = *(int **)(*compiler + 0x30c);
-  iVar8 = (**(code **)(*piVar7 + 0x140))(piVar7,*compiler);
+  scheduler[0xc] = (int)(puVar6 + 1);
+  piVar7 = *(int **)(*scheduler + 0x30c);
+  iVar4 = (**(code **)(*piVar7 + 0x138))(piVar7,*scheduler);
+  piVar7 = *(int **)(*scheduler + 0x30c);
+  iVar8 = (**(code **)(*piVar7 + 0x140))(piVar7,*scheduler);
   iVar4 = iVar4 + iVar8;
-  compiler[0x51] = iVar4;
+  scheduler[0x51] = iVar4;
   uVar2 = iVar4 + 0x1fU >> 5;
-  arena = *(undefined4 *)(*compiler + 0x378);
+  arena = *(undefined4 *)(*scheduler + 0x378);
   allocation = (undefined4 *)Arena__alloc(arena,uVar2 * 4 + 0xc);
   piVar7 = allocation + 1;
   *allocation = arena;
@@ -2942,41 +2942,41 @@ int pass_sched_preprocess_and_schedule_inst(compiler, program)
       iVar4 = iVar4 + -1;
     } while (iVar4 != 0);
   }
-  compiler[0x4c] = (int)piVar7;
-  iVar4 = (**(code **)(**(int **)(*compiler + 0x30c) + 0x13c))();
+  scheduler[0x4c] = (int)piVar7;
+  iVar4 = (**(code **)(**(int **)(*scheduler + 0x30c) + 0x13c))();
   bVar1 = iVar4 < 1;
-  piVar7 = compiler;
+  piVar7 = scheduler;
   do {
-    iVar8 = Arena__alloc(*(undefined4 *)(*compiler + 0x378),compiler[0x51] << 2);
+    iVar8 = Arena__alloc(*(undefined4 *)(*scheduler + 0x378),scheduler[0x51] << 2);
     piVar7[0x4d] = iVar8;
     if (bVar1) {
       piVar7[0x54] = 0;
       piVar7[0x58] = 0;
     }
     else {
-      iVar9 = Arena__alloc(*(undefined4 *)(*compiler + 0x378),compiler[0x51] << 2);
-      iVar8 = *compiler;
+      iVar9 = Arena__alloc(*(undefined4 *)(*scheduler + 0x378),scheduler[0x51] << 2);
+      iVar8 = *scheduler;
       piVar7[0x54] = iVar9;
       iVar8 = Arena__alloc(*(undefined4 *)(iVar8 + 0x378),iVar4 << 2);
       piVar7[0x58] = iVar8;
     }
     piVar7 = piVar7 + 1;
-  } while (piVar7 != compiler + 4);
-  iVar4 = compiler[0x51];
-  compiler[0x53] = iVar4;
-  compiler[0x60] = 0;
-  compiler[0x61] = -1;
-  compiler[0x52] = iVar4;
-  compiler[100] = 0;
-  compiler[0x65] = 0;
-  compiler[0x66] = -1;
-  compiler[0x67] = -1;
-  compiler[0x68] = -1;
-  compiler[0x69] = -1;
-  compiler[0x6a] = 0;
-  iVar8 = FUN_000e79d0(*(undefined4 *)(compiler[1] + 0x3a0));
+  } while (piVar7 != scheduler + 4);
+  iVar4 = scheduler[0x51];
+  scheduler[0x53] = iVar4;
+  scheduler[0x60] = 0;
+  scheduler[0x61] = -1;
+  scheduler[0x52] = iVar4;
+  scheduler[100] = 0;
+  scheduler[0x65] = 0;
+  scheduler[0x66] = -1;
+  scheduler[0x67] = -1;
+  scheduler[0x68] = -1;
+  scheduler[0x69] = -1;
+  scheduler[0x6a] = 0;
+  iVar8 = Block__successorCount(*(undefined4 *)(scheduler[1] + 0x3a0));
   if (iVar8 == 1) {
-    iVar8 = compiler[1];
+    iVar8 = scheduler[1];
     allocation = (undefined4 *)0x0;
     iVar4 = *(int *)(*(int *)(iVar8 + 0x3a0) + 0xd0);
     if (*(int *)(iVar4 + 4) != 0) {
@@ -2996,13 +2996,13 @@ int pass_sched_preprocess_and_schedule_inst(compiler, program)
         piVar13 = (int *)piVar14[1];
         piVar15 = piVar14;
       } while (piVar13 != (int *)0x0);
-      iVar8 = compiler[1];
+      iVar8 = scheduler[1];
     }
     *(undefined4 *)(iVar8 + 0x3a4) = arena;
   }
-  iVar8 = FUN_000e79dc(*(undefined4 *)(compiler[1] + 0x3a8));
+  iVar8 = Block__predecessorCount(*(undefined4 *)(scheduler[1] + 0x3a8));
   if (iVar8 == 1) {
-    iVar8 = compiler[1];
+    iVar8 = scheduler[1];
     allocation = (undefined4 *)0x0;
     iVar4 = *(int *)(*(int *)(iVar8 + 0x3a8) + 0xd4);
     if (*(int *)(iVar4 + 4) != 0) {
@@ -3030,91 +3030,91 @@ code_r0x00171b84:
       piVar15 = piVar14;
     } while (piVar13 != (int *)0x0);
   }
-  iVar8 = compiler[1];
+  iVar8 = scheduler[1];
 code_r0x00171ba0:
-  (**(code **)(*(int *)compiler[2] + 0x70))((int *)compiler[2],iVar8);
-  FUN_000ed7e4(compiler[1],(int)"sched_preprocess");
-  iVar8 = Compiler__isOptionEnabled(*compiler,0x43);
+  (**(code **)(*(int *)scheduler[2] + 0x70))((int *)scheduler[2],iVar8);
+  FUN_000ed7e4(scheduler[1],(int)"sched_preprocess");
+  iVar8 = Compiler__isOptionEnabled(*scheduler,0x43);
   if (iVar8 != 0) {
-    pass_minreg_order(compiler,program);
+    pass_minreg_order(scheduler,program);
   }
-  FUN_00169e30(compiler);
-  FUN_00165014(compiler);
-  iVar8 = *(int *)(compiler[1] + 900);
+  FUN_00169e30(scheduler);
+  FUN_00165014(scheduler);
+  iVar8 = *(int *)(scheduler[1] + 900);
   iVar9 = *(int *)(iVar8 + 8);
   while (iVar9 != 0) {
     iVar9 = DList__count(iVar8 + 0x90);
     if (2 < iVar9) {
-      ((int (*)())FUN_00170e6c)(compiler,iVar8);
-      iVar4 = compiler[1];
-      compiler[100] = compiler[100] + compiler[0xb];
+      ((int (*)())FUN_00170e6c)(scheduler,iVar8);
+      iVar4 = scheduler[1];
+      scheduler[100] = scheduler[100] + scheduler[0xb];
       *(undefined4 *)(iVar8 + 0x118) = *(undefined4 *)(iVar4 + 0x474);
     }
     iVar8 = *(int *)(iVar8 + 8);
     iVar9 = *(int *)(iVar8 + 8);
   }
   if (!bVar1) {
-    compiler[0x66] = compiler[0x68];
+    scheduler[0x66] = scheduler[0x68];
   }
-  if (-1 < compiler[0x66]) {
+  if (-1 < scheduler[0x66]) {
     iVar8 = 0;
     do {
       iVar9 = iVar8 + 1;
-      Program__markHwRegUsed(compiler[1],iVar8);
+      Program__markHwRegUsed(scheduler[1],iVar8);
       iVar8 = iVar9;
-    } while (iVar9 <= compiler[0x66]);
+    } while (iVar9 <= scheduler[0x66]);
   }
-  iVar8 = (**(code **)(**(int **)(*compiler + 0x30c) + 0x138))();
-  if (-1 < compiler[0x67]) {
+  iVar8 = (**(code **)(**(int **)(*scheduler + 0x30c) + 0x138))();
+  if (-1 < scheduler[0x67]) {
     iVar9 = 0;
     do {
       iVar10 = iVar8 + iVar9;
       iVar9 = iVar9 + 1;
-      Program__markHwRegUsed(compiler[1],iVar10);
-    } while (iVar9 <= compiler[0x67]);
+      Program__markHwRegUsed(scheduler[1],iVar10);
+    } while (iVar9 <= scheduler[0x67]);
   }
-  iVar9 = (**(code **)(**(int **)(*compiler + 0x30c) + 0x140))();
-  if (-1 < compiler[0x69]) {
+  iVar9 = (**(code **)(**(int **)(*scheduler + 0x30c) + 0x140))();
+  if (-1 < scheduler[0x69]) {
     loopIndex = 0;
     do {
       iVar11 = iVar8 + iVar9 + loopIndex;
       loopIndex = loopIndex + 1;
-      Program__markHwRegUsed(compiler[1],iVar11);
-    } while (loopIndex <= compiler[0x69]);
+      Program__markHwRegUsed(scheduler[1],iVar11);
+    } while (loopIndex <= scheduler[0x69]);
   }
-  FUN_000e0e0c(*compiler,"Scheduler : Total cycles %d\n",compiler[100],in_r6,in_r7,in_r8,iVar4,in_r10)
+  Compiler__logf(*scheduler,"Scheduler : Total cycles %d\n",scheduler[100],in_r6,in_r7,in_r8,iVar4,in_r10)
   ;
-  FUN_000e0e0c(*compiler,"Scheduler : Total dot-product transformed %d\n",compiler[0x6a],in_r6,in_r7,
+  Compiler__logf(*scheduler,"Scheduler : Total dot-product transformed %d\n",scheduler[0x6a],in_r6,in_r7,
                in_r8,iVar4,in_r10);
-  FUN_000ed7e4(compiler[1],(int)"schedule_inst");
+  FUN_000ed7e4(scheduler[1],(int)"schedule_inst");
   FUN_00138080(program);
-  iVar4 = compiler[0x4c];
-  piVar13 = compiler;
+  iVar4 = scheduler[0x4c];
+  piVar13 = scheduler;
   if (iVar4 != 0) {
     Arena__free(*(undefined4 *)(iVar4 + -4),iVar4 + -4);
   }
   do {
     if (!bVar1) {
-      Arena__free(*(undefined4 *)(*compiler + 0x378),piVar13[0x54]);
-      Arena__free(*(undefined4 *)(*compiler + 0x378),piVar13[0x58]);
+      Arena__free(*(undefined4 *)(*scheduler + 0x378),piVar13[0x54]);
+      Arena__free(*(undefined4 *)(*scheduler + 0x378),piVar13[0x58]);
     }
     piVar15 = piVar13 + 1;
-    Arena__free(*(undefined4 *)(*compiler + 0x378),piVar13[0x4d]);
+    Arena__free(*(undefined4 *)(*scheduler + 0x378),piVar13[0x4d]);
     piVar13 = piVar15;
   } while (piVar7 != piVar15);
-  iVar4 = compiler[0xc];
+  iVar4 = scheduler[0xc];
   if (iVar4 != 0) {
     puVar3 = PTR_DAT_001e8b48 + 8;
     *(undefined **)(iVar4 + 0x14) = puVar3;
     *(undefined **)(iVar4 + 0x20) = puVar3;
     Arena__free(*(undefined4 *)(iVar4 + -4),iVar4 + -4);
   }
-  iVar4 = compiler[6];
+  iVar4 = scheduler[6];
   if (iVar4 != 0) {
     Arena__free(*(undefined4 *)(iVar4 + 0xc),*(undefined4 *)(iVar4 + 8));
     Arena__free(*(undefined4 *)(iVar4 + -4),iVar4 + -4);
   }
-  iVar4 = compiler[5];
+  iVar4 = scheduler[5];
   if (iVar4 != 0) {
     Arena__free(*(undefined4 *)(iVar4 + 0xc),*(undefined4 *)(iVar4 + 8));
     iVar8 = *(int *)(iVar4 + -4);

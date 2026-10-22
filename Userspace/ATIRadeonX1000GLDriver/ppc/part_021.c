@@ -613,7 +613,7 @@ int FUN_000e2094(compiler, param_2)
     ;
     iVar1 = Compiler__isOptionEnabled(compiler,0x11);
     if (iVar1 != 0) {
-      FUN_0013bd68(*(undefined4 *)(compiler + 0x6c4),0);
+      Program__eliminateDeadInstsAndRecountUses(*(undefined4 *)(compiler + 0x6c4),0);
     }
     iVar1 = Compiler__isOptionEnabled(compiler,0x1a);
     if (iVar1 == 0) {
@@ -634,7 +634,7 @@ int FUN_000e2094(compiler, param_2)
            *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) | 0x80;
       iVar1 = Compiler__isOptionEnabled(compiler,0x11);
       if (iVar1 != 0) {
-        FUN_0013bd68(*(undefined4 *)(compiler + 0x6c4),0);
+        Program__eliminateDeadInstsAndRecountUses(*(undefined4 *)(compiler + 0x6c4),0);
       }
       FUN_0014657c(*(undefined4 *)(compiler + 0x6c4));
       *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) =
@@ -1481,7 +1481,7 @@ int FUN_000e36bc(param_1, param_2, param_3)
   for (piVar3 = (int *)((int *)param_1[0xe1])[2]; piVar3 != (int *)0x0; piVar3 = (int *)piVar3[2]) {
     iVar2 = (**(code **)(*piVar1 + 0x24))(piVar1);
     if ((iVar2 == 0) || (iVar2 = IfHeader__canFlatten(piVar1,auStack_78), iVar2 == 0)) {
-      iVar2 = FUN_000e79dc(piVar1);
+      iVar2 = Block__predecessorCount(piVar1);
       if (0 < iVar2) {
         piVar4 = (int *)piVar1[0x35];
         if (*piVar4 == 0) {
@@ -1524,7 +1524,7 @@ int FUN_000e36bc(param_1, param_2, param_3)
       (**(code **)(*local_54 + 0xc))(local_54);
       ((int (*)())FUN_000e36bc)(param_1,param_2,param_3);
       ((int (*)())FUN_000e284c)(auStack_74);
-      FUN_000e0e0c(param_1[2],"Compression : size reduced from %d to %d  (%%%d)\n",uVar6,
+      Compiler__logf(param_1[2],"Compression : size reduced from %d to %d  (%%%d)\n",uVar6,
                    param_1[1],(int)((uVar6 - param_1[1]) * 100) / (int)uVar6,in_r8,in_r9,in_r10);
       goto LAB_000e392c;
     }

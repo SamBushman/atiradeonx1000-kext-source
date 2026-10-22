@@ -3520,8 +3520,8 @@ int FUN_000e0cd0(param_1, param_2)
   return;
 }
 
-/* FUN_000e0e0c @ 0xe0e0c (28 bytes) */
-int FUN_000e0e0c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+/* Compiler__logf @ 0xe0e0c (28 bytes) */
+int Compiler__logf(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;

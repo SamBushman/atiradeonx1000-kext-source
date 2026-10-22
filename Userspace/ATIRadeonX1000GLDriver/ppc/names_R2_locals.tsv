@@ -87,8 +87,8 @@ local	FUN_0012b248	iVar2	operandRecord	INFERRED	all 1 definition(s) of the varia
 local	FUN_0012b2d8	iVar2	operandRecord	INFERRED	all 1 definition(s) of the variable yield a OperandRecord: FUN_001054ec(callResult,0)
 local	FUN_0012b35c	iVar4	operandRecord	INFERRED	all 1 definition(s) of the variable yield a OperandRecord: FUN_001054ec(inst,0)
 local	FUN_0012c7c0	iVar3	operandRecord	INFERRED	all 1 definition(s) of the variable yield a OperandRecord: FUN_001054ec(inst,0)
-local	FUN_0012d2f0	uVar9	operandVReg2	INFERRED	all 1 definition(s) of the variable yield a VReg: FUN_00105594(piVar2,1)
-local	FUN_0012d2f0	uVar10	operandVReg3	INFERRED	all 1 definition(s) of the variable yield a VReg: FUN_00105594(piVar2,2)
+local	FUN_0012d2f0	uVar9	phiSource1	INFERRED	pass_flatten_ifs (notes_compiler_passes.md): if/else regions are linearised and the footer phis become conditional selects; roles read from the CFG rewiring and the phi rewrite
+local	FUN_0012d2f0	uVar10	phiSource2	INFERRED	pass_flatten_ifs (notes_compiler_passes.md): if/else regions are linearised and the footer phis become conditional selects; roles read from the CFG rewiring and the phi rewrite
 local	FUN_00131008	uVar3	operandVReg	INFERRED	all 1 definition(s) of the variable yield a VReg: FUN_00105594(inst,param_3)
 local	FUN_001311cc	iVar2	operandRecord	INFERRED	all 2 definition(s) of the variable yield a OperandRecord: FUN_001054ec(puVar4,1); FUN_001054ec(puVar4,2)
 local	FUN_001312f4	iVar2	operandRecord	INFERRED	all 3 definition(s) of the variable yield a OperandRecord: FUN_001054ec(inst,0); FUN_001054ec(puVar7,1)

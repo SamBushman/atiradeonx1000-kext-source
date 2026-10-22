@@ -2861,7 +2861,7 @@ LAB_0014b954:
         *(int *)(iVar8 + 0x160) = *(int *)(iVar8 + 0x160) + -1;
         if (param_3 != 0) {
           iVar8 = IRInst__getOperandSource(inst,iVar6);
-          FUN_00194374(*(undefined4 *)(iVar8 + 0x10),inst);
+          Vector__removeValue(*(undefined4 *)(iVar8 + 0x10),inst);
         }
         iVar6 = iVar6 + 1;
       } while (iVar6 <= *(int *)(inst + 0x84));

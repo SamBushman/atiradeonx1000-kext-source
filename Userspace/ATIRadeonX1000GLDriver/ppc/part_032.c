@@ -908,7 +908,7 @@ LAB_0011047c:
                       uVar7 = puVar30[1];
                     } while ((int)uVar32 < (int)uVar7);
                   }
-                  FUN_00194374(vector,piVar22);
+                  Vector__removeValue(vector,piVar22);
                   uVar31 = uVar31 - 1;
                   Program__removeInst(param_1,*piVar22);
                   *(int *)(param_1 + 0x230) = *(int *)(param_1 + 0x230) + 1;
@@ -953,14 +953,14 @@ LAB_0011047c:
             }
             puVar11 = (undefined4 *)*puVar11;
             if (puVar11[5] == 0) {
-              FUN_00194374(vector,puVar11);
+              Vector__removeValue(vector,puVar11);
               uVar26 = uVar26 - 1;
               Program__removeInst(param_1,*puVar11);
               *(int *)(param_1 + 0x230) = *(int *)(param_1 + 0x230) + 1;
               IRInst__getOperandRecord(*puVar11,0);
             }
             else if (puVar11[5] == iVar8) {
-              FUN_00194374(vector,puVar11);
+              Vector__removeValue(vector,puVar11);
               FUN_0010f38c(puVar11,vector);
               ((int (*)())FUN_0010ff24)(puVar11,*(undefined4 *)(param_1 + 0x418));
               uVar7 = allocation[2];
@@ -1160,7 +1160,7 @@ LAB_00111270:
             piVar22 = (int *)*puVar12;
             iVar5 = *piVar22;
             if ((iVar5 == iVar9) || (iVar8 < 4 - piVar22[2])) goto LAB_001116e0;
-            FUN_00194374(puVar29,piVar22);
+            Vector__removeValue(puVar29,piVar22);
             puVar30 = (uint *)piVar22[3];
             uVar7 = puVar30[1];
             if (0 < (int)uVar7) {
@@ -1310,7 +1310,7 @@ LAB_0011151c:
                   uVar7 = puVar30[1];
                 } while ((int)uVar31 < (int)uVar7);
               }
-              FUN_00194374(puVar29,piVar24);
+              Vector__removeValue(puVar29,piVar24);
               uVar7 = puVar11[2];
             }
             else {
@@ -1449,7 +1449,7 @@ LAB_001116f4: ;
                 }
                 piVar24 = (int *)*puVar12;
                 if (piVar24[5] == iVar9) {
-                  FUN_00194374(puVar23,piVar24);
+                  Vector__removeValue(puVar23,piVar24);
                   Program__removeInst(param_1,*piVar24);
                   *(int *)(param_1 + 0x230) = *(int *)(param_1 + 0x230) + 1;
                   uVar7 = allocation[2];

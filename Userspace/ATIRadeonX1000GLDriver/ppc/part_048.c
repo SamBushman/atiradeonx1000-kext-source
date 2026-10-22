@@ -5209,7 +5209,7 @@ int FUN_0018401c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   param_1[1] = param_2;
   iVar3 = *(int *)(param_2 + 8);
   *param_1 = iVar3;
-  iVar3 = FUN_0010ddcc(iVar3);
+  iVar3 = Compiler__getResourceModel(iVar3);
   param_1[2] = iVar3;
   arenaAt378 = *(undefined4 *)(*param_1 + 0x378);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x14);
@@ -5579,35 +5579,35 @@ code_r0x00184480:
 }
 
 /* pass_minreg_order @ 0x184ab4 (280 bytes) */
-int pass_minreg_order(param_1, program)
-  undefined4 param_1;
+int pass_minreg_order(scheduler, program)
+  undefined4 scheduler;
   int program;
 {
-  int iVar1;
-  int iVar2;
-  int *piVar3;
-  int *piVar4;
-  int *piVar5;
+  int block;
+  int nextBlock;
+  int *nextInst;
+  int *currentInst;
+  int *inst;
   
-  iVar1 = *(int *)(program + 900);
-  for (iVar2 = *(int *)(*(int *)(program + 900) + 8); iVar2 != 0; iVar2 = *(int *)(iVar2 + 8)) {
-    piVar3 = (int *)(*(int **)(iVar1 + 0xa0))[1];
-    piVar5 = *(int **)(iVar1 + 0xa0);
-    if (piVar3 != (int *)0x0) {
+  block = *(int *)(program + 900);
+  for (nextBlock = *(int *)(*(int *)(program + 900) + 8); nextBlock != 0; nextBlock = *(int *)(nextBlock + 8)) {
+    nextInst = (int *)(*(int **)(block + 0xa0))[1];
+    inst = *(int **)(block + 0xa0);
+    if (nextInst != (int *)0x0) {
       do {
-        piVar4 = piVar3;
-        iVar2 = (**(code **)(*piVar5 + 0x34))(piVar5);
-        if ((((iVar2 == 0) && (iVar2 = (**(code **)(*piVar5 + 0x38))(piVar5), iVar2 == 0)) &&
-            (iVar2 = (**(code **)(*piVar5 + 0x14))(piVar5), 0 < iVar2)) &&
-           (iVar2 = ((int (*)())FUN_00181928)(piVar5,iVar1,program), iVar2 == 0)) {
-          ((int (*)())FUN_0018413c)(param_1,program,iVar1,piVar5);
+        currentInst = nextInst;
+        nextBlock = (**(code **)(*inst + 0x34))(inst);
+        if ((((nextBlock == 0) && (nextBlock = (**(code **)(*inst + 0x38))(inst), nextBlock == 0)) &&
+            (nextBlock = (**(code **)(*inst + 0x14))(inst), 0 < nextBlock)) &&
+           (nextBlock = ((int (*)())FUN_00181928)(inst,block,program), nextBlock == 0)) {
+          ((int (*)())FUN_0018413c)(scheduler,program,block,inst);
         }
-        piVar3 = (int *)piVar4[1];
-        piVar5 = piVar4;
-      } while (piVar3 != (int *)0x0);
-      iVar2 = *(int *)(iVar1 + 8);
+        nextInst = (int *)currentInst[1];
+        inst = currentInst;
+      } while (nextInst != (int *)0x0);
+      nextBlock = *(int *)(block + 8);
     }
-    iVar1 = iVar2;
+    block = nextBlock;
   }
   return FUN_000ed7e4(program,(int)"minreg_order");
 }

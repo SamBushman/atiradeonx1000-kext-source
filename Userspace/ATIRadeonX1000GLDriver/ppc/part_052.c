@@ -1125,10 +1125,10 @@ int FUN_0019a3bc(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   int iVar2;
   
   iVar1 = *(int *)(param_1 + 0x5c) + *(int *)(param_1 + 0x58);
-  FUN_000e0e0c(*(undefined4 *)(param_1 + 0xc),
+  Compiler__logf(*(undefined4 *)(param_1 + 0xc),
                "Assembler : emits %d cf, %d alu -> %d total instruction(s)\n",
                *(int *)(param_1 + 0x5c),*(int *)(param_1 + 0x58),iVar1,param_6,param_7,param_8);
-  FUN_000e0e0c(*(undefined4 *)(param_1 + 0xc),
+  Compiler__logf(*(undefined4 *)(param_1 + 0xc),
                "INFO:# of control flow %d, # of exec %d instructions\n",
                *(undefined4 *)(param_1 + 0x5c),*(undefined4 *)(param_1 + 0x58),iVar1,param_6,param_7
                ,param_8);
@@ -1138,7 +1138,7 @@ int FUN_0019a3bc(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     if (iVar1 != 0) {
       iVar2 = (*(int *)(param_1 + 0x74) * 100) / iVar1;
     }
-    FUN_000e0e0c(*(undefined4 *)(param_1 + 0xc),
+    Compiler__logf(*(undefined4 *)(param_1 + 0xc),
                  "Assembler : of %d candidate alu instruction(s), %d are packed (%%%d)\n",iVar1,
                  *(int *)(param_1 + 0x74),iVar2,param_6,param_7,param_8);
     return;
@@ -1272,7 +1272,7 @@ int R300VMachineAssembler__vslot2(param_1, param_2, param_3, param_4, param_5, p
 {
   undefined4 uVar1;
   
-  FUN_000e0e0c(*(int *)(param_1 + 0xc),"next_sp = %d, max = %d\n",*(undefined4 *)(param_1 + 0x58),
+  Compiler__logf(*(int *)(param_1 + 0xc),"next_sp = %d, max = %d\n",*(undefined4 *)(param_1 + 0x58),
                *(undefined4 *)(*(int *)(*(int *)(param_1 + 0xc) + 0x30c) + 0x40),param_5,param_6,
                param_7,param_8);
   if ((*(int *)(*(int *)(*(int *)(param_1 + 0xc) + 0x30c) + 0x40) < *(int *)(param_1 + 0x58)) ||
