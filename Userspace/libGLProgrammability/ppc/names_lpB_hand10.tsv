@@ -12,10 +12,12 @@ local	_PPParserPreprocessString	iVar14	charAdvance	INFERRED	pass 2: 1, or 2 for 
 local	_PPParserPreprocessString	iVar10	nextOutPos	INFERRED	pass 2: output index after the current character
 local	_PPParserPreprocessString	uVar5	ch	INFERRED	pass 2: the character being copied
 use	_PPParserPreprocessString	scanPos	outLength	INFERRED	pass 1: number of output characters counted	#0	^\s*iVar9\ =\ 0;	all	none
-use	_PPParserPreprocessString	scanPos	srcPos	INFERRED	pass 2: input index being copied	^\s*iVar9\ =\ 0;		all	none
+use	_PPParserPreprocessString	scanPos	srcPos	INFERRED	pass 2: input index being copied	^\s*iVar9\ =\ 0;	^code_r0x97b7c67c:	all	none
+use	_PPParserPreprocessString	scanPos	outLength	INFERRED	pass 1: number of output characters counted (tail block)	^code_r0x97b7c67c:		all	none
 use	_PPParserPreprocessString	uVar16	inPos	INFERRED	pass 1: input index of the next character (also holds the new output length briefly)	#0	^\s*iVar9\ =\ 0;	all	none
 use	_PPParserPreprocessString	uVar16	headerLeft	INFERRED	pass 2: down-counter while copying the verbatim header	^\s*for\ \(uVar16\ =\ scanPos;	+4	all	none
-use	_PPParserPreprocessString	uVar16	lastWasSep	INFERRED	pass 2: 1 when the last emitted character is a separator/space	^\s*iVar9\ =\ 0;		all	none
+use	_PPParserPreprocessString	uVar16	lastWasSep	INFERRED	pass 2: 1 when the last emitted character is a separator/space	^\s*iVar9\ =\ 0;	^code_r0x97b7c67c:	all	none
+use	_PPParserPreprocessString	uVar16	inPos	INFERRED	pass 1: input index of the next character (tail block)	^code_r0x97b7c67c:		all	none
 use	_PPParserPreprocessString	uVar12	prevSep	INFERRED	pass 1: 1 when the last counted character is a separator/space	#0	^\s*iVar9\ =\ 0;	all	none
 use	_PPParserPreprocessString	uVar12	numState	INFERRED	pass 2: number-literal state (0 none, 1 digit seen, 3 after a dot)	^\s*iVar9\ =\ 0;		all	none
 use	_PPParserPreprocessString	uVar11	digitState	INFERRED	pass 1: number-literal state (0 none, 1 digit seen, 3 after a dot)	#0	^\s*iVar9\ =\ 0;	all	none
@@ -27,8 +29,7 @@ local	_PPParserAddScope	param_2	scope	CONFIRMED	scope appended to the parser's s
 local	_PPParserAddScope	iVar1	firstScope	INFERRED	parser->firstScope after the update
 local	_PPParserAttachString	param_2	text	CONFIRMED	program text
 local	_PPParserAttachString	param_3	preprocess	CONFIRMED	nonzero: normalise through _PPParserPreprocessString, else copy verbatim
-use	_PPParserAttachString	iVar1	textLength	INFERRED	strlen of the stored text (parser[1])	^\s*iVar1\ =\ _strlen\(\*param_1\);	+4	all	none
-use	_PPParserAttachString	iVar1	charsLeft	INFERRED	down-counter over the text while counting newlines (parser[2])	*		all	none
+local	_PPParserAttachString	iVar1	charsLeft	INFERRED	strlen of the stored text (parser[1]), then the down-counter while counting newlines (parser[2])
 local	_PPParserAttachString	iVar2	scanIndex	INFERRED	index into the text while counting newlines
 local	_PPParserAttachStream	param_2	stream	CONFIRMED	PPStream* stored at parser+0x1c and propagated to every scope
 local	_PPParserAttachStream	iVar1	scope	INFERRED	walks the scope list (+0x20 next)

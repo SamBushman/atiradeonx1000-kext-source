@@ -19,8 +19,8 @@ use	_PPParserGetPart	iVar4	replaceLength	INFERRED	every definition is the result
 use	_PPParserGetPart	iVar5	newText	INFERRED	every definition is the result of a call whose name says it returns this	#18	+6	all	all
 use	_PPParserParseOption	iVar1	compareResult	INFERRED	every definition is the result of a call whose name says it returns this	#5	+1	all	all
 use	_PPParserParseOptionIdentifier	iVar1	compareResult	INFERRED	every definition is the result of a call whose name says it returns this	#9	+111	all	all
-use	_PPStreamAddOption	puVar1	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#0	+4	all	all
-use	_PPStreamAddAttribBinding	puVar1	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#0	+7	all	all
+use	_PPStreamAddOption	puVar1	optionChunk	INFERRED	every definition is the result of a call whose name says it returns this	#0	+4	all	all
+use	_PPStreamAddAttribBinding	puVar1	bindingChunk	INFERRED	every definition is the result of a call whose name says it returns this	#0	+7	all	all
 use	_PPParserParseStatement	iVar2	compareResult	INFERRED	every definition is the result of a call whose name says it returns this	#9	+16	all	all
 use	_PPParserParseStatement	iVar2	compareResult	INFERRED	every definition is the result of a call whose name says it returns this	#29	+1	all	all
 use	_PPParserParseStatement	iVar2	compareResult	INFERRED	every definition is the result of a call whose name says it returns this	#74	+0	lhs	lhs
