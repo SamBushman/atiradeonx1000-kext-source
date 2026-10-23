@@ -1,0 +1,58 @@
+local	TIntermBinary__compileNode	param_3	unusedArg3	UNKNOWN	only forwarded to the virtual getLine call and the error calls as extra register arguments
+local	TIntermBinary__compileNode	param_4	unusedArg4	UNKNOWN	scratch register argument: forwarded to calls (once loaded with the array-index error string for the next call)
+local	TIntermBinary__compileNode	param_5	unusedArg5	UNKNOWN	only forwarded to the virtual getLine call and the operand calls as an extra register argument
+local	TIntermBinary__compileNode	param_6	unusedArg6	UNKNOWN	only forwarded to calls as an extra register argument
+local	TIntermBinary__compileNode	uVar17	zeroCallArg	UNKNOWN	initialised to 0 and only forwarded as an extra register argument of error/operand calls
+local	TIntermBinary__compileNode	uVar1	glType	CONFIRMED	OpenGL type enum (ushort): ParseSymbol +0x2c / ParseOperand +0x18, fed to GetPPStreamTypeForGLType and getConstantAsSourceVar
+local	TIntermBinary__compileNode	uVar13	swizzleComponent	INFERRED	component returned by ParseOperand__GetSwizzle and stored in the saved swizzle byte array
+local	TIntermBinary__compileNode	uVar14	newSwizzleComponent	INFERRED	component (constant value or remapped byte) passed to ParseOperand__AddSwizzle
+local	TIntermBinary__compileNode	uVar20	operandPairResult	UNKNOWN	64-bit (r3:r4) return pair of equalOperands / assignOperands; only the high word (the result operand) is used afterwards
+local	TIntermBinary__compileNode	pPVar2	leftOperandToFree	INFERRED	copy of the left operand pointer deleted after its destructor
+local	TIntermBinary__compileNode	a6	rightConstData	INFERRED	right operand +4 = pointer to its constant integer data (index constant for EOpIndexDirect)
+local	TIntermBinary__compileNode	local_38	leftOperand	CONFIRMED	ParseOperand* returned by left->compileNode (vtable +0xc), deleted at the end unless it is the result
+local	TIntermBinary__compileNode	local_34	rightOperand	CONFIRMED	ParseOperand* returned by right->compileNode (vtable +0xc), deleted at the end
+local	TIntermBinary__compileNode	local_30	resultOperand	CONFIRMED	ParseOperand* returned by compileNode (local_30[0]); &local_30 is also the operand slot passed to AddOperation
+local	TIntermBinary__compileNode	local_3c	addrTempOperand	INFERRED	address-register temp (TPPStreamCompiler__newAddressTemp) holding a computed array index, or the left operand's existing +8 temp
+local	TIntermBinary__compileNode	local_40	arrayStride	INFERRED	vec4 registers per array element: 1, or TPPStreamCompiler__getArrayOffset(left); < 2 selects the MOV/ADD form, otherwise MUL by stride
+local	TIntermBinary__compileNode	local_70	structType	INFERRED	stack TType filled by left->getType() (vtable +0x38); its vtable word is reset to the TType vtable
+local	TIntermBinary__compileNode	local_68	structTypeFields	CONFIRMED	TType +8 (structure, the TTypeList*) of structType; element i is at (*(structTypeFields+4) + i*8)
+local	TIntermBinary__compileNode	pvVar12	operandCopy	INFERRED	new ParseOperand (0x38 bytes) copy-constructed from the left operand's +0xc / +8 sub-operand
+local	TIntermBinary__compileNode	iVar11	swizzleConstant	INFERRED	getAsConstantUnion (vtable +0x18) of a swizzle child node; null reports "Unexpected non-constant in vector swizzle"
+local	TIntermBinary__compileNode	pPVar9	leftSymbol	CONFIRMED	*leftOperand = the ParseSymbol of the left operand (CatName / SetParseTreeType / ResolveOpenGLType target)
+local	TIntermBinary__compileNode	ppPVar15	operandSlotPtr	INFERRED	address of the operand slot (resultOperand, addrTempOperand or rightOperand) handed to AddOperation / forwarded as an extra argument
+use	TIntermBinary__compileNode	iVar19	fieldIndex	CONFIRMED	struct field index constant (**(right+4)) selecting the member of structTypeFields	^\s*iVar19\ =\ \*\*\(int\ \*\*\)\(local_34\ \+\ 4\);$	^\s*iVar19\ =\ \*\(int\ \*\)\(local_38\ \+\ 0x14\);$	all	none
+use	TIntermBinary__compileNode	iVar19	swizzleCount	CONFIRMED	ParseOperand +0x14 swizzle count; malloc size of the saved swizzle copy	^\s*iVar19\ =\ \*\(int\ \*\)\(local_38\ \+\ 0x14\);$		all	none
+use	TIntermBinary__compileNode	iVar10	rightAggregate	CONFIRMED	right->getAsAggregate() (vtable +0x1c)	^\s*iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(this\ \+\ 0x38\)\ \+\ 0x1c\)\)\(\*\(int\ \*\*\)\(this\ \+\ 0x38\)\);$	^\s*iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 100\)\)\(piVar5\);$	all	none
+use	TIntermBinary__compileNode	iVar10	swizzleSequence	CONFIRMED	aggregate->getSequence() (vtable +100): vector of child nodes (begin +4, end +8)	^\s*iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 100\)\)\(piVar5\);$		all	none
+use	TIntermBinary__compileNode	piVar5	leftType	CONFIRMED	left->getTypePointer() (vtable +0x3c)	^\s*piVar5\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(this\ \+\ 0x34\)\ \+\ 0x3c\)\)$	^\s*piVar5\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(local_68\ \+\ 4\)\ \+\ iVar19\ \*\ 8\);$	all	none
+use	TIntermBinary__compileNode	piVar5	fieldType	CONFIRMED	TType* of member fieldIndex: *(structTypeFields->begin + fieldIndex*8)	^\s*piVar5\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(local_68\ \+\ 4\)\ \+\ iVar19\ \*\ 8\);$	^\s*piVar5\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(this\ \+\ 0x38\)\ \+\ 0x1c\)\)\(\*\(int\ \*\*\)\(this\ \+\ 0x38\)\);$	all	none
+use	TIntermBinary__compileNode	piVar5	rightAggregateNode	CONFIRMED	right->getAsAggregate()	^\s*piVar5\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(this\ \+\ 0x38\)\ \+\ 0x1c\)\)\(\*\(int\ \*\*\)\(this\ \+\ 0x38\)\);$	^\s*piVar5\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)\*puVar16\ \+\ 0x14\)\)\(\(int\ \*\)\*puVar16\);$	all	none
+use	TIntermBinary__compileNode	piVar5	swizzleChildTyped	CONFIRMED	child->getAsTyped() (vtable +0x14)	^\s*piVar5\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)\*puVar16\ \+\ 0x14\)\)\(\(int\ \*\)\*puVar16\);$	^\s*piVar5\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)local_30\[0\]\ \+\ 0xc\);$	all	none
+use	TIntermBinary__compileNode	piVar5	resultParseType	CONFIRMED	ParseSymbol +0xc parse-tree TType* of the result operand	^\s*piVar5\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)local_30\[0\]\ \+\ 0xc\);$		all	none
+use	TIntermBinary__compileNode	uVar4	currentLine	CONFIRMED	this->getLine() (vtable slot 0) stored at compiler+0x90	^\s*uVar4\ =\ \(\*\(code\ \*\)\*puVar16\)\(this,a1,param_3,param_4,param_5,param_6,puVar16\);$	^\s*uVar4\ =\ 1;$	all	none
+use	TIntermBinary__compileNode	uVar4	symbolIsArray	CONFIRMED	value stored at ParseSymbol +0x48 (is-array flag) before ResolveOpenGLType	^\s*uVar4\ =\ 1;$	^\s*uVar4\ =\ 1;$	all	none
+use	TIntermBinary__compileNode	uVar4	callArgOne	UNKNOWN	constant 1 forwarded as an extra register argument	^\s*uVar4\ =\ 1;$@2	^\s*uVar4\ =\ 0;$	all	none
+use	TIntermBinary__compileNode	uVar4	symbolIsArray	CONFIRMED	0 stored at ParseSymbol +0x48 for a struct member	^\s*uVar4\ =\ 0;$		all	none
+use	TIntermBinary__compileNode	pTVar7	leftNodeType	CONFIRMED	left->getTypePointer()	^\s*pTVar7\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(this\ \+\ 0x34\)\ \+\ 0x3c\)\)\(\*\(int\ \*\*\)\(this\ \+\ 0x34\)\);$	^\s*pTVar7\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x3c\)\)\(this\);$	all	none
+use	TIntermBinary__compileNode	pTVar7	thisType	CONFIRMED	this->getTypePointer() (vtable +0x3c) = result type of the node	^\s*pTVar7\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x3c\)\)\(this\);$		all	none
+use	TIntermBinary__compileNode	uVar18	indexValue	CONFIRMED	constant array index *rightConstData	^\s*uVar18\ =\ \*a6;$	^\s*uVar18\ =\ GetPPStreamTypeForGLType\(\(uint\)uVar1\);$	all	none
+use	TIntermBinary__compileNode	uVar18	ppStreamType	CONFIRMED	GetPPStreamTypeForGLType(glType)	^\s*uVar18\ =\ GetPPStreamTypeForGLType\(\(uint\)uVar1\);$	^\s*uVar18\ =\ \(uint\)uVar1;$	all	none
+use	TIntermBinary__compileNode	uVar18	glTypeArg	UNKNOWN	glType forwarded as an extra register argument	^\s*uVar18\ =\ \(uint\)uVar1;$	^\s*uVar18\ =\ GetPPStreamTypeForGLType\(\(uint\)uVar1\);$	all	none
+use	TIntermBinary__compileNode	uVar18	ppStreamType	CONFIRMED	GetPPStreamTypeForGLType(glType)	^\s*uVar18\ =\ GetPPStreamTypeForGLType\(\(uint\)uVar1\);$@2	^\s*uVar18\ =\ 0;$	all	none
+use	TIntermBinary__compileNode	uVar18	swizzleIndex	CONFIRMED	loop counter over the saved swizzle components	^\s*uVar18\ =\ 0;$	^\s*uVar18\ =\ ParseOperand__IsMatrix\(local_30\[0\]\);$	all	none
+use	TIntermBinary__compileNode	uVar18	isMatrixFlag	CONFIRMED	ParseOperand__IsMatrix(resultOperand)	^\s*uVar18\ =\ ParseOperand__IsMatrix\(local_30\[0\]\);$	^\s*uVar18\ =\ GetPPStreamTypeForGLType\(\(uint\)uVar1\);$	all	none
+use	TIntermBinary__compileNode	uVar18	ppStreamType	CONFIRMED	GetPPStreamTypeForGLType(glType)	^\s*uVar18\ =\ GetPPStreamTypeForGLType\(\(uint\)uVar1\);$@3		all	none
+use	TIntermBinary__compileNode	iVar6	leftIsArray	CONFIRMED	leftType->isArray() (TType vtable +0x38)	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x38\)\)\(piVar5\);$	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x34\)\)\(piVar5\);$	all	none
+use	TIntermBinary__compileNode	iVar6	leftIsMatrix	CONFIRMED	leftType->isMatrix() (TType vtable +0x34)	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x34\)\)\(piVar5\);$	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x38\)\)\(piVar5\);$	all	none
+use	TIntermBinary__compileNode	iVar6	leftIsArray	CONFIRMED	leftType->isArray()	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x38\)\)\(piVar5\);$@5	^\s*iVar6\ =\ \*piVar5;$	all	none
+use	TIntermBinary__compileNode	iVar6	fieldTypeVtable	CONFIRMED	vtable pointer of fieldType	^\s*iVar6\ =\ \*piVar5;$	^\s*iVar6\ =\ 0;$	all	none
+use	TIntermBinary__compileNode	iVar6	swizzleMap	CONFIRMED	malloc'd copy of the left operand's swizzle components (null when it has none)	^\s*iVar6\ =\ 0;$	^\s*iVar6\ =\ \*\(int\ \*\)\(this\ \+\ 0x30\);$	all	none
+use	TIntermBinary__compileNode	iVar6	binaryOp	CONFIRMED	this->op (+0x30)	^\s*iVar6\ =\ \*\(int\ \*\)\(this\ \+\ 0x30\);$	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x24\)\)\(piVar5,\(int\)uVar20,pPVar8,ppPVar15,iVar6,param_6,iVar3\);$	all	rhs
+use	TIntermBinary__compileNode	iVar6	resultQualifier	CONFIRMED	resultParseType->getQualifier() (TType vtable +0x24); 0xd = uniform sets compiler+0xa4	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x24\)\)\(piVar5,\(int\)uVar20,pPVar8,ppPVar15,iVar6,param_6,iVar3\);$	^\s*iVar6\ =\ \*\(int\ \*\)\(this\ \+\ 0x30\);$	lhs	none
+use	TIntermBinary__compileNode	iVar6	binaryOp	CONFIRMED	this->op (+0x30)	^\s*iVar6\ =\ \*\(int\ \*\)\(this\ \+\ 0x30\);$@2		all	none
+local	TIntermBinary__compileNode	a1	r4In0	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	TIntermBinary__compileNode	a1_00	r4In1	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	TIntermBinary__compileNode	a1_01	r4In2	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	TIntermBinary__compileNode	a1_02	r4In3	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	TIntermBinary__compileNode	extraout_r4	r4Out0	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TIntermBinary__compileNode	extraout_r4_00	r4Out1	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
