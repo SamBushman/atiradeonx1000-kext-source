@@ -557,6 +557,11 @@ int HwLimits__buildInterferenceGraph(this, graph, fixedRegCount, regCount, useCo
   int useCoalesced;
   int compiler;
 {
+  uint walkFlags;
+  uint poppedReg;
+  uint cursorFlags;
+  uint regNode;
+  uint bitScanIndex;
   uint wordByteOff5;
   uint topIndex;
   uint wordByteOff22;
@@ -609,7 +614,7 @@ int HwLimits__buildInterferenceGraph(this, graph, fixedRegCount, regCount, useCo
   undefined4 allocArena;
   int nextRow;
   uint wordOff;
-  uint uVar22;
+  uint inWorklistWordCount;
   int containsResult;
   int innerIndexOrScratch;
   int excludedRegs0;
@@ -662,22 +667,22 @@ int HwLimits__buildInterferenceGraph(this, graph, fixedRegCount, regCount, useCo
   worklist[4] = allocArena;
   arena = Arena__alloc(allocArena,8);
   worklist[3] = arena;
-  uVar22 = regCount + 0x1fU >> 5;
-  inWorklistAlloc = (undefined4 *)Arena__alloc(allocArena,uVar22 * 4 + 0xc);
+  inWorklistWordCount = regCount + 0x1fU >> 5;
+  inWorklistAlloc = (undefined4 *)Arena__alloc(allocArena,inWorklistWordCount * 4 + 0xc);
   inWorklistWords = inWorklistAlloc + 1;
   *inWorklistAlloc = allocArena;
-  inWorklistAlloc[1] = uVar22;
+  inWorklistAlloc[1] = inWorklistWordCount;
   inWorklistAlloc[2] = regCount;
-  if (uVar22 != 0) {
+  if (inWorklistWordCount != 0) {
     inWorklistAlloc = inWorklistWords;
-    if (uVar22 == 0) {
-      uVar22 = 1;
+    if (inWorklistWordCount == 0) {
+      inWorklistWordCount = 1;
     }
     do {
       inWorklistAlloc[2] = 0;
       inWorklistAlloc = inWorklistAlloc + 1;
-      uVar22 = uVar22 - 1;
-    } while (uVar22 != 0);
+      inWorklistWordCount = inWorklistWordCount - 1;
+    } while (inWorklistWordCount != 0);
   }
   worklist[5] = inWorklistWords;
   allocCtxOrBlock = *(int *)(allocCtxOrBlock + 900);
@@ -719,19 +724,19 @@ int HwLimits__buildInterferenceGraph(this, graph, fixedRegCount, regCount, useCo
       }
     }
     else if (0 < (int)bitCount) {
-      uVar22 = 0;
+      bitScanIndex = 0;
       do {
-        if ((*(uint *)((uVar22 >> 3 & 0x1ffffffc) + *(int *)(allocCtxOrBlock + 0x104) + 8) >> (uVar22 & 0x1f)
+        if ((*(uint *)((bitScanIndex >> 3 & 0x1ffffffc) + *(int *)(allocCtxOrBlock + 0x104) + 8) >> (bitScanIndex & 0x1f)
             & 1) != 0) {
-          innerIndexOrScratch = ((int)uVar22 >> 2) + (uint)((int)uVar22 < 0 && (uVar22 & 3) != 0);
+          innerIndexOrScratch = ((int)bitScanIndex >> 2) + (uint)((int)bitScanIndex < 0 && (bitScanIndex & 3) != 0);
           repReg = ((int (*)())FUN_00134bf0)(graph,innerIndexOrScratch,1);
-          bitIdx5 = uVar22 + innerIndexOrScratch * -4 + repReg * 4;
+          bitIdx5 = bitScanIndex + innerIndexOrScratch * -4 + repReg * 4;
           wordOff = bitIdx5 >> 3 & 0x1ffffffc;
           *(uint *)((int)liveWords + wordOff + 8) =
                1 << (bitIdx5 & 0x1f) | *(uint *)((int)liveWords + wordOff + 8);
         }
-        uVar22 = uVar22 + 1;
-      } while (bitCount != uVar22);
+        bitScanIndex = bitScanIndex + 1;
+      } while (bitCount != bitScanIndex);
     }
     groupHead = *(int **)(allocCtxOrBlock + 0xa0);
     for (walkInst = (int *)(*(int **)(allocCtxOrBlock + 0xa0))[1]; walkInst != (int *)0x0;
@@ -754,7 +759,7 @@ int HwLimits__buildInterferenceGraph(this, graph, fixedRegCount, regCount, useCo
                   excludedRegs1 = UNK_001afff0;
                   excludedRegs2 = UNK_001afff4;
                   excludedRegs3 = UNK_001afff8;
-                  uVar22 = ((int (*)())FUN_00134bf0)(graph,walkInst[0x25],useCoalesced);
+                  regNode = ((int (*)())FUN_00134bf0)(graph,walkInst[0x25],useCoalesced);
                   isMovResult = (**(code **)(*walkInst + 100))(walkInst);
                   if (isMovResult != 0) {
                     for (srcIndex = 1; innerIndexOrScratch = (**(code **)(*walkInst + 0x14))(walkInst),
@@ -790,9 +795,9 @@ int HwLimits__buildInterferenceGraph(this, graph, fixedRegCount, regCount, useCo
                     }
                   }
 code_r0x001327f0:
-                  anyComponentLive = FUN_0013097c(liveWords,uVar22);
+                  anyComponentLive = FUN_0013097c(liveWords,regNode);
                   if (anyComponentLive == 0) {
-                    if ((*(uint *)((uVar22 >> 3 & 0x1ffffffc) + worklist[5] + 8) >> (uVar22 & 0x1f) &
+                    if ((*(uint *)((regNode >> 3 & 0x1ffffffc) + worklist[5] + 8) >> (regNode & 0x1f) &
                         1) != 0) goto code_r0x00132adc;
                     worklistCount = worklist[2];
                     if (worklistCount < *worklistVecHeader) {
@@ -803,7 +808,7 @@ code_r0x001327f0:
                     else {
                       stackEntry = (uint *)Vector__elementRefGrow(worklistVecHeader,worklistCount);
                     }
-                    *stackEntry = uVar22;
+                    *stackEntry = regNode;
                     instFlags = walkInst[5];
                   }
                   else {
@@ -853,13 +858,13 @@ code_r0x0013299c:
                         (nextBlock = (**(code **)(*cursorInst + 0x50))(cursorInst), nextBlock == 0)))) {
                       src1Inst = IRInst__getOperandSource(walkInst,1);
                       arena = ((int (*)())FUN_00134bf0)(graph,*(undefined4 *)(src1Inst + 0x94),useCoalesced);
-                      ((int (*)())FUN_00135334)(graph,uVar22,arena);
+                      ((int (*)())FUN_00135334)(graph,regNode,arena);
                     }
                     isVertexFetchResult = (**(code **)(*walkInst + 0x2c))(walkInst);
                     if (isVertexFetchResult == 0) goto code_r0x00132adc;
                     src1Inst = IRInst__getOperandSource(walkInst,1);
                     arena = ((int (*)())FUN_00134bf0)(graph,*(undefined4 *)(src1Inst + 0x94),useCoalesced);
-                    ((int (*)())FUN_00135334)(graph,uVar22,arena);
+                    ((int (*)())FUN_00135334)(graph,regNode,arena);
                     instFlags = walkInst[5];
                   }
                 }
@@ -873,13 +878,13 @@ code_r0x00132adc:
           } while (((int *)walkInst[2] != (int *)0x0) &&
                   (walkInst = (int *)walkInst[2], (instFlags & 4) != 0));
           do {
-            uVar22 = cursorInst[5];
-            if ((uVar22 & 1) != 0) {
+            cursorFlags = cursorInst[5];
+            if ((cursorFlags & 1) != 0) {
               isPhiResult = (**(code **)(*cursorInst + 0x7c))(cursorInst);
               if (((isPhiResult == 0) && (cursorInst[0x20] != 0)) &&
                  (isPhiResult = RegKind__flagBit0(cursorInst[0x26]), isPhiResult != 0)) {
-                uVar22 = cursorInst[5];
-                if ((uVar22 & 2) != 0) goto code_r0x00132ca8;
+                cursorFlags = cursorInst[5];
+                if ((cursorFlags & 2) != 0) goto code_r0x00132ca8;
                 isUndefinedResult = (**(code **)(*cursorInst + 0x50))(cursorInst);
                 if (isUndefinedResult == 0) {
                   innerIndexOrScratch = 0;
@@ -897,8 +902,8 @@ code_r0x00132adc:
                     bitIndex = bitIndex + 1;
                     innerIndexOrScratch = innerIndexOrScratch + 1;
                   } while (moreComponents);
-                  uVar22 = cursorInst[5];
-                  if ((uVar22 & 0x200) == 0) goto code_r0x00132ca8;
+                  cursorFlags = cursorInst[5];
+                  if ((cursorFlags & 0x200) == 0) goto code_r0x00132ca8;
                   sourceInst = (int *)IRInst__getOperandSource(cursorInst,cursorInst[0x21]);
                   if (((sourceInst != (int *)0x0) && (sourceInst[0x20] != 0)) &&
                      ((operandRecord = RegKind__flagBit0(sourceInst[0x26]), operandRecord != 0 &&
@@ -920,11 +925,11 @@ code_r0x00132adc:
                   }
                 }
               }
-              uVar22 = cursorInst[5];
+              cursorFlags = cursorInst[5];
             }
 code_r0x00132ca8: ;
           } while (((int *)cursorInst[2] != (int *)0x0) &&
-                  (cursorInst = (int *)cursorInst[2], (uVar22 & 4) != 0));
+                  (cursorInst = (int *)cursorInst[2], (cursorFlags & 4) != 0));
         }
         while (walkInst = groupHead, worklist[2] != 0) {
           topIndex = worklist[2] - 1;
@@ -932,11 +937,11 @@ code_r0x00132ca8: ;
           if (topIndex < (uint)worklist[2]) {
             stackEntry = (uint *)(topIndex * 4 + worklist[3]);
           }
-          uVar22 = *stackEntry;
+          poppedReg = *stackEntry;
           Vector__removeAt(worklistVecHeader,worklist[2] - 1);
-          defWordAddr = (uVar22 >> 3 & 0x1ffffffc) + worklist[5];
+          defWordAddr = (poppedReg >> 3 & 0x1ffffffc) + worklist[5];
           *(uint *)(defWordAddr + 8) =
-               (-2 << (uVar22 & 0x1f) | 0xfffffffeU >> 0x20 - (uVar22 & 0x1f)) &
+               (-2 << (poppedReg & 0x1f) | 0xfffffffeU >> 0x20 - (poppedReg & 0x1f)) &
                *(uint *)(defWordAddr + 8);
           if (0 < regCount) {
             componentIdx = 0;
@@ -944,15 +949,15 @@ code_r0x00132ca8: ;
               innerIndexOrScratch = FUN_0013097c(liveWords,componentIdx);
               if (innerIndexOrScratch != 0) {
                 arena = ((int (*)())FUN_00134bf0)(graph,componentIdx,useCoalesced);
-                ((int (*)())FUN_00135334)(graph,uVar22,arena);
+                ((int (*)())FUN_00135334)(graph,poppedReg,arena);
               }
               componentIdx = componentIdx + 1;
             } while (regCount != componentIdx);
           }
         }
         while (hasGroup) {
-          uVar22 = walkInst[5];
-          if ((uVar22 & 1) != 0) {
+          walkFlags = walkInst[5];
+          if ((walkFlags & 1) != 0) {
             operandRecord = IRInst__getOperandRecord(walkInst,0);
             if (((((*(int *)(operandRecord + 0x10) != UNK_001affe8) &&
                   (*(int *)(walkInst[0x22] + 8) != 0x8e)) &&
@@ -960,9 +965,9 @@ code_r0x00132ca8: ;
                 ((operandRecord = (**(code **)(*walkInst + 0x38))(walkInst), operandRecord == 0 &&
                  (operandRecord = (**(code **)(*walkInst + 0x60))(walkInst), operandRecord == 0)))) &&
                (operandRecord = (**(code **)(*walkInst + 0x5c))(walkInst), operandRecord == 0)) {
-              uVar22 = walkInst[5];
+              walkFlags = walkInst[5];
               srcCount = walkInst[0x21];
-              if ((uVar22 & 0x200) != 0) {
+              if ((walkFlags & 0x200) != 0) {
                 srcCount = srcCount + -1;
               }
               if (0 < srcCount) {
@@ -993,9 +998,9 @@ code_r0x00132ca8: ;
                   }
                   innerIndexOrScratch = innerIndexOrScratch + 1;
                 } while (innerIndexOrScratch <= srcCount);
-                uVar22 = walkInst[5];
+                walkFlags = walkInst[5];
               }
-              if ((uVar22 & 0x200) == 0) goto code_r0x0013304c;
+              if ((walkFlags & 0x200) == 0) goto code_r0x0013304c;
               cursorInst = (int *)IRInst__getOperandSource(walkInst,walkInst[0x21]);
               if ((((cursorInst != (int *)0x0) && (cursorInst[0x20] != 0)) &&
                   (srcCount = RegKind__flagBit0(cursorInst[0x26]), srcCount != 0)) &&
@@ -1019,11 +1024,11 @@ code_r0x00132ca8: ;
                 } while (hasGroup);
               }
             }
-            uVar22 = walkInst[5];
+            walkFlags = walkInst[5];
           }
 code_r0x0013304c:
           if ((int *)walkInst[2] == (int *)0x0) break;
-          hasGroup = (uVar22 & 4) != 0;
+          hasGroup = (walkFlags & 4) != 0;
           walkInst = (int *)walkInst[2];
         }
         walkInst = (int *)groupHead[1];
@@ -1034,7 +1039,7 @@ code_r0x0013304c:
     nextBlock = *(int *)(allocCtxOrBlock + 8);
   } while( true );
 code_r0x00132970:
-  ((int (*)())FUN_00135334)(graph,uVar22,nextRow);
+  ((int (*)())FUN_00135334)(graph,regNode,nextRow);
 code_r0x00132990:
   nextBlock = nextBlock + 1;
   if (regCount == nextBlock) goto code_r0x0013299c;

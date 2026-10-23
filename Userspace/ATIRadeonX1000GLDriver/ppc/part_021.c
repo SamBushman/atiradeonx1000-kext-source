@@ -995,7 +995,7 @@ int FUN_000e2b68(inst, param_2)
   iVar1 = (**(code **)(*a0 + 0x48))(a0);
   if ((iVar1 != 0) && (a0[0x26] == 0xc)) {
     operandRecord = IRInst__getOperandRecord(inst,param_2);
-    FUN_000f2bdc(local_18,a0[0x55],*(undefined4 *)(operandRecord + 0x10));
+    SelectWord__compose(local_18,a0[0x55],*(undefined4 *)(operandRecord + 0x10));
     operandRecord = IRInst__getOperandRecord(inst,param_2);
     *(undefined4 *)(operandRecord + 0x10) = local_18[0];
   }
@@ -1479,7 +1479,7 @@ int FUN_000e36bc(param_1, param_2, param_3)
    * never read back by any other statement in this function (no name exists for them, hence no overflow
    * was visible from local C code alone) - only sized correctly by checking the callee's real write range
    * against stock disassembly. Same defect class as the Scheduler__run/Scheduler__scheduleBlock/Scheduler__packDotProductCandidates/
-   * Inst__collapseAlgebraic_00158c3c fixes already landed on this issue. */
+   * Inst__distributeResultScale fixes already landed on this issue. */
   undefined1 auStack_e36bc_combined [0x40];
 #define auStack_78 (auStack_e36bc_combined + 0x0)
 #define auStack_74 (auStack_e36bc_combined + 0x4)
@@ -1592,7 +1592,7 @@ int FUN_000e3968(inst, inst2, compiler)
     do {
       inst2 = IRInst__getOperandSource(inst2,*(undefined4 *)(inst2 + 0x84));
       operandRecord = IRInst__getOperandRecord(inst2,0);
-      FUN_000f2f84(&local_28,uVar4,*(undefined4 *)(operandRecord + 0x10));
+      SelectWord__mergeWrittenLanes(&local_28,uVar4,*(undefined4 *)(operandRecord + 0x10));
       uVar4 = local_28;
     } while ((*(uint *)(inst2 + 0x14) & 0x200) != 0);
   }
@@ -1808,7 +1808,7 @@ LAB_000e4140:
             }
             uVar4 = piVar8[5];
             DList__unlink(piVar8);
-            FUN_00108448(piVar8,0x31,*param_1);
+            IRInst__reinitAsMov(piVar8,0x31,*param_1);
             piVar8[0x25] = iVar6;
             piVar8[0x26] = iVar10;
             if ((uVar4 & 0x40) == 0) {
@@ -1856,7 +1856,7 @@ LAB_000e4140:
               uVar11 = local_58;
               if (iVar14 == iVar10) {
                 operandRecord2 = IRInst__getOperandRecord(piVar5,0);
-                FUN_000f2f84(local_54 + 3,uVar11,*(undefined4 *)(operandRecord2 + 0x10));
+                SelectWord__mergeWrittenLanes(local_54 + 3,uVar11,*(undefined4 *)(operandRecord2 + 0x10));
                 local_58 = local_54[3];
                 uVar4 = piVar5[5];
               }

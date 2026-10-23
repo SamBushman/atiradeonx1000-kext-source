@@ -1450,7 +1450,7 @@
 0xec258	FUN_000ec258	36	yes	
 0xec27c	FUN_000ec27c	36	yes	
 0xec2a0	FUN_000ec2a0	36	yes	
-0xec2c4	FUN_000ec2c4	36	yes	
+0xec2c4	Table__interpolatorKindToCode	36	yes	
 0xec2e8	Program__freeWorkArrays	136	yes	
 0xec370	FUN_000ec370	60	yes	
 0xec3ac	FUN_000ec3ac	60	yes	
@@ -1495,8 +1495,8 @@
 0xf14f8	FUN_000f14f8	2148	no	indirect call (driver context / vtable / callback)
 0xf1d7c	FUN_000f1d7c	3108	no	indirect call (driver context / vtable / callback)
 0xf29f4	FUN_000f29f4	488	no	indirect call (driver context / vtable / callback)
-0xf2bdc	FUN_000f2bdc	128	yes	
-0xf2c5c	FUN_000f2c5c	80	yes	
+0xf2bdc	SelectWord__compose	128	yes	
+0xf2c5c	SelectWord__isSplat	80	yes	
 0xf2cac	FUN_000f2cac	92	yes	
 0xf2d08	FUN_000f2d08	16	yes	
 0xf2d18	SelectWord__areCompatible	144	yes	
@@ -1505,8 +1505,8 @@
 0xf2e50	laneBytes__mapTwoThreeToOne	72	yes	
 0xf2e98	laneBytes__mergeOneAndTwo	144	yes	
 0xf2f28	FUN_000f2f28	92	yes	
-0xf2f84	FUN_000f2f84	92	yes	
-0xf2fe0	FUN_000f2fe0	76	yes	
+0xf2f84	SelectWord__mergeWrittenLanes	92	yes	
+0xf2fe0	SelectWord__fillUnusedLanes	76	yes	
 0xf302c	FUN_000f302c	96	yes	
 0xf308c	laneBytes__commonSelect	72	yes	
 0xf30d4	SelectWord__firstWrittenComponent	52	yes	
@@ -1527,9 +1527,9 @@
 0xf36b8	FUN_000f36b8	84	yes	
 0xf370c	FUN_000f370c	88	yes	
 0xf3764	laneBytes__clearSetLanes	84	yes	
-0xf37b8	FUN_000f37b8	108	yes	
-0xf3824	FUN_000f3824	96	yes	
-0xf3884	FUN_000f3884	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0xf37b8	SelectWord__splatComponent	108	yes	
+0xf3824	SelectWord__isSingleComponentConstant	96	yes	
+0xf3884	IRInst__destIsSingleComponent	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0xf388c	laneMask__fromSelectBytes	124	yes	
 0xf3908	WriteMask__fromSelectWord	96	yes	
 0xf3968	FUN_000f3968	104	yes	
@@ -1547,7 +1547,7 @@
 0xf472c	FUN_000f472c	124	yes	
 0xf47a8	FUN_000f47a8	180	yes	
 0xf485c	FUN_000f485c	144	yes	
-0xf48ec	FUN_000f48ec	144	yes	
+0xf48ec	IRInst__sourceLanesAllWritten	144	yes	
 0xf497c	FUN_000f497c	168	yes	
 0xf4a24	FUN_000f4a24	56	yes	
 0xf4a5c	FUN_000f4a5c	20	yes	
@@ -1567,7 +1567,7 @@
 0xf56ac	Compiler__getOrCreateLoadConst1	324	yes	
 0xf57f0	FUN_000f57f0	540	no	indirect call (driver context / vtable / callback)
 0xf5a0c	FUN_000f5a0c	512	no	indirect call (driver context / vtable / callback)
-0xf5c0c	FUN_000f5c0c	228	yes	
+0xf5c0c	IRInst__sourceMatchesConstant	228	yes	
 0xf5cf0	IRInst__getUniformSourceConstant	412	yes	
 0xf5e8c	FUN_000f5e8c	264	no	indirect call (driver context / vtable / callback)
 0xf5f94	FUN_000f5f94	304	yes	
@@ -1624,7 +1624,7 @@
 0x103e54	constantZeroFloat	28	yes	
 0x103e70	isLessThan2	16	yes	
 0x103e84	FUN_00103e84	56	yes	
-0x103ebc	FUN_00103ebc	92	yes	
+0x103ebc	IRInst__cloneInto	92	yes	
 0x103f18	IRInst__saveCounters	44	yes	
 0x103f44	IRInst__restoreCounters	64	yes	
 0x103f84	IRInst__copyBodyFrom	100	yes	
@@ -1636,7 +1636,7 @@
 0x104104	FUN_00104104	124	yes	
 0x104180	FUN_00104180	80	yes	
 0x1041d0	FUN_001041d0	156	yes	
-0x10426c	FUN_0010426c	80	yes	
+0x10426c	IRLoadInterp__laneIndex	80	yes	
 0x1042bc	FUN_001042bc	116	no	indirect call (driver context / vtable / callback)
 0x104330	IRVertexFetch__initSemantics	52	yes	
 0x104364	FUN_00104364	24	yes	
@@ -1651,7 +1651,7 @@
 0x10469c	IRInst__setHardwareRegisterAndAdd	44	yes	
 0x1046c8	IRInst__setOperandRef	104	no	indirect call (driver context / vtable / callback)
 0x104730	IROperand__copyFrom	120	yes	
-0x1047a8	FUN_001047a8	88	yes	
+0x1047a8	IROperand__copyModifiersAndSelect	88	yes	
 0x104800	FUN_00104800	92	yes	
 0x10485c	Inst__nearestCommonAncestorBlock	120	yes	
 0x1048d4	FUN_001048d4	56	yes	
@@ -1661,13 +1661,13 @@
 0x1049a0	FUN_001049a0	36	yes	
 0x1049c4	FUN_001049c4	36	yes	
 0x1049e8	IRInst__appendSource	172	no	indirect call (driver context / vtable / callback)
-0x104a94	FUN_00104a94	80	yes	
+0x104a94	IRLoadInterp__laneUsed	80	yes	
 0x104ae4	FUN_00104ae4	136	yes	
-0x104b6c	FUN_00104b6c	80	yes	
+0x104b6c	IRLoadInterp__laneKind	80	yes	
 0x104bbc	IROperand__init	44	yes	
 0x104be8	FUN_00104be8	16	yes	
 0x104bf8	FUN_00104bf8	324	yes	
-0x104d3c	FUN_00104d3c	44	yes	
+0x104d3c	IRInst__readLastOperand	44	yes	
 0x104d68	FUN_00104d68	184	no	indirect call (driver context / vtable / callback)
 0x104e20	IRLoadConst__removeFromListEx	196	yes	
 0x104ee4	FUN_00104ee4	80	yes	
@@ -1679,8 +1679,8 @@
 0x1054ec	IRInst__getOperandRecord	168	yes	
 0x105594	IRInst__getOperandSource	56	yes	
 0x1055cc	FUN_001055cc	128	yes	
-0x10564c	FUN_0010564c	584	yes	
-0x105894	FUN_00105894	20	yes	
+0x10564c	IRInst__deleteIfUnused	584	yes	
+0x105894	IRInst__dropCounterAndDeleteIfUnused	20	yes	
 0x1058a8	FUN_001058a8	136	yes	
 0x105930	FUN_00105930	276	yes	
 0x105a44	IRInst__removeFromList	224	no	indirect call (driver context / vtable / callback)
@@ -1689,12 +1689,12 @@
 0x105c5c	IRInst__getDefiningField128	168	yes	
 0x105d04	IRInst__firstLiteralSourceValue	184	no	indirect call (driver context / vtable / callback)
 0x105dbc	FUN_00105dbc	152	yes	
-0x105e54	FUN_00105e54	72	yes	
+0x105e54	IRInst__copyOperandFrom	72	yes	
 0x105e9c	FUN_00105e9c	104	yes	
 0x105f04	IRInst__addToUseLists	256	yes	
 0x106004	IRInst__setOperandSource	428	yes	
 0x1061b0	FUN_001061b0	128	yes	
-0x106230	FUN_00106230	144	no	indirect call (driver context / vtable / callback)
+0x106230	IRInst__setOperandSourceIfLegal	144	no	indirect call (driver context / vtable / callback)
 0x1062c0	IRInst__getOrCreateOperandRecord	412	yes	
 0x10647c	IRInst__validate	620	no	indirect call (driver context / vtable / callback)
 0x1066e8	IRProjection__validate	84	yes	
@@ -1702,7 +1702,7 @@
 0x106780	IRPhiNode__validate	128	yes	
 0x106804	IRInst__setExtraOperandSource	484	yes	
 0x1069e8	IRInst__insertSourceBeforeLast	352	yes	
-0x106b48	FUN_00106b48	88	yes	
+0x106b48	IRInst__setLastOperandFromRecord	88	yes	
 0x106ba0	IRMix__validate	276	no	indirect call (driver context / vtable / callback)
 0x106cb4	IRPresub1__validate	68	no	indirect call (driver context / vtable / callback)
 0x106cf8	FUN_00106cf8	772	no	indirect call (driver context / vtable / callback)
@@ -1738,7 +1738,7 @@
 0x107c70	IRLoadConst__vslot51	92	yes	
 0x107cec	FUN_00107cec	76	yes	
 0x107d38	IRMov__ctor_107d38	112	yes	
-0x107da8	FUN_00107da8	76	yes	
+0x107da8	IRInst__reinitAsUnary	76	yes	
 0x107df4	FUN_00107df4	92	yes	
 0x107e70	IRLoadConst__vslot43	92	yes	
 0x107eec	FUN_00107eec	76	yes	
@@ -1746,14 +1746,14 @@
 0x107fd0	FUN_00107fd0	112	yes	
 0x108064	IRLoadConst__vslot55	92	yes	
 0x1080e0	FUN_001080e0	112	yes	
-0x108174	FUN_00108174	76	yes	
+0x108174	IRInst__reinitAsBinary	76	yes	
 0x1081c0	FUN_001081c0	92	yes	
 0x10823c	IRLoadConst__vslot47	92	yes	
 0x1082b8	FUN_001082b8	76	yes	
-0x108304	FUN_00108304	76	yes	
+0x108304	IRInst__reinitAsTrinary	76	yes	
 0x108350	FUN_00108350	92	yes	
 0x1083cc	IRLoadConst__vslot49	92	yes	
-0x108448	FUN_00108448	112	yes	
+0x108448	IRInst__reinitAsMov	112	yes	
 0x1084b8	FUN_001084b8	92	yes	
 0x108534	IRLoadConst__vslot45	92	yes	
 0x1085b0	IRExport__ctor_1085b0	276	yes	
@@ -1844,11 +1844,11 @@
 0x10ad68	FUN_0010ad68	152	yes	
 0x10ae20	FUN_0010ae20	200	no	indirect call (driver context / vtable / callback)
 0x10aee8	FUN_0010aee8	80	yes	
-0x10af38	FUN_0010af38	448	no	indirect call (driver context / vtable / callback)
+0x10af38	IRInst__cloneIfPresub	448	no	indirect call (driver context / vtable / callback)
 0x10b118	FUN_0010b118	108	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x10b184	FUN_0010b184	256	no	indirect call (driver context / vtable / callback)
-0x10b284	FUN_0010b284	88	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x10b2dc	FUN_0010b2dc	80	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x10b284	IRInst__applyNegateModifier	88	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x10b2dc	IRInst__applyAbsModifier	80	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x10b32c	FUN_0010b32c	340	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x10b498	IRInst__isOperandConstZero	352	no	indirect call (driver context / vtable / callback)
 0x10b5f8	IRInst__getCompareCondition	112	yes	
@@ -1866,7 +1866,7 @@
 0x10c670	FUN_0010c670	1240	no	indirect call (driver context / vtable / callback)
 0x10cb48	FUN_0010cb48	1156	no	indirect call (driver context / vtable / callback)
 0x10cfcc	FUN_0010cfcc	400	no	indirect call (driver context / vtable / callback)
-0x10d15c	FUN_0010d15c	504	no	indirect call (driver context / vtable / callback)
+0x10d15c	IRInst__replaceWithMovOfSource	504	no	indirect call (driver context / vtable / callback)
 0x10d358	FUN_0010d358	372	yes	
 0x10d4cc	FUN_0010d4cc	608	no	indirect call (driver context / vtable / callback)
 0x10d730	FUN_0010d730	844	no	indirect call (driver context / vtable / callback)
@@ -1950,7 +1950,7 @@
 0x1133d4	OpcodeTraits__getFieldC	76	no	indirect call (driver context / vtable / callback)
 0x113420	OpcodeTraits__getField34	76	no	indirect call (driver context / vtable / callback)
 0x11346c	OpcodeTraits__instFlagBit2	80	yes	
-0x1134bc	FUN_001134bc	152	no	indirect call (driver context / vtable / callback)
+0x1134bc	OpcodeInfo__getResultMode	152	no	indirect call (driver context / vtable / callback)
 0x113554	mulFloatZeroAnnihilates	56	yes	
 0x11358c	FUN_0011358c	28	yes	
 0x1135a8	FUN_001135a8	24	yes	
@@ -2574,7 +2574,7 @@
 0x146610	IRInst__getOperandSourceOrDefault	20	yes	
 0x146624	FUN_00146624	76	yes	
 0x146670	FUN_00146670	132	no	indirect call (driver context / vtable / callback)
-0x1466f4	FUN_001466f4	104	no	indirect call (driver context / vtable / callback)
+0x1466f4	IRInst__getOperandSourceThroughMix	104	no	indirect call (driver context / vtable / callback)
 0x14675c	FUN_0014675c	44	yes	
 0x146788	FUN_00146788	96	yes	
 0x1467e8	FUN_001467e8	128	no	indirect call (driver context / vtable / callback)
@@ -2587,7 +2587,7 @@
 0x146edc	FUN_00146edc	304	yes	
 0x14700c	FUN_0014700c	56	yes	
 0x147044	FUN_00147044	152	no	indirect call (driver context / vtable / callback)
-0x1470dc	FUN_001470dc	348	yes	
+0x1470dc	Inst__canFuseAddMul	348	yes	
 0x147238	FUN_00147238	352	yes	
 0x147398	IRInst__isOpcodeInSet147398	120	yes	
 0x1474c8	FUN_001474c8	572	no	indirect call (driver context / vtable / callback)
@@ -2605,17 +2605,17 @@
 0x14a898	FUN_0014a898	128	yes	
 0x14a918	Inst__swizzleTextureFetchOutput	708	no	indirect call (driver context / vtable / callback)
 0x14abdc	Inst__tryCopyPropagate	220	no	indirect call (driver context / vtable / callback)
-0x14acb8	Inst__collapseAlgebraic_0014acb8	1172	no	indirect call (driver context / vtable / callback)
-0x14b150	Inst__collapseAlgebraic_0014b150	1748	yes	
-0x14b82c	Inst__collapseAlgebraic_0014b82c	1420	yes	
-0x14bdbc	Inst__collapseAlgebraic_0014bdbc	1912	no	indirect call (driver context / vtable / callback)
+0x14acb8	Inst__collapseMulSplatByDotOnes	1172	no	indirect call (driver context / vtable / callback)
+0x14b150	Inst__collapseAddIntoMadMulAddend	1748	yes	
+0x14b82c	Inst__collapseAddOfMulToMad	1420	yes	
+0x14bdbc	Inst__collapseMulOfAddWithUnitConstant	1912	no	indirect call (driver context / vtable / callback)
 0x14c534	FUN_0014c534	208	yes	
 0x14c604	FUN_0014c604	972	yes	
 0x14c9d0	FUN_0014c9d0	284	no	indirect call (driver context / vtable / callback)
-0x14caec	Inst__collapseAlgebraic_0014caec	988	no	indirect call (driver context / vtable / callback)
-0x14cec8	Inst__collapseAlgebraic_0014cec8	940	yes	
-0x14d274	Inst__collapseAlgebraic_0014d274	1664	yes	
-0x14d8f8	Inst__collapseAlgebraic_0014d8f8	2528	no	indirect call (driver context / vtable / callback)
+0x14caec	Inst__collapseMadOfMulToDot2Add	988	no	indirect call (driver context / vtable / callback)
+0x14cec8	Inst__collapseMadWithDot2AddToDot3	940	yes	
+0x14d274	Inst__collapseDot3VectorTimesScaledVector	1664	yes	
+0x14d8f8	Inst__collapseThreeComponentSumToDot3	2528	no	indirect call (driver context / vtable / callback)
 0x14e2dc	FUN_0014e2dc	1032	no	indirect call (driver context / vtable / callback)
 0x14e6e4	Inst__reassociate_14e6e4	744	yes	
 0x14e9e4	FUN_0014e9e4	2620	no	indirect call (driver context / vtable / callback)
@@ -2623,14 +2623,14 @@
 0x1506d0	FUN_001506d0	256	yes	
 0x1507d0	FUN_001507d0	964	yes	
 0x150b94	Inst__reassociate_150b94	420	yes	
-0x150d38	Inst__collapseAlgebraic_00150d38	1504	no	indirect call (driver context / vtable / callback)
+0x150d38	Inst__collapseAddOfScaledMov	1504	no	indirect call (driver context / vtable / callback)
 0x151318	FUN_00151318	88	yes	
 0x151370	FUN_00151370	1792	no	indirect call (driver context / vtable / callback)
 0x151a74	FUN_00151a74	2624	no	indirect call (driver context / vtable / callback)
 0x1524b8	FUN_001524b8	2540	no	indirect call (driver context / vtable / callback)
 0x152ea8	FUN_00152ea8	4932	no	indirect call (driver context / vtable / callback)
 0x1541f0	FUN_001541f0	3020	no	indirect call (driver context / vtable / callback)
-0x154dc0	Inst__collapseAlgebraic_00154dc0	1700	no	indirect call (driver context / vtable / callback)
+0x154dc0	Inst__mergeComponentMovsIntoCnd	1700	no	indirect call (driver context / vtable / callback)
 0x15546c	FUN_0015546c	488	no	indirect call (driver context / vtable / callback)
 0x155654	FUN_00155654	1036	no	indirect call (driver context / vtable / callback)
 0x155a60	Inst__collapseAlgebraic_00155a60	4688	no	indirect call (driver context / vtable / callback)
@@ -2641,31 +2641,31 @@
 0x158264	Inst__collapseAlgebraic_00158264	1824	no	indirect call (driver context / vtable / callback)
 0x158988	FUN_00158988	496	no	indirect call (driver context / vtable / callback)
 0x158b78	FUN_00158b78	196	no	indirect call (driver context / vtable / callback)
-0x158c3c	Inst__collapseAlgebraic_00158c3c	2460	no	indirect call (driver context / vtable / callback)
-0x1595f0	Inst__collapseAlgebraic_001595f0	420	no	indirect call (driver context / vtable / callback)
+0x158c3c	Inst__distributeResultScale	2460	no	indirect call (driver context / vtable / callback)
+0x1595f0	Inst__foldCndWithConstantCondition	420	no	indirect call (driver context / vtable / callback)
 0x159794	FUN_00159794	964	no	indirect call (driver context / vtable / callback)
 0x159b58	FUN_00159b58	2844	no	indirect call (driver context / vtable / callback)
 0x15a68c	Inst__takeOutCommonFactor	3608	no	indirect call (driver context / vtable / callback)
 0x15b4a4	FUN_0015b4a4	1044	no	indirect call (driver context / vtable / callback)
 0x15b8b8	FUN_0015b8b8	188	yes	
 0x15b974	FUN_0015b974	972	no	indirect call (driver context / vtable / callback)
-0x15bd40	Inst__collapseAlgebraic_0015bd40	2452	no	indirect call (driver context / vtable / callback)
+0x15bd40	Inst__mergeAddAndMadSharedOperands	2452	no	indirect call (driver context / vtable / callback)
 0x15c6d4	Inst__collapseAlgebraic_0015c6d4	2012	no	indirect call (driver context / vtable / callback)
 0x15ceb0	Inst__collapseAlgebraic_0015ceb0	4236	no	indirect call (driver context / vtable / callback)
-0x15df44	Inst__collapseAlgebraic_0015df44	936	no	indirect call (driver context / vtable / callback)
-0x15e2f4	FUN_0015e2f4	416	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x15e494	Inst__collapseAlgebraic_0015e494	1444	no	indirect call (driver context / vtable / callback)
+0x15df44	Inst__collapseMulOfExps	936	no	indirect call (driver context / vtable / callback)
+0x15e2f4	IRInst__getOtherOperandIfConstant	416	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x15e494	Inst__collapseClampToSaturate	1444	no	indirect call (driver context / vtable / callback)
 0x15ea3c	Inst__tryMix	2564	no	indirect call (driver context / vtable / callback)
 0x15f44c	FUN_0015f44c	3792	no	indirect call (driver context / vtable / callback)
 0x160320	Inst__foldProducerIntoConsumer	2960	no	indirect call (driver context / vtable / callback)
 0x160eb0	FUN_00160eb0	2188	no	indirect call (driver context / vtable / callback)
 0x161748	FUN_00161748	2688	no	indirect call (driver context / vtable / callback)
 0x1621c8	FUN_001621c8	2804	no	indirect call (driver context / vtable / callback)
-0x162cc0	Inst__collapseAlgebraic_00162cc0	316	no	indirect call (driver context / vtable / callback)
+0x162cc0	Inst__collapseIntoExtraSourceDispatch	316	no	indirect call (driver context / vtable / callback)
 0x162dfc	FUN_00162dfc	1532	yes	
 0x1633f8	Inst__tryCollapseSimilar	128	yes	
-0x163478	Inst__tryDp3CommutativityPushoff	1308	no	indirect call (driver context / vtable / callback)
-0x163994	Inst__collapseAlgebraic_00163994	3864	no	indirect call (driver context / vtable / callback)
+0x163478	Inst__hoistScalarMulOutOfDot	1308	no	indirect call (driver context / vtable / callback)
+0x163994	Inst__mergeMovAndMadByLanes	3864	no	indirect call (driver context / vtable / callback)
 0x1648ac	Scheduler__compareNodes	456	no	indirect call (driver context / vtable / callback)
 0x164a74	Scheduler__updateFetchBatchMode	312	yes	
 0x164bac	VRegKey__equals	44	yes	
@@ -2762,7 +2762,7 @@
 0x1733a0	ValueKey__canonicalizeCommutativeOperands	156	yes	
 0x17343c	FUN_0017343c	304	no	indirect call (driver context / vtable / callback)
 0x17356c	FUN_0017356c	176	no	indirect call (driver context / vtable / callback)
-0x17361c	FUN_0017361c	28	yes	
+0x17361c	IRInst__isCndFloatOp	28	yes	
 0x173638	FUN_00173638	284	no	indirect call (driver context / vtable / callback)
 0x173754	FUN_00173754	280	yes	
 0x17386c	ValueKey__fillSourceLaneUsage	204	yes	
@@ -2941,7 +2941,7 @@
 0x185da4	FUN_00185da4	1900	no	indirect call (driver context / vtable / callback)
 0x186510	FUN_00186510	1400	no	indirect call (driver context / vtable / callback)
 0x186a88	FUN_00186a88	2816	no	indirect call (driver context / vtable / callback)
-0x1875a8	Inst__r300Peephole_1875a8	1328	no	indirect call (driver context / vtable / callback)
+0x1875a8	Inst__r300ReassociateAddPair	1328	no	indirect call (driver context / vtable / callback)
 0x187ad8	FUN_00187ad8	1996	no	indirect call (driver context / vtable / callback)
 0x1882a4	Inst__r300Peephole_1882a4	408	no	indirect call (driver context / vtable / callback)
 0x18843c	KhanPs__peepholeCombine	1328	no	indirect call (driver context / vtable / callback)
@@ -3432,7 +3432,7 @@
 0x1d01d4	HwChip__deleting_dtor	36	yes	
 0x1d0208	OpcodeInfo__dtor	36	yes	
 0x1d022c	OpcodeInfo__deleting_dtor	36	yes	
-0x1d0278	IrAddFloat__vslot5	288	yes	
+0x1d0278	IrAddFloat__vslot5_getValueKeyTransformLevel	288	yes	
 0x1d05b0	IrCos__fold	144	no	indirect call (driver context / vtable / callback)
 0x1d0640	IrLogInternal__fold	172	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x1d06ec	IrRecipSqrtInternal__fold	112	yes	
@@ -3452,7 +3452,7 @@
 0x1d0c38	IrCndGEFloat__fold	64	yes	
 0x1d0c78	IrCndGTFloat__fold	60	yes	
 0x1d0cd8	IrSetGTFloat__fold	68	yes	
-0x1d0e0c	IrAddInt__vslot5	212	yes	
+0x1d0e0c	IrAddInt__vslot5_getValueKeyTransformLevel	212	yes	
 0x1d0ee0	IrMulFloat__fold	72	yes	
 0x1d0f28	IrRecipSqrtClamp__deleting_dtor	68	yes	
 0x1d0f6c	IrRecipSqrtClamp__dtor	68	yes	

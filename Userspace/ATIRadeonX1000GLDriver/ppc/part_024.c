@@ -137,8 +137,8 @@ int FUN_000ec2a0(param_1, param_2)
   return *(undefined4 *)(PTR_DAT_001e8b6c + param_2 * 4);
 }
 
-/* FUN_000ec2c4 @ 0xec2c4 (36 bytes) */
-int FUN_000ec2c4(param_1, param_2)
+/* Table__interpolatorKindToCode @ 0xec2c4 (36 bytes) */
+int Table__interpolatorKindToCode(param_1, param_2)
   undefined4 param_1;
   int param_2;
 {
@@ -466,39 +466,39 @@ int FUN_000ec920(param_1)
 }
 
 /* KhanVs__vslot17_isSimpleInst @ 0xeca10 (192 bytes) */
-int KhanVs__vslot17_isSimpleInst(this, param_2)
+int KhanVs__vslot17_isSimpleInst(this, inst)
   undefined4 this;
-  int *param_2;
+  int *inst;
 {
-  int iVar1;
-  uint uVar2;
+  int slotResult;
+  uint excluded;
   
-  iVar1 = (**(code **)(*param_2 + 0x40))(param_2,param_2);
-  if ((((iVar1 != 0) || (iVar1 = (**(code **)(*param_2 + 0x28))(param_2), iVar1 != 0)) ||
-      (iVar1 = (**(code **)(*param_2 + 0x60))(param_2), iVar1 != 0)) ||
-     ((iVar1 = (**(code **)(*param_2 + 0x5c))(param_2), iVar1 != 0 ||
-      (uVar2 = 0, *(int *)(param_2[0x22] + 8) == 0x84)))) {
-    uVar2 = 1;
+  slotResult = (**(code **)(*inst + 0x40))(inst,inst);
+  if ((((slotResult != 0) || (slotResult = (**(code **)(*inst + 0x28))(inst), slotResult != 0)) ||
+      (slotResult = (**(code **)(*inst + 0x60))(inst), slotResult != 0)) ||
+     ((slotResult = (**(code **)(*inst + 0x5c))(inst), slotResult != 0 ||
+      (excluded = 0, *(int *)(inst[0x22] + 8) == 0x84)))) {
+    excluded = 1;
   }
-  return uVar2 ^ 1;
+  return excluded ^ 1;
 }
 
 /* KhanPs__vslot17_isSimpleInst @ 0xecad0 (192 bytes) */
-int KhanPs__vslot17_isSimpleInst(this, param_2)
+int KhanPs__vslot17_isSimpleInst(this, inst)
   undefined4 this;
-  int *param_2;
+  int *inst;
 {
-  int iVar1;
-  uint uVar2;
+  int slotResult;
+  uint excluded;
   
-  iVar1 = (**(code **)(*param_2 + 0x40))(param_2,param_2);
-  if ((((iVar1 != 0) || (iVar1 = (**(code **)(*param_2 + 0x28))(param_2), iVar1 != 0)) ||
-      (iVar1 = (**(code **)(*param_2 + 0x60))(param_2), iVar1 != 0)) ||
-     ((iVar1 = (**(code **)(*param_2 + 0x5c))(param_2), iVar1 != 0 ||
-      (uVar2 = 0, *(int *)(param_2[0x22] + 8) == 0x84)))) {
-    uVar2 = 1;
+  slotResult = (**(code **)(*inst + 0x40))(inst,inst);
+  if ((((slotResult != 0) || (slotResult = (**(code **)(*inst + 0x28))(inst), slotResult != 0)) ||
+      (slotResult = (**(code **)(*inst + 0x60))(inst), slotResult != 0)) ||
+     ((slotResult = (**(code **)(*inst + 0x5c))(inst), slotResult != 0 ||
+      (excluded = 0, *(int *)(inst[0x22] + 8) == 0x84)))) {
+    excluded = 1;
   }
-  return uVar2 ^ 1;
+  return excluded ^ 1;
 }
 
 /* FUN_000ecb90 @ 0xecb90 (140 bytes) */
@@ -727,34 +727,36 @@ int HwLimits__vslot43_prependDefaultMov(this, inst, param_3, compiler)
   undefined4 param_3;
   int compiler;
 {
-  int iVar1;
+  int lanesLeft;
+  int laneIndex;
+  int destRecord;
   int inst2;
-  int iVar3;
+  int destRecord2;
   double fparam_1;
-  undefined4 uStack_38;
-  undefined4 auStack_34 [8];
+  undefined4 unwrittenLaneMask;
+  undefined4 destSelectBytes [8];
   
   if (inst == 0) {
     Compiler__fail(compiler,0xf);
   }
-  iVar1 = IRInst__getOperandRecord(inst,0);
-  if (*(int *)(iVar1 + 0x10) != DAT_001aa800) {
+  destRecord = IRInst__getOperandRecord(inst,0);
+  if (*(int *)(destRecord + 0x10) != DAT_001aa800) {
     inst2 = IRInst__create(0x31,compiler);
     fparam_1 = (double)FLOAT_001aa0d4;
     ((void (*)())IRInst__makeLiteralVec4Float)(inst2,*(undefined4 *)(compiler + COMP_currentProgram),1,fparam_1,fparam_1,fparam_1,
                  (double)FLOAT_001aa0e8);
     IRInst__setOperandRef(inst2,0,*(undefined4 *)(inst + 0xa4));
-    iVar3 = IRInst__getOperandRecord(inst,0);
-    iVar1 = 0;
-    auStack_34[0] = *(undefined4 *)(iVar3 + 0x10);
-    iVar3 = 4;
+    destRecord2 = IRInst__getOperandRecord(inst,0);
+    laneIndex = 0;
+    destSelectBytes[0] = *(undefined4 *)(destRecord2 + 0x10);
+    lanesLeft = 4;
     do {
-      *(byte *)((int)auStack_34 + iVar1 + -4) =
-           (byte)(-(uint)(*(byte *)((int)auStack_34 + iVar1) ^ 1) >> 0x1f);
-      iVar1 = iVar1 + 1;
-      iVar3 = iVar3 + -1;
-    } while (iVar3 != 0);
-    *(undefined4 *)(inst2 + 0x9c) = uStack_38;
+      *(byte *)((int)destSelectBytes + laneIndex + -4) =
+           (byte)(-(uint)(*(byte *)((int)destSelectBytes + laneIndex) ^ 1) >> 0x1f);
+      laneIndex = laneIndex + 1;
+      lanesLeft = lanesLeft + -1;
+    } while (lanesLeft != 0);
+    *(undefined4 *)(inst2 + 0x9c) = unwrittenLaneMask;
     Block__prependInst(*(undefined4 *)(inst + 0x158),inst2);
     *(int *)(inst + 0x9c) = DAT_001aa800;
   }
@@ -3100,7 +3102,7 @@ code_r0x000f101c:
                 for (iVar15 = 1; iVar9 = (**(code **)(*piVar3 + 0x14))(piVar3), iVar15 <= iVar9;
                     iVar15 = iVar15 + 1) {
                   operandRecord3 = IRInst__getOperandRecord(piVar3,iVar15);
-                  ((int (*)())FUN_000f2bdc)(&local_54,*(undefined4 *)(operandRecord3 + 0x10),local_84);
+                  ((int (*)())SelectWord__compose)(&local_54,*(undefined4 *)(operandRecord3 + 0x10),local_84);
                   iVar9 = local_54;
                   if (iVar15 == 0) {
                     piVar3[0x27] = local_54;
@@ -4015,8 +4017,8 @@ int FUN_000f29f4(param_1)
   return ((int (*)())Program__beginPass)(param_1,(int)"mark_io");
 }
 
-/* FUN_000f2bdc @ 0xf2bdc (128 bytes) */
-int FUN_000f2bdc(param_1, param_2, param_3)
+/* SelectWord__compose @ 0xf2bdc (128 bytes) */
+int SelectWord__compose(param_1, param_2, param_3)
   uint *param_1;
   undefined4 param_2;
   uint param_3;
@@ -4048,8 +4050,8 @@ int FUN_000f2bdc(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_000f2c5c @ 0xf2c5c (80 bytes) */
-int FUN_000f2c5c(param_1)
+/* SelectWord__isSplat @ 0xf2c5c (80 bytes) */
+int SelectWord__isSplat(param_1)
   undefined4 param_1;
 {
   unsigned int ghidra_home[8] = { param_1, 0, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
@@ -4085,7 +4087,7 @@ int FUN_000f2cac(param_1)
   int iVar3;
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 0)) = param_1;
-  ((int (*)())FUN_000f2c5c)(param_1);
+  ((int (*)())SelectWord__isSplat)(param_1);
   iVar3 = 4;
   iVar2 = 0;
   pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 0));

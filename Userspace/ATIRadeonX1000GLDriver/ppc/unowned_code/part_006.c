@@ -6,8 +6,8 @@ int KhanPs__vslot30()
   return 1;
 }
 
-/* KhanPs__vslot32 @ 0x1d82d0 (8 bytes) */
-int KhanPs__vslot32()
+/* KhanPs__vslot32_supportsResultSaturate @ 0x1d82d0 (8 bytes) */
+int KhanPs__vslot32_supportsResultSaturate()
 {
   return 1;
 }
@@ -78,8 +78,8 @@ int KhanVs__vslot31()
   return 1;
 }
 
-/* KhanVs__vslot32 @ 0x1d83f0 (8 bytes) */
-int KhanVs__vslot32()
+/* KhanVs__vslot32_supportsResultSaturate @ 0x1d83f0 (8 bytes) */
+int KhanVs__vslot32_supportsResultSaturate()
 {
   return 0;
 }
@@ -183,8 +183,8 @@ int FudoVs__vslot87()
   return;
 }
 
-/* FudoVs__vslot32 @ 0x1d8480 (8 bytes) */
-int FudoVs__vslot32()
+/* FudoVs__vslot32_supportsResultSaturate @ 0x1d8480 (8 bytes) */
+int FudoVs__vslot32_supportsResultSaturate()
 {
   return 1;
 }

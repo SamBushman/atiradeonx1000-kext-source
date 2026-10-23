@@ -76,8 +76,8 @@ int FUN_00103e84(param_1, param_2)
   return;
 }
 
-/* FUN_00103ebc @ 0x103ebc (92 bytes) */
-int FUN_00103ebc(param_1, param_2, param_3, param_4)
+/* IRInst__cloneInto @ 0x103ebc (92 bytes) */
+int IRInst__cloneInto(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   int param_2;
   int param_3;
@@ -297,8 +297,8 @@ int FUN_001041d0(param_1, param_2, param_3, param_4, param_5)
   return;
 }
 
-/* FUN_0010426c @ 0x10426c (80 bytes) */
-int FUN_0010426c(param_1, param_2)
+/* IRLoadInterp__laneIndex @ 0x10426c (80 bytes) */
+int IRLoadInterp__laneIndex(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -579,8 +579,8 @@ int IROperand__copyFrom(param_1, param_2)
   return;
 }
 
-/* FUN_001047a8 @ 0x1047a8 (88 bytes) */
-int FUN_001047a8(param_1, param_2)
+/* IROperand__copyModifiersAndSelect @ 0x1047a8 (88 bytes) */
+int IROperand__copyModifiersAndSelect(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -734,8 +734,8 @@ int IRInst__appendSource(inst, operandRef)
   return;
 }
 
-/* FUN_00104a94 @ 0x104a94 (80 bytes) */
-int FUN_00104a94(param_1, param_2)
+/* IRLoadInterp__laneUsed @ 0x104a94 (80 bytes) */
+int IRLoadInterp__laneUsed(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -771,7 +771,7 @@ int FUN_00104ae4(param_1, param_2)
   iVar3 = 0;
   puVar4 = param_1;
   do {
-    iVar2 = ((int (*)())FUN_00104a94)(param_2,iVar3);
+    iVar2 = ((int (*)())IRLoadInterp__laneUsed)(param_2,iVar3);
     if (iVar2 == 1) {
       *puVar4 = 5;
     }
@@ -788,8 +788,8 @@ int FUN_00104ae4(param_1, param_2)
   return param_1;
 }
 
-/* FUN_00104b6c @ 0x104b6c (80 bytes) */
-int FUN_00104b6c(param_1, param_2)
+/* IRLoadInterp__laneKind @ 0x104b6c (80 bytes) */
+int IRLoadInterp__laneKind(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -900,8 +900,8 @@ int FUN_00104bf8(inst, compiler)
   return;
 }
 
-/* FUN_00104d3c @ 0x104d3c (44 bytes) */
-int FUN_00104d3c(param_1, param_2)
+/* IRInst__readLastOperand @ 0x104d3c (44 bytes) */
+int IRInst__readLastOperand(param_1, param_2)
   int param_1;
   int param_2;
 {

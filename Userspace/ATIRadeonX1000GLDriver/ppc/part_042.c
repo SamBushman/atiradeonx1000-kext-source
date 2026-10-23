@@ -337,11 +337,11 @@ LAB_00139978:
     operandRecord = IRInst__getOperandRecord(inst,2);
     uVar7 = *(undefined4 *)(operandRecord + 0x10);
     operandRecord = IRInst__getOperandRecord(operandVReg,uVar8);
-    FUN_000f2bdc(&local_48,*(undefined4 *)(operandRecord + 0x10),uVar7);
+    SelectWord__compose(&local_48,*(undefined4 *)(operandRecord + 0x10),uVar7);
     operandRecord = IRInst__getOperandRecord(iVar1,1);
-    FUN_000f2bdc(&local_44,*(undefined4 *)(operandRecord + 0x10),local_48);
+    SelectWord__compose(&local_44,*(undefined4 *)(operandRecord + 0x10),local_48);
     operandRecord = IRInst__getOperandRecord(iVar1,2);
-    FUN_000f2bdc(local_40,*(undefined4 *)(operandRecord + 0x10),local_48);
+    SelectWord__compose(local_40,*(undefined4 *)(operandRecord + 0x10),local_48);
     sourceDef = IRInst__getOperandSource(iVar1,1);
     IRInst__setOperandSource(inst,1,sourceDef,0,*(undefined4 *)(param_4 + 8));
     operandVReg2 = IRInst__getOperandSource(iVar1,2);
@@ -367,7 +367,7 @@ LAB_00139978:
     *(undefined4 *)(operandRecord2 + 0x10) = local_40[0];
     opcodeInfo = Opcode__getInfo(uVar6);
     *(undefined4 *)(inst + 0x88) = opcodeInfo;
-    FUN_00105894(operandVReg,*(undefined4 *)(param_4 + 8));
+    IRInst__dropCounterAndDeleteIfUnused(operandVReg,*(undefined4 *)(param_4 + 8));
   }
   return 0;
 }
@@ -3256,7 +3256,7 @@ code_r0x0013e80c:
                     Block__insertInstBefore(iVar14,piVar20,cloneResult);
                     iVar17 = piVar20[4];
                     DList__unlink(piVar20);
-                    FUN_00108448(piVar20,0x31,*(undefined4 *)(program + PROG_compiler));
+                    IRInst__reinitAsMov(piVar20,0x31,*(undefined4 *)(program + PROG_compiler));
                     piVar20[4] = iVar17;
                     piVar20[0x25] = piVar20[0x53];
                     piVar20[0x26] = 0;
@@ -3741,7 +3741,7 @@ int FUN_0013f3d4(inst, param_2)
           iVar20 = iVar20 + -1;
         } while (iVar20 != 0);
         iVar13 = 0;
-        FUN_000f2f84(local_38,local_48,*(undefined4 *)(operandRecord2 + 0x10));
+        SelectWord__mergeWrittenLanes(local_38,local_48,*(undefined4 *)(operandRecord2 + 0x10));
         inst[0x27] = local_38[0];
         local_48 = local_38[0];
         piVar9 = (int *)((int (*)())FUN_0010bed0)(2,local_38[0],iVar6,param_2,*(undefined4 *)(param_2 + 8),
@@ -8451,8 +8451,8 @@ int FUN_00146670(param_1, param_2, param_3, param_4)
   return uVar3;
 }
 
-/* FUN_001466f4 @ 0x1466f4 (104 bytes) */
-int FUN_001466f4(inst, param_2)
+/* IRInst__getOperandSourceThroughMix @ 0x1466f4 (104 bytes) */
+int IRInst__getOperandSourceThroughMix(inst, param_2)
   undefined4 inst;
   undefined4 param_2;
 {

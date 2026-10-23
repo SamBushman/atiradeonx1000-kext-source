@@ -288,9 +288,6 @@ local	FUN_0019aee8	param_2	node	INFERRED	calls pass the block as first argument
 local	FUN_0019aee8	param_3	block	INFERRED	calls pass the block as first argument
 local	FUN_0019af40	param_1	this	INFERRED	loop-stack vector at program + 0x24 (count at +4, array at +8)
 local	FUN_0019af40	param_2	node	INFERRED	loop-stack vector at program + 0x24 (count at +4, array at +8)
-local	FUN_0019af40	iVar5	conditionRegister	INFERRED	loop-stack vector at program + 0x24 (count at +4, array at +8)
-local	FUN_0019af40	iVar4	callResult	INFERRED	loop-stack vector at program + 0x24 (count at +4, array at +8)
-local	FUN_0019af40	piVar2	lastEntryPtr	INFERRED	loop-stack vector at program + 0x24 (count at +4, array at +8)
 local	FUN_0019b03c	param_1	this	INFERRED	instruction list links at +8, flags at +0x14
 local	FUN_0019b03c	param_2	block	INFERRED	instruction list links at +8, flags at +0x14
 local	FUN_0019b03c	param_3	groupHead	INFERRED	instruction list links at +8, flags at +0x14
@@ -331,7 +328,6 @@ local	FUN_0019d590	param_1	this	INFERRED	stack vectors: count at +4, array at +8
 local	FUN_0019d590	param_2	node	INFERRED	stack vectors: count at +4, array at +8
 local	FUN_0019d590	param_3	extra1	INFERRED	stack vectors: count at +4, array at +8
 local	FUN_0019d590	iVar8	conditionBlock	INFERRED	stack vectors: count at +4, array at +8
-local	FUN_0019d590	iVar4	callResult	INFERRED	stack vectors: count at +4, array at +8
 local	FUN_0019d7a0	param_1	this	INFERRED	vslot 13 is the block assembler
 local	FUN_0019d7a0	param_2	node	INFERRED	vslot 13 is the block assembler
 local	FUN_0019d7a0	param_3	block	INFERRED	vslot 13 is the block assembler

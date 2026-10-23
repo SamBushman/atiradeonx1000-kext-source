@@ -96,8 +96,8 @@ int FUN_0017356c(ctx)
   return 0;
 }
 
-/* FUN_0017361c @ 0x17361c (28 bytes) */
-int FUN_0017361c(param_1)
+/* IRInst__isCndFloatOp @ 0x17361c (28 bytes) */
+int IRInst__isCndFloatOp(param_1)
   int param_1;
 {
   return *(int *)(*(int *)(param_1 + 0x88) + 8) - 0x24U < 3;
@@ -307,7 +307,7 @@ int FUN_00173a48(inst, param_2)
           return 1;
         }
         callResult = IRInst__getOperandRecord(inst,loopIndex);
-        callResult = FUN_000f2c5c(*(undefined4 *)(callResult + 0x10));
+        callResult = SelectWord__isSplat(*(undefined4 *)(callResult + 0x10));
         if (callResult == 0) break;
         loopIndex = loopIndex + 1;
       }
@@ -593,10 +593,10 @@ LAB_00173fa0:
               loopIndex3 = *(int *)((uint)*(byte *)((int)local_58 + loopIndex) * 4 + dVar10 + 0x20);
               if (loopIndex3 < 0) {
                 loopIndex8 = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),loopIndex3);
-                FUN_0010b2dc(&local_48,*(undefined4 *)(ctx + 0xb0),pdVar11,*loopIndex8);
+                IRInst__applyAbsModifier(&local_48,*(undefined4 *)(ctx + 0xb0),pdVar11,*loopIndex8);
                 in_r5 = pdVar11;
                 in_r6 = local_48;
-                FUN_0010b284(&local_44,*(undefined4 *)(ctx + 0xb0),pdVar11,local_48);
+                IRInst__applyNegateModifier(&local_44,*(undefined4 *)(ctx + 0xb0),pdVar11,local_48);
                 loopIndex3 = ((int (*)())Compiler__valueNumberForExpr)(*(undefined4 *)(ctx + 0x238),local_44);
                 loopIndex3 = *(int *)(loopIndex3 + 4);
               }
@@ -659,10 +659,10 @@ LAB_00173fa0:
             loopRemaining = *(int *)(uVar12 * 4 + loopIndex3 + 0x20);
             if (loopRemaining < 0) {
               loopIndex8 = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),loopRemaining);
-              FUN_0010b2dc(&local_40,*(undefined4 *)(ctx + 0xb0),pdVar11,*loopIndex8);
+              IRInst__applyAbsModifier(&local_40,*(undefined4 *)(ctx + 0xb0),pdVar11,*loopIndex8);
               in_r5 = pdVar11;
               in_r6 = local_40;
-              FUN_0010b284(local_3c,*(undefined4 *)(ctx + 0xb0),pdVar11,local_40);
+              IRInst__applyNegateModifier(local_3c,*(undefined4 *)(ctx + 0xb0),pdVar11,local_40);
               loopRemaining = ((int (*)())Compiler__valueNumberForExpr)(*(undefined4 *)(ctx + 0x238),local_3c[0]);
               loopIndex5 = *(int **)(ctx + 0xb0);
               loopRemaining = *(int *)(loopRemaining + 4);
@@ -1339,7 +1339,7 @@ LAB_00174efc:
           else {
             loopIndex2 = (**(code **)(*loopIndex4 + 100))(loopIndex4);
             if (loopIndex2 == 0) {
-              loopIndex2 = ((int (*)())FUN_0017361c)(param_1[0x2c]);
+              loopIndex2 = ((int (*)())IRInst__isCndFloatOp)(param_1[0x2c]);
               if ((loopIndex2 == 0) || (-1 < loopIndex3[0x5e])) {
                 if (loopIndex3[0xc] != 0) {
                   *loopIndex3 = *(int *)(loopIndex3[0xc] + 4);
@@ -1432,7 +1432,7 @@ LAB_001757d8:
   }
   loopIndex2 = (**(code **)(*(int *)param_1[0x2c] + 100))((int *)param_1[0x2c]);
   if (loopIndex2 == 0) {
-    loopIndex2 = ((int (*)())FUN_0017361c)(param_1[0x2c]);
+    loopIndex2 = ((int (*)())IRInst__isCndFloatOp)(param_1[0x2c]);
     if (loopIndex2 == 0) {
       loopIndex2 = (param_1 + iVar9)[0xc];
       if (loopIndex2 != 0) {

@@ -1,0 +1,1262 @@
+# round 5, fork I2: peephole pattern helpers decoded (OPT_COLLAPSE_ALGEBRAIC). Opcode ids: compiler_opcodes.tsv (decimal)
+func	Inst__collapseAlgebraic_0014acb8	Inst__collapseMulSplatByDotOnes	CONFIRMED	IrMulFloat (0x13) whose one source is a single-use IrDot3/IrDot4 (0x1c/0x1d) with an all-ones constant vector (FUN_000f5c0c with 1.0,1.0,1.0,1.0) and whose other source is a splat (FUN_000f2c5c): scalar * dot(v, 1) is rebuilt as dot(v, scalar) in place of the mul (FUN_00108174 re-initialises inst as a binary with the dot opcode, the splat scalar takes the ones slot with a splat select from PTR_DAT_001e8b8c, the dot is deleted)
+local	FUN_0014acb8	param_2	program	CONFIRMED	second argument passed as `program` by KhanPs/KhanVs/FudoPs__peepholeCombine; program+8 is the Compiler (passed to IRInst__setOperandSource), program+0x1f0 a statistics counter
+local	FUN_0014acb8	uVar9	compiler	CONFIRMED	*(program+8): the Compiler argument of IRInst__setOperandSource / FUN_00108174
+local	FUN_0014acb8	uVar2	vectorSourceModifiers	INFERRED	flag word of the dot operand record that is not the ones vector (record+0x14); copied to the new inst with IROperand__setModifierBits bits 1 and 2
+local	FUN_0014acb8	iVar7	destSelect	CONFIRMED	operand record 0 (+0x10) of inst: the destination select word, restored to inst[0x27] after the in-place rebuild
+local	FUN_0014acb8	iVar10	destRegister	CONFIRMED	inst[0x53] (inst+0x14c), written back to inst[0x25] and inst[0x53] after the rebuild
+local	FUN_0014acb8	uVar6	laneCheckMask	INFERRED	DAT_001b0170: per-lane mask argument of FUN_000f5c0c (byte 0 = lane must equal the given constant)
+local	FUN_0014acb8	local_58	onesLane0	CONFIRMED	first of four floats preset to 1.0 (0x3f800000); &local_58 is the expected constant vector passed to FUN_000f5c0c
+local	FUN_0014acb8	local_54	onesLane1	CONFIRMED	second float of the 1.0 vector at &local_58
+local	FUN_0014acb8	local_50	onesLane2	CONFIRMED	third float of the 1.0 vector at &local_58
+local	FUN_0014acb8	local_4c	onesLane3	CONFIRMED	fourth float of the 1.0 vector at &local_58
+local	FUN_0014acb8	local_68	scalarSelectWord	CONFIRMED	select word (+0x10) of the mul operand that is not the dot; its bytes are scanned for the splat lane
+local	FUN_0014acb8	local_64	savedCounters0	CONFIRMED	3-word buffer filled by IRInst__saveCounters(inst, &local_64, -1) and replayed by IRInst__restoreCounters after the rebuild
+local	FUN_0014acb8	local_60	savedCounters1	CONFIRMED	second word of the saveCounters buffer
+local	FUN_0014acb8	local_5c	savedCounters2	CONFIRMED	third word of the saveCounters buffer
+use	FUN_0014acb8	iVar1	sourceOpcode	CONFIRMED	opcode (opcode-info +8) of mul source 1 tested against 0x1c / 0x1d (IrDot3 / IrDot4)	^\s*iVar1\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar3\ \+\ 0x88\)\ \+\ 8\);$	+1	all	all
+use	FUN_0014acb8	iVar1	lanesWritten	INFERRED	FUN_000f48ec(inst, 1): every lane read through source 1 is written by its definition	^\s*\(iVar1\ =\ FUN_000f48ec\(param_1,1\),\ iVar1\ !=\ 0\)\)\ \{$	+0	all	all
+use	FUN_0014acb8	iVar1	isSplat	INFERRED	FUN_000f2c5c(select word of the other operand): all used lanes select the same component	^\s*iVar1\ =\ FUN_000f2c5c\(\*\(undefined4\ \*\)\(iVar1\ \+\ 0x10\)\);$	+1	all	all
+use	FUN_0014acb8	iVar1	sourceOpcode	CONFIRMED	opcode of mul source 2 tested against 0x1c / 0x1d (IrDot3 / IrDot4)	^\s*iVar1\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar4\ \+\ 0x88\)\ \+\ 8\);$	+1	all	all
+use	FUN_0014acb8	iVar1	lanesWritten	INFERRED	FUN_000f48ec(inst, 2): every lane read through source 2 is written by its definition	^\s*iVar1\ =\ FUN_000f48ec\(param_1,2\);$	+1	all	all
+use	FUN_0014acb8	iVar1	isSplat	INFERRED	FUN_000f2c5c(select word of the other operand): all used lanes select the same component	^\s*iVar1\ =\ FUN_000f2c5c\(\*\(undefined4\ \*\)\(iVar1\ \+\ 0x10\)\);$@2	+1	all	all
+use	FUN_0014acb8	uVar8	dotSourceIndex	CONFIRMED	index (1 or 2) of the mul source that is the dot instruction: IRInst__getOperandSource(inst, uVar8)	^\s*uVar8\ =\ 1;$	+49	all	all
+use	FUN_0014acb8	uVar8	splatLane	INFERRED	first lane (byte != 4) of the scalar operand select word, -1 when all bytes are 4; indexes the splat-select table PTR_DAT_001e8b8c	^\s*uVar8\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)\&local_68\ \+\ iVar5\);$	+29	all	all
+use	FUN_0014acb8	iVar3	isOnesConstant	CONFIRMED	FUN_000f5c0c(dot, n, mask, 1.0 vector): dot source n is the all-ones constant	^\s*iVar3\ =\ FUN_000f5c0c\(iVar1,1,DAT_001b0170,\&local_58\);$	+3	all	all
+use	FUN_0014acb8	iVar3	onesSourceIndex	CONFIRMED	index (1 or 2) of the dot source that is the all-ones vector; it receives the scalar	^\s*iVar3\ =\ 2;$	+58	all	all
+use	FUN_0014acb8	iVar4	vectorSourceIndex	CONFIRMED	index of the dot source that is not the ones vector; it is copied into the same slot of the rebuilt inst	^\s*iVar4\ =\ 1;$	+74	all	all
+use	FUN_0014acb8	iVar5	laneScanIndex	INFERRED	byte index into the scalar select word while looking for the first lane != 4	^\s*iVar5\ =\ 0;$	+8	all	all
+use	FUN_0014acb8	iVar5	extraSource	INFERRED	source at index numSources when inst has the >5-source layout (flag 0x200), re-attached with IRInst__setExtraOperandSource	^\s*iVar5\ =\ 0;$@2	+48	all	all
+use	FUN_0014acb8	iVar11	scalarSourceIndex	CONFIRMED	the mul source that is not the dot: 2 when dotSourceIndex is 1, else 1	^\s*iVar11\ =\ \(\(int\)\-\(uVar8\ \^\ 1\)\ >>\ 0x1f\)\ \+\ 2;$	+5	all	all
+use	FUN_0014acb8	iVar11	lanesLeft	INFERRED	countdown of the four select bytes scanned for the splat lane	^\s*iVar11\ =\ 4;$	+6	all	all
+use	FUN_0014acb8	iVar11	prevNode	INFERRED	inst[1]: list neighbour after which the rebuilt inst is re-inserted with Block__insertInstAfter	^\s*iVar11\ =\ param_1\[1\];$	+4	all	all
+use	FUN_0014acb8	iVar11	dotSaturate	INFERRED	dot +0x120: saturate flag (+0x120; PVS VE_SAT/ME_SAT, see R300VMachineAssembler__encodeDestinationWord) copied to inst[0x48] (with +0x124 to inst[0x49])	^\s*iVar11\ =\ \*\(int\ \*\)\(iVar1\ \+\ 0x120\);$	+2	all	all
+use	FUN_0014acb8	iVar11	splatSelect	CONFIRMED	PTR_DAT_001e8b8c[splatLane]: splat select word stored for the scalar operand	^\s*iVar11\ =\ \*\(int\ \*\)\(PTR_DAT_001e8b8c\ \+\ uVar8\ \*\ 4\);$	+7	all	all
+use	FUN_0014acb8	iVar11	vectorSelect	CONFIRMED	select word (+0x10) of the dot operand that is not the ones vector, copied to the same operand of inst	^\s*iVar11\ =\ \*\(int\ \*\)\(iVar11\ \+\ 0x10\);$	+6	all	all
+use	FUN_0014acb8	iVar11	dotOperandBase	INFERRED	address dot + vectorSourceIndex*0x18 + 0x80 of the dot operand record, whose +0x20 (record flags) bits 0 and 1 are copied as modifier bits	^\s*iVar11\ =\ iVar1\ \+\ iVar4\ \*\ 0x18\ \+\ 0x80;$	+2	all	all
+func	Inst__collapseAlgebraic_0015df44	Inst__collapseMulOfExps	CONFIRMED	IrMulFloat (0x13) of two single-use non-saturating IrExp (0x37) sources: builds IrAddFloat (0x12) of the two exp arguments (operand records copied with FUN_00105e54), then turns the mul into IrExp of the sum; when exactly one mul operand carries the negate modifier (inst[0x34] ^ inst[0x2e]) a separate exp is built and the mul becomes a negated IrMovFloat (0x31) of it; both old exps are released
+local	FUN_0015df44	param_2	program	CONFIRMED	second argument passed as `program` by the peepholeCombine drivers; program+8 is the Compiler, program+0x478 the base of the inst+0x160 counters
+use	FUN_0015df44	bVar1	signsDiffer	INFERRED	((inst[0x34] ^ inst[0x2e]) & 1) != 0: the negate bits (+0xd0 / +0xb8 operand flags) of the two mul operands differ, so the product is negated overall	^\s*bVar1\ =\ \(\(param_1\[0x34\]\ \^\ param_1\[0x2e\]\)\ \&\ 1U\)\ !=\ 0;$	+48	all	all
+local	FUN_0015df44	uVar2	sourceSelect	INFERRED	DAT_001b0050, stored in the select word (+0x10) of operand record 1 of the second exp
+local	FUN_0015df44	iVar3	depthBase	INFERRED	*(program+0x478): the base added to the new instructions inst+0x160 counters
+local	FUN_0015df44	iVar8	addDestSelect	INFERRED	DAT_001b0054, stored at +0x9c (destination select) of the new add and the new exp
+local	FUN_0015df44	iVar10	parentBlock	CONFIRMED	inst[0x56] (inst+0x158): the block the new add is inserted into before inst
+local	FUN_0015df44	iVar11	resultScale	CONFIRMED	inst[0x49] (inst+0x124), saved and restored around the rebuild
+local	FUN_0015df44	iVar12	allocatedRegister	INFERRED	inst[0x53] (inst+0x14c), saved and restored around the rebuild
+local	FUN_0015df44	iVar13	depthAboveBase	INFERRED	inst[0x58] - program[0x478], clamped at 0, restored as inst[0x58] = depth + base
+local	FUN_0015df44	iVar14	destRegister	CONFIRMED	inst[0x25] (operand record 0 +8): destination register, restored into record 0
+local	FUN_0015df44	iVar15	destRegisterOffset	INFERRED	inst[0x26] (operand record 0 +0xc), restored into record 0
+local	FUN_0015df44	iVar16	destSelect	CONFIRMED	operand record 0 +0x10 of inst: destination select word, restored to inst[0x27]
+use	FUN_0015df44	iVar6	hasSingleUse	CONFIRMED	IRInst__hasSingleUse of the two exp sources	^\s*\(iVar6\ =\ FUN_0010497c\(piVar4,param_2\),\ iVar6\ !=\ 0\)\)\ \&\&\ \(\(piVar4\[5\]\ \&\ 0x200U\)\ ==\ 0\)\)\ \&\&$	+3	all	all
+use	FUN_0015df44	iVar6	saturate	CONFIRMED	inst[0x48] (inst+0x120), saved and restored around the rebuild	^\s*iVar6\ =\ param_1\[0x48\];$	+47	all	all
+use	FUN_0015df44	iVar6	lane	INFERRED	component 0..3 of the select loop that sets select 3 on written lanes	^\s*iVar6\ =\ 0;$	+7	all	all
+use	FUN_0015df44	bVar1	moreLanes	INFERRED	lane != 3 continue flag	^\s*bVar1\ =\ iVar6\ !=\ 3;$	+2	all	all
+func	Inst__collapseAlgebraic_001595f0	Inst__foldCndWithConstantCondition	CONFIRMED	IrCndEFloat/CndGEFloat/CndGTFloat (0x24..0x26): for each written lane the condition (source 1, looked through a mix with FUN_001042bc) must be a constant lane (RegKind__flagBit7 and the lane valid mask); the constant, with abs/negate modifiers applied (FUN_0010b2dc / FUN_0010b284), is compared with 0 via the inst compare condition (FUN_0010b820) and selects source 2 or 3; when all lanes agree the inst is replaced by a mov of that source (FUN_0010d15c) and program+0x1ec is bumped
+local	FUN_001595f0	param_2	program	CONFIRMED	second argument passed as `program` by the peepholeCombine drivers; program+8 is the Compiler, program+0x1ec a statistics counter
+local	FUN_001595f0	iVar6	lane	INFERRED	component 0..3 of the per-lane loop
+local	FUN_001595f0	uVar7	laneComponent	INFERRED	select byte of the condition operand for this lane: the component read from its source; after looking through a mix, the select byte of the mix source
+local	FUN_001595f0	local_38	condSelectWord	CONFIRMED	select word (+0x10) of operand record 1 (the condition); bytes are indexed per lane
+local	FUN_001595f0	local_28	absValue	CONFIRMED	constant lane value after FUN_0010b2dc (abs modifier of source 1)
+local	FUN_001595f0	local_24	modifiedValue	CONFIRMED	constant lane value after FUN_0010b284 (negate modifier of source 1)
+use	FUN_001595f0	iVar2	isCndOp	CONFIRMED	FUN_0017361c(inst): opcode is IrCndEFloat/CndGEFloat/CndGTFloat	^\s*iVar2\ =\ FUN_0017361c\(param_1\);$	+1	all	all
+use	FUN_001595f0	iVar2	prevChoice	INFERRED	source index (2 or 3) chosen by the previous lane, -1 before the first written lane	^\s*iVar2\ =\ \-1;$	+25	all	all
+use	FUN_001595f0	iVar4	laneChoice	INFERRED	source index chosen for this lane: 2 when the compare holds, 3 otherwise; keeps the previous choice for unwritten lanes	^\s*iVar4\ =\ iVar2;$	+3	all	all
+use	FUN_001595f0	iVar4	isMix	CONFIRMED	result of vslot 24 (0x60, isMix) on the condition source	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x60\)\)\(a0\);$	+1	all	all
+use	FUN_001595f0	iVar4	laneChoice	INFERRED	(compare result == 0) + 2: source 3 when the compare fails, 2 when it holds; must equal the previous lane choice	^\s*iVar4\ =\ \(\(bool\ \(\*\)\(\)\)FUN_0010b820\)\(param_1,\(double\)local_24,0\.0\);$	+9	all	all
+use	FUN_001595f0	uVar5	result	CONFIRMED	return value: 0 = not folded, 1 = folded	^\s*uVar5\ =\ 0;$	+0	all	all
+use	FUN_001595f0	uVar5	mixSourceIndex	INFERRED	FUN_001042bc(mix, component): index of the mix source that provides the component	^\s*uVar5\ =\ FUN_001042bc\(a0,uVar7\);$	+3	all	all
+use	FUN_001595f0	uVar5	result	CONFIRMED	return value: 1 = folded	^\s*uVar5\ =\ 1;$	+2	all	all
+use	FUN_001595f0	bVar1	choiceMismatch	INFERRED	this lane choice differs from the previous lane choice	^\s*if\ \(\(iVar2\ !=\ \-1\)\ \&\&\ \(bVar1\ =\ iVar4\ !=\ iVar2,\ iVar4\ =\ iVar2,\ bVar1\)\)\ goto\ LAB_0015977c;$	+0	all	all
+use	FUN_001595f0	bVar1	moreLanes	INFERRED	lane != 3 continue flag	^\s*bVar1\ =\ iVar6\ !=\ 3;$	+3	all	all
+func	Inst__collapseAlgebraic_0014cec8	Inst__collapseMadWithDot2AddToDot3	INFERRED	IrMulAddFloat (0x14) writing a single lane whose source 3 is a single-lane non-saturating IrDot2Add (0x1e) with a constant 0.0 third source: when FUN_0014c604 finds compatible lane selects, the pair is replaced by one IrDot3 (0x1c) over the combined sources (FUN_0014c9d0 merges the select words), copied into inst in place with memcpy
+local	FUN_0014cec8	param_2	program	CONFIRMED	second argument passed as `program` by the peepholeCombine drivers; program+8 is the Compiler
+local	FUN_0014cec8	iVar1	dot2AddInst	CONFIRMED	IRInst__getOperandSource(inst, 3): the IrDot2Add (0x1e) addend of the mad
+use	FUN_0014cec8	iVar2	prevNode	INFERRED	inst[1]: list neighbour after which the replaced inst is re-inserted	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 4\);$	+3	all	all
+use	FUN_0014cec8	uVar3	saturate	CONFIRMED	inst+0x120 saturate flag (PVS VE_SAT/ME_SAT, see R300VMachineAssembler__encodeDestinationWord) copied to the new instruction	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x120\);$	+3	all	all
+use	FUN_0014cec8	uVar4	writeMaskWord	INFERRED	inst+0xc: the four per-lane write mask bytes (exactly one is set), copied to the new instruction	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0xc\);$	+3	all	all
+local	FUN_0014cec8	local_58	dotSelect1	CONFIRMED	select word for dot3 source 1 produced by FUN_0014c604 (stored at operand record 1 +0x10)
+local	FUN_0014cec8	local_54	dotSelect2	CONFIRMED	select word for dot3 source 2 produced by FUN_0014c604 (stored at operand record 2 +0x10)
+local	FUN_0014cec8	local_50	matchScratch	INFERRED	scratch block: [0] source-order flag from FUN_0014c604, [1..3] IRInst__saveCounters buffer, [4..] out record of IRInst__getUniformSourceConstant (kind, value)
+local	FUN_0014cec8	local_3c	uniformConstValue	CONFIRMED	float value written by IRInst__getUniformSourceConstant (out record word 1, at &local_50[4]+4); compared with 0.0
+func	Inst__collapseAlgebraic_0014caec	Inst__collapseMadOfMulToDot2Add	INFERRED	IrMulAddFloat (0x14) writing one lane whose source 3 is a single-lane non-saturating IrMulFloat (0x13) or IrMul (0x36): when FUN_0014c604 finds compatible lane selects the pair becomes one IrDot2Add (0x1e) whose third source is the literal 0.0 (FUN_000f79c4), copied into inst with memcpy; program+0x1e0 counts the rewrite
+local	FUN_0014caec	param_2	program	CONFIRMED	second argument passed as `program` by the peepholeCombine drivers; program+8 is the Compiler, program+0x1e0 a statistics counter
+local	FUN_0014caec	iVar6	writeMaskWord	INFERRED	inst[3] (+0xc): the four per-lane write mask bytes, copied to the new instruction
+local	FUN_0014caec	local_58	dotSelect1	CONFIRMED	select word for dot2add source 1 produced by FUN_0014c604
+local	FUN_0014caec	local_54	dotSelect2	CONFIRMED	select word for dot2add source 2 produced by FUN_0014c604
+local	FUN_0014caec	local_50	matchScratch	INFERRED	scratch block: [0] source-order flag from FUN_0014c604, [1..3] IRInst__saveCounters buffer, [4..] IROperand-sized record filled by IRInst__readLastOperand
+local	FUN_0014caec	local_2c	lastOperandRecordTail	INFERRED	sixth word of the record at &matchScratch[4] (zeroed together with its first two words before IRInst__readLastOperand)
+use	FUN_0014caec	iVar1	sourceCapacity	INFERRED	virtual slot 5 (0x14) result, +1 when inst uses the extra-source layout (flag 0x200); inst[0x21] must not exceed it	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x14\)\)\(param_1\);$	+4	all	all
+use	FUN_0014caec	iVar1	addendOpcode	CONFIRMED	opcode of the mad addend (source 3), tested for IrMulFloat 0x13 / IrMul 0x36	^\s*iVar1\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar2\ \+\ 0x88\)\ \+\ 8\);$	+1	all	all
+use	FUN_0014caec	iVar1	canMerge	INFERRED	FUN_0014c604 result: the lane selects of mad and mul can be merged into one dot2add	^\s*\(iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_0014c604\)\(param_1,iVar2,param_2,\&local_58,\&local_54,local_50\),\ iVar1\ !=\ 0\)\)\)\)$	+0	all	all
+use	FUN_0014caec	iVar1	saturate	CONFIRMED	inst[0x48] (+0x120) saturate flag (+0x120; PVS VE_SAT/ME_SAT, see R300VMachineAssembler__encodeDestinationWord) copied to the new instruction	^\s*iVar1\ =\ param_1\[0x48\];$	+3	all	all
+use	FUN_0014caec	iVar1	prevNode	INFERRED	inst[1]: list neighbour after which the replaced inst is re-inserted	^\s*iVar1\ =\ param_1\[1\];$	+4	all	all
+func	Inst__collapseAlgebraic_0014d274	Inst__collapseDot3VectorTimesScaledVector	INFERRED	IrDot3 (0x1c) of two identity-select unmodified sources where one source is an unpredicated IrMulFloat (0x13) of the other source (FUN_00147044 same-value test) and a factor S whose own source 1 is a dot-like op of that vector with itself (V.V): dot3(V, V*S) is rewritten in place as IrMulFloat of the existing V.V and S (splat selects from FUN_000f37b8 / PTR_DAT_001e8b8c)
+local	FUN_0014d274	param_2	program	CONFIRMED	second argument passed as `program` by the peepholeCombine drivers; program+8 is the Compiler, program+0x478 the base of the inst+0x160 counters
+local	FUN_0014d274	uVar1	origFlags	CONFIRMED	inst+0x14 flag word before the rebuild; bit 1 is restored afterwards
+local	FUN_0014d274	uVar10	destRegisterOffset	INFERRED	inst+0x98 (operand record 0 +0xc), restored after the rebuild
+local	FUN_0014d274	uVar11	saturate	CONFIRMED	inst+0x120 saturate flag / result scale code, restored after the rebuild
+local	FUN_0014d274	uVar12	resultScale	CONFIRMED	inst+0x124 saturate flag / result scale code, restored after the rebuild
+local	FUN_0014d274	uVar15	destSelect	CONFIRMED	operand record 0 +0x10 of inst: destination select word, restored to inst+0x9c
+local	FUN_0014d274	iVar13	extraSource	INFERRED	source at index numSources when inst has the extra-source layout (flag 0x200), re-attached with IRInst__setExtraOperandSource
+local	FUN_0014d274	iVar14	prevNode	INFERRED	inst+4: list neighbour after which the rebuilt inst is re-inserted
+use	FUN_0014d274	uVar5	destRegister	CONFIRMED	inst+0x94 (operand record 0 +8): destination register, restored after the rebuild	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x94\);$	+19	all	all
+use	FUN_0014d274	uVar5	splatSelectV	CONFIRMED	PTR_DAT_001e8b8c[splat component of the V.V result]: select word of the new source 1	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(PTR_DAT_001e8b8c\ \+\ iVar6\ \*\ 4\);$	+2	all	all
+use	FUN_0014d274	uVar5	splatSelectS	CONFIRMED	PTR_DAT_001e8b8c[splat component of S]: select word of the new source 2	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(PTR_DAT_001e8b8c\ \+\ iVar3\ \*\ 4\);$	+2	all	all
+use	FUN_0014d274	iVar2	opcodeInfo	CONFIRMED	opcode-info object (inst+0x88) of the examined source; +8 is its opcode, tested for IrMulFloat 0x13	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar4\ \+\ 0x88\);$	+1	all	all
+use	FUN_0014d274	iVar2	sameValue	INFERRED	FUN_00147044 (same defining value) of the dot source and a mul source	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_00147044\)\(iVar3,uVar5\);$	+1	all	all
+use	FUN_0014d274	iVar2	opcodeInfo	CONFIRMED	opcode-info object (inst+0x88) of dot source 2	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar4\ \+\ 0x88\);$@2	+2	all	all
+use	FUN_0014d274	iVar2	identityResult	CONFIRMED	IRInst__isSourceSelectIdentity(dot source 2, 1)	^\s*\(iVar2\ =\ FUN_000f31e8\(iVar4,1\),\ iVar2\ !=\ 0\)\)\ \{$	+0	all	all
+use	FUN_0014d274	iVar2	sameValue	INFERRED	FUN_00147044 (same defining value) of the dot source and a mul source	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_00147044\)\(iVar3,uVar5\);$@2	+1	all	all
+use	FUN_0014d274	iVar2	opcodeInfo	CONFIRMED	opcode-info object (inst+0x88) of dot source 1	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar3\ \+\ 0x88\);$	+1	all	all
+use	FUN_0014d274	iVar2	sameValue	INFERRED	FUN_00147044 (same defining value) of the dot source and a mul source	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_00147044\)\(iVar4,uVar5\);$	+1	all	all
+use	FUN_0014d274	iVar2	opcodeInfo	CONFIRMED	opcode-info object (inst+0x88) of dot source 1	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar3\ \+\ 0x88\);$@2	+2	all	all
+use	FUN_0014d274	iVar2	sameValue	INFERRED	FUN_00147044 (same defining value) of the dot source and a mul source	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_00147044\)\(iVar4,uVar5\);$@2	+1	all	all
+use	FUN_0014d274	iVar3	dotLeft	INFERRED	dot source 1; after a swap it is the vector V that appears in both factors (line `iVar3 = operandVReg`); at the end it is reused for the FUN_00147044 result of the V.V source 2 check	^\s*iVar3\ =\ FUN_00105594\(param_1,1\);$	+101	all	all
+use	FUN_0014d274	iVar3	splatComponentS	INFERRED	FUN_000f37b8(dest select word of S): the single component S is written to, used as table index for the new source 2 select	^\s*iVar3\ =\ FUN_000f37b8\(\*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\)\);$	+54	all	all
+use	FUN_0014d274	iVar6	identityResult2	CONFIRMED	IRInst__isSourceSelectIdentity(V.V source, 1 / 2)	^\s*\(\(iVar6\ =\ FUN_000f31e8\(iVar4,1\),\ iVar6\ !=\ 0\ \&\&\ \(iVar6\ =\ FUN_000f31e8\(iVar4,2\),\ iVar6\ !=\ 0\)\)\)$	+0	all	all
+use	FUN_0014d274	iVar6	sameValue2	INFERRED	FUN_00147044(V, source 1 of the V.V source)	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_00147044\)\(iVar3,uVar5\);$	+1	all	all
+use	FUN_0014d274	iVar6	splatComponentVV	INFERRED	FUN_000f37b8(dest select word of the V.V source): single component it is written to, table index for the new source 1 select	^\s*iVar6\ =\ FUN_000f37b8\(\*\(undefined4\ \*\)\(iVar6\ \+\ 0x10\)\);$	+42	all	all
+use	FUN_0014d274	iVar8	depthBase	INFERRED	*(program+0x478): base for the inst+0x160 counter of the rebuilt inst	^\s*iVar8\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x478\);$	+3	all	all
+func	Inst__collapseAlgebraic_0015e494	Inst__collapseClampToSaturate	CONFIRMED	when HwLimits slot 32 allows result saturate: inst is IrMaxFloat (0x17) with the constant 0.0 whose other source is IrMinFloat (0x19) with the constant 1.0 (or the two in the opposite order), FUN_0015e2f4 returning the non-constant operand each time; the producer x is copied into inst (FUN_00103ebc) and inst+0x120 is set to 1 (saturate), or inst becomes a mov of x when the producer cannot take the modifier; program+0x1a8 counts the rewrite
+local	FUN_0015e494	param_2	program	CONFIRMED	second argument passed as `program` by the peepholeCombine drivers; program+8 is the Compiler, program+0x478 the base of the inst+0x160 counters, program+0x1a8 a statistics counter
+local	FUN_0015e494	bVar2	srcSelectByte	INFERRED	select byte of operand record 1 for this lane
+local	FUN_0015e494	piVar4	clampedValue	CONFIRMED	x: the value being clamped, the non-constant operand found by the second FUN_0015e2f4 match (0.0 for IrMaxFloat, 1.0 for IrMinFloat)
+local	FUN_0015e494	iVar13	nextNode	INFERRED	inst[2] (+8): list neighbour before which the rebuilt inst is re-inserted (Block__insertInstBefore)
+local	FUN_0015e494	iVar14	extraSource	INFERRED	source at index numSources when inst has the extra-source layout (flag 0x200), re-attached with IRInst__setExtraOperandSource
+local	FUN_0015e494	iVar15	depthBasePlusOne	INFERRED	depthBase + 1: counter value given to the cloned producer sources
+local	FUN_0015e494	local_88	destSelectWord	CONFIRMED	select word (+0x10) of operand record 0 of inst (destination): lanes with byte 1 are unwritten
+local	FUN_0015e494	local_84	remapSelect	INFERRED	per-lane component remap (4 = unused): the producer select byte reached through inst source 1 and middleInst source 1
+local	FUN_0015e494	local_80	srcSelectWord	CONFIRMED	select word (+0x10) of the source record being remapped in the final loop
+local	FUN_0015e494	local_7c	newSelectWord	CONFIRMED	select word being rebuilt lane by lane (preset 0x4040404) and stored back to the source record
+local	FUN_0015e494	local_78	savedDestRecord	CONFIRMED	IROperand-sized buffer holding a copy of operand record 0 (IROperand__copyFrom) restored after the rebuild
+local	FUN_0015e494	local_74	savedDestRecord1	CONFIRMED	second word of the saved operand record 0 buffer
+local	FUN_0015e494	local_64	savedDestRecord5	CONFIRMED	last word of the saved operand record 0 buffer (zeroed with the first two before the copy)
+use	FUN_0015e494	iVar16	compiler	CONFIRMED	*(program+8): the Compiler passed to HwLimits slot 32 owner (compiler+0x30c), IRInst__reinitAsMov, IRInst__setOperandSource, ...	^\s*iVar16\ =\ \*\(int\ \*\)\(param_2\ \+\ 8\);$	+150	all	all
+use	FUN_0015e494	iVar16	sourceCountLimit	INFERRED	virtual slot 5 (0x14) result: loop bound for the final per-source select remap	^\s*for\ \(iVar3\ =\ 1;\ iVar16\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x14\)\)\(param_1\),\ iVar3\ <=\ iVar16;$	+1	all	all
+use	FUN_0015e494	iVar16	lanesLeft	INFERRED	countdown of the four lanes	^\s*iVar16\ =\ 4;$	+9	all	all
+use	FUN_0015e494	iVar16	outRecord	INFERRED	IRInst__getOperandRecord(inst, source): record that receives newSelectWord	^\s*iVar16\ =\ FUN_001054ec\(param_1,iVar3\);$@2	+1	all	all
+use	FUN_0015e494	bVar1	moreLanes	INFERRED	lane != 3 continue flag	^\s*bVar1\ =\ iVar17\ !=\ 3;$	+2	all	all
+use	FUN_0015e494	bVar1	identitySwizzle	INFERRED	both inst source 1 and the middle instruction source 1 have identity selects; inverted before use, so the remap loop at the end runs when they do not	^\s*bVar1\ =\ true;$	+75	all	all
+use	FUN_0015e494	iVar3	hwSupport	INFERRED	HwLimits slot 32 (supportsResultSaturate) result	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(iVar16\ \+\ 0x30c\)\ \+\ 0x80\)\)\(\*\(int\ \*\*\)\(iVar16\ \+\ 0x30c\),param_2\);$	+1	all	all
+use	FUN_0015e494	iVar3	middleInst	CONFIRMED	result of the first FUN_0015e2f4 match: the other operand of the outer Max (or Min) with constant 0.0 (1.0), itself the Min (Max) with constant 1.0 (0.0) whose other operand is clampedValue	^\s*iVar3\ =\ \(\(undefined4\ \(\*\)\(\)\)FUN_0015e2f4\)\(param_1,0x17,in_r5,iVar16,0\.0\);$	+71	all	all
+use	FUN_0015e494	iVar3	producerCheck	INFERRED	vslot 9 (0x24) of clampedValue, then IRInst__hasSingleUse(clampedValue)	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x24\)\)\(piVar4\);$	+3	all	all
+use	FUN_0015e494	iVar3	srcIndexProducer	INFERRED	1-based index over the sources of clampedValue	^\s*iVar3\ =\ 1;$	+12	all	all
+use	FUN_0015e494	iVar3	srcIndexInst	INFERRED	1-based index over the sources of the rebuilt inst	^\s*if\ \(\(\(piVar4\[5\]\ \&\ 1U\)\ !=\ 0\)\ \&\&\ \(iVar3\ =\ 1,\ 0\ <\ piVar4\[0x21\]\)\)\ \{$	+29	all	all
+use	FUN_0015e494	iVar3	srcIndexOut	INFERRED	1-based index over the sources of inst in the final select remap	^\s*for\ \(iVar3\ =\ 1;\ iVar16\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x14\)\)\(param_1\),\ iVar3\ <=\ iVar16;$	+17	all	all
+use	FUN_0015e494	iVar5	depthAboveBase	INFERRED	inst[0x58] - program[0x478], clamped at 0, restored as inst[0x58] = depth + base	^\s*iVar5\ =\ param_1\[0x58\]\ \-\ iVar17;$	+95	all	all
+use	FUN_0015e494	iVar5	lane	INFERRED	lane 0..3 of the select remap	^\s*iVar5\ =\ 0;$@2	+10	all	all
+use	FUN_0015e494	uVar6	extraSelect	INFERRED	select word (+0x10) of the extra source record (default 0x10203 when there is none), restored after the rebuild	^\s*uVar6\ =\ 0x10203;$	+83	all	all
+use	FUN_0015e494	uVar6	remappedSelect	INFERRED	newSelectWord copied out of the lane loop	^\s*uVar6\ =\ local_7c;$	+5	all	all
+use	FUN_0015e494	iVar7	producerResultMode	INFERRED	OpcodeInfo__getResultMode of clampedValue: only the modes 0, 3, 4, 5, 7 take the saturate modifier	^\s*iVar7\ =\ FUN_001134bc\(piVar4\[0x22\],piVar4,param_2\);$	+79	all	all
+use	FUN_0015e494	iVar8	isPresub	INFERRED	vslot 23 (0x5c, isPresub) of a source of the rebuilt inst	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*piVar9\ \+\ 0x5c\)\)\(\);$	+1	all	all
+use	FUN_0015e494	uVar12	allocatedRegister	CONFIRMED	cloneResult +0x14c, stored as destination register (record 0 +8) of the clone	^\s*uVar12\ =\ \*\(undefined4\ \*\)\(iVar8\ \+\ 0x14c\);$	+3	all	all
+use	FUN_0015e494	uVar12	parentBlock	CONFIRMED	nextNode +0x158: the block inst is re-inserted into	^\s*uVar12\ =\ \*\(undefined4\ \*\)\(iVar13\ \+\ 0x158\);$	+2	all	all
+use	FUN_0015e494	iVar17	lane2	INFERRED	lane 0..3 of the remap table build loop	^\s*iVar17\ =\ 0;$	+15	all	all
+use	FUN_0015e494	iVar17	depthBase	INFERRED	*(program+0x478): base of the inst+0x160 counters	^\s*iVar17\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x478\);$	+107	all	all
+func	Inst__collapseAlgebraic_00150d38	Inst__collapseAddOfScaledMov	CONFIRMED	IrAddFloat (0x12) with no +0x124 result scale, one of whose sources is an IRInst slot 25 (isMov) producer with no saturate, no extra source and a non-zero result scale code (+0x124 -> factor by FUN_0010aad4): the scale becomes a constant vector (HwLimits slot 85 findOrEncodeConstantVector) and the add is rebuilt as IrMulAddFloat (0x14) of (mov source, scale constant, other add operand); the old mov is released
+local	FUN_00150d38	iVar14	compiler	CONFIRMED	*(program+8): the Compiler passed to IRInst__create / IRInst__setOperandSource and used for its HwLimits (compiler+0x30c)
+local	FUN_00150d38	bVar1	moreSources	INFERRED	source index != 2 continue flag of the loop over the two add sources
+local	FUN_00150d38	uVar2	yNegate	INFERRED	bit 0 of the flag word of the add operand that is not the mov (negate modifier), copied to the mad source 3
+local	FUN_00150d38	uVar4	instFlags	CONFIRMED	inst+0x14 flag word (bit 1 copied to the new instruction, bit 0x200 = extra-source layout)
+local	FUN_00150d38	puVar13	flagsPtr	CONFIRMED	address of the flag word of operand record iVar12 (inst+0xb8 stepping by 0x18)
+local	FUN_00150d38	dVar18	scaleFactor	CONFIRMED	FUN_0010aad4(a0[0x49]) = IRInst__resultScaleFactor of the mov result scale code
+local	FUN_00150d38	uVar10	destSelect	CONFIRMED	operand record 0 +0x10 of inst: destination select word, stored at inst2+0x9c
+local	FUN_00150d38	uVar11	otherSelect	CONFIRMED	select word (+0x10) of the add operand that is not the mov, copied to mad source 3
+local	FUN_00150d38	uVar15	destRegisterOffset	INFERRED	inst+0x98 copied to inst2+0x98
+local	FUN_00150d38	local_98	destSelectWord	CONFIRMED	destination select word of inst: lanes with byte 1 are unwritten
+local	FUN_00150d38	local_94	scaleSelect	CONFIRMED	select word of the scale constant: SelectWord__maskUnused(0x10203, destWriteMask), later set to 4 on unwritten lanes; passed as &local_94 to HwLimits slot 85
+local	FUN_00150d38	local_90	scaleDestSelect	INFERRED	copy of the scale constant instruction destination select, lanes selected by scaleSelect set to 0
+local	FUN_00150d38	local_8c	scaleSelectCopy	INFERRED	copy of scaleSelect read byte-wise when clearing the scale constant destination lanes
+local	FUN_00150d38	local_88	scaleLane0	CONFIRMED	first of four floats all equal to the result scale factor: the constant vector passed as &local_88 to HwLimits slot 85
+local	FUN_00150d38	local_84	scaleLane1	CONFIRMED	second scale float
+local	FUN_00150d38	local_80	scaleLane2	CONFIRMED	third scale float
+local	FUN_00150d38	local_7c	scaleLane3	CONFIRMED	fourth scale float
+local	FUN_00150d38	local_78	destWriteMask	CONFIRMED	WriteMask__fromSelectWord(destination select word)
+local	FUN_00150d38	local_74	unusedMaskedSelect	CONFIRMED	SelectWord__maskUnused(0x10203, destWriteMask)
+local	FUN_00150d38	local_70	composedSelect	CONFIRMED	SelectWord__compose(mov source select, add source select): select word for mad source 1
+local	FUN_00150d38	local_6c	extraSource	INFERRED	source at index numSources when inst has the extra-source layout, re-attached with IRInst__setExtraOperandSource
+local	FUN_00150d38	local_68	otherSource	CONFIRMED	definition of the add operand that is not the mov (mad source 3)
+local	FUN_00150d38	local_64	scaledAbs	INFERRED	abs modifier for mad source 1: set when either the mov operand or the add operand carries abs (flag bit 1)
+local	FUN_00150d38	local_60	scaledNegate	INFERRED	negate for mad source 1: (add operand flags ^ mov operand flags) & 1
+local	FUN_00150d38	local_5c	saturate	CONFIRMED	inst+0x120 saturate flag copied to inst2+0x120
+local	FUN_00150d38	local_58	useCount	CONFIRMED	IRInst__useCount(inst), added to program[0x478] for the new inst+0x160
+local	FUN_00150d38	local_54	prevNode	INFERRED	inst+4: list neighbour after which the rebuilt inst is re-inserted
+use	FUN_00150d38	uVar3	otherOperandFlags	INFERRED	flag word of the add operand that is not the mov (record +0x14)	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar17\ \*\ 0x18\ \+\ param_1\ \+\ 0xa0\);$	+3	all	rhs
+use	FUN_00150d38	uVar3	yAbs	INFERRED	bit 1 of the flag word of the add operand that is not the mov (abs modifier), copied to the mad source 3	^\s*uVar3\ =\ uVar3\ >>\ 1\ \&\ 1;$	+29	lhs	all
+use	FUN_00150d38	iVar5	isMov	CONFIRMED	IRInst vslot 25 (0x64, isMov) of the add source	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 100\)\)\(a0\);$	+1	all	all
+use	FUN_00150d38	iVar5	scaleConstant	CONFIRMED	HwLimits slot 85 (0x154, findOrEncodeConstantVector) result: the constant instruction holding the scale vector, source 2 of the mad	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(iVar14\ \+\ 0x30c\)\ \+\ 0x154\)\)$	+125	all	all
+use	FUN_00150d38	iVar6	destRecord	CONFIRMED	IRInst__getOperandRecord(inst, 0)	^\s*iVar6\ =\ FUN_001054ec\(param_1,0\);$	+1	all	all
+use	FUN_00150d38	iVar6	movSourceRecord	CONFIRMED	IRInst__getOperandRecord(mov, 1)	^\s*iVar6\ =\ FUN_001054ec\(a0,1\);$	+1	all	all
+use	FUN_00150d38	iVar6	scaledOperandRecord	CONFIRMED	IRInst__getOperandRecord(inst, source index of the mov)	^\s*iVar6\ =\ FUN_001054ec\(param_1,iVar12\);$	+1	all	all
+use	FUN_00150d38	iVar6	otherRecord	CONFIRMED	IRInst__getOperandRecord(inst, index of the other add operand)	^\s*iVar6\ =\ FUN_001054ec\(param_1,iVar17\);$	+2	all	all
+use	FUN_00150d38	iVar6	src1Record	CONFIRMED	IRInst__getOperandRecord(inst2, 1): receives composedSelect	^\s*iVar6\ =\ FUN_001054ec\(pvVar8,1\);$	+1	all	all
+use	FUN_00150d38	iVar6	src2Set	INFERRED	IRInst__setOperandSourceIfLegal(inst2, 2, scaleConstant, ...) result	^\s*iVar6\ =\ FUN_00106230\(pvVar8,2,iVar5,0,0,iVar14\);$	+14	all	all
+use	FUN_00150d38	iVar6	lanesLeft	INFERRED	countdown of the four lanes	^\s*iVar6\ =\ 4;$	+8	all	all
+use	FUN_00150d38	iVar6	lane	INFERRED	lane 0..3 of the destination-select clearing loop	^\s*iVar6\ =\ 0;$	+8	all	all
+use	FUN_00150d38	iVar6	depthBase	INFERRED	*(program+0x478): base of the inst+0x160 counters	^\s*iVar6\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x478\);$	+43	all	all
+use	FUN_00150d38	iVar9	depthBasePlusOne	INFERRED	depthBase + 1: counter value given to the cloned mov source	^\s*iVar9\ =\ iVar6\ \+\ 1;$	+19	all	all
+use	FUN_00150d38	uVar16	movSelect	CONFIRMED	select word (+0x10) of operand record 1 of the mov	^\s*uVar16\ =\ \*\(undefined4\ \*\)\(iVar6\ \+\ 0x10\);$	+2	all	all
+use	FUN_00150d38	uVar16	src1Select	CONFIRMED	composedSelect, stored in the select word of mad source 1	^\s*uVar16\ =\ local_70;$	+30	all	all
+use	FUN_00150d38	uVar16	src2Select	CONFIRMED	scaleSelect, stored in the select word of mad source 2	^\s*uVar16\ =\ local_94;$	+2	all	all
+use	FUN_00150d38	uVar16	src2SelectFinal	CONFIRMED	scaleSelect after unwritten lanes were set to 4, stored in the select word of mad source 2	^\s*uVar16\ =\ local_94;$@2	+5	all	all
+use	FUN_00150d38	iVar12	srcIndex	INFERRED	1-based index of the add source that is the mov producer	^\s*iVar12\ =\ 1;$	+77	all	all
+use	FUN_00150d38	iVar12	destLane	INFERRED	lane 0..3 of the scaleSelect clearing loop	^\s*iVar12\ =\ 0;$	+9	all	all
+use	FUN_00150d38	iVar12	lanesLeft2	INFERRED	countdown of the four lanes	^\s*iVar12\ =\ 4;$	+7	all	all
+use	FUN_00150d38	iVar12	isPresub	INFERRED	IRInst vslot 23 (0x5c, isPresub) of the mov source operandVReg	^\s*iVar12\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x5c\)\)\(piVar7\);$	+1	all	all
+use	FUN_00150d38	iVar12	srcIndex	INFERRED	1-based index of the add source being examined (loop increment)	^\s*bVar1\ =\ iVar12\ !=\ 2;$	+2	all	all
+use	FUN_00150d38	iVar17	otherIndex	CONFIRMED	index of the add operand that is not the mov: 2 - (srcIndex == 2)	^\s*iVar17\ =\ 2\ \-\ \(uint\)\(iVar12\ ==\ 2\);$	+5	all	all
+use	FUN_00150d38	iVar17	src3Set	INFERRED	IRInst__setOperandSourceIfLegal(inst2, 3, otherSource, ...) result	^\s*iVar17\ =\ FUN_00106230\(pvVar8,3,local_68,uVar3,uVar2,iVar14\);$	+9	all	all
+func	Inst__collapseAlgebraic_0014b82c	Inst__collapseAddOfMulToMad	CONFIRMED	IrAddFloat (0x12) one of whose sources is an IrMulFloat (0x13) with no abs modifier on the add operand, all read lanes written, no saturate / result scale on the mul and (when requireSingleUse) a single use: inst is rebuilt in place as IrMulAddFloat (0x14, IRInst__reinitAsTrinary) with the mul sources as sources 1 and 2 (select words composed with SelectWord__compose, presub sources cloned by FUN_0010af38) and the other add operand as source 3; program+0x1d4 counts the rewrite
+func	FUN_001470dc	Inst__canFuseAddMul	CONFIRMED	the test half of Inst__collapseAddOfMulToMad: inst is IrAddFloat and source 1 or source 2 is an IrMulFloat (no abs on the add operand, lanes written, no saturate / scale on the mul, single use when requireSingleUse)
+func	FUN_0010af38	IRInst__cloneIfPresub	INFERRED	(src, program, trackUses): when src answers vslot 23 (isPresub) returns a clone of it inserted before it (own register, +0x160 reset to program+0x478, a fresh use vector when trackUses is set, source use vectors updated), otherwise src itself
+func	FUN_001047a8	IROperand__copyModifiersAndSelect	CONFIRMED	(dst, src): copies the negate (bit 0) and abs (bit 1) bits of src+0x14 with IROperand__setModifierBits and the select word src+0x10
+local	FUN_0014b82c	param_2	program	CONFIRMED	second argument passed as `program` by the peepholeCombine drivers; program+8 is the Compiler, program+0x1d4 a statistics counter, program+0x478 the base of the inst+0x160 counters
+local	FUN_0014b82c	param_3	skipUseLists	INFERRED	when non-zero the use vectors of the old sources are updated by hand (Vector__removeValue) and passed as the 4th argument of IRInst__setOperandSource; the peepholeCombine call passes 0
+local	FUN_0014b82c	param_4	requireSingleUse	CONFIRMED	tested as `param_4 == 0 || IRInst__hasSingleUse(mul)`; the peepholeCombine call passes 1
+local	FUN_0014b82c	bVar1	hasExtraSource	INFERRED	extraSource != 0
+local	FUN_0014b82c	bVar2	trackUses	INFERRED	skipUseLists == 0: the +0x160 counters of the new sources are bumped
+local	FUN_0014b82c	uVar3	mulOperandFlags	INFERRED	flag word of the inst operand record that held the mul (record +0x14); bit 0 (negate) is propagated to mad source 1
+local	FUN_0014b82c	uVar11	mulSrc2Select	CONFIRMED	select word (+0x10) of mul operand record 2
+local	FUN_0014b82c	uVar12	useList	INFERRED	inst+0x10 (use vector pointer), restored after the rebuild
+local	FUN_0014b82c	uVar13	allocatedRegister	INFERRED	inst+0x14c, restored to inst+0x94
+local	FUN_0014b82c	uVar14	destRegisterOffset	INFERRED	inst+0x98, restored after the rebuild
+local	FUN_0014b82c	uVar15	saturate	CONFIRMED	inst+0x120 saturate flag, restored after the rebuild
+local	FUN_0014b82c	uVar16	resultScale	INFERRED	inst+0x124 result scale code, restored after the rebuild
+local	FUN_0014b82c	uVar17	destSelect	CONFIRMED	operand record 0 +0x10 of inst: destination select word, restored to inst+0x9c
+local	FUN_0014b82c	uVar18	mulUseSelect	CONFIRMED	select word (+0x10) of the inst operand that read the mul: composed with the mul source selects
+local	FUN_0014b82c	uVar20	mulSrc1Select	CONFIRMED	select word (+0x10) of mul operand record 1
+local	FUN_0014b82c	local_c8	mulSrc1Record	CONFIRMED	IROperand-sized copy of mul operand record 1 (IROperand__copyFrom)
+local	FUN_0014b82c	local_c4	mulSrc1Record1	CONFIRMED	second word of the mul operand 1 copy
+local	FUN_0014b82c	local_b4	mulSrc1Record5	CONFIRMED	last word of the mul operand 1 copy
+local	FUN_0014b82c	local_b0	mulSrc2Record	CONFIRMED	IROperand-sized copy of mul operand record 2 (&local_b0 = mulSrc2RecordPtr)
+local	FUN_0014b82c	local_ac	mulSrc2Record1	CONFIRMED	second word of the mul operand 2 copy
+local	FUN_0014b82c	local_9c	mulSrc2Record5	CONFIRMED	last word of the mul operand 2 copy
+local	FUN_0014b82c	local_98	addendRecord	CONFIRMED	IROperand-sized copy of the inst operand that is not the mul (&local_98 = addendRecordPtr)
+local	FUN_0014b82c	local_94	addendRecord1	CONFIRMED	second word of the addend operand copy
+local	FUN_0014b82c	local_84	addendRecord5	CONFIRMED	last word of the addend operand copy
+local	FUN_0014b82c	local_64	mulSrc2RecordPtr	CONFIRMED	&mulSrc2Record, passed to IROperand__copyFrom and IROperand__copyModifiersAndSelect
+local	FUN_0014b82c	local_60	addendRecordPtr	CONFIRMED	&addendRecord, passed to IROperand__copyFrom and IROperand__copyModifiersAndSelect
+local	FUN_0014b82c	local_68	extraSelect	INFERRED	select word of the extra source record (default DAT_001b004c when there is none)
+local	FUN_0014b82c	local_6c	extraSource	INFERRED	source at index numSources when inst has the extra-source layout, re-attached with IRInst__setExtraOperandSource
+local	FUN_0014b82c	local_70	mulSrc2Def	CONFIRMED	IRInst__getOperandSource(mul, 2)
+local	FUN_0014b82c	local_74	composedSelect2	CONFIRMED	SelectWord__compose(mulSrc2Select, mulUseSelect): select word of mad source 2
+local	FUN_0014b82c	local_78	composedSelect1	CONFIRMED	SelectWord__compose(mulSrc1Select, mulUseSelect): select word of mad source 1
+use	FUN_0014b82c	iVar4	canFuse	CONFIRMED	Inst__canFuseAddMul(inst, program, requireSingleUse)	^\s*iVar4\ =\ \(\(int\ \(\*\)\(\)\)FUN_001470dc\)\(param_1,param_2,param_4\);$	+1	all	all
+use	FUN_0014b82c	iVar4	mulInst	CONFIRMED	the IrMulFloat source (add source 1, or source 2 after the swap)	^\s*iVar4\ =\ FUN_00105594\(param_1,1\);$	+151	all	all
+use	FUN_0014b82c	iVar19	source2Opcode	CONFIRMED	opcode of add source 2	^\s*iVar19\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar5\ \+\ 0x88\)\ \+\ 8\);$	+0	all	all
+use	FUN_0014b82c	iVar19	source2Opcode	CONFIRMED	opcode of add source 2 tested for IrMulFloat 0x13	^\s*if\ \(\(\(\(iVar19\ !=\ 0x13\)\ \|\|\ \(\(\*\(uint\ \*\)\(param_1\ \+\ 0xd0\)\ \&\ 2\)\ !=\ 0\)\)\ \|\|$	+0	all	all
+use	FUN_0014b82c	iVar19	checkResult2	INFERRED	IRInst__sourceLanesAllWritten(inst, 2) / IRInst__hasSingleUse(source 2)	^\s*\(\(iVar19\ =\ FUN_000f48ec\(param_1,2\),\ iVar19\ ==\ 0\ \|\|$	+2	all	all
+use	FUN_0014b82c	iVar19	addend	CONFIRMED	the add operand that is not the mul: becomes mad source 3	^\s*iVar19\ =\ iVar5;$	+0	all	all
+use	FUN_0014b82c	iVar19	addend	CONFIRMED	the add operand that is not the mul: becomes mad source 3	^\s*iVar19\ =\ iVar4;$	+117	all	all
+use	FUN_0014b82c	iVar5	depthAboveBase	INFERRED	inst+0x160 - program[0x478], clamped at 0, restored as inst+0x160 = depth + base	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x160\)\ \-\ \*\(int\ \*\)\(param_2\ \+\ 0x478\);$	+67	all	all
+use	FUN_0014b82c	iVar5	newSrc1	CONFIRMED	IRInst__cloneIfPresub(mulSrc1Def): mad source 1	^\s*iVar5\ =\ FUN_0010af38\(uVar9,param_2,param_3\);$	+7	all	all
+use	FUN_0014b82c	iVar5	newSrc2	CONFIRMED	IRInst__cloneIfPresub(mulSrc2Def): mad source 2	^\s*iVar5\ =\ FUN_0010af38\(local_70,param_2,param_3\);$	+7	all	all
+use	FUN_0014b82c	iVar6	checkResult	INFERRED	IRInst__sourceLanesAllWritten(inst, 1) / IRInst__hasSingleUse(source 1)	^\s*if\ \(\(\(\(\(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar4\ \+\ 0x88\)\ \+\ 8\)\ ==\ 0x13\)\ \&\&\ \(\(\*\(uint\ \*\)\(param_1\ \+\ 0xb8\)\ \&\ 2\)\ ==\ 0\)\)$	+3	all	all
+use	FUN_0014b82c	iVar6	mulSourceIndex	CONFIRMED	index (1 or 2) of the add source that is the mul	^\s*iVar6\ =\ 1;$	+38	all	all
+use	FUN_0014b82c	iVar6	srcLoopIndex	INFERRED	1-based index over the sources of inst when releasing them	^\s*iVar6\ =\ 1;$@2	+9	all	all
+use	FUN_0014b82c	iVar6	prevNode	INFERRED	inst+4: list neighbour after which the rebuilt inst is re-inserted	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 4\);$	+4	all	all
+use	FUN_0014b82c	iVar6	depthBase	INFERRED	*(program+0x478): base of the inst+0x160 counter	^\s*iVar6\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x478\);$	+3	all	all
+use	FUN_0014b82c	uVar7	result	CONFIRMED	return value: 0 = not fused, 1 = fused	^\s*uVar7\ =\ 0;$	+0	all	all
+use	FUN_0014b82c	uVar7	addendIndex	CONFIRMED	index (2 or 1) of the add operand that is not the mul	^\s*uVar7\ =\ 2;$	+60	all	all
+use	FUN_0014b82c	uVar7	result	CONFIRMED	return value: 1 = fused	^\s*uVar7\ =\ 1;$@2	+2	all	all
+func	Inst__collapseAlgebraic_00154dc0	Inst__mergeComponentMovsIntoCnd	INFERRED	inst (extra-source layout, flag 0x200, no saturate / result modifier) and its last source (the previous partial definition, same restrictions) are both movs (IRInst slot 25 isMov) or one of them is, each writing a single component, with disjoint written lanes: they are merged into one IrCndEFloat (0x24) / IrCndGTFloat (0x26) rebuilt in place whose first source is a constant mask vector found with HwLimits slot 85 (findOrEncodeConstantVector) and whose other two sources are the two movs' sources; the merged destination select is the union of both lane sets
+func	FUN_000f3824	SelectWord__isSingleComponentConstant	CONFIRMED	the word equals one of the four single-component splat select constants DAT_001aa85c / 858 / 854 / 850
+func	FUN_000f3884	IRInst__destIsSingleComponent	CONFIRMED	SelectWord__isSingleComponentConstant(inst+0x9c): the destination select writes one component
+func	FUN_000f37b8	SelectWord__splatComponent	CONFIRMED	returns 0..3 when the word equals the splat constant of that component (DAT_001aa85c, 858, 854, 850), else -1
+local	FUN_00154dc0	iVar17	compiler	CONFIRMED	*(program+8): the Compiler passed to IRInst__setOperandSource and used for its HwLimits (compiler+0x30c)
+local	FUN_00154dc0	bVar1	onlyOneMov	INFERRED	lastIsMov == 0: only one of the two partial writes is a mov, so no operand of the partner needs to be taken over
+local	FUN_00154dc0	bVar2	moreLanes	INFERRED	lane != 3 continue flag of the select-fixup loop
+local	FUN_00154dc0	uVar3	instLowSelect	INFERRED	select byte of inst source 1 at the first written component of inst destination
+local	FUN_00154dc0	uVar4	lastLowSelect	INFERRED	select byte of the partner source 1 at the first written component of the partner destination
+local	FUN_00154dc0	pcVar5	partnerCheck	INFERRED	IRInst slot 25 (isMov) of the partner when it has a single use, otherwise slot 19 (0x4c)
+local	FUN_00154dc0	uVar15	partnerNegate	INFERRED	bit 0 of the partner operand 1 flags (negate), copied to mad/cnd source 2
+local	FUN_00154dc0	uVar16	partnerAbs	INFERRED	bit 1 of the partner operand 1 flags (abs), copied to source 2
+local	FUN_00154dc0	piVar18	partnerInst	INFERRED	the instruction (inst or its last source) that stays as the source-2 provider; the other one is rebuilt as the cnd
+local	FUN_00154dc0	local_88	maskSelect	CONFIRMED	select word of the constant mask source: 0x10203, replaced by DAT_001b0160[component] (or byte-rotated when the component is 0)
+local	FUN_00154dc0	local_84	instDestSelect	CONFIRMED	destination select word of inst (operand record 0 +0x10); 0x1010100 excluded
+local	FUN_00154dc0	local_80	mergedDestSelect	CONFIRMED	destination select of the merged inst: inst lanes plus the lanes the last source writes
+local	FUN_00154dc0	local_7c	lastDestSelect	CONFIRMED	destination select word of the last source; 0x1010100 excluded
+local	FUN_00154dc0	local_78	instSrc1Select	CONFIRMED	select word of operand record 1 of inst
+local	FUN_00154dc0	local_74	partnerSrc1Select	CONFIRMED	select word of operand record 1 of the partner (default 0x10203)
+local	FUN_00154dc0	local_70	maskLane0	CONFIRMED	first of four floats of the constant mask vector (0, 1.0, 0, 0) passed as &local_70 to HwLimits slot 85
+local	FUN_00154dc0	local_6c	maskLane1	CONFIRMED	second mask float, preset to 1.0 (0x3f800000)
+local	FUN_00154dc0	local_68	maskLane2	CONFIRMED	third mask float
+local	FUN_00154dc0	local_64	maskLane3	CONFIRMED	fourth mask float
+local	FUN_00154dc0	local_58	parentBlock	CONFIRMED	inst[0x56] (inst+0x158): the block the rebuilt inst is inserted into
+local	FUN_00154dc0	local_54	prevNode	INFERRED	inst[1]: list neighbour after which the rebuilt inst is re-inserted
+use	FUN_00154dc0	piVar8	lastSource	CONFIRMED	IRInst__getOperandSource(inst, numSources): the extra (last) source, itself an instruction with no saturate / result modifier	^\s*\(piVar8\ =\ \(int\ \*\)FUN_00105594\(param_1,param_1\[0x21\]\),\ piVar8\[0x48\]\ ==\ 0\)\)\)\)\ \&\&$	+26	all	all
+use	FUN_00154dc0	piVar8	src2Def	INFERRED	source 2 of the rebuilt inst: the partner itself, or the partner source 1 when the partner has its own sources to take over	^\s*piVar8\ =\ piVar18;$	+37	all	all
+use	FUN_00154dc0	iVar9	instIsMov	CONFIRMED	IRInst slot 25 (isMov) of inst	^\s*iVar9\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 100\)\)\(param_1\);$	+18	all	all
+use	FUN_00154dc0	iVar9	checkResult	INFERRED	partnerCheck(partner) result	^\s*iVar9\ =\ \(\*pcVar5\)\(piVar18\);$	+1	all	all
+use	FUN_00154dc0	iVar9	laneIndex	INFERRED	lane 0..3 of the disjoint-lane check loop	^\s*iVar9\ =\ 0;$	+9	all	all
+use	FUN_00154dc0	iVar9	maskConstant	CONFIRMED	HwLimits slot 85 (0x154, findOrEncodeConstantVector) result: the constant mask instruction, source 1 of the cnd	^\s*iVar9\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(iVar17\ \+\ 0x30c\)\ \+\ 0x154\)\)$	+58	all	all
+use	FUN_00154dc0	iVar9	maskSelectWord	CONFIRMED	maskSelect, stored in the select word of source 1	^\s*iVar9\ =\ local_88;$	+2	all	all
+use	FUN_00154dc0	iVar9	laneIndex2	INFERRED	lane 0..3 of the merged-destination loop	^\s*iVar9\ =\ 0;$@2	+10	all	all
+use	FUN_00154dc0	iVar9	laneIndex3	INFERRED	lane 0..3 of the select fixup loop	^\s*iVar9\ =\ 0;$@3	+22	all	all
+use	FUN_00154dc0	iVar10	lastIsMov	CONFIRMED	IRInst slot 25 (isMov) of the last source	^\s*iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*piVar8\ \+\ 100\)\)\(piVar8\);$	+72	all	all
+use	FUN_00154dc0	iVar11	lastSingleComponent	CONFIRMED	IRInst__destIsSingleComponent(last source)	^\s*iVar11\ =\ FUN_000f3884\(piVar8\);$	+2	all	all
+use	FUN_00154dc0	iVar11	lanesLeft	INFERRED	countdown of the four lanes	^\s*iVar11\ =\ 4;$	+8	all	all
+use	FUN_00154dc0	iVar11	maskComponent	INFERRED	component used to pick the mask select: the splat component of inst (or of the last source when inst is not a single-component splat)	^\s*iVar11\ =\ iVar13;$	+7	all	all
+use	FUN_00154dc0	iVar11	hwLimitsResult	INFERRED	HwLimits slot 64 (0x100) result: whether the rotated mask select is acceptable	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(iVar17\ \+\ 0x30c\)\ \+\ 0x100\)\)$	+2	all	all
+use	FUN_00154dc0	iVar11	destRegisterOffset	INFERRED	inst[0x26]: operand record 0 +0xc, restored after the rebuild	^\s*iVar11\ =\ param_1\[0x26\];$	+38	all	all
+use	FUN_00154dc0	iVar12	instSingleComponent	CONFIRMED	IRInst__destIsSingleComponent(inst)	^\s*iVar12\ =\ FUN_000f3884\(param_1\);$	+1	all	all
+use	FUN_00154dc0	iVar12	lastSplatComponent	CONFIRMED	SelectWord__splatComponent(lastDestSelect)	^\s*iVar12\ =\ FUN_000f37b8\(local_7c\);$	+4	all	all
+use	FUN_00154dc0	iVar12	destRegister	CONFIRMED	inst[0x25]: operand record 0 +8, restored after the rebuild	^\s*iVar12\ =\ param_1\[0x25\];$	+35	all	all
+use	FUN_00154dc0	iVar13	instSplatComponent	CONFIRMED	SelectWord__splatComponent(instDestSelect): 0..3, or -1 when it is not a single-component splat; >= 0 selects IrCndEFloat 0x24, otherwise IrCndGTFloat 0x26	^\s*iVar13\ =\ FUN_000f37b8\(local_84\);$	+45	all	all
+use	FUN_00154dc0	iVar13	lanesLeft2	INFERRED	countdown of the four lanes	^\s*iVar13\ =\ 4;$	+7	all	all
+use	FUN_00154dc0	uVar6	maskWordHi	INFERRED	maskSelect >> 0x10, byte rotation of the mask select word for component 0	^\s*uVar6\ =\ \(uint\)local_88\ >>\ 0x10;$	+1	all	all
+use	FUN_00154dc0	uVar6	instFlags	CONFIRMED	inst[5] (+0x14) flag word before the rebuild; bit 1 restored afterwards	^\s*uVar6\ =\ param_1\[5\];$	+76	all	all
+use	FUN_00154dc0	uVar7	maskWordTop	INFERRED	maskSelect >> 0x18, byte rotation of the mask select word for component 0	^\s*uVar7\ =\ \(uint\)local_88\ >>\ 0x18;$	+2	all	all
+use	FUN_00154dc0	uVar7	instSrc1Flags	INFERRED	inst[0x2e] (+0xb8): flags of operand record 1, copied to the cnd source 3 modifier bits	^\s*uVar7\ =\ param_1\[0x2e\];$	+34	all	all
+func	Inst__collapseAlgebraic_0014b150	Inst__collapseAddIntoMadMulAddend	CONFIRMED	IrAddFloat (0x12) with no saturate and no abs/negate on the mad operand, whose source is a single-use IrMulAddFloat (0x14) whose source 3 is a single-use IrMulFloat (0x13) with the same +0x124 result modifier: the mul is rebuilt as IrMulAddFloat(c, d, y) with y the other add operand (selects composed lane by lane, operand records copied with IROperand__copyFrom), the add becomes an IrMovFloat of the outer mad whose source-3 select is updated; program+0x1dc counts the rewrite
+local	FUN_0014b150	param_2	program	CONFIRMED	second argument passed as `program` by the peepholeCombine drivers; program+8 is the Compiler, program+0x1dc a statistics counter, program+0x478 the base of the inst+0x160 counters
+local	FUN_0014b150	uVar1	selectByte	INFERRED	select byte read through the mul source 1 / 2 select words for the current lane
+local	FUN_0014b150	cVar2	srcSelectByte	INFERRED	select byte of the add operand (local_f8, record of the other operand) for this lane; 4 = unused
+local	FUN_0014b150	uVar3	selectComponent	INFERRED	component selected by the mad operand select byte for this lane (index into the new select words)
+local	FUN_0014b150	uVar13	outerSrc3Flags	CONFIRMED	flag word (+0xe8) of operand record 3 of the outer mad: bit 0 (negate) is propagated to the rebuilt mul source 3
+local	FUN_0014b150	uVar14	mulSaturate	CONFIRMED	mul +0x120 saturate flag, restored on the rebuilt mad
+local	FUN_0014b150	uVar15	mulResultScale	INFERRED	mul +0x124 result scale code, restored on the rebuilt mad
+local	FUN_0014b150	uVar16	mulDestRegisterOffset	INFERRED	mul +0x98, restored on the rebuilt mad
+local	FUN_0014b150	uVar17	instResultScale	INFERRED	inst +0x124 result scale code, restored on the mov
+local	FUN_0014b150	uVar19	instDestRegisterOffset	INFERRED	inst +0x98, restored on the mov
+local	FUN_0014b150	uVar20	instDestSelect	CONFIRMED	operand record 0 +0x10 of inst: destination select word, restored on the mov
+local	FUN_0014b150	local_108	madOperandSelect	CONFIRMED	select word (+0x10) of the inst operand that read the outer mad
+local	FUN_0014b150	local_104	mulSrc1Select	CONFIRMED	select word (+0x10) of mul operand record 1
+local	FUN_0014b150	local_100	mulSrc2Select	CONFIRMED	select word (+0x10) of mul operand record 2
+local	FUN_0014b150	local_fc	outerSrc3Select	CONFIRMED	select word (+0x10) of operand record 3 of the outer mad (the mul result as read by the mad)
+local	FUN_0014b150	local_f8	otherOperandSelect	CONFIRMED	select word (+0x10) of the inst operand that is not the mad
+local	FUN_0014b150	local_f4	newSelect3	CONFIRMED	select word being built for rebuilt mul source 3 (preset DAT_001b0050)
+local	FUN_0014b150	local_f0	newSelect1	CONFIRMED	select word being built for rebuilt mul source 1 (preset DAT_001b0050)
+local	FUN_0014b150	local_ec	newSelect2	CONFIRMED	select word being built for rebuilt mul source 2 (preset DAT_001b0050)
+local	FUN_0014b150	local_e8	outerSrc3NewSelect	CONFIRMED	select word being built for operand 3 of the outer mad (preset DAT_001b0050)
+local	FUN_0014b150	local_e4	mulSrc2Record	CONFIRMED	IROperand-sized copy of mul operand record 2 (&local_e4 = mulSrc2RecordPtr)
+local	FUN_0014b150	local_e0	mulSrc2Record1	CONFIRMED	second word of the mul operand 2 copy
+local	FUN_0014b150	local_d0	mulSrc2Record5	CONFIRMED	last word of the mul operand 2 copy
+local	FUN_0014b150	local_cc	instMadRecord	CONFIRMED	IROperand-sized copy of the inst operand that read the mad (&local_cc = instMadRecordPtr)
+local	FUN_0014b150	local_c8	instMadRecord1	CONFIRMED	second word of the inst mad operand copy
+local	FUN_0014b150	local_b8	instMadRecord5	CONFIRMED	last word of the inst mad operand copy
+local	FUN_0014b150	local_b4	instOtherRecord	CONFIRMED	IROperand-sized copy of the inst operand that is not the mad (&local_b4 = instOtherRecordPtr)
+local	FUN_0014b150	local_b0	instOtherRecord1	CONFIRMED	second word of the inst other operand copy
+local	FUN_0014b150	local_a0	instOtherRecord5	CONFIRMED	last word of the inst other operand copy
+local	FUN_0014b150	local_9c	mulSrc1Record	CONFIRMED	IROperand-sized copy of mul operand record 1 (&local_9c = mulSrc1RecordPtr)
+local	FUN_0014b150	local_98	mulSrc1Record1	CONFIRMED	second word of the mul operand 1 copy
+local	FUN_0014b150	local_88	mulSrc1Record5	CONFIRMED	last word of the mul operand 1 copy
+local	FUN_0014b150	local_78	mulDepthAboveBase	INFERRED	mul+0x160 - program[0x478], clamped at 0, restored on the rebuilt mad
+local	FUN_0014b150	local_74	outerMad	CONFIRMED	the IrMulAddFloat source of inst whose source 3 is the mul
+local	FUN_0014b150	local_70	otherAddend	CONFIRMED	the inst operand that is not the outer mad: becomes source 3 of the rebuilt mul
+local	FUN_0014b150	local_6c	instMadRecordPtr	CONFIRMED	&instMadRecord, copied onto the mov source with IROperand__copyFrom
+local	FUN_0014b150	local_68	instOtherRecordPtr	CONFIRMED	&instOtherRecord, copied onto the rebuilt mul source 3
+local	FUN_0014b150	local_64	mulSrc1RecordPtr	CONFIRMED	&mulSrc1Record, copied onto rebuilt mul source 1
+local	FUN_0014b150	local_60	mulSrc2RecordPtr	CONFIRMED	&mulSrc2Record, copied onto rebuilt mul source 2
+use	FUN_0014b150	iVar7	mulInst	CONFIRMED	the IrMulFloat (0x13) addend (source 3) of the outer mad; rebuilt as IrMulAddFloat	^\s*iVar7\ =\ FUN_00105594\(iVar5,3\);$	+189	all	all
+use	FUN_0014b150	iVar7	prevNode	INFERRED	inst+4: list neighbour after which the mov is re-inserted	^\s*iVar7\ =\ \*\(int\ \*\)\(param_1\ \+\ 4\);$	+3	all	all
+use	FUN_0014b150	iVar7	depthBase	INFERRED	*(program+0x478): base of the inst+0x160 counter	^\s*iVar7\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x478\);$	+2	all	all
+use	FUN_0014b150	iVar8	lanesAllWritten	INFERRED	IRInst__sourceLanesAllWritten(inst, 1)	^\s*\(\(\(\(\*\(uint\ \*\)\(param_1\ \+\ 0xb8\)\ \&\ 2\)\ ==\ 0\ \&\&\ \(iVar8\ =\ FUN_000f48ec\(param_1,1\),\ iVar8\ !=\ 0\)\)$	+0	all	all
+use	FUN_0014b150	iVar21	src1Opcode	CONFIRMED	opcode of add source 1 (tested for IrMulAddFloat 0x14)	^\s*iVar21\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar4\ \+\ 0x88\)\ \+\ 8\);$	+6	all	all
+use	FUN_0014b150	iVar21	checkResult	INFERRED	IRInst__hasSingleUse / IRInst__sourceLanesAllWritten results for the mad source	^\s*\(\(\(\(iVar21\ =\ FUN_0010497c\(iVar4,param_2\),\ iVar21\ !=\ 0\ \&\&\ \(\*\(int\ \*\)\(iVar4\ \+\ 0x120\)\ ==\ 0\)\)\ \&\&$	+4	all	all
+use	FUN_0014b150	iVar21	lane	INFERRED	lane 0..3 of the select-word build loop	^\s*iVar21\ =\ 0;$	+14	all	all
+use	FUN_0014b150	iVar21	mulPrevNode	INFERRED	mul+4: list neighbour after which the rebuilt mad is re-inserted	^\s*iVar21\ =\ \*\(int\ \*\)\(iVar7\ \+\ 4\);$	+4	all	all
+use	FUN_0014b150	iVar18	src2Opcode	CONFIRMED	opcode of add source 2 (tested for IrMulAddFloat 0x14)	^\s*iVar18\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar5\ \+\ 0x88\)\ \+\ 8\);$	+29	all	all
+use	FUN_0014b150	iVar18	instExtraSource	INFERRED	source at index numSources of inst when it has the extra-source layout, re-attached to the mov	^\s*iVar18\ =\ 0;$	+105	all	all
+use	FUN_0014b150	iVar4	reassocOk	INFERRED	FUN_00104800(otherAddend, mul): the other add operand can be moved below the mad	^\s*iVar4\ =\ FUN_00104800\(local_70,iVar7\);$	+1	all	all
+use	FUN_0014b150	iVar4	mulExtraSource	INFERRED	source at index numSources of the mul when it has the extra-source layout, re-attached to the rebuilt mad	^\s*iVar4\ =\ 0;$	+115	all	all
+use	FUN_0014b150	iVar5	instDepthAboveBase	INFERRED	inst+0x160 - program[0x478], clamped at 0, restored on the mov	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x160\)\ \-\ \*\(int\ \*\)\(param_2\ \+\ 0x478\);$	+105	all	all
+use	FUN_0014b150	iVar6	lanesWritten	INFERRED	IRInst__sourceLanesAllWritten(inst / mad, source) result	^\s*iVar6\ =\ FUN_000f48ec\(param_1,2\);$	+1	all	all
+use	FUN_0014b150	iVar6	lanesWritten	INFERRED	IRInst__sourceLanesAllWritten(inst / mad, source) result	^\s*iVar6\ =\ FUN_000f48ec\(iVar5,3\);$	+1	all	all
+use	FUN_0014b150	iVar6	lanesLeft	INFERRED	countdown of the four lanes	^\s*iVar6\ =\ 4;$	+14	all	all
+use	FUN_0014b150	iVar6	depthBase2	INFERRED	*(program+0x478): base of the inst+0x160 counter	^\s*iVar6\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x478\);$	+2	all	all
+use	FUN_0014b150	uVar11	instSaturate	CONFIRMED	inst+0x120 saturate flag, restored on the mov	^\s*uVar11\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x120\);$	+95	all	all
+use	FUN_0014b150	uVar22	madOperandIndex	CONFIRMED	index (1 or 2) of the inst operand that read the outer mad	^\s*uVar22\ =\ 1;$	+0	all	all
+use	FUN_0014b150	uVar22	madOperandIndex	CONFIRMED	index (1 or 2) of the inst operand that read the outer mad	^\s*uVar22\ =\ 2;$	+0	all	all
+use	FUN_0014b150	uVar22	madOperandIndex	CONFIRMED	index (1 or 2) of the inst operand that read the outer mad	^\s*uVar12\ =\ FUN_001054ec\(param_1,uVar22\);$	+0	all	all
+use	FUN_0014b150	uVar22	madOperandIndex	CONFIRMED	index (1 or 2) of the inst operand that read the outer mad	^\s*iVar6\ =\ FUN_001054ec\(param_1,uVar22\);$	+0	all	all
+use	FUN_0014b150	uVar22	mulDestSelect	CONFIRMED	operand record 0 +0x10 of the outer mad: destination select word stored at mul+0x9c	^\s*uVar22\ =\ \*\(undefined4\ \*\)\(iVar6\ \+\ 0x10\);$	+6	all	all
+use	FUN_0014b150	uVar22	rebuiltSrc1Select	CONFIRMED	newSelect1: select word of rebuilt mul source 1	^\s*uVar22\ =\ local_f0;$	+2	all	all
+use	FUN_0014b150	uVar22	rebuiltSrc2Select	CONFIRMED	newSelect2: select word of rebuilt mul source 2	^\s*uVar22\ =\ local_ec;$	+2	all	all
+use	FUN_0014b150	uVar22	rebuiltSrc3Select	CONFIRMED	newSelect3: select word of rebuilt mul source 3	^\s*uVar22\ =\ local_f4;$	+2	all	all
+use	FUN_0014b150	uVar22	outerSrc3SelectOut	CONFIRMED	outerSrc3NewSelect: select word of operand 3 of the outer mad	^\s*uVar22\ =\ local_e8;$	+2	all	all
+use	FUN_0014b150	uVar23	otherOperandIndex	CONFIRMED	index (2 or 1) of the inst operand that is not the mad	^\s*uVar23\ =\ 2;$	+0	all	all
+use	FUN_0014b150	uVar23	otherOperandIndex	CONFIRMED	index (2 or 1) of the inst operand that is not the mad	^\s*uVar23\ =\ 1;$	+0	all	all
+use	FUN_0014b150	uVar23	otherOperandIndex	CONFIRMED	index (2 or 1) of the inst operand that is not the mad	^\s*uVar12\ =\ FUN_001054ec\(param_1,uVar23\);$	+0	all	all
+use	FUN_0014b150	uVar23	otherOperandIndex	CONFIRMED	index (2 or 1) of the inst operand that is not the mad	^\s*iVar6\ =\ FUN_001054ec\(param_1,uVar23\);$	+0	all	all
+func	Inst__collapseAlgebraic_0014bdbc	Inst__collapseMulOfAddWithUnitConstant	CONFIRMED	unless OPT 0x2a is on: IrMulFloat (0x13) one of whose sources is an IrAddFloat (0x12, no saturate / result modifier, no abs on the mul operand, no extra source) with a constant source whose every examined lane is +1.0 or -1.0 of one sign: (x +- 1) * y is rebuilt as IrMulAddFloat (0x14) of (x, y, +-y) with the negate flags xor-ed; presub sources are cloned; program+0x1d0 counts the rewrite
+local	FUN_0014bdbc	param_2	program	CONFIRMED	second argument passed as `program` by the peepholeCombine drivers; program+8 is the Compiler, program+0x1d0 a statistics counter, program+0x478 the base of the inst+0x160 counters
+local	FUN_0014bdbc	iVar20	compiler	CONFIRMED	*(program+8): the Compiler, passed to Compiler__isOptionEnabled, IRInst__create sources and its HwLimits (compiler+0x30c)
+local	FUN_0014bdbc	bVar1	allUnit	INFERRED	cleared when an examined lane of the constant is neither +1.0 nor -1.0 (or the sign changes between lanes); later the lane / source loop continue flags
+local	FUN_0014bdbc	fVar2	constantLane	CONFIRMED	constant lane value read from the Add constant source (+0x20 + component*0x18), compared with -1.0 and 1.0
+local	FUN_0014bdbc	uVar14	instResultScale	INFERRED	inst+0x124 result scale code, copied to the new mad
+local	FUN_0014bdbc	uVar15	otherSelect	CONFIRMED	select word (+0x10) of the mul operand that is not the add; also the select of mad source 3
+local	FUN_0014bdbc	piVar9	madSrc1Def	CONFIRMED	the non-constant source of the add (IRInst__getOperandSource(add, other index)); replaced by a clone when it is a presub; mad source iVar17
+local	FUN_0014bdbc	piVar12	madSrc3Def	CONFIRMED	the other mul source (mulOtherSource), replaced by a clone when it is a presub; mad source 3
+local	FUN_0014bdbc	local_c8	instDestSelect	CONFIRMED	select word (+0x10) of operand record 0 of inst (destination): lanes with byte 0 are the written lanes examined
+local	FUN_0014bdbc	local_c4	mulOperandSelectWord	CONFIRMED	select word (+0x10) of the mul operand that is the add
+local	FUN_0014bdbc	local_c0	addSrcSelectWord	CONFIRMED	select word (+0x10) of the add operand being examined (constant candidate)
+local	FUN_0014bdbc	local_bc	addDestSelectWord	CONFIRMED	select word (+0x10) of operand record 0 of the add (its destination)
+local	FUN_0014bdbc	local_b8	lastOperandRecord	CONFIRMED	buffer filled by IRInst__readLastOperand(inst): extra source record
+local	FUN_0014bdbc	local_b4	lastOperandSource	CONFIRMED	word 1 of the lastOperandRecord buffer (the extra source, tested != 0)
+local	FUN_0014bdbc	local_a4	lastOperandRecord5	INFERRED	sixth word of the lastOperandRecord buffer (zeroed before the read)
+local	FUN_0014bdbc	local_98	composedSelect	CONFIRMED	SelectWord__compose(add operand select, mulOperandSelectWord): select word of mad source iVar17
+local	FUN_0014bdbc	local_94	addOtherAbs	INFERRED	bit 1 (abs) of the add operand flags that is not the constant
+local	FUN_0014bdbc	local_90	addOperandNegate	INFERRED	bit 0 (negate) of the mul operand flags that is the add
+local	FUN_0014bdbc	local_8c	otherOperandAbs	INFERRED	bit 1 (abs) of the flags of the mul operand that is not the add
+local	FUN_0014bdbc	local_88	otherOperandNegate	INFERRED	bit 0 (negate) of the flags of the mul operand that is not the add
+local	FUN_0014bdbc	local_84	mulOtherSource	CONFIRMED	definition of the mul operand that is not the add
+local	FUN_0014bdbc	local_80	instSaturate	CONFIRMED	inst+0x120 saturate flag copied to the new mad
+local	FUN_0014bdbc	local_7c	useCount	CONFIRMED	IRInst__useCount(inst), added to program[0x478] for the new mad inst+0x160
+local	FUN_0014bdbc	local_78	insertAfter	INFERRED	inst+4: list neighbour after which instructions are inserted; moves to each cloned presub that is inserted
+local	FUN_0014bdbc	local_74	composedSelectCopy	CONFIRMED	composedSelect, stored in the select word of mad source iVar17
+local	FUN_0014bdbc	local_70	otherOperandOffset	CONFIRMED	otherSrcIndex * 0x18 + 0x80: byte offset of the other operand record flags
+local	FUN_0014bdbc	local_6c	recordFlagsBase	CONFIRMED	inst + recordOffset: address whose +0x20 is the flag word of the mul operand that is the add
+use	FUN_0014bdbc	iVar17	mulSrcIndex	CONFIRMED	1-based index (1, 2) of the mul source that is the add	^\s*iVar17\ =\ 1;$	+134	all	all
+use	FUN_0014bdbc	iVar17	mulSrcIndex	CONFIRMED	loop increment of the mul source index	^\s*bVar1\ =\ iVar17\ !=\ 2;$	+2	all	all
+use	FUN_0014bdbc	iVar17	sourceCount1	INFERRED	virtual slot 5 (0x14) result: source count of the cloned presub, loop bound	^\s*for\ \(iVar5\ =\ 1;\ iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*piVar9\ \+\ 0x14\)\)\(piVar9\),\ iVar5\ <=\ iVar17;$	+1	all	all
+use	FUN_0014bdbc	iVar17	presubSource1	INFERRED	source of the cloned presub whose +0x160 counter is bumped	^\s*iVar17\ =\ FUN_00105594\(piVar9,iVar5\);$	+5	all	all
+use	FUN_0014bdbc	iVar17	sourceCount2	INFERRED	virtual slot 5 (0x14) result: source count of the cloned presub, loop bound	^\s*for\ \(iVar5\ =\ 1;\ iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x14\)\)\(piVar12\),\ iVar5\ <=\ iVar17;$	+1	all	all
+use	FUN_0014bdbc	iVar17	presubSource2	INFERRED	source of the cloned presub whose +0x160 counter is bumped	^\s*iVar17\ =\ FUN_00105594\(piVar12,iVar5\);$	+5	all	all
+use	FUN_0014bdbc	iVar5	recordOffset	CONFIRMED	0x98 + 0x18 * (mulSrcIndex - 1): byte offset of the flag word of the mul operand that is the add	^\s*iVar5\ =\ 0x98;$	+111	all	all
+use	FUN_0014bdbc	iVar5	recordOffset	CONFIRMED	advance of the record offset by 0x18 per mul source	^\s*iVar5\ =\ iVar5\ \+\ 0x18;$	+0	all	all
+use	FUN_0014bdbc	iVar5	presubFlag	INFERRED	IRInst vslot 23 (0x5c, isPresub) of madSrc1Def	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar9\ \+\ 0x5c\)\)\(piVar9\);$	+1	all	all
+use	FUN_0014bdbc	iVar5	srcLoopIndex	INFERRED	1-based index over the sources of the cloned presub	^\s*for\ \(iVar5\ =\ 1;\ iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*piVar9\ \+\ 0x14\)\)\(piVar9\),\ iVar5\ <=\ iVar17;$	+7	all	all
+use	FUN_0014bdbc	iVar5	presubFlag	INFERRED	IRInst vslot 23 (0x5c, isPresub) of madSrc3Def	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x5c\)\)\(piVar12\);$	+1	all	all
+use	FUN_0014bdbc	iVar5	srcLoopIndex2	INFERRED	1-based index over the sources of the cloned presub	^\s*for\ \(iVar5\ =\ 1;\ iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x14\)\)\(piVar12\),\ iVar5\ <=\ iVar17;$	+7	all	all
+use	FUN_0014bdbc	iVar7	addSrcIndex	CONFIRMED	1-based index (1, 2) of the add source being examined as the constant candidate	^\s*iVar7\ =\ 1;$	+177	all	all
+use	FUN_0014bdbc	iVar8	madOperandBase	INFERRED	inst2 + otherOperandOffset + 0xc: address of the mad operand whose modifier bits are set	^\s*iVar8\ =\ \(int\)pvVar10\ \+\ local_70\ \+\ 0xc;$	+2	all	all
+use	FUN_0014bdbc	iVar8	presubTest	INFERRED	IRInst vslot 23 (0x5c, isPresub) of madSrc1Def	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*piVar9\ \+\ 0x5c\)\)\(piVar9\);$	+1	all	all
+use	FUN_0014bdbc	iVar8	compilerCopy	INFERRED	copy of compiler left in a register by the compiler; passed as a stack argument of the IRInst vslot 23 call that follows	^\s*iVar8\ =\ iVar20;$	+8	all	rhs
+use	FUN_0014bdbc	iVar8	presubTest	INFERRED	IRInst vslot 23 (0x5c, isPresub) of mulOtherSource	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*local_84\ \+\ 0x5c\)\)\(local_84,a1,a2,uVar4,uVar19,iVar8,local_84\);$	+1	lhs	all
+use	FUN_0014bdbc	iVar8	src3Set	INFERRED	IRInst__setOperandSourceIfLegal(inst2, 3, madSrc3Def, ...) result	^\s*iVar8\ =\ FUN_00106230\(pvVar10,3,piVar12,local_8c,uVar16,iVar20\);$	+9	all	all
+use	FUN_0014bdbc	iVar11	madOperand2Base	INFERRED	inst2 + recordOffset + 0xc: address of the mad operand whose modifier bits are set	^\s*iVar11\ =\ \(int\)pvVar10\ \+\ iVar5\ \+\ 0xc;$	+2	all	all
+use	FUN_0014bdbc	iVar11	clonedRegister	INFERRED	cloned presub +0x14c, stored as its destination register	^\s*iVar11\ =\ piVar12\[0x53\];$	+2	all	all
+use	FUN_0014bdbc	iVar13	laneIndex	INFERRED	lane 0..3 of the constant check loop	^\s*iVar13\ =\ 0;$	+21	all	all
+use	FUN_0014bdbc	iVar13	hwResult	INFERRED	HwLimits slot 34 (0x88) result: the abs modifier on the constant source is acceptable	^\s*\(\(iVar13\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(iVar20\ \+\ 0x30c\)\ \+\ 0x88\)\)\(\*\(int\ \*\*\)\(iVar20\ \+\ 0x30c\)\),$	+1	all	all
+use	FUN_0014bdbc	iVar13	otherSrcIndex	CONFIRMED	index of the mul source that is not the add: (mulSrcIndex == 1) + 1	^\s*iVar13\ =\ \(iVar17\ ==\ 1\)\ \+\ 1;$	+41	all	all
+use	FUN_0014bdbc	iVar13	depthBase	INFERRED	*(program+0x478): base of the inst+0x160 counters	^\s*iVar13\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x478\);$	+73	all	all
+use	FUN_0014bdbc	iVar21	lanesLeft	INFERRED	countdown of the four lanes	^\s*iVar21\ =\ 4;$	+25	all	all
+use	FUN_0014bdbc	iVar21	addOtherIndex	CONFIRMED	index of the add source that is not the constant: (addSrcIndex == 1) + 1	^\s*iVar21\ =\ \(iVar7\ ==\ 1\)\ \+\ 1;$	+6	all	all
+use	FUN_0014bdbc	iVar21	clonedRegister2	INFERRED	cloned presub +0x14c, stored as its destination register	^\s*iVar21\ =\ piVar9\[0x53\];$	+2	all	all
+use	FUN_0014bdbc	iVar21	src1Set	INFERRED	IRInst__setOperandSourceIfLegal(inst2, mulSrcIndex, madSrc1Def, ...) result	^\s*iVar21\ =\ FUN_00106230\(pvVar10,iVar17,piVar9,local_94,a2,iVar20\);$	+25	all	all
+use	FUN_0014bdbc	uVar3	addOperandFlags	INFERRED	flag word (+0xa0 words) of the add operand that is the constant	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar7\ \*\ 0x18\ \+\ iVar6\ \+\ 0xa0\);$	+54	all	all
+use	FUN_0014bdbc	uVar4	selectedComponent	INFERRED	component the examined lane reads from the constant source	^\s*uVar4\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)\&local_c0\ \+\ \(uint\)\*\(byte\ \*\)\(\(int\)\&local_c4\ \+\ iVar13\)\);$	+3	all	all
+use	FUN_0014bdbc	uVar4	mulOperandFlags	INFERRED	flag word of the mul operand that is not the add	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_1\ \+\ local_70\ \+\ 0x20\);$	+2	all	all
+use	FUN_0014bdbc	uVar4	addOtherFlags	INFERRED	flag word of the add operand that is not the constant	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar21\ \*\ 0x18\ \+\ iVar6\ \+\ 0xa0\);$	+39	all	all
+use	FUN_0014bdbc	uVar4	callArgScratch	INFERRED	copy of addOtherAbs staged as an argument of the vslot 23 call that follows	^\s*uVar4\ =\ local_94;$	+10	all	all
+use	FUN_0014bdbc	uVar16	unitSign	CONFIRMED	accumulated sign of the unit constant lanes: -1 for -1.0, 1 for +1.0 (a sign change aborts)	^\s*uVar16\ =\ 0;$	+109	all	rhs
+use	FUN_0014bdbc	uVar16	src3Negate	INFERRED	negate flag of mad source 3: xor of the operand negates, the Add other operand negate and the constant sign bit	^\s*uVar16\ =\ local_88\ \^\ local_90\ \^\ uVar3\ \&\ 1\ \^\ uVar16\ >>\ 0x1f;$	+5	lhs	all
+use	FUN_0014bdbc	uVar18	mulOperandSelect	CONFIRMED	select word (+0x10) of the mul operand that is the add, composed with the add source select	^\s*uVar18\ =\ \*\(undefined4\ \*\)\(iVar8\ \+\ 0x10\);$	+7	all	all
+use	FUN_0014bdbc	uVar18	destRegisterOffset	INFERRED	inst+0x98, copied to inst2+0x98	^\s*uVar18\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x98\);$	+7	all	all
+use	FUN_0014bdbc	uVar19	instFlags	CONFIRMED	inst+0x14 flag word (bit 1 copied to the new mad, bit 0x200 = extra source)	^\s*uVar19\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x14\);$	+12	all	all
+use	FUN_0014bdbc	uVar19	callArgScratch2	INFERRED	copy of the negate flag staged as an argument of the vslot 23 call that follows	^\s*uVar19\ =\ a2;$	+9	all	all
+func	Inst__collapseAlgebraic_0014d8f8	Inst__collapseThreeComponentSumToDot3	CONFIRMED	IrAddFloat (0x12) of an add and a third operand that all read the same defining value (FUN_00147044 same-value tests of inner source 1 / 2 against the outer operand), single-component writes, no abs and equal negate bits: the three scalar component reads are packed into one select word (checked with HwLimits slots 66 (0x108) / 64 (0x100) over the permutations) and the outer add is rebuilt in place as IrDot3 (0x1c) of that vector and the literal 1.0 (FUN_000f79c4), the inner add is released
+local	FUN_0014d8f8	bVar1	innerMask0	CONFIRMED	byte +0xc of the inner add (per-lane write mask byte 0); the four bytes must sum to 1
+local	FUN_0014d8f8	bVar2	innerMask1	CONFIRMED	byte +0xd of the inner add (write mask byte 1)
+local	FUN_0014d8f8	bVar3	innerMask2	CONFIRMED	byte +0xe of the inner add (write mask byte 2)
+local	FUN_0014d8f8	uVar4	innerSel1	CONFIRMED	select byte of inner source 1 at the component the inner add writes
+local	FUN_0014d8f8	uVar5	innerSel2	CONFIRMED	select byte of inner source 2 at the component the inner add writes
+local	FUN_0014d8f8	uVar6	outerSel	CONFIRMED	select byte of the outer operand (the one that is not the inner add) at the component the outer add writes
+local	FUN_0014d8f8	uVar7	nodeFlags	CONFIRMED	node+0x14 flag word before the rebuild (bit 1 restored afterwards)
+local	FUN_0014d8f8	piVar12	hwLimits	CONFIRMED	*(compiler+0x30c): the HwLimits object whose slots 66 (0x108) and 64 (0x100) validate the packed select word
+local	FUN_0014d8f8	uVar15	negateFlag	CONFIRMED	bit 0 of the inner add operand 2 flags (equal to the outer operand negate bit): negate bit of the dot3 source 1
+local	FUN_0014d8f8	uVar16	saturate	CONFIRMED	node+0x120 saturate flag restored after the rebuild
+local	FUN_0014d8f8	uVar19	resultScale	INFERRED	node+0x124 result scale code restored after the rebuild
+local	FUN_0014d8f8	local_68	outerSelectWord	CONFIRMED	select word (+0x10) of the outer add operand that is not the inner add
+local	FUN_0014d8f8	local_64	innerSrc2SelectWord	CONFIRMED	select word (+0x10) of inner add operand 2
+local	FUN_0014d8f8	local_60	innerSrc1SelectWord	CONFIRMED	select word (+0x10) of inner add operand 1
+local	FUN_0014d8f8	local_5c	packedSelect	CONFIRMED	select word of the dot3 source 1: the three component select bytes (innerSel1, innerSel2, outerSel) packed into lanes 0..2, permuted until HwLimits accepts it
+local	FUN_0014d8f8	local_58	mergedDest1	CONFIRMED	SelectWord__mergeWrittenLanes of the destination selects of the two inner sources
+local	FUN_0014d8f8	local_54	mergedDest2	CONFIRMED	SelectWord__mergeWrittenLanes(mergedDest1, destination select of the outer operand): destination select of the merged source
+local	FUN_0014d8f8	local_50	mergedWriteMask	CONFIRMED	WriteMask__fromSelectWord(mergedDest2)
+local	FUN_0014d8f8	local_4c	mergedUnusedSelect	CONFIRMED	SelectWord__maskUnused(0x10203, mergedWriteMask): select word of the merged source operands 1 and 2
+use	FUN_0014d8f8	iVar17	extraSource	INFERRED	source at index numSources of node when it has the extra-source layout (flag 0x200), re-attached with IRInst__setExtraOperandSource	^\s*iVar17\ =\ 0;$	+256	all	all
+use	FUN_0014d8f8	iVar8	sameValue	CONFIRMED	FUN_00147044: the two sources have the same defining value	^\s*iVar8\ =\ \(\(int\ \(\*\)\(\)\)FUN_00147044\)\(uVar9,uVar10\);$	+6	all	all
+use	FUN_0014d8f8	iVar8	src1Temp	INFERRED	IRInst__getOperandSource(node, 1) used to test the modifier / result words of the inner add	^\s*\(iVar8\ =\ FUN_00105594\(param_1,1\),\ \(\*\(uint\ \*\)\(iVar8\ \+\ 0xb8\)\ \&\ 2\)\ ==\ 0\)\)\ \&\&$	+6	all	all
+use	FUN_0014d8f8	iVar8	sameValue	CONFIRMED	FUN_00147044: the two sources have the same defining value	^\s*iVar8\ =\ \(\(int\ \(\*\)\(\)\)FUN_00147044\)\(uVar9,uVar10\);$@3	+1	all	all
+use	FUN_0014d8f8	iVar8	sameValue	CONFIRMED	FUN_00147044: the two sources have the same defining value	^\s*iVar8\ =\ \(\(int\ \(\*\)\(\)\)FUN_00147044\)\(uVar9,uVar10\);$@4	+1	all	all
+use	FUN_0014d8f8	uVar9	outerIndex	CONFIRMED	index (2 or 1) of the node operand that is not the inner add	^\s*uVar9\ =\ 2;$	+194	all	all
+use	FUN_0014d8f8	uVar10	nodeDestSelect	CONFIRMED	operand record 0 +0x10 of node: destination select word, restored to node+0x9c	^\s*uVar10\ =\ \*\(undefined4\ \*\)\(iVar11\ \+\ 0x10\);$	+119	all	all
+use	FUN_0014d8f8	uVar9	finalSelect	CONFIRMED	local_5c: packed select word stored in node operand record 1	^\s*uVar9\ =\ local_5c;$	+2	all	all
+use	FUN_0014d8f8	iVar11	splatComponent	CONFIRMED	SelectWord__splatComponent(destination select): the single component written; indexes the source select word	^\s*iVar11\ =\ FUN_000f37b8\(uVar18\);$	+1	all	all
+use	FUN_0014d8f8	iVar11	splatComponent	CONFIRMED	SelectWord__splatComponent(destination select): the single component written; indexes the source select word	^\s*iVar11\ =\ FUN_000f37b8\(uVar18\);$@2	+1	all	all
+use	FUN_0014d8f8	iVar11	splatComponent	CONFIRMED	SelectWord__splatComponent(destination select): the single component written; indexes the source select word	^\s*iVar11\ =\ FUN_000f37b8\(uVar10\);$	+1	all	all
+use	FUN_0014d8f8	iVar11	isPresub	INFERRED	IRInst vslot 23 (0x5c, isPresub) of the inner source 1	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x5c\)\)\(piVar12\);$	+76	all	all
+use	FUN_0014d8f8	iVar11	depthBase	INFERRED	*(pass+0x478): base of the node+0x160 counter	^\s*iVar11\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x478\);$	+3	all	all
+use	FUN_0014d8f8	iVar13	selectAccepted	CONFIRMED	HwLimits slot 66 (0x108) / 64 (0x100) result for the packed select word local_5c	^\s*iVar13\ =\ \(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x108\)\)\(piVar12,\&local_5c\);$	+72	all	all
+use	FUN_0014d8f8	uVar18	innerDestSelect	CONFIRMED	operand record 0 +0x10 of the inner add: destination select word	^\s*uVar18\ =\ \*\(undefined4\ \*\)\(iVar11\ \+\ 0x10\);$	+9	all	all
+use	FUN_0014d8f8	uVar18	destRegister	CONFIRMED	node+0x94: destination register, restored after the rebuild	^\s*uVar18\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x94\);$	+11	all	all
+use	FUN_0014d8f8	uVar20	innerSrcDestSelect	INFERRED	operand record 0 +0x10 of the inner add source 1 (destination select merged with the other sources)	^\s*uVar20\ =\ \*\(undefined4\ \*\)\(iVar11\ \+\ 0x10\);$	+3	all	all
+use	FUN_0014d8f8	uVar20	destRegisterOffset	INFERRED	node+0x98, restored after the rebuild	^\s*uVar20\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x98\);$	+11	all	all
+local	FUN_00129b48	param_3	replacedSourceIndex	CONFIRMED	arg 2 of IRInst__setOperandSourceIfLegal (the source index being replaced); that source is taken from inst2 instead of inst
+local	FUN_00129b48	param_7	compiler	CONFIRMED	arg 5 of IRInst__setOperandSourceIfLegal; *(compiler+0x6c4)+0x30 bit 3 selects how the register of a source is read
+local	FUN_00129b48	iVar2	tableEntry	INFERRED	entry read from the seen-register table (-1 ends the list)
+local	FUN_00129b48	local_58	seenRegs	INFERRED	10 words: [0..2] distinct registers of class group A (types 2, 0xc, 0x26, 0x28), [3..5] of group B (types 0x29, 0x37), initialised to -1
+use	FUN_00129b48	iVar3	tableInitOffset	INFERRED	byte offset stepped by 4 while seenRegs is filled with -1	^\s*iVar3\ =\ 0;$	+6	all	all
+use	FUN_00129b48	bVar1	moreInit	INFERRED	offset != 8 continue flag of the table initialisation loop	^\s*bVar1\ =\ iVar3\ !=\ 8;$	+4	all	all
+use	FUN_00129b48	bVar1	slotsFull	INFERRED	slot index == 2: the group A / B list already holds three registers	^\s*if\ \(\(iVar6\ ==\ iVar2\)\ \|\|\ \(bVar1\ =\ iVar9\ ==\ 2,\ iVar9\ =\ iVar9\ \+\ 1,\ bVar1\)\)$	+0	all	all
+use	FUN_00129b48	bVar1	slotsFull	INFERRED	slot index == 2: the group A / B list already holds three registers	^\s*if\ \(\(iVar6\ ==\ iVar2\)\ \|\|\ \(bVar1\ =\ iVar9\ ==\ 2,\ iVar9\ =\ iVar9\ \+\ 1,\ bVar1\)\)$@2	+0	all	all
+use	FUN_00129b48	iVar6	numSources	CONFIRMED	virtual slot 5 (0x14) of inst: loop bound over its sources	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x14\)\)\(param_2\);$	+1	all	all
+use	FUN_00129b48	iVar6	regNumber	INFERRED	register number (+0x94) of the source (of inst2 for the replaced source)	^\s*iVar6\ =\ \*\(int\ \*\)\(param_4\[0x23\]\ \+\ 8\);$	+0	all	all
+use	FUN_00129b48	iVar6	regNumber	INFERRED	register number of the source stored in inst3 (+0xac)	^\s*iVar6\ =\ piVar8\[0x2b\];$	+0	all	all
+use	FUN_00129b48	iVar6	regNumber	INFERRED	register number compared with the seen registers	^\s*if\ \(\(iVar6\ ==\ iVar2\)\ \|\|\ \(bVar1\ =\ iVar9\ ==\ 2,\ iVar9\ =\ iVar9\ \+\ 1,\ bVar1\)\)$	+0	all	all
+use	FUN_00129b48	iVar6	regNumber	INFERRED	register number recorded in the group A list	^\s*local_58\[iVar9\]\ =\ iVar6;$	+0	all	all
+use	FUN_00129b48	iVar6	regNumber	INFERRED	register number compared with the seen registers	^\s*if\ \(\(iVar6\ ==\ iVar2\)\ \|\|\ \(bVar1\ =\ iVar9\ ==\ 2,\ iVar9\ =\ iVar9\ \+\ 1,\ bVar1\)\)$@2	+0	all	all
+use	FUN_00129b48	iVar6	regNumber	INFERRED	register number recorded in the group B list	^\s*local_58\[iVar9\ \+\ 3\]\ =\ iVar6;$	+0	all	all
+use	FUN_00129b48	iVar6	isMixResult	INFERRED	IRInst vslot 24 (0x60, isMix) of inst2	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*param_4\ \+\ 0x60\)\)\(param_4\);$	+1	all	all
+use	FUN_00129b48	iVar6	regNumber	INFERRED	inst2 +0x94: register number	^\s*iVar6\ =\ param_4\[0x25\];$	+0	all	all
+use	FUN_00129b48	iVar6	defTemp	INFERRED	IRInst__getOperandSource(inst2, 1): the source behind the mix	^\s*iVar6\ =\ FUN_00105594\(param_4,1\);$	+1	all	all
+use	FUN_00129b48	iVar6	defTemp	INFERRED	IRInst__getOperandSource(inst2, 1): the source behind the mix	^\s*iVar6\ =\ FUN_00105594\(param_4,1\);$@2	+0	all	all
+use	FUN_00129b48	iVar6	defTemp	INFERRED	source behind the mix (read side)	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar6\ \+\ 0x94\);$	+0	rhs	rhs
+use	FUN_00129b48	iVar6	regNumber	INFERRED	+0x94 of the source behind the mix: register number	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar6\ \+\ 0x94\);$	+0	lhs	lhs
+use	FUN_00129b48	iVar6	defTemp	INFERRED	IRInst__getOperandSource(inst, index): tested for non-null	^\s*iVar6\ =\ FUN_00105594\(param_2,iVar10\);$	+1	all	all
+use	FUN_00129b48	iVar6	isMixResult	INFERRED	IRInst vslot 24 (0x60, isMix) of the source	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x60\)\)\(piVar4\);$	+1	all	all
+use	FUN_00129b48	iVar6	defTemp	INFERRED	IRInst__getOperandSource(inst, index)	^\s*iVar6\ =\ FUN_00105594\(param_2,iVar10\);$@2	+1	all	all
+use	FUN_00129b48	iVar6	defTemp	INFERRED	IRInst__getOperandSource(inst, index)	^\s*iVar6\ =\ FUN_00105594\(param_2,iVar10\);$@3	+0	all	all
+use	FUN_00129b48	iVar6	defTemp	INFERRED	source (read side)	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar6\ \+\ 0x94\);$@2	+0	rhs	rhs
+use	FUN_00129b48	iVar6	regNumber	INFERRED	+0x94 of the source: register number	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar6\ \+\ 0x94\);$@2	+0	lhs	lhs
+use	FUN_00129b48	iVar6	defTemp	INFERRED	source behind the mix	^\s*iVar6\ =\ FUN_00105594\(uVar5,1\);$	+1	all	all
+use	FUN_00129b48	iVar6	defTemp	INFERRED	source behind the mix	^\s*iVar6\ =\ FUN_00105594\(uVar5,1\);$@2	+0	all	all
+use	FUN_00129b48	iVar6	defTemp	INFERRED	source behind the mix (read side)	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar6\ \+\ 0x94\);$@3	+0	rhs	rhs
+use	FUN_00129b48	iVar6	regNumber	INFERRED	+0x94 of the source behind the mix: register number	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar6\ \+\ 0x94\);$@3	+0	lhs	lhs
+use	FUN_00129b48	iVar9	regClass	INFERRED	register type (+0x98 / inst2[0x26]) of the source; the switch groups types 2, 0xc, 0x26, 0x28 (list A) and 0x29, 0x37 (list B)	^\s*iVar9\ =\ param_4\[0x26\];$	+0	all	all
+use	FUN_00129b48	iVar9	regClass	INFERRED	register type of the source stored in inst3 (+0xb0)	^\s*iVar9\ =\ piVar8\[0x2c\];$	+0	all	all
+use	FUN_00129b48	iVar9	regClass	INFERRED	register type switched on to pick list A or B	^\s*switch\(iVar9\)\ \{$	+0	all	all
+use	FUN_00129b48	iVar9	slotIndex	INFERRED	index of the first free slot of list A while scanning for the register (stops at 3)	^\s*iVar9\ =\ 0;$	+10	all	all
+use	FUN_00129b48	iVar9	slotIndex	INFERRED	index of the first free slot of list B while scanning for the register (stops at 3)	^\s*iVar9\ =\ 0;$@2	+10	all	all
+use	FUN_00129b48	iVar9	regClass	INFERRED	inst2 +0x98: register type	^\s*iVar9\ =\ param_4\[0x26\];$@2	+0	all	all
+use	FUN_00129b48	iVar9	regClass	INFERRED	source +0x98: register type	^\s*iVar9\ =\ \*\(int\ \*\)\(iVar6\ \+\ 0x98\);$	+0	all	all
+use	FUN_00129b48	iVar9	regClass	INFERRED	source +0x98: register type	^\s*iVar9\ =\ \*\(int\ \*\)\(iVar6\ \+\ 0x98\);$@2	+0	all	all
+use	FUN_00129b48	iVar9	regClass	INFERRED	source +0x98: register type	^\s*iVar9\ =\ \*\(int\ \*\)\(iVar6\ \+\ 0x98\);$@3	+0	all	all
+local	FUN_00128430	fVar1	uniformValue	CONFIRMED	value of the first used lane; every other used lane must equal it for the vector to be uniform
+local	FUN_00128430	bVar2	firstLane	CONFIRMED	true until the first lane whose select byte is not 4 has been read
+local	FUN_00128430	puVar4	fillCursor	CONFIRMED	walks the four words of the uniform vector buffer (preset 0x7ffffffe)
+local	FUN_00128430	iVar10	lanesLeft2	INFERRED	countdown of the four lanes while the uniform vector is filled
+local	FUN_00128430	uVar8	constantPool	CONFIRMED	*(program+0x3ac): the Program constant pool passed to FUN_000f5f94 / FUN_000f5248 / FUN_000f57f0
+local	FUN_00128430	local_50	uniformValueCopy	INFERRED	stack copy of the uniform value written in the fill loop (never read)
+local	FUN_00128430	local_b8	constVec0	INFERRED	first word of the 7-word constant descriptor / uniform vector buffer
+local	FUN_00128430	uStack_b4	constVec1	INFERRED	second word of the constant descriptor buffer
+local	FUN_00128430	uStack_b0	constVec2	INFERRED	third word of the constant descriptor buffer
+local	FUN_00128430	uStack_ac	constVec3	INFERRED	fourth word of the constant descriptor buffer
+local	FUN_00128430	local_a8	constVec4	INFERRED	fifth word of the constant descriptor buffer (passed by value to FUN_000f5248)
+local	FUN_00128430	local_a4	constVec5	INFERRED	sixth word of the constant descriptor buffer
+local	FUN_00128430	local_a0	constVec6	INFERRED	seventh word of the constant descriptor buffer
+use	FUN_00128430	piVar3	laneCursor	CONFIRMED	walks the four select bytes of laneSwizzle	^\s*piVar3\ =\ param_4;$	+15	all	all
+use	FUN_00128430	piVar3	laneSwizzleArg	INFERRED	copy of laneSwizzle left in a register and passed on as a stack argument of FUN_000f5f94 / FUN_000f57f0	^\s*piVar3\ =\ param_4;$@2	+39	all	all
+use	FUN_00128430	iVar6	isUniform	CONFIRMED	cleared when two used lanes hold different values; also read as a pass-through argument of FUN_000f5f94	^\s*iVar6\ =\ 1;$	+45	all	rhs
+use	FUN_00128430	iVar6	foundConstant	INFERRED	FUN_000f5f94(constant pool, constants, laneSwizzle): existing constant instruction, returned when non-zero	^\s*iVar6\ =\ FUN_000f5f94\(uVar8,param_3,param_4,piVar3,pcVar5,iVar6,pdVar7\);$	+2	lhs	all
+use	FUN_00128430	iVar6	foundExact	INFERRED	FUN_000f5248(pool, constant descriptor): result for the special (0,1,0,0) vector	^\s*iVar6\ =\ FUN_000f5248\(uVar8,local_b8,uStack_b4,uStack_b0,uStack_ac,local_a8,local_a4,local_a0\);$	+1	all	all
+use	FUN_00128430	iVar6	candidate	INFERRED	FUN_000f57f0(pool, constants, laneSwizzle): candidate constant, returned if HwLimits slot 64 (0x100) accepts laneSwizzle	^\s*iVar6\ =\ FUN_000f57f0\(uVar8,param_3,param_4,piVar3\);$	+2	all	all
+use	FUN_00128430	iVar9	lanesLeft	INFERRED	countdown of the four lanes	^\s*iVar9\ =\ 4;$	+18	all	all
+use	FUN_00128430	iVar9	existingConstant	CONFIRMED	FUN_000f6a04(program, constants, select): an existing constant instruction with these lane values, returned when non-zero	^\s*iVar9\ =\ FUN_000f6a04\(param_2,param_3,\*param_4\);$	+0	all	all
+use	FUN_00128430	iVar9	lanesLeft	INFERRED	countdown of the four lanes while the uniform vector is initialised	^\s*iVar9\ =\ 4;$@2	+6	all	all
+use	FUN_00128430	iVar9	byteOffset	INFERRED	byte offset into the uniform vector buffer	^\s*iVar9\ =\ 0;$	+5	all	all
+use	FUN_00128430	iVar9	existingConstant	CONFIRMED	FUN_000f6a04(program, uniform vector, 0x10203): an existing constant instruction, returned when non-zero	^\s*iVar9\ =\ FUN_000f6a04\(param_2,\&local_b8,0x10203\);$	+3	all	all
+use	FUN_00128430	iVar9	acceptsSwizzle	CONFIRMED	HwLimits slot 64 (0x100) result for laneSwizzle	^\s*if\ \(\(iVar6\ !=\ 0\)\ \&\&\ \(iVar9\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x100\)\)\(param_1,param_4\),\ iVar9\ !=\ 0\)\)\ \{$	+0	all	all
+local	FUN_00129eb4	fVar1	uniformValue	CONFIRMED	value of the first used lane; every other used lane must equal it for the vector to be uniform
+local	FUN_00129eb4	bVar2	firstLane	CONFIRMED	true until the first lane whose select byte is not 4 has been read
+local	FUN_00129eb4	puVar4	fillCursor	CONFIRMED	walks the four words of the uniform vector buffer (preset 0x7ffffffe)
+local	FUN_00129eb4	iVar10	lanesLeft2	INFERRED	countdown of the four lanes while the uniform vector is filled
+local	FUN_00129eb4	uVar8	constantPool	CONFIRMED	*(program+0x3ac): the Program constant pool passed to FUN_000f5f94 / FUN_000f57f0
+local	FUN_00129eb4	local_20	uniformValueCopy	INFERRED	stack copy of the uniform value written in the fill loop (never read)
+local	FUN_00129eb4	local_38	uniformVec0	CONFIRMED	first word of the 4-word uniform vector buffer passed as &local_38 to FUN_000f6a04
+use	FUN_00129eb4	piVar3	laneCursor	CONFIRMED	walks the four select bytes of laneSwizzle	^\s*piVar3\ =\ param_4;$	+15	all	all
+use	FUN_00129eb4	piVar3	laneSwizzleArg	INFERRED	copy of laneSwizzle left in a register and passed on as a stack argument of FUN_000f5f94 / FUN_000f57f0	^\s*piVar3\ =\ param_4;$@2	+32	all	all
+use	FUN_00129eb4	iVar6	isUniform	CONFIRMED	cleared when two used lanes hold different values; also read as a pass-through argument of FUN_000f5f94	^\s*iVar6\ =\ 1;$	+45	all	rhs
+use	FUN_00129eb4	iVar6	foundConstant	INFERRED	FUN_000f5f94(constant pool, constants, laneSwizzle): existing constant instruction, returned when non-zero	^\s*iVar6\ =\ FUN_000f5f94\(uVar8,param_3,param_4,piVar3,pcVar5,iVar6,pdVar7\);$	+2	lhs	all
+use	FUN_00129eb4	iVar6	candidate	INFERRED	FUN_000f57f0(pool, constants, laneSwizzle): candidate constant, returned when non-zero	^\s*iVar6\ =\ FUN_000f57f0\(uVar8,param_3,param_4,piVar3\);$	+2	all	all
+use	FUN_00129eb4	iVar9	lanesLeft	INFERRED	countdown of the four lanes	^\s*iVar9\ =\ 4;$	+18	all	all
+use	FUN_00129eb4	iVar9	existingConstant	CONFIRMED	FUN_000f6a04(program, constants, select): an existing constant instruction with these lane values, returned when non-zero	^\s*iVar9\ =\ FUN_000f6a04\(param_2,param_3,\*param_4\);$	+0	all	all
+use	FUN_00129eb4	iVar9	lanesLeft	INFERRED	countdown of the four lanes while the uniform vector is initialised	^\s*iVar9\ =\ 4;$@2	+6	all	all
+use	FUN_00129eb4	iVar9	byteOffset	INFERRED	byte offset into the uniform vector buffer	^\s*iVar9\ =\ 0;$	+5	all	all
+use	FUN_00129eb4	iVar9	existingConstant	CONFIRMED	FUN_000f6a04(program, uniform vector, 0x10203): an existing constant instruction, returned when non-zero	^\s*iVar9\ =\ FUN_000f6a04\(param_2,\&local_38,0x10203\);$	+3	all	all
+local	FUN_0012873c	uVar1	laneMask	CONFIRMED	laneSwizzle with its four bytes reversed (big-endian word to byte lanes): mask argument of IRInst__sourceMatchesConstant, byte 0 = lane must match
+local	FUN_0012873c	local_64	constValues	CONFIRMED	four floats of the candidate hardware constant (table at DAT_001aff08, 6 floats per entry, preset to the unknown marker 0x7fff0000)
+local	FUN_0012873c	local_54	negatedValues	CONFIRMED	the candidate constant with every lane negated, tried when IRInst vslot 35 allows a negated source
+local	FUN_0012873c	local_30	negatedLastCopy	INFERRED	stack copy of negatedValues[3] (never read)
+use	FUN_0012873c	pfVar2	fillCursor	CONFIRMED	walks the four floats of constValues / negatedValues while they are preset	^\s*pfVar2\ =\ local_64;$	+12	all	all
+use	FUN_0012873c	pfVar2	tableCursor	CONFIRMED	walks the table of encodable constants (DAT_001aff08 .. DAT_001aff50, 6 floats per entry)	^\s*pfVar2\ =\ \(float\ \*\)\&DAT_001aff08;$	+20	all	all
+use	FUN_0012873c	iVar3	lanesLeft	INFERRED	countdown of the four lanes	^\s*iVar3\ =\ 4;$	+13	all	all
+use	FUN_0012873c	iVar3	matchResult	CONFIRMED	IRInst__sourceMatchesConstant result; for the negated try, IRInst vslot 35 (allowsSourceNegate) first	^\s*iVar3\ =\ FUN_000f5c0c\(param_2,param_3,uVar1,local_64\);$	+7	all	all
+local	FUN_00129a0c	cVar1	laneMaskByte	CONFIRMED	byte of laneMaskWord for this lane: 0 = lane must hold an encodable constant
+local	FUN_00129a0c	fVar2	laneValue	CONFIRMED	constant lane value read from the source definition (+0x20 + component*0x18); must be 0.0, 1.0 or -1.0
+local	FUN_00129a0c	uVar4	result	CONFIRMED	return value: 1 = the source became a literal, 0 = not encodable
+local	FUN_00129a0c	pfVar5	valueCursor	CONFIRMED	walks the four floats of the literal vector being built
+local	FUN_00129a0c	iVar6	lane	CONFIRMED	lane 0..3
+local	FUN_00129a0c	local_58	laneMaskWord	CONFIRMED	laneSwizzle with its four bytes reversed
+local	FUN_00129a0c	local_54	srcSelectWord	CONFIRMED	select word (+0x10) of operand record srcIndex
+local	FUN_00129a0c	local_50	constLane0	CONFIRMED	first of the four floats of the literal vector passed to FUN_000f79c4
+local	FUN_00129a0c	fStack_4c	constLane1	CONFIRMED	second float of the literal vector
+local	FUN_00129a0c	fStack_48	constLane2	CONFIRMED	third float of the literal vector
+local	FUN_00129a0c	fStack_44	constLane3	CONFIRMED	fourth float of the literal vector
+local	FUN_00129a0c	local_30	minusOneBits	INFERRED	stack copy of -1.0 (0xbf800000) written while testing the value against -1.0
+use	FUN_00129a0c	iVar3	isConstant	CONFIRMED	IRInst vslot 18 (0x48, constant load) of the source definition	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x48\)\)\(a0\);$	+1	all	all
+use	FUN_00129a0c	iVar3	srcRecord	CONFIRMED	IRInst__getOperandRecord(inst, srcIndex)	^\s*iVar3\ =\ FUN_001054ec\(param_2,param_3\);$	+2	all	all
+use	FUN_00129a0c	iVar3	lanesLeft	INFERRED	countdown of the four lanes	^\s*iVar3\ =\ 4;$	+14	all	all
+local	FUN_00191b30	param_3	srcIndex	CONFIRMED	source index passed to IRInst__getOperandSource / IRInst__getOperandRecord / FUN_000f79c4
+local	FUN_00191b30	param_4	laneSwizzle	CONFIRMED	lane swizzle word whose bytes are reversed into the lane mask word
+local	FUN_00191b30	param_5	compiler	CONFIRMED	*(compiler+0x6c4) is passed to FUN_000f79c4 (currentProgram)
+local	FUN_00191b30	cVar1	laneMaskByte	CONFIRMED	byte of laneMaskWord for this lane: 0 = lane must hold an encodable constant
+local	FUN_00191b30	fVar2	laneValue	CONFIRMED	constant lane value read from the source definition (+0x20 + component*0x18); must be 0.0, 1.0 or 0.5
+local	FUN_00191b30	uVar4	result	CONFIRMED	return value: 1 = the source became a literal, 0 = not encodable
+local	FUN_00191b30	local_58	laneMaskWord	CONFIRMED	param_4 with its four bytes reversed
+local	FUN_00191b30	local_54	srcSelectWord	CONFIRMED	select word (+0x10) of operand record srcIndex
+local	FUN_00191b30	local_50	constLane0	CONFIRMED	first of the four floats of the literal vector passed to FUN_000f79c4
+local	FUN_00191b30	fStack_4c	constLane1	CONFIRMED	second float of the literal vector
+local	FUN_00191b30	fStack_48	constLane2	CONFIRMED	third float of the literal vector
+local	FUN_00191b30	fStack_44	constLane3	CONFIRMED	fourth float of the literal vector
+local	FUN_00191b30	local_30	halfBits	INFERRED	stack copy of 0.5 (0x3f000000) written while testing the value against 0.5
+local	FUN_001281f0	fVar1	uniformValue	CONFIRMED	value of the first used lane; every other used lane must equal it
+local	FUN_001281f0	fVar2	sumOfLanes	CONFIRMED	four times the uniform value (0.0 plus four additions): compared with the second float of each table entry
+local	FUN_001281f0	bVar3	firstLane	CONFIRMED	true until the first used lane has been read
+local	FUN_001281f0	pfVar4	laneValueCursor	CONFIRMED	walks the four constants
+local	FUN_001281f0	puVar5	tableCursor	CONFIRMED	walks the immediate-constant table (DAT_001aff0c .. UNK_001aff54, 6 words per entry: four lane floats, code, sum)
+local	FUN_001281f0	pcVar6	laneByteCursor	CONFIRMED	walks the four select bytes of laneSwizzle (4 = unused lane)
+local	FUN_001281f0	uVar7	tableCode	CONFIRMED	select code of the matching table entry, stored through outSelectCode
+local	FUN_001281f0	iVar9	lanesLeft3	INFERRED	countdown of the four lanes while the constants are overwritten with the uniform value
+use	FUN_001281f0	iVar8	lanesLeft	INFERRED	countdown of the four lanes while the uniform value is determined	^\s*iVar8\ =\ 4;$	+17	all	all
+use	FUN_001281f0	iVar8	lanesLeft2	INFERRED	countdown of the four additions that build sumOfLanes	^\s*iVar8\ =\ 4;$@2	+5	all	all
+use	FUN_001281f0	iVar8	byteOffset	INFERRED	byte offset into constants while they are overwritten with the uniform value	^\s*iVar8\ =\ 0;$	+4	all	all
+local	FUN_00129854	fVar1	laneValue	CONFIRMED	constant lane value; must be 0.0, 1.0 or -1.0 on every used lane
+local	FUN_00129854	piVar2	weightPtr	CONFIRMED	&laneWeights[lane]: weight of the lane in the code
+local	FUN_00129854	pcVar5	laneByteBase	CONFIRMED	address of the stored laneSwizzle word (home slot): the four select bytes, 4 = unused lane
+local	FUN_00129854	pcVar6	laneByteCursor	CONFIRMED	walks the four select bytes of laneSwizzle
+local	FUN_00129854	iVar4	weightOffset	INFERRED	byte offset into laneWeights
+local	FUN_00129854	iVar8	lanesLeft3	INFERRED	countdown of the four lanes while the code is accumulated
+local	FUN_00129854	local_38	laneWeights	CONFIRMED	four weights copied from DAT_001affc0 .. DAT_001affcc: the code is the sum of (int)lane value * weight
+local	FUN_00129854	local_28	laneValueInt	INFERRED	(long long)(int) of the lane value (never read)
+local	FUN_00129854	local_20	minusOneBits	INFERRED	stack copy of -1.0 (0xbf800000) written while testing the lane against -1.0
+use	FUN_00129854	pfVar3	laneValueCursor	CONFIRMED	walks the four constants while they are checked	^\s*pfVar3\ =\ param_2;$	+5	all	all
+use	FUN_00129854	pfVar3	fillCursor	CONFIRMED	walks the constants while unused lanes are zeroed	^\s*pfVar3\ =\ param_2;$@2	+8	all	all
+use	FUN_00129854	iVar7	lanesLeft	INFERRED	countdown of the four lanes while they are checked	^\s*iVar7\ =\ 4;$	+8	all	all
+use	FUN_00129854	iVar7	lanesLeft2	INFERRED	countdown of the lanes while unused lanes are zeroed (starts as the byte distance between the cursors)	^\s*iVar7\ =\ \(int\)pcVar6\ \-\ \(int\)pcVar5;$	+11	all	all
+use	FUN_00129854	iVar7	codeAccum	CONFIRMED	accumulated sum of lane value * weight: the immediate constant code stored through outSelectCode	^\s*iVar7\ =\ 0;$	+13	all	all
+local	FUN_00128d7c	param_2	constRecord	INFERRED	record of one constant (flag byte at +8, kind bits at +9, float value at +0x14) whose multiples -3..3 and its negation are registered in the compiler expression table
+local	FUN_00128d7c	param_3	compiler	CONFIRMED	first argument of Compiler__valueNumberForExpr
+local	FUN_00128d7c	fVar2	recordValue	CONFIRMED	constRecord +0x14: the float value stored into each registered expression record
+local	FUN_00128d7c	bVar3	kindFlags	CONFIRMED	kind bits (+9) of the record being examined: bit 0 / 1 / 2 / 3 = already registered as the value / a multiple / ...
+local	FUN_00128d7c	pfVar6	multipleCursor	CONFIRMED	walks the table of multipliers at DAT_001aff4c (-3.0 .. 3.0)
+use	FUN_00128d7c	iVar4	multiple	CONFIRMED	integer multiplier -3..3 recorded at +0x1c of each registered expression record	^\s*iVar4\ =\ \-3;$	+43	all	all
+use	FUN_00128d7c	bVar1	isLastMultiple	INFERRED	multiple == 3: the first pass over the multiples is done	^\s*bVar1\ =\ iVar4\ ==\ 3;$	+3	all	all
+use	FUN_00128d7c	bVar1	moreMultiples	INFERRED	multiple != 3 continue flag of the second (negated) pass	^\s*bVar1\ =\ iVar4\ !=\ 3;$	+3	all	all
+local	FUN_0012a3c0	param_2	constRecord	INFERRED	record of one constant (flag byte at +8, kind bits at +9, float value at +0x14) whose negation is registered in the compiler expression table
+local	FUN_0012a3c0	param_3	compiler	CONFIRMED	first argument of Compiler__valueNumberForExpr
+local	FUN_0012a3c0	uVar1	recordValueBits	CONFIRMED	constRecord +0x14: the value stored into the registered expression record
+local	FUN_0012a3c0	bVar2	kindFlags	CONFIRMED	kind bits (+9) of the record being examined
+local	FUN_00128ad4	param_2	registerKind	INFERRED	special register kind; only kind 1 is materialised here
+local	FUN_00128ad4	iVar6	program	CONFIRMED	*(compiler + COMP_currentProgram): the Program being compiled
+local	FUN_00128ad4	iVar7	listByteOffset	INFERRED	byte offset into the use vector of the special register load (stepped by 4 per user)
+local	FUN_00128ad4	iVar9	operandIndex	INFERRED	1-based operand index over the user instruction operands
+local	FUN_00128ad4	uVar1	selectWord	INFERRED	DAT_001aff48 / DAT_001affa4: select word stored at +0x10 of operand record 1 of the new instruction
+local	FUN_00128ad4	dVar10	literalValue	CONFIRMED	FLOAT_001aa108 / FLOAT_001aa0e8: splat literal given to sources 2 and 3 of the new IrMulAddFloat
+use	FUN_00128ad4	uVar3	constantPool	CONFIRMED	*(program+0x3ac): the Program constant pool	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(iVar6\ \+\ 0x3ac\);$	+4	all	rhs
+use	FUN_00128ad4	uVar3	newRegister	INFERRED	FUN_001275a0(pool, 0, number, 0): the new virtual register the load users are redirected to	^\s*uVar3\ =\ FUN_001275a0\(uVar3,0,iVar5,0\);$	+39	lhs	all
+use	FUN_00128ad4	iVar5	nextRegNumber	INFERRED	compiler+0x3ac - 1 (the counter is decremented): number of the new register	^\s*iVar5\ =\ \*\(int\ \*\)\(param_3\ \+\ 0x3ac\)\ \+\ \-1;$	+3	all	all
+use	FUN_00128ad4	iVar5	userInst	INFERRED	user instruction of the special register load (element of the use vector)	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar7\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar2\ \+\ 0x14\)\ \+\ 8\)\);$	+9	all	all
+use	FUN_00128ad4	iVar5	canCombine	INFERRED	FUN_000d9f3c(compiler+0x398, 0): target query: 0 selects the IrMulAddFloat (0x14) path, non-zero a plain IrMovFloat (0x31)	^\s*iVar5\ =\ FUN_000d9f3c\(\*\(undefined4\ \*\)\(param_3\ \+\ 0x398\),0\);$	+1	all	all
+use	FUN_00128ad4	iVar5	srcRecord	CONFIRMED	IRInst__getOperandRecord(newInst, 1)	^\s*iVar5\ =\ FUN_001054ec\(piVar4,1\);$	+2	all	all
+use	FUN_00128ad4	iVar5	srcRecord	CONFIRMED	IRInst__getOperandRecord(newInst, 1)	^\s*iVar5\ =\ FUN_001054ec\(piVar4,1\);$@2	+1	all	all
+local	FUN_0012a00c	param_2	compareKind	CONFIRMED	switched on: 0..5 select IrSetEFloat (0x27), IrSetNEFloat (0x2a), IrSetGTFloat (0x28), IrSetGEFloat (0x29) with swapped operands for 2 and 3 / plain for 4 and 5; other values give opcode 0xb5
+local	FUN_0012a00c	param_3	src1Register	INFERRED	stored at +8 (register field) of operand record 1 or 2 of the compare
+local	FUN_0012a00c	param_5	src2Register	INFERRED	stored at +8 (register field) of the other operand record of the compare
+local	FUN_0012a00c	uVar5	aux2	INFERRED	FUN_000ec208(arena, param_6): second operand auxiliary value stored at record +0xc
+local	FUN_0012a00c	iVar10	newRegNumber	CONFIRMED	compiler+0x3ac - 1 (the counter is decremented): number of the new result register
+local	FUN_0012a00c	puVar9	loadInst	CONFIRMED	the 0x168-byte instruction constructed with IRInst__ctor_10502c(opcode 0x8c) whose source 1 is the new result register; returned
+use	FUN_0012a00c	uVar2	opcode	CONFIRMED	compare opcode picked by the switch on compareKind	^\s*uVar2\ =\ 0x27;$	+29	all	rhs
+use	FUN_0012a00c	uVar2	compareInst	CONFIRMED	IRInst__create(opcode): the compare instruction	^\s*uVar2\ =\ FUN_001043f0\(uVar2,param_10\);$	+34	lhs	all
+use	FUN_0012a00c	bVar1	swapRequested	INFERRED	true for compare kinds 2 and 3 (operands swapped)	^\s*bVar1\ =\ false;$	+26	all	rhs
+use	FUN_0012a00c	bVar1	sourcesInOrder	INFERRED	!swapRequested: selects which operand record receives source 1	^\s*bVar1\ =\ !bVar1;$	+24	lhs	all
+use	FUN_0012a00c	uVar3	aux1	INFERRED	FUN_000ec208(arena, param_4): first operand auxiliary value stored at record +0xc	^\s*uVar3\ =\ FUN_000ec208\(uVar8,param_4\);$	+2	all	all
+use	FUN_0012a00c	uVar3	operandIndexA	INFERRED	operand record index (2 or 1) that receives the second source	^\s*if\ \(bVar1\)\ \{$	+7	all	all
+use	FUN_0012a00c	uVar3	operandIndexB	INFERRED	operand index passed to FUN_000f8aa0 for the first table entry	^\s*if\ \(bVar1\)\ \{$@2	+6	all	all
+use	FUN_0012a00c	uVar3	operandIndexC	INFERRED	operand index passed to FUN_000f8aa0 for the second table entry	^\s*if\ \(bVar1\)\ \{$@3	+6	all	all
+use	FUN_0012a00c	iVar7	compilerCopy	CONFIRMED	copy of compiler: its +0x3ac counter and +0x374 arena are used	^\s*iVar7\ =\ param_10;$	+72	all	all
+use	FUN_0012a00c	iVar7	loadRecord	CONFIRMED	IRInst__getOperandRecord(loadInst, 1): register field set to the new result register	^\s*iVar7\ =\ FUN_001054ec\(puVar9,1\);$	+2	all	all
+local	FUN_00128930	param_2	compareKind	CONFIRMED	index into the compare-condition table PTR_DAT_001e8b84 (stored as the compare condition at inst+0x12c)
+local	FUN_00128930	uVar5	program	CONFIRMED	*(compiler + COMP_currentProgram): the Program, passed to FUN_000ec208 / FUN_000f8aa0 / FUN_000f7870
+local	FUN_00128930	iVar4	compareCondition	CONFIRMED	compare condition code: table[compareKind], replaced through PTR_DAT_001e90f8 (swapped condition) when the negate bit of operand 1 was cleared; stored at inst+0x12c (IRInst__getCompareCondition field)
+local	FUN_00128930	iVar6	src1SelectWord	CONFIRMED	select word (+0x10) of operand record 1, compared with that of operand 2
+use	FUN_00128930	uVar2	swizzleHandle	INFERRED	FUN_000ec208(program, swizzle): converted swizzle stored at +0xc of operand record 1	^\s*uVar2\ =\ FUN_000ec208\(uVar5,param_4\);$	+2	all	all
+use	FUN_00128930	uVar2	swizzleHandle	INFERRED	FUN_000ec208(program, swizzle): converted swizzle stored at +0xc of operand record 2	^\s*uVar2\ =\ FUN_000ec208\(uVar5,param_6\);$	+2	all	all
+local	FUN_0012a260	param_2	program	CONFIRMED	*(program+8) is the Compiler passed to Compiler__isOptionEnabled; program+0x3a0 is the entry block whose instruction list (+0x98) is walked; program+0x3d4 selects the variant
+local	FUN_0012a260	iVar2	nextInst	INFERRED	the node after the instruction being examined (list link +8)
+local	FUN_0012a260	iVar3	bindingIndex	INFERRED	running index given to each IrLoad (opcode 0xa4) that gets a binding
+use	FUN_0012a260	iVar1	inst	INFERRED	current instruction of the entry block list (starts at block+0x98)	^\s*iVar1\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_2\ \+\ 0x3a0\)\ \+\ 0x98\);$	+24	all	all
+use	FUN_0012a260	iVar1	nextNode2	INFERRED	next node of the list (link +8) in the program+0x3d4 variant	^\s*for\ \(iVar1\ =\ \*\(int\ \*\)\(iVar4\ \+\ 8\);\ iVar1\ !=\ 0;\ iVar1\ =\ \*\(int\ \*\)\(iVar1\ \+\ 8\)\)\ \{$	+6	all	all
+use	FUN_0012a260	iVar4	nextNode	INFERRED	link +8 of the current instruction; the walk ends at a null link	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar1\ \+\ 8\);$	+1	all	all
+use	FUN_0012a260	iVar4	nextNode	INFERRED	link +8 of the current instruction	^\s*iVar2\ =\ iVar4;$	+0	all	all
+use	FUN_0012a260	iVar4	optionEnabled	CONFIRMED	Compiler__isOptionEnabled(compiler, 0x3e)	^\s*iVar4\ =\ FUN_000e07dc\(\*\(undefined4\ \*\)\(param_2\ \+\ 8\),0x3e\);$	+1	all	all
+use	FUN_0012a260	iVar4	bindingCheck	INFERRED	HwLimits slot 99 (0x18c) result for the IrLoad destination register	^\s*\(iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x18c\)\)\(param_1,\*\(undefined4\ \*\)\(iVar1\ \+\ 0x94\),param_2\)$	+1	all	all
+use	FUN_0012a260	iVar4	nextNode	INFERRED	link +8 of the next node	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar2\ \+\ 8\);$	+0	all	all
+use	FUN_0012a260	iVar4	curInst	INFERRED	current instruction of the entry block list in the program+0x3d4 variant	^\s*iVar4\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_2\ \+\ 0x3a0\)\ \+\ 0x98\);$	+7	all	all
+local	FUN_000eca10	param_2	inst	CONFIRMED	the instruction tested: IRInst vslots 0x40, 0x28 (isFetch), 0x60 (isMix), 0x5c (isPresub) and opcode 0x84 (IrProjection) are called / read on it
+local	FUN_000eca10	iVar1	slotResult	INFERRED	result of the IRInst predicate slots called in turn (0x40, 0x28, 0x60, 0x5c)
+local	FUN_000eca10	uVar2	excluded	INFERRED	1 when inst is of one of the excluded kinds; the function returns !excluded
+local	FUN_000ecad0	param_2	inst	CONFIRMED	the instruction tested: IRInst vslots 0x40, 0x28 (isFetch), 0x60 (isMix), 0x5c (isPresub) and opcode 0x84 (IrProjection) are called / read on it
+local	FUN_000ecad0	iVar1	slotResult	INFERRED	result of the IRInst predicate slots called in turn (0x40, 0x28, 0x60, 0x5c)
+local	FUN_000ecad0	uVar2	excluded	INFERRED	1 when inst is of one of the excluded kinds; the function returns !excluded
+local	FUN_001296cc	param_2	laneValues	INFERRED	four words, one per lane: the low byte of each enabled lane is stored at record+0x2c+lane
+local	FUN_001296cc	param_3	laneComponents	INFERRED	four bytes, one per lane: stored at record+0x30+lane for each enabled lane
+local	FUN_001296cc	param_5	registerNumber	INFERRED	stored at record+0xc and record+0x10 of the new binding record
+local	FUN_001296cc	iVar1	recordLaneBase	CONFIRMED	record + 8 + lane: address stepped one byte per lane; +0x2c / +0x30 of it are the per-lane bytes
+local	FUN_001296cc	uVar3	lane	CONFIRMED	lane 0..3 tested against laneMask
+local	FUN_001296cc	iVar4	lanesLeft	INFERRED	countdown of the four lanes
+local	FUN_0010ed4c	param_2	program	CONFIRMED	program+0x3a0 is the entry block whose instruction list (+0x98) is walked; passed to Program__markHwRegUsed
+local	FUN_0010ed4c	piVar15	inst	CONFIRMED	current instruction of the entry block list
+local	FUN_0010ed4c	piVar7	nextLink	INFERRED	link +8 of the current instruction; the walk ends at a null link
+local	FUN_0010ed4c	piVar8	nextInst	INFERRED	the node after the current instruction (link +8)
+local	FUN_0010ed4c	iVar10	interpolatorIndex	CONFIRMED	running interpolator register number given to each interpolant load; passed to Program__markHwRegUsed and to the binding append
+local	FUN_0010ed4c	uVar9	remainingLanes	CONFIRMED	bit mask of the lanes (preset 0xf) that still need a binding
+local	FUN_0010ed4c	uVar11	otherLane	CONFIRMED	lane scanned for the same kind and attribute as the current lane
+local	FUN_0010ed4c	uVar6	kindCode	CONFIRMED	Table__interpolatorKindToCode(lane kind)
+local	FUN_0010ed4c	pcVar13	appendBinding	CONFIRMED	HwLimits vtable slot 21 (0x54): appends an interpolator binding (index, kind code, attribute, select, flags)
+local	FUN_0010ed4c	bVar1	moreLanes	INFERRED	lane != 3 continue flag
+use	FUN_0010ed4c	iVar2	isInterpLoad	INFERRED	IRInst vslot 19 (0x4c): the instruction is an interpolant load	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar15\ \+\ 0x4c\)\)\(piVar15\);$	+1	all	all
+use	FUN_0010ed4c	iVar2	loadInst	CONFIRMED	IRInst vslot 32 (0x80) of the instruction: the load whose lane records are scanned (its +0x98 / +0x94 are set to the register and the interpolator index, flag 0x40 added)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar15\ \+\ 0x80\)\)\(piVar15\);$	+29	all	all
+use	FUN_0010ed4c	iVar3	laneUsed	CONFIRMED	IRLoadInterp__laneUsed(load, lane)	^\s*iVar3\ =\ FUN_00104a94\(iVar2,uVar14\);$	+1	all	all
+use	FUN_0010ed4c	iVar3	laneKind	CONFIRMED	IRLoadInterp__laneKind(load, lane)	^\s*iVar3\ =\ FUN_00104b6c\(iVar2,uVar14\);$	+17	all	all
+use	FUN_0010ed4c	iVar4	laneIndex	CONFIRMED	IRLoadInterp__laneIndex(load, lane)	^\s*iVar4\ =\ FUN_0010426c\(iVar2,uVar14\);$	+18	all	all
+use	FUN_0010ed4c	iVar5	otherLaneInfo	CONFIRMED	IRLoadInterp__laneUsed / laneKind / laneIndex of the other lane, compared with those of the current lane	^\s*iVar5\ =\ FUN_00104a94\(iVar2,uVar11\);$	+2	all	all
+use	FUN_0010ed4c	uVar12	laneGroup	CONFIRMED	bit mask of the lanes that share kind and attribute with the current lane	^\s*if\ \(\(iVar3\ !=\ 0\)\ \&\&\ \(uVar12\ =\ 1\ <<\ \(uVar14\ \&\ 0x3f\),\ \(uVar12\ \&\ uVar9\)\ !=\ 0\)\)\ \{$	+16	all	all
+use	FUN_0010ed4c	uVar12	bindingFlags	CONFIRMED	load +0x13c flag word: bits 0, 2, 1 passed as separate flags of the binding	^\s*uVar12\ =\ \*\(uint\ \*\)\(iVar2\ \+\ 0x13c\);$	+2	all	all
+func	Inst__collapseAlgebraic_00163994	Inst__mergeMovAndMadByLanes	INFERRED	node (IrMovFloat 0x31 or IrMulAddFloat 0x14, extra-source layout) and its last source (the other of the two, same +0x120 / +0x124) write disjoint lanes of one register and the mov source equals a mad source (with matching negate / abs): the mad is cloned into node with the union of the written lanes, the mov source is injected as a lane-selected literal (1.0 or 0.0, found with IRInst__getUniformSourceConstant or created with IRLoadConst__vslot73) in the other mad sources, and the mov is released
+local	FUN_00163994	bVar2	moreLanes2	INFERRED	lane != 3 continue flag of the uniform-constant lane scans
+local	FUN_00163994	uVar12	movAbs	INFERRED	bit 1 (abs) of the mov operand 1 flags; must equal the abs bit of the matched mad operand
+local	FUN_00163994	uVar13	matchedSrcIndex	CONFIRMED	index (1, 2 or 3) of the mad source that is the same value as the mov source
+local	FUN_00163994	uVar14	otherIndexA	CONFIRMED	index of the first mad source that is not matched (2 or 1 / 1)
+local	FUN_00163994	uVar15	otherIndexB	CONFIRMED	index of the second mad source that is not matched (3 / 2)
+local	FUN_00163994	uVar16	compilerArg	CONFIRMED	*(pass+8): the Compiler passed to IRInst__setOperandSource
+local	FUN_00163994	iVar3	movDepthAboveBase	INFERRED	mov+0x160 - pass[0x478], clamped at 0, restored on the merged instruction
+local	FUN_00163994	puVar20	useVector	INFERRED	use vector (+0x10) of the extra source of the mad, searched for the mad to drop it (only when pass+0x30 bit 7 is set)
+local	FUN_00163994	piVar8	madSrcA	CONFIRMED	definition of mad source otherIndexA: replaced by a new IRLoadConst__vslot73 literal instruction or a clone of itself, then rewritten lane by lane
+local	FUN_00163994	piVar9	madSrcB	CONFIRMED	definition of mad source otherIndexB: replaced by a new literal instruction or a clone of itself, then rewritten lane by lane
+local	FUN_00163994	local_88	lastOperandRecord5	INFERRED	sixth word of the lastOperandRecord buffer (zeroed before IRInst__readLastOperand)
+local	FUN_00163994	local_98	lastOperandSource	CONFIRMED	word 1 of the buffer filled by IRInst__readLastOperand(sourceDef2): its extra source, tested != 0
+local	FUN_00163994	local_9c	lastOperandRecord	CONFIRMED	buffer filled by IRInst__readLastOperand(sourceDef2)
+local	FUN_00163994	local_a0	madOtherSelectA	CONFIRMED	select word (+0x10) of mad operand otherIndexA
+local	FUN_00163994	local_a4	movSrc1Select	CONFIRMED	select word (+0x10) of mov operand record 1
+local	FUN_00163994	local_a8	mergedDestSelect	CONFIRMED	destination select word of the merged instruction: the mov lanes where the mad has none, plus the mad lanes
+local	FUN_00163994	local_ac	madOtherSelectB	CONFIRMED	select word (+0x10) of mad operand otherIndexB
+local	FUN_00163994	local_b0	madDestSelect	CONFIRMED	destination select word (record 0 +0x10) of the mad
+local	FUN_00163994	local_b4	movDestSelect	CONFIRMED	destination select word (record 0 +0x10) of the mov; lanes with byte 1 are unwritten
+local	FUN_00163994	local_b8	extraSourceSelect	CONFIRMED	select word (+0x10) of node operand numSources (the extra source), reduced to the lanes the mov provides
+use	FUN_00163994	bVar1	moreLanes	INFERRED	lane != 3 continue flag	^\s*bVar1\ =\ iVar4\ !=\ 3;$	+2	all	all
+use	FUN_00163994	bVar1	moreLanes	INFERRED	lane != 3 continue flag	^\s*bVar1\ =\ iVar4\ !=\ 3;$@2	+2	all	all
+use	FUN_00163994	bVar1	foundConstant	INFERRED	set when a constant source equal to the expected literal was found and the selects were rewritten for the lanes of extraSourceSelect	^\s*bVar1\ =\ false;$	+30	all	all
+use	FUN_00163994	bVar1	moreLanes	INFERRED	lane != 3 continue flag	^\s*bVar1\ =\ iVar19\ !=\ 3;$	+2	all	all
+use	FUN_00163994	bVar1	moreLanes	INFERRED	lane != 3 continue flag	^\s*bVar1\ =\ iVar4\ !=\ 3;$@3	+2	all	all
+use	FUN_00163994	bVar1	moreLanes	INFERRED	lane != 3 continue flag	^\s*bVar1\ =\ iVar4\ !=\ 3;$@4	+2	all	all
+use	FUN_00163994	bVar1	moreLanes	INFERRED	lane != 3 continue flag	^\s*bVar1\ =\ iVar4\ !=\ 3;$@5	+2	all	all
+use	FUN_00163994	bVar1	foundConstant	INFERRED	set when a constant source equal to the expected literal was found and the selects were rewritten for the lanes of extraSourceSelect	^\s*bVar1\ =\ false;$@2	+30	all	all
+use	FUN_00163994	bVar1	moreLanes	INFERRED	lane != 3 continue flag	^\s*bVar1\ =\ iVar19\ !=\ 3;$@2	+2	all	all
+use	FUN_00163994	bVar1	moreLanes	INFERRED	lane != 3 continue flag	^\s*bVar1\ =\ iVar4\ !=\ 3;$@6	+2	all	all
+use	FUN_00163994	bVar1	moreLanes	INFERRED	lane != 3 continue flag	^\s*bVar1\ =\ iVar4\ !=\ 3;$@7	+2	all	all
+use	FUN_00163994	iVar19	nodeOpcode	CONFIRMED	opcode of node: IrMovFloat 0x31 (extra source is the mad) or IrMulAddFloat 0x14 (extra source is the mov)	^\s*iVar19\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x88\)\ \+\ 8\);$	+4	all	all
+use	FUN_00163994	iVar19	nodeOpcode	CONFIRMED	opcode of node tested for IrMulAddFloat 0x14	^\s*if\ \(iVar19\ !=\ 0x14\)\ \{$	+0	all	all
+use	FUN_00163994	iVar19	movInst	CONFIRMED	the IrMovFloat of the pair (node, or the extra source)	^\s*iVar19\ =\ param_1;$	+0	all	all
+use	FUN_00163994	iVar19	movInst	CONFIRMED	the IrMovFloat of the pair (the extra source when node is the mad)	^\s*iVar19\ =\ iVar3;$	+0	all	all
+use	FUN_00163994	iVar19	movInst	CONFIRMED	the IrMovFloat of the pair	^\s*if\ \(\*\(int\ \*\)\(iVar19\ \+\ 0x120\)\ !=\ \*\(int\ \*\)\(iVar4\ \+\ 0x120\)\)\ \{$	+107	all	all
+use	FUN_00163994	iVar19	prevNode	INFERRED	node+4: list neighbour after which the merged instruction is inserted	^\s*iVar19\ =\ \*\(int\ \*\)\(param_1\ \+\ 4\);$	+38	all	all
+use	FUN_00163994	iVar19	allocatedRegister	CONFIRMED	merged instruction +0x14c, stored as destination register (record 0 +8)	^\s*iVar19\ =\ piVar11\[0x53\];$	+3	all	all
+use	FUN_00163994	iVar19	srcIndexA	INFERRED	1-based index over the sources of madSrcA while looking for the expected literal	^\s*iVar19\ =\ 2;$	+29	all	all
+use	FUN_00163994	iVar19	selectedLane	INFERRED	first lane written by madSrcA (-1 when none), used as select byte for the unmatched lanes	^\s*iVar19\ =\ 0;$	+16	all	all
+use	FUN_00163994	iVar19	srcIndexB	INFERRED	1-based index over the sources of madSrcB while looking for the expected literal	^\s*iVar19\ =\ 2;$@2	+29	all	all
+use	FUN_00163994	iVar19	selectedLane	INFERRED	first lane written by madSrcB (-1 when none), used as select byte for the unmatched lanes	^\s*iVar19\ =\ 0;$@2	+16	all	all
+use	FUN_00163994	iVar19	isMixResult	INFERRED	IRInst vslot 24 (0x60, isMix) of operandVReg	^\s*iVar19\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x60\)\)\(piVar5\);$	+1	all	all
+use	FUN_00163994	iVar21	extraOpcode	CONFIRMED	opcode of the extra source	^\s*iVar21\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar3\ \+\ 0x88\)\ \+\ 8\);$	+4	all	all
+use	FUN_00163994	iVar21	extraOpcode	CONFIRMED	opcode of the extra source tested for IrMovFloat 0x31	^\s*if\ \(iVar21\ !=\ 0x31\)\ \{$	+0	all	all
+use	FUN_00163994	iVar21	laneScan	INFERRED	lane 0..3 of the select-byte rewrite loop	^\s*iVar21\ =\ 0;$	+14	all	all
+use	FUN_00163994	iVar21	laneScan2	INFERRED	lane 0..3 of the disjoint-lane check loop	^\s*iVar21\ =\ 0;$@2	+9	all	all
+use	FUN_00163994	iVar21	isMixResult2	INFERRED	IRInst vslot 24 (0x60, isMix) of mov source 1	^\s*iVar21\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x60\)\)\(piVar5\);$	+1	all	all
+use	FUN_00163994	iVar21	movSrcResolved	CONFIRMED	IRInst__getOperandSourceThroughMix(mov, 1)	^\s*iVar21\ =\ FUN_001466f4\(iVar19,1\);$	+32	all	all
+use	FUN_00163994	iVar21	laneScan3	INFERRED	lane 0..3 of the merged-destination loop	^\s*iVar21\ =\ 0;$@3	+7	all	all
+use	FUN_00163994	iVar21	laneScan4	INFERRED	lane 0..3 of the expected-literal lane scan	^\s*iVar21\ =\ 0;$@4	+16	all	all
+use	FUN_00163994	iVar21	laneScan5	INFERRED	lane 0..3 of the expected-literal lane scan	^\s*iVar21\ =\ 0;$@6	+16	all	all
+use	FUN_00163994	iVar22	lanesLeft	INFERRED	countdown of the four lanes	^\s*iVar22\ =\ 4;$	+14	all	all
+use	FUN_00163994	iVar22	lanesLeft2	INFERRED	countdown of the four lanes	^\s*iVar22\ =\ 4;$@2	+8	all	all
+use	FUN_00163994	iVar22	madSrc1Resolved	CONFIRMED	IRInst__getOperandSourceThroughMix(mad, 1)	^\s*iVar22\ =\ FUN_001466f4\(iVar4,1\);$	+7	all	all
+use	FUN_00163994	iVar22	lanesLeft3	INFERRED	countdown of the four lanes	^\s*iVar22\ =\ 4;$@3	+9	all	all
+use	FUN_00163994	iVar6	madSrc2Resolved	CONFIRMED	IRInst__getOperandSourceThroughMix(mad, 2)	^\s*iVar6\ =\ FUN_001466f4\(iVar4,2\);$	+18	all	all
+use	FUN_00163994	iVar7	madSrc3Resolved	CONFIRMED	IRInst__getOperandSourceThroughMix(mad, 3)	^\s*iVar7\ =\ FUN_001466f4\(iVar4,3\);$	+29	all	all
+use	FUN_00163994	uVar17	madSrc1Negate	CONFIRMED	bit 0 (negate) of mad operand 1 flags (+0xb8)	^\s*uVar17\ =\ \*\(uint\ \*\)\(iVar4\ \+\ 0xb8\)\ \&\ 1;$	+20	all	all
+use	FUN_00163994	uVar17	trackUseLists	INFERRED	pass+0x30 bit 7: use vectors are maintained and must be updated by hand	^\s*uVar17\ =\ \*\(uint\ \*\)\(param_2\ \+\ 0x30\)\ >>\ 7\ \&\ 1;$	+29	all	all
+use	FUN_00163994	uVar10	madSrc2Negate	CONFIRMED	bit 0 (negate) of mad operand 2 flags (+0xd0)	^\s*uVar10\ =\ \*\(uint\ \*\)\(iVar4\ \+\ 0xd0\)\ \&\ 1;$	+19	all	all
+use	FUN_00163994	uVar10	useCount	INFERRED	element count (+4) of the use vector	^\s*uVar10\ =\ puVar20\[1\];$	+22	all	all
+use	FUN_00163994	uVar18	movNegate	CONFIRMED	bit 0 (negate) of the mov operand 1 flags (+0xb8)	^\s*uVar18\ =\ \*\(uint\ \*\)\(iVar19\ \+\ 0xb8\)\ \&\ 1;$	+32	all	all
+use	FUN_00163994	uVar18	useIndex	INFERRED	index into the use vector while searching for the mad	^\s*uVar18\ =\ 0;$	+20	all	all
+use	FUN_00163994	piVar11	vectorSlot	INFERRED	address of the use-vector element at useIndex	^\s*piVar11\ =\ \(int\ \*\)\(uVar18\ \*\ 4\ \+\ puVar20\[2\]\);$	+5	all	all
+use	FUN_00163994	piVar11	mergedInst	CONFIRMED	IRInst__cloneInto(mad, node, compiler, 0): node overwritten by a copy of the mad, then adjusted	^\s*piVar11\ =\ \(int\ \*\)FUN_00103ebc\(iVar4,param_1,\*\(undefined4\ \*\)\(param_2\ \+\ 8\),0\);$	+262	all	all
+use	FUN_00163994	iVar4	madInst	CONFIRMED	the IrMulAddFloat of the pair (node, or the extra source)	^\s*iVar4\ =\ iVar3;$	+162	all	all
+use	FUN_00163994	iVar4	isMixA	INFERRED	IRInst vslot 24 (0x60, isMix) of madSrcA	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar8\ \+\ 0x60\)\)\(piVar8\);$	+1	all	all
+use	FUN_00163994	iVar4	laneA	INFERRED	lane 0..3	^\s*iVar4\ =\ 0;$	+20	all	all
+use	FUN_00163994	iVar4	srcCountA	INFERRED	source count of madSrcA	^\s*iVar4\ =\ piVar8\[0x21\];$	+1	all	all
+use	FUN_00163994	iVar4	selectLaneA	INFERRED	last lane of madSrcA operand whose select byte is not 4 (-1 when none)	^\s*iVar4\ =\ \-1;$	+14	all	all
+use	FUN_00163994	iVar4	srcCountA	INFERRED	source count of madSrcA (read side of the increment)	^\s*iVar4\ =\ piVar8\[0x21\];$@2	+5	all	rhs
+use	FUN_00163994	iVar4	newSrcIndexA	INFERRED	srcCountA + 1: index of the source appended to madSrcA	^\s*iVar4\ =\ iVar4\ \+\ 1;$@3	+9	lhs	all
+use	FUN_00163994	iVar4	laneB	INFERRED	lane 0..3	^\s*iVar4\ =\ 0;$@3	+6	all	all
+use	FUN_00163994	iVar4	isMixB	INFERRED	IRInst vslot 24 (0x60, isMix) of madSrcB	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar9\ \+\ 0x60\)\)\(piVar9\);$	+1	all	all
+use	FUN_00163994	iVar4	laneC	INFERRED	lane 0..3	^\s*iVar4\ =\ 0;$@4	+20	all	all
+use	FUN_00163994	iVar4	srcCountB	INFERRED	source count of madSrcB	^\s*iVar4\ =\ piVar9\[0x21\];$	+1	all	all
+use	FUN_00163994	iVar4	selectLaneB	INFERRED	last lane of madSrcB operand whose select byte is not 4 (-1 when none)	^\s*iVar4\ =\ \-1;$@2	+14	all	all
+use	FUN_00163994	iVar4	srcCountB	INFERRED	source count of madSrcB (read side of the increment)	^\s*iVar4\ =\ piVar9\[0x21\];$@2	+5	all	rhs
+use	FUN_00163994	iVar4	newSrcIndexB	INFERRED	srcCountB + 1: index of the source appended to madSrcB	^\s*iVar4\ =\ iVar4\ \+\ 1;$@7	+9	lhs	all
+use	FUN_00163994	iVar4	laneD	INFERRED	lane 0..3	^\s*iVar4\ =\ 0;$@6	+6	all	all
+use	FUN_00163994	iVar4	laneE	INFERRED	lane 0..3 of the final select rewrite	^\s*iVar4\ =\ 0;$@7	+17	all	all
+local	FUN_0012804c	puVar1	lanePairPtr	INFERRED	laneSrcCursor + 4: second byte array of the binding record (copied to laneDstCursor[4])
+local	FUN_0012804c	puVar9	laneSrcCursor	INFERRED	walks the 4 per-lane bytes of the source binding record (+0x14)
+local	FUN_0012804c	puVar10	laneDstCursor	INFERRED	walks the 4 per-lane bytes of the published binding record
+local	FUN_0012804c	bVar2	moreRecords	INFERRED	record index != last (0x3f / 0x2f) continue flag
+local	FUN_0012804c	uVar3	packedFlags	INFERRED	(binding +0x78 & 0xf) << 4: packed into bits 7:4 of the published record word
+local	FUN_0012804c	uVar4	recordWord	INFERRED	published record word +8 (+0xc for the second table) before the update
+local	FUN_0012804c	iVar11	lanesLeft	INFERRED	countdown of the four lanes of a record
+use	FUN_0012804c	iVar5	inputIndex	INFERRED	index 0..0x3f over the 64 input binding records	^\s*iVar5\ =\ 0;$	+28	all	all
+use	FUN_0012804c	iVar5	outputIndex	INFERRED	index 0..0x2f over the 48 output binding records	^\s*iVar5\ =\ 0;$@2	+26	all	all
+use	FUN_0012804c	iVar6	inputSrcRecord	INFERRED	this + 0x80 + n*0x34: source input binding record (lane bytes at +0x14)	^\s*iVar6\ =\ param_1\ \+\ 0x80;$	+24	all	all
+use	FUN_0012804c	iVar6	outputSrcRecord	INFERRED	this + 0xd80 + n*0x34: source output binding record (lane bytes at +0x14)	^\s*iVar6\ =\ param_1\ \+\ 0xd80;$	+22	all	all
+use	FUN_0012804c	iVar8	inputDstRecord	INFERRED	compiler + 0x100 + n*0xc: published input binding record	^\s*iVar8\ =\ param_2\ \+\ 0x100;$	+22	all	all
+use	FUN_0012804c	iVar8	lanesLeft2	INFERRED	countdown of the four lanes of an output record	^\s*iVar8\ =\ 4;$	+14	all	all
+use	FUN_0012804c	iVar7	inputBinding	INFERRED	this + n*0x34: source input binding (kind bytes at +0x68..0x70, flags at +0x78 / +0x7c)	^\s*iVar7\ =\ param_1;$	+23	all	all
+use	FUN_0012804c	iVar7	outputDstRecord	INFERRED	compiler + 0x400 + n*0xc: published output binding record	^\s*iVar7\ =\ param_2\ \+\ 0x400;$	+24	all	all
+local	FUN_00129478	puVar1	lanePairPtr	INFERRED	laneSrcCursor + 4: second byte array of the binding record (copied to laneDstCursor[4])
+local	FUN_00129478	puVar10	laneSrcCursor	INFERRED	walks the 4 per-lane bytes of the source binding record (+0x14)
+local	FUN_00129478	puVar12	laneDstCursor	INFERRED	walks the 4 per-lane bytes of the published binding record
+local	FUN_00129478	bVar2	moreRecords	INFERRED	record index != last (0x3f / 0x2f) continue flag
+local	FUN_00129478	uVar3	recordWord	INFERRED	published record word +8 (+0xc for the second table) before the update
+local	FUN_00129478	iVar11	limit660	INFERRED	limitsBlob[5], copied to compiler+0x660
+use	FUN_00129478	uVar9	packedFlags	INFERRED	(binding +0x78 & 0xf) << 4: packed into bits 7:4 of the published record word	^\s*uVar9\ =\ \(\*\(uint\ \*\)\(iVar4\ \+\ 0x78\)\ \&\ 0xf\)\ <<\ 4;$	+2	all	all
+use	FUN_00129478	uVar9	packedFlags	INFERRED	(binding +0xd78 & 0xf) << 4: packed into bits 7:4 of the published record word	^\s*uVar9\ =\ \(\*\(uint\ \*\)\(param_1\ \+\ 0xd78\)\ \&\ 0xf\)\ <<\ 4;$	+2	all	all
+use	FUN_00129478	iVar4	maxVnTransforms	CONFIRMED	limitsBlob[3], copied to compiler+0x658 (max_vn_transforms, notes_compiler_passes3.md)	^\s*iVar4\ =\ param_3\[3\];$	+7	all	all
+use	FUN_00129478	iVar4	inputCount	INFERRED	this+0x172c: number of input bindings, copied to compiler+0x104	^\s*iVar4\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x0000172c\)\ \+\ param_1\);$	+2	all	all
+use	FUN_00129478	iVar4	inputBindingCursor	INFERRED	this + n*0x34: input binding whose kind bytes are rewritten from the published table	^\s*iVar4\ =\ param_1;$	+6	all	all
+use	FUN_00129478	iVar4	inputBinding	INFERRED	this + n*0x34: source input binding (kind bytes at +0x68..0x70, flags at +0x78 / +0x7c)	^\s*iVar4\ =\ param_1;$@2	+23	all	all
+use	FUN_00129478	iVar4	outputDstRecord	INFERRED	compiler + 0x400 + n*0xc: published output binding record	^\s*iVar4\ =\ param_2\ \+\ 0x400;$	+24	all	all
+use	FUN_00129478	iVar5	limit66c	INFERRED	limitsBlob[8], copied to compiler+0x66c	^\s*iVar5\ =\ param_3\[8\];$	+7	all	all
+use	FUN_00129478	iVar5	publishedRecord	INFERRED	compiler + inputBinding[0x70]*0xc: published input record whose bytes +0x108 / +0x109 are read back	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar4\ \+\ 0x70\)\ \*\ 0xc\ \+\ param_2;$	+2	all	all
+use	FUN_00129478	iVar5	inputIndex	INFERRED	index 0..0x3f over the 64 input binding records	^\s*iVar5\ =\ 0;$	+27	all	all
+use	FUN_00129478	iVar5	outputIndex	INFERRED	index 0..0x2f over the 48 output binding records	^\s*iVar5\ =\ 0;$@2	+26	all	all
+use	FUN_00129478	iVar6	limit668	INFERRED	limitsBlob[7], copied to compiler+0x668	^\s*iVar6\ =\ param_3\[7\];$	+7	all	all
+use	FUN_00129478	iVar6	inputSrcRecord	INFERRED	this + 0x80 + n*0x34: source input binding record (lane bytes at +0x14)	^\s*iVar6\ =\ param_1\ \+\ 0x80;$	+24	all	all
+use	FUN_00129478	iVar6	outputSrcRecord	INFERRED	this + 0xd80 + n*0x34: source output binding record (lane bytes at +0x14)	^\s*iVar6\ =\ param_1\ \+\ 0xd80;$	+22	all	all
+use	FUN_00129478	iVar7	limit65c	INFERRED	limitsBlob[4], copied to compiler+0x65c	^\s*iVar7\ =\ param_3\[4\];$	+7	all	all
+use	FUN_00129478	iVar7	inputDstRecord	INFERRED	compiler + 0x100 + n*0xc: published input binding record	^\s*iVar7\ =\ param_2\ \+\ 0x100;$	+22	all	all
+use	FUN_00129478	iVar7	lanesLeft2	INFERRED	countdown of the four lanes of an output record	^\s*iVar7\ =\ 4;$	+14	all	all
+use	FUN_00129478	iVar8	maxMixInsts	CONFIRMED	limitsBlob[6], copied to compiler+0x664 (max_mix_insts, notes_compiler_passes3.md)	^\s*iVar8\ =\ param_3\[6\];$	+7	all	all
+use	FUN_00129478	iVar8	lanesLeft	INFERRED	countdown of the four lanes of an input record	^\s*iVar8\ =\ 4;$	+14	all	all
+local	FUN_001859bc	param_2	program	CONFIRMED	program+8 is the Compiler, program+0x478 the base of the inst+0x160 counters; passed to IRInst__hasSingleUse
+local	FUN_001859bc	param_3	compiler	CONFIRMED	Compiler argument of IRInst__reinitAsTrinary / IRInst__setExtraOperandSource
+local	FUN_001859bc	uVar14	src1Select	CONFIRMED	select word (+0x10) of operand record 1 of inst (must be a splat)
+local	FUN_001859bc	uVar13	addendSelect	CONFIRMED	select word of the add operand that is not the dot3: operand 2 by default, replaced by operand 1 when the dot3 is source 2; converted by FUN_000f33f8 for the new source 3
+local	FUN_001859bc	uVar12	destSelect	CONFIRMED	select word (+0x10) of operand record 0 of inst: destination, restored to inst+0x9c
+local	FUN_001859bc	piVar4	dotInst	CONFIRMED	the single-use IrDot3 (0x1c) source of the add
+local	FUN_001859bc	iVar9	addendIndex	CONFIRMED	index (2 or 1) of the add operand that is not the dot3
+local	FUN_001859bc	uVar2	dotSrc2Flags	CONFIRMED	flag word of the dot3 operand 2 (negate / abs), copied to the dp3add source 2
+local	FUN_001859bc	iVar15	extraSource	INFERRED	source at index numSources of inst when it has the extra-source layout, re-attached
+local	FUN_001859bc	uVar7	prevNode	INFERRED	inst+4: list neighbour after which the rebuilt inst is inserted
+local	FUN_001859bc	uVar10	saturate	CONFIRMED	inst+0x120 saturate flag restored after the rebuild
+local	FUN_001859bc	uVar11	resultScale	INFERRED	inst+0x124 result scale code restored after the rebuild
+local	FUN_001859bc	local_78	addendSelect3	CONFIRMED	FUN_000f33f8(addendSelect): select word of the dp3add source 3
+local	FUN_001859bc	local_74	addendDef	CONFIRMED	definition of the add operand that is not the dot3: dp3add source 3
+local	FUN_001859bc	local_70	addendNegate	CONFIRMED	bit 0 (negate) of the addend operand flags
+local	FUN_001859bc	local_6c	addendAbs	CONFIRMED	bit 1 (abs) of the addend operand flags
+local	FUN_001859bc	local_68	dotSrc2Select	CONFIRMED	select word (+0x10) of dot3 operand record 2
+local	FUN_001859bc	local_64	dotSrc1Select	CONFIRMED	select word (+0x10) of dot3 operand record 1
+local	FUN_001859bc	local_60	addendOperandSelect	CONFIRMED	select word (+0x10) of the addend operand record of inst, stored at dp3add source 3
+use	FUN_001859bc	uVar1	addendFlags	CONFIRMED	flag word of the add operand that is not the dot3 (record +0x14)	^\s*uVar1\ =\ \*\(uint\ \*\)\(iVar9\ \*\ 0x18\ \+\ param_1\ \+\ 0xa0\);$	+3	all	all
+use	FUN_001859bc	uVar1	dotSrc1Flags	CONFIRMED	flag word of dot3 operand 1 (negate / abs), copied to the dp3add source 1	^\s*uVar1\ =\ piVar4\[0x2e\];$	+29	all	all
+local	FUN_001882a4	bVar1	moreLanes	INFERRED	lane != 3 continue flag
+local	FUN_001882a4	fVar2	uniformValue	CONFIRMED	constant lane value of the first written lane; all other written lanes must equal it
+local	FUN_001882a4	uVar5	firstComponent	CONFIRMED	component of the first written lane (0xffffffff before it): indexes the constant value passed to FUN_0010ab40
+local	FUN_001882a4	uVar6	readComponent	CONFIRMED	component the written lane reads from the constant source
+use	FUN_001882a4	iVar4	isScalable	INFERRED	FUN_0010aafc(value): the value has a result scale code	^\s*iVar4\ =\ \(\(undefined4\ \(\*\)\(\)\)FUN_0010aafc\)\(\(double\)GH_U2F\(\(unsigned\ int\)\(a0\[uVar6\ \*\ 6\ \+\ 8\]\)\)\);$	+1	all	all
+use	FUN_001882a4	iVar4	scaleAccepted	CONFIRMED	HwLimits slot 63 (0xfc, supportsResultScale)(compiler target, code, 0) result	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(param_2\ \+\ COMP_target\)\ \+\ 0xfc\)\)\(\*\(int\ \*\*\)\(param_2\ \+\ COMP_target\),iVar3,0\);$	+1	all	all
+func	Inst__r300Peephole_1875a8	Inst__r300ReassociateAddPair	INFERRED	inst and inst2 (its source number srcIndex) are both IrAddFloat, inst2 single-use with no saturate / result scale and neither with the extra-source layout: when FUN_00186a88 cannot combine them as they are, inst2 source 2 and the other operand of inst are exchanged (with modifier bits and selects) and FUN_00186a88 is tried again, then the exchange is undone on failure
+local	FUN_001875a8	param_2	srcIndex	CONFIRMED	index of the inst operand that is inst2: passed to IRInst__isSourceSelectIdentity / IRInst__getOperandRecord and to FUN_00186a88
+local	FUN_001875a8	param_4	program	CONFIRMED	program+8 is the Compiler passed to IRInst__setOperandSource; also the hasSingleUse program argument
+local	FUN_001875a8	uVar1	inst2Src2Negate	CONFIRMED	bit 0 (negate) of inst2 operand 2 flags
+local	FUN_001875a8	uVar8	inst2Src2Abs	CONFIRMED	bit 1 (abs) of inst2 operand 2 flags
+local	FUN_001875a8	uVar2	otherNegate	CONFIRMED	bit 0 (negate) of the inst operand that is not inst2
+local	FUN_001875a8	uVar9	otherAbs	CONFIRMED	bit 1 (abs) of the inst operand that is not inst2
+local	FUN_001875a8	uVar3	srcFlags	CONFIRMED	flag word of the inst operand srcIndex (inst2): bit 0 swaps the negate bits after the exchange
+local	FUN_001875a8	iVar11	inst2Src2ModBase	CONFIRMED	inst2 + 0xbc: operand 2 modifier bits of inst2
+local	FUN_001875a8	piVar5	otherModBase	CONFIRMED	inst + otherIndex*6 words + 0x23: modifier bits of the inst operand that is not inst2
+local	FUN_001875a8	local_68	composedSelect1	CONFIRMED	SelectWord__compose(inst2 operand 1 select, inst srcIndex select)
+local	FUN_001875a8	local_64	composedSelect2	CONFIRMED	SelectWord__compose(inst2 operand 2 select, inst srcIndex select)
+local	FUN_001875a8	local_60	destWriteMask	CONFIRMED	WriteMask__fromSelectWord(destination select)
+local	FUN_001875a8	local_5c	maskedSelect	CONFIRMED	SelectWord__maskUnused(DAT_001b0220, destWriteMask): select of the inst operand
+use	FUN_001875a8	iVar13	instDestSelect	CONFIRMED	operand record 0 +0x10 of inst: destination select word; compared with that of inst2	^\s*iVar13\ =\ \*\(int\ \*\)\(iVar4\ \+\ 0x10\);$	+2	all	all
+use	FUN_001875a8	iVar13	otherIndex	CONFIRMED	index of the inst operand that is not inst2: (srcIndex == 1) + 1	^\s*iVar13\ =\ \(param_2\ ==\ 1\)\ \+\ 1;$	+51	all	all
+use	FUN_001875a8	uVar12	srcSelect	CONFIRMED	select word (+0x10) of inst operand srcIndex, composed with the inst2 operand selects	^\s*uVar12\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x10\);$	+9	all	all
+use	FUN_001875a8	uVar12	maskSelectConst	CONFIRMED	DAT_001b0220: base select for SelectWord__maskUnused	^\s*uVar12\ =\ DAT_001b0220;$	+3	all	all
+use	FUN_001875a8	uVar12	inst2Src2Select	CONFIRMED	select word (+0x10) of inst2 operand record 2, restored on the exchanged operand	^\s*uVar12\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x10\);$@2	+48	all	all
+use	FUN_001875a8	uVar10	destSelect	CONFIRMED	operand record 0 +0x10 of inst: destination select word stored at inst2+0x9c	^\s*uVar10\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x10\);$	+11	all	all
+use	FUN_001875a8	uVar10	otherSelect	CONFIRMED	select word (+0x10) of the inst operand that is not inst2	^\s*uVar10\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x10\);$@2	+47	all	all
+local	FUN_00188fec	piVar2	currentProducerA	INFERRED	current producer instruction after the pattern rewrites: after each successful pattern the producer is re-read with IRInst__getOperandSourceOrDefault; A and B alternate through the fixed pattern sequence
+local	FUN_00188fec	piVar3	currentProducerB	INFERRED	current producer instruction (alternate of currentProducerA) through the fixed pattern sequence
+local	FUN_00188fec	piVar4	lastRewritten	INFERRED	the producer that the last successful pattern rewrote (initially consumerOperandArg / the foldStatus buffer): passed to Inst__tryCollapseSimilar
+local	FUN_0015ea3c	param_1	consumer	CONFIRMED	first argument of Inst__foldProducerIntoConsumer (the instruction that reads the producer)
+local	FUN_0015ea3c	param_2	consumerSrcIndex	CONFIRMED	second argument of Inst__foldProducerIntoConsumer (the consumer operand that reads the producer)
+local	FUN_0015ea3c	bVar1	moreLanes	INFERRED	lane != 3 continue flag
+local	FUN_0015ea3c	iVar10	nextIndex	INFERRED	iVar8 + 1: next source index in the select-clearing loop
+local	FUN_0015ea3c	uVar11	zeroWord	INFERRED	a zero (flag test of an already-zero value) used to zero-initialise the saveCounters buffer
+local	FUN_0015ea3c	local_70	foldStatus	CONFIRMED	status word (zeroed first) passed as the last argument of Inst__foldProducerIntoConsumer
+local	FUN_0015ea3c	local_5c	savedCounters0	CONFIRMED	3-word buffer filled by IRInst__saveCounters(node, buffer, -1) and replayed after the rebuild
+local	FUN_0015ea3c	local_58	savedCounters1	CONFIRMED	second word of the saveCounters buffer
+local	FUN_0015ea3c	local_54	savedCounters2	CONFIRMED	third word of the saveCounters buffer
+local	FUN_0015ea3c	local_6c	srcDestSelect	CONFIRMED	destination select word (record 0 +0x10) of operandVReg, scanned for written lanes
+local	FUN_0015ea3c	local_48	destWriteMask1	CONFIRMED	WriteMask__fromSelectWord(clone destination select)
+local	FUN_0015ea3c	local_44	maskedSelect1	CONFIRMED	SelectWord__maskUnused(0x10203, destWriteMask1): select of mix source 1
+local	FUN_0015ea3c	local_40	destWriteMask2	CONFIRMED	WriteMask__fromSelectWord(merged destination select)
+local	FUN_0015ea3c	local_3c	maskedSelect2	CONFIRMED	SelectWord__maskUnused(operandVReg operand 1 select, destWriteMask2): select of mix source 2
+use	FUN_0015ea3c	bVar2	moreLanes2	INFERRED	lane != 3 continue flag	^\s*bVar2\ =\ iVar7\ !=\ 3;$	+2	all	all
+use	FUN_0015ea3c	bVar2	noLaneOverlap	INFERRED	cleared when a lane is unwritten in both node and its last source while node has the extra-source layout	^\s*bVar2\ =\ true;$	+13	all	all
+use	FUN_0015ea3c	bVar2	moreLanes2	INFERRED	lane != 3 continue flag	^\s*bVar2\ =\ iVar5\ !=\ 3;$	+2	all	all
+use	FUN_0015ea3c	bVar2	moreLanes2	INFERRED	lane != 3 continue flag	^\s*bVar2\ =\ iVar7\ !=\ 3;$@2	+2	all	all
+use	FUN_0015ea3c	iVar3	checkResult	INFERRED	predicate slot / FUN_000f5a0c results gating the mix transformation	^\s*if\ \(\(\(\(param_1\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x88\)\ \+\ 8\)\ !=\ 0x8e\)\)\ \&\&$	+12	all	all
+use	FUN_0015ea3c	iVar3	laneIndex	INFERRED	lane 0..3	^\s*iVar3\ =\ 0;$	+11	all	all
+use	FUN_0015ea3c	iVar3	passArgCopy	INFERRED	copy of pass left in a register for the call that follows	^\s*iVar3\ =\ param_4;$	+0	all	all
+use	FUN_0015ea3c	iVar3	checkResult2	INFERRED	IRInst vslot 25 (isMov) of operandVReg	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 100\)\)\(piVar4\);$	+1	all	all
+use	FUN_0015ea3c	iVar3	checkResult3	INFERRED	FUN_000f5a0c(operandVReg, 1, operandVReg, pass)	^\s*iVar3\ =\ FUN_000f5a0c\(piVar4,1,piVar4,param_4\);$	+1	all	all
+use	FUN_0015ea3c	iVar3	laneIndex2	INFERRED	lane 0..3	^\s*iVar3\ =\ 0;$@2	+9	all	all
+use	FUN_0015ea3c	iVar3	laneIndex3	INFERRED	lane 0..3	^\s*iVar3\ =\ 0;$@3	+9	all	all
+use	FUN_0015ea3c	iVar3	passArgCopy	INFERRED	copy of pass staged as a pass-through argument of the vslot 24 call	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x60\)\)\(piVar4,a1,uVar9,iVar3,in_r7,in_r8,local_68\);$	+0	rhs	rhs
+use	FUN_0015ea3c	iVar3	isMixResult	INFERRED	IRInst vslot 24 (0x60, isMix) of operandVReg	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x60\)\)\(piVar4,a1,uVar9,iVar3,in_r7,in_r8,local_68\);$	+1	lhs	all
+use	FUN_0015ea3c	iVar3	src2SelectOut	INFERRED	local_60: select word stored into operand record 2 of node	^\s*iVar3\ =\ local_60;$	+2	all	all
+use	FUN_0015ea3c	iVar3	srcIndex	INFERRED	1-based source index while the sources of operandVReg are copied to node	^\s*iVar3\ =\ 1;$	+14	all	all
+use	FUN_0015ea3c	iVar3	srcCount	INFERRED	node source count (node[0x21]) while unwritten lanes are cleared	^\s*iVar3\ =\ param_3\[0x21\];$	+15	all	all
+use	FUN_0015ea3c	iVar3	srcSelectOut	INFERRED	local_60: select word stored into node operand numSources	^\s*iVar3\ =\ local_60;$@2	+6	all	all
+use	FUN_0015ea3c	iVar3	isMovResult	INFERRED	IRInst vslot 25 (isMov) of operandVReg	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 100\)\)\(piVar4\);$@2	+1	all	all
+use	FUN_0015ea3c	iVar5	prevNode	INFERRED	node+4: list neighbour after which the clone is inserted	^\s*iVar5\ =\ param_3\[1\];$	+13	all	all
+use	FUN_0015ea3c	iVar5	laneIndex9	INFERRED	lane 0..3	^\s*iVar5\ =\ 0;$	+9	all	all
+use	FUN_0015ea3c	iVar5	destRecord	CONFIRMED	IRInst__getOperandRecord(node, 0)	^\s*iVar5\ =\ FUN_001054ec\(param_3,0\);$	+2	all	all
+use	FUN_0015ea3c	iVar5	availableResult	INFERRED	FUN_000f5a0c(node, 1, node, pass)	^\s*iVar5\ =\ FUN_000f5a0c\(param_3,1,param_3,param_4\);$	+1	all	all
+use	FUN_0015ea3c	iVar5	lanesLeft	INFERRED	countdown of the four lanes	^\s*iVar5\ =\ 4;$	+7	all	all
+use	FUN_0015ea3c	iVar5	lanesLeft2	INFERRED	countdown of the four lanes	^\s*iVar5\ =\ 4;$@2	+7	all	all
+use	FUN_0015ea3c	iVar5	prevNode2	INFERRED	node+4: list neighbour after which node is re-inserted	^\s*iVar5\ =\ param_3\[1\];$@2	+17	all	all
+use	FUN_0015ea3c	iVar5	laneIndex4	INFERRED	lane 0..3	^\s*iVar5\ =\ 0;$@2	+9	all	all
+use	FUN_0015ea3c	iVar5	laneIndex5	INFERRED	lane 0..3	^\s*iVar5\ =\ 0;$@3	+9	all	all
+use	FUN_0015ea3c	iVar5	laneIndex6	INFERRED	lane 0..3	^\s*iVar5\ =\ 0;$@4	+8	all	all
+use	FUN_0015ea3c	iVar5	prevNode3	INFERRED	node+4: list neighbour after which node is re-inserted	^\s*iVar5\ =\ param_3\[1\];$@3	+72	all	all
+use	FUN_0015ea3c	iVar7	laneIndex7	INFERRED	lane 0..3	^\s*iVar7\ =\ 0;$	+14	all	all
+use	FUN_0015ea3c	iVar7	lanesLeft3	INFERRED	countdown of the four lanes	^\s*iVar7\ =\ 4;$	+7	all	all
+use	FUN_0015ea3c	iVar7	lanesLeft4	INFERRED	countdown of the four lanes	^\s*iVar7\ =\ 4;$@2	+7	all	all
+use	FUN_0015ea3c	iVar7	lanesLeft5	INFERRED	countdown of the four lanes	^\s*iVar7\ =\ 4;$@3	+7	all	all
+use	FUN_0015ea3c	iVar7	srcSelect	INFERRED	select word (+0x10) of operandVReg operand iVar3, copied to the same operand of node	^\s*iVar7\ =\ \*\(int\ \*\)\(iVar7\ \+\ 0x10\);$	+6	all	all
+use	FUN_0015ea3c	iVar7	laneIndex8	INFERRED	lane 0..3	^\s*iVar7\ =\ 0;$@2	+12	all	all
+use	FUN_0015ea3c	iVar8	clearIndex	INFERRED	1-based source index while the select byte of unwritten lanes is set to 4	^\s*iVar8\ =\ 1;$	+6	all	all
+use	FUN_0015ea3c	uVar6	prevBlock	INFERRED	prevNode +0x158: block the clone is inserted into	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(iVar5\ \+\ 0x158\);$	+3	all	all
+use	FUN_0015ea3c	uVar6	cloneDestSelect	CONFIRMED	destination select word (record 0 +0x10) of the clone of node	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(iVar5\ \+\ 0x10\);$	+30	all	all
+use	FUN_0015ea3c	uVar6	mixSrc2Select	CONFIRMED	select word (+0x10) of operandVReg operand 1: base select of mix source 2	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\);$	+2	all	all
+use	FUN_0015ea3c	uVar6	src2Select	CONFIRMED	local_64: select word of mix source 2	^\s*uVar6\ =\ local_64;$	+2	all	all
+use	FUN_0015ea3c	uVar9	nodeSrc1Select	CONFIRMED	select word (+0x10) of node operand record 1, moved to mix source 2	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\);$	+10	all	all
+use	FUN_0015ea3c	uVar9	compilerArg	CONFIRMED	*(pass+8): the Compiler passed to IRMix__ctor_10a1c0 (and left as a pass-through argument of the vslot 24 call)	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(param_4\ \+\ 8\);$	+6	all	all
+use	FUN_0015ea3c	uVar9	src1Select	CONFIRMED	local_64: select word of mix source 1	^\s*uVar9\ =\ local_64;$	+2	all	all
+func	Inst__tryDp3CommutativityPushoff	Inst__hoistScalarMulOutOfDot	CONFIRMED	single-component IrDot3 / IrDot4 (0x1c / 0x1d) one of whose operands is a single-use unsaturated IrMulFloat (0x13) with exactly one splat operand s and another operand v: the dot is cloned to read v instead of the mul, and the mul (re-created over the original dot instruction with IRInst__cloneInto) multiplies the new dot by s with lane selects set for the written lane; program+0x284 counts the rewrite
+local	FUN_00163478	param_1	consumer	CONFIRMED	first argument of the call from the peepholeCombine drivers (the consumer of inst); unused here
+local	FUN_00163478	param_2	consumerSrcIndex	CONFIRMED	second argument of the call from the peepholeCombine drivers; unused here
+local	FUN_00163478	param_4	program	CONFIRMED	program+8 is the Compiler, program+0x284 a statistics counter, program+0x478 the base of the inst+0x160 counters
+local	FUN_00163478	uVar10	compiler	CONFIRMED	*(program+8): the Compiler passed to IRInst__clone / IRInst__cloneInto / IRInst__setOperandSource
+local	FUN_00163478	bVar1	moreLanes	INFERRED	lane != 3 continue flag
+local	FUN_00163478	uVar7	scalarSelectByte	INFERRED	first select byte of the splat scalar that is not 4 (0 when all are 4): select byte of the dot operand in the rebuilt mul
+local	FUN_00163478	uVar9	src1SelectWord	CONFIRMED	select word (+0x10) of mul operand record 1
+local	FUN_00163478	piVar6	newMul	CONFIRMED	IRInst__cloneInto(mul, dot, compiler, 0): the dot instruction slot rewritten as the mul of the new dot and the scalar
+local	FUN_00163478	local_98	destSelectWord	CONFIRMED	destination select word (record 0 +0x10) of the dot; must be a single component constant; restored to newMul+0x9c
+local	FUN_00163478	local_94	scalarSelect	CONFIRMED	select word of the splat mul operand (the scalar s)
+local	FUN_00163478	local_90	mulVectorSelect	CONFIRMED	select word (+0x10) of the mul operand v that is not the scalar
+local	FUN_00163478	local_8c	dotOperandSelect	CONFIRMED	select word (+0x10) of the dot operand that read the mul, composed with mulVectorSelect
+local	FUN_00163478	local_88	savedCounters0	CONFIRMED	3-word buffer filled by IRInst__saveCounters(dot, buffer, -1) and replayed on newMul
+local	FUN_00163478	local_84	savedCounters1	CONFIRMED	second word of the saveCounters buffer
+local	FUN_00163478	local_80	savedCounters2	CONFIRMED	third word of the saveCounters buffer
+local	FUN_00163478	local_7c	lastOperandRecord	CONFIRMED	buffer filled by IRInst__readLastOperand(dot): the extra source record
+local	FUN_00163478	local_78	lastOperandSource	CONFIRMED	word 1 of the lastOperandRecord buffer (the extra source, tested != 0)
+local	FUN_00163478	local_68	lastOperandRecord5	INFERRED	sixth word of the lastOperandRecord buffer (zeroed before the read)
+use	FUN_00163478	iVar11	dotOpcode	CONFIRMED	opcode of inst: IrDot3 0x1c or IrDot4 0x1d	^\s*iVar11\ =\ \*\(int\ \*\)\(param_3\[0x22\]\ \+\ 8\);$	+3	all	all
+use	FUN_00163478	iVar11	srcCountBound	INFERRED	virtual slot 5 (0x14) result: bound of the loop over the dot sources	^\s*for\ \(iVar3\ =\ 1;\ iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*param_3\ \+\ 0x14\)\)\(param_3\),\ iVar3\ <=\ iVar11;$	+0	all	all
+use	FUN_00163478	iVar11	mulInst	CONFIRMED	the IrMulFloat source of the dot (operand index operandRecord)	^\s*iVar11\ =\ FUN_00105594\(param_3,iVar3\);$	+85	all	all
+use	FUN_00163478	iVar11	laneIndex	INFERRED	lane 0..3 of the select-compose loop	^\s*iVar11\ =\ 0;$	+8	all	all
+use	FUN_00163478	iVar11	newDotRecord	CONFIRMED	IRInst__getOperandRecord(newDot, operand): receives dotOperandSelect	^\s*iVar11\ =\ FUN_001054ec\(iVar4,iVar3\);$	+1	all	all
+use	FUN_00163478	iVar11	laneIndex2	INFERRED	lane 0..3 of the final select loop	^\s*iVar11\ =\ 0;$@2	+12	all	all
+use	FUN_00163478	iVar2	laneScan	INFERRED	index over the four select bytes of the scalar	^\s*iVar2\ =\ 0;$	+9	all	all
+use	FUN_00163478	iVar2	mulOperandRecord	CONFIRMED	IRInst__getOperandRecord(mul / dot, operand)	^\s*iVar2\ =\ FUN_001054ec\(iVar11,uVar8\);$	+3	all	all
+use	FUN_00163478	iVar2	savedResultScale	INFERRED	dot +0x124 result scale code, cleared on the dot and restored on newMul	^\s*iVar2\ =\ param_3\[0x49\];$	+44	all	all
+use	FUN_00163478	iVar14	lanesLeft	INFERRED	countdown of the four select bytes	^\s*iVar14\ =\ 4;$	+8	all	all
+use	FUN_00163478	iVar14	savedSaturate	INFERRED	dot +0x120 saturate flag, cleared on the dot and restored on newMul	^\s*iVar14\ =\ param_3\[0x48\];$	+43	all	all
+use	FUN_00163478	iVar13	nextNode	INFERRED	dot+8: list neighbour before which the new dot is inserted	^\s*iVar13\ =\ param_3\[2\];$	+12	all	all
+use	FUN_00163478	iVar4	singleUse	INFERRED	IRInst__hasSingleUse(mul)	^\s*\(iVar4\ =\ FUN_0010497c\(iVar11,param_4\),\ iVar4\ !=\ 0\)\)\ \&\&\ \(\*\(int\ \*\)\(iVar11\ \+\ 0x124\)\ ==\ 0\)\)$	+0	all	all
+use	FUN_00163478	iVar4	mulSelectRecord	CONFIRMED	IRInst__getOperandRecord(mul, 1 / 2)	^\s*iVar4\ =\ FUN_001054ec\(iVar11,1\);$	+3	all	all
+use	FUN_00163478	iVar4	isSplatResult	INFERRED	SelectWord__isSplat of the mul operand selects	^\s*iVar4\ =\ FUN_000f2c5c\(uVar9\);$	+5	all	all
+use	FUN_00163478	iVar4	scalarDef	CONFIRMED	definition of the splat mul operand s	^\s*iVar4\ =\ FUN_00105594\(iVar11,2\);$	+0	all	all
+use	FUN_00163478	iVar4	scalarDef	CONFIRMED	definition of the splat mul operand s	^\s*iVar4\ =\ FUN_00105594\(iVar11,1\);$	+0	all	all
+use	FUN_00163478	iVar4	scalarDef	CONFIRMED	definition of the splat mul operand s (its +0x160 counter is bumped)	^\s*if\ \(\*\(int\ \*\)\(param_4\ \+\ 0x478\)\ <\ \*\(int\ \*\)\(iVar4\ \+\ 0x160\)\)\ \{$	+4	all	all
+use	FUN_00163478	iVar4	newDot	CONFIRMED	IRInst__clone(dot): the new dot that reads the vector operand v	^\s*iVar4\ =\ FUN_0010445c\(param_3,uVar10,0\);$	+32	all	all
+use	FUN_00163478	iVar5	vectorDef	CONFIRMED	definition of the mul operand v that is not the scalar	^\s*iVar5\ =\ FUN_00105594\(iVar11,1\);$	+0	all	all
+use	FUN_00163478	iVar5	vectorDef	CONFIRMED	definition of the mul operand v that is not the scalar	^\s*iVar5\ =\ FUN_00105594\(iVar11,2\);$	+0	all	all
+use	FUN_00163478	iVar5	vectorDef	CONFIRMED	definition of the mul operand v (its +0x160 counter is bumped)	^\s*if\ \(\*\(int\ \*\)\(param_4\ \+\ 0x478\)\ <\ \*\(int\ \*\)\(iVar5\ \+\ 0x160\)\)\ \{$	+5	all	all
+use	FUN_00163478	iVar5	vectorDef	CONFIRMED	definition of the mul operand v set as the new dot source	^\s*FUN_00106004\(iVar4,2,iVar5,0,uVar10\);$	+2	all	all
+use	FUN_00163478	iVar5	lanesLeft2	INFERRED	countdown of the four lanes of the select compose loop	^\s*iVar5\ =\ 4;$	+10	all	all
+use	FUN_00163478	uVar8	src2SelectWord	CONFIRMED	select word (+0x10) of mul operand record 2	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x10\);$	+10	all	all
+use	FUN_00163478	uVar8	vectorOperandIndex	CONFIRMED	index (2 or 1) of the mul operand that is the vector v	^\s*uVar8\ =\ 1;$	+0	all	all
+use	FUN_00163478	uVar8	vectorOperandIndex	CONFIRMED	index (2 or 1) of the mul operand that is the vector v	^\s*uVar8\ =\ 2;$	+0	all	all
+use	FUN_00163478	uVar8	vectorOperandIndex	CONFIRMED	index of the mul operand that is the vector v	^\s*iVar2\ =\ FUN_001054ec\(iVar11,uVar8\);$	+84	all	all
+use	FUN_00163478	uVar12	result	CONFIRMED	return value: 1 when the dot was rewritten	^\s*uVar12\ =\ 0;$	+0	all	all
+use	FUN_00163478	uVar12	scalarOperandIndex	CONFIRMED	index (2 or 1) of the mul operand that is the splat scalar	^\s*uVar12\ =\ 2;$	+0	all	all
+use	FUN_00163478	uVar12	scalarOperandIndex	CONFIRMED	index (1) of the mul operand that is the splat scalar	^\s*uVar12\ =\ 1;$	+0	all	all
+use	FUN_00163478	uVar12	scalarOperandIndex	CONFIRMED	index of the mul operand that is the splat scalar	^\s*\(\*\*\(code\ \*\*\)\(\*piVar6\ \+\ 0x88\)\)\(piVar6,uVar12,iVar11,uVar7\);$	+0	all	all
+use	FUN_00163478	uVar12	result	CONFIRMED	return value: 1 when the dot was rewritten	^\s*uVar12\ =\ 1;$@2	+0	all	all
+use	FUN_00163478	uVar12	result	CONFIRMED	return value: 0 when the opcode or the destination does not match	^\s*uVar12\ =\ 0;$@2	+2	all	all
+local	FUN_000ed29c	uStack_38	unwrittenLaneMask	INFERRED	four bytes (stack buffer just below destSelectBytes): lane byte = 1 where the destination select byte is not 1 (written lane)
+local	FUN_000ed29c	auStack_34	destSelectBytes	CONFIRMED	copy of the destination select word of inst, read byte by byte
+use	FUN_000ed29c	iVar1	destRecord	CONFIRMED	IRInst__getOperandRecord(inst, 0)	^\s*iVar1\ =\ FUN_001054ec\(param_2,0\);$	+1	all	all
+use	FUN_000ed29c	iVar1	laneIndex	INFERRED	byte index 0..3 over destSelectBytes	^\s*iVar1\ =\ 0;$	+6	all	all
+use	FUN_000ed29c	iVar3	destRecord2	CONFIRMED	IRInst__getOperandRecord(inst, 0)	^\s*iVar3\ =\ FUN_001054ec\(param_2,0\);$	+2	all	all
+use	FUN_000ed29c	iVar3	lanesLeft	INFERRED	countdown of the four bytes	^\s*iVar3\ =\ 4;$	+6	all	all
+use	FUN_001322a8	uVar22	inWorklistWordCount	INFERRED	(regCount + 0x1f) >> 5: number of 32-bit words of the in-worklist bitset	^\s*uVar22\ =\ param_4\ \+\ 0x1fU\ >>\ 5;$	+15	all	all
+use	FUN_001322a8	uVar22	bitScanIndex	INFERRED	bit index 0..regCount*4-1 scanned over the live-in bitset of the block	^\s*uVar22\ =\ 0;$	+12	all	all
+use	FUN_001322a8	uVar22	regNode	INFERRED	FUN_00134bf0(graph, destination register, useCoalesced): graph node of the register defined by the instruction; pushed on the worklist and interfered with the live nodes	^\s*uVar22\ =\ \(\(int\ \(\*\)\(\)\)FUN_00134bf0\)\(param_2,piVar11\[0x25\],param_5\);$	+105	all	all
+use	FUN_001322a8	uVar22	regNode	INFERRED	graph node of the register defined by the instruction (reached by goto from the live-node loops)	^\s*\(\(int\ \(\*\)\(\)\)FUN_00135334\)\(param_2,uVar22,iVar20\);$	+0	all	all
+use	FUN_001322a8	uVar22	cursorFlags	INFERRED	cursorInst[5] (+0x14) flag word of the instruction being walked backwards	^\s*uVar22\ =\ piVar13\[5\];$	+51	all	all
+use	FUN_001322a8	uVar22	poppedReg	INFERRED	node popped from the worklist stack; cleared from the in-worklist bitset and interfered with every live register	^\s*uVar22\ =\ \*puVar10;$	+12	all	all
+use	FUN_001322a8	uVar22	walkFlags	INFERRED	walkInst[5] (+0x14) flag word of the instruction being walked	^\s*uVar22\ =\ piVar11\[5\];$@6	+72	all	all
+func	Inst__collapseAlgebraic_00158c3c	Inst__distributeResultScale	INFERRED	worklist over an arena vector (3-word vector struct at local_68vec) starting from rootInst: for each popped IrAddFloat / IrMulFloat / IrMulAddFloat (0x12..0x14) with a non-zero result scale code (+0x124) the scale is pushed into the source producers when FUN_0015800c says they can take it (FUN_00158988 applies it, FUN_00158b78 handles single-use pairs, movs are bypassed), +0x124 is cleared and the changed producers are pushed back; returns 1 when rootInst itself was handled; program+0x17c counts bypassed movs
+local	FUN_00158c3c	param_1	rootInst	CONFIRMED	first element pushed on the worklist; compared with the popped instruction to set the return value
+local	FUN_00158c3c	param_2	program	CONFIRMED	program+8 is the Compiler (+0x378 arena, passed to IRInst__setOperandSource), program+0x17c / +0x478 statistics counter and counter base
+local	FUN_00158c3c	local_5c	worklistArena	CONFIRMED	*(compiler+0x378): arena of the worklist vector storage; freed at the end
+local	FUN_00158c3c	local_58	src1ReadMask	CONFIRMED	SelectWord__readMask of operand record 1 (lanes read through source 1)
+local	FUN_00158c3c	local_54	src2ReadMask	CONFIRMED	SelectWord__readMask of operand record 2 (lanes read through source 2)
+local	FUN_00158c3c	local_50	src3ReadMask	CONFIRMED	SelectWord__readMask of operand record 3 (lanes read through source 3)
+local	FUN_00158c3c	uVar1	src1ReadMaskCopy	CONFIRMED	copy of src1ReadMask passed to FUN_0015800c / FUN_00158988
+local	FUN_00158c3c	uVar2	src2ReadMaskCopy	CONFIRMED	copy of src2ReadMask passed to FUN_0015800c / FUN_00158988
+local	FUN_00158c3c	uVar11	changedRoot	CONFIRMED	return value: set to 1 when the popped instruction is rootInst and its scale was distributed
+local	FUN_00158c3c	uVar12	destSelect	CONFIRMED	operand record 0 +0x10 of the popped instruction: destination select word passed to FUN_0015800c / FUN_00158988
+local	FUN_00158c3c	puVar6	pushedSlot	INFERRED	address of the worklist element just appended
+local	FUN_00158c3c	puVar15	operandFlagsPtr	INFERRED	walks the operand flag words of the source being bypassed (+0xb8 stepping by 0x18 bytes)
+local	FUN_00158c3c	piVar10	laneByteCursor	INFERRED	walks the four destination select bytes of the source being bypassed
+local	FUN_00158c3c	iVar16	curInst	CONFIRMED	instruction popped from the worklist
+use	FUN_00158c3c	uVar7	src3ReadMaskCopy	CONFIRMED	copy of src3ReadMask passed to FUN_0015800c / FUN_00158988	^\s*uVar7\ =\ local_50\[0\];$	+36	all	all
+use	FUN_00158c3c	piVar3	pushSlot	INFERRED	address of the worklist element appended for rootInst	^\s*piVar3\ =\ \(int\ \*\)\(iVar13\ \+\ local_60_vec\);$	+5	all	all
+use	FUN_00158c3c	piVar3	topSlot	INFERRED	address of the last worklist element (0 when empty)	^\s*piVar3\ =\ \(int\ \*\)0x0;$	+4	all	all
+use	FUN_00158c3c	uVar9	pushIndex	INFERRED	old element count of the worklist = index of the pushed instruction	^\s*uVar9\ =\ local_64_vec;$	+4	all	all
+use	FUN_00158c3c	uVar9	topIndex	INFERRED	count - 1: index of the worklist top	^\s*uVar9\ =\ local_64_vec\ \-\ 1;$	+6	all	all
+use	FUN_00158c3c	uVar9	pushIndex	INFERRED	old element count of the worklist = index of the pushed instruction	^\s*uVar9\ =\ local_64_vec;$@2	+5	all	all
+use	FUN_00158c3c	uVar9	operandFlags	INFERRED	flag word of the source operand being checked (negate / abs bits must be clear)	^\s*uVar9\ =\ \*puVar15;$	+2	all	all
+use	FUN_00158c3c	uVar9	operandFlags2	INFERRED	flag word of the source operand being checked (negate / abs bits must be clear)	^\s*uVar9\ =\ \*puVar15;$@2	+2	all	all
+use	FUN_00158c3c	uVar9	pushIndex	INFERRED	old element count of the worklist = index of the pushed instruction	^\s*uVar9\ =\ local_64_vec;$@3	+5	all	all
+use	FUN_00158c3c	uVar9	pushIndex	INFERRED	old element count of the worklist = index of the pushed instruction	^\s*uVar9\ =\ local_64_vec;$@4	+5	all	all
+use	FUN_00158c3c	uVar9	pushIndex	INFERRED	old element count of the worklist = index of the pushed instruction	^\s*uVar9\ =\ local_64_vec;$@5	+4	all	all
+use	FUN_00158c3c	uVar9	pushIndex	INFERRED	old element count of the worklist = index of the pushed instruction	^\s*uVar9\ =\ local_64_vec;$@6	+4	all	all
+use	FUN_00158c3c	uVar9	pushIndex	INFERRED	old element count of the worklist = index of the pushed instruction	^\s*uVar9\ =\ local_64_vec;$@7	+4	all	all
+use	FUN_00158c3c	iVar13	pushByteOffset	INFERRED	index * 4 of the worklist element being pushed	^\s*iVar13\ =\ local_64_vec\ \*\ 4;$	+3	all	all
+use	FUN_00158c3c	iVar13	scale	CONFIRMED	curInst +0x124: result scale code to distribute	^\s*iVar13\ =\ \*\(int\ \*\)\(iVar16\ \+\ 0x124\);$	+30	all	all
+use	FUN_00158c3c	iVar13	pushByteOffset	INFERRED	index * 4 of the worklist element being pushed	^\s*iVar13\ =\ local_64_vec\ \*\ 4;$@2	+3	all	all
+use	FUN_00158c3c	iVar13	scale	CONFIRMED	curInst +0x124: result scale code to distribute	^\s*if\ \(iVar13\ !=\ 0\)\ \{$@2	+11	all	all
+use	FUN_00158c3c	iVar13	scale	CONFIRMED	curInst +0x124: result scale code to distribute	^\s*\(\(int\ \(\*\)\(\)\)FUN_00158988\)\(iVar16,piVar3,iVar13,uVar12,uVar1,param_2\);$@2	+0	all	all
+use	FUN_00158c3c	iVar13	scale	CONFIRMED	curInst +0x124: result scale code to distribute	^\s*\(\(int\ \(\*\)\(\)\)FUN_00158988\)\(iVar16,uVar8,iVar13,uVar12,uVar7,param_2\);$	+0	all	all
+use	FUN_00158c3c	iVar13	pushByteOffset	INFERRED	index * 4 of the worklist element being pushed	^\s*iVar13\ =\ local_64_vec\ \*\ 4;$@3	+3	all	all
+use	FUN_00158c3c	iVar13	scale	CONFIRMED	curInst +0x124: result scale code to distribute	^\s*else\ if\ \(\(\(iVar14\ ==\ 0x12\)\ \&\&\ \(iVar13\ !=\ 0\)\)\ \&\&$	+7	all	all
+use	FUN_00158c3c	iVar13	scale	CONFIRMED	curInst +0x124: result scale code to distribute	^\s*\(\(int\ \(\*\)\(\)\)FUN_00158988\)\(iVar16,piVar5,iVar13,uVar12,uVar2,param_2\);$@3	+0	all	all
+use	FUN_00158c3c	iVar13	pushByteOffset	INFERRED	index * 4 of the worklist element being pushed	^\s*iVar13\ =\ local_64_vec\ \*\ 4;$@4	+3	all	all
+use	FUN_00158c3c	iVar14	opcode	CONFIRMED	opcode of curInst: IrAddFloat 0x12, IrMulFloat 0x13, IrMulAddFloat 0x14	^\s*iVar14\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar16\ \+\ 0x88\)\ \+\ 8\);$	+1	all	all
+use	FUN_00158c3c	iVar14	opcode	CONFIRMED	opcode of curInst tested for IrMulFloat 0x13	^\s*if\ \(iVar14\ ==\ 0x13\)\ \{$	+0	all	all
+use	FUN_00158c3c	iVar14	singleUse1	INFERRED	IRInst__hasSingleUse of source 1 / source 2	^\s*iVar14\ =\ FUN_0010497c\(piVar3,param_2\);$	+1	all	all
+use	FUN_00158c3c	iVar14	canApply	INFERRED	FUN_0015800c(curInst, source, scale, destSelect, readMask, program): the source can take the scale	^\s*iVar14\ =\ FUN_0015800c\(iVar16,piVar3,iVar13,uVar12,uVar1,param_2\);$	+3	all	all
+use	FUN_00158c3c	iVar14	opcode	CONFIRMED	opcode of curInst tested for IrMulAddFloat 0x14	^\s*else\ if\ \(iVar14\ ==\ 0x14\)\ \{$	+0	all	all
+use	FUN_00158c3c	iVar14	singleUse2	INFERRED	IRInst__hasSingleUse of source 1 / source 2	^\s*iVar14\ =\ FUN_0010497c\(piVar3,param_2\);$@2	+1	all	all
+use	FUN_00158c3c	iVar14	isMov	INFERRED	IRInst vslot 25 (isMov) of source 1	^\s*iVar14\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 100\)\)\(piVar3\);$	+1	all	all
+use	FUN_00158c3c	iVar14	srcIndex	INFERRED	1-based index over the sources of the mov source 1	^\s*for\ \(iVar14\ =\ 1;\ iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x14\)\)\(piVar3\),\ iVar14\ <=\ iVar4;$	+5	all	all
+use	FUN_00158c3c	iVar14	flagResult	INFERRED	RegKind__flagBit0 / IRInst vslot 20 (0x50) results for source 1	^\s*\(\(iVar14\ =\ FUN_00126760\(piVar3\[0x26\]\),\ iVar14\ !=\ 0\ \&\&\ \(\(piVar3\[5\]\ \&\ 2U\)\ ==\ 0\)\)\)\)$	+1	all	all
+use	FUN_00158c3c	iVar14	lanesLeft	INFERRED	countdown of the four destination select bytes	^\s*iVar14\ =\ 4;$	+6	all	all
+use	FUN_00158c3c	iVar14	addrMode	INFERRED	FUN_00105dbc(source 1, 0): destination addressing mode (0 = direct)	^\s*iVar14\ =\ FUN_00105dbc\(piVar3,0\);$	+1	all	all
+use	FUN_00158c3c	iVar14	isMov2	INFERRED	IRInst vslot 25 (isMov) of source 2	^\s*iVar14\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 100\)\)\(piVar5\);$	+1	all	all
+use	FUN_00158c3c	iVar14	srcIndex2	INFERRED	1-based index over the sources of the mov source 2	^\s*for\ \(iVar14\ =\ 1;\ iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x14\)\)\(piVar5\),\ iVar14\ <=\ iVar4;$	+5	all	all
+use	FUN_00158c3c	iVar14	flagResult2	INFERRED	RegKind__flagBit0 / IRInst vslot 20 (0x50) results for source 2	^\s*\(\(\(iVar14\ =\ FUN_00126760\(piVar5\[0x26\]\),\ iVar14\ !=\ 0\ \&\&\ \(\(piVar5\[5\]\ \&\ 2U\)\ ==\ 0\)\)\ \&\&$	+1	all	all
+use	FUN_00158c3c	iVar14	lanesLeft2	INFERRED	countdown of the four destination select bytes	^\s*iVar14\ =\ 4;$@2	+6	all	all
+use	FUN_00158c3c	iVar14	addrMode2	INFERRED	FUN_00105dbc(source 2, 0): destination addressing mode (0 = direct)	^\s*iVar14\ =\ FUN_00105dbc\(piVar5,0\);$	+1	all	all
+use	FUN_00158c3c	iVar14	canApply2	INFERRED	FUN_0015800c(...): the source can take the scale	^\s*iVar14\ =\ FUN_0015800c\(iVar16,uVar8,iVar13,uVar12,local_50\[0\],param_2\);$	+5	all	all
+use	FUN_00158c3c	iVar14	pushByteOffset2	INFERRED	index * 4 of the worklist element being pushed	^\s*iVar14\ =\ local_64_vec\ \*\ 4;$	+3	all	all
+use	FUN_00158c3c	iVar14	pushByteOffset3	INFERRED	index * 4 of the worklist element being pushed	^\s*iVar14\ =\ local_64_vec\ \*\ 4;$@2	+3	all	all
+use	FUN_00158c3c	iVar14	opcode	CONFIRMED	opcode of curInst tested for IrAddFloat 0x12	^\s*else\ if\ \(\(\(iVar14\ ==\ 0x12\)\ \&\&\ \(iVar13\ !=\ 0\)\)\ \&\&$	+0	all	all
+use	FUN_00158c3c	iVar14	canApply3	INFERRED	FUN_0015800c(...): the source can take the scale	^\s*\(\(iVar14\ =\ FUN_0015800c\(iVar16,piVar3,iVar13,uVar12,uVar1,param_2\),\ iVar14\ !=\ 0\ \&\&$	+1	all	all
+use	FUN_00158c3c	iVar14	pushByteOffset4	INFERRED	index * 4 of the worklist element being pushed	^\s*iVar14\ =\ local_64_vec\ \*\ 4;$@3	+3	all	all
+func	Inst__collapseAlgebraic_0015bd40	Inst__mergeAddAndMadSharedOperands	INFERRED	node (IrAddFloat 0x12 or IrMulAddFloat 0x14, extra-source layout) and its last source (the other kind, same +0x120 / +0x124) write disjoint lanes and the add operands equal two of the mad operands (with matching negate / abs): the add slot is rewritten with IRInst__cloneInto from the mad over the union of the lanes, the mad free operand is fed by a lane-selected literal 1.0 (IRLoadConst__vslot73 or an appended source) and the other operands are lane-selected from the add and mad sources
+local	FUN_0015bd40	bVar1	moreLanes	INFERRED	lane != 3 continue flag
+local	FUN_0015bd40	uVar2	madSrc2Negate	CONFIRMED	bit 0 (negate) of mad operand 2 flags (+0xd0)
+local	FUN_0015bd40	uVar3	madSrc3Negate	CONFIRMED	bit 0 (negate) of mad operand 3 flags (+0xe8)
+local	FUN_0015bd40	uVar4	madSrc1Negate	CONFIRMED	bit 0 (negate) of mad operand 1 flags (+0xb8)
+local	FUN_0015bd40	uVar26	madSrc2Abs	CONFIRMED	bit 1 (abs) of mad operand 2 flags
+local	FUN_0015bd40	uVar21	madSrc3Abs	CONFIRMED	bit 1 (abs) of mad operand 3 flags
+local	FUN_0015bd40	uVar5	addSrc1Negate	CONFIRMED	bit 0 (negate) of add operand 1 flags (+0xb8)
+local	FUN_0015bd40	uVar6	addSrc2Negate	CONFIRMED	bit 0 (negate) of add operand 2 flags (+0xd0)
+local	FUN_0015bd40	uVar8	madSrc1Abs	CONFIRMED	bit 1 (abs) of mad operand 1 flags
+local	FUN_0015bd40	uVar22	addSrc1Abs	CONFIRMED	bit 1 (abs) of add operand 1 flags
+local	FUN_0015bd40	uVar10	addSrc2Abs	CONFIRMED	bit 1 (abs) of add operand 2 flags
+local	FUN_0015bd40	uVar23	madIndexForAddSrc1	CONFIRMED	index of the mad operand that equals add operand 1
+local	FUN_0015bd40	uVar24	madIndexForAddSrc2	CONFIRMED	index of the mad operand that equals add operand 2
+local	FUN_0015bd40	uVar25	freeMadIndex	CONFIRMED	index of the remaining mad operand: it receives the lane-selected literal 1.0 or the appended source
+local	FUN_0015bd40	local_88	mergedDestSelect	CONFIRMED	destination select word of the merged instruction: add lanes plus mad lanes
+local	FUN_0015bd40	local_84	madDestSelect	CONFIRMED	destination select word (record 0 +0x10) of the mad
+local	FUN_0015bd40	local_80	addDestSelect	CONFIRMED	destination select word (record 0 +0x10) of the add
+local	FUN_0015bd40	local_7c	addDestSelectCopy	CONFIRMED	destination select word of the add, used for the lane loops
+local	FUN_0015bd40	local_78	addSrc1Select	CONFIRMED	select word (+0x10) of add operand record 1
+local	FUN_0015bd40	local_74	addSrc2Select	CONFIRMED	select word (+0x10) of add operand record 2
+local	FUN_0015bd40	local_70	madFreeSelect	CONFIRMED	select word (+0x10) of the free mad operand
+local	FUN_0015bd40	local_6c	lastOperandRecord	CONFIRMED	buffer filled by IRInst__readLastOperand(operandVReg5): the extra source record
+local	FUN_0015bd40	local_68	lastOperandSource	CONFIRMED	word 1 of the lastOperandRecord buffer (the extra source, tested != 0)
+local	FUN_0015bd40	local_58	lastOperandRecord5	INFERRED	sixth word of the lastOperandRecord buffer (zeroed before the read)
+local	FUN_0015bd40	piVar13	mergedInst	CONFIRMED	IRInst__cloneInto(mad, add, compiler, 0): the add slot rewritten as the mad
+local	FUN_0015bd40	piVar20	literalInst	CONFIRMED	IRLoadConst__vslot73(0xa2, compiler): the literal 1.0 instruction feeding the free mad operand
+local	FUN_0015bd40	piVar27	lanePtr	INFERRED	walks the destination select bytes of the appended source being rewritten
+use	FUN_0015bd40	iVar7	nodeOpcode	CONFIRMED	opcode of node: IrAddFloat 0x12 or IrMulAddFloat 0x14	^\s*iVar7\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x88\)\ \+\ 8\);$	+2	all	all
+use	FUN_0015bd40	iVar7	nodeOpcode	CONFIRMED	opcode of node tested for IrMulAddFloat 0x14	^\s*if\ \(iVar7\ !=\ 0x14\)\ \{$	+0	all	all
+use	FUN_0015bd40	iVar7	madInst	CONFIRMED	the IrMulAddFloat of the pair (node, or the extra source)	^\s*iVar7\ =\ iVar11;$	+0	all	all
+use	FUN_0015bd40	iVar7	madInst	CONFIRMED	the IrMulAddFloat of the pair (node)	^\s*iVar7\ =\ param_1;$	+0	all	all
+use	FUN_0015bd40	iVar7	madInst	CONFIRMED	the IrMulAddFloat of the pair	^\s*if\ \(\*\(int\ \*\)\(iVar17\ \+\ 0x120\)\ !=\ \*\(int\ \*\)\(iVar7\ \+\ 0x120\)\)\ \{$	+152	all	all
+use	FUN_0015bd40	iVar7	isMixResult	INFERRED	IRInst vslot 24 (0x60, isMix) of the free operand source	^\s*iVar7\ =\ \(\*\*\(code\ \*\*\)\(\*piVar20\ \+\ 0x60\)\)\(piVar20\);$	+1	all	all
+use	FUN_0015bd40	iVar7	laneA	INFERRED	lane 0..3	^\s*iVar7\ =\ 0;$	+8	all	all
+use	FUN_0015bd40	iVar7	laneB	INFERRED	lane 0..3	^\s*iVar7\ =\ 0;$@2	+9	all	all
+use	FUN_0015bd40	iVar7	laneC	INFERRED	lane 0..3	^\s*iVar7\ =\ 0;$@3	+13	all	all
+use	FUN_0015bd40	iVar7	laneD	INFERRED	lane 0..3	^\s*iVar7\ =\ 0;$@4	+31	all	all
+use	FUN_0015bd40	iVar9	otherOpcode	CONFIRMED	opcode of the extra source (the add or the mad of the pair)	^\s*iVar9\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar11\ \+\ 0x88\)\ \+\ 8\);$	+14	all	all
+use	FUN_0015bd40	iVar9	laneScan	INFERRED	lane 0..3 of the disjoint-lane check	^\s*iVar9\ =\ 0;$	+10	all	all
+use	FUN_0015bd40	iVar9	isMixResult1	INFERRED	IRInst vslot 24 (0x60, isMix) of add source 1	^\s*iVar9\ =\ \(\*\*\(code\ \*\*\)\(\*piVar13\ \+\ 0x60\)\)\(piVar13\);$	+1	all	all
+use	FUN_0015bd40	iVar9	isMixResult2	INFERRED	IRInst vslot 24 (0x60, isMix) of add source 2	^\s*iVar9\ =\ \(\*\*\(code\ \*\*\)\(\*piVar13\ \+\ 0x60\)\)\(piVar13\);$@2	+1	all	all
+use	FUN_0015bd40	iVar9	addSrc1Resolved	CONFIRMED	IRInst__getOperandSourceThroughMix(add, 1)	^\s*iVar9\ =\ FUN_001466f4\(iVar17,1\);$	+54	all	all
+use	FUN_0015bd40	iVar9	depthAboveBase	INFERRED	add+0x160 - pass[0x478], clamped at 0, restored on the merged instruction	^\s*iVar9\ =\ \*\(int\ \*\)\(iVar17\ \+\ 0x160\)\ \-\ \*\(int\ \*\)\(param_2\ \+\ 0x478\);$	+153	all	all
+use	FUN_0015bd40	iVar12	lanesLeft	INFERRED	countdown of the four lanes	^\s*iVar12\ =\ 4;$	+8	all	all
+use	FUN_0015bd40	iVar12	addSrc2Resolved	CONFIRMED	IRInst__getOperandSourceThroughMix(add, 2)	^\s*iVar12\ =\ FUN_001466f4\(iVar17,2\);$	+50	all	all
+use	FUN_0015bd40	iVar12	laneIdx	INFERRED	lane 0..3 of the merged-destination loop	^\s*iVar12\ =\ 0;$	+5	all	all
+use	FUN_0015bd40	iVar12	allocatedRegister	CONFIRMED	merged instruction +0x14c, stored as destination register (record 0 +8)	^\s*iVar12\ =\ piVar13\[0x53\];$	+3	all	all
+use	FUN_0015bd40	iVar14	madSrc1Resolved	CONFIRMED	IRInst__getOperandSourceThroughMix(mad, 1)	^\s*iVar14\ =\ FUN_001466f4\(iVar7,1\);$	+37	all	all
+use	FUN_0015bd40	iVar14	lanesLeft2	INFERRED	countdown of the four lanes	^\s*iVar14\ =\ 4;$	+9	all	all
+use	FUN_0015bd40	iVar14	prevNode	INFERRED	add+4: list neighbour after which the merged instruction is inserted	^\s*iVar14\ =\ \*\(int\ \*\)\(iVar17\ \+\ 4\);$	+4	all	all
+use	FUN_0015bd40	iVar15	madSrc2Resolved	CONFIRMED	IRInst__getOperandSourceThroughMix(mad, 2)	^\s*iVar15\ =\ FUN_001466f4\(iVar7,2\);$	+48	all	all
+use	FUN_0015bd40	iVar16	madSrc3Resolved	CONFIRMED	IRInst__getOperandSourceThroughMix(mad, 3)	^\s*iVar16\ =\ FUN_001466f4\(iVar7,3\);$	+50	all	all
+use	FUN_0015bd40	iVar17	addInst	CONFIRMED	the IrAddFloat of the pair (node, or the extra source)	^\s*iVar17\ =\ param_1;$	+207	all	all
+use	FUN_0015bd40	iVar17	srcCount	INFERRED	source count of the free operand source while lane selects are appended	^\s*iVar17\ =\ piVar20\[0x21\];$	+8	all	all
+use	FUN_0015bd40	iVar17	isMixResult3	INFERRED	IRInst vslot 24 (0x60, isMix) of the mad source 1	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*piVar18\ \+\ 0x60\)\)\(piVar18\);$	+1	all	all
+use	FUN_0015bd40	iVar17	isMixResult4	INFERRED	IRInst vslot 24 (0x60, isMix) of the mad source 2	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*piVar19\ \+\ 0x60\)\)\(piVar19\);$	+1	all	all
+local	FUN_0019dd7c	uVar2	elementStorage	CONFIRMED	Arena__alloc(arena, 8): data array of the new vector (capacity 2); stored at vector word 3; the vectors become this+0x98 (saved-predicate stack) and this+0x94 (predicate-kind stack)
+local	FUN_0019dc48	uVar1	nodeHandle	INFERRED	FUN_000e7d5c(node + 0x12c): first argument of the vslot 40 (endControlFlowBlock) call
+local	FUN_0019ae80	uVar1	nodeHandle	INFERRED	FUN_000e7d5c(node): first argument of the vslot 39 (appendBranchEntry) call
+local	FUN_0019dcb0	puVar1	blockStart	INFERRED	arena header block address (this-1) used to release the object when it is the last allocation
+use	FUN_0019dcb0	iVar2	savedPredStack	CONFIRMED	this[0x26]: saved-predicate stack vector; data (+8) and the vector object freed	^\s*iVar2\ =\ param_1\[0x26\];$	+5	all	all
+use	FUN_0019dcb0	iVar2	predKindStack	CONFIRMED	this[0x25]: predicate-kind stack vector; data (+8) and the vector object freed	^\s*iVar2\ =\ param_1\[0x25\];$	+4	all	all
+use	FUN_0019dcb0	iVar2	arenaHeader	INFERRED	this[-1]: arena that allocated the assembler	^\s*iVar2\ =\ param_1\[\-1\];$	+4	all	all
+local	FUN_0019ba3c	puVar1	baseVtable	CONFIRMED	PTR_DAT_001e914c + 8: the MachineAssembler vtable stored back while the base destructor runs
+local	FUN_0019ba3c	puVar2	blockStart	INFERRED	arena header block address (this-1) used to release the object when it is the last allocation
+local	FUN_0019ba3c	iVar3	arenaHeader	INFERRED	this[-1]: arena that allocated the assembler
+local	FUN_0019e660	puVar1	pushedSlot	INFERRED	address of the element appended to the predicate-kind stack (this+0x94); 0 is stored
+local	FUN_0019e660	uVar2	pushIndex	INFERRED	old count of the predicate-kind stack = index of the pushed element
+local	FUN_0019e660	puVar3	predKindStack	CONFIRMED	vector at this+0x94 (capacity, count, data): the predicate-kind stack
+local	FUN_0019a3bc	iVar2	packedPercent	CONFIRMED	packed alu instructions as a percentage of the candidates, printed with the %%%d format
+use	FUN_0019a3bc	iVar1	totalCount	CONFIRMED	this+0x5c + this+0x58: control flow plus alu instruction count (the "%d total instruction(s)" argument)	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x5c\)\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x58\);$	+7	all	all
+use	FUN_0019a3bc	iVar1	candidateAluCount	CONFIRMED	this+0x78: number of candidate alu instructions	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x78\);$	+7	all	all
+local	FUN_0019d1f4	iVar2	instSlotTable	INFERRED	this+8: table of 8-byte entries (first and second instruction of each emitted PVS word), indexed by the instruction count
+use	FUN_0019d1f4	iVar1	slotByteOffset	CONFIRMED	this+0x58 (instruction count) * 8: byte offset of the current entry in instSlotTable	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x58\)\ \*\ 8;$	+5	all	all
+use	FUN_0019d1f4	iVar1	flagBit2	INFERRED	opcodeInfoIsVsFlagBit2(this+0x88, inst): math-engine operation (dual-math path when this+0x7c is set)	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_0019a538\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x88\),param_2\);$	+1	all	all
+use	FUN_0019d1f4	iVar1	numSources	CONFIRMED	virtual slot 5 (0x14) of inst: source count	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x14\)\)\(param_2\);$	+1	all	all
+use	FUN_0019d1f4	iVar1	numSources	CONFIRMED	virtual slot 5 (0x14) of inst: source count	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x14\)\)\(param_2\);$@2	+1	all	all
+use	FUN_0019d1f4	iVar1	numSources	CONFIRMED	virtual slot 5 (0x14) of inst: source count	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x14\)\)\(param_2\);$@3	+1	all	all
+use	FUN_0019d1f4	iVar1	numSources	CONFIRMED	virtual slot 5 (0x14) of inst: source count	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x14\)\)\(param_2\);$@4	+1	all	all
+use	FUN_0019d1f4	iVar1	numSources	CONFIRMED	virtual slot 5 (0x14) of inst: source count	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x14\)\)\(param_2\);$@5	+1	all	all
+use	FUN_0019d1f4	iVar1	srcRecord	CONFIRMED	IRInst__getOperandRecord(inst, 1)	^\s*iVar1\ =\ FUN_001054ec\(param_2,1\);$	+1	all	all
+func	Inst__collapseAlgebraic_00162cc0	Inst__collapseIntoExtraSourceDispatch	INFERRED	for an isMov (slot 25) or IrMulFloat (0x13) instruction with the extra-source layout (flag 0x200) when the target flag bit 0x100 of the HwLimits object is set: tries seven collapses between inst and its last source in turn (FUN_00161748, FUN_00151a74, FUN_001524b8, FUN_00151370, FUN_001541f0, FUN_00152ea8, FUN_001621c8) and reports whether one rewrote it
+local	FUN_00162cc0	param_2	program	CONFIRMED	second argument passed as `program` by the peepholeCombine drivers; program+8 is the Compiler (HwLimits flags at compiler+0x30c +8)
+local	FUN_00162cc0	iVar1	collapseResult	INFERRED	IRInst vslot 25 (isMov) first, then the result of each collapse attempt
+local	FUN_0014abdc	param_2	program	CONFIRMED	second argument of the call from peepholeCombine (program), passed on to the copy-propagation helpers
+local	FUN_0014abdc	param_3	foldStatus	CONFIRMED	third argument of the call from peepholeCombine: the foldStatus buffer, passed to FUN_001494dc
+local	FUN_0014abdc	uVar2	fetchSwizzleResult	INFERRED	Inst__swizzleTextureFetchOutput(inst, 1, program) result
+local	FUN_0014abdc	uVar3	result	CONFIRMED	return value: 0, or 1 when FUN_001494dc changed the instruction, else the swizzle result
+use	FUN_0014abdc	iVar1	isMixResult	CONFIRMED	IRInst vslot 24 (0x60, isMix) of inst	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x60\)\)\(param_1,param_2,param_3\);$	+1	all	all
+use	FUN_0014abdc	iVar1	isMovResult	CONFIRMED	IRInst vslot 25 (0x64, isMov) of the (looked-through) instruction	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 100\)\)\(param_1\);$	+2	all	all
+use	FUN_0014abdc	iVar1	changedResult	INFERRED	FUN_001494dc(inst, program, foldStatus) result	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_001494dc\)\(param_1,param_2,param_3\);$	+2	all	all
+local	FUN_0010ac38	param_2	operandA	CONFIRMED	first operand index: record at inst + 0x8c + operandA*0x18
+local	FUN_0010ac38	param_3	operandB	CONFIRMED	second operand index
+local	FUN_0010ac38	param_4	compiler	INFERRED	fourth argument, passed on to the (artifact) virtual slot 5 calls
+local	FUN_0010ac38	iVar7	recASource	CONFIRMED	operand A record word 1 (+4): source
+local	FUN_0010ac38	iVar5	recAReg	CONFIRMED	operand A record word 2 (+8): register
+local	FUN_0010ac38	iVar3	recARegOffset	CONFIRMED	operand A record word 3 (+0xc): register offset
+local	FUN_0010ac38	iVar8	recAFlags	CONFIRMED	operand A record word 5 (+0x14): flags (negate / abs)
+local	FUN_0010ac38	iVar9	recBSource	CONFIRMED	operand B record word 1 (+4): source
+local	FUN_0010ac38	iVar6	recBReg	CONFIRMED	operand B record word 2 (+8): register
+use	FUN_0010ac38	iVar1	recAHeader	CONFIRMED	operand A record word 0 (+0): saved while the records are exchanged	^\s*iVar1\ =\ param_1\[param_2\ \*\ 6\ \+\ 0x23\];$	+19	all	all
+use	FUN_0010ac38	iVar1	kindB	CONFIRMED	inst[0x41 + operandB]: per-operand kind word of operand B, moved to operand A	^\s*iVar1\ =\ param_1\[param_3\ \+\ 0x41\];$	+3	all	all
+use	FUN_0010ac38	iVar2	recASelect	CONFIRMED	operand A record word 4 (+0x10): select word	^\s*iVar2\ =\ param_1\[param_2\ \*\ 6\ \+\ 0x27\];$	+16	all	all
+use	FUN_0010ac38	iVar2	kindA	CONFIRMED	inst[0x41 + operandA]: per-operand kind word of operand A, moved to operand B	^\s*iVar2\ =\ param_1\[param_2\ \+\ 0x41\];$	+3	all	all
+use	FUN_0010ac38	iVar4	recBRegOffset	CONFIRMED	operand B record word 3 (+0xc): register offset	^\s*iVar4\ =\ param_1\[param_3\ \*\ 6\ \+\ 0x26\];$	+4	all	all
+use	FUN_0010ac38	iVar4	recBFlags	CONFIRMED	operand B record word 5 (+0x14): flags (negate / abs)	^\s*iVar4\ =\ param_1\[param_3\ \*\ 6\ \+\ 0x28\];$	+2	all	all
+local	FUN_0010647c	bVar1	moreLanes	INFERRED	lane != 3 continue flag
+local	FUN_0010647c	uVar2	readComponent	INFERRED	component read through the source select byte for this lane (4 = unused)
+local	FUN_0010647c	iVar6	laneIndex2	INFERRED	lane 0..3 of the source destination-select scan
+local	FUN_0010647c	local_38	destSelectWord	CONFIRMED	select word (+0x10) of operand record 0 (destination)
+local	FUN_0010647c	local_34	srcSelectWord	CONFIRMED	select word (+0x10) of the source operand record being validated
+local	FUN_0010647c	local_30	srcDestSelectWord	CONFIRMED	select word (+0x10) of operand record 0 of the source definition
+use	FUN_0010647c	iVar3	slotResult	INFERRED	IRInst vslot 9 (0x24) result per operand	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x24\)\)\(param_1\);$	+1	all	all
+use	FUN_0010647c	iVar3	destRecord	CONFIRMED	IRInst__getOperandRecord(inst, 0)	^\s*iVar3\ =\ FUN_001054ec\(param_1,0\);$	+2	all	all
+use	FUN_0010647c	iVar3	lanesLeft	INFERRED	countdown of the four destination select bytes	^\s*iVar3\ =\ 4;$	+0	all	all
+use	FUN_0010647c	iVar3	lanesLeft	INFERRED	countdown of the four destination select bytes	^\s*iVar3\ =\ iVar3\ \+\ \-1;$	+1	all	all
+use	FUN_0010647c	iVar3	slotResult2	INFERRED	IRInst vslots 9 / 10 (0x24 / 0x28) result per source	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x24\)\)\(param_1\);$@2	+1	all	all
+use	FUN_0010647c	iVar3	srcLoopIndex	INFERRED	1-based source index of the validation loop	^\s*if\ \(\(\(\*\(uint\ \*\)\(iVar5\ \+\ 0x30\)\ \&\ 0x20000\)\ !=\ 0\)\ \&\&\ \(iVar3\ =\ 1,\ 0\ <\ param_1\[0x21\]\)\)\ \{$	+20	all	all
+use	FUN_0010647c	iVar5	program	CONFIRMED	*(compiler + COMP_currentProgram): its +0x30 flag word gates the checks (bits 8, 0x20000, 0x800)	^\s*iVar5\ =\ \*\(int\ \*\)\(param_2\ \+\ COMP_currentProgram\);$	+1	all	all
+use	FUN_0010647c	iVar5	laneIndex	INFERRED	lane 0..3 of the destination-select scan	^\s*iVar5\ =\ 0;$@2	+17	all	all
+use	FUN_0010647c	iVar5	program	CONFIRMED	*(compiler + COMP_currentProgram)	^\s*iVar5\ =\ \*\(int\ \*\)\(param_2\ \+\ COMP_currentProgram\);$@2	+1	all	all
+use	FUN_0010647c	iVar5	srcRecord	CONFIRMED	IRInst__getOperandRecord(inst, source)	^\s*iVar5\ =\ FUN_001054ec\(param_1,iVar3\);$	+1	all	all
+use	FUN_0010647c	iVar5	srcInst	CONFIRMED	IRInst__getOperandSource(inst, source): the definition of the source	^\s*iVar5\ =\ FUN_00105594\(param_1,iVar3\);$	+9	all	all
+use	FUN_0010647c	iVar5	program	CONFIRMED	*(compiler + COMP_currentProgram)	^\s*iVar5\ =\ \*\(int\ \*\)\(param_2\ \+\ COMP_currentProgram\);$@3	+3	all	all
+local	FUN_000f5cf0	param_2	srcIndex	CONFIRMED	operand index passed to IRInst__getOperandSource / IRInst__getOperandRecord; its flags (+0xa0 words) apply abs / negate to the result
+local	FUN_000f5cf0	param_3	laneMask	CONFIRMED	four mask bytes (read through the home slot): only lanes whose byte is 0 are examined
+local	FUN_000f5cf0	param_4	outConst	CONFIRMED	out record: [0] = 2 (float constant kind), [1] = the common lane value bits after abs / negate
+local	FUN_000f5cf0	bVar1	foundLane	INFERRED	set once the first examined lane has been recorded in outConst
+local	FUN_000f5cf0	iVar3	lane	CONFIRMED	lane 0..3
+local	FUN_000f5cf0	pcVar4	laneMaskCursor	CONFIRMED	walks the four mask bytes of laneMask
+local	FUN_000f5cf0	uVar5	readComponent	CONFIRMED	component read through the source select byte of this lane (must be < 4)
+local	FUN_000f5cf0	local_48	srcSelectWord	CONFIRMED	select word (+0x10) of operand record srcIndex
+local	FUN_000f5cf0	local_44	constKind	CONFIRMED	a0[component*6 + 7]: constant lane kind, must be 2 (float)
+local	FUN_000f5cf0	local_40	laneValueBits	CONFIRMED	a0[component*6 + 8]: the constant lane value; all examined lanes must equal outConst[1]
+local	FUN_000f5cf0	local_3c	laneWord9	INFERRED	a0[component*6 + 9], read but unused
+local	FUN_000f5cf0	local_38	laneWord10	INFERRED	a0[component*6 + 10], read but unused
+local	FUN_000f5cf0	local_34	laneWord11	INFERRED	a0[component*6 + 0xb], read but unused
+local	FUN_000f5cf0	local_30	laneWord12	INFERRED	a0[component*6 + 0xc], read but unused
+use	FUN_000f5cf0	iVar2	isConstant	CONFIRMED	IRInst vslot 18 (0x48, constant load) of the source definition	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x48\)\)\(a0\);$	+1	all	all
+use	FUN_000f5cf0	iVar2	srcRecord	CONFIRMED	IRInst__getOperandRecord(inst, srcIndex)	^\s*iVar2\ =\ FUN_001054ec\(param_1,param_2\);$	+4	all	all
+use	FUN_000f5cf0	iVar2	lanesLeft	INFERRED	countdown of the four lanes	^\s*iVar2\ =\ 4;$	+33	all	all
+local	FUN_001062c0	param_1	inst	CONFIRMED	the instruction; operands 0..4 are inline records at inst + 0x8c + n*0x18, the rest live in the arena vector at inst+0x118
+local	FUN_001062c0	param_2	operandIndex	CONFIRMED	index of the operand record to get or create (< 5 inline, otherwise element index-5 of the vector)
+local	FUN_001062c0	param_3	srcRecord	CONFIRMED	IROperand record copied into the destination record (flags bits 0 and 1 via IROperand__setModifierBits)
+local	FUN_001062c0	piVar3	newSlot	INFERRED	address of the vector element just appended for a new record
+local	FUN_001062c0	uVar4	oldCount	INFERRED	element count of the vector before it is grown to cover the index
+local	FUN_001062c0	uVar5	recWord1	CONFIRMED	srcRecord word 1 (source)
+local	FUN_001062c0	uVar6	recWord3	CONFIRMED	srcRecord word 3 (register offset)
+local	FUN_001062c0	uVar7	recWord2	CONFIRMED	srcRecord word 2 (register)
+local	FUN_001062c0	puVar9	extraVector	CONFIRMED	vector at inst+0x118 (capacity, count, data) of the records of operands >= 5, created on first use
+use	FUN_001062c0	uVar8	pushIndex	INFERRED	old count of the extra-operand vector = index of the appended record pointer	^\s*uVar8\ =\ puVar9\[1\];$	+7	all	all
+use	FUN_001062c0	uVar8	extraIndex	CONFIRMED	operandIndex - 5: element of the extra-operand vector	^\s*uVar8\ =\ param_2\ \-\ 5;$	+10	all	all
+# round 5, fork I2: R300VMachineAssembler__encodeDestinationWord per-use names (PVS destination operand encoding, notes_r500_backend.md section 4)
+local	FUN_0019baf4	piVar4	hwLimits	CONFIRMED	*(compiler+0x30c): the HwLimits object; slot 0x16c returns the opcode table, slot 0x138 the register base
+use	FUN_0019baf4	iVar5	opcodeTable	CONFIRMED	HwLimits slot 91 (0x16c) result: table of 0x38-byte opcode entries (+0xc hardware opcode)	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x16c\)\)\(piVar4,param_2,param_3\);$	+2	all	rhs
+use	FUN_0019baf4	iVar5	hwOpcode	CONFIRMED	table[opcode].+0xc: the PVS hardware opcode (-1 = none), stored in the opcode byte (instructionWords+3)	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar2\ \*\ 0x38\ \+\ iVar5\ \+\ 0xc\);$	+119	lhs	all
+use	FUN_0019baf4	iVar5	destRegType2	CONFIRMED	inst[0x26]: destination register type, compared with 1 and 0 for the constant / temporary maxima	^\s*iVar5\ =\ param_2\[0x26\];$	+10	all	all
+use	FUN_0019baf4	iVar2	opcode	CONFIRMED	opcode id of inst (opcode-info +8)	^\s*iVar2\ =\ \*\(int\ \*\)\(param_2\[0x22\]\ \+\ 8\);$	+49	all	all
+use	FUN_0019baf4	iVar2	numSources	CONFIRMED	virtual slot 5 (0x14) result: source count; only 3-source instructions take the register-class path	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x14\)\)\(param_2\);$	+1	all	all
+use	FUN_0019baf4	iVar2	isMix1	INFERRED	IRInst vslot 24 (0x60, isMix) of source 1	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*operandVReg\ \+\ 0x60\)\)\(operandVReg\);$	+1	all	all
+use	FUN_0019baf4	iVar2	src1Reg	CONFIRMED	register number of source 1 (thunk_FUN_00134de8 over the allocation table); compared with the registers of sources 2 and 3	^\s*iVar2\ =\ thunk_FUN_00134de8\(uVar16,uVar6\);$	+50	all	all
+use	FUN_0019baf4	iVar2	flagBit2	INFERRED	opcodeInfoIsVsFlagBit2(this+0x88, inst): math-engine operation, sets bit 6 of the opcode byte	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_0019a538\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x88\),param_2\);$	+1	all	all
+use	FUN_0019baf4	iVar2	destRegType	CONFIRMED	inst[0x26]: destination register type, index into DAT_001b2ad0 (bits 11:8 of word 0)	^\s*iVar2\ =\ param_2\[0x26\];$	+5	all	all
+use	FUN_0019baf4	iVar2	destAddrMode	CONFIRMED	FUN_00105dbc(inst, 0): destination addressing mode: 1 = relative (bit 12 ADDR_MODE_1), 2 = indirect (bits 31:29), 0 = direct	^\s*iVar2\ =\ FUN_00105dbc\(param_2,0\);$	+25	all	all
+use	FUN_0019baf4	iVar2	destRegIndex	CONFIRMED	thunk_FUN_00134de8(allocation table, inst): destination register number	^\s*iVar2\ =\ thunk_FUN_00134de8\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xc\)\ \+\ 0x6c4\),param_2\);$	+2	all	all
+use	FUN_0019baf4	iVar2	hwBase	INFERRED	HwLimits slot 78 (0x138) result: register base subtracted for constant registers	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x138\)\)\(piVar4,0\);$	+1	all	all
+use	FUN_0019baf4	iVar2	destRecord	CONFIRMED	IRInst__getOperandRecord(inst, 0)	^\s*iVar2\ =\ FUN_001054ec\(param_2,0\);$	+1	all	all
+use	FUN_0019baf4	iVar2	flagBit2	INFERRED	opcodeInfoIsVsFlagBit2(this+0x88, inst): picks VE_SAT (bit 24) or ME_SAT (bit 25)	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_0019a538\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x88\),param_2\);$@2	+1	all	all
+use	FUN_0019baf4	uVar6	srcDefTemp	INFERRED	IRInst__getOperandSource temporaries while resolving the register of source 1 / 2 / 3 (looking through a mix)	^\s*uVar6\ =\ FUN_00105594\(param_2,1\);$	+48	all	all
+use	FUN_0019baf4	uVar6	newMax	CONFIRMED	maxSigned(this+0x38, offset): updated maximum constant register	^\s*uVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_0019a2e0\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x38\),uVar13\);$	+1	all	all
+use	FUN_0019baf4	uVar6	newMax	CONFIRMED	maxSigned(this+0x34, offset): updated maximum temporary register	^\s*uVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_0019a2e0\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x34\),uVar13\);$	+1	all	all
+use	FUN_0019baf4	iVar10	isMix3	INFERRED	IRInst vslot 24 (0x60, isMix) of source 3	^\s*iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*operandVReg\ \+\ 0x60\)\)\(operandVReg\);$	+1	all	all
+use	FUN_0019baf4	iVar10	src3Def	INFERRED	definition of source 3 (or of its mix source)	^\s*iVar10\ =\ FUN_00105594\(param_2,3\);$	+1	all	rhs
+use	FUN_0019baf4	iVar10	src3RegClass	CONFIRMED	definition +0x98 of source 3: register class (0 = temporary)	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar10\ \+\ 0x98\);$	+0	lhs	lhs
+use	FUN_0019baf4	iVar10	src3Def	INFERRED	definition of the source behind the source-3 mix	^\s*iVar10\ =\ FUN_00105594\(uVar6,1\);$	+1	all	rhs
+use	FUN_0019baf4	iVar10	src3RegClass	CONFIRMED	definition +0x98 of source 3: register class (0 = temporary)	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar10\ \+\ 0x98\);$@2	+0	lhs	lhs
+use	FUN_0019baf4	iVar10	src3RegClass	CONFIRMED	definition +0x98 of source 3: register class (0 = temporary)	^\s*if\ \(\(\(\(\(iVar7\ !=\ 0\)\ \|\|\ \(iVar9\ !=\ 0\)\)\ \|\|\ \(iVar10\ !=\ 0\)\)\ \|\|\ \(\(iVar2\ ==\ callResult\ \|\|\ \(callResult\ ==\ iVar11\)\)\)\)$	+0	all	all
+use	FUN_0019baf4	uVar12	word1Old	CONFIRMED	instructionWords[1] before the math-engine operand shuffle	^\s*uVar12\ =\ param_3\[1\];$	+6	all	all
+use	FUN_0019baf4	uVar12	word1Old2	CONFIRMED	instructionWords[1] before the swap with word 2 (opcode 0x28)	^\s*uVar12\ =\ param_3\[1\];$@2	+4	all	all
+use	FUN_0019baf4	uVar12	word0	CONFIRMED	instructionWords[0], carried through the destination type / offset updates	^\s*uVar12\ =\ \*param_3;$	+41	all	all
+use	FUN_0019baf4	uVar12	destSelectWord	CONFIRMED	operand record 0 +0x10 of inst: destination select word; a zero byte sets the write-enable bit of its lane (bits 23:20)	^\s*uVar12\ =\ \*\(uint\ \*\)\(iVar2\ \+\ 0x10\);$	+0	all	all
+use	FUN_0019baf4	uVar12	destSelectWord	CONFIRMED	destination select word (read side of the write-enable bits)	^\s*uVar12\ =\ \(uint\)\(\(uVar12\ \&\ 0xff\)\ ==\ 0\)\ <<\ 0x17\ \|$	+0	rhs	rhs
+use	FUN_0019baf4	uVar12	destSelectWord	CONFIRMED	destination select word (read side of the write-enable bits)	^\s*\(uint\)\(\(uVar12\ >>\ 8\ \&\ 0xff\)\ ==\ 0\)\ <<\ 0x16\ \|$	+2	all	all
+use	FUN_0019baf4	uVar12	word0New	CONFIRMED	instructionWords[0] with the write-enable bits 23:20 set	^\s*uVar12\ =\ \(uint\)\(\(uVar12\ \&\ 0xff\)\ ==\ 0\)\ <<\ 0x17\ \|$	+0	lhs	lhs
+use	FUN_0019baf4	uVar12	word0New	CONFIRMED	instructionWords[0] with the write-enable bits set; saturate bit added	^\s*\*param_3\ =\ uVar12;$@2	+7	all	all
+use	FUN_0019baf4	uVar13	swizzleSelFromWord1	CONFIRMED	word1 >> 0xd & 7: source swizzle component broadcast into word 2	^\s*uVar13\ =\ uVar12\ >>\ 0xd\ \&\ 7;$	+4	all	all
+use	FUN_0019baf4	uVar13	destOffset	CONFIRMED	destination register offset, stored as bits 19:13 of word 0 ((offset & 0x7f) << 0xd)	^\s*uVar13\ =\ FUN_00105c5c\(param_2,0\);$	+42	all	all

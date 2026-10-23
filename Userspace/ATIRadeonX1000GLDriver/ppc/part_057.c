@@ -126,8 +126,8 @@ int OpcodeInfo__deleting_dtor(this)
   return operator_delete(this);
 }
 
-/* IrAddFloat__vslot5 @ 0x1d0278 (288 bytes) */
-int IrAddFloat__vslot5(this, param_2, param_3, param_4)
+/* IrAddFloat__vslot5_getValueKeyTransformLevel @ 0x1d0278 (288 bytes) */
+int IrAddFloat__vslot5_getValueKeyTransformLevel(this, param_2, param_3, param_4)
   undefined4 this;
   int param_2;
   int *param_3;
@@ -507,8 +507,8 @@ int IrSetGTFloat__fold(this, result, operands)
   return 1;
 }
 
-/* IrAddInt__vslot5 @ 0x1d0e0c (212 bytes) */
-int IrAddInt__vslot5(this, param_2, param_3, param_4)
+/* IrAddInt__vslot5_getValueKeyTransformLevel @ 0x1d0e0c (212 bytes) */
+int IrAddInt__vslot5_getValueKeyTransformLevel(this, param_2, param_3, param_4)
   undefined4 this;
   int param_2;
   int *param_3;
@@ -968,7 +968,7 @@ asm(".set FUN_001d0208, _OpcodeInfo__dtor");
 asm(".globl FUN_001d022c");
 asm(".set FUN_001d022c, _OpcodeInfo__deleting_dtor");
 asm(".globl FUN_001d0278");
-asm(".set FUN_001d0278, _IrAddFloat__vslot5");
+asm(".set FUN_001d0278, _IrAddFloat__vslot5_getValueKeyTransformLevel");
 asm(".globl FUN_001d05b0");
 asm(".set FUN_001d05b0, _IrCos__fold");
 asm(".globl FUN_001d0640");
@@ -1008,7 +1008,7 @@ asm(".set FUN_001d0c78, _IrCndGTFloat__fold");
 asm(".globl FUN_001d0cd8");
 asm(".set FUN_001d0cd8, _IrSetGTFloat__fold");
 asm(".globl FUN_001d0e0c");
-asm(".set FUN_001d0e0c, _IrAddInt__vslot5");
+asm(".set FUN_001d0e0c, _IrAddInt__vslot5_getValueKeyTransformLevel");
 asm(".globl FUN_001d0ee0");
 asm(".set FUN_001d0ee0, _IrMulFloat__fold");
 asm(".globl FUN_001d0f28");

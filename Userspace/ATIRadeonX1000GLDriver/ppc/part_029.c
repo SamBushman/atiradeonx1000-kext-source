@@ -11,7 +11,7 @@ int FUN_00107df4(param_1, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
-  FUN_00107da8(allocation + 1,param_1,compiler);
+  IRInst__reinitAsUnary(allocation + 1,param_1,compiler);
   return allocation + 1;
 }
 
@@ -26,7 +26,7 @@ int IRLoadConst__vslot43(this, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
-  FUN_00107da8(allocation + 1,this,compiler);
+  IRInst__reinitAsUnary(allocation + 1,this,compiler);
   return allocation + 1;
 }
 
@@ -109,8 +109,8 @@ int FUN_001080e0(param_1, param_2, param_3)
   return Program__addInst(*(undefined4 *)(param_3 + 0x6c4),param_1);
 }
 
-/* FUN_00108174 @ 0x108174 (76 bytes) */
-int FUN_00108174(inst, param_2, compiler)
+/* IRInst__reinitAsBinary @ 0x108174 (76 bytes) */
+int IRInst__reinitAsBinary(inst, param_2, compiler)
   undefined4 *inst;
   undefined4 param_2;
   undefined4 compiler;
@@ -135,7 +135,7 @@ int FUN_001081c0(param_1, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
-  ((int (*)())FUN_00108174)(allocation + 1,param_1,compiler);
+  ((int (*)())IRInst__reinitAsBinary)(allocation + 1,param_1,compiler);
   return allocation + 1;
 }
 
@@ -150,7 +150,7 @@ int IRLoadConst__vslot47(this, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
-  ((int (*)())FUN_00108174)(allocation + 1,this,compiler);
+  ((int (*)())IRInst__reinitAsBinary)(allocation + 1,this,compiler);
   return allocation + 1;
 }
 
@@ -169,8 +169,8 @@ int FUN_001082b8(inst, param_2, compiler)
   return;
 }
 
-/* FUN_00108304 @ 0x108304 (76 bytes) */
-int FUN_00108304(inst, param_2, compiler)
+/* IRInst__reinitAsTrinary @ 0x108304 (76 bytes) */
+int IRInst__reinitAsTrinary(inst, param_2, compiler)
   undefined4 *inst;
   undefined4 param_2;
   undefined4 compiler;
@@ -195,7 +195,7 @@ int FUN_00108350(param_1, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
-  ((int (*)())FUN_00108304)(allocation + 1,param_1,compiler);
+  ((int (*)())IRInst__reinitAsTrinary)(allocation + 1,param_1,compiler);
   return allocation + 1;
 }
 
@@ -210,12 +210,12 @@ int IRLoadConst__vslot49(this, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
-  ((int (*)())FUN_00108304)(allocation + 1,this,compiler);
+  ((int (*)())IRInst__reinitAsTrinary)(allocation + 1,this,compiler);
   return allocation + 1;
 }
 
-/* FUN_00108448 @ 0x108448 (112 bytes) */
-int FUN_00108448(param_1, param_2, compiler)
+/* IRInst__reinitAsMov @ 0x108448 (112 bytes) */
+int IRInst__reinitAsMov(param_1, param_2, compiler)
   undefined4 *param_1;
   undefined4 param_2;
   undefined4 compiler;
@@ -250,7 +250,7 @@ int FUN_001084b8(param_1, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
-  ((int (*)())FUN_00108448)(allocation + 1,param_1,compiler);
+  ((int (*)())IRInst__reinitAsMov)(allocation + 1,param_1,compiler);
   return allocation + 1;
 }
 
@@ -265,7 +265,7 @@ int IRLoadConst__vslot45(this, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
-  ((int (*)())FUN_00108448)(allocation + 1,this,compiler);
+  ((int (*)())IRInst__reinitAsMov)(allocation + 1,this,compiler);
   return allocation + 1;
 }
 

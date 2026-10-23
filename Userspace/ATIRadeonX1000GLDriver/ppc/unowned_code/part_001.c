@@ -430,8 +430,8 @@ int IRInst__vslot32()
   return 0;
 }
 
-/* IRInst__vslot33 @ 0x1cd7a0 (8 bytes) */
-int IRInst__vslot33(param_1, param_2)
+/* IRInst__vslot33_setPredicateKind @ 0x1cd7a0 (8 bytes) */
+int IRInst__vslot33_setPredicateKind(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
@@ -439,8 +439,8 @@ int IRInst__vslot33(param_1, param_2)
   return;
 }
 
-/* IRInst__vslot35 @ 0x1cd7a8 (8 bytes) */
-int IRInst__vslot35()
+/* IRInst__vslot35_allowsSourceNegate @ 0x1cd7a8 (8 bytes) */
+int IRInst__vslot35_allowsSourceNegate()
 {
   return 1;
 }
@@ -457,8 +457,8 @@ int IRPseudo__accept()
   return;
 }
 
-/* IRInst__vslot34 @ 0x1cd7d8 (20 bytes) */
-int IRInst__vslot34(param_1, param_2, param_3, param_4)
+/* IRInst__vslot34_setSourceSelect @ 0x1cd7d8 (20 bytes) */
+int IRInst__vslot34_setSourceSelect(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   int param_3;

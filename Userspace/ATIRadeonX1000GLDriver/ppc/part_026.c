@@ -506,8 +506,8 @@ LAB_000f5a8c:
   return uVar4;
 }
 
-/* FUN_000f5c0c @ 0xf5c0c (228 bytes) */
-int FUN_000f5c0c(inst, param_2, param_3, param_4)
+/* IRInst__sourceMatchesConstant @ 0xf5c0c (228 bytes) */
+int IRInst__sourceMatchesConstant(inst, param_2, param_3, param_4)
   undefined4 inst;
   undefined4 param_2;
   undefined4 param_3;
@@ -550,76 +550,78 @@ LAB_000f5cd8:
 }
 
 /* IRInst__getUniformSourceConstant @ 0xf5cf0 (412 bytes) */
-int IRInst__getUniformSourceConstant(inst, param_2, param_3, param_4)
+int IRInst__getUniformSourceConstant(inst, srcIndex, laneMask, outConst)
   int inst;
-  int param_2;
-  undefined4 param_3;
-  int *param_4;
+  int srcIndex;
+  undefined4 laneMask;
+  int *outConst;
 {
-  unsigned int ghidra_home[8] = { inst, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  bool bVar1;
+  int lanesLeft;
+  int srcRecord;
+  unsigned int ghidra_home[8] = { inst, srcIndex, laneMask, outConst, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  bool foundLane;
   int *a0;
-  int iVar2;
-  int iVar3;
-  char *pcVar4;
-  uint uVar5;
-  undefined4 local_48;
-  int local_44;
-  int local_40;
-  int local_3c;
-  int local_38;
-  int local_34;
-  int local_30;
+  int isConstant;
+  int lane;
+  char *laneMaskCursor;
+  uint readComponent;
+  undefined4 srcSelectWord;
+  int constKind;
+  int laneValueBits;
+  int laneWord9;
+  int laneWord10;
+  int laneWord11;
+  int laneWord12;
   
-  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
-  a0 = (int *)IRInst__getOperandSource(inst,param_2);
-  iVar2 = (**(code **)(*a0 + 0x48))(a0);
-  if (iVar2 != 0) {
-    iVar2 = IRInst__getOperandRecord(inst,param_2);
-    bVar1 = false;
-    iVar3 = 0;
-    pcVar4 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 8));
-    local_48 = *(undefined4 *)(iVar2 + 0x10);
-    iVar2 = 4;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = laneMask;
+  a0 = (int *)IRInst__getOperandSource(inst,srcIndex);
+  isConstant = (**(code **)(*a0 + 0x48))(a0);
+  if (isConstant != 0) {
+    srcRecord = IRInst__getOperandRecord(inst,srcIndex);
+    foundLane = false;
+    lane = 0;
+    laneMaskCursor = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 8));
+    srcSelectWord = *(undefined4 *)(srcRecord + 0x10);
+    lanesLeft = 4;
     do {
-      if ((*pcVar4 == '\0') && (uVar5 = (uint)*(byte *)((int)&local_48 + iVar3), uVar5 < 4)) {
-        local_40 = a0[uVar5 * 6 + 8];
-        local_3c = a0[uVar5 * 6 + 9];
-        local_38 = a0[uVar5 * 6 + 10];
-        local_44 = a0[uVar5 * 6 + 7];
-        local_30 = a0[uVar5 * 6 + 0xc];
-        local_34 = a0[uVar5 * 6 + 0xb];
-        if (a0[uVar5 * 6 + 7] != 2) {
+      if ((*laneMaskCursor == '\0') && (readComponent = (uint)*(byte *)((int)&srcSelectWord + lane), readComponent < 4)) {
+        laneValueBits = a0[readComponent * 6 + 8];
+        laneWord9 = a0[readComponent * 6 + 9];
+        laneWord10 = a0[readComponent * 6 + 10];
+        constKind = a0[readComponent * 6 + 7];
+        laneWord12 = a0[readComponent * 6 + 0xc];
+        laneWord11 = a0[readComponent * 6 + 0xb];
+        if (a0[readComponent * 6 + 7] != 2) {
           return 0;
         }
-        if (((int)*(char *)(a0 + 0x57) >> (uVar5 & 0x3f) & 1U) == 0) {
+        if (((int)*(char *)(a0 + 0x57) >> (readComponent & 0x3f) & 1U) == 0) {
           return 0;
         }
-        if (bVar1) {
-          if (*param_4 != 2) {
+        if (foundLane) {
+          if (*outConst != 2) {
             return 0;
           }
-          if (local_40 != param_4[1]) {
+          if (laneValueBits != outConst[1]) {
             return 0;
           }
-          bVar1 = true;
+          foundLane = true;
         }
         else {
-          bVar1 = true;
-          *param_4 = 2;
-          param_4[1] = local_40;
+          foundLane = true;
+          *outConst = 2;
+          outConst[1] = laneValueBits;
         }
       }
-      iVar3 = iVar3 + 1;
-      pcVar4 = pcVar4 + 1;
-      iVar2 = iVar2 + -1;
-    } while (iVar2 != 0);
-    if (bVar1) {
-      if (((*(uint *)(param_2 * 0x18 + inst + 0xa0) & 2) != 0) && (GH_U2F((unsigned int)(param_4[1])) < 0.0)) {
-        param_4[1] = (int)GH_F2U((float)(-GH_U2F((unsigned int)(param_4[1]))));
+      lane = lane + 1;
+      laneMaskCursor = laneMaskCursor + 1;
+      lanesLeft = lanesLeft + -1;
+    } while (lanesLeft != 0);
+    if (foundLane) {
+      if (((*(uint *)(srcIndex * 0x18 + inst + 0xa0) & 2) != 0) && (GH_U2F((unsigned int)(outConst[1])) < 0.0)) {
+        outConst[1] = (int)GH_F2U((float)(-GH_U2F((unsigned int)(outConst[1]))));
       }
-      if ((*(uint *)(param_2 * 0x18 + inst + 0xa0) & 1) != 0) {
-        param_4[1] = (int)GH_F2U((float)(-GH_U2F((unsigned int)(param_4[1]))));
+      if ((*(uint *)(srcIndex * 0x18 + inst + 0xa0) & 1) != 0) {
+        outConst[1] = (int)GH_F2U((float)(-GH_U2F((unsigned int)(outConst[1]))));
         return 1;
       }
       return 1;
@@ -7318,7 +7320,7 @@ code_r0x00101cbc:
                    (double)*(float *)(iVar43 + 8),(double)*(float *)(iVar43 + 0xc),
                    (double)*(float *)(iVar43 + 0x10));
       iVar43 = IRInst__getOperandRecord(ppppppuVar38,ppppppuVar40);
-      FUN_000f2bdc(&local_d8,*(undefined4 *)(iVar43 + 0x10),local_178);
+      SelectWord__compose(&local_d8,*(undefined4 *)(iVar43 + 0x10),local_178);
       arena = local_d8;
       iVar43 = IRInst__getOperandRecord(ppppppuVar38,ppppppuVar40);
       *(undefined4 *)(iVar43 + 0x10) = arena;
@@ -8067,7 +8069,7 @@ code_r0x00101d1c:
           ppppppuVar48 = (uint ******)0x0;
           do {
             in_r6 = ppppppuVar48;
-            FUN_00105e54(iVar22,ppppppuVar48,ppppppuVar19,ppppppuVar48);
+            IRInst__copyOperandFrom(iVar22,ppppppuVar48,ppppppuVar19,ppppppuVar48);
             if (iVar43 != 0) {
               operandRecord = IRInst__getOperandRecord(iVar22,ppppppuVar48);
               pppppuVar11 = *(uint ******)(operandRecord + 0x10);

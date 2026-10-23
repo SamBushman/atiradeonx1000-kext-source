@@ -1435,7 +1435,7 @@ PTR_FUN_001eb808	0x1eb808	__DATA,__const	undefined *	4	extern unsigned char PTR_
 PTR_FUN_001eb8d8	0x1eb8d8	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb8d8[] asm("PTR_FUN_001eb8d8");	pointer -> MachineAssembler__dtor_19df54	data.s
 PTR_FUN_001eb9a8	0x1eb9a8	__DATA,__const	undefined *	4	extern unsigned char PTR_FUN_001eb9a8[] asm("PTR_FUN_001eb9a8");	pointer -> R520MachineAssembler__dtor	data.s
 DAT_001f3a54	0x1f3a54	__DATA,__const_coal	-	-	extern unsigned char DAT_001f3a54 asm("DAT_001f3a54");	0x00000000	data.s
-PTR_DAT_001f4850	0x1f4850	__DATA,__const_coal	pointer	4	extern unsigned char *PTR_DAT_001f4850 asm("PTR_DAT_001f4850");	pointer -> OpcodeInfo__vslot6	data.s
+PTR_DAT_001f4850	0x1f4850	__DATA,__const_coal	pointer	4	extern unsigned char *PTR_DAT_001f4850 asm("PTR_DAT_001f4850");	pointer -> OpcodeInfo__vslot6_getMovaRoundFlag	data.s
 DAT_001f65e0	0x1f65e0	__DATA,__bss	undefined4	4	extern unsigned char *DAT_001f65e0 asm("DAT_001f65e0");		data.s
 DAT_001f65e4	0x1f65e4	__DATA,__bss	undefined1	1	extern unsigned char DAT_001f65e4[] asm("DAT_001f65e4");		data.s
 DAT_001f65e5	0x1f65e5	__DATA,__bss	undefined1	1	extern unsigned char DAT_001f65e5[] asm("DAT_001f65e5");		data.s

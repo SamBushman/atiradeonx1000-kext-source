@@ -108,11 +108,11 @@
 0x1cd788	8	IRInst__isMemStore	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1cd790	8	IRInst__isPhi	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1cd798	8	IRInst__vslot32	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
-0x1cd7a0	8	IRInst__vslot33	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
-0x1cd7a8	8	IRInst__vslot35	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd7a0	8	IRInst__vslot33_setPredicateKind	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd7a8	8	IRInst__vslot35_allowsSourceNegate	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1cd7b0	8	IRPseudo__getNumSources	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1cd7b8	4	IRPseudo__accept	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
-0x1cd7d8	20	IRInst__vslot34	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd7d8	20	IRInst__vslot34_setSourceSelect	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1cdbf8	4	Block__insertInstruction	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1cdbfc	8	Block__isFuncEnd	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1cdc04	8	Block__isAny	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
@@ -264,7 +264,7 @@
 0x1d0104	8	HwLimits__vslot57	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1d010c	8	HwLimits__vslot59	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1d0114	8	HwLimits__vslot61	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
-0x1d011c	36	HwLimits__vslot63	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d011c	36	HwLimits__vslot63_supportsResultScale	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1d0140	4	HwLimits__flattenIfs	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1d0144	8	HwLimits__vslot69	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1d016c	8	HwLimits__vslot72	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
@@ -281,8 +281,8 @@
 0x1d01f8	4	OpcodeInfo__init	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1d01fc	8	OpcodeInfo__fold	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1d0204	4	OpcodeInfo__foldVector	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
-0x1d0250	8	OpcodeInfo__vslot5	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
-0x1d0258	8	OpcodeInfo__vslot6	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0250	8	OpcodeInfo__vslot5_getValueKeyTransformLevel	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0258	8	OpcodeInfo__vslot6_getMovaRoundFlag	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1d0260	24	IrAddFloat__fold	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1d0398	24	IrAddInt__fold	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1d03b0	24	IrOrInt__fold	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
@@ -312,8 +312,8 @@
 0x1d0d1c	44	IrSetGEFloat__fold	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1d0d38	16	orph_1d0d38	branch	linked beside its owner: target of a branch / call in other code
 0x1d0d48	36	IrSetNEFloat__fold	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
-0x1d0d6c	8	IrMovaRoundFloat__vslot6	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
-0x1d0d74	8	IrMovaRound__vslot6	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0d6c	8	IrMovaRoundFloat__vslot6_getMovaRoundFlag	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0d74	8	IrMovaRound__vslot6_getMovaRoundFlag	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1d0d7c	56	IrDot4IEEE__foldVector	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1d0db4	4	IrScatter__init	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1d0db8	4	IrMovaRoundFloat__init	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
@@ -360,7 +360,7 @@
 0x1d7948	8	LoopIndexedSet__vslot9	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1d82c4	4	KhanPs__vslot29	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1d82c8	8	KhanPs__vslot30	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
-0x1d82d0	8	KhanPs__vslot32	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d82d0	8	KhanPs__vslot32_supportsResultSaturate	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1d82d8	8	KhanPs__vslot71	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1d82e0	8	KhanPs__vslot45	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1d82e8	8	KhanPs__vslot55	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
@@ -372,7 +372,7 @@
 0x1d8310	4	KhanChip__vslot3	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1d8314	4	KhanChip__vslot4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1d83e8	8	KhanVs__vslot31	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
-0x1d83f0	8	KhanVs__vslot32	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d83f0	8	KhanVs__vslot32_supportsResultSaturate	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1d83f8	8	KhanVs__vslot34	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1d8400	8	KhanVs__vslot33	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1d8408	8	KhanVs__vslot38	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
@@ -388,7 +388,7 @@
 0x1d8470	4	KhanVs__vslot87	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1d8474	8	KhanVs__vslot90	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1d847c	4	FudoVs__vslot87	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
-0x1d8480	8	FudoVs__vslot32	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8480	8	FudoVs__vslot32_supportsResultSaturate	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1d8488	8	FudoVs__vslot34	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1d8490	8	FudoVs__vslot33	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
 0x1d8498	8	FudoVs__vslot90	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare

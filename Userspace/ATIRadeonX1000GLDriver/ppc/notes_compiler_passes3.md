@@ -69,3 +69,60 @@ All three take the `ValueKey` (notes_compiler_passes2.md section 2: `+0xb0` inst
 
 `pass_minreg_order` (its body is only the block/instruction walk calling `FUN_00181928` / `FUN_0018413c`), the algorithms of `FUN_00147f54` and `FUN_0014846c`, `ValueKey__canonicalizeConstantSources` second half in detail,
 the unwind of the `Or` names in `FUN_0017b12c` (stack arrays `local_138` ... are one 0x6c-byte record of created instructions), field scopes for `Block` and `IRInst`, and the `compiler`-typed parameters whose object is not a Compiler.
+
+## Round 5, fork I2: peephole pattern decode, IR instruction fields, HwLimits helper slots (tables: names_I2_asm.tsv, names_I2_func.tsv, names_I2_pat.tsv)
+
+**IRInst fields fixed by this round** (all read in several places, tier in the tables):
+
+| offset | meaning | evidence |
+|---|---|---|
+| +0x11c | predicate kind (0 none, 2 / 3 predicated), set by IRInst vslot 33 (`IRInst__vslot33_setPredicateKind`); the R300V assembler turns 2 / 3 into PRED_ENABLE / PRED_SENSE | `vslot14_assembleInstruction`, R520V visitors |
+| +0x120 | **saturate** flag (PVS VE_SAT bit 24 / ME_SAT bit 25) | `encodeDestinationWord`, `encodeDualMathOperands`; set to 1 by `Inst__collapseClampToSaturate` |
+| +0x124 | **result scale code**; `FUN_0010aad4` (`IRInst__resultScaleFactor`) maps the code to a float; HwLimits slot 63 (`HwLimits__vslot63_supportsResultScale`) validates it | `Inst__foldConstantMovIntoResultScale`, `Inst__distributeResultScale`, `Inst__collapseAddOfScaledMov` |
+| +0x12c | compare condition (compare opcodes 0x8b..0x8d) or the mova round flag; OpcodeInfo slot 6 gives the default for the opcode | `KhanPs__vslot9_createCompareInst`, scheduler address-register reuse |
+| +0x160 | counter kept relative to `program+0x478` (`inst+0x160 = base + n`); new instructions get `base + 1` | every rebuild in the collapse patterns |
+| operand record n | at `inst + 0x8c + n*0x18`: +4 source, +8 register, +0xc register offset, +0x10 select word, +0x14 flags (bit 0 negate, bit 1 abs) | `IROperand__copyFrom`, `IRInst__applyAbsModifier` / `applyNegateModifier` |
+| +0x12c.. | for an interpolant load: four 4-byte lane records (used flag, kind byte, attribute halfword) | `IRLoadInterp__laneUsed/laneKind/laneIndex`, `KhanPs__vslot87_assignInterpolatorBindings` |
+
+IRInst vslot 23 / 24 / 25 are `isPresub` / `isMix` / `isMov` (names of the stubs at 0x1cd758 / 760 / 768). Slot 34 (`setSourceSelect`) stores one lane byte of an operand select word,
+slot 35 (`allowsSourceNegate`, default 1) lets `KhanPs__vslot59_tryEncodeSourceConstant` try the negated literal. OpcodeInfo slot 5 (`getValueKeyTransformLevel`) is called by the
+ValueKey transform `FUN_0017f7ec`; slot 6 (`getMovaRoundFlag`) is 1 only for IrMovaRound / IrMovaRoundFloat. HwLimits slot 32 (`supportsResultSaturate`: Khan Ps 1, Khan Vs 0, Fudo Vs 1)
+gates the clamp fold.
+
+**The OPT_COLLAPSE_ALGEBRAIC patterns decoded** (`Inst__collapseAlgebraic_<addr>` was not a decodable name; every row is `func` in names_I2_pat.tsv):
+
+| address | new name | rewrite |
+|---|---|---|
+| 0x14acb8 | `Inst__collapseMulSplatByDotOnes` | `s * dot(v, 1.0)` -> `dot(v, s)` |
+| 0x14b150 | `Inst__collapseAddIntoMadMulAddend` | `add(mad(a,b,mul(c,d)), y)` -> `mad(a,b,mad(c,d,y))`, the add becomes a mov |
+| 0x14b82c | `Inst__collapseAddOfMulToMad` | `add(mul(a,b), c)` -> `mad(a,b,c)` (test half: `Inst__canFuseAddMul`) |
+| 0x14bdbc | `Inst__collapseMulOfAddWithUnitConstant` | `(x +- 1) * y` -> `mad(x, y, +-y)` |
+| 0x14caec | `Inst__collapseMadOfMulToDot2Add` | `mad(a,b,x*y)` -> `dot2add` with a 0.0 third source |
+| 0x14cec8 | `Inst__collapseMadWithDot2AddToDot3` | `mad(a,b,dot2add(c,d,0))` -> `dot3` |
+| 0x14d274 | `Inst__collapseDot3VectorTimesScaledVector` | `dot3(V, V*S)` -> `(V.V) * S` reusing the existing V.V |
+| 0x14d8f8 | `Inst__collapseThreeComponentSumToDot3` | `(x.a + x.b) + x.c` -> `dot3(x.abc, 1.0)` |
+| 0x150d38 | `Inst__collapseAddOfScaledMov` | `add(mov(x) scaled by k, y)` -> `mad(x, k, y)` |
+| 0x154dc0 | `Inst__mergeComponentMovsIntoCnd` | two single-component partial movs -> one cnd with a constant mask |
+| 0x1595f0 | `Inst__foldCndWithConstantCondition` | cnd with constant condition lanes -> mov of the selected source |
+| 0x155a60 / 0x15ceb0 / 0x15c6d4 / 0x162cc0 + helpers | (not decoded) | result-scale / extra-source folds, see tier UNKNOWN names |
+| 0x158c3c | `Inst__distributeResultScale` | worklist pushing a result scale code into add / mul / mad sources |
+| 0x15bd40 | `Inst__mergeAddAndMadSharedOperands` | add + mad with shared operands and disjoint lanes -> one mad (extra-source layout) |
+| 0x15df44 | `Inst__collapseMulOfExps` | `exp(a) * exp(b)` -> `exp(a + b)` |
+| 0x15e494 | `Inst__collapseClampToSaturate` | `max(min(x,1),0)` -> saturate flag on the producer |
+| 0x163994 | `Inst__mergeMovAndMadByLanes` | mov + mad with disjoint lanes through the extra source -> one mad |
+| 0x1882a4 | `Inst__foldConstantMovIntoResultScale` | `mov(k)` with a scale-representable constant -> `mov(1.0)` with a result scale |
+| 0x1875a8 | `Inst__r300ReassociateAddPair` | exchange one operand between two adds and retry `FUN_00186a88` |
+| 0x163478 | `Inst__hoistScalarMulOutOfDot` | `dot(x, v*s)` -> `dot(x, v) * s` |
+| 0x1859bc | `Inst__tryDp3Add` | `dot3(a,b).splat + c.splat` -> `dp3add(a,b,c)` |
+
+Helper functions named: `IRInst__reinitAsBinary/Unary/Trinary/Mov` (in-place re-construction), `IRInst__deleteIfUnused`, `IRInst__cloneInto`, `IRInst__copyOperandFrom`,
+`IRInst__sourceLanesAllWritten`, `IRInst__sourceMatchesConstant`, `SelectWord__isSplat`, `SelectWord__compose`, `SelectWord__mergeWrittenLanes`, `SelectWord__fillUnusedLanes`,
+`SelectWord__splatComponent`, `IRInst__replaceWithMovOfSource`, `IRInst__cloneIfPresub`, `OpcodeInfo__getResultMode`.
+
+**Not decoded** (tier UNKNOWN, left as placeholders): `Inst__collapseAlgebraic_00155a60`, `_0015ceb0`, `_0015c6d4`, `_00162cc0` (a dispatcher over seven further 1.3-4.7 KB helpers
+`FUN_00161748`, `FUN_00151a74`, `FUN_001524b8`, `FUN_00151370`, `FUN_001541f0`, `FUN_00152ea8`, `FUN_001621c8`), `_00158264`, `Inst__foldProducerIntoConsumer`, `Inst__tryMix` is decoded in
+its locals only, `Inst__takeOutCommonFactor`.
+
+**Gate pitfalls hit while splitting** (each produced a NOT-EQUIVALENT before the fix): a `do { .. } while (n != 0)` countdown segment must include the `while` line; a line that reads
+the old value of a variable and assigns a new role needs `first=lhs` / `last=rhs` halves; a pass-through argument read of a variable after the role changed must stay with the old name;
+a use that follows a `goto` label belongs to the definition that reaches it, not to the nearest textual one.

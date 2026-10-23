@@ -136,7 +136,6 @@ local	FUN_0014caec	iVar2	operandVReg	INFERRED	all 1 definition(s) of the variabl
 local	FUN_0014caec	pvVar3	inst2	INFERRED	all 1 definition(s) of the variable yield a Inst: FUN_001043f0(0x1e,*(undefined4 *)(param_2 + 8))
 local	FUN_0014caec	uVar4	operandVReg2	INFERRED	all 6 definition(s) of the variable yield a VReg: FUN_00105594(inst,1); FUN_00105594(inst,2)
 local	FUN_0014caec	uVar5	operandVReg3	INFERRED	all 4 definition(s) of the variable yield a VReg: FUN_00105594(iVar2,2); FUN_00105594(iVar2,1)
-local	FUN_0014cec8	iVar5	inst2	INFERRED	all 1 definition(s) of the variable yield a Inst: FUN_001043f0(0x1c,*(undefined4 *)(param_2 + 8))
 local	FUN_0014d274	iVar4	operandVReg	INFERRED	all 1 definition(s) of the variable yield a VReg: FUN_00105594(inst,2)
 local	FUN_0014d274	uVar9	operandVReg2	INFERRED	all 2 definition(s) of the variable yield a VReg: FUN_00105594(inst,1); FUN_00105594(inst,2)
 local	FUN_0014e6e4	iVar6	operandVReg	INFERRED	all 4 definition(s) of the variable yield a VReg: FUN_00105594(inst,1); FUN_00105594(inst,2)

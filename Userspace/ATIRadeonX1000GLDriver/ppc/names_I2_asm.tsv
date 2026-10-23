@@ -1,0 +1,116 @@
+# round 5, fork I2: R520V assembler visitors (assembleConditionalBlock, assembleWithPredicateSet). Stack at this+0x94 = predicate-kind stack: visitNode feeds its top to FUN_000e2bf4(node+0x90,..), IRInst vslot 33 (0x84) stores its argument at inst+0x11c which vslot14 turns into the PVS PRED_ENABLE/PRED_SENSE bits; setLoopStack pushes 0 (none), closeConditional 2, the conditional visitors 3
+local	FUN_0019e318	a0	branchInst	CONFIRMED	Block__getBranchInst(node): the block branch instruction, freed with FUN_00193f20 at the end (same as vslot27)
+local	FUN_0019e318	uVar3	predKindCount	INFERRED	element count (+4) of the vector at this[0x25], the predicate-kind stack
+local	FUN_0019e318	bVar1	moreLanes	INFERRED	lane != 3 continue flag of the 4-lane do/while loop
+local	FUN_0019e318	bVar11	unpredicated	INFERRED	top of the predicate-kind stack == 0 (no predicate active): selects the plain IrPredSet* opcodes 0x53..0x56, otherwise the Push forms 0x2c..0x2f
+local	FUN_0019e318	pcVar9	setSourceSelect	CONFIRMED	IRInst vtable slot 34 (+0x88): stores byte (operand, lane, value) at inst + operand*0x18 + lane + 0x9c
+local	FUN_0019e318	puVar10	predKindStack	INFERRED	vector at this[0x25] (capacity, count, data), inline push_back at the end stores 3
+local	FUN_0019e318	puVar7	pushedSlot	INFERRED	address of the element just appended to the predicate-kind stack
+use	FUN_0019e318	piVar8	program	INFERRED	node+0xac: same Program object that FUN_00130690/FUN_000f79c4/getOrAllocateScratchRegister take as their allocator argument elsewhere (compiler+0x6c4 = currentProgram); *program is tested before generating code	^\s*piVar8\ =\ \*\(int\ \*\*\)\(param_2\ \+\ 0xac\);$	^\s*piVar8\ =\ \(int\ \*\)0x0;$	all	none
+use	FUN_0019e318	piVar8	topKindSlot	INFERRED	address of the last element of the predicate-kind stack (or 0 when empty); *slot == 0 drives bVar11	^\s*piVar8\ =\ \(int\ \*\)0x0;$	^\s*piVar8\ =\ FUN_001043f0\(uVar5,param_4\);$	all	none
+use	FUN_0019e318	piVar8	predSetInst	CONFIRMED	IRInst__create(opcode 0x53..0x56 / 0x2c..0x2f = IrPredSetE/NE/GT/GE and their Push forms, compiler_opcodes.tsv)	^\s*piVar8\ =\ FUN_001043f0\(uVar5,param_4\);$	
+use	FUN_0019e318	uVar2	pushIndex	INFERRED	old count of the predicate-kind stack = index of the new element (inline push_back)	^\s*uVar2\ =\ puVar10\[1\];$	
+use	FUN_0019e318	uVar5	predSetOpcode	CONFIRMED	opcode passed to IRInst__create: 0x53..0x56 IrPredSetE/NE/GT/GE or 0x2c..0x2f IrPredSetE/NE/GT/GEPush (compiler_opcodes.tsv), 0 for an unknown compare kind	^\s*uVar5\ =\ 0x54;$	^\s*piVar8\ =\ FUN_001043f0\(uVar5,param_4\);$	all	all
+use	FUN_0019e318	uVar5	sourceDef	CONFIRMED	IRInst__getOperandSource(branchInst, 1): the value feeding the compare, set as source of the predicate-set instruction	^\s*uVar5\ =\ FUN_00105594\(a0,1\);$	+1	all	all
+use	FUN_0019e318	uVar5	sourceDef	CONFIRMED	IRInst__getOperandSource(branchInst, 1): the value feeding the compare, set as source 2 of the push form	^\s*uVar5\ =\ FUN_00105594\(a0,1\);$@2	+1	all	all
+local	FUN_0019e6e0	puVar5	pushedSlot	INFERRED	address of the element appended to the predicate-kind stack (this[0x25]); the value 3 is stored there
+local	FUN_0019e6e0	piVar6	topKindSlot	INFERRED	address of the last element of the predicate-kind stack at this[0x25]; *slot == 0 means no predicate active
+local	FUN_0019e6e0	iVar10	predSlot	INFERRED	starts as the element count of the saved-predicate stack this[0x26]; with 3..6 entries it becomes count-3 (lane in a fresh temp register), above that 0; stored as the lane select byte at +0x9c of the saving mov
+local	FUN_0019e6e0	iVar4	saveMovInst	CONFIRMED	FUN_001084b8(0x66, compiler): opcode 0x66 = IrMov; pushed on the saved-predicate stack this[0x26]
+local	FUN_0019e6e0	uVar1	destSelect	INFERRED	DAT_001b2d50, stored at inst+0x9c (the destination select word, piVar[0x27] elsewhere in this class)
+use	FUN_0019e6e0	piVar8	program	CONFIRMED	node+0xac, passed as the program argument of FUN_000f79c4 (which takes *(compiler+0x6c4) elsewhere) and FUN_00130690	^\s*piVar8\ =\ \*\(int\ \*\*\)\(param_2\ \+\ 0xac\);$	^\s*piVar8\ =\ \(int\ \*\)\(uVar2\ \*\ 4\ \+\ puVar9\[2\]\);$	all	none
+use	FUN_0019e6e0	piVar8	savedSlot	INFERRED	address of the element appended to the saved-predicate stack this[0x26], receives the saving mov	^\s*piVar8\ =\ \(int\ \*\)\(uVar2\ \*\ 4\ \+\ puVar9\[2\]\);$	^\s*\*piVar8\ =\ iVar4;$	all	all
+use	FUN_0019e6e0	iVar3	zeroInst	CONFIRMED	R520VMachineAssembler__getOrCreateConstantZeroInst	^\s*iVar3\ =\ FUN_0019d4e8\(param_1\);$	^\s*iVar3\ =\ FUN_001043f0\(0x53,param_4\);$	all	none
+use	FUN_0019e6e0	iVar3	predSetInst	CONFIRMED	IRInst__create(0x53 = IrPredSetE): the instruction set up with a literal 0.0 source (FUN_000f79c4) and appended to the node	^\s*iVar3\ =\ FUN_001043f0\(0x53,param_4\);$	^\s*FUN_000e7688\(param_2,iVar3\);$	all	all
+use	FUN_0019e6e0	iVar3	zeroInst	CONFIRMED	R520VMachineAssembler__getOrCreateConstantZeroInst: the source of the saving mov	^\s*iVar10\ =\ \*\(int\ \*\)\(param_1\[0x26\]\ \+\ 4\);$	^\s*iVar3\ =\ FUN_001054ec\(iVar4,1\);$	all	none
+use	FUN_0019e6e0	iVar3	operandRecord	CONFIRMED	IRInst__getOperandRecord: address of the 0x18-byte operand record of the mov	^\s*iVar3\ =\ FUN_001054ec\(iVar4,1\);$	+1	all	all
+use	FUN_0019e6e0	uVar7	destRegister	INFERRED	destination register (+0x94) of the predicate-set / saving mov: the zero instruction register, replaced by a fresh FUN_00130690 register or 0 when the saved-predicate stack is deep	^\s*uVar7\ =\ \*\(undefined4\ \*\)\(iVar3\ \+\ 0x94\);$	^\s*uVar7\ =\ DAT_001b2d4c;$	all	none
+use	FUN_0019e6e0	uVar7	sourceSelect	INFERRED	DAT_001b2d4c stored into the select word (+0x10) of operand record 1 of the mov	^\s*uVar7\ =\ DAT_001b2d4c;$	+2	all	all
+use	FUN_0019e6e0	uVar7	nodeHandle	INFERRED	FUN_000e7d5c(node), the first argument of the vslot39 (appendBranchEntry) call	^\s*uVar7\ =\ FUN_000e7d5c\(param_2\);$	
+use	FUN_0019e6e0	uVar2	topKindIndex	INFERRED	count - 1, index of the top of the predicate-kind stack	^\s*uVar2\ =\ puVar9\[1\]\ \-\ 1;$	^\s*if\ \(\*piVar6\ ==\ 0\)\ \{$	all	none
+use	FUN_0019e6e0	uVar2	savedPushIndex	INFERRED	old count of the saved-predicate stack = index of the appended saving mov	^\s*uVar2\ =\ puVar9\[1\];$	^\s*\*piVar8\ =\ iVar4;$	all	all
+use	FUN_0019e6e0	uVar2	pushIndex	INFERRED	old count of the predicate-kind stack = index of the pushed 3	^\s*uVar2\ =\ puVar9\[1\];$@2	^\s*\*puVar5\ =\ 3;$	all	all
+use	FUN_0019e6e0	puVar9	predKindStack	INFERRED	vector at this[0x25] (capacity, count, data): predicate-kind stack	^\s*puVar9\ =\ \(uint\ \*\)param_1\[0x25\];$	^\s*puVar9\ =\ \(uint\ \*\)param_1\[0x26\];$	all	none
+use	FUN_0019e6e0	puVar9	savedPredStack	INFERRED	vector at this[0x26]: stack of the movs that save the predicate	^\s*puVar9\ =\ \(uint\ \*\)param_1\[0x26\];$	^\s*puVar9\ =\ \(uint\ \*\)param_1\[0x25\];$	all	none
+use	FUN_0019e6e0	puVar9	predKindStack	INFERRED	vector at this[0x25] (capacity, count, data): predicate-kind stack	^\s*puVar9\ =\ \(uint\ \*\)param_1\[0x25\];$@3	
+# round 5, fork I2 (2): R520V loop header / if-end / predicate restore / close conditional, R300V control-flow stack helpers. Predicate kind: IRInst vslot 33 (0x84) stores inst+0x11c, vslot14 turns it into PRED_ENABLE/PRED_SENSE; the stack at this+0x94 holds the kinds
+local	FUN_0019d858	bVar1	moreLanes	INFERRED	lane != 3 continue flag of the 4-lane do/while loops
+use	FUN_0019d858	uVar3	condSwizzle	INFERRED	operand record 1 +0x10 of the branch instruction (the lane select word), reused as the lane select byte (& 0xff) of the generated instructions	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar5\ \+\ 0x10\);$	
+use	FUN_0019d858	iVar5	branchSrcRecord	CONFIRMED	FUN_001054ec = IRInst__getOperandRecord(branchInst, 1)	^\s*iVar5\ =\ FUN_001054ec\(iVar4,1\);$	+1	all	all
+use	FUN_0019d858	iVar5	branchOpcode	INFERRED	opcode-info object (inst+0x88) field +8: the opcode id compared with 0x8b (IrCmp2) / 0x8c (IrCmp1D)	^\s*iVar5\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar4\ \+\ 0x88\)\ \+\ 8\);$	+1	all	all
+use	FUN_0019d858	iVar5	branchOpcode	INFERRED	opcode id tested again for IrCmp1D after the IrCmp2 branch	^\s*else\ if\ \(iVar5\ ==\ 0x8c\)\ \{$	+0	all	all
+use	FUN_0019d858	iVar5	addSrcRecord	CONFIRMED	IRInst__getOperandRecord(addInst, 1): its +0x10 select word receives condSwizzle	^\s*iVar5\ =\ FUN_001054ec\(piVar6,1\);$	+2	all	all
+use	FUN_0019d858	iVar5	addSrcRecord	CONFIRMED	IRInst__getOperandRecord(addInst, 1): its +0x10 select word receives condSwizzle	^\s*iVar5\ =\ FUN_001054ec\(piVar6,1\);$@2	+2	all	all
+use	FUN_0019d858	iVar5	scratchRegister	INFERRED	R300VMachineAssembler__getOrAllocateScratchRegister: destination register of the add instruction	^\s*iVar5\ =\ FUN_0019d430\(param_1,piVar11\);$	+1	all	all
+use	FUN_0019d858	iVar5	scratchRegister	INFERRED	R300VMachineAssembler__getOrAllocateScratchRegister: destination register of the add instruction	^\s*iVar5\ =\ FUN_0019d430\(param_1,piVar11\);$@2	+1	all	all
+use	FUN_0019d858	iVar5	zeroInst	CONFIRMED	R520VMachineAssembler__getOrCreateConstantZeroInst	^\s*iVar5\ =\ FUN_0019d4e8\(param_1\);$	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar5\ \+\ 0x94\);$	all	rhs
+use	FUN_0019d858	iVar5	zeroRegister	CONFIRMED	destination register (+0x94) of the constant-zero instruction: dest register of the second generated instruction	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar5\ \+\ 0x94\);$	^\s*piVar11\[0x25\]\ =\ iVar5;$	lhs	all
+use	FUN_0019d858	uVar8	branchFlags	INFERRED	branchInst + 0xb8 flag word: bit 0 is copied to the modifier bit of the add instruction	^\s*uVar8\ =\ \*\(uint\ \*\)\(iVar4\ \+\ 0xb8\);$	+2	all	all
+use	FUN_0019d858	uVar8	branchFlags	INFERRED	branchInst + 0xb8 flag word: bit 0 is copied to the modifier bit of the add instruction	^\s*uVar8\ =\ \*\(uint\ \*\)\(iVar4\ \+\ 0xb8\);$@2	+2	all	all
+use	FUN_0019d858	uVar8	selectByte	INFERRED	condSwizzle & 0xff: the select byte stored for each lane	^\s*uVar8\ =\ uVar3\ \&\ 0xff;$	
+use	FUN_0019d858	piVar11	program	INFERRED	node+0xac: the Program object (allocator argument of getOrAllocateScratchRegister and FUN_000f79c4); *program tested before generating code	^\s*piVar11\ =\ \*\(int\ \*\*\)\(param_2\ \+\ 0xac\);$	^\s*piVar11\ =\ FUN_001043f0\(0x54,param_6\);$	all	none
+use	FUN_0019d858	piVar11	predSetNEInst	CONFIRMED	IRInst__create(0x54 = IrPredSetNE) with the condition value as source 1	^\s*piVar11\ =\ FUN_001043f0\(0x54,param_6\);$	^\s*piVar11\ =\ FUN_001043f0\(0x3e,param_6\);$	all	none
+use	FUN_0019d858	piVar11	predicatedInst	INFERRED	IRInst__create(0x3e) with the condition value as source 1 and a predicate kind (slot 33) derived from the stack top; opcode 0x3e is IrRecipClamp in compiler_opcodes.tsv	^\s*piVar11\ =\ FUN_001043f0\(0x3e,param_6\);$	
+local	FUN_0019e11c	uVar5	savedMovInst	INFERRED	top element of the saved-predicate stack this[0x26] (the mov pushed by assembleWithPredicateSet); source 1 of the IrPredSetRst (0x5a) instruction
+local	FUN_0019e11c	iVar6	zeroRegister	CONFIRMED	destination register (+0x94) of the constant-zero instruction, stored as dest register of the new instruction
+use	FUN_0019e11c	piVar7	program	INFERRED	node+0xac: the Program object; *program tested	^\s*piVar7\ =\ \*\(int\ \*\*\)\(param_2\ \+\ 0xac\);$	^\s*piVar7\ =\ \(int\ \*\)FUN_001043f0\(0x5a,param_4\);$	all	none
+use	FUN_0019e11c	puVar4	topKindSlot	INFERRED	address of the last element of the predicate-kind stack this[0x25]	^\s*puVar4\ =\ \(undefined4\ \*\)0x0;$	^\s*FUN_000e2bf4\(param_3,\*puVar4\);$	all	all
+use	FUN_0019e11c	puVar4	savedTopSlot	INFERRED	address of the last element of the saved-predicate stack this[0x26]	^\s*puVar4\ =\ \(undefined4\ \*\)0x0;$@2	^\s*uVar5\ =\ \*puVar4;$	all	all
+use	FUN_0019e11c	uVar2	predKindCount	INFERRED	element count of the predicate-kind stack	^\s*uVar2\ =\ \*\(uint\ \*\)\(param_1\[0x25\]\ \+\ 4\);$	^\s*FUN_000e2bf4\(param_3,\*puVar4\);$	all	none
+use	FUN_0019e11c	uVar1	topKindIndex	INFERRED	count - 1: index of the predicate-kind stack top	^\s*uVar1\ =\ uVar2\ \-\ 1;$	^\s*FUN_000e2bf4\(param_3,\*puVar4\);$	all	none
+use	FUN_0019e11c	uVar1	savedCount	INFERRED	element count of the saved-predicate stack this[0x26] before the pop; the lane is count-4 for 4..7	^\s*uVar1\ =\ \*\(uint\ \*\)\(iVar3\ \+\ 4\);$	
+use	FUN_0019e11c	uVar2	laneSelect	INFERRED	starts as count-1 of the saved-predicate stack (index of the popped entry) and becomes count-4 for 4..7 entries / 0 for more; stored as the select byte of lane 0..3 by the four IRInst vslot 34 calls (same depth-to-lane mapping as predSlot in assembleWithPredicateSet)	^\s*uVar2\ =\ uVar1\ \-\ 1;$	^\s*\(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x88\)\)\(piVar7,1,3,uVar2\);$	all	all
+use	FUN_0019e11c	iVar3	savedPredStack	INFERRED	vector at this[0x26]: stack of saved-predicate movs	^\s*iVar3\ =\ param_1\[0x26\];$	^\s*iVar3\ =\ FUN_0019d4e8\(param_1\);$	all	none
+use	FUN_0019e11c	iVar3	zeroInst	CONFIRMED	R520VMachineAssembler__getOrCreateConstantZeroInst	^\s*iVar3\ =\ FUN_0019d4e8\(param_1\);$	+1	all	all
+use	FUN_0019e11c	iVar3	destSelect	INFERRED	DAT_001b2d50, stored as the destination select word (inst[0x27])	^\s*iVar3\ =\ DAT_001b2d50;$	+3	all	all
+use	FUN_0019dff8	piVar5	program	INFERRED	node+0xac: the Program object; *program tested	^\s*piVar5\ =\ \*\(int\ \*\*\)\(param_2\ \+\ 0xac\);$	^\s*piVar5\ =\ \(int\ \*\)0x0;$	all	none
+use	FUN_0019dff8	piVar5	topKindSlot	INFERRED	address of the last element of the predicate-kind stack this[0x25] (after the pop)	^\s*piVar5\ =\ \(int\ \*\)0x0;$	
+use	FUN_0019dff8	uVar3	predKindCount	INFERRED	element count of the predicate-kind stack	^\s*uVar3\ =\ \*\(uint\ \*\)\(param_1\[0x25\]\ \+\ 4\);$	^\s*iVar6\ =\ \*piVar5;$	all	none
+use	FUN_0019dff8	uVar2	topKindIndex	INFERRED	count - 1: index of the stack top	^\s*uVar2\ =\ uVar3\ \-\ 1;$	^\s*iVar6\ =\ \*piVar5;$	all	none
+use	FUN_0019dff8	iVar6	topKind	INFERRED	predicate kind now on top of the stack; passed to FUN_000e2bf4(block, kind); non-zero means an enclosing predicate is active, so a Pop is emitted	^\s*iVar6\ =\ \*piVar5;$	^\s*iVar6\ =\ FUN_001043f0\(0x58,param_4\);$	all	none
+use	FUN_0019dff8	iVar6	popInst	CONFIRMED	IRInst__create(0x58 = IrPredSetPop), prepended to the node	^\s*iVar6\ =\ FUN_001043f0\(0x58,param_4\);$	
+use	FUN_0019dff8	iVar4	zeroInst	CONFIRMED	R520VMachineAssembler__getOrCreateConstantZeroInst: source 1 of the pop and provider of its dest register	^\s*iVar4\ =\ FUN_0019d4e8\(param_1\);$	^\s*iVar4\ =\ FUN_001054ec\(iVar6,1\);$	all	none
+use	FUN_0019dff8	uVar1	destSelect	INFERRED	DAT_001b2d50, stored at inst+0x9c (destination select word)	^\s*uVar1\ =\ DAT_001b2d50;$	^\s*uVar1\ =\ DAT_001b2d4c;$	all	none
+use	FUN_0019dff8	uVar1	sourceSelect	INFERRED	DAT_001b2d4c, stored in the select word (+0x10) of operand record 1	^\s*uVar1\ =\ DAT_001b2d4c;$	+2	all	all
+local	FUN_0019d7a0	iVar3	zeroRegister	CONFIRMED	destination register (+0x94) of the constant-zero instruction
+use	FUN_0019d7a0	iVar1	zeroInst	CONFIRMED	R520VMachineAssembler__getOrCreateConstantZeroInst	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_0019d4e8\)\(param_1\);$	+1	all	all
+use	FUN_0019d7a0	iVar1	destSelect	INFERRED	DAT_001b2d50, stored as the destination select word (inst[0x27])	^\s*iVar1\ =\ DAT_001b2d50;$	+3	all	all
+local	FUN_0019d478	uVar2	predKindCount	INFERRED	element count of the predicate-kind stack at this+0x94
+local	FUN_0019d478	uVar1	topKindIndex	INFERRED	count - 1: index of the stack top
+local	FUN_0019d478	puVar3	topKindSlot	INFERRED	address of the last element of the predicate-kind stack; its value goes to FUN_000e2bf4(node+0x90, kind)
+local	FUN_0019d4e8	iVar1	zeroInst	CONFIRMED	the cached constant-zero instruction at this+0x90 (created on first use)
+local	FUN_0019d4e8	uVar2	zeroRegister	INFERRED	FUN_00130690(program, 0): fresh register id stored as the instruction destination register
+local	FUN_0019d590	uVar1	sourceSelect	INFERRED	DAT_001b2d4c, stored in the select word (+0x10) of operand record 1
+local	FUN_0019d590	puVar5	pushedSlot	INFERRED	address of the element appended to the predicate-kind stack this[0x25]; the value 2 is stored
+local	FUN_0019d590	iVar6	zeroInst	CONFIRMED	R520VMachineAssembler__getOrCreateConstantZeroInst
+local	FUN_0019d590	puVar9	predKindStack	INFERRED	vector at this[0x25] (capacity, count, data): predicate-kind stack
+use	FUN_0019d590	uVar2	pushIndex	INFERRED	old count of the predicate-kind stack = index of the pushed 2	^\s*uVar2\ =\ puVar9\[1\];$	^\s*\*puVar5\ =\ 2;$	all	all
+use	FUN_0019d590	uVar2	cfTopIndex	INFERRED	count - 1: index of the top of the control-flow stack (program+0x24)	^\s*uVar2\ =\ uVar3\ \-\ 1;$	
+local	FUN_0019d590	uVar3	cfStackCount	INFERRED	element count of the control-flow stack program+0x24
+use	FUN_0019d590	piVar7	firstElemSlot	INFERRED	address of the first element (data pointer +8) of the vector at conditionBlock+0xd0, 0 when empty; compared with node[0x4f]	^\s*piVar7\ =\ \(int\ \*\)0x0;$	^\s*piVar7\ =\ \(int\ \*\)FUN_001043f0\(0x57,param_4\);$	all	none
+use	FUN_0019d590	piVar7	cfTopSlot	INFERRED	address of the last element of the control-flow stack program+0x24	^\s*piVar7\ =\ \(int\ \*\)0x0;$@2	
+use	FUN_0019d590	iVar4	callResult	INFERRED	scratch for the DList count and the two call results tested in the early exits	^\s*iVar4\ =\ FUN_00194034\(iVar8\ \+\ 0x90\);$	^\s*iVar4\ =\ DAT_001b2d50;$	all	none
+local	FUN_0019af40	uVar3	cfStackCount	INFERRED	element count of the control-flow stack program+0x24
+local	FUN_0019af40	uVar1	cfTopIndex	INFERRED	count - 1: index of the top of the control-flow stack
+local	FUN_0019b6a0	iVar1	openStack	INFERRED	vector program+0x28 (stack of open control-flow entries, count +4, data +8)
+local	FUN_0019b6a0	piVar3	topSlot	INFERRED	address of the last element of openStack, 0 when empty
+local	FUN_0019b6a0	iVar4	cfEntry	INFERRED	top entry popped from the stack: +0x18 receives the end instruction index
+use	FUN_0019b6a0	uVar2	openCount	INFERRED	element count of openStack	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar1\ \+\ 4\);$	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar4\ \+\ 0x10\);$	all	none
+use	FUN_0019b6a0	uVar2	entryStart	INFERRED	cfEntry + 0x10: the start instruction index of the entry; compared with this+0x2c / +0x30	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar4\ \+\ 0x10\);$	
+local	FUN_0019b808	iVar1	openStack	INFERRED	vector program+0x24 (stack of open if entries, count +4, data +8)
+local	FUN_0019b808	piVar3	topSlot	INFERRED	address of the last element of openStack, 0 when empty
+local	FUN_0019b808	iVar4	cfEntry	INFERRED	top entry popped from the stack: +0x18 receives the end instruction index, +0x14 defaults to +0x10
+use	FUN_0019b808	uVar2	openCount	INFERRED	element count of openStack	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar1\ \+\ 4\);$	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar4\ \+\ 0x10\);$	all	none
+use	FUN_0019b808	uVar2	entryStart	INFERRED	cfEntry + 0x10: the start instruction index of the entry; compared with this+0x2c / +0x30	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar4\ \+\ 0x10\);$	
+local	FUN_0019b748	piVar2	pushedSlot	INFERRED	address of the element appended to the open-entry stack program+0x28
+local	FUN_0019b748	uVar3	pushIndex	INFERRED	old count of the open-entry stack = index of the pushed entry pointer
+local	FUN_0019b748	puVar4	openStack	INFERRED	vector program+0x28 (capacity, count, data)
+local	FUN_0019a484	iVar4	entryOffset	INFERRED	byte offset of the current 0x1c-byte control-flow entry (advances by 0x1c)
+local	FUN_0019a484	iVar8	srcEntry	CONFIRMED	this+0x40 array element at entryOffset
+local	FUN_0019a484	puVar1	srcEntryWords	CONFIRMED	same address as srcEntry typed as a word pointer; word 0 is copied to dst+4
+local	FUN_0019a484	iVar6	dstEntry	CONFIRMED	this+0x54 output block at entryOffset
+use	FUN_0019a484	uVar2	srcWord1	CONFIRMED	*(srcEntry+4), copied to dstEntry+8	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(iVar8\ \+\ 4\);$	+6	all	all
+use	FUN_0019a484	uVar2	srcWord4	CONFIRMED	*(srcEntry+0x10), copied to dstEntry+0x14	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(iVar8\ \+\ 0x10\);$	+3	all	all
+local	FUN_0019a484	uVar7	srcWord2	CONFIRMED	*(srcEntry+8), copied to dstEntry+0xc
+use	FUN_0019a484	uVar5	srcWord3	CONFIRMED	*(srcEntry+0xc), copied to dstEntry+0x10	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(iVar8\ \+\ 0xc\);$	+5	all	all
+use	FUN_0019a484	uVar5	srcWord5	CONFIRMED	*(srcEntry+0x14), copied to dstEntry+0x18	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(iVar8\ \+\ 0x14\);$	+3	all	all

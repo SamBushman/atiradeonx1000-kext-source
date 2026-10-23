@@ -700,3 +700,15 @@ Khan kinds is gated by `OPT_SPLIT_AND_MERGE` (0x36), `OPT_REASSOCIATE` (0x15, tw
 and `R520VMachineAssembler__vslot27_assembleLoopHeader`.
 
 **Not done.** The individual algebraic patterns behind the 21 `collapseAlgebraic` helpers; the OpcodeInfo slots 5/6 and IRInst slots 32-35; the scheduler-model slots (D2's area).
+
+## Round 5, fork I2: R520V predicate-kind stack and visitor names (names_I2_asm.tsv)
+
+The R520V assembler keeps two vectors that `R520VMachineAssembler__init` allocates (capacity 2): `this+0x94` is the **predicate-kind stack** and `this+0x98` the **saved-predicate stack**; `this+0x90`
+caches the constant-zero instruction (`getOrCreateConstantZeroInst`). A predicate kind is what IRInst vslot 33 stores at `inst+0x11c` (0 = unpredicated, 2 / 3 = predicated; the R300V encoder turns
+2 / 3 into PRED_ENABLE / PRED_SENSE). `setLoopStack` pushes 0, `closeConditional` replaces the entry above the base with 2, the conditional visitors push 3.
+
+* `vslot25_assembleConditionalBlock`: the top kind selects the plain `IrPredSetE/NE/GT/GE` (0x53..0x56) or the Push forms (0x2c..0x2f) from the branch compare kind (branchInst +0x12c).
+* `vslot24_assembleWithPredicateSet`: with a loop (`node+0x138 / 0x13c`) saves the predicate in a `mov` (opcode 0x66) whose lane is the saved-predicate depth (0..2 in the zero register, 3..6 in a fresh register, then 0).
+* `vslot31_assembleWithPredicateRestore` pops it again with `IrPredSetRst` (0x5a), `vslot28_assembleIfEnd` emits `IrPredSetPop` (0x58) when an enclosing predicate is active, `vslot32_assembleWithPredicateClear` `IrPredSetClr` (0x59).
+* `vslot27_assembleLoopHeader`: IrCmp2 (0x8b) / IrCmp1D (0x8c) conditions are turned into an add (0x12) and an `IrPredSetNE` (0x54) plus a predicated instruction (0x3e).
+* `node+0xac` is the Program (the same object `FUN_00130690` / `FUN_000f79c4` take as their allocator), `*program` is tested before any code is generated.

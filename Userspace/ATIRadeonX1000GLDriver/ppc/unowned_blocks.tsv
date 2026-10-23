@@ -3104,14 +3104,14 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 10a720	10a744	eh-pad	FUN_0010a6bc	9	__Unwind_Resume
 10a79c	10a7bc	eh-pad	IRLoadConst__vslot57	8	0x193cc0,__Unwind_Resume
 10adb4	10add4	eh-pad	FUN_0010ad68	8	0x193cc0,__Unwind_Resume
-10b000	10b020	eh-pad	FUN_0010af38	8	0x193cc0,__Unwind_Resume
+10b000	10b020	eh-pad	IRInst__cloneIfPresub	8	0x193cc0,__Unwind_Resume
 10b384	10b39c	table	FUN_0010b32c	6	
 10b638	10b7f0	table	IRInst__getCompareCondition	110	
 10b874	10b88c	table	evaluateCompareFloats	6	
 10b9c0	10ba40	table	FUN_0010b93c	32	
 10be9c	10bebc	eh-pad	FUN_0010bd50	8	0x193cc0,__Unwind_Resume
 10c268	10c26c	eh-pad	FUN_0010c010	1	__Unwind_Resume
-10d31c	10d320	eh-pad	FUN_0010d15c	1	__Unwind_Resume
+10d31c	10d320	eh-pad	IRInst__replaceWithMovOfSource	1	__Unwind_Resume
 10d5e4	10d5e8	eh-pad	FUN_0010d4cc	1	__Unwind_Resume
 10d88c	10d890	millicode	FUN_0010d730	1	
 10d948	10d94c	eh-pad	FUN_0010d730	1	__Unwind_Resume
@@ -3334,33 +3334,33 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 1465d8	1465f0	eh-pad	FUN_0014657c	6	0x193cc0,__Unwind_Resume
 1473f0	1474a8	table	IRInst__isOpcodeInSet147398	46	
 148328	14832c	eh-pad	FUN_00147f54	1	__Unwind_Resume
-14b00c	14b010	eh-pad	Inst__collapseAlgebraic_0014acb8	1	__Unwind_Resume
-14b720	14b724	millicode	Inst__collapseAlgebraic_0014b150	1	
-14b7f4	14b7f8	eh-pad	Inst__collapseAlgebraic_0014b150	1	__Unwind_Resume
-14bbe4	14bbe8	eh-pad	Inst__collapseAlgebraic_0014b82c	1	__Unwind_Resume
-14d794	14d798	eh-pad	Inst__collapseAlgebraic_0014d274	1	__Unwind_Resume
-14e1b8	14e1bc	eh-pad	Inst__collapseAlgebraic_0014d8f8	1	__Unwind_Resume
+14b00c	14b010	eh-pad	Inst__collapseMulSplatByDotOnes	1	__Unwind_Resume
+14b720	14b724	millicode	Inst__collapseAddIntoMadMulAddend	1	
+14b7f4	14b7f8	eh-pad	Inst__collapseAddIntoMadMulAddend	1	__Unwind_Resume
+14bbe4	14bbe8	eh-pad	Inst__collapseAddOfMulToMad	1	__Unwind_Resume
+14d794	14d798	eh-pad	Inst__collapseDot3VectorTimesScaledVector	1	__Unwind_Resume
+14e1b8	14e1bc	eh-pad	Inst__collapseThreeComponentSumToDot3	1	__Unwind_Resume
 14e984	14e99c	eh-pad	Inst__reassociate_14e6e4	6	0x193cc0,__Unwind_Resume
 1518ac	1518b0	eh-pad	FUN_00151370	1	__Unwind_Resume
 1521dc	1521e0	eh-pad	FUN_00151a74	1	__Unwind_Resume
 152b28	152b2c	eh-pad	FUN_001524b8	1	__Unwind_Resume
 154118	15411c	eh-pad	FUN_00152ea8	1	__Unwind_Resume
 154a44	154a48	eh-pad	FUN_001541f0	1	__Unwind_Resume
-155148	15514c	millicode	Inst__collapseAlgebraic_00154dc0	1	
-155264	155268	eh-pad	Inst__collapseAlgebraic_00154dc0	1	__Unwind_Resume
+155148	15514c	millicode	Inst__mergeComponentMovsIntoCnd	1	
+155264	155268	eh-pad	Inst__mergeComponentMovsIntoCnd	1	__Unwind_Resume
 155c88	155c8c	millicode	Inst__collapseAlgebraic_00155a60	1	
 15626c	156270	eh-pad	Inst__collapseAlgebraic_00155a60	1	__Unwind_Resume
 156f34	156f38	millicode	FUN_00156d48	1	
 1579dc	1579e0	millicode	FUN_00156d48	1	
 157b48	157b60	eh-pad	FUN_00156d48	6	0x193cc0,__Unwind_Resume
 1585a0	1585a4	eh-pad	Inst__collapseAlgebraic_00158264	1	__Unwind_Resume
-1595b4	1595cc	eh-pad	Inst__collapseAlgebraic_00158c3c	6	0x193cc0,__Unwind_Resume
+1595b4	1595cc	eh-pad	Inst__distributeResultScale	6	0x193cc0,__Unwind_Resume
 15a398	15a3b0	table	FUN_00159b58	6	
 15d458	15d45c	millicode	Inst__collapseAlgebraic_0015ceb0	1	
 15dd3c	15dd40	eh-pad	Inst__collapseAlgebraic_0015ceb0	1	__Unwind_Resume
-15e120	15e124	millicode	Inst__collapseAlgebraic_0015df44	1	
-15e1a0	15e1a4	eh-pad	Inst__collapseAlgebraic_0015df44	1	__Unwind_Resume
-15e798	15e79c	eh-pad	Inst__collapseAlgebraic_0015e494	1	__Unwind_Resume
+15e120	15e124	millicode	Inst__collapseMulOfExps	1	
+15e1a0	15e1a4	eh-pad	Inst__collapseMulOfExps	1	__Unwind_Resume
+15e798	15e79c	eh-pad	Inst__collapseClampToSaturate	1	__Unwind_Resume
 15ecf4	15ecf8	millicode	Inst__tryMix	1	
 15f108	15f10c	millicode	Inst__tryMix	1	
 15f2a4	15f2a8	eh-pad	Inst__tryMix	1	__Unwind_Resume
@@ -3519,7 +3519,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 1d016c	1d01b0	other	HwLimits__vslot70_initExportValueTypeDescriptor	17	
 1d01f8	1d0208	other	HwChip__deleting_dtor	4	
 1d0250	1d0278	other	OpcodeInfo__deleting_dtor	10	
-1d0398	1d05b0	other	IrAddFloat__vslot5	134	
+1d0398	1d05b0	other	IrAddFloat__vslot5_getValueKeyTransformLevel	134	
 1d096c	1d09b4	other	IrUInt2F__fold	18	
 1d0b6c	1d0b94	other	IrDot4__foldVector	10	
 1d0cb4	1d0cd8	other	IrCndGTFloat__fold	9	

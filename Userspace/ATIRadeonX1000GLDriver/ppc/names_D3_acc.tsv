@@ -461,7 +461,6 @@ use	FUN_0014c9d0	iVar1	operandRecord	CONFIRMED	IRInst__getOperandRecord: address
 use	FUN_0014caec	iVar1	operandRecord	CONFIRMED	IRInst__getOperandRecord: address of the 0x18-byte operand record	^\s*iVar1\ =\ FUN_001054ec\(pvVar3,1\);$@1	+37	all	all
 use	FUN_0014cec8	iVar2	operandRecord	CONFIRMED	IRInst__getOperandRecord: address of the 0x18-byte operand record	^\s*iVar2\ =\ FUN_001054ec\(iVar1,0\);$@1	+0	all	all
 use	FUN_0014cec8	iVar2	operandRecord	CONFIRMED	IRInst__getOperandRecord: address of the 0x18-byte operand record	^\s*iVar2\ =\ FUN_000f5cf0\(iVar1,3,\*\(undefined4\ \*\)\(iVar2\ \+\ 0x10\),local_50\ \+\ 4\);$@1	+0	rhs	rhs
-use	FUN_0014cec8	iVar2	operandRecord	CONFIRMED	IRInst__getOperandRecord: address of the 0x18-byte operand record	^\s*iVar2\ =\ FUN_001054ec\(iVar5,1\);$@1	+37	all	all
 use	FUN_0014cec8	uVar3	sourceDef	CONFIRMED	IRInst__getOperandSource: the value/instruction feeding the operand (record +4)	^\s*uVar3\ =\ FUN_00105594\(param_1,1\);$@1	+35	all	all
 use	FUN_0014cec8	uVar4	sourceDef2	CONFIRMED	IRInst__getOperandSource: the value/instruction feeding the operand (record +4)	^\s*uVar4\ =\ FUN_00105594\(iVar1,2\);$@1	+12	all	all
 use	FUN_0014d274	iVar2	sourceDef	CONFIRMED	IRInst__getOperandSource: the value/instruction feeding the operand (record +4)	^\s*iVar2\ =\ FUN_00105594\(iVar4,2\);$@1	+0	all	all
@@ -1240,7 +1239,5 @@ use	R300VMachineAssembler__findFoldableMovePair	iVar5	operandRecord	CONFIRMED	IR
 use	R300VMachineAssembler__findFoldableMovePair	uVar7	sourceDef2	CONFIRMED	IRInst__getOperandSource: the value/instruction feeding the operand (record +4)	^\s*uVar7\ =\ FUN_00105594\(piVar9,iVar5\);$@1	+1	all	all
 use	R300VMachineAssembler__findFoldableMovePair	uVar7	sourceDef2	CONFIRMED	IRInst__getOperandSource: the value/instruction feeding the operand (record +4)	^\s*uVar7\ =\ FUN_00105594\(piVar9,iVar6\);$@1	+1	all	all
 use	R520VMachineAssembler__vslot28_assembleIfEnd	iVar4	operandRecord	CONFIRMED	IRInst__getOperandRecord: address of the 0x18-byte operand record	^\s*iVar4\ =\ FUN_001054ec\(iVar6,1\);$@1	+1	all	all
-use	R520VMachineAssembler__vslot25_assembleConditionalBlock	uVar5	sourceDef	CONFIRMED	IRInst__getOperandSource: the value/instruction feeding the operand (record +4)	^\s*uVar5\ =\ FUN_00105594\(a0,1\);$@1	+12	all	all
-use	R520VMachineAssembler__vslot24_assembleWithPredicateSet	iVar3	operandRecord	CONFIRMED	IRInst__getOperandRecord: address of the 0x18-byte operand record	^\s*iVar3\ =\ FUN_001054ec\(iVar4,1\);$@1	+1	all	all
 use	R520MachineAssembler__vslot26_assembleThenAppendRecord	uVar4	sourceDef	CONFIRMED	IRInst__getOperandSource: the value/instruction feeding the operand (record +4)	^\s*uVar4\ =\ FUN_00105594\(iVar3,1\);$@1	+0	all	all
 use	R520MachineAssembler__vslot26_assembleThenAppendRecord	uVar4	sourceDef	CONFIRMED	IRInst__getOperandSource: the value/instruction feeding the operand (record +4)	^\s*uVar4\ =\ thunk_FUN_00134de8\(uVar7,uVar4\);$@1	+0	rhs	rhs

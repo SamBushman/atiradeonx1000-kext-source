@@ -1,7 +1,7 @@
 #include "decls.h"
 
-/* FUN_0010564c @ 0x10564c (584 bytes) */
-int FUN_0010564c(inst, param_2, param_3)
+/* IRInst__deleteIfUnused @ 0x10564c (584 bytes) */
+int IRInst__deleteIfUnused(inst, param_2, param_3)
   int *inst;
   int param_2;
   int param_3;
@@ -71,15 +71,15 @@ int FUN_0010564c(inst, param_2, param_3)
   return uVar2;
 }
 
-/* FUN_00105894 @ 0x105894 (20 bytes) */
-int FUN_00105894(inst, arg)
+/* IRInst__dropCounterAndDeleteIfUnused @ 0x105894 (20 bytes) */
+int IRInst__dropCounterAndDeleteIfUnused(inst, arg)
   int inst;
   undefined4 arg;
 {
   undefined4 uVar1;
   
   *(int *)(inst + 0x160) = *(int *)(inst + 0x160) + -1;
-  uVar1 = ((int (*)())FUN_0010564c)(inst,arg,0);
+  uVar1 = ((int (*)())IRInst__deleteIfUnused)(inst,arg,0);
   return uVar1;
 }
 
@@ -304,8 +304,8 @@ int FUN_00105dbc(inst, param_2)
   return uVar1;
 }
 
-/* FUN_00105e54 @ 0x105e54 (72 bytes) */
-int FUN_00105e54(param_1, param_2, inst, param_4)
+/* IRInst__copyOperandFrom @ 0x105e54 (72 bytes) */
+int IRInst__copyOperandFrom(param_1, param_2, inst, param_4)
   int param_1;
   int param_2;
   undefined4 inst;
@@ -329,7 +329,7 @@ int FUN_00105e9c(inst, param_2)
   iVar1 = iVar2 + 1;
   *(int *)(inst + 0x84) = iVar1;
   if ((*(uint *)(inst + 0x14) & 0x200) != 0) {
-    ((int (*)())FUN_00105e54)(inst,iVar1,inst,iVar2);
+    ((int (*)())IRInst__copyOperandFrom)(inst,iVar1,inst,iVar2);
     iVar1 = *(int *)(inst + 0x84) + -1;
   }
   return IRInst__setOperandRef(inst,iVar1,param_2);
@@ -472,8 +472,8 @@ int FUN_001061b0(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_00106230 @ 0x106230 (144 bytes) */
-int FUN_00106230(param_1, param_2, param_3, param_4, param_5, param_6)
+/* IRInst__setOperandSourceIfLegal @ 0x106230 (144 bytes) */
+int IRInst__setOperandSourceIfLegal(param_1, param_2, param_3, param_4, param_5, param_6)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -492,85 +492,86 @@ int FUN_00106230(param_1, param_2, param_3, param_4, param_5, param_6)
 }
 
 /* IRInst__getOrCreateOperandRecord @ 0x1062c0 (156 bytes) */
-int IRInst__getOrCreateOperandRecord(param_1, param_2, param_3, compiler)
-  int param_1;
-  int param_2;
-  undefined4 *param_3;
+int IRInst__getOrCreateOperandRecord(inst, operandIndex, srcRecord, compiler)
+  int inst;
+  int operandIndex;
+  undefined4 *srcRecord;
   int compiler;
 {
+  uint extraIndex;
   undefined4 arena;
   undefined4 *allocation;
-  int *piVar3;
-  uint uVar4;
-  undefined4 uVar5;
-  undefined4 uVar6;
-  undefined4 uVar7;
-  uint uVar8;
-  uint *puVar9;
+  int *newSlot;
+  uint oldCount;
+  undefined4 recWord1;
+  undefined4 recWord3;
+  undefined4 recWord2;
+  uint pushIndex;
+  uint *extraVector;
   
-  if (param_2 < 5) {
-    allocation = (undefined4 *)(param_2 * 0x18 + param_1 + 0x8c);
+  if (operandIndex < 5) {
+    allocation = (undefined4 *)(operandIndex * 0x18 + inst + 0x8c);
   }
   else {
-    puVar9 = *(uint **)(param_1 + 0x118);
-    if (puVar9 == (uint *)0x0) {
+    extraVector = *(uint **)(inst + 0x118);
+    if (extraVector == (uint *)0x0) {
       arena = *(undefined4 *)(compiler + COMP_arenaA);
       allocation = (undefined4 *)Arena__alloc(arena,0x14);
-      puVar9 = allocation + 1;
+      extraVector = allocation + 1;
       *allocation = arena;
       allocation[1] = 2;
       allocation[2] = 0;
       allocation[4] = arena;
       arena = Arena__alloc(arena,8);
       allocation[3] = arena;
-      *(uint **)(param_1 + 0x118) = puVar9;
+      *(uint **)(inst + 0x118) = extraVector;
     }
-    if ((int)puVar9[1] < (int)(param_2 - 4U)) {
+    if ((int)extraVector[1] < (int)(operandIndex - 4U)) {
       arena = *(undefined4 *)(compiler + COMP_arenaA);
       allocation = (undefined4 *)Arena__alloc(arena,0x1c);
       *allocation = arena;
       allocation[1] = 0;
       allocation[2] = 0;
       allocation[6] = 0;
-      puVar9 = *(uint **)(param_1 + 0x118);
-      uVar8 = puVar9[1];
-      if (uVar8 < *puVar9) {
-        _memset((void *)(uVar8 * 4 + puVar9[2]),0,4);
-        piVar3 = (int *)(uVar8 * 4 + puVar9[2]);
-        puVar9[1] = uVar8 + 1;
+      extraVector = *(uint **)(inst + 0x118);
+      pushIndex = extraVector[1];
+      if (pushIndex < *extraVector) {
+        _memset((void *)(pushIndex * 4 + extraVector[2]),0,4);
+        newSlot = (int *)(pushIndex * 4 + extraVector[2]);
+        extraVector[1] = pushIndex + 1;
       }
       else {
-        piVar3 = (int *)Vector__elementRefGrow(puVar9,uVar8);
+        newSlot = (int *)Vector__elementRefGrow(extraVector,pushIndex);
       }
-      *piVar3 = (int)(allocation + 1);
-      FUN_00103e84(allocation + 1,param_2);
-      puVar9 = *(uint **)(param_1 + 0x118);
+      *newSlot = (int)(allocation + 1);
+      FUN_00103e84(allocation + 1,operandIndex);
+      extraVector = *(uint **)(inst + 0x118);
     }
-    uVar8 = param_2 - 5;
-    if (uVar8 < *puVar9) {
-      uVar4 = puVar9[1];
-      if (uVar4 <= uVar8) {
-        _memset((void *)(uVar4 * 4 + puVar9[2]),0,(uVar8 - uVar4) * 4 + 4);
-        puVar9[1] = param_2 - 4U;
+    extraIndex = operandIndex - 5;
+    if (extraIndex < *extraVector) {
+      oldCount = extraVector[1];
+      if (oldCount <= extraIndex) {
+        _memset((void *)(oldCount * 4 + extraVector[2]),0,(extraIndex - oldCount) * 4 + 4);
+        extraVector[1] = operandIndex - 4U;
       }
-      allocation = (undefined4 *)(uVar8 * 4 + puVar9[2]);
+      allocation = (undefined4 *)(extraIndex * 4 + extraVector[2]);
     }
     else {
-      allocation = (undefined4 *)Vector__elementRefGrow(puVar9,uVar8);
+      allocation = (undefined4 *)Vector__elementRefGrow(extraVector,extraIndex);
     }
     allocation = (undefined4 *)*allocation;
   }
-  IROperand__setModifierBits(allocation,1,param_3[5] & 1);
-  IROperand__setModifierBits(allocation,2,(uint)param_3[5] >> 1 & 1);
-  arena = *param_3;
-  uVar5 = param_3[1];
-  uVar7 = param_3[2];
-  uVar6 = param_3[3];
-  allocation[4] = param_3[4];
+  IROperand__setModifierBits(allocation,1,srcRecord[5] & 1);
+  IROperand__setModifierBits(allocation,2,(uint)srcRecord[5] >> 1 & 1);
+  arena = *srcRecord;
+  recWord1 = srcRecord[1];
+  recWord2 = srcRecord[2];
+  recWord3 = srcRecord[3];
+  allocation[4] = srcRecord[4];
   *allocation = arena;
-  allocation[1] = uVar5;
-  allocation[2] = uVar7;
-  allocation[3] = uVar6;
+  allocation[1] = recWord1;
+  allocation[2] = recWord2;
+  allocation[3] = recWord3;
   return;
 }
 
@@ -579,40 +580,47 @@ int IRInst__validate(inst, compiler)
   int *inst;
   int compiler;
 {
+  int srcInst;
+  int srcRecord;
+  int laneIndex;
+  int srcLoopIndex;
+  int slotResult2;
+  int lanesLeft;
+  int destRecord;
   int loopIndex;
-  bool bVar1;
-  uint uVar2;
-  int iVar3;
+  bool moreLanes;
+  uint readComponent;
+  int slotResult;
   int operandRecord;
-  int iVar5;
-  int iVar6;
-  undefined4 local_38;
-  undefined4 local_34;
-  undefined4 local_30 [4];
+  int program;
+  int laneIndex2;
+  undefined4 destSelectWord;
+  undefined4 srcSelectWord;
+  undefined4 srcDestSelectWord [4];
   
   if (0 < inst[0x20]) {
     loopIndex = 0;
     do {
-      iVar3 = (**(code **)(*inst + 0x24))(inst);
-      if (iVar3 != 0) {
+      slotResult = (**(code **)(*inst + 0x24))(inst);
+      if (slotResult != 0) {
         IRInst__getOperandRecord(inst,loopIndex);
       }
       loopIndex = loopIndex + 1;
     } while (loopIndex < inst[0x20]);
   }
-  iVar5 = *(int *)(compiler + COMP_currentProgram);
-  if (((*(uint *)(iVar5 + 0x30) & 8) == 0) && (*(int *)(inst[0x22] + 8) != 0x8e)) {
-    iVar3 = IRInst__getOperandRecord(inst,0);
-    iVar5 = 0;
-    local_38 = *(undefined4 *)(iVar3 + 0x10);
-    iVar3 = 4;
+  program = *(int *)(compiler + COMP_currentProgram);
+  if (((*(uint *)(program + 0x30) & 8) == 0) && (*(int *)(inst[0x22] + 8) != 0x8e)) {
+    destRecord = IRInst__getOperandRecord(inst,0);
+    laneIndex = 0;
+    destSelectWord = *(undefined4 *)(destRecord + 0x10);
+    lanesLeft = 4;
     do {
-      if (*(char *)((int)&local_38 + iVar5) == '\0') {
+      if (*(char *)((int)&destSelectWord + laneIndex) == '\0') {
         loopIndex = 1;
         if (0 < inst[0x21]) {
           do {
-            iVar3 = (**(code **)(*inst + 0x24))(inst);
-            if ((iVar3 != 0) || (iVar3 = (**(code **)(*inst + 0x28))(inst), iVar3 != 0)) {
+            slotResult2 = (**(code **)(*inst + 0x24))(inst);
+            if ((slotResult2 != 0) || (slotResult2 = (**(code **)(*inst + 0x28))(inst), slotResult2 != 0)) {
               IRInst__getOperandRecord(inst,loopIndex);
             }
             loopIndex = loopIndex + 1;
@@ -620,36 +628,36 @@ int IRInst__validate(inst, compiler)
         }
         goto LAB_0010663c;
       }
-      iVar5 = iVar5 + 1;
-      iVar3 = iVar3 + -1;
-    } while (iVar3 != 0);
-    iVar5 = *(int *)(compiler + COMP_currentProgram);
-    if (((*(uint *)(iVar5 + 0x30) & 0x20000) != 0) && (iVar3 = 1, 0 < inst[0x21])) {
+      laneIndex = laneIndex + 1;
+      lanesLeft = lanesLeft + -1;
+    } while (lanesLeft != 0);
+    program = *(int *)(compiler + COMP_currentProgram);
+    if (((*(uint *)(program + 0x30) & 0x20000) != 0) && (srcLoopIndex = 1, 0 < inst[0x21])) {
       do {
-        iVar5 = IRInst__getOperandRecord(inst,iVar3);
-        local_34 = *(undefined4 *)(iVar5 + 0x10);
-        iVar5 = IRInst__getOperandSource(inst,iVar3);
-        if (iVar5 != 0) {
-          operandRecord = IRInst__getOperandRecord(iVar5,0);
-          iVar6 = 0;
-          local_30[0] = *(undefined4 *)(operandRecord + 0x10);
+        srcRecord = IRInst__getOperandRecord(inst,srcLoopIndex);
+        srcSelectWord = *(undefined4 *)(srcRecord + 0x10);
+        srcInst = IRInst__getOperandSource(inst,srcLoopIndex);
+        if (srcInst != 0) {
+          operandRecord = IRInst__getOperandRecord(srcInst,0);
+          laneIndex2 = 0;
+          srcDestSelectWord[0] = *(undefined4 *)(operandRecord + 0x10);
           do {
-            uVar2 = (uint)*(byte *)((int)local_30 + iVar6 + -4);
-            if (((uVar2 != 4) && (*(char *)((int)local_30 + uVar2) != '\0')) &&
-               ((*(uint *)(iVar5 + 0x14) & 0x200) != 0)) {
-              IRInst__getOperandRecord(iVar5,*(undefined4 *)(iVar5 + 0x84));
+            readComponent = (uint)*(byte *)((int)srcDestSelectWord + laneIndex2 + -4);
+            if (((readComponent != 4) && (*(char *)((int)srcDestSelectWord + readComponent) != '\0')) &&
+               ((*(uint *)(srcInst + 0x14) & 0x200) != 0)) {
+              IRInst__getOperandRecord(srcInst,*(undefined4 *)(srcInst + 0x84));
             }
-            bVar1 = iVar6 != 3;
-            iVar6 = iVar6 + 1;
-          } while (bVar1);
+            moreLanes = laneIndex2 != 3;
+            laneIndex2 = laneIndex2 + 1;
+          } while (moreLanes);
         }
-        iVar3 = iVar3 + 1;
-      } while (iVar3 <= inst[0x21]);
+        srcLoopIndex = srcLoopIndex + 1;
+      } while (srcLoopIndex <= inst[0x21]);
 LAB_0010663c:
-      iVar5 = *(int *)(compiler + COMP_currentProgram);
+      program = *(int *)(compiler + COMP_currentProgram);
     }
   }
-  if ((*(uint *)(iVar5 + 0x30) & 0x800) == 0) {
+  if ((*(uint *)(program + 0x30) & 0x800) == 0) {
     (**(code **)(*inst + 0x68))(inst);
   }
   if (((inst[5] & 0x200U) != 0) && ((*(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) & 8) != 0)) {
@@ -669,7 +677,7 @@ int IRProjection__validate(inst, compiler)
   iVar1 = IRInst__isProjectionOfClass26or3a(inst);
   if (iVar1 != 0) {
     iVar1 = IRInst__getOperandRecord(inst,1);
-    FUN_000f2c5c(*(undefined4 *)(iVar1 + 0x10));
+    SelectWord__isSplat(*(undefined4 *)(iVar1 + 0x10));
   }
   return ((int (*)())IRInst__validate)(inst,compiler);
 }
@@ -852,8 +860,8 @@ int IRInst__insertSourceBeforeLast(inst, newSource, compiler)
   return newCount;
 }
 
-/* FUN_00106b48 @ 0x106b48 (88 bytes) */
-int FUN_00106b48(inst, param_2, param_3, param_4)
+/* IRInst__setLastOperandFromRecord @ 0x106b48 (88 bytes) */
+int IRInst__setLastOperandFromRecord(inst, param_2, param_3, param_4)
   int inst;
   int param_2;
   undefined4 param_3;
@@ -1610,8 +1618,8 @@ int IRMov__ctor_107d38(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_00107da8 @ 0x107da8 (76 bytes) */
-int FUN_00107da8(param_1, param_2, param_3)
+/* IRInst__reinitAsUnary @ 0x107da8 (76 bytes) */
+int IRInst__reinitAsUnary(param_1, param_2, param_3)
   undefined4 *param_1;
   undefined4 param_2;
   undefined4 param_3;

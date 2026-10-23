@@ -1788,9 +1788,9 @@ int Program__packPsInputs(param_1)
             do {
               iVar7 = IRInst__getOperandRecord(arena,0);
               if (*(char *)(iVar22 + iVar7 + 0x10) != '\x01') {
-                uVar8 = FUN_00104b6c(arena,iVar22);
+                uVar8 = IRLoadInterp__laneKind(arena,iVar22);
                 local_90[iVar19] = uVar8;
-                uVar8 = FUN_0010426c(arena,iVar22);
+                uVar8 = IRLoadInterp__laneIndex(arena,iVar22);
                 local_98[iVar19] = (char)iVar22;
                 local_80[iVar19] = uVar8;
                 iVar19 = iVar19 + 1;
@@ -1831,9 +1831,9 @@ int Program__packPsInputs(param_1)
                   do {
                     operandRecord = IRInst__getOperandRecord(iVar25,0);
                     if (*(char *)(iVar10 + operandRecord + 0x10) != '\x01') {
-                      uVar12 = FUN_00104b6c(iVar25,iVar10);
+                      uVar12 = IRLoadInterp__laneKind(iVar25,iVar10);
                       *(undefined4 *)(puVar15 + 8) = uVar12;
-                      uVar12 = FUN_0010426c(iVar25,iVar10);
+                      uVar12 = IRLoadInterp__laneIndex(iVar25,iVar10);
                       *(undefined4 *)(puVar15 + 0x18) = uVar12;
                       puVar15 = puVar15 + 4;
                       local_58[iVar19] = (char)iVar10;
@@ -1904,7 +1904,7 @@ int Program__packPsInputs(param_1)
                     iVar22 = 0;
                   }
                   DList__unlink(piVar24);
-                  FUN_00108448(piVar24,0x31,*(undefined4 *)(param_1 + 8));
+                  IRInst__reinitAsMov(piVar24,0x31,*(undefined4 *)(param_1 + 8));
                   piVar24[0x26] = 0;
                   iVar7 = 0;
                   piVar24[0x25] = piVar24[0x53];
@@ -2207,7 +2207,7 @@ code_r0x00112df4:
      (uVar12 = uVar9, *(int *)(iVar1 + 8) != *(int *)(*piVar7 + 8))) {
 LAB_00112e78:
     pcVar14 = *(code **)(*this + 0x58);
-    uVar10 = FUN_000ec2c4(param_2,iVar6);
+    uVar10 = Table__interpolatorKindToCode(param_2,iVar6);
     uVar4 = FUN_0010e530(*(undefined4 *)(iVar1 + 4),*(undefined4 *)(iVar1 + 8));
     (*pcVar14)(this,auStack_50,auStack_54,uVar10,uVar4,uVar13);
     uVar13 = 0;
@@ -2445,8 +2445,8 @@ int OpcodeTraits__instFlagBit2(param_1, param_2)
   return *(uint *)(iVar1 + *(int *)(*(int *)(param_2 + 0x88) + 8) * 0x38) >> 2 & 1;
 }
 
-/* FUN_001134bc @ 0x1134bc (152 bytes) */
-int FUN_001134bc(param_1, param_2, param_3)
+/* OpcodeInfo__getResultMode @ 0x1134bc (152 bytes) */
+int OpcodeInfo__getResultMode(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   int param_3;

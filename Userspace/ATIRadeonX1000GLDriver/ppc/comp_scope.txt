@@ -152,7 +152,7 @@ FUN_001746c8 compiler
 FUN_0017a130 compiler
 FUN_0017ae28 compiler
 FUN_00181f00 compiler
-Inst__r300Peephole_1882a4 compiler
+Inst__foldConstantMovIntoResultScale compiler
 FUN_0018d4b4 compiler
 R300MachineAssembler__resolveSourceRegister compiler
 R300MachineAssembler__create compiler

@@ -380,7 +380,7 @@ int R520MachineAssembler__vslot23_emitTexRecord(this, inst, blockArg, compiler)
     uVar6 = *(undefined4 *)(loopRemaining + 0x10);
     loopRemaining = IRInst__getOperandRecord(inst,1);
     unaff_r22 = *(undefined4 *)(loopRemaining + 0x10);
-    FUN_000f2bdc(&local_48,uVar6,unaff_r22);
+    SelectWord__compose(&local_48,uVar6,unaff_r22);
     effectiveSrc1 = (int *)IRInst__getOperandSource(src1Inst,1);
     IRInst__setOperandSource(inst,1,effectiveSrc1,0,compiler);
     loopRemaining = IRInst__getOperandRecord(src1Inst,1);

@@ -106,8 +106,8 @@
 1541f0	FUN_001541f0	r7	PASS-indirect	15422c bctrl 
 1541f0	FUN_001541f0	r8	PASS-indirect	15422c bctrl 
 1541f0	FUN_001541f0	r9	PASS-indirect	15422c bctrl 
-154dc0	Inst__collapseAlgebraic_00154dc0	r7	PASS-deep	154e18 bl 0x105594
-154dc0	Inst__collapseAlgebraic_00154dc0	r8	PASS-deep	154e18 bl 0x105594
+154dc0	Inst__mergeComponentMovsIntoCnd	r7	PASS-deep	154e18 bl 0x105594
+154dc0	Inst__mergeComponentMovsIntoCnd	r8	PASS-deep	154e18 bl 0x105594
 159b58	FUN_00159b58	r7	PASS-deep	159bb8 bl 0x105594
 159b58	FUN_00159b58	r8	PASS-deep	159bb8 bl 0x105594
 15a68c	Inst__takeOutCommonFactor	r6	PASS-indirect	15a6c4 bl 0x193e18
@@ -117,7 +117,7 @@
 15c6d4	Inst__collapseAlgebraic_0015c6d4	r6	PASS-deep	15c708 bl 0x105594
 15c6d4	Inst__collapseAlgebraic_0015c6d4	r7	PASS-deep	15c708 bl 0x105594
 15c6d4	Inst__collapseAlgebraic_0015c6d4	r8	PASS-deep	15c708 bl 0x105594
-15e494	Inst__collapseAlgebraic_0015e494	r5	PASS-indirect	15e4d4 bctrl 
+15e494	Inst__collapseClampToSaturate	r5	PASS-indirect	15e4d4 bctrl 
 15ea3c	Inst__tryMix	r7	PASS-no	15ea90 bl 0x126760
 15ea3c	Inst__tryMix	r8	PASS-no	15ea90 bl 0x126760
 15f44c	FUN_0015f44c	r8	PASS-indirect	15f498 bl 0x105594

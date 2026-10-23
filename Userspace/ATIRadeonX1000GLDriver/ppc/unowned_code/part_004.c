@@ -150,8 +150,8 @@ int HwLimits__vslot61()
   return 1;
 }
 
-/* HwLimits__vslot63 @ 0x1d011c (36 bytes) */
-int HwLimits__vslot63(param_1, param_2)
+/* HwLimits__vslot63_supportsResultScale @ 0x1d011c (36 bytes) */
+int HwLimits__vslot63_supportsResultScale(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -257,14 +257,14 @@ int OpcodeInfo__foldVector()
   return;
 }
 
-/* OpcodeInfo__vslot5 @ 0x1d0250 (8 bytes) */
-int OpcodeInfo__vslot5()
+/* OpcodeInfo__vslot5_getValueKeyTransformLevel @ 0x1d0250 (8 bytes) */
+int OpcodeInfo__vslot5_getValueKeyTransformLevel()
 {
   return 2;
 }
 
-/* OpcodeInfo__vslot6 @ 0x1d0258 (8 bytes) */
-int OpcodeInfo__vslot6()
+/* OpcodeInfo__vslot6_getMovaRoundFlag @ 0x1d0258 (8 bytes) */
+int OpcodeInfo__vslot6_getMovaRoundFlag()
 {
   return 0;
 }

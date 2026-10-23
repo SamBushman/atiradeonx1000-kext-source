@@ -1465,7 +1465,7 @@ int pass_flatten_ifs(flattenPass)
             elseBlock = phiInst[4];
             FUN_00105b24(phiInst,flattenPass);
             DList__unlink(phiInst);
-            FUN_00108304(phiInst,0x25,*(undefined4 *)(flattenPass + 8));
+            IRInst__reinitAsTrinary(phiInst,0x25,*(undefined4 *)(flattenPass + 8));
             Block__insertInstAfter(blockAfterIf,insertAfterInst,phiInst);
             iVar6 = *(int *)(flattenPass + 0x478);
             phiInst[4] = elseBlock;

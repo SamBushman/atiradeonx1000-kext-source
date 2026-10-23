@@ -164,14 +164,14 @@ int IrSetNEFloat__fold(param_1, param_2, param_3)
   return 1;
 }
 
-/* IrMovaRoundFloat__vslot6 @ 0x1d0d6c (8 bytes) */
-int IrMovaRoundFloat__vslot6()
+/* IrMovaRoundFloat__vslot6_getMovaRoundFlag @ 0x1d0d6c (8 bytes) */
+int IrMovaRoundFloat__vslot6_getMovaRoundFlag()
 {
   return 1;
 }
 
-/* IrMovaRound__vslot6 @ 0x1d0d74 (8 bytes) */
-int IrMovaRound__vslot6()
+/* IrMovaRound__vslot6_getMovaRoundFlag @ 0x1d0d74 (8 bytes) */
+int IrMovaRound__vslot6_getMovaRoundFlag()
 {
   return 1;
 }

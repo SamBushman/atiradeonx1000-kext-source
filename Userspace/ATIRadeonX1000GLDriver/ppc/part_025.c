@@ -140,8 +140,8 @@ int FUN_000f2f28(param_1, param_2, param_3)
   return param_1;
 }
 
-/* FUN_000f2f84 @ 0xf2f84 (92 bytes) */
-int FUN_000f2f84(param_1, param_2, param_3)
+/* SelectWord__mergeWrittenLanes @ 0xf2f84 (92 bytes) */
+int SelectWord__mergeWrittenLanes(param_1, param_2, param_3)
   undefined4 *param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -168,8 +168,8 @@ int FUN_000f2f84(param_1, param_2, param_3)
   return param_1;
 }
 
-/* FUN_000f2fe0 @ 0xf2fe0 (76 bytes) */
-int FUN_000f2fe0(param_1, param_2, param_3)
+/* SelectWord__fillUnusedLanes @ 0xf2fe0 (76 bytes) */
+int SelectWord__fillUnusedLanes(param_1, param_2, param_3)
   undefined4 *param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -718,8 +718,8 @@ int laneBytes__clearSetLanes(param_1, param_2)
   return;
 }
 
-/* FUN_000f37b8 @ 0xf37b8 (108 bytes) */
-int FUN_000f37b8(param_1)
+/* SelectWord__splatComponent @ 0xf37b8 (108 bytes) */
+int SelectWord__splatComponent(param_1)
   int param_1;
 {
   if (param_1 == DAT_001aa85c) {
@@ -737,8 +737,8 @@ int FUN_000f37b8(param_1)
   return 0xffffffff;
 }
 
-/* FUN_000f3824 @ 0xf3824 (96 bytes) */
-int FUN_000f3824(param_1)
+/* SelectWord__isSingleComponentConstant @ 0xf3824 (96 bytes) */
+int SelectWord__isSingleComponentConstant(param_1)
   int param_1;
 {
   if ((((param_1 != DAT_001aa85c) && (param_1 != DAT_001aa858)) && (param_1 != DAT_001aa854)) &&
@@ -748,13 +748,13 @@ int FUN_000f3824(param_1)
   return 1;
 }
 
-/* FUN_000f3884 @ 0xf3884 (8 bytes) */
-int FUN_000f3884(param_1)
+/* IRInst__destIsSingleComponent @ 0xf3884 (8 bytes) */
+int IRInst__destIsSingleComponent(param_1)
   int param_1;
 {
   undefined4 uVar1;
   
-  uVar1 = ((int (*)())FUN_000f3824)(*(undefined4 *)(param_1 + 0x9c));
+  uVar1 = ((int (*)())SelectWord__isSingleComponentConstant)(*(undefined4 *)(param_1 + 0x9c));
   return uVar1;
 }
 
@@ -1007,7 +1007,7 @@ int FUN_000f3c30(param_1, inst, param_3, param_4, param_5)
     }
     if ((iVar4 == 0x3b) || (iVar4 == 0x42)) goto switchD_000f3cf4_caseD_b;
   }
-  uVar5 = FUN_001134bc(inst[0x22],inst,param_4);
+  uVar5 = OpcodeInfo__getResultMode(inst[0x22],inst,param_4);
   switch(uVar5) {
   case 0:
     break;
@@ -1193,7 +1193,7 @@ int FUN_000f403c(param_1, inst, param_3, param_4, param_5)
   operandRecord = IRInst__getOperandRecord(inst,param_3);
   local_58 = *(uint *)(operandRecord + 0x10);
   *param_1 = 0;
-  uVar5 = FUN_001134bc(inst[0x22],inst,param_5);
+  uVar5 = OpcodeInfo__getResultMode(inst[0x22],inst,param_5);
   switch(uVar5) {
   case 0:
     operandRecord = IRInst__getOperandRecord(inst,0);
@@ -1568,8 +1568,8 @@ int FUN_000f485c(inst, param_2)
   return 0;
 }
 
-/* FUN_000f48ec @ 0xf48ec (144 bytes) */
-int FUN_000f48ec(inst, param_2)
+/* IRInst__sourceLanesAllWritten @ 0xf48ec (144 bytes) */
+int IRInst__sourceLanesAllWritten(inst, param_2)
   undefined4 inst;
   undefined4 param_2;
 {

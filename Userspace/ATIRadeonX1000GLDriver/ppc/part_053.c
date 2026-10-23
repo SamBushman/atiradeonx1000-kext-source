@@ -10,24 +10,32 @@ int R520VMachineAssembler__vslot27_assembleLoopHeader(this, node, block, param_4
   undefined4 compiler;
   undefined4 param_7;
 {
-  bool bVar1;
+  int *predicatedInst;
+  int *predSetNEInst;
+  uint selectByte;
+  int zeroRegister;
+  int zeroInst;
+  int scratchRegister;
+  int addSrcRecord;
+  int branchOpcode;
+  bool moreLanes;
   uint loopStackEntry;
   uint condSwizzle;
   int branchInst;
-  int iVar5;
+  int branchSrcRecord;
   int *condValueInst;
   undefined4 operandVReg;
-  uint uVar8;
+  uint branchFlags;
   int a2;
   undefined4 a5;
   uint *loopStackSlot;
   int loopIndex;
-  int *piVar11;
+  int *program;
   
-  piVar11 = *(int **)(node + 0xac);
+  program = *(int **)(node + 0xac);
   a5 = compiler;
   branchInst = Block__getBranchInst(node,node,block,param_4,param_5,compiler,param_7);
-  if (*piVar11 != 0) goto LAB_0019dc0c;
+  if (*program != 0) goto LAB_0019dc0c;
   loopStackSlot = (uint *)0x0;
   condSwizzle = *(uint *)(this[0x25] + 4);
   loopStackEntry = condSwizzle - 1;
@@ -35,43 +43,43 @@ int R520VMachineAssembler__vslot27_assembleLoopHeader(this, node, block, param_4
     loopStackSlot = (uint *)(loopStackEntry * 4 + *(int *)(this[0x25] + 8));
   }
   loopStackEntry = *loopStackSlot;
-  iVar5 = IRInst__getOperandRecord(branchInst,1);
-  condSwizzle = *(uint *)(iVar5 + 0x10);
-  iVar5 = *(int *)(*(int *)(branchInst + 0x88) + 8);
-  if (iVar5 == 0x8b) {
+  branchSrcRecord = IRInst__getOperandRecord(branchInst,1);
+  condSwizzle = *(uint *)(branchSrcRecord + 0x10);
+  branchOpcode = *(int *)(*(int *)(branchInst + 0x88) + 8);
+  if (branchOpcode == 0x8b) {
     if (*(int *)(branchInst + 300) != 0) goto LAB_0019dab0;
     condValueInst = IRInst__create(0x12,compiler);
-    iVar5 = IRInst__getOperandRecord(condValueInst,1);
-    uVar8 = *(uint *)(branchInst + 0xb8);
-    *(uint *)(iVar5 + 0x10) = condSwizzle;
-    IROperand__setModifierBits(condValueInst + 0x29,1,uVar8 & 1);
+    addSrcRecord = IRInst__getOperandRecord(condValueInst,1);
+    branchFlags = *(uint *)(branchInst + 0xb8);
+    *(uint *)(addSrcRecord + 0x10) = condSwizzle;
+    IROperand__setModifierBits(condValueInst + 0x29,1,branchFlags & 1);
     operandVReg = IRInst__getOperandSource(branchInst,1);
     IRInst__setOperandSource(condValueInst,1,operandVReg,0,compiler);
     operandVReg = IRInst__getOperandSource(branchInst,2);
     IRInst__setOperandSource(condValueInst,2,operandVReg,0,compiler);
     IROperand__setModifierBits(condValueInst + 0x2f,1,1);
-    iVar5 = R300VMachineAssembler__getOrAllocateScratchRegister(this,piVar11);
-    condValueInst[0x25] = iVar5;
+    scratchRegister = R300VMachineAssembler__getOrAllocateScratchRegister(this,program);
+    condValueInst[0x25] = scratchRegister;
     condValueInst[0x26] = 0;
     (**(code **)(*condValueInst + 0x84))(condValueInst,loopStackEntry);
     Block__appendInst(node,condValueInst);
   }
-  else if (iVar5 == 0x8c) {
+  else if (branchOpcode == 0x8c) {
     if (*(int *)(branchInst + 300) == 0) {
       condValueInst = (int *)IRInst__getOperandSource(branchInst,1);
     }
     else {
       condValueInst = IRInst__create(0x12,compiler);
-      iVar5 = IRInst__getOperandRecord(condValueInst,1);
-      uVar8 = *(uint *)(branchInst + 0xb8);
-      *(uint *)(iVar5 + 0x10) = condSwizzle;
-      IROperand__setModifierBits(condValueInst + 0x29,1,uVar8 & 1);
+      addSrcRecord = IRInst__getOperandRecord(condValueInst,1);
+      branchFlags = *(uint *)(branchInst + 0xb8);
+      *(uint *)(addSrcRecord + 0x10) = condSwizzle;
+      IROperand__setModifierBits(condValueInst + 0x29,1,branchFlags & 1);
       operandVReg = IRInst__getOperandSource(branchInst,1);
       IRInst__setOperandSource(condValueInst,1,operandVReg,0,compiler);
-      ((void (*)())IRInst__makeLiteralVec4Float)(condValueInst,piVar11,2,1.0,1.0,1.0,1.0);
+      ((void (*)())IRInst__makeLiteralVec4Float)(condValueInst,program,2,1.0,1.0,1.0,1.0);
       IROperand__setModifierBits(condValueInst + 0x2f,1,1);
-      iVar5 = R300VMachineAssembler__getOrAllocateScratchRegister(this,piVar11);
-      condValueInst[0x25] = iVar5;
+      scratchRegister = R300VMachineAssembler__getOrAllocateScratchRegister(this,program);
+      condValueInst[0x25] = scratchRegister;
       condValueInst[0x26] = 0;
       (**(code **)(*condValueInst + 0x84))(condValueInst,loopStackEntry);
       Block__appendInst(node,condValueInst);
@@ -81,43 +89,43 @@ int R520VMachineAssembler__vslot27_assembleLoopHeader(this, node, block, param_4
 LAB_0019dab0:
     condValueInst = (int *)0x0;
   }
-  iVar5 = R520VMachineAssembler__getOrCreateConstantZeroInst(this);
-  iVar5 = *(int *)(iVar5 + 0x94);
-  piVar11 = IRInst__create(0x54,compiler);
-  piVar11[0x26] = 0;
-  piVar11[0x27] = 0x1010101;
-  piVar11[0x25] = 0;
-  IRInst__setOperandSource(piVar11,1,condValueInst,0,compiler);
+  zeroInst = R520VMachineAssembler__getOrCreateConstantZeroInst(this);
+  zeroRegister = *(int *)(zeroInst + 0x94);
+  predSetNEInst = IRInst__create(0x54,compiler);
+  predSetNEInst[0x26] = 0;
+  predSetNEInst[0x27] = 0x1010101;
+  predSetNEInst[0x25] = 0;
+  IRInst__setOperandSource(predSetNEInst,1,condValueInst,0,compiler);
   loopIndex = 0;
   do {
-    (**(code **)(*piVar11 + 0x88))(piVar11,1,loopIndex,condSwizzle & 0xff);
-    bVar1 = loopIndex != 3;
+    (**(code **)(*predSetNEInst + 0x88))(predSetNEInst,1,loopIndex,condSwizzle & 0xff);
+    moreLanes = loopIndex != 3;
     loopIndex = loopIndex + 1;
-  } while (bVar1);
+  } while (moreLanes);
   loopIndex = 0;
-  (**(code **)(*piVar11 + 0x84))(piVar11,loopStackEntry);
-  Block__appendInst(node,piVar11);
-  piVar11 = IRInst__create(0x3e,compiler);
-  IRInst__setOperandSource(piVar11,1,condValueInst,0,compiler);
+  (**(code **)(*predSetNEInst + 0x84))(predSetNEInst,loopStackEntry);
+  Block__appendInst(node,predSetNEInst);
+  predicatedInst = IRInst__create(0x3e,compiler);
+  IRInst__setOperandSource(predicatedInst,1,condValueInst,0,compiler);
   do {
     a2 = loopIndex;
-    uVar8 = condSwizzle & 0xff;
+    selectByte = condSwizzle & 0xff;
     /* dropped 2 args (found auditing #70 via ExtendIndirectCalls.java / ground-truth
-     * disassembly): stock passes loopIndex and uVar8 here too, matching the identical-shape
+     * disassembly): stock passes loopIndex and selectByte here too, matching the identical-shape
      * call a few lines above (both loops dispatch the same vtable+0x88 method the same way -
      * r28, set once, holds this loop's masked byte for both). */
-    (**(code **)(*piVar11 + 0x88))(piVar11,1,loopIndex,uVar8);
-    bVar1 = loopIndex != 3;
+    (**(code **)(*predicatedInst + 0x88))(predicatedInst,1,loopIndex,selectByte);
+    moreLanes = loopIndex != 3;
     loopIndex = loopIndex + 1;
-  } while (bVar1);
-  piVar11[0x25] = iVar5;
+  } while (moreLanes);
+  predicatedInst[0x25] = zeroRegister;
   loopStackEntry = loopStackEntry ^ 3;
-  piVar11[0x27] = 0x1010100;
-  piVar11[0x26] = 0;
-  (**(code **)(*piVar11 + 0x84))
-            (piVar11,(loopStackEntry - ((loopStackEntry - 1) + (uint)(loopStackEntry == 0))) + 2,a2,uVar8,compiler,a5,loopStackEntry - 1)
+  predicatedInst[0x27] = 0x1010100;
+  predicatedInst[0x26] = 0;
+  (**(code **)(*predicatedInst + 0x84))
+            (predicatedInst,(loopStackEntry - ((loopStackEntry - 1) + (uint)(loopStackEntry == 0))) + 2,a2,selectByte,compiler,a5,loopStackEntry - 1)
   ;
-  Block__appendInst(node,piVar11);
+  Block__appendInst(node,predicatedInst);
   FUN_00193f20(branchInst);
   *(undefined4 *)(node + 0x130) = 0;
 LAB_0019dc0c:
@@ -131,15 +139,15 @@ int R520VMachineAssembler__vslot30_assembleBlockThenSlot40(this, node, block)
   int node;
   undefined4 block;
 {
-  undefined4 uVar1;
+  undefined4 nodeHandle;
   code *UNRECOVERED_JUMPTABLE;
   
   (**(code **)(*this + 0x34))(this,block,*(undefined4 *)(node + 0xdc));
   UNRECOVERED_JUMPTABLE = *(code **)(*this + 0xa0);
-  uVar1 = FUN_000e7d5c(*(undefined4 *)(node + 300));
+  nodeHandle = FUN_000e7d5c(*(undefined4 *)(node + 300));
                     
                     
-  (*UNRECOVERED_JUMPTABLE)(this,uVar1);
+  (*UNRECOVERED_JUMPTABLE)(this,nodeHandle);
   return;
 }
 
@@ -147,29 +155,31 @@ int R520VMachineAssembler__vslot30_assembleBlockThenSlot40(this, node, block)
 int R520VMachineAssembler__deleting_dtor(this)
   undefined4 *this;
 {
-  undefined4 *puVar1;
-  int iVar2;
+  int arenaHeader;
+  int predKindStack;
+  undefined4 *blockStart;
+  int savedPredStack;
   
-  iVar2 = this[0x26];
+  savedPredStack = this[0x26];
   *this = &PTR_FUN_001eb8d8;
-  if (iVar2 != 0) {
-    Arena__free(*(undefined4 *)(iVar2 + 0xc),*(undefined4 *)(iVar2 + 8));
-    Arena__free(*(undefined4 *)(iVar2 + -4),iVar2 + -4);
+  if (savedPredStack != 0) {
+    Arena__free(*(undefined4 *)(savedPredStack + 0xc),*(undefined4 *)(savedPredStack + 8));
+    Arena__free(*(undefined4 *)(savedPredStack + -4),savedPredStack + -4);
   }
-  iVar2 = this[0x25];
-  if (iVar2 != 0) {
-    Arena__free(*(undefined4 *)(iVar2 + 0xc),*(undefined4 *)(iVar2 + 8));
-    Arena__free(*(undefined4 *)(iVar2 + -4),iVar2 + -4);
+  predKindStack = this[0x25];
+  if (predKindStack != 0) {
+    Arena__free(*(undefined4 *)(predKindStack + 0xc),*(undefined4 *)(predKindStack + 8));
+    Arena__free(*(undefined4 *)(predKindStack + -4),predKindStack + -4);
   }
   MachineAssembler__dtor_19b91c(this);
   if (this == (undefined4 *)0x0) {
     return;
   }
-  iVar2 = this[-1];
-  if ((*(int *)(iVar2 + 0x28) != 0) &&
-     (puVar1 = *(undefined4 **)(iVar2 + 0x14), puVar1 == this + -1)) {
-    _memset(puVar1,0,*(int *)(iVar2 + 8) - (int)puVar1);
-    *(undefined4 *)(iVar2 + 8) = *(undefined4 *)(iVar2 + 0x14);
+  arenaHeader = this[-1];
+  if ((*(int *)(arenaHeader + 0x28) != 0) &&
+     (blockStart = *(undefined4 **)(arenaHeader + 0x14), blockStart == this + -1)) {
+    _memset(blockStart,0,*(int *)(arenaHeader + 8) - (int)blockStart);
+    *(undefined4 *)(arenaHeader + 8) = *(undefined4 *)(arenaHeader + 0x14);
   }
   return;
 }
@@ -183,7 +193,7 @@ int R520VMachineAssembler__init(this, program, allocatorArg, compiler)
 {
   undefined4 arenaAt378;
   undefined4 *vectorAlloc;
-  undefined4 uVar2;
+  undefined4 elementStorage;
   
   R300VMachineAssembler__init(this,program,allocatorArg,compiler);
   *(undefined4 *)(this + 0x8c) = 0xffffffff;
@@ -194,8 +204,8 @@ int R520VMachineAssembler__init(this, program, allocatorArg, compiler)
   vectorAlloc[1] = 2;
   vectorAlloc[4] = arenaAt378;
   vectorAlloc[2] = 0;
-  uVar2 = Arena__alloc(arenaAt378,8);
-  vectorAlloc[3] = uVar2;
+  elementStorage = Arena__alloc(arenaAt378,8);
+  vectorAlloc[3] = elementStorage;
   *(undefined4 **)(this + 0x98) = vectorAlloc + 1;
   arenaAt378 = *(undefined4 *)(compiler + COMP_arenaB);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x14);
@@ -203,8 +213,8 @@ int R520VMachineAssembler__init(this, program, allocatorArg, compiler)
   vectorAlloc[1] = 2;
   vectorAlloc[2] = 0;
   vectorAlloc[4] = arenaAt378;
-  uVar2 = Arena__alloc(arenaAt378,8);
-  vectorAlloc[3] = uVar2;
+  elementStorage = Arena__alloc(arenaAt378,8);
+  vectorAlloc[3] = elementStorage;
   *(undefined4 **)(this + 0x94) = vectorAlloc + 1;
   return;
 }
@@ -284,37 +294,40 @@ int R520VMachineAssembler__vslot28_assembleIfEnd(this, node, block, compiler)
   undefined4 block;
   undefined4 compiler;
 {
+  undefined4 sourceSelect;
+  int popInst;
+  int *topKindSlot;
   int operandRecord;
-  undefined4 uVar1;
-  uint uVar2;
-  uint uVar3;
-  int iVar4;
-  int *piVar5;
-  int iVar6;
+  undefined4 destSelect;
+  uint topKindIndex;
+  uint predKindCount;
+  int zeroInst;
+  int *program;
+  int topKind;
   
-  piVar5 = *(int **)(node + 0xac);
+  program = *(int **)(node + 0xac);
   Vector__removeAt(this[0x25],*(int *)(this[0x25] + 4) + -1);
-  if (*piVar5 == 0) {
-    piVar5 = (int *)0x0;
-    uVar3 = *(uint *)(this[0x25] + 4);
-    uVar2 = uVar3 - 1;
-    if (uVar2 < uVar3) {
-      piVar5 = (int *)(uVar2 * 4 + *(int *)(this[0x25] + 8));
+  if (*program == 0) {
+    topKindSlot = (int *)0x0;
+    predKindCount = *(uint *)(this[0x25] + 4);
+    topKindIndex = predKindCount - 1;
+    if (topKindIndex < predKindCount) {
+      topKindSlot = (int *)(topKindIndex * 4 + *(int *)(this[0x25] + 8));
     }
-    iVar6 = *piVar5;
-    FUN_000e2bf4(block,iVar6);
-    if (iVar6 != 0) {
-      iVar6 = IRInst__create(0x58,compiler);
-      iVar4 = R520VMachineAssembler__getOrCreateConstantZeroInst(this);
-      uVar1 = DAT_001b2d50;
-      *(undefined4 *)(iVar6 + 0x94) = *(undefined4 *)(iVar4 + 0x94);
-      *(undefined4 *)(iVar6 + 0x98) = 0;
-      *(undefined4 *)(iVar6 + 0x9c) = uVar1;
-      IRInst__setOperandSource(iVar6,1,iVar4,0,compiler);
-      uVar1 = DAT_001b2d4c;
-      operandRecord = IRInst__getOperandRecord(iVar6,1);
-      *(undefined4 *)(operandRecord + 0x10) = uVar1;
-      Block__prependInst(node,iVar6);
+    topKind = *topKindSlot;
+    FUN_000e2bf4(block,topKind);
+    if (topKind != 0) {
+      popInst = IRInst__create(0x58,compiler);
+      zeroInst = R520VMachineAssembler__getOrCreateConstantZeroInst(this);
+      destSelect = DAT_001b2d50;
+      *(undefined4 *)(popInst + 0x94) = *(undefined4 *)(zeroInst + 0x94);
+      *(undefined4 *)(popInst + 0x98) = 0;
+      *(undefined4 *)(popInst + 0x9c) = destSelect;
+      IRInst__setOperandSource(popInst,1,zeroInst,0,compiler);
+      sourceSelect = DAT_001b2d4c;
+      operandRecord = IRInst__getOperandRecord(popInst,1);
+      *(undefined4 *)(operandRecord + 0x10) = sourceSelect;
+      Block__prependInst(node,popInst);
     }
   }
                     
@@ -330,51 +343,56 @@ int R520VMachineAssembler__vslot31_assembleWithPredicateRestore(this, node, bloc
   undefined4 block;
   undefined4 compiler;
 {
+  int destSelect;
+  int zeroInst;
+  uint laneSelect;
+  uint savedCount;
+  undefined4 *savedTopSlot;
   int *newInst;
-  uint uVar1;
-  uint uVar2;
-  int iVar3;
-  undefined4 *puVar4;
-  undefined4 uVar5;
-  int iVar6;
-  int *piVar7;
+  uint topKindIndex;
+  uint predKindCount;
+  int savedPredStack;
+  undefined4 *topKindSlot;
+  undefined4 savedMovInst;
+  int zeroRegister;
+  int *program;
   
-  piVar7 = *(int **)(node + 0xac);
+  program = *(int **)(node + 0xac);
   if (((0 < *(int *)(*(int *)(node + 300) + 0x138)) ||
       (*(int *)(*(int *)(node + 300) + 0x13c) != 0)) &&
-     (Vector__removeAt(this[0x25],*(int *)(this[0x25] + 4) + -1), *piVar7 == 0)) {
-    puVar4 = (undefined4 *)0x0;
-    uVar2 = *(uint *)(this[0x25] + 4);
-    uVar1 = uVar2 - 1;
-    if (uVar1 < uVar2) {
-      puVar4 = (undefined4 *)(uVar1 * 4 + *(int *)(this[0x25] + 8));
+     (Vector__removeAt(this[0x25],*(int *)(this[0x25] + 4) + -1), *program == 0)) {
+    topKindSlot = (undefined4 *)0x0;
+    predKindCount = *(uint *)(this[0x25] + 4);
+    topKindIndex = predKindCount - 1;
+    if (topKindIndex < predKindCount) {
+      topKindSlot = (undefined4 *)(topKindIndex * 4 + *(int *)(this[0x25] + 8));
     }
-    FUN_000e2bf4(block,*puVar4);
-    iVar3 = this[0x26];
-    uVar1 = *(uint *)(iVar3 + 4);
-    if (0 < (int)uVar1) {
-      uVar2 = uVar1 - 1;
-      puVar4 = (undefined4 *)0x0;
-      if (uVar2 < uVar1) {
-        puVar4 = (undefined4 *)(uVar2 * 4 + *(int *)(iVar3 + 8));
+    FUN_000e2bf4(block,*topKindSlot);
+    savedPredStack = this[0x26];
+    savedCount = *(uint *)(savedPredStack + 4);
+    if (0 < (int)savedCount) {
+      laneSelect = savedCount - 1;
+      savedTopSlot = (undefined4 *)0x0;
+      if (laneSelect < savedCount) {
+        savedTopSlot = (undefined4 *)(laneSelect * 4 + *(int *)(savedPredStack + 8));
       }
-      uVar5 = *puVar4;
-      Vector__removeAt(iVar3,uVar1 - 1);
-      iVar3 = R520VMachineAssembler__getOrCreateConstantZeroInst(this);
-      iVar6 = *(int *)(iVar3 + 0x94);
+      savedMovInst = *savedTopSlot;
+      Vector__removeAt(savedPredStack,savedCount - 1);
+      zeroInst = R520VMachineAssembler__getOrCreateConstantZeroInst(this);
+      zeroRegister = *(int *)(zeroInst + 0x94);
       newInst = (int *)IRInst__create(0x5a,compiler);
-      iVar3 = DAT_001b2d50;
-      newInst[0x25] = iVar6;
+      destSelect = DAT_001b2d50;
+      newInst[0x25] = zeroRegister;
       newInst[0x26] = 0;
-      newInst[0x27] = iVar3;
-      IRInst__setOperandSource(newInst,1,uVar5,0,compiler);
-      if ((3 < (int)uVar1) && (uVar2 = 0, (int)uVar1 < 8)) {
-        uVar2 = uVar1 - 4;
+      newInst[0x27] = destSelect;
+      IRInst__setOperandSource(newInst,1,savedMovInst,0,compiler);
+      if ((3 < (int)savedCount) && (laneSelect = 0, (int)savedCount < 8)) {
+        laneSelect = savedCount - 4;
       }
-      (**(code **)(*newInst + 0x88))(newInst,1,0,uVar2);
-      (**(code **)(*newInst + 0x88))(newInst,1,1,uVar2);
-      (**(code **)(*newInst + 0x88))(newInst,1,2,uVar2);
-      (**(code **)(*newInst + 0x88))(newInst,1,3,uVar2);
+      (**(code **)(*newInst + 0x88))(newInst,1,0,laneSelect);
+      (**(code **)(*newInst + 0x88))(newInst,1,1,laneSelect);
+      (**(code **)(*newInst + 0x88))(newInst,1,2,laneSelect);
+      (**(code **)(*newInst + 0x88))(newInst,1,3,laneSelect);
       Block__prependInst(node,newInst);
     }
   }
@@ -394,137 +412,141 @@ int R520VMachineAssembler__vslot25_assembleConditionalBlock(this, node, block, c
   undefined4 extra3;
   undefined4 extra4;
 {
+  undefined4 predSetOpcode;
+  uint pushIndex;
+  int *predSetInst;
+  int *topKindSlot;
   undefined4 sourceDef;
-  bool bVar1;
+  bool moreLanes;
   uint uVar2;
-  uint uVar3;
+  uint predKindCount;
   int loopIndex;
-  int *a0;
+  int *branchInst;
   undefined4 uVar5;
   int operandRecord;
-  undefined4 *puVar7;
-  int *piVar8;
-  code *pcVar9;
-  uint *puVar10;
-  bool bVar11;
+  undefined4 *pushedSlot;
+  int *program;
+  code *setSourceSelect;
+  uint *predKindStack;
+  bool unpredicated;
   
-  piVar8 = *(int **)(node + 0xac);
-  a0 = (int *)Block__getBranchInst(node,node,block,compiler,extra2,extra3,extra4);
-  if (*piVar8 != 0) goto LAB_0019e5d0;
-  (**(code **)(*a0 + 0x14))(a0);
-  piVar8 = (int *)0x0;
-  uVar3 = *(uint *)(this[0x25] + 4);
-  uVar2 = uVar3 - 1;
-  if (uVar2 < uVar3) {
-    piVar8 = (int *)(uVar2 * 4 + *(int *)(this[0x25] + 8));
+  program = *(int **)(node + 0xac);
+  branchInst = (int *)Block__getBranchInst(node,node,block,compiler,extra2,extra3,extra4);
+  if (*program != 0) goto LAB_0019e5d0;
+  (**(code **)(*branchInst + 0x14))(branchInst);
+  topKindSlot = (int *)0x0;
+  predKindCount = *(uint *)(this[0x25] + 4);
+  uVar2 = predKindCount - 1;
+  if (uVar2 < predKindCount) {
+    topKindSlot = (int *)(uVar2 * 4 + *(int *)(this[0x25] + 8));
   }
-  loopIndex = a0[0x4b];
-  bVar11 = *piVar8 == 0;
+  loopIndex = branchInst[0x4b];
+  unpredicated = *topKindSlot == 0;
   if (loopIndex == 1) {
-    if (bVar11) {
-      uVar5 = 0x54;
+    if (unpredicated) {
+      predSetOpcode = 0x54;
     }
     else {
-      uVar5 = 0x2d;
+      predSetOpcode = 0x2d;
     }
   }
   else if (loopIndex < 2) {
     if (loopIndex == 0) {
-      if (bVar11) {
-        uVar5 = 0x53;
+      if (unpredicated) {
+        predSetOpcode = 0x53;
       }
       else {
-        uVar5 = 0x2c;
+        predSetOpcode = 0x2c;
       }
     }
     else {
 LAB_0019e3d4:
-      uVar5 = 0;
+      predSetOpcode = 0;
     }
   }
   else if (loopIndex == 2) {
-    if (bVar11) {
-      uVar5 = 0x55;
+    if (unpredicated) {
+      predSetOpcode = 0x55;
     }
     else {
-      uVar5 = 0x2e;
+      predSetOpcode = 0x2e;
     }
   }
   else {
     if (loopIndex != 3) goto LAB_0019e3d4;
-    if (bVar11) {
-      uVar5 = 0x56;
+    if (unpredicated) {
+      predSetOpcode = 0x56;
     }
     else {
-      uVar5 = 0x2f;
+      predSetOpcode = 0x2f;
     }
   }
-  piVar8 = IRInst__create(uVar5,compiler);
-  if (bVar11) {
+  predSetInst = IRInst__create(predSetOpcode,compiler);
+  if (unpredicated) {
     if (*(int *)(node + 0x144) == 0) {
       loopIndex = R520VMachineAssembler__getOrCreateConstantZeroInst(this);
-      piVar8[0x25] = *(int *)(loopIndex + 0x94);
-      piVar8[0x26] = 0;
-      piVar8[0x27] = 0x1010100;
+      predSetInst[0x25] = *(int *)(loopIndex + 0x94);
+      predSetInst[0x26] = 0;
+      predSetInst[0x27] = 0x1010100;
     }
     else {
-      piVar8[0x26] = 0;
-      piVar8[0x25] = 0;
-      piVar8[0x27] = 0x1010101;
+      predSetInst[0x26] = 0;
+      predSetInst[0x25] = 0;
+      predSetInst[0x27] = 0x1010101;
     }
-    sourceDef = IRInst__getOperandSource(a0,1);
-    IRInst__setOperandSource(piVar8,1,sourceDef,0,compiler);
+    sourceDef = IRInst__getOperandSource(branchInst,1);
+    IRInst__setOperandSource(predSetInst,1,sourceDef,0,compiler);
   }
   else {
     loopIndex = R520VMachineAssembler__getOrCreateConstantZeroInst(this);
-    piVar8[0x25] = *(int *)(loopIndex + 0x94);
-    piVar8[0x26] = 0;
-    piVar8[0x27] = 0x1010100;
-    IRInst__setOperandSource(piVar8,1,loopIndex,0,compiler);
-    loopIndex = IRInst__getOperandRecord(piVar8,1);
+    predSetInst[0x25] = *(int *)(loopIndex + 0x94);
+    predSetInst[0x26] = 0;
+    predSetInst[0x27] = 0x1010100;
+    IRInst__setOperandSource(predSetInst,1,loopIndex,0,compiler);
+    loopIndex = IRInst__getOperandRecord(predSetInst,1);
     *(undefined4 *)(loopIndex + 0x10) = 0x3030303;
-    sourceDef = IRInst__getOperandSource(a0,1);
-    IRInst__setOperandSource(piVar8,2,sourceDef,0,compiler);
+    sourceDef = IRInst__getOperandSource(branchInst,1);
+    IRInst__setOperandSource(predSetInst,2,sourceDef,0,compiler);
   }
   loopIndex = 0;
   do {
-    pcVar9 = *(code **)(*piVar8 + 0x88);
-    if (bVar11) {
+    setSourceSelect = *(code **)(*predSetInst + 0x88);
+    if (unpredicated) {
       uVar5 = 1;
     }
     else {
       uVar5 = 2;
     }
-    operandRecord = IRInst__getOperandRecord(a0,1);
-    (*pcVar9)(piVar8,uVar5,loopIndex,*(undefined1 *)(operandRecord + 0x13));
-    bVar1 = loopIndex != 3;
+    operandRecord = IRInst__getOperandRecord(branchInst,1);
+    (*setSourceSelect)(predSetInst,uVar5,loopIndex,*(undefined1 *)(operandRecord + 0x13));
+    moreLanes = loopIndex != 3;
     loopIndex = loopIndex + 1;
-  } while (bVar1);
-  if ((a0[0x2e] & 1U) != 0) {
-    if (bVar11) {
+  } while (moreLanes);
+  if ((branchInst[0x2e] & 1U) != 0) {
+    if (unpredicated) {
       loopIndex = 1;
     }
     else {
       loopIndex = 2;
     }
-    IROperand__setModifierBits(piVar8 + loopIndex * 6 + 0x23,1,1);
+    IROperand__setModifierBits(predSetInst + loopIndex * 6 + 0x23,1,1);
   }
-  Block__appendInst(node,piVar8);
-  FUN_00193f20(a0);
+  Block__appendInst(node,predSetInst);
+  FUN_00193f20(branchInst);
   *(undefined4 *)(node + 0x130) = 0;
 LAB_0019e5d0:
   (**(code **)(*this + 0x34))(this,block,*(undefined4 *)(node + 0xdc));
-  puVar10 = (uint *)this[0x25];
-  uVar2 = puVar10[1];
-  if (uVar2 < *puVar10) {
-    _memset(uVar2 * 4 + puVar10[2],0,4);
-    puVar7 = (undefined4 *)(uVar2 * 4 + puVar10[2]);
-    puVar10[1] = uVar2 + 1;
+  predKindStack = (uint *)this[0x25];
+  pushIndex = predKindStack[1];
+  if (pushIndex < *predKindStack) {
+    _memset(pushIndex * 4 + predKindStack[2],0,4);
+    pushedSlot = (undefined4 *)(pushIndex * 4 + predKindStack[2]);
+    predKindStack[1] = pushIndex + 1;
   }
   else {
-    puVar7 = (undefined4 *)Vector__elementRefGrow(puVar10,uVar2);
+    pushedSlot = (undefined4 *)Vector__elementRefGrow(predKindStack,pushIndex);
   }
-  *puVar7 = 3;
+  *pushedSlot = 3;
   return;
 }
 
@@ -533,22 +555,22 @@ int R520VMachineAssembler__vslot6_setLoopStack(this, enable)
   int this;
   undefined4 enable;
 {
-  undefined4 *puVar1;
-  uint uVar2;
-  uint *puVar3;
+  undefined4 *pushedSlot;
+  uint pushIndex;
+  uint *predKindStack;
   
   R300VMachineAssembler__vslot6_setLoopStack(this,enable);
-  puVar3 = *(uint **)(this + 0x94);
-  uVar2 = puVar3[1];
-  if (uVar2 < *puVar3) {
-    _memset(uVar2 * 4 + puVar3[2],0,4);
-    puVar1 = (undefined4 *)(uVar2 * 4 + puVar3[2]);
-    puVar3[1] = uVar2 + 1;
+  predKindStack = *(uint **)(this + 0x94);
+  pushIndex = predKindStack[1];
+  if (pushIndex < *predKindStack) {
+    _memset(pushIndex * 4 + predKindStack[2],0,4);
+    pushedSlot = (undefined4 *)(pushIndex * 4 + predKindStack[2]);
+    predKindStack[1] = pushIndex + 1;
   }
   else {
-    puVar1 = (undefined4 *)Vector__elementRefGrow(puVar3,uVar2);
+    pushedSlot = (undefined4 *)Vector__elementRefGrow(predKindStack,pushIndex);
   }
-  *puVar1 = 0;
+  *pushedSlot = 0;
   return;
 }
 
@@ -559,97 +581,104 @@ int R520VMachineAssembler__vslot24_assembleWithPredicateSet(this, node, block, c
   undefined4 block;
   undefined4 compiler;
 {
+  uint *savedPredStack;
+  uint pushIndex;
+  uint savedPushIndex;
+  undefined4 nodeHandle;
+  undefined4 sourceSelect;
+  int predSetInst;
+  int *savedSlot;
   int operandRecord;
-  undefined4 uVar1;
-  uint uVar2;
-  int iVar3;
-  int iVar4;
-  undefined4 *puVar5;
-  int *piVar6;
-  undefined4 uVar7;
-  int *piVar8;
+  undefined4 destSelect;
+  uint topKindIndex;
+  int zeroInst;
+  int saveMovInst;
+  undefined4 *pushedSlot;
+  int *topKindSlot;
+  undefined4 destRegister;
+  int *program;
   code *UNRECOVERED_JUMPTABLE;
-  uint *puVar9;
-  int iVar10;
+  uint *predKindStack;
+  int predSlot;
   double fparam_1;
   
-  piVar8 = *(int **)(node + 0xac);
+  program = *(int **)(node + 0xac);
   if ((0 < *(int *)(node + 0x138)) || (*(int *)(node + 0x13c) != 0)) {
-    iVar3 = R520VMachineAssembler__getOrCreateConstantZeroInst(this);
-    puVar9 = (uint *)this[0x25];
-    uVar7 = *(undefined4 *)(iVar3 + 0x94);
-    piVar6 = (int *)0x0;
-    uVar2 = puVar9[1] - 1;
-    if (uVar2 < puVar9[1]) {
-      piVar6 = (int *)(uVar2 * 4 + puVar9[2]);
+    zeroInst = R520VMachineAssembler__getOrCreateConstantZeroInst(this);
+    predKindStack = (uint *)this[0x25];
+    destRegister = *(undefined4 *)(zeroInst + 0x94);
+    topKindSlot = (int *)0x0;
+    topKindIndex = predKindStack[1] - 1;
+    if (topKindIndex < predKindStack[1]) {
+      topKindSlot = (int *)(topKindIndex * 4 + predKindStack[2]);
     }
-    if (*piVar6 == 0) {
-      if (*piVar8 == 0) {
-        iVar3 = IRInst__create(0x53,compiler);
-        uVar1 = DAT_001b2d50;
+    if (*topKindSlot == 0) {
+      if (*program == 0) {
+        predSetInst = IRInst__create(0x53,compiler);
+        destSelect = DAT_001b2d50;
         fparam_1 = (double)FLOAT_001aa0d4;
-        *(undefined4 *)(iVar3 + 0x94) = uVar7;
-        *(undefined4 *)(iVar3 + 0x9c) = uVar1;
-        *(undefined4 *)(iVar3 + 0x98) = 0;
-        ((void (*)())IRInst__makeLiteralVec4Float)(iVar3,piVar8,1,fparam_1,fparam_1,fparam_1,fparam_1);
-        *(uint *)(iVar3 + 0x14) = *(uint *)(iVar3 + 0x14) & 0xfffffffb;
-        Block__appendInst(node,iVar3);
-        puVar9 = (uint *)this[0x25];
+        *(undefined4 *)(predSetInst + 0x94) = destRegister;
+        *(undefined4 *)(predSetInst + 0x9c) = destSelect;
+        *(undefined4 *)(predSetInst + 0x98) = 0;
+        ((void (*)())IRInst__makeLiteralVec4Float)(predSetInst,program,1,fparam_1,fparam_1,fparam_1,fparam_1);
+        *(uint *)(predSetInst + 0x14) = *(uint *)(predSetInst + 0x14) & 0xfffffffb;
+        Block__appendInst(node,predSetInst);
+        predKindStack = (uint *)this[0x25];
       }
     }
-    else if (*piVar8 == 0) {
-      iVar10 = *(int *)(this[0x26] + 4);
-      if (2 < iVar10) {
-        if (iVar10 < 7) {
-          uVar7 = FUN_00130690(piVar8,0);
-          iVar10 = iVar10 + -3;
+    else if (*program == 0) {
+      predSlot = *(int *)(this[0x26] + 4);
+      if (2 < predSlot) {
+        if (predSlot < 7) {
+          destRegister = FUN_00130690(program,0);
+          predSlot = predSlot + -3;
         }
         else {
-          uVar7 = 0;
-          iVar10 = 0;
+          destRegister = 0;
+          predSlot = 0;
         }
       }
-      iVar4 = FUN_001084b8(0x66,compiler);
-      *(undefined4 *)(iVar4 + 0x9c) = DAT_001b2d54;
-      *(undefined1 *)(iVar10 + iVar4 + 0x9c) = 0;
-      *(undefined4 *)(iVar4 + 0x98) = 0;
-      *(undefined4 *)(iVar4 + 0x94) = uVar7;
-      IRInst__setOperandSource(iVar4,1,iVar3,0,compiler);
-      uVar7 = DAT_001b2d4c;
-      operandRecord = IRInst__getOperandRecord(iVar4,1);
-      *(undefined4 *)(operandRecord + 0x10) = uVar7;
-      *(uint *)(iVar4 + 0x14) = *(uint *)(iVar4 + 0x14) & 0xfffffffb;
-      Block__appendInst(node,iVar4);
-      puVar9 = (uint *)this[0x26];
-      uVar2 = puVar9[1];
-      if (uVar2 < *puVar9) {
-        _memset(uVar2 * 4 + puVar9[2],0,4);
-        piVar8 = (int *)(uVar2 * 4 + puVar9[2]);
-        puVar9[1] = uVar2 + 1;
+      saveMovInst = FUN_001084b8(0x66,compiler);
+      *(undefined4 *)(saveMovInst + 0x9c) = DAT_001b2d54;
+      *(undefined1 *)(predSlot + saveMovInst + 0x9c) = 0;
+      *(undefined4 *)(saveMovInst + 0x98) = 0;
+      *(undefined4 *)(saveMovInst + 0x94) = destRegister;
+      IRInst__setOperandSource(saveMovInst,1,zeroInst,0,compiler);
+      sourceSelect = DAT_001b2d4c;
+      operandRecord = IRInst__getOperandRecord(saveMovInst,1);
+      *(undefined4 *)(operandRecord + 0x10) = sourceSelect;
+      *(uint *)(saveMovInst + 0x14) = *(uint *)(saveMovInst + 0x14) & 0xfffffffb;
+      Block__appendInst(node,saveMovInst);
+      savedPredStack = (uint *)this[0x26];
+      savedPushIndex = savedPredStack[1];
+      if (savedPushIndex < *savedPredStack) {
+        _memset(savedPushIndex * 4 + savedPredStack[2],0,4);
+        savedSlot = (int *)(savedPushIndex * 4 + savedPredStack[2]);
+        savedPredStack[1] = savedPushIndex + 1;
       }
       else {
-        piVar8 = (int *)Vector__elementRefGrow(puVar9,uVar2);
+        savedSlot = (int *)Vector__elementRefGrow(savedPredStack,savedPushIndex);
       }
-      *piVar8 = iVar4;
-      puVar9 = (uint *)this[0x25];
+      *savedSlot = saveMovInst;
+      predKindStack = (uint *)this[0x25];
     }
-    uVar2 = puVar9[1];
-    if (uVar2 < *puVar9) {
-      _memset(uVar2 * 4 + puVar9[2],0,4);
-      puVar5 = (undefined4 *)(uVar2 * 4 + puVar9[2]);
-      puVar9[1] = uVar2 + 1;
+    pushIndex = predKindStack[1];
+    if (pushIndex < *predKindStack) {
+      _memset(pushIndex * 4 + predKindStack[2],0,4);
+      pushedSlot = (undefined4 *)(pushIndex * 4 + predKindStack[2]);
+      predKindStack[1] = pushIndex + 1;
     }
     else {
-      puVar5 = (undefined4 *)Vector__elementRefGrow(puVar9,uVar2);
+      pushedSlot = (undefined4 *)Vector__elementRefGrow(predKindStack,pushIndex);
     }
-    *puVar5 = 3;
+    *pushedSlot = 3;
   }
   (**(code **)(*this + 0x34))(this,block,*(undefined4 *)(node + 0xdc));
   UNRECOVERED_JUMPTABLE = *(code **)(*this + 0x9c);
-  uVar7 = FUN_000e7d5c(node);
+  nodeHandle = FUN_000e7d5c(node);
                     
                     
-  (*UNRECOVERED_JUMPTABLE)(this,uVar7,*(undefined4 *)(node + 0x134));
+  (*UNRECOVERED_JUMPTABLE)(this,nodeHandle,*(undefined4 *)(node + 0x134));
   return;
 }
 

@@ -116,7 +116,7 @@ int FUN_0010c010(inst, param_2, param_3)
     iVar5 = 0;
     bVar1 = false;
   }
-  FUN_00108174(inst,iVar5,param_3);
+  IRInst__reinitAsBinary(inst,iVar5,param_3);
   inst[0x49] = iVar21;
   inst[0x25] = iVar18;
   inst[0x26] = iVar17;
@@ -179,7 +179,7 @@ int FUN_0010c37c(inst, param_2)
       if (*(int *)(operandRecord + 0x10) == DAT_001af9fc) {
         do {
           if (iVar5 < iVar4) {
-            FUN_00105e54(inst,iVar5,inst,iVar5 + 1);
+            IRInst__copyOperandFrom(inst,iVar5,inst,iVar5 + 1);
             operandVReg = IRInst__getOperandSource(inst,iVar5 + 1);
             IRInst__setOperandSource(inst,iVar5,operandVReg,0,param_2);
           }
@@ -361,7 +361,7 @@ int FUN_0010c670(inst, inst2, param_3)
       IRInst__setOperandRef(inst2,1,*(undefined4 *)(inst + 0xa4));
     }
     else {
-      FUN_00105894(inst,param_3);
+      IRInst__dropCounterAndDeleteIfUnused(inst,param_3);
     }
     iVar2 = 0;
     local_48 = 0x4040404;
@@ -466,7 +466,7 @@ int FUN_0010c670(inst, inst2, param_3)
       bVar1 = iVar2 != 3;
       iVar2 = iVar2 + 1;
     } while (bVar1);
-    FUN_00105894(inst,param_3);
+    IRInst__dropCounterAndDeleteIfUnused(inst,param_3);
   }
   return;
 }
@@ -636,7 +636,7 @@ LAB_0010ce20:
           *(int *)(iVar5 + 0x10) = iVar11;
         }
       }
-      FUN_00105894(inst,param_2);
+      IRInst__dropCounterAndDeleteIfUnused(inst,param_2);
       return operandVReg;
     }
   } while( true );
@@ -667,7 +667,7 @@ int FUN_0010cfcc(param_1, inst, param_3, param_4)
   iVar2 = (**(code **)(*a0 + 0x60))(a0);
   if (iVar2 != 0) {
     operandRecord = IRInst__getOperandRecord(inst,0);
-    iVar2 = FUN_000f37b8(*(undefined4 *)(operandRecord + 0x10));
+    iVar2 = SelectWord__splatComponent(*(undefined4 *)(operandRecord + 0x10));
     iVar3 = IRInst__getOperandRecord(inst,param_3);
     bVar1 = *(byte *)(iVar2 + iVar3 + 0x10);
     if (-1 < iVar2) {
@@ -687,7 +687,7 @@ int FUN_0010cfcc(param_1, inst, param_3, param_4)
         operandRecord = IRInst__getOperandRecord(a0,loopIndex);
         uVar4 = *(undefined4 *)(operandRecord + 0x10);
         operandRecord = IRInst__getOperandRecord(inst,param_3);
-        FUN_000f2bdc(local_28,uVar4,*(undefined4 *)(operandRecord + 0x10));
+        SelectWord__compose(local_28,uVar4,*(undefined4 *)(operandRecord + 0x10));
         *param_1 = local_28[0];
         return param_1;
       }
@@ -698,8 +698,8 @@ int FUN_0010cfcc(param_1, inst, param_3, param_4)
   return param_1;
 }
 
-/* FUN_0010d15c @ 0x10d15c (448 bytes) */
-int FUN_0010d15c(inst, param_2, param_3, param_4)
+/* IRInst__replaceWithMovOfSource @ 0x10d15c (448 bytes) */
+int IRInst__replaceWithMovOfSource(inst, param_2, param_3, param_4)
   int *inst;
   int param_2;
   int param_3;
@@ -738,7 +738,7 @@ int FUN_0010d15c(inst, param_2, param_3, param_4)
   iVar11 = inst[0x48];
   iVar12 = inst[0x49];
   if ((inst[5] & 0x200U) != 0) {
-    FUN_00104d3c(inst,&local_78);
+    IRInst__readLastOperand(inst,&local_78);
   }
   operandVReg = IRInst__getOperandSource(inst,param_2);
   uVar1 = inst[param_2 * 6 + 0x28];
@@ -749,7 +749,7 @@ int FUN_0010d15c(inst, param_2, param_3, param_4)
     for (; operandRecord = (**(code **)(*inst + 0x14))(inst), iVar14 <= operandRecord; iVar14 = iVar14 + 1) {
       if (iVar14 != param_2) {
         operandVReg2 = IRInst__getOperandSource(inst,iVar14);
-        FUN_00105894(operandVReg2,param_4);
+        IRInst__dropCounterAndDeleteIfUnused(operandVReg2,param_4);
       }
     }
     DList__unlink(inst);
@@ -757,7 +757,7 @@ int FUN_0010d15c(inst, param_2, param_3, param_4)
   else {
     (**(code **)(*inst + 0xc))(inst,1,param_4);
   }
-  FUN_00108448(inst,0x31,*(undefined4 *)(iVar13 + 8));
+  IRInst__reinitAsMov(inst,0x31,*(undefined4 *)(iVar13 + 8));
   inst[4] = iVar9;
   inst[0x58] = useCount + *(int *)(iVar13 + 0x478);
   inst[0x26] = 0;
@@ -771,7 +771,7 @@ int FUN_0010d15c(inst, param_2, param_3, param_4)
   operandRecord2 = IRInst__getOperandRecord(inst,1);
   *(undefined4 *)(operandRecord2 + 0x10) = uVar10;
   if (local_74 != 0) {
-    FUN_00106b48(inst,&local_78,param_3,param_4);
+    IRInst__setLastOperandFromRecord(inst,&local_78,param_3,param_4);
   }
   return Block__insertInstBefore(iVar8,iVar7,inst);
 }
@@ -886,7 +886,7 @@ int FUN_0010d4cc(inst, param_2)
   uVar7 = *(undefined4 *)(PTR_DAT_001e8c70 + compareCondition * 4);
   iVar5 = *(int *)(PTR_DAT_001e8c6c + compareCondition * 4);
   *(int *)(*(int *)(param_2 + 0x6c4) + 0x21c) = *(int *)(*(int *)(param_2 + 0x6c4) + 0x21c) + 1;
-  FUN_00108174(inst,uVar7,param_2);
+  IRInst__reinitAsBinary(inst,uVar7,param_2);
   *(undefined4 *)(inst + 0x94) = uVar12;
   *(undefined4 *)(inst + 0x98) = 0;
   *(undefined4 *)(inst + 0x9c) = uVar3;
@@ -965,7 +965,7 @@ int FUN_0010d730(inst, param_2, param_3, param_4)
     operandVReg3 = IRInst__getOperandSource(inst,1);
     operandVReg4 = IRInst__getOperandSource(inst,2);
     *(int *)(iVar16 + 0x220) = *(int *)(iVar16 + 0x220) + 1;
-    FUN_00108448(inst,0x31,param_4);
+    IRInst__reinitAsMov(inst,0x31,param_4);
     *(undefined4 *)(inst + 0x94) = uVar15;
     *(undefined4 *)(inst + 0x98) = uVar13;
     *(undefined4 *)(inst + 0x9c) = uVar14;
@@ -985,11 +985,11 @@ int FUN_0010d730(inst, param_2, param_3, param_4)
       operandRecord = IRInst__getOperandRecord(inst,1);
       *(undefined4 *)(operandRecord + 0x10) = uVar9;
     }
-    FUN_00105894(operandVReg3,param_4);
+    IRInst__dropCounterAndDeleteIfUnused(operandVReg3,param_4);
     return;
   }
   *(int *)(iVar16 + 0x224) = *(int *)(iVar16 + 0x224) + 1;
-  FUN_00108304(inst,0x24,param_4);
+  IRInst__reinitAsTrinary(inst,0x24,param_4);
   *(undefined4 *)(inst + 0x94) = uVar15;
   *(undefined4 *)(inst + 0x98) = uVar13;
   *(undefined4 *)(inst + 0x9c) = uVar14;
@@ -1982,82 +1982,85 @@ int FUN_0010ecb8(inst)
 }
 
 /* KhanPs__vslot87_assignInterpolatorBindings @ 0x10ed4c (540 bytes) */
-int KhanPs__vslot87_assignInterpolatorBindings(this, param_2)
+int KhanPs__vslot87_assignInterpolatorBindings(this, program)
   int *this;
-  int param_2;
+  int program;
 {
+  uint bindingFlags;
+  int laneKind;
+  int loadInst;
   int operandRecord;
-  bool bVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  undefined4 uVar6;
-  int *piVar7;
-  int *piVar8;
-  uint uVar9;
-  int iVar10;
-  uint uVar11;
-  uint uVar12;
-  code *pcVar13;
+  bool moreLanes;
+  int isInterpLoad;
+  int laneUsed;
+  int laneIndex;
+  int otherLaneInfo;
+  undefined4 kindCode;
+  int *nextLink;
+  int *nextInst;
+  uint remainingLanes;
+  int interpolatorIndex;
+  uint otherLane;
+  uint laneGroup;
+  code *appendBinding;
   uint loopIndex;
-  int *piVar15;
+  int *inst;
   
-  piVar15 = *(int **)(*(int *)(param_2 + 0x3a0) + 0x98);
-  piVar7 = (int *)piVar15[2];
-  if (piVar7 != (int *)0x0) {
-    iVar10 = 0;
+  inst = *(int **)(*(int *)(program + 0x3a0) + 0x98);
+  nextLink = (int *)inst[2];
+  if (nextLink != (int *)0x0) {
+    interpolatorIndex = 0;
     do {
-      piVar8 = piVar7;
-      if ((piVar15[5] & 1U) != 0) {
-        iVar2 = (**(code **)(*piVar15 + 0x4c))(piVar15);
-        if (iVar2 == 0) {
-          piVar8 = (int *)piVar15[2];
+      nextInst = nextLink;
+      if ((inst[5] & 1U) != 0) {
+        isInterpLoad = (**(code **)(*inst + 0x4c))(inst);
+        if (isInterpLoad == 0) {
+          nextInst = (int *)inst[2];
         }
         else {
-          uVar9 = 0xf;
+          remainingLanes = 0xf;
           loopIndex = 0;
-          iVar2 = (**(code **)(*piVar15 + 0x80))(piVar15);
-          *(undefined4 *)(iVar2 + 0x98) = 0;
-          *(int *)(iVar2 + 0x94) = iVar10;
-          *(uint *)(iVar2 + 0x14) = *(uint *)(iVar2 + 0x14) | 0x40;
-          Program__markHwRegUsed(param_2,iVar10);
+          loadInst = (**(code **)(*inst + 0x80))(inst);
+          *(undefined4 *)(loadInst + 0x98) = 0;
+          *(int *)(loadInst + 0x94) = interpolatorIndex;
+          *(uint *)(loadInst + 0x14) = *(uint *)(loadInst + 0x14) | 0x40;
+          Program__markHwRegUsed(program,interpolatorIndex);
           do {
-            iVar3 = FUN_00104a94(iVar2,loopIndex);
-            if ((iVar3 != 0) && (uVar12 = 1 << (loopIndex & 0x3f), (uVar12 & uVar9) != 0)) {
-              iVar3 = FUN_00104b6c(iVar2,loopIndex);
-              uVar11 = loopIndex + 1;
-              iVar4 = FUN_0010426c(iVar2,loopIndex);
-              if ((int)uVar11 < 4) {
+            laneUsed = IRLoadInterp__laneUsed(loadInst,loopIndex);
+            if ((laneUsed != 0) && (laneGroup = 1 << (loopIndex & 0x3f), (laneGroup & remainingLanes) != 0)) {
+              laneKind = IRLoadInterp__laneKind(loadInst,loopIndex);
+              otherLane = loopIndex + 1;
+              laneIndex = IRLoadInterp__laneIndex(loadInst,loopIndex);
+              if ((int)otherLane < 4) {
                 do {
-                  iVar5 = FUN_00104a94(iVar2,uVar11);
-                  if (((iVar5 != 0) && (iVar5 = FUN_00104b6c(iVar2,uVar11), iVar5 == iVar3)) &&
-                     (iVar5 = FUN_0010426c(iVar2,uVar11), iVar4 == iVar5)) {
-                    uVar12 = uVar12 | 1 << (uVar11 & 0x3f);
+                  otherLaneInfo = IRLoadInterp__laneUsed(loadInst,otherLane);
+                  if (((otherLaneInfo != 0) && (otherLaneInfo = IRLoadInterp__laneKind(loadInst,otherLane), otherLaneInfo == laneKind)) &&
+                     (otherLaneInfo = IRLoadInterp__laneIndex(loadInst,otherLane), laneIndex == otherLaneInfo)) {
+                    laneGroup = laneGroup | 1 << (otherLane & 0x3f);
                   }
-                  bVar1 = uVar11 != 3;
-                  uVar11 = uVar11 + 1;
-                } while (bVar1);
+                  moreLanes = otherLane != 3;
+                  otherLane = otherLane + 1;
+                } while (moreLanes);
               }
-              if (uVar12 != 0) {
-                uVar9 = uVar9 - uVar12;
-                pcVar13 = *(code **)(*this + 0x54);
-                uVar6 = FUN_000ec2c4(param_2,iVar3);
-                operandRecord = IRInst__getOperandRecord(iVar2,1);
-                uVar12 = *(uint *)(iVar2 + 0x13c);
-                (*pcVar13)(this,iVar10,uVar6,iVar4,*(undefined4 *)(operandRecord + 0x10),uVar12 & 1,
-                           uVar12 >> 2 & 1,uVar12 >> 1 & 1);
+              if (laneGroup != 0) {
+                remainingLanes = remainingLanes - laneGroup;
+                appendBinding = *(code **)(*this + 0x54);
+                kindCode = Table__interpolatorKindToCode(program,laneKind);
+                operandRecord = IRInst__getOperandRecord(loadInst,1);
+                bindingFlags = *(uint *)(loadInst + 0x13c);
+                (*appendBinding)(this,interpolatorIndex,kindCode,laneIndex,*(undefined4 *)(operandRecord + 0x10),bindingFlags & 1,
+                           bindingFlags >> 2 & 1,bindingFlags >> 1 & 1);
               }
             }
             loopIndex = loopIndex + 1;
           } while ((int)loopIndex < 4);
-          piVar8 = (int *)piVar15[2];
-          iVar10 = iVar10 + 1;
+          nextInst = (int *)inst[2];
+          interpolatorIndex = interpolatorIndex + 1;
         }
       }
-      piVar7 = (int *)piVar8[2];
-      piVar15 = piVar8;
-    } while ((int *)piVar8[2] != (int *)0x0);
+      nextLink = (int *)nextInst[2];
+      inst = nextInst;
+    } while ((int *)nextInst[2] != (int *)0x0);
   }
   return;
 }
@@ -2181,10 +2184,10 @@ LAB_0010f168:
             uVar11 = 0xf;
             loopIndex = 0;
             do {
-              iVar12 = FUN_00104a94(iVar18,loopIndex);
+              iVar12 = IRLoadInterp__laneUsed(iVar18,loopIndex);
               if ((iVar12 != 0) && (uVar9 = 1 << (loopIndex & 0x3f), (uVar9 & uVar11) != 0)) {
-                iVar14 = FUN_00104b6c(iVar18,loopIndex);
-                iVar16 = FUN_0010426c(iVar18,loopIndex);
+                iVar14 = IRLoadInterp__laneKind(iVar18,loopIndex);
+                iVar16 = IRLoadInterp__laneIndex(iVar18,loopIndex);
                 iVar12 = 1;
                 if (iVar14 != 7) {
                   iVar12 = iVar16;
@@ -2192,9 +2195,9 @@ LAB_0010f168:
                 uVar8 = loopIndex + 1;
                 if ((int)uVar8 < 4) {
                   do {
-                    iVar4 = FUN_00104a94(iVar18,uVar8);
-                    if (((iVar4 != 0) && (iVar4 = FUN_00104b6c(iVar18,uVar8), iVar4 == iVar14)) &&
-                       (iVar4 = FUN_0010426c(iVar18,uVar8), iVar16 == iVar4)) {
+                    iVar4 = IRLoadInterp__laneUsed(iVar18,uVar8);
+                    if (((iVar4 != 0) && (iVar4 = IRLoadInterp__laneKind(iVar18,uVar8), iVar4 == iVar14)) &&
+                       (iVar4 = IRLoadInterp__laneIndex(iVar18,uVar8), iVar16 == iVar4)) {
                       uVar9 = uVar9 | 1 << (uVar8 & 0x3f);
                     }
                     bVar1 = uVar8 != 3;
@@ -2205,7 +2208,7 @@ LAB_0010f168:
                   FUN_00104ae4(local_58,iVar18);
                   pcVar15 = *(code **)(*param_1 + 0x54);
                   uVar11 = uVar11 - uVar9;
-                  uVar5 = FUN_000ec2c4(param_2,iVar14);
+                  uVar5 = Table__interpolatorKindToCode(param_2,iVar14);
                   operandRecord = IRInst__getOperandRecord(iVar18,1);
                   uVar9 = *(uint *)(iVar18 + 0x13c);
                   (*pcVar15)(param_1,uVar10,uVar5,iVar12,*(undefined4 *)(operandRecord + 0x10),uVar9 & 1,

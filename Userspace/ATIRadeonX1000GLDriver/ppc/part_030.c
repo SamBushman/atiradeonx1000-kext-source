@@ -698,58 +698,63 @@ undefined4 tryOutputScaleExponent(undefined4 param_1,undefined4 *param_2,double 
 }
 
 /* IRInst__swapOperands @ 0x10ac38 (304 bytes) */
-int IRInst__swapOperands(param_1, param_2, param_3, param_4)
+int IRInst__swapOperands(param_1, operandA, operandB, compiler)
   int *param_1;
-  int param_2;
-  int param_3;
-  uint param_4;
+  int operandA;
+  int operandB;
+  uint compiler;
 {
+  int recBFlags;
+  int kindA;
+  int recASelect;
+  int kindB;
+  int recAHeader;
   int iVar1;
   int iVar2;
   int extraout_r4;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
-  int iVar8;
-  int iVar9;
+  int recARegOffset;
+  int recBRegOffset;
+  int recAReg;
+  int recBReg;
+  int recASource;
+  int recAFlags;
+  int recBSource;
   
-  iVar1 = param_2;
-  iVar2 = param_3;
-  if (0 < param_2) {
-    (**(code **)(*param_1 + 0x14))(param_1,param_2,param_3,param_4);
+  iVar1 = operandA;
+  iVar2 = operandB;
+  if (0 < operandA) {
+    (**(code **)(*param_1 + 0x14))(param_1,operandA,operandB,compiler);
     iVar1 = extraout_r4;
   }
-  if (0 < param_3) {
-    (**(code **)(*param_1 + 0x14))(param_1,iVar1,iVar2,param_4);
+  if (0 < operandB) {
+    (**(code **)(*param_1 + 0x14))(param_1,iVar1,iVar2,compiler);
   }
-  iVar1 = param_1[param_2 * 6 + 0x23];
-  iVar7 = param_1[param_2 * 6 + 0x24];
-  iVar5 = param_1[param_2 * 6 + 0x25];
-  iVar3 = param_1[param_2 * 6 + 0x26];
-  iVar2 = param_1[param_2 * 6 + 0x27];
-  iVar8 = param_1[param_2 * 6 + 0x28];
-  iVar9 = param_1[param_3 * 6 + 0x24];
-  iVar6 = param_1[param_3 * 6 + 0x25];
-  iVar4 = param_1[param_3 * 6 + 0x26];
-  param_1[param_2 * 6 + 0x23] = param_1[param_3 * 6 + 0x23];
-  param_1[param_2 * 6 + 0x24] = iVar9;
-  param_1[param_2 * 6 + 0x25] = iVar6;
-  param_1[param_2 * 6 + 0x26] = iVar4;
-  iVar4 = param_1[param_3 * 6 + 0x28];
-  param_1[param_2 * 6 + 0x27] = param_1[param_3 * 6 + 0x27];
-  param_1[param_2 * 6 + 0x28] = iVar4;
-  param_1[param_3 * 6 + 0x24] = iVar7;
-  param_1[param_3 * 6 + 0x25] = iVar5;
-  param_1[param_3 * 6 + 0x26] = iVar3;
-  param_1[param_3 * 6 + 0x23] = iVar1;
-  param_1[param_3 * 6 + 0x27] = iVar2;
-  iVar1 = param_1[param_3 + 0x41];
-  iVar2 = param_1[param_2 + 0x41];
-  param_1[param_3 * 6 + 0x28] = iVar8;
-  param_1[param_2 + 0x41] = iVar1;
-  param_1[param_3 + 0x41] = iVar2;
+  recAHeader = param_1[operandA * 6 + 0x23];
+  recASource = param_1[operandA * 6 + 0x24];
+  recAReg = param_1[operandA * 6 + 0x25];
+  recARegOffset = param_1[operandA * 6 + 0x26];
+  recASelect = param_1[operandA * 6 + 0x27];
+  recAFlags = param_1[operandA * 6 + 0x28];
+  recBSource = param_1[operandB * 6 + 0x24];
+  recBReg = param_1[operandB * 6 + 0x25];
+  recBRegOffset = param_1[operandB * 6 + 0x26];
+  param_1[operandA * 6 + 0x23] = param_1[operandB * 6 + 0x23];
+  param_1[operandA * 6 + 0x24] = recBSource;
+  param_1[operandA * 6 + 0x25] = recBReg;
+  param_1[operandA * 6 + 0x26] = recBRegOffset;
+  recBFlags = param_1[operandB * 6 + 0x28];
+  param_1[operandA * 6 + 0x27] = param_1[operandB * 6 + 0x27];
+  param_1[operandA * 6 + 0x28] = recBFlags;
+  param_1[operandB * 6 + 0x24] = recASource;
+  param_1[operandB * 6 + 0x25] = recAReg;
+  param_1[operandB * 6 + 0x26] = recARegOffset;
+  param_1[operandB * 6 + 0x23] = recAHeader;
+  param_1[operandB * 6 + 0x27] = recASelect;
+  kindB = param_1[operandB + 0x41];
+  kindA = param_1[operandA + 0x41];
+  param_1[operandB * 6 + 0x28] = recAFlags;
+  param_1[operandA + 0x41] = kindB;
+  param_1[operandB + 0x41] = kindA;
   return;
 }
 
@@ -824,8 +829,8 @@ int FUN_0010aee8(param_1, param_2, param_3_w)
   return param_1;
 }
 
-/* FUN_0010af38 @ 0x10af38 (200 bytes) */
-int FUN_0010af38(param_1, param_2, param_3)
+/* IRInst__cloneIfPresub @ 0x10af38 (200 bytes) */
+int IRInst__cloneIfPresub(param_1, param_2, param_3)
   int *param_1;
   int param_2;
   int param_3;
@@ -949,8 +954,8 @@ int FUN_0010b184(int *inst,undefined4 param_2,int *param_3,double fparam_1)
   } while( true );
 }
 
-/* FUN_0010b284 @ 0x10b284 (88 bytes) */
-int FUN_0010b284(param_1, param_2, param_3, param_4_w)
+/* IRInst__applyNegateModifier @ 0x10b284 (88 bytes) */
+int IRInst__applyNegateModifier(param_1, param_2, param_3, param_4_w)
   float *param_1;
   int param_2;
   int param_3;
@@ -970,8 +975,8 @@ int FUN_0010b284(param_1, param_2, param_3, param_4_w)
   return;
 }
 
-/* FUN_0010b2dc @ 0x10b2dc (80 bytes) */
-int FUN_0010b2dc(param_1, param_2, param_3, param_4_w)
+/* IRInst__applyAbsModifier @ 0x10b2dc (80 bytes) */
+int IRInst__applyAbsModifier(param_1, param_2, param_3, param_4_w)
   float *param_1;
   int param_2;
   int param_3;

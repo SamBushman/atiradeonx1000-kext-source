@@ -1537,8 +1537,8 @@ int FUN_001793d8(ctx, param_2, param_3)
       iVar2 = *(int *)(loopIndex + 0x20);
       if (iVar2 < 0) {
         puVar3 = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),iVar2);
-        FUN_0010b2dc(&local_38,*(undefined4 *)(ctx + 0xb0),param_2,*puVar3);
-        FUN_0010b284(&local_34,*(undefined4 *)(ctx + 0xb0),param_2,local_38);
+        IRInst__applyAbsModifier(&local_38,*(undefined4 *)(ctx + 0xb0),param_2,*puVar3);
+        IRInst__applyNegateModifier(&local_34,*(undefined4 *)(ctx + 0xb0),param_2,local_38);
         iVar2 = Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),local_34);
         iVar2 = *(int *)(iVar2 + 4);
       }
@@ -1559,8 +1559,8 @@ int FUN_001793d8(ctx, param_2, param_3)
       iVar2 = *(int *)(loopIndex4 * 4 + iVar6 + 0x20);
       if (iVar2 < 0) {
         puVar3 = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),iVar2);
-        FUN_0010b2dc(&local_30,*(undefined4 *)(ctx + 0xb0),param_2,*puVar3);
-        FUN_0010b284(local_2c,*(undefined4 *)(ctx + 0xb0),param_2,local_30);
+        IRInst__applyAbsModifier(&local_30,*(undefined4 *)(ctx + 0xb0),param_2,*puVar3);
+        IRInst__applyNegateModifier(local_2c,*(undefined4 *)(ctx + 0xb0),param_2,local_30);
         iVar2 = Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),local_2c[0]);
         iVar2 = *(int *)(iVar2 + 4);
       }

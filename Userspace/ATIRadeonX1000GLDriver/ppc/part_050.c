@@ -217,59 +217,59 @@ int FudoPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
 }
 
 /* FudoPs__vslot59_tryEncodeSourceConstant @ 0x191b30 (316 bytes) */
-int FudoPs__vslot59_tryEncodeSourceConstant(this, inst, param_3, param_4, param_5)
+int FudoPs__vslot59_tryEncodeSourceConstant(this, inst, srcIndex, laneSwizzle, compiler)
   undefined4 this;
   undefined4 inst;
-  undefined4 param_3;
-  uint param_4;
-  int param_5;
+  undefined4 srcIndex;
+  uint laneSwizzle;
+  int compiler;
 {
-  char cVar1;
-  float fVar2;
+  char laneMaskByte;
+  float laneValue;
   int *a0;
   int loopRemaining;
-  undefined4 uVar4;
+  undefined4 result;
   float *loopIndex2;
   int loopIndex;
-  uint local_58;
-  undefined4 local_54;
-  uint local_50;
-  float fStack_4c;
-  float fStack_48;
-  float fStack_44;
-  undefined4 local_30;
+  uint laneMaskWord;
+  undefined4 srcSelectWord;
+  uint constLane0;
+  float constLane1;
+  float constLane2;
+  float constLane3;
+  undefined4 halfBits;
   
-  local_58 = param_4 << 0x18 | (param_4 & 0xff00) << 8 | param_4 >> 8 & 0xff00 | param_4 >> 0x18;
-  a0 = (int *)IRInst__getOperandSource(inst,param_3);
+  laneMaskWord = laneSwizzle << 0x18 | (laneSwizzle & 0xff00) << 8 | laneSwizzle >> 8 & 0xff00 | laneSwizzle >> 0x18;
+  a0 = (int *)IRInst__getOperandSource(inst,srcIndex);
   loopRemaining = (**(code **)(*a0 + 0x48))(a0);
   if (loopRemaining == 0) {
 LAB_00191c54:
-    uVar4 = 0;
+    result = 0;
   }
   else {
-    loopRemaining = IRInst__getOperandRecord(inst,param_3);
+    loopRemaining = IRInst__getOperandRecord(inst,srcIndex);
     loopIndex = 0;
-    local_54 = *(undefined4 *)(loopRemaining + 0x10);
+    srcSelectWord = *(undefined4 *)(loopRemaining + 0x10);
     loopRemaining = 4;
-    loopIndex2 = (float *)&local_50;
+    loopIndex2 = (float *)&constLane0;
     do {
-      cVar1 = *(char *)((int)&local_58 + loopIndex);
+      laneMaskByte = *(char *)((int)&laneMaskWord + loopIndex);
       *loopIndex2 = 0.0;
-      if (cVar1 == '\0') {
-        if ((((int)*(char *)(a0 + 0x57) >> (*(byte *)((int)&local_54 + loopIndex) & 0x3f) & 1U) == 0) ||
-           (((fVar2 = GH_U2F((unsigned int)(a0[(uint)*(byte *)((int)&local_54 + loopIndex) * 6 + 8])), fVar2 != 0.0 &&
-             (fVar2 != 1.0)) && (local_30 = 0x3f000000, fVar2 != 0.5)))) goto LAB_00191c54;
-        *loopIndex2 = fVar2;
+      if (laneMaskByte == '\0') {
+        if ((((int)*(char *)(a0 + 0x57) >> (*(byte *)((int)&srcSelectWord + loopIndex) & 0x3f) & 1U) == 0) ||
+           (((laneValue = GH_U2F((unsigned int)(a0[(uint)*(byte *)((int)&srcSelectWord + loopIndex) * 6 + 8])), laneValue != 0.0 &&
+             (laneValue != 1.0)) && (halfBits = 0x3f000000, laneValue != 0.5)))) goto LAB_00191c54;
+        *loopIndex2 = laneValue;
       }
       loopIndex = loopIndex + 1;
       loopIndex2 = loopIndex2 + 1;
       loopRemaining = loopRemaining + -1;
     } while (loopRemaining != 0);
-    ((void (*)())IRInst__makeLiteralVec4Float)(inst,*(undefined4 *)(param_5 + 0x6c4),param_3,(double)GH_U2F((unsigned int)(local_50)),
-                 (double)fStack_4c,(double)fStack_48,(double)fStack_44);
-    uVar4 = 1;
+    ((void (*)())IRInst__makeLiteralVec4Float)(inst,*(undefined4 *)(compiler + 0x6c4),srcIndex,(double)GH_U2F((unsigned int)(constLane0)),
+                 (double)constLane1,(double)constLane2,(double)constLane3);
+    result = 1;
   }
-  return uVar4;
+  return result;
 }
 
 /* FudoChip__vslot2 @ 0x191c6c (16 bytes) */
@@ -694,7 +694,7 @@ int FUN_001922c4(param_1, param_2, inst, param_4)
     ((int (*)())DList__unlink)(inst);
     IRInst__setOperandSource(inst,1,0,*(uint *)(param_4 + 0x30) >> 7 & 1,uVar11);
     IRInst__setOperandSource(inst,2,0,*(uint *)(param_4 + 0x30) >> 7 & 1,uVar11);
-    FUN_00108304(inst,0x25,*(undefined4 *)(param_4 + 8));
+    IRInst__reinitAsTrinary(inst,0x25,*(undefined4 *)(param_4 + 8));
     IRInst__restoreCounters(inst,&local_48);
     inst[4] = iVar12;
     IRInst__setOperandSource(inst,1,inst2,*(uint *)(param_4 + 0x30) >> 7 & 1,uVar11);
@@ -726,7 +726,7 @@ int FUN_001922c4(param_1, param_2, inst, param_4)
     inst[0x56] = *(int *)(inst2 + 0x158);
     ((int (*)())DList__insertAfter)(inst,inst2);
     if ((*(uint *)(param_4 + 0x30) & 0x80) == 0) {
-      Inst__r300Peephole_1875a8(inst,1,inst2,param_4);
+      Inst__r300ReassociateAddPair(inst,1,inst2,param_4);
     }
   }
   return inst;
@@ -807,7 +807,7 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
   }
   loopIndex3 = Compiler__isOptionEnabled(program[PROG_compiler / 4],0x1c);
   if (loopIndex3 != 0) {
-    loopIndex3 = Inst__collapseAlgebraic_00162cc0(inst2,program);
+    loopIndex3 = Inst__collapseIntoExtraSourceDispatch(inst2,program);
     if (loopIndex3 != 0) {
       loopIndex3 = (**(code **)(*inst2 + 100))(inst2);
       if (((loopIndex3 != 0) && ((inst2[5] & 0x200U) == 0)) && (inst != (int *)0x0)) {
@@ -831,15 +831,15 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
     if (loopIndex3 != 0) {
       inst2 = (int *)IRInst__getOperandSourceOrDefault(inst,consumerSrcIndex,inst2);
     }
-    loopIndex3 = Inst__collapseAlgebraic_0014bdbc(inst2,program);
+    loopIndex3 = Inst__collapseMulOfAddWithUnitConstant(inst2,program);
     if (loopIndex3 != 0) {
       inst2 = (int *)IRInst__getOperandSourceOrDefault(inst,consumerSrcIndex,inst2);
     }
-    loopIndex3 = Inst__collapseAlgebraic_0014b82c(inst2,program,0,1);
+    loopIndex3 = Inst__collapseAddOfMulToMad(inst2,program,0,1);
     if (loopIndex3 != 0) {
       inst2 = (int *)IRInst__getOperandSourceOrDefault(inst,consumerSrcIndex,inst2);
     }
-    loopIndex3 = Inst__collapseAlgebraic_0014b150(inst2,program);
+    loopIndex3 = Inst__collapseAddIntoMadMulAddend(inst2,program);
     if (loopIndex3 != 0) {
       loopIndex3 = (**(code **)(*inst2 + 100))(inst2);
       if (((loopIndex3 != 0) && ((inst2[5] & 0x200U) == 0)) && (inst != (int *)0x0)) {
@@ -852,11 +852,11 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
       }
       changedFlag = 1;
     }
-    loopIndex3 = Inst__collapseAlgebraic_0014caec(inst2,program);
+    loopIndex3 = Inst__collapseMadOfMulToDot2Add(inst2,program);
     if (loopIndex3 != 0) {
       inst2 = (int *)IRInst__getOperandSourceOrDefault(inst,consumerSrcIndex,inst2);
     }
-    loopIndex3 = Inst__collapseAlgebraic_0014d8f8(inst2,program);
+    loopIndex3 = Inst__collapseThreeComponentSumToDot3(inst2,program);
     if (loopIndex3 != 0) {
       inst2 = (int *)IRInst__getOperandSourceOrDefault(inst,consumerSrcIndex,inst2);
     }
@@ -864,11 +864,11 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
     if (loopIndex3 != 0) {
       inst2 = (int *)IRInst__getOperandSourceOrDefault(inst,consumerSrcIndex,inst2);
     }
-    loopIndex3 = Inst__collapseAlgebraic_0015bd40(inst2,program);
+    loopIndex3 = Inst__mergeAddAndMadSharedOperands(inst2,program);
     if (loopIndex3 != 0) {
       inst2 = (int *)IRInst__getOperandSourceOrDefault(inst,consumerSrcIndex,inst2);
     }
-    loopIndex3 = Inst__collapseAlgebraic_00163994(inst2,program);
+    loopIndex3 = Inst__mergeMovAndMadByLanes(inst2,program);
     if (loopIndex3 != 0) {
       inst2 = (int *)IRInst__getOperandSourceOrDefault(inst,consumerSrcIndex,inst2);
     }
@@ -876,39 +876,39 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
     if (loopIndex3 != 0) {
       inst2 = (int *)IRInst__getOperandSourceOrDefault(inst,consumerSrcIndex,inst2);
     }
-    loopIndex3 = Inst__collapseAlgebraic_0014cec8(inst2,program);
+    loopIndex3 = Inst__collapseMadWithDot2AddToDot3(inst2,program);
     if (loopIndex3 != 0) {
       inst2 = (int *)IRInst__getOperandSourceOrDefault(inst,consumerSrcIndex,inst2);
     }
-    loopIndex3 = Inst__collapseAlgebraic_00150d38(inst2,program);
+    loopIndex3 = Inst__collapseAddOfScaledMov(inst2,program);
     if (loopIndex3 != 0) {
       inst2 = (int *)IRInst__getOperandSourceOrDefault(inst,consumerSrcIndex,inst2);
     }
-    loopIndex3 = Inst__collapseAlgebraic_0014acb8(inst2,program);
+    loopIndex3 = Inst__collapseMulSplatByDotOnes(inst2,program);
     if (loopIndex3 != 0) {
       inst2 = (int *)IRInst__getOperandSourceOrDefault(inst,consumerSrcIndex,inst2);
     }
-    loopIndex3 = Inst__collapseAlgebraic_001595f0(inst2,program);
+    loopIndex3 = Inst__foldCndWithConstantCondition(inst2,program);
     if (loopIndex3 != 0) {
       inst2 = (int *)IRInst__getOperandSourceOrDefault(inst,consumerSrcIndex,inst2);
     }
-    loopIndex3 = Inst__collapseAlgebraic_0015df44(inst2,program);
+    loopIndex3 = Inst__collapseMulOfExps(inst2,program);
     if (loopIndex3 != 0) {
       inst2 = (int *)IRInst__getOperandSourceOrDefault(inst,consumerSrcIndex,inst2);
     }
-    loopIndex3 = Inst__collapseAlgebraic_0015e494(inst2,program);
+    loopIndex3 = Inst__collapseClampToSaturate(inst2,program);
     if (loopIndex3 != 0) {
       inst2 = (int *)IRInst__getOperandSourceOrDefault(inst,consumerSrcIndex,inst2);
     }
     loopIndex3 = Compiler__isOptionEnabled(program[PROG_compiler / 4],0x3c);
-    if ((loopIndex3 != 0) && (loopIndex3 = Inst__tryDp3CommutativityPushoff(inst,consumerSrcIndex,inst2,program), loopIndex3 != 0)) {
+    if ((loopIndex3 != 0) && (loopIndex3 = Inst__hoistScalarMulOutOfDot(inst,consumerSrcIndex,inst2,program), loopIndex3 != 0)) {
       inst2 = (int *)IRInst__getOperandSourceOrDefault(inst,consumerSrcIndex,inst2);
     }
-    loopIndex3 = Inst__collapseAlgebraic_0014d274(inst2,program);
+    loopIndex3 = Inst__collapseDot3VectorTimesScaledVector(inst2,program);
     if (loopIndex3 != 0) {
       inst2 = (int *)IRInst__getOperandSourceOrDefault(inst,consumerSrcIndex,inst2);
     }
-    loopIndex3 = Inst__collapseAlgebraic_00158c3c(inst2,program);
+    loopIndex3 = Inst__distributeResultScale(inst2,program);
     if (loopIndex3 != 0) {
       changedFlag = 1;
     }
@@ -945,14 +945,14 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
   loopIndex3 = Compiler__isOptionEnabled(uVar21,0x3d);
   if (loopIndex3 != 0) {
     loopIndex3 = IRInst__getOperandRecord(curInst,1);
-    loopIndex3 = FUN_000f2c5c(*(undefined4 *)(loopIndex3 + 0x10));
+    loopIndex3 = SelectWord__isSplat(*(undefined4 *)(loopIndex3 + 0x10));
     if (((loopIndex3 != 0) &&
         (combineInstA = (int *)IRInst__getOperandSource(curInst,1), *(int *)(combineInstA[0x22] + 8) == 0x12)) &&
        ((combineInstA[0x48] == 0 &&
         (((combineInstA[0x49] == 0 && ((combineInstA[5] & 0x200U) == 0)) &&
          (loopIndex3 = IRInst__hasSingleUse(combineInstA,program), loopIndex3 != 0)))))) {
       loopIndex3 = IRInst__getOperandRecord(combineInstA,0);
-      loopIndex3 = FUN_000f37b8(*(undefined4 *)(loopIndex3 + 0x10));
+      loopIndex3 = SelectWord__splatComponent(*(undefined4 *)(loopIndex3 + 0x10));
       if (-1 < loopIndex3) {
         addSrcDef = (int *)IRInst__getOperandSource(combineInstA,1);
         operandVReg = (int *)IRInst__getOperandSource(combineInstA,2);
@@ -976,7 +976,7 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
           if (((*(int *)(addSrcDef[0x22] + 8) == 0x12) && (addSrcDef[0x48] == 0)) && (addSrcDef[0x49] == 0))
           {
             loopIndex3 = IRInst__getOperandRecord(addSrcDef,0);
-            uVar11 = FUN_000f37b8(*(undefined4 *)(loopIndex3 + 0x10));
+            uVar11 = SelectWord__splatComponent(*(undefined4 *)(loopIndex3 + 0x10));
             if ((uVar17 == uVar11) && (loopIndex3 = IRInst__hasSingleUse(addSrcDef,program), loopIndex3 != 0)) {
               loopIndex3 = IRInst__getOperandSource(addSrcDef,1);
               loopRemaining = IRInst__getOperandSource(addSrcDef,2);
@@ -1003,7 +1003,7 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
                   ((int (*)())DList__unlink)(combineInstA);
                   ((int (*)())DList__unlink)(addSrcDef);
                   ((int (*)())DList__unlink)(loopIndex3);
-                  FUN_00108174(combineInstA,0x17,uVar21);
+                  IRInst__reinitAsBinary(combineInstA,0x17,uVar21);
                   loopIndex3 = IRInst__getOperandSource(loopIndex3,1);
                   if ((int)program[PROG_useEpoch / 4] < *(int *)(loopIndex3 + 0x160)) {
                     *(int *)(loopIndex3 + 0x160) = *(int *)(loopIndex3 + 0x160) + 1;
@@ -1076,9 +1076,9 @@ LAB_00193490:
     for (loopIndex3 = 1; loopRemaining = (**(code **)(*curInst + 0x14))(curInst), loopIndex3 <= loopRemaining; loopIndex3 = loopIndex3 + 1
         ) {
       uVar21 = IRInst__getOperandSource(curInst,loopIndex3);
-      Inst__r300Peephole_1875a8(curInst,loopIndex3,uVar21,program);
+      Inst__r300ReassociateAddPair(curInst,loopIndex3,uVar21,program);
     }
-    loopIndex3 = Inst__r300Peephole_1875a8(inst,consumerSrcIndex,curInst,program);
+    loopIndex3 = Inst__r300ReassociateAddPair(inst,consumerSrcIndex,curInst,program);
     if (loopIndex3 != 0) {
       changedFlag = 1;
       curInst = (int *)IRInst__getOperandSourceOrDefault(inst,consumerSrcIndex,curInst);

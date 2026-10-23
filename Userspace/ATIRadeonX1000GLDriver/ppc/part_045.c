@@ -449,7 +449,7 @@ int Scheduler__tryReuseAddressRegister(scheduler, node)
   iVar9 = *(int *)(node + 0x38);
   iVar11 = 0;
   operandRecord = IRInst__getOperandRecord(iVar9,1);
-  FUN_000f2c5c(*(undefined4 *)(operandRecord + 0x10));
+  SelectWord__isSplat(*(undefined4 *)(operandRecord + 0x10));
   do {
     operandRecord = IRInst__getOperandRecord(iVar9,0);
     if (*(char *)(iVar11 + operandRecord + 0x10) != '\x01') {
@@ -2604,7 +2604,7 @@ int Scheduler__scheduleBlock(scheduler, block)
    * read as 0 (list "empty"), so the loop below - which registers this object into a shared pending-list
    * via Scheduler__onNodeReady/Scheduler__enqueueReadyNode - never ran at all, leaving Scheduler__commitBundle's later check permanently
    * empty and crashing much deeper in DList__count (same defect class as the two fixes already landed
-   * on this issue for Scheduler__packDotProductCandidates/Inst__collapseAlgebraic_00158c3c/Scheduler__buildCoScheduleGroups). local_38 only ever stores the *value*
+   * on this issue for Scheduler__packDotProductCandidates/Inst__distributeResultScale/Scheduler__buildCoScheduleGroups). local_38 only ever stores the *value*
    * auStack_40+0xc (not aliased memory), so simply enlarging the array is sufficient here. */
   undefined1 auStack_40 [0x18];
   int local_38;
