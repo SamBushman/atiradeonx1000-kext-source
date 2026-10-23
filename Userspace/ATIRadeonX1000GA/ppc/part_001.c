@@ -7,6 +7,7 @@ int __AllocateSurface(accel, flags, surfaceDesc, vramAddress)
   uint *surfaceDesc;
   undefined4 vramAddress;
 {
+  int repeatCount;
   uint tiledHeight;
   uint tiledWidth;
   uint tiledPitch;
@@ -48,7 +49,7 @@ int __AllocateSurface(accel, flags, surfaceDesc, vramAddress)
       if (status == 0) goto LAB_00002cb0;
       srcPitch = surfaceDesc[6];
       bytesPerPixel = record[10];
-      status = 1;
+      repeatCount = 1;
       *(undefined2 *)((int)record + 0xe) = 0;
       *(undefined2 *)(record + 3) = 0;
       record[7] = srcPitch / bytesPerPixel;
@@ -61,10 +62,10 @@ int __AllocateSurface(accel, flags, surfaceDesc, vramAddress)
       dataDwords = bytesPerPixel * descWidth * descHeight + 3;
       scalarIn1 = (dataDwords & 0xfffffffc) + 0xfff & 0xfffff000;
       for (dataDwords = dataDwords >> 2; 0x3fff < dataDwords; dataDwords = dataDwords >> 1) {
-        status = status << 1;
+        repeatCount = repeatCount << 1;
       }
       outCount = 2;
-      scalarIn0 = ((dataDwords + 0xd) * status + 0x27) * 4 & 0xffffffe0;
+      scalarIn0 = ((dataDwords + 0xd) * repeatCount + 0x27) * 4 & 0xffffffe0;
       status = _io_connect_method_scalarI_scalarO
                         (*(undefined4 *)(accel + 0xc),9,&scalarIn0,2,&scalarOut0,&outCount);
       if (status == 0) {
@@ -76,24 +77,24 @@ int __AllocateSurface(accel, flags, surfaceDesc, vramAddress)
         dataDwords = bytesPerPixel * width * repeatHeight >> 2;
         repeatRows = repeatHeight;
         if (dataDwords < 0x4000) {
-          status = 1;
+          repeatCount = 1;
         }
         else {
-          status = 1;
+          repeatCount = 1;
           do {
             dataDwords = dataDwords >> 1;
             repeatHeight = repeatHeight >> 1;
             repeatRows = repeatRows >> 1;
-            status = status << 1;
+            repeatCount = repeatCount << 1;
           } while (0x3fff < dataDwords);
         }
         paddedRowBytes = 0x20;
         if (0x1f < rowBytes) {
           paddedRowBytes = rowBytes;
         }
-        *scalarOut0 = (dataDwords + 0xd) * status + 8;
+        *scalarOut0 = (dataDwords + 0xd) * repeatCount + 8;
         scalarOut0[6] = dataDwords + 0xd;
-        scalarOut0[7] = status;
+        scalarOut0[7] = repeatCount;
         scalarOut0[5] = paddedRowBytes * repeatHeight;
         scalarOut0[0x20] = 0x1393;
         scalarOut0[0x21] = 10;
@@ -104,7 +105,7 @@ int __AllocateSurface(accel, flags, surfaceDesc, vramAddress)
         if (formatCode != 3) {
           hwTileMode = 0;
         }
-        if (status != 0) {
+        if (repeatCount != 0) {
           repeatIndex = 0;
           do {
             *cmdCursor = 0x5cb;
@@ -133,7 +134,7 @@ int __AllocateSurface(accel, flags, surfaceDesc, vramAddress)
               } while (rowIndex != repeatRows);
             }
             repeatIndex = repeatIndex + 1;
-          } while (status != repeatIndex);
+          } while (repeatCount != repeatIndex);
         }
         *cmdCursor = 0xd0b;
         cmdCursor[1] = 5;

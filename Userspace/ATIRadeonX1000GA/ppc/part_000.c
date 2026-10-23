@@ -75,6 +75,7 @@ int _check_cxa_atexit(cxaAtexitFn, cxaFinalizeFn)
 /* _find_atexit_10_3 @ 0x7bc (504 bytes) */
 int _find_atexit_10_3()
 {
+  int nsSymbol;
   uint imageCount;
   uint imageIndex;
   code *imageCountFn;
@@ -85,7 +86,7 @@ int _find_atexit_10_3()
   undefined4 imageName;
   undefined4 symbolAddress;
   int compareResult;
-  int machHeaderOrSymbol;
+  int machHeader;
   code *addressOfSymbolFn [7];
   
   ((int (*)())__dyld_func_lookup)("__dyld_image_count",&imageCountFn);
@@ -100,13 +101,13 @@ int _find_atexit_10_3()
       imageName = (*imageNameFn)(imageIndex);
       compareResult = _strcmp(imageName,"/usr/lib/libSystem.B.dylib");
       if (compareResult == 0) {
-        machHeaderOrSymbol = (*imageHeaderFn)(imageIndex);
-        if (machHeaderOrSymbol == 0) {
+        machHeader = (*imageHeaderFn)(imageIndex);
+        if (machHeader == 0) {
           return 0;
         }
-        machHeaderOrSymbol = (*lookupSymbolFn)(machHeaderOrSymbol,"_atexit",4);
-        if (machHeaderOrSymbol != 0) {
-          symbolAddress = (*addressOfSymbolFn[0])(machHeaderOrSymbol);
+        nsSymbol = (*lookupSymbolFn)(machHeader,"_atexit",4);
+        if (nsSymbol != 0) {
+          symbolAddress = (*addressOfSymbolFn[0])(nsSymbol);
           return symbolAddress;
         }
         return 0;
@@ -238,6 +239,7 @@ int FUN_00000c44()
 /* FUN_00000c64 @ 0xc64 (32 bytes) */
 int FUN_00000c64()
 {
+  int nsSymbol;
   uint imageCount;
   char *imageName;
   undefined4 symbolAddress;
@@ -247,7 +249,7 @@ int FUN_00000c64()
   code *imageHeaderFn;
   code *lookupSymbolFn;
   int compareResult;
-  int machHeaderOrSymbol;
+  int machHeader;
   code *addressOfSymbolFn [7];
   
   ((int (*)())__dyld_func_lookup)("__dyld_image_count",&imageCountFn);
@@ -262,13 +264,13 @@ int FUN_00000c64()
       imageName = (char *)(*imageNameFn)(imageIndex);
       compareResult = _strcmp(imageName,"/usr/lib/libSystem.B.dylib");
       if (compareResult == 0) {
-        machHeaderOrSymbol = (*imageHeaderFn)(imageIndex);
-        if (machHeaderOrSymbol == 0) {
+        machHeader = (*imageHeaderFn)(imageIndex);
+        if (machHeader == 0) {
           return 0;
         }
-        machHeaderOrSymbol = (*lookupSymbolFn)(machHeaderOrSymbol,"_atexit",4);
-        if (machHeaderOrSymbol != 0) {
-          symbolAddress = (*addressOfSymbolFn[0])(machHeaderOrSymbol);
+        nsSymbol = (*lookupSymbolFn)(machHeader,"_atexit",4);
+        if (nsSymbol != 0) {
+          symbolAddress = (*addressOfSymbolFn[0])(nsSymbol);
           return symbolAddress;
         }
         return 0;

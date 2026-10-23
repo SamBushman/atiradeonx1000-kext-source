@@ -17,12 +17,10 @@ local	FUN_00000c64	pcStack_2c	imageHeaderFn	CONFIRMED	crt atexit shim clone of _
 local	FUN_00000c64	pcStack_28	lookupSymbolFn	CONFIRMED	crt atexit shim clone of _find_atexit_10_3: "__dyld_NSLookupSymbolInImage"
 local	FUN_00000c64	apcStack_24	addressOfSymbolFn	CONFIRMED	crt atexit shim clone of _find_atexit_10_3: "__dyld_NSAddressOfSymbol"
 use	FUN_00000c64	iVar3	compareResult	CONFIRMED	strcmp of the image name with libSystem.B.dylib	iVar3 = _strcmp	iVar3 = \(\*pcStack_2c\)
-use	FUN_00000c64	iVar3	machHeaderOrSymbol	INFERRED	mach_header from __dyld_get_image_header, then the NSSymbol of _atexit looked up in it (one local, two roles in one line)	iVar3 = \(\*pcStack_2c\)
 use	_find_atexit_10_3	uVar1	lookupResult	UNKNOWN	result of the last __dyld_func_lookup call, passed unused as the argument of __dyld_image_count	uVar1 = \(\(int \(\*\)\(\)\)__dyld_func_lookup\)\("__dyld_NSAddressOfSymbol"	uVar1 = \(\*local_30\)
 use	_find_atexit_10_3	uVar1	imageName	CONFIRMED	__dyld_get_image_name(imageIndex), compared with libSystem.B.dylib	uVar1 = \(\*local_30\)	uVar1 = \(\*local_24\[0\]\)
 use	_find_atexit_10_3	uVar1	symbolAddress	CONFIRMED	__dyld_NSAddressOfSymbol result, returned	uVar1 = \(\*local_24\[0\]\)
 use	_find_atexit_10_3	iVar3	compareResult	CONFIRMED	strcmp of the image name with libSystem.B.dylib	iVar3 = _strcmp	iVar3 = \(\*local_2c\)
-use	_find_atexit_10_3	iVar3	machHeaderOrSymbol	INFERRED	mach_header from __dyld_get_image_header, then the NSSymbol of _atexit looked up in it (one local, two roles in one line)	iVar3 = \(\*local_2c\)
 local	FUN_000010ec	param_1	globals	CONFIRMED	crt atexit shim clone of _run_routines: the keymgr process-wide atexit record
 local	FUN_000010ec	param_2	stopNode	CONFIRMED	crt atexit shim clone of _run_routines: list node at which to stop
 local	FUN_000010ec	puVar1	node	CONFIRMED	crt atexit shim clone of _run_routines: head of the routine list

@@ -39,3 +39,12 @@ use	_atexit_common	iVar3	globals	CONFIRMED	the process-wide atexit state passed 
 use	_radeonFill	uVar29	batchLimit	INFERRED	exclusive end index of the rectangles this batch may cover: fillReq[0x16] (rect count), lowered to batchEnd when the batch is full, restored after the batch	uVar29 = param_5\[0x16\];@1		all	none
 local	__Flush	local_28	padWordsOrMapSize	INFERRED	one address-taken stack slot: 0 or 2 words of wait padding before the 0x1000000 terminator, then the output-size argument written by _IOConnectMapMemory (never read); the slot cannot be split because its address is passed
 local	___stub_getrealaddr	uVar3	nsSymbolOrAddress	CONFIRMED	NSSymbol returned by _NSLookupAndBindSymbolWithHint, overwritten by its _NSAddressOfSymbol address (returned); shares a frame slot that is also address-taken for the name buffer, so it cannot be split
+use	__AllocateSurface	iVar4	status	CONFIRMED	holds the kern_return_t/__DecodePixelFormat result returned at the end	iVar4 = __DecodePixelFormat@1	iVar4 = 1;	all	none
+use	__AllocateSurface	iVar4	repeatCount	INFERRED	number of times the image is uploaded: 1 << n, doubled until each chunk is under 0x4000 dwords; also the repeat loop bound	iVar4 = 1;@1	iVar4 = _io_connect_method_scalarI_scalarO	all	none
+use	__AllocateSurface	iVar4	status	CONFIRMED	holds the kern_return_t/__DecodePixelFormat result returned at the end	iVar4 = _io_connect_method_scalarI_scalarO@1	iVar4 = 1;	all	none
+use	__AllocateSurface	iVar4	repeatCount	INFERRED	number of times the image is uploaded: 1 << n, doubled until each chunk is under 0x4000 dwords; also the repeat loop bound	iVar4 = 1;@2	iVar4 = 0;	all	none
+use	__AllocateSurface	iVar4	status	CONFIRMED	holds the kern_return_t/__DecodePixelFormat result returned at the end	iVar4 = 0;@1		all	none
+use	_find_atexit_10_3	iVar3	machHeader	CONFIRMED	mach_header returned by __dyld_get_image_header for libSystem	iVar3 = \(\*local_2c\)	iVar3 = \(\*local_28\)\(iVar3	all	rhs
+use	_find_atexit_10_3	iVar3	nsSymbol	CONFIRMED	NSSymbol of _atexit returned by __dyld_NSLookupSymbolInImage, passed to __dyld_NSAddressOfSymbol	iVar3 = \(\*local_28\)\(iVar3		lhs	none
+use	FUN_00000c64	iVar3	machHeader	CONFIRMED	mach_header returned by __dyld_get_image_header for libSystem	iVar3 = \(\*pcStack_2c\)	iVar3 = \(\*pcStack_28\)\(iVar3	all	rhs
+use	FUN_00000c64	iVar3	nsSymbol	CONFIRMED	NSSymbol of _atexit returned by __dyld_NSLookupSymbolInImage, passed to __dyld_NSAddressOfSymbol	iVar3 = \(\*pcStack_28\)\(iVar3		lhs	none
