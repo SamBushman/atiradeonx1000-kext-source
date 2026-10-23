@@ -1,0 +1,173 @@
+local	_lFloatConst	param_1	lexemeBuf	INFERRED	buffer the lexeme characters are appended to (token text, token+0xc); NUL terminated before _lBuildFloatValue
+local	_lFloatConst	param_2	mantissaLength	INFERRED	number of mantissa characters stored in lexemeBuf; passed to _lBuildFloatValue as its length argument
+local	_lFloatConst	param_3	triggerChar	INFERRED	character that sent the caller into the float path ('.' or an exponent letter); compared with 0x2e
+local	_lFloatConst	param_4	token	CONFIRMED	yystypepp being filled: +4 float value (stored here), +0xc lexeme copy (_strcpy), passed to the input source vtable calls
+local	_lFloatConst	puVar1	cppGlobalSlot	CONFIRMED	PTR__cpp: address of the global cpp state pointer
+local	_lFloatConst	fVar2	floatValue	CONFIRMED	float stored at token+4 (result of _lBuildFloatValue, or 0.0)
+local	_lFloatConst	uVar4	scratchR4	UNKNOWN	Ghidra extra-output register r4 forwarded to _CPPErrorToInfoLog
+local	_lFloatConst	in_r7	scratchR7	UNKNOWN	register leftover forwarded to _CPPErrorToInfoLog
+local	_lFloatConst	in_r8	scratchR8	UNKNOWN	register leftover forwarded to _CPPErrorToInfoLog
+local	_lFloatConst	in_r9	scratchR9	UNKNOWN	register leftover forwarded to _CPPErrorToInfoLog
+local	_lFloatConst	iVar5	exponentSign	CONFIRMED	+1 or -1: set from the '+'/'-' after the exponent letter, multiplied into the exponent value
+use	_lFloatConst	iVar6	ungetSrc	CONFIRMED	cpp input source (cpp+0x20) used to call vtable slot 3 (unget char)	^\s*iVar6\ =\ \*\(int\ \*\)\(\*\(int\ \*\)PTR__cpp_a7b7c0a4\ \+\ 0x20\);$@1		all	none
+use	_lFloatConst	iVar6	fractionDigitCount	CONFIRMED	digits after the decimal point; subtracted from the exponent in the _lBuildFloatValue call	^\s*puVar1\ =\ PTR__cpp_a7b7c0a4;$@1		all	none
+local	_lFloatConst	iVar7	exponentValue	CONFIRMED	decimal exponent accumulated as exponent*10+digit then times exponentSign
+local	_lFloatConst	iVar9	writeIndex	INFERRED	next free index in lexemeBuf
+local	_lFloatConst	uVar8	digitOffset	INFERRED	current character minus '0', tested < 10 for a digit
+use	_lFloatConst	iVar10	nextWriteIndex	INFERRED	index after the exponent letter / sign (writeIndex copy)	^\s*iVar10\ =\ iVar9\ \+\ 1;$@1	^\s*iVar10\ =\ \*\(int\ \*\)\(\*\(int\ \*\)puVar1\ \+\ 0x20\);$	all	none
+use	_lFloatConst	iVar10	inputSrc	CONFIRMED	cpp input source (cpp+0x20) used to call vtable slot 2 (get char)	^\s*iVar10\ =\ \*\(int\ \*\)\(\*\(int\ \*\)puVar1\ \+\ 0x20\);$@1		all	none
+use	_lFloatConst	iVar3	readSrc	CONFIRMED	cpp input source (cpp+0x20), temporary before the getch call	^\s*iVar3\ =\ \*\(int\ \*\)\(\*\(int\ \*\)puVar1\ \+\ 0x20\);$@1	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(iVar3\ \+\ 8\)\)\(iVar3,param_4\);$	all	rhs
+use	_lFloatConst	iVar3	readSrc	CONFIRMED	cpp input source (cpp+0x20), temporary before the getch call	^\s*iVar3\ =\ \*\(int\ \*\)\(\*\(int\ \*\)puVar1\ \+\ 0x20\);$@2	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(iVar3\ \+\ 8\)\)\(iVar3,param_4\);$	all	rhs
+use	_lFloatConst	iVar3	cppState	CONFIRMED	*PTR__cpp: the cpp state, temporary before the getch call	^\s*iVar3\ =\ \*\(int\ \*\)puVar1;$@1	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)\(iVar3\ \+\ 0x20\)\ \+\ 8\)\)\(\*\(int\ \*\)\(iVar3\ \+\ 0x20\),param_4\);$	all	rhs
+use	_lFloatConst	iVar3	cppState	CONFIRMED	*PTR__cpp: the cpp state, temporary before the getch call	^\s*iVar3\ =\ \*\(int\ \*\)puVar1;$@2	^\s*iVar5\ =\ \-1;$	all	none
+use	_lFloatConst	iVar3	currentChar	CONFIRMED	character most recently read from the input source (compared with 'e', 'E', '+', '-', digits)	^\s*puVar1\ =\ PTR__cpp_a7b7c0a4;$@1		all	none
+local	_byte_scan	param_1	unusedArg1	UNKNOWN	never read in the body (the input source is reached through the cpp global)
+local	_byte_scan	param_3	scratchR5	UNKNOWN	register leftover forwarded to _CPPErrorToInfoLog
+local	_byte_scan	param_4	scratchR6	UNKNOWN	register leftover forwarded to _CPPErrorToInfoLog
+local	_byte_scan	param_5	scratchR7	UNKNOWN	register leftover forwarded to _CPPErrorToInfoLog
+local	_byte_scan	param_6	scratchR8	UNKNOWN	register leftover forwarded to _CPPErrorToInfoLog
+local	_byte_scan	uVar4	scratchR4	UNKNOWN	Ghidra extra-output register r4 forwarded to _CPPErrorToInfoLog
+local	_byte_scan	uVar7	constantValue	CONFIRMED	integer value accumulated for hex (<<4), octal (<<3) and decimal (*10) constants, stored at token[0]
+local	_yylex_CPP	param_1	outBuf	INFERRED	buffer receiving the token text (_strcpy target)
+local	_yylex_CPP	param_2	maxLengthOrResult	INFERRED	buffer capacity on entry, then overwritten with the returned text length (0 when the text is empty)
+local	_yylex_CPP	puVar1	cppGlobalSlot	CONFIRMED	PTR__cpp: address of the global cpp state pointer
+local	_yylex_CPP	puVar2	atomTableSlot	CONFIRMED	PTR__atable: address of the global atom table pointer
+local	_yylex_CPP	uVar5	atomTable	CONFIRMED	*PTR__atable passed to _GetStringOfAtom
+local	_yylex_CPP	pcVar6	tokenText	CONFIRMED	text of the token: the atom string or the numeric lexeme copy
+local	_yylex_CPP	in_r5	scratchR5	UNKNOWN	register leftover forwarded to the input source call
+local	_yylex_CPP	in_r6	scratchR6	UNKNOWN	register leftover forwarded to the input source call
+local	_yylex_CPP	in_r7	scratchR7	UNKNOWN	register leftover forwarded to the input source call
+local	_yylex_CPP	in_r8	scratchR8	UNKNOWN	register leftover forwarded to the input source call
+local	_yylex_CPP	local_a8	tokenAtom	CONFIRMED	yystypepp +8: atom of an identifier token, passed to _MacroExpand and _GetStringOfAtom
+use	_yylex_CPP	iVar4	eofFlag	CONFIRMED	_check_EOF result for the token just read	^\s*iVar4\ =\ \(\(int\ \(\*\)\(\)\)_check_EOF\)\(iVar3\);$@1	^\s*if\ \(\(iVar3\ !=\ 0x10e\)\ \|\|\ \(iVar4\ =\ _MacroExpand\(local_a8,auStack_b0\),\ iVar4\ ==\ 0\)\)\ break;$	all	none
+use	_yylex_CPP	iVar4	macroExpanded	CONFIRMED	_MacroExpand result: nonzero when the identifier was a macro and its expansion was pushed	^\s*if\ \(\(iVar3\ !=\ 0x10e\)\ \|\|\ \(iVar4\ =\ _MacroExpand\(local_a8,auStack_b0\),\ iVar4\ ==\ 0\)\)\ break;$@1	^\s*\*\(undefined4\ \*\)\(\*\(int\ \*\)puVar1\ \+\ 0x28\)\ =\ 1;$	all	none
+use	_yylex_CPP	iVar3	eofAfterDirective	CONFIRMED	_check_EOF result for the token returned by _readCPPline	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_check_EOF\)\(uVar5\);$@1	^\s*return\ 0;$	all	none
+use	_yylex_CPP	iVar3	token	CONFIRMED	token code returned by the input source scan function (vtable slot 1)	^\s*puVar2\ =\ PTR__atable_a7b7c0ac;$@1		all	none
+local	_check_EOF	param_1	token	CONFIRMED	token code tested against -1 (EOF)
+local	_check_EOF	puVar1	cppGlobalSlot	CONFIRMED	PTR__cpp: address of the global cpp state pointer
+local	_check_EOF	uVar2	isEof	CONFIRMED	1 when token == -1, else 0 (the function result)
+local	_check_EOF	in_r4	scratchR4	UNKNOWN	register leftover forwarded to _CPPErrorToInfoLog
+local	_check_EOF	in_r5	scratchR5	UNKNOWN	register leftover forwarded to _CPPErrorToInfoLog
+local	_check_EOF	in_r6	scratchR6	UNKNOWN	register leftover forwarded to _CPPErrorToInfoLog
+local	_check_EOF	in_r7	scratchR7	UNKNOWN	register leftover forwarded to _CPPErrorToInfoLog
+local	_check_EOF	in_r8	scratchR8	UNKNOWN	register leftover forwarded to _CPPErrorToInfoLog
+local	_check_EOF	in_r9	scratchR9	UNKNOWN	register leftover forwarded to _CPPErrorToInfoLog
+local	FUN_97b89f04	param_1	scope	CONFIRMED	Scope being unlinked from the global scope list (+0 next, +4 prev): entry _unlinkScope
+local	_NewScopeInPool	param_1	pool	CONFIRMED	memory pool the 0x20-byte Scope is allocated from (stored at scope+0x10, registered with _mem_AddCleanup)
+local	_NewScopeInPool	piVar2	scope	CONFIRMED	new Scope: +0 next, +4 prev, +8 parent, +0xc funScope, +0x10 pool, +0x14 symbols, +0x18 level, +0x1c programs
+local	_NewScopeInPool	bVar1	hadScopeList	INFERRED	_ScopeList was non-null before the new scope became its head
+local	_PushScope	param_1	scope	CONFIRMED	Scope being made current (+8 parent is set to the old _CurrentScope)
+local	_PushScope	piVar1	ancestorCursor	INFERRED	scope followed through +0 until its level is 2, giving the function scope stored at scope+0xc
+local	_PushScope	iVar2	level	CONFIRMED	nesting level of the scope being examined (+0x18)
+local	_NewSymbol	param_1	loc	INFERRED	source location whose first word is stored at symbol+0x10
+local	_NewSymbol	param_2	scope	CONFIRMED	Scope whose pool (+0x10) the symbol is allocated from
+local	_NewSymbol	param_3	name	CONFIRMED	name atom stored at symbol+0xc
+local	_NewSymbol	param_4	kind	INFERRED	symbol kind stored at symbol+0x14
+local	_NewSymbol	puVar3	symbol	CONFIRMED	new 0x28-byte Symbol: +0 left, +4 right, +8 next, +0xc name, +0x10 loc, +0x14 kind, +0x18 details (0x10 bytes zeroed)
+local	_NewSymbol	uVar1	locWord	INFERRED	first word of *loc
+local	_NewSymbol	puVar2	detailsCursor	INFERRED	write pointer clearing the 0x10 detail bytes
+local	_NewSymbol	iVar4	bytesLeft	INFERRED	countdown of detail bytes still to clear
+local	_lAddToTree	param_1	treeRoot	CONFIRMED	address of the tree root pointer of the scope symbol tree (scope+0x14)
+local	_lAddToTree	param_2	newSymbol	CONFIRMED	Symbol being inserted
+local	_lAddToTree	puVar1	atomTableSlot	CONFIRMED	PTR__atable: address of the global atom table pointer
+local	_lAddToTree	piVar5	node	CONFIRMED	tree node being compared against the new symbol
+local	_lAddToTree	piVar2	child	CONFIRMED	node->left (+0) or node->right (+4) child examined next
+local	_lAddToTree	iVar4	nodeReversedAtom	INFERRED	high word of the _GetReversedAtom result for node's name
+local	_lAddToTree	in_r5	scratchR5	UNKNOWN	register leftover forwarded to _CPPErrorToInfoLog
+local	_lAddToTree	in_r6	scratchR6	UNKNOWN	register leftover forwarded to _CPPErrorToInfoLog
+local	_lAddToTree	in_r7	scratchR7	UNKNOWN	register leftover forwarded to _CPPErrorToInfoLog
+local	_lAddToTree	in_r8	scratchR8	UNKNOWN	register leftover forwarded to _CPPErrorToInfoLog
+local	_lAddToTree	in_r9	scratchR9	UNKNOWN	register leftover forwarded to _CPPErrorToInfoLog
+local	_AddSymbol	param_1	loc	INFERRED	source location passed to _NewSymbol
+local	_AddSymbol	param_2	scope	CONFIRMED	target Scope (0 = _CurrentScope)
+local	_AddSymbol	param_3	name	CONFIRMED	name atom
+local	_AddSymbol	param_4	kind	INFERRED	symbol kind
+local	_LookUpLocalSymbol	param_1	scope	CONFIRMED	Scope to search (0 = _CurrentScope)
+local	_LookUpLocalSymbol	param_2	name	CONFIRMED	name atom looked up
+local	_LookUpLocalSymbol	puVar1	atomTableSlot	CONFIRMED	PTR__atable: address of the global atom table pointer
+local	_LookUpLocalSymbol	piVar4	symbol	CONFIRMED	tree node being compared; the Symbol found on return
+local	_LookUpSymbol	param_1	scope	CONFIRMED	Scope the search currently looks at (0 = _CurrentScope)
+local	_LookUpSymbol	param_2	name	CONFIRMED	name atom looked up
+use	_LookUpSymbol	iVar1	nextScope	CONFIRMED	scope to examine next: _CurrentScope, then scope->parent (+8)	^\s*iVar1\ =\ _CurrentScope;$@1	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)_LookUpLocalSymbol\)\(param_1,param_2\);$	all	none
+use	_LookUpSymbol	iVar1	symbol	CONFIRMED	result of _LookUpLocalSymbol in this scope	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)_LookUpLocalSymbol\)\(param_1,param_2\);$@1	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 8\);$	all	none
+use	_LookUpSymbol	iVar1	nextScope	CONFIRMED	scope to examine next: _CurrentScope, then scope->parent (+8)	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 8\);$@1	^\s*\}$	all	none
+use	_LookUpSymbol	iVar1	symbol	CONFIRMED	Symbol found, returned	^\s*return\ iVar1;$@1	^\s*\}$	all	none
+local	_idstr	param_1	srcCursor	CONFIRMED	read pointer advancing over the source string
+local	_idstr	param_2	pool	CONFIRMED	pool for the copy (0 = malloc)
+local	_idstr	bVar1	ch	CONFIRMED	source character under the cursor
+local	_idstr	puVar2	runeLocale	INFERRED	PTR_DAT: ctype table (_DefaultRuneLocale) indexed by character, flag word at +0x34
+local	_idstr	pbVar4	copy	CONFIRMED	allocated copy returned
+local	_idstr	pbVar6	dstCursor	CONFIRMED	write pointer into the copy
+use	_idstr	uVar5	charCode	CONFIRMED	signed character value used to index the ctype table / call ___maskrune	^\s*uVar5\ =\ \(uint\)\(char\)bVar1;$@1	^\s*uVar5\ =\ \-\(uint\)\(\*\(uint\ \*\)\(puVar2\ \+\ uVar5\ \*\ 4\ \+\ 0x34\)\ \&\ 0x500\)\ >>\ 0x1f;$	all	rhs
+use	_idstr	uVar5	isAlnum	CONFIRMED	nonzero when the character matches ctype mask 0x500 (alpha or digit)	^\s*uVar5\ =\ \-\(uint\)\(\*\(uint\ \*\)\(puVar2\ \+\ uVar5\ \*\ 4\ \+\ 0x34\)\ \&\ 0x500\)\ >>\ 0x1f;$@1	^\s*iVar3\ =\ ___maskrune\(uVar5,0x500\);$	lhs	none
+use	_idstr	uVar5	charCode	CONFIRMED	signed character value used to index the ctype table / call ___maskrune	^\s*iVar3\ =\ ___maskrune\(uVar5,0x500\);$@1	^\s*uVar5\ =\ \(uint\)\(iVar3\ !=\ 0\);$	all	none
+use	_idstr	uVar5	isAlnum	CONFIRMED	nonzero when the character matches ctype mask 0x500 (alpha or digit)	^\s*uVar5\ =\ \(uint\)\(iVar3\ !=\ 0\);$@1		all	none
+local	_lNewBlock	param_1	ts	CONFIRMED	TokenStream (+8 head block, +0xc current block) the block is appended to
+local	_lNewBlock	param_2	pool	CONFIRMED	pool for the 0x114-byte block (0 = malloc)
+local	_lNewBlock	puVar1	block	CONFIRMED	new TokenBlock: +0 next, +4 read index, +8 byte count, +0xc capacity (0x100), +0x10 data pointer (inline at +0x14)
+local	_lAddByte	param_1	ts	CONFIRMED	TokenStream being written
+local	_lAddByte	param_2	byteValue	CONFIRMED	byte stored into the current block
+local	_lAddByte	iVar2	block	CONFIRMED	current TokenBlock (ts+0xc), replaced by a fresh block when full
+local	_lAddByte	iVar1	writeIndex	CONFIRMED	block byte count (+8): index the byte is stored at
+local	_lReadByte	param_1	ts	CONFIRMED	TokenStream being read
+local	_lReadByte	piVar3	block	CONFIRMED	current TokenBlock (ts+0xc), advanced to the next block when exhausted
+local	_lReadByte	bVar1	noBlock	CONFIRMED	block pointer is null
+local	_lReadByte	uVar2	byteValue	CONFIRMED	byte read, or -1 at end of stream
+local	_NewTokenStream	param_1	name	CONFIRMED	stream name, copied with _idstr into ts+4
+local	_NewTokenStream	param_2	pool	CONFIRMED	pool for the stream (0 = malloc)
+local	_NewTokenStream	puVar1	ts	CONFIRMED	new 0x10-byte TokenStream: +0 next, +4 name, +8 head block, +0xc current block
+local	_DeleteTokenStream	param_1	ts	CONFIRMED	TokenStream being freed
+local	_DeleteTokenStream	piVar1	block	CONFIRMED	block being freed
+local	_DeleteTokenStream	iVar2	nextBlock	CONFIRMED	next block saved before freeing
+local	_RecordToken	param_1	ts	CONFIRMED	TokenStream the token is appended to
+local	_RecordToken	param_2	token	CONFIRMED	token code being recorded (identifier 0x10e, float 0x10b, int 0x10f, string 0x116, ...)
+local	_RecordToken	param_3	yylvalpp	CONFIRMED	token value record: +0 int value, +8 atom, +0xc text
+local	_RecordToken	uVar2	tokenByte	CONFIRMED	one-byte encoding of the token (token & 0x7f, or (token & 0x7f) - 0x80 for tokens above 0x100)
+local	_RecordToken	bVar1	ch	CONFIRMED	character of the text being appended
+local	_RecordToken	pbVar3	textCursor	CONFIRMED	read pointer over the atom string or numeric text being appended
+local	_RewindTokenStream	param_1	ts	CONFIRMED	TokenStream whose current block is reset to the head
+local	_RewindTokenStream	iVar1	head	CONFIRMED	first TokenBlock (ts+8)
+local	_ReadToken	param_1	ts	CONFIRMED	TokenStream being read
+local	_ReadToken	param_2	yylvalpp	CONFIRMED	token value record filled: +0 int value, +4 float, +8 atom, +0xc text
+local	_ReadToken	iVar2	token	CONFIRMED	token code decoded from the first byte (bytes above 0x7f get +0x80)
+local	_ReadToken	iVar4	ch	CONFIRMED	character read from the stream while collecting a lexeme
+local	_ReadToken	uVar1	charOffset	INFERRED	character minus the range base being tested (0x61 lower case, 0x30 digit)
+local	_ReadToken	pcVar5	stringCursor	CONFIRMED	write pointer into the string literal buffer
+local	_ReadToken	local_2c0	lexemeBuf	CONFIRMED	char[144]: identifier / number text, NUL terminated, then copied into the value record
+local	_ReadToken	local_230	stringLiteralBuf	CONFIRMED	char[532]: string literal text for token 0x116
+use	_ReadToken	uVar3	assertLine	CONFIRMED	source line number (0x140, 0x158, 0x168) passed to the failed-assertion message for tokens.c	^\s*uVar3\ =\ 0x140;$@1	^\s*\}$	all	none
+use	_ReadToken	uVar3	assertLine	CONFIRMED	source line number (0x140, 0x158, 0x168) passed to the failed-assertion message for tokens.c	^\s*uVar3\ =\ 0x158;$@1	^\s*goto\ LAB_97b8aac8;$	all	none
+use	_ReadToken	uVar3	assertLine	CONFIRMED	source line number (0x140, 0x158, 0x168) passed to the failed-assertion message for tokens.c	^\s*uVar3\ =\ 0x168;$@1	^\s*goto\ LAB_97b8aac8;$	all	none
+use	_ReadToken	uVar3	ival	CONFIRMED	integer value stored at yylvalpp[0] (byte read for token 0x28, or _atoi of the digits)	^\s*uVar3\ =\ \(\(int\ \(\*\)\(\)\)_lReadByte\)\(param_1\);$@3	^\s*goto\ LAB_97b8aaf0;$	all	none
+use	_ReadToken	uVar3	ival	CONFIRMED	integer value stored at yylvalpp[0] (byte read for token 0x28, or _atoi of the digits)	^\s*uVar3\ =\ _atoi\(param_2\ \+\ 3\);$@1	^\s*\}$	all	none
+local	_scan_token	param_1	in	CONFIRMED	TokenInputSrc: +0 prev input, +0x14 line, +0x18 token stream, +0x1c final callback
+local	_scan_token	param_2	yylvalpp	CONFIRMED	token value record passed to _ReadToken
+local	_scan_token	param_3	scratchR5	UNKNOWN	register leftover forwarded to the previous input source scan call
+local	_scan_token	param_4	scratchR6	UNKNOWN	register leftover forwarded to the previous input source scan call
+local	_scan_token	param_5	scratchR7	UNKNOWN	register leftover forwarded to the previous input source scan call
+local	_scan_token	param_6	scratchR8	UNKNOWN	register leftover forwarded to the previous input source scan call
+local	_scan_token	puVar1	cppGlobalSlot	CONFIRMED	PTR__cpp: address of the global cpp state pointer
+local	_scan_token	pcVar3	finalFn	CONFIRMED	in->final callback run when the stream is exhausted
+use	_scan_token	iVar2	finalResult	CONFIRMED	result of the final callback; 0 ends the scan with -1	^\s*if\ \(\(pcVar3\ !=\ \(code\ \*\)0x0\)\ \&\&\ \(iVar2\ =\ \(\*pcVar3\)\(\*\(undefined4\ \*\)puVar1\),\ iVar2\ ==\ 0\)\)\ \{$@1	^\s*iVar2\ =\ \*\(int\ \*\)\(\*\(int\ \*\)PTR__cpp_a7b7c0a4\ \+\ 0x20\);$	all	none
+use	_scan_token	iVar2	inputSrc	CONFIRMED	cpp current input source after popping this one	^\s*iVar2\ =\ \*\(int\ \*\)\(\*\(int\ \*\)PTR__cpp_a7b7c0a4\ \+\ 0x20\);$@1	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(iVar2\ \+\ 4\)\)$	all	none
+use	_scan_token	iVar2	inputSrc	CONFIRMED	cpp current input source after popping this one	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(iVar2\ \+\ 4\)\)$@1	^\s*return\ iVar2;$	rhs	all
+use	_scan_token	iVar2	token	CONFIRMED	token code from _ReadToken, or from the previous input source after the stream ended	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(iVar2\ \+\ 4\)\)$@1	^\s*\(iVar2,param_2,param_3,param_4,param_5,param_6,\*\(int\ \*\)PTR__cpp_a7b7c0a4\);$	lhs	none
+use	_scan_token	iVar2	token	CONFIRMED	token code from _ReadToken, or from the previous input source after the stream ended	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)_ReadToken\)\(param_1\[6\],param_2\);$@1		all	none
+local	_ReadFromTokenStream	param_1	ts	CONFIRMED	TokenStream to read from (rewound)
+local	_ReadFromTokenStream	param_2	name	CONFIRMED	input source name stored at +0x10
+local	_ReadFromTokenStream	param_3	finalFn	CONFIRMED	callback stored at +0x1c, run when the stream ends
+local	_ReadFromTokenStream	puVar2	cppGlobalSlot	CONFIRMED	PTR__cpp: address of the global cpp state pointer
+local	_ReadFromTokenStream	iVar3	cppState	CONFIRMED	*PTR__cpp
+local	_ReadFromTokenStream	uVar1	scanFn	CONFIRMED	scan callback stored at +4 (_scan_token)
+local	_ReadFromTokenStream	uVar5	prevInput	CONFIRMED	previous cpp input source (cpp+0x20), stored at +0
+local	FUN_97b8acb4	param_1	in	CONFIRMED	unget InputSrc: +6 token, +7 saved token value record (0x90 bytes)
+local	FUN_97b8acb4	param_2	yylvalpp	CONFIRMED	token value record the saved copy is written to
+local	FUN_97b8acb4	uVar1	token	CONFIRMED	the pushed-back token code returned
+local	_UngetToken	param_1	token	CONFIRMED	token code pushed back
+local	_UngetToken	param_2	yylvalpp	CONFIRMED	token value record copied into the new input source (0x90 bytes)
+local	_UngetToken	iVar2	cppState	CONFIRMED	*PTR__cpp
+local	_DumpTokenStream	param_1	unusedArg1	UNKNOWN	never read
+local	_DumpTokenStream	param_2	ts	CONFIRMED	TokenStream dumped
+local	_DumpTokenStream	param_3	yylvalpp	CONFIRMED	token value record filled by _ReadToken
+local	_DumpTokenStream	pcVar2	format	CONFIRMED	printf format chosen per token kind ("%c", "%s ", quoted string)
+local	_DumpTokenStream	iVar1	tokenOrFormatArg	INFERRED	token code from _ReadToken, which the identifier and string cases replace with an atom string for _sprintf; the %c case prints it unchanged
