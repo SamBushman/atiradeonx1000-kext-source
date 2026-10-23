@@ -64,16 +64,16 @@ int TIntermBinary__promote(this, infoSink, param_3, param_4, param_5, param_6)
   undefined4 param_5;
   undefined4 param_6;
 {
-  bool bVar1;
+  bool operandTypesMatch;
   undefined *atomicStore;
   undefined **ppuVar3;
   undefined4 uVar4;
   undefined *oldRefCount;
-  uint uVar6;
-  int iVar7;
-  uint uVar8;
-  uint uVar9;
-  uint uVar10;
+  uint resultNominalSize;
+  int queryResultOrOperator;
+  uint leftBasicType;
+  uint leftNominalSize;
+  uint leftIsMatrix;
   int iVar11;
   undefined4 a1;
   undefined4 extraout_r4;
@@ -104,24 +104,24 @@ int TIntermBinary__promote(this, infoSink, param_3, param_4, param_5, param_6)
   unsigned char aaStack_50 [4];
   uint local_4c;
   
-  uVar6 = (**(code **)(**(int **)(this + 0x34) + 0x48))
+  resultNominalSize = (**(code **)(**(int **)(this + 0x34) + 0x48))
                     (*(int **)(this + 0x34),infoSink,param_3,param_4,param_5,param_6);
-  iVar7 = (**(code **)(**(int **)(this + 0x38) + 0x48))(*(int **)(this + 0x38));
-  if ((int)uVar6 < iVar7) {
-    uVar6 = (**(code **)(**(int **)(this + 0x38) + 0x48))(*(int **)(this + 0x38));
+  queryResultOrOperator = (**(code **)(**(int **)(this + 0x38) + 0x48))(*(int **)(this + 0x38));
+  if ((int)resultNominalSize < queryResultOrOperator) {
+    resultNominalSize = (**(code **)(**(int **)(this + 0x38) + 0x48))(*(int **)(this + 0x38));
   }
-  uVar8 = (**(code **)(**(int **)(this + 0x34) + 0x40))(*(int **)(this + 0x34));
-  iVar7 = (**(code **)(**(int **)(this + 0x34) + 0x54))(*(int **)(this + 0x34));
-  if (iVar7 != 0) {
+  leftBasicType = (**(code **)(**(int **)(this + 0x34) + 0x40))(*(int **)(this + 0x34));
+  queryResultOrOperator = (**(code **)(**(int **)(this + 0x34) + 0x54))(*(int **)(this + 0x34));
+  if (queryResultOrOperator != 0) {
     return 0;
   }
   stackTypeArraySize = (**(code **)(**(int **)(this + 0x38) + 0x54))(*(int **)(this + 0x38));
   if (stackTypeArraySize != 0) {
     return 0;
   }
-  uVar9 = (**(code **)(**(int **)(this + 0x34) + 0x48))(*(int **)(this + 0x34));
-  uVar10 = (**(code **)(**(int **)(this + 0x34) + 0x50))(*(int **)(this + 0x34));
-  stackTypeBits = (uVar10 & 1) << 10 | (uVar9 & 0xff) << 0xb | (uVar8 & 0x3f) << 0x13 | stackTypeBits & 0x1ff;
+  leftNominalSize = (**(code **)(**(int **)(this + 0x34) + 0x48))(*(int **)(this + 0x34));
+  leftIsMatrix = (**(code **)(**(int **)(this + 0x34) + 0x50))(*(int **)(this + 0x34));
+  stackTypeBits = (leftIsMatrix & 1) << 10 | (leftNominalSize & 0xff) << 0xb | (leftBasicType & 0x3f) << 0x13 | stackTypeBits & 0x1ff;
   stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   stackTypeStructure = stackTypeArraySize;
   stackTypeFieldName = stackTypeArraySize;
@@ -132,40 +132,40 @@ int TIntermBinary__promote(this, infoSink, param_3, param_4, param_5, param_6)
   stackTypeWord20 = stackTypeArraySize;
   (**(code **)(*(int *)this + 0x34))(this,&stackType);
   stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-  if (uVar6 == 1) {
-    iVar7 = *(int *)(this + 0x30);
-    if (iVar7 < 0x25) {
-      if (0x20 < iVar7) {
+  if (resultNominalSize == 1) {
+    queryResultOrOperator = *(int *)(this + 0x30);
+    if (queryResultOrOperator < 0x25) {
+      if (0x20 < queryResultOrOperator) {
 LAB_97b90770:
-        iVar7 = *(int *)this;
+        queryResultOrOperator = *(int *)this;
         stackTypeBits = stackTypeBits & 0x1801ff;
         goto LAB_97b90850;
       }
-      if (0x16 < iVar7) {
-        if (iVar7 < 0x1d) {
-          iVar7 = (**(code **)(**(int **)(this + 0x34) + 0x40))(*(int **)(this + 0x34));
-          if (iVar7 != 2) {
+      if (0x16 < queryResultOrOperator) {
+        if (queryResultOrOperator < 0x1d) {
+          queryResultOrOperator = (**(code **)(**(int **)(this + 0x34) + 0x40))(*(int **)(this + 0x34));
+          if (queryResultOrOperator != 2) {
             return 0;
           }
-          iVar7 = (**(code **)(**(int **)(this + 0x38) + 0x40))(*(int **)(this + 0x38));
-          bVar1 = iVar7 == 2;
+          queryResultOrOperator = (**(code **)(**(int **)(this + 0x38) + 0x40))(*(int **)(this + 0x38));
+          operandTypesMatch = queryResultOrOperator == 2;
           goto LAB_97b90940;
         }
-        if (iVar7 < 0x1f) goto LAB_97b90770;
+        if (queryResultOrOperator < 0x1f) goto LAB_97b90770;
       }
     }
     else {
-      if (iVar7 == 0x2c) {
+      if (queryResultOrOperator == 0x2c) {
 LAB_97b907c4:
-        iVar7 = (**(code **)(**(int **)(this + 0x34) + 0x40))(*(int **)(this + 0x34),a1);
-        if (iVar7 != 3) {
+        queryResultOrOperator = (**(code **)(**(int **)(this + 0x34) + 0x40))(*(int **)(this + 0x34),a1);
+        if (queryResultOrOperator != 3) {
           return 0;
         }
-        iVar7 = (**(code **)(**(int **)(this + 0x38) + 0x40))(*(int **)(this + 0x38));
-        if (iVar7 != 3) {
+        queryResultOrOperator = (**(code **)(**(int **)(this + 0x38) + 0x40))(*(int **)(this + 0x38));
+        if (queryResultOrOperator != 3) {
           return 0;
         }
-        iVar7 = *(int *)this;
+        queryResultOrOperator = *(int *)this;
         stackTypeBits = stackTypeBits & 0x9ff;
 LAB_97b90850:
         stackTypeBits = stackTypeBits | 0x180800;
@@ -178,54 +178,54 @@ LAB_97b90850:
         stackTypeStructure = 0;
         stackTypeArraySize = 0;
         stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-        (**(code **)(iVar7 + 0x34))(this,&stackType,param_3,param_4,param_5,param_6,iVar7);
+        (**(code **)(queryResultOrOperator + 0x34))(this,&stackType,param_3,param_4,param_5,param_6,queryResultOrOperator);
         return 1;
       }
-      if (iVar7 < 0x2d) {
-        if (iVar7 == 0x2a) goto LAB_97b907c4;
+      if (queryResultOrOperator < 0x2d) {
+        if (queryResultOrOperator == 0x2a) goto LAB_97b907c4;
       }
-      else if (iVar7 - 0x7fU < 6) {
-        iVar7 = (**(code **)(**(int **)(this + 0x34) + 0x40))(*(int **)(this + 0x34));
-        if (iVar7 != 2) {
+      else if (queryResultOrOperator - 0x7fU < 6) {
+        queryResultOrOperator = (**(code **)(**(int **)(this + 0x34) + 0x40))(*(int **)(this + 0x34));
+        if (queryResultOrOperator != 2) {
           return 0;
         }
-        iVar7 = (**(code **)(**(int **)(this + 0x38) + 0x40))(*(int **)(this + 0x38));
-        if (iVar7 != 2) {
+        queryResultOrOperator = (**(code **)(**(int **)(this + 0x38) + 0x40))(*(int **)(this + 0x38));
+        if (queryResultOrOperator != 2) {
           return 0;
         }
       }
     }
-    iVar7 = (**(code **)(**(int **)(this + 0x34) + 0x40))(*(int **)(this + 0x34));
+    queryResultOrOperator = (**(code **)(**(int **)(this + 0x34) + 0x40))(*(int **)(this + 0x34));
     iVar11 = (**(code **)(**(int **)(this + 0x38) + 0x40))(*(int **)(this + 0x38));
-    if (iVar7 != iVar11) {
+    if (queryResultOrOperator != iVar11) {
       return 0;
     }
-    iVar7 = (**(code **)(**(int **)(this + 0x34) + 0x50))(*(int **)(this + 0x34));
+    queryResultOrOperator = (**(code **)(**(int **)(this + 0x34) + 0x50))(*(int **)(this + 0x34));
     iVar11 = (**(code **)(**(int **)(this + 0x38) + 0x50))(*(int **)(this + 0x38));
-    bVar1 = iVar7 == iVar11;
+    operandTypesMatch = queryResultOrOperator == iVar11;
 LAB_97b90940:
-    if (!bVar1) {
+    if (!operandTypesMatch) {
       return 0;
     }
     return 1;
   }
-  uVar9 = (**(code **)(**(int **)(this + 0x34) + 0x48))(*(int **)(this + 0x34));
-  if ((uVar9 != uVar6) &&
-     (iVar7 = (**(code **)(**(int **)(this + 0x34) + 0x48))(*(int **)(this + 0x34)), iVar7 != 1)) {
+  leftNominalSize = (**(code **)(**(int **)(this + 0x34) + 0x48))(*(int **)(this + 0x34));
+  if ((leftNominalSize != resultNominalSize) &&
+     (queryResultOrOperator = (**(code **)(**(int **)(this + 0x34) + 0x48))(*(int **)(this + 0x34)), queryResultOrOperator != 1)) {
     return 0;
   }
-  uVar9 = (**(code **)(**(int **)(this + 0x38) + 0x48))(*(int **)(this + 0x38));
+  leftNominalSize = (**(code **)(**(int **)(this + 0x38) + 0x48))(*(int **)(this + 0x38));
   uVar4 = extraout_r4;
-  if ((uVar9 != uVar6) &&
-     (iVar7 = (**(code **)(**(int **)(this + 0x38) + 0x48))(*(int **)(this + 0x38)),
-     uVar4 = extraout_r4_00, iVar7 != 1)) {
+  if ((leftNominalSize != resultNominalSize) &&
+     (queryResultOrOperator = (**(code **)(**(int **)(this + 0x38) + 0x48))(*(int **)(this + 0x38)),
+     uVar4 = extraout_r4_00, queryResultOrOperator != 1)) {
     return 0;
   }
-  uVar9 = *(int *)(this + 0x30) - 0x13;
-  if (0x6c < uVar9) {
+  leftNominalSize = *(int *)(this + 0x30) - 0x13;
+  if (0x6c < leftNominalSize) {
     return 0;
   }
-  iVar7 = uVar9 * 4;
+  queryResultOrOperator = leftNominalSize * 4;
   switch(*(int *)(this + 0x30)) {
   case 0x13:
   case 0x14:
@@ -238,29 +238,29 @@ LAB_97b90940:
     goto switchD_97b909e0_caseD_13;
   case 0x15:
     iVar11 = (**(code **)(**(int **)(this + 0x34) + 0x50))
-                       (*(int **)(this + 0x34),uVar4,param_3,param_4,param_5,param_6,iVar7);
+                       (*(int **)(this + 0x34),uVar4,param_3,param_4,param_5,param_6,queryResultOrOperator);
     uVar4 = extraout_r4_01;
     if ((iVar11 == 0) &&
        (iVar11 = (**(code **)(**(int **)(this + 0x38) + 0x50))(*(int **)(this + 0x38)),
        uVar4 = extraout_r4_02, iVar11 != 0)) {
-      iVar7 = (**(code **)(**(int **)(this + 0x34) + 0x58))(*(int **)(this + 0x34));
-      if (iVar7 != 0) {
+      queryResultOrOperator = (**(code **)(**(int **)(this + 0x34) + 0x58))(*(int **)(this + 0x34));
+      if (queryResultOrOperator != 0) {
         uVar4 = 0x27;
         goto LAB_97b9100c;
       }
-      stackTypeBits = (uVar6 & 0xff) << 0xb | (uVar8 & 0x3f) << 0x13 | stackTypeBits & 0x5ff | 0x400;
-      iVar7 = *(int *)this;
+      stackTypeBits = (resultNominalSize & 0xff) << 0xb | (leftBasicType & 0x3f) << 0x13 | stackTypeBits & 0x5ff | 0x400;
+      queryResultOrOperator = *(int *)this;
       *(undefined4 *)(this + 0x30) = 0x29;
     }
     else {
       iVar11 = (**(code **)(**(int **)(this + 0x34) + 0x50))
-                         (*(int **)(this + 0x34),uVar4,param_3,param_4,param_5,param_6,iVar7);
+                         (*(int **)(this + 0x34),uVar4,param_3,param_4,param_5,param_6,queryResultOrOperator);
       uVar4 = extraout_r4_03;
       if ((iVar11 == 0) ||
          (iVar11 = (**(code **)(**(int **)(this + 0x38) + 0x50))(*(int **)(this + 0x38)),
          uVar4 = extraout_r4_04, iVar11 != 0)) {
         iVar11 = (**(code **)(**(int **)(this + 0x34) + 0x50))
-                           (*(int **)(this + 0x34),uVar4,param_3,param_4,param_5,param_6,iVar7);
+                           (*(int **)(this + 0x34),uVar4,param_3,param_4,param_5,param_6,queryResultOrOperator);
         if (iVar11 != 0) {
           iVar11 = (**(code **)(**(int **)(this + 0x38) + 0x50))(*(int **)(this + 0x38));
           uVar4 = 0x56;
@@ -271,17 +271,17 @@ LAB_97b90940:
         if ((iVar11 != 0) ||
            (iVar11 = (**(code **)(**(int **)(this + 0x38) + 0x50))(*(int **)(this + 0x38)),
            uVar4 = extraout_r4_06, iVar11 != 0)) {
-          uVar6 = (*(code *)**(undefined4 **)this)(this,uVar4,param_3,param_4,param_5,param_6,iVar7)
+          resultNominalSize = (*(code *)**(undefined4 **)this)(this,uVar4,param_3,param_4,param_5,param_6,queryResultOrOperator)
           ;
                     
           __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
-          uVar8 = uVar6 & 0xffff;
-          cr0Flags = (uVar8 == 0) << 1;
-          if (uVar8 == 0) {
-            _sprintf(local_70,"%d:? ",(int)uVar6 >> 0x10);
+          leftBasicType = resultNominalSize & 0xffff;
+          cr0Flags = (leftBasicType == 0) << 1;
+          if (leftBasicType == 0) {
+            _sprintf(local_70,"%d:? ",(int)resultNominalSize >> 0x10);
           }
           else {
-            _sprintf(local_70,"%d:%d",(int)uVar6 >> 0x10,uVar8);
+            _sprintf(local_70,"%d:%d",(int)resultNominalSize >> 0x10,leftBasicType);
           }
           __ZNSsC1EPKcRKSaIcE(&stackType,local_70,(unsigned char *)&stackTypeTypeName);
           *(undefined *)((int)stackType + (int)stackType[-3]) = *PTR__S_terminal_a7b7c0b8;
@@ -304,28 +304,28 @@ code_r0x97b91274:
           __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
           return 0;
         }
-        iVar7 = (**(code **)(**(int **)(this + 0x34) + 0x58))(*(int **)(this + 0x34));
-        if (((iVar7 != 0) &&
-            (iVar7 = (**(code **)(**(int **)(this + 0x38) + 0x58))(*(int **)(this + 0x38)),
-            iVar7 != 0)) ||
-           ((iVar7 = (**(code **)(**(int **)(this + 0x34) + 0x58))(*(int **)(this + 0x34)),
-            iVar7 == 0 &&
-            (iVar7 = (**(code **)(**(int **)(this + 0x38) + 0x58))(*(int **)(this + 0x38)),
-            iVar7 == 0)))) goto LAB_97b91520;
-        iVar7 = *(int *)this;
-        uVar8 = (uVar8 & 0x3f) << 0x13 | stackTypeBits & 0x7ffff;
+        queryResultOrOperator = (**(code **)(**(int **)(this + 0x34) + 0x58))(*(int **)(this + 0x34));
+        if (((queryResultOrOperator != 0) &&
+            (queryResultOrOperator = (**(code **)(**(int **)(this + 0x38) + 0x58))(*(int **)(this + 0x38)),
+            queryResultOrOperator != 0)) ||
+           ((queryResultOrOperator = (**(code **)(**(int **)(this + 0x34) + 0x58))(*(int **)(this + 0x34)),
+            queryResultOrOperator == 0 &&
+            (queryResultOrOperator = (**(code **)(**(int **)(this + 0x38) + 0x58))(*(int **)(this + 0x38)),
+            queryResultOrOperator == 0)))) goto LAB_97b91520;
+        queryResultOrOperator = *(int *)this;
+        leftBasicType = (leftBasicType & 0x3f) << 0x13 | stackTypeBits & 0x7ffff;
         uVar4 = 0x26;
       }
       else {
-        iVar7 = (**(code **)(**(int **)(this + 0x38) + 0x58))(*(int **)(this + 0x38));
+        queryResultOrOperator = (**(code **)(**(int **)(this + 0x38) + 0x58))(*(int **)(this + 0x38));
         uVar4 = 0x29;
-        if (iVar7 == 0) goto LAB_97b9100c;
-        iVar7 = *(int *)this;
-        uVar8 = (uVar8 & 0x3f) << 0x13 | stackTypeBits & 0x7ffff;
+        if (queryResultOrOperator == 0) goto LAB_97b9100c;
+        queryResultOrOperator = *(int *)this;
+        leftBasicType = (leftBasicType & 0x3f) << 0x13 | stackTypeBits & 0x7ffff;
         uVar4 = 0x28;
       }
 LAB_97b910f8:
-      stackTypeBits = (uVar6 & 0xff) << 0xb | uVar8 & 0xfff801ff;
+      stackTypeBits = (resultNominalSize & 0xff) << 0xb | leftBasicType & 0xfff801ff;
       *(undefined4 *)(this + 0x30) = uVar4;
     }
     goto LAB_97b914fc;
@@ -337,28 +337,28 @@ LAB_97b910f8:
   case 0x22:
   case 0x23:
   case 0x24:
-    iVar7 = (**(code **)(**(int **)(this + 0x34) + 0x50))
-                      (*(int **)(this + 0x34),uVar4,param_3,param_4,param_5,param_6,iVar7);
-    if ((iVar7 != 0) &&
-       (iVar7 = (**(code **)(**(int **)(this + 0x38) + 0x58))(*(int **)(this + 0x38)), iVar7 != 0))
+    queryResultOrOperator = (**(code **)(**(int **)(this + 0x34) + 0x50))
+                      (*(int **)(this + 0x34),uVar4,param_3,param_4,param_5,param_6,queryResultOrOperator);
+    if ((queryResultOrOperator != 0) &&
+       (queryResultOrOperator = (**(code **)(**(int **)(this + 0x38) + 0x58))(*(int **)(this + 0x38)), queryResultOrOperator != 0))
     {
       return 0;
     }
-    iVar7 = (**(code **)(**(int **)(this + 0x34) + 0x58))(*(int **)(this + 0x34));
-    if ((iVar7 != 0) &&
-       (iVar7 = (**(code **)(**(int **)(this + 0x38) + 0x50))(*(int **)(this + 0x38)), iVar7 != 0))
+    queryResultOrOperator = (**(code **)(**(int **)(this + 0x34) + 0x58))(*(int **)(this + 0x34));
+    if ((queryResultOrOperator != 0) &&
+       (queryResultOrOperator = (**(code **)(**(int **)(this + 0x38) + 0x50))(*(int **)(this + 0x38)), queryResultOrOperator != 0))
     {
       return 0;
     }
-    iVar7 = (**(code **)(**(int **)(this + 0x34) + 0x40))(*(int **)(this + 0x34));
+    queryResultOrOperator = (**(code **)(**(int **)(this + 0x34) + 0x40))(*(int **)(this + 0x34));
     iVar11 = (**(code **)(**(int **)(this + 0x38) + 0x40))(*(int **)(this + 0x38));
-    if (iVar7 != iVar11) {
+    if (queryResultOrOperator != iVar11) {
       return 0;
     }
-    iVar7 = *(int *)this;
+    queryResultOrOperator = *(int *)this;
     stackTypeBits = stackTypeBits & 0x1801ff | 0x180800;
 LAB_97b914fc:
-    pcVar12 = *(code **)(iVar7 + 0x34);
+    pcVar12 = *(code **)(queryResultOrOperator + 0x34);
     goto LAB_97b91508;
   case 0x76:
     break;
@@ -367,8 +367,8 @@ LAB_97b914fc:
     if ((iVar11 == 0) &&
        (iVar11 = (**(code **)(**(int **)(this + 0x38) + 0x50))(*(int **)(this + 0x38)), iVar11 != 0)
        ) {
-      iVar7 = (**(code **)(**(int **)(this + 0x34) + 0x58))(*(int **)(this + 0x34));
-      if (iVar7 == 0) {
+      queryResultOrOperator = (**(code **)(**(int **)(this + 0x34) + 0x58))(*(int **)(this + 0x34));
+      if (queryResultOrOperator == 0) {
         return 0;
       }
       uVar4 = 0x7a;
@@ -387,17 +387,17 @@ LAB_97b914fc:
           if ((iVar11 != 0) ||
              (iVar11 = (**(code **)(**(int **)(this + 0x38) + 0x50))(*(int **)(this + 0x38)),
              uVar4 = extraout_r4_08, iVar11 != 0)) {
-            uVar6 = (*(code *)**(undefined4 **)this)
-                              (this,uVar4,param_3,param_4,param_5,param_6,iVar7);
+            resultNominalSize = (*(code *)**(undefined4 **)this)
+                              (this,uVar4,param_3,param_4,param_5,param_6,queryResultOrOperator);
                     
             __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
-            uVar8 = uVar6 & 0xffff;
-            cr0Flags = (uVar8 == 0) << 1;
-            if (uVar8 == 0) {
-              _sprintf((char *)&stackTypeTypeName,"%d:? ",(int)uVar6 >> 0x10);
+            leftBasicType = resultNominalSize & 0xffff;
+            cr0Flags = (leftBasicType == 0) << 1;
+            if (leftBasicType == 0) {
+              _sprintf((char *)&stackTypeTypeName,"%d:? ",(int)resultNominalSize >> 0x10);
             }
             else {
-              _sprintf((char *)&stackTypeTypeName,"%d:%d",(int)uVar6 >> 0x10,uVar8);
+              _sprintf((char *)&stackTypeTypeName,"%d:%d",(int)resultNominalSize >> 0x10,leftBasicType);
             }
             __ZNSsC1EPKcRKSaIcE(&stackType,(char *)&stackTypeTypeName,aaStack_50);
             *(undefined *)((int)stackType + (int)stackType[-3]) = *PTR__S_terminal_a7b7c0b8;
@@ -417,28 +417,28 @@ LAB_97b914fc:
             __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
             goto code_r0x97b91274;
           }
-          iVar7 = (**(code **)(**(int **)(this + 0x34) + 0x58))(*(int **)(this + 0x34));
-          if (((iVar7 != 0) &&
-              (iVar7 = (**(code **)(**(int **)(this + 0x38) + 0x58))(*(int **)(this + 0x38)),
-              iVar7 != 0)) ||
-             ((iVar7 = (**(code **)(**(int **)(this + 0x34) + 0x58))(*(int **)(this + 0x34)),
-              iVar7 == 0 &&
-              (iVar7 = (**(code **)(**(int **)(this + 0x38) + 0x58))(*(int **)(this + 0x38)),
-              iVar7 == 0)))) goto LAB_97b91520;
-          iVar7 = (**(code **)(**(int **)(this + 0x34) + 0x58))(*(int **)(this + 0x34));
-          if (iVar7 == 0) {
+          queryResultOrOperator = (**(code **)(**(int **)(this + 0x34) + 0x58))(*(int **)(this + 0x34));
+          if (((queryResultOrOperator != 0) &&
+              (queryResultOrOperator = (**(code **)(**(int **)(this + 0x38) + 0x58))(*(int **)(this + 0x38)),
+              queryResultOrOperator != 0)) ||
+             ((queryResultOrOperator = (**(code **)(**(int **)(this + 0x34) + 0x58))(*(int **)(this + 0x34)),
+              queryResultOrOperator == 0 &&
+              (queryResultOrOperator = (**(code **)(**(int **)(this + 0x38) + 0x58))(*(int **)(this + 0x38)),
+              queryResultOrOperator == 0)))) goto LAB_97b91520;
+          queryResultOrOperator = (**(code **)(**(int **)(this + 0x34) + 0x58))(*(int **)(this + 0x34));
+          if (queryResultOrOperator == 0) {
             return 0;
           }
-          iVar7 = *(int *)this;
+          queryResultOrOperator = *(int *)this;
           uVar4 = 0x7b;
-          uVar8 = (uVar8 & 0x3f) << 0x13 | stackTypeBits & 0x7ffff;
+          leftBasicType = (leftBasicType & 0x3f) << 0x13 | stackTypeBits & 0x7ffff;
           goto LAB_97b910f8;
         }
         uVar4 = 0x7d;
       }
       else {
-        iVar7 = (**(code **)(**(int **)(this + 0x38) + 0x58))(*(int **)(this + 0x38));
-        if (iVar7 != 0) {
+        queryResultOrOperator = (**(code **)(**(int **)(this + 0x38) + 0x58))(*(int **)(this + 0x38));
+        if (queryResultOrOperator != 0) {
           return 0;
         }
         uVar4 = 0x7c;
@@ -448,31 +448,31 @@ LAB_97b9100c:
     *(undefined4 *)(this + 0x30) = uVar4;
     goto LAB_97b91520;
   }
-  iVar7 = (**(code **)(**(int **)(this + 0x34) + 0x48))(*(int **)(this + 0x34),uVar4);
+  queryResultOrOperator = (**(code **)(**(int **)(this + 0x34) + 0x48))(*(int **)(this + 0x34),uVar4);
   iVar11 = (**(code **)(**(int **)(this + 0x38) + 0x48))(*(int **)(this + 0x38));
-  if (iVar7 != iVar11) {
+  if (queryResultOrOperator != iVar11) {
     return 0;
   }
 switchD_97b909e0_caseD_13:
-  iVar7 = (**(code **)(**(int **)(this + 0x34) + 0x50))(*(int **)(this + 0x34));
-  if (((iVar7 == 0) ||
-      (iVar7 = (**(code **)(**(int **)(this + 0x38) + 0x58))(*(int **)(this + 0x38)), iVar7 == 0))
-     && ((iVar7 = (**(code **)(**(int **)(this + 0x34) + 0x58))(*(int **)(this + 0x34)), iVar7 == 0
-         || (iVar7 = (**(code **)(**(int **)(this + 0x38) + 0x50))(*(int **)(this + 0x38)),
-            iVar7 == 0)))) {
-    iVar7 = (**(code **)(**(int **)(this + 0x34) + 0x40))(*(int **)(this + 0x34));
+  queryResultOrOperator = (**(code **)(**(int **)(this + 0x34) + 0x50))(*(int **)(this + 0x34));
+  if (((queryResultOrOperator == 0) ||
+      (queryResultOrOperator = (**(code **)(**(int **)(this + 0x38) + 0x58))(*(int **)(this + 0x38)), queryResultOrOperator == 0))
+     && ((queryResultOrOperator = (**(code **)(**(int **)(this + 0x34) + 0x58))(*(int **)(this + 0x34)), queryResultOrOperator == 0
+         || (queryResultOrOperator = (**(code **)(**(int **)(this + 0x38) + 0x50))(*(int **)(this + 0x38)),
+            queryResultOrOperator == 0)))) {
+    queryResultOrOperator = (**(code **)(**(int **)(this + 0x34) + 0x40))(*(int **)(this + 0x34));
     iVar11 = (**(code **)(**(int **)(this + 0x38) + 0x40))(*(int **)(this + 0x38));
-    if (iVar7 == iVar11) {
+    if (queryResultOrOperator == iVar11) {
       iVar11 = 0;
-      iVar7 = (**(code **)(**(int **)(this + 0x34) + 0x50))(*(int **)(this + 0x34));
-      if ((iVar7 != 0) ||
-         (iVar7 = (**(code **)(**(int **)(this + 0x38) + 0x50))(*(int **)(this + 0x38)), iVar7 != 0)
+      queryResultOrOperator = (**(code **)(**(int **)(this + 0x34) + 0x50))(*(int **)(this + 0x34));
+      if ((queryResultOrOperator != 0) ||
+         (queryResultOrOperator = (**(code **)(**(int **)(this + 0x38) + 0x50))(*(int **)(this + 0x38)), queryResultOrOperator != 0)
          ) {
         iVar11 = 1;
       }
-      iVar7 = *(int *)this;
-      stackTypeBits = iVar11 << 10 | (uVar6 & 0xff) << 0xb | (uVar8 & 0x3f) << 0x13 | stackTypeBits & 0x1ff;
-      pcVar12 = *(code **)(iVar7 + 0x34);
+      queryResultOrOperator = *(int *)this;
+      stackTypeBits = iVar11 << 10 | (resultNominalSize & 0xff) << 0xb | (leftBasicType & 0x3f) << 0x13 | stackTypeBits & 0x1ff;
+      pcVar12 = *(code **)(queryResultOrOperator + 0x34);
 LAB_97b91508:
       stackTypeWord20 = 0;
       stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
@@ -483,18 +483,18 @@ LAB_97b91508:
       stackTypeWord14 = stackTypeWord20;
       stackTypeStructureSize = stackTypeWord20;
       stackTypeWord1c = stackTypeWord20;
-      (*pcVar12)(this,&stackType,param_3,param_4,param_5,param_6,iVar7);
+      (*pcVar12)(this,&stackType,param_3,param_4,param_5,param_6,queryResultOrOperator);
       stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
 LAB_97b91520:
-      iVar7 = *(int *)(this + 0x30);
-      if ((0x75 < iVar7) && ((iVar7 < 0x7a || (iVar7 - 0x7eU < 7)))) {
+      queryResultOrOperator = *(int *)(this + 0x30);
+      if ((0x75 < queryResultOrOperator) && ((queryResultOrOperator < 0x7a || (queryResultOrOperator - 0x7eU < 7)))) {
         (**(code **)(*(int *)this + 0x38))(&stackType,this);
         (**(code **)(**(int **)(this + 0x34) + 0x38))(local_70,*(int **)(this + 0x34));
-        bVar1 = false;
+        operandTypesMatch = false;
         if (((stackTypeBits & 0x1fffe00) == (local_4c & 0x1fffe00)) && (stackTypeStructure == local_68)) {
-          bVar1 = true;
+          operandTypesMatch = true;
         }
-        if (!bVar1) {
+        if (!operandTypesMatch) {
           return 0;
         }
       }

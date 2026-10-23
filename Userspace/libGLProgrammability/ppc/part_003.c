@@ -3716,17 +3716,17 @@ int TIntermediate__addConversion(this, op, type, intermTyped)
 {
   undefined *oldRefCount;
   undefined *atomicStore;
-  bool bVar2;
+  bool isAggregateOnly;
   undefined **ppuVar3;
   undefined *puVar4;
   uint uVar5;
-  int iVar6;
-  uint uVar7;
-  int *piVar8;
+  int sourceBasicTypeOrSequence;
+  uint targetBasicType;
+  int *typedNodeTemp;
   unsigned char * poolAllocator;
-  unsigned char * pcVar10;
-  int iVar11;
-  int *piVar12;
+  unsigned char * convertedValue;
+  int constantUnionOrNewNode;
+  int *nodeTemp;
   undefined4 uVar13;
   uint uVar14;
   uint uVar15;
@@ -3740,11 +3740,11 @@ int TIntermediate__addConversion(this, op, type, intermTyped)
   undefined4 in_r7;
   undefined4 in_r8;
   undefined4 *a6;
-  unsigned char * pTVar16;
-  char *pcVar17;
+  unsigned char * sequenceCursor;
+  char *errorText;
   undefined4 *puVar18;
-  uint uVar19;
-  void *this_00;
+  uint childBasicType;
+  void *infoSink;
   char reservation;
   byte cr0Flags;
   undefined **stackType;
@@ -3765,12 +3765,12 @@ int TIntermediate__addConversion(this, op, type, intermTyped)
   int local_34;
   
   a2 = type;
-  piVar12 = intermTyped;
-  iVar6 = (**(code **)(*intermTyped + 0x40))(intermTyped,op,type,intermTyped);
-  if (iVar6 == 0) {
+  nodeTemp = intermTyped;
+  sourceBasicTypeOrSequence = (**(code **)(*intermTyped + 0x40))(intermTyped,op,type,intermTyped);
+  if (sourceBasicTypeOrSequence == 0) {
     return (int *)0x0;
   }
-  if ((-1 < iVar6) && (iVar6 - 5U < 8)) {
+  if ((-1 < sourceBasicTypeOrSequence) && (sourceBasicTypeOrSequence - 5U < 8)) {
     return (int *)0x0;
   }
   (**(code **)(*intermTyped + 0x38))(&stackType,intermTyped);
@@ -3786,13 +3786,13 @@ int TIntermediate__addConversion(this, op, type, intermTyped)
   if (*(int *)(type + 8) != 0) {
     return (int *)0x0;
   }
-  (**(code **)(*intermTyped + 0x38))((unsigned char *)&stackType,intermTyped,a2,piVar12,in_r7,in_r8,0);
+  (**(code **)(*intermTyped + 0x38))((unsigned char *)&stackType,intermTyped,a2,nodeTemp,in_r7,in_r8,0);
   stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   if (stackTypeStructure != 0) {
     return (int *)0x0;
   }
-  iVar6 = (**(code **)(*(int *)type + 0x38))(type);
-  if (iVar6 != 0) {
+  sourceBasicTypeOrSequence = (**(code **)(*(int *)type + 0x38))(type);
+  if (sourceBasicTypeOrSequence != 0) {
     return (int *)0x0;
   }
   (**(code **)(*intermTyped + 0x38))((unsigned char *)&stackType,intermTyped);
@@ -3801,67 +3801,67 @@ int TIntermediate__addConversion(this, op, type, intermTyped)
     return (int *)0x0;
   }
   if (op == 0x67) {
-    uVar7 = 3;
+    targetBasicType = 3;
   }
   else if (op < 0x68) {
     if (op != 0x66) {
 LAB_97b8e794:
-      uVar7 = (**(code **)(*(int *)type + 0x20))(type);
+      targetBasicType = (**(code **)(*(int *)type + 0x20))(type);
       (**(code **)(*intermTyped + 0x38))(&stackType,intermTyped);
-      if (uVar7 == (stackTypeBits >> 0x13 & 0x3f)) {
+      if (targetBasicType == (stackTypeBits >> 0x13 & 0x3f)) {
         return intermTyped;
       }
       return (int *)0x0;
     }
-    uVar7 = 2;
+    targetBasicType = 2;
   }
   else {
     if (op != 0x68) goto LAB_97b8e794;
-    uVar7 = 1;
+    targetBasicType = 1;
   }
-  bVar2 = true;
-  iVar6 = (**(code **)(*intermTyped + 0x1c))(intermTyped);
-  if (iVar6 == 0) {
+  isAggregateOnly = true;
+  sourceBasicTypeOrSequence = (**(code **)(*intermTyped + 0x1c))(intermTyped);
+  if (sourceBasicTypeOrSequence == 0) {
 LAB_97b8e8ac:
-    iVar6 = (**(code **)(*intermTyped + 0x1c))(intermTyped);
-    if (iVar6 != 0) {
-      piVar8 = (int *)(**(code **)(*intermTyped + 0x1c))(intermTyped);
-      iVar6 = (**(code **)(*piVar8 + 100))(piVar8);
-      pTVar16 = *(unsigned char **)(iVar6 + 4);
+    sourceBasicTypeOrSequence = (**(code **)(*intermTyped + 0x1c))(intermTyped);
+    if (sourceBasicTypeOrSequence != 0) {
+      typedNodeTemp = (int *)(**(code **)(*intermTyped + 0x1c))(intermTyped);
+      sourceBasicTypeOrSequence = (**(code **)(*typedNodeTemp + 100))(typedNodeTemp);
+      sequenceCursor = *(unsigned char **)(sourceBasicTypeOrSequence + 4);
       while( true ) {
-        if (pTVar16 == *(unsigned char **)(iVar6 + 8)) {
-          piVar12 = (int *)(**(code **)(*intermTyped + 0x1c))(intermTyped);
-          return piVar12;
+        if (sequenceCursor == *(unsigned char **)(sourceBasicTypeOrSequence + 8)) {
+          nodeTemp = (int *)(**(code **)(*intermTyped + 0x1c))(intermTyped);
+          return nodeTemp;
         }
         poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-        pcVar10 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,4);
-        if (uVar7 != 2) break;
-        piVar8 = (int *)(**(code **)(**(int **)pTVar16 + 0x14))(*(int **)pTVar16);
-        (**(code **)(*piVar8 + 0x38))(&stackType,piVar8);
-        uVar19 = stackTypeBits >> 0x13 & 0x3f;
+        convertedValue = (unsigned char *)TPoolAllocator__allocate(poolAllocator,4);
+        if (targetBasicType != 2) break;
+        typedNodeTemp = (int *)(**(code **)(**(int **)sequenceCursor + 0x14))(*(int **)sequenceCursor);
+        (**(code **)(*typedNodeTemp + 0x38))(&stackType,typedNodeTemp);
+        childBasicType = stackTypeBits >> 0x13 & 0x3f;
         stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-        if (uVar19 == 1) {
-          piVar12 = (int *)(**(code **)(**(int **)pTVar16 + 0x14))(*(int **)pTVar16);
-          iVar11 = (**(code **)(*piVar12 + 0x18))(piVar12);
-          local_40 = (longlong)(int)**(float **)(iVar11 + 0x30);
-          *(int *)pcVar10 = (int)**(float **)(iVar11 + 0x30);
+        if (childBasicType == 1) {
+          nodeTemp = (int *)(**(code **)(**(int **)sequenceCursor + 0x14))(*(int **)sequenceCursor);
+          constantUnionOrNewNode = (**(code **)(*nodeTemp + 0x18))(nodeTemp);
+          local_40 = (longlong)(int)**(float **)(constantUnionOrNewNode + 0x30);
+          *(int *)convertedValue = (int)**(float **)(constantUnionOrNewNode + 0x30);
 LAB_97b8ec88:
-          stackTypeBits = uVar7 << 0x13 | stackTypeBits & 0x7ff | 0x4000000 | 0x800;
+          stackTypeBits = targetBasicType << 0x13 | stackTypeBits & 0x7ff | 0x4000000 | 0x800;
         }
         else {
-          if (uVar19 != 3) {
-            this_00 = *(void **)this;
-            pcVar17 = "Bad promotion node";
-            uVar7 = (**(code **)*intermTyped)(intermTyped,a1_00,a2,piVar12,in_r7,in_r8,a6);
+          if (childBasicType != 3) {
+            infoSink = *(void **)this;
+            errorText = "Bad promotion node";
+            targetBasicType = (**(code **)*intermTyped)(intermTyped,a1_00,a2,nodeTemp,in_r7,in_r8,a6);
                     
             goto override_jmp_97b8ea8c_case_0;
           }
-          piVar12 = (int *)(**(code **)(**(int **)pTVar16 + 0x14))(*(int **)pTVar16);
-          iVar11 = (**(code **)(*piVar12 + 0x18))(piVar12);
-          a6 = *(undefined4 **)(iVar11 + 0x30);
-          *(undefined4 *)pcVar10 = *a6;
+          nodeTemp = (int *)(**(code **)(**(int **)sequenceCursor + 0x14))(*(int **)sequenceCursor);
+          constantUnionOrNewNode = (**(code **)(*nodeTemp + 0x18))(nodeTemp);
+          a6 = *(undefined4 **)(constantUnionOrNewNode + 0x30);
+          *(undefined4 *)convertedValue = *a6;
 LAB_97b8ecd8:
-          stackTypeBits = uVar7 << 0x13 | stackTypeBits & 0xfff | 0x4000000 | 0x800;
+          stackTypeBits = targetBasicType << 0x13 | stackTypeBits & 0xfff | 0x4000000 | 0x800;
         }
 LAB_97b8ed90:
         stackTypeBits = stackTypeBits & 0xfffff9ff;
@@ -3874,45 +3874,45 @@ LAB_97b8ed90:
         stackTypeWord1c = 0;
         stackTypeWord20 = 0;
         stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-        piVar12 = (int *)(**(code **)*intermTyped)(intermTyped);
+        nodeTemp = (int *)(**(code **)*intermTyped)(intermTyped);
         a2 = (unsigned char *)&stackType;
-        iVar11 = ((int (*)())TIntermediate__addConstantUnion)(this,pcVar10,(unsigned char *)&stackType,(int)piVar12);
+        constantUnionOrNewNode = ((int (*)())TIntermediate__addConstantUnion)(this,convertedValue,(unsigned char *)&stackType,(int)nodeTemp);
         stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-        if (iVar11 != 0) {
-          std__vector_TIntermNode__pool_allocator_TIntermNode_____erase(auStack_38,iVar6,pTVar16);
-          piVar12 = &local_34;
-          a2 = pTVar16;
-          local_34 = iVar11;
+        if (constantUnionOrNewNode != 0) {
+          std__vector_TIntermNode__pool_allocator_TIntermNode_____erase(auStack_38,sourceBasicTypeOrSequence,sequenceCursor);
+          nodeTemp = &local_34;
+          a2 = sequenceCursor;
+          local_34 = constantUnionOrNewNode;
           std__vector_TIntermNode__pool_allocator_TIntermNode_____insert
-                    (auStack_38,iVar6,pTVar16,piVar12);
+                    (auStack_38,sourceBasicTypeOrSequence,sequenceCursor,nodeTemp);
         }
-        pTVar16 = pTVar16 + 4;
+        sequenceCursor = sequenceCursor + 4;
       }
-      if (uVar7 < 3) {
-        if (uVar7 == 1) {
-          piVar8 = (int *)(**(code **)(**(int **)pTVar16 + 0x14))(*(int **)pTVar16);
-          (**(code **)(*piVar8 + 0x38))(&stackType,piVar8);
-          uVar19 = stackTypeBits >> 0x13 & 0x3f;
+      if (targetBasicType < 3) {
+        if (targetBasicType == 1) {
+          typedNodeTemp = (int *)(**(code **)(**(int **)sequenceCursor + 0x14))(*(int **)sequenceCursor);
+          (**(code **)(*typedNodeTemp + 0x38))(&stackType,typedNodeTemp);
+          childBasicType = stackTypeBits >> 0x13 & 0x3f;
           stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-          if (uVar19 == 2) {
-            piVar12 = (int *)(**(code **)(**(int **)pTVar16 + 0x14))(*(int **)pTVar16);
-            iVar11 = (**(code **)(*piVar12 + 0x18))(piVar12);
-            a6 = (undefined4 *)(**(uint **)(iVar11 + 0x30) ^ 0x80000000);
-            *(float *)pcVar10 = (float)((double)CONCAT44(0x43300000,a6) - 4503601774854144.0);
+          if (childBasicType == 2) {
+            nodeTemp = (int *)(**(code **)(**(int **)sequenceCursor + 0x14))(*(int **)sequenceCursor);
+            constantUnionOrNewNode = (**(code **)(*nodeTemp + 0x18))(nodeTemp);
+            a6 = (undefined4 *)(**(uint **)(constantUnionOrNewNode + 0x30) ^ 0x80000000);
+            *(float *)convertedValue = (float)((double)CONCAT44(0x43300000,a6) - 4503601774854144.0);
           }
           else {
-            if (uVar19 != 3) {
-              this_00 = *(void **)this;
-              pcVar17 = "Bad promotion node";
-              uVar7 = (**(code **)*intermTyped)(intermTyped,a1,a2,piVar12,in_r7,in_r8,a6);
+            if (childBasicType != 3) {
+              infoSink = *(void **)this;
+              errorText = "Bad promotion node";
+              targetBasicType = (**(code **)*intermTyped)(intermTyped,a1,a2,nodeTemp,in_r7,in_r8,a6);
                     
               goto override_jmp_97b8ea8c_case_0;
             }
-            piVar12 = (int *)(**(code **)(**(int **)pTVar16 + 0x14))
-                                       (*(int **)pTVar16,a1,a2,piVar12,in_r7,in_r8,a6);
-            iVar11 = (**(code **)(*piVar12 + 0x18))(piVar12);
-            a6 = (undefined4 *)**(undefined4 **)(iVar11 + 0x30);
-            *(float *)pcVar10 = (float)((double)CONCAT44(0x43300000,a6) - 4503599627370496.0);
+            nodeTemp = (int *)(**(code **)(**(int **)sequenceCursor + 0x14))
+                                       (*(int **)sequenceCursor,a1,a2,nodeTemp,in_r7,in_r8,a6);
+            constantUnionOrNewNode = (**(code **)(*nodeTemp + 0x18))(nodeTemp);
+            a6 = (undefined4 *)**(undefined4 **)(constantUnionOrNewNode + 0x30);
+            *(float *)convertedValue = (float)((double)CONCAT44(0x43300000,a6) - 4503599627370496.0);
           }
           local_90 = 0x43300000;
           stackTypeBits = stackTypeBits & 0x7ff | 0x4080800;
@@ -3920,77 +3920,77 @@ LAB_97b8ed90:
           goto LAB_97b8ed90;
         }
       }
-      else if (uVar7 == 3) {
-        piVar8 = (int *)(**(code **)(**(int **)pTVar16 + 0x14))(*(int **)pTVar16);
-        (**(code **)(*piVar8 + 0x38))(&stackType,piVar8);
-        uVar19 = stackTypeBits >> 0x13 & 0x3f;
+      else if (targetBasicType == 3) {
+        typedNodeTemp = (int *)(**(code **)(**(int **)sequenceCursor + 0x14))(*(int **)sequenceCursor);
+        (**(code **)(*typedNodeTemp + 0x38))(&stackType,typedNodeTemp);
+        childBasicType = stackTypeBits >> 0x13 & 0x3f;
         stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-        if (uVar19 == 1) {
-          piVar12 = (int *)(**(code **)(**(int **)pTVar16 + 0x14))(*(int **)pTVar16);
-          iVar11 = (**(code **)(*piVar12 + 0x18))(piVar12);
-          *(uint *)pcVar10 = (uint)(**(float **)(iVar11 + 0x30) != 0.0);
+        if (childBasicType == 1) {
+          nodeTemp = (int *)(**(code **)(**(int **)sequenceCursor + 0x14))(*(int **)sequenceCursor);
+          constantUnionOrNewNode = (**(code **)(*nodeTemp + 0x18))(nodeTemp);
+          *(uint *)convertedValue = (uint)(**(float **)(constantUnionOrNewNode + 0x30) != 0.0);
           goto LAB_97b8ec88;
         }
-        if (uVar19 == 2) {
-          piVar12 = (int *)(**(code **)(**(int **)pTVar16 + 0x14))(*(int **)pTVar16);
-          iVar11 = (**(code **)(*piVar12 + 0x18))(piVar12);
-          iVar11 = **(int **)(iVar11 + 0x30);
-          a6 = (undefined4 *)(iVar11 + -1);
-          *(uint *)pcVar10 = iVar11 - ((int)a6 + (uint)(iVar11 == 0));
+        if (childBasicType == 2) {
+          nodeTemp = (int *)(**(code **)(**(int **)sequenceCursor + 0x14))(*(int **)sequenceCursor);
+          constantUnionOrNewNode = (**(code **)(*nodeTemp + 0x18))(nodeTemp);
+          constantUnionOrNewNode = **(int **)(constantUnionOrNewNode + 0x30);
+          a6 = (undefined4 *)(constantUnionOrNewNode + -1);
+          *(uint *)convertedValue = constantUnionOrNewNode - ((int)a6 + (uint)(constantUnionOrNewNode == 0));
           goto LAB_97b8ecd8;
         }
-        this_00 = *(void **)this;
-        pcVar17 = "Bad promotion node";
-        uVar7 = (**(code **)*intermTyped)(intermTyped,a1_01,a2,piVar12,in_r7,in_r8,a6);
+        infoSink = *(void **)this;
+        errorText = "Bad promotion node";
+        targetBasicType = (**(code **)*intermTyped)(intermTyped,a1_01,a2,nodeTemp,in_r7,in_r8,a6);
                     
         goto override_jmp_97b8ea8c_case_0;
       }
-      this_00 = *(void **)this;
-      pcVar17 = "Bad promotion node";
-      uVar7 = (**(code **)*intermTyped)(intermTyped);
+      infoSink = *(void **)this;
+      errorText = "Bad promotion node";
+      targetBasicType = (**(code **)*intermTyped)(intermTyped);
                     
       goto override_jmp_97b8ea8c_case_0;
     }
   }
   else {
-    iVar6 = (**(code **)(*intermTyped + 0x1c))(intermTyped);
-    if (*(int *)(iVar6 + 0x30) == 2) {
-      bVar2 = false;
+    sourceBasicTypeOrSequence = (**(code **)(*intermTyped + 0x1c))(intermTyped);
+    if (*(int *)(sourceBasicTypeOrSequence + 0x30) == 2) {
+      isAggregateOnly = false;
     }
     else {
-      piVar8 = (int *)(**(code **)(*intermTyped + 0x1c))(intermTyped);
-      iVar6 = (**(code **)(*piVar8 + 100))(piVar8);
-      for (puVar18 = *(undefined4 **)(iVar6 + 4); puVar18 != *(undefined4 **)(iVar6 + 8);
+      typedNodeTemp = (int *)(**(code **)(*intermTyped + 0x1c))(intermTyped);
+      sourceBasicTypeOrSequence = (**(code **)(*typedNodeTemp + 100))(typedNodeTemp);
+      for (puVar18 = *(undefined4 **)(sourceBasicTypeOrSequence + 4); puVar18 != *(undefined4 **)(sourceBasicTypeOrSequence + 8);
           puVar18 = puVar18 + 1) {
-        piVar8 = (int *)(**(code **)(*(int *)*puVar18 + 0x14))((int *)*puVar18);
-        iVar11 = (**(code **)(*piVar8 + 0x18))(piVar8);
-        if (iVar11 == 0) {
-          bVar2 = false;
+        typedNodeTemp = (int *)(**(code **)(*(int *)*puVar18 + 0x14))((int *)*puVar18);
+        constantUnionOrNewNode = (**(code **)(*typedNodeTemp + 0x18))(typedNodeTemp);
+        if (constantUnionOrNewNode == 0) {
+          isAggregateOnly = false;
         }
       }
     }
-    if (bVar2) goto LAB_97b8e8ac;
+    if (isAggregateOnly) goto LAB_97b8e8ac;
   }
-  iVar6 = (**(code **)(*intermTyped + 0x18))(intermTyped);
-  if (iVar6 != 0) {
+  sourceBasicTypeOrSequence = (**(code **)(*intermTyped + 0x18))(intermTyped);
+  if (sourceBasicTypeOrSequence != 0) {
     uVar13 = (**(code **)(*intermTyped + 0x18))(intermTyped);
-    piVar12 = (int *)TIntermediate__promoteConstantUnion(this,uVar7,uVar13);
-    return piVar12;
+    nodeTemp = (int *)TIntermediate__promoteConstantUnion(this,targetBasicType,uVar13);
+    return nodeTemp;
   }
-  if (uVar7 != 2) {
-    if (uVar7 < 3) {
-      if (uVar7 == 1) {
-        iVar6 = (**(code **)(*intermTyped + 0x40))(intermTyped);
+  if (targetBasicType != 2) {
+    if (targetBasicType < 3) {
+      if (targetBasicType == 1) {
+        sourceBasicTypeOrSequence = (**(code **)(*intermTyped + 0x40))(intermTyped);
         uVar13 = extraout_r4;
-        if (iVar6 == 2) {
-          iVar11 = 0x10;
+        if (sourceBasicTypeOrSequence == 2) {
+          constantUnionOrNewNode = 0x10;
         }
         else {
-          iVar11 = 0xf;
-          if (iVar6 != 3) {
-            this_00 = *(void **)this;
-            pcVar17 = "Bad promotion node";
-            uVar7 = (**(code **)*intermTyped)(intermTyped);
+          constantUnionOrNewNode = 0xf;
+          if (sourceBasicTypeOrSequence != 3) {
+            infoSink = *(void **)this;
+            errorText = "Bad promotion node";
+            targetBasicType = (**(code **)*intermTyped)(intermTyped);
                     
             goto override_jmp_97b8ea8c_case_0;
           }
@@ -3998,41 +3998,41 @@ LAB_97b8ed90:
         goto LAB_97b8f1ac;
       }
     }
-    else if (uVar7 == 3) {
-      iVar6 = (**(code **)(*intermTyped + 0x40))(intermTyped);
+    else if (targetBasicType == 3) {
+      sourceBasicTypeOrSequence = (**(code **)(*intermTyped + 0x40))(intermTyped);
       uVar13 = extraout_r4_00;
-      if (iVar6 == 1) {
-        iVar11 = 0xe;
+      if (sourceBasicTypeOrSequence == 1) {
+        constantUnionOrNewNode = 0xe;
       }
       else {
-        iVar11 = 0xd;
-        if (iVar6 != 2) {
-          this_00 = *(void **)this;
-          pcVar17 = "Bad promotion node";
-          uVar7 = (**(code **)*intermTyped)(intermTyped);
+        constantUnionOrNewNode = 0xd;
+        if (sourceBasicTypeOrSequence != 2) {
+          infoSink = *(void **)this;
+          errorText = "Bad promotion node";
+          targetBasicType = (**(code **)*intermTyped)(intermTyped);
                     
           goto override_jmp_97b8ea8c_case_0;
         }
       }
       goto LAB_97b8f1ac;
     }
-    this_00 = *(void **)this;
-    pcVar17 = "Bad promotion type";
-    uVar7 = (**(code **)*intermTyped)(intermTyped);
+    infoSink = *(void **)this;
+    errorText = "Bad promotion type";
+    targetBasicType = (**(code **)*intermTyped)(intermTyped);
                     
 override_jmp_97b8ea8c_case_0:
-    ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(this_00,"INTERNAL ERROR: ");
-    uVar19 = uVar7 & 0xffff;
-    cr0Flags = (uVar19 == 0) << 1;
-    if (uVar19 == 0) {
-      _sprintf(acStack_80,"%d:? ",(int)uVar7 >> 0x10);
+    ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(infoSink,"INTERNAL ERROR: ");
+    childBasicType = targetBasicType & 0xffff;
+    cr0Flags = (childBasicType == 0) << 1;
+    if (childBasicType == 0) {
+      _sprintf(acStack_80,"%d:? ",(int)targetBasicType >> 0x10);
     }
     else {
-      _sprintf(acStack_80,"%d:%d",(int)uVar7 >> 0x10,uVar19);
+      _sprintf(acStack_80,"%d:%d",(int)targetBasicType >> 0x10,childBasicType);
     }
     __ZNSsC1EPKcRKSaIcE(&stackType,acStack_80,(unsigned char *)&stackTypeTypeName);
     *(undefined *)((int)stackType + (int)stackType[-3]) = *PTR__S_terminal_a7b7c0b8;
-    ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(this_00,(char *)stackType);
+    ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(infoSink,(char *)stackType);
     ppuVar3 = stackType + -1;
     do {
       oldRefCount = *ppuVar3;
@@ -4045,33 +4045,33 @@ override_jmp_97b8ea8c_case_0:
     if ((int)oldRefCount < 1) {
       __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(stackType + -3),(unsigned char *)&stackTypeTypeName);
     }
-    ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(this_00,": ");
-    ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(this_00,pcVar17);
-    ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(this_00,"\n");
+    ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(infoSink,": ");
+    ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(infoSink,errorText);
+    ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(infoSink,"\n");
     return (int *)0x0;
   }
-  iVar6 = (**(code **)(*intermTyped + 0x40))(intermTyped);
+  sourceBasicTypeOrSequence = (**(code **)(*intermTyped + 0x40))(intermTyped);
   uVar13 = extraout_r4_01;
-  if (iVar6 == 1) {
-    iVar11 = 0x11;
+  if (sourceBasicTypeOrSequence == 1) {
+    constantUnionOrNewNode = 0x11;
   }
   else {
-    iVar11 = 0x12;
-    if (iVar6 != 3) {
-      this_00 = *(void **)this;
-      pcVar17 = "Bad promotion node";
-      uVar7 = (**(code **)*intermTyped)(intermTyped);
+    constantUnionOrNewNode = 0x12;
+    if (sourceBasicTypeOrSequence != 3) {
+      infoSink = *(void **)this;
+      errorText = "Bad promotion node";
+      targetBasicType = (**(code **)*intermTyped)(intermTyped);
                     
       goto override_jmp_97b8ea8c_case_0;
     }
   }
 LAB_97b8f1ac:
-  uVar19 = (**(code **)(*intermTyped + 0x48))(intermTyped,uVar13);
+  childBasicType = (**(code **)(*intermTyped + 0x48))(intermTyped,uVar13);
   uVar14 = (**(code **)(*intermTyped + 0x50))(intermTyped);
   uVar15 = (**(code **)(*intermTyped + 0x54))(intermTyped);
   stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   stackTypeBits = (uVar15 & 1) << 9 |
-             (uVar14 & 1) << 10 | (uVar19 & 0xff) << 0xb | uVar7 << 0x13 | stackTypeBits & 0x1ff;
+             (uVar14 & 1) << 10 | (childBasicType & 0xff) << 0xb | targetBasicType << 0x13 | stackTypeBits & 0x1ff;
   stackTypeArraySize = 0;
   stackTypeStructure = 0;
   stackTypeFieldName = 0;
@@ -4081,36 +4081,36 @@ LAB_97b8f1ac:
   stackTypeWord1c = 0;
   stackTypeWord20 = 0;
   poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-  piVar12 = (int *)TPoolAllocator__allocate(poolAllocator,0x38);
-  piVar12[1] = 0;
-  *piVar12 = (int)&PTR_getLine_a7b7cf90;
-  piVar12[3] = stackTypeArraySize;
-  piVar12[4] = stackTypeStructure;
-  piVar12[5] = stackTypeFieldName;
-  piVar12[6] = stackTypeTypeName;
-  piVar12[7] = stackTypeWord14;
-  piVar12[8] = stackTypeStructureSize;
-  piVar12[2] = (int)&PTR___ZN5TTypeD1Ev_a7b7cff8;
-  piVar12[10] = stackTypeWord20;
-  piVar12[9] = stackTypeWord1c;
+  nodeTemp = (int *)TPoolAllocator__allocate(poolAllocator,0x38);
+  nodeTemp[1] = 0;
+  *nodeTemp = (int)&PTR_getLine_a7b7cf90;
+  nodeTemp[3] = stackTypeArraySize;
+  nodeTemp[4] = stackTypeStructure;
+  nodeTemp[5] = stackTypeFieldName;
+  nodeTemp[6] = stackTypeTypeName;
+  nodeTemp[7] = stackTypeWord14;
+  nodeTemp[8] = stackTypeStructureSize;
+  nodeTemp[2] = (int)&PTR___ZN5TTypeD1Ev_a7b7cff8;
+  nodeTemp[10] = stackTypeWord20;
+  nodeTemp[9] = stackTypeWord1c;
   puVar4 = PTR_vtable_a7b7c0d4;
-  uVar5 = piVar12[0xb];
-  uVar19 = stackTypeBits & 0xfe000000;
-  piVar12[0xb] = uVar19 | uVar5 & 0x1ffffff;
+  uVar5 = nodeTemp[0xb];
+  childBasicType = stackTypeBits & 0xfe000000;
+  nodeTemp[0xb] = childBasicType | uVar5 & 0x1ffffff;
   uVar14 = (stackTypeBits >> 0x13 & 0x3f) << 0x13;
-  piVar12[0xb] = uVar14 | uVar19 | uVar5 & 0x7ffff;
-  uVar7 = stackTypeBits & 0x7f800;
-  piVar12[0xb] = uVar7 | uVar14 | uVar19 | uVar5 & 0x7ff;
+  nodeTemp[0xb] = uVar14 | childBasicType | uVar5 & 0x7ffff;
+  targetBasicType = stackTypeBits & 0x7f800;
+  nodeTemp[0xb] = targetBasicType | uVar14 | childBasicType | uVar5 & 0x7ff;
   uVar15 = (stackTypeBits >> 10 & 1) << 10;
-  piVar12[0xb] = uVar15 | uVar7 | uVar14 | uVar19 | uVar5 & 0x3ff;
-  piVar12[0xb] = (stackTypeBits >> 9 & 1) << 9 | uVar15 | uVar7 | uVar14 | uVar19 | uVar5 & 0x1ff;
-  piVar12[0xc] = iVar11;
-  *piVar12 = (int)(puVar4 + 8);
-  piVar12[0xd] = 0;
+  nodeTemp[0xb] = uVar15 | targetBasicType | uVar14 | childBasicType | uVar5 & 0x3ff;
+  nodeTemp[0xb] = (stackTypeBits >> 9 & 1) << 9 | uVar15 | targetBasicType | uVar14 | childBasicType | uVar5 & 0x1ff;
+  nodeTemp[0xc] = constantUnionOrNewNode;
+  *nodeTemp = (int)(puVar4 + 8);
+  nodeTemp[0xd] = 0;
   uVar13 = (**(code **)*intermTyped)(intermTyped);
-  (**(code **)(puVar4 + 0xc))(piVar12,uVar13);
-  (**(code **)(*piVar12 + 0x60))(piVar12,intermTyped);
-  return piVar12;
+  (**(code **)(puVar4 + 0xc))(nodeTemp,uVar13);
+  (**(code **)(*nodeTemp + 0x60))(nodeTemp,intermTyped);
+  return nodeTemp;
 }
 
 /* TIntermediate__growAggregate @ 0x97b8f36c (760 bytes) */
