@@ -118,7 +118,7 @@ int _PPStreamChunkListRemoveChunk(stream, param_2)
   undefined4 *stream;
   int param_2;
 {
-  undefined4 extraOut1;
+  undefined4 extraout_r3;
   int iVar1;
   
   iVar1 = *(int *)(param_2 + 4);
@@ -137,7 +137,7 @@ int _PPStreamChunkListRemoveChunk(stream, param_2)
   }
   _free(param_2);
   stream[2] = stream[2] + -1;
-  return extraOut1;
+  return extraout_r3;
 }
 
 /* _PPStreamAttachParamBindingsChunkList @ 0x97b82808 (56 bytes) */
@@ -1439,7 +1439,7 @@ int _PPParserParseTextureSourceVar(parser, param_2)
   uint ashldi3Result;
   uint extraout_r4;
   uint extraout_r4_00;
-  uint extraOut1;
+  uint extraout_r4_01;
   uint uVar5;
   uint uVar6;
   uint uVar7;
@@ -1523,7 +1523,7 @@ int _PPParserParseTextureSourceVar(parser, param_2)
               *(uint *)(parser + 0x38) = uVar6;
               ashldi3Result = ((int (*)())___ashldi3)(0,uVar7,iVar2);
               *(uint *)(parser + 0x34) = uVar5 | ashldi3Result;
-              *(uint *)(parser + 0x38) = uVar6 | extraOut1;
+              *(uint *)(parser + 0x38) = uVar6 | extraout_r4_01;
             }
             else if ((extraout_r4 & 0xf) != uVar7) {
               return 0x28;
@@ -1620,7 +1620,7 @@ int _PPEmulatorFree(emulator)
 int _PPStreamFree(stream)
   int stream;
 {
-  undefined4 extraOut1;
+  undefined4 extraout_r3;
   
   ((int (*)())_PPStreamChunkListFree)(*(undefined4 *)(stream + 4));
   ((int (*)())_PPStreamChunkListFree)(*(undefined4 *)(stream + 8));
@@ -1635,7 +1635,7 @@ int _PPStreamFree(stream)
   ((int (*)())_PPStreamChunkListFree)(*(undefined4 *)(stream + 0x28));
   ((int (*)())_PPStreamChunkListFree)(*(undefined4 *)(stream + 0x30));
   _free(stream);
-  return extraOut1;
+  return extraout_r3;
 }
 
 /* _PPEmulatorProgramFree @ 0x97b84cb4 (180 bytes) */
@@ -1995,13 +1995,13 @@ int _InitStringTable(param_1)
 int _FreeStringTable(param_1)
   int *param_1;
 {
-  undefined4 extraOut1;
+  undefined4 extraout_r3;
   undefined4 uVar1;
   
   uVar1 = 0;
   if (*param_1 != 0) {
     _free(*param_1);
-    uVar1 = extraOut1;
+    uVar1 = extraout_r3;
   }
   param_1[2] = 0;
   *param_1 = 0;

@@ -141,9 +141,9 @@ use	_CPPdefine	uVar3	atomString	INFERRED	every definition is the result of a cal
 use	_CPPdefine	uVar3	strfromTStr	INFERRED	every definition is the result of a call whose name says it returns this	#99	+2	all	all
 use	_CPPerror	uVar4	strfromTStr	INFERRED	every definition is the result of a call whose name says it returns this	#19	+1	all	all
 use	_CPPpragma	iVar6	length	INFERRED	every definition is the result of a call whose name says it returns this	#27	+17	all	all
-use	_CPPpragma	puVar5	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#13	+64	all	all
-use	_CPPpragma	uVar4	allocation2	INFERRED	every definition is the result of a call whose name says it returns this	#28	+1	all	all
-use	_CPPpragma	uVar4	allocation2	INFERRED	every definition is the result of a call whose name says it returns this	#44	+13	all	all
+use	_CPPpragma	puVar5	allTokens	INFERRED	every definition is the result of a call whose name says it returns this	#13	+64	all	all
+use	_CPPpragma	uVar4	tokenCopy	INFERRED	every definition is the result of a call whose name says it returns this	#28	+1	all	all
+use	_CPPpragma	uVar4	tokenCopy	INFERRED	every definition is the result of a call whose name says it returns this	#44	+13	all	all
 use	_CPPextension	uVar4	atomString	INFERRED	every definition is the result of a call whose name says it returns this	#16	+9	all	all
 use	_readCPPline	uVar4	strfromTStr	INFERRED	every definition is the result of a call whose name says it returns this	#82	+1	all	all
 use	_PushEofSrc	puVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#0	+12	all	all

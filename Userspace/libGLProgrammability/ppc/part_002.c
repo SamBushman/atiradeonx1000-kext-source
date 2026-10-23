@@ -452,15 +452,17 @@ int _CPPelse(matchElse, yylvalpp, unusedArg3, unusedArg4, unusedArg5, unusedArg6
   undefined4 unusedArg6;
   int unusedArg7;
 {
+  int ifDepth;
+  int afterElseToken;
   int cpPifResult;
   undefined *cppRef;
   int directiveAtom;
   int token;
   undefined4 extraOut1;
-  int nestDepth;
+  int skipDepth;
   
   cppRef = PTR__cpp_a7b7c0a4;
-  nestDepth = 0;
+  skipDepth = 0;
   token = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
                     (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),yylvalpp,unusedArg3,unusedArg4,unusedArg5,
                      unusedArg6,unusedArg7);
@@ -486,28 +488,28 @@ int _CPPelse(matchElse, yylvalpp, unusedArg3, unusedArg4, unusedArg5, unusedArg6
           } while (token != 0x10e);
           directiveAtom = *(int *)(yylvalpp + 8);
           if (((directiveAtom != _ifAtom) && (directiveAtom != _ifdefAtom)) && (directiveAtom != _ifndefAtom)) break;
-          nestDepth = nestDepth + 1;
+          skipDepth = skipDepth + 1;
           *(int *)(*(int *)cppRef + 0x34) = *(int *)(*(int *)cppRef + 0x34) + 1;
           unusedArg7 = *(int *)cppRef;
           *(int *)(unusedArg7 + 0x138) = *(int *)(unusedArg7 + 0x138) + 1;
         }
         if (directiveAtom != _endifAtom) break;
-        nestDepth = nestDepth + -1;
-        if (nestDepth < 1) {
+        skipDepth = skipDepth + -1;
+        if (skipDepth < 1) {
           *(undefined4 *)(*(int *)(*(int *)cppRef + 0x138) * 4 + *(int *)cppRef + 0x38) = 0;
           *(int *)(*(int *)cppRef + 0x138) = *(int *)(*(int *)cppRef + 0x138) + -1;
-          nestDepth = *(int *)(*(int *)cppRef + 0x34);
-          if (nestDepth == 0) {
+          ifDepth = *(int *)(*(int *)cppRef + 0x34);
+          if (ifDepth == 0) {
             return 0x10e;
           }
-          *(int *)(*(int *)cppRef + 0x34) = nestDepth + -1;
+          *(int *)(*(int *)cppRef + 0x34) = ifDepth + -1;
           return 0x10e;
         }
         *(int *)(*(int *)cppRef + 0x138) = *(int *)(*(int *)cppRef + 0x138) + -1;
         unusedArg7 = *(int *)cppRef;
         *(int *)(unusedArg7 + 0x34) = *(int *)(unusedArg7 + 0x34) + -1;
       }
-      if ((matchElse != 0) && (nestDepth == 0)) break;
+      if ((matchElse != 0) && (skipDepth == 0)) break;
       if ((directiveAtom == _elseAtom) && (directiveAtom = ((int (*)())_ChkCorrectElseNesting)(), directiveAtom == 0)) {
         _CPPErrorToInfoLog("#else after a #else",extraOut1,unusedArg3,unusedArg4,unusedArg5,unusedArg6,unusedArg7
                           );
@@ -515,24 +517,24 @@ int _CPPelse(matchElse, yylvalpp, unusedArg3, unusedArg4, unusedArg5, unusedArg6
       }
     }
     if (directiveAtom == _elseAtom) {
-      nestDepth = (**(code **)(*(int *)(*(int *)cppRef + 0x20) + 4))
+      afterElseToken = (**(code **)(*(int *)(*(int *)cppRef + 0x20) + 4))
                         (*(int *)(*(int *)cppRef + 0x20),yylvalpp,unusedArg3,unusedArg4,unusedArg5,unusedArg6,
                          unusedArg7);
-      if (nestDepth == 10) {
+      if (afterElseToken == 10) {
         return 10;
       }
       _CPPWarningToInfoLog
                 ("unexpected tokens following #else preprocessor directive - expected a newline");
       do {
-        nestDepth = (**(code **)(*(int *)(*(int *)cppRef + 0x20) + 4))
+        afterElseToken = (**(code **)(*(int *)(*(int *)cppRef + 0x20) + 4))
                           (*(int *)(*(int *)cppRef + 0x20),yylvalpp);
-      } while (nestDepth != 10);
+      } while (afterElseToken != 10);
       return 10;
     }
   } while (directiveAtom != _elifAtom);
-  nestDepth = *(int *)(*(int *)cppRef + 0x34);
-  if (nestDepth != 0) {
-    *(int *)(*(int *)cppRef + 0x34) = nestDepth + -1;
+  ifDepth = *(int *)(*(int *)cppRef + 0x34);
+  if (ifDepth != 0) {
+    *(int *)(*(int *)cppRef + 0x34) = ifDepth + -1;
     *(int *)(*(int *)cppRef + 0x138) = *(int *)(*(int *)cppRef + 0x138) + -1;
   }
   cpPifResult = ((int (*)())_CPPif)(yylvalpp);
@@ -853,197 +855,201 @@ LAB_97b86fdc:
 }
 
 /* _CPPif @ 0x97b87010 (308 bytes) */
-int _CPPif(param_1)
-  undefined4 param_1;
+int _CPPif(yylvalpp)
+  undefined4 yylvalpp;
 {
-  undefined *puVar1;
-  int iVar2;
-  undefined4 uVar3;
+  int cppState;
+  int oldIfDepth;
+  undefined *cppRef;
+  int endToken;
+  undefined4 firstToken;
   undefined4 extraOut1;
   undefined4 leftoverR5;
-  int *piVar4;
+  int *resultPtr;
   undefined4 leftoverR6;
-  int *piVar5;
+  int *errorPtr;
   undefined4 leftoverR7;
-  undefined4 uVar6;
+  undefined4 yylvalForward;
   undefined4 leftoverR8;
-  undefined4 *puVar7;
-  int local_20;
-  int local_1c [4];
+  undefined4 *cppStateOrIfLoc;
+  int exprValue;
+  int exprError [4];
   
-  puVar1 = PTR__cpp_a7b7c0a4;
-  uVar3 = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
-                    (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),param_1);
-  local_1c[0] = 0;
-  local_20 = 0;
-  *(int *)(*(int *)puVar1 + 0x138) = *(int *)(*(int *)puVar1 + 0x138) + 1;
-  puVar7 = *(undefined4 **)puVar1;
-  iVar2 = puVar7[0xd];
-  puVar7[0xd] = iVar2 + 1;
-  if (iVar2 + 1 == 1) {
-    iVar2 = *(int *)puVar1;
-    puVar7 = *(undefined4 **)(iVar2 + 0x18);
-    _ifloc = *puVar7;
+  cppRef = PTR__cpp_a7b7c0a4;
+  firstToken = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
+                    (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),yylvalpp);
+  exprError[0] = 0;
+  exprValue = 0;
+  *(int *)(*(int *)cppRef + 0x138) = *(int *)(*(int *)cppRef + 0x138) + 1;
+  cppStateOrIfLoc = *(undefined4 **)cppRef;
+  oldIfDepth = cppStateOrIfLoc[0xd];
+  cppStateOrIfLoc[0xd] = oldIfDepth + 1;
+  if (oldIfDepth + 1 == 1) {
+    cppState = *(int *)cppRef;
+    cppStateOrIfLoc = *(undefined4 **)(cppState + 0x18);
+    _ifloc = *cppStateOrIfLoc;
   }
   else {
-    iVar2 = *(int *)puVar1;
+    cppState = *(int *)cppRef;
   }
-  if (*(int *)(iVar2 + 0x34) < 0x41) {
-    piVar4 = &local_20;
-    piVar5 = local_1c;
-    uVar6 = param_1;
-    iVar2 = ((int (*)())_eval)(uVar3,0,piVar4,piVar5,param_1);
-    if (iVar2 != 10) {
+  if (*(int *)(cppState + 0x34) < 0x41) {
+    resultPtr = &exprValue;
+    errorPtr = exprError;
+    yylvalForward = yylvalpp;
+    endToken = ((int (*)())_eval)(firstToken,0,resultPtr,errorPtr,yylvalpp);
+    if (endToken != 10) {
       _CPPWarningToInfoLog
                 ("unexpected tokens following the preprocessor directive - expected a newline");
-      puVar1 = PTR__cpp_a7b7c0a4;
+      cppRef = PTR__cpp_a7b7c0a4;
       do {
-        iVar2 = (**(code **)(*(int *)(*(int *)puVar1 + 0x20) + 4))
-                          (*(int *)(*(int *)puVar1 + 0x20),param_1);
-      } while (iVar2 != 10);
+        endToken = (**(code **)(*(int *)(*(int *)cppRef + 0x20) + 4))
+                          (*(int *)(*(int *)cppRef + 0x20),yylvalpp);
+      } while (endToken != 10);
     }
-    if ((local_20 == 0) && (local_1c[0] == 0)) {
-      iVar2 = ((int (*)())_CPPelse)(1,param_1,piVar4,piVar5,uVar6,leftoverR8,puVar7);
+    if ((exprValue == 0) && (exprError[0] == 0)) {
+      endToken = ((int (*)())_CPPelse)(1,yylvalpp,resultPtr,errorPtr,yylvalForward,leftoverR8,cppStateOrIfLoc);
     }
   }
   else {
-    _CPPErrorToInfoLog("max #if nesting depth exceeded",extraOut1,leftoverR5,leftoverR6,leftoverR7,leftoverR8,puVar7);
-    iVar2 = 0;
+    _CPPErrorToInfoLog("max #if nesting depth exceeded",extraOut1,leftoverR5,leftoverR6,leftoverR7,leftoverR8,cppStateOrIfLoc);
+    endToken = 0;
   }
-  return iVar2;
+  return endToken;
 }
 
 /* _CPPifdef @ 0x97b87144 (348 bytes) */
-int _CPPifdef(param_1, param_2)
-  int param_1;
-  int param_2;
+int _CPPifdef(isIfdef, yylvalpp)
+  int isIfdef;
+  int yylvalpp;
 {
+  int isDefined;
   int lookUpSymbolResult;
-  undefined *puVar1;
-  int iVar2;
-  int iVar3;
-  char *pcVar4;
-  undefined4 uVar5;
+  undefined *cppRef;
+  int ifDepth;
+  int token;
+  char *directiveName;
+  undefined4 nameAtom;
   undefined4 leftoverR5;
   undefined4 leftoverR6;
   undefined4 leftoverR7;
   undefined4 leftoverR8;
-  int iVar6;
-  uint uVar7;
+  int cppState;
+  uint elseTrackerOrUndefFlag;
   
-  puVar1 = PTR__cpp_a7b7c0a4;
-  iVar3 = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
+  cppRef = PTR__cpp_a7b7c0a4;
+  token = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
                     (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20));
-  iVar6 = *(int *)puVar1;
-  uVar5 = *(undefined4 *)(param_2 + 8);
-  iVar2 = *(int *)(iVar6 + 0x34) + 1;
-  *(int *)(iVar6 + 0x34) = iVar2;
-  if (iVar2 < 0x41) {
-    uVar7 = *(int *)(*(int *)puVar1 + 0x138) + 1;
-    *(uint *)(*(int *)puVar1 + 0x138) = uVar7;
-    if (iVar3 == 0x10e) {
-      lookUpSymbolResult = _LookUpSymbol(_macros,uVar5);
-      iVar3 = (**(code **)(*(int *)(*(int *)puVar1 + 0x20) + 4))
-                        (*(int *)(*(int *)puVar1 + 0x20),param_2);
-      if (iVar3 != 10) {
+  cppState = *(int *)cppRef;
+  nameAtom = *(undefined4 *)(yylvalpp + 8);
+  ifDepth = *(int *)(cppState + 0x34) + 1;
+  *(int *)(cppState + 0x34) = ifDepth;
+  if (ifDepth < 0x41) {
+    elseTrackerOrUndefFlag = *(int *)(*(int *)cppRef + 0x138) + 1;
+    *(uint *)(*(int *)cppRef + 0x138) = elseTrackerOrUndefFlag;
+    if (token == 0x10e) {
+      lookUpSymbolResult = _LookUpSymbol(_macros,nameAtom);
+      token = (**(code **)(*(int *)(*(int *)cppRef + 0x20) + 4))
+                        (*(int *)(*(int *)cppRef + 0x20),yylvalpp);
+      if (token != 10) {
         _CPPWarningToInfoLog
                   ("unexpected tokens following #ifdef preprocessor directive - expected a newline")
         ;
         do {
-          iVar3 = (**(code **)(*(int *)(*(int *)puVar1 + 0x20) + 4))
-                            (*(int *)(*(int *)puVar1 + 0x20),param_2);
-        } while (iVar3 != 10);
+          token = (**(code **)(*(int *)(*(int *)cppRef + 0x20) + 4))
+                            (*(int *)(*(int *)cppRef + 0x20),yylvalpp);
+        } while (token != 10);
       }
-      iVar6 = 0;
-      if ((lookUpSymbolResult != 0) && (uVar7 = *(uint *)(lookUpSymbolResult + 0x24) & 0x40000000, uVar7 == 0)) {
-        iVar6 = 1;
+      isDefined = 0;
+      if ((lookUpSymbolResult != 0) && (elseTrackerOrUndefFlag = *(uint *)(lookUpSymbolResult + 0x24) & 0x40000000, elseTrackerOrUndefFlag == 0)) {
+        isDefined = 1;
       }
-      if (iVar6 != param_1) {
-        iVar3 = ((int (*)())_CPPelse)(1,param_2,leftoverR5,leftoverR6,leftoverR7,leftoverR8,uVar7);
+      if (isDefined != isIfdef) {
+        token = ((int (*)())_CPPelse)(1,yylvalpp,leftoverR5,leftoverR6,leftoverR7,leftoverR8,elseTrackerOrUndefFlag);
       }
     }
     else {
-      if (param_1 == 0) {
-        pcVar4 = "ifndef";
+      if (isIfdef == 0) {
+        directiveName = "ifndef";
       }
       else {
-        pcVar4 = "ifdef";
+        directiveName = "ifdef";
       }
-      _CPPErrorToInfoLog(pcVar4,uVar5,leftoverR5,leftoverR6,leftoverR7,leftoverR8,uVar7);
+      _CPPErrorToInfoLog(directiveName,nameAtom,leftoverR5,leftoverR6,leftoverR7,leftoverR8,elseTrackerOrUndefFlag);
     }
   }
   else {
-    _CPPErrorToInfoLog("max #if nesting depth exceeded",uVar5,leftoverR5,leftoverR6,leftoverR7,leftoverR8,iVar6);
-    iVar3 = 0;
+    _CPPErrorToInfoLog("max #if nesting depth exceeded",nameAtom,leftoverR5,leftoverR6,leftoverR7,leftoverR8,cppState);
+    token = 0;
   }
-  return iVar3;
+  return token;
 }
 
 /* _CPPline @ 0x97b872a0 (268 bytes) */
-int _CPPline(param_1)
-  undefined4 *param_1;
+int _CPPline(yylvalpp)
+  undefined4 *yylvalpp;
 {
   undefined4 atoiResult;
-  undefined *puVar1;
-  int iVar2;
-  undefined4 uVar3;
-  int iVar4;
+  undefined *cppRef;
+  int token;
+  undefined4 r4Fwd;
+  int lastToken;
+  undefined4 extraout_r4;
   undefined4 extraOut1;
-  undefined4 extraOut2;
-  undefined4 extraOut3;
-  undefined4 extraOut4;
+  undefined4 extraout_r4_01;
+  undefined4 extraout_r4_02;
   undefined4 leftoverR5;
   undefined4 leftoverR6;
   undefined4 leftoverR7;
   undefined4 leftoverR8;
   undefined4 leftoverR9;
   
-  puVar1 = PTR__cpp_a7b7c0a4;
-  iVar2 = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
-                    (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),param_1);
-  if (iVar2 == 10) {
+  cppRef = PTR__cpp_a7b7c0a4;
+  token = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
+                    (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),yylvalpp);
+  if (token == 10) {
     _DecLineNumber();
-    _CPPErrorToInfoLog("#line",extraOut2,leftoverR5,leftoverR6,leftoverR7,leftoverR8,leftoverR9);
+    _CPPErrorToInfoLog("#line",extraOut1,leftoverR5,leftoverR6,leftoverR7,leftoverR8,leftoverR9);
     _IncLineNumber();
-    iVar2 = 10;
+    token = 10;
   }
   else {
-    uVar3 = extraOut1;
-    if (iVar2 == 0x10f) {
-      atoiResult = _atoi(param_1 + 3);
-      *param_1 = atoiResult;
+    r4Fwd = extraout_r4;
+    if (token == 0x10f) {
+      atoiResult = _atoi(yylvalpp + 3);
+      *yylvalpp = atoiResult;
       _SetLineNumber(atoiResult);
-      iVar2 = *(int *)(*(int *)puVar1 + 0x20);
-      iVar2 = (**(code **)(iVar2 + 4))(iVar2,param_1);
-      if (iVar2 == 0x10f) {
-        atoiResult = _atoi(param_1 + 3);
-        *param_1 = atoiResult;
+      token = *(int *)(*(int *)cppRef + 0x20);
+      token = (**(code **)(token + 4))(token,yylvalpp);
+      if (token == 0x10f) {
+        atoiResult = _atoi(yylvalpp + 3);
+        *yylvalpp = atoiResult;
         _SetStringNumber(atoiResult);
-        iVar2 = *(int *)(*(int *)puVar1 + 0x20);
-        iVar4 = (**(code **)(iVar2 + 4))(iVar2,param_1);
-        iVar2 = iVar4;
-        uVar3 = extraOut4;
+        token = *(int *)(*(int *)cppRef + 0x20);
+        lastToken = (**(code **)(token + 4))(token,yylvalpp);
+        token = lastToken;
+        r4Fwd = extraout_r4_02;
       }
       else {
-        iVar4 = 10;
-        uVar3 = extraOut3;
+        lastToken = 10;
+        r4Fwd = extraout_r4_01;
       }
-      if (iVar2 == 10) {
-        return iVar4;
+      if (token == 10) {
+        return lastToken;
       }
     }
-    _CPPErrorToInfoLog("#line",uVar3,leftoverR5,leftoverR6,leftoverR7,leftoverR8,leftoverR9);
+    _CPPErrorToInfoLog("#line",r4Fwd,leftoverR5,leftoverR6,leftoverR7,leftoverR8,leftoverR9);
   }
-  return iVar2;
+  return token;
 }
 
 /* _CPPerror @ 0x97b873ac (232 bytes) */
-int _CPPerror(param_1)
-  int param_1;
+int _CPPerror(yylvalpp)
+  int yylvalpp;
 {
-  undefined *puVar1;
-  undefined *puVar2;
-  int iVar3;
+  int messagePiece;
+  undefined *cppRef;
+  undefined *atableRef;
+  int tokenOrAtom;
   undefined4 strfromTStr;
   undefined4 extraOut1;
   undefined4 leftoverR5;
@@ -1052,23 +1058,23 @@ int _CPPerror(param_1)
   undefined4 leftoverR8;
   undefined4 leftoverR9;
   
-  puVar1 = PTR__cpp_a7b7c0a4;
-  iVar3 = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
-                    (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),param_1);
-  puVar2 = PTR__atable_a7b7c0ac;
-  while (iVar3 != 10) {
-    if ((iVar3 == 0x10b) || (iVar3 == 0x10f)) {
-      iVar3 = param_1 + 0xc;
+  cppRef = PTR__cpp_a7b7c0a4;
+  tokenOrAtom = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
+                    (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),yylvalpp);
+  atableRef = PTR__atable_a7b7c0ac;
+  while (tokenOrAtom != 10) {
+    if ((tokenOrAtom == 0x10b) || (tokenOrAtom == 0x10f)) {
+      messagePiece = yylvalpp + 0xc;
     }
     else {
-      if ((iVar3 == 0x10e) || (iVar3 == 0x116)) {
-        iVar3 = *(int *)(param_1 + 8);
+      if ((tokenOrAtom == 0x10e) || (tokenOrAtom == 0x116)) {
+        tokenOrAtom = *(int *)(yylvalpp + 8);
       }
-      iVar3 = ((int (*)())_GetStringOfAtom)(*(undefined4 *)puVar2,iVar3);
+      messagePiece = ((int (*)())_GetStringOfAtom)(*(undefined4 *)atableRef,tokenOrAtom);
     }
-    _StoreStr(iVar3);
-    iVar3 = (**(code **)(*(int *)(*(int *)puVar1 + 0x20) + 4))
-                      (*(int *)(*(int *)puVar1 + 0x20),param_1);
+    _StoreStr(messagePiece);
+    tokenOrAtom = (**(code **)(*(int *)(*(int *)cppRef + 0x20) + 4))
+                      (*(int *)(*(int *)cppRef + 0x20),yylvalpp);
   }
   _DecLineNumber();
   strfromTStr = _GetStrfromTStr();
@@ -1080,245 +1086,250 @@ int _CPPerror(param_1)
 }
 
 /* _CPPpragma @ 0x97b87494 (528 bytes) */
-int _CPPpragma(param_1)
-  int param_1;
+int _CPPpragma(yylvalpp)
+  int yylvalpp;
 {
-  undefined4 allocation2;
+  int cppState;
+  undefined4 r4Fwd;
+  undefined4 tokenCopy;
   int length;
-  undefined *puVar1;
-  undefined *puVar2;
-  uint uVar3;
-  undefined4 uVar4;
-  undefined4 *allocation;
-  int iVar6;
+  undefined *cppRef;
+  undefined *atableRef;
+  uint token;
+  undefined4 returnToken;
+  undefined4 *allTokens;
+  int tokenCapacity;
   undefined4 extraOut1;
-  undefined4 extraOut2;
-  undefined4 extraOut3;
-  undefined4 extraOut4;
+  undefined4 extraout_r4_00;
+  undefined4 extraout_r4_01;
+  undefined4 extraout_r4_02;
   undefined4 leftoverR5;
   undefined4 leftoverR6;
   undefined4 leftoverR7;
-  undefined4 in_r8;
-  int iVar7;
-  int iVar8;
-  undefined2 *puVar9;
-  undefined4 *puVar10;
-  int iVar11;
-  undefined2 local_40 [10];
+  undefined4 leftoverR8;
+  int currentInput;
+  int nextCapacity;
+  undefined2 *srcStr;
+  undefined4 *freeCursor;
+  int tokenCount;
+  undefined2 charStr [10];
   
-  iVar7 = *(int *)PTR__cpp_a7b7c0a4;
-  iVar11 = 0;
-  uVar3 = (**(code **)(*(int *)(iVar7 + 0x20) + 4))
-                    (*(int *)(iVar7 + 0x20),param_1,leftoverR5,leftoverR6,leftoverR7,in_r8,iVar7);
-  if (uVar3 == 10) {
+  cppState = *(int *)PTR__cpp_a7b7c0a4;
+  tokenCount = 0;
+  token = (**(code **)(*(int *)(cppState + 0x20) + 4))
+                    (*(int *)(cppState + 0x20),yylvalpp,leftoverR5,leftoverR6,leftoverR7,leftoverR8,cppState);
+  if (token == 10) {
     _DecLineNumber();
-    _CPPErrorToInfoLog("#pragma",extraOut1,leftoverR5,leftoverR6,leftoverR7,in_r8,iVar7);
+    _CPPErrorToInfoLog("#pragma",extraOut1,leftoverR5,leftoverR6,leftoverR7,leftoverR8,cppState);
     _IncLineNumber();
-    uVar4 = 10;
+    returnToken = 10;
   }
   else {
-    allocation = (undefined4 *)_malloc(0x28);
-    puVar2 = PTR__atable_a7b7c0ac;
-    uVar4 = extraOut2;
-    iVar6 = 10;
+    allTokens = (undefined4 *)_malloc(0x28);
+    atableRef = PTR__atable_a7b7c0ac;
+    r4Fwd = extraout_r4_00;
+    tokenCapacity = 10;
     do {
-      iVar8 = iVar6;
-      if (iVar6 <= iVar11) {
-        iVar8 = iVar6 << 1;
-        allocation = (undefined4 *)_realloc(allocation,iVar6 << 3);
-        uVar4 = extraOut3;
+      nextCapacity = tokenCapacity;
+      if (tokenCapacity <= tokenCount) {
+        nextCapacity = tokenCapacity << 1;
+        allTokens = (undefined4 *)_realloc(allTokens,tokenCapacity << 3);
+        r4Fwd = extraout_r4_01;
       }
-      if (uVar3 == 0x10b) {
+      if (token == 0x10b) {
 LAB_97b8758c:
-        puVar9 = (undefined2 *)(param_1 + 0xc);
-        length = _strlen(puVar9);
-        allocation2 = _malloc(length + 1);
-        allocation[iVar11] = allocation2;
+        srcStr = (undefined2 *)(yylvalpp + 0xc);
+        length = _strlen(srcStr);
+        tokenCopy = _malloc(length + 1);
+        allTokens[tokenCount] = tokenCopy;
       }
       else {
-        if ((int)uVar3 < 0x10c) {
-          if (uVar3 == 0xffffffff) {
-            _CPPShInfoLogMsg("#pragma directive must end with a newline",uVar4,leftoverR5,leftoverR6,leftoverR7,
-                             in_r8,iVar7);
+        if ((int)token < 0x10c) {
+          if (token == 0xffffffff) {
+            _CPPShInfoLogMsg("#pragma directive must end with a newline",r4Fwd,leftoverR5,leftoverR6,leftoverR7,
+                             leftoverR8,cppState);
             return 0xffffffff;
           }
         }
         else {
-          if (uVar3 == 0x10e) {
-            puVar9 = (undefined2 *)
-                     _GetAtomString(*(undefined4 *)puVar2,*(undefined4 *)(param_1 + 8));
-            length = _strlen(puVar9);
-            allocation2 = _malloc(length + 1);
-            allocation[iVar11] = allocation2;
+          if (token == 0x10e) {
+            srcStr = (undefined2 *)
+                     _GetAtomString(*(undefined4 *)atableRef,*(undefined4 *)(yylvalpp + 8));
+            length = _strlen(srcStr);
+            tokenCopy = _malloc(length + 1);
+            allTokens[tokenCount] = tokenCopy;
             goto LAB_97b875f0;
           }
-          if (uVar3 == 0x10f) goto LAB_97b8758c;
+          if (token == 0x10f) goto LAB_97b8758c;
         }
-        local_40[0] = (undefined2)((uVar3 & 0xff) << 8);
-        allocation2 = _malloc(2);
-        allocation[iVar11] = allocation2;
-        puVar9 = local_40;
+        charStr[0] = (undefined2)((token & 0xff) << 8);
+        tokenCopy = _malloc(2);
+        allTokens[tokenCount] = tokenCopy;
+        srcStr = charStr;
       }
 LAB_97b875f0:
-      iVar11 = iVar11 + 1;
-      _strcpy(allocation2,puVar9);
-      puVar1 = PTR__cpp_a7b7c0a4;
-      uVar3 = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
-                        (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),param_1);
-      uVar4 = extraOut4;
-      iVar6 = iVar8;
-    } while (uVar3 != 10);
-    iVar7 = *(int *)(*(int *)puVar1 + 0x20);
-    (**(code **)(iVar7 + 0xc))(iVar7,10,param_1);
-    _HandlePragma(allocation,iVar11);
-    iVar7 = *(int *)(*(int *)puVar1 + 0x20);
-    uVar4 = (**(code **)(iVar7 + 4))(iVar7,param_1);
-    puVar10 = allocation;
-    if (0 < iVar11) {
+      tokenCount = tokenCount + 1;
+      _strcpy(tokenCopy,srcStr);
+      cppRef = PTR__cpp_a7b7c0a4;
+      token = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
+                        (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),yylvalpp);
+      r4Fwd = extraout_r4_02;
+      tokenCapacity = nextCapacity;
+    } while (token != 10);
+    currentInput = *(int *)(*(int *)cppRef + 0x20);
+    (**(code **)(currentInput + 0xc))(currentInput,10,yylvalpp);
+    _HandlePragma(allTokens,tokenCount);
+    currentInput = *(int *)(*(int *)cppRef + 0x20);
+    returnToken = (**(code **)(currentInput + 4))(currentInput,yylvalpp);
+    freeCursor = allTokens;
+    if (0 < tokenCount) {
       do {
-        _free(*puVar10);
-        iVar11 = iVar11 + -1;
-        puVar10 = puVar10 + 1;
-      } while (iVar11 != 0);
+        _free(*freeCursor);
+        tokenCount = tokenCount + -1;
+        freeCursor = freeCursor + 1;
+      } while (tokenCount != 0);
     }
-    _free(allocation);
+    _free(allTokens);
   }
-  return uVar4;
+  return returnToken;
 }
 
 /* _CPPversion @ 0x97b876a4 (256 bytes) */
-int _CPPversion(param_1)
-  int *param_1;
+int _CPPversion(yylvalpp)
+  int *yylvalpp;
 {
+  int currentInput;
   int atoiResult;
-  undefined *puVar1;
-  int iVar2;
-  int iVar3;
+  undefined *cppRef;
+  int token;
+  int nextToken;
+  undefined4 extraout_r4;
+  undefined4 extraout_r4_00;
+  undefined4 r4Fwd;
   undefined4 extraOut1;
   undefined4 extraOut2;
-  undefined4 uVar4;
   undefined4 extraOut3;
-  undefined4 extraOut4;
-  undefined4 extraOut5;
-  undefined4 in_r5;
+  undefined4 leftoverR5;
   undefined4 leftoverR6;
   undefined4 leftoverR7;
   undefined4 leftoverR8;
-  undefined4 in_r9;
+  undefined4 leftoverR9;
   
-  puVar1 = PTR__cpp_a7b7c0a4;
-  iVar2 = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
-                    (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),param_1);
-  uVar4 = extraOut1;
-  if (*(int *)(*(int *)puVar1 + 0x28) == 1) {
-    _CPPShInfoLogMsg("#version must occur before any other statement in the program",extraOut1,
-                     in_r5,leftoverR6,leftoverR7,leftoverR8,in_r9);
-    uVar4 = extraOut2;
+  cppRef = PTR__cpp_a7b7c0a4;
+  token = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
+                    (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),yylvalpp);
+  r4Fwd = extraout_r4;
+  if (*(int *)(*(int *)cppRef + 0x28) == 1) {
+    _CPPShInfoLogMsg("#version must occur before any other statement in the program",extraout_r4,
+                     leftoverR5,leftoverR6,leftoverR7,leftoverR8,leftoverR9);
+    r4Fwd = extraout_r4_00;
   }
-  if (iVar2 == 10) {
+  if (token == 10) {
     _DecLineNumber();
-    _CPPErrorToInfoLog("#version",extraOut3,in_r5,leftoverR6,leftoverR7,leftoverR8,in_r9);
+    _CPPErrorToInfoLog("#version",extraOut1,leftoverR5,leftoverR6,leftoverR7,leftoverR8,leftoverR9);
     _IncLineNumber();
-    iVar2 = 10;
+    token = 10;
   }
   else {
-    if (iVar2 != 0x10f) {
-      _CPPErrorToInfoLog("#version",uVar4,in_r5,leftoverR6,leftoverR7,leftoverR8,in_r9);
+    if (token != 0x10f) {
+      _CPPErrorToInfoLog("#version",r4Fwd,leftoverR5,leftoverR6,leftoverR7,leftoverR8,leftoverR9);
     }
-    atoiResult = _atoi(param_1 + 3);
-    *param_1 = atoiResult;
+    atoiResult = _atoi(yylvalpp + 3);
+    *yylvalpp = atoiResult;
     if (atoiResult != 0x6e) {
-      _CPPShInfoLogMsg("Version number not supported by GL2",extraOut4,in_r5,leftoverR6,leftoverR7,leftoverR8,
-                       in_r9);
+      _CPPShInfoLogMsg("Version number not supported by GL2",extraOut2,leftoverR5,leftoverR6,leftoverR7,leftoverR8,
+                       leftoverR9);
     }
-    iVar2 = *(int *)(*(int *)puVar1 + 0x20);
-    iVar3 = (**(code **)(iVar2 + 4))(iVar2,param_1);
-    iVar2 = 10;
-    if (iVar3 != 10) {
-      _CPPErrorToInfoLog("#version",extraOut5,in_r5,leftoverR6,leftoverR7,leftoverR8,in_r9);
-      iVar2 = iVar3;
+    currentInput = *(int *)(*(int *)cppRef + 0x20);
+    nextToken = (**(code **)(currentInput + 4))(currentInput,yylvalpp);
+    token = 10;
+    if (nextToken != 10) {
+      _CPPErrorToInfoLog("#version",extraOut3,leftoverR5,leftoverR6,leftoverR7,leftoverR8,leftoverR9);
+      token = nextToken;
     }
   }
-  return iVar2;
+  return token;
 }
 
 /* _CPPextension @ 0x97b877a4 (348 bytes) */
-int _CPPextension(param_1)
-  int param_1;
+int _CPPextension(yylvalpp)
+  int yylvalpp;
 {
   undefined4 atomString;
-  undefined *puVar1;
-  undefined *puVar2;
-  int iVar3;
-  undefined4 uVar4;
-  char *pcVar5;
+  undefined *cppRef;
+  undefined *atableRef;
+  int token;
+  undefined4 messageR4;
+  char *errorMessage;
   undefined4 extraOut1;
   undefined4 extraOut2;
+  undefined4 extraout_r4_01;
+  undefined4 extraout_r4_02;
   undefined4 extraOut3;
-  undefined4 extraOut4;
-  undefined4 extraOut5;
   undefined4 leftoverR5;
   undefined4 leftoverR6;
   undefined4 leftoverR7;
   undefined4 leftoverR8;
   undefined4 leftoverR9;
-  undefined1 auStack_70 [92];
+  undefined1 extensionName [92];
   
-  puVar1 = PTR__cpp_a7b7c0a4;
-  iVar3 = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
-                    (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),param_1);
-  if (iVar3 == 10) {
+  cppRef = PTR__cpp_a7b7c0a4;
+  token = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
+                    (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),yylvalpp);
+  if (token == 10) {
     _DecLineNumber();
     _CPPShInfoLogMsg("extension name not specified",extraOut2,leftoverR5,leftoverR6,leftoverR7,leftoverR8,leftoverR9);
     _IncLineNumber();
-    iVar3 = 10;
+    token = 10;
   }
   else {
-    if (iVar3 != 0x10e) {
+    if (token != 0x10e) {
       _CPPErrorToInfoLog("#extension",extraOut1,leftoverR5,leftoverR6,leftoverR7,leftoverR8,leftoverR9);
     }
-    puVar2 = PTR__atable_a7b7c0ac;
-    atomString = _GetAtomString(*(undefined4 *)PTR__atable_a7b7c0ac,*(undefined4 *)(param_1 + 8));
-    _strcpy(auStack_70,atomString);
-    iVar3 = (**(code **)(*(int *)(*(int *)puVar1 + 0x20) + 4))
-                      (*(int *)(*(int *)puVar1 + 0x20),param_1);
-    if (iVar3 == 0x3a) {
-      iVar3 = (**(code **)(*(int *)(*(int *)puVar1 + 0x20) + 4))
-                        (*(int *)(*(int *)puVar1 + 0x20),param_1);
-      if (iVar3 == 0x10e) {
-        atomString = _GetAtomString(*(undefined4 *)puVar2,*(undefined4 *)(param_1 + 8));
-        _updateExtensionBehavior(auStack_70,atomString);
-        iVar3 = (**(code **)(*(int *)(*(int *)puVar1 + 0x20) + 4))
-                          (*(int *)(*(int *)puVar1 + 0x20),param_1);
-        if (iVar3 == 10) {
+    atableRef = PTR__atable_a7b7c0ac;
+    atomString = _GetAtomString(*(undefined4 *)PTR__atable_a7b7c0ac,*(undefined4 *)(yylvalpp + 8));
+    _strcpy(extensionName,atomString);
+    token = (**(code **)(*(int *)(*(int *)cppRef + 0x20) + 4))
+                      (*(int *)(*(int *)cppRef + 0x20),yylvalpp);
+    if (token == 0x3a) {
+      token = (**(code **)(*(int *)(*(int *)cppRef + 0x20) + 4))
+                        (*(int *)(*(int *)cppRef + 0x20),yylvalpp);
+      if (token == 0x10e) {
+        atomString = _GetAtomString(*(undefined4 *)atableRef,*(undefined4 *)(yylvalpp + 8));
+        _updateExtensionBehavior(extensionName,atomString);
+        token = (**(code **)(*(int *)(*(int *)cppRef + 0x20) + 4))
+                          (*(int *)(*(int *)cppRef + 0x20),yylvalpp);
+        if (token == 10) {
           return 10;
         }
-        _CPPErrorToInfoLog("#extension",extraOut5,leftoverR5,leftoverR6,leftoverR7,leftoverR8,leftoverR9);
-        return iVar3;
+        _CPPErrorToInfoLog("#extension",extraOut3,leftoverR5,leftoverR6,leftoverR7,leftoverR8,leftoverR9);
+        return token;
       }
-      pcVar5 = "behavior for extension not specified";
-      uVar4 = extraOut4;
+      errorMessage = "behavior for extension not specified";
+      messageR4 = extraout_r4_02;
     }
     else {
-      pcVar5 = "\':\' missing after extension name";
-      uVar4 = extraOut3;
+      errorMessage = "\':\' missing after extension name";
+      messageR4 = extraout_r4_01;
     }
-    _CPPShInfoLogMsg(pcVar5,uVar4,leftoverR5,leftoverR6,leftoverR7,leftoverR8,leftoverR9);
+    _CPPShInfoLogMsg(errorMessage,messageR4,leftoverR5,leftoverR6,leftoverR7,leftoverR8,leftoverR9);
   }
-  return iVar3;
+  return token;
 }
 
 /* _readCPPline @ 0x97b87900 (972 bytes) */
-int _readCPPline(param_1)
-  int param_1;
+int _readCPPline(yylvalpp)
+  int yylvalpp;
 {
+  int cppStateInput;
+  int cppState;
   int chkCorrectElseNestingResult;
   undefined4 stringOfAtom;
   undefined4 strfromTStr;
-  undefined *puVar1;
-  int iVar2;
-  int iVar3;
-  undefined4 uVar4;
+  undefined *cppRef;
+  int directiveAtom;
+  int token;
+  undefined4 isIfdef;
   undefined4 extraOut1;
   undefined4 extraOut2;
   undefined4 extraOut3;
@@ -1327,89 +1338,89 @@ int _readCPPline(param_1)
   undefined4 leftoverR7;
   undefined4 leftoverR8;
   undefined4 leftoverR9;
-  uint uVar5;
+  uint versionFlag;
   
-  puVar1 = PTR__cpp_a7b7c0a4;
-  uVar5 = 0;
-  iVar3 = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
-                    (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),param_1);
-  if (iVar3 == 0x10e) {
-    iVar2 = *(int *)(param_1 + 8);
-    if (iVar2 == _defineAtom) {
-      iVar3 = ((int (*)())_CPPdefine)(param_1);
+  cppRef = PTR__cpp_a7b7c0a4;
+  versionFlag = 0;
+  token = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
+                    (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),yylvalpp);
+  if (token == 0x10e) {
+    directiveAtom = *(int *)(yylvalpp + 8);
+    if (directiveAtom == _defineAtom) {
+      token = ((int (*)())_CPPdefine)(yylvalpp);
     }
     else {
-      if (iVar2 == _elseAtom) {
+      if (directiveAtom == _elseAtom) {
         chkCorrectElseNestingResult = ((int (*)())_ChkCorrectElseNesting)();
         if (chkCorrectElseNestingResult == 0) {
           _CPPErrorToInfoLog("#else after a #else",extraOut2,leftoverR5,leftoverR6,leftoverR7,leftoverR8,leftoverR9);
-          iVar3 = 0;
-          uVar5 = 1;
-          *(undefined4 *)(*(int *)puVar1 + 0x34) = 0;
-          iVar2 = *(int *)puVar1;
+          token = 0;
+          versionFlag = 1;
+          *(undefined4 *)(*(int *)cppRef + 0x34) = 0;
+          cppState = *(int *)cppRef;
           goto LAB_97b87cb4;
         }
-        iVar3 = *(int *)puVar1;
-        if (*(int *)(iVar3 + 0x34) == 0) {
+        cppStateInput = *(int *)cppRef;
+        if (*(int *)(cppStateInput + 0x34) == 0) {
           _CPPErrorToInfoLog("#else mismatch",extraOut2,leftoverR5,leftoverR6,leftoverR7,leftoverR8,leftoverR9);
-          *(undefined4 *)(*(int *)puVar1 + 0x140) = 1;
-          iVar3 = *(int *)puVar1;
+          *(undefined4 *)(*(int *)cppRef + 0x140) = 1;
+          cppStateInput = *(int *)cppRef;
         }
-        iVar3 = (**(code **)(*(int *)(iVar3 + 0x20) + 4))(*(int *)(iVar3 + 0x20),param_1);
-        if (iVar3 != 10) {
+        token = (**(code **)(*(int *)(cppStateInput + 0x20) + 4))(*(int *)(cppStateInput + 0x20),yylvalpp);
+        if (token != 10) {
           _CPPWarningToInfoLog
                     ("unexpected tokens following #else preprocessor directive - expected a newline"
                     );
           do {
-            iVar3 = (**(code **)(*(int *)(*(int *)puVar1 + 0x20) + 4))
-                              (*(int *)(*(int *)puVar1 + 0x20),param_1);
-          } while (iVar3 != 10);
+            token = (**(code **)(*(int *)(*(int *)cppRef + 0x20) + 4))
+                              (*(int *)(*(int *)cppRef + 0x20),yylvalpp);
+          } while (token != 10);
         }
       }
       else {
-        if (iVar2 != _elifAtom) {
-          if (iVar2 == _endifAtom) {
-            *(undefined4 *)(*(int *)(*(int *)puVar1 + 0x138) * 4 + *(int *)puVar1 + 0x38) = 0;
-            *(int *)(*(int *)puVar1 + 0x138) = *(int *)(*(int *)puVar1 + 0x138) + -1;
-            iVar2 = *(int *)puVar1;
-            if (*(int *)(iVar2 + 0x34) == 0) {
-              _CPPErrorToInfoLog("#endif mismatch",extraOut1,leftoverR5,leftoverR6,leftoverR7,leftoverR8,iVar2);
-              *(undefined4 *)(*(int *)puVar1 + 0x140) = 1;
+        if (directiveAtom != _elifAtom) {
+          if (directiveAtom == _endifAtom) {
+            *(undefined4 *)(*(int *)(*(int *)cppRef + 0x138) * 4 + *(int *)cppRef + 0x38) = 0;
+            *(int *)(*(int *)cppRef + 0x138) = *(int *)(*(int *)cppRef + 0x138) + -1;
+            cppState = *(int *)cppRef;
+            if (*(int *)(cppState + 0x34) == 0) {
+              _CPPErrorToInfoLog("#endif mismatch",extraOut1,leftoverR5,leftoverR6,leftoverR7,leftoverR8,cppState);
+              *(undefined4 *)(*(int *)cppRef + 0x140) = 1;
             }
             else {
-              *(int *)(iVar2 + 0x34) = *(int *)(iVar2 + 0x34) + -1;
+              *(int *)(cppState + 0x34) = *(int *)(cppState + 0x34) + -1;
             }
           }
-          else if (iVar2 == _ifAtom) {
-            iVar3 = ((int (*)())_CPPif)(param_1);
+          else if (directiveAtom == _ifAtom) {
+            token = ((int (*)())_CPPif)(yylvalpp);
           }
           else {
-            uVar4 = 1;
-            if (iVar2 != _ifdefAtom) {
-              if (iVar2 != _ifndefAtom) {
-                if (iVar2 == _lineAtom) {
-                  iVar3 = ((int (*)())_CPPline)(param_1);
+            isIfdef = 1;
+            if (directiveAtom != _ifdefAtom) {
+              if (directiveAtom != _ifndefAtom) {
+                if (directiveAtom == _lineAtom) {
+                  token = ((int (*)())_CPPline)(yylvalpp);
                 }
-                else if (iVar2 == _pragmaAtom) {
-                  iVar3 = ((int (*)())_CPPpragma)(param_1);
+                else if (directiveAtom == _pragmaAtom) {
+                  token = ((int (*)())_CPPpragma)(yylvalpp);
                 }
-                else if (iVar2 == _undefAtom) {
-                  iVar3 = ((int (*)())_CPPundef)(param_1);
+                else if (directiveAtom == _undefAtom) {
+                  token = ((int (*)())_CPPundef)(yylvalpp);
                 }
-                else if (iVar2 == _errorAtom) {
-                  iVar3 = ((int (*)())_CPPerror)(param_1);
+                else if (directiveAtom == _errorAtom) {
+                  token = ((int (*)())_CPPerror)(yylvalpp);
                 }
-                else if (iVar2 == _versionAtom) {
-                  uVar5 = 1;
-                  iVar3 = ((int (*)())_CPPversion)(param_1);
+                else if (directiveAtom == _versionAtom) {
+                  versionFlag = 1;
+                  token = ((int (*)())_CPPversion)(yylvalpp);
                 }
-                else if (iVar2 == _extensionAtom) {
-                  iVar3 = ((int (*)())_CPPextension)(param_1);
+                else if (directiveAtom == _extensionAtom) {
+                  token = ((int (*)())_CPPextension)(yylvalpp);
                 }
                 else {
                   _StoreStr("Invalid Directive");
                   stringOfAtom = ((int (*)())_GetStringOfAtom)(*(undefined4 *)PTR__atable_a7b7c0ac,
-                                           *(undefined4 *)(param_1 + 8));
+                                           *(undefined4 *)(yylvalpp + 8));
                   _StoreStr(stringOfAtom);
                   strfromTStr = _GetStrfromTStr();
                   _CPPShInfoLogMsg(strfromTStr,extraOut3,leftoverR5,leftoverR6,leftoverR7,leftoverR8,leftoverR9);
@@ -1417,41 +1428,41 @@ int _readCPPline(param_1)
                 }
                 goto LAB_97b87c50;
               }
-              uVar4 = 0;
+              isIfdef = 0;
             }
-            iVar3 = ((int (*)())_CPPifdef)(uVar4,param_1);
+            token = ((int (*)())_CPPifdef)(isIfdef,yylvalpp);
           }
           goto LAB_97b87c50;
         }
-        iVar3 = *(int *)puVar1;
-        if (*(int *)(iVar3 + 0x34) == 0) {
+        cppStateInput = *(int *)cppRef;
+        if (*(int *)(cppStateInput + 0x34) == 0) {
           _CPPErrorToInfoLog("#elif mismatch",extraOut1,leftoverR5,leftoverR6,leftoverR7,leftoverR8,leftoverR9);
-          *(undefined4 *)(*(int *)puVar1 + 0x140) = 1;
-          iVar3 = *(int *)puVar1;
+          *(undefined4 *)(*(int *)cppRef + 0x140) = 1;
+          cppStateInput = *(int *)cppRef;
         }
-        iVar3 = (**(code **)(*(int *)(iVar3 + 0x20) + 4))(*(int *)(iVar3 + 0x20),param_1);
-        while (iVar3 != 10) {
-          iVar3 = (**(code **)(*(int *)(*(int *)puVar1 + 0x20) + 4))
-                            (*(int *)(*(int *)puVar1 + 0x20),param_1);
+        token = (**(code **)(*(int *)(cppStateInput + 0x20) + 4))(*(int *)(cppStateInput + 0x20),yylvalpp);
+        while (token != 10) {
+          token = (**(code **)(*(int *)(*(int *)cppRef + 0x20) + 4))
+                            (*(int *)(*(int *)cppRef + 0x20),yylvalpp);
         }
       }
-      iVar3 = ((int (*)())_CPPelse)(0,param_1,leftoverR5,leftoverR6,leftoverR7,leftoverR8,leftoverR9);
+      token = ((int (*)())_CPPelse)(0,yylvalpp,leftoverR5,leftoverR6,leftoverR7,leftoverR8,leftoverR9);
     }
   }
 LAB_97b87c50:
-  puVar1 = PTR__cpp_a7b7c0a4;
-  if ((iVar3 != 10) && (iVar3 != 0)) {
-    while (iVar3 != -1) {
-      iVar3 = (**(code **)(*(int *)(*(int *)puVar1 + 0x20) + 4))
-                        (*(int *)(*(int *)puVar1 + 0x20),param_1);
-      if ((iVar3 == 10) || (iVar3 == 0)) break;
+  cppRef = PTR__cpp_a7b7c0a4;
+  if ((token != 10) && (token != 0)) {
+    while (token != -1) {
+      token = (**(code **)(*(int *)(*(int *)cppRef + 0x20) + 4))
+                        (*(int *)(*(int *)cppRef + 0x20),yylvalpp);
+      if ((token == 10) || (token == 0)) break;
     }
   }
-  uVar5 = uVar5 ^ 1;
-  iVar2 = *(int *)PTR__cpp_a7b7c0a4;
+  versionFlag = versionFlag ^ 1;
+  cppState = *(int *)PTR__cpp_a7b7c0a4;
 LAB_97b87cb4:
-  *(uint *)(iVar2 + 0x28) = uVar5;
-  return iVar3;
+  *(uint *)(cppState + 0x28) = versionFlag;
+  return token;
 }
 
 /* _FreeMacro @ 0x97b87ccc (8 bytes) */

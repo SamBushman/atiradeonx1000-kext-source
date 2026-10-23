@@ -8,7 +8,6 @@ local	_CPPelse	param_7	unusedArg7	INFERRED	never read as an input; forwarded to 
 local	_CPPelse	puVar1	cppRef	INFERRED	&_cpp GOT pointer
 local	_CPPelse	iVar2	directiveAtom	INFERRED	yylvalpp->sc_ident compared with the if/ifdef/ifndef/endif/else/elif atoms
 local	_CPPelse	iVar3	token	CONFIRMED	token from currentInput->scan
-local	_CPPelse	iVar4	nestDepth	INFERRED	nested #if depth while skipping; later reused for the cpp->ifdepth read and the #else scan token
 local	_CPPelse	extraout_r4	extraOut1	INFERRED	Ghidra extra-output of r4; only forwarded
 local	_op_logor	param_1	lhs	CONFIRMED	left operand of logical-or (cpp.c unop/binop table entry)
 local	_op_logor	param_2	rhs	CONFIRMED	right operand of ||
@@ -71,3 +70,7 @@ use	_eval	uVar8	definedValue	INFERRED	1 when the identifier after `defined` is a
 use	_eval	uVar8	binopResult	INFERRED	result of the binop function applied to lhsValue and *result	^\s*uVar8\ =\ \(\*\*\(code\ \*\*\)\(&UNK_a7b7ce50	+2	all	none
 use	_eval	uVar8	unopResult	INFERRED	result of the unop function applied to *result	^\s*uVar8\ =\ \(\*\*\(code\ \*\*\)\(&UNK_a7b7cf24	+2	all	none
 use	_eval	uVar8	scanToken	INFERRED	token from currentInput->scan, passed on as eval's first argument	*		all	none
+use	_CPPelse	iVar4	afterElseToken	INFERRED	token read after #else/#elif while checking for the trailing newline	^\s*iVar4\ =\ \(\*\*\(code	^\s*\}\ while\ \(iVar2\ !=\ _elifAtom\);	all	none
+use	_CPPelse	iVar4	ifDepth	INFERRED	cpp->ifdepth (+0x34) read before it is decremented	^\s*iVar4\ =\ \*\(int\ \*\)\(\*\(int\ \*\)puVar1\ \+\ 0x34\);	+5	all	none
+use	_CPPelse	iVar4	ifDepth	INFERRED	cpp->ifdepth (+0x34) read before it is decremented	^\s*iVar4\ =\ \*\(int\ \*\)\(\*\(int\ \*\)puVar1\ \+\ 0x34\);@2		all	none
+use	_CPPelse	iVar4	skipDepth	INFERRED	nesting depth of #if blocks entered while skipping	*		all	none

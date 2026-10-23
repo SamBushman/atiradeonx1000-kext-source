@@ -5529,9 +5529,9 @@ void _InterpreterRun(int emulator,int elementCount,double fparam_1,double fparam
   float *vertexOutput;
   uint uVar17;
   int iVar18;
-  int extraOut1;
-  int extraOut2;
-  int extraOut3;
+  int extraout_r4;
+  int extraout_r4_00;
+  int extraout_r4_01;
   undefined4 leftoverR5;
   undefined4 leftoverR6;
   undefined4 leftoverR7;
@@ -5542,8 +5542,8 @@ void _InterpreterRun(int emulator,int elementCount,double fparam_1,double fparam
   uint clipAndMask;
   int machine;
   double dVar24;
-  double unaffected_ut_f1;
-  double unaffected_ut_f1_00;
+  double extraout_f1;
+  double extraout_f1_00;
   double xScale;
   double xBias;
   double invWScale;
@@ -5622,8 +5622,8 @@ void _InterpreterRun(int emulator,int elementCount,double fparam_1,double fparam
       uVar17 = _InterpreterRasterOpMachine_DepthTest(machine + 0xa24);
       *(uint *)(machine + 0xa58) = *(uint *)(machine + 0xa58) | uVar17;
       iVar20 = *(int *)(emulator + 0xd80);
-      elementCount = extraOut1;
-      fparam_1 = unaffected_ut_f1;
+      elementCount = extraout_r4;
+      fparam_1 = extraout_f1;
     }
     iVar18 = *(int *)(iVar20 + 0x120);
     if ((iVar18 != 0) && (*(int *)(machine + 0xa58) == 0)) {
@@ -5631,17 +5631,17 @@ void _InterpreterRun(int emulator,int elementCount,double fparam_1,double fparam
         iVar18 = ((int * (*)())_InterpreterEmulateOp)(machine,iVar18,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,
                             fparam_7,fparam_8,in_stack_ffffff38,in_stack_ffffff40,in_stack_ffffff48,
                             in_stack_ffffff50,in_stack_ffffff58);
-        fparam_1 = unaffected_ut_f1_00;
+        fparam_1 = extraout_f1_00;
         if (iVar18 == 0) break;
       } while (*(int *)(machine + 0xa58) == 0);
       iVar20 = *(int *)(emulator + 0xd80);
-      elementCount = extraOut2;
+      elementCount = extraout_r4_00;
     }
     if ((*(int *)(iVar20 + 0x38) == 0x8804) || (*(int *)(iVar20 + 0x38) == 0x8b30)) {
       if (*(int *)(machine + 0xa58) == 0) {
         fparam_1 = (double)((int (*)())_InterpreterWriteFinalFragmentToBuffer)(machine,elementCount,leftoverR5,leftoverR6,leftoverR7,leftoverR8,iVar15);
         iVar20 = *(int *)(emulator + 0xd80);
-        elementCount = extraOut3;
+        elementCount = extraout_r4_01;
       }
     }
     else {
