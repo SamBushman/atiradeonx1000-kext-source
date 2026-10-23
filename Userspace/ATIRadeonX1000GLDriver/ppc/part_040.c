@@ -496,8 +496,8 @@ int FUN_0012c0e4(param_1)
   return 1;
 }
 
-/* FudoPs__vslot69 @ 0x12c134 (424 bytes) */
-int FudoPs__vslot69(this, param_2, param_3, param_4, param_5, param_6, param_7)
+/* FudoPs__vslot69_shouldFlattenIf @ 0x12c134 (424 bytes) */
+int FudoPs__vslot69_shouldFlattenIf(this, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 this;
   int param_2;
   undefined4 param_3;
@@ -3770,7 +3770,7 @@ int FUN_001314b8(param_1)
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_0012c134");
-asm(".set FUN_0012c134, _FudoPs__vslot69");
+asm(".set FUN_0012c134, _FudoPs__vslot69_shouldFlattenIf");
 asm(".globl FUN_0012dcf0");
 asm(".set FUN_0012dcf0, _FudoPs__flattenIfs");
 

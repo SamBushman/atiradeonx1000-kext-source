@@ -1182,8 +1182,8 @@ int FUN_000e2f8c(inst, param_2, param_3)
   return iVar2 == param_2;
 }
 
-/* MachineAssembler__vslot34 @ 0xe2fd8 (360 bytes) */
-int MachineAssembler__vslot34(this, inst)
+/* MachineAssembler__vslot34_declareDestinationLanesByClass @ 0xe2fd8 (360 bytes) */
+int MachineAssembler__vslot34_declareDestinationLanesByClass(this, inst)
   int this;
   int inst;
 {
@@ -1479,7 +1479,7 @@ int FUN_000e36bc(param_1, param_2, param_3)
    * never read back by any other statement in this function (no name exists for them, hence no overflow
    * was visible from local C code alone) - only sized correctly by checking the callee's real write range
    * against stock disassembly. Same defect class as the Scheduler__run/Scheduler__scheduleBlock/Scheduler__packDotProductCandidates/
-   * FUN_00158c3c fixes already landed on this issue. */
+   * Inst__collapseAlgebraic_00158c3c fixes already landed on this issue. */
   undefined1 auStack_e36bc_combined [0x40];
 #define auStack_78 (auStack_e36bc_combined + 0x0)
 #define auStack_74 (auStack_e36bc_combined + 0x4)
@@ -2369,6 +2369,6 @@ asm(".set FUN_000e2a8c, _IRStartMakeCall__acceptCallPseudo");
 asm(".globl FUN_000e2aa8");
 asm(".set FUN_000e2aa8, _IREndMakeCall__acceptCallPseudo");
 asm(".globl FUN_000e2fd8");
-asm(".set FUN_000e2fd8, _MachineAssembler__vslot34");
+asm(".set FUN_000e2fd8, _MachineAssembler__vslot34_declareDestinationLanesByClass");
 asm(".globl FUN_000e3140");
 asm(".set FUN_000e3140, _MachineAssembler__visitIfHeaderStatic");

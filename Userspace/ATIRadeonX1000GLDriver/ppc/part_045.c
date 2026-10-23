@@ -2546,7 +2546,7 @@ int Scheduler__scheduleBlock(scheduler, block)
    * read as 0 (list "empty"), so the loop below - which registers this object into a shared pending-list
    * via Scheduler__onNodeReady/Scheduler__enqueueReadyNode - never ran at all, leaving Scheduler__commitBundle's later check permanently
    * empty and crashing much deeper in DList__count (same defect class as the two fixes already landed
-   * on this issue for Scheduler__packDotProductCandidates/FUN_00158c3c/Scheduler__buildCoScheduleGroups). local_38 only ever stores the *value*
+   * on this issue for Scheduler__packDotProductCandidates/Inst__collapseAlgebraic_00158c3c/Scheduler__buildCoScheduleGroups). local_38 only ever stores the *value*
    * auStack_40+0xc (not aliased memory), so simply enlarging the array is sufficient here. */
   undefined1 auStack_40 [0x18];
   int local_38;

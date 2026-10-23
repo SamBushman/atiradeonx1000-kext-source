@@ -70,24 +70,24 @@ int HwLimits__deleting_dtor(this)
   return operator_delete(this);
 }
 
-/* HwLimits__vslot7 @ 0x1d0000 (32 bytes) */
-int HwLimits__vslot7(this)
+/* HwLimits__vslot7_initInterpolatorTypeDescriptor @ 0x1d0000 (32 bytes) */
+int HwLimits__vslot7_initInterpolatorTypeDescriptor(this)
   undefined4 *this;
 {
   *this = DAT_001afa04;
   return;
 }
 
-/* HwLimits__vslot40 @ 0x1d0070 (32 bytes) */
-int HwLimits__vslot40(this)
+/* HwLimits__vslot40_initTypeDescriptorB @ 0x1d0070 (32 bytes) */
+int HwLimits__vslot40_initTypeDescriptorB(this)
   undefined4 *this;
 {
   *this = DAT_001afa08;
   return;
 }
 
-/* HwLimits__vslot70 @ 0x1d014c (32 bytes) */
-int HwLimits__vslot70(this)
+/* HwLimits__vslot70_initExportValueTypeDescriptor @ 0x1d014c (32 bytes) */
+int HwLimits__vslot70_initExportValueTypeDescriptor(this)
   undefined4 *this;
 {
   *this = DAT_001afa04;
@@ -954,11 +954,11 @@ asm(".set FUN_001cffa4, _HwLimits__dtor");
 asm(".globl FUN_001cffc8");
 asm(".set FUN_001cffc8, _HwLimits__deleting_dtor");
 asm(".globl FUN_001d0000");
-asm(".set FUN_001d0000, _HwLimits__vslot7");
+asm(".set FUN_001d0000, _HwLimits__vslot7_initInterpolatorTypeDescriptor");
 asm(".globl FUN_001d0070");
-asm(".set FUN_001d0070, _HwLimits__vslot40");
+asm(".set FUN_001d0070, _HwLimits__vslot40_initTypeDescriptorB");
 asm(".globl FUN_001d014c");
-asm(".set FUN_001d014c, _HwLimits__vslot70");
+asm(".set FUN_001d014c, _HwLimits__vslot70_initExportValueTypeDescriptor");
 asm(".globl FUN_001d01b0");
 asm(".set FUN_001d01b0, _HwChip__dtor");
 asm(".globl FUN_001d01d4");

@@ -1,0 +1,18 @@
+local	R300MachineAssembler__assembleAluInstruction	bVar1	writesRgb	CONFIRMED	classifyAluOperation bit 0: the instruction has an rgb part
+local	R300MachineAssembler__assembleAluInstruction	bVar2	writesAlpha	CONFIRMED	classifyAluOperation bit 1: the instruction has an alpha part
+local	R300MachineAssembler__assembleAluInstruction	bVar5	crFlagsByte	CONFIRMED	top byte of the condition-register image built from classify bit 4
+local	R300MachineAssembler__assembleAluInstruction	iVar20	picTableWord	UNKNOWN	word from the PIC-relative table
+local	R300MachineAssembler__assembleAluInstruction	local_98	srcpEnablesAlpha	INFERRED	second word of the first classify output pair
+local	R300MachineAssembler__assembleAluInstruction	local_a8	classifyOut2b	INFERRED	second word of the second classify output pair
+local	R300MachineAssembler__assembleAluInstruction	local_bc	rgbSelect	INFERRED	per-source rgb source select codes (visitor slots 59/61/62)
+local	R300MachineAssembler__assembleAluInstruction	local_cc	alphaMod	INFERRED	per-source alpha swizzle/modifier words (visitor slots 60/63/64)
+local	R300MachineAssembler__assembleAluInstruction	local_dc	rgbMod	INFERRED	per-source rgb swizzle/modifier words
+local	R300MachineAssembler__assembleAluInstruction	local_ec	alphaSelect	INFERRED	per-source alpha source select codes
+local	R300MachineAssembler__assembleAluInstruction	piVar19	irInstWords	UNKNOWN	irInst + 0x98
+local	R300MachineAssembler__assembleAluInstruction	piVar22	srcIdx	CONFIRMED	1-based source operand index (pointer-typed in the decompile)
+local	R300MachineAssembler__assembleAluInstruction	pcVar7	selectMethod	CONFIRMED	visitor method chosen from the vtable: 0xf4/0xf8/0xfc/0x100/0x120/0x124
+local	R300MachineAssembler__assembleAluInstruction	uVar18	rgbUsedMaskOld	CONFIRMED	this[0x20]: bitmask of used rgb source slots (before the update)
+local	R300MachineAssembler__assembleAluInstruction	uVar24	allocTable	CONFIRMED	compiler+0x6c4
+local	R300MachineAssembler__assembleAluInstruction	uVar6	classifyRgbCopy	CONFIRMED	copy of classifyRgbBit
+local	R300MachineAssembler__assembleAluInstruction	uVar9	usedMaskOld	CONFIRMED	this[0x20]/this[0x21] before the update (rgb/alpha used-slot masks)
+local	R300MachineAssembler__assembleAluInstruction	piVar15	selectSrcIdx	CONFIRMED	source index passed to the select methods (srcIdx, or 1/3 for the third source)

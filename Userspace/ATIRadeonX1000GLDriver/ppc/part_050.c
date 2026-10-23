@@ -134,12 +134,12 @@ int FudoPs__encodeUniformImmediate(this, values, laneSelectors)
   return callResult;
 }
 
-/* FudoPs__vslot85 @ 0x1919d8 (344 bytes) */
-int FudoPs__vslot85(this, param_2, param_3, param_4)
+/* FudoPs__vslot85_findOrEncodeConstantVector @ 0x1919d8 (344 bytes) */
+int FudoPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwizzle)
   undefined4 this;
-  int param_2;
-  dword *param_3;
-  int *param_4;
+  int program;
+  dword *constants;
+  int *laneSwizzle;
 {
   float fVar1;
   bool bVar2;
@@ -154,14 +154,14 @@ int FudoPs__vslot85(this, param_2, param_3, param_4)
   uint local_38;
   float local_20;
   
-  if (*param_4 != 0x4040404) {
+  if (*laneSwizzle != 0x4040404) {
     puVar5 = &DAT_001b19e0;
     fVar1 = 0.0;
     loopRemaining2 = 4;
     bVar2 = true;
     iVar6 = 1;
-    piVar3 = param_4;
-    loopIndex = param_3;
+    piVar3 = laneSwizzle;
+    loopIndex = constants;
     do {
       if (*(char *)piVar3 != '\x04') {
         if (bVar2) {
@@ -176,9 +176,9 @@ int FudoPs__vslot85(this, param_2, param_3, param_4)
       loopIndex = loopIndex + 1;
       loopRemaining2 = loopRemaining2 + -1;
     } while (loopRemaining2 != 0);
-    piVar3 = param_4;
+    piVar3 = laneSwizzle;
     if (iVar6 == 0) {
-      loopRemaining2 = FUN_000f6a04(param_2,param_3,*param_4);
+      loopRemaining2 = FUN_000f6a04(program,constants,*laneSwizzle);
     }
     else {
       puVar5 = (undefined *)0x4;
@@ -198,17 +198,17 @@ int FudoPs__vslot85(this, param_2, param_3, param_4)
         loopRemaining2 = loopRemaining2 + 4;
         loopRemaining = loopRemaining + -1;
       } while (loopRemaining != 0);
-      loopRemaining2 = FUN_000f6a04(param_2,&local_38,0x10203);
+      loopRemaining2 = FUN_000f6a04(program,&local_38,0x10203);
     }
     if (loopRemaining2 != 0) {
       return loopRemaining2;
     }
-    uVar8 = *(undefined4 *)(param_2 + 0x3ac);
-    iVar6 = FUN_000f5f94(uVar8,param_3,param_4,piVar3,puVar5,iVar6,loopIndex);
+    uVar8 = *(undefined4 *)(program + 0x3ac);
+    iVar6 = FUN_000f5f94(uVar8,constants,laneSwizzle,piVar3,puVar5,iVar6,loopIndex);
     if (iVar6 != 0) {
       return iVar6;
     }
-    iVar6 = FUN_000f57f0(uVar8,param_3,param_4,piVar3);
+    iVar6 = FUN_000f57f0(uVar8,constants,laneSwizzle,piVar3);
     if (iVar6 != 0) {
       return iVar6;
     }
@@ -216,8 +216,8 @@ int FudoPs__vslot85(this, param_2, param_3, param_4)
   return 0;
 }
 
-/* FudoPs__vslot59 @ 0x191b30 (316 bytes) */
-int FudoPs__vslot59(this, inst, param_3, param_4, param_5)
+/* FudoPs__vslot59_tryEncodeSourceConstant @ 0x191b30 (316 bytes) */
+int FudoPs__vslot59_tryEncodeSourceConstant(this, inst, param_3, param_4, param_5)
   undefined4 this;
   undefined4 inst;
   undefined4 param_3;
@@ -442,7 +442,7 @@ int FudoPs__ctor_191efc(this, compiler, createSchedModels)
   FUN_0010dbd8(this,0x4a);
   FUN_0010dbd8(this,0x4b);
   this[2] = this[2] & 0xfffdffff | 0x1d80;
-  FudoPs__vslot96(this);
+  FudoPs__vslot96_installHardwareTables(this);
   if (createSchedModels != 0) {
     ((int (*)())FudoPs__createSchedModels)(this,compiler);
   }
@@ -536,7 +536,7 @@ int FudoPs__ctor_1920e0(this, compiler, createSchedModels)
   FUN_0010dbd8(this,0x4a);
   FUN_0010dbd8(this,0x4b);
   this[2] = this[2] & 0xfffdffff | 0x1d80;
-  FudoPs__vslot96(this);
+  FudoPs__vslot96_installHardwareTables(this);
   if (createSchedModels != 0) {
     ((int (*)())FudoPs__createSchedModels)(this,compiler);
   }
@@ -726,7 +726,7 @@ int FUN_001922c4(param_1, param_2, inst, param_4)
     inst[0x56] = *(int *)(inst2 + 0x158);
     ((int (*)())DList__insertAfter)(inst,inst2);
     if ((*(uint *)(param_4 + 0x30) & 0x80) == 0) {
-      FUN_001875a8(inst,1,inst2,param_4);
+      Inst__r300Peephole_1875a8(inst,1,inst2,param_4);
     }
   }
   return inst;
@@ -785,20 +785,20 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
   loopIndex3 = Compiler__isOptionEnabled(program[PROG_compiler / 4],0x38);
   if (((loopIndex3 != 0) && (inst != (int *)0x0)) &&
      (loopIndex3 = (**(code **)(*inst + 100))(inst), loopIndex3 == 0)) {
-    FUN_0014a918(inst,consumerSrcIndex,program);
+    Inst__swizzleTextureFetchOutput(inst,consumerSrcIndex,program);
   }
   changedFlag = 0;
   loopIndex3 = Compiler__isOptionEnabled(program[PROG_compiler / 4],0x1b);
   if (loopIndex3 != 0) {
     changedFlag = (**(code **)(*inst2 + 100))(inst2);
-    loopIndex3 = FUN_0014abdc(inst2,program,&local_58);
+    loopIndex3 = Inst__tryCopyPropagate(inst2,program,&local_58);
     if ((loopIndex3 != 0) &&
        (inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2), inst2 == (int *)0x0)) {
       return 1;
     }
     if (inst != (int *)0x0) {
       programAlias16 = &local_58;
-      loopIndex3 = FUN_00160320(inst,consumerSrcIndex,inst2,program,programAlias16);
+      loopIndex3 = Inst__foldProducerIntoConsumer(inst,consumerSrcIndex,inst2,program,programAlias16);
       if ((loopIndex3 != 0) &&
          (inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2), inst2 == (int *)0x0)) {
         return 1;
@@ -807,12 +807,12 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
   }
   loopIndex3 = Compiler__isOptionEnabled(program[PROG_compiler / 4],0x1c);
   if (loopIndex3 != 0) {
-    loopIndex3 = FUN_00162cc0(inst2,program);
+    loopIndex3 = Inst__collapseAlgebraic_00162cc0(inst2,program);
     if (loopIndex3 != 0) {
       loopIndex3 = (**(code **)(*inst2 + 100))(inst2);
       if (((loopIndex3 != 0) && ((inst2[5] & 0x200U) == 0)) && (inst != (int *)0x0)) {
         programAlias16 = &local_58;
-        FUN_00160320(inst,consumerSrcIndex,inst2,program,programAlias16);
+        Inst__foldProducerIntoConsumer(inst,consumerSrcIndex,inst2,program,programAlias16);
       }
       inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
       if (inst2 == (int *)0x0) {
@@ -820,31 +820,31 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
       }
     }
     loopIndex3 = (**(code **)(*inst2 + 0x14))(inst2);
-    if ((consumerSrcIndex <= loopIndex3) && (loopIndex3 = FUN_00158264(inst,consumerSrcIndex,inst2,program), loopIndex3 != 0)) {
+    if ((consumerSrcIndex <= loopIndex3) && (loopIndex3 = Inst__collapseAlgebraic_00158264(inst,consumerSrcIndex,inst2,program), loopIndex3 != 0)) {
       inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
       if (inst2 == (int *)0x0) {
         return 1;
       }
       changedFlag = 1;
     }
-    loopIndex3 = FUN_00155a60(inst2,program);
+    loopIndex3 = Inst__collapseAlgebraic_00155a60(inst2,program);
     if (loopIndex3 != 0) {
       inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
     }
-    loopIndex3 = FUN_0014bdbc(inst2,program);
+    loopIndex3 = Inst__collapseAlgebraic_0014bdbc(inst2,program);
     if (loopIndex3 != 0) {
       inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
     }
-    loopIndex3 = FUN_0014b82c(inst2,program,0,1);
+    loopIndex3 = Inst__collapseAlgebraic_0014b82c(inst2,program,0,1);
     if (loopIndex3 != 0) {
       inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
     }
-    loopIndex3 = FUN_0014b150(inst2,program);
+    loopIndex3 = Inst__collapseAlgebraic_0014b150(inst2,program);
     if (loopIndex3 != 0) {
       loopIndex3 = (**(code **)(*inst2 + 100))(inst2);
       if (((loopIndex3 != 0) && ((inst2[5] & 0x200U) == 0)) && (inst != (int *)0x0)) {
         programAlias16 = &local_58;
-        FUN_00160320(inst,consumerSrcIndex,inst2,program,programAlias16);
+        Inst__foldProducerIntoConsumer(inst,consumerSrcIndex,inst2,program,programAlias16);
       }
       inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
       if (inst2 == (int *)0x0) {
@@ -852,63 +852,63 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
       }
       changedFlag = 1;
     }
-    loopIndex3 = FUN_0014caec(inst2,program);
+    loopIndex3 = Inst__collapseAlgebraic_0014caec(inst2,program);
     if (loopIndex3 != 0) {
       inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
     }
-    loopIndex3 = FUN_0014d8f8(inst2,program);
+    loopIndex3 = Inst__collapseAlgebraic_0014d8f8(inst2,program);
     if (loopIndex3 != 0) {
       inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
     }
-    loopIndex3 = FUN_0015ceb0(inst2,program);
+    loopIndex3 = Inst__collapseAlgebraic_0015ceb0(inst2,program);
     if (loopIndex3 != 0) {
       inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
     }
-    loopIndex3 = FUN_0015bd40(inst2,program);
+    loopIndex3 = Inst__collapseAlgebraic_0015bd40(inst2,program);
     if (loopIndex3 != 0) {
       inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
     }
-    loopIndex3 = FUN_00163994(inst2,program);
+    loopIndex3 = Inst__collapseAlgebraic_00163994(inst2,program);
     if (loopIndex3 != 0) {
       inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
     }
-    loopIndex3 = FUN_0015c6d4(inst2,program);
+    loopIndex3 = Inst__collapseAlgebraic_0015c6d4(inst2,program);
     if (loopIndex3 != 0) {
       inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
     }
-    loopIndex3 = FUN_0014cec8(inst2,program);
+    loopIndex3 = Inst__collapseAlgebraic_0014cec8(inst2,program);
     if (loopIndex3 != 0) {
       inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
     }
-    loopIndex3 = FUN_00150d38(inst2,program);
+    loopIndex3 = Inst__collapseAlgebraic_00150d38(inst2,program);
     if (loopIndex3 != 0) {
       inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
     }
-    loopIndex3 = FUN_0014acb8(inst2,program);
+    loopIndex3 = Inst__collapseAlgebraic_0014acb8(inst2,program);
     if (loopIndex3 != 0) {
       inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
     }
-    loopIndex3 = FUN_001595f0(inst2,program);
+    loopIndex3 = Inst__collapseAlgebraic_001595f0(inst2,program);
     if (loopIndex3 != 0) {
       inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
     }
-    loopIndex3 = FUN_0015df44(inst2,program);
+    loopIndex3 = Inst__collapseAlgebraic_0015df44(inst2,program);
     if (loopIndex3 != 0) {
       inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
     }
-    loopIndex3 = FUN_0015e494(inst2,program);
+    loopIndex3 = Inst__collapseAlgebraic_0015e494(inst2,program);
     if (loopIndex3 != 0) {
       inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
     }
     loopIndex3 = Compiler__isOptionEnabled(program[PROG_compiler / 4],0x3c);
-    if ((loopIndex3 != 0) && (loopIndex3 = FUN_00163478(inst,consumerSrcIndex,inst2,program), loopIndex3 != 0)) {
+    if ((loopIndex3 != 0) && (loopIndex3 = Inst__tryDp3CommutativityPushoff(inst,consumerSrcIndex,inst2,program), loopIndex3 != 0)) {
       inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
     }
-    loopIndex3 = FUN_0014d274(inst2,program);
+    loopIndex3 = Inst__collapseAlgebraic_0014d274(inst2,program);
     if (loopIndex3 != 0) {
       inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
     }
-    loopIndex3 = FUN_00158c3c(inst2,program);
+    loopIndex3 = Inst__collapseAlgebraic_00158c3c(inst2,program);
     if (loopIndex3 != 0) {
       changedFlag = 1;
     }
@@ -929,10 +929,10 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
   }
   loopIndex3 = Compiler__isOptionEnabled(program[PROG_compiler / 4],0x1d);
   if (((((loopIndex3 != 0) &&
-        (loopIndex3 = FUN_001633f8(curInst,program,combineInstA,programAlias15,programAlias16,passThroughR8,passThroughR9), loopIndex3 != 0))
+        (loopIndex3 = Inst__tryCollapseSimilar(curInst,program,combineInstA,programAlias15,programAlias16,passThroughR8,passThroughR9), loopIndex3 != 0))
        && (loopIndex3 = (**(code **)(*curInst + 100))(curInst), loopIndex3 != 0)) &&
       ((inst != (int *)0x0 &&
-       (loopIndex3 = FUN_00160320(inst,consumerSrcIndex,curInst,program,&local_58), loopIndex3 != 0)))) &&
+       (loopIndex3 = Inst__foldProducerIntoConsumer(inst,consumerSrcIndex,curInst,program,&local_58), loopIndex3 != 0)))) &&
      (curInst = (int *)FUN_00146610(inst,consumerSrcIndex,curInst), curInst == (int *)0x0)) {
     return 1;
   }
@@ -1072,13 +1072,13 @@ LAB_0019348c:
 LAB_00193490:
   loopIndex3 = Compiler__isOptionEnabled(uVar21,0x39);
   if (loopIndex3 != 0) {
-    FUN_001882a4(curInst,program[PROG_compiler / 4]);
+    Inst__r300Peephole_1882a4(curInst,program[PROG_compiler / 4]);
     for (loopIndex3 = 1; loopRemaining = (**(code **)(*curInst + 0x14))(curInst), loopIndex3 <= loopRemaining; loopIndex3 = loopIndex3 + 1
         ) {
       uVar21 = IRInst__getOperandSource(curInst,loopIndex3);
-      FUN_001875a8(curInst,loopIndex3,uVar21,program);
+      Inst__r300Peephole_1875a8(curInst,loopIndex3,uVar21,program);
     }
-    loopIndex3 = FUN_001875a8(inst,consumerSrcIndex,curInst,program);
+    loopIndex3 = Inst__r300Peephole_1875a8(inst,consumerSrcIndex,curInst,program);
     if (loopIndex3 != 0) {
       changedFlag = 1;
       curInst = (int *)FUN_00146610(inst,consumerSrcIndex,curInst);
@@ -1188,7 +1188,7 @@ LAB_00193490:
     return changedFlag;
   }
   if (((int)program[PROG_mixInstCount / 4] < *(int *)(program[PROG_compiler / 4] + 0x664)) &&
-     (loopIndex3 = FUN_0015ea3c(inst,consumerSrcIndex,combinedInst,program), loopIndex3 != 0)) {
+     (loopIndex3 = Inst__tryMix(inst,consumerSrcIndex,combinedInst,program), loopIndex3 != 0)) {
     changedFlag = 1;
     combinedInst = (int *)FUN_00146610(inst,consumerSrcIndex,combinedInst);
   }
@@ -1251,23 +1251,23 @@ int R520SchedModel__vslot22(this, param_2, param_3, param_4)
   return uVar2;
 }
 
-/* FudoPs__vslot29 @ 0x193a00 (140 bytes) */
-int FudoPs__vslot29(this, param_2)
+/* FudoPs__vslot29_convertInnerIfsToPredicates @ 0x193a00 (140 bytes) */
+int FudoPs__vslot29_convertInnerIfsToPredicates(this, program)
   undefined4 this;
-  int param_2;
+  int program;
 {
   int convertInnerIfToPredEnabled;
   int iVar1;
   int *piVar2;
   
-  convertInnerIfToPredEnabled = Compiler__isOptionEnabled(*(undefined4 *)(param_2 + 8),0x4a);
+  convertInnerIfToPredEnabled = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x4a);
   if (convertInnerIfToPredEnabled != 0) {
-    piVar2 = *(int **)(param_2 + 900);
+    piVar2 = *(int **)(program + 900);
     iVar1 = piVar2[2];
     while (iVar1 != 0) {
       iVar1 = (**(code **)(*piVar2 + 0x24))(piVar2);
       if (iVar1 != 0) {
-        piVar2 = (int *)FUN_0012bb48(param_2,piVar2);
+        piVar2 = (int *)FUN_0012bb48(program,piVar2);
       }
       piVar2 = (int *)piVar2[2];
       iVar1 = piVar2[2];
@@ -2520,9 +2520,9 @@ asm(".set FUN_00191710, _isLiteralZeroHalfOrOne");
 asm(".globl FUN_00191940");
 asm(".set FUN_00191940, _FudoPs__encodeUniformImmediate");
 asm(".globl FUN_001919d8");
-asm(".set FUN_001919d8, _FudoPs__vslot85");
+asm(".set FUN_001919d8, _FudoPs__vslot85_findOrEncodeConstantVector");
 asm(".globl FUN_00191b30");
-asm(".set FUN_00191b30, _FudoPs__vslot59");
+asm(".set FUN_00191b30, _FudoPs__vslot59_tryEncodeSourceConstant");
 asm(".globl FUN_00191c6c");
 asm(".set FUN_00191c6c, _FudoChip__vslot2");
 asm(".globl FUN_00191c7c");
@@ -2536,6 +2536,6 @@ asm(".set FUN_00193944, _R520SchedModel__vslot21");
 asm(".globl FUN_001939b4");
 asm(".set FUN_001939b4, _R520SchedModel__vslot22");
 asm(".globl FUN_00193a00");
-asm(".set FUN_00193a00, _FudoPs__vslot29");
+asm(".set FUN_00193a00, _FudoPs__vslot29_convertInnerIfsToPredicates");
 asm(".globl FUN_00193e18");
 asm(".set FUN_00193e18, _Arena__alloc");

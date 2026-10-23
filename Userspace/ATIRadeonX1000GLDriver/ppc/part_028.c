@@ -793,63 +793,63 @@ LAB_00106908:
   return;
 }
 
-/* IRInst__vslot37 @ 0x1069e8 (352 bytes) */
-int IRInst__vslot37(inst, param_2, param_3)
+/* IRInst__insertSourceBeforeLast @ 0x1069e8 (352 bytes) */
+int IRInst__insertSourceBeforeLast(inst, newSource, compiler)
   int inst;
-  undefined4 param_2;
-  int param_3;
+  undefined4 newSource;
+  int compiler;
 {
   undefined4 uVar1;
-  int iVar2;
-  int iVar3;
+  int oldCount;
+  int newCount;
   int iVar4;
   
-  iVar2 = *(int *)(inst + 0x84);
-  iVar3 = iVar2 + 1;
-  *(int *)(inst + 0x84) = iVar3;
+  oldCount = *(int *)(inst + 0x84);
+  newCount = oldCount + 1;
+  *(int *)(inst + 0x84) = newCount;
   if ((*(uint *)(inst + 0x14) & 0x200) == 0) {
-    ((int (*)())IRInst__setOperandSource)(inst,iVar3,param_2,0,param_3);
+    ((int (*)())IRInst__setOperandSource)(inst,newCount,newSource,0,compiler);
     uVar1 = DAT_001af9bc;
-    if (iVar3 == 0) {
+    if (newCount == 0) {
       *(undefined4 *)(inst + 0x9c) = DAT_001af9bc;
     }
     else {
-      iVar2 = IRInst__getOperandRecord(inst,iVar3);
-      *(undefined4 *)(iVar2 + 0x10) = uVar1;
+      oldCount = IRInst__getOperandRecord(inst,newCount);
+      *(undefined4 *)(oldCount + 0x10) = uVar1;
     }
   }
   else {
-    if ((*(uint *)(*(int *)(param_3 + 0x6c4) + 0x30) & 8) == 0) {
-      uVar1 = IRInst__getOperandSource(inst,iVar2);
-      ((int (*)())IRInst__setOperandSource)(inst,iVar3,uVar1,0,param_3);
+    if ((*(uint *)(*(int *)(compiler + 0x6c4) + 0x30) & 8) == 0) {
+      uVar1 = IRInst__getOperandSource(inst,oldCount);
+      ((int (*)())IRInst__setOperandSource)(inst,newCount,uVar1,0,compiler);
     }
     else {
-      uVar1 = IRInst__getOperandSource(inst,iVar2);
-      ((int (*)())IRInst__setExtraOperandSource)(inst,uVar1,0,param_3);
+      uVar1 = IRInst__getOperandSource(inst,oldCount);
+      ((int (*)())IRInst__setExtraOperandSource)(inst,uVar1,0,compiler);
     }
     iVar4 = *(int *)(inst + 0x84);
-    iVar3 = IRInst__getOperandRecord(inst,iVar2);
-    uVar1 = *(undefined4 *)(iVar3 + 0x10);
+    newCount = IRInst__getOperandRecord(inst,oldCount);
+    uVar1 = *(undefined4 *)(newCount + 0x10);
     if (iVar4 == 0) {
       *(undefined4 *)(inst + 0x9c) = uVar1;
     }
     else {
-      iVar3 = IRInst__getOperandRecord(inst,iVar4);
-      *(undefined4 *)(iVar3 + 0x10) = uVar1;
+      newCount = IRInst__getOperandRecord(inst,iVar4);
+      *(undefined4 *)(newCount + 0x10) = uVar1;
     }
-    ((int (*)())IRInst__setOperandSource)(inst,iVar2,param_2,0,param_3);
+    ((int (*)())IRInst__setOperandSource)(inst,oldCount,newSource,0,compiler);
     uVar1 = DAT_001af9bc;
-    if (iVar2 == 0) {
+    if (oldCount == 0) {
       *(undefined4 *)(inst + 0x9c) = DAT_001af9bc;
-      iVar3 = 0;
+      newCount = 0;
     }
     else {
-      iVar3 = IRInst__getOperandRecord(inst,iVar2);
-      *(undefined4 *)(iVar3 + 0x10) = uVar1;
-      iVar3 = iVar2;
+      newCount = IRInst__getOperandRecord(inst,oldCount);
+      *(undefined4 *)(newCount + 0x10) = uVar1;
+      newCount = oldCount;
     }
   }
-  return iVar3;
+  return newCount;
 }
 
 /* FUN_00106b48 @ 0x106b48 (88 bytes) */
@@ -1645,7 +1645,7 @@ asm(".set FUN_0010673c, _IRPresub2__validate");
 asm(".globl FUN_00106780");
 asm(".set FUN_00106780, _IRPhiNode__validate");
 asm(".globl FUN_001069e8");
-asm(".set FUN_001069e8, _IRInst__vslot37");
+asm(".set FUN_001069e8, _IRInst__insertSourceBeforeLast");
 asm(".globl FUN_00106ba0");
 asm(".set FUN_00106ba0, _IRMix__validate");
 asm(".globl FUN_00106cb4");

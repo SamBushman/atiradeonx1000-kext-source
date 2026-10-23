@@ -1986,8 +1986,8 @@ int FUN_001762c0(param_1)
   return;
 }
 
-/* KhanPs__vslot56 @ 0x176304 (32 bytes) */
-double KhanPs__vslot56(double fparam_1)
+/* KhanPs__vslot56_scaleFloat @ 0x176304 (32 bytes) */
+double KhanPs__vslot56_scaleFloat(double fparam_1)
 {
   return (double)(float)(fparam_1 * (double)FLOAT_001aa1cc);
 }
@@ -2168,8 +2168,8 @@ int FUN_001765a4(param_1, param_2, param_3)
   return;
 }
 
-/* FudoPs__vslot12 @ 0x1765e4 (44 bytes) */
-int FudoPs__vslot12(this, param_2, param_3)
+/* FudoPs__vslot12_lookupTable6x @ 0x1765e4 (44 bytes) */
+int FudoPs__vslot12_lookupTable6x(this, param_2, param_3)
   undefined4 this;
   int param_2;
   int param_3;
@@ -2177,8 +2177,8 @@ int FudoPs__vslot12(this, param_2, param_3)
   return *(undefined4 *)(&DAT_001e5f54 + (param_2 * 6 + param_3) * 4);
 }
 
-/* FudoPs__vslot11 @ 0x176610 (28 bytes) */
-int FudoPs__vslot11(this, param_2)
+/* FudoPs__vslot11_isNotType2Or5 @ 0x176610 (28 bytes) */
+int FudoPs__vslot11_isNotType2Or5(this, param_2)
   undefined4 this;
   int param_2;
 {
@@ -2588,8 +2588,8 @@ int FUN_00176ec0(param_1, param_2, param_3)
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_00176304");
-asm(".set FUN_00176304, _KhanPs__vslot56");
+asm(".set FUN_00176304, _KhanPs__vslot56_scaleFloat");
 asm(".globl FUN_001765e4");
-asm(".set FUN_001765e4, _FudoPs__vslot12");
+asm(".set FUN_001765e4, _FudoPs__vslot12_lookupTable6x");
 asm(".globl FUN_00176610");
-asm(".set FUN_00176610, _FudoPs__vslot11");
+asm(".set FUN_00176610, _FudoPs__vslot11_isNotType2Or5");

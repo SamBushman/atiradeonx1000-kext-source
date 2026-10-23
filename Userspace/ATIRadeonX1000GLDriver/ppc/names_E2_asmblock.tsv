@@ -1,0 +1,16 @@
+# local rows (round 4, fork E2): R300MachineAssembler__assembleBlock
+local	R300MachineAssembler__assembleBlock	piVar13	groupInst	INFERRED	first instruction of the group being assembled; advanced to the next group at the loop tail
+local	R300MachineAssembler__assembleBlock	piVar10	cursorInst	INFERRED	walks the instructions of the current group (next pointer at +8)
+local	R300MachineAssembler__assembleBlock	piVar12	prevInst	INFERRED	the previous group head, used by the tail loop to test the group's continue flag (bit 2)
+local	R300MachineAssembler__assembleBlock	uVar9	instFlags	CONFIRMED	assigned from inst[5] (the flag word at +0x14) every time it is used
+local	R300MachineAssembler__assembleBlock	puVar1	flagsPtr	CONFIRMED	address of prevInst[5], the flag word tested by the tail loop
+local	R300MachineAssembler__assembleBlock	auStack_84	packState	CONFIRMED	a PackState reset with PackState__reset and filled by placeInstructionConstants
+local	R300MachineAssembler__assembleBlock	a0	src1Inst	CONFIRMED	IRInst__getOperandSource(inst, 1): the instruction defining source 1
+local	R300MachineAssembler__assembleBlock	pcVar14	visitSlot	CONFIRMED	function pointer loaded from this vtable +0x13c and called with the instruction's operand pack
+local	R300MachineAssembler__assembleBlock	bVar2	aluClauseOpened	INFERRED	set on the first ALU instruction of the group, when this slot 0xc0 is called once
+local	R300MachineAssembler__assembleBlock	bVar5	groupHasFlag0x80	CONFIRMED	set when any instruction of the group has flag bit 0x80; makes the assembler call slot 0x114 per instruction
+local	R300MachineAssembler__assembleBlock	bVar6	groupHasAlu	INFERRED	set by the non-fetch branch; selects the end-of-ALU path after the loop
+local	R300MachineAssembler__assembleBlock	bVar7	groupHasFetch	INFERRED	set by the fetch branch (IRInst slot 10 true)
+local	R300MachineAssembler__assembleBlock	bVar8	groupHasPresub	INFERRED	set when a flag-0x10000 pseudo instruction answers isPresub (IRInst slot 23)
+local	R300MachineAssembler__assembleBlock	bVar3	prevEndedAluClause	INFERRED	cleared after a fetch, set when the previous ALU instruction ended a clause
+local	R300MachineAssembler__assembleBlock	bVar4	startsNewWord	INFERRED	true for the first ALU instruction after a clause boundary and for fetches

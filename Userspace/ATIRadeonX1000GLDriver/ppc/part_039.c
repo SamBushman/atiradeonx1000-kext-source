@@ -1,19 +1,19 @@
 #include "decls.h"
 
-/* KhanPs__vslot76 @ 0x127ee4 (64 bytes) */
-int KhanPs__vslot76(this, param_2)
+/* KhanPs__vslot76_getBindingLimit @ 0x127ee4 (64 bytes) */
+int KhanPs__vslot76_getBindingLimit(this, outLimit)
   int *this;
-  undefined4 *param_2;
+  undefined4 *outLimit;
 {
   undefined4 uVar1;
   
   uVar1 = (**(code **)(*this + 0x138))(this,0);
-  *param_2 = uVar1;
+  *outLimit = uVar1;
   return;
 }
 
-/* KhanPs__vslot6 @ 0x127f24 (180 bytes) */
-int KhanPs__vslot6(this, param_2)
+/* KhanPs__createSchedModels @ 0x127f24 (180 bytes) */
+int KhanPs__createSchedModels(this, param_2)
   int this;
   undefined4 param_2;
 {
@@ -55,16 +55,16 @@ int FUN_00127fd8(param_1)
   return;
 }
 
-/* KhanPs__vslot62 @ 0x127ff8 (36 bytes) */
-int KhanPs__vslot62(this, param_2)
+/* KhanPs__vslot62_lookupTableEntry @ 0x127ff8 (36 bytes) */
+int KhanPs__vslot62_lookupTableEntry(this, param_2)
   undefined4 this;
   int param_2;
 {
   return *(undefined4 *)(PTR_PTR_001e910c + param_2 * 4);
 }
 
-/* KhanPs__vslot90 @ 0x12801c (20 bytes) */
-int KhanPs__vslot90(this, param_2, param_3)
+/* KhanPs__vslot90_isProgramKind1 @ 0x12801c (20 bytes) */
+int KhanPs__vslot90_isProgramKind1(this, param_2, param_3)
   undefined4 this;
   undefined4 param_2;
   int param_3;
@@ -78,11 +78,11 @@ int KhanPs__getOpcodeTraits()
   return &DAT_001dca64;
 }
 
-/* KhanPs__vslot35 @ 0x12804c (356 bytes) */
-int KhanPs__vslot35(this, param_2, param_3)
+/* KhanPs__vslot35_publishLimitsAndBindingTables @ 0x12804c (356 bytes) */
+int KhanPs__vslot35_publishLimitsAndBindingTables(this, compiler, limitsBlob)
   int this;
-  int param_2;
-  undefined4 param_3;
+  int compiler;
+  undefined4 limitsBlob;
 {
   undefined1 *puVar1;
   bool bVar2;
@@ -96,11 +96,11 @@ int KhanPs__vslot35(this, param_2, param_3)
   undefined1 *puVar10;
   int iVar11;
   
-  _memcpy(param_2 + 0x64c,param_3,0x963c);
+  _memcpy(compiler + 0x64c,limitsBlob,0x963c);
   iVar5 = 0;
-  *(undefined4 *)(param_2 + 0x104) = *(undefined4 *)(((unsigned char *)0x0000172c) + this);
+  *(undefined4 *)(compiler + 0x104) = *(undefined4 *)(((unsigned char *)0x0000172c) + this);
   iVar6 = this + 0x80;
-  iVar8 = param_2 + 0x100;
+  iVar8 = compiler + 0x100;
   iVar7 = this;
   do {
     puVar9 = (undefined1 *)(iVar6 + 0x14);
@@ -127,9 +127,9 @@ int KhanPs__vslot35(this, param_2, param_3)
     iVar7 = iVar7 + 0x34;
     iVar5 = iVar5 + 1;
   } while (bVar2);
-  iVar7 = param_2 + 0x400;
+  iVar7 = compiler + 0x400;
   iVar5 = 0;
-  *(undefined4 *)(param_2 + 0x408) = *(undefined4 *)(((unsigned char *)0x00001728) + this);
+  *(undefined4 *)(compiler + 0x408) = *(undefined4 *)(((unsigned char *)0x00001728) + this);
   iVar6 = this + 0xd80;
   do {
     puVar9 = (undefined1 *)(iVar6 + 0x14);
@@ -159,8 +159,8 @@ int KhanPs__vslot35(this, param_2, param_3)
   return 0;
 }
 
-/* KhanPs__vslot8 @ 0x1281b0 (56 bytes) */
-int KhanPs__vslot8(this, param_2, param_3, param_4, param_5, param_6, param_7)
+/* KhanPs__vslot8_failNotSupported @ 0x1281b0 (56 bytes) */
+int KhanPs__vslot8_failNotSupported(this, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 this;
   undefined4 param_2;
   undefined4 param_3;
@@ -175,14 +175,14 @@ int KhanPs__vslot8(this, param_2, param_3, param_4, param_5, param_6, param_7)
   return 0;
 }
 
-/* KhanPs__vslot58 @ 0x1281f0 (344 bytes) */
-int KhanPs__vslot58(this, param_2, param_3, param_4)
+/* KhanPs__vslot58_matchImmediateConstantCode @ 0x1281f0 (344 bytes) */
+int KhanPs__vslot58_matchImmediateConstantCode(this, constants, outSelectCode, laneSwizzle)
   undefined4 this;
-  float *param_2;
-  undefined4 *param_3;
-  undefined4 param_4;
+  float *constants;
+  undefined4 *outSelectCode;
+  undefined4 laneSwizzle;
 {
-  unsigned int ghidra_home[8] = { this, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { this, constants, outSelectCode, laneSwizzle, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   float fVar1;
   float fVar2;
   bool bVar3;
@@ -193,12 +193,12 @@ int KhanPs__vslot58(this, param_2, param_3, param_4)
   int iVar8;
   int iVar9;
   
-  (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = param_4;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = laneSwizzle;
   bVar3 = true;
-  *param_3 = 0xffffffff;
+  *outSelectCode = 0xffffffff;
   iVar8 = 4;
   pcVar6 = &(*(unsigned int *)((unsigned char *)ghidra_home + 12));
-  pfVar4 = param_2;
+  pfVar4 = constants;
   fVar1 = FLOAT_001aa0d4;
   do {
     if (*pcVar6 != '\x04') {
@@ -220,10 +220,10 @@ int KhanPs__vslot58(this, param_2, param_3, param_4)
     fVar2 = fVar2 + fVar1;
     iVar8 = iVar8 + -1;
   } while (iVar8 != 0);
-  (*(char *)((unsigned char *)ghidra_home + 12)) = (char)((uint)param_4 >> 0x18);
-  (*(char *)((unsigned char *)ghidra_home + 13)) = (char)((uint)param_4 >> 0x10);
-  (*(char *)((unsigned char *)ghidra_home + 14)) = (char)((uint)param_4 >> 8);
-  (*(char *)((unsigned char *)ghidra_home + 15)) = (char)param_4;
+  (*(char *)((unsigned char *)ghidra_home + 12)) = (char)((uint)laneSwizzle >> 0x18);
+  (*(char *)((unsigned char *)ghidra_home + 13)) = (char)((uint)laneSwizzle >> 0x10);
+  (*(char *)((unsigned char *)ghidra_home + 14)) = (char)((uint)laneSwizzle >> 8);
+  (*(char *)((unsigned char *)ghidra_home + 15)) = (char)laneSwizzle;
   puVar5 = &DAT_001aff0c;
   while( true ) {
     uVar7 = *puVar5;
@@ -240,16 +240,16 @@ int KhanPs__vslot58(this, param_2, param_3, param_4)
   iVar8 = 0;
   iVar9 = 4;
   do {
-    *(float *)((int)param_2 + iVar8) = fVar1;
+    *(float *)((int)constants + iVar8) = fVar1;
     iVar8 = iVar8 + 4;
     iVar9 = iVar9 + -1;
   } while (iVar9 != 0);
-  *param_3 = uVar7;
+  *outSelectCode = uVar7;
   return 1;
 }
 
-/* KhanPs__vslot73 @ 0x128348 (84 bytes) */
-int KhanPs__vslot73(this, param_2)
+/* KhanPs__vslot73_seedValueNumbers @ 0x128348 (84 bytes) */
+int KhanPs__vslot73_seedValueNumbers(this, param_2)
   undefined4 this;
   undefined4 param_2;
 {
@@ -265,8 +265,8 @@ int KhanPs__vslot73(this, param_2)
   return;
 }
 
-/* KhanPs__vslot74 @ 0x12839c (128 bytes) */
-int KhanPs__vslot74(this, param_2)
+/* KhanPs__vslot74_seedConstantValueNumbers @ 0x12839c (128 bytes) */
+int KhanPs__vslot74_seedConstantValueNumbers(this, param_2)
   undefined4 this;
   undefined4 param_2;
 {
@@ -289,12 +289,12 @@ int KhanPs__vslot74(this, param_2)
   return;
 }
 
-/* KhanPs__vslot85 @ 0x128430 (780 bytes) */
-int KhanPs__vslot85(this, param_2, param_3, param_4)
+/* KhanPs__vslot85_findOrEncodeConstantVector @ 0x128430 (780 bytes) */
+int KhanPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwizzle)
   int *this;
-  int param_2;
-  dword *param_3;
-  int *param_4;
+  int program;
+  dword *constants;
+  int *laneSwizzle;
 {
   float fVar1;
   bool bVar2;
@@ -315,14 +315,14 @@ int KhanPs__vslot85(this, param_2, param_3, param_4)
   undefined4 local_a0;
   float local_50;
   
-  if (*param_4 != 0x4040404) {
+  if (*laneSwizzle != 0x4040404) {
     pcVar5 = "In";
     fVar1 = 0.0;
     iVar9 = 4;
     bVar2 = true;
     iVar6 = 1;
-    piVar3 = param_4;
-    pdVar7 = param_3;
+    piVar3 = laneSwizzle;
+    pdVar7 = constants;
     do {
       if (*(char *)piVar3 != '\x04') {
         if (bVar2) {
@@ -337,9 +337,9 @@ int KhanPs__vslot85(this, param_2, param_3, param_4)
       pdVar7 = pdVar7 + 1;
       iVar9 = iVar9 + -1;
     } while (iVar9 != 0);
-    piVar3 = param_4;
+    piVar3 = laneSwizzle;
     if (iVar6 == 0) {
-      iVar9 = FUN_000f6a04(param_2,param_3,*param_4);
+      iVar9 = FUN_000f6a04(program,constants,*laneSwizzle);
     }
     else {
       pcVar5 = "";
@@ -359,38 +359,38 @@ int KhanPs__vslot85(this, param_2, param_3, param_4)
         iVar9 = iVar9 + 4;
         iVar10 = iVar10 + -1;
       } while (iVar10 != 0);
-      iVar9 = FUN_000f6a04(param_2,&local_b8,0x10203);
+      iVar9 = FUN_000f6a04(program,&local_b8,0x10203);
     }
     if (iVar9 != 0) {
       return iVar9;
     }
-    uVar8 = *(undefined4 *)(param_2 + 0x3ac);
-    iVar6 = FUN_000f5f94(uVar8,param_3,param_4,piVar3,pcVar5,iVar6,pdVar7);
+    uVar8 = *(undefined4 *)(program + 0x3ac);
+    iVar6 = FUN_000f5f94(uVar8,constants,laneSwizzle,piVar3,pcVar5,iVar6,pdVar7);
     if (iVar6 != 0) {
       return iVar6;
     }
-    if ((((((*(uint *)(param_2 + 0x30) & 0x100) != 0) && (GH_U2F((unsigned int)(*param_3)) == 0.0)) &&
-         (GH_U2F((unsigned int)(param_3[1])) == 1.0)) && ((GH_U2F((unsigned int)(param_3[2])) == 0.0 && (GH_U2F((unsigned int)(param_3[3])) == 0.0))))
-       && (*param_4 == 0x10203)) {
-      FUN_000f4a24(param_3,&local_b8);
+    if ((((((*(uint *)(program + 0x30) & 0x100) != 0) && (GH_U2F((unsigned int)(*constants)) == 0.0)) &&
+         (GH_U2F((unsigned int)(constants[1])) == 1.0)) && ((GH_U2F((unsigned int)(constants[2])) == 0.0 && (GH_U2F((unsigned int)(constants[3])) == 0.0))))
+       && (*laneSwizzle == 0x10203)) {
+      FUN_000f4a24(constants,&local_b8);
       iVar6 = FUN_000f5248(uVar8,local_b8,uStack_b4,uStack_b0,uStack_ac,local_a8,local_a4,local_a0);
       return iVar6;
     }
-    iVar6 = FUN_000f57f0(uVar8,param_3,param_4,piVar3);
-    if ((iVar6 != 0) && (iVar9 = (**(code **)(*this + 0x100))(this,param_4), iVar9 != 0)) {
+    iVar6 = FUN_000f57f0(uVar8,constants,laneSwizzle,piVar3);
+    if ((iVar6 != 0) && (iVar9 = (**(code **)(*this + 0x100))(this,laneSwizzle), iVar9 != 0)) {
       return iVar6;
     }
   }
   return 0;
 }
 
-/* KhanPs__vslot59 @ 0x12873c (500 bytes) */
-int KhanPs__vslot59(this, inst, param_3, param_4, param_5)
+/* KhanPs__vslot59_tryEncodeSourceConstant @ 0x12873c (500 bytes) */
+int KhanPs__vslot59_tryEncodeSourceConstant(this, inst, srcIndex, laneSwizzle, compiler)
   undefined4 this;
   int *inst;
-  int param_3;
-  uint param_4;
-  int param_5;
+  int srcIndex;
+  uint laneSwizzle;
+  int compiler;
 {
   uint uVar1;
   float *pfVar2;
@@ -413,7 +413,7 @@ int KhanPs__vslot59(this, inst, param_3, param_4, param_5)
     pfVar2 = pfVar2 + 1;
     iVar3 = iVar3 + -1;
   } while (iVar3 != 0);
-  uVar1 = param_4 << 0x18 | (param_4 & 0xff00) << 8 | param_4 >> 8 & 0xff00 | param_4 >> 0x18;
+  uVar1 = laneSwizzle << 0x18 | (laneSwizzle & 0xff00) << 8 | laneSwizzle >> 8 & 0xff00 | laneSwizzle >> 0x18;
   pfVar2 = (float *)&DAT_001aff08;
   while( true ) {
     local_64[1] = pfVar2[-2];
@@ -425,42 +425,42 @@ int KhanPs__vslot59(this, inst, param_3, param_4, param_5)
     local_54[2] = -local_64[2];
     local_54[3] = -local_64[3];
     local_30 = local_54[3];
-    iVar3 = FUN_000f5c0c(inst,param_3,uVar1,local_64);
+    iVar3 = FUN_000f5c0c(inst,srcIndex,uVar1,local_64);
     if (iVar3 != 0) {
-      ((void (*)())FUN_000f79c4)(inst,*(undefined4 *)(param_5 + 0x6c4),param_3,(double)local_64[0],
+      ((void (*)())FUN_000f79c4)(inst,*(undefined4 *)(compiler + 0x6c4),srcIndex,(double)local_64[0],
                    (double)local_64[1],(double)local_64[2],(double)local_64[3]);
       return 1;
     }
     iVar3 = (**(code **)(*inst + 0x8c))(inst);
-    if ((iVar3 != 0) && (iVar3 = FUN_000f5c0c(inst,param_3,uVar1,local_54), iVar3 != 0)) break;
+    if ((iVar3 != 0) && (iVar3 = FUN_000f5c0c(inst,srcIndex,uVar1,local_54), iVar3 != 0)) break;
     pfVar2 = pfVar2 + 6;
     if (pfVar2 == (float *)&DAT_001aff50) {
       return 0;
     }
   }
-  ((void (*)())FUN_000f79c4)(inst,*(undefined4 *)(param_5 + 0x6c4),param_3,(double)local_64[0],
+  ((void (*)())FUN_000f79c4)(inst,*(undefined4 *)(compiler + 0x6c4),srcIndex,(double)local_64[0],
                (double)local_64[1],(double)local_64[2],(double)local_64[3]);
-  if ((inst[param_3 * 6 + 0x28] & 2U) != 0) {
+  if ((inst[srcIndex * 6 + 0x28] & 2U) != 0) {
     return 1;
   }
-  IROperand__setModifierBits(inst + param_3 * 6 + 0x23,1,inst[param_3 * 6 + 0x28] & 1U ^ 1);
+  IROperand__setModifierBits(inst + srcIndex * 6 + 0x23,1,inst[srcIndex * 6 + 0x28] & 1U ^ 1);
   return 1;
 }
 
-/* KhanPs__vslot9 @ 0x128930 (420 bytes) */
-int KhanPs__vslot9(this, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, compiler)
+/* KhanPs__vslot9_createCompareInst @ 0x128930 (420 bytes) */
+int KhanPs__vslot9_createCompareInst(this, param_2, srcRegA, srcSwizzleA, srcRegB, srcSwizzleB, param_7, param_8, param_9, compiler)
   undefined4 this;
   int param_2;
-  int param_3;
-  int param_4;
-  int param_5;
-  int param_6;
+  int srcRegA;
+  int srcSwizzleA;
+  int srcRegB;
+  int srcSwizzleB;
   undefined4 param_7;
   int param_8;
   undefined4 param_9;
   int compiler;
 {
-  unsigned int ghidra_home[8] = { this, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { this, param_2, srcRegA, srcSwizzleA, srcRegB, srcSwizzleB, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   int callResult;
   undefined4 uVar2;
   int operandRecord;
@@ -472,17 +472,17 @@ int KhanPs__vslot9(this, param_2, param_3, param_4, param_5, param_6, param_7, p
   iVar4 = *(int *)(PTR_DAT_001e8b84 + param_2 * 4);
   (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = param_7;
   callResult = IRInst__create(0x8b,compiler);
-  uVar2 = FUN_000ec208(uVar5,param_4);
+  uVar2 = FUN_000ec208(uVar5,srcSwizzleA);
   operandRecord = IRInst__getOperandRecord(callResult,1);
   *(undefined4 *)(operandRecord + 0xc) = uVar2;
-  *(int *)(operandRecord + 8) = param_3;
-  uVar2 = FUN_000ec208(uVar5,param_6);
+  *(int *)(operandRecord + 8) = srcRegA;
+  uVar2 = FUN_000ec208(uVar5,srcSwizzleB);
   operandRecord = IRInst__getOperandRecord(callResult,2);
   *(undefined4 *)(operandRecord + 0xc) = uVar2;
-  *(int *)(operandRecord + 8) = param_5;
+  *(int *)(operandRecord + 8) = srcRegB;
   FUN_000f8aa0(uVar5,&(*(unsigned int *)((unsigned char *)ghidra_home + 24)),**(undefined4 **)(param_8 + 0x6c),1,callResult);
   FUN_000f8aa0(uVar5,&(*(unsigned int *)((unsigned char *)ghidra_home + 24)),*(undefined4 *)(*(int *)(param_8 + 0x6c) + 4),2,callResult);
-  if ((param_3 == param_5) && (param_4 == param_6)) {
+  if ((srcRegA == srcRegB) && (srcSwizzleA == srcSwizzleB)) {
     if ((*(uint *)(callResult + 0xb8) & 1) != (*(uint *)(callResult + 0xd0) & 1)) {
       if (((*(uint *)(callResult + 0xb8) & 2) == 0) && ((*(uint *)(callResult + 0xd0) & 2) == 0)) {
         operandRecord = IRInst__getOperandRecord(callResult,1);
@@ -502,8 +502,8 @@ int KhanPs__vslot9(this, param_2, param_3, param_4, param_5, param_6, param_7, p
   return callResult;
 }
 
-/* KhanPs__vslot5 @ 0x128ad4 (680 bytes) */
-int KhanPs__vslot5(this, param_2, compiler)
+/* KhanPs__vslot5_materializeSpecialRegister @ 0x128ad4 (680 bytes) */
+int KhanPs__vslot5_materializeSpecialRegister(this, param_2, compiler)
   undefined4 this;
   int param_2;
   int compiler;
@@ -576,8 +576,8 @@ int KhanPs__vslot5(this, param_2, compiler)
   return;
 }
 
-/* KhanPs__vslot75 @ 0x128d7c (596 bytes) */
-int KhanPs__vslot75(this, param_2, param_3, param_4, param_5, param_6, param_7)
+/* KhanPs__vslot75_registerConstantMultiples @ 0x128d7c (596 bytes) */
+int KhanPs__vslot75_registerConstantMultiples(this, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 this;
   float *param_2;
   undefined4 param_3;
@@ -712,9 +712,9 @@ int KhanPs__ctor_128fd0(this, param_2, param_3)
   FUN_0010dbd8(this,0x41);
   FUN_0010dbd8(this,0x42);
   this[2] = this[2] | 0x20000;
-  ((int (*)())KhanPs__vslot96)(this);
+  ((int (*)())KhanPs__vslot96_installHardwareTables)(this);
   if (param_3 != 0) {
-    ((int (*)())KhanPs__vslot6)(this,param_2);
+    ((int (*)())KhanPs__createSchedModels)(this,param_2);
   }
   return;
 }
@@ -753,15 +753,15 @@ int KhanPs__ctor_129130(this, param_2, param_3)
   FUN_0010dbd8(this,0x41);
   FUN_0010dbd8(this,0x42);
   this[2] = this[2] | 0x20000;
-  ((int (*)())KhanPs__vslot96)(this);
+  ((int (*)())KhanPs__vslot96_installHardwareTables)(this);
   if (param_3 != 0) {
-    ((int (*)())KhanPs__vslot6)(this,param_2);
+    ((int (*)())KhanPs__createSchedModels)(this,param_2);
   }
   return;
 }
 
-/* FudoVs__vslot6 @ 0x129290 (176 bytes) */
-int FudoVs__vslot6(this, param_2)
+/* FudoVs__createSchedModels @ 0x129290 (176 bytes) */
+int FudoVs__createSchedModels(this, param_2)
   int this;
   undefined4 param_2;
 {
@@ -789,41 +789,41 @@ int FudoVs__vslot6(this, param_2)
   return;
 }
 
-/* KhanVs__vslot76 @ 0x129350 (96 bytes) */
-int KhanVs__vslot76(this, param_2)
+/* KhanVs__vslot76_getBindingLimits @ 0x129350 (96 bytes) */
+int KhanVs__vslot76_getBindingLimits(this, outLimits)
   int *this;
-  undefined4 *param_2;
+  undefined4 *outLimits;
 {
   undefined4 uVar1;
   
   uVar1 = (**(code **)(*this + 0x138))(this,0);
-  *param_2 = uVar1;
+  *outLimits = uVar1;
   uVar1 = (**(code **)(*this + 0x140))(this,0);
-  param_2[1] = uVar1;
+  outLimits[1] = uVar1;
   return;
 }
 
-/* KhanVs__vslot77 @ 0x1293b0 (72 bytes) */
-int KhanVs__vslot77(this, param_2)
+/* KhanVs__vslot77_getBindingLimits @ 0x1293b0 (72 bytes) */
+int KhanVs__vslot77_getBindingLimits(this, outLimits)
   int *this;
-  undefined4 *param_2;
+  undefined4 *outLimits;
 {
   undefined4 uVar1;
   
-  *param_2 = 0;
+  *outLimits = 0;
   uVar1 = (**(code **)(*this + 0x138))(this,0);
-  param_2[1] = uVar1;
+  outLimits[1] = uVar1;
   return;
 }
 
-/* KhanVs__vslot80 @ 0x1293f8 (8 bytes) */
-int KhanVs__vslot80()
+/* KhanVs__vslot80_getLimit_0x14 @ 0x1293f8 (8 bytes) */
+int KhanVs__vslot80_getLimit_0x14()
 {
   return 0x14;
 }
 
-/* KhanVs__vslot60 @ 0x129408 (60 bytes) */
-undefined4 KhanVs__vslot60(double fparam_1)
+/* KhanVs__vslot60_isZeroOrOne @ 0x129408 (60 bytes) */
+undefined4 KhanVs__vslot60_isZeroOrOne(double fparam_1)
 {
   if ((fparam_1 != (double)FLOAT_001aa0d4) && (fparam_1 != (double)FLOAT_001aa0e8)) {
     return 0;
@@ -831,14 +831,14 @@ undefined4 KhanVs__vslot60(double fparam_1)
   return 1;
 }
 
-/* KhanVs__vslot73 @ 0x129444 (4 bytes) */
-int KhanVs__vslot73()
+/* KhanVs__vslot73_noOp @ 0x129444 (4 bytes) */
+int KhanVs__vslot73_noOp()
 {
   return;
 }
 
-/* KhanVs__vslot99 @ 0x129448 (48 bytes) */
-int KhanVs__vslot99(this, param_2, param_3)
+/* KhanVs__vslot99_matchesRegisterMapEntry @ 0x129448 (48 bytes) */
+int KhanVs__vslot99_matchesRegisterMapEntry(this, param_2, param_3)
   undefined4 this;
   uint param_2;
   int param_3;
@@ -848,11 +848,11 @@ int KhanVs__vslot99(this, param_2, param_3)
                            0x524) + 0x10a) == param_2;
 }
 
-/* KhanVs__vslot35 @ 0x129478 (504 bytes) */
-int KhanVs__vslot35(this, param_2, param_3)
+/* KhanVs__vslot35_publishLimitsAndBindingTables @ 0x129478 (504 bytes) */
+int KhanVs__vslot35_publishLimitsAndBindingTables(this, compiler, limitsBlob)
   int this;
-  int param_2;
-  int *param_3;
+  int compiler;
+  int *limitsBlob;
 {
   uint loopIndex;
   undefined1 *puVar1;
@@ -868,37 +868,37 @@ int KhanVs__vslot35(this, param_2, param_3)
   int iVar11;
   undefined1 *puVar12;
   
-  _memcpy(*(undefined4 *)(param_2 + 0x650),param_3[1],*param_3 << 4);
-  _memcpy(*(undefined4 *)(param_2 + 0x654),param_3[2],900);
-  iVar4 = param_3[3];
-  iVar7 = param_3[4];
-  iVar11 = param_3[5];
-  iVar8 = param_3[6];
-  iVar6 = param_3[7];
-  iVar5 = param_3[8];
-  *(int *)(param_2 + 0x670) = param_3[9];
-  *(int *)(param_2 + 0x658) = iVar4;
-  *(int *)(param_2 + 0x65c) = iVar7;
-  *(int *)(param_2 + 0x660) = iVar11;
-  *(int *)(param_2 + 0x664) = iVar8;
-  *(int *)(param_2 + 0x668) = iVar6;
-  *(int *)(param_2 + 0x66c) = iVar5;
+  _memcpy(*(undefined4 *)(compiler + 0x650),limitsBlob[1],*limitsBlob << 4);
+  _memcpy(*(undefined4 *)(compiler + 0x654),limitsBlob[2],900);
+  iVar4 = limitsBlob[3];
+  iVar7 = limitsBlob[4];
+  iVar11 = limitsBlob[5];
+  iVar8 = limitsBlob[6];
+  iVar6 = limitsBlob[7];
+  iVar5 = limitsBlob[8];
+  *(int *)(compiler + 0x670) = limitsBlob[9];
+  *(int *)(compiler + 0x658) = iVar4;
+  *(int *)(compiler + 0x65c) = iVar7;
+  *(int *)(compiler + 0x660) = iVar11;
+  *(int *)(compiler + 0x664) = iVar8;
+  *(int *)(compiler + 0x668) = iVar6;
+  *(int *)(compiler + 0x66c) = iVar5;
   iVar4 = *(int *)(((unsigned char *)0x0000172c) + this);
-  *(int *)(param_2 + 0x104) = iVar4;
+  *(int *)(compiler + 0x104) = iVar4;
   if (iVar4 != 0) {
     loopIndex = 0;
     iVar4 = this;
     do {
       loopIndex = loopIndex + 1;
-      iVar5 = *(int *)(iVar4 + 0x70) * 0xc + param_2;
+      iVar5 = *(int *)(iVar4 + 0x70) * 0xc + compiler;
       *(uint *)(iVar4 + 0x68) = (uint)*(byte *)(iVar5 + 0x108);
       *(uint *)(iVar4 + 0x6c) = (uint)*(byte *)(iVar5 + 0x109);
       iVar4 = iVar4 + 0x34;
-    } while (loopIndex < *(uint *)(param_2 + 0x104));
+    } while (loopIndex < *(uint *)(compiler + 0x104));
   }
   iVar5 = 0;
   iVar6 = this + 0x80;
-  iVar7 = param_2 + 0x100;
+  iVar7 = compiler + 0x100;
   iVar4 = this;
   do {
     puVar10 = (undefined1 *)(iVar6 + 0x14);
@@ -925,9 +925,9 @@ int KhanVs__vslot35(this, param_2, param_3)
     iVar4 = iVar4 + 0x34;
     iVar5 = iVar5 + 1;
   } while (bVar2);
-  iVar4 = param_2 + 0x400;
+  iVar4 = compiler + 0x400;
   iVar5 = 0;
-  *(undefined4 *)(param_2 + 0x408) = *(undefined4 *)(((unsigned char *)0x00001728) + this);
+  *(undefined4 *)(compiler + 0x408) = *(undefined4 *)(((unsigned char *)0x00001728) + this);
   iVar6 = this + 0xd80;
   do {
     puVar10 = (undefined1 *)(iVar6 + 0x14);
@@ -963,8 +963,8 @@ int KhanVs__getOpcodeTraits()
   return &DAT_001df1fc;
 }
 
-/* FudoVs__vslot8 @ 0x129694 (56 bytes) */
-int FudoVs__vslot8(this, param_2, param_3, param_4, param_5, param_6, param_7)
+/* FudoVs__vslot8_failNotSupported @ 0x129694 (56 bytes) */
+int FudoVs__vslot8_failNotSupported(this, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 this;
   undefined4 param_2;
   undefined4 param_3;
@@ -979,34 +979,34 @@ int FudoVs__vslot8(this, param_2, param_3, param_4, param_5, param_6, param_7)
   return 0;
 }
 
-/* KhanVs__vslot22 @ 0x1296cc (124 bytes) */
-int KhanVs__vslot22(this, param_2, param_3, param_4, param_5, param_6)
+/* KhanVs__vslot22_appendRegisterBindingWithLaneArrays @ 0x1296cc (124 bytes) */
+int KhanVs__vslot22_appendRegisterBindingWithLaneArrays(this, param_2, param_3, bindingKind, param_5, laneMask)
   int this;
   undefined4 *param_2;
   undefined1 *param_3;
-  undefined4 param_4;
+  undefined4 bindingKind;
   undefined4 param_5;
-  uint param_6;
+  uint laneMask;
 {
   int iVar1;
-  int iVar2;
+  int record;
   uint uVar3;
   int iVar4;
   
-  iVar2 = *(int *)(((unsigned char *)0x00001728) + this);
-  *(int *)(((unsigned char *)0x00001728) + this) = iVar2 + 1;
+  record = *(int *)(((unsigned char *)0x00001728) + this);
+  *(int *)(((unsigned char *)0x00001728) + this) = record + 1;
   uVar3 = 0;
-  iVar2 = this + iVar2 * 0x34 + 0xd60;
-  iVar1 = iVar2 + 8;
-  *(undefined4 *)(iVar2 + 8) = param_4;
-  *(undefined4 *)(iVar2 + 0x24) = 1;
-  *(undefined4 *)(iVar2 + 0x1c) = 1;
+  record = this + record * 0x34 + 0xd60;
+  iVar1 = record + 8;
+  *(undefined4 *)(record + 8) = bindingKind;
+  *(undefined4 *)(record + 0x24) = 1;
+  *(undefined4 *)(record + 0x1c) = 1;
   iVar4 = 4;
-  *(undefined4 *)(iVar2 + 0x10) = param_5;
-  *(undefined4 *)(iVar2 + 0xc) = param_5;
-  *(uint *)(iVar2 + 0x18) = param_6;
+  *(undefined4 *)(record + 0x10) = param_5;
+  *(undefined4 *)(record + 0xc) = param_5;
+  *(uint *)(record + 0x18) = laneMask;
   do {
-    if ((param_6 & 1 << (uVar3 & 0x3f)) != 0) {
+    if ((laneMask & 1 << (uVar3 & 0x3f)) != 0) {
       *(char *)(iVar1 + 0x2c) = (char)*param_2;
       *(undefined1 *)(iVar1 + 0x30) = *param_3;
     }
@@ -1019,84 +1019,84 @@ int KhanVs__vslot22(this, param_2, param_3, param_4, param_5, param_6)
   return;
 }
 
-/* KhanVs__vslot21 @ 0x129748 (156 bytes) */
-int KhanVs__vslot21(this, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
+/* KhanVs__vslot21_appendRegisterBinding @ 0x129748 (156 bytes) */
+int KhanVs__vslot21_appendRegisterBinding(this, regIndex, bindingKind, param_4, laneSelectWord, param_6, param_7, param_8, param_9, param_10)
   int this;
-  undefined4 param_2;
-  int param_3;
+  undefined4 regIndex;
+  int bindingKind;
   undefined4 param_4;
-  undefined4 param_5;
+  undefined4 laneSelectWord;
   int param_6;
   undefined4 param_7;
   undefined4 param_8;
   undefined4 param_9;
   undefined4 param_10;
 {
-  int iVar1;
+  int record;
   
-  iVar1 = *(int *)(((unsigned char *)0x00001728) + this);
-  *(int *)(((unsigned char *)0x00001728) + this) = iVar1 + 1;
-  iVar1 = this + iVar1 * 0x34 + 0xd60;
-  *(int *)(iVar1 + 8) = param_3;
-  *(undefined4 *)(iVar1 + 0x1c) = 1;
-  *(undefined4 *)(iVar1 + 0xc) = param_4;
-  *(undefined1 *)(iVar1 + 0x37) = (undefined1)param_2;
-  *(undefined1 *)(iVar1 + 0x34) = (undefined1)param_2;
-  *(undefined1 *)(iVar1 + 0x35) = (undefined1)param_2;
-  *(undefined1 *)(iVar1 + 0x36) = (undefined1)param_2;
-  if (param_3 == 4) {
-    *(undefined1 *)(iVar1 + 0x3b) = 3;
-    *(undefined1 *)(iVar1 + 0x38) = 3;
-    *(undefined1 *)(iVar1 + 0x39) = 3;
-    *(undefined1 *)(iVar1 + 0x3a) = 3;
+  record = *(int *)(((unsigned char *)0x00001728) + this);
+  *(int *)(((unsigned char *)0x00001728) + this) = record + 1;
+  record = this + record * 0x34 + 0xd60;
+  *(int *)(record + 8) = bindingKind;
+  *(undefined4 *)(record + 0x1c) = 1;
+  *(undefined4 *)(record + 0xc) = param_4;
+  *(undefined1 *)(record + 0x37) = (undefined1)regIndex;
+  *(undefined1 *)(record + 0x34) = (undefined1)regIndex;
+  *(undefined1 *)(record + 0x35) = (undefined1)regIndex;
+  *(undefined1 *)(record + 0x36) = (undefined1)regIndex;
+  if (bindingKind == 4) {
+    *(undefined1 *)(record + 0x3b) = 3;
+    *(undefined1 *)(record + 0x38) = 3;
+    *(undefined1 *)(record + 0x39) = 3;
+    *(undefined1 *)(record + 0x3a) = 3;
   }
   else {
-    *(char *)(iVar1 + 0x38) = (char)((uint)param_5 >> 0x18);
-    *(char *)(iVar1 + 0x39) = (char)((uint)param_5 >> 0x10);
-    *(char *)(iVar1 + 0x3a) = (char)((uint)param_5 >> 8);
-    *(char *)(iVar1 + 0x3b) = (char)param_5;
+    *(char *)(record + 0x38) = (char)((uint)laneSelectWord >> 0x18);
+    *(char *)(record + 0x39) = (char)((uint)laneSelectWord >> 0x10);
+    *(char *)(record + 0x3a) = (char)((uint)laneSelectWord >> 8);
+    *(char *)(record + 0x3b) = (char)laneSelectWord;
   }
-  *(undefined4 *)(iVar1 + 0x10) = param_10;
-  *(uint *)(iVar1 + 0x24) = (uint)(param_6 == 0);
-  *(undefined4 *)(iVar1 + 0x18) = param_9;
+  *(undefined4 *)(record + 0x10) = param_10;
+  *(uint *)(record + 0x24) = (uint)(param_6 == 0);
+  *(undefined4 *)(record + 0x18) = param_9;
   return;
 }
 
-/* KhanVs__vslot100 @ 0x1297e4 (112 bytes) */
-int KhanVs__vslot100(this, param_2, param_3)
+/* KhanVs__vslot100_appendIdentityRegisterBinding @ 0x1297e4 (112 bytes) */
+int KhanVs__vslot100_appendIdentityRegisterBinding(this, bindingValue, regIndex)
   int this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 bindingValue;
+  undefined4 regIndex;
 {
-  int iVar1;
+  int record;
   
-  iVar1 = *(int *)(((unsigned char *)0x0000172c) + this);
-  *(int *)(((unsigned char *)0x0000172c) + this) = iVar1 + 1;
-  iVar1 = this + iVar1 * 0x34 + 0x60;
-  *(undefined4 *)(iVar1 + 8) = 5;
-  *(undefined1 *)(iVar1 + 0x38) = 0;
-  *(undefined1 *)(iVar1 + 0x3a) = 2;
-  *(undefined4 *)(iVar1 + 0x10) = param_2;
-  *(undefined1 *)(iVar1 + 0x37) = (undefined1)param_3;
-  *(undefined1 *)(iVar1 + 0x39) = 1;
-  *(undefined1 *)(iVar1 + 0x3b) = 3;
-  *(undefined4 *)(iVar1 + 0x18) = 0xf;
-  *(undefined4 *)(iVar1 + 0x1c) = 1;
-  *(undefined4 *)(iVar1 + 0xc) = param_2;
-  *(undefined1 *)(iVar1 + 0x34) = (undefined1)param_3;
-  *(undefined1 *)(iVar1 + 0x35) = (undefined1)param_3;
-  *(undefined1 *)(iVar1 + 0x36) = (undefined1)param_3;
+  record = *(int *)(((unsigned char *)0x0000172c) + this);
+  *(int *)(((unsigned char *)0x0000172c) + this) = record + 1;
+  record = this + record * 0x34 + 0x60;
+  *(undefined4 *)(record + 8) = 5;
+  *(undefined1 *)(record + 0x38) = 0;
+  *(undefined1 *)(record + 0x3a) = 2;
+  *(undefined4 *)(record + 0x10) = bindingValue;
+  *(undefined1 *)(record + 0x37) = (undefined1)regIndex;
+  *(undefined1 *)(record + 0x39) = 1;
+  *(undefined1 *)(record + 0x3b) = 3;
+  *(undefined4 *)(record + 0x18) = 0xf;
+  *(undefined4 *)(record + 0x1c) = 1;
+  *(undefined4 *)(record + 0xc) = bindingValue;
+  *(undefined1 *)(record + 0x34) = (undefined1)regIndex;
+  *(undefined1 *)(record + 0x35) = (undefined1)regIndex;
+  *(undefined1 *)(record + 0x36) = (undefined1)regIndex;
   return;
 }
 
-/* KhanVs__vslot58 @ 0x129854 (312 bytes) */
-int KhanVs__vslot58(this, param_2, param_3, param_4)
+/* KhanVs__vslot58_matchImmediateConstantCode @ 0x129854 (312 bytes) */
+int KhanVs__vslot58_matchImmediateConstantCode(this, constants, outSelectCode, laneSwizzle)
   undefined4 this;
-  float *param_2;
-  int *param_3;
-  undefined4 param_4;
+  float *constants;
+  int *outSelectCode;
+  undefined4 laneSwizzle;
 {
-  unsigned int ghidra_home[8] = { this, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { this, constants, outSelectCode, laneSwizzle, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   float fVar1;
   int *piVar2;
   float *pfVar3;
@@ -1110,10 +1110,10 @@ int KhanVs__vslot58(this, param_2, param_3, param_4)
   undefined4 local_20;
   
   pcVar5 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 12));
-  (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = param_4;
-  *param_3 = -1;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = laneSwizzle;
+  *outSelectCode = -1;
   iVar7 = 4;
-  pfVar3 = param_2;
+  pfVar3 = constants;
   pcVar6 = pcVar5;
   while ((((*pcVar6 == '\x04' || (fVar1 = *pfVar3, fVar1 == FLOAT_001aa0d4)) ||
           (fVar1 == FLOAT_001aa0e8)) || (local_20 = 0xbf800000, fVar1 == -1.0))) {
@@ -1122,7 +1122,7 @@ int KhanVs__vslot58(this, param_2, param_3, param_4)
     iVar7 = iVar7 + -1;
     if (iVar7 == 0) {
       iVar7 = (int)pcVar6 - (int)pcVar5;
-      pfVar3 = param_2;
+      pfVar3 = constants;
       do {
         if (*pcVar5 == '\x04') {
           *pfVar3 = 0.0;
@@ -1138,15 +1138,15 @@ int KhanVs__vslot58(this, param_2, param_3, param_4)
       local_38[1] = DAT_001affc4;
       local_38[0] = DAT_001affc0;
       iVar8 = 4;
-      *param_3 = 0;
+      *outSelectCode = 0;
       do {
-        fVar1 = *param_2;
-        param_2 = param_2 + 1;
+        fVar1 = *constants;
+        constants = constants + 1;
         local_28 = (longlong)(int)fVar1;
         piVar2 = (int *)((int)local_38 + iVar4);
         iVar4 = iVar4 + 4;
         iVar7 = (int)fVar1 * *piVar2 + iVar7;
-        *param_3 = iVar7;
+        *outSelectCode = iVar7;
         iVar8 = iVar8 + -1;
       } while (iVar8 != 0);
       return 1;
@@ -1179,13 +1179,13 @@ int KhanVs__vslot74(this, param_2)
   return;
 }
 
-/* KhanVs__vslot59 @ 0x129a0c (316 bytes) */
-int KhanVs__vslot59(this, inst, param_3, param_4, param_5)
+/* KhanVs__vslot59_tryEncodeSourceConstant @ 0x129a0c (316 bytes) */
+int KhanVs__vslot59_tryEncodeSourceConstant(this, inst, srcIndex, laneSwizzle, compiler)
   undefined4 this;
   undefined4 inst;
-  undefined4 param_3;
-  uint param_4;
-  int param_5;
+  undefined4 srcIndex;
+  uint laneSwizzle;
+  int compiler;
 {
   char cVar1;
   float fVar2;
@@ -1202,15 +1202,15 @@ int KhanVs__vslot59(this, inst, param_3, param_4, param_5)
   float fStack_44;
   undefined4 local_30;
   
-  local_58 = param_4 << 0x18 | (param_4 & 0xff00) << 8 | param_4 >> 8 & 0xff00 | param_4 >> 0x18;
-  a0 = (int *)IRInst__getOperandSource(inst,param_3);
+  local_58 = laneSwizzle << 0x18 | (laneSwizzle & 0xff00) << 8 | laneSwizzle >> 8 & 0xff00 | laneSwizzle >> 0x18;
+  a0 = (int *)IRInst__getOperandSource(inst,srcIndex);
   iVar3 = (**(code **)(*a0 + 0x48))(a0);
   if (iVar3 == 0) {
 LAB_00129b30:
     uVar4 = 0;
   }
   else {
-    iVar3 = IRInst__getOperandRecord(inst,param_3);
+    iVar3 = IRInst__getOperandRecord(inst,srcIndex);
     iVar6 = 0;
     local_54 = *(undefined4 *)(iVar3 + 0x10);
     iVar3 = 4;
@@ -1228,15 +1228,15 @@ LAB_00129b30:
       pfVar5 = pfVar5 + 1;
       iVar3 = iVar3 + -1;
     } while (iVar3 != 0);
-    ((void (*)())FUN_000f79c4)(inst,*(undefined4 *)(param_5 + 0x6c4),param_3,(double)GH_U2F((unsigned int)(local_50)),
+    ((void (*)())FUN_000f79c4)(inst,*(undefined4 *)(compiler + 0x6c4),srcIndex,(double)GH_U2F((unsigned int)(local_50)),
                  (double)fStack_4c,(double)fStack_48,(double)fStack_44);
     uVar4 = 1;
   }
   return uVar4;
 }
 
-/* KhanVs__vslot71 @ 0x129b48 (632 bytes) */
-int KhanVs__vslot71(this, inst, param_3, inst2, param_5, param_6, param_7)
+/* KhanVs__vslot71_canCombineSources @ 0x129b48 (632 bytes) */
+int KhanVs__vslot71_canCombineSources(this, inst, param_3, inst2, param_5, param_6, param_7)
   undefined4 this;
   int *inst;
   int param_3;
@@ -1361,12 +1361,12 @@ switchD_00129ce4_caseD_0:
   } while( true );
 }
 
-/* KhanVs__vslot85 @ 0x129eb4 (344 bytes) */
-int KhanVs__vslot85(this, param_2, param_3, param_4)
+/* KhanVs__vslot85_findOrEncodeConstantVector @ 0x129eb4 (344 bytes) */
+int KhanVs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwizzle)
   undefined4 this;
-  int param_2;
-  dword *param_3;
-  int *param_4;
+  int program;
+  dword *constants;
+  int *laneSwizzle;
 {
   float fVar1;
   bool bVar2;
@@ -1381,14 +1381,14 @@ int KhanVs__vslot85(this, param_2, param_3, param_4)
   uint local_38;
   float local_20;
   
-  if (*param_4 != 0x4040404) {
+  if (*laneSwizzle != 0x4040404) {
     pcVar5 = "te()\n";
     fVar1 = 0.0;
     iVar9 = 4;
     bVar2 = true;
     iVar6 = 1;
-    piVar3 = param_4;
-    pdVar7 = param_3;
+    piVar3 = laneSwizzle;
+    pdVar7 = constants;
     do {
       if (*(char *)piVar3 != '\x04') {
         if (bVar2) {
@@ -1403,9 +1403,9 @@ int KhanVs__vslot85(this, param_2, param_3, param_4)
       pdVar7 = pdVar7 + 1;
       iVar9 = iVar9 + -1;
     } while (iVar9 != 0);
-    piVar3 = param_4;
+    piVar3 = laneSwizzle;
     if (iVar6 == 0) {
-      iVar9 = FUN_000f6a04(param_2,param_3,*param_4);
+      iVar9 = FUN_000f6a04(program,constants,*laneSwizzle);
     }
     else {
       pcVar5 = "";
@@ -1425,17 +1425,17 @@ int KhanVs__vslot85(this, param_2, param_3, param_4)
         iVar9 = iVar9 + 4;
         iVar10 = iVar10 + -1;
       } while (iVar10 != 0);
-      iVar9 = FUN_000f6a04(param_2,&local_38,0x10203);
+      iVar9 = FUN_000f6a04(program,&local_38,0x10203);
     }
     if (iVar9 != 0) {
       return iVar9;
     }
-    uVar8 = *(undefined4 *)(param_2 + 0x3ac);
-    iVar6 = FUN_000f5f94(uVar8,param_3,param_4,piVar3,pcVar5,iVar6,pdVar7);
+    uVar8 = *(undefined4 *)(program + 0x3ac);
+    iVar6 = FUN_000f5f94(uVar8,constants,laneSwizzle,piVar3,pcVar5,iVar6,pdVar7);
     if (iVar6 != 0) {
       return iVar6;
     }
-    iVar6 = FUN_000f57f0(uVar8,param_3,param_4,piVar3);
+    iVar6 = FUN_000f57f0(uVar8,constants,laneSwizzle,piVar3);
     if (iVar6 != 0) {
       return iVar6;
     }
@@ -1443,8 +1443,8 @@ int KhanVs__vslot85(this, param_2, param_3, param_4)
   return 0;
 }
 
-/* KhanVs__vslot9 @ 0x12a00c (480 bytes) */
-int KhanVs__vslot9(this, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, compiler)
+/* KhanVs__vslot9_createCompareInst @ 0x12a00c (480 bytes) */
+int KhanVs__vslot9_createCompareInst(this, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, compiler)
   undefined4 this;
   undefined4 param_2;
   undefined4 param_3;
@@ -1548,8 +1548,8 @@ int KhanVs__vslot9(this, param_2, param_3, param_4, param_5, param_6, param_7, p
   return puVar9;
 }
 
-/* KhanVs__vslot89 @ 0x12a260 (352 bytes) */
-int KhanVs__vslot89(this, param_2)
+/* KhanVs__vslot89_assignLoadBindings @ 0x12a260 (352 bytes) */
+int KhanVs__vslot89_assignLoadBindings(this, param_2)
   int *this;
   int param_2;
 {
@@ -1601,8 +1601,8 @@ int KhanVs__vslot89(this, param_2)
   return;
 }
 
-/* KhanVs__vslot75 @ 0x12a3c0 (248 bytes) */
-int KhanVs__vslot75(this, param_2, param_3, param_4, param_5, param_6, param_7)
+/* KhanVs__vslot75_registerConstantMultiples @ 0x12a3c0 (248 bytes) */
+int KhanVs__vslot75_registerConstantMultiples(this, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 this;
   int param_2;
   undefined4 param_3;
@@ -1641,8 +1641,8 @@ int KhanVs__vslot75(this, param_2, param_3, param_4, param_5, param_6, param_7)
   return;
 }
 
-/* KhanVs__vslot6 @ 0x12a4b8 (176 bytes) */
-int KhanVs__vslot6(this, param_2)
+/* KhanVs__createSchedModels @ 0x12a4b8 (176 bytes) */
+int KhanVs__createSchedModels(this, param_2)
   int this;
   undefined4 param_2;
 {
@@ -1706,9 +1706,9 @@ int KhanVs__ctor_12a578(this, param_2, param_3)
   FUN_0010dbd8(this,0x4d);
   this[0x19] = 0;
   this[0x18] = 0;
-  ((int (*)())KhanVs__vslot96)(this);
+  ((int (*)())KhanVs__vslot96_installHardwareTables)(this);
   if (param_3 != 0) {
-    ((int (*)())KhanVs__vslot6)(this,param_2);
+    ((int (*)())KhanVs__createSchedModels)(this,param_2);
   }
   return;
 }
@@ -1749,9 +1749,9 @@ int KhanVs__ctor_12a6c0(this, param_2, param_3)
   FUN_0010dbd8(this,0x4d);
   this[0x19] = 0;
   this[0x18] = 0;
-  ((int (*)())KhanVs__vslot96)(this);
+  ((int (*)())KhanVs__vslot96_installHardwareTables)(this);
   if (param_3 != 0) {
-    ((int (*)())KhanVs__vslot6)(this,param_2);
+    ((int (*)())KhanVs__createSchedModels)(this,param_2);
   }
   return;
 }
@@ -1767,9 +1767,9 @@ int FudoVs__ctor_12a808(this, param_2, param_3)
   this[6] = 0x80;
   this[0x10] = 0x400;
   this[2] = this[2] | 0x10100;
-  ((int (*)())FudoVs__vslot96)(this);
+  ((int (*)())FudoVs__vslot96_installHardwareTables)(this);
   if (param_3 != 0) {
-    ((int (*)())FudoVs__vslot6)(this,param_2);
+    ((int (*)())FudoVs__createSchedModels)(this,param_2);
   }
   return;
 }
@@ -1785,15 +1785,15 @@ int FudoVs__ctor_12a8bc(this, param_2, param_3)
   this[6] = 0x80;
   this[0x10] = 0x400;
   this[2] = this[2] | 0x10100;
-  ((int (*)())FudoVs__vslot96)(this);
+  ((int (*)())FudoVs__vslot96_installHardwareTables)(this);
   if (param_3 != 0) {
-    ((int (*)())FudoVs__vslot6)(this,param_2);
+    ((int (*)())FudoVs__createSchedModels)(this,param_2);
   }
   return;
 }
 
-/* KhanVs__vslot96 @ 0x12a970 (116 bytes) */
-int KhanVs__vslot96(this)
+/* KhanVs__vslot96_installHardwareTables @ 0x12a970 (116 bytes) */
+int KhanVs__vslot96_installHardwareTables(this)
   int this;
 {
   PTR_DAT_001e27bc = PTR_DAT_001e9120;
@@ -1809,8 +1809,8 @@ int KhanVs__vslot96(this)
   return;
 }
 
-/* FudoVs__vslot96 @ 0x12a9e4 (116 bytes) */
-int FudoVs__vslot96(this)
+/* FudoVs__vslot96_installHardwareTables @ 0x12a9e4 (116 bytes) */
+int FudoVs__vslot96_installHardwareTables(this)
   int this;
 {
   *(undefined **)(this + 0xc) = &DAT_001e1994;
@@ -1828,8 +1828,8 @@ int FudoVs__vslot96(this)
   return;
 }
 
-/* KhanPs__vslot96 @ 0x12aa58 (32 bytes) */
-int KhanPs__vslot96(this)
+/* KhanPs__vslot96_installHardwareTables @ 0x12aa58 (32 bytes) */
+int KhanPs__vslot96_installHardwareTables(this)
   int this;
 {
   *(undefined **)(this + 0xc) = &DAT_001e39a4;
@@ -2189,84 +2189,84 @@ int FUN_0012b2d8(param_1, param_2, param_3, param_4)
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_00127ee4");
-asm(".set FUN_00127ee4, _KhanPs__vslot76");
+asm(".set FUN_00127ee4, _KhanPs__vslot76_getBindingLimit");
 asm(".globl FUN_00127f24");
-asm(".set FUN_00127f24, _KhanPs__vslot6");
+asm(".set FUN_00127f24, _KhanPs__createSchedModels");
 asm(".globl FUN_00127fd8");
 asm(".set FUN_00127fd8, _FUN_00127fd8");
 asm(".globl FUN_00127ff8");
-asm(".set FUN_00127ff8, _KhanPs__vslot62");
+asm(".set FUN_00127ff8, _KhanPs__vslot62_lookupTableEntry");
 asm(".globl FUN_0012801c");
-asm(".set FUN_0012801c, _KhanPs__vslot90");
+asm(".set FUN_0012801c, _KhanPs__vslot90_isProgramKind1");
 asm(".globl FUN_00128030");
 asm(".set FUN_00128030, _KhanPs__getOpcodeTraits");
 asm(".globl FUN_0012804c");
-asm(".set FUN_0012804c, _KhanPs__vslot35");
+asm(".set FUN_0012804c, _KhanPs__vslot35_publishLimitsAndBindingTables");
 asm(".globl FUN_001281b0");
-asm(".set FUN_001281b0, _KhanPs__vslot8");
+asm(".set FUN_001281b0, _KhanPs__vslot8_failNotSupported");
 asm(".globl FUN_001281f0");
-asm(".set FUN_001281f0, _KhanPs__vslot58");
+asm(".set FUN_001281f0, _KhanPs__vslot58_matchImmediateConstantCode");
 asm(".globl FUN_00128348");
-asm(".set FUN_00128348, _KhanPs__vslot73");
+asm(".set FUN_00128348, _KhanPs__vslot73_seedValueNumbers");
 asm(".globl FUN_0012839c");
-asm(".set FUN_0012839c, _KhanPs__vslot74");
+asm(".set FUN_0012839c, _KhanPs__vslot74_seedConstantValueNumbers");
 asm(".globl FUN_00128430");
-asm(".set FUN_00128430, _KhanPs__vslot85");
+asm(".set FUN_00128430, _KhanPs__vslot85_findOrEncodeConstantVector");
 asm(".globl FUN_0012873c");
-asm(".set FUN_0012873c, _KhanPs__vslot59");
+asm(".set FUN_0012873c, _KhanPs__vslot59_tryEncodeSourceConstant");
 asm(".globl FUN_00128930");
-asm(".set FUN_00128930, _KhanPs__vslot9");
+asm(".set FUN_00128930, _KhanPs__vslot9_createCompareInst");
 asm(".globl FUN_00128ad4");
-asm(".set FUN_00128ad4, _KhanPs__vslot5");
+asm(".set FUN_00128ad4, _KhanPs__vslot5_materializeSpecialRegister");
 asm(".globl FUN_00128d7c");
-asm(".set FUN_00128d7c, _KhanPs__vslot75");
+asm(".set FUN_00128d7c, _KhanPs__vslot75_registerConstantMultiples");
 asm(".globl FUN_00129290");
-asm(".set FUN_00129290, _FudoVs__vslot6");
+asm(".set FUN_00129290, _FudoVs__createSchedModels");
 asm(".globl FUN_00129350");
-asm(".set FUN_00129350, _KhanVs__vslot76");
+asm(".set FUN_00129350, _KhanVs__vslot76_getBindingLimits");
 asm(".globl FUN_001293b0");
-asm(".set FUN_001293b0, _KhanVs__vslot77");
+asm(".set FUN_001293b0, _KhanVs__vslot77_getBindingLimits");
 asm(".globl FUN_001293f8");
-asm(".set FUN_001293f8, _KhanVs__vslot80");
+asm(".set FUN_001293f8, _KhanVs__vslot80_getLimit_0x14");
 asm(".globl FUN_00129408");
-asm(".set FUN_00129408, _KhanVs__vslot60");
+asm(".set FUN_00129408, _KhanVs__vslot60_isZeroOrOne");
 asm(".globl FUN_00129444");
-asm(".set FUN_00129444, _KhanVs__vslot73");
+asm(".set FUN_00129444, _KhanVs__vslot73_noOp");
 asm(".globl FUN_00129448");
-asm(".set FUN_00129448, _KhanVs__vslot99");
+asm(".set FUN_00129448, _KhanVs__vslot99_matchesRegisterMapEntry");
 asm(".globl FUN_00129478");
-asm(".set FUN_00129478, _KhanVs__vslot35");
+asm(".set FUN_00129478, _KhanVs__vslot35_publishLimitsAndBindingTables");
 asm(".globl FUN_00129678");
 asm(".set FUN_00129678, _KhanVs__getOpcodeTraits");
 asm(".globl FUN_00129694");
-asm(".set FUN_00129694, _FudoVs__vslot8");
+asm(".set FUN_00129694, _FudoVs__vslot8_failNotSupported");
 asm(".globl FUN_001296cc");
-asm(".set FUN_001296cc, _KhanVs__vslot22");
+asm(".set FUN_001296cc, _KhanVs__vslot22_appendRegisterBindingWithLaneArrays");
 asm(".globl FUN_00129748");
-asm(".set FUN_00129748, _KhanVs__vslot21");
+asm(".set FUN_00129748, _KhanVs__vslot21_appendRegisterBinding");
 asm(".globl FUN_001297e4");
-asm(".set FUN_001297e4, _KhanVs__vslot100");
+asm(".set FUN_001297e4, _KhanVs__vslot100_appendIdentityRegisterBinding");
 asm(".globl FUN_00129854");
-asm(".set FUN_00129854, _KhanVs__vslot58");
+asm(".set FUN_00129854, _KhanVs__vslot58_matchImmediateConstantCode");
 asm(".globl FUN_0012998c");
 asm(".set FUN_0012998c, _KhanVs__vslot74");
 asm(".globl FUN_00129a0c");
-asm(".set FUN_00129a0c, _KhanVs__vslot59");
+asm(".set FUN_00129a0c, _KhanVs__vslot59_tryEncodeSourceConstant");
 asm(".globl FUN_00129b48");
-asm(".set FUN_00129b48, _KhanVs__vslot71");
+asm(".set FUN_00129b48, _KhanVs__vslot71_canCombineSources");
 asm(".globl FUN_00129eb4");
-asm(".set FUN_00129eb4, _KhanVs__vslot85");
+asm(".set FUN_00129eb4, _KhanVs__vslot85_findOrEncodeConstantVector");
 asm(".globl FUN_0012a00c");
-asm(".set FUN_0012a00c, _KhanVs__vslot9");
+asm(".set FUN_0012a00c, _KhanVs__vslot9_createCompareInst");
 asm(".globl FUN_0012a260");
-asm(".set FUN_0012a260, _KhanVs__vslot89");
+asm(".set FUN_0012a260, _KhanVs__vslot89_assignLoadBindings");
 asm(".globl FUN_0012a3c0");
-asm(".set FUN_0012a3c0, _KhanVs__vslot75");
+asm(".set FUN_0012a3c0, _KhanVs__vslot75_registerConstantMultiples");
 asm(".globl FUN_0012a4b8");
-asm(".set FUN_0012a4b8, _KhanVs__vslot6");
+asm(".set FUN_0012a4b8, _KhanVs__createSchedModels");
 asm(".globl FUN_0012a970");
-asm(".set FUN_0012a970, _KhanVs__vslot96");
+asm(".set FUN_0012a970, _KhanVs__vslot96_installHardwareTables");
 asm(".globl FUN_0012a9e4");
-asm(".set FUN_0012a9e4, _FudoVs__vslot96");
+asm(".set FUN_0012a9e4, _FudoVs__vslot96_installHardwareTables");
 asm(".globl FUN_0012aa58");
-asm(".set FUN_0012aa58, _KhanPs__vslot96");
+asm(".set FUN_0012aa58, _KhanPs__vslot96_installHardwareTables");

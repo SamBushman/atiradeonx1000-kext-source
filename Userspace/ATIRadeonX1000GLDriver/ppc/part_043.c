@@ -2202,8 +2202,8 @@ int FUN_0014a898(inst, inst2)
   return 0;
 }
 
-/* FUN_0014a918 @ 0x14a918 (708 bytes) */
-int FUN_0014a918(inst, param_2, param_3)
+/* Inst__swizzleTextureFetchOutput @ 0x14a918 (708 bytes) */
+int Inst__swizzleTextureFetchOutput(inst, param_2, param_3)
   int *inst;
   int param_2;
   int param_3;
@@ -2294,8 +2294,8 @@ int FUN_0014a918(inst, param_2, param_3)
   return 0;
 }
 
-/* FUN_0014abdc @ 0x14abdc (220 bytes) */
-int FUN_0014abdc(inst, param_2, param_3)
+/* Inst__tryCopyPropagate @ 0x14abdc (220 bytes) */
+int Inst__tryCopyPropagate(inst, param_2, param_3)
   int *inst;
   undefined4 param_2;
   undefined4 param_3;
@@ -2314,7 +2314,7 @@ int FUN_0014abdc(inst, param_2, param_3)
     ((int (*)())FUN_001479f8)(inst,param_2);
     ((int (*)())FUN_00148d8c)(inst,param_2);
     ((int (*)())FUN_00148980)(inst,param_2);
-    uVar2 = ((int (*)())FUN_0014a918)(inst,1,param_2);
+    uVar2 = ((int (*)())Inst__swizzleTextureFetchOutput)(inst,1,param_2);
     iVar1 = ((int (*)())FUN_001494dc)(inst,param_2,param_3);
     uVar3 = 1;
     if (iVar1 == 0) {
@@ -2324,8 +2324,8 @@ int FUN_0014abdc(inst, param_2, param_3)
   return uVar3;
 }
 
-/* FUN_0014acb8 @ 0x14acb8 (852 bytes) */
-int FUN_0014acb8(inst, param_2)
+/* Inst__collapseAlgebraic_0014acb8 @ 0x14acb8 (852 bytes) */
+int Inst__collapseAlgebraic_0014acb8(inst, param_2)
   int *inst;
   int param_2;
 {
@@ -2507,8 +2507,8 @@ LAB_0014af34:
   return 0;
 }
 
-/* FUN_0014b150 @ 0x14b150 (1696 bytes) */
-int FUN_0014b150(inst, param_2)
+/* Inst__collapseAlgebraic_0014b150 @ 0x14b150 (1696 bytes) */
+int Inst__collapseAlgebraic_0014b150(inst, param_2)
   int inst;
   int param_2;
 {
@@ -2789,8 +2789,8 @@ int FUN_0014b150(inst, param_2)
   return 0;
 }
 
-/* FUN_0014b82c @ 0x14b82c (952 bytes) */
-int FUN_0014b82c(inst, param_2, param_3, param_4)
+/* Inst__collapseAlgebraic_0014b82c @ 0x14b82c (952 bytes) */
+int Inst__collapseAlgebraic_0014b82c(inst, param_2, param_3, param_4)
   int inst;
   int param_2;
   int param_3;
@@ -3001,8 +3001,8 @@ LAB_0014b954:
   return uVar7;
 }
 
-/* FUN_0014bdbc @ 0x14bdbc (1912 bytes) */
-int FUN_0014bdbc(inst, param_2)
+/* Inst__collapseAlgebraic_0014bdbc @ 0x14bdbc (1912 bytes) */
+int Inst__collapseAlgebraic_0014bdbc(inst, param_2)
   int inst;
   int param_2;
 {
@@ -3443,8 +3443,8 @@ int FUN_0014c9d0(inst, inst2)
   return;
 }
 
-/* FUN_0014caec @ 0x14caec (988 bytes) */
-int FUN_0014caec(inst, param_2)
+/* Inst__collapseAlgebraic_0014caec @ 0x14caec (988 bytes) */
+int Inst__collapseAlgebraic_0014caec(inst, param_2)
   int *inst;
   int param_2;
 {
@@ -3542,8 +3542,8 @@ int FUN_0014caec(inst, param_2)
   return 0;
 }
 
-/* FUN_0014cec8 @ 0x14cec8 (940 bytes) */
-int FUN_0014cec8(inst, param_2)
+/* Inst__collapseAlgebraic_0014cec8 @ 0x14cec8 (940 bytes) */
+int Inst__collapseAlgebraic_0014cec8(inst, param_2)
   int inst;
   int param_2;
 {
@@ -3632,8 +3632,8 @@ int FUN_0014cec8(inst, param_2)
   return 0;
 }
 
-/* FUN_0014d274 @ 0x14d274 (1312 bytes) */
-int FUN_0014d274(inst, param_2)
+/* Inst__collapseAlgebraic_0014d274 @ 0x14d274 (1312 bytes) */
+int Inst__collapseAlgebraic_0014d274(inst, param_2)
   int inst;
   int param_2;
 {
@@ -3854,8 +3854,8 @@ LAB_0014d5ac:
   return 0;
 }
 
-/* FUN_0014d8f8 @ 0x14d8f8 (2240 bytes) */
-int FUN_0014d8f8(node, pass)
+/* Inst__collapseAlgebraic_0014d8f8 @ 0x14d8f8 (2240 bytes) */
+int Inst__collapseAlgebraic_0014d8f8(node, pass)
   int node;
   int pass;
 {
@@ -4318,8 +4318,8 @@ LAB_0014e650:
   return;
 }
 
-/* FUN_0014e6e4 @ 0x14e6e4 (672 bytes) */
-int FUN_0014e6e4(inst, param_2)
+/* Inst__reassociate_14e6e4 @ 0x14e6e4 (672 bytes) */
+int Inst__reassociate_14e6e4(inst, param_2)
   int inst;
   int param_2;
 {
@@ -5301,7 +5301,7 @@ int FUN_001506d0(param_1, param_2, param_3)
     return;
   }
   sourceDef = IRInst__getOperandSource(*param_1,param_1[1]);
-  ((int (*)())FUN_0014e6e4)(sourceDef,param_3);
+  ((int (*)())Inst__reassociate_14e6e4)(sourceDef,param_3);
   return;
 }
 
@@ -5476,8 +5476,8 @@ int FUN_001507d0(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_00150b94 @ 0x150b94 (420 bytes) */
-int FUN_00150b94(inst, param_2)
+/* Inst__reassociate_150b94 @ 0x150b94 (420 bytes) */
+int Inst__reassociate_150b94(inst, param_2)
   int inst;
   int param_2;
 {
@@ -5536,8 +5536,8 @@ LAB_00150cd0:
   return bVar2 || bVar1;
 }
 
-/* FUN_00150d38 @ 0x150d38 (1504 bytes) */
-int FUN_00150d38(inst, param_2)
+/* Inst__collapseAlgebraic_00150d38 @ 0x150d38 (1504 bytes) */
+int Inst__collapseAlgebraic_00150d38(inst, param_2)
   int inst;
   int param_2;
 {
@@ -7703,8 +7703,8 @@ int FUN_001541f0(node, inst, pass)
   return 0;
 }
 
-/* FUN_00154dc0 @ 0x154dc0 (904 bytes) */
-int FUN_00154dc0(inst, param_2)
+/* Inst__collapseAlgebraic_00154dc0 @ 0x154dc0 (904 bytes) */
+int Inst__collapseAlgebraic_00154dc0(inst, param_2)
   int *inst;
   int param_2;
 {
@@ -8144,8 +8144,8 @@ int FUN_00155654(inst, param_2, inst2, param_4)
   return 0;
 }
 
-/* FUN_00155a60 @ 0x155a60 (2056 bytes) */
-int FUN_00155a60(inst, pass)
+/* Inst__collapseAlgebraic_00155a60 @ 0x155a60 (2056 bytes) */
+int Inst__collapseAlgebraic_00155a60(inst, pass)
   void *inst;
   int pass;
 {
@@ -9520,8 +9520,8 @@ LAB_00158170:
   } while( true );
 }
 
-/* FUN_00158264 @ 0x158264 (828 bytes) */
-int FUN_00158264(inst, param_2, inst2, param_4)
+/* Inst__collapseAlgebraic_00158264 @ 0x158264 (828 bytes) */
+int Inst__collapseAlgebraic_00158264(inst, param_2, inst2, param_4)
   int inst;
   int param_2;
   int inst2;

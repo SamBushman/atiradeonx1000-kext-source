@@ -1323,28 +1323,28 @@ int R300MachineAssembler__assembleBlock(this, block, startOfShaderFlag)
   int block;
   int startOfShaderFlag;
 {
-  uint *puVar1;
-  bool bVar2;
-  bool bVar3;
-  bool bVar4;
-  bool bVar5;
-  bool bVar6;
-  bool bVar7;
-  bool bVar8;
-  uint uVar9;
-  int *piVar10;
+  uint *flagsPtr;
+  bool aluClauseOpened;
+  bool prevEndedAluClause;
+  bool startsNewWord;
+  bool groupHasFlag0x80;
+  bool groupHasAlu;
+  bool groupHasFetch;
+  bool groupHasPresub;
+  uint instFlags;
+  int *cursorInst;
   int iVar11;
-  int *piVar12;
-  int *a0;
-  int *piVar13;
-  code *pcVar14;
+  int *prevInst;
+  int *src1Inst;
+  int *groupInst;
+  code *visitSlot;
   int local_88;
-  undefined1 auStack_84 [60];
+  undefined1 packState [60];
   undefined4 local_48 [2];
   
-  piVar13 = *(int **)(block + 8);
-  bVar3 = false;
-  if (piVar13[2] == 0) {
+  groupInst = *(int **)(block + 8);
+  prevEndedAluClause = false;
+  if (groupInst[2] == 0) {
     return;
   }
   do {
@@ -1354,70 +1354,70 @@ int R300MachineAssembler__assembleBlock(this, block, startOfShaderFlag)
     }
     iVar11 = this[3];
     if (**(int **)(iVar11 + 0x6c4) == 0) {
-      piVar12 = (int *)FUN_000e3b88(this[4],block,piVar13,&local_88);
-      if ((piVar12 == (int *)0x0) || (local_88 == 0)) {
+      prevInst = (int *)FUN_000e3b88(this[4],block,groupInst,&local_88);
+      if ((prevInst == (int *)0x0) || (local_88 == 0)) {
         iVar11 = this[3];
       }
       else {
         iVar11 = this[3];
-        piVar13 = piVar12;
+        groupInst = prevInst;
       }
     }
-    iVar11 = FUN_00106cf8(piVar13,*(undefined4 *)(iVar11 + 0x6c4));
-    piVar12 = piVar13;
-    if ((((iVar11 == 0) || (uVar9 = piVar13[5], (uVar9 & 4) != 0)) || ((int)uVar9 < 0)) ||
-       ((uVar9 & 0x1000) != 0)) {
-      PackState__reset(auStack_84);
-      if (piVar13 == (int *)0x0) {
-        bVar5 = false;
+    iVar11 = FUN_00106cf8(groupInst,*(undefined4 *)(iVar11 + 0x6c4));
+    prevInst = groupInst;
+    if ((((iVar11 == 0) || (instFlags = groupInst[5], (instFlags & 4) != 0)) || ((int)instFlags < 0)) ||
+       ((instFlags & 0x1000) != 0)) {
+      PackState__reset(packState);
+      if (groupInst == (int *)0x0) {
+        groupHasFlag0x80 = false;
       }
       else {
-        bVar5 = false;
-        piVar10 = piVar13;
+        groupHasFlag0x80 = false;
+        cursorInst = groupInst;
         do {
-          uVar9 = piVar10[5];
-          if ((uVar9 & 1) != 0) {
-            if ((uVar9 & 0x80) != 0) {
-              bVar5 = true;
+          instFlags = cursorInst[5];
+          if ((instFlags & 1) != 0) {
+            if ((instFlags & 0x80) != 0) {
+              groupHasFlag0x80 = true;
             }
-            if ((uVar9 & 0x10000) == 0) {
-              ((int (*)())R300MachineAssembler__placeInstructionConstants)(this,piVar10,auStack_84);
-              uVar9 = piVar10[5];
+            if ((instFlags & 0x10000) == 0) {
+              ((int (*)())R300MachineAssembler__placeInstructionConstants)(this,cursorInst,packState);
+              instFlags = cursorInst[5];
             }
           }
-          piVar10 = (int *)piVar10[2];
-        } while ((piVar10 != (int *)0x0) && ((uVar9 & 4) != 0));
+          cursorInst = (int *)cursorInst[2];
+        } while ((cursorInst != (int *)0x0) && ((instFlags & 4) != 0));
       }
-      FUN_0018c1c8(auStack_84,this + 7);
-      if (piVar13 == (int *)0x0) {
+      FUN_0018c1c8(packState,this + 7);
+      if (groupInst == (int *)0x0) {
 LAB_00197808:
-        piVar10 = (int *)piVar13[2];
+        cursorInst = (int *)groupInst[2];
       }
       else {
-        bVar2 = false;
-        bVar8 = false;
-        bVar6 = false;
-        bVar7 = false;
-        piVar10 = piVar13;
+        aluClauseOpened = false;
+        groupHasPresub = false;
+        groupHasAlu = false;
+        groupHasFetch = false;
+        cursorInst = groupInst;
         do {
-          uVar9 = piVar10[5];
-          if ((uVar9 & 1) != 0) {
-            iVar11 = piVar10[0x47];
-            pcVar14 = *(code **)(*this + 0x13c);
-            FUN_00105d04(local_48,piVar10);
-            (*pcVar14)(this,iVar11,local_48[0]);
-            if ((piVar10[5] & 0x10000U) == 0) {
-              if ((piVar10[5] & 2U) != 0) {
-                a0 = (int *)IRInst__getOperandSource(piVar10,1);
-                iVar11 = (**(code **)(*a0 + 0x50))(a0);
+          instFlags = cursorInst[5];
+          if ((instFlags & 1) != 0) {
+            iVar11 = cursorInst[0x47];
+            visitSlot = *(code **)(*this + 0x13c);
+            FUN_00105d04(local_48,cursorInst);
+            (*visitSlot)(this,iVar11,local_48[0]);
+            if ((cursorInst[5] & 0x10000U) == 0) {
+              if ((cursorInst[5] & 2U) != 0) {
+                src1Inst = (int *)IRInst__getOperandSource(cursorInst,1);
+                iVar11 = (**(code **)(*src1Inst + 0x50))(src1Inst);
                 if ((iVar11 != 0) &&
-                   (iVar11 = IRInst__getOperandRecord(piVar10,0), *(int *)(iVar11 + 0x10) == 0x1010100))
+                   (iVar11 = IRInst__getOperandRecord(cursorInst,0), *(int *)(iVar11 + 0x10) == 0x1010100))
                 goto LAB_00197784;
               }
-              iVar11 = (**(code **)(*piVar10 + 0x28))(piVar10);
+              iVar11 = (**(code **)(*cursorInst + 0x28))(cursorInst);
               if (iVar11 == 0) {
-                if (!bVar2) {
-                  bVar2 = true;
+                if (!aluClauseOpened) {
+                  aluClauseOpened = true;
                   (**(code **)(*this + 0xc0))(this);
                 }
                 if (this[0x23] == 0) {
@@ -1428,12 +1428,12 @@ LAB_00197808:
                   this[0x23] = 2;
                   (**(code **)(*this + 0x148))(this);
                 }
-                bVar4 = !bVar3;
-                if (bVar4) {
-                  bVar6 = true;
+                startsNewWord = !prevEndedAluClause;
+                if (startsNewWord) {
+                  groupHasAlu = true;
                   goto LAB_00197624;
                 }
-                bVar6 = true;
+                groupHasAlu = true;
               }
               else {
                 iVar11 = this[0x23];
@@ -1443,7 +1443,7 @@ LAB_00197808:
                 }
                 else {
                   if (iVar11 != 2) {
-                    if ((iVar11 != 1) || ((piVar10[5] & 0x1000U) == 0)) goto LAB_0019752c;
+                    if ((iVar11 != 1) || ((cursorInst[5] & 0x1000U) == 0)) goto LAB_0019752c;
                     (**(code **)(*this + 0x148))(this);
                   }
                   this[0x23] = 1;
@@ -1451,95 +1451,95 @@ LAB_00197808:
                   (**(code **)(*this + 0x138))(this);
                 }
 LAB_0019752c:
-                bVar3 = false;
-                bVar7 = true;
-                bVar4 = true;
+                prevEndedAluClause = false;
+                groupHasFetch = true;
+                startsNewWord = true;
 LAB_00197624:
-                if (*(int *)(piVar10[0x22] + 8) == 0xb4) {
-                  piVar10[5] = piVar10[5] | 0x1000;
+                if (*(int *)(cursorInst[0x22] + 8) == 0xb4) {
+                  cursorInst[5] = cursorInst[5] | 0x1000;
                 }
               }
-              (**(code **)(*piVar10 + 0x1c))(piVar10,this,0,this[3]);
-              if (bVar4) {
-                if ((((piVar10[5] & 0x1000U) != 0) || (startOfShaderFlag != 0)) || ((piVar10[5] & 2U) != 0)) {
+              (**(code **)(*cursorInst + 0x1c))(cursorInst,this,0,this[3]);
+              if (startsNewWord) {
+                if ((((cursorInst[5] & 0x1000U) != 0) || (startOfShaderFlag != 0)) || ((cursorInst[5] & 2U) != 0)) {
                   (**(code **)(*this + 0x14c))(this);
-                  iVar11 = (**(code **)(*piVar10 + 0x28))(piVar10);
+                  iVar11 = (**(code **)(*cursorInst + 0x28))(cursorInst);
                   if (iVar11 == 0) {
-                    bVar3 = true;
+                    prevEndedAluClause = true;
                     startOfShaderFlag = 0;
                     goto LAB_001976d0;
                   }
                 }
-                bVar3 = false;
+                prevEndedAluClause = false;
                 startOfShaderFlag = 0;
               }
 LAB_001976d0:
-              if (bVar5) {
+              if (groupHasFlag0x80) {
                 (**(code **)(*this + 0x114))(this);
               }
               if (this[6] != 0) {
                 (**(code **)(*this + 0x140))(this);
               }
-              (**(code **)(*piVar10 + 0x20))(piVar10,this,0,this[3]);
-              iVar11 = (**(code **)(*piVar10 + 0x28))(piVar10);
+              (**(code **)(*cursorInst + 0x20))(cursorInst,this,0,this[3]);
+              iVar11 = (**(code **)(*cursorInst + 0x28))(cursorInst);
               if (iVar11 != 0) {
                 this[0x1a] = this[0x1a] + 1;
                 (**(code **)(*this + 0x15c))(this);
-                uVar9 = piVar10[5];
+                instFlags = cursorInst[5];
                 goto LAB_00197788;
               }
             }
             else {
-              iVar11 = (**(code **)(*piVar10 + 0x5c))(piVar10);
+              iVar11 = (**(code **)(*cursorInst + 0x5c))(cursorInst);
               if (iVar11 != 0) {
-                bVar8 = true;
+                groupHasPresub = true;
               }
-              iVar11 = (**(code **)(*piVar10 + 0x48))(piVar10);
+              iVar11 = (**(code **)(*cursorInst + 0x48))(cursorInst);
               if (iVar11 != 0) {
-                ((int (*)())R300MachineAssembler__callSlot65)(this,(uint)piVar10,this[3]);
+                ((int (*)())R300MachineAssembler__callSlot65)(this,(uint)cursorInst,this[3]);
               }
-              iVar11 = (**(code **)(*piVar10 + 0x4c))(piVar10);
+              iVar11 = (**(code **)(*cursorInst + 0x4c))(cursorInst);
               if (iVar11 != 0) {
-                ((int (*)())FUN_0019651c)(this,piVar10,this[3]);
+                ((int (*)())FUN_0019651c)(this,cursorInst,this[3]);
               }
-              iVar11 = (**(code **)(*piVar10 + 0x38))(piVar10);
+              iVar11 = (**(code **)(*cursorInst + 0x38))(cursorInst);
               if ((iVar11 != 0) && (this[0x23] == 1)) {
                 (**(code **)(*this + 0x148))(this);
-                uVar9 = piVar10[5];
+                instFlags = cursorInst[5];
                 goto LAB_00197788;
               }
             }
 LAB_00197784:
-            uVar9 = piVar10[5];
+            instFlags = cursorInst[5];
           }
 LAB_00197788:
-          piVar10 = (int *)piVar10[2];
-        } while ((piVar10 != (int *)0x0) && ((uVar9 & 4) != 0));
-        if (bVar6) {
+          cursorInst = (int *)cursorInst[2];
+        } while ((cursorInst != (int *)0x0) && ((instFlags & 4) != 0));
+        if (groupHasAlu) {
           (**(code **)(*this + 0x15c))(this);
           this[0x19] = this[0x19] + 1;
-          piVar10 = (int *)piVar13[2];
+          cursorInst = (int *)groupInst[2];
         }
         else {
-          if ((bVar7) || (!bVar8)) goto LAB_00197808;
+          if ((groupHasFetch) || (!groupHasPresub)) goto LAB_00197808;
           (**(code **)(*this + 0x110))(this);
-          piVar10 = (int *)piVar13[2];
+          cursorInst = (int *)groupInst[2];
         }
       }
     }
     else {
       *(int *)(this[4] + 0xc) = *(int *)(this[4] + 0xc) + 1;
-      piVar10 = (int *)piVar13[2];
+      cursorInst = (int *)groupInst[2];
     }
     do {
-      piVar13 = piVar10;
-      puVar1 = (uint *)(piVar12 + 5);
-      if ((int *)piVar13[2] == (int *)0x0) {
+      groupInst = cursorInst;
+      flagsPtr = (uint *)(prevInst + 5);
+      if ((int *)groupInst[2] == (int *)0x0) {
         return;
       }
-      piVar10 = (int *)piVar13[2];
-      piVar12 = piVar13;
-    } while ((*puVar1 & 4) != 0);
+      cursorInst = (int *)groupInst[2];
+      prevInst = groupInst;
+    } while ((*flagsPtr & 4) != 0);
   } while( true );
 }
 

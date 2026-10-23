@@ -52,7 +52,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd768, /* +0xc4 */
     0x001cd770, /* +0xc8 */
     0x001cd778, /* +0xcc */
-    0x0010437c, /* -> IRInst__vslot28 */ /* +0xd0 */
+    0x0010437c, /* -> IRInst__vslot28_hasFlag0x4000AndClass0x24 */ /* +0xd0 */
     0x001cd780, /* +0xd4 */
     0x001cd788, /* +0xd8 */
     0x001cd790, /* +0xdc */
@@ -61,7 +61,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd7d8, /* +0xe8 */
     0x001cd7a8, /* +0xec */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0xf0 */
-    0x001069e8, /* -> IRInst__vslot37 */ /* +0xf4 */
+    0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0xf4 */
     0x001cd7bc, /* -> IRPseudo__getKindName */ /* +0xf8 */
     0x00000000, /* +0xfc */
     0x00000000, /* +0x100 */
@@ -244,7 +244,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd768, /* +0x3c4 */
     0x001cd770, /* +0x3c8 */
     0x001cd778, /* +0x3cc */
-    0x0010437c, /* -> IRInst__vslot28 */ /* +0x3d0 */
+    0x0010437c, /* -> IRInst__vslot28_hasFlag0x4000AndClass0x24 */ /* +0x3d0 */
     0x001cd780, /* +0x3d4 */
     0x001cd788, /* +0x3d8 */
     0x001cd790, /* +0x3dc */
@@ -253,7 +253,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd7d8, /* +0x3e8 */
     0x001cd7a8, /* +0x3ec */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0x3f0 */
-    0x001069e8, /* -> IRInst__vslot37 */ /* +0x3f4 */
+    0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0x3f4 */
     0x001ce6fc, /* -> IRLoad__getKindName */ /* +0x3f8 */
     0x00000000, /* +0x3fc */
     0x00000000, /* +0x400 */
@@ -286,7 +286,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd768, /* +0x46c */
     0x001cd770, /* +0x470 */
     0x001cd778, /* +0x474 */
-    0x0010437c, /* -> IRInst__vslot28 */ /* +0x478 */
+    0x0010437c, /* -> IRInst__vslot28_hasFlag0x4000AndClass0x24 */ /* +0x478 */
     0x001cd780, /* +0x47c */
     0x001cd788, /* +0x480 */
     0x001cd790, /* +0x484 */
@@ -295,7 +295,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cec6c, /* +0x490 */
     0x001cd7a8, /* +0x494 */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0x498 */
-    0x001069e8, /* -> IRInst__vslot37 */ /* +0x49c */
+    0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0x49c */
     0x001ce9b4, /* -> IRAlu__getKindName */ /* +0x4a0 */
     0x00000000, /* +0x4a4 */
     0x00000000, /* +0x4a8 */
@@ -328,7 +328,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd768, /* +0x514 */
     0x001cd770, /* +0x518 */
     0x001cd778, /* +0x51c */
-    0x0010437c, /* -> IRInst__vslot28 */ /* +0x520 */
+    0x0010437c, /* -> IRInst__vslot28_hasFlag0x4000AndClass0x24 */ /* +0x520 */
     0x001cd780, /* +0x524 */
     0x001cd788, /* +0x528 */
     0x001cd790, /* +0x52c */
@@ -337,7 +337,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd7d8, /* +0x538 */
     0x001cd7a8, /* +0x53c */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0x540 */
-    0x001069e8, /* -> IRInst__vslot37 */ /* +0x544 */
+    0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0x544 */
     0x001cebe4, /* -> IRCmp1S__getKindName */ /* +0x548 */
     0x00000000, /* +0x54c */
     0x00000008, /* +0x550 */
@@ -374,7 +374,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd768, /* +0x5cc */
     0x001cd770, /* +0x5d0 */
     0x001cd778, /* +0x5d4 */
-    0x0010437c, /* -> IRInst__vslot28 */ /* +0x5d8 */
+    0x0010437c, /* -> IRInst__vslot28_hasFlag0x4000AndClass0x24 */ /* +0x5d8 */
     0x001cd780, /* +0x5dc */
     0x001cd788, /* +0x5e0 */
     0x001cd790, /* +0x5e4 */
@@ -383,7 +383,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cec6c, /* +0x5f0 */
     0x001cd7a8, /* +0x5f4 */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0x5f8 */
-    0x001069e8, /* -> IRInst__vslot37 */ /* +0x5fc */
+    0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0x5fc */
     0x001cec24, /* +0x600 */
     0x00000000, /* +0x604 */
     0x00000008, /* +0x608 */
@@ -424,7 +424,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd768, /* +0x694 */
     0x001cd770, /* +0x698 */
     0x001cd778, /* +0x69c */
-    0x0010437c, /* -> IRInst__vslot28 */ /* +0x6a0 */
+    0x0010437c, /* -> IRInst__vslot28_hasFlag0x4000AndClass0x24 */ /* +0x6a0 */
     0x001cd780, /* +0x6a4 */
     0x001cd788, /* +0x6a8 */
     0x001cd790, /* +0x6ac */
@@ -433,7 +433,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cec6c, /* +0x6b8 */
     0x001cd7a8, /* +0x6bc */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0x6c0 */
-    0x001069e8, /* -> IRInst__vslot37 */ /* +0x6c4 */
+    0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0x6c4 */
     0x001ce9b4, /* -> IRAlu__getKindName */ /* +0x6c8 */
     0x00000000, /* +0x6cc */
     0x00000000, /* +0x6d0 */
@@ -466,7 +466,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd768, /* +0x73c */
     0x001cd770, /* +0x740 */
     0x001cd778, /* +0x744 */
-    0x0010437c, /* -> IRInst__vslot28 */ /* +0x748 */
+    0x0010437c, /* -> IRInst__vslot28_hasFlag0x4000AndClass0x24 */ /* +0x748 */
     0x001cd780, /* +0x74c */
     0x001cd788, /* +0x750 */
     0x001cd790, /* +0x754 */
@@ -475,7 +475,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cec6c, /* +0x760 */
     0x001cd7a8, /* +0x764 */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0x768 */
-    0x001069e8, /* -> IRInst__vslot37 */ /* +0x76c */
+    0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0x76c */
     0x001cebb4, /* -> IRCmp2__getKindName */ /* +0x770 */
     0x00000000, /* +0x774 */
     0x00000008, /* +0x778 */
@@ -512,7 +512,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd768, /* +0x7f4 */
     0x001ceb30, /* +0x7f8 */
     0x001ceb9c, /* +0x7fc */
-    0x0010437c, /* -> IRInst__vslot28 */ /* +0x800 */
+    0x0010437c, /* -> IRInst__vslot28_hasFlag0x4000AndClass0x24 */ /* +0x800 */
     0x001cd780, /* +0x804 */
     0x001cd788, /* +0x808 */
     0x001cd790, /* +0x80c */
@@ -521,7 +521,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cec6c, /* +0x818 */
     0x001cd7a8, /* +0x81c */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0x820 */
-    0x001069e8, /* -> IRInst__vslot37 */ /* +0x824 */
+    0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0x824 */
     0x001ceb14, /* +0x828 */
     0x00000000, /* +0x82c */
     0x00000008, /* +0x830 */
@@ -558,7 +558,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd768, /* +0x8ac */
     0x001ceb30, /* +0x8b0 */
     0x001cd778, /* +0x8b4 */
-    0x0010437c, /* -> IRInst__vslot28 */ /* +0x8b8 */
+    0x0010437c, /* -> IRInst__vslot28_hasFlag0x4000AndClass0x24 */ /* +0x8b8 */
     0x001cd780, /* +0x8bc */
     0x001cd788, /* +0x8c0 */
     0x001cd790, /* +0x8c4 */
@@ -567,7 +567,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cec6c, /* +0x8d0 */
     0x001cd7a8, /* +0x8d4 */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0x8d8 */
-    0x001069e8, /* -> IRInst__vslot37 */ /* +0x8dc */
+    0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0x8dc */
     0x001ceb64, /* +0x8e0 */
     0x00000000, /* +0x8e4 */
     0x00000008, /* +0x8e8 */
@@ -604,7 +604,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd768, /* +0x964 */
     0x001cd770, /* +0x968 */
     0x001cd778, /* +0x96c */
-    0x0010437c, /* -> IRInst__vslot28 */ /* +0x970 */
+    0x0010437c, /* -> IRInst__vslot28_hasFlag0x4000AndClass0x24 */ /* +0x970 */
     0x001cd780, /* +0x974 */
     0x001ceabc, /* +0x978 */
     0x001cd790, /* +0x97c */
@@ -613,7 +613,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cec8c, /* +0x988 */
     0x001cd7a8, /* +0x98c */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0x990 */
-    0x001069e8, /* -> IRInst__vslot37 */ /* +0x994 */
+    0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0x994 */
     0x001cea24, /* -> IRFetch__getKindName */ /* +0x998 */
     0x00000000, /* +0x99c */
     0x00000008, /* +0x9a0 */
@@ -654,7 +654,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd768, /* +0xa2c */
     0x001cd770, /* +0xa30 */
     0x001cd778, /* +0xa34 */
-    0x0010437c, /* -> IRInst__vslot28 */ /* +0xa38 */
+    0x0010437c, /* -> IRInst__vslot28_hasFlag0x4000AndClass0x24 */ /* +0xa38 */
     0x001cd780, /* +0xa3c */
     0x001cd788, /* +0xa40 */
     0x001cd790, /* +0xa44 */
@@ -663,7 +663,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cec8c, /* +0xa50 */
     0x001cd7a8, /* +0xa54 */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0xa58 */
-    0x001069e8, /* -> IRInst__vslot37 */ /* +0xa5c */
+    0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0xa5c */
     0x001cea24, /* -> IRFetch__getKindName */ /* +0xa60 */
     0x00000000, /* +0xa64 */
     0x00000000, /* +0xa68 */
@@ -696,7 +696,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd768, /* +0xad4 */
     0x001cd770, /* +0xad8 */
     0x001cd778, /* +0xadc */
-    0x0010437c, /* -> IRInst__vslot28 */ /* +0xae0 */
+    0x0010437c, /* -> IRInst__vslot28_hasFlag0x4000AndClass0x24 */ /* +0xae0 */
     0x001cea90, /* +0xae4 */
     0x001cd788, /* +0xae8 */
     0x001cd790, /* +0xaec */
@@ -705,7 +705,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cec8c, /* +0xaf8 */
     0x001cd7a8, /* +0xafc */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0xb00 */
-    0x001069e8, /* -> IRInst__vslot37 */ /* +0xb04 */
+    0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0xb04 */
     0x001cea24, /* -> IRFetch__getKindName */ /* +0xb08 */
     0x00000000, /* +0xb0c */
     0x00000008, /* +0xb10 */
@@ -742,7 +742,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd768, /* +0xb8c */
     0x001cd770, /* +0xb90 */
     0x001cd778, /* +0xb94 */
-    0x0010437c, /* -> IRInst__vslot28 */ /* +0xb98 */
+    0x0010437c, /* -> IRInst__vslot28_hasFlag0x4000AndClass0x24 */ /* +0xb98 */
     0x001cd780, /* +0xb9c */
     0x001cd788, /* +0xba0 */
     0x001cd790, /* +0xba4 */
@@ -751,7 +751,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cec8c, /* +0xbb0 */
     0x001cd7a8, /* +0xbb4 */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0xbb8 */
-    0x001069e8, /* -> IRInst__vslot37 */ /* +0xbbc */
+    0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0xbbc */
     0x001cea24, /* -> IRFetch__getKindName */ /* +0xbc0 */
     0x00000000, /* +0xbc4 */
     0x00000008, /* +0xbc8 */
@@ -792,7 +792,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd768, /* +0xc54 */
     0x001cd770, /* +0xc58 */
     0x001cd778, /* +0xc5c */
-    0x0010437c, /* -> IRInst__vslot28 */ /* +0xc60 */
+    0x0010437c, /* -> IRInst__vslot28_hasFlag0x4000AndClass0x24 */ /* +0xc60 */
     0x001cd780, /* +0xc64 */
     0x001cd788, /* +0xc68 */
     0x001cd790, /* +0xc6c */
@@ -801,7 +801,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cec8c, /* +0xc78 */
     0x001cd7a8, /* +0xc7c */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0xc80 */
-    0x001069e8, /* -> IRInst__vslot37 */ /* +0xc84 */
+    0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0xc84 */
     0x001cea24, /* -> IRFetch__getKindName */ /* +0xc88 */
     0x00000000, /* +0xc8c */
     0x00000000, /* +0xc90 */
@@ -834,7 +834,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd768, /* +0xcfc */
     0x001cd770, /* +0xd00 */
     0x001cd778, /* +0xd04 */
-    0x0010437c, /* -> IRInst__vslot28 */ /* +0xd08 */
+    0x0010437c, /* -> IRInst__vslot28_hasFlag0x4000AndClass0x24 */ /* +0xd08 */
     0x001cd780, /* +0xd0c */
     0x001cd788, /* +0xd10 */
     0x001cd790, /* +0xd14 */
@@ -843,7 +843,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cec8c, /* +0xd20 */
     0x001cd7a8, /* +0xd24 */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0xd28 */
-    0x001069e8, /* -> IRInst__vslot37 */ /* +0xd2c */
+    0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0xd2c */
     0x001cea24, /* -> IRFetch__getKindName */ /* +0xd30 */
     0x00000000, /* +0xd34 */
     0x00000008, /* +0xd38 */
@@ -880,7 +880,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd768, /* +0xdb4 */
     0x001cd770, /* +0xdb8 */
     0x001cd778, /* +0xdbc */
-    0x0010437c, /* -> IRInst__vslot28 */ /* +0xdc0 */
+    0x0010437c, /* -> IRInst__vslot28_hasFlag0x4000AndClass0x24 */ /* +0xdc0 */
     0x001cd780, /* +0xdc4 */
     0x001cd788, /* +0xdc8 */
     0x001cd790, /* +0xdcc */
@@ -889,7 +889,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd7d8, /* +0xdd8 */
     0x001cd7a8, /* +0xddc */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0xde0 */
-    0x001069e8, /* -> IRInst__vslot37 */ /* +0xde4 */
+    0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0xde4 */
     0x001cec50, /* -> IRLoopStart__getKindName */ /* +0xde8 */
     0x00000000, /* +0xdec */
     0x00000008, /* +0xdf0 */
@@ -926,7 +926,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd768, /* +0xe6c */
     0x001cd770, /* +0xe70 */
     0x001cd778, /* +0xe74 */
-    0x0010437c, /* -> IRInst__vslot28 */ /* +0xe78 */
+    0x0010437c, /* -> IRInst__vslot28_hasFlag0x4000AndClass0x24 */ /* +0xe78 */
     0x001cd780, /* +0xe7c */
     0x001cd788, /* +0xe80 */
     0x001cd790, /* +0xe84 */
@@ -935,7 +935,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd7d8, /* +0xe90 */
     0x001cd7a8, /* +0xe94 */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0xe98 */
-    0x001069e8, /* -> IRInst__vslot37 */ /* +0xe9c */
+    0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0xe9c */
     0x001ce81c, /* -> IRMerge__getKindName */ /* +0xea0 */
     0x00000000, /* +0xea4 */
     0x00000008, /* +0xea8 */
@@ -972,7 +972,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd768, /* +0xf24 */
     0x001cd770, /* +0xf28 */
     0x001cd778, /* +0xf2c */
-    0x0010437c, /* -> IRInst__vslot28 */ /* +0xf30 */
+    0x0010437c, /* -> IRInst__vslot28_hasFlag0x4000AndClass0x24 */ /* +0xf30 */
     0x001cd780, /* +0xf34 */
     0x001cd788, /* +0xf38 */
     0x001cd790, /* +0xf3c */
@@ -981,7 +981,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd7d8, /* +0xf48 */
     0x001cd7a8, /* +0xf4c */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0xf50 */
-    0x001069e8, /* -> IRInst__vslot37 */ /* +0xf54 */
+    0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0xf54 */
     0x001ce750, /* -> IRImmedConstBuff__getKindName */ /* +0xf58 */
     0x00000000, /* +0xf5c */
     0x00000008, /* +0xf60 */
@@ -1018,7 +1018,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd768, /* +0xfdc */
     0x001cd770, /* +0xfe0 */
     0x001cd778, /* +0xfe4 */
-    0x0010437c, /* -> IRInst__vslot28 */ /* +0xfe8 */
+    0x0010437c, /* -> IRInst__vslot28_hasFlag0x4000AndClass0x24 */ /* +0xfe8 */
     0x001cd780, /* +0xfec */
     0x001cd788, /* +0xff0 */
     0x001cd790, /* +0xff4 */
@@ -1027,7 +1027,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd7d8, /* +0x1000 */
     0x001cd7a8, /* +0x1004 */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0x1008 */
-    0x001069e8, /* -> IRInst__vslot37 */ /* +0x100c */
+    0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0x100c */
     0x001ce800, /* -> IRUndefined__getKindName */ /* +0x1010 */
     0x00000000, /* +0x1014 */
     0x00000008, /* +0x1018 */
@@ -1064,7 +1064,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd768, /* +0x1094 */
     0x001cd770, /* +0x1098 */
     0x001cd778, /* +0x109c */
-    0x0010437c, /* -> IRInst__vslot28 */ /* +0x10a0 */
+    0x0010437c, /* -> IRInst__vslot28_hasFlag0x4000AndClass0x24 */ /* +0x10a0 */
     0x001cd780, /* +0x10a4 */
     0x001cd788, /* +0x10a8 */
     0x001cd790, /* +0x10ac */
@@ -1073,7 +1073,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd7d8, /* +0x10b8 */
     0x001cd7a8, /* +0x10bc */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0x10c0 */
-    0x001069e8, /* -> IRInst__vslot37 */ /* +0x10c4 */
+    0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0x10c4 */
     0x001ce734, /* -> IRLoadMemBufferIndex__getKindName */ /* +0x10c8 */
     0x00000000, /* +0x10cc */
     0x00000008, /* +0x10d0 */
@@ -1110,7 +1110,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd768, /* +0x114c */
     0x001cd770, /* +0x1150 */
     0x001cd778, /* +0x1154 */
-    0x0010437c, /* -> IRInst__vslot28 */ /* +0x1158 */
+    0x0010437c, /* -> IRInst__vslot28_hasFlag0x4000AndClass0x24 */ /* +0x1158 */
     0x001cd780, /* +0x115c */
     0x001cd788, /* +0x1160 */
     0x001cd790, /* +0x1164 */
@@ -1119,7 +1119,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd7d8, /* +0x1170 */
     0x001cd7a8, /* +0x1174 */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0x1178 */
-    0x001069e8, /* -> IRInst__vslot37 */ /* +0x117c */
+    0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0x117c */
     0x001ce718, /* -> IRLoadMemBuffer__getKindName */ /* +0x1180 */
     0x00000000, /* +0x1184 */
     0x00000008, /* +0x1188 */
@@ -1156,7 +1156,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd768, /* +0x1204 */
     0x001cd770, /* +0x1208 */
     0x001cd778, /* +0x120c */
-    0x0010437c, /* -> IRInst__vslot28 */ /* +0x1210 */
+    0x0010437c, /* -> IRInst__vslot28_hasFlag0x4000AndClass0x24 */ /* +0x1210 */
     0x001cd780, /* +0x1214 */
     0x001cd788, /* +0x1218 */
     0x001cd790, /* +0x121c */
@@ -1165,7 +1165,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd7d8, /* +0x1228 */
     0x001cd7a8, /* +0x122c */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0x1230 */
-    0x001069e8, /* -> IRInst__vslot37 */ /* +0x1234 */
+    0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0x1234 */
     0x001ce7d8, /* -> IRLoadInterp__getKindName */ /* +0x1238 */
     0x00000000, /* +0x123c */
     0x00000008, /* +0x1240 */
@@ -1202,7 +1202,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd768, /* +0x12bc */
     0x001cd770, /* +0x12c0 */
     0x001cd778, /* +0x12c4 */
-    0x0010437c, /* -> IRInst__vslot28 */ /* +0x12c8 */
+    0x0010437c, /* -> IRInst__vslot28_hasFlag0x4000AndClass0x24 */ /* +0x12c8 */
     0x001cd780, /* +0x12cc */
     0x001cd788, /* +0x12d0 */
     0x001cd790, /* +0x12d4 */
@@ -1211,7 +1211,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd7d8, /* +0x12e0 */
     0x001cd7a8, /* +0x12e4 */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0x12e8 */
-    0x001069e8, /* -> IRInst__vslot37 */ /* +0x12ec */
+    0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0x12ec */
     0x001ce798, /* -> IRLoadTemp__getKindName */ /* +0x12f0 */
     0x00000000, /* +0x12f4 */
     0x00000008, /* +0x12f8 */
@@ -1248,7 +1248,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd768, /* +0x1374 */
     0x001cd770, /* +0x1378 */
     0x001cd778, /* +0x137c */
-    0x0010437c, /* -> IRInst__vslot28 */ /* +0x1380 */
+    0x0010437c, /* -> IRInst__vslot28_hasFlag0x4000AndClass0x24 */ /* +0x1380 */
     0x001cd780, /* +0x1384 */
     0x001cd788, /* +0x1388 */
     0x001cd790, /* +0x138c */
@@ -1257,7 +1257,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd7d8, /* +0x1398 */
     0x001cd7a8, /* +0x139c */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0x13a0 */
-    0x001069e8, /* -> IRInst__vslot37 */ /* +0x13a4 */
+    0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0x13a4 */
     0x001ce7b4, /* -> IRLoadVertex__getKindName */ /* +0x13a8 */
     0x00000000, /* +0x13ac */
     0x00000008, /* +0x13b0 */
@@ -1294,7 +1294,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd768, /* +0x142c */
     0x001cd770, /* +0x1430 */
     0x001cd778, /* +0x1434 */
-    0x0010437c, /* -> IRInst__vslot28 */ /* +0x1438 */
+    0x0010437c, /* -> IRInst__vslot28_hasFlag0x4000AndClass0x24 */ /* +0x1438 */
     0x001cd780, /* +0x143c */
     0x001cd788, /* +0x1440 */
     0x001cd790, /* +0x1444 */
@@ -1303,7 +1303,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd7d8, /* +0x1450 */
     0x001cd7a8, /* +0x1454 */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0x1458 */
-    0x001069e8, /* -> IRInst__vslot37 */ /* +0x145c */
+    0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0x145c */
     0x001ce6d8, /* -> IRExit__getKindName */ /* +0x1460 */
     0x00000000, /* +0x1464 */
     0x00000008, /* +0x1468 */
@@ -1340,7 +1340,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd768, /* +0x14e4 */
     0x001cd770, /* +0x14e8 */
     0x001cd778, /* +0x14ec */
-    0x0010437c, /* -> IRInst__vslot28 */ /* +0x14f0 */
+    0x0010437c, /* -> IRInst__vslot28_hasFlag0x4000AndClass0x24 */ /* +0x14f0 */
     0x001cd780, /* +0x14f4 */
     0x001cd788, /* +0x14f8 */
     0x001cd790, /* +0x14fc */
@@ -1349,7 +1349,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd7d8, /* +0x1508 */
     0x001cd7a8, /* +0x150c */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0x1510 */
-    0x001069e8, /* -> IRInst__vslot37 */ /* +0x1514 */
+    0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0x1514 */
     0x001ce6b4, /* -> IREntry__getKindName */ /* +0x1518 */
     0x00000000, /* +0x151c */
     0x00000008, /* +0x1520 */
@@ -1386,7 +1386,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd768, /* +0x159c */
     0x001cd770, /* +0x15a0 */
     0x001cd778, /* +0x15a4 */
-    0x0010437c, /* -> IRInst__vslot28 */ /* +0x15a8 */
+    0x0010437c, /* -> IRInst__vslot28_hasFlag0x4000AndClass0x24 */ /* +0x15a8 */
     0x001cd780, /* +0x15ac */
     0x001cd788, /* +0x15b0 */
     0x001cd790, /* +0x15b4 */
@@ -1395,7 +1395,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd7d8, /* +0x15c0 */
     0x001cd7a8, /* +0x15c4 */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0x15c8 */
-    0x001069e8, /* -> IRInst__vslot37 */ /* +0x15cc */
+    0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0x15cc */
     0x001cd7bc, /* -> IRPseudo__getKindName */ /* +0x15d0 */
     0x00000000, /* +0x15d4 */
     0x00000008, /* +0x15d8 */
@@ -1432,7 +1432,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001ce9fc, /* +0x1654 */
     0x001cd770, /* +0x1658 */
     0x001cd778, /* +0x165c */
-    0x0010437c, /* -> IRInst__vslot28 */ /* +0x1660 */
+    0x0010437c, /* -> IRInst__vslot28_hasFlag0x4000AndClass0x24 */ /* +0x1660 */
     0x001cd780, /* +0x1664 */
     0x001cd788, /* +0x1668 */
     0x001cd790, /* +0x166c */
@@ -1441,7 +1441,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cec6c, /* +0x1678 */
     0x001cd7a8, /* +0x167c */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0x1680 */
-    0x001069e8, /* -> IRInst__vslot37 */ /* +0x1684 */
+    0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0x1684 */
     0x001ce9b4, /* -> IRAlu__getKindName */ /* +0x1688 */
     0x00000000, /* +0x168c */
     0x00000008, /* +0x1690 */
@@ -1482,7 +1482,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd768, /* +0x171c */
     0x001cd770, /* +0x1720 */
     0x001cd778, /* +0x1724 */
-    0x0010437c, /* -> IRInst__vslot28 */ /* +0x1728 */
+    0x0010437c, /* -> IRInst__vslot28_hasFlag0x4000AndClass0x24 */ /* +0x1728 */
     0x001cd780, /* +0x172c */
     0x001cd788, /* +0x1730 */
     0x001cd790, /* +0x1734 */
@@ -1491,7 +1491,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cec6c, /* +0x1740 */
     0x001cd7a8, /* +0x1744 */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0x1748 */
-    0x001069e8, /* -> IRInst__vslot37 */ /* +0x174c */
+    0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0x174c */
     0x001ce9b4, /* -> IRAlu__getKindName */ /* +0x1750 */
     0x00000000, /* +0x1754 */
     0x00000000, /* +0x1758 */
@@ -1524,7 +1524,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd768, /* +0x17c4 */
     0x001cd770, /* +0x17c8 */
     0x001cd778, /* +0x17cc */
-    0x0010437c, /* -> IRInst__vslot28 */ /* +0x17d0 */
+    0x0010437c, /* -> IRInst__vslot28_hasFlag0x4000AndClass0x24 */ /* +0x17d0 */
     0x001cd780, /* +0x17d4 */
     0x001cd788, /* +0x17d8 */
     0x001cd790, /* +0x17dc */
@@ -1533,7 +1533,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cec6c, /* +0x17e8 */
     0x001cd7a8, /* +0x17ec */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0x17f0 */
-    0x001069e8, /* -> IRInst__vslot37 */ /* +0x17f4 */
+    0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0x17f4 */
     0x001ce9b4, /* -> IRAlu__getKindName */ /* +0x17f8 */
     0x00000000, /* +0x17fc */
     0x00000008, /* +0x1800 */
@@ -1570,7 +1570,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd768, /* +0x187c */
     0x001cd770, /* +0x1880 */
     0x001cd778, /* +0x1884 */
-    0x0010437c, /* -> IRInst__vslot28 */ /* +0x1888 */
+    0x0010437c, /* -> IRInst__vslot28_hasFlag0x4000AndClass0x24 */ /* +0x1888 */
     0x001cd780, /* +0x188c */
     0x001cd788, /* +0x1890 */
     0x001cd790, /* +0x1894 */
@@ -1579,7 +1579,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cec6c, /* +0x18a0 */
     0x001cd7a8, /* +0x18a4 */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0x18a8 */
-    0x001069e8, /* -> IRInst__vslot37 */ /* +0x18ac */
+    0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0x18ac */
     0x001ce9b4, /* -> IRAlu__getKindName */ /* +0x18b0 */
     0x00000000, /* +0x18b4 */
     0x00000008, /* +0x18b8 */
@@ -1616,7 +1616,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cd768, /* +0x1934 */
     0x001cd770, /* +0x1938 */
     0x001cd778, /* +0x193c */
-    0x0010437c, /* -> IRInst__vslot28 */ /* +0x1940 */
+    0x0010437c, /* -> IRInst__vslot28_hasFlag0x4000AndClass0x24 */ /* +0x1940 */
     0x001cd780, /* +0x1944 */
     0x001cd788, /* +0x1948 */
     0x001cd790, /* +0x194c */
@@ -1625,7 +1625,7 @@ const unsigned int sectDATA___const_coal[5558] = {
     0x001cec6c, /* +0x1958 */
     0x001cd7a8, /* +0x195c */
     0x00105e9c, /* -> FUN_00105e9c */ /* +0x1960 */
-    0x001069e8, /* -> IRInst__vslot37 */ /* +0x1964 */
+    0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0x1964 */
     0x001ce9b4, /* -> IRAlu__getKindName */ /* +0x1968 */
     0x00000000, /* +0x196c */
     0x00000008, /* +0x1970 */

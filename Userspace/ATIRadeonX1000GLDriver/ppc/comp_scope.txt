@@ -16,7 +16,7 @@ IfHeader__ctor_eb688 compiler
 IfHeaderStatic__ctor_eb9e0 compiler
 IfHeaderStatic__ctor_ebac8 compiler
 FUN_000ecc1c compiler
-HwLimits__vslot43 compiler
+HwLimits__vslot43_prependDefaultMov compiler
 FUN_000f4fdc compiler
 FUN_000f94dc compiler
 IRInst__clone compiler
@@ -129,9 +129,9 @@ ImmedConstBuffer__vslot191 compiler
 ImmedConstBuffer__vslot79 compiler
 ImmedConstBuffer__vslot39 compiler
 FUN_00127994 compiler
-KhanPs__vslot9 compiler
-KhanPs__vslot5 compiler
-KhanVs__vslot9 compiler
+KhanPs__vslot9_createCompareInst compiler
+KhanPs__vslot5_materializeSpecialRegister compiler
+KhanVs__vslot9_createCompareInst compiler
 FUN_0012aa78 compiler
 FUN_0012e56c compiler
 FUN_00130ec0 compiler
@@ -152,7 +152,7 @@ FUN_001746c8 compiler
 FUN_0017a130 compiler
 FUN_0017ae28 compiler
 FUN_00181f00 compiler
-FUN_001882a4 compiler
+Inst__r300Peephole_1882a4 compiler
 FUN_0018d4b4 compiler
 R300MachineAssembler__resolveSourceRegister compiler
 R300MachineAssembler__create compiler

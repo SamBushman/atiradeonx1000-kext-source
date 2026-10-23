@@ -1,0 +1,72 @@
+# func rows (round 4, fork E2): HwLimits/Khan/Fudo slots and related; func<TAB>old<TAB>new<TAB>tier<TAB>evidence
+func	HwLimits__vslot7	HwLimits__vslot7_initInterpolatorTypeDescriptor	INFERRED	stores DAT_001afa04 at *this; called from both Interpolator constructors (Interpolator__ctor_125350/_1257b0)
+func	HwLimits__vslot70	HwLimits__vslot70_initExportValueTypeDescriptor	INFERRED	stores DAT_001afa04 at *this; called from both ExportValue constructors (ExportValue__ctor_124e68/_1250dc)
+func	HwLimits__vslot40	HwLimits__vslot40_initTypeDescriptorB	UNKNOWN	same shape as slots 7/70 but stores DAT_001afa08 at *this; no caller found through the 0x30c hardware-description pointer
+func	HwLimits__vslot8	HwLimits__vslot8_failNotSupported	INFERRED	body is `if (compiler[0x6c4] != 0) Compiler__fail(compiler, 0xf); return 0` : the base class does not implement the operation
+func	HwLimits__vslot9	HwLimits__vslot9_failNotSupported	INFERRED	same body as slot 8 (compiler taken from the caller's frame): base class stub that reports failure 0xf
+func	HwLimits__vslot10	HwLimits__vslot10_failNotSupported	INFERRED	same body as slot 8 (compiler taken from the caller's frame): base class stub that reports failure 0xf
+func	HwLimits__vslot20	HwLimits__vslot20_createInstWithOwner	UNKNOWN	FUN_00109810(0xa4, arena) creates a 0xa4-byte IR object, stores param_2 at +0x12c and clears flag bit 0x8000
+func	HwLimits__vslot24	HwLimits__vslot24_resetBindingTables	CONFIRMED	zeroes the three counters at this+0x1728/0x172c/0x1730 and memsets the two record arrays at this+0x68 (0xd00 bytes) and this+0xd68 (0x9c0 bytes), the arrays KhanPs/KhanVs slot 21 append to
+func	HwLimits__vslot43	HwLimits__vslot43_prependDefaultMov	INFERRED	creates an IrMovFloat (0x31) with constant (0,0,0,1) sources and prepends it to the instruction's block when its destination operand has not been initialised
+func	HwLimits__vslot77	HwLimits__vslot77_getBindingLimitsDefault	INFERRED	base implementation writes 0 to *out; KhanVs overrides with (0, slot 78 result)
+func	KhanPs__vslot6	KhanPs__createSchedModels	INFERRED	same shape as FudoPs__createSchedModels (HwLimits slot 6): allocates two scheduling-model objects from the arena and stores them at this+0x60/0x64
+func	KhanVs__vslot6	KhanVs__createSchedModels	INFERRED	same shape as FudoPs__createSchedModels (HwLimits slot 6)
+func	FudoVs__vslot6	FudoVs__createSchedModels	INFERRED	same shape as FudoPs__createSchedModels (HwLimits slot 6)
+func	KhanPs__vslot8	KhanPs__vslot8_failNotSupported	INFERRED	same body as HwLimits slot 8
+func	FudoVs__vslot8	FudoVs__vslot8_failNotSupported	INFERRED	same body as HwLimits slot 8
+func	KhanPs__vslot9	KhanPs__vslot9_createCompareInst	INFERRED	creates an IrCmp2 (opcode 0x8b) instruction with two sources, normalises equal sources and stores a condition code from a table at +0x12c
+func	KhanVs__vslot9	KhanVs__vslot9_createCompareInst	INFERRED	vertex counterpart of KhanPs slot 9 (same IrCmp2 construction)
+func	KhanPs__vslot16	KhanPs__vslot16_getConstant0xb5	UNKNOWN	returns the constant 0xb5; meaning of the value not established
+func	KhanPs__vslot17	KhanPs__vslot17_isSimpleInst	INFERRED	true when IRInst predicates isLoad(16), isFetch(10), isMix(24), isPresub(23) are all false and the opcode info word is not 0x84
+func	KhanVs__vslot17	KhanVs__vslot17_isSimpleInst	INFERRED	identical body to KhanPs slot 17
+func	KhanPs__vslot21	KhanPs__vslot21_appendRegisterBinding	INFERRED	appends a 0x34-byte record at this+0x60+count*0x34 (count at this+0x172c): register index replicated in four bytes, kind, value, lane-select word
+func	KhanVs__vslot21	KhanVs__vslot21_appendRegisterBinding	INFERRED	vertex counterpart: record array at this+0xd60, count at this+0x1728; kind 4 forces lane selects 3,3,3,3
+func	KhanVs__vslot22	KhanVs__vslot22_appendRegisterBindingWithLaneArrays	INFERRED	appends a record to the this+0xd60 array and copies per-lane bytes from two arrays under a lane mask
+func	KhanVs__vslot100	KhanVs__vslot100_appendIdentityRegisterBinding	INFERRED	appends a type-5 record with lane selects 0,1,2,3 and mask 0xf to the this+0x60 array
+func	KhanPs__vslot27	KhanPs__vslot27_optimizeInstruction	INFERRED	per-instruction peephole driver gated by compiler options 0x36, 0x15, 0x16, 0x14; calls the pattern helpers on (inst, program)
+func	KhanVs__vslot27	KhanVs__vslot27_optimizeInstruction	INFERRED	vertex counterpart of slot 27: only option 0x15 gates FUN_00150b94/FUN_0014e6e4
+func	KhanVs__vslot29	KhanVs__vslot29_swapIfArmsWhenNotFlattenable	INFERRED	walks the program's block list; for an IfHeader whose arm has fewer than 3 instructions and one successor, and which IfHeader__canFlatten rejects, calls IfHeader__swapArms
+func	FudoPs__vslot29	FudoPs__vslot29_convertInnerIfsToPredicates	INFERRED	gated by option 0x4a (convertInnerIfToPred); walks the block list and calls FUN_0012bb48 on each IfHeader
+func	KhanPs__vslot31	KhanPs__vslot31_isNotTextureFetch	INFERRED	returns !IRInst::isTextureFetch(inst) (IRInst vtable slot 12)
+func	KhanPs__vslot35	KhanPs__vslot35_publishLimitsAndBindingTables	INFERRED	copies the 0x963c-byte limits block to compiler+0x64c and compacts the 64 and 48 register-binding records into the compiler at +0x100/+0x400
+func	KhanVs__vslot35	KhanVs__vslot35_publishLimitsAndBindingTables	INFERRED	vertex counterpart: copies vectors and tables from the limits block into compiler+0x650..0x670 and compacts the binding records
+func	KhanPs__vslot56	KhanPs__vslot56_scaleFloat	UNKNOWN	returns param * FLOAT_001aa1cc
+func	KhanPs__vslot58	KhanPs__vslot58_matchImmediateConstantCode	INFERRED	checks that the unmasked lanes of a 4-float constant are equal and looks the value up in the 6-word table at DAT_001aff0c; writes the table's select code
+func	KhanVs__vslot58	KhanVs__vslot58_matchImmediateConstantCode	INFERRED	vertex counterpart of KhanPs slot 58
+func	KhanPs__vslot59	KhanPs__vslot59_tryEncodeSourceConstant	INFERRED	tries to express a constant source (and its negation) as one of the entries of the table at DAT_001aff08 using FUN_000f5c0c; rewrites the operand with FUN_000f79c4
+func	KhanVs__vslot59	KhanVs__vslot59_tryEncodeSourceConstant	INFERRED	vertex counterpart of KhanPs slot 59
+func	FudoPs__vslot59	FudoPs__vslot59_tryEncodeSourceConstant	INFERRED	accepts source constants whose used lanes are 0.0, 1.0 or 0.5 and rewrites the operand
+func	KhanPs__vslot62	KhanPs__vslot62_lookupTableEntry	UNKNOWN	returns PTR_PTR_001e910c[param_2]
+func	KhanPs__vslot65	KhanPs__vslot65_isEncodableSourceSwizzle	UNKNOWN	true when param_5 is a load-interpolator instruction and *param_4 == 0x10304, else the result of this slot 64 on param_4
+func	KhanPs__vslot66	KhanPs__vslot66_callHelper189788	UNKNOWN	forwards *param_2 to FUN_00189788
+func	KhanPs__vslot73	KhanPs__vslot73_seedValueNumbers	INFERRED	calls Compiler__valueNumberForExpr for each of the ten constants at DAT_001aff74..9c
+func	KhanVs__vslot73	KhanVs__vslot73_noOp	CONFIRMED	bare return
+func	KhanPs__vslot74	KhanPs__vslot74_seedConstantValueNumbers	INFERRED	creates the value-number records of the three constants at DAT_001aff68..74 and marks them as known constants (+8=1, +9=0, +0x14=value)
+func	KhanPs__vslot75	KhanPs__vslot75_registerConstantMultiples	INFERRED	records value numbers for -x and for x*k and -x*k (k from the table at DAT_001aff4c) of a constant, tagging each with its multiple
+func	KhanVs__vslot75	KhanVs__vslot75_registerConstantMultiples	INFERRED	vertex counterpart of KhanPs slot 75
+func	KhanPs__vslot76	KhanPs__vslot76_getBindingLimit	INFERRED	writes this slot 78(0) to *out
+func	KhanVs__vslot76	KhanVs__vslot76_getBindingLimits	INFERRED	writes this slot 78(0) and slot 80(0) to out[0], out[1]
+func	KhanVs__vslot77	KhanVs__vslot77_getBindingLimits	INFERRED	writes 0 and this slot 78(0) to out[0], out[1]
+func	KhanPs__vslot78	KhanPs__vslot78_getLimit_0x20Or0x40	INFERRED	returns 0x40 when this+0x1740 == 2, else 0x20
+func	KhanVs__vslot80	KhanVs__vslot80_getLimit_0x14	UNKNOWN	returns the constant 0x14
+func	KhanPs__vslot85	KhanPs__vslot85_findOrEncodeConstantVector	INFERRED	looks up or encodes a 4-float constant with a lane swizzle word (0x4040404 = no lanes) using FUN_000f6a04/FUN_000f5f94/FUN_000f57f0
+func	KhanVs__vslot85	KhanVs__vslot85_findOrEncodeConstantVector	INFERRED	vertex counterpart of KhanPs slot 85
+func	FudoPs__vslot85	FudoPs__vslot85_findOrEncodeConstantVector	INFERRED	same structure as KhanPs slot 85
+func	KhanPs__vslot87	KhanPs__vslot87_assignInterpolatorBindings	INFERRED	walks the entry block's load-interpolator instructions, groups lanes with identical source/swizzle and calls this slot 21 (appendRegisterBinding) for each group
+func	KhanVs__vslot88	KhanVs__vslot88_assignOutputBindings	INFERRED	calls this slot 21/22 (appendRegisterBinding...) for vertex exports and applies export packing under option 0x3f
+func	KhanVs__vslot89	KhanVs__vslot89_assignLoadBindings	INFERRED	walks the entry block for IrLoad (0xa4) instructions, assigns consecutive indices and calls this slot 100 (appendIdentityRegisterBinding); option 0x3e selects the filtered path
+func	KhanPs__vslot90	KhanPs__vslot90_isProgramKind1	INFERRED	returns program[0x138] == 1
+func	KhanVs__vslot71	KhanVs__vslot71_canCombineSources	INFERRED	walks the sources of inst, compares them against inst2's operand at the combined index and returns 1 when none conflicts
+func	KhanPs__vslot5	KhanPs__vslot5_materializeSpecialRegister	UNKNOWN	for kind 1: finds the register of class 0x1b, replaces its uses by a new register and prepends a mad/mov that initialises it
+func	KhanPs__vslot96	KhanPs__vslot96_installHardwareTables	INFERRED	stores the address of the hardware table DAT_001e39a4 at this+0xc
+func	KhanVs__vslot96	KhanVs__vslot96_installHardwareTables	INFERRED	stores DAT_001e1994 at this+0xc and fills the global opcode/field tables for the vertex kind
+func	FudoVs__vslot96	FudoVs__vslot96_installHardwareTables	INFERRED	stores DAT_001e1994 at this+0xc and fills the global tables for the Fudo vertex kind
+func	FudoPs__vslot96	FudoPs__vslot96_installHardwareTables	INFERRED	stores DAT_001e6730 at this+0xc
+func	KhanVs__vslot60	KhanVs__vslot60_isZeroOrOne	INFERRED	true when the argument equals FLOAT_001aa0d4 (0.0) or FLOAT_001aa0e8 (1.0), the constants the other code uses as 0.0 and 1.0
+func	KhanVs__vslot99	KhanVs__vslot99_matchesRegisterMapEntry	UNKNOWN	compares a byte of a table reached through compiler[0x524+index*4] with param_2
+func	FudoPs__vslot11	FudoPs__vslot11_isNotType2Or5	INFERRED	returns param_2 != 2 && param_2 != 5
+func	FudoPs__vslot12	FudoPs__vslot12_lookupTable6x	UNKNOWN	returns DAT_001e5f54[param_2*6 + param_3]
+func	FudoPs__vslot69	FudoPs__vslot69_shouldFlattenIf	INFERRED	evaluates the instruction counts of the two arms of an IfHeader (DList__count) and merge feasibility (FUN_0012ae6c) to decide whether to flatten
+func	IRInst__vslot28	IRInst__vslot28_hasFlag0x4000AndClass0x24	INFERRED	returns (options & 0x4000) && inst[0x98] == 0x24
+func	IRInst__vslot37	IRInst__insertSourceBeforeLast	CONFIRMED	increments the source count (+0x84), moves the last source up and stores the new source at the previous last index; handles the >5 source layout (flag 0x200)
+func	MachineAssembler__vslot34	MachineAssembler__vslot34_declareDestinationLanesByClass	UNKNOWN	switches on inst[0x98] (2/0xc, 4, 3) and calls FUN_000e17b4 / FUN_000e175c / FUN_000e1704 for each destination lane whose select byte is not 1

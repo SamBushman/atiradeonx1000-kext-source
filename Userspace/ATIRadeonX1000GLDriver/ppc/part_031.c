@@ -1013,8 +1013,8 @@ int FUN_0010d730(inst, param_2, param_3, param_4)
   return;
 }
 
-/* HwLimits__vslot24 @ 0x10da84 (84 bytes) */
-int HwLimits__vslot24(this)
+/* HwLimits__vslot24_resetBindingTables @ 0x10da84 (84 bytes) */
+int HwLimits__vslot24_resetBindingTables(this)
   int this;
 {
   *(undefined4 *)(((unsigned char *)0x00001730) + this) = 0;
@@ -1147,17 +1147,17 @@ int FUN_0010dc9c(param_1, param_2)
   return (int)(uint)(byte)((unsigned char *)0x00001734)[((int)param_2 >> 3) + param_1] >> (param_2 & 7) & 1;
 }
 
-/* HwLimits__vslot77 @ 0x10dcb8 (12 bytes) */
-int HwLimits__vslot77(this, param_2)
+/* HwLimits__vslot77_getBindingLimitsDefault @ 0x10dcb8 (12 bytes) */
+int HwLimits__vslot77_getBindingLimitsDefault(this, outLimits)
   undefined4 this;
-  undefined4 *param_2;
+  undefined4 *outLimits;
 {
-  *param_2 = 0;
+  *outLimits = 0;
   return;
 }
 
-/* HwLimits__vslot10 @ 0x10dcc4 (56 bytes) */
-int HwLimits__vslot10()
+/* HwLimits__vslot10_failNotSupported @ 0x10dcc4 (56 bytes) */
+int HwLimits__vslot10_failNotSupported()
 {
   
   if (*(int *)((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)) + 0x6c4) != 0) {
@@ -1166,8 +1166,8 @@ int HwLimits__vslot10()
   return 0;
 }
 
-/* HwLimits__vslot20 @ 0x10dd08 (68 bytes) */
-int HwLimits__vslot20(this, param_2, param_3)
+/* HwLimits__vslot20_createInstWithOwner @ 0x10dd08 (68 bytes) */
+int HwLimits__vslot20_createInstWithOwner(this, param_2, param_3)
   undefined4 this;
   undefined4 param_2;
   undefined4 param_3;
@@ -1227,14 +1227,14 @@ int FUN_0010dde4()
   return 0x10c;
 }
 
-/* KhanPs__vslot16 @ 0x10ddec (8 bytes) */
-int KhanPs__vslot16()
+/* KhanPs__vslot16_getConstant0xb5 @ 0x10ddec (8 bytes) */
+int KhanPs__vslot16_getConstant0xb5()
 {
   return 0xb5;
 }
 
-/* HwLimits__vslot8 @ 0x10ddfc (56 bytes) */
-int HwLimits__vslot8(this, param_2, param_3, param_4, param_5, param_6, param_7)
+/* HwLimits__vslot8_failNotSupported @ 0x10ddfc (56 bytes) */
+int HwLimits__vslot8_failNotSupported(this, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 this;
   undefined4 param_2;
   undefined4 param_3;
@@ -1249,8 +1249,8 @@ int HwLimits__vslot8(this, param_2, param_3, param_4, param_5, param_6, param_7)
   return 0;
 }
 
-/* HwLimits__vslot9 @ 0x10de34 (56 bytes) */
-int HwLimits__vslot9()
+/* HwLimits__vslot9_failNotSupported @ 0x10de34 (56 bytes) */
+int HwLimits__vslot9_failNotSupported()
 {
   
   if (*(int *)((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x3c)) + 0x6c4) != 0) {
@@ -1978,8 +1978,8 @@ int FUN_0010ecb8(inst)
   return 0;
 }
 
-/* KhanPs__vslot87 @ 0x10ed4c (540 bytes) */
-int KhanPs__vslot87(this, param_2)
+/* KhanPs__vslot87_assignInterpolatorBindings @ 0x10ed4c (540 bytes) */
+int KhanPs__vslot87_assignInterpolatorBindings(this, param_2)
   int *this;
   int param_2;
 {
@@ -2387,22 +2387,22 @@ int FUN_0010f4d4(param_1)
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_0010da84");
-asm(".set FUN_0010da84, _HwLimits__vslot24");
+asm(".set FUN_0010da84, _HwLimits__vslot24_resetBindingTables");
 asm(".globl FUN_0010dcb8");
-asm(".set FUN_0010dcb8, _HwLimits__vslot77");
+asm(".set FUN_0010dcb8, _HwLimits__vslot77_getBindingLimitsDefault");
 asm(".globl FUN_0010dcc4");
-asm(".set FUN_0010dcc4, _HwLimits__vslot10");
+asm(".set FUN_0010dcc4, _HwLimits__vslot10_failNotSupported");
 asm(".globl FUN_0010dd08");
-asm(".set FUN_0010dd08, _HwLimits__vslot20");
+asm(".set FUN_0010dd08, _HwLimits__vslot20_createInstWithOwner");
 asm(".globl FUN_0010ddec");
-asm(".set FUN_0010ddec, _KhanPs__vslot16");
+asm(".set FUN_0010ddec, _KhanPs__vslot16_getConstant0xb5");
 asm(".globl FUN_0010ddfc");
-asm(".set FUN_0010ddfc, _HwLimits__vslot8");
+asm(".set FUN_0010ddfc, _HwLimits__vslot8_failNotSupported");
 asm(".globl FUN_0010de34");
-asm(".set FUN_0010de34, _HwLimits__vslot9");
+asm(".set FUN_0010de34, _HwLimits__vslot9_failNotSupported");
 asm(".globl FUN_0010de6c");
 asm(".set FUN_0010de6c, _FUN_0010de6c");
 asm(".globl FUN_0010ed4c");
-asm(".set FUN_0010ed4c, _KhanPs__vslot87");
+asm(".set FUN_0010ed4c, _KhanPs__vslot87_assignInterpolatorBindings");
 asm(".globl FUN_0010ef68");
 asm(".set FUN_0010ef68, _FUN_0010ef68");

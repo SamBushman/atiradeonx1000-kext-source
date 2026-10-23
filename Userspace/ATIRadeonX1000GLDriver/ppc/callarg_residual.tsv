@@ -50,8 +50,8 @@
 0x133fe4	FUN_00133fe4	0x1341ac	FUN_00130abc	r4	incoming param_1 not at argument 1 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
 0x133fe4	FUN_00133fe4	0x134380	FUN_00130abc	r4	incoming param_1 not at argument 1 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
 0x133fe4	FUN_00133fe4	0x1341ac	FUN_00130abc	r5	field at param_1+0x2c: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-REVIEWED (FUN_00130abc reads only r3; r4/r5 go to a this-only virtual call `(*(vtbl+0x34))(this)` at 0x13074c: unused parameters of the source prototype)
-0x158264	FUN_00158264	0x158380	FUN_0015800c	r7	incoming param_2 not at argument 4 of any C call (1 C calls)	CHECK (C arg4: local_68)
-0x15a68c	FUN_0015a68c	0x15b248	IRInst__getOperandRecord	r4	0x1 not at argument 1 of any C call (15 C calls)	CHECK (C arg1: iVar9; iVar9)
+0x158264	Inst__collapseAlgebraic_00158264	0x158380	FUN_0015800c	r7	incoming param_2 not at argument 4 of any C call (1 C calls)	CHECK (C arg4: local_68)
+0x15a68c	Inst__takeOutCommonFactor	0x15b248	IRInst__getOperandRecord	r4	0x1 not at argument 1 of any C call (15 C calls)	CHECK (C arg1: iVar9; iVar9)
 0x175dac	Program__valueNumberInst	0x175e08	ValueKey__maybeRefineSources	r4	incoming param_2 not at argument 1 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
 0x175dac	Program__valueNumberInst	0x175e08	ValueKey__maybeRefineSources	r5	incoming param_3 not at argument 2 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
 0x175dac	Program__valueNumberInst	0x175e08	ValueKey__maybeRefineSources	r6	incoming param_5 not at argument 3 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
@@ -65,11 +65,11 @@
 0x17f5a4	FUN_0017f5a4	0x17f6b0	IRInst__appendSource	r5	field at param_1+0x238: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-CALLEE-IGNORES
 0x180830	ValueKey__simplifyModifiersAndAddressing	0x180fa0	IRInst__appendSource	r5	field at param_1+0x238: 1 stock site(s), 0 C call(s) carry it at argument 2 (1 C calls)	BENIGN-CALLEE-IGNORES
 0x186a88	FUN_00186a88	0x1874f0	IRInst__create	r3	0x9b not at argument 0 of any C call (5 C calls)	CHECK (C arg0: 0x9c; 0x99)
-0x18843c	KhanPs__peepholeCombine	0x18885c	FUN_00160320	r7	r1+0x38 (a stack address) not at argument 4 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
-0x18843c	KhanPs__peepholeCombine	0x1888f8	FUN_001875a8	r7	field at param_5+0x8: 1 stock site(s), 0 C call(s) carry it at argument 4 (1 C calls)	BENIGN-CALLEE-IGNORES
-0x188fec	KhanVs__peepholeCombine	0x189054	FUN_0014abdc	r5	r1+0x38 (a stack address) not at argument 2 of any C call (1 C calls)	CHECK (C arg2: piVar4)
-0x188fec	KhanVs__peepholeCombine	0x18927c	FUN_00160320	r7	r1+0x38 (a stack address) not at argument 4 of any C call (3 C calls)	CHECK (C arg4: piVar6; piVar6)
-0x188fec	KhanVs__peepholeCombine	0x189418	FUN_00160320	r7	r1+0x38 (a stack address) not at argument 4 of any C call (3 C calls)	CHECK (C arg4: piVar6; piVar6)
-0x1922c4	FUN_001922c4	0x192850	FUN_001875a8	r7	field at param_4+0x8: 1 stock site(s), 0 C call(s) carry it at argument 4 (1 C calls)	BENIGN-CALLEE-IGNORES
-0x19286c	FudoPs__peepholeCombine	0x1934dc	FUN_001875a8	r7	field at param_5+0x8: 2 stock site(s), 0 C call(s) carry it at argument 4 (2 C calls)	BENIGN-CALLEE-IGNORES
+0x18843c	KhanPs__peepholeCombine	0x18885c	Inst__foldProducerIntoConsumer	r7	r1+0x38 (a stack address) not at argument 4 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
+0x18843c	KhanPs__peepholeCombine	0x1888f8	Inst__r300Peephole_1875a8	r7	field at param_5+0x8: 1 stock site(s), 0 C call(s) carry it at argument 4 (1 C calls)	BENIGN-CALLEE-IGNORES
+0x188fec	KhanVs__peepholeCombine	0x189054	Inst__tryCopyPropagate	r5	r1+0x38 (a stack address) not at argument 2 of any C call (1 C calls)	CHECK (C arg2: piVar4)
+0x188fec	KhanVs__peepholeCombine	0x18927c	Inst__foldProducerIntoConsumer	r7	r1+0x38 (a stack address) not at argument 4 of any C call (3 C calls)	CHECK (C arg4: piVar6; piVar6)
+0x188fec	KhanVs__peepholeCombine	0x189418	Inst__foldProducerIntoConsumer	r7	r1+0x38 (a stack address) not at argument 4 of any C call (3 C calls)	CHECK (C arg4: piVar6; piVar6)
+0x1922c4	FUN_001922c4	0x192850	Inst__r300Peephole_1875a8	r7	field at param_4+0x8: 1 stock site(s), 0 C call(s) carry it at argument 4 (1 C calls)	BENIGN-CALLEE-IGNORES
+0x19286c	FudoPs__peepholeCombine	0x1934dc	Inst__r300Peephole_1875a8	r7	field at param_5+0x8: 2 stock site(s), 0 C call(s) carry it at argument 4 (2 C calls)	BENIGN-CALLEE-IGNORES
 0x1a1338	R520MachineAssembler__create	0x1a135c	Arena__alloc	r4	0x10c4 printed as &UNK_000010c4 (symbolized-text-address)	BENIGN-SYMBOLIZED

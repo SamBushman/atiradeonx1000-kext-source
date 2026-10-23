@@ -370,8 +370,8 @@ int FUN_00104364(param_1, param_2, param_3, param_4)
   return;
 }
 
-/* IRInst__vslot28 @ 0x10437c (36 bytes) */
-int IRInst__vslot28(this, param_2)
+/* IRInst__vslot28_hasFlag0x4000AndClass0x24 @ 0x10437c (36 bytes) */
+int IRInst__vslot28_hasFlag0x4000AndClass0x24(this, param_2)
   int this;
   int param_2;
 {
@@ -1316,6 +1316,6 @@ int FUN_001055cc(param_1)
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_0010437c");
-asm(".set FUN_0010437c, _IRInst__vslot28");
+asm(".set FUN_0010437c, _IRInst__vslot28_hasFlag0x4000AndClass0x24");
 asm(".globl FUN_00104e20");
 asm(".set FUN_00104e20, _IRLoadConst__removeFromListEx");

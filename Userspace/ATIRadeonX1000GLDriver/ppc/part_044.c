@@ -99,8 +99,8 @@ int FUN_00158b78(param_1, param_2, inst, param_4, param_5, param_6)
   return;
 }
 
-/* FUN_00158c3c @ 0x158c3c (2424 bytes) */
-int FUN_00158c3c(param_1, param_2)
+/* Inst__collapseAlgebraic_00158c3c @ 0x158c3c (2424 bytes) */
+int Inst__collapseAlgebraic_00158c3c(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -390,8 +390,8 @@ LAB_00158fc8:
   return uVar11;
 }
 
-/* FUN_001595f0 @ 0x1595f0 (420 bytes) */
-int FUN_001595f0(inst, param_2)
+/* Inst__collapseAlgebraic_001595f0 @ 0x1595f0 (420 bytes) */
+int Inst__collapseAlgebraic_001595f0(inst, param_2)
   undefined4 inst;
   int param_2;
 {
@@ -921,8 +921,8 @@ switchD_0015a394_default:
   return 0;
 }
 
-/* FUN_0015a68c @ 0x15a68c (3608 bytes) */
-int FUN_0015a68c(param_1, pass)
+/* Inst__takeOutCommonFactor @ 0x15a68c (3608 bytes) */
+int Inst__takeOutCommonFactor(param_1, pass)
   int param_1;
   int pass;
 {
@@ -1765,8 +1765,8 @@ LAB_0015bc04:
   return 0;
 }
 
-/* FUN_0015bd40 @ 0x15bd40 (2452 bytes) */
-int FUN_0015bd40(node, pass)
+/* Inst__collapseAlgebraic_0015bd40 @ 0x15bd40 (2452 bytes) */
+int Inst__collapseAlgebraic_0015bd40(node, pass)
   int node;
   int pass;
 {
@@ -2118,8 +2118,8 @@ LAB_0015c078:
   return 0;
 }
 
-/* FUN_0015c6d4 @ 0x15c6d4 (2012 bytes) */
-int FUN_0015c6d4(inst, param_2)
+/* Inst__collapseAlgebraic_0015c6d4 @ 0x15c6d4 (2012 bytes) */
+int Inst__collapseAlgebraic_0015c6d4(inst, param_2)
   int *inst;
   int param_2;
 {
@@ -2422,8 +2422,8 @@ LAB_0015ce60:
   goto LAB_0015c82c;
 }
 
-/* FUN_0015ceb0 @ 0x15ceb0 (3720 bytes) */
-int FUN_0015ceb0(node, pass)
+/* Inst__collapseAlgebraic_0015ceb0 @ 0x15ceb0 (3720 bytes) */
+int Inst__collapseAlgebraic_0015ceb0(node, pass)
   int *node;
   int pass;
 {
@@ -2986,8 +2986,8 @@ LAB_0015cf80:
   return 0;
 }
 
-/* FUN_0015df44 @ 0x15df44 (600 bytes) */
-int FUN_0015df44(inst, param_2)
+/* Inst__collapseAlgebraic_0015df44 @ 0x15df44 (600 bytes) */
+int Inst__collapseAlgebraic_0015df44(inst, param_2)
   int *inst;
   int param_2;
 {
@@ -3139,8 +3139,8 @@ undefined4 FUN_0015e2f4(int inst,int param_2,undefined4 param_3,undefined4 param
   return 0;
 }
 
-/* FUN_0015e494 @ 0x15e494 (772 bytes) */
-int FUN_0015e494(inst, param_2)
+/* Inst__collapseAlgebraic_0015e494 @ 0x15e494 (772 bytes) */
+int Inst__collapseAlgebraic_0015e494(inst, param_2)
   int *inst;
   int param_2;
 {
@@ -3352,8 +3352,8 @@ LAB_0015e6ec:
   return 1;
 }
 
-/* FUN_0015ea3c @ 0x15ea3c (696 bytes) */
-int FUN_0015ea3c(param_1, param_2, node, pass)
+/* Inst__tryMix @ 0x15ea3c (696 bytes) */
+int Inst__tryMix(param_1, param_2, node, pass)
   int param_1;
   undefined4 param_2;
   int *node;
@@ -3471,7 +3471,7 @@ int FUN_0015ea3c(param_1, param_2, node, pass)
           operandRecord = IRInst__getOperandRecord(node,2);
           *(undefined4 *)(operandRecord + 0x10) = local_3c[0];
           FUN_00105894(operandVReg,*(undefined4 *)(pass + 8));
-          ((int (*)())FUN_00160320)(param_1,param_2,node,pass,&local_70);
+          ((int (*)())Inst__foldProducerIntoConsumer)(param_1,param_2,node,pass,&local_70);
           return 1;
         }
       }
@@ -3677,7 +3677,7 @@ int FUN_0015ea3c(param_1, param_2, node, pass)
             return 1;
           }
         }
-        ((int (*)())FUN_00160320)(param_1,param_2,node,pass,&local_70);
+        ((int (*)())Inst__foldProducerIntoConsumer)(param_1,param_2,node,pass,&local_70);
         return 1;
       }
     }
@@ -4169,13 +4169,13 @@ LAB_0015fd14:
   IRInst__restoreCounters(node,&local_b0);
   node[0x56] = *(int *)(iVar6 + 0x158);
   local_c4 = 0;
-  FUN_0014abdc(node,pass,&local_c4);
-  ((int (*)())FUN_00160320)(inst,param_2,node,pass,&local_c4);
+  Inst__tryCopyPropagate(node,pass,&local_c4);
+  ((int (*)())Inst__foldProducerIntoConsumer)(inst,param_2,node,pass,&local_c4);
   return 1;
 }
 
-/* FUN_00160320 @ 0x160320 (2960 bytes) */
-int FUN_00160320(node, param_2, inst, pass, param_5)
+/* Inst__foldProducerIntoConsumer @ 0x160320 (2960 bytes) */
+int Inst__foldProducerIntoConsumer(node, param_2, inst, pass, param_5)
   int *node;
   int param_2;
   int *inst;
@@ -4845,7 +4845,7 @@ int FUN_00160eb0(param_1, param_2, inst, param_4)
           }
           *(int *)(inst + 0x120) = iVar11;
         }
-        ((int (*)())FUN_00160320)(param_1,param_2,inst,param_4,&local_98);
+        ((int (*)())Inst__foldProducerIntoConsumer)(param_1,param_2,inst,param_4,&local_98);
         return 1;
       }
       if (!bVar1) {
@@ -5644,8 +5644,8 @@ LAB_001627ec:
   return 1;
 }
 
-/* FUN_00162cc0 @ 0x162cc0 (316 bytes) */
-int FUN_00162cc0(inst, param_2)
+/* Inst__collapseAlgebraic_00162cc0 @ 0x162cc0 (316 bytes) */
+int Inst__collapseAlgebraic_00162cc0(inst, param_2)
   int *inst;
   int param_2;
 {
@@ -5888,8 +5888,8 @@ int FUN_00162dfc(param_1, param_2, param_3)
   return 0;
 }
 
-/* FUN_001633f8 @ 0x1633f8 (128 bytes) */
-int FUN_001633f8(inst, param_2, param_3, param_4, param_5, param_6, param_7)
+/* Inst__tryCollapseSimilar @ 0x1633f8 (128 bytes) */
+int Inst__tryCollapseSimilar(inst, param_2, param_3, param_4, param_5, param_6, param_7)
   int inst;
   int param_2;
   undefined4 param_3;
@@ -5915,8 +5915,8 @@ int FUN_001633f8(inst, param_2, param_3, param_4, param_5, param_6, param_7)
   return callResult != 0;
 }
 
-/* FUN_00163478 @ 0x163478 (1308 bytes) */
-int FUN_00163478(param_1, param_2, inst, param_4)
+/* Inst__tryDp3CommutativityPushoff @ 0x163478 (1308 bytes) */
+int Inst__tryDp3CommutativityPushoff(param_1, param_2, inst, param_4)
   undefined4 param_1;
   undefined4 param_2;
   int *inst;
@@ -6095,8 +6095,8 @@ LAB_00163950: ;
   return uVar12;
 }
 
-/* FUN_00163994 @ 0x163994 (3864 bytes) */
-int FUN_00163994(node, pass)
+/* Inst__collapseAlgebraic_00163994 @ 0x163994 (3864 bytes) */
+int Inst__collapseAlgebraic_00163994(node, pass)
   int node;
   int pass;
 {

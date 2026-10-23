@@ -11,75 +11,75 @@ int R520VMachineAssembler__vslot27_assembleLoopHeader(this, node, block, param_4
   undefined4 param_7;
 {
   bool bVar1;
-  uint uVar2;
-  uint uVar3;
-  int iVar4;
+  uint loopStackEntry;
+  uint condSwizzle;
+  int branchInst;
   int iVar5;
-  int *piVar6;
+  int *condValueInst;
   undefined4 operandVReg;
   uint uVar8;
   int a2;
   undefined4 a5;
-  uint *puVar9;
+  uint *loopStackSlot;
   int loopIndex;
   int *piVar11;
   
   piVar11 = *(int **)(node + 0xac);
   a5 = compiler;
-  iVar4 = Block__getBranchInst(node,node,block,param_4,param_5,compiler,param_7);
+  branchInst = Block__getBranchInst(node,node,block,param_4,param_5,compiler,param_7);
   if (*piVar11 != 0) goto LAB_0019dc0c;
-  puVar9 = (uint *)0x0;
-  uVar3 = *(uint *)(this[0x25] + 4);
-  uVar2 = uVar3 - 1;
-  if (uVar2 < uVar3) {
-    puVar9 = (uint *)(uVar2 * 4 + *(int *)(this[0x25] + 8));
+  loopStackSlot = (uint *)0x0;
+  condSwizzle = *(uint *)(this[0x25] + 4);
+  loopStackEntry = condSwizzle - 1;
+  if (loopStackEntry < condSwizzle) {
+    loopStackSlot = (uint *)(loopStackEntry * 4 + *(int *)(this[0x25] + 8));
   }
-  uVar2 = *puVar9;
-  iVar5 = IRInst__getOperandRecord(iVar4,1);
-  uVar3 = *(uint *)(iVar5 + 0x10);
-  iVar5 = *(int *)(*(int *)(iVar4 + 0x88) + 8);
+  loopStackEntry = *loopStackSlot;
+  iVar5 = IRInst__getOperandRecord(branchInst,1);
+  condSwizzle = *(uint *)(iVar5 + 0x10);
+  iVar5 = *(int *)(*(int *)(branchInst + 0x88) + 8);
   if (iVar5 == 0x8b) {
-    if (*(int *)(iVar4 + 300) != 0) goto LAB_0019dab0;
-    piVar6 = IRInst__create(0x12,compiler);
-    iVar5 = IRInst__getOperandRecord(piVar6,1);
-    uVar8 = *(uint *)(iVar4 + 0xb8);
-    *(uint *)(iVar5 + 0x10) = uVar3;
-    IROperand__setModifierBits(piVar6 + 0x29,1,uVar8 & 1);
-    operandVReg = IRInst__getOperandSource(iVar4,1);
-    IRInst__setOperandSource(piVar6,1,operandVReg,0,compiler);
-    operandVReg = IRInst__getOperandSource(iVar4,2);
-    IRInst__setOperandSource(piVar6,2,operandVReg,0,compiler);
-    IROperand__setModifierBits(piVar6 + 0x2f,1,1);
+    if (*(int *)(branchInst + 300) != 0) goto LAB_0019dab0;
+    condValueInst = IRInst__create(0x12,compiler);
+    iVar5 = IRInst__getOperandRecord(condValueInst,1);
+    uVar8 = *(uint *)(branchInst + 0xb8);
+    *(uint *)(iVar5 + 0x10) = condSwizzle;
+    IROperand__setModifierBits(condValueInst + 0x29,1,uVar8 & 1);
+    operandVReg = IRInst__getOperandSource(branchInst,1);
+    IRInst__setOperandSource(condValueInst,1,operandVReg,0,compiler);
+    operandVReg = IRInst__getOperandSource(branchInst,2);
+    IRInst__setOperandSource(condValueInst,2,operandVReg,0,compiler);
+    IROperand__setModifierBits(condValueInst + 0x2f,1,1);
     iVar5 = R300VMachineAssembler__getOrAllocateScratchRegister(this,piVar11);
-    piVar6[0x25] = iVar5;
-    piVar6[0x26] = 0;
-    (**(code **)(*piVar6 + 0x84))(piVar6,uVar2);
-    Block__appendInst(node,piVar6);
+    condValueInst[0x25] = iVar5;
+    condValueInst[0x26] = 0;
+    (**(code **)(*condValueInst + 0x84))(condValueInst,loopStackEntry);
+    Block__appendInst(node,condValueInst);
   }
   else if (iVar5 == 0x8c) {
-    if (*(int *)(iVar4 + 300) == 0) {
-      piVar6 = (int *)IRInst__getOperandSource(iVar4,1);
+    if (*(int *)(branchInst + 300) == 0) {
+      condValueInst = (int *)IRInst__getOperandSource(branchInst,1);
     }
     else {
-      piVar6 = IRInst__create(0x12,compiler);
-      iVar5 = IRInst__getOperandRecord(piVar6,1);
-      uVar8 = *(uint *)(iVar4 + 0xb8);
-      *(uint *)(iVar5 + 0x10) = uVar3;
-      IROperand__setModifierBits(piVar6 + 0x29,1,uVar8 & 1);
-      operandVReg = IRInst__getOperandSource(iVar4,1);
-      IRInst__setOperandSource(piVar6,1,operandVReg,0,compiler);
-      ((void (*)())FUN_000f79c4)(piVar6,piVar11,2,1.0,1.0,1.0,1.0);
-      IROperand__setModifierBits(piVar6 + 0x2f,1,1);
+      condValueInst = IRInst__create(0x12,compiler);
+      iVar5 = IRInst__getOperandRecord(condValueInst,1);
+      uVar8 = *(uint *)(branchInst + 0xb8);
+      *(uint *)(iVar5 + 0x10) = condSwizzle;
+      IROperand__setModifierBits(condValueInst + 0x29,1,uVar8 & 1);
+      operandVReg = IRInst__getOperandSource(branchInst,1);
+      IRInst__setOperandSource(condValueInst,1,operandVReg,0,compiler);
+      ((void (*)())FUN_000f79c4)(condValueInst,piVar11,2,1.0,1.0,1.0,1.0);
+      IROperand__setModifierBits(condValueInst + 0x2f,1,1);
       iVar5 = R300VMachineAssembler__getOrAllocateScratchRegister(this,piVar11);
-      piVar6[0x25] = iVar5;
-      piVar6[0x26] = 0;
-      (**(code **)(*piVar6 + 0x84))(piVar6,uVar2);
-      Block__appendInst(node,piVar6);
+      condValueInst[0x25] = iVar5;
+      condValueInst[0x26] = 0;
+      (**(code **)(*condValueInst + 0x84))(condValueInst,loopStackEntry);
+      Block__appendInst(node,condValueInst);
     }
   }
   else {
 LAB_0019dab0:
-    piVar6 = (int *)0x0;
+    condValueInst = (int *)0x0;
   }
   iVar5 = R520VMachineAssembler__getOrCreateConstantZeroInst(this);
   iVar5 = *(int *)(iVar5 + 0x94);
@@ -87,21 +87,21 @@ LAB_0019dab0:
   piVar11[0x26] = 0;
   piVar11[0x27] = 0x1010101;
   piVar11[0x25] = 0;
-  IRInst__setOperandSource(piVar11,1,piVar6,0,compiler);
+  IRInst__setOperandSource(piVar11,1,condValueInst,0,compiler);
   loopIndex = 0;
   do {
-    (**(code **)(*piVar11 + 0x88))(piVar11,1,loopIndex,uVar3 & 0xff);
+    (**(code **)(*piVar11 + 0x88))(piVar11,1,loopIndex,condSwizzle & 0xff);
     bVar1 = loopIndex != 3;
     loopIndex = loopIndex + 1;
   } while (bVar1);
   loopIndex = 0;
-  (**(code **)(*piVar11 + 0x84))(piVar11,uVar2);
+  (**(code **)(*piVar11 + 0x84))(piVar11,loopStackEntry);
   Block__appendInst(node,piVar11);
   piVar11 = IRInst__create(0x3e,compiler);
-  IRInst__setOperandSource(piVar11,1,piVar6,0,compiler);
+  IRInst__setOperandSource(piVar11,1,condValueInst,0,compiler);
   do {
     a2 = loopIndex;
-    uVar8 = uVar3 & 0xff;
+    uVar8 = condSwizzle & 0xff;
     /* dropped 2 args (found auditing #70 via ExtendIndirectCalls.java / ground-truth
      * disassembly): stock passes loopIndex and uVar8 here too, matching the identical-shape
      * call a few lines above (both loops dispatch the same vtable+0x88 method the same way -
@@ -111,14 +111,14 @@ LAB_0019dab0:
     loopIndex = loopIndex + 1;
   } while (bVar1);
   piVar11[0x25] = iVar5;
-  uVar2 = uVar2 ^ 3;
+  loopStackEntry = loopStackEntry ^ 3;
   piVar11[0x27] = 0x1010100;
   piVar11[0x26] = 0;
   (**(code **)(*piVar11 + 0x84))
-            (piVar11,(uVar2 - ((uVar2 - 1) + (uint)(uVar2 == 0))) + 2,a2,uVar8,compiler,a5,uVar2 - 1)
+            (piVar11,(loopStackEntry - ((loopStackEntry - 1) + (uint)(loopStackEntry == 0))) + 2,a2,uVar8,compiler,a5,loopStackEntry - 1)
   ;
   Block__appendInst(node,piVar11);
-  FUN_00193f20(iVar4);
+  FUN_00193f20(branchInst);
   *(undefined4 *)(node + 0x130) = 0;
 LAB_0019dc0c:
   (**(code **)(*this + 0x34))(this,block,*(undefined4 *)(node + 0xdc));
@@ -1007,8 +1007,8 @@ int FUN_0019ee74(param_1, param_2)
   return;
 }
 
-/* FudoPs__vslot96 @ 0x19ef2c (32 bytes) */
-int FudoPs__vslot96(this)
+/* FudoPs__vslot96_installHardwareTables @ 0x19ef2c (32 bytes) */
+int FudoPs__vslot96_installHardwareTables(this)
   int this;
 {
   *(undefined **)(this + 0xc) = &DAT_001e6730;
@@ -2436,7 +2436,7 @@ asm(".set FUN_0019e660, _R520VMachineAssembler__vslot6_setLoopStack");
 asm(".globl FUN_0019e6e0");
 asm(".set FUN_0019e6e0, _R520VMachineAssembler__vslot24_assembleWithPredicateSet");
 asm(".globl FUN_0019ef2c");
-asm(".set FUN_0019ef2c, _FudoPs__vslot96");
+asm(".set FUN_0019ef2c, _FudoPs__vslot96_installHardwareTables");
 asm(".globl FUN_0019ef50");
 asm(".set FUN_0019ef50, _R520MachineAssembler__vslot5_beginProgram");
 asm(".globl FUN_0019f094");

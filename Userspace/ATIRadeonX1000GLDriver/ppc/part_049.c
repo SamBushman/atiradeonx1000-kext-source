@@ -608,8 +608,8 @@ LAB_0018754c:
   return loopRemaining;
 }
 
-/* FUN_001875a8 @ 0x1875a8 (1328 bytes) */
-int FUN_001875a8(inst, param_2, inst2, param_4)
+/* Inst__r300Peephole_1875a8 @ 0x1875a8 (1328 bytes) */
+int Inst__r300Peephole_1875a8(inst, param_2, inst2, param_4)
   int *inst;
   int param_2;
   int inst2;
@@ -1049,8 +1049,8 @@ code_r0x00188258:
   goto LAB_0018825c;
 }
 
-/* FUN_001882a4 @ 0x1882a4 (408 bytes) */
-int FUN_001882a4(inst, compiler)
+/* Inst__r300Peephole_1882a4 @ 0x1882a4 (408 bytes) */
+int Inst__r300Peephole_1882a4(inst, compiler)
   int *inst;
   int compiler;
 {
@@ -1133,64 +1133,64 @@ int KhanPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
 LAB_00188508:
     callResult = Compiler__isOptionEnabled(program[2],0x1c);
     if (callResult != 0) {
-      callResult = FUN_00154dc0(inst2,program);
+      callResult = Inst__collapseAlgebraic_00154dc0(inst2,program);
       if (callResult != 0) {
         inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
         if (inst2 == (int *)0x0) goto LAB_00188950;
       }
-      callResult = FUN_00162cc0(inst2,program);
+      callResult = Inst__collapseAlgebraic_00162cc0(inst2,program);
       if (callResult != 0) {
         inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
         if (inst2 == (int *)0x0) goto LAB_00188950;
       }
       callResult = (**(code **)(*inst2 + 0x14))(inst2);
-      if ((consumerSrcIndex <= callResult) && (callResult = FUN_00158264(inst,consumerSrcIndex,inst2,program), callResult != 0))
+      if ((consumerSrcIndex <= callResult) && (callResult = Inst__collapseAlgebraic_00158264(inst,consumerSrcIndex,inst2,program), callResult != 0))
       {
         inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
         if (inst2 == (int *)0x0) goto LAB_00188950;
         changedFlag = 1;
       }
-      callResult = FUN_00155a60(inst2,program);
+      callResult = Inst__collapseAlgebraic_00155a60(inst2,program);
       if (callResult != 0) {
         inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
       }
-      callResult = FUN_0014bdbc(inst2,program);
+      callResult = Inst__collapseAlgebraic_0014bdbc(inst2,program);
       if (callResult != 0) {
         inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
       }
-      callResult = FUN_0014caec(inst2,program);
+      callResult = Inst__collapseAlgebraic_0014caec(inst2,program);
       if (callResult != 0) {
         inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
       }
-      callResult = FUN_0014d8f8(inst2,program);
+      callResult = Inst__collapseAlgebraic_0014d8f8(inst2,program);
       if (callResult != 0) {
         inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
       }
-      callResult = FUN_00150d38(inst2,program);
+      callResult = Inst__collapseAlgebraic_00150d38(inst2,program);
       if (callResult != 0) {
         inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
       }
-      callResult = FUN_0014cec8(inst2,program);
+      callResult = Inst__collapseAlgebraic_0014cec8(inst2,program);
       if (callResult != 0) {
         inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
       }
-      callResult = FUN_0015df44(inst2,program);
+      callResult = Inst__collapseAlgebraic_0015df44(inst2,program);
       if (callResult != 0) {
         inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
       }
-      callResult = FUN_0015e494(inst2,program);
+      callResult = Inst__collapseAlgebraic_0015e494(inst2,program);
       if (callResult != 0) {
         inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
       }
       callResult = Compiler__isOptionEnabled(program[2],0x3c);
-      if ((callResult != 0) && (callResult = FUN_00163478(inst,consumerSrcIndex,inst2,program), callResult != 0)) {
+      if ((callResult != 0) && (callResult = Inst__tryDp3CommutativityPushoff(inst,consumerSrcIndex,inst2,program), callResult != 0)) {
         inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
       }
-      callResult = FUN_0014d274(inst2,program);
+      callResult = Inst__collapseAlgebraic_0014d274(inst2,program);
       if (callResult != 0) {
         inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
       }
-      callResult = FUN_00158c3c(inst2,program);
+      callResult = Inst__collapseAlgebraic_00158c3c(inst2,program);
       if (callResult != 0) {
         changedFlag = 1;
       }
@@ -1211,39 +1211,39 @@ LAB_00188508:
     }
     callResult = Compiler__isOptionEnabled(program[2],0x1d);
     if ((((callResult != 0) &&
-         (callResult = FUN_001633f8(curInst,program,inst3,programAlias4,programAlias5,passThroughR8,passThroughR9), callResult != 0)) &&
+         (callResult = Inst__tryCollapseSimilar(curInst,program,inst3,programAlias4,programAlias5,passThroughR8,passThroughR9), callResult != 0)) &&
         (callResult = (**(code **)(*curInst + 100))(curInst), callResult != 0)) &&
-       ((inst != 0 && (callResult = FUN_00160320(inst,consumerSrcIndex,curInst,program,foldStatus), callResult != 0)
+       ((inst != 0 && (callResult = Inst__foldProducerIntoConsumer(inst,consumerSrcIndex,curInst,program,foldStatus), callResult != 0)
         ))) {
       curInst = (int *)FUN_00146610(inst,consumerSrcIndex,curInst);
       if (curInst == (int *)0x0) goto LAB_00188950;
     }
     callResult = Compiler__isOptionEnabled(program[2],0x39);
     if (callResult != 0) {
-      ((int (*)())FUN_001882a4)(curInst,program[2]);
+      ((int (*)())Inst__r300Peephole_1882a4)(curInst,program[2]);
     }
     callResult = FUN_00159b58(curInst,1,program);
     if (callResult != 0) {
       curInst = (int *)FUN_00146610(inst,consumerSrcIndex,curInst);
     }
     callResult = Compiler__isOptionEnabled(program[2],0x39);
-    if ((callResult != 0) && (callResult = ((int (*)())FUN_001875a8)(inst,consumerSrcIndex,curInst,program), callResult != 0)) {
+    if ((callResult != 0) && (callResult = ((int (*)())Inst__r300Peephole_1875a8)(inst,consumerSrcIndex,curInst,program), callResult != 0)) {
       changedFlag = 1;
       curInst = (int *)FUN_00146610(inst,consumerSrcIndex,curInst);
     }
     callResult = Compiler__isOptionEnabled(program[2],0x3b);
     if ((callResult != 0) && ((curInst[5] & 1U) != 0)) {
-      FUN_001859bc(curInst,program,program[2]);
+      Inst__tryDp3Add(curInst,program,program[2]);
     }
   }
   else {
     changedFlag = (**(code **)(*inst2 + 100))(inst2);
-    callResult = FUN_0014abdc(inst2,program,foldStatus);
+    callResult = Inst__tryCopyPropagate(inst2,program,foldStatus);
     if (callResult == 0) {
 LAB_001884c8:
       if (inst != 0) {
         programAlias5 = foldStatus;
-        callResult = FUN_00160320(inst,consumerSrcIndex,inst2,program,programAlias5);
+        callResult = Inst__foldProducerIntoConsumer(inst,consumerSrcIndex,inst2,program,programAlias5);
         if (callResult != 0) {
           inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
           if (inst2 == (int *)0x0) goto LAB_00188950;
@@ -1259,8 +1259,8 @@ LAB_00188950:
   return changedFlag;
 }
 
-/* FUN_0018896c @ 0x18896c (1208 bytes) */
-int FUN_0018896c(inst, param_2)
+/* Inst__movAndShiftUseVector @ 0x18896c (1208 bytes) */
+int Inst__movAndShiftUseVector(inst, param_2)
   int *inst;
   int param_2;
 {
@@ -1445,30 +1445,30 @@ LAB_00188a5c:
   return;
 }
 
-/* KhanPs__vslot27 @ 0x188e24 (256 bytes) */
-int KhanPs__vslot27(this, inst, param_3)
+/* KhanPs__vslot27_optimizeInstruction @ 0x188e24 (256 bytes) */
+int KhanPs__vslot27_optimizeInstruction(this, inst, program)
   undefined4 this;
   int inst;
-  int param_3;
+  int program;
 {
   int callResult;
   
   if ((*(uint *)(inst + 0x14) & 1) != 0) {
-    ((int (*)())FUN_00187ad8)(inst,param_3);
-    callResult = Compiler__isOptionEnabled(*(undefined4 *)(param_3 + 8),0x36);
-    if ((callResult == 0) || (FUN_00184d7c(inst,param_3), (*(uint *)(inst + 0x14) & 1) != 0)) {
-      callResult = Compiler__isOptionEnabled(*(undefined4 *)(param_3 + 8),0x15);
+    ((int (*)())FUN_00187ad8)(inst,program);
+    callResult = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x36);
+    if ((callResult == 0) || (Inst__splitAndMerge(inst,program), (*(uint *)(inst + 0x14) & 1) != 0)) {
+      callResult = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x15);
       if (callResult != 0) {
-        FUN_00150b94(inst,param_3);
-        FUN_0014e6e4(inst,param_3);
+        Inst__reassociate_150b94(inst,program);
+        Inst__reassociate_14e6e4(inst,program);
       }
-      callResult = Compiler__isOptionEnabled(*(undefined4 *)(param_3 + 8),0x16);
-      if ((callResult != 0) && (callResult = IRInst__hasSingleUse(inst,param_3), callResult == 0)) {
-        FUN_0015a68c(inst,param_3);
+      callResult = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x16);
+      if ((callResult != 0) && (callResult = IRInst__hasSingleUse(inst,program), callResult == 0)) {
+        Inst__takeOutCommonFactor(inst,program);
       }
-      callResult = Compiler__isOptionEnabled(*(undefined4 *)(param_3 + 8),0x14);
+      callResult = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x14);
       if (callResult != 0) {
-        ((int (*)())FUN_0018896c)(inst,param_3);
+        ((int (*)())Inst__movAndShiftUseVector)(inst,program);
         return;
       }
     }
@@ -1476,17 +1476,17 @@ int KhanPs__vslot27(this, inst, param_3)
   return;
 }
 
-/* KhanVs__vslot29 @ 0x188f24 (200 bytes) */
-int KhanVs__vslot29(this, param_2)
+/* KhanVs__vslot29_swapIfArmsWhenNotFlattenable @ 0x188f24 (200 bytes) */
+int KhanVs__vslot29_swapIfArmsWhenNotFlattenable(this, program)
   undefined4 this;
-  int param_2;
+  int program;
 {
   int iVar1;
   int iVar2;
   int *piVar3;
   undefined1 auStack_28 [24];
   
-  piVar3 = *(int **)(param_2 + 900);
+  piVar3 = *(int **)(program + 900);
   iVar1 = piVar3[2];
   while (iVar1 != 0) {
     iVar1 = (**(code **)(*piVar3 + 0x24))(piVar3);
@@ -1496,7 +1496,7 @@ int KhanVs__vslot29(this, param_2)
       if ((((iVar1 < 3) && (iVar1 = Block__successorCount(iVar2), iVar1 == 1)) &&
           (iVar1 = Block__getSuccessor(iVar2,0), iVar1 == piVar3[0x4f])) &&
          (iVar1 = IfHeader__canFlatten(piVar3,auStack_28), iVar1 == 0)) {
-        piVar3 = (int *)IfHeader__swapArms(param_2,piVar3);
+        piVar3 = (int *)IfHeader__swapArms(program,piVar3);
       }
     }
     piVar3 = (int *)piVar3[2];
@@ -1533,7 +1533,7 @@ int KhanVs__peepholeCombine(this, inst, consumerOperandArg, inst2, program, pass
   if (callResult != 0) {
     changedFlag = (**(code **)(*inst2 + 100))(inst2);
     piVar4 = foldStatus;
-    callResult = FUN_0014abdc(inst2,program,piVar4);
+    callResult = Inst__tryCopyPropagate(inst2,program,piVar4);
     piVar2 = inst2;
     if ((callResult != 0) &&
        (piVar2 = (int *)FUN_00146610(inst,consumerOperandArg,inst2), piVar4 = inst2,
@@ -1545,7 +1545,7 @@ int KhanVs__peepholeCombine(this, inst, consumerOperandArg, inst2, program, pass
       programAlias = foldStatus;
       piVar4 = piVar2;
       producerAlias = program;
-      callResult = FUN_00160320(inst,consumerOperandArg,piVar2,program,programAlias);
+      callResult = Inst__foldProducerIntoConsumer(inst,consumerOperandArg,piVar2,program,programAlias);
       if ((callResult != 0) &&
          (inst2 = (int *)FUN_00146610(inst,consumerOperandArg,piVar2), piVar4 = piVar2,
          inst2 == (int *)0x0)) {
@@ -1557,48 +1557,48 @@ int KhanVs__peepholeCombine(this, inst, consumerOperandArg, inst2, program, pass
   if (callResult != 0) {
     hwLimitsOrArg = **(int **)(program[2] + 0x30c);
     callResult = (**(code **)(hwLimitsOrArg + 0x84))(*(int **)(program[2] + 0x30c));
-    if (((callResult != 0) && (callResult = FUN_00154dc0(inst2,program), callResult != 0)) &&
+    if (((callResult != 0) && (callResult = Inst__collapseAlgebraic_00154dc0(inst2,program), callResult != 0)) &&
        (inst2 = (int *)FUN_00146610(inst,consumerOperandArg,inst2), inst2 == (int *)0x0)) {
       return 1;
     }
-    callResult = FUN_00162cc0(inst2,program);
+    callResult = Inst__collapseAlgebraic_00162cc0(inst2,program);
     if ((callResult != 0) &&
        (inst2 = (int *)FUN_00146610(inst,consumerOperandArg,inst2), inst2 == (int *)0x0)) {
       return 1;
     }
     callResult = (**(code **)(*inst2 + 0x14))(inst2);
     if (((int)consumerOperandArg <= callResult) &&
-       (callResult = FUN_00158264(inst,consumerOperandArg,inst2,program), callResult != 0)) {
+       (callResult = Inst__collapseAlgebraic_00158264(inst,consumerOperandArg,inst2,program), callResult != 0)) {
       inst2 = (int *)FUN_00146610(inst,consumerOperandArg,inst2);
       if (inst2 == (int *)0x0) {
         return 1;
       }
       changedFlag = 1;
     }
-    callResult = FUN_00155a60(inst2,program);
+    callResult = Inst__collapseAlgebraic_00155a60(inst2,program);
     if (callResult != 0) {
       inst2 = (int *)FUN_00146610(inst,consumerOperandArg,inst2);
     }
-    callResult = FUN_0014bdbc(inst2,program);
+    callResult = Inst__collapseAlgebraic_0014bdbc(inst2,program);
     if (callResult != 0) {
       inst2 = (int *)FUN_00146610(inst,consumerOperandArg,inst2);
     }
     piVar4 = (int *)0x0;
     producerAlias = (int *)((int)((unsigned char *)0x0) + 1);
-    callResult = FUN_0014b82c(inst2,program,0,1);
+    callResult = Inst__collapseAlgebraic_0014b82c(inst2,program,0,1);
     piVar2 = inst2;
     if (callResult != 0) {
       piVar2 = (int *)FUN_00146610(inst,consumerOperandArg,inst2);
       piVar4 = inst2;
     }
-    callResult = FUN_0014b150(piVar2,program);
+    callResult = Inst__collapseAlgebraic_0014b150(piVar2,program);
     piVar3 = piVar2;
     if (callResult != 0) {
       callResult = (**(code **)(*piVar2 + 100))(piVar2);
       if (((callResult != 0) && ((piVar2[5] & 0x200U) == 0)) && (inst != 0)) {
         programAlias = foldStatus;
         producerAlias = program;
-        FUN_00160320(inst,consumerOperandArg,piVar2,program,programAlias);
+        Inst__foldProducerIntoConsumer(inst,consumerOperandArg,piVar2,program,programAlias);
       }
       piVar3 = (int *)FUN_00146610(inst,consumerOperandArg,piVar2);
       if (piVar3 == (int *)0x0) {
@@ -1607,43 +1607,43 @@ int KhanVs__peepholeCombine(this, inst, consumerOperandArg, inst2, program, pass
       changedFlag = 1;
       piVar4 = piVar2;
     }
-    callResult = FUN_00150d38(piVar3,program);
+    callResult = Inst__collapseAlgebraic_00150d38(piVar3,program);
     piVar2 = piVar3;
     if (callResult != 0) {
       piVar2 = (int *)FUN_00146610(inst,consumerOperandArg,piVar3);
       piVar4 = piVar3;
     }
-    callResult = FUN_0015ceb0(piVar2,program);
+    callResult = Inst__collapseAlgebraic_0015ceb0(piVar2,program);
     piVar3 = piVar2;
     if (callResult != 0) {
       piVar3 = (int *)FUN_00146610(inst,consumerOperandArg,piVar2);
       piVar4 = piVar2;
     }
-    callResult = FUN_0015bd40(piVar3,program);
+    callResult = Inst__collapseAlgebraic_0015bd40(piVar3,program);
     piVar2 = piVar3;
     if (callResult != 0) {
       piVar2 = (int *)FUN_00146610(inst,consumerOperandArg,piVar3);
       piVar4 = piVar3;
     }
-    callResult = FUN_00163994(piVar2,program);
+    callResult = Inst__collapseAlgebraic_00163994(piVar2,program);
     piVar3 = piVar2;
     if (callResult != 0) {
       piVar3 = (int *)FUN_00146610(inst,consumerOperandArg,piVar2);
       piVar4 = piVar2;
     }
-    callResult = FUN_0015c6d4(piVar3,program);
+    callResult = Inst__collapseAlgebraic_0015c6d4(piVar3,program);
     piVar2 = piVar3;
     if (callResult != 0) {
       piVar2 = (int *)FUN_00146610(inst,consumerOperandArg,piVar3);
       piVar4 = piVar3;
     }
-    callResult = FUN_0014acb8(piVar2,program);
+    callResult = Inst__collapseAlgebraic_0014acb8(piVar2,program);
     piVar3 = piVar2;
     if (callResult != 0) {
       piVar3 = (int *)FUN_00146610(inst,consumerOperandArg,piVar2);
       piVar4 = piVar2;
     }
-    callResult = FUN_0015e494(piVar3,program);
+    callResult = Inst__collapseAlgebraic_0015e494(piVar3,program);
     inst2 = piVar3;
     if (callResult != 0) {
       inst2 = (int *)FUN_00146610(inst,consumerOperandArg,piVar3);
@@ -1652,10 +1652,10 @@ int KhanVs__peepholeCombine(this, inst, consumerOperandArg, inst2, program, pass
   }
   callResult = Compiler__isOptionEnabled(program[2],0x1d);
   if ((((callResult != 0) &&
-       (callResult = FUN_001633f8(inst2,program,piVar4,producerAlias,programAlias,passThroughR8,hwLimitsOrArg), callResult != 0)) &&
+       (callResult = Inst__tryCollapseSimilar(inst2,program,piVar4,producerAlias,programAlias,passThroughR8,hwLimitsOrArg), callResult != 0)) &&
       ((callResult = (**(code **)(*inst2 + 100))(inst2), callResult != 0 &&
        ((inst != 0 &&
-        (callResult = FUN_00160320(inst,consumerOperandArg,inst2,program,foldStatus), callResult != 0)))))) &&
+        (callResult = Inst__foldProducerIntoConsumer(inst,consumerOperandArg,inst2,program,foldStatus), callResult != 0)))))) &&
      (inst2 = (int *)FUN_00146610(inst,consumerOperandArg,inst2), inst2 == (int *)0x0)) {
     return 1;
   }
@@ -1664,7 +1664,7 @@ int KhanVs__peepholeCombine(this, inst, consumerOperandArg, inst2, program, pass
     return changedFlag;
   }
   if ((program[0x8a] < *(int *)(program[2] + 0x664)) &&
-     (callResult = FUN_0015ea3c(inst,consumerOperandArg,inst2,program), callResult != 0)) {
+     (callResult = Inst__tryMix(inst,consumerOperandArg,inst2,program), callResult != 0)) {
     changedFlag = 1;
     inst2 = (int *)FUN_00146610(inst,consumerOperandArg,inst2);
   }
@@ -1676,18 +1676,18 @@ int KhanVs__peepholeCombine(this, inst, consumerOperandArg, inst2, program, pass
   return changedFlag;
 }
 
-/* KhanVs__vslot27 @ 0x1894ec (116 bytes) */
-int KhanVs__vslot27(this, inst, param_3)
+/* KhanVs__vslot27_optimizeInstruction @ 0x1894ec (116 bytes) */
+int KhanVs__vslot27_optimizeInstruction(this, inst, program)
   undefined4 this;
   int inst;
-  int param_3;
+  int program;
 {
   int iVar1;
   
   if (((*(uint *)(inst + 0x14) & 1) != 0) &&
-     (iVar1 = Compiler__isOptionEnabled(*(undefined4 *)(param_3 + 8),0x15), iVar1 != 0)) {
-    FUN_00150b94(inst,param_3);
-    FUN_0014e6e4(inst,param_3);
+     (iVar1 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x15), iVar1 != 0)) {
+    Inst__reassociate_150b94(inst,program);
+    Inst__reassociate_14e6e4(inst,program);
     return;
   }
   return;
@@ -1767,19 +1767,19 @@ int R520SchedModel__vslot2_reset(param_1)
   return ((int (*)())PackState__reset)(param_1 + 0x28);
 }
 
-/* KhanPs__vslot31 @ 0x18962c (52 bytes) */
-int KhanPs__vslot31(this, param_2)
+/* KhanPs__vslot31_isNotTextureFetch @ 0x18962c (52 bytes) */
+int KhanPs__vslot31_isNotTextureFetch(this, inst)
   undefined4 this;
-  int *param_2;
+  int *inst;
 {
   uint uVar1;
   
-  uVar1 = (**(code **)(*param_2 + 0x30))(param_2,param_2);
+  uVar1 = (**(code **)(*inst + 0x30))(inst,inst);
   return uVar1 ^ 1;
 }
 
-/* KhanPs__vslot65 @ 0x189660 (152 bytes) */
-int KhanPs__vslot65(this, param_2, param_3, param_4, param_5)
+/* KhanPs__vslot65_isEncodableSourceSwizzle @ 0x189660 (152 bytes) */
+int KhanPs__vslot65_isEncodableSourceSwizzle(this, param_2, param_3, param_4, param_5)
   int *this;
   undefined4 param_2;
   undefined4 param_3;
@@ -1838,8 +1838,8 @@ int FUN_00189788(param_1)
   return 0;
 }
 
-/* KhanPs__vslot66 @ 0x1897f0 (8 bytes) */
-int KhanPs__vslot66(this, param_2)
+/* KhanPs__vslot66_callHelper189788 @ 0x1897f0 (8 bytes) */
+int KhanPs__vslot66_callHelper189788(this, param_2)
   undefined4 this;
   undefined4 *param_2;
 {
@@ -5948,23 +5948,23 @@ int R300VSchedModel__vslot19(this, inst)
 asm(".globl FUN_0018843c");
 asm(".set FUN_0018843c, _KhanPs__peepholeCombine");
 asm(".globl FUN_00188e24");
-asm(".set FUN_00188e24, _KhanPs__vslot27");
+asm(".set FUN_00188e24, _KhanPs__vslot27_optimizeInstruction");
 asm(".globl FUN_00188f24");
-asm(".set FUN_00188f24, _KhanVs__vslot29");
+asm(".set FUN_00188f24, _KhanVs__vslot29_swapIfArmsWhenNotFlattenable");
 asm(".globl FUN_00188fec");
 asm(".set FUN_00188fec, _KhanVs__peepholeCombine");
 asm(".globl FUN_001894ec");
-asm(".set FUN_001894ec, _KhanVs__vslot27");
+asm(".set FUN_001894ec, _KhanVs__vslot27_optimizeInstruction");
 asm(".globl FUN_00189604");
 asm(".set FUN_00189604, _R520SchedModel__vslot2_reset");
 asm(".globl FUN_0018962c");
-asm(".set FUN_0018962c, _KhanPs__vslot31");
+asm(".set FUN_0018962c, _KhanPs__vslot31_isNotTextureFetch");
 asm(".globl FUN_00189660");
-asm(".set FUN_00189660, _KhanPs__vslot65");
+asm(".set FUN_00189660, _KhanPs__vslot65_isEncodableSourceSwizzle");
 asm(".globl FUN_001896f8");
 asm(".set FUN_001896f8, _FUN_001896f8");
 asm(".globl FUN_001897f0");
-asm(".set FUN_001897f0, _KhanPs__vslot66");
+asm(".set FUN_001897f0, _KhanPs__vslot66_callHelper189788");
 asm(".globl FUN_00189be4");
 asm(".set FUN_00189be4, _R300SchedModel__vslot15");
 asm(".globl FUN_00189fd4");

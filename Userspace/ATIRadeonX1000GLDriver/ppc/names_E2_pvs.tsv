@@ -1,0 +1,18 @@
+# local rows (round 4, fork E2): PVS encoders - whole-function rows only, retried from D1's rows
+local	R300VMachineAssembler__encodeDestinationWord	bVar1	isMathInst	INFERRED	true except for the plain-move forms; with opcodeInfoIsVsFlagBit2 it sets PVS_DST_MATH_INST (0x40 in the opcode byte)
+local	R300VMachineAssembler__encodeDestinationWord	iVar11	src3RegOffset	CONFIRMED	allocated register offset of source 3
+local	R300VMachineAssembler__encodeDestinationWord	iVar7	src1RegClass	CONFIRMED	register class (+0x98) of source 1
+local	R300VMachineAssembler__encodeDestinationWord	iVar9	src2RegClass	CONFIRMED	register class (+0x98) of source 2
+local	R300VMachineAssembler__encodeDestinationWord	uVar14	swizzleSelFromWord2	CONFIRMED	instructionWords[2] >> 16 & 7
+local	R300VMachineAssembler__encodeDestinationWord	uVar15	word3Old	CONFIRMED	instructionWords[3] before the select fields are repacked
+local	R300VMachineAssembler__encodeDestinationWord	uVar16	allocTable	CONFIRMED	compiler+0x6c4 register allocation table
+local	R300VMachineAssembler__encodeDestinationWord	uVar3	opcodeByte	CONFIRMED	0 or 1: opcode byte for the three-source clash case
+local	R300VMachineAssembler__encodeDualMathOperands	iVar9	regBias9	INFERRED	target description slot 0x138 value subtracted for class 1
+local	R300VMachineAssembler__encodeDualMathOperands	in_r6	passThroughR6	UNKNOWN	Ghidra input-register artifact of the indirect isMix call
+local	R300VMachineAssembler__encodeDualMathOperands	in_r7	passThroughR7	UNKNOWN	Ghidra input-register artifact
+local	R300VMachineAssembler__encodeDualMathOperands	in_r8	passThroughR8	UNKNOWN	Ghidra input-register artifact
+local	R300VMachineAssembler__encodeDualMathOperands	local_34	composedSwizzle2	CONFIRMED	FUN_000f2bdc output for source 2
+local	R300VMachineAssembler__encodeDualMathOperands	local_38	composedSwizzle1	CONFIRMED	FUN_000f2bdc output for source 1
+local	R300VMachineAssembler__encodeDualMathOperands	local_48	constNegated	CONFIRMED	vsSourceSelectForConstant output flag: the constant lane is negated
+local	R300VMachineAssembler__encodeDualMathOperands	piVar8	hwLimitsObj8	CONFIRMED	compiler+0x30c target description object
+local	R300VMachineAssembler__encodeDualMathOperands	uVar13	srcOffsetPair	INFERRED	64-bit thunk_FUN_00134de8 result: offset in the high word

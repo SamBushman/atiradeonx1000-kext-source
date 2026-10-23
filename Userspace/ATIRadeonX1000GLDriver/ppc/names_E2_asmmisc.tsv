@@ -1,0 +1,15 @@
+# local rows (round 4, fork E2): R520 texture-record emitter and R520V loop header
+local	R520MachineAssembler__vslot23_emitTexRecord	a0	src1Inst	CONFIRMED	IRInst__getOperandSource(inst, 1): the instruction defining source 1
+local	R520MachineAssembler__vslot23_emitTexRecord	iVar3	src1IsMix	CONFIRMED	result of IRInst vtable slot 24 (isMix) called on src1Inst
+local	R520MachineAssembler__vslot23_emitTexRecord	piVar11	mixInst	INFERRED	src1Inst when it is a mix instruction, else 0; its operand 1 replaces inst's source 1
+local	R520MachineAssembler__vslot23_emitTexRecord	piVar4	effectiveSrc1	INFERRED	the mix's own source 1 when src1 is a mix, else src1Inst; its slot 0x80 result is tested for the record's valid flag
+local	R520VMachineAssembler__vslot27_assembleLoopHeader	iVar4	branchInst	CONFIRMED	Block__getBranchInst(node): the block's conditional branch instruction, freed with FUN_00193f20 at the end
+local	R520VMachineAssembler__vslot27_assembleLoopHeader	uVar3	condSwizzle	INFERRED	operand record 1 +0x10 of the branch instruction, reused as the lane select byte for the generated compare instructions
+local	R520VMachineAssembler__vslot27_assembleLoopHeader	uVar2	loopStackEntry	INFERRED	last element of the vector at this[0x25] (the loop stack), passed to slot 0x84 of the created instructions
+local	R520VMachineAssembler__vslot27_assembleLoopHeader	puVar9	loopStackSlot	INFERRED	address of the last element of the vector at this[0x25], or 0 when the vector is empty
+local	R520VMachineAssembler__vslot27_assembleLoopHeader	piVar6	condValueInst	INFERRED	the add (0x12) instruction built from the compare, or source 1 of the 0x8c compare when it needs no rewrite
+local	R300VMachineAssembler__assembleBlock	piVar4	groupInst	INFERRED	head of the instruction group being assembled (after findFoldableMovePair); same role as piVar13 in R300MachineAssembler__assembleBlock
+local	R300VMachineAssembler__assembleBlock	piVar6	cursorInst	INFERRED	walks the group's instructions through the next pointer at +8
+local	R300VMachineAssembler__assembleBlock	uVar2	instFlags	CONFIRMED	assigned from inst[5], the flag word at +0x14
+local	R300VMachineAssembler__assembleBlock	puVar1	flagsPtr	CONFIRMED	address of the previous group head's flag word, tested for bit 2 by the tail loop
+local	R300VMachineAssembler__assembleBlock	local_38	lookahead	INFERRED	out buffer of FUN_000e3b88; word 0 is tested for non-zero

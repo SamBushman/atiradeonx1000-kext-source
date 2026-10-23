@@ -673,3 +673,30 @@ whose source 1 is a single-use `IrAddFloat` of two identical-register terms is r
 
 **Gate finds worth remembering.** The dataflow gate rejected webs that cross loop-carried flag words (`uVar22 = piVar13[5]` flags re-read at the loop test), a split of
 `local_88` in `encodeSourceOperand` (changes the instruction count) and `uVar19` there (new -Wuninitialized warning): those variables keep their Ghidra names.
+
+## Round 4: E2 (HwLimits slot names, peephole helpers, assembler locals)
+
+**Option table as a naming source.** D3's `OPT_*` table (notes_compiler_passes2.md) names the compiler option bits, and `Compiler__isOptionEnabled(program[2], id)` gates
+every peephole call. That gives each helper of `{KhanPs,KhanVs,FudoPs}__peepholeCombine` (HwLimits slot 28) a CONFIRMED *group*: `OPT_COPY_PROP` (0x1b) `Inst__tryCopyPropagate`;
+`OPT_COLLAPSE_ALGEBRAIC` (0x1c) twenty-one pattern rewrites tried in a fixed order on the producer (`Inst__collapseAlgebraic_<addr>`: the individual patterns are NOT decoded);
+`OPT_COLLAPSE_SIMILAR` (0x1d) `Inst__tryCollapseSimilar`; `OPT_DP3_COMMUTATIVITY_PUSHOFF` (0x3c); `OPT_R300_PEEPHOLE` (0x39) two helpers; `OPT_DP3ADD` (0x3b); `OPT_MIX` (0x3a);
+`OPT_SWIZZLE_TFETCH_OUTPUT` (0x38). `FUN_00160320` is the shared "fold the producer into the consumer" step (used under 0x1b and 0x1d). The optimizeInstruction slot (27) of the
+Khan kinds is gated by `OPT_SPLIT_AND_MERGE` (0x36), `OPT_REASSOCIATE` (0x15, two helpers), `OPT_TAKEOUT_COMMON_FACTOR` (0x16) and `OPT_MOV_AND_SHIFT_USEVECTOR` (0x14).
+
+**HwLimits slots named (descriptive `vslotN_role` names unless the role is certain).**
+* Register-binding tables: `HwLimits` slot 24 clears them (counters at `this+0x1728/0x172c/0x1730`, 64 records of 0x34 bytes at `this+0x60`, 48 at `this+0xd60`);
+  Khan slot 21 appends a binding (`regIndex` replicated in 4 bytes at +0x34, `bindingKind` at +8, a lane-select word at +0x38), slot 22/100 are the VS variants, slot 35 publishes
+  the limits block (memcpy of 0x963c bytes to `compiler+0x64c`) and compacts both tables into the compiler (+0x100 / +0x400), slots 87/88/89 walk the entry block and call slot 21/22/100 for
+  interpolators, vertex exports (option 0x3f) and `IrLoad` (0xa4) instructions.
+* Constants: slot 58 matches a 4-float constant against the 6-word table at `DAT_001aff0c` (immediate-constant select codes), slot 59 rewrites a source constant (or its negation) to a table entry,
+  slot 75 registers `x`, `-x` and `x*k` value numbers, slots 73/74 seed the value-number table with ten + three fixed constants, slot 85 finds/encodes a 4-float constant with a lane swizzle
+  (`0x4040404` = no lanes).
+* Others: slot 6 `createSchedModels`, slots 8/9/10 base-class `failNotSupported` (Compiler__fail code 0xf), slot 17 `isSimpleInst`, slot 27 `optimizeInstruction`, slot 29 the two
+  if-conversion variants, slots 76/77/78/80 limit getters, slot 96 `installHardwareTables` (stores a table pointer at `this+0xc` and fills the global opcode/field tables).
+
+**Assembler locals.** Whole-function names only (the combined dataflow gate rejected D1's per-use splits of `assembleAluInstruction`, `encodeDestinationWord` and
+`encodeDualMathOperands` when they met D3's accessor rows): 18 + 17 locals of those, plus `R300MachineAssembler__assembleBlock` (the clause state machine: `this[0x23]` = 0 none,
+1 inside a fetch block, 2 inside an ALU block), `R300VMachineAssembler__assembleBlock`, `R520MachineAssembler__vslot23_emitTexRecord` (a 0x48-byte record per texture instruction at `this[0x2a] + this[0x18]*0x48`)
+and `R520VMachineAssembler__vslot27_assembleLoopHeader`.
+
+**Not done.** The individual algebraic patterns behind the 21 `collapseAlgebraic` helpers; the OpcodeInfo slots 5/6 and IRInst slots 32-35; the scheduler-model slots (D2's area).

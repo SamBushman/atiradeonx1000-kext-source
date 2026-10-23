@@ -1980,8 +1980,8 @@ LAB_00112378:
   } while( true );
 }
 
-/* KhanVs__vslot88 @ 0x1128a0 (1640 bytes) */
-int KhanVs__vslot88(this, param_2)
+/* KhanVs__vslot88_assignOutputBindings @ 0x1128a0 (1640 bytes) */
+int KhanVs__vslot88_assignOutputBindings(this, param_2)
   int *this;
   int param_2;
 {
@@ -2759,4 +2759,4 @@ int IrAllocColor__opcodeInfo_atexit_dtor_op149()
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_001128a0");
-asm(".set FUN_001128a0, _KhanVs__vslot88");
+asm(".set FUN_001128a0, _KhanVs__vslot88_assignOutputBindings");

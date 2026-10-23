@@ -1,0 +1,58 @@
+# local rows (round 4, fork E2): parameters/locals of the renamed HwLimits slots
+local	KhanPs__vslot21_appendRegisterBinding	param_2	regIndex	INFERRED	stored replicated into record bytes +0x34..+0x37
+local	KhanPs__vslot21_appendRegisterBinding	param_3	bindingKind	INFERRED	stored at record+8; KhanVs slot 21 compares it with 4
+local	KhanPs__vslot21_appendRegisterBinding	param_5	laneSelectWord	INFERRED	its four bytes are stored at record+0x38..+0x3b (high byte first)
+local	KhanPs__vslot21_appendRegisterBinding	iVar1	record	CONFIRMED	pointer to the 0x34-byte entry appended at this+0x60+count*0x34
+local	KhanVs__vslot21_appendRegisterBinding	param_2	regIndex	INFERRED	stored replicated into record bytes +0x34..+0x37
+local	KhanVs__vslot21_appendRegisterBinding	param_3	bindingKind	INFERRED	stored at record+8; kind 4 forces lane selects 3,3,3,3
+local	KhanVs__vslot21_appendRegisterBinding	param_5	laneSelectWord	INFERRED	its four bytes are stored at record+0x38..+0x3b (high byte first)
+local	KhanVs__vslot21_appendRegisterBinding	iVar1	record	CONFIRMED	pointer to the 0x34-byte entry appended at this+0xd60+count*0x34
+local	KhanVs__vslot22_appendRegisterBindingWithLaneArrays	param_4	bindingKind	INFERRED	stored at record+8
+local	KhanVs__vslot22_appendRegisterBindingWithLaneArrays	param_6	laneMask	INFERRED	stored at record+0x18 and tested bit by bit for each of the four lanes
+local	KhanVs__vslot22_appendRegisterBindingWithLaneArrays	iVar2	record	CONFIRMED	pointer to the 0x34-byte entry appended at this+0xd60+count*0x34
+local	KhanVs__vslot100_appendIdentityRegisterBinding	param_2	bindingValue	INFERRED	stored at record+0xc and +0x10
+local	KhanVs__vslot100_appendIdentityRegisterBinding	param_3	regIndex	INFERRED	stored replicated into record bytes +0x34..+0x37
+local	KhanVs__vslot100_appendIdentityRegisterBinding	iVar1	record	CONFIRMED	pointer to the 0x34-byte entry appended at this+0x60+count*0x34
+local	KhanPs__vslot35_publishLimitsAndBindingTables	param_2	compiler	INFERRED	the limits block is copied to compiler+0x64c / vectors to +0x650..+0x670
+local	KhanPs__vslot35_publishLimitsAndBindingTables	param_3	limitsBlob	INFERRED	source of the memcpy into the compiler's limit fields
+local	KhanVs__vslot35_publishLimitsAndBindingTables	param_2	compiler	INFERRED	the limits block is copied to compiler+0x64c / vectors to +0x650..+0x670
+local	KhanVs__vslot35_publishLimitsAndBindingTables	param_3	limitsBlob	INFERRED	source of the memcpy into the compiler's limit fields
+local	KhanPs__vslot58_matchImmediateConstantCode	param_2	constants	INFERRED	four floats; unmasked lanes must all be equal
+local	KhanPs__vslot58_matchImmediateConstantCode	param_3	outSelectCode	INFERRED	receives the table's select code, or 0xffffffff when nothing matched
+local	KhanPs__vslot58_matchImmediateConstantCode	param_4	laneSwizzle	INFERRED	four lane bytes; value 4 marks an unused lane
+local	KhanVs__vslot58_matchImmediateConstantCode	param_2	constants	INFERRED	four floats; unmasked lanes must all be equal
+local	KhanVs__vslot58_matchImmediateConstantCode	param_3	outSelectCode	INFERRED	receives the table's select code, or 0xffffffff when nothing matched
+local	KhanVs__vslot58_matchImmediateConstantCode	param_4	laneSwizzle	INFERRED	four lane bytes; value 4 marks an unused lane
+local	KhanPs__vslot59_tryEncodeSourceConstant	param_3	srcIndex	INFERRED	operand index passed to FUN_000f5c0c and FUN_000f79c4
+local	KhanPs__vslot59_tryEncodeSourceConstant	param_4	laneSwizzle	INFERRED	byte-swapped before the lookup
+local	KhanPs__vslot59_tryEncodeSourceConstant	param_5	compiler	INFERRED	param_5+0x6c4 is passed as the options argument
+local	KhanVs__vslot59_tryEncodeSourceConstant	param_3	srcIndex	INFERRED	operand index passed to FUN_000f5c0c and FUN_000f79c4
+local	KhanVs__vslot59_tryEncodeSourceConstant	param_4	laneSwizzle	INFERRED	byte-swapped before the lookup
+local	KhanVs__vslot59_tryEncodeSourceConstant	param_5	compiler	INFERRED	param_5+0x6c4 is passed as the options argument
+local	KhanPs__vslot85_findOrEncodeConstantVector	param_2	program	INFERRED	param_2+0x3ac is passed to FUN_000f5f94 and +0x30 flags are tested
+local	KhanPs__vslot85_findOrEncodeConstantVector	param_3	constants	INFERRED	four 32-bit constant words
+local	KhanPs__vslot85_findOrEncodeConstantVector	param_4	laneSwizzle	INFERRED	four lane bytes; 0x4040404 means no lanes are used
+local	KhanVs__vslot85_findOrEncodeConstantVector	param_2	program	INFERRED	param_2+0x3ac is passed to FUN_000f5f94 and +0x30 flags are tested
+local	KhanVs__vslot85_findOrEncodeConstantVector	param_3	constants	INFERRED	four 32-bit constant words
+local	KhanVs__vslot85_findOrEncodeConstantVector	param_4	laneSwizzle	INFERRED	four lane bytes; 0x4040404 means no lanes are used
+local	FudoPs__vslot85_findOrEncodeConstantVector	param_2	program	INFERRED	param_2+0x3ac is passed to FUN_000f5f94 and +0x30 flags are tested
+local	FudoPs__vslot85_findOrEncodeConstantVector	param_3	constants	INFERRED	four 32-bit constant words
+local	FudoPs__vslot85_findOrEncodeConstantVector	param_4	laneSwizzle	INFERRED	four lane bytes; 0x4040404 means no lanes are used
+local	KhanPs__vslot31_isNotTextureFetch	param_2	inst	CONFIRMED	its vtable slot 12 (isTextureFetch) is called
+local	KhanPs__vslot27_optimizeInstruction	param_3	program	CONFIRMED	program+8 is the compiler passed to Compiler__isOptionEnabled
+local	KhanVs__vslot27_optimizeInstruction	param_3	program	CONFIRMED	program+8 is the compiler passed to Compiler__isOptionEnabled
+local	KhanPs__vslot9_createCompareInst	param_3	srcRegA	INFERRED	stored at operand record 1 +8
+local	KhanPs__vslot9_createCompareInst	param_4	srcSwizzleA	INFERRED	converted by FUN_000ec208 and stored at operand record 1 +0xc
+local	KhanPs__vslot9_createCompareInst	param_5	srcRegB	INFERRED	stored at operand record 2 +8
+local	KhanPs__vslot9_createCompareInst	param_6	srcSwizzleB	INFERRED	converted by FUN_000ec208 and stored at operand record 2 +0xc
+local	KhanPs__vslot76_getBindingLimit	param_2	outLimit	CONFIRMED	*param_2 receives this slot 78(0)
+local	KhanVs__vslot76_getBindingLimits	param_2	outLimits	CONFIRMED	out[0], out[1] receive this slot 78(0) and slot 80(0)
+local	KhanVs__vslot77_getBindingLimits	param_2	outLimits	CONFIRMED	out[0] = 0, out[1] = this slot 78(0)
+local	HwLimits__vslot77_getBindingLimitsDefault	param_2	outLimits	CONFIRMED	*param_2 = 0
+local	IRInst__insertSourceBeforeLast	param_2	newSource	CONFIRMED	stored with IRInst__setOperandSource at the previous last index
+local	IRInst__insertSourceBeforeLast	param_3	compiler	CONFIRMED	param_3+0x6c4 is the options pointer tested for bit 8
+local	IRInst__insertSourceBeforeLast	iVar2	oldCount	CONFIRMED	the source count before the increment (+0x84)
+local	IRInst__insertSourceBeforeLast	iVar3	newCount	CONFIRMED	the incremented source count
+local	MachineAssembler__vslot34_declareDestinationLanesByClass	param_2	inst	CONFIRMED	inst[0x98] is switched on and its operand records are read
+local	FudoPs__vslot29_convertInnerIfsToPredicates	param_2	program	CONFIRMED	program+8 is the compiler for the option check; program+900 the block list
+local	KhanVs__vslot29_swapIfArmsWhenNotFlattenable	param_2	program	CONFIRMED	program+900 is the block list head

@@ -3115,9 +3115,9 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 10d5e4	10d5e8	eh-pad	FUN_0010d4cc	1	__Unwind_Resume
 10d88c	10d890	millicode	FUN_0010d730	1	
 10d948	10d94c	eh-pad	FUN_0010d730	1	__Unwind_Resume
-10dcfc	10dd08	other	HwLimits__vslot10	3	
-10dd4c	10dd54	millicode	HwLimits__vslot20	2	
-10ddf4	10ddfc	other	KhanPs__vslot16	2	
+10dcfc	10dd08	other	HwLimits__vslot10_failNotSupported	3	
+10dd4c	10dd54	millicode	HwLimits__vslot20_createInstWithOwner	2	
+10ddf4	10ddfc	other	KhanPs__vslot16_getConstant0xb5	2	
 10def8	10defc	millicode	FUN_0010de6c	1	
 10e0d0	10e0d4	millicode	KhanChip__ctor_10e050	1	
 10e100	10e114	eh-pad	KhanChip__ctor_10e050	5	__Unwind_Resume
@@ -3241,18 +3241,18 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 127d2c	127d30	millicode	FUN_00127994	1	
 127d78	127d7c	millicode	FUN_00127994	1	
 127dac	127de8	eh-pad	FUN_00127994	15	0x193cc0,__Unwind_Resume
-1281e8	1281f0	millicode	KhanPs__vslot8	2	
-12841c	128430	other	KhanPs__vslot74	5	
+1281e8	1281f0	millicode	KhanPs__vslot8_failNotSupported	2	
+12841c	128430	other	KhanPs__vslot74_seedConstantValueNumbers	5	
 129108	12911c	eh-pad	KhanPs__ctor_128fd0	5	__Unwind_Resume
 129268	12927c	eh-pad	KhanPs__ctor_129130	5	__Unwind_Resume
-129340	129350	eh-pad	FudoVs__vslot6	4	__Unwind_Resume
-129400	129408	other	KhanVs__vslot80	2	
-129670	129678	millicode	KhanVs__vslot35	2	
-129ce8	129dc8	table	KhanVs__vslot71	56	
-129ea0	129eb4	other	KhanVs__vslot71	5	
-12a070	12a088	table	KhanVs__vslot9	6	
-12a204	12a224	eh-pad	KhanVs__vslot9	8	0x193cc0,__Unwind_Resume
-12a568	12a578	eh-pad	KhanVs__vslot6	4	__Unwind_Resume
+129340	129350	eh-pad	FudoVs__createSchedModels	4	__Unwind_Resume
+129400	129408	other	KhanVs__vslot80_getLimit_0x14	2	
+129670	129678	millicode	KhanVs__vslot35_publishLimitsAndBindingTables	2	
+129ce8	129dc8	table	KhanVs__vslot71_canCombineSources	56	
+129ea0	129eb4	other	KhanVs__vslot71_canCombineSources	5	
+12a070	12a088	table	KhanVs__vslot9_createCompareInst	6	
+12a204	12a224	eh-pad	KhanVs__vslot9_createCompareInst	8	0x193cc0,__Unwind_Resume
+12a568	12a578	eh-pad	KhanVs__createSchedModels	4	__Unwind_Resume
 12a698	12a6ac	eh-pad	KhanVs__ctor_12a578	5	__Unwind_Resume
 12a7e0	12a7f4	eh-pad	KhanVs__ctor_12a6c0	5	__Unwind_Resume
 12a884	12a8a8	eh-pad	FudoVs__ctor_12a808	9	__Unwind_Resume
@@ -3334,36 +3334,36 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 1465d8	1465f0	eh-pad	FUN_0014657c	6	0x193cc0,__Unwind_Resume
 1473f0	1474a8	table	FUN_00147398	46	
 148328	14832c	eh-pad	FUN_00147f54	1	__Unwind_Resume
-14b00c	14b010	eh-pad	FUN_0014acb8	1	__Unwind_Resume
-14b720	14b724	millicode	FUN_0014b150	1	
-14b7f4	14b7f8	eh-pad	FUN_0014b150	1	__Unwind_Resume
-14bbe4	14bbe8	eh-pad	FUN_0014b82c	1	__Unwind_Resume
-14d794	14d798	eh-pad	FUN_0014d274	1	__Unwind_Resume
-14e1b8	14e1bc	eh-pad	FUN_0014d8f8	1	__Unwind_Resume
-14e984	14e99c	eh-pad	FUN_0014e6e4	6	0x193cc0,__Unwind_Resume
+14b00c	14b010	eh-pad	Inst__collapseAlgebraic_0014acb8	1	__Unwind_Resume
+14b720	14b724	millicode	Inst__collapseAlgebraic_0014b150	1	
+14b7f4	14b7f8	eh-pad	Inst__collapseAlgebraic_0014b150	1	__Unwind_Resume
+14bbe4	14bbe8	eh-pad	Inst__collapseAlgebraic_0014b82c	1	__Unwind_Resume
+14d794	14d798	eh-pad	Inst__collapseAlgebraic_0014d274	1	__Unwind_Resume
+14e1b8	14e1bc	eh-pad	Inst__collapseAlgebraic_0014d8f8	1	__Unwind_Resume
+14e984	14e99c	eh-pad	Inst__reassociate_14e6e4	6	0x193cc0,__Unwind_Resume
 1518ac	1518b0	eh-pad	FUN_00151370	1	__Unwind_Resume
 1521dc	1521e0	eh-pad	FUN_00151a74	1	__Unwind_Resume
 152b28	152b2c	eh-pad	FUN_001524b8	1	__Unwind_Resume
 154118	15411c	eh-pad	FUN_00152ea8	1	__Unwind_Resume
 154a44	154a48	eh-pad	FUN_001541f0	1	__Unwind_Resume
-155148	15514c	millicode	FUN_00154dc0	1	
-155264	155268	eh-pad	FUN_00154dc0	1	__Unwind_Resume
-155c88	155c8c	millicode	FUN_00155a60	1	
-15626c	156270	eh-pad	FUN_00155a60	1	__Unwind_Resume
+155148	15514c	millicode	Inst__collapseAlgebraic_00154dc0	1	
+155264	155268	eh-pad	Inst__collapseAlgebraic_00154dc0	1	__Unwind_Resume
+155c88	155c8c	millicode	Inst__collapseAlgebraic_00155a60	1	
+15626c	156270	eh-pad	Inst__collapseAlgebraic_00155a60	1	__Unwind_Resume
 156f34	156f38	millicode	FUN_00156d48	1	
 1579dc	1579e0	millicode	FUN_00156d48	1	
 157b48	157b60	eh-pad	FUN_00156d48	6	0x193cc0,__Unwind_Resume
-1585a0	1585a4	eh-pad	FUN_00158264	1	__Unwind_Resume
-1595b4	1595cc	eh-pad	FUN_00158c3c	6	0x193cc0,__Unwind_Resume
+1585a0	1585a4	eh-pad	Inst__collapseAlgebraic_00158264	1	__Unwind_Resume
+1595b4	1595cc	eh-pad	Inst__collapseAlgebraic_00158c3c	6	0x193cc0,__Unwind_Resume
 15a398	15a3b0	table	FUN_00159b58	6	
-15d458	15d45c	millicode	FUN_0015ceb0	1	
-15dd3c	15dd40	eh-pad	FUN_0015ceb0	1	__Unwind_Resume
-15e120	15e124	millicode	FUN_0015df44	1	
-15e1a0	15e1a4	eh-pad	FUN_0015df44	1	__Unwind_Resume
-15e798	15e79c	eh-pad	FUN_0015e494	1	__Unwind_Resume
-15ecf4	15ecf8	millicode	FUN_0015ea3c	1	
-15f108	15f10c	millicode	FUN_0015ea3c	1	
-15f2a4	15f2a8	eh-pad	FUN_0015ea3c	1	__Unwind_Resume
+15d458	15d45c	millicode	Inst__collapseAlgebraic_0015ceb0	1	
+15dd3c	15dd40	eh-pad	Inst__collapseAlgebraic_0015ceb0	1	__Unwind_Resume
+15e120	15e124	millicode	Inst__collapseAlgebraic_0015df44	1	
+15e1a0	15e1a4	eh-pad	Inst__collapseAlgebraic_0015df44	1	__Unwind_Resume
+15e798	15e79c	eh-pad	Inst__collapseAlgebraic_0015e494	1	__Unwind_Resume
+15ecf4	15ecf8	millicode	Inst__tryMix	1	
+15f108	15f10c	millicode	Inst__tryMix	1	
+15f2a4	15f2a8	eh-pad	Inst__tryMix	1	__Unwind_Resume
 15fe5c	15fe60	eh-pad	FUN_0015f44c	1	__Unwind_Resume
 161550	161554	millicode	FUN_00160eb0	1	
 1615f8	1615fc	millicode	FUN_00160eb0	1	
@@ -3428,10 +3428,10 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 184250	18426c	other	FUN_0018413c	7	0x193cc0
 184290	1842b0	eh-pad	FUN_0018413c	8	0x193cc0,__Unwind_Resume
 185878	18587c	eh-pad	FUN_00184ef0	1	__Unwind_Resume
-185c28	185c2c	eh-pad	FUN_001859bc	1	__Unwind_Resume
+185c28	185c2c	eh-pad	Inst__tryDp3Add	1	__Unwind_Resume
 187588	1875a8	other	FUN_00186a88	8	
 189764	18976c	millicode	FUN_001896f8	2	
-1897f8	1897fc	millicode	KhanPs__vslot66	1	
+1897f8	1897fc	millicode	KhanPs__vslot66_callHelper189788	1	
 18a528	18a548	eh-pad	R300SchedModel__vslot28	8	0x193cc0,__Unwind_Resume
 18a68c	18a690	eh-pad	R300SchedModel__vslot28	1	__Unwind_Resume
 18e13c	18e164	other	R300SchedModel__vslot13	10	0x193cc0
@@ -3475,7 +3475,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 19de30	19de50	eh-pad	R520VMachineAssembler__init	8	0x193cc0,__Unwind_Resume
 19df28	19df3c	eh-pad	MachineAssembler__dtor_19deb0	5	0x19b91c,__Unwind_Resume
 19dfcc	19dfe0	eh-pad	MachineAssembler__dtor_19df54	5	0x19b91c,__Unwind_Resume
-19ef4c	19ef50	millicode	FudoPs__vslot96	1	
+19ef4c	19ef50	millicode	FudoPs__vslot96_installHardwareTables	1	
 19fcc4	19fccc	millicode	R520MachineAssembler__beginNextRecord	2	
 1a1094	1a10ac	table	evaluateConstantComparison	6	
 1a1974	1a198c	table	R520MachineAssembler__vslot74_setPredicateSetDestination	6	
@@ -3514,9 +3514,9 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 1cec00	1cec50	other	IRCmp1S__getKindName	20	
 1cec6c	1cecc0	other	IRLoopStart__getKindName	21	
 1cffec	1d0000	other	HwLimits__deleting_dtor	5	
-1d0020	1d0070	other	HwLimits__vslot7	20	
-1d0090	1d014c	other	HwLimits__vslot40	47	
-1d016c	1d01b0	other	HwLimits__vslot70	17	
+1d0020	1d0070	other	HwLimits__vslot7_initInterpolatorTypeDescriptor	20	
+1d0090	1d014c	other	HwLimits__vslot40_initTypeDescriptorB	47	
+1d016c	1d01b0	other	HwLimits__vslot70_initExportValueTypeDescriptor	17	
 1d01f8	1d0208	other	HwChip__deleting_dtor	4	
 1d0250	1d0278	other	OpcodeInfo__deleting_dtor	10	
 1d0398	1d05b0	other	IrAddFloat__vslot5	134	

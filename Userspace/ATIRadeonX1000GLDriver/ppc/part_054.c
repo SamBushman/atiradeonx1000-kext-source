@@ -349,9 +349,9 @@ int R520MachineAssembler__vslot23_emitTexRecord(this, inst, blockArg, compiler)
 {
   bool bVar1;
   undefined1 uVar2;
-  int *a0;
-  int iVar3;
-  int *piVar4;
+  int *src1Inst;
+  int src1IsMix;
+  int *effectiveSrc1;
   undefined2 uVar7;
   int iVar5;
   byte bVar8;
@@ -360,7 +360,7 @@ int R520MachineAssembler__vslot23_emitTexRecord(this, inst, blockArg, compiler)
   uint uVar9;
   undefined4 unaff_r21;
   undefined4 unaff_r22;
-  int *piVar11;
+  int *mixInst;
   int loopRemaining;
   int iVar13;
   undefined4 uVar14;
@@ -373,26 +373,26 @@ int R520MachineAssembler__vslot23_emitTexRecord(this, inst, blockArg, compiler)
   uint local_40;
   uint local_3c [3];
   
-  a0 = (int *)IRInst__getOperandSource(inst,1);
-  iVar3 = (**(code **)(*a0 + 0x60))(a0);
-  if (iVar3 != 0) {
-    loopRemaining = IRInst__getOperandRecord(a0,1);
+  src1Inst = (int *)IRInst__getOperandSource(inst,1);
+  src1IsMix = (**(code **)(*src1Inst + 0x60))(src1Inst);
+  if (src1IsMix != 0) {
+    loopRemaining = IRInst__getOperandRecord(src1Inst,1);
     uVar6 = *(undefined4 *)(loopRemaining + 0x10);
     loopRemaining = IRInst__getOperandRecord(inst,1);
     unaff_r22 = *(undefined4 *)(loopRemaining + 0x10);
     FUN_000f2bdc(&local_48,uVar6,unaff_r22);
-    piVar4 = (int *)IRInst__getOperandSource(a0,1);
-    IRInst__setOperandSource(inst,1,piVar4,0,compiler);
-    loopRemaining = IRInst__getOperandRecord(a0,1);
+    effectiveSrc1 = (int *)IRInst__getOperandSource(src1Inst,1);
+    IRInst__setOperandSource(inst,1,effectiveSrc1,0,compiler);
+    loopRemaining = IRInst__getOperandRecord(src1Inst,1);
     uVar6 = *(undefined4 *)(loopRemaining + 0x10);
     loopRemaining = IRInst__getOperandRecord(inst,1);
     *(undefined4 *)(loopRemaining + 0x10) = uVar6;
     unaff_r21 = local_48;
-    piVar11 = a0;
+    mixInst = src1Inst;
   }
   else {
-    piVar11 = (int *)0x0;
-    piVar4 = a0;
+    mixInst = (int *)0x0;
+    effectiveSrc1 = src1Inst;
   }
   uVar7 = (**(code **)(*this + 0x158))(this,inst,1,compiler);
   *(undefined4 *)(this[0x18] * 0x48 + this[0x2a]) = 2;
@@ -411,7 +411,7 @@ int R520MachineAssembler__vslot23_emitTexRecord(this, inst, blockArg, compiler)
     *(undefined2 *)(this[0x18] * 0x48 + this[0x2a] + 0xc) = 0;
     *(undefined4 *)(this[0x2b] + 0x9370) = 1;
   }
-  iVar5 = (**(code **)(*piVar4 + 0x80))(piVar4);
+  iVar5 = (**(code **)(*effectiveSrc1 + 0x80))(effectiveSrc1);
   if (iVar5 == 0) {
     *(undefined4 *)(iVar13 * 4 + this[0x2b] + 0x9378) = 1;
   }
@@ -531,30 +531,30 @@ LAB_001a20d4:
     uVar7 = thunk_FUN_00134de8(uVar14,uVar6);
     *(undefined2 *)(iVar13 * 0x48 + loopRemaining + 0x12) = uVar7;
   }
-  if (iVar3 != 0) {
-    iVar3 = 0;
+  if (src1IsMix != 0) {
+    src1IsMix = 0;
     loopRemaining = 4;
     do {
-      *(undefined4 *)(iVar3 + (int)local_78) = 0;
-      *(undefined4 *)(iVar3 + (int)local_58) = 0;
-      *(undefined4 *)(iVar3 + (int)local_68) = 0;
-      iVar3 = iVar3 + 4;
+      *(undefined4 *)(src1IsMix + (int)local_78) = 0;
+      *(undefined4 *)(src1IsMix + (int)local_58) = 0;
+      *(undefined4 *)(src1IsMix + (int)local_68) = 0;
+      src1IsMix = src1IsMix + 4;
       loopRemaining = loopRemaining + -1;
     } while (loopRemaining != 0);
     (**(code **)(*this + 0xf8))(this,1,local_58,local_78,0,unaff_r21);
-    (**(code **)(*this + 0x108))(this,1,local_78,piVar11,unaff_r22);
-    (**(code **)(*this + 0x10c))(this,1,local_68,piVar11,unaff_r22);
-    IRInst__setOperandSource(inst,1,piVar11,0,compiler);
-    iVar3 = IRInst__getOperandRecord(inst,1);
-    *(undefined4 *)(iVar3 + 0x10) = unaff_r22;
-    iVar3 = this[0x18] * 0x48 + this[0x2a];
-    *(uint *)(iVar3 + 0x14) = (local_78[1] & 3) << 0x16 | *(uint *)(iVar3 + 0x14) & 0xff3fffff;
-    iVar3 = this[0x18] * 0x48 + this[0x2a];
-    *(uint *)(iVar3 + 0x14) = (local_78[1] & 0x18) << 0x11 | *(uint *)(iVar3 + 0x14) & 0xffcfffff;
-    iVar3 = this[0x18] * 0x48 + this[0x2a];
-    *(uint *)(iVar3 + 0x14) = (local_78[1] & 0xc0) << 0xc | *(uint *)(iVar3 + 0x14) & 0xfff3ffff;
-    iVar3 = this[0x18] * 0x48 + this[0x2a];
-    *(uint *)(iVar3 + 0x14) = (local_68[1] & 0x600) << 7 | *(uint *)(iVar3 + 0x14) & 0xfffcffff;
+    (**(code **)(*this + 0x108))(this,1,local_78,mixInst,unaff_r22);
+    (**(code **)(*this + 0x10c))(this,1,local_68,mixInst,unaff_r22);
+    IRInst__setOperandSource(inst,1,mixInst,0,compiler);
+    src1IsMix = IRInst__getOperandRecord(inst,1);
+    *(undefined4 *)(src1IsMix + 0x10) = unaff_r22;
+    src1IsMix = this[0x18] * 0x48 + this[0x2a];
+    *(uint *)(src1IsMix + 0x14) = (local_78[1] & 3) << 0x16 | *(uint *)(src1IsMix + 0x14) & 0xff3fffff;
+    src1IsMix = this[0x18] * 0x48 + this[0x2a];
+    *(uint *)(src1IsMix + 0x14) = (local_78[1] & 0x18) << 0x11 | *(uint *)(src1IsMix + 0x14) & 0xffcfffff;
+    src1IsMix = this[0x18] * 0x48 + this[0x2a];
+    *(uint *)(src1IsMix + 0x14) = (local_78[1] & 0xc0) << 0xc | *(uint *)(src1IsMix + 0x14) & 0xfff3ffff;
+    src1IsMix = this[0x18] * 0x48 + this[0x2a];
+    *(uint *)(src1IsMix + 0x14) = (local_68[1] & 0x600) << 7 | *(uint *)(src1IsMix + 0x14) & 0xfffcffff;
   }
   return;
 }

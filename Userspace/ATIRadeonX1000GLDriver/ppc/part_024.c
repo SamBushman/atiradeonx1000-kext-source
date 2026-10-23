@@ -464,8 +464,8 @@ int FUN_000ec920(param_1)
   return;
 }
 
-/* KhanVs__vslot17 @ 0xeca10 (192 bytes) */
-int KhanVs__vslot17(this, param_2)
+/* KhanVs__vslot17_isSimpleInst @ 0xeca10 (192 bytes) */
+int KhanVs__vslot17_isSimpleInst(this, param_2)
   undefined4 this;
   int *param_2;
 {
@@ -482,8 +482,8 @@ int KhanVs__vslot17(this, param_2)
   return uVar2 ^ 1;
 }
 
-/* KhanPs__vslot17 @ 0xecad0 (192 bytes) */
-int KhanPs__vslot17(this, param_2)
+/* KhanPs__vslot17_isSimpleInst @ 0xecad0 (192 bytes) */
+int KhanPs__vslot17_isSimpleInst(this, param_2)
   undefined4 this;
   int *param_2;
 {
@@ -718,8 +718,8 @@ int FUN_000ed124(param_1)
   return;
 }
 
-/* HwLimits__vslot43 @ 0xed29c (264 bytes) */
-int HwLimits__vslot43(this, inst, param_3, compiler)
+/* HwLimits__vslot43_prependDefaultMov @ 0xed29c (264 bytes) */
+int HwLimits__vslot43_prependDefaultMov(this, inst, param_3, compiler)
   undefined4 this;
   int inst;
   undefined4 param_3;
@@ -4113,8 +4113,8 @@ int FUN_000f2d08(param_1)
 asm(".globl FUN_000ebff8");
 asm(".set FUN_000ebff8, _ContinueBlock__clone");
 asm(".globl FUN_000eca10");
-asm(".set FUN_000eca10, _KhanVs__vslot17");
+asm(".set FUN_000eca10, _KhanVs__vslot17_isSimpleInst");
 asm(".globl FUN_000ecad0");
-asm(".set FUN_000ecad0, _KhanPs__vslot17");
+asm(".set FUN_000ecad0, _KhanPs__vslot17_isSimpleInst");
 asm(".globl FUN_000ed29c");
-asm(".set FUN_000ed29c, _HwLimits__vslot43");
+asm(".set FUN_000ed29c, _HwLimits__vslot43_prependDefaultMov");

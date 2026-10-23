@@ -5731,8 +5731,8 @@ int FUN_00184cd8(param_1, param_2, param_3)
   return uVar3;
 }
 
-/* FUN_00184d7c @ 0x184d7c (372 bytes) */
-int FUN_00184d7c(param_1, param_2)
+/* Inst__splitAndMerge @ 0x184d7c (372 bytes) */
+int Inst__splitAndMerge(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
@@ -5782,7 +5782,7 @@ int FUN_00184d7c(param_1, param_2)
           puVar2 = (undefined4 *)Vector__elementRefGrow(puVar5,loopIndex);
         }
         loopIndex = loopIndex + 1;
-        FUN_0014b82c(*puVar2,param_2,1,0);
+        Inst__collapseAlgebraic_0014b82c(*puVar2,param_2,1,0);
         puVar5 = *(uint **)(param_1 + 0x10);
         uVar1 = puVar5[1];
       } while ((int)loopIndex < (int)uVar1);
@@ -6160,8 +6160,8 @@ LAB_00185964:
   return uVar8;
 }
 
-/* FUN_001859bc @ 0x1859bc (640 bytes) */
-int FUN_001859bc(inst, param_2, param_3)
+/* Inst__tryDp3Add @ 0x1859bc (640 bytes) */
+int Inst__tryDp3Add(inst, param_2, param_3)
   int inst;
   int param_2;
   undefined4 param_3;
