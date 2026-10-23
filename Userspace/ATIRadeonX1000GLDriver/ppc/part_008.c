@@ -174,8 +174,8 @@ int glWriteMaskEXT_impl(ctx, resultId, sourceId, enableX, enableY, enableZ, enab
   return;
 }
 
-/* glExtractComponentEXT_impl @ 0x54270 (308 bytes) */
-int glExtractComponentEXT_impl(ctx, resultId, sourceId, componentIndex)
+/* glInsertComponentEXT_impl @ 0x54270 (308 bytes) */
+int glInsertComponentEXT_impl(ctx, resultId, sourceId, componentIndex)
   int ctx;
   undefined4 resultId;
   undefined4 sourceId;
@@ -220,8 +220,8 @@ int glExtractComponentEXT_impl(ctx, resultId, sourceId, componentIndex)
   return;
 }
 
-/* glInsertComponentEXT_impl @ 0x543b0 (164 bytes) */
-int glInsertComponentEXT_impl(ctx, resultId, sourceId, componentIndex)
+/* glExtractComponentEXT_impl @ 0x543b0 (164 bytes) */
+int glExtractComponentEXT_impl(ctx, resultId, sourceId, componentIndex)
   int ctx;
   undefined4 resultId;
   undefined4 sourceId;

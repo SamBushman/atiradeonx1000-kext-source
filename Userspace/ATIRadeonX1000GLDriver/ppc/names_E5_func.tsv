@@ -8,8 +8,8 @@ func	FUN_00053f00	glShaderOp1EXT_impl	INFERRED	when a shader is open (ctx+0x1170
 func	FUN_00053f80	glShaderOp2EXT_impl	INFERRED	as ShaderOp1 with a second source
 func	FUN_00054000	glShaderOp3EXT_impl	INFERRED	as ShaderOp1 with two more sources
 func	FUN_000541a0	glWriteMaskEXT_impl	INFERRED	four enable arguments each < 2 copied to a local array and passed with pseudo-opcode 0x879b to extvsAppendInstruction
-func	FUN_00054270	glExtractComponentEXT_impl	INFERRED	component number < 4; appends pseudo-opcode 0x879c and rewrites the last instruction's source swizzle words for a vector result
-func	FUN_000543b0	glInsertComponentEXT_impl	INFERRED	component number < 4; appends pseudo-opcode 0x879d and stores the component into the last instruction record (+0x34 from its end)
+func	FUN_00054270	glInsertComponentEXT_impl	CONFIRMED	component number < 4; appends pseudo-opcode 0x879c and, when the RESULT operand (record+4) is a vector (0x87bf), zeroes every destination write-enable word except the chosen component: res[num] = src (corrected in round 5; formerly named Extract)
+func	FUN_000543b0	glExtractComponentEXT_impl	CONFIRMED	component number < 4; appends pseudo-opcode 0x879d and stores only the component index at record-0x34; its emitter evsEmitOp879d replicates one SOURCE component: res = src[num] (corrected in round 5; formerly named Insert)
 func	FUN_000547f0	glSetLocalConstantEXT_impl	INFERRED	GL data type argument checked in 0x1400..0x140a, symbol looked up by id must have storage 0x87c3 (LOCAL_CONSTANT) and not be state-bound; copies the values into the symbol's data
 func	FUN_00053340	glGenSymbolsEXT_impl	CONFIRMED	argument checks: datatype 0x87be..0x87c0 (SCALAR/VECTOR/MATRIX), storage 0x87c1..0x87c4, range 0x87e0/0x87e1 (NORMALIZED/FULL_RANGE_EXT), then extvsCreateSymbol per requested symbol
 func	FUN_00053220	extvsGetOrCreateStateSymbol	INFERRED	hash lookup (index & 0x7c) of a state-bound symbol list; when absent creates a symbol (range 0x87e1), sets +0x44 bound flag, +0x48 state enum, +0x4c index and links it

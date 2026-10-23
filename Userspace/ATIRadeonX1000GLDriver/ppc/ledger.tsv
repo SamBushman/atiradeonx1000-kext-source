@@ -486,8 +486,8 @@
 0x54000	128	glShaderOp3EXT_impl	part_008	converted
 0x54080	276	FUN_00054080	part_008	converted
 0x541a0	196	glWriteMaskEXT_impl	part_008	converted
-0x54270	308	glExtractComponentEXT_impl	part_008	converted
-0x543b0	164	glInsertComponentEXT_impl	part_008	converted
+0x54270	308	glInsertComponentEXT_impl	part_008	converted
+0x543b0	164	glExtractComponentEXT_impl	part_008	converted
 0x54460	8	FUN_00054460	part_008	converted
 0x54470	272	FUN_00054470	part_008	converted
 0x54590	288	FUN_00054590	part_008	converted

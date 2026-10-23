@@ -16,7 +16,7 @@ ctx+0xc/+0x10/+0x18 = malloc/calloc/free hooks, ctx+0x1344 = memcpy hook, ctx+0x
 * object table: extvsFindShaderIndex (0x53a90), extvsGetShaderById (0x53b00), extvsBindShader (0x53b60: glBindVertexShaderEXT, grows the array by 16),
   extvsDeleteShaderObject (0x53de0) behind glDeleteVertexShaderEXT_impl (0x53ef0).
 * GL entry points (all test the open byte ctx+0x1170 first): glShaderOp1/2/3EXT_impl (0x53f00/0x53f80/0x54000, all through extvsAppendInstruction 0x553c0),
-  glWriteMaskEXT_impl (0x541a0, four enables each < 2), glExtractComponentEXT_impl (0x54270) / glInsertComponentEXT_impl (0x543b0) (component < 4;
+  glWriteMaskEXT_impl (0x541a0, four enables each < 2), glInsertComponentEXT_impl (0x54270) / glExtractComponentEXT_impl (0x543b0) (component < 4;
   which of the two is which rests on what each writes into the instruction, tier INFERRED), glSetLocalConstantEXT_impl (0x547f0, storage 0x87c3),
   glGenSymbolsEXT_impl (0x53340, arguments validated against datatype 0x87be-0x87c0, storage 0x87c1-0x87c4, range 0x87e0/0x87e1).
 * symbols: 0x54-byte records in a list {+4 records, +8 index array, +0xc count}; extvsCreateSymbol (0x55610), extvsSymbolListGetIndex (0x54da0),

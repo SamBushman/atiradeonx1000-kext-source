@@ -487,8 +487,8 @@
 0x54000	glShaderOp3EXT_impl	128	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x54080	FUN_00054080	276	yes	
 0x541a0	glWriteMaskEXT_impl	196	yes	
-0x54270	glExtractComponentEXT_impl	308	yes	
-0x543b0	glInsertComponentEXT_impl	164	yes	
+0x54270	glInsertComponentEXT_impl	308	yes	
+0x543b0	glExtractComponentEXT_impl	164	yes	
 0x54460	FUN_00054460	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x54470	FUN_00054470	272	no	indirect call (driver context / vtable / callback)
 0x54590	FUN_00054590	288	yes	

@@ -44,11 +44,7 @@ glBindProgram (0xa0380, targets 0x8620 / 0x8804), glDeleteProgramsARB (0xa0d70),
 hardware op argument of `extvsEncodeSourceOperand` matches the op (1 dot, 2 mul, 3 add, 4 mad, 6 frc, 7 max, 8 min, 9 sge, 10 slt, 5 dst-vector,
 0xd mova conversion; math-engine ops flagged with the extra argument 1: 1 expp, 2 logp, 6 rcp, 0xb exp, 0xc log).
 
-**Possible swap in earlier names.** `glExtractComponentEXT_impl` (0x54270) passes opcode 0x879c and zeroes the destination write enables except the
-chosen component itself; `glInsertComponentEXT_impl` (0x543b0) passes 0x879d and stores the component number at instruction+0x40. The evs emitter
-for 0x879d (FUN_00074ed0) uses +0x40 to replicate one SOURCE component (what an extract does) and the one for 0x879c (FUN_00075060) rebuilds the
-DESTINATION write enables (what an insert does). By GL semantics the two impl names look swapped; I named the emitters by opcode
-(`evsEmitOp879c/879d`, `extvsEmitOp879c/879d`) and left the impl names alone.
+**Swap in earlier names - FIXED (round 5, after I3).** The names `glExtractComponentEXT_impl` / `glInsertComponentEXT_impl` were swapped. 0x54270 (opcode 0x879c) requires the result operand to be a vector (0x87bf) and zeroes all destination write-enable words except the chosen component: that is **Insert**. 0x543b0 (opcode 0x879d) stores only the component index and its emitter (`evsEmitOp879d`) replicates one source component: that is **Extract**. The names are now `glInsertComponentEXT_impl` = 0x54270 and `glExtractComponentEXT_impl` = 0x543b0.
 
 ### 5. Program-record emitters and accessors (CONFIRMED layout)
 

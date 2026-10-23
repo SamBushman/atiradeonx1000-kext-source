@@ -1105,8 +1105,8 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 53ffc	54000	padding	glShaderOp2EXT_impl	1	
 54194	541a0	padding	FUN_00054080	3	
 54264	54270	padding	glWriteMaskEXT_impl	3	
-543a4	543b0	padding	glExtractComponentEXT_impl	3	
-54454	54460	padding	glInsertComponentEXT_impl	3	
+543a4	543b0	padding	glInsertComponentEXT_impl	3	
+54454	54460	padding	glExtractComponentEXT_impl	3	
 54468	54470	padding	FUN_00054460	2	
 544f8	54500	padding	FUN_00054470	2	
 54588	54590	padding	FUN_00054470	2	

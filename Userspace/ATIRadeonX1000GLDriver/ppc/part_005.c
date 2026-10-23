@@ -9566,19 +9566,19 @@ LAB_0003c9b8:
         case 0xd:
           FUN_00054080(ctx,hwProgram[0x18],local_70[0],0x87d9,0x87da,0x87db,0x87dc);
           glShaderOp2EXT_impl(ctx,0x878a,hwProgram[0x19],local_70[0],hwProgram[0x18]);
-          glInsertComponentEXT_impl(ctx,hwProgram[0x10],hwProgram[0x19],0);
+          glExtractComponentEXT_impl(ctx,hwProgram[0x10],hwProgram[0x19],0);
           uVar26 = hwProgram[0x11];
           uVar9 = hwProgram[0x10];
           uVar7 = 0x8795;
           goto LAB_0003cdec;
         case 0xe:
-          glInsertComponentEXT_impl(ctx,hwProgram[0x10],local_70[0],0);
+          glExtractComponentEXT_impl(ctx,hwProgram[0x10],local_70[0],0);
           uVar26 = hwProgram[0x11];
           uVar9 = hwProgram[0x10];
           uVar7 = 0x8794;
           goto LAB_0003cdec;
         case 0x10:
-          glInsertComponentEXT_impl(ctx,hwProgram[0x10],local_70[0],0);
+          glExtractComponentEXT_impl(ctx,hwProgram[0x10],local_70[0],0);
           uVar26 = hwProgram[0x11];
           uVar9 = hwProgram[0x10];
           uVar7 = 0x8791;
@@ -9587,7 +9587,7 @@ LAB_0003c9b8:
           glShaderOp1EXT_impl(ctx,0x87a0,iVar3,local_70[0]);
           break;
         case 0x13:
-          glInsertComponentEXT_impl(ctx,hwProgram[0x10],local_70[0],0);
+          glExtractComponentEXT_impl(ctx,hwProgram[0x10],local_70[0],0);
           uVar26 = hwProgram[0x11];
           uVar9 = hwProgram[0x10];
           uVar7 = 0x8792;
@@ -9636,8 +9636,8 @@ LAB_0003cdec:
           glShaderOp2EXT_impl(ctx,0x878d,iVar3,local_70[0],local_70[1]);
           break;
         case 0x38:
-          glInsertComponentEXT_impl(ctx,hwProgram[0x10],local_70[0],0);
-          glInsertComponentEXT_impl(ctx,hwProgram[0x11],uVar7,0);
+          glExtractComponentEXT_impl(ctx,hwProgram[0x10],local_70[0],0);
+          glExtractComponentEXT_impl(ctx,hwProgram[0x11],uVar7,0);
           glShaderOp2EXT_impl(ctx,0x8793,hwProgram[0x12],hwProgram[0x10],hwProgram[0x11]);
           glShaderOp1EXT_impl(ctx,0x8799,iVar3,hwProgram[0x12]);
           break;
@@ -9658,7 +9658,7 @@ LAB_0003cdec:
           }
           break;
         case 0x48:
-          glInsertComponentEXT_impl(ctx,iVar3,local_70[0],0);
+          glExtractComponentEXT_impl(ctx,iVar3,local_70[0],0);
         }
         if (((operandWord & 0x1e000) != 0x1e000) && (!bVar1)) {
           glWriteMaskEXT_impl(ctx,iVar17,iVar3,operandWord >> 0xd & 1,operandWord >> 0xe & 1,operandWord >> 0xf & 1,
