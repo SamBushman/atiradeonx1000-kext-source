@@ -1,0 +1,6 @@
+# use	FUNCTION	old	new	tier	evidence	from	to	first	last   (machine-written: webs named by the API their definitions call; #L = lines after the declarations, +N = lines to the end line)
+use	_byte_scan	iVar9	cppContext	INFERRED	loaded from the global PTR__cpp, whose +0x20 object supplies the allocator-style vtable calls (+8 / +0xc) used throughout the function	^\s*iVar9\ =\ \*\(int\ \*\)PTR__cpp_a7b7c0a4;$@1	+247	all	all
+use	_byte_scan	iVar9	result	INFERRED	receives the value returned by _lFloatConst and is returned	^\s*iVar9\ =\ \(\(int\ \(\*\)\(\)\)_lFloatConst\)\(param_2\ \+\ 3,iVar10,a1,param_2\);$@1	+1	all	all
+use	_byte_scan	iVar9	cppContext	INFERRED	loaded from the global PTR__cpp, whose +0x20 object supplies the allocator-style vtable calls (+8 / +0xc) used throughout the function	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)\(iVar9\ \+\ 0x20\)\ \+\ 8\)\)\(\*\(int\ \*\)\(iVar9\ \+\ 0x20\),param_2\);$@13	+144	all	all
+use	GetBuiltInInitialSwizzle	iVar3	nameLength	CONFIRMED	loaded from symbol+0x20 and counted down by the hash loop	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x20\);$@1	+12	all	all
+use	GetBuiltInInitialSwizzle	iVar3	fieldValue	INFERRED	constant returned/stored after the hash switch	^\s*iVar3\ =\ 0x17e48;$@1	+140	all	all

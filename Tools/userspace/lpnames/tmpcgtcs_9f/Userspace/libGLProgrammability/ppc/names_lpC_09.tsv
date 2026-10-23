@@ -1,0 +1,245 @@
+local	ParseSymbol	bVar1	isNotMatrix	INFERRED	type is not a matrix (bit 10 clear): component count is the nominal size, not its square
+local	ParseSymbol	dVar19	i2dBias	INFERRED	magic double (2^52 or 2^52 + 2^31) subtracted in the int-to-float conversion
+local	ParseSymbol	iVar11	levelsBeginOrVariable	INFERRED	symbol table level vector start, then the TVariable found by the level search (same Ghidra variable)
+use	ParseSymbol	iVar12	resultArray	INFERRED	w1 traverser unionArray (+0x34) being filled; w2 symbol->getSymbol() TString (vtable +0x60)	^\s*iVar12\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x34\);$	+1
+use	ParseSymbol	iVar12	resultArray	INFERRED	w1 traverser unionArray (+0x34) being filled; w2 symbol->getSymbol() TString (vtable +0x60)	^\s*\*\(undefined4\ \*\)\(iVar12\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x30\)\ \*\ 4\)\ =$	+1
+use	ParseSymbol	iVar12	resultArray	INFERRED	w1 traverser unionArray (+0x34) being filled; w2 symbol->getSymbol() TString (vtable +0x60)	^\s*\*\(float\ \*\)\(iVar12\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x30\)\ \*\ 4\)\ =$	+1
+use	ParseSymbol	iVar12	resultArray	INFERRED	w1 traverser unionArray (+0x34) being filled; w2 symbol->getSymbol() TString (vtable +0x60)	^\s*\*\(uint\ \*\)\(iVar12\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x30\)\ \*\ 4\)\ =$	+1
+use	ParseSymbol	iVar12	resultArray	INFERRED	w1 traverser unionArray (+0x34) being filled; w2 symbol->getSymbol() TString (vtable +0x60)	^\s*\*\(int\ \*\)\(\*\(int\ \*\)\(param_2\ \+\ 0x30\)\ \*\ 4\ \+\ iVar12\)\ =\ iVar8;$	+1
+use	ParseSymbol	iVar12	resultArray	INFERRED	w1 traverser unionArray (+0x34) being filled; w2 symbol->getSymbol() TString (vtable +0x60)	^\s*\*\(uint\ \*\)\(\*\(int\ \*\)\(param_2\ \+\ 0x30\)\ \*\ 4\ \+\ iVar12\)\ =$	+1
+use	ParseSymbol	iVar12	symbolName	INFERRED	w1 traverser unionArray (+0x34) being filled; w2 symbol->getSymbol() TString (vtable +0x60)	^\s*iVar12\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_1\ \+\ 0x60\)\)\(param_1\);$	+5
+use	ParseSymbol	iVar13	instanceSize	INFERRED	constant component count of the constructed type (structure size, or vector/matrix size)	^\s*iVar13\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x54\);$	+1
+use	ParseSymbol	iVar13	instanceSize	INFERRED	constant component count of the constructed type (structure size, or vector/matrix size)	^\s*iVar13\ =\ \(int\)\(uVar10\ <<\ 0xd\ \|\ uVar10\ >>\ 0x13\)\ >>\ 0x18;$	+1
+use	ParseSymbol	iVar13	instanceSize	INFERRED	constant component count of the constructed type (structure size, or vector/matrix size)	^\s*iVar13\ =\ \(int\)\(uVar10\ <<\ 0xd\ \|\ uVar10\ >>\ 0x13\)\ >>\ 0x18;$@2	+2
+use	ParseSymbol	iVar13	instanceSize	INFERRED	constant component count of the constructed type (structure size, or vector/matrix size)	^\s*if\ \(\*\(int\ \*\)\(param_2\ \+\ 0x30\)\ <\ iVar13\)\ \{$	+1
+use	ParseSymbol	iVar13	instanceSize	INFERRED	constant component count of the constructed type (structure size, or vector/matrix size)	^\s*if\ \(iVar13\ <=\ \*\(int\ \*\)\(param_2\ \+\ 0x30\)\)\ \{$	+1
+local	ParseSymbol	iVar14	componentIndex	INFERRED	component of the symbol constant being copied
+use	ParseSymbol	iVar16	level	INFERRED	w1 level pointer; w2 variable basic type; w3 constant component count of the variable	^\s*iVar16\ =\ \*\(int\ \*\)\(iVar11\ \+\ iVar17\ \*\ 4\);$	+1
+use	ParseSymbol	iVar16	level	INFERRED	w1 level pointer; w2 variable basic type; w3 constant component count of the variable	^\s*std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______find\(\(unsigned\ char\ \*\)local_60,iVar16,uVar6\);$	+2
+use	ParseSymbol	iVar16	variableBasicType	INFERRED	w1 level pointer; w2 variable basic type; w3 constant component count of the variable	^\s*iVar16\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)\(iVar11\ \+\ 0xc\)\ \+\ 0x20\)\)\(a0,\(int\)uVar20\);$	+2
+use	ParseSymbol	iVar16	componentCount	INFERRED	w1 level pointer; w2 variable basic type; w3 constant component count of the variable	^\s*iVar16\ =\ \*\(int\ \*\)\(iVar11\ \+\ 0x24\);$	+1
+use	ParseSymbol	iVar16	componentCount	INFERRED	w1 level pointer; w2 variable basic type; w3 constant component count of the variable	^\s*iVar16\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)\(iVar11\ \+\ 0xc\)\ \+\ 0x30\)\)\(a0\);$	+1
+use	ParseSymbol	iVar16	componentCount	INFERRED	w1 level pointer; w2 variable basic type; w3 constant component count of the variable	^\s*if\ \(iVar16\ <\ 1\)\ \{$	+1
+use	ParseSymbol	iVar16	componentCount	INFERRED	w1 level pointer; w2 variable basic type; w3 constant component count of the variable	^\s*if\ \(iVar16\ <=\ iVar14\)\ \{$	+1
+use	ParseSymbol	iVar17	levelIndex	INFERRED	w1 level counted down; w2 component count of the variable type; w3 the variable's constant union array	^\s*iVar17\ =\ \(piVar3\[1\]\ \-\ iVar11\ >>\ 2\)\ \+\ \-1;$	+1
+use	ParseSymbol	iVar17	levelIndex	INFERRED	w1 level counted down; w2 component count of the variable type; w3 the variable's constant union array	^\s*iVar16\ =\ \*\(int\ \*\)\(iVar11\ \+\ iVar17\ \*\ 4\);$	+1
+use	ParseSymbol	iVar17	levelIndex	INFERRED	w1 level counted down; w2 component count of the variable type; w3 the variable's constant union array	^\s*iVar17\ =\ iVar17\ \+\ \-1;$	+2
+use	ParseSymbol	iVar17	objectSize	INFERRED	w1 level counted down; w2 component count of the variable type; w3 the variable's constant union array	^\s*iVar17\ =\ \(int\)\(uVar10\ <<\ 0xd\ \|\ uVar10\ >>\ 0x13\)\ >>\ 0x18;$	+1
+use	ParseSymbol	iVar17	objectSize	INFERRED	w1 level counted down; w2 component count of the variable type; w3 the variable's constant union array	^\s*iVar17\ =\ \(int\)\(uVar10\ <<\ 0xd\ \|\ uVar10\ >>\ 0x13\)\ >>\ 0x18;$@2	+2
+use	ParseSymbol	iVar17	objectSize	INFERRED	w1 level counted down; w2 component count of the variable type; w3 the variable's constant union array	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar11\ \+\ 0x24\);$	+1
+use	ParseSymbol	iVar17	objectSize	INFERRED	w1 level counted down; w2 component count of the variable type; w3 the variable's constant union array	^\s*uVar20\ =\ TPoolAllocator__allocate\(this,iVar17\ <<\ 2\);$	+1
+use	ParseSymbol	iVar17	constArray	INFERRED	w1 level counted down; w2 component count of the variable type; w3 the variable's constant union array	^\s*iVar17\ =\ \(int\)\(\(ulonglong\)uVar20\ >>\ 0x20\);$	+2
+use	ParseSymbol	iVar17	constArray	INFERRED	w1 level counted down; w2 component count of the variable type; w3 the variable's constant union array	^\s*\*\(undefined4\ \*\)\(iVar14\ \*\ 4\ \+\ iVar17\);$	+1
+use	ParseSymbol	iVar17	constArray	INFERRED	w1 level counted down; w2 component count of the variable type; w3 the variable's constant union array	^\s*uStack_4c\ =\ \*\(uint\ \*\)\(iVar14\ \*\ 4\ \+\ iVar17\)\ \^\ 0x80000000;$	+1
+use	ParseSymbol	iVar17	constArray	INFERRED	w1 level counted down; w2 component count of the variable type; w3 the variable's constant union array	^\s*\(uint\)\(\*\(int\ \*\)\(iVar14\ \*\ 4\ \+\ iVar17\)\ !=\ 0\);$	+1
+use	ParseSymbol	iVar17	constArray	INFERRED	w1 level counted down; w2 component count of the variable type; w3 the variable's constant union array	^\s*iVar8\ =\ \(int\)\*\(float\ \*\)\(iVar14\ \*\ 4\ \+\ iVar17\);$	+1
+use	ParseSymbol	iVar17	constArray	INFERRED	w1 level counted down; w2 component count of the variable type; w3 the variable's constant union array	^\s*\(uint\)\(\(double\)\*\(float\ \*\)\(iVar14\ \*\ 4\ \+\ iVar17\)\ !=\ DOUBLE_97c30a48\);$	+1
+use	ParseSymbol	iVar17	constArray	INFERRED	w1 level counted down; w2 component count of the variable type; w3 the variable's constant union array	^\s*uStack_4c\ =\ \*\(uint\ \*\)\(iVar14\ \*\ 4\ \+\ iVar17\);$	+1
+use	ParseSymbol	iVar8	componentSrcBasicType	INFERRED	w1 variable type getBasicType() (vtable +0x20); w2 float component converted to int	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)\(iVar11\ \+\ 0xc\)\ \+\ 0x20\)\)\(a0\);$	+2
+use	ParseSymbol	iVar8	componentSrcBasicType	INFERRED	w1 variable type getBasicType() (vtable +0x20); w2 float component converted to int	^\s*if\ \(iVar8\ <\ 3\)\ \{$	+2
+use	ParseSymbol	iVar8	componentSrcBasicType	INFERRED	w1 variable type getBasicType() (vtable +0x20); w2 float component converted to int	^\s*else\ if\ \(iVar8\ ==\ 3\)\ \{$	+1
+use	ParseSymbol	iVar8	intValue	INFERRED	w1 variable type getBasicType() (vtable +0x20); w2 float component converted to int	^\s*iVar8\ =\ \(int\)\*\(float\ \*\)\(iVar14\ \*\ 4\ \+\ iVar17\);$	+3
+local	ParseSymbol	local_50	i2dHi	INFERRED	high word 0x43300000 of the int-to-double conversion constant
+local	ParseSymbol	uStack_4c	i2dLo	INFERRED	low word of the int-to-double conversion constant
+local	ParseSymbol	local_58	d2iScratch	INFERRED	float-to-int conversion scratch (fctiwz result)
+local	ParseSymbol	local_60	findResult	INFERRED	std::pair<iterator,bool> returned by the level map find
+local	ParseSymbol	local_b0	destroyAllocatorArg	INFERRED	allocator argument for _Rep::_M_destroy of the type string
+use	ParseSymbol	piVar3	levelsVector	INFERRED	symbol table level vector (traverser +0x70)	^\s*piVar3\ =\ \*\(int\ \*\*\)\(param_2\ \+\ 0x70\);$	+1
+use	ParseSymbol	piVar3	levelsVector	INFERRED	symbol table level vector (traverser +0x70)	^\s*iVar11\ =\ \*piVar3;$	+2
+use	ParseSymbol	piVar3	levelsVector	INFERRED	symbol table level vector (traverser +0x70)	^\s*iVar11\ =\ \*piVar3;$@2	+1
+use	ParseSymbol	ppuVar4	refCountPtr2	INFERRED	std::string rep refcount pointer decremented after an error text is appended	^\s*ppuVar4\ =\ local_1b0\ \+\ \-1;$	+1
+use	ParseSymbol	ppuVar4	refCountPtr2	INFERRED	std::string rep refcount pointer decremented after an error text is appended	^\s*puVar5\ =\ \*ppuVar4;$	+1
+use	ParseSymbol	ppuVar4	refCountPtr2	INFERRED	std::string rep refcount pointer decremented after an error text is appended	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar5\ \+\ \-1,0,ppuVar4\);$	+2
+use	ParseSymbol	ppuVar4	refCountPtr2	INFERRED	std::string rep refcount pointer decremented after an error text is appended	^\s*ppuVar4\ =\ local_1b0\ \+\ \-1;$@2	+1
+use	ParseSymbol	ppuVar4	refCountPtr2	INFERRED	std::string rep refcount pointer decremented after an error text is appended	^\s*puVar5\ =\ \*ppuVar4;$@2	+1
+use	ParseSymbol	ppuVar4	refCountPtr2	INFERRED	std::string rep refcount pointer decremented after an error text is appended	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar5\ \+\ \-1,0,ppuVar4\);$@2	+2
+use	ParseSymbol	pvVar15	infoSink	INFERRED	traverser infoSink (+0x6c) the error is appended to	^\s*pvVar15\ =\ \*\(void\ \*\*\)\(param_2\ \+\ 0x6c\);$	+1
+use	ParseSymbol	pvVar15	infoSink	INFERRED	traverser infoSink (+0x6c) the error is appended to	^\s*pvVar15\ =\ \*\(void\ \*\*\)\(param_2\ \+\ 0x6c\);$@2	+1
+use	ParseSymbol	pvVar15	infoSink	INFERRED	traverser infoSink (+0x6c) the error is appended to	^\s*pvVar15\ =\ \*\(void\ \*\*\)\(param_2\ \+\ 0x6c\);$@3	+1
+use	ParseSymbol	pvVar15	infoSink	INFERRED	traverser infoSink (+0x6c) the error is appended to	^\s*pvVar15\ =\ \*\(void\ \*\*\)\(param_2\ \+\ 0x6c\);$@4	+1
+use	ParseSymbol	pvVar15	infoSink	INFERRED	traverser infoSink (+0x6c) the error is appended to	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar15,"INTERNAL\ ERROR:\ "\);$	+1
+use	ParseSymbol	pvVar15	infoSink	INFERRED	traverser infoSink (+0x6c) the error is appended to	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar15,\(char\ \*\)local_1b0\);$	+1
+use	ParseSymbol	pvVar15	infoSink	INFERRED	traverser infoSink (+0x6c) the error is appended to	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar15,":\ "\);$	+3
+use	ParseSymbol	pvVar15	infoSink	INFERRED	traverser infoSink (+0x6c) the error is appended to	^\s*pvVar15\ =\ \*\(void\ \*\*\)\(param_2\ \+\ 0x6c\);$@5	+1
+use	ParseSymbol	pvVar15	infoSink	INFERRED	traverser infoSink (+0x6c) the error is appended to	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar15,"ERROR:\ "\);$	+1
+use	ParseSymbol	pvVar15	infoSink	INFERRED	traverser infoSink (+0x6c) the error is appended to	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar15,apcStack_e0\[0\]\);$	+1
+use	ParseSymbol	pvVar15	infoSink	INFERRED	traverser infoSink (+0x6c) the error is appended to	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar15,":\ "\);$@2	+1
+use	ParseSymbol	pvVar15	infoSink	INFERRED	traverser infoSink (+0x6c) the error is appended to	^\s*pvVar15\ =\ \*\(void\ \*\*\)\(param_2\ \+\ 0x6c\);$@6	+1
+use	ParseSymbol	pvVar15	infoSink	INFERRED	traverser infoSink (+0x6c) the error is appended to	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar15,"ERROR:\ "\);$@2	+1
+use	ParseSymbol	pvVar15	infoSink	INFERRED	traverser infoSink (+0x6c) the error is appended to	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar15,\(char\ \*\)local_1b0\);$@2	+1
+use	ParseSymbol	pvVar15	infoSink	INFERRED	traverser infoSink (+0x6c) the error is appended to	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar15,":\ "\);$@3	+1
+use	ParseSymbol	pvVar15	infoSink	INFERRED	traverser infoSink (+0x6c) the error is appended to	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar15,\(char\ \*\)pppuVar9\);$	+2
+use	ParseSymbol	uVar10	traverserTypeBits	INFERRED	w1 traverser type bit-field word (+0x60); w2 variable type bits; basic type of the constructed type; sourceLoc = node getLine() for the internal error	^\s*uVar10\ =\ \*\(uint\ \*\)\(param_2\ \+\ 0x60\);$	+1
+use	ParseSymbol	uVar10	traverserTypeBits	INFERRED	w1 traverser type bit-field word (+0x60); w2 variable type bits; basic type of the constructed type; sourceLoc = node getLine() for the internal error	^\s*if\ \(\(uVar10\ >>\ 0x13\ \&\ 0x3f\)\ ==\ 0xe\)\ \{$	+1
+use	ParseSymbol	uVar10	traverserTypeBits	INFERRED	w1 traverser type bit-field word (+0x60); w2 variable type bits; basic type of the constructed type; sourceLoc = node getLine() for the internal error	^\s*bVar1\ =\ \(uVar10\ \&\ 0x400\)\ ==\ 0;$	+1
+use	ParseSymbol	uVar10	traverserTypeBits	INFERRED	w1 traverser type bit-field word (+0x60); w2 variable type bits; basic type of the constructed type; sourceLoc = node getLine() for the internal error	^\s*iVar13\ =\ \(int\)\(uVar10\ <<\ 0xd\ \|\ uVar10\ >>\ 0x13\)\ >>\ 0x18;$	+1
+use	ParseSymbol	uVar10	traverserTypeBits	INFERRED	w1 traverser type bit-field word (+0x60); w2 variable type bits; basic type of the constructed type; sourceLoc = node getLine() for the internal error	^\s*iVar13\ =\ \(int\)\(uVar10\ <<\ 0xd\ \|\ uVar10\ >>\ 0x13\)\ >>\ 0x18;$@2	+1
+use	ParseSymbol	uVar10	variableTypeBits	INFERRED	w1 traverser type bit-field word (+0x60); w2 variable type bits; basic type of the constructed type; sourceLoc = node getLine() for the internal error	^\s*uVar10\ =\ \*\(uint\ \*\)\(iVar11\ \+\ 0x30\);$	+3
+use	ParseSymbol	uVar10	variableTypeBits	INFERRED	w1 traverser type bit-field word (+0x60); w2 variable type bits; basic type of the constructed type; sourceLoc = node getLine() for the internal error	^\s*iVar17\ =\ \(int\)\(uVar10\ <<\ 0xd\ \|\ uVar10\ >>\ 0x13\)\ >>\ 0x18;$@2	+1
+use	ParseSymbol	uVar10	traverserBasicType	INFERRED	w1 traverser type bit-field word (+0x60); w2 variable type bits; basic type of the constructed type; sourceLoc = node getLine() for the internal error	^\s*uVar10\ =\ \*\(uint\ \*\)\(param_2\ \+\ 0x60\)\ >>\ 0x13\ \&\ 0x3f;$	+2
+use	ParseSymbol	uVar10	traverserBasicType	INFERRED	w1 traverser type bit-field word (+0x60); w2 variable type bits; basic type of the constructed type; sourceLoc = node getLine() for the internal error	^\s*uVar10\ =\ \*\(uint\ \*\)\(param_2\ \+\ 0x60\)\ >>\ 0x13\ \&\ 0x3f;$@2	+2
+use	ParseSymbol	uVar10	traverserBasicType	INFERRED	w1 traverser type bit-field word (+0x60); w2 variable type bits; basic type of the constructed type; sourceLoc = node getLine() for the internal error	^\s*if\ \(uVar10\ !=\ 3\)\ \{$	+1
+use	ParseSymbol	uVar10	sourceLoc	INFERRED	w1 traverser type bit-field word (+0x60); w2 variable type bits; basic type of the constructed type; sourceLoc = node getLine() for the internal error	^\s*uVar10\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)param_1\)\(param_1\);$	+1
+use	ParseSymbol	uVar10	sourceLoc	INFERRED	w1 traverser type bit-field word (+0x60); w2 variable type bits; basic type of the constructed type; sourceLoc = node getLine() for the internal error	^\s*uVar10\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)param_1\)\(param_1\);$@2	+1
+use	ParseSymbol	uVar10	sourceLoc	INFERRED	w1 traverser type bit-field word (+0x60); w2 variable type bits; basic type of the constructed type; sourceLoc = node getLine() for the internal error	^\s*uVar10\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)param_1\)\(param_1\);$@3	+1
+use	ParseSymbol	uVar10	sourceLoc	INFERRED	w1 traverser type bit-field word (+0x60); w2 variable type bits; basic type of the constructed type; sourceLoc = node getLine() for the internal error	^\s*uVar10\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)param_1\)\(param_1\);$@4	+1
+use	ParseSymbol	uVar10	sourceLoc	INFERRED	w1 traverser type bit-field word (+0x60); w2 variable type bits; basic type of the constructed type; sourceLoc = node getLine() for the internal error	^\s*uVar7\ =\ uVar10\ \&\ 0xffff;$	+1
+use	ParseSymbol	uVar10	sourceLoc	INFERRED	w1 traverser type bit-field word (+0x60); w2 variable type bits; basic type of the constructed type; sourceLoc = node getLine() for the internal error	^\s*_sprintf\(\(char\ \*\)aaStack_1a0,"%d:\?\ ",\(int\)uVar10\ >>\ 0x10\);$	+1
+use	ParseSymbol	uVar10	sourceLoc	INFERRED	w1 traverser type bit-field word (+0x60); w2 variable type bits; basic type of the constructed type; sourceLoc = node getLine() for the internal error	^\s*_sprintf\(\(char\ \*\)aaStack_1a0,"%d:%d",\(int\)uVar10\ >>\ 0x10,uVar7\);$	+1
+use	ParseSymbol	uVar10	traverserBasicType	INFERRED	w1 traverser type bit-field word (+0x60); w2 variable type bits; basic type of the constructed type; sourceLoc = node getLine() for the internal error	^\s*uVar10\ =\ \*\(uint\ \*\)\(param_2\ \+\ 0x60\)\ >>\ 0x13\ \&\ 0x3f;$@3	+2
+use	ParseSymbol	uVar10	traverserBasicType	INFERRED	w1 traverser type bit-field word (+0x60); w2 variable type bits; basic type of the constructed type; sourceLoc = node getLine() for the internal error	^\s*if\ \(uVar10\ !=\ 3\)\ \{$@2	+1
+use	ParseSymbol	uVar10	traverserBasicType	INFERRED	w1 traverser type bit-field word (+0x60); w2 variable type bits; basic type of the constructed type; sourceLoc = node getLine() for the internal error	^\s*uVar10\ =\ \*\(uint\ \*\)\(param_2\ \+\ 0x60\)\ >>\ 0x13\ \&\ 0x3f;$@4	+2
+use	ParseSymbol	uVar10	traverserBasicType	INFERRED	w1 traverser type bit-field word (+0x60); w2 variable type bits; basic type of the constructed type; sourceLoc = node getLine() for the internal error	^\s*if\ \(uVar10\ !=\ 2\)\ \{$	+1
+use	ParseSymbol	uVar10	sourceLoc	INFERRED	w1 traverser type bit-field word (+0x60); w2 variable type bits; basic type of the constructed type; sourceLoc = node getLine() for the internal error	^\s*uVar10\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)param_1\)\(param_1\);$@5	+1
+use	ParseSymbol	uVar10	sourceLoc	INFERRED	w1 traverser type bit-field word (+0x60); w2 variable type bits; basic type of the constructed type; sourceLoc = node getLine() for the internal error	^\s*uVar7\ =\ uVar10\ \&\ 0xffff;$@2	+1
+use	ParseSymbol	uVar10	sourceLoc	INFERRED	w1 traverser type bit-field word (+0x60); w2 variable type bits; basic type of the constructed type; sourceLoc = node getLine() for the internal error	^\s*_sprintf\(acStack_d0,"%d:\?\ ",\(int\)uVar10\ >>\ 0x10\);$	+1
+use	ParseSymbol	uVar10	sourceLoc	INFERRED	w1 traverser type bit-field word (+0x60); w2 variable type bits; basic type of the constructed type; sourceLoc = node getLine() for the internal error	^\s*_sprintf\(acStack_d0,"%d:%d",\(int\)uVar10\ >>\ 0x10,uVar7\);$	+1
+use	ParseSymbol	uVar10	sourceLoc	INFERRED	w1 traverser type bit-field word (+0x60); w2 variable type bits; basic type of the constructed type; sourceLoc = node getLine() for the internal error	^\s*uVar10\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)param_1\)\(param_1\);$@6	+1
+use	ParseSymbol	uVar10	sourceLoc	INFERRED	w1 traverser type bit-field word (+0x60); w2 variable type bits; basic type of the constructed type; sourceLoc = node getLine() for the internal error	^\s*uVar7\ =\ uVar10\ \&\ 0xffff;$@3	+1
+use	ParseSymbol	uVar10	sourceLoc	INFERRED	w1 traverser type bit-field word (+0x60); w2 variable type bits; basic type of the constructed type; sourceLoc = node getLine() for the internal error	^\s*_sprintf\(acStack_a0,"%d:\?\ ",\(int\)uVar10\ >>\ 0x10\);$	+1
+use	ParseSymbol	uVar10	sourceLoc	INFERRED	w1 traverser type bit-field word (+0x60); w2 variable type bits; basic type of the constructed type; sourceLoc = node getLine() for the internal error	^\s*_sprintf\(acStack_a0,"%d:%d",\(int\)uVar10\ >>\ 0x10,uVar7\);$	+1
+local	ParseSymbol	uVar20	constArrayAlloc	INFERRED	TPoolAllocator__allocate 64-bit result pair (array pointer in the high word)
+local	ParseSymbol	uVar6	symbolNameString	INFERRED	symbol->getSymbol() TString passed to the level find
+use	ParseSymbol	uVar7	variableBasicTypeU	INFERRED	w1 variable basic type compared with the constructed type; others sourceLoc & 0xffff	^\s*uVar7\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)\(iVar11\ \+\ 0xc\)\ \+\ 0x20\)\)\(a0\);$	+1
+use	ParseSymbol	uVar7	variableBasicTypeU	INFERRED	w1 variable basic type compared with the constructed type; others sourceLoc & 0xffff	^\s*if\ \(\(uVar7\ ==\ uVar10\)\ \|\|\ \(uVar10\ ==\ 0xe\)\)\ \{$	+1
+use	ParseSymbol	uVar7	lineInString	INFERRED	w1 variable basic type compared with the constructed type; others sourceLoc & 0xffff	^\s*uVar7\ =\ uVar10\ \&\ 0xffff;$	+3
+use	ParseSymbol	uVar7	lineInString	INFERRED	w1 variable basic type compared with the constructed type; others sourceLoc & 0xffff	^\s*_sprintf\(\(char\ \*\)aaStack_1a0,"%d:%d",\(int\)uVar10\ >>\ 0x10,uVar7\);$	+1
+use	ParseSymbol	uVar7	lineInString	INFERRED	w1 variable basic type compared with the constructed type; others sourceLoc & 0xffff	^\s*uVar7\ =\ uVar10\ \&\ 0xffff;$@2	+3
+use	ParseSymbol	uVar7	lineInString	INFERRED	w1 variable basic type compared with the constructed type; others sourceLoc & 0xffff	^\s*_sprintf\(acStack_d0,"%d:%d",\(int\)uVar10\ >>\ 0x10,uVar7\);$	+1
+use	ParseSymbol	uVar7	lineInString	INFERRED	w1 variable basic type compared with the constructed type; others sourceLoc & 0xffff	^\s*uVar7\ =\ uVar10\ \&\ 0xffff;$@3	+3
+use	ParseSymbol	uVar7	lineInString	INFERRED	w1 variable basic type compared with the constructed type; others sourceLoc & 0xffff	^\s*_sprintf\(acStack_a0,"%d:%d",\(int\)uVar10\ >>\ 0x10,uVar7\);$	+1
+local	ParseBinary	param_1	preVisit	INFERRED	traversal visit flag
+local	ParseBinary	local_70	destroyAllocatorArg	INFERRED	allocator argument for _Rep::_M_destroy of the type string
+use	ParseBinary	ppuVar4	refCountPtr2	INFERRED	std::string rep refcount pointer decremented after an error text is appended	^\s*ppuVar4\ =\ local_170\ \+\ \-1;$	+1
+use	ParseBinary	ppuVar4	refCountPtr2	INFERRED	std::string rep refcount pointer decremented after an error text is appended	^\s*puVar6\ =\ \*ppuVar4;$	+1
+use	ParseBinary	ppuVar4	refCountPtr2	INFERRED	std::string rep refcount pointer decremented after an error text is appended	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar6\ \+\ \-1,0,ppuVar4\);$	+2
+use	ParseBinary	ppuVar4	refCountPtr2	INFERRED	std::string rep refcount pointer decremented after an error text is appended	^\s*ppuVar4\ =\ local_170\ \+\ \-1;$@2	+1
+use	ParseBinary	ppuVar4	refCountPtr2	INFERRED	std::string rep refcount pointer decremented after an error text is appended	^\s*puVar6\ =\ \*ppuVar4;$@2	+1
+use	ParseBinary	ppuVar4	refCountPtr2	INFERRED	std::string rep refcount pointer decremented after an error text is appended	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar6\ \+\ \-1,0,ppuVar4\);$@2	+2
+use	ParseBinary	pvVar9	infoSink	INFERRED	traverser infoSink (+0x6c) the error is appended to	^\s*pvVar9\ =\ \*\(void\ \*\*\)\(param_3\ \+\ 0x6c\);$	+1
+use	ParseBinary	pvVar9	infoSink	INFERRED	traverser infoSink (+0x6c) the error is appended to	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar9,"INTERNAL\ ERROR:\ "\);$	+1
+use	ParseBinary	pvVar9	infoSink	INFERRED	traverser infoSink (+0x6c) the error is appended to	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar9,\(char\ \*\)local_170\);$	+1
+use	ParseBinary	pvVar9	infoSink	INFERRED	traverser infoSink (+0x6c) the error is appended to	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar9,":\ "\);$	+3
+use	ParseBinary	pvVar9	infoSink	INFERRED	traverser infoSink (+0x6c) the error is appended to	^\s*pvVar9\ =\ \*\(void\ \*\*\)\(param_3\ \+\ 0x6c\);$@2	+1
+use	ParseBinary	pvVar9	infoSink	INFERRED	traverser infoSink (+0x6c) the error is appended to	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar9,"ERROR:\ "\);$	+1
+use	ParseBinary	pvVar9	infoSink	INFERRED	traverser infoSink (+0x6c) the error is appended to	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar9,\(char\ \*\)local_170\);$@2	+1
+use	ParseBinary	pvVar9	infoSink	INFERRED	traverser infoSink (+0x6c) the error is appended to	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar9,":\ "\);$@2	+3
+use	ParseBinary	uVar7	sourceLoc	INFERRED	node getLine()	^\s*uVar7\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)param_2\)\(param_2\);$	+1
+use	ParseBinary	uVar7	sourceLoc	INFERRED	node getLine()	^\s*uVar8\ =\ uVar7\ \&\ 0xffff;$	+1
+use	ParseBinary	uVar7	sourceLoc	INFERRED	node getLine()	^\s*_sprintf\(\(char\ \*\)aaStack_160,"%d:\?\ ",\(int\)uVar7\ >>\ 0x10\);$	+1
+use	ParseBinary	uVar7	sourceLoc	INFERRED	node getLine()	^\s*_sprintf\(\(char\ \*\)aaStack_160,"%d:%d",\(int\)uVar7\ >>\ 0x10,uVar8\);$	+1
+use	ParseBinary	uVar7	sourceLoc	INFERRED	node getLine()	^\s*uVar7\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)param_2\)\(param_2\);$@2	+1
+use	ParseBinary	uVar7	sourceLoc	INFERRED	node getLine()	^\s*uVar8\ =\ uVar7\ \&\ 0xffff;$@2	+1
+use	ParseBinary	uVar7	sourceLoc	INFERRED	node getLine()	^\s*_sprintf\(acStack_60,"%d:\?\ ",\(int\)uVar7\ >>\ 0x10\);$	+1
+use	ParseBinary	uVar7	sourceLoc	INFERRED	node getLine()	^\s*_sprintf\(acStack_60,"%d:%d",\(int\)uVar7\ >>\ 0x10,uVar8\);$	+1
+use	ParseBinary	uVar8	lineInString	INFERRED	sourceLoc & 0xffff	^\s*uVar8\ =\ uVar7\ \&\ 0xffff;$	+3
+use	ParseBinary	uVar8	lineInString	INFERRED	sourceLoc & 0xffff	^\s*_sprintf\(\(char\ \*\)aaStack_160,"%d:%d",\(int\)uVar7\ >>\ 0x10,uVar8\);$	+1
+use	ParseBinary	uVar8	lineInString	INFERRED	sourceLoc & 0xffff	^\s*uVar8\ =\ uVar7\ \&\ 0xffff;$@2	+3
+use	ParseBinary	uVar8	lineInString	INFERRED	sourceLoc & 0xffff	^\s*_sprintf\(acStack_60,"%d:%d",\(int\)uVar7\ >>\ 0x10,uVar8\);$	+1
+local	ParseUnary	param_1	preVisit	INFERRED	traversal visit flag
+local	ParseUnary	local_80	destroyAllocatorArg	INFERRED	allocator argument for _Rep::_M_destroy of the type string
+local	ParseUnary	local_8c	typeStringChars	INFERRED	character pointer of typeString
+local	ParseUnary	local_90	typeString	INFERRED	TType::getCompleteString result
+local	ParseUnary	uVar4	sourceLoc	INFERRED	node getLine()
+local	ParseSelection	param_1	preVisit	INFERRED	traversal visit flag
+local	ParseSelection	uVar4	sourceLoc	INFERRED	node getLine()
+local	ParseLoop	param_1	preVisit	INFERRED	traversal visit flag
+local	ParseLoop	uVar4	sourceLoc	INFERRED	node getLine()
+local	ParseBranch	param_1	preVisit	INFERRED	traversal visit flag
+local	ParseBranch	uVar4	sourceLoc	INFERRED	node getLine()
+local	ParseAggregate	param_1	preVisit	INFERRED	traversal visit flag
+local	ParseAggregate	param_4	scratchR6	UNKNOWN	register leftover forwarded through the vtable calls
+local	ParseAggregate	param_5	scratchR7	UNKNOWN	register leftover forwarded through the vtable calls
+local	ParseAggregate	param_6	scratchR8	UNKNOWN	register leftover forwarded through the vtable calls
+local	ParseAggregate	bVar1	singleConstantParam	INFERRED	the aggregate has exactly one child and it is a constant: constructor argument is a scalar broadcast
+use	ParseAggregate	iVar3	sequence	INFERRED	aggregate->getSequence() (vtable +100); first child getAsConstantUnion(); constant count of the type	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_2\ \+\ 100\)\)\(param_2,\(int\)uVar8\);$	+2
+use	ParseAggregate	iVar3	sequence	INFERRED	aggregate->getSequence() (vtable +100); first child getAsConstantUnion(); constant count of the type	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_2\ \+\ 100\)\)\(param_2\);$	+2
+use	ParseAggregate	iVar3	sequence	INFERRED	aggregate->getSequence() (vtable +100); first child getAsConstantUnion(); constant count of the type	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_2\ \+\ 100\)\)\(param_2\);$@2	+2
+use	ParseAggregate	iVar3	sequence	INFERRED	aggregate->getSequence() (vtable +100); first child getAsConstantUnion(); constant count of the type	^\s*\(\(int\ \*\)\*\*\(undefined4\ \*\*\)\(iVar3\ \+\ 4\),a1,a2,param_4,param_5,param_6$	+2
+use	ParseAggregate	iVar3	firstChildConstUnion	INFERRED	aggregate->getSequence() (vtable +100); first child getAsConstantUnion(); constant count of the type	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar2\ \+\ 0x18\)\)\(piVar2\);$	+2
+use	ParseAggregate	iVar3	objectSize	INFERRED	aggregate->getSequence() (vtable +100); first child getAsConstantUnion(); constant count of the type	^\s*iVar3\ =\ \(int\)\(local_10c\ <<\ 0xd\ \|\ local_10c\ >>\ 0x13\)\ >>\ 0x18;$	+1
+use	ParseAggregate	iVar3	objectSize	INFERRED	aggregate->getSequence() (vtable +100); first child getAsConstantUnion(); constant count of the type	^\s*iVar3\ =\ \(int\)\(local_10c\ <<\ 0xd\ \|\ local_10c\ >>\ 0x13\)\ >>\ 0x18;$@2	+2
+use	ParseAggregate	iVar3	objectSize	INFERRED	aggregate->getSequence() (vtable +100); first child getAsConstantUnion(); constant count of the type	^\s*\*\(int\ \*\)\(param_3\ \+\ 0x78\)\ =\ iVar3;$	+1
+use	ParseAggregate	iVar3	sequence	INFERRED	aggregate->getSequence() (vtable +100); first child getAsConstantUnion(); constant count of the type	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_2\ \+\ 100\)\)\(param_2\);$@3	+4
+use	ParseAggregate	iVar5	firstChildVtable	INFERRED	vtable of the first child	^\s*iVar5\ =\ \*\(int\ \*\)\*\*\(undefined4\ \*\*\)\(iVar3\ \+\ 4\);$	+4
+local	ParseAggregate	local_10c	typeTemp2Bits	INFERRED	bit-field word (+0x24) of the TType temp at local_130
+local	ParseAggregate	local_118	typeTemp2StructureSize	INFERRED	structure size (+0x18) of the TType temp at local_130
+local	ParseAggregate	local_130	typeTemp2	INFERRED	second getType() temp
+local	ParseAggregate	local_13c	typeTemp1Bits	INFERRED	bit-field word (+0x24) of the TType temp at local_160
+local	ParseAggregate	local_160	typeTemp1	INFERRED	first getType() temp
+local	ParseAggregate	local_80	destroyAllocatorArg	INFERRED	allocator argument for _Rep::_M_destroy of the type string
+local	ParseAggregate	local_8c	typeStringChars	INFERRED	character pointer of typeString
+local	ParseAggregate	local_90	typeString	INFERRED	TType::getCompleteString result
+use	ParseAggregate	piVar2	firstChildTyped	INFERRED	first child's getAsTyped()	^\s*piVar2\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(iVar5\ \+\ 0x14\)\)$	+1
+use	ParseAggregate	piVar2	firstChildTyped	INFERRED	first child's getAsTyped()	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar2\ \+\ 0x18\)\)\(piVar2\);$	+1
+local	ParseAggregate	puVar6	childCursor	INFERRED	iterator over the aggregate sequence
+local	ParseAggregate	uVar4	sourceLoc	INFERRED	node getLine()
+local	ParseAggregate	uVar8	isConstructorResult	INFERRED	TIntermOperator::isConstructor() 64-bit result (flag in the high word)
+local	FUN_97b9907c	bVar1	columnIsZero	INFERRED	sourceLoc & 0xffff == 0: print "string:?" instead of "string:line"
+local	FUN_97b99274	bVar1	columnIsZero	INFERRED	sourceLoc & 0xffff == 0: print "string:?" instead of "string:line"
+local	FUN_97b9989c	bVar1	columnIsZero	INFERRED	sourceLoc & 0xffff == 0: print "string:?" instead of "string:line"
+local	FUN_97b99eb8	bVar1	columnIsZero	INFERRED	sourceLoc & 0xffff == 0: print "string:?" instead of "string:line"
+local	FUN_97b9a04c	bVar1	columnIsZero	INFERRED	sourceLoc & 0xffff == 0: print "string:?" instead of "string:line"
+local	ParseConstantUnion	param_3	scratchR5	UNKNOWN	register leftover forwarded through the vtable calls
+local	ParseConstantUnion	param_4	scratchR6	UNKNOWN	register leftover forwarded through the vtable calls
+local	ParseConstantUnion	param_5	scratchR7	UNKNOWN	register leftover forwarded through the vtable calls
+local	ParseConstantUnion	param_6	scratchR8	UNKNOWN	register leftover forwarded through the vtable calls
+local	ParseConstantUnion	bVar1	typeTemp3Live	INFERRED	third stack TType temp constructed (needs its destructor store)
+local	ParseConstantUnion	bVar2	typeTemp2Live	INFERRED	second stack TType temp constructed (needs its destructor store)
+local	ParseConstantUnion	bVar3	typeTempLive	INFERRED	first extra stack TType temp constructed (needs its destructor store)
+local	ParseConstantUnion	bVar4	advanceSource	INFERRED	node object size > 1: step to the next source component
+local	ParseConstantUnion	iVar5	nodeObjectSizeB	INFERRED	constant component count of the node (size, squared for a matrix)
+local	ParseConstantUnion	iVar9	matrixSize	INFERRED	traverser matrixSize (+0x80): column count of the matrix being constructed
+local	ParseConstantUnion	iVar10	totalSize	INFERRED	first index + constructor size: end of the range to fill
+local	ParseConstantUnion	iVar11	instanceSize	INFERRED	constant component count of the constructed type
+use	ParseConstantUnion	iVar12	resultArray	INFERRED	w1 traverser unionArray (+0x34); w2 constant component count of the node; w3 matrix fill loop index	^\s*iVar12\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x34\);$	+1
+use	ParseConstantUnion	iVar12	resultArray	INFERRED	w1 traverser unionArray (+0x34); w2 constant component count of the node; w3 matrix fill loop index	^\s*\*\(undefined4\ \*\)\(iVar12\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x30\)\ \*\ 4\)\ =\ uVar8;$	+1
+use	ParseConstantUnion	iVar12	resultArray	INFERRED	w1 traverser unionArray (+0x34); w2 constant component count of the node; w3 matrix fill loop index	^\s*puVar14\ =\ \(undefined4\ \*\)\(iVar13\ \*\ 4\ \+\ iVar12\);$	+1
+use	ParseConstantUnion	iVar12	resultArray	INFERRED	w1 traverser unionArray (+0x34); w2 constant component count of the node; w3 matrix fill loop index	^\s*puVar14\ =\ \(undefined4\ \*\)\(iVar13\ \*\ 4\ \+\ iVar12\);$@2	+1
+use	ParseConstantUnion	iVar12	nodeObjectSize	INFERRED	w1 traverser unionArray (+0x34); w2 constant component count of the node; w3 matrix fill loop index	^\s*iVar12\ =\ \(int\)\(local_4c\ <<\ 0xd\ \|\ local_4c\ >>\ 0x13\)\ >>\ 0x18;$	+1
+use	ParseConstantUnion	iVar12	nodeObjectSize	INFERRED	w1 traverser unionArray (+0x34); w2 constant component count of the node; w3 matrix fill loop index	^\s*iVar12\ =\ \(int\)\(local_4c\ <<\ 0xd\ \|\ local_4c\ >>\ 0x13\)\ >>\ 0x18;$@2	+2
+use	ParseConstantUnion	iVar12	nodeObjectSize	INFERRED	w1 traverser unionArray (+0x34); w2 constant component count of the node; w3 matrix fill loop index	^\s*if\ \(1\ <\ iVar12\)\ goto\ LAB_97b99c64;$	+1
+use	ParseConstantUnion	iVar12	fillIndex	INFERRED	w1 traverser unionArray (+0x34); w2 constant component count of the node; w3 matrix fill loop index	^\s*iVar12\ =\ iVar13;$	+1
+use	ParseConstantUnion	iVar12	fillIndex	INFERRED	w1 traverser unionArray (+0x34); w2 constant component count of the node; w3 matrix fill loop index	^\s*if\ \(iVar11\ <=\ iVar12\)\ \{$	+1
+use	ParseConstantUnion	iVar12	fillIndex	INFERRED	w1 traverser unionArray (+0x34); w2 constant component count of the node; w3 matrix fill loop index	^\s*if\ \(\(iVar13\ ==\ iVar12\)\ \|\|$	+2
+use	ParseConstantUnion	iVar12	fillIndex	INFERRED	w1 traverser unionArray (+0x34); w2 constant component count of the node; w3 matrix fill loop index	^\s*iVar12\ =\ iVar12\ \+\ 1;$	+1
+use	ParseConstantUnion	iVar12	fillIndex	INFERRED	w1 traverser unionArray (+0x34); w2 constant component count of the node; w3 matrix fill loop index	^\s*\}\ while\ \(iVar12\ <\ iVar10\);$	+1
+use	ParseConstantUnion	iVar13	startIndex	INFERRED	w1 traverser index (+0x30) at entry / fill start; w2 copy loop counter	^\s*iVar13\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x30\);$	+2
+use	ParseConstantUnion	iVar13	startIndex	INFERRED	w1 traverser index (+0x30) at entry / fill start; w2 copy loop counter	^\s*iVar10\ =\ iVar13\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x78\);$	+1
+use	ParseConstantUnion	iVar13	startIndex	INFERRED	w1 traverser index (+0x30) at entry / fill start; w2 copy loop counter	^\s*if\ \(iVar13\ <\ iVar10\)\ \{$	+2
+use	ParseConstantUnion	iVar13	startIndex	INFERRED	w1 traverser index (+0x30) at entry / fill start; w2 copy loop counter	^\s*if\ \(iVar11\ <=\ iVar13\)\ \{$	+1
+use	ParseConstantUnion	iVar13	startIndex	INFERRED	w1 traverser index (+0x30) at entry / fill start; w2 copy loop counter	^\s*iVar13\ =\ iVar13\ \+\ 1;$@2	+2
+use	ParseConstantUnion	iVar13	startIndex	INFERRED	w1 traverser index (+0x30) at entry / fill start; w2 copy loop counter	^\s*else\ if\ \(iVar13\ <\ iVar10\)\ \{$	+3
+use	ParseConstantUnion	iVar13	startIndex	INFERRED	w1 traverser index (+0x30) at entry / fill start; w2 copy loop counter	^\s*if\ \(\(iVar13\ ==\ iVar12\)\ \|\|$	+2
+use	ParseConstantUnion	iVar13	copyIndex	INFERRED	w1 traverser index (+0x30) at entry / fill start; w2 copy loop counter	^\s*iVar13\ =\ 0;$	+1
+use	ParseConstantUnion	iVar13	copyIndex	INFERRED	w1 traverser index (+0x30) at entry / fill start; w2 copy loop counter	^\s*iVar13\ =\ iVar13\ \+\ 1;$	+1
+use	ParseConstantUnion	iVar13	copyIndex	INFERRED	w1 traverser index (+0x30) at entry / fill start; w2 copy loop counter	^\s*\}\ while\ \(iVar13\ <\ local_e8\);$	+1
+local	ParseConstantUnion	local_130	typeTemp1	INFERRED	first getType() temp
+local	ParseConstantUnion	local_10c	typeTemp1Bits	INFERRED	bit-field word (+0x24) of typeTemp1
+local	ParseConstantUnion	local_100	typeTemp2a	INFERRED	second getType() temp (first variant)
+local	ParseConstantUnion	local_e8	typeTemp2aStructureSize	INFERRED	structure size (+0x18) of typeTemp2a, reused as the node's component count
+local	ParseConstantUnion	local_dc	typeTemp2aBits	INFERRED	bit-field word (+0x24) of typeTemp2a
+local	ParseConstantUnion	local_d0	typeTemp2b	INFERRED	second getType() temp (second variant)
+local	ParseConstantUnion	local_b8	typeTemp2bStructureSize	INFERRED	structure size (+0x18) of typeTemp2b
+local	ParseConstantUnion	local_ac	typeTemp2bBits	INFERRED	bit-field word (+0x24) of typeTemp2b
+local	ParseConstantUnion	local_a0	typeTemp3a	INFERRED	third getType() temp (first variant)
+local	ParseConstantUnion	local_7c	typeTemp3aBits	INFERRED	bit-field word (+0x24) of typeTemp3a
+local	ParseConstantUnion	local_70	typeTemp3b	INFERRED	third getType() temp (second variant)
+local	ParseConstantUnion	local_4c	typeTemp3bBits	INFERRED	bit-field word (+0x24) of typeTemp3b
+use	ParseConstantUnion	puVar14	dstCursor	INFERRED	write pointer into the traverser unionArray at the fill index	^\s*puVar14\ =\ \(undefined4\ \*\)\(iVar13\ \*\ 4\ \+\ iVar12\);$	+1
+use	ParseConstantUnion	puVar14	dstCursor	INFERRED	write pointer into the traverser unionArray at the fill index	^\s*\*puVar14\ =\ \*puVar7;$	+1
+use	ParseConstantUnion	puVar14	dstCursor	INFERRED	write pointer into the traverser unionArray at the fill index	^\s*puVar14\ =\ puVar14\ \+\ 1;$	+1
+use	ParseConstantUnion	puVar14	dstCursor	INFERRED	write pointer into the traverser unionArray at the fill index	^\s*puVar14\ =\ \(undefined4\ \*\)\(iVar13\ \*\ 4\ \+\ iVar12\);$@2	+1
+use	ParseConstantUnion	puVar14	dstCursor	INFERRED	write pointer into the traverser unionArray at the fill index	^\s*\*puVar14\ =\ \*puVar7;$@2	+1
+use	ParseConstantUnion	puVar14	dstCursor	INFERRED	write pointer into the traverser unionArray at the fill index	^\s*\*puVar14\ =\ 0;$	+1
+use	ParseConstantUnion	puVar14	dstCursor	INFERRED	write pointer into the traverser unionArray at the fill index	^\s*puVar14\ =\ puVar14\ \+\ 1;$@2	+1
+use	ParseConstantUnion	puVar7	srcCursor	INFERRED	read pointer into the node's constant union array	^\s*puVar7\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0x30\);$	+1
+use	ParseConstantUnion	puVar7	srcCursor	INFERRED	read pointer into the node's constant union array	^\s*uVar8\ =\ \*puVar7;$	+1
+use	ParseConstantUnion	puVar7	srcCursor	INFERRED	read pointer into the node's constant union array	^\s*puVar7\ =\ puVar7\ \+\ 1;$	+1
+use	ParseConstantUnion	puVar7	srcCursor	INFERRED	read pointer into the node's constant union array	^\s*puVar7\ =\ \*\(undefined4\ \*\*\)\(param_1\ \+\ 0x30\);$@2	+1
+use	ParseConstantUnion	puVar7	srcCursor	INFERRED	read pointer into the node's constant union array	^\s*\*puVar14\ =\ \*puVar7;$	+1
+use	ParseConstantUnion	puVar7	srcCursor	INFERRED	read pointer into the node's constant union array	^\s*puVar7\ =\ puVar7\ \+\ 1;$@2	+1
+use	ParseConstantUnion	puVar7	srcCursor	INFERRED	read pointer into the node's constant union array	^\s*\*puVar14\ =\ \*puVar7;$@2	+1
+use	ParseConstantUnion	puVar7	srcCursor	INFERRED	read pointer into the node's constant union array	^\s*puVar7\ =\ puVar7\ \+\ 1;$@3	+1
+local	ParseConstantUnion	uVar6	traverserTypeBits	INFERRED	traverser type bit-field word (+0x60)
+local	ParseConstantUnion	uVar8	srcValue	INFERRED	constant component copied to the result array

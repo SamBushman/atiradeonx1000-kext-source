@@ -40,7 +40,6 @@ local	TIntermBranch__compileNode	local_88	opAuxA	INFERRED	_PPStreamOperation rec
 local	TIntermBranch__compileNode	local_84	opAuxB	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 11: auxiliary operand second word
 local	TIntermBranch__compileNode	local_80	opLine	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 12: source line, set from TIntermNode vtable slot 0 (getLine)
 local	TIntermBranch__compileNode	local_7c	opLabelLength	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 13: length of the label text passed as the str argument of TPPStreamCompiler::AddOperation (local = _strlen(label))
-local	TIntermLoop__compileNode	iVar17	loopId	CONFIRMED	value of compiler+0x8c (the running label counter) before the increment; appended to gl__WhileBody_/WhileEnd_/WhileStart_/WhileEndIf_ labels
 local	TIntermLoop__compileNode	iVar16	ppStream	CONFIRMED	compiler+0x70: the PPStream receiving operations and labels (_PPStreamAddLabel(ppStream, ...))
 local	TIntermLoop__compileNode	piVar15	operationChunkList	CONFIRMED	*(ppStream+0x20): the operation chunk list whose head is walked to find the last chunk
 local	TIntermLoop__compileNode	acStack_130	whileBodyLabel	CONFIRMED	sprintf("%s%d", "gl__WhileBody_", loopId)
@@ -50,7 +49,6 @@ local	TIntermLoop__compileNode	acStack_d0	whileEndIfLabel	CONFIRMED	sprintf("%s%
 local	TIntermLoop__compileNode	local_60	conditionTemp	INFERRED	ParseOperand* result of TPPStreamCompiler__newTemporary for the loop condition; destroyed after use
 local	TIntermLoop__compileNode	local_5c	conditionOperand	INFERRED	array whose element 0 is the compiled condition expression operand (TIntermNode slot 3 compileNode)
 local	TIntermLoop__compileNode	a5	labelPrefixArg	UNKNOWN	Ghidra argument-register artifact holding the string "gl__WhileEndIf_"
-local	TIntermLoop__compileNode	iVar8	chunkCursorOrTemp	INFERRED	chunk cursor of the operation list walk (next at +8), then the logical-size result
 local	TIntermLoop__compileNode	uVar1	glTypeCode	INFERRED	GL type code (+0x18 or the symbol's +0x2c) mapped by GetPPStreamTypeForGLType
 local	TIntermLoop__compileNode	uVar7	ppStreamType	INFERRED	result of GetPPStreamTypeForGLType (3 bits stored into record flags bits 23..25)
 local	TIntermSelection__compileNode	pcVar10	labelId	CONFIRMED	value of compiler+0x8c before the increment; appended to gl__IfElse_/gl__IfEnd_

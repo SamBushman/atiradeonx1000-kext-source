@@ -1,0 +1,246 @@
+local	TParseContext__error	param_1	this	INFERRED	TParseContext (+8 holds the info sink, +0x18 the error count)
+local	TParseContext__error	param_2	sourceLoc	INFERRED	node source location (string number << 16 | line)
+local	TParseContext__error	param_3	reason	INFERRED	short reason text printed after the token
+local	TParseContext__error	param_5	extraInfoFormat	INFERRED	printf-style format for the extra information
+local	TParseContext__error	param_6	varArg1	INFERRED	first variadic argument, spilled to the va_list area
+local	TParseContext__error	param_7	varArg2	INFERRED	second variadic argument
+local	TParseContext__error	param_8	varArg3	INFERRED	third variadic argument
+local	TParseContext__error	iVar1	atomicStore	INFERRED	atomic refcount store result
+local	TParseContext__error	iVar3	oldRefCount	INFERRED	std::string rep refcount before the decrement
+local	TParseContext__error	piVar2	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the location text is appended
+use	TParseContext__error	pvVar4	infoSink	INFERRED	info sink (this+8) the message is appended to	^\s*pvVar4\ =\ \*\(void\ \*\*\)\(param_1\ \+\ 8\);$	+1
+use	TParseContext__error	pvVar4	infoSink	INFERRED	info sink (this+8) the message is appended to	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar4,apcStack_80\[0\]\);$	+1
+use	TParseContext__error	pvVar4	infoSink	INFERRED	info sink (this+8) the message is appended to	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar4,":\ "\);$	+1
+use	TParseContext__error	pvVar4	infoSink	INFERRED	info sink (this+8) the message is appended to	^\s*pvVar4\ =\ \*\(void\ \*\*\)\(param_1\ \+\ 8\);$@2	+8
+local	FUN_97b9a844	bVar1	columnIsZero	INFERRED	sourceLoc & 0xffff == 0: print "string:?" instead of "string:line"
+local	FUN_97b9a844	param_1	infoSink	INFERRED	info sink the "ERROR: " prefix is appended to
+use	FUN_97b9a844	pvVar5	infoSink2	INFERRED	info sink (this+8) the rest of the message is appended to	^\s*pvVar5\ =\ \*\(void\ \*\*\)\(unaff_r30\ \+\ 8\);$	+1
+use	FUN_97b9a844	pvVar5	infoSink2	INFERRED	info sink (this+8) the rest of the message is appended to	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar5,\(\*\(char\ \*\ \*\)\(\*\(unsigned\ int\ \*\)__builtin_frame_address\(0\)\ \+\ 0x1d0\)\)\);$	+1
+use	FUN_97b9a844	pvVar5	infoSink2	INFERRED	info sink (this+8) the rest of the message is appended to	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar5,\(char\ \*\)\(unaff_r31\ \+\ 0x8e020\)\);$	+1
+use	FUN_97b9a844	pvVar5	infoSink2	INFERRED	info sink (this+8) the rest of the message is appended to	^\s*pvVar5\ =\ \*\(void\ \*\*\)\(unaff_r30\ \+\ 8\);$@2	+8
+local	TParseContext__assignError	param_2	sourceLoc	INFERRED	node source location
+local	TParseContext__assignError	bVar1	terminalChar	INFERRED	std::string::_S_terminal byte stored after text2
+local	TParseContext__assignError	pbVar2	terminalPtr	INFERRED	DAT: address of std::string::_S_terminal
+local	TParseContext__assignError	uVar3	text1Chars	INFERRED	character pointer of text1 (the source type name)
+local	TParseContext__unaryOpError	param_2	sourceLoc	INFERRED	node source location
+local	TParseContext__binaryOpError	param_2	sourceLoc	INFERRED	node source location
+local	TParseContext__binaryOpError	puVar1	terminalPtr	INFERRED	DAT: address of std::string::_S_terminal
+local	TParseContext__binaryOpError	uVar2	text2Chars	INFERRED	character pointer of text2 (the right operand type name)
+local	TParseContext__lValueErrorCheck	param_2	sourceLoc	INFERRED	node source location
+local	TParseContext__lValueErrorCheck	param_5	scratchR7	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__lValueErrorCheck	param_6	scratchR8	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__lValueErrorCheck	param_7	scratchR9	UNKNOWN	register leftover, also reused as scratch (qualifier * 4)
+local	TParseContext__lValueErrorCheck	param_8	scratchR10	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__lValueErrorCheck	bVar1	hasSymbolNode	INFERRED	the l-value operand is a symbol node (error text then names the symbol)
+use	TParseContext__lValueErrorCheck	iVar2	symbolName	INFERRED	w0 symbol->getSymbol() TString; basicType getBasicType() (vtable +0x40); w4 binary node operator (+0x30); swizzle aggregate sequence; w8 how often a swizzle component was seen	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x60\)\)\(piVar3\);$	+1
+use	TParseContext__lValueErrorCheck	iVar2	symbolName	INFERRED	w0 symbol->getSymbol() TString; basicType getBasicType() (vtable +0x40); w4 binary node operator (+0x30); swizzle aggregate sequence; w8 how often a swizzle component was seen	^\s*\*\(byte\ \*\)\(\*\(int\ \*\)\(iVar2\ \+\ 4\)\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar2\ \+\ 4\)\ \+\ \-0xc\)\)\ =\ \*DAT_a7b7ba18;$	+2
+use	TParseContext__lValueErrorCheck	iVar2	basicType	INFERRED	w0 symbol->getSymbol() TString; basicType getBasicType() (vtable +0x40); w4 binary node operator (+0x30); swizzle aggregate sequence; w8 how often a swizzle component was seen	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_4\ \+\ 0x40\)\)$	+1
+use	TParseContext__lValueErrorCheck	iVar2	basicType	INFERRED	w0 symbol->getSymbol() TString; basicType getBasicType() (vtable +0x40); w4 binary node operator (+0x30); swizzle aggregate sequence; w8 how often a swizzle component was seen	^\s*if\ \(iVar2\ \-\ 5U\ <\ 8\)\ \{$	+1
+use	TParseContext__lValueErrorCheck	iVar2	basicType	INFERRED	w0 symbol->getSymbol() TString; basicType getBasicType() (vtable +0x40); w4 binary node operator (+0x30); swizzle aggregate sequence; w8 how often a swizzle component was seen	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_4\ \+\ 0x40\)\)\(param_4\);$	+2
+use	TParseContext__lValueErrorCheck	iVar2	basicType	INFERRED	w0 symbol->getSymbol() TString; basicType getBasicType() (vtable +0x40); w4 binary node operator (+0x30); swizzle aggregate sequence; w8 how often a swizzle component was seen	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_4\ \+\ 0x40\)\)\(param_4\);$@2	+2
+use	TParseContext__lValueErrorCheck	iVar2	binaryOp	INFERRED	w0 symbol->getSymbol() TString; basicType getBasicType() (vtable +0x40); w4 binary node operator (+0x30); swizzle aggregate sequence; w8 how often a swizzle component was seen	^\s*iVar2\ =\ piVar4\[0xc\];$	+3
+use	TParseContext__lValueErrorCheck	iVar2	binaryOp	INFERRED	w0 symbol->getSymbol() TString; basicType getBasicType() (vtable +0x40); w4 binary node operator (+0x30); swizzle aggregate sequence; w8 how often a swizzle component was seen	^\s*if\ \(iVar2\ !=\ 0x30\)\ goto\ LAB_97b9ae0c;$	+1
+use	TParseContext__lValueErrorCheck	iVar2	swizzleSequence	INFERRED	w0 symbol->getSymbol() TString; basicType getBasicType() (vtable +0x40); w4 binary node operator (+0x30); swizzle aggregate sequence; w8 how often a swizzle component was seen	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 100\)\)\(piVar3\);$	+2
+use	TParseContext__lValueErrorCheck	iVar2	swizzleSequence	INFERRED	w0 symbol->getSymbol() TString; basicType getBasicType() (vtable +0x40); w4 binary node operator (+0x30); swizzle aggregate sequence; w8 how often a swizzle component was seen	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 100\)\)\(piVar3\);$@2	+2
+use	TParseContext__lValueErrorCheck	iVar2	componentSeenCount	INFERRED	w0 symbol->getSymbol() TString; basicType getBasicType() (vtable +0x40); w4 binary node operator (+0x30); swizzle aggregate sequence; w8 how often a swizzle component was seen	^\s*iVar2\ =\ local_30\[\*\*\(int\ \*\*\)\(iVar6\ \+\ 0x30\)\];$	+3
+local	TParseContext__lValueErrorCheck	iVar6	componentConstUnion	INFERRED	swizzle element getAsConstantUnion(): its constant is the component index
+local	TParseContext__lValueErrorCheck	local_30	componentSeen	INFERRED	per-component counters of the swizzle (4 components): a count above 1 is a duplicate
+local	TParseContext__lValueErrorCheck	pcVar12	modifyReason	INFERRED	"can't modify a const / an attribute / ..." text
+use	TParseContext__lValueErrorCheck	pcVar8	tokenCopy	INFERRED	w1 copy of the token passed to error; w2 " l-value required"	^\s*pcVar8\ =\ param_3;$	+1
+use	TParseContext__lValueErrorCheck	pcVar8	tokenCopy	INFERRED	w1 copy of the token passed to error; w2 " l-value required"	^\s*uVar7\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_4\ \+\ 0x44\)\)\(param_4,a1,pcVar8,pTVar5,param_5,param_6,param_7\);$	+1
+use	TParseContext__lValueErrorCheck	pcVar8	tokenCopy	INFERRED	w1 copy of the token passed to error; w2 " l-value required"	^\s*\(param_4,a1_00,pcVar8,pTVar5,param_5,param_6,param_7\);$	+1
+use	TParseContext__lValueErrorCheck	pcVar8	errorReason	INFERRED	w1 copy of the token passed to error; w2 " l-value required"	^\s*pcVar8\ =\ "\ l\-value\ required";$	+1
+use	TParseContext__lValueErrorCheck	pcVar8	errorReason	INFERRED	w1 copy of the token passed to error; w2 " l-value required"	^\s*pcVar8\ =\ "\ l\-value\ required";$@2	+1
+use	TParseContext__lValueErrorCheck	pcVar8	errorReason	INFERRED	w1 copy of the token passed to error; w2 " l-value required"	^\s*pcVar8\ =\ "\ l\-value\ of\ swizzle\ cannot\ have\ duplicate\ components";$	+1
+use	TParseContext__lValueErrorCheck	pcVar8	errorReason	INFERRED	w1 copy of the token passed to error; w2 " l-value required"	^\s*error\(\(int\)this,\(char\ \*\)param_2,pcVar8,param_3,pcVar9,pcVar12,param_7,param_8\);$	+1
+local	TParseContext__lValueErrorCheck	pcVar9	extraInfoFormat	INFERRED	extra-info format ("(%s)" / "")
+use	TParseContext__lValueErrorCheck	piVar3	symbolNode	INFERRED	w0 operand->getAsSymbolNode() (vtable +0x28); w1 swizzle component list getAsAggregate()	^\s*piVar3\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_4\ \+\ 0x28\)\)\(param_4\);$	+1
+use	TParseContext__lValueErrorCheck	piVar3	symbolNode	INFERRED	w0 operand->getAsSymbolNode() (vtable +0x28); w1 swizzle component list getAsAggregate()	^\s*bVar1\ =\ piVar3\ !=\ \(int\ \*\)0x0;$	+1
+use	TParseContext__lValueErrorCheck	piVar3	symbolNode	INFERRED	w0 operand->getAsSymbolNode() (vtable +0x28); w1 swizzle component list getAsAggregate()	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x60\)\)\(piVar3\);$	+1
+use	TParseContext__lValueErrorCheck	piVar3	swizzleAggregate	INFERRED	w0 operand->getAsSymbolNode() (vtable +0x28); w1 swizzle component list getAsAggregate()	^\s*piVar3\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x6c\)\)\(piVar4\);$	+3
+use	TParseContext__lValueErrorCheck	piVar3	swizzleAggregate	INFERRED	w0 operand->getAsSymbolNode() (vtable +0x28); w1 swizzle component list getAsAggregate()	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 100\)\)\(piVar3\);$@2	+1
+use	TParseContext__lValueErrorCheck	piVar4	binaryNode	INFERRED	w0 operand->getAsBinaryNode() (vtable +0x20); w1 current swizzle element getAsTyped()	^\s*piVar4\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_4\ \+\ 0x20\)\)\(param_4\);$	+2
+use	TParseContext__lValueErrorCheck	piVar4	binaryNode	INFERRED	w0 operand->getAsBinaryNode() (vtable +0x20); w1 current swizzle element getAsTyped()	^\s*iVar2\ =\ piVar4\[0xc\];$	+1
+use	TParseContext__lValueErrorCheck	piVar4	binaryNode	INFERRED	w0 operand->getAsBinaryNode() (vtable +0x20); w1 current swizzle element getAsTyped()	^\s*pTVar5\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x68\)\)\(piVar4\);$	+1
+use	TParseContext__lValueErrorCheck	piVar4	binaryNode	INFERRED	w0 operand->getAsBinaryNode() (vtable +0x20); w1 current swizzle element getAsTyped()	^\s*pTVar5\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x68\)\)\(piVar4\);$@2	+1
+use	TParseContext__lValueErrorCheck	piVar4	binaryNode	INFERRED	w0 operand->getAsBinaryNode() (vtable +0x20); w1 current swizzle element getAsTyped()	^\s*piVar3\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x6c\)\)\(piVar4\);$	+1
+use	TParseContext__lValueErrorCheck	piVar4	swizzleElement	INFERRED	w0 operand->getAsBinaryNode() (vtable +0x20); w1 current swizzle element getAsTyped()	^\s*piVar4\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)\*puVar10\ \+\ 0x14\)\)\(\(int\ \*\)\*puVar10\);$	+2
+local	TParseContext__lValueErrorCheck	puVar10	elementCursor	INFERRED	iterator over the swizzle aggregate sequence
+local	TParseContext__lValueErrorCheck	uVar11	symbolNameChars	INFERRED	character pointer of the symbol name
+local	TParseContext__lValueErrorCheck	uVar7	qualifier	INFERRED	operand->getQualifier() (vtable +0x44)
+local	TParseContext__constErrorCheck	iVar1	qualifier	INFERRED	operand->getQualifier(): 2 = EvqConst
+local	TParseContext__constErrorCheck	in_r8	scratchR8	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__constErrorCheck	in_r9	scratchR9	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__constErrorCheck	in_r10	scratchR10	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__constErrorCheck	pcVar2	sourceLoc	INFERRED	node getLine() passed to error
+local	TParseContext__integerErrorCheck	iVar1	basicTypeThenSize	INFERRED	operand getBasicType() (compared with int), then getNominalSize() (compared with 1): same Ghidra variable
+local	TParseContext__integerErrorCheck	in_r8	scratchR8	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__integerErrorCheck	in_r9	scratchR9	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__integerErrorCheck	in_r10	scratchR10	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__integerErrorCheck	pcVar2	sourceLoc	INFERRED	node getLine() passed to error
+local	TParseContext__globalErrorCheck	param_2	sourceLoc	INFERRED	source location
+local	TParseContext__globalErrorCheck	param_3	isGlobalScope	INFERRED	nonzero when the declaration is at global scope
+local	TParseContext__globalErrorCheck	param_5	scratchR7	UNKNOWN	register leftover
+local	TParseContext__globalErrorCheck	param_6	scratchR8	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__globalErrorCheck	in_r9	scratchR9	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__globalErrorCheck	in_r10	scratchR10	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__reservedErrorCheck	param_2	sourceLoc	INFERRED	source location
+use	TParseContext__reservedErrorCheck	iVar2	levelCount	INFERRED	w0 number of symbol table levels (skip the check at the first two); w1 string compare result of the name prefix against "gl_"	^\s*iVar2\ =\ \(\*\(int\ \*\*\)\(this\ \+\ 4\)\)\[1\]\ \-\ \*\*\(int\ \*\*\)\(this\ \+\ 4\)\ >>\ 2;$	+2
+use	TParseContext__reservedErrorCheck	iVar2	compareResult	INFERRED	w0 number of symbol table levels (skip the check at the first two); w1 string compare result of the name prefix against "gl_"	^\s*iVar2\ =\ _memcmp\(local_6c,local_7c,\*puVar5\);$	+4
+use	TParseContext__reservedErrorCheck	iVar2	compareResult	INFERRED	w0 number of symbol table levels (skip the check at the first two); w1 string compare result of the name prefix against "gl_"	^\s*if\ \(iVar2\ ==\ 0\)\ \{$@2	+1
+local	TParseContext__reservedErrorCheck	in_r8	scratchR8	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__reservedErrorCheck	in_r10	scratchR10	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__reservedErrorCheck	local_2c	prefixLengths	INFERRED	lengths of the two strings being compared (second element)
+local	TParseContext__reservedErrorCheck	local_30	prefixLength	INFERRED	length of the "gl_" string (address taken: points into the length pair)
+local	TParseContext__reservedErrorCheck	local_40	destroyArgB	INFERRED	allocator argument for the destroy of the name prefix copy
+local	TParseContext__reservedErrorCheck	local_50	destroyArgA	INFERRED	allocator argument for the destroy of the "gl_" string
+local	TParseContext__reservedErrorCheck	local_60	allocatorArg	INFERRED	pool_allocator argument for the "gl_" string constructor
+local	TParseContext__reservedErrorCheck	local_6c	reservedPrefixChars	INFERRED	character pointer of the "gl_" string
+local	TParseContext__reservedErrorCheck	local_70	reservedPrefix	INFERRED	"gl_" TString
+local	TParseContext__reservedErrorCheck	local_7c	namePrefixChars	INFERRED	character pointer of the first three characters of the name
+local	TParseContext__reservedErrorCheck	local_80	namePrefix	INFERRED	TString holding the first three characters of the name
+local	TParseContext__reservedErrorCheck	puVar5	minLengthPtr	INFERRED	points at the smaller of the two lengths
+local	TParseContext__reservedErrorCheck	uVar6	reservedPrefixLength	INFERRED	length of the "gl_" string
+local	TParseContext__reservedErrorCheck	uVar7	namePrefixLength	INFERRED	length of the name prefix copy
+local	TParseContext__constructorErrorCheck	param_2	sourceLoc	INFERRED	source location
+local	TParseContext__constructorErrorCheck	bVar2	full	INFERRED	enough components were supplied: later arguments are too many
+local	TParseContext__constructorErrorCheck	bVar3	constType	INFERRED	every argument is a const-qualified expression
+local	TParseContext__constructorErrorCheck	bVar4	arrayArg	INFERRED	an argument is an array
+local	TParseContext__constructorErrorCheck	bVar5	matrixInMatrix	INFERRED	a matrix constructor was given a matrix argument
+local	TParseContext__constructorErrorCheck	bVar6	overFull	INFERRED	an argument follows an argument that already filled the constructor
+local	TParseContext__constructorErrorCheck	iVar1	paramOffset	INFERRED	byte offset of the current function parameter entry (index * 8)
+use	TParseContext__constructorErrorCheck	iVar10	paramSizeOrScratchR4	INFERRED	w1 component count of the parameter / r4 carried between calls; w2 vtable of the parameter type; w3 parameter isArray(); w4 argument basic type	^\s*iVar10\ =\ param_2;$	+1
+use	TParseContext__constructorErrorCheck	iVar10	paramSizeOrScratchR4	INFERRED	w1 component count of the parameter / r4 carried between calls; w2 vtable of the parameter type; w3 parameter isArray(); w4 argument basic type	^\s*iVar10\ =\ \(int\)uVar23;$	+1
+use	TParseContext__constructorErrorCheck	iVar10	paramSizeOrScratchR4	INFERRED	w1 component count of the parameter / r4 carried between calls; w2 vtable of the parameter type; w3 parameter isArray(); w4 argument basic type	^\s*iVar10\ =\ extraout_r4;$	+1
+use	TParseContext__constructorErrorCheck	iVar10	paramSizeOrScratchR4	INFERRED	w1 component count of the parameter / r4 carried between calls; w2 vtable of the parameter type; w3 parameter isArray(); w4 argument basic type	^\s*iVar10\ =\ extraout_r4_00;$	+1
+use	TParseContext__constructorErrorCheck	iVar10	paramSizeOrScratchR4	INFERRED	w1 component count of the parameter / r4 carried between calls; w2 vtable of the parameter type; w3 parameter isArray(); w4 argument basic type	^\s*iVar10\ =\ extraout_r4_01;$	+1
+use	TParseContext__constructorErrorCheck	iVar10	paramSizeOrScratchR4	INFERRED	w1 component count of the parameter / r4 carried between calls; w2 vtable of the parameter type; w3 parameter isArray(); w4 argument basic type	^\s*iVar10\ =\ \(\*\*\(code\ \*\*\)\(a6_00\ \+\ 0x30\)\)\(piVar7,iVar10,pTVar12,pTVar14,iVar16,piVar18,a6_00\);$	+2
+use	TParseContext__constructorErrorCheck	iVar10	paramSizeOrScratchR4	INFERRED	w1 component count of the parameter / r4 carried between calls; w2 vtable of the parameter type; w3 parameter isArray(); w4 argument basic type	^\s*if\ \(\(param_5\ \-\ 0x72U\ <\ 3\)\ \&\&$	+4
+use	TParseContext__constructorErrorCheck	iVar10	paramSizeOrScratchR4	INFERRED	w1 component count of the parameter / r4 carried between calls; w2 vtable of the parameter type; w3 parameter isArray(); w4 argument basic type	^\s*if\ \(\(param_5\ !=\ 0x75\)\ \&\&$	+2
+use	TParseContext__constructorErrorCheck	iVar10	paramSizeOrScratchR4	INFERRED	w1 component count of the parameter / r4 carried between calls; w2 vtable of the parameter type; w3 parameter isArray(); w4 argument basic type	^\s*iVar10\ =\ extraout_r4_04;$	+1
+use	TParseContext__constructorErrorCheck	iVar10	paramSizeOrScratchR4	INFERRED	w1 component count of the parameter / r4 carried between calls; w2 vtable of the parameter type; w3 parameter isArray(); w4 argument basic type	^\s*iVar10\ =\ extraout_r4_05;$	+1
+use	TParseContext__constructorErrorCheck	iVar10	paramSizeOrScratchR4	INFERRED	w1 component count of the parameter / r4 carried between calls; w2 vtable of the parameter type; w3 parameter isArray(); w4 argument basic type	^\s*else\ if\ \(\(\(iVar8\ ==\ 1\)\ \|\|$	+4
+use	TParseContext__constructorErrorCheck	iVar10	paramSizeOrScratchR4	INFERRED	w1 component count of the parameter / r4 carried between calls; w2 vtable of the parameter type; w3 parameter isArray(); w4 argument basic type	^\s*if\ \(\(param_5\ ==\ 0x75\)\ \|\|$	+3
+use	TParseContext__constructorErrorCheck	iVar10	paramTypeVtable	INFERRED	w1 component count of the parameter / r4 carried between calls; w2 vtable of the parameter type; w3 parameter isArray(); w4 argument basic type	^\s*iVar10\ =\ \*piVar7;$	+3
+use	TParseContext__constructorErrorCheck	iVar10	paramIsArray	INFERRED	w1 component count of the parameter / r4 carried between calls; w2 vtable of the parameter type; w3 parameter isArray(); w4 argument basic type	^\s*iVar10\ =\ \(\*\*\(code\ \*\*\)\(a6\ \+\ 0x38\)\)\(a0,a1_00,pTVar12,pTVar14,iVar16,piVar18,a6\);$	+2
+use	TParseContext__constructorErrorCheck	iVar10	argBasicType	INFERRED	w1 component count of the parameter / r4 carried between calls; w2 vtable of the parameter type; w3 parameter isArray(); w4 argument basic type	^\s*iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x40\)\)\(piVar7,uVar11,pTVar12,pTVar14,iVar16\);$	+2
+local	TParseContext__constructorErrorCheck	iVar16	opCopy	INFERRED	copy of op carried through the vtable calls
+use	TParseContext__constructorErrorCheck	iVar21	paramIndex	INFERRED	loop index over the function parameters	^\s*for\ \(iVar21\ =\ 0;\ iVar21\ <\ \*\(int\ \*\)\(param_4\ \+\ 0x14\)\ \-\ \*\(int\ \*\)\(param_4\ \+\ 0x10\)\ >>\ 3;$	+3
+use	TParseContext__constructorErrorCheck	iVar21	paramIndex	INFERRED	loop index over the function parameters	^\s*else\ if\ \(\(\(iVar8\ ==\ 1\)\ \|\|$	+3
+use	TParseContext__constructorErrorCheck	iVar8	ctorNominalSize	INFERRED	w0/w1 vector / matrix nominal size implied by the constructor operator; w4 sum of the component counts of the arguments	^\s*iVar8\ =\ 1;$	+1
+use	TParseContext__constructorErrorCheck	iVar8	ctorNominalSize	INFERRED	w0/w1 vector / matrix nominal size implied by the constructor operator; w4 sum of the component counts of the arguments	^\s*iVar8\ =\ 1;$@2	+1
+use	TParseContext__constructorErrorCheck	iVar8	ctorNominalSize	INFERRED	w0/w1 vector / matrix nominal size implied by the constructor operator; w4 sum of the component counts of the arguments	^\s*iVar8\ =\ 3;$	+1
+use	TParseContext__constructorErrorCheck	iVar8	ctorNominalSize	INFERRED	w0/w1 vector / matrix nominal size implied by the constructor operator; w4 sum of the component counts of the arguments	^\s*iVar8\ =\ 2;$	+1
+use	TParseContext__constructorErrorCheck	iVar8	ctorNominalSize	INFERRED	w0/w1 vector / matrix nominal size implied by the constructor operator; w4 sum of the component counts of the arguments	^\s*iVar8\ =\ 3;$@2	+1
+use	TParseContext__constructorErrorCheck	iVar8	ctorNominalSize	INFERRED	w0/w1 vector / matrix nominal size implied by the constructor operator; w4 sum of the component counts of the arguments	^\s*iVar8\ =\ 2;$@2	+1
+use	TParseContext__constructorErrorCheck	iVar8	ctorNominalSize	INFERRED	w0/w1 vector / matrix nominal size implied by the constructor operator; w4 sum of the component counts of the arguments	^\s*uVar19\ =\ iVar8\ <<\ 0x13\ \|\ local_9c\ \&\ 0x7ffff;$	+1
+use	TParseContext__constructorErrorCheck	iVar8	ctorNominalSize	INFERRED	w0/w1 vector / matrix nominal size implied by the constructor operator; w4 sum of the component counts of the arguments	^\s*iVar8\ =\ 4;$	+1
+use	TParseContext__constructorErrorCheck	iVar8	ctorNominalSize	INFERRED	w0/w1 vector / matrix nominal size implied by the constructor operator; w4 sum of the component counts of the arguments	^\s*a6\ =\ iVar8\ <<\ 0xb\ \|\ uVar19\ \&\ 0xfff801ff;$	+1
+use	TParseContext__constructorErrorCheck	iVar8	ctorNominalSize	INFERRED	w0/w1 vector / matrix nominal size implied by the constructor operator; w4 sum of the component counts of the arguments	^\s*param_6\[9\]\ =\ iVar8\ <<\ 0xb\ \|\ uVar19\ \&\ 0xfff80000\ \|\ param_6\[9\]\ \&\ 0x1ffU;$	+1
+use	TParseContext__constructorErrorCheck	iVar8	ctorNominalSize	INFERRED	w0/w1 vector / matrix nominal size implied by the constructor operator; w4 sum of the component counts of the arguments	^\s*iVar8\ =\ 2;$@3	+1
+use	TParseContext__constructorErrorCheck	iVar8	ctorNominalSize	INFERRED	w0/w1 vector / matrix nominal size implied by the constructor operator; w4 sum of the component counts of the arguments	^\s*iVar8\ =\ 4;$@2	+1
+use	TParseContext__constructorErrorCheck	iVar8	ctorNominalSize	INFERRED	w0/w1 vector / matrix nominal size implied by the constructor operator; w4 sum of the component counts of the arguments	^\s*uVar19\ =\ iVar8\ <<\ 0xb\ \|\ local_9c\ \&\ 0x3ff\ \|\ 0x80000;$	+1
+use	TParseContext__constructorErrorCheck	iVar8	totalSize	INFERRED	w0/w1 vector / matrix nominal size implied by the constructor operator; w4 sum of the component counts of the arguments	^\s*iVar8\ =\ 0;$	+1
+use	TParseContext__constructorErrorCheck	iVar8	totalSize	INFERRED	w0/w1 vector / matrix nominal size implied by the constructor operator; w4 sum of the component counts of the arguments	^\s*iVar8\ =\ iVar8\ \+\ iVar10;$	+1
+use	TParseContext__constructorErrorCheck	iVar8	totalSize	INFERRED	w0/w1 vector / matrix nominal size implied by the constructor operator; w4 sum of the component counts of the arguments	^\s*if\ \(\(param_5\ !=\ 0x75\)\ \&\&$	+2
+use	TParseContext__constructorErrorCheck	iVar8	totalSize	INFERRED	w0/w1 vector / matrix nominal size implied by the constructor operator; w4 sum of the component counts of the arguments	^\s*else\ if\ \(\(\(iVar8\ ==\ 1\)\ \|\|$	+3
+local	TParseContext__constructorErrorCheck	in_r10	scratchR10	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__constructorErrorCheck	local_50	destroyArgB	INFERRED	allocator argument for the destroy of the second name copy
+local	TParseContext__constructorErrorCheck	local_60	destroyArgA	INFERRED	allocator argument for the destroy of the first name copy
+local	TParseContext__constructorErrorCheck	local_70	allocatorArg	INFERRED	pool_allocator argument for the struct name string constructor
+local	TParseContext__constructorErrorCheck	local_7c	nameCopy2Chars	INFERRED	character pointer of the second copy of the struct type name
+local	TParseContext__constructorErrorCheck	local_8c	nameCopy1CharsOrScratch	INFERRED	character pointer of the first copy of the struct type name; elsewhere the packed type bits carried into r10
+local	TParseContext__constructorErrorCheck	local_80	nameCopy2	INFERRED	second copy of the constructed struct type name (TString)
+local	TParseContext__constructorErrorCheck	local_90	nameCopy1	INFERRED	first copy of the constructed struct type name (TString)
+use	TParseContext__constructorErrorCheck	pcVar13	structNameChars	INFERRED	w1 character pointer of the struct name; w2 error reason text	^\s*pcVar13\ =\ local_7c;$	+1
+use	TParseContext__constructorErrorCheck	pcVar13	structNameChars	INFERRED	w1 character pointer of the struct name; w2 error reason text	^\s*\(this_01,pcVar13,\(unsigned\ char\ \*\)pTVar12\);$	+1
+use	TParseContext__constructorErrorCheck	pcVar13	errorReason	INFERRED	w1 character pointer of the struct name; w2 error reason text	^\s*pcVar13\ =\ "expected\ constructor";$	+1
+use	TParseContext__constructorErrorCheck	pcVar13	errorReason	INFERRED	w1 character pointer of the struct name; w2 error reason text	^\s*pcVar13\ =\ "constructing\ from\ a\ non\-dereferenced\ array";$	+1
+use	TParseContext__constructorErrorCheck	pcVar13	errorReason	INFERRED	w1 character pointer of the struct name; w2 error reason text	^\s*pcVar13\ =\ "constructing\ matrix\ from\ matrix";$	+1
+use	TParseContext__constructorErrorCheck	pcVar13	errorReason	INFERRED	w1 character pointer of the struct name; w2 error reason text	^\s*pcVar13\ =\ "too\ many\ arguments";$	+1
+use	TParseContext__constructorErrorCheck	pcVar13	errorReason	INFERRED	w1 character pointer of the struct name; w2 error reason text	^\s*pcVar13\ =\ "constructor\ argument\ does\ not\ have\ a\ param_6";$	+1
+use	TParseContext__constructorErrorCheck	pcVar13	errorReason	INFERRED	w1 character pointer of the struct name; w2 error reason text	^\s*pcVar13\ =\ "cannot\ convert\ a\ void";$	+1
+use	TParseContext__constructorErrorCheck	pcVar13	errorReason	INFERRED	w1 character pointer of the struct name; w2 error reason text	^\s*pcVar13\ =\ "cannot\ convert\ a\ sampler";$	+1
+use	TParseContext__constructorErrorCheck	pcVar13	errorReason	INFERRED	w1 character pointer of the struct name; w2 error reason text	^\s*pcVar13\ =\ "not\ enough\ data\ provided\ for\ construction";$	+1
+use	TParseContext__constructorErrorCheck	pcVar13	errorReason	INFERRED	w1 character pointer of the struct name; w2 error reason text	^\s*error\(\(int\)this,\(char\ \*\)param_2,pcVar13,pcVar15,pcVar17,piVar18,a6,in_r10\);$	+1
+local	TParseContext__constructorErrorCheck	pcVar15	errorToken	INFERRED	token passed to error ("constructor" / "Internal Error")
+local	TParseContext__constructorErrorCheck	pcVar17	extraInfoFormat	INFERRED	extra-info format passed to error ("(reserved)" / "")
+local	TParseContext__constructorErrorCheck	piVar18	typeCopy	INFERRED	copy of the type argument carried through the vtable calls
+use	TParseContext__constructorErrorCheck	piVar7	paramType	INFERRED	function parameter type; w4 the constructor argument node getAsTyped()	^\s*piVar7\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_4\ \+\ 0x10\)\ \+\ iVar1\ \+\ 4\);$	+3
+use	TParseContext__constructorErrorCheck	piVar7	paramType	INFERRED	function parameter type; w4 the constructor argument node getAsTyped()	^\s*if\ \(\(param_5\ \-\ 0x72U\ <\ 3\)\ \&\&$	+4
+use	TParseContext__constructorErrorCheck	piVar7	paramType	INFERRED	function parameter type; w4 the constructor argument node getAsTyped()	^\s*piVar7\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_4\ \+\ 0x10\)\ \+\ iVar1\ \+\ 4\);$@2	+3
+use	TParseContext__constructorErrorCheck	piVar7	argTyped	INFERRED	function parameter type; w4 the constructor argument node getAsTyped()	^\s*piVar7\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_3\ \+\ 0x14\)\)\(param_3,iVar10,pTVar12,pTVar14,iVar16\);$	+2
+use	TParseContext__constructorErrorCheck	piVar7	argTyped	INFERRED	function parameter type; w4 the constructor argument node getAsTyped()	^\s*if\ \(\(param_5\ ==\ 0x75\)\ \|\|$	+4
+use	TParseContext__constructorErrorCheck	psVar9	functionName	INFERRED	function->getName() (vtable +0x18)	^\s*psVar9\ =\ \(unsigned\ char\ \*\)$	+1
+use	TParseContext__constructorErrorCheck	psVar9	functionName	INFERRED	function->getName() (vtable +0x18)	^\s*__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_\(\(unsigned\ char\ \*\)\&local_90,psVar9\);$	+1
+local	TParseContext__constructorErrorCheck	uVar11	scratchR4	UNKNOWN	Ghidra extra-output register r4 forwarded through the vtable calls
+use	TParseContext__constructorErrorCheck	uVar19	ctorTypeBits	INFERRED	TType bit-field word being assembled for the constructed type	^\s*uVar19\ =\ local_9c\ \&\ 0xfff\ \|\ 0x100800;$	+1
+use	TParseContext__constructorErrorCheck	uVar19	ctorTypeBits	INFERRED	TType bit-field word being assembled for the constructed type	^\s*uVar19\ =\ local_9c\ \&\ 0x1fff\ \|\ 0x101800;$	+1
+use	TParseContext__constructorErrorCheck	uVar19	ctorTypeBits	INFERRED	TType bit-field word being assembled for the constructed type	^\s*local_9c\ =\ uVar19\ \&\ 0xfffff9ff;$	+1
+use	TParseContext__constructorErrorCheck	uVar19	ctorTypeBits	INFERRED	TType bit-field word being assembled for the constructed type	^\s*param_6\[9\]\ =\ uVar19\ \&\ 0x7f800\ \|\ uVar19\ \&\ 0xfff80000\ \|\ param_6\[9\]\ \&\ 0x1ffU;$	+1
+use	TParseContext__constructorErrorCheck	uVar19	ctorTypeBits	INFERRED	TType bit-field word being assembled for the constructed type	^\s*uVar19\ =\ local_9c\ \&\ 0x1fffff\ \|\ 0x180000;$	+1
+use	TParseContext__constructorErrorCheck	uVar19	ctorTypeBits	INFERRED	TType bit-field word being assembled for the constructed type	^\s*uVar19\ =\ local_9c\ \&\ 0xfffff\ \|\ 0x80000;$	+1
+use	TParseContext__constructorErrorCheck	uVar19	ctorTypeBits	INFERRED	TType bit-field word being assembled for the constructed type	^\s*uVar19\ =\ local_9c\ \&\ 0xfffff\ \|\ 0x80000;$@2	+1
+use	TParseContext__constructorErrorCheck	uVar19	ctorTypeBits	INFERRED	TType bit-field word being assembled for the constructed type	^\s*uVar19\ =\ local_9c\ \&\ 0xfffff\ \|\ 0x80000;$@3	+1
+use	TParseContext__constructorErrorCheck	uVar19	ctorTypeBits	INFERRED	TType bit-field word being assembled for the constructed type	^\s*uVar19\ =\ local_9c\ \&\ 0x1fffff\ \|\ 0x180000;$@2	+1
+use	TParseContext__constructorErrorCheck	uVar19	ctorTypeBits	INFERRED	TType bit-field word being assembled for the constructed type	^\s*uVar19\ =\ local_9c\ \&\ 0x1fffff\ \|\ 0x180000;$@3	+1
+use	TParseContext__constructorErrorCheck	uVar19	ctorTypeBits	INFERRED	TType bit-field word being assembled for the constructed type	^\s*uVar19\ =\ iVar8\ <<\ 0x13\ \|\ local_9c\ \&\ 0x7ffff;$	+1
+use	TParseContext__constructorErrorCheck	uVar19	ctorTypeBits	INFERRED	TType bit-field word being assembled for the constructed type	^\s*uVar19\ =\ local_9c\ \&\ 0x7ffff\ \|\ 0x100000;$	+1
+use	TParseContext__constructorErrorCheck	uVar19	ctorTypeBits	INFERRED	TType bit-field word being assembled for the constructed type	^\s*a6\ =\ iVar8\ <<\ 0xb\ \|\ uVar19\ \&\ 0xfff801ff;$	+1
+use	TParseContext__constructorErrorCheck	uVar19	ctorTypeBits	INFERRED	TType bit-field word being assembled for the constructed type	^\s*param_6\[9\]\ =\ iVar8\ <<\ 0xb\ \|\ uVar19\ \&\ 0xfff80000\ \|\ param_6\[9\]\ \&\ 0x1ffU;$	+1
+use	TParseContext__constructorErrorCheck	uVar19	ctorTypeBits	INFERRED	TType bit-field word being assembled for the constructed type	^\s*uVar19\ =\ local_9c\ \&\ 0x1bff\ \|\ 0x81800;$	+1
+use	TParseContext__constructorErrorCheck	uVar19	ctorTypeBits	INFERRED	TType bit-field word being assembled for the constructed type	^\s*uVar19\ =\ iVar8\ <<\ 0xb\ \|\ local_9c\ \&\ 0x3ff\ \|\ 0x80000;$	+1
+use	TParseContext__constructorErrorCheck	uVar19	ctorTypeBits	INFERRED	TType bit-field word being assembled for the constructed type	^\s*a6\ =\ uVar19\ \&\ 0xfffffdff\ \|\ 0x400;$	+2
+local	TParseContext__constructorErrorCheck	uVar23	allocPair	INFERRED	TPoolAllocator__allocate 64-bit result pair
+local	TParseContext__voidErrorCheck	param_2	sourceLoc	INFERRED	source location
+local	TParseContext__voidErrorCheck	bVar1	terminalChar	INFERRED	std::string::_S_terminal byte stored after text
+local	TParseContext__voidErrorCheck	iVar2	basicType	INFERRED	publicType->type: 0 is void
+local	TParseContext__voidErrorCheck	in_r8	scratchR8	UNKNOWN	register leftover forwarded to error()
+local	__ZN13TParseContext14boolErrorCheckEiPK12TIntermTyped	param_2	sourceLoc	INFERRED	source location
+local	__ZN13TParseContext14boolErrorCheckEiPK12TIntermTyped	param_4	scratchR6	UNKNOWN	register leftover
+local	__ZN13TParseContext14boolErrorCheckEiPK12TIntermTyped	param_5	scratchR7	UNKNOWN	register leftover
+local	__ZN13TParseContext14boolErrorCheckEiPK12TIntermTyped	param_6	scratchR8	UNKNOWN	register leftover forwarded to error()
+local	__ZN13TParseContext14boolErrorCheckEiPK12TIntermTyped	iVar1	typeQueryResult	INFERRED	result of the type query vtable calls: getBasicType (compared with bool), isArray, isMatrix, isVector
+local	__ZN13TParseContext14boolErrorCheckEiPK12TIntermTyped	in_r9	scratchR9	UNKNOWN	register leftover forwarded to error()
+local	__ZN13TParseContext14boolErrorCheckEiPK12TIntermTyped	in_r10	scratchR10	UNKNOWN	register leftover forwarded to error()
+local	__ZN13TParseContext14boolErrorCheckEiRK11TPublicType	param_2	sourceLoc	INFERRED	source location
+local	__ZN13TParseContext14boolErrorCheckEiRK11TPublicType	uVar1	result	INFERRED	1 when the type is not a scalar bool, else 0
+local	__ZN13TParseContext14boolErrorCheckEiRK11TPublicType	in_r8	scratchR8	UNKNOWN	register leftover forwarded to error()
+local	__ZN13TParseContext14boolErrorCheckEiRK11TPublicType	in_r9	scratchR9	UNKNOWN	register leftover forwarded to error()
+local	__ZN13TParseContext14boolErrorCheckEiRK11TPublicType	in_r10	scratchR10	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__samplerErrorCheck	param_2	sourceLoc	INFERRED	source location
+use	TParseContext__samplerErrorCheck	iVar1	basicType	INFERRED	publicType->type: 0xe struct, 5..12 samplers	^\s*iVar1\ =\ \*\(int\ \*\)param_3;$	+2
+use	TParseContext__samplerErrorCheck	iVar1	basicType	INFERRED	publicType->type: 0xe struct, 5..12 samplers	^\s*if\ \(7\ <\ iVar1\ \-\ 5U\)\ \{$	+1
+use	TParseContext__samplerErrorCheck	iVar1	basicType	INFERRED	publicType->type: 0xe struct, 5..12 samplers	^\s*pcVar2\ =\ \(char\ \*\)TType__getBasicString\(iVar1\);$	+1
+local	TParseContext__samplerErrorCheck	pcVar3	extraInfo	INFERRED	"(structure contains a sampler)" or ""
+local	TParseContext__samplerErrorCheck	in_r8	scratchR8	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__samplerErrorCheck	in_r9	scratchR9	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__samplerErrorCheck	in_r10	scratchR10	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__structQualifierErrorCheck	param_2	sourceLoc	INFERRED	source location
+local	TParseContext__structQualifierErrorCheck	param_4	scratchR6	UNKNOWN	register leftover
+local	TParseContext__structQualifierErrorCheck	param_5	scratchR7	UNKNOWN	register leftover
+local	TParseContext__structQualifierErrorCheck	param_6	scratchR8	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__structQualifierErrorCheck	param_7	scratchR9	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__structQualifierErrorCheck	iVar1	qualifierThenResult	INFERRED	publicType->qualifier, then the samplerErrorCheck result (same Ghidra variable)
+local	TParseContext__structQualifierErrorCheck	uVar3	result	INFERRED	1 when an error was reported, else 0
+local	TParseContext__structQualifierErrorCheck	in_r10	scratchR10	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__parameterSamplerErrorCheck	param_2	sourceLoc	INFERRED	source location
+local	TParseContext__parameterSamplerErrorCheck	iVar1	basicType	INFERRED	type->getBasicType() (vtable +0x20): 5..12 samplers
+local	TParseContext__parameterSamplerErrorCheck	uVar3	result	INFERRED	1 when a sampler is an output parameter, else 0
+local	TParseContext__parameterSamplerErrorCheck	in_r8	scratchR8	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__parameterSamplerErrorCheck	in_r9	scratchR9	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__parameterSamplerErrorCheck	in_r10	scratchR10	UNKNOWN	register leftover forwarded to error()
+use	TParseContext__containsSampler	iVar1	basicType	INFERRED	w0/w1 type->getBasicType() (vtable +0x20); w2 type->structure (type+8): the field list	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_2\ \+\ 0x20\)\)\(param_2,param_2\);$	+1
+use	TParseContext__containsSampler	iVar1	basicType	INFERRED	w0/w1 type->getBasicType() (vtable +0x20); w2 type->structure (type+8): the field list	^\s*if\ \(7\ <\ iVar1\ \-\ 5U\)\ \{$	+1
+use	TParseContext__containsSampler	iVar1	basicType	INFERRED	w0/w1 type->getBasicType() (vtable +0x20); w2 type->structure (type+8): the field list	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_2\ \+\ 0x20\)\)\(param_2\);$	+2
+use	TParseContext__containsSampler	iVar1	typeList	INFERRED	w0/w1 type->getBasicType() (vtable +0x20); w2 type->structure (type+8): the field list	^\s*iVar1\ =\ \*\(int\ \*\)\(param_2\ \+\ 8\);$	+3
+local	TParseContext__containsSampler	iVar3	fieldsBegin	INFERRED	start of the struct field vector
+local	TParseContext__containsSampler	uVar2	result	INFERRED	1 when the type is a sampler, else 0
+local	TParseContext__containsSampler	uVar4	fieldIndex	INFERRED	struct field being checked
+local	TParseContext__paramErrorCheck	param_2	sourceLoc	INFERRED	source location
+local	TParseContext__paramErrorCheck	iVar1	typeVtable	INFERRED	vtable of type, used to call changeQualifier (+0x28)
+local	TParseContext__paramErrorCheck	pcVar3	errorReason	INFERRED	"qualifier not allowed with " / "qualifier not allowed on function parameter"
+local	TParseContext__paramErrorCheck	pcVar4	qualifier2String	INFERRED	name of the second qualifier, or ""
+local	TParseContext__paramErrorCheck	in_r8	scratchR8	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__paramErrorCheck	in_r9	scratchR9	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__paramErrorCheck	in_r10	scratchR10	UNKNOWN	register leftover forwarded to error()

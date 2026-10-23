@@ -1,0 +1,34 @@
+local	_CPPif	param_1	yylvalpp	CONFIRMED	yystypepp* handed to scan/eval
+local	_CPPif	puVar1	cppRef	INFERRED	&_cpp GOT pointer
+local	_CPPif	uVar3	firstToken	INFERRED	first token after #if, passed to _eval
+local	_CPPif	puVar7	cppStateOrIfLoc	INFERRED	cpp state words, then the +0x18 source-location pointer; forwarded as a dead vararg to _CPPelse/_CPPErrorToInfoLog
+local	_CPPif	piVar4	resultPtr	INFERRED	&exprValue passed to _eval
+local	_CPPif	piVar5	errorPtr	INFERRED	exprError passed to _eval
+local	_CPPif	uVar6	yylvalForward	INFERRED	copy of param_1 forwarded as a dead register argument
+local	_CPPif	local_20	exprValue	CONFIRMED	_eval result: value of the #if expression
+local	_CPPif	local_1c	exprError	CONFIRMED	_eval error flag (array of 4 in the decompile, only [0] used)
+use	_CPPif	iVar2	oldIfDepth	INFERRED	cpp->ifdepth (+0x34) before the increment	^\s*iVar2\ =\ puVar7\[0xd\];	+3	all	none
+use	_CPPif	iVar2	cppState	INFERRED	*cpp: the cpp state	^\s*iVar2\ =\ \*\(int\ \*\)puVar1;	^\s*piVar4\ =\ &local_20;	all	none
+use	_CPPif	iVar2	endToken	INFERRED	token that ends the directive: _eval result, then #else result or 0 (returned)	*		all	none
+local	_CPPifdef	param_1	isIfdef	CONFIRMED	1 for #ifdef, 0 for #ifndef (selects the "ifdef"/"ifndef" message)
+local	_CPPifdef	param_2	yylvalpp	CONFIRMED	yystypepp*: [2] sc_ident
+local	_CPPifdef	puVar1	cppRef	INFERRED	&_cpp GOT pointer
+local	_CPPifdef	iVar3	token	CONFIRMED	token from currentInput->scan; returned
+local	_CPPifdef	iVar2	ifDepth	INFERRED	cpp->ifdepth after the increment (nesting limit 0x40)
+local	_CPPifdef	pcVar4	directiveName	CONFIRMED	"ifndef"/"ifdef" error-message text
+local	_CPPifdef	uVar5	nameAtom	INFERRED	yylvalpp->sc_ident: the macro name atom
+local	_CPPifdef	uVar7	elseTrackerOrUndefFlag	INFERRED	cpp->elsetracker after the increment, then symbol flags & undef bit; forwarded as a dead vararg
+use	_CPPifdef	iVar6	isDefined	INFERRED	1 when the macro exists and is not #undef'd	^\s*iVar6\ =\ 0;	+5	all	none
+use	_CPPifdef	iVar6	cppState	INFERRED	*cpp: the cpp state (forwarded to the nesting error)	*		all	none
+local	_CPPline	param_1	yylvalpp	CONFIRMED	yystypepp*: [0] sc_int, [3..] sc_string
+local	_CPPline	puVar1	cppRef	INFERRED	&_cpp GOT pointer
+local	_CPPline	iVar2	token	CONFIRMED	token from currentInput->scan; returned
+local	_CPPline	uVar3	r4Fwd	INFERRED	forwarded extraout r4 for the final error call
+local	_CPPline	iVar4	lastToken	INFERRED	token returned when the line directive parses (10 or the final scan result)
+local	_CPPerror	param_1	yylvalpp	CONFIRMED	yystypepp*: [2] sc_ident, [3..] sc_string
+local	_CPPerror	puVar1	cppRef	INFERRED	&_cpp GOT pointer
+local	_CPPerror	puVar2	atableRef	INFERRED	&_atable GOT pointer
+use	_CPPerror	iVar3	messagePiece	INFERRED	string stored into the message buffer: sc_string or the atom text	^\s*iVar3\ =\ param_1\ \+\ 0xc;	+1	lhs	none
+use	_CPPerror	iVar3	messagePiece	INFERRED	string result of _GetStringOfAtom	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_GetStringOfAtom\)	+1	lhs	none
+use	_CPPerror	iVar3	messagePiece	INFERRED	string passed to _StoreStr	^\s*_StoreStr\(iVar3\);	+1	all	none
+use	_CPPerror	iVar3	tokenOrAtom	INFERRED	scanned token; for identifiers the atom, for punctuation the token value doubles as the atom	*		all	none

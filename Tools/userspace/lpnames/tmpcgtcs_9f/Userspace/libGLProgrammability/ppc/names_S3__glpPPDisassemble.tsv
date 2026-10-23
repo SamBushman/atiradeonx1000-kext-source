@@ -1,0 +1,86 @@
+# use	FUNCTION	old	new	tier	evidence	from	to	first	last   (machine-written: strcpy-idiom roles over def-use webs; #L = lines after the declarations, +N = lines to the end line)
+use	_glpPPDisassemble	iVar10	copyLength2	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#137	+197	all	all
+use	_glpPPDisassemble	iVar10	copyLength2	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#484	+90	all	all
+use	_glpPPDisassemble	iVar10	copyLength2	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#670	+291	all	all
+use	_glpPPDisassemble	iVar10	copyIndex	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#1078	+23	all	all
+use	_glpPPDisassemble	iVar10	copyIndex	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#1107	+92	all	all
+use	_glpPPDisassemble	iVar10	copyIndex	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#1205	+15	all	all
+use	_glpPPDisassemble	iVar10	copyIndex	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#1226	+449	all	all
+use	_glpPPDisassemble	iVar10	copyIndex	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#1681	+15	all	all
+use	_glpPPDisassemble	iVar10	copyIndex	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#1702	+98	all	all
+use	_glpPPDisassemble	iVar10	copyIndex	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#1806	+15	all	all
+use	_glpPPDisassemble	iVar10	copyIndex	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#1827	+15	all	all
+use	_glpPPDisassemble	iVar10	copyIndex	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#1848	+15	all	all
+use	_glpPPDisassemble	iVar10	copyIndex	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#1869	+57	all	all
+use	_glpPPDisassemble	iVar10	copyIndex	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#1932	+131	all	all
+use	_glpPPDisassemble	iVar10	copyIndex	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#2069	+19	all	all
+use	_glpPPDisassemble	iVar10	copyLength2	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#2098	+186	all	all
+use	_glpPPDisassemble	iVar10	copyLength2	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#2302	+112	all	all
+use	_glpPPDisassemble	iVar10	copyIndex	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#2479	+5	all	all
+use	_glpPPDisassemble	iVar10	copyIndex	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#2507	+17	all	all
+use	_glpPPDisassemble	iVar10	copyLength2	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#2575	+4	all	all
+use	_glpPPDisassemble	iVar10	copyIndex	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#2614	+471	all	all
+use	_glpPPDisassemble	iVar10	copyIndex	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#3197	+616	all	all
+use	_glpPPDisassemble	iVar10	copyIndex	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#4172	+59	all	all
+use	_glpPPDisassemble	iVar12	copyLength	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#581	+504	all	all
+use	_glpPPDisassemble	iVar12	copyLength	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#1110	+4	all	all
+use	_glpPPDisassemble	iVar12	copyLength	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#1133	+4	all	all
+use	_glpPPDisassemble	iVar12	copyLength	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#1197	+46	all	all
+use	_glpPPDisassemble	iVar12	copyLength	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#1344	+4	all	all
+use	_glpPPDisassemble	iVar12	copyLength	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#1365	+14	all	all
+use	_glpPPDisassemble	iVar12	copyLength	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#1545	+4	all	all
+use	_glpPPDisassemble	iVar12	copyLength	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#1609	+4	all	all
+use	_glpPPDisassemble	iVar12	copyLength	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#1673	+34	all	all
+use	_glpPPDisassemble	iVar12	copyLength	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#1765	+190	all	all
+use	_glpPPDisassemble	iVar12	copyLength	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#2031	+4	all	all
+use	_glpPPDisassemble	iVar12	copyLength	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#2072	+2	all	all
+use	_glpPPDisassemble	iVar12	copyLength	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#2290	+196	all	all
+use	_glpPPDisassemble	iVar12	copyIndex3	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#2495	+5	all	all
+use	_glpPPDisassemble	iVar12	copyLength	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#2510	+4	all	all
+use	_glpPPDisassemble	iVar12	copyLength	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#2606	+506	all	all
+use	_glpPPDisassemble	iVar12	copyIndex3	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#3116	+75	all	all
+use	_glpPPDisassemble	iVar12	copyLength	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#3200	+629	all	all
+use	_glpPPDisassemble	iVar12	copyIndex3	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#3833	+159	all	all
+use	_glpPPDisassemble	iVar12	copyLength	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#4000	+4	all	all
+use	_glpPPDisassemble	iVar12	copyIndex3	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#4008	+155	all	all
+use	_glpPPDisassemble	iVar12	copyLength	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#4175	+58	all	all
+use	_glpPPDisassemble	iVar13	copyLength4	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#1122	+4	all	all
+use	_glpPPDisassemble	iVar13	copyLength4	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#1966	+19	all	all
+use	_glpPPDisassemble	iVar13	copyLength4	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#2041	+14	all	all
+use	_glpPPDisassemble	iVar13	copyLength4	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#2498	+5	all	all
+use	_glpPPDisassemble	iVar14	copyLength5	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#2706	+110	all	all
+use	_glpPPDisassemble	iVar22	copyIndex4	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#62	+61	all	all
+use	_glpPPDisassemble	iVar22	copyIndex4	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#303	+17	all	all
+use	_glpPPDisassemble	iVar22	copyIndex4	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#342	+17	all	all
+use	_glpPPDisassemble	iVar22	copyIndex4	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#567	+5	all	all
+use	_glpPPDisassemble	iVar22	copyIndex4	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#603	+52	all	all
+use	_glpPPDisassemble	iVar22	copyIndex4	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#971	+5	all	all
+use	_glpPPDisassemble	iVar22	copyIndex4	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#2137	+5	all	all
+use	_glpPPDisassemble	iVar22	copyIndex4	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#2423	+5	all	all
+use	_glpPPDisassemble	iVar22	copyIndex4	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#2562	+29	all	all
+use	_glpPPDisassemble	iVar9	copyLength3	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#65	+60	all	all
+use	_glpPPDisassemble	iVar9	copyIndex2	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#134	+146	all	all
+use	_glpPPDisassemble	iVar9	copyLength3	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#306	+17	all	all
+use	_glpPPDisassemble	iVar9	copyIndex2	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#327	+5	all	all
+use	_glpPPDisassemble	iVar9	copyLength3	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#345	+16	all	all
+use	_glpPPDisassemble	iVar9	copyIndex2	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#481	+44	all	all
+use	_glpPPDisassemble	iVar9	copyIndex2	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#535	+5	all	all
+use	_glpPPDisassemble	iVar9	copyIndex2	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#555	+5	all	all
+use	_glpPPDisassemble	iVar9	copyIndex2	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#578	+5	all	all
+use	_glpPPDisassemble	iVar9	copyLength3	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#606	+51	all	all
+use	_glpPPDisassemble	iVar9	copyIndex2	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#667	+5	all	all
+use	_glpPPDisassemble	iVar9	copyIndex2	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#686	+90	all	all
+use	_glpPPDisassemble	iVar9	copyIndex2	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#782	+15	all	all
+use	_glpPPDisassemble	iVar9	copyIndex2	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#803	+15	all	all
+use	_glpPPDisassemble	iVar9	copyIndex2	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#824	+15	all	all
+use	_glpPPDisassemble	iVar9	copyIndex2	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#845	+114	all	all
+use	_glpPPDisassemble	iVar9	copyLength3	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#974	+4	all	all
+use	_glpPPDisassemble	iVar9	copyIndex2	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#2095	+26	all	all
+use	_glpPPDisassemble	iVar9	copyLength3	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#2140	+4	all	all
+use	_glpPPDisassemble	iVar9	copyIndex2	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#2157	+30	all	all
+use	_glpPPDisassemble	iVar9	copyIndex2	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#2199	+140	all	all
+use	_glpPPDisassemble	iVar9	copyIndex2	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#2345	+45	all	all
+use	_glpPPDisassemble	iVar9	copyIndex2	INFERRED	index of the inlined string copy loop (set to 0, stepped by 1, ends at the NUL)	#2396	+16	all	all
+use	_glpPPDisassemble	iVar9	copyLength3	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#2426	+4	all	all
+use	_glpPPDisassemble	iVar9	copyLength3	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#2565	+4	all	all
+use	_glpPPDisassemble	iVar9	copyLength3	INFERRED	index after the last copied character: the length of the string just copied (N = V + 1 inside the do-while copy loop)	#2589	+7	all	all
