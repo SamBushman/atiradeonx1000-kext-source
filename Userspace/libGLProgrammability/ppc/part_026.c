@@ -2290,139 +2290,143 @@ LAB_97c1d688:
 }
 
 /* _init_object @ 0x97c1d6d0 (732 bytes) */
-int _init_object(param_1)
-  uint param_1;
+int _init_object(ob)
+  uint ob;
 {
-  undefined4 *puVar1;
-  bool bVar2;
-  undefined4 *puVar3;
-  int iVar4;
-  uint uVar5;
-  uint uVar6;
-  int iVar7;
+  undefined4 fde2;
+  int erraticAlias;
+  int vectorBytes;
+  bool linearEmpty;
+  undefined4 *srcSlot;
+  bool noFdes;
+  undefined4 *v1;
+  int arrayEntry;
+  uint objectBits;
+  uint classifyResult;
+  int compareResult;
   undefined4 r3Out0;
-  undefined4 *puVar8;
-  code *pcVar9;
-  undefined4 *puVar10;
-  int iVar11;
-  undefined4 uVar12;
-  int iVar13;
-  uint uVar14;
-  uint uVar15;
-  undefined4 *puVar16;
-  int *piVar17;
-  undefined4 *puVar18;
-  undefined4 *local_50;
-  int local_4c;
+  undefined4 *v2ArrayCursor;
+  code *fdeCompare;
+  undefined4 *v1IndexBase;
+  int i2;
+  undefined4 returnValue;
+  int i1;
+  uint totalCount;
+  uint count;
+  undefined4 *dstSlot;
+  int *arrayCursor;
+  undefined4 *v1Cursor;
+  undefined4 *linearVec;
+  int erraticVec;
   
-  uVar5 = *(uint *)(param_1 + 0x10);
-  uVar15 = uVar5 & 0x1fffff;
-  if (uVar15 == 0) {
-    if ((uVar5 & 0x40000000) == 0) {
-      uVar6 = ((int (*)())_classify_object_over_fdes)(param_1,*(undefined4 *)(param_1 + 0xc));
-      uVar5 = *(uint *)(param_1 + 0x10);
-      bVar2 = uVar6 == 0;
-      uVar15 = uVar6;
+  objectBits = *(uint *)(ob + 0x10);
+  count = objectBits & 0x1fffff;
+  if (count == 0) {
+    if ((objectBits & 0x40000000) == 0) {
+      classifyResult = ((int (*)())_classify_object_over_fdes)(ob,*(undefined4 *)(ob + 0xc));
+      objectBits = *(uint *)(ob + 0x10);
+      noFdes = classifyResult == 0;
+      count = classifyResult;
     }
     else {
-      piVar17 = *(int **)(param_1 + 0xc);
-      iVar4 = *piVar17;
-      bVar2 = true;
-      uVar14 = 0;
-      uVar6 = param_1;
-      if (iVar4 != 0) {
+      arrayCursor = *(int **)(ob + 0xc);
+      arrayEntry = *arrayCursor;
+      noFdes = true;
+      totalCount = 0;
+      classifyResult = ob;
+      if (arrayEntry != 0) {
         do {
-          uVar6 = ((int (*)())_classify_object_over_fdes)(param_1,iVar4);
-          piVar17 = piVar17 + 1;
-          iVar4 = *piVar17;
-          uVar14 = uVar14 + uVar6;
-        } while (iVar4 != 0);
-        uVar5 = *(uint *)(param_1 + 0x10);
-        bVar2 = uVar14 == 0;
-        uVar15 = uVar14;
+          classifyResult = ((int (*)())_classify_object_over_fdes)(ob,arrayEntry);
+          arrayCursor = arrayCursor + 1;
+          arrayEntry = *arrayCursor;
+          totalCount = totalCount + classifyResult;
+        } while (arrayEntry != 0);
+        objectBits = *(uint *)(ob + 0x10);
+        noFdes = totalCount == 0;
+        count = totalCount;
       }
     }
-    *(uint *)(param_1 + 0x10) = uVar15 & 0x1fffff | uVar5 & 0xffe00000;
-    if ((uVar15 & 0x1fffff) != uVar15) {
-      *(uint *)(param_1 + 0x10) = uVar5 & 0xffe00000;
+    *(uint *)(ob + 0x10) = count & 0x1fffff | objectBits & 0xffe00000;
+    if ((count & 0x1fffff) != count) {
+      *(uint *)(ob + 0x10) = objectBits & 0xffe00000;
     }
-    if (bVar2) {
-      return uVar6;
+    if (noFdes) {
+      return classifyResult;
     }
   }
-  iVar4 = uVar15 * 4 + 8;
-  local_50 = (undefined4 *)_malloc(iVar4);
-  uVar12 = 0;
-  if (local_50 != (undefined4 *)0x0) {
-    local_50[1] = 0;
-    local_4c = _malloc(iVar4);
-    if (local_4c != 0) {
-      *(undefined4 *)(local_4c + 4) = 0;
+  vectorBytes = count * 4 + 8;
+  linearVec = (undefined4 *)_malloc(vectorBytes);
+  returnValue = 0;
+  if (linearVec != (undefined4 *)0x0) {
+    linearVec[1] = 0;
+    erraticVec = _malloc(vectorBytes);
+    if (erraticVec != 0) {
+      *(undefined4 *)(erraticVec + 4) = 0;
     }
-    if ((*(uint *)(param_1 + 0x10) & 0x40000000) == 0) {
-      ((int (*)())_add_fdes)(param_1,&local_50,*(undefined4 *)(param_1 + 0xc));
+    if ((*(uint *)(ob + 0x10) & 0x40000000) == 0) {
+      ((int (*)())_add_fdes)(ob,&linearVec,*(undefined4 *)(ob + 0xc));
     }
     else {
-      piVar17 = *(int **)(param_1 + 0xc);
-      iVar4 = *piVar17;
-      while (iVar4 != 0) {
-        ((int (*)())_add_fdes)(param_1,&local_50,iVar4);
-        piVar17 = piVar17 + 1;
-        iVar4 = *piVar17;
+      arrayCursor = *(int **)(ob + 0xc);
+      arrayEntry = *arrayCursor;
+      while (arrayEntry != 0) {
+        ((int (*)())_add_fdes)(ob,&linearVec,arrayEntry);
+        arrayCursor = arrayCursor + 1;
+        arrayEntry = *arrayCursor;
       }
     }
-    if ((local_50 != (undefined4 *)0x0) && (local_50[1] != uVar15)) {
+    if ((linearVec != (undefined4 *)0x0) && (linearVec[1] != count)) {
 LAB_97c1d890:
                     
       _abort();
     }
-    pcVar9 = DAT_a7b7c094;
-    if (((*(uint *)(param_1 + 0x10) & 0x20000000) == 0) &&
-       (pcVar9 = DAT_a7b7c08c, (*(uint *)(param_1 + 0x10) >> 0x15 & 0xff) == 0)) {
-      pcVar9 = DAT_a7b7c090;
+    fdeCompare = DAT_a7b7c094;
+    if (((*(uint *)(ob + 0x10) & 0x20000000) == 0) &&
+       (fdeCompare = DAT_a7b7c08c, (*(uint *)(ob + 0x10) >> 0x15 & 0xff) == 0)) {
+      fdeCompare = DAT_a7b7c090;
     }
-    if (local_4c == 0) {
-      uVar12 = ((int (*)())_frame_heapsort)(param_1,pcVar9,local_50);
+    if (erraticVec == 0) {
+      returnValue = ((int (*)())_frame_heapsort)(ob,fdeCompare,linearVec);
     }
     else {
-      ((int (*)())_fde_split)(param_1,pcVar9,local_50,local_4c);
-      if (local_50[1] + *(int *)(local_4c + 4) != uVar15) goto LAB_97c1d890;
-      ((int (*)())_frame_heapsort)(param_1,pcVar9,local_4c);
-      iVar4 = local_4c;
-      puVar3 = local_50;
-      iVar11 = *(int *)(local_4c + 4);
-      if (iVar11 != 0) {
-        iVar13 = local_50[1];
-        puVar10 = local_50 + iVar11;
-        bVar2 = iVar13 == 0;
-        puVar8 = (undefined4 *)(iVar11 * 4 + local_4c + 8);
+      ((int (*)())_fde_split)(ob,fdeCompare,linearVec,erraticVec);
+      if (linearVec[1] + *(int *)(erraticVec + 4) != count) goto LAB_97c1d890;
+      ((int (*)())_frame_heapsort)(ob,fdeCompare,erraticVec);
+      erraticAlias = erraticVec;
+      v1 = linearVec;
+      i2 = *(int *)(erraticVec + 4);
+      if (i2 != 0) {
+        i1 = linearVec[1];
+        v1IndexBase = linearVec + i2;
+        linearEmpty = i1 == 0;
+        v2ArrayCursor = (undefined4 *)(i2 * 4 + erraticVec + 8);
         do {
-          puVar10 = puVar10 + -1;
-          iVar11 = iVar11 + -1;
-          puVar16 = puVar10 + iVar13 + 2;
-          puVar18 = puVar3 + iVar13;
-          puVar8 = puVar8 + -1;
-          uVar12 = *puVar8;
-          while ((!bVar2 && (iVar7 = (*pcVar9)(param_1,puVar18[1],uVar12), 0 < iVar7))) {
-            puVar1 = puVar18 + 1;
-            iVar13 = iVar13 + -1;
-            bVar2 = iVar13 == 0;
-            puVar18 = puVar18 + -1;
-            *puVar16 = *puVar1;
-            puVar16 = puVar16 + -1;
+          v1IndexBase = v1IndexBase + -1;
+          i2 = i2 + -1;
+          dstSlot = v1IndexBase + i1 + 2;
+          v1Cursor = v1 + i1;
+          v2ArrayCursor = v2ArrayCursor + -1;
+          fde2 = *v2ArrayCursor;
+          while ((!linearEmpty && (compareResult = (*fdeCompare)(ob,v1Cursor[1],fde2), 0 < compareResult))) {
+            srcSlot = v1Cursor + 1;
+            i1 = i1 + -1;
+            linearEmpty = i1 == 0;
+            v1Cursor = v1Cursor + -1;
+            *dstSlot = *srcSlot;
+            dstSlot = dstSlot + -1;
           }
-          puVar3[iVar13 + iVar11 + 2] = uVar12;
-        } while (iVar11 != 0);
-        puVar3[1] = puVar3[1] + *(int *)(iVar4 + 4);
+          v1[i1 + i2 + 2] = fde2;
+        } while (i2 != 0);
+        v1[1] = v1[1] + *(int *)(erraticAlias + 4);
       }
-      _free(local_4c);
-      uVar12 = r3Out0;
+      _free(erraticVec);
+      returnValue = r3Out0;
     }
-    *local_50 = *(undefined4 *)(param_1 + 0xc);
-    *(uint *)(param_1 + 0x10) = *(uint *)(param_1 + 0x10) | 0x80000000;
-    *(undefined4 **)(param_1 + 0xc) = local_50;
+    *linearVec = *(undefined4 *)(ob + 0xc);
+    *(uint *)(ob + 0x10) = *(uint *)(ob + 0x10) | 0x80000000;
+    *(undefined4 **)(ob + 0xc) = linearVec;
   }
-  return uVar12;
+  return returnValue;
 }
 
 /* _examine_objects @ 0x97c1d9ac (556 bytes) */
