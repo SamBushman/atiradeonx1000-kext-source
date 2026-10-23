@@ -1,0 +1,32 @@
+# local	FUNCTION	old	new	tier	evidence (fork E3: per-opcode constant-fold slots of the OpcodeInfo classes)
+local	IrCos__fold	dVar1	cosine	CONFIRMED	_cos result stored to *result
+local	IrCos__fold	param_4	compiler	CONFIRMED	*(param_4+0x30c) is the target description (HwLimits, compiler+0x30c); its slot 0xe0 converts the R5xx angle unit to radians
+local	IrSin__fold	dVar1	sine	CONFIRMED	_sin result stored to *result
+local	IrSin__fold	param_4	compiler	CONFIRMED	*(param_4+0x30c) is the target description (HwLimits, compiler+0x30c); its slot 0xe0 converts the R5xx angle unit to radians
+local	IrLogInternal__fold	dVar1	absOperandOrLn	INFERRED	first |operand| (fabs by sign test), then logf(|operand|): the two roles share one double
+local	IrLogInternal__fold	dVar2	lnTwo	INFERRED	_log(DOUBLE_001aa2a0), the divisor that turns ln into log2: result = ln(|x|) * (1.0 / ln 2)
+local	IrRecipSqrtInternal__fold	fVar1	resultValue	CONFIRMED	written to *result (1.0 when the operand is 1.0, else 1/sqrt(x) for x > 0)
+local	IrRecipSqrtInternal__fold	dVar2	squareRoot	CONFIRMED	_sqrt(operand)
+local	IrSqrt__fold	fVar1	resultValue	CONFIRMED	operand itself for 0.0 and 1.0, else sqrt(x) for x > 0; stored to *result
+local	IrSqrt__fold	dVar2	squareRoot	CONFIRMED	_sqrt(operand)
+local	IrExp__fold	dVar1	powerOfTwo	CONFIRMED	_pow(2.0, operand)
+local	IrMulAddFloat__fold	dVar1	product	CONFIRMED	FUN_00113554(a, b): the IEEE-exact multiply with 0 * x = 0; the addend operand[3] is added afterwards
+local	IrFloorFloat__fold	dVar1	floorValue	CONFIRMED	_floor(operand)
+local	IrFractFloat__fold	fVar1	operandValue	CONFIRMED	operand[1], result = x - floor(x)
+local	IrFractFloat__fold	dVar2	floorValue	CONFIRMED	_floor(operand)
+local	IrDot3__foldVector	dVar1	productX	CONFIRMED	multiply of lane 0 of srcA and srcB
+local	IrDot3__foldVector	dVar2	productY	CONFIRMED	multiply of lane 1
+local	IrDot3__foldVector	dVar3	productZ	CONFIRMED	multiply of lane 2
+local	IrDot4__foldVector	dVar1	productX	CONFIRMED	multiply of lane 0
+local	IrDot4__foldVector	dVar2	productY	CONFIRMED	multiply of lane 1
+local	IrDot4__foldVector	dVar3	productZ	CONFIRMED	multiply of lane 2
+local	IrDot4__foldVector	dVar4	productW	CONFIRMED	multiply of lane 3
+local	IrDot2Add__foldVector	dVar1	productX	CONFIRMED	multiply of lane 0
+local	IrDot2Add__foldVector	dVar2	productY	CONFIRMED	multiply of lane 1
+local	IrDot2Add__foldVector	param_5	addOperand	INFERRED	the float added to the 2-lane dot product is *(param_5 + 8): the third source
+local	IrCndEFloat__fold	uVar1	selected	CONFIRMED	operand[2] when operand[1] == 0.0, else operand[3]
+local	IrCndGEFloat__fold	uVar1	selected	CONFIRMED	operand[3] when operand[1] < 0.0, else operand[2]
+local	IrCndGTFloat__fold	uVar1	selected	CONFIRMED	operand[3] when operand[1] <= 0.0, else operand[2]
+local	IrSetGTFloat__fold	fVar1	difference	CONFIRMED	operand[1] - operand[2]
+local	IrSetGTFloat__fold	fVar2	setResult	CONFIRMED	the stored 1.0/0.0: 1.0 only when the difference is positive
+local	IrSetGTFloat__fold	fVar3	positiveResult	INFERRED	1.0 unless the difference is negative

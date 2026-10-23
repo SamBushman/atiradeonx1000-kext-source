@@ -174,13 +174,13 @@ int IrAddFloat__vslot5(this, param_2, param_3, param_4)
 }
 
 /* IrCos__fold @ 0x1d05b0 (144 bytes) */
-int IrCos__fold(this, result, operands, param_4)
+int IrCos__fold(this, result, operands, compiler)
   undefined4 this;
   float *result;
   int operands;
-  int param_4;
+  int compiler;
 {
-  double dVar1;
+  double cosine;
   
   if (*(int *)(operands + 4) == 0) {
     *result = 1.0;
@@ -189,8 +189,8 @@ int IrCos__fold(this, result, operands, param_4)
     *result = 0.0;
   }
   else {
-    dVar1 = (double)_cos(((double (*)(int, double))*(code **)(**(int **)(param_4 + 0x30c) + 0xe0))(*(int *)(param_4 + 0x30c), (double)*(float *)(operands + 4)));
-    *result = (float)dVar1;
+    cosine = (double)_cos(((double (*)(int, double))*(code **)(**(int **)(compiler + 0x30c) + 0xe0))(*(int *)(compiler + 0x30c), (double)*(float *)(operands + 4)));
+    *result = (float)cosine;
   }
   return 1;
 }
@@ -201,20 +201,20 @@ int IrLogInternal__fold(this, result, operands)
   float *result;
   int operands;
 {
-  double dVar1;
-  double dVar2;
+  double absOperandOrLn;
+  double lnTwo;
   
   if (*(float *)(operands + 4) == FLOAT_001aa0e8) {
     *result = 0.0;
   }
   if (*(int *)(operands + 4) != 0) {
-    dVar1 = (double)*(float *)(operands + 4);
-    if (dVar1 < (double)FLOAT_001aa0d4) {
-      dVar1 = -dVar1;
+    absOperandOrLn = (double)*(float *)(operands + 4);
+    if (absOperandOrLn < (double)FLOAT_001aa0d4) {
+      absOperandOrLn = -absOperandOrLn;
     }
-    dVar1 = (double)_logf(dVar1);
-    dVar2 = (double)_log(DOUBLE_001aa2a0);
-    *result = (float)(dVar1 * (double)(float)(DOUBLE_001aa200 / dVar2));
+    absOperandOrLn = (double)_logf(absOperandOrLn);
+    lnTwo = (double)_log(DOUBLE_001aa2a0);
+    *result = (float)(absOperandOrLn * (double)(float)(DOUBLE_001aa200 / lnTwo));
   }
   return 1;
 }
@@ -225,18 +225,18 @@ int IrRecipSqrtInternal__fold(this, result, operands)
   float *result;
   int operands;
 {
-  float fVar1;
-  double dVar2;
+  float resultValue;
+  double squareRoot;
   
-  fVar1 = FLOAT_001aa0e8;
+  resultValue = FLOAT_001aa0e8;
   if (*(float *)(operands + 4) != FLOAT_001aa0e8) {
     if (*(float *)(operands + 4) <= FLOAT_001aa0d4) {
       return 1;
     }
-    dVar2 = (double)_sqrt((double)*(float *)(operands + 4));
-    fVar1 = (float)(DOUBLE_001aa200 / dVar2);
+    squareRoot = (double)_sqrt((double)*(float *)(operands + 4));
+    resultValue = (float)(DOUBLE_001aa200 / squareRoot);
   }
-  *result = fVar1;
+  *result = resultValue;
   return 1;
 }
 
@@ -253,13 +253,13 @@ int IrRecipInternal__fold(this, result, operands)
 }
 
 /* IrSin__fold @ 0x1d0794 (140 bytes) */
-int IrSin__fold(this, result, operands, param_4)
+int IrSin__fold(this, result, operands, compiler)
   undefined4 this;
   float *result;
   int operands;
-  int param_4;
+  int compiler;
 {
-  double dVar1;
+  double sine;
   
   if (*(int *)(operands + 4) == 0) {
     *result = 0.0;
@@ -268,8 +268,8 @@ int IrSin__fold(this, result, operands, param_4)
     *result = FLOAT_001aa0e8;
   }
   else {
-    dVar1 = (double)_sin(((double (*)(int, double))*(code **)(**(int **)(param_4 + 0x30c) + 0xe0))(*(int *)(param_4 + 0x30c), (double)*(float *)(operands + 4)));
-    *result = (float)dVar1;
+    sine = (double)_sin(((double (*)(int, double))*(code **)(**(int **)(compiler + 0x30c) + 0xe0))(*(int *)(compiler + 0x30c), (double)*(float *)(operands + 4)));
+    *result = (float)sine;
   }
   return 1;
 }
@@ -280,18 +280,18 @@ int IrSqrt__fold(this, result, operands)
   float *result;
   int operands;
 {
-  float fVar1;
-  double dVar2;
+  float resultValue;
+  double squareRoot;
   
-  fVar1 = *(float *)(operands + 4);
-  if ((fVar1 != FLOAT_001aa0e8) && (*(int *)(operands + 4) != 0)) {
+  resultValue = *(float *)(operands + 4);
+  if ((resultValue != FLOAT_001aa0e8) && (*(int *)(operands + 4) != 0)) {
     if (*(int *)(operands + 4) < 1) {
       return 1;
     }
-    dVar2 = (double)_sqrt((double)*(float *)(operands + 4));
-    fVar1 = (float)dVar2;
+    squareRoot = (double)_sqrt((double)*(float *)(operands + 4));
+    resultValue = (float)squareRoot;
   }
-  *result = fVar1;
+  *result = resultValue;
   return 1;
 }
 
@@ -301,14 +301,14 @@ int IrExp__fold(this, result, operands)
   float *result;
   int operands;
 {
-  double dVar1;
+  double powerOfTwo;
   
   if (*(int *)(operands + 4) == 0) {
     *result = 1.0;
   }
   else {
-    dVar1 = (double)_pow(DOUBLE_001aa2a0,(double)*(float *)(operands + 4));
-    *result = (float)dVar1;
+    powerOfTwo = (double)_pow(DOUBLE_001aa2a0,(double)*(float *)(operands + 4));
+    *result = (float)powerOfTwo;
   }
   return 1;
 }
@@ -340,10 +340,10 @@ int IrMulAddFloat__fold(this, result, operands)
   float *result;
   int operands;
 {
-  double dVar1;
+  double product;
   
-  dVar1 = (double)((double (*)())FUN_00113554)((double)*(float *)(operands + 4),(double)*(float *)(operands + 8));
-  *result = (float)(dVar1 + (double)*(float *)(operands + 0xc));
+  product = (double)((double (*)())FUN_00113554)((double)*(float *)(operands + 4),(double)*(float *)(operands + 8));
+  *result = (float)(product + (double)*(float *)(operands + 0xc));
   return 1;
 }
 
@@ -353,10 +353,10 @@ int IrFloorFloat__fold(this, result, operands)
   float *result;
   int operands;
 {
-  double dVar1;
+  double floorValue;
   
-  dVar1 = (double)_floor((double)*(float *)(operands + 4));
-  *result = (float)dVar1;
+  floorValue = (double)_floor((double)*(float *)(operands + 4));
+  *result = (float)floorValue;
   return 1;
 }
 
@@ -366,12 +366,12 @@ int IrFractFloat__fold(this, result, operands)
   float *result;
   int operands;
 {
-  float fVar1;
-  double dVar2;
+  float operandValue;
+  double floorValue;
   
-  fVar1 = *(float *)(operands + 4);
-  dVar2 = (double)_floor((double)fVar1);
-  *result = (float)((double)fVar1 - dVar2);
+  operandValue = *(float *)(operands + 4);
+  floorValue = (double)_floor((double)operandValue);
+  *result = (float)((double)operandValue - floorValue);
   return 1;
 }
 
@@ -382,14 +382,14 @@ int IrDot3__foldVector(this, result, srcA, srcB)
   float *srcA;
   float *srcB;
 {
-  double dVar1;
-  double dVar2;
-  double dVar3;
+  double productX;
+  double productY;
+  double productZ;
   
-  dVar1 = (double)((double (*)())FUN_00113554)((double)*srcA,(double)*srcB);
-  dVar2 = (double)((double (*)())FUN_00113554)((double)srcA[1],(double)srcB[1]);
-  dVar3 = (double)((double (*)())FUN_00113554)((double)srcA[2],(double)srcB[2]);
-  *result = (float)((double)(float)(dVar1 + dVar2) + dVar3);
+  productX = (double)((double (*)())FUN_00113554)((double)*srcA,(double)*srcB);
+  productY = (double)((double (*)())FUN_00113554)((double)srcA[1],(double)srcB[1]);
+  productZ = (double)((double (*)())FUN_00113554)((double)srcA[2],(double)srcB[2]);
+  *result = (float)((double)(float)(productX + productY) + productZ);
   return;
 }
 
@@ -400,33 +400,33 @@ int IrDot4__foldVector(this, result, srcA, srcB)
   float *srcA;
   float *srcB;
 {
-  double dVar1;
-  double dVar2;
-  double dVar3;
-  double dVar4;
+  double productX;
+  double productY;
+  double productZ;
+  double productW;
   
-  dVar1 = (double)((double (*)())FUN_00113554)((double)*srcA,(double)*srcB);
-  dVar2 = (double)((double (*)())FUN_00113554)((double)srcA[1],(double)srcB[1]);
-  dVar3 = (double)((double (*)())FUN_00113554)((double)srcA[2],(double)srcB[2]);
-  dVar4 = (double)((double (*)())FUN_00113554)((double)srcA[3],(double)srcB[3]);
-  *result = (float)((double)(float)((double)(float)(dVar1 + dVar2) + dVar3) + dVar4);
+  productX = (double)((double (*)())FUN_00113554)((double)*srcA,(double)*srcB);
+  productY = (double)((double (*)())FUN_00113554)((double)srcA[1],(double)srcB[1]);
+  productZ = (double)((double (*)())FUN_00113554)((double)srcA[2],(double)srcB[2]);
+  productW = (double)((double (*)())FUN_00113554)((double)srcA[3],(double)srcB[3]);
+  *result = (float)((double)(float)((double)(float)(productX + productY) + productZ) + productW);
   return;
 }
 
 /* IrDot2Add__foldVector @ 0x1d0b94 (104 bytes) */
-int IrDot2Add__foldVector(this, result, srcA, srcB, param_5)
+int IrDot2Add__foldVector(this, result, srcA, srcB, addOperand)
   undefined4 this;
   float *result;
   float *srcA;
   float *srcB;
-  int param_5;
+  int addOperand;
 {
-  double dVar1;
-  double dVar2;
+  double productX;
+  double productY;
   
-  dVar1 = (double)((double (*)())FUN_00113554)((double)*srcA,(double)*srcB);
-  dVar2 = (double)((double (*)())FUN_00113554)((double)srcA[1],(double)srcB[1]);
-  *result = (float)(dVar1 + dVar2) + *(float *)(param_5 + 8);
+  productX = (double)((double (*)())FUN_00113554)((double)*srcA,(double)*srcB);
+  productY = (double)((double (*)())FUN_00113554)((double)srcA[1],(double)srcB[1]);
+  *result = (float)(productX + productY) + *(float *)(addOperand + 8);
   return;
 }
 
@@ -436,15 +436,15 @@ int IrCndEFloat__fold(this, result, operands)
   undefined4 *result;
   int operands;
 {
-  undefined4 uVar1;
+  undefined4 selected;
   
   if (*(float *)(operands + 4) == FLOAT_001aa0d4) {
-    uVar1 = *(undefined4 *)(operands + 8);
+    selected = *(undefined4 *)(operands + 8);
   }
   else {
-    uVar1 = *(undefined4 *)(operands + 0xc);
+    selected = *(undefined4 *)(operands + 0xc);
   }
-  *result = uVar1;
+  *result = selected;
   return 1;
 }
 
@@ -454,15 +454,15 @@ int IrCndGEFloat__fold(this, result, operands)
   undefined4 *result;
   int operands;
 {
-  undefined4 uVar1;
+  undefined4 selected;
   
   if (*(float *)(operands + 4) < FLOAT_001aa0d4) {
-    uVar1 = *(undefined4 *)(operands + 0xc);
+    selected = *(undefined4 *)(operands + 0xc);
   }
   else {
-    uVar1 = *(undefined4 *)(operands + 8);
+    selected = *(undefined4 *)(operands + 8);
   }
-  *result = uVar1;
+  *result = selected;
   return 1;
 }
 
@@ -472,15 +472,15 @@ int IrCndGTFloat__fold(this, result, operands)
   undefined4 *result;
   int operands;
 {
-  undefined4 uVar1;
+  undefined4 selected;
   
   if (*(float *)(operands + 4) <= FLOAT_001aa0d4) {
-    uVar1 = *(undefined4 *)(operands + 0xc);
+    selected = *(undefined4 *)(operands + 0xc);
   }
   else {
-    uVar1 = *(undefined4 *)(operands + 8);
+    selected = *(undefined4 *)(operands + 8);
   }
-  *result = uVar1;
+  *result = selected;
   return 1;
 }
 
@@ -490,20 +490,20 @@ int IrSetGTFloat__fold(this, result, operands)
   float *result;
   int operands;
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
+  float difference;
+  float setResult;
+  float positiveResult;
   
-  fVar1 = *(float *)(operands + 4) - *(float *)(operands + 8);
-  fVar3 = FLOAT_001aa0e8;
-  if (fVar1 < 0.0) {
-    fVar3 = FLOAT_001aa0d4;
+  difference = *(float *)(operands + 4) - *(float *)(operands + 8);
+  positiveResult = FLOAT_001aa0e8;
+  if (difference < 0.0) {
+    positiveResult = FLOAT_001aa0d4;
   }
-  fVar2 = FLOAT_001aa0d4;
-  if (-fVar1 < 0.0) {
-    fVar2 = fVar3;
+  setResult = FLOAT_001aa0d4;
+  if (-difference < 0.0) {
+    setResult = positiveResult;
   }
-  *result = fVar2;
+  *result = setResult;
   return 1;
 }
 
