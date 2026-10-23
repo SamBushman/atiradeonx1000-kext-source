@@ -32,8 +32,8 @@
 0x9b30	FUN_000098c8
 0x9b54	FUN_000098c8
 0x9b68	FUN_000098c8
-0x40a9c	FUN_00040374
-0x40ac0	FUN_00040374
+0x40a9c	fragmentTranslateScalarMathBody
+0x40ac0	fragmentTranslateScalarMathBody
 0x4c544	noop_4c540
 0x535c4	FUN_000534c0
 0x535f0	FUN_000534c0

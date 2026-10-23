@@ -1831,7 +1831,7 @@ const unsigned int sectDATA___data[15824] = {
     0x00000000, /* +0x1c90 */
     0x066a0066, /* +0x1c94 */
     0x00000000, /* +0x1c98 */
-    0x0003fd80, /* -> FUN_0003fd80 */ /* +0x1c9c */
+    0x0003fd80, /* -> fragmentTranslateSimpleOp */ /* +0x1c9c */
     0x40000000, /* +0x1ca0 */
     0x076200ae, /* +0x1ca4 */
     0x00000000, /* +0x1ca8 */
@@ -1871,11 +1871,11 @@ const unsigned int sectDATA___data[15824] = {
     0x00000000, /* +0x1d30 */
     0x106a005a, /* +0x1d34 */
     0x00000000, /* +0x1d38 */
-    0x00040370, /* -> FUN_00040370 */ /* +0x1d3c */
+    0x00040370, /* -> fragmentTranslateScalarMath */ /* +0x1d3c */
     0x00000000, /* +0x1d40 */
     0x110a005a, /* +0x1d44 */
     0x00000000, /* +0x1d48 */
-    0x00040370, /* -> FUN_00040370 */ /* +0x1d4c */
+    0x00040370, /* -> fragmentTranslateScalarMath */ /* +0x1d4c */
     0x00000000, /* +0x1d50 */
     0x12620070, /* +0x1d54 */
     0x00000000, /* +0x1d58 */
@@ -1883,11 +1883,11 @@ const unsigned int sectDATA___data[15824] = {
     0x00000000, /* +0x1d60 */
     0x136a0078, /* +0x1d64 */
     0x00000000, /* +0x1d68 */
-    0x00040370, /* -> FUN_00040370 */ /* +0x1d6c */
+    0x00040370, /* -> fragmentTranslateScalarMath */ /* +0x1d6c */
     0x00000000, /* +0x1d70 */
     0x140a0078, /* +0x1d74 */
     0x00000000, /* +0x1d78 */
-    0x00040370, /* -> FUN_00040370 */ /* +0x1d7c */
+    0x00040370, /* -> fragmentTranslateScalarMath */ /* +0x1d7c */
     0x00000000, /* +0x1d80 */
     0x15620098, /* +0x1d84 */
     0x00200000, /* +0x1d88 */
@@ -1895,11 +1895,11 @@ const unsigned int sectDATA___data[15824] = {
     0x00000000, /* +0x1d90 */
     0x166a0092, /* +0x1d94 */
     0x00000000, /* +0x1d98 */
-    0x00041510, /* -> FUN_00041510 */ /* +0x1d9c */
+    0x00041510, /* -> fragmentTranslateAngleConvert */ /* +0x1d9c */
     0x00000000, /* +0x1da0 */
     0x176a0092, /* +0x1da4 */
     0x00000000, /* +0x1da8 */
-    0x00041510, /* -> FUN_00041510 */ /* +0x1dac */
+    0x00041510, /* -> fragmentTranslateAngleConvert */ /* +0x1dac */
     0x00000000, /* +0x1db0 */
     0x186200b2, /* +0x1db4 */
     0x00000000, /* +0x1db8 */
@@ -1907,27 +1907,27 @@ const unsigned int sectDATA___data[15824] = {
     0x00000000, /* +0x1dc0 */
     0x196a00b0, /* +0x1dc4 */
     0x00000000, /* +0x1dc8 */
-    0x00041310, /* -> FUN_00041310 */ /* +0x1dcc */
+    0x00041310, /* -> fragmentTranslateTrig */ /* +0x1dcc */
     0x00000000, /* +0x1dd0 */
     0x1a6a0024, /* +0x1dd4 */
     0x00000000, /* +0x1dd8 */
-    0x00041310, /* -> FUN_00041310 */ /* +0x1ddc */
+    0x00041310, /* -> fragmentTranslateTrig */ /* +0x1ddc */
     0x00000000, /* +0x1de0 */
     0x1b6a00b8, /* +0x1de4 */
     0x00000000, /* +0x1de8 */
-    0x00041310, /* -> FUN_00041310 */ /* +0x1dec */
+    0x00041310, /* -> fragmentTranslateTrig */ /* +0x1dec */
     0x00000000, /* +0x1df0 */
     0x1c6a0008, /* +0x1df4 */
     0x00000000, /* +0x1df8 */
-    0x00040370, /* -> FUN_00040370 */ /* +0x1dfc */
+    0x00040370, /* -> fragmentTranslateScalarMath */ /* +0x1dfc */
     0x00000000, /* +0x1e00 */
     0x1d6a0004, /* +0x1e04 */
     0x00000000, /* +0x1e08 */
-    0x00040370, /* -> FUN_00040370 */ /* +0x1e0c */
+    0x00040370, /* -> fragmentTranslateScalarMath */ /* +0x1e0c */
     0x00000000, /* +0x1e10 */
     0x1e0a000a, /* +0x1e14 */
     0x00000000, /* +0x1e18 */
-    0x00041c00, /* -> FUN_00041c00 */ /* +0x1e1c */
+    0x00041c00, /* -> fragmentTranslateAtn */ /* +0x1e1c */
     0x00000000, /* +0x1e20 */
     0x1f8e0006, /* +0x1e24 */
     0x00000000, /* +0x1e28 */
@@ -1939,7 +1939,7 @@ const unsigned int sectDATA___data[15824] = {
     0x00000000, /* +0x1e40 */
     0x218a0092, /* +0x1e44 */
     0x00000000, /* +0x1e48 */
-    0x00041750, /* -> FUN_00041750 */ /* +0x1e4c */
+    0x00041750, /* -> fragmentTranslateMod */ /* +0x1e4c */
     0x00000000, /* +0x1e50 */
     0x228e0092, /* +0x1e54 */
     0x00000000, /* +0x1e58 */
@@ -1979,7 +1979,7 @@ const unsigned int sectDATA___data[15824] = {
     0x00000000, /* +0x1ee0 */
     0x2b8a00b6, /* +0x1ee4 */
     0x00000000, /* +0x1ee8 */
-    0x00043f60, /* -> FUN_00043f60 */ /* +0x1eec */
+    0x00043f60, /* -> fragmentTranslateDst */ /* +0x1eec */
     0x00000000, /* +0x1ef0 */
     0x2c820088, /* +0x1ef4 */
     0x00000000, /* +0x1ef8 */
@@ -1995,7 +1995,7 @@ const unsigned int sectDATA___data[15824] = {
     0x00000000, /* +0x1f20 */
     0x2f8a0000, /* +0x1f24 */
     0x00000000, /* +0x1f28 */
-    0x00044500, /* -> FUN_00044500 */ /* +0x1f2c */
+    0x00044500, /* -> fragmentTranslateRfl */ /* +0x1f2c */
     0x00000000, /* +0x1f30 */
     0x30000000, /* +0x1f34 */
     0x00000000, /* +0x1f38 */
@@ -2043,7 +2043,7 @@ const unsigned int sectDATA___data[15824] = {
     0x00000000, /* +0x1fe0 */
     0x3baa005e, /* +0x1fe4 */
     0x00000000, /* +0x1fe8 */
-    0x00043df0, /* -> FUN_00043df0 */ /* +0x1fec */
+    0x00043df0, /* -> fragmentTranslateFfw */ /* +0x1fec */
     0x00000000, /* +0x1ff0 */
     0x3ca2007e, /* +0x1ff4 */
     0x00000000, /* +0x1ff8 */
@@ -2127,11 +2127,11 @@ const unsigned int sectDATA___data[15824] = {
     0x00000000, /* +0x2130 */
     0x500a004a, /* +0x2134 */
     0x00000000, /* +0x2138 */
-    0x0003fd80, /* -> FUN_0003fd80 */ /* +0x213c */
+    0x0003fd80, /* -> fragmentTranslateSimpleOp */ /* +0x213c */
     0x40000000, /* +0x2140 */
     0x510a004c, /* +0x2144 */
     0x00000000, /* +0x2148 */
-    0x000401b0, /* -> FUN_000401b0 */ /* +0x214c */
+    0x000401b0, /* -> fragmentTranslateDdy */ /* +0x214c */
     0x40000000, /* +0x2150 */
     0x52000000, /* +0x2154 */
     0x00000000, /* +0x2158 */
@@ -2143,11 +2143,11 @@ const unsigned int sectDATA___data[15824] = {
     0x00000000, /* +0x2170 */
     0x544a000c, /* +0x2174 */
     0x00000000, /* +0x2178 */
-    0x0003fd80, /* -> FUN_0003fd80 */ /* +0x217c */
+    0x0003fd80, /* -> fragmentTranslateSimpleOp */ /* +0x217c */
     0x20000000, /* +0x2180 */
     0x556a0068, /* +0x2184 */
     0x00180000, /* +0x2188 */
-    0x00044360, /* -> FUN_00044360 */ /* +0x218c */
+    0x00044360, /* -> fragmentTranslateIf */ /* +0x218c */
     0x60000000, /* +0x2190 */
     0x56000000, /* +0x2194 */
     0x00000000, /* +0x2198 */
@@ -2155,15 +2155,15 @@ const unsigned int sectDATA___data[15824] = {
     0x00000000, /* +0x21a0 */
     0x576a007c, /* +0x21a4 */
     0x00080000, /* +0x21a8 */
-    0x0003ff40, /* -> FUN_0003ff40 */ /* +0x21ac */
+    0x0003ff40, /* -> fragmentTranslateRep */ /* +0x21ac */
     0x60000000, /* +0x21b0 */
     0x584a004e, /* +0x21b4 */
     0x00000000, /* +0x21b8 */
-    0x0003fd80, /* -> FUN_0003fd80 */ /* +0x21bc */
+    0x0003fd80, /* -> fragmentTranslateSimpleOp */ /* +0x21bc */
     0x20000000, /* +0x21c0 */
     0x594a0052, /* +0x21c4 */
     0x00000000, /* +0x21c8 */
-    0x0003fd80, /* -> FUN_0003fd80 */ /* +0x21cc */
+    0x0003fd80, /* -> fragmentTranslateSimpleOp */ /* +0x21cc */
     0x20000000, /* +0x21d0 */
     0x5a000000, /* +0x21d4 */
     0x00000000, /* +0x21d8 */
@@ -2171,7 +2171,7 @@ const unsigned int sectDATA___data[15824] = {
     0x00000000, /* +0x21e0 */
     0x5b0a0054, /* +0x21e4 */
     0x00000000, /* +0x21e8 */
-    0x0003fd80, /* -> FUN_0003fd80 */ /* +0x21ec */
+    0x0003fd80, /* -> fragmentTranslateSimpleOp */ /* +0x21ec */
     0x20000000, /* +0x21f0 */
     0x5c000000, /* +0x21f4 */
     0x00000000, /* +0x21f8 */
@@ -2223,19 +2223,19 @@ const unsigned int sectDATA___data[15824] = {
     0x00000000, /* +0x22b0 */
     0x68aa0000, /* +0x22b4 */
     0x00000000, /* +0x22b8 */
-    0x00042e00, /* -> FUN_00042e00 */ /* +0x22bc */
+    0x00042e00, /* -> fragmentTranslateRfr */ /* +0x22bc */
     0x00000000, /* +0x22c0 */
     0x690a0020, /* +0x22c4 */
     0x00000000, /* +0x22c8 */
-    0x0003fd80, /* -> FUN_0003fd80 */ /* +0x22cc */
+    0x0003fd80, /* -> fragmentTranslateSimpleOp */ /* +0x22cc */
     0x20000000, /* +0x22d0 */
     0x6a4a007c, /* +0x22d4 */
     0x00080000, /* +0x22d8 */
-    0x00044ac0, /* -> FUN_00044ac0 */ /* +0x22dc */
+    0x00044ac0, /* -> fragmentTranslateWhile */ /* +0x22dc */
     0x20000000, /* +0x22e0 */
     0x6b4a0054, /* +0x22e4 */
     0x00000000, /* +0x22e8 */
-    0x0003fd80, /* -> FUN_0003fd80 */ /* +0x22ec */
+    0x0003fd80, /* -> fragmentTranslateSimpleOp */ /* +0x22ec */
     0x20000000, /* +0x22f0 */
     0x6c6e0000, /* +0x22f4 */
     0x00000000, /* +0x22f8 */
@@ -2251,11 +2251,11 @@ const unsigned int sectDATA___data[15824] = {
     0x00000000, /* +0x2320 */
     0x6f0a0058, /* +0x2324 */
     0x00000000, /* +0x2328 */
-    0x00040370, /* -> FUN_00040370 */ /* +0x232c */
+    0x00040370, /* -> fragmentTranslateScalarMath */ /* +0x232c */
     0x00000000, /* +0x2330 */
     0x700a0074, /* +0x2334 */
     0x00000000, /* +0x2338 */
-    0x00040370, /* -> FUN_00040370 */ /* +0x233c */
+    0x00040370, /* -> fragmentTranslateScalarMath */ /* +0x233c */
     0x00000000, /* +0x2340 */
     0x00000008, /* +0x2344 */
     0x00000000, /* +0x2348 */

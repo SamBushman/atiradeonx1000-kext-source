@@ -7732,14 +7732,14 @@ void FUN_000b4f50(int param_1,int param_2,undefined4 param_3,undefined4 param_4,
   undefined4 uVar2;
   
   if (param_7 == 0) {
-    uVar2 = ((uint (*)())FUN_0004a7d0)(fparam_1);
+    uVar2 = ((uint (*)())floatToFp24)(fparam_1);
     iVar1 = param_2 * 0x10 + param_1;
     *(undefined4 *)(iVar1 + 0x8c) = uVar2;
-    uVar2 = ((uint (*)())FUN_0004a7d0)(fparam_2);
+    uVar2 = ((uint (*)())floatToFp24)(fparam_2);
     *(undefined4 *)(iVar1 + 0x90) = uVar2;
-    uVar2 = ((uint (*)())FUN_0004a7d0)(fparam_3);
+    uVar2 = ((uint (*)())floatToFp24)(fparam_3);
     *(undefined4 *)(iVar1 + 0x94) = uVar2;
-    uVar2 = ((uint (*)())FUN_0004a7d0)(fparam_4);
+    uVar2 = ((uint (*)())floatToFp24)(fparam_4);
     *(undefined4 *)(iVar1 + 0x98) = uVar2;
   }
   else {

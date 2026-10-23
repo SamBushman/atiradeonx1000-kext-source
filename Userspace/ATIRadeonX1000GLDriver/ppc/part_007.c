@@ -532,8 +532,8 @@ LAB_0004c770:
   return;
 }
 
-/* FUN_0004cde0 @ 0x4cde0 (72 bytes) */
-int FUN_0004cde0(param_1)
+/* freeAndNullField @ 0x4cde0 (72 bytes) */
+int freeAndNullField(param_1)
   int param_1;
 {
   /* issue #74 / #79: this is the stock's plain free-and-null helper again. It used to carry a
@@ -2462,7 +2462,7 @@ int gldValidateAlphaTest(glContext)
     *(undefined1 *)(glContext + 0x1a4f) = alphaRefByte;
     if ((*(uint *)(PTR_DAT_001e88c8 + (uint)*(byte *)(glContext + 0x293f) * 0x24 + 0x18) & 0x3c00) ==
         0x2800) {
-      alphaRef16 = ((uint (*)())FUN_0001d7c0)((double)*(float *)(((unsigned char *)0x00002d60) + glState));
+      alphaRef16 = ((uint (*)())floatToHalfBits)((double)*(float *)(((unsigned char *)0x00002d60) + glState));
       *(undefined2 *)(glContext + 0x1bde) = alphaRef16;
     }
     else {
@@ -3613,13 +3613,13 @@ LAB_00051c00:
   fVar6 = FLOAT_001aa10c;
   if ((*(uint *)(PTR_DAT_001e88c8 + (uint)*(byte *)(glContext + 0x293f) * 0x24 + 0x18) & 0x3c00) ==
       0x2800) {
-    uVar14 = ((uint (*)())FUN_0001d7c0)((double)*(float *)(((unsigned char *)0x00002d70) + glState));
+    uVar14 = ((uint (*)())floatToHalfBits)((double)*(float *)(((unsigned char *)0x00002d70) + glState));
     *(undefined2 *)(glContext + 0x1a8e) = uVar14;
-    uVar14 = ((uint (*)())FUN_0001d7c0)((double)*(float *)(((unsigned char *)0x00002d7c) + glState));
+    uVar14 = ((uint (*)())floatToHalfBits)((double)*(float *)(((unsigned char *)0x00002d7c) + glState));
     *(undefined2 *)(glContext + 0x1a8c) = uVar14;
-    uVar14 = ((uint (*)())FUN_0001d7c0)((double)*(float *)(((unsigned char *)0x00002d78) + glState));
+    uVar14 = ((uint (*)())floatToHalfBits)((double)*(float *)(((unsigned char *)0x00002d78) + glState));
     *(undefined2 *)(glContext + 0x1a92) = uVar14;
-    uVar14 = ((uint (*)())FUN_0001d7c0)((double)*(float *)(((unsigned char *)0x00002d74) + glState));
+    uVar14 = ((uint (*)())floatToHalfBits)((double)*(float *)(((unsigned char *)0x00002d74) + glState));
     *(undefined2 *)(glContext + 0x1a90) = uVar14;
   }
   else {

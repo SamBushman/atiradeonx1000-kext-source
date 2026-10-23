@@ -27,7 +27,7 @@ gld_readPixelsViaBlit
 FUN_00029290
 glReadPixels_impl
 gld_drawPixelsFromClientSurface
-FUN_0002cb40
+gldContextFreeResources
 FUN_0002cc10
 FUN_000307a0
 glGenerateMipmap_impl

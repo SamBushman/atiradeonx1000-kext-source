@@ -7387,8 +7387,8 @@ LAB_0009fb60:
   return;
 }
 
-/* FUN_000a0290 @ 0xa0290 (96 bytes) */
-int FUN_000a0290(param_1, param_2, param_3)
+/* arbProgramFindIndex @ 0xa0290 (96 bytes) */
+int arbProgramFindIndex(param_1, param_2, param_3)
   undefined4 param_1;
   int param_2;
   int param_3;
@@ -7420,8 +7420,8 @@ int FUN_000a0290(param_1, param_2, param_3)
   return 0;
 }
 
-/* FUN_000a0300 @ 0xa0300 (80 bytes) */
-int FUN_000a0300(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+/* glProgramStringARB_impl @ 0xa0300 (80 bytes) */
+int glProgramStringARB_impl(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   int param_1;
   int param_2;
   int param_3;
@@ -7459,8 +7459,8 @@ int FUN_000a0350(param_1, param_2)
   return;
 }
 
-/* FUN_000a0380 @ 0xa0380 (476 bytes) */
-int FUN_000a0380(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+/* glBindProgramARB_impl @ 0xa0380 (476 bytes) */
+int glBindProgramARB_impl(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int param_1;
   int param_2;
   int param_3;
@@ -7481,7 +7481,7 @@ int FUN_000a0380(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   if ((param_2 == 0x8620) || (param_2 == 0x8804)) {
     iVar5 = *(int *)(((unsigned char *)0x0000112c) + param_1);
     a2 = param_3;
-    iVar2 = ((int (*)())FUN_000a0290)(param_1,iVar5,param_3);
+    iVar2 = ((int (*)())arbProgramFindIndex)(param_1,iVar5,param_3);
     if (iVar2 == 0) {
       if (param_3 != 0) {
         uVar1 = *(uint *)(iVar5 + 4);
@@ -7529,8 +7529,8 @@ int FUN_000a0380(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   return;
 }
 
-/* FUN_000a0570 @ 0xa0570 (124 bytes) */
-int FUN_000a0570(param_1, param_2, param_3)
+/* glGenProgramsARB_impl @ 0xa0570 (124 bytes) */
+int glGenProgramsARB_impl(param_1, param_2, param_3)
   int param_1;
   int param_2;
   int param_3;
@@ -7545,7 +7545,7 @@ int FUN_000a0570(param_1, param_2, param_3)
     loopIndex = 0;
     iVar4 = *piVar3;
     do {
-      while (iVar1 = ((int (*)())FUN_000a0290)(param_1,piVar3,iVar4), iVar1 != 0) {
+      while (iVar1 = ((int (*)())arbProgramFindIndex)(param_1,piVar3,iVar4), iVar1 != 0) {
         iVar4 = iVar4 + 1;
       }
       iVar1 = loopIndex * 4;
@@ -7558,8 +7558,8 @@ int FUN_000a0570(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_000a05f0 @ 0xa05f0 (704 bytes) */
-int FUN_000a05f0(param_1, param_2, param_3, param_4)
+/* glGetProgramivARB_impl @ 0xa05f0 (704 bytes) */
+int glGetProgramivARB_impl(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   int param_3;
@@ -7848,8 +7848,8 @@ switchD_000a0718_caseD_8811:
   return;
 }
 
-/* FUN_000a0ba0 @ 0xa0ba0 (188 bytes) */
-int FUN_000a0ba0(param_1, param_2)
+/* arbProgramEntryFree @ 0xa0ba0 (188 bytes) */
+int arbProgramEntryFree(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
@@ -7875,8 +7875,8 @@ int FUN_000a0ba0(param_1, param_2)
   return;
 }
 
-/* FUN_000a0c60 @ 0xa0c60 (260 bytes) */
-int FUN_000a0c60(param_1)
+/* arbProgramTableRelease @ 0xa0c60 (260 bytes) */
+int arbProgramTableRelease(param_1)
   int param_1;
 {
   int iVar1;
@@ -7900,7 +7900,7 @@ int FUN_000a0c60(param_1)
         loopIndex = loopIndex + 1;
         iVar1 = iVar3 + *(int *)(iVar4 + 8);
         iVar3 = iVar3 + 0x18;
-        ((int (*)())FUN_000a0ba0)(param_1,iVar1);
+        ((int (*)())arbProgramEntryFree)(param_1,iVar1);
       } while (loopIndex < *(uint *)(iVar4 + 4));
     }
     *(undefined4 *)(iVar4 + 4) = 0;
@@ -7914,8 +7914,8 @@ int FUN_000a0c60(param_1)
   return;
 }
 
-/* FUN_000a0d70 @ 0xa0d70 (372 bytes) */
-int FUN_000a0d70(param_1, param_2, param_3)
+/* glDeleteProgramsARB_impl @ 0xa0d70 (372 bytes) */
+int glDeleteProgramsARB_impl(param_1, param_2, param_3)
   int param_1;
   int param_2;
   int *param_3;
@@ -7933,16 +7933,16 @@ int FUN_000a0d70(param_1, param_2, param_3)
     iVar5 = *(int *)(((unsigned char *)0x0000112c) + param_1);
     loopIndex = 0;
     do {
-      uVar1 = ((int (*)())FUN_000a0290)(param_1,iVar5,*param_3);
+      uVar1 = ((int (*)())arbProgramFindIndex)(param_1,iVar5,*param_3);
       if (uVar1 != 0) {
         iVar2 = *(int *)(iVar5 + 8);
         iVar4 = uVar1 * 0x18;
         if ((*(int *)(iVar2 + iVar4 + 4) == 0x8804) &&
            (*(int *)(*(int *)(((unsigned char *)0x00001270) + param_1) * 0x18 + iVar2) == *param_3)) {
-          ((int (*)())FUN_000a0380)(param_1,0x8804,0,in_r6,in_r7,in_r8,*param_3);
+          ((int (*)())glBindProgramARB_impl)(param_1,0x8804,0,in_r6,in_r7,in_r8,*param_3);
           iVar2 = *(int *)(iVar5 + 8);
         }
-        ((int (*)())FUN_000a0ba0)(param_1,iVar4 + iVar2);
+        ((int (*)())arbProgramEntryFree)(param_1,iVar4 + iVar2);
         iVar4 = iVar4 + *(int *)(iVar5 + 8);
         _memmove(iVar4,iVar4 + 0x18,(*(int *)(iVar5 + 4) - uVar1) * 0x18 + -0x18);
         iVar4 = *(int *)(iVar5 + 4) + -1;
@@ -8008,7 +8008,7 @@ int FUN_000a0f90(param_1)
   *(code **)(((unsigned char *)0x00001160) + param_1) = noop_a0f80;
   *(code **)(((unsigned char *)0x0000115c) + param_1) = noop_a0f80;
   *(undefined **)(((unsigned char *)0x00001164) + param_1) = puVar2;
-  FUN_000a21d0(param_1);
+  atifsResetState(param_1);
   uVar5 = *(uint *)(param_1 + 0x27bc);
   uVar4 = 0;
   iVar6 = 0x10;

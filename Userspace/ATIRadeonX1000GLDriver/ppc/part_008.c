@@ -2397,8 +2397,8 @@ int extvsOperandsConflictInBank(symbolList, operandA, operandB)
   return 0;
 }
 
-/* FUN_00057b80 @ 0x57b80 (360 bytes) */
-int FUN_00057b80(param_1, param_2)
+/* extvsAllocTempSlot @ 0x57b80 (360 bytes) */
+int extvsAllocTempSlot(param_1, param_2)
   int param_1;
   int *param_2;
 {
@@ -2540,7 +2540,7 @@ int extvsEmitIndex(param_1, param_2, param_3)
       }
       iVar6 = iVar3 * 0x10 + *(int *)(iVar6 + 0x1c);
       iVar3 = param_3 + 0x3c;
-      uVar2 = ((int (*)())FUN_00057b80)(param_1,param_2);
+      uVar2 = ((int (*)())extvsAllocTempSlot)(param_1,param_2);
       uStack_98 = 3;
       uStack_90 = 1;
       uStack_8c = 0;
@@ -2729,7 +2729,7 @@ int extvsEmitDot3(param_1, param_2, param_3)
       }
     }
     iVar2 = iVar7 * 0x10 + *(int *)(iVar2 + 0x1c);
-    uVar3 = ((int (*)())FUN_00057b80)(param_1,param_2);
+    uVar3 = ((int (*)())extvsAllocTempSlot)(param_1,param_2);
     uStack_78 = 3;
     uStack_60 = 0;
     uStack_64 = 1;
@@ -2832,7 +2832,7 @@ int extvsEmitDot4(compiler, program, irInstruction)
       }
     }
     block = instrCount * 0x10 + *(int *)(block + 0x1c);
-    emitResult = ((int (*)())FUN_00057b80)(compiler,program);
+    emitResult = ((int (*)())extvsAllocTempSlot)(compiler,program);
     tempDstFile = 3;
     tempDstFlag = 0;
     tempDstMask3 = 1;
@@ -2933,7 +2933,7 @@ int extvsEmitMul(compiler, program, irInstruction)
       }
     }
     block = instrCount * 0x10 + *(int *)(block + 0x1c);
-    emitResult = ((int (*)())FUN_00057b80)(compiler,program);
+    emitResult = ((int (*)())extvsAllocTempSlot)(compiler,program);
     tempDstFile = 3;
     tempDstFlag = 0;
     tempDstMask3 = 1;
@@ -3034,7 +3034,7 @@ int extvsEmitAdd(compiler, program, irInstruction)
       }
     }
     block = instrCount * 0x10 + *(int *)(block + 0x1c);
-    emitResult = ((int (*)())FUN_00057b80)(compiler,program);
+    emitResult = ((int (*)())extvsAllocTempSlot)(compiler,program);
     tempDstFile = 3;
     tempDstFlag = 0;
     tempDstMask3 = 1;
@@ -3153,7 +3153,7 @@ int extvsEmitMad(param_1, param_2, param_3)
         }
       }
       iVar2 = iVar7 * 0x10 + *(int *)(iVar2 + 0x1c);
-      uVar3 = ((int (*)())FUN_00057b80)(param_1,param_2);
+      uVar3 = ((int (*)())extvsAllocTempSlot)(param_1,param_2);
       uStack_80 = 3;
       uStack_68 = 0;
       uStack_6c = 1;
@@ -3201,7 +3201,7 @@ int extvsEmitMad(param_1, param_2, param_3)
           }
         }
         iVar2 = iVar7 * 0x10 + *(int *)(iVar2 + 0x1c);
-        uVar3 = ((int (*)())FUN_00057b80)(param_1,param_2);
+        uVar3 = ((int (*)())extvsAllocTempSlot)(param_1,param_2);
         uStack_64 = 3;
         uStack_4c = 0;
         uStack_50 = 1;
@@ -3241,7 +3241,7 @@ int extvsEmitMad(param_1, param_2, param_3)
           }
         }
         iVar2 = iVar7 * 0x10 + *(int *)(iVar2 + 0x1c);
-        uVar3 = ((int (*)())FUN_00057b80)(param_1,param_2);
+        uVar3 = ((int (*)())extvsAllocTempSlot)(param_1,param_2);
         uStack_b8 = 3;
         uStack_a0 = 0;
         uStack_a4 = 1;
@@ -3286,7 +3286,7 @@ int extvsEmitMad(param_1, param_2, param_3)
         }
       }
       iVar2 = iVar7 * 0x10 + *(int *)(iVar2 + 0x1c);
-      uVar3 = ((int (*)())FUN_00057b80)(param_1,param_2);
+      uVar3 = ((int (*)())extvsAllocTempSlot)(param_1,param_2);
       uStack_b8 = 3;
       uStack_a0 = 0;
       uStack_a4 = 1;
@@ -3425,7 +3425,7 @@ int extvsEmitMax(param_1, param_2, param_3)
       }
     }
     iVar2 = iVar7 * 0x10 + *(int *)(iVar2 + 0x1c);
-    uVar3 = ((int (*)())FUN_00057b80)(param_1,param_2);
+    uVar3 = ((int (*)())extvsAllocTempSlot)(param_1,param_2);
     local_78 = 3;
     local_60 = 0;
     local_64 = 1;
@@ -3526,7 +3526,7 @@ int extvsEmitMin(compiler, program, irInstruction)
       }
     }
     block = instrCount * 0x10 + *(int *)(block + 0x1c);
-    emitResult = ((int (*)())FUN_00057b80)(compiler,program);
+    emitResult = ((int (*)())extvsAllocTempSlot)(compiler,program);
     tempDstFile = 3;
     tempDstFlag = 0;
     tempDstMask3 = 1;
@@ -3627,7 +3627,7 @@ int extvsEmitSetGreaterEqual(compiler, program, irInstruction)
       }
     }
     block = instrCount * 0x10 + *(int *)(block + 0x1c);
-    emitResult = ((int (*)())FUN_00057b80)(compiler,program);
+    emitResult = ((int (*)())extvsAllocTempSlot)(compiler,program);
     tempDstFile = 3;
     tempDstFlag = 0;
     tempDstMask3 = 1;
@@ -3728,7 +3728,7 @@ int extvsEmitSetLessThan(compiler, program, irInstruction)
       }
     }
     block = instrCount * 0x10 + *(int *)(block + 0x1c);
-    emitResult = ((int (*)())FUN_00057b80)(compiler,program);
+    emitResult = ((int (*)())extvsAllocTempSlot)(compiler,program);
     tempDstFile = 3;
     tempDstFlag = 0;
     tempDstMask3 = 1;
@@ -3788,7 +3788,7 @@ int extvsEmitClamp(param_1, param_2, param_3)
   iVar5 = param_3 + 0x20;
   piVar6 = param_2 + 7;
   iVar4 = param_3 + 0x3c;
-  uVar2 = ((int (*)())FUN_00057b80)(param_1,param_2);
+  uVar2 = ((int (*)())extvsAllocTempSlot)(param_1,param_2);
   iVar3 = ((int (*)())extvsOperandsConflictInBank)(piVar6,iVar5,iVar4);
   uStack_84 = uVar2;
   uStack_68 = uVar2;
@@ -3920,7 +3920,7 @@ int extvsEmitFlr(param_1, param_2, param_3)
   }
   piVar2 = param_2 + 7;
   iVar3 = iVar4 * 0x10 + *(int *)(iVar3 + 0x1c);
-  uVar1 = ((int (*)())FUN_00057b80)(param_1,param_2);
+  uVar1 = ((int (*)())extvsAllocTempSlot)(param_1,param_2);
   uStack_78 = 3;
   uStack_60 = 0;
   uStack_64 = 1;
@@ -3995,13 +3995,13 @@ int extvsEmitRnd(param_1, param_2, param_3)
   }
   piVar5 = param_2 + 7;
   iVar9 = iVar8 * 0x10 + *(int *)(iVar7 + 0x1c);
-  iVar8 = ((int (*)())FUN_00057b80)(param_1,param_2);
+  iVar8 = ((int (*)())extvsAllocTempSlot)(param_1,param_2);
   iVar6 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
   iVar4 = iStack00000020 + 0x20;
   iVar7 = iVar8 * 0x28 + *(int *)(iVar6 + 0x4c);
   uVar1 = *(undefined1 *)(iVar7 + 0x10);
   *(undefined1 *)(iVar7 + 0x10) = 1;
-  uVar3 = ((int (*)())FUN_00057b80)(param_1,param_2);
+  uVar3 = ((int (*)())extvsAllocTempSlot)(param_1,param_2);
   *(undefined1 *)(iVar8 * 0x28 + *(int *)(iVar6 + 0x4c) + 0x10) = uVar1;
   local_98 = 3;
   local_90 = 1;
@@ -4204,7 +4204,7 @@ int extvsEmitPow(param_1, param_2, param_3)
       }
     }
     iVar2 = iVar7 * 0x10 + *(int *)(iVar2 + 0x1c);
-    uVar3 = ((int (*)())FUN_00057b80)(param_1,param_2);
+    uVar3 = ((int (*)())extvsAllocTempSlot)(param_1,param_2);
     local_78 = 3;
     local_70 = 0;
     local_6c = 0;

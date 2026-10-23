@@ -3582,7 +3582,7 @@ int _gldDestroyContext(ctx)
   returnCode = 0x2714;
   if (ctx != 0) {
     FUN_00007020(ctx);
-    FUN_0002cb40(ctx);
+    gldContextFreeResources(ctx);
     _IOServiceClose(*(undefined4 *)(ctx + GLD_connect));
     if (DAT_001f65e0 != (int *)0x0) {
       listNode = DAT_001f65e0;

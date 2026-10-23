@@ -9225,8 +9225,8 @@ LAB_00017d90:
   return;
 }
 
-/* FUN_00017e10 @ 0x17e10 (204 bytes) */
-int FUN_00017e10(param_1)
+/* gldRemoveDisplayNotificationObserver @ 0x17e10 (204 bytes) */
+int gldRemoveDisplayNotificationObserver(param_1)
   undefined4 param_1;
 {
   int distributedCenter;

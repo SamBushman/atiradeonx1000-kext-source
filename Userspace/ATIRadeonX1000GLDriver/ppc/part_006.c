@@ -1,7 +1,7 @@
 #include "decls.h"
 
-/* FUN_0003e4d0 @ 0x3e4d0 (276 bytes) */
-int FUN_0003e4d0(param_1, param_2, param_3, param_4)
+/* atifsReplayTextureOps @ 0x3e4d0 (276 bytes) */
+int atifsReplayTextureOps(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   int param_3;
@@ -49,10 +49,10 @@ LAB_0003e540:
         }
       }
       if ((uVar5 & 0xf0) == 0) {
-        FUN_000a1a60(param_1,iVar2,iVar3,uVar4);
+        glPassTexCoordATI_impl(param_1,iVar2,iVar3,uVar4);
       }
       else {
-        FUN_000a1bc0(param_1,iVar2,iVar3,uVar4);
+        glSampleMapATI_impl(param_1,iVar2,iVar3,uVar4);
       }
       loopIndex = loopIndex + 1;
     } while (param_3 != loopIndex);
@@ -60,8 +60,8 @@ LAB_0003e540:
   return;
 }
 
-/* FUN_0003e600 @ 0x3e600 (1352 bytes) */
-int FUN_0003e600(param_1, param_2, param_3, param_4)
+/* atifsReplayColorAlphaOps @ 0x3e600 (1352 bytes) */
+int atifsReplayColorAlphaOps(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   int param_3;
@@ -259,28 +259,28 @@ LAB_0003e904:
         }
 LAB_0003e9b8:
         if (iVar9 == 2) {
-          FUN_000a1dc0(param_1,uVar10,iVar8,uVar2,uVar11,local_68,local_64,local_60,local_5c,
+          glColorFragmentOp2ATI_impl(param_1,uVar10,iVar8,uVar2,uVar11,local_68,local_64,local_60,local_5c,
                        local_58,local_54);
         }
         else if (iVar9 == 3) {
-          FUN_000a1e70(param_1,uVar10,iVar8,uVar2,uVar11,local_68,local_64,local_60,local_5c,
+          glColorFragmentOp3ATI_impl(param_1,uVar10,iVar8,uVar2,uVar11,local_68,local_64,local_60,local_5c,
                        local_58,local_54,local_50,local_4c,local_48);
         }
         else if (iVar9 == 1) {
-          FUN_000a1d20(param_1,uVar10,iVar8,uVar2,uVar11,local_68,local_64,local_60);
+          glColorFragmentOp1ATI_impl(param_1,uVar10,iVar8,uVar2,uVar11,local_68,local_64,local_60);
         }
       }
       if (((uVar5 & 0x80000) != 0) || ((uVar5 & 0xf0000) == 0)) {
         if (iVar9 == 2) {
-          FUN_000a1fb0(param_1,uVar10,iVar8,uVar11,local_68,local_64,local_60,local_5c,local_58,
+          glAlphaFragmentOp2ATI_impl(param_1,uVar10,iVar8,uVar11,local_68,local_64,local_60,local_5c,local_58,
                        local_54);
         }
         else if (iVar9 == 3) {
-          FUN_000a2050(param_1,uVar10,iVar8,uVar11,local_68,local_64,local_60,local_5c,local_58,
+          glAlphaFragmentOp3ATI_impl(param_1,uVar10,iVar8,uVar11,local_68,local_64,local_60,local_5c,local_58,
                        local_54,local_50,local_4c,local_48);
         }
         else if (iVar9 == 1) {
-          FUN_000a1f20(param_1,uVar10,iVar8,uVar11,local_68,local_64,local_60);
+          glAlphaFragmentOp1ATI_impl(param_1,uVar10,iVar8,uVar11,local_68,local_64,local_60);
         }
       }
       loopIndex = loopIndex + 1;
@@ -289,8 +289,8 @@ LAB_0003e9b8:
   return;
 }
 
-/* FUN_0003eb70 @ 0x3eb70 (296 bytes) */
-int FUN_0003eb70(param_1, param_2, param_3)
+/* atifsReplayProgram @ 0x3eb70 (296 bytes) */
+int atifsReplayProgram(param_1, param_2, param_3)
   int param_1;
   uint *param_2;
   undefined4 param_3;
@@ -303,7 +303,7 @@ int FUN_0003eb70(param_1, param_2, param_3)
   uint *puVar6;
   
   *(undefined2 *)(param_1 + 0x2800) = 0;
-  FUN_000a16b0(param_1);
+  glBeginFragmentShaderATI_impl(param_1);
   uVar1 = *(ushort *)((int)param_2 + 0x16);
   uVar4 = *param_2 >> 0x10 & 0xff;
   puVar6 = param_2 + (*param_2 & 0xffff);
@@ -313,17 +313,17 @@ int FUN_0003eb70(param_1, param_2, param_3)
       uVar2 = *puVar6;
       puVar6 = puVar6 + 1;
       if ((uVar2 & 3) == 1) {
-        FUN_000a2100(param_1,(uVar2 >> 0x14 & 0xff) + 0x8941,
+        glSetFragmentShaderConstantATI_impl(param_1,(uVar2 >> 0x14 & 0xff) + 0x8941,
                      (int)param_2 + (uVar2 >> 8 & 0xff0) + (uint)uVar1 * 4);
       }
       loopIndex = loopIndex + 1;
     } while (uVar4 != loopIndex);
   }
-  ((int (*)())FUN_0003e4d0)(param_1,param_3,param_2[1] >> 0x10 & 0xff,param_2 + (param_2[1] & 0xffff));
-  ((int (*)())FUN_0003e600)(param_1,param_3,param_2[2] >> 0x10 & 0xff,param_2 + (param_2[2] & 0xffff));
-  ((int (*)())FUN_0003e4d0)(param_1,param_3,param_2[3] >> 0x10 & 0xff,param_2 + (param_2[3] & 0xffff));
-  ((int (*)())FUN_0003e600)(param_1,param_3,param_2[4] >> 0x10 & 0xff,param_2 + (param_2[4] & 0xffff));
-  FUN_000a1750(param_1);
+  ((int (*)())atifsReplayTextureOps)(param_1,param_3,param_2[1] >> 0x10 & 0xff,param_2 + (param_2[1] & 0xffff));
+  ((int (*)())atifsReplayColorAlphaOps)(param_1,param_3,param_2[2] >> 0x10 & 0xff,param_2 + (param_2[2] & 0xffff));
+  ((int (*)())atifsReplayTextureOps)(param_1,param_3,param_2[3] >> 0x10 & 0xff,param_2 + (param_2[3] & 0xffff));
+  ((int (*)())atifsReplayColorAlphaOps)(param_1,param_3,param_2[4] >> 0x10 & 0xff,param_2 + (param_2[4] & 0xffff));
+  glEndFragmentShaderATI_impl(param_1);
   uVar3 = FUN_000a11a0(param_1);
   *(undefined4 *)(param_1 + 0x27b8) = uVar3;
   return 1;
@@ -384,8 +384,8 @@ int FUN_0003ed50(param_1, param_2)
   return (uint)(uVar1 == 4) << 1;
 }
 
-/* FUN_0003ed90 @ 0x3ed90 (160 bytes) */
-int FUN_0003ed90(param_1, param_2, param_3, param_4, param_5)
+/* fpilBuildDestinationToken @ 0x3ed90 (160 bytes) */
+int fpilBuildDestinationToken(param_1, param_2, param_3, param_4, param_5)
   int *param_1;
   uint *param_2;
   uint *param_3;
@@ -419,8 +419,8 @@ int FUN_0003ed90(param_1, param_2, param_3, param_4, param_5)
   return 0;
 }
 
-/* FUN_0003ee30 @ 0x3ee30 (88 bytes) */
-int FUN_0003ee30(param_1, param_2, param_3)
+/* fpilSetComponentSelect @ 0x3ee30 (88 bytes) */
+int fpilSetComponentSelect(param_1, param_2, param_3)
   uint param_1;
   int param_2;
   uint *param_3;
@@ -476,8 +476,8 @@ int FUN_0003eea0(param_1, param_2, param_3)
   return 4;
 }
 
-/* FUN_0003ef50 @ 0x3ef50 (240 bytes) */
-int FUN_0003ef50(param_1, param_2, param_3)
+/* fpilReserveTokens @ 0x3ef50 (240 bytes) */
+int fpilReserveTokens(param_1, param_2, param_3)
   int param_1;
   int param_2;
   int *param_3;
@@ -587,8 +587,8 @@ LAB_0003f164:
   return 2;
 }
 
-/* FUN_0003f1c0 @ 0x3f1c0 (700 bytes) */
-int FUN_0003f1c0(param_1, param_2, param_3, param_4)
+/* fpilTranslateSource @ 0x3f1c0 (700 bytes) */
+int fpilTranslateSource(param_1, param_2, param_3, param_4)
   int *param_1;
   uint *param_2;
   uint *param_3;
@@ -698,8 +698,8 @@ switchD_0003f230_caseD_0:
   return 0;
 }
 
-/* FUN_0003f4e0 @ 0x3f4e0 (232 bytes) */
-int FUN_0003f4e0(param_1, param_2, param_3, param_4, param_5)
+/* fpilTranslateSourceWithSwizzle @ 0x3f4e0 (232 bytes) */
+int fpilTranslateSourceWithSwizzle(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   uint *param_2;
   undefined4 *param_3;
@@ -716,7 +716,7 @@ int FUN_0003f4e0(param_1, param_2, param_3, param_4, param_5)
   undefined4 local_38;
   uint local_34 [7];
   
-  iVar2 = ((int (*)())FUN_0003f1c0)(param_1,param_2,&local_38,local_34);
+  iVar2 = ((int (*)())fpilTranslateSource)(param_1,param_2,&local_38,local_34);
   if (iVar2 == 0) {
     uVar6 = *param_5;
     uVar3 = 0;
@@ -750,8 +750,8 @@ int FUN_0003f5d0(param_1)
   return _free(param_1);
 }
 
-/* FUN_0003f5e0 @ 0x3f5e0 (112 bytes) */
-int FUN_0003f5e0(param_1)
+/* fpilDestroyTranslator @ 0x3f5e0 (112 bytes) */
+int fpilDestroyTranslator(param_1)
   int param_1;
 {
   if (*(int *)(param_1 + 0x34) != 0) {
@@ -767,8 +767,8 @@ int FUN_0003f5e0(param_1)
   return;
 }
 
-/* FUN_0003f660 @ 0x3f660 (220 bytes) */
-int FUN_0003f660()
+/* fpilCreateTranslator @ 0x3f660 (220 bytes) */
+int fpilCreateTranslator()
 {
   int iVar1;
   int allocation;
@@ -801,8 +801,8 @@ int FUN_0003f660()
   return 0;
 }
 
-/* FUN_0003f750 @ 0x3f750 (232 bytes) */
-int FUN_0003f750(param_1, param_2, param_3, param_4, param_5)
+/* fpilTranslateDestination @ 0x3f750 (232 bytes) */
+int fpilTranslateDestination(param_1, param_2, param_3, param_4, param_5)
   int *param_1;
   uint *param_2;
   uint *param_3;
@@ -826,7 +826,7 @@ int FUN_0003f750(param_1, param_2, param_3, param_4, param_5)
     *param_4 = *param_4 & 0xffffff00 | 0x55;
     return 0;
   }
-  uVar1 = ((int (*)())FUN_0003ed90)(param_1,param_2,param_3,param_4,param_5);
+  uVar1 = ((int (*)())fpilBuildDestinationToken)(param_1,param_2,param_3,param_4,param_5);
   return uVar1;
 }
 
@@ -932,7 +932,7 @@ int FUN_0003f9f0(param_1, param_2, param_3)
   
   local_38 = 0;
   local_34[0] = 0;
-  iVar2 = ((int (*)())FUN_0003ed90)(param_1,param_2,&local_38,local_34,param_3);
+  iVar2 = ((int (*)())fpilBuildDestinationToken)(param_1,param_2,&local_38,local_34,param_3);
   if (iVar2 != 0) {
     return param_1[9];
   }
@@ -999,8 +999,8 @@ LAB_0003fb50:
   return 0;
 }
 
-/* FUN_0003fbf0 @ 0x3fbf0 (392 bytes) */
-int FUN_0003fbf0(param_1, param_2, param_3, param_4)
+/* fpilEmitInstruction @ 0x3fbf0 (392 bytes) */
+int fpilEmitInstruction(param_1, param_2, param_3, param_4)
   int param_1;
   undefined4 *param_2;
   int param_3;
@@ -1083,8 +1083,8 @@ LAB_0003fcc0:
   return 0;
 }
 
-/* FUN_0003fd80 @ 0x3fd80 (440 bytes) */
-int FUN_0003fd80(param_1, param_2, param_3)
+/* fragmentTranslateSimpleOp @ 0x3fd80 (440 bytes) */
+int fragmentTranslateSimpleOp(param_1, param_2, param_3)
   int *param_1;
   int param_2;
   undefined4 *param_3;
@@ -1171,8 +1171,8 @@ LAB_0003fe80:
   return 0;
 }
 
-/* FUN_0003ff40 @ 0x3ff40 (592 bytes) */
-int FUN_0003ff40(param_1, param_2, param_3)
+/* fragmentTranslateRep @ 0x3ff40 (592 bytes) */
+int fragmentTranslateRep(param_1, param_2, param_3)
   int *param_1;
   undefined4 param_2;
   undefined4 *param_3;
@@ -1271,8 +1271,8 @@ LAB_00040128:
   return 0;
 }
 
-/* FUN_000401b0 @ 0x401b0 (420 bytes) */
-int FUN_000401b0(param_1, param_2, param_3)
+/* fragmentTranslateDdy @ 0x401b0 (420 bytes) */
+int fragmentTranslateDdy(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 *param_3;
@@ -1351,8 +1351,8 @@ LAB_000402d0:
   return 0;
 }
 
-/* FUN_00040370 @ 0x40370 (4 bytes) */
-int FUN_00040370(param_1, param_2, param_3)
+/* fragmentTranslateScalarMath @ 0x40370 (4 bytes) */
+int fragmentTranslateScalarMath(param_1, param_2, param_3)
   int *param_1;
   int param_2;
   undefined4 *param_3;
@@ -1624,8 +1624,8 @@ LAB_000408d0:
   return iVar4;
 }
 
-/* FUN_00040374 @ 0x40374 (1800 bytes) */
-int FUN_00040374(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+/* fragmentTranslateScalarMathBody @ 0x40374 (1800 bytes) */
+int fragmentTranslateScalarMathBody(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   int *param_1;
   int param_2;
   undefined4 *param_3;
@@ -2253,8 +2253,8 @@ LAB_00041170:
   return iVar7;
 }
 
-/* FUN_00041310 @ 0x41310 (488 bytes) */
-int FUN_00041310(param_1, param_2, param_3)
+/* fragmentTranslateTrig @ 0x41310 (488 bytes) */
+int fragmentTranslateTrig(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -2323,13 +2323,13 @@ int FUN_00041310(param_1, param_2, param_3)
   }
 LAB_000414c0:
   *(int *)(param_1 + 0x20) = *(int *)(param_1 + 0x20) + 1;
-  ((int (*)())FUN_00040370)(param_1,param_2,param_3);
+  ((int (*)())fragmentTranslateScalarMath)(param_1,param_2,param_3);
   *(int *)(param_1 + 0x20) = *(int *)(param_1 + 0x20) + -1;
   return *(undefined4 *)(param_1 + 0x24);
 }
 
-/* FUN_00041510 @ 0x41510 (548 bytes) */
-int FUN_00041510(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+/* fragmentTranslateAngleConvert @ 0x41510 (548 bytes) */
+int fragmentTranslateAngleConvert(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int *param_1;
   int param_2;
   undefined4 *param_3;
@@ -2420,8 +2420,8 @@ LAB_00041698:
   return 0;
 }
 
-/* FUN_00041750 @ 0x41750 (1160 bytes) */
-int FUN_00041750(param_1, param_2, param_3)
+/* fragmentTranslateMod @ 0x41750 (1160 bytes) */
+int fragmentTranslateMod(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -2620,8 +2620,8 @@ LAB_00041b48:
   return 0;
 }
 
-/* FUN_00041c00 @ 0x41c00 (4544 bytes) */
-int FUN_00041c00(emitter, slot, instr)
+/* fragmentTranslateAtn @ 0x41c00 (4544 bytes) */
+int fragmentTranslateAtn(emitter, slot, instr)
   int *emitter;
   int slot;
   int instr;
@@ -2914,7 +2914,7 @@ LAB_000422f0:
   uVar12 = 0xffff7777;
   apuStack_50[0] = ((unsigned char *)0x00003210);
   uStack_5c = (undefined *)((uint)uStack_5c | 0x400000);
-  ((int (*)())FUN_00040370)(emitter,slot,&entryHeader);
+  ((int (*)())fragmentTranslateScalarMath)(emitter,slot,&entryHeader);
   uVar7 = 0x24;
   emitter[8] = emitter[8] + -3;
   _memset(&entryHeader,0,0x24);
@@ -3234,8 +3234,8 @@ LAB_00042bf0:
   return bufferCount;
 }
 
-/* FUN_00042e00 @ 0x42e00 (4024 bytes) */
-int FUN_00042e00(emitter, param_2, instr)
+/* fragmentTranslateRfr @ 0x42e00 (4024 bytes) */
+int fragmentTranslateRfr(emitter, param_2, instr)
   int emitter;
   undefined4 param_2;
   int instr;
@@ -3786,8 +3786,8 @@ LAB_00043be0:
   return bufferCount;
 }
 
-/* FUN_00043df0 @ 0x43df0 (352 bytes) */
-int FUN_00043df0(param_1, param_2, param_3)
+/* fragmentTranslateFfw @ 0x43df0 (352 bytes) */
+int fragmentTranslateFfw(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 *param_3;
@@ -3860,8 +3860,8 @@ int FUN_00043df0(param_1, param_2, param_3)
   return iVar4;
 }
 
-/* FUN_00043f60 @ 0x43f60 (996 bytes) */
-int FUN_00043f60(param_1, param_2, param_3)
+/* fragmentTranslateDst @ 0x43f60 (996 bytes) */
+int fragmentTranslateDst(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 *param_3;
@@ -4034,8 +4034,8 @@ LAB_0004432c:
   return *(int *)(param_1 + 0x24);
 }
 
-/* FUN_00044360 @ 0x44360 (388 bytes) */
-int FUN_00044360(param_1, param_2, param_3)
+/* fragmentTranslateIf @ 0x44360 (388 bytes) */
+int fragmentTranslateIf(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 *param_3;
@@ -4106,8 +4106,8 @@ LAB_00044460:
   return 0;
 }
 
-/* FUN_00044500 @ 0x44500 (1432 bytes) */
-int FUN_00044500(param_1, param_2, param_3)
+/* fragmentTranslateRfl @ 0x44500 (1432 bytes) */
+int fragmentTranslateRfl(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -4346,8 +4346,8 @@ LAB_00044970:
   return iVar3;
 }
 
-/* FUN_00044ac0 @ 0x44ac0 (440 bytes) */
-int FUN_00044ac0(param_1, param_2, param_3)
+/* fragmentTranslateWhile @ 0x44ac0 (440 bytes) */
+int fragmentTranslateWhile(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   undefined4 *param_3;
@@ -4422,8 +4422,8 @@ LAB_00044c08:
   return 0;
 }
 
-/* FUN_00044c90 @ 0x44c90 (2856 bytes) */
-int FUN_00044c90(emitter, param_2)
+/* fragmentTranslateDsl @ 0x44c90 (2856 bytes) */
+int fragmentTranslateDsl(emitter, param_2)
   int *emitter;
   int param_2;
 {
@@ -4478,7 +4478,7 @@ int FUN_00044c90(emitter, param_2)
   local_ac = CONCAT22((*(unsigned short *)((unsigned char *)&(local_ac) + 0)),0x5b);
   local_a4 = 0x55;
   local_a8 = local_a8 | 0x400000;
-  bufferCount = ((int (*)())FUN_0003f1c0)(emitter,iVar11 + 0x18,puVar5,&local_94);
+  bufferCount = ((int (*)())fpilTranslateSource)(emitter,iVar11 + 0x18,puVar5,&local_94);
   if (bufferCount == 0) {
     local_90 = ((unsigned char *)0x00005555U);
     local_9c = 0x440000;
@@ -4737,31 +4737,31 @@ int FUN_00044c90(emitter, param_2)
     _memset(&local_64,0,0x24);
     local_64 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_64) + 0)),0xd);
     local_88 = local_88 & 0xc000ffff | 0x30000;
-    bufferCount = ((int (*)())FUN_0003f750)(emitter,iVar11 + 8,&local_60,&local_5c,*(uint *)(iVar11 + 4) >> 0x14 & 1);
+    bufferCount = ((int (*)())fpilTranslateDestination)(emitter,iVar11 + 8,&local_60,&local_5c,*(uint *)(iVar11 + 4) >> 0x14 & 1);
     if (bufferCount == 0) {
       local_58 = (undefined *)CONCAT22(4,(short)emitter[8] + 1);
       local_4c = ((unsigned char *)0x00003210);
       local_58 = (undefined *)((uint)local_58 | 0x400000);
-      bufferCount = ((int (*)())FUN_0003f1c0)(emitter,iVar11 + 0x10,auStack_54,auStack_48);
+      bufferCount = ((int (*)())fpilTranslateSource)(emitter,iVar11 + 0x10,auStack_54,auStack_48);
       if (bufferCount == 0) {
-        bufferCount = ((int (*)())FUN_0003ed90)(emitter,iVar11 + 8,auStack_b8,auStack_b4,0);
+        bufferCount = ((int (*)())fpilBuildDestinationToken)(emitter,iVar11 + 8,auStack_b8,auStack_b4,0);
         if (bufferCount == 0) {
           local_b0 = ((unsigned char *)0x00003210);
           capacity = *(uint *)(iVar11 + 8);
           if ((capacity & 0x2000) != 0) {
-            ((int (*)())FUN_0003ee30)(0,capacity >> 8 & 3,&local_b0);
+            ((int (*)())fpilSetComponentSelect)(0,capacity >> 8 & 3,&local_b0);
             capacity = *(uint *)(iVar11 + 8);
           }
           if ((capacity & 0x4000) != 0) {
-            ((int (*)())FUN_0003ee30)(1,capacity >> 6 & 3,&local_b0);
+            ((int (*)())fpilSetComponentSelect)(1,capacity >> 6 & 3,&local_b0);
             capacity = *(uint *)(iVar11 + 8);
           }
           if ((capacity & 0x8000) != 0) {
-            ((int (*)())FUN_0003ee30)(2,capacity >> 4 & 3,&local_b0);
+            ((int (*)())fpilSetComponentSelect)(2,capacity >> 4 & 3,&local_b0);
             capacity = *(uint *)(iVar11 + 8);
           }
           if ((capacity & 0x10000) != 0) {
-            ((int (*)())FUN_0003ee30)(3,capacity >> 2 & 3,&local_b0);
+            ((int (*)())fpilSetComponentSelect)(3,capacity >> 2 & 3,&local_b0);
           }
           bufferCount = emitter[9];
           local_50 = local_b6 | 0x440000;
@@ -4822,8 +4822,8 @@ LAB_000457a8:
   return emitter[9];
 }
 
-/* FUN_000457f0 @ 0x457f0 (2412 bytes) */
-int FUN_000457f0(emitter, param_2)
+/* fragmentTranslateSel @ 0x457f0 (2412 bytes) */
+int fragmentTranslateSel(emitter, param_2)
   int *emitter;
   int param_2;
 {
@@ -4870,20 +4870,20 @@ int FUN_000457f0(emitter, param_2)
   _memset(&local_88,0,0x24);
   iVar16 = iVar16 + bufferCount * 8 + param_2 * 8;
   _memset(&local_64,0,0x24);
-  bufferCount = ((int (*)())FUN_0003f750)(emitter,iVar16 + 8,&local_98,&local_94,*(uint *)(iVar16 + 4) >> 0x14 & 1);
+  bufferCount = ((int (*)())fpilTranslateDestination)(emitter,iVar16 + 8,&local_98,&local_94,*(uint *)(iVar16 + 4) >> 0x14 & 1);
   if (bufferCount != 0) {
 LAB_000458f0:
     return emitter[9];
   }
   puVar14 = (uint *)(iVar16 + 0x10);
-  bufferCount = ((int (*)())FUN_0003f1c0)(emitter,puVar14,&local_90,&local_8c);
+  bufferCount = ((int (*)())fpilTranslateSource)(emitter,puVar14,&local_90,&local_8c);
   if (bufferCount != 0) goto LAB_000458f0;
   puVar6 = &local_7c;
   local_84 = CONCAT22(4,(short)emitter[8]);
   local_88 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_88) + 0)),0x5b);
   local_80 = 0x55;
   local_84 = local_84 | 0x400000;
-  bufferCount = ((int (*)())FUN_0003f1c0)(emitter,iVar16 + 0x18,puVar6,&local_70);
+  bufferCount = ((int (*)())fpilTranslateSource)(emitter,iVar16 + 0x18,puVar6,&local_70);
   if (bufferCount != 0) goto LAB_000458f0;
   local_6c = ((unsigned char *)0x00005555U);
   local_78 = 0x440000;
@@ -5184,8 +5184,8 @@ LAB_00046124:
   return 0;
 }
 
-/* FUN_00046180 @ 0x46180 (1528 bytes) */
-int FUN_00046180(param_1, param_2, param_3)
+/* fragmentTranslateAll @ 0x46180 (1528 bytes) */
+int fragmentTranslateAll(param_1, param_2, param_3)
   int *param_1;
   int param_2;
   int param_3;
@@ -5225,13 +5225,13 @@ int FUN_00046180(param_1, param_2, param_3)
       (*(unsigned short *)((unsigned char *)&(local_58) + 2)) = 0x49;
     }
     iVar9 = iVar9 + param_2 * 8;
-    iVar5 = ((int (*)())FUN_0003f750)(param_1,iVar9 + 8,&local_54,&local_50,1);
+    iVar5 = ((int (*)())fpilTranslateDestination)(param_1,iVar9 + 8,&local_54,&local_50,1);
     if (iVar5 != 0) {
 LAB_00046640:
       return param_1[9];
     }
     if (bVar2) {
-      iVar9 = ((int (*)())FUN_0003f1c0)(param_1,iVar9 + 0x10,&local_4c,&local_40);
+      iVar9 = ((int (*)())fpilTranslateSource)(param_1,iVar9 + 0x10,&local_4c,&local_40);
       if (iVar9 != 0) goto LAB_00046640;
     }
     else {
@@ -5293,7 +5293,7 @@ LAB_00046640:
     local_50 = local_50 & 0xffffff00 | 0x111;
     local_54 = CONCAT22((short)(local_54 >> 0x10),(short)param_1[8]) & 0xffc0ffff | 0x440000;
     if (bVar2) {
-      iVar5 = ((int (*)())FUN_0003f1c0)(param_1,iVar9 + param_2 * 8 + 0x10,&local_4c,&local_40);
+      iVar5 = ((int (*)())fpilTranslateSource)(param_1,iVar9 + param_2 * 8 + 0x10,&local_4c,&local_40);
       if (iVar5 != 0) goto LAB_00046640;
     }
     else {
@@ -5351,7 +5351,7 @@ LAB_00046640:
       puVar6[4] = *puVar1;
       puVar6 = puVar6 + 2;
     } while (&uStack_44 != puVar7);
-    iVar9 = ((int (*)())FUN_0003f750)(param_1,iVar9 + param_2 * 8 + 8,&local_54,&local_50,1);
+    iVar9 = ((int (*)())fpilTranslateDestination)(param_1,iVar9 + param_2 * 8 + 8,&local_54,&local_50,1);
     if (iVar9 != 0) goto LAB_00046640;
     local_4c = CONCAT22(4,(short)param_1[8]);
     local_40 = (undefined *)0x0;
@@ -5406,8 +5406,8 @@ LAB_0004676c:
   return 0;
 }
 
-/* FUN_000467a0 @ 0x467a0 (632 bytes) */
-int FUN_000467a0(param_1, param_2, param_3)
+/* fragmentTranslateAny @ 0x467a0 (632 bytes) */
+int fragmentTranslateAny(param_1, param_2, param_3)
   int *param_1;
   int param_2;
   int param_3;
@@ -5435,10 +5435,10 @@ int FUN_000467a0(param_1, param_2, param_3)
   _memset(&local_58,0,0x24);
   iVar8 = iVar8 + iVar2 * 8 + param_2 * 8;
   local_58 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_58) + 0)),0x23);
-  iVar2 = ((int (*)())FUN_0003f750)(param_1,iVar8 + 8,&local_54,&local_50,1);
+  iVar2 = ((int (*)())fpilTranslateDestination)(param_1,iVar8 + 8,&local_54,&local_50,1);
   if (iVar2 == 0) {
     if (param_3 == 0) {
-      iVar2 = ((int (*)())FUN_0003f1c0)(param_1,iVar8 + 0x10,&local_4c,&local_40);
+      iVar2 = ((int (*)())fpilTranslateSource)(param_1,iVar8 + 0x10,&local_4c,&local_40);
       if (iVar2 != 0) goto LAB_000468f0;
       uVar5 = (undefined2)param_1[8];
     }
@@ -5504,8 +5504,8 @@ LAB_000468f0:
   return iVar2;
 }
 
-/* FUN_00046a30 @ 0x46a30 (1080 bytes) */
-int FUN_00046a30(param_1, param_2)
+/* fragmentTranslateArithmetic @ 0x46a30 (1080 bytes) */
+int fragmentTranslateArithmetic(param_1, param_2)
   int *param_1;
   int param_2;
 {
@@ -5552,11 +5552,11 @@ int FUN_00046a30(param_1, param_2)
   iVar11 = uVar9 * 0x10;
   local_68 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_68) + 0)),(short)(*(uint *)(&DAT_001dac34 + iVar11) >> 1));
   local_68 = (*(uint *)(&DAT_001dac38 + iVar11) >> 0x13) << 0x10 | local_68 & 0xc000ffff;
-  iVar11 = ((int (*)())FUN_0003f750)(param_1,iVar12 + 8,&local_64,&local_60,*(uint *)(iVar12 + 4) >> 0x14 & 1);
+  iVar11 = ((int (*)())fpilTranslateDestination)(param_1,iVar12 + 8,&local_64,&local_60,*(uint *)(iVar12 + 4) >> 0x14 & 1);
   if (iVar11 == 0) {
-    iVar11 = ((int (*)())FUN_0003f1c0)(param_1,iVar12 + 0x10,&local_5c,&local_50);
+    iVar11 = ((int (*)())fpilTranslateSource)(param_1,iVar12 + 0x10,&local_5c,&local_50);
     if ((iVar11 == 0) &&
-       (iVar11 = ((int (*)())FUN_0003f1c0)(param_1,iVar12 + 0x18,auStack_58,auStack_4c), iVar11 == 0)) {
+       (iVar11 = ((int (*)())fpilTranslateSource)(param_1,iVar12 + 0x18,auStack_58,auStack_4c), iVar11 == 0)) {
       if (uVar7 == 0) {
         iVar11 = 1;
       }
@@ -5790,9 +5790,9 @@ LAB_00048d20:
           _memset(local_5c,0,0x24);
           local_b0 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_b0) + 0)),(short)(*(uint *)(&DAT_001dac34 + uVar13 * 0x10) >> 1))
           ;
-          ((int (*)())FUN_0003f750)(translator,iVar24 + 8,&local_ac,&local_a8,
+          ((int (*)())fpilTranslateDestination)(translator,iVar24 + 8,&local_ac,&local_a8,
                        *(uint *)(iVar5 + iVar6 + 4) >> 0x14 & 1);
-          ((int (*)())FUN_0003f1c0)(translator,iVar24 + 0x10,&local_a4,&local_98);
+          ((int (*)())fpilTranslateSource)(translator,iVar24 + 0x10,&local_a4,&local_98);
           if ((translator[5] & 0x20000000U) == 0) {
             local_b0 = (*(uint *)(iVar24 + 0x18) & 0x1f) << 0x10 | local_b0 & 0xc000ffff;
             uVar13 = *(uint *)(iVar24 + 0x18) >> 5 & 7;
@@ -5808,7 +5808,7 @@ LAB_00048d20:
             local_b0 = ((uint)local_f0 & 0x3fff) << 0x10 | local_b0 & 0xc000ffff;
             uVar13 = *(uint *)(iVar24 + 0x20) >> 5 & 7;
             if (iVar23 != 0) {
-              ((int (*)())FUN_0003f1c0)(translator,iVar24 + 0x28,&local_a0,&local_94);
+              ((int (*)())fpilTranslateSource)(translator,iVar24 + 0x28,&local_a0,&local_94);
               uVar11 = (uint)local_94 >> 3 & 1;
               local_94 = (undefined *)
                          (uVar11 << 0xf |
@@ -5832,7 +5832,7 @@ LAB_00048d20:
                       ((uint)puVar12 ^ 8) & 8 | (uint)local_98 & 0xff1f7777 | 0x600000);
           }
           local_98 = puVar12;
-          ((int (*)())FUN_0003fbf0)(translator,local_5c,1,iVar23 + 1);
+          ((int (*)())fpilEmitInstruction)(translator,local_5c,1,iVar23 + 1);
 LAB_00048c70:
           if (uVar22 != 0x4d) {
 LAB_00048c78:
@@ -5859,7 +5859,7 @@ LAB_00048c78:
                    (uVar9 = 0, (*(uint *)(&DAT_001dac40 + iVar8) >> 0x1c & 1) != 0)) {
                   uVar9 = 1;
                 }
-                ((int (*)())FUN_0003f750)(translator,(int)puVar20 + iVar5 + 8,&local_d0,&local_cc,uVar9);
+                ((int (*)())fpilTranslateDestination)(translator,(int)puVar20 + iVar5 + 8,&local_d0,&local_cc,uVar9);
               }
               if (uVar11 != 0) {
                 uVar13 = 0;
@@ -5867,7 +5867,7 @@ LAB_00048c78:
                 puVar21 = puVar20 + iVar18 * 2 + 4;
                 do {
                   uVar13 = uVar13 + 1;
-                  ((int (*)())FUN_0003f1c0)(translator,puVar21,puVar25,puVar25 + 3);
+                  ((int (*)())fpilTranslateSource)(translator,puVar21,puVar25,puVar25 + 3);
                   puVar25 = puVar25 + 1;
                   puVar21 = puVar21 + 2;
                 } while (uVar11 != uVar13);
@@ -5888,7 +5888,7 @@ LAB_00048a2c:
               if (uVar13 != 3) {
                 iVar6 = uVar11 * 2 + 3;
               }
-              iVar6 = ((int (*)())FUN_0003ef50)(translator,iVar6,&local_f0);
+              iVar6 = ((int (*)())fpilReserveTokens)(translator,iVar6,&local_f0);
               if (iVar6 != 0) goto LAB_00048d74;
               *local_f0 = (uVar4 >> 0x13) << 0x10 | uVar7 >> 1 & 0xffff;
               if ((*(uint *)(&DAT_001dac34 + iVar8) >> 0x11 & 0xf) != 3) {
@@ -5896,17 +5896,17 @@ LAB_00048a2c:
                    (uVar9 = 0, (*(uint *)(&DAT_001dac40 + iVar8) & 0x10000000) != 0)) {
                   uVar9 = 1;
                 }
-                iVar6 = ((int (*)())FUN_0003f750)(translator,(int)puVar20 + iVar5 + 8,&local_108,&local_104,uVar9);
+                iVar6 = ((int (*)())fpilTranslateDestination)(translator,(int)puVar20 + iVar5 + 8,&local_108,&local_104,uVar9);
                 if (iVar6 != 0) goto LAB_00048d74;
                 local_f0[1] = local_108;
                 local_f0[2] = local_104;
               }
               if ((*(uint *)(&DAT_001dac34 + iVar8) >> 0x11 & 0xf) == 4) {
-                iVar6 = ((int (*)())FUN_0003f4e0)(translator,(int)puVar20 + iVar5 + 0x10,&local_100,&local_fc,
+                iVar6 = ((int (*)())fpilTranslateSourceWithSwizzle)(translator,(int)puVar20 + iVar5 + 0x10,&local_100,&local_fc,
                                      (int)puVar20 + iVar5 + 0x18);
               }
               else {
-                iVar6 = ((int (*)())FUN_0003f1c0)(translator,(int)puVar20 + iVar5 + 0x10,&local_100,&local_fc);
+                iVar6 = ((int (*)())fpilTranslateSource)(translator,(int)puVar20 + iVar5 + 0x10,&local_100,&local_fc);
               }
               if (iVar6 != 0) goto LAB_00048d74;
               uVar13 = *(uint *)(&DAT_001dac34 + iVar8) >> 0x11 & 0xf;
@@ -5922,12 +5922,12 @@ LAB_00048a2c:
                 local_f0[4] = local_fc;
               }
               if (1 < (int)uVar11) {
-                iVar6 = ((int (*)())FUN_0003f1c0)(translator,(int)puVar20 + iVar5 + 0x18,&local_100,&local_fc);
+                iVar6 = ((int (*)())fpilTranslateSource)(translator,(int)puVar20 + iVar5 + 0x18,&local_100,&local_fc);
                 if (iVar6 != 0) goto LAB_00048d74;
                 local_f0[5] = local_100;
                 local_f0[6] = local_fc;
                 if (2 < (int)uVar11) {
-                  iVar6 = ((int (*)())FUN_0003f1c0)(translator,(int)puVar20 + iVar5 + 0x20,&local_100,&local_fc);
+                  iVar6 = ((int (*)())fpilTranslateSource)(translator,(int)puVar20 + iVar5 + 0x20,&local_100,&local_fc);
                   if (iVar6 != 0) goto LAB_00048d74;
                   local_f0[7] = local_100;
                   local_f0[8] = local_fc;
@@ -5943,10 +5943,10 @@ LAB_00048a2c:
             iVar23 = iVar5 + iVar24;
             iVar24 = iVar24 + iVar5;
             local_b0 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_b0) + 0)),0x47);
-            iVar6 = ((int (*)())FUN_0003f750)(translator,iVar24 + 8,&local_ac,&local_a8,
+            iVar6 = ((int (*)())fpilTranslateDestination)(translator,iVar24 + 8,&local_ac,&local_a8,
                                  *(uint *)(iVar23 + 4) >> 0x14 & 1);
             if ((iVar6 == 0) &&
-               (iVar6 = ((int (*)())FUN_0003f1c0)(translator,iVar24 + 0x10,&local_a4,&local_98), iVar6 == 0)) {
+               (iVar6 = ((int (*)())fpilTranslateSource)(translator,iVar24 + 0x10,&local_a4,&local_98), iVar6 == 0)) {
               if (((translator[5] & 0x20000000U) == 0) ||
                  (uVar13 = *(uint *)(iVar23 + 4), (uVar13 & 0x10000000) == 0)) {
                 iVar6 = 1;
@@ -5957,7 +5957,7 @@ LAB_00048a2c:
               }
               iVar23 = 0;
               do {
-                iVar24 = ((int (*)())FUN_0003fbf0)(translator,local_5c,1,1);
+                iVar24 = ((int (*)())fpilEmitInstruction)(translator,local_5c,1,1);
                 if (iVar24 != 0) goto LAB_00048418;
                 iVar23 = iVar23 + 1;
                 local_ac = CONCAT22((*(unsigned short *)((unsigned char *)&(local_ac) + 0)),(*(unsigned short *)((unsigned char *)&(local_ac) + 2)) + 1);
@@ -5973,14 +5973,14 @@ LAB_00048418:
           }
           if (uVar22 == 0x40) {
             iVar23 = *translator + *(int *)(*translator + 0x54) * 8;
-            iVar6 = ((int (*)())FUN_0003f750)(translator,iVar23 + iVar5 + 8,&local_f8,&local_f4,
+            iVar6 = ((int (*)())fpilTranslateDestination)(translator,iVar23 + iVar5 + 8,&local_f8,&local_f4,
                                  *(uint *)(iVar5 + iVar23 + 4) >> 0x14 & 1);
             if (iVar6 == 0) {
               local_5c = &local_b0;
               iVar6 = 0;
               iVar23 = iVar18 * 8 + iVar23 + 0x10;
               do {
-                iVar24 = ((int (*)())FUN_0003f1c0)(translator,iVar23,iVar6 + (int)local_5c,(int)&local_e0 + iVar6);
+                iVar24 = ((int (*)())fpilTranslateSource)(translator,iVar23,iVar6 + (int)local_5c,(int)&local_e0 + iVar6);
                 if (iVar24 != 0) goto LAB_00048418;
                 bVar1 = iVar6 != 8;
                 iVar23 = iVar23 + 8;
@@ -6005,7 +6005,7 @@ LAB_00048418:
                 puVar21[7] = puVar21[7] | 0x400000;
                 puVar21 = puVar21 + 1;
               } while (bVar1);
-              iVar6 = ((int (*)())FUN_0003ef50)(translator,7,&local_f0);
+              iVar6 = ((int (*)())fpilReserveTokens)(translator,7,&local_f0);
               uVar13 = local_ec;
               if (iVar6 == 0) {
                 *local_f0 = 0x5b;
@@ -6015,7 +6015,7 @@ LAB_00048418:
                 local_f0[4] = local_d8;
                 local_f0[5] = local_b0;
                 local_f0[6] = local_e0;
-                iVar6 = ((int (*)())FUN_0003ef50)(translator,7,&local_f0);
+                iVar6 = ((int (*)())fpilReserveTokens)(translator,7,&local_f0);
                 if (iVar6 == 0) {
                   *local_f0 = 0x5b;
                   local_6c = local_e8;
@@ -6026,7 +6026,7 @@ LAB_00048418:
                   local_f0[5] = local_b0;
                   local_f0[6] = local_e0;
                   local_f4 = local_f4 | 0x100;
-                  iVar6 = ((int (*)())FUN_0003ef50)(translator,5,&local_f0);
+                  iVar6 = ((int (*)())fpilReserveTokens)(translator,5,&local_f0);
                   uVar22 = local_d4;
                   if (iVar6 == 0) {
                     *local_f0 = 0x20;
@@ -6036,21 +6036,21 @@ LAB_00048418:
                     local_70 = local_d0;
                     local_f0[4] = local_d0;
                     local_f4 = local_f4 & 0xfffffeff;
-                    iVar6 = ((int (*)())FUN_0003ef50)(translator,5,&local_f0);
+                    iVar6 = ((int (*)())fpilReserveTokens)(translator,5,&local_f0);
                     if (iVar6 == 0) {
                       *local_f0 = 3;
                       local_f0[1] = local_6c;
                       local_f0[2] = local_f4;
                       local_f0[3] = uVar22;
                       local_f0[4] = uVar22;
-                      iVar6 = ((int (*)())FUN_0003ef50)(translator,5,&local_f0);
+                      iVar6 = ((int (*)())fpilReserveTokens)(translator,5,&local_f0);
                       if (iVar6 == 0) {
                         *local_f0 = 0x49;
                         local_f0[1] = uVar13;
                         local_f0[2] = local_f4;
                         local_f0[3] = uVar22;
                         local_f0[4] = uVar22;
-                        iVar6 = ((int (*)())FUN_0003ef50)(translator,5,&local_f0);
+                        iVar6 = ((int (*)())fpilReserveTokens)(translator,5,&local_f0);
                         uVar13 = local_d4;
                         if (iVar6 == 0) {
                           *local_f0 = 0x49;
@@ -6058,7 +6058,7 @@ LAB_00048418:
                           local_f0[2] = local_f4;
                           local_f0[3] = uVar22;
                           local_f0[4] = local_70;
-                          iVar6 = ((int (*)())FUN_0003ef50)(translator,7,&local_f0);
+                          iVar6 = ((int (*)())fpilReserveTokens)(translator,7,&local_f0);
                           if (iVar6 == 0) {
                             *local_f0 = 0x23;
                             local_f0[1] = local_e4;
@@ -6068,7 +6068,7 @@ LAB_00048418:
                             local_f0[5] = uVar13 | 0x400000;
                             local_f0[6] = (uint)((unsigned char *)0x00004555);
                             local_d0 = local_d0 | 0x400000;
-                            iVar6 = ((int (*)())FUN_0003ef50)(translator,7,&local_f0);
+                            iVar6 = ((int (*)())fpilReserveTokens)(translator,7,&local_f0);
                             if (iVar6 == 0) {
                               *local_f0 = 0x40;
                               local_f0[1] = local_f8;
@@ -6097,24 +6097,24 @@ LAB_00048418:
             if ((iVar6 == 1) &&
                (((*(uint *)(iVar24 + 0x10) & 0x3000) == 0 ||
                 ((*(uint *)(iVar24 + 0x18) & 0x3000) == 0)))) {
-              iVar6 = ((int (*)())FUN_00046a30)(translator,iVar18);
+              iVar6 = ((int (*)())fragmentTranslateArithmetic)(translator,iVar18);
               goto joined_r0x00048448;
             }
             local_60 = &local_d4;
             _memset(local_60,0,0x24);
             local_d4 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_d4) + 0)),0x49);
-            iVar23 = ((int (*)())FUN_0003f750)(translator,iVar24 + 8,&local_d0,&local_cc,
+            iVar23 = ((int (*)())fpilTranslateDestination)(translator,iVar24 + 8,&local_d0,&local_cc,
                                   *(uint *)(iVar5 + iVar23 + 4) >> 0x14 & 1);
             if (((iVar23 != 0) ||
-                (iVar23 = ((int (*)())FUN_0003f1c0)(translator,puVar21,&local_c8,&local_bc), iVar23 != 0)) ||
-               (iVar23 = ((int (*)())FUN_0003f1c0)(translator,(uint *)(iVar24 + 0x18),&local_c4,local_b8),
+                (iVar23 = ((int (*)())fpilTranslateSource)(translator,puVar21,&local_c8,&local_bc), iVar23 != 0)) ||
+               (iVar23 = ((int (*)())fpilTranslateSource)(translator,(uint *)(iVar24 + 0x18),&local_c4,local_b8),
                uVar22 = local_cc, uVar13 = local_d0, iVar23 != 0)) {
 LAB_000479ec:
               iVar6 = translator[9];
               goto joined_r0x00048448;
             }
             if (iVar6 == 0) {
-              iVar6 = ((int (*)())FUN_0003fbf0)(translator,local_60,1,2);
+              iVar6 = ((int (*)())fpilEmitInstruction)(translator,local_60,1,2);
 joined_r0x000479e8:
               if (iVar6 != 0) goto LAB_000479ec;
             }
@@ -6147,7 +6147,7 @@ joined_r0x000479e8:
                              ((uint)local_b8[0] & 7) << 4 |
                              uVar13 << 3 | (uint)local_b8[0] & 7 | (uint)local_94 & 0xffff0000);
                   local_ac = local_ac | 0x400000;
-                  iVar24 = ((int (*)())FUN_0003fbf0)(translator,local_5c,1,2);
+                  iVar24 = ((int (*)())fpilEmitInstruction)(translator,local_5c,1,2);
                   if (iVar24 == 0) {
                     local_9c = CONCAT22(4,(short)iVar14);
                     local_a4 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_a4) + 0)),(*(unsigned short *)((unsigned char *)&(local_a4) + 2)) + 1);
@@ -6167,7 +6167,7 @@ joined_r0x000479e8:
                                uVar11 << 8 |
                                uVar13 << 7 |
                                uVar11 << 4 | uVar13 << 3 | uVar11 | (uint)local_94 & 0xffff0000);
-                    iVar24 = ((int (*)())FUN_0003fbf0)(translator,local_5c,1,3);
+                    iVar24 = ((int (*)())fpilEmitInstruction)(translator,local_5c,1,3);
                     if ((iVar24 == 0) && (1 < uVar22)) {
                       local_a4 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_a4) + 0)),(*(unsigned short *)((unsigned char *)&(local_a4) + 2)) + 1);
                       if (uVar22 == 2) {
@@ -6183,7 +6183,7 @@ joined_r0x000479e8:
                                  uVar11 << 8 |
                                  uVar13 << 7 |
                                  uVar11 << 4 | uVar13 << 3 | uVar11 | (uint)local_94 & 0xffff0000);
-                      iVar24 = ((int (*)())FUN_0003fbf0)(translator,local_5c,1,3);
+                      iVar24 = ((int (*)())fpilEmitInstruction)(translator,local_5c,1,3);
                       if ((iVar24 == 0) && (uVar22 == 3)) {
                         uVar22 = (uint)local_b8[0] >> 0xc & 7;
                         uVar13 = (uint)local_b8[0] >> 0xf & 1;
@@ -6198,7 +6198,7 @@ joined_r0x000479e8:
                                    uVar13 << 7 |
                                    uVar22 << 4 | uVar13 << 3 | uVar22 | (uint)local_94 & 0xffff0000)
                         ;
-                        ((int (*)())FUN_0003fbf0)(translator,local_5c,1,3);
+                        ((int (*)())fpilEmitInstruction)(translator,local_5c,1,3);
                       }
                     }
                   }
@@ -6219,7 +6219,7 @@ joined_r0x000479e8:
                 iVar6 = 0;
                 do {
                   iVar6 = iVar6 + 1;
-                  ((int (*)())FUN_0003fbf0)(translator,local_60,1,1);
+                  ((int (*)())fpilEmitInstruction)(translator,local_60,1,1);
                   local_d0 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_d0) + 0)),(*(unsigned short *)((unsigned char *)&(local_d0) + 2)) + 1);
                   local_c8 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_c8) + 0)),(*(unsigned short *)((unsigned char *)&(local_c8) + 2)) + 1);
                 } while (iVar23 != iVar6);
@@ -6250,7 +6250,7 @@ joined_r0x000479e8:
                       else {
                         local_cc = local_cc & 0xffffff00 | 0x40;
                       }
-                      iVar23 = ((int (*)())FUN_0003fbf0)(translator,local_60,1,2);
+                      iVar23 = ((int (*)())fpilEmitInstruction)(translator,local_60,1,2);
                       if (iVar23 != 0) goto LAB_000479ec;
                     }
                     iVar6 = iVar6 + 1;
@@ -6262,7 +6262,7 @@ joined_r0x000479e8:
                       local_c8 = local_c8 | 0x400000;
                       local_d0 = uVar13;
                       local_cc = uVar22;
-                      iVar6 = ((int (*)())FUN_0003fbf0)(translator,local_60,1,1);
+                      iVar6 = ((int (*)())fpilEmitInstruction)(translator,local_60,1,1);
                       goto joined_r0x000479e8;
                     }
                     if (iVar6 == 0) break;
@@ -6294,7 +6294,7 @@ joined_r0x000479e8:
                          ((uint)local_b8[0] & 7) << 4 |
                          uVar13 << 3 | (uint)local_b8[0] & 7 | (uint)local_94 & 0xffff0000);
               local_ac = local_ac | 0x400000;
-              iVar23 = ((int (*)())FUN_0003fbf0)(translator,local_5c,1,2);
+              iVar23 = ((int (*)())fpilEmitInstruction)(translator,local_5c,1,2);
               if (iVar23 == 0) {
                 local_9c = CONCAT22(4,(short)iVar6);
                 local_a4 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_a4) + 0)),(*(unsigned short *)((unsigned char *)&(local_a4) + 2)) + 1);
@@ -6314,7 +6314,7 @@ joined_r0x000479e8:
                            uVar11 << 8 |
                            uVar13 << 7 |
                            uVar11 << 4 | uVar13 << 3 | uVar11 | (uint)local_94 & 0xffff0000);
-                iVar6 = ((int (*)())FUN_0003fbf0)(translator,local_5c,1,3);
+                iVar6 = ((int (*)())fpilEmitInstruction)(translator,local_5c,1,3);
                 if ((iVar6 == 0) && (1 < uVar22)) {
                   local_a4 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_a4) + 0)),(*(unsigned short *)((unsigned char *)&(local_a4) + 2)) + 1);
                   if (uVar22 == 2) {
@@ -6330,7 +6330,7 @@ joined_r0x000479e8:
                              uVar11 << 8 |
                              uVar13 << 7 |
                              uVar11 << 4 | uVar13 << 3 | uVar11 | (uint)local_94 & 0xffff0000);
-                  iVar6 = ((int (*)())FUN_0003fbf0)(translator,local_5c,1,3);
+                  iVar6 = ((int (*)())fpilEmitInstruction)(translator,local_5c,1,3);
                   if ((iVar6 == 0) && (uVar22 == 3)) {
                     uVar22 = (uint)local_b8[0] >> 0xc & 7;
                     uVar13 = (uint)local_b8[0] >> 0xf & 1;
@@ -6344,7 +6344,7 @@ joined_r0x000479e8:
                                uVar22 << 8 |
                                uVar13 << 7 |
                                uVar22 << 4 | uVar13 << 3 | uVar22 | (uint)local_94 & 0xffff0000);
-                    ((int (*)())FUN_0003fbf0)(translator,local_5c,1,3);
+                    ((int (*)())fpilEmitInstruction)(translator,local_5c,1,3);
                   }
                 }
               }
@@ -6352,7 +6352,7 @@ joined_r0x000479e8:
             goto LAB_00048c78;
           }
           if (((uVar22 - 0x1f < 2) || (uVar22 == 0x23)) || (uVar22 == 0x3a)) {
-            iVar6 = ((int (*)())FUN_00046a30)(translator,iVar18);
+            iVar6 = ((int (*)())fragmentTranslateArithmetic)(translator,iVar18);
             goto joined_r0x0004802c;
           }
           if (uVar22 == 0x6c) {
@@ -6372,10 +6372,10 @@ joined_r0x000479e8:
             else {
               local_b0 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_b0) + 0)),0x47);
             }
-            iVar24 = ((int (*)())FUN_0003f750)(translator,iVar24,&local_ac,&local_a8,
+            iVar24 = ((int (*)())fpilTranslateDestination)(translator,iVar24,&local_ac,&local_a8,
                                   *(uint *)(iVar5 + iVar14 + 4) >> 0x14 & 1);
             if ((iVar24 == 0) &&
-               (iVar23 = ((int (*)())FUN_0003f1c0)(translator,iVar23 + 0x10,&local_a4,&local_98), iVar23 == 0)) {
+               (iVar23 = ((int (*)())fpilTranslateSource)(translator,iVar23 + 0x10,&local_a4,&local_98), iVar23 == 0)) {
               uVar9 = 1;
               if (iVar6 == 2) {
                 uVar9 = 2;
@@ -6383,13 +6383,13 @@ joined_r0x000479e8:
                 local_a0 = CONCAT22((short)(local_a0 >> 0x10),(short)translator[8]) & 0xffc0ffff |
                            0x440000;
               }
-              iVar6 = ((int (*)())FUN_0003fbf0)(translator,local_5c,1,uVar9);
+              iVar6 = ((int (*)())fpilEmitInstruction)(translator,local_5c,1,uVar9);
               goto joined_r0x00048414;
             }
             goto LAB_00048418;
           }
           if (uVar22 == 8) {
-            iVar6 = ((int (*)())FUN_000467a0)(translator,iVar18,0);
+            iVar6 = ((int (*)())fragmentTranslateAny)(translator,iVar18,0);
 joined_r0x00048448:
             if (iVar6 != 0) {
 LAB_00048d74:
@@ -6398,7 +6398,7 @@ LAB_00048d74:
             goto LAB_00048c78;
           }
           if (uVar22 == 9) {
-            iVar6 = ((int (*)())FUN_00046180)(translator,iVar18,0);
+            iVar6 = ((int (*)())fragmentTranslateAll)(translator,iVar18,0);
             goto joined_r0x00048448;
           }
           if (uVar22 == 10) {
@@ -6408,14 +6408,14 @@ LAB_00048d74:
             _memset(local_5c,0,0x24);
             iVar23 = iVar23 + iVar6 * 8 + iVar5;
             local_b0 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_b0) + 0)),0x5b);
-            iVar6 = ((int (*)())FUN_0003f750)(translator,iVar23 + 8,&local_ac,&local_a8,1);
+            iVar6 = ((int (*)())fpilTranslateDestination)(translator,iVar23 + 8,&local_ac,&local_a8,1);
             if (iVar6 == 0) {
               local_98 = (undefined *)((uint)local_98 & 0xffff0000 | 0x5555);
               local_a4 = CONCAT22((short)(local_a4 >> 0x10),(short)translator[8]) & 0xffc0ffff |
                          0x440000;
-              iVar6 = ((int (*)())FUN_0003f1c0)(translator,iVar23 + 0x10,&local_a0,&local_94);
+              iVar6 = ((int (*)())fpilTranslateSource)(translator,iVar23 + 0x10,&local_a0,&local_94);
               if (iVar6 == 0) {
-                iVar6 = ((int (*)())FUN_0003fbf0)(translator,local_5c,1,2);
+                iVar6 = ((int (*)())fpilEmitInstruction)(translator,local_5c,1,2);
 joined_r0x00048414:
                 if (iVar6 == 0) goto LAB_00048c78;
               }
@@ -6432,28 +6432,28 @@ joined_r0x00048414:
             local_a8 = local_a8 & 0xffffff00 | 0x55;
             local_ac = CONCAT22((short)(local_ac >> 0x10),(short)translator[8]) & 0xffc0ffff | 0x440000
             ;
-            iVar6 = ((int (*)())FUN_0003f1c0)(translator,iVar23 + 0x10,&local_a4,&local_98);
+            iVar6 = ((int (*)())fpilTranslateSource)(translator,iVar23 + 0x10,&local_a4,&local_98);
             if (((iVar6 == 0) &&
-                (iVar6 = ((int (*)())FUN_0003f1c0)(translator,iVar23 + 0x18,&local_a0,&local_94), iVar6 == 0)) &&
-               (iVar6 = ((int (*)())FUN_0003fbf0)(translator,local_5c,1,2), iVar6 == 0)) {
+                (iVar6 = ((int (*)())fpilTranslateSource)(translator,iVar23 + 0x18,&local_a0,&local_94), iVar6 == 0)) &&
+               (iVar6 = ((int (*)())fpilEmitInstruction)(translator,local_5c,1,2), iVar6 == 0)) {
               local_b0 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_b0) + 0)),1);
-              iVar6 = ((int (*)())FUN_0003f750)(translator,iVar23 + 8,&local_ac,&local_a8,1);
+              iVar6 = ((int (*)())fpilTranslateDestination)(translator,iVar23 + 8,&local_ac,&local_a8,1);
               if (iVar6 == 0) {
                 local_a4 = CONCAT22(4,(short)translator[8]);
                 local_98 = ((unsigned char *)0x00003210);
                 local_a4 = local_a4 | 0x400000;
-                iVar6 = ((int (*)())FUN_0003fbf0)(translator,local_5c,1,1);
+                iVar6 = ((int (*)())fpilEmitInstruction)(translator,local_5c,1,1);
                 goto joined_r0x00048414;
               }
             }
             goto LAB_00048418;
           }
           if (uVar22 == 0x39) {
-            iVar6 = ((int (*)())FUN_000457f0)(translator,iVar18);
+            iVar6 = ((int (*)())fragmentTranslateSel)(translator,iVar18);
             goto joined_r0x00048448;
           }
           if (uVar22 == 0x6d) {
-            iVar6 = ((int (*)())FUN_00044c90)(translator,iVar18);
+            iVar6 = ((int (*)())fragmentTranslateDsl)(translator,iVar18);
             goto joined_r0x00048448;
           }
           if ((uVar22 == 0x31) || (uVar22 == 0x36)) {
@@ -6477,14 +6477,14 @@ joined_r0x00048414:
             local_b0 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_b0) + 0)),0x56);
             local_b0 = (uint)((*(uint *)(iVar5 + iVar6) & 0x3fc0000) == 0xc40000) << 0x10 |
                        local_b0 & 0xc000ffff;
-            iVar23 = ((int (*)())FUN_0003f1c0)(translator,puVar26,&local_a4,&local_98);
+            iVar23 = ((int (*)())fpilTranslateSource)(translator,puVar26,&local_a4,&local_98);
             if ((iVar23 == 0) &&
-               (iVar23 = ((int (*)())FUN_0003f1c0)(translator,puVar21,&local_a0,&local_94), iVar23 == 0)) {
+               (iVar23 = ((int (*)())fpilTranslateSource)(translator,puVar21,&local_a0,&local_94), iVar23 == 0)) {
               if (local_80 < 2) {
                 local_ac = CONCAT22(4,(short)translator[8]);
                 local_a8 = 0x55;
                 local_ac = local_ac | 0x400000;
-                iVar23 = ((int (*)())FUN_0003fbf0)(translator,local_5c,1,2);
+                iVar23 = ((int (*)())fpilEmitInstruction)(translator,local_5c,1,2);
                 if (iVar23 == 0) {
                   iVar23 = local_84;
                   if (local_84 < local_88) {
@@ -6519,15 +6519,15 @@ joined_r0x00048414:
                       if (bVar2) {
                         local_a0 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_a0) + 0)),(*(unsigned short *)((unsigned char *)&(local_a0) + 2)) + 1);
                       }
-                      iVar24 = ((int (*)())FUN_0003fbf0)(translator,local_5c,1,2);
+                      iVar24 = ((int (*)())fpilEmitInstruction)(translator,local_5c,1,2);
                       if ((iVar24 != 0) ||
-                         (iVar24 = ((int (*)())FUN_0003fbf0)(translator,local_60,1,2), iVar24 != 0))
+                         (iVar24 = ((int (*)())fpilEmitInstruction)(translator,local_60,1,2), iVar24 != 0))
                       goto LAB_000488e8;
                       iVar6 = iVar6 + 1;
                     } while (iVar23 != iVar6);
                   }
                   if ((*local_74 & 0x3fc0000) == 0xc40000) {
-                    iVar6 = ((int (*)())FUN_00046180)(translator,iVar18,iVar23);
+                    iVar6 = ((int (*)())fragmentTranslateAll)(translator,iVar18,iVar23);
                     goto joined_r0x0004802c;
                   }
                   local_60 = &local_d4;
@@ -6535,7 +6535,7 @@ joined_r0x00048414:
                   iVar6 = *(int *)(iVar23 + 0x54);
                   _memset(local_60,0,0x24);
                   local_d4 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_d4) + 0)),0x23);
-                  iVar6 = ((int (*)())FUN_0003f750)(translator,iVar23 + iVar6 * 8 + iVar5 + 8,&local_d0,&local_cc,1)
+                  iVar6 = ((int (*)())fpilTranslateDestination)(translator,iVar23 + iVar6 * 8 + iVar5 + 8,&local_d0,&local_cc,1)
                   ;
                   if (iVar6 == 0) {
                     local_c8 = CONCAT22(4,(short)translator[8]);
@@ -6544,14 +6544,14 @@ joined_r0x00048414:
                     local_c8 = local_c8 | 0x400000;
                     local_c4 = CONCAT22((short)(local_c4 >> 0x10),(short)translator[8]) & 0xffc0ffff |
                                0x440000;
-                    iVar6 = ((int (*)())FUN_0003fbf0)(translator,local_60,1,2);
+                    iVar6 = ((int (*)())fpilEmitInstruction)(translator,local_60,1,2);
                     if (iVar6 == 0) goto LAB_00048c70;
                   }
                 }
                 goto LAB_000488e8;
               }
-              ((int (*)())FUN_0003f750)(translator,iVar5 + iVar6 + 8,&local_ac,&local_a8,0);
-              ((int (*)())FUN_0003fbf0)(translator,local_5c,1,2);
+              ((int (*)())fpilTranslateDestination)(translator,iVar5 + iVar6 + 8,&local_ac,&local_a8,0);
+              ((int (*)())fpilEmitInstruction)(translator,local_5c,1,2);
               iVar6 = translator[9];
             }
             else {
@@ -7603,8 +7603,8 @@ LAB_0004a7b4:
   return translator[9];
 }
 
-/* FUN_0004a7d0 @ 0x4a7d0 (80 bytes) */
-uint FUN_0004a7d0(double fparam_1)
+/* floatToFp24 @ 0x4a7d0 (80 bytes) */
+uint floatToFp24(double fparam_1)
 {
   float fVar1;
   uint uVar2;
@@ -7622,8 +7622,8 @@ uint FUN_0004a7d0(double fparam_1)
   return (uint)GH_F2U(fVar1) >> 7 & 0xffff | uVar3 | (uVar2 - 0x40) * 0x10000;
 }
 
-/* FUN_0004a830 @ 0x4a830 (40 bytes) */
-double FUN_0004a830(uint param_1)
+/* fp24ToFloat @ 0x4a830 (40 bytes) */
+double fp24ToFloat(uint param_1)
 {
   return (double)GH_U2F((unsigned int)(((param_1 & 0x800000) << 8 | ((param_1 >> 0x10 & 0x7f) + 0x40) * 0x800000 |
                         (param_1 & 0xffff) << 7)));
@@ -7684,14 +7684,14 @@ int FUN_0004a990(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
-  /* issue #74: this called FUN_0004cde0(param_2+8) twice in a row with the identical argument.
-   * FUN_0004cde0 is a plain free-and-null helper, so the second call was always a guaranteed
+  /* issue #74: this called freeAndNullField(param_2+8) twice in a row with the identical argument.
+   * freeAndNullField is a plain free-and-null helper, so the second call was always a guaranteed
    * no-op once the first succeeded (or, before the malloc_size() guard above, a second harmless
    * skip once the first left a bad value in place) - a redundant duplicate, not a real second
    * resource being freed. Removed; no other call site in this corpus uses a different offset
    * here to compare against, so there is no evidence a second, distinct field was ever meant
    * to be freed. */
-  FUN_0004cde0(param_2 + 8);
+  freeAndNullField(param_2 + 8);
   *param_2 = 0;
   param_2[7] = 0;
   if ((param_1 != 0) && (param_2 == *(undefined4 **)(param_1 + 0x1e68))) {
@@ -7844,21 +7844,21 @@ int FUN_0004ac90(param_1)
          (fparam_1 = (double)*(float *)(iVar3 + 0x50), fparam_1 != 0.0)) {
         iVar3 = ((int)loopIndex >> 2) + (uint)((int)loopIndex < 0 && (loopIndex & 3) != 0);
         if (iVar3 == 1) {
-          iVar14 = ((uint (*)())FUN_0004a7d0)(fparam_1);
+          iVar14 = ((uint (*)())floatToFp24)(fparam_1);
           piVar9[0x68] = iVar14;
         }
         else if (iVar3 < 2) {
           if (iVar3 == 0) {
-            iVar14 = ((uint (*)())FUN_0004a7d0)(fparam_1);
+            iVar14 = ((uint (*)())floatToFp24)(fparam_1);
             piVar9[99] = iVar14;
           }
         }
         else if (iVar3 == 2) {
-          iVar14 = ((uint (*)())FUN_0004a7d0)(fparam_1);
+          iVar14 = ((uint (*)())floatToFp24)(fparam_1);
           piVar9[0x6d] = iVar14;
         }
         else if (iVar3 == 3) {
-          iVar14 = ((uint (*)())FUN_0004a7d0)(fparam_1);
+          iVar14 = ((uint (*)())floatToFp24)(fparam_1);
           piVar9[0x72] = iVar14;
         }
         uVar2 = iVar3 + 0x10U >> 3 & 0x1ffffffc;
@@ -8704,30 +8704,30 @@ LAB_0004c1ac:
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_0003fd80");
-asm(".set FUN_0003fd80, _FUN_0003fd80");
+asm(".set FUN_0003fd80, _fragmentTranslateSimpleOp");
 asm(".globl FUN_0003ff40");
-asm(".set FUN_0003ff40, _FUN_0003ff40");
+asm(".set FUN_0003ff40, _fragmentTranslateRep");
 asm(".globl FUN_000401b0");
-asm(".set FUN_000401b0, _FUN_000401b0");
+asm(".set FUN_000401b0, _fragmentTranslateDdy");
 asm(".globl FUN_00040370");
-asm(".set FUN_00040370, _FUN_00040370");
+asm(".set FUN_00040370, _fragmentTranslateScalarMath");
 asm(".globl FUN_00041310");
-asm(".set FUN_00041310, _FUN_00041310");
+asm(".set FUN_00041310, _fragmentTranslateTrig");
 asm(".globl FUN_00041510");
-asm(".set FUN_00041510, _FUN_00041510");
+asm(".set FUN_00041510, _fragmentTranslateAngleConvert");
 asm(".globl FUN_00041750");
-asm(".set FUN_00041750, _FUN_00041750");
+asm(".set FUN_00041750, _fragmentTranslateMod");
 asm(".globl FUN_00041c00");
-asm(".set FUN_00041c00, _FUN_00041c00");
+asm(".set FUN_00041c00, _fragmentTranslateAtn");
 asm(".globl FUN_00042e00");
-asm(".set FUN_00042e00, _FUN_00042e00");
+asm(".set FUN_00042e00, _fragmentTranslateRfr");
 asm(".globl FUN_00043df0");
-asm(".set FUN_00043df0, _FUN_00043df0");
+asm(".set FUN_00043df0, _fragmentTranslateFfw");
 asm(".globl FUN_00043f60");
-asm(".set FUN_00043f60, _FUN_00043f60");
+asm(".set FUN_00043f60, _fragmentTranslateDst");
 asm(".globl FUN_00044360");
-asm(".set FUN_00044360, _FUN_00044360");
+asm(".set FUN_00044360, _fragmentTranslateIf");
 asm(".globl FUN_00044500");
-asm(".set FUN_00044500, _FUN_00044500");
+asm(".set FUN_00044500, _fragmentTranslateRfl");
 asm(".globl FUN_00044ac0");
-asm(".set FUN_00044ac0, _FUN_00044ac0");
+asm(".set FUN_00044ac0, _fragmentTranslateWhile");

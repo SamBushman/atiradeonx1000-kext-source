@@ -78,7 +78,7 @@ int extvsEmitSub(param_1, param_2, param_3)
       }
     }
     iVar2 = iVar7 * 0x10 + *(int *)(iVar2 + 0x1c);
-    uVar3 = FUN_00057b80(param_1,param_2);
+    uVar3 = extvsAllocTempSlot(param_1,param_2);
     local_78 = 3;
     local_60 = 0;
     local_64 = 1;
@@ -168,7 +168,7 @@ int extvsEmitCrs(param_1, param_2, param_3)
       }
     }
     iVar3 = iVar10 * 0x10 + *(int *)(iVar3 + 0x1c);
-    uVar4 = FUN_00057b80(param_1,param_2);
+    uVar4 = extvsAllocTempSlot(param_1,param_2);
     local_98 = 3;
     local_80 = 0;
     local_84 = 1;
@@ -238,13 +238,13 @@ int extvsEmitCrs(param_1, param_2, param_3)
       }
     }
     iVar9 = iVar3 * 0x10 + *(int *)(iVar10 + 0x1c);
-    iVar10 = FUN_00057b80(param_1,param_2);
+    iVar10 = extvsAllocTempSlot(param_1,param_2);
     local_58 = &local_7c;
     iVar8 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
     iVar3 = iVar10 * 0x28 + *(int *)(iVar8 + 0x4c);
     uVar1 = *(undefined1 *)(iVar3 + 0x10);
     *(undefined1 *)(iVar3 + 0x10) = 1;
-    uVar4 = FUN_00057b80(param_1,param_2);
+    uVar4 = extvsAllocTempSlot(param_1,param_2);
     *(undefined1 *)(iVar10 * 0x28 + *(int *)(iVar8 + 0x4c) + 0x10) = uVar1;
     local_80 = 0;
     local_98 = 3;
@@ -411,7 +411,7 @@ int extvsEmitMmul(param_1, param_2, param_3)
   }
   iVar7 = param_3 + 4;
   iVar4 = iVar6 * 0x10 + *(int *)(iVar4 + 0x1c);
-  uVar3 = FUN_00057b80(param_1,param_2);
+  uVar3 = extvsAllocTempSlot(param_1,param_2);
   uStack_88 = 3;
   uStack_70 = 0;
   uStack_74 = 1;
@@ -1007,7 +1007,7 @@ int extvsEmitDst(param_1, param_2, param_3)
       }
     }
     iVar2 = iVar7 * 0x10 + *(int *)(iVar2 + 0x1c);
-    uVar3 = FUN_00057b80(param_1,param_2);
+    uVar3 = extvsAllocTempSlot(param_1,param_2);
     local_78 = 3;
     local_60 = 0;
     local_64 = 1;
@@ -1180,7 +1180,7 @@ int FUN_0005e0d0(param_1, param_2, param_3)
   iVar5 = *(int *)(*(int *)(param_1 + 4) + 0x10);
   iVar3 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
   uVar2 = *(undefined4 *)(iVar3 + 0x60);
-  local_a4 = FUN_00057b80(param_1,param_2);
+  local_a4 = extvsAllocTempSlot(param_1,param_2);
   *param_3 = (local_a4 & 0x7f) << 0xd | *param_3 & 0xfff010ff | 0x100000;
   sVar1 = *(short *)(((unsigned char *)0x00002e04) + iVar5);
   local_88 = local_a4;
@@ -3397,7 +3397,7 @@ LAB_00061650:
         }
       }
     }
-    ((int (*)())FUN_00062af0)(ctx,shader);
+    ((int (*)())extvsBuildStreamDescriptors)(ctx,shader);
     ((int (*)())FUN_00062a70)(ctx,shader);
     *(undefined1 *)(shader[1] + *(int *)(((unsigned char *)0x0000118c) + ctx)) = 0;
     if (*(int *)(programState + 0x2b8) != 0) {
@@ -3961,8 +3961,8 @@ int FUN_00062a70(param_1, param_2)
   return;
 }
 
-/* FUN_00062af0 @ 0x62af0 (5624 bytes) */
-int FUN_00062af0(param_1, param_2)
+/* extvsBuildStreamDescriptors @ 0x62af0 (5624 bytes) */
+int extvsBuildStreamDescriptors(param_1, param_2)
   int param_1;
   int *param_2;
 {
@@ -9747,7 +9747,7 @@ asm(".set FUN_000627e4, _FUN_000627e4");
 asm(".globl FUN_00062940");
 asm(".set FUN_00062940, _FUN_00062940");
 asm(".globl FUN_00062af0");
-asm(".set FUN_00062af0, _FUN_00062af0");
+asm(".set FUN_00062af0, _extvsBuildStreamDescriptors");
 asm(".globl FUN_000640f0");
 asm(".set FUN_000640f0, _FUN_000640f0");
 asm(".globl FUN_00064230");

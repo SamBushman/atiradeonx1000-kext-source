@@ -1,7 +1,7 @@
 #include "decls.h"
 
-/* FUN_0002dcf0 @ 0x2dcf0 (236 bytes) */
-int FUN_0002dcf0(param_1, param_2, param_3, param_4, param_5, param_6)
+/* gldTextureHasNonPowerOfTwoSize2 @ 0x2dcf0 (236 bytes) */
+int gldTextureHasNonPowerOfTwoSize2(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -211,7 +211,7 @@ int FUN_0002ddf0(param_1, param_2)
     param_2[0x21] = (int)GH_F2U((float)((double)CONCAT44(0x43300000,uVar21 & 0xffff) - dVar31));
     break;
   case 3:
-    iVar26 = ((int (*)())FUN_0002dcf0)(param_2,uVar18,uVar19,uVar22,uVar20,uVar21);
+    iVar26 = ((int (*)())gldTextureHasNonPowerOfTwoSize2)(param_2,uVar18,uVar19,uVar22,uVar20,uVar21);
     if (iVar26 == 0) {
       *(short *)((int)param_2 + 0x76) = (short)(1 << (*(byte *)(puVar27 + 0x32) - uVar15 & 0x3f));
       *(short *)(param_2 + 0x1e) = (short)(1 << (*(byte *)((int)puVar27 + 0x65) - uVar14 & 0x3f));
@@ -237,7 +237,7 @@ int FUN_0002ddf0(param_1, param_2)
          (int)GH_F2U((float)((double)CONCAT44(0x43300000,(uint)*(ushort *)((int)param_2 + 0x76)) - dVar31));
     break;
   case 4:
-    iVar26 = ((int (*)())FUN_0002dcf0)(param_2,uVar18,uVar19,uVar22,uVar20,uVar21);
+    iVar26 = ((int (*)())gldTextureHasNonPowerOfTwoSize2)(param_2,uVar18,uVar19,uVar22,uVar20,uVar21);
     if (iVar26 == 0) {
       *(short *)((int)param_2 + 0x76) = (short)(1 << (*(byte *)(puVar27 + 0x32) - uVar15 & 0x3f));
     }
@@ -813,8 +813,8 @@ int window_mode_to_ati_format(param_1)
   }
 }
 
-/* FUN_0002f4d0 @ 0x2f4d0 (708 bytes) */
-int FUN_0002f4d0(param_1, param_2, param_3)
+/* gldTextureFormatCodeMatchesType @ 0x2f4d0 (708 bytes) */
+int gldTextureFormatCodeMatchesType(param_1, param_2, param_3)
   uint param_1;
   undefined *param_2;
   int param_3;
@@ -967,8 +967,8 @@ LAB_0002f5fc:
   return false;
 }
 
-/* FUN_0002f7c0 @ 0x2f7c0 (716 bytes) */
-int FUN_0002f7c0(param_1, param_2)
+/* gldTextureFormatCodeFromFormatType @ 0x2f7c0 (716 bytes) */
+int gldTextureFormatCodeFromFormatType(param_1, param_2)
   uint param_1;
   undefined *param_2;
 {
@@ -1566,8 +1566,8 @@ LAB_000303b4:
   return;
 }
 
-/* FUN_000303d0 @ 0x303d0 (68 bytes) */
-int FUN_000303d0(param_1, param_2, param_3, param_4)
+/* gldCompressedImageBytes @ 0x303d0 (68 bytes) */
+int gldCompressedImageBytes(param_1, param_2, param_3, param_4)
   uint param_1;
   int param_2;
   int param_3;
@@ -1825,8 +1825,8 @@ LAB_0003093c:
   } while( true );
 }
 
-/* FUN_00030990 @ 0x30990 (40 bytes) */
-int FUN_00030990(param_1)
+/* floorLog2 @ 0x30990 (40 bytes) */
+int floorLog2(param_1)
   uint param_1;
 {
   int iVar1;
@@ -1898,8 +1898,8 @@ int FUN_00030a60(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   return param_1 + 0x12;
 }
 
-/* FUN_00030b50 @ 0x30b50 (236 bytes) */
-int FUN_00030b50(param_1, param_2, param_3, param_4, param_5, param_6)
+/* gldTextureHasNonPowerOfTwoSize @ 0x30b50 (236 bytes) */
+int gldTextureHasNonPowerOfTwoSize(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -2017,9 +2017,9 @@ int FUN_00030c50(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     *(undefined1 *)(allocation + 0x2f) = 0;
     *(uint *)(allocation + 0x24) = *(uint *)(allocation + 0x24) & 0xffff7f7f;
     *(undefined1 *)((int)allocation + 0x5f) = 0;
-    iVar2 = ((int (*)())FUN_00030990)(param_2);
-    iVar3 = ((int (*)())FUN_00030990)(param_3);
-    iVar4 = ((int (*)())FUN_00030990)(param_4);
+    iVar2 = ((int (*)())floorLog2)(param_2);
+    iVar3 = ((int (*)())floorLog2)(param_3);
+    iVar4 = ((int (*)())floorLog2)(param_4);
     *(char *)(allocation + 0x30) = (char)iVar2;
     *(char *)(allocation + 0x31) = (char)iVar4;
     *(char *)((int)allocation + 0x61) = (char)iVar3;
@@ -2154,7 +2154,7 @@ LAB_000310c0:
   }
   else {
     iVar4 = *(int *)(param_2 + 0x30) + 0xa0 + param_4 * 0x18 + param_3 * 0x168;
-    uVar3 = ((int (*)())FUN_000303d0)((uint)*(byte *)(param_2 + 0x38),(uint)*(ushort *)(iVar4 + 4),
+    uVar3 = ((int (*)())gldCompressedImageBytes)((uint)*(byte *)(param_2 + 0x38),(uint)*(ushort *)(iVar4 + 4),
                          (uint)*(ushort *)(iVar4 + 6),(uint)*(ushort *)(iVar4 + 8));
     param_5[8] = uVar3;
   }
@@ -2620,7 +2620,7 @@ int FUN_00031940(param_1, param_2)
     local_d0 = uVar6;
     local_b8 = uVar25;
     local_b4 = uVar24;
-    iVar26 = ((int (*)())FUN_0002f4d0)((uint)*(ushort *)(iVar30 + 0x10),(uint)*(ushort *)(iVar30 + 0x12),uVar14);
+    iVar26 = ((int (*)())gldTextureFormatCodeMatchesType)((uint)*(ushort *)(iVar30 + 0x10),(uint)*(ushort *)(iVar30 + 0x12),uVar14);
     if (iVar26 == 0) {
       _glgProcessPixels(0,local_5c,uVar14,puVar15,puVar16,uVar18,iVar11,uVar19);
     }
@@ -2904,7 +2904,7 @@ int FUN_00032100(ctx, texture, param_3, param_4, param_5, param_6)
   
   texImages = (ushort *)texture[0xc];
   ctxSaved = ctx;
-  iVar11 = ((int (*)())FUN_00030b50)(texture,texture,param_3,param_4,param_5,param_6);
+  iVar11 = ((int (*)())gldTextureHasNonPowerOfTwoSize)(texture,texture,param_3,param_4,param_5,param_6);
   if (iVar11 != 0) {
     iVar25 = texture[0xc];
     bVar41 = *(byte *)(iVar25 + 1);
@@ -3057,7 +3057,7 @@ LAB_000323a0:
       bVar42 = ((uVar32 & 0x1f) != 0) << 2 | ((uVar32 & 0x1f) == 0) << 1;
       bVar41 = bVar42 | in_xer_so & 1;
       param_3 = (uint)bVar4;
-      uVar44 = ((int (*)())FUN_0002f4d0)((uint)texImages[uVar22 * 0xc + 0x58],(uint)texImages[uVar22 * 0xc + 0x59],
+      uVar44 = ((int (*)())gldTextureFormatCodeMatchesType)((uint)texImages[uVar22 * 0xc + 0x58],(uint)texImages[uVar22 * 0xc + 0x59],
                             param_3);
       uVar16 = (undefined4)uVar44;
       iVar25 = texture[0xc];
@@ -3300,7 +3300,7 @@ LAB_00032c54:
     else {
 LAB_00034128:
       if (*(char *)((int)texImages + 0x6d) == '\0') {
-        iVar11 = ((int (*)())FUN_00030b50)(texture,uVar16,param_3,param_4,uVar19,param_6);
+        iVar11 = ((int (*)())gldTextureHasNonPowerOfTwoSize)(texture,uVar16,param_3,param_4,uVar19,param_6);
         if (iVar11 == 0) {
           local_74 = texture[0xc];
           local_78 = (uint)*(byte *)(local_74 + 0x6c);
@@ -3806,7 +3806,7 @@ LAB_00033700:
                     uVar6 = *(ushort *)(iVar33 + 0x12);
                     uVar15 = (uint)*(byte *)(texture + 0xe);
                     iVar25 = 1 << (uVar28 + uVar22 + uVar32 + local_214 & 0x3f);
-                    uVar20 = ((int (*)())FUN_0002f4d0)((uint)uVar27,(uint)uVar6,uVar15);
+                    uVar20 = ((int (*)())gldTextureFormatCodeMatchesType)((uint)uVar27,(uint)uVar6,uVar15);
                     iVar11 = gldPixelUnitBytes((uint)uVar27,(uint)uVar6);
                     uVar20 = local_154 == iVar11 * local_12c & uVar20;
                     if (((uVar20 == 0) || (uVar23 = local_158 & 0x1f, uVar23 != 0)) ||
@@ -3875,7 +3875,7 @@ LAB_00033700:
                       }
                       else if (!bVar2) {
                         puVar18 = (undefined1 *)((int)((unsigned char *)0x0) + 1);
-                        uVar20 = ((int (*)())FUN_000303d0)((uint)*(byte *)(texture + 0xe),local_12c,1,1);
+                        uVar20 = ((int (*)())gldCompressedImageBytes)((uint)*(byte *)(texture + 0xe),local_12c,1,1);
                         if (uVar20 < 0x20) {
                           if (local_128 != 0) {
                             uVar15 = 0;
@@ -4185,7 +4185,7 @@ int glGenerateMipmap_impl(ctx, texture, face, passThroughArg4, passThroughArg5)
     lastLevel = *(byte *)((int)levelTable + 0x6b);
   }
   levelCount = lastLevel - baseLevel;
-  faceArg = ((int (*)())FUN_00030b50)(texture,extraout_r4,faceArg,passThroughArg4,passThroughArg5,in_r8);
+  faceArg = ((int (*)())gldTextureHasNonPowerOfTwoSize)(texture,extraout_r4,faceArg,passThroughArg4,passThroughArg5,in_r8);
   if (faceArg != 0) {
 LAB_000342e0:
     _pthread_mutex_unlock(*(undefined4 *)(ctx + GLD_mutex));
@@ -5867,7 +5867,7 @@ int glTexSubImage_impl(ctx, texture, face, level, xOffset, yOffset, zOffset, wid
           *(undefined4 *)(ctx + GLD_streamCurrent) = uVar28;
           (**(code **)(ctx + GLD_streamSetCurrent))(commandStream,uVar28);
           chunkRows = 0x1e000 / rowPitch;
-          srcHwFormatB = ((int (*)())FUN_0002f7c0)(pixelFormat,pixelType);
+          srcHwFormatB = ((int (*)())gldTextureFormatCodeFromFormatType)(pixelFormat,pixelType);
           if ((srcHwFormatB == *(byte *)(texture + 0xe)) && ((*(uint *)(levelRecord + 0x14) & 7) < 3)) {
             chunkRowsHw = 0x10000 / rowPitch;
             if (0 < (int)height) {
@@ -6687,7 +6687,7 @@ LAB_00037930:
     return 0;
   }
   textureState = texture[0xc];
-  srcHwFormat = ((int (*)())FUN_0002f7c0)(pixelFormat,pixelType);
+  srcHwFormat = ((int (*)())gldTextureFormatCodeFromFormatType)(pixelFormat,pixelType);
   if (srcHwFormat == 0) {
     return 0;
   }
@@ -10410,13 +10410,13 @@ int FUN_0003e3a0(param_1, param_2)
   
   iVar2 = *param_2;
   if (iVar2 == 0) {
-    iVar2 = FUN_000a12b0(param_1,1);
+    iVar2 = glGenFragmentShadersATI_impl(param_1,1);
     *param_2 = iVar2;
     if (iVar2 == 0) {
       return 0;
     }
   }
-  FUN_000a12f0(param_1,iVar2);
+  glBindFragmentShaderATI_impl(param_1,iVar2);
   uVar1 = FUN_000a11a0(param_1);
   *(undefined4 *)(param_1 + 0x27b8) = uVar1;
   return 1;
@@ -10449,7 +10449,7 @@ int FUN_0003e420(param_1, param_2, param_3, param_4, param_5, param_6)
         else {
           iVar3 = uVar2 * 0x10 + param_6;
         }
-        FUN_000a2100(param_1,(uVar1 >> 0x14 & 0xff) + 0x8941,iVar3);
+        glSetFragmentShaderConstantATI_impl(param_1,(uVar1 >> 0x14 & 0xff) + 0x8941,iVar3);
       }
       loopIndex = loopIndex + 1;
     } while (param_3 != loopIndex);
@@ -10462,7 +10462,7 @@ int FUN_0003e4c0(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  return FUN_000a1570(param_1,*param_2);
+  return glDeleteFragmentShaderATI_impl(param_1,*param_2);
 }
 
 

@@ -36,7 +36,7 @@ int FUN_00076c60(param_1)
     bVar1 = iVar5 == 0;
   }
   else {
-    iVar5 = FUN_00076c10(piVar4,iVar2);
+    iVar5 = vpStateCacheLookup(piVar4,iVar2);
     bVar1 = iVar5 == 0;
     if ((bVar1) || (*(char *)(piVar6[1] + *(int *)(((unsigned char *)0x0000118c) + param_1)) != '\0')) {
       FUN_000546d0(param_1,piVar6);
@@ -68,8 +68,8 @@ int noop_76e60()
   return;
 }
 
-/* FUN_00076e70 @ 0x76e70 (356 bytes) */
-int FUN_00076e70(param_1, param_2)
+/* vpStateFree @ 0x76e70 (356 bytes) */
+int vpStateFree(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -248,8 +248,8 @@ int FUN_00077090(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_000772f4 @ 0x772f4 (300 bytes) */
-int FUN_000772f4(param_1, param_2, param_3)
+/* vpStateCacheFreeAll @ 0x772f4 (300 bytes) */
+int vpStateCacheFreeAll(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   int param_3;
@@ -282,7 +282,7 @@ int FUN_000772f4(param_1, param_2, param_3)
         piVar10 = *(int **)(iVar5 + iVar9);
         if (piVar10 != (int *)0x0) {
           if (*(char *)(*piVar10 + 0x134) == '\0') {
-            ((int (*)())FUN_00076e70)(param_1,*piVar10);
+            ((int (*)())vpStateFree)(param_1,*piVar10);
             *piVar10 = 0;
           }
           if (param_3 != 0) {
@@ -294,7 +294,7 @@ int FUN_000772f4(param_1, param_2, param_3)
               iVar6 = *piVar1;
               while (iVar6 != 0) {
                 *piVar4 = *(int *)(iVar6 + 0x138);
-                ((int (*)())FUN_00076e70)(param_1,iVar6);
+                ((int (*)())vpStateFree)(param_1,iVar6);
                 iVar6 = *piVar4;
               }
               bVar2 = iVar5 != 0x1f;
@@ -314,8 +314,8 @@ int FUN_000772f4(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_00077430 @ 0x77430 (132 bytes) */
-int FUN_00077430(param_1, param_2, param_3)
+/* vpStateSetConstantVector @ 0x77430 (132 bytes) */
+int vpStateSetConstantVector(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   int param_3;
@@ -8936,9 +8936,9 @@ asm(".set FUN_00077030, _FUN_00077030");
 asm(".globl FUN_00077090");
 asm(".set FUN_00077090, _FUN_00077090");
 asm(".globl FUN_000772f4");
-asm(".set FUN_000772f4, _FUN_000772f4");
+asm(".set FUN_000772f4, _vpStateCacheFreeAll");
 asm(".globl FUN_00077430");
-asm(".set FUN_00077430, _FUN_00077430");
+asm(".set FUN_00077430, _vpStateSetConstantVector");
 asm(".globl FUN_00078990");
 asm(".set FUN_00078990, _FUN_00078990");
 asm(".globl FUN_000789d0");

@@ -1386,8 +1386,8 @@ int FUN_0001bac0(param_1, param_2)
   return;
 }
 
-/* FUN_0001be50 @ 0x1be50 (868 bytes) */
-int FUN_0001be50(param_1, param_2)
+/* dxt5EncodeAlphaBlock @ 0x1be50 (868 bytes) */
+int dxt5EncodeAlphaBlock(param_1, param_2)
   int param_1;
   byte *param_2;
 {
@@ -1500,8 +1500,8 @@ LAB_0001bf84:
   return param_2 + 8;
 }
 
-/* FUN_0001c1c0 @ 0x1c1c0 (416 bytes) */
-int FUN_0001c1c0(param_1, param_2, param_3, param_4)
+/* dxt1DecodeColorIndex @ 0x1c1c0 (416 bytes) */
+int dxt1DecodeColorIndex(param_1, param_2, param_3, param_4)
   uint param_1;
   uint param_2;
   uint param_3;
@@ -2260,7 +2260,7 @@ LAB_0001c78c:
           }
         }
         else if (iStack00000024 == 0xe) {
-          param_6 = (byte *)((int (*)())FUN_0001be50)(local_4b8,param_6);
+          param_6 = (byte *)((int (*)())dxt5EncodeAlphaBlock)(local_4b8,param_6);
         }
         local_74 = local_74 + 4;
         *param_6 = local_504;
@@ -2281,8 +2281,8 @@ LAB_0001c78c:
   } while( true );
 }
 
-/* FUN_0001d1e0 @ 0x1d1e0 (808 bytes) */
-int FUN_0001d1e0(param_1, param_2, param_3, param_4, param_5, param_6)
+/* dxtDecompressImage @ 0x1d1e0 (808 bytes) */
+int dxtDecompressImage(param_1, param_2, param_3, param_4, param_5, param_6)
   uint param_1;
   uint param_2;
   uint param_3;
@@ -2327,7 +2327,7 @@ int FUN_0001d1e0(param_1, param_2, param_3, param_4, param_5, param_6)
                 uVar5 = loopIndex2 + iVar1 * -4;
                 iVar2 = iVar6 * 0x10;
                 iVar1 = param_5 + iVar2;
-                ((int (*)())FUN_0001c1c0)((uint)CONCAT11(*(undefined1 *)(iVar1 + 9),*(undefined1 *)(iVar1 + 8)),
+                ((int (*)())dxt1DecodeColorIndex)((uint)CONCAT11(*(undefined1 *)(iVar1 + 9),*(undefined1 *)(iVar1 + 8)),
                              (uint)CONCAT11(*(undefined1 *)(iVar1 + 0xb),*(undefined1 *)(iVar1 + 10)
                                            ),
                              (int)(uint)*(byte *)(iVar2 + iVar11 + param_5 + 0xc) >>
@@ -2370,7 +2370,7 @@ int FUN_0001d1e0(param_1, param_2, param_3, param_4, param_5, param_6)
                 iVar2 = (iVar6 + iVar2 * iVar8) * 0x10;
                 uVar12 = iVar1 + iVar11 * 4;
                 iVar6 = param_5 + iVar2;
-                ((int (*)())FUN_0001c1c0)((uint)CONCAT11(*(undefined1 *)(iVar6 + 9),*(undefined1 *)(iVar6 + 8)),
+                ((int (*)())dxt1DecodeColorIndex)((uint)CONCAT11(*(undefined1 *)(iVar6 + 9),*(undefined1 *)(iVar6 + 8)),
                              (uint)CONCAT11(*(undefined1 *)(iVar6 + 0xb),*(undefined1 *)(iVar6 + 10)
                                            ),
                              (int)(uint)*(byte *)(iVar2 + iVar11 + param_5 + 0xc) >>
@@ -2493,7 +2493,7 @@ code_r0x0001d6b4:
               loopIndex2 = loopIndex2 + 1;
               iVar2 = (iVar1 + iVar2 * iVar11) * 8;
               iVar1 = param_5 + iVar2;
-              ((int (*)())FUN_0001c1c0)((uint)CONCAT11(*(undefined1 *)(iVar1 + 1),
+              ((int (*)())dxt1DecodeColorIndex)((uint)CONCAT11(*(undefined1 *)(iVar1 + 1),
                                           *(undefined1 *)(param_5 + iVar2)),
                            (uint)CONCAT11(*(undefined1 *)(iVar1 + 3),*(undefined1 *)(iVar1 + 2)),
                            (int)(uint)*(byte *)(loopIndex + iVar11 * -4 + iVar2 + param_5 + 4) >>
@@ -2510,8 +2510,8 @@ code_r0x0001d6b4:
   return;
 }
 
-/* FUN_0001d7c0 @ 0x1d7c0 (148 bytes) */
-uint FUN_0001d7c0(double fparam_1)
+/* floatToHalfBits @ 0x1d7c0 (148 bytes) */
+uint floatToHalfBits(double fparam_1)
 {
   float fVar1;
   int iVar2;
@@ -3177,8 +3177,8 @@ LAB_0001e86c:
   return uVar2;
 }
 
-/* FUN_0001e890 @ 0x1e890 (16 bytes) */
-int FUN_0001e890(param_1, param_2, param_3)
+/* copyIndices16Swapped_prefetch_entry @ 0x1e890 (16 bytes) */
+int copyIndices16Swapped_prefetch_entry(param_1, param_2, param_3)
   uint *param_1;
   uint *param_2;
   uint param_3;
@@ -3272,8 +3272,8 @@ LAB_0001eabc:
   return;
 }
 
-/* FUN_0001e8a0 @ 0x1e8a0 (564 bytes) */
-int FUN_0001e8a0(param_1, param_2, param_3)
+/* copyIndices16Swapped_prefetch @ 0x1e8a0 (564 bytes) */
+int copyIndices16Swapped_prefetch(param_1, param_2, param_3)
   uint *param_1;
   uint *param_2;
   uint param_3;
@@ -3367,8 +3367,8 @@ LAB_0001eabc:
   return;
 }
 
-/* FUN_0001eae0 @ 0x1eae0 (16 bytes) */
-int FUN_0001eae0(param_1, param_2, param_3)
+/* copyIndices16Swapped_dcbz_entry @ 0x1eae0 (16 bytes) */
+int copyIndices16Swapped_dcbz_entry(param_1, param_2, param_3)
   uint param_1;
   uint param_2;
   uint param_3;
@@ -3457,8 +3457,8 @@ LAB_0001ecac:
   return;
 }
 
-/* FUN_0001eaf0 @ 0x1eaf0 (468 bytes) */
-int FUN_0001eaf0(param_1, param_2, param_3)
+/* copyIndices16Swapped_dcbz @ 0x1eaf0 (468 bytes) */
+int copyIndices16Swapped_dcbz(param_1, param_2, param_3)
   uint param_1;
   uint param_2;
   uint param_3;
@@ -4079,10 +4079,10 @@ code_r0x0001f7c0:
           }
           else {
             if (*(char *)(ctx + GLD_cacheLineSize) == -0x80) {
-              ((int (*)())FUN_0001eae0)(puVar33,puVar15,chunkCount);
+              ((int (*)())copyIndices16Swapped_dcbz_entry)(puVar33,puVar15,chunkCount);
             }
             else {
-              ((int (*)())FUN_0001e890)(puVar33,puVar15,chunkCount);
+              ((int (*)())copyIndices16Swapped_prefetch_entry)(puVar33,puVar15,chunkCount);
             }
             puVar33 = puVar33 + ((uint)(chunkCount + 1) >> 1);
           }
@@ -4518,8 +4518,8 @@ int FUN_00020330(param_1, param_2)
   return;
 }
 
-/* FUN_00020420 @ 0x20420 (1716 bytes) */
-int FUN_00020420(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+/* gldDisplayNotificationCallback @ 0x20420 (1716 bytes) */
+int gldDisplayNotificationCallback(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   undefined4 param_1;
   int param_2;
   undefined4 param_3;
@@ -6432,7 +6432,7 @@ asm(".set FUN_0001ecd0, _gld_drawVertexArray");
 asm(".globl FUN_00020330");
 asm(".set FUN_00020330, _FUN_00020330");
 asm(".globl FUN_00020420");
-asm(".set FUN_00020420, _FUN_00020420");
+asm(".set FUN_00020420, _gldDisplayNotificationCallback");
 asm(".globl FUN_000242f0");
 asm(".set FUN_000242f0, _FUN_000242f0");
 asm(".globl FUN_00024370");

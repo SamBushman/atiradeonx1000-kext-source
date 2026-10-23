@@ -951,7 +951,7 @@ int FUN_00025bf0(ctx, program)
       kind = *(int *)(program + 0x1c);
       savedNext = (int *)listNode[1];
       if (kind == 2) {
-        FUN_000a0d70(listNode[2] + 0x240,1,listNode + 5);
+        glDeleteProgramsARB_impl(listNode[2] + 0x240,1,listNode + 5);
         nextNode = (int *)listNode[1];
       }
       else if (kind == 3) {
@@ -1007,7 +1007,7 @@ int FUN_00025da0(param_1)
         if (param_1 == iVar3) {
           iVar1 = *(int *)(iVar4 + 0x10);
           if (iVar1 == 2) {
-            FUN_000a0d70(iVar3 + 0x240,1,piVar5 + 5);
+            glDeleteProgramsARB_impl(iVar3 + 0x240,1,piVar5 + 5);
           }
           else if (iVar1 == 3) {
             FUN_0003e4c0(iVar3 + 0x240,piVar5 + 5);
@@ -1075,7 +1075,7 @@ LAB_00025f80:
   iVar9 = piVar6[5];
   piVar14 = piVar6 + 5;
   if (iVar9 == 0) {
-    FUN_000a0570(piVar15,1,piVar14);
+    glGenProgramsARB_impl(piVar15,1,piVar14);
     iVar9 = piVar6[5];
     if (iVar9 != 0) goto LAB_00025fac;
 LAB_000263d8:
@@ -1083,7 +1083,7 @@ LAB_000263d8:
   }
   else {
 LAB_00025fac:
-    FUN_000a0380(piVar15,0x8804,iVar9,in_r6,in_r7,in_r8,in_r9);
+    glBindProgramARB_impl(piVar15,0x8804,iVar9,in_r6,in_r7,in_r8,in_r9);
     if (piVar6[3] == param_2[5]) {
       pbVar13 = (byte *)param_2[0xe];
       if (pbVar13 != (byte *)0x0) {
@@ -1154,7 +1154,7 @@ LAB_000260dc:
           iVar9 = _glpPPShaderLinearize(*(undefined4 *)((short *)*param_2 + 2),uVar5);
           param_2[0xb] = iVar9;
         }
-        piVar7 = (int *)FUN_0003f660();
+        piVar7 = (int *)fpilCreateTranslator();
         iVar9 = param_2[0xd];
         if (((iVar9 == 0) && (iVar9 = param_2[0xc], iVar9 == 0)) &&
            (iVar9 = param_2[0xb], iVar9 == 0)) {
@@ -1208,7 +1208,7 @@ LAB_000260dc:
         }
         FUN_0003f5d0(param_2[0xe]);
         param_2[0xe] = 0;
-        FUN_0003f5e0(piVar7);
+        fpilDestroyTranslator(piVar7);
       }
       if (bVar4) {
         if (*(short *)*param_2 == -0x74d0) {
@@ -1223,12 +1223,12 @@ LAB_000260dc:
           }
           iVar9 = arbProgramIrToText(iVar9);
           if (iVar9 == 0) {
-            FUN_000a0d70(piVar15,1,piVar14);
+            glDeleteProgramsARB_impl(piVar15,1,piVar14);
             *piVar14 = 0;
             return 0;
           }
           length = _strlen(iVar9);
-          FUN_000a0300(piVar15,0x8804,0x8875,length,iVar9,in_r8,iVar10,iVar12);
+          glProgramStringARB_impl(piVar15,0x8804,0x8875,length,iVar9,in_r8,iVar10,iVar12);
           _free(iVar9);
           bVar4 = *piVar15 != 0;
         }
@@ -1237,7 +1237,7 @@ LAB_000260dc:
         bVar4 = false;
       }
 LAB_0002639c:
-      FUN_0003f5e0(piVar7);
+      fpilDestroyTranslator(piVar7);
       if (bVar4) {
         *(undefined1 *)(param_2 + 10) = 1;
         return 0;
@@ -1421,7 +1421,7 @@ LAB_0002687c:
       if (iVar4 != 0) {
         if (piVar5[3] != param_2[5]) {
           piVar5[3] = param_2[5];
-          iVar4 = FUN_0003eb70(param_1 + 0x240,*(undefined4 *)(*param_2 + 4),piVar5 + 5);
+          iVar4 = atifsReplayProgram(param_1 + 0x240,*(undefined4 *)(*param_2 + 4),piVar5 + 5);
           if (iVar4 == 0) {
             return 0;
           }
@@ -1490,7 +1490,7 @@ LAB_00026ae0:
       }
     }
     else if (((psVar2[1] == 1) && (*psVar2 != -0x7e00)) && (*psVar2 == -0x77fc)) {
-      FUN_000a05f0(param_1 + 0x240,0x8804,param_3,param_4);
+      glGetProgramivARB_impl(param_1 + 0x240,0x8804,param_3,param_4);
     }
   }
   _pthread_mutex_unlock(*(undefined4 *)(param_1 + 0xc));
@@ -1519,10 +1519,10 @@ int FUN_00026bf0(param_1, param_2, param_3, param_4, param_5)
   int iVar12;
   
   if (param_4 < 4) {
-    iVar5 = ((int (*)())FUN_0002bf30)(param_1,param_3,param_4);
+    iVar5 = ((int (*)())gldTrimVertexCountToPrimitiveMin)(param_1,param_3,param_4);
   }
   else {
-    iVar5 = ((int (*)())FUN_0002bea0)(param_1,param_3,param_4);
+    iVar5 = ((int (*)())gldTrimVertexCountToPrimitive)(param_1,param_3,param_4);
   }
   if (iVar5 == 0) {
     return;
@@ -1730,10 +1730,10 @@ int FUN_00027150(param_1, param_2, param_3, param_4)
   int iVar11;
   
   if (param_4 < 4) {
-    iVar5 = ((int (*)())FUN_0002bf30)(param_1,param_3,param_4);
+    iVar5 = ((int (*)())gldTrimVertexCountToPrimitiveMin)(param_1,param_3,param_4);
   }
   else {
-    iVar5 = ((int (*)())FUN_0002bea0)(param_1,param_3,param_4);
+    iVar5 = ((int (*)())gldTrimVertexCountToPrimitive)(param_1,param_3,param_4);
   }
   if (iVar5 != 0) {
     uVar2 = *(uint *)(param_1 + 0x283c);
@@ -5542,8 +5542,8 @@ int FUN_0002be90(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   return FUN_000a3be0(param_1 + 0x240,param_3,param_3,param_4,param_5,param_6,param_7);
 }
 
-/* FUN_0002bea0 @ 0x2bea0 (116 bytes) */
-int FUN_0002bea0(param_1, param_2, param_3)
+/* gldTrimVertexCountToPrimitive @ 0x2bea0 (116 bytes) */
+int gldTrimVertexCountToPrimitive(param_1, param_2, param_3)
   undefined4 param_1;
   uint param_2;
   uint param_3;
@@ -5569,8 +5569,8 @@ int FUN_0002bea0(param_1, param_2, param_3)
   return param_3 & 0xfffffffe;
 }
 
-/* FUN_0002bf30 @ 0x2bf30 (180 bytes) */
-int FUN_0002bf30(param_1, param_2, param_3)
+/* gldTrimVertexCountToPrimitiveMin @ 0x2bf30 (180 bytes) */
+int gldTrimVertexCountToPrimitiveMin(param_1, param_2, param_3)
   undefined4 param_1;
   undefined4 param_2;
   uint param_3;
@@ -6090,8 +6090,8 @@ int gld_initContextHardwareState(param_1, param_2)
   return;
 }
 
-/* FUN_0002cb40 @ 0x2cb40 (200 bytes) */
-int FUN_0002cb40(ctx)
+/* gldContextFreeResources @ 0x2cb40 (200 bytes) */
+int gldContextFreeResources(ctx)
   int ctx;
 {
   if (*(int *)(((unsigned char *)0x000027cc) + ctx) != 0) {
@@ -6101,7 +6101,7 @@ int FUN_0002cb40(ctx)
     _free(*(int *)(0x000027d0 + ctx));
   }
   if (*(char *)(ctx + 0x2a6a) == '\0') {
-    FUN_00017e10(ctx);
+    gldRemoveDisplayNotificationObserver(ctx);
   }
   ((int (*)())FUN_00025da0)(ctx);
   if (*(int *)(ctx + GLD_ringMap) + 0x28U < *(uint *)(ctx + GLD_writeCursor)) {
@@ -6150,7 +6150,7 @@ uint FUN_0002cc30(int ctx,undefined4 param_2,uint param_3,uint param_4,undefined
   in_r9 = param_7;
   uVar3 = param_4;
   if ((int)param_4 < 4) {
-    uVar4 = ((int (*)())FUN_0002bf30)(ctx,param_3,param_4);
+    uVar4 = ((int (*)())gldTrimVertexCountToPrimitiveMin)(ctx,param_3,param_4);
     uVar2 = param_4;
     fparam_1 = extraout_f1;
   }
@@ -6608,16 +6608,16 @@ LAB_0002d9d4:
     break;
   case '\x1f':
   case '!':
-    uVar3 = ((uint (*)())FUN_0001d7c0)(fparam_1);
+    uVar3 = ((uint (*)())floatToHalfBits)(fparam_1);
     fVar6 = GH_U2F((unsigned int)((uVar3 << 0x10 | uVar3)));
     break;
   case ' ':
-    uVar3 = ((uint (*)())FUN_0001d7c0)(fparam_1_00);
+    uVar3 = ((uint (*)())floatToHalfBits)(fparam_1_00);
     fVar6 = GH_U2F((unsigned int)((uVar3 << 0x10 | uVar3)));
     break;
   case '\"':
-    uVar3 = ((uint (*)())FUN_0001d7c0)(fparam_1);
-    iVar1 = ((uint (*)())FUN_0001d7c0)((double)fStack00000028);
+    uVar3 = ((uint (*)())floatToHalfBits)(fparam_1);
+    iVar1 = ((uint (*)())floatToHalfBits)((double)fStack00000028);
     fVar6 = GH_U2F((unsigned int)((uVar3 | iVar1 << 0x10)));
     break;
   case '#':

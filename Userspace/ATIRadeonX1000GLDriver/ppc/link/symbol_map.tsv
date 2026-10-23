@@ -644,11 +644,11 @@ DAT_001dac3c	0x1dac3c	__DATA,__data	-	-	extern unsigned char DAT_001dac3c asm("D
 DAT_001dac40	0x1dac40	__DATA,__data	-	-	extern unsigned char DAT_001dac40 asm("DAT_001dac40");	0x00000000	data.s
 DAT_001db2d4	0x1db2d4	__DATA,__data	-	-	extern unsigned char DAT_001db2d4 asm("DAT_001db2d4");	0x6a4a007c	data.s
 DAT_001db2d8	0x1db2d8	__DATA,__data	-	-	extern unsigned char DAT_001db2d8 asm("DAT_001db2d8");	0x00080000	data.s
-PTR_FUN_001db2dc	0x1db2dc	__DATA,__data	pointer	4	extern unsigned char *PTR_FUN_001db2dc[] asm("PTR_FUN_001db2dc");	pointer -> FUN_00044ac0	data.s
+PTR_FUN_001db2dc	0x1db2dc	__DATA,__data	pointer	4	extern unsigned char *PTR_FUN_001db2dc[] asm("PTR_FUN_001db2dc");	pointer -> fragmentTranslateWhile	data.s
 DAT_001db2e0	0x1db2e0	__DATA,__data	-	-	extern unsigned char DAT_001db2e0 asm("DAT_001db2e0");	0x20000000	data.s
 DAT_001db2e4	0x1db2e4	__DATA,__data	-	-	extern unsigned char DAT_001db2e4 asm("DAT_001db2e4");	0x6b4a0054	data.s
 DAT_001db2e8	0x1db2e8	__DATA,__data	-	-	extern unsigned char DAT_001db2e8 asm("DAT_001db2e8");	0x00000000	data.s
-PTR_FUN_001db2ec	0x1db2ec	__DATA,__data	pointer	4	extern unsigned char *PTR_FUN_001db2ec[] asm("PTR_FUN_001db2ec");	pointer -> FUN_0003fd80	data.s
+PTR_FUN_001db2ec	0x1db2ec	__DATA,__data	pointer	4	extern unsigned char *PTR_FUN_001db2ec[] asm("PTR_FUN_001db2ec");	pointer -> fragmentTranslateSimpleOp	data.s
 DAT_001db2f0	0x1db2f0	__DATA,__data	-	-	extern unsigned char DAT_001db2f0 asm("DAT_001db2f0");	0x20000000	data.s
 DAT_001db2f4	0x1db2f4	__DATA,__data	-	-	extern unsigned char DAT_001db2f4 asm("DAT_001db2f4");	0x6c6e0000	data.s
 DAT_001db344	0x1db344	__DATA,__data	undefined4	4	extern unsigned int DAT_001db344 asm("DAT_001db344");	0x00000008	data.s
@@ -816,7 +816,7 @@ PTR_001e88b4	0x1e88b4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR
 PTR_001e88b8	0x1e88b8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_001e88b8 asm("PTR_001e88b8");	pointer -> _kCFCopyStringDictionaryKeyCallBacks	data.s
 PTR_001e88bc	0x1e88bc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_001e88bc asm("PTR_001e88bc");	pointer -> _kCFTypeDictionaryValueCallBacks	data.s
 PTR_001e88c0	0x1e88c0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_001e88c0 asm("PTR_001e88c0");	pointer -> _kCFAllocatorDefault	data.s
-PTR_FUN_001e88c4	0x1e88c4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e88c4 asm("PTR_FUN_001e88c4");	pointer -> FUN_00020420	data.s
+PTR_FUN_001e88c4	0x1e88c4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e88c4 asm("PTR_FUN_001e88c4");	pointer -> gldDisplayNotificationCallback	data.s
 PTR_DAT_001e88c8	0x1e88c8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e88c8 asm("PTR_DAT_001e88c8");	pointer -> LD_1d9f34	data.s
 PTR_DAT_001e88cc	0x1e88cc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e88cc asm("PTR_DAT_001e88cc");	pointer -> LD_1fc798	data.s
 PTR_DAT_001e88d0	0x1e88d0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e88d0 asm("PTR_DAT_001e88d0");	pointer -> LD_1da90c	data.s
@@ -874,7 +874,7 @@ PTR_DAT_001e899c	0x1e899c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char 
 PTR_FUN_001e89a0	0x1e89a0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89a0 asm("PTR_FUN_001e89a0");	pointer -> noop_70c50	data.s
 PTR_FUN_001e89a4	0x1e89a4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89a4 asm("PTR_FUN_001e89a4");	pointer -> FUN_00064a10	data.s
 PTR_FUN_001e89a8	0x1e89a8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89a8 asm("PTR_FUN_001e89a8");	pointer -> evsFoldConstantMoves	data.s
-PTR_FUN_001e89ac	0x1e89ac	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89ac asm("PTR_FUN_001e89ac");	pointer -> FUN_00077430	data.s
+PTR_FUN_001e89ac	0x1e89ac	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89ac asm("PTR_FUN_001e89ac");	pointer -> vpStateSetConstantVector	data.s
 PTR_FUN_001e89b0	0x1e89b0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89b0 asm("PTR_FUN_001e89b0");	pointer -> FUN_00077030	data.s
 PTR_FUN_001e89b4	0x1e89b4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89b4 asm("PTR_FUN_001e89b4");	pointer -> extvsPrepareHardwareProgram	data.s
 PTR_FUN_001e89b8	0x1e89b8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89b8 asm("PTR_FUN_001e89b8");	pointer -> FUN_00062510	data.s
@@ -888,7 +888,7 @@ PTR_LAB_001e89d4	0x1e89d4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char 
 PTR_FUN_001e89d8	0x1e89d8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89d8 asm("PTR_FUN_001e89d8");	pointer -> FUN_000623e0	data.s
 PTR_FUN_001e89dc	0x1e89dc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89dc asm("PTR_FUN_001e89dc");	pointer -> noop_70c60	data.s
 PTR_FUN_001e89e0	0x1e89e0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89e0 asm("PTR_FUN_001e89e0");	pointer -> FUN_00062940	data.s
-PTR_FUN_001e89e4	0x1e89e4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89e4 asm("PTR_FUN_001e89e4");	pointer -> FUN_00071bc0	data.s
+PTR_FUN_001e89e4	0x1e89e4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89e4 asm("PTR_FUN_001e89e4");	pointer -> evsAssignVertexInputs	data.s
 PTR_FUN_001e89e8	0x1e89e8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89e8 asm("PTR_FUN_001e89e8");	pointer -> FUN_0005f540	data.s
 PTR_FUN_001e89ec	0x1e89ec	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89ec asm("PTR_FUN_001e89ec");	pointer -> FUN_00064850	data.s
 PTR_FUN_001e89f0	0x1e89f0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89f0 asm("PTR_FUN_001e89f0");	pointer -> atifsCompileCurrentShader	data.s
@@ -919,7 +919,7 @@ PTR_FUN_001e8a50	0x1e8a50	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char 
 PTR_FUN_001e8a54	0x1e8a54	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a54 asm("PTR_FUN_001e8a54");	pointer -> arbEmitIlRcp	data.s
 PTR_001e8a58	0x1e8a58	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_001e8a58 asm("PTR_001e8a58");	pointer -> _realloc	data.s
 PTR_FUN_001e8a5c	0x1e8a5c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a5c asm("PTR_FUN_001e8a5c");	pointer -> arbEmitRecord3Src_op0c	data.s
-PTR_FUN_001e8a60	0x1e8a60	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a60 asm("PTR_FUN_001e8a60");	pointer -> FUN_00062af0	data.s
+PTR_FUN_001e8a60	0x1e8a60	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a60 asm("PTR_FUN_001e8a60");	pointer -> extvsBuildStreamDescriptors	data.s
 PTR_FUN_001e8a64	0x1e8a64	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a64 asm("PTR_FUN_001e8a64");	pointer -> arbEmitIlMov	data.s
 PTR_FUN_001e8a68	0x1e8a68	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a68 asm("PTR_FUN_001e8a68");	pointer -> FUN_000afe40	data.s
 PTR_FUN_001e8a6c	0x1e8a6c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a6c asm("PTR_FUN_001e8a6c");	pointer -> noop_879e0	data.s

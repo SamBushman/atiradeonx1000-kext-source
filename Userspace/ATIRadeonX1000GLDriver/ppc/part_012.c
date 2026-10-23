@@ -3377,10 +3377,10 @@ int FUN_00087800(param_1, param_2, param_3, param_4)
       iVar10 = iVar8 + *(int *)(iVar6 + 0x80);
       if (*(int *)(iVar10 + 8) != 0x34) {
         arbfpFetchParameterValue(param_1,iVar10,&fStack_48,param_4);
-        iVar2 = ((uint (*)())FUN_0004a7d0)((double)fStack_48);
-        iVar3 = ((uint (*)())FUN_0004a7d0)((double)fStack_44);
-        iVar4 = ((uint (*)())FUN_0004a7d0)((double)fStack_40);
-        iVar5 = ((uint (*)())FUN_0004a7d0)((double)fStack_3c);
+        iVar2 = ((uint (*)())floatToFp24)((double)fStack_48);
+        iVar3 = ((uint (*)())floatToFp24)((double)fStack_44);
+        iVar4 = ((uint (*)())floatToFp24)((double)fStack_40);
+        iVar5 = ((uint (*)())floatToFp24)((double)fStack_3c);
         iVar6 = *(int *)(iVar10 + 4) * 0x10;
         iVar1 = iVar6 + iVar9;
         if ((((iVar2 == *(int *)(iVar1 + 0x8c)) && (iVar3 == *(int *)(iVar1 + 0x90))) &&

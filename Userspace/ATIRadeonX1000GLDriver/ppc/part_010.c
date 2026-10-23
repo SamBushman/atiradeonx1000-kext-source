@@ -2049,8 +2049,8 @@ LAB_0006f9f0:
   return;
 }
 
-/* FUN_0006fd10 @ 0x6fd10 (180 bytes) */
-int FUN_0006fd10(param_1, param_2, param_3)
+/* evsTokenBufPush @ 0x6fd10 (180 bytes) */
+int evsTokenBufPush(param_1, param_2, param_3)
   int param_1;
   uint *param_2;
   undefined4 param_3;
@@ -2073,8 +2073,8 @@ int FUN_0006fd10(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_0006fdd0 @ 0x6fdd0 (1812 bytes) */
-int FUN_0006fdd0(param_1, param_2, param_3, param_4)
+/* evsAllocLocalConstantRegisters @ 0x6fdd0 (1812 bytes) */
+int evsAllocLocalConstantRegisters(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   int param_3;
@@ -2346,8 +2346,8 @@ LAB_00070350:
   return 0;
 }
 
-/* FUN_00070520 @ 0x70520 (252 bytes) */
-int FUN_00070520(param_1, param_2, param_3, param_4)
+/* evsAllocConstantsForOperand @ 0x70520 (252 bytes) */
+int evsAllocConstantsForOperand(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   int param_2;
   undefined4 param_3;
@@ -2365,7 +2365,7 @@ int FUN_00070520(param_1, param_2, param_3, param_4)
     if (*(char *)(iVar2 + 0x3d) == '\0') {
       if (*(int *)(iVar2 + 0x30) == 0) {
         if (*(uint *)(iVar2 + 0x34) < 2) {
-          iVar1 = ((int (*)())FUN_0006fdd0)(param_1,param_2,param_3,iVar2);
+          iVar1 = ((int (*)())evsAllocLocalConstantRegisters)(param_1,param_2,param_3,iVar2);
           if (iVar1 != 1) {
             return 0;
           }
@@ -2381,7 +2381,7 @@ int FUN_00070520(param_1, param_2, param_3, param_4)
         loopIndex = 0;
         iVar2 = iVar4;
         do {
-          iVar1 = ((int (*)())FUN_0006fdd0)(param_1,param_2,param_3,iVar1 + iVar2);
+          iVar1 = ((int (*)())evsAllocLocalConstantRegisters)(param_1,param_2,param_3,iVar1 + iVar2);
           if (iVar1 == 1) {
             return 1;
           }
@@ -2395,8 +2395,8 @@ int FUN_00070520(param_1, param_2, param_3, param_4)
   return 0;
 }
 
-/* FUN_00070630 @ 0x70630 (1412 bytes) */
-int FUN_00070630(param_1, param_2, param_3, param_4)
+/* evsAllocLocalRegisters @ 0x70630 (1412 bytes) */
+int evsAllocLocalRegisters(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   int param_3;
@@ -2590,8 +2590,8 @@ LAB_000707f4:
   return;
 }
 
-/* FUN_00070bf0 @ 0x70bf0 (80 bytes) */
-int FUN_00070bf0(param_1, param_2)
+/* evsOperandUsesTempSlot @ 0x70bf0 (80 bytes) */
+int evsOperandUsesTempSlot(param_1, param_2)
   int *param_1;
   int param_2;
 {
@@ -2618,8 +2618,8 @@ int noop_70c60()
   return;
 }
 
-/* FUN_00070c70 @ 0x70c70 (84 bytes) */
-int FUN_00070c70(param_1)
+/* evsFindFreeOutputRegister @ 0x70c70 (84 bytes) */
+int evsFindFreeOutputRegister(param_1)
   int param_1;
 {
   uint uVar1;
@@ -2641,8 +2641,8 @@ int FUN_00070c70(param_1)
   } while( true );
 }
 
-/* FUN_00070cd0 @ 0x70cd0 (144 bytes) */
-int FUN_00070cd0(param_1)
+/* evsAllocTempSlot @ 0x70cd0 (144 bytes) */
+int evsAllocTempSlot(param_1)
   int param_1;
 {
   char cVar1;
@@ -2686,8 +2686,8 @@ int FUN_00070cd0(param_1)
   return iVar4;
 }
 
-/* FUN_00070d80 @ 0x70d80 (3624 bytes) */
-int FUN_00070d80(param_1, param_2, param_3, param_4)
+/* evsEmitFogOutput @ 0x70d80 (3624 bytes) */
+int evsEmitFogOutput(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   int param_3;
@@ -3020,8 +3020,8 @@ LAB_00071390:
   return;
 }
 
-/* FUN_00071bc0 @ 0x71bc0 (7188 bytes) */
-int FUN_00071bc0(param_1, param_2)
+/* evsAssignVertexInputs @ 0x71bc0 (7188 bytes) */
+int evsAssignVertexInputs(param_1, param_2)
   int param_1;
   int *param_2;
 {
@@ -3068,9 +3068,9 @@ int FUN_00071bc0(param_1, param_2)
     return 1;
   }
   *(undefined1 *)(param_2 + 4) = 1;
-  uVar12 = ((int (*)())FUN_00070cd0)(iVar21);
+  uVar12 = ((int (*)())evsAllocTempSlot)(iVar21);
   *(undefined4 *)(((unsigned char *)0x000013c0) + iVar21) = uVar12;
-  uVar12 = ((int (*)())FUN_00070cd0)(iVar21);
+  uVar12 = ((int (*)())evsAllocTempSlot)(iVar21);
   *(undefined4 *)(((unsigned char *)0x000013cc) + iVar21) = uVar12;
   iVar26 = 0x16;
   iVar22 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
@@ -3678,7 +3678,7 @@ LAB_000728e4:
              (iVar14 != 0)) && (*(int *)(iVar17 + iVar18) == 0)))) {
           *(undefined1 *)(iVar14 + 0x3d) = 1;
           if (*(int *)(iVar14 + 0x24) == 0x87bf) {
-            iVar15 = ((int (*)())FUN_00070c70)(iVar26);
+            iVar15 = ((int (*)())evsFindFreeOutputRegister)(iVar26);
             iVar26 = iVar15 * 4 + iVar26;
             *(undefined4 *)(iVar26 + 0xb8) = *(undefined4 *)(iVar14 + 4);
             *(undefined4 *)(iVar26 + 0x60) = 1;
@@ -3705,7 +3705,7 @@ LAB_000728e4:
             (iVar14 != 0)) && (*(int *)(iVar17 + iVar18) == 0)) {
           *(undefined1 *)(iVar14 + 0x3d) = 1;
           if (*(int *)(iVar14 + 0x24) == 0x87bf) {
-            iVar15 = ((int (*)())FUN_00070c70)(iVar26);
+            iVar15 = ((int (*)())evsFindFreeOutputRegister)(iVar26);
             iVar26 = iVar15 * 4 + iVar26;
             *(undefined4 *)(iVar26 + 0xb8) = *(undefined4 *)(iVar14 + 4);
             *(undefined4 *)(iVar26 + 0x60) = 1;
@@ -3732,7 +3732,7 @@ LAB_000728e4:
            ((iVar16 != 0 &&
             ((*(int *)(iVar18 + iVar15) == 0 &&
              (*(undefined1 *)(iVar16 + 0x3d) = 1, *(int *)(iVar16 + 0x24) == 0x87bf)))))) {
-          iVar14 = ((int (*)())FUN_00070c70)(iVar26);
+          iVar14 = ((int (*)())evsFindFreeOutputRegister)(iVar26);
           iVar26 = iVar14 * 4 + iVar26;
           *(undefined4 *)(iVar26 + 0xb8) = *(undefined4 *)(iVar16 + 4);
           *(undefined4 *)(iVar26 + 0x60) = 1;
@@ -3759,10 +3759,10 @@ LAB_000728e4:
     uVar13 = 0;
     iVar10 = 0;
     do {
-      iVar22 = ((int (*)())FUN_00070520)(param_1,param_2,iVar21,iVar10 + param_2[6] + 0x20);
+      iVar22 = ((int (*)())evsAllocConstantsForOperand)(param_1,param_2,iVar21,iVar10 + param_2[6] + 0x20);
       if (((iVar22 == 1) ||
-          (iVar22 = ((int (*)())FUN_00070520)(param_1,param_2,iVar21,iVar10 + param_2[6] + 0x3c), iVar22 == 1))
-         || (iVar22 = ((int (*)())FUN_00070520)(param_1,param_2,iVar21,iVar10 + param_2[6] + 0x58), iVar22 == 1))
+          (iVar22 = ((int (*)())evsAllocConstantsForOperand)(param_1,param_2,iVar21,iVar10 + param_2[6] + 0x3c), iVar22 == 1))
+         || (iVar22 = ((int (*)())evsAllocConstantsForOperand)(param_1,param_2,iVar21,iVar10 + param_2[6] + 0x58), iVar22 == 1))
       {
         param_2[0x19] = 0;
         param_2[0xc] = 0;
@@ -3779,15 +3779,15 @@ LAB_000728e4:
   uVar24 = 0;
   iVar10 = iVar21 + 0x140;
   *(undefined4 *)(iVar21 + 4) = 0;
-  ((int (*)())FUN_0006fd10)(param_1,iVar10,1);
-  ((int (*)())FUN_0006fd10)(param_1,iVar10,0x200);
+  ((int (*)())evsTokenBufPush)(param_1,iVar10,1);
+  ((int (*)())evsTokenBufPush)(param_1,iVar10,0x200);
   uVar13 = 0;
   if (*(int *)(iVar21 + 0x130) != 0) {
     do {
-      ((int (*)())FUN_0006fd10)(param_1,iVar10,(uVar24 & 0x3fff) << 0x10 | 0x1a);
+      ((int (*)())evsTokenBufPush)(param_1,iVar10,(uVar24 & 0x3fff) << 0x10 | 0x1a);
       uVar13 = uVar24 & 0xffff;
       uVar24 = uVar24 + 1;
-      ((int (*)())FUN_0006fd10)(param_1,iVar10,uVar13 | 0x50000);
+      ((int (*)())evsTokenBufPush)(param_1,iVar10,uVar13 | 0x50000);
       uVar13 = *(uint *)(iVar21 + 0x130);
     } while (uVar24 < uVar13);
   }
@@ -3802,53 +3802,53 @@ LAB_000728e4:
         iVar15 = *(int *)(iVar26 + 0x24);
         if (iVar15 == 0x87bf) {
           uVar13 = *(uint *)(iVar26 + 4);
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,0x1c);
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,uVar13 & 0xffff | 0x10000);
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,**(undefined4 **)(iVar22 + param_2[8] + 0x38));
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,*(undefined4 *)(*(int *)(iVar22 + param_2[8] + 0x38) + 4));
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,*(undefined4 *)(*(int *)(iVar22 + param_2[8] + 0x38) + 8));
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,*(undefined4 *)(*(int *)(iVar22 + param_2[8] + 0x38) + 0xc));
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,0x1c);
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,uVar13 & 0xffff | 0x10000);
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,**(undefined4 **)(iVar22 + param_2[8] + 0x38));
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,*(undefined4 *)(*(int *)(iVar22 + param_2[8] + 0x38) + 4));
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,*(undefined4 *)(*(int *)(iVar22 + param_2[8] + 0x38) + 8));
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,*(undefined4 *)(*(int *)(iVar22 + param_2[8] + 0x38) + 0xc));
           uVar13 = param_2[7];
         }
         else if (iVar15 == 0x87c0) {
           uVar13 = *(uint *)(iVar26 + 0x10);
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,0x1c);
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,uVar13 & 0xffff | 0x10000);
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,**(undefined4 **)(param_2[8] + iVar22 + 0x38));
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,*(undefined4 *)(*(int *)(param_2[8] + iVar22 + 0x38) + 4));
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,*(undefined4 *)(*(int *)(param_2[8] + iVar22 + 0x38) + 8));
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,*(undefined4 *)(*(int *)(param_2[8] + iVar22 + 0x38) + 0xc));
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,0x1c);
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,uVar13 & 0xffff | 0x10000);
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,**(undefined4 **)(param_2[8] + iVar22 + 0x38));
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,*(undefined4 *)(*(int *)(param_2[8] + iVar22 + 0x38) + 4));
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,*(undefined4 *)(*(int *)(param_2[8] + iVar22 + 0x38) + 8));
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,*(undefined4 *)(*(int *)(param_2[8] + iVar22 + 0x38) + 0xc));
           uVar13 = *(uint *)(iVar26 + 0x14);
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,0x1c);
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,uVar13 & 0xffff | 0x10000);
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,*(undefined4 *)(*(int *)(param_2[8] + iVar22 + 0x38) + 0x10));
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,*(undefined4 *)(*(int *)(param_2[8] + iVar22 + 0x38) + 0x14));
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,*(undefined4 *)(*(int *)(param_2[8] + iVar22 + 0x38) + 0x18));
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,*(undefined4 *)(*(int *)(param_2[8] + iVar22 + 0x38) + 0x1c));
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,0x1c);
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,uVar13 & 0xffff | 0x10000);
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,*(undefined4 *)(*(int *)(param_2[8] + iVar22 + 0x38) + 0x10));
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,*(undefined4 *)(*(int *)(param_2[8] + iVar22 + 0x38) + 0x14));
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,*(undefined4 *)(*(int *)(param_2[8] + iVar22 + 0x38) + 0x18));
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,*(undefined4 *)(*(int *)(param_2[8] + iVar22 + 0x38) + 0x1c));
           uVar13 = *(uint *)(iVar26 + 0x18);
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,0x1c);
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,uVar13 & 0xffff | 0x10000);
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,*(undefined4 *)(*(int *)(param_2[8] + iVar22 + 0x38) + 0x20));
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,*(undefined4 *)(*(int *)(iVar22 + param_2[8] + 0x38) + 0x24));
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,*(undefined4 *)(*(int *)(iVar22 + param_2[8] + 0x38) + 0x28));
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,*(undefined4 *)(*(int *)(iVar22 + param_2[8] + 0x38) + 0x2c));
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,0x1c);
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,uVar13 & 0xffff | 0x10000);
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,*(undefined4 *)(*(int *)(param_2[8] + iVar22 + 0x38) + 0x20));
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,*(undefined4 *)(*(int *)(iVar22 + param_2[8] + 0x38) + 0x24));
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,*(undefined4 *)(*(int *)(iVar22 + param_2[8] + 0x38) + 0x28));
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,*(undefined4 *)(*(int *)(iVar22 + param_2[8] + 0x38) + 0x2c));
           uVar13 = *(uint *)(iVar26 + 0x1c);
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,0x1c);
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,uVar13 & 0xffff | 0x10000);
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,*(undefined4 *)(*(int *)(iVar22 + param_2[8] + 0x38) + 0x30));
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,*(undefined4 *)(*(int *)(iVar22 + param_2[8] + 0x38) + 0x34));
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,*(undefined4 *)(*(int *)(iVar22 + param_2[8] + 0x38) + 0x38));
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,*(undefined4 *)(*(int *)(iVar22 + param_2[8] + 0x38) + 0x3c));
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,0x1c);
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,uVar13 & 0xffff | 0x10000);
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,*(undefined4 *)(*(int *)(iVar22 + param_2[8] + 0x38) + 0x30));
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,*(undefined4 *)(*(int *)(iVar22 + param_2[8] + 0x38) + 0x34));
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,*(undefined4 *)(*(int *)(iVar22 + param_2[8] + 0x38) + 0x38));
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,*(undefined4 *)(*(int *)(iVar22 + param_2[8] + 0x38) + 0x3c));
           uVar13 = param_2[7];
         }
         else if (iVar15 == 0x87be) {
           uVar13 = *(uint *)(iVar26 + 4);
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,0x1c);
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,uVar13 & 0xffff | 0x10000);
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,**(undefined4 **)(iVar22 + param_2[8] + 0x38));
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,**(undefined4 **)(iVar22 + param_2[8] + 0x38));
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,**(undefined4 **)(iVar22 + param_2[8] + 0x38));
-          ((int (*)())FUN_0006fd10)(param_1,iVar10,**(undefined4 **)(iVar22 + param_2[8] + 0x38));
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,0x1c);
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,uVar13 & 0xffff | 0x10000);
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,**(undefined4 **)(iVar22 + param_2[8] + 0x38));
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,**(undefined4 **)(iVar22 + param_2[8] + 0x38));
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,**(undefined4 **)(iVar22 + param_2[8] + 0x38));
+          ((int (*)())evsTokenBufPush)(param_1,iVar10,**(undefined4 **)(iVar22 + param_2[8] + 0x38));
           uVar13 = param_2[7];
         }
       }
@@ -3870,10 +3870,10 @@ LAB_000728e4:
         param_2[0x18] = 0;
         return 0;
       }
-      ((int (*)())FUN_00070630)(param_1,param_2,iVar21,iVar22 + param_2[6] + 4);
-      ((int (*)())FUN_00070630)(param_1,param_2,iVar21,iVar22 + param_2[6] + 0x20);
-      ((int (*)())FUN_00070630)(param_1,param_2,iVar21,iVar22 + param_2[6] + 0x3c);
-      ((int (*)())FUN_00070630)(param_1,param_2,iVar21,iVar22 + param_2[6] + 0x58);
+      ((int (*)())evsAllocLocalRegisters)(param_1,param_2,iVar21,iVar22 + param_2[6] + 4);
+      ((int (*)())evsAllocLocalRegisters)(param_1,param_2,iVar21,iVar22 + param_2[6] + 0x20);
+      ((int (*)())evsAllocLocalRegisters)(param_1,param_2,iVar21,iVar22 + param_2[6] + 0x3c);
+      ((int (*)())evsAllocLocalRegisters)(param_1,param_2,iVar21,iVar22 + param_2[6] + 0x58);
       if (uStack_58 < (uint)param_2[0x19]) {
         uStack_58 = param_2[0x19];
       }
@@ -3914,10 +3914,10 @@ LAB_000728e4:
                 bVar9 = 0;
                 uVar23 = uVar13 + 1;
                 do {
-                  iVar17 = ((int (*)())FUN_00070bf0)(iVar14 + 0x20,iVar16);
-                  if (((iVar17 == 0) && (iVar17 = ((int (*)())FUN_00070bf0)(iVar14 + 0x3c,iVar16), iVar17 == 0))
-                     && (iVar17 = ((int (*)())FUN_00070bf0)(iVar14 + 0x58,iVar16), iVar17 == 0)) {
-                    iVar17 = ((int (*)())FUN_00070bf0)(iVar14 + 4,iVar16);
+                  iVar17 = ((int (*)())evsOperandUsesTempSlot)(iVar14 + 0x20,iVar16);
+                  if (((iVar17 == 0) && (iVar17 = ((int (*)())evsOperandUsesTempSlot)(iVar14 + 0x3c,iVar16), iVar17 == 0))
+                     && (iVar17 = ((int (*)())evsOperandUsesTempSlot)(iVar14 + 0x58,iVar16), iVar17 == 0)) {
+                    iVar17 = ((int (*)())evsOperandUsesTempSlot)(iVar14 + 4,iVar16);
                     if (iVar17 != 0) {
                       iVar17 = *(int *)(iVar14 + 8);
                       if (*(int *)(iVar17 * 0x54 + param_2[8] + 0x24) == 0x87be) {
@@ -4002,10 +4002,10 @@ LAB_000734d0:
     iVar22 = *(int *)(iVar21 + 0x4c);
     *(int *)(((unsigned char *)0x000013c4) + iVar21) = iVar22;
     *(int *)(iVar21 + 0x4c) = iVar22 + 1;
-    ((int (*)())FUN_00070d80)(param_1,iVar19,iVar21,uVar12);
+    ((int (*)())evsEmitFogOutput)(param_1,iVar19,iVar21,uVar12);
   }
 LAB_000736b0:
-  ((int (*)())FUN_0006fd10)(param_1,iVar10,0x28);
+  ((int (*)())evsTokenBufPush)(param_1,iVar10,0x28);
   param_2[0x15] = *(int *)(iVar21 + 4);
   param_2[0x19] = uStack_58;
   if (*(int *)(iVar21 + 0x118) != 0) {
@@ -4047,7 +4047,7 @@ LAB_00073754:
   }
   (**(code **)(((unsigned char *)0x000012b8) + param_1))(param_1,param_2);
   *(undefined1 *)(param_1 + 0x29) = 1;
-  ((int (*)())FUN_00076b80)(param_1,param_2);
+  ((int (*)())vpStateCacheInsert)(param_1,param_2);
   *(undefined1 *)(param_2[1] + *(int *)(((unsigned char *)0x0000118c) + param_1)) = 0;
   if (*(int *)(((unsigned char *)0x000013d8) + iVar21) != 0) {
     (**(code **)(param_1 + 0x18))(*(int *)(((unsigned char *)0x000013d8) + iVar21));
@@ -5636,7 +5636,7 @@ int FUN_000768e0(param_1, param_2)
       }
       *(undefined4 *)(((unsigned char *)0x00001354) + param_1) = 0;
       *(undefined4 *)(((unsigned char *)0x0000134c) + param_1) = 0;
-      *(code **)(((unsigned char *)0x00001350) + param_1) = FUN_00077430;
+      *(code **)(((unsigned char *)0x00001350) + param_1) = vpStateSetConstantVector;
     }
   }
   return;
@@ -5676,8 +5676,8 @@ int FUN_00076ac0(param_1, param_2)
   return uVar1 | (uint)(byte)((unsigned char *)0x00002e0a)[*(int *)(*(int *)(param_1 + 4) + 0x10)] << 6;
 }
 
-/* FUN_00076b80 @ 0x76b80 (116 bytes) */
-int FUN_00076b80(param_1, param_2)
+/* vpStateCacheInsert @ 0x76b80 (116 bytes) */
+int vpStateCacheInsert(param_1, param_2)
   int param_1;
   int *param_2;
 {
@@ -5702,8 +5702,8 @@ int noop_76c00()
   return;
 }
 
-/* FUN_00076c10 @ 0x76c10 (72 bytes) */
-int FUN_00076c10(param_1, param_2)
+/* vpStateCacheLookup @ 0x76c10 (72 bytes) */
+int vpStateCacheLookup(param_1, param_2)
   int param_1;
   uint param_2;
 {
@@ -5748,7 +5748,7 @@ asm(".set FUN_00070c50, _noop_70c50");
 asm(".globl FUN_00070c60");
 asm(".set FUN_00070c60, _noop_70c60");
 asm(".globl FUN_00071bc0");
-asm(".set FUN_00071bc0, _FUN_00071bc0");
+asm(".set FUN_00071bc0, _evsAssignVertexInputs");
 asm(".globl FUN_00074b30");
 asm(".set FUN_00074b30, _evsEmitMova");
 asm(".globl FUN_00074c00");

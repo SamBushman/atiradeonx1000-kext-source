@@ -639,8 +639,8 @@ LAB_00007e28:
   return;
 }
 
-/* FUN_00007ec0 @ 0x7ec0 (256 bytes) */
-int FUN_00007ec0(bitCount)
+/* gldDepthBitsToFormatMask @ 0x7ec0 (256 bytes) */
+int gldDepthBitsToFormatMask(bitCount)
   uint bitCount;
 {
   if (0x7f < bitCount) {
@@ -691,8 +691,8 @@ int FUN_00007ec0(bitCount)
   return (bitCount == 0) + 0x1fffe;
 }
 
-/* FUN_00007fc0 @ 0x7fc0 (112 bytes) */
-int FUN_00007fc0(bitCount)
+/* gldColorBitsToFormatMask @ 0x7fc0 (112 bytes) */
+int gldColorBitsToFormatMask(bitCount)
   uint bitCount;
 {
   if (0x100 < bitCount) {
@@ -719,8 +719,8 @@ int FUN_00007fc0(bitCount)
   return 0xbffffffc;
 }
 
-/* FUN_00008030 @ 0x8030 (128 bytes) */
-int FUN_00008030(bitCount)
+/* gldAlphaBitsToFormatMask @ 0x8030 (128 bytes) */
+int gldAlphaBitsToFormatMask(bitCount)
   uint bitCount;
 {
   if (0x20 < bitCount) {
@@ -865,9 +865,9 @@ int _gldChoosePixelFormat(formatListOut, attribList)
   attribCursor = attribList;
   do {
     if (*attribCursor == 0) {
-      stencilMask = ((int (*)())FUN_00007ec0)(stencilSize);
+      stencilMask = ((int (*)())gldDepthBitsToFormatMask)(stencilSize);
       stencilMask = stencilMask & 0x1ffff;
-      depthMask = ((int (*)())FUN_00007ec0)(depthSize);
+      depthMask = ((int (*)())gldDepthBitsToFormatMask)(depthSize);
       depthMask = depthMask & 0x1ffff;
       blueSize = greenSize + redSize + blueSize;
       if ((int)colorSize < (int)blueSize) {
@@ -880,10 +880,10 @@ int _gldChoosePixelFormat(formatListOut, attribList)
       if (((int)colorSize < 0x21) && ((int)alphaSize < 9)) {
         capabilityMask = capabilityMask & 0xff0fffff;
       }
-      stencilSize = ((int (*)())FUN_00007fc0)(colorSize);
-      colorSize = ((int (*)())FUN_00008030)(alphaSize);
-      accumSize = ((int (*)())FUN_00007fc0)(accumSize);
-      alphaSize = ((int (*)())FUN_00008030)(accumAlphaSize);
+      stencilSize = ((int (*)())gldColorBitsToFormatMask)(colorSize);
+      colorSize = ((int (*)())gldAlphaBitsToFormatMask)(alphaSize);
+      accumSize = ((int (*)())gldColorBitsToFormatMask)(accumSize);
+      alphaSize = ((int (*)())gldAlphaBitsToFormatMask)(accumAlphaSize);
       library = PTR_DAT_001e88ac;
       if (CONCAT22((short)sampleBuffers,(short)samples) == 0) {
         sampleAlpha = 0;
