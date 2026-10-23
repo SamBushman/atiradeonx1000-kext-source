@@ -137,6 +137,7 @@ int FUN_000009d4()
 /* _get_globals @ 0x9f4 (528 bytes) */
 int _get_globals()
 {
+  int atexitRegResult;
   int libSystemHandle;
   undefined4 symbolAddress;
   int checkResult;
@@ -154,7 +155,7 @@ int _get_globals()
       symbolAddress = ((int (*)())_find_atexit_10_3)();
       *(undefined4 *)(globals + 0x10) = symbolAddress;
       if ((*(int *)(globals + 0x10) != 0) &&
-         (libSystemHandle = (**(code **)(globals + 0x10))(_our_atexit), libSystemHandle == 0)) goto LAB_00000bc8;
+         (atexitRegResult = (**(code **)(globals + 0x10))(_our_atexit), atexitRegResult == 0)) goto LAB_00000bc8;
     }
     else {
       symbolAddress = _dlsym(libSystemHandle,"__cxa_atexit");
@@ -620,6 +621,7 @@ int _atexit_common(entry, dsoHandle)
   undefined4 *entry;
   undefined4 dsoHandle;
 {
+  int unlockResult;
   code *registerFn;
   undefined4 entryArgument;
   int globals;
@@ -641,8 +643,8 @@ int _atexit_common(entry, dsoHandle)
   else if ((*(char *)(globals + 2) == '\0') && (*(char *)(globals + 3) != '\x01')) {
     if (*(byte *)(globals + 3) < 0x10) {
       registerFn = *(code **)(globals + 8);
-      globals = __keymgr_set_and_unlock_processwide_ptr(0xe,globals);
-      if ((*(ushort *)(*(int *)(PTR_0000e68c + 8) + 4) < 4) || (globals == 0)) {
+      unlockResult = __keymgr_set_and_unlock_processwide_ptr(0xe,globals);
+      if ((*(ushort *)(*(int *)(PTR_0000e68c + 8) + 4) < 4) || (unlockResult == 0)) {
         entryCopy = (undefined4 *)_malloc(0xc);
         if (entryCopy == (undefined4 *)0x0) {
           result = 0xffffffff;
@@ -662,8 +664,8 @@ int _atexit_common(entry, dsoHandle)
     }
     else if (entryHome[1] == 0) {
       registerFn = *(code **)(globals + 0x10);
-      globals = __keymgr_set_and_unlock_processwide_ptr(0xe,globals);
-      if ((*(ushort *)(*(int *)(PTR_0000e68c + 8) + 4) < 4) || (globals == 0)) {
+      unlockResult = __keymgr_set_and_unlock_processwide_ptr(0xe,globals);
+      if ((*(ushort *)(*(int *)(PTR_0000e68c + 8) + 4) < 4) || (unlockResult == 0)) {
         result = (*registerFn)(*entryHome);
       }
       else {
@@ -672,8 +674,8 @@ int _atexit_common(entry, dsoHandle)
     }
     else {
       registerFn = *(code **)(globals + 8);
-      globals = __keymgr_set_and_unlock_processwide_ptr(0xe,globals);
-      if ((*(ushort *)(*(int *)(PTR_0000e68c + 8) + 4) < 4) || (globals == 0)) {
+      unlockResult = __keymgr_set_and_unlock_processwide_ptr(0xe,globals);
+      if ((*(ushort *)(*(int *)(PTR_0000e68c + 8) + 4) < 4) || (unlockResult == 0)) {
         result = (*registerFn)(*entryHome,entryHome[2],dsoHandleHome,fwdReg6,fwdReg7,fwdReg8,
                              *entryHome);
       }
@@ -1212,13 +1214,14 @@ int _fillTextureWithPattern(patternRef, opFlags, backColor, foreColor)
   undefined4 backColor;
   undefined4 foreColor;
 {
+  uint patternWord1Cursor;
   bool columnIsLast;
   int eightRowsBytes;
   int rowBytes;
   int eightRowsTexels;
   int columnByteOffset;
   int eightRowsTexelIndex;
-  uint patternWord0Cursor;
+  uint patternWord0;
   int column;
   int dstPtr;
   uint bitCursor;
@@ -1229,13 +1232,13 @@ int _fillTextureWithPattern(patternRef, opFlags, backColor, foreColor)
   int bitsLeft;
   
   if ((opFlags & 0x7ffff000) == 0x6000) {
-    patternWord0Cursor = 0xffffffff;
+    patternWord0 = 0xffffffff;
     patternWord1 = 0xffffffff;
   }
   else {
     patternWord1 = ((uint *)*patternRef)[1];
-    patternWord0Cursor = *(uint *)*patternRef;
-    patternWord0Cursor = patternWord0Cursor >> 0x18 | patternWord0Cursor >> 8 & 0xff00 | (patternWord0Cursor & 0xff00) << 8 | patternWord0Cursor << 0x18;
+    patternWord0 = *(uint *)*patternRef;
+    patternWord0 = patternWord0 >> 0x18 | patternWord0 >> 8 & 0xff00 | (patternWord0 & 0xff00) << 8 | patternWord0 << 0x18;
     patternWord1 = patternWord1 >> 0x18 | patternWord1 >> 8 & 0xff00 | (patternWord1 & 0xff00) << 8 | patternWord1 << 0x18;
   }
   if (DAT_0000e724 == 0x10) {
@@ -1249,7 +1252,7 @@ int _fillTextureWithPattern(patternRef, opFlags, backColor, foreColor)
     dstPtr = _textureBufferBytes;
     do {
       texel16 = (short)foreColor;
-      if ((patternWord0Cursor & bitCursor) == 0) {
+      if ((patternWord0 & bitCursor) == 0) {
         texel16 = (short)backColor;
       }
       columnIsLast = column == 7;
@@ -1269,11 +1272,11 @@ int _fillTextureWithPattern(patternRef, opFlags, backColor, foreColor)
       bitsLeft = bitsLeft + -1;
     } while (bitsLeft != 0);
     column = 0;
-    patternWord0Cursor = 0x80000000;
+    patternWord1Cursor = 0x80000000;
     bitsLeft = 0x20;
     while( true ) {
       texel16 = (short)foreColor;
-      if ((patternWord1 & patternWord0Cursor) == 0) {
+      if ((patternWord1 & patternWord1Cursor) == 0) {
         texel16 = (short)backColor;
       }
       columnIsLast = column == 7;
@@ -1288,7 +1291,7 @@ int _fillTextureWithPattern(patternRef, opFlags, backColor, foreColor)
         dstPtr = dstPtr + rowBytes;
         column = 0;
       }
-      patternWord0Cursor = patternWord0Cursor >> 1;
+      patternWord1Cursor = patternWord1Cursor >> 1;
       bitsLeft = bitsLeft + -1;
       if (bitsLeft == 0) break;
       secondRowBase = eightRowsBytes + dstPtr;
@@ -1305,7 +1308,7 @@ int _fillTextureWithPattern(patternRef, opFlags, backColor, foreColor)
     dstPtr = _textureBufferBytes;
     do {
       texel32 = foreColor;
-      if ((patternWord0Cursor & bitCursor) == 0) {
+      if ((patternWord0 & bitCursor) == 0) {
         texel32 = backColor;
       }
       columnIsLast = column == 7;
@@ -1325,11 +1328,11 @@ int _fillTextureWithPattern(patternRef, opFlags, backColor, foreColor)
       bitsLeft = bitsLeft + -1;
     } while (bitsLeft != 0);
     column = 0;
-    patternWord0Cursor = 0x80000000;
+    patternWord1Cursor = 0x80000000;
     bitsLeft = 0x20;
     while( true ) {
       texel32 = foreColor;
-      if ((patternWord1 & patternWord0Cursor) == 0) {
+      if ((patternWord1 & patternWord1Cursor) == 0) {
         texel32 = backColor;
       }
       columnIsLast = column == 7;
@@ -1344,7 +1347,7 @@ int _fillTextureWithPattern(patternRef, opFlags, backColor, foreColor)
         dstPtr = dstPtr + rowBytes;
         column = 0;
       }
-      patternWord0Cursor = patternWord0Cursor >> 1;
+      patternWord1Cursor = patternWord1Cursor >> 1;
       bitsLeft = bitsLeft + -1;
       if (bitsLeft == 0) break;
       secondRowBase = eightRowsBytes + dstPtr;
@@ -1481,21 +1484,23 @@ int _ATIRadeonX1000GAFactory(allocator, typeUUID)
   undefined4 allocator;
   undefined4 typeUUID;
 {
+  int factoryUUID;
+  undefined4 retainedFactoryUUID;
   undefined4 *instance;
-  undefined4 uuidRef;
-  int factoryUUIDOrIsEqual;
+  undefined4 pluginTypeUUID;
+  int typeMatches;
   
-  uuidRef = _CFUUIDGetConstantUUIDWithBytes(0,0xac,0xcf,0,0,0,0,0,0,0,0,0,10,0x27,0x89,0x90,0x4e);
-  factoryUUIDOrIsEqual = _CFEqual(typeUUID,uuidRef);
+  pluginTypeUUID = _CFUUIDGetConstantUUIDWithBytes(0,0xac,0xcf,0,0,0,0,0,0,0,0,0,10,0x27,0x89,0x90,0x4e);
+  typeMatches = _CFEqual(typeUUID,pluginTypeUUID);
   instance = (undefined4 *)0x0;
-  if (factoryUUIDOrIsEqual != 0) {
-    factoryUUIDOrIsEqual = _CFUUIDGetConstantUUIDWithBytes(0,0x10,2,0x71,0,0,0,0,0,0,0,0,10,0x27,0x89,0x8d,0x3e);
+  if (typeMatches != 0) {
+    factoryUUID = _CFUUIDGetConstantUUIDWithBytes(0,0x10,2,0x71,0,0,0,0,0,0,0,0,10,0x27,0x89,0x8d,0x3e);
     instance = (undefined4 *)_calloc(1,0x98);
     *instance = &_radeonGAInterface;
-    if (factoryUUIDOrIsEqual != 0) {
-      uuidRef = _CFRetain(factoryUUIDOrIsEqual);
-      instance[1] = uuidRef;
-      _CFPlugInAddInstanceForFactory(factoryUUIDOrIsEqual);
+    if (factoryUUID != 0) {
+      retainedFactoryUUID = _CFRetain(factoryUUID);
+      instance[1] = retainedFactoryUUID;
+      _CFPlugInAddInstanceForFactory(factoryUUID);
     }
     instance[2] = 1;
   }

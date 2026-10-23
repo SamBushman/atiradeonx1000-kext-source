@@ -492,16 +492,17 @@ use	_radeonHighlight	iVar33	screenFormat	INFERRED	accel+0x70: surface format cod
 use	_radeonHighlight	iVar33	screenFormat	INFERRED	accel+0x70: surface format code (3 selects the 1555 path)	^\s*pdVar10\[0x3f\]\ =\ 0x5300c\ \-\ \(uint\)\(iVar33\ ==\ 3\);$	+1
 use	_radeonHighlight	iVar33	screenFormat	INFERRED	accel+0x70: surface format code (3 selects the 1555 path)	^\s*if\ \(iVar33\ !=\ 3\)\ \{$	+1
 use	_radeonHighlight	iVar33	screenFormat	INFERRED	accel+0x70: surface format code (3 selects the 1555 path)	^\s*if\ \(iVar33\ !=\ 3\)\ \{$@2	+1
-use	_radeonHighlight	iVar33	pass2FormatOrWords	UNKNOWN	pattern descriptor format code, then overwritten by the word count _radeon3DCopySetup returns	^\s*iVar33\ =\ DAT_0000e6e4\[0xc\];$	+3
-use	_radeonHighlight	iVar33	pass2FormatOrWords	UNKNOWN	pattern descriptor format code, then overwritten by the word count _radeon3DCopySetup returns	^\s*else\ if\ \(iVar33\ ==\ 6\)\ \{$	+2
-use	_radeonHighlight	iVar33	pass2FormatOrWords	UNKNOWN	pattern descriptor format code, then overwritten by the word count _radeon3DCopySetup returns	^\s*iVar33\ =\ \(\(int\ \(\*\)\(\)\)_radeon3DCopySetup\)\(param_1,pdVar32,DAT_0000e6e4\ \+\ 3,iVar33,0,0,0,0\);$	+1
-use	_radeonHighlight	iVar33	pass2FormatOrWords	UNKNOWN	pattern descriptor format code, then overwritten by the word count _radeon3DCopySetup returns	^\s*pdVar32\[iVar33\]\ =\ 0xc00c3500;$	+2
-use	_radeonHighlight	iVar33	pass2FormatOrWords	UNKNOWN	pattern descriptor format code, then overwritten by the word count _radeon3DCopySetup returns	^\s*pdVar32\[iVar33\ \+\ 2\]\ =\ uVar28;$	+1
-use	_radeonHighlight	iVar33	pass2FormatOrWords	UNKNOWN	pattern descriptor format code, then overwritten by the word count _radeon3DCopySetup returns	^\s*pdVar32\[iVar33\ \+\ 3\]\ =\ dVar18;$	+1
-use	_radeonHighlight	iVar33	pass2FormatOrWords	UNKNOWN	pattern descriptor format code, then overwritten by the word count _radeon3DCopySetup returns	^\s*pdVar32\[iVar33\ \+\ 4\]\ =\ dVar15;$	+3
-use	_radeonHighlight	iVar33	pass2FormatOrWords	UNKNOWN	pattern descriptor format code, then overwritten by the word count _radeon3DCopySetup returns	^\s*pdVar32\[iVar33\ \+\ 7\]\ =\ \(dword\)GH_F2U\(fVar14\);$	+2
-use	_radeonHighlight	iVar33	pass2FormatOrWords	UNKNOWN	pattern descriptor format code, then overwritten by the word count _radeon3DCopySetup returns	^\s*pdVar32\[iVar33\ \+\ 9\]\ =\ \(dword\)GH_F2U\(fVar20\);$	+10
-use	_radeonHighlight	iVar33	pass2FormatOrWords	UNKNOWN	pattern descriptor format code, then overwritten by the word count _radeon3DCopySetup returns	^\s*pdVar32\ =\ pdVar32\ \+\ iVar33\ \+\ 0x12;$	+1
+use	_radeonHighlight	iVar33	pass2Format	UNKNOWN	pattern descriptor format code (3 -> 0xb, 6 -> 0xc) passed to _radeon3DCopySetup	^\s*iVar33\ =\ DAT_0000e6e4\[0xc\];$	+3
+use	_radeonHighlight	iVar33	pass2Format	UNKNOWN	pattern descriptor format code (3 -> 0xb, 6 -> 0xc) passed to _radeon3DCopySetup	^\s*else\ if\ \(iVar33\ ==\ 6\)\ \{$	+2
+use	_radeonHighlight	iVar33	pass2SetupWords	UNKNOWN	word count returned by _radeon3DCopySetup (index of the first word after the setup block)	^\s*iVar33\ =\ \(\(int\ \(\*\)\(\)\)_radeon3DCopySetup\)\(param_1,pdVar32,DAT_0000e6e4\ \+\ 3,iVar33,0,0,0,0\);$	+1	lhs	none
+use	_radeonHighlight	iVar33	pass2Format	UNKNOWN	pattern descriptor format code (3 -> 0xb, 6 -> 0xc) passed to _radeon3DCopySetup	^\s*iVar33\ =\ \(\(int\ \(\*\)\(\)\)_radeon3DCopySetup\)\(param_1,pdVar32,DAT_0000e6e4\ \+\ 3,iVar33,0,0,0,0\);$	+1	rhs	none
+use	_radeonHighlight	iVar33	pass2SetupWords	UNKNOWN	word count returned by _radeon3DCopySetup (index of the first word after the setup block)	^\s*pdVar32\[iVar33\]\ =\ 0xc00c3500;$	+2
+use	_radeonHighlight	iVar33	pass2SetupWords	UNKNOWN	word count returned by _radeon3DCopySetup (index of the first word after the setup block)	^\s*pdVar32\[iVar33\ \+\ 2\]\ =\ uVar28;$	+1
+use	_radeonHighlight	iVar33	pass2SetupWords	UNKNOWN	word count returned by _radeon3DCopySetup (index of the first word after the setup block)	^\s*pdVar32\[iVar33\ \+\ 3\]\ =\ dVar18;$	+1
+use	_radeonHighlight	iVar33	pass2SetupWords	UNKNOWN	word count returned by _radeon3DCopySetup (index of the first word after the setup block)	^\s*pdVar32\[iVar33\ \+\ 4\]\ =\ dVar15;$	+3
+use	_radeonHighlight	iVar33	pass2SetupWords	UNKNOWN	word count returned by _radeon3DCopySetup (index of the first word after the setup block)	^\s*pdVar32\[iVar33\ \+\ 7\]\ =\ \(dword\)GH_F2U\(fVar14\);$	+2
+use	_radeonHighlight	iVar33	pass2SetupWords	UNKNOWN	word count returned by _radeon3DCopySetup (index of the first word after the setup block)	^\s*pdVar32\[iVar33\ \+\ 9\]\ =\ \(dword\)GH_F2U\(fVar20\);$	+10
+use	_radeonHighlight	iVar33	pass2SetupWords	UNKNOWN	word count returned by _radeon3DCopySetup (index of the first word after the setup block)	^\s*pdVar32\ =\ pdVar32\ \+\ iVar33\ \+\ 0x12;$	+1
 use	_radeonHighlight	iVar6	offscreenResult	CONFIRMED	result of _createOffscreenBuffer	^\s*if\ \(\(pdVar32\ ==\ \(dword\ \*\)0x0\)\ \|\|$	+4
 use	_radeonHighlight	iVar6	heightM1	CONFIRMED	screenHeight - 1 for the 0x3ff800 / 0x10000 packing	^\s*iVar6\ =\ sVar2\ \+\ \-1;$	+2
 use	_radeonHighlight	iVar6	heightM1	CONFIRMED	screenHeight - 1 for the 0x3ff800 / 0x10000 packing	^\s*iVar6\ \*\ 0x20\ \&\ 0x10000U;$	+1
@@ -718,12 +719,13 @@ use	_radeonFill	iVar23	progIdx105	INFERRED	index of shader-program word slot 105
 use	_radeonFill	iVar23	tileIdx16	INFERRED	word 16 of the tile quad packet	^\s*iVar23\ =\ iVar12\ \+\ 0x26;$	+1
 use	_radeonFill	iVar23	tileIdx16	INFERRED	word 16 of the tile quad packet	^\s*pdVar44\[iVar23\]\ =\ \(dword\)GH_F2U\(fVar27\);$	+1
 use	_radeonFill	iVar23	tileIdx16	INFERRED	word 16 of the tile quad packet	^\s*iVar23\ =\ 0x10;$	+1
-use	_radeonFill	iVar23	pass2FormatOrWords	UNKNOWN	pattern descriptor format code, then overwritten by the word count _radeon3DCopySetup returns	^\s*iVar23\ =\ DAT_0000e6e4\[0xc\];$	+3
-use	_radeonFill	iVar23	pass2FormatOrWords	UNKNOWN	pattern descriptor format code, then overwritten by the word count _radeon3DCopySetup returns	^\s*else\ if\ \(iVar23\ ==\ 6\)\ \{$	+2
-use	_radeonFill	iVar23	pass2FormatOrWords	UNKNOWN	pattern descriptor format code, then overwritten by the word count _radeon3DCopySetup returns	^\s*iVar23\ =\ \(\(int\ \(\*\)\(\)\)_radeon3DCopySetup\)\(param_1,pdVar30,DAT_0000e6e4\ \+\ 3,iVar23,0,0,0,0\);$	+1
-use	_radeonFill	iVar23	pass2FormatOrWords	UNKNOWN	pattern descriptor format code, then overwritten by the word count _radeon3DCopySetup returns	^\s*pdVar30\[iVar23\]\ =\ 0xc00c3500;$	+2
-use	_radeonFill	iVar23	pass2FormatOrWords	UNKNOWN	pattern descriptor format code, then overwritten by the word count _radeon3DCopySetup returns	^\s*pdVar30\[iVar23\ \+\ 2\]\ =\ local_10c\ \|\ local_118\ <<\ 0x10;$	+17
-use	_radeonFill	iVar23	pass2FormatOrWords	UNKNOWN	pattern descriptor format code, then overwritten by the word count _radeon3DCopySetup returns	^\s*pdVar44\ =\ pdVar30\ \+\ iVar23\ \+\ 0x12;$	+1
+use	_radeonFill	iVar23	pass2Format	UNKNOWN	pattern descriptor format code (3 -> 0xb, 6 -> 0xc) passed to _radeon3DCopySetup	^\s*iVar23\ =\ DAT_0000e6e4\[0xc\];$	+3
+use	_radeonFill	iVar23	pass2Format	UNKNOWN	pattern descriptor format code (3 -> 0xb, 6 -> 0xc) passed to _radeon3DCopySetup	^\s*else\ if\ \(iVar23\ ==\ 6\)\ \{$	+2
+use	_radeonFill	iVar23	pass2SetupWords	UNKNOWN	word count returned by _radeon3DCopySetup (index of the first word after the setup block)	^\s*iVar23\ =\ \(\(int\ \(\*\)\(\)\)_radeon3DCopySetup\)\(param_1,pdVar30,DAT_0000e6e4\ \+\ 3,iVar23,0,0,0,0\);$	+1	lhs	none
+use	_radeonFill	iVar23	pass2Format	UNKNOWN	pattern descriptor format code (3 -> 0xb, 6 -> 0xc) passed to _radeon3DCopySetup	^\s*iVar23\ =\ \(\(int\ \(\*\)\(\)\)_radeon3DCopySetup\)\(param_1,pdVar30,DAT_0000e6e4\ \+\ 3,iVar23,0,0,0,0\);$	+1	rhs	none
+use	_radeonFill	iVar23	pass2SetupWords	UNKNOWN	word count returned by _radeon3DCopySetup (index of the first word after the setup block)	^\s*pdVar30\[iVar23\]\ =\ 0xc00c3500;$	+2
+use	_radeonFill	iVar23	pass2SetupWords	UNKNOWN	word count returned by _radeon3DCopySetup (index of the first word after the setup block)	^\s*pdVar30\[iVar23\ \+\ 2\]\ =\ local_10c\ \|\ local_118\ <<\ 0x10;$	+17
+use	_radeonFill	iVar23	pass2SetupWords	UNKNOWN	word count returned by _radeon3DCopySetup (index of the first word after the setup block)	^\s*pdVar44\ =\ pdVar30\ \+\ iVar23\ \+\ 0x12;$	+1
 use	_radeonFill	iVar23	cmdBufferSize	INFERRED	size field (+0x10) of the command buffer	^\s*iVar23\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x18\)\ \+\ 0x10\);$	+2
 use	_radeonFill	iVar23	cmdBufferSize	INFERRED	size field (+0x10) of the command buffer	^\s*local_100\ =\ \(iVar23\ \-\ 0x75U\)\ /\ 0xc\ \-\ 1;$	+1
 use	_radeonFill	iVar23	fillSetupWords	CONFIRMED	words written by _radeon3DFillSetup	^\s*iVar23\ =\ \(\(int\ \(\*\)\(\)\)_radeon3DFillSetup\)\(puVar48,0,param_6,param_1\);$	+1

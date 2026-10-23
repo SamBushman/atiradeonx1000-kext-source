@@ -74,7 +74,6 @@ local	_fillTextureWithPattern	param_1	patternRef	INFERRED	*param_1 points at the
 local	_fillTextureWithPattern	param_2	opFlags	INFERRED	(param_2 & 0x7ffff000)==0x6000 selects the solid (all-ones) pattern
 local	_fillTextureWithPattern	param_3	backColor	INFERRED	written where the pattern bit is 0
 local	_fillTextureWithPattern	param_4	foreColor	INFERRED	written where the pattern bit is 1
-local	_fillTextureWithPattern	uVar7	patternWord0Cursor	UNKNOWN	byte-swapped first pattern word, reused as the bit cursor of the second loop
 local	_fillTextureWithPattern	uVar14	patternWord1	CONFIRMED	byte-swapped second pattern word
 local	_fillTextureWithPattern	uVar10	bitCursor	CONFIRMED	one-hot mask shifted right each iteration
 local	_fillTextureWithPattern	bVar1	columnIsLast	CONFIRMED	column index == 7
@@ -113,8 +112,6 @@ local	__WaitSurface	iVar2	surfaceHandle	INFERRED	record[0], sent to selector 0xc
 local	_ATIRadeonX1000GAFactory	param_1	allocator	INFERRED	CFPlugIn factory signature (allocator, typeUUID)
 local	_ATIRadeonX1000GAFactory	param_2	typeUUID	CONFIRMED	compared with a constant UUID by _CFEqual
 local	_ATIRadeonX1000GAFactory	puVar1	instance	CONFIRMED	calloc(1,0x98) interface object returned
-local	_ATIRadeonX1000GAFactory	uVar2	uuidRef	UNKNOWN	constant UUID, later the retained factory UUID
-local	_ATIRadeonX1000GAFactory	iVar3	factoryUUIDOrIsEqual	UNKNOWN	_CFEqual result, then the factory UUID reference
 local	__Reset	param_1	accel	CONFIRMED	io_connect_t at +0xc
 local	__Reset	puVar1	lastHeader	CONFIRMED	*(accel+0x7c): last command header word, ORed with the length
 local	__Reset	iVar2	status	CONFIRMED	_IOConnectMapMemory result
@@ -138,10 +135,8 @@ local	__Start	auStack_9c	className	CONFIRMED	_IOObjectGetClass buffer printed in
 local	__Flush	param_1	accel	CONFIRMED	cmd buffer fields at +0x18/+0x7c/+0x80
 local	__Flush	param_2	flushFlags	INFERRED	bit 0x10000 appends a 0x2000000 header word
 local	__Flush	puVar1	taskPtr	INFERRED	PTR_0000e694: passed as the target task of _IOConnectMapMemory
-local	__Flush	iVar2	destOrNewBase	UNKNOWN	accel+0x8c, then 0, then the new buffer base+0x20
 local	__Flush	puVar3	lastHeader	CONFIRMED	*(accel+0x7c) header word, ORed with the length
 local	__Flush	puVar4	cmdWrite	CONFIRMED	accel+0x80 command-buffer write cursor
-local	__Flush	local_28	padWords	UNKNOWN	0 or 2 words of padding, then the output size
 local	__Flush	local_24	mapAddr	CONFIRMED	address output of _IOConnectMapMemory
 local	__WaitComplete	param_1	accel	CONFIRMED	io_connect_t at +0xc
 local	__WaitComplete	param_2	waitArg	UNKNOWN	stored in the home slot then sent as the scalar input
@@ -207,8 +202,6 @@ local	_radeonCopy	dVar48	srcLeftFloat	INFERRED	(float)srcLeftExact
 local	_radeonCopy	dVar49	srcTopFloat	INFERRED	(float)srcTopExact
 local	_radeonCopy	dVar50	srcRightFloat	INFERRED	srcLeftFloat + rect[4]
 local	_radeonCopy	dVar51	srcBottomFloat	INFERRED	srcTopFloat + rect[5]
-local	_radeonCopy	dVar47	srcRightExactOrInvWidth	UNKNOWN	source right edge, later 1/width
-local	_radeonCopy	dVar45	srcBottomExactOrInvHeight	UNKNOWN	source bottom edge, later 1/height
 local	_radeonCopy	local_1a8	scratchWord0	CONFIRMED	&local_1a8 is passed as an _IOConnectMapMemory output; also holds a float texture-coordinate word
 local	_radeonCopy	local_1a4	scratchWord1	CONFIRMED	same, second word
 local	_radeonCopy	local_1a0	scratchWord2	CONFIRMED	same, third word
@@ -240,7 +233,6 @@ local	FUN_000055a4	param_3	unusedArg3	CONFIRMED	never read
 local	FUN_000055a4	param_4	blitFlags	CONFIRMED	param_4&0x7ffff000 is compared with 0, 0x1000, 0x3000, 0x7000 to pick the source kind
 local	FUN_000055a4	param_5	blitReq	INFERRED	+0x58/+0x5c offsets, +0x60 region list
 local	FUN_000055a4	param_6	srcRef	INFERRED	a surface descriptor (kind 0x3000) or surface id (kind 0x7000)
-local	FUN_000055a4	bVar1	isScreenCopyOrNeedsSetup	UNKNOWN	kind==0x1000, reused as a needs-setup flag in the later loops
 local	FUN_000055a4	bVar14	needsSetup	INFERRED	true when a new command block must emit the 3D setup
 local	FUN_000055a4	piVar54	regionRect	INFERRED	walks the region list: shorts x,y at +0/+2 and w,h at +4/+6
 local	FUN_000055a4	iVar38	regionCount	CONFIRMED	*regionList: loop bound (1 when zero)
@@ -300,8 +292,6 @@ local	_radeonFill	param_3	fillFlags	UNKNOWN	bits 0xc000 select a mask variant
 local	_radeonFill	param_4	blitFlags	CONFIRMED	param_4&0x7ffff000 == 0x6000 selects the solid pattern
 local	_radeonFill	param_5	fillReq	INFERRED	[0],[1] pattern colours, [2],[3] pattern offset, [5] colour, [0x16] rect count, [0x17..] rects
 local	_radeonFill	param_6	patternBuf	INFERRED	forwarded as the first argument of _fillTextureWithPattern
-local	_radeonFill	uVar42	fillColor	INFERRED	param_5[5]; its bytes feed the colour components; reused as a scratch later
-local	_radeonFill	puVar48	rectEntry	CONFIRMED	4-int rect entry advanced by 4 per iteration: [0x17] x, [0x18] y, [0x19] width, [0x1a] height
 local	_radeonFill	local_10c	dstLeft	CONFIRMED	rect[0x17] + accel+0x60
 local	_radeonFill	local_114	dstTop	CONFIRMED	rect[0x18] + accel+0x64
 local	_radeonFill	local_110	dstRight	CONFIRMED	dstLeft + rect[0x19]
@@ -324,7 +314,6 @@ local	_radeonFill	local_2e8	scratchWord1	CONFIRMED	&local_2e8 is an _IOConnectMa
 local	_radeonFill	local_2e4	scratchWord2	CONFIRMED	padding/word scratch
 local	_radeonFill	puVar24	lastHeader	CONFIRMED	*(accel+0x7c): previous command header, ORed with its length
 local	_radeonFill	pdVar44	cmdWrite	CONFIRMED	loaded from accel+0x80 and stored back there at the end: command-buffer write cursor
-local	_radeonFill	uVar29	cmdCapacity	CONFIRMED	(*(accel+0x18)+0x10)-7: usable words of the mapped command buffer
 local	_radeonFill	puVar7	taskPtr	INFERRED	PTR_0000e694: target task argument of _IOConnectMapMemory
 local	_radeonHighlight	param_1	accel	CONFIRMED	cmd buffer at +0x18/+0x7c/+0x80
 local	_radeonHighlight	param_2	unusedArg2	CONFIRMED	never read
@@ -372,10 +361,8 @@ local	_radeonSolidScanlines	local_f0	dstRightMasked	CONFIRMED	dstRight & 0x1fff
 local	_radeonSolidScanlines	local_f8	flushWaitWord	CONFIRMED	constant 0xc000
 local	_radeonSolidScanlines	local_1a4	scratchWord0	CONFIRMED	&local_1a4 is an _IOConnectMapMemory output
 local	_radeonSolidScanlines	local_1a0	scratchWord1	CONFIRMED	&local_1a0 is an _IOConnectMapMemory output / padding words
-local	_radeonSolidScanlines	puVar24	lastHeader	CONFIRMED	*(accel+0x7c): previous command header, ORed with its length
 local	_radeonSolidScanlines	pdVar39	cmdWrite	CONFIRMED	loaded from accel+0x80 and stored back there at the end: command-buffer write cursor
 local	_radeonSolidScanlines	uVar34	cmdWordsLeft	CONFIRMED	capacity minus words written; compared with each block size before a flush
-local	_radeonSolidScanlines	uVar29	cmdCapacity	CONFIRMED	(*(accel+0x18)+0x10)-7: usable words of the mapped command buffer
 local	_radeonSolidScanlines	puVar6	taskPtr	INFERRED	PTR_0000e694: target task argument of _IOConnectMapMemory
 local	_radeonCopy	iVar10	idxPlus22Or10Block1	CONFIRMED	assigned base+22Or10 (command word index) on every path
 local	_radeonCopy	pdVar12	cmdPtrPlus36Or1Block2	CONFIRMED	assigned base+36Or1 (command word pointer) on every path
@@ -692,7 +679,6 @@ local	_find_atexit_10_3	local_2c	imageHeaderFn	CONFIRMED	__dyld_get_image_header
 local	_find_atexit_10_3	local_28	lookupSymbolFn	CONFIRMED	__dyld_NSLookupSymbolInImage
 local	_find_atexit_10_3	local_24	addressOfSymbolFn	CONFIRMED	__dyld_NSAddressOfSymbol (array of 7 words, first used)
 local	_find_atexit_10_3	uVar2	imageCount	CONFIRMED	result of the image-count function
-local	_get_globals	iVar1	libSystemHandle	CONFIRMED	_dlopen("/usr/lib/libSystem.B.dylib") result, then reused for the atexit test
 local	_get_globals	uVar2	symbolAddress	CONFIRMED	_dlsym / _find_atexit_10_3 result stored into the globals block
 local	_get_globals	iVar3	checkResult	CONFIRMED	_check_cxa_atexit result (-1, 0 or other)
 local	_get_globals	local_20	globals	CONFIRMED	processwide keymgr block (calloc 0x14): +2 running flag, +3 mode, +4 routine list, +8 __cxa_atexit, +0xc __cxa_finalize, +0x10 atexit
@@ -733,7 +719,6 @@ local	_our_atexit	iVar3	relocked	CONFIRMED	_run_routines result (re-locked block
 local	_atexit_common	param_1	entry	CONFIRMED	3-word record {function, argument selector, argument}
 local	_atexit_common	param_2	dsoHandle	INFERRED	forwarded as __cxa_atexit third argument
 local	_atexit_common	pcVar1	registerFn	CONFIRMED	globals+8 (__cxa_atexit) or +0x10 (atexit)
-local	_atexit_common	iVar3	globals	CONFIRMED	_get_globals result, later the unlock result
 local	_atexit_common	a1	entryCopy	CONFIRMED	malloc(0xc) copy of the entry passed to the wrapper
 local	_atexit_common	puStack00000018	entryHome	CONFIRMED	home-slot copy of param_1
 local	_atexit_common	uStack0000001c	dsoHandleHome	CONFIRMED	home-slot copy of param_2
@@ -764,7 +749,6 @@ local	_printf_LDBLStub	param_8	printfArg8	CONFIRMED	forwarded unchanged to the r
 local	___stub_getrealaddr	param_1	symbolName	CONFIRMED	copied after an underscore and suffixed with $LDBL128
 local	___stub_getrealaddr	iVar1	nameLength	CONFIRMED	_strlen of the underscore-prefixed name
 local	___stub_getrealaddr	iVar2	isDefined	CONFIRMED	_NSIsSymbolNameDefinedWithHint result
-local	___stub_getrealaddr	uVar3	symbol	CONFIRMED	NSSymbol, then its address (returned)
 local	___stub_getrealaddr	local_58	nameBuffer	CONFIRMED	"_<name>" built here
 local	___stub_getrealaddr	acStack_54	nameBufferTail	CONFIRMED	overlaps nameBuffer for the "L128" suffix store
 local	___stub_getrealaddr	acStack_50	nameBufferEnd	CONFIRMED	overlaps nameBuffer for the terminating NUL

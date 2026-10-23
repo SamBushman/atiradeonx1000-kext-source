@@ -1,0 +1,41 @@
+use	_fillTextureWithPattern	uVar7	patternWord0	CONFIRMED	byte-swapped first 32-bit pattern word (all ones when the kind is 0x6000); tested against bitCursor	uVar7 = 0xffffffff;	uVar7 = 0x80000000;	all	none
+use	_fillTextureWithPattern	uVar7	patternWord1Cursor	CONFIRMED	bit cursor (0x80000000 >> n) over the second pattern word	uVar7 = 0x80000000;@1	if \(\(uVar7 & uVar10\) == 0\) \{	all	none
+use	_fillTextureWithPattern	uVar7	patternWord0	CONFIRMED	byte-swapped first 32-bit pattern word, tested against bitCursor in the 32-bit texel path	if \(\(uVar7 & uVar10\) == 0\) \{@2	uVar7 = 0x80000000;	all	none
+use	_fillTextureWithPattern	uVar7	patternWord1Cursor	CONFIRMED	bit cursor (0x80000000 >> n) over the second pattern word	uVar7 = 0x80000000;@2		all	none
+use	__Flush	iVar2	accel8cState	UNKNOWN	accel+0x8c (0 selects the 0x5c8/0xc000 wait-word padding), or 0 after the 0x2000000 terminator	iVar2 = \*\(int \*\)\(param_1 \+ 0x8c\);	iVar2 = _IOConnectMapMemory	all	none
+use	__Flush	iVar2	mapResult	CONFIRMED	_IOConnectMapMemory return code	iVar2 = _IOConnectMapMemory	iVar2 = local_24\[0\] \+ 0x20;	all	none
+use	__Flush	iVar2	newCmdWriteAddr	INFERRED	new buffer base + 0x20 (or 0 on failure): stored to accel+0x80, the command write cursor	iVar2 = local_24\[0\] \+ 0x20;		all	none
+use	_ATIRadeonX1000GAFactory	uVar2	pluginTypeUUID	INFERRED	constant UUID the requested type UUID is compared against	uVar2 = _CFUUIDGetConstantUUIDWithBytes\(0,0xac	uVar2 = _CFRetain	all	none
+use	_ATIRadeonX1000GAFactory	uVar2	retainedFactoryUUID	CONFIRMED	_CFRetain of the factory UUID, stored in instance[1]	uVar2 = _CFRetain		all	none
+use	_ATIRadeonX1000GAFactory	iVar3	typeMatches	CONFIRMED	_CFEqual(typeUUID, plugin type UUID)	iVar3 = _CFEqual	iVar3 = _CFUUIDGetConstantUUIDWithBytes\(0,0x10	all	none
+use	_ATIRadeonX1000GAFactory	iVar3	factoryUUID	INFERRED	constant factory UUID passed to _CFRetain and _CFPlugInAddInstanceForFactory	iVar3 = _CFUUIDGetConstantUUIDWithBytes\(0,0x10		all	none
+use	_radeonCopy	dVar47	srcRightExact	UNKNOWN	source left + width as double: right edge, narrowed to float and truncated to int	dVar47 = dVar48 \+ \(double\)\(float\)	dVar47 = 1.0 /	all	none
+use	_radeonCopy	dVar47	invSrcWidth	INFERRED	1.0 / source width: scales the right/left edge into normalised texture coordinates	dVar47 = 1.0 /		all	none
+use	_radeonCopy	dVar45	srcBottomExact	UNKNOWN	source top + height as double: bottom edge, narrowed to float and truncated to int	dVar45 = dVar49 \+ \(double\)\(float\)	dVar45 = 1.0 /	all	none
+use	_radeonCopy	dVar45	invSrcHeight	INFERRED	1.0 / source height: scales the bottom/top edge into normalised texture coordinates	dVar45 = 1.0 /		all	none
+use	FUN_000055a4	bVar1	isScreenCopy	CONFIRMED	blitKind == 0x1000 (blit from the screen)	bVar1 = uVar55 == 0x1000;	bVar1 = true;	all	none
+use	FUN_000055a4	bVar1	needsSetupBlock	INFERRED	true for the first quad of a pass and again after a mid-loop flush: the setup/state block must be written before the quad, cleared once written	bVar1 = true;@1		all	none
+use	_radeonFill	uVar42	fillColor	INFERRED	fillReq[5]: fill colour word; its bytes/bit fields feed the colour components	uVar42 = param_5\[5\];	uVar42 = 0;	all	none
+use	_radeonFill	uVar42	batchStart	INFERRED	index of the first rectangle of the current fast-fill batch (0, then the previous batch end)	uVar42 = 0;		all	none
+use	_radeonFill	uVar29	cmdCapacity	CONFIRMED	command buffer size - 7: capacity in words, reset into cmdWordsLeft on a flush	uVar29 = \*\(int \*\)\(iVar[0-9]+ \+ 0x10\) - 7;	uVar29 = param_5\[0x16\];	all	none
+use	_radeonFill	puVar48	rectEntry	CONFIRMED	cursor over the fillReq rectangle list (stride 4 words)	puVar48 = param_5;	puVar48 = \*\(undefined4 \*\*\)\(param_1 \+ 0x80\);	all	none
+use	_radeonFill	puVar48	fastCmdWrite	CONFIRMED	command write cursor (accel+0x80) of the fast fill path	puVar48 = \*\(undefined4 \*\*\)\(param_1 \+ 0x80\);		all	none
+use	_radeonSolidScanlines	uVar29	cmdBufferBase	CONFIRMED	accel+0x18: command buffer base, remapped on a flush	uVar29 = \*\(uint \*\)\(param_1 \+ 0x18\);	uVar29 = param_5\[0x17\]	all	none
+use	_radeonSolidScanlines	uVar29	scanDstTop	INFERRED	scanReq[0x17] + accel+100: destination top row of the scanline rect, converted to float	uVar29 = param_5\[0x17\]	uVar29 = \*\(int \*\)\(iVar10 \+ 0x10\) - 7;	all	none
+use	_radeonSolidScanlines	uVar29	cmdCapacity	CONFIRMED	command buffer size - 7: capacity in words, reset into cmdWordsLeft on a flush	uVar29 = \*\(int \*\)\(iVar10 \+ 0x10\) - 7;		all	none
+use	_radeonSolidScanlines	puVar24	lastHeader	CONFIRMED	accel+0x7c: header word of the last command packet, patched with the packet length	puVar24 = \*\(uint \*\*\)\(param_1 \+ 0x7c\);@1	puVar24 = puVar40 \+ iVar10;	all	none
+use	_radeonSolidScanlines	puVar24	drawPacketHeader	INFERRED	header word of the 0xc0003500 draw packet just emitted by the solid-scanline path	puVar24 = puVar40 \+ iVar10;	+4	all	none
+use	_radeonSolidScanlines	puVar24	lastHeader	CONFIRMED	accel+0x7c: header word of the last command packet, patched with the packet length	puVar24 = \*\(uint \*\*\)\(param_1 \+ 0x7c\);@2		all	none
+use	_get_globals	iVar1	libSystemHandle	CONFIRMED	_dlopen("/usr/lib/libSystem.B.dylib") result; _dlsym source	iVar1 = _dlopen	iVar1 = \(\*\*\(code	all	none
+use	_get_globals	iVar1	atexitRegResult	INFERRED	return value of the located atexit function called with _our_atexit (0 = registered)	iVar1 = \(\*\*\(code	+1	all	none
+use	_get_globals	iVar1	libSystemHandle	CONFIRMED	_dlopen("/usr/lib/libSystem.B.dylib") result; _dlsym source	uVar2 = _dlsym\(iVar1,"__cxa_atexit"\);		all	none
+use	_atexit_common	iVar3	globals	CONFIRMED	_get_globals() result: the process-wide atexit state	iVar3 = \(\(int \(\*\)\(\)\)_get_globals\)\(\);	iVar3 = __keymgr_set_and_unlock_processwide_ptr\(0xe,iVar3\);	all	rhs
+use	_atexit_common	iVar3	unlockResult	INFERRED	_keymgr_set_and_unlock_processwide_ptr result: tested against 0 after the lock is released	iVar3 = __keymgr_set_and_unlock_processwide_ptr\(0xe,iVar3\);@1	+2	lhs	none
+use	_atexit_common	iVar3	globals	CONFIRMED	the process-wide atexit state (_get_globals result)	pcVar1 = \*\(code \*\*\)\(iVar3 \+ 0x10\);	iVar3 = __keymgr_set_and_unlock_processwide_ptr\(0xe,iVar3\);	all	rhs
+use	_atexit_common	iVar3	unlockResult	INFERRED	_keymgr_set_and_unlock_processwide_ptr result: tested against 0 after the lock is released	iVar3 = __keymgr_set_and_unlock_processwide_ptr\(0xe,iVar3\);@2	+2	lhs	none
+use	_atexit_common	iVar3	globals	CONFIRMED	the process-wide atexit state (_get_globals result)	pcVar1 = \*\(code \*\*\)\(iVar3 \+ 8\);@2	iVar3 = __keymgr_set_and_unlock_processwide_ptr\(0xe,iVar3\);	all	rhs
+use	_atexit_common	iVar3	unlockResult	INFERRED	_keymgr_set_and_unlock_processwide_ptr result: tested against 0 after the lock is released	iVar3 = __keymgr_set_and_unlock_processwide_ptr\(0xe,iVar3\);@3	+2	lhs	none
+use	_atexit_common	iVar3	globals	CONFIRMED	the process-wide atexit state passed to _add_routine	local_18 = \(\(int \(\*\)\(\)\)_add_routine\)\(iVar3	+1	all	none
+use	_radeonFill	uVar29	batchLimit	INFERRED	exclusive end index of the rectangles this batch may cover: fillReq[0x16] (rect count), lowered to batchEnd when the batch is full, restored after the batch	uVar29 = param_5\[0x16\];@1		all	none
+local	__Flush	local_28	padWordsOrMapSize	INFERRED	one address-taken stack slot: 0 or 2 words of wait padding before the 0x1000000 terminator, then the output-size argument written by _IOConnectMapMemory (never read); the slot cannot be split because its address is passed
+local	___stub_getrealaddr	uVar3	nsSymbolOrAddress	CONFIRMED	NSSymbol returned by _NSLookupAndBindSymbolWithHint, overwritten by its _NSAddressOfSymbol address (returned); shares a frame slot that is also address-taken for the name buffer, so it cannot be split
