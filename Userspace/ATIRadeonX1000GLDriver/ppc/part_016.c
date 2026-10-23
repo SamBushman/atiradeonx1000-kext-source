@@ -8716,7 +8716,7 @@ LAB_000b66b8:
   if ((uint)(byte)((unsigned char *)0x000013b2)[param_1] < (uint)*(byte *)(param_1 + 0x2b)) {
     uVar5 = (uint)(byte)((unsigned char *)0x000013b2)[param_1];
   }
-  FUN_000d5900(param_1,puVar7);
+  ffpsEmitDeclarations(param_1,puVar7);
   FUN_000d8450(param_1,puVar7,0);
   iVar4 = *(int *)(puVar7 + 4);
   if (uVar5 == 0) {
@@ -8735,14 +8735,14 @@ LAB_000b66b8:
       if (iVar10 != 0) {
         if (*(ushort *)(iVar8 + 0x450) == 0x8570) {
           if (*psVar13 != -0x7885) {
-            FUN_000d6340(param_1,puVar7,(uint)*(ushort *)(iVar10 + 0x38),loopIndex,iVar10,uVar9,uVar12)
+            ffpsEmitTexEnvCombine(param_1,puVar7,(uint)*(ushort *)(iVar10 + 0x38),loopIndex,iVar10,uVar9,uVar12)
             ;
             uVar9 = 0;
             uVar12 = loopIndex;
           }
         }
         else {
-          FUN_000d7520(param_1,puVar7,(uint)*(ushort *)(iVar10 + 0x38),
+          ffpsEmitTexEnvLegacy(param_1,puVar7,(uint)*(ushort *)(iVar10 + 0x38),
                        (uint)*(ushort *)(iVar8 + 0x450),loopIndex,iVar10,uVar9,uVar12);
           uVar9 = 0;
           uVar12 = loopIndex;

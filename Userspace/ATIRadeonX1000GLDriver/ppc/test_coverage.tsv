@@ -1142,13 +1142,13 @@
 0xd4e08	FUN_000d4e08	92	yes	
 0xd4e64	FUN_000d4e64	40	yes	
 0xd4e8c	FUN_000d4e8c	84	yes	
-0xd4ef0	FUN_000d4ef0	628	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xd51a0	FUN_000d51a0	460	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xd4ef0	ffpsBuildRgbSourceOperand	628	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xd51a0	ffpsBuildAlphaSourceOperand	460	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0xd5390	FUN_000d5390	548	no	indirect call (driver context / vtable / callback)
 0xd55c0	FUN_000d55c0	832	no	indirect call (driver context / vtable / callback)
-0xd5900	FUN_000d5900	2612	no	indirect call (driver context / vtable / callback)
-0xd6340	FUN_000d6340	4540	no	indirect call (driver context / vtable / callback)
-0xd7520	FUN_000d7520	3832	no	indirect call (driver context / vtable / callback)
+0xd5900	ffpsEmitDeclarations	2612	no	indirect call (driver context / vtable / callback)
+0xd6340	ffpsEmitTexEnvCombine	4540	no	indirect call (driver context / vtable / callback)
+0xd7520	ffpsEmitTexEnvLegacy	3832	no	indirect call (driver context / vtable / callback)
 0xd8450	FUN_000d8450	5856	no	indirect call (driver context / vtable / callback)
 0xd9b58	FUN_000d9b58	84	yes	
 0xd9bac	FUN_000d9bac	228	yes	
