@@ -1392,7 +1392,7 @@ extern int ildisPrintResultModifiers();
 extern int ildisPrintElementFormat();
 extern int ildisPrintFormatXyzw();
 extern int ildisModComponentChar();
-extern int ildisPrintModifierSwizzle();
+extern int ildisPrintDestinationWriteMask();
 extern int ildisPrintUnsigned();
 extern int ildisPrintCmpVal();
 extern int ildisPrintUsage();

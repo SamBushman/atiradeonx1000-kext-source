@@ -1186,7 +1186,7 @@
 0xdaf7c	172	ildisPrintElementFormat	part_019	converted
 0xdb048	224	ildisPrintFormatXyzw	part_019	converted
 0xdb128	156	ildisModComponentChar	part_019	converted
-0xdb1c4	304	ildisPrintModifierSwizzle	part_019	converted
+0xdb1c4	304	ildisPrintDestinationWriteMask	part_019	converted
 0xdb2f4	92	ildisPrintUnsigned	part_019	converted
 0xdb350	244	ildisPrintCmpVal	part_019	converted
 0xdb458	260	ildisPrintUsage	part_019	converted

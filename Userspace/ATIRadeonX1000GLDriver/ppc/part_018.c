@@ -4165,52 +4165,52 @@ int scDisassembleIL(param_1, param_2, param_3, param_4)
 }
 
 /* scDumpSrcShader @ 0xcd214 (40 bytes) */
-int scDumpSrcShader(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int scDumpSrcShader(sinkContext, shaderState, sinkRecord, argR6, argR7Text, argR8Text, argR9Text, argR10Text)
+  undefined4 sinkContext;
+  undefined4 shaderState;
+  undefined4 sinkRecord;
+  undefined4 argR6;
+  undefined4 argR7Text;
+  undefined4 argR8Text;
+  undefined4 argR9Text;
+  undefined4 argR10Text;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { sinkContext, shaderState, sinkRecord, argR6, argR7Text, argR8Text, argR9Text, argR10Text };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   
-  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
-  return ((int (*)())scDumpSrcShaderImpl)(param_1,param_2,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)),param_4,param_5,param_6,param_7,param_8);
+  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = sinkRecord;
+  return ((int (*)())scDumpSrcShaderImpl)(sinkContext,shaderState,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)),argR6,argR7Text,argR8Text,argR9Text,argR10Text);
 }
 
 /* scDumpShader @ 0xcd23c (40 bytes) */
-int scDumpShader(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int scDumpShader(sinkArg, shaderState, optionsArg, argR6, sinkFn, argR8, argR9)
+  undefined4 sinkArg;
+  undefined4 shaderState;
+  undefined4 optionsArg;
+  undefined4 argR6;
+  undefined4 sinkFn;
+  undefined4 argR8;
+  undefined4 argR9;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { sinkArg, shaderState, optionsArg, argR6, sinkFn, argR8, argR9, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   
-  (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = param_5;
-  return ((int (*)())scDumpShaderImpl)(param_1,param_2,param_3,param_4,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)),param_6,param_7);
+  (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = sinkFn;
+  return ((int (*)())scDumpShaderImpl)(sinkArg,shaderState,optionsArg,argR6,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)),argR8,argR9);
 }
 
 /* scDumpShaderToString @ 0xcd264 (40 bytes) */
-int scDumpShaderToString(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int scDumpShaderToString(sinkArg, shaderState, sinkFn, argR6, argR7, argR8, argR9)
+  undefined4 sinkArg;
+  undefined4 shaderState;
+  undefined4 sinkFn;
+  undefined4 argR6;
+  undefined4 argR7;
+  undefined4 argR8;
+  undefined4 argR9;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { sinkArg, shaderState, sinkFn, argR6, argR7, argR8, argR9, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   
-  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
-  return ((int (*)())scDumpShaderToStringImpl)(param_1,param_2,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)),param_4,param_5,param_6,param_7);
+  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = sinkFn;
+  return ((int (*)())scDumpShaderToStringImpl)(sinkArg,shaderState,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)),argR6,argR7,argR8,argR9);
 }
 
 /* FUN_000cd290 @ 0xcd290 (88 bytes) */
