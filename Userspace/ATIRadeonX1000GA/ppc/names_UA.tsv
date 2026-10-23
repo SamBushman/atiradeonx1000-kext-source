@@ -393,26 +393,7 @@ local	_radeonCopy	local_108	i2dHi9	CONFIRMED	constant 0x43300000: high word of t
 local	_radeonCopy	uStack_104	i2dLo9	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
 local	_radeonCopy	local_100	i2dHi10	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
 local	_radeonCopy	uStack_fc	i2dLo10	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
-local	FUN_000055a4	iVar21	idxPlus5Or22Or13Or20Or19Block1	CONFIRMED	assigned base+5Or22Or13Or20Or19 (command word index) on every path
-local	FUN_000055a4	iVar22	idxPlus7Or5Or22Or8Or20Block1	CONFIRMED	assigned base+7Or5Or22Or8Or20 (command word index) on every path
-local	FUN_000055a4	iVar24	idxPlus8Or7Or4Or1Block1	CONFIRMED	assigned base+8Or7Or4Or1 (command word index) on every path
-local	FUN_000055a4	iVar28	idxPlus6Or4Or5Or2Or1Block1	CONFIRMED	assigned base+6Or4Or5Or2Or1 (command word index) on every path
-local	FUN_000055a4	iVar34	idxPlus3Or8Or2Block1	CONFIRMED	assigned base+3Or8Or2 (command word index) on every path
-local	FUN_000055a4	iVar35	idxPlus4Or6Or1Or5Or3Block1	CONFIRMED	assigned base+4Or6Or1Or5Or3 (command word index) on every path
-local	FUN_000055a4	iVar36	idxPlus9Or2Or10Or16Block1	CONFIRMED	assigned base+9Or2Or10Or16 (command word index) on every path
-local	FUN_000055a4	iVar37	idxPlus10Or11Or20Or12Block1	CONFIRMED	assigned base+10Or11Or20Or12 (command word index) on every path
-local	FUN_000055a4	iVar40	idxPlus11Or12Or6Or22Block1	CONFIRMED	assigned base+11Or12Or6Or22 (command word index) on every path
-local	FUN_000055a4	iVar41	idxPlus12Or13Or7Or6Or4Block1	CONFIRMED	assigned base+12Or13Or7Or6Or4 (command word index) on every path
-local	FUN_000055a4	iVar42	idxPlus13Or14Or8Or7Or5Block1	CONFIRMED	assigned base+13Or14Or8Or7Or5 (command word index) on every path
-local	FUN_000055a4	iVar43	idxPlus14Or15Or9Or11Or6Block1	CONFIRMED	assigned base+14Or15Or9Or11Or6 (command word index) on every path
-local	FUN_000055a4	iVar44	idxPlus15Or16Or10Or13Or7Block1	CONFIRMED	assigned base+15Or16Or10Or13Or7 (command word index) on every path
-local	FUN_000055a4	iVar46	idxPlus16Or17Or11Or14Block1	CONFIRMED	assigned base+16Or17Or11Or14 (command word index) on every path
-local	FUN_000055a4	iVar47	idxPlus17Or18Or12Or15Or13Block1	CONFIRMED	assigned base+17Or18Or12Or15Or13 (command word index) on every path
-local	FUN_000055a4	iVar49	idxPlus18Or19Or16Or14Block1	CONFIRMED	assigned base+18Or19Or16Or14 (command word index) on every path
-local	FUN_000055a4	iVar50	idxPlus19Or10Or17Block2	CONFIRMED	assigned base+19Or10Or17 (command word index) on every path
 local	FUN_000055a4	pdVar52	cmdPtrPlus6Block3	CONFIRMED	assigned base+6 (command word pointer) on every path
-local	FUN_000055a4	iVar57	idxPlus2Or18Block4	CONFIRMED	assigned base+2Or18 (command word index) on every path
-local	FUN_000055a4	iVar58	idxPlus4Or15Block5	CONFIRMED	assigned base+4Or15 (command word index) on every path
 local	FUN_000055a4	local_318	i2dHi1	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
 local	FUN_000055a4	uStack_314	i2dLo1	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
 local	FUN_000055a4	local_310	i2dHi2	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
@@ -499,12 +480,6 @@ local	FUN_000055a4	local_190	i2dHi40	CONFIRMED	constant 0x43300000: high word of
 local	FUN_000055a4	uStack_18c	i2dLo34	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
 local	FUN_000055a4	local_188	d2iScratch11	CONFIRMED	(longlong)(int)x: fctiwz scratch of a float->int conversion
 local	FUN_000055a4	local_180	d2iScratch12	CONFIRMED	(longlong)(int)x: fctiwz scratch of a float->int conversion
-local	FUN_000055a4	local_15c	idxPlus3Block6	CONFIRMED	assigned base+3 (command word index) on every path
-local	FUN_000055a4	local_158	idxPlus2Block6	CONFIRMED	assigned base+2 (command word index) on every path
-local	FUN_000055a4	local_154	idxPlus1Block6	CONFIRMED	assigned base+1 (command word index) on every path
-local	FUN_000055a4	local_150	idxPlus16Block7	CONFIRMED	assigned base+16 (command word index) on every path
-local	FUN_000055a4	local_14c	idxPlus15Block7	CONFIRMED	assigned base+15 (command word index) on every path
-local	FUN_000055a4	local_148	idxPlus14Block7	CONFIRMED	assigned base+14 (command word index) on every path
 local	_radeonFill	local_2d8	i2dHi1	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
 local	_radeonFill	uStack_2d4	i2dLo1	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
 local	_radeonFill	local_2d0	i2dHi2	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick

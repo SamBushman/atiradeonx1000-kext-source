@@ -53,3 +53,98 @@ use	_radeonCopy	iVar34	pass2QuadVtx3VIdx	INFERRED	vertex 3 v texcoord word	#377	
 use	_radeonCopy	iVar35	pass2QuadDrawRegIdx	INFERRED	0x1393 draw register word	#378	+79	all	none
 use	_radeonCopy	iVar27	pass2QuadDrawRegValueIdx	INFERRED	value written to reg 0x1393	#379	+79	all	none
 use	_radeonCopy	iVar13	pass2QuadFlushRegIdx	INFERRED	0x5c8 flush register word	#380	+79	all	none
+use	FUN_000055a4	iVar57	srcQuadRectBRRegIdx	INFERRED	the 0x10f9 register word (packed right|bottom follows)	#479	+58	all	none
+use	FUN_000055a4	iVar34	srcQuadRectBRIdx	INFERRED	packed right|bottom of the rect, value of reg 0x10f9	#480	+58	all	none
+use	FUN_000055a4	iVar35	srcQuadDrawHeaderIdx	INFERRED	0xc00c3500 type-3 draw packet header	#481	+58	all	none
+use	FUN_000055a4	iVar21	srcQuadVertexFormatIdx	INFERRED	0x4003d vertex-format word	#482	+58	all	none
+use	FUN_000055a4	iVar28	srcQuadVtx0PosIdx	INFERRED	vertex 0 position (x|y<<16) word	#483	+74	all	none
+use	FUN_000055a4	iVar22	srcQuadVtx0UIdx	INFERRED	vertex 0 u texcoord word	#484	+75	all	none
+use	FUN_000055a4	iVar24	srcQuadVtx0VIdx	INFERRED	vertex 0 v texcoord word	#485	+76	all	none
+use	FUN_000055a4	iVar36	srcQuadVtx1PosIdx	INFERRED	vertex 1 position (x|y<<16) word	#486	+76	all	none
+use	FUN_000055a4	iVar37	srcQuadVtx1UIdx	INFERRED	vertex 1 u texcoord word	#487	+76	all	none
+use	FUN_000055a4	iVar40	srcQuadVtx1VIdx	INFERRED	vertex 1 v texcoord word	#488	+77	all	none
+use	FUN_000055a4	iVar41	srcQuadVtx2PosIdx	INFERRED	vertex 2 position (x|y<<16) word	#489	+77	all	none
+use	FUN_000055a4	iVar42	srcQuadVtx2UIdx	INFERRED	vertex 2 u texcoord word	#490	+78	all	none
+use	FUN_000055a4	iVar43	srcQuadVtx2VIdx	INFERRED	vertex 2 v texcoord word	#491	+78	all	none
+use	FUN_000055a4	iVar44	srcQuadVtx3PosIdx	INFERRED	vertex 3 position (x|y<<16) word	#492	+78	all	none
+use	FUN_000055a4	iVar46	srcQuadVtx3UIdx	INFERRED	vertex 3 u texcoord word	#493	+78	all	none
+use	FUN_000055a4	iVar47	srcQuadVtx3VIdx	INFERRED	vertex 3 v texcoord word	#494	+78	all	none
+use	FUN_000055a4	iVar49	srcQuadDrawRegIdx	INFERRED	0x1393 draw register word	#495	+78	all	none
+use	FUN_000055a4	iVar50	srcQuadDrawRegValueIdx	INFERRED	value written to reg 0x1393	#496	+78	all	none
+use	FUN_000055a4	iVar28	dstQuadDrawHeaderIdx	INFERRED	0xc00c3500 type-3 draw packet header	#640	+63	all	none
+use	FUN_000055a4	iVar36	dstQuadVtx1PosIdx	INFERRED	vertex 1 position (x|y<<16) word	#641	+86	all	none
+use	FUN_000055a4	local_15c	dstQuadRectBRIdx	INFERRED	packed right|bottom of the rect, value of reg 0x10f9	#642	+60	all	none
+use	FUN_000055a4	local_154	dstQuadRectTLIdx	INFERRED	word after the 0x10f8 register: packed left|top of the rect	#643	+57	all	none
+use	FUN_000055a4	local_158	dstQuadRectBRRegIdx	INFERRED	the 0x10f9 register word (packed right|bottom follows)	#644	+57	all	none
+use	FUN_000055a4	iVar21	dstQuadPacketWordsIdx	INFERRED	total words of the setup + quad packet: subtracted from the words left and added to the write cursor	#645	+98	all	none
+use	FUN_000055a4	iVar22	dstQuadVertexFormatIdx	INFERRED	0x4003d vertex-format word	#647	+57	all	none
+use	FUN_000055a4	iVar35	dstQuadVtx0PosIdx	INFERRED	vertex 0 position (x|y<<16) word	#648	+74	all	none
+use	FUN_000055a4	iVar24	dstQuadVtx0UIdx	INFERRED	vertex 0 u texcoord word	#649	+75	all	none
+use	FUN_000055a4	iVar34	dstQuadVtx0VIdx	INFERRED	vertex 0 v texcoord word	#650	+76	all	none
+use	FUN_000055a4	iVar50	dstQuadVtx1UIdx	INFERRED	vertex 1 u texcoord word	#651	+77	all	none
+use	FUN_000055a4	iVar37	dstQuadVtx1VIdx	INFERRED	vertex 1 v texcoord word	#652	+78	all	none
+use	FUN_000055a4	iVar40	dstQuadVtx2PosIdx	INFERRED	vertex 2 position (x|y<<16) word	#653	+78	all	none
+use	FUN_000055a4	iVar41	dstQuadVtx2UIdx	INFERRED	vertex 2 u texcoord word	#654	+79	all	none
+use	FUN_000055a4	iVar42	dstQuadVtx2VIdx	INFERRED	vertex 2 v texcoord word	#655	+79	all	none
+use	FUN_000055a4	iVar43	dstQuadVtx3PosIdx	INFERRED	vertex 3 position (x|y<<16) word	#656	+79	all	none
+use	FUN_000055a4	iVar44	dstQuadVtx3UIdx	INFERRED	vertex 3 u texcoord word	#657	+79	all	none
+use	FUN_000055a4	iVar46	dstQuadVtx3VIdx	INFERRED	vertex 3 v texcoord word	#658	+79	all	none
+use	FUN_000055a4	iVar47	dstQuadDrawRegIdx	INFERRED	0x1393 draw register word	#659	+79	all	none
+use	FUN_000055a4	iVar49	dstQuadDrawRegValueIdx	INFERRED	value written to reg 0x1393	#660	+79	all	none
+use	FUN_000055a4	local_148	regionQuadVtx2VIdx	INFERRED	vertex 2 v texcoord word	#867	+100	all	none
+use	FUN_000055a4	local_14c	regionQuadVtx3PosIdx	INFERRED	vertex 3 position (x|y<<16) word	#868	+100	all	none
+use	FUN_000055a4	iVar22	regionQuadPacketWordsIdx	INFERRED	total words of the setup + quad packet: subtracted from the words left and added to the write cursor	#869	+108	all	none
+use	FUN_000055a4	local_150	regionQuadVtx3UIdx	INFERRED	vertex 3 u texcoord word	#871	+98	all	none
+use	FUN_000055a4	iVar35	regionQuadRectTLIdx	INFERRED	word after the 0x10f8 register: packed left|top of the rect	#874	+75	all	none
+use	FUN_000055a4	iVar36	regionQuadRectBRRegIdx	INFERRED	the 0x10f9 register word (packed right|bottom follows)	#875	+75	all	none
+use	FUN_000055a4	iVar34	regionQuadRectBRIdx	INFERRED	packed right|bottom of the rect, value of reg 0x10f9	#876	+76	all	none
+use	FUN_000055a4	iVar24	regionQuadDrawHeaderIdx	INFERRED	0xc00c3500 type-3 draw packet header	#877	+76	all	none
+use	FUN_000055a4	iVar28	regionQuadVertexFormatIdx	INFERRED	0x4003d vertex-format word	#878	+76	all	none
+use	FUN_000055a4	iVar40	regionQuadVtx0PosIdx	INFERRED	vertex 0 position (x|y<<16) word	#879	+76	all	none
+use	FUN_000055a4	iVar41	regionQuadVtx0UIdx	INFERRED	vertex 0 u texcoord word	#880	+77	all	none
+use	FUN_000055a4	iVar42	regionQuadVtx0VIdx	INFERRED	vertex 0 v texcoord word	#881	+78	all	none
+use	FUN_000055a4	iVar43	regionQuadVtx1PosIdx	INFERRED	vertex 1 position (x|y<<16) word	#882	+78	all	none
+use	FUN_000055a4	iVar44	regionQuadVtx1UIdx	INFERRED	vertex 1 u texcoord word	#883	+78	all	none
+use	FUN_000055a4	iVar46	regionQuadVtx1VIdx	INFERRED	vertex 1 v texcoord word	#884	+79	all	none
+use	FUN_000055a4	iVar47	regionQuadVtx2PosIdx	INFERRED	vertex 2 position (x|y<<16) word	#885	+79	all	none
+use	FUN_000055a4	iVar21	regionQuadVtx2UIdx	INFERRED	vertex 2 u texcoord word	#886	+80	all	none
+use	FUN_000055a4	iVar49	regionQuadDrawRegValueIdx	INFERRED	value written to reg 0x1393	#887	+85	all	none
+use	FUN_000055a4	iVar37	regionQuadFlushRegIdx	INFERRED	0x5c8 flush register word	#888	+85	all	none
+use	FUN_000055a4	iVar40	leftTileQuadPacketWordsIdx	INFERRED	total words of the setup + quad packet: subtracted from the words left and added to the write cursor	#1221	+125	all	none
+use	FUN_000055a4	iVar24	leftTileQuadRectTLIdx	INFERRED	word after the 0x10f8 register: packed left|top of the rect	#1223	+100	all	none
+use	FUN_000055a4	iVar28	leftTileQuadRectBRRegIdx	INFERRED	the 0x10f9 register word (packed right|bottom follows)	#1224	+100	all	none
+use	FUN_000055a4	iVar34	leftTileQuadRectBRIdx	INFERRED	packed right|bottom of the rect, value of reg 0x10f9	#1225	+100	all	none
+use	FUN_000055a4	iVar58	leftTileQuadDrawHeaderIdx	INFERRED	0xc00c3500 type-3 draw packet header	#1226	+100	all	none
+use	FUN_000055a4	iVar35	leftTileQuadVertexFormatIdx	INFERRED	0x4003d vertex-format word	#1227	+100	all	none
+use	FUN_000055a4	iVar41	leftTileQuadVtx0PosIdx	INFERRED	vertex 0 position (x|y<<16) word	#1228	+100	all	none
+use	FUN_000055a4	iVar42	leftTileQuadVtx0UIdx	INFERRED	vertex 0 u texcoord word	#1229	+100	all	none
+use	FUN_000055a4	iVar22	leftTileQuadVtx0VIdx	INFERRED	vertex 0 v texcoord word	#1230	+100	all	none
+use	FUN_000055a4	iVar36	leftTileQuadVtx1UIdx	INFERRED	vertex 1 u texcoord word	#1231	+101	all	none
+use	FUN_000055a4	iVar43	leftTileQuadVtx1VIdx	INFERRED	vertex 1 v texcoord word	#1232	+101	all	none
+use	FUN_000055a4	iVar37	leftTileQuadVtx2PosIdx	INFERRED	vertex 2 position (x|y<<16) word	#1233	+101	all	none
+use	FUN_000055a4	iVar44	leftTileQuadVtx2UIdx	INFERRED	vertex 2 u texcoord word	#1234	+101	all	none
+use	FUN_000055a4	iVar46	leftTileQuadVtx2VIdx	INFERRED	vertex 2 v texcoord word	#1235	+101	all	none
+use	FUN_000055a4	iVar47	leftTileQuadVtx3PosIdx	INFERRED	vertex 3 position (x|y<<16) word	#1236	+101	all	none
+use	FUN_000055a4	iVar49	leftTileQuadVtx3UIdx	INFERRED	vertex 3 u texcoord word	#1237	+101	all	none
+use	FUN_000055a4	iVar50	leftTileQuadVtx3VIdx	INFERRED	vertex 3 v texcoord word	#1238	+101	all	none
+use	FUN_000055a4	iVar57	leftTileQuadDrawRegIdx	INFERRED	0x1393 draw register word	#1239	+101	all	none
+use	FUN_000055a4	iVar21	leftTileQuadFlushRegIdx	INFERRED	0x5c8 flush register word	#1241	+101	all	none
+use	FUN_000055a4	iVar40	rightTileQuadPacketWordsIdx	INFERRED	total words of the setup + quad packet: subtracted from the words left and added to the write cursor	#1476	+124	all	none
+use	FUN_000055a4	iVar28	rightTileQuadRectTLIdx	INFERRED	word after the 0x10f8 register: packed left|top of the rect	#1478	+99	all	none
+use	FUN_000055a4	iVar34	rightTileQuadRectBRRegIdx	INFERRED	the 0x10f9 register word (packed right|bottom follows)	#1479	+99	all	none
+use	FUN_000055a4	iVar35	rightTileQuadRectBRIdx	INFERRED	packed right|bottom of the rect, value of reg 0x10f9	#1480	+99	all	none
+use	FUN_000055a4	iVar41	rightTileQuadDrawHeaderIdx	INFERRED	0xc00c3500 type-3 draw packet header	#1481	+99	all	none
+use	FUN_000055a4	iVar42	rightTileQuadVertexFormatIdx	INFERRED	0x4003d vertex-format word	#1482	+99	all	none
+use	FUN_000055a4	iVar43	rightTileQuadVtx0PosIdx	INFERRED	vertex 0 position (x|y<<16) word	#1483	+99	all	none
+use	FUN_000055a4	iVar44	rightTileQuadVtx0UIdx	INFERRED	vertex 0 u texcoord word	#1484	+99	all	none
+use	FUN_000055a4	iVar24	rightTileQuadVtx0VIdx	INFERRED	vertex 0 v texcoord word	#1485	+99	all	none
+use	FUN_000055a4	iVar46	rightTileQuadVtx1VIdx	INFERRED	vertex 1 v texcoord word	#1486	+101	all	none
+use	FUN_000055a4	iVar37	rightTileQuadVtx2PosIdx	INFERRED	vertex 2 position (x|y<<16) word	#1487	+101	all	none
+use	FUN_000055a4	iVar47	rightTileQuadVtx2UIdx	INFERRED	vertex 2 u texcoord word	#1488	+101	all	none
+use	FUN_000055a4	iVar49	rightTileQuadVtx2VIdx	INFERRED	vertex 2 v texcoord word	#1489	+101	all	none
+use	FUN_000055a4	iVar58	rightTileQuadVtx3PosIdx	INFERRED	vertex 3 position (x|y<<16) word	#1490	+101	all	none
+use	FUN_000055a4	iVar36	rightTileQuadVtx3UIdx	INFERRED	vertex 3 u texcoord word	#1491	+101	all	none
+use	FUN_000055a4	iVar50	rightTileQuadVtx3VIdx	INFERRED	vertex 3 v texcoord word	#1492	+101	all	none
+use	FUN_000055a4	iVar57	rightTileQuadDrawRegIdx	INFERRED	0x1393 draw register word	#1493	+101	all	none
+use	FUN_000055a4	iVar21	rightTileQuadDrawRegValueIdx	INFERRED	value written to reg 0x1393	#1494	+101	all	none
+use	FUN_000055a4	iVar22	rightTileQuadFlushRegIdx	INFERRED	0x5c8 flush register word	#1495	+101	all	none
