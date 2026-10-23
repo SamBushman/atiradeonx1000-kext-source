@@ -2760,30 +2760,33 @@ int __ZN13TInfoSinkBase6appendERKSbIcSt11char_traitsIcE14pool_allocatorIcEE(this
 }
 
 /* TIntermediate__addSymbol @ 0x97b8cb6c (376 bytes) */
-int TIntermediate__addSymbol(this, param_2, text, type, param_5)
+int TIntermediate__addSymbol(this, id, text, type, line)
   unsigned char * this;
-  int param_2;
+  int id;
   unsigned char * text;
   unsigned char * type;
-  int param_5;
+  int line;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  undefined *puVar5;
-  int iVar6;
-  uint uVar7;
-  int *piVar8;
+  int stringAllocator;
+  int atomicStore;
+  int emptyStringRep;
+  uint typeSizeBits;
+  uint typeQualifierBits;
+  uint typeBasicTypeBits;
+  uint typeMatrixBit;
+  undefined *intermSymbolVtable;
+  int typeArraySize;
+  uint oldTypeBits;
+  int *emptyRepRefCount;
   unsigned char * this_00;
   int *a0;
-  int iVar9;
-  int iVar10;
-  int iVar11;
-  int iVar12;
-  int iVar13;
-  int iVar14;
-  int iVar15;
+  int typeWord20;
+  int typeWord1c;
+  int typeStructureSize;
+  int typeWord14;
+  int typeTypeName;
+  int typeFieldName;
+  int typeStructure;
   char reservation;
   byte cr0Reg;
   
@@ -2791,83 +2794,95 @@ int TIntermediate__addSymbol(this, param_2, text, type, param_5)
   a0 = (int *)TPoolAllocator__allocate(this_00,0x3c);
   a0[1] = 0;
   *a0 = (int)&PTR_getLine_a7b7cf90;
-  iVar6 = *(int *)(type + 4);
-  iVar15 = *(int *)(type + 8);
-  iVar14 = *(int *)(type + 0xc);
-  iVar13 = *(int *)(type + 0x10);
-  iVar12 = *(int *)(type + 0x14);
-  iVar11 = *(int *)(type + 0x18);
-  iVar10 = *(int *)(type + 0x1c);
-  iVar9 = *(int *)(type + 0x20);
+  typeArraySize = *(int *)(type + 4);
+  typeStructure = *(int *)(type + 8);
+  typeFieldName = *(int *)(type + 0xc);
+  typeTypeName = *(int *)(type + 0x10);
+  typeWord14 = *(int *)(type + 0x14);
+  typeStructureSize = *(int *)(type + 0x18);
+  typeWord1c = *(int *)(type + 0x1c);
+  typeWord20 = *(int *)(type + 0x20);
   a0[2] = (int)&PTR___ZN5TTypeD1Ev_a7b7cff8;
-  a0[3] = iVar6;
-  a0[4] = iVar15;
-  a0[5] = iVar14;
-  a0[6] = iVar13;
-  a0[7] = iVar12;
-  a0[8] = iVar11;
-  a0[9] = iVar10;
-  a0[10] = iVar9;
-  uVar7 = a0[0xb];
-  uVar2 = *(uint *)(type + 0x24) & 0xfe000000;
-  a0[0xb] = uVar2 | uVar7 & 0x1ffffff;
-  uVar3 = (*(uint *)(type + 0x24) >> 0x13 & 0x3f) << 0x13;
-  a0[0xb] = uVar3 | uVar2 | uVar7 & 0x7ffff;
-  uVar1 = *(uint *)(type + 0x24) & 0x7f800;
-  a0[0xb] = uVar1 | uVar3 | uVar2 | uVar7 & 0x7ff;
-  uVar4 = (*(uint *)(type + 0x24) >> 10 & 1) << 10;
-  a0[0xb] = uVar4 | uVar1 | uVar3 | uVar2 | uVar7 & 0x3ff;
-  puVar5 = PTR_vtable_a7b7c0dc;
-  iVar6 = DAT_a7b7b9b8;
+  a0[3] = typeArraySize;
+  a0[4] = typeStructure;
+  a0[5] = typeFieldName;
+  a0[6] = typeTypeName;
+  a0[7] = typeWord14;
+  a0[8] = typeStructureSize;
+  a0[9] = typeWord1c;
+  a0[10] = typeWord20;
+  oldTypeBits = a0[0xb];
+  typeQualifierBits = *(uint *)(type + 0x24) & 0xfe000000;
+  a0[0xb] = typeQualifierBits | oldTypeBits & 0x1ffffff;
+  typeBasicTypeBits = (*(uint *)(type + 0x24) >> 0x13 & 0x3f) << 0x13;
+  a0[0xb] = typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x7ffff;
+  typeSizeBits = *(uint *)(type + 0x24) & 0x7f800;
+  a0[0xb] = typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x7ff;
+  typeMatrixBit = (*(uint *)(type + 0x24) >> 10 & 1) << 10;
+  a0[0xb] = typeMatrixBit | typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x3ff;
+  intermSymbolVtable = PTR_vtable_a7b7c0dc;
+  emptyStringRep = DAT_a7b7b9b8;
   a0[0xb] = (*(uint *)(type + 0x24) >> 9 & 1) << 9 |
-            uVar4 | uVar1 | uVar3 | uVar2 | uVar7 & 0x1ff;
-  piVar8 = (int *)(iVar6 + 8);
-  *a0 = (int)(puVar5 + 8);
-  a0[0xc] = param_2;
+            typeMatrixBit | typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x1ff;
+  emptyRepRefCount = (int *)(emptyStringRep + 8);
+  *a0 = (int)(intermSymbolVtable + 8);
+  a0[0xc] = id;
   do {
     if (reservation != '\0') {
-      iVar9 = storeWordConditionalIndexed(*piVar8 + 1,0,piVar8);
-      *piVar8 = iVar9;
+      atomicStore = storeWordConditionalIndexed(*emptyRepRefCount + 1,0,emptyRepRefCount);
+      *emptyRepRefCount = atomicStore;
       cr0Reg = 2;
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
-  iVar9 = GetGlobalPoolAllocator();
-  a0[0xd] = iVar9;
-  a0[0xe] = iVar6 + 0xc;
+  stringAllocator = GetGlobalPoolAllocator();
+  a0[0xd] = stringAllocator;
+  a0[0xe] = emptyStringRep + 0xc;
   __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_(a0 + 0xd,text);
-  (**(code **)(*a0 + 4))(a0,param_5);
+  (**(code **)(*a0 + 4))(a0,line);
   return a0;
 }
 
 /* TIntermediate__addBinaryMath @ 0x97b8cce4 (2288 bytes) */
-int TIntermediate__addBinaryMath(this, op, intermTyped1, intermTyped2, param_5, symbolTable)
+int TIntermediate__addBinaryMath(this, op, intermTyped1, intermTyped2, line, symbolTable)
   unsigned char * this;
   int op;
   int *intermTyped1;
   int *intermTyped2;
-  int param_5;
+  int line;
   unsigned char * symbolTable;
 {
-  bool bVar1;
-  bool bVar2;
-  bool bVar3;
-  bool bVar4;
-  undefined *puVar5;
-  uint uVar6;
-  int *piVar7;
+  int *foldResult;
+  int *rightConstCopy;
+  code *foldFn;
+  int constantSize;
+  int nodeVtable;
+  int leftAggregate;
+  int rightAggregate;
+  int leftConstantUnion;
+  bool needsConversion;
+  bool bothOperandsConst;
+  bool operandTypesMatch;
+  bool typeTemp3Live;
+  bool typeTemp1Constructed;
+  bool typeTemp2Live;
+  bool typeTemp1Live;
+  bool operandInvalid;
+  undefined *intermBinaryVtable;
+  uint oldTypeBits;
+  int *rightOperand;
   unsigned char * this_00;
   int *a0;
-  int iVar8;
-  int iVar9;
+  int promoteResult;
+  int rightConstantUnion;
   unsigned char * pTVar10;
-  int *piVar11;
+  int *leftConstCopy;
   unsigned char * pTVar12;
   unsigned char * pTVar13;
   unsigned char * a0_00;
   unsigned char * a2;
   undefined4 a3;
   undefined4 a4;
-  code *pcVar14;
+  code *setOperandFn;
   undefined **stackType;
   undefined4 stackTypeArraySize;
   int stackTypeStructure;
@@ -2878,17 +2893,17 @@ int TIntermediate__addBinaryMath(this, op, intermTyped1, intermTyped2, param_5, 
   undefined4 stackTypeWord1c;
   undefined4 stackTypeWord20;
   uint stackTypeBits;
-  undefined **local_f0 [2];
-  int local_e8;
-  uint local_cc;
-  undefined **local_c0 [2];
-  int local_b8;
-  uint local_9c;
-  undefined **local_90 [2];
-  int local_88;
-  uint local_6c;
-  undefined **local_60 [9];
-  uint local_3c;
+  undefined **typeTemp1 [2];
+  int typeTemp1Structure;
+  uint typeTemp1Bits;
+  undefined **typeTemp2 [2];
+  int typeTemp2Structure;
+  uint typeTemp2Bits;
+  undefined **typeTemp3 [2];
+  int typeTemp3Structure;
+  uint typeTemp3Bits;
+  undefined **typeTemp3Alt [9];
+  uint typeTemp3AltBits;
   
   if (op - 0x13U < 0x1a) {
     switch(op) {
@@ -2896,20 +2911,20 @@ int TIntermediate__addBinaryMath(this, op, intermTyped1, intermTyped2, param_5, 
     case 0x14:
     case 0x15:
     case 0x16:
-      bVar4 = false;
+      operandInvalid = false;
       (**(code **)(*intermTyped1 + 0x38))(&stackType,intermTyped1);
-      bVar1 = false;
+      typeTemp1Constructed = false;
       if ((stackTypeBits >> 0x13 & 0x3f) == 0xe) {
 LAB_97b8cff8:
-        bVar4 = true;
-        if (bVar1) goto LAB_97b8d008;
+        operandInvalid = true;
+        if (typeTemp1Constructed) goto LAB_97b8d008;
       }
       else {
-        (**(code **)(*intermTyped1 + 0x38))(local_f0,intermTyped1);
-        bVar1 = true;
-        if ((local_cc >> 0x13 & 0x3f) == 3) goto LAB_97b8cff8;
+        (**(code **)(*intermTyped1 + 0x38))(typeTemp1,intermTyped1);
+        typeTemp1Constructed = true;
+        if ((typeTemp1Bits >> 0x13 & 0x3f) == 3) goto LAB_97b8cff8;
 LAB_97b8d008:
-        local_f0[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+        typeTemp1[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
       }
       goto LAB_97b8d01c;
     default:
@@ -2918,115 +2933,115 @@ LAB_97b8d008:
     case 0x22:
     case 0x23:
     case 0x24:
-      bVar4 = false;
-      bVar3 = false;
-      bVar2 = false;
+      operandInvalid = false;
+      typeTemp1Live = false;
+      typeTemp2Live = false;
       (**(code **)(*intermTyped1 + 0x38))
-                (&stackType,intermTyped1,intermTyped1,intermTyped2,param_5,symbolTable,(op - 0x13U) * 4);
-      bVar1 = false;
+                (&stackType,intermTyped1,intermTyped1,intermTyped2,line,symbolTable,(op - 0x13U) * 4);
+      typeTemp3Live = false;
       if ((stackTypeBits & 0x400) == 0) {
-        bVar3 = true;
-        (**(code **)(*intermTyped1 + 0x38))(local_f0,intermTyped1);
-        if ((local_cc & 0x200) != 0) goto LAB_97b8ce68;
-        bVar2 = true;
-        (**(code **)(*intermTyped1 + 0x38))(local_c0,intermTyped1);
-        if ((1 < (int)(local_9c << 0xd | local_9c >> 0x13) >> 0x18) && ((local_9c & 0x400) == 0))
+        typeTemp1Live = true;
+        (**(code **)(*intermTyped1 + 0x38))(typeTemp1,intermTyped1);
+        if ((typeTemp1Bits & 0x200) != 0) goto LAB_97b8ce68;
+        typeTemp2Live = true;
+        (**(code **)(*intermTyped1 + 0x38))(typeTemp2,intermTyped1);
+        if ((1 < (int)(typeTemp2Bits << 0xd | typeTemp2Bits >> 0x13) >> 0x18) && ((typeTemp2Bits & 0x400) == 0))
         goto LAB_97b8ce68;
-        bVar1 = true;
-        (**(code **)(*intermTyped1 + 0x38))(local_90,intermTyped1);
-        if ((local_6c >> 0x13 & 0x3f) == 0xe) goto LAB_97b8ce68;
+        typeTemp3Live = true;
+        (**(code **)(*intermTyped1 + 0x38))(typeTemp3,intermTyped1);
+        if ((typeTemp3Bits >> 0x13 & 0x3f) == 0xe) goto LAB_97b8ce68;
       }
       else {
 LAB_97b8ce68:
-        bVar4 = true;
-        if (!bVar1) break;
+        operandInvalid = true;
+        if (!typeTemp3Live) break;
       }
-      local_90[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+      typeTemp3[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
       break;
     case 0x2a:
     case 0x2b:
     case 0x2c:
-      bVar4 = false;
-      bVar3 = false;
-      bVar2 = false;
+      operandInvalid = false;
+      typeTemp1Live = false;
+      typeTemp2Live = false;
       (**(code **)(*intermTyped1 + 0x38))(&stackType,intermTyped1);
-      bVar1 = false;
+      typeTemp3Live = false;
       if ((stackTypeBits >> 0x13 & 0x3f) == 3) {
-        bVar3 = true;
-        (**(code **)(*intermTyped1 + 0x38))(local_f0,intermTyped1);
-        if ((local_cc & 0x400) != 0) goto LAB_97b8cf4c;
-        bVar2 = true;
-        (**(code **)(*intermTyped1 + 0x38))(local_c0,intermTyped1);
-        if ((local_9c & 0x200) != 0) goto LAB_97b8cf4c;
-        bVar1 = true;
-        (**(code **)(*intermTyped1 + 0x38))(local_60,intermTyped1);
-        if ((1 < (int)(local_3c << 0xd | local_3c >> 0x13) >> 0x18) && ((local_3c & 0x400) == 0))
+        typeTemp1Live = true;
+        (**(code **)(*intermTyped1 + 0x38))(typeTemp1,intermTyped1);
+        if ((typeTemp1Bits & 0x400) != 0) goto LAB_97b8cf4c;
+        typeTemp2Live = true;
+        (**(code **)(*intermTyped1 + 0x38))(typeTemp2,intermTyped1);
+        if ((typeTemp2Bits & 0x200) != 0) goto LAB_97b8cf4c;
+        typeTemp3Live = true;
+        (**(code **)(*intermTyped1 + 0x38))(typeTemp3Alt,intermTyped1);
+        if ((1 < (int)(typeTemp3AltBits << 0xd | typeTemp3AltBits >> 0x13) >> 0x18) && ((typeTemp3AltBits & 0x400) == 0))
         goto LAB_97b8cf4c;
 LAB_97b8cf5c:
-        local_60[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+        typeTemp3Alt[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
       }
       else {
 LAB_97b8cf4c:
-        bVar4 = true;
-        if (bVar1) goto LAB_97b8cf5c;
+        operandInvalid = true;
+        if (typeTemp3Live) goto LAB_97b8cf5c;
       }
     }
-    if (bVar2) {
-      local_c0[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+    if (typeTemp2Live) {
+      typeTemp2[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
     }
-    if (bVar3) {
-      local_f0[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+    if (typeTemp1Live) {
+      typeTemp1[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
     }
 LAB_97b8d01c:
     stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-    if (bVar4) {
+    if (operandInvalid) {
       return (int *)0x0;
     }
   }
 switchD_97b8cd3c_default:
-  bVar2 = false;
+  needsConversion = false;
   (**(code **)(*intermTyped1 + 0x38))(&stackType,intermTyped1);
-  bVar1 = false;
+  typeTemp1Constructed = false;
   if (stackTypeStructure == 0) {
 LAB_97b8d08c:
-    bVar2 = true;
-    if (bVar1) goto LAB_97b8d098;
+    needsConversion = true;
+    if (typeTemp1Constructed) goto LAB_97b8d098;
   }
   else {
-    (**(code **)(*intermTyped2 + 0x38))(local_f0,intermTyped2);
-    bVar1 = true;
-    if (local_e8 == 0) goto LAB_97b8d08c;
+    (**(code **)(*intermTyped2 + 0x38))(typeTemp1,intermTyped2);
+    typeTemp1Constructed = true;
+    if (typeTemp1Structure == 0) goto LAB_97b8d08c;
 LAB_97b8d098:
-    local_f0[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+    typeTemp1[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   }
   stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-  if (bVar2) {
-    (**(code **)(*intermTyped1 + 0x38))(local_c0,intermTyped1);
-    piVar7 = (int *)((int (*)())TIntermediate__addConversion)(this,op,local_c0,intermTyped2);
-    local_c0[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-    if (piVar7 == (int *)0x0) {
-      (**(code **)(*intermTyped2 + 0x38))(local_c0,intermTyped2);
-      intermTyped1 = (int *)((int (*)())TIntermediate__addConversion)(this,op,local_c0,intermTyped1);
-      piVar7 = intermTyped2;
+  if (needsConversion) {
+    (**(code **)(*intermTyped1 + 0x38))(typeTemp2,intermTyped1);
+    rightOperand = (int *)((int (*)())TIntermediate__addConversion)(this,op,typeTemp2,intermTyped2);
+    typeTemp2[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+    if (rightOperand == (int *)0x0) {
+      (**(code **)(*intermTyped2 + 0x38))(typeTemp2,intermTyped2);
+      intermTyped1 = (int *)((int (*)())TIntermediate__addConversion)(this,op,typeTemp2,intermTyped1);
+      rightOperand = intermTyped2;
       if (intermTyped1 == (int *)0x0) {
         return (int *)0x0;
       }
     }
   }
   else {
-    (**(code **)(*intermTyped1 + 0x38))(local_c0,intermTyped1);
-    (**(code **)(*intermTyped2 + 0x38))(local_90,intermTyped2);
-    bVar1 = false;
-    if (((local_9c & 0x1fffe00) == (local_6c & 0x1fffe00)) && (local_b8 == local_88)) {
-      bVar1 = true;
+    (**(code **)(*intermTyped1 + 0x38))(typeTemp2,intermTyped1);
+    (**(code **)(*intermTyped2 + 0x38))(typeTemp3,intermTyped2);
+    operandTypesMatch = false;
+    if (((typeTemp2Bits & 0x1fffe00) == (typeTemp3Bits & 0x1fffe00)) && (typeTemp2Structure == typeTemp3Structure)) {
+      operandTypesMatch = true;
     }
-    local_90[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-    piVar7 = intermTyped2;
-    if (!bVar1) {
+    typeTemp3[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+    rightOperand = intermTyped2;
+    if (!operandTypesMatch) {
       return (int *)0x0;
     }
   }
-  local_c0[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+  typeTemp2[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   this_00 = (unsigned char *)GetGlobalPoolAllocator();
   a0 = (int *)TPoolAllocator__allocate(this_00,0x3c);
   stackTypeBits = stackTypeBits & 0x1ff | 0x80800;
@@ -3049,61 +3064,61 @@ LAB_97b8d098:
   a0[2] = (int)&PTR___ZN5TTypeD1Ev_a7b7cff8;
   a0[9] = 0;
   a0[10] = 0;
-  uVar6 = a0[0xb];
-  a0[0xb] = uVar6 & 0x1ffffff;
-  a0[0xb] = uVar6 & 0x7ffff | 0x80000;
-  a0[0xb] = uVar6 & 0x7ff | 0x80800;
-  a0[0xb] = uVar6 & 0x3ff | 0x80800;
-  puVar5 = PTR_vtable_a7b7c0d8;
-  a0[0xb] = uVar6 & 0x1ff | 0x80800;
+  oldTypeBits = a0[0xb];
+  a0[0xb] = oldTypeBits & 0x1ffffff;
+  a0[0xb] = oldTypeBits & 0x7ffff | 0x80000;
+  a0[0xb] = oldTypeBits & 0x7ff | 0x80800;
+  a0[0xb] = oldTypeBits & 0x3ff | 0x80800;
+  intermBinaryVtable = PTR_vtable_a7b7c0d8;
+  a0[0xb] = oldTypeBits & 0x1ff | 0x80800;
   stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   a0[0xc] = op;
-  *a0 = (int)(puVar5 + 8);
-  if (param_5 == 0) {
-    param_5 = (**(code **)*piVar7)(piVar7);
+  *a0 = (int)(intermBinaryVtable + 8);
+  if (line == 0) {
+    line = (**(code **)*rightOperand)(rightOperand);
   }
-  (**(code **)(*a0 + 4))(a0,param_5);
+  (**(code **)(*a0 + 4))(a0,line);
   (**(code **)(*a0 + 0x60))(a0,intermTyped1);
-  (**(code **)(*a0 + 100))(a0,piVar7);
-  iVar8 = (**(code **)(*a0 + 0x5c))(a0,*(undefined4 *)this);
-  if (iVar8 == 0) {
+  (**(code **)(*a0 + 100))(a0,rightOperand);
+  promoteResult = (**(code **)(*a0 + 0x5c))(a0,*(undefined4 *)this);
+  if (promoteResult == 0) {
     return (int *)0x0;
   }
-  iVar8 = (**(code **)(*intermTyped1 + 0x18))(intermTyped1);
-  iVar9 = (**(code **)(*piVar7 + 0x18))(piVar7);
+  leftConstantUnion = (**(code **)(*intermTyped1 + 0x18))(intermTyped1);
+  rightConstantUnion = (**(code **)(*rightOperand + 0x18))(rightOperand);
   pTVar10 = (unsigned char *)0x0;
-  if (iVar8 != 0) {
+  if (leftConstantUnion != 0) {
     pTVar10 = (unsigned char *)(**(code **)(*intermTyped1 + 0x18))(intermTyped1);
-    piVar11 = (int *)TIntermediate__copyConstUnion(this,pTVar10);
-    pTVar10 = (unsigned char *)(**(code **)(*piVar11 + 0x18))(piVar11);
+    leftConstCopy = (int *)TIntermediate__copyConstUnion(this,pTVar10);
+    pTVar10 = (unsigned char *)(**(code **)(*leftConstCopy + 0x18))(leftConstCopy);
   }
   pTVar12 = (unsigned char *)0x0;
-  if (iVar9 != 0) {
-    pTVar12 = (unsigned char *)(**(code **)(*piVar7 + 0x18))(piVar7);
-    piVar11 = (int *)TIntermediate__copyConstUnion(this,pTVar12);
-    pTVar12 = (unsigned char *)(**(code **)(*piVar11 + 0x18))(piVar11);
+  if (rightConstantUnion != 0) {
+    pTVar12 = (unsigned char *)(**(code **)(*rightOperand + 0x18))(rightOperand);
+    rightConstCopy = (int *)TIntermediate__copyConstUnion(this,pTVar12);
+    pTVar12 = (unsigned char *)(**(code **)(*rightConstCopy + 0x18))(rightConstCopy);
   }
-  bVar1 = false;
-  (**(code **)(*piVar7 + 0x38))(&stackType,piVar7);
+  bothOperandsConst = false;
+  (**(code **)(*rightOperand + 0x38))(&stackType,rightOperand);
   if (stackTypeBits >> 0x19 == 2) {
-    (**(code **)(*intermTyped1 + 0x38))(local_f0,intermTyped1);
-    bVar1 = local_cc >> 0x19 == 2;
-    local_f0[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+    (**(code **)(*intermTyped1 + 0x38))(typeTemp1,intermTyped1);
+    bothOperandsConst = typeTemp1Bits >> 0x19 == 2;
+    typeTemp1[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   }
   stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-  if (bVar1) {
-    iVar8 = (**(code **)(*piVar7 + 0x1c))(piVar7);
-    if (iVar8 != 0) {
-      pTVar13 = (unsigned char *)(**(code **)(*piVar7 + 0x1c))(piVar7);
-      pTVar12 = (unsigned char *)TIntermediate__changeAggrToTempConst(this,pTVar13,symbolTable,param_5);
+  if (bothOperandsConst) {
+    rightAggregate = (**(code **)(*rightOperand + 0x1c))(rightOperand);
+    if (rightAggregate != 0) {
+      pTVar13 = (unsigned char *)(**(code **)(*rightOperand + 0x1c))(rightOperand);
+      pTVar12 = (unsigned char *)TIntermediate__changeAggrToTempConst(this,pTVar13,symbolTable,line);
       if (*(int *)(pTVar12 + 0x30) == 0) {
         return (int *)0x0;
       }
     }
-    iVar8 = (**(code **)(*intermTyped1 + 0x1c))(intermTyped1);
-    if (iVar8 != 0) {
+    leftAggregate = (**(code **)(*intermTyped1 + 0x1c))(intermTyped1);
+    if (leftAggregate != 0) {
       pTVar13 = (unsigned char *)(**(code **)(*intermTyped1 + 0x1c))(intermTyped1);
-      pTVar10 = (unsigned char *)TIntermediate__changeAggrToTempConst(this,pTVar13,symbolTable,param_5);
+      pTVar10 = (unsigned char *)TIntermediate__changeAggrToTempConst(this,pTVar13,symbolTable,line);
       if (*(int *)(pTVar10 + 0x30) == 0) {
         return (int *)0x0;
       }
@@ -3116,53 +3131,55 @@ LAB_97b8d098:
   }
   else {
     if (pTVar12 == (unsigned char *)0x0) {
-      iVar8 = *a0;
+      nodeVtable = *a0;
       pTVar12 = (unsigned char *)TIntermediate__copyConstUnion(this,pTVar10);
-      pcVar14 = *(code **)(iVar8 + 0x60);
+      setOperandFn = *(code **)(nodeVtable + 0x60);
       goto LAB_97b8d618;
     }
-    iVar8 = (**(code **)(*(int *)pTVar10 + 0x4c))(pTVar10);
-    if ((iVar8 == 1) && (iVar8 = (**(code **)(*(int *)pTVar12 + 0x4c))(pTVar12), 1 < iVar8)) {
+    constantSize = (**(code **)(*(int *)pTVar10 + 0x4c))(pTVar10);
+    if ((constantSize == 1) && (constantSize = (**(code **)(*(int *)pTVar12 + 0x4c))(pTVar12), 1 < constantSize)) {
       a3 = *(undefined4 *)this;
-      pcVar14 = *(code **)(*(int *)pTVar12 + 0x5c);
+      foldFn = *(code **)(*(int *)pTVar12 + 0x5c);
       a4 = 0;
       a0_00 = pTVar12;
       a2 = pTVar10;
     }
     else {
       a3 = *(undefined4 *)this;
-      pcVar14 = *(code **)(*(int *)pTVar10 + 0x5c);
+      foldFn = *(code **)(*(int *)pTVar10 + 0x5c);
       a4 = 1;
       a0_00 = pTVar10;
       a2 = pTVar12;
     }
-    piVar7 = (int *)(*pcVar14)(a0_00,a0[0xc],a2,a3,a4);
-    if (piVar7 != (int *)0x0) {
-      return piVar7;
+    foldResult = (int *)(*foldFn)(a0_00,a0[0xc],a2,a3,a4);
+    if (foldResult != (int *)0x0) {
+      return foldResult;
     }
     (**(code **)(*a0 + 0x60))(a0,pTVar10);
   }
-  pcVar14 = *(code **)(*a0 + 100);
+  setOperandFn = *(code **)(*a0 + 100);
 LAB_97b8d618:
-  (*pcVar14)(a0,pTVar12);
+  (*setOperandFn)(a0,pTVar12);
   return a0;
 }
 
 /* TIntermediate__addAssign @ 0x97b8d63c (640 bytes) */
-int TIntermediate__addAssign(this, op, intermTyped1, intermTyped2, param_5)
+int TIntermediate__addAssign(this, op, intermTyped1, intermTyped2, line)
   unsigned char * this;
   int op;
   int *intermTyped1;
   int *intermTyped2;
-  int param_5;
+  int line;
 {
-  undefined *puVar1;
-  uint uVar2;
+  int promoteResult;
+  int convertedRight;
+  undefined *intermBinaryVtable;
+  uint oldTypeBits;
   unsigned char * this_00;
   int *a0;
-  int iVar3;
-  unsigned char * pTVar4;
-  int *piVar5;
+  int rightConstUnion;
+  unsigned char * rightConstUnionNode;
+  int *result;
   undefined **stackType;
   undefined4 stackTypeArraySize;
   undefined4 stackTypeStructure;
@@ -3196,54 +3213,54 @@ int TIntermediate__addAssign(this, op, intermTyped1, intermTyped2, param_5)
   a0[2] = (int)&PTR___ZN5TTypeD1Ev_a7b7cff8;
   a0[9] = 0;
   a0[10] = 0;
-  uVar2 = a0[0xb];
-  a0[0xb] = uVar2 & 0x1ffffff;
-  a0[0xb] = uVar2 & 0x7ffff | 0x80000;
-  a0[0xb] = uVar2 & 0x7ff | 0x80800;
-  a0[0xb] = uVar2 & 0x3ff | 0x80800;
-  puVar1 = PTR_vtable_a7b7c0d8;
-  a0[0xb] = uVar2 & 0x1ff | 0x80800;
+  oldTypeBits = a0[0xb];
+  a0[0xb] = oldTypeBits & 0x1ffffff;
+  a0[0xb] = oldTypeBits & 0x7ffff | 0x80000;
+  a0[0xb] = oldTypeBits & 0x7ff | 0x80800;
+  a0[0xb] = oldTypeBits & 0x3ff | 0x80800;
+  intermBinaryVtable = PTR_vtable_a7b7c0d8;
+  a0[0xb] = oldTypeBits & 0x1ff | 0x80800;
   stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-  *a0 = (int)(puVar1 + 8);
+  *a0 = (int)(intermBinaryVtable + 8);
   a0[0xc] = op;
-  if (param_5 == 0) {
-    param_5 = (**(code **)*intermTyped1)(intermTyped1);
+  if (line == 0) {
+    line = (**(code **)*intermTyped1)(intermTyped1);
   }
-  (**(code **)(*a0 + 4))(a0,param_5);
-  iVar3 = (**(code **)(*intermTyped2 + 0x18))(intermTyped2);
-  if (iVar3 != 0) {
-    pTVar4 = (unsigned char *)(**(code **)(*intermTyped2 + 0x18))(intermTyped2);
-    intermTyped2 = (int *)TIntermediate__copyConstUnion(this,pTVar4);
+  (**(code **)(*a0 + 4))(a0,line);
+  rightConstUnion = (**(code **)(*intermTyped2 + 0x18))(intermTyped2);
+  if (rightConstUnion != 0) {
+    rightConstUnionNode = (unsigned char *)(**(code **)(*intermTyped2 + 0x18))(intermTyped2);
+    intermTyped2 = (int *)TIntermediate__copyConstUnion(this,rightConstUnionNode);
     if (intermTyped2 == (int *)0x0) {
       return (int *)0x0;
     }
   }
   (**(code **)(*intermTyped1 + 0x38))(&stackType,intermTyped1);
-  iVar3 = ((int (*)())TIntermediate__addConversion)(this,op,&stackType,intermTyped2);
+  convertedRight = ((int (*)())TIntermediate__addConversion)(this,op,&stackType,intermTyped2);
   stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-  piVar5 = (int *)0x0;
-  if (iVar3 != 0) {
+  result = (int *)0x0;
+  if (convertedRight != 0) {
     (**(code **)(*a0 + 0x60))(a0,intermTyped1);
-    (**(code **)(*a0 + 100))(a0,iVar3);
-    iVar3 = (**(code **)(*a0 + 0x5c))(a0,*(undefined4 *)this);
-    piVar5 = (int *)0x0;
-    if (iVar3 != 0) {
-      piVar5 = a0;
+    (**(code **)(*a0 + 100))(a0,convertedRight);
+    promoteResult = (**(code **)(*a0 + 0x5c))(a0,*(undefined4 *)this);
+    result = (int *)0x0;
+    if (promoteResult != 0) {
+      result = a0;
     }
   }
-  return piVar5;
+  return result;
 }
 
 /* TIntermediate__addIndex @ 0x97b8d8bc (460 bytes) */
-int TIntermediate__addIndex(this, op, intermTyped1, intermTyped2, param_5)
+int TIntermediate__addIndex(this, op, intermTyped1, intermTyped2, line)
   unsigned char * this;
   int op;
   undefined4 intermTyped1;
   undefined4 *intermTyped2;
-  int param_5;
+  int line;
 {
-  undefined *puVar1;
-  uint uVar2;
+  undefined *intermBinaryVtable;
+  uint oldTypeBits;
   unsigned char * this_00;
   int *a0;
   
@@ -3260,47 +3277,54 @@ int TIntermediate__addIndex(this, op, intermTyped1, intermTyped2, param_5)
   a0[2] = (int)&PTR___ZN5TTypeD1Ev_a7b7cff8;
   a0[9] = 0;
   a0[10] = 0;
-  uVar2 = a0[0xb];
-  a0[0xb] = uVar2 & 0x1ffffff;
-  a0[0xb] = uVar2 & 0x7ffff | 0x80000;
-  a0[0xb] = uVar2 & 0x7ff | 0x80800;
-  a0[0xb] = uVar2 & 0x3ff | 0x80800;
-  puVar1 = PTR_vtable_a7b7c0d8;
-  a0[0xb] = uVar2 & 0x1ff | 0x80800;
+  oldTypeBits = a0[0xb];
+  a0[0xb] = oldTypeBits & 0x1ffffff;
+  a0[0xb] = oldTypeBits & 0x7ffff | 0x80000;
+  a0[0xb] = oldTypeBits & 0x7ff | 0x80800;
+  a0[0xb] = oldTypeBits & 0x3ff | 0x80800;
+  intermBinaryVtable = PTR_vtable_a7b7c0d8;
+  a0[0xb] = oldTypeBits & 0x1ff | 0x80800;
   a0[0xc] = op;
-  *a0 = (int)(puVar1 + 8);
-  if (param_5 == 0) {
-    param_5 = (**(code **)*intermTyped2)(intermTyped2);
+  *a0 = (int)(intermBinaryVtable + 8);
+  if (line == 0) {
+    line = (**(code **)*intermTyped2)(intermTyped2);
   }
-  (**(code **)(*a0 + 4))(a0,param_5);
+  (**(code **)(*a0 + 4))(a0,line);
   (**(code **)(*a0 + 0x60))(a0,intermTyped1);
   (**(code **)(*a0 + 100))(a0,intermTyped2);
   return a0;
 }
 
 /* TIntermediate__addUnaryMath @ 0x97b8da88 (104 bytes) */
-int TIntermediate__addUnaryMath(this, op, intermNode, param_4, symbolTable, param_6, param_7)
+int TIntermediate__addUnaryMath(this, op, intermNode, sourceLoc, symbolTable, scratchR8, scratchR9)
   unsigned char * this;
   int op;
   int *intermNode;
-  uint param_4;
+  uint sourceLoc;
   unsigned char * symbolTable;
-  undefined4 param_6;
-  uint param_7;
+  undefined4 scratchR8;
+  uint scratchR9;
 {
+  uint oldTypeBits;
+  uint lineInString;
+  int promoteResult;
+  int constantUnionNode;
+  int childAggregate;
+  int childConstantUnion;
+  bool typeTemp1Live;
   undefined *oldRefCount;
   undefined *atomicStore;
-  bool bVar2;
-  bool bVar3;
-  bool bVar4;
-  bool bVar5;
-  undefined **ppuVar6;
-  uint uVar7;
-  undefined *puVar8;
+  bool typeTemp4Live;
+  bool typeTemp3Live;
+  bool typeTemp2Live;
+  bool operandInvalid;
+  undefined **refCountPtr;
+  uint nominalSize;
+  undefined *intermUnaryVtable;
   int *a1;
-  uint uVar9;
-  uint uVar10;
-  int iVar11;
+  uint isMatrix;
+  uint isArray;
+  int targetBasicType;
   unsigned char * pTVar12;
   unsigned char * pTVar13;
   int *a0;
@@ -3311,7 +3335,7 @@ int TIntermediate__addUnaryMath(this, op, intermNode, param_4, symbolTable, para
   undefined4 extraout_r4_01;
   undefined4 extraout_r4_02;
   undefined4 extraout_r4_03;
-  undefined4 uVar14;
+  undefined4 scratchR4;
   undefined4 extraout_r4_04;
   undefined4 extraout_r4_05;
   unsigned char * a4;
@@ -3322,48 +3346,48 @@ int TIntermediate__addUnaryMath(this, op, intermNode, param_4, symbolTable, para
   undefined4 stackTypeArraySize;
   undefined4 stackTypeStructure;
   undefined4 stackTypeFieldName;
-  char local_110 [20];
+  char stackTypeTailBytes [20];
   uint stackTypeBits;
-  undefined **local_f0 [8];
+  undefined **typeTemp1 [8];
   unsigned char aaStack_d0 [4];
-  uint local_cc;
-  undefined **local_c0 [9];
-  uint local_9c;
-  undefined **local_90 [9];
-  uint local_6c;
-  undefined **local_60 [9];
-  uint local_3c;
+  uint typeTemp1Bits;
+  undefined **typeTemp2 [9];
+  uint typeTemp2Bits;
+  undefined **typeTemp3 [9];
+  uint typeTemp3Bits;
+  undefined **typeTemp4 [9];
+  uint typeTemp4Bits;
   
-  uVar7 = param_4;
+  nominalSize = sourceLoc;
   a4 = symbolTable;
   a1 = (int *)(**(code **)(*intermNode + 0x14))
-                        (intermNode,op,intermNode,param_4,symbolTable,param_6,param_7);
+                        (intermNode,op,intermNode,sourceLoc,symbolTable,scratchR8,scratchR9);
   if (a1 == (int *)0x0) {
     this_01 = *(void **)this;
                     
     ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(this_01,"INTERNAL ERROR: ");
-    uVar7 = param_4 & 0xffff;
-    cr0Flags = (uVar7 == 0) << 1;
-    if (uVar7 == 0) {
-      _sprintf(local_110,"%d:? ",(int)param_4 >> 0x10);
+    lineInString = sourceLoc & 0xffff;
+    cr0Flags = (lineInString == 0) << 1;
+    if (lineInString == 0) {
+      _sprintf(stackTypeTailBytes,"%d:? ",(int)sourceLoc >> 0x10);
     }
     else {
-      _sprintf(local_110,"%d:%d",(int)param_4 >> 0x10,uVar7);
+      _sprintf(stackTypeTailBytes,"%d:%d",(int)sourceLoc >> 0x10,lineInString);
     }
-    __ZNSsC1EPKcRKSaIcE(&stackType,local_110,aaStack_d0);
+    __ZNSsC1EPKcRKSaIcE(&stackType,stackTypeTailBytes,aaStack_d0);
     *(undefined *)((int)stackType + (int)stackType[-3]) = *PTR__S_terminal_a7b7c0b8;
     ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(this_01,(char *)stackType);
-    ppuVar6 = stackType + -1;
+    refCountPtr = stackType + -1;
     do {
-      oldRefCount = *ppuVar6;
+      oldRefCount = *refCountPtr;
       if (reservation != '\0') {
-        atomicStore = (undefined *)storeWordConditionalIndexed(oldRefCount + -1,0,ppuVar6);
-        *ppuVar6 = atomicStore;
+        atomicStore = (undefined *)storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+        *refCountPtr = atomicStore;
         cr0Flags = 2;
       }
     } while (!(bool)(cr0Flags >> 1 & 1));
     if ((int)oldRefCount < 1) {
-      __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(stackType + -3),local_110);
+      __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(stackType + -3),stackTypeTailBytes);
     }
     ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(this_01,": ");
     ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(this_01,"Bad type in AddUnaryMath");
@@ -3371,68 +3395,68 @@ int TIntermediate__addUnaryMath(this, op, intermNode, param_4, symbolTable, para
     return (int *)0x0;
   }
   if (op == 6) {
-    bVar5 = false;
-    bVar4 = false;
-    bVar3 = false;
-    bVar2 = false;
+    operandInvalid = false;
+    typeTemp2Live = false;
+    typeTemp3Live = false;
+    typeTemp4Live = false;
     (**(code **)(*a1 + 0x38))(&stackType,a1);
-    uVar14 = extraout_r4_00;
+    scratchR4 = extraout_r4_00;
     if ((stackTypeBits >> 0x13 & 0x3f) == 3) {
-      bVar4 = true;
-      (**(code **)(*a1 + 0x38))(local_c0,a1);
-      uVar14 = extraout_r4_01;
-      if ((local_9c & 0x400) != 0) goto LAB_97b8dcfc;
-      bVar3 = true;
-      (**(code **)(*a1 + 0x38))(local_90,a1);
-      uVar14 = extraout_r4_02;
-      if ((local_6c & 0x200) != 0) goto LAB_97b8dcfc;
-      bVar2 = true;
-      (**(code **)(*a1 + 0x38))(local_60,a1);
-      uVar14 = extraout_r4_03;
-      if ((1 < (int)(local_3c << 0xd | local_3c >> 0x13) >> 0x18) && ((local_3c & 0x400) == 0))
+      typeTemp2Live = true;
+      (**(code **)(*a1 + 0x38))(typeTemp2,a1);
+      scratchR4 = extraout_r4_01;
+      if ((typeTemp2Bits & 0x400) != 0) goto LAB_97b8dcfc;
+      typeTemp3Live = true;
+      (**(code **)(*a1 + 0x38))(typeTemp3,a1);
+      scratchR4 = extraout_r4_02;
+      if ((typeTemp3Bits & 0x200) != 0) goto LAB_97b8dcfc;
+      typeTemp4Live = true;
+      (**(code **)(*a1 + 0x38))(typeTemp4,a1);
+      scratchR4 = extraout_r4_03;
+      if ((1 < (int)(typeTemp4Bits << 0xd | typeTemp4Bits >> 0x13) >> 0x18) && ((typeTemp4Bits & 0x400) == 0))
       goto LAB_97b8dcfc;
 LAB_97b8dd0c:
-      local_60[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+      typeTemp4[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
     }
     else {
 LAB_97b8dcfc:
-      bVar5 = true;
-      if (bVar2) goto LAB_97b8dd0c;
+      operandInvalid = true;
+      if (typeTemp4Live) goto LAB_97b8dd0c;
     }
-    if (bVar3) {
-      local_90[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+    if (typeTemp3Live) {
+      typeTemp3[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
     }
-    if (bVar4) {
-      local_c0[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+    if (typeTemp2Live) {
+      typeTemp2[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
     }
 LAB_97b8ddc8:
     stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-    if (bVar5) {
+    if (operandInvalid) {
       return (int *)0x0;
     }
   }
   else {
-    uVar14 = extraout_r4;
+    scratchR4 = extraout_r4;
     if (op < 7) {
       if (op == 5) {
 LAB_97b8dd4c:
-        bVar5 = false;
+        operandInvalid = false;
         (**(code **)(*a1 + 0x38))(&stackType,a1);
-        bVar2 = false;
-        uVar14 = extraout_r4_04;
+        typeTemp1Live = false;
+        scratchR4 = extraout_r4_04;
         if ((stackTypeBits >> 0x13 & 0x3f) == 0xe) {
 LAB_97b8dda4:
-          bVar5 = true;
-          if (bVar2) goto LAB_97b8ddb4;
+          operandInvalid = true;
+          if (typeTemp1Live) goto LAB_97b8ddb4;
         }
         else {
-          (**(code **)(*a1 + 0x38))(local_f0,a1);
-          bVar2 = true;
-          param_7 = local_cc & 0x200;
-          uVar14 = extraout_r4_05;
-          if (param_7 != 0) goto LAB_97b8dda4;
+          (**(code **)(*a1 + 0x38))(typeTemp1,a1);
+          typeTemp1Live = true;
+          scratchR9 = typeTemp1Bits & 0x200;
+          scratchR4 = extraout_r4_05;
+          if (scratchR9 != 0) goto LAB_97b8dda4;
 LAB_97b8ddb4:
-          local_f0[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+          typeTemp1[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
         }
         goto LAB_97b8ddc8;
       }
@@ -3440,45 +3464,45 @@ LAB_97b8ddb4:
     else if (op - 9U < 4) goto LAB_97b8dd4c;
   }
   if (op == 0x67) {
-    iVar11 = 3;
+    targetBasicType = 3;
   }
   else if (op < 0x68) {
     if (op != 0x66) goto LAB_97b8decc;
-    iVar11 = 2;
+    targetBasicType = 2;
   }
   else {
     if (op != 0x68) goto LAB_97b8decc;
-    iVar11 = 1;
+    targetBasicType = 1;
   }
-  uVar7 = (**(code **)(*a1 + 0x48))(a1,uVar14,intermNode,uVar7,a4,param_6,param_7);
-  uVar9 = (**(code **)(*a1 + 0x50))(a1);
-  uVar10 = (**(code **)(*a1 + 0x54))(a1);
-  stackTypeBits = (uVar10 & 1) << 9 |
-             (uVar9 & 1) << 10 | (uVar7 & 0xff) << 0xb | iVar11 << 0x13 | stackTypeBits & 0x1ff;
-  local_110[0x10] = '\0';
-  local_110[0x11] = '\0';
-  local_110[0x12] = '\0';
-  local_110[0x13] = '\0';
+  nominalSize = (**(code **)(*a1 + 0x48))(a1,scratchR4,intermNode,nominalSize,a4,scratchR8,scratchR9);
+  isMatrix = (**(code **)(*a1 + 0x50))(a1);
+  isArray = (**(code **)(*a1 + 0x54))(a1);
+  stackTypeBits = (isArray & 1) << 9 |
+             (isMatrix & 1) << 10 | (nominalSize & 0xff) << 0xb | targetBasicType << 0x13 | stackTypeBits & 0x1ff;
+  stackTypeTailBytes[0x10] = '\0';
+  stackTypeTailBytes[0x11] = '\0';
+  stackTypeTailBytes[0x12] = '\0';
+  stackTypeTailBytes[0x13] = '\0';
   stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   stackTypeArraySize = 0;
   stackTypeStructure = 0;
   stackTypeFieldName = 0;
-  local_110[0] = '\0';
-  local_110[1] = '\0';
-  local_110[2] = '\0';
-  local_110[3] = '\0';
-  local_110[4] = '\0';
-  local_110[5] = '\0';
-  local_110[6] = '\0';
-  local_110[7] = '\0';
-  local_110[8] = '\0';
-  local_110[9] = '\0';
-  local_110[10] = '\0';
-  local_110[0xb] = '\0';
-  local_110[0xc] = '\0';
-  local_110[0xd] = '\0';
-  local_110[0xe] = '\0';
-  local_110[0xf] = '\0';
+  stackTypeTailBytes[0] = '\0';
+  stackTypeTailBytes[1] = '\0';
+  stackTypeTailBytes[2] = '\0';
+  stackTypeTailBytes[3] = '\0';
+  stackTypeTailBytes[4] = '\0';
+  stackTypeTailBytes[5] = '\0';
+  stackTypeTailBytes[6] = '\0';
+  stackTypeTailBytes[7] = '\0';
+  stackTypeTailBytes[8] = '\0';
+  stackTypeTailBytes[9] = '\0';
+  stackTypeTailBytes[10] = '\0';
+  stackTypeTailBytes[0xb] = '\0';
+  stackTypeTailBytes[0xc] = '\0';
+  stackTypeTailBytes[0xd] = '\0';
+  stackTypeTailBytes[0xe] = '\0';
+  stackTypeTailBytes[0xf] = '\0';
   a1 = (int *)((int (*)())TIntermediate__addConversion)(this,op,&stackType,a1);
   stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   if (a1 == (int *)0x0) {
@@ -3486,20 +3510,20 @@ LAB_97b8ddb4:
   }
 LAB_97b8decc:
   if (2 < op - 0x66U) {
-    iVar11 = (**(code **)(*a1 + 0x18))(a1);
-    if (iVar11 != 0) {
+    childConstantUnion = (**(code **)(*a1 + 0x18))(a1);
+    if (childConstantUnion != 0) {
       pTVar12 = (unsigned char *)(**(code **)(*a1 + 0x18))(a1);
       a1 = (int *)TIntermediate__copyConstUnion(this,pTVar12);
     }
-    iVar11 = (**(code **)(*a1 + 0x1c))(a1);
-    if (iVar11 != 0) {
+    childAggregate = (**(code **)(*a1 + 0x1c))(a1);
+    if (childAggregate != 0) {
       (**(code **)(*a1 + 0x38))(&stackType,a1);
       stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
       if (stackTypeBits >> 0x19 == 2) {
         pTVar13 = (unsigned char *)(**(code **)(*a1 + 0x1c))(a1);
-        a1 = (int *)TIntermediate__changeAggrToTempConst(this,pTVar13,symbolTable,param_4);
-        iVar11 = (**(code **)(*a1 + 0x18))(a1);
-        if (*(int *)(iVar11 + 0x30) == 0) {
+        a1 = (int *)TIntermediate__changeAggrToTempConst(this,pTVar13,symbolTable,sourceLoc);
+        constantUnionNode = (**(code **)(*a1 + 0x18))(a1);
+        if (*(int *)(constantUnionNode + 0x30) == 0) {
           return (int *)0x0;
         }
       }
@@ -3511,26 +3535,26 @@ LAB_97b8decc:
     stackTypeArraySize = 0;
     stackTypeStructure = 0;
     stackTypeFieldName = 0;
-    local_110[0] = '\0';
-    local_110[1] = '\0';
-    local_110[2] = '\0';
-    local_110[3] = '\0';
-    local_110[4] = '\0';
-    local_110[5] = '\0';
-    local_110[6] = '\0';
-    local_110[7] = '\0';
-    local_110[8] = '\0';
-    local_110[9] = '\0';
-    local_110[10] = '\0';
-    local_110[0xb] = '\0';
-    local_110[0xc] = '\0';
-    local_110[0xd] = '\0';
-    local_110[0xe] = '\0';
-    local_110[0xf] = '\0';
-    local_110[0x10] = '\0';
-    local_110[0x11] = '\0';
-    local_110[0x12] = '\0';
-    local_110[0x13] = '\0';
+    stackTypeTailBytes[0] = '\0';
+    stackTypeTailBytes[1] = '\0';
+    stackTypeTailBytes[2] = '\0';
+    stackTypeTailBytes[3] = '\0';
+    stackTypeTailBytes[4] = '\0';
+    stackTypeTailBytes[5] = '\0';
+    stackTypeTailBytes[6] = '\0';
+    stackTypeTailBytes[7] = '\0';
+    stackTypeTailBytes[8] = '\0';
+    stackTypeTailBytes[9] = '\0';
+    stackTypeTailBytes[10] = '\0';
+    stackTypeTailBytes[0xb] = '\0';
+    stackTypeTailBytes[0xc] = '\0';
+    stackTypeTailBytes[0xd] = '\0';
+    stackTypeTailBytes[0xe] = '\0';
+    stackTypeTailBytes[0xf] = '\0';
+    stackTypeTailBytes[0x10] = '\0';
+    stackTypeTailBytes[0x11] = '\0';
+    stackTypeTailBytes[0x12] = '\0';
+    stackTypeTailBytes[0x13] = '\0';
     *a0_00 = (int)&PTR_getLine_a7b7cf90;
     a0_00[1] = 0;
     a0_00[3] = 0;
@@ -3542,25 +3566,25 @@ LAB_97b8decc:
     a0_00[2] = (int)&PTR___ZN5TTypeD1Ev_a7b7cff8;
     a0_00[9] = 0;
     a0_00[10] = 0;
-    uVar7 = a0_00[0xb];
-    a0_00[0xb] = uVar7 & 0x1ffffff;
-    a0_00[0xb] = uVar7 & 0x7ffff | 0x80000;
-    a0_00[0xb] = uVar7 & 0x7ff | 0x80800;
-    a0_00[0xb] = uVar7 & 0x3ff | 0x80800;
-    puVar8 = PTR_vtable_a7b7c0d4;
-    a0_00[0xb] = uVar7 & 0x1ff | 0x80800;
+    oldTypeBits = a0_00[0xb];
+    a0_00[0xb] = oldTypeBits & 0x1ffffff;
+    a0_00[0xb] = oldTypeBits & 0x7ffff | 0x80000;
+    a0_00[0xb] = oldTypeBits & 0x7ff | 0x80800;
+    a0_00[0xb] = oldTypeBits & 0x3ff | 0x80800;
+    intermUnaryVtable = PTR_vtable_a7b7c0d4;
+    a0_00[0xb] = oldTypeBits & 0x1ff | 0x80800;
     stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-    *a0_00 = (int)(puVar8 + 8);
+    *a0_00 = (int)(intermUnaryVtable + 8);
     a0_00[0xd] = 0;
     a0_00[0xc] = op;
-    if (param_4 == 0) {
-      param_4 = (**(code **)*a1)(a1);
+    if (sourceLoc == 0) {
+      sourceLoc = (**(code **)*a1)(a1);
     }
-    (**(code **)(*a0_00 + 4))(a0_00,param_4);
+    (**(code **)(*a0_00 + 4))(a0_00,sourceLoc);
     (**(code **)(*a0_00 + 0x60))(a0_00,a1);
-    iVar11 = (**(code **)(*a0_00 + 0x5c))(a0_00,*(undefined4 *)this);
+    promoteResult = (**(code **)(*a0_00 + 0x5c))(a0_00,*(undefined4 *)this);
     a1 = (int *)0x0;
-    if ((iVar11 != 0) &&
+    if ((promoteResult != 0) &&
        ((a0 == (int *)0x0 ||
         (a1 = (int *)(**(code **)(*a0 + 0x5c))(a0,op,0,*(undefined4 *)this,1), a1 == (int *)0x0
         )))) {
@@ -3571,24 +3595,28 @@ LAB_97b8decc:
 }
 
 /* TIntermediate__setAggregateOperator @ 0x97b8e1b8 (1132 bytes) */
-int TIntermediate__setAggregateOperator(this, intermNode, op, param_4)
+int TIntermediate__setAggregateOperator(this, intermNode, op, line)
   unsigned char * this;
   unsigned char * intermNode;
   undefined4 op;
-  int param_4;
+  int line;
 {
-  unsigned int ghidra_home[8] = { this, intermNode, op, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  bool bVar1;
-  undefined *puVar2;
-  uint uVar3;
-  int *piVar4;
+  int stringAllocator;
+  int sequenceFinishValue;
+  int emptyStringRep;
+  int nameAllocator;
+  unsigned int ghidra_home[8] = { this, intermNode, op, line, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  bool noLine;
+  undefined *intermAggregateVtable;
+  uint oldTypeBits;
+  int *emptyRepRefCount;
   int *a0;
   unsigned char * poolAllocator;
-  int iVar6;
-  int iVar7;
+  int sequenceAllocator;
+  int atomicStore;
   unsigned char * this_00;
-  undefined4 *puVar8;
-  code *pcVar9;
+  undefined4 *sequenceFinish;
+  code *getSequenceFn;
   char reservation;
   byte cr0Flags;
   unsigned char * pTStack0000001c;
@@ -3609,45 +3637,45 @@ int TIntermediate__setAggregateOperator(this, intermNode, op, param_4)
     a0[2] = (int)&PTR___ZN5TTypeD1Ev_a7b7cff8;
     a0[9] = 0;
     a0[10] = 0;
-    uVar3 = a0[0xb];
-    a0[0xb] = uVar3 & 0x1ffffff;
-    a0[0xb] = uVar3 & 0x7ffff | 0x80000;
-    a0[0xb] = uVar3 & 0x7ff | 0x80800;
-    a0[0xb] = uVar3 & 0x3ff | 0x80800;
-    puVar2 = PTR_vtable_a7b7c0d0;
-    a0[0xb] = uVar3 & 0x1ff | 0x80800;
-    *a0 = (int)(puVar2 + 8);
+    oldTypeBits = a0[0xb];
+    a0[0xb] = oldTypeBits & 0x1ffffff;
+    a0[0xb] = oldTypeBits & 0x7ffff | 0x80000;
+    a0[0xb] = oldTypeBits & 0x7ff | 0x80800;
+    a0[0xb] = oldTypeBits & 0x3ff | 0x80800;
+    intermAggregateVtable = PTR_vtable_a7b7c0d0;
+    a0[0xb] = oldTypeBits & 0x1ff | 0x80800;
+    *a0 = (int)(intermAggregateVtable + 8);
     a0[0xc] = 0;
-    iVar6 = GetGlobalPoolAllocator();
+    sequenceAllocator = GetGlobalPoolAllocator();
     a0[0x10] = 0;
     a0[0xe] = 0;
     a0[0xf] = 0;
-    a0[0xd] = iVar6;
-    iVar6 = GetGlobalPoolAllocator();
-    a0[0x11] = iVar6;
-    iVar6 = DAT_a7b7b9b8;
+    a0[0xd] = sequenceAllocator;
+    nameAllocator = GetGlobalPoolAllocator();
+    a0[0x11] = nameAllocator;
+    emptyStringRep = DAT_a7b7b9b8;
     a0[0x14] = 0;
     a0[0x12] = 0;
-    piVar4 = (int *)(iVar6 + 8);
+    emptyRepRefCount = (int *)(emptyStringRep + 8);
     a0[0x13] = 0;
     do {
       if (reservation != '\0') {
-        iVar7 = storeWordConditionalIndexed(*piVar4 + 1,0,piVar4);
-        *piVar4 = iVar7;
+        atomicStore = storeWordConditionalIndexed(*emptyRepRefCount + 1,0,emptyRepRefCount);
+        *emptyRepRefCount = atomicStore;
         cr0Flags = 2;
       }
     } while (!(bool)(cr0Flags >> 1 & 1));
-    iVar7 = GetGlobalPoolAllocator();
-    a0[0x16] = iVar6 + 0xc;
-    bVar1 = param_4 == 0;
+    stringAllocator = GetGlobalPoolAllocator();
+    a0[0x16] = emptyStringRep + 0xc;
+    noLine = line == 0;
     a0[0x1a] = 0;
-    a0[0x15] = iVar7;
+    a0[0x15] = stringAllocator;
     a0[0x17] = 0;
   }
   else {
     a0 = (int *)(**(code **)(*(int *)intermNode + 0x1c))(intermNode);
     cr0Flags = (a0 == (int *)0x0) << 1;
-    if ((a0 == (int *)0x0) || (bVar1 = param_4 == 0, a0[0xc] != 0)) {
+    if ((a0 == (int *)0x0) || (noLine = line == 0, a0[0xc] != 0)) {
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
       a0 = (int *)TPoolAllocator__allocate(poolAllocator,0x6c);
       a0[1] = 0;
@@ -3661,64 +3689,64 @@ int TIntermediate__setAggregateOperator(this, intermNode, op, param_4)
       a0[2] = (int)&PTR___ZN5TTypeD1Ev_a7b7cff8;
       a0[9] = 0;
       a0[10] = 0;
-      uVar3 = a0[0xb];
-      a0[0xb] = uVar3 & 0x1ffffff;
-      a0[0xb] = uVar3 & 0x7ffff | 0x80000;
-      a0[0xb] = uVar3 & 0x7ff | 0x80800;
-      a0[0xb] = uVar3 & 0x3ff | 0x80800;
-      puVar2 = PTR_vtable_a7b7c0d0;
-      a0[0xb] = uVar3 & 0x1ff | 0x80800;
-      *a0 = (int)(puVar2 + 8);
+      oldTypeBits = a0[0xb];
+      a0[0xb] = oldTypeBits & 0x1ffffff;
+      a0[0xb] = oldTypeBits & 0x7ffff | 0x80000;
+      a0[0xb] = oldTypeBits & 0x7ff | 0x80800;
+      a0[0xb] = oldTypeBits & 0x3ff | 0x80800;
+      intermAggregateVtable = PTR_vtable_a7b7c0d0;
+      a0[0xb] = oldTypeBits & 0x1ff | 0x80800;
+      *a0 = (int)(intermAggregateVtable + 8);
       a0[0xc] = 0;
-      iVar6 = GetGlobalPoolAllocator();
+      sequenceAllocator = GetGlobalPoolAllocator();
       a0[0x10] = 0;
       a0[0xe] = 0;
       a0[0xf] = 0;
-      a0[0xd] = iVar6;
-      iVar6 = GetGlobalPoolAllocator();
-      a0[0x11] = iVar6;
-      iVar6 = DAT_a7b7b9b8;
+      a0[0xd] = sequenceAllocator;
+      nameAllocator = GetGlobalPoolAllocator();
+      a0[0x11] = nameAllocator;
+      emptyStringRep = DAT_a7b7b9b8;
       a0[0x14] = 0;
       a0[0x12] = 0;
-      piVar4 = (int *)(iVar6 + 8);
+      emptyRepRefCount = (int *)(emptyStringRep + 8);
       a0[0x13] = 0;
       do {
         if (reservation != '\0') {
-          iVar7 = storeWordConditionalIndexed(*piVar4 + 1,0,piVar4);
-          *piVar4 = iVar7;
+          atomicStore = storeWordConditionalIndexed(*emptyRepRefCount + 1,0,emptyRepRefCount);
+          *emptyRepRefCount = atomicStore;
           cr0Flags = 2;
         }
       } while (!(bool)(cr0Flags >> 1 & 1));
-      iVar7 = GetGlobalPoolAllocator();
-      a0[0x16] = iVar6 + 0xc;
-      a0[0x15] = iVar7;
-      pcVar9 = *(code **)(*a0 + 100);
+      stringAllocator = GetGlobalPoolAllocator();
+      a0[0x16] = emptyStringRep + 0xc;
+      a0[0x15] = stringAllocator;
+      getSequenceFn = *(code **)(*a0 + 100);
       a0[0x1a] = 0;
       a0[0x17] = 0;
-      this_00 = (unsigned char *)(*pcVar9)(a0);
-      puVar8 = *(undefined4 **)(this_00 + 8);
-      if (puVar8 == *(undefined4 **)(this_00 + 0xc)) {
+      this_00 = (unsigned char *)(*getSequenceFn)(a0);
+      sequenceFinish = *(undefined4 **)(this_00 + 8);
+      if (sequenceFinish == *(undefined4 **)(this_00 + 0xc)) {
         std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux
-                  (this_00,puVar8,&(*(unsigned int *)((unsigned char *)ghidra_home + 4)));
+                  (this_00,sequenceFinish,&(*(unsigned int *)((unsigned char *)ghidra_home + 4)));
       }
       else {
-        iVar6 = 0;
-        if (puVar8 != (undefined4 *)0x0) {
-          *puVar8 = pTStack0000001c;
-          iVar6 = *(int *)(this_00 + 8);
+        sequenceFinishValue = 0;
+        if (sequenceFinish != (undefined4 *)0x0) {
+          *sequenceFinish = pTStack0000001c;
+          sequenceFinishValue = *(int *)(this_00 + 8);
         }
-        *(int *)(this_00 + 8) = iVar6 + 4;
+        *(int *)(this_00 + 8) = sequenceFinishValue + 4;
       }
-      bVar1 = false;
-      if (param_4 == 0) {
-        param_4 = (*(code *)**(undefined4 **)pTStack0000001c)(pTStack0000001c);
-        bVar1 = param_4 == 0;
+      noLine = false;
+      if (line == 0) {
+        line = (*(code *)**(undefined4 **)pTStack0000001c)(pTStack0000001c);
+        noLine = line == 0;
       }
     }
   }
   (**(code **)(*a0 + 0x60))(a0,op);
-  if (!bVar1) {
-    (**(code **)(*a0 + 4))(a0,param_4);
+  if (!noLine) {
+    (**(code **)(*a0 + 4))(a0,line);
   }
   return a0;
 }
@@ -3730,12 +3758,16 @@ int TIntermediate__addConversion(this, op, type, intermTyped)
   unsigned char * type;
   int *intermTyped;
 {
+  uint matrixBit;
+  uint basicTypeBits;
+  undefined4 line;
+  undefined4 scratchR4;
   undefined *oldRefCount;
   undefined *atomicStore;
   bool isAggregateOnly;
-  undefined **ppuVar3;
-  undefined *puVar4;
-  uint uVar5;
+  undefined **refCountPtr;
+  undefined *intermUnaryVtable;
+  uint oldTypeBits;
   int sourceBasicTypeOrSequence;
   uint targetBasicType;
   int *typedNodeTemp;
@@ -3743,9 +3775,9 @@ int TIntermediate__addConversion(this, op, type, intermTyped)
   unsigned char * convertedValue;
   int constantUnionOrNewNode;
   int *nodeTemp;
-  undefined4 uVar13;
-  uint uVar14;
-  uint uVar15;
+  undefined4 constantUnion;
+  uint isMatrix;
+  uint isArray;
   undefined4 a1;
   undefined4 a1_00;
   undefined4 a1_01;
@@ -3753,12 +3785,12 @@ int TIntermediate__addConversion(this, op, type, intermTyped)
   undefined4 extraout_r4_00;
   undefined4 extraout_r4_01;
   unsigned char * a2;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 scratchR7;
+  undefined4 scratchR8;
   undefined4 *a6;
   unsigned char * sequenceCursor;
   char *errorText;
-  undefined4 *puVar18;
+  undefined4 *childCursor;
   uint childBasicType;
   void *infoSink;
   char reservation;
@@ -3773,12 +3805,12 @@ int TIntermediate__addConversion(this, op, type, intermTyped)
   int stackTypeWord1c;
   int stackTypeWord20;
   uint stackTypeBits;
-  undefined4 local_90;
+  undefined4 i2dHi;
   undefined4 *puStack_8c;
   char acStack_80 [64];
-  longlong local_40;
+  longlong d2iScratch;
   undefined1 auStack_38 [4];
-  int local_34;
+  int newNodeSlot;
   
   a2 = type;
   nodeTemp = intermTyped;
@@ -3802,7 +3834,7 @@ int TIntermediate__addConversion(this, op, type, intermTyped)
   if (*(int *)(type + 8) != 0) {
     return (int *)0x0;
   }
-  (**(code **)(*intermTyped + 0x38))((unsigned char *)&stackType,intermTyped,a2,nodeTemp,in_r7,in_r8,0);
+  (**(code **)(*intermTyped + 0x38))((unsigned char *)&stackType,intermTyped,a2,nodeTemp,scratchR7,scratchR8,0);
   stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   if (stackTypeStructure != 0) {
     return (int *)0x0;
@@ -3859,7 +3891,7 @@ LAB_97b8e8ac:
         if (childBasicType == 1) {
           nodeTemp = (int *)(**(code **)(**(int **)sequenceCursor + 0x14))(*(int **)sequenceCursor);
           constantUnionOrNewNode = (**(code **)(*nodeTemp + 0x18))(nodeTemp);
-          local_40 = (longlong)(int)**(float **)(constantUnionOrNewNode + 0x30);
+          d2iScratch = (longlong)(int)**(float **)(constantUnionOrNewNode + 0x30);
           *(int *)convertedValue = (int)**(float **)(constantUnionOrNewNode + 0x30);
 LAB_97b8ec88:
           stackTypeBits = targetBasicType << 0x13 | stackTypeBits & 0x7ff | 0x4000000 | 0x800;
@@ -3868,7 +3900,7 @@ LAB_97b8ec88:
           if (childBasicType != 3) {
             infoSink = *(void **)this;
             errorText = "Bad promotion node";
-            targetBasicType = (**(code **)*intermTyped)(intermTyped,a1_00,a2,nodeTemp,in_r7,in_r8,a6);
+            targetBasicType = (**(code **)*intermTyped)(intermTyped,a1_00,a2,nodeTemp,scratchR7,scratchR8,a6);
                     
             goto override_jmp_97b8ea8c_case_0;
           }
@@ -3896,9 +3928,9 @@ LAB_97b8ed90:
         stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
         if (constantUnionOrNewNode != 0) {
           std__vector_TIntermNode__pool_allocator_TIntermNode_____erase(auStack_38,sourceBasicTypeOrSequence,sequenceCursor);
-          nodeTemp = &local_34;
+          nodeTemp = &newNodeSlot;
           a2 = sequenceCursor;
-          local_34 = constantUnionOrNewNode;
+          newNodeSlot = constantUnionOrNewNode;
           std__vector_TIntermNode__pool_allocator_TIntermNode_____insert
                     (auStack_38,sourceBasicTypeOrSequence,sequenceCursor,nodeTemp);
         }
@@ -3920,17 +3952,17 @@ LAB_97b8ed90:
             if (childBasicType != 3) {
               infoSink = *(void **)this;
               errorText = "Bad promotion node";
-              targetBasicType = (**(code **)*intermTyped)(intermTyped,a1,a2,nodeTemp,in_r7,in_r8,a6);
+              targetBasicType = (**(code **)*intermTyped)(intermTyped,a1,a2,nodeTemp,scratchR7,scratchR8,a6);
                     
               goto override_jmp_97b8ea8c_case_0;
             }
             nodeTemp = (int *)(**(code **)(**(int **)sequenceCursor + 0x14))
-                                       (*(int **)sequenceCursor,a1,a2,nodeTemp,in_r7,in_r8,a6);
+                                       (*(int **)sequenceCursor,a1,a2,nodeTemp,scratchR7,scratchR8,a6);
             constantUnionOrNewNode = (**(code **)(*nodeTemp + 0x18))(nodeTemp);
             a6 = (undefined4 *)**(undefined4 **)(constantUnionOrNewNode + 0x30);
             *(float *)convertedValue = (float)((double)CONCAT44(0x43300000,a6) - 4503599627370496.0);
           }
-          local_90 = 0x43300000;
+          i2dHi = 0x43300000;
           stackTypeBits = stackTypeBits & 0x7ff | 0x4080800;
           puStack_8c = a6;
           goto LAB_97b8ed90;
@@ -3957,7 +3989,7 @@ LAB_97b8ed90:
         }
         infoSink = *(void **)this;
         errorText = "Bad promotion node";
-        targetBasicType = (**(code **)*intermTyped)(intermTyped,a1_01,a2,nodeTemp,in_r7,in_r8,a6);
+        targetBasicType = (**(code **)*intermTyped)(intermTyped,a1_01,a2,nodeTemp,scratchR7,scratchR8,a6);
                     
         goto override_jmp_97b8ea8c_case_0;
       }
@@ -3976,9 +4008,9 @@ LAB_97b8ed90:
     else {
       typedNodeTemp = (int *)(**(code **)(*intermTyped + 0x1c))(intermTyped);
       sourceBasicTypeOrSequence = (**(code **)(*typedNodeTemp + 100))(typedNodeTemp);
-      for (puVar18 = *(undefined4 **)(sourceBasicTypeOrSequence + 4); puVar18 != *(undefined4 **)(sourceBasicTypeOrSequence + 8);
-          puVar18 = puVar18 + 1) {
-        typedNodeTemp = (int *)(**(code **)(*(int *)*puVar18 + 0x14))((int *)*puVar18);
+      for (childCursor = *(undefined4 **)(sourceBasicTypeOrSequence + 4); childCursor != *(undefined4 **)(sourceBasicTypeOrSequence + 8);
+          childCursor = childCursor + 1) {
+        typedNodeTemp = (int *)(**(code **)(*(int *)*childCursor + 0x14))((int *)*childCursor);
         constantUnionOrNewNode = (**(code **)(*typedNodeTemp + 0x18))(typedNodeTemp);
         if (constantUnionOrNewNode == 0) {
           isAggregateOnly = false;
@@ -3989,15 +4021,15 @@ LAB_97b8ed90:
   }
   sourceBasicTypeOrSequence = (**(code **)(*intermTyped + 0x18))(intermTyped);
   if (sourceBasicTypeOrSequence != 0) {
-    uVar13 = (**(code **)(*intermTyped + 0x18))(intermTyped);
-    nodeTemp = (int *)TIntermediate__promoteConstantUnion(this,targetBasicType,uVar13);
+    constantUnion = (**(code **)(*intermTyped + 0x18))(intermTyped);
+    nodeTemp = (int *)TIntermediate__promoteConstantUnion(this,targetBasicType,constantUnion);
     return nodeTemp;
   }
   if (targetBasicType != 2) {
     if (targetBasicType < 3) {
       if (targetBasicType == 1) {
         sourceBasicTypeOrSequence = (**(code **)(*intermTyped + 0x40))(intermTyped);
-        uVar13 = extraout_r4;
+        scratchR4 = extraout_r4;
         if (sourceBasicTypeOrSequence == 2) {
           constantUnionOrNewNode = 0x10;
         }
@@ -4016,7 +4048,7 @@ LAB_97b8ed90:
     }
     else if (targetBasicType == 3) {
       sourceBasicTypeOrSequence = (**(code **)(*intermTyped + 0x40))(intermTyped);
-      uVar13 = extraout_r4_00;
+      scratchR4 = extraout_r4_00;
       if (sourceBasicTypeOrSequence == 1) {
         constantUnionOrNewNode = 0xe;
       }
@@ -4049,12 +4081,12 @@ override_jmp_97b8ea8c_case_0:
     __ZNSsC1EPKcRKSaIcE(&stackType,acStack_80,(unsigned char *)&stackTypeTypeName);
     *(undefined *)((int)stackType + (int)stackType[-3]) = *PTR__S_terminal_a7b7c0b8;
     ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(infoSink,(char *)stackType);
-    ppuVar3 = stackType + -1;
+    refCountPtr = stackType + -1;
     do {
-      oldRefCount = *ppuVar3;
+      oldRefCount = *refCountPtr;
       if (reservation != '\0') {
-        atomicStore = (undefined *)storeWordConditionalIndexed(oldRefCount + -1,0,ppuVar3);
-        *ppuVar3 = atomicStore;
+        atomicStore = (undefined *)storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+        *refCountPtr = atomicStore;
         cr0Flags = 2;
       }
     } while (!(bool)(cr0Flags >> 1 & 1));
@@ -4067,7 +4099,7 @@ override_jmp_97b8ea8c_case_0:
     return (int *)0x0;
   }
   sourceBasicTypeOrSequence = (**(code **)(*intermTyped + 0x40))(intermTyped);
-  uVar13 = extraout_r4_01;
+  scratchR4 = extraout_r4_01;
   if (sourceBasicTypeOrSequence == 1) {
     constantUnionOrNewNode = 0x11;
   }
@@ -4082,12 +4114,12 @@ override_jmp_97b8ea8c_case_0:
     }
   }
 LAB_97b8f1ac:
-  childBasicType = (**(code **)(*intermTyped + 0x48))(intermTyped,uVar13);
-  uVar14 = (**(code **)(*intermTyped + 0x50))(intermTyped);
-  uVar15 = (**(code **)(*intermTyped + 0x54))(intermTyped);
+  childBasicType = (**(code **)(*intermTyped + 0x48))(intermTyped,scratchR4);
+  isMatrix = (**(code **)(*intermTyped + 0x50))(intermTyped);
+  isArray = (**(code **)(*intermTyped + 0x54))(intermTyped);
   stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-  stackTypeBits = (uVar15 & 1) << 9 |
-             (uVar14 & 1) << 10 | (childBasicType & 0xff) << 0xb | targetBasicType << 0x13 | stackTypeBits & 0x1ff;
+  stackTypeBits = (isArray & 1) << 9 |
+             (isMatrix & 1) << 10 | (childBasicType & 0xff) << 0xb | targetBasicType << 0x13 | stackTypeBits & 0x1ff;
   stackTypeArraySize = 0;
   stackTypeStructure = 0;
   stackTypeFieldName = 0;
@@ -4109,43 +4141,47 @@ LAB_97b8f1ac:
   nodeTemp[2] = (int)&PTR___ZN5TTypeD1Ev_a7b7cff8;
   nodeTemp[10] = stackTypeWord20;
   nodeTemp[9] = stackTypeWord1c;
-  puVar4 = PTR_vtable_a7b7c0d4;
-  uVar5 = nodeTemp[0xb];
+  intermUnaryVtable = PTR_vtable_a7b7c0d4;
+  oldTypeBits = nodeTemp[0xb];
   childBasicType = stackTypeBits & 0xfe000000;
-  nodeTemp[0xb] = childBasicType | uVar5 & 0x1ffffff;
-  uVar14 = (stackTypeBits >> 0x13 & 0x3f) << 0x13;
-  nodeTemp[0xb] = uVar14 | childBasicType | uVar5 & 0x7ffff;
+  nodeTemp[0xb] = childBasicType | oldTypeBits & 0x1ffffff;
+  basicTypeBits = (stackTypeBits >> 0x13 & 0x3f) << 0x13;
+  nodeTemp[0xb] = basicTypeBits | childBasicType | oldTypeBits & 0x7ffff;
   targetBasicType = stackTypeBits & 0x7f800;
-  nodeTemp[0xb] = targetBasicType | uVar14 | childBasicType | uVar5 & 0x7ff;
-  uVar15 = (stackTypeBits >> 10 & 1) << 10;
-  nodeTemp[0xb] = uVar15 | targetBasicType | uVar14 | childBasicType | uVar5 & 0x3ff;
-  nodeTemp[0xb] = (stackTypeBits >> 9 & 1) << 9 | uVar15 | targetBasicType | uVar14 | childBasicType | uVar5 & 0x1ff;
+  nodeTemp[0xb] = targetBasicType | basicTypeBits | childBasicType | oldTypeBits & 0x7ff;
+  matrixBit = (stackTypeBits >> 10 & 1) << 10;
+  nodeTemp[0xb] = matrixBit | targetBasicType | basicTypeBits | childBasicType | oldTypeBits & 0x3ff;
+  nodeTemp[0xb] = (stackTypeBits >> 9 & 1) << 9 | matrixBit | targetBasicType | basicTypeBits | childBasicType | oldTypeBits & 0x1ff;
   nodeTemp[0xc] = constantUnionOrNewNode;
-  *nodeTemp = (int)(puVar4 + 8);
+  *nodeTemp = (int)(intermUnaryVtable + 8);
   nodeTemp[0xd] = 0;
-  uVar13 = (**(code **)*intermTyped)(intermTyped);
-  (**(code **)(puVar4 + 0xc))(nodeTemp,uVar13);
+  line = (**(code **)*intermTyped)(intermTyped);
+  (**(code **)(intermUnaryVtable + 0xc))(nodeTemp,line);
   (**(code **)(*nodeTemp + 0x60))(nodeTemp,intermTyped);
   return nodeTemp;
 }
 
 /* TIntermediate__growAggregate @ 0x97b8f36c (760 bytes) */
-int TIntermediate__growAggregate(this, intermNode1, intermNode2, param_4)
+int TIntermediate__growAggregate(this, intermNode1, intermNode2, line)
   unsigned char * this;
   unsigned char * intermNode1;
   unsigned char * intermNode2;
-  int param_4;
+  int line;
 {
-  unsigned int ghidra_home[8] = { this, intermNode1, intermNode2, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  undefined *puVar1;
-  uint uVar2;
-  int *piVar3;
+  int stringAllocator;
+  int sequenceFinishValue;
+  int emptyStringRep;
+  int nameAllocator;
+  unsigned int ghidra_home[8] = { this, intermNode1, intermNode2, line, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  undefined *intermAggregateVtable;
+  uint oldTypeBits;
+  int *emptyRepRefCount;
   int *a0;
   unsigned char * this_00;
-  int iVar4;
-  int iVar5;
-  unsigned char * pvVar6;
-  undefined4 *puVar7;
+  int sequenceAllocator;
+  int atomicStore;
+  unsigned char * sequence;
+  undefined4 *sequenceFinish;
   char reservation;
   byte cr0Reg;
   unsigned char * pTStack0000001c;
@@ -4174,96 +4210,102 @@ int TIntermediate__growAggregate(this, intermNode1, intermNode2, param_4)
   a0[2] = (int)&PTR___ZN5TTypeD1Ev_a7b7cff8;
   a0[9] = 0;
   a0[10] = 0;
-  uVar2 = a0[0xb];
-  a0[0xb] = uVar2 & 0x1ffffff;
-  a0[0xb] = uVar2 & 0x7ffff | 0x80000;
-  a0[0xb] = uVar2 & 0x7ff | 0x80800;
-  a0[0xb] = uVar2 & 0x3ff | 0x80800;
-  puVar1 = PTR_vtable_a7b7c0d0;
-  a0[0xb] = uVar2 & 0x1ff | 0x80800;
-  *a0 = (int)(puVar1 + 8);
+  oldTypeBits = a0[0xb];
+  a0[0xb] = oldTypeBits & 0x1ffffff;
+  a0[0xb] = oldTypeBits & 0x7ffff | 0x80000;
+  a0[0xb] = oldTypeBits & 0x7ff | 0x80800;
+  a0[0xb] = oldTypeBits & 0x3ff | 0x80800;
+  intermAggregateVtable = PTR_vtable_a7b7c0d0;
+  a0[0xb] = oldTypeBits & 0x1ff | 0x80800;
+  *a0 = (int)(intermAggregateVtable + 8);
   a0[0xc] = 0;
-  iVar4 = GetGlobalPoolAllocator();
+  sequenceAllocator = GetGlobalPoolAllocator();
   a0[0x10] = 0;
   a0[0xe] = 0;
   a0[0xf] = 0;
-  a0[0xd] = iVar4;
-  iVar4 = GetGlobalPoolAllocator();
-  a0[0x11] = iVar4;
-  iVar4 = DAT_a7b7b9b8;
+  a0[0xd] = sequenceAllocator;
+  nameAllocator = GetGlobalPoolAllocator();
+  a0[0x11] = nameAllocator;
+  emptyStringRep = DAT_a7b7b9b8;
   a0[0x14] = 0;
   a0[0x12] = 0;
-  piVar3 = (int *)(iVar4 + 8);
+  emptyRepRefCount = (int *)(emptyStringRep + 8);
   a0[0x13] = 0;
   do {
     if (reservation != '\0') {
-      iVar5 = storeWordConditionalIndexed(*piVar3 + 1,0,piVar3);
-      *piVar3 = iVar5;
+      atomicStore = storeWordConditionalIndexed(*emptyRepRefCount + 1,0,emptyRepRefCount);
+      *emptyRepRefCount = atomicStore;
       cr0Reg = 2;
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
-  iVar5 = GetGlobalPoolAllocator();
-  a0[0x16] = iVar4 + 0xc;
-  a0[0x15] = iVar5;
+  stringAllocator = GetGlobalPoolAllocator();
+  a0[0x16] = emptyStringRep + 0xc;
+  a0[0x15] = stringAllocator;
   a0[0x1a] = 0;
   a0[0x17] = 0;
   if (pTStack0000001c != (unsigned char *)0x0) {
-    pvVar6 = (unsigned char *)(**(code **)(*a0 + 100))(a0);
-    puVar7 = *(undefined4 **)(pvVar6 + 8);
-    if (puVar7 == *(undefined4 **)(pvVar6 + 0xc)) {
+    sequence = (unsigned char *)(**(code **)(*a0 + 100))(a0);
+    sequenceFinish = *(undefined4 **)(sequence + 8);
+    if (sequenceFinish == *(undefined4 **)(sequence + 0xc)) {
       std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux
-                (pvVar6,puVar7,&(*(unsigned int *)((unsigned char *)ghidra_home + 4)));
+                (sequence,sequenceFinish,&(*(unsigned int *)((unsigned char *)ghidra_home + 4)));
     }
     else {
-      iVar4 = 0;
-      if (puVar7 != (undefined4 *)0x0) {
-        *puVar7 = pTStack0000001c;
-        iVar4 = *(int *)(pvVar6 + 8);
+      sequenceFinishValue = 0;
+      if (sequenceFinish != (undefined4 *)0x0) {
+        *sequenceFinish = pTStack0000001c;
+        sequenceFinishValue = *(int *)(sequence + 8);
       }
-      *(int *)(pvVar6 + 8) = iVar4 + 4;
+      *(int *)(sequence + 8) = sequenceFinishValue + 4;
     }
   }
 LAB_97b8f5cc:
   if (pTStack00000020 != (unsigned char *)0x0) {
-    pvVar6 = (unsigned char *)(**(code **)(*a0 + 100))(a0);
-    puVar7 = *(undefined4 **)(pvVar6 + 8);
-    if (puVar7 == *(undefined4 **)(pvVar6 + 0xc)) {
+    sequence = (unsigned char *)(**(code **)(*a0 + 100))(a0);
+    sequenceFinish = *(undefined4 **)(sequence + 8);
+    if (sequenceFinish == *(undefined4 **)(sequence + 0xc)) {
       std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux
-                (pvVar6,puVar7,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
+                (sequence,sequenceFinish,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
     }
     else {
-      iVar4 = 0;
-      if (puVar7 != (undefined4 *)0x0) {
-        *puVar7 = pTStack00000020;
-        iVar4 = *(int *)(pvVar6 + 8);
+      sequenceFinishValue = 0;
+      if (sequenceFinish != (undefined4 *)0x0) {
+        *sequenceFinish = pTStack00000020;
+        sequenceFinishValue = *(int *)(sequence + 8);
       }
-      *(int *)(pvVar6 + 8) = iVar4 + 4;
+      *(int *)(sequence + 8) = sequenceFinishValue + 4;
     }
   }
-  if (param_4 != 0) {
-    (**(code **)(*a0 + 4))(a0,param_4);
+  if (line != 0) {
+    (**(code **)(*a0 + 4))(a0,line);
   }
   return a0;
 }
 
 /* TIntermediate__makeAggregate @ 0x97b8f664 (632 bytes) */
-int TIntermediate__makeAggregate(this, intermNode, param_3)
+int TIntermediate__makeAggregate(this, intermNode, line)
   unsigned char * this;
   unsigned char * intermNode;
-  int param_3;
+  int line;
 {
-  unsigned int ghidra_home[8] = { this, intermNode, param_3, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  undefined *puVar1;
-  uint uVar2;
-  int *piVar3;
+  code *setLineFn;
+  int stringAllocator;
+  int nodeVtable;
+  int sequenceFinishValue;
+  int emptyStringRep;
+  int nameAllocator;
+  unsigned int ghidra_home[8] = { this, intermNode, line, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  undefined *intermAggregateVtable;
+  uint oldTypeBits;
+  int *emptyRepRefCount;
   int *a0;
   unsigned char * this_00;
-  int iVar4;
-  int iVar5;
+  int sequenceAllocator;
+  int atomicStore;
   unsigned char * this_01;
   undefined4 *a1;
   undefined4 *extraout_r4;
-  code *pcVar6;
+  code *getSequenceFn;
   char reservation;
   byte cr0Reg;
   unsigned char * pTStack0000001c;
@@ -4284,41 +4326,41 @@ int TIntermediate__makeAggregate(this, intermNode, param_3)
     a0[2] = (int)&PTR___ZN5TTypeD1Ev_a7b7cff8;
     a0[9] = 0;
     a0[10] = 0;
-    uVar2 = a0[0xb];
-    a0[0xb] = uVar2 & 0x1ffffff;
-    a0[0xb] = uVar2 & 0x7ffff | 0x80000;
-    a0[0xb] = uVar2 & 0x7ff | 0x80800;
-    a0[0xb] = uVar2 & 0x3ff | 0x80800;
-    puVar1 = PTR_vtable_a7b7c0d0;
-    a0[0xb] = uVar2 & 0x1ff | 0x80800;
-    *a0 = (int)(puVar1 + 8);
+    oldTypeBits = a0[0xb];
+    a0[0xb] = oldTypeBits & 0x1ffffff;
+    a0[0xb] = oldTypeBits & 0x7ffff | 0x80000;
+    a0[0xb] = oldTypeBits & 0x7ff | 0x80800;
+    a0[0xb] = oldTypeBits & 0x3ff | 0x80800;
+    intermAggregateVtable = PTR_vtable_a7b7c0d0;
+    a0[0xb] = oldTypeBits & 0x1ff | 0x80800;
+    *a0 = (int)(intermAggregateVtable + 8);
     a0[0xc] = 0;
-    iVar4 = GetGlobalPoolAllocator();
+    sequenceAllocator = GetGlobalPoolAllocator();
     a0[0x10] = 0;
     a0[0xe] = 0;
     a0[0xf] = 0;
-    a0[0xd] = iVar4;
-    iVar4 = GetGlobalPoolAllocator();
-    a0[0x11] = iVar4;
-    iVar4 = DAT_a7b7b9b8;
+    a0[0xd] = sequenceAllocator;
+    nameAllocator = GetGlobalPoolAllocator();
+    a0[0x11] = nameAllocator;
+    emptyStringRep = DAT_a7b7b9b8;
     a0[0x14] = 0;
     a0[0x12] = 0;
-    piVar3 = (int *)(iVar4 + 8);
+    emptyRepRefCount = (int *)(emptyStringRep + 8);
     a0[0x13] = 0;
     do {
       if (reservation != '\0') {
-        iVar5 = storeWordConditionalIndexed(*piVar3 + 1,0,piVar3);
-        *piVar3 = iVar5;
+        atomicStore = storeWordConditionalIndexed(*emptyRepRefCount + 1,0,emptyRepRefCount);
+        *emptyRepRefCount = atomicStore;
         cr0Reg = 2;
       }
     } while (!(bool)(cr0Reg >> 1 & 1));
-    iVar5 = GetGlobalPoolAllocator();
-    a0[0x16] = iVar4 + 0xc;
-    a0[0x15] = iVar5;
-    pcVar6 = *(code **)(*a0 + 100);
+    stringAllocator = GetGlobalPoolAllocator();
+    a0[0x16] = emptyStringRep + 0xc;
+    a0[0x15] = stringAllocator;
+    getSequenceFn = *(code **)(*a0 + 100);
     a0[0x1a] = 0;
     a0[0x17] = 0;
-    this_01 = (unsigned char *)(*pcVar6)(a0);
+    this_01 = (unsigned char *)(*getSequenceFn)(a0);
     a1 = *(undefined4 **)(this_01 + 8);
     if (a1 == *(undefined4 **)(this_01 + 0xc)) {
       std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux
@@ -4326,55 +4368,56 @@ int TIntermediate__makeAggregate(this, intermNode, param_3)
       a1 = extraout_r4;
     }
     else {
-      iVar4 = 0;
+      sequenceFinishValue = 0;
       if (a1 != (undefined4 *)0x0) {
         *a1 = pTStack0000001c;
-        iVar4 = *(int *)(this_01 + 8);
+        sequenceFinishValue = *(int *)(this_01 + 8);
       }
-      *(int *)(this_01 + 8) = iVar4 + 4;
+      *(int *)(this_01 + 8) = sequenceFinishValue + 4;
     }
-    if (param_3 == 0) {
-      iVar4 = *a0;
-      param_3 = (*(code *)**(undefined4 **)pTStack0000001c)(pTStack0000001c,a1);
-      pcVar6 = *(code **)(iVar4 + 4);
+    if (line == 0) {
+      nodeVtable = *a0;
+      line = (*(code *)**(undefined4 **)pTStack0000001c)(pTStack0000001c,a1);
+      setLineFn = *(code **)(nodeVtable + 4);
     }
     else {
-      pcVar6 = *(code **)(*a0 + 4);
+      setLineFn = *(code **)(*a0 + 4);
     }
-    (*pcVar6)(a0,param_3);
+    (*setLineFn)(a0,line);
   }
   return a0;
 }
 
 /* __ZN13TIntermediate12addSelectionEP12TIntermTyped15TIntermNodePairi @ 0x97b8f8dc (516 bytes) */
-int __ZN13TIntermediate12addSelectionEP12TIntermTyped15TIntermNodePairi(param_1, intermTyped, intermNodePair, param_4, param_5)
-  unsigned char * param_1;
+int __ZN13TIntermediate12addSelectionEP12TIntermTyped15TIntermNodePairi(intermediate, intermTyped, intermNodePair, falseBlock, line)
+  unsigned char * intermediate;
   int *intermTyped;
   undefined4 *intermNodePair;
-  undefined4 *param_4;
-  undefined4 param_5;
+  undefined4 *falseBlock;
+  undefined4 line;
 {
-  undefined *puVar1;
-  uint uVar2;
-  int iVar3;
-  int *piVar4;
+  int constUnion;
+  undefined *intermSelectionVtable;
+  uint oldTypeBits;
+  int condAsTyped;
+  int *condTypedNode;
   unsigned char * this;
   undefined4 *a0;
   undefined *a6;
-  code *pcVar5;
+  code *setLineFn;
   undefined4 *puStack00000020;
   undefined4 *puStack00000024;
   
   puStack00000020 = intermNodePair;
-  puStack00000024 = param_4;
-  iVar3 = (**(code **)(*intermTyped + 0x14))(intermTyped,intermTyped,intermNodePair,param_4,param_5);
-  if (iVar3 != 0) {
-    piVar4 = (int *)(**(code **)(*intermTyped + 0x14))(intermTyped);
-    iVar3 = (**(code **)(*piVar4 + 0x18))(piVar4);
-    if (iVar3 != 0) {
-      piVar4 = (int *)(**(code **)(*intermTyped + 0x14))(intermTyped);
-      iVar3 = (**(code **)(*piVar4 + 0x18))(piVar4);
-      if (**(int **)(iVar3 + 0x30) == 0) {
+  puStack00000024 = falseBlock;
+  condAsTyped = (**(code **)(*intermTyped + 0x14))(intermTyped,intermTyped,intermNodePair,falseBlock,line);
+  if (condAsTyped != 0) {
+    condTypedNode = (int *)(**(code **)(*intermTyped + 0x14))(intermTyped);
+    constUnion = (**(code **)(*condTypedNode + 0x18))(condTypedNode);
+    if (constUnion != 0) {
+      condTypedNode = (int *)(**(code **)(*intermTyped + 0x14))(intermTyped);
+      constUnion = (**(code **)(*condTypedNode + 0x18))(condTypedNode);
+      if (**(int **)(constUnion + 0x30) == 0) {
         return puStack00000024;
       }
       return puStack00000020;
@@ -4393,93 +4436,95 @@ int __ZN13TIntermediate12addSelectionEP12TIntermTyped15TIntermNodePairi(param_1,
   a0[2] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   a0[10] = 0;
   a0[9] = 0;
-  uVar2 = a0[0xb];
-  a0[0xb] = uVar2 & 0x1ffffff;
-  puVar1 = PTR_vtable_a7b7c0cc;
+  oldTypeBits = a0[0xb];
+  a0[0xb] = oldTypeBits & 0x1ffffff;
+  intermSelectionVtable = PTR_vtable_a7b7c0cc;
   a6 = PTR_vtable_a7b7c0cc + 8;
-  a0[0xb] = uVar2 & 0x7ffff;
-  pcVar5 = *(code **)(puVar1 + 0xc);
-  a0[0xb] = uVar2 & 0x7ff | 0x800;
-  a0[0xb] = uVar2 & 0x3ff | 0x800;
-  a0[0xb] = uVar2 & 0x1ff | 0x800;
+  a0[0xb] = oldTypeBits & 0x7ffff;
+  setLineFn = *(code **)(intermSelectionVtable + 0xc);
+  a0[0xb] = oldTypeBits & 0x7ff | 0x800;
+  a0[0xb] = oldTypeBits & 0x3ff | 0x800;
+  a0[0xb] = oldTypeBits & 0x1ff | 0x800;
   a0[0xc] = intermTyped;
   a0[0xd] = puStack00000020;
   a0[0xe] = puStack00000024;
   *a0 = a6;
-  (*pcVar5)(a0,param_5,intermNodePair,param_4,puStack00000024,puStack00000020,a6,
+  (*setLineFn)(a0,line,intermNodePair,falseBlock,puStack00000024,puStack00000020,a6,
             &PTR___ZN5TTypeD1Ev_a7b7cff8);
   return a0;
 }
 
 /* TIntermediate__addComma @ 0x97b8fae0 (348 bytes) */
-int TIntermediate__addComma(this, intermTyped1, intermTyped2, param_4)
+int TIntermediate__addComma(this, intermTyped1, intermTyped2, line)
   unsigned char * this;
   unsigned char * intermTyped1;
   unsigned char * intermTyped2;
-  int param_4;
+  int line;
 {
-  bool bVar1;
+  int *nodeType;
+  bool bothConst;
   unsigned char * pTVar2;
-  int *piVar3;
+  int *aggregate;
   int a3;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  undefined **local_b0 [9];
-  uint local_8c;
-  undefined **local_80 [9];
-  uint local_5c;
-  undefined **local_50 [13];
+  undefined4 scratchR7;
+  undefined4 scratchR8;
+  undefined **typeTemp1 [9];
+  uint typeTemp1Bits;
+  undefined **typeTemp2 [9];
+  uint typeTemp2Bits;
+  undefined **typeTemp3 [13];
   
-  bVar1 = false;
+  bothConst = false;
   pTVar2 = intermTyped2;
-  a3 = param_4;
-  (**(code **)(*(int *)intermTyped1 + 0x38))(local_b0,intermTyped1,intermTyped2,param_4);
-  if (local_8c >> 0x19 == 2) {
-    (**(code **)(*(int *)intermTyped2 + 0x38))(local_80,intermTyped2,pTVar2,a3,in_r7,in_r8,0xa7b7faf0);
-    bVar1 = local_5c >> 0x19 == 2;
-    local_80[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+  a3 = line;
+  (**(code **)(*(int *)intermTyped1 + 0x38))(typeTemp1,intermTyped1,intermTyped2,line);
+  if (typeTemp1Bits >> 0x19 == 2) {
+    (**(code **)(*(int *)intermTyped2 + 0x38))(typeTemp2,intermTyped2,pTVar2,a3,scratchR7,scratchR8,0xa7b7faf0);
+    bothConst = typeTemp2Bits >> 0x19 == 2;
+    typeTemp2[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   }
-  local_b0[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+  typeTemp1[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   pTVar2 = intermTyped2;
-  if (!bVar1) {
+  if (!bothConst) {
     pTVar2 = (unsigned char *)
-             ((int (*)())TIntermediate__growAggregate)(this,(unsigned char *)intermTyped1,(unsigned char *)intermTyped2,param_4);
-    piVar3 = (int *)(**(code **)(*(int *)pTVar2 + 0x1c))(pTVar2);
-    (**(code **)(*piVar3 + 0x60))(piVar3,0x25);
-    (**(code **)(*(int *)intermTyped2 + 0x38))(local_50,intermTyped2);
-    (**(code **)(*(int *)pTVar2 + 0x34))(pTVar2,local_50);
-    local_50[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-    piVar3 = (int *)(**(code **)(*(int *)pTVar2 + 0x3c))(pTVar2);
-    (**(code **)(*piVar3 + 0x28))(piVar3,0);
+             ((int (*)())TIntermediate__growAggregate)(this,(unsigned char *)intermTyped1,(unsigned char *)intermTyped2,line);
+    aggregate = (int *)(**(code **)(*(int *)pTVar2 + 0x1c))(pTVar2);
+    (**(code **)(*aggregate + 0x60))(aggregate,0x25);
+    (**(code **)(*(int *)intermTyped2 + 0x38))(typeTemp3,intermTyped2);
+    (**(code **)(*(int *)pTVar2 + 0x34))(pTVar2,typeTemp3);
+    typeTemp3[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+    nodeType = (int *)(**(code **)(*(int *)pTVar2 + 0x3c))(pTVar2);
+    (**(code **)(*nodeType + 0x28))(nodeType,0);
   }
   return pTVar2;
 }
 
 /* __ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i @ 0x97b8fc3c (628 bytes) */
-int __ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i(this, intermTyped1, intermTyped2, intermTyped3, param_5)
+int __ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i(this, intermTyped1, intermTyped2, intermTyped3, line)
   void *this;
   unsigned char * intermTyped1;
   unsigned char * intermTyped2;
   unsigned char * intermTyped3;
-  int param_5;
+  int line;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  undefined *puVar5;
-  uint uVar6;
-  int iVar7;
-  int iVar8;
+  int condConstUnion;
+  uint typeSizeBits;
+  uint typeQualifierBits;
+  uint typeBasicTypeBits;
+  uint typeMatrixBit;
+  undefined *intermSelectionVtable;
+  uint oldTypeBits;
+  int constantUnionTest;
+  int lineCopy;
   unsigned char * this_00;
   unsigned char * pTVar9;
   undefined4 a1;
   undefined ***a2;
   undefined ***a0;
   unsigned char * a3;
-  undefined4 in_r8;
+  undefined4 scratchR8;
   unsigned char * a0_00;
-  undefined8 uVar10;
+  undefined8 convertedBranchPair;
   undefined **stackType;
   int stackTypeArraySize;
   int stackTypeStructure;
@@ -4492,13 +4537,13 @@ int __ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i(this, intermTyped1,
   uint stackTypeBits;
   
   a0 = &stackType;
-  iVar8 = param_5;
-  (**(code **)(*(int *)intermTyped2 + 0x38))(&stackType,intermTyped2,intermTyped2,intermTyped3,param_5);
+  lineCopy = line;
+  (**(code **)(*(int *)intermTyped2 + 0x38))(&stackType,intermTyped2,intermTyped2,intermTyped3,line);
   a2 = &stackType;
   a3 = intermTyped3;
-  uVar10 = ((int (*)())TIntermediate__addConversion)(this,1,a2,intermTyped3);
-  a0_00 = (unsigned char *)((ulonglong)uVar10 >> 0x20);
-  a1 = (undefined4)uVar10;
+  convertedBranchPair = ((int (*)())TIntermediate__addConversion)(this,1,a2,intermTyped3);
+  a0_00 = (unsigned char *)((ulonglong)convertedBranchPair >> 0x20);
+  a1 = (undefined4)convertedBranchPair;
   stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   if (a0_00 == (unsigned char *)0x0) {
     (**(code **)(*(int *)intermTyped3 + 0x38))(a0,intermTyped3);
@@ -4513,9 +4558,9 @@ int __ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i(this, intermTyped1,
     }
   }
   stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-  iVar7 = (**(code **)(*(int *)intermTyped1 + 0x18))(intermTyped1,a1);
-  if (((iVar7 == 0) || (iVar7 = (**(code **)(*(int *)intermTyped2 + 0x18))(intermTyped2), iVar7 == 0)) ||
-     (iVar7 = (**(code **)(*(int *)a0_00 + 0x18))(a0_00), iVar7 == 0)) {
+  constantUnionTest = (**(code **)(*(int *)intermTyped1 + 0x18))(intermTyped1,a1);
+  if (((constantUnionTest == 0) || (constantUnionTest = (**(code **)(*(int *)intermTyped2 + 0x18))(intermTyped2), constantUnionTest == 0)) ||
+     (constantUnionTest = (**(code **)(*(int *)a0_00 + 0x18))(a0_00), constantUnionTest == 0)) {
     this_00 = (unsigned char *)GetGlobalPoolAllocator();
     pTVar9 = (unsigned char *)TPoolAllocator__allocate(this_00,0x3c);
     (**(code **)(*(int *)intermTyped2 + 0x38))(&stackType,intermTyped2);
@@ -4530,29 +4575,29 @@ int __ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i(this, intermTyped1,
     *(undefined ***)(pTVar9 + 8) = &PTR___ZN5TTypeD1Ev_a7b7cff8;
     *(int *)(pTVar9 + 0x24) = stackTypeWord1c;
     *(int *)(pTVar9 + 0x28) = stackTypeWord20;
-    uVar6 = *(uint *)(pTVar9 + 0x2c);
-    uVar2 = stackTypeBits & 0xfe000000;
-    *(uint *)(pTVar9 + 0x2c) = uVar2 | uVar6 & 0x1ffffff;
-    uVar3 = (stackTypeBits >> 0x13 & 0x3f) << 0x13;
-    *(uint *)(pTVar9 + 0x2c) = uVar3 | uVar2 | uVar6 & 0x7ffff;
-    uVar1 = stackTypeBits & 0x7f800;
-    *(uint *)(pTVar9 + 0x2c) = uVar1 | uVar3 | uVar2 | uVar6 & 0x7ff;
-    uVar4 = (stackTypeBits >> 10 & 1) << 10;
-    *(uint *)(pTVar9 + 0x2c) = uVar4 | uVar1 | uVar3 | uVar2 | uVar6 & 0x3ff;
-    puVar5 = PTR_vtable_a7b7c0cc;
+    oldTypeBits = *(uint *)(pTVar9 + 0x2c);
+    typeQualifierBits = stackTypeBits & 0xfe000000;
+    *(uint *)(pTVar9 + 0x2c) = typeQualifierBits | oldTypeBits & 0x1ffffff;
+    typeBasicTypeBits = (stackTypeBits >> 0x13 & 0x3f) << 0x13;
+    *(uint *)(pTVar9 + 0x2c) = typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x7ffff;
+    typeSizeBits = stackTypeBits & 0x7f800;
+    *(uint *)(pTVar9 + 0x2c) = typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x7ff;
+    typeMatrixBit = (stackTypeBits >> 10 & 1) << 10;
+    *(uint *)(pTVar9 + 0x2c) = typeMatrixBit | typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x3ff;
+    intermSelectionVtable = PTR_vtable_a7b7c0cc;
     *(uint *)(pTVar9 + 0x2c) =
-         (stackTypeBits >> 9 & 1) << 9 | uVar4 | uVar1 | uVar3 | uVar2 | uVar6 & 0x1ff;
+         (stackTypeBits >> 9 & 1) << 9 | typeMatrixBit | typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x1ff;
     *(unsigned char **)(pTVar9 + 0x30) = intermTyped1;
-    *(undefined **)pTVar9 = puVar5 + 8;
+    *(undefined **)pTVar9 = intermSelectionVtable + 8;
     *(unsigned char **)(pTVar9 + 0x34) = intermTyped2;
     *(unsigned char **)(pTVar9 + 0x38) = a0_00;
     stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-    (**(code **)(*(int *)pTVar9 + 4))(pTVar9,param_5,a2,a3,iVar8,in_r8,pTVar9 + 8);
+    (**(code **)(*(int *)pTVar9 + 4))(pTVar9,line,a2,a3,lineCopy,scratchR8,pTVar9 + 8);
   }
   else {
-    iVar8 = (**(code **)(*(int *)intermTyped1 + 0x18))(intermTyped1);
+    condConstUnion = (**(code **)(*(int *)intermTyped1 + 0x18))(intermTyped1);
     pTVar9 = intermTyped2;
-    if (**(int **)(iVar8 + 0x30) == 0) {
+    if (**(int **)(condConstUnion + 0x30) == 0) {
       pTVar9 = a0_00;
     }
   }
@@ -4560,89 +4605,90 @@ int __ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i(this, intermTyped1,
 }
 
 /* TIntermediate__addConstantUnion @ 0x97b8feb0 (300 bytes) */
-int TIntermediate__addConstantUnion(this, constUnion, type, param_4)
+int TIntermediate__addConstantUnion(this, constUnion, type, line)
   unsigned char * this;
   unsigned char * constUnion;
   unsigned char * type;
-  int param_4;
+  int line;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  undefined4 uVar5;
-  uint uVar6;
-  undefined *puVar7;
+  uint typeSizeBits;
+  uint typeQualifierBits;
+  uint typeBasicTypeBits;
+  uint typeMatrixBit;
+  undefined4 typeArraySize;
+  uint oldTypeBits;
+  undefined *constantUnionVtable;
   unsigned char * this_00;
   undefined4 *a0;
-  undefined4 uVar8;
+  undefined4 typeWord20;
   undefined4 a2;
   undefined4 a3;
   undefined4 a4;
   undefined4 a5;
-  undefined4 uVar9;
+  undefined4 typeStructure;
   uint a6;
   undefined4 a7;
-  code *pcVar10;
+  code *setLineFn;
   
   this_00 = (unsigned char *)GetGlobalPoolAllocator();
   a0 = (undefined4 *)TPoolAllocator__allocate(this_00,0x34);
   a0[1] = 0;
   *a0 = &PTR_getLine_a7b7cf90;
-  uVar5 = *(undefined4 *)(type + 4);
-  uVar9 = *(undefined4 *)(type + 8);
-  uVar8 = *(undefined4 *)(type + 0x20);
+  typeArraySize = *(undefined4 *)(type + 4);
+  typeStructure = *(undefined4 *)(type + 8);
+  typeWord20 = *(undefined4 *)(type + 0x20);
   a7 = *(undefined4 *)(type + 0xc);
   a5 = *(undefined4 *)(type + 0x10);
   a4 = *(undefined4 *)(type + 0x14);
   a3 = *(undefined4 *)(type + 0x18);
   a2 = *(undefined4 *)(type + 0x1c);
   a0[2] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-  a0[3] = uVar5;
-  a0[10] = uVar8;
-  a0[4] = uVar9;
+  a0[3] = typeArraySize;
+  a0[10] = typeWord20;
+  a0[4] = typeStructure;
   a0[5] = a7;
   a0[6] = a5;
   a0[7] = a4;
   a0[8] = a3;
   a0[9] = a2;
-  uVar6 = a0[0xb];
-  uVar2 = *(uint *)(type + 0x24) & 0xfe000000;
-  a0[0xb] = uVar2 | uVar6 & 0x1ffffff;
-  uVar3 = (*(uint *)(type + 0x24) >> 0x13 & 0x3f) << 0x13;
-  a0[0xb] = uVar3 | uVar2 | uVar6 & 0x7ffff;
-  uVar1 = *(uint *)(type + 0x24) & 0x7f800;
-  a0[0xb] = uVar1 | uVar3 | uVar2 | uVar6 & 0x7ff;
-  uVar4 = (*(uint *)(type + 0x24) >> 10 & 1) << 10;
-  a0[0xb] = uVar4 | uVar1 | uVar3 | uVar2 | uVar6 & 0x3ff;
-  puVar7 = PTR_vtable_a7b7c0c8 + 8;
+  oldTypeBits = a0[0xb];
+  typeQualifierBits = *(uint *)(type + 0x24) & 0xfe000000;
+  a0[0xb] = typeQualifierBits | oldTypeBits & 0x1ffffff;
+  typeBasicTypeBits = (*(uint *)(type + 0x24) >> 0x13 & 0x3f) << 0x13;
+  a0[0xb] = typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x7ffff;
+  typeSizeBits = *(uint *)(type + 0x24) & 0x7f800;
+  a0[0xb] = typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x7ff;
+  typeMatrixBit = (*(uint *)(type + 0x24) >> 10 & 1) << 10;
+  a0[0xb] = typeMatrixBit | typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x3ff;
+  constantUnionVtable = PTR_vtable_a7b7c0c8 + 8;
   a6 = *(uint *)(type + 0x24) >> 9 & 1;
-  pcVar10 = *(code **)(PTR_vtable_a7b7c0c8 + 0xc);
-  a0[0xb] = a6 << 9 | uVar4 | uVar1 | uVar3 | uVar2 | uVar6 & 0x1ff;
+  setLineFn = *(code **)(PTR_vtable_a7b7c0c8 + 0xc);
+  a0[0xb] = a6 << 9 | typeMatrixBit | typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x1ff;
   a0[0xc] = constUnion;
-  *a0 = puVar7;
-  (*pcVar10)(a0,param_4,a2,a3,a4,a5,a6,a7);
+  *a0 = constantUnionVtable;
+  (*setLineFn)(a0,line,a2,a3,a4,a5,a6,a7);
   return a0;
 }
 
 /* TIntermediate__addSwizzle @ 0x97b8ffdc (744 bytes) */
-int TIntermediate__addSwizzle(this, vectorFields, param_3)
+int TIntermediate__addSwizzle(this, vectorFields, line)
   unsigned char * this;
   unsigned char * vectorFields;
-  int param_3;
+  int line;
 {
+  int fieldIndex;
   int atomicStore;
-  undefined *puVar1;
-  uint uVar2;
-  int *piVar3;
-  int iVar4;
+  undefined *intermAggregateVtable;
+  uint oldTypeBits;
+  int *emptyRepRefCount;
+  int sequenceFinishValue;
   unsigned char * poolAllocator;
   int *a0;
   unsigned char * this_00;
-  unsigned char * pcVar6;
-  undefined4 *puVar7;
-  code *pcVar8;
-  int iVar9;
+  unsigned char * constUnionValue;
+  undefined4 *sequenceFinish;
+  code *setLineFn;
+  int emptyStringRep;
   unsigned char * pTVar10;
   char reservation;
   byte cr0Reg;
@@ -4656,10 +4702,10 @@ int TIntermediate__addSwizzle(this, vectorFields, param_3)
   undefined4 stackTypeWord1c;
   undefined4 stackTypeWord20;
   uint stackTypeBits;
-  int local_80;
-  int local_70;
-  int local_60;
-  undefined4 local_50 [6];
+  int sequenceAllocator;
+  int nameAllocator;
+  int stringAllocator;
+  undefined4 constantNodeSlot [6];
   
   poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
   a0 = (int *)TPoolAllocator__allocate(poolAllocator,0x6c);
@@ -4683,49 +4729,49 @@ int TIntermediate__addSwizzle(this, vectorFields, param_3)
   a0[9] = 0;
   a0[2] = (int)&PTR___ZN5TTypeD1Ev_a7b7cff8;
   a0[10] = 0;
-  uVar2 = a0[0xb];
-  a0[0xb] = uVar2 & 0x1ffffff;
-  a0[0xb] = uVar2 & 0x7ffff | 0x80000;
-  a0[0xb] = uVar2 & 0x7ff | 0x80800;
-  a0[0xb] = uVar2 & 0x3ff | 0x80800;
-  puVar1 = PTR_vtable_a7b7c0d0;
-  a0[0xb] = uVar2 & 0x1ff | 0x80800;
+  oldTypeBits = a0[0xb];
+  a0[0xb] = oldTypeBits & 0x1ffffff;
+  a0[0xb] = oldTypeBits & 0x7ffff | 0x80000;
+  a0[0xb] = oldTypeBits & 0x7ff | 0x80800;
+  a0[0xb] = oldTypeBits & 0x3ff | 0x80800;
+  intermAggregateVtable = PTR_vtable_a7b7c0d0;
+  a0[0xb] = oldTypeBits & 0x1ff | 0x80800;
   stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   a0[0xc] = 1;
-  *a0 = (int)(puVar1 + 8);
-  local_80 = GetGlobalPoolAllocator();
+  *a0 = (int)(intermAggregateVtable + 8);
+  sequenceAllocator = GetGlobalPoolAllocator();
   a0[0x10] = 0;
   a0[0xe] = 0;
   a0[0xf] = 0;
-  a0[0xd] = local_80;
-  local_70 = GetGlobalPoolAllocator();
-  a0[0x11] = local_70;
-  iVar9 = DAT_a7b7b9b8;
+  a0[0xd] = sequenceAllocator;
+  nameAllocator = GetGlobalPoolAllocator();
+  a0[0x11] = nameAllocator;
+  emptyStringRep = DAT_a7b7b9b8;
   a0[0x14] = 0;
   a0[0x12] = 0;
-  piVar3 = (int *)(iVar9 + 8);
+  emptyRepRefCount = (int *)(emptyStringRep + 8);
   a0[0x13] = 0;
   do {
     if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(*piVar3 + 1,0,piVar3);
-      *piVar3 = atomicStore;
+      atomicStore = storeWordConditionalIndexed(*emptyRepRefCount + 1,0,emptyRepRefCount);
+      *emptyRepRefCount = atomicStore;
       cr0Reg = 2;
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
-  local_60 = GetGlobalPoolAllocator();
-  a0[0x16] = iVar9 + 0xc;
-  iVar9 = 0;
-  a0[0x15] = local_60;
-  pcVar8 = *(code **)(*a0 + 4);
+  stringAllocator = GetGlobalPoolAllocator();
+  a0[0x16] = emptyStringRep + 0xc;
+  fieldIndex = 0;
+  a0[0x15] = stringAllocator;
+  setLineFn = *(code **)(*a0 + 4);
   a0[0x1a] = 0;
-  (*pcVar8)(a0,param_3);
+  (*setLineFn)(a0,line);
   this_00 = (unsigned char *)(**(code **)(*a0 + 100))(a0);
   if (0 < *(int *)(vectorFields + 0x10)) {
     pTVar10 = vectorFields;
     do {
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-      pcVar6 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,4);
-      *(undefined4 *)pcVar6 = *(undefined4 *)pTVar10;
+      constUnionValue = (unsigned char *)TPoolAllocator__allocate(poolAllocator,4);
+      *(undefined4 *)constUnionValue = *(undefined4 *)pTVar10;
       stackTypeBits = stackTypeBits & 0x1ff | 0x4100800;
       pTVar10 = pTVar10 + 4;
       stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
@@ -4737,85 +4783,85 @@ int TIntermediate__addSwizzle(this, vectorFields, param_3)
       stackTypeStructureSize = 0;
       stackTypeWord1c = 0;
       stackTypeWord20 = 0;
-      local_50[0] = ((int (*)())TIntermediate__addConstantUnion)(this,pcVar6,(unsigned char *)&stackType,param_3);
+      constantNodeSlot[0] = ((int (*)())TIntermediate__addConstantUnion)(this,constUnionValue,(unsigned char *)&stackType,line);
       stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-      puVar7 = *(undefined4 **)(this_00 + 8);
-      if (puVar7 == *(undefined4 **)(this_00 + 0xc)) {
+      sequenceFinish = *(undefined4 **)(this_00 + 8);
+      if (sequenceFinish == *(undefined4 **)(this_00 + 0xc)) {
         std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux
-                  (this_00,puVar7,local_50);
+                  (this_00,sequenceFinish,constantNodeSlot);
       }
       else {
-        iVar4 = 0;
-        if (puVar7 != (undefined4 *)0x0) {
-          *puVar7 = local_50[0];
-          iVar4 = *(int *)(this_00 + 8);
+        sequenceFinishValue = 0;
+        if (sequenceFinish != (undefined4 *)0x0) {
+          *sequenceFinish = constantNodeSlot[0];
+          sequenceFinishValue = *(int *)(this_00 + 8);
         }
-        *(int *)(this_00 + 8) = iVar4 + 4;
+        *(int *)(this_00 + 8) = sequenceFinishValue + 4;
       }
-      iVar9 = iVar9 + 1;
-    } while (iVar9 < *(int *)(vectorFields + 0x10));
+      fieldIndex = fieldIndex + 1;
+    } while (fieldIndex < *(int *)(vectorFields + 0x10));
   }
   return a0;
 }
 
 /* TIntermediate__addLoop @ 0x97b902c4 (140 bytes) */
-int TIntermediate__addLoop(this, intermNode, intermTyped1, intermTyped2, param_5, param_6)
+int TIntermediate__addLoop(this, intermNode, intermTyped1, intermTyped2, testFirst, line)
   unsigned char * this;
   unsigned char * intermNode;
   unsigned char * intermTyped1;
   unsigned char * intermTyped2;
-  undefined4 param_5;
-  int param_6;
+  undefined4 testFirst;
+  int line;
 {
-  undefined *puVar1;
+  undefined *intermLoopVtable;
   unsigned char * this_00;
   undefined4 *a0;
-  code *pcVar2;
+  code *setLineFn;
   
   this_00 = (unsigned char *)GetGlobalPoolAllocator();
   a0 = (undefined4 *)TPoolAllocator__allocate(this_00,0x18);
-  puVar1 = PTR_vtable_a7b7c0c4;
+  intermLoopVtable = PTR_vtable_a7b7c0c4;
   a0[1] = 0;
   a0[2] = intermNode;
-  pcVar2 = *(code **)(puVar1 + 0xc);
+  setLineFn = *(code **)(intermLoopVtable + 0xc);
   a0[3] = intermTyped1;
   a0[4] = intermTyped2;
-  a0[5] = param_5;
-  *a0 = puVar1 + 8;
-  (*pcVar2)(a0,param_6);
+  a0[5] = testFirst;
+  *a0 = intermLoopVtable + 8;
+  (*setLineFn)(a0,line);
   return a0;
 }
 
 /* __ZN13TIntermediate9addBranchE9TOperatori @ 0x97b90350 (12 bytes) */
-int __ZN13TIntermediate9addBranchE9TOperatori(this, op, param_3)
+int __ZN13TIntermediate9addBranchE9TOperatori(this, op, line)
   void *this;
   undefined4 op;
-  undefined4 param_3;
+  undefined4 line;
 {
-  return ((int (*)())__ZN13TIntermediate9addBranchE9TOperatorP12TIntermTypedi)(this,op,0,param_3);
+  return ((int (*)())__ZN13TIntermediate9addBranchE9TOperatorP12TIntermTypedi)(this,op,0,line);
 }
 
 /* __ZN13TIntermediate9addBranchE9TOperatorP12TIntermTypedi @ 0x97b9035c (124 bytes) */
-int __ZN13TIntermediate9addBranchE9TOperatorP12TIntermTypedi(this, op, intermTyped, param_4)
+int __ZN13TIntermediate9addBranchE9TOperatorP12TIntermTypedi(this, op, intermTyped, line)
   void *this;
   undefined4 op;
   undefined4 intermTyped;
-  undefined4 param_4;
+  undefined4 line;
 {
-  undefined *puVar1;
+  undefined *intermBranchVtable;
   unsigned char * this_00;
   undefined4 *a0;
-  code *pcVar2;
+  code *setLineFn;
   
   this_00 = (unsigned char *)GetGlobalPoolAllocator();
   a0 = (undefined4 *)TPoolAllocator__allocate(this_00,0x10);
-  puVar1 = PTR_vtable_a7b7c0c0;
+  intermBranchVtable = PTR_vtable_a7b7c0c0;
   a0[1] = 0;
   a0[2] = op;
-  pcVar2 = *(code **)(puVar1 + 0xc);
+  setLineFn = *(code **)(intermBranchVtable + 0xc);
   a0[3] = intermTyped;
-  *a0 = puVar1 + 8;
-  (*pcVar2)(a0,param_4);
+  *a0 = intermBranchVtable + 8;
+  (*setLineFn)(a0,line);
   return a0;
 }
 
@@ -4848,10 +4894,10 @@ int TIntermediate__remove(this, intermNode)
 int TIntermOperator__modifiesState(this)
   unsigned char * this;
 {
-  int iVar1;
+  int op;
   
-  iVar1 = *(int *)(this + 0x30);
-  if ((8 < iVar1) && ((iVar1 < 0xd || (iVar1 - 0x76U < 0xf)))) {
+  op = *(int *)(this + 0x30);
+  if ((8 < op) && ((op < 0xd || (op - 0x76U < 0xf)))) {
     return 1;
   }
   return 0;
