@@ -451,9 +451,9 @@ use	_HashTableNew	puVar1	hashTable	INFERRED	every definition is the result of a 
 use	_HashTableAdd	puVar4	newPair	INFERRED	every definition is the result of a call whose name says it returns this	#39	+8	all	all
 use	_HashTableAdd	uVar5	grownEntries	INFERRED	every definition is the result of a call whose name says it returns this	#36	+0	lhs	lhs
 use	_HashTableAdd	uVar5	grownEntries	INFERRED	every definition is the result of a call whose name says it returns this	#37	+1	all	all
-use	_RegistersMerge	iVar5	allocation2	INFERRED	every definition is the result of a call whose name says it returns this	#2	+94	all	all
-use	_RegistersMerge	piVar7	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#5	+87	all	all
-use	_RegistersMerge	uVar6	allocation3	INFERRED	every definition is the result of a call whose name says it returns this	#4	+1	all	all
+use	_RegistersMerge	iVar5	replacements	INFERRED	every definition is the result of a call whose name says it returns this	#2	+94	all	all
+use	_RegistersMerge	piVar7	keptVectors	INFERRED	every definition is the result of a call whose name says it returns this	#5	+87	all	all
+use	_RegistersMerge	uVar6	firstVectorStorage	INFERRED	every definition is the result of a call whose name says it returns this	#4	+1	all	all
 use	_RegisterAdd	iVar1	grownRegisters	INFERRED	every definition is the result of a call whose name says it returns this	#2	+2	all	all
 use	_InstructionAdd	iVar10	allocation3	INFERRED	every definition is the result of a call whose name says it returns this	#158	+4	all	all
 use	_InstructionAdd	iVar15	allocation4	INFERRED	every definition is the result of a call whose name says it returns this	#173	+4	all	all
