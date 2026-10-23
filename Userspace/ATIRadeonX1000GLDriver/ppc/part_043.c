@@ -909,10 +909,10 @@ int FUN_00147f54(inst, compiler)
     uVar16 = 0xffffffff;
     iVar2 = 1;
   }
-  iVar4 = (**(code **)(**(int **)(compiler + 0x30c) + 0xfc))
-                    (*(int **)(compiler + 0x30c),local_a8[0],inst);
+  iVar4 = (**(code **)(**(int **)(compiler + COMP_target) + 0xfc))
+                    (*(int **)(compiler + COMP_target),local_a8[0],inst);
   if (iVar4 != 0) {
-    iVar4 = *(int *)(compiler + 0x6c4);
+    iVar4 = *(int *)(compiler + COMP_currentProgram);
     *(int *)(iVar4 + 0x158) = *(int *)(iVar4 + 0x158) + 1;
     if (iVar17 == 2) {
       uVar15 = (uint)(local_90 < FLOAT_001aa0d4) ^ inst[iVar2 * 6 + 0x28] & 1U;
@@ -1885,7 +1885,7 @@ int FUN_00149de4(inst, param_2, inst2, param_4, compiler)
     operandRecord2 = IRInst__getOperandRecord(inst,param_2);
     local_68 = *(undefined4 *)(operandRecord2 + 0x10);
     FUN_000f2bdc(local_58,*param_4,local_68);
-    piVar18 = *(int **)(compiler + 0x30c);
+    piVar18 = *(int **)(compiler + COMP_target);
     local_68 = local_58[0];
     pcVar15 = *(code **)(*piVar18 + 0x104);
     iVar4 = IRInst__getOperandSource(inst2,1);
@@ -1897,7 +1897,7 @@ int FUN_00149de4(inst, param_2, inst2, param_4, compiler)
       operandVReg2 = (int *)IRInst__getOperandSource(inst,param_2);
       iVar5 = (**(code **)(*operandVReg2 + 0x60))(operandVReg2);
       if ((iVar5 == 0) || ((inst2[0x2e] & 1U) == 0)) {
-        iVar14 = *(int *)(compiler + 0x6c4);
+        iVar14 = *(int *)(compiler + COMP_currentProgram);
         iVar5 = (**(code **)(*operandVReg2 + 0x60))(operandVReg2);
         if (iVar5 == 0) {
           uVar16 = inst2[0x2e] & 1;
@@ -1909,8 +1909,8 @@ int FUN_00149de4(inst, param_2, inst2, param_4, compiler)
             uVar16 = 0;
           }
           uVar16 = inst[param_2 * 6 + 0x28] & 1U ^ uVar16;
-          iVar4 = (**(code **)(**(int **)(compiler + 0x30c) + 0x11c))
-                            (*(int **)(compiler + 0x30c),inst,param_2,operandVReg,uVar13,uVar16,
+          iVar4 = (**(code **)(**(int **)(compiler + COMP_target) + 0x11c))
+                            (*(int **)(compiler + COMP_target),inst,param_2,operandVReg,uVar13,uVar16,
                              compiler);
           if (iVar4 == 0) {
             return 0;

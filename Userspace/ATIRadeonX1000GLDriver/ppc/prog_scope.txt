@@ -1,0 +1,16 @@
+# functions whose variable `program` is the shader-compiler Program (distinctive offsets used); fork E3
+Program__beginPass program
+Program__addInst program
+Program__removeInst program
+IRInst__useCount program
+IRInst__hasSingleUse program
+IRInst__addToUseLists program
+pass_ssa_build program
+pass_loop_trans program
+Program__isRegionTrivial program
+pass_remove_empty_graphs program
+Program__eliminateDeadInstsAndRecountUses program
+pass_rewrite program
+FUN_0013da3c program
+pass_minreg_order program
+FudoPs__peepholeCombine program

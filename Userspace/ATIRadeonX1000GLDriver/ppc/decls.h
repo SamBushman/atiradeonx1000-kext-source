@@ -7422,3 +7422,5 @@ extern double DOUBLE_001aa2a8[];
 #include "extra_decls.h"
 #include "gld_ctx_fields.h"
 #include "arb_ctx_fields.h"
+#include "prog_ctx_fields.h"
+#include "comp_ctx_fields.h"

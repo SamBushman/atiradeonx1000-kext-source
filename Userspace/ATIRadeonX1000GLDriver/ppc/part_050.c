@@ -779,16 +779,16 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
     loopIndex3 = (**(code **)(*src1DefInst + 0x60))(src1DefInst);
     if (loopIndex3 != 0) {
       src1DefArg = IRInst__getOperandSource(inst2,1);
-      FUN_0010c670(src1DefArg,inst2,program[2]);
+      FUN_0010c670(src1DefArg,inst2,program[PROG_compiler / 4]);
     }
   }
-  loopIndex3 = Compiler__isOptionEnabled(program[2],0x38);
+  loopIndex3 = Compiler__isOptionEnabled(program[PROG_compiler / 4],0x38);
   if (((loopIndex3 != 0) && (inst != (int *)0x0)) &&
      (loopIndex3 = (**(code **)(*inst + 100))(inst), loopIndex3 == 0)) {
     FUN_0014a918(inst,consumerSrcIndex,program);
   }
   changedFlag = 0;
-  loopIndex3 = Compiler__isOptionEnabled(program[2],0x1b);
+  loopIndex3 = Compiler__isOptionEnabled(program[PROG_compiler / 4],0x1b);
   if (loopIndex3 != 0) {
     changedFlag = (**(code **)(*inst2 + 100))(inst2);
     loopIndex3 = FUN_0014abdc(inst2,program,&local_58);
@@ -805,7 +805,7 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
       }
     }
   }
-  loopIndex3 = Compiler__isOptionEnabled(program[2],0x1c);
+  loopIndex3 = Compiler__isOptionEnabled(program[PROG_compiler / 4],0x1c);
   if (loopIndex3 != 0) {
     loopIndex3 = FUN_00162cc0(inst2,program);
     if (loopIndex3 != 0) {
@@ -900,7 +900,7 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
     if (loopIndex3 != 0) {
       inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
     }
-    loopIndex3 = Compiler__isOptionEnabled(program[2],0x3c);
+    loopIndex3 = Compiler__isOptionEnabled(program[PROG_compiler / 4],0x3c);
     if ((loopIndex3 != 0) && (loopIndex3 = FUN_00163478(inst,consumerSrcIndex,inst2,program), loopIndex3 != 0)) {
       inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
     }
@@ -927,7 +927,7 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
     curInst = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
     combineInstA = inst2;
   }
-  loopIndex3 = Compiler__isOptionEnabled(program[2],0x1d);
+  loopIndex3 = Compiler__isOptionEnabled(program[PROG_compiler / 4],0x1d);
   if (((((loopIndex3 != 0) &&
         (loopIndex3 = FUN_001633f8(curInst,program,combineInstA,programAlias15,programAlias16,passThroughR8,passThroughR9), loopIndex3 != 0))
        && (loopIndex3 = (**(code **)(*curInst + 100))(curInst), loopIndex3 != 0)) &&
@@ -940,7 +940,7 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
   if (loopIndex3 != 0) {
     curInst = (int *)FUN_00146610(inst,consumerSrcIndex,curInst);
   }
-  uVar21 = program[2];
+  uVar21 = program[PROG_compiler / 4];
   if (*(int *)(curInst[0x22] + 8) != 0x77) goto LAB_00193490;
   loopIndex3 = Compiler__isOptionEnabled(uVar21,0x3d);
   if (loopIndex3 != 0) {
@@ -1005,17 +1005,17 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
                   ((int (*)())DList__unlink)(loopIndex3);
                   FUN_00108174(combineInstA,0x17,uVar21);
                   loopIndex3 = IRInst__getOperandSource(loopIndex3,1);
-                  if ((int)program[0x11e] < *(int *)(loopIndex3 + 0x160)) {
+                  if ((int)program[PROG_useEpoch / 4] < *(int *)(loopIndex3 + 0x160)) {
                     *(int *)(loopIndex3 + 0x160) = *(int *)(loopIndex3 + 0x160) + 1;
                   }
                   else {
-                    *(int *)(loopIndex3 + 0x160) = program[0x11e] + 1;
+                    *(int *)(loopIndex3 + 0x160) = program[PROG_useEpoch / 4] + 1;
                   }
-                  if ((int)program[0x11e] < *(int *)(loopIndex3 + 0x160)) {
+                  if ((int)program[PROG_useEpoch / 4] < *(int *)(loopIndex3 + 0x160)) {
                     *(int *)(loopIndex3 + 0x160) = *(int *)(loopIndex3 + 0x160) + 1;
                   }
                   else {
-                    *(int *)(loopIndex3 + 0x160) = program[0x11e] + 1;
+                    *(int *)(loopIndex3 + 0x160) = program[PROG_useEpoch / 4] + 1;
                   }
                   IRInst__setOperandSource(combineInstA,1,loopIndex3,0,uVar21);
                   IRInst__setOperandSource(combineInstA,2,loopIndex3,0,uVar21);
@@ -1035,11 +1035,11 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
                   IROperand__setModifierBits(combineInstA + 0x2f,1,1);
                   combineInstA[0x26] = 0;
                   combineInstA[0x25] = combineInstA[0x53];
-                  if ((int)program[0x11e] < combineInstA[0x58]) {
+                  if ((int)program[PROG_useEpoch / 4] < combineInstA[0x58]) {
                     combineInstA[0x58] = combineInstA[0x58] + 1;
                   }
                   else {
-                    combineInstA[0x58] = program[0x11e] + 1;
+                    combineInstA[0x58] = program[PROG_useEpoch / 4] + 1;
                   }
                   Block__insertInstBefore(curInst[0x56],curInst,combineInstA);
                   laneMaskBytes[0] = *(int *)(PTR_DAT_001e8b64 + uVar17 * 4);
@@ -1057,7 +1057,7 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
                   curInst[0x27] = laneMaskBytes[0];
                   curInst[5] = curInst[5] | 0x2000000;
                   curInst = (int *)FUN_00146610(inst,consumerSrcIndex,curInst);
-                  uVar21 = program[2];
+                  uVar21 = program[PROG_compiler / 4];
                   goto LAB_00193490;
                 }
               }
@@ -1068,11 +1068,11 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
     }
   }
 LAB_0019348c:
-  uVar21 = program[2];
+  uVar21 = program[PROG_compiler / 4];
 LAB_00193490:
   loopIndex3 = Compiler__isOptionEnabled(uVar21,0x39);
   if (loopIndex3 != 0) {
-    FUN_001882a4(curInst,program[2]);
+    FUN_001882a4(curInst,program[PROG_compiler / 4]);
     for (loopIndex3 = 1; loopRemaining = (**(code **)(*curInst + 0x14))(curInst), loopIndex3 <= loopRemaining; loopIndex3 = loopIndex3 + 1
         ) {
       uVar21 = IRInst__getOperandSource(curInst,loopIndex3);
@@ -1090,7 +1090,7 @@ LAB_00193490:
     changedFlag = 1;
     combinedInst = (int *)FUN_00146610(inst,consumerSrcIndex,combinedInst);
   }
-  loopIndex3 = FUN_0011379c(program[2],combinedInst);
+  loopIndex3 = FUN_0011379c(program[PROG_compiler / 4],combinedInst);
   if ((loopIndex3 != 0) && ((combinedInst[5] & 0x200U) == 0)) {
     for (loopIndex3 = 1; loopRemaining = (**(code **)(*combinedInst + 0x14))(combinedInst), loopIndex3 <= loopRemaining; loopIndex3 = loopIndex3 + 1
         ) {
@@ -1107,7 +1107,7 @@ LAB_00193490:
            (*(uint *)(loopIndex + 0x14) & 0x200) == 0)) {
           loopIndex2 = 0;
           uVar21 = IRInst__getOperandSource(loopRemaining,*(undefined4 *)(loopRemaining + 0x84));
-          iVar12 = IRInst__clone(combinedInst,program[2],0);
+          iVar12 = IRInst__clone(combinedInst,program[PROG_compiler / 4],0);
           curInstCopy = combinedInst;
           loopIndex = iVar12;
           do {
@@ -1127,16 +1127,16 @@ LAB_00193490:
             loopIndex = loopIndex + 1;
             loopIndex2 = loopIndex2 + 1;
           } while (bVar1);
-          IRInst__setOperandSource(iVar12,loopIndex3,uVar21,0,program[2]);
-          IRInst__setExtraOperandSource(combinedInst,iVar12,0,program[2]);
+          IRInst__setOperandSource(iVar12,loopIndex3,uVar21,0,program[PROG_compiler / 4]);
+          IRInst__setExtraOperandSource(combinedInst,iVar12,0,program[PROG_compiler / 4]);
           Block__insertInstBefore(combinedInst[0x56],combinedInst,iVar12);
-          IRInst__setOperandSource(loopRemaining,*(undefined4 *)(loopRemaining + 0x84),0,0,program[2]);
+          IRInst__setOperandSource(loopRemaining,*(undefined4 *)(loopRemaining + 0x84),0,0,program[PROG_compiler / 4]);
           *(int *)(loopRemaining + 0x84) = *(int *)(loopRemaining + 0x84) + -1;
           *(uint *)(loopRemaining + 0x14) = *(uint *)(loopRemaining + 0x14) & 0xfffffdff;
           FUN_000f35c4(combinedInst);
           FUN_000f35c4(iVar12);
           loopRemaining = *(int *)(iVar12 + 0x84);
-          *(int *)(iVar12 + 0x160) = program[0x11e] + 1;
+          *(int *)(iVar12 + 0x160) = program[PROG_useEpoch / 4] + 1;
           if (0 < loopRemaining) {
             loopIndex = 1;
             do {
@@ -1145,29 +1145,29 @@ LAB_00193490:
                 loopRemaining = (**(code **)(*operandDefInst + 0x5c))();
                 if (loopRemaining == 0) {
                   loopIndex2 = IRInst__getOperandSource(iVar12,loopIndex);
-                  if ((int)program[0x11e] < *(int *)(loopIndex2 + 0x160)) {
+                  if ((int)program[PROG_useEpoch / 4] < *(int *)(loopIndex2 + 0x160)) {
                     loopRemaining = *(int *)(iVar12 + 0x84);
                     *(int *)(loopIndex2 + 0x160) = *(int *)(loopIndex2 + 0x160) + 1;
                   }
                   else {
                     loopRemaining = *(int *)(iVar12 + 0x84);
-                    *(int *)(loopIndex2 + 0x160) = program[0x11e] + 1;
+                    *(int *)(loopIndex2 + 0x160) = program[PROG_useEpoch / 4] + 1;
                   }
                 }
                 else {
                   uVar21 = IRInst__getOperandSource(iVar12,loopIndex);
-                  loopRemaining = IRInst__clone(uVar21,program[2],0);
-                  IRInst__setOperandSource(iVar12,loopIndex,loopRemaining,0,program[2]);
+                  loopRemaining = IRInst__clone(uVar21,program[PROG_compiler / 4],0);
+                  IRInst__setOperandSource(iVar12,loopIndex,loopRemaining,0,program[PROG_compiler / 4]);
                   Block__insertInstBefore(*(undefined4 *)(iVar12 + 0x158),iVar12,loopRemaining);
                   if (0 < *(int *)(loopRemaining + 0x84)) {
                     loopIndex2 = 1;
                     do {
                       callResult = IRInst__getOperandSource(loopRemaining,loopIndex2);
-                      if ((int)program[0x11e] < *(int *)(callResult + 0x160)) {
+                      if ((int)program[PROG_useEpoch / 4] < *(int *)(callResult + 0x160)) {
                         *(int *)(callResult + 0x160) = *(int *)(callResult + 0x160) + 1;
                       }
                       else {
-                        *(int *)(callResult + 0x160) = program[0x11e] + 1;
+                        *(int *)(callResult + 0x160) = program[PROG_useEpoch / 4] + 1;
                       }
                       loopIndex2 = loopIndex2 + 1;
                     } while (loopIndex2 <= *(int *)(loopRemaining + 0x84));
@@ -1183,11 +1183,11 @@ LAB_00193490:
       }
     }
   }
-  loopIndex3 = Compiler__isOptionEnabled(program[2],0x3a);
+  loopIndex3 = Compiler__isOptionEnabled(program[PROG_compiler / 4],0x3a);
   if (loopIndex3 == 0) {
     return changedFlag;
   }
-  if (((int)program[0x8a] < *(int *)(program[2] + 0x664)) &&
+  if (((int)program[PROG_mixInstCount / 4] < *(int *)(program[PROG_compiler / 4] + 0x664)) &&
      (loopIndex3 = FUN_0015ea3c(inst,consumerSrcIndex,combinedInst,program), loopIndex3 != 0)) {
     changedFlag = 1;
     combinedInst = (int *)FUN_00146610(inst,consumerSrcIndex,combinedInst);

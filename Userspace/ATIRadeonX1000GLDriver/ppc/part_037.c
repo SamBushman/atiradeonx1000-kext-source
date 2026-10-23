@@ -724,7 +724,7 @@ int FUN_0011f8a0(vector, param_2, param_3, param_4, param_5, param_6, compiler, 
   if (param_4 != 0) {
     newInst[5] = newInst[5] | 0x40;
   }
-  piVar9 = *(int **)(*(int *)(compiler + 0x30c) + 100);
+  piVar9 = *(int **)(*(int *)(compiler + COMP_target) + 100);
   pcVar8 = *(code **)(*piVar9 + 0x20);
   if (param_5 < *vector) {
     uVar3 = vector[1];
@@ -769,7 +769,7 @@ int FUN_0011f8a0(vector, param_2, param_3, param_4, param_5, param_6, compiler, 
     else {
       puVar4 = (undefined4 *)Vector__elementRefGrow(vector2,param_10);
     }
-    uVar7 = ((int (*)())FUN_0011f7fc)(*(undefined4 *)(compiler + 0x6c4),newInst,vector);
+    uVar7 = ((int (*)())FUN_0011f7fc)(*(undefined4 *)(compiler + COMP_currentProgram),newInst,vector);
     *puVar4 = uVar7;
   }
   return;
@@ -1785,12 +1785,12 @@ int pass_ssa_build(program)
 #define local_54 (*(int *)(local_5c_buf + 0x08))
   undefined4 local_50;
   
-  local_50 = *(undefined4 *)(*(int *)(program + 8) + 0x378);
+  local_50 = *(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaB);
   local_58 = 0;
   local_5c = 2;
   local_54 = Arena__alloc(local_50,8);
   blockStackSize = local_58;
-  arena = *(undefined4 *)(program + 0x3a0);
+  arena = *(undefined4 *)(program + PROG_entryBlock);
   if (local_58 < local_5c) {
     byteOffset2 = local_58 * 4;
     _memset(local_54 + byteOffset2,0,4);
@@ -1801,16 +1801,16 @@ int pass_ssa_build(program)
     allocation = (undefined4 *)Vector__elementRefGrow(&local_5c,local_58);
   }
   *allocation = arena;
-  piVar18 = *(int **)(program + 0x3a0);
+  piVar18 = *(int **)(program + PROG_entryBlock);
   piVar18[0x45] = 0x10;
   piVar18[0x2f] = 0;
-  *(int *)(program + 0x474) = *(int *)(program + 0x474) + 1;
-  iVar3 = *(int *)(*(int *)(program + 8) + 0x324);
+  *(int *)(program + PROG_visitStamp) = *(int *)(program + PROG_visitStamp) + 1;
+  iVar3 = *(int *)(*(int *)(program + PROG_compiler) + COMP_nextInstId);
   *(undefined4 *)(program + 0x334) = 0;
-  *(int *)(program + 0x478) = iVar3 * 4 + *(int *)(program + 0x478);
-  iVar3 = Compiler__isOptionEnabled(*(int *)(program + 8),7);
+  *(int *)(program + PROG_useEpoch) = iVar3 * 4 + *(int *)(program + PROG_useEpoch);
+  iVar3 = Compiler__isOptionEnabled(*(int *)(program + PROG_compiler),7);
   if (iVar3 != 0) {
-    iVar3 = *(int *)(program + 8);
+    iVar3 = *(int *)(program + PROG_compiler);
     arena = *(undefined4 *)(iVar3 + 0x378);
     allocation = (undefined4 *)Arena__alloc(arena,0x14);
     *allocation = arena;
@@ -1820,7 +1820,7 @@ int pass_ssa_build(program)
     arena = Arena__alloc(arena,8);
     allocation[3] = arena;
     *(undefined4 **)(iVar3 + 0x3d8) = allocation + 1;
-    iVar3 = *(int *)(program + 8);
+    iVar3 = *(int *)(program + PROG_compiler);
     arena = *(undefined4 *)(iVar3 + 0x378);
     allocation = (undefined4 *)Arena__alloc(arena,0x14);
     *allocation = arena;
@@ -1830,7 +1830,7 @@ int pass_ssa_build(program)
     arena = Arena__alloc(arena,8);
     allocation[3] = arena;
     *(undefined4 **)(iVar3 + 0x3dc) = allocation + 1;
-    iVar3 = *(int *)(program + 8);
+    iVar3 = *(int *)(program + PROG_compiler);
     arena = *(undefined4 *)(iVar3 + 0x378);
     allocation = (undefined4 *)Arena__alloc(arena,0x1c);
     eqByValueNumberFn = PTR_FUN_001e90b8;
@@ -1854,7 +1854,7 @@ int pass_ssa_build(program)
     allocation[3] = arena;
     _memset(arena,0,*puVar15 << 2);
     *(uint **)(iVar3 + 0x3e0) = puVar15;
-    iVar3 = *(int *)(program + 8);
+    iVar3 = *(int *)(program + PROG_compiler);
     arena = *(undefined4 *)(iVar3 + 0x378);
     allocation = (undefined4 *)Arena__alloc(arena,0x1c);
     hashByExprFn = PTR_FUN_001e90bc;
@@ -1878,7 +1878,7 @@ int pass_ssa_build(program)
     allocation[3] = arena;
     _memset(arena,0,*puVar15 << 2);
     *(uint **)(iVar3 + 0x3e4) = puVar15;
-    iVar3 = *(int *)(program + 8);
+    iVar3 = *(int *)(program + PROG_compiler);
     arena = *(undefined4 *)(iVar3 + 0x378);
     allocation = (undefined4 *)Arena__alloc(arena,0x1c);
     ptrEqFn = PTR_FUN_001e90ac;
@@ -1902,7 +1902,7 @@ int pass_ssa_build(program)
     allocation[3] = arena;
     _memset(arena,0,*puVar15 << 2);
     *(uint **)(iVar3 + 1000) = puVar15;
-    iVar3 = *(int *)(program + 8);
+    iVar3 = *(int *)(program + PROG_compiler);
     arena = *(undefined4 *)(iVar3 + 0x378);
     allocation = (undefined4 *)Arena__alloc(arena,0x1c);
     keyLaneHashFn = PTR_FUN_001e90b4;
@@ -1927,10 +1927,10 @@ int pass_ssa_build(program)
     bucketBytes = *puVar15 << 2;
     _memset(arena,0,bucketBytes);
     *(uint **)(iVar3 + 0x3ec) = puVar15;
-    arena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
+    arena = *(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaB);
     allocation = (undefined4 *)Arena__alloc(arena,0x2c);
     *allocation = arena;
-    iVar3 = *(int *)(program + 8);
+    iVar3 = *(int *)(program + PROG_compiler);
     allocation[1] = 0x7ffffffe;
     allocation[5] = 4;
     allocation[8] = 0;
@@ -1940,10 +1940,10 @@ int pass_ssa_build(program)
     allocation[4] = 0;
     allocation[7] = 0;
     *(undefined4 **)(iVar3 + 0x3f0) = allocation + 1;
-    arena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
+    arena = *(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaB);
     allocation = (undefined4 *)Arena__alloc(arena,0x34);
     *allocation = arena;
-    iVar3 = *(int *)(program + 8);
+    iVar3 = *(int *)(program + PROG_compiler);
     allocation[0xc] = 0;
     allocation[2] = 0;
     allocation[4] = 0;
@@ -1957,15 +1957,15 @@ int pass_ssa_build(program)
     allocation[3] = 0xffffffff;
     allocation[8] = 0;
     *(undefined4 **)(iVar3 + 0x3f4) = allocation + 1;
-    piVar9 = *(int **)(*(int *)(program + 8) + 0x30c);
+    piVar9 = *(int **)(*(int *)(program + PROG_compiler) + COMP_target);
     (**(code **)(*piVar9 + 0x124))
-              (piVar9,*(int *)(program + 8),bucketBytes,in_r6,in_r7,in_r8,0xffffffff,iVar3);
-    piVar9 = *(int **)(*(int *)(program + 8) + 0x30c);
-    (**(code **)(*piVar9 + 0x128))(piVar9,*(int *)(program + 8));
-    noop_1762bc(*(undefined4 *)(program + 8));
-    FUN_001762c0(*(undefined4 *)(program + 8));
+              (piVar9,*(int *)(program + PROG_compiler),bucketBytes,in_r6,in_r7,in_r8,0xffffffff,iVar3);
+    piVar9 = *(int **)(*(int *)(program + PROG_compiler) + COMP_target);
+    (**(code **)(*piVar9 + 0x128))(piVar9,*(int *)(program + PROG_compiler));
+    noop_1762bc(*(undefined4 *)(program + PROG_compiler));
+    FUN_001762c0(*(undefined4 *)(program + PROG_compiler));
   }
-  arena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
+  arena = *(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaB);
   allocation = (undefined4 *)Arena__alloc(arena,0x14);
   *allocation = arena;
   allocation[1] = 2;
@@ -1973,8 +1973,8 @@ int pass_ssa_build(program)
   allocation[2] = 0;
   arena = Arena__alloc(arena,8);
   allocation[3] = arena;
-  *(undefined4 **)(program + 0x404) = allocation + 1;
-  arena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
+  *(undefined4 **)(program + PROG_scopeExprTables) = allocation + 1;
+  arena = *(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaB);
   allocation = (undefined4 *)Arena__alloc(arena,0x14);
   *allocation = arena;
   allocation[1] = 2;
@@ -1982,8 +1982,8 @@ int pass_ssa_build(program)
   allocation[4] = arena;
   arena = Arena__alloc(arena,8);
   allocation[3] = arena;
-  *(undefined4 **)(program + 0x408) = allocation + 1;
-  arena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
+  *(undefined4 **)(program + PROG_scopeLaneMatchTables) = allocation + 1;
+  arena = *(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaB);
   allocation = (undefined4 *)Arena__alloc(arena,0x14);
   allocation[1] = 2;
   *allocation = arena;
@@ -1991,8 +1991,8 @@ int pass_ssa_build(program)
   allocation[4] = arena;
   arena = Arena__alloc(arena,8);
   allocation[3] = arena;
-  *(undefined4 **)(program + 0x40c) = allocation + 1;
-  arena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
+  *(undefined4 **)(program + PROG_scopeSwizzleTables) = allocation + 1;
+  arena = *(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaB);
   allocation = (undefined4 *)Arena__alloc(arena,0x14);
   allocation[1] = 2;
   *allocation = arena;
@@ -2000,11 +2000,11 @@ int pass_ssa_build(program)
   allocation[4] = arena;
   arena = Arena__alloc(arena,8);
   allocation[3] = arena;
-  *(undefined4 **)(program + 0x410) = allocation + 1;
-  piVar9 = *(int **)(*(int *)(program + 8) + 0x30c);
+  *(undefined4 **)(program + PROG_scopeBlocks) = allocation + 1;
+  piVar9 = *(int **)(*(int *)(program + PROG_compiler) + COMP_target);
   iVar3 = (**(code **)(*piVar9 + 0xc0))(piVar9);
   if (iVar3 != 0) {
-    arena = *(undefined4 *)(*(int *)(program + 8) + 0x374);
+    arena = *(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arena,0x14);
     *allocation = arena;
     allocation[1] = 2;
@@ -2013,7 +2013,7 @@ int pass_ssa_build(program)
     arena = Arena__alloc(arena,8);
     allocation[3] = arena;
     *(undefined4 **)(program + 0x41c) = allocation + 1;
-    arena = *(undefined4 *)(*(int *)(program + 8) + 0x374);
+    arena = *(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arena,0x14);
     *allocation = arena;
     allocation[1] = 2;
@@ -2022,7 +2022,7 @@ int pass_ssa_build(program)
     arena = Arena__alloc(arena,8);
     allocation[3] = arena;
     *(undefined4 **)(program + 0x420) = allocation + 1;
-    arena = *(undefined4 *)(*(int *)(program + 8) + 0x374);
+    arena = *(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arena,0x14);
     allocation[1] = 2;
     *allocation = arena;
@@ -2031,7 +2031,7 @@ int pass_ssa_build(program)
     arena = Arena__alloc(arena,8);
     allocation[3] = arena;
     *(undefined4 **)(program + 0x424) = allocation + 1;
-    arena = *(undefined4 *)(*(int *)(program + 8) + 0x374);
+    arena = *(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arena,0x14);
     allocation[1] = 2;
     *allocation = arena;
@@ -2049,9 +2049,9 @@ int pass_ssa_build(program)
     if (piVar18[0x3c] != 0) {
       piVar18[0x2f] = *(int *)(piVar18[0x3c] + 0xbc) + 1;
     }
-    iVar23 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),7);
+    iVar23 = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),7);
     if (iVar23 != 0) {
-      arena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
+      arena = *(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaB);
       allocation = (undefined4 *)Arena__alloc(arena,0x1c);
       scopedHashFn = PTR_FUN_001e90c4;
       scopedEqFn = PTR_FUN_001e90b0;
@@ -2073,7 +2073,7 @@ int pass_ssa_build(program)
       arena = Arena__alloc(arena,*puVar15 << 2);
       allocation[3] = arena;
       _memset(arena,0,*puVar15 << 2);
-      puVar16 = *(uint **)(program + 0x404);
+      puVar16 = *(uint **)(program + PROG_scopeExprTables);
       stackCount = puVar16[1];
       if (stackCount < *puVar16) {
         _memset(stackCount * 4 + puVar16[2],0,4);
@@ -2084,7 +2084,7 @@ int pass_ssa_build(program)
         allocation = (undefined4 *)Vector__elementRefGrow(puVar16,stackCount);
       }
       *allocation = puVar15;
-      arena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
+      arena = *(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaB);
       allocation = (undefined4 *)Arena__alloc(arena,0x1c);
       laneMatchEqFn = PTR_FUN_001e90c0;
       laneMatchHashFn = PTR_FUN_001e9094;
@@ -2106,7 +2106,7 @@ int pass_ssa_build(program)
       arena = Arena__alloc(arena,*puVar16 << 2);
       allocation[3] = arena;
       _memset(arena,0,*puVar16 << 2);
-      puVar17 = *(uint **)(program + 0x408);
+      puVar17 = *(uint **)(program + PROG_scopeLaneMatchTables);
       stackCount = puVar17[1];
       if (stackCount < *puVar17) {
         _memset(stackCount * 4 + puVar17[2],0,4);
@@ -2117,7 +2117,7 @@ int pass_ssa_build(program)
         allocation = (undefined4 *)Vector__elementRefGrow(puVar17,stackCount);
       }
       *allocation = puVar16;
-      arena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
+      arena = *(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaB);
       allocation = (undefined4 *)Arena__alloc(arena,0x1c);
       swizzleHashFn = PTR_FUN_001e90a4;
       swizzleEqFn = PTR_FUN_001e909c;
@@ -2139,7 +2139,7 @@ int pass_ssa_build(program)
       arena = Arena__alloc(arena,*puVar17 << 2);
       allocation[3] = arena;
       _memset(arena,0,*puVar17 << 2);
-      puVar21 = *(uint **)(program + 0x40c);
+      puVar21 = *(uint **)(program + PROG_scopeSwizzleTables);
       stackCount = puVar21[1];
       if (stackCount < *puVar21) {
         _memset(stackCount * 4 + puVar21[2],0,4);
@@ -2150,7 +2150,7 @@ int pass_ssa_build(program)
         allocation = (undefined4 *)Vector__elementRefGrow(puVar21,stackCount);
       }
       *allocation = puVar17;
-      arena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
+      arena = *(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaB);
       puVar10 = (undefined4 *)Arena__alloc(arena,0x20c);
       puVar10[1] = 0x80;
       loopRemaining = 0x80;
@@ -2163,7 +2163,7 @@ int pass_ssa_build(program)
         loopRemaining = loopRemaining + -1;
       } while (loopRemaining != 0);
       piVar18[0x4a] = (int)(puVar10 + 1);
-      puVar21 = *(uint **)(program + 0x410);
+      puVar21 = *(uint **)(program + PROG_scopeBlocks);
       stackCount = puVar21[1];
       if (stackCount < *puVar21) {
         _memset(stackCount * 4 + puVar21[2],0,4);
@@ -2183,7 +2183,7 @@ int pass_ssa_build(program)
 LAB_00122000:
       resumeInst = nextInst;
       if ((inst[5] & 1U) == 0) break;
-      iVar23 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),7);
+      iVar23 = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),7);
       if (iVar23 != 0) {
         piVar18[0x47] = (int)puVar15;
         piVar18[0x48] = (int)puVar16;
@@ -2200,11 +2200,11 @@ LAB_001227a8:
         *(uint *)(inst[0x56] + 0xc) = *(uint *)(inst[0x56] + 0xc) | 1;
         *(uint *)(inst[0x56] + 0xc) = *(uint *)(inst[0x56] + 0xc) | 2;
       }
-      arena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
+      arena = *(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaB);
       allocation = (undefined4 *)Arena__alloc(arena,0x240);
       *allocation = arena;
       allocation = allocation + 1;
-      ValueKey__init(allocation,inst,*(undefined4 *)(program + 8));
+      ValueKey__init(allocation,inst,*(undefined4 *)(program + PROG_compiler));
       destVReg = (int *)inst[0x23];
       local_68 = allocation;
       if (destVReg != (int *)0x0) {
@@ -2235,9 +2235,9 @@ LAB_001227a8:
       if (*(int *)(inst[0x22] + 8) == 0x8e) {
         phi2 = (**(code **)(*inst + 0x7c))(inst);
         *(undefined4 **)(phi2 + 0x130) = local_68;
-        inst[0x54] = *(int *)(program + 0x474);
-        iVar23 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),7);
-        if ((iVar23 != 0) && (*(int *)(program + 0x14c) < *(int *)(*(int *)(program + 8) + 0x654)))
+        inst[0x54] = *(int *)(program + PROG_visitStamp);
+        iVar23 = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),7);
+        if ((iVar23 != 0) && (*(int *)(program + PROG_vnKillCount) < *(int *)(*(int *)(program + PROG_compiler) + COMP_maxVnKills)))
         {
           arena = (**(code **)(*inst + 0x7c))(inst);
           iVar23 = ((int (*)())IRInst__sourcesAreSameValue)(arena);
@@ -2257,7 +2257,7 @@ LAB_001227a8:
               allocation = (undefined4 *)Vector__elementRefGrow(sourceDefinitionStack,lastIndex);
             }
             Block__recordDefinition(piVar18,inst[0x23],*allocation);
-            (**(code **)(*inst + 0xc))(inst,0,*(undefined4 *)(program + 8));
+            (**(code **)(*inst + 0xc))(inst,0,*(undefined4 *)(program + PROG_compiler));
             inst[5] = inst[5] | 0x400;
             *(int *)(program + 0x150) = *(int *)(program + 0x150) + 1;
             resumeInst = (int *)inst[2];
@@ -2292,25 +2292,25 @@ LAB_00122704:
       }
       iVar23 = ((int (*)())Program__tryEliminateRedundantCopy)(program,inst,piVar18);
       if (iVar23 != 0) goto LAB_001227a8;
-      ((int (*)())ValueKey__loadSourceDefinitions)(local_68,*(undefined4 *)(program + 0x3a0));
+      ((int (*)())ValueKey__loadSourceDefinitions)(local_68,*(undefined4 *)(program + PROG_entryBlock));
       ((int (*)())ValueKey__foldMovSources)(local_68,program);
       iVar23 = Program__valueNumberInst(program,scopeDepth,0,&local_68,piVar18);
       if (iVar23 != 0) goto LAB_001227a8;
-      piVar9 = *(int **)(*(int *)(program + 8) + 0x30c);
+      piVar9 = *(int **)(*(int *)(program + PROG_compiler) + COMP_target);
       iVar23 = (**(code **)(*piVar9 + 0xc0))(piVar9);
       if (iVar23 != 0) {
         FUN_00110020(program,local_68);
       }
-      iVar23 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),7);
-      if ((((iVar23 == 0) || (iVar23 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),9), iVar23 == 0))
-          || (iVar23 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0xd), iVar23 == 0)) ||
+      iVar23 = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),7);
+      if ((((iVar23 == 0) || (iVar23 = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),9), iVar23 == 0))
+          || (iVar23 = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),0xd), iVar23 == 0)) ||
          ((iVar23 = (**(code **)(*piVar18 + 0x24))(piVar18), iVar23 == 0 || (piVar18[0x53] == 0))))
       {
         if (0 < inst[0x21]) {
           sourceIndex = 1;
           operandCursor = inst;
           do {
-            IRInst__setOperandSource(inst,sourceIndex,local_68[sourceIndex + 0x84],0,*(undefined4 *)(program + 8));
+            IRInst__setOperandSource(inst,sourceIndex,local_68[sourceIndex + 0x84],0,*(undefined4 *)(program + PROG_compiler));
             operandRecord = IRInst__getOperandRecord(inst,sourceIndex);
             operandCursor[0x29] = 0;
             *(undefined4 *)(operandRecord + 0xc) = 0x46;
@@ -2397,10 +2397,10 @@ LAB_00122704:
         Arena__free(puVar15[-1],puVar15 + -1);
       }
       piVar18[0x47] = 0;
-      Vector__removeAt(*(undefined4 *)(program + 0x404),scopeDepth);
-      Vector__removeAt(*(undefined4 *)(program + 0x408),scopeDepth);
-      Vector__removeAt(*(undefined4 *)(program + 0x40c),scopeDepth);
-      Vector__removeAt(*(undefined4 *)(program + 0x410),scopeDepth);
+      Vector__removeAt(*(undefined4 *)(program + PROG_scopeExprTables),scopeDepth);
+      Vector__removeAt(*(undefined4 *)(program + PROG_scopeLaneMatchTables),scopeDepth);
+      Vector__removeAt(*(undefined4 *)(program + PROG_scopeSwizzleTables),scopeDepth);
+      Vector__removeAt(*(undefined4 *)(program + PROG_scopeBlocks),scopeDepth);
       scopeDepth = scopeDepth + -1;
       piVar18 = (int *)workBlock[0x3d];
       *(int **)(local_64 + 0xf0) = workBlock;
@@ -2444,10 +2444,10 @@ LAB_001227bc:
             if ((piVar9[5] & 1U) != 0) {
               phi = (int *)(**(code **)(*piVar9 + 0x7c))(piVar9);
               if (phi != (int *)0x0) {
-                iVar13 = ((int (*)())VReg__currentDefinition)(phi[0x23],*(undefined4 *)(program + 0x3a0),
-                                      *(uint *)(program + 8));
+                iVar13 = ((int (*)())VReg__currentDefinition)(phi[0x23],*(undefined4 *)(program + PROG_entryBlock),
+                                      *(uint *)(program + PROG_compiler));
                 IRInst__setOperandSource(phi,phiOperandIndex,*(undefined4 *)(iVar13 + 0xb0),0,
-                             *(undefined4 *)(program + 8));
+                             *(undefined4 *)(program + PROG_compiler));
                 iVar5 = phi[0x4e];
                 iVar14 = 0;
                 loopRemaining2 = 4;
@@ -2481,7 +2481,7 @@ LAB_001228ec:
     hasChildren = Block__hasDominatedChildren(workBlock);
     if (hasChildren == 0) {
       Block__popDefinitions(workBlock);
-      iVar23 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),7);
+      iVar23 = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),7);
       if (iVar23 != 0) {
         if (puVar17 != (uint *)0x0) {
           tableSize = *puVar17;
@@ -2549,10 +2549,10 @@ LAB_001228ec:
           Arena__free(puVar15[-1],puVar15 + -1);
         }
         workBlock[0x47] = 0;
-        Vector__removeAt(*(undefined4 *)(program + 0x404),scopeDepth);
-        Vector__removeAt(*(undefined4 *)(program + 0x408),scopeDepth);
-        Vector__removeAt(*(undefined4 *)(program + 0x40c),scopeDepth);
-        Vector__removeAt(*(undefined4 *)(program + 0x410),scopeDepth);
+        Vector__removeAt(*(undefined4 *)(program + PROG_scopeExprTables),scopeDepth);
+        Vector__removeAt(*(undefined4 *)(program + PROG_scopeLaneMatchTables),scopeDepth);
+        Vector__removeAt(*(undefined4 *)(program + PROG_scopeSwizzleTables),scopeDepth);
+        Vector__removeAt(*(undefined4 *)(program + PROG_scopeBlocks),scopeDepth);
         scopeDepth = scopeDepth + -1;
       }
       iVar23 = workBlock[0x3c];
@@ -2566,12 +2566,12 @@ LAB_001228ec:
       while ((iVar23 != 0 && (iVar23 != piVar18[0x3c]))) {
         Block__popDefinitions(iVar23);
         iVar23 = *(int *)(iVar23 + 0xf0);
-        iVar12 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),7);
+        iVar12 = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),7);
         if (iVar12 != 0) {
-          Vector__removeAt(*(undefined4 *)(program + 0x404),scopeDepth);
-          Vector__removeAt(*(undefined4 *)(program + 0x408),scopeDepth);
-          Vector__removeAt(*(undefined4 *)(program + 0x40c),scopeDepth);
-          Vector__removeAt(*(undefined4 *)(program + 0x410),scopeDepth);
+          Vector__removeAt(*(undefined4 *)(program + PROG_scopeExprTables),scopeDepth);
+          Vector__removeAt(*(undefined4 *)(program + PROG_scopeLaneMatchTables),scopeDepth);
+          Vector__removeAt(*(undefined4 *)(program + PROG_scopeSwizzleTables),scopeDepth);
+          Vector__removeAt(*(undefined4 *)(program + PROG_scopeBlocks),scopeDepth);
           scopeDepth = scopeDepth + -1;
         }
       }
@@ -2603,48 +2603,48 @@ LAB_001228ec:
       }
     }
     if (local_58 == 0) {
-      piVar18 = *(int **)(*(int *)(program + 8) + 0x30c);
+      piVar18 = *(int **)(*(int *)(program + PROG_compiler) + COMP_target);
       iVar3 = (**(code **)(*piVar18 + 0xc0))(piVar18);
       if (iVar3 != 0) {
         FUN_0010f87c(program,2,*(undefined4 *)(program + 0x420));
-        iVar3 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x3f);
+        iVar3 = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),0x3f);
         if (iVar3 != 0) {
           FUN_001102e0(program,1,*(undefined4 *)(program + 0x41c));
-          piVar18 = *(int **)(*(int *)(program + 8) + 0x30c);
+          piVar18 = *(int **)(*(int *)(program + PROG_compiler) + COMP_target);
           iVar3 = (**(code **)(*piVar18 + 200))(piVar18);
           if (iVar3 != 0) {
             FUN_001102e0(program,2,*(undefined4 *)(program + 0x420));
           }
         }
       }
-      iVar3 = *(int *)(program + 0x404);
+      iVar3 = *(int *)(program + PROG_scopeExprTables);
       if (iVar3 != 0) {
         Arena__free(*(undefined4 *)(iVar3 + 0xc),*(undefined4 *)(iVar3 + 8));
         Arena__free(*(undefined4 *)(iVar3 + -4),iVar3 + -4);
       }
-      iVar3 = *(int *)(program + 0x408);
+      iVar3 = *(int *)(program + PROG_scopeLaneMatchTables);
       if (iVar3 != 0) {
         Arena__free(*(undefined4 *)(iVar3 + 0xc),*(undefined4 *)(iVar3 + 8));
         Arena__free(*(undefined4 *)(iVar3 + -4),iVar3 + -4);
       }
-      iVar3 = *(int *)(program + 0x40c);
+      iVar3 = *(int *)(program + PROG_scopeSwizzleTables);
       if (iVar3 != 0) {
         Arena__free(*(undefined4 *)(iVar3 + 0xc),*(undefined4 *)(iVar3 + 8));
         Arena__free(*(undefined4 *)(iVar3 + -4),iVar3 + -4);
       }
-      iVar3 = *(int *)(program + 0x410);
+      iVar3 = *(int *)(program + PROG_scopeBlocks);
       if (iVar3 != 0) {
         Arena__free(*(undefined4 *)(iVar3 + 0xc),*(undefined4 *)(iVar3 + 8));
         Arena__free(*(undefined4 *)(iVar3 + -4),iVar3 + -4);
       }
-      Arena__free(*(undefined4 *)(*(int *)(program + 8) + 0x378),
-                   *(undefined4 *)(*(int *)(program + 8) + 0x3d8));
-      iVar3 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),7);
-      if ((iVar3 != 0) && (iVar3 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),9), iVar3 != 0)) {
-        noop_172fb0(*(undefined4 *)(program + 8));
-        noop_172fb4(*(undefined4 *)(program + 8));
+      Arena__free(*(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaB),
+                   *(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_exprCreationList));
+      iVar3 = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),7);
+      if ((iVar3 != 0) && (iVar3 = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),9), iVar3 != 0)) {
+        noop_172fb0(*(undefined4 *)(program + PROG_compiler));
+        noop_172fb4(*(undefined4 *)(program + PROG_compiler));
       }
-      *(uint *)(program + 0x30) = *(uint *)(program + 0x30) | 0xc;
+      *(uint *)(program + PROG_flags) = *(uint *)(program + PROG_flags) | 0xc;
       Program__beginPass(program,(int)"ssa_build");
       Arena__free(local_50,local_54);
       return;
@@ -2844,8 +2844,8 @@ int ImmedConstBuffer__clone(this, param_2, compiler)
   undefined4 *puVar8;
   int iVar9;
   
-  arena = *(undefined4 *)(compiler + 0x374);
-  piVar6 = *(int **)(*(int *)(*(int *)(compiler + 0x6c4) + 0x354) + 300);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
+  piVar6 = *(int **)(*(int *)(*(int *)(compiler + COMP_currentProgram) + 0x354) + 300);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   puVar8 = allocation + 1;
   *allocation = arena;
@@ -2869,7 +2869,7 @@ int ImmedConstBuffer__clone(this, param_2, compiler)
     iVar9 = iVar9 + -1;
   } while (iVar9 != 0);
   IRInst__setOperandRef(puVar8,0,this);
-  arena = *(undefined4 *)(compiler + 0x378);
+  arena = *(undefined4 *)(compiler + COMP_arenaB);
   puVar3 = (undefined4 *)Arena__alloc(arena,0x240);
   allocation = puVar3 + 1;
   *puVar3 = arena;
@@ -2901,7 +2901,7 @@ int VertexRegister__clone(this, param_2, compiler)
   IRInst__setOperandRef(iVar1,0,this);
   *(undefined4 *)(iVar1 + 0x9c) = DAT_001afee8;
   *(undefined4 *)(iVar1 + 300) = *(undefined4 *)(this + 8);
-  arena = *(undefined4 *)(compiler + 0x378);
+  arena = *(undefined4 *)(compiler + COMP_arenaB);
   allocation = (undefined4 *)Arena__alloc(arena,0x240);
   puVar4 = allocation + 1;
   *allocation = arena;
@@ -3132,7 +3132,7 @@ int FUN_0012379c(param_1, param_2, param_3, param_4, compiler)
   *(int *)(compiler + 0x348) = iVar2 + 1;
   param_1[10] = 0xffffffff;
   param_1[9] = 0;
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x14);
   *allocation = arena;
   allocation[1] = 2;
@@ -3141,7 +3141,7 @@ int FUN_0012379c(param_1, param_2, param_3, param_4, compiler)
   arena = Arena__alloc(arena,8);
   allocation[3] = arena;
   param_1[5] = allocation + 1;
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x14);
   *allocation = arena;
   allocation[1] = 2;
@@ -3150,7 +3150,7 @@ int FUN_0012379c(param_1, param_2, param_3, param_4, compiler)
   arena = Arena__alloc(arena,8);
   allocation[3] = arena;
   param_1[6] = allocation + 1;
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x14);
   *allocation = arena;
   allocation[1] = 2;
@@ -3187,7 +3187,7 @@ int FUN_001238e8(param_1, param_2, param_3, param_4, compiler)
   *(int *)(compiler + 0x348) = iVar2 + 1;
   param_1[10] = 0xffffffff;
   param_1[9] = 0;
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x14);
   *allocation = arena;
   allocation[1] = 2;
@@ -3196,7 +3196,7 @@ int FUN_001238e8(param_1, param_2, param_3, param_4, compiler)
   arena = Arena__alloc(arena,8);
   allocation[3] = arena;
   param_1[5] = allocation + 1;
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x14);
   *allocation = arena;
   allocation[1] = 2;
@@ -3205,7 +3205,7 @@ int FUN_001238e8(param_1, param_2, param_3, param_4, compiler)
   arena = Arena__alloc(arena,8);
   allocation[3] = arena;
   param_1[6] = allocation + 1;
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x14);
   *allocation = arena;
   allocation[1] = 2;
@@ -3325,7 +3325,7 @@ int FUN_00123c08(compiler, param_2, param_3)
   float fStack_48;
   float fStack_44;
   
-  if (*(int *)(compiler + 0x378) == 0) {
+  if (*(int *)(compiler + COMP_arenaB) == 0) {
     iVar7 = *(int *)(compiler + 8);
     iVar10 = *(int *)(iVar7 + 0x6c4);
     bVar1 = false;
@@ -3353,10 +3353,10 @@ int FUN_00123c08(compiler, param_2, param_3)
       iVar16 = iVar16 + -1;
     } while (iVar16 != 0);
     uVar4 = FUN_001084b8(0x31,iVar7);
-    *(undefined4 *)(compiler + 0x378) = uVar4;
+    *(undefined4 *)(compiler + COMP_arenaB) = uVar4;
     ((void (*)())FUN_000f79c4)(uVar4,*(undefined4 *)(*(int *)(compiler + 8) + 0x6c4),1,(double)GH_U2F((unsigned int)(local_50)),
                  (double)fStack_4c,(double)fStack_48,(double)fStack_44);
-    iVar3 = *(int *)(*(int *)(compiler + 0x378) + 0xa4);
+    iVar3 = *(int *)(*(int *)(compiler + COMP_arenaB) + 0xa4);
     piVar5 = *(int **)(iVar3 + 0x18);
     if (*piVar5 == 0) {
       allocation = (undefined4 *)Vector__elementRefGrow(piVar5,0);
@@ -3410,33 +3410,33 @@ int FUN_00123c08(compiler, param_2, param_3)
       }
       ((int (*)())FUN_0012306c)(arena,a1);
       Block__recordDefinition(param_2,arena,allocation);
-      *(undefined4 *)(*(int *)(compiler + 0x378) + 0x9c) = local_54;
-      IRInst__setExtraOperandSource(*(undefined4 *)(compiler + 0x378),a1,0,*(undefined4 *)(compiler + 8));
-      *(undefined4 *)(*(int *)(compiler + 0x378) + 0xbc) = arena;
-      ((int (*)())VReg__addUse)(arena,2,*(undefined4 *)(compiler + 0x378));
+      *(undefined4 *)(*(int *)(compiler + COMP_arenaB) + 0x9c) = local_54;
+      IRInst__setExtraOperandSource(*(undefined4 *)(compiler + COMP_arenaB),a1,0,*(undefined4 *)(compiler + 8));
+      *(undefined4 *)(*(int *)(compiler + COMP_arenaB) + 0xbc) = arena;
+      ((int (*)())VReg__addUse)(arena,2,*(undefined4 *)(compiler + COMP_arenaB));
     }
-    IRInst__setOperandSource(*(undefined4 *)(compiler + 0x378),1,uVar4,0,*(undefined4 *)(compiler + 8));
-    uVar4 = *(undefined4 *)(*(int *)(compiler + 0x378) + 0x14c);
-    operandRecord = IRInst__getOperandRecord(*(int *)(compiler + 0x378),0);
+    IRInst__setOperandSource(*(undefined4 *)(compiler + COMP_arenaB),1,uVar4,0,*(undefined4 *)(compiler + 8));
+    uVar4 = *(undefined4 *)(*(int *)(compiler + COMP_arenaB) + 0x14c);
+    operandRecord = IRInst__getOperandRecord(*(int *)(compiler + COMP_arenaB),0);
     *(undefined4 *)(operandRecord + 0xc) = 0;
     *(undefined4 *)(operandRecord + 8) = uVar4;
     iVar3 = *(int *)(*(int *)(compiler + 8) + 0x3ac) + -1;
     *(int *)(*(int *)(compiler + 8) + 0x3ac) = iVar3;
     uVar4 = FUN_00127608(*(undefined4 *)(compiler + 0x3ac),0,iVar3,0);
-    *(undefined4 *)(*(int *)(compiler + 0x378) + 0x8c) = uVar4;
-    ((int (*)())FUN_0012306c)(uVar4,*(undefined4 *)(compiler + 0x378));
-    (**(code **)(*param_2 + 0xc))(param_2,*(undefined4 *)(compiler + 0x378),iVar3);
+    *(undefined4 *)(*(int *)(compiler + COMP_arenaB) + 0x8c) = uVar4;
+    ((int (*)())FUN_0012306c)(uVar4,*(undefined4 *)(compiler + COMP_arenaB));
+    (**(code **)(*param_2 + 0xc))(param_2,*(undefined4 *)(compiler + COMP_arenaB),iVar3);
     arena = *(undefined4 *)(*(int *)(compiler + 8) + 0x378);
     allocation = (undefined4 *)Arena__alloc(arena,0x240);
     *allocation = arena;
-    ValueKey__init(allocation + 1,*(undefined4 *)(compiler + 0x378),*(undefined4 *)(compiler + 8));
+    ValueKey__init(allocation + 1,*(undefined4 *)(compiler + COMP_arenaB),*(undefined4 *)(compiler + 8));
     local_58 = allocation + 1;
     Program__valueNumberInst(iVar10,0,0,&local_58,param_2);
     Block__recordDefinition(param_2,uVar4,local_58);
-    ((int (*)())FUN_00122f28)(uVar4,*(undefined4 *)(compiler + 0x378));
+    ((int (*)())FUN_00122f28)(uVar4,*(undefined4 *)(compiler + COMP_arenaB));
   }
   else {
-    puVar12 = *(uint **)(*(int *)(*(int *)(compiler + 0x378) + 0x8c) + 0x2c);
+    puVar12 = *(uint **)(*(int *)(*(int *)(compiler + COMP_arenaB) + 0x8c) + 0x2c);
     uVar11 = puVar12[1];
     uVar15 = uVar11 - 1;
     if (uVar15 < *puVar12) {
@@ -3467,12 +3467,12 @@ int TempValue__clone(this, param_2, compiler)
   undefined4 arena;
   
   if (*(int *)(this + 4) == 0x1a) {
-    iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x50))
-                      (*(int **)(compiler + 0x30c),*(undefined4 *)(this + 8));
+    iVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x50))
+                      (*(int **)(compiler + COMP_target),*(undefined4 *)(this + 8));
     IRInst__setOperandRef(iVar1,0,this);
     *(undefined4 *)(iVar1 + 0x9c) = DAT_001afee8;
     ((int (*)())FUN_0012306c)(this,iVar1);
-    arena = *(undefined4 *)(compiler + 0x378);
+    arena = *(undefined4 *)(compiler + COMP_arenaB);
     allocation = (undefined4 *)Arena__alloc(arena,0x240);
     puVar4 = allocation + 1;
     *allocation = arena;
@@ -3482,12 +3482,12 @@ int TempValue__clone(this, param_2, compiler)
       FUN_00174e0c(puVar4);
       ValueKey__propagateLaneValues(puVar4);
     }
-    *(uint *)(*(int *)(compiler + 0x30c) + 8) = *(uint *)(*(int *)(compiler + 0x30c) + 8) | 0x20;
+    *(uint *)(*(int *)(compiler + COMP_target) + 8) = *(uint *)(*(int *)(compiler + COMP_target) + 8) | 0x20;
     (**(code **)(*param_2 + 0xc))(param_2,iVar1);
     ((int (*)())FUN_00122f28)(this,iVar1);
     return puVar4;
   }
-  allocation = (undefined4 *)((int (*)())FUN_00123c08)(*(undefined4 *)(compiler + 0x6c4),param_2,this);
+  allocation = (undefined4 *)((int (*)())FUN_00123c08)(*(undefined4 *)(compiler + COMP_currentProgram),param_2,this);
   return allocation;
 }
 
@@ -3503,7 +3503,7 @@ int ExportSlot__clone(this, param_2, compiler)
   undefined4 arena;
   undefined4 *puVar5;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   puVar5 = allocation + 1;
   *allocation = arena;
@@ -3512,7 +3512,7 @@ int ExportSlot__clone(this, param_2, compiler)
   arena = DAT_001afee8;
   allocation[6] = allocation[6] & 0xffff7fff;
   allocation[0x28] = arena;
-  arena = *(undefined4 *)(compiler + 0x378);
+  arena = *(undefined4 *)(compiler + COMP_arenaB);
   allocation = (undefined4 *)Arena__alloc(arena,0x240);
   puVar3 = allocation + 1;
   *allocation = arena;
@@ -3540,13 +3540,13 @@ int Resource__clone(this, param_2, compiler)
   undefined4 arena;
   undefined4 *puVar5;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   puVar5 = allocation + 1;
   *allocation = arena;
   FUN_00109348(puVar5,this,compiler);
   IRInst__setOperandRef(puVar5,0,this);
-  arena = *(undefined4 *)(compiler + 0x378);
+  arena = *(undefined4 *)(compiler + COMP_arenaB);
   allocation = (undefined4 *)Arena__alloc(arena,0x240);
   puVar3 = allocation + 1;
   *allocation = arena;
@@ -3574,13 +3574,13 @@ int FixedValue__clone(this, param_2, compiler)
   undefined4 arena;
   undefined4 *puVar5;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   puVar5 = allocation + 1;
   *allocation = arena;
   IRLoadConst__ctor_109938(puVar5,compiler);
   IRInst__setOperandRef(puVar5,0,this);
-  arena = *(undefined4 *)(compiler + 0x378);
+  arena = *(undefined4 *)(compiler + COMP_arenaB);
   allocation = (undefined4 *)Arena__alloc(arena,0x240);
   puVar3 = allocation + 1;
   *allocation = arena;
@@ -3614,24 +3614,24 @@ int FixedValue__ctor_1245a8(this, param_2, param_3, param_4, compiler)
   *this = &PTR_FUN_001ea898;
   *(int *)(compiler + 0x338) = *(int *)(compiler + 0x338) + 1;
   if (param_3 == 3) {
-    if (*(int *)(*(int *)(compiler + 0x30c) + 0x24) <= param_2) {
+    if (*(int *)(*(int *)(compiler + COMP_target) + 0x24) <= param_2) {
       Compiler__fail(compiler,10);
     }
   }
   else if (param_3 == 4) {
-    if (*(int *)(*(int *)(compiler + 0x30c) + 0x28) <= param_2) {
+    if (*(int *)(*(int *)(compiler + COMP_target) + 0x28) <= param_2) {
       Compiler__fail(compiler,0xc);
     }
   }
-  else if ((param_3 == 2) && (*(int *)(*(int *)(compiler + 0x30c) + 0x2c) <= param_2)) {
+  else if ((param_3 == 2) && (*(int *)(*(int *)(compiler + COMP_target) + 0x2c) <= param_2)) {
     Compiler__fail(compiler,0xb);
   }
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   puVar3 = allocation + 1;
   *allocation = arena;
   IRLoadConst__ctor_109614(puVar3,this,compiler);
-  piVar2 = *(int **)(*(int *)(compiler + 0x6c4) + 0x3a0);
+  piVar2 = *(int **)(*(int *)(compiler + COMP_currentProgram) + 0x3a0);
   (**(code **)(*piVar2 + 0xc))(piVar2,puVar3);
   IRInst__setOperandRef(puVar3,0,this);
   ((int (*)())FUN_0012306c)(this,puVar3);
@@ -3656,24 +3656,24 @@ int FixedValue__ctor_124724(this, param_2, param_3, param_4, compiler)
   *this = &PTR_FUN_001ea898;
   *(int *)(compiler + 0x338) = *(int *)(compiler + 0x338) + 1;
   if (param_3 == 3) {
-    if (*(int *)(*(int *)(compiler + 0x30c) + 0x24) <= param_2) {
+    if (*(int *)(*(int *)(compiler + COMP_target) + 0x24) <= param_2) {
       Compiler__fail(compiler,10);
     }
   }
   else if (param_3 == 4) {
-    if (*(int *)(*(int *)(compiler + 0x30c) + 0x28) <= param_2) {
+    if (*(int *)(*(int *)(compiler + COMP_target) + 0x28) <= param_2) {
       Compiler__fail(compiler,0xc);
     }
   }
-  else if ((param_3 == 2) && (*(int *)(*(int *)(compiler + 0x30c) + 0x2c) <= param_2)) {
+  else if ((param_3 == 2) && (*(int *)(*(int *)(compiler + COMP_target) + 0x2c) <= param_2)) {
     Compiler__fail(compiler,0xb);
   }
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   puVar3 = allocation + 1;
   *allocation = arena;
   IRLoadConst__ctor_109614(puVar3,this,compiler);
-  piVar2 = *(int **)(*(int *)(compiler + 0x6c4) + 0x3a0);
+  piVar2 = *(int **)(*(int *)(compiler + COMP_currentProgram) + 0x3a0);
   (**(code **)(*piVar2 + 0xc))(piVar2,puVar3);
   IRInst__setOperandRef(puVar3,0,this);
   ((int (*)())FUN_0012306c)(this,puVar3);
@@ -3749,11 +3749,11 @@ int PrimitiveIndex__ctor_12499c(this, param_2, param_3, param_4, compiler)
   ((int (*)())TempValue__ctor_124938)(this,param_2,param_3,param_4,compiler);
   *this = PTR_DAT_001e90c8 + 8;
   local_38[0] = 0x10203;
-  iVar4 = *(int *)(compiler + 0x6c4);
-  uVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0xa4))
-                    (*(int **)(compiler + 0x30c),local_38,compiler,param_4,iVar3,in_r8,0x10203);
+  iVar4 = *(int *)(compiler + COMP_currentProgram);
+  uVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0xa4))
+                    (*(int **)(compiler + COMP_target),local_38,compiler,param_4,iVar3,in_r8,0x10203);
   uVar1 = FUN_00127608(*(undefined4 *)(iVar4 + 0x3ac),0x10,uVar1,0);
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   puVar6 = allocation + 1;
   *allocation = arena;
@@ -3789,11 +3789,11 @@ int StandardIndex__ctor_124b24(this, param_2, param_3, param_4, compiler)
   
   ((int (*)())TempValue__ctor_124938)(this,param_2,param_3,param_4,compiler);
   *this = PTR_DAT_001e90e0 + 8;
-  iVar5 = *(int *)(compiler + 0x6c4);
+  iVar5 = *(int *)(compiler + COMP_currentProgram);
   iVar1 = *(int *)(param_2 * 4 + iVar5 + 0x38);
   if (iVar1 == 0) {
     uVar2 = FUN_00127608(*(undefined4 *)(iVar5 + 0x3ac),0x10,param_2,0);
-    arena = *(undefined4 *)(compiler + 0x374);
+    arena = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arena,0x168);
     puVar6 = allocation + 1;
     *allocation = arena;
@@ -3831,11 +3831,11 @@ int StandardIndex__ctor_124c94(this, param_2, param_3, param_4, compiler)
   
   ((int (*)())TempValue__ctor_124938)(this,param_2,param_3,param_4,compiler);
   *this = PTR_DAT_001e90e0 + 8;
-  iVar5 = *(int *)(compiler + 0x6c4);
+  iVar5 = *(int *)(compiler + COMP_currentProgram);
   iVar1 = *(int *)(param_2 * 4 + iVar5 + 0x38);
   if (iVar1 == 0) {
     uVar2 = FUN_00127608(*(undefined4 *)(iVar5 + 0x3ac),0x10,param_2,0);
-    arena = *(undefined4 *)(compiler + 0x374);
+    arena = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arena,0x168);
     puVar6 = allocation + 1;
     *allocation = arena;
@@ -3896,12 +3896,12 @@ int ExportValue__ctor_124e68(this, param_2, param_3, param_4, compiler)
   this[0xd] = 0;
   *this = &PTR_FUN_001ea748;
   this[0xc] = 0;
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   puVar5 = allocation + 1;
   *allocation = arena;
   IRExport__ctor_108918(puVar5,compiler);
-  iVar4 = *(int *)(compiler + 0x6c4);
+  iVar4 = *(int *)(compiler + COMP_currentProgram);
   Block__prependInst(*(undefined4 *)(iVar4 + 0x3a8),puVar5);
   IRInst__setOperandRef(puVar5,0,this);
   ((int (*)())FUN_0012306c)(this,puVar5);
@@ -3931,7 +3931,7 @@ int ExportValue__ctor_124e68(this, param_2, param_3, param_4, compiler)
   if (param_3 == 8) {
     operandRecord = IRInst__getOperandRecord(puVar5,1);
     *(undefined4 *)(operandRecord + 0x10) = arena;
-    (**(code **)(**(int **)(compiler + 0x30c) + 0x118))(local_28);
+    (**(code **)(**(int **)(compiler + COMP_target) + 0x118))(local_28);
     allocation[0x28] = local_28[0];
     *(undefined4 **)(iVar4 + 0x34c) = puVar5;
   }
@@ -3970,12 +3970,12 @@ int ExportValue__ctor_1250dc(this, param_2, param_3, param_4, compiler)
   this[0xd] = 0;
   *this = &PTR_FUN_001ea748;
   this[0xc] = 0;
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   puVar5 = allocation + 1;
   *allocation = arena;
   IRExport__ctor_108918(puVar5,compiler);
-  iVar4 = *(int *)(compiler + 0x6c4);
+  iVar4 = *(int *)(compiler + COMP_currentProgram);
   Block__prependInst(*(undefined4 *)(iVar4 + 0x3a8),puVar5);
   IRInst__setOperandRef(puVar5,0,this);
   ((int (*)())FUN_0012306c)(this,puVar5);
@@ -4005,7 +4005,7 @@ int ExportValue__ctor_1250dc(this, param_2, param_3, param_4, compiler)
   if (param_3 == 8) {
     operandRecord = IRInst__getOperandRecord(puVar5,1);
     *(undefined4 *)(operandRecord + 0x10) = arena;
-    (**(code **)(**(int **)(compiler + 0x30c) + 0x118))(local_28);
+    (**(code **)(**(int **)(compiler + COMP_target) + 0x118))(local_28);
     allocation[0x28] = local_28[0];
     *(undefined4 **)(iVar4 + 0x34c) = puVar5;
   }
@@ -4053,7 +4053,7 @@ int Interpolator__ctor_125350(this, param_2, param_3, param_4, compiler)
   this[0xc] = 0;
   this[0xd] = 0;
   this[0xe] = 0;
-  iVar7 = *(int *)(compiler + 0x6c4);
+  iVar7 = *(int *)(compiler + COMP_currentProgram);
   if ((*(uint *)(iVar7 + 0x30) & 0x2000) != 0) {
     iVar2 = RegKind__flagBit0(this[1]);
     if (iVar2 != 0) {
@@ -4062,7 +4062,7 @@ int Interpolator__ctor_125350(this, param_2, param_3, param_4, compiler)
       *(int *)(compiler + 0x334) = iVar2 + 1;
       this[4] = param_2;
     }
-    arena = *(undefined4 *)(compiler + 0x374);
+    arena = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arena,0x168);
     puVar9 = allocation + 1;
     *allocation = arena;
@@ -4078,7 +4078,7 @@ int Interpolator__ctor_125350(this, param_2, param_3, param_4, compiler)
   if ((*(uint *)(iVar7 + 0x30) & 1) == 0) {
     return;
   }
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   puVar9 = allocation + 1;
   *allocation = arena;
@@ -4092,8 +4092,8 @@ int Interpolator__ctor_125350(this, param_2, param_3, param_4, compiler)
   *(int *)(compiler + 0x3ac) = iVar2;
   arena = FUN_001275a0(arena,0,iVar2,0);
   this[0xf] = arena;
-  iVar2 = (**(code **)(**(int **)(compiler + 0x30c) + 0x120))
-                    (*(int **)(compiler + 0x30c),iVar7,compiler);
+  iVar2 = (**(code **)(**(int **)(compiler + COMP_target) + 0x120))
+                    (*(int **)(compiler + COMP_target),iVar7,compiler);
   if (iVar2 == 0) goto LAB_00125660;
   local_48 = 6;
   local_44[0] = 0;
@@ -4114,7 +4114,7 @@ LAB_00125578:
     }
   }
   uVar4 = FUN_001275a0(*(undefined4 *)(iVar7 + 0x3ac),local_48,local_44[0],0);
-  arena2 = *(undefined4 *)(compiler + 0x374);
+  arena2 = *(undefined4 *)(compiler + COMP_arenaA);
   allocation2 = (undefined4 *)Arena__alloc(arena2,0x168);
   puVar10 = allocation2 + 1;
   *allocation2 = arena2;
@@ -4152,7 +4152,7 @@ LAB_00125660:
   if (param_3 == 0x18) {
     operandRecord = IRInst__getOperandRecord(puVar9,1);
     *(undefined4 *)(operandRecord + 0x10) = arena;
-    (**(code **)(**(int **)(compiler + 0x30c) + 0x1c))(local_38);
+    (**(code **)(**(int **)(compiler + COMP_target) + 0x1c))(local_38);
     allocation[0x28] = local_38[0];
   }
   return;
@@ -4187,7 +4187,7 @@ int Interpolator__ctor_1257b0(this, param_2, param_3, param_4, compiler)
   this[0xc] = 0;
   this[0xd] = 0;
   this[0xe] = 0;
-  iVar7 = *(int *)(compiler + 0x6c4);
+  iVar7 = *(int *)(compiler + COMP_currentProgram);
   if ((*(uint *)(iVar7 + 0x30) & 0x2000) != 0) {
     iVar2 = RegKind__flagBit0(this[1]);
     if (iVar2 != 0) {
@@ -4196,7 +4196,7 @@ int Interpolator__ctor_1257b0(this, param_2, param_3, param_4, compiler)
       *(int *)(compiler + 0x334) = iVar2 + 1;
       this[4] = param_2;
     }
-    arena = *(undefined4 *)(compiler + 0x374);
+    arena = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arena,0x168);
     puVar9 = allocation + 1;
     *allocation = arena;
@@ -4212,7 +4212,7 @@ int Interpolator__ctor_1257b0(this, param_2, param_3, param_4, compiler)
   if ((*(uint *)(iVar7 + 0x30) & 1) == 0) {
     return;
   }
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   puVar9 = allocation + 1;
   *allocation = arena;
@@ -4226,8 +4226,8 @@ int Interpolator__ctor_1257b0(this, param_2, param_3, param_4, compiler)
   *(int *)(compiler + 0x3ac) = iVar2;
   arena = FUN_001275a0(arena,0,iVar2,0);
   this[0xf] = arena;
-  iVar2 = (**(code **)(**(int **)(compiler + 0x30c) + 0x120))
-                    (*(int **)(compiler + 0x30c),iVar7,compiler);
+  iVar2 = (**(code **)(**(int **)(compiler + COMP_target) + 0x120))
+                    (*(int **)(compiler + COMP_target),iVar7,compiler);
   if (iVar2 == 0) goto LAB_00125ac0;
   local_48 = 6;
   local_44[0] = 0;
@@ -4248,7 +4248,7 @@ LAB_001259d8:
     }
   }
   uVar4 = FUN_001275a0(*(undefined4 *)(iVar7 + 0x3ac),local_48,local_44[0],0);
-  arena2 = *(undefined4 *)(compiler + 0x374);
+  arena2 = *(undefined4 *)(compiler + COMP_arenaA);
   allocation2 = (undefined4 *)Arena__alloc(arena2,0x168);
   puVar10 = allocation2 + 1;
   *allocation2 = arena2;
@@ -4286,7 +4286,7 @@ LAB_00125ac0:
   if (param_3 == 0x18) {
     operandRecord = IRInst__getOperandRecord(puVar9,1);
     *(undefined4 *)(operandRecord + 0x10) = arena;
-    (**(code **)(**(int **)(compiler + 0x30c) + 0x1c))(local_38);
+    (**(code **)(**(int **)(compiler + COMP_target) + 0x1c))(local_38);
     allocation[0x28] = local_38[0];
   }
   return;
@@ -4373,11 +4373,11 @@ int PrimitiveIndex__ctor_125db8(this, param_2, param_3, param_4, compiler)
   ((int (*)())TempValue__ctor_124938)(this,param_2,param_3,param_4,compiler);
   *this = PTR_DAT_001e90c8 + 8;
   local_38[0] = 0x10203;
-  iVar4 = *(int *)(compiler + 0x6c4);
-  uVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0xa4))
-                    (*(int **)(compiler + 0x30c),local_38,compiler,param_4,iVar3,in_r8,0x10203);
+  iVar4 = *(int *)(compiler + COMP_currentProgram);
+  uVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0xa4))
+                    (*(int **)(compiler + COMP_target),local_38,compiler,param_4,iVar3,in_r8,0x10203);
   uVar1 = FUN_00127608(*(undefined4 *)(iVar4 + 0x3ac),0x10,uVar1,0);
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   puVar6 = allocation + 1;
   *allocation = arena;

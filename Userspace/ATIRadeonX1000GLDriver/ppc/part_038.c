@@ -79,8 +79,8 @@ int ExportSlot__ctor_12622c(this, param_2, param_3, param_4, compiler)
   this[4] = param_2;
   this[9] = this[9] | 2;
   *this = &PTR_FUN_001ea7f0;
-  if ((*(uint *)(*(int *)(compiler + 0x6c4) + 0x30) & 0x4000) != 0) {
-    arena = *(undefined4 *)(compiler + 0x374);
+  if ((*(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) & 0x4000) != 0) {
+    arena = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arena,0x168);
     puVar3 = allocation + 1;
     *allocation = arena;
@@ -93,8 +93,8 @@ int ExportSlot__ctor_12622c(this, param_2, param_3, param_4, compiler)
     operandRecord = IRInst__getOperandRecord(puVar3,1);
     *(undefined4 *)(operandRecord + 0x10) = arena;
     VReg__addUse(this,1,puVar3);
-    Program__addInst(*(undefined4 *)(compiler + 0x6c4),puVar3);
-    Block__appendInst(*(undefined4 *)(*(int *)(compiler + 0x6c4) + 0x3a8),puVar3);
+    Program__addInst(*(undefined4 *)(compiler + COMP_currentProgram),puVar3);
+    Block__appendInst(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3a8),puVar3);
   }
   return;
 }
@@ -116,8 +116,8 @@ int ExportSlot__ctor_126378(this, param_2, param_3, param_4, compiler)
   this[4] = param_2;
   this[9] = this[9] | 2;
   *this = &PTR_FUN_001ea7f0;
-  if ((*(uint *)(*(int *)(compiler + 0x6c4) + 0x30) & 0x4000) != 0) {
-    arena = *(undefined4 *)(compiler + 0x374);
+  if ((*(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) & 0x4000) != 0) {
+    arena = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arena,0x168);
     puVar3 = allocation + 1;
     *allocation = arena;
@@ -130,8 +130,8 @@ int ExportSlot__ctor_126378(this, param_2, param_3, param_4, compiler)
     operandRecord = IRInst__getOperandRecord(puVar3,1);
     *(undefined4 *)(operandRecord + 0x10) = arena;
     VReg__addUse(this,1,puVar3);
-    Program__addInst(*(undefined4 *)(compiler + 0x6c4),puVar3);
-    Block__appendInst(*(undefined4 *)(*(int *)(compiler + 0x6c4) + 0x3a8),puVar3);
+    Program__addInst(*(undefined4 *)(compiler + COMP_currentProgram),puVar3);
+    Block__appendInst(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3a8),puVar3);
   }
   return;
 }
@@ -281,7 +281,7 @@ int ImmedConstBuffer__vslot283(this, param_2, param_3, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x34);
   *allocation = arena;
   ((int (*)())ImmedConstBuffer__ctor_1261e8)(allocation + 1,this,param_2,param_3,compiler);
@@ -319,7 +319,7 @@ int ImmedConstBuffer__vslot235(this, param_2, param_3, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x34);
   *allocation = arena;
   VertexRegister__ctor_1248ec(allocation + 1,this,param_2,param_3,compiler);
@@ -336,7 +336,7 @@ int ImmedConstBuffer__vslot15(this, param_2, param_3, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x38);
   *allocation = arena;
   TempValue__ctor_124e04(allocation + 1,this,param_2,param_3,compiler);
@@ -353,7 +353,7 @@ int ImmedConstBuffer__vslot23(this, param_2, param_3, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x34);
   *allocation = arena;
   FixedValue__ctor_124724(allocation + 1,this,param_2,param_3,compiler);
@@ -370,7 +370,7 @@ int ImmedConstBuffer__vslot83(this, param_2, param_3, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x44);
   *allocation = arena;
   Interpolator__ctor_1257b0(allocation + 1,this,param_2,param_3,compiler);
@@ -387,7 +387,7 @@ int ImmedConstBuffer__vslot67(this, param_2, param_3, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x38);
   *allocation = arena;
   StandardIndex__ctor_124b24(allocation + 1,this,param_2,param_3,compiler);
@@ -404,7 +404,7 @@ int ImmedConstBuffer__vslot71(this, param_2, param_3, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x38);
   *allocation = arena;
   PrimitiveIndex__ctor_125db8(allocation + 1,this,param_2,param_3,compiler);
@@ -421,7 +421,7 @@ int ImmedConstBuffer__vslot35(this, param_2, param_3, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x34);
   *allocation = arena;
   Resource__ctor_125d60(allocation + 1,this,param_2,param_3,compiler);
@@ -438,7 +438,7 @@ int ImmedConstBuffer__vslot167(this, param_2, param_3, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x38);
   *allocation = arena;
   FUN_00125f94(allocation + 1,this,param_2,param_3,compiler);
@@ -455,7 +455,7 @@ int ImmedConstBuffer__vslot171(this, param_2, param_3, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x34);
   *allocation = arena;
   FUN_00126034(allocation + 1,this,param_2,param_3,compiler);
@@ -474,7 +474,7 @@ int FUN_00126de4(param_1, param_2, param_3, compiler)
   undefined4 arena;
   undefined4 *puVar4;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x38);
   puVar4 = allocation + 1;
   *allocation = arena;
@@ -495,7 +495,7 @@ int ImmedConstBuffer__vslot183(this, param_2, param_3, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x38);
   *allocation = arena;
   LoopIndexedOutputSet__ctor_126080(allocation + 1,this,param_2,param_3,compiler);
@@ -512,7 +512,7 @@ int ImmedConstBuffer__vslot179(this, param_2, param_3, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x38);
   *allocation = arena;
   ((int (*)())LoopIndexedInputSet__ctor_126620)(allocation + 1,this,param_2,param_3,compiler);
@@ -529,7 +529,7 @@ int ImmedConstBuffer__vslot175(this, param_2, param_3, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x38);
   *allocation = arena;
   ((int (*)())LoopIndexedConstSet__ctor_126538)(allocation + 1,this,param_2,param_3,compiler);
@@ -546,7 +546,7 @@ int ImmedConstBuffer__vslot187(this, param_2, param_3, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x34);
   *allocation = arena;
   ((int (*)())FUN_0012614c)(allocation + 1,this,param_2,param_3,compiler);
@@ -563,7 +563,7 @@ int ImmedConstBuffer__vslot191(this, param_2, param_3, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x34);
   *allocation = arena;
   ((int (*)())ExportSlot__ctor_126378)(allocation + 1,this,param_2,param_3,compiler);
@@ -580,7 +580,7 @@ int ImmedConstBuffer__vslot79(this, param_2, param_3, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x34);
   *allocation = arena;
   Physical__ctor_125c8c(allocation + 1,this,param_2,param_3,compiler);
@@ -597,7 +597,7 @@ int ImmedConstBuffer__vslot39(this, param_2, param_3, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x3c);
   *allocation = arena;
   ExportValue__ctor_1250dc(allocation + 1,this,param_2,param_3,compiler);

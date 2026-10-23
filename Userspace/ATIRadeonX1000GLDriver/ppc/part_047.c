@@ -2040,7 +2040,7 @@ int FUN_0017a130(param_1, param_2, inst, compiler)
     operandRecord = IRInst__getOperandRecord(inst,param_1);
     *(undefined4 *)(operandRecord + 0x10) = uVar4;
   }
-  ((void (*)())FUN_000f79c4)(inst,*(undefined4 *)(compiler + 0x6c4),param_1,(double)*param_2,(double)param_2[1],
+  ((void (*)())FUN_000f79c4)(inst,*(undefined4 *)(compiler + COMP_currentProgram),param_1,(double)*param_2,(double)param_2[1],
                (double)param_2[2],(double)param_2[3]);
   piVar1 = *(int **)(*(int *)(param_1 * 0x18 + inst + 0x8c) + 0x18);
   if (*piVar1 == 0) {
@@ -2056,7 +2056,7 @@ int FUN_0017a130(param_1, param_2, inst, compiler)
   iVar5 = *piVar1;
   iVar3 = *(int *)(iVar5 + 0x8c);
   if (*(int *)(*(int *)(iVar3 + 0x2c) + 4) == 0) {
-    arenaAt378 = *(undefined4 *)(compiler + 0x378);
+    arenaAt378 = *(undefined4 *)(compiler + COMP_arenaB);
     puVar2 = (undefined4 *)Arena__alloc(arenaAt378,0x240);
     puVar6 = puVar2 + 1;
     *puVar2 = arenaAt378;
@@ -2590,7 +2590,7 @@ int FUN_0017ae28(ctx, param_2, param_3, param_4, param_5, param_6, compiler)
   
   iVar3 = *(int *)(param_3 + 0x8c);
   if (*(int *)(*(int *)(iVar3 + 0x2c) + 4) == 0) {
-    arena = *(undefined4 *)(compiler + 0x378);
+    arena = *(undefined4 *)(compiler + COMP_arenaB);
     allocation = (undefined4 *)Arena__alloc(arena,0x240);
     puVar4 = allocation + 1;
     *allocation = arena;

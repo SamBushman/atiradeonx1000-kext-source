@@ -18,7 +18,7 @@ int FUN_0010f704(param_1, vector, compiler)
   undefined4 arena;
   uint loopIndex;
   
-  arena = *(undefined4 *)(compiler + 0x378);
+  arena = *(undefined4 *)(compiler + COMP_arenaB);
   allocation = (undefined4 *)Arena__alloc(arena,0x14);
   puVar8 = allocation + 1;
   allocation[1] = 2;
@@ -2241,7 +2241,7 @@ int OpcodeTraits__flagBit0(opcode, compiler)
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),compiler);
+  iVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
   return *(uint *)(opcode * 0x38 + iVar1) & 1;
 }
 
@@ -2298,7 +2298,7 @@ int OpcodeTraits__flagBit2(opcode, compiler)
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),compiler);
+  iVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
   return *(uint *)(opcode * 0x38 + iVar1) >> 2 & 1;
 }
 
@@ -2309,7 +2309,7 @@ int OpcodeTraits__flagBit3(opcode, compiler)
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),compiler);
+  iVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
   return *(uint *)(opcode * 0x38 + iVar1) >> 3 & 1;
 }
 
@@ -2320,7 +2320,7 @@ int OpcodeTraits__flagBit6(opcode, compiler)
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),compiler);
+  iVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
   return *(uint *)(opcode * 0x38 + iVar1) >> 6 & 1;
 }
 
@@ -2331,7 +2331,7 @@ int OpcodeTraits__flagBit7(opcode, compiler)
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),compiler);
+  iVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
   return *(uint *)(opcode * 0x38 + iVar1) >> 7 & 1;
 }
 
@@ -2342,7 +2342,7 @@ int OpcodeTraits__flagBit8(opcode, compiler)
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),compiler);
+  iVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
   return *(uint *)(opcode * 0x38 + iVar1) >> 8 & 1;
 }
 
@@ -2353,7 +2353,7 @@ int OpcodeTraits__flagBit9(opcode, compiler)
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),compiler);
+  iVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
   return *(uint *)(opcode * 0x38 + iVar1) >> 9 & 1;
 }
 
@@ -2364,7 +2364,7 @@ int OpcodeTraits__flagBit10(opcode, compiler)
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),compiler);
+  iVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
   return *(uint *)(opcode * 0x38 + iVar1) >> 10 & 1;
 }
 
@@ -2375,7 +2375,7 @@ int OpcodeTraits__flagBit12(opcode, compiler)
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),compiler);
+  iVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
   return *(uint *)(opcode * 0x38 + iVar1) >> 0xc & 1;
 }
 
@@ -2386,7 +2386,7 @@ int OpcodeTraits__flagBit13(opcode, compiler)
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),compiler);
+  iVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
   return *(uint *)(opcode * 0x38 + iVar1) >> 0xd & 1;
 }
 
@@ -2397,7 +2397,7 @@ int OpcodeTraits__getField4(opcode, compiler)
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),compiler);
+  iVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
   return *(undefined4 *)(opcode * 0x38 + iVar1 + 4);
 }
 
@@ -2408,7 +2408,7 @@ int OpcodeTraits__getInstClass(opcode, compiler)
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),compiler);
+  iVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
   return *(undefined4 *)(opcode * 0x38 + iVar1 + 0x30);
 }
 
@@ -2419,7 +2419,7 @@ int OpcodeTraits__getFieldC(opcode, compiler)
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),compiler);
+  iVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
   return *(undefined4 *)(opcode * 0x38 + iVar1 + 0xc);
 }
 
@@ -2430,7 +2430,7 @@ int OpcodeTraits__getField34(opcode, compiler)
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x16c))(*(int **)(compiler + 0x30c),compiler);
+  iVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x16c))(*(int **)(compiler + COMP_target),compiler);
   return *(undefined4 *)(opcode * 0x38 + iVar1 + 0x34);
 }
 

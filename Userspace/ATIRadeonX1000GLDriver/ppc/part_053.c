@@ -188,7 +188,7 @@ int R520VMachineAssembler__init(this, program, allocatorArg, compiler)
   R300VMachineAssembler__init(this,program,allocatorArg,compiler);
   *(undefined4 *)(this + 0x8c) = 0xffffffff;
   *(undefined4 *)(this + 0x90) = 0;
-  arenaAt378 = *(undefined4 *)(compiler + 0x378);
+  arenaAt378 = *(undefined4 *)(compiler + COMP_arenaB);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x14);
   *vectorAlloc = arenaAt378;
   vectorAlloc[1] = 2;
@@ -197,7 +197,7 @@ int R520VMachineAssembler__init(this, program, allocatorArg, compiler)
   uVar2 = Arena__alloc(arenaAt378,8);
   vectorAlloc[3] = uVar2;
   *(undefined4 **)(this + 0x98) = vectorAlloc + 1;
-  arenaAt378 = *(undefined4 *)(compiler + 0x378);
+  arenaAt378 = *(undefined4 *)(compiler + COMP_arenaB);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x14);
   *vectorAlloc = arenaAt378;
   vectorAlloc[1] = 2;
@@ -217,7 +217,7 @@ int R520VMachineAssembler__create(unusedThis, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x378);
+  arena = *(undefined4 *)(compiler + COMP_arenaB);
   allocation = (undefined4 *)Arena__alloc(arena,0xa0);
   *allocation = arena;
   allocation[1] = &PTR_FUN_001eb8d8;
@@ -1969,11 +1969,11 @@ int R520MachineAssembler__vslot86_resolveSourceRegister(this, inst, sourceIndex,
     registerWord = 0;
     if (callResult[0x26] == 0x29) {
       iVar2 = FUN_00105c5c(inst,sourceIndex);
-      registerWord = iVar2 + *(int *)(*(int *)(compiler + 0x6c4) + 0x3f0) | 0x4000;
+      registerWord = iVar2 + *(int *)(*(int *)(compiler + COMP_currentProgram) + 0x3f0) | 0x4000;
     }
     return registerWord;
   }
-  registerWord = thunk_FUN_00134de8(*(undefined4 *)(compiler + 0x6c4),callResult);
+  registerWord = thunk_FUN_00134de8(*(undefined4 *)(compiler + COMP_currentProgram),callResult);
   return registerWord;
 }
 
@@ -2362,7 +2362,7 @@ int R520MachineAssembler__vslot26_assembleThenAppendRecord(this, node, block, co
   
   a3 = compiler;
   iVar3 = Block__getBranchInst(node,node,block,compiler,param_5,param_6,param_7);
-  uVar7 = *(undefined4 *)(compiler + 0x6c4);
+  uVar7 = *(undefined4 *)(compiler + COMP_currentProgram);
   iVar2 = *(int *)(iVar3 + 300);
   sourceDef = IRInst__getOperandSource(iVar3,1);
   uVar4 = thunk_FUN_00134de8(uVar7,sourceDef);
@@ -2399,7 +2399,7 @@ int R520MachineAssembler__create(unusedThis, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x378);
+  arena = *(undefined4 *)(compiler + COMP_arenaB);
   allocation = (undefined4 *)Arena__alloc(arena,((unsigned char *)0x000010c4U));
   *allocation = arena;
   allocation[1] = &PTR_FUN_001eb9a8;

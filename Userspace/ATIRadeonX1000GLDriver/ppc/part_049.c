@@ -1095,9 +1095,9 @@ int FUN_001882a4(inst, compiler)
         loopIndex = loopIndex + 1;
       } while (bVar1);
       loopIndex = ((int (*)())FUN_0010ab40)((double)GH_U2F((unsigned int)(a0[uVar5 * 6 + 8])));
-      iVar4 = (**(code **)(**(int **)(compiler + 0x30c) + 0xfc))(*(int **)(compiler + 0x30c),loopIndex,0);
+      iVar4 = (**(code **)(**(int **)(compiler + COMP_target) + 0xfc))(*(int **)(compiler + COMP_target),loopIndex,0);
       if (iVar4 != 0) {
-        ((void (*)())FUN_000f79c4)(inst,*(undefined4 *)(compiler + 0x6c4),1,1.0,1.0,1.0,1.0);
+        ((void (*)())FUN_000f79c4)(inst,*(undefined4 *)(compiler + COMP_currentProgram),1,1.0,1.0,1.0,1.0);
         inst[0x49] = loopIndex;
         loopIndex = IRInst__getOperandRecord(inst,1);
         *(undefined4 *)(loopIndex + 0x10) = 0x10203;
@@ -3951,9 +3951,9 @@ LAB_0018d93c:
         a3 = &local_68;
         iVar7 = FUN_000f5cf0(operandVReg2,1,piVar3,a3);
         if (((iVar7 == 0) || (local_68 != 2)) ||
-           (iVar7 = (**(code **)(**(int **)(compiler + 0x30c) + 0xf0))((double)local_64), iVar7 == 0)
+           (iVar7 = (**(code **)(**(int **)(compiler + COMP_target) + 0xf0))((double)local_64), iVar7 == 0)
            ) {
-          iVar7 = IRInst__hasSingleUse(operandVReg2,*(undefined4 *)(compiler + 0x6c4));
+          iVar7 = IRInst__hasSingleUse(operandVReg2,*(undefined4 *)(compiler + COMP_currentProgram));
           if (iVar7 == 0) {
             bVar1 = true;
             iVar7 = 1;

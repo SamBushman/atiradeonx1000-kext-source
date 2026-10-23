@@ -5625,8 +5625,8 @@ int pass_minreg_order(scheduler, program)
   int *currentInst;
   int *inst;
   
-  block = *(int *)(program + 900);
-  for (nextBlock = *(int *)(*(int *)(program + 900) + 8); nextBlock != 0; nextBlock = *(int *)(nextBlock + 8)) {
+  block = *(int *)(program + PROG_blockListHead);
+  for (nextBlock = *(int *)(*(int *)(program + PROG_blockListHead) + 8); nextBlock != 0; nextBlock = *(int *)(nextBlock + 8)) {
     nextInst = (int *)(*(int **)(block + 0xa0))[1];
     inst = *(int **)(block + 0xa0);
     if (nextInst != (int *)0x0) {

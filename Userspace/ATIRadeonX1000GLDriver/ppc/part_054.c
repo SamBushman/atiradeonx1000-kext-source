@@ -403,7 +403,7 @@ int R520MachineAssembler__vslot23_emitTexRecord(this, inst, blockArg, compiler)
     *(char *)(this[0x18] * 0x48 + this[0x2a] + 0x19) = (char)iVar13;
     iVar15 = this[0x18];
     iVar5 = this[0x2a];
-    uVar7 = thunk_FUN_00134de8(*(undefined4 *)(compiler + 0x6c4),inst);
+    uVar7 = thunk_FUN_00134de8(*(undefined4 *)(compiler + COMP_currentProgram),inst);
     *(undefined2 *)(iVar15 * 0x48 + iVar5 + 0xc) = uVar7;
   }
   else {
@@ -420,7 +420,7 @@ int R520MachineAssembler__vslot23_emitTexRecord(this, inst, blockArg, compiler)
          (char)*(int *)(PTR_DAT_001e913c + loopRemaining * 0x38 + 0xc);
   }
   bVar10 = 0xc;
-  iVar13 = *(int *)(iVar13 * 0xc + *(int *)(*(int *)(compiler + 0x6c4) + 0x78) + 4);
+  iVar13 = *(int *)(iVar13 * 0xc + *(int *)(*(int *)(compiler + COMP_currentProgram) + 0x78) + 4);
   if (iVar13 != 2) {
     if (iVar13 < 3) {
       bVar10 = 0xe;
@@ -510,7 +510,7 @@ LAB_001a20d4:
     *(uint *)(loopRemaining + 0x14) = (uVar9 & 3) << 8 | *(uint *)(loopRemaining + 0x14) & 0xfffffcff;
     iVar13 = this[0x18];
     loopRemaining = this[0x2a];
-    uVar14 = *(undefined4 *)(compiler + 0x6c4);
+    uVar14 = *(undefined4 *)(compiler + COMP_currentProgram);
     uVar6 = IRInst__getOperandSource(inst,2);
     uVar7 = thunk_FUN_00134de8(uVar14,uVar6);
     *(undefined2 *)(iVar13 * 0x48 + loopRemaining + 0x10) = uVar7;
@@ -526,7 +526,7 @@ LAB_001a20d4:
     *(uint *)(loopRemaining + 0x14) = uVar9 & 3 | *(uint *)(loopRemaining + 0x14) & 0xfffffffc;
     iVar13 = this[0x18];
     loopRemaining = this[0x2a];
-    uVar14 = *(undefined4 *)(compiler + 0x6c4);
+    uVar14 = *(undefined4 *)(compiler + COMP_currentProgram);
     uVar6 = IRInst__getOperandSource(inst,3);
     uVar7 = thunk_FUN_00134de8(uVar14,uVar6);
     *(undefined2 *)(iVar13 * 0x48 + loopRemaining + 0x12) = uVar7;

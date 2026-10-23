@@ -977,10 +977,10 @@ int pass_loop_trans(program)
   undefined4 loopInfoCounterInit;
   int loopInfoProgram;
   
-  piVar7 = (int *)(*(int **)(program + 900))[2];
+  piVar7 = (int *)(*(int **)(program + PROG_blockListHead))[2];
   if (piVar7 != (int *)0x0) {
     changed = false;
-    block = *(int **)(program + 900);
+    block = *(int **)(program + PROG_blockListHead);
     loopInfoProgram = program;
     do {
       nextBlock = piVar7;
@@ -1900,9 +1900,9 @@ int FUN_0012e56c(param_1, param_2, compiler)
   
   iVar2 = (**(code **)(*param_2 + 0x30))(param_2,param_2,compiler);
   if (iVar2 != 0) {
-    arena = *(undefined4 *)(compiler + 0x374);
+    arena = *(undefined4 *)(compiler + COMP_arenaA);
     iVar7 = param_2[0x4b];
-    uVar5 = *(undefined4 *)(compiler + 0x6c4);
+    uVar5 = *(undefined4 *)(compiler + COMP_currentProgram);
     allocation = (undefined4 *)Arena__alloc(arena,0x168);
     puVar6 = allocation + 1;
     *allocation = arena;
@@ -1917,7 +1917,7 @@ int FUN_0012e56c(param_1, param_2, compiler)
     *(undefined4 *)(operandRecord + 0x10) = arena;
     uVar11 = *(undefined4 *)(iVar7 + 0xb8);
     arena = Block__getSuccessor(iVar7,0);
-    arenaAt374 = *(undefined4 *)(compiler + 0x374);
+    arenaAt374 = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arenaAt374,0x130);
     puVar8 = allocation + 1;
     *allocation = arenaAt374;
@@ -1926,22 +1926,22 @@ int FUN_0012e56c(param_1, param_2, compiler)
     FUN_000ec3ac(uVar5,iVar7,puVar8);
     FUN_000e977c(iVar7,arena,puVar8);
     uVar11 = FUN_0012b140(iVar7);
-    arenaAt374 = *(undefined4 *)(compiler + 0x374);
+    arenaAt374 = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arenaAt374,0x130);
     puVar10 = allocation + 1;
     *allocation = arenaAt374;
     Block__ctor_ea020(puVar10,compiler);
-    arenaAt374 = *(undefined4 *)(compiler + 0x374);
+    arenaAt374 = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arenaAt374,0x138);
     puVar9 = allocation + 1;
     *allocation = arenaAt374;
     BreakBlock__ctor_ec0c8(puVar9,iVar7,1,compiler);
-    arenaAt374 = *(undefined4 *)(compiler + 0x374);
+    arenaAt374 = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arenaAt374,0x15c);
     puVar12 = allocation + 1;
     *allocation = arenaAt374;
     IfHeader__ctor_ea6d0(puVar12,puVar6,uVar11,puVar10,compiler);
-    arenaAt3742 = *(undefined4 *)(compiler + 0x374);
+    arenaAt3742 = *(undefined4 *)(compiler + COMP_arenaA);
     puVar4 = (undefined4 *)Arena__alloc(arenaAt3742,0x134);
     puVar15 = puVar4 + 1;
     *puVar4 = arenaAt3742;
@@ -2783,8 +2783,8 @@ int Program__isRegionTrivial(program, startBlock, boundaryBlock)
   if (2 < blockInstCount) {
     return 0;
   }
-  *(int *)(program + 0x474) = *(int *)(program + 0x474) + 1;
-  vecArena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
+  *(int *)(program + PROG_visitStamp) = *(int *)(program + PROG_visitStamp) + 1;
+  vecArena = *(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaB);
   vecCount = 0;
   vecCapacity = 2;
   vecData = (undefined4 *)Arena__alloc(vecArena,8);
@@ -2806,9 +2806,9 @@ LAB_00130080:
     blockInstCount = 0;
     for (loopIndex = 1; loopIndex <= *(uint *)(startBlock[0x34] + 4); loopIndex = loopIndex + 1) {
       successor = *(int *)(*(int *)(startBlock[0x34] + 8) + blockInstCount);
-      if (((successor != 0) && (*(int *)(program + 0x474) != *(int *)(successor + 0x118))) &&
+      if (((successor != 0) && (*(int *)(program + PROG_visitStamp) != *(int *)(successor + 0x118))) &&
          (boundaryBlock != successor)) {
-        *(int *)(successor + 0x118) = *(int *)(program + 0x474);
+        *(int *)(successor + 0x118) = *(int *)(program + PROG_visitStamp);
         if (vecCount < vecCapacity) {
           vecData[vecCount] = 0;
           elementRef = vecData + vecCount;
@@ -2862,10 +2862,10 @@ int pass_remove_empty_graphs(program)
   undefined8 regionResult;
   
   while( true ) {
-    successorOrNextBlock = (int *)(*(int **)(program + 900))[2];
+    successorOrNextBlock = (int *)(*(int **)(program + PROG_blockListHead))[2];
     if (successorOrNextBlock == (int *)0x0) break;
     changed = false;
-    block = *(int **)(program + 900);
+    block = *(int **)(program + PROG_blockListHead);
     do {
       nextBlock = successorOrNextBlock;
       iVar2 = (**(code **)(*block + 0x24))(block);
@@ -2892,7 +2892,7 @@ int pass_remove_empty_graphs(program)
         iVar2 = joinBlock;
         regionResult = ((int (*)())Program__isRegionTrivial)(program,block,joinBlock);
         if ((int)((ulonglong)regionResult >> 0x20) == 0) {
-          iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x21);
+          iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),0x21);
           if (((iVar2 != 0) && (iVar2 = Block__hasMultipleSuccessors(thenBlock), iVar2 == 0)) &&
              ((iVar2 = Block__getSuccessor(thenBlock,0), iVar2 == joinBlock &&
               ((iVar2 = DList__count(thenBlock + 0x90), iVar2 < 3 &&
@@ -2908,7 +2908,7 @@ int pass_remove_empty_graphs(program)
             Program__removeInst(program,successorOrNextBlock);
             successorOrNextBlock[5] = successorOrNextBlock[5] & 0xffffffef;
             in_r9 = *(code **)(*successorOrNextBlock + 0xc);
-            (*in_r9)(successorOrNextBlock,*(uint *)(program + 0x30) >> 7 & 1,*(undefined4 *)(program + 8),in_r6,
+            (*in_r9)(successorOrNextBlock,*(uint *)(program + PROG_flags) >> 7 & 1,*(undefined4 *)(program + PROG_compiler),in_r6,
                      in_r7,in_r8,in_r9);
             block[0x4c] = 0;
           }
@@ -2942,7 +2942,7 @@ LAB_0013037c:
     *(undefined4 *)(program + 0x394) = 0;
     *(undefined4 *)(program + 0x398) = 0;
     *(undefined4 *)(program + 0x39c) = 0;
-    iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x11);
+    iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),0x11);
     if (iVar2 != 0) {
       Program__eliminateDeadInstsAndRecountUses(program,0);
     }
@@ -3526,7 +3526,7 @@ int FUN_00130ec0(param_1, param_2, compiler)
   undefined4 arena;
   undefined4 *puVar3;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   puVar3 = allocation + 1;
   *allocation = arena;
@@ -3535,7 +3535,7 @@ int FUN_00130ec0(param_1, param_2, compiler)
   allocation[0x27] = 0x3b;
   allocation[0x4e] = param_2;
   allocation[0x26] = param_1;
-  Block__appendInst(*(undefined4 *)(*(int *)(compiler + 0x6c4) + 0x3a0),puVar3);
+  Block__appendInst(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3a0),puVar3);
   return puVar3;
 }
 
@@ -3549,7 +3549,7 @@ int FUN_00130f64(param_1, param_2, compiler)
   undefined4 arena;
   undefined4 *puVar3;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   puVar3 = allocation + 1;
   *allocation = arena;
@@ -3558,7 +3558,7 @@ int FUN_00130f64(param_1, param_2, compiler)
   allocation[0x27] = 0x3c;
   allocation[0x50] = param_2;
   allocation[0x26] = param_2;
-  Block__prependInst(*(undefined4 *)(*(int *)(compiler + 0x6c4) + 0x3a0),puVar3);
+  Block__prependInst(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3a0),puVar3);
   return puVar3;
 }
 
@@ -3635,7 +3635,7 @@ int FUN_001311cc(param_1, param_2, param_3, param_4, param_5, compiler)
   undefined4 arena;
   undefined4 *puVar4;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   puVar4 = allocation + 1;
   *allocation = arena;
@@ -3692,7 +3692,7 @@ int FUN_001312f4(inst, param_2, param_3, param_4, compiler)
     } while (bVar1);
   }
   FUN_000f370c(&local_38,local_48[0]);
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   puVar7 = allocation + 1;
   *allocation = arena;

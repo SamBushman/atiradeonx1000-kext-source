@@ -1,0 +1,52 @@
+# field	STRUCT	OFFSET	name	tier	evidence   - PROG: the shader-compiler Program object (a pass receives it); COMP: the Compiler (*(program+8)); scopes prog_scope.txt / comp_scope.txt; fork E3
+field	PROG	0x8	compiler	CONFIRMED	every pass passes *(program+8) to the instruction factory FUN_001043f0 and the arena allocator FUN_00193e18 (notes_compiler_ir.md 5.1)
+field	PROG	0x30	flags	INFERRED	flag word; bit 7 is the "debug" bit passed to FUN_00106004 and to virtual calls (notes_compiler_ir.md 5.1)
+field	PROG	0xa0	copyFoldCount	CONFIRMED	running counter of copy folds, compared against compiler limit max_copy_folds (+0x650) (notes_compiler_passes2.md 1.1)
+field	PROG	0xa4	constPropCount	INFERRED	counter bumped with OPT_CONST_PROP folds in Program__valueNumberInst (notes_compiler_passes2.md 2)
+field	PROG	0xa8	valueTransformCount	CONFIRMED	compared against max_vn_transforms (compiler+0x658) in FUN_00180830 (OPT_VALUE_TRANSFORMS)
+field	PROG	0x14c	vnKillCount	CONFIRMED	value-number kills, compared against max_vn_kills (compiler+0x654) (notes_compiler_passes2.md 1.1)
+field	PROG	0x228	mixInstCount	CONFIRMED	compared against max_mix_insts (compiler+0x664) in FUN_0017b12c (OPT_MIX); reached through compiler+0x6c4
+field	PROG	0x22c	uselessPhiCount	CONFIRMED	useless phis folded, compared against max_useless_phis (compiler+0x66c) in Program__foldUselessPhis
+field	PROG	0x384	blockListHead	CONFIRMED	head of the Block list: FUN_000ed7e4 walks it calling Block virtual slot 18 (notes_compiler_ir.md 5.1)
+field	PROG	0x3a0	entryBlock	INFERRED	the work list of pass_ssa_build starts with it; passed to FUN_000e79d0 / FUN_000ec3ac
+field	PROG	0x3c4	instructionVector	CONFIRMED	vector of all instructions: Program__addInst/removeInst maintain it, FUN_000ed7e4 clears bit 0 of +0x14 in each
+field	PROG	0x404	scopeExprTables	CONFIRMED	scope stack of the per-scope expression hash tables (pass_ssa_build; notes_compiler_passes2.md 2)
+field	PROG	0x408	scopeLaneMatchTables	CONFIRMED	scope stack of the lane-match tables (same section)
+field	PROG	0x40c	scopeSwizzleTables	CONFIRMED	scope stack of the swizzle tables (same section)
+field	PROG	0x410	scopeBlocks	CONFIRMED	the block that opened each scope (same section)
+field	PROG	0x474	visitStamp	CONFIRMED	inst+0x150 visit stamps are compared with it (notes_compiler_passes.md 2.1, pass_ssa_build set-up)
+field	PROG	0x478	useEpoch	CONFIRMED	IRInst__useCount reads inst+0x160 relative to program+0x478; the epoch advances by compiler+0x324 * 4 (notes_compiler_passes.md)
+field	COMP	0x30c	target	CONFIRMED	the target description object (HwLimits family KhanPs/KhanVs/FudoPs/FudoVs): virtual calls at slots 0x60/0x104/0xe0/0xf0 (notes_compiler_ir.md 5.2, notes_compiler_opcodes.md)
+field	COMP	0x324	nextInstId	CONFIRMED	IRInst constructor takes the next id from it (notes_compiler_ir.md 5.2)
+field	COMP	0x32c	nextBlockId	CONFIRMED	Block constructor takes the next id from it
+field	COMP	0x374	arenaA	CONFIRMED	first argument of the arena allocator FUN_00193e18 for Block vectors and instruction allocation
+field	COMP	0x378	arenaB	CONFIRMED	arena for pass work vectors / bit sets / IRInst debug vector
+field	COMP	0x3bc	blockIdBitSet	INFERRED	FUN_000e8124 finds/sets a free bit in it to hand out Block slot ids
+field	COMP	0x3d8	exprCreationList	CONFIRMED	Compiler__valueNumberForExpr registers new ExprRecords in it (notes_compiler_passes2.md 2)
+field	COMP	0x3e0	exprRecordsByValueNumber	CONFIRMED	global table of ExprRecords by value number (same section)
+field	COMP	0x3e4	exprRecordsByHandle	CONFIRMED	global table of ExprRecords by expression handle (same section)
+field	COMP	0x3e8	pointerSet	INFERRED	a pointer set (same section)
+field	COMP	0x3ec	entriesByOpcode	INFERRED	(key, lane) entries by opcode (same section)
+field	COMP	0x64c	optFlattenIfState	CONFIRMED	Compiler__setOption stores it for option string opt_flatten_if_state (notes_compiler_passes2.md 1.1)
+field	COMP	0x650	maxCopyFolds	CONFIRMED	setOption string max_copy_folds
+field	COMP	0x654	maxVnKills	CONFIRMED	setOption string max_vn_kills
+field	COMP	0x658	maxVnTransforms	CONFIRMED	setOption string max_vn_transforms
+field	COMP	0x65c	maxCopyMerges	CONFIRMED	setOption string max_copy_merges
+field	COMP	0x660	maxCopyProps	CONFIRMED	setOption string max_copy_props
+field	COMP	0x664	maxMixInsts	CONFIRMED	setOption string max_mix_insts
+field	COMP	0x668	maxPresubs	CONFIRMED	setOption string max_presubs
+field	COMP	0x66c	maxUselessPhis	CONFIRMED	setOption string max_useless_phis
+field	COMP	0x670	maxMovAndShift	CONFIRMED	setOption string max_mov_and_shift
+field	COMP	0x674	maxBalanceConversions	CONFIRMED	setOption string max_balance_conversions
+field	COMP	0x678	maxCoalesceLoops	CONFIRMED	setOption string max_coalesce_loops
+field	COMP	0x67c	maxSpillLoops	CONFIRMED	setOption string max_spill_loops
+field	COMP	0x680	maxInstHoists	CONFIRMED	setOption string max_inst_hoists
+field	COMP	0x684	maxMadMulToD2a	CONFIRMED	setOption string max_mad_mul_to_d2a
+field	COMP	0x688	maxMadD2aToDp3	CONFIRMED	setOption string max_mad_d2a_to_dp3
+field	COMP	0x68c	maxAddAddToDp3	CONFIRMED	setOption string max_add_add_to_dp3
+field	COMP	0x690	maxAddMulToMad	CONFIRMED	setOption string max_add_mul_to_mad
+field	COMP	0x694	maxAddMadMulToMovMadMad	CONFIRMED	setOption string max_add_mad_mul_to_mov_mad_mad
+field	COMP	0x698	maxReassociate	CONFIRMED	setOption string max_reassociate
+field	COMP	0x69c	maxReconstAlu	CONFIRMED	setOption string max_reconst_alu
+field	COMP	0x6a0	maxRemoveCndInput	CONFIRMED	setOption string max_remove_cnd_input
+field	COMP	0x6c4	currentProgram	INFERRED	*(compiler+0x6c4)+0x30 & 0x80 is the same bit as program+0x30 bit 7 and +0xa8/+0x228 are the Program counters (FUN_00180830, FUN_0017b12c): the Program being compiled; R2b called it the options object

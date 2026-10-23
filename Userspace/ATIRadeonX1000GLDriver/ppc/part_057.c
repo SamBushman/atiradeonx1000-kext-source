@@ -189,7 +189,7 @@ int IrCos__fold(this, result, operands, compiler)
     *result = 0.0;
   }
   else {
-    cosine = (double)_cos(((double (*)(int, double))*(code **)(**(int **)(compiler + 0x30c) + 0xe0))(*(int *)(compiler + 0x30c), (double)*(float *)(operands + 4)));
+    cosine = (double)_cos(((double (*)(int, double))*(code **)(**(int **)(compiler + COMP_target) + 0xe0))(*(int *)(compiler + COMP_target), (double)*(float *)(operands + 4)));
     *result = (float)cosine;
   }
   return 1;
@@ -268,7 +268,7 @@ int IrSin__fold(this, result, operands, compiler)
     *result = FLOAT_001aa0e8;
   }
   else {
-    sine = (double)_sin(((double (*)(int, double))*(code **)(**(int **)(compiler + 0x30c) + 0xe0))(*(int *)(compiler + 0x30c), (double)*(float *)(operands + 4)));
+    sine = (double)_sin(((double (*)(int, double))*(code **)(**(int **)(compiler + COMP_target) + 0xe0))(*(int *)(compiler + COMP_target), (double)*(float *)(operands + 4)));
     *result = (float)sine;
   }
   return 1;

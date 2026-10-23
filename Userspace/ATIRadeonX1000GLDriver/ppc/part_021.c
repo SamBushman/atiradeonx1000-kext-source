@@ -569,12 +569,12 @@ int FUN_000e2094(compiler, param_2)
       pcVar4 = *(char **)(param_2 + 0x14);
       uVar5 = *(undefined4 *)(pcVar4 + iVar1 * 4);
     }
-    arenaAt374 = *(undefined4 *)(compiler + 0x374);
+    arenaAt374 = *(undefined4 *)(compiler + COMP_arenaA);
     puVar3 = (undefined4 *)Arena__alloc(arenaAt374,0x484);
     *puVar3 = arenaAt374;
     FUN_000ee29c(puVar3 + 1,compiler);
-    arenaAt378 = *(undefined4 *)(compiler + 0x378);
-    *(undefined4 **)(compiler + 0x6c4) = puVar3 + 1;
+    arenaAt378 = *(undefined4 *)(compiler + COMP_arenaB);
+    *(undefined4 **)(compiler + COMP_currentProgram) = puVar3 + 1;
     puVar3 = (undefined4 *)Arena__alloc(arenaAt378,0x290);
     puVar7 = puVar3 + 1;
     *puVar3 = arenaAt378;
@@ -591,98 +591,98 @@ int FUN_000e2094(compiler, param_2)
       }
       ((int (*)())FUN_000e4400)(puVar7,uVar5);
     }
-    (**(code **)(**(int **)(compiler + 0x30c) + 0x60))(*(int **)(compiler + 0x30c));
-    FUN_000ef498(*(undefined4 *)(compiler + 0x6c4),puVar7);
+    (**(code **)(**(int **)(compiler + COMP_target) + 0x60))(*(int **)(compiler + COMP_target));
+    FUN_000ef498(*(undefined4 *)(compiler + COMP_currentProgram),puVar7);
     if (puVar7 != (undefined4 *)0x0) {
       ((int (*)())FUN_000e4934)(puVar7);
       Arena__free(*puVar3,puVar3);
     }
-    FUN_00193d18(*(undefined4 *)(compiler + 0x378));
-    FUN_00122de8(*(undefined4 *)(compiler + 0x6c4));
-    FUN_00193d18(*(undefined4 *)(compiler + 0x378));
+    FUN_00193d18(*(undefined4 *)(compiler + COMP_arenaB));
+    FUN_00122de8(*(undefined4 *)(compiler + COMP_currentProgram));
+    FUN_00193d18(*(undefined4 *)(compiler + COMP_arenaB));
     reduceDepEnabled = Compiler__isOptionEnabled(compiler,0xf);
     if (reduceDepEnabled != 0) {
-      FUN_0013d3b8(*(undefined4 *)(compiler + 0x6c4));
-      FUN_0013da3c(*(undefined4 *)(compiler + 0x6c4));
+      FUN_0013d3b8(*(undefined4 *)(compiler + COMP_currentProgram));
+      FUN_0013da3c(*(undefined4 *)(compiler + COMP_currentProgram));
     }
     mapChannelsEnabled = Compiler__isOptionEnabled(compiler,0x34);
     if (mapChannelsEnabled != 0) {
-      FUN_0013a8a4(*(undefined4 *)(compiler + 0x6c4));
+      FUN_0013a8a4(*(undefined4 *)(compiler + COMP_currentProgram));
     }
     pairInstructionsEnabled = Compiler__isOptionEnabled(compiler,0x35);
     if (pairInstructionsEnabled != 0) {
-      FUN_0013fc38(*(undefined4 *)(compiler + 0x6c4));
+      FUN_0013fc38(*(undefined4 *)(compiler + COMP_currentProgram));
     }
     deleteComputationsThatCouldBeVsEnabled = Compiler__isOptionEnabled(compiler,0x10);
     if ((int)((ulonglong)deleteComputationsThatCouldBeVsEnabled >> 0x20) != 0) {
-      ((int (*)())FUN_000e1c50)(*(undefined4 *)(compiler + 0x6c4),(int)deleteComputationsThatCouldBeVsEnabled,iVar1,in_r6,in_r7,in_r8,pcVar4);
+      ((int (*)())FUN_000e1c50)(*(undefined4 *)(compiler + COMP_currentProgram),(int)deleteComputationsThatCouldBeVsEnabled,iVar1,in_r6,in_r7,in_r8,pcVar4);
     }
-    *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) = *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) | 0x80
+    *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) = *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) | 0x80
     ;
     deadCodeEnabled = Compiler__isOptionEnabled(compiler,0x11);
     if (deadCodeEnabled != 0) {
-      Program__eliminateDeadInstsAndRecountUses(*(undefined4 *)(compiler + 0x6c4),0);
+      Program__eliminateDeadInstsAndRecountUses(*(undefined4 *)(compiler + COMP_currentProgram),0);
     }
     peepholeEnabled = Compiler__isOptionEnabled(compiler,0x1a);
     if (peepholeEnabled == 0) {
-      *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) =
-           *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) & 0xffffff7f;
+      *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) =
+           *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) & 0xffffff7f;
     }
     else {
-      pass_rewrite(*(undefined4 *)(compiler + 0x6c4));
+      pass_rewrite(*(undefined4 *)(compiler + COMP_currentProgram));
     }
     removeEmptyGraphEnabled = Compiler__isOptionEnabled(compiler,0x20);
     if (removeEmptyGraphEnabled != 0) {
-      pass_remove_empty_graphs(*(undefined4 *)(compiler + 0x6c4));
+      pass_remove_empty_graphs(*(undefined4 *)(compiler + COMP_currentProgram));
     }
     packInstsEnabled = Compiler__isOptionEnabled(compiler,0x12);
     if (packInstsEnabled != 0) {
-      FUN_0013da3c(*(undefined4 *)(compiler + 0x6c4));
-      *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) =
-           *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) | 0x80;
+      FUN_0013da3c(*(undefined4 *)(compiler + COMP_currentProgram));
+      *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) =
+           *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) | 0x80;
       deadCodeEnabled = Compiler__isOptionEnabled(compiler,0x11);
       if (deadCodeEnabled != 0) {
-        Program__eliminateDeadInstsAndRecountUses(*(undefined4 *)(compiler + 0x6c4),0);
+        Program__eliminateDeadInstsAndRecountUses(*(undefined4 *)(compiler + COMP_currentProgram),0);
       }
-      FUN_0014657c(*(undefined4 *)(compiler + 0x6c4));
-      *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) =
-           *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) & 0xffffff7f;
+      FUN_0014657c(*(undefined4 *)(compiler + COMP_currentProgram));
+      *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) =
+           *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) & 0xffffff7f;
     }
     markIgnoreUncoveredEnabled = Compiler__isOptionEnabled(compiler,0x22);
     if (markIgnoreUncoveredEnabled != 0) {
-      FUN_00139d40(*(undefined4 *)(compiler + 0x6c4));
+      FUN_00139d40(*(undefined4 *)(compiler + COMP_currentProgram));
     }
-    FUN_000f29f4(*(undefined4 *)(compiler + 0x6c4));
-    FUN_00193d18(*(undefined4 *)(compiler + 0x378));
-    Scheduler__run(*(undefined4 *)(compiler + 0x6c4));
-    FUN_00193d18(*(undefined4 *)(compiler + 0x378));
-    FUN_00120cd4(*(undefined4 *)(compiler + 0x6c4));
-    FUN_00193d18(*(undefined4 *)(compiler + 0x378));
-    FUN_00134658(*(undefined4 *)(compiler + 0x6c4));
-    FUN_00193d18(*(undefined4 *)(compiler + 0x378));
-    FUN_000f60c4(*(undefined4 *)(compiler + 0x6c4),compiler);
-    *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) =
-         *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) | 0x10000;
-    pass_optimize_control_flow(*(undefined4 *)(compiler + 0x6c4));
-    ((int (*)())FUN_000e36bc)(*(undefined4 *)(compiler + 0x6c4),*(int *)(compiler + 0x52c) * 4 + compiler + 0x484,
+    FUN_000f29f4(*(undefined4 *)(compiler + COMP_currentProgram));
+    FUN_00193d18(*(undefined4 *)(compiler + COMP_arenaB));
+    Scheduler__run(*(undefined4 *)(compiler + COMP_currentProgram));
+    FUN_00193d18(*(undefined4 *)(compiler + COMP_arenaB));
+    FUN_00120cd4(*(undefined4 *)(compiler + COMP_currentProgram));
+    FUN_00193d18(*(undefined4 *)(compiler + COMP_arenaB));
+    FUN_00134658(*(undefined4 *)(compiler + COMP_currentProgram));
+    FUN_00193d18(*(undefined4 *)(compiler + COMP_arenaB));
+    FUN_000f60c4(*(undefined4 *)(compiler + COMP_currentProgram),compiler);
+    *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) =
+         *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) | 0x10000;
+    pass_optimize_control_flow(*(undefined4 *)(compiler + COMP_currentProgram));
+    ((int (*)())FUN_000e36bc)(*(undefined4 *)(compiler + COMP_currentProgram),*(int *)(compiler + 0x52c) * 4 + compiler + 0x484,
                  *(int *)(compiler + 0x52c));
-    FUN_00193d18(*(undefined4 *)(compiler + 0x378));
-    FUN_0013061c(*(undefined4 *)(compiler + 0x6c4),0);
-    (**(code **)(**(int **)(compiler + 0x30c) + 0x38))
-              (*(int **)(compiler + 0x30c),*(undefined4 *)(compiler + 0x52c),compiler);
-    pcVar4 = (char *)**(undefined4 **)(compiler + 0x30c);
+    FUN_00193d18(*(undefined4 *)(compiler + COMP_arenaB));
+    FUN_0013061c(*(undefined4 *)(compiler + COMP_currentProgram),0);
+    (**(code **)(**(int **)(compiler + COMP_target) + 0x38))
+              (*(int **)(compiler + COMP_target),*(undefined4 *)(compiler + 0x52c),compiler);
+    pcVar4 = (char *)**(undefined4 **)(compiler + COMP_target);
     iVar1 = *(int *)(compiler + 0x52c) * 4 + compiler;
     in_r6 = compiler;
     (**(code **)(pcVar4 + 0x8c))
-              (*(undefined4 **)(compiler + 0x30c),*(undefined4 *)(iVar1 + 0x524),
+              (*(undefined4 **)(compiler + COMP_target),*(undefined4 *)(iVar1 + 0x524),
                *(undefined4 *)(iVar1 + 0x4d4));
-    iVar1 = *(int *)(compiler + 0x6c4);
+    iVar1 = *(int *)(compiler + COMP_currentProgram);
     if (iVar1 != 0) {
       FUN_000ecfac(iVar1);
       Arena__free(*(undefined4 *)(iVar1 + -4),iVar1 + -4);
     }
-    FUN_00193d18(*(undefined4 *)(compiler + 0x374));
-    FUN_00193d18(*(undefined4 *)(compiler + 0x378));
+    FUN_00193d18(*(undefined4 *)(compiler + COMP_arenaA));
+    FUN_00193d18(*(undefined4 *)(compiler + COMP_arenaB));
     iVar1 = *(int *)(compiler + 0x52c) + -1;
     *(int *)(compiler + 0x52c) = iVar1;
   }
