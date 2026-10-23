@@ -395,7 +395,7 @@ use	GetBuiltInChunkForSymbol	uVar9	directIndex2	INFERRED	every definition is the
 use	GetChunkForSymbol	iVar8	scalerWidthForType	INFERRED	every definition is the result of a call whose name says it returns this	#42	+10	all	all
 use	GetChunkForSymbol	uVar7	streamType	INFERRED	every definition is the result of a call whose name says it returns this	#40	+1	all	all
 use	GetChunkForSymbol	uVar7	streamType	INFERRED	every definition is the result of a call whose name says it returns this	#49	+1	all	all
-use	FunctionTable__addFunction	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#2	+31	all	all
+use	FunctionTable__addFunction	iVar2	newEntries	INFERRED	every definition is the result of a call whose name says it returns this	#2	+31	all	all
 use	FunctionTable__addFunction	iVar2	length	INFERRED	every definition is the result of a call whose name says it returns this	#36	+1	all	all
 use	FunctionTable__addFunction	uVar6	allocation2	INFERRED	every definition is the result of a call whose name says it returns this	#37	+1	all	all
 use	FunctionTable__findFunction	iVar1	compareResult	INFERRED	every definition is the result of a call whose name says it returns this	#5	+1	all	all

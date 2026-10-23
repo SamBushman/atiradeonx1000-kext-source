@@ -2243,10 +2243,10 @@ int _InterpreterRasterOpMachine_Blending(machine, srcColor, dstColor, result)
   float srcComponent3;
   float srcComponent2;
   float srcComponent;
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  float fVar4;
+  float clampValue;
+  float clampLimit1;
+  float clampLimit2;
+  float clampLimit3OrValue;
   int emulator;
   uint framebufferFormat;
   uint blendState;
@@ -2261,83 +2261,83 @@ int _InterpreterRasterOpMachine_Blending(machine, srcColor, dstColor, result)
   float dstFactorA;
   undefined1 auStack_40 [12];
   float factorAlphaScratch;
-  float local_30;
+  float clampValueCarry;
   
   emulator = *machine;
   blendState = *(uint *)(*(int *)(emulator + 0xd80) + 0x58);
   blendConstant = *(int *)(*(int *)(emulator + 0xd9c) + 0xd8) + 0x2d70;
   framebufferFormat = _PPEmulatorFramebufferFormat(emulator);
-  fVar2 = FLOAT_97c3acd8;
+  clampLimit1 = FLOAT_97c3acd8;
   if ((framebufferFormat & 0x8000000) == 0) {
     srcComponent2 = *srcColor;
-    fVar4 = srcComponent2;
+    clampLimit3OrValue = srcComponent2;
     if (FLOAT_97c3acd8 <= srcComponent2) {
       srcComponent2 = 1.0;
-      fVar4 = local_30;
+      clampLimit3OrValue = clampValueCarry;
     }
-    local_30 = fVar4;
+    clampValueCarry = clampLimit3OrValue;
     srcComponent3 = srcColor[1];
     *srcColor = srcComponent2;
-    fVar3 = FLOAT_97c3acd8;
-    fVar1 = srcComponent3;
-    if (fVar2 <= srcComponent3) {
+    clampLimit2 = FLOAT_97c3acd8;
+    clampValue = srcComponent3;
+    if (clampLimit1 <= srcComponent3) {
       srcComponent3 = 1.0;
-      fVar1 = local_30;
+      clampValue = clampValueCarry;
     }
-    local_30 = fVar1;
+    clampValueCarry = clampValue;
     srcComponent = srcColor[2];
     srcColor[1] = srcComponent3;
-    fVar4 = FLOAT_97c3acd8;
-    fVar1 = srcComponent;
-    if (fVar3 <= srcComponent) {
+    clampLimit3OrValue = FLOAT_97c3acd8;
+    clampValue = srcComponent;
+    if (clampLimit2 <= srcComponent) {
       srcComponent = 1.0;
-      fVar1 = local_30;
+      clampValue = clampValueCarry;
     }
-    local_30 = fVar1;
+    clampValueCarry = clampValue;
     srcComponent2 = srcColor[3];
     srcColor[2] = srcComponent;
-    fVar2 = TAllocation__guardBlockSize;
-    fVar1 = srcComponent2;
-    if (fVar4 <= srcComponent2) {
+    clampLimit1 = TAllocation__guardBlockSize;
+    clampValue = srcComponent2;
+    if (clampLimit3OrValue <= srcComponent2) {
       srcComponent2 = 1.0;
-      fVar1 = local_30;
+      clampValue = clampValueCarry;
     }
-    local_30 = fVar1;
+    clampValueCarry = clampValue;
     srcComponent3 = *srcColor;
     srcColor[3] = srcComponent2;
-    fVar3 = TAllocation__guardBlockSize;
-    fVar1 = srcComponent3;
-    if (srcComponent3 <= fVar2) {
+    clampLimit2 = TAllocation__guardBlockSize;
+    clampValue = srcComponent3;
+    if (srcComponent3 <= clampLimit1) {
       srcComponent3 = 0.0;
-      fVar1 = local_30;
+      clampValue = clampValueCarry;
     }
-    local_30 = fVar1;
+    clampValueCarry = clampValue;
     srcComponent = srcColor[1];
     *srcColor = srcComponent3;
-    fVar4 = TAllocation__guardBlockSize;
-    fVar1 = srcComponent;
-    if (srcComponent <= fVar3) {
+    clampLimit3OrValue = TAllocation__guardBlockSize;
+    clampValue = srcComponent;
+    if (srcComponent <= clampLimit2) {
       srcComponent = 0.0;
-      fVar1 = local_30;
+      clampValue = clampValueCarry;
     }
-    local_30 = fVar1;
+    clampValueCarry = clampValue;
     srcComponent2 = srcColor[2];
     srcColor[1] = srcComponent;
-    fVar2 = TAllocation__guardBlockSize;
-    fVar1 = srcComponent2;
-    if (srcComponent2 <= fVar4) {
+    clampLimit1 = TAllocation__guardBlockSize;
+    clampValue = srcComponent2;
+    if (srcComponent2 <= clampLimit3OrValue) {
       srcComponent2 = 0.0;
-      fVar1 = local_30;
+      clampValue = clampValueCarry;
     }
-    local_30 = fVar1;
+    clampValueCarry = clampValue;
     srcComponent3 = srcColor[3];
     srcColor[2] = srcComponent2;
-    fVar3 = srcComponent3;
-    if (srcComponent3 <= fVar2) {
+    clampLimit2 = srcComponent3;
+    if (srcComponent3 <= clampLimit1) {
       srcComponent3 = 0.0;
-      fVar3 = local_30;
+      clampLimit2 = clampValueCarry;
     }
-    local_30 = fVar3;
+    clampValueCarry = clampLimit2;
     srcColor[3] = srcComponent3;
   }
   if ((1 < (blendState >> 0x10 & 7) - 3) || (1 < (blendState >> 0x13 & 7) - 3)) {
@@ -2364,7 +2364,7 @@ int _InterpreterRasterOpMachine_Blending(machine, srcColor, dstColor, result)
     result[1] = srcColor[1] * srcFactorG - dstColor[1] * dstFactorG;
     srcComponent = dstColor[2];
     srcComponent2 = srcColor[2];
-    fVar4 = dstFactorB;
+    clampLimit3OrValue = dstFactorB;
     dstFactorB = srcFactorB;
     break;
   case 2:
@@ -2372,7 +2372,7 @@ int _InterpreterRasterOpMachine_Blending(machine, srcColor, dstColor, result)
     result[1] = dstColor[1] * dstFactorG - srcColor[1] * srcFactorG;
     srcComponent = srcColor[2];
     srcComponent2 = dstColor[2];
-    fVar4 = srcFactorB;
+    clampLimit3OrValue = srcFactorB;
     break;
   case 3:
     srcComponent = *dstColor;
@@ -2386,10 +2386,10 @@ int _InterpreterRasterOpMachine_Blending(machine, srcColor, dstColor, result)
     }
     result[1] = srcComponent;
     srcComponent2 = srcColor[2];
-    fVar2 = dstColor[2];
-    if (srcComponent2 < fVar2) {
+    clampLimit1 = dstColor[2];
+    if (srcComponent2 < clampLimit1) {
 LAB_97bd72bc:
-      fVar2 = srcComponent2;
+      clampLimit1 = srcComponent2;
     }
     goto LAB_97bd72c0;
   case 4:
@@ -2404,50 +2404,50 @@ LAB_97bd72bc:
     }
     result[1] = srcComponent;
     srcComponent2 = srcColor[2];
-    fVar2 = dstColor[2];
+    clampLimit1 = dstColor[2];
     if (dstColor[2] < srcComponent2) goto LAB_97bd72bc;
 LAB_97bd72c0:
-    result[2] = fVar2;
+    result[2] = clampLimit1;
   default:
     goto switchD_97bd7128_default;
   }
-  srcComponent = srcComponent2 * dstFactorB - srcComponent * fVar4;
+  srcComponent = srcComponent2 * dstFactorB - srcComponent * clampLimit3OrValue;
 LAB_97bd7230:
   result[2] = srcComponent;
 switchD_97bd7128_default:
   switch(blendState >> 0x13 & 7) {
   case 0:
-    fVar3 = srcColor[3] * srcFactorA + dstColor[3] * dstFactorA;
+    clampLimit2 = srcColor[3] * srcFactorA + dstColor[3] * dstFactorA;
     goto LAB_97bd734c;
   case 1:
     srcComponent = srcColor[3];
-    fVar3 = dstColor[3] * dstFactorA;
+    clampLimit2 = dstColor[3] * dstFactorA;
     dstFactorA = srcFactorA;
     break;
   case 2:
     srcComponent = dstColor[3];
-    fVar3 = srcColor[3] * srcFactorA;
+    clampLimit2 = srcColor[3] * srcFactorA;
     break;
   case 3:
     srcComponent2 = srcColor[3];
-    fVar2 = dstColor[3];
-    if (srcComponent2 < fVar2) {
+    clampLimit1 = dstColor[3];
+    if (srcComponent2 < clampLimit1) {
 LAB_97bd7378:
-      fVar2 = srcComponent2;
+      clampLimit1 = srcComponent2;
     }
     goto LAB_97bd737c;
   case 4:
     srcComponent2 = srcColor[3];
-    fVar2 = dstColor[3];
+    clampLimit1 = dstColor[3];
     if (dstColor[3] < srcComponent2) goto LAB_97bd7378;
 LAB_97bd737c:
-    result[3] = fVar2;
+    result[3] = clampLimit1;
   default:
     goto switchD_97bd72e8_default;
   }
-  fVar3 = srcComponent * dstFactorA - fVar3;
+  clampLimit2 = srcComponent * dstFactorA - clampLimit2;
 LAB_97bd734c:
-  result[3] = fVar3;
+  result[3] = clampLimit2;
 switchD_97bd72e8_default:
   return;
 }
