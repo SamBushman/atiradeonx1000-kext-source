@@ -433,3 +433,96 @@ use	_PPCRuntimeCompilerCompileNO	iVar6	sourceIndexOrRecord	INFERRED	source index
 use	_PPCRuntimeCompilerCompileNO	iVar6	sourceIndexOrRecord	INFERRED	source index scaled by 0x24, then added to the instruction to give the source record (x = f(x) in one web)	^\s*iVar9\ =\ iVar6\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0xe28\);$	+1
 use	_PPCRuntimeCompilerCompileNO	iVar6	sourceIndexOrRecord	INFERRED	source index scaled by 0x24, then added to the instruction to give the source record (x = f(x) in one web)	^\s*iVar9\ =\ iVar6\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0xe28\);$@2	+1
 use	_PPCRuntimeCompilerCompileNO	iVar6	sourceIndexOrRecord	INFERRED	source index scaled by 0x24, then added to the instruction to give the source record (x = f(x) in one web)	^\s*iVar6\ =\ iVar6\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0xe28\);$	+8
+local	_PPCRuntimeCompilerCompileAV	bVar1	storageMatches	CONFIRMED	comparison of the source storage kind word with a constant (register file selector), tested to choose the operand encoding
+local	_PPCRuntimeCompilerCompileAV	bVar4	writesDestination	CONFIRMED	cleared for opcodes that produce no destination value so the destination write is skipped
+local	_PPCRuntimeCompilerCompileAV	iVar11	sourceRecord	CONFIRMED	source record: operand byte offset + instruction record (compiler+0xe28)
+use	_PPCRuntimeCompilerCompileAV	puVar18	paddedCursor	CONFIRMED	code cursor advanced one word at a time while padding with nops to a 16-byte boundary	^\s*puVar18\ =\ puVar5\ \+\ 1;$@2	+1
+use	_PPCRuntimeCompilerCompileAV	puVar18	paddedCursor	CONFIRMED	code cursor advanced one word at a time while padding with nops to a 16-byte boundary	^\s*\*\(undefined4\ \*\*\)\(param_1\ \+\ 0xe30\)\ =\ puVar18;$@2	+3
+local	_PPCRuntimeCompilerCompileAV	uVar22	nextComponentIndex	CONFIRMED	component loop index + 1
+use	_PPCRuntimeCompilerCompileAV	uVar7	textureTarget	CONFIRMED	texture target code at instruction+0x110 (2 rect, 1 3D, 3 2D, 4 1D)	^\s*uVar7\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xe28\)\ \+\ 0x110\);$	+2
+use	_PPCRuntimeCompilerCompileAV	uVar7	textureTarget	CONFIRMED	texture target code at instruction+0x110 (2 rect, 1 3D, 3 2D, 4 1D)	^\s*if\ \(uVar7\ <\ 3\)\ \{$	+2
+use	_PPCRuntimeCompilerCompileAV	uVar7	textureTarget	CONFIRMED	texture target code at instruction+0x110 (2 rect, 1 3D, 3 2D, 4 1D)	^\s*else\ if\ \(uVar7\ ==\ 3\)\ \{$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar7	textureTarget	CONFIRMED	texture target code at instruction+0x110 (2 rect, 1 3D, 3 2D, 4 1D)	^\s*if\ \(uVar7\ !=\ 4\)\ goto\ switchD_97bdfc38_caseD_6;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar7	branchWord	CONFIRMED	signed byte displacement to the epilog target, masked into the b opcode (0x48000000)	^\s*uVar7\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe40\)\ \-\ \(int\)puVar13;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar7	branchWord	CONFIRMED	signed byte displacement to the epilog target, masked into the b opcode (0x48000000)	^\s*uVar7\ =\ \*\(int\ \*\)\(iVar9\ \+\ \-4\)\ \-\ \(\(int\)puVar13\ \-\ \*\(int\ \*\)\(param_1\ \+\ 0xe2c\)\);$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar7	branchWord	CONFIRMED	signed byte displacement to the epilog target, masked into the b opcode (0x48000000)	^\s*\*puVar13\ =\ uVar7\ \&\ 0x3fffffc\ \|\ 0x48000000;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar7	branchWord	CONFIRMED	signed byte displacement to the epilog target, masked into the b opcode (0x48000000)	^\s*uVar7\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe40\)\ \-\ \(int\)in_r10;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar7	branchWord	CONFIRMED	signed byte displacement to the epilog target, masked into the b opcode (0x48000000)	^\s*uVar7\ =\ \*\(int\ \*\)\(iVar9\ \+\ \-4\)\ \-\ \(\(int\)in_r10\ \-\ \*\(int\ \*\)\(param_1\ \+\ 0xe2c\)\);$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar7	branchWord	CONFIRMED	signed byte displacement to the epilog target, masked into the b opcode (0x48000000)	^\s*\*puVar13\ =\ uVar7\ \&\ 0x3fffffc\ \|\ 0x48000000;$@2	+1
+use	_PPCRuntimeCompilerCompileAV	uVar8	textureObject	CONFIRMED	sampler texture object for the TEX path	^\s*uVar8\ =\ \*\(undefined4\ \*\)$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar8	textureObject	CONFIRMED	sampler texture object for the TEX path	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xe28\)\ \+\ 0x10c\);$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar8	textureObject	CONFIRMED	sampler texture object for the TEX path	^\s*uVar23\ =\ \(\(int\ \(\*\)\(\)\)_PPCTextureSamplerSampleTexelRECTRTCAV\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xe1c\),uVar8,in_r5\);$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar8	textureObject	CONFIRMED	sampler texture object for the TEX path	^\s*uVar23\ =\ \(\(int\ \(\*\)\(\)\)_PPCTextureSamplerSampleTexel3DRTCAV\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xe1c\),uVar8,in_r5\);$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar8	textureObject	CONFIRMED	sampler texture object for the TEX path	^\s*uVar23\ =\ \(\(int\ \(\*\)\(\)\)_PPCTextureSamplerSampleTexel2DRTCAV\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xe1c\),uVar8,in_r5\);$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar8	textureObject	CONFIRMED	sampler texture object for the TEX path	^\s*uVar23\ =\ \(\(int\ \(\*\)\(\)\)_PPCTextureSamplerSampleTexel1DRTCAV\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xe1c\),uVar8,in_r5\);$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar8	passStartCursor	CONFIRMED	code cursor value saved in compiler+0xe34/+0xe38 at the end of the previous pass, restored into +0xe30	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0xe34\);$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar8	passStartCursor	CONFIRMED	code cursor value saved in compiler+0xe34/+0xe38 at the end of the previous pass, restored into +0xe30	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ 0xe30\)\ =\ uVar8;$	+1
+use	_PPCRuntimeCompilerCompileAV	uVar8	passStartCursor	CONFIRMED	code cursor value saved in compiler+0xe34/+0xe38 at the end of the previous pass, restored into +0xe30	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0xe38\);$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	ascendingRun	CONFIRMED	length of the run of selectors that each equal the previous one plus one (mod 4): a rotation	^\s*iVar4\ =\ 1;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	ascendingRun	CONFIRMED	length of the run of selectors that each equal the previous one plus one (mod 4): a rotation	^\s*iVar4\ =\ 2;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	ascendingRun	CONFIRMED	length of the run of selectors that each equal the previous one plus one (mod 4): a rotation	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	ascendingRun	CONFIRMED	length of the run of selectors that each equal the previous one plus one (mod 4): a rotation	^\s*if\ \(3\ <\ iVar4\)\ break;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	ascendingRun	CONFIRMED	length of the run of selectors that each equal the previous one plus one (mod 4): a rotation	^\s*if\ \(\(uVar6\ ==\ 0\)\ \&\&\ \(iVar4\ <\ 4\)\)\ \{$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	ascendingRun	CONFIRMED	length of the run of selectors that each equal the previous one plus one (mod 4): a rotation	^\s*iVar4\ =\ iVar4\ \+\ 1;$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	ascendingRun	CONFIRMED	length of the run of selectors that each equal the previous one plus one (mod 4): a rotation	^\s*\}\ while\ \(iVar4\ <\ 4\);$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	ascendingRun	CONFIRMED	length of the run of selectors that each equal the previous one plus one (mod 4): a rotation	^\s*if\ \(iVar4\ ==\ 4\)\ \{$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	ascendingRun	CONFIRMED	length of the run of selectors that each equal the previous one plus one (mod 4): a rotation	^\s*if\ \(iVar4\ !=\ 3\)\ \{$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar4	ascendingRun	CONFIRMED	length of the run of selectors that each equal the previous one plus one (mod 4): a rotation	^\s*if\ \(iVar4\ ==\ 2\)\ \{$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar5	equalRun	CONFIRMED	length of the run of equal selectors (a splat)	^\s*iVar5\ =\ 1;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar5	equalRun	CONFIRMED	length of the run of equal selectors (a splat)	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar5	equalRun	CONFIRMED	length of the run of equal selectors (a splat)	^\s*if\ \(3\ <\ iVar5\)\ break;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar5	equalRun	CONFIRMED	length of the run of equal selectors (a splat)	^\s*if\ \(\(uVar7\ ==\ 0\)\ \&\&\ \(iVar5\ <\ 4\)\)\ \{$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar5	equalRun	CONFIRMED	length of the run of equal selectors (a splat)	^\s*iVar5\ =\ iVar5\ \+\ 1;$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar5	equalRun	CONFIRMED	length of the run of equal selectors (a splat)	^\s*\}\ while\ \(iVar5\ <\ 4\);$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar5	equalRun	CONFIRMED	length of the run of equal selectors (a splat)	^\s*iVar5\ =\ 2;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar5	equalRun	CONFIRMED	length of the run of equal selectors (a splat)	^\s*if\ \(iVar5\ ==\ 4\)\ \{$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar5	equalRun	CONFIRMED	length of the run of equal selectors (a splat)	^\s*if\ \(iVar5\ ==\ 3\)\ \{$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar5	equalRun	CONFIRMED	length of the run of equal selectors (a splat)	^\s*if\ \(iVar5\ ==\ 2\)\ \{$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar1	selectorBitBase	CONFIRMED	start position*4+8 of the run inside the doubled selector string	^\s*iVar1\ =\ uVar6\ \*\ 4\ \+\ 8;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar1	selectorBitBase	CONFIRMED	start position*4+8 of the run inside the doubled selector string	^\s*uVar10\ =\ 0x20\ \-\ iVar1;$	+2
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar1	selectorBitBase	CONFIRMED	start position*4+8 of the run inside the doubled selector string	^\s*iVar1\ =\ uVar7\ \*\ 4\ \+\ 8;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	iVar1	selectorBitBase	CONFIRMED	start position*4+8 of the run inside the doubled selector string	^\s*uVar11\ =\ 0x20\ \-\ iVar1;$	+2
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar10	ascShiftA	CONFIRMED	right-shift of the first selector of the pair compared in the ascending-run scan	^\s*uVar10\ =\ 0x20\ \-\ iVar1;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar10	ascShiftA	CONFIRMED	right-shift of the first selector of the pair compared in the ascending-run scan	^\s*uVar10\ =\ uVar10\ \-\ 4;$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar10	ascShiftA	CONFIRMED	right-shift of the first selector of the pair compared in the ascending-run scan	^\s*if\ \(\(\(uVar3\ >>\ \(uVar10\ \&\ 0x3f\)\)\ \+\ 1\ \&\ 3\)\ !=\ \(uVar3\ >>\ \(uVar7\ \&\ 0x3f\)\ \&\ 3\)\)\ break;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar10	ascShiftA	CONFIRMED	right-shift of the first selector of the pair compared in the ascending-run scan	^\s*uVar10\ =\ 0x10;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar10	ascShiftA	CONFIRMED	right-shift of the first selector of the pair compared in the ascending-run scan	^\s*if\ \(\(\(uVar3\ >>\ \(uVar10\ \&\ 0x3f\)\)\ \+\ 1\ \&\ 3\)\ !=\ \(uVar3\ >>\ \(uVar7\ \&\ 0x3f\)\ \&\ 3\)\)\ break;$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar10	ascShiftA	CONFIRMED	right-shift of the first selector of the pair compared in the ascending-run scan	^\s*uVar10\ =\ uVar10\ \+\ 4;$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar7	ascShiftB	CONFIRMED	right-shift of the second selector of the pair compared in the ascending-run scan	^\s*uVar7\ =\ 0x1c\ \-\ iVar1;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar7	ascShiftB	CONFIRMED	right-shift of the second selector of the pair compared in the ascending-run scan	^\s*uVar7\ =\ uVar7\ \-\ 4;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar7	ascShiftB	CONFIRMED	right-shift of the second selector of the pair compared in the ascending-run scan	^\s*if\ \(\(\(uVar3\ >>\ \(uVar10\ \&\ 0x3f\)\)\ \+\ 1\ \&\ 3\)\ !=\ \(uVar3\ >>\ \(uVar7\ \&\ 0x3f\)\ \&\ 3\)\)\ break;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar7	ascShiftB	CONFIRMED	right-shift of the second selector of the pair compared in the ascending-run scan	^\s*uVar7\ =\ 0xc;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar7	ascShiftB	CONFIRMED	right-shift of the second selector of the pair compared in the ascending-run scan	^\s*if\ \(\(\(uVar3\ >>\ \(uVar10\ \&\ 0x3f\)\)\ \+\ 1\ \&\ 3\)\ !=\ \(uVar3\ >>\ \(uVar7\ \&\ 0x3f\)\ \&\ 3\)\)\ break;$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar7	ascShiftB	CONFIRMED	right-shift of the second selector of the pair compared in the ascending-run scan	^\s*uVar7\ =\ uVar7\ \+\ 4;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar10	eqShiftB	CONFIRMED	right-shift of the second selector of the pair compared in the equal-run scan	^\s*uVar10\ =\ uVar10\ \-\ 4;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar10	eqShiftB	CONFIRMED	right-shift of the second selector of the pair compared in the equal-run scan	^\s*if\ \(\(uVar3\ >>\ \(uVar11\ \&\ 0x3f\)\ \&\ 3\)\ !=\ \(uVar3\ >>\ \(uVar10\ \&\ 0x3f\)\ \&\ 3\)\)\ break;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar10	eqShiftB	CONFIRMED	right-shift of the second selector of the pair compared in the equal-run scan	^\s*uVar10\ =\ 0x1c\ \-\ iVar1;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar10	eqShiftB	CONFIRMED	right-shift of the second selector of the pair compared in the equal-run scan	^\s*uVar10\ =\ 0xc;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar10	eqShiftB	CONFIRMED	right-shift of the second selector of the pair compared in the equal-run scan	^\s*if\ \(\(uVar3\ >>\ \(uVar11\ \&\ 0x3f\)\ \&\ 3\)\ !=\ \(uVar3\ >>\ \(uVar10\ \&\ 0x3f\)\ \&\ 3\)\)\ break;$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar10	eqShiftB	CONFIRMED	right-shift of the second selector of the pair compared in the equal-run scan	^\s*uVar10\ =\ uVar10\ \+\ 4;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar11	eqShiftA	CONFIRMED	right-shift of the first selector of the pair compared in the equal-run scan	^\s*uVar11\ =\ uVar11\ \-\ 4;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar11	eqShiftA	CONFIRMED	right-shift of the first selector of the pair compared in the equal-run scan	^\s*if\ \(\(uVar3\ >>\ \(uVar11\ \&\ 0x3f\)\ \&\ 3\)\ !=\ \(uVar3\ >>\ \(uVar10\ \&\ 0x3f\)\ \&\ 3\)\)\ break;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar11	eqShiftA	CONFIRMED	right-shift of the first selector of the pair compared in the equal-run scan	^\s*uVar11\ =\ 0x20\ \-\ iVar1;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar11	eqShiftA	CONFIRMED	right-shift of the first selector of the pair compared in the equal-run scan	^\s*uVar11\ =\ 0x10;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar11	eqShiftA	CONFIRMED	right-shift of the first selector of the pair compared in the equal-run scan	^\s*if\ \(\(uVar3\ >>\ \(uVar11\ \&\ 0x3f\)\ \&\ 3\)\ !=\ \(uVar3\ >>\ \(uVar10\ \&\ 0x3f\)\ \&\ 3\)\)\ break;$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar11	eqShiftA	CONFIRMED	right-shift of the first selector of the pair compared in the equal-run scan	^\s*uVar11\ =\ uVar11\ \+\ 4;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	component3Selector	CONFIRMED	selector of component 3 (top two bits of the swizzle word)	^\s*uVar6\ =\ \(uVar2\ \&\ 0x3000000\)\ >>\ 0x18;$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	component3Selector	CONFIRMED	selector of component 3 (top two bits of the swizzle word)	^\s*if\ \(uVar6\ !=\ 3\)\ \{$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar6	component3Selector	CONFIRMED	selector of component 3 (top two bits of the swizzle word)	^\s*\*puVar8\ =\ param_2\ <<\ 0x10\ \|\ 0x600000U\ \|\ param_2\ <<\ 0xb\ \|\ \(uVar6\ \*\ 4\ \+\ 4\)\ \*\ 0x40\ \&\ 0x300\ \|$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	firstSelector	CONFIRMED	selector nibble at the run start of the doubled selector string	^\s*uVar2\ =\ uVar3\ >>\ \(uVar6\ \*\ \-4\ \+\ 0x1c\ \&\ 0x3f\)\ \&\ 0xf;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	firstSelector	CONFIRMED	selector nibble at the run start of the doubled selector string	^\s*if\ \(uVar2\ !=\ 2\)\ \{$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	firstSelector	CONFIRMED	selector nibble at the run start of the doubled selector string	^\s*\*puVar8\ =\ param_2\ <<\ 0x10\ \|\ 0x600000U\ \|\ param_2\ <<\ 0xb\ \|\ \(uVar2\ \*\ 4\ \+\ 8\)\ \*\ 0x40\ \&\ 0x300$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	firstSelector	CONFIRMED	selector nibble at the run start of the doubled selector string	^\s*uVar2\ =\ uVar3\ >>\ \(uVar6\ \*\ \-4\ \+\ 0x1c\ \&\ 0x3f\)\ \&\ 0xf;$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	firstSelector	CONFIRMED	selector nibble at the run start of the doubled selector string	^\s*if\ \(uVar2\ !=\ 1\)\ \{$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar2	firstSelector	CONFIRMED	selector nibble at the run start of the doubled selector string	^\s*\*puVar8\ =\ param_2\ <<\ 0x10\ \|\ 0x600000U\ \|\ param_2\ <<\ 0xb\ \|\ \(uVar2\ \*\ 4\ \+\ 0xc\)\ \*\ 0x40\ \&\ 0x300\ \|$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar7	secondSelector	CONFIRMED	selector nibble following the run start	^\s*uVar7\ =\ uVar3\ >>\ \(uVar6\ \*\ \-4\ \+\ 0x10\ \&\ 0x3f\)\ \&\ 0xf;$	+2
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar7	secondSelector	CONFIRMED	selector nibble following the run start	^\s*if\ \(uVar7\ ==\ uVar2\)\ \{$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar10	nextSelector	CONFIRMED	selector nibble two positions after the run start	^\s*uVar10\ =\ uVar3\ >>\ \(uVar7\ \*\ \-4\ \+\ 0x10\ \&\ 0x3f\)\ \&\ 0xf;$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar10	nextSelector	CONFIRMED	selector nibble two positions after the run start	^\s*if\ \(uVar10\ ==\ \(uVar6\ \+\ 1\ \&\ 3\)\)\ \{$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar10	nextSelector	CONFIRMED	selector nibble two positions after the run start	^\s*if\ \(uVar10\ !=\ uVar6\)\ \{$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar10	shiftedSelectors	CONFIRMED	selector string shifted to the third element	^\s*uVar10\ =\ uVar3\ >>\ \(uVar6\ \*\ \-4\ \+\ 0x14\ \&\ 0x3f\);$	+2
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar10	shiftedSelectors	CONFIRMED	selector string shifted to the third element	^\s*\*puVar8\ =\ param_2\ <<\ 0x10\ \|\ 0x800000U\ \|\ param_2\ <<\ 0xb\ \|\ \(uVar10\ \&\ 3\)\ <<\ 8\ \|$	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar10	shiftedSelectors	CONFIRMED	selector string shifted to the third element	^\s*\*puVar8\ =\ param_2\ <<\ 0x10\ \|\ 0x800000U\ \|\ param_2\ <<\ 0xb\ \|\ \(uVar10\ \&\ 3\)\ <<\ 8\ \|$@2	+1
+use	_PPCRuntimeCompilerSwizzleRegisterAV	puVar9	nextCursor	INFERRED	code cursor after the instructions just written (cursor+1 or cursor+3), stored back into compiler+0xe30	^\s*puVar9\ =\ puVar9\ \+\ 1;$	+0	lhs	lhs
+use	_PPCRuntimeCompilerSwizzleRegisterAV	puVar9	nextCursor	INFERRED	code cursor after the instructions just written (cursor+1 or cursor+3), stored back into compiler+0xe30	^\s*puVar9\ =\ puVar8\ \+\ 3;$	+0	lhs	lhs
+use	_PPCRuntimeCompilerSwizzleRegisterAV	puVar9	nextCursor	INFERRED	code cursor after the instructions just written (cursor+1 or cursor+3), stored back into compiler+0xe30	^\s*\*\(uint\ \*\*\)\(param_1\ \+\ 0xe30\)\ =\ puVar9;$	+1

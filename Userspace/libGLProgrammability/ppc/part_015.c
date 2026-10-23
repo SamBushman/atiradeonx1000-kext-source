@@ -61,221 +61,225 @@ int _PPCRuntimeCompilerSwizzleRegisterAV(compiler, vectorReg, swizzle)
   int vectorReg;
   uint *swizzle;
 {
-  uint vectorInstWord8;
-  uint vectorInstWord7;
-  uint vectorInstWord5;
-  uint vectorInstWord4;
+  uint shiftedSelectors;
+  uint nextSelector;
+  uint secondSelector;
+  uint eqShiftB;
+  uint equalRunStart;
+  uint runStartOrInstWord;
+  uint swizzleWordOrInst;
+  uint shiftedSelectorsB;
   int srcRegB;
   int srcRegA;
   uint *codeCursor2;
   uint *codeCursor;
-  int iVar1;
-  uint uVar2;
-  uint vectorInstWord6;
-  int iVar4;
-  int iVar5;
-  uint uVar6;
-  uint uVar7;
+  int selectorBitBase;
+  uint firstSelector;
+  uint selectors;
+  int ascendingRun;
+  int equalRun;
+  uint component3Selector;
+  uint ascShiftB;
   uint *codeWritePtr;
-  uint *puVar9;
-  uint uVar10;
-  uint uVar11;
+  uint *nextCursor;
+  uint ascShiftA;
+  uint eqShiftA;
   uint *emitPtr2;
   
-  vectorInstWord5 = *swizzle;
-  iVar4 = 1;
-  iVar5 = 1;
-  vectorInstWord6 = (vectorInstWord5 & 0x3000000) << 4 | (vectorInstWord5 & 0x30000) << 8 | (vectorInstWord5 & 0x300) << 0xc |
-          (vectorInstWord5 & 3) << 0x10;
-  vectorInstWord7 = 0;
-  vectorInstWord6 = vectorInstWord6 | vectorInstWord6 >> 0x10;
+  swizzleWordOrInst = *swizzle;
+  ascendingRun = 1;
+  equalRun = 1;
+  selectors = (swizzleWordOrInst & 0x3000000) << 4 | (swizzleWordOrInst & 0x30000) << 8 | (swizzleWordOrInst & 0x300) << 0xc |
+          (swizzleWordOrInst & 3) << 0x10;
+  runStartOrInstWord = 0;
+  selectors = selectors | selectors >> 0x10;
   do {
-    if (((vectorInstWord6 >> (vectorInstWord7 * -4 + 0x1c & 0x3f)) + 1 & 3) == (vectorInstWord6 >> (vectorInstWord7 * -4 + 0x18 & 0x3f) & 3)
+    if (((selectors >> (runStartOrInstWord * -4 + 0x1c & 0x3f)) + 1 & 3) == (selectors >> (runStartOrInstWord * -4 + 0x18 & 0x3f) & 3)
        ) {
-      iVar1 = vectorInstWord7 * 4 + 8;
-      iVar4 = 2;
-      uVar10 = 0x20 - iVar1;
-      uVar7 = 0x1c - iVar1;
+      selectorBitBase = runStartOrInstWord * 4 + 8;
+      ascendingRun = 2;
+      ascShiftA = 0x20 - selectorBitBase;
+      ascShiftB = 0x1c - selectorBitBase;
       goto LAB_97bda1ac;
     }
-    vectorInstWord7 = vectorInstWord7 + 1;
-  } while ((int)vectorInstWord7 < 4);
+    runStartOrInstWord = runStartOrInstWord + 1;
+  } while ((int)runStartOrInstWord < 4);
   goto LAB_97bda240;
   while( true ) {
-    iVar5 = iVar5 + 1;
-    uVar11 = uVar11 - 4;
-    uVar10 = uVar10 - 4;
-    if (3 < iVar5) break;
+    equalRun = equalRun + 1;
+    eqShiftA = eqShiftA - 4;
+    eqShiftB = eqShiftB - 4;
+    if (3 < equalRun) break;
 LAB_97bda278:
-    if ((vectorInstWord6 >> (uVar11 & 0x3f) & 3) != (vectorInstWord6 >> (uVar10 & 0x3f) & 3)) break;
+    if ((selectors >> (eqShiftA & 0x3f) & 3) != (selectors >> (eqShiftB & 0x3f) & 3)) break;
   }
-  if ((vectorInstWord8 == 0) && (iVar5 < 4)) {
-    uVar11 = 0x10;
-    uVar10 = 0xc;
+  if ((equalRunStart == 0) && (equalRun < 4)) {
+    eqShiftA = 0x10;
+    eqShiftB = 0xc;
     do {
-      if ((vectorInstWord6 >> (uVar11 & 0x3f) & 3) != (vectorInstWord6 >> (uVar10 & 0x3f) & 3)) break;
-      iVar5 = iVar5 + 1;
-      vectorInstWord8 = vectorInstWord8 - 1 & 3;
-      uVar11 = uVar11 + 4;
-      uVar10 = uVar10 + 4;
-    } while (iVar5 < 4);
+      if ((selectors >> (eqShiftA & 0x3f) & 3) != (selectors >> (eqShiftB & 0x3f) & 3)) break;
+      equalRun = equalRun + 1;
+      equalRunStart = equalRunStart - 1 & 3;
+      eqShiftA = eqShiftA + 4;
+      eqShiftB = eqShiftB + 4;
+    } while (equalRun < 4);
   }
   goto LAB_97bda304;
   while( true ) {
-    iVar4 = iVar4 + 1;
-    uVar10 = uVar10 - 4;
-    uVar7 = uVar7 - 4;
-    if (3 < iVar4) break;
+    ascendingRun = ascendingRun + 1;
+    ascShiftA = ascShiftA - 4;
+    ascShiftB = ascShiftB - 4;
+    if (3 < ascendingRun) break;
 LAB_97bda1ac:
-    if (((vectorInstWord6 >> (uVar10 & 0x3f)) + 1 & 3) != (vectorInstWord6 >> (uVar7 & 0x3f) & 3)) break;
+    if (((selectors >> (ascShiftA & 0x3f)) + 1 & 3) != (selectors >> (ascShiftB & 0x3f) & 3)) break;
   }
-  if ((vectorInstWord7 == 0) && (iVar4 < 4)) {
-    uVar10 = 0x10;
-    uVar7 = 0xc;
+  if ((runStartOrInstWord == 0) && (ascendingRun < 4)) {
+    ascShiftA = 0x10;
+    ascShiftB = 0xc;
     do {
-      if (((vectorInstWord6 >> (uVar10 & 0x3f)) + 1 & 3) != (vectorInstWord6 >> (uVar7 & 0x3f) & 3)) break;
-      iVar4 = iVar4 + 1;
-      vectorInstWord7 = vectorInstWord7 - 1 & 3;
-      uVar10 = uVar10 + 4;
-      uVar7 = uVar7 + 4;
-    } while (iVar4 < 4);
+      if (((selectors >> (ascShiftA & 0x3f)) + 1 & 3) != (selectors >> (ascShiftB & 0x3f) & 3)) break;
+      ascendingRun = ascendingRun + 1;
+      runStartOrInstWord = runStartOrInstWord - 1 & 3;
+      ascShiftA = ascShiftA + 4;
+      ascShiftB = ascShiftB + 4;
+    } while (ascendingRun < 4);
   }
 LAB_97bda240:
-  vectorInstWord8 = 0;
+  equalRunStart = 0;
   do {
-    if ((vectorInstWord6 >> (vectorInstWord8 * -4 + 0x1c & 0x3f) & 3) == (vectorInstWord6 >> (vectorInstWord8 * -4 + 0x18 & 0x3f) & 3)) {
-      iVar1 = vectorInstWord8 * 4 + 8;
-      iVar5 = 2;
-      uVar11 = 0x20 - iVar1;
-      uVar10 = 0x1c - iVar1;
+    if ((selectors >> (equalRunStart * -4 + 0x1c & 0x3f) & 3) == (selectors >> (equalRunStart * -4 + 0x18 & 0x3f) & 3)) {
+      selectorBitBase = equalRunStart * 4 + 8;
+      equalRun = 2;
+      eqShiftA = 0x20 - selectorBitBase;
+      eqShiftB = 0x1c - selectorBitBase;
       goto LAB_97bda278;
     }
-    vectorInstWord8 = vectorInstWord8 + 1;
-  } while ((int)vectorInstWord8 < 4);
+    equalRunStart = equalRunStart + 1;
+  } while ((int)equalRunStart < 4);
 LAB_97bda304:
-  if (iVar5 == 4) {
+  if (equalRun == 4) {
     codeCursor = *(uint **)(compiler + 0xe30);
-    *codeCursor = vectorReg << 0x15 | (vectorInstWord6 >> (vectorInstWord8 * -4 + 0x1c & 0x3f) & 0xf) << 0x10 | vectorReg << 0xb
+    *codeCursor = vectorReg << 0x15 | (selectors >> (equalRunStart * -4 + 0x1c & 0x3f) & 0xf) << 0x10 | vectorReg << 0xb
               | 0x1000028c;
     *(uint **)(compiler + 0xe30) = codeCursor + 1;
     return;
   }
-  if (iVar4 == 4) {
-    vectorInstWord7 = (vectorInstWord5 & 0x3000000) >> 0x18;
-    if (vectorInstWord7 == 0) {
+  if (ascendingRun == 4) {
+    runStartOrInstWord = (swizzleWordOrInst & 0x3000000) >> 0x18;
+    if (runStartOrInstWord == 0) {
       return;
     }
-    vectorInstWord5 = vectorReg << 0x15 | vectorReg << 0x10 | vectorReg << 0xb;
-    vectorInstWord7 = vectorInstWord7 << 8;
+    swizzleWordOrInst = vectorReg << 0x15 | vectorReg << 0x10 | vectorReg << 0xb;
+    runStartOrInstWord = runStartOrInstWord << 8;
 LAB_97bda710:
     codeWritePtr = *(uint **)(compiler + 0xe30);
-    vectorInstWord7 = vectorInstWord5 | vectorInstWord7 & 0x300 | 0x1000002c;
+    runStartOrInstWord = swizzleWordOrInst | runStartOrInstWord & 0x300 | 0x1000002c;
 LAB_97bdaabc:
-    *codeWritePtr = vectorInstWord7;
+    *codeWritePtr = runStartOrInstWord;
   }
   else {
-    if (iVar5 == 3) {
-      vectorInstWord5 = vectorReg << 0xb;
-      vectorInstWord7 = vectorInstWord6 >> (vectorInstWord8 * -4 + 0x10 & 0x3f);
+    if (equalRun == 3) {
+      swizzleWordOrInst = vectorReg << 0xb;
+      runStartOrInstWord = selectors >> (equalRunStart * -4 + 0x10 & 0x3f);
       codeCursor = *(uint **)(compiler + 0xe30);
-      *codeCursor = (vectorInstWord6 >> (vectorInstWord8 * -4 + 0x1c & 0x3f) & 0xf) << 0x10 | 0x600000 | vectorInstWord5 | 0x1000028c;
+      *codeCursor = (selectors >> (equalRunStart * -4 + 0x1c & 0x3f) & 0xf) << 0x10 | 0x600000 | swizzleWordOrInst | 0x1000028c;
       *(uint **)(compiler + 0xe30) = codeCursor + 1;
       srcRegA = vectorReg;
-      if ((vectorInstWord7 & 0xf) != 0) {
+      if ((runStartOrInstWord & 0xf) != 0) {
         srcRegA = 4;
-        codeCursor[1] = vectorReg << 0x10 | 0x800000U | vectorInstWord5 | (vectorInstWord7 & 3) << 8 | 0x1000002c;
+        codeCursor[1] = vectorReg << 0x10 | 0x800000U | swizzleWordOrInst | (runStartOrInstWord & 3) << 8 | 0x1000002c;
         *(uint **)(compiler + 0xe30) = codeCursor + 2;
       }
       codeCursor = *(uint **)(compiler + 0xe30);
       *codeCursor = vectorReg << 0x15 | 0x30000U | srcRegA << 0xb | 0x1000012c;
       codeWritePtr = codeCursor + 1;
       *(uint **)(compiler + 0xe30) = codeWritePtr;
-      if (vectorInstWord8 == 0) {
+      if (equalRunStart == 0) {
         return;
       }
-      vectorInstWord5 = vectorReg << 0x15 | vectorReg << 0x10 | vectorInstWord5;
-      vectorInstWord7 = vectorInstWord8;
+      swizzleWordOrInst = vectorReg << 0x15 | vectorReg << 0x10 | swizzleWordOrInst;
+      runStartOrInstWord = equalRunStart;
     }
     else {
-      if (iVar4 != 3) {
-        if (iVar5 == 2) {
-          vectorInstWord5 = vectorReg << 0xb;
-          vectorInstWord4 = vectorInstWord6 >> (vectorInstWord8 * -4 + 0x14 & 0x3f);
-          vectorInstWord7 = vectorInstWord4 & 0xf;
-          uVar10 = vectorInstWord6 >> (vectorInstWord8 * -4 + 0x10 & 0x3f) & 0xf;
+      if (ascendingRun != 3) {
+        if (equalRun == 2) {
+          swizzleWordOrInst = vectorReg << 0xb;
+          shiftedSelectorsB = selectors >> (equalRunStart * -4 + 0x14 & 0x3f);
+          runStartOrInstWord = shiftedSelectorsB & 0xf;
+          nextSelector = selectors >> (equalRunStart * -4 + 0x10 & 0x3f) & 0xf;
           codeCursor = *(uint **)(compiler + 0xe30);
-          *codeCursor = (vectorInstWord6 >> (vectorInstWord8 * -4 + 0x1c & 0x3f) & 0xf) << 0x10 | 0x600000 | vectorInstWord5 |
+          *codeCursor = (selectors >> (equalRunStart * -4 + 0x1c & 0x3f) & 0xf) << 0x10 | 0x600000 | swizzleWordOrInst |
                     0x1000028c;
           emitPtr2 = codeCursor + 1;
           *(uint **)(compiler + 0xe30) = emitPtr2;
-          if (uVar10 == (vectorInstWord7 + 1 & 3)) {
+          if (nextSelector == (runStartOrInstWord + 1 & 3)) {
             srcRegA = vectorReg;
-            if (vectorInstWord7 != 0) {
+            if (runStartOrInstWord != 0) {
               srcRegA = 4;
-              *emitPtr2 = vectorReg << 0x10 | 0x800000U | vectorInstWord5 | (vectorInstWord4 & 3) << 8 | 0x1000002c;
+              *emitPtr2 = vectorReg << 0x10 | 0x800000U | swizzleWordOrInst | (shiftedSelectorsB & 3) << 8 | 0x1000002c;
               *(uint **)(compiler + 0xe30) = codeCursor + 2;
             }
             codeCursor2 = *(uint **)(compiler + 0xe30);
-            vectorInstWord7 = vectorReg << 0x15 | 0x30000U | srcRegA << 0xb | 0x1000022c;
+            runStartOrInstWord = vectorReg << 0x15 | 0x30000U | srcRegA << 0xb | 0x1000022c;
 LAB_97bda6e8:
-            *codeCursor2 = vectorInstWord7;
-            puVar9 = codeCursor2 + 1;
+            *codeCursor2 = runStartOrInstWord;
+            nextCursor = codeCursor2 + 1;
           }
           else {
-            if (uVar10 != vectorInstWord7) {
+            if (nextSelector != runStartOrInstWord) {
               srcRegA = vectorReg;
-              if (vectorInstWord7 != 0) {
+              if (runStartOrInstWord != 0) {
                 srcRegA = 4;
-                *emitPtr2 = vectorReg << 0x10 | 0x800000U | vectorInstWord5 | (vectorInstWord4 & 3) << 8 | 0x1000002c;
+                *emitPtr2 = vectorReg << 0x10 | 0x800000U | swizzleWordOrInst | (shiftedSelectorsB & 3) << 8 | 0x1000002c;
                 *(uint **)(compiler + 0xe30) = codeCursor + 2;
               }
-              vectorInstWord6 = vectorInstWord6 >> (vectorInstWord8 * -4 + 0x10 & 0x3f);
+              selectors = selectors >> (equalRunStart * -4 + 0x10 & 0x3f);
               codeCursor = *(uint **)(compiler + 0xe30);
               *codeCursor = srcRegA << 0xb | 0x1063012c;
               *(uint **)(compiler + 0xe30) = codeCursor + 1;
               srcRegA = vectorReg;
-              if ((vectorInstWord6 & 0xf) != 0) {
+              if ((selectors & 0xf) != 0) {
                 srcRegA = 4;
-                codeCursor[1] = vectorReg << 0x10 | 0x800000U | vectorInstWord5 | (vectorInstWord6 & 3) << 8 | 0x1000002c;
+                codeCursor[1] = vectorReg << 0x10 | 0x800000U | swizzleWordOrInst | (selectors & 3) << 8 | 0x1000002c;
                 *(uint **)(compiler + 0xe30) = codeCursor + 2;
               }
               codeCursor2 = *(uint **)(compiler + 0xe30);
-              vectorInstWord7 = vectorReg << 0x15 | 0x30000U | srcRegA << 0xb | 0x1000012c;
+              runStartOrInstWord = vectorReg << 0x15 | 0x30000U | srcRegA << 0xb | 0x1000012c;
               goto LAB_97bda6e8;
             }
-            puVar9 = codeCursor + 3;
+            nextCursor = codeCursor + 3;
             codeCursor[2] = vectorReg << 0x15 | 0x1003222c;
-            *emitPtr2 = vectorInstWord7 << 0x10 | 0x800000 | vectorInstWord5 | 0x1000028c;
+            *emitPtr2 = runStartOrInstWord << 0x10 | 0x800000 | swizzleWordOrInst | 0x1000028c;
           }
-          *(uint **)(compiler + 0xe30) = puVar9;
-          if (vectorInstWord8 == 0) {
+          *(uint **)(compiler + 0xe30) = nextCursor;
+          if (equalRunStart == 0) {
             return;
           }
-          vectorInstWord5 = vectorReg << 0x15 | vectorReg << 0x10 | vectorInstWord5;
-          vectorInstWord7 = vectorInstWord8;
+          swizzleWordOrInst = vectorReg << 0x15 | vectorReg << 0x10 | swizzleWordOrInst;
+          runStartOrInstWord = equalRunStart;
 LAB_97bda70c:
-          vectorInstWord7 = (4 - vectorInstWord7) * 0x100;
+          runStartOrInstWord = (4 - runStartOrInstWord) * 0x100;
           goto LAB_97bda710;
         }
-        if (iVar4 == 2) {
-          uVar2 = vectorInstWord6 >> (vectorInstWord7 * -4 + 0x1c & 0x3f) & 0xf;
+        if (ascendingRun == 2) {
+          firstSelector = selectors >> (runStartOrInstWord * -4 + 0x1c & 0x3f) & 0xf;
           srcRegA = vectorReg;
-          if (uVar2 != 2) {
+          if (firstSelector != 2) {
             codeCursor = *(uint **)(compiler + 0xe30);
             srcRegA = 3;
-            *codeCursor = vectorReg << 0x10 | 0x600000U | vectorReg << 0xb | (uVar2 * 4 + 8) * 0x40 & 0x300
+            *codeCursor = vectorReg << 0x10 | 0x600000U | vectorReg << 0xb | (firstSelector * 4 + 8) * 0x40 & 0x300
                       | 0x1000002c;
             *(uint **)(compiler + 0xe30) = codeCursor + 1;
           }
-          uVar10 = vectorInstWord6 >> (vectorInstWord7 * -4 + 0x14 & 0x3f);
-          vectorInstWord5 = uVar10 & 0xf;
-          uVar7 = vectorInstWord6 >> (vectorInstWord7 * -4 + 0x10 & 0x3f) & 0xf;
-          if (uVar7 == (vectorInstWord5 + 1 & 3)) {
+          shiftedSelectors = selectors >> (runStartOrInstWord * -4 + 0x14 & 0x3f);
+          swizzleWordOrInst = shiftedSelectors & 0xf;
+          secondSelector = selectors >> (runStartOrInstWord * -4 + 0x10 & 0x3f) & 0xf;
+          if (secondSelector == (swizzleWordOrInst + 1 & 3)) {
             srcRegB = vectorReg;
-            if (vectorInstWord5 != 0) {
+            if (swizzleWordOrInst != 0) {
               codeCursor = *(uint **)(compiler + 0xe30);
               srcRegB = 4;
-              *codeCursor = vectorReg << 0x10 | 0x800000U | vectorReg << 0xb | (uVar10 & 3) << 8 |
+              *codeCursor = vectorReg << 0x10 | 0x800000U | vectorReg << 0xb | (shiftedSelectors & 3) << 8 |
                         0x1000002c;
               *(uint **)(compiler + 0xe30) = codeCursor + 1;
             }
@@ -285,29 +289,29 @@ LAB_97bda854:
             *(uint **)(compiler + 0xe30) = codeWritePtr + 1;
           }
           else {
-            if (uVar7 == vectorInstWord5) {
+            if (secondSelector == swizzleWordOrInst) {
               codeCursor = *(uint **)(compiler + 0xe30);
-              *codeCursor = vectorInstWord5 << 0x10 | 0x800000 | vectorReg << 0xb | 0x1000028c;
+              *codeCursor = swizzleWordOrInst << 0x10 | 0x800000 | vectorReg << 0xb | 0x1000028c;
               codeWritePtr = codeCursor + 1;
               *codeWritePtr = vectorReg << 0x15 | srcRegA << 0x10 | 0x1000222c;
               goto LAB_97bda854;
             }
             srcRegB = vectorReg;
-            if (vectorInstWord5 != 0) {
+            if (swizzleWordOrInst != 0) {
               codeCursor = *(uint **)(compiler + 0xe30);
               srcRegB = 4;
-              *codeCursor = vectorReg << 0x10 | 0x800000U | vectorReg << 0xb | (uVar10 & 3) << 8 |
+              *codeCursor = vectorReg << 0x10 | 0x800000U | vectorReg << 0xb | (shiftedSelectors & 3) << 8 |
                         0x1000002c;
               *(uint **)(compiler + 0xe30) = codeCursor + 1;
             }
-            vectorInstWord6 = vectorInstWord6 >> (vectorInstWord7 * -4 + 0x10 & 0x3f);
+            selectors = selectors >> (runStartOrInstWord * -4 + 0x10 & 0x3f);
             codeCursor = *(uint **)(compiler + 0xe30);
             *codeCursor = srcRegA << 0x10 | srcRegB << 0xb | 0x1060012c;
             *(uint **)(compiler + 0xe30) = codeCursor + 1;
             srcRegA = vectorReg;
-            if ((vectorInstWord6 & 0xf) != 0) {
+            if ((selectors & 0xf) != 0) {
               srcRegA = 4;
-              codeCursor[1] = vectorReg << 0x10 | 0x800000U | vectorReg << 0xb | (vectorInstWord6 & 3) << 8 |
+              codeCursor[1] = vectorReg << 0x10 | 0x800000U | vectorReg << 0xb | (selectors & 3) << 8 |
                           0x1000002c;
               *(uint **)(compiler + 0xe30) = codeCursor + 2;
             }
@@ -315,26 +319,26 @@ LAB_97bda854:
             *codeCursor = vectorReg << 0x15 | 0x30000U | srcRegA << 0xb | 0x1000012c;
             *(uint **)(compiler + 0xe30) = codeCursor + 1;
           }
-          if (vectorInstWord7 == 0) {
+          if (runStartOrInstWord == 0) {
             return;
           }
-          vectorInstWord5 = vectorReg << 0x15 | vectorReg << 0x10 | vectorReg << 0xb;
+          swizzleWordOrInst = vectorReg << 0x15 | vectorReg << 0x10 | vectorReg << 0xb;
           goto LAB_97bda70c;
         }
-        uVar6 = (vectorInstWord5 & 0x3000000) >> 0x18;
+        component3Selector = (swizzleWordOrInst & 0x3000000) >> 0x18;
         srcRegA = vectorReg;
-        if (uVar6 != 3) {
+        if (component3Selector != 3) {
           codeCursor = *(uint **)(compiler + 0xe30);
           srcRegA = 3;
-          *codeCursor = vectorReg << 0x10 | 0x600000U | vectorReg << 0xb | (uVar6 * 4 + 4) * 0x40 & 0x300 |
+          *codeCursor = vectorReg << 0x10 | 0x600000U | vectorReg << 0xb | (component3Selector * 4 + 4) * 0x40 & 0x300 |
                     0x1000002c;
           *(uint **)(compiler + 0xe30) = codeCursor + 1;
         }
         srcRegB = vectorReg;
-        if ((vectorInstWord5 & 0x30000) != 0) {
+        if ((swizzleWordOrInst & 0x30000) != 0) {
           codeCursor = *(uint **)(compiler + 0xe30);
           srcRegB = 4;
-          *codeCursor = vectorReg << 0x10 | 0x800000U | vectorReg << 0xb | ((vectorInstWord5 & 0x30000) >> 0x10) << 8
+          *codeCursor = vectorReg << 0x10 | 0x800000U | vectorReg << 0xb | ((swizzleWordOrInst & 0x30000) >> 0x10) << 8
                     | 0x1000002c;
           *(uint **)(compiler + 0xe30) = codeCursor + 1;
         }
@@ -342,51 +346,51 @@ LAB_97bda854:
         *codeCursor = srcRegA << 0x10 | srcRegB << 0xb | 0x1060012c;
         *(uint **)(compiler + 0xe30) = codeCursor + 1;
         srcRegA = vectorReg;
-        if ((vectorInstWord5 & 0x300) != 0) {
+        if ((swizzleWordOrInst & 0x300) != 0) {
           srcRegA = 4;
-          codeCursor[1] = vectorReg << 0x10 | 0x800000U | vectorReg << 0xb | vectorInstWord5 & 0x300 | 0x1000002c;
+          codeCursor[1] = vectorReg << 0x10 | 0x800000U | vectorReg << 0xb | swizzleWordOrInst & 0x300 | 0x1000002c;
           *(uint **)(compiler + 0xe30) = codeCursor + 2;
         }
         codeCursor = *(uint **)(compiler + 0xe30);
         *codeCursor = srcRegA << 0xb | 0x1063012c;
         *(uint **)(compiler + 0xe30) = codeCursor + 1;
         srcRegA = vectorReg;
-        if ((vectorInstWord5 & 3) != 0) {
+        if ((swizzleWordOrInst & 3) != 0) {
           srcRegA = 4;
-          codeCursor[1] = vectorReg << 0x10 | 0x800000U | vectorReg << 0xb | (vectorInstWord5 & 3) << 8 | 0x1000002c;
+          codeCursor[1] = vectorReg << 0x10 | 0x800000U | vectorReg << 0xb | (swizzleWordOrInst & 3) << 8 | 0x1000002c;
           *(uint **)(compiler + 0xe30) = codeCursor + 2;
         }
         codeWritePtr = *(uint **)(compiler + 0xe30);
-        vectorInstWord7 = vectorReg << 0x15 | 0x30000U | srcRegA << 0xb | 0x1000012c;
+        runStartOrInstWord = vectorReg << 0x15 | 0x30000U | srcRegA << 0xb | 0x1000012c;
         goto LAB_97bdaabc;
       }
-      uVar2 = vectorInstWord6 >> (vectorInstWord7 * -4 + 0x1c & 0x3f) & 0xf;
+      firstSelector = selectors >> (runStartOrInstWord * -4 + 0x1c & 0x3f) & 0xf;
       srcRegA = vectorReg;
-      if (uVar2 != 1) {
+      if (firstSelector != 1) {
         codeCursor = *(uint **)(compiler + 0xe30);
         srcRegA = 3;
-        *codeCursor = vectorReg << 0x10 | 0x600000U | vectorReg << 0xb | (uVar2 * 4 + 0xc) * 0x40 & 0x300 |
+        *codeCursor = vectorReg << 0x10 | 0x600000U | vectorReg << 0xb | (firstSelector * 4 + 0xc) * 0x40 & 0x300 |
                   0x1000002c;
         *(uint **)(compiler + 0xe30) = codeCursor + 1;
       }
-      vectorInstWord6 = vectorInstWord6 >> (vectorInstWord7 * -4 + 0x10 & 0x3f);
+      selectors = selectors >> (runStartOrInstWord * -4 + 0x10 & 0x3f);
       srcRegB = vectorReg;
-      if ((vectorInstWord6 & 0xf) != 0) {
+      if ((selectors & 0xf) != 0) {
         codeCursor = *(uint **)(compiler + 0xe30);
         srcRegB = 4;
-        *codeCursor = vectorReg << 0x10 | 0x800000U | vectorReg << 0xb | (vectorInstWord6 & 3) << 8 | 0x1000002c;
+        *codeCursor = vectorReg << 0x10 | 0x800000U | vectorReg << 0xb | (selectors & 3) << 8 | 0x1000002c;
         *(uint **)(compiler + 0xe30) = codeCursor + 1;
       }
       codeCursor = *(uint **)(compiler + 0xe30);
       *codeCursor = vectorReg << 0x15 | srcRegA << 0x10 | srcRegB << 0xb | 0x1000012c;
       codeWritePtr = codeCursor + 1;
       *(uint **)(compiler + 0xe30) = codeWritePtr;
-      if (vectorInstWord7 == 0) {
+      if (runStartOrInstWord == 0) {
         return;
       }
-      vectorInstWord5 = vectorReg << 0x15 | vectorReg << 0x10 | vectorReg << 0xb;
+      swizzleWordOrInst = vectorReg << 0x15 | vectorReg << 0x10 | vectorReg << 0xb;
     }
-    *codeWritePtr = vectorInstWord5 | (4 - vectorInstWord7) * 0x100 & 0x300 | 0x1000002c;
+    *codeWritePtr = swizzleWordOrInst | (4 - runStartOrInstWord) * 0x100 & 0x300 | 0x1000002c;
   }
   *(uint **)(compiler + 0xe30) = codeWritePtr + 1;
   return;
@@ -2266,6 +2270,8 @@ LAB_97bdd85c:
 int _PPCRuntimeCompilerCompileAV(compiler)
   int compiler;
 {
+  undefined4 passStartCursor;
+  uint branchWord;
   undefined4 *vectorInstWord6;
   int codeWritePtr4;
   int ppcInstWord;
@@ -2304,17 +2310,17 @@ int _PPCRuntimeCompilerCompileAV(compiler)
   undefined8 chunkIndex2;
   int chunkIndex;
   uint loopIndex;
-  bool bVar1;
+  bool storageMatches;
   char saturateFlag;
   byte dimension;
-  bool bVar4;
+  bool writesDestination;
   undefined4 *instructionListHead;
   uint sourceComponent;
-  uint uVar7;
-  undefined4 uVar8;
+  uint textureTarget;
+  undefined4 textureObject;
   int vectorInstWord5;
   int *codeWordPtr;
-  int iVar11;
+  int sourceRecord;
   uint operandWidth;
   uint *codeWritePtr2;
   uint *codeWritePtr3;
@@ -2341,12 +2347,12 @@ int _PPCRuntimeCompilerCompileAV(compiler)
   int *srcStorageWord;
   undefined4 *inst;
   int operandOffset;
-  undefined4 *puVar18;
+  undefined4 *paddedCursor;
   int *srcTypeWord;
   int codeBufferCapacity;
   uint elementCount;
   int opcode;
-  uint uVar22;
+  uint nextComponentIndex;
   undefined8 emitResult64;
   
   _PPCRuntimeCompilerInitialise(compiler,1);
@@ -2371,7 +2377,7 @@ int _PPCRuntimeCompilerCompileAV(compiler)
     *(undefined4 **)(compiler + 0xe28) = instructionListHead;
     while (instructionListHead != (undefined4 *)0x0) {
       elementCount = 1;
-      bVar4 = true;
+      writesDestination = true;
       instruction2 = *(int **)(compiler + 0xe28);
       instruction2[0x46] = *(int *)(compiler + 0xe30) - *(int *)(compiler + 0xe2c);
       opcode = *instruction2;
@@ -2380,9 +2386,9 @@ int _PPCRuntimeCompilerCompileAV(compiler)
       if (sourceCount != 0) {
         operandOffset = 0;
         do {
-          iVar11 = operandOffset + *(int *)(compiler + 0xe28);
-          if ((*(char *)(iVar11 + 0x48) != '\0') &&
-             (operandWidth = (uint)*(byte *)(iVar11 + 0x49), elementCount < operandWidth)) {
+          sourceRecord = operandOffset + *(int *)(compiler + 0xe28);
+          if ((*(char *)(sourceRecord + 0x48) != '\0') &&
+             (operandWidth = (uint)*(byte *)(sourceRecord + 0x49), elementCount < operandWidth)) {
             elementCount = operandWidth;
           }
           operandOffset = operandOffset + 0x24;
@@ -3308,7 +3314,7 @@ LAB_97bdde94:
                 if (*(char *)(programInfo + 0x48) == '\0') {
                   sourceComponent = 0;
                 }
-                uVar22 = componentLoopIndex + 1;
+                nextComponentIndex = componentLoopIndex + 1;
                 operandOffset = operandOffset + 0x24;
                 srcTypeWord = *(int **)(programInfo + 0x4c);
                 srcBankWord = *(undefined4 *)(programInfo + 0x38);
@@ -3320,8 +3326,8 @@ LAB_97bdde94:
                            *(undefined4 *)(programInfo + 0x54),sourceComponent,componentLoopIndex);
                 programInfo = *(int *)(compiler + 0xe28);
                 passThroughR4 = leftoverR4_04;
-                componentLoopIndex = uVar22;
-              } while (uVar22 < *(uint *)(programInfo + 0x30));
+                componentLoopIndex = nextComponentIndex;
+              } while (nextComponentIndex < *(uint *)(programInfo + 0x30));
             }
             switch(opcode) {
             case 1:
@@ -3956,9 +3962,9 @@ LAB_97be09ec:
                 *(undefined4 **)(compiler + 0xe30) = codeWritePtr + 1;
                 if (operandSelector != 8) break;
                 if (srcTypeWord != (int *)0x8) goto switchD_97be0ba4_default;
-                bVar1 = srcStorageWord == (int *)0x8;
+                storageMatches = srcStorageWord == (int *)0x8;
 LAB_97be0b40:
-                if (bVar1) goto switchD_97bdfc38_caseD_6;
+                if (storageMatches) goto switchD_97bdfc38_caseD_6;
                 goto switchD_97be0fe8_default;
               case 9:
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
@@ -3966,7 +3972,7 @@ LAB_97be0b40:
                 *(undefined4 **)(compiler + 0xe30) = codeWritePtr + 1;
                 if (operandSelector != 9) break;
                 if (srcTypeWord == (int *)0x9) {
-                  bVar1 = srcStorageWord == (int *)0x9;
+                  storageMatches = srcStorageWord == (int *)0x9;
                   goto LAB_97be0b40;
                 }
                 goto switchD_97be0ba4_default;
@@ -3985,7 +3991,7 @@ LAB_97be0b40:
               switch(operandSelector) {
               case 0:
                 if (srcTypeWord == (int *)0x0) {
-                  bVar1 = srcStorageWord == (int *)0x0;
+                  storageMatches = srcStorageWord == (int *)0x0;
                   codeCursor3 = *(uint **)(compiler + 0xe30);
                   vectorInstWord = 0x10600000;
 LAB_97be0c50:
@@ -4013,7 +4019,7 @@ LAB_97be0c08:
                 goto LAB_97be1470;
               case 1:
                 if (srcTypeWord == (int *)0x1) {
-                  bVar1 = srcStorageWord == (int *)0x1;
+                  storageMatches = srcStorageWord == (int *)0x1;
                   codeCursor3 = *(uint **)(compiler + 0xe30);
                   vectorInstWord = 0x10610000;
                   goto LAB_97be0c50;
@@ -4023,13 +4029,13 @@ LAB_97be0c08:
                   vectorInstWord3 = 0x1060012c;
                   goto LAB_97be0e60;
                 }
-                bVar1 = srcStorageWord == (int *)0x3;
+                storageMatches = srcStorageWord == (int *)0x3;
                 codeCursor3 = *(uint **)(compiler + 0xe30);
                 vectorInstWord = 0x1060012c;
                 goto LAB_97be0c54;
               case 2:
                 if (srcTypeWord == (int *)0x2) {
-                  bVar1 = srcStorageWord == (int *)0x2;
+                  storageMatches = srcStorageWord == (int *)0x2;
                   codeCursor3 = *(uint **)(compiler + 0xe30);
                   vectorInstWord = 0x10620000;
                   goto LAB_97be0c50;
@@ -4039,7 +4045,7 @@ LAB_97be0c08:
                   vectorInstWord3 = 0x1060022c;
                   goto LAB_97be0e60;
                 }
-                bVar1 = srcStorageWord == (int *)0x0;
+                storageMatches = srcStorageWord == (int *)0x0;
                 codeCursor3 = *(uint **)(compiler + 0xe30);
                 vectorInstWord = 0x1060022c;
                 goto LAB_97be0c54;
@@ -4050,12 +4056,12 @@ LAB_97be0c08:
                     vectorInstWord3 = 0x1060032c;
                     goto LAB_97be0e60;
                   }
-                  bVar1 = srcStorageWord == (int *)0x3;
+                  storageMatches = srcStorageWord == (int *)0x3;
                   codeCursor3 = *(uint **)(compiler + 0xe30);
                   vectorInstWord = 0x10630000;
                   goto LAB_97be0c50;
                 }
-                bVar1 = srcStorageWord == (int *)0x1;
+                storageMatches = srcStorageWord == (int *)0x1;
                 codeCursor3 = *(uint **)(compiler + 0xe30);
                 vectorInstWord = 0x1060032c;
 LAB_97be0c54:
@@ -4063,7 +4069,7 @@ LAB_97be0c54:
                 codeWritePtr2 = codeCursor3 + 1;
                 *(uint **)(compiler + 0xe30) = codeWritePtr2;
 LAB_97be0f9c:
-                if (!bVar1) {
+                if (!storageMatches) {
                   vectorInstWord = 0x10420000;
 LAB_97be0fac:
                   vectorInstWord = vectorInstWord | 0x1a2c;
@@ -4079,14 +4085,14 @@ LAB_97be0ab4:
                 codeWritePtr2 = codeWritePtr + 1;
                 *(uint **)(compiler + 0xe30) = codeWritePtr2;
                 if (srcTypeWord == (int *)0x4) {
-                  bVar1 = srcStorageWord == (int *)0x4;
+                  storageMatches = srcStorageWord == (int *)0x4;
                   vectorInstWord = 0x10600000;
 LAB_97be0da4:
                   *codeWritePtr2 = vectorInstWord | 0x1a8c;
                   goto LAB_97be0e24;
                 }
                 if (srcTypeWord == (int *)0x5) {
-                  bVar1 = srcStorageWord == (int *)0x6;
+                  storageMatches = srcStorageWord == (int *)0x6;
                   goto LAB_97be0f9c;
                 }
                 codeWritePtr2 = *(uint **)(compiler + 0xe30);
@@ -4100,7 +4106,7 @@ LAB_97be0794:
                 codeWritePtr2 = codeWritePtr + 1;
                 *(uint **)(compiler + 0xe30) = codeWritePtr2;
                 if (srcTypeWord == (int *)0x5) {
-                  bVar1 = srcStorageWord == (int *)0x5;
+                  storageMatches = srcStorageWord == (int *)0x5;
                   vectorInstWord = 0x10610000;
                   goto LAB_97be0da4;
                 }
@@ -4109,13 +4115,13 @@ LAB_97be0794:
                   vectorInstWord3 = 0x1063192c;
                   goto LAB_97be0e60;
                 }
-                bVar1 = srcStorageWord == (int *)0x7;
+                storageMatches = srcStorageWord == (int *)0x7;
                 vectorInstWord = 0x1063192c;
 LAB_97be0e1c:
                 *codeWritePtr2 = vectorInstWord;
 LAB_97be0e24:
                 *(uint **)(compiler + 0xe30) = codeWritePtr2 + 1;
-                if (!bVar1) {
+                if (!storageMatches) {
                   codeWritePtr3 = codeWritePtr2 + 2;
                   codeWritePtr2[1] = 0x10421a2c;
                   goto LAB_97be1344;
@@ -4128,12 +4134,12 @@ LAB_97be0e24:
                 codeWritePtr2 = codeWritePtr + 1;
                 *(uint **)(compiler + 0xe30) = codeWritePtr2;
                 if (srcTypeWord == (int *)0x6) {
-                  bVar1 = srcStorageWord == (int *)0x6;
+                  storageMatches = srcStorageWord == (int *)0x6;
                   vectorInstWord = 0x10620000;
                   goto LAB_97be0da4;
                 }
                 if (srcTypeWord == (int *)0x7) {
-                  bVar1 = srcStorageWord == (int *)0x4;
+                  storageMatches = srcStorageWord == (int *)0x4;
                   vectorInstWord = 0x10631a2c;
                   goto LAB_97be0e1c;
                 }
@@ -4152,7 +4158,7 @@ LAB_97be0e64:
                 vectorInstWord6 = codeWritePtr + 1;
                 *(undefined4 **)(compiler + 0xe30) = vectorInstWord6;
                 if (srcTypeWord == (int *)0x4) {
-                  bVar1 = srcStorageWord == (int *)0x5;
+                  storageMatches = srcStorageWord == (int *)0x5;
                   vectorInstWord3 = 0x10631b2c;
                 }
                 else {
@@ -4162,12 +4168,12 @@ LAB_97be0e64:
                     *(undefined4 **)(compiler + 0xe30) = codeWritePtr + 3;
                     goto switchD_97be0ba4_default;
                   }
-                  bVar1 = srcStorageWord == (int *)0x7;
+                  storageMatches = srcStorageWord == (int *)0x7;
                   vectorInstWord3 = 0x10631a8c;
                 }
                 *vectorInstWord6 = vectorInstWord3;
                 *(undefined4 **)(compiler + 0xe30) = codeWritePtr + 2;
-                if (bVar1) {
+                if (storageMatches) {
                   codeWritePtr3 = codeWritePtr + 3;
                   codeWritePtr[2] = 0x10421b2c;
                   goto LAB_97be1820;
@@ -4195,7 +4201,7 @@ LAB_97be0e64:
                 codeWritePtr2 = codeWritePtr + 1;
                 *(uint **)(compiler + 0xe30) = codeWritePtr2;
                 if (srcTypeWord == (int *)0x9) {
-                  bVar1 = srcStorageWord == (int *)0x9;
+                  storageMatches = srcStorageWord == (int *)0x9;
                   goto LAB_97be0f9c;
                 }
 LAB_97be0fb4:
@@ -4209,7 +4215,7 @@ LAB_97be0fb8:
                 codeWritePtr2 = codeWritePtr + 1;
                 *(uint **)(compiler + 0xe30) = codeWritePtr2;
                 if (srcTypeWord != (int *)0xa) goto LAB_97be0fb4;
-                bVar1 = srcStorageWord == (int *)0xa;
+                storageMatches = srcStorageWord == (int *)0xa;
                 goto LAB_97be0f9c;
               default:
                 goto switchD_97be0ba4_default;
@@ -4373,19 +4379,19 @@ LAB_97be1344:
                 *(uint **)(compiler + 0xe30) = codeWritePtr3;
                 break;
               case 0x9:
-                bVar1 = srcStorageWord == (int *)0x9;
+                storageMatches = srcStorageWord == (int *)0x9;
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                 vectorInstWord3 = 0x1060038c;
                 goto LAB_97be1318;
               case 0xa:
-                bVar1 = srcStorageWord == (int *)0xa;
+                storageMatches = srcStorageWord == (int *)0xa;
                 codeWritePtr = *(undefined4 **)(compiler + 0xe30);
                 vectorInstWord3 = 0x10683cc4;
 LAB_97be1318:
                 *codeWritePtr = vectorInstWord3;
                 codeWritePtr2 = codeWritePtr + 1;
                 *(uint **)(compiler + 0xe30) = codeWritePtr2;
-                if (!bVar1) {
+                if (!storageMatches) {
                   vectorInstWord = 0x10420000;
 LAB_97be1338:
                   vectorInstWord = vectorInstWord | 0x192c;
@@ -4488,11 +4494,11 @@ LAB_97be1820:
               srcStorageWord = *(int **)(compiler + 0xe20);
               if (*(int *)(srcStorageWord[0x360] + 0x38) - 0x8b30U < 2) {
                 srcTypeWord = *(int **)(*(int *)(compiler + 0xe28) + 0x58);
-                uVar8 = *(undefined4 *)
+                textureObject = *(undefined4 *)
                          (srcStorageWord[*(ushort *)(*(int *)(compiler + 0xe28) + 0x68) + 0x361] + *srcTypeWord);
               }
               else {
-                uVar8 = *(undefined4 *)(*(int *)(compiler + 0xe28) + 0x10c);
+                textureObject = *(undefined4 *)(*(int *)(compiler + 0xe28) + 0x10c);
               }
               ((int (*)())_PPCTextureSamplerAttachGLDContext)(*(undefined4 *)(compiler + 0xe1c),srcStorageWord[0x367]);
               projectionEnabled = 0;
@@ -4509,26 +4515,26 @@ LAB_97be1820:
                 codeWritePtr[1] = 0x1000436a;
                 *(undefined4 **)(compiler + 0xe30) = codeWritePtr + 2;
               }
-              uVar7 = *(uint *)(*(int *)(compiler + 0xe28) + 0x110);
-              if (uVar7 == 2) {
+              textureTarget = *(uint *)(*(int *)(compiler + 0xe28) + 0x110);
+              if (textureTarget == 2) {
                 srcBankWord = *(undefined4 *)(compiler + 0xe30);
-                emitResult64 = ((int (*)())_PPCTextureSamplerSampleTexelRECTRTCAV)(*(undefined4 *)(compiler + 0xe1c),uVar8,srcBankWord);
+                emitResult64 = ((int (*)())_PPCTextureSamplerSampleTexelRECTRTCAV)(*(undefined4 *)(compiler + 0xe1c),textureObject,srcBankWord);
               }
               else {
                 passThroughR4 = leftoverR4_07;
-                if (uVar7 < 3) {
-                  if (uVar7 != 1) goto switchD_97bdfc38_caseD_6;
+                if (textureTarget < 3) {
+                  if (textureTarget != 1) goto switchD_97bdfc38_caseD_6;
                   srcBankWord = *(undefined4 *)(compiler + 0xe30);
-                  emitResult64 = ((int (*)())_PPCTextureSamplerSampleTexel3DRTCAV)(*(undefined4 *)(compiler + 0xe1c),uVar8,srcBankWord);
+                  emitResult64 = ((int (*)())_PPCTextureSamplerSampleTexel3DRTCAV)(*(undefined4 *)(compiler + 0xe1c),textureObject,srcBankWord);
                 }
-                else if (uVar7 == 3) {
+                else if (textureTarget == 3) {
                   srcBankWord = *(undefined4 *)(compiler + 0xe30);
-                  emitResult64 = ((int (*)())_PPCTextureSamplerSampleTexel2DRTCAV)(*(undefined4 *)(compiler + 0xe1c),uVar8,srcBankWord);
+                  emitResult64 = ((int (*)())_PPCTextureSamplerSampleTexel2DRTCAV)(*(undefined4 *)(compiler + 0xe1c),textureObject,srcBankWord);
                 }
                 else {
-                  if (uVar7 != 4) goto switchD_97bdfc38_caseD_6;
+                  if (textureTarget != 4) goto switchD_97bdfc38_caseD_6;
                   srcBankWord = *(undefined4 *)(compiler + 0xe30);
-                  emitResult64 = ((int (*)())_PPCTextureSamplerSampleTexel1DRTCAV)(*(undefined4 *)(compiler + 0xe1c),uVar8,srcBankWord);
+                  emitResult64 = ((int (*)())_PPCTextureSamplerSampleTexel1DRTCAV)(*(undefined4 *)(compiler + 0xe1c),textureObject,srcBankWord);
                 }
               }
 LAB_97be1634:
@@ -4581,13 +4587,13 @@ LAB_97be1634:
               curInst = *codeWordPtr + *(int *)(*(int *)(compiler + 0xe28) + 8) * 0x11c;
               if ((uint)codeWordPtr[1] < curInst - 0x11cU) {
                 codeWritePtr2 = *(uint **)(compiler + 0xe30);
-                uVar7 = *(int *)(compiler + 0xe40) - (int)codeWritePtr2;
+                branchWord = *(int *)(compiler + 0xe40) - (int)codeWritePtr2;
               }
               else {
                 codeWritePtr2 = *(uint **)(compiler + 0xe30);
-                uVar7 = *(int *)(curInst + -4) - ((int)codeWritePtr2 - *(int *)(compiler + 0xe2c));
+                branchWord = *(int *)(curInst + -4) - ((int)codeWritePtr2 - *(int *)(compiler + 0xe2c));
               }
-              *codeWritePtr2 = uVar7 & 0x3fffffc | 0x48000000;
+              *codeWritePtr2 = branchWord & 0x3fffffc | 0x48000000;
               goto LAB_97be17b0;
             case 0x55:
               codeWritePtr = *(undefined4 **)(compiler + 0xe30);
@@ -4599,17 +4605,17 @@ LAB_97be16ec:
               codeWordPtr = *(int **)(*(int *)(compiler + 0xe20) + 0xd80);
               curInst = *codeWordPtr + *(int *)(*(int *)(compiler + 0xe28) + 8) * 0x11c;
               if ((uint)codeWordPtr[1] < curInst - 0x11cU) {
-                uVar7 = *(int *)(compiler + 0xe40) - (int)srcTypeWord;
+                branchWord = *(int *)(compiler + 0xe40) - (int)srcTypeWord;
               }
               else {
-                uVar7 = *(int *)(curInst + -4) - ((int)srcTypeWord - *(int *)(compiler + 0xe2c));
+                branchWord = *(int *)(curInst + -4) - ((int)srcTypeWord - *(int *)(compiler + 0xe2c));
               }
               codeWritePtr2 = *(uint **)(compiler + 0xe30);
-              *codeWritePtr2 = uVar7 & 0x3fffffc | 0x48000000;
+              *codeWritePtr2 = branchWord & 0x3fffffc | 0x48000000;
 LAB_97be17b0:
               *(uint **)(compiler + 0xe30) = codeWritePtr2 + 1;
 switchD_97bdfc38_caseD_49:
-              bVar4 = false;
+              writesDestination = false;
               goto LAB_97be1860;
             case 0x68:
               codeWritePtr = *(undefined4 **)(compiler + 0xe30);
@@ -4627,7 +4633,7 @@ switchD_97bdfc38_caseD_49:
                 vectorInstWord = *(int *)(curInst + -4) - ((int)codeWritePtr2 - *(int *)(compiler + 0xe2c));
               }
               vectorInstWord = vectorInstWord & 0x3fffffc | 0x48000000;
-              bVar4 = false;
+              writesDestination = false;
               goto LAB_97be181c;
             case 0x6c:
               curInst = *(int *)(compiler + 0xe28);
@@ -4674,7 +4680,7 @@ switchD_97bdfc38_caseD_49:
             *(int *)(compiler + 0xe30) =
                  *(int *)(compiler + 0xe30) + (int)((ulonglong)chunkIndex2 >> 0x20) * 4;
 switchD_97bdfc38_caseD_6:
-            if (bVar4) {
+            if (writesDestination) {
               if (saturateFlag != '\0') {
                 chunkWordCount = _glpRTCAddAChunk_97bd7cbc
                                   (&_glpOpSaturateAVRTC,*(undefined4 *)(compiler + 0xe30));
@@ -4726,11 +4732,11 @@ LAB_97be18e4:
         inst = inst + 1;
       }
       _PPCRuntimeCompilerInitialise(compiler,1);
-      uVar8 = *(undefined4 *)(compiler + 0xe34);
+      passStartCursor = *(undefined4 *)(compiler + 0xe34);
       passThroughR4 = leftoverR4_10;
 LAB_97be1ac8:
       passIndex = *(int *)(compiler + 0xe48);
-      *(undefined4 *)(compiler + 0xe30) = uVar8;
+      *(undefined4 *)(compiler + 0xe30) = passStartCursor;
     }
     else if (passIndex == 1) {
       _PPCRuntimeCompilerBackupRegister(compiler,0);
@@ -4743,11 +4749,11 @@ LAB_97be1ac8:
         inst = (undefined4 *)0x60000000;
         codeWritePtr = *(undefined4 **)(compiler + 0xe30);
         do {
-          puVar18 = codeWritePtr + 1;
+          paddedCursor = codeWritePtr + 1;
           *codeWritePtr = 0x60000000;
-          *(undefined4 **)(compiler + 0xe30) = puVar18;
-          codeWritePtr = puVar18;
-        } while (((uint)puVar18 & 0xf) != 0);
+          *(undefined4 **)(compiler + 0xe30) = paddedCursor;
+          codeWritePtr = paddedCursor;
+        } while (((uint)paddedCursor & 0xf) != 0);
       }
       _PPCRuntimeCompilerInitialiseVariableInfo(compiler);
       passIndex = *(int *)(compiler + 0xe48);
@@ -4782,7 +4788,7 @@ LAB_97be1ac8:
         _PPCRuntimeCompilerDirtyRegistersContainingTemps(compiler);
         _PPCRuntimeCompilerDirtyRegistersContainingParams(compiler);
         _PPCRuntimeCompilerInitialiseVariableInfo(compiler);
-        uVar8 = *(undefined4 *)(compiler + 0xe38);
+        passStartCursor = *(undefined4 *)(compiler + 0xe38);
         passThroughR4 = leftoverR4_12;
         goto LAB_97be1ac8;
       }
