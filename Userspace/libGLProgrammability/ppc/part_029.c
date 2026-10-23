@@ -58,68 +58,69 @@ int std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select
 }
 
 /* std__vector_TParameter_pool_allocator_TParameter_____M_insert_aux @ 0x97c33ee8 (384 bytes) */
-int std__vector_TParameter_pool_allocator_TParameter_____M_insert_aux(this, param_2, param_3)
+int std__vector_TParameter_pool_allocator_TParameter_____M_insert_aux(this, position, newParameter)
   unsigned char * this;
-  undefined4 *param_2;
-  undefined4 *param_3;
+  undefined4 *position;
+  undefined4 *newParameter;
 {
+  int elemsToMove;
   undefined4 *finish;
   int allocation;
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  undefined4 uVar4;
-  undefined4 uVar5;
-  undefined4 *puVar6;
-  undefined4 uVar7;
-  undefined4 *puVar8;
-  undefined4 *local_30 [5];
+  int oldSize;
+  int destroyCursor;
+  int len;
+  undefined4 xWord0;
+  undefined4 movedWord;
+  undefined4 *srcCursor;
+  undefined4 xWord1;
+  undefined4 *copyDest;
+  undefined4 *newFinish [5];
   
   finish = *(undefined4 **)(this + 8);
   if (finish == *(undefined4 **)(this + 0xc)) {
-    iVar3 = 1;
-    iVar1 = (int)finish - *(int *)(this + 4) >> 3;
-    if (iVar1 != 0) {
-      iVar3 = iVar1 << 1;
+    len = 1;
+    oldSize = (int)finish - *(int *)(this + 4) >> 3;
+    if (oldSize != 0) {
+      len = oldSize << 1;
     }
-    allocation = TPoolAllocator__allocate(*(unsigned char **)this,iVar3 * 8);
-    ((int (*)())std____uninitialized_copy_aux___gnu_cxx____normal_iterator_TParameter__std__vector_TParameter_pool_allocator_TParameter______gnu_cxx____normal_iterator_TParameter__std__vector_TParameter_pool_allocator_TParameter____)(local_30,*(undefined4 *)(this + 4),param_2,allocation);
-    if (local_30[0] != (undefined4 *)0x0) {
-      uVar4 = *param_3;
-      local_30[0][1] = param_3[1];
-      *local_30[0] = uVar4;
+    allocation = TPoolAllocator__allocate(*(unsigned char **)this,len * 8);
+    ((int (*)())std____uninitialized_copy_aux___gnu_cxx____normal_iterator_TParameter__std__vector_TParameter_pool_allocator_TParameter______gnu_cxx____normal_iterator_TParameter__std__vector_TParameter_pool_allocator_TParameter____)(newFinish,*(undefined4 *)(this + 4),position,allocation);
+    if (newFinish[0] != (undefined4 *)0x0) {
+      xWord0 = *newParameter;
+      newFinish[0][1] = newParameter[1];
+      *newFinish[0] = xWord0;
     }
-    ((int (*)())std____uninitialized_copy_aux___gnu_cxx____normal_iterator_TParameter__std__vector_TParameter_pool_allocator_TParameter______gnu_cxx____normal_iterator_TParameter__std__vector_TParameter_pool_allocator_TParameter____)(local_30,param_2,*(undefined4 *)(this + 8),local_30[0] + 2);
-    for (iVar2 = *(int *)(this + 4); iVar2 != *(int *)(this + 8); iVar2 = iVar2 + 8) {
+    ((int (*)())std____uninitialized_copy_aux___gnu_cxx____normal_iterator_TParameter__std__vector_TParameter_pool_allocator_TParameter______gnu_cxx____normal_iterator_TParameter__std__vector_TParameter_pool_allocator_TParameter____)(newFinish,position,*(undefined4 *)(this + 8),newFinish[0] + 2);
+    for (destroyCursor = *(int *)(this + 4); destroyCursor != *(int *)(this + 8); destroyCursor = destroyCursor + 8) {
     }
-    *(undefined4 **)(this + 8) = local_30[0];
-    *(int *)(this + 0xc) = allocation + iVar3 * 8;
+    *(undefined4 **)(this + 8) = newFinish[0];
+    *(int *)(this + 0xc) = allocation + len * 8;
     *(int *)(this + 4) = allocation;
   }
   else {
-    puVar8 = (undefined4 *)0x0;
+    copyDest = (undefined4 *)0x0;
     if (finish != (undefined4 *)0x0) {
       finish[1] = finish[-1];
       *finish = finish[-2];
-      puVar8 = *(undefined4 **)(this + 8);
+      copyDest = *(undefined4 **)(this + 8);
     }
-    *(undefined4 **)(this + 8) = puVar8 + 2;
-    uVar7 = param_3[1];
-    iVar3 = (int)(puVar8 + -2) - (int)param_2 >> 3;
-    uVar4 = *param_3;
-    puVar6 = puVar8 + -2;
-    if (0 < iVar3) {
+    *(undefined4 **)(this + 8) = copyDest + 2;
+    xWord1 = newParameter[1];
+    elemsToMove = (int)(copyDest + -2) - (int)position >> 3;
+    xWord0 = *newParameter;
+    srcCursor = copyDest + -2;
+    if (0 < elemsToMove) {
       do {
-        uVar5 = puVar6[-1];
-        puVar8[-2] = puVar6[-2];
-        puVar8[-1] = uVar5;
-        iVar3 = iVar3 + -1;
-        puVar8 = puVar8 + -2;
-        puVar6 = puVar6 + -2;
-      } while (iVar3 != 0);
+        movedWord = srcCursor[-1];
+        copyDest[-2] = srcCursor[-2];
+        copyDest[-1] = movedWord;
+        elemsToMove = elemsToMove + -1;
+        copyDest = copyDest + -2;
+        srcCursor = srcCursor + -2;
+      } while (elemsToMove != 0);
     }
-    param_2[1] = uVar7;
-    *param_2 = uVar4;
+    position[1] = xWord1;
+    *position = xWord0;
   }
   return;
 }
@@ -233,147 +234,154 @@ int TType__copyType(this, copyOf, remapper)
   unsigned char * copyOf;
   unsigned char * remapper;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  void *pvVar5;
-  int iVar6;
-  undefined4 uVar7;
+  undefined4 *memberFinish;
+  int srcMangled;
+  int srcTypeName;
+  int srcFieldName;
+  int finishCursor;
+  int srcMembers;
+  uint memberIndex;
+  uint srcBasicTypeBits;
+  uint srcQualifierBits;
+  uint srcIsMatrixBit;
+  uint dstTypeBits;
+  void *newString;
+  int srcStructure;
+  undefined4 srcStructureSize;
   unsigned char * poolAllocator;
-  undefined4 *puVar9;
-  unsigned char * this_00;
-  unsigned char * this_01;
-  void *pvVar10;
-  undefined4 *puVar11;
-  undefined4 uVar12;
-  uint uVar13;
-  char *pcVar14;
-  unsigned char * pTVar15;
-  unsigned char * local_a0 [4];
-  unsigned char * local_90;
-  undefined4 local_80;
-  unsigned char * local_70;
-  undefined4 local_6c;
-  undefined4 local_60 [4];
-  undefined4 local_50 [4];
-  undefined4 local_40 [7];
+  undefined4 *newTypeList;
+  unsigned char * newFieldType;
+  unsigned char * newStructure;
+  void *stringAlloc;
+  undefined4 *typeListOrNull;
+  undefined4 srcWord1c;
+  uint srcNominalSizeBits;
+  char *srcChars;
+  unsigned char * srcFieldType;
+  unsigned char * findResult [4];
+  unsigned char * remapperEnd;
+  undefined4 listAllocator;
+  unsigned char * typeLineType;
+  undefined4 typeLineLine;
+  undefined4 fieldNameAllocSlot [4];
+  undefined4 typeNameAllocSlot [4];
+  undefined4 mangledAllocSlot [7];
   
-  uVar4 = *(uint *)(this + 0x24);
-  uVar1 = (*(uint *)(copyOf + 0x24) >> 0x13 & 0x3f) << 0x13;
-  *(uint *)(this + 0x24) = uVar1 | uVar4 & 0xfe07ffff;
-  uVar2 = *(uint *)(copyOf + 0x24) & 0xfe000000;
-  *(uint *)(this + 0x24) = uVar2 | uVar1 | uVar4 & 0x7ffff;
-  uVar13 = *(uint *)(copyOf + 0x24) & 0x7f800;
-  *(uint *)(this + 0x24) = uVar13 | uVar2 | uVar1 | uVar4 & 0x7ff;
-  uVar3 = (*(uint *)(copyOf + 0x24) >> 10 & 1) << 10;
-  *(uint *)(this + 0x24) = uVar3 | uVar13 | uVar2 | uVar1 | uVar4 & 0x3ff;
+  dstTypeBits = *(uint *)(this + 0x24);
+  srcBasicTypeBits = (*(uint *)(copyOf + 0x24) >> 0x13 & 0x3f) << 0x13;
+  *(uint *)(this + 0x24) = srcBasicTypeBits | dstTypeBits & 0xfe07ffff;
+  srcQualifierBits = *(uint *)(copyOf + 0x24) & 0xfe000000;
+  *(uint *)(this + 0x24) = srcQualifierBits | srcBasicTypeBits | dstTypeBits & 0x7ffff;
+  srcNominalSizeBits = *(uint *)(copyOf + 0x24) & 0x7f800;
+  *(uint *)(this + 0x24) = srcNominalSizeBits | srcQualifierBits | srcBasicTypeBits | dstTypeBits & 0x7ff;
+  srcIsMatrixBit = (*(uint *)(copyOf + 0x24) >> 10 & 1) << 10;
+  *(uint *)(this + 0x24) = srcIsMatrixBit | srcNominalSizeBits | srcQualifierBits | srcBasicTypeBits | dstTypeBits & 0x3ff;
   *(uint *)(this + 0x24) =
-       (*(uint *)(copyOf + 0x24) >> 9 & 1) << 9 | uVar3 | uVar13 | uVar2 | uVar1 | uVar4 & 0x1ff;
-  iVar6 = *(int *)(copyOf + 8);
+       (*(uint *)(copyOf + 0x24) >> 9 & 1) << 9 | srcIsMatrixBit | srcNominalSizeBits | srcQualifierBits | srcBasicTypeBits | dstTypeBits & 0x1ff;
+  srcStructure = *(int *)(copyOf + 8);
   *(undefined4 *)(this + 4) = *(undefined4 *)(copyOf + 4);
-  if (iVar6 == 0) {
+  if (srcStructure == 0) {
     *(undefined4 *)(this + 8) = 0;
   }
   else {
-    ((int (*)())std___Rb_tree_TVector_TTypeLine___std__pair_TVector_TTypeLine__const_TVector_TTypeLine____std___Select1st_std__pair_TVector_TTypeLine__const_TVector_TTypeLine_____std__less_TVector_TTypeLine____std__allocator_std__pair_TVector_TTypeLine__const_TVector_TTypeLine_______find)(local_a0,remapper,this + 8);
-    local_90 = *(unsigned char **)remapper;
-    if (local_a0[0] == local_90) {
+    ((int (*)())std___Rb_tree_TVector_TTypeLine___std__pair_TVector_TTypeLine__const_TVector_TTypeLine____std___Select1st_std__pair_TVector_TTypeLine__const_TVector_TTypeLine_____std__less_TVector_TTypeLine____std__allocator_std__pair_TVector_TTypeLine__const_TVector_TTypeLine_______find)(findResult,remapper,this + 8);
+    remapperEnd = *(unsigned char **)remapper;
+    if (findResult[0] == remapperEnd) {
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-      puVar9 = (undefined4 *)TPoolAllocator__allocate(poolAllocator,0x10);
-      puVar11 = (undefined4 *)0x0;
-      if (puVar9 != (undefined4 *)0x0) {
-        local_80 = GetGlobalPoolAllocator();
-        puVar9[3] = 0;
-        puVar9[1] = 0;
-        puVar9[2] = 0;
-        *puVar9 = local_80;
-        puVar11 = puVar9;
+      newTypeList = (undefined4 *)TPoolAllocator__allocate(poolAllocator,0x10);
+      typeListOrNull = (undefined4 *)0x0;
+      if (newTypeList != (undefined4 *)0x0) {
+        listAllocator = GetGlobalPoolAllocator();
+        newTypeList[3] = 0;
+        newTypeList[1] = 0;
+        newTypeList[2] = 0;
+        *newTypeList = listAllocator;
+        typeListOrNull = newTypeList;
       }
-      *(undefined4 **)(this + 8) = puVar11;
-      for (uVar13 = 0; iVar6 = *(int *)(*(int *)(copyOf + 8) + 4),
-          uVar13 < (uint)(*(int *)(*(int *)(copyOf + 8) + 8) - iVar6 >> 3); uVar13 = uVar13 + 1) {
-        local_6c = *(undefined4 *)(iVar6 + uVar13 * 8 + 4);
-        pTVar15 = *(unsigned char **)(*(int *)(*(int *)(copyOf + 8) + 4) + uVar13 * 8);
+      *(undefined4 **)(this + 8) = typeListOrNull;
+      for (memberIndex = 0; srcMembers = *(int *)(*(int *)(copyOf + 8) + 4),
+          memberIndex < (uint)(*(int *)(*(int *)(copyOf + 8) + 8) - srcMembers >> 3); memberIndex = memberIndex + 1) {
+        typeLineLine = *(undefined4 *)(srcMembers + memberIndex * 8 + 4);
+        srcFieldType = *(unsigned char **)(*(int *)(*(int *)(copyOf + 8) + 4) + memberIndex * 8);
         poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-        this_00 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
-        *(undefined ***)this_00 = &PTR___ZN5TTypeD1Ev_a7b7d590;
-        ((int (*)())TType__copyType)(this_00,pTVar15,remapper);
-        this_01 = *(unsigned char **)(this + 8);
-        puVar11 = *(undefined4 **)(this_01 + 8);
-        local_70 = this_00;
-        if (puVar11 == *(undefined4 **)(this_01 + 0xc)) {
-          ((int (*)())std__vector_TTypeLine_pool_allocator_TTypeLine_____M_insert_aux)(this_01,puVar11,&local_70)
+        newFieldType = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
+        *(undefined ***)newFieldType = &PTR___ZN5TTypeD1Ev_a7b7d590;
+        ((int (*)())TType__copyType)(newFieldType,srcFieldType,remapper);
+        newStructure = *(unsigned char **)(this + 8);
+        memberFinish = *(undefined4 **)(newStructure + 8);
+        typeLineType = newFieldType;
+        if (memberFinish == *(undefined4 **)(newStructure + 0xc)) {
+          ((int (*)())std__vector_TTypeLine_pool_allocator_TTypeLine_____M_insert_aux)(newStructure,memberFinish,&typeLineType)
           ;
         }
         else {
-          iVar6 = 0;
-          if (puVar11 != (undefined4 *)0x0) {
-            *puVar11 = this_00;
-            puVar11[1] = local_6c;
-            iVar6 = *(int *)(this_01 + 8);
+          finishCursor = 0;
+          if (memberFinish != (undefined4 *)0x0) {
+            *memberFinish = newFieldType;
+            memberFinish[1] = typeLineLine;
+            finishCursor = *(int *)(newStructure + 8);
           }
-          *(int *)(this_01 + 8) = iVar6 + 8;
+          *(int *)(newStructure + 8) = finishCursor + 8;
         }
       }
     }
     else {
-      *(undefined4 *)(this + 8) = *(undefined4 *)(local_a0[0] + 0x14);
+      *(undefined4 *)(this + 8) = *(undefined4 *)(findResult[0] + 0x14);
     }
   }
   *(undefined4 *)(this + 0xc) = 0;
-  iVar6 = *(int *)(copyOf + 0xc);
-  if (iVar6 != 0) {
-    *(undefined1 *)(*(int *)(iVar6 + 4) + *(int *)(*(int *)(iVar6 + 4) + -0xc)) = *DAT_a7b7ba80;
-    pcVar14 = *(char **)(iVar6 + 4);
+  srcFieldName = *(int *)(copyOf + 0xc);
+  if (srcFieldName != 0) {
+    *(undefined1 *)(*(int *)(srcFieldName + 4) + *(int *)(*(int *)(srcFieldName + 4) + -0xc)) = *DAT_a7b7ba80;
+    srcChars = *(char **)(srcFieldName + 4);
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-    pvVar10 = (void *)TPoolAllocator__allocate(poolAllocator,8);
-    pvVar5 = (void *)0x0;
-    if (pvVar10 != (void *)0x0) {
-      local_60[0] = GetGlobalPoolAllocator();
+    stringAlloc = (void *)TPoolAllocator__allocate(poolAllocator,8);
+    newString = (void *)0x0;
+    if (stringAlloc != (void *)0x0) {
+      fieldNameAllocSlot[0] = GetGlobalPoolAllocator();
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-                (pvVar10,pcVar14,(unsigned char *)local_60);
-      pvVar5 = pvVar10;
+                (stringAlloc,srcChars,(unsigned char *)fieldNameAllocSlot);
+      newString = stringAlloc;
     }
-    *(void **)(this + 0xc) = pvVar5;
+    *(void **)(this + 0xc) = newString;
   }
   *(undefined4 *)(this + 0x10) = 0;
-  iVar6 = *(int *)(copyOf + 0x10);
-  if (iVar6 != 0) {
-    *(undefined1 *)(*(int *)(iVar6 + 4) + *(int *)(*(int *)(iVar6 + 4) + -0xc)) = *DAT_a7b7ba80;
-    pcVar14 = *(char **)(iVar6 + 4);
+  srcTypeName = *(int *)(copyOf + 0x10);
+  if (srcTypeName != 0) {
+    *(undefined1 *)(*(int *)(srcTypeName + 4) + *(int *)(*(int *)(srcTypeName + 4) + -0xc)) = *DAT_a7b7ba80;
+    srcChars = *(char **)(srcTypeName + 4);
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-    pvVar10 = (void *)TPoolAllocator__allocate(poolAllocator,8);
-    pvVar5 = (void *)0x0;
-    if (pvVar10 != (void *)0x0) {
-      local_50[0] = GetGlobalPoolAllocator();
+    stringAlloc = (void *)TPoolAllocator__allocate(poolAllocator,8);
+    newString = (void *)0x0;
+    if (stringAlloc != (void *)0x0) {
+      typeNameAllocSlot[0] = GetGlobalPoolAllocator();
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-                (pvVar10,pcVar14,(unsigned char *)local_50);
-      pvVar5 = pvVar10;
+                (stringAlloc,srcChars,(unsigned char *)typeNameAllocSlot);
+      newString = stringAlloc;
     }
-    *(void **)(this + 0x10) = pvVar5;
+    *(void **)(this + 0x10) = newString;
   }
   *(undefined4 *)(this + 0x14) = 0;
-  iVar6 = *(int *)(copyOf + 0x14);
-  if (iVar6 != 0) {
-    *(undefined1 *)(*(int *)(iVar6 + 4) + *(int *)(*(int *)(iVar6 + 4) + -0xc)) = *DAT_a7b7ba80;
-    pcVar14 = *(char **)(iVar6 + 4);
+  srcMangled = *(int *)(copyOf + 0x14);
+  if (srcMangled != 0) {
+    *(undefined1 *)(*(int *)(srcMangled + 4) + *(int *)(*(int *)(srcMangled + 4) + -0xc)) = *DAT_a7b7ba80;
+    srcChars = *(char **)(srcMangled + 4);
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-    pvVar10 = (void *)TPoolAllocator__allocate(poolAllocator,8);
-    pvVar5 = (void *)0x0;
-    if (pvVar10 != (void *)0x0) {
-      local_40[0] = GetGlobalPoolAllocator();
+    stringAlloc = (void *)TPoolAllocator__allocate(poolAllocator,8);
+    newString = (void *)0x0;
+    if (stringAlloc != (void *)0x0) {
+      mangledAllocSlot[0] = GetGlobalPoolAllocator();
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-                (pvVar10,pcVar14,(unsigned char *)local_40);
-      pvVar5 = pvVar10;
+                (stringAlloc,srcChars,(unsigned char *)mangledAllocSlot);
+      newString = stringAlloc;
     }
-    *(void **)(this + 0x14) = pvVar5;
+    *(void **)(this + 0x14) = newString;
   }
-  uVar12 = *(undefined4 *)(copyOf + 0x1c);
-  uVar7 = *(undefined4 *)(copyOf + 0x18);
+  srcWord1c = *(undefined4 *)(copyOf + 0x1c);
+  srcStructureSize = *(undefined4 *)(copyOf + 0x18);
   *(undefined4 *)(this + 0x20) = 0;
-  *(undefined4 *)(this + 0x18) = uVar7;
-  *(undefined4 *)(this + 0x1c) = uVar12;
+  *(undefined4 *)(this + 0x18) = srcStructureSize;
+  *(undefined4 *)(this + 0x1c) = srcWord1c;
   return;
 }
 
@@ -484,68 +492,69 @@ int std___Rb_tree_TVector_TTypeLine___std__pair_TVector_TTypeLine__const_TVector
 }
 
 /* std__vector_TTypeLine_pool_allocator_TTypeLine_____M_insert_aux @ 0x97c346a0 (384 bytes) */
-int std__vector_TTypeLine_pool_allocator_TTypeLine_____M_insert_aux(this, param_2, typeLine)
+int std__vector_TTypeLine_pool_allocator_TTypeLine_____M_insert_aux(this, position, typeLine)
   unsigned char * this;
-  undefined4 *param_2;
+  undefined4 *position;
   undefined4 *typeLine;
 {
+  int elemsToMove;
   undefined4 *finish;
   int allocation;
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  undefined4 uVar4;
-  undefined4 uVar5;
-  undefined4 *puVar6;
-  undefined4 uVar7;
-  undefined4 *puVar8;
-  undefined4 *local_30 [5];
+  int oldSize;
+  int destroyCursor;
+  int len;
+  undefined4 xWord0;
+  undefined4 movedWord;
+  undefined4 *srcCursor;
+  undefined4 xWord1;
+  undefined4 *copyDest;
+  undefined4 *newFinish [5];
   
   finish = *(undefined4 **)(this + 8);
   if (finish == *(undefined4 **)(this + 0xc)) {
-    iVar3 = 1;
-    iVar1 = (int)finish - *(int *)(this + 4) >> 3;
-    if (iVar1 != 0) {
-      iVar3 = iVar1 << 1;
+    len = 1;
+    oldSize = (int)finish - *(int *)(this + 4) >> 3;
+    if (oldSize != 0) {
+      len = oldSize << 1;
     }
-    allocation = TPoolAllocator__allocate(*(unsigned char **)this,iVar3 * 8);
-    ((int (*)())std____uninitialized_copy_aux___gnu_cxx____normal_iterator_TTypeLine__std__vector_TTypeLine_pool_allocator_TTypeLine______gnu_cxx____normal_iterator_TTypeLine__std__vector_TTypeLine_pool_allocator_TTypeLine____)(local_30,*(undefined4 *)(this + 4),param_2,allocation);
-    if (local_30[0] != (undefined4 *)0x0) {
-      uVar4 = *typeLine;
-      local_30[0][1] = typeLine[1];
-      *local_30[0] = uVar4;
+    allocation = TPoolAllocator__allocate(*(unsigned char **)this,len * 8);
+    ((int (*)())std____uninitialized_copy_aux___gnu_cxx____normal_iterator_TTypeLine__std__vector_TTypeLine_pool_allocator_TTypeLine______gnu_cxx____normal_iterator_TTypeLine__std__vector_TTypeLine_pool_allocator_TTypeLine____)(newFinish,*(undefined4 *)(this + 4),position,allocation);
+    if (newFinish[0] != (undefined4 *)0x0) {
+      xWord0 = *typeLine;
+      newFinish[0][1] = typeLine[1];
+      *newFinish[0] = xWord0;
     }
-    ((int (*)())std____uninitialized_copy_aux___gnu_cxx____normal_iterator_TTypeLine__std__vector_TTypeLine_pool_allocator_TTypeLine______gnu_cxx____normal_iterator_TTypeLine__std__vector_TTypeLine_pool_allocator_TTypeLine____)(local_30,param_2,*(undefined4 *)(this + 8),local_30[0] + 2);
-    for (iVar2 = *(int *)(this + 4); iVar2 != *(int *)(this + 8); iVar2 = iVar2 + 8) {
+    ((int (*)())std____uninitialized_copy_aux___gnu_cxx____normal_iterator_TTypeLine__std__vector_TTypeLine_pool_allocator_TTypeLine______gnu_cxx____normal_iterator_TTypeLine__std__vector_TTypeLine_pool_allocator_TTypeLine____)(newFinish,position,*(undefined4 *)(this + 8),newFinish[0] + 2);
+    for (destroyCursor = *(int *)(this + 4); destroyCursor != *(int *)(this + 8); destroyCursor = destroyCursor + 8) {
     }
-    *(undefined4 **)(this + 8) = local_30[0];
-    *(int *)(this + 0xc) = allocation + iVar3 * 8;
+    *(undefined4 **)(this + 8) = newFinish[0];
+    *(int *)(this + 0xc) = allocation + len * 8;
     *(int *)(this + 4) = allocation;
   }
   else {
-    puVar8 = (undefined4 *)0x0;
+    copyDest = (undefined4 *)0x0;
     if (finish != (undefined4 *)0x0) {
       finish[1] = finish[-1];
       *finish = finish[-2];
-      puVar8 = *(undefined4 **)(this + 8);
+      copyDest = *(undefined4 **)(this + 8);
     }
-    *(undefined4 **)(this + 8) = puVar8 + 2;
-    uVar7 = typeLine[1];
-    iVar3 = (int)(puVar8 + -2) - (int)param_2 >> 3;
-    uVar4 = *typeLine;
-    puVar6 = puVar8 + -2;
-    if (0 < iVar3) {
+    *(undefined4 **)(this + 8) = copyDest + 2;
+    xWord1 = typeLine[1];
+    elemsToMove = (int)(copyDest + -2) - (int)position >> 3;
+    xWord0 = *typeLine;
+    srcCursor = copyDest + -2;
+    if (0 < elemsToMove) {
       do {
-        uVar5 = puVar6[-1];
-        puVar8[-2] = puVar6[-2];
-        puVar8[-1] = uVar5;
-        iVar3 = iVar3 + -1;
-        puVar8 = puVar8 + -2;
-        puVar6 = puVar6 + -2;
-      } while (iVar3 != 0);
+        movedWord = srcCursor[-1];
+        copyDest[-2] = srcCursor[-2];
+        copyDest[-1] = movedWord;
+        elemsToMove = elemsToMove + -1;
+        copyDest = copyDest + -2;
+        srcCursor = srcCursor + -2;
+      } while (elemsToMove != 0);
     }
-    param_2[1] = uVar7;
-    *param_2 = uVar4;
+    position[1] = xWord1;
+    *position = xWord0;
   }
   return;
 }
@@ -592,52 +601,53 @@ int __ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_ERKS7_S9_(this, te
 }
 
 /* std__vector_int_pool_allocator_int_____M_insert_aux @ 0x97c348bc (252 bytes) */
-int std__vector_int_pool_allocator_int_____M_insert_aux(this, param_2, param_3)
+int std__vector_int_pool_allocator_int_____M_insert_aux(this, position, intValue)
   unsigned char * this;
-  undefined4 *param_2;
-  undefined4 *param_3;
+  undefined4 *position;
+  undefined4 *intValue;
 {
-  int finish2;
-  uint uVar1;
-  int iVar2;
+  int finishCursor;
+  int oldFinish;
+  uint moveBytes;
+  int oldSize;
   undefined4 *finish;
-  int iVar4;
-  void *allocation;
-  void *pvVar6;
-  undefined4 uVar7;
-  size_t sVar8;
+  int len;
+  void *newStart;
+  void *backStart;
+  undefined4 xValue;
+  size_t frontBytes;
   
   finish = *(undefined4 **)(this + 8);
   if (finish == *(undefined4 **)(this + 0xc)) {
-    iVar4 = 1;
-    iVar2 = (int)finish - *(int *)(this + 4) >> 2;
-    if (iVar2 != 0) {
-      iVar4 = iVar2 << 1;
+    len = 1;
+    oldSize = (int)finish - *(int *)(this + 4) >> 2;
+    if (oldSize != 0) {
+      len = oldSize << 1;
     }
-    allocation = (void *)TPoolAllocator__allocate(*(unsigned char **)this,iVar4 * 4);
-    sVar8 = (int)param_2 - (int)*(void **)(this + 4);
-    _memmove(allocation,*(void **)(this + 4),sVar8);
-    if ((int)allocation + sVar8 != 0) {
-      *(undefined4 *)((int)allocation + sVar8) = *param_3;
+    newStart = (void *)TPoolAllocator__allocate(*(unsigned char **)this,len * 4);
+    frontBytes = (int)position - (int)*(void **)(this + 4);
+    _memmove(newStart,*(void **)(this + 4),frontBytes);
+    if ((int)newStart + frontBytes != 0) {
+      *(undefined4 *)((int)newStart + frontBytes) = *intValue;
     }
-    finish2 = *(int *)(this + 8);
-    pvVar6 = (void *)((int)allocation + sVar8 + 4);
-    _memmove(pvVar6,param_2,finish2 - (int)param_2);
-    *(void **)(this + 0xc) = (void *)((int)allocation + iVar4 * 4);
-    *(int *)(this + 8) = (int)pvVar6 + (finish2 - (int)param_2);
-    *(void **)(this + 4) = allocation;
+    oldFinish = *(int *)(this + 8);
+    backStart = (void *)((int)newStart + frontBytes + 4);
+    _memmove(backStart,position,oldFinish - (int)position);
+    *(void **)(this + 0xc) = (void *)((int)newStart + len * 4);
+    *(int *)(this + 8) = (int)backStart + (oldFinish - (int)position);
+    *(void **)(this + 4) = newStart;
   }
   else {
-    iVar4 = 0;
+    finishCursor = 0;
     if (finish != (undefined4 *)0x0) {
       *finish = finish[-1];
-      iVar4 = *(int *)(this + 8);
+      finishCursor = *(int *)(this + 8);
     }
-    *(int *)(this + 8) = iVar4 + 4;
-    uVar1 = (iVar4 + -4) - (int)param_2 & 0xfffffffc;
-    uVar7 = *param_3;
-    _memmove((void *)(iVar4 - uVar1),param_2,uVar1);
-    *param_2 = uVar7;
+    *(int *)(this + 8) = finishCursor + 4;
+    moveBytes = (finishCursor + -4) - (int)position & 0xfffffffc;
+    xValue = *intValue;
+    _memmove((void *)(finishCursor - moveBytes),position,moveBytes);
+    *position = xValue;
   }
   return;
 }
