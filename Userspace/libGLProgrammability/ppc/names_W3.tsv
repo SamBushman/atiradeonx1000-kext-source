@@ -136,13 +136,13 @@ local	_PPParserScopeAddMacro	param_1	scope	INFERRED	dereferenced as the PPParser
 local	_PPParserAddScope	param_1	parser	INFERRED	dereferenced as the PPParser object (8 field accesses); every PPParser* function takes it first
 local	_PPParserAttachString	param_1	parser	INFERRED	dereferenced as the PPParser object (13 field accesses); every PPParser* function takes it first
 local	_PPParserAttachStream	param_1	parser	INFERRED	dereferenced as the PPParser object (4 field accesses); every PPParser* function takes it first
-local	_PPParserScopeAttachStream	param_1	parser	INFERRED	dereferenced as the PPParser object (3 field accesses); every PPParser* function takes it first
+local	_PPParserScopeAttachStream	param_1	scope	INFERRED	dereferenced as the PPParser object (3 field accesses); every PPParser* function takes it first
 local	_PPParserParse	param_1	parser	INFERRED	dereferenced as the PPParser object (4 field accesses); every PPParser* function takes it first
 local	_PPParserParseVersion	param_1	parser	INFERRED	dereferenced as the PPParser object (5 field accesses); every PPParser* function takes it first
 local	_PPParserGetPart	param_1	parser	INFERRED	dereferenced as the PPParser object (16 field accesses); every PPParser* function takes it first
 local	_PPParserGetCharacter	param_1	parser	INFERRED	dereferenced as the PPParser object (11 field accesses); every PPParser* function takes it first
 local	_PPParserParseOptionIdentifier	param_1	parser	INFERRED	dereferenced as the PPParser object (40 field accesses); every PPParser* function takes it first
-local	_PPStreamChunkListAddChunk	param_1	stream	INFERRED	dereferenced as the PPStream object (9 field accesses); every PPStream* function takes it first
+local	_PPStreamChunkListAddChunk	param_1	chunkList	INFERRED	dereferenced as the PPStream object (9 field accesses); every PPStream* function takes it first
 local	_PPParserReturnCharacter	param_1	parser	INFERRED	dereferenced as the PPParser object (9 field accesses); every PPParser* function takes it first
 local	_PPParserParseStatement	param_1	parser	INFERRED	dereferenced as the PPParser object (9 field accesses); every PPParser* function takes it first
 local	_PPParserParseParameterDeclaration	param_1	parser	INFERRED	dereferenced as the PPParser object (2 field accesses); every PPParser* function takes it first
@@ -163,7 +163,7 @@ local	_PPStreamAttribBindingIsEqual	param_1	chunkBinding	INFERRED	dereferenced a
 local	_PPStreamOutputBindingIsEqual	param_1	chunkBinding	INFERRED	dereferenced as the PPStream object (3 field accesses); every PPStream* function takes it first
 local	_PPStreamParamBindingIsEqual	param_1	chunkBinding	INFERRED	dereferenced as the PPStream object (3 field accesses); every PPStream* function takes it first
 local	_PPStreamChunkListGetStream	param_1	chunkList	INFERRED	dereferenced as the PPStream object (3 field accesses); every PPStream* function takes it first
-local	_PPStreamChunkGetStream	param_1	stream	INFERRED	dereferenced as the PPStream object (5 field accesses); every PPStream* function takes it first
+local	_PPStreamChunkGetStream	param_1	outEntry	INFERRED	dereferenced as the PPStream object (5 field accesses); every PPStream* function takes it first
 local	_PPStreamChunkListCreateFromChunkList	param_1	sourceList	INFERRED	dereferenced as the PPStream object (2 field accesses); every PPStream* function takes it first
 local	_PPStreamChunkCreateFromChunk	param_1	chunk	INFERRED	dereferenced as the PPStream object (4 field accesses); every PPStream* function takes it first
 local	_PPStreamChunkListSort	param_1	chunkList	INFERRED	dereferenced as the PPStream object (5 field accesses); every PPStream* function takes it first

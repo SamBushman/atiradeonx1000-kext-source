@@ -8,7 +8,6 @@ local	_PPParserParseOptionIdentifier	local_1c	bindingIndex	INFERRED	attribute bi
 local	_PPStreamAddOption	param_1	stream	CONFIRMED	PPStream*: +0x30 is the options chunk list
 local	_PPStreamAddOption	param_2	optionId	CONFIRMED	option number stored at chunk+0xf
 local	_PPStreamAddOption	uVar2	optionList	INFERRED	stream->options chunk list
-local	_PPStreamChunkListAddChunk	stream	chunkList	CONFIRMED	PPStreamChunkList*: [0] first, [1] last, [2] count
 local	_PPStreamChunkListAddChunk	param_2	chunk	CONFIRMED	chunk appended to the doubly linked list (+4 prev, +8 next)
 local	_PPStreamAddAttribBinding	param_1	stream	CONFIRMED	PPStream*: +0x18 is the attribute-binding chunk list
 local	_PPStreamAddAttribBinding	param_2	binding	CONFIRMED	two-word attribute binding record
