@@ -1,0 +1,130 @@
+local	TIntermediate__growAggregate	param_4	line	INFERRED	source line passed to setLine (0 = leave unset)
+use	TIntermediate__growAggregate	iVar4	sequenceAllocator	INFERRED	inlined TIntermAggregate construction: allocator of the node sequence (+0x34), allocator of the name string (+0x44), shared empty string rep (refcount at +8, chars at +0xc); w4/w5 reloaded vector finish pointer	^\s*iVar4\ =\ GetGlobalPoolAllocator\(\);$	+1
+use	TIntermediate__growAggregate	iVar4	sequenceAllocator	INFERRED	inlined TIntermAggregate construction: allocator of the node sequence (+0x34), allocator of the name string (+0x44), shared empty string rep (refcount at +8, chars at +0xc); w4/w5 reloaded vector finish pointer	^\s*a0\[0xd\]\ =\ iVar4;$	+1
+use	TIntermediate__growAggregate	iVar4	nameAllocator	INFERRED	inlined TIntermAggregate construction: allocator of the node sequence (+0x34), allocator of the name string (+0x44), shared empty string rep (refcount at +8, chars at +0xc); w4/w5 reloaded vector finish pointer	^\s*iVar4\ =\ GetGlobalPoolAllocator\(\);$@2	+2
+use	TIntermediate__growAggregate	iVar4	emptyStringRep	INFERRED	inlined TIntermAggregate construction: allocator of the node sequence (+0x34), allocator of the name string (+0x44), shared empty string rep (refcount at +8, chars at +0xc); w4/w5 reloaded vector finish pointer	^\s*iVar4\ =\ DAT_a7b7b9b8;$	+1
+use	TIntermediate__growAggregate	iVar4	emptyStringRep	INFERRED	inlined TIntermAggregate construction: allocator of the node sequence (+0x34), allocator of the name string (+0x44), shared empty string rep (refcount at +8, chars at +0xc); w4/w5 reloaded vector finish pointer	^\s*piVar3\ =\ \(int\ \*\)\(iVar4\ \+\ 8\);$	+1
+use	TIntermediate__growAggregate	iVar4	emptyStringRep	INFERRED	inlined TIntermAggregate construction: allocator of the node sequence (+0x34), allocator of the name string (+0x44), shared empty string rep (refcount at +8, chars at +0xc); w4/w5 reloaded vector finish pointer	^\s*a0\[0x16\]\ =\ iVar4\ \+\ 0xc;$	+1
+use	TIntermediate__growAggregate	iVar4	sequenceFinishValue	INFERRED	inlined TIntermAggregate construction: allocator of the node sequence (+0x34), allocator of the name string (+0x44), shared empty string rep (refcount at +8, chars at +0xc); w4/w5 reloaded vector finish pointer	^\s*iVar4\ =\ 0;$	+1
+use	TIntermediate__growAggregate	iVar4	sequenceFinishValue	INFERRED	inlined TIntermAggregate construction: allocator of the node sequence (+0x34), allocator of the name string (+0x44), shared empty string rep (refcount at +8, chars at +0xc); w4/w5 reloaded vector finish pointer	^\s*iVar4\ =\ \*\(int\ \*\)\(pvVar6\ \+\ 8\);$	+1
+use	TIntermediate__growAggregate	iVar4	sequenceFinishValue	INFERRED	inlined TIntermAggregate construction: allocator of the node sequence (+0x34), allocator of the name string (+0x44), shared empty string rep (refcount at +8, chars at +0xc); w4/w5 reloaded vector finish pointer	^\s*\*\(int\ \*\)\(pvVar6\ \+\ 8\)\ =\ iVar4\ \+\ 4;$	+1
+use	TIntermediate__growAggregate	iVar4	sequenceFinishValue	INFERRED	inlined TIntermAggregate construction: allocator of the node sequence (+0x34), allocator of the name string (+0x44), shared empty string rep (refcount at +8, chars at +0xc); w4/w5 reloaded vector finish pointer	^\s*iVar4\ =\ 0;$@2	+1
+use	TIntermediate__growAggregate	iVar4	sequenceFinishValue	INFERRED	inlined TIntermAggregate construction: allocator of the node sequence (+0x34), allocator of the name string (+0x44), shared empty string rep (refcount at +8, chars at +0xc); w4/w5 reloaded vector finish pointer	^\s*iVar4\ =\ \*\(int\ \*\)\(pvVar6\ \+\ 8\);$@2	+1
+use	TIntermediate__growAggregate	iVar4	sequenceFinishValue	INFERRED	inlined TIntermAggregate construction: allocator of the node sequence (+0x34), allocator of the name string (+0x44), shared empty string rep (refcount at +8, chars at +0xc); w4/w5 reloaded vector finish pointer	^\s*\*\(int\ \*\)\(pvVar6\ \+\ 8\)\ =\ iVar4\ \+\ 4;$@2	+1
+use	TIntermediate__growAggregate	iVar5	atomicStore	INFERRED	atomic refcount store result; pool allocator stored at a0[0x15]	^\s*iVar5\ =\ storeWordConditionalIndexed\(\*piVar3\ \+\ 1,0,piVar3\);$	+2
+use	TIntermediate__growAggregate	iVar5	stringAllocator	INFERRED	atomic refcount store result; pool allocator stored at a0[0x15]	^\s*iVar5\ =\ GetGlobalPoolAllocator\(\);$	+1
+use	TIntermediate__growAggregate	iVar5	stringAllocator	INFERRED	atomic refcount store result; pool allocator stored at a0[0x15]	^\s*a0\[0x15\]\ =\ iVar5;$	+1
+local	TIntermediate__growAggregate	piVar3	emptyRepRefCount	INFERRED	refcount of the shared empty string rep, atomically incremented
+local	TIntermediate__growAggregate	puVar1	intermAggregateVtable	INFERRED	PTR_vtable: TIntermAggregate vtable (+8 stored at a0[0])
+use	TIntermediate__growAggregate	puVar7	sequenceFinish	INFERRED	vector _M_finish of the aggregate sequence (+8)	^\s*puVar7\ =\ \*\(undefined4\ \*\*\)\(pvVar6\ \+\ 8\);$	+2
+use	TIntermediate__growAggregate	puVar7	sequenceFinish	INFERRED	vector _M_finish of the aggregate sequence (+8)	^\s*\(pvVar6,puVar7,\&\(\*\(unsigned\ int\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 4\)\)\);$	+1
+use	TIntermediate__growAggregate	puVar7	sequenceFinish	INFERRED	vector _M_finish of the aggregate sequence (+8)	^\s*if\ \(puVar7\ !=\ \(undefined4\ \*\)0x0\)\ \{$	+2
+use	TIntermediate__growAggregate	puVar7	sequenceFinish	INFERRED	vector _M_finish of the aggregate sequence (+8)	^\s*puVar7\ =\ \*\(undefined4\ \*\*\)\(pvVar6\ \+\ 8\);$@2	+2
+use	TIntermediate__growAggregate	puVar7	sequenceFinish	INFERRED	vector _M_finish of the aggregate sequence (+8)	^\s*\(pvVar6,puVar7,\&\(\*\(unsigned\ int\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 8\)\)\);$	+1
+use	TIntermediate__growAggregate	puVar7	sequenceFinish	INFERRED	vector _M_finish of the aggregate sequence (+8)	^\s*if\ \(puVar7\ !=\ \(undefined4\ \*\)0x0\)\ \{$@2	+2
+use	TIntermediate__growAggregate	pvVar6	sequence	INFERRED	aggregate->getSequence() (vtable +100): the child vector	^\s*pvVar6\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*a0\ \+\ 100\)\)\(a0\);$	+3
+use	TIntermediate__growAggregate	pvVar6	sequence	INFERRED	aggregate->getSequence() (vtable +100): the child vector	^\s*\(pvVar6,puVar7,\&\(\*\(unsigned\ int\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 4\)\)\);$	+1
+use	TIntermediate__growAggregate	pvVar6	sequence	INFERRED	aggregate->getSequence() (vtable +100): the child vector	^\s*iVar4\ =\ \*\(int\ \*\)\(pvVar6\ \+\ 8\);$	+1
+use	TIntermediate__growAggregate	pvVar6	sequence	INFERRED	aggregate->getSequence() (vtable +100): the child vector	^\s*\*\(int\ \*\)\(pvVar6\ \+\ 8\)\ =\ iVar4\ \+\ 4;$	+1
+use	TIntermediate__growAggregate	pvVar6	sequence	INFERRED	aggregate->getSequence() (vtable +100): the child vector	^\s*pvVar6\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*a0\ \+\ 100\)\)\(a0\);$@2	+3
+use	TIntermediate__growAggregate	pvVar6	sequence	INFERRED	aggregate->getSequence() (vtable +100): the child vector	^\s*\(pvVar6,puVar7,\&\(\*\(unsigned\ int\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 8\)\)\);$	+1
+use	TIntermediate__growAggregate	pvVar6	sequence	INFERRED	aggregate->getSequence() (vtable +100): the child vector	^\s*iVar4\ =\ \*\(int\ \*\)\(pvVar6\ \+\ 8\);$@2	+1
+use	TIntermediate__growAggregate	pvVar6	sequence	INFERRED	aggregate->getSequence() (vtable +100): the child vector	^\s*\*\(int\ \*\)\(pvVar6\ \+\ 8\)\ =\ iVar4\ \+\ 4;$@2	+1
+local	TIntermediate__growAggregate	uVar2	oldTypeBits	INFERRED	bit-field word of the new aggregate's TType before the field-wise init
+local	TIntermediate__makeAggregate	param_3	line	INFERRED	source line; 0 means take it from the node getLine
+use	TIntermediate__makeAggregate	iVar4	sequenceAllocator	INFERRED	inlined TIntermAggregate construction; w4 reloaded vector finish pointer; w5 *a0, the vtable	^\s*iVar4\ =\ GetGlobalPoolAllocator\(\);$	+1
+use	TIntermediate__makeAggregate	iVar4	sequenceAllocator	INFERRED	inlined TIntermAggregate construction; w4 reloaded vector finish pointer; w5 *a0, the vtable	^\s*a0\[0xd\]\ =\ iVar4;$	+1
+use	TIntermediate__makeAggregate	iVar4	nameAllocator	INFERRED	inlined TIntermAggregate construction; w4 reloaded vector finish pointer; w5 *a0, the vtable	^\s*iVar4\ =\ GetGlobalPoolAllocator\(\);$@2	+2
+use	TIntermediate__makeAggregate	iVar4	emptyStringRep	INFERRED	inlined TIntermAggregate construction; w4 reloaded vector finish pointer; w5 *a0, the vtable	^\s*iVar4\ =\ DAT_a7b7b9b8;$	+1
+use	TIntermediate__makeAggregate	iVar4	emptyStringRep	INFERRED	inlined TIntermAggregate construction; w4 reloaded vector finish pointer; w5 *a0, the vtable	^\s*piVar3\ =\ \(int\ \*\)\(iVar4\ \+\ 8\);$	+1
+use	TIntermediate__makeAggregate	iVar4	emptyStringRep	INFERRED	inlined TIntermAggregate construction; w4 reloaded vector finish pointer; w5 *a0, the vtable	^\s*a0\[0x16\]\ =\ iVar4\ \+\ 0xc;$	+1
+use	TIntermediate__makeAggregate	iVar4	sequenceFinishValue	INFERRED	inlined TIntermAggregate construction; w4 reloaded vector finish pointer; w5 *a0, the vtable	^\s*iVar4\ =\ 0;$	+1
+use	TIntermediate__makeAggregate	iVar4	sequenceFinishValue	INFERRED	inlined TIntermAggregate construction; w4 reloaded vector finish pointer; w5 *a0, the vtable	^\s*iVar4\ =\ \*\(int\ \*\)\(this_01\ \+\ 8\);$	+1
+use	TIntermediate__makeAggregate	iVar4	sequenceFinishValue	INFERRED	inlined TIntermAggregate construction; w4 reloaded vector finish pointer; w5 *a0, the vtable	^\s*\*\(int\ \*\)\(this_01\ \+\ 8\)\ =\ iVar4\ \+\ 4;$	+1
+use	TIntermediate__makeAggregate	iVar4	nodeVtable	INFERRED	inlined TIntermAggregate construction; w4 reloaded vector finish pointer; w5 *a0, the vtable	^\s*iVar4\ =\ \*a0;$	+1
+use	TIntermediate__makeAggregate	iVar4	nodeVtable	INFERRED	inlined TIntermAggregate construction; w4 reloaded vector finish pointer; w5 *a0, the vtable	^\s*pcVar6\ =\ \*\(code\ \*\*\)\(iVar4\ \+\ 4\);$	+1
+use	TIntermediate__makeAggregate	iVar5	atomicStore	INFERRED	atomic refcount store result; pool allocator stored at a0[0x15]	^\s*iVar5\ =\ storeWordConditionalIndexed\(\*piVar3\ \+\ 1,0,piVar3\);$	+2
+use	TIntermediate__makeAggregate	iVar5	stringAllocator	INFERRED	atomic refcount store result; pool allocator stored at a0[0x15]	^\s*iVar5\ =\ GetGlobalPoolAllocator\(\);$	+1
+use	TIntermediate__makeAggregate	iVar5	stringAllocator	INFERRED	atomic refcount store result; pool allocator stored at a0[0x15]	^\s*a0\[0x15\]\ =\ iVar5;$	+1
+use	TIntermediate__makeAggregate	pcVar6	getSequenceFn	INFERRED	w1 TIntermAggregate::getSequence (vtable +100); w2 TIntermNode::setLine (vtable +4)	^\s*pcVar6\ =\ \*\(code\ \*\*\)\(\*a0\ \+\ 100\);$	+1
+use	TIntermediate__makeAggregate	pcVar6	getSequenceFn	INFERRED	w1 TIntermAggregate::getSequence (vtable +100); w2 TIntermNode::setLine (vtable +4)	^\s*this_01\ =\ \(unsigned\ char\ \*\)\(\*pcVar6\)\(a0\);$	+1
+use	TIntermediate__makeAggregate	pcVar6	setLineFn	INFERRED	w1 TIntermAggregate::getSequence (vtable +100); w2 TIntermNode::setLine (vtable +4)	^\s*pcVar6\ =\ \*\(code\ \*\*\)\(iVar4\ \+\ 4\);$	+1
+use	TIntermediate__makeAggregate	pcVar6	setLineFn	INFERRED	w1 TIntermAggregate::getSequence (vtable +100); w2 TIntermNode::setLine (vtable +4)	^\s*pcVar6\ =\ \*\(code\ \*\*\)\(\*a0\ \+\ 4\);$	+1
+use	TIntermediate__makeAggregate	pcVar6	setLineFn	INFERRED	w1 TIntermAggregate::getSequence (vtable +100); w2 TIntermNode::setLine (vtable +4)	^\s*\(\*pcVar6\)\(a0,param_3\);$	+1
+local	TIntermediate__makeAggregate	piVar3	emptyRepRefCount	INFERRED	refcount of the shared empty string rep, atomically incremented
+local	TIntermediate__makeAggregate	puVar1	intermAggregateVtable	INFERRED	PTR_vtable: TIntermAggregate vtable (+8 stored at a0[0])
+local	TIntermediate__makeAggregate	uVar2	oldTypeBits	INFERRED	bit-field word of the new aggregate's TType before the field-wise init
+local	__ZN13TIntermediate12addSelectionEP12TIntermTyped15TIntermNodePairi	param_1	intermediate	INFERRED	the TIntermediate (its +0 holds the info sink); the local `this` is the pool allocator
+local	__ZN13TIntermediate12addSelectionEP12TIntermTyped15TIntermNodePairi	param_4	falseBlock	INFERRED	TIntermNodePair second member: the false-branch node
+local	__ZN13TIntermediate12addSelectionEP12TIntermTyped15TIntermNodePairi	param_5	line	INFERRED	source line passed to setLine
+use	__ZN13TIntermediate12addSelectionEP12TIntermTyped15TIntermNodePairi	iVar3	condAsTyped	INFERRED	w0 condition->getAsTyped() (vtable +0x14); w1/w2 getAsConstantUnion() (vtable +0x18)	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x14\)\)\(param_2,param_2,param_3,param_4,param_5\);$	+2
+use	__ZN13TIntermediate12addSelectionEP12TIntermTyped15TIntermNodePairi	iVar3	constUnion	INFERRED	w0 condition->getAsTyped() (vtable +0x14); w1/w2 getAsConstantUnion() (vtable +0x18)	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x18\)\)\(piVar4\);$	+2
+use	__ZN13TIntermediate12addSelectionEP12TIntermTyped15TIntermNodePairi	iVar3	constUnion	INFERRED	w0 condition->getAsTyped() (vtable +0x14); w1/w2 getAsConstantUnion() (vtable +0x18)	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x18\)\)\(piVar4\);$@2	+2
+use	__ZN13TIntermediate12addSelectionEP12TIntermTyped15TIntermNodePairi	piVar4	condTypedNode	INFERRED	condition->getAsTyped()	^\s*piVar4\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x14\)\)\(param_2\);$	+2
+use	__ZN13TIntermediate12addSelectionEP12TIntermTyped15TIntermNodePairi	piVar4	condTypedNode	INFERRED	condition->getAsTyped()	^\s*piVar4\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x14\)\)\(param_2\);$@2	+2
+local	__ZN13TIntermediate12addSelectionEP12TIntermTyped15TIntermNodePairi	pcVar5	setLineFn	INFERRED	TIntermNode::setLine (vtable +4)
+local	__ZN13TIntermediate12addSelectionEP12TIntermTyped15TIntermNodePairi	puVar1	intermSelectionVtable	INFERRED	PTR_vtable: TIntermSelection vtable
+local	__ZN13TIntermediate12addSelectionEP12TIntermTyped15TIntermNodePairi	uVar2	oldTypeBits	INFERRED	bit-field word of the new selection's TType before the field-wise init
+local	TIntermediate__addComma	param_4	line	INFERRED	source line
+local	TIntermediate__addComma	bVar1	bothConst	INFERRED	both operand qualifiers are const (bit-field word >> 0x19 == 2)
+local	TIntermediate__addComma	in_r7	scratchR7	UNKNOWN	register leftover forwarded through the vtable calls
+local	TIntermediate__addComma	in_r8	scratchR8	UNKNOWN	register leftover forwarded through the vtable calls
+local	TIntermediate__addComma	local_b0	typeTemp1	INFERRED	getType() temp of the left operand
+local	TIntermediate__addComma	local_8c	typeTemp1Bits	INFERRED	bit-field word (+0x24) of typeTemp1
+local	TIntermediate__addComma	local_80	typeTemp2	INFERRED	getType() temp of the right operand
+local	TIntermediate__addComma	local_5c	typeTemp2Bits	INFERRED	bit-field word (+0x24) of typeTemp2
+local	TIntermediate__addComma	local_50	typeTemp3	INFERRED	getType() temp of the right operand copied into the comma node
+use	TIntermediate__addComma	piVar3	aggregate	INFERRED	w1 comma->getAsAggregate() (vtable +0x1c); w2 comma->getTypePointer() (vtable +0x3c)	^\s*piVar3\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)pTVar2\ \+\ 0x1c\)\)\(pTVar2\);$	+2
+use	TIntermediate__addComma	piVar3	nodeType	INFERRED	w1 comma->getAsAggregate() (vtable +0x1c); w2 comma->getTypePointer() (vtable +0x3c)	^\s*piVar3\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)pTVar2\ \+\ 0x3c\)\)\(pTVar2\);$	+2
+local	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	param_5	line	INFERRED	source line passed to setLine
+local	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	iVar7	constantUnionTest	INFERRED	getAsConstantUnion() of the condition and both branches, tested non-null
+use	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	iVar8	lineCopy	INFERRED	w0 copy of the line argument passed through the vtable call; w1 condition->getAsConstantUnion()	^\s*iVar8\ =\ param_5;$	+1
+use	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	iVar8	lineCopy	INFERRED	w0 copy of the line argument passed through the vtable call; w1 condition->getAsConstantUnion()	^\s*\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)pTVar9\ \+\ 4\)\)\(pTVar9,param_5,a2,a3,iVar8,in_r8,pTVar9\ \+\ 8\);$	+1
+use	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	iVar8	condConstUnion	INFERRED	w0 copy of the line argument passed through the vtable call; w1 condition->getAsConstantUnion()	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_2\ \+\ 0x18\)\)\(param_2\);$	+1
+use	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	iVar8	condConstUnion	INFERRED	w0 copy of the line argument passed through the vtable call; w1 condition->getAsConstantUnion()	^\s*if\ \(\*\*\(int\ \*\*\)\(iVar8\ \+\ 0x30\)\ ==\ 0\)\ \{$	+1
+local	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	in_r8	scratchR8	UNKNOWN	register leftover forwarded through the vtable call
+local	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	puVar5	intermSelectionVtable	INFERRED	PTR_vtable: TIntermSelection vtable
+local	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	uVar1	typeSizeBits	INFERRED	nominal-size field of the copied TType bit-field word
+local	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	uVar2	typeQualifierBits	INFERRED	qualifier field of the copied TType bit-field word
+local	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	uVar3	typeBasicTypeBits	INFERRED	basic type field of the copied TType bit-field word
+local	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	uVar4	typeMatrixBit	INFERRED	matrix bit of the copied TType bit-field word
+local	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	uVar6	oldTypeBits	INFERRED	bit-field word of the new selection's TType before the field-wise copy
+local	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	uVar10	convertedBranchPair	INFERRED	64-bit result of addConversion (converted node in the high word)
+local	TIntermediate__addConstantUnion	param_4	line	INFERRED	source line passed to setLine
+local	TIntermediate__addConstantUnion	pcVar10	setLineFn	INFERRED	TIntermNode::setLine (vtable +4)
+local	TIntermediate__addConstantUnion	puVar7	constantUnionVtable	INFERRED	PTR_vtable + 8: TIntermConstantUnion vtable
+local	TIntermediate__addConstantUnion	uVar1	typeSizeBits	INFERRED	nominal-size field of the copied TType bit-field word
+local	TIntermediate__addConstantUnion	uVar2	typeQualifierBits	INFERRED	qualifier field of the copied TType bit-field word
+local	TIntermediate__addConstantUnion	uVar3	typeBasicTypeBits	INFERRED	basic type field of the copied TType bit-field word
+local	TIntermediate__addConstantUnion	uVar4	typeMatrixBit	INFERRED	matrix bit of the copied TType bit-field word
+local	TIntermediate__addConstantUnion	uVar5	typeArraySize	INFERRED	inlined TType copy of type+4
+local	TIntermediate__addConstantUnion	uVar6	oldTypeBits	INFERRED	bit-field word of the new node's TType before the field-wise copy
+local	TIntermediate__addConstantUnion	uVar8	typeWord20	INFERRED	inlined TType copy of type+0x20
+local	TIntermediate__addConstantUnion	uVar9	typeStructure	INFERRED	inlined TType copy of type+8
+local	TIntermediate__addSwizzle	param_3	line	INFERRED	source line passed to setLine
+local	TIntermediate__addSwizzle	iVar4	sequenceFinishValue	INFERRED	reloaded vector finish pointer before the store
+use	TIntermediate__addSwizzle	iVar9	emptyStringRep	INFERRED	w1 shared empty std::string rep; w2 loop counter over the swizzle fields	^\s*iVar9\ =\ DAT_a7b7b9b8;$	+1
+use	TIntermediate__addSwizzle	iVar9	emptyStringRep	INFERRED	w1 shared empty std::string rep; w2 loop counter over the swizzle fields	^\s*piVar3\ =\ \(int\ \*\)\(iVar9\ \+\ 8\);$	+1
+use	TIntermediate__addSwizzle	iVar9	emptyStringRep	INFERRED	w1 shared empty std::string rep; w2 loop counter over the swizzle fields	^\s*a0\[0x16\]\ =\ iVar9\ \+\ 0xc;$	+1
+use	TIntermediate__addSwizzle	iVar9	fieldIndex	INFERRED	w1 shared empty std::string rep; w2 loop counter over the swizzle fields	^\s*iVar9\ =\ 0;$	+1
+use	TIntermediate__addSwizzle	iVar9	fieldIndex	INFERRED	w1 shared empty std::string rep; w2 loop counter over the swizzle fields	^\s*iVar9\ =\ iVar9\ \+\ 1;$	+2
+local	TIntermediate__addSwizzle	local_50	constantNodeSlot	INFERRED	one-element slot holding the new constant node for vector::insert
+local	TIntermediate__addSwizzle	local_60	stringAllocator	INFERRED	pool allocator stored at a0[0x15]
+local	TIntermediate__addSwizzle	local_70	nameAllocator	INFERRED	pool allocator stored at a0[0x11]
+local	TIntermediate__addSwizzle	local_80	sequenceAllocator	INFERRED	pool allocator stored at a0[0xd]
+use	TIntermediate__addSwizzle	pcVar6	constUnionValue	INFERRED	one-element constant array (4 bytes) holding the field index	^\s*pcVar6\ =\ \(unsigned\ char\ \*\)TPoolAllocator__allocate\(pTVar5,4\);$	+2
+use	TIntermediate__addSwizzle	pcVar6	constUnionValue	INFERRED	one-element constant array (4 bytes) holding the field index	^\s*local_50\[0\]\ =\ \(\(int\ \(\*\)\(\)\)TIntermediate__addConstantUnion\)\(this,pcVar6,\(unsigned\ char\ \*\)\&local_b0,param_3\);$	+1
+local	TIntermediate__addSwizzle	pcVar8	setLineFn	INFERRED	TIntermNode::setLine (vtable +4)
+local	TIntermediate__addSwizzle	piVar3	emptyRepRefCount	INFERRED	refcount of the shared empty string rep, atomically incremented
+local	TIntermediate__addSwizzle	puVar1	intermAggregateVtable	INFERRED	PTR_vtable: TIntermAggregate vtable (+8 stored at a0[0])
+local	TIntermediate__addSwizzle	puVar7	sequenceFinish	INFERRED	vector _M_finish of the aggregate sequence (+8)
+local	TIntermediate__addSwizzle	uVar2	oldTypeBits	INFERRED	bit-field word of the new aggregate's TType before the field-wise init
+local	TIntermediate__addLoop	param_5	testFirst	INFERRED	TIntermLoop test-first flag stored at +0x14
+local	TIntermediate__addLoop	param_6	line	INFERRED	source line passed to setLine
+local	TIntermediate__addLoop	pcVar2	setLineFn	INFERRED	TIntermNode::setLine (vtable +4)
+local	TIntermediate__addLoop	puVar1	intermLoopVtable	INFERRED	PTR_vtable: TIntermLoop vtable (+8 stored at a0[0])
+local	__ZN13TIntermediate9addBranchE9TOperatori	param_3	line	INFERRED	source line forwarded to the TIntermTyped* overload
+local	__ZN13TIntermediate9addBranchE9TOperatorP12TIntermTypedi	param_4	line	INFERRED	source line passed to setLine
+local	__ZN13TIntermediate9addBranchE9TOperatorP12TIntermTypedi	pcVar2	setLineFn	INFERRED	TIntermNode::setLine (vtable +4)
+local	__ZN13TIntermediate9addBranchE9TOperatorP12TIntermTypedi	puVar1	intermBranchVtable	INFERRED	PTR_vtable: TIntermBranch vtable (+8 stored at a0[0])
+local	TIntermOperator__modifiesState	iVar1	op	INFERRED	TIntermOperator operator (+0x30)

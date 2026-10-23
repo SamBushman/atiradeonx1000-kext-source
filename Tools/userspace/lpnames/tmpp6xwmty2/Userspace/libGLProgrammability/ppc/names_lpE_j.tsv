@@ -1,0 +1,30 @@
+local	TPPStreamCompiler__removeOrphanedCompilerTemp	bVar3	stillReferenced	CONFIRMED	set when any operation in the stream still uses the temp's register (as a source or as a destination)
+local	TPPStreamCompiler__removeOrphanedCompilerTemp	iVar7	srcSlotCursor	CONFIRMED	walks the source descriptor pairs (8 bytes each) of one operation chunk
+local	TPPStreamCompiler__removeOrphanedCompilerTemp	this_00	symbol	CONFIRMED	the temp's ParseSymbol (*tempOperand): +0 chunk, +0x28 temp index, +0x2c GL type, +0x3c flag selecting releaseTemporary
+local	TPPStreamCompiler__removeOrphanedCompilerTemp	pbVar8	chunk	CONFIRMED	the symbol's first register chunk (symbol +0); consecutive chunks (+8 next) are removed
+local	TPPStreamCompiler__removeOrphanedCompilerTemp	pbVar9	nextChunk	CONFIRMED	chunk +8, saved before the chunk is removed from its list
+local	TPPStreamCompiler__removeOrphanedCompilerTemp	uVar2	symbolGlType	CONFIRMED	symbol +0x2c OpenGL type, tested against the matrix types 0x8b5a (mat2) 0x8b5b (mat3) 0x8b5c (mat4)
+local	TPPStreamCompiler__removeOrphanedCompilerTemp	uVar4	matrixBaseGlType	INFERRED	0x8b5a or 0x8b5c: the matrix type compared with symbolGlType to decide the column count
+local	TPPStreamCompiler__removeOrphanedCompilerTemp	bVar1	chunkKind	CONFIRMED	chunk kind byte (+0): 0 / 2 / 3 / 4 choose the stream list the chunk lives in
+use	TPPStreamCompiler__removeOrphanedCompilerTemp	iVar6	opChunkCursor	CONFIRMED	walks the stream's operation chunk list (stream +0x20, first chunk, next at +8)	iVar6 = \*\*\(int \*\*\)\(\*\(int \*\)\(this \+ 0x70\) \+ 0x20\);	iVar6 = ParseSymbolTable__RemoveEndSymbol
+use	TPPStreamCompiler__removeOrphanedCompilerTemp	iVar6	removeResult	CONFIRMED	ParseSymbolTable__RemoveEndSymbol result: nonzero when the symbol was the last one and was removed	iVar6 = ParseSymbolTable__RemoveEndSymbol	iVar6 = \*\(int \*\)\(\*\(int \*\)\(this \+ 0x70\) \+ 0x18\);
+use	TPPStreamCompiler__removeOrphanedCompilerTemp	iVar6	chunkList	CONFIRMED	stream chunk list selected by chunkKind: +0x18 kind 2, +4 kind 0, +0x10 kind 3, +0x1c kind 4	iVar6 = \*\(int \*\)\(\*\(int \*\)\(this \+ 0x70\) \+ 0x18\);	
+use	TPPStreamCompiler__removeOrphanedCompilerTemp	uVar5	srcStreamType	CONFIRMED	stream type bits 23..25 of operation word 4 (source 0 descriptor)	uVar5 = \*\(uint \*\)\(param_2 \+ 0x10\) >> 0x17 & 7;	uVar5 = 3;
+use	TPPStreamCompiler__removeOrphanedCompilerTemp	uVar5	chunkCount	CONFIRMED	number of consecutive register chunks the symbol owns: 3 for mat3, 2 for mat2, 4 for mat4, else 1	uVar5 = 3;	
+use	TPPStreamCompiler__removeOrphanedCompilerTemp	uVar10	srcOperandCount	CONFIRMED	operation word 3 >> 29: number of source descriptor pairs in the chunk	uVar10 = \*\(uint \*\)\(iVar6 \+ 0xc\) >> 0x1d;	if \(\(\(\*\(uint \*\)\(iVar6 \+ 0x14\)
+use	TPPStreamCompiler__removeOrphanedCompilerTemp	uVar10	removedCount	CONFIRMED	chunks removed so far, bounded by chunkCount	uVar10 = 0, uVar5 != 0	
+local	TPPStreamCompiler__parseIntermediateTree	pQVar3	labelQueue	INFERRED	compiler +0x4c queue (drained with size/fetch then re-initialised with newQueue)
+local	TPPStreamCompiler__parseIntermediateTree	bVar4	succeeded	CONFIRMED	return value: compiler +0xa0 (error flag) != 1
+local	TPPStreamCompiler__parseIntermediateTree	local_30	addressUsageRecord	INFERRED	zeroed record passed to _PPStreamAddAddressUsage when compiler +0xa8 == 1
+use	TPPStreamCompiler__parseIntermediateTree	pvVar2	oldTemporaryAllocator	CONFIRMED	previous compiler +0x60 allocator, destroyed	pvVar2 = \*\(void \*\*\)\(this \+ 0x60\);	pvVar2 = operator_new\(200\);
+use	TPPStreamCompiler__parseIntermediateTree	pvVar2	oldAddressTempAllocator	CONFIRMED	previous compiler +100 AddressTempAllocator, destroyed	pvVar2 = \*\(void \*\*\)\(this \+ 100\);	pvVar2 = operator_new\(8\);
+use	TPPStreamCompiler__parseIntermediateTree	pvVar2	rootOperand	CONFIRMED	operand returned by the root's compileNode, destroyed	pvVar2 = \(void \*\)\(\*\*\(code \*\*\)\(\*\(int \*\)param_2 \+ 0xc\)\)\(param_2,this\);	ParseSymbolTable__ClearCompilerTempData
+local	__ZN17TPPStreamCompilerC2E11EShLanguagei	param_3	debugOptions	INFERRED	int of the mangled signature, stored at compiler +0xc0 (the 3Dlabs TCompiler takes debugOptions here)
+local	__ZN17TPPStreamCompilerC2E11EShLanguagei	puVar2	emptyRepStorage	CONFIRMED	PTR__S_empty_rep_storage: the shared empty std::string representation the two string members point at (+0xc)
+local	__ZN17TPPStreamCompilerC2E11EShLanguagei	piVar3	emptyRepRefcount	CONFIRMED	refcount word (+8) of the shared empty representation, atomically incremented per string
+local	__ZN17TPPStreamCompilerC1E11EShLanguagei	param_3	debugOptions	INFERRED	int of the mangled signature, stored at compiler +0xc0 (the 3Dlabs TCompiler takes debugOptions here)
+local	__ZN17TPPStreamCompilerC1E11EShLanguagei	puVar2	emptyRepStorage	CONFIRMED	PTR__S_empty_rep_storage: the shared empty std::string representation the two string members point at (+0xc)
+local	__ZN17TPPStreamCompilerC1E11EShLanguagei	piVar3	emptyRepRefcount	CONFIRMED	refcount word (+8) of the shared empty representation, atomically incremented per string
+local	__ZN17TPPStreamCompilerC4E11EShLanguagei	param_3	debugOptions	INFERRED	int of the mangled signature, stored at compiler +0xc0 (the 3Dlabs TCompiler takes debugOptions here)
+local	__ZN17TPPStreamCompilerC4E11EShLanguagei	puVar2	emptyRepStorage	CONFIRMED	PTR__S_empty_rep_storage: the shared empty std::string representation the two string members point at (+0xc)
+local	__ZN17TPPStreamCompilerC4E11EShLanguagei	piVar3	emptyRepRefcount	CONFIRMED	refcount word (+8) of the shared empty representation, atomically incremented per string

@@ -1,0 +1,46 @@
+local	_PPParserParseSwizzleCode	param_2	operand	CONFIRMED	source operand descriptor word receiving the 4 component selects (bits 8..19) or the scalar select
+local	_PPParserParseSwizzleCode	local_120	partBuf	INFERRED	first byte of the token buffer; address passed to _PPParserGetPart
+local	_PPParserParseSwizzleCode	local_11f	partBuf1	INFERRED	second byte of the token buffer (letter after a sign)
+local	_PPParserParseSwizzleCode	uVar3	swizzleSets	INFERRED	which letter sets were used: bit0 xyzw, bit1 rgba/stpq (mixing is an error)
+local	_PPParserParseSwizzleCode	iVar5	negateComponent	INFERRED	a - sign precedes this component
+use	_PPParserParseSwizzleCode	uVar1	partLength	INFERRED	_PPParserGetPart result: characters in the swizzle token	#0	^\s*switch\(local_120\)	all	none
+use	_PPParserParseSwizzleCode	uVar1	component	INFERRED	component select code (0..3, +4 negated, 8..10 for 0/1/-1 constants)	*		all	none
+local	_PPParserParseTextureSourceVar	param_2	operand	CONFIRMED	texture source operand descriptor being filled
+local	_PPParserParseTextureSourceVar	local_140	partBuf	INFERRED	token text: texture, [, ], target name (1D/2D/3D/CUBE/RECT/SHADOW*)
+local	_PPParserParseTextureSourceVar	local_40	arrayIndex	INFERRED	_PPParserParseArray result: [0] is the texture unit
+local	_PPParserParseTextureSourceVar	uVar1	unit	INFERRED	texture unit index (arrayIndex[0])
+local	_PPParserParseTextureSourceVar	uVar5	unitTargetsLo	INFERRED	low word of the per-unit texture target table (parser+0x34), 4 bits per unit
+local	_PPParserParseTextureSourceVar	uVar6	unitTargetsHi	INFERRED	high word of the per-unit texture target table (parser+0x38)
+local	_PPParserParseTextureSourceVar	uVar7	targetCode	INFERRED	texture target code: CUBE 0, 3D 1, RECT 2, 2D 3, 1D 4, SHADOWRECT 5, SHADOW2D 6, SHADOW1D 7
+local	_PPParserParseTextureSourceVar	iVar2	shift	INFERRED	unit*4: bit position of the unit's target nibble
+local	_PPParserParseTextureSourceVar	iVar3	status	INFERRED	parser status code
+local	_PPParserParseTextureSourceVar	extraout_r4	currentUnitBits	INFERRED	low word of (unitTargets >> shift): the unit's target nibble if already set
+local	_PPParserParseTextureSourceVar	extraout_r4_00	clearMaskLo	INFERRED	low word of 0xf << shift
+local	_PPParserParseTextureSourceVar	extraout_r4_01	newTargetBitsLo	INFERRED	low word of targetCode << shift
+local	_PPParserMacroGetReplaceString	param_2	unusedArg2	INFERRED	unused
+local	_PPParserMacroGetReplaceString	param_3	argStrings	CONFIRMED	actual argument strings, one per macro parameter
+local	_PPParserMacroGetReplaceString	param_4	outBuf	CONFIRMED	receives the expanded body (NULL: only measure it)
+local	_PPParserMacroGetReplaceString	cVar1	curChar	INFERRED	character after the current word (space/newline), or the next word's first character
+local	_PPParserMacroGetReplaceString	iVar2	paramOffset	INFERRED	byte offset of the current parameter in the argument array
+local	_PPParserMacroGetReplaceString	iVar3	paramLength	INFERRED	strlen of the parameter name / strncmp result
+local	_PPParserMacroGetReplaceString	iVar4	outLength	INFERRED	characters produced so far
+local	_PPParserMacroGetReplaceString	pcVar5	wordStart	INFERRED	start of the current word of the macro body
+local	_PPParserMacroGetReplaceString	pcVar6	nextWord	INFERRED	start of the next word
+local	_PPParserMacroGetReplaceString	iVar8	wordLength	INFERRED	length of the current word, then of its replacement
+local	_PPParserParseSourceSwizzle	param_2	operand	CONFIRMED	source operand descriptor word receiving the swizzle
+local	_PPParserParseSourceSwizzle	param_3	swizzleGiven	CONFIRMED	set to 1 when an explicit swizzle was parsed
+local	_PPParserParseSourceSwizzle	local_110	partBuf	INFERRED	token text: the swizzle letters
+local	_PPParserParseSourceSwizzle	uVar6	swizzleSets	INFERRED	which letter sets were used: bit0 xyzw, bit1 rgba/stpq
+local	_PPParserParseSourceSwizzle	iVar5	charIndex	INFERRED	index of the swizzle letter being decoded
+local	_PPParserParseSourceSwizzle	iVar3	component	INFERRED	component select 0..3 of the current letter
+local	_PPParserParseSourceSwizzle	uVar1	status	INFERRED	parser status code (0 ok, 0xd mixed sets, 0x2d no token)
+local	_PPParserParseSourceSwizzle	uVar2	operandWord	INFERRED	operand descriptor word with the component select merged in
+local	_FindHashLoc	param_1	htable	CONFIRMED	HashTable*: [0] string base, [3] entry array (8 bytes each), [4] size, [6..8] collision counters
+local	_FindHashLoc	param_2	key	CONFIRMED	string being looked up
+local	_FindHashLoc	iVar4	slot	INFERRED	hash slot index (first, then the probed slot)
+local	_FindHashLoc	iVar2	entryOffset	INFERRED	string offset stored in the first slot
+local	_FindHashLoc	iVar3	probeOffset	INFERRED	string offset stored in the probed slot
+local	_FindHashLoc	uVar1	probeHash	INFERRED	slot + secondary hash, masked to 31 bits
+local	_FindHashLoc	piVar5	visitedCursor	INFERRED	cursor over the visited-slot list
+local	_FindHashLoc	local_30	firstSlot	INFERRED	first probed slot (start of the visited list)
+local	_FindHashLoc	local_2c	visitedSlots	INFERRED	slots visited while probing

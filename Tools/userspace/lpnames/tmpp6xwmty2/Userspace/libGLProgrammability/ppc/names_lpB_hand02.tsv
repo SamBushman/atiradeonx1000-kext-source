@@ -1,0 +1,52 @@
+use	_InitCPP	puVar1	atableRef	INFERRED	&_atable GOT pointer used for every _LookUpAddString	^\s*puVar1\ =\ PTR__atable_a7b7c0ac;	^\s*puVar1\ =\ PTR_DAT_a7b7c0a8;	all	none
+use	_InitCPP	puVar1	ctypeTable	INFERRED	_DefaultRuneLocale-style ctype table (+0x34 flags) used for isalnum	^\s*puVar1\ =\ PTR_DAT_a7b7c0a8;		all	none
+local	_InitCPP	local_60	profileName	CONFIRMED	"PROFILE_" followed by the upper-cased profile string of cpp+4
+local	_InitCPP	acStack_21	profileLimit	INFERRED	end marker of profileName's buffer
+local	_InitCPP	pcVar6	profileWrite	INFERRED	write cursor appending to "PROFILE_"
+local	_InitCPP	pcVar7	profileRead	INFERRED	read cursor over the profile string
+local	_InitCPP	_Var4	upperChar	INFERRED	___toupper result
+local	_FinalCPP	param_1	unusedArg1	INFERRED	never read; r3 left over from the caller
+local	_FinalCPP	param_2	unusedArg2	INFERRED	only forwarded to _CPPErrorToInfoLog
+local	_FinalCPP	param_3	unusedArg3	INFERRED	only forwarded to _CPPErrorToInfoLog
+local	_FinalCPP	param_4	unusedArg4	INFERRED	only forwarded to _CPPErrorToInfoLog
+local	_FinalCPP	param_5	unusedArg5	INFERRED	only forwarded to _CPPErrorToInfoLog
+local	_FinalCPP	param_6	unusedArg6	INFERRED	only forwarded to _CPPErrorToInfoLog
+local	_CPPdefine	param_1	yylvalpp	CONFIRMED	yystypepp* (3Dlabs cpp.c CPPdefine): [0] sc_int, [2] sc_ident
+local	_CPPdefine	puVar1	cppRef	INFERRED	&_cpp GOT pointer (currentInput is at *cpp+0x20)
+use	_CPPdefine	iVar2	token	CONFIRMED	token returned by currentInput->scan (vtable +4); finally 10 ('\n') is returned	*		all	none
+use	_CPPdefine	uVar3	r4Fwd	INFERRED	forwarded extraout_r4 for the _CPPErrorToInfoLog call	*		all	none
+local	_CPPdefine	extraout_r4	extraOut1	INFERRED	Ghidra extra-output of r4 after a scan call; only forwarded
+local	_CPPdefine	extraout_r4_00	extraOut2	INFERRED	same
+local	_CPPdefine	extraout_r4_01	extraOut3	INFERRED	same
+local	_CPPdefine	extraout_r4_02	extraOut4	INFERRED	same
+local	_CPPdefine	iVar5	macroAtom	CONFIRMED	yylvalpp->sc_ident of the macro name: LookUpSymbol/AddSymbol key, GetAtomString arg
+local	_CPPdefine	piVar6	argAtomWrite	INFERRED	write cursor into local_150 (parameter atoms)
+local	_CPPdefine	iVar7	oldTokenInt	INFERRED	yylvalpp->sc_int saved before reading the new body token
+use	_CPPdefine	iVar8	macroSymbol	CONFIRMED	Symbol* from _LookUpSymbol/_AddSymbol(_macros, atom): +0x18 argc, +0x1c args, +0x20 body, +0x24 flags (undef=0x40000000)	*		all	none
+local	_CPPdefine	local_150	argAtoms	CONFIRMED	args[MAX_MACRO_ARGS=64] of the macro being defined
+local	_CPPdefine	local_50	argCount	CONFIRMED	mac.argc
+local	_CPPdefine	local_4c	argAtomsCopy	CONFIRMED	mac.args: pool copy of argAtoms
+local	_CPPdefine	local_48	bodyStream	CONFIRMED	mac.body: _NewTokenStream result
+local	_CPPdefine	local_44	macroFlags	CONFIRMED	mac.undef word, stored to symbol+0x24
+local	_CPPdefine	local_40	dummyLocFile	INFERRED	SourceLoc passed to _AddSymbol, zeroed
+local	_CPPdefine	local_3e	dummyLocLine	INFERRED	SourceLoc passed to _AddSymbol, zeroed
+local	_CPPundef	param_1	yylvalpp	CONFIRMED	yystypepp*: [2] sc_ident is the macro name atom
+local	_CPPundef	puVar1	cppRef	INFERRED	&_cpp GOT pointer
+local	_CPPundef	iVar2	token	CONFIRMED	token returned by currentInput->scan
+local	_CPPundef	uVar3	r4Fwd	INFERRED	forwarded extraout_r4 for the _CPPErrorToInfoLog call
+local	_CPPundef	extraout_r4	extraOut1	INFERRED	Ghidra extra-output of r4; only forwarded
+local	_CPPundef	extraout_r4_00	extraOut2	INFERRED	same
+local	_CPPundef	in_r5	leftoverR5	INFERRED	Ghidra input-register artifact; only forwarded
+local	_CPPundef	in_r6	leftoverR6	INFERRED	same
+local	_CPPundef	in_r7	leftoverR7	INFERRED	same
+local	_CPPundef	in_r8	leftoverR8	INFERRED	same
+local	_CPPundef	in_r9	leftoverR9	INFERRED	same
+use	_InitCPP	uVar5	curChar	INFERRED	current profile character	^\s*uVar5\ =\ \(uint\)\*pcVar7;	^\s*uVar5\ =\ -\(uint\)	all	rhs
+use	_InitCPP	uVar5	isAlnum	INFERRED	inline isalnum (0x500 mask) from the ctype table	^\s*uVar5\ =\ -\(uint\)	^\s*iVar3\ =\ ___maskrune	lhs	none
+use	_InitCPP	uVar5	curChar	INFERRED	current profile character passed to ___maskrune	^\s*iVar3\ =\ ___maskrune	^\s*uVar5\ =\ \(uint\)\(iVar3	all	none
+use	_InitCPP	uVar5	isAlnum	INFERRED	___maskrune(curChar,0x500) != 0, tested by the loop condition	^\s*uVar5\ =\ \(uint\)\(iVar3		all	none
+local	_CPPdefine	in_r5	scratchR5	INFERRED	register r5 reused as the argument-array byte size, later forwarded as a dead vararg
+local	_CPPdefine	in_r6	leftoverR6	INFERRED	Ghidra input-register artifact; only forwarded
+local	_CPPdefine	in_r7	leftoverR7	INFERRED	Ghidra input-register artifact; only forwarded
+local	_CPPdefine	in_r8	scratchR8	INFERRED	register r8 reused for the old macro's argument array, later forwarded as a dead vararg
+local	_CPPdefine	in_r9	scratchR9	INFERRED	register r9 reused for the cpp state, then the compared argument atom, later forwarded as a dead vararg

@@ -895,133 +895,136 @@ int ParseSymbolTable__InsertSymbol(this, parseSymbol)
   unsigned char * this;
   unsigned char * parseSymbol;
 {
-  bool bVar1;
-  undefined1 *puVar2;
-  int iVar3;
-  short sVar5;
-  undefined4 uVar4;
-  unsigned char * pPVar6;
-  unsigned char * pPVar7;
+  uint elementIndex;
+  undefined4 trimmedFlag40;
+  int symbolCursor;
+  bool foundSymbolId;
+  undefined1 *terminalCharPtr;
+  int structFieldList;
+  short glType;
+  undefined4 elementFlag40;
+  unsigned char *elementSymbol;
+  unsigned char *elementOperand;
   int *r3In0;
-  int iVar8;
-  undefined4 uVar9;
-  uint uVar10;
-  uint uVar11;
-  char acStack_40 [20];
+  int fieldNameObj;
+  undefined4 result;
+  uint fieldCount;
+  uint fieldIndex;
+  char indexText [20];
   
-  puVar2 = DAT_a7b7bcfc;
-  uVar9 = 0;
+  terminalCharPtr = DAT_a7b7bcfc;
+  result = 0;
   if (parseSymbol == (unsigned char *)0x0) {
     return 0;
   }
   if ((*(int *)(this + 0x4c) != 0) || (*(int *)(parseSymbol + 0x24) == 0)) {
-    sVar5 = *(short *)(parseSymbol + 0x2c);
+    glType = *(short *)(parseSymbol + 0x2c);
 LAB_97bbd254:
-    if (sVar5 == 0x7ffe) {
-      iVar3 = *(int *)(*(int *)(parseSymbol + 0xc) + 8);
-      if (iVar3 != 0) {
-        uVar11 = 0;
-        uVar10 = *(int *)(iVar3 + 8) - *(int *)(iVar3 + 4) >> 3;
-        if (uVar10 != 0) {
+    if (glType == 0x7ffe) {
+      structFieldList = *(int *)(*(int *)(parseSymbol + 0xc) + 8);
+      if (structFieldList != 0) {
+        fieldIndex = 0;
+        fieldCount = *(int *)(structFieldList + 8) - *(int *)(structFieldList + 4) >> 3;
+        if (fieldCount != 0) {
           do {
-            pPVar6 = operator_new(100);
-            __ZN11ParseSymbolC1ERKS_(pPVar6,parseSymbol);
-            ParseSymbol__CatName(pPVar6,".");
-            r3In0 = *(int **)(*(int *)(iVar3 + 4) + uVar11 * 8);
-            iVar8 = (**(code **)(*r3In0 + 0x1c))(r3In0);
-            *(undefined1 *)(*(int *)(iVar8 + 4) + *(int *)(*(int *)(iVar8 + 4) + -0xc)) = *puVar2;
-            ParseSymbol__CatName(pPVar6,*(char **)(iVar8 + 4));
-            ParseSymbol__SetParseTreeType(pPVar6,*(unsigned char **)(*(int *)(iVar3 + 4) + uVar11 * 8));
-            *(undefined4 *)(pPVar6 + 0x48) = 0;
-            ParseSymbol__ResolveOpenGLType(pPVar6);
-            uVar4 = 0;
+            elementSymbol = operator_new(100);
+            __ZN11ParseSymbolC1ERKS_(elementSymbol,parseSymbol);
+            ParseSymbol__CatName(elementSymbol,".");
+            r3In0 = *(int **)(*(int *)(structFieldList + 4) + fieldIndex * 8);
+            fieldNameObj = (**(code **)(*r3In0 + 0x1c))(r3In0);
+            *(undefined1 *)(*(int *)(fieldNameObj + 4) + *(int *)(*(int *)(fieldNameObj + 4) + -0xc)) = *terminalCharPtr;
+            ParseSymbol__CatName(elementSymbol,*(char **)(fieldNameObj + 4));
+            ParseSymbol__SetParseTreeType(elementSymbol,*(unsigned char **)(*(int *)(structFieldList + 4) + fieldIndex * 8));
+            *(undefined4 *)(elementSymbol + 0x48) = 0;
+            ParseSymbol__ResolveOpenGLType(elementSymbol);
+            elementFlag40 = 0;
             if ((*(int *)(parseSymbol + 0x3c) != 0) || (*(int *)(parseSymbol + 0x40) != 0)) {
-              uVar4 = 1;
+              elementFlag40 = 1;
             }
-            *(undefined4 *)(pPVar6 + 0x40) = uVar4;
-            *(undefined4 *)(pPVar6 + 0x3c) = 0;
-            uVar11 = uVar11 + 1;
-            pPVar7 = operator_new(0x38);
-            __ZN12ParseOperandC1Ev(pPVar7);
-            *(unsigned char **)pPVar7 = pPVar6;
-            ((int (*)())ParseSymbolTable__processOperand)(this,pPVar7);
-            __ZN12ParseOperandD1Ev(pPVar7);
-            __ZdlPv(pPVar7);
-          } while (uVar11 < uVar10);
+            *(undefined4 *)(elementSymbol + 0x40) = elementFlag40;
+            *(undefined4 *)(elementSymbol + 0x3c) = 0;
+            fieldIndex = fieldIndex + 1;
+            elementOperand = operator_new(0x38);
+            __ZN12ParseOperandC1Ev(elementOperand);
+            *(unsigned char **)elementOperand = elementSymbol;
+            ((int (*)())ParseSymbolTable__processOperand)(this,elementOperand);
+            __ZN12ParseOperandD1Ev(elementOperand);
+            __ZdlPv(elementOperand);
+          } while (fieldIndex < fieldCount);
         }
       }
     }
-    else if (sVar5 == 0x7fff) {
-      uVar10 = 0;
+    else if (glType == 0x7fff) {
+      elementIndex = 0;
       if (0 < *(int *)(*(int *)(parseSymbol + 0xc) + 4)) {
         do {
-          pPVar6 = operator_new(100);
-          __ZN11ParseSymbolC1ERKS_(pPVar6,parseSymbol);
-          ParseSymbol__AddDirectIndex(pPVar6,uVar10);
-          _sprintf(acStack_40,"[%d]",uVar10);
-          ParseSymbol__CatName(pPVar6,acStack_40);
-          *(undefined4 *)(pPVar6 + 0x48) = 1;
-          ParseSymbol__ResolveOpenGLType(pPVar6);
-          uVar4 = 0;
+          elementSymbol = operator_new(100);
+          __ZN11ParseSymbolC1ERKS_(elementSymbol,parseSymbol);
+          ParseSymbol__AddDirectIndex(elementSymbol,elementIndex);
+          _sprintf(indexText,"[%d]",elementIndex);
+          ParseSymbol__CatName(elementSymbol,indexText);
+          *(undefined4 *)(elementSymbol + 0x48) = 1;
+          ParseSymbol__ResolveOpenGLType(elementSymbol);
+          elementFlag40 = 0;
           if ((*(int *)(parseSymbol + 0x3c) != 0) || (*(int *)(parseSymbol + 0x40) != 0)) {
-            uVar4 = 1;
+            elementFlag40 = 1;
           }
-          *(undefined4 *)(pPVar6 + 0x40) = uVar4;
-          *(undefined4 *)(pPVar6 + 0x3c) = 0;
-          pPVar7 = operator_new(0x38);
-          __ZN12ParseOperandC1Ev(pPVar7);
-          *(unsigned char **)pPVar7 = pPVar6;
-          if (uVar10 == 0) {
+          *(undefined4 *)(elementSymbol + 0x40) = elementFlag40;
+          *(undefined4 *)(elementSymbol + 0x3c) = 0;
+          elementOperand = operator_new(0x38);
+          __ZN12ParseOperandC1Ev(elementOperand);
+          *(unsigned char **)elementOperand = elementSymbol;
+          if (elementIndex == 0) {
             *(int *)(this + 0x40) = *(int *)(this + 0x40) + 1;
           }
-          ((int (*)())ParseSymbolTable__processOperand)(this,pPVar7);
-          if (uVar10 == *(int *)(*(int *)(parseSymbol + 0xc) + 4) - 1U) {
+          ((int (*)())ParseSymbolTable__processOperand)(this,elementOperand);
+          if (elementIndex == *(int *)(*(int *)(parseSymbol + 0xc) + 4) - 1U) {
             *(int *)(this + 0x40) = *(int *)(this + 0x40) + -1;
             ((int (*)())ParseSymbolTable__FinishArrayAddition)(this);
           }
-          if (pPVar7 != (unsigned char *)0x0) {
-            __ZN12ParseOperandD1Ev(pPVar7);
-            __ZdlPv(pPVar7);
+          if (elementOperand != (unsigned char *)0x0) {
+            __ZN12ParseOperandD1Ev(elementOperand);
+            __ZdlPv(elementOperand);
           }
-          uVar10 = uVar10 + 1;
-        } while ((int)uVar10 < *(int *)(*(int *)(parseSymbol + 0xc) + 4));
+          elementIndex = elementIndex + 1;
+        } while ((int)elementIndex < *(int *)(*(int *)(parseSymbol + 0xc) + 4));
       }
     }
     else {
-      uVar9 = ((int (*)())ParseSymbolTable__InsertSingleSymbol)(this,parseSymbol);
+      result = ((int (*)())ParseSymbolTable__InsertSingleSymbol)(this,parseSymbol);
     }
-    return uVar9;
+    return result;
   }
-  sVar5 = *(short *)(parseSymbol + 0x2c);
-  if (((sVar5 != 0x7fff) || (*(int *)(parseSymbol + 0x3c) != 0)) || (*(int *)(parseSymbol + 0x40) != 0))
+  glType = *(short *)(parseSymbol + 0x2c);
+  if (((glType != 0x7fff) || (*(int *)(parseSymbol + 0x3c) != 0)) || (*(int *)(parseSymbol + 0x40) != 0))
   goto LAB_97bbd254;
-  bVar1 = false;
+  foundSymbolId = false;
   if (-1 < *(int *)(parseSymbol + 0x28)) {
-    for (iVar3 = *(int *)this; iVar3 != 0; iVar3 = *(int *)(iVar3 + 8)) {
-      if (*(int *)(parseSymbol + 0x28) == *(int *)(iVar3 + 0x28)) {
-        bVar1 = true;
+    for (symbolCursor = *(int *)this; symbolCursor != 0; symbolCursor = *(int *)(symbolCursor + 8)) {
+      if (*(int *)(parseSymbol + 0x28) == *(int *)(symbolCursor + 0x28)) {
+        foundSymbolId = true;
         break;
       }
     }
-    if (bVar1) goto LAB_97bbd244;
+    if (foundSymbolId) goto LAB_97bbd244;
   }
   *(undefined4 *)(this + 0x4c) = 1;
-  pPVar6 = operator_new(100);
-  __ZN11ParseSymbolC1ERKS_(pPVar6,parseSymbol);
-  ParseSymbol__TrimNameToBase(pPVar6);
-  ParseSymbol__SetParseTreeType(pPVar6,*(unsigned char **)(parseSymbol + 0x10));
-  uVar9 = 0;
+  elementSymbol = operator_new(100);
+  __ZN11ParseSymbolC1ERKS_(elementSymbol,parseSymbol);
+  ParseSymbol__TrimNameToBase(elementSymbol);
+  ParseSymbol__SetParseTreeType(elementSymbol,*(unsigned char **)(parseSymbol + 0x10));
+  trimmedFlag40 = 0;
   if ((*(int *)(parseSymbol + 0x3c) != 0) || (*(int *)(parseSymbol + 0x40) != 0)) {
-    uVar9 = 1;
+    trimmedFlag40 = 1;
   }
-  *(undefined4 *)(pPVar6 + 0x40) = uVar9;
-  *(undefined4 *)(pPVar6 + 0x3c) = 0;
-  pPVar7 = operator_new(0x38);
-  __ZN12ParseOperandC1Ev(pPVar7);
-  *(unsigned char **)pPVar7 = pPVar6;
-  ((int (*)())ParseSymbolTable__processOperand)(this,pPVar7);
-  __ZN12ParseOperandD1Ev(pPVar7);
-  __ZdlPv(pPVar7);
+  *(undefined4 *)(elementSymbol + 0x40) = trimmedFlag40;
+  *(undefined4 *)(elementSymbol + 0x3c) = 0;
+  elementOperand = operator_new(0x38);
+  __ZN12ParseOperandC1Ev(elementOperand);
+  *(unsigned char **)elementOperand = elementSymbol;
+  ((int (*)())ParseSymbolTable__processOperand)(this,elementOperand);
+  __ZN12ParseOperandD1Ev(elementOperand);
+  __ZdlPv(elementOperand);
 LAB_97bbd244:
   *(undefined4 *)(this + 0x4c) = 0;
   return 0;
@@ -1032,103 +1035,107 @@ int ParseSymbolTable__FindFirstElement(this, parseSymbol)
   unsigned char * this;
   unsigned char * parseSymbol;
 {
-  unsigned char * pPVar1;
-  int iVar2;
-  char *pcVar3;
+  undefined4 flag40;
+  undefined4 fieldNameData;
+  int srcFlag3c;
+  int nameBufferSize;
+  unsigned char *elementSymbol;
+  int parentNameLength;
+  char *elementName;
   undefined4 r4In0;
-  unsigned char * pTVar4;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  int iVar5;
-  undefined4 uVar6;
-  undefined4 uVar7;
-  undefined4 uVar8;
-  int iVar9;
-  undefined4 uVar10;
-  uint uVar11;
-  char acStack_30 [16];
+  unsigned char *elementType;
+  undefined4 strayR5;
+  undefined4 strayR6;
+  undefined4 strayR7;
+  undefined4 strayR8;
+  int fieldNameObj;
+  undefined4 flag3c;
+  undefined4 flag5c;
+  undefined4 flag60;
+  int structFieldList;
+  undefined4 result;
+  uint elementIndex;
+  char indexText [16];
   
-  uVar10 = 0;
+  result = 0;
   if (parseSymbol != (unsigned char *)0x0) {
     if (*(short *)(parseSymbol + 0x2c) == 0x7ffe) {
-      iVar9 = *(int *)(*(int *)(parseSymbol + 0xc) + 8);
-      if (iVar9 != 0) {
-        pPVar1 = operator_new(100);
-        __ZN11ParseSymbolC1Ev(pPVar1);
-        iVar5 = *(int *)**(undefined4 **)(iVar9 + 4);
-        iVar5 = (**(code **)(iVar5 + 0x1c))
-                          ((int *)**(undefined4 **)(iVar9 + 4),r4In0,in_r5,in_r6,in_r7,in_r8,iVar5);
-        *(undefined1 *)(*(int *)(iVar5 + 4) + *(int *)(*(int *)(iVar5 + 4) + -0xc)) = *DAT_a7b7bcfc;
-        uVar10 = *(undefined4 *)(iVar5 + 4);
-        iVar5 = _strlen(uVar10);
-        iVar5 = iVar5 + 1;
+      structFieldList = *(int *)(*(int *)(parseSymbol + 0xc) + 8);
+      if (structFieldList != 0) {
+        elementSymbol = operator_new(100);
+        __ZN11ParseSymbolC1Ev(elementSymbol);
+        fieldNameObj = *(int *)**(undefined4 **)(structFieldList + 4);
+        fieldNameObj = (**(code **)(fieldNameObj + 0x1c))
+                          ((int *)**(undefined4 **)(structFieldList + 4),r4In0,strayR5,strayR6,strayR7,strayR8,fieldNameObj);
+        *(undefined1 *)(*(int *)(fieldNameObj + 4) + *(int *)(*(int *)(fieldNameObj + 4) + -0xc)) = *DAT_a7b7bcfc;
+        fieldNameData = *(undefined4 *)(fieldNameObj + 4);
+        nameBufferSize = _strlen(fieldNameData);
+        nameBufferSize = nameBufferSize + 1;
         if (*(int *)(parseSymbol + 0x14) != 0) {
-          iVar2 = _strlen(*(int *)(parseSymbol + 0x14));
-          iVar5 = iVar5 + iVar2 + 1;
+          parentNameLength = _strlen(*(int *)(parseSymbol + 0x14));
+          nameBufferSize = nameBufferSize + parentNameLength + 1;
         }
-        pcVar3 = (char *)_malloc(iVar5);
+        elementName = (char *)_malloc(nameBufferSize);
         if (*(int *)(parseSymbol + 0x14) == 0) {
-          _strcpy(pcVar3,uVar10);
+          _strcpy(elementName,fieldNameData);
         }
         else {
-          _sprintf(pcVar3,DAT_a7b7bbf4,*(int *)(parseSymbol + 0x14),uVar10);
+          _sprintf(elementName,DAT_a7b7bbf4,*(int *)(parseSymbol + 0x14),fieldNameData);
         }
-        ParseSymbol__SetName(pPVar1,pcVar3);
-        iVar5 = *(int *)(parseSymbol + 0x3c);
-        *(undefined4 *)(pPVar1 + 0x28) = *(undefined4 *)(parseSymbol + 0x28);
-        uVar10 = 0;
-        if ((iVar5 != 0) || (*(int *)(parseSymbol + 0x40) != 0)) {
-          uVar10 = 1;
+        ParseSymbol__SetName(elementSymbol,elementName);
+        srcFlag3c = *(int *)(parseSymbol + 0x3c);
+        *(undefined4 *)(elementSymbol + 0x28) = *(undefined4 *)(parseSymbol + 0x28);
+        flag40 = 0;
+        if ((srcFlag3c != 0) || (*(int *)(parseSymbol + 0x40) != 0)) {
+          flag40 = 1;
         }
-        *(undefined4 *)(pPVar1 + 0x40) = uVar10;
-        ParseSymbol__SetParseTreeType(pPVar1,(unsigned char *)**(undefined4 **)(iVar9 + 4));
-        uVar10 = ((int (*)())ParseSymbolTable__FindFirstElement)(this,pPVar1);
-        if (pPVar1 != (unsigned char *)0x0) {
-          __ZN11ParseSymbolD1Ev(pPVar1);
-          __ZdlPv(pPVar1);
+        *(undefined4 *)(elementSymbol + 0x40) = flag40;
+        ParseSymbol__SetParseTreeType(elementSymbol,(unsigned char *)**(undefined4 **)(structFieldList + 4));
+        result = ((int (*)())ParseSymbolTable__FindFirstElement)(this,elementSymbol);
+        if (elementSymbol != (unsigned char *)0x0) {
+          __ZN11ParseSymbolD1Ev(elementSymbol);
+          __ZdlPv(elementSymbol);
         }
-        _free(pcVar3);
+        _free(elementName);
       }
     }
     else if (*(short *)(parseSymbol + 0x2c) == 0x7fff) {
-      uVar11 = 0;
+      elementIndex = 0;
       if (0 < *(int *)(*(int *)(parseSymbol + 0xc) + 4)) {
         do {
-          pPVar1 = operator_new(100);
-          __ZN11ParseSymbolC1Ev(pPVar1);
-          ParseSymbol__SetName(pPVar1,*(char **)(parseSymbol + 0x14));
-          ParseSymbol__AddDirectIndex(pPVar1,uVar11);
-          _sprintf(acStack_30,DAT_a7b7bbf8,uVar11);
-          ParseSymbol__CatName(pPVar1,acStack_30);
-          uVar10 = *(undefined4 *)(parseSymbol + 0x40);
-          uVar6 = *(undefined4 *)(parseSymbol + 0x3c);
-          uVar8 = *(undefined4 *)(parseSymbol + 0x60);
-          uVar7 = *(undefined4 *)(parseSymbol + 0x5c);
-          pTVar4 = *(unsigned char **)(parseSymbol + 0xc);
-          *(undefined4 *)(pPVar1 + 0x28) = *(undefined4 *)(parseSymbol + 0x28);
-          *(undefined4 *)(pPVar1 + 0x40) = uVar10;
-          *(undefined4 *)(pPVar1 + 0x3c) = uVar6;
-          *(undefined4 *)(pPVar1 + 0x60) = uVar8;
-          *(undefined4 *)(pPVar1 + 0x5c) = uVar7;
-          ParseSymbol__SetParseTreeType(pPVar1,pTVar4);
-          *(undefined4 *)(pPVar1 + 0x48) = 1;
-          ParseSymbol__ResolveOpenGLType(pPVar1);
-          uVar10 = ((int (*)())ParseSymbolTable__FindFirstElement)(this,pPVar1);
-          if (pPVar1 != (unsigned char *)0x0) {
-            __ZN11ParseSymbolD1Ev(pPVar1);
-            __ZdlPv(pPVar1);
+          elementSymbol = operator_new(100);
+          __ZN11ParseSymbolC1Ev(elementSymbol);
+          ParseSymbol__SetName(elementSymbol,*(char **)(parseSymbol + 0x14));
+          ParseSymbol__AddDirectIndex(elementSymbol,elementIndex);
+          _sprintf(indexText,DAT_a7b7bbf8,elementIndex);
+          ParseSymbol__CatName(elementSymbol,indexText);
+          flag40 = *(undefined4 *)(parseSymbol + 0x40);
+          flag3c = *(undefined4 *)(parseSymbol + 0x3c);
+          flag60 = *(undefined4 *)(parseSymbol + 0x60);
+          flag5c = *(undefined4 *)(parseSymbol + 0x5c);
+          elementType = *(unsigned char **)(parseSymbol + 0xc);
+          *(undefined4 *)(elementSymbol + 0x28) = *(undefined4 *)(parseSymbol + 0x28);
+          *(undefined4 *)(elementSymbol + 0x40) = flag40;
+          *(undefined4 *)(elementSymbol + 0x3c) = flag3c;
+          *(undefined4 *)(elementSymbol + 0x60) = flag60;
+          *(undefined4 *)(elementSymbol + 0x5c) = flag5c;
+          ParseSymbol__SetParseTreeType(elementSymbol,elementType);
+          *(undefined4 *)(elementSymbol + 0x48) = 1;
+          ParseSymbol__ResolveOpenGLType(elementSymbol);
+          result = ((int (*)())ParseSymbolTable__FindFirstElement)(this,elementSymbol);
+          if (elementSymbol != (unsigned char *)0x0) {
+            __ZN11ParseSymbolD1Ev(elementSymbol);
+            __ZdlPv(elementSymbol);
           }
-          uVar11 = uVar11 + 1;
-        } while ((int)uVar11 < *(int *)(*(int *)(parseSymbol + 0xc) + 4));
+          elementIndex = elementIndex + 1;
+        } while ((int)elementIndex < *(int *)(*(int *)(parseSymbol + 0xc) + 4));
       }
     }
     else {
-      uVar10 = ((int (*)())ParseSymbolTable__FindSymbol)(this,parseSymbol);
+      result = ((int (*)())ParseSymbolTable__FindSymbol)(this,parseSymbol);
     }
   }
-  return uVar10;
+  return result;
 }
 
 /* ParseSymbolTable__FindSymbol @ 0x97bbd734 (120 bytes) */

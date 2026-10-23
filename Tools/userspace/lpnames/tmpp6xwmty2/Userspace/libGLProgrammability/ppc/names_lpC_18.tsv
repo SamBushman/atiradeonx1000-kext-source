@@ -1,0 +1,62 @@
+local	_yylex_CPP	auStack_b0	tokenValueWords	INFERRED	first 8 bytes (int value, float value) of the yystypepp token record filled by the input source scan call
+local	_yylex_CPP	acStack_a4	tokenTextBuf	INFERRED	char[136] text field (+0xc) of the yystypepp token record
+local	_DumpTokenStream	acStack_80	dumpBuf	INFERRED	char[116] buffer the token text is formatted into before _CPPDebugLogMsg
+local	TIntermediate__addUnaryMath	aaStack_d0	allocatorDummy	INFERRED	std::allocator<char> argument of the std::string constructor (unused object)
+local	TIntermediate__addConversion	acStack_80	locTextBuf	INFERRED	buffer the "string:line" location text is formatted into
+local	TIntermediate__addConversion	auStack_38	eraseResultSlot	INFERRED	scratch slot for the iterator returned by vector::erase / insert
+local	TIntermBinary__promote	aaStack_50	allocatorDummy	INFERRED	std::allocator<char> argument of the std::string constructor (unused object)
+local	TIntermediate__promoteConstantUnion	aaStack_b0	allocatorDummy	INFERRED	std::allocator<char> argument of the std::string constructor (unused object)
+local	__ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggregate	auStack_30	eraseResultSlot	INFERRED	scratch slot for the iterator returned by vector::erase
+local	TIntermediate__removeMatrixConstNode	auStack_50	insertResultSlot	INFERRED	scratch slot for the iterator returned by vector::insert
+local	TType__getCompleteString	acStack_90	descriptionBuf	INFERRED	char[112] buffer the type description is assembled in
+local	OutputTreeText	acStack_70	locTextBuf	INFERRED	buffer the "string:line" location text is formatted into
+local	OutputTreeText	aaStack_30	allocatorDummy	INFERRED	std::allocator<char> argument of the std::string constructor (unused object)
+local	OutputSymbol	acStack_b0	symbolTextBuf	INFERRED	char[112] buffer for the formatted symbol line
+local	OutputConstantUnion	acStack_1b0	locTextBuf	INFERRED	buffer the "string:line" location text is formatted into
+local	OutputConstantUnion	aaStack_170	allocatorDummy	INFERRED	std::allocator<char> argument of the std::string constructor (unused object)
+local	OutputConstantUnion	acStack_160	floatTextBuf	INFERRED	char[312] buffer for the _glp_dtostr float text
+local	ParseSymbol	aaStack_1a0	locTextBuf	INFERRED	buffer the "string:line" location text is formatted into
+local	ParseSymbol	aaStack_160	allocatorDummy	INFERRED	std::allocator<char> argument of the std::string constructor (unused object)
+local	ParseSymbol	apcStack_e0	locString	INFERRED	std::string holding the "string:line" location text
+local	ParseSymbol	acStack_d0	locTextBuf2	INFERRED	buffer the "string:line" location text is formatted into
+local	ParseSymbol	acStack_a0	locTextBuf3	INFERRED	buffer the "string:line" location text is formatted into
+local	ParseSymbol	aaStack_90	allocatorDummy2	INFERRED	std::allocator<char> argument of the std::string constructor (unused object)
+local	ParseBinary	aaStack_160	locTextBuf	INFERRED	buffer the "string:line" location text is formatted into
+local	ParseBinary	acStack_140	messageBuf	INFERRED	char[32] buffer for the "assigning non-constant to" message
+local	ParseBinary	aaStack_120	allocatorDummy	INFERRED	std::allocator<char> argument of the std::string constructor (unused object)
+local	ParseBinary	acStack_60	locTextBuf2	INFERRED	buffer the "string:line" location text is formatted into
+local	ParseUnary	acStack_160	messageBuf	INFERRED	char[208] buffer for the "assigning non-constant to" message
+local	ParseUnary	acStack_70	locTextBuf	INFERRED	buffer the "string:line" location text is formatted into
+local	ParseUnary	aaStack_30	allocatorDummy	INFERRED	std::allocator<char> argument of the std::string constructor (unused object)
+local	ParseAggregate	acStack_70	locTextBuf	INFERRED	buffer the "string:line" location text is formatted into
+local	ParseAggregate	aaStack_30	allocatorDummy	INFERRED	std::allocator<char> argument of the std::string constructor (unused object)
+local	ParseSelection	apcStack_80	locString	INFERRED	std::string holding the "string:line" location text
+local	ParseSelection	acStack_70	locTextBuf	INFERRED	buffer the "string:line" location text is formatted into
+local	ParseSelection	aaStack_30	allocatorDummy	INFERRED	std::allocator<char> argument of the std::string constructor (unused object)
+local	ParseLoop	apcStack_80	locString	INFERRED	std::string holding the "string:line" location text
+local	ParseLoop	acStack_70	locTextBuf	INFERRED	buffer the "string:line" location text is formatted into
+local	ParseLoop	aaStack_30	allocatorDummy	INFERRED	std::allocator<char> argument of the std::string constructor (unused object)
+local	ParseBranch	apcStack_80	locString	INFERRED	std::string holding the "string:line" location text
+local	ParseBranch	acStack_70	locTextBuf	INFERRED	buffer the "string:line" location text is formatted into
+local	ParseBranch	aaStack_30	allocatorDummy	INFERRED	std::allocator<char> argument of the std::string constructor (unused object)
+local	TParseContext__error	acStack_210	formattedInfoBuf	INFERRED	char[400] buffer for the vsnprintf-formatted extra info
+local	TParseContext__error	apcStack_80	locString	INFERRED	std::string holding the "string:line" location text
+local	TParseContext__error	acStack_70	locTextBuf	INFERRED	buffer the "string:line" location text is formatted into
+local	TParseContext__error	aaStack_30	allocatorDummy	INFERRED	std::allocator<char> argument of the std::string constructor (unused object)
+local	TParseContext__arraySetMaxSize	acStack_a0	locTextBuf	INFERRED	buffer the "string:line" location text is formatted into
+local	TParseContext__arraySetMaxSize	aaStack_60	allocatorDummy	INFERRED	std::allocator<char> argument of the std::string constructor (unused object)
+local	TParseContext__extensionErrorCheck	apcStack_110	locString	INFERRED	std::string holding the "string:line" location text
+local	TParseContext__extensionErrorCheck	acStack_100	locTextBuf	INFERRED	buffer the "string:line" location text is formatted into
+local	TParseContext__extensionErrorCheck	aaStack_c0	allocatorDummy	INFERRED	std::allocator<char> argument of the std::string constructor (unused object)
+local	TParseContext__extensionErrorCheck	aiStack_b0	msgDestroyArg	INFERRED	allocator argument for the destroy of the message string
+local	TParseContext__extensionErrorCheck	aiStack_a0	msgPrefixDestroyArg	INFERRED	allocator argument for the destroy of the message prefix string
+local	TParseContext__extensionErrorCheck	auStack_90	strCopyDestroyArg	INFERRED	allocator argument for the destroy of the extension name copy
+local	TParseContext__addConstructor	auStack_40	eraseResultSlot	INFERRED	scratch slot for the iterator returned by vector::erase / insert
+local	TParseContext__addConstVectorNode	acStack_80	locTextBuf	INFERRED	buffer the "string:line" location text is formatted into
+local	TParseContext__addConstVectorNode	aaStack_40	allocatorDummy	INFERRED	std::allocator<char> argument of the std::string constructor (unused object)
+local	_ShInitialize	auStack_30	destroyAllocatorArg	INFERRED	allocator argument for _Rep::_M_destroy of the empty string reps
+local	initializeSymbolTable	auStack_60	destroyArgB	INFERRED	allocator argument for the destroy of the empty string rep (parse failure path)
+local	initializeSymbolTable	auStack_50	destroyArgC	INFERRED	allocator argument for the destroy of the empty string rep (preprocessor failure path)
+local	_ShCompile	acStack_80	numErrorsTextBuf	INFERRED	char[16] buffer for the decimal error count
+local	_ShCompile	auStack_70	allocatorArgN	INFERRED	pool_allocator argument for the error count string constructor
+local	_ShCompile	auStack_60	numErrorsDestroyArg	INFERRED	allocator argument for the destroy of the error count string

@@ -1,0 +1,3 @@
+func	FUN_97b82078	_PPStreamAddOperation_97b82078	INFERRED	exported symbol _PPStreamAddOperation is only a stub thunk (0x97c21c80) in the dump; this is the lone (stream, 0x38-byte operation record, string, flag) appender called from ParseOperation/TPPStreamCompiler
+func	FUN_97b85470	_dyld_func_lookup_call_97b85470	INFERRED	32-byte wrapper whose only effect is a call to __dyld_func_lookup
+func	FUN_97b88a90	_str_ungetch_body_97b88a90	CONFIRMED	continuation of the _str_ungetch entry (the entry loads r2 = stringSrc->p and falls into this code)

@@ -1,0 +1,55 @@
+local	TPPStreamCompiler__constructElement	local_100	movOpHeader	INFERRED	_PPStreamOperation record for the per-element move into the destination (mov): word 0 (Header)
+local	TPPStreamCompiler__constructElement	local_fc	movOpFlags	INFERRED	_PPStreamOperation record for the per-element move into the destination (mov): word 1 (Flags)
+local	TPPStreamCompiler__constructElement	local_f8	movOpDest0	INFERRED	_PPStreamOperation record for the per-element move into the destination (mov): word 2 (Dest0)
+local	TPPStreamCompiler__constructElement	local_f4	movOpDest1	INFERRED	_PPStreamOperation record for the per-element move into the destination (mov): word 3 (Dest1)
+local	TPPStreamCompiler__constructElement	local_f0	movOpSrc0A	INFERRED	_PPStreamOperation record for the per-element move into the destination (mov): word 4 (Src0A)
+local	TPPStreamCompiler__constructElement	local_ec	movOpSrc0B	INFERRED	_PPStreamOperation record for the per-element move into the destination (mov): word 5 (Src0B)
+local	TPPStreamCompiler__constructElement	local_e8	movOpSrc1A	INFERRED	_PPStreamOperation record for the per-element move into the destination (mov): word 6 (Src1A)
+local	TPPStreamCompiler__constructElement	local_e4	movOpSrc1B	INFERRED	_PPStreamOperation record for the per-element move into the destination (mov): word 7 (Src1B)
+local	TPPStreamCompiler__constructElement	local_e0	movOpSrc2A	INFERRED	_PPStreamOperation record for the per-element move into the destination (mov): word 8 (Src2A)
+local	TPPStreamCompiler__constructElement	local_dc	movOpSrc2B	INFERRED	_PPStreamOperation record for the per-element move into the destination (mov): word 9 (Src2B)
+local	TPPStreamCompiler__constructElement	local_d8	movOpAuxA	INFERRED	_PPStreamOperation record for the per-element move into the destination (mov): word 10 (AuxA)
+local	TPPStreamCompiler__constructElement	local_d4	movOpAuxB	INFERRED	_PPStreamOperation record for the per-element move into the destination (mov): word 11 (AuxB)
+local	TPPStreamCompiler__constructElement	local_d0	movOpLine	INFERRED	_PPStreamOperation record for the per-element move into the destination (mov): word 12 (Line)
+local	TPPStreamCompiler__constructElement	local_cc	movOpWord13	INFERRED	_PPStreamOperation record for the per-element move into the destination (mov): word 13 (Word13)
+local	TPPStreamCompiler__constructElement	local_c0	constOpHeader	INFERRED	_PPStreamOperation record for the constant lanes gathered from scalar arguments (const): word 0 (Header)
+local	TPPStreamCompiler__constructElement	local_bc	constOpFlags	INFERRED	_PPStreamOperation record for the constant lanes gathered from scalar arguments (const): word 1 (Flags)
+local	TPPStreamCompiler__constructElement	local_b8	constOpDest0	INFERRED	_PPStreamOperation record for the constant lanes gathered from scalar arguments (const): word 2 (Dest0)
+local	TPPStreamCompiler__constructElement	local_b4	constOpDest1	INFERRED	_PPStreamOperation record for the constant lanes gathered from scalar arguments (const): word 3 (Dest1)
+local	TPPStreamCompiler__constructElement	local_b0	constOpSrc0A	INFERRED	_PPStreamOperation record for the constant lanes gathered from scalar arguments (const): word 4 (Src0A)
+local	TPPStreamCompiler__constructElement	local_ac	constOpSrc0B	INFERRED	_PPStreamOperation record for the constant lanes gathered from scalar arguments (const): word 5 (Src0B)
+local	TPPStreamCompiler__constructElement	local_a8	constOpSrc1A	INFERRED	_PPStreamOperation record for the constant lanes gathered from scalar arguments (const): word 6 (Src1A)
+local	TPPStreamCompiler__constructElement	local_a4	constOpSrc1B	INFERRED	_PPStreamOperation record for the constant lanes gathered from scalar arguments (const): word 7 (Src1B)
+local	TPPStreamCompiler__constructElement	local_a0	constOpSrc2A	INFERRED	_PPStreamOperation record for the constant lanes gathered from scalar arguments (const): word 8 (Src2A)
+local	TPPStreamCompiler__constructElement	local_9c	constOpSrc2B	INFERRED	_PPStreamOperation record for the constant lanes gathered from scalar arguments (const): word 9 (Src2B)
+local	TPPStreamCompiler__constructElement	local_98	constOpAuxA	INFERRED	_PPStreamOperation record for the constant lanes gathered from scalar arguments (const): word 10 (AuxA)
+local	TPPStreamCompiler__constructElement	local_94	constOpAuxB	INFERRED	_PPStreamOperation record for the constant lanes gathered from scalar arguments (const): word 11 (AuxB)
+local	TPPStreamCompiler__constructElement	local_90	constOpLine	INFERRED	_PPStreamOperation record for the constant lanes gathered from scalar arguments (const): word 12 (Line)
+local	TPPStreamCompiler__constructElement	local_8c	constOpWord13	INFERRED	_PPStreamOperation record for the constant lanes gathered from scalar arguments (const): word 13 (Word13)
+local	TPPStreamCompiler__constructElement	ppPVar15	argCursor	CONFIRMED	walks param_3 while each argument is passed through IndirectAddressHandler
+local	TPPStreamCompiler__constructElement	uVar2	argGlType	CONFIRMED	OpenGL type of the current argument: symbol +0x2c or operand +0x18
+local	TPPStreamCompiler__constructElement	uVar9	argColumnSize	CONFIRMED	ParseOperand__GetLogicalSize of the current argument (the number of elements in one column of it)
+local	TPPStreamCompiler__constructElement	uVar12	argElemsUsed	CONFIRMED	elements of the current argument column already copied; reset to 0 when the next column or argument starts
+local	TPPStreamCompiler__constructElement	in_r8	argElemsUsedWork	INFERRED	working copy of argElemsUsed advanced inside the copy loops (register name left by the decompiler)
+local	TPPStreamCompiler__constructElement	local_58	argColumnIndex	CONFIRMED	column of the current matrix argument selected with AddDirectIndex; starts at -1 and is advanced per column
+local	TPPStreamCompiler__constructElement	local_54	argColumnCount	CONFIRMED	columns left in the current argument: its logical size when it is an unindexed matrix, else 1
+local	TPPStreamCompiler__constructElement	local_5c	columnIndex	CONFIRMED	destination column being built (0..columnCount-1), the direct index added to the destination operand
+local	TPPStreamCompiler__constructElement	local_60	argsConsumed	CONFIRMED	number of arguments consumed so far; the function returns it
+local	TPPStreamCompiler__constructElement	iVar16	destLane	CONFIRMED	next destination lane (x y z w = 0..3) to receive an element; also the lane selector chosen for the write-mask bits
+local	TPPStreamCompiler__constructElement	puVar3	zeroCursor	CONFIRMED	walks constantLanes zeroing its four words
+local	TPPStreamCompiler__constructElement	puVar11	laneStackAddr	INFERRED	address arithmetic into the constantLanes stack area: base plus 4 per pending lane
+local	TPPStreamCompiler__constructElement	local_80	constantLanes	CONFIRMED	up to four constant lane values gathered from constant arguments, flushed through getConstantAsSourceVar
+local	TPPStreamCompiler__constructElement	local_70	operandDescA	INFERRED	first word of the descriptor returned by getOperandAs{Dest,Source}Var / getConstantAsSourceVar
+local	TPPStreamCompiler__constructElement	local_6c	operandDescB	INFERRED	second word of that descriptor
+use	TPPStreamCompiler__constructElement	iVar13	argsLeft	INFERRED	countdown of the arguments passed through IndirectAddressHandler	iVar13 = param_4;	iVar13 = iVar4;
+use	TPPStreamCompiler__constructElement	iVar13	columnCount	INFERRED	number of destination columns to build: the logical size for a matrix destination, else 1	iVar13 = iVar4;	
+use	TPPStreamCompiler__constructElement	iVar5	argIndex	INFERRED	index of the current argument in param_3; starts at -1 and is advanced when an argument is used up	iVar5 = -1;	
+use	TPPStreamCompiler__constructElement	iVar6	constElemsLeft	INFERRED	elements still to copy from the current argument into the constant lanes (at most the destination lanes left)	iVar6 = uVar9 - in_r8;	iVar6 = uVar9 - in_r8;
+use	TPPStreamCompiler__constructElement	iVar6	moveElemsLeft	INFERRED	elements still to copy from the current argument by a move operation	iVar6 = uVar9 - in_r8;@2	
+use	TPPStreamCompiler__constructElement	iVar14	argSymbolRef	INFERRED	ParseSymbol of the current argument (**(param_3 + offset)); NULL means the argument is a constant operand	iVar14 = \*\*\(int \*\*\)\(iVar17 \+ \(int\)param_3\);	if \(uVar2 == 0x1406\) \{
+use	TPPStreamCompiler__constructElement	iVar14	moveLaneCount	INFERRED	lanes written by the move operation (the size-1 field of its flags)	iVar14 = 0;	
+use	TPPStreamCompiler__constructElement	bVar1	isFirstColumn	INFERRED	columnIndex == 0: the first column adds the direct index, later columns overwrite it	bVar1 = local_5c == 0;	bVar1 = iVar4 == 0;
+use	TPPStreamCompiler__constructElement	bVar1	destFilled	INFERRED	every destination lane x..w has been written for this column	bVar1 = iVar4 == 0;	
+
+local	TPPStreamCompiler__constructElement	in_r7	laneStorePtr	INFERRED	pointer into constantLanes where a bool argument value is stored; the same register is also forwarded unchanged as a leftover argument of the getOperandAs*Var and AddOperation calls (leftover register name)
+local	TPPStreamCompiler__constructElement	in_r10	elemByteOffset	INFERRED	argElemsUsedWork * 4, the byte offset of the element in the argument data; also forwarded as a leftover argument of getOperandAsSourceVar
