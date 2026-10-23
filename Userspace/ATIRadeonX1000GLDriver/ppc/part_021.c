@@ -525,6 +525,14 @@ int FUN_000e2094(compiler, param_2)
   int compiler;
   int param_2;
 {
+  int pairInstructionsEnabled;
+  int mapChannelsEnabled;
+  int reduceDepEnabled;
+  int markIgnoreUncoveredEnabled;
+  int packInstsEnabled;
+  int removeEmptyGraphEnabled;
+  int peepholeEnabled;
+  int deadCodeEnabled;
   undefined4 arenaAt378;
   int iVar1;
   int iVar2;
@@ -536,7 +544,7 @@ int FUN_000e2094(compiler, param_2)
   undefined4 uVar5;
   undefined4 arenaAt374;
   undefined4 *puVar7;
-  undefined8 uVar8;
+  undefined8 deleteComputationsThatCouldBeVsEnabled;
   
   ((int (*)())FUN_000e15b8)(compiler);
   *(char **)(compiler + 0x5a8) = "INITIAL_INPUT";
@@ -592,56 +600,56 @@ int FUN_000e2094(compiler, param_2)
     FUN_00193d18(*(undefined4 *)(compiler + 0x378));
     FUN_00122de8(*(undefined4 *)(compiler + 0x6c4));
     FUN_00193d18(*(undefined4 *)(compiler + 0x378));
-    iVar2 = Compiler__isOptionEnabled(compiler,0xf);
-    if (iVar2 != 0) {
+    reduceDepEnabled = Compiler__isOptionEnabled(compiler,0xf);
+    if (reduceDepEnabled != 0) {
       FUN_0013d3b8(*(undefined4 *)(compiler + 0x6c4));
       FUN_0013da3c(*(undefined4 *)(compiler + 0x6c4));
     }
-    iVar2 = Compiler__isOptionEnabled(compiler,0x34);
-    if (iVar2 != 0) {
+    mapChannelsEnabled = Compiler__isOptionEnabled(compiler,0x34);
+    if (mapChannelsEnabled != 0) {
       FUN_0013a8a4(*(undefined4 *)(compiler + 0x6c4));
     }
-    iVar2 = Compiler__isOptionEnabled(compiler,0x35);
-    if (iVar2 != 0) {
+    pairInstructionsEnabled = Compiler__isOptionEnabled(compiler,0x35);
+    if (pairInstructionsEnabled != 0) {
       FUN_0013fc38(*(undefined4 *)(compiler + 0x6c4));
     }
-    uVar8 = Compiler__isOptionEnabled(compiler,0x10);
-    if ((int)((ulonglong)uVar8 >> 0x20) != 0) {
-      ((int (*)())FUN_000e1c50)(*(undefined4 *)(compiler + 0x6c4),(int)uVar8,iVar1,in_r6,in_r7,in_r8,pcVar4);
+    deleteComputationsThatCouldBeVsEnabled = Compiler__isOptionEnabled(compiler,0x10);
+    if ((int)((ulonglong)deleteComputationsThatCouldBeVsEnabled >> 0x20) != 0) {
+      ((int (*)())FUN_000e1c50)(*(undefined4 *)(compiler + 0x6c4),(int)deleteComputationsThatCouldBeVsEnabled,iVar1,in_r6,in_r7,in_r8,pcVar4);
     }
     *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) = *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) | 0x80
     ;
-    iVar1 = Compiler__isOptionEnabled(compiler,0x11);
-    if (iVar1 != 0) {
+    deadCodeEnabled = Compiler__isOptionEnabled(compiler,0x11);
+    if (deadCodeEnabled != 0) {
       Program__eliminateDeadInstsAndRecountUses(*(undefined4 *)(compiler + 0x6c4),0);
     }
-    iVar1 = Compiler__isOptionEnabled(compiler,0x1a);
-    if (iVar1 == 0) {
+    peepholeEnabled = Compiler__isOptionEnabled(compiler,0x1a);
+    if (peepholeEnabled == 0) {
       *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) =
            *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) & 0xffffff7f;
     }
     else {
       pass_rewrite(*(undefined4 *)(compiler + 0x6c4));
     }
-    iVar1 = Compiler__isOptionEnabled(compiler,0x20);
-    if (iVar1 != 0) {
+    removeEmptyGraphEnabled = Compiler__isOptionEnabled(compiler,0x20);
+    if (removeEmptyGraphEnabled != 0) {
       pass_remove_empty_graphs(*(undefined4 *)(compiler + 0x6c4));
     }
-    iVar1 = Compiler__isOptionEnabled(compiler,0x12);
-    if (iVar1 != 0) {
+    packInstsEnabled = Compiler__isOptionEnabled(compiler,0x12);
+    if (packInstsEnabled != 0) {
       FUN_0013da3c(*(undefined4 *)(compiler + 0x6c4));
       *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) =
            *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) | 0x80;
-      iVar1 = Compiler__isOptionEnabled(compiler,0x11);
-      if (iVar1 != 0) {
+      deadCodeEnabled = Compiler__isOptionEnabled(compiler,0x11);
+      if (deadCodeEnabled != 0) {
         Program__eliminateDeadInstsAndRecountUses(*(undefined4 *)(compiler + 0x6c4),0);
       }
       FUN_0014657c(*(undefined4 *)(compiler + 0x6c4));
       *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) =
            *(uint *)(*(int *)(compiler + 0x6c4) + 0x30) & 0xffffff7f;
     }
-    iVar1 = Compiler__isOptionEnabled(compiler,0x22);
-    if (iVar1 != 0) {
+    markIgnoreUncoveredEnabled = Compiler__isOptionEnabled(compiler,0x22);
+    if (markIgnoreUncoveredEnabled != 0) {
       FUN_00139d40(*(undefined4 *)(compiler + 0x6c4));
     }
     FUN_000f29f4(*(undefined4 *)(compiler + 0x6c4));
@@ -966,7 +974,7 @@ int FUN_000e2acc(inst, param_2, param_3)
     }
     iVar2 = IRInst__getOperandSource(inst,loopIndex);
     iVar1 = thunk_FUN_00134de8(*(undefined4 *)(param_3 + 0x6c4),iVar2);
-    if ((iVar1 == param_2) && (iVar2 = FUN_00126708(*(undefined4 *)(iVar2 + 0x98)), iVar2 == 0))
+    if ((iVar1 == param_2) && (iVar2 = RegKind__flagBit7(*(undefined4 *)(iVar2 + 0x98)), iVar2 == 0))
     break;
     loopIndex = loopIndex + 1;
   }
@@ -978,6 +986,7 @@ int FUN_000e2b68(inst, param_2)
   undefined4 inst;
   undefined4 param_2;
 {
+  int operandRecord;
   int *a0;
   int iVar1;
   undefined4 local_18 [2];
@@ -985,10 +994,10 @@ int FUN_000e2b68(inst, param_2)
   a0 = (int *)IRInst__getOperandSource(inst,param_2);
   iVar1 = (**(code **)(*a0 + 0x48))(a0);
   if ((iVar1 != 0) && (a0[0x26] == 0xc)) {
-    iVar1 = IRInst__getOperandRecord(inst,param_2);
-    FUN_000f2bdc(local_18,a0[0x55],*(undefined4 *)(iVar1 + 0x10));
-    iVar1 = IRInst__getOperandRecord(inst,param_2);
-    *(undefined4 *)(iVar1 + 0x10) = local_18[0];
+    operandRecord = IRInst__getOperandRecord(inst,param_2);
+    FUN_000f2bdc(local_18,a0[0x55],*(undefined4 *)(operandRecord + 0x10));
+    operandRecord = IRInst__getOperandRecord(inst,param_2);
+    *(undefined4 *)(operandRecord + 0x10) = local_18[0];
   }
   return;
 }
@@ -1233,19 +1242,20 @@ int MachineAssembler__visitIfHeaderStatic(this, param_2, param_3, param_4, param
   undefined4 param_6;
   undefined4 param_7;
 {
+  undefined4 sourceDef;
   int iVar1;
-  int iVar2;
+  int branchInst;
   undefined4 uVar3;
   undefined4 *puVar4;
   undefined4 uVar5;
   uint uVar6;
   uint *puVar7;
   
-  iVar2 = Block__getBranchInst(param_2,param_2,param_3,param_4,param_5,param_6,param_7);
+  branchInst = Block__getBranchInst(param_2,param_2,param_3,param_4,param_5,param_6,param_7);
   uVar5 = *(undefined4 *)(param_4 + 0x6c4);
-  iVar1 = *(int *)(iVar2 + 300);
-  uVar3 = IRInst__getOperandSource(iVar2,1);
-  uVar3 = thunk_FUN_00134de8(uVar5,uVar3);
+  iVar1 = *(int *)(branchInst + 300);
+  sourceDef = IRInst__getOperandSource(branchInst,1);
+  uVar3 = thunk_FUN_00134de8(uVar5,sourceDef);
   (**(code **)(*this + 0x34))(this,param_3,*(undefined4 *)(param_2 + 0xdc));
   uVar3 = (**(code **)(*this + 0x98))(this,iVar1 != 1,uVar3,0);
   puVar7 = *(uint **)(this[4] + 0x24);
@@ -1452,7 +1462,7 @@ int FUN_000e36bc(param_1, param_2, param_3)
   int *piVar4;
   undefined4 *puVar5;
   uint uVar6;
-  int iVar7;
+  int compressEnabled;
   undefined4 in_r8;
   undefined4 in_r9;
   undefined4 in_r10;
@@ -1513,8 +1523,8 @@ int FUN_000e36bc(param_1, param_2, param_3)
   param_1[1] = uVar6;
   ((int (*)())FUN_000e2780)(param_1,auStack_74);
   iVar2 = ((int (*)())FUN_000e284c)(auStack_74);
-  iVar7 = Compiler__isOptionEnabled(param_1[2],0x4d);
-  if (iVar7 == 0) {
+  compressEnabled = Compiler__isOptionEnabled(param_1[2],0x4d);
+  if (compressEnabled == 0) {
     if (iVar2 != 0) goto LAB_000e3900;
   }
   else if (iVar2 != 0) {
@@ -1545,6 +1555,7 @@ int FUN_000e3968(inst, inst2, compiler)
   int inst2;
   undefined4 compiler;
 {
+  int operandRecord;
   int iVar1;
   uint uVar2;
   int *newInst;
@@ -1573,15 +1584,15 @@ int FUN_000e3968(inst, inst2, compiler)
     newInst[5] = uVar2 | 0x20;
   }
   IRInst__setOperandSource(newInst,1,inst2,0,compiler);
-  iVar1 = IRInst__getOperandRecord(inst2,0);
-  uVar4 = *(undefined4 *)(iVar1 + 0x10);
-  iVar1 = IRInst__getOperandRecord(inst,0);
-  local_38[0] = *(undefined4 *)(iVar1 + 0x10);
+  operandRecord = IRInst__getOperandRecord(inst2,0);
+  uVar4 = *(undefined4 *)(operandRecord + 0x10);
+  operandRecord = IRInst__getOperandRecord(inst,0);
+  local_38[0] = *(undefined4 *)(operandRecord + 0x10);
   if ((*(uint *)(inst2 + 0x14) & 0x200) != 0) {
     do {
       inst2 = IRInst__getOperandSource(inst2,*(undefined4 *)(inst2 + 0x84));
-      iVar1 = IRInst__getOperandRecord(inst2,0);
-      FUN_000f2f84(&local_28,uVar4,*(undefined4 *)(iVar1 + 0x10));
+      operandRecord = IRInst__getOperandRecord(inst2,0);
+      FUN_000f2f84(&local_28,uVar4,*(undefined4 *)(operandRecord + 0x10));
       uVar4 = local_28;
     } while ((*(uint *)(inst2 + 0x14) & 0x200) != 0);
   }
@@ -1635,6 +1646,9 @@ int FUN_000e3b88(param_1, param_2, param_3, param_4)
   int *param_3;
   undefined4 *param_4;
 {
+  undefined4 sourceDef;
+  int operandRecord;
+  int operandRecord2;
   int *operandVReg;
   int *operandVReg4;
   int *operandVReg3;
@@ -1685,7 +1699,7 @@ int FUN_000e3b88(param_1, param_2, param_3, param_4)
               piVar13[5] = piVar13[5] & 0xfffffdff;
             }
           }
-          if ((piVar13[0x20] == 0) || (iVar6 = FUN_00126760(piVar13[0x26]), iVar6 == 0)) {
+          if ((piVar13[0x20] == 0) || (iVar6 = RegKind__flagBit0(piVar13[0x26]), iVar6 == 0)) {
             uVar4 = piVar13[5];
           }
           else {
@@ -1765,18 +1779,18 @@ int FUN_000e3b88(param_1, param_2, param_3, param_4)
         if (iVar14 != 1) {
 LAB_000e4140:
           piVar8 = local_54[0];
-          uVar11 = IRInst__getOperandSource(local_54[0],local_54[0][0x21]);
+          sourceDef = IRInst__getOperandSource(local_54[0],local_54[0][0x21]);
           param_1[2] = param_1[2] + 1;
           iVar10 = piVar8[0x26];
           iVar6 = piVar8[0x25];
           uVar12 = ((int (*)())FUN_000e2a04)(param_1,(uint)(iVar10 != 0));
-          iVar14 = ((int (*)())FUN_000e2f04)(piVar8,uVar12,iVar10,uVar11,*param_1);
+          iVar14 = ((int (*)())FUN_000e2f04)(piVar8,uVar12,iVar10,sourceDef,*param_1);
           Block__insertInstBefore(param_3[0x56],param_3,iVar14);
           piVar9 = piVar13;
           if (bVar1) {
-            uVar11 = IRInst__getOperandSource(local_54[1],local_54[1][0x21]);
+            sourceDef = IRInst__getOperandSource(local_54[1],local_54[1][0x21]);
             param_1[1] = param_1[1] + 1;
-            piVar9 = (int *)((int (*)())FUN_000e3968)(local_54[1],uVar11,*param_1);
+            piVar9 = (int *)((int (*)())FUN_000e3968)(local_54[1],sourceDef,*param_1);
             Block__insertInstAfter(piVar13[0x56],piVar13,piVar9);
             IRInst__setOperandSource(local_54[1],local_54[1][0x21],0,0,*param_1);
             local_54[1][0x21] = local_54[1][0x21] + -1;
@@ -1820,8 +1834,8 @@ LAB_000e4140:
       }
       piVar8 = local_54[0];
       iVar14 = thunk_FUN_00134de8(*(undefined4 *)(*param_1 + 0x6c4),local_54[0]);
-      iVar6 = IRInst__getOperandRecord(piVar8,0);
-      local_58 = *(undefined4 *)(iVar6 + 0x10);
+      operandRecord = IRInst__getOperandRecord(piVar8,0);
+      local_58 = *(undefined4 *)(operandRecord + 0x10);
       operandVReg = (int *)IRInst__getOperandSource(piVar8,piVar8[0x21]);
       iVar6 = thunk_FUN_00134de8(*(undefined4 *)(*param_1 + 0x6c4),operandVReg);
       if (param_3 != (int *)0x0) {
@@ -1841,8 +1855,8 @@ LAB_000e4140:
               iVar10 = thunk_FUN_00134de8(*(undefined4 *)(*param_1 + 0x6c4),piVar5);
               uVar11 = local_58;
               if (iVar14 == iVar10) {
-                iVar10 = IRInst__getOperandRecord(piVar5,0);
-                FUN_000f2f84(local_54 + 3,uVar11,*(undefined4 *)(iVar10 + 0x10));
+                operandRecord2 = IRInst__getOperandRecord(piVar5,0);
+                FUN_000f2f84(local_54 + 3,uVar11,*(undefined4 *)(operandRecord2 + 0x10));
                 local_58 = local_54[3];
                 uVar4 = piVar5[5];
               }
@@ -1900,8 +1914,8 @@ LAB_000e413c:
         iVar6 = iVar6 + 1;
         iVar10 = iVar10 + -1;
       } while (iVar10 != 0);
-      iVar6 = IRInst__getOperandRecord(iVar14,0);
-      FUN_000f2f28(local_44,*(undefined4 *)(iVar6 + 0x10),local_58);
+      operandRecord = IRInst__getOperandRecord(iVar14,0);
+      FUN_000f2f28(local_44,*(undefined4 *)(operandRecord + 0x10),local_58);
       local_58 = local_44[0];
       *(undefined4 *)(iVar14 + 0x9c) = local_44[0];
       Block__insertInstAfter(piVar13[0x56],piVar13,iVar14);

@@ -92,7 +92,7 @@ int ExportSlot__ctor_12622c(this, param_2, param_3, param_4, compiler)
     arena = DAT_001afeec;
     operandRecord = IRInst__getOperandRecord(puVar3,1);
     *(undefined4 *)(operandRecord + 0x10) = arena;
-    FUN_001236e4(this,1,puVar3);
+    VReg__addUse(this,1,puVar3);
     Program__addInst(*(undefined4 *)(compiler + 0x6c4),puVar3);
     Block__appendInst(*(undefined4 *)(*(int *)(compiler + 0x6c4) + 0x3a8),puVar3);
   }
@@ -129,7 +129,7 @@ int ExportSlot__ctor_126378(this, param_2, param_3, param_4, compiler)
     arena = DAT_001afeec;
     operandRecord = IRInst__getOperandRecord(puVar3,1);
     *(undefined4 *)(operandRecord + 0x10) = arena;
-    FUN_001236e4(this,1,puVar3);
+    VReg__addUse(this,1,puVar3);
     Program__addInst(*(undefined4 *)(compiler + 0x6c4),puVar3);
     Block__appendInst(*(undefined4 *)(*(int *)(compiler + 0x6c4) + 0x3a8),puVar3);
   }
@@ -236,29 +236,29 @@ int LoopIndexedOutputSet__ctor_126694(this, param_2, param_3, param_4, param_5)
   return;
 }
 
-/* FUN_00126708 @ 0x126708 (44 bytes) */
-int FUN_00126708(param_1)
+/* RegKind__flagBit7 @ 0x126708 (44 bytes) */
+int RegKind__flagBit7(param_1)
   int param_1;
 {
   return *(uint *)(&DAT_001ea904 + param_1 * 0x10) >> 7 & 1;
 }
 
-/* FUN_00126734 @ 0x126734 (44 bytes) */
-int FUN_00126734(param_1)
+/* RegKind__flagBit8 @ 0x126734 (44 bytes) */
+int RegKind__flagBit8(param_1)
   int param_1;
 {
   return *(uint *)(&DAT_001ea904 + param_1 * 0x10) >> 8 & 1;
 }
 
-/* FUN_00126760 @ 0x126760 (44 bytes) */
-int FUN_00126760(kind)
+/* RegKind__flagBit0 @ 0x126760 (44 bytes) */
+int RegKind__flagBit0(kind)
   int kind;
 {
   return *(uint *)(&DAT_001ea904 + kind * 0x10) & 1;
 }
 
-/* FUN_0012678c @ 0x12678c (44 bytes) */
-int FUN_0012678c(param_1)
+/* RegKind__flagBit6 @ 0x12678c (44 bytes) */
+int RegKind__flagBit6(param_1)
   int param_1;
 {
   return *(uint *)(&DAT_001ea904 + param_1 * 0x10) >> 6 & 1;
@@ -791,7 +791,7 @@ int FUN_00127534(param_1, param_2, param_3, param_4)
   *(undefined4 *)(*(int *)(param_1 + 0x24) + 8) = (*(unsigned int *)((unsigned char *)ghidra_home + 8));
   *(undefined4 *)(*(int *)(param_1 + 0x24) + 4) = (*(unsigned int *)((unsigned char *)ghidra_home + 4));
   *(undefined4 *)(*(int *)(param_1 + 0x24) + 0xc) = param_4;
-  callResult = FUN_00194834(*(undefined4 *)(param_1 + 4),*(undefined4 *)(param_1 + 0x24));
+  callResult = HashTable__find(*(undefined4 *)(param_1 + 4),*(undefined4 *)(param_1 + 0x24));
   return callResult;
 }
 
@@ -809,7 +809,7 @@ int FUN_001275a0(param_1, param_2, param_3, param_4)
   (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
   ((int (*)())FUN_001272d4)(param_1,&(*(unsigned int *)((unsigned char *)ghidra_home + 4)),&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
   callResult = FUN_00122e90((*(unsigned int *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 4)),param_4,*param_1);
-  FUN_00194d44(param_1[1],callResult);
+  HashTable__insert(param_1[1],callResult);
   return callResult;
 }
 

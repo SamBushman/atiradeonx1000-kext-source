@@ -507,7 +507,7 @@ extern int FUN_0011363c();
 extern int FUN_00113690();
 extern int pass_flatten_ifs();
 extern int ResourceModel__vslot11();
-extern int FUN_00173330();
+extern int Compiler__findInPtrSet();
 extern int FUN_00186a88();
 extern int FUN_00193d18();
 extern int _calloc();

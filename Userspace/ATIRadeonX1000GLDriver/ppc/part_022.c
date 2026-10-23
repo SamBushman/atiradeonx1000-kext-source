@@ -767,6 +767,8 @@ int FUN_000e59f0(param_1, param_2, param_3)
 int FUN_000e5e70(param_1)
   int *param_1;
 {
+  int preprocessConstantIfsEnabled2;
+  int preprocessConstantIfsEnabled;
   short sVar1;
   ushort uVar2;
   uint uVar3;
@@ -1075,8 +1077,8 @@ LAB_000e6ac4:
   case 0x1c:
     iVar4 = Compiler__isOptionEnabled(*param_1,0);
     if (iVar4 == 0) {
-      iVar13 = Compiler__isOptionEnabled(*param_1,1);
-      if (iVar13 != 0) {
+      preprocessConstantIfsEnabled = Compiler__isOptionEnabled(*param_1,1);
+      if (preprocessConstantIfsEnabled != 0) {
         iVar13 = (int)(short)**(uint **)param_1[0x19];
         uVar12 = **(uint **)param_1[0x19] >> 0x10 & 0x3f;
         if (uVar12 == 1) {
@@ -1095,8 +1097,8 @@ LAB_000e6ac4:
     if (iVar4 == 0) {
       iVar13 = param_1[0x25];
       iVar4 = *(int *)param_1[0x19];
-      iVar14 = Compiler__isOptionEnabled(*param_1,1);
-      if (iVar14 != 0) {
+      preprocessConstantIfsEnabled2 = Compiler__isOptionEnabled(*param_1,1);
+      if (preprocessConstantIfsEnabled2 != 0) {
         FUN_000e4724(param_1,(uint)*(ushort *)(iVar4 + 2),(uint)(iVar13 != 0));
       }
       goto switchD_000e61ac_caseD_a;
@@ -1830,15 +1832,15 @@ int FUN_000e79fc(param_1)
   return *(int *)(*(int *)(param_1 + 0xd4) + 4) != 0;
 }
 
-/* FUN_000e7a10 @ 0xe7a10 (20 bytes) */
-int FUN_000e7a10(param_1)
+/* Block__hasDominatedChildren @ 0xe7a10 (20 bytes) */
+int Block__hasDominatedChildren(param_1)
   int param_1;
 {
   return *(int *)(*(int *)(param_1 + 0xf4) + 4) != 0;
 }
 
-/* FUN_000e7a24 @ 0xe7a24 (120 bytes) */
-int FUN_000e7a24(param_1)
+/* Block__popDefinitions @ 0xe7a24 (120 bytes) */
+int Block__popDefinitions(param_1)
   int param_1;
 {
   int iVar1;
@@ -1855,7 +1857,7 @@ int FUN_000e7a24(param_1)
     }
     uVar4 = *puVar3;
     Vector__removeAt(iVar1,uVar2 - 1);
-    FUN_00122ebc(uVar4);
+    VReg__popDefinition(uVar4);
     iVar1 = *(int *)(param_1 + 0xc4);
     uVar2 = *(uint *)(iVar1 + 4);
   }
@@ -1967,6 +1969,7 @@ int EntryBlock__insertInstruction(this, inst)
 int FUN_000e7d5c(param_1)
   int param_1;
 {
+  int sourceDef;
   int iVar1;
   int iVar2;
   
@@ -1981,11 +1984,11 @@ int FUN_000e7d5c(param_1)
     iVar1 = iVar2;
     iVar2 = *(int *)(iVar2 + 8);
   }
-  iVar2 = IRInst__getOperandSource(iVar1,1);
-  if (iVar2 == 0) {
+  sourceDef = IRInst__getOperandSource(iVar1,1);
+  if (sourceDef == 0) {
     return *(undefined4 *)(iVar1 + 0xac);
   }
-  return *(undefined4 *)(iVar2 + 0x94);
+  return *(undefined4 *)(sourceDef + 0x94);
 }
 
 /* FUN_000e7de4 @ 0xe7de4 (172 bytes) */
@@ -2024,8 +2027,8 @@ LAB_000e7e3c:
   } while( true );
 }
 
-/* FUN_000e7e90 @ 0xe7e90 (168 bytes) */
-int FUN_000e7e90(param_1)
+/* Block__findSimplePredecessor @ 0xe7e90 (168 bytes) */
+int Block__findSimplePredecessor(param_1)
   int param_1;
 {
   int *a0;
@@ -2057,8 +2060,8 @@ int FUN_000e7e90(param_1)
   } while( true );
 }
 
-/* FUN_000e7f38 @ 0xe7f38 (168 bytes) */
-int FUN_000e7f38(block)
+/* Block__findSimpleSuccessor @ 0xe7f38 (168 bytes) */
+int Block__findSimpleSuccessor(block)
   int block;
 {
   int *successor;
@@ -2119,8 +2122,8 @@ int FUN_000e7fe0(param_1, param_2)
   } while( true );
 }
 
-/* FUN_000e803c @ 0xe803c (92 bytes) */
-int FUN_000e803c(param_1, param_2)
+/* Block__predecessorIndex @ 0xe803c (92 bytes) */
+int Block__predecessorIndex(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -2148,15 +2151,15 @@ int FUN_000e803c(param_1, param_2)
   } while( true );
 }
 
-/* FUN_000e8098 @ 0xe8098 (52 bytes) */
-int FUN_000e8098(param_1, param_2)
+/* Block__phiOperandIndexForPredecessor @ 0xe8098 (52 bytes) */
+int Block__phiOperandIndexForPredecessor(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
   int iVar1;
   int iVar2;
   
-  iVar2 = ((int (*)())FUN_000e803c)(param_1,param_2);
+  iVar2 = ((int (*)())Block__predecessorIndex)(param_1,param_2);
   iVar1 = -1;
   if (iVar2 != -1) {
     iVar1 = iVar2 + 1;

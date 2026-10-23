@@ -284,6 +284,7 @@ int R520VMachineAssembler__vslot28_assembleIfEnd(this, node, block, compiler)
   undefined4 block;
   undefined4 compiler;
 {
+  int operandRecord;
   undefined4 uVar1;
   uint uVar2;
   uint uVar3;
@@ -311,8 +312,8 @@ int R520VMachineAssembler__vslot28_assembleIfEnd(this, node, block, compiler)
       *(undefined4 *)(iVar6 + 0x9c) = uVar1;
       IRInst__setOperandSource(iVar6,1,iVar4,0,compiler);
       uVar1 = DAT_001b2d4c;
-      iVar4 = IRInst__getOperandRecord(iVar6,1);
-      *(undefined4 *)(iVar4 + 0x10) = uVar1;
+      operandRecord = IRInst__getOperandRecord(iVar6,1);
+      *(undefined4 *)(operandRecord + 0x10) = uVar1;
       Block__prependInst(node,iVar6);
     }
   }
@@ -393,6 +394,7 @@ int R520VMachineAssembler__vslot25_assembleConditionalBlock(this, node, block, c
   undefined4 extra3;
   undefined4 extra4;
 {
+  undefined4 sourceDef;
   bool bVar1;
   uint uVar2;
   uint uVar3;
@@ -470,8 +472,8 @@ LAB_0019e3d4:
       piVar8[0x25] = 0;
       piVar8[0x27] = 0x1010101;
     }
-    uVar5 = IRInst__getOperandSource(a0,1);
-    IRInst__setOperandSource(piVar8,1,uVar5,0,compiler);
+    sourceDef = IRInst__getOperandSource(a0,1);
+    IRInst__setOperandSource(piVar8,1,sourceDef,0,compiler);
   }
   else {
     loopIndex = R520VMachineAssembler__getOrCreateConstantZeroInst(this);
@@ -481,8 +483,8 @@ LAB_0019e3d4:
     IRInst__setOperandSource(piVar8,1,loopIndex,0,compiler);
     loopIndex = IRInst__getOperandRecord(piVar8,1);
     *(undefined4 *)(loopIndex + 0x10) = 0x3030303;
-    uVar5 = IRInst__getOperandSource(a0,1);
-    IRInst__setOperandSource(piVar8,2,uVar5,0,compiler);
+    sourceDef = IRInst__getOperandSource(a0,1);
+    IRInst__setOperandSource(piVar8,2,sourceDef,0,compiler);
   }
   loopIndex = 0;
   do {
@@ -557,6 +559,7 @@ int R520VMachineAssembler__vslot24_assembleWithPredicateSet(this, node, block, c
   undefined4 block;
   undefined4 compiler;
 {
+  int operandRecord;
   undefined4 uVar1;
   uint uVar2;
   int iVar3;
@@ -613,8 +616,8 @@ int R520VMachineAssembler__vslot24_assembleWithPredicateSet(this, node, block, c
       *(undefined4 *)(iVar4 + 0x94) = uVar7;
       IRInst__setOperandSource(iVar4,1,iVar3,0,compiler);
       uVar7 = DAT_001b2d4c;
-      iVar3 = IRInst__getOperandRecord(iVar4,1);
-      *(undefined4 *)(iVar3 + 0x10) = uVar7;
+      operandRecord = IRInst__getOperandRecord(iVar4,1);
+      *(undefined4 *)(operandRecord + 0x10) = uVar7;
       *(uint *)(iVar4 + 0x14) = *(uint *)(iVar4 + 0x14) & 0xfffffffb;
       Block__appendInst(node,iVar4);
       puVar9 = (uint *)this[0x26];
@@ -1960,7 +1963,7 @@ int R520MachineAssembler__vslot86_resolveSourceRegister(this, inst, sourceIndex,
   uint registerWord;
   
   callResult = (int *)IRInst__getOperandSource(inst,sourceIndex);
-  if (((((callResult[0x20] == 0) || (iVar2 = FUN_00126760(callResult[0x26]), iVar2 == 0)) ||
+  if (((((callResult[0x20] == 0) || (iVar2 = RegKind__flagBit0(callResult[0x26]), iVar2 == 0)) ||
        ((callResult[5] & 2U) != 0)) || (iVar2 = (**(code **)(*callResult + 0x50))(callResult), iVar2 != 0)) &&
      (iVar2 = (**(code **)(*callResult + 0x50))(callResult), iVar2 == 0)) {
     registerWord = 0;
@@ -2346,6 +2349,7 @@ int R520MachineAssembler__vslot26_assembleThenAppendRecord(this, node, block, co
   undefined4 param_6;
   undefined4 param_7;
 {
+  undefined4 sourceDef;
   bool bVar1;
   int iVar2;
   int iVar3;
@@ -2360,8 +2364,8 @@ int R520MachineAssembler__vslot26_assembleThenAppendRecord(this, node, block, co
   iVar3 = Block__getBranchInst(node,node,block,compiler,param_5,param_6,param_7);
   uVar7 = *(undefined4 *)(compiler + 0x6c4);
   iVar2 = *(int *)(iVar3 + 300);
-  uVar4 = IRInst__getOperandSource(iVar3,1);
-  uVar4 = thunk_FUN_00134de8(uVar7,uVar4);
+  sourceDef = IRInst__getOperandSource(iVar3,1);
+  uVar4 = thunk_FUN_00134de8(uVar7,sourceDef);
   iVar3 = this[0x18];
   (**(code **)(*this + 0x34))
             (this,block,*(undefined4 *)(node + 0xdc),a3,param_5,param_6,

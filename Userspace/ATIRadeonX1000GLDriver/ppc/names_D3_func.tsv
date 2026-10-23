@@ -1,0 +1,55 @@
+# func rows (fork D3): value numbering / SSA renaming infrastructure of pass_ssa_build; format func<TAB>old<TAB>new<TAB>tier<TAB>evidence
+func	FUN_00172ab0	ExprRecordTable__hashByValueNumber	CONFIRMED	`*(rec+4) % 101`; installed as the hash of the table at compiler+0x3e0 by pass_ssa_build (records keyed by their value number at +4)
+func	FUN_00172ad8	ExprRecordTable__eqByValueNumber	CONFIRMED	`-(a[1] != b[1])`: equality callback of the compiler+0x3e0 table (same words as its hash)
+func	FUN_00172af4	ExprRecordTable__hashByExpr	CONFIRMED	`(*rec * 37) % 101`: hash of the table at compiler+0x3e4 (records keyed by their first word, the expression handle)
+func	FUN_00172b2c	ExprRecordTable__eqByExpr	CONFIRMED	`-(*a != *b)`: equality callback of the compiler+0x3e4 table
+func	FUN_00172b48	PtrSet__hashPtr	CONFIRMED	`*p % 101`: hash of the table at compiler+0x3e8
+func	FUN_00172b70	PtrSet__eqNonNullPtr	CONFIRMED	`-(FUN_00176264(*a,*b) == 0)`; FUN_00176264 is `a == b && a != 0`: equality callback of the compiler+0x3e8 pointer table
+func	FUN_00172ba0	KeyLaneTable__hashByOpcode	CONFIRMED	`*(*(p+4)+0xb4) % 101`: key+0xb4 is the opcode number written by ValueKey__fill; hash of the compiler+0x3ec table
+func	FUN_00172bd0	KeyLaneTable__eqKeys	CONFIRMED	compares two (ValueKey*, lane) entries: opcode (+0xb4), +0xc0/+0xc4 and for each source the pointer/flag words; ValueKey layout from ValueKey__fill
+func	FUN_00172d1c	ScopedExprTable__hashKey	CONFIRMED	product over the instruction sources (virtual call getNumSources, slot 5) of their four per-lane value numbers at key+0x168+0x10*i, plus the opcode at key+0xb4, mod 101
+func	FUN_00172dc4	ScopedExprTable__eqKeys	CONFIRMED	`memcmp(a+0xb4, b+0xb4, 0x15c) == 0`: the key signature (opcode, per-source lane value numbers, modifiers) is the 0x15c bytes from +0xb4
+func	FUN_00172e04	LaneMatchTable__eqKeys	CONFIRMED	four lane words at key+0x20 compare equal or either is 3 (a wildcard lane), then the two words at +0xb8/+0xbc
+func	FUN_00172e78	SwizzleTable__hashKey	CONFIRMED	max over the four lane words at key+0x20 of |word|, mod 101
+func	FUN_00173228	SwizzleTable__eqKeys	CONFIRMED	`ValueKey__computeSwizzleTo(a,b) == DAT_001b01b8` (the identity swizzle): equal when every lane value of one key occurs at the same lane of the other
+func	FUN_00173164	ValueKey__computeSwizzleTo	INFERRED	for each written lane of the instruction (destination swizzle byte != 1) finds the lane of the other key with the same value number (key+0x20+4*lane) and packs the lane indices into a 4-byte swizzle; identity (DAT_001b01b8) when no lane matches
+func	FUN_00172ed4	Compiler__nextValueNumber	INFERRED	`++compiler[0x3c8]`; the counter starts at 4 (Compiler__resetValueNumbers): values 0..3 are reserved lane ids
+func	FUN_00172ee8	Compiler__nextNegativeValueNumber	INFERRED	`--compiler[0x3cc]`; starts at -2 (Compiler__resetValueNumbers); used by Compiler__valueNumberForExpr for the record at +8
+func	FUN_00172efc	Compiler__peekValueNumber	INFERRED	returns compiler[0x3c8]
+func	FUN_00172f0c	Compiler__resetValueNumbers	INFERRED	compiler[0x3cc] = -2; compiler[0x3c8] = 4
+func	FUN_00172f34	ValueKey__initResultLaneValues	INFERRED	for each lane: destination swizzle byte 0 -> key[0x20+lane] = key[0x178+lane]; byte 1 -> key[0x10+lane]
+func	FUN_00173278	ValueKey__propagateLaneValues	INFERRED	for each lane the destination swizzle byte selects which of the lane word sets (key+0, +0x10, +0x20, +0x30...) is copied to the lane (bytes 0 and 1)
+func	FUN_00173330	Compiler__findInPtrSet	CONFIRMED	stores the pointer into the scratch record compiler[0x3f4] and calls HashTable__find on the table at compiler+0x3e8
+func	FUN_00173360	Compiler__exprRecordForValueNumber	CONFIRMED	scratch record compiler[0x3f0] gets the value number at +4, then HashTable__find on the table at compiler+0x3e0 (by value number)
+func	FUN_00173e10	Compiler__valueNumberForExpr	CONFIRMED	finds (table compiler+0x3e4) or creates a 0x2c-byte ExprRecord {+0 expression handle, +4 value number from Compiler__nextNegativeValueNumber}; inserts it in both tables (0x3e4 and 0x3e0) and the vector at compiler+0x3d8; returns the record
+func	FUN_00173938	ValueKey__init	CONFIRMED	key[0x2c]=inst (key+0xb0), key[0x8e]=compiler (key+0x238), clears the four-lane words and 0x15c bytes at +0xb4, then ValueKey__fillResultLaneInfo
+func	FUN_001739c0	ValueKey__initCopy	INFERRED	byte-identical body to ValueKey__init at another address (duplicate emitted for a second user)
+func	FUN_0017386c	ValueKey__fillSourceLaneUsage	INFERRED	for each source index: FUN_000f3c30 (per-lane usage record for the operand) stored at key+0x228+4*i; skipped for a phi whose sources are not all defined
+func	FUN_00173f1c	ValueKey__fill	CONFIRMED	builds the canonical signature: opcode (+0xb4), destination register pair (+0xb8/+0xbc), +0xc0/+0xc4 from inst+0x120/0x124, per source: its defining ValueKey lane value numbers (+0x168+0x10*i+4*lane, negative ones resolved through Compiler__exprRecordForValueNumber), modifier bits (+0xc8), operand kind (+0x1bc), and the instruction extra words (+0x1cc..+0x1ec = inst+0x12c..0x14c)
+func	FUN_001733a0	ValueKey__canonicalizeCommutativeOperands	INFERRED	opcode trait bit 0 set: compares source 1 and source 2 lane-set numbers (+0x178 vs +0x188); when source 2 sorts first it swaps the operands (IRInst__swapOperands) so equal expressions get equal keys
+func	FUN_00172a90	ValueKey__swapSources12	CONFIRMED	swaps key words +4 and +8 then IRInst__swapOperands(inst,1,2)
+func	FUN_0010ac38	IRInst__swapOperands	CONFIRMED	swaps the 0x18-byte operand records i and j (words at +0x23*4.. in 6-word steps) and the parallel word at inst[i+0x41]/inst[j+0x41]
+func	FUN_00175dac	Program__valueNumberInst	INFERRED	called per instruction by pass_ssa_build with the ValueKey: looks the key up in the scoped tables (FUN_00173f1c fills it), eliminates the instruction when an equivalent value dominates it (replaces it with the earlier definition, bumps program+0x14c / 0x150 counters), otherwise inserts the key into the current scope tables (program+0x408/0x40c vectors); returns 1 when the instruction was removed
+func	FUN_0012df90	Program__foldConstantIfRegion	CONFIRMED	given an IfHeader and IfFooter whose compare value is known (header[0x53]==1 selects the then arm +0x134 else the else arm +0x138): walks and detaches every block of the dead arm (visit stamp program+0x474), removes the branch instruction, reconnects the surviving arm between the header predecessor and the footer successor, detaches header and footer
+func	FUN_0011eec8	ValueKey__foldMovSources	INFERRED	option 6: for each source whose definition is a mov-like copy (opcode classes FUN_00126708/FUN_00126734) rewrites the operand to read the copy source directly, composing swizzles (byte selects through the 4-byte table) and negate/abs modifier bits (IROperand__setModifierBits); counts folds in program+0xa4
+func	FUN_0011f2f8	Program__tryEliminateRedundantCopy	INFERRED	option 5: for a copy-like instruction whose destination is not a hardware register and whose source stays valid, replaces its uses by the source (virtual slot 3 removeFromList), counts program+0xa0
+func	FUN_0011e988	ValueKey__loadSourceDefinitions	CONFIRMED	for each source index i: key[0x214+4*i] = FUN_00122fa4(source vreg, entry block, compiler)->+0xb0 (the defining ValueKey's instruction); with options 7 and 9 also the extra source of slot-0x18 operands at +0x210
+func	FUN_00122fa4	VReg__currentDefinition	CONFIRMED	top of the definition stack (vector at vreg+0x2c); when empty calls virtual slot 2 of the vreg to create the initial definition and records it with Block__recordDefinition
+func	FUN_000e9c00	Block__recordDefinition	CONFIRMED	adds the vreg to the block vector at +0xc4 (the vregs defined here, once) then VReg__pushDefinition(vreg, block+0xb0 id, def)
+func	FUN_00123424	VReg__pushDefinition	CONFIRMED	if the stack is non-empty and the top was pushed by the same block (vreg+0x28 == block id) replaces the top, else sets vreg+0x28 = block id and appends to the vector at vreg+0x2c
+func	FUN_00123398	VReg__setTopDefinition	CONFIRMED	overwrites the last element of the definition stack vector (vreg+0x2c)
+func	FUN_00122ebc	VReg__popDefinition	CONFIRMED	vreg+0x28 = -1 and removes the last element of the definition stack vector
+func	FUN_001236e4	VReg__addUse	INFERRED	appends the instruction to the use vector at vreg+0x14 unless an earlier source operand of the same instruction already uses the vreg
+func	FUN_000e7a24	Block__popDefinitions	CONFIRMED	pops every vreg recorded in the block vector +0xc4 and VReg__popDefinition each: scope exit of the renaming walk
+func	FUN_000e7a10	Block__hasDominatedChildren	INFERRED	`*(block+0xf4)+4 != 0`: the vector at +0xf4 holds the blocks this one immediately dominates (pass_ssa_build pushes it)
+func	FUN_000e7e90	Block__findSimplePredecessor	INFERRED	first non-null predecessor (vector +0xd4) that is a SIMPLE block (Block__isSimple) or answers virtual slot 7
+func	FUN_000e7f38	Block__findSimpleSuccessor	INFERRED	first non-null successor (vector +0xd0) that is a SIMPLE block or answers virtual slot 8
+func	FUN_000e803c	Block__predecessorIndex	CONFIRMED	index of param_2 among the non-null entries of the predecessor vector +0xd4, -1 when absent
+func	FUN_000e8098	Block__phiOperandIndexForPredecessor	CONFIRMED	`predecessorIndex + 1` (source operands of a phi are 1-based), -1 when the block is not a predecessor
+func	FUN_00126760	RegKind__flagBit0	INFERRED	`regKindTable[kind*0x10] & 1` (table DAT_001ea904)
+func	FUN_00126708	RegKind__flagBit7	INFERRED	`regKindTable[kind*0x10] >> 7 & 1`
+func	FUN_00126734	RegKind__flagBit8	INFERRED	`regKindTable[kind*0x10] >> 8 & 1`
+func	FUN_0012678c	RegKind__flagBit6	INFERRED	`regKindTable[kind*0x10] >> 6 & 1`
+func	FUN_00194834	HashTable__find	CONFIRMED	bucket = (size-1) & hash(key) via the function pointer at table[4]; scans the bucket vector comparing with the function at table[3] (0 means equal); returns the stored entry or 0
+func	FUN_00194d44	HashTable__insert	CONFIRMED	hashes with table[4], creates the bucket vector on first use from the table arena (table[5]), appends the entry, bumps the entry count (table[1]); calls FUN_00194aa8 (grow) when the bucket chain is longer than the table size
+func	FUN_00176264	Ptr__equalNonNull	CONFIRMED	`a == b && a != 0`

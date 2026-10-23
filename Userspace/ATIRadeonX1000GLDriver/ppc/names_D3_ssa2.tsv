@@ -1,0 +1,6 @@
+# use	FUNCTION	old	new	tier	evidence	from	to	first	last   (machine-written: webs named by the API their definitions call; #L = lines after the declarations, +N = lines to the end line)
+use	pass_ssa_build	iVar12	phiOperandIndex	CONFIRMED	Block__phiOperandIndexForPredecessor (predecessor index + 1): the phi source operand to fill	^\s*iVar12\ =\ FUN_000e8098\(local_60,piVar11\);$@1	+17	all	all
+use	pass_ssa_build	iVar23	destKindFlag0	INFERRED	RegKind__flagBit0 of the destination kind	^\s*iVar23\ =\ FUN_00126760\(iVar12\);$@1	+1	all	all
+use	pass_ssa_build	iVar23	footerSuccessor	INFERRED	Block__findSimpleSuccessor of the footer	^\s*iVar23\ =\ FUN_000e7f38\(iVar12\);$@1	+99	all	all
+use	pass_ssa_build	iVar23	hasChildren	INFERRED	Block__hasDominatedChildren: the block immediately dominates others	^\s*iVar23\ =\ FUN_000e7a10\(piVar11\);$@1	+1	all	all
+use	pass_ssa_build	piVar11	workBlock	INFERRED	block whose instructions are renamed (piVar18, or the survivor chosen by Block__findSimplePredecessor after a constant if is folded)	^\s*piVar11\ =\ piVar18;$@1	+400	all	all

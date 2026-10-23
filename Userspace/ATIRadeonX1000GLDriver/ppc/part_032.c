@@ -76,6 +76,7 @@ int FUN_0010f87c(param_1, param_2, vector)
   undefined4 param_2;
   uint *vector;
 {
+  int operandRecord;
   bool bVar1;
   uint uVar2;
   undefined4 *puVar3;
@@ -107,9 +108,9 @@ int FUN_0010f87c(param_1, param_2, vector)
       uVar6 = uVar7 + 1;
       iVar9 = *(int *)*puVar3;
       if (*(uint *)(iVar9 + 0x94) != uVar7) {
-        iVar4 = IRInst__getOperandRecord(iVar9,0);
+        operandRecord = IRInst__getOperandRecord(iVar9,0);
         iVar8 = 0;
-        *(uint *)(iVar4 + 8) = uVar7;
+        *(uint *)(operandRecord + 8) = uVar7;
         do {
           puVar11 = *(uint **)(param_1 + 0x418);
           uVar2 = puVar11[1];
@@ -450,6 +451,8 @@ int FUN_00110020(param_1, param_2)
   int param_1;
   int param_2;
 {
+  int valueNumberEnabled;
+  int operandRecord2;
   bool bVar1;
   int iVar2;
   undefined4 *allocation;
@@ -471,8 +474,8 @@ int FUN_00110020(param_1, param_2)
   if (iVar2 == 0) {
     return;
   }
-  iVar2 = IRInst__getOperandRecord(piVar14,0);
-  if (*(int *)(iVar2 + 0x10) == DAT_001afa14) {
+  operandRecord2 = IRInst__getOperandRecord(piVar14,0);
+  if (*(int *)(operandRecord2 + 0x10) == DAT_001afa14) {
     Program__removeInst(param_1,piVar14);
                     
                     
@@ -513,9 +516,9 @@ LAB_00110170:
   }
   *allocation = piVar8;
 LAB_001101ac:
-  iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(param_1 + 8),7);
-  if (iVar2 != 0) {
-    FUN_00172f34(param_2);
+  valueNumberEnabled = Compiler__isOptionEnabled(*(undefined4 *)(param_1 + 8),7);
+  if (valueNumberEnabled != 0) {
+    ValueKey__initResultLaneValues(param_2);
     FUN_0010e8e4(piVar8,param_2 + 0x20);
   }
   iVar2 = 0;
@@ -1707,8 +1710,8 @@ LAB_00111508:
   goto LAB_001113e0;
 }
 
-/* FUN_001121b4 @ 0x1121b4 (156 bytes) */
-int FUN_001121b4(param_1)
+/* Program__packPsInputs @ 0x1121b4 (156 bytes) */
+int Program__packPsInputs(param_1)
   int param_1;
 {
   bool bVar1;
@@ -1982,6 +1985,7 @@ int KhanVs__vslot88(this, param_2)
   int *this;
   int param_2;
 {
+  int exportPackingEnabled;
   uint loopIndex;
   int iVar1;
   undefined4 uVar2;
@@ -2096,9 +2100,9 @@ LAB_0011293c:
         }
         iVar6 = FUN_0010e40c(uVar4,*(undefined4 *)(*(int *)*puVar3 + 0x140));
         if (iVar6 - 2U < 2) {
-          iVar6 = Compiler__isOptionEnabled(uVar10,0x3f);
+          exportPackingEnabled = Compiler__isOptionEnabled(uVar10,0x3f);
           iVar1 = local_58;
-          if (iVar6 == 0) {
+          if (exportPackingEnabled == 0) {
             puVar16 = *(uint **)(param_2 + 0x420);
             local_58 = local_58 + 4;
             uVar13 = puVar16[1];

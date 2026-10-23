@@ -871,6 +871,7 @@ int FUN_0019651c(param_1, inst, param_3)
   int inst;
   uint param_3;
 {
+  int operandRecord;
   bool bVar1;
   int iVar2;
   undefined4 uVar3;
@@ -884,8 +885,8 @@ int FUN_0019651c(param_1, inst, param_3)
   a2 = 0;
   loopIndex = 0;
   do {
-    iVar2 = IRInst__getOperandRecord(inst,0);
-    if (*(char *)(loopIndex + iVar2 + 0x10) == '\x01') {
+    operandRecord = IRInst__getOperandRecord(inst,0);
+    if (*(char *)(loopIndex + operandRecord + 0x10) == '\x01') {
       a2 = a2 | 1 << (loopIndex & 0x3f);
     }
     bVar1 = loopIndex != 3;
@@ -959,7 +960,7 @@ int R300MachineAssembler__resolveSourceRegister(this, inst, sourceIndex, compile
   int callResult;
   
   operandVReg = (int *)IRInst__getOperandSource(inst,sourceIndex);
-  if (((((operandVReg[0x20] == 0) || (callResult = FUN_00126760(operandVReg[0x26]), callResult == 0)) ||
+  if (((((operandVReg[0x20] == 0) || (callResult = RegKind__flagBit0(operandVReg[0x26]), callResult == 0)) ||
        ((operandVReg[5] & 2U) != 0)) || (callResult = (**(code **)(*operandVReg + 0x50))(operandVReg), callResult != 0)) &&
      (callResult = (**(code **)(*operandVReg + 0x50))(operandVReg), callResult == 0)) {
     return;
@@ -1551,6 +1552,7 @@ int R300MachineAssembler__classifyAluOperation(this, rgbLaneBytes, alphaLaneByte
   undefined4 *rgbHardwareOpcodeOut;
   undefined4 *alphaHardwareOpcodeOut;
 {
+  undefined4 opcodeInfo;
   char laneW;
   char laneY;
   undefined4 uVar3;
@@ -1567,9 +1569,9 @@ int R300MachineAssembler__classifyAluOperation(this, rgbLaneBytes, alphaLaneByte
   irOpcode = *(int *)(*(int *)(irInst + 0x88) + 8);
   if (irOpcode == 0x35) {
     IROperand__setModifierBits(irInst + 0xbc,1,*(uint *)(irInst + 0xd0) & 1 ^ 1);
-    uVar3 = Opcode__getInfo(0x34);
+    opcodeInfo = Opcode__getInfo(0x34);
     irOpcode = 0x34;
-    *(undefined4 *)(irInst + 0x88) = uVar3;
+    *(undefined4 *)(irInst + 0x88) = opcodeInfo;
   }
   opcodeClass = *(undefined4 *)(PTR_DAT_001e913c + irOpcode * 0x38 + 0x34);
   uVar3 = ((int (*)())opcodeInfoRgbHwOpcode)(this[0x29],irOpcode);

@@ -3135,12 +3135,12 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 110ef0	110f0c	other	FUN_001102e0	7	0x193cc0
 1119bc	1119d8	other	FUN_001102e0	7	0x193cc0
 111c8c	111cac	eh-pad	FUN_001102e0	8	0x193cc0,__Unwind_Resume
-112250	11226c	other	FUN_001121b4	7	0x193cc0
-112678	112698	eh-pad	FUN_001121b4	8	0x193cc0,__Unwind_Resume
-1127c0	1127c4	eh-pad	FUN_001121b4	1	__Unwind_Resume
+112250	11226c	other	Program__packPsInputs	7	0x193cc0
+112678	112698	eh-pad	Program__packPsInputs	8	0x193cc0,__Unwind_Resume
+1127c0	1127c4	eh-pad	Program__packPsInputs	1	__Unwind_Resume
 11ed40	11ed60	eh-pad	FUN_0011eaa0	8	0x193cc0,__Unwind_Resume
 11f7c4	11f7dc	eh-pad	FUN_0011f578	6	0x193cc0,__Unwind_Resume
-11ff30	11ff48	eh-pad	FUN_0011fb94	6	0x193cc0,__Unwind_Resume
+11ff30	11ff48	eh-pad	Program__foldUselessPhis	6	0x193cc0,__Unwind_Resume
 120db4	120dd0	other	FUN_00120cd4	7	0x193cc0
 120e14	120e30	other	FUN_00120cd4	7	0x193cc0
 120e74	120e90	other	FUN_00120cd4	7	0x193cc0
@@ -3266,7 +3266,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 12dab4	12dab8	eh-pad	pass_flatten_ifs	1	__Unwind_Resume
 12dd48	12dd58	other	FudoPs__flattenIfs	4	
 12df58	12df70	eh-pad	FUN_0012dd58	6	0x193cc0,__Unwind_Resume
-12e450	12e468	eh-pad	FUN_0012df90	6	0x193cc0,__Unwind_Resume
+12e450	12e468	eh-pad	Program__foldConstantIfRegion	6	0x193cc0,__Unwind_Resume
 12e534	12e554	eh-pad	FUN_0012e488	8	0x193cc0,__Unwind_Resume
 12e658	12e674	other	FUN_0012e56c	7	0x193cc0
 12e6cc	12e6e8	other	FUN_0012e56c	7	0x193cc0
@@ -3307,10 +3307,10 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 13785c	13787c	eh-pad	FUN_00137694	8	0x193cc0,__Unwind_Resume
 139384	1394a0	table	FUN_00139344	71	
 139f4c	139f64	eh-pad	FUN_00139d40	6	0x193cc0,__Unwind_Resume
-13b49c	13b4b8	other	FUN_0013b3f0	7	0x193cc0
-13b808	13b824	other	FUN_0013b3f0	7	0x193cc0
-13b978	13b994	other	FUN_0013b3f0	7	0x193cc0
-13ba90	13bab0	eh-pad	FUN_0013b3f0	8	0x193cc0,__Unwind_Resume
+13b49c	13b4b8	other	Program__hoistFetchInsts	7	0x193cc0
+13b808	13b824	other	Program__hoistFetchInsts	7	0x193cc0
+13b978	13b994	other	Program__hoistFetchInsts	7	0x193cc0
+13ba90	13bab0	eh-pad	Program__hoistFetchInsts	8	0x193cc0,__Unwind_Resume
 13c1cc	13c1e4	eh-pad	Program__eliminateDeadInstsAndRecountUses	6	0x193cc0,__Unwind_Resume
 13c5d4	13c600	eh-pad	FUN_0013c210	11	0x193cc0,__Unwind_Resume
 13ca48	13ca74	eh-pad	FUN_0013c60c	11	0x193cc0,__Unwind_Resume
@@ -3395,8 +3395,8 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 171f2c	171f64	other	Scheduler__run	14	
 171fa0	171fd0	eh-pad	Scheduler__run	12	__Unwind_Resume
 1724d4	1724f4	eh-pad	ResourceModel__vslot32	8	0x193cc0,__Unwind_Resume
-172f04	172f0c	millicode	FUN_00172efc	2	
-172f20	172f24	millicode	FUN_00172f0c	1	
+172f04	172f0c	millicode	Compiler__peekValueNumber	2	
+172f20	172f24	millicode	Compiler__resetValueNumbers	1	
 172f2c	172f34	millicode	returnZero_172f24	2	
 1764dc	1764e0	millicode	FUN_00176474	1	
 176e0c	176e20	other	FUN_00176d6c	5	
@@ -3455,7 +3455,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 193d94	193d98	millicode	FUN_00193d18	1	
 193f04	193f08	millicode	FUN_00193eb8	1	
 194bac	194be8	eh-pad	FUN_00194aa8	15	0x193cc0,__Unwind_Resume
-194dfc	194e1c	eh-pad	FUN_00194d44	8	0x193cc0,__Unwind_Resume
+194dfc	194e1c	eh-pad	HashTable__insert	8	0x193cc0,__Unwind_Resume
 194f48	194f84	eh-pad	FUN_00194e44	15	0x193cc0,__Unwind_Resume
 1951b0	1951d0	eh-pad	FUN_001950e0	8	0x193cc0,__Unwind_Resume
 195470	195474	millicode	packSourceModifier	1	

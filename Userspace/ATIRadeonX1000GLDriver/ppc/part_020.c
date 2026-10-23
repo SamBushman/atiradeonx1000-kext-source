@@ -3585,8 +3585,8 @@ int FUN_000e0ebc(param_1)
   return 1;
 }
 
-/* FUN_000e0ee8 @ 0xe0ee8 (1184 bytes) */
-int FUN_000e0ee8(param_1, param_2, param_3)
+/* Compiler__setOption @ 0xe0ee8 (1184 bytes) */
+int Compiler__setOption(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   int param_3;
@@ -3832,7 +3832,7 @@ int FUN_000e13b4(param_1)
   *(undefined4 *)(param_1 + 0x3b8) = 0;
   *(undefined4 *)(param_1 + 0x3bc) = 0;
   *(undefined4 *)(param_1 + 0x3c0) = 0;
-  FUN_00172f0c(param_1);
+  Compiler__resetValueNumbers(param_1);
   *(undefined4 *)(param_1 + 0x3d0) = 0;
   *(undefined4 *)(param_1 + 0x648) = 0;
   if (*(int *)(param_1 + 0x318) == 0) {

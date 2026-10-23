@@ -31,11 +31,11 @@ int R300VSchedModel__vslot12(this, inst)
         return 1;
       }
       operandVReg = (int *)IRInst__getOperandSource(inst,1);
-      if (((((operandVReg[0x20] != 0) && (iVar1 = FUN_00126760(operandVReg[0x26]), iVar1 != 0)) &&
+      if (((((operandVReg[0x20] != 0) && (iVar1 = RegKind__flagBit0(operandVReg[0x26]), iVar1 != 0)) &&
            (((operandVReg[5] & 2U) == 0 &&
             ((iVar1 = (**(code **)(*operandVReg + 0x50))(operandVReg), iVar1 == 0 &&
              (operandVReg = (int *)IRInst__getOperandSource(inst,2), operandVReg[0x20] != 0)))))) &&
-          (iVar1 = FUN_00126760(operandVReg[0x26]), iVar1 != 0)) &&
+          (iVar1 = RegKind__flagBit0(operandVReg[0x26]), iVar1 != 0)) &&
          (((operandVReg[5] & 2U) == 0 && (iVar1 = (**(code **)(*operandVReg + 0x50))(operandVReg), iVar1 == 0)))) {
         return 1;
       }
@@ -583,6 +583,9 @@ int FUN_001922c4(param_1, param_2, inst, param_4)
   int *inst;
   int param_4;
 {
+  undefined4 sourceDef;
+  int operandRecord2;
+  int operandRecord;
   bool bVar1;
   int iVar2;
   int inst2;
@@ -651,8 +654,8 @@ int FUN_001922c4(param_1, param_2, inst, param_4)
       uVar7 = 0;
     }
     inst2 = IRInst__create(0x12,uVar11);
-    uVar4 = IRInst__getOperandSource(inst,iVar12);
-    IRInst__setOperandSource(inst2,iVar12,uVar4,*(uint *)(param_4 + 0x30) >> 7 & 1,uVar11);
+    sourceDef = IRInst__getOperandSource(inst,iVar12);
+    IRInst__setOperandSource(inst2,iVar12,sourceDef,*(uint *)(param_4 + 0x30) >> 7 & 1,uVar11);
     loopIndex = IRInst__getOperandRecord(inst,iVar12);
     uVar4 = *(undefined4 *)(loopIndex + 0x10);
     loopIndex = IRInst__getOperandRecord(inst2,iVar12);
@@ -660,17 +663,17 @@ int FUN_001922c4(param_1, param_2, inst, param_4)
     loopIndex = inst2 + iVar12 * 0x18 + 0x8c;
     IROperand__setModifierBits(loopIndex,2,(uint)inst[iVar12 * 6 + 0x28] >> 1 & 1);
     IROperand__setModifierBits(loopIndex,1,inst[iVar12 * 6 + 0x28] & 1);
-    uVar4 = IRInst__getOperandSource(inst,iVar2);
-    IRInst__setOperandSource(inst2,iVar2,uVar4,*(uint *)(param_4 + 0x30) >> 7 & 1,uVar11);
-    iVar12 = IRInst__getOperandRecord(inst,iVar2);
-    uVar4 = *(undefined4 *)(iVar12 + 0x10);
-    iVar12 = IRInst__getOperandRecord(inst2,iVar2);
-    *(undefined4 *)(iVar12 + 0x10) = uVar4;
+    sourceDef = IRInst__getOperandSource(inst,iVar2);
+    IRInst__setOperandSource(inst2,iVar2,sourceDef,*(uint *)(param_4 + 0x30) >> 7 & 1,uVar11);
+    operandRecord = IRInst__getOperandRecord(inst,iVar2);
+    uVar4 = *(undefined4 *)(operandRecord + 0x10);
+    operandRecord = IRInst__getOperandRecord(inst2,iVar2);
+    *(undefined4 *)(operandRecord + 0x10) = uVar4;
     iVar12 = inst2 + iVar2 * 0x18 + 0x8c;
     IROperand__setModifierBits(iVar12,2,(uint)inst[iVar2 * 6 + 0x28] >> 1 & 1);
     IROperand__setModifierBits(iVar12,1,inst[iVar2 * 6 + 0x28] & 1U ^ 1);
-    iVar2 = IRInst__getOperandRecord(inst,0);
-    uVar4 = *(undefined4 *)(iVar2 + 0x10);
+    operandRecord2 = IRInst__getOperandRecord(inst,0);
+    uVar4 = *(undefined4 *)(operandRecord2 + 0x10);
     *(undefined4 *)(inst2 + 0x94) = *(undefined4 *)(inst2 + 0x14c);
     *(undefined4 *)(inst2 + 0x9c) = uVar4;
     *(undefined4 *)(inst2 + 0x98) = 0;
@@ -704,11 +707,11 @@ int FUN_001922c4(param_1, param_2, inst, param_4)
     ((void (*)())FUN_000f79c4)(inst,param_4,uVar9,dVar13,dVar13,dVar13,dVar13);
     inst[0x25] = inst[0x53];
     inst[0x26] = 0;
-    iVar12 = IRInst__getOperandRecord(inst2,0);
-    inst[0x27] = *(int *)(iVar12 + 0x10);
+    operandRecord = IRInst__getOperandRecord(inst2,0);
+    inst[0x27] = *(int *)(operandRecord + 0x10);
     do {
-      iVar12 = IRInst__getOperandRecord(inst2,0);
-      if (*(char *)(loopIndex + iVar12 + 0x10) == '\x01') {
+      operandRecord = IRInst__getOperandRecord(inst2,0);
+      if (*(char *)(loopIndex + operandRecord + 0x10) == '\x01') {
         for (iVar12 = 1; iVar6 = (**(code **)(*inst + 0x14))(inst), iVar12 <= iVar6;
             iVar12 = iVar12 + 1) {
           (**(code **)(*inst + 0x88))(inst,iVar12,loopIndex,4);
@@ -1248,11 +1251,12 @@ int FudoPs__vslot29(this, param_2)
   undefined4 this;
   int param_2;
 {
+  int convertInnerIfToPredEnabled;
   int iVar1;
   int *piVar2;
   
-  iVar1 = Compiler__isOptionEnabled(*(undefined4 *)(param_2 + 8),0x4a);
-  if (iVar1 != 0) {
+  convertInnerIfToPredEnabled = Compiler__isOptionEnabled(*(undefined4 *)(param_2 + 8),0x4a);
+  if (convertInnerIfToPredEnabled != 0) {
     piVar2 = *(int **)(param_2 + 900);
     iVar1 = piVar2[2];
     while (iVar1 != 0) {
@@ -1987,8 +1991,8 @@ int FUN_00194720(param_1, param_2)
   return;
 }
 
-/* FUN_00194834 @ 0x194834 (260 bytes) */
-int FUN_00194834(param_1, param_2)
+/* HashTable__find @ 0x194834 (260 bytes) */
+int HashTable__find(param_1, param_2)
   int *param_1;
   undefined4 param_2;
 {
@@ -2205,8 +2209,8 @@ int FUN_00194aa8(param_1)
   return;
 }
 
-/* FUN_00194d44 @ 0x194d44 (184 bytes) */
-int FUN_00194d44(param_1, param_2)
+/* HashTable__insert @ 0x194d44 (184 bytes) */
+int HashTable__insert(param_1, param_2)
   uint *param_1;
   undefined4 param_2;
 {

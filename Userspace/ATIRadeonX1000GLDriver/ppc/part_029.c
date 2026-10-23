@@ -896,7 +896,7 @@ int FUN_00109764(param_1, param_2, compiler)
   undefined4 compiler;
 {
   undefined *puVar1;
-  int iVar2;
+  int preserveVertexInputsEnabled;
   
   ((int (*)())FUN_00108e40)(param_1,param_2,compiler);
   puVar1 = PTR_DAT_001e8bdc;
@@ -905,8 +905,8 @@ int FUN_00109764(param_1, param_2, compiler)
   *param_1 = puVar1 + 8;
   param_1[0x20] = 1;
   param_1[0x4c] = 0;
-  iVar2 = Compiler__isOptionEnabled(compiler,0x3e);
-  if (iVar2 != 0) {
+  preserveVertexInputsEnabled = Compiler__isOptionEnabled(compiler,0x3e);
+  if (preserveVertexInputsEnabled != 0) {
     param_1[5] = param_1[5] | 0x18;
   }
   return;
@@ -934,7 +934,7 @@ int FUN_0010988c(param_1, param_2, param_3)
   undefined4 param_3;
 {
   undefined *puVar1;
-  int iVar2;
+  int preserveVertexInputsEnabled;
   
   ((int (*)())FUN_00108e40)(param_1,param_2,param_3);
   puVar1 = PTR_DAT_001e8bdc;
@@ -943,8 +943,8 @@ int FUN_0010988c(param_1, param_2, param_3)
   *param_1 = puVar1 + 8;
   param_1[0x20] = 1;
   param_1[0x4c] = 0;
-  iVar2 = Compiler__isOptionEnabled(param_3,0x3e);
-  if (iVar2 != 0) {
+  preserveVertexInputsEnabled = Compiler__isOptionEnabled(param_3,0x3e);
+  if (preserveVertexInputsEnabled != 0) {
     param_1[5] = param_1[5] | 0x18;
   }
   return;

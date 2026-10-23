@@ -1,0 +1,13 @@
+# func rows (fork D3, part 2): pass_rewrite pipeline, option machinery; format func<TAB>old<TAB>new<TAB>tier<TAB>evidence
+func	FUN_000e0ee8	Compiler__setOption	CONFIRMED	matches the name against the 80 OPT_* strings at 0x1dc444 (sets bit id of compiler+0x59c) and, failing that, against the max_* tunable names, storing the value at compiler+0x64c..0x6a8
+func	FUN_0011fb94	Program__foldUselessPhis	CONFIRMED	gated by OPT_FOLD_USELESS_PHI (0x17) in pass_rewrite; counts program+0x22c against max_useless_phis (compiler+0x66c); replaces a phi with its unique source and deletes it
+func	FUN_0011e6f4	IRPhi__getUniqueSource	CONFIRMED	returns the one distinct source of a phi, ignoring sources equal to the phi itself and null ones; 0 when two different sources exist
+func	FUN_001121b4	Program__packPsInputs	INFERRED	gated by OPT_PACK_PS_INPUT (0x37): merges interpolant loads (same words at +0x13c..0x148) that write different lanes into one multi-lane load plus moves
+func	FUN_001394b0	Program__moveInterpFetchesOutOfIfs	INFERRED	part of OPT_MOVE_FETCH_INST (0x18): instructions whose source answers IRInst slot 19 (isLoadInterp) and that sit inside if regions are appended to the block after the entry
+func	FUN_0013b3f0	Program__hoistFetchInsts	INFERRED	part of OPT_MOVE_FETCH_INST (0x18): creates AnyBlock/Block pairs and prepends fetch instructions to the dominating block
+func	FUN_0013caf4	IfHeader__convertInnerIfToCmov	INFERRED	gated by OPT_CONVERT_INNER_IF_TO_CMOV (0x19) in pass_rewrite, called per IfHeader (Block virtual slot 9); handles then/else arms of phis and cheap instructions
+func	FUN_00173b98	Program__eliminateRedundantInst	INFERRED	called by Program__valueNumberInst when an equivalent definition exists: records the definition for the vreg (Block__recordDefinition), removes the instruction (virtual slot 3), counts program+0x14c (or +0x150 for a phi)
+func	FUN_0011e948	Program__isPreassignedHwReg	INFERRED	`(inst+0x14 & 0x40) && Program__isHwRegAllowed(program, inst[0x25])`
+func	FUN_0011e780	IRInst__allSourcesDefined	CONFIRMED	true when every source operand has a defining instruction (IRInst__getOperandSource nonzero)
+func	FUN_0011e7ec	IRInst__sourcesAreSameValue	CONFIRMED	true when all sources are the same non-null definition
+func	FUN_00172a28	ValueKey__maybeRefineSources	INFERRED	options 9 (OPT_VALUE_TRANSFORMS) and 0x30 (OPT_SPLIT_RGB_ALPHA) both on: calls FUN_0017f78c on the key

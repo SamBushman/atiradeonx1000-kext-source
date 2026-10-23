@@ -52,9 +52,9 @@
 0x133fe4	FUN_00133fe4	0x1341ac	FUN_00130abc	r5	field at param_1+0x2c: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-REVIEWED (FUN_00130abc reads only r3; r4/r5 go to a this-only virtual call `(*(vtbl+0x34))(this)` at 0x13074c: unused parameters of the source prototype)
 0x158264	FUN_00158264	0x158380	FUN_0015800c	r7	incoming param_2 not at argument 4 of any C call (1 C calls)	CHECK (C arg4: local_68)
 0x15a68c	FUN_0015a68c	0x15b248	IRInst__getOperandRecord	r4	0x1 not at argument 1 of any C call (15 C calls)	CHECK (C arg1: iVar9; iVar9)
-0x175dac	FUN_00175dac	0x175e08	FUN_00172a28	r4	incoming param_2 not at argument 1 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
-0x175dac	FUN_00175dac	0x175e08	FUN_00172a28	r5	incoming param_3 not at argument 2 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
-0x175dac	FUN_00175dac	0x175e08	FUN_00172a28	r6	incoming param_5 not at argument 3 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
+0x175dac	Program__valueNumberInst	0x175e08	ValueKey__maybeRefineSources	r4	incoming param_2 not at argument 1 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
+0x175dac	Program__valueNumberInst	0x175e08	ValueKey__maybeRefineSources	r5	incoming param_3 not at argument 2 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
+0x175dac	Program__valueNumberInst	0x175e08	ValueKey__maybeRefineSources	r6	incoming param_5 not at argument 3 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
 0x177b4c	FUN_00177b4c	0x177c74	IRInst__appendSource	r5	field at param_1+0x238: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-CALLEE-IGNORES
 0x177cd0	FUN_00177cd0	0x177db8	IRInst__appendSource	r5	field at param_1+0x238: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-CALLEE-IGNORES
 0x177e14	FUN_00177e14	0x177fc8	IRInst__appendSource	r5	field at param_1+0x238: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-CALLEE-IGNORES

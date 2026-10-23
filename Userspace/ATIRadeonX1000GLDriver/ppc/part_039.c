@@ -260,7 +260,7 @@ int KhanPs__vslot73(this, param_2)
   do {
     uVar1 = *puVar2;
     puVar2 = puVar2 + 1;
-    FUN_00173e10(param_2,uVar1);
+    Compiler__valueNumberForExpr(param_2,uVar1);
   } while (puVar2 != &DAT_001aff9c);
   return;
 }
@@ -271,20 +271,20 @@ int KhanPs__vslot74(this, param_2)
   undefined4 param_2;
 {
   undefined4 uVar1;
-  int iVar2;
+  int exprRecord;
   undefined4 *puVar3;
   
   puVar3 = &DAT_001aff68;
   do {
-    iVar2 = FUN_00173e10(param_2,*puVar3);
+    exprRecord = Compiler__valueNumberForExpr(param_2,*puVar3);
     uVar1 = *puVar3;
-    *(undefined4 *)(iVar2 + 0x1c) = 0;
+    *(undefined4 *)(exprRecord + 0x1c) = 0;
     puVar3 = puVar3 + 1;
-    *(undefined4 *)(iVar2 + 0x14) = uVar1;
-    *(undefined1 *)(iVar2 + 8) = 1;
-    *(undefined1 *)(iVar2 + 9) = 0;
-    *(undefined4 *)(iVar2 + 0x18) = 0;
-    FUN_0017629c(iVar2,param_2);
+    *(undefined4 *)(exprRecord + 0x14) = uVar1;
+    *(undefined1 *)(exprRecord + 8) = 1;
+    *(undefined1 *)(exprRecord + 9) = 0;
+    *(undefined4 *)(exprRecord + 0x18) = 0;
+    FUN_0017629c(exprRecord,param_2);
   } while (puVar3 != &DAT_001aff74);
   return;
 }
@@ -554,7 +554,7 @@ int KhanPs__vslot5(this, param_2, compiler)
         IROperand__setModifierBits(newInst + 0x2f,1,1);
         dVar10 = (double)FLOAT_001aa0e8;
         ((void (*)())FUN_000f79c4)(newInst,*(undefined4 *)(compiler + 0x6c4),3,dVar10,dVar10,dVar10,dVar10);
-        FUN_001236e4(callResult,1,newInst);
+        VReg__addUse(callResult,1,newInst);
         FUN_0012306c(uVar3,newInst);
         Block__appendInst(*(undefined4 *)(iVar6 + 0x3a0),newInst);
         (**(code **)(*newInst + 8))(newInst,compiler);
@@ -566,7 +566,7 @@ int KhanPs__vslot5(this, param_2, compiler)
         uVar1 = DAT_001affa4;
         iVar5 = IRInst__getOperandRecord(newInst,1);
         *(undefined4 *)(iVar5 + 0x10) = uVar1;
-        FUN_001236e4(callResult,1,newInst);
+        VReg__addUse(callResult,1,newInst);
         FUN_0012306c(uVar3,newInst);
         Block__appendInst(*(undefined4 *)(iVar6 + 0x3a0),newInst);
         (**(code **)(*newInst + 8))(newInst,compiler);
@@ -586,11 +586,12 @@ int KhanPs__vslot75(this, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_6;
   undefined4 param_7;
 {
+  int exprRecord2;
   bool bVar1;
   float fVar2;
   byte bVar3;
   int iVar4;
-  int iVar5;
+  int exprRecord;
   float *pfVar6;
   
   if (*(char *)(param_2 + 2) == '\0') {
@@ -609,45 +610,45 @@ int KhanPs__vslot75(this, param_2, param_3, param_4, param_5, param_6, param_7)
   if ((bVar3 & 8) != 0) {
     return;
   }
-  iVar4 = FUN_00173e10(param_3,GH_F2U(-param_2[5]));
-  if (*(char *)(iVar4 + 8) == '\0') {
-    bVar3 = *(byte *)(iVar4 + 9);
+  exprRecord2 = Compiler__valueNumberForExpr(param_3,GH_F2U(-param_2[5]));
+  if (*(char *)(exprRecord2 + 8) == '\0') {
+    bVar3 = *(byte *)(exprRecord2 + 9);
   }
   else {
-    bVar3 = *(byte *)(iVar4 + 9);
+    bVar3 = *(byte *)(exprRecord2 + 9);
     if (((((bVar3 & 1) == 0) && ((bVar3 & 2) == 0)) && ((bVar3 & 4) == 0)) && ((bVar3 & 8) == 0))
     goto LAB_00128e28;
   }
   if (((bVar3 & 1) == 0) || ((bVar3 & 2) != 0)) {
-    *(undefined4 *)(iVar4 + 0x20) = 0x31;
-    FUN_00176280(iVar4,param_2);
+    *(undefined4 *)(exprRecord2 + 0x20) = 0x31;
+    FUN_00176280(exprRecord2,param_2);
     fVar2 = param_2[5];
-    *(undefined1 *)(iVar4 + 9) = 1;
-    *(float *)(iVar4 + 0x14) = fVar2;
-    *(undefined4 *)(iVar4 + 0x1c) = 0;
-    *(undefined4 *)(iVar4 + 0x18) = 1;
+    *(undefined1 *)(exprRecord2 + 9) = 1;
+    *(float *)(exprRecord2 + 0x14) = fVar2;
+    *(undefined4 *)(exprRecord2 + 0x1c) = 0;
+    *(undefined4 *)(exprRecord2 + 0x18) = 1;
   }
 LAB_00128e28:
   iVar4 = -3;
   pfVar6 = (float *)&DAT_001aff4c;
   do {
-    iVar5 = FUN_00173e10(param_3,GH_F2U(*param_2 * *pfVar6));
-    if (*(char *)(iVar5 + 8) == '\0') {
-      bVar3 = *(byte *)(iVar5 + 9);
+    exprRecord = Compiler__valueNumberForExpr(param_3,GH_F2U(*param_2 * *pfVar6));
+    if (*(char *)(exprRecord + 8) == '\0') {
+      bVar3 = *(byte *)(exprRecord + 9);
 LAB_00128e98:
       if ((((bVar3 & 1) == 0) || ((bVar3 & 2) != 0)) && (((bVar3 & 2) == 0 || ((bVar3 & 1) != 0))))
       {
-        *(undefined4 *)(iVar5 + 0x20) = 0x31;
-        FUN_00176280(iVar5,param_2);
+        *(undefined4 *)(exprRecord + 0x20) = 0x31;
+        FUN_00176280(exprRecord,param_2);
         fVar2 = param_2[5];
-        *(int *)(iVar5 + 0x1c) = iVar4;
-        *(undefined1 *)(iVar5 + 9) = 2;
-        *(float *)(iVar5 + 0x14) = fVar2;
-        *(undefined4 *)(iVar5 + 0x18) = 0;
+        *(int *)(exprRecord + 0x1c) = iVar4;
+        *(undefined1 *)(exprRecord + 9) = 2;
+        *(float *)(exprRecord + 0x14) = fVar2;
+        *(undefined4 *)(exprRecord + 0x18) = 0;
       }
     }
     else {
-      bVar3 = *(byte *)(iVar5 + 9);
+      bVar3 = *(byte *)(exprRecord + 9);
       if ((((bVar3 & 1) != 0) || ((bVar3 & 2) != 0)) || (((bVar3 & 4) != 0 || ((bVar3 & 8) != 0))))
       goto LAB_00128e98;
     }
@@ -658,15 +659,15 @@ LAB_00128e98:
       pfVar6 = (float *)&DAT_001aff4c;
       iVar4 = -3;
       do {
-        iVar5 = FUN_00173e10(param_3,GH_F2U(-*param_2 * *pfVar6));
-        if (*(char *)(iVar5 + 8) == '\0') {
-          *(undefined4 *)(iVar5 + 0x20) = 0x31;
-          FUN_00176280(iVar5,param_2);
+        exprRecord = Compiler__valueNumberForExpr(param_3,GH_F2U(-*param_2 * *pfVar6));
+        if (*(char *)(exprRecord + 8) == '\0') {
+          *(undefined4 *)(exprRecord + 0x20) = 0x31;
+          FUN_00176280(exprRecord,param_2);
           fVar2 = param_2[5];
-          *(undefined1 *)(iVar5 + 9) = 3;
-          *(float *)(iVar5 + 0x14) = fVar2;
-          *(undefined4 *)(iVar5 + 0x18) = 1;
-          *(int *)(iVar5 + 0x1c) = iVar4;
+          *(undefined1 *)(exprRecord + 9) = 3;
+          *(float *)(exprRecord + 0x14) = fVar2;
+          *(undefined4 *)(exprRecord + 0x18) = 1;
+          *(int *)(exprRecord + 0x1c) = iVar4;
         }
         bVar1 = iVar4 != 3;
         pfVar6 = pfVar6 + 1;
@@ -1160,20 +1161,20 @@ int KhanVs__vslot74(this, param_2)
   undefined4 param_2;
 {
   undefined4 uVar1;
-  int iVar2;
+  int exprRecord;
   undefined4 *puVar3;
   
   puVar3 = &DAT_001affb0;
   do {
-    iVar2 = FUN_00173e10(param_2,*puVar3);
+    exprRecord = Compiler__valueNumberForExpr(param_2,*puVar3);
     uVar1 = *puVar3;
-    *(undefined4 *)(iVar2 + 0x1c) = 0;
+    *(undefined4 *)(exprRecord + 0x1c) = 0;
     puVar3 = puVar3 + 1;
-    *(undefined4 *)(iVar2 + 0x14) = uVar1;
-    *(undefined1 *)(iVar2 + 8) = 1;
-    *(undefined1 *)(iVar2 + 9) = 0;
-    *(undefined4 *)(iVar2 + 0x18) = 0;
-    FUN_0017629c(iVar2,param_2);
+    *(undefined4 *)(exprRecord + 0x14) = uVar1;
+    *(undefined1 *)(exprRecord + 8) = 1;
+    *(undefined1 *)(exprRecord + 9) = 0;
+    *(undefined4 *)(exprRecord + 0x18) = 0;
+    FUN_0017629c(exprRecord,param_2);
   } while (puVar3 != &DAT_001affb8);
   return;
 }
@@ -1552,6 +1553,7 @@ int KhanVs__vslot89(this, param_2)
   int *this;
   int param_2;
 {
+  int operandRecord;
   int iVar1;
   int iVar2;
   int iVar3;
@@ -1571,8 +1573,8 @@ int KhanVs__vslot89(this, param_2)
              (iVar4 = (**(code **)(*this + 0x18c))(this,*(undefined4 *)(iVar1 + 0x94),param_2)
              , iVar4 != 0)) {
             (**(code **)(*this + 400))(this,*(undefined4 *)(iVar1 + 0x94),iVar3);
-            iVar4 = IRInst__getOperandRecord(iVar1,0);
-            *(int *)(iVar4 + 8) = iVar3;
+            operandRecord = IRInst__getOperandRecord(iVar1,0);
+            *(int *)(operandRecord + 8) = iVar3;
             iVar2 = *(int *)(iVar1 + 8);
             iVar3 = iVar3 + 1;
           }
@@ -1611,29 +1613,29 @@ int KhanVs__vslot75(this, param_2, param_3, param_4, param_5, param_6, param_7)
 {
   undefined4 uVar1;
   byte bVar2;
-  int iVar3;
+  int exprRecord;
   
   if ((((*(char *)(param_2 + 8) != '\0') && (bVar2 = *(byte *)(param_2 + 9), (bVar2 & 1) == 0)) &&
       ((bVar2 & 2) == 0)) && (((bVar2 & 4) == 0 && ((bVar2 & 8) == 0)))) {
-    iVar3 = FUN_00173e10(param_3,GH_F2U(-*(float *)(param_2 + 0x14)));
-    if (*(char *)(iVar3 + 8) == '\0') {
-      bVar2 = *(byte *)(iVar3 + 9);
+    exprRecord = Compiler__valueNumberForExpr(param_3,GH_F2U(-*(float *)(param_2 + 0x14)));
+    if (*(char *)(exprRecord + 8) == '\0') {
+      bVar2 = *(byte *)(exprRecord + 9);
     }
     else {
-      bVar2 = *(byte *)(iVar3 + 9);
+      bVar2 = *(byte *)(exprRecord + 9);
       if ((((bVar2 & 1) == 0) && ((bVar2 & 2) == 0)) && (((bVar2 & 4) == 0 && ((bVar2 & 8) == 0))))
       {
         return;
       }
     }
     if (((bVar2 & 1) == 0) || ((bVar2 & 2) != 0)) {
-      *(undefined4 *)(iVar3 + 0x20) = 0x31;
-      FUN_00176280(iVar3,param_2);
+      *(undefined4 *)(exprRecord + 0x20) = 0x31;
+      FUN_00176280(exprRecord,param_2);
       uVar1 = *(undefined4 *)(param_2 + 0x14);
-      *(undefined1 *)(iVar3 + 9) = 1;
-      *(undefined4 *)(iVar3 + 0x14) = uVar1;
-      *(undefined4 *)(iVar3 + 0x1c) = 0;
-      *(undefined4 *)(iVar3 + 0x18) = 1;
+      *(undefined1 *)(exprRecord + 9) = 1;
+      *(undefined4 *)(exprRecord + 0x14) = uVar1;
+      *(undefined4 *)(exprRecord + 0x1c) = 0;
+      *(undefined4 *)(exprRecord + 0x18) = 1;
     }
   }
   return;
@@ -1930,6 +1932,7 @@ int FUN_0012ac58(param_1, param_2)
   int param_1;
   int *param_2;
 {
+  int *predecessor;
   int *a0;
   int iVar1;
   int *piVar2;
@@ -1942,8 +1945,8 @@ int FUN_0012ac58(param_1, param_2)
         iVar1 = (**(code **)(*a0 + 0x10))(a0);
         if ((iVar1 != 0) && (*(int *)(iVar1 + 300) == param_1)) {
           iVar1 = (**(code **)(*piVar2 + 0x2c))(piVar2);
-          piVar2 = (int *)Block__getPredecessor(piVar2,(uint)(iVar1 != 0));
-          return piVar2;
+          predecessor = (int *)Block__getPredecessor(piVar2,(uint)(iVar1 != 0));
+          return predecessor;
         }
         iVar1 = (**(code **)(*a0 + 0x24))(a0);
         if (iVar1 == 0) break;
@@ -2021,6 +2024,7 @@ int FUN_0012aef0(param_1, param_2, param_3)
   undefined4 param_2;
   int param_3;
 {
+  undefined4 successor;
   int iVar1;
   undefined4 uVar2;
   int *piVar3;
@@ -2041,8 +2045,8 @@ int FUN_0012aef0(param_1, param_2, param_3)
         Block__appendInst(param_2,piVar4);
       }
     }
-    uVar2 = Block__getSuccessor(param_3,0);
-    Block__bypassAndDetach(param_3,param_2,uVar2);
+    successor = Block__getSuccessor(param_3,0);
+    Block__bypassAndDetach(param_3,param_2,successor);
     uVar2 = 1;
   }
   return uVar2;
@@ -2109,7 +2113,7 @@ int FUN_0012b140(param_1)
       param_1 = (int *)Block__getPredecessor(param_1,0);
     }
     else {
-      param_1 = (int *)FUN_000e7e90(param_1);
+      param_1 = (int *)Block__findSimplePredecessor(param_1);
     }
     while( true ) {
       while( true ) {
@@ -2126,7 +2130,7 @@ int FUN_0012b140(param_1)
       }
       iVar1 = (**(code **)(*param_1 + 0x34))(param_1);
       if (iVar1 == 0) break;
-      param_1 = (int *)FUN_000e7e90(param_1[0x4b]);
+      param_1 = (int *)Block__findSimplePredecessor(param_1[0x4b]);
     }
     iVar1 = *param_1;
   } while( true );

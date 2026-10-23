@@ -47,7 +47,7 @@
 12dd58	FUN_0012dd58	r6	PASS-indirect	GARBAGE	
 12dd58	FUN_0012dd58	r7	PASS-indirect	GARBAGE	
 12dd58	FUN_0012dd58	r8	PASS-indirect	GARBAGE	
-12df90	FUN_0012df90	r8	PASS-indirect	GARBAGE	
+12df90	Program__foldConstantIfRegion	r8	PASS-indirect	GARBAGE	
 1300b0	pass_remove_empty_graphs	r6	PASS-indirect	GARBAGE	
 1300b0	pass_remove_empty_graphs	r7	PASS-indirect	GARBAGE	
 1300b0	pass_remove_empty_graphs	r8	PASS-indirect	GARBAGE	
@@ -108,11 +108,11 @@
 169e30	Scheduler__markGlobalValues	r10	PASS-indirect	GARBAGE	
 16d538	Scheduler__tryReuseAddressRegister	r7	PASS-indirect	GARBAGE	
 16d538	Scheduler__tryReuseAddressRegister	r8	PASS-indirect	GARBAGE	
-173b98	FUN_00173b98	r7	PASS-indirect	GARBAGE	
-173b98	FUN_00173b98	r8	PASS-indirect	GARBAGE	
-173f1c	FUN_00173f1c	r5	PASS-indirect	GARBAGE	
-173f1c	FUN_00173f1c	r6	PASS-indirect	GARBAGE	
-173f1c	FUN_00173f1c	r7	PASS-indirect	GARBAGE	
+173b98	Program__eliminateRedundantInst	r7	PASS-indirect	GARBAGE	
+173b98	Program__eliminateRedundantInst	r8	PASS-indirect	GARBAGE	
+173f1c	ValueKey__fill	r5	PASS-indirect	GARBAGE	
+173f1c	ValueKey__fill	r6	PASS-indirect	GARBAGE	
+173f1c	ValueKey__fill	r7	PASS-indirect	GARBAGE	
 175b40	FUN_00175b40	r6	PASS-deep	GARBAGE	
 175b40	FUN_00175b40	r7	PASS-deep	GARBAGE	
 175b40	FUN_00175b40	r8	PASS-deep	GARBAGE	

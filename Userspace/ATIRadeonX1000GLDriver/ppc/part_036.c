@@ -3957,8 +3957,8 @@ int FUN_0011e6ec(param_1)
   return (*(unsigned short *)((unsigned char *)&(param_1) + 2));
 }
 
-/* FUN_0011e6f4 @ 0x11e6f4 (140 bytes) */
-int FUN_0011e6f4(inst)
+/* IRPhi__getUniqueSource @ 0x11e6f4 (140 bytes) */
+int IRPhi__getUniqueSource(inst)
   int inst;
 {
   int callResult;
@@ -3985,8 +3985,8 @@ LAB_0011e764:
   return iVar3;
 }
 
-/* FUN_0011e780 @ 0x11e780 (108 bytes) */
-int FUN_0011e780(inst)
+/* IRInst__allSourcesDefined @ 0x11e780 (108 bytes) */
+int IRInst__allSourcesDefined(inst)
   int inst;
 {
   int callResult;

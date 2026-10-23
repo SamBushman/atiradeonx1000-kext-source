@@ -198,7 +198,7 @@ int FUN_000e9adc(param_1, param_2, param_3)
     puVar3 = (undefined4 *)Vector__elementRefGrow(puVar4,uVar1);
   }
   *puVar3 = param_3;
-  uVar1 = FUN_000e803c(param_2,param_1);
+  uVar1 = Block__predecessorIndex(param_2,param_1);
   puVar4 = *(uint **)(param_2 + 0xd4);
   if (uVar1 < *puVar4) {
     uVar2 = puVar4[1];
@@ -216,8 +216,8 @@ int FUN_000e9adc(param_1, param_2, param_3)
   return FUN_000e8dd4(param_3,param_2);
 }
 
-/* FUN_000e9c00 @ 0xe9c00 (200 bytes) */
-int FUN_000e9c00(param_1, param_2, param_3)
+/* Block__recordDefinition @ 0xe9c00 (200 bytes) */
+int Block__recordDefinition(param_1, param_2, param_3)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -253,7 +253,7 @@ int FUN_000e9c00(param_1, param_2, param_3)
   }
   *piVar1 = param_2;
 LAB_000e9ca8:
-  return FUN_00123424(param_2,*(undefined4 *)(param_1 + 0xb0),param_3);
+  return VReg__pushDefinition(param_2,*(undefined4 *)(param_1 + 0xb0),param_3);
 }
 
 /* FUN_000e9cc8 @ 0xe9cc8 (160 bytes) */

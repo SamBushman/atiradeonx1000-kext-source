@@ -16,9 +16,9 @@
 10d4cc	FUN_0010d4cc	r7	PASS-deep	10d4f0 bl 0x105594
 10d4cc	FUN_0010d4cc	r8	PASS-deep	10d4f0 bl 0x105594
 10d4cc	FUN_0010d4cc	r9	PASS-deep	10d4f0 bl 0x105594
-11f2f8	FUN_0011f2f8	r6	PASS-no	11f31c bl 0xe07dc
-11f2f8	FUN_0011f2f8	r7	PASS-no	11f31c bl 0xe07dc
-11f2f8	FUN_0011f2f8	r8	PASS-no	11f31c bl 0xe07dc
+11f2f8	Program__tryEliminateRedundantCopy	r6	PASS-no	11f31c bl 0xe07dc
+11f2f8	Program__tryEliminateRedundantCopy	r7	PASS-no	11f31c bl 0xe07dc
+11f2f8	Program__tryEliminateRedundantCopy	r8	PASS-no	11f31c bl 0xe07dc
 120cd4	FUN_00120cd4	r6	PASS-deep	120cf8 bl 0xec4f0
 120cd4	FUN_00120cd4	r7	PASS-deep	120cf8 bl 0xec4f0
 120cd4	FUN_00120cd4	r8	PASS-deep	120cf8 bl 0xec4f0
@@ -54,7 +54,7 @@
 12dd58	FUN_0012dd58	r6	PASS-indirect	12dda4 bl 0x193e18
 12dd58	FUN_0012dd58	r7	PASS-indirect	12dda4 bl 0x193e18
 12dd58	FUN_0012dd58	r8	PASS-indirect	12dda4 bl 0x193e18
-12df90	FUN_0012df90	r8	PASS-indirect	12dffc bl 0x193e18
+12df90	Program__foldConstantIfRegion	r8	PASS-indirect	12dffc bl 0x193e18
 1300b0	pass_remove_empty_graphs	r6	PASS-indirect	1300f8 bctrl 
 1300b0	pass_remove_empty_graphs	r7	PASS-indirect	1300f8 bctrl 
 1300b0	pass_remove_empty_graphs	r8	PASS-indirect	1300f8 bctrl 
@@ -73,10 +73,10 @@
 13c210	FUN_0013c210	r8	PASS-no	13c234 bl 0xe07dc
 13c210	FUN_0013c210	r9	PASS-no	13c234 bl 0xe07dc
 13c210	FUN_0013c210	r10	PASS-no	13c234 bl 0xe07dc
-13caf4	FUN_0013caf4	r6	PASS-no	13cb18 bl 0xe9294
-13caf4	FUN_0013caf4	r7	PASS-no	13cb18 bl 0xe9294
-13caf4	FUN_0013caf4	r8	PASS-no	13cb18 bl 0xe9294
-13caf4	FUN_0013caf4	r9	PASS-no	13cb18 bl 0xe9294
+13caf4	IfHeader__convertInnerIfToCmov	r6	PASS-no	13cb18 bl 0xe9294
+13caf4	IfHeader__convertInnerIfToCmov	r7	PASS-no	13cb18 bl 0xe9294
+13caf4	IfHeader__convertInnerIfToCmov	r8	PASS-no	13cb18 bl 0xe9294
+13caf4	IfHeader__convertInnerIfToCmov	r9	PASS-no	13cb18 bl 0xe9294
 14694c	FUN_0014694c	r5	USED	14694c cmpwi cr7,r5,0x0
 147704	FUN_00147704	r7	PASS-deep	147724 bl 0x105594
 147704	FUN_00147704	r8	PASS-deep	147724 bl 0x105594
@@ -140,11 +140,11 @@
 171e68	Scheduler__run	r7	PASS-no	171e88 bl 0x1940a8
 171e68	Scheduler__run	r8	PASS-no	171e88 bl 0x1940a8
 171e68	Scheduler__run	r9	PASS-no	171e88 bl 0x1940a8
-173b98	FUN_00173b98	r7	PASS-indirect	173bd4 bl 0xe9c00
-173b98	FUN_00173b98	r8	PASS-indirect	173bd4 bl 0xe9c00
-173f1c	FUN_00173f1c	r5	PASS-indirect	173f50 bl 0x126760
-173f1c	FUN_00173f1c	r6	PASS-indirect	173f50 bl 0x126760
-173f1c	FUN_00173f1c	r7	PASS-indirect	173f50 bl 0x126760
+173b98	Program__eliminateRedundantInst	r7	PASS-indirect	173bd4 bl 0xe9c00
+173b98	Program__eliminateRedundantInst	r8	PASS-indirect	173bd4 bl 0xe9c00
+173f1c	ValueKey__fill	r5	PASS-indirect	173f50 bl 0x126760
+173f1c	ValueKey__fill	r6	PASS-indirect	173f50 bl 0x126760
+173f1c	ValueKey__fill	r7	PASS-indirect	173f50 bl 0x126760
 175b40	FUN_00175b40	r6	PASS-deep	175bd4 bl 0x19423c
 175b40	FUN_00175b40	r7	PASS-deep	175bd4 bl 0x19423c
 175b40	FUN_00175b40	r8	PASS-deep	175bd4 bl 0x19423c

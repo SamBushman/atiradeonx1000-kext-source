@@ -158,8 +158,8 @@ int orph_176e0c(param_1, param_2, param_3)
   int iVar3;
   
   uVar1 = *(undefined4 *)(param_1 + 0x238);
-  if ((((param_2 < 1) || (param_3 < 1)) || (iVar2 = FUN_00173330(uVar1,param_2), iVar2 == 0)) ||
-     ((iVar3 = FUN_00173330(uVar1,param_3), iVar3 == 0 ||
+  if ((((param_2 < 1) || (param_3 < 1)) || (iVar2 = Compiler__findInPtrSet(uVar1,param_2), iVar2 == 0)) ||
+     ((iVar3 = Compiler__findInPtrSet(uVar1,param_3), iVar3 == 0 ||
       (((*(int *)(iVar2 + 0x20) == 0 || (param_3 != *(int *)(iVar2 + 0x24))) &&
        ((*(int *)(iVar3 + 0x20) == 0 || (param_2 != *(int *)(iVar3 + 0x24))))))))) {
     uVar1 = 0;

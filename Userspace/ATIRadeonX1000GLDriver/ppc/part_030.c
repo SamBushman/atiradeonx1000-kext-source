@@ -697,8 +697,8 @@ undefined4 FUN_0010ab8c(undefined4 param_1,undefined4 *param_2,double fparam_1)
   return 1;
 }
 
-/* FUN_0010ac38 @ 0x10ac38 (304 bytes) */
-int FUN_0010ac38(param_1, param_2, param_3, param_4)
+/* IRInst__swapOperands @ 0x10ac38 (304 bytes) */
+int IRInst__swapOperands(param_1, param_2, param_3, param_4)
   int *param_1;
   int param_2;
   int param_3;
@@ -785,7 +785,7 @@ int FUN_0010ae20(param_1, param_2, param_3)
   int param_3;
 {
   int iVar1;
-  int iVar2;
+  int useCount;
   undefined4 uVar3;
   undefined4 uVar4;
   undefined4 local_48;
@@ -798,13 +798,13 @@ int FUN_0010ae20(param_1, param_2, param_3)
   IRInst__saveCounters(param_1,&local_48,0xffffffff);
   uVar3 = *(undefined4 *)(param_1 + 4);
   uVar4 = *(undefined4 *)(param_1 + 0x158);
-  iVar2 = IRInst__useCount(param_1,param_3);
+  useCount = IRInst__useCount(param_1,param_3);
   DList__unlink(param_1);
   FUN_00103f84(param_1,param_2);
   IRInst__restoreCounters(param_1,&local_48);
   iVar1 = *(int *)(param_3 + 0x478);
   *(undefined4 *)(param_1 + 0x94) = *(undefined4 *)(param_1 + 0x14c);
-  *(int *)(param_1 + 0x160) = iVar2 + iVar1;
+  *(int *)(param_1 + 0x160) = useCount + iVar1;
   *(undefined4 *)(param_1 + 0x98) = 0;
   Block__insertInstAfter(uVar4,uVar3,param_1);
   return (**(code **)(*param_2 + 0xc))(param_2,0,*(undefined4 *)(param_3 + 8));
@@ -830,6 +830,7 @@ int FUN_0010af38(param_1, param_2, param_3)
   int param_2;
   int param_3;
 {
+  int operandRecord;
   int iVar1;
   int *piVar2;
   undefined4 *allocation;
@@ -843,8 +844,8 @@ int FUN_0010af38(param_1, param_2, param_3)
   if (iVar1 != 0) {
     piVar2 = (int *)IRInst__clone(param_1,*(undefined4 *)(param_2 + 8),0);
     iVar5 = piVar2[0x53];
-    iVar1 = IRInst__getOperandRecord(piVar2,0);
-    *(int *)(iVar1 + 8) = iVar5;
+    operandRecord = IRInst__getOperandRecord(piVar2,0);
+    *(int *)(operandRecord + 8) = iVar5;
     Block__insertInstBefore(param_1[0x56],param_1,piVar2);
     piVar2[0x58] = *(int *)(param_2 + 0x478);
     if (param_3 != 0) {
@@ -1301,6 +1302,7 @@ int FUN_0010bc78(param_1, param_2)
   int *param_1;
   undefined4 param_2;
 {
+  int opcodeInfo;
   int iVar1;
   undefined4 uVar2;
   int iVar3;
@@ -1310,8 +1312,8 @@ int FUN_0010bc78(param_1, param_2)
   
   iVar1 = *(int *)(param_1[0x22] + 8);
   uVar2 = OpcodeTraits__getField4(iVar1,param_2);
-  iVar3 = Opcode__getInfo(uVar2);
-  param_1[0x22] = iVar3;
+  opcodeInfo = Opcode__getInfo(uVar2);
+  param_1[0x22] = opcodeInfo;
   iVar3 = (**(code **)(*param_1 + 0x14))(param_1);
   FUN_000f33f8(&local_28,param_1[0x2d]);
   param_1[0x2d] = local_28;
@@ -1332,6 +1334,7 @@ int FUN_0010bc78(param_1, param_2)
 /* FUN_0010bd50 @ 0x10bd50 (332 bytes) */
 void FUN_0010bd50(int inst,undefined4 param_2,int param_3,int compiler,double fparam_1)
 {
+  int operandRecord;
   int *piVar1;
   undefined4 *allocation;
   int iVar3;
@@ -1347,8 +1350,8 @@ void FUN_0010bd50(int inst,undefined4 param_2,int param_3,int compiler,double fp
     *(undefined4 *)(inst + 0x9c) = DAT_001af9fc;
   }
   else {
-    iVar3 = IRInst__getOperandRecord(inst,param_3);
-    *(undefined4 *)(iVar3 + 0x10) = arena;
+    operandRecord = IRInst__getOperandRecord(inst,param_3);
+    *(undefined4 *)(operandRecord + 0x10) = arena;
   }
   if ((*(uint *)(*(int *)(compiler + 0x6c4) + 0x30) & 8) == 0) {
     iVar3 = *(int *)(param_3 * 0x18 + inst + 0x8c);
@@ -1369,11 +1372,11 @@ void FUN_0010bd50(int inst,undefined4 param_2,int param_3,int compiler,double fp
       allocation = (undefined4 *)Arena__alloc(arena,0x240);
       puVar6 = allocation + 1;
       *allocation = arena;
-      FUN_00173938(puVar6,iVar5,compiler);
-      FUN_00173f1c(puVar6);
+      ValueKey__init(puVar6,iVar5,compiler);
+      ValueKey__fill(puVar6);
       FUN_00174e0c(puVar6);
-      FUN_00173278(puVar6);
-      FUN_00123424(iVar3,*(undefined4 *)(*(int *)(iVar5 + 0x158) + 0xb0),puVar6);
+      ValueKey__propagateLaneValues(puVar6);
+      VReg__pushDefinition(iVar3,*(undefined4 *)(*(int *)(iVar5 + 0x158) + 0xb0),puVar6);
     }
     IRInst__setOperandSource(inst,param_3,iVar5,0,compiler);
     return;
