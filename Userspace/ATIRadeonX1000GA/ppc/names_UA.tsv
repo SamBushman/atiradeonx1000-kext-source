@@ -364,26 +364,7 @@ local	_radeonSolidScanlines	local_1a0	scratchWord1	CONFIRMED	&local_1a0 is an _I
 local	_radeonSolidScanlines	pdVar39	cmdWrite	CONFIRMED	loaded from accel+0x80 and stored back there at the end: command-buffer write cursor
 local	_radeonSolidScanlines	uVar34	cmdWordsLeft	CONFIRMED	capacity minus words written; compared with each block size before a flush
 local	_radeonSolidScanlines	puVar6	taskPtr	INFERRED	PTR_0000e694: target task argument of _IOConnectMapMemory
-local	_radeonCopy	iVar10	idxPlus22Or10Block1	CONFIRMED	assigned base+22Or10 (command word index) on every path
 local	_radeonCopy	pdVar12	cmdPtrPlus36Or1Block2	CONFIRMED	assigned base+36Or1 (command word pointer) on every path
-local	_radeonCopy	iVar13	idxPlus1Or20Block1	CONFIRMED	assigned base+1Or20 (command word index) on every path
-local	_radeonCopy	iVar14	idxPlus6Or22Block1	CONFIRMED	assigned base+6Or22 (command word index) on every path
-local	_radeonCopy	iVar17	idxPlus2Or5Block1	CONFIRMED	assigned base+2Or5 (command word index) on every path
-local	_radeonCopy	iVar18	idxPlus8Or7Block1	CONFIRMED	assigned base+8Or7 (command word index) on every path
-local	_radeonCopy	iVar20	idxPlus7Or8Block1	CONFIRMED	assigned base+7Or8 (command word index) on every path
-local	_radeonCopy	iVar25	idxPlus4Or6Block1	CONFIRMED	assigned base+4Or6 (command word index) on every path
-local	_radeonCopy	iVar26	idxPlus9Block1	CONFIRMED	assigned base+9 (command word index) on every path
-local	_radeonCopy	iVar27	idxPlus10Or19Block1	CONFIRMED	assigned base+10Or19 (command word index) on every path
-local	_radeonCopy	iVar28	idxPlus11Block1	CONFIRMED	assigned base+11 (command word index) on every path
-local	_radeonCopy	iVar29	idxPlus12Block1	CONFIRMED	assigned base+12 (command word index) on every path
-local	_radeonCopy	iVar30	idxPlus13Block1	CONFIRMED	assigned base+13 (command word index) on every path
-local	_radeonCopy	iVar31	idxPlus14Block1	CONFIRMED	assigned base+14 (command word index) on every path
-local	_radeonCopy	iVar32	idxPlus15Block1	CONFIRMED	assigned base+15 (command word index) on every path
-local	_radeonCopy	iVar33	idxPlus16Block1	CONFIRMED	assigned base+16 (command word index) on every path
-local	_radeonCopy	iVar34	idxPlus17Block1	CONFIRMED	assigned base+17 (command word index) on every path
-local	_radeonCopy	iVar35	idxPlus18Block1	CONFIRMED	assigned base+18 (command word index) on every path
-local	_radeonCopy	iVar37	idxPlus19Block3	CONFIRMED	assigned base+19 (command word index) on every path
-local	_radeonCopy	iVar43	idxPlus3Block3	CONFIRMED	assigned base+3 (command word index) on every path
 local	_radeonCopy	uStack_198	i2dHi1	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
 local	_radeonCopy	uStack_194	i2dLo1	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
 local	_radeonCopy	local_190	i2dHi2	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
@@ -412,10 +393,6 @@ local	_radeonCopy	local_108	i2dHi9	CONFIRMED	constant 0x43300000: high word of t
 local	_radeonCopy	uStack_104	i2dLo9	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
 local	_radeonCopy	local_100	i2dHi10	CONFIRMED	constant 0x43300000: high word of the int->double conversion trick
 local	_radeonCopy	uStack_fc	i2dLo10	CONFIRMED	x ^ 0x80000000: low word of the int->double conversion trick
-local	_radeonCopy	local_f8	idxPlus4Block4	CONFIRMED	assigned base+4 (command word index) on every path
-local	_radeonCopy	local_f4	idxPlus3Block4	CONFIRMED	assigned base+3 (command word index) on every path
-local	_radeonCopy	local_f0	idxPlus2Block4	CONFIRMED	assigned base+2 (command word index) on every path
-local	_radeonCopy	local_ec	idxPlus1Block4	CONFIRMED	assigned base+1 (command word index) on every path
 local	FUN_000055a4	iVar21	idxPlus5Or22Or13Or20Or19Block1	CONFIRMED	assigned base+5Or22Or13Or20Or19 (command word index) on every path
 local	FUN_000055a4	iVar22	idxPlus7Or5Or22Or8Or20Block1	CONFIRMED	assigned base+7Or5Or22Or8Or20 (command word index) on every path
 local	FUN_000055a4	iVar24	idxPlus8Or7Or4Or1Block1	CONFIRMED	assigned base+8Or7Or4Or1 (command word index) on every path

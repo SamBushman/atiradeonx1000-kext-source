@@ -13,3 +13,43 @@ use	_radeonFill	local_160	fillQuadVtx2ScrVIdx	INFERRED	vertex 2 screen-texture v
 use	_radeonFill	local_148	fillQuadVtx1PosIdx	INFERRED	vertex 1 position (x|y<<16) word	#521	+158	all	none
 use	_radeonFill	local_154	fillQuadVtx1TexUIdx	INFERRED	vertex 1 pattern-texture u word	#522	+154	all	none
 use	_radeonFill	local_158	fillQuadVtx1TexVIdx	INFERRED	vertex 1 pattern-texture v word	#524	+156	all	none
+use	_radeonCopy	iVar13	pass1QuadRectTLIdx	INFERRED	word after the 0x10f8 register: packed left|top of the rect	#192	+62	all	none
+use	_radeonCopy	iVar17	pass1QuadRectBRRegIdx	INFERRED	the 0x10f9 register word (packed right|bottom follows)	#193	+62	all	none
+use	_radeonCopy	iVar10	pass1QuadPacketWordsIdx	INFERRED	total words of the setup + quad packet: subtracted from the words left and added to the write cursor	#194	+100	all	none
+use	_radeonCopy	iVar43	pass1QuadRectBRIdx	INFERRED	packed right|bottom of the rect, value of reg 0x10f9	#196	+60	all	none
+use	_radeonCopy	iVar25	pass1QuadDrawHeaderIdx	INFERRED	0xc00c3500 type-3 draw packet header	#197	+60	all	none
+use	_radeonCopy	iVar14	pass1QuadVtx0PosIdx	INFERRED	vertex 0 position (x|y<<16) word	#199	+70	all	none
+use	_radeonCopy	iVar20	pass1QuadVtx0UIdx	INFERRED	vertex 0 u texcoord word	#200	+71	all	none
+use	_radeonCopy	iVar18	pass1QuadVtx0VIdx	INFERRED	vertex 0 v texcoord word	#201	+72	all	none
+use	_radeonCopy	iVar26	pass1QuadVtx1PosIdx	INFERRED	vertex 1 position (x|y<<16) word	#202	+72	all	none
+use	_radeonCopy	iVar27	pass1QuadVtx1UIdx	INFERRED	vertex 1 u texcoord word	#203	+72	all	none
+use	_radeonCopy	iVar28	pass1QuadVtx1VIdx	INFERRED	vertex 1 v texcoord word	#204	+73	all	none
+use	_radeonCopy	iVar29	pass1QuadVtx2PosIdx	INFERRED	vertex 2 position (x|y<<16) word	#205	+73	all	none
+use	_radeonCopy	iVar30	pass1QuadVtx2UIdx	INFERRED	vertex 2 u texcoord word	#206	+74	all	none
+use	_radeonCopy	iVar31	pass1QuadVtx2VIdx	INFERRED	vertex 2 v texcoord word	#207	+74	all	none
+use	_radeonCopy	iVar32	pass1QuadVtx3PosIdx	INFERRED	vertex 3 position (x|y<<16) word	#208	+74	all	none
+use	_radeonCopy	iVar33	pass1QuadVtx3UIdx	INFERRED	vertex 3 u texcoord word	#209	+74	all	none
+use	_radeonCopy	iVar34	pass1QuadVtx3VIdx	INFERRED	vertex 3 v texcoord word	#210	+74	all	none
+use	_radeonCopy	iVar35	pass1QuadDrawRegIdx	INFERRED	0x1393 draw register word	#211	+74	all	none
+use	_radeonCopy	iVar37	pass1QuadDrawRegValueIdx	INFERRED	value written to reg 0x1393	#212	+74	all	none
+use	_radeonCopy	local_ec	pass2QuadRectTLIdx	INFERRED	word after the 0x10f8 register: packed left|top of the rect	#359	+60	all	none
+use	_radeonCopy	iVar26	pass2QuadVtx1PosIdx	INFERRED	vertex 1 position (x|y<<16) word	#360	+86	all	none
+use	_radeonCopy	local_f4	pass2QuadRectBRIdx	INFERRED	packed right|bottom of the rect, value of reg 0x10f9	#361	+60	all	none
+use	_radeonCopy	local_f8	pass2QuadDrawHeaderIdx	INFERRED	0xc00c3500 type-3 draw packet header	#362	+60	all	none
+use	_radeonCopy	iVar10	pass2QuadVtx1UIdx	INFERRED	vertex 1 u texcoord word	#363	+84	all	none
+use	_radeonCopy	local_f0	pass2QuadRectBRRegIdx	INFERRED	the 0x10f9 register word (packed right|bottom follows)	#364	+56	all	none
+use	_radeonCopy	iVar14	pass2QuadPacketWordsIdx	INFERRED	total words of the setup + quad packet: subtracted from the words left and added to the write cursor	#365	+97	all	none
+use	_radeonCopy	iVar17	pass2QuadVertexFormatIdx	INFERRED	0x4003d vertex-format word	#367	+56	all	none
+use	_radeonCopy	iVar25	pass2QuadVtx0PosIdx	INFERRED	vertex 0 position (x|y<<16) word	#368	+73	all	none
+use	_radeonCopy	iVar18	pass2QuadVtx0UIdx	INFERRED	vertex 0 u texcoord word	#369	+74	all	none
+use	_radeonCopy	iVar20	pass2QuadVtx0VIdx	INFERRED	vertex 0 v texcoord word	#370	+75	all	none
+use	_radeonCopy	iVar28	pass2QuadVtx1VIdx	INFERRED	vertex 1 v texcoord word	#371	+78	all	none
+use	_radeonCopy	iVar29	pass2QuadVtx2PosIdx	INFERRED	vertex 2 position (x|y<<16) word	#372	+78	all	none
+use	_radeonCopy	iVar30	pass2QuadVtx2UIdx	INFERRED	vertex 2 u texcoord word	#373	+79	all	none
+use	_radeonCopy	iVar31	pass2QuadVtx2VIdx	INFERRED	vertex 2 v texcoord word	#374	+79	all	none
+use	_radeonCopy	iVar32	pass2QuadVtx3PosIdx	INFERRED	vertex 3 position (x|y<<16) word	#375	+79	all	none
+use	_radeonCopy	iVar33	pass2QuadVtx3UIdx	INFERRED	vertex 3 u texcoord word	#376	+79	all	none
+use	_radeonCopy	iVar34	pass2QuadVtx3VIdx	INFERRED	vertex 3 v texcoord word	#377	+79	all	none
+use	_radeonCopy	iVar35	pass2QuadDrawRegIdx	INFERRED	0x1393 draw register word	#378	+79	all	none
+use	_radeonCopy	iVar27	pass2QuadDrawRegValueIdx	INFERRED	value written to reg 0x1393	#379	+79	all	none
+use	_radeonCopy	iVar13	pass2QuadFlushRegIdx	INFERRED	0x5c8 flush register word	#380	+79	all	none
