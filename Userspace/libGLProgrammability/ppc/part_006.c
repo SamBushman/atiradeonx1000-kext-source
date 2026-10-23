@@ -1924,103 +1924,103 @@ int yyparse(parseContext, scratchR4, scratchR5, scratchR6, scratchR7, scratchR8,
   int local_764;
   unsigned char * local_750 [4];
   unsigned char * local_740;
-  undefined4 local_720 [4];
-  unsigned char * local_710 [4];
-  undefined4 local_700 [4];
-  unsigned char * local_6f0 [4];
-  unsigned char * local_6e0 [4];
-  unsigned char * local_6d0 [4];
-  unsigned char * local_6c0 [4];
-  undefined4 local_6b0 [4];
-  unsigned char * local_6a0 [4];
-  undefined4 local_690 [4];
-  unsigned char * local_680 [4];
-  undefined4 local_670 [4];
+  undefined4 ctorAlloc1 [4];
+  unsigned char * destroyAlloc1 [4];
+  undefined4 destroyAlloc2 [4];
+  unsigned char * destroyAlloc3 [4];
+  unsigned char * destroyAlloc4 [4];
+  unsigned char * destroyAlloc5 [4];
+  unsigned char * destroyAlloc6 [4];
+  undefined4 ctorAlloc2 [4];
+  unsigned char * destroyAlloc7 [4];
+  undefined4 ctorAlloc3 [4];
+  unsigned char * destroyAlloc8 [4];
+  undefined4 ctorAlloc4 [4];
   unsigned char * local_660;
-  unsigned char * local_650 [4];
+  unsigned char * destroyAlloc9 [4];
   uint allocatorArg1;
   uint allocatorArg2;
   uint allocatorArg3;
-  unsigned char * local_610 [4];
-  unsigned char * local_600 [4];
-  unsigned char * local_5f0 [4];
-  unsigned char * local_5e0 [4];
-  unsigned char * local_5d0 [4];
-  unsigned char * local_5c0 [4];
-  unsigned char * local_5b0 [4];
-  unsigned char * local_5a0 [4];
-  unsigned char * local_590 [4];
-  unsigned char * local_580 [4];
-  unsigned char * local_570 [4];
-  unsigned char * local_560 [4];
-  unsigned char * local_550 [4];
-  unsigned char * local_540 [4];
-  unsigned char * local_530 [4];
-  unsigned char * local_520 [4];
-  unsigned char * local_510 [4];
-  unsigned char * local_500 [4];
-  unsigned char * local_4f0 [4];
-  unsigned char * local_4e0 [4];
-  unsigned char * local_4d0 [4];
-  unsigned char * local_4c0 [4];
-  unsigned char * local_4b0 [4];
-  unsigned char * local_4a0 [4];
-  unsigned char * local_490 [4];
-  unsigned char * local_480 [4];
-  unsigned char * local_470 [4];
-  unsigned char * local_460 [4];
-  unsigned char * local_450 [4];
-  unsigned char * local_440 [4];
-  unsigned char * local_430 [4];
-  unsigned char * local_420 [4];
-  unsigned char * local_410 [4];
-  unsigned char * local_400 [4];
-  unsigned char * local_3f0 [4];
-  unsigned char * local_3e0 [4];
-  unsigned char * local_3d0 [4];
-  unsigned char * local_3c0 [4];
-  unsigned char * local_3b0 [4];
-  unsigned char * local_3a0 [4];
-  unsigned char * local_390 [4];
-  unsigned char * local_380 [4];
-  unsigned char * local_370 [4];
-  unsigned char * local_360 [4];
-  unsigned char * local_350 [4];
-  unsigned char * local_340 [4];
-  unsigned char * local_330 [4];
+  unsigned char * destroyAlloc10 [4];
+  unsigned char * destroyAlloc11 [4];
+  unsigned char * destroyAlloc12 [4];
+  unsigned char * destroyAlloc13 [4];
+  unsigned char * destroyAlloc14 [4];
+  unsigned char * destroyAlloc15 [4];
+  unsigned char * destroyAlloc16 [4];
+  unsigned char * destroyAlloc17 [4];
+  unsigned char * destroyAlloc18 [4];
+  unsigned char * destroyAlloc19 [4];
+  unsigned char * destroyAlloc20 [4];
+  unsigned char * destroyAlloc21 [4];
+  unsigned char * destroyAlloc22 [4];
+  unsigned char * destroyAlloc23 [4];
+  unsigned char * destroyAlloc24 [4];
+  unsigned char * destroyAlloc25 [4];
+  unsigned char * destroyAlloc26 [4];
+  unsigned char * destroyAlloc27 [4];
+  unsigned char * destroyAlloc28 [4];
+  unsigned char * destroyAlloc29 [4];
+  unsigned char * destroyAlloc30 [4];
+  unsigned char * destroyAlloc31 [4];
+  unsigned char * destroyAlloc32 [4];
+  unsigned char * destroyAlloc33 [4];
+  unsigned char * destroyAlloc34 [4];
+  unsigned char * destroyAlloc35 [4];
+  unsigned char * destroyAlloc36 [4];
+  unsigned char * destroyAlloc37 [4];
+  unsigned char * destroyAlloc38 [4];
+  unsigned char * destroyAlloc39 [4];
+  unsigned char * destroyAlloc40 [4];
+  unsigned char * destroyAlloc41 [4];
+  unsigned char * destroyAlloc42 [4];
+  unsigned char * destroyAlloc43 [4];
+  unsigned char * destroyAlloc44 [4];
+  unsigned char * destroyAlloc45 [4];
+  unsigned char * destroyAlloc46 [4];
+  unsigned char * destroyAlloc47 [4];
+  unsigned char * destroyAlloc48 [4];
+  unsigned char * destroyAlloc49 [4];
+  unsigned char * destroyAlloc50 [4];
+  unsigned char * destroyAlloc51 [4];
+  unsigned char * destroyAlloc52 [4];
+  unsigned char * destroyAlloc53 [4];
+  unsigned char * destroyAlloc54 [4];
+  unsigned char * destroyAlloc55 [4];
+  unsigned char * destroyAlloc56 [4];
   int local_320 [4];
   unsigned char * local_310;
   int local_30c;
   unsigned char * local_308;
-  unsigned char * local_300 [4];
-  undefined4 local_2f0 [4];
-  unsigned char * local_2e0 [4];
-  undefined4 local_2d0 [4];
-  unsigned char * local_2c0 [4];
-  undefined4 local_2b0 [4];
+  unsigned char * destroyAlloc57 [4];
+  undefined4 ctorAlloc5 [4];
+  unsigned char * destroyAlloc58 [4];
+  undefined4 ctorAlloc6 [4];
+  unsigned char * destroyAlloc59 [4];
+  undefined4 ctorAlloc7 [4];
   uint allocatorArg4;
-  undefined4 local_290 [4];
-  undefined4 local_280 [4];
-  unsigned char * local_270 [4];
-  undefined4 local_260 [4];
-  undefined4 local_250 [4];
-  undefined4 local_240 [4];
-  unsigned char * local_230 [4];
-  undefined4 local_220 [4];
-  undefined4 local_210 [4];
-  unsigned char * local_200 [4];
-  unsigned char * local_1f0 [4];
+  undefined4 ctorAlloc8 [4];
+  undefined4 ctorAlloc9 [4];
+  unsigned char * destroyAlloc60 [4];
+  undefined4 ctorAlloc10 [4];
+  undefined4 ctorAlloc11 [4];
+  undefined4 ctorAlloc12 [4];
+  unsigned char * destroyAlloc61 [4];
+  undefined4 ctorAlloc13 [4];
+  undefined4 ctorAlloc14 [4];
+  unsigned char * destroyAlloc62 [4];
+  unsigned char * destroyAlloc63 [4];
   undefined4 local_1e0;
   int local_1dc;
   int *local_1d8;
-  undefined4 local_1d0 [4];
-  undefined4 local_1c0 [4];
-  undefined4 local_1b0 [4];
-  unsigned char * local_1a0 [4];
-  unsigned char * local_190 [4];
+  undefined4 destroyAlloc64 [4];
+  undefined4 ctorAlloc15 [4];
+  undefined4 ctorAlloc16 [4];
+  unsigned char * destroyAlloc65 [4];
+  unsigned char * destroyAlloc66 [4];
   undefined4 allocatorArg5;
   unsigned char * local_170;
-  undefined4 *local_160 [4];
+  undefined4 *destroyAlloc67 [4];
   unsigned char * local_150;
   unsigned char * local_140;
   unsigned char * local_130;
@@ -2030,11 +2030,11 @@ int yyparse(parseContext, scratchR4, scratchR5, scratchR6, scratchR7, scratchR8,
   undefined4 local_f0;
   int local_ec;
   int *local_e8;
-  undefined4 local_e0 [4];
-  undefined4 local_d0 [4];
-  unsigned char * local_c0 [4];
-  undefined4 local_b0 [4];
-  unsigned char * local_a0 [4];
+  undefined4 destroyAlloc68 [4];
+  undefined4 ctorAlloc17 [4];
+  unsigned char * destroyAlloc69 [4];
+  undefined4 ctorAlloc18 [4];
+  unsigned char * destroyAlloc70 [4];
   uint local_90;
   uint local_8c;
   int local_88;
@@ -2749,13 +2749,13 @@ LAB_97ba4bc0:
     cr0 = (pTVar7 == (unsigned char *)0x0) << 1;
     pTVar3 = (unsigned char *)0x0;
     if (pTVar7 != (unsigned char *)0x0) {
-      local_720[0] = GetGlobalPoolAllocator();
+      ctorAlloc1[0] = GetGlobalPoolAllocator();
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-                (pTVar7,pcVar62,(unsigned char *)local_720);
+                (pTVar7,pcVar62,(unsigned char *)ctorAlloc1);
       pTVar3 = pTVar7;
     }
     refCountPtr2 = (int *)(local_7ac + -4);
-    local_710[0] = local_7b0;
+    destroyAlloc1[0] = local_7b0;
     do {
       oldRefCount4 = *refCountPtr2;
       if (reservation != '\0') {
@@ -2767,11 +2767,11 @@ LAB_97ba4bc0:
     local_810 = pTVar3;
     if (oldRefCount4 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_7ac + -0xc),local_710);
+                ((unsigned char *)(local_7ac + -0xc),destroyAlloc1);
     }
     (**(code **)(*(unsigned char **)yyvalNode + 0x34))(yyvalNode,(unsigned char *)&local_820);
     pTVar31 = picBase2 + -0x610c;
-    local_700[0] = local_7c0;
+    destroyAlloc2[0] = local_7c0;
     refCountPtr2 = (int *)(local_7bc - 4);
     do {
       oldRefCount4 = *refCountPtr2;
@@ -2786,7 +2786,7 @@ LAB_97ba4bc0:
     pTVar32 = pTVar31;
     if (oldRefCount4 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_7bc - 0xc),local_700);
+                ((unsigned char *)(local_7bc - 0xc),destroyAlloc2);
       pTVar3 = yyvalNode;
     }
     break;
@@ -3034,7 +3034,7 @@ LAB_97ba50cc:
     (**(code **)(pTVar33 + 0x34))
               (yyvalNode,&local_7f0,uVar28,scratchR6,scratchR7,pTVar3,*(uint *)(local_7fc + -0xc));
     refCountPtr = local_7fc + -4;
-    local_6f0[0] = local_800;
+    destroyAlloc3[0] = local_800;
     paVar11 = (unsigned char *)(local_7fc + -0xc);
     do {
       oldRefCount = *(uint *)refCountPtr;
@@ -3045,7 +3045,7 @@ LAB_97ba50cc:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)oldRefCount;
-    ppTVar24 = local_6f0;
+    ppTVar24 = destroyAlloc3;
     local_7f0 = typeVtable2;
     goto LAB_97ba869c;
   case 0xb:
@@ -3069,7 +3069,7 @@ LAB_97ba50cc:
     TType__getCompleteString(scratchR6,*(uint *)(yyvsp + -0x24) + 8);
     TParseContext__unaryOpError(parseContext,*(uint *)yyvsp,"++",scratchR6);
     refCountPtr = local_84c + -4;
-    local_6e0[0] = local_850;
+    destroyAlloc4[0] = local_850;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -3079,7 +3079,7 @@ LAB_97ba50cc:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount2 < 1) {
-      ppTVar24 = local_6e0;
+      ppTVar24 = destroyAlloc4;
 LAB_97ba5844:
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(local_84c + -0xc),ppTVar24);
@@ -3106,7 +3106,7 @@ LAB_97ba5844:
     TType__getCompleteString(scratchR6,*(uint *)(yyvsp + -0x24) + 8);
     TParseContext__unaryOpError(parseContext,*(uint *)yyvsp,"--",scratchR6);
     refCountPtr = local_84c + -4;
-    local_6d0[0] = local_850;
+    destroyAlloc5[0] = local_850;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -3115,7 +3115,7 @@ LAB_97ba5844:
         cr0 = 2;
       }
     } while (!(bool)(cr0 >> 1 & 1));
-    ppTVar24 = local_6d0;
+    ppTVar24 = destroyAlloc5;
     if ((int)oldRefCount2 < 1) goto LAB_97ba5844;
 LAB_97ba5848:
     TParseContext__recover(parseContext);
@@ -3288,7 +3288,7 @@ switchD_97ba39c8_caseD_6:
                   ((int)parseContext,pcVar62," wrong operand type","Internal Error",
                    "built in unary operator function.  Type: %s",pTVar33,pTVar3,scratchR10);
         refCountPtr = local_84c + -4;
-        local_6c0[0] = local_850;
+        destroyAlloc6[0] = local_850;
         do {
           yyn = *(uint *)refCountPtr;
           if (reservation != '\0') {
@@ -3300,7 +3300,7 @@ switchD_97ba39c8_caseD_6:
         scratchR4 = r4Out9;
         if ((int)yyn < 1) {
           __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                    ((unsigned char *)(local_84c + -0xc),local_6c0);
+                    ((unsigned char *)(local_84c + -0xc),destroyAlloc6);
           scratchR4 = r4Out10;
         }
         goto LAB_97bac050;
@@ -3374,8 +3374,8 @@ LAB_97ba5e64:
       cr0 = (newString == (unsigned char *)0x0) << 1;
       psVar21 = (unsigned char *)0x0;
       if (newString != (unsigned char *)0x0) {
-        local_6b0[0] = GetGlobalPoolAllocator();
-        __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(newString,"",(unsigned char *)local_6b0)
+        ctorAlloc2[0] = GetGlobalPoolAllocator();
+        __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(newString,"",(unsigned char *)ctorAlloc2)
         ;
         psVar21 = newString;
       }
@@ -3389,7 +3389,7 @@ LAB_97ba5e64:
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_
               ((unsigned char *)(functionCallHeaderTypeOrFunction + 0x44),(unsigned char *)&local_840);
     refCountPtr = local_83c + -4;
-    local_6a0[0] = local_840;
+    destroyAlloc7[0] = local_840;
     do {
       oldRefCount = *(uint *)refCountPtr;
       if (reservation != '\0') {
@@ -3400,7 +3400,7 @@ LAB_97ba5e64:
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_83c + -0xc),local_6a0);
+                ((unsigned char *)(local_83c + -0xc),destroyAlloc7);
     }
     yyvalTypeOrFunction = *(unsigned char **)(yyvsp + -0x1c);
     pTVar3 = *(unsigned char **)(yyvsp + 8);
@@ -3439,8 +3439,8 @@ LAB_97ba5e64:
       cr0 = (newString == (unsigned char *)0x0) << 1;
       psVar21 = (unsigned char *)0x0;
       if (newString != (unsigned char *)0x0) {
-        local_690[0] = GetGlobalPoolAllocator();
-        __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(newString,"",(unsigned char *)local_690)
+        ctorAlloc3[0] = GetGlobalPoolAllocator();
+        __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(newString,"",(unsigned char *)ctorAlloc3)
         ;
         psVar21 = newString;
       }
@@ -3454,7 +3454,7 @@ LAB_97ba5e64:
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_
               ((unsigned char *)(functionCallHeaderWithParametersTypeOrFunction + 0x44),(unsigned char *)&local_840);
     refCountPtr = local_83c + -4;
-    local_680[0] = local_840;
+    destroyAlloc8[0] = local_840;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -3465,7 +3465,7 @@ LAB_97ba5e64:
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_83c + -0xc),local_680);
+                ((unsigned char *)(local_83c + -0xc),destroyAlloc8);
     }
     yyvalTypeOrFunction = *(unsigned char **)(yyvsp + -0x48);
     pTVar15 = *(unsigned char **)parseContext;
@@ -3527,9 +3527,9 @@ LAB_97ba97d8:
       pTVar32 = local_750[0];
       break;
     }
-    local_670[0] = GetGlobalPoolAllocator();
+    ctorAlloc4[0] = GetGlobalPoolAllocator();
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-              ((unsigned char *)&local_850,"",(unsigned char *)local_670);
+              ((unsigned char *)&local_850,"",(unsigned char *)ctorAlloc4);
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     newFunction = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x54);
     constructorIdentifierUserDef = *(uint *)(yyvsp + 0x24);
@@ -3579,7 +3579,7 @@ LAB_97ba97d8:
     *(unsigned char **)(newFunction + 0x4c) = constructorIdentifierOp2;
     *(unsigned char **)(newFunction + 0x50) = (unsigned char *)0x0;
     refCountPtr = local_84c + -4;
-    local_650[0] = local_850;
+    destroyAlloc9[0] = local_850;
     paVar11 = (unsigned char *)(local_84c + -0xc);
     do {
       oldRefCount3 = *(unsigned char **)refCountPtr;
@@ -3590,7 +3590,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)oldRefCount3;
-    ppTVar24 = local_650;
+    ppTVar24 = destroyAlloc9;
     yyvalTypeOrFunction = newFunction;
     goto LAB_97ba869c;
   case 0x17:
@@ -3857,7 +3857,7 @@ LAB_97ba97d8:
     TParseContext__unaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"++",scratchR6);
     refCountPtr = local_84c + -4;
     paVar11 = (unsigned char *)(local_84c + -0xc);
-    local_610[0] = local_850;
+    destroyAlloc10[0] = local_850;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -3867,7 +3867,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)oldRefCount2;
-    ppTVar24 = local_610;
+    ppTVar24 = destroyAlloc10;
     goto LAB_97ba82d4;
   case 0x2a:
     lValueError = TParseContext__lValueErrorCheck
@@ -3891,7 +3891,7 @@ LAB_97ba97d8:
     TParseContext__unaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"--",scratchR6);
     refCountPtr = local_84c + -4;
     paVar11 = (unsigned char *)(local_84c + -0xc);
-    local_600[0] = local_850;
+    destroyAlloc11[0] = local_850;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -3901,7 +3901,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount2 < 1) {
-      ppTVar24 = local_600;
+      ppTVar24 = destroyAlloc11;
       goto LAB_97ba69a8;
     }
     goto LAB_97ba82f0;
@@ -3935,7 +3935,7 @@ LAB_97ba97d8:
     TParseContext__unaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),pcVar62,scratchR6);
     refCountPtr = local_84c + -4;
     paVar11 = (unsigned char *)(local_84c + -0xc);
-    local_5f0[0] = local_850;
+    destroyAlloc12[0] = local_850;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -3945,7 +3945,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)oldRefCount2;
-    ppTVar24 = local_5f0;
+    ppTVar24 = destroyAlloc12;
     goto LAB_97ba82d4;
   case 0x2c:
     yyval = *(uint *)yyvsp;
@@ -3997,7 +3997,7 @@ LAB_97ba97d8:
     TType__getCompleteString(scratchR6,*(uint *)(yyvsp + -0x50) + 8);
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"*",scratchR6,scratchR7);
     refCountPtr = local_83c + -4;
-    local_5e0[0] = local_840;
+    destroyAlloc13[0] = local_840;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -4008,11 +4008,11 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_83c + -0xc),local_5e0);
+                ((unsigned char *)(local_83c + -0xc),destroyAlloc13);
     }
     refCountPtr = local_84c + -4;
     paVar11 = (unsigned char *)(local_84c + -0xc);
-    local_5d0[0] = local_850;
+    destroyAlloc14[0] = local_850;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -4022,7 +4022,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)oldRefCount2;
-    ppTVar24 = local_5d0;
+    ppTVar24 = destroyAlloc14;
     goto LAB_97ba7a00;
   case 0x32:
     if (1 < *(uint *)((int)parseContext + 0xc)) {
@@ -4047,7 +4047,7 @@ LAB_97ba97d8:
     TType__getCompleteString(scratchR6,*(uint *)(yyvsp + -0x50) + 8);
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"/",scratchR6,scratchR7);
     refCountPtr = local_83c + -4;
-    local_5c0[0] = local_840;
+    destroyAlloc15[0] = local_840;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -4058,11 +4058,11 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_83c + -0xc),local_5c0);
+                ((unsigned char *)(local_83c + -0xc),destroyAlloc15);
     }
     refCountPtr = local_84c + -4;
     paVar11 = (unsigned char *)(local_84c + -0xc);
-    local_5b0[0] = local_850;
+    destroyAlloc16[0] = local_850;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -4072,7 +4072,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)oldRefCount2;
-    ppTVar24 = local_5b0;
+    ppTVar24 = destroyAlloc16;
     goto LAB_97ba7a00;
   case 0x33:
     if (1 < *(int *)((int)parseContext + 0xc) - 2U) {
@@ -4097,7 +4097,7 @@ LAB_97ba97d8:
     TType__getCompleteString(scratchR6,*(uint *)(yyvsp + -0x50) + 8);
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"%",scratchR6,scratchR7);
     refCountPtr = local_83c + -4;
-    local_5a0[0] = local_840;
+    destroyAlloc17[0] = local_840;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -4108,11 +4108,11 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_83c + -0xc),local_5a0);
+                ((unsigned char *)(local_83c + -0xc),destroyAlloc17);
     }
     refCountPtr = local_84c + -4;
     paVar11 = (unsigned char *)(local_84c + -0xc);
-    local_590[0] = local_850;
+    destroyAlloc18[0] = local_850;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -4122,7 +4122,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)oldRefCount2;
-    ppTVar24 = local_590;
+    ppTVar24 = destroyAlloc18;
     goto LAB_97ba7a00;
   case 0x35:
     scratchR6 = *(char **)(yyvsp + 8);
@@ -4141,7 +4141,7 @@ LAB_97ba97d8:
     TType__getCompleteString(scratchR6,*(uint *)(yyvsp + -0x50) + 8);
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"+",scratchR6,scratchR7);
     refCountPtr = local_83c + -4;
-    local_580[0] = local_840;
+    destroyAlloc19[0] = local_840;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -4152,11 +4152,11 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_83c + -0xc),local_580);
+                ((unsigned char *)(local_83c + -0xc),destroyAlloc19);
     }
     refCountPtr = local_84c + -4;
     paVar11 = (unsigned char *)(local_84c + -0xc);
-    local_570[0] = local_850;
+    destroyAlloc20[0] = local_850;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -4166,7 +4166,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)oldRefCount2;
-    ppTVar24 = local_570;
+    ppTVar24 = destroyAlloc20;
     goto LAB_97ba7a00;
   case 0x36:
     scratchR6 = *(char **)(yyvsp + 8);
@@ -4185,7 +4185,7 @@ LAB_97ba97d8:
     TType__getCompleteString(scratchR6,*(uint *)(yyvsp + -0x50) + 8);
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"-",scratchR6,scratchR7);
     refCountPtr = local_83c + -4;
-    local_560[0] = local_840;
+    destroyAlloc21[0] = local_840;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -4196,11 +4196,11 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_83c + -0xc),local_560);
+                ((unsigned char *)(local_83c + -0xc),destroyAlloc21);
     }
     refCountPtr = local_84c + -4;
     paVar11 = (unsigned char *)(local_84c + -0xc);
-    local_550[0] = local_850;
+    destroyAlloc22[0] = local_850;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -4210,7 +4210,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)oldRefCount2;
-    ppTVar24 = local_550;
+    ppTVar24 = destroyAlloc22;
     goto LAB_97ba7a00;
   case 0x38:
     if (1 < *(int *)((int)parseContext + 0xc) - 2U) {
@@ -4235,7 +4235,7 @@ LAB_97ba97d8:
     TType__getCompleteString(scratchR6,*(uint *)(yyvsp + -0x50) + 8);
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"<<",scratchR6,scratchR7);
     refCountPtr = local_83c + -4;
-    local_540[0] = local_840;
+    destroyAlloc23[0] = local_840;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -4246,11 +4246,11 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_83c + -0xc),local_540);
+                ((unsigned char *)(local_83c + -0xc),destroyAlloc23);
     }
     refCountPtr = local_84c + -4;
     paVar11 = (unsigned char *)(local_84c + -0xc);
-    local_530[0] = local_850;
+    destroyAlloc24[0] = local_850;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -4260,7 +4260,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)oldRefCount2;
-    ppTVar24 = local_530;
+    ppTVar24 = destroyAlloc24;
     goto LAB_97ba7a00;
   case 0x39:
     if (1 < *(int *)((int)parseContext + 0xc) - 2U) {
@@ -4285,7 +4285,7 @@ LAB_97ba97d8:
     TType__getCompleteString(scratchR6,*(uint *)(yyvsp + -0x50) + 8);
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),">>",scratchR6,scratchR7);
     refCountPtr = local_83c + -4;
-    local_520[0] = local_840;
+    destroyAlloc25[0] = local_840;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -4296,11 +4296,11 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_83c + -0xc),local_520);
+                ((unsigned char *)(local_83c + -0xc),destroyAlloc25);
     }
     refCountPtr = local_84c + -4;
     paVar11 = (unsigned char *)(local_84c + -0xc);
-    local_510[0] = local_850;
+    destroyAlloc26[0] = local_850;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -4310,7 +4310,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)oldRefCount2;
-    ppTVar24 = local_510;
+    ppTVar24 = destroyAlloc26;
     goto LAB_97ba7a00;
   case 0x3b:
     scratchR6 = *(char **)(yyvsp + 8);
@@ -4328,7 +4328,7 @@ LAB_97ba97d8:
     TType__getCompleteString(&local_840,*(uint *)(yyvsp + -0x50) + 8);
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"<",&local_840,scratchR7);
     refCountPtr = local_83c + -4;
-    local_500[0] = local_840;
+    destroyAlloc27[0] = local_840;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -4339,11 +4339,11 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_83c + -0xc),local_500);
+                ((unsigned char *)(local_83c + -0xc),destroyAlloc27);
     }
     refCountPtr = local_84c + -4;
     paVar11 = (unsigned char *)(local_84c + -0xc);
-    local_4f0[0] = local_850;
+    destroyAlloc28[0] = local_850;
     do {
       oldRefCount = *(uint *)refCountPtr;
       if (reservation != '\0') {
@@ -4353,7 +4353,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)oldRefCount;
-    ppTVar24 = local_4f0;
+    ppTVar24 = destroyAlloc28;
     goto LAB_97ba7bac;
   case 0x3c:
     scratchR6 = *(char **)(yyvsp + 8);
@@ -4371,7 +4371,7 @@ LAB_97ba97d8:
     TType__getCompleteString(&local_840,*(uint *)(yyvsp + -0x50) + 8);
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),">",&local_840,scratchR7);
     refCountPtr = local_83c + -4;
-    local_4e0[0] = local_840;
+    destroyAlloc29[0] = local_840;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -4382,11 +4382,11 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_83c + -0xc),local_4e0);
+                ((unsigned char *)(local_83c + -0xc),destroyAlloc29);
     }
     refCountPtr = local_84c + -4;
     paVar11 = (unsigned char *)(local_84c + -0xc);
-    local_4d0[0] = local_850;
+    destroyAlloc30[0] = local_850;
     do {
       oldRefCount = *(uint *)refCountPtr;
       if (reservation != '\0') {
@@ -4396,7 +4396,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)oldRefCount;
-    ppTVar24 = local_4d0;
+    ppTVar24 = destroyAlloc30;
     goto LAB_97ba7bac;
   case 0x3d:
     scratchR6 = *(char **)(yyvsp + 8);
@@ -4414,7 +4414,7 @@ LAB_97ba97d8:
     TType__getCompleteString(&local_840,*(uint *)(yyvsp + -0x50) + 8);
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"<=",&local_840,scratchR7);
     refCountPtr = local_83c + -4;
-    local_4c0[0] = local_840;
+    destroyAlloc31[0] = local_840;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -4425,11 +4425,11 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_83c + -0xc),local_4c0);
+                ((unsigned char *)(local_83c + -0xc),destroyAlloc31);
     }
     refCountPtr = local_84c + -4;
     paVar11 = (unsigned char *)(local_84c + -0xc);
-    local_4b0[0] = local_850;
+    destroyAlloc32[0] = local_850;
     do {
       oldRefCount = *(uint *)refCountPtr;
       if (reservation != '\0') {
@@ -4439,7 +4439,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)oldRefCount;
-    ppTVar24 = local_4b0;
+    ppTVar24 = destroyAlloc32;
     goto LAB_97ba7bac;
   case 0x3e:
     scratchR6 = *(char **)(yyvsp + 8);
@@ -4457,7 +4457,7 @@ LAB_97ba97d8:
     TType__getCompleteString(&local_840,*(uint *)(yyvsp + -0x50) + 8);
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),">=",&local_840,scratchR7);
     refCountPtr = local_83c + -4;
-    local_4a0[0] = local_840;
+    destroyAlloc33[0] = local_840;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -4468,11 +4468,11 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_83c + -0xc),local_4a0);
+                ((unsigned char *)(local_83c + -0xc),destroyAlloc33);
     }
     refCountPtr = local_84c + -4;
     paVar11 = (unsigned char *)(local_84c + -0xc);
-    local_490[0] = local_850;
+    destroyAlloc34[0] = local_850;
     do {
       oldRefCount = *(uint *)refCountPtr;
       if (reservation != '\0') {
@@ -4482,7 +4482,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)oldRefCount;
-    ppTVar24 = local_490;
+    ppTVar24 = destroyAlloc34;
     goto LAB_97ba7bac;
   case 0x40:
     scratchR6 = *(char **)(yyvsp + 8);
@@ -4500,7 +4500,7 @@ LAB_97ba97d8:
     TType__getCompleteString(&local_840,*(uint *)(yyvsp + -0x50) + 8);
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"==",&local_840,scratchR7);
     refCountPtr = local_83c + -4;
-    local_480[0] = local_840;
+    destroyAlloc35[0] = local_840;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -4511,11 +4511,11 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_83c + -0xc),local_480);
+                ((unsigned char *)(local_83c + -0xc),destroyAlloc35);
     }
     refCountPtr = local_84c + -4;
     paVar11 = (unsigned char *)(local_84c + -0xc);
-    local_470[0] = local_850;
+    destroyAlloc36[0] = local_850;
     do {
       oldRefCount = *(uint *)refCountPtr;
       if (reservation != '\0') {
@@ -4525,7 +4525,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)oldRefCount;
-    ppTVar24 = local_470;
+    ppTVar24 = destroyAlloc36;
     goto LAB_97ba7bac;
   case 0x41:
     scratchR6 = *(char **)(yyvsp + 8);
@@ -4543,7 +4543,7 @@ LAB_97ba97d8:
     TType__getCompleteString(&local_840,*(uint *)(yyvsp + -0x50) + 8);
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"!=",&local_840,scratchR7);
     refCountPtr = local_83c + -4;
-    local_460[0] = local_840;
+    destroyAlloc37[0] = local_840;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -4554,11 +4554,11 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_83c + -0xc),local_460);
+                ((unsigned char *)(local_83c + -0xc),destroyAlloc37);
     }
     refCountPtr = local_84c + -4;
     paVar11 = (unsigned char *)(local_84c + -0xc);
-    local_450[0] = local_850;
+    destroyAlloc38[0] = local_850;
     do {
       oldRefCount = *(uint *)refCountPtr;
       if (reservation != '\0') {
@@ -4568,7 +4568,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)oldRefCount;
-    ppTVar24 = local_450;
+    ppTVar24 = destroyAlloc38;
     goto LAB_97ba7bac;
   case 0x43:
     if (1 < *(int *)((int)parseContext + 0xc) - 2U) {
@@ -4593,7 +4593,7 @@ LAB_97ba97d8:
     TType__getCompleteString(scratchR6,*(uint *)(yyvsp + -0x50) + 8);
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"&",scratchR6,scratchR7);
     refCountPtr = local_83c + -4;
-    local_440[0] = local_840;
+    destroyAlloc39[0] = local_840;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -4604,11 +4604,11 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_83c + -0xc),local_440);
+                ((unsigned char *)(local_83c + -0xc),destroyAlloc39);
     }
     refCountPtr = local_84c + -4;
     paVar11 = (unsigned char *)(local_84c + -0xc);
-    local_430[0] = local_850;
+    destroyAlloc40[0] = local_850;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -4618,7 +4618,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)oldRefCount2;
-    ppTVar24 = local_430;
+    ppTVar24 = destroyAlloc40;
     goto LAB_97ba7a00;
   case 0x45:
     if (1 < *(int *)((int)parseContext + 0xc) - 2U) {
@@ -4643,7 +4643,7 @@ LAB_97ba97d8:
     TType__getCompleteString(scratchR6,*(uint *)(yyvsp + -0x50) + 8);
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"^",scratchR6,scratchR7);
     refCountPtr = local_83c + -4;
-    local_420[0] = local_840;
+    destroyAlloc41[0] = local_840;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -4654,11 +4654,11 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_83c + -0xc),local_420);
+                ((unsigned char *)(local_83c + -0xc),destroyAlloc41);
     }
     refCountPtr = local_84c + -4;
     paVar11 = (unsigned char *)(local_84c + -0xc);
-    local_410[0] = local_850;
+    destroyAlloc42[0] = local_850;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -4668,7 +4668,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)oldRefCount2;
-    ppTVar24 = local_410;
+    ppTVar24 = destroyAlloc42;
     goto LAB_97ba7a00;
   case 0x47:
     if (1 < *(int *)((int)parseContext + 0xc) - 2U) {
@@ -4693,7 +4693,7 @@ LAB_97ba97d8:
     TType__getCompleteString(scratchR6,*(uint *)(yyvsp + -0x50) + 8);
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"|",scratchR6,scratchR7);
     refCountPtr = local_83c + -4;
-    local_400[0] = local_840;
+    destroyAlloc43[0] = local_840;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -4704,11 +4704,11 @@ LAB_97ba97d8:
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_83c + -0xc),local_400);
+                ((unsigned char *)(local_83c + -0xc),destroyAlloc43);
     }
     refCountPtr = local_84c + -4;
     paVar11 = (unsigned char *)(local_84c + -0xc);
-    local_3f0[0] = local_850;
+    destroyAlloc44[0] = local_850;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -4718,7 +4718,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)oldRefCount2;
-    ppTVar24 = local_3f0;
+    ppTVar24 = destroyAlloc44;
 LAB_97ba7a00:
     if (!bVar37) {
 LAB_97ba7f84:
@@ -4746,7 +4746,7 @@ LAB_97ba5554:
     TType__getCompleteString(&local_840,*(uint *)(yyvsp + -0x50) + 8);
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"&&",&local_840,scratchR7);
     refCountPtr = local_83c + -4;
-    local_3e0[0] = local_840;
+    destroyAlloc45[0] = local_840;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -4757,11 +4757,11 @@ LAB_97ba5554:
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_83c + -0xc),local_3e0);
+                ((unsigned char *)(local_83c + -0xc),destroyAlloc45);
     }
     refCountPtr = local_84c + -4;
     paVar11 = (unsigned char *)(local_84c + -0xc);
-    local_3d0[0] = local_850;
+    destroyAlloc46[0] = local_850;
     do {
       oldRefCount = *(uint *)refCountPtr;
       if (reservation != '\0') {
@@ -4771,7 +4771,7 @@ LAB_97ba5554:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)oldRefCount;
-    ppTVar24 = local_3d0;
+    ppTVar24 = destroyAlloc46;
     goto LAB_97ba7bac;
   case 0x4b:
     scratchR6 = *(char **)(yyvsp + 8);
@@ -4789,7 +4789,7 @@ LAB_97ba5554:
     TType__getCompleteString(&local_840,*(uint *)(yyvsp + -0x50) + 8);
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"^^",&local_840,scratchR7);
     refCountPtr = local_83c + -4;
-    local_3c0[0] = local_840;
+    destroyAlloc47[0] = local_840;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -4800,11 +4800,11 @@ LAB_97ba5554:
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_83c + -0xc),local_3c0);
+                ((unsigned char *)(local_83c + -0xc),destroyAlloc47);
     }
     refCountPtr = local_84c + -4;
     paVar11 = (unsigned char *)(local_84c + -0xc);
-    local_3b0[0] = local_850;
+    destroyAlloc48[0] = local_850;
     do {
       oldRefCount = *(uint *)refCountPtr;
       if (reservation != '\0') {
@@ -4814,7 +4814,7 @@ LAB_97ba5554:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)oldRefCount;
-    ppTVar24 = local_3b0;
+    ppTVar24 = destroyAlloc48;
 LAB_97ba7bac:
     if (!bVar37) {
 LAB_97ba7c88:
@@ -4862,7 +4862,7 @@ LAB_97ba7d0c:
     TType__getCompleteString(&local_840,*(uint *)(yyvsp + -0x50) + 8);
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),"||",&local_840,scratchR7);
     refCountPtr = local_83c + -4;
-    local_3a0[0] = local_840;
+    destroyAlloc49[0] = local_840;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -4873,11 +4873,11 @@ LAB_97ba7d0c:
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_83c + -0xc),local_3a0);
+                ((unsigned char *)(local_83c + -0xc),destroyAlloc49);
     }
     refCountPtr = local_84c + -4;
     paVar11 = (unsigned char *)(local_84c + -0xc);
-    local_390[0] = local_850;
+    destroyAlloc50[0] = local_850;
     do {
       oldRefCount = *(uint *)refCountPtr;
       if (reservation != '\0') {
@@ -4887,7 +4887,7 @@ LAB_97ba7d0c:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount < 1) {
-      ppTVar24 = local_390;
+      ppTVar24 = destroyAlloc50;
       goto LAB_97ba7c88;
     }
     goto LAB_97ba7c8c;
@@ -4928,7 +4928,7 @@ LAB_97ba7d0c:
     TType__getCompleteString(scratchR6,*(uint *)(yyvsp + -0x50) + 8);
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x84),":",scratchR6,pTVar7);
     refCountPtr = local_83c + -4;
-    local_380[0] = local_840;
+    destroyAlloc51[0] = local_840;
     do {
       oldRefCount3 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -4939,11 +4939,11 @@ LAB_97ba7d0c:
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount3 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_83c + -0xc),local_380);
+                ((unsigned char *)(local_83c + -0xc),destroyAlloc51);
     }
     refCountPtr = local_84c + -4;
     paVar11 = (unsigned char *)(local_84c + -0xc);
-    local_370[0] = local_850;
+    destroyAlloc52[0] = local_850;
     do {
       oldRefCount3 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -4953,7 +4953,7 @@ LAB_97ba7d0c:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)oldRefCount3;
-    ppTVar24 = local_370;
+    ppTVar24 = destroyAlloc52;
     scratchR7 = (char *)pTVar7;
     goto LAB_97ba82d4;
   case 0x51:
@@ -4979,7 +4979,7 @@ LAB_97ba7d0c:
     TType__getCompleteString(scratchR6,*(uint *)(yyvsp + -0x50) + 8);
     TParseContext__assignError(parseContext,*(uint *)(yyvsp + -0x2c),"assign",scratchR6,scratchR7);
     refCountPtr = local_83c + -4;
-    local_360[0] = local_840;
+    destroyAlloc53[0] = local_840;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -4990,11 +4990,11 @@ LAB_97ba7d0c:
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_83c + -0xc),local_360);
+                ((unsigned char *)(local_83c + -0xc),destroyAlloc53);
     }
     refCountPtr = local_84c + -4;
     paVar11 = (unsigned char *)(local_84c + -0xc);
-    local_350[0] = local_850;
+    destroyAlloc54[0] = local_850;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -5004,7 +5004,7 @@ LAB_97ba7d0c:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     if (0 < (int)oldRefCount2) goto LAB_97ba5554;
-    ppTVar24 = local_350;
+    ppTVar24 = destroyAlloc54;
     goto LAB_97ba7f84;
   case 0x52:
     yyval = *(uint *)yyvsp;
@@ -5154,7 +5154,7 @@ LAB_97ba7d0c:
     TType__getCompleteString(scratchR6,*(uint *)(yyvsp + -0x50) + 8);
     TParseContext__binaryOpError(parseContext,*(uint *)(yyvsp + -0x2c),",",scratchR6,scratchR7);
     refCountPtr = local_83c + -4;
-    local_340[0] = local_840;
+    destroyAlloc55[0] = local_840;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -5165,11 +5165,11 @@ LAB_97ba7d0c:
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_83c + -0xc),local_340);
+                ((unsigned char *)(local_83c + -0xc),destroyAlloc55);
     }
     refCountPtr = local_84c + -4;
     paVar11 = (unsigned char *)(local_84c + -0xc);
-    local_330[0] = local_850;
+    destroyAlloc56[0] = local_850;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -5179,7 +5179,7 @@ LAB_97ba7d0c:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)oldRefCount2;
-    ppTVar24 = local_330;
+    ppTVar24 = destroyAlloc56;
 LAB_97ba82d4:
     if (!bVar37) {
 LAB_97ba69a8:
@@ -5264,8 +5264,8 @@ LAB_97ba86ec:
       cr0 = (newString == (unsigned char *)0x0) << 1;
       psVar21 = (unsigned char *)0x0;
       if (newString != (unsigned char *)0x0) {
-        local_2f0[0] = GetGlobalPoolAllocator();
-        __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(newString,"",(unsigned char *)local_2f0)
+        ctorAlloc5[0] = GetGlobalPoolAllocator();
+        __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(newString,"",(unsigned char *)ctorAlloc5)
         ;
         psVar21 = newString;
       }
@@ -5280,7 +5280,7 @@ LAB_97ba86ec:
               ((unsigned char *)(uVar57 + 0x44),(unsigned char *)&local_850);
     refCountPtr = local_84c + -4;
     paVar11 = (unsigned char *)(local_84c + -0xc);
-    local_2e0[0] = local_850;
+    destroyAlloc58[0] = local_850;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -5290,7 +5290,7 @@ LAB_97ba86ec:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     bVar37 = 0 < (int)oldRefCount2;
-    ppTVar24 = local_2e0;
+    ppTVar24 = destroyAlloc58;
 LAB_97ba869c:
     pTVar3 = yyvalNode;
     pTVar31 = local_7f0;
@@ -5341,8 +5341,8 @@ LAB_97ba8824:
       cr0 = (newString == (unsigned char *)0x0) << 1;
       psVar21 = (unsigned char *)0x0;
       if (newString != (unsigned char *)0x0) {
-        local_2d0[0] = GetGlobalPoolAllocator();
-        __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(newString,"",(unsigned char *)local_2d0)
+        ctorAlloc6[0] = GetGlobalPoolAllocator();
+        __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(newString,"",(unsigned char *)ctorAlloc6)
         ;
         psVar21 = newString;
       }
@@ -5357,7 +5357,7 @@ LAB_97ba8824:
               ((unsigned char *)(functionHeaderWithParametersTypeOrFunction + 0x44),(unsigned char *)&local_850);
     refCountPtr = local_84c + -4;
     paVar11 = (unsigned char *)(local_84c + -0xc);
-    local_2c0[0] = local_850;
+    destroyAlloc59[0] = local_850;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -5370,7 +5370,7 @@ LAB_97ba8824:
     pTVar31 = local_7f0;
     pTVar32 = local_750[0];
     if (0 < (int)oldRefCount2) break;
-    ppTVar24 = local_2c0;
+    ppTVar24 = destroyAlloc59;
     goto LAB_97ba8824;
   case 0x67:
     if (1 < *(uint *)(yyvsp + -0x44)) {
@@ -5437,9 +5437,9 @@ LAB_97ba8824:
       cr0 = (pTVar7 == (unsigned char *)0x0) << 1;
       pTVar3 = (unsigned char *)0x0;
       if (pTVar7 != (unsigned char *)0x0) {
-        local_2b0[0] = GetGlobalPoolAllocator();
+        ctorAlloc7[0] = GetGlobalPoolAllocator();
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-                  (pTVar7,pcVar62,(unsigned char *)local_2b0);
+                  (pTVar7,pcVar62,(unsigned char *)ctorAlloc7);
         pTVar3 = pTVar7;
       }
     }
@@ -5554,9 +5554,9 @@ LAB_97ba8824:
       cr0 = (pvVar13 == (void *)0x0) << 1;
       pvVar23 = (void *)0x0;
       if (pvVar13 != (void *)0x0) {
-        local_290[0] = GetGlobalPoolAllocator();
+        ctorAlloc8[0] = GetGlobalPoolAllocator();
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-                  (pvVar13,pcVar62,(unsigned char *)local_290);
+                  (pvVar13,pcVar62,(unsigned char *)ctorAlloc8);
         pvVar23 = pvVar13;
       }
       *(void **)(newType + 0x10) = pvVar23;
@@ -5625,9 +5625,9 @@ LAB_97ba8824:
         cr0 = (pTVar7 == (unsigned char *)0x0) << 1;
         pTVar3 = (unsigned char *)0x0;
         if (pTVar7 != (unsigned char *)0x0) {
-          local_280[0] = GetGlobalPoolAllocator();
+          ctorAlloc9[0] = GetGlobalPoolAllocator();
           __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-                    (pTVar7,pcVar62,(unsigned char *)local_280);
+                    (pTVar7,pcVar62,(unsigned char *)ctorAlloc9);
           pTVar3 = pTVar7;
         }
       }
@@ -5638,7 +5638,7 @@ LAB_97ba8824:
                 ((int)parseContext,*(char **)(yyvsp + -0x58),"cannot declare arrays of this type",
                  (char *)local_84c,"",picBase,local_84c,uVar16);
       refCountPtr = local_84c + -4;
-      local_270[0] = local_850;
+      destroyAlloc60[0] = local_850;
       do {
         oldRefCount = *(uint *)refCountPtr;
         if (reservation != '\0') {
@@ -5649,7 +5649,7 @@ LAB_97ba8824:
       } while (!(bool)(cr0 >> 1 & 1));
       if ((int)oldRefCount < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                  ((unsigned char *)(local_84c + -0xc),local_270);
+                  ((unsigned char *)(local_84c + -0xc),destroyAlloc60);
       }
       local_840 = picBase2 + -0x610c;
       TParseContext__recover(parseContext);
@@ -5712,9 +5712,9 @@ LAB_97ba8824:
       cr0 = (pvVar13 == (void *)0x0) << 1;
       pvVar23 = (void *)0x0;
       if (pvVar13 != (void *)0x0) {
-        local_260[0] = GetGlobalPoolAllocator();
+        ctorAlloc10[0] = GetGlobalPoolAllocator();
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-                  (pvVar13,pcVar62,(unsigned char *)local_260);
+                  (pvVar13,pcVar62,(unsigned char *)ctorAlloc10);
         pvVar23 = pvVar13;
       }
       *(void **)(newType + 0x10) = pvVar23;
@@ -5835,9 +5835,9 @@ LAB_97bab5f4:
       cr0 = (pvVar13 == (void *)0x0) << 1;
       pvVar23 = (void *)0x0;
       if (pvVar13 != (void *)0x0) {
-        local_250[0] = GetGlobalPoolAllocator();
+        ctorAlloc11[0] = GetGlobalPoolAllocator();
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-                  (pvVar13,pcVar62,(unsigned char *)local_250);
+                  (pvVar13,pcVar62,(unsigned char *)ctorAlloc11);
         pvVar23 = pvVar13;
       }
       *(void **)(newType + 0x10) = pvVar23;
@@ -5905,9 +5905,9 @@ LAB_97bab5f4:
         cr0 = (pTVar7 == (unsigned char *)0x0) << 1;
         pTVar3 = (unsigned char *)0x0;
         if (pTVar7 != (unsigned char *)0x0) {
-          local_240[0] = GetGlobalPoolAllocator();
+          ctorAlloc12[0] = GetGlobalPoolAllocator();
           __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-                    (pTVar7,pcVar62,(unsigned char *)local_240);
+                    (pTVar7,pcVar62,(unsigned char *)ctorAlloc12);
           pTVar3 = pTVar7;
         }
       }
@@ -5918,7 +5918,7 @@ LAB_97bab5f4:
                 ((int)parseContext,*(char **)(yyvsp + -0x58),"cannot declare arrays of this type",
                  (char *)local_84c,"",picBase,local_84c,uVar16);
       refCountPtr = local_84c + -4;
-      local_230[0] = local_850;
+      destroyAlloc61[0] = local_850;
       do {
         oldRefCount = *(uint *)refCountPtr;
         if (reservation != '\0') {
@@ -5929,7 +5929,7 @@ LAB_97bab5f4:
       } while (!(bool)(cr0 >> 1 & 1));
       if ((int)oldRefCount < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                  ((unsigned char *)(local_84c + -0xc),local_230);
+                  ((unsigned char *)(local_84c + -0xc),destroyAlloc61);
       }
       local_840 = picBase2 + -0x610c;
       TParseContext__recover(parseContext);
@@ -5987,9 +5987,9 @@ LAB_97bab5f4:
       cr0 = (pvVar13 == (void *)0x0) << 1;
       pvVar23 = (void *)0x0;
       if (pvVar13 != (void *)0x0) {
-        local_220[0] = GetGlobalPoolAllocator();
+        ctorAlloc13[0] = GetGlobalPoolAllocator();
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-                  (pvVar13,pcVar62,(unsigned char *)local_220);
+                  (pvVar13,pcVar62,(unsigned char *)ctorAlloc13);
         pvVar23 = pvVar13;
       }
       *(void **)(newType + 0x10) = pvVar23;
@@ -6682,14 +6682,14 @@ LAB_97baa46c:
     cr0 = (pvVar13 == (void *)0x0) << 1;
     pvVar23 = (void *)0x0;
     if (pvVar13 != (void *)0x0) {
-      local_210[0] = GetGlobalPoolAllocator();
+      ctorAlloc14[0] = GetGlobalPoolAllocator();
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-                (pvVar13,(char *)pTVar3,(unsigned char *)local_210);
+                (pvVar13,(char *)pTVar3,(unsigned char *)ctorAlloc14);
       pvVar23 = pvVar13;
     }
     *(void **)(newType + 0x10) = pvVar23;
     refCountPtr = local_83c + -4;
-    local_200[0] = local_840;
+    destroyAlloc62[0] = local_840;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -6700,10 +6700,10 @@ LAB_97baa46c:
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_83c + -0xc),local_200);
+                ((unsigned char *)(local_83c + -0xc),destroyAlloc62);
     }
     refCountPtr = local_84c + -4;
-    local_1f0[0] = local_850;
+    destroyAlloc63[0] = local_850;
     do {
       oldRefCount = *(uint *)refCountPtr;
       if (reservation != '\0') {
@@ -6714,7 +6714,7 @@ LAB_97baa46c:
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_84c + -0xc),local_1f0);
+                ((unsigned char *)(local_84c + -0xc),destroyAlloc63);
     }
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     newVariable = (int *)TPoolAllocator__allocate(poolAllocator,0x40);
@@ -6766,7 +6766,7 @@ LAB_97baa46c:
     local_850 = local_840;
     refCountPtr2 = (int *)(local_1dc + -4);
     local_84c = local_83c;
-    local_1d0[0] = local_1e0;
+    destroyAlloc64[0] = local_1e0;
     do {
       oldRefCount4 = *refCountPtr2;
       if (reservation != '\0') {
@@ -6777,7 +6777,7 @@ LAB_97baa46c:
     } while (!(bool)(cr0 >> 1 & 1));
     if (oldRefCount4 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_1dc + -0xc),local_1d0);
+                ((unsigned char *)(local_1dc + -0xc),destroyAlloc64);
     }
     if (local_84c == (unsigned char *)0x0) {
       identifierString = *(uint *)(yyvsp + -0x80);
@@ -6819,9 +6819,9 @@ LAB_97baa46c:
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     newType = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
     structDeclarationListTypeOrFunction = *(unsigned char **)(yyvsp + -0x1c);
-    local_1c0[0] = GetGlobalPoolAllocator();
+    ctorAlloc15[0] = GetGlobalPoolAllocator();
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-              ((unsigned char *)&local_850,"",(unsigned char *)local_1c0);
+              ((unsigned char *)&local_850,"",(unsigned char *)ctorAlloc15);
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&local_840,(unsigned char *)&local_850);
     picBase2 = (unsigned char *)0xa7b8374c;
     *(undefined ***)newType = &PTR___ZN5TTypeD1Ev_a7b7d640;
@@ -6842,14 +6842,14 @@ LAB_97baa46c:
     cr0 = (pvVar13 == (void *)0x0) << 1;
     pvVar23 = (void *)0x0;
     if (pvVar13 != (void *)0x0) {
-      local_1b0[0] = GetGlobalPoolAllocator();
+      ctorAlloc16[0] = GetGlobalPoolAllocator();
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-                (pvVar13,(char *)pTVar3,(unsigned char *)local_1b0);
+                (pvVar13,(char *)pTVar3,(unsigned char *)ctorAlloc16);
       pvVar23 = pvVar13;
     }
     *(void **)(newType + 0x10) = pvVar23;
     refCountPtr = local_83c + -4;
-    local_1a0[0] = local_840;
+    destroyAlloc65[0] = local_840;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -6860,10 +6860,10 @@ LAB_97baa46c:
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_83c + -0xc),local_1a0);
+                ((unsigned char *)(local_83c + -0xc),destroyAlloc65);
     }
     refCountPtr = local_84c + -4;
-    local_190[0] = local_850;
+    destroyAlloc66[0] = local_850;
     do {
       oldRefCount = *(uint *)refCountPtr;
       if (reservation != '\0') {
@@ -6874,7 +6874,7 @@ LAB_97baa46c:
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_84c + -0xc),local_190);
+                ((unsigned char *)(local_84c + -0xc),destroyAlloc66);
     }
     local_830 = (unsigned char *)0xe;
     local_82c = (unsigned char *)0x0;
@@ -7124,10 +7124,10 @@ LAB_97baadbc:
     *(undefined4 *)(puVar18[1] + 8) = puVar18[1];
     *(undefined4 *)(puVar18[1] + 0xc) = puVar18[1];
     piVar61 = *(int **)(symbolTable3 + 4);
-    local_160[0] = puVar18;
+    destroyAlloc67[0] = puVar18;
     if (piVar61 == *(int **)(symbolTable3 + 8)) {
       std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_insert_aux
-                (symbolTable3,piVar61,local_160);
+                (symbolTable3,piVar61,destroyAlloc67);
       pTVar3 = yyvalNode;
       pTVar31 = local_7f0;
       pTVar32 = local_750[0];
@@ -7301,10 +7301,10 @@ LAB_97bab2e8:
     *(undefined4 *)(puVar18[1] + 8) = puVar18[1];
     *(undefined4 *)(puVar18[1] + 0xc) = puVar18[1];
     puVar19 = *(undefined4 **)(symbolTable3 + 4);
-    local_160[0] = puVar18;
+    destroyAlloc67[0] = puVar18;
     if (puVar19 == *(undefined4 **)(symbolTable3 + 8)) {
       std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_insert_aux
-                (symbolTable3,puVar19,local_160);
+                (symbolTable3,puVar19,destroyAlloc67);
     }
     else {
       iVar55 = 0;
@@ -7535,10 +7535,10 @@ LAB_97bab674:
     *(undefined4 *)(puVar18[1] + 8) = puVar18[1];
     *(undefined4 *)(puVar18[1] + 0xc) = puVar18[1];
     puVar19 = *(undefined4 **)(symbolTable3 + 4);
-    local_160[0] = puVar18;
+    destroyAlloc67[0] = puVar18;
     if (puVar19 == *(undefined4 **)(symbolTable3 + 8)) {
       std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_insert_aux
-                (symbolTable3,puVar19,local_160);
+                (symbolTable3,puVar19,destroyAlloc67);
     }
     else {
       iVar54 = 0;
@@ -7613,9 +7613,9 @@ LAB_97bab674:
       iVar60 = piVar61[4];
       iVar54 = iVar55 * 8;
       if (*(int *)(iVar60 + iVar54) == 0) {
-        local_d0[0] = GetGlobalPoolAllocator();
+        ctorAlloc17[0] = GetGlobalPoolAllocator();
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-                  (&local_850,"",(unsigned char *)local_d0);
+                  (&local_850,"",(unsigned char *)ctorAlloc17);
         scratchR7 = *(char **)yyvsp;
         addSymbolResult = (unsigned char *)
                   TIntermediate__addSymbol
@@ -7625,7 +7625,7 @@ LAB_97bab674:
                   TIntermediate__growAggregate
                             (*(unsigned char **)parseContext,pTVar20,addSymbolResult,*(uint *)yyvsp);
         refCountPtr = local_84c + -4;
-        local_c0[0] = local_850;
+        destroyAlloc69[0] = local_850;
         do {
           oldRefCount = *(uint *)refCountPtr;
           if (reservation != '\0') {
@@ -7636,7 +7636,7 @@ LAB_97bab674:
         } while (!(bool)(cr0 >> 1 & 1));
         if ((int)oldRefCount < 1) {
           __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                    ((unsigned char *)(local_84c + -0xc),local_c0);
+                    ((unsigned char *)(local_84c + -0xc),destroyAlloc69);
         }
       }
       else {
@@ -7690,7 +7690,7 @@ LAB_97bab674:
         local_850 = local_840;
         refCountPtr3 = (int *)(local_ec + -4);
         local_84c = local_83c;
-        local_e0[0] = local_f0;
+        destroyAlloc68[0] = local_f0;
         do {
           oldRefCount5 = *refCountPtr3;
           if (reservation != '\0') {
@@ -7701,7 +7701,7 @@ LAB_97bab674:
         } while (!(bool)(cr0 >> 1 & 1));
         if (oldRefCount5 < 1) {
           __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                    ((unsigned char *)(local_ec + -0xc),local_e0);
+                    ((unsigned char *)(local_ec + -0xc),destroyAlloc68);
         }
         if (local_84c == (unsigned char *)0x0) {
           iVar26 = newNode[1];
@@ -7766,13 +7766,13 @@ LAB_97bab674:
     *(undefined1 *)(*(int *)(iVar55 + 4) + *(int *)(*(int *)(iVar55 + 4) + -0xc)) =
          **(undefined1 **)(picBase + -0x7cc4);
     pcVar62 = *(char **)(iVar55 + 4);
-    local_b0[0] = GetGlobalPoolAllocator();
+    ctorAlloc18[0] = GetGlobalPoolAllocator();
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-              (&local_850,pcVar62,(unsigned char *)local_b0);
+              (&local_850,pcVar62,(unsigned char *)ctorAlloc18);
     piVar61 = (int *)(**(code **)(*(uint *)yyvalNode + 0x1c))(yyvalNode);
     (**(code **)(*piVar61 + 0x68))(piVar61,&local_850);
     refCountPtr = local_84c + -4;
-    local_a0[0] = local_850;
+    destroyAlloc70[0] = local_850;
     do {
       oldRefCount2 = *(unsigned char **)refCountPtr;
       if (reservation != '\0') {
@@ -7783,7 +7783,7 @@ LAB_97bab674:
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount2 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_84c + -0xc),local_a0);
+                ((unsigned char *)(local_84c + -0xc),destroyAlloc70);
     }
     functionPrototypeTypeOrFunction = *(uint *)(yyvsp + -0x48);
     piVar61 = (int *)(**(code **)(*(uint *)yyvalNode + 0x1c))(yyvalNode);
@@ -7900,7 +7900,7 @@ LAB_97ba84b0:
   local_850 = local_840;
   refCountPtr2 = (int *)(local_30c + -4);
   local_84c = local_83c;
-  local_300[0] = local_310;
+  destroyAlloc57[0] = local_310;
   do {
     oldRefCount4 = *refCountPtr2;
     if (reservation != '\0') {
@@ -7910,7 +7910,7 @@ LAB_97ba84b0:
     }
   } while (!(bool)(cr0 >> 1 & 1));
   bVar37 = 0 < oldRefCount4;
-  ppTVar24 = local_300;
+  ppTVar24 = destroyAlloc57;
   goto LAB_97ba869c;
 switchD_97ba39c8_caseD_60:
   scratchR6 = (char *)pTVar59;
