@@ -1,5 +1,5 @@
 local	__cxxabiv1____vmi_class_type_info____do_dyncast	param_2	src2dst	CONFIRMED	ptrdiff_t src2dst of __do_dyncast: >= 0 offset of src in dst, -1 no relationship, -2 src is not a public base of dst (libsupc++ tinfo.cc)
-local	__cxxabiv1____vmi_class_type_info____do_dyncast	param_3	accessPath	CONFIRMED	__sub_kind access_path: bit0 contained-public, bit1 contained-next?, bit 2 virtual mask (|1 public, |2... see tinfo.cc)
+local	__cxxabiv1____vmi_class_type_info____do_dyncast	param_3	accessPath	CONFIRMED	__sub_kind access_path: bit0 reached through a virtual base, bit1 public path, bit2 contained (6 = __contained_public, 4 = __contained_private, 1 = __not_contained) (libsupc++ tinfo.cc)
 local	__cxxabiv1____vmi_class_type_info____do_dyncast	param_4	dstType	CONFIRMED	const __class_type_info* dst_type compared with *this by type_info::operator==
 local	__cxxabiv1____vmi_class_type_info____do_dyncast	param_5	objPtr	CONFIRMED	const void* obj_ptr: address of this subobject inside the most derived object
 local	__cxxabiv1____vmi_class_type_info____do_dyncast	param_7	srcPtr	CONFIRMED	const void* src_ptr: the pointer being cast from
