@@ -3066,7 +3066,7 @@ int __ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__
                 (vector,*(undefined4 *)__normal_iterator,*(int *)(aggregateSequence + 4),*(int *)(aggregateSequence + 8));
     }
     adjustedIndex = (*indexPtr + (*(int *)(vector + 8) - *(int *)(vector + 4) >> 2)) -
-            (oldSequenceEnd - adjustedIndex >> 2);
+            (oldSequenceEnd - oldSequenceBegin >> 2);
     *indexPtr = adjustedIndex;
     adjustedIndex = *(int *)(vector + 4) + adjustedIndex * 4;
     *(int *)__normal_iterator = adjustedIndex;
@@ -5487,33 +5487,33 @@ int FUN_97b9a04c()
 }
 
 /* TIntermediate__parseConstTree @ 0x97b9a170 (428 bytes) */
-int TIntermediate__parseConstTree(this, param_2, intermNode, constUnion, op, symbolTable, type, param_8)
+int TIntermediate__parseConstTree(this, unusedLine, intermNode, constUnion, op, symbolTable, type, singleConstantParam)
   unsigned char * this;
-  int param_2;
+  int unusedLine;
   unsigned char * intermNode;
   unsigned char * constUnion;
   undefined4 op;
   undefined4 symbolTable;
   int type;
-  undefined4 param_8;
+  undefined4 singleConstantParam;
 {
-  undefined4 uVar1;
-  uint uVar2;
-  undefined4 local_b0;
-  undefined4 local_ac;
-  undefined4 local_a8;
-  undefined4 local_a4;
-  undefined4 local_a0;
-  undefined4 local_9c;
-  undefined4 local_98;
-  undefined4 local_94;
-  undefined4 local_90;
-  undefined4 local_8c;
-  undefined4 local_88;
-  undefined4 local_84;
-  undefined4 local_80;
-  unsigned char * local_7c;
-  undefined4 local_78;
+  undefined4 result;
+  uint typeBits;
+  undefined4 visitSymbolFn;
+  undefined4 visitConstantUnionFn;
+  undefined4 visitBinaryFn;
+  undefined4 visitUnaryFn;
+  undefined4 visitSelectionFn;
+  undefined4 visitAggregateFn;
+  undefined4 visitLoopFn;
+  undefined4 visitBranchFn;
+  undefined4 depth;
+  undefined4 preVisit;
+  undefined4 postVisit;
+  undefined4 rightToLeft;
+  undefined4 index;
+  unsigned char * unionArray;
+  undefined4 unusedField38;
   undefined **stackType;
   undefined4 stackTypeArraySize;
   undefined4 stackTypeStructure;
@@ -5524,261 +5524,267 @@ int TIntermediate__parseConstTree(this, param_2, intermNode, constUnion, op, sym
   undefined4 stackTypeWord1c;
   undefined4 stackTypeWord20;
   uint stackTypeBits;
-  undefined4 local_4c;
-  undefined4 local_48;
-  undefined4 local_44;
-  undefined4 local_40;
-  int local_3c;
-  undefined4 local_34;
-  undefined4 local_30;
+  undefined4 travConstructorType;
+  undefined4 travSingleConstantParam;
+  undefined4 travInfoSink;
+  undefined4 travSymbolTable;
+  int errorFlag;
+  undefined4 isMatrix;
+  undefined4 matrixSize;
   
-  uVar1 = 0;
+  result = 0;
   if (intermNode != (unsigned char *)0x0) {
-    uVar2 = *(uint *)(type + 0x24);
-    local_44 = *(undefined4 *)this;
+    typeBits = *(uint *)(type + 0x24);
+    travInfoSink = *(undefined4 *)this;
     stackTypeStructure = *(undefined4 *)(type + 8);
     stackTypeFieldName = *(undefined4 *)(type + 0xc);
     stackTypeTypeName = *(undefined4 *)(type + 0x10);
     stackTypeArraySize = *(undefined4 *)(type + 4);
     stackTypeWord14 = *(undefined4 *)(type + 0x14);
-    stackTypeBits = (uVar2 >> 9 & 1) << 9 |
-               (uVar2 >> 10 & 1) << 10 |
-               uVar2 & 0x7f800 |
-               (uVar2 >> 0x13 & 0x3f) << 0x13 | uVar2 & 0xfe000000 | stackTypeBits & 0x1ff;
+    stackTypeBits = (typeBits >> 9 & 1) << 9 |
+               (typeBits >> 10 & 1) << 10 |
+               typeBits & 0x7f800 |
+               (typeBits >> 0x13 & 0x3f) << 0x13 | typeBits & 0xfe000000 | stackTypeBits & 0x1ff;
     stackTypeStructureSize = *(undefined4 *)(type + 0x18);
     stackTypeWord1c = *(undefined4 *)(type + 0x1c);
     stackTypeWord20 = *(undefined4 *)(type + 0x20);
-    local_8c = 1;
-    local_90 = 0;
-    local_88 = 0;
-    local_84 = 0;
-    local_3c = 0;
-    local_34 = 0;
-    local_30 = 0;
+    preVisit = 1;
+    depth = 0;
+    postVisit = 0;
+    rightToLeft = 0;
+    errorFlag = 0;
+    isMatrix = 0;
+    matrixSize = 0;
     stackType = &PTR___ZN5TTypeD1Ev_a7b7d488;
-    local_80 = 0;
-    local_78 = 0;
-    local_9c = DAT_a7b7ba0c;
-    local_a8 = DAT_a7b7ba08;
-    local_ac = DAT_a7b7ba04;
-    local_a0 = DAT_a7b7ba00;
-    local_b0 = DAT_a7b7b9fc;
-    local_a4 = DAT_a7b7b9f8;
-    local_98 = DAT_a7b7b9f4;
-    local_94 = DAT_a7b7b9f0;
-    local_7c = constUnion;
-    local_4c = op;
-    local_48 = param_8;
-    local_40 = symbolTable;
+    index = 0;
+    unusedField38 = 0;
+    visitAggregateFn = DAT_a7b7ba0c;
+    visitBinaryFn = DAT_a7b7ba08;
+    visitConstantUnionFn = DAT_a7b7ba04;
+    visitSelectionFn = DAT_a7b7ba00;
+    visitSymbolFn = DAT_a7b7b9fc;
+    visitUnaryFn = DAT_a7b7b9f8;
+    visitLoopFn = DAT_a7b7b9f4;
+    visitBranchFn = DAT_a7b7b9f0;
+    unionArray = constUnion;
+    travConstructorType = op;
+    travSingleConstantParam = singleConstantParam;
+    travSymbolTable = symbolTable;
     (**(code **)(*(int *)intermNode + 8))
-              (intermNode,&local_b0,stackTypeWord14,stackTypeTypeName,stackTypeFieldName,stackTypeStructure,DAT_a7b7b9f0,stackTypeArraySize);
-    if (local_3c == 0) {
-      uVar1 = 0;
+              (intermNode,&visitSymbolFn,stackTypeWord14,stackTypeTypeName,stackTypeFieldName,stackTypeStructure,DAT_a7b7b9f0,stackTypeArraySize);
+    if (errorFlag == 0) {
+      result = 0;
     }
     else {
-      uVar1 = 1;
+      result = 1;
     }
   }
-  return uVar1;
+  return result;
 }
 
 /* TParseContext__parseVectorFields @ 0x97b9a31c (612 bytes) */
-int TParseContext__parseVectorFields(this, text, param_3, vectorFields, param_5)
+int TParseContext__parseVectorFields(this, text, vecSize, vectorFields, line)
   unsigned char * this;
   unsigned char * text;
-  int param_3;
+  int vecSize;
   unsigned char * vectorFields;
-  int param_5;
+  int line;
 {
-  byte bVar1;
-  int iVar2;
-  int iVar3;
-  undefined4 uVar4;
-  char *pcVar5;
-  char *pcVar6;
-  int in_r10;
-  int *piVar7;
-  int local_24 [8];
+  undefined4 result;
+  int textCharsB;
+  int fieldValue;
+  int errTextLength;
+  int componentIndex;
+  int textChars;
+  byte terminalChar;
+  int fieldCount;
+  int textLengthB;
+  undefined4 fieldSetId;
+  char *errorMessage;
+  char *errorToken;
+  int fieldIndex;
+  int *fieldSetCursor;
+  int fieldSets [8];
   
-  iVar2 = *(int *)(*(int *)(text + 4) + -0xc);
-  *(int *)(vectorFields + 0x10) = iVar2;
-  if (iVar2 < 5) {
-    in_r10 = 0;
-    if (iVar2 < 1) {
-      iVar2 = *(int *)(vectorFields + 0x10);
+  fieldCount = *(int *)(*(int *)(text + 4) + -0xc);
+  *(int *)(vectorFields + 0x10) = fieldCount;
+  if (fieldCount < 5) {
+    fieldIndex = 0;
+    if (fieldCount < 1) {
+      fieldCount = *(int *)(vectorFields + 0x10);
     }
     else {
       do {
-        iVar2 = *(int *)(text + 4);
-        switch(*(char *)(iVar2 + in_r10) + -0x61) {
+        textChars = *(int *)(text + 4);
+        switch(*(char *)(textChars + fieldIndex) + -0x61) {
         case '\0':
-          iVar2 = 1;
+          componentIndex = 1;
           break;
         case '\x01':
-          iVar2 = 1;
+          componentIndex = 1;
           goto LAB_97b9a4dc;
         default:
-          iVar3 = *(int *)(iVar2 + -0xc);
+          textLengthB = *(int *)(textChars + -0xc);
           goto LAB_97b9a54c;
         case '\x06':
-          iVar2 = 1;
+          componentIndex = 1;
           goto LAB_97b9a4f0;
         case '\x0f':
-          iVar2 = 2;
+          componentIndex = 2;
           goto LAB_97b9a4f0;
         case '\x10':
-          iVar2 = 2;
+          componentIndex = 2;
           break;
         case '\x11':
-          iVar2 = 1;
+          componentIndex = 1;
           goto LAB_97b9a490;
         case '\x12':
-          iVar2 = 2;
+          componentIndex = 2;
 LAB_97b9a490:
-          uVar4 = 0;
+          fieldSetId = 0;
           goto LAB_97b9a528;
         case '\x13':
-          iVar2 = 2;
+          componentIndex = 2;
           goto LAB_97b9a4bc;
         case '\x16':
-          iVar2 = 0;
+          componentIndex = 0;
           break;
         case '\x17':
-          iVar2 = 0;
+          componentIndex = 0;
 LAB_97b9a4f0:
-          local_24[in_r10 + 1] = iVar2;
-          *(int *)(vectorFields + in_r10 * 4) = iVar2;
+          fieldSets[fieldIndex + 1] = componentIndex;
+          *(int *)(vectorFields + fieldIndex * 4) = componentIndex;
           goto LAB_97b9a570;
         case '\x18':
-          iVar2 = 0;
+          componentIndex = 0;
 LAB_97b9a4bc:
-          uVar4 = 1;
+          fieldSetId = 1;
           goto LAB_97b9a528;
         case '\x19':
-          iVar2 = 0;
+          componentIndex = 0;
 LAB_97b9a4dc:
-          uVar4 = 2;
+          fieldSetId = 2;
           goto LAB_97b9a528;
         }
-        uVar4 = 3;
+        fieldSetId = 3;
 LAB_97b9a528:
-        local_24[in_r10 + 1] = iVar2;
-        *(undefined4 *)(vectorFields + in_r10 * 4) = uVar4;
+        fieldSets[fieldIndex + 1] = componentIndex;
+        *(undefined4 *)(vectorFields + fieldIndex * 4) = fieldSetId;
 LAB_97b9a570:
-        iVar2 = *(int *)(vectorFields + 0x10);
-        in_r10 = in_r10 + 1;
-      } while (in_r10 < iVar2);
+        fieldCount = *(int *)(vectorFields + 0x10);
+        fieldIndex = fieldIndex + 1;
+      } while (fieldIndex < fieldCount);
     }
-    in_r10 = 0;
-    if (0 < iVar2) {
-      piVar7 = local_24;
+    fieldIndex = 0;
+    if (0 < fieldCount) {
+      fieldSetCursor = fieldSets;
       do {
-        iVar3 = *(int *)vectorFields;
+        fieldValue = *(int *)vectorFields;
         vectorFields = vectorFields + 4;
-        if (param_3 <= iVar3) {
-          iVar3 = *(int *)(text + 4);
-          iVar2 = *(int *)(iVar3 + -0xc);
-          bVar1 = *DAT_a7b7ba18;
-          pcVar5 = "vector field selection out of range";
+        if (vecSize <= fieldValue) {
+          textCharsB = *(int *)(text + 4);
+          errTextLength = *(int *)(textCharsB + -0xc);
+          terminalChar = *DAT_a7b7ba18;
+          errorMessage = "vector field selection out of range";
 LAB_97b9a3b8:
-          *(byte *)(iVar3 + iVar2) = bVar1;
-          pcVar6 = *(char **)(text + 4);
+          *(byte *)(textCharsB + errTextLength) = terminalChar;
+          errorToken = *(char **)(text + 4);
           goto LAB_97b9a560;
         }
-        if ((0 < in_r10) && (piVar7[1] != *piVar7)) {
-          iVar3 = *(int *)(text + 4);
-          iVar2 = *(int *)(iVar3 + -0xc);
-          bVar1 = *DAT_a7b7ba18;
-          pcVar5 = "illegal - vector component fields not from the same set";
+        if ((0 < fieldIndex) && (fieldSetCursor[1] != *fieldSetCursor)) {
+          textCharsB = *(int *)(text + 4);
+          errTextLength = *(int *)(textCharsB + -0xc);
+          terminalChar = *DAT_a7b7ba18;
+          errorMessage = "illegal - vector component fields not from the same set";
           goto LAB_97b9a3b8;
         }
-        in_r10 = in_r10 + 1;
-        piVar7 = piVar7 + 1;
-      } while (in_r10 < iVar2);
+        fieldIndex = fieldIndex + 1;
+        fieldSetCursor = fieldSetCursor + 1;
+      } while (fieldIndex < fieldCount);
     }
-    uVar4 = 1;
+    result = 1;
   }
   else {
-    iVar2 = *(int *)(text + 4);
-    iVar3 = *(int *)(iVar2 + -0xc);
+    textChars = *(int *)(text + 4);
+    textLengthB = *(int *)(textChars + -0xc);
 LAB_97b9a54c:
-    bVar1 = *DAT_a7b7ba18;
-    *(byte *)(iVar2 + iVar3) = bVar1;
-    pcVar6 = *(char **)(text + 4);
-    pcVar5 = "illegal vector field selection";
+    terminalChar = *DAT_a7b7ba18;
+    *(byte *)(textChars + textLengthB) = terminalChar;
+    errorToken = *(char **)(text + 4);
+    errorMessage = "illegal vector field selection";
 LAB_97b9a560:
-    error((int)this,(char *)param_5,pcVar5,pcVar6,"",param_5,(uint)bVar1,in_r10);
-    uVar4 = 0;
+    error((int)this,(char *)line,errorMessage,errorToken,"",line,(uint)terminalChar,fieldIndex);
+    result = 0;
   }
-  return uVar4;
+  return result;
 }
 
 /* TParseContext__parseMatrixFields @ 0x97b9a5e8 (464 bytes) */
-int TParseContext__parseMatrixFields(this, text, param_3, matrixFields, param_5)
+int TParseContext__parseMatrixFields(this, text, matSize, matrixFields, line)
   unsigned char * this;
   unsigned char * text;
-  int param_3;
+  int matSize;
   unsigned char * matrixFields;
-  int param_5;
+  int line;
 {
-  char cVar1;
-  int iVar2;
-  char *pcVar3;
-  uint uVar4;
-  char *pcVar5;
+  char secondChar;
+  int firstChar;
+  char *errorMessage;
+  uint textLengthOrTerminal;
+  char *textChars;
   
   *(undefined4 *)(matrixFields + 4) = 0;
   *(undefined4 *)(matrixFields + 0xc) = 0xffffffff;
   *(undefined4 *)matrixFields = 0;
   *(undefined4 *)(matrixFields + 8) = 0xffffffff;
-  pcVar5 = *(char **)(text + 4);
-  uVar4 = *(uint *)(pcVar5 + -0xc);
-  if (uVar4 == 2) {
-    iVar2 = (int)*pcVar5;
-    if (iVar2 == 0x5f) {
-      if (('/' < pcVar5[1]) && (pcVar5[1] < '4')) {
+  textChars = *(char **)(text + 4);
+  textLengthOrTerminal = *(uint *)(textChars + -0xc);
+  if (textLengthOrTerminal == 2) {
+    firstChar = (int)*textChars;
+    if (firstChar == 0x5f) {
+      if (('/' < textChars[1]) && (textChars[1] < '4')) {
         *(undefined4 *)(matrixFields + 4) = 1;
 LAB_97b9a738:
         *(int *)(matrixFields + 0xc) = *(char *)(*(int *)(text + 4) + 1) + -0x30;
 LAB_97b9a74c:
-        if ((*(int *)(matrixFields + 8) < param_3) && (*(int *)(matrixFields + 0xc) < param_3)) {
+        if ((*(int *)(matrixFields + 8) < matSize) && (*(int *)(matrixFields + 0xc) < matSize)) {
           return 1;
         }
-        uVar4 = (uint)*DAT_a7b7ba18;
-        pcVar3 = "matrix field selection out of range";
+        textLengthOrTerminal = (uint)*DAT_a7b7ba18;
+        errorMessage = "matrix field selection out of range";
         *(byte *)(*(int *)(text + 4) + *(int *)(*(int *)(text + 4) + -0xc)) = *DAT_a7b7ba18;
         goto LAB_97b9a790;
       }
 LAB_97b9a6a4:
-      pcVar5[2] = *DAT_a7b7ba18;
+      textChars[2] = *DAT_a7b7ba18;
     }
     else {
-      cVar1 = pcVar5[1];
-      if (cVar1 == '_') {
-        if ((0x2f < iVar2) && (iVar2 < 0x34)) {
+      secondChar = textChars[1];
+      if (secondChar == '_') {
+        if ((0x2f < firstChar) && (firstChar < 0x34)) {
           *(undefined4 *)matrixFields = 1;
           *(int *)(matrixFields + 8) = **(char **)(text + 4) + -0x30;
           goto LAB_97b9a74c;
         }
         goto LAB_97b9a6a4;
       }
-      if ((((0x2f < iVar2) && (iVar2 < 0x34)) && ('/' < cVar1)) && (cVar1 < '4')) {
-        *(int *)(matrixFields + 8) = iVar2 + -0x30;
+      if ((((0x2f < firstChar) && (firstChar < 0x34)) && ('/' < secondChar)) && (secondChar < '4')) {
+        *(int *)(matrixFields + 8) = firstChar + -0x30;
         goto LAB_97b9a738;
       }
-      uVar4 = (uint)*DAT_a7b7ba18;
-      pcVar5[*(int *)(pcVar5 + -0xc)] = *DAT_a7b7ba18;
+      textLengthOrTerminal = (uint)*DAT_a7b7ba18;
+      textChars[*(int *)(textChars + -0xc)] = *DAT_a7b7ba18;
     }
-    pcVar5 = *(char **)(text + 4);
-    pcVar3 = "illegal matrix field selection";
+    textChars = *(char **)(text + 4);
+    errorMessage = "illegal matrix field selection";
   }
   else {
-    pcVar3 = "illegal length of matrix field selection";
-    pcVar5[uVar4] = *DAT_a7b7ba18;
+    errorMessage = "illegal length of matrix field selection";
+    textChars[textLengthOrTerminal] = *DAT_a7b7ba18;
 LAB_97b9a790:
-    pcVar5 = *(char **)(text + 4);
+    textChars = *(char **)(text + 4);
   }
-  error((int)this,(char *)param_5,pcVar3,pcVar5,"",this,uVar4,param_5);
+  error((int)this,(char *)line,errorMessage,textChars,"",this,textLengthOrTerminal,line);
   return 0;
 }
 
