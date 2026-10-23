@@ -3079,7 +3079,7 @@ LAB_0001e440:
     *(undefined1 *)(iVar4 + 0x14) = 1;
     puVar6 = (uint *)param_2[1];
     if (((*puVar6 & 2) == 0) || ((*(uint *)(param_1 + 0x24) & 2) == 0)) goto LAB_0001e6e0;
-    FUN_0000b620(param_1,*puVar12,puVar12[2],uVar3,uVar5,puVar6,iVar4,in_r10);
+    gldFlushDataCacheRange(param_1,*puVar12,puVar12[2],uVar3,uVar5,puVar6,iVar4,in_r10);
   }
   else {
     puVar6 = (uint *)param_2[1];
@@ -3089,7 +3089,7 @@ LAB_0001e440:
     if (*(short *)(puVar12 + 3) != -0x771c) {
       if (param_2[4] == 6) {
         if (((uVar10 & 2) != 0) && ((*(uint *)(param_1 + 0x24) & 2) != 0)) {
-          FUN_0000b620(param_1,*puVar12,puVar12[2],in_r6,iVar4,puVar6,0,uVar10 & 2);
+          gldFlushDataCacheRange(param_1,*puVar12,puVar12[2],in_r6,iVar4,puVar6,0,uVar10 & 2);
           puVar6 = (uint *)param_2[1];
         }
         goto LAB_0001e6e0;
@@ -3103,7 +3103,7 @@ LAB_0001e440:
     iVar8 = *(int *)param_2[2];
     *(ushort *)(iVar8 + 0x28) = *(ushort *)(iVar8 + 0x28) & 0xfffe;
     if ((*(uint *)(param_1 + 0x24) & 2) != 0) {
-      FUN_0000b620(param_1,*puVar12,puVar12[2],in_r6,iVar4,puVar6,iVar8,uVar10 & 2);
+      gldFlushDataCacheRange(param_1,*puVar12,puVar12[2],in_r6,iVar4,puVar6,iVar8,uVar10 & 2);
       puVar6 = (uint *)param_2[1];
       goto LAB_0001e6e0;
     }

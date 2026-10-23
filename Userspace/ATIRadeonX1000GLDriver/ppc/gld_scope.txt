@@ -7,7 +7,7 @@ gld_releaseQueryMemory
 gld_setQueryAgpRefBacking
 gld_waitTextureStamp
 FUN_0000abf0
-FUN_0000b620
+gldFlushDataCacheRange
 FUN_0000b750
 gld_waitVertexArrayStamp
 FUN_0000b980

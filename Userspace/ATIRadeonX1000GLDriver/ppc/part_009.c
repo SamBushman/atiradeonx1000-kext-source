@@ -1,7 +1,7 @@
 #include "decls.h"
 
-/* FUN_0005bbc0 @ 0x5bbc0 (928 bytes) */
-int FUN_0005bbc0(param_1, param_2, param_3)
+/* extvsEmitSub @ 0x5bbc0 (928 bytes) */
+int extvsEmitSub(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   int param_3;
@@ -113,8 +113,8 @@ int FUN_0005bbc0(param_1, param_2, param_3)
   return uVar3;
 }
 
-/* FUN_0005bf60 @ 0x5bf60 (1672 bytes) */
-int FUN_0005bf60(param_1, param_2, param_3)
+/* extvsEmitCrs @ 0x5bf60 (1672 bytes) */
+int extvsEmitCrs(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   int param_3;
@@ -313,8 +313,8 @@ int FUN_0005bf60(param_1, param_2, param_3)
   return uVar4;
 }
 
-/* FUN_0005c600 @ 0x5c600 (1552 bytes) */
-int FUN_0005c600(param_1, param_2, param_3)
+/* extvsEmitMmul @ 0x5c600 (1552 bytes) */
+int extvsEmitMmul(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   int param_3;
@@ -454,8 +454,8 @@ int FUN_0005c600(param_1, param_2, param_3)
   return 5;
 }
 
-/* FUN_0005cc20 @ 0x5cc20 (320 bytes) */
-int FUN_0005cc20(param_1, param_2, param_3)
+/* extvsEmitMov @ 0x5cc20 (320 bytes) */
+int extvsEmitMov(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   int param_3;
@@ -489,8 +489,8 @@ int FUN_0005cc20(param_1, param_2, param_3)
   return 1;
 }
 
-/* FUN_0005cd60 @ 0x5cd60 (1228 bytes) */
-int FUN_0005cd60(param_1, param_2, param_3)
+/* extvsEmitSwizzle @ 0x5cd60 (1228 bytes) */
+int extvsEmitSwizzle(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   int param_3;
@@ -719,8 +719,8 @@ LAB_0005d2d0:
   return 0;
 }
 
-/* FUN_0005d2f0 @ 0x5d2f0 (372 bytes) */
-int FUN_0005d2f0(param_1, param_2, param_3)
+/* extvsEmitWriteMask @ 0x5d2f0 (372 bytes) */
+int extvsEmitWriteMask(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   int param_3;
@@ -769,8 +769,8 @@ int FUN_0005d2f0(param_1, param_2, param_3)
   return 1;
 }
 
-/* FUN_0005d470 @ 0x5d470 (424 bytes) */
-int FUN_0005d470(param_1, param_2, param_3)
+/* extvsEmitOp879c @ 0x5d470 (424 bytes) */
+int extvsEmitOp879c(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   int param_3;
@@ -821,8 +821,8 @@ LAB_0005d600:
   return uVar2;
 }
 
-/* FUN_0005d620 @ 0x5d620 (568 bytes) */
-int FUN_0005d620(param_1, param_2, param_3)
+/* extvsEmitOp879d @ 0x5d620 (568 bytes) */
+int extvsEmitOp879d(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   int param_3;
@@ -899,8 +899,8 @@ LAB_0005d850:
   return uVar1;
 }
 
-/* FUN_0005d870 @ 0x5d870 (336 bytes) */
-int FUN_0005d870(param_1, param_2, param_3)
+/* extvsEmitLit @ 0x5d870 (336 bytes) */
+int extvsEmitLit(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   int param_3;
@@ -935,8 +935,8 @@ int FUN_0005d870(param_1, param_2, param_3)
   return 1;
 }
 
-/* FUN_0005d9c0 @ 0x5d9c0 (824 bytes) */
-int FUN_0005d9c0(param_1, param_2, param_3)
+/* extvsEmitDst @ 0x5d9c0 (824 bytes) */
+int extvsEmitDst(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   int param_3;
@@ -1036,8 +1036,8 @@ int FUN_0005d9c0(param_1, param_2, param_3)
   return uVar3;
 }
 
-/* FUN_0005dd00 @ 0x5dd00 (324 bytes) */
-int FUN_0005dd00(param_1, param_2, param_3)
+/* extvsEmitExpp @ 0x5dd00 (324 bytes) */
+int extvsEmitExpp(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   int param_3;
@@ -1073,8 +1073,8 @@ int FUN_0005dd00(param_1, param_2, param_3)
   return 1;
 }
 
-/* FUN_0005de50 @ 0x5de50 (324 bytes) */
-int FUN_0005de50(param_1, param_2, param_3)
+/* extvsEmitLogp @ 0x5de50 (324 bytes) */
+int extvsEmitLogp(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   int param_3;
@@ -1110,8 +1110,8 @@ int FUN_0005de50(param_1, param_2, param_3)
   return 1;
 }
 
-/* FUN_0005dfa0 @ 0x5dfa0 (304 bytes) */
-int FUN_0005dfa0(param_1, param_2, param_3)
+/* extvsEmitMova @ 0x5dfa0 (304 bytes) */
+int extvsEmitMova(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   int param_3;
@@ -5607,8 +5607,8 @@ int FUN_00065de0(param_1, param_2)
   return;
 }
 
-/* FUN_00065ea0 @ 0x65ea0 (1912 bytes) */
-int FUN_00065ea0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
+/* arbEmitIlDp4 @ 0x65ea0 (1912 bytes) */
+int arbEmitIlDp4(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -5926,8 +5926,8 @@ LAB_00066234:
   return;
 }
 
-/* FUN_00066640 @ 0x66640 (1308 bytes) */
-int FUN_00066640(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, srcNegate)
+/* arbEmitIlMov @ 0x66640 (1308 bytes) */
+int arbEmitIlMov(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, srcNegate)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -6137,8 +6137,8 @@ LAB_00066894:
   return;
 }
 
-/* FUN_00066b80 @ 0x66b80 (1912 bytes) */
-int FUN_00066b80(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
+/* arbEmitIlMul @ 0x66b80 (1912 bytes) */
+int arbEmitIlMul(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -6456,8 +6456,8 @@ LAB_00066f14:
   return;
 }
 
-/* FUN_00067320 @ 0x67320 (1912 bytes) */
-int FUN_00067320(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
+/* arbEmitIlAdd @ 0x67320 (1912 bytes) */
+int arbEmitIlAdd(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -6775,8 +6775,8 @@ LAB_000676b4:
   return;
 }
 
-/* FUN_00067ac0 @ 0x67ac0 (2516 bytes) */
-int FUN_00067ac0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate, src2File, src2Index, src2Select, src2Negate)
+/* arbEmitIlMad @ 0x67ac0 (2516 bytes) */
+int arbEmitIlMad(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate, src2File, src2Index, src2Select, src2Negate)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -7193,8 +7193,8 @@ LAB_00067f94:
   return;
 }
 
-/* FUN_000684c0 @ 0x684c0 (3632 bytes) */
-int FUN_000684c0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Words, src0Flags, src1File, src1Index, src1Words, src1Flags, src2File, src2Index, src2Words, src2Flags)
+/* arbEmitIlAddMad3Src @ 0x684c0 (3632 bytes) */
+int arbEmitIlAddMad3Src(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Words, src0Flags, src1File, src1Index, src1Words, src1Flags, src2File, src2Index, src2Words, src2Flags)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -7683,8 +7683,8 @@ LAB_00068e14:
   return;
 }
 
-/* FUN_00069330 @ 0x69330 (4280 bytes) */
-int FUN_00069330(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Words, src0Flags, src1File, src1Index, src1Words, src1Flags, src2File, src2Index, src2Words, src2Flags)
+/* arbEmitIlMulMaxMin2Src @ 0x69330 (4280 bytes) */
+int arbEmitIlMulMaxMin2Src(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Words, src0Flags, src1File, src1Index, src1Words, src1Flags, src2File, src2Index, src2Words, src2Flags)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -8209,8 +8209,8 @@ LAB_00069f70:
   return;
 }
 
-/* FUN_0006a400 @ 0x6a400 (1912 bytes) */
-int FUN_0006a400(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
+/* arbEmitIlMin @ 0x6a400 (1912 bytes) */
+int arbEmitIlMin(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -8528,8 +8528,8 @@ LAB_0006a794:
   return;
 }
 
-/* FUN_0006aba0 @ 0x6aba0 (1912 bytes) */
-int FUN_0006aba0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
+/* arbEmitIlMax @ 0x6aba0 (1912 bytes) */
+int arbEmitIlMax(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -8847,8 +8847,8 @@ LAB_0006af34:
   return;
 }
 
-/* FUN_0006b340 @ 0x6b340 (1920 bytes) */
-int FUN_0006b340(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
+/* arbEmitIlSetCompare5 @ 0x6b340 (1920 bytes) */
+int arbEmitIlSetCompare5(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -9166,8 +9166,8 @@ LAB_0006b6d4:
   return;
 }
 
-/* FUN_0006bae0 @ 0x6bae0 (1920 bytes) */
-int FUN_0006bae0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
+/* arbEmitIlSetCompare2 @ 0x6bae0 (1920 bytes) */
+int arbEmitIlSetCompare2(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -9485,8 +9485,8 @@ LAB_0006be74:
   return;
 }
 
-/* FUN_0006c280 @ 0x6c280 (1308 bytes) */
-int FUN_0006c280(param_1, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate)
+/* arbEmitIlRnd @ 0x6c280 (1308 bytes) */
+int arbEmitIlRnd(param_1, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate)
   int param_1;
   uint dstFile;
   uint dstIndex;
@@ -9703,31 +9703,31 @@ LAB_0006c4d4:
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_0005bbc0");
-asm(".set FUN_0005bbc0, _FUN_0005bbc0");
+asm(".set FUN_0005bbc0, _extvsEmitSub");
 asm(".globl FUN_0005bf60");
-asm(".set FUN_0005bf60, _FUN_0005bf60");
+asm(".set FUN_0005bf60, _extvsEmitCrs");
 asm(".globl FUN_0005c600");
-asm(".set FUN_0005c600, _FUN_0005c600");
+asm(".set FUN_0005c600, _extvsEmitMmul");
 asm(".globl FUN_0005cc20");
-asm(".set FUN_0005cc20, _FUN_0005cc20");
+asm(".set FUN_0005cc20, _extvsEmitMov");
 asm(".globl FUN_0005cd60");
-asm(".set FUN_0005cd60, _FUN_0005cd60");
+asm(".set FUN_0005cd60, _extvsEmitSwizzle");
 asm(".globl FUN_0005d2f0");
-asm(".set FUN_0005d2f0, _FUN_0005d2f0");
+asm(".set FUN_0005d2f0, _extvsEmitWriteMask");
 asm(".globl FUN_0005d470");
-asm(".set FUN_0005d470, _FUN_0005d470");
+asm(".set FUN_0005d470, _extvsEmitOp879c");
 asm(".globl FUN_0005d620");
-asm(".set FUN_0005d620, _FUN_0005d620");
+asm(".set FUN_0005d620, _extvsEmitOp879d");
 asm(".globl FUN_0005d870");
-asm(".set FUN_0005d870, _FUN_0005d870");
+asm(".set FUN_0005d870, _extvsEmitLit");
 asm(".globl FUN_0005d9c0");
-asm(".set FUN_0005d9c0, _FUN_0005d9c0");
+asm(".set FUN_0005d9c0, _extvsEmitDst");
 asm(".globl FUN_0005dd00");
-asm(".set FUN_0005dd00, _FUN_0005dd00");
+asm(".set FUN_0005dd00, _extvsEmitExpp");
 asm(".globl FUN_0005de50");
-asm(".set FUN_0005de50, _FUN_0005de50");
+asm(".set FUN_0005de50, _extvsEmitLogp");
 asm(".globl FUN_0005dfa0");
-asm(".set FUN_0005dfa0, _FUN_0005dfa0");
+asm(".set FUN_0005dfa0, _extvsEmitMova");
 asm(".globl FUN_0005f540");
 asm(".set FUN_0005f540, _FUN_0005f540");
 asm(".globl FUN_0005f810");
@@ -9771,26 +9771,26 @@ asm(".set FUN_00065c90, _FUN_00065c90");
 asm(".globl FUN_00065de0");
 asm(".set FUN_00065de0, _FUN_00065de0");
 asm(".globl FUN_00065ea0");
-asm(".set FUN_00065ea0, _FUN_00065ea0");
+asm(".set FUN_00065ea0, _arbEmitIlDp4");
 asm(".globl FUN_00066640");
-asm(".set FUN_00066640, _FUN_00066640");
+asm(".set FUN_00066640, _arbEmitIlMov");
 asm(".globl FUN_00066b80");
-asm(".set FUN_00066b80, _FUN_00066b80");
+asm(".set FUN_00066b80, _arbEmitIlMul");
 asm(".globl FUN_00067320");
-asm(".set FUN_00067320, _FUN_00067320");
+asm(".set FUN_00067320, _arbEmitIlAdd");
 asm(".globl FUN_00067ac0");
-asm(".set FUN_00067ac0, _FUN_00067ac0");
+asm(".set FUN_00067ac0, _arbEmitIlMad");
 asm(".globl FUN_000684c0");
-asm(".set FUN_000684c0, _FUN_000684c0");
+asm(".set FUN_000684c0, _arbEmitIlAddMad3Src");
 asm(".globl FUN_00069330");
-asm(".set FUN_00069330, _FUN_00069330");
+asm(".set FUN_00069330, _arbEmitIlMulMaxMin2Src");
 asm(".globl FUN_0006a400");
-asm(".set FUN_0006a400, _FUN_0006a400");
+asm(".set FUN_0006a400, _arbEmitIlMin");
 asm(".globl FUN_0006aba0");
-asm(".set FUN_0006aba0, _FUN_0006aba0");
+asm(".set FUN_0006aba0, _arbEmitIlMax");
 asm(".globl FUN_0006b340");
-asm(".set FUN_0006b340, _FUN_0006b340");
+asm(".set FUN_0006b340, _arbEmitIlSetCompare5");
 asm(".globl FUN_0006bae0");
-asm(".set FUN_0006bae0, _FUN_0006bae0");
+asm(".set FUN_0006bae0, _arbEmitIlSetCompare2");
 asm(".globl FUN_0006c280");
-asm(".set FUN_0006c280, _FUN_0006c280");
+asm(".set FUN_0006c280, _arbEmitIlRnd");

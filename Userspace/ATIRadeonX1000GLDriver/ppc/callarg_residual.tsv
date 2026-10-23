@@ -1,6 +1,6 @@
 # owner entry	owner	call site	callee	register	value	class
 0x6700	_gldCreateContext	0x6778	malloc	r3	0x2b98 printed as &UNK_00002b98 (symbolized-text-address)	BENIGN-SYMBOLIZED
-0xbfa0	FUN_0000bfa0	0xc048	frexp	r5	r1+0x38 (a stack address) not at argument 2 of any C call (1 C calls)	BENIGN-DOUBLE-SLOT
+0xbfa0	textPrintDoubleShortest	0xc048	frexp	r5	r1+0x38 (a stack address) not at argument 2 of any C call (1 C calls)	BENIGN-DOUBLE-SLOT
 0x16670	glBitmap_impl	0x1681c	FUN_0002a260	r10	r1+0x48 (a stack address) not at argument 7 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
 0x2c230	FUN_0002c230	0x2c678	FUN_00027990	r4	incoming param_2 not at argument 1 of any C call (1 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
 0x2c230	FUN_0002c230	0x2c6a8	FUN_0001fd00	r4	incoming param_2 not at argument 1 of any C call (1 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT

@@ -2466,7 +2466,7 @@ int _gldGetTextureLevel(ctx, texture, face, level)
   if (*(int *)(texture + 0x30) != 0) {
     levelEntry = *(int *)(texture + 0x30) + 0xa0 + level * 0x18 + face * 0x168;
     levelFormat = *(ushort *)(levelEntry + 0xc);
-    bytesPerElement = FUN_0000a3f0((uint)*(ushort *)(levelEntry + 0x10),(uint)*(ushort *)(levelEntry + 0x12));
+    bytesPerElement = gldPixelUnitBytes((uint)*(ushort *)(levelEntry + 0x10),(uint)*(ushort *)(levelEntry + 0x12));
     _pthread_mutex_lock(*(undefined4 *)(ctx + GLD_mutex));
     returnCode = ((int (*)())FUN_00031340)(ctx,texture,face,level,(uint)*(ushort *)(levelEntry + 0x10),
                          (uint)*(ushort *)(levelEntry + 0x12),*(undefined4 *)(levelEntry + 0x14),
@@ -2542,7 +2542,7 @@ int FUN_00031940(param_1, param_2)
   local_5c = &local_e4;
   iVar30 = iVar9 + 0xa0 + uVar21 * 0x18;
   uVar23 = (uint)((*(uint *)(&DAT_001d9f48 + iVar7) & 7) == 4);
-  iVar9 = FUN_0000a3f0((uint)*(ushort *)(iVar30 + 0x10),(uint)*(ushort *)(iVar30 + 0x12));
+  iVar9 = gldPixelUnitBytes((uint)*(ushort *)(iVar30 + 0x10),(uint)*(ushort *)(iVar30 + 0x12));
   puVar16 = auStack_e8;
   iVar26 = iVar9 * (uint)*(ushort *)(iVar30 + 0xc);
   uVar22 = uVar23 ^ 1;
@@ -2634,7 +2634,7 @@ int FUN_00031940(param_1, param_2)
       } while (loopIndex < local_b4);
     }
     if ((*(uint *)(param_1 + 0x24) & 0x82) != 0) {
-      FUN_0000b620(param_1,local_60 + 0x20,iVar7,puVar15,puVar16,uVar18,local_60,uVar19);
+      gldFlushDataCacheRange(param_1,local_60 + 0x20,iVar7,puVar15,puVar16,uVar18,local_60,uVar19);
     }
   }
   if ((*(byte *)((int)param_2 + 0x39) & 3) == 0) goto LAB_00032098;
@@ -3045,7 +3045,7 @@ LAB_000323a0:
            (sVar5 = *(short *)(texture[0xc] + 0x1a), sVar5 == -0x7a41)) || (sVar5 == -0x7a42)) &&
          ((*(char *)(texImages + 0x36) == '\x01' && (*(char *)(texImages + 0x35) == '\x01')))) &&
         (bVar39)) && (*(int *)(texImages + uVar22 * 0xc + 0x5a) != 0)) {
-      iVar11 = FUN_0000a3f0((uint)texImages[uVar22 * 0xc + 0x58],(uint)texImages[uVar22 * 0xc + 0x59]);
+      iVar11 = gldPixelUnitBytes((uint)texImages[uVar22 * 0xc + 0x58],(uint)texImages[uVar22 * 0xc + 0x59]);
       uVar27 = texImages[uVar22 * 0xc + 0x56];
       uVar28 = iVar11 * (int)(uint)uVar27;
       uVar32 = *(int *)(texImages + uVar22 * 0xc + 0x5a) +
@@ -3101,7 +3101,7 @@ LAB_000323a0:
           uVar8 = uVar32;
           do {
             uVar36 = uVar36 + 1;
-            FUN_0000b620(ctxSaved,uVar8,iVar11 * iVar33,puVar17,uVar20,uVar16,uVar23,puVar26);
+            gldFlushDataCacheRange(ctxSaved,uVar8,iVar11 * iVar33,puVar17,uVar20,uVar16,uVar23,puVar26);
             uVar8 = uVar8 + uVar28;
           } while (uVar36 < uVar22);
           iVar29 = texture[0xc];
@@ -3732,7 +3732,7 @@ LAB_00033700:
                   if ((local_a8 >> (uVar30 & 0x3f) & 1) != 0) {
                     iVar33 = local_cc + local_74 + 0xa0;
                     uVar20 = (uint)*(ushort *)(iVar33 + 0x12);
-                    iVar25 = FUN_0000a3f0((uint)*(ushort *)(iVar33 + 0x10),uVar20);
+                    iVar25 = gldPixelUnitBytes((uint)*(ushort *)(iVar33 + 0x10),uVar20);
                     uVar23 = (uint)*(ushort *)(iVar33 + 0xc);
                     bVar39 = uVar20 != 0;
                     bVar4 = in_xer_so & 1;
@@ -3807,7 +3807,7 @@ LAB_00033700:
                     uVar15 = (uint)*(byte *)(texture + 0xe);
                     iVar25 = 1 << (uVar28 + uVar22 + uVar32 + local_214 & 0x3f);
                     uVar20 = ((int (*)())FUN_0002f4d0)((uint)uVar27,(uint)uVar6,uVar15);
-                    iVar11 = FUN_0000a3f0((uint)uVar27,(uint)uVar6);
+                    iVar11 = gldPixelUnitBytes((uint)uVar27,(uint)uVar6);
                     uVar20 = local_154 == iVar11 * local_12c & uVar20;
                     if (((uVar20 == 0) || (uVar23 = local_158 & 0x1f, uVar23 != 0)) ||
                        (uVar36 = local_154 & 0x1f, uVar36 != 0)) {
@@ -3900,7 +3900,7 @@ LAB_00033700:
                     }
                     uVar20 = *(uint *)(ctxSaved + 0x24) & 0x82;
                     if (uVar20 != 0) {
-                      FUN_0000b620(ctxSaved,local_ac + *texture,
+                      gldFlushDataCacheRange(ctxSaved,local_ac + *texture,
                                    (uint)*(ushort *)((int)local_5c + local_c8 + 2) *
                                    *(int *)((int)local_5c + local_c8 + 0xc),puVar18,local_c8,
                                    local_5c,uVar20,uVar8);
@@ -5579,7 +5579,7 @@ LAB_00035dd8:
      (*(char *)(param_2[0xd] + 0x16) == '\x06')) {
     iVar34 = iVar47 + 0xa0 + (uint)*(byte *)(iVar47 + 0x5e) * 0x18;
     uVar9 = *(ushort *)(iVar34 + 0xc);
-    iVar35 = FUN_0000a3f0((uint)*(ushort *)(iVar34 + 0x10),(uint)*(ushort *)(iVar34 + 0x12));
+    iVar35 = gldPixelUnitBytes((uint)*(ushort *)(iVar34 + 0x10),(uint)*(ushort *)(iVar34 + 0x12));
     if (*(int *)(iVar34 + 0x14) != 0) {
       FUN_0000b670(param_1,*(int *)(iVar34 + 0x14),(uint)uVar9 * iVar35 * uVar46,uVar39,uVar41,
                    uVar42,uVar50,uVar43);

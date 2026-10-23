@@ -46,8 +46,8 @@ switchD_0000a324_caseD_400:
   return 1;
 }
 
-/* FUN_0000a3f0 @ 0xa3f0 (592 bytes) */
-int FUN_0000a3f0(param_1, param_2)
+/* gldPixelUnitBytes @ 0xa3f0 (592 bytes) */
+int gldPixelUnitBytes(param_1, param_2)
   uint param_1;
   undefined *param_2;
 {
@@ -186,8 +186,8 @@ int FUN_0000a3f0(param_1, param_2)
   return 2;
 }
 
-/* FUN_0000a670 @ 0xa670 (100 bytes) */
-int FUN_0000a670(param_1, param_2, param_3)
+/* gldPixelRowBytes @ 0xa670 (100 bytes) */
+int gldPixelRowBytes(param_1, param_2, param_3)
   undefined4 param_1;
   int param_2;
   int param_3;
@@ -195,14 +195,14 @@ int FUN_0000a670(param_1, param_2, param_3)
   int iVar1;
   
   if (param_2 == 0) {
-    iVar1 = ((int (*)())FUN_0000a3f0)(param_1,0);
+    iVar1 = ((int (*)())gldPixelUnitBytes)(param_1,0);
     iVar1 = iVar1 * (param_3 + 3 >> 2) >> 2;
   }
   else if (param_2 == 0x1a00) {
     iVar1 = param_3 + 7 >> 3;
   }
   else {
-    iVar1 = ((int (*)())FUN_0000a3f0)(param_1,param_2);
+    iVar1 = ((int (*)())gldPixelUnitBytes)(param_1,param_2);
     iVar1 = iVar1 * param_3;
   }
   return iVar1;
@@ -225,17 +225,17 @@ int FUN_0000a6e0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint uVar3;
   int iVar4;
   
-  iVar2 = ((int (*)())FUN_0000a3f0)(param_2,param_3);
+  iVar2 = ((int (*)())gldPixelUnitBytes)(param_2,param_3);
   *param_7 = iVar2;
   if (param_9 == (int *)0x0) {
     *param_8 = 0;
-    uVar3 = ((int (*)())FUN_0000a670)(param_2,param_3,param_4);
+    uVar3 = ((int (*)())gldPixelRowBytes)(param_2,param_3,param_4);
     *param_6 = uVar3;
   }
   else {
     iVar4 = *param_9;
     if (iVar4 < 1) {
-      uVar3 = ((int (*)())FUN_0000a670)(param_2,param_3,param_4);
+      uVar3 = ((int (*)())gldPixelRowBytes)(param_2,param_3,param_4);
     }
     else if (param_3 == 0x1a00) {
       uVar3 = iVar4 + 7 >> 3;
@@ -933,8 +933,8 @@ int gld_ensureTextureGlobalBacking(param_1, param_2, param_3)
   return uVar2;
 }
 
-/* FUN_0000b620 @ 0xb620 (72 bytes) */
-int FUN_0000b620(ctx, address, length, unused4, unused5, unused6, unused7, unused8)
+/* gldFlushDataCacheRange @ 0xb620 (72 bytes) */
+int gldFlushDataCacheRange(ctx, address, length, unused4, unused5, unused6, unused7, unused8)
   int ctx;
   uint address;
   int length;
@@ -1019,7 +1019,7 @@ int _gldFlushVertexArray(ctx, unused2, flushArg2, flushArg3, doFlush, flushArg5,
   undefined4 flushArg7;
 {
   if (doFlush != 0) {
-    ((int (*)())FUN_0000b620)(ctx,flushArg3,flushArg2,flushArg3,doFlush,flushArg5,flushArg6,flushArg7);
+    ((int (*)())gldFlushDataCacheRange)(ctx,flushArg3,flushArg2,flushArg3,doFlush,flushArg5,flushArg6,flushArg7);
   }
   return doFlush != 0;
 }
@@ -1344,8 +1344,8 @@ int gld_setVertexArrayNewTextureBacking(param_1, param_2, param_3, param_4, para
   return uVar4;
 }
 
-/* FUN_0000be70 @ 0xbe70 (272 bytes) */
-double FUN_0000be70(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7)
+/* powerOfTenDouble @ 0xbe70 (272 bytes) */
+double powerOfTenDouble(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7)
 {
   int iVar1;
   double dVar2;
@@ -1383,8 +1383,8 @@ double FUN_0000be70(int param_1,undefined4 param_2,undefined4 param_3,undefined4
   return dVar2 * (DOUBLE_001aa2a8)[-param_1];
 }
 
-/* FUN_0000bfa0 @ 0xbfa0 (1332 bytes) */
-char * FUN_0000bfa0(undefined4 unusedArg1,undefined4 unusedArg2,char *outBuffer,uint outCapacity,double value,double tolerance)
+/* textPrintDoubleShortest @ 0xbfa0 (1332 bytes) */
+char * textPrintDoubleShortest(undefined4 unusedArg1,undefined4 unusedArg2,char *outBuffer,uint outCapacity,double value,double tolerance)
 {
   int reversalSwaps;
   int capacityLeft;
@@ -1448,8 +1448,8 @@ char * FUN_0000bfa0(undefined4 unusedArg1,undefined4 unusedArg2,char *outBuffer,
       roundedExponent = _round(((double)CONCAT44(0x43300000,i2dLo1) - DOUBLE_001aa1e0) * DOUBLE_001aa218);
       decimalExponent[0] = (uint)(int)roundedExponent;
       fixConvScratch1 = (longlong)(int)decimalExponent[0];
-      pow10Exponent = (double)((double (*)())FUN_0000be70)(decimalExponent[0],extraout_r4,exponentPtr,outCapacity,argReg7,argReg8,pow10Table);
-      negPow10 = (double)((double (*)())FUN_0000be70)(-decimalExponent[0],extraout_r4_00,exponentPtr,outCapacity,argReg7,argReg8,pow10Table);
+      pow10Exponent = (double)((double (*)())powerOfTenDouble)(decimalExponent[0],extraout_r4,exponentPtr,outCapacity,argReg7,argReg8,pow10Table);
+      negPow10 = (double)((double (*)())powerOfTenDouble)(-decimalExponent[0],extraout_r4_00,exponentPtr,outCapacity,argReg7,argReg8,pow10Table);
       scaledValue = value * negPow10;
       scaledTolerance = tolerance * pow10Exponent;
     }
@@ -1699,7 +1699,7 @@ LAB_0000c670:
     if (bVar2) {
       dVar9 = -dVar9;
     }
-    dVar9 = (double)((double (*)())FUN_0000be70)((int)dVar9,param_2,param_3,param_4,param_5,param_6,pcVar8);
+    dVar9 = (double)((double (*)())powerOfTenDouble)((int)dVar9,param_2,param_3,param_4,param_5,param_6,pcVar8);
     dVar10 = dVar10 * dVar9;
   }
 LAB_0000c5a8:
@@ -1712,8 +1712,8 @@ LAB_0000c5a8:
   return dVar10;
 }
 
-/* FUN_0000c8a0 @ 0xc8a0 (136 bytes) */
-int FUN_0000c8a0(capacityPtr, bufferPtr, cursorPtr)
+/* textBufferEnsureRoom @ 0xc8a0 (136 bytes) */
+int textBufferEnsureRoom(capacityPtr, bufferPtr, cursorPtr)
   int *capacityPtr;
   int *bufferPtr;
   int *cursorPtr;
@@ -1742,8 +1742,8 @@ int FUN_0000c8a0(capacityPtr, bufferPtr, cursorPtr)
   return ok;
 }
 
-/* FUN_0000c930 @ 0xc930 (284 bytes) */
-int FUN_0000c930(cursor, updatesCC, ccRegisterIndex, saturate)
+/* arbIrPrintCcAndSaturateSuffix @ 0xc930 (284 bytes) */
+int arbIrPrintCcAndSaturateSuffix(cursor, updatesCC, ccRegisterIndex, saturate)
   int cursor;
   int updatesCC;
   int ccRegisterIndex;
@@ -1799,8 +1799,8 @@ int FUN_0000c930(cursor, updatesCC, ccRegisterIndex, saturate)
   return cursor;
 }
 
-/* FUN_0000ca50 @ 0xca50 (312 bytes) */
-int FUN_0000ca50(cursor, precisionCode)
+/* arbIrPrintPrecisionSuffix @ 0xca50 (312 bytes) */
+int arbIrPrintPrecisionSuffix(cursor, precisionCode)
   int cursor;
   int precisionCode;
 {
@@ -1857,8 +1857,8 @@ int FUN_0000ca50(cursor, precisionCode)
   return cursor + emitLength;
 }
 
-/* FUN_0000cb90 @ 0xcb90 (572 bytes) */
-int FUN_0000cb90(cursorPtr, value)
+/* textPrintDecimalDigits @ 0xcb90 (572 bytes) */
+int textPrintDecimalDigits(cursorPtr, value)
   int *cursorPtr;
   int value;
 {
@@ -1915,7 +1915,7 @@ int FUN_0000cb90(cursorPtr, value)
                 else {
                   valueDiv1e9 = valueDiv1e8 / 10;
                   if (valueDiv1e9 != 0) {
-                    ((int (*)())FUN_0000cb90)(cursorPtr,valueDiv1e9);
+                    ((int (*)())textPrintDecimalDigits)(cursorPtr,valueDiv1e9);
                   }
                   *(char *)*cursorPtr = (char)valueDiv1e8 + (char)valueDiv1e9 * -10 + '0';
                   digitCursor = (char *)(*cursorPtr + 1);
@@ -1954,8 +1954,8 @@ int FUN_0000cb90(cursorPtr, value)
   return;
 }
 
-/* FUN_0000cdf0 @ 0xcdf0 (156 bytes) */
-int FUN_0000cdf0(outCursor, value)
+/* textPrintSignedDecimal @ 0xcdf0 (156 bytes) */
+int textPrintSignedDecimal(outCursor, value)
   char *outCursor;
   int value;
 {
@@ -1970,14 +1970,14 @@ int FUN_0000cdf0(outCursor, value)
   }
   valueDiv10 = value / 10;
   if (valueDiv10 != 0) {
-    ((int (*)())FUN_0000cb90)(cursorBox,valueDiv10);
+    ((int (*)())textPrintDecimalDigits)(cursorBox,valueDiv10);
   }
   *cursorBox[0] = (char)value + (char)valueDiv10 * -10 + '0';
   return cursorBox[0] + (1 - (int)outCursor);
 }
 
-/* FUN_0000ce90 @ 0xce90 (924 bytes) */
-int FUN_0000ce90(cursor, vectorWidthMinus1, hasSecondWidth, elementType, bitWidthCode)
+/* arbIrPrintDeclSizeSuffix @ 0xce90 (924 bytes) */
+int arbIrPrintDeclSizeSuffix(cursor, vectorWidthMinus1, hasSecondWidth, elementType, bitWidthCode)
   int cursor;
   int vectorWidthMinus1;
   int hasSecondWidth;
@@ -2008,7 +2008,7 @@ int FUN_0000ce90(cursor, vectorWidthMinus1, hasSecondWidth, elementType, bitWidt
   else {
     emitLength = 0;
   }
-  suffixCursor = ((int (*)())FUN_0000cdf0)(cursor + emitLength,vectorWidthMinus1 + 1);
+  suffixCursor = ((int (*)())textPrintSignedDecimal)(cursor + emitLength,vectorWidthMinus1 + 1);
   suffixCursor = cursor + emitLength + suffixCursor;
   if (hasSecondWidth == 1) {
     if (colonNotEmpty) {
@@ -2024,7 +2024,7 @@ int FUN_0000ce90(cursor, vectorWidthMinus1, hasSecondWidth, elementType, bitWidt
     else {
       emitLength = 0;
     }
-    secondNumberLength = ((int (*)())FUN_0000cdf0)(suffixCursor + emitLength,vectorWidthMinus1 + 1);
+    secondNumberLength = ((int (*)())textPrintSignedDecimal)(suffixCursor + emitLength,vectorWidthMinus1 + 1);
     suffixCursor = suffixCursor + emitLength + secondNumberLength;
   }
   if (elementType == 2) {
@@ -2128,8 +2128,8 @@ LAB_0000d0e4:
   return suffixCursor + emitLength;
 }
 
-/* FUN_0000d240 @ 0xd240 (308 bytes) */
-int FUN_0000d240(cursor, sizeMinus1, hasSecondSize)
+/* arbIrPrintSourceSizeSuffix @ 0xd240 (308 bytes) */
+int arbIrPrintSourceSizeSuffix(cursor, sizeMinus1, hasSecondSize)
   int cursor;
   int sizeMinus1;
   int hasSecondSize;
@@ -2158,7 +2158,7 @@ int FUN_0000d240(cursor, sizeMinus1, hasSecondSize)
     else {
       emitLength = 0;
     }
-    numberLength = ((int (*)())FUN_0000cdf0)(cursor + emitLength,sizeMinus1 + 1);
+    numberLength = ((int (*)())textPrintSignedDecimal)(cursor + emitLength,sizeMinus1 + 1);
     cursor = cursor + emitLength + numberLength;
     if (hasSecondSize == 1) {
       if (colonNotEmpty) {
@@ -2174,15 +2174,15 @@ int FUN_0000d240(cursor, sizeMinus1, hasSecondSize)
       else {
         emitLength = 0;
       }
-      numberLength = ((int (*)())FUN_0000cdf0)(cursor + emitLength,sizeMinus1 + 1);
+      numberLength = ((int (*)())textPrintSignedDecimal)(cursor + emitLength,sizeMinus1 + 1);
       cursor = cursor + emitLength + numberLength;
     }
   }
   return cursor;
 }
 
-/* FUN_0000d380 @ 0xd380 (2976 bytes) */
-int FUN_0000d380(instrTable, outCursor, nameTable3, nameTable4, instrIndex, useNames)
+/* arbIrPrintDestinationOperand @ 0xd380 (2976 bytes) */
+int arbIrPrintDestinationOperand(instrTable, outCursor, nameTable3, nameTable4, instrIndex, useNames)
   int instrTable;
   undefined1 *outCursor;
   int nameTable3;
@@ -2217,11 +2217,11 @@ int FUN_0000d380(instrTable, outCursor, nameTable3, nameTable4, instrIndex, useN
     }
     afterPrefix = outCursor + written;
     if ((useNames == 0) || (nameTable3 == 0)) {
-      written = ((int (*)())FUN_0000cdf0)(afterPrefix,(uint)*(ushort *)((int)operandEntry + 6));
+      written = ((int (*)())textPrintSignedDecimal)(afterPrefix,(uint)*(ushort *)((int)operandEntry + 6));
       outCursor = afterPrefix + written;
       goto LAB_0000d5c0;
     }
-    written = ((int (*)())FUN_0000cdf0)(afterPrefix,*(undefined4 *)(nameTable3 + (uint)*(ushort *)((int)operandEntry + 6) * 4));
+    written = ((int (*)())textPrintSignedDecimal)(afterPrefix,*(undefined4 *)(nameTable3 + (uint)*(ushort *)((int)operandEntry + 6) * 4));
     outCursor = afterPrefix + written;
     if (nameTable4 == 0) goto LAB_0000d5c4;
     registerFile = operandEntry[1];
@@ -2242,7 +2242,7 @@ int FUN_0000d380(instrTable, outCursor, nameTable3, nameTable4, instrIndex, useN
           registerId = (uint)*(ushort *)((int)operandEntry + 6);
         }
         afterPrefix = outCursor + written;
-        written = ((int (*)())FUN_0000cdf0)(afterPrefix,*(undefined4 *)(nameTable4 + registerId * 4));
+        written = ((int (*)())textPrintSignedDecimal)(afterPrefix,*(undefined4 *)(nameTable4 + registerId * 4));
         emitLength = 0;
         if (s___001a4468[0] != '\0') {
           srcCursor = "]";
@@ -2274,7 +2274,7 @@ LAB_0000d5d0:
       } while (curChar != '\0');
       registerFile = operandEntry[1];
     }
-    emitLength = ((int (*)())FUN_0000cdf0)(outCursor + written,registerFile >> 0x1e & 1);
+    emitLength = ((int (*)())textPrintSignedDecimal)(outCursor + written,registerFile >> 0x1e & 1);
     operandWord1 = operandEntry[1];
     afterPrefix = outCursor + written + emitLength;
     registerFile = operandWord1 >> 0x1c & 3;
@@ -2365,7 +2365,7 @@ LAB_0000d79c:
         }
         afterPrefix = afterPrefix + emitLength;
       }
-      written = ((int (*)())FUN_0000cdf0)(afterPrefix,written);
+      written = ((int (*)())textPrintSignedDecimal)(afterPrefix,written);
       afterPrefix = afterPrefix + written;
     }
     written = 0;
@@ -2438,7 +2438,7 @@ LAB_0000d89c:
         registerFile = *operandEntry;
       }
     }
-    outCursor = (undefined1 *)((int (*)())FUN_0000d240)(srcCursor,registerFile >> 10 & 3,registerFile >> 0xc & 1);
+    outCursor = (undefined1 *)((int (*)())arbIrPrintSourceSizeSuffix)(srcCursor,registerFile >> 10 & 3,registerFile >> 0xc & 1);
     registerFile = *operandEntry;
   }
   else {
@@ -2455,7 +2455,7 @@ LAB_0000d89c:
           curChar = *srcCursor;
         } while (curChar != '\0');
       }
-      emitLength = ((int (*)())FUN_0000cdf0)(outCursor + written,(uint)*(ushort *)((int)operandEntry + 6));
+      emitLength = ((int (*)())textPrintSignedDecimal)(outCursor + written,(uint)*(ushort *)((int)operandEntry + 6));
       outCursor = outCursor + written + emitLength;
     }
 LAB_0000d5c0:
@@ -2679,8 +2679,8 @@ switchD_0000dc3c_default:
   return outCursor + 6;
 }
 
-/* FUN_0000df50 @ 0xdf50 (648 bytes) */
-int FUN_0000df50(cursor, vectorWidthMinus1, hasSecondWidth, elementType)
+/* arbIrPrintSizeTypeSuffix @ 0xdf50 (648 bytes) */
+int arbIrPrintSizeTypeSuffix(cursor, vectorWidthMinus1, hasSecondWidth, elementType)
   int cursor;
   int vectorWidthMinus1;
   int hasSecondWidth;
@@ -2710,7 +2710,7 @@ int FUN_0000df50(cursor, vectorWidthMinus1, hasSecondWidth, elementType)
   else {
     emitLength = 0;
   }
-  suffixCursor = ((int (*)())FUN_0000cdf0)(cursor + emitLength,vectorWidthMinus1 + 1);
+  suffixCursor = ((int (*)())textPrintSignedDecimal)(cursor + emitLength,vectorWidthMinus1 + 1);
   suffixCursor = cursor + emitLength + suffixCursor;
   if (hasSecondWidth != 0) {
     if (colonNotEmpty) {
@@ -2726,7 +2726,7 @@ int FUN_0000df50(cursor, vectorWidthMinus1, hasSecondWidth, elementType)
     else {
       emitLength = 0;
     }
-    secondNumberLength = ((int (*)())FUN_0000cdf0)(suffixCursor + emitLength,vectorWidthMinus1 + 1);
+    secondNumberLength = ((int (*)())textPrintSignedDecimal)(suffixCursor + emitLength,vectorWidthMinus1 + 1);
     suffixCursor = suffixCursor + emitLength + secondNumberLength;
   }
   if (elementType == 2) {
@@ -2790,8 +2790,8 @@ int FUN_0000df50(cursor, vectorWidthMinus1, hasSecondWidth, elementType)
   return suffixCursor + emitLength;
 }
 
-/* FUN_0000e1f0 @ 0xe1f0 (4068 bytes) */
-int FUN_0000e1f0(instrTable, outCursor, nameTable3, nameTable4, nameTable5, nameTable6, instrIndex, useNames, isSwizzleOperand)
+/* arbIrPrintSourceOperand @ 0xe1f0 (4068 bytes) */
+int arbIrPrintSourceOperand(instrTable, outCursor, nameTable3, nameTable4, nameTable5, nameTable6, instrIndex, useNames, isSwizzleOperand)
   int instrTable;
   char *outCursor;
   int nameTable3;
@@ -2875,10 +2875,10 @@ int FUN_0000e1f0(instrTable, outCursor, nameTable3, nameTable4, nameTable5, name
     }
     srcCursor = outCursor + written;
     if (nameTable5 == 0) {
-      written = ((int (*)())FUN_0000cdf0)(srcCursor,(uint)*(ushort *)((int)operandEntry + 6));
+      written = ((int (*)())textPrintSignedDecimal)(srcCursor,(uint)*(ushort *)((int)operandEntry + 6));
     }
     else {
-      written = ((int (*)())FUN_0000cdf0)(srcCursor,*(undefined4 *)(nameTable5 + (uint)*(ushort *)((int)operandEntry + 6) * 4)
+      written = ((int (*)())textPrintSignedDecimal)(srcCursor,*(undefined4 *)(nameTable5 + (uint)*(ushort *)((int)operandEntry + 6) * 4)
                           );
     }
     outCursor = srcCursor + written;
@@ -2903,7 +2903,7 @@ int FUN_0000e1f0(instrTable, outCursor, nameTable3, nameTable4, nameTable5, name
           } while (curChar != '\0');
           nameIndex = (uint)*(ushort *)((int)operandEntry + 6);
         }
-        nameLength = ((int (*)())FUN_0000cdf0)(outCursor + written,*(undefined4 *)(nameTable6 + nameIndex * 4));
+        nameLength = ((int (*)())textPrintSignedDecimal)(outCursor + written,*(undefined4 *)(nameTable6 + nameIndex * 4));
         srcCursor = outCursor + written + nameLength;
         written = 0;
         if (s___001a4468[0] != '\0') {
@@ -2934,7 +2934,7 @@ int FUN_0000e1f0(instrTable, outCursor, nameTable3, nameTable4, nameTable5, name
         curChar = *srcCursor;
       } while (curChar != '\0');
     }
-    nameLength = ((int (*)())FUN_0000cdf0)(outCursor + written,
+    nameLength = ((int (*)())textPrintSignedDecimal)(outCursor + written,
                          *(undefined4 *)(nameTable3 + (uint)*(ushort *)((int)operandEntry + 6) * 4));
     operandWord = *operandEntry;
     outCursor = outCursor + written + nameLength;
@@ -2954,7 +2954,7 @@ int FUN_0000e1f0(instrTable, outCursor, nameTable3, nameTable4, nameTable5, name
           } while (curChar != '\0');
           nameIndex = (uint)*(ushort *)((int)operandEntry + 6);
         }
-        nameLength = ((int (*)())FUN_0000cdf0)(outCursor + written,*(undefined4 *)(nameTable4 + nameIndex * 4));
+        nameLength = ((int (*)())textPrintSignedDecimal)(outCursor + written,*(undefined4 *)(nameTable4 + nameIndex * 4));
         srcCursor = outCursor + written + nameLength;
         written = 0;
         if (s___001a4468[0] != '\0') {
@@ -3006,7 +3006,7 @@ LAB_0000e610:
   default:
     goto switchD_0000e310_default;
   }
-  nameLength = ((int (*)())FUN_0000cdf0)(outCursor + written,(uint)*(ushort *)((int)operandEntry + 6));
+  nameLength = ((int (*)())textPrintSignedDecimal)(outCursor + written,(uint)*(ushort *)((int)operandEntry + 6));
   operandWord = *operandEntry;
   outCursor = outCursor + written + nameLength;
 switchD_0000e310_default:
@@ -3024,7 +3024,7 @@ LAB_0000e6e8:
       } while (curChar != '\0');
       operandWord = *operandEntry;
     }
-    nameLength = ((int (*)())FUN_0000cdf0)(outCursor + written,operandWord >> 0x1e & 1);
+    nameLength = ((int (*)())textPrintSignedDecimal)(outCursor + written,operandWord >> 0x1e & 1);
     nameIndex = *operandEntry;
     srcCursor = outCursor + written + nameLength;
     operandWord = nameIndex >> 0x1c & 3;
@@ -3125,7 +3125,7 @@ LAB_0000e908:
         }
         srcCursor = srcCursor + nameLength;
       }
-      written = ((int (*)())FUN_0000cdf0)(srcCursor,written);
+      written = ((int (*)())textPrintSignedDecimal)(srcCursor,written);
       srcCursor = srcCursor + written;
     }
     written = 0;
@@ -3446,7 +3446,7 @@ LAB_0000ebd4:
       operandWord = *operandEntry;
     }
   }
-  outCursor = (char *)((int (*)())FUN_0000d240)(outCursor,operandWord >> 0xc & 3,operandWord >> 0xe & 1);
+  outCursor = (char *)((int (*)())arbIrPrintSourceSizeSuffix)(outCursor,operandWord >> 0xc & 3,operandWord >> 0xe & 1);
   operandWord = *operandEntry;
 LAB_0000f0bc:
   if ((operandWord & 0x4000000) != 0) {
@@ -3466,8 +3466,8 @@ LAB_0000f0bc:
   return outCursor;
 }
 
-/* FUN_0000f250 @ 0xf250 (932 bytes) */
-int FUN_0000f250(instrTable, outCursor, nameTable3, nameTable4, nameTable5, nameTable6, instrIndex, unitIsOperand)
+/* arbIrPrintTextureOperand @ 0xf250 (932 bytes) */
+int arbIrPrintTextureOperand(instrTable, outCursor, nameTable3, nameTable4, nameTable5, nameTable6, instrIndex, unitIsOperand)
   int instrTable;
   int outCursor;
   undefined4 nameTable3;
@@ -3498,12 +3498,12 @@ int FUN_0000f250(instrTable, outCursor, nameTable3, nameTable4, nameTable5, name
   cursor = outCursor + cursor;
   if (unitIsOperand == 0) {
     targetEntryOffset = instrIndex * 8;
-    emitLength = ((int (*)())FUN_0000cdf0)(cursor,*(uint *)(targetEntryOffset + instrTable) & 0x1f);
+    emitLength = ((int (*)())textPrintSignedDecimal)(cursor,*(uint *)(targetEntryOffset + instrTable) & 0x1f);
     cursor = cursor + emitLength;
   }
   else {
     targetEntryOffset = (instrIndex + 1) * 8;
-    cursor = ((int (*)())FUN_0000e1f0)(instrTable,cursor,nameTable3,nameTable4,nameTable5,nameTable6,instrIndex,1,0);
+    cursor = ((int (*)())arbIrPrintSourceOperand)(instrTable,cursor,nameTable3,nameTable4,nameTable5,nameTable6,instrIndex,1,0);
   }
   emitLength = 0;
   if (s____001a4520[0] != '\0') {
@@ -3631,8 +3631,8 @@ switchD_0000f394_default:
   return cursor;
 }
 
-/* FUN_0000f620 @ 0xf620 (27520 bytes) */
-int FUN_0000f620(program)
+/* arbProgramIrToText @ 0xf620 (27520 bytes) */
+int arbProgramIrToText(program)
   uint *program;
 {
   uint *labelsRemaining;
@@ -4093,7 +4093,7 @@ switchD_0000f958_default:
         } while (curChar != '\0');
       }
       outCursor = outCursor + emitLength;
-      bufferOk = ((int (*)())FUN_0000c8a0)(outCapacityPtr,&outBuffer,outCursorPtr);
+      bufferOk = ((int (*)())textBufferEnsureRoom)(outCapacityPtr,&outBuffer,outCursorPtr);
       if (bufferOk == 0) goto LAB_00016630;
       loopIndex = loopIndex + 1;
       optionEntry = optionEntry + 2;
@@ -4145,7 +4145,7 @@ switchD_0000f958_default:
         }
         outCursor = outCursor + emitLength;
         loopCounter = addressRegIndex + 1;
-        emitLength = ((int (*)())FUN_0000cdf0)(outCursor,addressRegIndex);
+        emitLength = ((int (*)())textPrintSignedDecimal)(outCursor,addressRegIndex);
         outCursor = outCursor + emitLength;
         addressRegIndex = loopCounter;
       } while (addressRegCount != loopCounter);
@@ -4162,7 +4162,7 @@ switchD_0000f958_default:
       } while (curChar != '\0');
     }
     outCursor = outCursor + emitLength;
-    bufferOk = ((int (*)())FUN_0000c8a0)(outCapacity,&outBuffer,&outCursor);
+    bufferOk = ((int (*)())textBufferEnsureRoom)(outCapacity,&outBuffer,&outCursor);
     if (bufferOk == 0) goto LAB_00016630;
     if (!isAssemblyProgram) {
       emitLength = 0;
@@ -4257,7 +4257,7 @@ LAB_00010394:
               } while (curChar != '\0');
             }
             outCursor = outCursor + emitLength2;
-            emitLength2 = ((int (*)())FUN_0000cdf0)(outCursor,(uint)*(ushort *)((int)currentTempEntry + 6));
+            emitLength2 = ((int (*)())textPrintSignedDecimal)(outCursor,(uint)*(ushort *)((int)currentTempEntry + 6));
             outCursor = outCursor + emitLength2;
           }
           else if (tmpGroupState[*(ushort *)((int)currentTempEntry + 6)] == 0xffffffff) {
@@ -4273,13 +4273,13 @@ LAB_00010394:
               } while (curChar != '\0');
             }
             outCursor = outCursor + emitLength2;
-            emitLength2 = ((int (*)())FUN_0000cdf0)(outCursor,*(undefined4 *)
+            emitLength2 = ((int (*)())textPrintSignedDecimal)(outCursor,*(undefined4 *)
                                             (tmpRegisterNumbers + (uint)*(ushort *)((int)currentTempEntry + 6) * 4));
             outCursor = outCursor + emitLength2;
             declWord = *currentTempEntry;
             argReg7 = declWord >> 0x1d;
             argReg6 = (uint *)(declWord >> 0x1a & 7);
-            outCursor = (undefined1 *)((int (*)())FUN_0000ce90)(outCursor,declWord >> 0x18 & 3,0,argReg6,argReg7);
+            outCursor = (undefined1 *)((int (*)())arbIrPrintDeclSizeSuffix)(outCursor,declWord >> 0x18 & 3,0,argReg6,argReg7);
           }
           else {
             if (tmpGroupState[*(ushort *)((int)currentTempEntry + 6)] == 0) {
@@ -4295,7 +4295,7 @@ LAB_00010394:
                 } while (curChar != '\0');
               }
               outCursor = outCursor + emitLength5;
-              emitLength6 = ((int (*)())FUN_0000cdf0)(outCursor,*(undefined4 *)
+              emitLength6 = ((int (*)())textPrintSignedDecimal)(outCursor,*(undefined4 *)
                                               (tmpRegisterNumbers + (uint)*(ushort *)((int)currentTempEntry + 6) * 4));
               emitLength2 = 0;
               if (s___001a4464[0] != '\0') {
@@ -4310,7 +4310,7 @@ LAB_00010394:
               }
               outCursor = outCursor + emitLength2 + emitLength6;
               groupByteOffset = groupIndex * 4;
-              emitLength6 = ((int (*)())FUN_0000cdf0)(outCursor,*(undefined4 *)(tmpArrayLengths + groupByteOffset));
+              emitLength6 = ((int (*)())textPrintSignedDecimal)(outCursor,*(undefined4 *)(tmpArrayLengths + groupByteOffset));
               emitLength4 = 0;
               if (s___001a4468[0] != '\0') {
                 srcCursor = "]";
@@ -4326,7 +4326,7 @@ LAB_00010394:
               declWord = *currentTempEntry;
               argReg7 = declWord >> 0x1d;
               argReg6 = (uint *)(declWord >> 0x1a & 7);
-              outCursor = (undefined1 *)((int (*)())FUN_0000ce90)(outCursor,declWord >> 0x18 & 3,0,argReg6,argReg7);
+              outCursor = (undefined1 *)((int (*)())arbIrPrintDeclSizeSuffix)(outCursor,declWord >> 0x18 & 3,0,argReg6,argReg7);
               groupElementIndex = 0;
               elementsSoFar = 1;
             }
@@ -4389,7 +4389,7 @@ LAB_00010780:
             outCursor = outCursor + emitLength2;
             groupEnded = true;
           }
-          reallocOk = ((int (*)())FUN_0000c8a0)(outCapacityPtr,&outBuffer,outCursorPtr);
+          reallocOk = ((int (*)())textBufferEnsureRoom)(outCapacityPtr,&outBuffer,outCursorPtr);
           if (reallocOk == 0) goto LAB_00014070;
           if ((int)tempCount <= (int)loopCounter) goto LAB_000107a8;
           currentTempEntry = currentTempEntry + 2;
@@ -4544,13 +4544,13 @@ LAB_000107a8:
           } while (curChar != '\0');
         }
         outCursor = outCursor + emitLength;
-        emitLength = ((int (*)())FUN_0000cdf0)(outCursor,(uint)*(ushort *)((int)attribEntry + 6));
+        emitLength = ((int (*)())textPrintSignedDecimal)(outCursor,(uint)*(ushort *)((int)attribEntry + 6));
         outCursor = outCursor + emitLength;
         if (!isAssemblyProgram) {
           entryWord = *attribEntry;
           argReg7 = entryWord >> 0x1d;
           argReg6 = (uint *)(entryWord >> 0x1a & 7);
-          outCursor = (undefined1 *)((int (*)())FUN_0000ce90)(outCursor,entryWord >> 0x18 & 3,0,argReg6,argReg7);
+          outCursor = (undefined1 *)((int (*)())arbIrPrintDeclSizeSuffix)(outCursor,entryWord >> 0x18 & 3,0,argReg6,argReg7);
         }
         if (programTarget == 0x8804) {
 LAB_00010974:
@@ -4670,7 +4670,7 @@ LAB_0001092c:
             } while (curChar != '\0');
           }
           outCursor = outCursor + emitLength;
-          emitLength3 = ((int (*)())FUN_0000cdf0)(outCursor,*attribEntry & 0x1f);
+          emitLength3 = ((int (*)())textPrintSignedDecimal)(outCursor,*attribEntry & 0x1f);
           emitLength = 0;
           outCursor = outCursor + emitLength3;
           if (s___001a4468[0] != '\0') {
@@ -4697,7 +4697,7 @@ LAB_0001092c:
             } while (curChar != '\0');
           }
           outCursor = outCursor + emitLength;
-          emitLength3 = ((int (*)())FUN_0000cdf0)(outCursor,*attribEntry & 0x1f);
+          emitLength3 = ((int (*)())textPrintSignedDecimal)(outCursor,*attribEntry & 0x1f);
           emitLength = 0;
           outCursor = outCursor + emitLength3;
           if (s___001a4468[0] != '\0') {
@@ -4724,7 +4724,7 @@ LAB_0001092c:
             } while (curChar != '\0');
           }
           outCursor = outCursor + emitLength;
-          emitLength3 = ((int (*)())FUN_0000cdf0)(outCursor,*attribEntry & 0x1f);
+          emitLength3 = ((int (*)())textPrintSignedDecimal)(outCursor,*attribEntry & 0x1f);
           emitLength = 0;
           outCursor = outCursor + emitLength3;
           if (s___001a4468[0] != '\0') {
@@ -4751,7 +4751,7 @@ LAB_0001092c:
             } while (curChar != '\0');
           }
           outCursor = outCursor + emitLength;
-          emitLength3 = ((int (*)())FUN_0000cdf0)(outCursor,*attribEntry & 0x1f);
+          emitLength3 = ((int (*)())textPrintSignedDecimal)(outCursor,*attribEntry & 0x1f);
           emitLength = 0;
           outCursor = outCursor + emitLength3;
           if (s___001a4468[0] != '\0') {
@@ -4909,7 +4909,7 @@ switchD_000109e4_caseD_0:
           } while (curChar != '\0');
         }
         outCursor = outCursor + emitLength;
-        bufferOk = ((int (*)())FUN_0000c8a0)(outCapacity,&outBuffer,&outCursor);
+        bufferOk = ((int (*)())textBufferEnsureRoom)(outCapacity,&outBuffer,&outCursor);
         if (bufferOk == 0) goto LAB_00014070;
       }
       loopCounter = loopCounter + 1;
@@ -5045,13 +5045,13 @@ LAB_00011410:
           paramRegisterId = (uint)*(ushort *)((int)paramEntry + 6);
         }
         outCursor = outCursor + emitLength3;
-        printResult = ((int (*)())FUN_0000cdf0)(outCursor,*(undefined4 *)(paramRegisterNumbers + paramRegisterId * 4));
+        printResult = ((int (*)())textPrintSignedDecimal)(outCursor,*(undefined4 *)(paramRegisterNumbers + paramRegisterId * 4));
         outCursor = outCursor + (int)(printResult >> 0x20);
         if (!isAssemblyProgram) {
           paramWord = *paramEntry;
           argReg7 = paramWord >> 0x1d;
           argReg6 = (uint *)(paramWord >> 0x1a & 7);
-          printResult = ((int (*)())FUN_0000ce90)(outCursor,paramWord >> 0x18 & 3,0,argReg6,argReg7);
+          printResult = ((int (*)())arbIrPrintDeclSizeSuffix)(outCursor,paramWord >> 0x18 & 3,0,argReg6,argReg7);
           outCursor = (undefined1 *)(printResult >> 0x20);
         }
         emitLength3 = 0;
@@ -5097,7 +5097,7 @@ LAB_00011758:
           paramRegisterId = (uint)*(ushort *)((int)paramEntry + 6);
         }
         outCursor = outCursor + emitLength5;
-        emitLength6 = ((int (*)())FUN_0000cdf0)(outCursor,*(undefined4 *)(paramRegisterNumbers + paramRegisterId * 4));
+        emitLength6 = ((int (*)())textPrintSignedDecimal)(outCursor,*(undefined4 *)(paramRegisterNumbers + paramRegisterId * 4));
         emitLength3 = 0;
         if (s___001a4464[0] != '\0') {
           srcCursor = "[";
@@ -5110,7 +5110,7 @@ LAB_00011758:
           } while (curChar != '\0');
         }
         outCursor = outCursor + emitLength3 + emitLength6;
-        printResult = ((int (*)())FUN_0000cdf0)(outCursor,paramArrayLengths[paramArrayIndex]);
+        printResult = ((int (*)())textPrintSignedDecimal)(outCursor,paramArrayLengths[paramArrayIndex]);
         emitLength6 = (int)(printResult >> 0x20);
         emitLength3 = 0;
         if (s___001a4468[0] != '\0') {
@@ -5128,7 +5128,7 @@ LAB_00011758:
           paramWord = *paramEntry;
           argReg7 = paramWord >> 0x1d;
           argReg6 = (uint *)(paramWord >> 0x1a & 7);
-          printResult = ((int (*)())FUN_0000ce90)(outCursor,paramWord >> 0x18 & 3,0,argReg6,argReg7);
+          printResult = ((int (*)())arbIrPrintDeclSizeSuffix)(outCursor,paramWord >> 0x18 & 3,0,argReg6,argReg7);
           outCursor = (undefined1 *)(printResult >> 0x20);
         }
         emitLength5 = 0;
@@ -5191,7 +5191,7 @@ switchD_000118c8_caseD_11:
           }
           outCursor = outCursor + emitLength3;
           commaSeparatorBase = 0x19f634;
-          floatPrintResult = ((char * (*)())FUN_0000bfa0)((int)(printResult >> 0x20),(int)printResult,outCursor,
+          floatPrintResult = ((char * (*)())textPrintDoubleShortest)((int)(printResult >> 0x20),(int)printResult,outCursor,
                                 (outBuffer + outCapacity[0]) - (int)outCursor,(double)*constantVector,
                                 DOUBLE_001aa248);
           floatTextCursor = (int)((ulonglong)floatPrintResult >> 0x20);
@@ -5212,7 +5212,7 @@ switchD_000118c8_caseD_11:
             emitLength2 = 0;
           }
           outCursor = (undefined1 *)(emitLength2 + floatTextCursor);
-          floatPrintResult = ((char * (*)())FUN_0000bfa0)(floatTextCursor,(int)floatPrintResult,outCursor,(outBuffer + outCapacity[0]) - (int)outCursor
+          floatPrintResult = ((char * (*)())textPrintDoubleShortest)(floatTextCursor,(int)floatPrintResult,outCursor,(outBuffer + outCapacity[0]) - (int)outCursor
                                 ,(double)constantVector[1],DOUBLE_001aa248);
           floatTextCursor = (int)((ulonglong)floatPrintResult >> 0x20);
           if (separatorNotEmpty) {
@@ -5230,7 +5230,7 @@ switchD_000118c8_caseD_11:
             emitLength2 = 0;
           }
           outCursor = (undefined1 *)(emitLength2 + floatTextCursor);
-          floatPrintResult = ((char * (*)())FUN_0000bfa0)(floatTextCursor,(int)floatPrintResult,outCursor,(outBuffer + outCapacity[0]) - (int)outCursor
+          floatPrintResult = ((char * (*)())textPrintDoubleShortest)(floatTextCursor,(int)floatPrintResult,outCursor,(outBuffer + outCapacity[0]) - (int)outCursor
                                 ,(double)constantVector[2],DOUBLE_001aa248);
           floatTextCursor = (int)((ulonglong)floatPrintResult >> 0x20);
           if (separatorNotEmpty) {
@@ -5248,7 +5248,7 @@ switchD_000118c8_caseD_11:
           }
           outCursor = (undefined1 *)(emitLength2 + floatTextCursor);
           argReg6 = (uint *)((outBuffer + outCapacity[0]) - (int)outCursor);
-          floatTextCursor = ((char * (*)())FUN_0000bfa0)(floatTextCursor,(int)floatPrintResult,outCursor,argReg6,(double)constantVector[3],DOUBLE_001aa248
+          floatTextCursor = ((char * (*)())textPrintDoubleShortest)(floatTextCursor,(int)floatPrintResult,outCursor,argReg6,(double)constantVector[3],DOUBLE_001aa248
                                );
           emitLength2 = 0;
           if (s___001a49e0[0] != '\0') {
@@ -5291,7 +5291,7 @@ switchD_000118c8_caseD_11:
           }
           outCursor = outCursor + emitLength3;
           commaSeparatorBase = 0x19f634;
-          emitLength7 = ((int (*)())FUN_0000cdf0)(outCursor, *(unsigned int *)constantVector);
+          emitLength7 = ((int (*)())textPrintSignedDecimal)(outCursor, *(unsigned int *)constantVector);
           curChar = ((unsigned char *)0x00004ec0)[commaSeparatorBase];
           separatorNotEmpty = curChar != '\0';
           if (separatorNotEmpty) {
@@ -5309,7 +5309,7 @@ switchD_000118c8_caseD_11:
             emitLength2 = 0;
           }
           outCursor = outCursor + emitLength2 + emitLength7;
-          emitLength7 = ((int (*)())FUN_0000cdf0)(outCursor, ((unsigned int *)constantVector)[1]);
+          emitLength7 = ((int (*)())textPrintSignedDecimal)(outCursor, ((unsigned int *)constantVector)[1]);
           if (separatorNotEmpty) {
             emitLength2 = 0;
             srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
@@ -5325,7 +5325,7 @@ switchD_000118c8_caseD_11:
             emitLength2 = 0;
           }
           outCursor = outCursor + emitLength2 + emitLength7;
-          emitLength7 = ((int (*)())FUN_0000cdf0)(outCursor, ((unsigned int *)constantVector)[2]);
+          emitLength7 = ((int (*)())textPrintSignedDecimal)(outCursor, ((unsigned int *)constantVector)[2]);
           if (separatorNotEmpty) {
             emitLength2 = 0;
             srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
@@ -5340,7 +5340,7 @@ switchD_000118c8_caseD_11:
             emitLength2 = 0;
           }
           outCursor = outCursor + emitLength2 + emitLength7;
-          emitLength2 = ((int (*)())FUN_0000cdf0)(outCursor, ((unsigned int *)constantVector)[3]);
+          emitLength2 = ((int (*)())textPrintSignedDecimal)(outCursor, ((unsigned int *)constantVector)[3]);
           emitLength3 = 0;
           outCursor = outCursor + emitLength2;
           if (s___001a49e0[0] != '\0') {
@@ -5390,7 +5390,7 @@ LAB_000118a8:
           } while (curChar != '\0');
         }
         outCursor = outCursor + emitLength3;
-        emitLength2 = ((int (*)())FUN_0000cdf0)(outCursor,(uint)(ushort)*paramEntry);
+        emitLength2 = ((int (*)())textPrintSignedDecimal)(outCursor,(uint)(ushort)*paramEntry);
         emitLength3 = 0;
         outCursor = outCursor + emitLength2;
         if (s___001a4468[0] != '\0') {
@@ -5417,7 +5417,7 @@ LAB_000118a8:
           } while (curChar != '\0');
         }
         outCursor = outCursor + emitLength3;
-        emitLength2 = ((int (*)())FUN_0000cdf0)(outCursor,(uint)(ushort)*paramEntry);
+        emitLength2 = ((int (*)())textPrintSignedDecimal)(outCursor,(uint)(ushort)*paramEntry);
         emitLength3 = 0;
         outCursor = outCursor + emitLength2;
         if (s___001a4468[0] != '\0') {
@@ -5444,7 +5444,7 @@ LAB_000118a8:
           } while (curChar != '\0');
         }
         outCursor = outCursor + emitLength3;
-        emitLength3 = ((int (*)())FUN_0000cdf0)(outCursor,(uint)(byte)*paramEntry);
+        emitLength3 = ((int (*)())textPrintSignedDecimal)(outCursor,(uint)(byte)*paramEntry);
         emitLength2 = 0;
         if (s____001a4878[0] != '\0') {
           srcCursor = "].";
@@ -5579,7 +5579,7 @@ LAB_000118a8:
           } while (curChar != '\0');
         }
         outCursor = outCursor + emitLength3;
-        emitLength7 = ((int (*)())FUN_0000cdf0)(outCursor,(uint)(byte)*paramEntry);
+        emitLength7 = ((int (*)())textPrintSignedDecimal)(outCursor,(uint)(byte)*paramEntry);
         emitLength2 = 0;
         if (s____001a4878[0] != '\0') {
           srcCursor = "].";
@@ -5841,7 +5841,7 @@ LAB_000121cc:
           } while (curChar != '\0');
         }
         outCursor = outCursor + emitLength3;
-        emitLength7 = ((int (*)())FUN_0000cdf0)(outCursor,*paramEntry & 0x1f);
+        emitLength7 = ((int (*)())textPrintSignedDecimal)(outCursor,*paramEntry & 0x1f);
         emitLength2 = 0;
         if (s___eye__001a48ec[0] != '\0') {
           srcCursor = "].eye.";
@@ -5923,7 +5923,7 @@ LAB_000121cc:
           } while (curChar != '\0');
         }
         outCursor = outCursor + emitLength3;
-        emitLength7 = ((int (*)())FUN_0000cdf0)(outCursor,*paramEntry & 0x1f);
+        emitLength7 = ((int (*)())textPrintSignedDecimal)(outCursor,*paramEntry & 0x1f);
         emitLength2 = 0;
         if (s___object__001a4904[0] != '\0') {
           srcCursor = "].object.";
@@ -6005,7 +6005,7 @@ LAB_000121cc:
           } while (curChar != '\0');
         }
         outCursor = outCursor + emitLength3;
-        emitLength2 = ((int (*)())FUN_0000cdf0)(outCursor,*paramEntry & 0x1f);
+        emitLength2 = ((int (*)())textPrintSignedDecimal)(outCursor,*paramEntry & 0x1f);
         emitLength3 = 0;
         outCursor = outCursor + emitLength2;
         if (s___color_001a4918[0] != '\0') {
@@ -6032,7 +6032,7 @@ LAB_000121cc:
           } while (curChar != '\0');
         }
         outCursor = outCursor + emitLength3;
-        emitLength2 = ((int (*)())FUN_0000cdf0)(outCursor,(uint)(byte)*paramEntry);
+        emitLength2 = ((int (*)())textPrintSignedDecimal)(outCursor,(uint)(byte)*paramEntry);
         emitLength3 = 0;
         outCursor = outCursor + emitLength2;
         if (s___plane_001a4928[0] != '\0') {
@@ -6168,7 +6168,7 @@ LAB_00012bfc:
             } while (curChar != '\0');
           }
           outCursor = outCursor + emitLength3;
-          emitLength3 = ((int (*)())FUN_0000cdf0)(outCursor,(uint)(byte)*paramEntry);
+          emitLength3 = ((int (*)())textPrintSignedDecimal)(outCursor,(uint)(byte)*paramEntry);
           emitLength2 = 0;
           outCursor = outCursor + emitLength3;
           if (s____001a4878[0] != '\0') {
@@ -6195,7 +6195,7 @@ LAB_00012bfc:
             } while (curChar != '\0');
           }
           outCursor = outCursor + emitLength3;
-          emitLength3 = ((int (*)())FUN_0000cdf0)(outCursor,(uint)(byte)*paramEntry);
+          emitLength3 = ((int (*)())textPrintSignedDecimal)(outCursor,(uint)(byte)*paramEntry);
           emitLength2 = 0;
           outCursor = outCursor + emitLength3;
           if (s____001a4878[0] != '\0') {
@@ -6225,7 +6225,7 @@ LAB_00012d68:
             } while (curChar != '\0');
           }
           outCursor = outCursor + emitLength3;
-          emitLength3 = ((int (*)())FUN_0000cdf0)(outCursor,(uint)(byte)*paramEntry);
+          emitLength3 = ((int (*)())textPrintSignedDecimal)(outCursor,(uint)(byte)*paramEntry);
           emitLength2 = 0;
           outCursor = outCursor + emitLength3;
           if (s____001a4878[0] != '\0') {
@@ -6255,7 +6255,7 @@ LAB_00012e2c:
             } while (curChar != '\0');
           }
           outCursor = outCursor + emitLength3;
-          emitLength7 = ((int (*)())FUN_0000cdf0)(outCursor,(uint)(byte)*paramEntry);
+          emitLength7 = ((int (*)())textPrintSignedDecimal)(outCursor,(uint)(byte)*paramEntry);
           emitLength2 = 0;
           if (s____001a4878[0] != '\0') {
             srcCursor = "].";
@@ -6328,7 +6328,7 @@ LAB_00012ff0:
           } while (curChar != '\0');
         }
         outCursor = outCursor + emitLength3;
-        emitLength2 = ((int (*)())FUN_0000cdf0)(outCursor,*paramEntry >> 0xc & 3);
+        emitLength2 = ((int (*)())textPrintSignedDecimal)(outCursor,*paramEntry >> 0xc & 3);
         emitLength3 = 0;
         outCursor = outCursor + emitLength2;
         if (s___001a4468[0] != '\0') {
@@ -6401,7 +6401,7 @@ switchD_000118c8_caseD_0:
         }
       }
       outCursor = outCursor + emitLength3;
-      printResult = ((int (*)())FUN_0000c8a0)(outCapacity,&outBuffer,&outCursor);
+      printResult = ((int (*)())textBufferEnsureRoom)(outCapacity,&outBuffer,&outCursor);
       if ((int)(printResult >> 0x20) == 0) goto LAB_00014048;
 LAB_000136f0:
       paramLoopCursor = (uint *)((int)paramLoopCursor + 1);
@@ -6478,13 +6478,13 @@ LAB_0001389c:
           goto LAB_0001389c;
         }
       }
-      emitLength = ((int (*)())FUN_0000cdf0)(outCursor,(uint)*(ushort *)((int)outputEntry + 6));
+      emitLength = ((int (*)())textPrintSignedDecimal)(outCursor,(uint)*(ushort *)((int)outputEntry + 6));
       outCursor = outCursor + emitLength;
       if (!isAssemblyProgram) {
         declWord = *outputEntry;
         argReg7 = declWord >> 0x1d;
         argReg6 = (uint *)(declWord >> 0x1a & 7);
-        outCursor = (undefined1 *)((int (*)())FUN_0000ce90)(outCursor,declWord >> 0x18 & 3,0,argReg6,argReg7);
+        outCursor = (undefined1 *)((int (*)())arbIrPrintDeclSizeSuffix)(outCursor,declWord >> 0x18 & 3,0,argReg6,argReg7);
       }
       emitLength = 0;
       if (s___001a4834[0] != '\0') {
@@ -6598,7 +6598,7 @@ LAB_0001389c:
             entryWord = *outputEntry;
           }
           outCursor = outCursor + emitLength;
-          emitLength = ((int (*)())FUN_0000cdf0)(outCursor,entryWord >> 1 & 7);
+          emitLength = ((int (*)())textPrintSignedDecimal)(outCursor,entryWord >> 1 & 7);
           groupElementIndex = 0;
           outCursor = outCursor + emitLength;
           if (s___001a4468[0] != '\0') {
@@ -6670,7 +6670,7 @@ LAB_0001389c:
           } while (curChar != '\0');
         }
         outCursor = outCursor + emitLength;
-        emitLength = ((int (*)())FUN_0000cdf0)(outCursor,*outputEntry & 0x1f);
+        emitLength = ((int (*)())textPrintSignedDecimal)(outCursor,*outputEntry & 0x1f);
         groupElementIndex = 0;
         outCursor = outCursor + emitLength;
         if (s___001a4468[0] != '\0') {
@@ -6736,7 +6736,7 @@ LAB_0001389c:
           } while (curChar != '\0');
         }
         outCursor = outCursor + emitLength;
-        emitLength = ((int (*)())FUN_0000cdf0)(outCursor,*outputEntry & 0x1f);
+        emitLength = ((int (*)())textPrintSignedDecimal)(outCursor,*outputEntry & 0x1f);
         groupElementIndex = 0;
         outCursor = outCursor + emitLength;
         if (s___001a4468[0] != '\0') {
@@ -6764,7 +6764,7 @@ switchD_00013960_caseD_0:
         } while (curChar != '\0');
       }
       outCursor = outCursor + emitLength;
-      bufferOk = ((int (*)())FUN_0000c8a0)(outCapacity,&outBuffer,&outCursor);
+      bufferOk = ((int (*)())textBufferEnsureRoom)(outCapacity,&outBuffer,&outCursor);
       if (bufferOk == 0) goto LAB_00014048;
 LAB_000140a0:
       loopCounter = loopCounter + 1;
@@ -6953,7 +6953,7 @@ LAB_00014300:
             } while (curChar != '\0');
           }
           outCursor = outCursor + emitLength3;
-          emitLength7 = ((int (*)())FUN_0000cdf0)(outCursor,labelIndex);
+          emitLength7 = ((int (*)())textPrintSignedDecimal)(outCursor,labelIndex);
           labelIndex = labelIndex + 1;
           emitLength2 = 0;
           if (s___001a4b58[0] != '\0') {
@@ -7057,12 +7057,12 @@ LAB_00014300:
       case 0x6c:
       case 0x6f:
       case 0x70:
-        cursorAfterPrecision = ((int (*)())FUN_0000ca50)(lineCursor,instructionRecord[1] >> 0x12 & 3);
+        cursorAfterPrecision = ((int (*)())arbIrPrintPrecisionSuffix)(lineCursor,instructionRecord[1] >> 0x12 & 3);
         modifierWord = instructionRecord[1];
-        emitLength3 = ((int (*)())FUN_0000c930)(cursorAfterPrecision,modifierWord >> 0x16 & 1,modifierWord >> 0x15 & 1,modifierWord >> 0x14 & 1);
+        emitLength3 = ((int (*)())arbIrPrintCcAndSaturateSuffix)(cursorAfterPrecision,modifierWord >> 0x16 & 1,modifierWord >> 0x15 & 1,modifierWord >> 0x14 & 1);
         if (!isAssemblyProgram) {
           modifierWord = instructionRecord[1];
-          emitLength3 = ((int (*)())FUN_0000df50)(emitLength3,modifierWord >> 0x1a & 3,modifierWord >> 0x1c & 1,modifierWord >> 0x17 & 7);
+          emitLength3 = ((int (*)())arbIrPrintSizeTypeSuffix)(emitLength3,modifierWord >> 0x1a & 3,modifierWord >> 0x1c & 1,modifierWord >> 0x17 & 7);
         }
         emitLength2 = 0;
         if (s__001a4b5c[0] != '\0') {
@@ -7076,7 +7076,7 @@ LAB_00014300:
           } while (curChar != '\0');
         }
         commaSeparatorBase = 0x19f634;
-        emitLength3 = ((int (*)())FUN_0000d380)(instructionRecord,emitLength3 + emitLength2,tmpRegisterNumbers,tmpGroupState,1,isShaderObject);
+        emitLength3 = ((int (*)())arbIrPrintDestinationOperand)(instructionRecord,emitLength3 + emitLength2,tmpRegisterNumbers,tmpGroupState,1,isShaderObject);
         curChar = ((unsigned char *)0x00004ec0)[commaSeparatorBase];
         if (curChar != '\0') {
           srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
@@ -7098,7 +7098,7 @@ LAB_00014300:
         argReg8 = tmpGroupState;
         argReg10 = (char *)isShaderObject;
         lineCursor = (undefined1 *)
-                  ((int (*)())FUN_0000e1f0)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,2,isShaderObject,0);
+                  ((int (*)())arbIrPrintSourceOperand)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,2,isShaderObject,0);
         if (entryWord >> 0x1d == 2) {
           if (curChar != '\0') {
             emitLength3 = 0;
@@ -7148,12 +7148,12 @@ LAB_00014300:
       case 0x4e:
       case 0x52:
       case 0x6d:
-        cursorAfterPrecision = ((int (*)())FUN_0000ca50)(lineCursor,instructionRecord[1] >> 0x12 & 3);
+        cursorAfterPrecision = ((int (*)())arbIrPrintPrecisionSuffix)(lineCursor,instructionRecord[1] >> 0x12 & 3);
         entryWord = instructionRecord[1];
-        emitLength3 = ((int (*)())FUN_0000c930)(cursorAfterPrecision,entryWord >> 0x16 & 1,entryWord >> 0x15 & 1,entryWord >> 0x14 & 1);
+        emitLength3 = ((int (*)())arbIrPrintCcAndSaturateSuffix)(cursorAfterPrecision,entryWord >> 0x16 & 1,entryWord >> 0x15 & 1,entryWord >> 0x14 & 1);
         if (!isAssemblyProgram) {
           entryWord = instructionRecord[1];
-          emitLength3 = ((int (*)())FUN_0000df50)(emitLength3,entryWord >> 0x1a & 3,entryWord >> 0x1c & 1,entryWord >> 0x17 & 7);
+          emitLength3 = ((int (*)())arbIrPrintSizeTypeSuffix)(emitLength3,entryWord >> 0x1a & 3,entryWord >> 0x1c & 1,entryWord >> 0x17 & 7);
         }
         emitLength2 = 0;
         if (s__001a4b5c[0] != '\0') {
@@ -7167,7 +7167,7 @@ LAB_00014300:
           } while (curChar != '\0');
         }
         commaSeparatorBase = 0x19f634;
-        emitLength3 = ((int (*)())FUN_0000d380)(instructionRecord,emitLength3 + emitLength2,tmpRegisterNumbers,tmpGroupState,1,isShaderObject);
+        emitLength3 = ((int (*)())arbIrPrintDestinationOperand)(instructionRecord,emitLength3 + emitLength2,tmpRegisterNumbers,tmpGroupState,1,isShaderObject);
         curChar = ((unsigned char *)0x00004ec0)[commaSeparatorBase];
         if (curChar != '\0') {
           srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
@@ -7183,7 +7183,7 @@ LAB_00014300:
         else {
           emitLength2 = 0;
         }
-        emitLength3 = ((int (*)())FUN_0000e1f0)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,2,isShaderObject,0);
+        emitLength3 = ((int (*)())arbIrPrintSourceOperand)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,2,isShaderObject,0);
         if (curChar != '\0') {
           emitLength2 = 0;
           srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
@@ -7205,7 +7205,7 @@ LAB_000154ec:
         argReg8 = tmpGroupState;
         argReg10 = (char *)isShaderObject;
         lineCursor = (undefined1 *)
-                  ((int (*)())FUN_0000e1f0)(instructionRecord,lineCursor,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,3,isShaderObject,0);
+                  ((int (*)())arbIrPrintSourceOperand)(instructionRecord,lineCursor,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,3,isShaderObject,0);
         break;
       case 0x3b:
       case 0x3c:
@@ -7216,12 +7216,12 @@ LAB_000154ec:
       case 0x53:
       case 0x67:
       case 0x68:
-        cursorAfterPrecision = ((int (*)())FUN_0000ca50)(lineCursor,instructionRecord[1] >> 0x12 & 3);
+        cursorAfterPrecision = ((int (*)())arbIrPrintPrecisionSuffix)(lineCursor,instructionRecord[1] >> 0x12 & 3);
         entryWord = instructionRecord[1];
-        emitLength3 = ((int (*)())FUN_0000c930)(cursorAfterPrecision,entryWord >> 0x16 & 1,entryWord >> 0x15 & 1,entryWord >> 0x14 & 1);
+        emitLength3 = ((int (*)())arbIrPrintCcAndSaturateSuffix)(cursorAfterPrecision,entryWord >> 0x16 & 1,entryWord >> 0x15 & 1,entryWord >> 0x14 & 1);
         if (!isAssemblyProgram) {
           entryWord = instructionRecord[1];
-          emitLength3 = ((int (*)())FUN_0000df50)(emitLength3,entryWord >> 0x1a & 3,entryWord >> 0x1c & 1,entryWord >> 0x17 & 7);
+          emitLength3 = ((int (*)())arbIrPrintSizeTypeSuffix)(emitLength3,entryWord >> 0x1a & 3,entryWord >> 0x1c & 1,entryWord >> 0x17 & 7);
         }
         emitLength2 = 0;
         if (s__001a4b5c[0] != '\0') {
@@ -7235,7 +7235,7 @@ LAB_000154ec:
           } while (curChar != '\0');
         }
         commaSeparatorBase = 0x19f634;
-        emitLength3 = ((int (*)())FUN_0000d380)(instructionRecord,emitLength3 + emitLength2,tmpRegisterNumbers,tmpGroupState,1,isShaderObject);
+        emitLength3 = ((int (*)())arbIrPrintDestinationOperand)(instructionRecord,emitLength3 + emitLength2,tmpRegisterNumbers,tmpGroupState,1,isShaderObject);
         curChar = ((unsigned char *)0x00004ec0)[commaSeparatorBase];
         separatorNotEmpty = curChar != '\0';
         if (separatorNotEmpty) {
@@ -7252,7 +7252,7 @@ LAB_000154ec:
         else {
           emitLength2 = 0;
         }
-        emitLength3 = ((int (*)())FUN_0000e1f0)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,2,isShaderObject,0);
+        emitLength3 = ((int (*)())arbIrPrintSourceOperand)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,2,isShaderObject,0);
         if (separatorNotEmpty) {
           emitLength2 = 0;
           srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
@@ -7267,7 +7267,7 @@ LAB_000154ec:
         else {
           emitLength2 = 0;
         }
-        emitLength3 = ((int (*)())FUN_0000e1f0)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,3,isShaderObject,0);
+        emitLength3 = ((int (*)())arbIrPrintSourceOperand)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,3,isShaderObject,0);
         if (separatorNotEmpty) {
           emitLength2 = 0;
           srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
@@ -7287,14 +7287,14 @@ LAB_000154ec:
         argReg8 = tmpGroupState;
         argReg10 = (char *)isShaderObject;
         lineCursor = (undefined1 *)
-                  ((int (*)())FUN_0000e1f0)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,4,isShaderObject,0);
+                  ((int (*)())arbIrPrintSourceOperand)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,4,isShaderObject,0);
         break;
       case 0x41:
         entryWord = instructionRecord[1];
-        emitLength3 = ((int (*)())FUN_0000c930)(lineCursor,entryWord >> 0x16 & 1,entryWord >> 0x15 & 1,entryWord >> 0x14 & 1);
+        emitLength3 = ((int (*)())arbIrPrintCcAndSaturateSuffix)(lineCursor,entryWord >> 0x16 & 1,entryWord >> 0x15 & 1,entryWord >> 0x14 & 1);
         if (!isAssemblyProgram) {
           entryWord = instructionRecord[1];
-          emitLength3 = ((int (*)())FUN_0000df50)(emitLength3,entryWord >> 0x1a & 3,entryWord >> 0x1c & 1,entryWord >> 0x17 & 7);
+          emitLength3 = ((int (*)())arbIrPrintSizeTypeSuffix)(emitLength3,entryWord >> 0x1a & 3,entryWord >> 0x1c & 1,entryWord >> 0x17 & 7);
         }
         emitLength2 = 0;
         if (s__001a4b5c[0] != '\0') {
@@ -7307,7 +7307,7 @@ LAB_000154ec:
             curChar = *srcCursor;
           } while (curChar != '\0');
         }
-        emitLength3 = ((int (*)())FUN_0000d380)(instructionRecord,emitLength3 + emitLength2,tmpRegisterNumbers,tmpGroupState,1,isShaderObject);
+        emitLength3 = ((int (*)())arbIrPrintDestinationOperand)(instructionRecord,emitLength3 + emitLength2,tmpRegisterNumbers,tmpGroupState,1,isShaderObject);
         emitLength2 = 0;
         if (s___001a44f4[0] != '\0') {
           srcCursor = ", ";
@@ -7325,15 +7325,15 @@ LAB_000154ec:
         argReg8 = tmpGroupState;
         argReg10 = (char *)isShaderObject;
         lineCursor = (undefined1 *)
-                  ((int (*)())FUN_0000e1f0)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,2,isShaderObject,1);
+                  ((int (*)())arbIrPrintSourceOperand)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,2,isShaderObject,1);
         break;
       case 0x42:
       case 0x43:
         entryWord = instructionRecord[1];
-        emitLength3 = ((int (*)())FUN_0000c930)(lineCursor,entryWord >> 0x16 & 1,entryWord >> 0x15 & 1,entryWord >> 0x14 & 1);
+        emitLength3 = ((int (*)())arbIrPrintCcAndSaturateSuffix)(lineCursor,entryWord >> 0x16 & 1,entryWord >> 0x15 & 1,entryWord >> 0x14 & 1);
         if (!isAssemblyProgram) {
           entryWord = instructionRecord[1];
-          emitLength3 = ((int (*)())FUN_0000df50)(emitLength3,entryWord >> 0x1a & 3,entryWord >> 0x1c & 1,entryWord >> 0x17 & 7);
+          emitLength3 = ((int (*)())arbIrPrintSizeTypeSuffix)(emitLength3,entryWord >> 0x1a & 3,entryWord >> 0x1c & 1,entryWord >> 0x17 & 7);
         }
         emitLength2 = 0;
         if (s__001a4b5c[0] != '\0') {
@@ -7347,7 +7347,7 @@ LAB_000154ec:
           } while (curChar != '\0');
         }
         commaSeparatorBase = 0x19f634;
-        emitLength3 = ((int (*)())FUN_0000d380)(instructionRecord,emitLength3 + emitLength2,tmpRegisterNumbers,tmpGroupState,1,isShaderObject);
+        emitLength3 = ((int (*)())arbIrPrintDestinationOperand)(instructionRecord,emitLength3 + emitLength2,tmpRegisterNumbers,tmpGroupState,1,isShaderObject);
         curChar = ((unsigned char *)0x00004ec0)[commaSeparatorBase];
         if (curChar != '\0') {
           srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
@@ -7363,7 +7363,7 @@ LAB_000154ec:
         else {
           emitLength2 = 0;
         }
-        emitLength3 = ((int (*)())FUN_0000e1f0)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,2,isShaderObject,0);
+        emitLength3 = ((int (*)())arbIrPrintSourceOperand)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,2,isShaderObject,0);
         if (curChar != '\0') {
           emitLength2 = 0;
           srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
@@ -7383,17 +7383,17 @@ LAB_000154ec:
         argReg8 = tmpGroupState;
         argReg10 = (char *)isShaderObject;
         lineCursor = (undefined1 *)
-                  ((int (*)())FUN_0000f250)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,3,isShaderObject);
+                  ((int (*)())arbIrPrintTextureOperand)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,3,isShaderObject);
         break;
       case 0x44:
       case 0x45:
       case 0x46:
       case 0x47:
         entryWord = instructionRecord[1];
-        emitLength3 = ((int (*)())FUN_0000c930)(lineCursor,entryWord >> 0x16 & 1,entryWord >> 0x15 & 1,entryWord >> 0x14 & 1);
+        emitLength3 = ((int (*)())arbIrPrintCcAndSaturateSuffix)(lineCursor,entryWord >> 0x16 & 1,entryWord >> 0x15 & 1,entryWord >> 0x14 & 1);
         if (!isAssemblyProgram) {
           entryWord = instructionRecord[1];
-          emitLength3 = ((int (*)())FUN_0000df50)(emitLength3,entryWord >> 0x1a & 3,entryWord >> 0x1c & 1,entryWord >> 0x17 & 7);
+          emitLength3 = ((int (*)())arbIrPrintSizeTypeSuffix)(emitLength3,entryWord >> 0x1a & 3,entryWord >> 0x1c & 1,entryWord >> 0x17 & 7);
         }
         emitLength2 = 0;
         if (s__001a4b5c[0] != '\0') {
@@ -7407,7 +7407,7 @@ LAB_000154ec:
           } while (curChar != '\0');
         }
         commaSeparatorBase = 0x19f634;
-        emitLength3 = ((int (*)())FUN_0000d380)(instructionRecord,emitLength3 + emitLength2,tmpRegisterNumbers,tmpGroupState,1,isShaderObject);
+        emitLength3 = ((int (*)())arbIrPrintDestinationOperand)(instructionRecord,emitLength3 + emitLength2,tmpRegisterNumbers,tmpGroupState,1,isShaderObject);
         curChar = ((unsigned char *)0x00004ec0)[commaSeparatorBase];
         separatorNotEmpty = curChar != '\0';
         if (separatorNotEmpty) {
@@ -7424,7 +7424,7 @@ LAB_000154ec:
         else {
           emitLength2 = 0;
         }
-        emitLength3 = ((int (*)())FUN_0000e1f0)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,2,isShaderObject,0);
+        emitLength3 = ((int (*)())arbIrPrintSourceOperand)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,2,isShaderObject,0);
         if (separatorNotEmpty) {
           emitLength2 = 0;
           srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
@@ -7444,7 +7444,7 @@ LAB_000154ec:
         argReg8 = tmpGroupState;
         argReg10 = (char *)isShaderObject;
         lineCursor = (undefined1 *)
-                  ((int (*)())FUN_0000f250)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,3,isShaderObject);
+                  ((int (*)())arbIrPrintTextureOperand)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,3,isShaderObject);
         if (isAssemblyProgram) {
           operandEntriesUsed = (dword *)((int)((unsigned char *)0x0) + 3);
         }
@@ -7468,7 +7468,7 @@ LAB_000154ec:
           argReg8 = tmpGroupState;
           argReg10 = (char *)isShaderObject;
           lineCursor = (undefined1 *)
-                    ((int (*)())FUN_0000e1f0)(instructionRecord,lineCursor + emitLength3,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,operandEntriesUsed,
+                    ((int (*)())arbIrPrintSourceOperand)(instructionRecord,lineCursor + emitLength3,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,operandEntriesUsed,
                                  isShaderObject,0);
         }
         break;
@@ -7478,7 +7478,7 @@ LAB_000154ec:
         if (!isAssemblyProgram) {
           entryWord = instructionRecord[1];
           lineCursor = (undefined1 *)
-                    ((int (*)())FUN_0000df50)(lineCursor,entryWord >> 0x1a & 3,entryWord >> 0x1c & 1,entryWord >> 0x17 & 7);
+                    ((int (*)())arbIrPrintSizeTypeSuffix)(lineCursor,entryWord >> 0x1a & 3,entryWord >> 0x1c & 1,entryWord >> 0x17 & 7);
         }
         emitLength3 = 0;
         if (s__001a4b5c[0] != '\0') {
@@ -7507,7 +7507,7 @@ LAB_000154ec:
               curChar = *srcCursor;
             } while (curChar != '\0');
           }
-          registerNumberLength = ((int (*)())FUN_0000cdf0)(lineCursor + emitLength3,(uint)*(ushort *)((int)instructionRecord + 0xe));
+          registerNumberLength = ((int (*)())textPrintSignedDecimal)(lineCursor + emitLength3,(uint)*(ushort *)((int)instructionRecord + 0xe));
           lineCursor = lineCursor + emitLength3 + registerNumberLength;
         }
         entryWord = *firstOperand;
@@ -7846,7 +7846,7 @@ switchD_000146d8_caseD_4d:
         if (!isAssemblyProgram) {
           entryWord = instructionRecord[1];
           lineCursor = (undefined1 *)
-                    ((int (*)())FUN_0000df50)(lineCursor,entryWord >> 0x1a & 3,entryWord >> 0x1c & 1,entryWord >> 0x17 & 7);
+                    ((int (*)())arbIrPrintSizeTypeSuffix)(lineCursor,entryWord >> 0x1a & 3,entryWord >> 0x1c & 1,entryWord >> 0x17 & 7);
           emitLength3 = 0;
           if (s__001a4b5c[0] != '\0') {
             srcCursor = " ";
@@ -8025,14 +8025,14 @@ LAB_00014cb8:
         argReg8 = tmpGroupState;
         argReg10 = (char *)isShaderObject;
         lineCursor = (undefined1 *)
-                  ((int (*)())FUN_0000e1f0)(instructionRecord,lineCursor,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,2,isShaderObject,0);
+                  ((int (*)())arbIrPrintSourceOperand)(instructionRecord,lineCursor,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,2,isShaderObject,0);
         break;
       case 0x62:
         entryWord = instructionRecord[1];
-        emitLength3 = ((int (*)())FUN_0000c930)(lineCursor,entryWord >> 0x16 & 1,entryWord >> 0x15 & 1,entryWord >> 0x14 & 1);
+        emitLength3 = ((int (*)())arbIrPrintCcAndSaturateSuffix)(lineCursor,entryWord >> 0x16 & 1,entryWord >> 0x15 & 1,entryWord >> 0x14 & 1);
         if (!isAssemblyProgram) {
           entryWord = instructionRecord[1];
-          emitLength3 = ((int (*)())FUN_0000df50)(emitLength3,entryWord >> 0x1a & 3,entryWord >> 0x1c & 1,entryWord >> 0x17 & 7);
+          emitLength3 = ((int (*)())arbIrPrintSizeTypeSuffix)(emitLength3,entryWord >> 0x1a & 3,entryWord >> 0x1c & 1,entryWord >> 0x17 & 7);
         }
         emitLength2 = 0;
         if (s__001a4b5c[0] != '\0') {
@@ -8046,7 +8046,7 @@ LAB_00014cb8:
           } while (curChar != '\0');
         }
         commaSeparatorBase = 0x19f634;
-        emitLength3 = ((int (*)())FUN_0000d380)(instructionRecord,emitLength3 + emitLength2,tmpRegisterNumbers,tmpGroupState,1,isShaderObject);
+        emitLength3 = ((int (*)())arbIrPrintDestinationOperand)(instructionRecord,emitLength3 + emitLength2,tmpRegisterNumbers,tmpGroupState,1,isShaderObject);
         curChar = ((unsigned char *)0x00004ec0)[commaSeparatorBase];
         separatorNotEmpty = curChar != '\0';
         if (separatorNotEmpty) {
@@ -8063,7 +8063,7 @@ LAB_00014cb8:
         else {
           emitLength2 = 0;
         }
-        emitLength3 = ((int (*)())FUN_0000e1f0)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,2,isShaderObject,0);
+        emitLength3 = ((int (*)())arbIrPrintSourceOperand)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,2,isShaderObject,0);
         if (separatorNotEmpty) {
           emitLength2 = 0;
           srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
@@ -8078,7 +8078,7 @@ LAB_00014cb8:
         else {
           emitLength2 = 0;
         }
-        emitLength3 = ((int (*)())FUN_0000e1f0)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,3,isShaderObject,0);
+        emitLength3 = ((int (*)())arbIrPrintSourceOperand)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,3,isShaderObject,0);
         if (separatorNotEmpty) {
           emitLength2 = 0;
           srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
@@ -8093,7 +8093,7 @@ LAB_00014cb8:
         else {
           emitLength2 = 0;
         }
-        emitLength3 = ((int (*)())FUN_0000e1f0)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,4,isShaderObject,0);
+        emitLength3 = ((int (*)())arbIrPrintSourceOperand)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,4,isShaderObject,0);
         if (separatorNotEmpty) {
           emitLength2 = 0;
           srcCursor = ((unsigned char *)0x00004ec1) + commaSeparatorBase;
@@ -8113,7 +8113,7 @@ LAB_00014cb8:
         argReg8 = tmpGroupState;
         argReg10 = (char *)isShaderObject;
         lineCursor = (undefined1 *)
-                  ((int (*)())FUN_0000f250)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,5,isShaderObject);
+                  ((int (*)())arbIrPrintTextureOperand)(instructionRecord,emitLength3 + emitLength2,paramRegisterNumbers,paramGroupState,tmpRegisterNumbers,tmpGroupState,5,isShaderObject);
       }
       emitLength3 = 0;
       curChar = ((unsigned char *)0x00005558)[semicolonBase];
@@ -8160,7 +8160,7 @@ LAB_00014cb8:
         } while (curChar != '\0');
       }
       outCursor = lineCursor + (int)(outCursor + (emitLength3 - (int)lineStart));
-      ensureOk = ((int (*)())FUN_0000c8a0)(outCapacityPtr,&outBuffer,outCursorPtr);
+      ensureOk = ((int (*)())textBufferEnsureRoom)(outCapacityPtr,&outBuffer,outCursorPtr);
       if (ensureOk == 0) {
         if (paramRegisterNumbers != 0) {
           _free(paramRegisterNumbers);
@@ -8196,7 +8196,7 @@ LAB_00014cb8:
           } while (curChar != '\0');
         }
         outCursor = outCursor + emitLength5;
-        labelNumberLength = ((int (*)())FUN_0000cdf0)(outCursor,labelIndex);
+        labelNumberLength = ((int (*)())textPrintSignedDecimal)(outCursor,labelIndex);
         emitLength5 = 0;
         if (s___001a4b58[0] != '\0') {
           srcCursor = ":\n";
@@ -10429,7 +10429,7 @@ int glDrawPixels_impl(ctx, rasterPos, width, height, format, pixelType, pixels, 
   notStencil = format != 0x1901;
   heightCopy = height;
   ((int (*)())FUN_0000a6e0)(ctx,format,pixelType,width,height,piVar18,puVar21,piVar25,unpackState);
-  ((int (*)())FUN_0000a3f0)(format,pixelType);
+  ((int (*)())gldPixelUnitBytes)(format,pixelType);
   puVar16 = auStack_418;
   puVar17 = auStack_414;
   convResult = _glgConvertType(format,pixelType,puVar16,puVar17,heightCopy,piVar18,puVar21,piVar25);

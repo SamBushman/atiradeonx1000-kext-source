@@ -2479,8 +2479,8 @@ LAB_0000a05c:
   return 0;
 }
 
-/* FUN_0000a0a0 @ 0xa0a0 (68 bytes) */
-int FUN_0000a0a0(param_1)
+/* gldFormatBitsPerPixel @ 0xa0a0 (68 bytes) */
+int gldFormatBitsPerPixel(param_1)
   uint param_1;
 {
   if ((param_1 & 0x3c) != 0) {
@@ -2514,8 +2514,8 @@ int FUN_0000a0f0(param_1)
   return param_1 >> 4 & 8;
 }
 
-/* FUN_0000a120 @ 0xa120 (92 bytes) */
-int FUN_0000a120(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+/* gldFormatAlphaBits @ 0xa120 (92 bytes) */
+int gldFormatAlphaBits(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   uint param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -2624,7 +2624,7 @@ int FUN_0000a180(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
     param_2[2] = 2;
     *param_2 = 3;
   }
-  uVar1 = ((int (*)())FUN_0000a120)(param_1,param_2,param_3,param_4,param_5,param_6,param_7);
+  uVar1 = ((int (*)())gldFormatAlphaBits)(param_1,param_2,param_3,param_4,param_5,param_6,param_7);
   param_2[3] = uVar1;
   return 1;
 }

@@ -516,8 +516,8 @@ int FUN_00083c90(param_1, param_2)
   return param_2 + 0x13;
 }
 
-/* FUN_00083e10 @ 0x83e10 (692 bytes) */
-int FUN_00083e10(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate, src2File, src2Index, src2Select, src2Negate)
+/* arbEmitRecord3Src_op44 @ 0x83e10 (692 bytes) */
+int arbEmitRecord3Src_op44(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate, src2File, src2Index, src2Select, src2Negate)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -666,8 +666,8 @@ int FUN_00083e10(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   return;
 }
 
-/* FUN_000840d0 @ 0x840d0 (548 bytes) */
-int FUN_000840d0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
+/* arbEmitRecord2Src_op01 @ 0x840d0 (548 bytes) */
+int arbEmitRecord2Src_op01(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -786,8 +786,8 @@ int FUN_000840d0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   return;
 }
 
-/* FUN_00084300 @ 0x84300 (472 bytes) */
-int FUN_00084300(param_1, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate)
+/* arbEmitRecord1Src_op02 @ 0x84300 (472 bytes) */
+int arbEmitRecord1Src_op02(param_1, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate)
   int param_1;
   uint dstFile;
   uint dstIndex;
@@ -876,8 +876,8 @@ int FUN_00084300(param_1, dstFile, dstIndex, dstMask, src0File, src0Index, src0S
   return;
 }
 
-/* FUN_000844e0 @ 0x844e0 (548 bytes) */
-int FUN_000844e0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
+/* arbEmitRecord2Src_op02 @ 0x844e0 (548 bytes) */
+int arbEmitRecord2Src_op02(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -996,8 +996,8 @@ int FUN_000844e0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   return;
 }
 
-/* FUN_00084710 @ 0x84710 (548 bytes) */
-int FUN_00084710(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
+/* arbEmitRecord2Src_op03 @ 0x84710 (548 bytes) */
+int arbEmitRecord2Src_op03(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -1116,8 +1116,8 @@ int FUN_00084710(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   return;
 }
 
-/* FUN_00084940 @ 0x84940 (692 bytes) */
-int FUN_00084940(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate, src2File, src2Index, src2Select, src2Negate)
+/* arbEmitRecord3Src_op04 @ 0x84940 (692 bytes) */
+int arbEmitRecord3Src_op04(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate, src2File, src2Index, src2Select, src2Negate)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -1266,8 +1266,8 @@ int FUN_00084940(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   return;
 }
 
-/* FUN_00084c00 @ 0x84c00 (692 bytes) */
-int FUN_00084c00(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate, src2File, src2Index, src2Select, src2Negate)
+/* arbEmitRecord3Src_op0b @ 0x84c00 (692 bytes) */
+int arbEmitRecord3Src_op0b(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate, src2File, src2Index, src2Select, src2Negate)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -1416,8 +1416,8 @@ int FUN_00084c00(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   return;
 }
 
-/* FUN_00084ec0 @ 0x84ec0 (692 bytes) */
-int FUN_00084ec0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate, src2File, src2Index, src2Select, src2Negate)
+/* arbEmitRecord3Src_op0c @ 0x84ec0 (692 bytes) */
+int arbEmitRecord3Src_op0c(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate, src2File, src2Index, src2Select, src2Negate)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -1566,8 +1566,8 @@ int FUN_00084ec0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   return;
 }
 
-/* FUN_00085180 @ 0x85180 (548 bytes) */
-int FUN_00085180(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
+/* arbEmitRecord2Src_op08 @ 0x85180 (548 bytes) */
+int arbEmitRecord2Src_op08(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -1686,8 +1686,8 @@ int FUN_00085180(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   return;
 }
 
-/* FUN_000853b0 @ 0x853b0 (548 bytes) */
-int FUN_000853b0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
+/* arbEmitRecord2Src_op07 @ 0x853b0 (548 bytes) */
+int arbEmitRecord2Src_op07(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -1806,8 +1806,8 @@ int FUN_000853b0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   return;
 }
 
-/* FUN_000855e0 @ 0x855e0 (548 bytes) */
-int FUN_000855e0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
+/* arbEmitRecord2Src_op0a @ 0x855e0 (548 bytes) */
+int arbEmitRecord2Src_op0a(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -1926,8 +1926,8 @@ int FUN_000855e0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   return;
 }
 
-/* FUN_00085810 @ 0x85810 (548 bytes) */
-int FUN_00085810(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
+/* arbEmitRecord2Src_op09 @ 0x85810 (548 bytes) */
+int arbEmitRecord2Src_op09(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -2046,8 +2046,8 @@ int FUN_00085810(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   return;
 }
 
-/* FUN_00085a40 @ 0x85a40 (424 bytes) */
-int FUN_00085a40(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, srcNegate)
+/* arbEmitRecord1Src_op0e @ 0x85a40 (424 bytes) */
+int arbEmitRecord1Src_op0e(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, srcNegate)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -2133,8 +2133,8 @@ int FUN_00085a40(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, 
   return;
 }
 
-/* FUN_00085bf0 @ 0x85bf0 (424 bytes) */
-int FUN_00085bf0(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, srcNegate)
+/* arbEmitRecord1Src_op47 @ 0x85bf0 (424 bytes) */
+int arbEmitRecord1Src_op47(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, srcNegate)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -2220,8 +2220,8 @@ int FUN_00085bf0(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, 
   return;
 }
 
-/* FUN_00085da0 @ 0x85da0 (424 bytes) */
-int FUN_00085da0(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, srcNegate)
+/* arbEmitRecord1Src_op49 @ 0x85da0 (424 bytes) */
+int arbEmitRecord1Src_op49(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, srcNegate)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -2307,8 +2307,8 @@ int FUN_00085da0(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, 
   return;
 }
 
-/* FUN_00085f50 @ 0x85f50 (424 bytes) */
-int FUN_00085f50(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, srcNegate)
+/* arbEmitRecord1Src_op4b @ 0x85f50 (424 bytes) */
+int arbEmitRecord1Src_op4b(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, srcNegate)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -2394,8 +2394,8 @@ int FUN_00085f50(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, 
   return;
 }
 
-/* FUN_00086100 @ 0x86100 (424 bytes) */
-int FUN_00086100(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, srcNegate)
+/* arbEmitRecord1Src_op43 @ 0x86100 (424 bytes) */
+int arbEmitRecord1Src_op43(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, srcNegate)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -2481,8 +2481,8 @@ int FUN_00086100(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, 
   return;
 }
 
-/* FUN_000862b0 @ 0x862b0 (548 bytes) */
-int FUN_000862b0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
+/* arbEmitRecord2Src_op45 @ 0x862b0 (548 bytes) */
+int arbEmitRecord2Src_op45(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -2601,8 +2601,8 @@ int FUN_000862b0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   return;
 }
 
-/* FUN_000864e0 @ 0x864e0 (548 bytes) */
-int FUN_000864e0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
+/* arbEmitRecord2Src_op4f @ 0x864e0 (548 bytes) */
+int arbEmitRecord2Src_op4f(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -4683,43 +4683,43 @@ asm(".set FUN_000837b0, _FUN_000837b0");
 asm(".globl FUN_00083870");
 asm(".set FUN_00083870, _FUN_00083870");
 asm(".globl FUN_00083e10");
-asm(".set FUN_00083e10, _FUN_00083e10");
+asm(".set FUN_00083e10, _arbEmitRecord3Src_op44");
 asm(".globl FUN_000840d0");
-asm(".set FUN_000840d0, _FUN_000840d0");
+asm(".set FUN_000840d0, _arbEmitRecord2Src_op01");
 asm(".globl FUN_00084300");
-asm(".set FUN_00084300, _FUN_00084300");
+asm(".set FUN_00084300, _arbEmitRecord1Src_op02");
 asm(".globl FUN_000844e0");
-asm(".set FUN_000844e0, _FUN_000844e0");
+asm(".set FUN_000844e0, _arbEmitRecord2Src_op02");
 asm(".globl FUN_00084710");
-asm(".set FUN_00084710, _FUN_00084710");
+asm(".set FUN_00084710, _arbEmitRecord2Src_op03");
 asm(".globl FUN_00084940");
-asm(".set FUN_00084940, _FUN_00084940");
+asm(".set FUN_00084940, _arbEmitRecord3Src_op04");
 asm(".globl FUN_00084c00");
-asm(".set FUN_00084c00, _FUN_00084c00");
+asm(".set FUN_00084c00, _arbEmitRecord3Src_op0b");
 asm(".globl FUN_00084ec0");
-asm(".set FUN_00084ec0, _FUN_00084ec0");
+asm(".set FUN_00084ec0, _arbEmitRecord3Src_op0c");
 asm(".globl FUN_00085180");
-asm(".set FUN_00085180, _FUN_00085180");
+asm(".set FUN_00085180, _arbEmitRecord2Src_op08");
 asm(".globl FUN_000853b0");
-asm(".set FUN_000853b0, _FUN_000853b0");
+asm(".set FUN_000853b0, _arbEmitRecord2Src_op07");
 asm(".globl FUN_000855e0");
-asm(".set FUN_000855e0, _FUN_000855e0");
+asm(".set FUN_000855e0, _arbEmitRecord2Src_op0a");
 asm(".globl FUN_00085810");
-asm(".set FUN_00085810, _FUN_00085810");
+asm(".set FUN_00085810, _arbEmitRecord2Src_op09");
 asm(".globl FUN_00085a40");
-asm(".set FUN_00085a40, _FUN_00085a40");
+asm(".set FUN_00085a40, _arbEmitRecord1Src_op0e");
 asm(".globl FUN_00085bf0");
-asm(".set FUN_00085bf0, _FUN_00085bf0");
+asm(".set FUN_00085bf0, _arbEmitRecord1Src_op47");
 asm(".globl FUN_00085da0");
-asm(".set FUN_00085da0, _FUN_00085da0");
+asm(".set FUN_00085da0, _arbEmitRecord1Src_op49");
 asm(".globl FUN_00085f50");
-asm(".set FUN_00085f50, _FUN_00085f50");
+asm(".set FUN_00085f50, _arbEmitRecord1Src_op4b");
 asm(".globl FUN_00086100");
-asm(".set FUN_00086100, _FUN_00086100");
+asm(".set FUN_00086100, _arbEmitRecord1Src_op43");
 asm(".globl FUN_000862b0");
-asm(".set FUN_000862b0, _FUN_000862b0");
+asm(".set FUN_000862b0, _arbEmitRecord2Src_op45");
 asm(".globl FUN_000864e0");
-asm(".set FUN_000864e0, _FUN_000864e0");
+asm(".set FUN_000864e0, _arbEmitRecord2Src_op4f");
 asm(".globl FUN_00087960");
 asm(".set FUN_00087960, _FUN_00087960");
 asm(".globl FUN_000879e0");

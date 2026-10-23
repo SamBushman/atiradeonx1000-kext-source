@@ -1,6 +1,6 @@
 # stock entry	name	size	entered by a test of the differential suite	if not: static reason
 0x1740	dyld_stub_binding_helper	48	not a C function of the rebuilt image	
-0x1770	FUN_00001770	32	not a C function of the rebuilt image	
+0x1770	dyld_func_lookup_stub	32	not a C function of the rebuilt image	
 0x1790	cxa_atexit_check_2	40	not a C function of the rebuilt image	
 0x17b8	cxa_atexit_check_1	120	not a C function of the rebuilt image	
 0x1830	check_cxa_atexit	204	not a C function of the rebuilt image	
@@ -10,20 +10,20 @@
 0x1b34	get_globals	528	not a C function of the rebuilt image	
 0x1d44	FUN_00001d44	32	not a C function of the rebuilt image	
 0x1d64	FUN_00001d64	32	not a C function of the rebuilt image	
-0x1d84	FUN_00001d84	32	not a C function of the rebuilt image	
+0x1d84	dlsym_stub_00001d84	32	not a C function of the rebuilt image	
 0x1da4	FUN_00001da4	32	not a C function of the rebuilt image	
-0x1dc4	FUN_00001dc4	32	not a C function of the rebuilt image	
-0x1de4	FUN_00001de4	32	not a C function of the rebuilt image	
+0x1dc4	dlopen_stub_00001dc4	32	not a C function of the rebuilt image	
+0x1de4	calloc_stub_00001de4	32	not a C function of the rebuilt image	
 0x1e04	FUN_00001e04	32	not a C function of the rebuilt image	
 0x1e24	add_routine	268	not a C function of the rebuilt image	
 0x1f30	FUN_00001f30	32	not a C function of the rebuilt image	
-0x1f50	FUN_00001f50	32	not a C function of the rebuilt image	
+0x1f50	malloc_stub_00001f50	32	not a C function of the rebuilt image	
 0x1f70	run_routines	292	not a C function of the rebuilt image	
 0x2094	FUN_00002094	32	not a C function of the rebuilt image	
-0x20b4	FUN_000020b4	32	not a C function of the rebuilt image	
+0x20b4	free_stub_000020b4	32	not a C function of the rebuilt image	
 0x20d4	FUN_000020d4	32	not a C function of the rebuilt image	
 0x20f4	cxa_atexit_wrapper	312	not a C function of the rebuilt image	
-0x222c	FUN_0000222c	32	not a C function of the rebuilt image	
+0x222c	run_routines_stub_0000222c	32	not a C function of the rebuilt image	
 0x224c	FUN_0000224c	32	not a C function of the rebuilt image	
 0x226c	FUN_0000226c	32	not a C function of the rebuilt image	
 0x228c	our_atexit	188	not a C function of the rebuilt image	
@@ -31,7 +31,7 @@
 0x2368	FUN_00002368	32	not a C function of the rebuilt image	
 0x2388	FUN_00002388	32	not a C function of the rebuilt image	
 0x23a8	atexit_common	672	not a C function of the rebuilt image	
-0x2648	FUN_00002648	32	not a C function of the rebuilt image	
+0x2648	malloc_stub_00002648	32	not a C function of the rebuilt image	
 0x2668	FUN_00002668	32	not a C function of the rebuilt image	
 0x2688	FUN_00002688	32	not a C function of the rebuilt image	
 0x26a8	FUN_000026a8	32	not a C function of the rebuilt image	
@@ -115,13 +115,13 @@
 0x9cd0	gld_releaseQueryMemory	152	no	atomic / cache / barrier instruction; calls an import (io_connect_method_scalarI_structureI)
 0x9d70	gld_setQueryAgpRefBacking	248	no	atomic / cache / barrier instruction; calls an import (io_connect_method_scalarI_structureI); calls an import (io_connect_method_structureI_structureO)
 0x9e70	_gldCreateQuery	532	no	calls an import (free); calls an import (malloc); calls an import (realloc)
-0xa0a0	FUN_0000a0a0	68	yes	
+0xa0a0	gldFormatBitsPerPixel	68	yes	
 0xa0f0	FUN_0000a0f0	48	yes	
-0xa120	FUN_0000a120	92	yes	
+0xa120	gldFormatAlphaBits	92	yes	
 0xa180	FUN_0000a180	344	yes	
 0xa2f0	FUN_0000a2f0	184	yes	
-0xa3f0	FUN_0000a3f0	592	yes	
-0xa670	FUN_0000a670	100	yes	
+0xa3f0	gldPixelUnitBytes	592	yes	
+0xa670	gldPixelRowBytes	100	yes	
 0xa6e0	FUN_0000a6e0	292	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0xa820	FUN_0000a820	452	yes	
 0xa9f0	FUN_0000a9f0	244	yes	
@@ -133,7 +133,7 @@
 0xb270	gld_setTextureNewTextureBacking	296	no	atomic / cache / barrier instruction; calls an import (io_connect_method_scalarI_structureI); calls an import (io_connect_method_structureI_structureO)
 0xb3a0	gld_ensureTextureSurfaceBacking	332	no	atomic / cache / barrier instruction; calls an import (io_connect_method_scalarI_structureI); calls an import (io_connect_method_structureI_structureO)
 0xb4f0	gld_ensureTextureGlobalBacking	292	no	atomic / cache / barrier instruction; calls an import (io_connect_method_scalarI_structureI); calls an import (io_connect_method_structureI_structureO)
-0xb620	FUN_0000b620	72	yes	
+0xb620	gldFlushDataCacheRange	72	yes	
 0xb670	FUN_0000b670	80	no	atomic / cache / barrier instruction
 0xb6c0	_gldCreateVertexArray	80	no	calls an import (calloc)
 0xb710	_gldFlushVertexArray	56	yes	
@@ -145,21 +145,21 @@
 0xbc20	_gldDestroyVertexArray	56	no	calls an import (free)
 0xbc60	gld_setVertexArrayAgpRefBacking	248	no	atomic / cache / barrier instruction; calls an import (io_connect_method_scalarI_structureI); calls an import (io_connect_method_structureI_structureO)
 0xbd60	gld_setVertexArrayNewTextureBacking	264	no	atomic / cache / barrier instruction; calls an import (io_connect_method_scalarI_structureI); calls an import (io_connect_method_structureI_structureO)
-0xbe70	FUN_0000be70	272	yes	
-0xbfa0	FUN_0000bfa0	1332	no	calls an import (round)
+0xbe70	powerOfTenDouble	272	yes	
+0xbfa0	textPrintDoubleShortest	1332	no	calls an import (round)
 0xc500	FUN_0000c500	892	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xc8a0	FUN_0000c8a0	136	no	calls an import (realloc)
-0xc930	FUN_0000c930	284	yes	
-0xca50	FUN_0000ca50	312	yes	
-0xcb90	FUN_0000cb90	572	yes	
-0xcdf0	FUN_0000cdf0	156	yes	
-0xce90	FUN_0000ce90	924	yes	
-0xd240	FUN_0000d240	308	yes	
-0xd380	FUN_0000d380	2976	yes	
-0xdf50	FUN_0000df50	648	yes	
-0xe1f0	FUN_0000e1f0	4068	yes	
-0xf250	FUN_0000f250	932	yes	
-0xf620	FUN_0000f620	27520	no	calls an import (free); calls an import (malloc); calls an import (realloc)
+0xc8a0	textBufferEnsureRoom	136	no	calls an import (realloc)
+0xc930	arbIrPrintCcAndSaturateSuffix	284	yes	
+0xca50	arbIrPrintPrecisionSuffix	312	yes	
+0xcb90	textPrintDecimalDigits	572	yes	
+0xcdf0	textPrintSignedDecimal	156	yes	
+0xce90	arbIrPrintDeclSizeSuffix	924	yes	
+0xd240	arbIrPrintSourceSizeSuffix	308	yes	
+0xd380	arbIrPrintDestinationOperand	2976	yes	
+0xdf50	arbIrPrintSizeTypeSuffix	648	yes	
+0xe1f0	arbIrPrintSourceOperand	4068	yes	
+0xf250	arbIrPrintTextureOperand	932	yes	
+0xf620	arbProgramIrToText	27520	no	calls an import (free); calls an import (malloc); calls an import (realloc)
 0x16670	glBitmap_impl	2312	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x16fc0	gld_bufferEnumToIndex	272	yes	
 0x17100	FUN_00017100	84	yes	
@@ -519,39 +519,39 @@
 0x57340	extvsEncodeSourceSwizzle	1768	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x57af0	extvsOperandsConflictInBank	144	yes	
 0x57b80	FUN_00057b80	360	no	indirect call (driver context / vtable / callback)
-0x57cf0	FUN_00057cf0	1532	no	indirect call (driver context / vtable / callback)
+0x57cf0	extvsEmitIndex	1532	no	indirect call (driver context / vtable / callback)
 0x58300	extvsEmitSingleSourceInstruction	332	no	indirect call (driver context / vtable / callback)
-0x58450	FUN_00058450	872	no	indirect call (driver context / vtable / callback)
-0x587d0	FUN_000587d0	824	no	indirect call (driver context / vtable / callback)
-0x58b10	FUN_00058b10	824	no	indirect call (driver context / vtable / callback)
-0x58e50	FUN_00058e50	824	no	indirect call (driver context / vtable / callback)
-0x59190	FUN_00059190	2512	no	indirect call (driver context / vtable / callback)
-0x59b80	FUN_00059b80	304	no	indirect call (driver context / vtable / callback)
-0x59cb0	FUN_00059cb0	824	no	indirect call (driver context / vtable / callback)
-0x59ff0	FUN_00059ff0	824	no	indirect call (driver context / vtable / callback)
-0x5a330	FUN_0005a330	824	no	indirect call (driver context / vtable / callback)
-0x5a670	FUN_0005a670	824	no	indirect call (driver context / vtable / callback)
-0x5a9b0	FUN_0005a9b0	1112	no	indirect call (driver context / vtable / callback)
-0x5ae10	FUN_0005ae10	512	no	indirect call (driver context / vtable / callback)
-0x5b010	FUN_0005b010	932	no	indirect call (driver context / vtable / callback)
-0x5b3c0	FUN_0005b3c0	304	no	indirect call (driver context / vtable / callback)
-0x5b4f0	FUN_0005b4f0	304	no	indirect call (driver context / vtable / callback)
-0x5b620	FUN_0005b620	824	no	indirect call (driver context / vtable / callback)
-0x5b960	FUN_0005b960	304	no	indirect call (driver context / vtable / callback)
-0x5ba90	FUN_0005ba90	304	no	indirect call (driver context / vtable / callback)
-0x5bbc0	FUN_0005bbc0	928	no	indirect call (driver context / vtable / callback)
-0x5bf60	FUN_0005bf60	1672	no	indirect call (driver context / vtable / callback)
-0x5c600	FUN_0005c600	1552	no	indirect call (driver context / vtable / callback)
-0x5cc20	FUN_0005cc20	320	no	indirect call (driver context / vtable / callback)
-0x5cd60	FUN_0005cd60	1228	no	indirect call (driver context / vtable / callback)
-0x5d2f0	FUN_0005d2f0	372	no	indirect call (driver context / vtable / callback)
-0x5d470	FUN_0005d470	424	no	indirect call (driver context / vtable / callback)
-0x5d620	FUN_0005d620	568	no	indirect call (driver context / vtable / callback)
-0x5d870	FUN_0005d870	336	no	indirect call (driver context / vtable / callback)
-0x5d9c0	FUN_0005d9c0	824	no	indirect call (driver context / vtable / callback)
-0x5dd00	FUN_0005dd00	324	no	indirect call (driver context / vtable / callback)
-0x5de50	FUN_0005de50	324	no	indirect call (driver context / vtable / callback)
-0x5dfa0	FUN_0005dfa0	304	no	indirect call (driver context / vtable / callback)
+0x58450	extvsEmitDot3	872	no	indirect call (driver context / vtable / callback)
+0x587d0	extvsEmitDot4	824	no	indirect call (driver context / vtable / callback)
+0x58b10	extvsEmitMul	824	no	indirect call (driver context / vtable / callback)
+0x58e50	extvsEmitAdd	824	no	indirect call (driver context / vtable / callback)
+0x59190	extvsEmitMad	2512	no	indirect call (driver context / vtable / callback)
+0x59b80	extvsEmitFrc	304	no	indirect call (driver context / vtable / callback)
+0x59cb0	extvsEmitMax	824	no	indirect call (driver context / vtable / callback)
+0x59ff0	extvsEmitMin	824	no	indirect call (driver context / vtable / callback)
+0x5a330	extvsEmitSetGreaterEqual	824	no	indirect call (driver context / vtable / callback)
+0x5a670	extvsEmitSetLessThan	824	no	indirect call (driver context / vtable / callback)
+0x5a9b0	extvsEmitClamp	1112	no	indirect call (driver context / vtable / callback)
+0x5ae10	extvsEmitFlr	512	no	indirect call (driver context / vtable / callback)
+0x5b010	extvsEmitRnd	932	no	indirect call (driver context / vtable / callback)
+0x5b3c0	extvsEmitExp	304	no	indirect call (driver context / vtable / callback)
+0x5b4f0	extvsEmitLog	304	no	indirect call (driver context / vtable / callback)
+0x5b620	extvsEmitPow	824	no	indirect call (driver context / vtable / callback)
+0x5b960	extvsEmitRcp	304	no	indirect call (driver context / vtable / callback)
+0x5ba90	extvsEmitRsq	304	no	indirect call (driver context / vtable / callback)
+0x5bbc0	extvsEmitSub	928	no	indirect call (driver context / vtable / callback)
+0x5bf60	extvsEmitCrs	1672	no	indirect call (driver context / vtable / callback)
+0x5c600	extvsEmitMmul	1552	no	indirect call (driver context / vtable / callback)
+0x5cc20	extvsEmitMov	320	no	indirect call (driver context / vtable / callback)
+0x5cd60	extvsEmitSwizzle	1228	no	indirect call (driver context / vtable / callback)
+0x5d2f0	extvsEmitWriteMask	372	no	indirect call (driver context / vtable / callback)
+0x5d470	extvsEmitOp879c	424	no	indirect call (driver context / vtable / callback)
+0x5d620	extvsEmitOp879d	568	no	indirect call (driver context / vtable / callback)
+0x5d870	extvsEmitLit	336	no	indirect call (driver context / vtable / callback)
+0x5d9c0	extvsEmitDst	824	no	indirect call (driver context / vtable / callback)
+0x5dd00	extvsEmitExpp	324	no	indirect call (driver context / vtable / callback)
+0x5de50	extvsEmitLogp	324	no	indirect call (driver context / vtable / callback)
+0x5dfa0	extvsEmitMova	304	no	indirect call (driver context / vtable / callback)
 0x5e0d0	FUN_0005e0d0	1676	no	indirect call (driver context / vtable / callback)
 0x5e770	popFirstNonNull32	108	yes	
 0x5e7f0	extvsAssignVertexInputs	3156	no	indirect call (driver context / vtable / callback)
@@ -587,25 +587,25 @@
 0x65c80	noop_65c80	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x65c90	FUN_00065c90	328	no	indirect call (driver context / vtable / callback)
 0x65de0	FUN_00065de0	192	no	indirect call (driver context / vtable / callback)
-0x65ea0	FUN_00065ea0	1912	no	indirect call (driver context / vtable / callback)
-0x66640	FUN_00066640	1308	no	indirect call (driver context / vtable / callback)
-0x66b80	FUN_00066b80	1912	no	indirect call (driver context / vtable / callback)
-0x67320	FUN_00067320	1912	no	indirect call (driver context / vtable / callback)
-0x67ac0	FUN_00067ac0	2516	no	indirect call (driver context / vtable / callback)
-0x684c0	FUN_000684c0	3632	no	indirect call (driver context / vtable / callback)
-0x69330	FUN_00069330	4280	no	indirect call (driver context / vtable / callback)
-0x6a400	FUN_0006a400	1912	no	indirect call (driver context / vtable / callback)
-0x6aba0	FUN_0006aba0	1912	no	indirect call (driver context / vtable / callback)
-0x6b340	FUN_0006b340	1920	no	indirect call (driver context / vtable / callback)
-0x6bae0	FUN_0006bae0	1920	no	indirect call (driver context / vtable / callback)
-0x6c280	FUN_0006c280	1308	no	indirect call (driver context / vtable / callback)
-0x6c7c0	FUN_0006c7c0	1308	no	indirect call (driver context / vtable / callback)
-0x6cd00	FUN_0006cd00	1308	no	indirect call (driver context / vtable / callback)
-0x6d240	FUN_0006d240	1308	no	indirect call (driver context / vtable / callback)
-0x6d780	FUN_0006d780	1308	no	indirect call (driver context / vtable / callback)
-0x6dcc0	FUN_0006dcc0	1912	no	indirect call (driver context / vtable / callback)
+0x65ea0	arbEmitIlDp4	1912	no	indirect call (driver context / vtable / callback)
+0x66640	arbEmitIlMov	1308	no	indirect call (driver context / vtable / callback)
+0x66b80	arbEmitIlMul	1912	no	indirect call (driver context / vtable / callback)
+0x67320	arbEmitIlAdd	1912	no	indirect call (driver context / vtable / callback)
+0x67ac0	arbEmitIlMad	2516	no	indirect call (driver context / vtable / callback)
+0x684c0	arbEmitIlAddMad3Src	3632	no	indirect call (driver context / vtable / callback)
+0x69330	arbEmitIlMulMaxMin2Src	4280	no	indirect call (driver context / vtable / callback)
+0x6a400	arbEmitIlMin	1912	no	indirect call (driver context / vtable / callback)
+0x6aba0	arbEmitIlMax	1912	no	indirect call (driver context / vtable / callback)
+0x6b340	arbEmitIlSetCompare5	1920	no	indirect call (driver context / vtable / callback)
+0x6bae0	arbEmitIlSetCompare2	1920	no	indirect call (driver context / vtable / callback)
+0x6c280	arbEmitIlRnd	1308	no	indirect call (driver context / vtable / callback)
+0x6c7c0	arbEmitIlRcp	1308	no	indirect call (driver context / vtable / callback)
+0x6cd00	arbEmitIlRsq	1308	no	indirect call (driver context / vtable / callback)
+0x6d240	arbEmitIlExp	1308	no	indirect call (driver context / vtable / callback)
+0x6d780	arbEmitIlExn	1308	no	indirect call (driver context / vtable / callback)
+0x6dcc0	arbEmitIlPow	1912	no	indirect call (driver context / vtable / callback)
 0x6e460	FUN_0006e460	1928	no	indirect call (driver context / vtable / callback)
-0x6ec10	FUN_0006ec10	4312	no	indirect call (driver context / vtable / callback)
+0x6ec10	arbEmitIlMovMadMov	4312	no	indirect call (driver context / vtable / callback)
 0x6fd10	FUN_0006fd10	180	no	indirect call (driver context / vtable / callback)
 0x6fdd0	FUN_0006fdd0	1812	no	indirect call (driver context / vtable / callback)
 0x70520	FUN_00070520	252	yes	
@@ -625,11 +625,11 @@
 0x74cc0	evsEmitExpp	156	yes	
 0x74d60	evsEmitDst	204	yes	
 0x74e30	evsEmitLit	156	yes	
-0x74ed0	FUN_00074ed0	392	yes	
-0x75060	FUN_00075060	584	yes	
-0x752c0	FUN_000752c0	156	yes	
-0x75360	FUN_00075360	156	yes	
-0x75400	FUN_00075400	156	yes	
+0x74ed0	evsEmitOp879d	392	yes	
+0x75060	evsEmitOp879c	584	yes	
+0x752c0	evsEmitOp879b	156	yes	
+0x75360	evsEmitOp879a	156	yes	
+0x75400	evsEmitMovOp8799	156	yes	
 0x754a0	evsEmitMmul	204	yes	
 0x75570	evsEmitCrs	204	yes	
 0x75640	evsEmitSub	204	yes	
@@ -726,25 +726,25 @@
 0x83870	FUN_00083870	1012	no	indirect call (driver context / vtable / callback)
 0x83c80	FUN_00083c80	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x83c90	FUN_00083c90	372	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x83e10	FUN_00083e10	692	no	calls an import (calloc); calls an import (free)
-0x840d0	FUN_000840d0	548	no	calls an import (calloc); calls an import (free)
-0x84300	FUN_00084300	472	no	calls an import (calloc); calls an import (free)
-0x844e0	FUN_000844e0	548	no	calls an import (calloc); calls an import (free)
-0x84710	FUN_00084710	548	no	calls an import (calloc); calls an import (free)
-0x84940	FUN_00084940	692	no	calls an import (calloc); calls an import (free)
-0x84c00	FUN_00084c00	692	no	calls an import (calloc); calls an import (free)
-0x84ec0	FUN_00084ec0	692	no	calls an import (calloc); calls an import (free)
-0x85180	FUN_00085180	548	no	calls an import (calloc); calls an import (free)
-0x853b0	FUN_000853b0	548	no	calls an import (calloc); calls an import (free)
-0x855e0	FUN_000855e0	548	no	calls an import (calloc); calls an import (free)
-0x85810	FUN_00085810	548	no	calls an import (calloc); calls an import (free)
-0x85a40	FUN_00085a40	424	no	calls an import (calloc); calls an import (free)
-0x85bf0	FUN_00085bf0	424	no	calls an import (calloc); calls an import (free)
-0x85da0	FUN_00085da0	424	no	calls an import (calloc); calls an import (free)
-0x85f50	FUN_00085f50	424	no	calls an import (calloc); calls an import (free)
-0x86100	FUN_00086100	424	no	calls an import (calloc); calls an import (free)
-0x862b0	FUN_000862b0	548	no	calls an import (calloc); calls an import (free)
-0x864e0	FUN_000864e0	548	no	calls an import (calloc); calls an import (free)
+0x83e10	arbEmitRecord3Src_op44	692	no	calls an import (calloc); calls an import (free)
+0x840d0	arbEmitRecord2Src_op01	548	no	calls an import (calloc); calls an import (free)
+0x84300	arbEmitRecord1Src_op02	472	no	calls an import (calloc); calls an import (free)
+0x844e0	arbEmitRecord2Src_op02	548	no	calls an import (calloc); calls an import (free)
+0x84710	arbEmitRecord2Src_op03	548	no	calls an import (calloc); calls an import (free)
+0x84940	arbEmitRecord3Src_op04	692	no	calls an import (calloc); calls an import (free)
+0x84c00	arbEmitRecord3Src_op0b	692	no	calls an import (calloc); calls an import (free)
+0x84ec0	arbEmitRecord3Src_op0c	692	no	calls an import (calloc); calls an import (free)
+0x85180	arbEmitRecord2Src_op08	548	no	calls an import (calloc); calls an import (free)
+0x853b0	arbEmitRecord2Src_op07	548	no	calls an import (calloc); calls an import (free)
+0x855e0	arbEmitRecord2Src_op0a	548	no	calls an import (calloc); calls an import (free)
+0x85810	arbEmitRecord2Src_op09	548	no	calls an import (calloc); calls an import (free)
+0x85a40	arbEmitRecord1Src_op0e	424	no	calls an import (calloc); calls an import (free)
+0x85bf0	arbEmitRecord1Src_op47	424	no	calls an import (calloc); calls an import (free)
+0x85da0	arbEmitRecord1Src_op49	424	no	calls an import (calloc); calls an import (free)
+0x85f50	arbEmitRecord1Src_op4b	424	no	calls an import (calloc); calls an import (free)
+0x86100	arbEmitRecord1Src_op43	424	no	calls an import (calloc); calls an import (free)
+0x862b0	arbEmitRecord2Src_op45	548	no	calls an import (calloc); calls an import (free)
+0x864e0	arbEmitRecord2Src_op4f	548	no	calls an import (calloc); calls an import (free)
 0x86710	FUN_00086710	152	no	indirect call (driver context / vtable / callback)
 0x867b0	FUN_000867b0	140	yes	
 0x86840	FUN_00086840	228	no	indirect call (driver context / vtable / callback)

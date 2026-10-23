@@ -2449,8 +2449,8 @@ int FUN_00057b80(param_1, param_2)
   return uVar5;
 }
 
-/* FUN_00057cf0 @ 0x57cf0 (1532 bytes) */
-int FUN_00057cf0(param_1, param_2, param_3)
+/* extvsEmitIndex @ 0x57cf0 (1532 bytes) */
+int extvsEmitIndex(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   int param_3;
@@ -2651,8 +2651,8 @@ int extvsEmitSingleSourceInstruction(ctx, shader, inst)
   return 1;
 }
 
-/* FUN_00058450 @ 0x58450 (872 bytes) */
-int FUN_00058450(param_1, param_2, param_3)
+/* extvsEmitDot3 @ 0x58450 (872 bytes) */
+int extvsEmitDot3(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   int param_3;
@@ -2760,8 +2760,8 @@ int FUN_00058450(param_1, param_2, param_3)
   return uVar3;
 }
 
-/* FUN_000587d0 @ 0x587d0 (824 bytes) */
-int FUN_000587d0(compiler, program, irInstruction)
+/* extvsEmitDot4 @ 0x587d0 (824 bytes) */
+int extvsEmitDot4(compiler, program, irInstruction)
   int compiler;
   int *program;
   int irInstruction;
@@ -2861,8 +2861,8 @@ int FUN_000587d0(compiler, program, irInstruction)
   return emitResult;
 }
 
-/* FUN_00058b10 @ 0x58b10 (824 bytes) */
-int FUN_00058b10(compiler, program, irInstruction)
+/* extvsEmitMul @ 0x58b10 (824 bytes) */
+int extvsEmitMul(compiler, program, irInstruction)
   int compiler;
   int *program;
   int irInstruction;
@@ -2962,8 +2962,8 @@ int FUN_00058b10(compiler, program, irInstruction)
   return emitResult;
 }
 
-/* FUN_00058e50 @ 0x58e50 (824 bytes) */
-int FUN_00058e50(compiler, program, irInstruction)
+/* extvsEmitAdd @ 0x58e50 (824 bytes) */
+int extvsEmitAdd(compiler, program, irInstruction)
   int compiler;
   int *program;
   int irInstruction;
@@ -3063,8 +3063,8 @@ int FUN_00058e50(compiler, program, irInstruction)
   return emitResult;
 }
 
-/* FUN_00059190 @ 0x59190 (2512 bytes) */
-int FUN_00059190(param_1, param_2, param_3)
+/* extvsEmitMad @ 0x59190 (2512 bytes) */
+int extvsEmitMad(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   int param_3;
@@ -3320,8 +3320,8 @@ int FUN_00059190(param_1, param_2, param_3)
   return uVar3;
 }
 
-/* FUN_00059b80 @ 0x59b80 (304 bytes) */
-int FUN_00059b80(param_1, param_2, param_3)
+/* extvsEmitFrc @ 0x59b80 (304 bytes) */
+int extvsEmitFrc(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   int param_3;
@@ -3353,8 +3353,8 @@ int FUN_00059b80(param_1, param_2, param_3)
   return 1;
 }
 
-/* FUN_00059cb0 @ 0x59cb0 (824 bytes) */
-int FUN_00059cb0(param_1, param_2, param_3)
+/* extvsEmitMax @ 0x59cb0 (824 bytes) */
+int extvsEmitMax(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   int param_3;
@@ -3454,8 +3454,8 @@ int FUN_00059cb0(param_1, param_2, param_3)
   return uVar3;
 }
 
-/* FUN_00059ff0 @ 0x59ff0 (824 bytes) */
-int FUN_00059ff0(compiler, program, irInstruction)
+/* extvsEmitMin @ 0x59ff0 (824 bytes) */
+int extvsEmitMin(compiler, program, irInstruction)
   int compiler;
   int *program;
   int irInstruction;
@@ -3555,8 +3555,8 @@ int FUN_00059ff0(compiler, program, irInstruction)
   return emitResult;
 }
 
-/* FUN_0005a330 @ 0x5a330 (824 bytes) */
-int FUN_0005a330(compiler, program, irInstruction)
+/* extvsEmitSetGreaterEqual @ 0x5a330 (824 bytes) */
+int extvsEmitSetGreaterEqual(compiler, program, irInstruction)
   int compiler;
   int *program;
   int irInstruction;
@@ -3656,8 +3656,8 @@ int FUN_0005a330(compiler, program, irInstruction)
   return emitResult;
 }
 
-/* FUN_0005a670 @ 0x5a670 (824 bytes) */
-int FUN_0005a670(compiler, program, irInstruction)
+/* extvsEmitSetLessThan @ 0x5a670 (824 bytes) */
+int extvsEmitSetLessThan(compiler, program, irInstruction)
   int compiler;
   int *program;
   int irInstruction;
@@ -3757,8 +3757,8 @@ int FUN_0005a670(compiler, program, irInstruction)
   return emitResult;
 }
 
-/* FUN_0005a9b0 @ 0x5a9b0 (1112 bytes) */
-int FUN_0005a9b0(param_1, param_2, param_3)
+/* extvsEmitClamp @ 0x5a9b0 (1112 bytes) */
+int extvsEmitClamp(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   int param_3;
@@ -3878,8 +3878,8 @@ int FUN_0005a9b0(param_1, param_2, param_3)
   return uVar2;
 }
 
-/* FUN_0005ae10 @ 0x5ae10 (512 bytes) */
-int FUN_0005ae10(param_1, param_2, param_3)
+/* extvsEmitFlr @ 0x5ae10 (512 bytes) */
+int extvsEmitFlr(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   int param_3;
@@ -3946,8 +3946,8 @@ int FUN_0005ae10(param_1, param_2, param_3)
   return 2;
 }
 
-/* FUN_0005b010 @ 0x5b010 (932 bytes) */
-int FUN_0005b010(param_1, param_2, param_3)
+/* extvsEmitRnd @ 0x5b010 (932 bytes) */
+int extvsEmitRnd(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   int param_3;
@@ -4066,8 +4066,8 @@ int FUN_0005b010(param_1, param_2, param_3)
   return 4;
 }
 
-/* FUN_0005b3c0 @ 0x5b3c0 (304 bytes) */
-int FUN_0005b3c0(param_1, param_2, param_3)
+/* extvsEmitExp @ 0x5b3c0 (304 bytes) */
+int extvsEmitExp(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   int param_3;
@@ -4099,8 +4099,8 @@ int FUN_0005b3c0(param_1, param_2, param_3)
   return 1;
 }
 
-/* FUN_0005b4f0 @ 0x5b4f0 (304 bytes) */
-int FUN_0005b4f0(param_1, param_2, param_3)
+/* extvsEmitLog @ 0x5b4f0 (304 bytes) */
+int extvsEmitLog(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   int param_3;
@@ -4132,8 +4132,8 @@ int FUN_0005b4f0(param_1, param_2, param_3)
   return 1;
 }
 
-/* FUN_0005b620 @ 0x5b620 (824 bytes) */
-int FUN_0005b620(param_1, param_2, param_3)
+/* extvsEmitPow @ 0x5b620 (824 bytes) */
+int extvsEmitPow(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   int param_3;
@@ -4233,8 +4233,8 @@ int FUN_0005b620(param_1, param_2, param_3)
   return uVar3;
 }
 
-/* FUN_0005b960 @ 0x5b960 (304 bytes) */
-int FUN_0005b960(param_1, param_2, param_3)
+/* extvsEmitRcp @ 0x5b960 (304 bytes) */
+int extvsEmitRcp(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   int param_3;
@@ -4266,8 +4266,8 @@ int FUN_0005b960(param_1, param_2, param_3)
   return 1;
 }
 
-/* FUN_0005ba90 @ 0x5ba90 (304 bytes) */
-int FUN_0005ba90(param_1, param_2, param_3)
+/* extvsEmitRsq @ 0x5ba90 (304 bytes) */
+int extvsEmitRsq(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   int param_3;
@@ -4306,45 +4306,45 @@ int FUN_0005ba90(param_1, param_2, param_3)
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_00057cf0");
-asm(".set FUN_00057cf0, _FUN_00057cf0");
+asm(".set FUN_00057cf0, _extvsEmitIndex");
 asm(".globl FUN_00058300");
 asm(".set FUN_00058300, _extvsEmitSingleSourceInstruction");
 asm(".globl FUN_00058450");
-asm(".set FUN_00058450, _FUN_00058450");
+asm(".set FUN_00058450, _extvsEmitDot3");
 asm(".globl FUN_000587d0");
-asm(".set FUN_000587d0, _FUN_000587d0");
+asm(".set FUN_000587d0, _extvsEmitDot4");
 asm(".globl FUN_00058b10");
-asm(".set FUN_00058b10, _FUN_00058b10");
+asm(".set FUN_00058b10, _extvsEmitMul");
 asm(".globl FUN_00058e50");
-asm(".set FUN_00058e50, _FUN_00058e50");
+asm(".set FUN_00058e50, _extvsEmitAdd");
 asm(".globl FUN_00059190");
-asm(".set FUN_00059190, _FUN_00059190");
+asm(".set FUN_00059190, _extvsEmitMad");
 asm(".globl FUN_00059b80");
-asm(".set FUN_00059b80, _FUN_00059b80");
+asm(".set FUN_00059b80, _extvsEmitFrc");
 asm(".globl FUN_00059cb0");
-asm(".set FUN_00059cb0, _FUN_00059cb0");
+asm(".set FUN_00059cb0, _extvsEmitMax");
 asm(".globl FUN_00059ff0");
-asm(".set FUN_00059ff0, _FUN_00059ff0");
+asm(".set FUN_00059ff0, _extvsEmitMin");
 asm(".globl FUN_0005a330");
-asm(".set FUN_0005a330, _FUN_0005a330");
+asm(".set FUN_0005a330, _extvsEmitSetGreaterEqual");
 asm(".globl FUN_0005a670");
-asm(".set FUN_0005a670, _FUN_0005a670");
+asm(".set FUN_0005a670, _extvsEmitSetLessThan");
 asm(".globl FUN_0005a9b0");
-asm(".set FUN_0005a9b0, _FUN_0005a9b0");
+asm(".set FUN_0005a9b0, _extvsEmitClamp");
 asm(".globl FUN_0005ae10");
-asm(".set FUN_0005ae10, _FUN_0005ae10");
+asm(".set FUN_0005ae10, _extvsEmitFlr");
 asm(".globl FUN_0005b010");
-asm(".set FUN_0005b010, _FUN_0005b010");
+asm(".set FUN_0005b010, _extvsEmitRnd");
 asm(".globl FUN_0005b3c0");
-asm(".set FUN_0005b3c0, _FUN_0005b3c0");
+asm(".set FUN_0005b3c0, _extvsEmitExp");
 asm(".globl FUN_0005b4f0");
-asm(".set FUN_0005b4f0, _FUN_0005b4f0");
+asm(".set FUN_0005b4f0, _extvsEmitLog");
 asm(".globl FUN_0005b620");
-asm(".set FUN_0005b620, _FUN_0005b620");
+asm(".set FUN_0005b620, _extvsEmitPow");
 asm(".globl FUN_0005b960");
-asm(".set FUN_0005b960, _FUN_0005b960");
+asm(".set FUN_0005b960, _extvsEmitRcp");
 asm(".globl FUN_0005ba90");
-asm(".set FUN_0005ba90, _FUN_0005ba90");
+asm(".set FUN_0005ba90, _extvsEmitRsq");
 
 /* issue #75 (follow-up #3): Ghidra recognized this as a THUNK - a pure trampoline stub that
  * just branches straight to the real function below, no different behavior or arguments - but

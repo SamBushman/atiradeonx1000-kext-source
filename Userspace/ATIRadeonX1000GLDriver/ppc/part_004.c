@@ -1221,7 +1221,7 @@ LAB_000260dc:
              (iVar9 = param_2[0xb], iVar9 == 0)) {
             iVar9 = *(int *)(*param_2 + 4);
           }
-          iVar9 = FUN_0000f620(iVar9);
+          iVar9 = arbProgramIrToText(iVar9);
           if (iVar9 == 0) {
             FUN_000a0d70(piVar15,1,piVar14);
             *piVar14 = 0;
@@ -1636,7 +1636,7 @@ LAB_00026d64:
   *(undefined4 **)(param_1 + 0x298c) = puVar8;
   *(undefined4 **)(param_1 + 0x1dc) = puVar8;
   if (((*(uint *)(param_1 + 0x27d8) & 2) != 0) && ((*(uint *)(param_1 + 0x24) & 2) != 0)) {
-    FUN_0000b620(param_1,iVar12,iVar7,param_4,param_5,uVar11,0xc0003400,puVar8);
+    gldFlushDataCacheRange(param_1,iVar12,iVar7,param_4,param_5,uVar11,0xc0003400,puVar8);
   }
 LAB_00026f60:
   *(undefined1 *)(param_1 + 0x2a5e) = 1;
@@ -3521,13 +3521,13 @@ LAB_00029a74:
           surfaceFormat = (uint)*(ushort *)(levelRecord + 0xb0);
           _glgConvertType(surfaceFormat,surfaceType,&procChannelFormat,&procChannelSize);
           renderWidth = *(int *)(ctx + GLD_renderWidth);
-          bytesPerPixel = FUN_0000a3f0(surfaceFormat,surfaceType);
+          bytesPerPixel = gldPixelUnitBytes(surfaceFormat,surfaceType);
           procPitch = renderWidth * bytesPerPixel;
           renderHeight = procPitch * *(int *)(ctx + GLD_renderHeight);
           levelBuffer = _valloc((uint)sliceCount * renderHeight);
           FUN_00031340(ctx,attachObject,attachFace,attachLevel,surfaceFormat,surfaceType,levelBuffer,procPitch);
           yOffsetBytes = rectY * procPitch;
-          bytesPerPixel2 = FUN_0000a3f0(surfaceFormat,surfaceType);
+          bytesPerPixel2 = gldPixelUnitBytes(surfaceFormat,surfaceType);
           procPixels = (int)levelBuffer + rectX * bytesPerPixel2 + attachZOffset * renderHeight + yOffsetBytes;
           _glgProcessPixels(packState,&procPixels);
           _vfree(levelBuffer);
@@ -3934,7 +3934,7 @@ LAB_00029a74:
           surfaceFormat = (uint)*(ushort *)(ctxState + 0xb0);
           _glgConvertType(surfaceFormat,surfaceType,&uStack_b4,&uStack_b0,savedHeight,ring,*attachObject,dstOffsetAddress);
           ctxState = *(int *)(ctx + GLD_renderWidth);
-          ring = FUN_0000a3f0(surfaceFormat,surfaceType);
+          ring = gldPixelUnitBytes(surfaceFormat,surfaceType);
           procPitch = ctxState * ring;
           renderHeight = procPitch * *(int *)(ctx + GLD_renderHeight);
           levelBuffer = _valloc((uint)sliceCount * renderHeight);
@@ -3944,7 +3944,7 @@ LAB_00029a74:
           uVar13 = procPitch;
           FUN_00031340(ctx,attachObject,attachFace,attachLevel,surfaceFormat,surfaceType,levelBuffer,procPitch);
           ctxState = rectY * procPitch;
-          bytesPerPixel = FUN_0000a3f0(surfaceFormat,surfaceType);
+          bytesPerPixel = gldPixelUnitBytes(surfaceFormat,surfaceType);
           uStack_bc = levelBuffer + attachZOffset * renderHeight + ctxState + rectX * bytesPerPixel;
           _glgProcessPixels(packState,&uStack_bc,attachFace,attachLevel,flags,uVar12,ring,uVar13);
           _vfree(levelBuffer);
@@ -5854,7 +5854,7 @@ LAB_0002c610:
       *(undefined4 **)(0x00002748 + param_1 + 4) = puVar6 + 0x39;
       /* issue #64 live-repro (crash #10, the long-running "iVar5+0x1dc=1" hunt): this indirect
        * dispatch through the per-instance table at 0x275c supplied only 1 of 2 real arguments -
-       * a dropped-call-args bug matching the same class already fixed for FUN_000840d0's own
+       * a dropped-call-args bug matching the same class already fixed for arbEmitRecord2Src_op01's own
        * dispatch calls. The line right above sets up *(0x2748+param_1+4) - the exact "current
        * write pointer" value the real target expects as its 2nd argument - but never actually
        * passes it; a sibling call site to this SAME dispatch slot (FUN_00082c50, part_011.c:8826)

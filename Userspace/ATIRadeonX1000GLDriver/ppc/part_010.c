@@ -1,7 +1,7 @@
 #include "decls.h"
 
-/* FUN_0006c7c0 @ 0x6c7c0 (1308 bytes) */
-int FUN_0006c7c0(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, srcNegate)
+/* arbEmitIlRcp @ 0x6c7c0 (1308 bytes) */
+int arbEmitIlRcp(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, srcNegate)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -211,8 +211,8 @@ LAB_0006ca14:
   return;
 }
 
-/* FUN_0006cd00 @ 0x6cd00 (1308 bytes) */
-int FUN_0006cd00(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, srcNegate)
+/* arbEmitIlRsq @ 0x6cd00 (1308 bytes) */
+int arbEmitIlRsq(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, srcNegate)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -422,8 +422,8 @@ LAB_0006cf54:
   return;
 }
 
-/* FUN_0006d240 @ 0x6d240 (1308 bytes) */
-int FUN_0006d240(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, srcNegate)
+/* arbEmitIlExp @ 0x6d240 (1308 bytes) */
+int arbEmitIlExp(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, srcNegate)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -633,8 +633,8 @@ LAB_0006d494:
   return;
 }
 
-/* FUN_0006d780 @ 0x6d780 (1308 bytes) */
-int FUN_0006d780(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, srcNegate)
+/* arbEmitIlExn @ 0x6d780 (1308 bytes) */
+int arbEmitIlExn(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, srcSelect, srcNegate)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -844,8 +844,8 @@ LAB_0006d9d4:
   return;
 }
 
-/* FUN_0006dcc0 @ 0x6dcc0 (1912 bytes) */
-int FUN_0006dcc0(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
+/* arbEmitIlPow @ 0x6dcc0 (1912 bytes) */
+int arbEmitIlPow(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Select, src0Negate, src1File, src1Index, src1Select, src1Negate)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -1479,8 +1479,8 @@ LAB_0006e804:
   return;
 }
 
-/* FUN_0006ec10 @ 0x6ec10 (4312 bytes) */
-int FUN_0006ec10(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Words, src0Flags, src1File, src1Index, src1Words, src1Flags, src2File, src2Index, src2Words, src2Flags)
+/* arbEmitIlMovMadMov @ 0x6ec10 (4312 bytes) */
+int arbEmitIlMovMadMov(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Words, src0Flags, src1File, src1Index, src1Words, src1Flags, src2File, src2Index, src2Words, src2Flags)
   int ctx;
   uint dstFile;
   uint dstIndex;
@@ -4798,8 +4798,8 @@ int evsEmitLit(compiler, program, compileState, irInstruction)
   return 0xffffffff;
 }
 
-/* FUN_00074ed0 @ 0x74ed0 (392 bytes) */
-int FUN_00074ed0(param_1, param_2, param_3, param_4)
+/* evsEmitOp879d @ 0x74ed0 (392 bytes) */
+int evsEmitOp879d(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   int param_2;
   int param_3;
@@ -4871,8 +4871,8 @@ LAB_00075028:
   return 1;
 }
 
-/* FUN_00075060 @ 0x75060 (584 bytes) */
-int FUN_00075060(param_1, param_2, param_3, param_4)
+/* evsEmitOp879c @ 0x75060 (584 bytes) */
+int evsEmitOp879c(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   int param_2;
   int param_3;
@@ -4967,8 +4967,8 @@ LAB_00075258:
   return 1;
 }
 
-/* FUN_000752c0 @ 0x752c0 (156 bytes) */
-int FUN_000752c0(compiler, program, compileState, irInstruction)
+/* evsEmitOp879b @ 0x752c0 (156 bytes) */
+int evsEmitOp879b(compiler, program, compileState, irInstruction)
   undefined4 compiler;
   int program;
   undefined4 compileState;
@@ -4986,8 +4986,8 @@ int FUN_000752c0(compiler, program, compileState, irInstruction)
   return 0xffffffff;
 }
 
-/* FUN_00075360 @ 0x75360 (156 bytes) */
-int FUN_00075360(compiler, program, compileState, irInstruction)
+/* evsEmitOp879a @ 0x75360 (156 bytes) */
+int evsEmitOp879a(compiler, program, compileState, irInstruction)
   undefined4 compiler;
   int program;
   undefined4 compileState;
@@ -5005,8 +5005,8 @@ int FUN_00075360(compiler, program, compileState, irInstruction)
   return 0xffffffff;
 }
 
-/* FUN_00075400 @ 0x75400 (156 bytes) */
-int FUN_00075400(compiler, program, compileState, irInstruction)
+/* evsEmitMovOp8799 @ 0x75400 (156 bytes) */
+int evsEmitMovOp8799(compiler, program, compileState, irInstruction)
   undefined4 compiler;
   int program;
   undefined4 compileState;
@@ -5730,19 +5730,19 @@ int FUN_00076c10(param_1, param_2)
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_0006c7c0");
-asm(".set FUN_0006c7c0, _FUN_0006c7c0");
+asm(".set FUN_0006c7c0, _arbEmitIlRcp");
 asm(".globl FUN_0006cd00");
-asm(".set FUN_0006cd00, _FUN_0006cd00");
+asm(".set FUN_0006cd00, _arbEmitIlRsq");
 asm(".globl FUN_0006d240");
-asm(".set FUN_0006d240, _FUN_0006d240");
+asm(".set FUN_0006d240, _arbEmitIlExp");
 asm(".globl FUN_0006d780");
-asm(".set FUN_0006d780, _FUN_0006d780");
+asm(".set FUN_0006d780, _arbEmitIlExn");
 asm(".globl FUN_0006dcc0");
-asm(".set FUN_0006dcc0, _FUN_0006dcc0");
+asm(".set FUN_0006dcc0, _arbEmitIlPow");
 asm(".globl FUN_0006e460");
 asm(".set FUN_0006e460, _FUN_0006e460");
 asm(".globl FUN_0006ec10");
-asm(".set FUN_0006ec10, _FUN_0006ec10");
+asm(".set FUN_0006ec10, _arbEmitIlMovMadMov");
 asm(".globl FUN_00070c50");
 asm(".set FUN_00070c50, _noop_70c50");
 asm(".globl FUN_00070c60");
@@ -5760,15 +5760,15 @@ asm(".set FUN_00074d60, _evsEmitDst");
 asm(".globl FUN_00074e30");
 asm(".set FUN_00074e30, _evsEmitLit");
 asm(".globl FUN_00074ed0");
-asm(".set FUN_00074ed0, _FUN_00074ed0");
+asm(".set FUN_00074ed0, _evsEmitOp879d");
 asm(".globl FUN_00075060");
-asm(".set FUN_00075060, _FUN_00075060");
+asm(".set FUN_00075060, _evsEmitOp879c");
 asm(".globl FUN_000752c0");
-asm(".set FUN_000752c0, _FUN_000752c0");
+asm(".set FUN_000752c0, _evsEmitOp879b");
 asm(".globl FUN_00075360");
-asm(".set FUN_00075360, _FUN_00075360");
+asm(".set FUN_00075360, _evsEmitOp879a");
 asm(".globl FUN_00075400");
-asm(".set FUN_00075400, _FUN_00075400");
+asm(".set FUN_00075400, _evsEmitMovOp8799");
 asm(".globl FUN_000754a0");
 asm(".set FUN_000754a0, _evsEmitMmul");
 asm(".globl FUN_00075570");

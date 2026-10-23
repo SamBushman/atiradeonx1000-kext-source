@@ -393,8 +393,8 @@ b6580	FUN_000b6580	r7	PASS-indirect	b65b8 bl 0x4bbf0
 b6580	FUN_000b6580	r8	PASS-indirect	b65b8 bl 0x4bbf0
 bd9a0	FUN_000bd9a0	r7	PASS-indirect	bd9d8 bctrl 
 bd9a0	FUN_000bd9a0	r8	PASS-indirect	bd9d8 bctrl 
-bfa0	FUN_0000bfa0	r7	PASS-no	bfac bl 0x1a3264
-bfa0	FUN_0000bfa0	r8	PASS-no	bfac bl 0x1a3264
+bfa0	textPrintDoubleShortest	r7	PASS-no	bfac bl 0x1a3264
+bfa0	textPrintDoubleShortest	r8	PASS-no	bfac bl 0x1a3264
 bfed0	FUN_000bfed0	r6	PASS-no	bfeec bl 0xc5e60
 bfed0	FUN_000bfed0	r7	PASS-no	bfeec bl 0xc5e60
 bfed0	FUN_000bfed0	r8	PASS-no	bfeec bl 0xc5e60
@@ -449,10 +449,10 @@ f29f4	FUN_000f29f4	r7	PASS-indirect	f2a10 bl 0x10ea30
 f29f4	FUN_000f29f4	r8	PASS-indirect	f2a10 bl 0x10ea30
 f60c4	FUN_000f60c4	r9	PASS-indirect	f6148 bl 0x19423c
 f60c4	FUN_000f60c4	r10	PASS-indirect	f6148 bl 0x19423c
-f620	FUN_0000f620	r6	PASS-no	f650 bl 0x1a3660	; symbol stub for: _malloc
-f620	FUN_0000f620	r7	PASS-no	f650 bl 0x1a3660	; symbol stub for: _malloc
-f620	FUN_0000f620	r8	PASS-no	f650 bl 0x1a3660	; symbol stub for: _malloc
-f620	FUN_0000f620	r10	PASS-no	f650 bl 0x1a3660	; symbol stub for: _malloc
+f620	arbProgramIrToText	r6	PASS-no	f650 bl 0x1a3660	; symbol stub for: _malloc
+f620	arbProgramIrToText	r7	PASS-no	f650 bl 0x1a3660	; symbol stub for: _malloc
+f620	arbProgramIrToText	r8	PASS-no	f650 bl 0x1a3660	; symbol stub for: _malloc
+f620	arbProgramIrToText	r10	PASS-no	f650 bl 0x1a3660	; symbol stub for: _malloc
 f8aa0	FUN_000f8aa0	r8	PASS-indirect	f8b7c bl 0x19e9fc
 f9140	FUN_000f9140	r6	PASS-indirect	f918c bctrl 
 f9140	FUN_000f9140	r7	PASS-indirect	f918c bctrl 

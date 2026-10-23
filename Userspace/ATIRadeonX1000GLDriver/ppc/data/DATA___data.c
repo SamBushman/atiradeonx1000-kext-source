@@ -2670,39 +2670,39 @@ const unsigned int sectDATA___data[15824] = {
     0x00000001, /* +0x29ac */
     0x00000001, /* +0x29b0 */
     0x00000001, /* +0x29b4 */
-    0x00057cf0, /* -> FUN_00057cf0 */ /* +0x29b8 */
+    0x00057cf0, /* -> extvsEmitIndex */ /* +0x29b8 */
     0x00058300, /* -> extvsEmitSingleSourceInstruction */ /* +0x29bc */
-    0x00058450, /* -> FUN_00058450 */ /* +0x29c0 */
-    0x000587d0, /* -> FUN_000587d0 */ /* +0x29c4 */
-    0x00058b10, /* -> FUN_00058b10 */ /* +0x29c8 */
-    0x00058e50, /* -> FUN_00058e50 */ /* +0x29cc */
-    0x00059190, /* -> FUN_00059190 */ /* +0x29d0 */
-    0x00059b80, /* -> FUN_00059b80 */ /* +0x29d4 */
-    0x00059cb0, /* -> FUN_00059cb0 */ /* +0x29d8 */
-    0x00059ff0, /* -> FUN_00059ff0 */ /* +0x29dc */
-    0x0005a330, /* -> FUN_0005a330 */ /* +0x29e0 */
-    0x0005a670, /* -> FUN_0005a670 */ /* +0x29e4 */
-    0x0005a9b0, /* -> FUN_0005a9b0 */ /* +0x29e8 */
-    0x0005ae10, /* -> FUN_0005ae10 */ /* +0x29ec */
-    0x0005b010, /* -> FUN_0005b010 */ /* +0x29f0 */
-    0x0005b3c0, /* -> FUN_0005b3c0 */ /* +0x29f4 */
-    0x0005b4f0, /* -> FUN_0005b4f0 */ /* +0x29f8 */
-    0x0005b620, /* -> FUN_0005b620 */ /* +0x29fc */
-    0x0005b960, /* -> FUN_0005b960 */ /* +0x2a00 */
-    0x0005ba90, /* -> FUN_0005ba90 */ /* +0x2a04 */
-    0x0005bbc0, /* -> FUN_0005bbc0 */ /* +0x2a08 */
-    0x0005bf60, /* -> FUN_0005bf60 */ /* +0x2a0c */
-    0x0005c600, /* -> FUN_0005c600 */ /* +0x2a10 */
-    0x0005cc20, /* -> FUN_0005cc20 */ /* +0x2a14 */
-    0x0005cd60, /* -> FUN_0005cd60 */ /* +0x2a18 */
-    0x0005d2f0, /* -> FUN_0005d2f0 */ /* +0x2a1c */
-    0x0005d470, /* -> FUN_0005d470 */ /* +0x2a20 */
-    0x0005d620, /* -> FUN_0005d620 */ /* +0x2a24 */
-    0x0005d870, /* -> FUN_0005d870 */ /* +0x2a28 */
-    0x0005d9c0, /* -> FUN_0005d9c0 */ /* +0x2a2c */
-    0x0005dd00, /* -> FUN_0005dd00 */ /* +0x2a30 */
-    0x0005de50, /* -> FUN_0005de50 */ /* +0x2a34 */
-    0x0005dfa0, /* -> FUN_0005dfa0 */ /* +0x2a38 */
+    0x00058450, /* -> extvsEmitDot3 */ /* +0x29c0 */
+    0x000587d0, /* -> extvsEmitDot4 */ /* +0x29c4 */
+    0x00058b10, /* -> extvsEmitMul */ /* +0x29c8 */
+    0x00058e50, /* -> extvsEmitAdd */ /* +0x29cc */
+    0x00059190, /* -> extvsEmitMad */ /* +0x29d0 */
+    0x00059b80, /* -> extvsEmitFrc */ /* +0x29d4 */
+    0x00059cb0, /* -> extvsEmitMax */ /* +0x29d8 */
+    0x00059ff0, /* -> extvsEmitMin */ /* +0x29dc */
+    0x0005a330, /* -> extvsEmitSetGreaterEqual */ /* +0x29e0 */
+    0x0005a670, /* -> extvsEmitSetLessThan */ /* +0x29e4 */
+    0x0005a9b0, /* -> extvsEmitClamp */ /* +0x29e8 */
+    0x0005ae10, /* -> extvsEmitFlr */ /* +0x29ec */
+    0x0005b010, /* -> extvsEmitRnd */ /* +0x29f0 */
+    0x0005b3c0, /* -> extvsEmitExp */ /* +0x29f4 */
+    0x0005b4f0, /* -> extvsEmitLog */ /* +0x29f8 */
+    0x0005b620, /* -> extvsEmitPow */ /* +0x29fc */
+    0x0005b960, /* -> extvsEmitRcp */ /* +0x2a00 */
+    0x0005ba90, /* -> extvsEmitRsq */ /* +0x2a04 */
+    0x0005bbc0, /* -> extvsEmitSub */ /* +0x2a08 */
+    0x0005bf60, /* -> extvsEmitCrs */ /* +0x2a0c */
+    0x0005c600, /* -> extvsEmitMmul */ /* +0x2a10 */
+    0x0005cc20, /* -> extvsEmitMov */ /* +0x2a14 */
+    0x0005cd60, /* -> extvsEmitSwizzle */ /* +0x2a18 */
+    0x0005d2f0, /* -> extvsEmitWriteMask */ /* +0x2a1c */
+    0x0005d470, /* -> extvsEmitOp879c */ /* +0x2a20 */
+    0x0005d620, /* -> extvsEmitOp879d */ /* +0x2a24 */
+    0x0005d870, /* -> extvsEmitLit */ /* +0x2a28 */
+    0x0005d9c0, /* -> extvsEmitDst */ /* +0x2a2c */
+    0x0005dd00, /* -> extvsEmitExpp */ /* +0x2a30 */
+    0x0005de50, /* -> extvsEmitLogp */ /* +0x2a34 */
+    0x0005dfa0, /* -> extvsEmitMova */ /* +0x2a38 */
     0x00000000, /* +0x2a3c */
     0x00000000, /* +0x2a40 */
     0x000308c8, /* +0x2a44 */
@@ -2778,11 +2778,11 @@ const unsigned int sectDATA___data[15824] = {
     0x00075640, /* -> evsEmitSub */ /* +0x2b5c */
     0x00075570, /* -> evsEmitCrs */ /* +0x2b60 */
     0x000754a0, /* -> evsEmitMmul */ /* +0x2b64 */
-    0x00075400, /* -> FUN_00075400 */ /* +0x2b68 */
-    0x00075360, /* -> FUN_00075360 */ /* +0x2b6c */
-    0x000752c0, /* -> FUN_000752c0 */ /* +0x2b70 */
-    0x00075060, /* -> FUN_00075060 */ /* +0x2b74 */
-    0x00074ed0, /* -> FUN_00074ed0 */ /* +0x2b78 */
+    0x00075400, /* -> evsEmitMovOp8799 */ /* +0x2b68 */
+    0x00075360, /* -> evsEmitOp879a */ /* +0x2b6c */
+    0x000752c0, /* -> evsEmitOp879b */ /* +0x2b70 */
+    0x00075060, /* -> evsEmitOp879c */ /* +0x2b74 */
+    0x00074ed0, /* -> evsEmitOp879d */ /* +0x2b78 */
     0x00074e30, /* -> evsEmitLit */ /* +0x2b7c */
     0x00074d60, /* -> evsEmitDst */ /* +0x2b80 */
     0x00074cc0, /* -> evsEmitExpp */ /* +0x2b84 */

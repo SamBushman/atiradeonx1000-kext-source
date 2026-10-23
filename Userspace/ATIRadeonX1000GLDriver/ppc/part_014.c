@@ -1580,14 +1580,14 @@ int FUN_00095dd0(param_1, param_2, param_3)
     }
     uVar3 = *(undefined4 *)(param_1[0xfb] + 8);
     /* issue #64 live-repro (crash #9, past the local_98-cluster fix): this indirect dispatch
-     * (through the per-instance function-pointer table at 0x12e4+iVar5) reaches FUN_000840d0
+     * (through the per-instance function-pointer table at 0x12e4+iVar5) reaches arbEmitRecord2Src_op01
      * on real hardware, whose real signature takes 12 parameters - but every call at this
      * shared call shape only supplies 8, matching the project's known dropped-call-args
      * defect class (Tools/userspace/indirect_args.py, detect_dropped_args.py). Since the call
      * is an untyped raw function-pointer invocation, the missing param_9-12 are simply never
-     * pushed; FUN_000840d0 reads whatever stale stack memory happens to be there instead.
+     * pushed; arbEmitRecord2Src_op01 reads whatever stale stack memory happens to be there instead.
      * Live-verified on real hardware: it crashed dereferencing param_11 as a null pointer.
-     * FUN_000840d0's own body applies the IDENTICAL bit-packing pattern to (param_5,param_6,
+     * arbEmitRecord2Src_op01's own body applies the IDENTICAL bit-packing pattern to (param_5,param_6,
      * param_7,param_8) as it does to (param_9,param_10,param_11,param_12) - one group at
      * iVar15+4, the other at iVar15+8 - matching OpenGL's separate front/back stencil-state
      * encoding; when front and back use the same function (the common, non-"Separate" case

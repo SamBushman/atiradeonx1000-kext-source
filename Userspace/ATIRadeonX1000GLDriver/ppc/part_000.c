@@ -9,8 +9,8 @@ int dyld_stub_binding_helper()
   return;
 }
 
-/* FUN_00001770 @ 0x1770 (32 bytes) */
-int FUN_00001770(param_1, param_2)
+/* dyld_func_lookup_stub @ 0x1770 (32 bytes) */
+int dyld_func_lookup_stub(param_1, param_2)
   uint param_1;
   uint param_2;
 {
@@ -98,11 +98,11 @@ int find_atexit_10_3()
   code *lookupSymbolFn;
   code *addressOfSymbolFn [7];
   
-  ((int (*)())FUN_00001770)((int)"__dyld_image_count",(uint)&imageCountFn);
-  ((int (*)())FUN_00001770)((int)"__dyld_get_image_name",(uint)&imageNameFn);
-  ((int (*)())FUN_00001770)((int)"__dyld_get_image_header",(uint)&imageHeaderFn);
-  ((int (*)())FUN_00001770)((int)"__dyld_NSLookupSymbolInImage",(uint)&lookupSymbolFn);
-  uVar1 = ((int (*)())FUN_00001770)((int)"__dyld_NSAddressOfSymbol",(uint)addressOfSymbolFn);
+  ((int (*)())dyld_func_lookup_stub)((int)"__dyld_image_count",(uint)&imageCountFn);
+  ((int (*)())dyld_func_lookup_stub)((int)"__dyld_get_image_name",(uint)&imageNameFn);
+  ((int (*)())dyld_func_lookup_stub)((int)"__dyld_get_image_header",(uint)&imageHeaderFn);
+  ((int (*)())dyld_func_lookup_stub)((int)"__dyld_NSLookupSymbolInImage",(uint)&lookupSymbolFn);
+  uVar1 = ((int (*)())dyld_func_lookup_stub)((int)"__dyld_NSAddressOfSymbol",(uint)addressOfSymbolFn);
   if ((((imageCountFn != (code *)0x0) && (imageNameFn != (code *)0x0)) && (imageHeaderFn != (code *)0x0)) &&
      ((lookupSymbolFn != (code *)0x0 && (addressOfSymbolFn[0] != (code *)0x0)))) {
     imageCount = (*imageCountFn)(uVar1);
@@ -235,8 +235,8 @@ int FUN_00001d64(param_1, param_2)
   return iStack_18;
 }
 
-/* FUN_00001d84 @ 0x1d84 (32 bytes) */
-int FUN_00001d84()
+/* dlsym_stub_00001d84 @ 0x1d84 (32 bytes) */
+int dlsym_stub_00001d84()
 {
   _dlsym();
   return;
@@ -257,11 +257,11 @@ int FUN_00001da4()
   code *pcStack_28;
   code *apcStack_24 [7];
   
-  ((int (*)())FUN_00001770)("__dyld_image_count",&pcStack_34);
-  ((int (*)())FUN_00001770)("__dyld_get_image_name",&pcStack_30);
-  ((int (*)())FUN_00001770)("__dyld_get_image_header",&pcStack_2c);
-  ((int (*)())FUN_00001770)("__dyld_NSLookupSymbolInImage",&pcStack_28);
-  ((int (*)())FUN_00001770)("__dyld_NSAddressOfSymbol",apcStack_24);
+  ((int (*)())dyld_func_lookup_stub)("__dyld_image_count",&pcStack_34);
+  ((int (*)())dyld_func_lookup_stub)("__dyld_get_image_name",&pcStack_30);
+  ((int (*)())dyld_func_lookup_stub)("__dyld_get_image_header",&pcStack_2c);
+  ((int (*)())dyld_func_lookup_stub)("__dyld_NSLookupSymbolInImage",&pcStack_28);
+  ((int (*)())dyld_func_lookup_stub)("__dyld_NSAddressOfSymbol",apcStack_24);
   if ((((pcStack_34 != (code *)0x0) && (pcStack_30 != (code *)0x0)) && (pcStack_2c != (code *)0x0))
      && ((pcStack_28 != (code *)0x0 && (apcStack_24[0] != (code *)0x0)))) {
     uVar1 = (*pcStack_34)();
@@ -285,15 +285,15 @@ int FUN_00001da4()
   return 0;
 }
 
-/* FUN_00001dc4 @ 0x1dc4 (32 bytes) */
-int FUN_00001dc4()
+/* dlopen_stub_00001dc4 @ 0x1dc4 (32 bytes) */
+int dlopen_stub_00001dc4()
 {
   _dlopen();
   return;
 }
 
-/* FUN_00001de4 @ 0x1de4 (32 bytes) */
-int FUN_00001de4(param_1, param_2)
+/* calloc_stub_00001de4 @ 0x1de4 (32 bytes) */
+int calloc_stub_00001de4(param_1, param_2)
   size_t param_1;
   size_t param_2;
 {
@@ -356,8 +356,8 @@ int FUN_00001f30()
   return;
 }
 
-/* FUN_00001f50 @ 0x1f50 (32 bytes) */
-int FUN_00001f50(param_1)
+/* malloc_stub_00001f50 @ 0x1f50 (32 bytes) */
+int malloc_stub_00001f50(param_1)
   size_t param_1;
 {
   _malloc(param_1);
@@ -417,8 +417,8 @@ int FUN_00002094()
   return;
 }
 
-/* FUN_000020b4 @ 0x20b4 (32 bytes) */
-int FUN_000020b4(param_1)
+/* free_stub_000020b4 @ 0x20b4 (32 bytes) */
+int free_stub_000020b4(param_1)
   void *param_1;
 {
   _free(param_1);
@@ -481,8 +481,8 @@ int cxa_atexit_wrapper(atexit_entry)
   return;
 }
 
-/* FUN_0000222c @ 0x222c (32 bytes) */
-int FUN_0000222c(param_1, param_2)
+/* run_routines_stub_0000222c @ 0x222c (32 bytes) */
+int run_routines_stub_0000222c(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -651,8 +651,8 @@ int atexit_common(atexit_entry, dsoHandle)
   return result;
 }
 
-/* FUN_00002648 @ 0x2648 (32 bytes) */
-int FUN_00002648(param_1)
+/* malloc_stub_00002648 @ 0x2648 (32 bytes) */
+int malloc_stub_00002648(param_1)
   size_t param_1;
 {
   _malloc(param_1);
@@ -2924,7 +2924,7 @@ int _gldFlushBuffer(ctx, buffer, flushRegion, flushArg4, flushArg5, flushArg6, f
   pluginData = *(int **)(buffer + 8);
   if ((pluginData != (int *)0x0) && (*pluginData != 0)) {
     if (flushRegion != 0) {
-      FUN_0000b620(ctx,flushRegion,flushArg4,flushArg4,flushArg5,flushArg6,flushArg7,flushArg8);
+      gldFlushDataCacheRange(ctx,flushRegion,flushArg4,flushArg4,flushArg5,flushArg6,flushArg7,flushArg8);
       pluginData = *(int **)(buffer + 8);
     }
     if (*(char *)(*pluginData + 0x16) == '\a') {
