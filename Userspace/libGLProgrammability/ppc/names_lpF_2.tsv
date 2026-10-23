@@ -1,0 +1,518 @@
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar5\ =\ 0;$	+1
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*param_2\[iVar5\]\ =\ cVar1;$	+3
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*pcVar8\ =\ param_2\ \+\ iVar5;$	+1
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar5\ =\ 0;$@2	+1
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*param_2\[iVar5\]\ =\ cVar1;$@2	+3
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*pcVar8\ =\ param_2\ \+\ iVar5;$@2	+1
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar5\ =\ 0;$@3	+1
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*pcVar8\[iVar5\ \+\ iVar7\]\ =\ cVar1;$	+3
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*param_2\ =\ pcVar8\ \+\ iVar5\ \+\ iVar7;$	+1
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar5\ =\ 0;$@4	+1
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*param_2\[iVar5\]\ =\ cVar1;$@3	+3
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*pcVar8\ =\ param_2\ \+\ iVar5;$@3	+1
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar5\ =\ 0;$@5	+1
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*param_2\[iVar5\]\ =\ cVar1;$@4	+3
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*param_2\ =\ param_2\ \+\ iVar5;$	+1
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar5\ =\ 0;$@6	+1
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*param_2\[iVar5\]\ =\ cVar1;$@5	+3
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*param_2\ =\ param_2\ \+\ iVar5;$@2	+1
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar5\ =\ 0;$@7	+1
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*param_2\[iVar5\]\ =\ cVar1;$@6	+3
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*param_2\ =\ param_2\ \+\ iVar5;$@3	+1
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar5\ =\ 0;$@8	+1
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*param_2\[iVar5\]\ =\ cVar1;$@7	+3
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*param_2\ =\ param_2\ \+\ iVar5;$@4	+1
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar5\ =\ 0;$@9	+1
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*param_2\[iVar5\]\ =\ cVar1;$@8	+3
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*param_2\ =\ param_2\ \+\ iVar5;$@5	+1
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar5\ =\ 0;$@10	+1
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*param_2\[iVar5\]\ =\ cVar1;$@9	+3
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(param_2\ \+\ iVar5,\*\(uint\ \*\)\(iVar3\ \+\ param_1\ \+\ 4\)\ >>\ 0x1e\ \&\ 1\);$	+2
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar5\ =\ 0;$@11	+1
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*pcVar8\[iVar5\]\ =\ cVar1;$	+3
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*pcVar8\ =\ pcVar8\ \+\ iVar5;$	+1
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar5\ =\ 0;$@12	+1
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*pcVar8\[iVar5\]\ =\ cVar1;$@2	+3
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar5\ =\ 0;$@13	+1
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*pcVar8\[iVar5\]\ =\ cVar1;$@3	+3
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar5\ =\ 0;$@14	+1
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*pcVar8\[iVar5\]\ =\ cVar1;$@4	+3
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*if\ \(\(\(\(\*\(uint\ \*\)\(iVar3\ \+\ param_1\)\ >>\ 0x11\ \&\ 7\)\ ==\ 1\)\ \&\&\ \(param_4\ !=\ 0\)\)\ \&\&$	+3
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar5\ =\ 0;$@15	+1
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*pcVar8\[iVar5\]\ =\ cVar1;$@5	+3
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*pcVar8\ =\ pcVar8\ \+\ iVar5;$@2	+1
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar5\ =\ 0;$@16	+1
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*pcVar8\[iVar5\]\ =\ cVar1;$@6	+3
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*param_2\ =\ pcVar8\ \+\ iVar5;$@3	+1
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar5\ =\ 0;$@17	+1
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*param_2\[iVar5\]\ =\ cVar1;$@10	+3
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*pcVar8\ =\ param_2\ \+\ iVar5;$@4	+1
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar5\ =\ 0;$@18	+1
+use	_glpWriteDestinationOperand_97be6730	iVar5	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*param_2\[iVar5\]\ =\ cVar1;$@11	+75
+use	_glpWriteDestinationOperand_97be6730	iVar5	numberLength	CONFIRMED	character count returned by _ncpy_97be5f58 for the decimal number just written	^\s*iVar5\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(pcVar8,\*\(undefined4\ \*\)$	+3
+use	_glpWriteDestinationOperand_97be6730	iVar5	numberLength	CONFIRMED	character count returned by _ncpy_97be5f58 for the decimal number just written	^\s*iVar5\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(pcVar8,\(uint\)uVar2\);$	+2
+use	_glpWriteDestinationOperand_97be6730	iVar5	numberLength	CONFIRMED	character count returned by _ncpy_97be5f58 for the decimal number just written	^\s*iVar5\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(pcVar8,iVar7\);$	+2
+use	_glpWriteDestinationOperand_97be6730	uVar4	registerFile	CONFIRMED	operand word0 >> 0x11 & 7: 1 prints "tmp", 3 prints "res" (temporary vs output register file)	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar3\ \+\ param_1\)\ >>\ 0x11\ \&\ 7;$	+2
+use	_glpWriteDestinationOperand_97be6730	uVar4	registerFile	CONFIRMED	operand word0 >> 0x11 & 7: 1 prints "tmp", 3 prints "res" (temporary vs output register file)	^\s*if\ \(\(\(param_4\ !=\ 0\)\ \&\&\ \(uVar4\ =\ \*\(uint\ \*\)\(iVar3\ \+\ param_1\ \+\ 4\),\ \-1\ <\ \(int\)uVar4\)\)\ \&\&$	+2
+use	_glpWriteDestinationOperand_97be6730	uVar4	registerFile	CONFIRMED	operand word0 >> 0x11 & 7: 1 prints "tmp", 3 prints "res" (temporary vs output register file)	^\s*else\ if\ \(uVar4\ ==\ 3\)\ \{$	+1
+use	_glpWriteDestinationOperand_97be6730	uVar4	addressComponent	CONFIRMED	operand word1 >> 0x1c & 3: component of the address register printed as .x/.y/.z/.w in "[adrN.c"	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar3\ \+\ param_1\ \+\ 4\)\ >>\ 0x1c\ \&\ 3;$	+2
+use	_glpWriteDestinationOperand_97be6730	uVar4	addressComponent	CONFIRMED	operand word1 >> 0x1c & 3: component of the address register printed as .x/.y/.z/.w in "[adrN.c"	^\s*if\ \(1\ <\ uVar4\)\ \{$	+2
+use	_glpWriteDestinationOperand_97be6730	uVar4	addressComponent	CONFIRMED	operand word1 >> 0x1c & 3: component of the address register printed as .x/.y/.z/.w in "[adrN.c"	^\s*if\ \(uVar4\ !=\ 3\)\ goto\ LAB_97be6a78;$	+1
+use	_glpWriteDestinationOperand_97be6730	uVar4	addressComponent	CONFIRMED	operand word1 >> 0x1c & 3: component of the address register printed as .x/.y/.z/.w in "[adrN.c"	^\s*if\ \(uVar4\ ==\ 0\)\ \{$	+1
+use	_glpWriteDestinationOperand_97be6730	uVar4	relativeWord	CONFIRMED	operand word1 (offset +4 of the 8-byte table entry): holds the relative-address offset in its top byte after the rotate	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar3\ \+\ param_1\ \+\ 4\);$	+2
+use	_glpWriteDestinationOperand_97be6730	uVar4	destWord0	CONFIRMED	operand word0 re-read: write-mask / swizzle bits tested with 0xc00, >>10 & 3	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar3\ \+\ param_1\);$	+1
+use	_glpWriteDestinationOperand_97be6730	uVar4	destWord0	CONFIRMED	operand word0 re-read: write-mask / swizzle bits tested with 0xc00, >>10 & 3	^\s*if\ \(\(uVar4\ \&\ 0xc00\)\ !=\ 0\)\ \{$	+2
+use	_glpWriteDestinationOperand_97be6730	uVar4	destWord0	CONFIRMED	operand word0 re-read: write-mask / swizzle bits tested with 0xc00, >>10 & 3	^\s*\*param_2\ =\ \(\(\(byte\)\(uVar4\ >>\ 6\)\ \&\ 3\)\ \+\ 1\ \&\ 3\)\ \+\ 0x77;$	+1
+use	_glpWriteDestinationOperand_97be6730	uVar4	destWord0	CONFIRMED	operand word0 re-read: write-mask / swizzle bits tested with 0xc00, >>10 & 3	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar3\ \+\ param_1\);$@2	+3
+use	_glpWriteDestinationOperand_97be6730	uVar4	destWord0	CONFIRMED	operand word0 re-read: write-mask / swizzle bits tested with 0xc00, >>10 & 3	^\s*\*param_2\ =\ \(\(\(byte\)\(uVar4\ >>\ 4\)\ \&\ 3\)\ \+\ 1\ \&\ 3\)\ \+\ 0x77;$	+1
+use	_glpWriteDestinationOperand_97be6730	uVar4	destWord0	CONFIRMED	operand word0 re-read: write-mask / swizzle bits tested with 0xc00, >>10 & 3	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar3\ \+\ param_1\);$@3	+3
+use	_glpWriteDestinationOperand_97be6730	uVar4	destWord0	CONFIRMED	operand word0 re-read: write-mask / swizzle bits tested with 0xc00, >>10 & 3	^\s*\*param_2\ =\ \(\(\(byte\)\(uVar4\ >>\ 2\)\ \&\ 3\)\ \+\ 1\ \&\ 3\)\ \+\ 0x77;$	+1
+use	_glpWriteDestinationOperand_97be6730	uVar4	conditionCode	CONFIRMED	operand word0 >> 0x1c & 7: condition code printed as (EQ/GE/GT/LE/LT/NE/FL	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar3\ \+\ param_1\)\ >>\ 0x1c\ \&\ 7;$	+2
+use	_glpWriteDestinationOperand_97be6730	uVar4	conditionCode	CONFIRMED	operand word0 >> 0x1c & 7: condition code printed as (EQ/GE/GT/LE/LT/NE/FL	^\s*switch\(uVar4\)\ \{$	+1
+use	_glpWriteSourceOperandType	iVar3	writeCursor	CONFIRMED	output position after the text written so far (outCursor + copy index + digits)	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(param_2\ \+\ iVar5,\*\(uint\ \*\)\(iVar4\ \+\ param_1\)\ >>\ 0x1e\ \&\ 1\);$	+2
+use	_glpWriteSourceOperandType	iVar3	writeCursor	CONFIRMED	output position after the text written so far (outCursor + copy index + digits)	^\s*\*\(char\ \*\)\(iVar3\ \+\ iVar5\)\ =\ cVar1;$	+1
+use	_glpWriteSourceOperandType	iVar3	writeCursor	CONFIRMED	output position after the text written so far (outCursor + copy index + digits)	^\s*\*\(char\ \*\)\(iVar3\ \+\ iVar5\)\ =\ cVar1;$@2	+1
+use	_glpWriteSourceOperandType	iVar3	writeCursor	CONFIRMED	output position after the text written so far (outCursor + copy index + digits)	^\s*\*\(char\ \*\)\(iVar3\ \+\ iVar5\)\ =\ cVar1;$@3	+1
+use	_glpWriteSourceOperandType	iVar3	writeCursor	CONFIRMED	output position after the text written so far (outCursor + copy index + digits)	^\s*\*\(char\ \*\)\(iVar3\ \+\ iVar5\)\ =\ cVar1;$@4	+1
+use	_glpWriteSourceOperandType	iVar3	writeCursor	CONFIRMED	output position after the text written so far (outCursor + copy index + digits)	^\s*iVar3\ =\ iVar3\ \+\ iVar5;$	+1
+use	_glpWriteSourceOperandType	iVar3	writeCursor	CONFIRMED	output position after the text written so far (outCursor + copy index + digits)	^\s*\*\(char\ \*\)\(iVar3\ \+\ iVar4\)\ =\ cVar1;$	+1
+use	_glpWriteSourceOperandType	iVar3	writeCursor	CONFIRMED	output position after the text written so far (outCursor + copy index + digits)	^\s*iVar3\ =\ iVar3\ \+\ iVar4;$	+1
+use	_glpWriteSourceOperandType	iVar3	writeCursor	CONFIRMED	output position after the text written so far (outCursor + copy index + digits)	^\s*iVar4\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(iVar3,iVar5\);$	+2
+use	_glpWriteSourceOperandType	iVar3	writeCursor	CONFIRMED	output position after the text written so far (outCursor + copy index + digits)	^\s*\*\(char\ \*\)\(iVar3\ \+\ iVar4\)\ =\ cVar1;$@2	+1
+use	_glpWriteSourceOperandType	iVar3	writeCursor	CONFIRMED	output position after the text written so far (outCursor + copy index + digits)	^\s*return\ iVar3\ \+\ iVar4;$	+1
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar5\ =\ 0;$	+1
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*\*\(char\ \*\)\(param_2\ \+\ iVar5\)\ =\ cVar1;$	+3
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar5\ =\ 0;$@8	+1
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*\*\(char\ \*\)\(param_2\ \+\ iVar5\)\ =\ cVar1;$@6	+3
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar5\ =\ 0;$@9	+1
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*\*\(char\ \*\)\(param_2\ \+\ iVar5\)\ =\ cVar1;$@7	+3
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(param_2\ \+\ iVar5,\(uint\)\*\(ushort\ \*\)\(iVar4\ \+\ param_1\ \+\ 6\)\);$	+2
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar5\ =\ 0;$@2	+1
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*\*\(char\ \*\)\(param_2\ \+\ iVar5\)\ =\ cVar1;$@2	+3
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(param_2\ \+\ iVar5,uVar2\);$	+2
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar5\ =\ 0;$@3	+1
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*\*\(char\ \*\)\(param_2\ \+\ iVar5\)\ =\ cVar1;$@3	+3
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(param_2\ \+\ iVar5,$	+3
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar5\ =\ 0;$@4	+1
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*\*\(char\ \*\)\(iVar6\ \+\ iVar5\)\ =\ cVar1;$	+3
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*param_2\ =\ iVar6\ \+\ iVar5;$	+1
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar5\ =\ 0;$@7	+1
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*\*\(char\ \*\)\(iVar6\ \+\ iVar5\)\ =\ cVar1;$@2	+3
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar5\ =\ 0;$@5	+1
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*\*\(char\ \*\)\(param_2\ \+\ iVar5\)\ =\ cVar1;$@4	+3
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(param_2\ \+\ iVar5,$@2	+3
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar5\ =\ 0;$@6	+1
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*\*\(char\ \*\)\(param_2\ \+\ iVar5\)\ =\ cVar1;$@5	+3
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(param_2\ \+\ iVar5,$@3	+3
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar5\ =\ 0;$@10	+1
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*\*\(char\ \*\)\(param_2\ \+\ iVar5\)\ =\ cVar1;$@8	+3
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(param_2\ \+\ iVar5,\*\(uint\ \*\)\(iVar4\ \+\ param_1\)\ >>\ 0x1e\ \&\ 1\);$	+2
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar5\ =\ 0;$@11	+1
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*\*\(char\ \*\)\(iVar3\ \+\ iVar5\)\ =\ cVar1;$	+3
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar5\ =\ 0;$@12	+1
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*\*\(char\ \*\)\(iVar3\ \+\ iVar5\)\ =\ cVar1;$@2	+3
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar5\ =\ 0;$@13	+1
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*\*\(char\ \*\)\(iVar3\ \+\ iVar5\)\ =\ cVar1;$@3	+3
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar5\ =\ 0;$@14	+1
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*\*\(char\ \*\)\(iVar3\ \+\ iVar5\)\ =\ cVar1;$@4	+3
+use	_glpWriteSourceOperandType	iVar5	copyIndex2	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar3\ =\ iVar3\ \+\ iVar5;$	+1
+use	_glpWriteSourceOperandType	iVar5	relativeOffset	CONFIRMED	array base from tempArrayMap/paramArrayMap (or the default) plus the signed immediate offset of the operand: the number printed after '+' in "[adrN.c+offset]"	^\s*if\ \(\(\(\(\(\(\*\(uint\ \*\)\(iVar4\ \+\ param_1\)\ >>\ 0x17\ \&\ 7\)\ !=\ 1\)\ \|\|\ \(param_6\ ==\ 0\)\)\ \|\|$	+5
+use	_glpWriteSourceOperandType	iVar5	relativeOffset	CONFIRMED	array base from tempArrayMap/paramArrayMap (or the default) plus the signed immediate offset of the operand: the number printed after '+' in "[adrN.c+offset]"	^\s*iVar5\ =\ iVar5\ \+\ \(char\)\*\(undefined4\ \*\)\(iVar4\ \+\ param_1\);$	+3
+use	_glpWriteSourceOperandType	iVar5	relativeOffset	CONFIRMED	array base from tempArrayMap/paramArrayMap (or the default) plus the signed immediate offset of the operand: the number printed after '+' in "[adrN.c+offset]"	^\s*iVar4\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(iVar3,iVar5\);$	+1
+use	_glpWriteSourceOperandType	iVar6	numberLength	CONFIRMED	character count returned by _ncpy_97be5f58 for the decimal number just written	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(param_2\ \+\ iVar5,uVar2\);$	+2
+use	_glpWriteSourceOperandType	iVar6	numberLength	CONFIRMED	character count returned by _ncpy_97be5f58 for the decimal number just written	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(param_2\ \+\ iVar5,$	+3
+use	_glpWriteSourceOperandType	iVar6	numberLength	CONFIRMED	character count returned by _ncpy_97be5f58 for the decimal number just written	^\s*\*\(char\ \*\)\(iVar6\ \+\ iVar5\)\ =\ cVar1;$	+1
+use	_glpWriteSourceOperandType	iVar6	numberLength	CONFIRMED	character count returned by _ncpy_97be5f58 for the decimal number just written	^\s*param_2\ =\ iVar6\ \+\ iVar5;$	+1
+use	_glpWriteSourceOperandType	iVar6	numberLength	CONFIRMED	character count returned by _ncpy_97be5f58 for the decimal number just written	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(param_2\ \+\ iVar5,$@3	+3
+use	_glpWriteSourceOperandType	iVar6	numberLength	CONFIRMED	character count returned by _ncpy_97be5f58 for the decimal number just written	^\s*\*\(char\ \*\)\(iVar6\ \+\ iVar5\)\ =\ cVar1;$@2	+1
+use	_glpWriteSourceOperandType	iVar6	numberLength	CONFIRMED	character count returned by _ncpy_97be5f58 for the decimal number just written	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(param_2\ \+\ iVar5,$@2	+3
+use	_glpWriteSourceOperandType	iVar6	numberLength	CONFIRMED	character count returned by _ncpy_97be5f58 for the decimal number just written	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(param_2\ \+\ iVar5,\(uint\)\*\(ushort\ \*\)\(iVar4\ \+\ param_1\ \+\ 6\)\);$	+2
+use	_glpWriteSourceOperandType	iVar6	defaultArrayBase	INFERRED	0 unless paramArrayMap holds a base for this register; fallback relative-offset base	^\s*iVar6\ =\ 0;$	+1
+use	_glpWriteSourceOperandType	iVar6	defaultArrayBase	INFERRED	0 unless paramArrayMap holds a base for this register; fallback relative-offset base	^\s*if\ \(\(\(\(\(\(\*\(uint\ \*\)\(iVar4\ \+\ param_1\)\ >>\ 0x17\ \&\ 7\)\ !=\ 1\)\ \|\|\ \(param_6\ ==\ 0\)\)\ \|\|$	+5
+local	_isTempArrayStart	param_1	program	CONFIRMED	packed program header: +0x40 temp-array count, +0x44 offset (in 8-byte units) of the 8-byte table entries
+local	_isTempArrayStart	param_2	startRegister	INFERRED	compared with the low 16 bits of each entry's first word: the register where an array starts
+local	_isTempArrayStart	param_3	arraySize	INFERRED	receives the ushort at byte +6 of the matching table entry
+local	_isTempArrayStart	iVar1	arrayTable	CONFIRMED	program + word[0x44/4] * 8: the table of 8-byte temp-array entries
+local	_isTempArrayStart	iVar2	entryIndex	CONFIRMED	loop index over the table entries
+local	_isTempArrayStart	iVar3	arrayCount	CONFIRMED	program+0x40, the number of temp-array entries
+local	_isParamArrayStart_97be9b80	param_1	program	CONFIRMED	packed program header: +0x38 parameter-array count, +0x3c offset (in 8-byte units) of the entries
+local	_isParamArrayStart_97be9b80	param_2	startRegister	INFERRED	compared with the low 16 bits of each entry's first word: the register where an array starts
+local	_isParamArrayStart_97be9b80	param_3	arraySize	INFERRED	receives the ushort at byte +6 of the matching table entry
+local	_isParamArrayStart_97be9b80	iVar1	arrayTable	CONFIRMED	program + word[0x3c/4] * 8: the table of 8-byte parameter-array entries
+local	_isParamArrayStart_97be9b80	iVar2	entryIndex	CONFIRMED	loop index over the table entries
+local	_isParamArrayStart_97be9b80	iVar3	arrayCount	CONFIRMED	program+0x38, the number of parameter-array entries
+local	_adjustAllocation_97be9cb4	param_1	capacityPtr	CONFIRMED	*param_1 is the buffer capacity: grown by 0x800 when fewer than 0x100 bytes remain
+local	_adjustAllocation_97be9cb4	param_2	bufferPtr	CONFIRMED	*param_2 is the buffer base, passed to _realloc and replaced by the new allocation
+local	_adjustAllocation_97be9cb4	param_3	cursorPtr	CONFIRMED	*param_3 is the write cursor inside the buffer, rebased onto the new allocation (allocation + old offset)
+local	_adjustAllocation_97be9cb4	iVar1	oldBuffer	CONFIRMED	*param_2 before the realloc
+local	_adjustAllocation_97be9cb4	iVar2	newCapacity	CONFIRMED	old capacity + 0x800, stored back to *param_1 and passed to _realloc
+local	_adjustAllocation_97be9cb4	iVar3	oldCursor	CONFIRMED	*param_3 before the realloc; (oldCursor - oldBuffer) is the used length
+local	_handleDigit_97bf0d2c	param_1	writeCursorPtr	CONFIRMED	pointer to the char* write cursor; one digit is stored through it and it is advanced
+local	_handleDigit_97bf0d2c	param_2	value	CONFIRMED	the number being printed; value/10 is printed first recursively
+local	_handleDigit_97bf0d2c	iVar1	leadingValue	CONFIRMED	value / 10, the digits that precede the last digit
+use	_glpWriteBranchOperand	iVar5	labelIndex	CONFIRMED	position of the branch target in the label table, printed as "label_%i" (-1 when there is no table)	^\s*iVar5\ =\ 0;$	+1
+use	_glpWriteBranchOperand	iVar5	labelIndex	CONFIRMED	position of the branch target in the label table, printed as "label_%i" (-1 when there is no table)	^\s*iVar5\ =\ \-1;$	+1
+use	_glpWriteBranchOperand	iVar5	labelIndex	CONFIRMED	position of the branch target in the label table, printed as "label_%i" (-1 when there is no table)	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
+use	_glpWriteBranchOperand	iVar5	labelIndex	CONFIRMED	position of the branch target in the label table, printed as "label_%i" (-1 when there is no table)	^\s*iVar5\ =\ _sprintf\(param_2,"label_%i",iVar5\);$	+2
+use	_glpWriteBranchOperand	iVar5	operandByteOffset	CONFIRMED	operandIndex * 8, byte offset of the 8-byte operand entry	^\s*iVar5\ =\ param_4\ \*\ 8;$	+2
+use	_glpWriteBranchOperand	iVar5	operandByteOffset	CONFIRMED	operandIndex * 8, byte offset of the 8-byte operand entry	^\s*cVar1\ =\ "\ \(TR"\[iVar2\ \+\ 1\];$	+83
+use	_glpWriteTextureOperand_97be8478	iVar2	nextIndex	CONFIRMED	copyIndex + 1 of the do-while copy loop (the "], " literal): number of characters copied so far	^\s*iVar2\ =\ iVar5\ \+\ 1;$	+1
+use	_glpWriteTextureOperand_97be8478	iVar2	nextIndex	CONFIRMED	copyIndex + 1 of the do-while copy loop (the "], " literal): number of characters copied so far	^\s*iVar5\ =\ iVar2;$	+1
+use	_glpWriteTextureOperand_97be8478	iVar2	nextIndex	CONFIRMED	copyIndex + 1 of the do-while copy loop (the "], " literal): number of characters copied so far	^\s*iVar4\ =\ iVar4\ \+\ iVar2;$	+1
+use	_glpWriteTextureOperand_97be8478	iVar3	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar3\ =\ 0;$	+1
+use	_glpWriteTextureOperand_97be8478	iVar3	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*\*\(char\ \*\)\(param_2\ \+\ iVar3\)\ =\ cVar1;$	+4
+use	_glpWriteTextureOperand_97be8478	iVar3	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar3\ =\ 0;$@2	+1
+use	_glpWriteTextureOperand_97be8478	iVar3	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*\*\(char\ \*\)\(iVar4\ \+\ iVar3\)\ =\ cVar1;$	+4
+use	_glpWriteTextureOperand_97be8478	iVar3	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar3\ =\ 0;$@3	+1
+use	_glpWriteTextureOperand_97be8478	iVar3	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*\*\(char\ \*\)\(iVar4\ \+\ iVar3\)\ =\ cVar1;$@2	+4
+use	_glpWriteTextureOperand_97be8478	iVar3	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar3\ =\ 0;$@4	+1
+use	_glpWriteTextureOperand_97be8478	iVar3	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*\*\(char\ \*\)\(iVar4\ \+\ iVar3\)\ =\ cVar1;$@3	+4
+use	_glpWriteTextureOperand_97be8478	iVar3	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar3\ =\ 0;$@5	+1
+use	_glpWriteTextureOperand_97be8478	iVar3	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*\*\(char\ \*\)\(iVar4\ \+\ iVar3\)\ =\ cVar1;$@4	+4
+use	_glpWriteTextureOperand_97be8478	iVar3	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar3\ =\ 0;$@6	+1
+use	_glpWriteTextureOperand_97be8478	iVar3	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*\*\(char\ \*\)\(iVar4\ \+\ iVar3\)\ =\ cVar1;$@5	+4
+use	_glpWriteTextureOperand_97be8478	iVar3	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar3\ =\ 0;$@7	+1
+use	_glpWriteTextureOperand_97be8478	iVar3	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*\*\(char\ \*\)\(iVar4\ \+\ iVar3\)\ =\ cVar1;$@6	+4
+use	_glpWriteTextureOperand_97be8478	iVar3	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar3\ =\ 0;$@8	+1
+use	_glpWriteTextureOperand_97be8478	iVar3	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*\*\(char\ \*\)\(iVar4\ \+\ iVar3\)\ =\ cVar1;$@7	+4
+use	_glpWriteTextureOperand_97be8478	iVar3	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar3\ =\ 0;$@9	+1
+use	_glpWriteTextureOperand_97be8478	iVar3	copyIndex	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*\*\(char\ \*\)\(iVar4\ \+\ iVar3\)\ =\ cVar1;$@8	+4
+use	_glpWriteTextureOperand_97be8478	iVar3	operandByteOffset	CONFIRMED	operand entry byte offset: operandIndex * 8 (or (operandIndex + 1) * 8 for the indirect unit), whose word >> 5 & 7 selects the texture target	^\s*iVar3\ =\ param_7\ \*\ 8;$	+2
+use	_glpWriteTextureOperand_97be8478	iVar3	operandByteOffset	CONFIRMED	operand entry byte offset: operandIndex * 8 (or (operandIndex + 1) * 8 for the indirect unit), whose word >> 5 & 7 selects the texture target	^\s*iVar3\ =\ \(param_7\ \+\ 1\)\ \*\ 8;$	+1
+use	_glpWriteTextureOperand_97be8478	iVar3	operandByteOffset	CONFIRMED	operand entry byte offset: operandIndex * 8 (or (operandIndex + 1) * 8 for the indirect unit), whose word >> 5 & 7 selects the texture target	^\s*switch\(\*\(uint\ \*\)\(iVar3\ \+\ param_1\)\ >>\ 5\ \&\ 7\)\ \{$	+1
+use	_glpWriteTextureOperand_97be8478	iVar4	writeCursor	CONFIRMED	output position: starts as the do-while copy length of "texture[" and becomes outCursor + length, then advances past the unit number, "]" and the target name	^\s*iVar4\ =\ iVar3\ \+\ 1;$	+1
+use	_glpWriteTextureOperand_97be8478	iVar4	writeCursor	CONFIRMED	output position: starts as the do-while copy length of "texture[" and becomes outCursor + length, then advances past the unit number, "]" and the target name	^\s*iVar3\ =\ iVar4;$	+1
+use	_glpWriteTextureOperand_97be8478	iVar4	writeCursor	CONFIRMED	output position: starts as the do-while copy length of "texture[" and becomes outCursor + length, then advances past the unit number, "]" and the target name	^\s*iVar4\ =\ param_2\ \+\ iVar4;$	+1
+use	_glpWriteTextureOperand_97be8478	iVar4	writeCursor	CONFIRMED	output position: starts as the do-while copy length of "texture[" and becomes outCursor + length, then advances past the unit number, "]" and the target name	^\s*iVar5\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(iVar4,\*\(uint\ \*\)\(iVar3\ \+\ param_1\)\ \&\ 0x1f\);$	+2
+use	_glpWriteTextureOperand_97be8478	iVar4	writeCursor	CONFIRMED	output position: starts as the do-while copy length of "texture[" and becomes outCursor + length, then advances past the unit number, "]" and the target name	^\s*iVar4\ =\ \(\(int\ \(\*\)\(\)\)_glpWriteSourceOperand_97be7fc0\)\(param_1,iVar4,param_3,param_4,param_5,param_6,param_7,1,0\);$	+1
+use	_glpWriteTextureOperand_97be8478	iVar4	writeCursor	CONFIRMED	output position: starts as the do-while copy length of "texture[" and becomes outCursor + length, then advances past the unit number, "]" and the target name	^\s*\*\(char\ \*\)\(iVar4\ \+\ iVar5\)\ =\ cVar1;$	+1
+use	_glpWriteTextureOperand_97be8478	iVar4	writeCursor	CONFIRMED	output position: starts as the do-while copy length of "texture[" and becomes outCursor + length, then advances past the unit number, "]" and the target name	^\s*iVar4\ =\ iVar4\ \+\ iVar2;$	+1
+use	_glpWriteTextureOperand_97be8478	iVar4	writeCursor	CONFIRMED	output position: starts as the do-while copy length of "texture[" and becomes outCursor + length, then advances past the unit number, "]" and the target name	^\s*\*\(char\ \*\)\(iVar4\ \+\ iVar3\)\ =\ cVar1;$	+1
+use	_glpWriteTextureOperand_97be8478	iVar4	writeCursor	CONFIRMED	output position: starts as the do-while copy length of "texture[" and becomes outCursor + length, then advances past the unit number, "]" and the target name	^\s*\*\(char\ \*\)\(iVar4\ \+\ iVar3\)\ =\ cVar1;$@2	+1
+use	_glpWriteTextureOperand_97be8478	iVar4	writeCursor	CONFIRMED	output position: starts as the do-while copy length of "texture[" and becomes outCursor + length, then advances past the unit number, "]" and the target name	^\s*\*\(char\ \*\)\(iVar4\ \+\ iVar3\)\ =\ cVar1;$@3	+1
+use	_glpWriteTextureOperand_97be8478	iVar4	writeCursor	CONFIRMED	output position: starts as the do-while copy length of "texture[" and becomes outCursor + length, then advances past the unit number, "]" and the target name	^\s*\*\(char\ \*\)\(iVar4\ \+\ iVar3\)\ =\ cVar1;$@4	+1
+use	_glpWriteTextureOperand_97be8478	iVar4	writeCursor	CONFIRMED	output position: starts as the do-while copy length of "texture[" and becomes outCursor + length, then advances past the unit number, "]" and the target name	^\s*\*\(char\ \*\)\(iVar4\ \+\ iVar3\)\ =\ cVar1;$@5	+1
+use	_glpWriteTextureOperand_97be8478	iVar4	writeCursor	CONFIRMED	output position: starts as the do-while copy length of "texture[" and becomes outCursor + length, then advances past the unit number, "]" and the target name	^\s*\*\(char\ \*\)\(iVar4\ \+\ iVar3\)\ =\ cVar1;$@6	+1
+use	_glpWriteTextureOperand_97be8478	iVar4	writeCursor	CONFIRMED	output position: starts as the do-while copy length of "texture[" and becomes outCursor + length, then advances past the unit number, "]" and the target name	^\s*\*\(char\ \*\)\(iVar4\ \+\ iVar3\)\ =\ cVar1;$@7	+1
+use	_glpWriteTextureOperand_97be8478	iVar4	writeCursor	CONFIRMED	output position: starts as the do-while copy length of "texture[" and becomes outCursor + length, then advances past the unit number, "]" and the target name	^\s*\*\(char\ \*\)\(iVar4\ \+\ iVar3\)\ =\ cVar1;$@8	+1
+use	_glpWriteTextureOperand_97be8478	iVar4	writeCursor	CONFIRMED	output position: starts as the do-while copy length of "texture[" and becomes outCursor + length, then advances past the unit number, "]" and the target name	^\s*iVar4\ =\ iVar4\ \+\ iVar5;$@2	+1
+use	_glpWriteTextureOperand_97be8478	iVar4	writeCursor	CONFIRMED	output position: starts as the do-while copy length of "texture[" and becomes outCursor + length, then advances past the unit number, "]" and the target name	^\s*return\ iVar4;$	+1
+use	_glpWriteTextureOperand_97be8478	iVar5	copyIndex2	CONFIRMED	index of the character copied from "], " (copy loop)	^\s*iVar5\ =\ 0;$	+1
+use	_glpWriteTextureOperand_97be8478	iVar5	copyIndex2	CONFIRMED	index of the character copied from "], " (copy loop)	^\s*\*\(char\ \*\)\(iVar4\ \+\ iVar5\)\ =\ cVar1;$	+4
+use	_glpWriteTextureOperand_97be8478	iVar5	copiedLength	CONFIRMED	number of characters of the target name ("CUBE", "3D", "RECT", "2D", "1D", "SHADOWRECT", "SHADOW2D", "SHADOW1D") copied, added to writeCursor	^\s*iVar5\ =\ iVar3\ \+\ 1;$	+1
+use	_glpWriteTextureOperand_97be8478	iVar5	copiedLength	CONFIRMED	number of characters of the target name ("CUBE", "3D", "RECT", "2D", "1D", "SHADOWRECT", "SHADOW2D", "SHADOW1D") copied, added to writeCursor	^\s*iVar3\ =\ iVar5;$	+1
+use	_glpWriteTextureOperand_97be8478	iVar5	copiedLength	CONFIRMED	number of characters of the target name ("CUBE", "3D", "RECT", "2D", "1D", "SHADOWRECT", "SHADOW2D", "SHADOW1D") copied, added to writeCursor	^\s*iVar5\ =\ iVar3\ \+\ 1;$@2	+1
+use	_glpWriteTextureOperand_97be8478	iVar5	copiedLength	CONFIRMED	number of characters of the target name ("CUBE", "3D", "RECT", "2D", "1D", "SHADOWRECT", "SHADOW2D", "SHADOW1D") copied, added to writeCursor	^\s*iVar3\ =\ iVar5;$@2	+1
+use	_glpWriteTextureOperand_97be8478	iVar5	copiedLength	CONFIRMED	number of characters of the target name ("CUBE", "3D", "RECT", "2D", "1D", "SHADOWRECT", "SHADOW2D", "SHADOW1D") copied, added to writeCursor	^\s*iVar5\ =\ iVar3\ \+\ 1;$@3	+1
+use	_glpWriteTextureOperand_97be8478	iVar5	copiedLength	CONFIRMED	number of characters of the target name ("CUBE", "3D", "RECT", "2D", "1D", "SHADOWRECT", "SHADOW2D", "SHADOW1D") copied, added to writeCursor	^\s*iVar3\ =\ iVar5;$@3	+1
+use	_glpWriteTextureOperand_97be8478	iVar5	copiedLength	CONFIRMED	number of characters of the target name ("CUBE", "3D", "RECT", "2D", "1D", "SHADOWRECT", "SHADOW2D", "SHADOW1D") copied, added to writeCursor	^\s*iVar5\ =\ iVar3\ \+\ 1;$@4	+1
+use	_glpWriteTextureOperand_97be8478	iVar5	copiedLength	CONFIRMED	number of characters of the target name ("CUBE", "3D", "RECT", "2D", "1D", "SHADOWRECT", "SHADOW2D", "SHADOW1D") copied, added to writeCursor	^\s*iVar3\ =\ iVar5;$@4	+1
+use	_glpWriteTextureOperand_97be8478	iVar5	copiedLength	CONFIRMED	number of characters of the target name ("CUBE", "3D", "RECT", "2D", "1D", "SHADOWRECT", "SHADOW2D", "SHADOW1D") copied, added to writeCursor	^\s*iVar5\ =\ iVar3\ \+\ 1;$@5	+1
+use	_glpWriteTextureOperand_97be8478	iVar5	copiedLength	CONFIRMED	number of characters of the target name ("CUBE", "3D", "RECT", "2D", "1D", "SHADOWRECT", "SHADOW2D", "SHADOW1D") copied, added to writeCursor	^\s*iVar3\ =\ iVar5;$@5	+1
+use	_glpWriteTextureOperand_97be8478	iVar5	copiedLength	CONFIRMED	number of characters of the target name ("CUBE", "3D", "RECT", "2D", "1D", "SHADOWRECT", "SHADOW2D", "SHADOW1D") copied, added to writeCursor	^\s*iVar5\ =\ iVar3\ \+\ 1;$@6	+1
+use	_glpWriteTextureOperand_97be8478	iVar5	copiedLength	CONFIRMED	number of characters of the target name ("CUBE", "3D", "RECT", "2D", "1D", "SHADOWRECT", "SHADOW2D", "SHADOW1D") copied, added to writeCursor	^\s*iVar3\ =\ iVar5;$@6	+1
+use	_glpWriteTextureOperand_97be8478	iVar5	copiedLength	CONFIRMED	number of characters of the target name ("CUBE", "3D", "RECT", "2D", "1D", "SHADOWRECT", "SHADOW2D", "SHADOW1D") copied, added to writeCursor	^\s*iVar5\ =\ iVar3\ \+\ 1;$@7	+1
+use	_glpWriteTextureOperand_97be8478	iVar5	copiedLength	CONFIRMED	number of characters of the target name ("CUBE", "3D", "RECT", "2D", "1D", "SHADOWRECT", "SHADOW2D", "SHADOW1D") copied, added to writeCursor	^\s*iVar3\ =\ iVar5;$@7	+1
+use	_glpWriteTextureOperand_97be8478	iVar5	copiedLength	CONFIRMED	number of characters of the target name ("CUBE", "3D", "RECT", "2D", "1D", "SHADOWRECT", "SHADOW2D", "SHADOW1D") copied, added to writeCursor	^\s*iVar5\ =\ iVar3\ \+\ 1;$@8	+1
+use	_glpWriteTextureOperand_97be8478	iVar5	copiedLength	CONFIRMED	number of characters of the target name ("CUBE", "3D", "RECT", "2D", "1D", "SHADOWRECT", "SHADOW2D", "SHADOW1D") copied, added to writeCursor	^\s*iVar3\ =\ iVar5;$@8	+1
+use	_glpWriteTextureOperand_97be8478	iVar5	copiedLength	CONFIRMED	number of characters of the target name ("CUBE", "3D", "RECT", "2D", "1D", "SHADOWRECT", "SHADOW2D", "SHADOW1D") copied, added to writeCursor	^\s*iVar4\ =\ iVar4\ \+\ iVar5;$@2	+1
+use	_glpDisassemble1Op	iVar4	indentCopyLength	CONFIRMED	characters of the two-space indent literal copied in one indent step; added to outBase	^\s*iVar4\ =\ 0;$	+2
+use	_glpDisassemble1Op	iVar4	indentCopyLength	CONFIRMED	characters of the two-space indent literal copied in one indent step; added to outBase	^\s*iVar4\ =\ iVar5\ \+\ 1;$	+1
+use	_glpDisassemble1Op	iVar4	indentCopyLength	CONFIRMED	characters of the two-space indent literal copied in one indent step; added to outBase	^\s*iVar5\ =\ iVar4;$@2	+1
+use	_glpDisassemble1Op	iVar4	indentCopyLength	CONFIRMED	characters of the two-space indent literal copied in one indent step; added to outBase	^\s*iVar14\ =\ iVar14\ \+\ iVar4;$	+1
+use	_glpDisassemble1Op	iVar5	indentCopyIndex	CONFIRMED	index of the character copied from the two-space indent literal	^\s*iVar5\ =\ iVar4;$	+1
+use	_glpDisassemble1Op	iVar5	indentCopyIndex	CONFIRMED	index of the character copied from the two-space indent literal	^\s*\*\(char\ \*\)\(iVar14\ \+\ iVar5\)\ =\ cVar2;$	+4
+use	_glpDisassemble1Op	uVar7	instWord1Copy	CONFIRMED	inst[1] re-read for the clamp/saturate and size-type fields (>>0x16,>>0x15,>>0x14 and >>0x1a,>>0x1c,>>0x17)	^\s*uVar7\ =\ param_1\[1\];$	+2
+use	_glpDisassemble1Op	uVar7	instWord1Copy	CONFIRMED	inst[1] re-read for the clamp/saturate and size-type fields (>>0x16,>>0x15,>>0x14 and >>0x1a,>>0x1c,>>0x17)	^\s*uVar7\ =\ param_1\[1\];$@2	+2
+use	_glpDisassemble1Op	pcVar8	opMnemonic	CONFIRMED	_ppstreamOpString[opcode], the opcode name copied to the output	^\s*pcVar8\ =\ \*\(char\ \*\*\)\(\&_ppstreamOpString\ \+\ uVar11\ \*\ 4\);$	+1
+use	_glpDisassemble1Op	pcVar8	opMnemonic	CONFIRMED	_ppstreamOpString[opcode], the opcode name copied to the output	^\s*cVar2\ =\ \*pcVar8;$	+1
+use	_glpDisassemble1Op	pcVar8	opMnemonic	CONFIRMED	_ppstreamOpString[opcode], the opcode name copied to the output	^\s*cVar2\ =\ pcVar8\[iVar9\];$	+1
+use	_glpDisassemble1Op	pcVar8	lineEnd	CONFIRMED	output position after the instruction text and ';', where the optional "    # Target: %d" comment is appended	^\s*pcVar8\ =\ puVar15\ \+\ iVar14;$	+1
+use	_glpDisassemble1Op	pcVar8	lineEnd	CONFIRMED	output position after the instruction text and ';', where the optional "    # Target: %d" comment is appended	^\s*iVar14\ =\ _sprintf\(pcVar8,"\ \ \ \ \#\ Target:\ %d",uVar3\ \&\ 0x3ffff\);$	+2
+use	_glpDisassemble1Op	pcVar8	lineEnd	CONFIRMED	output position after the instruction text and ';', where the optional "    # Target: %d" comment is appended	^\s*pcVar8\[iVar14\]\ =\ cVar2;$	+1
+use	_glpDisassemble1Op	pcVar8	lineEnd	CONFIRMED	output position after the instruction text and ';', where the optional "    # Target: %d" comment is appended	^\s*\*param_4\ =\ \(int\)\(pcVar8\ \+\ \(iVar14\ \-\ param_2\)\);$	+1
+use	_glpDisassemble1Op	iVar10	indentLevel	CONFIRMED	*indentDepth: number of two-space indents to print	^\s*iVar10\ =\ \*param_10;$	+1
+use	_glpDisassemble1Op	iVar10	indentLevel	CONFIRMED	*indentDepth: number of two-space indents to print	^\s*if\ \(0\ <\ iVar10\)\ \{$	+1
+use	_glpDisassemble1Op	iVar10	indentLevel	CONFIRMED	*indentDepth: number of two-space indents to print	^\s*iVar10\ =\ \*param_10;$@2	+1
+use	_glpDisassemble1Op	iVar10	indentLevel	CONFIRMED	*indentDepth: number of two-space indents to print	^\s*\}\ while\ \(iVar9\ <\ iVar10\);$	+1
+use	_glpDisassemble1Op	iVar10	lastSourceIndex	CONFIRMED	operand index of the last source printed before the texture operand (2 for TEX/TXP, 4 for TXD); the texture operand is iVar10 + 1	^\s*iVar10\ =\ 2;$	+1
+use	_glpDisassemble1Op	iVar10	lastSourceIndex	CONFIRMED	operand index of the last source printed before the texture operand (2 for TEX/TXP, 4 for TXD); the texture operand is iVar10 + 1	^\s*iVar10\ =\ 4;$	+1
+use	_glpDisassemble1Op	iVar10	lastSourceIndex	CONFIRMED	operand index of the last source printed before the texture operand (2 for TEX/TXP, 4 for TXD); the texture operand is iVar10 + 1	^\s*\(\(int\ \(\*\)\(\)\)_glpWriteTextureOperand_97be8478\)\(param_1,iVar9\ \+\ iVar14,param_5,param_6,param_7,param_8,iVar10\ \+\ 1,uVar12\);$	+2
+local	_InsertLabel	param_1	keys	CONFIRMED	sorted array of int keys (label target indices): the search walks it while *keys < newKey and insertion shifts the tail up
+local	_InsertLabel	param_2	values	CONFIRMED	array parallel to keys; values[i] belongs to keys[i] and is shifted with it
+local	_InsertLabel	param_3	newKey	CONFIRMED	key searched for (compared with each keys[i]) and stored at the insertion position
+local	_InsertLabel	param_4	newValue	CONFIRMED	stored into values at the insertion position
+local	_InsertLabel	param_5	count	CONFIRMED	number of entries before the insert; the function returns the new count
+use	_InsertLabel	bVar1	appendAtEnd	CONFIRMED	set when the search ran off the end (loopIndex == count) so the new entry is simply stored at the end	^\s*bVar1\ =\ param_5\ ==\ 0;$	+1
+use	_InsertLabel	bVar1	appendAtEnd	CONFIRMED	set when the search ran off the end (loopIndex == count) so the new entry is simply stored at the end	^\s*bVar1\ =\ iVar8\ ==\ param_5;$	+1
+use	_InsertLabel	bVar1	appendAtEnd	CONFIRMED	set when the search ran off the end (loopIndex == count) so the new entry is simply stored at the end	^\s*if\ \(bVar1\)\ \{$	+1
+use	_InsertLabel	iVar2	byteOffset	CONFIRMED	insertion position * 4, offset of keys[pos] and values[pos]	^\s*iVar2\ =\ 0;$	+1
+use	_InsertLabel	iVar2	byteOffset	CONFIRMED	insertion position * 4, offset of keys[pos] and values[pos]	^\s*iVar2\ =\ iVar8\ \*\ 4;$	+1
+use	_InsertLabel	iVar2	byteOffset	CONFIRMED	insertion position * 4, offset of keys[pos] and values[pos]	^\s*iVar2\ =\ iVar8\ \*\ 4;$@2	+1
+use	_InsertLabel	iVar2	byteOffset	CONFIRMED	insertion position * 4, offset of keys[pos] and values[pos]	^\s*\*\(int\ \*\)\(iVar2\ \+\ \(int\)param_1\)\ =\ param_3;$	+2
+use	_InsertLabel	iVar2	byteOffset	CONFIRMED	insertion position * 4, offset of keys[pos] and values[pos]	^\s*iVar7\ =\ \*\(int\ \*\)\(iVar2\ \+\ \(int\)param_1\);$	+1
+use	_InsertLabel	iVar2	byteOffset	CONFIRMED	insertion position * 4, offset of keys[pos] and values[pos]	^\s*\*\(int\ \*\)\(iVar2\ \+\ \(int\)param_1\)\ =\ param_3;$@2	+3
+use	_InsertLabel	iVar2	shiftIndex	CONFIRMED	index of the entry being shifted up by one in the tail-shifting loop	^\s*iVar2\ =\ iVar8;$	+1
+use	_InsertLabel	iVar2	shiftIndex	CONFIRMED	index of the entry being shifted up by one in the tail-shifting loop	^\s*iVar8\ =\ iVar2\ \+\ 1;$	+5
+use	_InsertLabel	iVar2	shiftIndex	CONFIRMED	index of the entry being shifted up by one in the tail-shifting loop	^\s*iVar2\ =\ iVar8;$@2	+1
+use	_InsertLabel	iVar3	shiftCount	CONFIRMED	entries remaining to shift (count - position - 1), counts down to 0	^\s*iVar3\ =\ param_5\ \-\ iVar8;$	+1
+use	_InsertLabel	iVar3	shiftCount	CONFIRMED	entries remaining to shift (count - position - 1), counts down to 0	^\s*iVar3\ =\ iVar3\ \+\ \-1;$	+1
+use	_InsertLabel	iVar3	shiftCount	CONFIRMED	entries remaining to shift (count - position - 1), counts down to 0	^\s*\}\ while\ \(iVar3\ !=\ 0\);$	+1
+use	_InsertLabel	uVar4	displacedValue	CONFIRMED	the value previously stored at the position being overwritten; moved on in the shifting loop	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(iVar2\ \+\ param_2\);$	+1
+use	_InsertLabel	uVar4	displacedValue	CONFIRMED	the value previously stored at the position being overwritten; moved on in the shifting loop	^\s*uVar5\ =\ uVar4;$	+1
+use	_InsertLabel	uVar4	displacedValue	CONFIRMED	the value previously stored at the position being overwritten; moved on in the shifting loop	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ iVar2\ \*\ 4\);$	+1
+use	_InsertLabel	uVar4	displacedValue	CONFIRMED	the value previously stored at the position being overwritten; moved on in the shifting loop	^\s*uVar5\ =\ uVar4;$@2	+1
+use	_InsertLabel	uVar4	displacedValue	CONFIRMED	the value previously stored at the position being overwritten; moved on in the shifting loop	^\s*\*\(undefined4\ \*\)\(param_2\ \+\ iVar8\ \*\ 4\)\ =\ uVar4;$	+1
+use	_InsertLabel	uVar5	carriedValue	CONFIRMED	the value carried from the previous slot and written to values[shiftIndex]	^\s*uVar5\ =\ uVar4;$	+1
+use	_InsertLabel	uVar5	carriedValue	CONFIRMED	the value carried from the previous slot and written to values[shiftIndex]	^\s*\*\(undefined4\ \*\)\(param_2\ \+\ iVar2\ \*\ 4\)\ =\ uVar5;$	+1
+use	_InsertLabel	uVar5	carriedValue	CONFIRMED	the value carried from the previous slot and written to values[shiftIndex]	^\s*uVar5\ =\ uVar4;$@2	+1
+use	_InsertLabel	piVar6	keyCursor	CONFIRMED	pointer walking keys[] during the search	^\s*if\ \(\(param_5\ <\ 1\)\ \|\|\ \(piVar6\ =\ param_1,\ param_3\ <=\ \*param_1\)\)\ \{$	+1
+use	_InsertLabel	piVar6	keyCursor	CONFIRMED	pointer walking keys[] during the search	^\s*piVar6\ =\ piVar6\ \+\ 1;$	+1
+use	_InsertLabel	piVar6	keyCursor	CONFIRMED	pointer walking keys[] during the search	^\s*\}\ while\ \(\*piVar6\ <\ param_3\);$	+1
+use	_InsertLabel	iVar7	displacedKey	CONFIRMED	the key previously at the insertion position (equal to newKey means it is already present and nothing is inserted); then moved on in the shifting loop	^\s*iVar7\ =\ \*\(int\ \*\)\(iVar2\ \+\ \(int\)param_1\);$	+1
+use	_InsertLabel	iVar7	displacedKey	CONFIRMED	the key previously at the insertion position (equal to newKey means it is already present and nothing is inserted); then moved on in the shifting loop	^\s*if\ \(iVar7\ !=\ param_3\)\ \{$	+1
+use	_InsertLabel	iVar7	displacedKey	CONFIRMED	the key previously at the insertion position (equal to newKey means it is already present and nothing is inserted); then moved on in the shifting loop	^\s*iVar9\ =\ iVar7;$	+1
+use	_InsertLabel	iVar7	displacedKey	CONFIRMED	the key previously at the insertion position (equal to newKey means it is already present and nothing is inserted); then moved on in the shifting loop	^\s*iVar7\ =\ param_1\[iVar2\];$	+1
+use	_InsertLabel	iVar7	displacedKey	CONFIRMED	the key previously at the insertion position (equal to newKey means it is already present and nothing is inserted); then moved on in the shifting loop	^\s*iVar9\ =\ iVar7;$@2	+1
+use	_InsertLabel	iVar7	displacedKey	CONFIRMED	the key previously at the insertion position (equal to newKey means it is already present and nothing is inserted); then moved on in the shifting loop	^\s*param_1\[iVar8\]\ =\ iVar7;$	+1
+use	_InsertLabel	iVar8	nextIndex	CONFIRMED	position + 1: the index after the insertion point, advanced in the shifting loop	^\s*iVar8\ =\ iVar8\ \+\ 1;$@2	+1
+use	_InsertLabel	iVar8	nextIndex	CONFIRMED	position + 1: the index after the insertion point, advanced in the shifting loop	^\s*if\ \(iVar8\ <\ param_5\)\ \{$	+2
+use	_InsertLabel	iVar8	nextIndex	CONFIRMED	position + 1: the index after the insertion point, advanced in the shifting loop	^\s*iVar2\ =\ iVar8;$	+1
+use	_InsertLabel	iVar8	nextIndex	CONFIRMED	position + 1: the index after the insertion point, advanced in the shifting loop	^\s*iVar8\ =\ iVar2\ \+\ 1;$	+1
+use	_InsertLabel	iVar8	nextIndex	CONFIRMED	position + 1: the index after the insertion point, advanced in the shifting loop	^\s*iVar2\ =\ iVar8;$@2	+1
+use	_InsertLabel	iVar8	nextIndex	CONFIRMED	position + 1: the index after the insertion point, advanced in the shifting loop	^\s*param_1\[iVar8\]\ =\ iVar7;$	+2
+use	_InsertLabel	iVar9	carriedKey	CONFIRMED	the key carried from the previous slot and written to keys[shiftIndex]	^\s*iVar9\ =\ iVar7;$	+1
+use	_InsertLabel	iVar9	carriedKey	CONFIRMED	the key carried from the previous slot and written to keys[shiftIndex]	^\s*param_1\[iVar2\]\ =\ iVar9;$	+1
+use	_InsertLabel	iVar9	carriedKey	CONFIRMED	the key carried from the previous slot and written to keys[shiftIndex]	^\s*iVar9\ =\ iVar7;$@2	+1
+use	_InsertLabel	iVar10	newCount	CONFIRMED	count + 1 if an entry was inserted, else count; the return value	^\s*iVar10\ =\ param_5\ \+\ 1;$	+1
+use	_InsertLabel	iVar10	newCount	CONFIRMED	count + 1 if an entry was inserted, else count; the return value	^\s*iVar10\ =\ param_5;$	+1
+use	_InsertLabel	iVar10	newCount	CONFIRMED	count + 1 if an entry was inserted, else count; the return value	^\s*iVar10\ =\ param_5\ \+\ 1;$@2	+1
+use	_InsertLabel	iVar10	newCount	CONFIRMED	count + 1 if an entry was inserted, else count; the return value	^\s*return\ iVar10;$	+1
+local	_PPStreamChunkCreateWithType	param_1	chunkType	CONFIRMED	stored as the chunk's type byte (*allocation) and passed to _GetChunkAllocationSize; 8 and 0xb get the extra word
+local	_PPStreamChunkCreateWithType	param_2	chunkExtra	INFERRED	passed to _GetChunkAllocationSize; stored at +0x40 for type 8 (operation chunk) and at +0x10 for type 0xb
+local	_PPStreamChunkCompare	param_2	otherChunk	CONFIRMED	second chunk compared with the first; its type byte must match
+local	_PPStreamChunkCompare	uVar1	result	CONFIRMED	0 when the payloads are equal, 1 otherwise; for type 8 the +0x3c/+0x40 words are first copied from the first chunk into the second
+local	_PPStreamChunkCompare	uVar3	payloadSize	CONFIRMED	number of bytes memcmp'ed from +0xc: 0x10 for types 0,3,10; 4 for 1; 8 for 2,4,5,6,7,9; 0x38 for 8
+local	_PPStreamChunkListInsertChunkBeforeChunk	param_2	newChunk	CONFIRMED	chunk linked in front of beforeChunk (prev +4, next +8)
+local	_PPStreamChunkListInsertChunkBeforeChunk	param_3	beforeChunk	CONFIRMED	existing chunk the new one is inserted before; null falls back to _PPStreamChunkListAddChunk
+local	_PPStreamChunkListInsertChunkBeforeChunk	uVar1	previousChunk	CONFIRMED	beforeChunk's old predecessor (+4), becomes newChunk's predecessor
+local	_PPStreamChunkListInsertChunkAfterChunk	param_2	newChunk	CONFIRMED	chunk linked in after afterChunk (prev +4, next +8)
+local	_PPStreamChunkListInsertChunkAfterChunk	param_3	afterChunk	CONFIRMED	existing chunk the new one is inserted after; null inserts at the list head (*list)
+local	_PPStreamChunkListInsertChunkAfterChunk	uVar1	nextChunk	CONFIRMED	afterChunk's old successor (+8), becomes newChunk's successor
+local	_PPStreamChunkListRemoveChunkNoFree	param_2	chunk	CONFIRMED	chunk unlinked from the list (its prev/next are cleared, nothing freed)
+local	_PPStreamChunkListRemoveChunkNoFree	iVar1	previousChunk	CONFIRMED	chunk's predecessor (+4), becomes the predecessor of chunk's successor (or the new tail)
+local	_PPStreamChunkListCompare	param_2	otherList	CONFIRMED	second chunk list whose count (+8) and chunks are compared
+local	_PPStreamChunkListCompare	uVar1	result	CONFIRMED	0 when both lists have equal counts and pairwise equal chunks, else 1
+local	_PPStreamChunkListCompare	iVar3	chunk	CONFIRMED	cursor over the first list's chunks (next at +8)
+local	_PPStreamChunkListCompare	iVar4	otherChunk	CONFIRMED	cursor over the second list's chunks
+local	_PPStreamDuplicate	puVar2	newStream	CONFIRMED	the stream returned by _PPStreamCreate, whose target word (*) and chunk lists [1]..[0xc] are filled from the source stream
+local	_PPStreamDuplicate	piVar1	tempList	CONFIRMED	stream[1], the temporary-register chunk list (header words 4/5 of the packed program; chunk type 0)
+local	_PPStreamDuplicate	iVar4	sourceChunk	CONFIRMED	cursor over the source list's chunks (next at +8), each cloned with _PPStreamChunkCreateFromChunk
+local	_PPStreamAddTempUsageArray	param_1	stream	CONFIRMED	stream+8 is the chunk list of type-6 (temp-array) chunks, see _PPStreamAttachStream
+local	_PPStreamAddTempUsageArray	param_2	arrayEntry	CONFIRMED	two words copied into the new chunk's payload (+0xc, +0x10)
+local	_PPStreamAddTempUsageArray	uVar2	tempArrayList	CONFIRMED	stream[2], the list that receives the type-6 chunk
+local	_PPStreamAddTempUsageArray	uVar3	entryWord0	CONFIRMED	arrayEntry[0], stored at chunk+0xc (low 16 bits are the start register, per _isTempArrayStart)
+local	_PPStreamAddTempUsageArray	uVar4	entryWord1	CONFIRMED	arrayEntry[1], stored at chunk+0x10 (ushort at byte +6 of the 8-byte entry is the array size)
+local	_PPStreamAddAddressUsage	param_1	stream	CONFIRMED	stream+0xc is the chunk list of type-1 (address register) chunks
+local	_PPStreamAddAddressUsage	param_2	addressEntry	CONFIRMED	one word copied into the new chunk's payload (+0xc)
+local	_PPStreamAddAddressUsage	uVar2	addressList	CONFIRMED	stream[3], the list that receives the type-1 chunk
+local	_PPStreamAddAddressUsage	uVar3	addressIndex	INFERRED	addressEntry[0], stored at chunk+0xc (type-1 chunks hold only the register index, per _PPStreamAttachStream)
+local	_PPStreamAddParamBindingArray	param_1	stream	CONFIRMED	stream+0x14 is the chunk list of type-5 (parameter-array) chunks
+local	_PPStreamAddParamBindingArray	param_2	arrayEntry	CONFIRMED	two words copied into the new chunk's payload
+local	_PPStreamAddParamBindingArray	uVar2	paramArrayList	CONFIRMED	stream[5], the list that receives the type-5 chunk
+local	_PPStreamAddParamBindingArray	uVar3	entryWord0	CONFIRMED	arrayEntry[0], stored at chunk+0xc
+local	_PPStreamAddParamBindingArray	uVar4	entryWord1	CONFIRMED	arrayEntry[1], stored at chunk+0x10
+local	_PPStreamInsertOperationBeforeChunk	param_2	opRecord	CONFIRMED	the 14-word (0x38 byte) operation record copied into the new chunk at +0xc; word 13 (+0x34) is the length of the trailing text
+local	_PPStreamInsertOperationBeforeChunk	param_3	operationText	INFERRED	text of length operation[13] copied to chunk+0x44 and zero-terminated (an operation comment/name); only used when the length is non-zero
+local	_PPStreamInsertOperationBeforeChunk	param_4	keepIndex	CONFIRMED	non-zero keeps the operation index (bits 0..17 of word 0) from the record; zero assigns _PPStreamChunkListGetMaxIndex + 1
+local	_PPStreamInsertOperationBeforeChunk	param_5	beforeChunk	CONFIRMED	operation chunk the new chunk is inserted in front of (passed to _PPStreamChunkListInsertChunkBeforeChunk); null appends
+use	_PPStreamInsertOperationBeforeChunk	iVar5	operationTextLength	CONFIRMED	operation[13] (+0x34): length of the trailing text, 0 means none	^\s*iVar5\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x34\);$	+1
+use	_PPStreamInsertOperationBeforeChunk	iVar5	operationTextLength	CONFIRMED	operation[13] (+0x34): length of the trailing text, 0 means none	^\s*if\ \(iVar5\ !=\ 0\)\ \{$	+2
+use	_PPStreamInsertOperationBeforeChunk	iVar5	operationTextLength	CONFIRMED	operation[13] (+0x34): length of the trailing text, 0 means none	^\s*if\ \(\(iVar5\ !=\ 0\)\ \&\&\ \(param_3\ !=\ 0\)\)\ \{$	+3
+use	_PPStreamInsertOperationBeforeChunk	iVar3	chunkPayloadSize	CONFIRMED	0x38, or text length + 0x39 when there is trailing text (text + NUL); the chunk is calloc'ed with +0xc more	^\s*iVar3\ =\ 0x38;$	+1
+use	_PPStreamInsertOperationBeforeChunk	iVar3	chunkPayloadSize	CONFIRMED	0x38, or text length + 0x39 when there is trailing text (text + NUL); the chunk is calloc'ed with +0xc more	^\s*iVar3\ =\ iVar5\ \+\ 0x39;$	+1
+use	_PPStreamInsertOperationBeforeChunk	iVar3	chunkPayloadSize	CONFIRMED	0x38, or text length + 0x39 when there is trailing text (text + NUL); the chunk is calloc'ed with +0xc more	^\s*puVar4\ =\ \(undefined1\ \*\)_calloc\(iVar3\ \+\ 0xc,1\);$	+1
+use	_PPStreamInsertOperationBeforeChunk	uVar1	newOpWord0	CONFIRMED	word 0 of the new operation with its index replaced: (maxIndex + 1 & 0x3ffff) | (old & 0xfffc0000), or the old high bits only when keepIndex	^\s*uVar1\ =\ iVar3\ \+\ 1U\ \&\ 0x3ffff\ \|\ \*\(uint\ \*\)\(puVar4\ \+\ 0xc\)\ \&\ 0xfffc0000;$	+1
+use	_PPStreamInsertOperationBeforeChunk	uVar1	newOpWord0	CONFIRMED	word 0 of the new operation with its index replaced: (maxIndex + 1 & 0x3ffff) | (old & 0xfffc0000), or the old high bits only when keepIndex	^\s*uVar1\ =\ \*\(uint\ \*\)\(puVar4\ \+\ 0xc\)\ \&\ 0xfffc0000;$	+1
+use	_PPStreamInsertOperationBeforeChunk	uVar1	newOpWord0	CONFIRMED	word 0 of the new operation with its index replaced: (maxIndex + 1 & 0x3ffff) | (old & 0xfffc0000), or the old high bits only when keepIndex	^\s*\*\(uint\ \*\)\(puVar4\ \+\ 0xc\)\ =\ uVar1;$	+1
+use	_PPStreamInsertOperationBeforeChunk	uVar1	beforeOpWord0	CONFIRMED	word 0 of beforeChunk's operation, exchanged with the new operation's bits 26..28 below	^\s*uVar1\ =\ \*\(uint\ \*\)\(param_5\ \+\ 0xc\);$	+1
+use	_PPStreamInsertOperationBeforeChunk	uVar1	beforeOpWord0	CONFIRMED	word 0 of beforeChunk's operation, exchanged with the new operation's bits 26..28 below	^\s*uVar2\ \&\ 0x3ffff\ \|\ \(uVar2\ \&\ 0xe3ffffff\)\ >>\ 3\ \&\ 0x1c000000\ \|\ uVar1\ \&\ 0xe3fc0000;$	+2
+use	_PPStreamInsertOperationBeforeChunk	uVar2	newOpWord0Final	CONFIRMED	new operation's word 0 re-read after the index was stored	^\s*uVar2\ =\ \*\(uint\ \*\)\(puVar4\ \+\ 0xc\);$	+1
+use	_PPStreamInsertOperationBeforeChunk	uVar2	newOpWord0Final	CONFIRMED	new operation's word 0 re-read after the index was stored	^\s*uVar2\ \&\ 0x3ffff\ \|\ \(uVar2\ \&\ 0xe3ffffff\)\ >>\ 3\ \&\ 0x1c000000\ \|\ uVar1\ \&\ 0xe3fc0000;$	+2
+local	_PPStreamInsertOperationAfterChunk	param_2	opRecord	CONFIRMED	the 14-word (0x38 byte) operation record copied into the new chunk at +0xc; word 13 (+0x34) is the length of the trailing text
+local	_PPStreamInsertOperationAfterChunk	param_3	operationText	INFERRED	text of length operation[13] copied to chunk+0x44 and zero-terminated; only used when the length is non-zero
+local	_PPStreamInsertOperationAfterChunk	param_4	keepIndex	CONFIRMED	non-zero keeps the operation index (bits 0..17 of word 0) from the record; zero assigns _PPStreamChunkListGetMaxIndex + 1
+local	_PPStreamInsertOperationAfterChunk	param_5	afterChunk	CONFIRMED	operation chunk the new chunk is inserted behind (passed to _PPStreamChunkListInsertChunkAfterChunk); null inserts at the head
+use	_PPStreamInsertOperationAfterChunk	iVar4	operationTextLength	CONFIRMED	operation[13] (+0x34): length of the trailing text, 0 means none	^\s*iVar4\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x34\);$	+1
+use	_PPStreamInsertOperationAfterChunk	iVar4	operationTextLength	CONFIRMED	operation[13] (+0x34): length of the trailing text, 0 means none	^\s*if\ \(iVar4\ !=\ 0\)\ \{$	+2
+use	_PPStreamInsertOperationAfterChunk	iVar4	operationTextLength	CONFIRMED	operation[13] (+0x34): length of the trailing text, 0 means none	^\s*if\ \(\(iVar4\ !=\ 0\)\ \&\&\ \(param_3\ !=\ 0\)\)\ \{$	+3
+use	_PPStreamInsertOperationAfterChunk	iVar2	chunkPayloadSize	CONFIRMED	0x38, or text length + 0x39 when there is trailing text; the chunk is calloc'ed with +0xc more	^\s*iVar2\ =\ 0x38;$	+1
+use	_PPStreamInsertOperationAfterChunk	iVar2	chunkPayloadSize	CONFIRMED	0x38, or text length + 0x39 when there is trailing text; the chunk is calloc'ed with +0xc more	^\s*iVar2\ =\ iVar4\ \+\ 0x39;$	+1
+use	_PPStreamInsertOperationAfterChunk	iVar2	chunkPayloadSize	CONFIRMED	0x38, or text length + 0x39 when there is trailing text; the chunk is calloc'ed with +0xc more	^\s*puVar3\ =\ \(undefined1\ \*\)_calloc\(iVar2\ \+\ 0xc,1\);$	+1
+use	_PPStreamInsertOperationAfterChunk	uVar1	newOpWord0	CONFIRMED	word 0 of the new operation with its index replaced: (maxIndex + 1 & 0x3ffff) | (old & 0xfffc0000), or the old high bits only when keepIndex	^\s*uVar1\ =\ iVar2\ \+\ 1U\ \&\ 0x3ffff\ \|\ \*\(uint\ \*\)\(puVar3\ \+\ 0xc\)\ \&\ 0xfffc0000;$	+1
+use	_PPStreamInsertOperationAfterChunk	uVar1	newOpWord0	CONFIRMED	word 0 of the new operation with its index replaced: (maxIndex + 1 & 0x3ffff) | (old & 0xfffc0000), or the old high bits only when keepIndex	^\s*uVar1\ =\ \*\(uint\ \*\)\(puVar3\ \+\ 0xc\)\ \&\ 0xfffc0000;$	+1
+use	_PPStreamInsertOperationAfterChunk	uVar1	newOpWord0	CONFIRMED	word 0 of the new operation with its index replaced: (maxIndex + 1 & 0x3ffff) | (old & 0xfffc0000), or the old high bits only when keepIndex	^\s*\*\(uint\ \*\)\(puVar3\ \+\ 0xc\)\ =\ uVar1;$	+1
+local	_PPStreamAddLabel	param_2	labelText	CONFIRMED	label name copied to chunk+0x14 (labelLength bytes, zero-terminated)
+local	_PPStreamAddLabel	param_3	labelLength	CONFIRMED	number of bytes of labelText; stored at chunk+0x10, chunk size is labelLength + 0x15
+use	_PPStreamAddLabel	uVar2	operationList	CONFIRMED	stream[8] (stream+0x20), the operation chunk list whose max index + 1 becomes the label's operation index	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x20\);$	+1
+use	_PPStreamAddLabel	uVar2	operationList	CONFIRMED	stream[8] (stream+0x20), the operation chunk list whose max index + 1 becomes the label's operation index	^\s*iVar3\ =\ _PPStreamChunkListGetMaxIndex\(uVar2\);$	+1
+use	_PPStreamAddLabel	uVar2	labelList	CONFIRMED	stream[9] (stream+0x24), the list of type-0xb label chunks that receives the new chunk	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x24\);$	+1
+use	_PPStreamAddLabel	uVar2	labelList	CONFIRMED	stream[9] (stream+0x24), the list of type-0xb label chunks that receives the new chunk	^\s*return\ _PPStreamChunkListAddChunk\(uVar2,puVar1\);$	+1
+local	_PPStreamRemoveLabelsAtOperationIndex	param_2	operationIndex	CONFIRMED	labels whose index (+0xc) equals this are removed from the label list stream[9]
+local	_PPStreamRemoveLabelsAtOperationIndex	iVar1	label	CONFIRMED	the label chunk being examined/removed
+local	_PPStreamRemoveLabelsAtOperationIndex	iVar2	nextLabel	CONFIRMED	label's successor (+8), read before the label may be removed
+local	_PPStreamAddRasterOp	param_1	stream	CONFIRMED	stream+0x28 is the chunk list of type-9 (raster-state) chunks
+local	_PPStreamAddRasterOp	param_2	rasterOpEntry	CONFIRMED	two words copied into the new chunk's payload
+local	_PPStreamAddRasterOp	uVar2	rasterOpList	CONFIRMED	stream[10], the list that receives the type-9 chunk
+local	_PPStreamAddRasterOp	uVar3	entryWord0	CONFIRMED	rasterOpEntry[0], stored at chunk+0xc
+local	_PPStreamAddRasterOp	uVar4	entryWord1	CONFIRMED	rasterOpEntry[1], stored at chunk+0x10
+local	_PPStreamAttachStream	param_2	packedProgram	CONFIRMED	packed program ("pp" shader): header words are count/offset pairs for each table (temps [4]/[5], attributes [8]/[9], params [10]/[11], outputs [12]/[13], param arrays [14]/[15], temp arrays [16]/[17], options [18]/[19], instructions [20]/[21], raster ops [24]/[25], [26]/[27]); word 0 is the target copied to stream[0]
+use	_PPStreamAttachStream	puVar1	operationWord2Ptr	CONFIRMED	pointer to operation word 2 (operationCursor + 2), copied to chunk+0x14	^\s*puVar1\ =\ puVar8\ \+\ 2;$	+1
+use	_PPStreamAttachStream	puVar1	operationWord2Ptr	CONFIRMED	pointer to operation word 2 (operationCursor + 2), copied to chunk+0x14	^\s*\*\(uint\ \*\)\(puVar5\ \+\ 0x14\)\ =\ \*puVar1;$	+1
+use	_PPStreamAttachStream	uVar2	operationWord1	CONFIRMED	operationCursor[1], stored at chunk+0x10	^\s*uVar2\ =\ puVar8\[1\];$	+1
+use	_PPStreamAttachStream	uVar2	operationWord1	CONFIRMED	operationCursor[1], stored at chunk+0x10	^\s*\*\(uint\ \*\)\(puVar5\ \+\ 0x10\)\ =\ uVar2;$	+1
+use	_PPStreamAttachStream	uVar2	operationWord3	CONFIRMED	operationCursor[3], stored at chunk+0x18	^\s*uVar2\ =\ puVar8\[3\];$	+1
+use	_PPStreamAttachStream	uVar2	operationWord3	CONFIRMED	operationCursor[3], stored at chunk+0x18	^\s*\*\(uint\ \*\)\(puVar5\ \+\ 0x18\)\ =\ uVar2;$	+1
+use	_PPStreamAttachStream	uVar2	operandWord0	CONFIRMED	first word of a source-operand pair read from operationCursor, stored at operandCursor+0xc	^\s*uVar2\ =\ \*puVar8;$	+1
+use	_PPStreamAttachStream	uVar2	operandWord0	CONFIRMED	first word of a source-operand pair read from operationCursor, stored at operandCursor+0xc	^\s*\*\(uint\ \*\)\(puVar6\ \+\ 0xc\)\ =\ uVar2;$	+1
+use	_PPStreamAttachStream	uVar4	operandWord1	CONFIRMED	second word of the operand pair, stored at operandCursor+0x10	^\s*uVar4\ =\ puVar8\[1\];$	+1
+use	_PPStreamAttachStream	uVar4	operandWord1	CONFIRMED	second word of the operand pair, stored at operandCursor+0x10	^\s*\*\(uint\ \*\)\(puVar6\ \+\ 0x10\)\ =\ uVar4;$	+1
+use	_PPStreamAttachStream	puVar6	operandCursor	CONFIRMED	chunk+0x10, advanced by 8 per source operand copied after the 4-word operation header	^\s*puVar6\ =\ puVar5\ \+\ 0x10;$	+1
+use	_PPStreamAttachStream	puVar6	operandCursor	CONFIRMED	chunk+0x10, advanced by 8 per source operand copied after the 4-word operation header	^\s*\*\(uint\ \*\)\(puVar6\ \+\ 0xc\)\ =\ uVar2;$	+3
+use	_PPStreamAttachStream	puVar8	operationCursor	CONFIRMED	cursor over the packed instructions (table at word [21] * 8 bytes), advanced past each instruction's 4 header words and its operand pairs	^\s*puVar8\ =\ param_2\ \+\ param_2\[0x15\]\ \*\ 2;$	+1
+use	_PPStreamAttachStream	puVar8	operationCursor	CONFIRMED	cursor over the packed instructions (table at word [21] * 8 bytes), advanced past each instruction's 4 header words and its operand pairs	^\s*uVar2\ =\ puVar8\[1\];$	+3
+use	_PPStreamAttachStream	puVar8	operationCursor	CONFIRMED	cursor over the packed instructions (table at word [21] * 8 bytes), advanced past each instruction's 4 header words and its operand pairs	^\s*puVar1\ =\ puVar8\ \+\ 2;$	+3
+use	_PPStreamAttachStream	puVar8	operationCursor	CONFIRMED	cursor over the packed instructions (table at word [21] * 8 bytes), advanced past each instruction's 4 header words and its operand pairs	^\s*uVar2\ =\ \*puVar8;$	+3
+use	_PPStreamAttachStream	uVar10	sourceOperandCount	CONFIRMED	operation word 0 >> 0x1d (bits 31..29): number of source-operand word pairs that follow the 4-word header	^\s*uVar10\ =\ \*puVar8\ >>\ 0x1d;$	+1
+use	_PPStreamAttachStream	uVar10	sourceOperandCount	CONFIRMED	operation word 0 >> 0x1d (bits 31..29): number of source-operand word pairs that follow the 4-word header	^\s*if\ \(uVar10\ !=\ 0\)\ \{$	+1
+use	_PPStreamAttachStream	uVar10	sourceOperandCount	CONFIRMED	operation word 0 >> 0x1d (bits 31..29): number of source-operand word pairs that follow the 4-word header	^\s*uVar10\ =\ uVar10\ \-\ 1;$	+2
+use	_PPStreamAttachStream	uVar3	entryWord1	CONFIRMED	entry[1], the second word of the current 8-byte table entry, stored at chunk+0x10	^\s*uVar3\ =\ puVar9\[1\];$	+1
+use	_PPStreamAttachStream	uVar3	entryWord1	CONFIRMED	entry[1], the second word of the current 8-byte table entry, stored at chunk+0x10	^\s*\*\(undefined4\ \*\)\(puVar5\ \+\ 0x10\)\ =\ uVar3;$	+1
+use	_PPStreamAttachStream	uVar3	entryWord1	CONFIRMED	entry[1], the second word of the current 8-byte table entry, stored at chunk+0x10	^\s*uVar3\ =\ puVar9\[1\];$@2	+1
+use	_PPStreamAttachStream	uVar3	entryWord1	CONFIRMED	entry[1], the second word of the current 8-byte table entry, stored at chunk+0x10	^\s*\*\(undefined4\ \*\)\(puVar5\ \+\ 0x10\)\ =\ uVar3;$@2	+1
+use	_PPStreamAttachStream	uVar3	entryWord1	CONFIRMED	entry[1], the second word of the current 8-byte table entry, stored at chunk+0x10	^\s*uVar3\ =\ puVar9\[1\];$@3	+1
+use	_PPStreamAttachStream	uVar3	entryWord1	CONFIRMED	entry[1], the second word of the current 8-byte table entry, stored at chunk+0x10	^\s*\*\(undefined4\ \*\)\(puVar5\ \+\ 0x10\)\ =\ uVar3;$@3	+1
+use	_PPStreamAttachStream	uVar3	entryWord1	CONFIRMED	entry[1], the second word of the current 8-byte table entry, stored at chunk+0x10	^\s*uVar3\ =\ puVar9\[1\];$@4	+1
+use	_PPStreamAttachStream	uVar3	entryWord1	CONFIRMED	entry[1], the second word of the current 8-byte table entry, stored at chunk+0x10	^\s*\*\(undefined4\ \*\)\(puVar5\ \+\ 0x10\)\ =\ uVar3;$@4	+1
+use	_PPStreamAttachStream	uVar3	entryWord1	CONFIRMED	entry[1], the second word of the current 8-byte table entry, stored at chunk+0x10	^\s*uVar3\ =\ puVar9\[1\];$@5	+1
+use	_PPStreamAttachStream	uVar3	entryWord1	CONFIRMED	entry[1], the second word of the current 8-byte table entry, stored at chunk+0x10	^\s*\*\(undefined4\ \*\)\(puVar5\ \+\ 0x10\)\ =\ uVar3;$@5	+1
+use	_PPStreamAttachStream	uVar3	entryWord1	CONFIRMED	entry[1], the second word of the current 8-byte table entry, stored at chunk+0x10	^\s*uVar3\ =\ puVar9\[1\];$@6	+1
+use	_PPStreamAttachStream	uVar3	entryWord1	CONFIRMED	entry[1], the second word of the current 8-byte table entry, stored at chunk+0x10	^\s*\*\(undefined4\ \*\)\(puVar5\ \+\ 0x10\)\ =\ uVar3;$@6	+1
+use	_PPStreamAttachStream	uVar3	entryWord1	CONFIRMED	entry[1], the second word of the current 8-byte table entry, stored at chunk+0x10	^\s*uVar3\ =\ puVar9\[1\];$@7	+1
+use	_PPStreamAttachStream	uVar3	entryWord1	CONFIRMED	entry[1], the second word of the current 8-byte table entry, stored at chunk+0x10	^\s*\*\(undefined4\ \*\)\(puVar5\ \+\ 0x10\)\ =\ uVar3;$@7	+1
+use	_PPStreamAttachStream	uVar3	entryWord1	CONFIRMED	entry[1], the second word of the current 8-byte table entry, stored at chunk+0x10	^\s*uVar3\ =\ puVar9\[1\];$@8	+1
+use	_PPStreamAttachStream	uVar3	entryWord1	CONFIRMED	entry[1], the second word of the current 8-byte table entry, stored at chunk+0x10	^\s*\*\(undefined4\ \*\)\(puVar5\ \+\ 0x10\)\ =\ uVar3;$@8	+1
+use	_PPStreamAttachStream	puVar9	tempEntry	CONFIRMED	cursor over the temp-register table (offset header word [5]); chunk type 0 into stream[1]	^\s*puVar9\ =\ param_2\ \+\ param_2\[5\]\ \*\ 2;$	+1
+use	_PPStreamAttachStream	puVar9	tempEntry	CONFIRMED	cursor over the temp-register table (offset header word [5]); chunk type 0 into stream[1]	^\s*uVar3\ =\ puVar9\[1\];$	+2
+use	_PPStreamAttachStream	puVar9	tempEntry	CONFIRMED	cursor over the temp-register table (offset header word [5]); chunk type 0 into stream[1]	^\s*puVar9\ =\ puVar9\ \+\ 2;$	+1
+use	_PPStreamAttachStream	puVar9	attributeEntry	CONFIRMED	cursor over the attribute table (header word [9]); chunk type 2 into stream[6]	^\s*puVar9\ =\ param_2\ \+\ param_2\[9\]\ \*\ 2;$	+1
+use	_PPStreamAttachStream	puVar9	attributeEntry	CONFIRMED	cursor over the attribute table (header word [9]); chunk type 2 into stream[6]	^\s*uVar3\ =\ puVar9\[1\];$@2	+2
+use	_PPStreamAttachStream	puVar9	attributeEntry	CONFIRMED	cursor over the attribute table (header word [9]); chunk type 2 into stream[6]	^\s*puVar9\ =\ puVar9\ \+\ 2;$@2	+1
+use	_PPStreamAttachStream	puVar9	paramEntry	CONFIRMED	cursor over the parameter table (header word [0xb]); chunk type 3 into stream[4]	^\s*puVar9\ =\ param_2\ \+\ param_2\[0xb\]\ \*\ 2;$	+1
+use	_PPStreamAttachStream	puVar9	paramEntry	CONFIRMED	cursor over the parameter table (header word [0xb]); chunk type 3 into stream[4]	^\s*uVar3\ =\ puVar9\[1\];$@3	+2
+use	_PPStreamAttachStream	puVar9	paramEntry	CONFIRMED	cursor over the parameter table (header word [0xb]); chunk type 3 into stream[4]	^\s*puVar9\ =\ puVar9\ \+\ 2;$@3	+1
+use	_PPStreamAttachStream	puVar9	outputEntry	CONFIRMED	cursor over the output table (header word [0xd]); chunk type 4 into stream[7]	^\s*puVar9\ =\ param_2\ \+\ param_2\[0xd\]\ \*\ 2;$	+1
+use	_PPStreamAttachStream	puVar9	outputEntry	CONFIRMED	cursor over the output table (header word [0xd]); chunk type 4 into stream[7]	^\s*uVar3\ =\ puVar9\[1\];$@4	+2
+use	_PPStreamAttachStream	puVar9	outputEntry	CONFIRMED	cursor over the output table (header word [0xd]); chunk type 4 into stream[7]	^\s*puVar9\ =\ puVar9\ \+\ 2;$@4	+1
+use	_PPStreamAttachStream	puVar9	paramArrayEntry	CONFIRMED	cursor over the parameter-array table (header word [0xf]); chunk type 5 into stream[5]	^\s*puVar9\ =\ param_2\ \+\ param_2\[0xf\]\ \*\ 2;$	+1
+use	_PPStreamAttachStream	puVar9	paramArrayEntry	CONFIRMED	cursor over the parameter-array table (header word [0xf]); chunk type 5 into stream[5]	^\s*uVar3\ =\ puVar9\[1\];$@5	+2
+use	_PPStreamAttachStream	puVar9	paramArrayEntry	CONFIRMED	cursor over the parameter-array table (header word [0xf]); chunk type 5 into stream[5]	^\s*puVar9\ =\ puVar9\ \+\ 2;$@5	+1
+use	_PPStreamAttachStream	puVar9	tempArrayEntry	CONFIRMED	cursor over the temp-array table (header word [0x11]); chunk type 6 into stream[2]	^\s*puVar9\ =\ param_2\ \+\ param_2\[0x11\]\ \*\ 2;$	+1
+use	_PPStreamAttachStream	puVar9	tempArrayEntry	CONFIRMED	cursor over the temp-array table (header word [0x11]); chunk type 6 into stream[2]	^\s*uVar3\ =\ puVar9\[1\];$@6	+2
+use	_PPStreamAttachStream	puVar9	tempArrayEntry	CONFIRMED	cursor over the temp-array table (header word [0x11]); chunk type 6 into stream[2]	^\s*puVar9\ =\ puVar9\ \+\ 2;$@6	+1
+use	_PPStreamAttachStream	puVar9	optionEntry	CONFIRMED	cursor over the option table (header word [0x13]); chunk type 7 into stream[0xc]	^\s*puVar9\ =\ param_2\ \+\ param_2\[0x13\]\ \*\ 2;$	+1
+use	_PPStreamAttachStream	puVar9	optionEntry	CONFIRMED	cursor over the option table (header word [0x13]); chunk type 7 into stream[0xc]	^\s*uVar3\ =\ puVar9\[1\];$@7	+2
+use	_PPStreamAttachStream	puVar9	optionEntry	CONFIRMED	cursor over the option table (header word [0x13]); chunk type 7 into stream[0xc]	^\s*puVar9\ =\ puVar9\ \+\ 2;$@7	+1
+use	_PPStreamAttachStream	puVar9	rasterOpEntry	CONFIRMED	cursor over the raster-state table (header word [0x19]); chunk type 9 into stream[10]	^\s*puVar9\ =\ param_2\ \+\ param_2\[0x19\]\ \*\ 2;$	+1
+use	_PPStreamAttachStream	puVar9	rasterOpEntry	CONFIRMED	cursor over the raster-state table (header word [0x19]); chunk type 9 into stream[10]	^\s*uVar3\ =\ puVar9\[1\];$@8	+2
+use	_PPStreamAttachStream	puVar9	rasterOpEntry	CONFIRMED	cursor over the raster-state table (header word [0x19]); chunk type 9 into stream[10]	^\s*puVar9\ =\ puVar9\ \+\ 2;$@8	+1
+use	_PPStreamAttachStream	puVar9	extraTableEntry	INFERRED	cursor over the 16-byte entries of the table at header word [0x1b]; chunk type 10 into stream[0xb]	^\s*puVar9\ =\ param_2\ \+\ param_2\[0x1b\]\ \*\ 2;$	+1
+use	_PPStreamAttachStream	puVar9	extraTableEntry	INFERRED	cursor over the 16-byte entries of the table at header word [0x1b]; chunk type 10 into stream[0xb]	^\s*\*\(undefined4\ \*\)\(puVar5\ \+\ 0xc\)\ =\ \*puVar9;$@9	+5
+local	_PPStreamCompare	param_2	otherStream	CONFIRMED	second stream: target word and each chunk list ([1]..[0xc]) compared with the first
+local	_PPStreamCompare	bVar2	streamsDiffer	CONFIRMED	true until every compared list is equal; the function returns it as its result
+local	_PPStreamRenumberOperandIndices	param_1	stream	CONFIRMED	stream+0x20 is the operation chunk list walked here (head chunk **(stream+0x20))
+local	_PPStreamRenumberOperandIndices	param_2	declChunk	CONFIRMED	register-declaration chunk whose type byte (0 temp, 2 attribute, 3 param, 4 output) selects the operand file; +0x12 holds its current index
+local	_PPStreamRenumberOperandIndices	param_3	newIndex	CONFIRMED	low 16 bits are stored as the declaration's new index in every matching operand
+use	_PPStreamRenumberOperandIndices	iVar6	opChunk	CONFIRMED	cursor over the operation chunks (next at +8)	^\s*iVar6\ =\ \*\*\(int\ \*\*\)\(param_1\ \+\ 0x20\);$	+2
+use	_PPStreamRenumberOperandIndices	iVar6	opChunk	CONFIRMED	cursor over the operation chunks (next at +8)	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar6\ \+\ 0xc\);$	+1
+use	_PPStreamRenumberOperandIndices	iVar6	opChunk	CONFIRMED	cursor over the operation chunks (next at +8)	^\s*iVar4\ =\ iVar6\ \+\ 0x10;$	+1
+use	_PPStreamRenumberOperandIndices	iVar6	opChunk	CONFIRMED	cursor over the operation chunks (next at +8)	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar6\ \+\ 0xc\);$@2	+1
+use	_PPStreamRenumberOperandIndices	iVar6	opChunk	CONFIRMED	cursor over the operation chunks (next at +8)	^\s*if\ \(\(\*\(uint\ \*\)\(iVar6\ \+\ 0x14\)\ \&\ 0xe0000\)\ ==\ 0\)\ goto\ LAB_97bf1ea0;$	+1
+use	_PPStreamRenumberOperandIndices	iVar6	opChunk	CONFIRMED	cursor over the operation chunks (next at +8)	^\s*bVar1\ =\ \(\*\(uint\ \*\)\(iVar6\ \+\ 0x14\)\ >>\ 0x11\ \&\ 7\)\ ==\ 1;$	+1
+use	_PPStreamRenumberOperandIndices	iVar6	opChunk	CONFIRMED	cursor over the operation chunks (next at +8)	^\s*bVar1\ =\ \(\*\(uint\ \*\)\(iVar6\ \+\ 0x14\)\ >>\ 0x11\ \&\ 7\)\ ==\ 2;$	+1
+use	_PPStreamRenumberOperandIndices	iVar6	opChunk	CONFIRMED	cursor over the operation chunks (next at +8)	^\s*bVar1\ =\ \(\*\(uint\ \*\)\(iVar6\ \+\ 0x14\)\ >>\ 0x11\ \&\ 7\)\ ==\ 3;$	+1
+use	_PPStreamRenumberOperandIndices	iVar6	opChunk	CONFIRMED	cursor over the operation chunks (next at +8)	^\s*if\ \(\*\(short\ \*\)\(iVar6\ \+\ 0x1a\)\ ==\ \*\(short\ \*\)\(param_2\ \+\ 0x12\)\)\ \{$	+2
+use	_PPStreamRenumberOperandIndices	iVar6	opChunk	CONFIRMED	cursor over the operation chunks (next at +8)	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar6\ \+\ 8\);$	+2
+use	_PPStreamRenumberOperandIndices	uVar2	opWord0	CONFIRMED	operation word 0; bits 31..29 give the source-operand count	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar6\ \+\ 0xc\);$	+1
+use	_PPStreamRenumberOperandIndices	uVar2	opWord0	CONFIRMED	operation word 0; bits 31..29 give the source-operand count	^\s*if\ \(uVar2\ >>\ 0x1d\ !=\ 0\)\ \{$	+1
+use	_PPStreamRenumberOperandIndices	uVar2	opWord0	CONFIRMED	operation word 0; bits 31..29 give the source-operand count	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar6\ \+\ 0xc\);$@2	+1
+use	_PPStreamRenumberOperandIndices	uVar2	opWord0	CONFIRMED	operation word 0; bits 31..29 give the source-operand count	^\s*\}\ while\ \(iVar3\ <\ \(int\)\(uVar2\ >>\ 0x1d\)\);$	+1
+use	_PPStreamRenumberOperandIndices	iVar4	sourceOperand	CONFIRMED	cursor over the operation's source operand pairs, starting at chunk+0x10 and stepping 8 bytes	^\s*iVar4\ =\ iVar6\ \+\ 0x10;$	+1
+use	_PPStreamRenumberOperandIndices	iVar4	sourceOperand	CONFIRMED	cursor over the operation's source operand pairs, starting at chunk+0x10 and stepping 8 bytes	^\s*if\ \(\(\*\(uint\ \*\)\(iVar4\ \+\ 0xc\)\ \&\ 0x3800000\)\ ==\ 0\)\ goto\ LAB_97bf1e1c;$	+1
+use	_PPStreamRenumberOperandIndices	iVar4	sourceOperand	CONFIRMED	cursor over the operation's source operand pairs, starting at chunk+0x10 and stepping 8 bytes	^\s*bVar1\ =\ \(\*\(uint\ \*\)\(iVar4\ \+\ 0xc\)\ >>\ 0x17\ \&\ 7\)\ ==\ 1;$	+1
+use	_PPStreamRenumberOperandIndices	iVar4	sourceOperand	CONFIRMED	cursor over the operation's source operand pairs, starting at chunk+0x10 and stepping 8 bytes	^\s*bVar1\ =\ \(\*\(uint\ \*\)\(iVar4\ \+\ 0xc\)\ >>\ 0x17\ \&\ 7\)\ ==\ 2;$	+1
+use	_PPStreamRenumberOperandIndices	iVar4	sourceOperand	CONFIRMED	cursor over the operation's source operand pairs, starting at chunk+0x10 and stepping 8 bytes	^\s*bVar1\ =\ \(\*\(uint\ \*\)\(iVar4\ \+\ 0xc\)\ >>\ 0x17\ \&\ 7\)\ ==\ 3;$	+1
+use	_PPStreamRenumberOperandIndices	iVar4	sourceOperand	CONFIRMED	cursor over the operation's source operand pairs, starting at chunk+0x10 and stepping 8 bytes	^\s*if\ \(\*\(short\ \*\)\(iVar4\ \+\ 0x12\)\ ==\ \*\(short\ \*\)\(param_2\ \+\ 0x12\)\)\ \{$	+2
+use	_PPStreamRenumberOperandIndices	iVar4	sourceOperand	CONFIRMED	cursor over the operation's source operand pairs, starting at chunk+0x10 and stepping 8 bytes	^\s*iVar4\ =\ iVar4\ \+\ 8;$	+1
+use	_PPStreamRenumberOperandIndices	bVar5	declType	CONFIRMED	*declChunk: the declaration type byte (0 temp, 2 attribute, 3 param, 4 output) re-read after each update	^\s*bVar5\ =\ \*param_2;$	+1
+use	_PPStreamRenumberOperandIndices	bVar5	declType	CONFIRMED	*declChunk: the declaration type byte (0 temp, 2 attribute, 3 param, 4 output) re-read after each update	^\s*if\ \(bVar5\ ==\ 2\)\ \{$	+1
+use	_PPStreamRenumberOperandIndices	bVar5	declType	CONFIRMED	*declChunk: the declaration type byte (0 temp, 2 attribute, 3 param, 4 output) re-read after each update	^\s*if\ \(bVar5\ <\ 3\)\ \{$	+2
+use	_PPStreamRenumberOperandIndices	bVar5	declType	CONFIRMED	*declChunk: the declaration type byte (0 temp, 2 attribute, 3 param, 4 output) re-read after each update	^\s*else\ if\ \(bVar5\ ==\ 3\)\ \{$	+1
+use	_PPStreamRenumberOperandIndices	bVar5	declType	CONFIRMED	*declChunk: the declaration type byte (0 temp, 2 attribute, 3 param, 4 output) re-read after each update	^\s*if\ \(bVar5\ !=\ 4\)\ goto\ LAB_97bf1e38;$	+1
+use	_PPStreamRenumberOperandIndices	bVar5	declType	CONFIRMED	*declChunk: the declaration type byte (0 temp, 2 attribute, 3 param, 4 output) re-read after each update	^\s*bVar5\ =\ \*param_2;$@2	+1
+use	_PPStreamRenumberOperandIndices	bVar5	declType	CONFIRMED	*declChunk: the declaration type byte (0 temp, 2 attribute, 3 param, 4 output) re-read after each update	^\s*if\ \(bVar5\ ==\ 2\)\ \{$@2	+1
+use	_PPStreamRenumberOperandIndices	bVar5	declType	CONFIRMED	*declChunk: the declaration type byte (0 temp, 2 attribute, 3 param, 4 output) re-read after each update	^\s*if\ \(bVar5\ <\ 3\)\ \{$@2	+2
+use	_PPStreamRenumberOperandIndices	bVar5	declType	CONFIRMED	*declChunk: the declaration type byte (0 temp, 2 attribute, 3 param, 4 output) re-read after each update	^\s*else\ if\ \(bVar5\ ==\ 3\)\ \{$@2	+1
+use	_PPStreamRenumberOperandIndices	bVar5	declType	CONFIRMED	*declChunk: the declaration type byte (0 temp, 2 attribute, 3 param, 4 output) re-read after each update	^\s*if\ \(bVar5\ !=\ 4\)\ goto\ LAB_97bf1eb4;$	+1
+use	_PPStreamRenumberOperandIndices	bVar1	sourceFileMatches	CONFIRMED	operand file field (word >> 0x17 & 7) equals the file implied by declType (1 temp, 2 param, 3 output)	^\s*bVar1\ =\ \(\*\(uint\ \*\)\(iVar4\ \+\ 0xc\)\ >>\ 0x17\ \&\ 7\)\ ==\ 1;$	+1
+use	_PPStreamRenumberOperandIndices	bVar1	sourceFileMatches	CONFIRMED	operand file field (word >> 0x17 & 7) equals the file implied by declType (1 temp, 2 param, 3 output)	^\s*bVar1\ =\ \(\*\(uint\ \*\)\(iVar4\ \+\ 0xc\)\ >>\ 0x17\ \&\ 7\)\ ==\ 2;$	+1
+use	_PPStreamRenumberOperandIndices	bVar1	sourceFileMatches	CONFIRMED	operand file field (word >> 0x17 & 7) equals the file implied by declType (1 temp, 2 param, 3 output)	^\s*bVar1\ =\ \(\*\(uint\ \*\)\(iVar4\ \+\ 0xc\)\ >>\ 0x17\ \&\ 7\)\ ==\ 3;$	+1
+use	_PPStreamRenumberOperandIndices	bVar1	sourceFileMatches	CONFIRMED	operand file field (word >> 0x17 & 7) equals the file implied by declType (1 temp, 2 param, 3 output)	^\s*if\ \(bVar1\)\ \{$	+1
+use	_PPStreamRenumberOperandIndices	bVar1	destFileMatches	CONFIRMED	destination file field (word >> 0x11 & 7) equals the file implied by declType	^\s*bVar1\ =\ \(\*\(uint\ \*\)\(iVar6\ \+\ 0x14\)\ >>\ 0x11\ \&\ 7\)\ ==\ 1;$	+1
+use	_PPStreamRenumberOperandIndices	bVar1	destFileMatches	CONFIRMED	destination file field (word >> 0x11 & 7) equals the file implied by declType	^\s*bVar1\ =\ \(\*\(uint\ \*\)\(iVar6\ \+\ 0x14\)\ >>\ 0x11\ \&\ 7\)\ ==\ 2;$	+1
+use	_PPStreamRenumberOperandIndices	bVar1	destFileMatches	CONFIRMED	destination file field (word >> 0x11 & 7) equals the file implied by declType	^\s*bVar1\ =\ \(\*\(uint\ \*\)\(iVar6\ \+\ 0x14\)\ >>\ 0x11\ \&\ 7\)\ ==\ 3;$	+1
+use	_PPStreamRenumberOperandIndices	bVar1	destFileMatches	CONFIRMED	destination file field (word >> 0x11 & 7) equals the file implied by declType	^\s*if\ \(bVar1\)\ \{$@2	+1
+use	_PPStreamPackIndices	iVar3	tempChunk	CONFIRMED	cursor over the temp-register declaration chunks (stream+4)	^\s*for\ \(iVar3\ =\ \*\*\(int\ \*\*\)\(param_1\ \+\ 4\);\ iVar3\ !=\ 0;\ iVar3\ =\ \*\(int\ \*\)\(iVar3\ \+\ 8\)\)\ \{$	+5
+use	_PPStreamPackIndices	iVar3	paramChunk	CONFIRMED	cursor over the parameter declaration chunks (stream+0x10)	^\s*for\ \(iVar3\ =\ \*\*\(int\ \*\*\)\(param_1\ \+\ 0x10\);\ iVar3\ !=\ 0;\ iVar3\ =\ \*\(int\ \*\)\(iVar3\ \+\ 8\)\)\ \{$	+5
+use	_PPStreamPackIndices	iVar3	attributeChunk	CONFIRMED	cursor over the attribute declaration chunks (stream+0x18)	^\s*for\ \(iVar3\ =\ \*\*\(int\ \*\*\)\(param_1\ \+\ 0x18\);\ iVar3\ !=\ 0;\ iVar3\ =\ \*\(int\ \*\)\(iVar3\ \+\ 8\)\)\ \{$	+4
+use	_PPStreamPackIndices	iVar3	outputChunk	CONFIRMED	cursor over the output declaration chunks (stream+0x1c)	^\s*for\ \(iVar3\ =\ \*\*\(int\ \*\*\)\(param_1\ \+\ 0x1c\);\ iVar3\ !=\ 0;\ iVar3\ =\ \*\(int\ \*\)\(iVar3\ \+\ 8\)\)\ \{$	+4
+use	_PPStreamPackIndices	iVar3	opChunk	CONFIRMED	cursor over the operation chunks (stream+0x20), clearing the byte at +1 (renumbered mark)	^\s*for\ \(iVar3\ =\ \*\*\(int\ \*\*\)\(param_1\ \+\ 0x20\);\ iVar3\ !=\ 0;\ iVar3\ =\ \*\(int\ \*\)\(iVar3\ \+\ 8\)\)\ \{$	+2
+use	_PPStreamPackIndices	iVar3	labelChunk	CONFIRMED	cursor over the label chunks (stream+0x24), clearing the byte at +1 (renumbered mark)	^\s*for\ \(iVar3\ =\ \*\*\(int\ \*\*\)\(param_1\ \+\ 0x24\);\ iVar3\ !=\ 0;\ iVar3\ =\ \*\(int\ \*\)\(iVar3\ \+\ 8\)\)\ \{$	+2
+use	_PPStreamPackIndices	iVar3	renumberOpChunk	CONFIRMED	cursor over the operation chunks in the final renumbering pass; word 0 low 18 bits are the operation index	^\s*for\ \(iVar3\ =\ \*\*\(int\ \*\*\)\(param_1\ \+\ 0x20\);\ iVar3\ !=\ 0;\ iVar3\ =\ \*\(int\ \*\)\(iVar3\ \+\ 8\)\)\ \{$@2	+2
+use	_PPStreamPackIndices	iVar3	renumberOpChunk	CONFIRMED	cursor over the operation chunks in the final renumbering pass; word 0 low 18 bits are the operation index	^\s*\(\(int\ \(\*\)\(\)\)_renumberTargets\)\(\*\*\(undefined4\ \*\*\)\(param_1\ \+\ 0x20\),\*\(uint\ \*\)\(iVar3\ \+\ 0xc\)\ \&\ 0x3ffff,uVar2,1\);$	+2
+use	_PPStreamPackIndices	iVar4	addressChunk	CONFIRMED	cursor over the address-register chunks (stream+0xc), whose index is at +0xc	^\s*for\ \(iVar4\ =\ \*\*\(int\ \*\*\)\(param_1\ \+\ 0xc\);\ iVar4\ !=\ 0;\ iVar4\ =\ \*\(int\ \*\)\(iVar4\ \+\ 8\)\)\ \{$	+4
+use	_PPStreamPackIndices	uVar1	oldOpIndex	CONFIRMED	operation word 0 & 0x3ffff: the index the operation had before renumbering	^\s*uVar1\ =\ \*\(uint\ \*\)\(iVar3\ \+\ 0xc\)\ \&\ 0x3ffff;$	+3
+local	_renumberTempArrayIndices	param_1	arrayChunk	CONFIRMED	cursor over the temp-array chunks (next at +8); +0xe and +0x12 hold the array's first/last register
+local	_renumberTempArrayIndices	param_2	oldIndex	CONFIRMED	register index to replace
+local	_renumberTempArrayIndices	param_3	newIndex	CONFIRMED	low 16 bits are stored where oldIndex matched
+local	_renumberParamArrayIndices	param_1	arrayChunk	CONFIRMED	cursor over the parameter-array chunks (next at +8); +0xe and +0x12 hold the array's first/last register
+local	_renumberParamArrayIndices	param_2	oldIndex	CONFIRMED	register index to replace
+local	_renumberParamArrayIndices	param_3	newIndex	CONFIRMED	low 16 bits are stored where oldIndex matched
+local	_renumberLabels	param_1	label	CONFIRMED	cursor over the label chunks (next at +8); +0xc is the label's operation index
+local	_renumberLabels	param_2	oldIndex	CONFIRMED	operation index to replace
+local	_renumberLabels	param_3	newIndex	CONFIRMED	stored at label+0xc where oldIndex matched
+local	_renumberLabels	param_4	markRenumbered	CONFIRMED	non-zero skips labels whose byte +1 is already set and sets it on the ones changed, so a label is renumbered only once per pass
+local	_renumberTargets	param_1	opChunk	CONFIRMED	cursor over the operation chunks (next at +8); branch/loop opcodes (0x4b,0x4c,0x54..0x58,0x5a,0x5b,0x69..0x6b) carry a target index in the low 18 bits of word 1
+local	_renumberTargets	param_2	oldIndex	CONFIRMED	branch target to replace
+local	_renumberTargets	param_3	newIndex	CONFIRMED	stored (masked to 18 bits) where oldIndex matched
+local	_renumberTargets	param_4	markRenumbered	CONFIRMED	non-zero skips operations whose byte +1 is already set and sets it on the ones changed
+local	_PPStreamChangeBranchTargets	param_2	oldTarget	CONFIRMED	passed as oldIndex to _renumberLabels and _renumberTargets
+local	_PPStreamChangeBranchTargets	param_3	newTarget	CONFIRMED	passed as newIndex to _renumberLabels and _renumberTargets
+local	_PPStreamSortParamConstants	iVar4	paramChunk	CONFIRMED	cursor over the parameter chunks (stream+0x10); +0x12 is the chunk's index
+local	_PPStreamSortParamConstants	uVar1	chunkIndex	CONFIRMED	paramChunk's current index (+0x12)
+local	_PPStreamSortParamConstants	uVar3	nextConstantIndex	CONFIRMED	starts at maxIndex + 1; constants whose kind field (word >> 0x10 & 0x1f) is 0x11 are renumbered to it, then it is incremented, so they sort after the rest
+local	_PPStreamResolveBranches	piVar3	labelList	CONFIRMED	stream[9] (stream+0x24), the label chunk list
+local	_PPStreamResolveBranches	piVar4	operationList	CONFIRMED	stream[8] (stream+0x20), the operation chunk list
+local	_PPStreamResolveBranches	uVar2	hasUnresolvedBranch	CONFIRMED	0, set to 1 when an operation with a text name has no label with the same name; returned
+local	_PPStreamResolveBranches	iVar1	nameCompareResult	CONFIRMED	_strncmp of the operation text (chunk+0x44) against the label text (+0x14)
+local	_PPStreamResolveBranches	iVar5	chunkCursor	CONFIRMED	cursor over the operation chunks, then over the label chunks when looking for the "main(" label (next at +8)
+local	_PPStreamResolveBranches	iVar7	labelCursor	CONFIRMED	cursor over the label chunks compared by name length (+0x10) and text (+0x14)
+use	_PPStreamResolveBranches	iVar6	operationTextLength	CONFIRMED	operation chunk +0x40: length of the trailing text (the called function's name)	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar5\ \+\ 0x40\);$	^LAB_97bf24b8:$
+use	_PPStreamResolveBranches	iVar6	operationCursor	CONFIRMED	cursor over the operation chunks, looking for the one whose target equals the "main(" label's index	^\s*iVar6\ =\ \*piVar4;$	
+local	_PPStreamGetArray	param_2	arrayKind	CONFIRMED	1 searches the temp-array list (stream+8), 2 the parameter-array list (stream+0x14)
+local	_PPStreamGetArray	param_3	registerIndex	CONFIRMED	register tested against each array's [first (+0xe), last (+0x12)] range
+local	_PPStreamGetArray	iVar1	arrayChunk	CONFIRMED	cursor over the array chunks
+local	_PPStreamGetArray	iVar2	arrayNumber	CONFIRMED	position of arrayChunk in the list, returned when the register falls in its range (-1 if none)
+local	_PPStreamFindDuplicateChunk	param_2	chunk	CONFIRMED	chunk to look for; its type byte selects the list (0 temps +4, 1 addresses +0xc, 2 attributes +0x18, 3 params +0x10, 4 outputs +0x1c, 5 param arrays +0x14, 6 temp arrays +8, 7 options +0x30, 8 operations +0x20, 9 raster ops +0x28, 10 +0x2c, 0xb labels +0x24)
+local	_PPStreamFindDuplicateChunk	piVar1	chunkList	CONFIRMED	the list selected by the chunk's type
+local	_PPStreamFindDuplicateChunk	iVar3	candidate	CONFIRMED	cursor over chunkList's chunks, returned when _PPStreamChunkCompare reports equality

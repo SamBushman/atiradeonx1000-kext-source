@@ -242,11 +242,11 @@ local	_glpWriteSourceOperand_97be7fc0	cVar1	ch	CONFIRMED	current character of th
 local	_glpWriteBranchOperand	cVar1	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar1 != '\0')`
 local	_glpWriteTextureOperand_97be8478	cVar1	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar1 != '\0')`
 local	_glpDisassemble1Op	cVar2	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar2 != '\0')`
-local	_PPStreamChunkCompare	param_1	stream	INFERRED	dereferenced as the PPStream object (4 field accesses); every PPStream* function takes it first
-local	_PPStreamChunkListInsertChunkBeforeChunk	param_1	stream	INFERRED	dereferenced as the PPStream object (5 field accesses); every PPStream* function takes it first
-local	_PPStreamChunkListInsertChunkAfterChunk	param_1	stream	INFERRED	dereferenced as the PPStream object (9 field accesses); every PPStream* function takes it first
-local	_PPStreamChunkListRemoveChunkNoFree	param_1	stream	INFERRED	dereferenced as the PPStream object (5 field accesses); every PPStream* function takes it first
-local	_PPStreamChunkListCompare	param_1	stream	INFERRED	dereferenced as the PPStream object (3 field accesses); every PPStream* function takes it first
+local	_PPStreamChunkCompare	param_1	chunk	CONFIRMED	_PPStreamChunk record (type byte at +0, prev +4, next +8, payload +0xc) compared by type-dependent payload size
+local	_PPStreamChunkListInsertChunkBeforeChunk	param_1	chunkList	CONFIRMED	_PPStreamChunkList header: head +0, tail +4, count +8 (stream[2] is incremented on insert)
+local	_PPStreamChunkListInsertChunkAfterChunk	param_1	chunkList	CONFIRMED	_PPStreamChunkList header: head +0, tail +4, count +8 (stream[2] is incremented on insert)
+local	_PPStreamChunkListRemoveChunkNoFree	param_1	chunkList	CONFIRMED	_PPStreamChunkList header: head +0, tail +4, count +8 (count decremented on removal)
+local	_PPStreamChunkListCompare	param_1	chunkList	CONFIRMED	_PPStreamChunkList header: head +0, count +8 compared, chunks walked through next (+8)
 local	_PPStreamDuplicate	param_1	stream	INFERRED	dereferenced as the PPStream object (14 field accesses); every PPStream* function takes it first
 local	_PPStreamInsertOperationBeforeChunk	param_1	stream	INFERRED	dereferenced as the PPStream object (2 field accesses); every PPStream* function takes it first
 local	_PPStreamInsertOperationAfterChunk	param_1	stream	INFERRED	dereferenced as the PPStream object (2 field accesses); every PPStream* function takes it first
