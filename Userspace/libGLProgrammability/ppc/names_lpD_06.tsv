@@ -1,0 +1,30 @@
+local	__cxxabiv1____vmi_class_type_info____do_upcast	uVar1	baseOffsetFlags	CONFIRMED	__base_class_type_info::__offset_flags: bit0 virtual, bit1 public, offset in bits 8..
+local	__cxxabiv1____vmi_class_type_info____do_upcast	ptVar4	resultBaseType	CONFIRMED	result.base_type read back (+0xc); 8 = nonvirtual_base_type
+local	__cxxabiv1____vmi_class_type_info____do_upcast	r5In0	adjustedObjPtr	CONFIRMED	obj_ptr advanced by the (virtual) base offset for the recursive __do_upcast
+local	__cxxabiv1____vmi_class_type_info____do_upcast	uVar5	srcDetails	CONFIRMED	src_details: result.src_details (+8) or this->__flags when unknown (bit 0x10)
+local	__cxxabiv1____vmi_class_type_info____do_upcast	p_Var6	baseInfo	CONFIRMED	this + i*8: __base_info[i] (base_type at +0x10, offset_flags at +0x14), walked downwards
+local	__cxxabiv1____vmi_class_type_info____do_upcast	local_40	result2DstPtr	CONFIRMED	__upcast_result result2 of the recursive call: dst_ptr
+local	__cxxabiv1____vmi_class_type_info____do_upcast	local_3c	result2Part2dst	CONFIRMED	result2.part2dst
+local	__cxxabiv1____vmi_class_type_info____do_upcast	local_38	result2SrcDetails	CONFIRMED	result2.src_details (initialised from srcDetails)
+local	__cxxabiv1____vmi_class_type_info____do_upcast	local_34	result2BaseType	CONFIRMED	result2.base_type
+use	__cxxabiv1____vmi_class_type_info____do_upcast	iVar3	classUpcastOk	CONFIRMED	__class_type_info::__do_upcast(dst, obj_ptr, result): true when this class is dst	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)__ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PKvRNS0_15__upcast_resultE\)\(this,param_2,param_3,param_4\);$	^\s*iVar3\ =\ \*\(int\ \*\)\(this\ \+\ 0xc\)\ \+\ \-1;$	all	none
+use	__cxxabiv1____vmi_class_type_info____do_upcast	iVar3	baseIndex	CONFIRMED	i = __base_count - 1, counted down to 0	^\s*iVar3\ =\ \*\(int\ \*\)\(this\ \+\ 0xc\)\ \+\ \-1;$		all	none
+use	__cxxabiv1____vmi_class_type_info____do_upcast	iVar2	baseOffset	CONFIRMED	offset_flags >> 8, replaced by the vbase offset read through the vtable for a virtual base	^\s*iVar2\ =\ \(int\)uVar1\ >>\ 8;$	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(p_Var6\ \+\ 0x10\)\ \+\ 0x18\)\)$	all	none
+use	__cxxabiv1____vmi_class_type_info____do_upcast	iVar2	baseUpcastOk	CONFIRMED	base_type->__do_upcast(dst, base, result2)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(p_Var6\ \+\ 0x10\)\ \+\ 0x18\)\)$	^\s*\(iVar2\ =\ __ZNKSt9type_infoeqERKS_\(local_34,ptVar4\),\ iVar2\ ==\ 0\)\)\)\)\ \{$	all	none
+use	__cxxabiv1____vmi_class_type_info____do_upcast	iVar2	sameBaseType	CONFIRMED	*result2.base_type == *result.base_type	^\s*\(iVar2\ =\ __ZNKSt9type_infoeqERKS_\(local_34,ptVar4\),\ iVar2\ ==\ 0\)\)\)\)\ \{$		all	none
+use	__cxxabiv1____vmi_class_type_info____do_upcast	bVar7	upcastResult	CONFIRMED	return value: true when the class itself was the target	^\s*bVar7\ =\ true;$	^\s*bVar7\ =\ \(uVar1\ >>\ 1\ \&\ 1\)\ !=\ 0;$	all	none
+use	__cxxabiv1____vmi_class_type_info____do_upcast	bVar7	isPublicBase	CONFIRMED	__base_info[i].__is_public_p()	^\s*bVar7\ =\ \(uVar1\ >>\ 1\ \&\ 1\)\ !=\ 0;$	^\s*bVar7\ =\ iVar3\ !=\ 0;$	all	none
+use	__cxxabiv1____vmi_class_type_info____do_upcast	bVar7	moreBases	CONFIRMED	loop continues while i != 0	^\s*bVar7\ =\ iVar3\ !=\ 0;$	^\s*bVar7\ =\ \*\(int\ \*\)\(param_4\ \+\ 4\)\ !=\ 0;$	all	none
+use	__cxxabiv1____vmi_class_type_info____do_upcast	bVar7	upcastResult	CONFIRMED	result.part2dst != __unknown	^\s*bVar7\ =\ \*\(int\ \*\)\(param_4\ \+\ 4\)\ !=\ 0;$		all	none
+local	___dynamic_cast	param_1	srcPtr	CONFIRMED	const void* src_ptr: the pointer being cast, its vtable gives the most derived type
+local	___dynamic_cast	param_2	srcType	CONFIRMED	const __class_type_info* src_type
+local	___dynamic_cast	param_3	dstType	CONFIRMED	const __class_type_info* dst_type
+local	___dynamic_cast	param_4	src2dst	CONFIRMED	ptrdiff_t src2dst hint
+local	___dynamic_cast	r3In0	whole	CONFIRMED	whole_type = vtable[-1]: the type_info of the most derived object
+local	___dynamic_cast	uVar1	dst2srcKind	CONFIRMED	result.dst2src, recomputed from src2dst when unknown
+local	___dynamic_cast	iVar2	castResult	CONFIRMED	returned dst pointer, null when the cast fails or is ambiguous
+local	___dynamic_cast	local_40	resultDstPtr	CONFIRMED	__dyncast_result result: dst_ptr
+local	___dynamic_cast	local_3c	resultWhole2dst	CONFIRMED	result.whole2dst
+local	___dynamic_cast	local_38	resultWhole2src	CONFIRMED	result.whole2src
+local	___dynamic_cast	local_34	resultDst2src	CONFIRMED	result.dst2src
+local	___dynamic_cast	local_30	resultWholeDetails	CONFIRMED	result.whole_details (initialised to the unknown mask 0x10)

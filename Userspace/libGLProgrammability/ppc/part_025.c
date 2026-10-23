@@ -299,65 +299,70 @@ int __cxxabiv1____vmi_class_type_info____do_upcast(this, dstType, objPtr, result
   void *objPtr;
   unsigned char * result;
 {
-  uint uVar1;
-  int iVar2;
-  int iVar3;
-  unsigned char * ptVar4;
-  void *r5In0;
-  uint uVar5;
-  unsigned char * p_Var6;
-  bool bVar7;
-  int local_40;
-  uint local_3c;
-  uint local_38;
-  void *local_34;
+  bool moreBases;
+  bool isPublicBase;
+  int sameBaseType;
+  int baseUpcastOk;
+  int baseIndex;
+  uint baseOffsetFlags;
+  int baseOffset;
+  int classUpcastOk;
+  unsigned char * resultBaseType;
+  void *adjustedObjPtr;
+  uint srcDetails;
+  unsigned char * baseInfo;
+  bool upcastResult;
+  int result2DstPtr;
+  uint result2Part2dst;
+  uint result2SrcDetails;
+  void *result2BaseType;
   
-  iVar3 = ((int (*)())__ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PKvRNS0_15__upcast_resultE)(this,dstType,objPtr,result);
-  bVar7 = true;
-  if (iVar3 == 0) {
-    uVar5 = *(uint *)(result + 8);
-    if ((uVar5 & 0x10) != 0) {
-      uVar5 = *(uint *)(this + 8);
+  classUpcastOk = ((int (*)())__ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PKvRNS0_15__upcast_resultE)(this,dstType,objPtr,result);
+  upcastResult = true;
+  if (classUpcastOk == 0) {
+    srcDetails = *(uint *)(result + 8);
+    if ((srcDetails & 0x10) != 0) {
+      srcDetails = *(uint *)(this + 8);
     }
-    iVar3 = *(int *)(this + 0xc) + -1;
+    baseIndex = *(int *)(this + 0xc) + -1;
     if (*(int *)(this + 0xc) != 0) {
-      p_Var6 = this + iVar3 * 8;
+      baseInfo = this + baseIndex * 8;
       do {
-        uVar1 = *(uint *)(p_Var6 + 0x14);
-        local_40 = 0;
-        bVar7 = (uVar1 >> 1 & 1) != 0;
-        local_3c = 0;
-        iVar2 = (int)uVar1 >> 8;
-        local_34 = (void *)0x0;
-        if ((bVar7) || (((uVar5 ^ 1) & 1) == 0)) {
-          r5In0 = objPtr;
+        baseOffsetFlags = *(uint *)(baseInfo + 0x14);
+        result2DstPtr = 0;
+        isPublicBase = (baseOffsetFlags >> 1 & 1) != 0;
+        result2Part2dst = 0;
+        baseOffset = (int)baseOffsetFlags >> 8;
+        result2BaseType = (void *)0x0;
+        if ((isPublicBase) || (((srcDetails ^ 1) & 1) == 0)) {
+          adjustedObjPtr = objPtr;
           if (objPtr != (void *)0x0) {
-            if ((uVar1 & 1) != 0) {
-              iVar2 = *(int *)(*(int *)objPtr + iVar2);
+            if ((baseOffsetFlags & 1) != 0) {
+              baseOffset = *(int *)(*(int *)objPtr + baseOffset);
             }
-            r5In0 = (void *)((int)objPtr + iVar2);
+            adjustedObjPtr = (void *)((int)objPtr + baseOffset);
           }
-          local_38 = uVar5;
-          iVar2 = (**(code **)(**(int **)(p_Var6 + 0x10) + 0x18))
-                            (*(int **)(p_Var6 + 0x10),dstType,r5In0,&local_40);
-          if (iVar2 != 0) {
-            if ((local_34 == (void *)0x8) && ((uVar1 & 1) != 0)) {
-              local_34 = *(void **)(p_Var6 + 0x10);
+          result2SrcDetails = srcDetails;
+          baseUpcastOk = (**(code **)(**(int **)(baseInfo + 0x10) + 0x18))
+                            (*(int **)(baseInfo + 0x10),dstType,adjustedObjPtr,&result2DstPtr);
+          if (baseUpcastOk != 0) {
+            if ((result2BaseType == (void *)0x8) && ((baseOffsetFlags & 1) != 0)) {
+              result2BaseType = *(void **)(baseInfo + 0x10);
             }
-            if ((3 < (int)local_3c) && (!bVar7)) {
-              local_3c = local_3c & 0xfffffffd;
+            if ((3 < (int)result2Part2dst) && (!isPublicBase)) {
+              result2Part2dst = result2Part2dst & 0xfffffffd;
             }
-            ptVar4 = *(unsigned char **)(result + 0xc);
-            if (ptVar4 == (unsigned char *)0x0) {
-              *(uint *)(result + 8) = local_38;
-              *(int *)result = local_40;
-              *(void **)(result + 0xc) = local_34;
-              *(uint *)(result + 4) = local_3c;
-              if ((int)local_3c < 4) {
+            resultBaseType = *(unsigned char **)(result + 0xc);
+            if (resultBaseType == (unsigned char *)0x0) {
+              *(uint *)(result + 8) = result2SrcDetails;
+              *(int *)result = result2DstPtr;
+              *(void **)(result + 0xc) = result2BaseType;
+              *(uint *)(result + 4) = result2Part2dst;
+              if ((int)result2Part2dst < 4) {
                 return true;
               }
-              if ((local_3c & 2) == 0) {
-                if ((local_3c & 1) == 0) {
+              if ((result2Part2dst & 2) == 0) {
+                if ((result2Part2dst & 1) == 0) {
                   return true;
                 }
                 if ((*(uint *)(this + 8) & 2) == 0) {
@@ -369,79 +374,79 @@ int __cxxabiv1____vmi_class_type_info____do_upcast(this, dstType, objPtr, result
               }
             }
             else {
-              if (*(int *)result != local_40) {
+              if (*(int *)result != result2DstPtr) {
                 *(undefined4 *)(result + 4) = 2;
                 *(undefined4 *)result = 0;
                 return true;
               }
               if ((*(int *)result == 0) &&
-                 (((local_34 == (void *)0x8 || (ptVar4 == (unsigned char *)0x8)) ||
-                  (iVar2 = __ZNKSt9type_infoeqERKS_(local_34,ptVar4), iVar2 == 0)))) {
+                 (((result2BaseType == (void *)0x8 || (resultBaseType == (unsigned char *)0x8)) ||
+                  (sameBaseType = __ZNKSt9type_infoeqERKS_(result2BaseType,resultBaseType), sameBaseType == 0)))) {
                 *(undefined4 *)(result + 4) = 2;
                 return true;
               }
-              *(uint *)(result + 4) = *(uint *)(result + 4) | local_3c;
+              *(uint *)(result + 4) = *(uint *)(result + 4) | result2Part2dst;
             }
           }
         }
-        bVar7 = iVar3 != 0;
-        p_Var6 = p_Var6 + -8;
-        iVar3 = iVar3 + -1;
-      } while (bVar7);
+        moreBases = baseIndex != 0;
+        baseInfo = baseInfo + -8;
+        baseIndex = baseIndex + -1;
+      } while (moreBases);
     }
-    bVar7 = *(int *)(result + 4) != 0;
+    upcastResult = *(int *)(result + 4) != 0;
   }
-  return bVar7;
+  return upcastResult;
 }
 
 /* ___dynamic_cast @ 0x97c18e28 (328 bytes) */
-int ___dynamic_cast(param_1, param_2, param_3, param_4)
-  int *param_1;
-  undefined4 param_2;
-  int *param_3;
-  int param_4;
+int ___dynamic_cast(srcPtr, srcType, dstType, src2dst)
+  int *srcPtr;
+  undefined4 srcType;
+  int *dstType;
+  int src2dst;
 {
-  int *r3In0;
-  uint uVar1;
-  int iVar2;
-  int local_40;
-  uint local_3c;
-  uint local_38;
-  uint local_34;
-  undefined4 local_30;
+  int *whole;
+  uint dst2srcKind;
+  int castResult;
+  int resultDstPtr;
+  uint resultWhole2dst;
+  uint resultWhole2src;
+  uint resultDst2src;
+  undefined4 resultWholeDetails;
   
-  r3In0 = *(int **)(*param_1 + -4);
-  local_38 = 0;
-  local_34 = 0;
-  local_30 = 0x10;
-  local_40 = 0;
-  local_3c = 0;
-  (**(code **)(*r3In0 + 0x1c))
-            (r3In0,param_4,6,param_3,(int)param_1 + *(int *)(*param_1 + -8),param_2,param_1,&local_40);
-  iVar2 = 0;
-  if ((((local_40 != 0) && (iVar2 = local_40, (local_34 & 6) != 6)) &&
-      ((local_38 & local_3c & 6) != 6)) && (iVar2 = 0, (local_38 & 5) != 4)) {
-    uVar1 = local_34;
-    if (local_34 == 0) {
-      if (param_4 < 0) {
-        uVar1 = 0;
-        if (param_4 != -2) {
-          uVar1 = (**(code **)(*param_3 + 0x20))(param_3,param_4,local_40,param_2,param_1);
+  whole = *(int **)(*srcPtr + -4);
+  resultWhole2src = 0;
+  resultDst2src = 0;
+  resultWholeDetails = 0x10;
+  resultDstPtr = 0;
+  resultWhole2dst = 0;
+  (**(code **)(*whole + 0x1c))
+            (whole,src2dst,6,dstType,(int)srcPtr + *(int *)(*srcPtr + -8),srcType,srcPtr,&resultDstPtr);
+  castResult = 0;
+  if ((((resultDstPtr != 0) && (castResult = resultDstPtr, (resultDst2src & 6) != 6)) &&
+      ((resultWhole2src & resultWhole2dst & 6) != 6)) && (castResult = 0, (resultWhole2src & 5) != 4)) {
+    dst2srcKind = resultDst2src;
+    if (resultDst2src == 0) {
+      if (src2dst < 0) {
+        dst2srcKind = 0;
+        if (src2dst != -2) {
+          dst2srcKind = (**(code **)(*dstType + 0x20))(dstType,src2dst,resultDstPtr,srcType,srcPtr);
         }
       }
       else {
-        uVar1 = 6;
-        if ((int *)(local_40 + param_4) != param_1) {
-          uVar1 = 0;
+        dst2srcKind = 6;
+        if ((int *)(resultDstPtr + src2dst) != srcPtr) {
+          dst2srcKind = 0;
         }
       }
     }
-    iVar2 = 0;
-    if ((uVar1 & 6) == 6) {
-      iVar2 = local_40;
+    castResult = 0;
+    if ((dst2srcKind & 6) == 6) {
+      castResult = resultDstPtr;
     }
   }
-  return iVar2;
+  return castResult;
 }
 
 /* __ZNSt9exceptionD2Ev @ 0x97c18f70 (8 bytes) */
