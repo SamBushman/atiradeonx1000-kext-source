@@ -59,11 +59,11 @@ local	psnRgbSelectToComponentBit	param_2	writeMask	INFERRED	components requested
 local	psnRgbSelectToComponentBit	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): unused by this function
 local	psnRgbSelectToComponentBit	param_4	passThroughR6	INFERRED	Ghidra register-argument pass-through (r6): unused by this function
 local	psnRgbSelectToComponentBit	param_6	passThroughR8	INFERRED	Ghidra register-argument pass-through (r8): unused by this function
-local	psnRgbSelectToComponentBit	param_5	sourceSlots	INFERRED	base of the three 4-byte source slots; the component bit is ORed into the word at +2 / +6 / +10 of the slot the select names
+local	psnRgbSelectToComponentBit	param_5	sourceUsage	INFERRED	array of six 4-byte {address, readMask} records (RGB sources 0-2 at +0 / +4 / +8, alpha sources 0-2 at +0xc / +0x10 / +0x14, evidence: the select cases write the word at +2 / +6 / +10 for the RGB sources and +0xe / +0x12 / +0x16 for the alpha sources); the component bit is ORed into the read mask (+2) of the source the select names
 local	psnRgbSelectToComponentBit	uVar4	componentBits	INFERRED	component bit(s) read through the select (1 r, 2 g, 4 b, 8 a)
 local	psnAlphaSelectToComponentBit	param_1	selectCode	INFERRED	ALPHA_INST operand select 0..0xf
 local	psnAlphaSelectToComponentBit	param_2	writeMask	INFERRED	components requested (bit 3 = alpha)
 local	psnAlphaSelectToComponentBit	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): unused by this function
 local	psnAlphaSelectToComponentBit	param_4	passThroughR6	INFERRED	Ghidra register-argument pass-through (r6): unused by this function
 local	psnAlphaSelectToComponentBit	param_6	passThroughR8	INFERRED	Ghidra register-argument pass-through (r8): unused by this function
-local	psnAlphaSelectToComponentBit	param_5	sourceSlots	INFERRED	base of the source slots; the component bit is ORed into the word at +2 / +6 / +10 / +0xe
+local	psnAlphaSelectToComponentBit	param_5	sourceUsage	INFERRED	array of six 4-byte {address, readMask} records (RGB sources 0-2 at +0 / +4 / +8, alpha sources 0-2 at +0xc / +0x10 / +0x14, evidence: the select cases write the word at +2 / +6 / +10 for the RGB sources and +0xe / +0x12 / +0x16 for the alpha sources); the component bit is ORed into the read mask (+2) of the source the select names
