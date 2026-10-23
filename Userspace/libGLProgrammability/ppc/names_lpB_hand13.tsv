@@ -1,0 +1,15 @@
+local	_PPParserParseParamBinding	bVar1	singleBinding	INFERRED	isBraceList == 0: one binding per declaration (no {..} list)
+local	_PPParserParseParamBinding	bVar2	isFragmentProgram	INFERRED	profile bit 1 (ARBfp) set: enables texenv/depth/fog bindings
+local	_PPParserParseParamBinding	local_70	arrayFirstOrdinal	INFERRED	first parameter ordinal of a bound array (passed in the array descriptor to _PPStreamAddParamBindingArray)
+local	_PPParserParseParamBinding	local_6c	arrayLastOrdinalLo	INFERRED	low half of the array descriptor's last-ordinal word
+local	_PPParserParseParamBinding	sStack_6a	arrayLastOrdinalHi	INFERRED	high half of the array descriptor's last-ordinal word
+local	_PPParserParseParamBinding	local_78	bindingExtra0	INFERRED	third word of the 4-word binding record
+local	_PPParserParseParamBinding	local_74	bindingExtra1	INFERRED	fourth word of the 4-word binding record
+local	_PPParserParseParamBinding	local_60	constX	INFERRED	x of the constant vector (default 0,0,0,1)
+local	_PPParserParseParamBinding	local_5c	constY	INFERRED	y of the constant vector
+local	_PPParserParseParamBinding	local_58	constZ	INFERRED	z of the constant vector
+local	_PPParserParseParamBinding	local_54	constW	INFERRED	w of the constant vector (1.0 default)
+local	_PPParserParseParamBinding	local_50	scalarX	INFERRED	scalar literal x, replicated for a single-value constant
+local	_PPParserParseParamBinding	local_4c	scalarY	INFERRED	copy of scalarX
+local	_PPParserParseParamBinding	local_48	scalarZ	INFERRED	copy of scalarX
+local	_PPParserParseParamBinding	local_44	scalarW	INFERRED	copy of scalarX

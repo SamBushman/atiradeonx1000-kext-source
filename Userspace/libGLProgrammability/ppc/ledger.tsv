@@ -49,7 +49,7 @@
 0x97b81994	604	_PPParserParseDestination	part_000	converted
 0x97b81bf0	460	_PPParserParseSwizzleSourceVar	part_000	converted
 0x97b81dbc	696	_PPParserParseSourceVar	part_000	converted
-0x97b82078	216	FUN_97b82078	part_000	converted
+0x97b82078	216	_PPStreamAddOperation_97b82078	part_000	converted
 0x97b82150	136	_PPParserParseEnd	part_000	converted
 0x97b821d8	88	_PPStreamAttribBindingIsEqual	part_000	converted
 0x97b82230	88	_PPStreamOutputBindingIsEqual	part_000	converted
@@ -98,7 +98,7 @@
 0x97b85058	620	_PPParserParseSwizzleCode	part_001	converted
 0x97b853f8	32	__dyld_func_lookup	part_001	converted
 0x97b85418	88	___initialize_Cplusplus	part_001	converted
-0x97b85470	32	FUN_97b85470	part_001	converted
+0x97b85470	32	_dyld_func_lookup_call_97b85470	part_001	converted
 0x97b85490	36	InitProcess	part_001	converted
 0x97b854b4	36	DetachProcess	part_001	converted
 0x97b854d8	84	_InitStringTable	part_001	converted
@@ -175,7 +175,7 @@
 0x97b88924	8	_eof_scan_97b88924	part_002	converted
 0x97b88930	116	_InitScanner	part_002	converted
 0x97b889a8	228	_str_getch	part_002	converted
-0x97b88a90	100	FUN_97b88a90	part_002	converted
+0x97b88a90	100	_str_ungetch_body_97b88a90	part_002	converted
 0x97b88af4	148	_ScanFromString	part_002	converted
 0x97b88b88	272	_lBuildFloatValue	part_002	converted
 0x97b88c98	588	_lFloatConst	part_003	converted

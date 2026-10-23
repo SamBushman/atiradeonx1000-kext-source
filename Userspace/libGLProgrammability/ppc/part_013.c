@@ -15,15 +15,15 @@ int __ZN17TPPStreamCompilerD0Ev(this)
 }
 
 /* __ZN17TPPStreamCompilerD4Ev @ 0x97bc97ec (536 bytes) */
-int __ZN17TPPStreamCompilerD4Ev(this, param_2)
+int __ZN17TPPStreamCompilerD4Ev(this, deleteFlags)
   void *this;
-  uint param_2;
+  uint deleteFlags;
 {
   int atomicStore;
   int *refCountPtr;
   int oldRefCount;
-  int iVar4;
-  void *pvVar5;
+  int sizeOrStringRep;
+  void *owned;
   char reservation;
   byte cr0Reg;
   undefined1 auStack_30 [24];
@@ -31,22 +31,22 @@ int __ZN17TPPStreamCompilerD4Ev(this, param_2)
   *(int *)this = DAT_a7b7bd98 + 8;
   ConstantAllocationList__clear((unsigned char *)((int)this + 0x44));
   while( true ) {
-    iVar4 = size((unsigned char *)((int)this + 0x4c));
-    if (iVar4 == 0) break;
+    sizeOrStringRep = size((unsigned char *)((int)this + 0x4c));
+    if (sizeOrStringRep == 0) break;
     fetch((unsigned char *)((int)this + 0x4c));
   }
-  while (iVar4 = ParseFunctionStack__empty((unsigned char *)((int)this + 0x58)), iVar4 == 0) {
+  while (sizeOrStringRep = ParseFunctionStack__empty((unsigned char *)((int)this + 0x58)), sizeOrStringRep == 0) {
     ParseFunctionStack__pop((unsigned char *)((int)this + 0x58));
   }
-  pvVar5 = *(void **)((int)this + 0x6c);
-  if (pvVar5 != (void *)0x0) {
-    ((int (*)())__ZN13FunctionTableD1Ev)(pvVar5);
-    __ZdlPv(pvVar5);
+  owned = *(void **)((int)this + 0x6c);
+  if (owned != (void *)0x0) {
+    ((int (*)())__ZN13FunctionTableD1Ev)(owned);
+    __ZdlPv(owned);
   }
-  pvVar5 = *(void **)((int)this + 0x68);
-  if (pvVar5 != (void *)0x0) {
-    __ZN16ParseSymbolTableD1Ev(pvVar5);
-    __ZdlPv(pvVar5);
+  owned = *(void **)((int)this + 0x68);
+  if (owned != (void *)0x0) {
+    __ZN16ParseSymbolTableD1Ev(owned);
+    __ZdlPv(owned);
   }
   if (*(int *)((int)this + 0x70) != 0) {
     _PPStreamFree(*(int *)((int)this + 0x70));
@@ -63,23 +63,23 @@ int __ZN17TPPStreamCompilerD4Ev(this, param_2)
   if (*(int *)((int)this + 0x84) != 0) {
     _free(*(int *)((int)this + 0x84));
   }
-  pvVar5 = *(void **)((int)this + 0x60);
-  if (pvVar5 != (void *)0x0) {
-    __ZN18TemporaryAllocatorD1Ev(pvVar5);
-    __ZdlPv(pvVar5);
+  owned = *(void **)((int)this + 0x60);
+  if (owned != (void *)0x0) {
+    __ZN18TemporaryAllocatorD1Ev(owned);
+    __ZdlPv(owned);
   }
   *(undefined4 *)PTR_temporaryAllocator_a7b7c0fc = 0;
-  pvVar5 = *(void **)((int)this + 100);
-  if (pvVar5 != (void *)0x0) {
-    __ZN20AddressTempAllocatorD1Ev(pvVar5);
-    __ZdlPv(pvVar5);
+  owned = *(void **)((int)this + 100);
+  if (owned != (void *)0x0) {
+    __ZN20AddressTempAllocatorD1Ev(owned);
+    __ZdlPv(owned);
   }
   *(undefined4 *)PTR_addressTempAllocator_a7b7c0f8 = 0;
   if (*(int *)((int)this + 0x74) != 0) {
     _free(*(int *)((int)this + 0x74));
   }
-  iVar4 = *(int *)((int)this + 0xb8);
-  refCountPtr = (int *)(iVar4 + -4);
+  sizeOrStringRep = *(int *)((int)this + 0xb8);
+  refCountPtr = (int *)(sizeOrStringRep + -4);
   do {
     oldRefCount = *refCountPtr;
     if (reservation != '\0') {
@@ -89,10 +89,10 @@ int __ZN17TPPStreamCompilerD4Ev(this, param_2)
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
   if (oldRefCount < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(iVar4 + -0xc),auStack_30);
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(sizeOrStringRep + -0xc),auStack_30);
   }
-  iVar4 = *(int *)((int)this + 0xb0);
-  refCountPtr = (int *)(iVar4 + -4);
+  sizeOrStringRep = *(int *)((int)this + 0xb0);
+  refCountPtr = (int *)(sizeOrStringRep + -4);
   do {
     oldRefCount = *refCountPtr;
     if (reservation != '\0') {
@@ -102,170 +102,170 @@ int __ZN17TPPStreamCompilerD4Ev(this, param_2)
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
   if (oldRefCount < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(iVar4 + -0xc),auStack_30);
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(sizeOrStringRep + -0xc),auStack_30);
   }
   __ZN22ConstantAllocationListD1Ev((unsigned char *)((int)this + 0x44));
   *(undefined ***)this = &PTR___ZN9TCompilerD1Ev_a7b7d850;
   __ZN14TPoolAllocatorD1Ev((void *)((int)this + 0x10));
   *(undefined ***)this = &PTR___ZN13TShHandleBaseD1Ev_a7b7d898;
-  if ((param_2 & 1) != 0) {
+  if ((deleteFlags & 1) != 0) {
     __ZdlPv(this);
   }
   return;
 }
 
 /* TPPStreamCompiler__error @ 0x97bc9a04 (304 bytes) */
-int TPPStreamCompiler__error(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int param_1;
-  char *param_2;
-  char *param_3;
-  char *param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int TPPStreamCompiler__error(this, formatSelect, locationText, format, vaArg1, vaArg2, vaArg3, vaArg4)
+  int this;
+  char *formatSelect;
+  char *locationText;
+  char *format;
+  undefined4 vaArg1;
+  undefined4 vaArg2;
+  undefined4 vaArg3;
+  undefined4 vaArg4;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  char *pcVar1;
-  char *pcVar2;
-  int iVar3;
-  char *pcVar4;
-  int iVar5;
-  char acStack_120 [264];
+  unsigned int ghidra_home[8] = { this, formatSelect, locationText, format, vaArg1, vaArg2, vaArg3, vaArg4 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  char *formatWithLocation;
+  char *formatPlain;
+  int messageLength;
+  char *lineBuffer;
+  int locationLength;
+  char message [264];
   
-  iVar5 = 0;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = param_5;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = param_6;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = param_7;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = param_8;
-  _vsprintf(acStack_120,param_4,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)));
-  if (param_3 != (char *)0x0) {
-    iVar5 = _strlen(param_3);
+  locationLength = 0;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = vaArg1;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = vaArg2;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = vaArg3;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = vaArg4;
+  _vsprintf(message,format,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)));
+  if (locationText != (char *)0x0) {
+    locationLength = _strlen(locationText);
   }
-  iVar3 = _strlen(acStack_120);
-  pcVar4 = (char *)_malloc(iVar3 + iVar5 + 0x28);
-  pcVar1 = DAT_a7b7bd20;
-  pcVar2 = DAT_a7b7bd24;
-  if (param_2 != (char *)0x0) {
-    pcVar1 = DAT_a7b7bd18;
-    pcVar2 = DAT_a7b7bd1c;
+  messageLength = _strlen(message);
+  lineBuffer = (char *)_malloc(messageLength + locationLength + 0x28);
+  formatWithLocation = DAT_a7b7bd20;
+  formatPlain = DAT_a7b7bd24;
+  if (formatSelect != (char *)0x0) {
+    formatWithLocation = DAT_a7b7bd18;
+    formatPlain = DAT_a7b7bd1c;
   }
-  if (param_3 == (char *)0x0) {
-    _sprintf(pcVar4,pcVar2,*(undefined4 *)(param_1 + 0x90),acStack_120);
+  if (locationText == (char *)0x0) {
+    _sprintf(lineBuffer,formatPlain,*(undefined4 *)(this + 0x90),message);
   }
   else {
-    _sprintf(pcVar4,pcVar1,*(undefined4 *)(param_1 + 0x90),param_3,acStack_120);
+    _sprintf(lineBuffer,formatWithLocation,*(undefined4 *)(this + 0x90),locationText,message);
   }
-  __ZN13TInfoSinkBase6appendEPKc((void *)(param_1 + 0xb0),pcVar4);
-  __ZN13TInfoSinkBase6appendEPKc((void *)(param_1 + 0xb0),"\n");
-  _free(pcVar4);
-  *(undefined4 *)(param_1 + 0xa0) = 1;
+  __ZN13TInfoSinkBase6appendEPKc((void *)(this + 0xb0),lineBuffer);
+  __ZN13TInfoSinkBase6appendEPKc((void *)(this + 0xb0),"\n");
+  _free(lineBuffer);
+  *(undefined4 *)(this + 0xa0) = 1;
   return;
 }
 
 /* TPPStreamCompiler__warning @ 0x97bc9b34 (296 bytes) */
-int TPPStreamCompiler__warning(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int param_1;
-  char *param_2;
-  char *param_3;
-  char *param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int TPPStreamCompiler__warning(this, formatSelect, locationText, format, vaArg1, vaArg2, vaArg3, vaArg4)
+  int this;
+  char *formatSelect;
+  char *locationText;
+  char *format;
+  undefined4 vaArg1;
+  undefined4 vaArg2;
+  undefined4 vaArg3;
+  undefined4 vaArg4;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  char *pcVar1;
-  char *pcVar2;
-  int iVar3;
-  char *pcVar4;
-  int iVar5;
-  char acStack_120 [268];
+  unsigned int ghidra_home[8] = { this, formatSelect, locationText, format, vaArg1, vaArg2, vaArg3, vaArg4 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  char *formatWithLocation;
+  char *formatPlain;
+  int messageLength;
+  char *lineBuffer;
+  int locationLength;
+  char message [268];
   
-  (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = param_5;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = param_6;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = param_7;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = param_8;
-  _vsprintf(acStack_120,param_4,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)));
-  iVar5 = 0;
-  if (param_3 != (char *)0x0) {
-    iVar5 = _strlen(param_3);
+  (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = vaArg1;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = vaArg2;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = vaArg3;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = vaArg4;
+  _vsprintf(message,format,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)));
+  locationLength = 0;
+  if (locationText != (char *)0x0) {
+    locationLength = _strlen(locationText);
   }
-  iVar3 = _strlen(acStack_120);
-  pcVar4 = (char *)_malloc(iVar3 + iVar5 + 0x28);
-  pcVar1 = DAT_a7b7bd34;
-  pcVar2 = DAT_a7b7bd38;
-  if (param_2 != (char *)0x0) {
-    pcVar1 = DAT_a7b7bd2c;
-    pcVar2 = DAT_a7b7bd30;
+  messageLength = _strlen(message);
+  lineBuffer = (char *)_malloc(messageLength + locationLength + 0x28);
+  formatWithLocation = DAT_a7b7bd34;
+  formatPlain = DAT_a7b7bd38;
+  if (formatSelect != (char *)0x0) {
+    formatWithLocation = DAT_a7b7bd2c;
+    formatPlain = DAT_a7b7bd30;
   }
-  if (param_3 == (char *)0x0) {
-    _sprintf(pcVar4,pcVar2,*(undefined4 *)(param_1 + 0x90),acStack_120);
+  if (locationText == (char *)0x0) {
+    _sprintf(lineBuffer,formatPlain,*(undefined4 *)(this + 0x90),message);
   }
   else {
-    _sprintf(pcVar4,pcVar1,*(undefined4 *)(param_1 + 0x90),param_3,acStack_120);
+    _sprintf(lineBuffer,formatWithLocation,*(undefined4 *)(this + 0x90),locationText,message);
   }
-  __ZN13TInfoSinkBase6appendEPKc((void *)(param_1 + 0xb0),pcVar4);
-  __ZN13TInfoSinkBase6appendEPKc((void *)(param_1 + 0xb0),"\n");
-  return _free(pcVar4);
+  __ZN13TInfoSinkBase6appendEPKc((void *)(this + 0xb0),lineBuffer);
+  __ZN13TInfoSinkBase6appendEPKc((void *)(this + 0xb0),"\n");
+  return _free(lineBuffer);
 }
 
 /* TPPStreamCompiler__getSymbolTableString @ 0x97bc9c5c (196 bytes) */
-int TPPStreamCompiler__getSymbolTableString(this, param_2)
+int TPPStreamCompiler__getSymbolTableString(this, style)
   unsigned char * this;
-  int param_2;
+  int style;
 {
   undefined4 string;
   int length;
   char *allocation;
-  char *pcVar4;
+  char *headerFormat;
   
   if (*(unsigned char **)(this + 0x68) == (unsigned char *)0x0) {
     return (char *)0x0;
   }
-  string = ParseSymbolTable__GetString(*(unsigned char **)(this + 0x68),param_2);
+  string = ParseSymbolTable__GetString(*(unsigned char **)(this + 0x68),style);
   length = _strlen(string);
   allocation = (char *)_malloc(length + 0x17);
   *allocation = '\0';
-  pcVar4 = DAT_a7b7bd64;
-  if (param_2 != 1) {
-    if (param_2 < 2) {
-      pcVar4 = DAT_a7b7bd60;
-      if (param_2 != 0) goto LAB_97bc9d00;
+  headerFormat = DAT_a7b7bd64;
+  if (style != 1) {
+    if (style < 2) {
+      headerFormat = DAT_a7b7bd60;
+      if (style != 0) goto LAB_97bc9d00;
     }
     else {
-      pcVar4 = DAT_a7b7bd68;
-      if (param_2 != 2) goto LAB_97bc9d00;
+      headerFormat = DAT_a7b7bd68;
+      if (style != 2) goto LAB_97bc9d00;
     }
   }
-  _sprintf(allocation,pcVar4,string);
+  _sprintf(allocation,headerFormat,string);
 LAB_97bc9d00:
   _free(string);
   return allocation;
 }
 
 /* TPPStreamCompiler__dumpSymbolTableInfo @ 0x97bc9d20 (220 bytes) */
-int TPPStreamCompiler__dumpSymbolTableInfo(this, param_2)
+int TPPStreamCompiler__dumpSymbolTableInfo(this, style)
   unsigned char * this;
-  int param_2;
+  int style;
 {
   char *string;
-  char *pcVar1;
+  char *headerFormat;
   
-  pcVar1 = DAT_a7b7bd70;
-  if (param_2 != 1) {
-    if (param_2 < 2) {
-      pcVar1 = DAT_a7b7bd6c;
-      if (param_2 != 0) goto LAB_97bc9d98;
+  headerFormat = DAT_a7b7bd70;
+  if (style != 1) {
+    if (style < 2) {
+      headerFormat = DAT_a7b7bd6c;
+      if (style != 0) goto LAB_97bc9d98;
     }
     else {
-      pcVar1 = DAT_a7b7bd74;
-      if (param_2 != 2) goto LAB_97bc9d98;
+      headerFormat = DAT_a7b7bd74;
+      if (style != 2) goto LAB_97bc9d98;
     }
   }
-  __ZN13TInfoSinkBase6appendEPKc(this + 0xb0,pcVar1);
+  __ZN13TInfoSinkBase6appendEPKc(this + 0xb0,headerFormat);
 LAB_97bc9d98:
-  string = (char *)ParseSymbolTable__GetString(*(unsigned char **)(this + 0x68),param_2);
+  string = (char *)ParseSymbolTable__GetString(*(unsigned char **)(this + 0x68),style);
   if (string == (char *)0x0) {
     return;
   }
@@ -287,10 +287,10 @@ int TPPStreamCompiler__reset(this)
 {
   undefined4 ppStreamCreateResult;
   void *allocation;
-  undefined4 *puVar1;
-  undefined4 uVar2;
-  int iVar3;
-  void *pvVar4;
+  undefined4 *ppStream;
+  undefined4 shaderEnum;
+  int stage;
+  void *owned;
   
   *(undefined4 *)(this + 0xc) = 0;
   if (*(int *)(this + 0x78) != 0) {
@@ -308,20 +308,20 @@ int TPPStreamCompiler__reset(this)
   if (*(int *)(this + 0x84) != 0) {
     _free(*(int *)(this + 0x84));
   }
-  pvVar4 = *(void **)(this + 0x68);
+  owned = *(void **)(this + 0x68);
   *(undefined4 *)(this + 0x84) = 0;
-  if (pvVar4 != (void *)0x0) {
-    __ZN16ParseSymbolTableD1Ev(pvVar4);
-    __ZdlPv(pvVar4);
+  if (owned != (void *)0x0) {
+    __ZN16ParseSymbolTableD1Ev(owned);
+    __ZdlPv(owned);
   }
   allocation = operator_new(0x54);
   __ZN16ParseSymbolTableC1Ej(allocation,0x80);
   *(void **)(this + 0x68) = allocation;
   *(undefined4 *)((int)allocation + 0x3c) = *(undefined4 *)(this + 8);
-  pvVar4 = *(void **)(this + 0x6c);
-  if (pvVar4 != (void *)0x0) {
-    ((int (*)())__ZN13FunctionTableD1Ev)(pvVar4);
-    __ZdlPv(pvVar4);
+  owned = *(void **)(this + 0x6c);
+  if (owned != (void *)0x0) {
+    ((int (*)())__ZN13FunctionTableD1Ev)(owned);
+    __ZdlPv(owned);
   }
   allocation = operator_new(8);
   ((int (*)())__ZN13FunctionTableC1Ev)(allocation);
@@ -332,20 +332,20 @@ int TPPStreamCompiler__reset(this)
   ppStreamCreateResult = _PPStreamCreate();
   *(undefined4 *)(this + 0x70) = ppStreamCreateResult;
   *(undefined4 *)(*(int *)(this + 0x68) + 0xc) = ppStreamCreateResult;
-  iVar3 = *(int *)(this + 8);
-  if (iVar3 == 0) {
-    puVar1 = *(undefined4 **)(this + 0x70);
-    uVar2 = 0x8b31;
+  stage = *(int *)(this + 8);
+  if (stage == 0) {
+    ppStream = *(undefined4 **)(this + 0x70);
+    shaderEnum = 0x8b31;
   }
   else {
-    if (iVar3 != 1) {
+    if (stage != 1) {
       return;
     }
-    puVar1 = *(undefined4 **)(this + 0x70);
-    uVar2 = 0x8b30;
+    ppStream = *(undefined4 **)(this + 0x70);
+    shaderEnum = 0x8b30;
   }
-  *puVar1 = uVar2;
-  *(int *)(this + 0xa4) = iVar3;
+  *ppStream = shaderEnum;
+  *(int *)(this + 0xa4) = stage;
   return;
 }
 
@@ -355,53 +355,53 @@ int TPPStreamCompiler__compile(this, intermNode)
   unsigned char * intermNode;
 {
   int parseIntermediateTreeResult;
-  uint uVar1;
-  int iVar2;
-  int iVar3;
+  uint opWord;
+  int opChunkOrResult;
+  int ppStream;
   undefined4 allocation;
   char *pPStreamString;
-  uint uVar6;
-  int local_20 [5];
+  uint carryBits;
+  int streamEntryCount [5];
   
   parseIntermediateTreeResult = TPPStreamCompiler__parseIntermediateTree(this,intermNode);
   *(int *)(this + 0xc) = parseIntermediateTreeResult;
   if (parseIntermediateTreeResult != 0) {
-    iVar3 = *(int *)(this + 0x70);
-    uVar6 = 0;
-    iVar2 = **(int **)(iVar3 + 0x20);
-    if (iVar2 != 0) {
+    ppStream = *(int *)(this + 0x70);
+    carryBits = 0;
+    opChunkOrResult = **(int **)(ppStream + 0x20);
+    if (opChunkOrResult != 0) {
       do {
-        uVar1 = *(uint *)(iVar2 + 0xc);
-        *(uint *)(iVar2 + 0xc) = uVar6 << 0x1a | uVar1 & 0xe3ffffff;
-        uVar6 = uVar1 >> 0x1d;
-        iVar2 = *(int *)(iVar2 + 8);
-      } while (iVar2 != 0);
-      iVar3 = *(int *)(this + 0x70);
+        opWord = *(uint *)(opChunkOrResult + 0xc);
+        *(uint *)(opChunkOrResult + 0xc) = carryBits << 0x1a | opWord & 0xe3ffffff;
+        carryBits = opWord >> 0x1d;
+        opChunkOrResult = *(int *)(opChunkOrResult + 8);
+      } while (opChunkOrResult != 0);
+      ppStream = *(int *)(this + 0x70);
     }
-    _PPStreamResolveBranches(iVar3);
+    _PPStreamResolveBranches(ppStream);
     if (*(int *)(this + 0x74) != 0) {
       _free(*(int *)(this + 0x74));
     }
     *(undefined4 *)(this + 0x74) = 0;
-    _PPStreamGetStream(*(undefined4 *)(this + 0x70),0,local_20);
-    if (local_20[0] != 0) {
-      allocation = _malloc(local_20[0] * 8 + 0xfU & 0xfffffff0);
+    _PPStreamGetStream(*(undefined4 *)(this + 0x70),0,streamEntryCount);
+    if (streamEntryCount[0] != 0) {
+      allocation = _malloc(streamEntryCount[0] * 8 + 0xfU & 0xfffffff0);
       *(undefined4 *)(this + 0x74) = allocation;
-      _PPStreamGetStream(*(undefined4 *)(this + 0x70),allocation,local_20);
+      _PPStreamGetStream(*(undefined4 *)(this + 0x70),allocation,streamEntryCount);
     }
   }
-  iVar2 = *(int *)(this + 0xc);
-  if ((iVar2 != 0) && ((*(uint *)(this + 0xc0) & 0x10) != 0)) {
+  opChunkOrResult = *(int *)(this + 0xc);
+  if ((opChunkOrResult != 0) && ((*(uint *)(this + 0xc0) & 0x10) != 0)) {
     ((int (*)())TPPStreamCompiler__dumpSymbolTableInfo)(this,2);
-    iVar2 = *(int *)(this + 0xc);
+    opChunkOrResult = *(int *)(this + 0xc);
   }
-  if ((iVar2 != 0) && ((*(uint *)(this + 0xc0) & 2) != 0)) {
+  if ((opChunkOrResult != 0) && ((*(uint *)(this + 0xc0) & 2) != 0)) {
     __ZN13TInfoSinkBase6appendEPKc(this + 0xb0,DAT_a7b7bd80);
     pPStreamString = (char *)(**(code **)(*(int *)this + 0x28))(this);
     __ZN13TInfoSinkBase6appendEPKc(this + 0xb0,pPStreamString);
-    iVar2 = *(int *)(this + 0xc);
+    opChunkOrResult = *(int *)(this + 0xc);
   }
-  return iVar2;
+  return opChunkOrResult;
 }
 
 /* TPPStreamCompiler__getStatsString @ 0x97bca090 (108 bytes) */
@@ -409,47 +409,47 @@ int TPPStreamCompiler__getStatsString(this)
   unsigned char * this;
 {
   int length;
-  undefined4 uVar1;
-  int iVar2;
+  undefined4 placeholderText;
+  int statsString;
   undefined4 allocation;
   
-  uVar1 = DAT_a7b7bd84;
-  iVar2 = *(int *)(this + 0x78);
-  if (iVar2 == 0) {
+  placeholderText = DAT_a7b7bd84;
+  statsString = *(int *)(this + 0x78);
+  if (statsString == 0) {
     length = _strlen(DAT_a7b7bd84);
     allocation = _malloc(length * 4 + 4);
     *(undefined4 *)(this + 0x78) = allocation;
-    _strcpy(allocation,uVar1);
-    iVar2 = *(int *)(this + 0x78);
+    _strcpy(allocation,placeholderText);
+    statsString = *(int *)(this + 0x78);
   }
-  return iVar2;
+  return statsString;
 }
 
 /* TPPStreamCompiler__getPPStreamString @ 0x97bca0fc (144 bytes) */
 int TPPStreamCompiler__getPPStreamString(this)
   unsigned char * this;
 {
-  undefined4 uVar1;
-  void *pvVar2;
+  undefined4 placeholderText;
+  void *ppStreamString;
   int length;
   undefined4 allocation;
   
-  uVar1 = DAT_a7b7bd88;
-  pvVar2 = *(void **)(this + 0x7c);
-  if (pvVar2 == (void *)0x0) {
+  placeholderText = DAT_a7b7bd88;
+  ppStreamString = *(void **)(this + 0x7c);
+  if (ppStreamString == (void *)0x0) {
     if ((*(int *)(this + 0xc) == 0) || (*(int *)(this + 0x74) == 0)) {
       length = _strlen(DAT_a7b7bd88);
       allocation = _malloc(length * 4 + 4);
       *(undefined4 *)(this + 0x7c) = allocation;
-      _strcpy(allocation,uVar1);
-      pvVar2 = *(void **)(this + 0x7c);
+      _strcpy(allocation,placeholderText);
+      ppStreamString = *(void **)(this + 0x7c);
     }
     else {
-      pvVar2 = _glpPPDisassemble(*(int *)(this + 0x74));
-      *(void **)(this + 0x7c) = pvVar2;
+      ppStreamString = _glpPPDisassemble(*(int *)(this + 0x74));
+      *(void **)(this + 0x7c) = ppStreamString;
     }
   }
-  return pvVar2;
+  return ppStreamString;
 }
 
 /* TPPStreamCompiler__getShaderToProgramString @ 0x97bca18c (148 bytes) */
@@ -457,49 +457,49 @@ int TPPStreamCompiler__getShaderToProgramString(this)
   unsigned char * this;
 {
   int length;
-  int iVar1;
+  int programString;
   undefined4 allocation;
   
-  iVar1 = *(int *)(this + 0x80);
-  if (iVar1 == 0) {
+  programString = *(int *)(this + 0x80);
+  if (programString == 0) {
     if ((*(int *)(this + 0xc) == 0) || (*(int *)(this + 0x74) == 0)) {
       length = _strlen("No Shader Program generated.");
       allocation = _malloc(length * 4 + 4);
       *(undefined4 *)(this + 0x80) = allocation;
       _strcpy(allocation,"No Shader Program generated.");
-      iVar1 = *(int *)(this + 0x80);
+      programString = *(int *)(this + 0x80);
     }
     else {
-      iVar1 = _glpPPShaderToProgramString(*(int *)(this + 0x74),0,0);
-      *(int *)(this + 0x80) = iVar1;
+      programString = _glpPPShaderToProgramString(*(int *)(this + 0x74),0,0);
+      *(int *)(this + 0x80) = programString;
     }
   }
-  return iVar1;
+  return programString;
 }
 
 /* TPPStreamCompiler__getTableString @ 0x97bca220 (72 bytes) */
 int TPPStreamCompiler__getTableString(this)
   unsigned char * this;
 {
-  int iVar1;
+  int tableString;
   
-  iVar1 = *(int *)(this + 0x84);
-  if (iVar1 == 0) {
-    iVar1 = ((int (*)())TPPStreamCompiler__getSymbolTableString)(this,2);
-    *(int *)(this + 0x84) = iVar1;
+  tableString = *(int *)(this + 0x84);
+  if (tableString == 0) {
+    tableString = ((int (*)())TPPStreamCompiler__getSymbolTableString)(this,2);
+    *(int *)(this + 0x84) = tableString;
   }
-  return iVar1;
+  return tableString;
 }
 
 /* ConstructCompiler @ 0x97bca268 (72 bytes) */
-int ConstructCompiler(language, param_2)
+int ConstructCompiler(language, optionFlags)
   undefined4 language;
-  undefined4 param_2;
+  undefined4 optionFlags;
 {
   void *this;
   
   this = operator_new(200);
-  __ZN17TPPStreamCompilerC1E11EShLanguagei(this,language,param_2);
+  __ZN17TPPStreamCompilerC1E11EShLanguagei(this,language,optionFlags);
   return this;
 }
 
@@ -708,9 +708,9 @@ LAB_97bca590:
 }
 
 /* GetBuiltInChunkForSymbol @ 0x97bca5b4 (8452 bytes) */
-int GetBuiltInChunkForSymbol(parseSymbol, param_2)
+int GetBuiltInChunkForSymbol(parseSymbol, shaderStage)
   unsigned char * parseSymbol;
-  int param_2;
+  int shaderStage;
 {
   int fieldValue;
   uint directIndex;
@@ -718,7 +718,7 @@ int GetBuiltInChunkForSymbol(parseSymbol, param_2)
   char *charPtr;
   int nameLength;
   int weightedChar;
-  uint uVar5;
+  uint chunkWordTexcoord;
   uint chunkWord;
   int charWeight;
   undefined4 chunkType;
@@ -925,7 +925,7 @@ LAB_97bca770:
                 }
               }
 LAB_97bcbb38:
-              if (param_2 == 0) {
+              if (shaderStage == 0) {
                 chunk = _PPStreamChunkCreateWithType(4,0);
                 fieldValue = 6;
                 chunkWord = *(uint *)(chunk + 0xc);
@@ -1046,24 +1046,24 @@ LAB_97bcc4c8:
               }
               if (nameHash != 0x7a8f) goto LAB_97bcc698;
               chunk = _PPStreamChunkCreateWithType(2,0);
-              uVar5 = *(uint *)(chunk + 0xc) & 0xfff0ffff | 0x70000;
+              chunkWordTexcoord = *(uint *)(chunk + 0xc) & 0xfff0ffff | 0x70000;
               chunkWord = 2;
             }
             else if (nameHash == 0x7b1b) {
               chunk = _PPStreamChunkCreateWithType(2,0);
-              uVar5 = *(uint *)(chunk + 0xc) & 0xfff0ffff | 0x70000;
+              chunkWordTexcoord = *(uint *)(chunk + 0xc) & 0xfff0ffff | 0x70000;
               chunkWord = 6;
             }
             else if (nameHash < 0x7b1c) {
               if (nameHash == 0x7ad5) {
                 chunk = _PPStreamChunkCreateWithType(2,0);
-                uVar5 = *(uint *)(chunk + 0xc) & 0xfff0ffff | 0x70000;
+                chunkWordTexcoord = *(uint *)(chunk + 0xc) & 0xfff0ffff | 0x70000;
                 chunkWord = 4;
               }
               else {
                 if (nameHash != 0x7af8) goto LAB_97bcc698;
                 chunk = _PPStreamChunkCreateWithType(2,0);
-                uVar5 = *(uint *)(chunk + 0xc) & 0xfff0ffff | 0x70000;
+                chunkWordTexcoord = *(uint *)(chunk + 0xc) & 0xfff0ffff | 0x70000;
                 chunkWord = 5;
               }
             }
@@ -1074,9 +1074,9 @@ LAB_97bcc4c8:
               }
               chunk = _PPStreamChunkCreateWithType(2,0);
               chunkWord = 7;
-              uVar5 = *(uint *)(chunk + 0xc) & 0xfff0ffff | 0x70000;
+              chunkWordTexcoord = *(uint *)(chunk + 0xc) & 0xfff0ffff | 0x70000;
             }
-            chunkWord = chunkWord | uVar5 & 0xffffffe0;
+            chunkWord = chunkWord | chunkWordTexcoord & 0xffffffe0;
             goto LAB_97bcc694;
           }
           if (nameHash != 0x5c79) {
@@ -1096,7 +1096,7 @@ LAB_97bca914:
             else {
               if (nameHash == 0x6349) {
                 chunkType = 4;
-                if (param_2 != 0) goto LAB_97bcbce8;
+                if (shaderStage != 0) goto LAB_97bcbce8;
 LAB_97bcbba8:
                 chunk = _PPStreamChunkCreateWithType(chunkType,0);
                 fieldValue = 2;
@@ -2097,27 +2097,28 @@ LAB_97bcc698:
 }
 
 /* GetChunkForSymbol @ 0x97bcc6b8 (592 bytes) */
-int GetChunkForSymbol(parseSymbol, param_2)
+int GetChunkForSymbol(parseSymbol, shaderStage)
   unsigned char * parseSymbol;
-  int param_2;
+  int shaderStage;
 {
+  int symbolName;
   uint builtInInitialSwizzle;
   uint streamType;
   int scalerWidthForType;
-  bool bVar1;
-  byte bVar2;
-  uint uVar3;
-  int iVar4;
-  byte *pbVar5;
-  undefined4 uVar6;
-  uint uVar7;
-  int iVar8;
+  bool isTypedKind;
+  byte chunkKind;
+  uint swizzleBits;
+  int compareResult;
+  byte *chunk;
+  undefined4 typeKind;
+  uint chunkWord;
+  int basicTypeCode;
   
-  iVar8 = *(int *)(parseSymbol + 0x14);
-  if (((iVar8 == 0) || (iVar4 = _memcmp(iVar8,"gl_",3), iVar4 != 0)) ||
-     (*(char *)(iVar8 + 3) == '_')) {
-    uVar6 = (**(code **)(**(int **)(parseSymbol + 0xc) + 0x24))(*(int **)(parseSymbol + 0xc));
-    switch(uVar6) {
+  symbolName = *(int *)(parseSymbol + 0x14);
+  if (((symbolName == 0) || (compareResult = _memcmp(symbolName,"gl_",3), compareResult != 0)) ||
+     (*(char *)(symbolName + 3) == '_')) {
+    typeKind = (**(code **)(**(int **)(parseSymbol + 0xc) + 0x24))(*(int **)(parseSymbol + 0xc));
+    switch(typeKind) {
     case 0:
     case 1:
     case 2:
@@ -2127,77 +2128,77 @@ int GetChunkForSymbol(parseSymbol, param_2)
     case 10:
     case 0xb:
     case 0xc:
-      pbVar5 = (byte *)_PPStreamChunkCreateWithType(0,0);
+      chunk = (byte *)_PPStreamChunkCreateWithType(0,0);
       break;
     case 3:
-      pbVar5 = (byte *)_PPStreamChunkCreateWithType(2,0);
-      *(uint *)(pbVar5 + 0xc) = *(uint *)(pbVar5 + 0xc) & 0xfff0ffff | 0x90000;
+      chunk = (byte *)_PPStreamChunkCreateWithType(2,0);
+      *(uint *)(chunk + 0xc) = *(uint *)(chunk + 0xc) & 0xfff0ffff | 0x90000;
       break;
     case 6:
-      pbVar5 = (byte *)_PPStreamChunkCreateWithType(3,0);
-      *(uint *)(pbVar5 + 0xc) = *(uint *)(pbVar5 + 0xc) & 0xffe0ffff | 0x10000;
-      iVar8 = (**(code **)(**(int **)(parseSymbol + 0xc) + 0x20))(*(int **)(parseSymbol + 0xc));
-      *(uint *)(pbVar5 + 0x10) =
-           (uint)(iVar8 - 5U < 8) << 0x1f | *(uint *)(pbVar5 + 0x10) & 0x7fffffff;
+      chunk = (byte *)_PPStreamChunkCreateWithType(3,0);
+      *(uint *)(chunk + 0xc) = *(uint *)(chunk + 0xc) & 0xffe0ffff | 0x10000;
+      basicTypeCode = (**(code **)(**(int **)(parseSymbol + 0xc) + 0x20))(*(int **)(parseSymbol + 0xc));
+      *(uint *)(chunk + 0x10) =
+           (uint)(basicTypeCode - 5U < 8) << 0x1f | *(uint *)(chunk + 0x10) & 0x7fffffff;
       break;
     default:
-      pbVar5 = (byte *)0x0;
+      chunk = (byte *)0x0;
     }
   }
   else {
-    pbVar5 = (byte *)((int (*)())GetBuiltInChunkForSymbol)(parseSymbol,param_2);
+    chunk = (byte *)((int (*)())GetBuiltInChunkForSymbol)(parseSymbol,shaderStage);
     *(undefined4 *)(parseSymbol + 0x38) = 1;
     *(undefined4 *)(parseSymbol + 0x28) = 0xffffffff;
   }
-  if (pbVar5 == (byte *)0x0) goto LAB_97bcc8c4;
-  bVar2 = *pbVar5;
-  if (bVar2 == 2) {
+  if (chunk == (byte *)0x0) goto LAB_97bcc8c4;
+  chunkKind = *chunk;
+  if (chunkKind == 2) {
 LAB_97bcc864:
     streamType = GetPPStreamTypeForGLType((uint)*(ushort *)(parseSymbol + 0x2c));
-    *(uint *)(pbVar5 + 0xc) = (streamType & 7) << 0x1a | *(uint *)(pbVar5 + 0xc) & 0xe3ffffff;
+    *(uint *)(chunk + 0xc) = (streamType & 7) << 0x1a | *(uint *)(chunk + 0xc) & 0xe3ffffff;
     scalerWidthForType = GetScalerWidthForType((uint)*(ushort *)(parseSymbol + 0x2c));
-    uVar7 = (scalerWidthForType + -1) * 0x1000000 & 0x3000000U | *(uint *)(pbVar5 + 0xc) & 0x1cffffff;
+    chunkWord = (scalerWidthForType + -1) * 0x1000000 & 0x3000000U | *(uint *)(chunk + 0xc) & 0x1cffffff;
 LAB_97bcc8c0:
-    *(uint *)(pbVar5 + 0xc) = uVar7;
+    *(uint *)(chunk + 0xc) = chunkWord;
   }
-  else if (bVar2 < 3) {
-    if (bVar2 == 0) {
+  else if (chunkKind < 3) {
+    if (chunkKind == 0) {
       streamType = GetPPStreamTypeForGLType((uint)*(ushort *)(parseSymbol + 0x2c));
-      *(uint *)(pbVar5 + 0xc) = (streamType & 7) << 0x1a | *(uint *)(pbVar5 + 0xc) & 0xe3ffffff;
+      *(uint *)(chunk + 0xc) = (streamType & 7) << 0x1a | *(uint *)(chunk + 0xc) & 0xe3ffffff;
       scalerWidthForType = GetScalerWidthForType((uint)*(ushort *)(parseSymbol + 0x2c));
-      uVar7 = (scalerWidthForType + -1) * 0x1000000 & 0x3000000U | *(uint *)(pbVar5 + 0xc) & 0x1cffffff;
+      chunkWord = (scalerWidthForType + -1) * 0x1000000 & 0x3000000U | *(uint *)(chunk + 0xc) & 0x1cffffff;
       goto LAB_97bcc8c0;
     }
   }
-  else if ((bVar2 == 3) || (bVar2 == 4)) goto LAB_97bcc864;
+  else if ((chunkKind == 3) || (chunkKind == 4)) goto LAB_97bcc864;
 LAB_97bcc8c4:
   if (*(int *)(parseSymbol + 0x34) == 0) {
-    return pbVar5;
+    return chunk;
   }
   builtInInitialSwizzle = ((int (*)())GetBuiltInInitialSwizzle)(parseSymbol);
   if (builtInInitialSwizzle == 0) {
-    return pbVar5;
+    return chunk;
   }
-  bVar2 = *pbVar5;
-  if (bVar2 != 2) {
-    if (bVar2 < 3) {
-      bVar1 = bVar2 == 0;
+  chunkKind = *chunk;
+  if (chunkKind != 2) {
+    if (chunkKind < 3) {
+      isTypedKind = chunkKind == 0;
     }
     else {
-      if (bVar2 == 3) goto LAB_97bcc908;
-      bVar1 = bVar2 == 4;
+      if (chunkKind == 3) goto LAB_97bcc908;
+      isTypedKind = chunkKind == 4;
     }
-    if (!bVar1) {
-      return pbVar5;
+    if (!isTypedKind) {
+      return chunk;
     }
   }
 LAB_97bcc908:
-  uVar3 = *(uint *)(pbVar5 + 0xc) >> 0x18 & 3;
-  if (uVar3 < builtInInitialSwizzle) {
-    uVar3 = builtInInitialSwizzle;
+  swizzleBits = *(uint *)(chunk + 0xc) >> 0x18 & 3;
+  if (swizzleBits < builtInInitialSwizzle) {
+    swizzleBits = builtInInitialSwizzle;
   }
-  *(uint *)(pbVar5 + 0xc) = (uVar3 & 3) << 0x18 | *(uint *)(pbVar5 + 0xc) & 0xfcffffff;
-  return pbVar5;
+  *(uint *)(chunk + 0xc) = (swizzleBits & 3) << 0x18 | *(uint *)(chunk + 0xc) & 0xfcffffff;
+  return chunk;
 }
 
 /* __ZN13FunctionTableC2Ev @ 0x97bcc93c (4 bytes) */
@@ -2250,18 +2251,18 @@ int __ZN13FunctionTableD4Ev(this)
 int FunctionTable__clear(this)
   unsigned char * this;
 {
-  undefined4 *puVar1;
+  undefined4 *entryName;
   int loopIndex;
-  int iVar3;
+  int entryOffset;
   
   loopIndex = 0;
   if (0 < *(int *)(this + 4)) {
-    iVar3 = 0;
+    entryOffset = 0;
     do {
       loopIndex = loopIndex + 1;
-      puVar1 = (undefined4 *)(iVar3 + *(int *)this);
-      iVar3 = iVar3 + 0x18;
-      _free(*puVar1);
+      entryName = (undefined4 *)(entryOffset + *(int *)this);
+      entryOffset = entryOffset + 0x18;
+      _free(*entryName);
     } while (loopIndex < *(int *)(this + 4));
   }
   if (*(int *)this != 0) {
@@ -2280,145 +2281,145 @@ int FunctionTable__addFunction(this, str)
   int loopIndex;
   undefined4 allocation2;
   int length;
-  int allocation;
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  undefined4 uVar6;
-  undefined4 uVar7;
-  undefined4 uVar8;
-  int iVar9;
-  uint uVar10;
+  int newEntries;
+  int dstEntry;
+  int newIndex;
+  int oldEntries;
+  int entries;
+  int entryOffset;
+  undefined4 entryWord3;
+  undefined4 entryWord1;
+  undefined4 entryWord2;
+  int srcEntry;
+  uint functionCount;
   
-  uVar10 = *(uint *)(this + 4);
-  if ((uVar10 & 0xf) == 0) {
-    allocation = _malloc(uVar10 * 0x18 + 0x180);
-    _memset(allocation,0,*(int *)(this + 4) * 0x18 + 0x180);
-    uVar10 = *(uint *)(this + 4);
+  functionCount = *(uint *)(this + 4);
+  if ((functionCount & 0xf) == 0) {
+    newEntries = _malloc(functionCount * 0x18 + 0x180);
+    _memset(newEntries,0,*(int *)(this + 4) * 0x18 + 0x180);
+    functionCount = *(uint *)(this + 4);
     loopIndex = 0;
-    if ((int)uVar10 < 1) {
-      iVar3 = *(int *)this;
+    if ((int)functionCount < 1) {
+      oldEntries = *(int *)this;
     }
     else {
-      iVar3 = *(int *)this;
-      iVar5 = 0;
+      oldEntries = *(int *)this;
+      entryOffset = 0;
       do {
-        iVar9 = iVar5 + iVar3;
-        uVar7 = *(undefined4 *)(iVar9 + 4);
+        srcEntry = entryOffset + oldEntries;
+        entryWord1 = *(undefined4 *)(srcEntry + 4);
         loopIndex = loopIndex + 1;
-        uVar8 = *(undefined4 *)(iVar9 + 8);
-        iVar1 = iVar5 + allocation;
-        uVar6 = *(undefined4 *)(iVar9 + 0xc);
-        *(undefined4 *)(iVar5 + allocation) = *(undefined4 *)(iVar5 + iVar3);
-        iVar5 = iVar5 + 0x18;
-        *(undefined4 *)(iVar1 + 4) = uVar7;
-        *(undefined4 *)(iVar1 + 8) = uVar8;
-        *(undefined4 *)(iVar1 + 0xc) = uVar6;
-        uVar6 = *(undefined4 *)(iVar9 + 0x10);
-        *(undefined4 *)(iVar1 + 0x14) = *(undefined4 *)(iVar9 + 0x14);
-        *(undefined4 *)(iVar1 + 0x10) = uVar6;
-      } while (loopIndex < (int)uVar10);
+        entryWord2 = *(undefined4 *)(srcEntry + 8);
+        dstEntry = entryOffset + newEntries;
+        entryWord3 = *(undefined4 *)(srcEntry + 0xc);
+        *(undefined4 *)(entryOffset + newEntries) = *(undefined4 *)(entryOffset + oldEntries);
+        entryOffset = entryOffset + 0x18;
+        *(undefined4 *)(dstEntry + 4) = entryWord1;
+        *(undefined4 *)(dstEntry + 8) = entryWord2;
+        *(undefined4 *)(dstEntry + 0xc) = entryWord3;
+        entryWord3 = *(undefined4 *)(srcEntry + 0x10);
+        *(undefined4 *)(dstEntry + 0x14) = *(undefined4 *)(srcEntry + 0x14);
+        *(undefined4 *)(dstEntry + 0x10) = entryWord3;
+      } while (loopIndex < (int)functionCount);
     }
-    if (iVar3 != 0) {
-      _free(iVar3);
-      uVar10 = *(uint *)(this + 4);
+    if (oldEntries != 0) {
+      _free(oldEntries);
+      functionCount = *(uint *)(this + 4);
     }
-    *(int *)this = allocation;
+    *(int *)this = newEntries;
   }
-  iVar4 = *(int *)this;
+  entries = *(int *)this;
   length = _strlen(str);
   allocation2 = _malloc(length + 1);
-  *(undefined4 *)(uVar10 * 0x18 + iVar4) = allocation2;
+  *(undefined4 *)(functionCount * 0x18 + entries) = allocation2;
   _strcpy(*(undefined4 *)(*(int *)(this + 4) * 0x18 + *(int *)this),str);
-  iVar2 = *(int *)(this + 4);
-  *(int *)(this + 4) = iVar2 + 1;
-  return iVar2;
+  newIndex = *(int *)(this + 4);
+  *(int *)(this + 4) = newIndex + 1;
+  return newIndex;
 }
 
 /* FunctionTable__removeFunction @ 0x97bccafc (168 bytes) */
-int FunctionTable__removeFunction(this, param_2)
+int FunctionTable__removeFunction(this, functionIndex)
   unsigned char * this;
-  int param_2;
+  int functionIndex;
 {
-  int iVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  int iVar5;
+  int entry;
+  undefined4 nextWord3;
+  undefined4 nextWord2;
+  undefined4 nextWord1;
+  int entryOffset;
   
-  iVar5 = param_2 * 0x18;
-  _free(*(undefined4 *)(iVar5 + *(int *)this));
-  iVar1 = *(int *)(this + 4);
-  if (param_2 < iVar1) {
+  entryOffset = functionIndex * 0x18;
+  _free(*(undefined4 *)(entryOffset + *(int *)this));
+  entry = *(int *)(this + 4);
+  if (functionIndex < entry) {
     do {
-      param_2 = param_2 + 1;
-      iVar1 = iVar5 + *(int *)this;
-      uVar4 = *(undefined4 *)(iVar1 + 0x1c);
-      uVar3 = *(undefined4 *)(iVar1 + 0x20);
-      uVar2 = *(undefined4 *)(iVar1 + 0x24);
-      *(undefined4 *)(iVar5 + *(int *)this) = *(undefined4 *)(iVar1 + 0x18);
-      iVar5 = iVar5 + 0x18;
-      *(undefined4 *)(iVar1 + 4) = uVar4;
-      *(undefined4 *)(iVar1 + 8) = uVar3;
-      *(undefined4 *)(iVar1 + 0xc) = uVar2;
-      *(undefined4 *)(iVar1 + 0x14) = *(undefined4 *)(iVar1 + 0x2c);
-      *(undefined4 *)(iVar1 + 0x10) = *(undefined4 *)(iVar1 + 0x28);
-      iVar1 = *(int *)(this + 4);
-    } while (param_2 < iVar1);
+      functionIndex = functionIndex + 1;
+      entry = entryOffset + *(int *)this;
+      nextWord1 = *(undefined4 *)(entry + 0x1c);
+      nextWord2 = *(undefined4 *)(entry + 0x20);
+      nextWord3 = *(undefined4 *)(entry + 0x24);
+      *(undefined4 *)(entryOffset + *(int *)this) = *(undefined4 *)(entry + 0x18);
+      entryOffset = entryOffset + 0x18;
+      *(undefined4 *)(entry + 4) = nextWord1;
+      *(undefined4 *)(entry + 8) = nextWord2;
+      *(undefined4 *)(entry + 0xc) = nextWord3;
+      *(undefined4 *)(entry + 0x14) = *(undefined4 *)(entry + 0x2c);
+      *(undefined4 *)(entry + 0x10) = *(undefined4 *)(entry + 0x28);
+      entry = *(int *)(this + 4);
+    } while (functionIndex < entry);
   }
-  *(int *)(this + 4) = iVar1 + -1;
+  *(int *)(this + 4) = entry + -1;
   return;
 }
 
 /* FunctionTable__setReturnVal @ 0x97bccba4 (20 bytes) */
-int FunctionTable__setReturnVal(this, param_2, param_3)
+int FunctionTable__setReturnVal(this, functionIndex, value)
   unsigned char * this;
-  int param_2;
-  undefined4 param_3;
+  int functionIndex;
+  undefined4 value;
 {
-  *(undefined4 *)(param_2 * 0x18 + *(int *)this + 4) = param_3;
+  *(undefined4 *)(functionIndex * 0x18 + *(int *)this + 4) = value;
   return;
 }
 
 /* FunctionTable__setEmpty @ 0x97bccbb8 (20 bytes) */
-int FunctionTable__setEmpty(this, param_2, param_3)
+int FunctionTable__setEmpty(this, functionIndex, value)
   unsigned char * this;
-  int param_2;
-  undefined4 param_3;
+  int functionIndex;
+  undefined4 value;
 {
-  *(undefined4 *)(param_2 * 0x18 + *(int *)this + 8) = param_3;
+  *(undefined4 *)(functionIndex * 0x18 + *(int *)this + 8) = value;
   return;
 }
 
 /* FunctionTable__setNumParams @ 0x97bccbcc (20 bytes) */
-int FunctionTable__setNumParams(this, param_2, param_3)
+int FunctionTable__setNumParams(this, functionIndex, value)
   unsigned char * this;
-  int param_2;
-  int param_3;
+  int functionIndex;
+  int value;
 {
-  *(int *)(param_2 * 0x18 + *(int *)this + 0xc) = param_3;
+  *(int *)(functionIndex * 0x18 + *(int *)this + 0xc) = value;
   return;
 }
 
 /* FunctionTable__setFirstOp @ 0x97bccbe0 (20 bytes) */
-int FunctionTable__setFirstOp(this, param_2, param_3)
+int FunctionTable__setFirstOp(this, functionIndex, value)
   unsigned char * this;
-  int param_2;
-  uint param_3;
+  int functionIndex;
+  uint value;
 {
-  *(uint *)(param_2 * 0x18 + *(int *)this + 0x10) = param_3;
+  *(uint *)(functionIndex * 0x18 + *(int *)this + 0x10) = value;
   return;
 }
 
 /* FunctionTable__setLastOp @ 0x97bccbf4 (20 bytes) */
-int FunctionTable__setLastOp(this, param_2, param_3)
+int FunctionTable__setLastOp(this, functionIndex, value)
   unsigned char * this;
-  int param_2;
-  uint param_3;
+  int functionIndex;
+  uint value;
 {
-  *(uint *)(param_2 * 0x18 + *(int *)this + 0x14) = param_3;
+  *(uint *)(functionIndex * 0x18 + *(int *)this + 0x14) = value;
   return;
 }
 
@@ -2428,30 +2429,30 @@ int FunctionTable__updateForRemovingChunk(this, _PPStreamChunk)
   unsigned char * _PPStreamChunk;
 {
   int loopIndex;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  uint uVar5;
+  int entryOffset;
+  int entries;
+  int entry;
+  uint chunkWord;
   
   loopIndex = 0;
   if (0 < *(int *)(this + 4)) {
-    iVar2 = 0;
+    entryOffset = 0;
     do {
-      iVar3 = *(int *)this;
-      uVar5 = *(uint *)(_PPStreamChunk + 0xc);
-      iVar4 = iVar2 + iVar3;
-      if ((((uVar5 & 0x3ffff) == *(uint *)(iVar4 + 0x14)) && (*(int *)(_PPStreamChunk + 4) != 0)) &&
-         (*(int *)(iVar4 + 0x10) != 0)) {
-        *(uint *)(iVar4 + 0x14) = *(uint *)(*(int *)(_PPStreamChunk + 4) + 0xc) & 0x3ffff;
-        uVar5 = *(uint *)(_PPStreamChunk + 0xc);
-        iVar3 = *(int *)this;
+      entries = *(int *)this;
+      chunkWord = *(uint *)(_PPStreamChunk + 0xc);
+      entry = entryOffset + entries;
+      if ((((chunkWord & 0x3ffff) == *(uint *)(entry + 0x14)) && (*(int *)(_PPStreamChunk + 4) != 0)) &&
+         (*(int *)(entry + 0x10) != 0)) {
+        *(uint *)(entry + 0x14) = *(uint *)(*(int *)(_PPStreamChunk + 4) + 0xc) & 0x3ffff;
+        chunkWord = *(uint *)(_PPStreamChunk + 0xc);
+        entries = *(int *)this;
       }
-      if ((((uVar5 & 0x3ffff) == *(uint *)(iVar2 + iVar3 + 0x10)) && (*(int *)(_PPStreamChunk + 8) != 0))
-         && ((uVar5 & 0x3ffff) != 0)) {
-        *(uint *)(iVar2 + iVar3 + 0x10) = *(uint *)(*(int *)(_PPStreamChunk + 8) + 0xc) & 0x3ffff;
+      if ((((chunkWord & 0x3ffff) == *(uint *)(entryOffset + entries + 0x10)) && (*(int *)(_PPStreamChunk + 8) != 0))
+         && ((chunkWord & 0x3ffff) != 0)) {
+        *(uint *)(entryOffset + entries + 0x10) = *(uint *)(*(int *)(_PPStreamChunk + 8) + 0xc) & 0x3ffff;
       }
       loopIndex = loopIndex + 1;
-      iVar2 = iVar2 + 0x18;
+      entryOffset = entryOffset + 0x18;
     } while (loopIndex < *(int *)(this + 4));
     return;
   }
@@ -2459,86 +2460,86 @@ int FunctionTable__updateForRemovingChunk(this, _PPStreamChunk)
 }
 
 /* FunctionTable__findFunction @ 0x97bcccb0 (132 bytes) */
-int FunctionTable__findFunction(this, str, param_3, param_4, param_5, param_6)
+int FunctionTable__findFunction(this, str, unusedArg3, unusedArg4, unusedArg5, unusedArg6)
   unsigned char * this;
   char *str;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
 {
   int compareResult;
-  int iVar1;
-  int iVar2;
-  int iVar3;
+  int functionCount;
+  int entryOffset;
+  int index;
   
-  iVar3 = 0;
-  iVar1 = *(int *)(this + 4);
-  if (0 < iVar1) {
-    iVar2 = 0;
+  index = 0;
+  functionCount = *(int *)(this + 4);
+  if (0 < functionCount) {
+    entryOffset = 0;
     do {
-      compareResult = _strcmp(*(undefined4 *)(iVar2 + *(int *)this),str);
+      compareResult = _strcmp(*(undefined4 *)(entryOffset + *(int *)this),str);
       if (compareResult == 0) {
-        iVar1 = *(int *)(this + 4);
+        functionCount = *(int *)(this + 4);
         break;
       }
-      iVar1 = *(int *)(this + 4);
-      iVar3 = iVar3 + 1;
-      iVar2 = iVar2 + 0x18;
-    } while (iVar3 < iVar1);
+      functionCount = *(int *)(this + 4);
+      index = index + 1;
+      entryOffset = entryOffset + 0x18;
+    } while (index < functionCount);
   }
-  if (iVar3 == iVar1) {
-    iVar3 = -1;
+  if (index == functionCount) {
+    index = -1;
   }
-  return iVar3;
+  return index;
 }
 
 /* FunctionTable__getFunctionName @ 0x97bccd34 (16 bytes) */
-int FunctionTable__getFunctionName(this, param_2)
+int FunctionTable__getFunctionName(this, functionIndex)
   unsigned char * this;
-  int param_2;
+  int functionIndex;
 {
-  return *(undefined4 *)(param_2 * 0x18 + *(int *)this);
+  return *(undefined4 *)(functionIndex * 0x18 + *(int *)this);
 }
 
 /* FunctionTable__getReturnVal @ 0x97bccd44 (20 bytes) */
-int FunctionTable__getReturnVal(this, param_2)
+int FunctionTable__getReturnVal(this, functionIndex)
   unsigned char * this;
-  int param_2;
+  int functionIndex;
 {
-  return *(undefined4 *)(param_2 * 0x18 + *(int *)this + 4);
+  return *(undefined4 *)(functionIndex * 0x18 + *(int *)this + 4);
 }
 
 /* FunctionTable__getEmpty @ 0x97bccd58 (20 bytes) */
-int FunctionTable__getEmpty(this, param_2)
+int FunctionTable__getEmpty(this, functionIndex)
   unsigned char * this;
-  int param_2;
+  int functionIndex;
 {
-  return *(undefined4 *)(param_2 * 0x18 + *(int *)this + 8);
+  return *(undefined4 *)(functionIndex * 0x18 + *(int *)this + 8);
 }
 
 /* FunctionTable__getNumParams @ 0x97bccd6c (20 bytes) */
-int FunctionTable__getNumParams(this, param_2)
+int FunctionTable__getNumParams(this, functionIndex)
   unsigned char * this;
-  int param_2;
+  int functionIndex;
 {
-  return *(undefined4 *)(param_2 * 0x18 + *(int *)this + 0xc);
+  return *(undefined4 *)(functionIndex * 0x18 + *(int *)this + 0xc);
 }
 
 /* FunctionTable__getFirstOp @ 0x97bccd80 (20 bytes) */
-int FunctionTable__getFirstOp(this, param_2)
+int FunctionTable__getFirstOp(this, functionIndex)
   unsigned char * this;
-  int param_2;
+  int functionIndex;
 {
-  return *(undefined4 *)(param_2 * 0x18 + *(int *)this + 0x10);
+  return *(undefined4 *)(functionIndex * 0x18 + *(int *)this + 0x10);
 }
 
 /* FunctionTable__getLastOp @ 0x97bccd94 (20 bytes) */
-int FunctionTable__getLastOp(this, param_2)
+int FunctionTable__getLastOp(this, functionIndex)
   unsigned char * this;
-  int param_2;
+  int functionIndex;
 {
-  return *(undefined4 *)(param_2 * 0x18 + *(int *)this + 0x14);
+  return *(undefined4 *)(functionIndex * 0x18 + *(int *)this + 0x14);
 }
 
 /* FunctionTable__dump @ 0x97bccda8 (4 bytes) */
@@ -2558,43 +2559,43 @@ int _InterpreterCreate()
 }
 
 /* _InterpreterFree @ 0x97bccde8 (48 bytes) */
-int _InterpreterFree(param_1)
-  undefined4 param_1;
+int _InterpreterFree(machine)
+  undefined4 machine;
 {
-  ((int (*)())_InterpreterShutdown)(param_1);
-  return _free(param_1);
+  ((int (*)())_InterpreterShutdown)(machine);
+  return _free(machine);
 }
 
 /* _InterpreterInit @ 0x97bcce18 (72 bytes) */
-int _InterpreterInit(param_1)
-  int param_1;
+int _InterpreterInit(machine)
+  int machine;
 {
   undefined4 interpreterTextureSamplerCreateResult;
   
-  _memset(param_1,0,0xa70);
+  _memset(machine,0,0xa70);
   interpreterTextureSamplerCreateResult = ((int (*)())_InterpreterTextureSamplerCreate)();
-  *(undefined4 *)(param_1 + 0xa2c) = interpreterTextureSamplerCreateResult;
-  _InterpreterNoiseGeneratorInitialise(param_1 + 4);
-  return _InterpreterRasterOpMachineInitialise(param_1 + 0xa24);
+  *(undefined4 *)(machine + 0xa2c) = interpreterTextureSamplerCreateResult;
+  _InterpreterNoiseGeneratorInitialise(machine + 4);
+  return _InterpreterRasterOpMachineInitialise(machine + 0xa24);
 }
 
 /* _InterpreterShutdown @ 0x97bcce60 (8 bytes) */
-int _InterpreterShutdown(param_1)
-  int param_1;
+int _InterpreterShutdown(machine)
+  int machine;
 {
   undefined4 interpreterTextureSamplerFreeResult;
   
-  interpreterTextureSamplerFreeResult = _InterpreterTextureSamplerFree(*(undefined4 *)(param_1 + 0xa2c));
+  interpreterTextureSamplerFreeResult = _InterpreterTextureSamplerFree(*(undefined4 *)(machine + 0xa2c));
   return interpreterTextureSamplerFreeResult;
 }
 
 /* _InterpreterAttachEmulatorContext @ 0x97bcce68 (12 bytes) */
-int _InterpreterAttachEmulatorContext(param_1, param_2)
-  undefined4 *param_1;
-  undefined4 param_2;
+int _InterpreterAttachEmulatorContext(machine, emulator)
+  undefined4 *machine;
+  undefined4 emulator;
 {
-  *param_1 = param_2;
-  return _InterpreterRasterOpMachineAttachEmulatorContext(param_1 + 0x289,param_2);
+  *machine = emulator;
+  return _InterpreterRasterOpMachineAttachEmulatorContext(machine + 0x289,emulator);
 }
 
 /* _InterpreterPackPixel @ 0x97bcce74 (1208 bytes) */
@@ -3027,9 +3028,9 @@ int _InterpreterLoadSource(machine, componentOffsets, bankIndex, swizzle, indexI
   float z;
   float w;
   double intToFloatBias;
-  int iVar6;
+  int workPtr;
   int *componentSlot;
-  int iVar8;
+  int bankInfo;
   int emulator;
   byte swizzleX;
   byte swizzleY;
@@ -3041,24 +3042,24 @@ int _InterpreterLoadSource(machine, componentOffsets, bankIndex, swizzle, indexI
   
   intToFloatBias = DOUBLE_97c30a58;
   emulator = *machine;
-  iVar6 = *(int *)(*(int *)(emulator + 0xd80) + 0x38);
+  workPtr = *(int *)(*(int *)(emulator + 0xd80) + 0x38);
   storageClass = (ushort)((uint)storageFlags >> 0x10);
   swizzleZ = (byte)(swizzle >> 8);
   swizzleY = (byte)(swizzle >> 0x10);
   swizzleX = (byte)(swizzle >> 0x18);
-  if (((iVar6 == 0x8804) || (iVar6 == 0x8b30)) && (storageClass == 2)) {
-    iVar6 = *(int *)(emulator + 0xda4);
+  if (((workPtr == 0x8804) || (workPtr == 0x8b30)) && (storageClass == 2)) {
+    workPtr = *(int *)(emulator + 0xda4);
     emulator = *(int *)(emulator + 0xda0);
-    x = *(float *)(iVar6 + componentOffsets[element * 4 + (uint)swizzleX]) * GH_U2F((unsigned int)(machine[0x28c]))
+    x = *(float *)(workPtr + componentOffsets[element * 4 + (uint)swizzleX]) * GH_U2F((unsigned int)(machine[0x28c]))
             + *(float *)(emulator + componentOffsets[element * 4 + (uint)swizzleX]);
     *result = x;
-    y = *(float *)(iVar6 + componentOffsets[element * 4 + (uint)swizzleY]) * GH_U2F((unsigned int)(machine[0x28c]))
+    y = *(float *)(workPtr + componentOffsets[element * 4 + (uint)swizzleY]) * GH_U2F((unsigned int)(machine[0x28c]))
             + *(float *)(emulator + componentOffsets[element * 4 + (uint)swizzleY]);
     result[1] = y;
-    z = *(float *)(iVar6 + componentOffsets[element * 4 + (uint)swizzleZ]) * GH_U2F((unsigned int)(machine[0x28c]))
+    z = *(float *)(workPtr + componentOffsets[element * 4 + (uint)swizzleZ]) * GH_U2F((unsigned int)(machine[0x28c]))
             + *(float *)(emulator + componentOffsets[element * 4 + (uint)swizzleZ]);
     result[2] = z;
-    w = *(float *)(iVar6 + componentOffsets[element * 4 + (swizzle & 0xff)]) * GH_U2F((unsigned int)(machine[0x28c])) +
+    w = *(float *)(workPtr + componentOffsets[element * 4 + (swizzle & 0xff)]) * GH_U2F((unsigned int)(machine[0x28c])) +
             *(float *)(emulator + componentOffsets[element * 4 + (swizzle & 0xff)]);
     result[3] = w;
     if (*componentOffsets != 0) {
@@ -3074,33 +3075,33 @@ int _InterpreterLoadSource(machine, componentOffsets, bankIndex, swizzle, indexI
       componentSlot = componentOffsets + element * 4;
     }
     else {
-      iVar8 = bankIndex * 0xc + *(int *)(emulator + 0xd80);
+      bankInfo = bankIndex * 0xc + *(int *)(emulator + 0xd80);
       relativeOffset = (short)((uint)indexInfo >> 0x10);
-      iVar6 = *(int *)(iVar8 + 0x80);
-      componentSlot = (int *)(iVar6 + (((uint)((int)componentOffsets + (element * 0x10 - iVar6)) >> 4) +
-                                machine[0x290] + (int)relativeOffset & *(uint *)(iVar8 + 0x88)) *
+      workPtr = *(int *)(bankInfo + 0x80);
+      componentSlot = (int *)(workPtr + (((uint)((int)componentOffsets + (element * 0x10 - workPtr)) >> 4) +
+                                machine[0x290] + (int)relativeOffset & *(uint *)(bankInfo + 0x88)) *
                                0x10);
     }
-    iVar6 = *(int *)((uint)storageClass * 4 + emulator + 0xd84);
+    workPtr = *(int *)((uint)storageClass * 4 + emulator + 0xd84);
     if (valueType < 2) {
-      *result = *(float *)(iVar6 + componentSlot[swizzleX]);
-      result[1] = *(float *)(iVar6 + componentSlot[swizzleY]);
-      result[2] = *(float *)(iVar6 + componentSlot[swizzleZ]);
-      x = *(float *)(iVar6 + componentSlot[swizzle & 0xff]);
+      *result = *(float *)(workPtr + componentSlot[swizzleX]);
+      result[1] = *(float *)(workPtr + componentSlot[swizzleY]);
+      result[2] = *(float *)(workPtr + componentSlot[swizzleZ]);
+      x = *(float *)(workPtr + componentSlot[swizzle & 0xff]);
     }
     else {
       if (1 < valueType - 3) goto LAB_97bcdbfc;
       *result = (float)((double)CONCAT44(0x43300000,
-                                           *(uint *)(iVar6 + componentSlot[swizzleX]) ^ 0x80000000) -
+                                           *(uint *)(workPtr + componentSlot[swizzleX]) ^ 0x80000000) -
                          DOUBLE_97c30a58);
       result[1] = (float)((double)CONCAT44(0x43300000,
-                                             *(uint *)(iVar6 + componentSlot[swizzleY]) ^ 0x80000000)
+                                             *(uint *)(workPtr + componentSlot[swizzleY]) ^ 0x80000000)
                            - intToFloatBias);
       result[2] = (float)((double)CONCAT44(0x43300000,
-                                             *(uint *)(iVar6 + componentSlot[swizzleZ]) ^ 0x80000000)
+                                             *(uint *)(workPtr + componentSlot[swizzleZ]) ^ 0x80000000)
                            - intToFloatBias);
       x = (float)((double)CONCAT44(0x43300000,
-                                       *(uint *)(iVar6 + componentSlot[swizzle & 0xff]) ^ 0x80000000) -
+                                       *(uint *)(workPtr + componentSlot[swizzle & 0xff]) ^ 0x80000000) -
                      intToFloatBias);
     }
     result[3] = x;
@@ -3169,6 +3170,9 @@ int _InterpreterTestCR(machine, operandWord0, operandWord1, operandWord2, operan
 /* _InterpreterEmulateOp @ 0x97bcdd50 (20820 bytes) */
 int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
+  float sourceComponentW;
+  float smoothT;
+  byte vectorDimension;
   uint textureTarget;
   float *srcElementPtr;
   uint destUpdatesCC;
@@ -3216,21 +3220,21 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam
   double powResult;
   uint loopIndex;
   uint loopIndex2;
-  float *pfVar1;
-  bool bVar2;
+  float *srcBElement;
+  bool cmpResult;
   char saturate;
-  byte bVar4;
+  byte instUpdateCC;
   char swizzleSelect;
-  float fVar6;
-  float fVar7;
+  float dotProduct;
+  float logicComponent;
   uint boolBit8;
-  byte *pbVar9;
+  byte *srcDimCursor;
   float *operandScratch;
-  int *piVar11;
+  int *poppedStackTop;
   float *in_r5_artifact;
   int destIndexInfo;
   int destStorageFlags;
-  int iVar14;
+  int callStackTop;
   int destWord5;
   int destValueType;
   uint scalarSourceIndex;
@@ -3241,10 +3245,10 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam
   int destConditionSwizzleZW;
   float *srcAPtr;
   uint sourceElement;
-  bool bVar25;
+  bool fallsThrough;
   int sourcesRemaining;
-  double dVar27;
-  double dVar28;
+  double texLodOrBias;
+  double mathTemp;
   double floorValue_29;
   double floorValue_30;
   double floorValue_31;
@@ -3272,17 +3276,17 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam
   float prodC3R1;
   float prodC3R2;
   float prodC3R3;
-  undefined4 local_b0;
-  uint uStack_ac;
-  longlong local_a8;
-  longlong local_a0;
-  longlong local_98;
-  longlong local_90;
-  float local_80;
-  float local_7c;
-  float local_78;
-  float local_74;
-  float local_70;
+  undefined4 i2dHi;
+  uint i2dLo;
+  longlong d2iScratch1;
+  longlong d2iScratch2;
+  longlong d2iScratch3;
+  longlong d2iScratch4;
+  float texelX;
+  float texelY;
+  float texelZ;
+  float texelW;
+  float storedComponent;
   
   emulator = *machine;
   nextInst = inst + 0x47;
@@ -3294,18 +3298,18 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam
   elementCount = 1;
   opVec[0] = 0.0;
   opVec[1] = 0.0;
-  bVar25 = true;
+  fallsThrough = true;
   opVec[2] = 0.0;
   opcode = *inst;
   saturate = *(char *)(inst + 1);
   if (sourceCount != 0) {
-    pbVar9 = (byte *)((int)inst + 0x49);
+    srcDimCursor = (byte *)((int)inst + 0x49);
     sourcesRemaining = sourceCount;
     do {
-      if ((pbVar9[-1] != 0) && (elementCount < *pbVar9)) {
-        elementCount = (uint)*pbVar9;
+      if ((srcDimCursor[-1] != 0) && (elementCount < *srcDimCursor)) {
+        elementCount = (uint)*srcDimCursor;
       }
-      pbVar9 = pbVar9 + 0x24;
+      srcDimCursor = srcDimCursor + 0x24;
       sourcesRemaining = sourcesRemaining + -1;
     } while (sourcesRemaining != 0);
   }
@@ -3374,7 +3378,7 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam
             opVec[0] = opVec[4] * opVec[8];
             destValueType = inst[9];
             opVec[1] = opVec[4] * opVec[9];
-            bVar4 = *(byte *)((int)inst + 6);
+            instUpdateCC = *(byte *)((int)inst + 6);
             destWriteMask = inst[10];
             destConditionSwizzleZW = inst[0xb];
             destOffsetTable = inst[3];
@@ -3411,7 +3415,7 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam
             opVec[2] = opVec[4] * opVec[10];
             destValueType = inst[9];
             opVec[1] = opVec[4] * opVec[9];
-            bVar4 = *(byte *)((int)inst + 6);
+            instUpdateCC = *(byte *)((int)inst + 6);
             destWriteMask = inst[10];
             destConditionSwizzleZW = inst[0xb];
             destOffsetTable = inst[3];
@@ -3468,7 +3472,7 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam
             opVec[1] = opVec[4] * opVec[9];
             destValueType = inst[9];
             opVec[2] = opVec[4] * opVec[10];
-            bVar4 = *(byte *)((int)inst + 6);
+            instUpdateCC = *(byte *)((int)inst + 6);
             destWriteMask = inst[10];
             destConditionSwizzleZW = inst[0xb];
             destOffsetTable = inst[3];
@@ -3479,7 +3483,7 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam
             destWord5 = inst[8];
           }
           operandScratch = opVec;
-          destUpdatesCC = (uint)bVar4;
+          destUpdatesCC = (uint)instUpdateCC;
           goto LAB_97bd043c;
         }
         operandScratch = opVec + 8;
@@ -3869,7 +3873,7 @@ switchD_97bd0598_caseD_0:
           opVec[2] = 0.0;
         }
         else {
-          local_70 = opVec[4];
+          storedComponent = opVec[4];
           fparam_2 = (double)opVec[7];
           opVec[1] = opVec[4];
           powResult = _pow((double)opVec[5],fparam_2);
@@ -3894,11 +3898,11 @@ switchD_97bd0598_caseD_0:
       case 4:
         floorValue_29 = (double)opVec[4];
         floorResult = _floor(floorValue_29);
-        dVar28 = (double)opVec[5];
+        mathTemp = (double)opVec[5];
         opVec[0] = (float)(floorValue_29 - floorResult);
-        floorResult = _floor(dVar28);
+        floorResult = _floor(mathTemp);
         floorValue_29 = (double)opVec[6];
-        opVec[1] = (float)(dVar28 - floorResult);
+        opVec[1] = (float)(mathTemp - floorResult);
         floorResult2 = _floor(floorValue_29);
         floorValue = (double)opVec[7];
         opVec[2] = (float)(floorValue_29 - floorResult2);
@@ -3967,8 +3971,8 @@ LAB_97bd0ab8:
         if (((opVec[4] != 0.0) && (opVec[5] != 0.0)) && (opVec[6] != 0.0))
         goto LAB_97bd0ab8;
 LAB_97bd0ac8:
-        uStack_ac = boolBit ^ 0x80000000;
-        local_b0 = 0x43300000;
+        i2dLo = boolBit ^ 0x80000000;
+        i2dHi = 0x43300000;
         intAsDouble = (double)CONCAT44(0x43300000,boolBit ^ 0x80000000) - 4503601774854144.0;
 LAB_97bd0cc8:
         opVec[0] = (float)intAsDouble;
@@ -3993,22 +3997,22 @@ LAB_97bd0cc8:
         if (opVec[7] != 0.0) goto LAB_97bd1ce0;
         break;
       case 0xb:
-        bVar4 = *(byte *)((int)inst + 5);
-        if (bVar4 == 2) {
+        vectorDimension = *(byte *)((int)inst + 5);
+        if (vectorDimension == 2) {
           in_r5_artifact = opVec;
           _InterpreterNoiseGeneratorCalculate2D(machine + 1,opVec + 4,opVec);
         }
-        else if (bVar4 < 3) {
-          if (bVar4 == 1) {
+        else if (vectorDimension < 3) {
+          if (vectorDimension == 1) {
             in_r5_artifact = opVec;
             _InterpreterNoiseGeneratorCalculate1D(machine + 1,opVec + 4,opVec);
           }
         }
-        else if (bVar4 == 3) {
+        else if (vectorDimension == 3) {
           in_r5_artifact = opVec;
           _InterpreterNoiseGeneratorCalculate3D(machine + 1,opVec + 4,opVec);
         }
-        else if (bVar4 == 4) {
+        else if (vectorDimension == 4) {
           in_r5_artifact = opVec;
           _InterpreterNoiseGeneratorCalculate4D(machine + 1,opVec + 4,opVec);
         }
@@ -4135,36 +4139,36 @@ LAB_97bd1d68:
           log2Value = 0.0;
         }
         log2Result = _log2(log2Value);
-        dVar28 = (double)opVec[5];
+        mathTemp = (double)opVec[5];
         opVec[0] = (float)log2Result;
-        if (dVar28 < 0.0) {
-          dVar28 = 0.0;
+        if (mathTemp < 0.0) {
+          mathTemp = 0.0;
         }
-        log2Result = _log2(dVar28);
-        dVar28 = (double)opVec[6];
+        log2Result = _log2(mathTemp);
+        mathTemp = (double)opVec[6];
         opVec[1] = (float)log2Result;
-        if (dVar28 < 0.0) {
-          dVar28 = 0.0;
+        if (mathTemp < 0.0) {
+          mathTemp = 0.0;
         }
-        log2Result = _log2(dVar28);
-        dVar28 = (double)opVec[7];
+        log2Result = _log2(mathTemp);
+        mathTemp = (double)opVec[7];
         opVec[2] = (float)log2Result;
-        if (dVar28 < 0.0) {
-          dVar28 = 0.0;
+        if (mathTemp < 0.0) {
+          mathTemp = 0.0;
         }
-        powValue = _log2(dVar28);
+        powValue = _log2(mathTemp);
         goto LAB_97bd2010;
       case 0x14:
-        dVar28 = ABS((double)opVec[7]);
-        log2Result = _log2(dVar28);
+        mathTemp = ABS((double)opVec[7]);
+        log2Result = _log2(mathTemp);
         floorResult = _floor(log2Result);
         opVec[0] = (float)floorResult;
         exp2Result = _exp2((double)opVec[0]);
-        opVec[1] = (float)(dVar28 / exp2Result);
-        if (dVar28 < 0.0) {
-          dVar28 = 0.0;
+        opVec[1] = (float)(mathTemp / exp2Result);
+        if (mathTemp < 0.0) {
+          mathTemp = 0.0;
         }
-        exp2Value = _log2(dVar28);
+        exp2Value = _log2(mathTemp);
 LAB_97bd0fd4:
         opVec[2] = (float)exp2Value;
         opVec[3] = 1.0;
@@ -4302,10 +4306,10 @@ LAB_97bd109c:
           floorValue_30 = (double)opVec[8];
           opVec[0] = (float)-(floorValue_31 * floorResult2 - floorValue);
           floorResult = _floor((double)(float)(floorValue_29 / floorValue_30));
-          dVar28 = (double)opVec[6];
+          mathTemp = (double)opVec[6];
           floorValue_31 = (double)opVec[8];
           opVec[1] = (float)-(floorValue_30 * floorResult - floorValue_29);
-          floorResult = _floor((double)(float)(dVar28 / floorValue_31));
+          floorResult = _floor((double)(float)(mathTemp / floorValue_31));
           operandComponent = opVec[8];
         }
         else {
@@ -4316,14 +4320,14 @@ LAB_97bd109c:
           floorValue_30 = (double)opVec[9];
           opVec[0] = (float)-(floorValue_31 * floorResult2 - floorValue);
           floorResult = _floor((double)(float)(floorValue_29 / floorValue_30));
-          dVar28 = (double)opVec[6];
+          mathTemp = (double)opVec[6];
           floorValue_31 = (double)opVec[10];
           opVec[1] = (float)-(floorValue_30 * floorResult - floorValue_29);
-          floorResult = _floor((double)(float)(dVar28 / floorValue_31));
+          floorResult = _floor((double)(float)(mathTemp / floorValue_31));
           operandComponent = opVec[0xb];
         }
         floorValue_29 = (double)opVec[7];
-        opVec[2] = (float)-(floorValue_31 * floorResult - dVar28);
+        opVec[2] = (float)-(floorValue_31 * floorResult - mathTemp);
         floorResult = _floor((double)(float)(floorValue_29 / (double)operandComponent));
         floorValue = -((double)operandComponent * floorResult - floorValue_29);
 LAB_97bd1440:
@@ -4423,8 +4427,8 @@ LAB_97bd178c:
         if (opVec[7] == 0.0) goto LAB_97bd17d0;
         if (opVec[0xb] == 0.0) goto LAB_97bd17ec;
 LAB_97bd17f0:
-        uStack_ac = boolBit8 ^ 0x80000000;
-        local_b0 = 0x43300000;
+        i2dLo = boolBit8 ^ 0x80000000;
+        i2dHi = 0x43300000;
         opVec[3] = (float)((double)CONCAT44(0x43300000,boolBit8 ^ 0x80000000) - 4503601774854144.0)
         ;
         break;
@@ -4438,9 +4442,9 @@ LAB_97bd17f0:
           componentCursor = opVec;
           do {
             srcElementPtr = componentCursor + 4;
-            pfVar1 = componentCursor + 8;
+            srcBElement = componentCursor + 8;
             componentCursor = componentCursor + 1;
-            opVec[0] = *srcElementPtr * *pfVar1 + opVec[0];
+            opVec[0] = *srcElementPtr * *srcBElement + opVec[0];
             dimension = dimension - 1;
             opVec[1] = opVec[0];
             opVec[2] = opVec[0];
@@ -4478,9 +4482,9 @@ LAB_97bd17f0:
             componentCursor = opVec;
             do {
               srcElementPtr = componentCursor + 4;
-              pfVar1 = componentCursor + 8;
+              srcBElement = componentCursor + 8;
               componentCursor = componentCursor + 1;
-              mathAccumulator = (double)(float)((double)(*srcElementPtr - *pfVar1) * (double)(*srcElementPtr - *pfVar1) +
+              mathAccumulator = (double)(float)((double)(*srcElementPtr - *srcBElement) * (double)(*srcElementPtr - *srcBElement) +
                                       mathAccumulator);
               dimension = dimension - 1;
             } while (dimension != 0);
@@ -4540,22 +4544,22 @@ LAB_97bd2210:
         goto LAB_97bd1ce0;
       case 0x2f:
         dimension = (uint)*(byte *)((int)inst + 5);
-        fVar6 = 0.0;
+        dotProduct = 0.0;
         if (dimension != 0) {
           componentCursor = opVec;
           do {
             srcElementPtr = componentCursor + 4;
-            pfVar1 = componentCursor + 8;
+            srcBElement = componentCursor + 8;
             componentCursor = componentCursor + 1;
-            fVar6 = *srcElementPtr * *pfVar1 + fVar6;
+            dotProduct = *srcElementPtr * *srcBElement + dotProduct;
             dimension = dimension - 1;
           } while (dimension != 0);
         }
-        fVar6 = fVar6 + fVar6;
-        opVec[0] = -(fVar6 * opVec[8] - opVec[4]);
-        opVec[1] = -(fVar6 * opVec[9] - opVec[5]);
-        opVec[2] = -(fVar6 * opVec[10] - opVec[6]);
-        opVec[3] = -(fVar6 * opVec[0xb] - opVec[7]);
+        dotProduct = dotProduct + dotProduct;
+        opVec[0] = -(dotProduct * opVec[8] - opVec[4]);
+        opVec[1] = -(dotProduct * opVec[9] - opVec[5]);
+        opVec[2] = -(dotProduct * opVec[10] - opVec[6]);
+        opVec[3] = -(dotProduct * opVec[0xb] - opVec[7]);
         break;
       case 0x30:
         opVec[0] = 1.0;
@@ -4576,7 +4580,7 @@ LAB_97bd2210:
         if (opVec[6] < opVec[10]) {
           opVec[2] = 0.0;
         }
-        bVar2 = opVec[0xb] <= opVec[7];
+        cmpResult = opVec[0xb] <= opVec[7];
         goto LAB_97bd1c60;
       case 0x33:
         if (opVec[4] <= opVec[8]) {
@@ -4612,10 +4616,10 @@ LAB_97bd2210:
         if (opVec[10] < opVec[6]) {
           opVec[2] = 0.0;
         }
-        bVar2 = opVec[7] <= opVec[0xb];
+        cmpResult = opVec[7] <= opVec[0xb];
 LAB_97bd1c60:
         opVec[3] = 1.0;
-        if (!bVar2) {
+        if (!cmpResult) {
 LAB_97bd1ce0:
           opVec[3] = 0.0;
         }
@@ -4667,38 +4671,38 @@ LAB_97bd1cd8:
       case 0x39:
         if (2.1474836e+09 <= opVec[8]) {
           intComponentI14 = (int)(opVec[8] - 2.1474836e+09);
-          local_a0 = (longlong)intComponentI14;
+          d2iScratch2 = (longlong)intComponentI14;
         }
         else {
           intComponentI14 = (int)opVec[8];
-          local_a8 = (longlong)intComponentI14;
+          d2iScratch1 = (longlong)intComponentI14;
         }
         opVec[0] = opVec[intComponentI14 + 4];
         if (2.1474836e+09 <= opVec[8]) {
           intComponentI14 = (int)(opVec[8] - 2.1474836e+09);
-          local_a8 = (longlong)intComponentI14;
+          d2iScratch1 = (longlong)intComponentI14;
         }
         else {
           intComponentI14 = (int)opVec[8];
-          local_a0 = (longlong)intComponentI14;
+          d2iScratch2 = (longlong)intComponentI14;
         }
         opVec[1] = opVec[intComponentI14 + 4];
         if (2.1474836e+09 <= opVec[8]) {
           intComponentI14 = (int)(opVec[8] - 2.1474836e+09);
-          local_a8 = (longlong)intComponentI14;
+          d2iScratch1 = (longlong)intComponentI14;
         }
         else {
           intComponentI14 = (int)opVec[8];
-          local_a0 = (longlong)intComponentI14;
+          d2iScratch2 = (longlong)intComponentI14;
         }
         opVec[2] = opVec[intComponentI14 + 4];
         if (2.1474836e+09 <= opVec[8]) {
           intComponentI14 = (int)(opVec[8] - 2.1474836e+09);
-          local_a8 = (longlong)intComponentI14;
+          d2iScratch1 = (longlong)intComponentI14;
         }
         else {
           intComponentI14 = (int)opVec[8];
-          local_a0 = (longlong)intComponentI14;
+          d2iScratch2 = (longlong)intComponentI14;
         }
         opVec[3] = opVec[intComponentI14 + 4];
         break;
@@ -4721,18 +4725,18 @@ LAB_97bd1cd8:
         break;
       case 0x3b:
         dimension = (uint)*(byte *)((int)inst + 5);
-        fVar6 = 0.0;
+        dotProduct = 0.0;
         if (dimension != 0) {
           componentCursor = opVec;
           do {
             srcElementPtr = componentCursor + 0xc;
-            pfVar1 = componentCursor + 8;
+            srcBElement = componentCursor + 8;
             componentCursor = componentCursor + 1;
-            fVar6 = *srcElementPtr * *pfVar1 + fVar6;
+            dotProduct = *srcElementPtr * *srcBElement + dotProduct;
             dimension = dimension - 1;
           } while (dimension != 0);
         }
-        if (fVar6 < 0.0) goto switchD_97bd0598_caseD_0;
+        if (dotProduct < 0.0) goto switchD_97bd0598_caseD_0;
         opVec[0] = -opVec[4];
         opVec[1] = -opVec[5];
         opVec[2] = -opVec[6];
@@ -4817,18 +4821,18 @@ LAB_97bd1cd8:
         else {
           operandComponent = 1.0;
         }
-        fVar7 = (srcC[1] - opVec[5]) / (opVec[9] - opVec[5]);
+        smoothT = (srcC[1] - opVec[5]) / (opVec[9] - opVec[5]);
         opVec[0] = operandComponent * operandComponent * (3.0 - (operandComponent + operandComponent));
-        if ((fVar7 <= 0.0) || (fVar7 < 1.0)) {
-          if (fVar7 <= 0.0) {
-            fVar7 = 0.0;
+        if ((smoothT <= 0.0) || (smoothT < 1.0)) {
+          if (smoothT <= 0.0) {
+            smoothT = 0.0;
           }
         }
         else {
-          fVar7 = 1.0;
+          smoothT = 1.0;
         }
         operandComponent = (srcC[2] - opVec[6]) / (opVec[10] - opVec[6]);
-        opVec[1] = fVar7 * fVar7 * (3.0 - (fVar7 + fVar7));
+        opVec[1] = smoothT * smoothT * (3.0 - (smoothT + smoothT));
         if ((operandComponent <= 0.0) || (operandComponent < 1.0)) {
           if (operandComponent <= 0.0) {
             operandComponent = 0.0;
@@ -4837,17 +4841,17 @@ LAB_97bd1cd8:
         else {
           operandComponent = 1.0;
         }
-        fVar7 = (srcC[3] - opVec[7]) / (opVec[0xb] - opVec[7]);
+        smoothT = (srcC[3] - opVec[7]) / (opVec[0xb] - opVec[7]);
         opVec[2] = operandComponent * operandComponent * (3.0 - (operandComponent + operandComponent));
-        if ((fVar7 <= 0.0) || (fVar7 < 1.0)) {
-          if (fVar7 <= 0.0) {
-            fVar7 = 0.0;
+        if ((smoothT <= 0.0) || (smoothT < 1.0)) {
+          if (smoothT <= 0.0) {
+            smoothT = 0.0;
           }
         }
         else {
-          fVar7 = 1.0;
+          smoothT = 1.0;
         }
-        opVec[3] = fVar7 * fVar7 * (3.0 - (fVar7 + fVar7));
+        opVec[3] = smoothT * smoothT * (3.0 - (smoothT + smoothT));
         break;
       case 0x41:
         swizzleSelect = *(char *)(inst + 0x18);
@@ -4935,14 +4939,14 @@ LAB_97bd1cd8:
         ((int (*)())_InterpreterTextureSamplerSetProjectionEnabled)(machine[0x28b],destElement);
         ((int (*)())_InterpreterTextureSamplerSetLodBiasEnabled)(machine[0x28b],(uint)(opcode == 0x44 || opcode - 0x44U == 1));
         ((void (*)())_InterpreterTextureSamplerAttachDerivatives)(machine[0x28b],*(undefined4 *)(emulator + 0xda4),(double)GH_U2F((unsigned int)(machine[0x28f])));
-        fVar7 = opVec[7];
+        sourceComponentW = opVec[7];
         operandComponent = 0.0;
         if (opcode - 0x44U < 2) {
           programInfo = *(int *)(emulator + 0xd80);
           operandComponent = srcC[0];
           if (1 < *(int *)(programInfo + 0x38) - 0x8b30U) {
             opVec[7] = 1.0;
-            operandComponent = fVar7;
+            operandComponent = sourceComponentW;
             goto LAB_97bd29a8;
           }
         }
@@ -4950,15 +4954,15 @@ LAB_97bd1cd8:
 LAB_97bd29a8:
           programInfo = *(int *)(emulator + 0xd80);
         }
-        dVar27 = (double)operandComponent;
+        texLodOrBias = (double)operandComponent;
         if (*(int *)(programInfo + 0x38) - 0x8b30U < 2) {
           if (2.1474836e+09 <= opVec[8]) {
-            local_98 = (longlong)(int)(opVec[8] - 2.1474836e+09);
+            d2iScratch3 = (longlong)(int)(opVec[8] - 2.1474836e+09);
             intComponent = (int)(opVec[8] - 2.1474836e+09) ^ 0x80000000;
           }
           else {
             intComponent = (uint)(int)opVec[8];
-            local_90 = (longlong)(int)intComponent;
+            d2iScratch4 = (longlong)(int)intComponent;
           }
         }
         else {
@@ -4967,40 +4971,40 @@ LAB_97bd29a8:
         textureTarget = inst[0x44];
         if (textureTarget == 2) {
           _InterpreterTextureSamplerSampleTexelRECT
-                    (machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&local_80);
+                    (machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texelX);
         }
         else if (textureTarget < 3) {
           if (textureTarget == 1) {
-            ((void (*)())_InterpreterTextureSamplerSampleTexel3D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&local_80,dVar27,fparam_2,fparam_3,
+            ((void (*)())_InterpreterTextureSamplerSampleTexel3D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texelX,texLodOrBias,fparam_2,fparam_3,
                        fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,in_stack_fffffe78,
                        in_stack_fffffe80,in_stack_fffffe88,in_stack_fffffe90);
           }
         }
         else if (textureTarget == 3) {
-          ((void (*)())_InterpreterTextureSamplerSampleTexel2D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&local_80,dVar27,fparam_2,fparam_3,
+          ((void (*)())_InterpreterTextureSamplerSampleTexel2D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texelX,texLodOrBias,fparam_2,fparam_3,
                      fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,in_stack_fffffe78,
                      in_stack_fffffe80,in_stack_fffffe88,in_stack_fffffe90,in_stack_fffffe98);
         }
         else if (textureTarget == 4) {
-          ((void (*)())_InterpreterTextureSamplerSampleTexel1D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&local_80,dVar27,fparam_2,fparam_3,
+          ((void (*)())_InterpreterTextureSamplerSampleTexel1D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texelX,texLodOrBias,fparam_2,fparam_3,
                      fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,in_stack_fffffe78,
                      in_stack_fffffe80,in_stack_fffffe88,in_stack_fffffe90);
         }
-        opVec[0] = local_80;
-        opVec[1] = local_7c;
-        opVec[2] = local_78;
-        opVec[3] = local_74;
+        opVec[0] = texelX;
+        opVec[1] = texelY;
+        opVec[2] = texelZ;
+        opVec[3] = texelW;
         break;
       case 0x48:
       case 0x49:
         floorResult = _floor((double)opVec[4]);
         if (2147483648.0 <= floorResult) {
-          local_98 = (longlong)(int)(floorResult - 2147483648.0);
+          d2iScratch3 = (longlong)(int)(floorResult - 2147483648.0);
           intComponent = (int)(floorResult - 2147483648.0) ^ 0x80000000;
         }
         else {
           intComponent = (uint)(int)floorResult;
-          local_90 = (longlong)(int)intComponent;
+          d2iScratch4 = (longlong)(int)intComponent;
         }
         machine[0x290] = intComponent;
         goto switchD_97bd0598_caseD_6;
@@ -5033,7 +5037,7 @@ switchD_97bd0598_caseD_54:
           nextInst = (int *)0x0;
         }
 switchD_97bd0598_caseD_6:
-        bVar25 = false;
+        fallsThrough = false;
         break;
       case 0x4c:
         in_r5_artifact = (float *)inst[4];
@@ -5081,12 +5085,12 @@ switchD_97bd0598_caseD_6:
             }
           }
         }
-        iVar14 = machine[0x29b];
+        callStackTop = machine[0x29b];
         nextInst = (int *)0x0;
-        piVar11 = (int *)(iVar14 - 4);
-        if (machine + 0x297 <= piVar11) {
-          machine[0x29b] = (int)piVar11;
-          nextInst = *(int **)(iVar14 + -4);
+        poppedStackTop = (int *)(callStackTop - 4);
+        if (machine + 0x297 <= poppedStackTop) {
+          machine[0x29b] = (int)poppedStackTop;
+          nextInst = *(int **)(callStackTop + -4);
         }
         goto switchD_97bd0598_caseD_6;
       case 0x4f:
@@ -5106,9 +5110,9 @@ switchD_97bd0598_caseD_6:
           componentCursor = opVec;
           do {
             srcElementPtr = componentCursor + 4;
-            pfVar1 = componentCursor + 8;
+            srcBElement = componentCursor + 8;
             componentCursor = componentCursor + 1;
-            operandComponent = *srcElementPtr * *pfVar1 + operandComponent;
+            operandComponent = *srcElementPtr * *srcBElement + operandComponent;
             dimension = dimension - 1;
           } while (dimension != 0);
         }
@@ -5116,14 +5120,14 @@ switchD_97bd0598_caseD_6:
         if (0.0 <= sqrtValue) {
           operandComponent = srcC[0] * operandComponent;
           sqrtResult = _sqrt(sqrtValue);
-          dVar28 = (double)srcC[0];
+          mathTemp = (double)srcC[0];
           operandComponent = (float)((double)operandComponent + sqrtResult);
           fparam_7 = (double)(operandComponent * opVec[0xb]);
-          opVec[0] = (float)(dVar28 * (double)opVec[4] - (double)(operandComponent * opVec[8]));
-          opVec[1] = (float)(dVar28 * (double)opVec[5] - (double)(operandComponent * opVec[9]));
-          opVec[2] = (float)(dVar28 * (double)opVec[6] - (double)(operandComponent * opVec[10]));
+          opVec[0] = (float)(mathTemp * (double)opVec[4] - (double)(operandComponent * opVec[8]));
+          opVec[1] = (float)(mathTemp * (double)opVec[5] - (double)(operandComponent * opVec[9]));
+          opVec[2] = (float)(mathTemp * (double)opVec[6] - (double)(operandComponent * opVec[10]));
           fparam_8 = (double)opVec[2];
-          opVec[3] = (float)(dVar28 * (double)opVec[7] - fparam_7);
+          opVec[3] = (float)(mathTemp * (double)opVec[7] - fparam_7);
         }
         else {
           opVec[3] = 0.0;
@@ -5169,19 +5173,19 @@ LAB_97bd200c:
         opVec[3] = srcC[3];
         if (2.1474836e+09 <= opVec[8]) {
           intComponentI14 = (int)(opVec[8] - 2.1474836e+09);
-          local_a8 = (longlong)intComponentI14;
+          d2iScratch1 = (longlong)intComponentI14;
         }
         else {
           intComponentI14 = (int)opVec[8];
-          local_a0 = (longlong)intComponentI14;
+          d2iScratch2 = (longlong)intComponentI14;
         }
         if (2.1474836e+09 <= opVec[8]) {
           intComponentI26 = (int)(opVec[8] - 2.1474836e+09);
-          local_90 = (longlong)intComponentI26;
+          d2iScratch4 = (longlong)intComponentI26;
         }
         else {
           intComponentI26 = (int)opVec[8];
-          local_98 = (longlong)intComponentI26;
+          d2iScratch3 = (longlong)intComponentI26;
         }
         opVec[intComponentI14] = opVec[intComponentI26 + 4];
         break;
@@ -5208,7 +5212,7 @@ LAB_97bd2010:
       if (saturate != '\0') {
         if (0.0 <= opVec[0]) {
           if (opVec[0] <= 1.0) {
-            local_70 = opVec[0];
+            storedComponent = opVec[0];
           }
           else {
             opVec[0] = 1.0;
@@ -5219,7 +5223,7 @@ LAB_97bd2010:
         }
         if (0.0 <= opVec[1]) {
           if (opVec[1] <= 1.0) {
-            local_70 = opVec[1];
+            storedComponent = opVec[1];
           }
           else {
             opVec[1] = 1.0;
@@ -5230,7 +5234,7 @@ LAB_97bd2010:
         }
         if (0.0 <= opVec[2]) {
           if (opVec[2] <= 1.0) {
-            local_70 = opVec[2];
+            storedComponent = opVec[2];
           }
           else {
             opVec[2] = 1.0;
@@ -5241,7 +5245,7 @@ LAB_97bd2010:
         }
         if (0.0 <= opVec[3]) {
           if (opVec[3] <= 1.0) {
-            local_70 = opVec[3];
+            storedComponent = opVec[3];
           }
           else {
             opVec[3] = 1.0;
@@ -5251,7 +5255,7 @@ LAB_97bd2010:
           opVec[3] = 0.0;
         }
       }
-      if (bVar25) {
+      if (fallsThrough) {
         sourceElement = loopIndex2;
         if (*(char *)(inst + 8) == '\0') {
           sourceElement = 0;
@@ -5284,8 +5288,8 @@ LAB_97bd0310:
       }
       else if (saturate == '\x03') {
         if ((opVec[4] == opVec[8]) &&
-           (bVar25 = opVec[5] == opVec[9], opVec[5] = opVec[6],
-           opVec[9] = opVec[10], bVar25)) goto LAB_97bd0310;
+           (fallsThrough = opVec[5] == opVec[9], opVec[5] = opVec[6],
+           opVec[9] = opVec[10], fallsThrough)) goto LAB_97bd0310;
       }
       else {
         if (saturate != '\x04') goto LAB_97bd0328;
@@ -5338,14 +5342,14 @@ LAB_97bd0310:
         *componentCursor = operandComponent;
         componentCursor = componentCursor + 1;
       } while (loopIndex < 3);
-      uStack_ac = 0;
+      i2dLo = 0;
       operandComponent = opVec[2];
-      fVar7 = opVec[1];
+      logicComponent = opVec[1];
       if (opVec[0] != 0.0) goto joined_r0x97bd003c;
 LAB_97bd01a0:
-      uStack_ac = uStack_ac ^ 0x80000000;
-      local_b0 = 0x43300000;
-      opVec[0] = (float)((double)CONCAT44(0x43300000,uStack_ac) - 4503601774854144.0);
+      i2dLo = i2dLo ^ 0x80000000;
+      i2dHi = 0x43300000;
+      opVec[0] = (float)((double)CONCAT44(0x43300000,i2dLo) - 4503601774854144.0);
     }
     else if (elementCount < 4) {
       if (elementCount == 2) {
@@ -5371,12 +5375,12 @@ LAB_97bd01a0:
           *componentCursor = operandComponent;
           componentCursor = componentCursor + 1;
           operandComponent = opVec[1];
-          fVar7 = opVec[0];
+          logicComponent = opVec[0];
         } while (loopIndex < 2);
 joined_r0x97bd003c:
-        uStack_ac = 0;
-        if ((fVar7 != 0.0) && (uStack_ac = 0, operandComponent != 0.0)) {
-          uStack_ac = 1;
+        i2dLo = 0;
+        if ((logicComponent != 0.0) && (i2dLo = 0, operandComponent != 0.0)) {
+          i2dLo = 1;
         }
         goto LAB_97bd01a0;
       }
@@ -5405,8 +5409,8 @@ joined_r0x97bd003c:
         *componentCursor = operandComponent;
         componentCursor = componentCursor + 1;
       } while (loopIndex < 4);
-      uStack_ac = 0;
-      if ((opVec[0] == 0.0) || (operandComponent = opVec[3], fVar7 = opVec[2], opVec[1] == 0.0)
+      i2dLo = 0;
+      if ((opVec[0] == 0.0) || (operandComponent = opVec[3], logicComponent = opVec[2], opVec[1] == 0.0)
          ) goto LAB_97bd01a0;
       goto joined_r0x97bd003c;
     }
@@ -5511,8 +5515,9 @@ int _InterpreterWriteFinalFragmentToBuffer(machine, operandWord1, operandWord2, 
 /* _InterpreterRun @ 0x97bd31e0 (1020 bytes) */
 void _InterpreterRun(int emulator,int elementCount,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
+  int programTarget;
   bool wSafeToDivide;
-  float fVar2;
+  float vertexW;
   float clipX;
   float clipY;
   float clipZ;
@@ -5525,25 +5530,25 @@ void _InterpreterRun(int emulator,int elementCount,double fparam_1,double fparam
   float negW;
   double one;
   float zero;
-  int iVar15;
+  int viewportOrTarget;
   float *vertexOutput;
-  uint uVar17;
-  int iVar18;
-  int extraout_r4;
-  int extraout_r4_00;
-  int extraout_r4_01;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  int iVar19;
-  int iVar20;
+  uint testFlags;
+  int inst;
+  int extraOut1;
+  int extraOut2;
+  int extraOut3;
+  undefined4 leftoverR5;
+  undefined4 leftoverR6;
+  undefined4 leftoverR7;
+  undefined4 leftoverR8;
+  int itemsLeft;
+  int programInfo;
   uint clipOrMask;
   uint clipAndMask;
   int machine;
-  double dVar24;
-  double extraout_f1;
-  double extraout_f1_00;
+  double vertexWDouble;
+  double extraOutF1;
+  double extraOutF2;
   double xScale;
   double xBias;
   double invWScale;
@@ -5555,12 +5560,12 @@ void _InterpreterRun(int emulator,int elementCount,double fparam_1,double fparam
   double in_stack_ffffff58;
   
   one = DOUBLE_97c30a60;
-  iVar19 = *(int *)(*(int *)(emulator + 0xd80) + 0x38);
+  programTarget = *(int *)(*(int *)(emulator + 0xd80) + 0x38);
   machine = *(int *)(emulator + 0xdf0);
-  iVar15 = *(int *)(emulator + 0xd9c);
+  viewportOrTarget = *(int *)(emulator + 0xd9c);
   clipAndMask = 0xff;
   clipOrMask = 0;
-  if ((iVar19 == 0x8804) || (iVar19 == 0x8b30)) {
+  if ((programTarget == 0x8804) || (programTarget == 0x8b30)) {
     invWBias = (double)*(float *)(*(int *)(emulator + 0xda0) + 0xc);
     xBias = (double)*(float *)(*(int *)(emulator + 0xda0) + 8);
     invWScale = (double)*(float *)(*(int *)(emulator + 0xda4) + 0xc);
@@ -5577,23 +5582,23 @@ void _InterpreterRun(int emulator,int elementCount,double fparam_1,double fparam
     xScale = invWScale;
     xBias = invWScale;
     invWBias = invWScale;
-    viewportZBias = *(float *)(iVar15 + 0x1b88);
-    viewportZScale = *(float *)(iVar15 + 0x1b78);
-    viewportXScale = *(float *)(iVar15 + 0x1b70);
-    viewportXBias = *(float *)(iVar15 + 0x1b80);
-    viewportYBias = *(float *)(iVar15 + 0x1b84);
-    viewportYScale = *(float *)(iVar15 + 0x1b74);
+    viewportZBias = *(float *)(viewportOrTarget + 0x1b88);
+    viewportZScale = *(float *)(viewportOrTarget + 0x1b78);
+    viewportXScale = *(float *)(viewportOrTarget + 0x1b70);
+    viewportXBias = *(float *)(viewportOrTarget + 0x1b80);
+    viewportYBias = *(float *)(viewportOrTarget + 0x1b84);
+    viewportYScale = *(float *)(viewportOrTarget + 0x1b74);
   }
-  iVar15 = *(int *)(*(int *)(emulator + 0xd80) + 0x38);
-  if ((iVar15 == 0x8804) || (iVar15 == 0x8b30)) {
+  viewportOrTarget = *(int *)(*(int *)(emulator + 0xd80) + 0x38);
+  if ((viewportOrTarget == 0x8804) || (viewportOrTarget == 0x8b30)) {
     *(undefined4 *)(machine + 0xa30) = 0;
     *(float *)(machine + 0xa38) = (float)xBias;
     *(float *)(machine + 0xa3c) = (float)(one / invWBias);
   }
-  iVar15 = machine + 0xa5c;
+  viewportOrTarget = machine + 0xa5c;
   *(undefined1 *)(machine + 0xa47) = 0;
   *(undefined4 *)(machine + 0xa68) = 0;
-  *(int *)(machine + 0xa6c) = iVar15;
+  *(int *)(machine + 0xa6c) = viewportOrTarget;
   *(undefined1 *)(machine + 0xa44) = 0;
   *(undefined1 *)(machine + 0xa45) = 0;
   *(undefined1 *)(machine + 0xa46) = 0;
@@ -5602,11 +5607,11 @@ void _InterpreterRun(int emulator,int elementCount,double fparam_1,double fparam
   *(undefined4 *)(machine + 0xa64) = 0;
   zero = TAllocation__guardBlockSize;
   one = DOUBLE_97c30a60;
-  iVar19 = elementCount;
+  itemsLeft = elementCount;
   do {
-    if (iVar19 == 0) {
-      iVar15 = *(int *)(*(int *)(emulator + 0xd80) + 0x38);
-      if ((iVar15 == 0x8804) || (iVar15 == 0x8b30)) {
+    if (itemsLeft == 0) {
+      viewportOrTarget = *(int *)(*(int *)(emulator + 0xd80) + 0x38);
+      if ((viewportOrTarget == 0x8804) || (viewportOrTarget == 0x8b30)) {
         clipOrMask = 0;
       }
       else {
@@ -5615,75 +5620,75 @@ void _InterpreterRun(int emulator,int elementCount,double fparam_1,double fparam
       FUN_97c1a28c(clipOrMask);
       return;
     }
-    iVar19 = iVar19 + -1;
+    itemsLeft = itemsLeft + -1;
     *(undefined4 *)(machine + 0xa58) = 0;
-    iVar20 = *(int *)(emulator + 0xd80);
-    if (((*(uint *)(iVar20 + 0x3c) & 6) == 4) && ((*(uint *)(iVar20 + 0x34) & 0xa000) == 0)) {
-      uVar17 = _InterpreterRasterOpMachine_DepthTest(machine + 0xa24);
-      *(uint *)(machine + 0xa58) = *(uint *)(machine + 0xa58) | uVar17;
-      iVar20 = *(int *)(emulator + 0xd80);
-      elementCount = extraout_r4;
-      fparam_1 = extraout_f1;
+    programInfo = *(int *)(emulator + 0xd80);
+    if (((*(uint *)(programInfo + 0x3c) & 6) == 4) && ((*(uint *)(programInfo + 0x34) & 0xa000) == 0)) {
+      testFlags = _InterpreterRasterOpMachine_DepthTest(machine + 0xa24);
+      *(uint *)(machine + 0xa58) = *(uint *)(machine + 0xa58) | testFlags;
+      programInfo = *(int *)(emulator + 0xd80);
+      elementCount = extraOut1;
+      fparam_1 = extraOutF1;
     }
-    iVar18 = *(int *)(iVar20 + 0x120);
-    if ((iVar18 != 0) && (*(int *)(machine + 0xa58) == 0)) {
+    inst = *(int *)(programInfo + 0x120);
+    if ((inst != 0) && (*(int *)(machine + 0xa58) == 0)) {
       do {
-        iVar18 = ((int * (*)())_InterpreterEmulateOp)(machine,iVar18,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,
+        inst = ((int * (*)())_InterpreterEmulateOp)(machine,inst,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,
                             fparam_7,fparam_8,in_stack_ffffff38,in_stack_ffffff40,in_stack_ffffff48,
                             in_stack_ffffff50,in_stack_ffffff58);
-        fparam_1 = extraout_f1_00;
-        if (iVar18 == 0) break;
+        fparam_1 = extraOutF2;
+        if (inst == 0) break;
       } while (*(int *)(machine + 0xa58) == 0);
-      iVar20 = *(int *)(emulator + 0xd80);
-      elementCount = extraout_r4_00;
+      programInfo = *(int *)(emulator + 0xd80);
+      elementCount = extraOut2;
     }
-    if ((*(int *)(iVar20 + 0x38) == 0x8804) || (*(int *)(iVar20 + 0x38) == 0x8b30)) {
+    if ((*(int *)(programInfo + 0x38) == 0x8804) || (*(int *)(programInfo + 0x38) == 0x8b30)) {
       if (*(int *)(machine + 0xa58) == 0) {
-        fparam_1 = (double)((int (*)())_InterpreterWriteFinalFragmentToBuffer)(machine,elementCount,in_r5,in_r6,in_r7,in_r8,iVar15);
-        iVar20 = *(int *)(emulator + 0xd80);
-        elementCount = extraout_r4_01;
+        fparam_1 = (double)((int (*)())_InterpreterWriteFinalFragmentToBuffer)(machine,elementCount,leftoverR5,leftoverR6,leftoverR7,leftoverR8,viewportOrTarget);
+        programInfo = *(int *)(emulator + 0xd80);
+        elementCount = extraOut3;
       }
     }
     else {
       vertexOutput = *(float **)(emulator + 0xd88);
-      uVar17 = 0;
-      fVar2 = vertexOutput[7];
+      testFlags = 0;
+      vertexW = vertexOutput[7];
       clipX = vertexOutput[4];
-      negW = -fVar2;
+      negW = -vertexW;
       clipY = vertexOutput[5];
       clipZ = vertexOutput[6];
       if (clipX < negW) {
-        uVar17 = 0x10;
+        testFlags = 0x10;
       }
-      if (fVar2 <= clipX) {
-        uVar17 = uVar17 | 0x20;
+      if (vertexW <= clipX) {
+        testFlags = testFlags | 0x20;
       }
       if (clipY < negW) {
-        uVar17 = uVar17 | 4;
+        testFlags = testFlags | 4;
       }
-      if (fVar2 <= clipY) {
-        uVar17 = uVar17 | 8;
+      if (vertexW <= clipY) {
+        testFlags = testFlags | 8;
       }
       if (clipZ < negW) {
-        uVar17 = uVar17 | 1;
+        testFlags = testFlags | 1;
       }
-      if (fVar2 < clipZ) {
-        uVar17 = uVar17 | 2;
+      if (vertexW < clipZ) {
+        testFlags = testFlags | 2;
       }
-      vertexOutput[0x1f] = GH_U2F((unsigned int)((uVar17 | 0x1000000)));
-      if (uVar17 == 0) {
-        if (fVar2 < zero) {
-          wSafeToDivide = fVar2 <= FLOAT_97c3acf4;
+      vertexOutput[0x1f] = GH_U2F((unsigned int)((testFlags | 0x1000000)));
+      if (testFlags == 0) {
+        if (vertexW < zero) {
+          wSafeToDivide = vertexW <= FLOAT_97c3acf4;
         }
         else {
-          wSafeToDivide = FLOAT_97c3acf0 <= fVar2;
+          wSafeToDivide = FLOAT_97c3acf0 <= vertexW;
         }
         if (wSafeToDivide) {
-          negW = FLOAT_97c3acd8 / fVar2;
+          negW = FLOAT_97c3acd8 / vertexW;
         }
         else {
           negW = FLOAT_97c3acfc;
-          if (zero <= fVar2) {
+          if (zero <= vertexW) {
             negW = FLOAT_97c3acf8;
           }
         }
@@ -5692,21 +5697,21 @@ void _InterpreterRun(int emulator,int elementCount,double fparam_1,double fparam
         vertexOutput[1] = clipY * negW * viewportYScale + viewportYBias;
         vertexOutput[2] = clipZ * negW * viewportZScale + viewportZBias;
       }
-      iVar20 = *(int *)(emulator + 0xd80);
-      clipAndMask = clipAndMask & uVar17;
-      clipOrMask = clipOrMask | uVar17;
+      programInfo = *(int *)(emulator + 0xd80);
+      clipAndMask = clipAndMask & testFlags;
+      clipOrMask = clipOrMask | testFlags;
     }
-    *(int *)(emulator + 0xd8c) = *(int *)(emulator + 0xd8c) + *(int *)(iVar20 + 0xbc);
-    *(int *)(emulator + 0xd88) = *(int *)(emulator + 0xd88) + *(int *)(iVar20 + 0xb8);
-    iVar15 = *(int *)(emulator + 0xda8) + *(int *)(iVar20 + 0xd8);
-    *(int *)(emulator + 0xda8) = iVar15;
-    *(int *)(emulator + 0xdac) = *(int *)(emulator + 0xdac) + *(int *)(iVar20 + 0xdc);
-    if ((*(int *)(iVar20 + 0x38) == 0x8804) || (*(int *)(iVar20 + 0x38) == 0x8b30)) {
-      fVar2 = (float)((double)*(float *)(machine + 0xa30) + one);
-      dVar24 = (double)fVar2;
-      *(float *)(machine + 0xa30) = fVar2;
-      *(float *)(machine + 0xa38) = (float)(xScale * dVar24 + xBias);
-      *(float *)(machine + 0xa3c) = (float)(one / (double)(float)(invWScale * dVar24 + invWBias));
+    *(int *)(emulator + 0xd8c) = *(int *)(emulator + 0xd8c) + *(int *)(programInfo + 0xbc);
+    *(int *)(emulator + 0xd88) = *(int *)(emulator + 0xd88) + *(int *)(programInfo + 0xb8);
+    viewportOrTarget = *(int *)(emulator + 0xda8) + *(int *)(programInfo + 0xd8);
+    *(int *)(emulator + 0xda8) = viewportOrTarget;
+    *(int *)(emulator + 0xdac) = *(int *)(emulator + 0xdac) + *(int *)(programInfo + 0xdc);
+    if ((*(int *)(programInfo + 0x38) == 0x8804) || (*(int *)(programInfo + 0x38) == 0x8b30)) {
+      vertexW = (float)((double)*(float *)(machine + 0xa30) + one);
+      vertexWDouble = (double)vertexW;
+      *(float *)(machine + 0xa30) = vertexW;
+      *(float *)(machine + 0xa38) = (float)(xScale * vertexWDouble + xBias);
+      *(float *)(machine + 0xa3c) = (float)(one / (double)(float)(invWScale * vertexWDouble + invWBias));
     }
   } while( true );
 }
@@ -5721,38 +5726,38 @@ int _InterpreterTextureSamplerCreate()
 }
 
 /* _InterpreterTextureSamplerInitialise @ 0x97bd35e8 (16 bytes) */
-int _InterpreterTextureSamplerInitialise(param_1)
-  int param_1;
+int _InterpreterTextureSamplerInitialise(sampler)
+  int sampler;
 {
-  *(undefined4 *)(param_1 + 0x18) = 0xffffffff;
-  *(undefined4 *)(param_1 + 0x14) = 0xffffffff;
+  *(undefined4 *)(sampler + 0x18) = 0xffffffff;
+  *(undefined4 *)(sampler + 0x14) = 0xffffffff;
   return;
 }
 
 /* _InterpreterTextureSamplerAttachGLDContext @ 0x97bd35fc (8 bytes) */
-int _InterpreterTextureSamplerAttachGLDContext(param_1, param_2)
-  undefined4 *param_1;
-  undefined4 param_2;
+int _InterpreterTextureSamplerAttachGLDContext(sampler, gldContext)
+  undefined4 *sampler;
+  undefined4 gldContext;
 {
-  *param_1 = param_2;
+  *sampler = gldContext;
   return;
 }
 
 /* _InterpreterTextureSamplerSetProjectionEnabled @ 0x97bd3604 (8 bytes) */
-int _InterpreterTextureSamplerSetProjectionEnabled(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+int _InterpreterTextureSamplerSetProjectionEnabled(sampler, enabled)
+  int sampler;
+  undefined4 enabled;
 {
-  *(undefined4 *)(param_1 + 0x20) = param_2;
+  *(undefined4 *)(sampler + 0x20) = enabled;
   return;
 }
 
 /* _InterpreterTextureSamplerSetLodBiasEnabled @ 0x97bd360c (8 bytes) */
-int _InterpreterTextureSamplerSetLodBiasEnabled(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+int _InterpreterTextureSamplerSetLodBiasEnabled(sampler, enabled)
+  int sampler;
+  undefined4 enabled;
 {
-  *(undefined4 *)(param_1 + 0x24) = param_2;
+  *(undefined4 *)(sampler + 0x24) = enabled;
   return;
 }
 

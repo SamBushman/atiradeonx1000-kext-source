@@ -50,7 +50,7 @@
 0x97b81994	_PPParserParseDestination	604	yes	
 0x97b81bf0	_PPParserParseSwizzleSourceVar	460	yes	
 0x97b81dbc	_PPParserParseSourceVar	696	yes	
-0x97b82078	FUN_97b82078	216	yes	
+0x97b82078	_PPStreamAddOperation_97b82078	216	yes	
 0x97b82150	_PPParserParseEnd	136	yes	
 0x97b821d8	_PPStreamAttribBindingIsEqual	88	yes	
 0x97b82230	_PPStreamOutputBindingIsEqual	88	yes	
@@ -99,7 +99,7 @@
 0x97b85058	_PPParserParseSwizzleCode	620	yes	
 0x97b853f8	__dyld_func_lookup	32	no	toolchain crt code (runs under dyld: lazy binding / image initialisation)
 0x97b85418	___initialize_Cplusplus	88	no	toolchain crt code (runs under dyld: lazy binding / image initialisation); indirect call (driver context / vtable / callback)
-0x97b85470	FUN_97b85470	32	yes	
+0x97b85470	_dyld_func_lookup_call_97b85470	32	yes	
 0x97b85490	InitProcess	36	yes	
 0x97b854b4	DetachProcess	36	no	calls an import (Z15FreeGlobalPoolsv)
 0x97b854d8	_InitStringTable	84	yes	
@@ -176,7 +176,7 @@
 0x97b88924	_eof_scan_97b88924	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x97b88930	_InitScanner	116	yes	
 0x97b889a8	_str_getch	228	yes	
-0x97b88a90	FUN_97b88a90	100	yes	
+0x97b88a90	_str_ungetch_body_97b88a90	100	yes	
 0x97b88af4	_ScanFromString	148	yes	
 0x97b88b88	_lBuildFloatValue	272	no	calls an import (CPPErrorToInfoLog)
 0x97b88c98	_lFloatConst	588	no	calls an import (CPPErrorToInfoLog); indirect call (driver context / vtable / callback)

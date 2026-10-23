@@ -66,10 +66,10 @@ use	_PPParserParseEnd	iVar1	part	INFERRED	every definition is the result of a ca
 use	_PPStreamChunkListCreateFromChunkList	uVar1	chunkList	INFERRED	every definition is the result of a call whose name says it returns this	#0	+5	all	all
 use	_PPStreamChunkListCreateFromChunkList	uVar2	chunk	INFERRED	every definition is the result of a call whose name says it returns this	#2	+1	all	all
 use	_PPStreamGetStream	iVar2	maxIndex	INFERRED	every definition is the result of a call whose name says it returns this	#31	+1	all	all
-use	_PPEmulatorProgramConvertFromPPStream	iVar21	chunk	INFERRED	every definition is the result of a call whose name says it returns this	#277	+0	lhs	lhs
-use	_PPEmulatorProgramConvertFromPPStream	iVar21	chunk	INFERRED	every definition is the result of a call whose name says it returns this	#278	+24	all	lhs
-use	_PPEmulatorProgramConvertFromPPStream	iVar21	chunk	INFERRED	every definition is the result of a call whose name says it returns this	#304	+29	all	all
-use	_PPEmulatorProgramConvertFromPPStream	iVar6	chunk2	INFERRED	every definition is the result of a call whose name says it returns this	#133	+9	all	all
+use	_PPEmulatorProgramConvertFromPPStream	iVar21	srcBindingChunk	INFERRED	every definition is the result of a call whose name says it returns this	#277	+0	lhs	lhs
+use	_PPEmulatorProgramConvertFromPPStream	iVar21	srcBindingChunk	INFERRED	every definition is the result of a call whose name says it returns this	#278	+24	all	lhs
+use	_PPEmulatorProgramConvertFromPPStream	iVar21	srcBindingChunk	INFERRED	every definition is the result of a call whose name says it returns this	#304	+29	all	all
+use	_PPEmulatorProgramConvertFromPPStream	iVar6	destBindingChunk	INFERRED	every definition is the result of a call whose name says it returns this	#133	+9	all	all
 use	_PPParserParseTempDeclaration	iVar2	arrayResult	INFERRED	every definition is the result of a call whose name says it returns this	#34	+2	all	all
 use	_PPParserParseTextureSourceVar	iVar2	arrayResult	INFERRED	every definition is the result of a call whose name says it returns this	#14	+2	all	all
 use	_CPPdefine	uVar3	stringOfAtom	INFERRED	every definition is the result of a call whose name says it returns this	#97	+1	all	all
