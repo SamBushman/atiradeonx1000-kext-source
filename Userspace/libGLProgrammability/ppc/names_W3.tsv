@@ -130,9 +130,9 @@ local	__ZN5TType7setTypeE10TBasicTypeibPS_	param_5	type	INFERRED	parameter type 
 local	__ZNKSbIcSt11char_traitsIcE14pool_allocatorIcEE7compareEPKc	param_2	str	INFERRED	parameter type in the mangled name (__ZNKSbIcSt11char_traitsIcE14pool_allocatorIcEE7compareEPKc)
 local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm	param_2	str	INFERRED	parameter type in the mangled name (__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm)
 local	_PPEmulatorInit	param_1	emulator	INFERRED	dereferenced as the PPEmulator object (2 field accesses); every PPEmulator* function takes it first
-local	_PPParserMacroSetParamStringsCount	param_1	parser	INFERRED	dereferenced as the PPParser object (2 field accesses); every PPParser* function takes it first
-local	_PPParserMacroSetParamString	param_1	parser	INFERRED	dereferenced as the PPParser object (3 field accesses); every PPParser* function takes it first
-local	_PPParserScopeAddMacro	param_1	parser	INFERRED	dereferenced as the PPParser object (7 field accesses); every PPParser* function takes it first
+local	_PPParserMacroSetParamStringsCount	param_1	macro	INFERRED	dereferenced as the PPParser object (2 field accesses); every PPParser* function takes it first
+local	_PPParserMacroSetParamString	param_1	macro	INFERRED	dereferenced as the PPParser object (3 field accesses); every PPParser* function takes it first
+local	_PPParserScopeAddMacro	param_1	scope	INFERRED	dereferenced as the PPParser object (7 field accesses); every PPParser* function takes it first
 local	_PPParserAddScope	param_1	parser	INFERRED	dereferenced as the PPParser object (8 field accesses); every PPParser* function takes it first
 local	_PPParserAttachString	param_1	parser	INFERRED	dereferenced as the PPParser object (13 field accesses); every PPParser* function takes it first
 local	_PPParserAttachStream	param_1	parser	INFERRED	dereferenced as the PPParser object (4 field accesses); every PPParser* function takes it first
