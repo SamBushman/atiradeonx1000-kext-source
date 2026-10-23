@@ -49,33 +49,33 @@ int yy_flush_buffer(yy_buffer_state)
 }
 
 /* yy_scan_buffer @ 0x97badbf8 (192 bytes) */
-int yy_scan_buffer(str, param_2)
-  char *str;
-  uint param_2;
+int yy_scan_buffer(base, bufSize)
+  char *base;
+  uint bufSize;
 {
-  unsigned char * pyVar1;
+  unsigned char * buffer;
   
-  if (((param_2 < 2) || (str[param_2 - 2] != '\0')) || (str[param_2 - 1] != '\0')) {
-    pyVar1 = (unsigned char *)0x0;
+  if (((bufSize < 2) || (base[bufSize - 2] != '\0')) || (base[bufSize - 1] != '\0')) {
+    buffer = (unsigned char *)0x0;
   }
   else {
-    pyVar1 = (unsigned char *)((int (*)())yy_flex_alloc)(0x28);
-    if (pyVar1 == (unsigned char *)0x0) {
+    buffer = (unsigned char *)((int (*)())yy_flex_alloc)(0x28);
+    if (buffer == (unsigned char *)0x0) {
       ((int (*)())yy_fatal_error)("out of dynamic memory in yy_scan_buffer()");
     }
-    *(char **)(pyVar1 + 8) = str;
-    *(uint *)(pyVar1 + 0x10) = param_2 - 2;
-    *(undefined4 *)(pyVar1 + 0x1c) = 1;
-    *(undefined4 *)(pyVar1 + 0x24) = 0;
-    *(uint *)(pyVar1 + 0xc) = param_2 - 2;
-    *(char **)(pyVar1 + 4) = str;
-    *(undefined4 *)(pyVar1 + 0x14) = 0;
-    *(undefined4 *)pyVar1 = 0;
-    *(undefined4 *)(pyVar1 + 0x18) = 0;
-    *(undefined4 *)(pyVar1 + 0x20) = 0;
-    yy_switch_to_buffer(pyVar1);
+    *(char **)(buffer + 8) = base;
+    *(uint *)(buffer + 0x10) = bufSize - 2;
+    *(undefined4 *)(buffer + 0x1c) = 1;
+    *(undefined4 *)(buffer + 0x24) = 0;
+    *(uint *)(buffer + 0xc) = bufSize - 2;
+    *(char **)(buffer + 4) = base;
+    *(undefined4 *)(buffer + 0x14) = 0;
+    *(undefined4 *)buffer = 0;
+    *(undefined4 *)(buffer + 0x18) = 0;
+    *(undefined4 *)(buffer + 0x20) = 0;
+    yy_switch_to_buffer(buffer);
   }
-  return pyVar1;
+  return buffer;
 }
 
 /* yy_scan_string @ 0x97badcb8 (44 bytes) */
@@ -95,31 +95,31 @@ int yy_scan_string(str)
 }
 
 /* yy_scan_bytes @ 0x97badce4 (176 bytes) */
-int yy_scan_bytes(str, param_2)
-  char *str;
-  int param_2;
+int yy_scan_bytes(bytes, len)
+  char *bytes;
+  int len;
 {
   int yy_scan_bufferResult;
-  int iVar1;
+  int copyIdx;
   char *yy_flex_allocResult;
-  int iVar3;
+  int remaining;
   
-  yy_flex_allocResult = (char *)((int (*)())yy_flex_alloc)(param_2 + 2U);
+  yy_flex_allocResult = (char *)((int (*)())yy_flex_alloc)(len + 2U);
   if (yy_flex_allocResult == (char *)0x0) {
     ((int (*)())yy_fatal_error)("out of dynamic memory in yy_scan_bytes()");
   }
-  iVar1 = 0;
-  iVar3 = param_2;
-  if (0 < param_2) {
+  copyIdx = 0;
+  remaining = len;
+  if (0 < len) {
     do {
-      yy_flex_allocResult[iVar1] = str[iVar1];
-      iVar1 = iVar1 + 1;
-      iVar3 = iVar3 + -1;
-    } while (iVar3 != 0);
+      yy_flex_allocResult[copyIdx] = bytes[copyIdx];
+      copyIdx = copyIdx + 1;
+      remaining = remaining + -1;
+    } while (remaining != 0);
   }
-  yy_flex_allocResult[param_2 + 1] = '\0';
-  yy_flex_allocResult[param_2] = '\0';
-  yy_scan_bufferResult = ((int (*)())yy_scan_buffer)(yy_flex_allocResult,param_2 + 2U);
+  yy_flex_allocResult[len + 1] = '\0';
+  yy_flex_allocResult[len] = '\0';
+  yy_scan_bufferResult = ((int (*)())yy_scan_buffer)(yy_flex_allocResult,len + 2U);
   if (yy_scan_bufferResult == 0) {
     ((int (*)())yy_fatal_error)("bad buffer in yy_scan_bytes()");
   }
@@ -146,13 +146,13 @@ int yy_flex_alloc(param_1)
 }
 
 /* yy_flex_realloc @ 0x97baddd4 (4 bytes) */
-int yy_flex_realloc(param_1, param_2)
-  void *param_1;
-  uint param_2;
+int yy_flex_realloc(ptr, newSize)
+  void *ptr;
+  uint newSize;
 {
                     
                     
-  return _realloc(param_1,param_2);
+  return _realloc(ptr,newSize);
 }
 
 /* yy_flex_free @ 0x97baddd8 (4 bytes) */
@@ -165,86 +165,86 @@ int yy_flex_free(param_1)
 }
 
 /* PaParseStrings @ 0x97badddc (452 bytes) */
-int PaParseStrings(str, param_2, param_3, param_4, parseContext)
-  char **str;
-  int *param_2;
-  int param_3;
-  int param_4;
+int PaParseStrings(shaderStrings, stringLengths, numStrings, freeSymbolsFlag, parseContext)
+  char **shaderStrings;
+  int *stringLengths;
+  int numStrings;
+  int freeSymbolsFlag;
   unsigned char * parseContext;
 {
-  undefined *puVar1;
-  undefined *puVar2;
-  int iVar3;
-  char **ppcVar4;
-  undefined4 uVar5;
-  undefined4 *puVar6;
-  undefined4 extraout_r4;
-  int iVar7;
-  unsigned char * pTVar8;
-  undefined4 in_r8;
-  int iVar9;
-  undefined4 in_r10;
-  int local_30 [4];
+  undefined *cppPtr;
+  undefined *cppPtr2;
+  int numStringsCopy;
+  char **stringPtr;
+  undefined4 result;
+  undefined4 *node;
+  undefined4 r4Out0;
+  int freeSymbolsFlagCopy;
+  unsigned char * parseContextCopy;
+  undefined4 staleR8;
+  int stringIdx;
+  undefined4 staleR10;
+  int defaultLength [4];
   
-  iVar3 = param_3;
-  iVar7 = param_4;
-  pTVar8 = parseContext;
-  _ScanFromString(*str);
-  uVar5 = 1;
+  numStringsCopy = numStrings;
+  freeSymbolsFlagCopy = freeSymbolsFlag;
+  parseContextCopy = parseContext;
+  _ScanFromString(*shaderStrings);
+  result = 1;
   *(unsigned char **)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) = parseContext;
-  if (param_3 != 0) {
-    iVar9 = 0;
-    ppcVar4 = str;
-    if (0 < param_3) {
+  if (numStrings != 0) {
+    stringIdx = 0;
+    stringPtr = shaderStrings;
+    if (0 < numStrings) {
       do {
-        if (*ppcVar4 == (char *)0x0) {
+        if (*stringPtr == (char *)0x0) {
           TParseContext__error
-                    ((int)parseContext,(char *)0x0,"Null shader source string","","",in_r8,iVar9,in_r10);
+                    ((int)parseContext,(char *)0x0,"Null shader source string","","",staleR8,stringIdx,staleR10);
           TParseContext__recover(parseContext);
           goto LAB_97badf80;
         }
-        iVar9 = iVar9 + 1;
-        ppcVar4 = ppcVar4 + 1;
-      } while (iVar9 < param_3);
+        stringIdx = stringIdx + 1;
+        stringPtr = stringPtr + 1;
+      } while (stringIdx < numStrings);
     }
-    if (param_2 == (int *)0x0) {
-      param_2 = local_30;
-      local_30[0] = _strlen(*str);
+    if (stringLengths == (int *)0x0) {
+      stringLengths = defaultLength;
+      defaultLength[0] = _strlen(*shaderStrings);
     }
     yyrestart((unsigned char *)0x0);
-    puVar1 = PTR__cpp_a7b7c0a4;
-    uVar5 = 0;
+    cppPtr = PTR__cpp_a7b7c0a4;
+    result = 0;
     *(undefined4 *)(parseContext + 0x60) = 0;
-    *(undefined4 *)(*(int *)puVar1 + 0x144) = 0;
-    *(char ***)(*(int *)puVar1 + 0x150) = str;
-    *(int *)(*(int *)puVar1 + 0x14c) = param_3;
-    *(int **)(*(int *)puVar1 + 0x148) = param_2;
-    *(undefined4 *)(*(int *)puVar1 + 0x28) = 0;
+    *(undefined4 *)(*(int *)cppPtr + 0x144) = 0;
+    *(char ***)(*(int *)cppPtr + 0x150) = shaderStrings;
+    *(int *)(*(int *)cppPtr + 0x14c) = numStrings;
+    *(int **)(*(int *)cppPtr + 0x148) = stringLengths;
+    *(undefined4 *)(*(int *)cppPtr + 0x28) = 0;
     _yylineno = 1;
-    if ((-1 < **(int **)(*(int *)puVar1 + 0x148)) &&
-       (((yyparse(parseContext,extraout_r4,iVar3,iVar7,pTVar8,in_r8,*(int **)(*(int *)puVar1 + 0x148),
-                  in_r10), puVar2 = PTR__cpp_a7b7c0a4, *(int *)(*(int *)puVar1 + 0x140) == 1 ||
-         (*(int *)(parseContext + 0x14) != 0)) || (uVar5 = 0, 0 < *(int *)(parseContext + 0x18))))) {
-      if (param_4 != 0) {
-        iVar3 = *(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20);
-        while (iVar3 != 0) {
-          iVar3 = *(int *)puVar2;
-          puVar6 = *(undefined4 **)(iVar3 + 0x20);
-          *(undefined4 *)(iVar3 + 0x20) = *puVar6;
-          _free(puVar6);
-          iVar3 = *(int *)(*(int *)puVar2 + 0x20);
+    if ((-1 < **(int **)(*(int *)cppPtr + 0x148)) &&
+       (((yyparse(parseContext,r4Out0,numStringsCopy,freeSymbolsFlagCopy,parseContextCopy,staleR8,*(int **)(*(int *)cppPtr + 0x148),
+                  staleR10), cppPtr2 = PTR__cpp_a7b7c0a4, *(int *)(*(int *)cppPtr + 0x140) == 1 ||
+         (*(int *)(parseContext + 0x14) != 0)) || (result = 0, 0 < *(int *)(parseContext + 0x18))))) {
+      if (freeSymbolsFlag != 0) {
+        numStringsCopy = *(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20);
+        while (numStringsCopy != 0) {
+          numStringsCopy = *(int *)cppPtr2;
+          node = *(undefined4 **)(numStringsCopy + 0x20);
+          *(undefined4 *)(numStringsCopy + 0x20) = *node;
+          _free(node);
+          numStringsCopy = *(int *)(*(int *)cppPtr2 + 0x20);
         }
       }
 LAB_97badf80:
-      uVar5 = 1;
+      result = 1;
     }
   }
-  return uVar5;
+  return result;
 }
 
 /* yyerror @ 0x97badfa0 (184 bytes) */
-int yyerror(str, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  char *str;
+int yyerror(msg, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+  char *msg;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
@@ -253,36 +253,36 @@ int yyerror(str, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   undefined4 param_7;
   undefined4 param_8;
 {
-  undefined *puVar1;
-  int iVar2;
-  char *pcVar3;
+  undefined *cppPtr;
+  int parseContext;
+  char *tokenText;
   
-  puVar1 = PTR__cpp_a7b7c0a4;
-  iVar2 = *(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c);
-  pcVar3 = _yytext;
-  if (*(int *)(iVar2 + 0x60) != 0) {
+  cppPtr = PTR__cpp_a7b7c0a4;
+  parseContext = *(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c);
+  tokenText = _yytext;
+  if (*(int *)(parseContext + 0x60) != 0) {
     if (-1 < *(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x154)) {
       return;
     }
-    pcVar3 = "pre-mature EOF";
+    tokenText = "pre-mature EOF";
   }
-  TParseContext__error(iVar2,_yylineno,"syntax error",pcVar3,str,"",param_7,param_8);
-  TParseContext__recover(*(unsigned char **)(*(int *)puVar1 + 0x2c));
+  TParseContext__error(parseContext,_yylineno,"syntax error",tokenText,msg,"",param_7,param_8);
+  TParseContext__recover(*(unsigned char **)(*(int *)cppPtr + 0x2c));
   return;
 }
 
 /* PaReservedWord @ 0x97bae058 (108 bytes) */
 int PaReservedWord()
 {
-  undefined *puVar1;
-  undefined4 in_r9;
-  undefined4 in_r10;
+  undefined *cppPtr;
+  undefined4 staleR9;
+  undefined4 staleR10;
   
-  puVar1 = PTR__cpp_a7b7c0a4;
+  cppPtr = PTR__cpp_a7b7c0a4;
   TParseContext__error
             (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c),_yylineno,"Reserved word.",_yytext,"","",
-             in_r9,in_r10);
-  return TParseContext__recover(*(unsigned char **)(*(int *)puVar1 + 0x2c));
+             staleR9,staleR10);
+  return TParseContext__recover(*(unsigned char **)(*(int *)cppPtr + 0x2c));
 }
 
 /* PaIdentOrType @ 0x97bae0c4 (228 bytes) */
@@ -291,78 +291,78 @@ int PaIdentOrType(text, parseContext, symbol)
   unsigned char * parseContext;
   unsigned char ** symbol;
 {
-  unsigned char * a0;
-  undefined4 uVar1;
+  unsigned char * foundSymbol;
+  undefined4 token;
   int iVar2;
-  int *piVar3;
-  int iVar4;
-  int local_30 [5];
+  int *symbolTable;
+  int levelIdx;
+  int findIter [5];
   
-  piVar3 = *(int **)(parseContext + 4);
-  iVar2 = *piVar3;
-  iVar4 = (piVar3[1] - iVar2 >> 2) + -1;
+  symbolTable = *(int **)(parseContext + 4);
+  iVar2 = *symbolTable;
+  levelIdx = (symbolTable[1] - iVar2 >> 2) + -1;
   while( true ) {
-    iVar2 = *(int *)(iVar2 + iVar4 * 4);
-    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______find((unsigned char *)local_30,iVar2,text);
-    a0 = (unsigned char *)0x0;
-    if (local_30[0] != *(int *)(iVar2 + 4)) {
-      a0 = *(unsigned char **)(local_30[0] + 0x18);
+    iVar2 = *(int *)(iVar2 + levelIdx * 4);
+    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______find((unsigned char *)findIter,iVar2,text);
+    foundSymbol = (unsigned char *)0x0;
+    if (findIter[0] != *(int *)(iVar2 + 4)) {
+      foundSymbol = *(unsigned char **)(findIter[0] + 0x18);
     }
-    iVar4 = iVar4 + -1;
-    if ((a0 != (unsigned char *)0x0) || (iVar4 < 0)) break;
-    iVar2 = *piVar3;
+    levelIdx = levelIdx + -1;
+    if ((foundSymbol != (unsigned char *)0x0) || (levelIdx < 0)) break;
+    iVar2 = *symbolTable;
   }
-  *symbol = a0;
-  if ((((*(int *)(parseContext + 0x1c) != 0) || (a0 == (unsigned char *)0x0)) ||
-      (iVar2 = (**(code **)(*(int *)a0 + 0x10))(a0), iVar2 == 0)) ||
+  *symbol = foundSymbol;
+  if ((((*(int *)(parseContext + 0x1c) != 0) || (foundSymbol == (unsigned char *)0x0)) ||
+      (iVar2 = (**(code **)(*(int *)foundSymbol + 0x10))(foundSymbol), iVar2 == 0)) ||
      (*(int *)(*symbol + 0x34) == 0)) {
-    uVar1 = 0x12a;
+    token = 0x12a;
   }
   else {
-    uVar1 = 299;
+    token = 299;
     *(undefined4 *)(parseContext + 0x1c) = 1;
   }
-  return uVar1;
+  return token;
 }
 
 /* PaParseComment @ 0x97bae1a8 (228 bytes) */
-int PaParseComment(param_1, parseContext)
-  int *param_1;
+int PaParseComment(lineCounter, parseContext)
+  int *lineCounter;
   unsigned char * parseContext;
 {
   int yyinputResult;
-  undefined4 in_r9;
-  undefined4 in_r10;
-  int iVar2;
+  undefined4 staleR9;
+  undefined4 staleR10;
+  int starState;
   
-  iVar2 = 0;
+  starState = 0;
   do {
     while( true ) {
       yyinputResult = yyinput();
       if (yyinputResult == 10) {
-        *param_1 = *param_1 + 1;
+        *lineCounter = *lineCounter + 1;
       }
       if (yyinputResult != 0x2a) break;
-      iVar2 = 1;
+      starState = 1;
     }
     if (yyinputResult < 0x2b) {
       if (yyinputResult == -1) {
         TParseContext__error
                   ((int)parseContext,_yylineno,"End of shader found before end of comment.","","","",
-                   in_r9,in_r10);
+                   staleR9,staleR10);
         TParseContext__recover(*(unsigned char **)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c));
         return 0;
       }
 LAB_97bae268:
-      iVar2 = 0;
+      starState = 0;
     }
     else {
       if (yyinputResult != 0x2f) goto LAB_97bae268;
-      if (iVar2 == 1) {
+      if (starState == 1) {
         return 1;
       }
     }
-    if (iVar2 == 2) {
+    if (starState == 2) {
       return 1;
     }
   } while( true );
@@ -431,8 +431,8 @@ int _CPPWarningToInfoLog(str)
 }
 
 /* _CPPShInfoLogMsg @ 0x97bae468 (100 bytes) */
-int _CPPShInfoLogMsg(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
+int _CPPShInfoLogMsg(msg, param_2, param_3, param_4, param_5, param_6, param_7)
+  undefined4 msg;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
@@ -440,18 +440,18 @@ int _CPPShInfoLogMsg(param_1, param_2, param_3, param_4, param_5, param_6, param
   undefined4 param_6;
   undefined4 param_7;
 {
-  undefined *puVar1;
-  undefined4 in_r10;
+  undefined *cppPtr;
+  undefined4 staleR10;
   
-  puVar1 = PTR__cpp_a7b7c0a4;
+  cppPtr = PTR__cpp_a7b7c0a4;
   TParseContext__error
-            (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c),_yylineno,"","",param_1,"",param_7,in_r10);
-  return TParseContext__recover(*(unsigned char **)(*(int *)puVar1 + 0x2c));
+            (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c),_yylineno,"","",msg,"",param_7,staleR10);
+  return TParseContext__recover(*(unsigned char **)(*(int *)cppPtr + 0x2c));
 }
 
 /* _CPPErrorToInfoLog @ 0x97bae4cc (104 bytes) */
-int _CPPErrorToInfoLog(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
+int _CPPErrorToInfoLog(msg, param_2, param_3, param_4, param_5, param_6, param_7)
+  undefined4 msg;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
@@ -459,14 +459,14 @@ int _CPPErrorToInfoLog(param_1, param_2, param_3, param_4, param_5, param_6, par
   undefined4 param_6;
   undefined4 param_7;
 {
-  undefined *puVar1;
-  undefined4 in_r10;
+  undefined *cppPtr;
+  undefined4 staleR10;
   
-  puVar1 = PTR__cpp_a7b7c0a4;
+  cppPtr = PTR__cpp_a7b7c0a4;
   TParseContext__error
-            (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c),_yylineno,"syntax error","",param_1,"",
-             param_7,in_r10);
-  return TParseContext__recover(*(unsigned char **)(*(int *)puVar1 + 0x2c));
+            (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c),_yylineno,"syntax error","",msg,"",
+             param_7,staleR10);
+  return TParseContext__recover(*(unsigned char **)(*(int *)cppPtr + 0x2c));
 }
 
 /* _SetLineNumber @ 0x97bae534 (44 bytes) */
@@ -518,117 +518,117 @@ int _DecLineNumber()
 }
 
 /* _HandlePragma @ 0x97bae634 (576 bytes) */
-int _HandlePragma(param_1, param_2)
-  undefined4 *param_1;
-  int param_2;
+int _HandlePragma(tokens, tokenCount)
+  undefined4 *tokens;
+  int tokenCount;
 {
   int compareResult;
-  char *pcVar2;
-  undefined4 extraout_r4;
-  undefined4 extraout_r4_00;
-  undefined4 extraout_r4_01;
-  undefined4 extraout_r4_02;
-  undefined4 extraout_r4_03;
-  undefined4 extraout_r4_04;
-  undefined4 extraout_r4_05;
-  undefined4 extraout_r4_06;
-  undefined4 uVar3;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  char *message;
+  undefined4 r4Out0;
+  undefined4 r4Out1;
+  undefined4 r4Out2;
+  undefined4 r4Out3;
+  undefined4 r4Out4;
+  undefined4 r4Out5;
+  undefined4 r4Out6;
+  undefined4 r4Out7;
+  undefined4 cmpLen;
+  undefined4 staleR6;
+  undefined4 staleR7;
+  undefined4 staleR8;
   int in_r9;
   undefined4 uVar4;
   
-  uVar4 = *param_1;
-  uVar3 = 9;
+  uVar4 = *tokens;
+  cmpLen = 9;
   compareResult = _memcmp(uVar4,"optimize",9);
   if (compareResult == 0) {
-    if (param_2 == 4) {
-      uVar3 = 2;
-      compareResult = _memcmp(param_1[1],"(",2);
+    if (tokenCount == 4) {
+      cmpLen = 2;
+      compareResult = _memcmp(tokens[1],"(",2);
       if (compareResult == 0) {
-        uVar4 = param_1[2];
+        uVar4 = tokens[2];
         compareResult = _memcmp(uVar4,"on",3);
         if (compareResult == 0) {
           in_r9 = *(int *)PTR__cpp_a7b7c0a4;
           *(undefined4 *)(*(int *)(in_r9 + 0x2c) + 0x40) = 1;
         }
         else {
-          uVar3 = 4;
+          cmpLen = 4;
           compareResult = _memcmp(uVar4,"off",4);
           if (compareResult != 0) {
-            pcVar2 = "\"on\" or \"off\" expected after \'(\' for \'optimize\' pragma";
-            uVar4 = extraout_r4_01;
+            message = "\"on\" or \"off\" expected after \'(\' for \'optimize\' pragma";
+            uVar4 = r4Out2;
             goto LAB_97bae84c;
           }
           in_r9 = *(int *)PTR__cpp_a7b7c0a4;
           *(undefined4 *)(*(int *)(in_r9 + 0x2c) + 0x40) = 0;
         }
-        uVar3 = 2;
-        compareResult = _memcmp(param_1[3],")",2);
+        cmpLen = 2;
+        compareResult = _memcmp(tokens[3],")",2);
         if (compareResult == 0) {
           return;
         }
-        pcVar2 = "\")\" expected to end \'optimize\' pragma";
-        uVar4 = extraout_r4_02;
+        message = "\")\" expected to end \'optimize\' pragma";
+        uVar4 = r4Out3;
       }
       else {
-        pcVar2 = "\"(\" expected after \'optimize\' keyword";
-        uVar4 = extraout_r4_00;
+        message = "\"(\" expected after \'optimize\' keyword";
+        uVar4 = r4Out1;
       }
     }
     else {
-      pcVar2 = "optimize pragma syntax is incorrect";
-      uVar4 = extraout_r4;
+      message = "optimize pragma syntax is incorrect";
+      uVar4 = r4Out0;
     }
   }
   else {
-    uVar3 = 6;
+    cmpLen = 6;
     compareResult = _memcmp(uVar4,"debug",6);
     if (compareResult != 0) {
       return;
     }
-    if (param_2 == 4) {
-      uVar3 = 2;
-      compareResult = _memcmp(param_1[1],"(",2);
+    if (tokenCount == 4) {
+      cmpLen = 2;
+      compareResult = _memcmp(tokens[1],"(",2);
       if (compareResult == 0) {
-        uVar4 = param_1[2];
+        uVar4 = tokens[2];
         compareResult = _memcmp(uVar4,"on",3);
         if (compareResult == 0) {
           in_r9 = *(int *)PTR__cpp_a7b7c0a4;
           *(undefined4 *)(*(int *)(in_r9 + 0x2c) + 0x44) = 1;
         }
         else {
-          uVar3 = 4;
+          cmpLen = 4;
           compareResult = _memcmp(uVar4,"off",4);
           if (compareResult != 0) {
-            pcVar2 = "\"on\" or \"off\" expected after \'(\' for \'debug\' pragma";
-            uVar4 = extraout_r4_05;
+            message = "\"on\" or \"off\" expected after \'(\' for \'debug\' pragma";
+            uVar4 = r4Out6;
             goto LAB_97bae84c;
           }
           in_r9 = *(int *)PTR__cpp_a7b7c0a4;
           *(undefined4 *)(*(int *)(in_r9 + 0x2c) + 0x44) = 0;
         }
-        uVar3 = 2;
-        compareResult = _memcmp(param_1[3],")",2);
+        cmpLen = 2;
+        compareResult = _memcmp(tokens[3],")",2);
         if (compareResult == 0) {
           return;
         }
-        pcVar2 = "\")\" expected to end \'debug\' pragma";
-        uVar4 = extraout_r4_06;
+        message = "\")\" expected to end \'debug\' pragma";
+        uVar4 = r4Out7;
       }
       else {
-        pcVar2 = "\"(\" expected after \'debug\' keyword";
-        uVar4 = extraout_r4_04;
+        message = "\"(\" expected after \'debug\' keyword";
+        uVar4 = r4Out5;
       }
     }
     else {
-      pcVar2 = "debug pragma syntax is incorrect";
-      uVar4 = extraout_r4_03;
+      message = "debug pragma syntax is incorrect";
+      uVar4 = r4Out4;
     }
   }
 LAB_97bae84c:
-  ((int (*)())_CPPShInfoLogMsg)(pcVar2,uVar4,uVar3,in_r6,in_r7,in_r8,in_r9);
+  ((int (*)())_CPPShInfoLogMsg)(message,uVar4,cmpLen,staleR6,staleR7,staleR8,in_r9);
   return;
 }
 
@@ -639,46 +639,46 @@ int _StoreStr(str)
   int *refCountPtr;
   int oldRefCount;
   int atomicStore;
-  int *piVar2;
-  int iVar3;
+  int *emptyRepRefCount;
+  int emptyRep;
   ulong length;
-  unsigned char * paVar5;
-  unsigned char * this;
+  unsigned char * destroyResult;
+  unsigned char * tokenString;
   char reservation;
   byte cr0Reg;
-  undefined4 local_c0;
-  int local_bc;
-  undefined4 local_b0;
-  undefined4 local_a0;
-  int local_9c;
-  undefined4 local_90 [4];
-  undefined4 local_80 [4];
-  undefined4 local_70;
-  int local_6c;
-  undefined4 local_60;
-  int local_5c;
-  undefined4 local_50 [4];
-  undefined4 local_40 [4];
-  undefined4 local_30 [7];
+  undefined4 newStrAlloc;
+  int newStrData;
+  undefined4 newStrAllocCopy;
+  undefined4 copyStrAlloc;
+  int copyStrData;
+  undefined4 ctorAlloc [4];
+  undefined4 copyDestroyAlloc [4];
+  undefined4 concatStrAlloc;
+  int concatStrData;
+  undefined4 accumStrAlloc;
+  int accumStrData;
+  undefined4 concatDestroyAlloc [4];
+  undefined4 accumDestroyAlloc [4];
+  undefined4 newDestroyAlloc [7];
   
-  iVar3 = DAT_a7b7baa8;
-  piVar2 = (int *)(DAT_a7b7baa8 + 8);
+  emptyRep = DAT_a7b7baa8;
+  emptyRepRefCount = (int *)(DAT_a7b7baa8 + 8);
   do {
     if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
-      *piVar2 = atomicStore;
+      atomicStore = storeWordConditionalIndexed(*emptyRepRefCount + 1,0,emptyRepRefCount);
+      *emptyRepRefCount = atomicStore;
       cr0Reg = 2;
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
-  local_c0 = GetGlobalPoolAllocator();
-  local_bc = iVar3 + 0xc;
-  local_b0 = local_c0;
-  local_90[0] = GetGlobalPoolAllocator();
+  newStrAlloc = GetGlobalPoolAllocator();
+  newStrData = emptyRep + 0xc;
+  newStrAllocCopy = newStrAlloc;
+  ctorAlloc[0] = GetGlobalPoolAllocator();
   __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-            ((unsigned char *)&local_a0,str,(unsigned char *)local_90);
-  __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_(&local_c0,(unsigned char *)&local_a0);
-  refCountPtr = (int *)(local_9c + -4);
-  local_80[0] = local_a0;
+            ((unsigned char *)&copyStrAlloc,str,(unsigned char *)ctorAlloc);
+  __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_(&newStrAlloc,(unsigned char *)&copyStrAlloc);
+  refCountPtr = (int *)(copyStrData + -4);
+  copyDestroyAlloc[0] = copyStrAlloc;
   do {
     oldRefCount = *refCountPtr;
     if (reservation != '\0') {
@@ -689,17 +689,17 @@ int _StoreStr(str)
   } while (!(bool)(cr0Reg >> 1 & 1));
   if (oldRefCount < 1) {
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-              ((unsigned char *)(local_9c + -0xc),local_80);
+              ((unsigned char *)(copyStrData + -0xc),copyDestroyAlloc);
   }
-  this = (unsigned char *)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) + 0x58);
-  __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_((unsigned char *)&local_60,this);
+  tokenString = (unsigned char *)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) + 0x58);
+  __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_((unsigned char *)&accumStrAlloc,tokenString);
   length = _strlen(" ");
-  __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm((unsigned char *)&local_60," ",length);
+  __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm((unsigned char *)&accumStrAlloc," ",length);
   __ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_ERKS7_S9_
-            ((unsigned char *)&local_70,(unsigned char *)&local_60,&local_c0);
-  __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_(this,(unsigned char *)&local_70);
-  refCountPtr = (int *)(local_6c + -4);
-  local_50[0] = local_70;
+            ((unsigned char *)&concatStrAlloc,(unsigned char *)&accumStrAlloc,&newStrAlloc);
+  __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_(tokenString,(unsigned char *)&concatStrAlloc);
+  refCountPtr = (int *)(concatStrData + -4);
+  concatDestroyAlloc[0] = concatStrAlloc;
   do {
     oldRefCount = *refCountPtr;
     if (reservation != '\0') {
@@ -710,10 +710,10 @@ int _StoreStr(str)
   } while (!(bool)(cr0Reg >> 1 & 1));
   if (oldRefCount < 1) {
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-              ((unsigned char *)(local_6c + -0xc),local_50);
+              ((unsigned char *)(concatStrData + -0xc),concatDestroyAlloc);
   }
-  refCountPtr = (int *)(local_5c + -4);
-  local_40[0] = local_60;
+  refCountPtr = (int *)(accumStrData + -4);
+  accumDestroyAlloc[0] = accumStrAlloc;
   do {
     oldRefCount = *refCountPtr;
     if (reservation != '\0') {
@@ -724,11 +724,11 @@ int _StoreStr(str)
   } while (!(bool)(cr0Reg >> 1 & 1));
   if (oldRefCount < 1) {
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-              ((unsigned char *)(local_5c + -0xc),local_40);
+              ((unsigned char *)(accumStrData + -0xc),accumDestroyAlloc);
   }
-  refCountPtr = (int *)(local_bc + -4);
-  paVar5 = (unsigned char *)(local_bc + -0xc);
-  local_30[0] = local_c0;
+  refCountPtr = (int *)(newStrData + -4);
+  destroyResult = (unsigned char *)(newStrData + -0xc);
+  newDestroyAlloc[0] = newStrAlloc;
   do {
     oldRefCount = *refCountPtr;
     if (reservation != '\0') {
@@ -738,61 +738,61 @@ int _StoreStr(str)
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
   if (oldRefCount < 1) {
-    paVar5 = (unsigned char *)
-             __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_(paVar5,local_30);
+    destroyResult = (unsigned char *)
+             __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_(destroyResult,newDestroyAlloc);
   }
-  return paVar5;
+  return destroyResult;
 }
 
 /* _GetStrfromTStr @ 0x97baea34 (80 bytes) */
 int _GetStrfromTStr()
 {
-  undefined *puVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
+  undefined *cppPtr;
+  int cpp;
+  int parseContext;
+  int tokenData;
   
-  puVar1 = PTR__cpp_a7b7c0a4;
-  iVar2 = *(int *)PTR__cpp_a7b7c0a4;
-  iVar3 = *(int *)(iVar2 + 0x2c);
-  iVar4 = *(int *)(iVar3 + 0x5c);
-  *(undefined1 *)(iVar4 + *(int *)(iVar4 + -0xc)) = *DAT_a7b7baa4;
-  *(undefined4 *)(iVar2 + 0x13c) = *(undefined4 *)(iVar3 + 0x5c);
-  return *(undefined4 *)(*(int *)puVar1 + 0x13c);
+  cppPtr = PTR__cpp_a7b7c0a4;
+  cpp = *(int *)PTR__cpp_a7b7c0a4;
+  parseContext = *(int *)(cpp + 0x2c);
+  tokenData = *(int *)(parseContext + 0x5c);
+  *(undefined1 *)(tokenData + *(int *)(tokenData + -0xc)) = *DAT_a7b7baa4;
+  *(undefined4 *)(cpp + 0x13c) = *(undefined4 *)(parseContext + 0x5c);
+  return *(undefined4 *)(*(int *)cppPtr + 0x13c);
 }
 
 /* _ResetTString @ 0x97baea84 (252 bytes) */
 int _ResetTString()
 {
-  int iVar1;
+  int parseContext;
   uint length;
-  char *pcVar3;
-  unsigned char * psVar4;
+  char *data;
+  unsigned char * result;
   
-  iVar1 = *(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c);
+  parseContext = *(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c);
   length = _strlen("");
   if (0x3ffffffc < length) {
     std____throw_length_error("basic_string::assign");
   }
-  pcVar3 = *(char **)(iVar1 + 0x5c);
-  if (((0 < *(int *)(pcVar3 + -4)) || ("" < pcVar3)) || (pcVar3 + *(int *)(pcVar3 + -0xc) < "")) {
-    psVar4 = __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE15_M_replace_safeIPKcEERS3_N9__gnu_cxx17__normal_iteratorIPcS3_EESB_T_SC_
-                       ((void *)(iVar1 + 0x58),pcVar3,pcVar3 + *(int *)(pcVar3 + -0xc),"","" + length
+  data = *(char **)(parseContext + 0x5c);
+  if (((0 < *(int *)(data + -4)) || ("" < data)) || (data + *(int *)(data + -0xc) < "")) {
+    result = __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE15_M_replace_safeIPKcEERS3_N9__gnu_cxx17__normal_iteratorIPcS3_EESB_T_SC_
+                       ((void *)(parseContext + 0x58),data,data + *(int *)(data + -0xc),"","" + length
                        );
-    return (char *)psVar4;
+    return (char *)result;
   }
-  if ((uint)((int)"" - (int)pcVar3) < length) {
-    if (pcVar3 == "") goto LAB_97baeb5c;
-    _memmove(pcVar3,"",length);
+  if ((uint)((int)"" - (int)data) < length) {
+    if (data == "") goto LAB_97baeb5c;
+    _memmove(data,"",length);
   }
   else {
-    _memcpy(pcVar3,"",length);
+    _memcpy(data,"",length);
   }
-  pcVar3 = *(char **)(iVar1 + 0x5c);
+  data = *(char **)(parseContext + 0x5c);
 LAB_97baeb5c:
-  *(uint *)(pcVar3 + -0xc) = length;
-  *(undefined1 *)(*(int *)(iVar1 + 0x5c) + length) = 0;
-  return pcVar3;
+  *(uint *)(data + -0xc) = length;
+  *(undefined1 *)(*(int *)(parseContext + 0x5c) + length) = 0;
+  return data;
 }
 
 /* _GetBehavior @ 0x97baeb80 (484 bytes) */
@@ -800,58 +800,58 @@ int _GetBehavior(str)
   char *str;
 {
   int compareResult;
-  byte bVar1;
+  byte terminator;
   int atomicStore;
   int *refCountPtr;
   int oldRefCount;
-  undefined4 uVar5;
+  undefined4 behavior;
   ulong length;
-  undefined4 extraout_r4;
+  undefined4 r4Out0;
   undefined4 in_r6;
   undefined4 in_r7;
   undefined4 in_r8;
   char reservation;
   byte cr0Reg;
-  undefined4 local_80;
-  int local_7c;
-  undefined4 local_70;
-  int local_6c;
-  undefined4 local_60;
-  int local_5c;
-  undefined4 local_50 [4];
-  undefined4 local_40 [4];
-  undefined4 local_30 [4];
-  undefined4 local_20 [4];
+  undefined4 fullStrAlloc;
+  int fullStrData;
+  undefined4 catStrAlloc;
+  int catStrData;
+  undefined4 prefixStrAlloc;
+  int prefixStrData;
+  undefined4 prefixCtorAlloc [4];
+  undefined4 fullDestroyAlloc [4];
+  undefined4 catDestroyAlloc [4];
+  undefined4 prefixDestroyAlloc [4];
   
   compareResult = _memcmp("require",str,8);
-  uVar5 = 0;
+  behavior = 0;
   if (compareResult != 0) {
     compareResult = _memcmp("enable",str,7);
-    uVar5 = 1;
+    behavior = 1;
     if (compareResult != 0) {
       compareResult = _memcmp("disable",str,8);
-      uVar5 = 3;
+      behavior = 3;
       if (compareResult != 0) {
         compareResult = _memcmp("warn",str,5);
-        uVar5 = 2;
+        behavior = 2;
         if (compareResult != 0) {
-          local_50[0] = GetGlobalPoolAllocator();
+          prefixCtorAlloc[0] = GetGlobalPoolAllocator();
           __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-                    ((unsigned char *)&local_60,"behavior \'",(unsigned char *)local_50);
+                    ((unsigned char *)&prefixStrAlloc,"behavior \'",(unsigned char *)prefixCtorAlloc);
           __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_
-                    ((unsigned char *)&local_70,(unsigned char *)&local_60);
+                    ((unsigned char *)&catStrAlloc,(unsigned char *)&prefixStrAlloc);
           length = _strlen(str);
           __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm
-                    ((unsigned char *)&local_70,str,length);
-          __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&local_80,(unsigned char *)&local_70);
+                    ((unsigned char *)&catStrAlloc,str,length);
+          __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&fullStrAlloc,(unsigned char *)&catStrAlloc);
           length = _strlen("\' is not supported");
           __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm
-                    (&local_80,"\' is not supported",length);
-          bVar1 = *DAT_a7b7baa4;
-          *(byte *)(local_7c + *(int *)(local_7c + -0xc)) = bVar1;
-          ((int (*)())_CPPShInfoLogMsg)(local_7c,extraout_r4,length,in_r6,in_r7,in_r8,(uint)bVar1);
-          refCountPtr = (int *)(local_7c + -4);
-          local_40[0] = local_80;
+                    (&fullStrAlloc,"\' is not supported",length);
+          terminator = *DAT_a7b7baa4;
+          *(byte *)(fullStrData + *(int *)(fullStrData + -0xc)) = terminator;
+          ((int (*)())_CPPShInfoLogMsg)(fullStrData,r4Out0,length,in_r6,in_r7,in_r8,(uint)terminator);
+          refCountPtr = (int *)(fullStrData + -4);
+          fullDestroyAlloc[0] = fullStrAlloc;
           do {
             oldRefCount = *refCountPtr;
             if (reservation != '\0') {
@@ -862,10 +862,10 @@ int _GetBehavior(str)
           } while (!(bool)(cr0Reg >> 1 & 1));
           if (oldRefCount < 1) {
             __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                      ((unsigned char *)(local_7c + -0xc),local_40);
+                      ((unsigned char *)(fullStrData + -0xc),fullDestroyAlloc);
           }
-          refCountPtr = (int *)(local_6c + -4);
-          local_30[0] = local_70;
+          refCountPtr = (int *)(catStrData + -4);
+          catDestroyAlloc[0] = catStrAlloc;
           do {
             oldRefCount = *refCountPtr;
             if (reservation != '\0') {
@@ -876,10 +876,10 @@ int _GetBehavior(str)
           } while (!(bool)(cr0Reg >> 1 & 1));
           if (oldRefCount < 1) {
             __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                      ((unsigned char *)(local_6c + -0xc),local_30);
+                      ((unsigned char *)(catStrData + -0xc),catDestroyAlloc);
           }
-          refCountPtr = (int *)(local_5c + -4);
-          local_20[0] = local_60;
+          refCountPtr = (int *)(prefixStrData + -4);
+          prefixDestroyAlloc[0] = prefixStrAlloc;
           do {
             oldRefCount = *refCountPtr;
             if (reservation != '\0') {
@@ -890,106 +890,106 @@ int _GetBehavior(str)
           } while (!(bool)(cr0Reg >> 1 & 1));
           if (oldRefCount < 1) {
             __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                      ((unsigned char *)(local_5c + -0xc),local_20);
+                      ((unsigned char *)(prefixStrData + -0xc),prefixDestroyAlloc);
           }
-          uVar5 = 3;
+          behavior = 3;
         }
       }
     }
   }
-  return uVar5;
+  return behavior;
 }
 
 /* _updateExtensionBehavior @ 0x97baed64 (1124 bytes) */
-int _updateExtensionBehavior(param_1, str)
-  char *param_1;
-  undefined4 str;
+int _updateExtensionBehavior(extensionName, behaviorName)
+  char *extensionName;
+  undefined4 behaviorName;
 {
   int *refCountPtr;
   int oldRefCount;
   uint behavior2;
   int compareResult;
-  byte bVar1;
+  byte terminator;
   int atomicStore;
-  undefined *puVar3;
-  char *pcVar4;
-  int *piVar5;
-  uint uVar6;
+  undefined *cppPtr;
+  char *msgText;
+  int *emptyRepRefCount;
+  uint lineNo;
   int iVar7;
   ulong length;
-  undefined4 extraout_r4;
-  undefined4 extraout_r4_00;
-  undefined4 *puVar9;
+  undefined4 r4Out0;
+  undefined4 r4Out1;
+  undefined4 *destroyAllocPtr;
   undefined4 uVar10;
   undefined4 in_r6;
-  uint a1;
+  uint column;
   undefined4 in_r7;
   undefined4 in_r8;
   undefined4 in_r9;
-  void *this;
+  void *infoSink;
   char reservation;
   byte cr0Reg;
-  int local_1f0 [4];
-  undefined4 local_1e0;
-  char *local_1dc;
-  undefined4 local_1d0;
+  int extIter [4];
+  undefined4 msgStrAlloc;
+  char *msgStrData;
+  undefined4 msgAllocCopy;
   int local_1c0;
-  int local_1b0;
-  int local_1a0 [4];
-  undefined4 local_190;
-  int local_18c;
-  undefined4 local_180 [4];
-  undefined4 local_170 [4];
-  int local_160;
-  char *local_150;
-  int local_14c;
-  undefined4 local_140;
-  int local_13c;
-  undefined4 local_130;
-  int local_12c;
-  undefined4 local_120 [4];
-  char *local_110 [4];
-  undefined4 local_100 [4];
-  undefined4 local_f0 [4];
-  undefined4 local_e0;
-  int local_dc;
-  undefined4 local_d0 [4];
-  char *local_c0 [4];
-  undefined4 local_b0 [4];
-  undefined4 local_a0 [4];
-  char acStack_90 [64];
-  undefined4 local_50 [4];
-  undefined4 local_40 [4];
-  undefined4 local_30 [5];
+  int endNodeAll;
+  int findIter [4];
+  undefined4 keyStrAlloc;
+  int keyStrData;
+  undefined4 keyCtorAlloc [4];
+  undefined4 keyDestroyAlloc [4];
+  int endNodeFind;
+  char *fullStrAlloc;
+  int fullStrData;
+  undefined4 catStrAlloc;
+  int catStrData;
+  undefined4 errPrefixStrAlloc;
+  int errPrefixStrData;
+  undefined4 errPrefixCtorAlloc [4];
+  char *errFullDestroyAlloc [4];
+  undefined4 errCatDestroyAlloc [4];
+  undefined4 errPrefixDestroyAlloc [4];
+  undefined4 warnPrefixStrAlloc;
+  int warnPrefixStrData;
+  undefined4 warnPrefixCtorAlloc [4];
+  char *warnFullDestroyAlloc [4];
+  undefined4 warnCatDestroyAlloc [4];
+  undefined4 warnPrefixDestroyAlloc [4];
+  char lineText [64];
+  undefined4 msgDestroyAllocAll [4];
+  undefined4 msgDestroyAllocFound [4];
+  undefined4 msgDestroyAllocErr [5];
   
-  behavior2 = ((int (*)())_GetBehavior)(str);
+  behavior2 = ((int (*)())_GetBehavior)(behaviorName);
   iVar7 = DAT_a7b7baa8;
-  piVar5 = (int *)(DAT_a7b7baa8 + 8);
+  emptyRepRefCount = (int *)(DAT_a7b7baa8 + 8);
   do {
     if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(*piVar5 + 1,0,piVar5);
-      *piVar5 = atomicStore;
+      atomicStore = storeWordConditionalIndexed(*emptyRepRefCount + 1,0,emptyRepRefCount);
+      *emptyRepRefCount = atomicStore;
       cr0Reg = 2;
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
-  local_1e0 = GetGlobalPoolAllocator();
-  local_1dc = (char *)(iVar7 + 0xc);
+  msgStrAlloc = GetGlobalPoolAllocator();
+  msgStrData = (char *)(iVar7 + 0xc);
   uVar10 = 4;
-  local_1d0 = local_1e0;
-  compareResult = _memcmp(param_1,"all",4);
-  puVar3 = PTR__cpp_a7b7c0a4;
+  msgAllocCopy = msgStrAlloc;
+  compareResult = _memcmp(extensionName,"all",4);
+  cppPtr = PTR__cpp_a7b7c0a4;
   if (compareResult == 0) {
     if (1 < behavior2) {
-      local_1f0[0] = *(int *)(*(int *)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) + 0x34) + 8);
-      local_1c0 = local_1f0[0];
-      while (local_1b0 = *(int *)(*(int *)(*(int *)puVar3 + 0x2c) + 0x34), local_1f0[0] != local_1b0
+      extIter[0] = *(int *)(*(int *)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) + 0x34) + 8);
+      local_1c0 = extIter[0];
+      while (endNodeAll = *(int *)(*(int *)(*(int *)cppPtr + 0x2c) + 0x34), extIter[0] != endNodeAll
             ) {
-        *(uint *)(local_1f0[0] + 0x18) = behavior2;
-        std___Rb_tree_base_iterator___M_increment((unsigned char *)local_1f0);
+        *(uint *)(extIter[0] + 0x18) = behavior2;
+        std___Rb_tree_base_iterator___M_increment((unsigned char *)extIter);
       }
 LAB_97baf31c:
-      refCountPtr = (int *)(local_1dc + -4);
-      local_50[0] = local_1e0;
+      refCountPtr = (int *)(msgStrData + -4);
+      msgDestroyAllocAll[0] = msgStrAlloc;
       do {
         oldRefCount = *refCountPtr;
         if (reservation != '\0') {
@@ -1001,13 +1001,13 @@ LAB_97baf31c:
       if (0 < oldRefCount) {
         return;
       }
-      puVar9 = local_50;
+      destroyAllocPtr = msgDestroyAllocAll;
       goto code_r0x97baf34c;
     }
-    ((int (*)())_CPPShInfoLogMsg)("extension \'all\' cannot have \'require\' or \'enable\' behavior",extraout_r4,
+    ((int (*)())_CPPShInfoLogMsg)("extension \'all\' cannot have \'require\' or \'enable\' behavior",r4Out0,
                      uVar10,in_r6,in_r7,in_r8,in_r9);
-    refCountPtr = (int *)(local_1dc + -4);
-    local_30[0] = local_1e0;
+    refCountPtr = (int *)(msgStrData + -4);
+    msgDestroyAllocErr[0] = msgStrAlloc;
     do {
       oldRefCount = *refCountPtr;
       if (reservation != '\0') {
@@ -1016,17 +1016,17 @@ LAB_97baf31c:
         cr0Reg = 2;
       }
     } while (!(bool)(cr0Reg >> 1 & 1));
-    puVar9 = local_30;
+    destroyAllocPtr = msgDestroyAllocErr;
   }
   else {
     iVar7 = *(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c);
-    local_180[0] = GetGlobalPoolAllocator();
+    keyCtorAlloc[0] = GetGlobalPoolAllocator();
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-              (&local_190,param_1,(unsigned char *)local_180);
-    std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior_____find((unsigned char *)local_1a0,iVar7 + 0x30,&local_190);
-    local_1f0[0] = local_1a0[0];
-    refCountPtr = (int *)(local_18c + -4);
-    local_170[0] = local_190;
+              (&keyStrAlloc,extensionName,(unsigned char *)keyCtorAlloc);
+    std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior_____find((unsigned char *)findIter,iVar7 + 0x30,&keyStrAlloc);
+    extIter[0] = findIter[0];
+    refCountPtr = (int *)(keyStrData + -4);
+    keyDestroyAlloc[0] = keyStrAlloc;
     do {
       oldRefCount = *refCountPtr;
       if (reservation != '\0') {
@@ -1037,31 +1037,31 @@ LAB_97baf31c:
     } while (!(bool)(cr0Reg >> 1 & 1));
     if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_18c + -0xc),local_170);
+                ((unsigned char *)(keyStrData + -0xc),keyDestroyAlloc);
     }
-    local_160 = *(int *)(*(int *)(*(int *)puVar3 + 0x2c) + 0x34);
-    if (local_1f0[0] != local_160) {
-      *(uint *)(local_1f0[0] + 0x18) = behavior2;
+    endNodeFind = *(int *)(*(int *)(*(int *)cppPtr + 0x2c) + 0x34);
+    if (extIter[0] != endNodeFind) {
+      *(uint *)(extIter[0] + 0x18) = behavior2;
       goto LAB_97baf31c;
     }
     if (behavior2 == 0) {
-      local_120[0] = GetGlobalPoolAllocator();
+      errPrefixCtorAlloc[0] = GetGlobalPoolAllocator();
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-                ((unsigned char *)&local_130,"extension \'",(unsigned char *)local_120);
+                ((unsigned char *)&errPrefixStrAlloc,"extension \'",(unsigned char *)errPrefixCtorAlloc);
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_
-                ((unsigned char *)&local_140,(unsigned char *)&local_130);
-      length = _strlen(param_1);
-      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm((unsigned char *)&local_140,param_1,length)
+                ((unsigned char *)&catStrAlloc,(unsigned char *)&errPrefixStrAlloc);
+      length = _strlen(extensionName);
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm((unsigned char *)&catStrAlloc,extensionName,length)
       ;
-      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&local_150,(unsigned char *)&local_140);
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&fullStrAlloc,(unsigned char *)&catStrAlloc);
       length = _strlen("\' is not supported");
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm
-                (&local_150,"\' is not supported",length);
-      bVar1 = *DAT_a7b7baa4;
-      *(byte *)(local_14c + *(int *)(local_14c + -0xc)) = bVar1;
-      ((int (*)())_CPPShInfoLogMsg)(local_14c,extraout_r4_00,length,in_r6,in_r7,in_r8,(uint)bVar1);
-      refCountPtr = (int *)(local_14c + -4);
-      local_110[0] = local_150;
+                (&fullStrAlloc,"\' is not supported",length);
+      terminator = *DAT_a7b7baa4;
+      *(byte *)(fullStrData + *(int *)(fullStrData + -0xc)) = terminator;
+      ((int (*)())_CPPShInfoLogMsg)(fullStrData,r4Out1,length,in_r6,in_r7,in_r8,(uint)terminator);
+      refCountPtr = (int *)(fullStrData + -4);
+      errFullDestroyAlloc[0] = fullStrAlloc;
       do {
         oldRefCount = *refCountPtr;
         if (reservation != '\0') {
@@ -1072,10 +1072,10 @@ LAB_97baf31c:
       } while (!(bool)(cr0Reg >> 1 & 1));
       if (oldRefCount < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                  ((unsigned char *)(local_14c + -0xc),local_110);
+                  ((unsigned char *)(fullStrData + -0xc),errFullDestroyAlloc);
       }
-      refCountPtr = (int *)(local_13c + -4);
-      local_100[0] = local_140;
+      refCountPtr = (int *)(catStrData + -4);
+      errCatDestroyAlloc[0] = catStrAlloc;
       do {
         oldRefCount = *refCountPtr;
         if (reservation != '\0') {
@@ -1086,10 +1086,10 @@ LAB_97baf31c:
       } while (!(bool)(cr0Reg >> 1 & 1));
       if (oldRefCount < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                  ((unsigned char *)(local_13c + -0xc),local_100);
+                  ((unsigned char *)(catStrData + -0xc),errCatDestroyAlloc);
       }
-      refCountPtr = (int *)(local_12c + -4);
-      local_f0[0] = local_130;
+      refCountPtr = (int *)(errPrefixStrData + -4);
+      errPrefixDestroyAlloc[0] = errPrefixStrAlloc;
       do {
         oldRefCount = *refCountPtr;
         if (reservation != '\0') {
@@ -1100,26 +1100,26 @@ LAB_97baf31c:
       } while (!(bool)(cr0Reg >> 1 & 1));
       if (oldRefCount < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                  ((unsigned char *)(local_12c + -0xc),local_f0);
+                  ((unsigned char *)(errPrefixStrData + -0xc),errPrefixDestroyAlloc);
       }
     }
     else if ((-1 < (int)behavior2) && ((int)behavior2 < 4)) {
-      local_d0[0] = GetGlobalPoolAllocator();
+      warnPrefixCtorAlloc[0] = GetGlobalPoolAllocator();
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-                ((unsigned char *)&local_e0,"extension \'",(unsigned char *)local_d0);
+                ((unsigned char *)&warnPrefixStrAlloc,"extension \'",(unsigned char *)warnPrefixCtorAlloc);
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_
-                ((unsigned char *)&local_140,(unsigned char *)&local_e0);
-      length = _strlen(param_1);
-      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm((unsigned char *)&local_140,param_1,length)
+                ((unsigned char *)&catStrAlloc,(unsigned char *)&warnPrefixStrAlloc);
+      length = _strlen(extensionName);
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm((unsigned char *)&catStrAlloc,extensionName,length)
       ;
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_
-                ((unsigned char *)&local_150,(unsigned char *)&local_140);
+                ((unsigned char *)&fullStrAlloc,(unsigned char *)&catStrAlloc);
       length = _strlen("\' is not supported");
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm
-                ((unsigned char *)&local_150,"\' is not supported",length);
-      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_(&local_1e0,(unsigned char *)&local_150);
-      refCountPtr = (int *)(local_14c + -4);
-      local_c0[0] = local_150;
+                ((unsigned char *)&fullStrAlloc,"\' is not supported",length);
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_(&msgStrAlloc,(unsigned char *)&fullStrAlloc);
+      refCountPtr = (int *)(fullStrData + -4);
+      warnFullDestroyAlloc[0] = fullStrAlloc;
       do {
         oldRefCount = *refCountPtr;
         if (reservation != '\0') {
@@ -1130,10 +1130,10 @@ LAB_97baf31c:
       } while (!(bool)(cr0Reg >> 1 & 1));
       if (oldRefCount < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                  ((unsigned char *)(local_14c + -0xc),local_c0);
+                  ((unsigned char *)(fullStrData + -0xc),warnFullDestroyAlloc);
       }
-      refCountPtr = (int *)(local_13c + -4);
-      local_b0[0] = local_140;
+      refCountPtr = (int *)(catStrData + -4);
+      warnCatDestroyAlloc[0] = catStrAlloc;
       do {
         oldRefCount = *refCountPtr;
         if (reservation != '\0') {
@@ -1144,10 +1144,10 @@ LAB_97baf31c:
       } while (!(bool)(cr0Reg >> 1 & 1));
       if (oldRefCount < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                  ((unsigned char *)(local_13c + -0xc),local_b0);
+                  ((unsigned char *)(catStrData + -0xc),warnCatDestroyAlloc);
       }
-      refCountPtr = (int *)(local_dc + -4);
-      local_a0[0] = local_e0;
+      refCountPtr = (int *)(warnPrefixStrData + -4);
+      warnPrefixDestroyAlloc[0] = warnPrefixStrAlloc;
       do {
         oldRefCount = *refCountPtr;
         if (reservation != '\0') {
@@ -1158,27 +1158,27 @@ LAB_97baf31c:
       } while (!(bool)(cr0Reg >> 1 & 1));
       if (oldRefCount < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                  ((unsigned char *)(local_dc + -0xc),local_a0);
+                  ((unsigned char *)(warnPrefixStrData + -0xc),warnPrefixDestroyAlloc);
       }
-      pcVar4 = local_1dc;
-      this = *(void **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) + 8);
-      local_1dc[*(int *)(local_1dc + -0xc)] = *DAT_a7b7baa4;
-      uVar6 = _yylineno;
+      msgText = msgStrData;
+      infoSink = *(void **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) + 8);
+      msgStrData[*(int *)(msgStrData + -0xc)] = *DAT_a7b7baa4;
+      lineNo = _yylineno;
                     
-      __ZN13TInfoSinkBase6appendEPKc(this,"WARNING: ");
-      a1 = uVar6 & 0xffff;
-      cr0Reg = (a1 == 0) << 1;
-      iVar7 = (int)uVar6 >> 0x10;
-      if (a1 == 0) {
-        _sprintf(acStack_90,"%d:? ",iVar7);
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,"WARNING: ");
+      column = lineNo & 0xffff;
+      cr0Reg = (column == 0) << 1;
+      iVar7 = (int)lineNo >> 0x10;
+      if (column == 0) {
+        _sprintf(lineText,"%d:? ",iVar7);
       }
       else {
-        _sprintf(acStack_90,"%d:%d",iVar7,a1);
+        _sprintf(lineText,"%d:%d",iVar7,column);
       }
-      __ZNSsC1EPKcRKSaIcE((unsigned char *)&local_150,acStack_90,(unsigned char *)&local_140);
-      local_150[*(int *)(local_150 + -0xc)] = *PTR__S_terminal_a7b7c0b8;
-      __ZN13TInfoSinkBase6appendEPKc(this,local_150);
-      refCountPtr = (int *)(local_150 + -4);
+      __ZNSsC1EPKcRKSaIcE((unsigned char *)&fullStrAlloc,lineText,(unsigned char *)&catStrAlloc);
+      fullStrAlloc[*(int *)(fullStrAlloc + -0xc)] = *PTR__S_terminal_a7b7c0b8;
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,fullStrAlloc);
+      refCountPtr = (int *)(fullStrAlloc + -4);
       do {
         oldRefCount = *refCountPtr;
         if (reservation != '\0') {
@@ -1188,14 +1188,14 @@ LAB_97baf31c:
         }
       } while (!(bool)(cr0Reg >> 1 & 1));
       if (oldRefCount < 1) {
-        __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_150 + -0xc));
+        __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(fullStrAlloc + -0xc));
       }
-      __ZN13TInfoSinkBase6appendEPKc(this,": ");
-      __ZN13TInfoSinkBase6appendEPKc(this,pcVar4);
-      __ZN13TInfoSinkBase6appendEPKc(this,"\n");
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,msgText);
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
     }
-    refCountPtr = (int *)(local_1dc + -4);
-    local_40[0] = local_1e0;
+    refCountPtr = (int *)(msgStrData + -4);
+    msgDestroyAllocFound[0] = msgStrAlloc;
     do {
       oldRefCount = *refCountPtr;
       if (reservation != '\0') {
@@ -1204,14 +1204,14 @@ LAB_97baf31c:
         cr0Reg = 2;
       }
     } while (!(bool)(cr0Reg >> 1 & 1));
-    puVar9 = local_40;
+    destroyAllocPtr = msgDestroyAllocFound;
   }
   if (0 < oldRefCount) {
     return;
   }
 code_r0x97baf34c:
   __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-            ((unsigned char *)(local_1dc + -0xc),puVar9);
+            ((unsigned char *)(msgStrData + -0xc),destroyAllocPtr);
   return;
 }
 
@@ -1244,454 +1244,454 @@ int scpy(str1, str2)
 }
 
 /* handleDigit @ 0x97baf3b8 (112 bytes) */
-int handleDigit(str, param_2)
-  char **str;
-  int param_2;
+int handleDigit(outPtr, value)
+  char **outPtr;
+  int value;
 {
-  int iVar1;
+  int quotient;
   
-  iVar1 = param_2 / 10;
-  if (iVar1 != 0) {
-    ((int (*)())handleDigit)(str,iVar1);
+  quotient = value / 10;
+  if (quotient != 0) {
+    ((int (*)())handleDigit)(outPtr,quotient);
   }
-  **str = (char)param_2 + (char)iVar1 * -10 + '0';
-  *str = *str + 1;
+  **outPtr = (char)value + (char)quotient * -10 + '0';
+  *outPtr = *outPtr + 1;
   return;
 }
 
 /* ncpy @ 0x97baf428 (88 bytes) */
-int ncpy(str, param_2)
-  char *str;
-  int param_2;
+int ncpy(out, value)
+  char *out;
+  int value;
 {
-  char *local_20 [6];
+  char *cursor [6];
   
-  local_20[0] = str;
-  if (param_2 < 0) {
-    local_20[0] = str + 1;
-    *str = '-';
-    param_2 = -param_2;
+  cursor[0] = out;
+  if (value < 0) {
+    cursor[0] = out + 1;
+    *out = '-';
+    value = -value;
   }
-  ((int (*)())handleDigit)(local_20,param_2);
-  return (int)local_20[0] - (int)str;
+  ((int (*)())handleDigit)(cursor,value);
+  return (int)cursor[0] - (int)out;
 }
 
 /* PrintAttribute @ 0x97baf480 (456 bytes) */
-int PrintAttribute(_PPStreamToken, param_2)
+int PrintAttribute(_PPStreamToken, ordinalIn)
   uint _PPStreamToken;
-  uint param_2;
+  uint ordinalIn;
 {
-  uint uVar1;
+  uint indexValue;
   char *allocation;
   int copyEnd;
-  char *pcVar4;
-  char *pcVar5;
-  uint uStack00000018;
-  uint uStack0000001c;
+  char *label;
+  char *writePtr;
+  uint bindingWord;
+  uint ordinal;
   
-  uStack00000018 = _PPStreamToken;
-  uStack0000001c = param_2;
+  bindingWord = _PPStreamToken;
+  ordinal = ordinalIn;
   allocation = (char *)_malloc(0x100);
-  copyEnd = ((int (*)())ncpy)(allocation,uStack0000001c & 0xffff);
-  pcVar5 = allocation + copyEnd;
-  switch(uStack00000018 >> 0x10 & 0xf) {
+  copyEnd = ((int (*)())ncpy)(allocation,ordinal & 0xffff);
+  writePtr = allocation + copyEnd;
+  switch(bindingWord >> 0x10 & 0xf) {
   case 0:
-    pcVar4 = ": PP_BIND_ATTRIB_NONE";
+    label = ": PP_BIND_ATTRIB_NONE";
     break;
   case 1:
-    pcVar4 = ": PP_BIND_ATTRIB_POSITION";
+    label = ": PP_BIND_ATTRIB_POSITION";
     break;
   case 2:
-    pcVar4 = ": PP_BIND_ATTRIB_COLOR";
+    label = ": PP_BIND_ATTRIB_COLOR";
     break;
   case 3:
-    pcVar4 = ": PP_BIND_ATTRIB_SEC_COLOR";
+    label = ": PP_BIND_ATTRIB_SEC_COLOR";
     break;
   case 4:
-    pcVar4 = ": PP_BIND_ATTRIB_NORMAL";
+    label = ": PP_BIND_ATTRIB_NORMAL";
     break;
   case 5:
-    pcVar4 = ": PP_BIND_ATTRIB_FOG_COORD";
+    label = ": PP_BIND_ATTRIB_FOG_COORD";
     break;
   case 6:
-    pcVar4 = ": PP_BIND_ATTRIB_WEIGHT:";
+    label = ": PP_BIND_ATTRIB_WEIGHT:";
     goto LAB_97baf584;
   case 7:
-    pcVar4 = ": PP_BIND_ATTRIB_TEX_COORD:";
+    label = ": PP_BIND_ATTRIB_TEX_COORD:";
     goto LAB_97baf584;
   case 8:
-    pcVar4 = ": PP_BIND_ATTRIB_MATRIX_INDICES:";
+    label = ": PP_BIND_ATTRIB_MATRIX_INDICES:";
     goto LAB_97baf584;
   case 9:
-    pcVar4 = ": PP_BIND_ATTRIB_ATTRIB:";
+    label = ": PP_BIND_ATTRIB_ATTRIB:";
 LAB_97baf584:
-    copyEnd = ((int (*)())scpy)(pcVar5,pcVar4);
-    pcVar5 = pcVar5 + copyEnd;
-    uVar1 = uStack00000018 & 0x1f;
+    copyEnd = ((int (*)())scpy)(writePtr,label);
+    writePtr = writePtr + copyEnd;
+    indexValue = bindingWord & 0x1f;
 LAB_97baf658:
-    copyEnd = ((int (*)())ncpy)(pcVar5,uVar1);
+    copyEnd = ((int (*)())ncpy)(writePtr,indexValue);
     goto LAB_97baf660;
   case 10:
-    copyEnd = ((int (*)())scpy)(pcVar5,"PP_BIND_ATTRIB_MATERIAL:");
-    pcVar5 = pcVar5 + copyEnd;
-    switch(uStack00000018 >> 0xc & 0xf) {
+    copyEnd = ((int (*)())scpy)(writePtr,"PP_BIND_ATTRIB_MATERIAL:");
+    writePtr = writePtr + copyEnd;
+    switch(bindingWord >> 0xc & 0xf) {
     case 0:
-      pcVar4 = "PP_ATTRIB_MATERIAL_AMBIENT:";
+      label = "PP_ATTRIB_MATERIAL_AMBIENT:";
       break;
     case 1:
-      pcVar4 = "PP_ATTRIB_MATERIAL_DIFFUSE:";
+      label = "PP_ATTRIB_MATERIAL_DIFFUSE:";
       break;
     case 2:
-      pcVar4 = "PP_ATTRIB_MATERIAL_SPECULAR:";
+      label = "PP_ATTRIB_MATERIAL_SPECULAR:";
       break;
     case 3:
-      pcVar4 = "PP_ATTRIB_MATERIAL_EMISSION:";
+      label = "PP_ATTRIB_MATERIAL_EMISSION:";
       break;
     case 4:
-      pcVar4 = "PP_ATTRIB_MATERIAL_SHININESS:";
+      label = "PP_ATTRIB_MATERIAL_SHININESS:";
       break;
     default:
       goto switchD_97baf5f0_default;
     }
-    copyEnd = ((int (*)())scpy)(pcVar5,pcVar4);
-    pcVar5 = pcVar5 + copyEnd;
+    copyEnd = ((int (*)())scpy)(writePtr,label);
+    writePtr = writePtr + copyEnd;
 switchD_97baf5f0_default:
-    uVar1 = uStack00000018 & 1;
+    indexValue = bindingWord & 1;
     goto LAB_97baf658;
   case 0xb:
-    pcVar4 = ": PP_BIND_ATTRIB_FRONT_FACING";
+    label = ": PP_BIND_ATTRIB_FRONT_FACING";
     break;
   default:
     goto switchD_97baf4e0_default;
   }
-  copyEnd = ((int (*)())scpy)(pcVar5,pcVar4);
+  copyEnd = ((int (*)())scpy)(writePtr,label);
 LAB_97baf660:
-  pcVar5 = pcVar5 + copyEnd;
+  writePtr = writePtr + copyEnd;
 switchD_97baf4e0_default:
-  *pcVar5 = '\0';
-  _realloc(allocation,pcVar5 + (1 - (int)allocation));
+  *writePtr = '\0';
+  _realloc(allocation,writePtr + (1 - (int)allocation));
   return;
 }
 
 /* PrintParam @ 0x97baf68c (1228 bytes) */
-int PrintParam(_PPStreamToken, param_2)
+int PrintParam(_PPStreamToken, ordinalIn)
   uint _PPStreamToken;
-  uint param_2;
+  uint ordinalIn;
 {
   char *allocation;
   int copyEnd;
   int copyEnd2;
   uint uVar4;
-  char *pcVar5;
-  char *pcVar6;
-  uint uStack00000018;
-  uint uStack0000001c;
+  char *label;
+  char *writePtr;
+  uint bindingWord;
+  uint ordinal;
   
-  uStack00000018 = _PPStreamToken;
-  uStack0000001c = param_2;
+  bindingWord = _PPStreamToken;
+  ordinal = ordinalIn;
   allocation = (char *)_malloc(0x100);
-  copyEnd = ((int (*)())ncpy)(allocation,uStack0000001c & 0xffff);
-  pcVar6 = allocation + copyEnd;
-  switch(uStack00000018 >> 0x10 & 0x1f) {
+  copyEnd = ((int (*)())ncpy)(allocation,ordinal & 0xffff);
+  writePtr = allocation + copyEnd;
+  switch(bindingWord >> 0x10 & 0x1f) {
   case 0:
-    pcVar5 = ": PP_BIND_PARAM_NONE:";
+    label = ": PP_BIND_PARAM_NONE:";
     goto LAB_97baf750;
   case 1:
-    pcVar5 = ": PP_BIND_PARAM_PROGRAM_LOCAL:";
+    label = ": PP_BIND_PARAM_PROGRAM_LOCAL:";
     goto LAB_97baf750;
   case 2:
-    pcVar5 = ": PP_BIND_PARAM_PROGRAM_ENV:";
+    label = ": PP_BIND_PARAM_PROGRAM_ENV:";
     goto LAB_97baf750;
   case 3:
-    copyEnd = ((int (*)())scpy)(pcVar6,": PP_BIND_PARAM_LIGHT:");
-    copyEnd2 = ((int (*)())ncpy)(pcVar6 + copyEnd,uStack00000018 & 0xff);
-    pcVar6 = pcVar6 + copyEnd + copyEnd2;
-    switch(uStack00000018 >> 8 & 0xf) {
+    copyEnd = ((int (*)())scpy)(writePtr,": PP_BIND_PARAM_LIGHT:");
+    copyEnd2 = ((int (*)())ncpy)(writePtr + copyEnd,bindingWord & 0xff);
+    writePtr = writePtr + copyEnd + copyEnd2;
+    switch(bindingWord >> 8 & 0xf) {
     case 0:
-      pcVar5 = ":PP_PARAM_LIGHT_AMBIENT";
+      label = ":PP_PARAM_LIGHT_AMBIENT";
       break;
     case 1:
-      pcVar5 = ":PP_PARAM_LIGHT_DIFFUSE";
+      label = ":PP_PARAM_LIGHT_DIFFUSE";
       break;
     case 2:
-      pcVar5 = ":PP_PARAM_LIGHT_SPECULAR";
+      label = ":PP_PARAM_LIGHT_SPECULAR";
       break;
     case 3:
-      pcVar5 = ":PP_PARAM_LIGHT_POSITION";
+      label = ":PP_PARAM_LIGHT_POSITION";
       break;
     case 4:
-      pcVar5 = ":PP_PARAM_LIGHT_DIRECTION";
+      label = ":PP_PARAM_LIGHT_DIRECTION";
       break;
     case 5:
-      pcVar5 = ":PP_PARAM_LIGHT_ATTENUATION";
+      label = ":PP_PARAM_LIGHT_ATTENUATION";
       break;
     case 6:
-      pcVar5 = ":PP_PARAM_LIGHT_HALF";
+      label = ":PP_PARAM_LIGHT_HALF";
       break;
     case 7:
-      pcVar5 = ":PP_PARAM_LIGHT_SPOTCUTOFF";
+      label = ":PP_PARAM_LIGHT_SPOTCUTOFF";
       break;
     default:
       goto switchD_97bafb24_default;
     }
     break;
   case 4:
-    copyEnd = ((int (*)())scpy)(pcVar6,": PP_BIND_PARAM_LIGHT_PROD:");
-    pcVar6 = pcVar6 + copyEnd;
-    copyEnd = ((int (*)())ncpy)(pcVar6,uStack00000018 & 0xff);
-    pcVar6 = pcVar6 + copyEnd;
-    copyEnd = ((int (*)())scpy)(pcVar6,":");
-    copyEnd2 = ((int (*)())ncpy)(pcVar6 + copyEnd,uStack00000018 >> 8 & 1);
-    pcVar6 = pcVar6 + copyEnd + copyEnd2;
-    uVar4 = uStack00000018 >> 9 & 3;
+    copyEnd = ((int (*)())scpy)(writePtr,": PP_BIND_PARAM_LIGHT_PROD:");
+    writePtr = writePtr + copyEnd;
+    copyEnd = ((int (*)())ncpy)(writePtr,bindingWord & 0xff);
+    writePtr = writePtr + copyEnd;
+    copyEnd = ((int (*)())scpy)(writePtr,":");
+    copyEnd2 = ((int (*)())ncpy)(writePtr + copyEnd,bindingWord >> 8 & 1);
+    writePtr = writePtr + copyEnd + copyEnd2;
+    uVar4 = bindingWord >> 9 & 3;
     if (uVar4 == 1) {
-      pcVar5 = ":PP_PARAM_LIGHT_PROD_DIFFUSE";
+      label = ":PP_PARAM_LIGHT_PROD_DIFFUSE";
     }
     else if (uVar4 == 0) {
-      pcVar5 = ":PP_PARAM_LIGHT_PROD_AMBIENT";
+      label = ":PP_PARAM_LIGHT_PROD_AMBIENT";
     }
     else {
       if (uVar4 != 2) goto switchD_97bafb24_default;
-      pcVar5 = ":PP_PARAM_LIGHT_PROD_SPECULAR";
+      label = ":PP_PARAM_LIGHT_PROD_SPECULAR";
     }
     break;
   case 5:
-    copyEnd = ((int (*)())scpy)(pcVar6,": PP_BIND_PARAM_MATERIAL:");
-    copyEnd2 = ((int (*)())ncpy)(pcVar6 + copyEnd,uStack00000018 & 1);
-    pcVar6 = pcVar6 + copyEnd + copyEnd2;
-    switch(uStack00000018 >> 1 & 7) {
+    copyEnd = ((int (*)())scpy)(writePtr,": PP_BIND_PARAM_MATERIAL:");
+    copyEnd2 = ((int (*)())ncpy)(writePtr + copyEnd,bindingWord & 1);
+    writePtr = writePtr + copyEnd + copyEnd2;
+    switch(bindingWord >> 1 & 7) {
     case 0:
-      pcVar5 = ":PP_PARAM_MATERIAL_AMBIENT";
+      label = ":PP_PARAM_MATERIAL_AMBIENT";
       break;
     case 1:
-      pcVar5 = ":PP_PARAM_MATERIAL_DIFFUSE";
+      label = ":PP_PARAM_MATERIAL_DIFFUSE";
       break;
     case 2:
-      pcVar5 = ":PP_PARAM_MATERIAL_SPECULAR";
+      label = ":PP_PARAM_MATERIAL_SPECULAR";
       break;
     case 3:
-      pcVar5 = ":PP_PARAM_MATERIAL_EMISSION";
+      label = ":PP_PARAM_MATERIAL_EMISSION";
       break;
     case 4:
-      pcVar5 = ":PP_PARAM_MATERIAL_SHININESS";
+      label = ":PP_PARAM_MATERIAL_SHININESS";
       break;
     case 5:
-      pcVar5 = ":PP_PARAM_MATERIAL_SCENE_COLOR";
+      label = ":PP_PARAM_MATERIAL_SCENE_COLOR";
       break;
     default:
       goto switchD_97bafb24_default;
     }
     break;
   case 6:
-    pcVar5 = ": PP_BIND_PARAM_LIGHT_MODEL";
+    label = ": PP_BIND_PARAM_LIGHT_MODEL";
     break;
   case 7:
-    pcVar5 = ": PP_BIND_PARAM_TEX_GEN_EYE_PLANE:";
+    label = ": PP_BIND_PARAM_TEX_GEN_EYE_PLANE:";
     goto LAB_97baf9a4;
   case 8:
-    pcVar5 = ": PP_BIND_PARAM_TEX_GEN_OBJECT_PLANE:";
+    label = ": PP_BIND_PARAM_TEX_GEN_OBJECT_PLANE:";
 LAB_97baf9a4:
-    copyEnd = ((int (*)())scpy)(pcVar6,pcVar5);
-    pcVar6 = pcVar6 + copyEnd;
-    uVar4 = uStack00000018 >> 5 & 7;
+    copyEnd = ((int (*)())scpy)(writePtr,label);
+    writePtr = writePtr + copyEnd;
+    uVar4 = bindingWord >> 5 & 7;
     if (uVar4 == 1) {
-      pcVar5 = "PP_PARAM_TEX_GEN_COORD_T:";
+      label = "PP_PARAM_TEX_GEN_COORD_T:";
 LAB_97bafa10:
-      copyEnd = ((int (*)())scpy)(pcVar6,pcVar5);
-      pcVar6 = pcVar6 + copyEnd;
+      copyEnd = ((int (*)())scpy)(writePtr,label);
+      writePtr = writePtr + copyEnd;
     }
     else {
       if (uVar4 == 0) {
-        pcVar5 = "PP_PARAM_TEX_GEN_COORD_S:";
+        label = "PP_PARAM_TEX_GEN_COORD_S:";
         goto LAB_97bafa10;
       }
       if (uVar4 == 2) {
-        pcVar5 = "PP_PARAM_TEX_GEN_COORD_R:";
+        label = "PP_PARAM_TEX_GEN_COORD_R:";
         goto LAB_97bafa10;
       }
       if (uVar4 == 3) {
-        pcVar5 = "PP_PARAM_TEX_GEN_COORD_Q:";
+        label = "PP_PARAM_TEX_GEN_COORD_Q:";
         goto LAB_97bafa10;
       }
     }
-    uVar4 = uStack00000018 & 0x1f;
+    uVar4 = bindingWord & 0x1f;
     goto LAB_97baf760;
   default:
-    pcVar5 = ": Error, binding not found.";
+    label = ": Error, binding not found.";
     break;
   case 10:
-    pcVar5 = ": PP_BIND_PARAM_CLIP_PLANE:";
+    label = ": PP_BIND_PARAM_CLIP_PLANE:";
     goto LAB_97bafb84;
   case 0xb:
-    pcVar5 = ": PP_BIND_PARAM_FOG_COLOR";
+    label = ": PP_BIND_PARAM_FOG_COLOR";
     break;
   case 0xc:
-    pcVar5 = ": PP_BIND_PARAM_FOG_PARAMETERS";
+    label = ": PP_BIND_PARAM_FOG_PARAMETERS";
     break;
   case 0xd:
-    pcVar5 = ": PP_BIND_PARAM_POINT_PARAMETERS";
+    label = ": PP_BIND_PARAM_POINT_PARAMETERS";
     break;
   case 0xe:
-    pcVar5 = ": PP_BIND_PARAM_POINT_ATTENUATION";
+    label = ": PP_BIND_PARAM_POINT_ATTENUATION";
     break;
   case 0xf:
-    pcVar5 = ": PP_BIND_PARAM_DEPTH_RANGE";
+    label = ": PP_BIND_PARAM_DEPTH_RANGE";
     break;
   case 0x10:
-    copyEnd = ((int (*)())scpy)(pcVar6,": PP_BIND_PARAM_MATRIX:");
-    pcVar6 = pcVar6 + copyEnd;
-    uVar4 = uStack00000018 >> 0xe & 3;
+    copyEnd = ((int (*)())scpy)(writePtr,": PP_BIND_PARAM_MATRIX:");
+    writePtr = writePtr + copyEnd;
+    uVar4 = bindingWord >> 0xe & 3;
     if (uVar4 == 1) {
-      pcVar5 = "PP_MATRIX_TRANSFORM_TRANSPOSE:";
+      label = "PP_MATRIX_TRANSFORM_TRANSPOSE:";
 LAB_97bafae0:
-      copyEnd = ((int (*)())scpy)(pcVar6,pcVar5);
-      pcVar6 = pcVar6 + copyEnd;
+      copyEnd = ((int (*)())scpy)(writePtr,label);
+      writePtr = writePtr + copyEnd;
     }
     else {
       if (uVar4 == 0) {
-        pcVar5 = "PP_MATRIX_TRANSFORM_IDENTITY:";
+        label = "PP_MATRIX_TRANSFORM_IDENTITY:";
         goto LAB_97bafae0;
       }
       if (uVar4 == 2) {
-        pcVar5 = "PP_MATRIX_TRANSFORM_INVERSE:";
+        label = "PP_MATRIX_TRANSFORM_INVERSE:";
         goto LAB_97bafae0;
       }
       if (uVar4 == 3) {
-        pcVar5 = "PP_MATRIX_TRANSFORM_INVERSE_TRANSPOSE:";
+        label = "PP_MATRIX_TRANSFORM_INVERSE_TRANSPOSE:";
         goto LAB_97bafae0;
       }
     }
-    copyEnd = ((int (*)())ncpy)(pcVar6,uStack00000018 >> 0xc & 3);
-    pcVar6 = pcVar6 + copyEnd;
-    switch(uStack00000018 >> 8 & 7) {
+    copyEnd = ((int (*)())ncpy)(writePtr,bindingWord >> 0xc & 3);
+    writePtr = writePtr + copyEnd;
+    switch(bindingWord >> 8 & 7) {
     case 0:
-      pcVar5 = ":PP_PARAM_MATRIX_MODELVIEW_PROJECTION";
+      label = ":PP_PARAM_MATRIX_MODELVIEW_PROJECTION";
       break;
     case 1:
-      pcVar5 = ":PP_PARAM_MATRIX_PROJECTION";
+      label = ":PP_PARAM_MATRIX_PROJECTION";
       break;
     case 2:
-      pcVar5 = ":PP_PARAM_MATRIX_COLOR";
+      label = ":PP_PARAM_MATRIX_COLOR";
       break;
     case 3:
-      pcVar5 = ":PP_PARAM_MATRIX_MODELVIEW:";
+      label = ":PP_PARAM_MATRIX_MODELVIEW:";
       goto LAB_97bafb84;
     case 4:
-      pcVar5 = ":PP_PARAM_MATRIX_TEXTURE:";
+      label = ":PP_PARAM_MATRIX_TEXTURE:";
       goto LAB_97bafb84;
     case 5:
-      pcVar5 = ":PP_PARAM_MATRIX_PROGRAM:";
+      label = ":PP_PARAM_MATRIX_PROGRAM:";
 LAB_97bafb84:
-      copyEnd = ((int (*)())scpy)(pcVar6,pcVar5);
-      uVar4 = uStack00000018 & 0xff;
+      copyEnd = ((int (*)())scpy)(writePtr,label);
+      uVar4 = bindingWord & 0xff;
       goto LAB_97baf75c;
     default:
       goto switchD_97bafb24_default;
     }
     break;
   case 0x11:
-    pcVar5 = ": PP_BIND_PARAM_CONSTANT:";
+    label = ": PP_BIND_PARAM_CONSTANT:";
 LAB_97baf750:
-    copyEnd = ((int (*)())scpy)(pcVar6,pcVar5);
-    uVar4 = uStack00000018 & 0xffff;
+    copyEnd = ((int (*)())scpy)(writePtr,label);
+    uVar4 = bindingWord & 0xffff;
 LAB_97baf75c:
-    pcVar6 = pcVar6 + copyEnd;
+    writePtr = writePtr + copyEnd;
 LAB_97baf760:
-    copyEnd = ((int (*)())ncpy)(pcVar6,uVar4);
+    copyEnd = ((int (*)())ncpy)(writePtr,uVar4);
     goto LAB_97bafbc8;
   case 0x12:
-    pcVar5 = ": PP_BIND_PARAM_NORMAL_SCALE";
+    label = ": PP_BIND_PARAM_NORMAL_SCALE";
   }
-  copyEnd = ((int (*)())scpy)(pcVar6,pcVar5);
+  copyEnd = ((int (*)())scpy)(writePtr,label);
 LAB_97bafbc8:
-  pcVar6 = pcVar6 + copyEnd;
+  writePtr = writePtr + copyEnd;
 switchD_97bafb24_default:
-  *pcVar6 = '\0';
-  _realloc(allocation,pcVar6 + (1 - (int)allocation));
+  *writePtr = '\0';
+  _realloc(allocation,writePtr + (1 - (int)allocation));
   return;
 }
 
 /* PrintOutput @ 0x97bafbf4 (420 bytes) */
-int PrintOutput(_PPStreamToken, param_2)
+int PrintOutput(_PPStreamToken, ordinalIn)
   uint _PPStreamToken;
-  uint param_2;
+  uint ordinalIn;
 {
   char *allocation;
   int copyEnd;
   int copyEnd2;
   undefined4 allocation2;
-  uint uVar5;
-  char *pcVar6;
-  char *pcVar7;
-  uint uStack00000018;
-  uint uStack0000001c;
+  uint indexValue;
+  char *label;
+  char *writePtr;
+  uint bindingWord;
+  uint ordinal;
   
-  uStack00000018 = _PPStreamToken;
-  uStack0000001c = param_2;
+  bindingWord = _PPStreamToken;
+  ordinal = ordinalIn;
   allocation = (char *)_malloc(0x100);
-  copyEnd = ((int (*)())ncpy)(allocation,uStack0000001c & 0xffff);
-  pcVar7 = allocation + copyEnd;
-  switch(uStack00000018 >> 0x10 & 0xf) {
+  copyEnd = ((int (*)())ncpy)(allocation,ordinal & 0xffff);
+  writePtr = allocation + copyEnd;
+  switch(bindingWord >> 0x10 & 0xf) {
   default:
-    pcVar6 = ": Error, binding not found.";
+    label = ": Error, binding not found.";
     break;
   case 1:
-    pcVar6 = ": PP_BIND_OUTPUT_RESULT_POSITION";
+    label = ": PP_BIND_OUTPUT_RESULT_POSITION";
     break;
   case 2:
-    pcVar6 = ": PP_BIND_OUTPUT_RESULT_FOG_COORD";
+    label = ": PP_BIND_OUTPUT_RESULT_FOG_COORD";
     break;
   case 3:
-    pcVar6 = ": PP_BIND_OUTPUT_RESULT_POINT_SIZE";
+    label = ": PP_BIND_OUTPUT_RESULT_POINT_SIZE";
     break;
   case 4:
-    copyEnd = ((int (*)())scpy)(pcVar7,": PP_BIND_OUTPUT_RESULT_COLOR:");
-    if ((uStack00000018 & 1) == 0) {
-      pcVar6 = "PP_FACE_FRONT:";
+    copyEnd = ((int (*)())scpy)(writePtr,": PP_BIND_OUTPUT_RESULT_COLOR:");
+    if ((bindingWord & 1) == 0) {
+      label = "PP_FACE_FRONT:";
     }
     else {
-      pcVar6 = "PP_FACE_BACK:";
+      label = "PP_FACE_BACK:";
     }
-    copyEnd2 = ((int (*)())scpy)(pcVar7 + copyEnd,pcVar6);
-    pcVar7 = pcVar7 + copyEnd + copyEnd2;
-    uVar5 = uStack00000018 >> 1 & 7;
+    copyEnd2 = ((int (*)())scpy)(writePtr + copyEnd,label);
+    writePtr = writePtr + copyEnd + copyEnd2;
+    indexValue = bindingWord >> 1 & 7;
     goto LAB_97bafcf4;
   case 5:
-    copyEnd = ((int (*)())scpy)(pcVar7,": PP_BIND_OUTPUT_RESULT_SEC_COLOR:");
-    pcVar7 = pcVar7 + copyEnd;
-    if ((uStack00000018 & 1) == 0) {
-      pcVar6 = "PP_FACE_FRONT";
+    copyEnd = ((int (*)())scpy)(writePtr,": PP_BIND_OUTPUT_RESULT_SEC_COLOR:");
+    writePtr = writePtr + copyEnd;
+    if ((bindingWord & 1) == 0) {
+      label = "PP_FACE_FRONT";
     }
     else {
-      pcVar6 = "PP_FACE_BACK";
+      label = "PP_FACE_BACK";
     }
     break;
   case 6:
-    pcVar6 = ": PP_BIND_OUTPUT_RESULT_TEX_COORD:";
+    label = ": PP_BIND_OUTPUT_RESULT_TEX_COORD:";
     goto LAB_97bafd6c;
   case 7:
-    pcVar6 = ": PP_BIND_OUTPUT_RESULT_DEPTH";
+    label = ": PP_BIND_OUTPUT_RESULT_DEPTH";
     break;
   case 8:
-    pcVar6 = ": PP_BIND_OUTPUT_RESULT_EYE_POSITION";
+    label = ": PP_BIND_OUTPUT_RESULT_EYE_POSITION";
     break;
   case 9:
-    pcVar6 = ": PP_BIND_OUTPUT_RESULT_CLIP_VERTEX";
+    label = ": PP_BIND_OUTPUT_RESULT_CLIP_VERTEX";
     break;
   case 10:
-    pcVar6 = ": PP_BIND_OUTPUT_RESULT_ATTRIB:";
+    label = ": PP_BIND_OUTPUT_RESULT_ATTRIB:";
 LAB_97bafd6c:
-    copyEnd = ((int (*)())scpy)(pcVar7,pcVar6);
-    pcVar7 = pcVar7 + copyEnd;
-    uVar5 = uStack00000018 & 0x1f;
+    copyEnd = ((int (*)())scpy)(writePtr,label);
+    writePtr = writePtr + copyEnd;
+    indexValue = bindingWord & 0x1f;
 LAB_97bafcf4:
-    copyEnd = ((int (*)())ncpy)(pcVar7,uVar5);
+    copyEnd = ((int (*)())ncpy)(writePtr,indexValue);
     goto LAB_97bafd98;
   }
-  copyEnd = ((int (*)())scpy)(pcVar7,pcVar6);
+  copyEnd = ((int (*)())scpy)(writePtr,label);
 LAB_97bafd98:
-  pcVar7[copyEnd] = '\0';
-  allocation2 = _realloc(allocation,pcVar7 + copyEnd + (1 - (int)allocation));
+  writePtr[copyEnd] = '\0';
+  allocation2 = _realloc(allocation,writePtr + copyEnd + (1 - (int)allocation));
   return allocation2;
 }
 
@@ -1828,13 +1828,13 @@ int __ZN7BindingC2ERKS_(this, binding)
   bool bVar4;
   ushort openGLType;
   ulong decSize;
-  char *pcVar5;
+  char *name;
   
   *(undefined4 *)((int)this + 8) = 0;
-  pcVar5 = *(char **)(binding + 8);
+  name = *(char **)(binding + 8);
   *(undefined4 *)((int)this + 0xc) = 0;
   *(undefined4 *)((int)this + 0x10) = 0;
-  ((int (*)())Binding__SetName)(this,pcVar5);
+  ((int (*)())Binding__SetName)(this,name);
   location = Binding__GetLocation(binding);
   Binding__SetLocation(this,location);
   activeIndex = Binding__GetActiveIndex(binding);
@@ -1868,13 +1868,13 @@ int __ZN7BindingC1ERKS_(this, binding)
   bool bVar4;
   ushort openGLType;
   ulong decSize;
-  char *pcVar5;
+  char *name;
   
   *(undefined4 *)((int)this + 8) = 0;
-  pcVar5 = *(char **)(binding + 8);
+  name = *(char **)(binding + 8);
   *(undefined4 *)((int)this + 0xc) = 0;
   *(undefined4 *)((int)this + 0x10) = 0;
-  ((int (*)())Binding__SetName)(this,pcVar5);
+  ((int (*)())Binding__SetName)(this,name);
   location = Binding__GetLocation(binding);
   Binding__SetLocation(this,location);
   activeIndex = Binding__GetActiveIndex(binding);
@@ -1908,13 +1908,13 @@ int __ZN7BindingC4ERKS_(this, binding)
   undefined4 isClientRequest;
   ushort openGLType;
   ulong decSize;
-  char *pcVar5;
+  char *name;
   
   *(undefined4 *)((int)this + 8) = 0;
-  pcVar5 = *(char **)(binding + 8);
+  name = *(char **)(binding + 8);
   *(undefined4 *)((int)this + 0xc) = 0;
   *(undefined4 *)((int)this + 0x10) = 0;
-  ((int (*)())Binding__SetName)(this,pcVar5);
+  ((int (*)())Binding__SetName)(this,name);
   location = Binding__GetLocation(binding);
   Binding__SetLocation(this,location);
   activeIndex = Binding__GetActiveIndex(binding);
@@ -1997,11 +1997,11 @@ int Binding__CatName(this, str)
   char *str;
 {
   int length;
-  char *pcVar1;
-  int iVar2;
-  int iVar3;
+  char *chPtr;
+  int hashSum;
+  int nameLen;
   char *allocation;
-  int iVar5;
+  int charIdx;
   
   if (str != (char *)0x0) {
     length = _strlen(str);
@@ -2012,19 +2012,19 @@ int Binding__CatName(this, str)
     _strncpy(allocation + *(int *)(this + 0x10),str,length + 1);
     *(int *)(this + 0x10) = *(int *)(this + 0x10) + length;
     _free(*(undefined4 *)(this + 8));
-    iVar3 = *(int *)(this + 0x10);
-    iVar5 = 0;
+    nameLen = *(int *)(this + 0x10);
+    charIdx = 0;
     *(undefined4 *)(this + 0xc) = 0;
     *(char **)(this + 8) = allocation;
-    if (iVar3 != 0) {
-      iVar2 = 0;
+    if (nameLen != 0) {
+      hashSum = 0;
       do {
-        pcVar1 = allocation + iVar5;
-        iVar5 = iVar5 + 1;
-        iVar2 = iVar2 + *pcVar1;
-        iVar3 = iVar3 + -1;
-      } while (iVar3 != 0);
-      *(int *)(this + 0xc) = iVar2;
+        chPtr = allocation + charIdx;
+        charIdx = charIdx + 1;
+        hashSum = hashSum + *chPtr;
+        nameLen = nameLen + -1;
+      } while (nameLen != 0);
+      *(int *)(this + 0xc) = hashSum;
     }
   }
   return;
@@ -2036,26 +2036,26 @@ int Binding__SetName(this, str)
   char *str;
 {
   char *allocation;
-  int iVar1;
-  char *pcVar2;
-  int iVar3;
+  int nameLen;
+  char *chPtr;
+  int charIdx;
   
   ClearName(this);
-  if ((str != (char *)0x0) && (iVar1 = _strlen(str), 0 < iVar1)) {
-    *(int *)(this + 0x10) = iVar1;
-    allocation = (char *)_malloc(iVar1 + 1);
+  if ((str != (char *)0x0) && (nameLen = _strlen(str), 0 < nameLen)) {
+    *(int *)(this + 0x10) = nameLen;
+    allocation = (char *)_malloc(nameLen + 1);
     *(char **)(this + 8) = allocation;
     _strncpy(allocation,str,*(int *)(this + 0x10) + 1);
-    iVar1 = *(int *)(this + 0x10);
-    iVar3 = 0;
+    nameLen = *(int *)(this + 0x10);
+    charIdx = 0;
     *(undefined4 *)(this + 0xc) = 0;
-    if (iVar1 != 0) {
+    if (nameLen != 0) {
       do {
-        pcVar2 = (char *)(*(int *)(this + 8) + iVar3);
-        iVar3 = iVar3 + 1;
-        *(int *)(this + 0xc) = *(int *)(this + 0xc) + (int)*pcVar2;
-        iVar1 = iVar1 + -1;
-      } while (iVar1 != 0);
+        chPtr = (char *)(*(int *)(this + 8) + charIdx);
+        charIdx = charIdx + 1;
+        *(int *)(this + 0xc) = *(int *)(this + 0xc) + (int)*chPtr;
+        nameLen = nameLen + -1;
+      } while (nameLen != 0);
     }
   }
   return;
@@ -2067,15 +2067,15 @@ int Binding__SetNameFromArrayName(this, str)
   char *str;
 {
   char *allocation;
-  bool bVar1;
+  bool foundBracket;
   int iVar2;
-  char *pcVar3;
+  char *chPtr;
   int iVar4;
-  undefined4 uVar5;
-  int iVar6;
+  undefined4 arrayIndex;
+  int bracketPos;
   
   ClearName(this);
-  uVar5 = 0;
+  arrayIndex = 0;
   if ((str != (char *)0x0) && (iVar2 = _strlen(str), 0 < iVar2)) {
     *(int *)(this + 0x10) = iVar2;
     allocation = (char *)_malloc(iVar2 + 1);
@@ -2084,74 +2084,74 @@ int Binding__SetNameFromArrayName(this, str)
     iVar4 = *(int *)(this + 8);
     iVar2 = *(int *)(this + 0x10);
     if (*(char *)(iVar4 + iVar2 + -1) == ']') {
-      bVar1 = false;
-      iVar6 = iVar2 + -1;
+      foundBracket = false;
+      bracketPos = iVar2 + -1;
       do {
-        iVar6 = iVar6 + -1;
-        if (*(char *)(iVar4 + iVar6) == '[') {
-          bVar1 = true;
+        bracketPos = bracketPos + -1;
+        if (*(char *)(iVar4 + bracketPos) == '[') {
+          foundBracket = true;
         }
-        if (iVar6 < 0) {
-          if (!bVar1) goto LAB_97bb0358;
+        if (bracketPos < 0) {
+          if (!foundBracket) goto LAB_97bb0358;
           break;
         }
-      } while (!bVar1);
-      uVar5 = _atoi(iVar4 + iVar6 + 1);
-      iVar2 = iVar6;
-      if (iVar6 < *(int *)(this + 0x10) + 1) {
+      } while (!foundBracket);
+      arrayIndex = _atoi(iVar4 + bracketPos + 1);
+      iVar2 = bracketPos;
+      if (bracketPos < *(int *)(this + 0x10) + 1) {
         do {
           *(undefined1 *)(*(int *)(this + 8) + iVar2) = 0;
           iVar2 = iVar2 + 1;
         } while (iVar2 < *(int *)(this + 0x10) + 1);
       }
-      *(int *)(this + 0x10) = iVar6;
-      iVar2 = iVar6;
+      *(int *)(this + 0x10) = bracketPos;
+      iVar2 = bracketPos;
     }
 LAB_97bb0358:
     iVar4 = 0;
     *(undefined4 *)(this + 0xc) = 0;
     if (iVar2 != 0) {
       do {
-        pcVar3 = (char *)(*(int *)(this + 8) + iVar4);
+        chPtr = (char *)(*(int *)(this + 8) + iVar4);
         iVar4 = iVar4 + 1;
-        *(int *)(this + 0xc) = *(int *)(this + 0xc) + (int)*pcVar3;
+        *(int *)(this + 0xc) = *(int *)(this + 0xc) + (int)*chPtr;
         iVar2 = iVar2 + -1;
       } while (iVar2 != 0);
     }
   }
-  return uVar5;
+  return arrayIndex;
 }
 
 /* Binding__RemoveNameBackToChar @ 0x97bb03a8 (132 bytes) */
-int Binding__RemoveNameBackToChar(this, param_2)
+int Binding__RemoveNameBackToChar(this, stopChar)
   unsigned char * this;
-  int param_2;
+  int stopChar;
 {
-  char *pcVar1;
-  bool bVar2;
+  char *chPtr;
+  bool found;
   int iVar3;
-  int iVar4;
+  int charIdx;
   
   iVar3 = *(int *)(this + 0x10);
-  bVar2 = false;
+  found = false;
   if (-1 < iVar3) {
     do {
-      if (*(char *)(*(int *)(this + 8) + iVar3) == param_2) {
-        bVar2 = true;
+      if (*(char *)(*(int *)(this + 8) + iVar3) == stopChar) {
+        found = true;
       }
       *(undefined1 *)(*(int *)(this + 8) + iVar3) = 0;
       iVar3 = iVar3 + -1;
-    } while ((-1 < iVar3) && (!bVar2));
+    } while ((-1 < iVar3) && (!found));
   }
   iVar3 = iVar3 + 1;
-  iVar4 = 0;
+  charIdx = 0;
   *(undefined4 *)(this + 0xc) = 0;
   *(int *)(this + 0x10) = iVar3;
   if (0 < iVar3) {
     do {
-      pcVar1 = (char *)(*(int *)(this + 8) + iVar4);
-      iVar4 = iVar4 + 1;
-      *(int *)(this + 0xc) = *(int *)(this + 0xc) + (int)*pcVar1;
+      chPtr = (char *)(*(int *)(this + 8) + charIdx);
+      charIdx = charIdx + 1;
+      *(int *)(this + 0xc) = *(int *)(this + 0xc) + (int)*chPtr;
       iVar3 = iVar3 + -1;
     } while (iVar3 != 0);
     return;

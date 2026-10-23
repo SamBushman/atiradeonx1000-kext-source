@@ -218,21 +218,21 @@ local	yy_switch_to_buffer	param_1	yy_buffer_state	INFERRED	argument type yy_buff
 local	yy_delete_buffer	param_1	yy_buffer_state	INFERRED	argument type yy_buffer_state* in the mangled symbol (__Z16yy_delete_bufferP15yy_buffer_state); assumes no hidden struct-return argument
 local	yy_init_buffer	param_1	yy_buffer_state	INFERRED	argument type yy_buffer_state* in the mangled symbol (__Z14yy_init_bufferP15yy_buffer_stateP7__sFILE); assumes no hidden struct-return argument
 local	yy_flush_buffer	param_1	yy_buffer_state	INFERRED	argument type yy_buffer_state* in the mangled symbol (__Z15yy_flush_bufferP15yy_buffer_state); assumes no hidden struct-return argument
-local	yy_scan_buffer	param_1	str	INFERRED	argument type char* in the mangled symbol (__Z14yy_scan_bufferPcj); assumes no hidden struct-return argument
+local	yy_scan_buffer	param_1	base	INFERRED	argument type char* in the mangled symbol (__Z14yy_scan_bufferPcj); assumes no hidden struct-return argument
 local	yy_scan_string	param_1	str	INFERRED	argument type char const* in the mangled symbol (__Z14yy_scan_stringPKc); assumes no hidden struct-return argument
-local	yy_scan_bytes	param_1	str	INFERRED	argument type char const* in the mangled symbol (__Z13yy_scan_bytesPKci); assumes no hidden struct-return argument
+local	yy_scan_bytes	param_1	bytes	INFERRED	argument type char const* in the mangled symbol (__Z13yy_scan_bytesPKci); assumes no hidden struct-return argument
 local	yy_fatal_error	param_1	str	INFERRED	argument type char const* in the mangled symbol (__Z14yy_fatal_errorPKc); assumes no hidden struct-return argument
-local	PaParseStrings	param_1	str	INFERRED	argument type char** in the mangled symbol (__Z14PaParseStringsPPcPiiiR13TParseContext); assumes no hidden struct-return argument
+local	PaParseStrings	param_1	shaderStrings	INFERRED	argument type char** in the mangled symbol (__Z14PaParseStringsPPcPiiiR13TParseContext); assumes no hidden struct-return argument
 local	PaParseStrings	param_5	parseContext	INFERRED	argument type TParseContext& in the mangled symbol (__Z14PaParseStringsPPcPiiiR13TParseContext); assumes no hidden struct-return argument
-local	yyerror	param_1	str	INFERRED	argument type char* in the mangled symbol (__Z7yyerrorPc); assumes no hidden struct-return argument
+local	yyerror	param_1	msg	INFERRED	argument type char* in the mangled symbol (__Z7yyerrorPc); assumes no hidden struct-return argument
 local	PaIdentOrType	param_1	text	INFERRED	argument type std::basic_string<char, std::char_traits<char>, pool_allocator<char> >& in the mangled symbol (__Z13PaIdentOrTypeRSbIcSt11char_traitsIcE14pool_allocatorIcEER13TParseContextRP7TSymbol); assumes no hidden struct-return argument
 local	PaIdentOrType	param_2	parseContext	INFERRED	argument type TParseContext& in the mangled symbol (__Z13PaIdentOrTypeRSbIcSt11char_traitsIcE14pool_allocatorIcEER13TParseContextRP7TSymbol); assumes no hidden struct-return argument
 local	PaIdentOrType	param_3	symbol	INFERRED	argument type TSymbol*& in the mangled symbol (__Z13PaIdentOrTypeRSbIcSt11char_traitsIcE14pool_allocatorIcEER13TParseContextRP7TSymbol); assumes no hidden struct-return argument
 local	PaParseComment	param_2	parseContext	INFERRED	argument type TParseContext& in the mangled symbol (__Z14PaParseCommentRiR13TParseContext); assumes no hidden struct-return argument
 local	scpy	param_1	str1	INFERRED	argument type char* in the mangled symbol (__Z4scpyPcPKc); assumes no hidden struct-return argument
 local	scpy	param_2	str2	INFERRED	argument type char const* in the mangled symbol (__Z4scpyPcPKc); assumes no hidden struct-return argument
-local	handleDigit	param_1	str	INFERRED	argument type char** in the mangled symbol (__Z11handleDigitPPci); assumes no hidden struct-return argument
-local	ncpy	param_1	str	INFERRED	argument type char* in the mangled symbol (__Z4ncpyPci); assumes no hidden struct-return argument
+local	handleDigit	param_1	outPtr	INFERRED	argument type char** in the mangled symbol (__Z11handleDigitPPci); assumes no hidden struct-return argument
+local	ncpy	param_1	out	INFERRED	argument type char* in the mangled symbol (__Z4ncpyPci); assumes no hidden struct-return argument
 local	PrintAttribute	param_1	_PPStreamToken	INFERRED	argument type _PPStreamToken in the mangled symbol (__Z14PrintAttribute14_PPStreamToken); assumes no hidden struct-return argument
 local	PrintParam	param_1	_PPStreamToken	INFERRED	argument type _PPStreamToken in the mangled symbol (__Z10PrintParam14_PPStreamToken); assumes no hidden struct-return argument
 local	PrintOutput	param_1	_PPStreamToken	INFERRED	argument type _PPStreamToken in the mangled symbol (__Z11PrintOutput14_PPStreamToken); assumes no hidden struct-return argument

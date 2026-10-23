@@ -11,7 +11,6 @@ local	_GetBehavior	local_40	fullDestroyAlloc	INFERRED	_GetBehavior(str): maps th
 local	_GetBehavior	local_30	catDestroyAlloc	INFERRED	_GetBehavior(str): maps the #extension behavior word to TBehavior (require 0, enable 1, warn 2, disable 3); unknown words log "behavior '<str>' is not supported" (message built as three pool-allocator std::strings: prefix, prefix+name, full) and return 3
 local	_GetBehavior	local_20	prefixDestroyAlloc	INFERRED	_GetBehavior(str): maps the #extension behavior word to TBehavior (require 0, enable 1, warn 2, disable 3); unknown words log "behavior '<str>' is not supported" (message built as three pool-allocator std::strings: prefix, prefix+name, full) and return 3
 local	_updateExtensionBehavior	param_1	extensionName	INFERRED	_updateExtensionBehavior(extension,behavior): "all" sets every extension in the std::map<string,TBehavior> (the TParseContext at _cpp+0x2c), an unknown extension is reported through the info sink; the many std::string temporaries are pool-allocator strings {alloc,data}
-local	_updateExtensionBehavior	str	behaviorName	INFERRED	_updateExtensionBehavior(extension,behavior): "all" sets every extension in the std::map<string,TBehavior> (the TParseContext at _cpp+0x2c), an unknown extension is reported through the info sink; the many std::string temporaries are pool-allocator strings {alloc,data}
 local	_updateExtensionBehavior	this	infoSink	INFERRED	_updateExtensionBehavior(extension,behavior): "all" sets every extension in the std::map<string,TBehavior> (the TParseContext at _cpp+0x2c), an unknown extension is reported through the info sink; the many std::string temporaries are pool-allocator strings {alloc,data}
 local	_updateExtensionBehavior	uVar6	lineNo	INFERRED	_updateExtensionBehavior(extension,behavior): "all" sets every extension in the std::map<string,TBehavior> (the TParseContext at _cpp+0x2c), an unknown extension is reported through the info sink; the many std::string temporaries are pool-allocator strings {alloc,data}
 local	_updateExtensionBehavior	a1	column	INFERRED	_updateExtensionBehavior(extension,behavior): "all" sets every extension in the std::map<string,TBehavior> (the TParseContext at _cpp+0x2c), an unknown extension is reported through the info sink; the many std::string temporaries are pool-allocator strings {alloc,data}
@@ -51,3 +50,129 @@ local	_updateExtensionBehavior	local_a0	warnPrefixDestroyAlloc	INFERRED	_updateE
 local	_updateExtensionBehavior	local_50	msgDestroyAllocAll	INFERRED	_updateExtensionBehavior(extension,behavior): "all" sets every extension in the std::map<string,TBehavior> (the TParseContext at _cpp+0x2c), an unknown extension is reported through the info sink; the many std::string temporaries are pool-allocator strings {alloc,data}
 local	_updateExtensionBehavior	local_40	msgDestroyAllocFound	INFERRED	_updateExtensionBehavior(extension,behavior): "all" sets every extension in the std::map<string,TBehavior> (the TParseContext at _cpp+0x2c), an unknown extension is reported through the info sink; the many std::string temporaries are pool-allocator strings {alloc,data}
 local	_updateExtensionBehavior	local_30	msgDestroyAllocErr	INFERRED	_updateExtensionBehavior(extension,behavior): "all" sets every extension in the std::map<string,TBehavior> (the TParseContext at _cpp+0x2c), an unknown extension is reported through the info sink; the many std::string temporaries are pool-allocator strings {alloc,data}
+local	PaParseStrings	extraout_r4	r4Out0	INFERRED	Ghidra extra-output register artifact: r4 still holds the value left by an earlier call (not a program variable)
+local	_HandlePragma	extraout_r4	r4Out0	INFERRED	Ghidra extra-output register artifact: r4 still holds the value left by an earlier call (not a program variable)
+local	_HandlePragma	extraout_r4_00	r4Out1	INFERRED	Ghidra extra-output register artifact: r4 still holds the value left by an earlier call (not a program variable)
+local	_HandlePragma	extraout_r4_01	r4Out2	INFERRED	Ghidra extra-output register artifact: r4 still holds the value left by an earlier call (not a program variable)
+local	_HandlePragma	extraout_r4_02	r4Out3	INFERRED	Ghidra extra-output register artifact: r4 still holds the value left by an earlier call (not a program variable)
+local	_HandlePragma	extraout_r4_03	r4Out4	INFERRED	Ghidra extra-output register artifact: r4 still holds the value left by an earlier call (not a program variable)
+local	_HandlePragma	extraout_r4_04	r4Out5	INFERRED	Ghidra extra-output register artifact: r4 still holds the value left by an earlier call (not a program variable)
+local	_HandlePragma	extraout_r4_05	r4Out6	INFERRED	Ghidra extra-output register artifact: r4 still holds the value left by an earlier call (not a program variable)
+local	_HandlePragma	extraout_r4_06	r4Out7	INFERRED	Ghidra extra-output register artifact: r4 still holds the value left by an earlier call (not a program variable)
+local	_GetBehavior	extraout_r4	r4Out0	INFERRED	Ghidra extra-output register artifact: r4 still holds the value left by an earlier call (not a program variable)
+local	_updateExtensionBehavior	extraout_r4	r4Out0	INFERRED	Ghidra extra-output register artifact: r4 still holds the value left by an earlier call (not a program variable)
+local	_updateExtensionBehavior	extraout_r4_00	r4Out1	INFERRED	Ghidra extra-output register artifact: r4 still holds the value left by an earlier call (not a program variable)
+local	yy_scan_buffer	param_2	bufSize	INFERRED	flex yy_scan_buffer(base,size): needs two trailing NULs; allocates a 0x28-byte YY_BUFFER_STATE (+4 buf_pos, +8 buf_base, +0xc/+0x10 sizes, +0x14 is_our_buffer...) and switches to it
+local	yy_scan_buffer	pyVar1	buffer	INFERRED	flex yy_scan_buffer(base,size): needs two trailing NULs; allocates a 0x28-byte YY_BUFFER_STATE (+4 buf_pos, +8 buf_base, +0xc/+0x10 sizes, +0x14 is_our_buffer...) and switches to it
+local	yy_scan_bytes	param_2	len	INFERRED	flex yy_scan_bytes(bytes,len): copies into a len+2 buffer with two NULs and scans it (is_our_buffer set at +0x14)
+local	yy_scan_bytes	iVar1	copyIdx	INFERRED	flex yy_scan_bytes(bytes,len): copies into a len+2 buffer with two NULs and scans it (is_our_buffer set at +0x14)
+local	yy_scan_bytes	iVar3	remaining	INFERRED	flex yy_scan_bytes(bytes,len): copies into a len+2 buffer with two NULs and scans it (is_our_buffer set at +0x14)
+local	yy_flex_realloc	param_1	ptr	INFERRED	flex yy_flex_realloc = realloc
+local	yy_flex_realloc	param_2	newSize	INFERRED	flex yy_flex_realloc = realloc
+local	yyerror	puVar1	cppPtr	INFERRED	yyerror(msg): reports "syntax error" with the lexer token text (or "pre-mature EOF") through TParseContext::error, then recover
+local	yyerror	iVar2	parseContext	INFERRED	yyerror(msg): reports "syntax error" with the lexer token text (or "pre-mature EOF") through TParseContext::error, then recover
+local	yyerror	pcVar3	tokenText	INFERRED	yyerror(msg): reports "syntax error" with the lexer token text (or "pre-mature EOF") through TParseContext::error, then recover
+local	PaReservedWord	puVar1	cppPtr	INFERRED	reports "Reserved word." for yytext through TParseContext::error; r9/r10 are stale registers forwarded to the error call
+local	PaReservedWord	in_r9	staleR9	INFERRED	reports "Reserved word." for yytext through TParseContext::error; r9/r10 are stale registers forwarded to the error call
+local	PaReservedWord	in_r10	staleR10	INFERRED	reports "Reserved word." for yytext through TParseContext::error; r9/r10 are stale registers forwarded to the error call
+local	PaParseComment	param_1	lineCounter	INFERRED	skips a /* */ comment: lineCounter is bumped per newline, starState 1 after '*'; r9/r10 are stale registers forwarded to the error call
+local	PaParseComment	iVar2	starState	INFERRED	skips a /* */ comment: lineCounter is bumped per newline, starState 1 after '*'; r9/r10 are stale registers forwarded to the error call
+local	PaParseComment	in_r9	staleR9	INFERRED	skips a /* */ comment: lineCounter is bumped per newline, starState 1 after '*'; r9/r10 are stale registers forwarded to the error call
+local	PaParseComment	in_r10	staleR10	INFERRED	skips a /* */ comment: lineCounter is bumped per newline, starState 1 after '*'; r9/r10 are stale registers forwarded to the error call
+local	_CPPShInfoLogMsg	param_1	msg	INFERRED	logs an informational message through TParseContext::error(line,"","",msg,"")
+local	_CPPShInfoLogMsg	puVar1	cppPtr	INFERRED	logs an informational message through TParseContext::error(line,"","",msg,"")
+local	_CPPShInfoLogMsg	in_r10	staleR10	INFERRED	logs an informational message through TParseContext::error(line,"","",msg,"")
+local	_CPPErrorToInfoLog	param_1	msg	INFERRED	logs "syntax error" with the preprocessor's message through TParseContext::error
+local	_CPPErrorToInfoLog	puVar1	cppPtr	INFERRED	logs "syntax error" with the preprocessor's message through TParseContext::error
+local	_CPPErrorToInfoLog	in_r10	staleR10	INFERRED	logs "syntax error" with the preprocessor's message through TParseContext::error
+local	_StoreStr	iVar3	emptyRep	INFERRED	_StoreStr(str): appends " " + str to the preprocessor's accumulated token string (parse context +0x58, data +0x5c); all std::string temporaries are pool-allocator strings {alloc,data}
+local	_StoreStr	piVar2	emptyRepRefCount	INFERRED	_StoreStr(str): appends " " + str to the preprocessor's accumulated token string (parse context +0x58, data +0x5c); all std::string temporaries are pool-allocator strings {alloc,data}
+local	_StoreStr	paVar5	destroyResult	INFERRED	_StoreStr(str): appends " " + str to the preprocessor's accumulated token string (parse context +0x58, data +0x5c); all std::string temporaries are pool-allocator strings {alloc,data}
+local	_StoreStr	this	tokenString	INFERRED	_StoreStr(str): appends " " + str to the preprocessor's accumulated token string (parse context +0x58, data +0x5c); all std::string temporaries are pool-allocator strings {alloc,data}
+local	_StoreStr	local_c0	newStrAlloc	INFERRED	_StoreStr(str): appends " " + str to the preprocessor's accumulated token string (parse context +0x58, data +0x5c); all std::string temporaries are pool-allocator strings {alloc,data}
+local	_StoreStr	local_bc	newStrData	INFERRED	_StoreStr(str): appends " " + str to the preprocessor's accumulated token string (parse context +0x58, data +0x5c); all std::string temporaries are pool-allocator strings {alloc,data}
+local	_StoreStr	local_b0	newStrAllocCopy	INFERRED	_StoreStr(str): appends " " + str to the preprocessor's accumulated token string (parse context +0x58, data +0x5c); all std::string temporaries are pool-allocator strings {alloc,data}
+local	_StoreStr	local_90	ctorAlloc	INFERRED	_StoreStr(str): appends " " + str to the preprocessor's accumulated token string (parse context +0x58, data +0x5c); all std::string temporaries are pool-allocator strings {alloc,data}
+local	_StoreStr	local_a0	copyStrAlloc	INFERRED	_StoreStr(str): appends " " + str to the preprocessor's accumulated token string (parse context +0x58, data +0x5c); all std::string temporaries are pool-allocator strings {alloc,data}
+local	_StoreStr	local_9c	copyStrData	INFERRED	_StoreStr(str): appends " " + str to the preprocessor's accumulated token string (parse context +0x58, data +0x5c); all std::string temporaries are pool-allocator strings {alloc,data}
+local	_StoreStr	local_80	copyDestroyAlloc	INFERRED	_StoreStr(str): appends " " + str to the preprocessor's accumulated token string (parse context +0x58, data +0x5c); all std::string temporaries are pool-allocator strings {alloc,data}
+local	_StoreStr	local_60	accumStrAlloc	INFERRED	_StoreStr(str): appends " " + str to the preprocessor's accumulated token string (parse context +0x58, data +0x5c); all std::string temporaries are pool-allocator strings {alloc,data}
+local	_StoreStr	local_5c	accumStrData	INFERRED	_StoreStr(str): appends " " + str to the preprocessor's accumulated token string (parse context +0x58, data +0x5c); all std::string temporaries are pool-allocator strings {alloc,data}
+local	_StoreStr	local_70	concatStrAlloc	INFERRED	_StoreStr(str): appends " " + str to the preprocessor's accumulated token string (parse context +0x58, data +0x5c); all std::string temporaries are pool-allocator strings {alloc,data}
+local	_StoreStr	local_6c	concatStrData	INFERRED	_StoreStr(str): appends " " + str to the preprocessor's accumulated token string (parse context +0x58, data +0x5c); all std::string temporaries are pool-allocator strings {alloc,data}
+local	_StoreStr	local_50	concatDestroyAlloc	INFERRED	_StoreStr(str): appends " " + str to the preprocessor's accumulated token string (parse context +0x58, data +0x5c); all std::string temporaries are pool-allocator strings {alloc,data}
+local	_StoreStr	local_40	accumDestroyAlloc	INFERRED	_StoreStr(str): appends " " + str to the preprocessor's accumulated token string (parse context +0x58, data +0x5c); all std::string temporaries are pool-allocator strings {alloc,data}
+local	_StoreStr	local_30	newDestroyAlloc	INFERRED	_StoreStr(str): appends " " + str to the preprocessor's accumulated token string (parse context +0x58, data +0x5c); all std::string temporaries are pool-allocator strings {alloc,data}
+local	_GetStrfromTStr	puVar1	cppPtr	INFERRED	returns the accumulated token string (parse context +0x5c) as a C string, storing it in cpp+0x13c
+local	_GetStrfromTStr	iVar2	cpp	INFERRED	returns the accumulated token string (parse context +0x5c) as a C string, storing it in cpp+0x13c
+local	_GetStrfromTStr	iVar3	parseContext	INFERRED	returns the accumulated token string (parse context +0x5c) as a C string, storing it in cpp+0x13c
+local	_GetStrfromTStr	iVar4	tokenData	INFERRED	returns the accumulated token string (parse context +0x5c) as a C string, storing it in cpp+0x13c
+local	_ResetTString	iVar1	parseContext	INFERRED	empties the accumulated token string (parse context +0x58) by inlined assign("")
+local	_ResetTString	pcVar3	data	INFERRED	empties the accumulated token string (parse context +0x58) by inlined assign("")
+local	_ResetTString	psVar4	result	INFERRED	empties the accumulated token string (parse context +0x58) by inlined assign("")
+local	handleDigit	param_2	value	INFERRED	recursive decimal digit writer: writes the digits of value through *outPtr
+local	handleDigit	iVar1	quotient	INFERRED	recursive decimal digit writer: writes the digits of value through *outPtr
+local	ncpy	param_2	value	INFERRED	writes the signed decimal text of value at out, returns the number of characters written
+local	ncpy	local_20	cursor	INFERRED	writes the signed decimal text of value at out, returns the number of characters written
+local	__ZN7BindingC4ERKS_	pcVar5	name	INFERRED	Binding copy constructor: copies name, location, active index, client-request and built-in flags, OpenGL type, declared and actual size
+local	Binding__CatName	pcVar1	chPtr	INFERRED	appends str to the name (+8), keeping length (+0x10) and character-sum hash (+0xc)
+local	Binding__CatName	iVar2	hashSum	INFERRED	appends str to the name (+8), keeping length (+0x10) and character-sum hash (+0xc)
+local	Binding__CatName	iVar3	nameLen	INFERRED	appends str to the name (+8), keeping length (+0x10) and character-sum hash (+0xc)
+local	Binding__CatName	iVar5	charIdx	INFERRED	appends str to the name (+8), keeping length (+0x10) and character-sum hash (+0xc)
+local	Binding__SetNameFromArrayName	bVar1	foundBracket	INFERRED	sets the name from str; for "name[n]" the "[n]" suffix is cut off and n returned
+local	Binding__SetNameFromArrayName	pcVar3	chPtr	INFERRED	sets the name from str; for "name[n]" the "[n]" suffix is cut off and n returned
+local	Binding__SetNameFromArrayName	uVar5	arrayIndex	INFERRED	sets the name from str; for "name[n]" the "[n]" suffix is cut off and n returned
+local	Binding__SetNameFromArrayName	iVar6	bracketPos	INFERRED	sets the name from str; for "name[n]" the "[n]" suffix is cut off and n returned
+local	PaParseStrings	param_2	stringLengths	INFERRED	PaParseStrings: rejects null source strings, sets up the lexer (cpp+0x144 string index, +0x148 lengths, +0x14c count, +0x150 strings), runs yyparse and returns nonzero on failure
+local	PaParseStrings	param_3	numStrings	INFERRED	PaParseStrings: rejects null source strings, sets up the lexer (cpp+0x144 string index, +0x148 lengths, +0x14c count, +0x150 strings), runs yyparse and returns nonzero on failure
+local	PaParseStrings	param_4	freeSymbolsFlag	INFERRED	PaParseStrings: rejects null source strings, sets up the lexer (cpp+0x144 string index, +0x148 lengths, +0x14c count, +0x150 strings), runs yyparse and returns nonzero on failure
+local	PaParseStrings	local_30	defaultLength	INFERRED	PaParseStrings: rejects null source strings, sets up the lexer (cpp+0x144 string index, +0x148 lengths, +0x14c count, +0x150 strings), runs yyparse and returns nonzero on failure
+local	PaParseStrings	puVar1	cppPtr	INFERRED	PaParseStrings: rejects null source strings, sets up the lexer (cpp+0x144 string index, +0x148 lengths, +0x14c count, +0x150 strings), runs yyparse and returns nonzero on failure
+local	PaParseStrings	puVar2	cppPtr2	INFERRED	PaParseStrings: rejects null source strings, sets up the lexer (cpp+0x144 string index, +0x148 lengths, +0x14c count, +0x150 strings), runs yyparse and returns nonzero on failure
+local	PaParseStrings	ppcVar4	stringPtr	INFERRED	PaParseStrings: rejects null source strings, sets up the lexer (cpp+0x144 string index, +0x148 lengths, +0x14c count, +0x150 strings), runs yyparse and returns nonzero on failure
+local	PaParseStrings	iVar9	stringIdx	INFERRED	PaParseStrings: rejects null source strings, sets up the lexer (cpp+0x144 string index, +0x148 lengths, +0x14c count, +0x150 strings), runs yyparse and returns nonzero on failure
+local	PaParseStrings	uVar5	result	INFERRED	PaParseStrings: rejects null source strings, sets up the lexer (cpp+0x144 string index, +0x148 lengths, +0x14c count, +0x150 strings), runs yyparse and returns nonzero on failure
+local	PaParseStrings	puVar6	node	INFERRED	PaParseStrings: rejects null source strings, sets up the lexer (cpp+0x144 string index, +0x148 lengths, +0x14c count, +0x150 strings), runs yyparse and returns nonzero on failure
+local	PaParseStrings	iVar3	numStringsCopy	INFERRED	PaParseStrings: rejects null source strings, sets up the lexer (cpp+0x144 string index, +0x148 lengths, +0x14c count, +0x150 strings), runs yyparse and returns nonzero on failure
+local	PaParseStrings	iVar7	freeSymbolsFlagCopy	INFERRED	PaParseStrings: rejects null source strings, sets up the lexer (cpp+0x144 string index, +0x148 lengths, +0x14c count, +0x150 strings), runs yyparse and returns nonzero on failure
+local	PaParseStrings	pTVar8	parseContextCopy	INFERRED	PaParseStrings: rejects null source strings, sets up the lexer (cpp+0x144 string index, +0x148 lengths, +0x14c count, +0x150 strings), runs yyparse and returns nonzero on failure
+local	PaParseStrings	in_r8	staleR8	INFERRED	PaParseStrings: rejects null source strings, sets up the lexer (cpp+0x144 string index, +0x148 lengths, +0x14c count, +0x150 strings), runs yyparse and returns nonzero on failure
+local	PaParseStrings	in_r10	staleR10	INFERRED	PaParseStrings: rejects null source strings, sets up the lexer (cpp+0x144 string index, +0x148 lengths, +0x14c count, +0x150 strings), runs yyparse and returns nonzero on failure
+local	_HandlePragma	param_1	tokens	INFERRED	handles '#pragma optimize(on|off)' and '#pragma debug(on|off)': sets parse-context flags +0x40 / +0x44, otherwise logs the syntax problem
+local	_HandlePragma	param_2	tokenCount	INFERRED	handles '#pragma optimize(on|off)' and '#pragma debug(on|off)': sets parse-context flags +0x40 / +0x44, otherwise logs the syntax problem
+local	_HandlePragma	pcVar2	message	INFERRED	handles '#pragma optimize(on|off)' and '#pragma debug(on|off)': sets parse-context flags +0x40 / +0x44, otherwise logs the syntax problem
+local	_HandlePragma	uVar3	cmpLen	INFERRED	handles '#pragma optimize(on|off)' and '#pragma debug(on|off)': sets parse-context flags +0x40 / +0x44, otherwise logs the syntax problem
+local	_HandlePragma	in_r6	staleR6	INFERRED	handles '#pragma optimize(on|off)' and '#pragma debug(on|off)': sets parse-context flags +0x40 / +0x44, otherwise logs the syntax problem
+local	_HandlePragma	in_r7	staleR7	INFERRED	handles '#pragma optimize(on|off)' and '#pragma debug(on|off)': sets parse-context flags +0x40 / +0x44, otherwise logs the syntax problem
+local	_HandlePragma	in_r8	staleR8	INFERRED	handles '#pragma optimize(on|off)' and '#pragma debug(on|off)': sets parse-context flags +0x40 / +0x44, otherwise logs the syntax problem
+local	PrintAttribute	param_2	ordinalIn	INFERRED	PrintAttribute(bindingWord,ordinal): text of a PP_BIND_ATTRIB_* binding (class in bits 16..19, index in the low bits)
+local	PrintAttribute	uStack0000001c	ordinal	INFERRED	PrintAttribute(bindingWord,ordinal): text of a PP_BIND_ATTRIB_* binding (class in bits 16..19, index in the low bits)
+local	PrintAttribute	uStack00000018	bindingWord	INFERRED	PrintAttribute(bindingWord,ordinal): text of a PP_BIND_ATTRIB_* binding (class in bits 16..19, index in the low bits)
+local	PrintAttribute	pcVar4	label	INFERRED	PrintAttribute(bindingWord,ordinal): text of a PP_BIND_ATTRIB_* binding (class in bits 16..19, index in the low bits)
+local	PrintAttribute	pcVar5	writePtr	INFERRED	PrintAttribute(bindingWord,ordinal): text of a PP_BIND_ATTRIB_* binding (class in bits 16..19, index in the low bits)
+local	PrintAttribute	uVar1	indexValue	INFERRED	PrintAttribute(bindingWord,ordinal): text of a PP_BIND_ATTRIB_* binding (class in bits 16..19, index in the low bits)
+local	PrintOutput	param_2	ordinalIn	INFERRED	PrintOutput(bindingWord,ordinal): text of a PP_BIND_OUTPUT_RESULT_* binding (class in bits 16..19)
+local	PrintOutput	uStack0000001c	ordinal	INFERRED	PrintOutput(bindingWord,ordinal): text of a PP_BIND_OUTPUT_RESULT_* binding (class in bits 16..19)
+local	PrintOutput	uStack00000018	bindingWord	INFERRED	PrintOutput(bindingWord,ordinal): text of a PP_BIND_OUTPUT_RESULT_* binding (class in bits 16..19)
+local	PrintOutput	pcVar6	label	INFERRED	PrintOutput(bindingWord,ordinal): text of a PP_BIND_OUTPUT_RESULT_* binding (class in bits 16..19)
+local	PrintOutput	pcVar7	writePtr	INFERRED	PrintOutput(bindingWord,ordinal): text of a PP_BIND_OUTPUT_RESULT_* binding (class in bits 16..19)
+local	PrintOutput	uVar5	indexValue	INFERRED	PrintOutput(bindingWord,ordinal): text of a PP_BIND_OUTPUT_RESULT_* binding (class in bits 16..19)
+local	PrintParam	param_2	ordinalIn	INFERRED	PrintParam(bindingWord,ordinal): text of a PP_BIND_PARAM_* binding (class in bits 16..20)
+local	PrintParam	uStack0000001c	ordinal	INFERRED	PrintParam(bindingWord,ordinal): text of a PP_BIND_PARAM_* binding (class in bits 16..20)
+local	PrintParam	uStack00000018	bindingWord	INFERRED	PrintParam(bindingWord,ordinal): text of a PP_BIND_PARAM_* binding (class in bits 16..20)
+local	PrintParam	pcVar5	label	INFERRED	PrintParam(bindingWord,ordinal): text of a PP_BIND_PARAM_* binding (class in bits 16..20)
+local	PrintParam	pcVar6	writePtr	INFERRED	PrintParam(bindingWord,ordinal): text of a PP_BIND_PARAM_* binding (class in bits 16..20)
+local	PaIdentOrType	a0	foundSymbol	INFERRED	PaIdentOrType(text): looks the identifier up from the innermost symbol table level outwards; returns 299 (type name) for a type, 0x12a (identifier) otherwise
+local	PaIdentOrType	uVar1	token	INFERRED	PaIdentOrType(text): looks the identifier up from the innermost symbol table level outwards; returns 299 (type name) for a type, 0x12a (identifier) otherwise
+local	PaIdentOrType	piVar3	symbolTable	INFERRED	PaIdentOrType(text): looks the identifier up from the innermost symbol table level outwards; returns 299 (type name) for a type, 0x12a (identifier) otherwise
+local	PaIdentOrType	iVar4	levelIdx	INFERRED	PaIdentOrType(text): looks the identifier up from the innermost symbol table level outwards; returns 299 (type name) for a type, 0x12a (identifier) otherwise
+local	PaIdentOrType	local_30	findIter	INFERRED	PaIdentOrType(text): looks the identifier up from the innermost symbol table level outwards; returns 299 (type name) for a type, 0x12a (identifier) otherwise
+local	Binding__SetName	iVar1	nameLen	INFERRED	replaces the name (+8) with a copy of str, recomputing the length (+0x10) and character-sum hash (+0xc)
+local	Binding__SetName	pcVar2	chPtr	INFERRED	replaces the name (+8) with a copy of str, recomputing the length (+0x10) and character-sum hash (+0xc)
+local	Binding__SetName	iVar3	charIdx	INFERRED	replaces the name (+8) with a copy of str, recomputing the length (+0x10) and character-sum hash (+0xc)
+local	Binding__RemoveNameBackToChar	param_2	stopChar	INFERRED	truncates the name back to and including the last stopChar, recomputing length (+0x10) and hash (+0xc)
+local	Binding__RemoveNameBackToChar	pcVar1	chPtr	INFERRED	truncates the name back to and including the last stopChar, recomputing length (+0x10) and hash (+0xc)
+local	Binding__RemoveNameBackToChar	bVar2	found	INFERRED	truncates the name back to and including the last stopChar, recomputing length (+0x10) and hash (+0xc)
+local	Binding__RemoveNameBackToChar	iVar4	charIdx	INFERRED	truncates the name back to and including the last stopChar, recomputing length (+0x10) and hash (+0xc)
+local	__ZN7BindingC1ERKS_	pcVar5	name	INFERRED	Binding copy constructor: copies name, location, active index, client-request and built-in flags, OpenGL type, declared and actual size
+local	__ZN7BindingC2ERKS_	pcVar5	name	INFERRED	Binding copy constructor: copies name, location, active index, client-request and built-in flags, OpenGL type, declared and actual size

@@ -64,7 +64,7 @@ local	_glpPPShaderLinearizeStreamMgr	param_1	stream	INFERRED	passed unchanged as
 local	_glpPPShaderToProgram	param_1	shader	INFERRED	passed unchanged as argument 1 of _glpPPShaderToProgramString, whose parameter is named shader
 local	_glpPPShaderToProgram	param_2	printOptions	INFERRED	passed unchanged as argument 2 of _glpPPShaderToProgramString, whose parameter is named printOptions
 local	_glpPPShaderToProgram	param_3	printFlags	INFERRED	passed unchanged as argument 3 of _glpPPShaderToProgramString, whose parameter is named printFlags
-local	_updateExtensionBehavior	param_2	str	INFERRED	passed unchanged as argument 1 of _GetBehavior, whose parameter is named str
+local	_updateExtensionBehavior	param_2	behaviorName	INFERRED	passed unchanged as argument 1 of _GetBehavior, whose parameter is named str
 local	_uw_frame_state_for	param_1	context	INFERRED	passed unchanged as argument 2 of _extract_cie_info, whose parameter is named context (and 3 other calls agree)
 local	_uw_init_context_1	param_1	context	INFERRED	passed unchanged as argument 1 of _uw_frame_state_for, whose parameter is named context
 local	std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_insert	param_5	text	INFERRED	passed unchanged as argument 2 of __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_, whose parameter is named text (and 1 other call agree)
