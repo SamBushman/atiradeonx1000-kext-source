@@ -4357,24 +4357,24 @@ int _PPStreamChunkListCreateFromChunkList(sourceList)
 int _PPStreamChunkCreateFromChunk(chunk)
   byte *chunk;
 {
-  uint uVar1;
+  uint chunkKind;
   int chunkAllocationSize;
-  int allocation;
+  int newChunk;
   undefined4 extraWord;
   
   extraWord = 0;
-  uVar1 = (uint)*chunk;
-  if (uVar1 == 8) {
+  chunkKind = (uint)*chunk;
+  if (chunkKind == 8) {
     extraWord = *(undefined4 *)(chunk + 0x40);
   }
-  else if (uVar1 == 0xb) {
+  else if (chunkKind == 0xb) {
     extraWord = *(undefined4 *)(chunk + 0x10);
   }
-  chunkAllocationSize = _GetChunkAllocationSize(uVar1,extraWord);
-  allocation = _calloc(chunkAllocationSize + 0xc,1);
-  _memmove(allocation,chunk,chunkAllocationSize + 0xc);
-  *(undefined4 *)(allocation + 4) = 0;
-  *(undefined4 *)(allocation + 8) = 0;
-  return allocation;
+  chunkAllocationSize = _GetChunkAllocationSize(chunkKind,extraWord);
+  newChunk = _calloc(chunkAllocationSize + 0xc,1);
+  _memmove(newChunk,chunk,chunkAllocationSize + 0xc);
+  *(undefined4 *)(newChunk + 4) = 0;
+  *(undefined4 *)(newChunk + 8) = 0;
+  return newChunk;
 }
 

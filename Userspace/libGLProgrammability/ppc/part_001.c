@@ -1,11 +1,11 @@
 #include "decls.h"
 
 /* _GetChunkAllocationSize @ 0x97b825bc (124 bytes) */
-int _GetChunkAllocationSize(param_1, param_2)
-  undefined4 param_1;
-  int param_2;
+int _GetChunkAllocationSize(chunkKind, extraSize)
+  undefined4 chunkKind;
+  int extraSize;
 {
-  switch(param_1) {
+  switch(chunkKind) {
   case 0:
   case 3:
   case 10:
@@ -22,15 +22,15 @@ int _GetChunkAllocationSize(param_1, param_2)
   case 8:
     break;
   case 0xb:
-    if (param_2 != 0) {
-      return param_2 + 9;
+    if (extraSize != 0) {
+      return extraSize + 9;
     }
     return 8;
   default:
     return 0;
   }
-  if (param_2 != 0) {
-    return param_2 + 0x39;
+  if (extraSize != 0) {
+    return extraSize + 0x39;
   }
   return 0x38;
 }
@@ -83,12 +83,12 @@ int _PPStreamChunkListSort(chunkList)
 }
 
 /* _PPStreamAttachOperationsChunkList @ 0x97b82704 (56 bytes) */
-int _PPStreamAttachOperationsChunkList(stream, param_2)
+int _PPStreamAttachOperationsChunkList(stream, chunkList)
   int stream;
-  undefined4 param_2;
+  undefined4 chunkList;
 {
   ((int (*)())_PPStreamChunkListFree)(*(undefined4 *)(stream + 0x20));
-  *(undefined4 *)(stream + 0x20) = param_2;
+  *(undefined4 *)(stream + 0x20) = chunkList;
   return;
 }
 
@@ -141,22 +141,22 @@ int _PPStreamChunkListRemoveChunk(chunkList, chunk)
 }
 
 /* _PPStreamAttachParamBindingsChunkList @ 0x97b82808 (56 bytes) */
-int _PPStreamAttachParamBindingsChunkList(stream, param_2)
+int _PPStreamAttachParamBindingsChunkList(stream, chunkList)
   int stream;
-  undefined4 param_2;
+  undefined4 chunkList;
 {
   ((int (*)())_PPStreamChunkListFree)(*(undefined4 *)(stream + 0x10));
-  *(undefined4 *)(stream + 0x10) = param_2;
+  *(undefined4 *)(stream + 0x10) = chunkList;
   return;
 }
 
 /* _PPStreamAttachParamBindingArraysChunkList @ 0x97b82840 (56 bytes) */
-int _PPStreamAttachParamBindingArraysChunkList(stream, param_2)
+int _PPStreamAttachParamBindingArraysChunkList(stream, chunkList)
   int stream;
-  undefined4 param_2;
+  undefined4 chunkList;
 {
   ((int (*)())_PPStreamChunkListFree)(*(undefined4 *)(stream + 0x14));
-  *(undefined4 *)(stream + 0x14) = param_2;
+  *(undefined4 *)(stream + 0x14) = chunkList;
   return;
 }
 
@@ -339,13 +339,13 @@ int _PPStreamAddTempUsage(stream, usage)
 /* _PPEmulatorProgramCreate @ 0x97b82d7c (72 bytes) */
 int _PPEmulatorProgramCreate()
 {
-  undefined4 uVar1;
+  undefined4 defaultWord;
   int allocation;
   
   allocation = _calloc(0x128,1);
-  uVar1 = DAT_a7b7bda4;
+  defaultWord = DAT_a7b7bda4;
   *(undefined4 *)(allocation + 0xc) = DAT_a7b7bda4;
-  *(undefined4 *)(allocation + 8) = uVar1;
+  *(undefined4 *)(allocation + 8) = defaultWord;
   /* dropped-return-value defect (class 25, issue #68) - stock leaves calloc's result in r3
    * through to blr; verified via Capstone disasm of the real 0x97b82d7c body. */
   return allocation;
@@ -949,13 +949,13 @@ int _PPParserFree(parser)
 int _PPParserShutdown(parser)
   int parser;
 {
-  int iVar1;
+  int scope;
   undefined4 ppParserAttachStringResult;
   
-  iVar1 = *(int *)(parser + 0x448);
-  while (iVar1 != 0) {
-    ((int (*)())_PPParserRemoveScope)(parser,iVar1);
-    iVar1 = *(int *)(parser + 0x448);
+  scope = *(int *)(parser + 0x448);
+  while (scope != 0) {
+    ((int (*)())_PPParserRemoveScope)(parser,scope);
+    scope = *(int *)(parser + 0x448);
   }
   ppParserAttachStringResult = _PPParserAttachString(parser,0,0);
   return ppParserAttachStringResult;
@@ -986,22 +986,22 @@ int _PPParserRemoveScope(parser, scope)
 }
 
 /* _PPParserScopeFree @ 0x97b83f70 (116 bytes) */
-int _PPParserScopeFree(parser)
-  int *parser;
+int _PPParserScopeFree(scope)
+  int *scope;
 {
-  int iVar1;
+  int entry;
   
-  iVar1 = *parser;
-  while (iVar1 != 0) {
-    ((int (*)())_PPParserScopeRemoveIdentifier)(parser,iVar1);
-    iVar1 = *parser;
+  entry = *scope;
+  while (entry != 0) {
+    ((int (*)())_PPParserScopeRemoveIdentifier)(scope,entry);
+    entry = *scope;
   }
-  iVar1 = parser[2];
-  while (iVar1 != 0) {
-    ((int (*)())_PPParserScopeRemoveMacro)(parser,iVar1);
-    iVar1 = parser[2];
+  entry = scope[2];
+  while (entry != 0) {
+    ((int (*)())_PPParserScopeRemoveMacro)(scope,entry);
+    entry = scope[2];
   }
-  return _free(parser);
+  return _free(scope);
 }
 
 /* _PPParserScopeRemoveIdentifier @ 0x97b83fe4 (68 bytes) */
@@ -1946,22 +1946,22 @@ LAB_97b85398:
 /* __dyld_func_lookup @ 0x97b853f8 (32 bytes) */
 int __dyld_func_lookup()
 {
-  undefined4 uVar1;
+  undefined4 result;
   
                     
                     
-  uVar1 = (*dyld_func_lookup_pointer)();
-  return uVar1;
+  result = (*dyld_func_lookup_pointer)();
+  return result;
 }
 
 /* ___initialize_Cplusplus @ 0x97b85418 (88 bytes) */
 int ___initialize_Cplusplus()
 {
-  undefined4 uStack_28;
+  undefined4 initializerFn;
   
   ((int (*)())__dyld_func_lookup)();
-  if ((void *)uStack_28 != (void *)0) {
-    ((int (*)())uStack_28)(PTR___mh_dylib_header_a7b7c0a0);
+  if ((void *)initializerFn != (void *)0) {
+    ((int (*)())initializerFn)(PTR___mh_dylib_header_a7b7c0a0);
   }
   return;
 }
@@ -1988,16 +1988,16 @@ int DetachProcess()
 }
 
 /* _InitStringTable @ 0x97b854d8 (84 bytes) */
-int _InitStringTable(param_1)
-  int *param_1;
+int _InitStringTable(stringTable)
+  int *stringTable;
 {
   int allocation;
   
   allocation = _malloc(0x4000);
-  *param_1 = allocation;
+  *stringTable = allocation;
   if (allocation != 0) {
-    param_1[2] = 0x4000;
-    param_1[1] = 1;
+    stringTable[2] = 0x4000;
+    stringTable[1] = 1;
   }
   return (uint)(allocation != 0);
 }
@@ -2122,15 +2122,15 @@ int _InitHashTable(htable, tableSize)
 }
 
 /* _FreeHashTable @ 0x97b85734 (72 bytes) */
-int _FreeHashTable(param_1)
-  int *param_1;
+int _FreeHashTable(htable)
+  int *htable;
 {
-  if (*param_1 != 0) {
-    _free(*param_1);
+  if (*htable != 0) {
+    _free(*htable);
   }
-  param_1[2] = 0;
-  *param_1 = 0;
-  param_1[1] = 0;
+  htable[2] = 0;
+  *htable = 0;
+  htable[1] = 0;
   return;
 }
 
@@ -2348,35 +2348,35 @@ int _LookUpAddString(atable, string)
 }
 
 /* _GetAtomString @ 0x97b85c1c (144 bytes) */
-int _GetAtomString(param_1, param_2)
-  int *param_1;
-  int param_2;
+int _GetAtomString(atable, atom)
+  int *atable;
+  int atom;
 {
   int stringOffset;
   
-  if ((0 < param_2) && (param_2 < param_1[0xc])) {
-    stringOffset = *(int *)(param_2 * 4 + param_1[10]);
-    if ((0 < stringOffset) && (stringOffset < param_1[1])) {
-      return (char *)(*param_1 + stringOffset);
+  if ((0 < atom) && (atom < atable[0xc])) {
+    stringOffset = *(int *)(atom * 4 + atable[10]);
+    if ((0 < stringOffset) && (stringOffset < atable[1])) {
+      return (char *)(*atable + stringOffset);
     }
     return "<internal error: bad soffset>";
   }
-  if (param_2 == 0) {
+  if (atom == 0) {
     return "<null atom>";
   }
-  if (param_2 == -1) {
+  if (atom == -1) {
     return "<EOF>";
   }
   return "<invalid atom>";
 }
 
 /* _GetReversedAtom @ 0x97b85cac (44 bytes) */
-int _GetReversedAtom(param_1, param_2)
-  int param_1;
-  int param_2;
+int _GetReversedAtom(atable, atom)
+  int atable;
+  int atom;
 {
-  if ((0 < param_2) && (param_2 < *(int *)(param_1 + 0x30))) {
-    return *(undefined4 *)(param_2 * 4 + *(int *)(param_1 + 0x2c));
+  if ((0 < atom) && (atom < *(int *)(atable + 0x30))) {
+    return *(undefined4 *)(atom * 4 + *(int *)(atable + 0x2c));
   }
   return 0;
 }

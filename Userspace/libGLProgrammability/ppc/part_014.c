@@ -3362,8 +3362,8 @@ int _PPCRuntimeCompilerBackupRegister(compiler, regIndex)
   uint regIndex;
 {
   uint loopIndex3;
-  uint *vectorInstWord2;
-  undefined4 *vectorInstWord;
+  uint *codeCursor2;
+  undefined4 *codeCursor;
   uint registerLimit;
   int recordWord7;
   int variableInfo2;
@@ -3378,42 +3378,42 @@ int _PPCRuntimeCompilerBackupRegister(compiler, regIndex)
   int vectorMode;
   uint loopIndex2;
   uint loopIndex;
-  char cVar1;
-  byte bVar2;
-  bool bVar3;
-  undefined4 vectorInstWord4;
-  byte *pbVar5;
-  undefined4 *puVar6;
-  uint uVar7;
-  uint *puVar8;
-  int *piVar9;
-  int iVar10;
+  char selectByte;
+  byte componentSelect;
+  bool foundCandidate;
+  undefined4 instWord;
+  byte *selectCursor;
+  undefined4 *codeCursor3;
+  uint scanIndex;
+  uint *codeCursor4;
+  int *flagCursor;
+  int vectorModeOrCmp;
   int *regRecord;
   uint nextComponent;
-  int *piVar13;
-  uint vectorInstWord3;
-  int iVar15;
+  int *usedFlags;
+  uint rotateWords;
+  int regsLeft;
   int bestAge;
   uint candidateReg;
-  int iVar18;
+  int recordOffset;
   uint vectorRegIndex;
-  uint uVar20;
-  int local_60 [4];
-  byte local_50;
-  byte local_4f;
-  byte local_4e;
-  byte local_4d;
-  undefined4 local_4c;
-  undefined4 local_48;
+  uint bankIndex;
+  int componentUsedFlags [4];
+  byte transferSel0;
+  byte transferSel1;
+  byte transferSel2;
+  byte transferSel3;
+  undefined4 identitySwizzle;
+  undefined4 newSwizzleWord;
   
   vectorMode = compiler[0x393];
   candidateReg = 0;
   bestAge = 0;
-  bVar3 = false;
+  foundCandidate = false;
   if (vectorMode != 0) {
     regIndex = regIndex + 0x20;
   }
-  iVar18 = regIndex * 0x38;
+  recordOffset = regIndex * 0x38;
   if (compiler[regIndex * 0xe] == 0) {
     loopIndex = 0;
     regRecord = compiler;
@@ -3446,7 +3446,7 @@ LAB_97bd8c50:
       loopIndex = loopIndex + 1;
       regRecord = regRecord + 0xe;
     } while (loopIndex < 0x20);
-    iVar10 = 0;
+    vectorModeOrCmp = 0;
     if (vectorMode != 0) {
       vectorRegIndex = regIndex - 0x20;
       loopIndex2 = 0;
@@ -3455,30 +3455,30 @@ LAB_97bd8c50:
       do {
         if (((loopIndex2 != vectorRegIndex) && (regRecord[0x1c0] == 0)) &&
            ((regRecord[0x1cb] != 0 &&
-            ((iVar10 = _memcmp(regRecord[0x1c2],compiler[regIndex * 0xe + 2],0x10), iVar10 == 0 &&
+            ((vectorModeOrCmp = _memcmp(regRecord[0x1c2],compiler[regIndex * 0xe + 2],0x10), vectorModeOrCmp == 0 &&
              (*(short *)(regRecord + 0x1c6) == *(short *)(compiler + regIndex * 0xe + 6))))))) {
-          local_4c = 0x10203;
+          identitySwizzle = 0x10203;
           if (((uint)compiler[vectorRegIndex * 0xe + 0x1c4] >> 8 !=
                (compiler[vectorRegIndex * 0xe + 0x1c4] & 0xffffffU)) &&
              (((*(char *)(compiler + vectorRegIndex * 0xe + 0x1c4) != '\0' &&
                (*(char *)(compiler + vectorRegIndex * 0xe + 0x1c4) != -1)) ||
-              ((((cVar1 = *(char *)((int)compiler + vectorRegIndex * 0x38 + 0x711), cVar1 != '\x01' &&
-                 (cVar1 != -1)) ||
-                ((cVar1 = *(char *)((int)compiler + vectorRegIndex * 0x38 + 0x712), cVar1 != '\x02' &&
-                 (cVar1 != -1)))) ||
-               ((cVar1 = *(char *)((int)compiler + vectorRegIndex * 0x38 + 0x713), cVar1 != '\x03' &&
-                (cVar1 != -1)))))))) {
+              ((((selectByte = *(char *)((int)compiler + vectorRegIndex * 0x38 + 0x711), selectByte != '\x01' &&
+                 (selectByte != -1)) ||
+                ((selectByte = *(char *)((int)compiler + vectorRegIndex * 0x38 + 0x712), selectByte != '\x02' &&
+                 (selectByte != -1)))) ||
+               ((selectByte = *(char *)((int)compiler + vectorRegIndex * 0x38 + 0x713), selectByte != '\x03' &&
+                (selectByte != -1)))))))) {
             _PPCRuntimeCompilerBuildTransferSwizzle
-                      (&local_50,compiler + vectorRegIndex * 0xe + 0x1c4,&local_4c);
-            _PPCRuntimeCompilerSwizzleRegisterAV(compiler,vectorRegIndex,&local_50);
-            local_48 = CONCAT31(CONCAT21(CONCAT11(*(undefined1 *)
-                                                   ((int)compiler + (uint)local_50 + vectorRecordOffset + 8),
+                      (&transferSel0,compiler + vectorRegIndex * 0xe + 0x1c4,&identitySwizzle);
+            _PPCRuntimeCompilerSwizzleRegisterAV(compiler,vectorRegIndex,&transferSel0);
+            newSwizzleWord = CONCAT31(CONCAT21(CONCAT11(*(undefined1 *)
+                                                   ((int)compiler + (uint)transferSel0 + vectorRecordOffset + 8),
                                                   *(undefined1 *)
-                                                   ((int)compiler + (uint)local_4f + vectorRecordOffset + 8)),
-                                         *(undefined1 *)((int)compiler + (uint)local_4e + vectorRecordOffset + 8)
+                                                   ((int)compiler + (uint)transferSel1 + vectorRecordOffset + 8)),
+                                         *(undefined1 *)((int)compiler + (uint)transferSel2 + vectorRecordOffset + 8)
                                         ),
-                                *(undefined1 *)((int)compiler + (uint)local_4d + vectorRecordOffset + 8));
-            compiler[vectorRegIndex * 0xe + 0x1c4] = local_48;
+                                *(undefined1 *)((int)compiler + (uint)transferSel3 + vectorRecordOffset + 8));
+            compiler[vectorRegIndex * 0xe + 0x1c4] = newSwizzleWord;
           }
           if (((uint)regRecord[0x1c4] >> 8 != (regRecord[0x1c4] & 0xffffffU)) &&
              (((((*(char *)(regRecord + 0x1c4) != '\0' && (*(char *)(regRecord + 0x1c4) != -1)) ||
@@ -3488,102 +3488,102 @@ LAB_97bd8c50:
                 (*(char *)((int)regRecord + 0x712) != -1)))) ||
               ((*(char *)((int)regRecord + 0x713) != '\x03' && (*(char *)((int)regRecord + 0x713) != -1)
                ))))) {
-            _PPCRuntimeCompilerBuildTransferSwizzle(&local_50,regRecord + 0x1c4,&local_4c);
-            _PPCRuntimeCompilerSwizzleRegisterAV(compiler,loopIndex2,&local_50);
-            local_48 = CONCAT31(CONCAT21(CONCAT11(*(undefined1 *)((int)regRecord + local_50 + 0x710),
-                                                  *(undefined1 *)((int)regRecord + local_4f + 0x710)),
-                                         *(undefined1 *)((int)regRecord + local_4e + 0x710)),
-                                *(undefined1 *)((int)regRecord + local_4d + 0x710));
-            regRecord[0x1c4] = local_48;
+            _PPCRuntimeCompilerBuildTransferSwizzle(&transferSel0,regRecord + 0x1c4,&identitySwizzle);
+            _PPCRuntimeCompilerSwizzleRegisterAV(compiler,loopIndex2,&transferSel0);
+            newSwizzleWord = CONCAT31(CONCAT21(CONCAT11(*(undefined1 *)((int)regRecord + transferSel0 + 0x710),
+                                                  *(undefined1 *)((int)regRecord + transferSel1 + 0x710)),
+                                         *(undefined1 *)((int)regRecord + transferSel2 + 0x710)),
+                                *(undefined1 *)((int)regRecord + transferSel3 + 0x710));
+            regRecord[0x1c4] = newSwizzleWord;
           }
-          local_60[3] = 0;
+          componentUsedFlags[3] = 0;
           componentsRemaining = 4;
-          local_60[0] = 0;
-          local_60[1] = 0;
-          piVar13 = local_60;
-          local_60[2] = 0;
-          pbVar5 = (byte *)(compiler + vectorRegIndex * 0xe + 0x1c4);
+          componentUsedFlags[0] = 0;
+          componentUsedFlags[1] = 0;
+          usedFlags = componentUsedFlags;
+          componentUsedFlags[2] = 0;
+          selectCursor = (byte *)(compiler + vectorRegIndex * 0xe + 0x1c4);
           do {
-            bVar2 = *pbVar5;
-            pbVar5 = pbVar5 + 1;
-            if (bVar2 < 4) {
-              piVar13[bVar2] = 1;
+            componentSelect = *selectCursor;
+            selectCursor = selectCursor + 1;
+            if (componentSelect < 4) {
+              usedFlags[componentSelect] = 1;
             }
             componentsRemaining = componentsRemaining + -1;
           } while (componentsRemaining != 0);
-          if (local_60[0] + local_60[1] + local_60[2] + local_60[3] == 1) {
-            if (local_60[0] == 0) {
-              if (local_60[1] == 0) {
-                if (local_60[2] == 0) {
-                  if (local_60[3] == 0) goto LAB_97bd9024;
-                  puVar6 = (undefined4 *)compiler[0x38c];
-                  vectorInstWord4 = 0x106d6c84;
+          if (componentUsedFlags[0] + componentUsedFlags[1] + componentUsedFlags[2] + componentUsedFlags[3] == 1) {
+            if (componentUsedFlags[0] == 0) {
+              if (componentUsedFlags[1] == 0) {
+                if (componentUsedFlags[2] == 0) {
+                  if (componentUsedFlags[3] == 0) goto LAB_97bd9024;
+                  codeCursor3 = (undefined4 *)compiler[0x38c];
+                  instWord = 0x106d6c84;
                 }
                 else {
-                  puVar6 = (undefined4 *)compiler[0x38c];
-                  vectorInstWord4 = 0x106d492c;
+                  codeCursor3 = (undefined4 *)compiler[0x38c];
+                  instWord = 0x106d492c;
                 }
               }
               else {
-                puVar6 = (undefined4 *)compiler[0x38c];
-                vectorInstWord4 = 0x106d4a2c;
+                codeCursor3 = (undefined4 *)compiler[0x38c];
+                instWord = 0x106d4a2c;
               }
             }
             else {
-              puVar6 = (undefined4 *)compiler[0x38c];
-              vectorInstWord4 = 0x106d4b2c;
+              codeCursor3 = (undefined4 *)compiler[0x38c];
+              instWord = 0x106d4b2c;
             }
-            *puVar6 = vectorInstWord4;
-            compiler[0x38c] = (int)(puVar6 + 1);
+            *codeCursor3 = instWord;
+            compiler[0x38c] = (int)(codeCursor3 + 1);
           }
           else {
-            vectorInstWord = (undefined4 *)compiler[0x38c];
-            *vectorInstWord = 0x10836a8c;
-            vectorInstWord[1] = 0x10694c84;
-            compiler[0x38c] = (int)(vectorInstWord + 2);
+            codeCursor = (undefined4 *)compiler[0x38c];
+            *codeCursor = 0x10836a8c;
+            codeCursor[1] = 0x10694c84;
+            compiler[0x38c] = (int)(codeCursor + 2);
             loopIndex3 = 0;
             do {
               nextComponent = loopIndex3 + 1;
-              if (piVar13[loopIndex3] != 0) {
-                vectorInstWord3 = 3 - loopIndex3;
+              if (usedFlags[loopIndex3] != 0) {
+                rotateWords = 3 - loopIndex3;
                 if (nextComponent < 4) {
-                  piVar9 = piVar13 + nextComponent;
-                  uVar7 = nextComponent;
+                  flagCursor = usedFlags + nextComponent;
+                  scanIndex = nextComponent;
                   do {
-                    componentSlot = *piVar9;
-                    piVar9 = piVar9 + 1;
+                    componentSlot = *flagCursor;
+                    flagCursor = flagCursor + 1;
                     if (componentSlot != 0) {
-                      vectorInstWord3 = (uVar7 - loopIndex3) - 1;
+                      rotateWords = (scanIndex - loopIndex3) - 1;
                       break;
                     }
-                    uVar7 = uVar7 + 1;
-                  } while (uVar7 < 4);
+                    scanIndex = scanIndex + 1;
+                  } while (scanIndex < 4);
                 }
-                vectorInstWord = (undefined4 *)compiler[0x38c];
-                *vectorInstWord = 0x1063212c;
-                compiler[0x38c] = (int)(vectorInstWord + 1);
-                if (vectorInstWord3 != 0) {
-                  vectorInstWord[1] = (vectorInstWord3 & 3) << 8 | 0x1063482c;
-                  compiler[0x38c] = (int)(vectorInstWord + 2);
+                codeCursor = (undefined4 *)compiler[0x38c];
+                *codeCursor = 0x1063212c;
+                compiler[0x38c] = (int)(codeCursor + 1);
+                if (rotateWords != 0) {
+                  codeCursor[1] = (rotateWords & 3) << 8 | 0x1063482c;
+                  compiler[0x38c] = (int)(codeCursor + 2);
                 }
               }
               loopIndex3 = nextComponent;
             } while (nextComponent < 4);
           }
 LAB_97bd9024:
-          vectorInstWord2 = (uint *)compiler[0x38c];
+          codeCursor2 = (uint *)compiler[0x38c];
           regRecord = regRecord + 0x1c4;
-          *vectorInstWord2 = loopIndex2 << 0x15 | loopIndex2 << 0x10 | vectorRegIndex * 0x800 | 0x100000ea;
+          *codeCursor2 = loopIndex2 << 0x15 | loopIndex2 << 0x10 | vectorRegIndex * 0x800 | 0x100000ea;
           componentsRemaining = 4;
-          compiler[0x38c] = (int)(vectorInstWord2 + 1);
-          piVar9 = compiler + vectorRegIndex * 0xe + 0x1c4;
+          compiler[0x38c] = (int)(codeCursor2 + 1);
+          flagCursor = compiler + vectorRegIndex * 0xe + 0x1c4;
           do {
-            componentUsed = *piVar13;
-            piVar13 = piVar13 + 1;
+            componentUsed = *usedFlags;
+            usedFlags = usedFlags + 1;
             if (componentUsed != 0) {
-              *(undefined1 *)regRecord = *(undefined1 *)piVar9;
+              *(undefined1 *)regRecord = *(undefined1 *)flagCursor;
             }
-            piVar9 = (int *)((int)piVar9 + 1);
+            flagCursor = (int *)((int)flagCursor + 1);
             regRecord = (int *)((int)regRecord + 1);
             componentsRemaining = componentsRemaining + -1;
           } while (componentsRemaining != 0);
@@ -3592,13 +3592,13 @@ LAB_97bd9024:
         loopIndex2 = loopIndex2 + 1;
         regRecord = regRecord + 0xe;
       } while (loopIndex2 < 0x20);
-      iVar10 = compiler[0x393];
+      vectorModeOrCmp = compiler[0x393];
     }
-    if (((iVar10 != 0) && (*(short *)(compiler + regIndex * 0xe + 6) == 0)) &&
+    if (((vectorModeOrCmp != 0) && (*(short *)(compiler + regIndex * 0xe + 6) == 0)) &&
        ((*(char *)(compiler + regIndex * 0xe + 4) == -1 ||
-        (((*(char *)((int)compiler + iVar18 + 0x11) == -1 ||
-          (*(char *)((int)compiler + iVar18 + 0x12) == -1)) ||
-         (*(char *)((int)compiler + iVar18 + 0x13) == -1)))))) {
+        (((*(char *)((int)compiler + recordOffset + 0x11) == -1 ||
+          (*(char *)((int)compiler + recordOffset + 0x12) == -1)) ||
+         (*(char *)((int)compiler + recordOffset + 0x13) == -1)))))) {
       variableInfo = _PPCRuntimeCompilerFindVariableInfo
                          (compiler,compiler[regIndex * 0xe + 2],compiler[regIndex * 0xe + 3],
                           compiler[regIndex * 0xe + 4],compiler[regIndex * 0xe + 5],
@@ -3609,33 +3609,33 @@ LAB_97bd9024:
         ((int (*)())_PPCRuntimeCompilerDirtyRegister)(compiler,regIndex - 0x20);
         return;
       }
-      iVar10 = compiler[0x393];
+      vectorModeOrCmp = compiler[0x393];
     }
-    uVar20 = (uint)(iVar10 != 0);
-    bankFirstReg = uVar20 * 0x20;
-    if (iVar10 == 0) {
+    bankIndex = (uint)(vectorModeOrCmp != 0);
+    bankFirstReg = bankIndex * 0x20;
+    if (vectorModeOrCmp == 0) {
       registerLimit = 0x20;
     }
     else {
       registerLimit = 0x40;
     }
     if (bankFirstReg < registerLimit) {
-      iVar15 = registerLimit + uVar20 * -0x20;
-      regRecord = compiler + uVar20 * 0x1c0;
+      regsLeft = registerLimit + bankIndex * -0x20;
+      regRecord = compiler + bankIndex * 0x1c0;
       do {
         if (((bankFirstReg != regIndex) && (regRecord[0xb] != 0)) &&
            ((bestAge <= compiler[0x391] - regRecord[0xc] && (regRecord[0xd] == 0)))) {
-          bVar3 = true;
+          foundCandidate = true;
           bestAge = compiler[0x391] - regRecord[0xc];
           candidateReg = bankFirstReg;
         }
         bankFirstReg = bankFirstReg + 1;
         regRecord = regRecord + 0xe;
-        iVar15 = iVar15 + -1;
-      } while (iVar15 != 0);
-      if (bVar3) {
+        regsLeft = regsLeft + -1;
+      } while (regsLeft != 0);
+      if (foundCandidate) {
         if ((*(short *)(compiler + candidateReg * 0xe + 6) == 0) && (compiler[candidateReg * 0xe] == 0)) {
-          if (iVar10 == 0) {
+          if (vectorModeOrCmp == 0) {
             ((int (*)())_PPCRuntimeCompilerSaveRegisterToMemory)(compiler,candidateReg);
           }
           else {
@@ -3647,9 +3647,9 @@ LAB_97bd9024:
                                 compiler[candidateReg * 0xe + 8]);
             *(undefined4 *)(variableInfo2 + 4) = 1;
           }
-          iVar10 = compiler[0x393];
+          vectorModeOrCmp = compiler[0x393];
         }
-        if (iVar10 == 0) {
+        if (vectorModeOrCmp == 0) {
           recordWord7 = compiler[regIndex * 0xe + 7];
           targetReg = candidateReg;
         }
@@ -3663,21 +3663,21 @@ LAB_97bd9024:
                    compiler[regIndex * 0xe + 10],compiler[regIndex * 0xe + 0xd],
                    compiler[regIndex * 0xe + 1]);
         if (compiler[0x393] == 0) {
-          puVar8 = (uint *)compiler[0x38c];
+          codeCursor4 = (uint *)compiler[0x38c];
           candidateReg = candidateReg << 0x15 | regIndex << 0xb | 0xfc000090;
         }
         else {
-          puVar8 = (uint *)compiler[0x38c];
+          codeCursor4 = (uint *)compiler[0x38c];
           candidateReg = (candidateReg - 0x20) * 0x200000 | (regIndex - 0x20) * 0x10000 |
                    (regIndex - 0x20) * 0x800 | 0x10000484;
         }
-        *puVar8 = candidateReg;
-        compiler[0x38c] = (int)(puVar8 + 1);
+        *codeCursor4 = candidateReg;
+        compiler[0x38c] = (int)(codeCursor4 + 1);
         return;
       }
     }
     if (*(short *)(compiler + regIndex * 0xe + 6) == 0) {
-      if (iVar10 != 0) {
+      if (vectorModeOrCmp != 0) {
         regIndex = regIndex - 0x20;
       }
       ((int (*)())_PPCRuntimeCompilerSaveRegisterToMemory)(compiler,regIndex);

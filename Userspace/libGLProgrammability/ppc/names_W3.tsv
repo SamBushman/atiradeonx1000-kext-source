@@ -179,7 +179,7 @@ local	_PPEmulatorProgramConvertFromPPStream	param_1	emulator	INFERRED	dereferenc
 local	_PPStreamChunkListChunkAtIndex	param_1	chunkList	INFERRED	dereferenced as the PPStream object (2 field accesses); every PPStream* function takes it first
 local	_PPParserShutdown	param_1	parser	INFERRED	dereferenced as the PPParser object (2 field accesses); every PPParser* function takes it first
 local	_PPParserRemoveScope	param_1	parser	INFERRED	dereferenced as the PPParser object (2 field accesses); every PPParser* function takes it first
-local	_PPParserScopeFree	param_1	parser	INFERRED	dereferenced as the PPParser object (5 field accesses); every PPParser* function takes it first
+local	_PPParserScopeFree	param_1	scope	INFERRED	dereferenced as the PPParser object (5 field accesses); every PPParser* function takes it first
 local	_PPParserScopeRemoveIdentifier	param_1	scope	INFERRED	dereferenced as the PPParser object (3 field accesses); every PPParser* function takes it first
 local	_PPParserScopeRemoveMacro	param_1	scope	INFERRED	dereferenced as the PPParser object (2 field accesses); every PPParser* function takes it first
 local	_PPParserMacroFree	param_1	macro	INFERRED	dereferenced as the PPParser object (8 field accesses); every PPParser* function takes it first

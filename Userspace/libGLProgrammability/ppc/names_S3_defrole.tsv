@@ -103,7 +103,7 @@ use	_PPStreamAttribBindingIsEqual	iVar1	compareResult	INFERRED	every definition 
 use	_PPStreamOutputBindingIsEqual	iVar1	compareResult	INFERRED	every definition is the result of a call whose name says it returns this	#4	+1	all	all
 use	_PPStreamParamBindingIsEqual	iVar1	compareResult	INFERRED	every definition is the result of a call whose name says it returns this	#4	+1	all	all
 use	_PPStreamChunkCreateFromChunk	iVar2	chunkAllocationSize	INFERRED	every definition is the result of a call whose name says it returns this	#8	+2	all	all
-use	_PPStreamChunkCreateFromChunk	iVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#9	+4	all	all
+use	_PPStreamChunkCreateFromChunk	iVar3	newChunk	INFERRED	every definition is the result of a call whose name says it returns this	#9	+4	all	all
 use	_PPStreamAddTempUsage	puVar1	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#0	+11	all	all
 use	_PPEmulatorProgramCreate	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#0	+6	all	all
 use	_PPEmulatorProgramInitialiseHandleBanks	uVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#28	+2	all	all

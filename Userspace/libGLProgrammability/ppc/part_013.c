@@ -3169,6 +3169,9 @@ int _InterpreterTestCR(machine, operandWord0, operandWord1, operandWord2, operan
 /* _InterpreterEmulateOp @ 0x97bcdd50 (20820 bytes) */
 int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
+  float sourceComponentW;
+  float smoothT;
+  byte vectorDimension;
   uint textureTarget;
   float *srcElementPtr;
   uint destUpdatesCC;
@@ -3216,21 +3219,21 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam
   double powResult;
   uint loopIndex;
   uint loopIndex2;
-  float *pfVar1;
-  bool bVar2;
+  float *srcBElement;
+  bool cmpResult;
   char saturate;
-  byte bVar4;
+  byte instUpdateCC;
   char swizzleSelect;
-  float fVar6;
-  float fVar7;
+  float dotProduct;
+  float logicComponent;
   uint boolBit8;
-  byte *pbVar9;
+  byte *srcDimCursor;
   float *operandScratch;
-  int *piVar11;
+  int *poppedStackTop;
   float *in_r5_artifact;
   int destIndexInfo;
   int destStorageFlags;
-  int iVar14;
+  int callStackTop;
   int destWord5;
   int destValueType;
   uint scalarSourceIndex;
@@ -3241,10 +3244,10 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam
   int destConditionSwizzleZW;
   float *srcAPtr;
   uint sourceElement;
-  bool bVar25;
+  bool fallsThrough;
   int sourcesRemaining;
-  double dVar27;
-  double dVar28;
+  double texLodOrBias;
+  double mathTemp;
   double floorValue_29;
   double floorValue_30;
   double floorValue_31;
@@ -3272,17 +3275,17 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam
   float prodC3R1;
   float prodC3R2;
   float prodC3R3;
-  undefined4 local_b0;
-  uint uStack_ac;
-  longlong local_a8;
-  longlong local_a0;
-  longlong local_98;
-  longlong local_90;
-  float local_80;
-  float local_7c;
-  float local_78;
-  float local_74;
-  float local_70;
+  undefined4 i2dHi;
+  uint i2dLo;
+  longlong d2iScratch1;
+  longlong d2iScratch2;
+  longlong d2iScratch3;
+  longlong d2iScratch4;
+  float texelX;
+  float texelY;
+  float texelZ;
+  float texelW;
+  float storedComponent;
   
   emulator = *machine;
   nextInst = inst + 0x47;
@@ -3294,18 +3297,18 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam
   elementCount = 1;
   opVec[0] = 0.0;
   opVec[1] = 0.0;
-  bVar25 = true;
+  fallsThrough = true;
   opVec[2] = 0.0;
   opcode = *inst;
   saturate = *(char *)(inst + 1);
   if (sourceCount != 0) {
-    pbVar9 = (byte *)((int)inst + 0x49);
+    srcDimCursor = (byte *)((int)inst + 0x49);
     sourcesRemaining = sourceCount;
     do {
-      if ((pbVar9[-1] != 0) && (elementCount < *pbVar9)) {
-        elementCount = (uint)*pbVar9;
+      if ((srcDimCursor[-1] != 0) && (elementCount < *srcDimCursor)) {
+        elementCount = (uint)*srcDimCursor;
       }
-      pbVar9 = pbVar9 + 0x24;
+      srcDimCursor = srcDimCursor + 0x24;
       sourcesRemaining = sourcesRemaining + -1;
     } while (sourcesRemaining != 0);
   }
@@ -3374,7 +3377,7 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam
             opVec[0] = opVec[4] * opVec[8];
             destValueType = inst[9];
             opVec[1] = opVec[4] * opVec[9];
-            bVar4 = *(byte *)((int)inst + 6);
+            instUpdateCC = *(byte *)((int)inst + 6);
             destWriteMask = inst[10];
             destConditionSwizzleZW = inst[0xb];
             destOffsetTable = inst[3];
@@ -3411,7 +3414,7 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam
             opVec[2] = opVec[4] * opVec[10];
             destValueType = inst[9];
             opVec[1] = opVec[4] * opVec[9];
-            bVar4 = *(byte *)((int)inst + 6);
+            instUpdateCC = *(byte *)((int)inst + 6);
             destWriteMask = inst[10];
             destConditionSwizzleZW = inst[0xb];
             destOffsetTable = inst[3];
@@ -3468,7 +3471,7 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam
             opVec[1] = opVec[4] * opVec[9];
             destValueType = inst[9];
             opVec[2] = opVec[4] * opVec[10];
-            bVar4 = *(byte *)((int)inst + 6);
+            instUpdateCC = *(byte *)((int)inst + 6);
             destWriteMask = inst[10];
             destConditionSwizzleZW = inst[0xb];
             destOffsetTable = inst[3];
@@ -3479,7 +3482,7 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam
             destWord5 = inst[8];
           }
           operandScratch = opVec;
-          destUpdatesCC = (uint)bVar4;
+          destUpdatesCC = (uint)instUpdateCC;
           goto LAB_97bd043c;
         }
         operandScratch = opVec + 8;
@@ -3869,7 +3872,7 @@ switchD_97bd0598_caseD_0:
           opVec[2] = 0.0;
         }
         else {
-          local_70 = opVec[4];
+          storedComponent = opVec[4];
           fparam_2 = (double)opVec[7];
           opVec[1] = opVec[4];
           powResult = _pow((double)opVec[5],fparam_2);
@@ -3894,11 +3897,11 @@ switchD_97bd0598_caseD_0:
       case 4:
         floorValue_29 = (double)opVec[4];
         floorResult = _floor(floorValue_29);
-        dVar28 = (double)opVec[5];
+        mathTemp = (double)opVec[5];
         opVec[0] = (float)(floorValue_29 - floorResult);
-        floorResult = _floor(dVar28);
+        floorResult = _floor(mathTemp);
         floorValue_29 = (double)opVec[6];
-        opVec[1] = (float)(dVar28 - floorResult);
+        opVec[1] = (float)(mathTemp - floorResult);
         floorResult2 = _floor(floorValue_29);
         floorValue = (double)opVec[7];
         opVec[2] = (float)(floorValue_29 - floorResult2);
@@ -3967,8 +3970,8 @@ LAB_97bd0ab8:
         if (((opVec[4] != 0.0) && (opVec[5] != 0.0)) && (opVec[6] != 0.0))
         goto LAB_97bd0ab8;
 LAB_97bd0ac8:
-        uStack_ac = boolBit ^ 0x80000000;
-        local_b0 = 0x43300000;
+        i2dLo = boolBit ^ 0x80000000;
+        i2dHi = 0x43300000;
         intAsDouble = (double)CONCAT44(0x43300000,boolBit ^ 0x80000000) - 4503601774854144.0;
 LAB_97bd0cc8:
         opVec[0] = (float)intAsDouble;
@@ -3993,22 +3996,22 @@ LAB_97bd0cc8:
         if (opVec[7] != 0.0) goto LAB_97bd1ce0;
         break;
       case 0xb:
-        bVar4 = *(byte *)((int)inst + 5);
-        if (bVar4 == 2) {
+        vectorDimension = *(byte *)((int)inst + 5);
+        if (vectorDimension == 2) {
           in_r5_artifact = opVec;
           _InterpreterNoiseGeneratorCalculate2D(machine + 1,opVec + 4,opVec);
         }
-        else if (bVar4 < 3) {
-          if (bVar4 == 1) {
+        else if (vectorDimension < 3) {
+          if (vectorDimension == 1) {
             in_r5_artifact = opVec;
             _InterpreterNoiseGeneratorCalculate1D(machine + 1,opVec + 4,opVec);
           }
         }
-        else if (bVar4 == 3) {
+        else if (vectorDimension == 3) {
           in_r5_artifact = opVec;
           _InterpreterNoiseGeneratorCalculate3D(machine + 1,opVec + 4,opVec);
         }
-        else if (bVar4 == 4) {
+        else if (vectorDimension == 4) {
           in_r5_artifact = opVec;
           _InterpreterNoiseGeneratorCalculate4D(machine + 1,opVec + 4,opVec);
         }
@@ -4135,36 +4138,36 @@ LAB_97bd1d68:
           log2Value = 0.0;
         }
         log2Result = _log2(log2Value);
-        dVar28 = (double)opVec[5];
+        mathTemp = (double)opVec[5];
         opVec[0] = (float)log2Result;
-        if (dVar28 < 0.0) {
-          dVar28 = 0.0;
+        if (mathTemp < 0.0) {
+          mathTemp = 0.0;
         }
-        log2Result = _log2(dVar28);
-        dVar28 = (double)opVec[6];
+        log2Result = _log2(mathTemp);
+        mathTemp = (double)opVec[6];
         opVec[1] = (float)log2Result;
-        if (dVar28 < 0.0) {
-          dVar28 = 0.0;
+        if (mathTemp < 0.0) {
+          mathTemp = 0.0;
         }
-        log2Result = _log2(dVar28);
-        dVar28 = (double)opVec[7];
+        log2Result = _log2(mathTemp);
+        mathTemp = (double)opVec[7];
         opVec[2] = (float)log2Result;
-        if (dVar28 < 0.0) {
-          dVar28 = 0.0;
+        if (mathTemp < 0.0) {
+          mathTemp = 0.0;
         }
-        powValue = _log2(dVar28);
+        powValue = _log2(mathTemp);
         goto LAB_97bd2010;
       case 0x14:
-        dVar28 = ABS((double)opVec[7]);
-        log2Result = _log2(dVar28);
+        mathTemp = ABS((double)opVec[7]);
+        log2Result = _log2(mathTemp);
         floorResult = _floor(log2Result);
         opVec[0] = (float)floorResult;
         exp2Result = _exp2((double)opVec[0]);
-        opVec[1] = (float)(dVar28 / exp2Result);
-        if (dVar28 < 0.0) {
-          dVar28 = 0.0;
+        opVec[1] = (float)(mathTemp / exp2Result);
+        if (mathTemp < 0.0) {
+          mathTemp = 0.0;
         }
-        exp2Value = _log2(dVar28);
+        exp2Value = _log2(mathTemp);
 LAB_97bd0fd4:
         opVec[2] = (float)exp2Value;
         opVec[3] = 1.0;
@@ -4302,10 +4305,10 @@ LAB_97bd109c:
           floorValue_30 = (double)opVec[8];
           opVec[0] = (float)-(floorValue_31 * floorResult2 - floorValue);
           floorResult = _floor((double)(float)(floorValue_29 / floorValue_30));
-          dVar28 = (double)opVec[6];
+          mathTemp = (double)opVec[6];
           floorValue_31 = (double)opVec[8];
           opVec[1] = (float)-(floorValue_30 * floorResult - floorValue_29);
-          floorResult = _floor((double)(float)(dVar28 / floorValue_31));
+          floorResult = _floor((double)(float)(mathTemp / floorValue_31));
           operandComponent = opVec[8];
         }
         else {
@@ -4316,14 +4319,14 @@ LAB_97bd109c:
           floorValue_30 = (double)opVec[9];
           opVec[0] = (float)-(floorValue_31 * floorResult2 - floorValue);
           floorResult = _floor((double)(float)(floorValue_29 / floorValue_30));
-          dVar28 = (double)opVec[6];
+          mathTemp = (double)opVec[6];
           floorValue_31 = (double)opVec[10];
           opVec[1] = (float)-(floorValue_30 * floorResult - floorValue_29);
-          floorResult = _floor((double)(float)(dVar28 / floorValue_31));
+          floorResult = _floor((double)(float)(mathTemp / floorValue_31));
           operandComponent = opVec[0xb];
         }
         floorValue_29 = (double)opVec[7];
-        opVec[2] = (float)-(floorValue_31 * floorResult - dVar28);
+        opVec[2] = (float)-(floorValue_31 * floorResult - mathTemp);
         floorResult = _floor((double)(float)(floorValue_29 / (double)operandComponent));
         floorValue = -((double)operandComponent * floorResult - floorValue_29);
 LAB_97bd1440:
@@ -4423,8 +4426,8 @@ LAB_97bd178c:
         if (opVec[7] == 0.0) goto LAB_97bd17d0;
         if (opVec[0xb] == 0.0) goto LAB_97bd17ec;
 LAB_97bd17f0:
-        uStack_ac = boolBit8 ^ 0x80000000;
-        local_b0 = 0x43300000;
+        i2dLo = boolBit8 ^ 0x80000000;
+        i2dHi = 0x43300000;
         opVec[3] = (float)((double)CONCAT44(0x43300000,boolBit8 ^ 0x80000000) - 4503601774854144.0)
         ;
         break;
@@ -4438,9 +4441,9 @@ LAB_97bd17f0:
           componentCursor = opVec;
           do {
             srcElementPtr = componentCursor + 4;
-            pfVar1 = componentCursor + 8;
+            srcBElement = componentCursor + 8;
             componentCursor = componentCursor + 1;
-            opVec[0] = *srcElementPtr * *pfVar1 + opVec[0];
+            opVec[0] = *srcElementPtr * *srcBElement + opVec[0];
             dimension = dimension - 1;
             opVec[1] = opVec[0];
             opVec[2] = opVec[0];
@@ -4478,9 +4481,9 @@ LAB_97bd17f0:
             componentCursor = opVec;
             do {
               srcElementPtr = componentCursor + 4;
-              pfVar1 = componentCursor + 8;
+              srcBElement = componentCursor + 8;
               componentCursor = componentCursor + 1;
-              mathAccumulator = (double)(float)((double)(*srcElementPtr - *pfVar1) * (double)(*srcElementPtr - *pfVar1) +
+              mathAccumulator = (double)(float)((double)(*srcElementPtr - *srcBElement) * (double)(*srcElementPtr - *srcBElement) +
                                       mathAccumulator);
               dimension = dimension - 1;
             } while (dimension != 0);
@@ -4540,22 +4543,22 @@ LAB_97bd2210:
         goto LAB_97bd1ce0;
       case 0x2f:
         dimension = (uint)*(byte *)((int)inst + 5);
-        fVar6 = 0.0;
+        dotProduct = 0.0;
         if (dimension != 0) {
           componentCursor = opVec;
           do {
             srcElementPtr = componentCursor + 4;
-            pfVar1 = componentCursor + 8;
+            srcBElement = componentCursor + 8;
             componentCursor = componentCursor + 1;
-            fVar6 = *srcElementPtr * *pfVar1 + fVar6;
+            dotProduct = *srcElementPtr * *srcBElement + dotProduct;
             dimension = dimension - 1;
           } while (dimension != 0);
         }
-        fVar6 = fVar6 + fVar6;
-        opVec[0] = -(fVar6 * opVec[8] - opVec[4]);
-        opVec[1] = -(fVar6 * opVec[9] - opVec[5]);
-        opVec[2] = -(fVar6 * opVec[10] - opVec[6]);
-        opVec[3] = -(fVar6 * opVec[0xb] - opVec[7]);
+        dotProduct = dotProduct + dotProduct;
+        opVec[0] = -(dotProduct * opVec[8] - opVec[4]);
+        opVec[1] = -(dotProduct * opVec[9] - opVec[5]);
+        opVec[2] = -(dotProduct * opVec[10] - opVec[6]);
+        opVec[3] = -(dotProduct * opVec[0xb] - opVec[7]);
         break;
       case 0x30:
         opVec[0] = 1.0;
@@ -4576,7 +4579,7 @@ LAB_97bd2210:
         if (opVec[6] < opVec[10]) {
           opVec[2] = 0.0;
         }
-        bVar2 = opVec[0xb] <= opVec[7];
+        cmpResult = opVec[0xb] <= opVec[7];
         goto LAB_97bd1c60;
       case 0x33:
         if (opVec[4] <= opVec[8]) {
@@ -4612,10 +4615,10 @@ LAB_97bd2210:
         if (opVec[10] < opVec[6]) {
           opVec[2] = 0.0;
         }
-        bVar2 = opVec[7] <= opVec[0xb];
+        cmpResult = opVec[7] <= opVec[0xb];
 LAB_97bd1c60:
         opVec[3] = 1.0;
-        if (!bVar2) {
+        if (!cmpResult) {
 LAB_97bd1ce0:
           opVec[3] = 0.0;
         }
@@ -4667,38 +4670,38 @@ LAB_97bd1cd8:
       case 0x39:
         if (2.1474836e+09 <= opVec[8]) {
           intComponentI14 = (int)(opVec[8] - 2.1474836e+09);
-          local_a0 = (longlong)intComponentI14;
+          d2iScratch2 = (longlong)intComponentI14;
         }
         else {
           intComponentI14 = (int)opVec[8];
-          local_a8 = (longlong)intComponentI14;
+          d2iScratch1 = (longlong)intComponentI14;
         }
         opVec[0] = opVec[intComponentI14 + 4];
         if (2.1474836e+09 <= opVec[8]) {
           intComponentI14 = (int)(opVec[8] - 2.1474836e+09);
-          local_a8 = (longlong)intComponentI14;
+          d2iScratch1 = (longlong)intComponentI14;
         }
         else {
           intComponentI14 = (int)opVec[8];
-          local_a0 = (longlong)intComponentI14;
+          d2iScratch2 = (longlong)intComponentI14;
         }
         opVec[1] = opVec[intComponentI14 + 4];
         if (2.1474836e+09 <= opVec[8]) {
           intComponentI14 = (int)(opVec[8] - 2.1474836e+09);
-          local_a8 = (longlong)intComponentI14;
+          d2iScratch1 = (longlong)intComponentI14;
         }
         else {
           intComponentI14 = (int)opVec[8];
-          local_a0 = (longlong)intComponentI14;
+          d2iScratch2 = (longlong)intComponentI14;
         }
         opVec[2] = opVec[intComponentI14 + 4];
         if (2.1474836e+09 <= opVec[8]) {
           intComponentI14 = (int)(opVec[8] - 2.1474836e+09);
-          local_a8 = (longlong)intComponentI14;
+          d2iScratch1 = (longlong)intComponentI14;
         }
         else {
           intComponentI14 = (int)opVec[8];
-          local_a0 = (longlong)intComponentI14;
+          d2iScratch2 = (longlong)intComponentI14;
         }
         opVec[3] = opVec[intComponentI14 + 4];
         break;
@@ -4721,18 +4724,18 @@ LAB_97bd1cd8:
         break;
       case 0x3b:
         dimension = (uint)*(byte *)((int)inst + 5);
-        fVar6 = 0.0;
+        dotProduct = 0.0;
         if (dimension != 0) {
           componentCursor = opVec;
           do {
             srcElementPtr = componentCursor + 0xc;
-            pfVar1 = componentCursor + 8;
+            srcBElement = componentCursor + 8;
             componentCursor = componentCursor + 1;
-            fVar6 = *srcElementPtr * *pfVar1 + fVar6;
+            dotProduct = *srcElementPtr * *srcBElement + dotProduct;
             dimension = dimension - 1;
           } while (dimension != 0);
         }
-        if (fVar6 < 0.0) goto switchD_97bd0598_caseD_0;
+        if (dotProduct < 0.0) goto switchD_97bd0598_caseD_0;
         opVec[0] = -opVec[4];
         opVec[1] = -opVec[5];
         opVec[2] = -opVec[6];
@@ -4817,18 +4820,18 @@ LAB_97bd1cd8:
         else {
           operandComponent = 1.0;
         }
-        fVar7 = (srcC[1] - opVec[5]) / (opVec[9] - opVec[5]);
+        smoothT = (srcC[1] - opVec[5]) / (opVec[9] - opVec[5]);
         opVec[0] = operandComponent * operandComponent * (3.0 - (operandComponent + operandComponent));
-        if ((fVar7 <= 0.0) || (fVar7 < 1.0)) {
-          if (fVar7 <= 0.0) {
-            fVar7 = 0.0;
+        if ((smoothT <= 0.0) || (smoothT < 1.0)) {
+          if (smoothT <= 0.0) {
+            smoothT = 0.0;
           }
         }
         else {
-          fVar7 = 1.0;
+          smoothT = 1.0;
         }
         operandComponent = (srcC[2] - opVec[6]) / (opVec[10] - opVec[6]);
-        opVec[1] = fVar7 * fVar7 * (3.0 - (fVar7 + fVar7));
+        opVec[1] = smoothT * smoothT * (3.0 - (smoothT + smoothT));
         if ((operandComponent <= 0.0) || (operandComponent < 1.0)) {
           if (operandComponent <= 0.0) {
             operandComponent = 0.0;
@@ -4837,17 +4840,17 @@ LAB_97bd1cd8:
         else {
           operandComponent = 1.0;
         }
-        fVar7 = (srcC[3] - opVec[7]) / (opVec[0xb] - opVec[7]);
+        smoothT = (srcC[3] - opVec[7]) / (opVec[0xb] - opVec[7]);
         opVec[2] = operandComponent * operandComponent * (3.0 - (operandComponent + operandComponent));
-        if ((fVar7 <= 0.0) || (fVar7 < 1.0)) {
-          if (fVar7 <= 0.0) {
-            fVar7 = 0.0;
+        if ((smoothT <= 0.0) || (smoothT < 1.0)) {
+          if (smoothT <= 0.0) {
+            smoothT = 0.0;
           }
         }
         else {
-          fVar7 = 1.0;
+          smoothT = 1.0;
         }
-        opVec[3] = fVar7 * fVar7 * (3.0 - (fVar7 + fVar7));
+        opVec[3] = smoothT * smoothT * (3.0 - (smoothT + smoothT));
         break;
       case 0x41:
         swizzleSelect = *(char *)(inst + 0x18);
@@ -4935,14 +4938,14 @@ LAB_97bd1cd8:
         ((int (*)())_InterpreterTextureSamplerSetProjectionEnabled)(machine[0x28b],destElement);
         ((int (*)())_InterpreterTextureSamplerSetLodBiasEnabled)(machine[0x28b],(uint)(opcode == 0x44 || opcode - 0x44U == 1));
         ((void (*)())_InterpreterTextureSamplerAttachDerivatives)(machine[0x28b],*(undefined4 *)(emulator + 0xda4),(double)GH_U2F((unsigned int)(machine[0x28f])));
-        fVar7 = opVec[7];
+        sourceComponentW = opVec[7];
         operandComponent = 0.0;
         if (opcode - 0x44U < 2) {
           programInfo = *(int *)(emulator + 0xd80);
           operandComponent = srcC[0];
           if (1 < *(int *)(programInfo + 0x38) - 0x8b30U) {
             opVec[7] = 1.0;
-            operandComponent = fVar7;
+            operandComponent = sourceComponentW;
             goto LAB_97bd29a8;
           }
         }
@@ -4950,15 +4953,15 @@ LAB_97bd1cd8:
 LAB_97bd29a8:
           programInfo = *(int *)(emulator + 0xd80);
         }
-        dVar27 = (double)operandComponent;
+        texLodOrBias = (double)operandComponent;
         if (*(int *)(programInfo + 0x38) - 0x8b30U < 2) {
           if (2.1474836e+09 <= opVec[8]) {
-            local_98 = (longlong)(int)(opVec[8] - 2.1474836e+09);
+            d2iScratch3 = (longlong)(int)(opVec[8] - 2.1474836e+09);
             intComponent = (int)(opVec[8] - 2.1474836e+09) ^ 0x80000000;
           }
           else {
             intComponent = (uint)(int)opVec[8];
-            local_90 = (longlong)(int)intComponent;
+            d2iScratch4 = (longlong)(int)intComponent;
           }
         }
         else {
@@ -4967,40 +4970,40 @@ LAB_97bd29a8:
         textureTarget = inst[0x44];
         if (textureTarget == 2) {
           _InterpreterTextureSamplerSampleTexelRECT
-                    (machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&local_80);
+                    (machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texelX);
         }
         else if (textureTarget < 3) {
           if (textureTarget == 1) {
-            ((void (*)())_InterpreterTextureSamplerSampleTexel3D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&local_80,dVar27,fparam_2,fparam_3,
+            ((void (*)())_InterpreterTextureSamplerSampleTexel3D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texelX,texLodOrBias,fparam_2,fparam_3,
                        fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,in_stack_fffffe78,
                        in_stack_fffffe80,in_stack_fffffe88,in_stack_fffffe90);
           }
         }
         else if (textureTarget == 3) {
-          ((void (*)())_InterpreterTextureSamplerSampleTexel2D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&local_80,dVar27,fparam_2,fparam_3,
+          ((void (*)())_InterpreterTextureSamplerSampleTexel2D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texelX,texLodOrBias,fparam_2,fparam_3,
                      fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,in_stack_fffffe78,
                      in_stack_fffffe80,in_stack_fffffe88,in_stack_fffffe90,in_stack_fffffe98);
         }
         else if (textureTarget == 4) {
-          ((void (*)())_InterpreterTextureSamplerSampleTexel1D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&local_80,dVar27,fparam_2,fparam_3,
+          ((void (*)())_InterpreterTextureSamplerSampleTexel1D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texelX,texLodOrBias,fparam_2,fparam_3,
                      fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,in_stack_fffffe78,
                      in_stack_fffffe80,in_stack_fffffe88,in_stack_fffffe90);
         }
-        opVec[0] = local_80;
-        opVec[1] = local_7c;
-        opVec[2] = local_78;
-        opVec[3] = local_74;
+        opVec[0] = texelX;
+        opVec[1] = texelY;
+        opVec[2] = texelZ;
+        opVec[3] = texelW;
         break;
       case 0x48:
       case 0x49:
         floorResult = _floor((double)opVec[4]);
         if (2147483648.0 <= floorResult) {
-          local_98 = (longlong)(int)(floorResult - 2147483648.0);
+          d2iScratch3 = (longlong)(int)(floorResult - 2147483648.0);
           intComponent = (int)(floorResult - 2147483648.0) ^ 0x80000000;
         }
         else {
           intComponent = (uint)(int)floorResult;
-          local_90 = (longlong)(int)intComponent;
+          d2iScratch4 = (longlong)(int)intComponent;
         }
         machine[0x290] = intComponent;
         goto switchD_97bd0598_caseD_6;
@@ -5033,7 +5036,7 @@ switchD_97bd0598_caseD_54:
           nextInst = (int *)0x0;
         }
 switchD_97bd0598_caseD_6:
-        bVar25 = false;
+        fallsThrough = false;
         break;
       case 0x4c:
         in_r5_artifact = (float *)inst[4];
@@ -5081,12 +5084,12 @@ switchD_97bd0598_caseD_6:
             }
           }
         }
-        iVar14 = machine[0x29b];
+        callStackTop = machine[0x29b];
         nextInst = (int *)0x0;
-        piVar11 = (int *)(iVar14 - 4);
-        if (machine + 0x297 <= piVar11) {
-          machine[0x29b] = (int)piVar11;
-          nextInst = *(int **)(iVar14 + -4);
+        poppedStackTop = (int *)(callStackTop - 4);
+        if (machine + 0x297 <= poppedStackTop) {
+          machine[0x29b] = (int)poppedStackTop;
+          nextInst = *(int **)(callStackTop + -4);
         }
         goto switchD_97bd0598_caseD_6;
       case 0x4f:
@@ -5106,9 +5109,9 @@ switchD_97bd0598_caseD_6:
           componentCursor = opVec;
           do {
             srcElementPtr = componentCursor + 4;
-            pfVar1 = componentCursor + 8;
+            srcBElement = componentCursor + 8;
             componentCursor = componentCursor + 1;
-            operandComponent = *srcElementPtr * *pfVar1 + operandComponent;
+            operandComponent = *srcElementPtr * *srcBElement + operandComponent;
             dimension = dimension - 1;
           } while (dimension != 0);
         }
@@ -5116,14 +5119,14 @@ switchD_97bd0598_caseD_6:
         if (0.0 <= sqrtValue) {
           operandComponent = srcC[0] * operandComponent;
           sqrtResult = _sqrt(sqrtValue);
-          dVar28 = (double)srcC[0];
+          mathTemp = (double)srcC[0];
           operandComponent = (float)((double)operandComponent + sqrtResult);
           fparam_7 = (double)(operandComponent * opVec[0xb]);
-          opVec[0] = (float)(dVar28 * (double)opVec[4] - (double)(operandComponent * opVec[8]));
-          opVec[1] = (float)(dVar28 * (double)opVec[5] - (double)(operandComponent * opVec[9]));
-          opVec[2] = (float)(dVar28 * (double)opVec[6] - (double)(operandComponent * opVec[10]));
+          opVec[0] = (float)(mathTemp * (double)opVec[4] - (double)(operandComponent * opVec[8]));
+          opVec[1] = (float)(mathTemp * (double)opVec[5] - (double)(operandComponent * opVec[9]));
+          opVec[2] = (float)(mathTemp * (double)opVec[6] - (double)(operandComponent * opVec[10]));
           fparam_8 = (double)opVec[2];
-          opVec[3] = (float)(dVar28 * (double)opVec[7] - fparam_7);
+          opVec[3] = (float)(mathTemp * (double)opVec[7] - fparam_7);
         }
         else {
           opVec[3] = 0.0;
@@ -5169,19 +5172,19 @@ LAB_97bd200c:
         opVec[3] = srcC[3];
         if (2.1474836e+09 <= opVec[8]) {
           intComponentI14 = (int)(opVec[8] - 2.1474836e+09);
-          local_a8 = (longlong)intComponentI14;
+          d2iScratch1 = (longlong)intComponentI14;
         }
         else {
           intComponentI14 = (int)opVec[8];
-          local_a0 = (longlong)intComponentI14;
+          d2iScratch2 = (longlong)intComponentI14;
         }
         if (2.1474836e+09 <= opVec[8]) {
           intComponentI26 = (int)(opVec[8] - 2.1474836e+09);
-          local_90 = (longlong)intComponentI26;
+          d2iScratch4 = (longlong)intComponentI26;
         }
         else {
           intComponentI26 = (int)opVec[8];
-          local_98 = (longlong)intComponentI26;
+          d2iScratch3 = (longlong)intComponentI26;
         }
         opVec[intComponentI14] = opVec[intComponentI26 + 4];
         break;
@@ -5208,7 +5211,7 @@ LAB_97bd2010:
       if (saturate != '\0') {
         if (0.0 <= opVec[0]) {
           if (opVec[0] <= 1.0) {
-            local_70 = opVec[0];
+            storedComponent = opVec[0];
           }
           else {
             opVec[0] = 1.0;
@@ -5219,7 +5222,7 @@ LAB_97bd2010:
         }
         if (0.0 <= opVec[1]) {
           if (opVec[1] <= 1.0) {
-            local_70 = opVec[1];
+            storedComponent = opVec[1];
           }
           else {
             opVec[1] = 1.0;
@@ -5230,7 +5233,7 @@ LAB_97bd2010:
         }
         if (0.0 <= opVec[2]) {
           if (opVec[2] <= 1.0) {
-            local_70 = opVec[2];
+            storedComponent = opVec[2];
           }
           else {
             opVec[2] = 1.0;
@@ -5241,7 +5244,7 @@ LAB_97bd2010:
         }
         if (0.0 <= opVec[3]) {
           if (opVec[3] <= 1.0) {
-            local_70 = opVec[3];
+            storedComponent = opVec[3];
           }
           else {
             opVec[3] = 1.0;
@@ -5251,7 +5254,7 @@ LAB_97bd2010:
           opVec[3] = 0.0;
         }
       }
-      if (bVar25) {
+      if (fallsThrough) {
         sourceElement = loopIndex2;
         if (*(char *)(inst + 8) == '\0') {
           sourceElement = 0;
@@ -5284,8 +5287,8 @@ LAB_97bd0310:
       }
       else if (saturate == '\x03') {
         if ((opVec[4] == opVec[8]) &&
-           (bVar25 = opVec[5] == opVec[9], opVec[5] = opVec[6],
-           opVec[9] = opVec[10], bVar25)) goto LAB_97bd0310;
+           (fallsThrough = opVec[5] == opVec[9], opVec[5] = opVec[6],
+           opVec[9] = opVec[10], fallsThrough)) goto LAB_97bd0310;
       }
       else {
         if (saturate != '\x04') goto LAB_97bd0328;
@@ -5338,14 +5341,14 @@ LAB_97bd0310:
         *componentCursor = operandComponent;
         componentCursor = componentCursor + 1;
       } while (loopIndex < 3);
-      uStack_ac = 0;
+      i2dLo = 0;
       operandComponent = opVec[2];
-      fVar7 = opVec[1];
+      logicComponent = opVec[1];
       if (opVec[0] != 0.0) goto joined_r0x97bd003c;
 LAB_97bd01a0:
-      uStack_ac = uStack_ac ^ 0x80000000;
-      local_b0 = 0x43300000;
-      opVec[0] = (float)((double)CONCAT44(0x43300000,uStack_ac) - 4503601774854144.0);
+      i2dLo = i2dLo ^ 0x80000000;
+      i2dHi = 0x43300000;
+      opVec[0] = (float)((double)CONCAT44(0x43300000,i2dLo) - 4503601774854144.0);
     }
     else if (elementCount < 4) {
       if (elementCount == 2) {
@@ -5371,12 +5374,12 @@ LAB_97bd01a0:
           *componentCursor = operandComponent;
           componentCursor = componentCursor + 1;
           operandComponent = opVec[1];
-          fVar7 = opVec[0];
+          logicComponent = opVec[0];
         } while (loopIndex < 2);
 joined_r0x97bd003c:
-        uStack_ac = 0;
-        if ((fVar7 != 0.0) && (uStack_ac = 0, operandComponent != 0.0)) {
-          uStack_ac = 1;
+        i2dLo = 0;
+        if ((logicComponent != 0.0) && (i2dLo = 0, operandComponent != 0.0)) {
+          i2dLo = 1;
         }
         goto LAB_97bd01a0;
       }
@@ -5405,8 +5408,8 @@ joined_r0x97bd003c:
         *componentCursor = operandComponent;
         componentCursor = componentCursor + 1;
       } while (loopIndex < 4);
-      uStack_ac = 0;
-      if ((opVec[0] == 0.0) || (operandComponent = opVec[3], fVar7 = opVec[2], opVec[1] == 0.0)
+      i2dLo = 0;
+      if ((opVec[0] == 0.0) || (operandComponent = opVec[3], logicComponent = opVec[2], opVec[1] == 0.0)
          ) goto LAB_97bd01a0;
       goto joined_r0x97bd003c;
     }
@@ -5511,8 +5514,9 @@ int _InterpreterWriteFinalFragmentToBuffer(machine, operandWord1, operandWord2, 
 /* _InterpreterRun @ 0x97bd31e0 (1020 bytes) */
 void _InterpreterRun(int emulator,int elementCount,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
+  int programTarget;
   bool wSafeToDivide;
-  float fVar2;
+  float vertexW;
   float clipX;
   float clipY;
   float clipZ;
@@ -5525,25 +5529,25 @@ void _InterpreterRun(int emulator,int elementCount,double fparam_1,double fparam
   float negW;
   double one;
   float zero;
-  int iVar15;
+  int viewportOrTarget;
   float *vertexOutput;
-  uint uVar17;
-  int iVar18;
-  int extraout_r4;
-  int extraout_r4_00;
-  int extraout_r4_01;
+  uint testFlags;
+  int inst;
+  int extraOut1;
+  int extraOut2;
+  int extraOut3;
   undefined4 leftoverR5;
   undefined4 leftoverR6;
   undefined4 leftoverR7;
   undefined4 leftoverR8;
-  int iVar19;
-  int iVar20;
+  int itemsLeft;
+  int programInfo;
   uint clipOrMask;
   uint clipAndMask;
   int machine;
-  double dVar24;
-  double extraout_f1;
-  double extraout_f1_00;
+  double vertexWDouble;
+  double extraOutF1;
+  double extraOutF2;
   double xScale;
   double xBias;
   double invWScale;
@@ -5555,12 +5559,12 @@ void _InterpreterRun(int emulator,int elementCount,double fparam_1,double fparam
   double in_stack_ffffff58;
   
   one = DOUBLE_97c30a60;
-  iVar19 = *(int *)(*(int *)(emulator + 0xd80) + 0x38);
+  programTarget = *(int *)(*(int *)(emulator + 0xd80) + 0x38);
   machine = *(int *)(emulator + 0xdf0);
-  iVar15 = *(int *)(emulator + 0xd9c);
+  viewportOrTarget = *(int *)(emulator + 0xd9c);
   clipAndMask = 0xff;
   clipOrMask = 0;
-  if ((iVar19 == 0x8804) || (iVar19 == 0x8b30)) {
+  if ((programTarget == 0x8804) || (programTarget == 0x8b30)) {
     invWBias = (double)*(float *)(*(int *)(emulator + 0xda0) + 0xc);
     xBias = (double)*(float *)(*(int *)(emulator + 0xda0) + 8);
     invWScale = (double)*(float *)(*(int *)(emulator + 0xda4) + 0xc);
@@ -5577,23 +5581,23 @@ void _InterpreterRun(int emulator,int elementCount,double fparam_1,double fparam
     xScale = invWScale;
     xBias = invWScale;
     invWBias = invWScale;
-    viewportZBias = *(float *)(iVar15 + 0x1b88);
-    viewportZScale = *(float *)(iVar15 + 0x1b78);
-    viewportXScale = *(float *)(iVar15 + 0x1b70);
-    viewportXBias = *(float *)(iVar15 + 0x1b80);
-    viewportYBias = *(float *)(iVar15 + 0x1b84);
-    viewportYScale = *(float *)(iVar15 + 0x1b74);
+    viewportZBias = *(float *)(viewportOrTarget + 0x1b88);
+    viewportZScale = *(float *)(viewportOrTarget + 0x1b78);
+    viewportXScale = *(float *)(viewportOrTarget + 0x1b70);
+    viewportXBias = *(float *)(viewportOrTarget + 0x1b80);
+    viewportYBias = *(float *)(viewportOrTarget + 0x1b84);
+    viewportYScale = *(float *)(viewportOrTarget + 0x1b74);
   }
-  iVar15 = *(int *)(*(int *)(emulator + 0xd80) + 0x38);
-  if ((iVar15 == 0x8804) || (iVar15 == 0x8b30)) {
+  viewportOrTarget = *(int *)(*(int *)(emulator + 0xd80) + 0x38);
+  if ((viewportOrTarget == 0x8804) || (viewportOrTarget == 0x8b30)) {
     *(undefined4 *)(machine + 0xa30) = 0;
     *(float *)(machine + 0xa38) = (float)xBias;
     *(float *)(machine + 0xa3c) = (float)(one / invWBias);
   }
-  iVar15 = machine + 0xa5c;
+  viewportOrTarget = machine + 0xa5c;
   *(undefined1 *)(machine + 0xa47) = 0;
   *(undefined4 *)(machine + 0xa68) = 0;
-  *(int *)(machine + 0xa6c) = iVar15;
+  *(int *)(machine + 0xa6c) = viewportOrTarget;
   *(undefined1 *)(machine + 0xa44) = 0;
   *(undefined1 *)(machine + 0xa45) = 0;
   *(undefined1 *)(machine + 0xa46) = 0;
@@ -5602,11 +5606,11 @@ void _InterpreterRun(int emulator,int elementCount,double fparam_1,double fparam
   *(undefined4 *)(machine + 0xa64) = 0;
   zero = TAllocation__guardBlockSize;
   one = DOUBLE_97c30a60;
-  iVar19 = elementCount;
+  itemsLeft = elementCount;
   do {
-    if (iVar19 == 0) {
-      iVar15 = *(int *)(*(int *)(emulator + 0xd80) + 0x38);
-      if ((iVar15 == 0x8804) || (iVar15 == 0x8b30)) {
+    if (itemsLeft == 0) {
+      viewportOrTarget = *(int *)(*(int *)(emulator + 0xd80) + 0x38);
+      if ((viewportOrTarget == 0x8804) || (viewportOrTarget == 0x8b30)) {
         clipOrMask = 0;
       }
       else {
@@ -5615,75 +5619,75 @@ void _InterpreterRun(int emulator,int elementCount,double fparam_1,double fparam
       FUN_97c1a28c(clipOrMask);
       return;
     }
-    iVar19 = iVar19 + -1;
+    itemsLeft = itemsLeft + -1;
     *(undefined4 *)(machine + 0xa58) = 0;
-    iVar20 = *(int *)(emulator + 0xd80);
-    if (((*(uint *)(iVar20 + 0x3c) & 6) == 4) && ((*(uint *)(iVar20 + 0x34) & 0xa000) == 0)) {
-      uVar17 = _InterpreterRasterOpMachine_DepthTest(machine + 0xa24);
-      *(uint *)(machine + 0xa58) = *(uint *)(machine + 0xa58) | uVar17;
-      iVar20 = *(int *)(emulator + 0xd80);
-      elementCount = extraout_r4;
-      fparam_1 = extraout_f1;
+    programInfo = *(int *)(emulator + 0xd80);
+    if (((*(uint *)(programInfo + 0x3c) & 6) == 4) && ((*(uint *)(programInfo + 0x34) & 0xa000) == 0)) {
+      testFlags = _InterpreterRasterOpMachine_DepthTest(machine + 0xa24);
+      *(uint *)(machine + 0xa58) = *(uint *)(machine + 0xa58) | testFlags;
+      programInfo = *(int *)(emulator + 0xd80);
+      elementCount = extraOut1;
+      fparam_1 = extraOutF1;
     }
-    iVar18 = *(int *)(iVar20 + 0x120);
-    if ((iVar18 != 0) && (*(int *)(machine + 0xa58) == 0)) {
+    inst = *(int *)(programInfo + 0x120);
+    if ((inst != 0) && (*(int *)(machine + 0xa58) == 0)) {
       do {
-        iVar18 = ((int * (*)())_InterpreterEmulateOp)(machine,iVar18,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,
+        inst = ((int * (*)())_InterpreterEmulateOp)(machine,inst,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,
                             fparam_7,fparam_8,in_stack_ffffff38,in_stack_ffffff40,in_stack_ffffff48,
                             in_stack_ffffff50,in_stack_ffffff58);
-        fparam_1 = extraout_f1_00;
-        if (iVar18 == 0) break;
+        fparam_1 = extraOutF2;
+        if (inst == 0) break;
       } while (*(int *)(machine + 0xa58) == 0);
-      iVar20 = *(int *)(emulator + 0xd80);
-      elementCount = extraout_r4_00;
+      programInfo = *(int *)(emulator + 0xd80);
+      elementCount = extraOut2;
     }
-    if ((*(int *)(iVar20 + 0x38) == 0x8804) || (*(int *)(iVar20 + 0x38) == 0x8b30)) {
+    if ((*(int *)(programInfo + 0x38) == 0x8804) || (*(int *)(programInfo + 0x38) == 0x8b30)) {
       if (*(int *)(machine + 0xa58) == 0) {
-        fparam_1 = (double)((int (*)())_InterpreterWriteFinalFragmentToBuffer)(machine,elementCount,leftoverR5,leftoverR6,leftoverR7,leftoverR8,iVar15);
-        iVar20 = *(int *)(emulator + 0xd80);
-        elementCount = extraout_r4_01;
+        fparam_1 = (double)((int (*)())_InterpreterWriteFinalFragmentToBuffer)(machine,elementCount,leftoverR5,leftoverR6,leftoverR7,leftoverR8,viewportOrTarget);
+        programInfo = *(int *)(emulator + 0xd80);
+        elementCount = extraOut3;
       }
     }
     else {
       vertexOutput = *(float **)(emulator + 0xd88);
-      uVar17 = 0;
-      fVar2 = vertexOutput[7];
+      testFlags = 0;
+      vertexW = vertexOutput[7];
       clipX = vertexOutput[4];
-      negW = -fVar2;
+      negW = -vertexW;
       clipY = vertexOutput[5];
       clipZ = vertexOutput[6];
       if (clipX < negW) {
-        uVar17 = 0x10;
+        testFlags = 0x10;
       }
-      if (fVar2 <= clipX) {
-        uVar17 = uVar17 | 0x20;
+      if (vertexW <= clipX) {
+        testFlags = testFlags | 0x20;
       }
       if (clipY < negW) {
-        uVar17 = uVar17 | 4;
+        testFlags = testFlags | 4;
       }
-      if (fVar2 <= clipY) {
-        uVar17 = uVar17 | 8;
+      if (vertexW <= clipY) {
+        testFlags = testFlags | 8;
       }
       if (clipZ < negW) {
-        uVar17 = uVar17 | 1;
+        testFlags = testFlags | 1;
       }
-      if (fVar2 < clipZ) {
-        uVar17 = uVar17 | 2;
+      if (vertexW < clipZ) {
+        testFlags = testFlags | 2;
       }
-      vertexOutput[0x1f] = GH_U2F((unsigned int)((uVar17 | 0x1000000)));
-      if (uVar17 == 0) {
-        if (fVar2 < zero) {
-          wSafeToDivide = fVar2 <= FLOAT_97c3acf4;
+      vertexOutput[0x1f] = GH_U2F((unsigned int)((testFlags | 0x1000000)));
+      if (testFlags == 0) {
+        if (vertexW < zero) {
+          wSafeToDivide = vertexW <= FLOAT_97c3acf4;
         }
         else {
-          wSafeToDivide = FLOAT_97c3acf0 <= fVar2;
+          wSafeToDivide = FLOAT_97c3acf0 <= vertexW;
         }
         if (wSafeToDivide) {
-          negW = FLOAT_97c3acd8 / fVar2;
+          negW = FLOAT_97c3acd8 / vertexW;
         }
         else {
           negW = FLOAT_97c3acfc;
-          if (zero <= fVar2) {
+          if (zero <= vertexW) {
             negW = FLOAT_97c3acf8;
           }
         }
@@ -5692,21 +5696,21 @@ void _InterpreterRun(int emulator,int elementCount,double fparam_1,double fparam
         vertexOutput[1] = clipY * negW * viewportYScale + viewportYBias;
         vertexOutput[2] = clipZ * negW * viewportZScale + viewportZBias;
       }
-      iVar20 = *(int *)(emulator + 0xd80);
-      clipAndMask = clipAndMask & uVar17;
-      clipOrMask = clipOrMask | uVar17;
+      programInfo = *(int *)(emulator + 0xd80);
+      clipAndMask = clipAndMask & testFlags;
+      clipOrMask = clipOrMask | testFlags;
     }
-    *(int *)(emulator + 0xd8c) = *(int *)(emulator + 0xd8c) + *(int *)(iVar20 + 0xbc);
-    *(int *)(emulator + 0xd88) = *(int *)(emulator + 0xd88) + *(int *)(iVar20 + 0xb8);
-    iVar15 = *(int *)(emulator + 0xda8) + *(int *)(iVar20 + 0xd8);
-    *(int *)(emulator + 0xda8) = iVar15;
-    *(int *)(emulator + 0xdac) = *(int *)(emulator + 0xdac) + *(int *)(iVar20 + 0xdc);
-    if ((*(int *)(iVar20 + 0x38) == 0x8804) || (*(int *)(iVar20 + 0x38) == 0x8b30)) {
-      fVar2 = (float)((double)*(float *)(machine + 0xa30) + one);
-      dVar24 = (double)fVar2;
-      *(float *)(machine + 0xa30) = fVar2;
-      *(float *)(machine + 0xa38) = (float)(xScale * dVar24 + xBias);
-      *(float *)(machine + 0xa3c) = (float)(one / (double)(float)(invWScale * dVar24 + invWBias));
+    *(int *)(emulator + 0xd8c) = *(int *)(emulator + 0xd8c) + *(int *)(programInfo + 0xbc);
+    *(int *)(emulator + 0xd88) = *(int *)(emulator + 0xd88) + *(int *)(programInfo + 0xb8);
+    viewportOrTarget = *(int *)(emulator + 0xda8) + *(int *)(programInfo + 0xd8);
+    *(int *)(emulator + 0xda8) = viewportOrTarget;
+    *(int *)(emulator + 0xdac) = *(int *)(emulator + 0xdac) + *(int *)(programInfo + 0xdc);
+    if ((*(int *)(programInfo + 0x38) == 0x8804) || (*(int *)(programInfo + 0x38) == 0x8b30)) {
+      vertexW = (float)((double)*(float *)(machine + 0xa30) + one);
+      vertexWDouble = (double)vertexW;
+      *(float *)(machine + 0xa30) = vertexW;
+      *(float *)(machine + 0xa38) = (float)(xScale * vertexWDouble + xBias);
+      *(float *)(machine + 0xa3c) = (float)(one / (double)(float)(invWScale * vertexWDouble + invWBias));
     }
   } while( true );
 }

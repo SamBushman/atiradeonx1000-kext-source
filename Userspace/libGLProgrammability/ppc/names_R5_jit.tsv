@@ -1077,24 +1077,24 @@ use	_PPCRasterOpMachine_LogicOpRTCAV	uVar2	vectorInstWord2	CONFIRMED	AltiVec ins
 
 
 
-use	_PPCRuntimeCompilerBackupRegister	puVar6	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar6\ =\ \(undefined4\ \*\)param_1\[0x38c\];$@5	+4
-use	_PPCRuntimeCompilerBackupRegister	puVar6	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar6\ =\ \(undefined4\ \*\)param_1\[0x38c\];$@6	+3
-use	_PPCRuntimeCompilerBackupRegister	puVar6	vectorInstWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar6\[1\]\ =\ \(uVar14\ \&\ 3\)\ <<\ 8\ \|\ 0x1063482c;$	+2
-use	_PPCRuntimeCompilerBackupRegister	puVar8	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar8\ =\ \(uint\ \*\)param_1\[0x38c\];$	+1
-use	_PPCRuntimeCompilerBackupRegister	puVar8	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar8\ =\ uVar20\ <<\ 0x15\ \|\ uVar20\ <<\ 0x10\ \|\ uVar19\ \*\ 0x800\ \|\ 0x100000ea;$	+1
-use	_PPCRuntimeCompilerBackupRegister	puVar8	vectorInstWord2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*param_1\[0x38c\]\ =\ \(int\)\(puVar8\ \+\ 1\);$	+1
-use	_PPCRuntimeCompilerBackupRegister	uVar14	vectorInstWord3	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar14\ =\ 3\ \-\ uVar17;$	+1
-use	_PPCRuntimeCompilerBackupRegister	uVar14	vectorInstWord3	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar14\ =\ \(uVar7\ \-\ uVar17\)\ \-\ 1;$	+1
-use	_PPCRuntimeCompilerBackupRegister	uVar14	vectorInstWord3	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*if\ \(uVar14\ !=\ 0\)\ \{$	+2
+use	_PPCRuntimeCompilerBackupRegister	puVar6	codeCursor	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar6\ =\ \(undefined4\ \*\)param_1\[0x38c\];$@5	+4
+use	_PPCRuntimeCompilerBackupRegister	puVar6	codeCursor	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar6\ =\ \(undefined4\ \*\)param_1\[0x38c\];$@6	+3
+use	_PPCRuntimeCompilerBackupRegister	puVar6	codeCursor	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar6\[1\]\ =\ \(uVar14\ \&\ 3\)\ <<\ 8\ \|\ 0x1063482c;$	+2
+use	_PPCRuntimeCompilerBackupRegister	puVar8	codeCursor2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*puVar8\ =\ \(uint\ \*\)param_1\[0x38c\];$	+1
+use	_PPCRuntimeCompilerBackupRegister	puVar8	codeCursor2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar8\ =\ uVar20\ <<\ 0x15\ \|\ uVar20\ <<\ 0x10\ \|\ uVar19\ \*\ 0x800\ \|\ 0x100000ea;$	+1
+use	_PPCRuntimeCompilerBackupRegister	puVar8	codeCursor2	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*param_1\[0x38c\]\ =\ \(int\)\(puVar8\ \+\ 1\);$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar14	rotateWords	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar14\ =\ 3\ \-\ uVar17;$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar14	rotateWords	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar14\ =\ \(uVar7\ \-\ uVar17\)\ \-\ 1;$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar14	rotateWords	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*if\ \(uVar14\ !=\ 0\)\ \{$	+2
 use	_PPCRuntimeCompilerBackupRegister	uVar17	loopIndex3	INFERRED	up-counting loop index	^\s*uVar17\ =\ 0;$@2	+1
 use	_PPCRuntimeCompilerBackupRegister	uVar17	loopIndex3	INFERRED	up-counting loop index	^\s*uVar12\ =\ uVar17\ \+\ 1;$	+3
 use	_PPCRuntimeCompilerBackupRegister	uVar17	loopIndex3	INFERRED	up-counting loop index	^\s*uVar14\ =\ \(uVar7\ \-\ uVar17\)\ \-\ 1;$	+1
 use	_PPCRuntimeCompilerBackupRegister	uVar17	loopIndex3	INFERRED	up-counting loop index	^\s*uVar17\ =\ uVar12;$	+1
-use	_PPCRuntimeCompilerBackupRegister	uVar4	vectorInstWord4	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar4\ =\ 0x106d6c84;$	+1
-use	_PPCRuntimeCompilerBackupRegister	uVar4	vectorInstWord4	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar4\ =\ 0x106d492c;$	+1
-use	_PPCRuntimeCompilerBackupRegister	uVar4	vectorInstWord4	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar4\ =\ 0x106d4a2c;$	+1
-use	_PPCRuntimeCompilerBackupRegister	uVar4	vectorInstWord4	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar4\ =\ 0x106d4b2c;$	+1
-use	_PPCRuntimeCompilerBackupRegister	uVar4	vectorInstWord4	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar6\ =\ uVar4;$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar4	instWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar4\ =\ 0x106d6c84;$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar4	instWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar4\ =\ 0x106d492c;$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar4	instWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar4\ =\ 0x106d4a2c;$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar4	instWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*uVar4\ =\ 0x106d4b2c;$	+1
+use	_PPCRuntimeCompilerBackupRegister	uVar4	instWord	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*\*puVar6\ =\ uVar4;$	+1
 
 
 use	_PPCRuntimeCompilerCompileAV	iVar9	vectorInstWord5	CONFIRMED	AltiVec instruction word template (primary opcode 4) stored into the code buffer	^\s*iVar9\ =\ \(int\)\(\(ulonglong\)uVar23\ >>\ 0x20\)\ \*\ 4;$	+3
