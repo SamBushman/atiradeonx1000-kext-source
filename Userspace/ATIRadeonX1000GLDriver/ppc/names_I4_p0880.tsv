@@ -5,8 +5,6 @@ use	psnDecRecomputeSourceUsage	uVar9	sourceIndex	CONFIRMED	counter over the thre
 use	psnDecRecomputeSourceUsage	uVar9	sourceIndex	CONFIRMED	counter over the three source slots of the half (0..2)	^\s*uVar6\ =\ \*\(ushort\ \*\)\(iVar14\ \+\ 8\ \+\ uVar9\ \*\ 4\);$	+2
 use	psnDecRecomputeSourceUsage	uVar9	sourceIndex	CONFIRMED	counter over the three source slots of the half (0..2)	^\s*uVar18\ =\ \(1\ <\ uVar9\)\ \+\ 3;$	+1
 use	psnDecRecomputeSourceUsage	uVar9	sourceIndex	CONFIRMED	counter over the three source slots of the half (0..2)	^\s*if\ \(\(iVar24\ ==\ 1\)\ \&\&\ \(uVar9\ ==\ 2\)\)\ \{$	+1
-use	psnDecRecomputeSourceUsage	uVar9	sourceIndex	CONFIRMED	counter over the three source slots of the half (0..2)	^\s*bVar2\ =\ uVar9\ !=\ 2;$	+1
-use	psnDecRecomputeSourceUsage	uVar9	sourceIndex	CONFIRMED	counter over the three source slots of the half (0..2)	^\s*uVar9\ =\ uVar9\ \+\ 1;$	+1
 use	psnDecRecomputeSourceUsage	iVar25	copyHalfNumber	INFERRED	halfIndex+1 of the half whose opcode is 0xd; afterwards the usage words of one half are copied to the other (1: half 0 <- half 1, 2: half 1 <- half 0)	^\s*iVar25\ =\ 0;$	+1
 use	psnDecRecomputeSourceUsage	iVar25	copyHalfNumber	INFERRED	halfIndex+1 of the half whose opcode is 0xd; afterwards the usage words of one half are copied to the other (1: half 0 <- half 1, 2: half 1 <- half 0)	^\s*iVar25\ =\ iVar26;$	+1
 use	psnDecRecomputeSourceUsage	iVar25	copyHalfNumber	INFERRED	halfIndex+1 of the half whose opcode is 0xd; afterwards the usage words of one half are copied to the other (1: half 0 <- half 1, 2: half 1 <- half 0)	^\s*if\ \(iVar25\ ==\ 1\)\ \{$	+1
@@ -110,11 +108,11 @@ use	psnDecRecomputeSourceUsage	uVar13	componentSelect	INFERRED	swizzle word & 0x
 use	psnDecRecomputeSourceUsage	uVar15	readComponents	INFERRED	componentSelect & 7, restricted by the write mask	^\s*uVar15\ =\ uVar13\ \&\ 7;$	+2
 use	psnDecRecomputeSourceUsage	uVar15	readComponents	INFERRED	componentSelect & 7, restricted by the write mask	^\s*uVar15\ =\ uVar15\ \&\ uVar11;$	+1
 use	psnDecRecomputeSourceUsage	uVar15	readComponents	INFERRED	componentSelect & 7, restricted by the write mask	^\s*uVar16\ =\ \(ushort\)uVar15;$	+1
-use	psnDecRecomputeSourceUsage	uVar18	slotComponentMask	INFERRED	component mask derived for the dp3-like opcode 3 by source index and replicate mode	^\s*uVar18\ =\ \(1\ <\ uVar9\)\ \+\ 3;$	+1
-use	psnDecRecomputeSourceUsage	uVar18	slotComponentMask	INFERRED	component mask derived for the dp3-like opcode 3 by source index and replicate mode	^\s*uVar18\ =\ uVar18\ \*\ 4\ \&\ 4\ \|\ uVar18\ >>\ 1;$	+1
-use	psnDecRecomputeSourceUsage	uVar18	slotComponentMask	INFERRED	component mask derived for the dp3-like opcode 3 by source index and replicate mode	^\s*uVar18\ =\ uVar18\ \*\ 8\ \&\ 8\ \|\ uVar18\ \*\ 2\ \&\ 4\ \|\ uVar18\ >>\ 1\ \&\ 2;$	+1
-use	psnDecRecomputeSourceUsage	uVar18	slotComponentMask	INFERRED	component mask derived for the dp3-like opcode 3 by source index and replicate mode	^\s*uVar18\ =\ uVar18\ \*\ 2\ \&\ 6\ \|\ uVar18\ >>\ 2;$	+1
-use	psnDecRecomputeSourceUsage	uVar18	slotComponentMask	INFERRED	component mask derived for the dp3-like opcode 3 by source index and replicate mode	^\s*uVar13\ =\ uVar18\ \&\ uVar13;$	+1
+use	psnDecRecomputeSourceUsage	uVar18	slotComponentMask	INFERRED	component mask derived for opcode 3 by source index and replicate mode	^\s*uVar18\ =\ \(1\ <\ uVar9\)\ \+\ 3;$	+1
+use	psnDecRecomputeSourceUsage	uVar18	slotComponentMask	INFERRED	component mask derived for opcode 3 by source index and replicate mode	^\s*uVar18\ =\ uVar18\ \*\ 4\ \&\ 4\ \|\ uVar18\ >>\ 1;$	+1
+use	psnDecRecomputeSourceUsage	uVar18	slotComponentMask	INFERRED	component mask derived for opcode 3 by source index and replicate mode	^\s*uVar18\ =\ uVar18\ \*\ 8\ \&\ 8\ \|\ uVar18\ \*\ 2\ \&\ 4\ \|\ uVar18\ >>\ 1\ \&\ 2;$	+1
+use	psnDecRecomputeSourceUsage	uVar18	slotComponentMask	INFERRED	component mask derived for opcode 3 by source index and replicate mode	^\s*uVar18\ =\ uVar18\ \*\ 2\ \&\ 6\ \|\ uVar18\ >>\ 2;$	+1
+use	psnDecRecomputeSourceUsage	uVar18	slotComponentMask	INFERRED	component mask derived for opcode 3 by source index and replicate mode	^\s*uVar13\ =\ uVar18\ \&\ uVar13;$	+1
 use	psnDecRecomputeSourceUsage	uVar18	readSlot	INFERRED	address slot whose read-mask word is updated (0 for slot-3 sources)	^\s*uVar18\ =\ uVar23;$	+1
 use	psnDecRecomputeSourceUsage	uVar18	readSlot	INFERRED	address slot whose read-mask word is updated (0 for slot-3 sources)	^\s*uVar18\ =\ 0;$	+1
 use	psnDecRecomputeSourceUsage	uVar18	readSlot	INFERRED	address slot whose read-mask word is updated (0 for slot-3 sources)	^\s*iVar10\ =\ uVar18\ \*\ 2;$	+1

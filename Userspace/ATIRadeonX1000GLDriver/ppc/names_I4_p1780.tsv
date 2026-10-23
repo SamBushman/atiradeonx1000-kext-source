@@ -1,4 +1,4 @@
-# Fork I4 batch 5: names in psnDecDecodeHwInstruction (inlined peephole / usage code mapped from psnDecCanonicalizeEntry by statement alignment; hardware image words from the R3xx register manual)
+# Fork I4 batch 5/6: names in psnDecDecodeHwInstruction (decode part from the R3xx register manual; inlined peephole / usage code mapped from psnDecCanonicalizeEntry by statement alignment)
 use	psnDecDecodeHwInstruction	bVar2	loopContinue2	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar2\ =\ iVar23\ !=\ 2;$	+1
 use	psnDecDecodeHwInstruction	bVar2	loopContinue2	CONFIRMED	loop-continue flag of a do-while loop	^\s*\}\ while\ \(bVar2\);$	+1
 use	psnDecDecodeHwInstruction	bVar2	loopContinue2	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar2\ =\ iVar6\ !=\ 0x40;$	+1
@@ -274,37 +274,83 @@ use	psnDecDecodeHwInstruction	uVar11	rgbInstWord	CONFIRMED	US_ALU_RGB_INST image
 use	psnDecDecodeHwInstruction	uVar11	rgbInstWord	CONFIRMED	US_ALU_RGB_INST image word (+0x298): SEL_A/B/C, MOD_A/B/C, SRCP_OP, OP, OMOD, CLAMP	^\s*param_1\[0x15\]\ =\ \(ushort\)\(uVar11\ >>\ 0x15\)\ \&\ 3;$	+2
 use	psnDecDecodeHwInstruction	uVar11	rgbInstWord	CONFIRMED	US_ALU_RGB_INST image word (+0x298): SEL_A/B/C, MOD_A/B/C, SRCP_OP, OP, OMOD, CLAMP	^\s*uVar20\ =\ \*\(undefined4\ \*\)\(\(uVar11\ >>\ 0x19\ \&\ 0x1c\)\ \+\ 0x1dc198\);$	+1
 use	psnDecDecodeHwInstruction	uVar11	rgbInstWord	CONFIRMED	US_ALU_RGB_INST image word (+0x298): SEL_A/B/C, MOD_A/B/C, SRCP_OP, OP, OMOD, CLAMP	^\s*if\ \(\(uVar11\ \&\ 0x7800000\)\ ==\ 0x1000000\)\ \{$	+1
-use	psnDecDecodeHwInstruction	uVar8	alphaInstWord	CONFIRMED	US_ALU_ALPHA_INST image word (+0x398)	^\s*uVar8\ =\ \*\(uint\ \*\)\(iVar6\ \+\ 0x398\);$	+1
-use	psnDecDecodeHwInstruction	uVar8	alphaInstWord	CONFIRMED	US_ALU_ALPHA_INST image word (+0x398)	^\s*uVar12\ =\ uVar8\ >>\ 0x15\ \&\ 0x3c;$	+1
-use	psnDecDecodeHwInstruction	uVar8	alphaInstWord	CONFIRMED	US_ALU_ALPHA_INST image word (+0x398)	^\s*param_1\[0x35\]\ =\ \(ushort\)\(uVar8\ >>\ 0x15\)\ \&\ 3;$	+2
-use	psnDecDecodeHwInstruction	uVar8	alphaInstWord	CONFIRMED	US_ALU_ALPHA_INST image word (+0x398)	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ 0x36\)\ =\ \*\(undefined4\ \*\)\(\(uVar8\ >>\ 0x19\ \&\ 0x1c\)\ \+\ 0x1dc198\);$	+1
-use	psnDecDecodeHwInstruction	uVar8	alphaInstWord	CONFIRMED	US_ALU_ALPHA_INST image word (+0x398)	^\s*uVar8\ =\ 0;$	+1
-use	psnDecDecodeHwInstruction	uVar8	alphaInstWord	CONFIRMED	US_ALU_ALPHA_INST image word (+0x398)	^\s*uVar14\ =\ uVar8;$	+1
-use	psnDecDecodeHwInstruction	uVar8	alphaInstWord	CONFIRMED	US_ALU_ALPHA_INST image word (+0x398)	^\s*uVar8\ =\ uVar14;$	+1
-use	psnDecDecodeHwInstruction	uVar8	alphaInstWord	CONFIRMED	US_ALU_ALPHA_INST image word (+0x398)	^\s*uVar8\ =\ \(uVar11\ \&\ 3\)\ <<\ 1\ \|\ \(int\)\(uVar11\ \&\ 4\)\ >>\ 2;$	+1
-use	psnDecDecodeHwInstruction	uVar8	alphaInstWord	CONFIRMED	US_ALU_ALPHA_INST image word (+0x398)	^\s*uVar8\ =\ uVar12;$	+1
-use	psnDecDecodeHwInstruction	uVar8	alphaInstWord	CONFIRMED	US_ALU_ALPHA_INST image word (+0x398)	^\s*uVar8\ =\ uVar14;$@2	+1
-use	psnDecDecodeHwInstruction	uVar8	alphaInstWord	CONFIRMED	US_ALU_ALPHA_INST image word (+0x398)	^\s*uVar8\ =\ \(uVar11\ \&\ 1\)\ <<\ 2\ \|\ uVar13\ >>\ 1\ \&\ 3;$	+1
-use	psnDecDecodeHwInstruction	uVar8	alphaInstWord	CONFIRMED	US_ALU_ALPHA_INST image word (+0x398)	^\s*uVar8\ =\ uVar14;$@3	+1
-use	psnDecDecodeHwInstruction	uVar8	alphaInstWord	CONFIRMED	US_ALU_ALPHA_INST image word (+0x398)	^\s*uVar8\ =\ \(uVar11\ \&\ 2\)\ <<\ 1\ \|\ \(int\)\(uVar11\ \&\ 4\)\ >>\ 1\ \|\ \(uVar11\ \&\ 1\)\ <<\ 3;$	+1
-use	psnDecDecodeHwInstruction	uVar8	alphaInstWord	CONFIRMED	US_ALU_ALPHA_INST image word (+0x398)	^\s*\*\(ushort\ \*\)\(iVar18\ \+\ iVar23\ \+\ 2\)\ =\ uVar15\ \&\ \~\(\(ushort\)uVar8\ \^\ 0xf\ \|\ 0x300\);$	+1
-use	psnDecDecodeHwInstruction	uVar8	alphaInstWord	CONFIRMED	US_ALU_ALPHA_INST image word (+0x398)	^\s*uVar14\ =\ uVar8;$@2	+1
-use	psnDecDecodeHwInstruction	uVar8	alphaInstWord	CONFIRMED	US_ALU_ALPHA_INST image word (+0x398)	^\s*uVar11\ =\ uVar8\ >>\ 5\ \&\ 3;$	+1
-use	psnDecDecodeHwInstruction	uVar8	alphaInstWord	CONFIRMED	US_ALU_ALPHA_INST image word (+0x398)	^\s*uVar14\ =\ uVar8\ \&\ 0x1f;$	+1
-use	psnDecDecodeHwInstruction	uVar8	alphaInstWord	CONFIRMED	US_ALU_ALPHA_INST image word (+0x398)	^\s*uVar14\ =\ uVar8\ >>\ 7\ \&\ 0x1f;$	+2
-use	psnDecDecodeHwInstruction	uVar8	alphaInstWord	CONFIRMED	US_ALU_ALPHA_INST image word (+0x398)	^\s*uVar14\ =\ uVar8\ >>\ 0xe\ \&\ 0x1f;$	+2
-use	psnDecDecodeHwInstruction	iVar6	instrIndex	CONFIRMED	instruction index read from decoded+0x90 (selects the word in the register images)	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x48\);$	+1
-use	psnDecDecodeHwInstruction	iVar6	instrIndex	CONFIRMED	instruction index read from decoded+0x90 (selects the word in the register images)	^\s*iVar22\ =\ iVar6\ \*\ 4\ \+\ param_2;$	+1
-use	psnDecDecodeHwInstruction	iVar6	instrIndex	CONFIRMED	instruction index read from decoded+0x90 (selects the word in the register images)	^\s*iVar6\ =\ iVar6\ \*\ 4\ \+\ param_2;$	+1
-use	psnDecDecodeHwInstruction	iVar6	instrIndex	CONFIRMED	instruction index read from decoded+0x90 (selects the word in the register images)	^\s*\*\(undefined4\ \*\)\(\(\*\(uint\ \*\)\(iVar6\ \+\ 4\)\ >>\ 0x19\ \&\ 0x7c\)\ \+\ 0x1dc198\);$	+4
-use	psnDecDecodeHwInstruction	iVar6	instrIndex	CONFIRMED	instruction index read from decoded+0x90 (selects the word in the register images)	^\s*uVar8\ =\ \*\(uint\ \*\)\(iVar6\ \+\ 4\);$@2	+1
-use	psnDecDecodeHwInstruction	iVar6	instrIndex	CONFIRMED	instruction index read from decoded+0x90 (selects the word in the register images)	^\s*iVar6\ =\ iVar6\ \*\ 4\ \+\ param_3;$	+5
-use	psnDecDecodeHwInstruction	iVar6	instrIndex	CONFIRMED	instruction index read from decoded+0x90 (selects the word in the register images)	^\s*iVar6\ =\ 0;$@12	+1
-use	psnDecDecodeHwInstruction	iVar6	instrIndex	CONFIRMED	instruction index read from decoded+0x90 (selects the word in the register images)	^\s*iVar6\ =\ iVar6\ \+\ 1;$@7	+1
-use	psnDecDecodeHwInstruction	iVar6	instrIndex	CONFIRMED	instruction index read from decoded+0x90 (selects the word in the register images)	^\s*if\ \(iVar6\ !=\ 1\)\ \{$@2	+2
-use	psnDecDecodeHwInstruction	iVar6	instrIndex	CONFIRMED	instruction index read from decoded+0x90 (selects the word in the register images)	^\s*if\ \(iVar6\ !=\ 2\)\ \{$@2	+1
-use	psnDecDecodeHwInstruction	iVar6	instrIndex	CONFIRMED	instruction index read from decoded+0x90 (selects the word in the register images)	^\s*iVar22\ =\ iVar6\ \*\ 4\ \+\ param_3;$	+1
-use	psnDecDecodeHwInstruction	iVar6	instrIndex	CONFIRMED	instruction index read from decoded+0x90 (selects the word in the register images)	^\s*uVar8\ =\ \*\(uint\ \*\)\(iVar6\ \*\ 4\ \+\ param_3\ \+\ 0x18\);$	+1
 use	psnDecDecodeHwInstruction	iVar22	entryMode	CONFIRMED	mode word at decoded+0x8c: 0 RS, 1 TEX, 2 ALU	^\s*iVar22\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x46\);$	+1
 use	psnDecDecodeHwInstruction	iVar22	entryMode	CONFIRMED	mode word at decoded+0x8c: 0 RS, 1 TEX, 2 ALU	^\s*if\ \(iVar22\ !=\ 1\)\ \{$	+2
 use	psnDecDecodeHwInstruction	iVar22	entryMode	CONFIRMED	mode word at decoded+0x8c: 0 RS, 1 TEX, 2 ALU	^\s*if\ \(iVar22\ !=\ 2\)\ \{$	+1
+use	psnDecDecodeHwInstruction	iVar22	rsWordPtr	CONFIRMED	instrIndex*4 + wordsMode0: the RS instruction word being decoded	^\s*iVar22\ =\ iVar6\ \*\ 4\ \+\ param_2;$	+4
+use	psnDecDecodeHwInstruction	iVar22	rsWordPtr	CONFIRMED	instrIndex*4 + wordsMode0: the RS instruction word being decoded	^\s*uVar13\ =\ \*\(ushort\ \*\)\(iVar22\ \+\ 4\)\ \&\ 3;$	+1
+use	psnDecDecodeHwInstruction	iVar22	groupCounter	CONFIRMED	counter over the two address groups in the address-slot fix-up loop	^\s*iVar22\ =\ 0;$	+1
+use	psnDecDecodeHwInstruction	iVar22	groupCounter	CONFIRMED	counter over the two address groups in the address-slot fix-up loop	^\s*bVar3\ =\ iVar22\ !=\ 1;$	+1
+use	psnDecDecodeHwInstruction	iVar22	groupCounter	CONFIRMED	counter over the two address groups in the address-slot fix-up loop	^\s*iVar22\ =\ iVar22\ \+\ 1;$	+1
+use	psnDecDecodeHwInstruction	iVar22	programWordPtr	CONFIRMED	instrIndex*4 + programImage: base of the TEX word (+0x18) read by the mode-1 path	^\s*iVar22\ =\ iVar6\ \*\ 4\ \+\ param_3;$	+4
+use	psnDecDecodeHwInstruction	iVar22	sourceSlotPtr	CONFIRMED	entry + halfByteOffset + 8 + 4*source: the source slot compared with the rewrite key	^\s*iVar22\ =\ \(int\)param_1\ \+\ iVar6;$	+1
+use	psnDecDecodeHwInstruction	iVar22	sourceSlotPtr	CONFIRMED	entry + halfByteOffset + 8 + 4*source: the source slot compared with the rewrite key	^\s*if\ \(\*\(ushort\ \*\)\(iVar22\ \+\ 8\)\ ==\ uVar11\)\ \{$	+2
+use	psnDecDecodeHwInstruction	iVar22	sourceSlotPtr	CONFIRMED	entry + halfByteOffset + 8 + 4*source: the source slot compared with the rewrite key	^\s*iVar22\ =\ iVar22\ \+\ 4;$	+1
+use	psnDecDecodeHwInstruction	iVar22	sourceSlotPtr	CONFIRMED	entry + halfByteOffset + 8 + 4*source: the source slot compared with the rewrite key	^\s*iVar22\ =\ \(int\)param_1\ \+\ iVar6;$@2	+1
+use	psnDecDecodeHwInstruction	iVar22	sourceSlotPtr	CONFIRMED	entry + halfByteOffset + 8 + 4*source: the source slot compared with the rewrite key	^\s*if\ \(\*\(ushort\ \*\)\(iVar22\ \+\ 8\)\ ==\ uVar11\)\ \{$@2	+2
+use	psnDecDecodeHwInstruction	iVar22	sourceSlotPtr	CONFIRMED	entry + halfByteOffset + 8 + 4*source: the source slot compared with the rewrite key	^\s*iVar22\ =\ iVar22\ \+\ 4;$@2	+1
+use	psnDecDecodeHwInstruction	iVar22	sourceSlotPtr	CONFIRMED	entry + halfByteOffset + 8 + 4*source: the source slot compared with the rewrite key	^\s*iVar22\ =\ \(int\)param_1\ \+\ iVar6;$@3	+1
+use	psnDecDecodeHwInstruction	iVar22	sourceSlotPtr	CONFIRMED	entry + halfByteOffset + 8 + 4*source: the source slot compared with the rewrite key	^\s*if\ \(\*\(ushort\ \*\)\(iVar22\ \+\ 8\)\ ==\ uVar11\)\ \{$@3	+2
+use	psnDecDecodeHwInstruction	iVar22	sourceSlotPtr	CONFIRMED	entry + halfByteOffset + 8 + 4*source: the source slot compared with the rewrite key	^\s*iVar22\ =\ iVar22\ \+\ 4;$@3	+1
+use	psnDecDecodeHwInstruction	iVar22	slotIndex	CONFIRMED	counter over the three slots of a group (0..2)	^\s*iVar22\ =\ 0;$@2	+1
+use	psnDecDecodeHwInstruction	iVar22	slotIndex	CONFIRMED	counter over the three slots of a group (0..2)	^\s*bVar3\ =\ iVar22\ !=\ 2;$	+1
+use	psnDecDecodeHwInstruction	iVar22	slotIndex	CONFIRMED	counter over the three slots of a group (0..2)	^\s*iVar22\ =\ iVar22\ \+\ 1;$@2	+1
+use	psnDecDecodeHwInstruction	iVar23	slotCounter	CONFIRMED	counter over the three address slots of a group	^\s*iVar23\ =\ 0;$	+1
+use	psnDecDecodeHwInstruction	iVar23	slotCounter	CONFIRMED	counter over the three address slots of a group	^\s*bVar3\ =\ iVar23\ !=\ 2;$	+1
+use	psnDecDecodeHwInstruction	iVar23	slotCounter	CONFIRMED	counter over the three address slots of a group	^\s*iVar23\ =\ iVar23\ \+\ 1;$	+1
+use	psnDecDecodeHwInstruction	iVar6	addressSlotOffset	CONFIRMED	0x80 + 6*group: byte offset of the group's address slots in the entry	^\s*iVar6\ =\ 0x80;$	+1
+use	psnDecDecodeHwInstruction	iVar6	addressSlotOffset	CONFIRMED	0x80 + 6*group: byte offset of the group's address slots in the entry	^\s*puVar19\ =\ \(ushort\ \*\)\(\(int\)param_1\ \+\ iVar6\);$	+1
+use	psnDecDecodeHwInstruction	iVar6	addressSlotOffset	CONFIRMED	0x80 + 6*group: byte offset of the group's address slots in the entry	^\s*iVar6\ =\ iVar6\ \+\ 6;$	+1
+use	psnDecDecodeHwInstruction	iVar6	groupSetupCounter	CONFIRMED	counter over the two groups while the default operand words are stored	^\s*iVar6\ =\ 0;$	+1
+use	psnDecDecodeHwInstruction	iVar6	groupSetupCounter	CONFIRMED	counter over the two groups while the default operand words are stored	^\s*bVar3\ =\ iVar6\ !=\ 2;$	+1
+use	psnDecDecodeHwInstruction	iVar6	groupSetupCounter	CONFIRMED	counter over the two groups while the default operand words are stored	^\s*iVar6\ =\ iVar6\ \+\ 1;$	+1
+use	psnDecDecodeHwInstruction	iVar6	sourceIndex	CONFIRMED	index of the ALU source being decoded (SEL_A, SEL_B, SEL_C)	^\s*iVar6\ =\ 0;$@2	+1
+use	psnDecDecodeHwInstruction	iVar6	sourceIndex	CONFIRMED	index of the ALU source being decoded (SEL_A, SEL_B, SEL_C)	^\s*iVar6\ =\ iVar6\ \+\ 1;$@2	+1
+use	psnDecDecodeHwInstruction	iVar6	sourceIndex	CONFIRMED	index of the ALU source being decoded (SEL_A, SEL_B, SEL_C)	^\s*if\ \(iVar6\ !=\ 1\)\ \{$	+2
+use	psnDecDecodeHwInstruction	iVar6	sourceIndex	CONFIRMED	index of the ALU source being decoded (SEL_A, SEL_B, SEL_C)	^\s*if\ \(iVar6\ !=\ 2\)\ \{$	+1
+use	psnDecDecodeHwInstruction	iVar6	halfByteOffset	CONFIRMED	0 / 0x40: byte offset of the half in the entry	^\s*iVar6\ =\ 0;$@3	+1
+use	psnDecDecodeHwInstruction	iVar6	halfByteOffset	CONFIRMED	0 / 0x40: byte offset of the half in the entry	^\s*iVar22\ =\ \(int\)param_1\ \+\ iVar6;$	+1
+use	psnDecDecodeHwInstruction	iVar6	halfByteOffset	CONFIRMED	0 / 0x40: byte offset of the half in the entry	^\s*bVar2\ =\ iVar6\ !=\ 0x40;$	+2
+use	psnDecDecodeHwInstruction	iVar6	halfByteOffset	CONFIRMED	0 / 0x40: byte offset of the half in the entry	^\s*iVar6\ =\ 0;$@4	+1
+use	psnDecDecodeHwInstruction	iVar6	halfByteOffset	CONFIRMED	0 / 0x40: byte offset of the half in the entry	^\s*iVar22\ =\ \(int\)param_1\ \+\ iVar6;$@2	+1
+use	psnDecDecodeHwInstruction	iVar6	halfByteOffset	CONFIRMED	0 / 0x40: byte offset of the half in the entry	^\s*bVar2\ =\ iVar6\ !=\ 0x40;$@2	+2
+use	psnDecDecodeHwInstruction	iVar6	halfByteOffset	CONFIRMED	0 / 0x40: byte offset of the half in the entry	^\s*iVar6\ =\ 0;$@5	+1
+use	psnDecDecodeHwInstruction	iVar6	halfByteOffset	CONFIRMED	0 / 0x40: byte offset of the half in the entry	^\s*iVar22\ =\ \(int\)param_1\ \+\ iVar6;$@3	+1
+use	psnDecDecodeHwInstruction	iVar6	halfByteOffset	CONFIRMED	0 / 0x40: byte offset of the half in the entry	^\s*bVar2\ =\ iVar6\ !=\ 0x40;$@3	+2
+use	psnDecDecodeHwInstruction	iVar6	halfCounter	CONFIRMED	counter over the two halves	^\s*iVar6\ =\ 0;$@9	+1
+use	psnDecDecodeHwInstruction	iVar6	halfCounter	CONFIRMED	counter over the two halves	^\s*bVar3\ =\ iVar6\ !=\ 1;$@2	+1
+use	psnDecDecodeHwInstruction	iVar6	halfCounter	CONFIRMED	counter over the two halves	^\s*iVar6\ =\ iVar6\ \+\ 1;$@4	+1
+use	psnDecDecodeHwInstruction	iVar6	halfIndexB	CONFIRMED	half number 1..2 tested against the srcp select bits (0x100 / 0x200)	^\s*iVar6\ =\ 0;$@10	+1
+use	psnDecDecodeHwInstruction	iVar6	halfIndexB	CONFIRMED	half number 1..2 tested against the srcp select bits (0x100 / 0x200)	^\s*iVar6\ =\ iVar6\ \+\ 1;$@5	+2
+use	psnDecDecodeHwInstruction	iVar6	halfIndexB	CONFIRMED	half number 1..2 tested against the srcp select bits (0x100 / 0x200)	^\s*\}\ while\ \(iVar6\ !=\ 2\);$	+1
+use	psnDecDecodeHwInstruction	iVar6	halfCounter2	CONFIRMED	counter over the two halves	^\s*iVar6\ =\ 0;$@11	+1
+use	psnDecDecodeHwInstruction	iVar6	halfCounter2	CONFIRMED	counter over the two halves	^\s*bVar3\ =\ iVar6\ !=\ 1;$@3	+1
+use	psnDecDecodeHwInstruction	iVar6	halfCounter2	CONFIRMED	counter over the two halves	^\s*iVar6\ =\ iVar6\ \+\ 1;$@6	+1
+use	psnDecDecodeHwInstruction	uVar24	sourceModifier	CONFIRMED	MOD_A / MOD_B / MOD_C of the source being decoded (2 bits of RGB_INST)	^\s*uVar24\ =\ uVar11\ >>\ 5\ \&\ 3;$	+1
+use	psnDecDecodeHwInstruction	uVar24	sourceModifier	CONFIRMED	MOD_A / MOD_B / MOD_C of the source being decoded (2 bits of RGB_INST)	^\s*uVar7\ =\ uVar24;$	+1
+use	psnDecDecodeHwInstruction	uVar24	sourceModifier	CONFIRMED	MOD_A / MOD_B / MOD_C of the source being decoded (2 bits of RGB_INST)	^\s*uVar24\ =\ uVar11;$	+1
+use	psnDecDecodeHwInstruction	uVar24	sourceModifier	CONFIRMED	MOD_A / MOD_B / MOD_C of the source being decoded (2 bits of RGB_INST)	^\s*puVar19\[1\]\ =\ \(ushort\)\(uVar24\ <<\ 0xc\)\ \|\ puVar19\[1\];$	+1
+use	psnDecDecodeHwInstruction	uVar24	sourceModifier	CONFIRMED	MOD_A / MOD_B / MOD_C of the source being decoded (2 bits of RGB_INST)	^\s*uVar24\ =\ uVar8\ >>\ 0xc\ \&\ 3;$	+1
+use	psnDecDecodeHwInstruction	uVar24	sourceModifier	CONFIRMED	MOD_A / MOD_B / MOD_C of the source being decoded (2 bits of RGB_INST)	^\s*uVar24\ =\ uVar8\ >>\ 0x13\ \&\ 3;$	+1
+use	psnDecDecodeHwInstruction	uVar24	sourceModifier	CONFIRMED	MOD_A / MOD_B / MOD_C of the source being decoded (2 bits of RGB_INST)	^\s*uVar24\ =\ 0;$@2	+1
+use	psnDecDecodeHwInstruction	uVar24	readSlot	INFERRED	address slot whose read-mask word is updated (0 for slot-3 sources)	^\s*uVar24\ =\ uVar12;$	+1
+use	psnDecDecodeHwInstruction	uVar24	readSlot	INFERRED	address slot whose read-mask word is updated (0 for slot-3 sources)	^\s*uVar24\ =\ 0;$	+1
+use	psnDecDecodeHwInstruction	uVar24	readSlot	INFERRED	address slot whose read-mask word is updated (0 for slot-3 sources)	^\s*puVar17\[uVar24\ \+\ 10\]\ =\ uVar15\ \|\ puVar17\[uVar24\ \+\ 10\];$	+1
+use	psnDecDecodeHwInstruction	uVar24	readSlot	INFERRED	address slot whose read-mask word is updated (0 for slot-3 sources)	^\s*puVar19\[uVar24\ \+\ 10\]\ =\ uVar15\ \|\ puVar19\[uVar24\ \+\ 10\];$	+1
+use	psnDecDecodeHwInstruction	uVar24	readSlot	INFERRED	address slot whose read-mask word is updated (0 for slot-3 sources)	^\s*puVar17\[uVar24\ \+\ 0x10\]\ =\ uVar15\ \|\ puVar17\[uVar24\ \+\ 0x10\];$	+1
+use	psnDecDecodeHwInstruction	uVar24	readSlot	INFERRED	address slot whose read-mask word is updated (0 for slot-3 sources)	^\s*puVar19\[uVar24\ \+\ 0x10\]\ =\ uVar15\ \|\ puVar19\[uVar24\ \+\ 0x10\];$	+1
+use	psnDecDecodeHwInstruction	uVar24	readSlot	INFERRED	address slot whose read-mask word is updated (0 for slot-3 sources)	^\s*puVar17\[uVar24\ \+\ 0xd\]\ =\ uVar15\ \|\ puVar17\[uVar24\ \+\ 0xd\];$	+1
+use	psnDecDecodeHwInstruction	uVar24	readSlot	INFERRED	address slot whose read-mask word is updated (0 for slot-3 sources)	^\s*puVar19\[uVar24\ \+\ 0xd\]\ =\ uVar15\ \|\ puVar19\[uVar24\ \+\ 0xd\];$	+1
+use	psnDecDecodeHwInstruction	uVar24	readSlot	INFERRED	address slot whose read-mask word is updated (0 for slot-3 sources)	^\s*puVar17\[uVar24\ \+\ 0x12\]\ =\ uVar15\ \|\ puVar17\[uVar24\ \+\ 0x12\];$	+1
+use	psnDecDecodeHwInstruction	uVar24	readSlot	INFERRED	address slot whose read-mask word is updated (0 for slot-3 sources)	^\s*puVar19\[uVar24\ \+\ 0x12\]\ =\ uVar15\ \|\ puVar19\[uVar24\ \+\ 0x12\];$	+1
+use	psnDecDecodeHwInstruction	uVar26	sourceSelectCode	CONFIRMED	SEL_A / SEL_B / SEL_C (5 bits of RGB_INST) of the source being decoded	^\s*uVar26\ =\ uVar11\ \&\ 0x1f;$	+1
+use	psnDecDecodeHwInstruction	uVar26	sourceSelectCode	CONFIRMED	SEL_A / SEL_B / SEL_C (5 bits of RGB_INST) of the source being decoded	^\s*\*\(undefined4\ \*\)puVar19\ =\ \*\(undefined4\ \*\)\(uVar26\ \*\ 4\ \+\ 0x1dc0d8\);$	+1
+use	psnDecDecodeHwInstruction	uVar26	sourceSelectCode	CONFIRMED	SEL_A / SEL_B / SEL_C (5 bits of RGB_INST) of the source being decoded	^\s*uVar26\ =\ uVar11\ >>\ 7\ \&\ 0x1f;$	+1
+use	psnDecDecodeHwInstruction	uVar26	sourceSelectCode	CONFIRMED	SEL_A / SEL_B / SEL_C (5 bits of RGB_INST) of the source being decoded	^\s*uVar26\ =\ uVar11\ >>\ 0xe\ \&\ 0x1f;$	+1
+use	psnDecDecodeHwInstruction	uVar26	sourceSelectCode	CONFIRMED	SEL_A / SEL_B / SEL_C (5 bits of RGB_INST) of the source being decoded	^\s*uVar26\ =\ 0;$	+1
+use	psnDecDecodeHwInstruction	uVar26	alphaSourcesLeft	CONFIRMED	countdown of the alpha sources still to be decoded	^\s*uVar26\ =\ uVar12;$	+1
+use	psnDecDecodeHwInstruction	uVar26	alphaSourcesLeft	CONFIRMED	countdown of the alpha sources still to be decoded	^\s*uVar26\ =\ 1;$	+1
+use	psnDecDecodeHwInstruction	uVar26	alphaSourcesLeft	CONFIRMED	countdown of the alpha sources still to be decoded	^\s*uVar26\ =\ uVar26\ \-\ 1;$	+2
+use	psnDecDecodeHwInstruction	uVar25	rgbSourcesLeft	CONFIRMED	countdown of the RGB sources still to be decoded	^\s*uVar25\ =\ uVar14;$	+1
+use	psnDecDecodeHwInstruction	uVar25	rgbSourcesLeft	CONFIRMED	countdown of the RGB sources still to be decoded	^\s*uVar25\ =\ 1;$	+1
+use	psnDecDecodeHwInstruction	uVar25	rgbSourcesLeft	CONFIRMED	countdown of the RGB sources still to be decoded	^\s*uVar25\ =\ uVar25\ \-\ 1;$	+2

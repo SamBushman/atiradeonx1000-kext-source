@@ -413,7 +413,7 @@ int ilEmitPrologue(outCursor, programRecord, passThroughR5, passThroughR6, passT
   uint loopIndex;
   bool bVar1;
   uint uVar2;
-  undefined4 uVar3;
+  undefined4 registerNumber;
   uint *puVar4;
   int iVar5;
   uint uVar6;
@@ -422,59 +422,59 @@ int ilEmitPrologue(outCursor, programRecord, passThroughR5, passThroughR6, passT
   int iVar9;
   uint uVar10;
   int iVar11;
-  undefined8 uVar12;
-  undefined4 local_58;
-  undefined4 local_54;
-  undefined4 local_50;
+  undefined8 allocationResult;
+  undefined4 operandToken0;
+  undefined4 operandToken1;
+  undefined4 operandToken2;
   
-  uVar3 = ilNextCounterValue(programRecord);
-  *(undefined4 *)(programRecord + 0x21e0) = uVar3;
-  uVar3 = ilNextCounterValue(programRecord);
-  *(undefined4 *)(programRecord + 0x21e4) = uVar3;
-  uVar3 = ilNextCounterValue(programRecord);
-  *(undefined4 *)(programRecord + 0x21e8) = uVar3;
-  uVar3 = ilNextCounterValue(programRecord);
-  *(undefined4 *)(programRecord + 0x21ec) = uVar3;
+  registerNumber = ilNextCounterValue(programRecord);
+  *(undefined4 *)(programRecord + 0x21e0) = registerNumber;
+  registerNumber = ilNextCounterValue(programRecord);
+  *(undefined4 *)(programRecord + 0x21e4) = registerNumber;
+  registerNumber = ilNextCounterValue(programRecord);
+  *(undefined4 *)(programRecord + 0x21e8) = registerNumber;
+  registerNumber = ilNextCounterValue(programRecord);
+  *(undefined4 *)(programRecord + 0x21ec) = registerNumber;
   if (*(int *)(programRecord + 0x2324) != 0) {
-    uVar3 = ilNextCounterValue(programRecord);
-    *(undefined4 *)(programRecord + 9000) = uVar3;
+    registerNumber = ilNextCounterValue(programRecord);
+    *(undefined4 *)(programRecord + 9000) = registerNumber;
   }
-  uVar3 = ilNextCounterValue(programRecord);
-  *(undefined4 *)(programRecord + 0x2200) = uVar3;
-  uVar12 = ilNextCounterValue(programRecord);
-  *(int *)(programRecord + 0x2208) = (int)((ulonglong)uVar12 >> 0x20);
+  registerNumber = ilNextCounterValue(programRecord);
+  *(undefined4 *)(programRecord + 0x2200) = registerNumber;
+  allocationResult = ilNextCounterValue(programRecord);
+  *(int *)(programRecord + 0x2208) = (int)((ulonglong)allocationResult >> 0x20);
   if (*(int *)(programRecord + 100) != 0) {
-    uVar3 = ilAllocLowestFreeBit8(programRecord,(int)uVar12,passThroughR5,passThroughR6,passThroughR7,passThroughR8,passThroughR9,passThroughR10);
-    *(undefined4 *)(programRecord + 0x68) = uVar3;
+    registerNumber = ilAllocLowestFreeBit8(programRecord,(int)allocationResult,passThroughR5,passThroughR6,passThroughR7,passThroughR8,passThroughR9,passThroughR10);
+    *(undefined4 *)(programRecord + 0x68) = registerNumber;
   }
   if (*(int *)(programRecord + 0x22fc) != 0) {
-    uVar3 = ilNextCounterValue(programRecord);
-    *(undefined4 *)(programRecord + 0x2300) = uVar3;
-    uVar3 = ((int (*)())ilPopFreeRegister)(programRecord);
-    *(undefined4 *)(programRecord + 0x2304) = uVar3;
-    uVar3 = ((int (*)())ilPopFreeRegister)(programRecord);
-    *(undefined4 *)(programRecord + 0x2308) = uVar3;
+    registerNumber = ilNextCounterValue(programRecord);
+    *(undefined4 *)(programRecord + 0x2300) = registerNumber;
+    registerNumber = ((int (*)())ilPopFreeRegister)(programRecord);
+    *(undefined4 *)(programRecord + 0x2304) = registerNumber;
+    registerNumber = ((int (*)())ilPopFreeRegister)(programRecord);
+    *(undefined4 *)(programRecord + 0x2308) = registerNumber;
     *outCursor = 0x1ff0016;
     outCursor[1] = *(uint *)(programRecord + 0x68) & 0xffff | 0x110000;
     outCursor = outCursor + 2;
   }
   if (*(int *)(programRecord + 0x21d0) != 0) {
-    uVar3 = ilNextCounterValue(programRecord);
-    *(undefined4 *)(programRecord + 0x21dc) = uVar3;
+    registerNumber = ilNextCounterValue(programRecord);
+    *(undefined4 *)(programRecord + 0x21dc) = registerNumber;
     *outCursor = 0x1ff0016;
     outCursor[1] = *(uint *)(programRecord + 0x21d4) & 0xffff | 0x110000;
     outCursor[2] = *(int *)(programRecord + 0x21d4) << 0x10 | 0xb000019;
     outCursor = outCursor + 3;
   }
   if (*(int *)(programRecord + 0x4c) != 0) {
-    uVar3 = ilNextCounterValue(programRecord);
-    *(undefined4 *)(programRecord + 0x54) = uVar3;
-    uVar3 = ((int (*)())ilPopFreeRegister)(programRecord);
-    *(undefined4 *)(programRecord + 0x58) = uVar3;
-    uVar12 = ((int (*)())ilPopFreeRegister)(programRecord);
-    *(int *)(programRecord + 0x5c) = (int)((ulonglong)uVar12 >> 0x20);
-    uVar3 = ilAllocLowestFreeBit8(programRecord,(int)uVar12,passThroughR5,passThroughR6,passThroughR7,passThroughR8,passThroughR9,passThroughR10);
-    *(undefined4 *)(programRecord + 0x60) = uVar3;
+    registerNumber = ilNextCounterValue(programRecord);
+    *(undefined4 *)(programRecord + 0x54) = registerNumber;
+    registerNumber = ((int (*)())ilPopFreeRegister)(programRecord);
+    *(undefined4 *)(programRecord + 0x58) = registerNumber;
+    allocationResult = ((int (*)())ilPopFreeRegister)(programRecord);
+    *(int *)(programRecord + 0x5c) = (int)((ulonglong)allocationResult >> 0x20);
+    registerNumber = ilAllocLowestFreeBit8(programRecord,(int)allocationResult,passThroughR5,passThroughR6,passThroughR7,passThroughR8,passThroughR9,passThroughR10);
+    *(undefined4 *)(programRecord + 0x60) = registerNumber;
     *outCursor = 0x1ff0016;
     uVar6 = *(uint *)(programRecord + 0x60);
     outCursor[2] = 0x51;
@@ -482,30 +482,30 @@ int ilEmitPrologue(outCursor, programRecord, passThroughR5, passThroughR6, passT
     uVar6 = *(uint *)(programRecord + 0x54);
     outCursor[4] = 0x40;
     outCursor[3] = uVar6 & 0xffff | 0x440000;
-    uVar3 = *(undefined4 *)(programRecord + 0x60);
+    registerNumber = *(undefined4 *)(programRecord + 0x60);
     outCursor[6] = 0x49;
-    local_58 = CONCAT22(0x11,(short)uVar3);
-    outCursor[5] = local_58;
+    operandToken0 = CONCAT22(0x11,(short)registerNumber);
+    outCursor[5] = operandToken0;
     uVar6 = *(uint *)(programRecord + 0x54);
     outCursor[8] = 0x15;
     outCursor[7] = uVar6 & 0xffff | 0x440000;
-    uVar3 = *(undefined4 *)(programRecord + 0x54);
+    registerNumber = *(undefined4 *)(programRecord + 0x54);
     outCursor[10] = (uint)((unsigned char *)0x00003333);
-    local_58 = CONCAT22(4,(short)uVar3);
-    outCursor[9] = local_58 | 0x400000;
-    uVar3 = *(undefined4 *)(programRecord + 0x60);
+    operandToken0 = CONCAT22(4,(short)registerNumber);
+    outCursor[9] = operandToken0 | 0x400000;
+    registerNumber = *(undefined4 *)(programRecord + 0x60);
     outCursor[0xc] = 0x40;
-    local_54 = CONCAT22(0x11,(short)uVar3);
-    outCursor[0xb] = local_54;
+    operandToken1 = CONCAT22(0x11,(short)registerNumber);
+    outCursor[0xb] = operandToken1;
     uVar6 = *(uint *)(programRecord + 0x54);
     outCursor[0xe] = 0x15;
     outCursor[0xd] = uVar6 & 0xffff | 0x440000;
-    local_58 = CONCAT22(4,(short)*(undefined4 *)(programRecord + 0x54));
-    outCursor[0xf] = local_58;
-    local_54 = CONCAT22(1,(short)*(undefined4 *)(programRecord + 0x58));
-    outCursor[0x10] = local_54;
-    local_50 = CONCAT22(1,(short)*(undefined4 *)(programRecord + 0x5c));
-    outCursor[0x11] = local_50;
+    operandToken0 = CONCAT22(4,(short)*(undefined4 *)(programRecord + 0x54));
+    outCursor[0xf] = operandToken0;
+    operandToken1 = CONCAT22(1,(short)*(undefined4 *)(programRecord + 0x58));
+    outCursor[0x10] = operandToken1;
+    operandToken2 = CONCAT22(1,(short)*(undefined4 *)(programRecord + 0x5c));
+    outCursor[0x11] = operandToken2;
     outCursor = outCursor + 0x12;
   }
   if (*(int *)(programRecord + 0x2234) != 0) {
@@ -517,15 +517,15 @@ int ilEmitPrologue(outCursor, programRecord, passThroughR5, passThroughR6, passT
     do {
       uVar10 = 1 << (loopIndex2 & 0x3f);
       if (((uVar2 | uVar6) & uVar10) != 0) {
-        uVar3 = ((int (*)())ilPopFreeRegister)(programRecord);
-        *(undefined4 *)(iVar9 + 0xb8) = uVar3;
+        registerNumber = ((int (*)())ilPopFreeRegister)(programRecord);
+        *(undefined4 *)(iVar9 + 0xb8) = registerNumber;
         if (uVar7 == 0) {
           uVar7 = 1;
         }
       }
       if ((uVar10 & *(uint *)(programRecord + 0x74)) != 0) {
-        uVar3 = ilNextCounterValue(programRecord);
-        *(undefined4 *)(programRecord + 0x184) = uVar3;
+        registerNumber = ilNextCounterValue(programRecord);
+        *(undefined4 *)(programRecord + 0x184) = registerNumber;
         if (uVar7 < 2) {
           uVar7 = 2;
         }
@@ -539,8 +539,8 @@ int ilEmitPrologue(outCursor, programRecord, passThroughR5, passThroughR6, passT
       iVar9 = programRecord;
       do {
         loopIndex = loopIndex + 1;
-        uVar3 = ilNextCounterValue(programRecord);
-        *(undefined4 *)(iVar9 + 0x17c) = uVar3;
+        registerNumber = ilNextCounterValue(programRecord);
+        *(undefined4 *)(iVar9 + 0x17c) = registerNumber;
         iVar9 = iVar9 + 4;
       } while (loopIndex != uVar7);
     }
@@ -548,8 +548,8 @@ int ilEmitPrologue(outCursor, programRecord, passThroughR5, passThroughR6, passT
   if (*(int *)(programRecord + 0x21d0) != 0) {
     *outCursor = (*(uint *)(programRecord + 0x21d4) & 0x3fff) << 0x10 | 0x5d;
     outCursor[1] = *(uint *)(programRecord + 0x21dc) & 0xffff | 0x40000;
-    local_58 = CONCAT22(0x11,(short)*(undefined4 *)(programRecord + 0x21d8));
-    outCursor[2] = local_58;
+    operandToken0 = CONCAT22(0x11,(short)*(undefined4 *)(programRecord + 0x21d8));
+    outCursor[2] = operandToken0;
     outCursor = outCursor + 3;
   }
   iVar5 = 0;

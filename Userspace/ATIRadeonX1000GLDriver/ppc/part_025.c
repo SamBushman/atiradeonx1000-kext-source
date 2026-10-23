@@ -1777,66 +1777,68 @@ int noop_f4c44()
 }
 
 /* ConstKey__compareOrdered @ 0xf4c48 (268 bytes) */
-int ConstKey__compareOrdered(param_1, param_2, param_3, param_4, param_5, param_6)
-  int param_1;
-  int param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+int ConstKey__compareOrdered(keyA, keyB, passThroughR5, passThroughR6, passThroughR7, passThroughR8)
+  int keyA;
+  int keyB;
+  undefined4 passThroughR5;
+  undefined4 passThroughR6;
+  undefined4 passThroughR7;
+  undefined4 passThroughR8;
 {
-  int iVar1;
-  uint uVar2;
-  int iVar3;
-  int iVar4;
-  bool bVar5;
-  int iVar6;
+  uint kindA;
+  int operandIndex;
+  int operandA;
+  uint presenceBit;
+  int operandB;
+  int presentOperands;
+  bool aIsLess;
+  int presenceLoopRemaining;
   
-  iVar4 = 0;
-  uVar2 = 3;
-  iVar6 = 4;
+  presentOperands = 0;
+  presenceBit = 3;
+  presenceLoopRemaining = 4;
   do {
-    if (((int)*(char *)(param_1 + 0x15c) >> (uVar2 & 0x3f) & 1U) == 0) {
-      if (((int)*(char *)(param_2 + 0x15c) >> (uVar2 & 0x3f) & 1U) != 0) {
+    if (((int)*(char *)(keyA + 0x15c) >> (presenceBit & 0x3f) & 1U) == 0) {
+      if (((int)*(char *)(keyB + 0x15c) >> (presenceBit & 0x3f) & 1U) != 0) {
         return 1;
       }
     }
     else {
-      if (((int)*(char *)(param_2 + 0x15c) >> (uVar2 & 0x3f) & 1U) == 0) {
+      if (((int)*(char *)(keyB + 0x15c) >> (presenceBit & 0x3f) & 1U) == 0) {
         return 0xffffffff;
       }
-      iVar4 = iVar4 + 1;
+      presentOperands = presentOperands + 1;
     }
-    uVar2 = uVar2 - 1;
-    iVar6 = iVar6 + -1;
-  } while (iVar6 != 0);
-  if (0 < iVar4) {
-    iVar6 = 0;
+    presenceBit = presenceBit - 1;
+    presenceLoopRemaining = presenceLoopRemaining + -1;
+  } while (presenceLoopRemaining != 0);
+  if (0 < presentOperands) {
+    operandIndex = 0;
     do {
-      iVar1 = iVar6 * 0x18 + 0x10;
-      iVar3 = param_2 + iVar1;
-      iVar1 = param_1 + iVar1;
-      uVar2 = *(uint *)(iVar1 + 0xc);
-      if (uVar2 != *(uint *)(iVar3 + 0xc)) {
-        bVar5 = uVar2 < *(uint *)(iVar3 + 0xc);
+      operandA = operandIndex * 0x18 + 0x10;
+      operandB = keyB + operandA;
+      operandA = keyA + operandA;
+      kindA = *(uint *)(operandA + 0xc);
+      if (kindA != *(uint *)(operandB + 0xc)) {
+        aIsLess = kindA < *(uint *)(operandB + 0xc);
 LAB_000f4d20:
-        if (!bVar5) {
+        if (!aIsLess) {
           return 1;
         }
         return 0xffffffff;
       }
-      if (*(uint *)(iVar1 + 0x10) != *(uint *)(iVar3 + 0x10)) {
-        if (uVar2 == 2) {
-          bVar5 = *(float *)(iVar1 + 0x10) < *(float *)(iVar3 + 0x10);
+      if (*(uint *)(operandA + 0x10) != *(uint *)(operandB + 0x10)) {
+        if (kindA == 2) {
+          aIsLess = *(float *)(operandA + 0x10) < *(float *)(operandB + 0x10);
         }
         else {
-          bVar5 = *(uint *)(iVar1 + 0x10) < *(uint *)(iVar3 + 0x10);
+          aIsLess = *(uint *)(operandA + 0x10) < *(uint *)(operandB + 0x10);
         }
         goto LAB_000f4d20;
       }
-      iVar4 = iVar4 + -1;
-      iVar6 = iVar6 + 1;
-    } while (iVar4 != 0);
+      presentOperands = presentOperands + -1;
+      operandIndex = operandIndex + 1;
+    } while (presentOperands != 0);
   }
   return 0;
 }

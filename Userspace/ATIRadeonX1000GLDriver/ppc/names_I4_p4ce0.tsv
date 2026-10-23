@@ -1,0 +1,65 @@
+# Fork I4 batch 6: web-split names of psnDecodedToProgram
+use	psnDecodedToProgram	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar15\ !=\ 2;$	+1
+use	psnDecodedToProgram	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*\}\ while\ \(bVar1\);$	+1
+use	psnDecodedToProgram	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar15\ !=\ 1;$	+1
+use	psnDecodedToProgram	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*\}\ while\ \(bVar1\);$@2	+1
+use	psnDecodedToProgram	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar8\ !=\ 2;$	+1
+use	psnDecodedToProgram	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*\}\ while\ \(bVar1\);$@3	+1
+use	psnDecodedToProgram	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar15\ !=\ 1;$@2	+1
+use	psnDecodedToProgram	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*\}\ while\ \(bVar1\);$@4	+1
+use	psnDecodedToProgram	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar15\ !=\ 1;$@3	+1
+use	psnDecodedToProgram	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*\}\ while\ \(bVar1\);$@5	+1
+use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*iVar17\ =\ uVar21\ \*\ 0xa0\ \+\ uVar13;$	+4
+use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*\*\(undefined2\ \*\)\(\(int\)param_2\ \+\ 0x56\)\ =\ \*\(undefined2\ \*\)\(iVar17\ \+\ 0x80\);$	+3
+use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*\*\(char\ \*\)\(\(int\)param_2\ \+\ 0x62\)\ =\ \(char\)\*\(undefined2\ \*\)\(iVar17\ \+\ 0x28\);$	+2
+use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*bVar2\ =\ \*\(byte\ \*\)\(iVar17\ \+\ 0x15\);$	+1
+use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*if\ \(\(\*\(short\ \*\)\(iVar17\ \+\ 2\)\ ==\ 0\ \&\&\ \*\(short\ \*\)\(iVar17\ \+\ 6\)\ ==\ 0\)\ \&\&$@2	+2
+use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*sVar9\ =\ \*\(short\ \*\)\(iVar17\ \+\ 0x3a\);$	+1
+use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*if\ \(\(\*\(short\ \*\)\(iVar17\ \+\ 0x42\)\ !=\ 0\ \|\|\ \*\(short\ \*\)\(iVar17\ \+\ 0x46\)\ !=\ 0\)\ \|\|$	+2
+use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*if\ \(\*\(short\ \*\)\(iVar17\ \+\ 0x80\)\ ==\ \-1\)\ \{$	+1
+use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*\*\(char\ \*\)\(\(int\)param_2\ \+\ 0x52\)\ =\ \(char\)\*\(short\ \*\)\(iVar17\ \+\ 0x80\);$	+1
+use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*if\ \(\*\(short\ \*\)\(iVar17\ \+\ 0x86\)\ ==\ \-1\)\ \{$	+1
+use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*\*\(char\ \*\)\(param_2\ \+\ 0x14\)\ =\ \(char\)\*\(short\ \*\)\(iVar17\ \+\ 0x86\);$	+1
+use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*\*\(bool\ \*\)\(\(int\)param_2\ \+\ 0x55\)\ =\ \*\(float\ \*\)\(iVar17\ \+\ 0x2c\)\ !=\ FLOAT_001aa0e8;$	+2
+use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*\*\(char\ \*\)\(\(int\)param_2\ \+\ 0x5d\)\ =\ \(char\)\*\(undefined2\ \*\)\(iVar17\ \+\ 2\);$	+1
+use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*\*\(byte\ \*\)\(\(int\)param_2\ \+\ 0x69\)\ =\ \(byte\)\(\*\(ushort\ \*\)\(iVar17\ \+\ 0x42\)\ >>\ 3\)\ \&\ 1;$	+2
+use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*\*\(char\ \*\)\(\(int\)param_2\ \+\ 0x6a\)\ =\ \(char\)\*\(undefined2\ \*\)\(iVar17\ \+\ 0x40\);$	+4
+use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*iVar16\ =\ iVar17\ \+\ 8;$	+1
+use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*iVar8\ =\ iVar17;$@2	+1
+use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*\*\(byte\ \*\)\(\(int\)param_2\ \+\ 0x7b\)\ =\ \(byte\)\(\*\(uint\ \*\)\(iVar17\ \+\ 0x30\)\ >>\ 3\)\ \&\ 1;$	+1
+use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*\*\(byte\ \*\)\(\(int\)param_2\ \+\ 0x8a\)\ =\ \(byte\)\(\*\(uint\ \*\)\(iVar17\ \+\ 0x70\)\ >>\ 3\)\ \&\ 1;$	+1
+use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*iVar8\ =\ iVar17;$@3	+1
+use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*\*\(char\ \*\)\(param_2\ \+\ 0x1e\)\ =\ \(char\)\*\(undefined2\ \*\)\(iVar17\ \+\ 0x2a\);$	+1
+use	psnDecodedToProgram	iVar17	entry	CONFIRMED	current decoded entry: decoded program entry array + index*0xa0	^\s*\*\(char\ \*\)\(\(int\)param_2\ \+\ 0x87\)\ =\ \(char\)\*\(undefined2\ \*\)\(iVar17\ \+\ 0x6a\);$	+1
+use	psnDecodedToProgram	puVar24	outRecord	CONFIRMED	param_2 + 0x12 words: the PSN record being written (the record after the header / previous record)	^\s*puVar24\ =\ param_2\ \+\ 0x12;$	+2
+use	psnDecodedToProgram	puVar24	outRecord	CONFIRMED	param_2 + 0x12 words: the PSN record being written (the record after the header / previous record)	^\s*\*puVar24\ =\ 2;$	+1
+use	psnDecodedToProgram	puVar24	outRecord	CONFIRMED	param_2 + 0x12 words: the PSN record being written (the record after the header / previous record)	^\s*\*puVar24\ =\ 1;$	+1
+use	psnDecodedToProgram	puVar24	outRecord	CONFIRMED	param_2 + 0x12 words: the PSN record being written (the record after the header / previous record)	^\s*\*puVar24\ =\ 3;$	+1
+use	psnDecodedToProgram	puVar24	outRecord	CONFIRMED	param_2 + 0x12 words: the PSN record being written (the record after the header / previous record)	^\s*param_2\ =\ puVar24;$	+1
+use	psnDecodedToProgram	uVar13	entryArray	CONFIRMED	decodedProgram[2]: base of the 0xa0-byte entries	^\s*uVar13\ =\ param_1\[2\];$	+2
+use	psnDecodedToProgram	uVar13	entryArray	CONFIRMED	decodedProgram[2]: base of the 0xa0-byte entries	^\s*\*\(char\ \*\)\(\(int\)param_2\ \+\ 0x5e\)\ =\ \(char\)\*\(undefined2\ \*\)\(uVar21\ \*\ 0xa0\ \+\ uVar13\);$	+1
+use	psnDecodedToProgram	iVar8	entryMode	CONFIRMED	entry mode word (+0x8c): 0 RS, 1 TEX, 2 ALU	^\s*iVar8\ =\ \*\(int\ \*\)\(iVar17\ \+\ 0x8c\);$	+1
+use	psnDecodedToProgram	iVar8	entryMode	CONFIRMED	entry mode word (+0x8c): 0 RS, 1 TEX, 2 ALU	^\s*if\ \(iVar8\ ==\ 1\)\ \{$	+1
+use	psnDecodedToProgram	iVar8	entryMode	CONFIRMED	entry mode word (+0x8c): 0 RS, 1 TEX, 2 ALU	^\s*else\ if\ \(iVar8\ ==\ 0\)\ \{$	+1
+use	psnDecodedToProgram	iVar8	entryMode	CONFIRMED	entry mode word (+0x8c): 0 RS, 1 TEX, 2 ALU	^\s*else\ if\ \(iVar8\ ==\ 2\)\ \{$	+1
+use	psnDecodedToProgram	iVar8	entryAlias	CONFIRMED	copy of the entry pointer used while the ALU record bytes are filled	^\s*iVar8\ =\ iVar17;$	+1
+use	psnDecodedToProgram	iVar8	entryAlias	CONFIRMED	copy of the entry pointer used while the ALU record bytes are filled	^\s*sVar9\ =\ \*\(short\ \*\)\(iVar8\ \+\ 0x80\);$	+2
+use	psnDecodedToProgram	iVar8	entryAlias	CONFIRMED	copy of the entry pointer used while the ALU record bytes are filled	^\s*iVar8\ =\ iVar8\ \+\ 2;$	+1
+use	psnDecodedToProgram	iVar8	entryAlias	CONFIRMED	copy of the entry pointer used while the ALU record bytes are filled	^\s*iVar8\ =\ iVar17;$@2	+1
+use	psnDecodedToProgram	iVar8	entryAlias	CONFIRMED	copy of the entry pointer used while the ALU record bytes are filled	^\s*uVar13\ =\ \(uint\)\(int\)\(\(double\)\*\(float\ \*\)\(iVar8\ \+\ 0x2c\)\ \*\ DOUBLE_001aa290\);$	+1
+use	psnDecodedToProgram	iVar8	entryAlias	CONFIRMED	copy of the entry pointer used while the ALU record bytes are filled	^\s*iVar8\ =\ iVar8\ \+\ 0x40;$	+1
+use	psnDecodedToProgram	iVar8	entryAlias	CONFIRMED	copy of the entry pointer used while the ALU record bytes are filled	^\s*iVar8\ =\ iVar17;$@3	+1
+use	psnDecodedToProgram	iVar8	entryAlias	CONFIRMED	copy of the entry pointer used while the ALU record bytes are filled	^\s*uVar22\ =\ \*\(undefined1\ \*\)\(\(uint\)\*\(ushort\ \*\)\(iVar8\ \+\ 0x28\)\ \*\ 2\ \+\ 0x1dbf98\ \+\ iVar15\);$	+1
+use	psnDecodedToProgram	iVar8	entryAlias	CONFIRMED	copy of the entry pointer used while the ALU record bytes are filled	^\s*iVar8\ =\ iVar8\ \+\ 0x40;$@2	+1
+use	psnDecodedToProgram	uVar22	isFirstTexRecord	INFERRED	1 until the first TEX record has been written (stored into the record's flag byte at +0x68, then cleared)	^\s*uVar22\ =\ 1;$	+1
+use	psnDecodedToProgram	uVar22	isFirstTexRecord	INFERRED	1 until the first TEX record has been written (stored into the record's flag byte at +0x68, then cleared)	^\s*\*\(undefined1\ \*\)\(param_2\ \+\ 0x1a\)\ =\ uVar22;$	+2
+use	psnDecodedToProgram	uVar22	isFirstTexRecord	INFERRED	1 until the first TEX record has been written (stored into the record's flag byte at +0x68, then cleared)	^\s*uVar22\ =\ 1;$@2	+1
+use	psnDecodedToProgram	uVar4	rgbDestReg	CONFIRMED	ushort at entry+4 (RGB destination register)	^\s*uVar4\ =\ \*\(undefined2\ \*\)\(iVar17\ \+\ 4\);$	+1
+use	psnDecodedToProgram	uVar4	rgbDestReg	CONFIRMED	ushort at entry+4 (RGB destination register)	^\s*\*\(undefined2\ \*\)\(param_2\ \+\ 0x15\)\ =\ uVar4;$	+1
+use	psnDecodedToProgram	uVar4	rgbDestReg	CONFIRMED	ushort at entry+4 (RGB destination register)	^\s*\*\(undefined2\ \*\)\(\(int\)param_2\ \+\ 0x4e\)\ =\ uVar4;$	+1
+use	psnDecodedToProgram	uVar4	rgbDestReg	CONFIRMED	ushort at entry+4 (RGB destination register)	^\s*\*\(undefined2\ \*\)\(param_2\ \+\ 0x15\)\ =\ uVar4;$@2	+1
+use	psnDecodedToProgram	uVar5	alphaDestReg	CONFIRMED	ushort at entry+0x44 (alpha destination register)	^\s*uVar5\ =\ \*\(undefined2\ \*\)\(iVar17\ \+\ 0x44\);$	+1
+use	psnDecodedToProgram	uVar5	alphaDestReg	CONFIRMED	ushort at entry+0x44 (alpha destination register)	^\s*\*\(undefined2\ \*\)\(param_2\ \+\ 0x13\)\ =\ uVar5;$	+1
+use	psnDecodedToProgram	uVar5	alphaDestReg	CONFIRMED	ushort at entry+0x44 (alpha destination register)	^\s*\*\(undefined2\ \*\)\(param_2\ \+\ 0x18\)\ =\ uVar5;$	+1
+use	psnDecodedToProgram	uVar20	headerWord1	CONFIRMED	word 1 of the PSN header, preserved across the memset	^\s*uVar20\ =\ param_2\[1\];$	+1
+use	psnDecodedToProgram	uVar20	headerWord1	CONFIRMED	word 1 of the PSN header, preserved across the memset	^\s*param_2\[1\]\ =\ uVar20;$	+1

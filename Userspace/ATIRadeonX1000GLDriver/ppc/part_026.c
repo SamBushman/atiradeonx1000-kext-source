@@ -246,87 +246,87 @@ int FUN_000f5248(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
 }
 
 /* Compiler__getOrCreateLoadConst3 @ 0xf53c0 (396 bytes) */
-int Compiler__getOrCreateLoadConst3(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int Compiler__getOrCreateLoadConst3(compiler, operandWord0, operandWord1, operandWord2, operandWord3, operandWord4, operandWord5, operandWord6)
+  undefined4 compiler;
+  undefined4 operandWord0;
+  undefined4 operandWord1;
+  undefined4 operandWord2;
+  undefined4 operandWord3;
+  undefined4 operandWord4;
+  undefined4 operandWord5;
+  undefined4 operandWord6;
 {
-  undefined4 uStack0000001c;
-  undefined4 uStack00000020;
-  undefined4 uStack00000024;
-  undefined4 uStack00000028;
-  undefined4 uStack0000002c;
-  undefined4 uStack00000030;
-  undefined4 uStack00000034;
+  undefined4 operandWord0Home;
+  undefined4 operandWord1Home;
+  undefined4 operandWord2Home;
+  undefined4 operandWord3Home;
+  undefined4 operandWord4Home;
+  undefined4 operandWord5Home;
+  undefined4 operandWord6Home;
   
-  uStack0000001c = param_2;
-  uStack00000020 = param_3;
-  uStack00000024 = param_4;
-  uStack00000028 = param_5;
-  uStack0000002c = param_6;
-  uStack00000030 = param_7;
-  uStack00000034 = param_8;
-  return ((int (*)())Compiler__getOrCreateLoadConstN)(param_1,3,param_2,param_3,param_4,param_5,param_6,param_7);
+  operandWord0Home = operandWord0;
+  operandWord1Home = operandWord1;
+  operandWord2Home = operandWord2;
+  operandWord3Home = operandWord3;
+  operandWord4Home = operandWord4;
+  operandWord5Home = operandWord5;
+  operandWord6Home = operandWord6;
+  return ((int (*)())Compiler__getOrCreateLoadConstN)(compiler,3,operandWord0,operandWord1,operandWord2,operandWord3,operandWord4,operandWord5);
 }
 
 /* Compiler__getOrCreateLoadConst2 @ 0xf554c (352 bytes) */
-int Compiler__getOrCreateLoadConst2(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int Compiler__getOrCreateLoadConst2(compiler, operandWord0, operandWord1, operandWord2, operandWord3, operandWord4, operandWord5, operandWord6)
+  undefined4 compiler;
+  undefined4 operandWord0;
+  undefined4 operandWord1;
+  undefined4 operandWord2;
+  undefined4 operandWord3;
+  undefined4 operandWord4;
+  undefined4 operandWord5;
+  undefined4 operandWord6;
 {
-  undefined4 uStack0000001c;
-  undefined4 uStack00000020;
-  undefined4 uStack00000024;
-  undefined4 uStack00000028;
-  undefined4 uStack0000002c;
-  undefined4 uStack00000030;
-  undefined4 uStack00000034;
+  undefined4 operandWord0Home;
+  undefined4 operandWord1Home;
+  undefined4 operandWord2Home;
+  undefined4 operandWord3Home;
+  undefined4 operandWord4Home;
+  undefined4 operandWord5Home;
+  undefined4 operandWord6Home;
   
-  uStack0000001c = param_2;
-  uStack00000020 = param_3;
-  uStack00000024 = param_4;
-  uStack00000028 = param_5;
-  uStack0000002c = param_6;
-  uStack00000030 = param_7;
-  uStack00000034 = param_8;
-  return ((int (*)())Compiler__getOrCreateLoadConstN)(param_1,2,param_2,param_3,param_4,param_5,param_6,param_7);
+  operandWord0Home = operandWord0;
+  operandWord1Home = operandWord1;
+  operandWord2Home = operandWord2;
+  operandWord3Home = operandWord3;
+  operandWord4Home = operandWord4;
+  operandWord5Home = operandWord5;
+  operandWord6Home = operandWord6;
+  return ((int (*)())Compiler__getOrCreateLoadConstN)(compiler,2,operandWord0,operandWord1,operandWord2,operandWord3,operandWord4,operandWord5);
 }
 
 /* Compiler__getOrCreateLoadConst1 @ 0xf56ac (324 bytes) */
-int Compiler__getOrCreateLoadConst1(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int Compiler__getOrCreateLoadConst1(compiler, operandWord0, operandWord1, operandWord2, operandWord3, operandWord4, operandWord5)
+  undefined4 compiler;
+  undefined4 operandWord0;
+  undefined4 operandWord1;
+  undefined4 operandWord2;
+  undefined4 operandWord3;
+  undefined4 operandWord4;
+  undefined4 operandWord5;
 {
-  undefined4 uStack0000001c;
-  undefined4 uStack00000020;
-  undefined4 uStack00000024;
-  undefined4 uStack00000028;
-  undefined4 uStack0000002c;
-  undefined4 uStack00000030;
+  undefined4 operandWord0Home;
+  undefined4 operandWord1Home;
+  undefined4 operandWord2Home;
+  undefined4 operandWord3Home;
+  undefined4 operandWord4Home;
+  undefined4 operandWord5Home;
   
-  uStack0000001c = param_2;
-  uStack00000020 = param_3;
-  uStack00000024 = param_4;
-  uStack00000028 = param_5;
-  uStack0000002c = param_6;
-  uStack00000030 = param_7;
-  return ((int (*)())Compiler__getOrCreateLoadConstN)(param_1,1,param_2,param_3,param_4,param_5,param_6,param_7);
+  operandWord0Home = operandWord0;
+  operandWord1Home = operandWord1;
+  operandWord2Home = operandWord2;
+  operandWord3Home = operandWord3;
+  operandWord4Home = operandWord4;
+  operandWord5Home = operandWord5;
+  return ((int (*)())Compiler__getOrCreateLoadConstN)(compiler,1,operandWord0,operandWord1,operandWord2,operandWord3,operandWord4,operandWord5);
 }
 
 /* FUN_000f57f0 @ 0xf57f0 (540 bytes) */
@@ -918,118 +918,118 @@ int Compiler__getOrCreateConstVectorN(param_1, param_2, param_3, param_4, param_
 #undef local_7c
 
 /* Compiler__getOrCreateConstVector4 @ 0xf645c (376 bytes) */
-int Compiler__getOrCreateConstVector4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int Compiler__getOrCreateConstVector4(owner, operandWord0, operandWord1, operandWord2, operandWord3, operandWord4, operandWord5, operandWord6)
+  undefined4 owner;
+  undefined4 operandWord0;
+  undefined4 operandWord1;
+  undefined4 operandWord2;
+  undefined4 operandWord3;
+  undefined4 operandWord4;
+  undefined4 operandWord5;
+  undefined4 operandWord6;
 {
   undefined4 uVar1;
-  undefined4 uStack0000001c;
-  undefined4 uStack00000020;
-  undefined4 uStack00000024;
-  undefined4 uStack00000028;
-  undefined4 uStack0000002c;
-  undefined4 uStack00000030;
-  undefined4 uStack00000034;
+  undefined4 operandWord0Home;
+  undefined4 operandWord1Home;
+  undefined4 operandWord2Home;
+  undefined4 operandWord3Home;
+  undefined4 operandWord4Home;
+  undefined4 operandWord5Home;
+  undefined4 operandWord6Home;
   
-  uStack0000001c = param_2;
-  uStack00000020 = param_3;
-  uStack00000024 = param_4;
-  uStack00000028 = param_5;
-  uStack0000002c = param_6;
-  uStack00000030 = param_7;
-  uStack00000034 = param_8;
-  uVar1 = ((int (*)())Compiler__getOrCreateConstVectorN)(param_1,4,param_2,param_3,param_4,param_5,param_6,param_7);
+  operandWord0Home = operandWord0;
+  operandWord1Home = operandWord1;
+  operandWord2Home = operandWord2;
+  operandWord3Home = operandWord3;
+  operandWord4Home = operandWord4;
+  operandWord5Home = operandWord5;
+  operandWord6Home = operandWord6;
+  uVar1 = ((int (*)())Compiler__getOrCreateConstVectorN)(owner,4,operandWord0,operandWord1,operandWord2,operandWord3,operandWord4,operandWord5);
   return uVar1;
 }
 
 /* Compiler__getOrCreateConstVector3 @ 0xf65d4 (396 bytes) */
-int Compiler__getOrCreateConstVector3(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int Compiler__getOrCreateConstVector3(owner, operandWord0, operandWord1, operandWord2, operandWord3, operandWord4, operandWord5, operandWord6)
+  undefined4 owner;
+  undefined4 operandWord0;
+  undefined4 operandWord1;
+  undefined4 operandWord2;
+  undefined4 operandWord3;
+  undefined4 operandWord4;
+  undefined4 operandWord5;
+  undefined4 operandWord6;
 {
-  undefined4 uStack0000001c;
-  undefined4 uStack00000020;
-  undefined4 uStack00000024;
-  undefined4 uStack00000028;
-  undefined4 uStack0000002c;
-  undefined4 uStack00000030;
-  undefined4 uStack00000034;
+  undefined4 operandWord0Home;
+  undefined4 operandWord1Home;
+  undefined4 operandWord2Home;
+  undefined4 operandWord3Home;
+  undefined4 operandWord4Home;
+  undefined4 operandWord5Home;
+  undefined4 operandWord6Home;
   
-  uStack0000001c = param_2;
-  uStack00000020 = param_3;
-  uStack00000024 = param_4;
-  uStack00000028 = param_5;
-  uStack0000002c = param_6;
-  uStack00000030 = param_7;
-  uStack00000034 = param_8;
-  return ((int (*)())Compiler__getOrCreateConstVectorN)(param_1,3,param_2,param_3,param_4,param_5,param_6,param_7);
+  operandWord0Home = operandWord0;
+  operandWord1Home = operandWord1;
+  operandWord2Home = operandWord2;
+  operandWord3Home = operandWord3;
+  operandWord4Home = operandWord4;
+  operandWord5Home = operandWord5;
+  operandWord6Home = operandWord6;
+  return ((int (*)())Compiler__getOrCreateConstVectorN)(owner,3,operandWord0,operandWord1,operandWord2,operandWord3,operandWord4,operandWord5);
 }
 
 /* Compiler__getOrCreateConstVector2 @ 0xf6760 (352 bytes) */
-int Compiler__getOrCreateConstVector2(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int Compiler__getOrCreateConstVector2(owner, operandWord0, operandWord1, operandWord2, operandWord3, operandWord4, operandWord5, operandWord6)
+  undefined4 owner;
+  undefined4 operandWord0;
+  undefined4 operandWord1;
+  undefined4 operandWord2;
+  undefined4 operandWord3;
+  undefined4 operandWord4;
+  undefined4 operandWord5;
+  undefined4 operandWord6;
 {
-  undefined4 uStack0000001c;
-  undefined4 uStack00000020;
-  undefined4 uStack00000024;
-  undefined4 uStack00000028;
-  undefined4 uStack0000002c;
-  undefined4 uStack00000030;
-  undefined4 uStack00000034;
+  undefined4 operandWord0Home;
+  undefined4 operandWord1Home;
+  undefined4 operandWord2Home;
+  undefined4 operandWord3Home;
+  undefined4 operandWord4Home;
+  undefined4 operandWord5Home;
+  undefined4 operandWord6Home;
   
-  uStack0000001c = param_2;
-  uStack00000020 = param_3;
-  uStack00000024 = param_4;
-  uStack00000028 = param_5;
-  uStack0000002c = param_6;
-  uStack00000030 = param_7;
-  uStack00000034 = param_8;
-  return ((int (*)())Compiler__getOrCreateConstVectorN)(param_1,2,param_2,param_3,param_4,param_5,param_6,param_7);
+  operandWord0Home = operandWord0;
+  operandWord1Home = operandWord1;
+  operandWord2Home = operandWord2;
+  operandWord3Home = operandWord3;
+  operandWord4Home = operandWord4;
+  operandWord5Home = operandWord5;
+  operandWord6Home = operandWord6;
+  return ((int (*)())Compiler__getOrCreateConstVectorN)(owner,2,operandWord0,operandWord1,operandWord2,operandWord3,operandWord4,operandWord5);
 }
 
 /* Compiler__getOrCreateConstVector1 @ 0xf68c0 (324 bytes) */
-int Compiler__getOrCreateConstVector1(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int Compiler__getOrCreateConstVector1(owner, operandWord0, operandWord1, operandWord2, operandWord3, operandWord4, operandWord5)
+  undefined4 owner;
+  undefined4 operandWord0;
+  undefined4 operandWord1;
+  undefined4 operandWord2;
+  undefined4 operandWord3;
+  undefined4 operandWord4;
+  undefined4 operandWord5;
 {
-  undefined4 uStack0000001c;
-  undefined4 uStack00000020;
-  undefined4 uStack00000024;
-  undefined4 uStack00000028;
-  undefined4 uStack0000002c;
-  undefined4 uStack00000030;
+  undefined4 operandWord0Home;
+  undefined4 operandWord1Home;
+  undefined4 operandWord2Home;
+  undefined4 operandWord3Home;
+  undefined4 operandWord4Home;
+  undefined4 operandWord5Home;
   
-  uStack0000001c = param_2;
-  uStack00000020 = param_3;
-  uStack00000024 = param_4;
-  uStack00000028 = param_5;
-  uStack0000002c = param_6;
-  uStack00000030 = param_7;
-  return ((int (*)())Compiler__getOrCreateConstVectorN)(param_1,1,param_2,param_3,param_4,param_5,param_6,param_7);
+  operandWord0Home = operandWord0;
+  operandWord1Home = operandWord1;
+  operandWord2Home = operandWord2;
+  operandWord3Home = operandWord3;
+  operandWord4Home = operandWord4;
+  operandWord5Home = operandWord5;
+  return ((int (*)())Compiler__getOrCreateConstVectorN)(owner,1,operandWord0,operandWord1,operandWord2,operandWord3,operandWord4,operandWord5);
 }
 
 /* FUN_000f6a04 @ 0xf6a04 (588 bytes) */

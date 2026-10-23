@@ -7,7 +7,7 @@ local	psnDecEncodeHwWords	param_1	decodedProgram	CONFIRMED	decoded program {[0] 
 local	psnDecEncodeHwWords	param_2	rsWords	CONFIRMED	RS instruction words: RS words are written at +4+index*4
 local	psnDecEncodeHwWords	param_3	programImage	CONFIRMED	hardware register image: TEX words at +0x18+index*4, ALU RGB_ADDR / ALPHA_ADDR / RGB_INST / ALPHA_INST at +0x98 / +0x198 / +0x298 / +0x398 + index*4
 local	psnDecodedToProgram	param_1	decodedProgram	CONFIRMED	decoded program {[0] entry count, [1] temp count, [2] entry array of 0xa0-byte entries}
-local	psnDecodedToProgram	param_2	psnProgram	CONFIRMED	destination PSN program: header record then 0x48-byte records, each memset before it is filled
+local	psnDecodedToProgram	param_2	previousRecord	CONFIRMED	the PSN record written in the previous iteration (the header before the first one): the loop ends with `param_2 = puVar24` where puVar24 = param_2 + 0x12 words is the record filled in this iteration
 local	psnDecodedToProgram	param_3	outStatus	INFERRED	int cleared at entry; written through the pointer by later code
 local	psnReallocateTemps	param_1	psnState	INFERRED	state record: +0x1c temp table, +0x30 number of temps
 local	psnReallocateTemps	param_2	psnProgram	CONFIRMED	PSN program: record count at +8, records of 0x48 bytes from +0x48 per record number

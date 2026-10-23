@@ -1,0 +1,51 @@
+# Fork I4 batch 7: ConstKey__compareOrdered, psnDecRangeHasConflict, psnDecRetargetSourceReg
+local	ConstKey__compareOrdered	param_1	keyA	CONFIRMED	first scratch key: presence bits in the byte at +0x15c, operand descriptors of 0x18 bytes from +0x10
+local	ConstKey__compareOrdered	param_2	keyB	CONFIRMED	second key compared with the first
+local	ConstKey__compareOrdered	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): unused by this function
+local	ConstKey__compareOrdered	param_4	passThroughR6	INFERRED	Ghidra register-argument pass-through (r6): unused
+local	ConstKey__compareOrdered	param_5	passThroughR7	INFERRED	Ghidra register-argument pass-through (r7): unused
+local	ConstKey__compareOrdered	param_6	passThroughR8	INFERRED	Ghidra register-argument pass-through (r8): unused
+local	ConstKey__compareOrdered	iVar1	operandA	CONFIRMED	operand descriptor of keyA: key + 0x10 + index*0x18
+local	ConstKey__compareOrdered	iVar3	operandB	CONFIRMED	operand descriptor of keyB
+local	ConstKey__compareOrdered	iVar4	presentOperands	CONFIRMED	number of operands present in keyA (counted over the four presence bits)
+use	ConstKey__compareOrdered	iVar6	presenceLoopRemaining	CONFIRMED	counts the four presence bits down	^\s*iVar6\ =\ 4;$	+1
+use	ConstKey__compareOrdered	iVar6	presenceLoopRemaining	CONFIRMED	counts the four presence bits down	^\s*iVar6\ =\ iVar6\ \+\ \-1;$	+2
+use	ConstKey__compareOrdered	iVar6	operandIndex	CONFIRMED	index of the operand being compared	^\s*iVar6\ =\ 0;$	+1
+use	ConstKey__compareOrdered	iVar6	operandIndex	CONFIRMED	index of the operand being compared	^\s*iVar1\ =\ iVar6\ \*\ 0x18\ \+\ 0x10;$	+1
+use	ConstKey__compareOrdered	iVar6	operandIndex	CONFIRMED	index of the operand being compared	^\s*iVar6\ =\ iVar6\ \+\ 1;$	+1
+use	ConstKey__compareOrdered	uVar2	presenceBit	CONFIRMED	presence bit number, 3 down to 0	^\s*uVar2\ =\ 3;$	+1
+use	ConstKey__compareOrdered	uVar2	presenceBit	CONFIRMED	presence bit number, 3 down to 0	^\s*if\ \(\(\(int\)\*\(char\ \*\)\(param_1\ \+\ 0x15c\)\ >>\ \(uVar2\ \&\ 0x3f\)\ \&\ 1U\)\ ==\ 0\)\ \{$	+2
+use	ConstKey__compareOrdered	uVar2	presenceBit	CONFIRMED	presence bit number, 3 down to 0	^\s*if\ \(\(\(int\)\*\(char\ \*\)\(param_2\ \+\ 0x15c\)\ >>\ \(uVar2\ \&\ 0x3f\)\ \&\ 1U\)\ ==\ 0\)\ \{$	+1
+use	ConstKey__compareOrdered	uVar2	presenceBit	CONFIRMED	presence bit number, 3 down to 0	^\s*uVar2\ =\ uVar2\ \-\ 1;$	+1
+use	ConstKey__compareOrdered	uVar2	kindA	CONFIRMED	kind word (+0xc) of operandA; 2 selects the float comparison	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar1\ \+\ 0xc\);$	+3
+use	ConstKey__compareOrdered	uVar2	kindA	CONFIRMED	kind word (+0xc) of operandA; 2 selects the float comparison	^\s*if\ \(uVar2\ ==\ 2\)\ \{$	+1
+local	ConstKey__compareOrdered	bVar5	aIsLess	CONFIRMED	result of the less-than test of the current field
+local	psnDecRangeHasConflict	iVar14	scanIndex	CONFIRMED	index of the entry being tested, from lastEntry-1 down to firstEntry
+local	psnDecRangeHasConflict	iVar15	entry	CONFIRMED	the entry whose registers must not conflict: array + lastEntry*0xa0
+local	psnDecRangeHasConflict	iVar13	scanOffset	CONFIRMED	scanIndex * 0xa0
+local	psnDecRangeHasConflict	iVar7	halfByteOffset	CONFIRMED	half * 0x40
+local	psnDecRangeHasConflict	uVar2	rgbDestReg	CONFIRMED	ushort at entry+4 (RGB destination register)
+local	psnDecRangeHasConflict	uVar3	rgbWriteMask	CONFIRMED	ushort at entry+6 (RGB write mask)
+local	psnDecRangeHasConflict	uVar4	alphaDestReg	CONFIRMED	ushort at entry+0x44 (alpha destination register)
+local	psnDecRangeHasConflict	uVar5	alphaWriteMask	CONFIRMED	ushort at entry+0x46 (alpha write mask)
+local	psnDecRangeHasConflict	puVar16	sourceSelectPtr	CONFIRMED	points at the select ushort of source slot i of entry's half (entry + half*0x40 + 8 + 4*i)
+local	psnDecRangeHasConflict	uVar6	sourceSelect	CONFIRMED	select ushort of the source slot
+local	psnDecRangeHasConflict	uVar8	addressSlot	CONFIRMED	select & 3: address slot read by the source
+local	psnDecRangeHasConflict	uVar12	conflictResult	CONFIRMED	0 when the range is clear, 1 when a conflict was found
+local	psnDecRangeHasConflict	iVar11	slotConflict	CONFIRMED	result of the psnDecDestMatchesRegMask test of the address slot's register
+local	psnDecRangeHasConflict	bVar1	loopContinue	CONFIRMED	loop-continue flag of the do-while loop over the three sources
+local	psnDecRangeHasConflict	param_5	passThroughR7	INFERRED	Ghidra register-argument pass-through (r7): forwarded to psnDecDestMatchesRegMask
+local	psnDecRangeHasConflict	param_6	passThroughR8	INFERRED	Ghidra register-argument pass-through (r8): forwarded to psnDecDestMatchesRegMask
+local	psnDecRetargetSourceReg	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop
+local	psnDecRetargetSourceReg	iVar10	halfCounter	CONFIRMED	counter over the two halves
+local	psnDecRetargetSourceReg	iVar8	sourceCounter	CONFIRMED	counter over the three source slots of a half
+local	psnDecRetargetSourceReg	iVar4	halfCursor	CONFIRMED	entry + half*0x40 while walking the halves
+local	psnDecRetargetSourceReg	puVar9	sourceSwizzlePtr	CONFIRMED	points at the swizzle ushort of the source slot (slot + 10)
+local	psnDecRetargetSourceReg	uVar2	sourceSwizzle	CONFIRMED	swizzle ushort of the source slot: low 5 bits = component select
+local	psnDecRetargetSourceReg	iVar7	oldAddressOffset	CONFIRMED	3 when the old select is the alpha group code 8, else 0: index offset of the old group's address slots
+local	psnDecRetargetSourceReg	iVar6	newSlotAddressPtr	CONFIRMED	address of the address-table entry (+0x80..) that receives the new address
+local	psnDecRetargetSourceReg	uVar5	newSlotCode	CONFIRMED	slot code for the rewritten select (new slot 2 -> 2, 3 -> 3, 1 -> 1, else 0)
+local	psnDecRetargetSourceReg	param_2	oldComponentSelect	INFERRED	component select (swizzle & 0x1f) of the sources to retarget (8 = the alpha-group form)
+local	psnDecRetargetSourceReg	param_3	newComponentSelect	INFERRED	component select stored into the retargeted sources
+local	psnDecRetargetSourceReg	param_4	newSlot	INFERRED	address slot that receives the address
+local	psnDecRetargetSourceReg	param_5	address	INFERRED	address value the sources must currently use; also written to the new slot
