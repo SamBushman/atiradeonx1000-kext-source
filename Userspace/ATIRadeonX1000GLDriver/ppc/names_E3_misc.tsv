@@ -1,0 +1,23 @@
+# fork E3 round 4: value-transform functions of OPT_VALUE_TRANSFORMS / OPT_MIX, use-vector scans
+func	FUN_00180250	ValueKey__canonicalizeConstantSources	INFERRED	called on a ValueKey (ctx+0xb0 instruction, +0x238 compiler, +0x168.. lane value numbers): for IrFetchTextureMapKill (opcode 0x77, its kill test is "any component < 0") it drops lanes whose constant value cannot kill and keeps one lane that always kills; then replaces constant source operands by their canonical constant when HwLimits slot 0x104 accepts it; returns 1 when the instruction changed
+func	FUN_0017b12c	ValueKey__mixLiteralSources	INFERRED	gated by OPT_CONST_FOLD_LITERALS (0xb) and OPT_MIX (0x3a) and counted against max_mix_insts (compiler+0x664, mix counter at program+0x228): replaces literal constants the hardware cannot encode directly (HwLimits slot 0xf0 says no) by a newly created instruction (FUN_00179138) and rewires the sources through it; returns 1 when changed (local_84)
+func	FUN_00180830	ValueKey__simplifyModifiersAndAddressing	INFERRED	counted against max_vn_transforms (compiler+0x658, counter at program+0xa8): cancels negate/abs modifier chains through the defining instruction (FUN_00176518 / FUN_001764fc) and, with OPT_CONST_FOLD_ADDR (10), turns a relative-addressed source whose address register is a known constant into a direct register index (floor(value [+0.5]) + base, below the HwLimits +0x2c register limit); returns 1 when changed
+func	FUN_0013c60c	Program__scanUsevectorChains	INFERRED	for every linked instruction of the program (program+0x3c4) walks the source-1 chain with an explicit stack (instruction stack and source-index stack, visit stamp inst+0x150 = program+0x474) and calls FUN_00138fb4 at the end of each chain; OPT_MOV_AND_SHIFT_USEVECTOR (0x14) lets FUN_00147f54 look through movs and shifts
+func	FUN_00138fb4	Program__finishUsevectorChain	INFERRED	84-byte wrapper: HwLimits slot 0x6c (inst, program) then FUN_0014846c(inst, program); the two middle arguments of the caller are unused
+func	FUN_00139f84	Block__scanBranchConeForFetchAndInterp	INFERRED	flood fill over the source instructions of the block's branch instruction with a worklist and the stamp param_3 (inst+0x150 words), noting whether the cone contains a fetch (IRInst slot 10 isFetch) and an interpolant load (slot 19 isLoadInterp); sets block flag 0x400 (clean) or 0x800 (both found and the successors cannot take it)
+local	FUN_00180250	bVar2	hasNegativeConstant	CONFIRMED	set when a constant source-1 lane (negative value number resolved to an ExprRecord float) is < 0.0: such a lane always kills
+local	FUN_00180250	pfVar5	constantRecord	CONFIRMED	Compiler__exprRecordForValueNumber result, read as a float (*pfVar5 compared with 0.0)
+local	FUN_00180250	uVar13	changed	CONFIRMED	set to 1 when the instruction was modified and returned
+local	FUN_0017b12c	pfVar9	literalRecord	CONFIRMED	Compiler__exprRecordForValueNumber result; its float is passed to HwLimits slot 0xf0 and FUN_00176474
+local	FUN_0017b12c	local_84	changed	CONFIRMED	0 initially, 1 after a mix instruction was created, returned at the end
+local	FUN_00180830	uVar15	changed	CONFIRMED	set to 1 whenever a modifier or an address was simplified and returned
+local	FUN_00180830	pfVar5	addressRecord	CONFIRMED	ExprRecord of the relative-address register value: _floor((double)*pfVar5 [+ 0.5])
+local	FUN_00180830	dVar29	floorValue	CONFIRMED	_floor result, truncated to the integer register offset
+local	FUN_0013c60c	param_1	program	CONFIRMED	program+0x474 stamp, +0x3c4 instruction vector, *(program+8)+0x378 arena
+local	FUN_0013c60c	local_58	currentInst	CONFIRMED	the instruction being walked: its flag word +0x14, operand sources, visit stamp +0x150
+local	FUN_0013c60c	iVar9	instByteOffset	CONFIRMED	advanced by 4 per instruction of the vector at program+0x3c4
+local	FUN_0013c60c	bVar2	descending	INFERRED	true while the walk goes down the source-1 chain, false while it unwinds the stacks
+local	FUN_00139f84	param_1	block	CONFIRMED	Block virtual slot 0x40 and Block__getBranchInst(param_1) are called on it
+local	FUN_00139f84	param_3	coneStamp	INFERRED	stored into inst+0x150 of every source instruction reached, compared with != to avoid revisits
+local	FUN_00139f84	bVar2	coneHasFetch	INFERRED	set when a source instruction's virtual slot 10 (0x28, isFetch) returns non-zero
+local	FUN_00139f84	bVar1	coneHasInterpLoad	INFERRED	set when a source instruction's virtual slot 19 (0x4c, isLoadInterp) returns non-zero

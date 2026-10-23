@@ -4808,8 +4808,8 @@ LAB_00138d24: ;
   } while( true );
 }
 
-/* FUN_00138fb4 @ 0x138fb4 (84 bytes) */
-int FUN_00138fb4(inst, param_2, param_3, param_4)
+/* Program__finishUsevectorChain @ 0x138fb4 (84 bytes) */
+int Program__finishUsevectorChain(inst, param_2, param_3, param_4)
   undefined4 inst;
   undefined4 param_2;
   undefined4 param_3;

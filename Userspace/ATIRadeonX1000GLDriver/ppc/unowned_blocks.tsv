@@ -3313,7 +3313,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 13ba90	13bab0	eh-pad	Program__hoistFetchInsts	8	0x193cc0,__Unwind_Resume
 13c1cc	13c1e4	eh-pad	Program__eliminateDeadInstsAndRecountUses	6	0x193cc0,__Unwind_Resume
 13c5d4	13c600	eh-pad	FUN_0013c210	11	0x193cc0,__Unwind_Resume
-13ca48	13ca74	eh-pad	FUN_0013c60c	11	0x193cc0,__Unwind_Resume
+13ca48	13ca74	eh-pad	Program__scanUsevectorChains	11	0x193cc0,__Unwind_Resume
 13d2d8	13d2f0	eh-pad	pass_rewrite	6	0x193cc0,__Unwind_Resume
 13dba4	13dba8	millicode	FUN_0013da3c	1	
 13dd38	13dd50	eh-pad	FUN_0013da3c	6	0x193cc0,__Unwind_Resume
@@ -3418,7 +3418,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 17edb0	17edd0	eh-pad	FUN_0017ebb0	8	0x193cc0,__Unwind_Resume
 17f03c	17f040	eh-pad	FUN_0017ee68	1	__Unwind_Resume
 1801a4	1801f8	table	FUN_0017f7ec	21	
-1811d8	1811f8	eh-pad	FUN_00180830	8	0x193cc0,__Unwind_Resume
+1811d8	1811f8	eh-pad	ValueKey__simplifyModifiersAndAddressing	8	0x193cc0,__Unwind_Resume
 181fdc	181ff8	other	FUN_00181f00	7	0x193cc0
 182010	18202c	other	FUN_00181f00	7	0x193cc0
 182040	182060	eh-pad	FUN_00181f00	8	0x193cc0,__Unwind_Resume

@@ -420,8 +420,8 @@
 0x13c1cc	Program__eliminateDeadInstsAndRecountUses
 0x13c5d4	FUN_0013c210
 0x13c5e8	FUN_0013c210
-0x13ca48	FUN_0013c60c
-0x13ca5c	FUN_0013c60c
+0x13ca48	Program__scanUsevectorChains
+0x13ca5c	Program__scanUsevectorChains
 0x13d2d8	pass_rewrite
 0x13dba4	FUN_0013da3c
 0x13dd38	FUN_0013da3c
@@ -521,7 +521,7 @@
 0x17ece0	FUN_0017ebb0
 0x17edb0	FUN_0017ebb0
 0x17f03c	FUN_0017ee68
-0x1811d8	FUN_00180830
+0x1811d8	ValueKey__simplifyModifiersAndAddressing
 0x181fdc	FUN_00181f00
 0x182010	FUN_00181f00
 0x182040	FUN_00181f00

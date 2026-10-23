@@ -788,7 +788,7 @@ int FUN_001745f0(ctx)
   callResult = Compiler__isOptionEnabled(*(undefined4 *)(ctx + 0x238),9);
   uVar2 = 0;
   if (callResult != 0) {
-    callResult = FUN_00180250(ctx);
+    callResult = ValueKey__canonicalizeConstantSources(ctx);
     if (callResult != 0) {
       ((int (*)())FUN_001745ac)(ctx);
     }
@@ -800,10 +800,10 @@ int FUN_001745f0(ctx)
       ((int (*)())FUN_001745ac)(ctx);
     }
     callResult = (**(code **)(**(int **)(ctx + 0xb0) + 0x24))(*(int **)(ctx + 0xb0));
-    if ((callResult != 0) && (callResult = FUN_0017b12c(ctx), callResult != 0)) {
+    if ((callResult != 0) && (callResult = ValueKey__mixLiteralSources(ctx), callResult != 0)) {
       ((int (*)())FUN_001745ac)(ctx);
     }
-    callResult = FUN_00180830(ctx);
+    callResult = ValueKey__simplifyModifiersAndAddressing(ctx);
     uVar2 = 1;
     if (callResult != 0) {
       ((int (*)())FUN_001745ac)(ctx);
