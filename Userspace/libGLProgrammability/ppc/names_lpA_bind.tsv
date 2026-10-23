@@ -4,12 +4,119 @@ local	BindingTable__GetString	uVar9	capacity	INFERRED	BindingTable::GetString(ki
 local	BindingTable__GetString	pcVar6	header	INFERRED	BindingTable::GetString(kind): builds the printable dump (malloc'd, doubled with realloc as it grows) of one binding list (kind 0 client attrib requests, 1 attribs, 2 uniforms, 3 = 0..2, 4..6 the same three as hash-bucket tables, 7 = 4..6)
 local	BindingTable__GetString	bVar1	listEmpty	INFERRED	BindingTable::GetString(kind): builds the printable dump (malloc'd, doubled with realloc as it grows) of one binding list (kind 0 client attrib requests, 1 attribs, 2 uniforms, 3 = 0..2, 4..6 the same three as hash-bucket tables, 7 = 4..6)
 local	BindingTable__GetString	this_00	binding	INFERRED	BindingTable::GetString(kind): builds the printable dump (malloc'd, doubled with realloc as it grows) of one binding list (kind 0 client attrib requests, 1 attribs, 2 uniforms, 3 = 0..2, 4..6 the same three as hash-bucket tables, 7 = 4..6)
-use	BindingTable__GetString	pcVar7	buf	INFERRED	growing output buffer (previous realloc result)		if \(param_2 == 5\)
+use	BindingTable__GetString	pcVar7	buf	INFERRED	growing output buffer (previous realloc result)	_malloc	if \(param_2 == 5\)
 use	BindingTable__GetString	pcVar7	kindHeader	INFERRED	header text chosen for the hash-table kinds 4..6	if \(param_2 == 5\)@1	LAB_97bb1cf0:
 use	BindingTable__GetString	pcVar7	buf	INFERRED	growing output buffer (previous realloc result)	LAB_97bb1cf0:	
-use	BindingTable__GetString	iVar8	usedLen	INFERRED	text length accumulated so far (compared with the capacity)		if \(param_2 == 3\)
+use	BindingTable__GetString	iVar8	usedLen	INFERRED	text length accumulated so far (compared with the capacity)	_malloc	if \(param_2 == 3\)
 use	BindingTable__GetString	iVar8	kindIdx	INFERRED	loop counter over the three kinds 0..2 of kind 3	iVar8 = 0;@2	iVar3 = 4;
 use	BindingTable__GetString	iVar8	kindStr	INFERRED	string returned for hash kind iVar3 (4..6)	iVar8 = \w+\(this,iVar3\)	if \(param_2 == 5\)
 use	BindingTable__GetString	iVar8	usedLen	INFERRED	text length accumulated so far	if \(param_2 == 5\)@1	
 use	BindingTable__GetString	iVar3	kindCounter	INFERRED	counter over the hash kinds 4..6 of kind 7	iVar3 = 4;	if \(param_2 == 5\)
 use	BindingTable__GetString	iVar3	bucketArray	INFERRED	bucket pointer array of the selected binding table kind	if \(param_2 == 5\)@2	
+local	Binding__SetLocation	param_2	location	INFERRED	Binding+0x14 is the location (Binding__GetLocation reads it)
+local	Binding__SetOpenGLType	param_2	glType	INFERRED	Binding+0x24 is the OpenGL type ushort (GetOpenGLType reads it)
+local	Binding__SetActiveIndex	param_2	activeIndex	INFERRED	Binding+0x20 is the active index (GetActiveIndex reads it)
+local	Binding__SetDecSize	param_2	decSize	INFERRED	Binding+0x18 is the declared size (GetDecSize reads it)
+local	Binding__SetActualSize	param_2	actualSize	INFERRED	Binding+0x1c is the actual size (GetActualSize reads it)
+local	Binding__GetString	iVar1	nameLength	INFERRED	Binding::GetString: allocation = format length + name length (+0x10) + type string length + 0x15; formatStrings[isClientRequest] is the sprintf format; flag chars are 'V' (vertex use, +0x34) / 'F' (fragment use, +0x35) or ' '
+local	Binding__GetString	uVar9	vertexFlagChar	INFERRED	Binding::GetString: allocation = format length + name length (+0x10) + type string length + 0x15; formatStrings[isClientRequest] is the sprintf format; flag chars are 'V' (vertex use, +0x34) / 'F' (fragment use, +0x35) or ' '
+local	Binding__GetString	uVar10	fragmentFlagChar	INFERRED	Binding::GetString: allocation = format length + name length (+0x10) + type string length + 0x15; formatStrings[isClientRequest] is the sprintf format; flag chars are 'V' (vertex use, +0x34) / 'F' (fragment use, +0x35) or ' '
+local	Binding__GetString	uVar11	name	INFERRED	Binding::GetString: allocation = format length + name length (+0x10) + type string length + 0x15; formatStrings[isClientRequest] is the sprintf format; flag chars are 'V' (vertex use, +0x34) / 'F' (fragment use, +0x35) or ' '
+local	Binding__GetString	local_30	formatStrings	INFERRED	Binding::GetString: allocation = format length + name length (+0x10) + type string length + 0x15; formatStrings[isClientRequest] is the sprintf format; flag chars are 'V' (vertex use, +0x34) / 'F' (fragment use, +0x35) or ' '
+local	Binding__GetString	pcVar8	result	INFERRED	Binding::GetString: allocation = format length + name length (+0x10) + type string length + 0x15; formatStrings[isClientRequest] is the sprintf format; flag chars are 'V' (vertex use, +0x34) / 'F' (fragment use, +0x35) or ' '
+local	__ZN12BindingTableC2Ej	param_2	numBuckets	INFERRED	BindingTable ctor: +0 bucket count; three malloc'd bucket arrays (+8 attrib requests, +0x10 attribs, +0x18 uniforms) zeroed with a loop
+local	__ZN12BindingTableC2Ej	iVar1	byteOffset	INFERRED	BindingTable ctor: +0 bucket count; three malloc'd bucket arrays (+8 attrib requests, +0x10 attribs, +0x18 uniforms) zeroed with a loop
+local	__ZN12BindingTableC2Ej	uVar2	bucketCount	INFERRED	BindingTable ctor: +0 bucket count; three malloc'd bucket arrays (+8 attrib requests, +0x10 attribs, +0x18 uniforms) zeroed with a loop
+local	__ZN12BindingTableC4Ej	param_2	numBuckets	INFERRED	BindingTable ctor: +0 bucket count; three malloc'd bucket arrays (+8 attrib requests, +0x10 attribs, +0x18 uniforms) zeroed with a loop
+local	__ZN12BindingTableC4Ej	iVar1	byteOffset	INFERRED	BindingTable ctor: +0 bucket count; three malloc'd bucket arrays (+8 attrib requests, +0x10 attribs, +0x18 uniforms) zeroed with a loop
+local	__ZN12BindingTableC4Ej	uVar2	bucketCount	INFERRED	BindingTable ctor: +0 bucket count; three malloc'd bucket arrays (+8 attrib requests, +0x10 attribs, +0x18 uniforms) zeroed with a loop
+local	__ZN12BindingTableC1Ej	param_2	numBuckets	INFERRED	BindingTable ctor forwarding to C4
+local	__ZN12BindingTableD4Ev	bVar1	nodeIsNull	INFERRED	BindingTable dtor: frees the attrib request list (+4), clears internal bindings, frees the three bucket arrays
+local	__ZN12BindingTableD4Ev	pBVar2	nextBinding	INFERRED	BindingTable dtor: frees the attrib request list (+4), clears internal bindings, frees the three bucket arrays
+local	__ZN12BindingTableD4Ev	this_00	binding	INFERRED	BindingTable dtor: frees the attrib request list (+4), clears internal bindings, frees the three bucket arrays
+local	BindingTable__InsertAttribRequestBinding	pBVar3	curNode	INFERRED	InsertAttribRequestBinding: walks the request list (+4) and the hash bucket chain to their tails
+local	BindingTable__GetAttribBindingNameByLocation	param_2	wantedLocation	INFERRED	walks the attrib list (+0xc) for the binding with this location, returns its name (+8)
+local	BindingTable__GetAttribBindingNameByLocation	this_00	binding	INFERRED	walks the attrib list (+0xc) for the binding with this location, returns its name (+8)
+local	BindingTable__GetAttribBindingByIndex	param_2	wantedIndex	INFERRED	walks the attrib list (+0xc) for the binding with this active index
+local	BindingTable__GetAttribBindingByIndex	iVar1	activeIndex	INFERRED	walks the attrib list (+0xc) for the binding with this active index
+local	BindingTable__GetAttribBindingByIndex	this_00	binding	INFERRED	walks the attrib list (+0xc) for the binding with this active index
+local	BindingTable__FindUniformBindingByIndex	param_2	wantedIndex	INFERRED	walks the uniform list (+0x14) for the binding with this active index
+local	BindingTable__FindUniformBindingByIndex	iVar1	activeIndex	INFERRED	walks the uniform list (+0x14) for the binding with this active index
+local	BindingTable__FindUniformBindingByIndex	this_00	binding	INFERRED	walks the uniform list (+0x14) for the binding with this active index
+local	BindingTable__AddSingleUniformReference	param_3	isFragment	INFERRED	marks the binding used by the fragment (+0x35, counters +0x30/+0x44) or vertex (+0x34, +0x2c/+0x40) stage
+local	BindingTable__FindClientUniformBindingLocationByName	iVar1	glPrefixCmp	INFERRED	looks up a non-gl_ uniform name (also with [0] appended); probe is a temporary Binding holding the name
+local	BindingTable__FindClientUniformBindingLocationByName	this_00	probe	INFERRED	looks up a non-gl_ uniform name (also with [0] appended); probe is a temporary Binding holding the name
+local	BindingTable__FindClientUniformBindingLocationByName	pBVar2	found	INFERRED	looks up a non-gl_ uniform name (also with [0] appended); probe is a temporary Binding holding the name
+local	BindingTable__FindClientUniformBindingLocationByName	uVar3	location	INFERRED	looks up a non-gl_ uniform name (also with [0] appended); probe is a temporary Binding holding the name
+local	BindingTable__FindUniformBindingByLocation	param_2	wantedLocation	INFERRED	returns the uniform binding whose slot range holds the location, only when it is aligned to the binding's basic size
+local	BindingTable__FindUniformBindingByLocation	iVar2	bindingSlots	INFERRED	returns the uniform binding whose slot range holds the location, only when it is aligned to the binding's basic size
+local	BindingTable__FindUniformBindingByLocation	this_00	binding	INFERRED	returns the uniform binding whose slot range holds the location, only when it is aligned to the binding's basic size
+local	BindingTable__FindAttribRequestBindingLocationByName	this_00	probe	INFERRED	looks up an attribute request by name with a temporary Binding; returns its location or -1
+local	BindingTable__FindAttribRequestBindingLocationByName	uVar2	location	INFERRED	looks up an attribute request by name with a temporary Binding; returns its location or -1
+local	BindingTable__FindAttribRequestBindingLocationByName	this_01	found	INFERRED	looks up an attribute request by name with a temporary Binding; returns its location or -1
+local	TGenericLinker__FindChunkDelta	_Var2	kind	INFERRED	difference of the two chunks' register index words (+0x12); chunks of different kind log an INTERNAL ERROR to the info sink
+local	TGenericLinker__FindChunkDelta	pcVar3	errorText	INFERRED	difference of the two chunks' register index words (+0x12); chunks of different kind log an INTERNAL ERROR to the info sink
+local	TGenericLinker__FindChunkDelta	this_00	infoSink	INFERRED	difference of the two chunks' register index words (+0x12); chunks of different kind log an INTERNAL ERROR to the info sink
+local	TGenericLinker__FindChunkDelta	bVar1	kindKnown	INFERRED	difference of the two chunks' register index words (+0x12); chunks of different kind log an INTERNAL ERROR to the info sink
+local	BindingTable__ClearInternalBindings	bVar1	nodeIsNull	INFERRED	BindingTable::ClearInternalBindings: frees the attrib list (+0xc) and the uniform list (+0x14), zeroes the counters and both bucket arrays
+local	BindingTable__ClearInternalBindings	pBVar4	nextBinding	INFERRED	BindingTable::ClearInternalBindings: frees the attrib list (+0xc) and the uniform list (+0x14), zeroes the counters and both bucket arrays
+local	BindingTable__ClearInternalBindings	pBVar6	binding	INFERRED	BindingTable::ClearInternalBindings: frees the attrib list (+0xc) and the uniform list (+0x14), zeroes the counters and both bucket arrays
+local	BindingTable__ClearInternalBindings	uVar5	bucketIdx	INFERRED	BindingTable::ClearInternalBindings: frees the attrib list (+0xc) and the uniform list (+0x14), zeroes the counters and both bucket arrays
+local	BindingTable__ClearInternalBindings	iVar2	byteOffset	INFERRED	BindingTable::ClearInternalBindings: frees the attrib list (+0xc) and the uniform list (+0x14), zeroes the counters and both bucket arrays
+local	BindingTable__ClearInternalBindings	uVar3	bucketCount	INFERRED	BindingTable::ClearInternalBindings: frees the attrib list (+0xc) and the uniform list (+0x14), zeroes the counters and both bucket arrays
+local	BindingTable__InsertClientAttribBinding	this_00	newBinding	INFERRED	inserts a copy of the binding into the attrib list (+0xc) sorted by location and into the hash bucket
+local	BindingTable__InsertClientAttribBinding	this_01	cur	INFERRED	inserts a copy of the binding into the attrib list (+0xc) sorted by location and into the hash bucket
+local	BindingTable__InsertClientAttribBinding	pBVar3	prev	INFERRED	inserts a copy of the binding into the attrib list (+0xc) sorted by location and into the hash bucket
+local	BindingTable__InsertClientAttribBinding	iVar2	curLocation	INFERRED	inserts a copy of the binding into the attrib list (+0xc) sorted by location and into the hash bucket
+local	BindingTable__InsertSingleUniform	param_3	isFragment	INFERRED	appends the binding to the uniform list (+0x14) after the highest located binding, hashes it, counts its slots for the stage
+local	BindingTable__InsertSingleUniform	pBVar3	nextNode	INFERRED	appends the binding to the uniform list (+0x14) after the highest located binding, hashes it, counts its slots for the stage
+local	BindingTable__InsertSingleUniform	pBVar4	curNode	INFERRED	appends the binding to the uniform list (+0x14) after the highest located binding, hashes it, counts its slots for the stage
+local	BindingTable__InsertSingleUniform	uVar5	glType	INFERRED	appends the binding to the uniform list (+0x14) after the highest located binding, hashes it, counts its slots for the stage
+local	BindingTable__InsertAttribBinding	this_00	curBinding	INFERRED	first-fit insert of the attribute binding into the sorted attrib list (+0xc)
+local	UpdateOperations	param_5	numCopies	INFERRED	UpdateOperations: for every one of numCopies copies, walks the chunk list and subtracts adjust from the register index of operands/destinations that reference the given chunk
+local	UpdateOperations	param_6	adjust	INFERRED	UpdateOperations: for every one of numCopies copies, walks the chunk list and subtracts adjust from the register index of operands/destinations that reference the given chunk
+local	UpdateOperations	iVar11	copyIdx	INFERRED	UpdateOperations: for every one of numCopies copies, walks the chunk list and subtracts adjust from the register index of operands/destinations that reference the given chunk
+local	UpdateOperations	iVar5	chunkIdx	INFERRED	UpdateOperations: for every one of numCopies copies, walks the chunk list and subtracts adjust from the register index of operands/destinations that reference the given chunk
+local	UpdateOperations	iVar2	walkIdx	INFERRED	UpdateOperations: for every one of numCopies copies, walks the chunk list and subtracts adjust from the register index of operands/destinations that reference the given chunk
+local	UpdateOperations	p_Var4	chunk	INFERRED	UpdateOperations: for every one of numCopies copies, walks the chunk list and subtracts adjust from the register index of operands/destinations that reference the given chunk
+local	UpdateOperations	p_Var6	target	INFERRED	UpdateOperations: for every one of numCopies copies, walks the chunk list and subtracts adjust from the register index of operands/destinations that reference the given chunk
+local	UpdateOperations	p_Var7	operand	INFERRED	UpdateOperations: for every one of numCopies copies, walks the chunk list and subtracts adjust from the register index of operands/destinations that reference the given chunk
+local	UpdateOperations	uVar9	chunkInfo	INFERRED	UpdateOperations: for every one of numCopies copies, walks the chunk list and subtracts adjust from the register index of operands/destinations that reference the given chunk
+local	UpdateOperations	_Var10	kind	INFERRED	UpdateOperations: for every one of numCopies copies, walks the chunk list and subtracts adjust from the register index of operands/destinations that reference the given chunk
+local	UpdateOperations	bVar1	matchesKind	INFERRED	UpdateOperations: for every one of numCopies copies, walks the chunk list and subtracts adjust from the register index of operands/destinations that reference the given chunk
+local	UpdateOperations	iVar3	newWalkIdx	INFERRED	UpdateOperations: for every one of numCopies copies, walks the chunk list and subtracts adjust from the register index of operands/destinations that reference the given chunk
+use	BindingTable__InsertClientAttribBinding	iVar1	newLocation	INFERRED	location of the new binding (compared with each existing one)	iVar1 = \(\(int \(\*\)\(\)\)Binding__GetLocation\)\(this_00\)	iVar1 = Binding__GetHash
+use	BindingTable__InsertClientAttribBinding	iVar1	hashIdx	INFERRED	hash bucket index of the new binding	iVar1 = Binding__GetHash	iVar1 = \*\(int \*\)\(this \+ 0x1c\)
+use	BindingTable__InsertClientAttribBinding	iVar1	activeIndex	INFERRED	running active-attribute count, becomes the binding's active index	iVar1 = \*\(int \*\)\(this \+ 0x1c\)	iVar1 = Binding__IsBuiltIn
+use	BindingTable__InsertClientAttribBinding	iVar1	isBuiltIn	INFERRED	built-in flag	iVar1 = Binding__IsBuiltIn	iVar1 = \(\(int \(\*\)\(\)\)Binding__GetBindingSlots\)\(this_00\)
+use	BindingTable__InsertClientAttribBinding	iVar1	bindingSlots	INFERRED	slot count of the binding	iVar1 = \(\(int \(\*\)\(\)\)Binding__GetBindingSlots\)\(this_00\)	
+use	BindingTable__InsertAttribRequestBinding	iVar2	hashIdx	INFERRED	hash bucket index of the binding	iVar2 = Binding__GetHash	iVar2 = \(\(int \(\*\)\(\)\)Binding__GetLocation\)
+use	BindingTable__InsertAttribRequestBinding	iVar2	location	INFERRED	location copied to the existing request binding	iVar2 = \(\(int \(\*\)\(\)\)Binding__GetLocation\)	
+use	BindingTable__FindAttribRequestBinding	iVar1	hashIdx	INFERRED	hash bucket index of the binding	iVar1 = Binding__GetHash	while
+use	BindingTable__FindAttribRequestBinding	iVar1	isEqual	INFERRED	result of Binding operator== against the bucket entry	while	
+use	BindingTable__FindAttribRequestBindingLocationByName	iVar1	hashIdx	INFERRED	hash bucket index of the probe	iVar1 = Binding__GetHash	while
+use	BindingTable__FindAttribRequestBindingLocationByName	iVar1	isEqual	INFERRED	result of Binding operator== against the bucket entry	while	
+local	BindingTable__InsertUniformArray	param_4	firstTable	INFERRED	BindingTable::InsertUniformArray: expands a uniform array into one Binding per element ("name[i]"), up to the highest element index referenced by each stage (stageMaxIndex[0]=vertex, [1]=fragment; the range [firstTable,endTable) indexes the per-stage parse symbol tables)
+local	BindingTable__InsertUniformArray	param_5	endTable	INFERRED	BindingTable::InsertUniformArray: expands a uniform array into one Binding per element ("name[i]"), up to the highest element index referenced by each stage (stageMaxIndex[0]=vertex, [1]=fragment; the range [firstTable,endTable) indexes the per-stage parse symbol tables)
+local	BindingTable__InsertUniformArray	local_50	stageMaxIndex	INFERRED	BindingTable::InsertUniformArray: expands a uniform array into one Binding per element ("name[i]"), up to the highest element index referenced by each stage (stageMaxIndex[0]=vertex, [1]=fragment; the range [firstTable,endTable) indexes the per-stage parse symbol tables)
+local	BindingTable__InsertUniformArray	acStack_90	indexText	INFERRED	BindingTable::InsertUniformArray: expands a uniform array into one Binding per element ("name[i]"), up to the highest element index referenced by each stage (stageMaxIndex[0]=vertex, [1]=fragment; the range [firstTable,endTable) indexes the per-stage parse symbol tables)
+local	BindingTable__InsertUniformArray	acStack_70	indexText2	INFERRED	BindingTable::InsertUniformArray: expands a uniform array into one Binding per element ("name[i]"), up to the highest element index referenced by each stage (stageMaxIndex[0]=vertex, [1]=fragment; the range [firstTable,endTable) indexes the per-stage parse symbol tables)
+local	BindingTable__InsertUniformArray	this_00	elementBinding	INFERRED	BindingTable::InsertUniformArray: expands a uniform array into one Binding per element ("name[i]"), up to the highest element index referenced by each stage (stageMaxIndex[0]=vertex, [1]=fragment; the range [firstTable,endTable) indexes the per-stage parse symbol tables)
+local	BindingTable__InsertUniformArray	this_01	symbolTable	INFERRED	BindingTable::InsertUniformArray: expands a uniform array into one Binding per element ("name[i]"), up to the highest element index referenced by each stage (stageMaxIndex[0]=vertex, [1]=fragment; the range [firstTable,endTable) indexes the per-stage parse symbol tables)
+local	BindingTable__InsertUniformArray	ppPVar12	tablePtr	INFERRED	BindingTable::InsertUniformArray: expands a uniform array into one Binding per element ("name[i]"), up to the highest element index referenced by each stage (stageMaxIndex[0]=vertex, [1]=fragment; the range [firstTable,endTable) indexes the per-stage parse symbol tables)
+local	BindingTable__InsertUniformArray	pBVar7	nextNode	INFERRED	BindingTable::InsertUniformArray: expands a uniform array into one Binding per element ("name[i]"), up to the highest element index referenced by each stage (stageMaxIndex[0]=vertex, [1]=fragment; the range [firstTable,endTable) indexes the per-stage parse symbol tables)
+local	BindingTable__InsertUniformArray	pBVar8	curNode	INFERRED	BindingTable::InsertUniformArray: expands a uniform array into one Binding per element ("name[i]"), up to the highest element index referenced by each stage (stageMaxIndex[0]=vertex, [1]=fragment; the range [firstTable,endTable) indexes the per-stage parse symbol tables)
+local	BindingTable__InsertUniformArray	uVar9	glType	INFERRED	BindingTable::InsertUniformArray: expands a uniform array into one Binding per element ("name[i]"), up to the highest element index referenced by each stage (stageMaxIndex[0]=vertex, [1]=fragment; the range [firstTable,endTable) indexes the per-stage parse symbol tables)
+local	BindingTable__InsertUniformArray	uVar10	elementsLeft	INFERRED	BindingTable::InsertUniformArray: expands a uniform array into one Binding per element ("name[i]"), up to the highest element index referenced by each stage (stageMaxIndex[0]=vertex, [1]=fragment; the range [firstTable,endTable) indexes the per-stage parse symbol tables)
+local	BindingTable__InsertUniformArray	uVar2	result	INFERRED	BindingTable::InsertUniformArray: expands a uniform array into one Binding per element ("name[i]"), up to the highest element index referenced by each stage (stageMaxIndex[0]=vertex, [1]=fragment; the range [firstTable,endTable) indexes the per-stage parse symbol tables)
+local	BindingTable__InsertSingleUniform	iVar7	lastSlots	INFERRED	slot count / location of the last located binding in the uniform list
+local	BindingTable__FindAttribBindingLocationByName	this_00	probe	INFERRED	looks up an attribute by name with a temporary Binding; returns its location or -1
+local	BindingTable__FindAttribBindingLocationByName	uVar2	location	INFERRED	looks up an attribute by name with a temporary Binding; returns its location or -1
+local	BindingTable__FindAttribBindingLocationByName	this_01	found	INFERRED	looks up an attribute by name with a temporary Binding; returns its location or -1
+use	BindingTable__InsertSingleUniform	iVar6	lastLocation	INFERRED	location of the last located binding (list tail position)	iVar6 = 0;	iVar6 = Binding__GetHash
+use	BindingTable__InsertSingleUniform	iVar6	hashIdx	INFERRED	hash bucket index of the binding	iVar6 = Binding__GetHash	iVar6 = \*\(int \*\)\(this \+ 0x20\)
+use	BindingTable__InsertSingleUniform	iVar6	activeIndex	INFERRED	running active-uniform count (this+0x20), becomes the binding's active index	iVar6 = \*\(int \*\)\(this \+ 0x20\)	iVar6 = Binding__IsBuiltIn
+use	BindingTable__InsertSingleUniform	iVar6	isBuiltIn	INFERRED	built-in flag	iVar6 = Binding__IsBuiltIn	iVar6 = \(\(int \(\*\)\(\)\)Binding__GetBindingSlots\)
+use	BindingTable__InsertSingleUniform	iVar6	bindingSlots	INFERRED	slot count of the binding	iVar6 = \(\(int \(\*\)\(\)\)Binding__GetBindingSlots\)	
+use	BindingTable__FindAttribBindingLocationByName	iVar1	hashIdx	INFERRED	hash bucket index of the probe	iVar1 = Binding__GetHash	while
+use	BindingTable__FindAttribBindingLocationByName	iVar1	isEqual	INFERRED	result of Binding operator== against the bucket entry	while	
