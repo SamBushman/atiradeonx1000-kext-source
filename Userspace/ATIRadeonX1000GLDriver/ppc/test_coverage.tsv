@@ -1058,8 +1058,8 @@
 0xc3fd0	psnDecTryMergeAddressSlots	784	yes	
 0xc42f0	psnProgramToDecoded	2444	yes	
 0xc4ce0	psnDecodedToProgram	1548	yes	
-0xc5460	psnRgbSelectToComponentBit	576	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xc57b0	psnAlphaSelectToComponentBit	392	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xc5460	psnAccumulateRgbSelectRead	576	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xc57b0	psnAccumulateAlphaSelectRead	392	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0xc59c0	psnRaReleaseUse	580	yes	
 0xc5c50	psnRaAssignDefinition	476	yes	
 0xc5e60	FUN_000c5e60	1524	yes	
@@ -1151,7 +1151,7 @@
 0xd7520	ffpsEmitTexEnvLegacy	3832	no	indirect call (driver context / vtable / callback)
 0xd8450	FUN_000d8450	5856	no	indirect call (driver context / vtable / callback)
 0xd9b58	FUN_000d9b58	84	yes	
-0xd9bac	FUN_000d9bac	228	yes	
+0xd9bac	scStoreConstantComponent	228	yes	
 0xd9c90	FUN_000d9c90	228	yes	
 0xd9d74	FUN_000d9d74	228	yes	
 0xd9e58	FUN_000d9e58	64	yes	
@@ -1165,10 +1165,10 @@
 0xda070	FUN_000da070	44	yes	
 0xda09c	FUN_000da09c	36	yes	
 0xda0c0	FUN_000da0c0	720	yes	
-0xda394	FUN_000da394	68	yes	
+0xda394	scSetCallbackTables	68	yes	
 0xda420	FUN_000da420	24	yes	
 0xda438	FUN_000da438	32	yes	
-0xda458	FUN_000da458	96	yes	
+0xda458	scDestroyCompilerObject	96	yes	
 0xda4b8	FUN_000da4b8	720	no	calls an import (setjmp); indirect call (driver context / vtable / callback)
 0xda78c	FUN_000da78c	244	yes	
 0xda8a8	ildisInitContext	40	yes	
@@ -2558,13 +2558,13 @@
 0x141458	FUN_00141458	332	yes	
 0x1415a4	FUN_001415a4	272	yes	
 0x1416b4	FUN_001416b4	508	yes	
-0x1418b0	FUN_001418b0	128	yes	
+0x1418b0	PostPack__canPairInEitherOrder	128	yes	
 0x141930	FUN_00141930	3700	no	indirect call (driver context / vtable / callback)
 0x1427a4	FUN_001427a4	464	yes	
 0x142974	FUN_00142974	1616	no	indirect call (driver context / vtable / callback)
 0x142fdc	FUN_00142fdc	1672	yes	
 0x143664	FUN_00143664	80	yes	
-0x1436b4	FUN_001436b4	168	yes	
+0x1436b4	PostPack__buildCandidate	168	yes	
 0x14375c	FUN_0014375c	1720	yes	
 0x143e40	FUN_00143e40	676	yes	
 0x1440e4	FUN_001440e4	4680	yes	
@@ -2913,9 +2913,9 @@
 0x17ebb0	FUN_0017ebb0	660	yes	
 0x17ee68	FUN_0017ee68	908	yes	
 0x17f1f8	FUN_0017f1f8	512	no	indirect call (driver context / vtable / callback)
-0x17f3f8	FUN_0017f3f8	412	no	indirect call (driver context / vtable / callback)
-0x17f594	FUN_0017f594	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x17f59c	FUN_0017f59c	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x17f3f8	ValueKey__foldMinMaxOfNegatedPair	412	no	indirect call (driver context / vtable / callback)
+0x17f594	ValueKey__foldMaxOfNegatedPair	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x17f59c	ValueKey__foldMinOfNegatedPair	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x17f5a4	FUN_0017f5a4	488	no	indirect call (driver context / vtable / callback)
 0x17f78c	FUN_0017f78c	96	yes	
 0x17f7ec	FUN_0017f7ec	1848	no	indirect call (driver context / vtable / callback)

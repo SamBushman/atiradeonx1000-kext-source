@@ -2234,8 +2234,8 @@ int FUN_000d9b58(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   return -1;
 }
 
-/* FUN_000d9bac @ 0xd9bac (228 bytes) */
-undefined4 FUN_000d9bac(undefined4 param_1,int param_2,undefined4 param_3,int param_4,int param_5,int param_6,double fparam_1)
+/* scStoreConstantComponent @ 0xd9bac (228 bytes) */
+undefined4 scStoreConstantComponent(undefined4 param_1,int param_2,undefined4 param_3,int param_4,int param_5,int param_6,double fparam_1)
 {
   int iVar1;
   uint uVar2;
@@ -2724,8 +2724,8 @@ code_r0x000da340:
   return;
 }
 
-/* FUN_000da394 @ 0xda394 (68 bytes) */
-int FUN_000da394(param_1, param_2, param_3)
+/* scSetCallbackTables @ 0xda394 (68 bytes) */
+int scSetCallbackTables(param_1, param_2, param_3)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -2772,8 +2772,8 @@ int FUN_000da438(param_1, param_2)
   return;
 }
 
-/* FUN_000da458 @ 0xda458 (96 bytes) */
-int FUN_000da458(param_1, param_2)
+/* scDestroyCompilerObject @ 0xda458 (96 bytes) */
+int scDestroyCompilerObject(param_1, param_2)
   undefined4 *param_1;
   undefined4 param_2;
 {

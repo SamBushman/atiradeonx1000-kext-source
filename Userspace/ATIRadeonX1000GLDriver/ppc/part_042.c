@@ -5039,8 +5039,8 @@ int FUN_001416b4(param_1, inst, inst2, param_4)
   return 1;
 }
 
-/* FUN_001418b0 @ 0x1418b0 (128 bytes) */
-int FUN_001418b0(param_1, param_2, param_3, param_4)
+/* PostPack__canPairInEitherOrder @ 0x1418b0 (128 bytes) */
+int PostPack__canPairInEitherOrder(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -6385,8 +6385,8 @@ int FUN_00143664(param_1, param_2, param_3, param_4, param_5)
   return callResult;
 }
 
-/* FUN_001436b4 @ 0x1436b4 (168 bytes) */
-int FUN_001436b4(param_1, param_2, param_3, param_4)
+/* PostPack__buildCandidate @ 0x1436b4 (168 bytes) */
+int PostPack__buildCandidate(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -6399,7 +6399,7 @@ int FUN_001436b4(param_1, param_2, param_3, param_4)
   iVar1 = ((int (*)())FUN_00140e7c)(param_1,param_2,param_3);
   if ((((iVar1 != 0) &&
        (iVar1 = ((int (*)())FUN_00143664)(param_1,param_2,param_3,param_4 + 2,param_4 + 3), iVar1 != 0)) &&
-      (iVar1 = ((int (*)())FUN_001418b0)(param_1,param_2,param_3,param_4 + 4), iVar1 != 0)) &&
+      (iVar1 = ((int (*)())PostPack__canPairInEitherOrder)(param_1,param_2,param_3,param_4 + 4), iVar1 != 0)) &&
      (iVar1 = ((int (*)())FUN_00141930)(param_1,param_2,param_3,param_4 + 5), iVar1 != 0)) {
     return 1;
   }
@@ -7853,7 +7853,7 @@ int pass_post_pack_insts(param_1)
                             }
                             Arena__free(arenaAt378,iVar7);
                           }
-                          iVar4 = ((int (*)())FUN_001436b4)(param_1,iVar21,iVar5,iVar8 + iVar17);
+                          iVar4 = ((int (*)())PostPack__buildCandidate)(param_1,iVar21,iVar5,iVar8 + iVar17);
                           uVar11 = uVar13;
                           iVar7 = iVar8;
                           if (iVar4 == 0) {
@@ -8343,7 +8343,7 @@ LAB_001463fc:
             Arena__free(arenaAt378,iVar21);
             iVar17 = iVar7 + iVar8;
           }
-          iVar2 = ((int (*)())FUN_001436b4)(param_1,iVar5,iVar2,iVar17);
+          iVar2 = ((int (*)())PostPack__buildCandidate)(param_1,iVar5,iVar2,iVar17);
           uVar10 = uVar13;
           uVar20 = uVar19;
           if (iVar2 == 0) goto LAB_001463fc;

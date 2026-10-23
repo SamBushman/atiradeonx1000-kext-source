@@ -2098,23 +2098,23 @@ int FUN_00134c18(param_1, param_2, param_3)
 {
   bool bVar1;
   int callResult;
-  int iVar3;
+  int loopIndex;
   int iVar4;
   
-  iVar3 = 0;
+  loopIndex = 0;
   iVar4 = *(int *)(param_1 + 8);
   do {
-    callResult = ((int (*)())FUN_00134bf0)(param_3,*(undefined4 *)(iVar3 * 4 + iVar4),1);
+    callResult = ((int (*)())FUN_00134bf0)(param_3,*(undefined4 *)(loopIndex * 4 + iVar4),1);
     if (callResult == param_2) {
-      *(undefined4 *)(iVar3 * 4 + iVar4) = *(undefined4 *)(iVar4 + *(int *)(param_1 + 4) * 4);
+      *(undefined4 *)(loopIndex * 4 + iVar4) = *(undefined4 *)(iVar4 + *(int *)(param_1 + 4) * 4);
       *(int *)(param_1 + 4) = *(int *)(param_1 + 4) + -1;
     }
     else if ((*(int *)(param_1 + 4) == (*(int *)(param_1 + 4) / 7) * 7) &&
             (*(int *)(iVar4 + 0x1c) != 0)) {
       iVar4 = *(int *)(iVar4 + 0x1c);
     }
-    bVar1 = iVar3 != 6;
-    iVar3 = iVar3 + 1;
+    bVar1 = loopIndex != 6;
+    loopIndex = loopIndex + 1;
   } while (bVar1);
   return;
 }

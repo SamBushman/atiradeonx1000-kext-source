@@ -919,26 +919,26 @@ int FUN_00104d68(param_1, param_2)
   bool bVar1;
   int iVar2;
   int *piVar3;
-  int iVar4;
+  int loopIndex;
   int iVar5;
   
-  iVar4 = 0;
+  loopIndex = 0;
   piVar3 = param_1 + 0x27;
   do {
     if (*param_2 == '\0') {
       *(undefined1 *)piVar3 = 1;
       for (iVar5 = 1; iVar2 = (**(code **)(*param_1 + 0x14))(param_1), iVar5 <= iVar2;
           iVar5 = iVar5 + 1) {
-        (**(code **)(*param_1 + 0x88))(param_1,iVar5,iVar4,4);
+        (**(code **)(*param_1 + 0x88))(param_1,iVar5,loopIndex,4);
       }
     }
     else {
       *(undefined1 *)piVar3 = 0;
     }
-    bVar1 = iVar4 != 3;
+    bVar1 = loopIndex != 3;
     piVar3 = (int *)((int)piVar3 + 1);
     param_2 = param_2 + 1;
-    iVar4 = iVar4 + 1;
+    loopIndex = loopIndex + 1;
   } while (bVar1);
   return;
 }

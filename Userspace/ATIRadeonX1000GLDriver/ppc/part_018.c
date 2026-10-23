@@ -418,7 +418,7 @@ int ilEmitPrologue(outCursor, programRecord, passThroughR5, passThroughR6, passT
   int iVar5;
   uint uVar6;
   uint uVar7;
-  uint uVar8;
+  uint loopIndex2;
   int iVar9;
   uint uVar10;
   int iVar11;
@@ -512,10 +512,10 @@ int ilEmitPrologue(outCursor, programRecord, passThroughR5, passThroughR6, passT
     uVar2 = *(uint *)(programRecord + 0x70);
     uVar6 = *(uint *)(programRecord + 0x74);
     uVar7 = 0;
-    uVar8 = 0;
+    loopIndex2 = 0;
     iVar9 = programRecord;
     do {
-      uVar10 = 1 << (uVar8 & 0x3f);
+      uVar10 = 1 << (loopIndex2 & 0x3f);
       if (((uVar2 | uVar6) & uVar10) != 0) {
         uVar3 = ((int (*)())ilPopFreeRegister)(programRecord);
         *(undefined4 *)(iVar9 + 0xb8) = uVar3;
@@ -530,9 +530,9 @@ int ilEmitPrologue(outCursor, programRecord, passThroughR5, passThroughR6, passT
           uVar7 = 2;
         }
       }
-      bVar1 = uVar8 != 0xf;
+      bVar1 = loopIndex2 != 0xf;
       iVar9 = iVar9 + 4;
-      uVar8 = uVar8 + 1;
+      loopIndex2 = loopIndex2 + 1;
     } while (bVar1);
     if (uVar7 != 0) {
       loopIndex = 0;
@@ -2509,7 +2509,7 @@ int ilRewriteForTextureState(ctx, param_2, compileRecord, ilSource, param_5)
    * correct, but leaving local_c100/local_c0fc/local_c0f8/local_c0f0/local_c0d0/local_c090 as
    * separate, non-overlapping locals was NOT harmless - confirmed live on real hardware. Stock's
    * real code does do pointer arithmetic from this buffer into them: FUN_000cd1b0 (called with
-   * auStack_c148) tail-calls into FUN_000da394/FUN_000e2524, which read *(auStack_c148+0x4c)
+   * auStack_c148) tail-calls into scSetCallbackTables/FUN_000e2524, which read *(auStack_c148+0x4c)
    * expecting local_c0fc's value; a loop just below also writes local_c0f0[8..15], expecting
    * those words to land in local_c0d0. With the locals declared separately, the compiler placed
    * them elsewhere on the stack, so auStack_c148+0x4c stayed at its memset'd 0 instead of the
@@ -4041,7 +4041,7 @@ int FUN_000cd05c(param_1, param_2, param_3)
     FUN_000da0c0(a1,param_1);
     iVar1 = FUN_000da420(a1);
     if (iVar1 != 0) {
-      FUN_000da458(a1,1);
+      scDestroyCompilerObject(a1,1);
       (**(code **)(param_1 + 0x34))(*(undefined4 *)(param_1 + 0x2c),a1,param_3);
       a1 = 0;
     }
@@ -4060,7 +4060,7 @@ int scDestroy(param_1)
   if (param_1 != (undefined4 *)0x0) {
     pcVar2 = (code *)*param_1;
     uVar1 = param_1[1];
-    FUN_000da458(param_1,1);
+    scDestroyCompilerObject(param_1,1);
     (*pcVar2)(uVar1,param_1);
     uVar1 = 0;
   }
@@ -4076,7 +4076,7 @@ int FUN_000cd1b0(param_1, param_2, param_3)
   undefined4 uVar1;
   
   if (param_1 != 0) {
-    uVar1 = FUN_000da394(param_1,param_2,param_3);
+    uVar1 = scSetCallbackTables(param_1,param_2,param_3);
     return uVar1;
   }
   return 3;

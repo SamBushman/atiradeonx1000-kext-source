@@ -19,13 +19,6 @@ local	FUN_00034200	iVar17	levelRecord	INFERRED	FUN_00031220(ctx,texture,face,bas
 local	FUN_000c1780	param_1	decoded	INFERRED	output record: memset(0x80) then ushort fields; int at ushort[0x46] is the mode (0/1/2) and int at [0x48] the instruction index, both read first
 local	FUN_000c1780	param_2	wordsMode0	UNKNOWN	read as param_2[instrIndex*4+4] in mode 0
 local	FUN_000c1780	param_3	wordsMode2	UNKNOWN	mode 2: four words per instruction at +0x98/+0x198/+0x298/+0x398 from param_3+instrIndex*4
-local	FUN_000c1780	iVar22	modeOrEntry	INFERRED	starts as the mode read from decoded[0x46]; reused as a pointer into wordsMode0 and as a small loop counter
-local	FUN_000c1780	iVar6	instrIndexOrEntry	INFERRED	starts as decoded[0x48]; reused as the entry pointer / byte offset
-local	FUN_000c1780	uVar14	word98	UNKNOWN	*(entry+0x98) in mode 2 (bits 0..5, 6..11, 12..17 are stored as three 6-bit fields); reused later
-local	FUN_000c1780	uVar12	word198	UNKNOWN	*(entry+0x198) in mode 2 (three 6-bit fields)
-local	FUN_000c1780	uVar11	word298	UNKNOWN	*(entry+0x298) in mode 2 (5-bit selector, 2-bit field, table indices)
-local	FUN_000c1780	uVar8	word398	UNKNOWN	*(entry+0x398) in mode 2; in mode 0 holds the 32-bit word at entry+4
-local	FUN_000c1780	iVar23	innerIndex	INFERRED	inner loop counter 0..2
 local	FUN_00018a40	param_1	ctx	INFERRED	same first parameter as the other pixel entry points; *(ctx+0x10) and +0x2a5e are read as context state
 local	FUN_00018a40	param_2	rasterPos	INFERRED	float* stored to pfStack and passed down with the pixel parameters (x/y/z raster position)
 local	FUN_00018a40	param_3	width	INFERRED	FUN_0000a6e0(ctx,format,type,width,height,...) and FUN_00018a40 returns early when 0; converted to float with the 0x80000000 xor trick

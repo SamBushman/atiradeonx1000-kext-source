@@ -2417,8 +2417,8 @@ int FUN_0017f1f8(ctx)
   return 1;
 }
 
-/* FUN_0017f3f8 @ 0x17f3f8 (412 bytes) */
-int FUN_0017f3f8(ctx, param_2)
+/* ValueKey__foldMinMaxOfNegatedPair @ 0x17f3f8 (412 bytes) */
+int ValueKey__foldMinMaxOfNegatedPair(ctx, param_2)
   int ctx;
   uint param_2;
 {
@@ -2481,23 +2481,23 @@ LAB_0017f514:
   return 0;
 }
 
-/* FUN_0017f594 @ 0x17f594 (8 bytes) */
-int FUN_0017f594(param_1)
+/* ValueKey__foldMaxOfNegatedPair @ 0x17f594 (8 bytes) */
+int ValueKey__foldMaxOfNegatedPair(param_1)
   undefined4 param_1;
 {
   undefined4 callResult;
   
-  callResult = ((int (*)())FUN_0017f3f8)(param_1,1);
+  callResult = ((int (*)())ValueKey__foldMinMaxOfNegatedPair)(param_1,1);
   return callResult;
 }
 
-/* FUN_0017f59c @ 0x17f59c (8 bytes) */
-int FUN_0017f59c(param_1)
+/* ValueKey__foldMinOfNegatedPair @ 0x17f59c (8 bytes) */
+int ValueKey__foldMinOfNegatedPair(param_1)
   undefined4 param_1;
 {
   undefined4 callResult;
   
-  callResult = ((int (*)())FUN_0017f3f8)(param_1,0);
+  callResult = ((int (*)())ValueKey__foldMinMaxOfNegatedPair)(param_1,0);
   return callResult;
 }
 
@@ -2643,7 +2643,7 @@ joined_r0x0017f980:
       if (loopIndex != 0) {
         return 0;
       }
-      loopIndex = ((int (*)())FUN_0017f594)(ctx);
+      loopIndex = ((int (*)())ValueKey__foldMaxOfNegatedPair)(ctx);
       if (loopIndex != 0) {
         return 0;
       }
@@ -2756,7 +2756,7 @@ LAB_0017fe28:
       if (loopIndex != 0) {
         return 0;
       }
-      loopIndex = ((int (*)())FUN_0017f59c)(ctx);
+      loopIndex = ((int (*)())ValueKey__foldMinOfNegatedPair)(ctx);
       if (loopIndex != 0) {
         return 0;
       }

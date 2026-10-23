@@ -1126,7 +1126,7 @@ int FUN_000e2c78(param_1, param_2, param_3)
         uVar12 = *(undefined4 *)(param_1 + 0x94);
         uVar15 = *(undefined4 *)(param_3 + 0x398);
         uVar5 = ((int (*)())Compiler__selectBlockByProgramFlags)(param_3);
-        ((undefined4 (*)())FUN_000d9bac)(uVar15,uVar12,iVar3,uVar7,uVar5,(uint)(iVar4 == 0xc),(double)fVar6);
+        ((undefined4 (*)())scStoreConstantComponent)(uVar15,uVar12,iVar3,uVar7,uVar5,(uint)(iVar4 == 0xc),(double)fVar6);
       }
     }
     bVar1 = uVar7 != 3;

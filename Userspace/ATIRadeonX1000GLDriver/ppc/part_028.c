@@ -1593,18 +1593,18 @@ int IRMov__ctor_107d38(param_1, param_2, param_3)
 {
   bool bVar1;
   undefined *puVar2;
-  int iVar3;
+  int loopIndex;
   
   ((int (*)())FUN_00107cec)(param_1,param_2,param_3);
   puVar2 = PTR_DAT_001e8bf0;
   param_1[0x20] = 1;
   *param_1 = puVar2 + 8;
-  iVar3 = 0;
+  loopIndex = 0;
   do {
-    bVar1 = iVar3 != 1;
+    bVar1 = loopIndex != 1;
     param_1[0x25] = 0xffffffff;
     param_1[0x26] = 0;
-    iVar3 = iVar3 + 1;
+    loopIndex = loopIndex + 1;
     param_1 = param_1 + 6;
   } while (bVar1);
   return;
