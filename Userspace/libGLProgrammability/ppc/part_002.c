@@ -2108,8 +2108,8 @@ int _str_getch(stringSrc)
   return -1;
 }
 
-/* FUN_97b88a90 @ 0x97b88a90 (100 bytes) */
-int FUN_97b88a90(stringSrc, ch)
+/* _str_ungetch_body_97b88a90 @ 0x97b88a90 (100 bytes) */
+int _str_ungetch_body_97b88a90(stringSrc, ch)
   int stringSrc;
   int ch;
 {

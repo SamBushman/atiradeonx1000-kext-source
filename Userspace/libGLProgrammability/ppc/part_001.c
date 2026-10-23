@@ -1955,8 +1955,8 @@ int ___initialize_Cplusplus()
   return;
 }
 
-/* FUN_97b85470 @ 0x97b85470 (32 bytes) */
-int FUN_97b85470()
+/* _dyld_func_lookup_call_97b85470 @ 0x97b85470 (32 bytes) */
+int _dyld_func_lookup_call_97b85470()
 {
   ((int (*)())__dyld_func_lookup)();
   return;
