@@ -497,8 +497,8 @@ use	__Z21base_of_encoded_valuehP15_Unwind_Context	uVar3	regionStart	INFERRED	eve
 use	_base_of_encoded_value	uVar3	regionStart	INFERRED	every definition is the result of a call whose name says it returns this	#14	+1	all	all
 use	_extract_cie_info	uVar6	lebValue	INFERRED	every definition is the result of a call whose name says it returns this	#12	+1	all	all
 use	_execute_stack_op	uVar5	lebValue	INFERRED	every definition is the result of a call whose name says it returns this	#358	+1	all	all
-use	_uw_update_context_1	iVar1	lebValue	INFERRED	every definition is the result of a call whose name says it returns this	#20	+1	all	all
-use	_uw_update_context_1	iVar1	lebValue	INFERRED	every definition is the result of a call whose name says it returns this	#36	+1	all	all
+use	_uw_update_context_1	iVar1	exp	INFERRED	every definition is the result of a call whose name says it returns this	#20	+1	all	all
+use	_uw_update_context_1	iVar1	exp	INFERRED	every definition is the result of a call whose name says it returns this	#36	+1	all	all
 use	_fde_single_encoding_compare	uVar1	baseAddress	INFERRED	every definition is the result of a call whose name says it returns this	#2	+2	all	all
 use	_fde_mixed_encoding_compare	uVar2	baseAddress	INFERRED	every definition is the result of a call whose name says it returns this	#3	+4	all	all
 use	_add_fdes	uVar4	baseAddress	INFERRED	every definition is the result of a call whose name says it returns this	#4	+16	all	all

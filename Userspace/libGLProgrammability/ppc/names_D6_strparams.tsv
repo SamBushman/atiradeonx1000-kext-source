@@ -133,8 +133,8 @@ local	__ZNKSs7compareEmmPKcm	param_2	pos1	INFERRED	libstdc++ 4.0 basic_string::c
 local	__ZNKSs7compareEmmPKcm	param_3	n1	INFERRED	libstdc++ 4.0 basic_string::compare parameter 2 (n1) from the mangled signature mmPKcm
 local	__ZNKSs7compareEmmPKcm	param_5	pos2	INFERRED	libstdc++ 4.0 basic_string::compare parameter 4 (pos2) from the mangled signature mmPKcm
 local	__ZNSs4_RepixEm	param_2	pos	INFERRED	libstdc++ 4.0 basic_string::_Rep parameter 1 (pos) from the mangled signature m
-local	__ZNSs10_M_replaceIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18input_iterator_tag	param_3	i1	INFERRED	libstdc++ 4.0 basic_string::_M_replace parameter 2 (i1) from the mangled signature RSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18input_iterator_tag
-local	__ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_	param_3	i1	INFERRED	libstdc++ 4.0 basic_string::_M_replace_safe parameter 2 (i1) from the mangled signature RSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_
+local	__ZNSs10_M_replaceIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18input_iterator_tag	param_3	i2	INFERRED	libstdc++ 4.0 basic_string::_M_replace parameter 2 (i1) from the mangled signature RSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18input_iterator_tag
+local	__ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_	param_3	i2	INFERRED	libstdc++ 4.0 basic_string::_M_replace_safe parameter 2 (i1) from the mangled signature RSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_
 local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm	param_3	n	INFERRED	number of characters of str to append (append(const char* __s, size_type __n))
 local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE7reserveEm	param_2	res	INFERRED	requested capacity (reserve(size_type __res))
 local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE9_M_mutateEmmm	param_2	pos	INFERRED	libstdc++ 4.0 basic_string::_M_mutate parameter 1 (pos) from the mangled signature mmm

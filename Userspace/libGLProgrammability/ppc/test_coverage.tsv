@@ -1523,7 +1523,7 @@
 0x97c190cc	__ZNSt9bad_allocD1Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x97c190d4	__ZNSt9bad_allocD0Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x97c190dc	__ZNSt9bad_allocD4Ev	88	no	calls an import (ZNSt9exceptionD2Ev); calls an import (ZdlPv)
-0x97c1913c	FUN_97c1913c	220	yes	
+0x97c1913c	___cxa_allocate_exception_97c1913c	220	yes	
 0x97c19218	___cxa_free_exception	152	no	calls an import (pthread_mutex_lock)
 0x97c192b0	__gxx_exception_cleanup	88	no	calls an import (ZN10__cxxabiv111__terminateEPFvvE); indirect call (driver context / vtable / callback)
 0x97c19308	___cxa_throw	216	yes	
@@ -1537,7 +1537,7 @@
 0x97c19818	get_adjusted_ptr	152	yes	
 0x97c198b0	check_exception_spec	124	yes	
 0x97c1992c	___gxx_personality_v0	976	no	calls an import (Unwind_GetIP); calls an import (Unwind_GetLanguageSpecificData); calls an import (Unwind_SetGR)
-0x97c19d00	FUN_97c19d00	232	no	calls an import (Unwind_Resume); calls an import (ZN10__cxxabiv111__terminateEPFvvE); calls an import (ZN10__cxxabiv112__unexpectedEPFvvE)
+0x97c19d00	___cxa_call_unexpected_97c19d00	232	no	calls an import (Unwind_Resume); calls an import (ZN10__cxxabiv111__terminateEPFvvE); calls an import (ZN10__cxxabiv112__unexpectedEPFvvE)
 0x97c19de8	__cxxabiv1::__terminate	32	not a C function of the rebuilt image	
 0x97c19e0c	std::terminate	56	not a C function of the rebuilt image	
 0x97c19e44	__cxxabiv1::__unexpected	28	not a C function of the rebuilt image	

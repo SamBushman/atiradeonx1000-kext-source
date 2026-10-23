@@ -1,0 +1,27 @@
+local	_init_object	param_1	ob	CONFIRMED	struct object* (unwind-dw2-fde.c): single/array +0xc, s.b bit-field word +0x10
+local	_init_object	uVar5	objectBits	CONFIRMED	ob->s.b word (+0x10): count in bits 0..20, encoding bits 21..28, mixed_encoding 29, from_array 30, sorted 31
+local	_init_object	uVar15	count	CONFIRMED	number of FDEs: ob->s.b.count, or counted by classify_object_over_fdes
+local	_init_object	uVar6	classifyResult	CONFIRMED	classify_object_over_fdes(ob, fde) result (also left in the register as the early return value)
+local	_init_object	uVar14	totalCount	CONFIRMED	sum of classify_object_over_fdes over the fde array (from_array case)
+local	_init_object	piVar17	arrayCursor	CONFIRMED	fde** p walking ob->u.array until the null terminator
+local	_init_object	local_50	linearVec	CONFIRMED	accu.linear: struct fde_vector {orig_data +0, count +4, array[] +8}
+local	_init_object	local_4c	erraticVec	CONFIRMED	accu.erratic: second fde_vector for FDEs that are out of order (null when allocation failed)
+local	_init_object	pcVar9	fdeCompare	CONFIRMED	fde_compare_t chosen by ob->s.b: mixed_encoding, absptr (fde_unencoded_compare) or single encoding
+local	_init_object	puVar3	v1	CONFIRMED	fde_merge: v1 = accu.linear
+local	_init_object	iVar11	i2	CONFIRMED	fde_merge: i2, counted down from v2->count
+local	_init_object	iVar13	i1	CONFIRMED	fde_merge: i1, counted down while v1->array[i1-1] compares greater than fde2
+local	_init_object	puVar10	v1IndexBase	INFERRED	fde_merge: v1 advanced by i2 words, the base of &v1->array[i1 + i2]
+local	_init_object	puVar8	v2ArrayCursor	CONFIRMED	fde_merge: pointer to v2->array[i2], stepped down per outer iteration
+local	_init_object	puVar16	dstSlot	CONFIRMED	fde_merge: &v1->array[i1 + i2], the slot the next larger element is moved to
+local	_init_object	puVar18	v1Cursor	CONFIRMED	fde_merge: &v1->array[i1 - 1] - 1 (cursor in v1)
+local	_init_object	puVar1	srcSlot	CONFIRMED	fde_merge: &v1->array[i1 - 1], the element being moved up
+local	_init_object	iVar7	compareResult	CONFIRMED	fde_compare(ob, v1->array[i1-1], fde2)
+use	_init_object	bVar2	noFdes	CONFIRMED	count == 0 (nothing to sort)	^\s*bVar2\ =\ uVar6\ ==\ 0;$	^\s*bVar2\ =\ iVar13\ ==\ 0;$	all	none
+use	_init_object	bVar2	linearEmpty	CONFIRMED	i1 == 0	^\s*bVar2\ =\ iVar13\ ==\ 0;$		all	none
+use	_init_object	iVar4	arrayEntry	CONFIRMED	*p: the next fde list of ob->u.array	^\s*iVar4\ =\ \*piVar17;$	^\s*iVar4\ =\ uVar15\ \*\ 4\ \+\ 8;$	all	none
+use	_init_object	iVar4	vectorBytes	CONFIRMED	8 + count * 4: size of one struct fde_vector	^\s*iVar4\ =\ uVar15\ \*\ 4\ \+\ 8;$	^\s*iVar4\ =\ \*piVar17;$	all	none
+use	_init_object	iVar4	arrayEntry	CONFIRMED	*p: the next fde list of ob->u.array	^\s*iVar4\ =\ \*piVar17;$@3	^\s*iVar4\ =\ local_4c;$	all	none
+use	_init_object	iVar4	erraticAlias	CONFIRMED	copy of accu.erratic held in v2 during the merge	^\s*iVar4\ =\ local_4c;$		all	none
+use	_init_object	uVar12	returnValue	INFERRED	value returned (0, or a leftover register)	^\s*uVar12\ =\ 0;$	+50
+use	_init_object	uVar12	fde2	CONFIRMED	fde_merge: fde2 = v2->array[i2]	^\s*uVar12\ =\ \*puVar8;$	+14
+use	_init_object	uVar12	returnValue	INFERRED	value returned (0, or a leftover register)	^\s*uVar12\ =\ extraout_r3;$	

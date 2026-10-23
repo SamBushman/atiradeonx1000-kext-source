@@ -490,157 +490,159 @@ int __ZN10__cxxabiv121__vmi_class_type_infoD4Ev(this, param_2)
 }
 
 /* __ZNK10__cxxabiv117__class_type_info10__do_catchEPKSt9type_infoPPvj @ 0x97c182f4 (124 bytes) */
-int __ZNK10__cxxabiv117__class_type_info10__do_catchEPKSt9type_infoPPvj(this, type_info, param_3, param_4)
+int __ZNK10__cxxabiv117__class_type_info10__do_catchEPKSt9type_infoPPvj(this, thrType, thrObj, outer)
   void *this;
-  unsigned char * type_info;
-  void **param_3;
-  uint param_4;
+  unsigned char * thrType;
+  void **thrObj;
+  uint outer;
 {
-  int iVar1;
-  undefined4 uVar2;
-  uint a3;
+  int isSameType;
+  undefined4 caught;
+  uint outerArg;
   
-  a3 = param_4;
-  iVar1 = ((int (*)())__ZNKSt9type_infoeqERKS_)(this,type_info);
-  uVar2 = 1;
-  if ((iVar1 == 0) && (uVar2 = 0, param_4 < 4)) {
+  outerArg = outer;
+  isSameType = ((int (*)())__ZNKSt9type_infoeqERKS_)(this,thrType);
+  caught = 1;
+  if ((isSameType == 0) && (caught = 0, outer < 4)) {
                     
                     
-    uVar2 = (**(code **)(*(int *)type_info + 0x14))(type_info,this,param_3,a3);
-    return uVar2;
+    caught = (**(code **)(*(int *)thrType + 0x14))(thrType,this,thrObj,outerArg);
+    return caught;
   }
-  return uVar2;
+  return caught;
 }
 
 /* __ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PPv @ 0x97c18370 (120 bytes) */
-int __ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PPv(this, param_2, param_3, param_4, param_5, param_6)
+int __ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PPv(this, dstType, objPtr, unusedArg4, unusedArg5, unusedArg6)
   void *this;
-  unsigned char * param_2;
-  void **param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+  unsigned char * dstType;
+  void **objPtr;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
 {
-  bool bVar1;
-  void *local_20;
-  uint local_1c;
-  undefined4 local_18;
-  undefined4 local_14;
+  bool isPublic;
+  void *resultDstPtr;
+  uint resultPart2dst;
+  undefined4 resultSrcDetails;
+  undefined4 resultBaseType;
   
-  local_18 = 0x10;
-  local_14 = 0;
-  local_20 = (void *)0x0;
-  local_1c = 0;
-  (**(code **)(*(int *)this + 0x18))(this,param_2,*param_3,&local_20,param_5,param_6,*(int *)this);
-  bVar1 = (local_1c & 6) == 6;
-  if (bVar1) {
-    *param_3 = local_20;
+  resultSrcDetails = 0x10;
+  resultBaseType = 0;
+  resultDstPtr = (void *)0x0;
+  resultPart2dst = 0;
+  (**(code **)(*(int *)this + 0x18))(this,dstType,*objPtr,&resultDstPtr,unusedArg5,unusedArg6,*(int *)this);
+  isPublic = (resultPart2dst & 6) == 6;
+  if (isPublic) {
+    *objPtr = resultDstPtr;
   }
-  return bVar1;
+  return isPublic;
 }
 
 /* __ZNK10__cxxabiv117__class_type_info20__do_find_public_srcEiPKvPKS0_S2_ @ 0x97c183e8 (20 bytes) */
-int __ZNK10__cxxabiv117__class_type_info20__do_find_public_srcEiPKvPKS0_S2_(this, param_2, param_3, __class_type_info, param_5)
+int __ZNK10__cxxabiv117__class_type_info20__do_find_public_srcEiPKvPKS0_S2_(this, src2dst, objPtr, srcType, srcPtr)
   void *this;
-  int param_2;
-  void *param_3;
-  unsigned char * __class_type_info;
-  void *param_5;
+  int src2dst;
+  void *objPtr;
+  unsigned char * srcType;
+  void *srcPtr;
 {
-  if (param_5 == param_3) {
+  if (srcPtr == objPtr) {
     return 6;
   }
   return 1;
 }
 
 /* __ZNK10__cxxabiv120__si_class_type_info20__do_find_public_srcEiPKvPKNS_17__class_type_infoES2_ @ 0x97c183fc (136 bytes) */
-int __ZNK10__cxxabiv120__si_class_type_info20__do_find_public_srcEiPKvPKNS_17__class_type_infoES2_(this, param_2, param_3, __class_type_info, param_5)
+int __ZNK10__cxxabiv120__si_class_type_info20__do_find_public_srcEiPKvPKNS_17__class_type_infoES2_(this, src2dst, objPtr, srcType, srcPtr)
   void *this;
-  int param_2;
-  void *param_3;
-  unsigned char * __class_type_info;
-  void *param_5;
+  int src2dst;
+  void *objPtr;
+  unsigned char * srcType;
+  void *srcPtr;
 {
-  int iVar1;
-  undefined4 uVar2;
+  int isSrcType;
+  undefined4 baseResult;
   
-  if ((param_5 == param_3) &&
-     (iVar1 = ((int (*)())__ZNKSt9type_infoeqERKS_)(this,(unsigned char *)__class_type_info), iVar1 != 0)) {
+  if ((srcPtr == objPtr) &&
+     (isSrcType = ((int (*)())__ZNKSt9type_infoeqERKS_)(this,(unsigned char *)srcType), isSrcType != 0)) {
     return 6;
   }
                     
                     
-  uVar2 = (**(code **)(**(int **)((int)this + 8) + 0x20))
-                    (*(int **)((int)this + 8),param_2,param_3,__class_type_info,param_5);
-  return uVar2;
+  baseResult = (**(code **)(**(int **)((int)this + 8) + 0x20))
+                    (*(int **)((int)this + 8),src2dst,objPtr,srcType,srcPtr);
+  return baseResult;
 }
 
 /* __cxxabiv1____vmi_class_type_info____do_find_public_src @ 0x97c18484 (248 bytes) */
-int __cxxabiv1____vmi_class_type_info____do_find_public_src(this, param_2, param_3, type_info, param_5)
+int __cxxabiv1____vmi_class_type_info____do_find_public_src(this, src2dst, objPtr, srcType, srcPtr)
   unsigned char * this;
-  int param_2;
-  void *param_3;
-  unsigned char * type_info;
-  void *param_5;
+  int src2dst;
+  void *objPtr;
+  unsigned char * srcType;
+  void *srcPtr;
 {
-  bool bVar1;
-  uint uVar2;
-  int iVar3;
-  unsigned char * p_Var4;
+  int baseOffset;
+  uint baseResult;
+  bool isNonVirtual;
+  uint baseOffsetFlags;
+  int isSrcType;
+  unsigned char * baseInfo;
   
-  if ((param_3 == param_5) &&
-     (iVar3 = ((int (*)())__ZNKSt9type_infoeqERKS_)(this,(unsigned char *)type_info), iVar3 != 0)) {
+  if ((objPtr == srcPtr) &&
+     (isSrcType = ((int (*)())__ZNKSt9type_infoeqERKS_)(this,(unsigned char *)srcType), isSrcType != 0)) {
     return 6;
   }
   if (*(int *)(this + 0xc) != 0) {
-    p_Var4 = this + (*(int *)(this + 0xc) + -1) * 8;
+    baseInfo = this + (*(int *)(this + 0xc) + -1) * 8;
     do {
-      uVar2 = *(uint *)(p_Var4 + 0x14);
-      if ((uVar2 & 2) != 0) {
-        iVar3 = (int)uVar2 >> 8;
-        bVar1 = (uVar2 & 1) == 0;
-        if ((bVar1) || (param_2 != -3)) {
-          if (!bVar1) {
-            iVar3 = *(int *)(*(int *)param_3 + iVar3);
+      baseOffsetFlags = *(uint *)(baseInfo + 0x14);
+      if ((baseOffsetFlags & 2) != 0) {
+        baseOffset = (int)baseOffsetFlags >> 8;
+        isNonVirtual = (baseOffsetFlags & 1) == 0;
+        if ((isNonVirtual) || (src2dst != -3)) {
+          if (!isNonVirtual) {
+            baseOffset = *(int *)(*(int *)objPtr + baseOffset);
           }
-          uVar2 = (**(code **)(**(int **)(p_Var4 + 0x10) + 0x20))
-                            (*(int **)(p_Var4 + 0x10),param_2,(int)param_3 + iVar3,type_info,param_5);
-          if (3 < (int)uVar2) {
-            if (bVar1) {
-              return uVar2;
+          baseResult = (**(code **)(**(int **)(baseInfo + 0x10) + 0x20))
+                            (*(int **)(baseInfo + 0x10),src2dst,(int)objPtr + baseOffset,srcType,srcPtr);
+          if (3 < (int)baseResult) {
+            if (isNonVirtual) {
+              return baseResult;
             }
-            return uVar2 | 1;
+            return baseResult | 1;
           }
         }
       }
-      p_Var4 = p_Var4 + -8;
-    } while (p_Var4 != this + -8);
+      baseInfo = baseInfo + -8;
+    } while (baseInfo != this + -8);
   }
   return 1;
 }
 
 /* __ZNK10__cxxabiv117__class_type_info12__do_dyncastEiNS0_10__sub_kindEPKS0_PKvS3_S5_RNS0_16__dyncast_resultE @ 0x97c1857c (128 bytes) */
-int __ZNK10__cxxabiv117__class_type_info12__do_dyncastEiNS0_10__sub_kindEPKS0_PKvS3_S5_RNS0_16__dyncast_resultE(this, param_2, __sub_kind, __class_type_info1, param_5, __class_type_info2, param_7, __dyncast_result)
+int __ZNK10__cxxabiv117__class_type_info12__do_dyncastEiNS0_10__sub_kindEPKS0_PKvS3_S5_RNS0_16__dyncast_resultE(this, src2dst, accessPath, dstType, objPtr, srcType, srcPtr, result)
   void *this;
-  int param_2;
-  int __sub_kind;
-  unsigned char * __class_type_info1;
-  int param_5;
-  unsigned char * __class_type_info2;
-  int param_7;
-  int *__dyncast_result;
+  int src2dst;
+  int accessPath;
+  unsigned char * dstType;
+  int objPtr;
+  unsigned char * srcType;
+  int srcPtr;
+  int *result;
 {
   int iVar1;
   
-  if ((param_5 == param_7) && (iVar1 = ((int (*)())__ZNKSt9type_infoeqERKS_)(this,__class_type_info2), iVar1 != 0)) {
-    __dyncast_result[2] = __sub_kind;
+  if ((objPtr == srcPtr) && (iVar1 = ((int (*)())__ZNKSt9type_infoeqERKS_)(this,srcType), iVar1 != 0)) {
+    result[2] = accessPath;
   }
   else {
-    iVar1 = ((int (*)())__ZNKSt9type_infoeqERKS_)(this,__class_type_info1);
+    iVar1 = ((int (*)())__ZNKSt9type_infoeqERKS_)(this,dstType);
     if (iVar1 != 0) {
-      *__dyncast_result = param_5;
-      __dyncast_result[3] = 1;
-      __dyncast_result[1] = __sub_kind;
+      *result = objPtr;
+      result[3] = 1;
+      result[1] = accessPath;
     }
   }
   return 0;
