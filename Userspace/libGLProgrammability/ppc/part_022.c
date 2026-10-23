@@ -6,24 +6,24 @@ int __ZNKSs5rfindEcm(this, c, pos)
   int c;
   ulong pos;
 {
-  bool bVar1;
-  int iVar2;
-  uint uVar3;
+  bool wasZero;
+  int thisSize;
+  uint i;
   
-  iVar2 = *(int *)(*(int *)this + -0xc);
-  if (iVar2 != 0) {
-    uVar3 = iVar2 - 1;
-    if (pos < uVar3) {
-      uVar3 = pos;
+  thisSize = *(int *)(*(int *)this + -0xc);
+  if (thisSize != 0) {
+    i = thisSize - 1;
+    if (pos < i) {
+      i = pos;
     }
-    if (uVar3 != 0xffffffff) {
+    if (i != 0xffffffff) {
       do {
-        if (*(char *)(*(int *)this + uVar3) == c) {
-          return uVar3;
+        if (*(char *)(*(int *)this + i) == c) {
+          return i;
         }
-        bVar1 = uVar3 != 0;
-        uVar3 = uVar3 - 1;
-      } while (bVar1);
+        wasZero = i != 0;
+        i = i - 1;
+      } while (wasZero);
     }
   }
   return 0xffffffff;
@@ -45,18 +45,18 @@ int __ZNKSs13find_first_ofEPKcmm(this, str, pos, n)
   ulong pos;
   ulong n;
 {
-  int iVar1;
+  int data;
   void *memchrResult;
   
-  if ((n != 0) && (iVar1 = *(int *)this, pos < *(uint *)(iVar1 + -0xc))) {
+  if ((n != 0) && (data = *(int *)this, pos < *(uint *)(data + -0xc))) {
     do {
-      memchrResult = _memchr(str,(int)*(char *)(iVar1 + pos),n);
+      memchrResult = _memchr(str,(int)*(char *)(data + pos),n);
       if (memchrResult != (void *)0x0) {
         return pos;
       }
       pos = pos + 1;
-      iVar1 = *(int *)this;
-    } while (pos < *(uint *)(iVar1 + -0xc));
+      data = *(int *)this;
+    } while (pos < *(uint *)(data + -0xc));
   }
   return 0xffffffff;
 }
@@ -98,29 +98,29 @@ int __ZNKSs12find_last_ofEPKcmm(this, str, pos, n)
   ulong pos;
   ulong n;
 {
-  bool bVar1;
+  bool wasZero;
   int data;
-  void *pvVar3;
-  uint uVar4;
+  void *found;
+  uint i;
   
   data = *(int *)this;
   if ((*(int *)(data + -0xc) == 0) || (n == 0)) {
 LAB_97c15cf8:
-    uVar4 = 0xffffffff;
+    i = 0xffffffff;
   }
   else {
-    uVar4 = *(int *)(data + -0xc) - 1;
-    if (pos < uVar4) {
-      uVar4 = pos;
+    i = *(int *)(data + -0xc) - 1;
+    if (pos < i) {
+      i = pos;
     }
-    while (pvVar3 = _memchr(str,(int)*(char *)(data + uVar4),n), pvVar3 == (void *)0x0) {
-      bVar1 = uVar4 == 0;
-      uVar4 = uVar4 - 1;
-      if (bVar1) goto LAB_97c15cf8;
+    while (found = _memchr(str,(int)*(char *)(data + i),n), found == (void *)0x0) {
+      wasZero = i == 0;
+      i = i - 1;
+      if (wasZero) goto LAB_97c15cf8;
       data = *(int *)this;
     }
   }
-  return uVar4;
+  return i;
 }
 
 /* __ZNKSs12find_last_ofEPKcm @ 0x97c15d10 (72 bytes) */
@@ -221,29 +221,29 @@ int __ZNKSs16find_last_not_ofEPKcmm(this, str, pos, n)
   ulong pos;
   ulong n;
 {
-  bool bVar1;
+  bool wasZero;
   int data;
-  void *pvVar3;
-  uint uVar4;
+  void *found;
+  uint i;
   
   data = *(int *)this;
   if (*(int *)(data + -0xc) == 0) {
 LAB_97c15eec:
-    uVar4 = 0xffffffff;
+    i = 0xffffffff;
   }
   else {
-    uVar4 = *(int *)(data + -0xc) - 1;
-    if (pos < uVar4) {
-      uVar4 = pos;
+    i = *(int *)(data + -0xc) - 1;
+    if (pos < i) {
+      i = pos;
     }
-    while (pvVar3 = _memchr(str,(int)*(char *)(data + uVar4),n), pvVar3 != (void *)0x0) {
-      bVar1 = uVar4 == 0;
-      uVar4 = uVar4 - 1;
-      if (bVar1) goto LAB_97c15eec;
+    while (found = _memchr(str,(int)*(char *)(data + i),n), found != (void *)0x0) {
+      wasZero = i == 0;
+      i = i - 1;
+      if (wasZero) goto LAB_97c15eec;
       data = *(int *)this;
     }
   }
-  return uVar4;
+  return i;
 }
 
 /* __ZNKSs16find_last_not_ofEPKcm @ 0x97c15f04 (72 bytes) */
@@ -264,168 +264,173 @@ int __ZNKSs16find_last_not_ofEcm(this, c, pos)
   int c;
   ulong pos;
 {
-  bool bVar1;
-  int iVar2;
-  uint uVar3;
+  bool wasZero;
+  int thisSize;
+  uint i;
   
-  iVar2 = *(int *)(*(int *)this + -0xc);
-  if (iVar2 != 0) {
-    uVar3 = iVar2 - 1;
-    if (pos < uVar3) {
-      uVar3 = pos;
+  thisSize = *(int *)(*(int *)this + -0xc);
+  if (thisSize != 0) {
+    i = thisSize - 1;
+    if (pos < i) {
+      i = pos;
     }
     do {
-      if (*(char *)(*(int *)this + uVar3) != c) {
-        return uVar3;
+      if (*(char *)(*(int *)this + i) != c) {
+        return i;
       }
-      bVar1 = uVar3 != 0;
-      uVar3 = uVar3 - 1;
-    } while (bVar1);
+      wasZero = i != 0;
+      i = i - 1;
+    } while (wasZero);
   }
   return 0xffffffff;
 }
 
 /* std__string__substr @ 0x97c15fa0 (112 bytes) */
-int std__string__substr(this, text, param_3, param_4)
-  ulong this;
-  ulong text;
-  uint param_3;
-  ulong param_4;
+int std__string__substr(retStr, str, pos, n)
+  ulong retStr;
+  ulong str;
+  uint pos;
+  ulong n;
 {
-  if (*(uint *)(*(int *)text + -0xc) < param_3) {
+  if (*(uint *)(*(int *)str + -0xc) < pos) {
     std____throw_out_of_range("basic_string::substr");
   }
-  __ZNSsC1ERKSsmm((void *)this,(unsigned char *)text,param_3,param_4);
-  return this;
+  __ZNSsC1ERKSsmm((void *)retStr,(unsigned char *)str,pos,n);
+  return retStr;
 }
 
 /* __ZNKSs7compareERKSs @ 0x97c16010 (96 bytes) */
-int __ZNKSs7compareERKSs(this, text)
+int __ZNKSs7compareERKSs(this, str)
   void *this;
-  unsigned char * text;
+  unsigned char * str;
 {
-  int iVar1;
-  uint *puVar2;
-  uint uVar3;
-  uint uVar4;
-  uint local_20;
-  uint local_1c [4];
+  int r;
+  uint *minRef;
+  uint thisSize;
+  uint strSize;
+  uint thisSizeCopy;
+  uint strSizeCopy [4];
   
-  puVar2 = local_1c;
-  uVar3 = *(uint *)(*(int *)this + -0xc);
-  local_20 = uVar3;
-  uVar4 = *(uint *)(*(int *)text + -0xc);
-  local_1c[0] = uVar4;
-  if (uVar3 <= uVar4) {
-    puVar2 = &local_20;
+  minRef = strSizeCopy;
+  thisSize = *(uint *)(*(int *)this + -0xc);
+  thisSizeCopy = thisSize;
+  strSize = *(uint *)(*(int *)str + -0xc);
+  strSizeCopy[0] = strSize;
+  if (thisSize <= strSize) {
+    minRef = &thisSizeCopy;
   }
-  iVar1 = _memcmp(*(int *)this,*(int *)text,*puVar2);
-  if (iVar1 == 0) {
-    iVar1 = uVar3 - uVar4;
+  r = _memcmp(*(int *)this,*(int *)str,*minRef);
+  if (r == 0) {
+    r = thisSize - strSize;
   }
-  return iVar1;
+  return r;
 }
 
 /* __ZNKSs7compareEmmRKSs @ 0x97c16070 (188 bytes) */
-int __ZNKSs7compareEmmRKSs(this, pos1, n1, text)
+int __ZNKSs7compareEmmRKSs(this, pos1, n1, str)
   void *this;
   ulong pos1;
   ulong n1;
-  unsigned char * text;
+  unsigned char * str;
 {
-  unsigned int ghidra_home[8] = { this, pos1, n1, text, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  uint uVar1;
-  uint *puVar2;
-  int iVar3;
-  int iVar4;
-  uint uVar5;
-  uint local_30;
-  uint local_2c;
-  uint local_28 [5];
+  uint rsize;
+  int r;
+  unsigned int ghidra_home[8] = { this, pos1, n1, str, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  uint strSize;
+  uint *minRef;
+  int thisData;
+  int strData;
+  uint thisSize;
+  uint thisSizeMinusPos1;
+  uint rsizeCopy;
+  uint strSizeCopy [5];
   
-  iVar3 = *(int *)this;
-  uVar5 = *(uint *)(iVar3 + -0xc);
-  iVar4 = *(int *)text;
-  local_28[0] = *(uint *)(iVar4 + -0xc);
+  thisData = *(int *)this;
+  thisSize = *(uint *)(thisData + -0xc);
+  strData = *(int *)str;
+  strSizeCopy[0] = *(uint *)(strData + -0xc);
   (*(ulong *)((unsigned char *)ghidra_home + 8)) = n1;
-  if (uVar5 < pos1) {
+  if (thisSize < pos1) {
     std____throw_out_of_range("basic_string::compare");
-    iVar3 = *(int *)this;
-    iVar4 = *(int *)text;
+    thisData = *(int *)this;
+    strData = *(int *)str;
   }
-  uVar1 = local_28[0];
-  local_30 = uVar5 - pos1;
-  puVar2 = &(*(unsigned int *)((unsigned char *)ghidra_home + 8));
-  if (local_30 <= (*(ulong *)((unsigned char *)ghidra_home + 8))) {
-    puVar2 = &local_30;
+  strSize = strSizeCopy[0];
+  thisSizeMinusPos1 = thisSize - pos1;
+  minRef = &(*(unsigned int *)((unsigned char *)ghidra_home + 8));
+  if (thisSizeMinusPos1 <= (*(ulong *)((unsigned char *)ghidra_home + 8))) {
+    minRef = &thisSizeMinusPos1;
   }
-  uVar5 = *puVar2;
-  puVar2 = local_28;
-  local_2c = uVar5;
-  if (uVar5 <= local_28[0]) {
-    puVar2 = &local_2c;
+  rsize = *minRef;
+  minRef = strSizeCopy;
+  rsizeCopy = rsize;
+  if (rsize <= strSizeCopy[0]) {
+    minRef = &rsizeCopy;
   }
-  iVar3 = _memcmp(iVar3 + pos1,iVar4,*puVar2);
-  if (iVar3 == 0) {
-    iVar3 = uVar5 - uVar1;
+  r = _memcmp(thisData + pos1,strData,*minRef);
+  if (r == 0) {
+    r = rsize - strSize;
   }
-  return iVar3;
+  return r;
 }
 
 /* __ZNKSs7compareEmmRKSsmm @ 0x97c1612c (240 bytes) */
-int __ZNKSs7compareEmmRKSsmm(this, pos1, n1, text, pos2, n2)
+int __ZNKSs7compareEmmRKSsmm(this, pos1, n1, str, pos2, n2)
   void *this;
   ulong pos1;
   ulong n1;
-  unsigned char * text;
+  unsigned char * str;
   ulong pos2;
   ulong n2;
 {
-  unsigned int ghidra_home[8] = { this, pos1, n1, text, pos2, n2, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  uint *puVar1;
-  int iVar2;
-  int iVar3;
-  uint uVar4;
-  uint uVar5;
-  uint local_30;
-  uint local_2c;
-  uint local_28;
-  uint local_24 [2];
+  uint rsize;
+  uint osize;
+  int r;
+  unsigned int ghidra_home[8] = { this, pos1, n1, str, pos2, n2, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  uint *minRef;
+  int thisData;
+  int strData;
+  uint strSize;
+  uint thisSize;
+  uint thisSizeMinusPos1;
+  uint strSizeMinusPos2;
+  uint rsizeCopy;
+  uint osizeCopy [2];
   
-  iVar2 = *(int *)this;
-  uVar5 = *(uint *)(iVar2 + -0xc);
-  iVar3 = *(int *)text;
-  uVar4 = *(uint *)(iVar3 + -0xc);
+  thisData = *(int *)this;
+  thisSize = *(uint *)(thisData + -0xc);
+  strData = *(int *)str;
+  strSize = *(uint *)(strData + -0xc);
   (*(ulong *)((unsigned char *)ghidra_home + 8)) = n1;
   (*(ulong *)((unsigned char *)ghidra_home + 20)) = n2;
-  if ((uVar5 < pos1) || (uVar4 < pos2)) {
+  if ((thisSize < pos1) || (strSize < pos2)) {
     std____throw_out_of_range("basic_string::compare");
-    iVar2 = *(int *)this;
-    iVar3 = *(int *)text;
+    thisData = *(int *)this;
+    strData = *(int *)str;
   }
-  local_30 = uVar5 - pos1;
-  puVar1 = &(*(unsigned int *)((unsigned char *)ghidra_home + 8));
-  if (local_30 <= (*(ulong *)((unsigned char *)ghidra_home + 8))) {
-    puVar1 = &local_30;
+  thisSizeMinusPos1 = thisSize - pos1;
+  minRef = &(*(unsigned int *)((unsigned char *)ghidra_home + 8));
+  if (thisSizeMinusPos1 <= (*(ulong *)((unsigned char *)ghidra_home + 8))) {
+    minRef = &thisSizeMinusPos1;
   }
-  local_2c = uVar4 - pos2;
-  uVar4 = *puVar1;
-  local_28 = uVar4;
-  puVar1 = &(*(unsigned int *)((unsigned char *)ghidra_home + 20));
-  if (local_2c <= (*(ulong *)((unsigned char *)ghidra_home + 20))) {
-    puVar1 = &local_2c;
+  strSizeMinusPos2 = strSize - pos2;
+  rsize = *minRef;
+  rsizeCopy = rsize;
+  minRef = &(*(unsigned int *)((unsigned char *)ghidra_home + 20));
+  if (strSizeMinusPos2 <= (*(ulong *)((unsigned char *)ghidra_home + 20))) {
+    minRef = &strSizeMinusPos2;
   }
-  uVar5 = *puVar1;
-  puVar1 = local_24;
-  local_24[0] = uVar5;
-  if (uVar4 <= uVar5) {
-    puVar1 = &local_28;
+  osize = *minRef;
+  minRef = osizeCopy;
+  osizeCopy[0] = osize;
+  if (rsize <= osize) {
+    minRef = &rsizeCopy;
   }
-  iVar2 = _memcmp(iVar2 + pos1,iVar3 + pos2,*puVar1);
-  if (iVar2 == 0) {
-    iVar2 = uVar4 - uVar5;
+  r = _memcmp(thisData + pos1,strData + pos2,*minRef);
+  if (r == 0) {
+    r = rsize - osize;
   }
-  return iVar2;
+  return r;
 }
 
 /* __ZNKSs7compareEPKc @ 0x97c1621c (112 bytes) */
@@ -433,28 +438,28 @@ int __ZNKSs7compareEPKc(this, str)
   void *this;
   char *str;
 {
-  int data;
-  uint length;
-  uint *puVar2;
-  int iVar3;
-  uint repLength;
-  uint local_30;
-  uint local_2c [6];
+  int thisData;
+  uint strLen;
+  uint *minRef;
+  int r;
+  uint thisSize;
+  uint thisSizeCopy;
+  uint strLenCopy [6];
   
-  data = *(int *)this;
-  repLength = *(uint *)(data + -0xc);
-  local_30 = repLength;
-  length = _strlen(str);
-  puVar2 = local_2c;
-  local_2c[0] = length;
-  if (repLength <= length) {
-    puVar2 = &local_30;
+  thisData = *(int *)this;
+  thisSize = *(uint *)(thisData + -0xc);
+  thisSizeCopy = thisSize;
+  strLen = _strlen(str);
+  minRef = strLenCopy;
+  strLenCopy[0] = strLen;
+  if (thisSize <= strLen) {
+    minRef = &thisSizeCopy;
   }
-  iVar3 = _memcmp(data,str,*puVar2);
-  if (iVar3 == 0) {
-    iVar3 = repLength - length;
+  r = _memcmp(thisData,str,*minRef);
+  if (r == 0) {
+    r = thisSize - strLen;
   }
-  return iVar3;
+  return r;
 }
 
 /* __ZNKSs7compareEmmPKc @ 0x97c1628c (188 bytes) */
@@ -464,40 +469,42 @@ int __ZNKSs7compareEmmPKc(this, pos1, n1, str)
   ulong n1;
   char *str;
 {
+  uint rsize;
+  int r;
   unsigned int ghidra_home[8] = { this, pos1, n1, str, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  uint *puVar1;
-  uint uVar2;
-  int iVar3;
-  uint uVar4;
-  uint local_30;
-  uint local_2c;
-  uint local_28 [4];
+  uint *minRef;
+  uint strLen;
+  int thisData;
+  uint thisSize;
+  uint thisSizeMinusPos1;
+  uint rsizeCopy;
+  uint strLenCopy [4];
   
-  iVar3 = *(int *)this;
-  uVar4 = *(uint *)(iVar3 + -0xc);
+  thisData = *(int *)this;
+  thisSize = *(uint *)(thisData + -0xc);
   (*(ulong *)((unsigned char *)ghidra_home + 8)) = n1;
-  if (uVar4 < pos1) {
+  if (thisSize < pos1) {
     std____throw_out_of_range("basic_string::compare");
-    iVar3 = *(int *)this;
+    thisData = *(int *)this;
   }
-  uVar2 = _strlen(str);
-  local_30 = uVar4 - pos1;
-  local_28[0] = uVar2;
-  puVar1 = &(*(unsigned int *)((unsigned char *)ghidra_home + 8));
-  if (local_30 <= (*(ulong *)((unsigned char *)ghidra_home + 8))) {
-    puVar1 = &local_30;
+  strLen = _strlen(str);
+  thisSizeMinusPos1 = thisSize - pos1;
+  strLenCopy[0] = strLen;
+  minRef = &(*(unsigned int *)((unsigned char *)ghidra_home + 8));
+  if (thisSizeMinusPos1 <= (*(ulong *)((unsigned char *)ghidra_home + 8))) {
+    minRef = &thisSizeMinusPos1;
   }
-  uVar4 = *puVar1;
-  puVar1 = local_28;
-  local_2c = uVar4;
-  if (uVar4 <= uVar2) {
-    puVar1 = &local_2c;
+  rsize = *minRef;
+  minRef = strLenCopy;
+  rsizeCopy = rsize;
+  if (rsize <= strLen) {
+    minRef = &rsizeCopy;
   }
-  iVar3 = _memcmp(iVar3 + pos1,str,*puVar1);
-  if (iVar3 == 0) {
-    iVar3 = uVar4 - uVar2;
+  r = _memcmp(thisData + pos1,str,*minRef);
+  if (r == 0) {
+    r = rsize - strLen;
   }
-  return iVar3;
+  return r;
 }
 
 /* __ZNKSs7compareEmmPKcm @ 0x97c16348 (220 bytes) */
@@ -508,47 +515,49 @@ int __ZNKSs7compareEmmPKcm(this, pos1, n1, str, pos2)
   char *str;
   ulong pos2;
 {
+  uint osize;
+  int r;
   unsigned int ghidra_home[8] = { this, pos1, n1, str, pos2, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  uint *puVar1;
-  int iVar2;
-  uint uVar3;
-  uint uVar4;
-  uint local_30;
-  uint local_2c;
-  uint local_28;
-  uint local_24 [3];
+  uint *minRef;
+  int thisData;
+  uint thisSize;
+  uint rsize;
+  uint strLenCopy;
+  uint thisSizeMinusPos1;
+  uint rsizeCopy;
+  uint osizeCopy [3];
   
-  iVar2 = *(int *)this;
-  uVar3 = *(uint *)(iVar2 + -0xc);
+  thisData = *(int *)this;
+  thisSize = *(uint *)(thisData + -0xc);
   (*(ulong *)((unsigned char *)ghidra_home + 8)) = n1;
   (*(ulong *)((unsigned char *)ghidra_home + 16)) = pos2;
-  if (uVar3 < pos1) {
+  if (thisSize < pos1) {
     std____throw_out_of_range("basic_string::compare");
-    iVar2 = *(int *)this;
+    thisData = *(int *)this;
   }
-  local_30 = _strlen(str);
-  puVar1 = &(*(unsigned int *)((unsigned char *)ghidra_home + 16));
-  if (local_30 <= (*(ulong *)((unsigned char *)ghidra_home + 16))) {
-    puVar1 = &local_30;
+  strLenCopy = _strlen(str);
+  minRef = &(*(unsigned int *)((unsigned char *)ghidra_home + 16));
+  if (strLenCopy <= (*(ulong *)((unsigned char *)ghidra_home + 16))) {
+    minRef = &strLenCopy;
   }
-  local_2c = uVar3 - pos1;
-  uVar3 = *puVar1;
-  local_24[0] = uVar3;
-  puVar1 = &(*(unsigned int *)((unsigned char *)ghidra_home + 8));
-  if (local_2c <= (*(ulong *)((unsigned char *)ghidra_home + 8))) {
-    puVar1 = &local_2c;
+  thisSizeMinusPos1 = thisSize - pos1;
+  osize = *minRef;
+  osizeCopy[0] = osize;
+  minRef = &(*(unsigned int *)((unsigned char *)ghidra_home + 8));
+  if (thisSizeMinusPos1 <= (*(ulong *)((unsigned char *)ghidra_home + 8))) {
+    minRef = &thisSizeMinusPos1;
   }
-  uVar4 = *puVar1;
-  puVar1 = local_24;
-  local_28 = uVar4;
-  if (uVar4 <= uVar3) {
-    puVar1 = &local_28;
+  rsize = *minRef;
+  minRef = osizeCopy;
+  rsizeCopy = rsize;
+  if (rsize <= osize) {
+    minRef = &rsizeCopy;
   }
-  iVar2 = _memcmp(iVar2 + pos1,str,*puVar1);
-  if (iVar2 == 0) {
-    iVar2 = uVar4 - uVar3;
+  r = _memcmp(thisData + pos1,str,*minRef);
+  if (r == 0) {
+    r = rsize - osize;
   }
-  return iVar2;
+  return r;
 }
 
 /* __ZNSs4_RepixEm @ 0x97c16424 (12 bytes) */

@@ -29,9 +29,9 @@ use	__ZNKSs4findEcm	iVar3	data	CONFIRMED	std::string _M_dataplus._M_p: the chara
 use	__ZNKSs12find_last_ofEPKcmm	iVar2	data	CONFIRMED	std::string _M_dataplus._M_p: the character pointer at this+0; the _Rep header precedes it	^\s*iVar2\ =\ \*\(int\ \*\)this;$@1	+14	all	all
 use	__ZNKSs17find_first_not_ofEPKcmm	iVar1	data	CONFIRMED	std::string _M_dataplus._M_p: the character pointer at this+0; the _Rep header precedes it	^\s*iVar1\ =\ \*\(int\ \*\)this;$@1	+9	all	all
 use	__ZNKSs16find_last_not_ofEPKcmm	iVar2	data	CONFIRMED	std::string _M_dataplus._M_p: the character pointer at this+0; the _Rep header precedes it	^\s*iVar2\ =\ \*\(int\ \*\)this;$@1	+14	all	all
-use	__ZNKSs7compareEPKc	iVar3	data	CONFIRMED	std::string _M_dataplus._M_p: the character pointer at this+0; the _Rep header precedes it	^\s*iVar3\ =\ \*\(int\ \*\)this;$@1	+1	all	all
-use	__ZNKSs7compareEPKc	iVar3	data	CONFIRMED	std::string _M_dataplus._M_p: the character pointer at this+0; the _Rep header precedes it	^\s*iVar3\ =\ _memcmp\(iVar3,param_2,\*puVar2\);$@1	+0	rhs	rhs
-use	__ZNKSs7compareEPKc	uVar4	repLength	CONFIRMED	_Rep::_M_length at data-0xc	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar3\ \+\ \-0xc\);$@1	+10	all	all
+use	__ZNKSs7compareEPKc	iVar3	thisData	CONFIRMED	std::string _M_dataplus._M_p: the character pointer at this+0; the _Rep header precedes it	^\s*iVar3\ =\ \*\(int\ \*\)this;$@1	+1	all	all
+use	__ZNKSs7compareEPKc	iVar3	thisData	CONFIRMED	std::string _M_dataplus._M_p: the character pointer at this+0; the _Rep header precedes it	^\s*iVar3\ =\ _memcmp\(iVar3,param_2,\*puVar2\);$@1	+0	rhs	rhs
+use	__ZNKSs7compareEPKc	uVar4	thisSize	CONFIRMED	_Rep::_M_length at data-0xc	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar3\ \+\ \-0xc\);$@1	+10	all	all
 use	std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux	iVar2	finish2	CONFIRMED	std::vector _M_finish at this+0x8 (+0 is the pool_allocator pointer)	^\s*iVar2\ =\ \*\(int\ \*\)\(this\ \+\ 8\);$@1	+4	all	all
 use	std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux	puVar3	finish	CONFIRMED	std::vector _M_finish at this+0x8 (+0 is the pool_allocator pointer)	^\s*puVar3\ =\ \*\(undefined4\ \*\*\)\(this\ \+\ 8\);$@1	+23	all	all
 use	std__vector_TPoolAllocator__tAllocState_std__allocator_TPoolAllocator__tAllocState_____M_insert_aux	puVar9	start	CONFIRMED	std::vector _M_start at this+0x4 (+0 is the pool_allocator pointer)	^\s*puVar9\ =\ \*\(undefined4\ \*\*\)\(this\ \+\ 4\);$@1	+4	all	all

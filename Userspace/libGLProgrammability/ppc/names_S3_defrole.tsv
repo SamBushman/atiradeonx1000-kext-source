@@ -530,7 +530,7 @@ use	__ZNKSs13find_first_ofEPKcm	uVar1	length	INFERRED	every definition is the re
 use	__ZNKSs12find_last_ofEPKcm	uVar1	length	INFERRED	every definition is the result of a call whose name says it returns this	#0	+1	all	all
 use	__ZNKSs17find_first_not_ofEPKcm	uVar1	length	INFERRED	every definition is the result of a call whose name says it returns this	#0	+1	all	all
 use	__ZNKSs16find_last_not_ofEPKcm	uVar1	length	INFERRED	every definition is the result of a call whose name says it returns this	#0	+1	all	all
-use	__ZNKSs7compareEPKc	uVar1	length	INFERRED	every definition is the result of a call whose name says it returns this	#5	+8	all	all
+use	__ZNKSs7compareEPKc	uVar1	strLen	INFERRED	every definition is the result of a call whose name says it returns this	#5	+8	all	all
 use	__ZStplIcSt11char_traitsIcESaIcEESbIT_T0_T1_EPKS3_RKS6_	iVar1	length	INFERRED	every definition is the result of a call whose name says it returns this	#2	+6	all	all
 use	operator_new	pvVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#3	+8	all	all
 use	std____default_alloc_template_true_0___reallocate	pvVar1	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#1	+1	all	all
