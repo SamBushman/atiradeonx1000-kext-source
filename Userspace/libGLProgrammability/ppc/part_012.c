@@ -717,37 +717,37 @@ int TPPStreamCompiler__newIndirectOperandFromConstant(this, parseOperand, type)
   bool bVar4;
   byte bVar5;
   double dVar6;
-  unsigned char * this_00;
+  unsigned char * unusedOperand;
   undefined4 *puVar7;
-  unsigned char * this_01;
-  uint uVar8;
-  int iVar9;
+  unsigned char * newSymbol;
+  uint typeNominalSize;
+  int valueIndex;
   int iVar10;
   uint uVar11;
   uint uVar12;
-  unsigned char * p_Var13;
+  unsigned char * newChunk;
   undefined4 a1;
   undefined4 a1_00;
   undefined4 in_r6;
   int in_r7;
   int in_r8;
-  undefined4 *puVar14;
-  int iVar15;
-  int iVar16;
-  int iVar17;
+  undefined4 *valueCursor;
+  int constantList;
+  int slotIndex;
+  int chunkCursor;
   byte in_xer_so = 0;
   unsigned char * pTStack00000020;
-  undefined4 local_1f0;
-  uint local_1ec;
-  char acStack_1e0 [256];
-  ushort local_e0 [8];
-  int local_d0 [8];
-  bool local_b0 [16];
-  uint local_a0 [4];
-  int *local_90;
+  undefined4 chunkWord0;
+  uint chunkWord1;
+  char symbolNameText [256];
+  ushort usageGlTypes [8];
+  int constantValues [8];
+  bool laneUsedFlags [16];
+  uint paramBindingArrayRecord [4];
+  int *constantChunkList;
   int local_8c;
-  unsigned char * local_88;
-  int local_84;
+  unsigned char * resultOperand;
+  int constantSlotCount;
   int local_80;
   int local_7c;
   int local_78;
@@ -755,70 +755,70 @@ int TPPStreamCompiler__newIndirectOperandFromConstant(this, parseOperand, type)
   unsigned char * local_70;
   int local_6c;
   
-  iVar16 = 0;
+  slotIndex = 0;
   bVar3 = false;
-  local_90 = *(int **)(*(int *)(this + 0x70) + 0x10);
-  iVar17 = *local_90;
-  iVar15 = *(int *)(*(int *)(this + 0x70) + 0x2c);
+  constantChunkList = *(int **)(*(int *)(this + 0x70) + 0x10);
+  chunkCursor = *constantChunkList;
+  constantList = *(int *)(*(int *)(this + 0x70) + 0x2c);
   pTStack00000020 = type;
-  local_88 = operator_new(0x38);
-  __ZN12ParseOperandC1Ev(local_88);
-  this_01 = operator_new(100);
-  __ZN11ParseSymbolC1Ev(this_01);
+  resultOperand = operator_new(0x38);
+  __ZN12ParseOperandC1Ev(resultOperand);
+  newSymbol = operator_new(100);
+  __ZN11ParseSymbolC1Ev(newSymbol);
   local_8c = 0;
-  uVar8 = (**(code **)(*(int *)pTStack00000020 + 0x2c))
+  typeNominalSize = (**(code **)(*(int *)pTStack00000020 + 0x2c))
                     (pTStack00000020,a1,type,in_r6,in_r7,in_r8,pTStack00000020);
-  iVar9 = ParseOperand__GetBaseSize(parseOperand);
-  local_84 = (iVar9 - 1U) / uVar8 + 1;
-  if (iVar17 == 0) {
+  valueIndex = ParseOperand__GetBaseSize(parseOperand);
+  constantSlotCount = (valueIndex - 1U) / typeNominalSize + 1;
+  if (chunkCursor == 0) {
     bVar4 = true;
 LAB_97bc4c8c:
     if (bVar4) {
-      iVar9 = 0;
-      iVar16 = 0;
-      if (local_84 < 1) {
-        return local_88;
+      valueIndex = 0;
+      slotIndex = 0;
+      if (constantSlotCount < 1) {
+        return resultOperand;
       }
       do {
-        local_d0[0] = 0;
-        local_d0[1] = 0;
-        local_d0[2] = 0;
-        local_d0[3] = 0;
-        local_b0[0] = false;
-        local_b0[1] = false;
-        local_b0[2] = false;
-        local_b0[3] = false;
-        local_b0[4] = false;
-        local_b0[5] = false;
-        local_b0[6] = false;
-        local_b0[7] = false;
-        local_b0[8] = false;
-        local_b0[9] = false;
-        local_b0[10] = false;
-        local_b0[0xb] = false;
-        local_b0[0xc] = false;
-        local_b0[0xd] = false;
-        local_b0[0xe] = false;
-        local_b0[0xf] = false;
-        local_1ec = *(uint *)(*(int *)(this + 0x68) + 0x24);
-        *(uint *)(*(int *)(this + 0x68) + 0x24) = local_1ec + 1;
-        local_1f0 = 0x110000;
-        local_1ec = local_1ec & 0xffff;
+        constantValues[0] = 0;
+        constantValues[1] = 0;
+        constantValues[2] = 0;
+        constantValues[3] = 0;
+        laneUsedFlags[0] = false;
+        laneUsedFlags[1] = false;
+        laneUsedFlags[2] = false;
+        laneUsedFlags[3] = false;
+        laneUsedFlags[4] = false;
+        laneUsedFlags[5] = false;
+        laneUsedFlags[6] = false;
+        laneUsedFlags[7] = false;
+        laneUsedFlags[8] = false;
+        laneUsedFlags[9] = false;
+        laneUsedFlags[10] = false;
+        laneUsedFlags[0xb] = false;
+        laneUsedFlags[0xc] = false;
+        laneUsedFlags[0xd] = false;
+        laneUsedFlags[0xe] = false;
+        laneUsedFlags[0xf] = false;
+        chunkWord1 = *(uint *)(*(int *)(this + 0x68) + 0x24);
+        *(uint *)(*(int *)(this + 0x68) + 0x24) = chunkWord1 + 1;
+        chunkWord0 = 0x110000;
+        chunkWord1 = chunkWord1 & 0xffff;
         uVar11 = getOpenGLTypeFromTType(pTStack00000020);
         uVar12 = GetPPStreamTypeForGLType(uVar11 & 0xffff);
-        uVar11 = local_1f0 >> 0x10;
-        local_1f0 = CONCAT22((ushort)((uVar8 - 1) * 0x1000000 >> 0x10) & 0x300 |
+        uVar11 = chunkWord0 >> 0x10;
+        chunkWord0 = CONCAT22((ushort)((typeNominalSize - 1) * 0x1000000 >> 0x10) & 0x300 |
                              (ushort)(((uVar12 & 7) << 0x1a) >> 0x10) | (ushort)uVar11 & 0xff,
-                             *(undefined2 *)(iVar15 + 10));
-        if (0 < (int)uVar8) {
-          puVar14 = (undefined4 *)(iVar9 * 4 + *(int *)(parseOperand + 4));
-          puVar7 = &local_1f0;
-          uVar11 = uVar8;
+                             *(undefined2 *)(constantList + 10));
+        if (0 < (int)typeNominalSize) {
+          valueCursor = (undefined4 *)(valueIndex * 4 + *(int *)(parseOperand + 4));
+          puVar7 = &chunkWord0;
+          uVar11 = typeNominalSize;
           do {
             puVar7[0x50] = 1;
-            iVar9 = iVar9 + 1;
-            uVar1 = *puVar14;
-            puVar14 = puVar14 + 1;
+            valueIndex = valueIndex + 1;
+            uVar1 = *valueCursor;
+            valueCursor = valueCursor + 1;
             puVar7[0x48] = uVar1;
             puVar7 = puVar7 + 1;
             uVar11 = uVar11 - 1;
@@ -832,89 +832,89 @@ LAB_97bc4c8c:
         }
         uVar11 = (uint)uVar2;
         ConstantAllocationList__addConstant
-                  ((unsigned char *)(this + 0x44),local_1ec & 0xffff,local_b0,uVar2);
-        _PPStreamAddConstant(*(undefined4 *)(this + 0x70),local_d0);
-        p_Var13 = (unsigned char *)_calloc(0x1c,1);
-        *p_Var13 = 0x3;
-        *(uint *)(p_Var13 + 0xc) = local_1f0;
-        *(uint *)(p_Var13 + 0x10) = local_1ec;
-        *(undefined4 *)(p_Var13 + 0x14) = 0;
-        _PPStreamChunkListAddChunk(local_90,p_Var13);
-        if (iVar16 == 0) {
-          ParseSymbol__SetParseTreeType(this_01,pTStack00000020);
-          uVar12 = local_1f0 & 0xffff;
-          _sprintf(acStack_1e0,DAT_a7b7bd5c,uVar12);
-          *(uint *)(this_01 + 0x28) = local_1f0 & 0xffff;
-          ParseSymbol__SetName(this_01,acStack_1e0);
-          iVar17 = (**(code **)(*(int *)pTStack00000020 + 0x24))
+                  ((unsigned char *)(this + 0x44),chunkWord1 & 0xffff,laneUsedFlags,uVar2);
+        _PPStreamAddConstant(*(undefined4 *)(this + 0x70),constantValues);
+        newChunk = (unsigned char *)_calloc(0x1c,1);
+        *newChunk = 0x3;
+        *(uint *)(newChunk + 0xc) = chunkWord0;
+        *(uint *)(newChunk + 0x10) = chunkWord1;
+        *(undefined4 *)(newChunk + 0x14) = 0;
+        _PPStreamChunkListAddChunk(constantChunkList,newChunk);
+        if (slotIndex == 0) {
+          ParseSymbol__SetParseTreeType(newSymbol,pTStack00000020);
+          uVar12 = chunkWord0 & 0xffff;
+          _sprintf(symbolNameText,DAT_a7b7bd5c,uVar12);
+          *(uint *)(newSymbol + 0x28) = chunkWord0 & 0xffff;
+          ParseSymbol__SetName(newSymbol,symbolNameText);
+          chunkCursor = (**(code **)(*(int *)pTStack00000020 + 0x24))
                              (pTStack00000020,a1_00,uVar12,uVar11,in_r7,in_r8,pTStack00000020);
-          *(uint *)(this_01 + 0x38) = (uint)(iVar17 != 0);
-          ParseSymbol__SetChunk(this_01,p_Var13);
-          *(undefined4 *)(this_01 + 0x44) = 0;
-          *(unsigned char **)local_88 = this_01;
-          *(undefined4 *)(this_01 + 0x50) = 1;
-          ParseSymbolTable__AddSymbol(*(unsigned char **)(this + 0x68),this_01);
-          local_a0[1] = 0;
-          local_a0[0] = local_1f0 & 0xffff;
-          _PPStreamAddParamBindingArray(*(undefined4 *)(this + 0x70),local_a0);
+          *(uint *)(newSymbol + 0x38) = (uint)(chunkCursor != 0);
+          ParseSymbol__SetChunk(newSymbol,newChunk);
+          *(undefined4 *)(newSymbol + 0x44) = 0;
+          *(unsigned char **)resultOperand = newSymbol;
+          *(undefined4 *)(newSymbol + 0x50) = 1;
+          ParseSymbolTable__AddSymbol(*(unsigned char **)(this + 0x68),newSymbol);
+          paramBindingArrayRecord[1] = 0;
+          paramBindingArrayRecord[0] = chunkWord0 & 0xffff;
+          _PPStreamAddParamBindingArray(*(undefined4 *)(this + 0x70),paramBindingArrayRecord);
         }
-        else if ((iVar16 == local_84 + -1) &&
-                (iVar17 = *(int *)(*(int *)(*(int *)(this + 0x70) + 0x14) + 4),
-                *(short *)(iVar17 + 0x12) == 0)) {
-          *(undefined2 *)(iVar17 + 0x12) = (*(unsigned short *)((unsigned char *)&(local_1f0) + 2));
+        else if ((slotIndex == constantSlotCount + -1) &&
+                (chunkCursor = *(int *)(*(int *)(*(int *)(this + 0x70) + 0x14) + 4),
+                *(short *)(chunkCursor + 0x12) == 0)) {
+          *(undefined2 *)(chunkCursor + 0x12) = (*(unsigned short *)((unsigned char *)&(chunkWord0) + 2));
         }
-        iVar16 = iVar16 + 1;
-      } while (iVar16 < local_84);
-      return local_88;
+        slotIndex = slotIndex + 1;
+      } while (slotIndex < constantSlotCount);
+      return resultOperand;
     }
   }
   else {
     local_70 = this + 0x44;
-    local_74 = (uint)(byte)(((int)uVar8 < 2) << 3 | (2 < (int)uVar8) << 2 | (uVar8 == 2) << 1 |
+    local_74 = (uint)(byte)(((int)typeNominalSize < 2) << 3 | (2 < (int)typeNominalSize) << 2 | (typeNominalSize == 2) << 1 |
                            in_xer_so & 1) << 0x1c;
-    local_80 = (uint)(byte)(((int)uVar8 < 1) << 3 | (1 < (int)uVar8) << 2 | (uVar8 == 1) << 1 |
+    local_80 = (uint)(byte)(((int)typeNominalSize < 1) << 3 | (1 < (int)typeNominalSize) << 2 | (typeNominalSize == 1) << 1 |
                            in_xer_so & 1) << 0x1c;
-    local_7c = (uint)(byte)(((int)uVar8 < 3) << 3 | (3 < (int)uVar8) << 2 | (uVar8 == 3) << 1 |
+    local_7c = (uint)(byte)(((int)typeNominalSize < 3) << 3 | (3 < (int)typeNominalSize) << 2 | (typeNominalSize == 3) << 1 |
                            in_xer_so & 1) << 0x1c;
-    local_78 = (uint)(byte)(((int)uVar8 < 4) << 3 | (4 < (int)uVar8) << 2 | (uVar8 == 4) << 1 |
+    local_78 = (uint)(byte)(((int)typeNominalSize < 4) << 3 | (4 < (int)typeNominalSize) << 2 | (typeNominalSize == 4) << 1 |
                            in_xer_so & 1) << 0x1c;
     local_6c = local_74;
     do {
-      local_d0[0] = 1;
-      local_d0[1] = 1;
-      local_d0[2] = 1;
-      local_d0[3] = 1;
-      local_1f0 = *(uint *)(iVar17 + 0xc);
-      local_1ec = *(uint *)(iVar17 + 0x10);
-      if ((local_1f0 & 0x1f0000) == 0x110000) {
-        iVar9 = _PPStreamChunkListChunkAtIndex(iVar15,local_1f0 & 0xffff);
+      constantValues[0] = 1;
+      constantValues[1] = 1;
+      constantValues[2] = 1;
+      constantValues[3] = 1;
+      chunkWord0 = *(uint *)(chunkCursor + 0xc);
+      chunkWord1 = *(uint *)(chunkCursor + 0x10);
+      if ((chunkWord0 & 0x1f0000) == 0x110000) {
+        valueIndex = _PPStreamChunkListChunkAtIndex(constantList,chunkWord0 & 0xffff);
         ConstantAllocationList__getConstantUsage
-                  ((unsigned char *)(this + 0x44),local_1ec & 0xffff,(bool *)local_d0,
-                   local_e0);
-        local_d0[5] = local_d0[0] + local_d0[1] + local_d0[2] + local_d0[3] ^ 0x80000000;
-        local_d0[4] = 0x43300000;
-        dVar6 = (double)CONCAT44(0x43300000,local_d0[5]);
+                  ((unsigned char *)(this + 0x44),chunkWord1 & 0xffff,(bool *)constantValues,
+                   usageGlTypes);
+        constantValues[5] = constantValues[0] + constantValues[1] + constantValues[2] + constantValues[3] ^ 0x80000000;
+        constantValues[4] = 0x43300000;
+        dVar6 = (double)CONCAT44(0x43300000,constantValues[5]);
         if (*(int *)parseOperand == 0) {
           uVar2 = *(ushort *)(parseOperand + 0x18);
         }
         else {
           uVar2 = *(ushort *)(*(int *)parseOperand + 0x2c);
         }
-        in_r8 = local_d0[0];
-        if (local_e0[0] == uVar2) {
-          local_d0[5] = uVar8 ^ 0x80000000;
-          local_d0[4] = 0x43300000;
+        in_r8 = constantValues[0];
+        if (usageGlTypes[0] == uVar2) {
+          constantValues[5] = typeNominalSize ^ 0x80000000;
+          constantValues[4] = 0x43300000;
           if ((float)(dVar6 - 4503601774854144.0) ==
-              (float)((double)CONCAT44(0x43300000,local_d0[5]) - 4503601774854144.0)) {
+              (float)((double)CONCAT44(0x43300000,constantValues[5]) - 4503601774854144.0)) {
             in_r7 = 1;
             bVar5 = (byte)((uint)local_74 >> 0x18);
             if ((bool)(bVar5 >> 5 & 1)) {
 LAB_97bc49e0:
-              if ((local_d0[1] != 0) &&
-                 (*(float *)(iVar16 * 4 + *(int *)(parseOperand + 4) + 4) == *(float *)(iVar9 + 0x10))) {
+              if ((constantValues[1] != 0) &&
+                 (*(float *)(slotIndex * 4 + *(int *)(parseOperand + 4) + 4) == *(float *)(valueIndex + 0x10))) {
 LAB_97bc4a14:
-                if ((local_d0[0] != 0) &&
-                   (*(float *)(*(int *)(parseOperand + 4) + iVar16 * 4) == *(float *)(iVar9 + 0xc)))
+                if ((constantValues[0] != 0) &&
+                   (*(float *)(*(int *)(parseOperand + 4) + slotIndex * 4) == *(float *)(valueIndex + 0xc)))
                 goto LAB_97bc4a38;
               }
 LAB_97bc4a34:
@@ -924,71 +924,71 @@ LAB_97bc4a34:
               if ((bool)(bVar5 >> 6 & 1)) {
                 if ((bool)((byte)((uint)local_7c >> 0x1d) & 1)) {
 LAB_97bc49bc:
-                  if ((local_d0[2] != 0) &&
-                     (*(float *)(iVar16 * 4 + *(int *)(parseOperand + 4) + 8) == *(float *)(iVar9 + 0x14)
+                  if ((constantValues[2] != 0) &&
+                     (*(float *)(slotIndex * 4 + *(int *)(parseOperand + 4) + 8) == *(float *)(valueIndex + 0x14)
                      )) goto LAB_97bc49e0;
                 }
                 else {
                   if (!(bool)((byte)((uint)local_78 >> 0x1d) & 1)) goto LAB_97bc4a38;
-                  if ((local_d0[3] != 0) &&
-                     (*(float *)(iVar16 * 4 + *(int *)(parseOperand + 4) + 0xc) ==
-                      *(float *)(iVar9 + 0x18))) goto LAB_97bc49bc;
+                  if ((constantValues[3] != 0) &&
+                     (*(float *)(slotIndex * 4 + *(int *)(parseOperand + 4) + 0xc) ==
+                      *(float *)(valueIndex + 0x18))) goto LAB_97bc49bc;
                 }
                 goto LAB_97bc4a34;
               }
               if ((bool)((byte)((uint)local_80 >> 0x1d) & 1)) goto LAB_97bc4a14;
             }
 LAB_97bc4a38:
-            iVar16 = iVar16 + uVar8;
-            if ((in_r7 != 0) && (local_8c = iVar17, local_84 == 1)) {
+            slotIndex = slotIndex + typeNominalSize;
+            if ((in_r7 != 0) && (local_8c = chunkCursor, constantSlotCount == 1)) {
               bVar3 = true;
             }
           }
         }
       }
-      this_00 = local_70;
-      iVar17 = *(int *)(iVar17 + 8);
+      unusedOperand = local_70;
+      chunkCursor = *(int *)(chunkCursor + 8);
       if (local_8c == 0) {
         bVar4 = !bVar3;
       }
       else {
         bVar4 = !bVar3;
         if (bVar4) {
-          if (iVar17 != 0) {
+          if (chunkCursor != 0) {
             bVar5 = (byte)((uint)local_6c >> 0x18);
-            iVar9 = iVar17;
+            valueIndex = chunkCursor;
             do {
-              local_1f0 = *(uint *)(iVar9 + 0xc);
-              local_1ec = *(uint *)(iVar9 + 0x10);
-              if ((local_1f0 & 0x1f0000) == 0x110000) {
-                iVar10 = _PPStreamChunkListChunkAtIndex(iVar15,local_1f0 & 0xffff);
+              chunkWord0 = *(uint *)(valueIndex + 0xc);
+              chunkWord1 = *(uint *)(valueIndex + 0x10);
+              if ((chunkWord0 & 0x1f0000) == 0x110000) {
+                iVar10 = _PPStreamChunkListChunkAtIndex(constantList,chunkWord0 & 0xffff);
                 ConstantAllocationList__getConstantUsage
-                          ((unsigned char *)this_00,local_1ec & 0xffff,(bool *)local_d0,
-                           local_e0);
-                local_d0[4] = 0x43300000;
-                local_d0[5] = local_d0[0] + local_d0[1] + local_d0[2] + local_d0[3] ^ 0x80000000;
-                dVar6 = (double)CONCAT44(0x43300000,local_d0[5]);
+                          ((unsigned char *)unusedOperand,chunkWord1 & 0xffff,(bool *)constantValues,
+                           usageGlTypes);
+                constantValues[4] = 0x43300000;
+                constantValues[5] = constantValues[0] + constantValues[1] + constantValues[2] + constantValues[3] ^ 0x80000000;
+                dVar6 = (double)CONCAT44(0x43300000,constantValues[5]);
                 if (*(int *)parseOperand == 0) {
                   uVar2 = *(ushort *)(parseOperand + 0x18);
                 }
                 else {
                   uVar2 = *(ushort *)(*(int *)parseOperand + 0x2c);
                 }
-                in_r8 = local_d0[0];
-                if (local_e0[0] == uVar2) {
-                  local_d0[5] = uVar8 ^ 0x80000000;
-                  local_d0[4] = 0x43300000;
+                in_r8 = constantValues[0];
+                if (usageGlTypes[0] == uVar2) {
+                  constantValues[5] = typeNominalSize ^ 0x80000000;
+                  constantValues[4] = 0x43300000;
                   if ((float)(dVar6 - 4503601774854144.0) ==
-                      (float)((double)CONCAT44(0x43300000,local_d0[5]) - 4503601774854144.0)) {
+                      (float)((double)CONCAT44(0x43300000,constantValues[5]) - 4503601774854144.0)) {
                     in_r7 = 1;
                     if ((bool)(bVar5 >> 5 & 1)) {
 LAB_97bc4bec:
-                      if ((local_d0[1] != 0) &&
-                         (*(float *)(iVar16 * 4 + *(int *)(parseOperand + 4) + 4) ==
+                      if ((constantValues[1] != 0) &&
+                         (*(float *)(slotIndex * 4 + *(int *)(parseOperand + 4) + 4) ==
                           *(float *)(iVar10 + 0x10))) {
 LAB_97bc4c10:
-                        if ((local_d0[0] != 0) &&
-                           (*(float *)(*(int *)(parseOperand + 4) + iVar16 * 4) ==
+                        if ((constantValues[0] != 0) &&
+                           (*(float *)(*(int *)(parseOperand + 4) + slotIndex * 4) ==
                             *(float *)(iVar10 + 0xc))) goto LAB_97bc4c34;
                       }
 LAB_97bc4c30:
@@ -998,14 +998,14 @@ LAB_97bc4c30:
                       if ((bool)(bVar5 >> 6 & 1)) {
                         if ((bool)((byte)((uint)local_7c >> 0x1d) & 1)) {
 LAB_97bc4bc8:
-                          if ((local_d0[2] != 0) &&
-                             (*(float *)(iVar16 * 4 + *(int *)(parseOperand + 4) + 8) ==
+                          if ((constantValues[2] != 0) &&
+                             (*(float *)(slotIndex * 4 + *(int *)(parseOperand + 4) + 8) ==
                               *(float *)(iVar10 + 0x14))) goto LAB_97bc4bec;
                         }
                         else {
                           if (!(bool)((byte)((uint)local_78 >> 0x1d) & 1)) goto LAB_97bc4c34;
-                          if ((local_d0[3] != 0) &&
-                             (*(float *)(iVar16 * 4 + *(int *)(parseOperand + 4) + 0xc) ==
+                          if ((constantValues[3] != 0) &&
+                             (*(float *)(slotIndex * 4 + *(int *)(parseOperand + 4) + 0xc) ==
                               *(float *)(iVar10 + 0x18))) goto LAB_97bc4bc8;
                         }
                         goto LAB_97bc4c30;
@@ -1013,9 +1013,9 @@ LAB_97bc4bc8:
                       if ((bool)((byte)((uint)local_80 >> 0x1d) & 1)) goto LAB_97bc4c10;
                     }
 LAB_97bc4c34:
-                    iVar16 = iVar16 + uVar8;
+                    slotIndex = slotIndex + typeNominalSize;
                     if (in_r7 == 0) {
-                      iVar16 = 0;
+                      slotIndex = 0;
                       local_8c = 0;
                       goto LAB_97bc4c7c;
                     }
@@ -1023,58 +1023,58 @@ LAB_97bc4c34:
                 }
               }
               iVar10 = ParseOperand__GetBaseSize(parseOperand);
-              if (iVar10 <= iVar16) {
+              if (iVar10 <= slotIndex) {
                 bVar3 = true;
                 bVar4 = false;
               }
-              iVar9 = *(int *)(iVar9 + 8);
-              if ((iVar9 == 0) || (!bVar4)) goto LAB_97bc4c7c;
+              valueIndex = *(int *)(valueIndex + 8);
+              if ((valueIndex == 0) || (!bVar4)) goto LAB_97bc4c7c;
             } while( true );
           }
           goto LAB_97bc4c8c;
         }
       }
 LAB_97bc4c7c:
-      if (iVar17 == 0) goto LAB_97bc4c8c;
+      if (chunkCursor == 0) goto LAB_97bc4c8c;
     } while (bVar4);
   }
-  local_1ec = *(undefined4 *)(local_8c + 0x10);
-  local_1f0 = *(uint *)(local_8c + 0xc);
-  ParseSymbol__SetParseTreeType(this_01,pTStack00000020);
-  _sprintf(acStack_1e0,DAT_a7b7bd5c,local_1f0 & 0xffff);
-  *(uint *)(this_01 + 0x28) = local_1f0 & 0xffff;
-  ParseSymbol__SetName(this_01,acStack_1e0);
-  *(unsigned char **)local_88 = this_01;
-  ParseSymbolTable__processOperand(*(unsigned char **)(this + 0x68),local_88);
-  return local_88;
+  chunkWord1 = *(undefined4 *)(local_8c + 0x10);
+  chunkWord0 = *(uint *)(local_8c + 0xc);
+  ParseSymbol__SetParseTreeType(newSymbol,pTStack00000020);
+  _sprintf(symbolNameText,DAT_a7b7bd5c,chunkWord0 & 0xffff);
+  *(uint *)(newSymbol + 0x28) = chunkWord0 & 0xffff;
+  ParseSymbol__SetName(newSymbol,symbolNameText);
+  *(unsigned char **)resultOperand = newSymbol;
+  ParseSymbolTable__processOperand(*(unsigned char **)(this + 0x68),resultOperand);
+  return resultOperand;
 }
 
 /* TPPStreamCompiler__equalOperands @ 0x97bc4f74 (2416 bytes) */
-int TPPStreamCompiler__equalOperands(this, type, parseOperand1, parseOperand2, param_5)
+int TPPStreamCompiler__equalOperands(this, type, parseOperand1, parseOperand2, isEqualTest)
   unsigned char * this;
   unsigned char * type;
   unsigned char ** parseOperand1;
   unsigned char ** parseOperand2;
-  int param_5;
+  int isEqualTest;
 {
   int generateAddressLoadResult2;
   int generateAddressLoadResult;
   int logicalSize;
   int length;
   short sVar1;
-  ushort uVar2;
-  bool bVar3;
+  ushort glTypeCode;
+  bool addressLoaded;
   int iVar4;
   int iVar5;
   int *a0;
   int length2;
   char *p0;
-  unsigned char * pPVar7;
-  unsigned char * pPVar8;
+  unsigned char * elementResultOperand;
+  unsigned char * elementSymbol;
   undefined4 uVar9;
-  uint uVar10;
-  void *this_00;
-  unsigned char * pPVar11;
+  uint elementIndex;
+  void *elementOperand;
+  unsigned char * combinedResultOperand;
   uint uVar12;
   undefined4 extraout_r4;
   undefined4 extraout_r4_00;
@@ -1110,37 +1110,37 @@ int TPPStreamCompiler__equalOperands(this, type, parseOperand1, parseOperand2, p
   undefined4 opWord13;
   uint local_a0;
   undefined4 local_9c;
-  uint local_90;
-  undefined4 local_8c;
-  uint local_80;
-  undefined4 local_7c;
-  unsigned char * local_70 [2];
-  unsigned char * local_68 [9];
+  uint elemDescA;
+  undefined4 elemDescB;
+  uint srcDescA;
+  undefined4 srcDescB;
+  unsigned char * resultOperand [2];
+  unsigned char * operandSlots [9];
   
-  local_70[0] = (unsigned char *)0x0;
+  resultOperand[0] = (unsigned char *)0x0;
   ppPVar13 = parseOperand1;
   a3 = parseOperand2;
-  iVar18 = param_5;
-  ((int (*)())__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_)(this,local_70,parseOperand1,parseOperand2);
-  local_68[0] = *parseOperand1;
-  bVar3 = false;
-  local_68[1] = *parseOperand2;
-  if ((*(int *)local_68[0] != 0) &&
-     ((sVar1 = *(short *)(*(int *)local_68[0] + 0x2c), sVar1 == 0x7ffe || (sVar1 == 0x7fff)))) {
-    generateAddressLoadResult = ((int (*)())TPPStreamCompiler__generateAddressLoad)(this,local_68[0]);
+  iVar18 = isEqualTest;
+  ((int (*)())__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_)(this,resultOperand,parseOperand1,parseOperand2);
+  operandSlots[0] = *parseOperand1;
+  addressLoaded = false;
+  operandSlots[1] = *parseOperand2;
+  if ((*(int *)operandSlots[0] != 0) &&
+     ((sVar1 = *(short *)(*(int *)operandSlots[0] + 0x2c), sVar1 == 0x7ffe || (sVar1 == 0x7fff)))) {
+    generateAddressLoadResult = ((int (*)())TPPStreamCompiler__generateAddressLoad)(this,operandSlots[0]);
     if (generateAddressLoadResult != 0) {
       TPPStreamCompiler__equalOperands__source0Indirect = 1;
     }
-    generateAddressLoadResult2 = ((int (*)())TPPStreamCompiler__generateAddressLoad)(this,local_68[1]);
+    generateAddressLoadResult2 = ((int (*)())TPPStreamCompiler__generateAddressLoad)(this,operandSlots[1]);
     if (generateAddressLoadResult2 != 0) {
       TPPStreamCompiler__equalOperands__source1Indirect = 1;
     }
-    bVar3 = generateAddressLoadResult2 != 0 || generateAddressLoadResult != 0;
+    addressLoaded = generateAddressLoadResult2 != 0 || generateAddressLoadResult != 0;
   }
-  uVar19 = CONCAT44(local_70[0],local_68[0]);
-  iVar4 = *(int *)local_68[0];
+  uVar19 = CONCAT44(resultOperand[0],operandSlots[0]);
+  iVar4 = *(int *)operandSlots[0];
   if ((iVar4 == 0) || (*(short *)(iVar4 + 0x2c) != 0x7ffe)) {
-    iVar4 = *(int *)local_68[0];
+    iVar4 = *(int *)operandSlots[0];
     if ((iVar4 == 0) || (*(short *)(iVar4 + 0x2c) != 0x7fff)) {
       uVar9 = 0;
       opFlags = 0;
@@ -1157,92 +1157,92 @@ int TPPStreamCompiler__equalOperands(this, type, parseOperand1, parseOperand2, p
       opSrc2A = 0;
       opSrc2B = 0;
       opWord13 = 0;
-      ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&local_80,this,local_68[0],a3,iVar18,in_r8,0,0);
-      opSrc0A = local_80;
-      opSrc0B = local_7c;
+      ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&srcDescA,this,operandSlots[0],a3,iVar18,in_r8,0,0);
+      opSrc0A = srcDescA;
+      opSrc0B = srcDescB;
       if (TPPStreamCompiler__equalOperands__source0Indirect != 0) {
-        opSrc0A = local_80 & 0x8fffff00 | 0x80000000;
+        opSrc0A = srcDescA & 0x8fffff00 | 0x80000000;
       }
-      ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&local_80,this,local_68[1],a3,iVar18,in_r8,local_80,uVar9);
-      opSrc1A = local_80;
-      opSrc1B = local_7c;
+      ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&srcDescA,this,operandSlots[1],a3,iVar18,in_r8,srcDescA,uVar9);
+      opSrc1A = srcDescA;
+      opSrc1B = srcDescB;
       if (TPPStreamCompiler__equalOperands__source1Indirect != 0) {
-        opSrc1A = local_80 & 0x8fffff00 | 0x80000000;
+        opSrc1A = srcDescA & 0x8fffff00 | 0x80000000;
       }
-      local_70[0] = (unsigned char *)((int (*)())TPPStreamCompiler__newTemporary)(this,type);
-      ((int (*)())TPPStreamCompiler__getOperandAsDestVar)((unsigned char *)&local_80,this,local_70[0],a3,iVar18,in_r8);
-      opDest1 = local_7c;
+      resultOperand[0] = (unsigned char *)((int (*)())TPPStreamCompiler__newTemporary)(this,type);
+      ((int (*)())TPPStreamCompiler__getOperandAsDestVar)((unsigned char *)&srcDescA,this,resultOperand[0],a3,iVar18,in_r8);
+      opDest1 = srcDescB;
       iVar18 = 0x31;
-      opDest0 = local_80;
-      if (param_5 == 0) {
+      opDest0 = srcDescA;
+      if (isEqualTest == 0) {
         iVar18 = 0x36;
       }
       opHeader = iVar18 << 0x12 | opHeader & 0xfc03ffff;
-      opFlags = (local_80 >> 0xc & 1) << 0x1c | opFlags & 0xefffffff;
-      if (*(int *)local_70[0] == 0) {
-        uVar2 = *(ushort *)(local_70[0] + 0x18);
+      opFlags = (srcDescA >> 0xc & 1) << 0x1c | opFlags & 0xefffffff;
+      if (*(int *)resultOperand[0] == 0) {
+        glTypeCode = *(ushort *)(resultOperand[0] + 0x18);
       }
       else {
-        uVar2 = *(ushort *)(*(int *)local_70[0] + 0x2c);
+        glTypeCode = *(ushort *)(*(int *)resultOperand[0] + 0x2c);
       }
-      uVar10 = GetPPStreamTypeForGLType((uint)uVar2);
-      opFlags = (uVar10 & 7) << 0x17 | opFlags & 0xfc7fffff;
-      iVar18 = ParseOperand__GetLogicalSize(local_70[0]);
+      elementIndex = GetPPStreamTypeForGLType((uint)glTypeCode);
+      opFlags = (elementIndex & 7) << 0x17 | opFlags & 0xfc7fffff;
+      iVar18 = ParseOperand__GetLogicalSize(resultOperand[0]);
       opFlags = (iVar18 + -1) * 0x4000000 & 0xc000000U | opFlags & 0xf3f3ffff;
       _PPStreamAddOperation(*(undefined4 *)(this + 0x70),&opHeader,0,0);
     }
     else {
-      uVar10 = (int)*(short *)(iVar4 + 0x2e) - 1;
-      if (-1 < (int)uVar10) {
+      elementIndex = (int)*(short *)(iVar4 + 0x2e) - 1;
+      if (-1 < (int)elementIndex) {
         do {
           iVar4 = 0;
           iVar18 = 1;
           do {
-            this_00 = operator_new(0x38);
-            __ZN12ParseOperandC1Ev(this_00);
-            *(void **)((int)local_68 + iVar4 + 8) = this_00;
-            pPVar8 = operator_new(100);
-            __ZN11ParseSymbolC1Ev(pPVar8);
-            ParseSymbol__SetName(pPVar8,*(char **)(**(int **)((int)local_68 + iVar4) + 0x14));
-            ParseSymbol__AddDirectIndex(pPVar8,uVar10);
-            _sprintf((char *)&opHeader,DAT_a7b7bd90,uVar10);
-            ParseSymbol__CatName(pPVar8,(char *)&opHeader);
-            *(undefined4 *)(pPVar8 + 0x40) =
-                 *(undefined4 *)(**(int **)((int)local_68 + iVar4) + 0x40);
-            *(undefined4 *)(pPVar8 + 0x3c) =
-                 *(undefined4 *)(**(int **)((int)local_68 + iVar4) + 0x3c);
+            elementOperand = operator_new(0x38);
+            __ZN12ParseOperandC1Ev(elementOperand);
+            *(void **)((int)operandSlots + iVar4 + 8) = elementOperand;
+            elementSymbol = operator_new(100);
+            __ZN11ParseSymbolC1Ev(elementSymbol);
+            ParseSymbol__SetName(elementSymbol,*(char **)(**(int **)((int)operandSlots + iVar4) + 0x14));
+            ParseSymbol__AddDirectIndex(elementSymbol,elementIndex);
+            _sprintf((char *)&opHeader,DAT_a7b7bd90,elementIndex);
+            ParseSymbol__CatName(elementSymbol,(char *)&opHeader);
+            *(undefined4 *)(elementSymbol + 0x40) =
+                 *(undefined4 *)(**(int **)((int)operandSlots + iVar4) + 0x40);
+            *(undefined4 *)(elementSymbol + 0x3c) =
+                 *(undefined4 *)(**(int **)((int)operandSlots + iVar4) + 0x3c);
             ParseSymbol__SetParseTreeType
-                      (pPVar8,*(unsigned char **)(**(int **)((int)local_68 + iVar4) + 0xc));
-            iVar5 = **(int **)((int)local_68 + iVar4);
-            *(undefined4 *)(pPVar8 + 0x48) = 1;
-            *(undefined4 *)(pPVar8 + 0x28) = *(undefined4 *)(iVar5 + 0x28);
-            ParseSymbol__ResolveOpenGLType(pPVar8);
-            **(undefined4 **)((int)local_68 + iVar4 + 8) = pPVar8;
-            if ((*(short *)(pPVar8 + 0x2c) != 0x7ffe) && (*(short *)(pPVar8 + 0x2c) != 0x7fff)) {
+                      (elementSymbol,*(unsigned char **)(**(int **)((int)operandSlots + iVar4) + 0xc));
+            iVar5 = **(int **)((int)operandSlots + iVar4);
+            *(undefined4 *)(elementSymbol + 0x48) = 1;
+            *(undefined4 *)(elementSymbol + 0x28) = *(undefined4 *)(iVar5 + 0x28);
+            ParseSymbol__ResolveOpenGLType(elementSymbol);
+            **(undefined4 **)((int)operandSlots + iVar4 + 8) = elementSymbol;
+            if ((*(short *)(elementSymbol + 0x2c) != 0x7ffe) && (*(short *)(elementSymbol + 0x2c) != 0x7fff)) {
               ParseSymbolTable__processOperand
                         (*(unsigned char **)(this + 0x68),
-                         *(unsigned char **)((int)local_68 + iVar4 + 8));
+                         *(unsigned char **)((int)operandSlots + iVar4 + 8));
             }
-            pPVar7 = local_70[0];
+            elementResultOperand = resultOperand[0];
             iVar18 = iVar18 + -1;
             iVar4 = iVar4 + 4;
           } while (-1 < iVar18);
-          ppPVar13 = local_68 + 3;
-          iVar18 = param_5;
-          local_70[0] = (unsigned char *)((int (*)())TPPStreamCompiler__equalOperands)(this,type,local_68 + 2,ppPVar13,param_5);
-          pPVar11 = local_68[2];
-          if (local_68[2] != (void *)0x0) {
-            __ZN12ParseOperandD1Ev(local_68[2]);
-            __ZdlPv(pPVar11);
+          ppPVar13 = operandSlots + 3;
+          iVar18 = isEqualTest;
+          resultOperand[0] = (unsigned char *)((int (*)())TPPStreamCompiler__equalOperands)(this,type,operandSlots + 2,ppPVar13,isEqualTest);
+          combinedResultOperand = operandSlots[2];
+          if (operandSlots[2] != (void *)0x0) {
+            __ZN12ParseOperandD1Ev(operandSlots[2]);
+            __ZdlPv(combinedResultOperand);
           }
-          pPVar11 = local_68[3];
-          if (local_68[3] != (void *)0x0) {
-            __ZN12ParseOperandD1Ev(local_68[3]);
-            __ZdlPv(pPVar11);
+          combinedResultOperand = operandSlots[3];
+          if (operandSlots[3] != (void *)0x0) {
+            __ZN12ParseOperandD1Ev(operandSlots[3]);
+            __ZdlPv(combinedResultOperand);
           }
-          pPVar11 = local_70[0];
-          if ((pPVar7 != (unsigned char *)0x0) && (local_70[0] != (unsigned char *)0x0)) {
-            pPVar11 = (unsigned char *)((int (*)())TPPStreamCompiler__newTemporary)(this,type);
+          combinedResultOperand = resultOperand[0];
+          if ((elementResultOperand != (unsigned char *)0x0) && (resultOperand[0] != (unsigned char *)0x0)) {
+            combinedResultOperand = (unsigned char *)((int (*)())TPPStreamCompiler__newTemporary)(this,type);
             opFlags = 0;
             opLine = *(undefined4 *)(this + 0x90);
             opHeader = 0x40000000;
@@ -1257,41 +1257,41 @@ int TPPStreamCompiler__equalOperands(this, type, parseOperand1, parseOperand2, p
             opAuxA = 0;
             opAuxB = 0;
             opWord13 = 0;
-            ((int (*)())TPPStreamCompiler__getOperandAsDestVar)((unsigned char *)&local_90,this,pPVar11,ppPVar13,iVar18,in_r8);
-            opDest0 = local_90;
-            opDest1 = local_8c;
-            ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&local_90,this,pPVar7,ppPVar13,iVar18,in_r8,iVar5,in_r10);
-            opSrc0A = local_90;
-            opSrc0B = local_8c;
-            ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&local_90,this,local_70[0],ppPVar13,iVar18,in_r8,iVar5,in_r10
+            ((int (*)())TPPStreamCompiler__getOperandAsDestVar)((unsigned char *)&elemDescA,this,combinedResultOperand,ppPVar13,iVar18,in_r8);
+            opDest0 = elemDescA;
+            opDest1 = elemDescB;
+            ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&elemDescA,this,elementResultOperand,ppPVar13,iVar18,in_r8,iVar5,in_r10);
+            opSrc0A = elemDescA;
+            opSrc0B = elemDescB;
+            ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&elemDescA,this,resultOperand[0],ppPVar13,iVar18,in_r8,iVar5,in_r10
                       );
-            opHeader = ((param_5 == 0) + 0x24) * 0x40000 | opHeader & 0xfc03ffff;
+            opHeader = ((isEqualTest == 0) + 0x24) * 0x40000 | opHeader & 0xfc03ffff;
             opFlags = (opDest0 >> 0xc & 1) << 0x1c | opFlags & 0xefffffff;
-            opSrc1A = local_90;
-            opSrc1B = local_8c;
-            if (*(int *)local_70[0] == 0) {
-              uVar2 = *(ushort *)(local_70[0] + 0x18);
+            opSrc1A = elemDescA;
+            opSrc1B = elemDescB;
+            if (*(int *)resultOperand[0] == 0) {
+              glTypeCode = *(ushort *)(resultOperand[0] + 0x18);
             }
             else {
-              uVar2 = *(ushort *)(*(int *)local_70[0] + 0x2c);
+              glTypeCode = *(ushort *)(*(int *)resultOperand[0] + 0x2c);
             }
-            in_r10 = local_70[0];
-            uVar12 = GetPPStreamTypeForGLType((uint)uVar2);
+            in_r10 = resultOperand[0];
+            uVar12 = GetPPStreamTypeForGLType((uint)glTypeCode);
             opFlags = (uVar12 & 7) << 0x17 | opFlags & 0xfc7fffff;
-            iVar18 = ParseOperand__GetLogicalSize(local_70[0]);
+            iVar18 = ParseOperand__GetLogicalSize(resultOperand[0]);
             opFlags = (iVar18 + -1) * 0x4000000 & 0xc000000U | opFlags & 0xf3f3ffff;
             _PPStreamAddOperation(*(undefined4 *)(this + 0x70),&opHeader,0,0);
-            __ZN12ParseOperandD1Ev(pPVar7);
-            __ZdlPv(pPVar7);
-            pPVar7 = local_70[0];
-            if (local_70[0] != (unsigned char *)0x0) {
-              __ZN12ParseOperandD1Ev(local_70[0]);
-              __ZdlPv(pPVar7);
+            __ZN12ParseOperandD1Ev(elementResultOperand);
+            __ZdlPv(elementResultOperand);
+            elementResultOperand = resultOperand[0];
+            if (resultOperand[0] != (unsigned char *)0x0) {
+              __ZN12ParseOperandD1Ev(resultOperand[0]);
+              __ZdlPv(elementResultOperand);
             }
           }
-          local_70[0] = pPVar11;
-          uVar10 = uVar10 - 1;
-        } while (-1 < (int)uVar10);
+          resultOperand[0] = combinedResultOperand;
+          elementIndex = elementIndex - 1;
+        } while (-1 < (int)elementIndex);
       }
     }
   }
@@ -1304,11 +1304,11 @@ int TPPStreamCompiler__equalOperands(this, type, parseOperand1, parseOperand2, p
         while( true ) {
           iVar17 = 0;
           while( true ) {
-            local_70[0] = (unsigned char *)((ulonglong)uVar19 >> 0x20);
+            resultOperand[0] = (unsigned char *)((ulonglong)uVar19 >> 0x20);
             a0 = *(int **)(iVar5 + iVar16 * 8);
-            a0_00 = *(unsigned char ***)(*(int *)local_68[iVar17] + 0x14);
+            a0_00 = *(unsigned char ***)(*(int *)operandSlots[iVar17] + 0x14);
             iVar5 = (**(code **)(*a0 + 0x1c))
-                              (a0,(int)uVar19,ppPVar13,a3,iVar18,in_r8,local_68[iVar17]);
+                              (a0,(int)uVar19,ppPVar13,a3,iVar18,in_r8,operandSlots[iVar17]);
             *(undefined1 *)(*(int *)(iVar5 + 4) + *(int *)(*(int *)(iVar5 + 4) + -0xc)) =
                  *DAT_a7b7bd9c;
             a1 = *(unsigned char ***)(iVar5 + 4);
@@ -1327,50 +1327,50 @@ int TPPStreamCompiler__equalOperands(this, type, parseOperand1, parseOperand2, p
               ppPVar13 = a0_00;
               a3 = a1;
             }
-            pPVar7 = operator_new(0x38);
-            __ZN12ParseOperandC1Ev(pPVar7);
-            local_68[iVar17 + 2] = pPVar7;
-            pPVar8 = operator_new(100);
-            __ZN11ParseSymbolC1Ev(pPVar8);
-            ParseSymbol__SetName(pPVar8,p0);
+            elementResultOperand = operator_new(0x38);
+            __ZN12ParseOperandC1Ev(elementResultOperand);
+            operandSlots[iVar17 + 2] = elementResultOperand;
+            elementSymbol = operator_new(100);
+            __ZN11ParseSymbolC1Ev(elementSymbol);
+            ParseSymbol__SetName(elementSymbol,p0);
             _free(p0);
-            *(undefined4 *)(pPVar8 + 0x40) = *(undefined4 *)(*(int *)local_68[iVar17] + 0x40);
-            *(undefined4 *)(pPVar8 + 0x3c) = *(undefined4 *)(*(int *)local_68[iVar17] + 0x3c);
-            ParseSymbol__SetParseTreeType(pPVar8,*(unsigned char **)(*(int *)(iVar4 + 4) + iVar16 * 8));
-            *(undefined4 *)(pPVar8 + 0x28) = *(undefined4 *)(*(int *)local_68[iVar17] + 0x28);
-            *(unsigned char **)local_68[iVar17 + 2] = pPVar8;
+            *(undefined4 *)(elementSymbol + 0x40) = *(undefined4 *)(*(int *)operandSlots[iVar17] + 0x40);
+            *(undefined4 *)(elementSymbol + 0x3c) = *(undefined4 *)(*(int *)operandSlots[iVar17] + 0x3c);
+            ParseSymbol__SetParseTreeType(elementSymbol,*(unsigned char **)(*(int *)(iVar4 + 4) + iVar16 * 8));
+            *(undefined4 *)(elementSymbol + 0x28) = *(undefined4 *)(*(int *)operandSlots[iVar17] + 0x28);
+            *(unsigned char **)operandSlots[iVar17 + 2] = elementSymbol;
             uVar9 = extraout_r4;
-            if ((*(short *)(pPVar8 + 0x2c) != 0x7ffe) && (*(short *)(pPVar8 + 0x2c) != 0x7fff)) {
+            if ((*(short *)(elementSymbol + 0x2c) != 0x7ffe) && (*(short *)(elementSymbol + 0x2c) != 0x7fff)) {
               ParseSymbolTable__processOperand
-                        (*(unsigned char **)(this + 0x68),local_68[iVar17 + 2]);
+                        (*(unsigned char **)(this + 0x68),operandSlots[iVar17 + 2]);
               uVar9 = extraout_r4_00;
             }
-            pPVar7 = local_70[0];
-            uVar19 = CONCAT44(local_70[0],uVar9);
+            elementResultOperand = resultOperand[0];
+            uVar19 = CONCAT44(resultOperand[0],uVar9);
             iVar17 = iVar17 + 1;
             if (1 < iVar17) break;
             iVar5 = *(int *)(iVar4 + 4);
           }
-          ppPVar13 = local_68 + 2;
-          a3 = local_68 + 3;
-          iVar18 = param_5;
-          uVar19 = ((int (*)())TPPStreamCompiler__equalOperands)(this,type,ppPVar13,a3,param_5);
-          pPVar11 = local_68[2];
-          local_70[0] = (unsigned char *)((ulonglong)uVar19 >> 0x20);
-          if (local_68[2] != (void *)0x0) {
-            __ZN12ParseOperandD1Ev(local_68[2]);
-            __ZdlPv(pPVar11);
-            uVar19 = CONCAT44(local_70[0],extraout_r4_01);
+          ppPVar13 = operandSlots + 2;
+          a3 = operandSlots + 3;
+          iVar18 = isEqualTest;
+          uVar19 = ((int (*)())TPPStreamCompiler__equalOperands)(this,type,ppPVar13,a3,isEqualTest);
+          combinedResultOperand = operandSlots[2];
+          resultOperand[0] = (unsigned char *)((ulonglong)uVar19 >> 0x20);
+          if (operandSlots[2] != (void *)0x0) {
+            __ZN12ParseOperandD1Ev(operandSlots[2]);
+            __ZdlPv(combinedResultOperand);
+            uVar19 = CONCAT44(resultOperand[0],extraout_r4_01);
           }
-          pPVar11 = local_68[3];
-          local_70[0] = (unsigned char *)((ulonglong)uVar19 >> 0x20);
-          if (local_68[3] != (void *)0x0) {
-            __ZN12ParseOperandD1Ev(local_68[3]);
-            __ZdlPv(pPVar11);
-            uVar19 = CONCAT44(local_70[0],extraout_r4_02);
+          combinedResultOperand = operandSlots[3];
+          resultOperand[0] = (unsigned char *)((ulonglong)uVar19 >> 0x20);
+          if (operandSlots[3] != (void *)0x0) {
+            __ZN12ParseOperandD1Ev(operandSlots[3]);
+            __ZdlPv(combinedResultOperand);
+            uVar19 = CONCAT44(resultOperand[0],extraout_r4_02);
           }
-          local_70[0] = (unsigned char *)((ulonglong)uVar19 >> 0x20);
-          if ((pPVar7 != (unsigned char *)0x0) && (local_70[0] != (unsigned char *)0x0)) {
+          resultOperand[0] = (unsigned char *)((ulonglong)uVar19 >> 0x20);
+          if ((elementResultOperand != (unsigned char *)0x0) && (resultOperand[0] != (unsigned char *)0x0)) {
             uVar9 = ((int (*)())TPPStreamCompiler__newTemporary)(this,type);
             uVar14 = 0;
             uVar15 = 0;
@@ -1391,38 +1391,38 @@ int TPPStreamCompiler__equalOperands(this, type, parseOperand1, parseOperand2, p
             ((int (*)())TPPStreamCompiler__getOperandAsDestVar)((unsigned char *)&local_a0,this,uVar9,a3,iVar18,in_r8);
             opDest0 = local_a0;
             opDest1 = local_9c;
-            ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&local_a0,this,pPVar7,a3,iVar18,in_r8,uVar14,uVar15);
+            ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&local_a0,this,elementResultOperand,a3,iVar18,in_r8,uVar14,uVar15);
             opSrc0A = local_a0;
             opSrc0B = local_9c;
-            ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&local_a0,this,local_70[0],a3,iVar18,in_r8,uVar14,uVar15);
-            opHeader = ((param_5 == 0) + 0x24) * 0x40000 | opHeader & 0xfc03ffff;
+            ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&local_a0,this,resultOperand[0],a3,iVar18,in_r8,uVar14,uVar15);
+            opHeader = ((isEqualTest == 0) + 0x24) * 0x40000 | opHeader & 0xfc03ffff;
             opFlags = (opDest0 >> 0xc & 1) << 0x1c | opFlags & 0xefffffff;
             opSrc1A = local_a0;
             opSrc1B = local_9c;
-            if (*(int *)local_70[0] == 0) {
-              uVar2 = *(ushort *)(local_70[0] + 0x18);
+            if (*(int *)resultOperand[0] == 0) {
+              glTypeCode = *(ushort *)(resultOperand[0] + 0x18);
             }
             else {
-              uVar2 = *(ushort *)(*(int *)local_70[0] + 0x2c);
+              glTypeCode = *(ushort *)(*(int *)resultOperand[0] + 0x2c);
             }
-            uVar10 = GetPPStreamTypeForGLType((uint)uVar2);
-            opFlags = (uVar10 & 7) << 0x17 | opFlags & 0xfc7fffff;
-            logicalSize = ParseOperand__GetLogicalSize(local_70[0]);
+            elementIndex = GetPPStreamTypeForGLType((uint)glTypeCode);
+            opFlags = (elementIndex & 7) << 0x17 | opFlags & 0xfc7fffff;
+            logicalSize = ParseOperand__GetLogicalSize(resultOperand[0]);
             opFlags = (logicalSize + -1) * 0x4000000 & 0xc000000U | opFlags & 0xf3f3ffff;
             ppPVar13 = (unsigned char **)0x0;
             a3 = (unsigned char **)0x0;
             _PPStreamAddOperation(*(undefined4 *)(this + 0x70),&opHeader,0,0);
-            __ZN12ParseOperandD1Ev(pPVar7);
-            __ZdlPv(pPVar7);
-            pPVar7 = local_70[0];
+            __ZN12ParseOperandD1Ev(elementResultOperand);
+            __ZdlPv(elementResultOperand);
+            elementResultOperand = resultOperand[0];
             uVar19 = CONCAT44(uVar9,extraout_r4_03);
-            if (local_70[0] != (unsigned char *)0x0) {
-              __ZN12ParseOperandD1Ev(local_70[0]);
-              __ZdlPv(pPVar7);
+            if (resultOperand[0] != (unsigned char *)0x0) {
+              __ZN12ParseOperandD1Ev(resultOperand[0]);
+              __ZdlPv(elementResultOperand);
               uVar19 = CONCAT44(uVar9,extraout_r4_04);
             }
           }
-          local_70[0] = (unsigned char *)((ulonglong)uVar19 >> 0x20);
+          resultOperand[0] = (unsigned char *)((ulonglong)uVar19 >> 0x20);
           iVar16 = iVar16 + -1;
           if (iVar16 < 0) break;
           iVar5 = *(int *)(iVar4 + 4);
@@ -1430,11 +1430,11 @@ int TPPStreamCompiler__equalOperands(this, type, parseOperand1, parseOperand2, p
       }
     }
   }
-  if (bVar3) {
+  if (addressLoaded) {
     TPPStreamCompiler__equalOperands__source1Indirect = 0;
     TPPStreamCompiler__equalOperands__source0Indirect = 0;
   }
-  return local_70[0];
+  return resultOperand[0];
 }
 
 /* TPPStreamCompiler__duplicateDestinationSource @ 0x97bc58e4 (636 bytes) */

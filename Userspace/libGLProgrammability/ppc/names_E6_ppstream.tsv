@@ -1,0 +1,33 @@
+local	TPPStreamCompiler__equalOperands	param_5	isEqualTest	INFERRED	selects the per-element compare opcode (0x31 when set, 0x36 when clear) and the combiner opcode ((param_5 == 0) + 0x24: AND for equality, OR for inequality)
+local	TPPStreamCompiler__equalOperands	local_70	resultOperand	CONFIRMED	element 0 is the ParseOperand* result (newTemporary / recursive equalOperands result)
+local	TPPStreamCompiler__equalOperands	local_68	operandSlots	CONFIRMED	[0],[1] = the two compared operands (*parseOperand1/2), [2],[3] = per-element sub-operands built for arrays/structs
+local	TPPStreamCompiler__equalOperands	pPVar7	elementResultOperand	INFERRED	result operand of the previous element comparison, combined with the next by AND/OR
+local	TPPStreamCompiler__equalOperands	pPVar11	combinedResultOperand	INFERRED	new temporary holding the combined result of two element comparisons
+local	TPPStreamCompiler__equalOperands	pPVar8	elementSymbol	CONFIRMED	operator_new(100) ParseSymbol for one element: named "<base>[i]" via SetName/AddDirectIndex/CatName
+local	TPPStreamCompiler__equalOperands	this_00	elementOperand	CONFIRMED	operator_new(0x38) ParseOperand wrapping elementSymbol
+local	TPPStreamCompiler__equalOperands	uVar10	elementIndex	CONFIRMED	array element index counting down from arraySize-1 (the symbol's +0x2e) to 0
+local	TPPStreamCompiler__equalOperands	bVar3	addressLoaded	INFERRED	set when a generateAddressLoad produced an indirect-address load for either operand
+local	TPPStreamCompiler__equalOperands	local_80	srcDescA	INFERRED	first word of the descriptor returned by getOperandAsSourceVar / getOperandAsDestVar (copied into the record)
+local	TPPStreamCompiler__equalOperands	local_7c	srcDescB	INFERRED	second word of that descriptor
+local	TPPStreamCompiler__equalOperands	local_90	elemDescA	INFERRED	first descriptor word returned in the element-combine step
+local	TPPStreamCompiler__equalOperands	local_8c	elemDescB	INFERRED	second descriptor word in the element-combine step
+local	TPPStreamCompiler__equalOperands	uVar2	glTypeCode	INFERRED	GL type code of the result operand for GetPPStreamTypeForGLType
+local	TPPStreamCompiler__newIndirectOperandFromConstant	local_90	constantChunkList	CONFIRMED	*(ppStream+0x10): the PPStream's constant chunk list (head chunk read via *local_90, chunks added with _PPStreamChunkListAddChunk)
+local	TPPStreamCompiler__newIndirectOperandFromConstant	iVar17	chunkCursor	INFERRED	current chunk while scanning the existing constant chunks for reusable constants (next at +8)
+local	TPPStreamCompiler__newIndirectOperandFromConstant	iVar15	constantList	CONFIRMED	*(ppStream+0x2c): the constant list indexed by _PPStreamChunkListChunkAtIndex
+local	TPPStreamCompiler__newIndirectOperandFromConstant	local_88	resultOperand	CONFIRMED	operator_new(0x38) ParseOperand returned to the caller
+local	TPPStreamCompiler__newIndirectOperandFromConstant	this_01	newSymbol	CONFIRMED	operator_new(100) ParseSymbol named "<sprintf of the constant index>" and added to the symbol table
+local	TPPStreamCompiler__newIndirectOperandFromConstant	this_00	unusedOperand	UNKNOWN	declared ParseOperand pointer not used on the visible paths
+local	TPPStreamCompiler__newIndirectOperandFromConstant	uVar8	typeNominalSize	CONFIRMED	TType vtable slot 0x2c (getNominalSize) of the requested type: components per constant slot
+local	TPPStreamCompiler__newIndirectOperandFromConstant	local_84	constantSlotCount	CONFIRMED	(baseSize - 1) / nominalSize + 1: number of vec4-wide constant slots needed
+local	TPPStreamCompiler__newIndirectOperandFromConstant	iVar16	slotIndex	CONFIRMED	index of the constant slot being created, 0 .. constantSlotCount-1
+local	TPPStreamCompiler__newIndirectOperandFromConstant	iVar9	valueIndex	INFERRED	running index into the source operand's constant values (+4)
+local	TPPStreamCompiler__newIndirectOperandFromConstant	puVar14	valueCursor	INFERRED	pointer into the source constant values being copied into the new constant
+local	TPPStreamCompiler__newIndirectOperandFromConstant	local_1f0	chunkWord0	INFERRED	header word 0 of the new constant chunk: register class 0x11 (constant) in bits 16..20, type bits, constant index in the low 16
+local	TPPStreamCompiler__newIndirectOperandFromConstant	local_1ec	chunkWord1	INFERRED	header word 1 of the new constant chunk: constant slot number taken from symbol table +0x24 counter
+local	TPPStreamCompiler__newIndirectOperandFromConstant	p_Var13	newChunk	CONFIRMED	calloc(0x1c,1) constant chunk of kind 3 added to the constant chunk list
+local	TPPStreamCompiler__newIndirectOperandFromConstant	acStack_1e0	symbolNameText	CONFIRMED	char[256] sprintf buffer holding the generated symbol name
+local	TPPStreamCompiler__newIndirectOperandFromConstant	local_a0	paramBindingArrayRecord	INFERRED	two-word record {constant index, 0} passed to _PPStreamAddParamBindingArray
+local	TPPStreamCompiler__newIndirectOperandFromConstant	local_d0	constantValues	INFERRED	constant slot value buffer / usage flags (four lanes initialised to 0 or 1) passed to _PPStreamAddConstant and getConstantUsage
+local	TPPStreamCompiler__newIndirectOperandFromConstant	local_b0	laneUsedFlags	INFERRED	bool[16] lane-used flags passed to ConstantAllocationList__addConstant
+local	TPPStreamCompiler__newIndirectOperandFromConstant	local_e0	usageGlTypes	INFERRED	ushort[8] GL types reported by ConstantAllocationList__getConstantUsage
