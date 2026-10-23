@@ -1,0 +1,41 @@
+# func	old	new	tier	evidence   (fork E5: EXT_vertex_shader implementation, 0x538e0-0x5f810; layouts in notes_gld_functions_d.md)
+func	FUN_00053a90	extvsFindShaderIndex	CONFIRMED	walks the table at ctx+0x116c (count +4, 0x7c-byte shader objects at +0xc, object id at +8) and returns the index of the object whose id equals param_2, else -1
+func	FUN_00053b00	extvsGetShaderById	INFERRED	extvsFindShaderIndex then index*0x7c + table[+0xc]: the shader object pointer
+func	FUN_00053b60	extvsBindShader	INFERRED	binds shader id param_2 as current (ctx+0x1168): finds it or grows the 0x7c-byte object array by 16 entries, initialises and numbers a new object, clears the per-shader open state (ctx+0x1170/0x1174..0x1188): glBindVertexShaderEXT
+func	FUN_00053de0	extvsDeleteShaderObject	INFERRED	unbinds when current, finds the object, frees it (FUN_00055300) when its refcount (+0xc) is 0, memmoves the array down and fixes the current-shader pointer
+func	FUN_00053ef0	glDeleteVertexShaderEXT_impl	INFERRED	returns for id 0, otherwise extvsDeleteShaderObject
+func	FUN_00053f00	glShaderOp1EXT_impl	INFERRED	when a shader is open (ctx+0x1170) appends one instruction op,res,arg1 through extvsAppendInstruction with default swizzle tables for the unused sources
+func	FUN_00053f80	glShaderOp2EXT_impl	INFERRED	as ShaderOp1 with a second source
+func	FUN_00054000	glShaderOp3EXT_impl	INFERRED	as ShaderOp1 with two more sources
+func	FUN_000541a0	glWriteMaskEXT_impl	INFERRED	four enable arguments each < 2 copied to a local array and passed with pseudo-opcode 0x879b to extvsAppendInstruction
+func	FUN_00054270	glExtractComponentEXT_impl	INFERRED	component number < 4; appends pseudo-opcode 0x879c and rewrites the last instruction's source swizzle words for a vector result
+func	FUN_000543b0	glInsertComponentEXT_impl	INFERRED	component number < 4; appends pseudo-opcode 0x879d and stores the component into the last instruction record (+0x34 from its end)
+func	FUN_000547f0	glSetLocalConstantEXT_impl	INFERRED	GL data type argument checked in 0x1400..0x140a, symbol looked up by id must have storage 0x87c3 (LOCAL_CONSTANT) and not be state-bound; copies the values into the symbol's data
+func	FUN_00053340	glGenSymbolsEXT_impl	CONFIRMED	argument checks: datatype 0x87be..0x87c0 (SCALAR/VECTOR/MATRIX), storage 0x87c1..0x87c4, range 0x87e0/0x87e1 (NORMALIZED/FULL_RANGE_EXT), then extvsCreateSymbol per requested symbol
+func	FUN_00053220	extvsGetOrCreateStateSymbol	INFERRED	hash lookup (index & 0x7c) of a state-bound symbol list; when absent creates a symbol (range 0x87e1), sets +0x44 bound flag, +0x48 state enum, +0x4c index and links it
+func	FUN_00054940	extvsBindCurrentVertexParameter	INFERRED	only handles parameter 0x87e2 (CURRENT_VERTEX_EXT): returns the state symbol for it (vector, variant storage)
+func	FUN_00054b20	extvsInitState	CONFIRMED	allocates the 0x7c0-byte shader array, sets refcount 1, makes object 0 the default (id 0), clears the open flag ctx+0x1170
+func	FUN_00054980	extvsFreeAllShaders	CONFIRMED	frees every shader object (FUN_00055300) of the table
+func	FUN_00054a90	extvsReleaseState	CONFIRMED	calls the ctx hook at +0x11a8, decrements the table refcount and frees all shaders at zero
+func	FUN_00054c10	extvsAttachSharedState	INFERRED	releases the old table (refcount), takes another context's table, assigns the next shader namespace id (table+0x10) and resets the current-shader fields
+func	FUN_00055300	extvsFreeShaderObject	CONFIRMED	calls hook +0x11ac, frees the object's instruction array, symbol arrays and tables
+func	FUN_000551f0	extvsFreeSymbolData	INFERRED	for each 0x54-byte symbol record with a data pointer (+0x38) and ownership flag (+0x3c) frees the data
+func	FUN_00054da0	extvsSymbolListGetIndex	CONFIRMED	returns the symbol index stored at position i (array at +8, count at +0xc) or 0 when out of range
+func	FUN_00055a30	extvsSymbolListGetSymbol	CONFIRMED	same lookup, then index*0x54 + records (+4): the symbol record pointer or 0
+func	FUN_00055a60	extvsInitSymbolListWithMVP	CONFIRMED	zeroes the list, creates a matrix symbol with state enum 0x87e3 (MVP_MATRIX_EXT)
+func	FUN_00055b50	extvsInitShaderObject	INFERRED	allocates the per-object tables sized from table+0x10 and clears them
+func	FUN_00055d00	extvsRefreshBoundVertexPrograms	INFERRED	for each entry of ctx+0x112c of type 0x8620 (VERTEX_PROGRAM_ARB) re-resolves its shader object by id
+func	FUN_000553c0	extvsAppendInstruction	INFERRED	common back end of the ShaderOp/WriteMask/Component entry points: appends a 0x74-byte instruction record built from (op, dest, three source operands with swizzles)
+func	FUN_00055610	extvsCreateSymbol	INFERRED	adds a 0x54-byte symbol record (data type, storage, range, component count) to the symbol list and index array
+func	FUN_0005e770	popFirstNonNull32	CONFIRMED	returns the first non-null pointer of a 32-entry array and shifts the following entries down by one
+func	FUN_0005e7f0	extvsAssignVertexInputs	INFERRED	marks the vertex attributes (position, normal, colours, texture coordinates, ...) the shader's unbound VARIANT symbols read and assigns input registers: scalars, vectors and matrices (4 registers) from separate lists into the 0x28-byte input slot array at programState+0x24
+func	FUN_00055da0	extvsAllocConstantRegisters	INFERRED	for an INVARIANT symbol (storage 0x87c2) finds free 0x28-byte slots in the constant pool (programState+0x54, count +0x58; flag byte +0x10 = used): 1 slot for scalar/vector, 4 for matrices, growing the pool by 16 with the ctx allocator hooks
+func	FUN_000564c0	extvsAllocTempRegisters	INFERRED	same scheme for LOCAL symbols (storage 0x87c4): finds free slots in the temp pool (programState+0x4c, count +0x50) and binds the symbol
+func	FUN_00056b80	extvsOperandUsesTempSlot	CONFIRMED	true when the operand has type 2 and its index equals one of the four symbol indices stored at slot+0x18..+0x24
+func	FUN_00056be0	extvsFreeDeadTempSlots	INFERRED	for each used temp slot, scans the instructions after param_3 for a read of the slot's symbols; when none reads all four components later, clears the symbols' in-use flag and the slot
+func	FUN_00056f20	extvsEncodeSourceOperand	INFERRED	packs a source operand into the hardware word: low 6 bits register select, bit 6 flag, bits 0x14..0x17 per-component flags, register index in bits 13..19 resolved through the LOCAL symbol (scalar/vector/matrix row)
+func	FUN_0005f810	extvsPrepareHardwareProgram	INFERRED	scans the instruction array to record which outputs (0x879a vertex, colours, texcoords) the shader writes, snapshots the write-enable words, assigns output registers (programState+0x1e8..0x200) and allocates constant registers for INVARIANT symbols via FUN_00055da0
+func	FUN_00057340	extvsEncodeSourceSwizzle	CONFIRMED	switch on the four swizzle selector words of a source operand (0x87d5-0x87d8 X..W, 0x87d9-0x87dc negated, 0x87dd ZERO, 0x87de/0x87df ONE) writing the 3-bit select fields into the hardware source word
+func	FUN_00057af0	extvsOperandsConflictInBank	INFERRED	true for two different symbols of type 2 that are both VARIANT (0x87c1) or both INVARIANT/LOCAL_CONSTANT (0x87c2/0x87c3): two registers of one bank in one instruction
+func	FUN_00058300	extvsEmitSingleSourceInstruction	INFERRED	reserves a 0x10-byte slot in the output instruction array (limit 0x100, grown by 16 slots), encodes destination and source 0 with extvsEncodeSourceOperand/extvsEncodeSourceSwizzle and ORs the opcode field 0x1e000000
+func	FUN_00098500	ffvpEmitLight	INFERRED	fixed-function vertex-program generator for one light: uses the per-light 0x3c-byte parameter records at builder+0xf8, the 0x80-byte light state (spot exponent float tested at +0x251c) and the temp allocator FUN_00090ca0/FUN_000911a0

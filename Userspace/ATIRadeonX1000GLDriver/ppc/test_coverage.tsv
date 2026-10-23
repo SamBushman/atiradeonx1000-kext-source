@@ -467,8 +467,8 @@
 0x530a0	FUN_000530a0	24	yes	
 0x530c0	FUN_000530c0	184	yes	
 0x53190	FUN_00053190	116	yes	
-0x53220	FUN_00053220	284	no	indirect call (driver context / vtable / callback)
-0x53340	FUN_00053340	368	yes	
+0x53220	extvsGetOrCreateStateSymbol	284	no	indirect call (driver context / vtable / callback)
+0x53340	glGenSymbolsEXT_impl	368	yes	
 0x534c0	FUN_000534c0	260	yes	
 0x53610	FUN_00053610	136	yes	
 0x536a0	FUN_000536a0	144	yes	
@@ -476,51 +476,51 @@
 0x537c0	FUN_000537c0	276	yes	
 0x538e0	extvsBeginShader	164	yes	
 0x53990	extvsEndShader	244	no	indirect call (driver context / vtable / callback)
-0x53a90	FUN_00053a90	100	yes	
-0x53b00	FUN_00053b00	84	yes	
-0x53b60	FUN_00053b60	568	yes	
+0x53a90	extvsFindShaderIndex	100	yes	
+0x53b00	extvsGetShaderById	84	yes	
+0x53b60	extvsBindShader	568	yes	
 0x53dc0	FUN_00053dc0	20	yes	
-0x53de0	FUN_00053de0	268	yes	
-0x53ef0	FUN_00053ef0	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x53f00	FUN_00053f00	124	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x53f80	FUN_00053f80	124	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x54000	FUN_00054000	128	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x53de0	extvsDeleteShaderObject	268	yes	
+0x53ef0	glDeleteVertexShaderEXT_impl	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x53f00	glShaderOp1EXT_impl	124	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x53f80	glShaderOp2EXT_impl	124	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x54000	glShaderOp3EXT_impl	128	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x54080	FUN_00054080	276	yes	
-0x541a0	FUN_000541a0	196	yes	
-0x54270	FUN_00054270	308	yes	
-0x543b0	FUN_000543b0	164	yes	
+0x541a0	glWriteMaskEXT_impl	196	yes	
+0x54270	glExtractComponentEXT_impl	308	yes	
+0x543b0	glInsertComponentEXT_impl	164	yes	
 0x54460	FUN_00054460	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x54470	FUN_00054470	272	no	indirect call (driver context / vtable / callback)
 0x54590	FUN_00054590	288	yes	
 0x546d0	FUN_000546d0	284	no	indirect call (driver context / vtable / callback)
-0x547f0	FUN_000547f0	324	no	indirect call (driver context / vtable / callback)
-0x54940	FUN_00054940	56	yes	
-0x54980	FUN_00054980	260	no	indirect call (driver context / vtable / callback)
-0x54a90	FUN_00054a90	120	no	indirect call (driver context / vtable / callback)
-0x54b20	FUN_00054b20	240	no	indirect call (driver context / vtable / callback)
-0x54c10	FUN_00054c10	388	no	indirect call (driver context / vtable / callback)
-0x54da0	FUN_00054da0	36	yes	
+0x547f0	glSetLocalConstantEXT_impl	324	no	indirect call (driver context / vtable / callback)
+0x54940	extvsBindCurrentVertexParameter	56	yes	
+0x54980	extvsFreeAllShaders	260	no	indirect call (driver context / vtable / callback)
+0x54a90	extvsReleaseState	120	no	indirect call (driver context / vtable / callback)
+0x54b20	extvsInitState	240	no	indirect call (driver context / vtable / callback)
+0x54c10	extvsAttachSharedState	388	no	indirect call (driver context / vtable / callback)
+0x54da0	extvsSymbolListGetIndex	36	yes	
 0x54dd0	extvsAppendSymbol	376	no	indirect call (driver context / vtable / callback)
 0x54f50	FUN_00054f50	380	yes	
 0x550e0	extvsOperandDataType	244	yes	
-0x551f0	FUN_000551f0	244	no	indirect call (driver context / vtable / callback)
-0x55300	FUN_00055300	184	yes	
-0x553c0	FUN_000553c0	556	yes	
-0x55610	FUN_00055610	1008	yes	
-0x55a30	FUN_00055a30	48	yes	
-0x55a60	FUN_00055a60	220	yes	
-0x55b50	FUN_00055b50	428	no	indirect call (driver context / vtable / callback)
-0x55d00	FUN_00055d00	148	yes	
-0x55da0	FUN_00055da0	1756	no	indirect call (driver context / vtable / callback)
-0x564c0	FUN_000564c0	1668	no	indirect call (driver context / vtable / callback)
-0x56b80	FUN_00056b80	80	yes	
-0x56be0	FUN_00056be0	816	yes	
-0x56f20	FUN_00056f20	988	yes	
-0x57340	FUN_00057340	1768	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x57af0	FUN_00057af0	144	yes	
+0x551f0	extvsFreeSymbolData	244	no	indirect call (driver context / vtable / callback)
+0x55300	extvsFreeShaderObject	184	yes	
+0x553c0	extvsAppendInstruction	556	yes	
+0x55610	extvsCreateSymbol	1008	yes	
+0x55a30	extvsSymbolListGetSymbol	48	yes	
+0x55a60	extvsInitSymbolListWithMVP	220	yes	
+0x55b50	extvsInitShaderObject	428	no	indirect call (driver context / vtable / callback)
+0x55d00	extvsRefreshBoundVertexPrograms	148	yes	
+0x55da0	extvsAllocConstantRegisters	1756	no	indirect call (driver context / vtable / callback)
+0x564c0	extvsAllocTempRegisters	1668	no	indirect call (driver context / vtable / callback)
+0x56b80	extvsOperandUsesTempSlot	80	yes	
+0x56be0	extvsFreeDeadTempSlots	816	yes	
+0x56f20	extvsEncodeSourceOperand	988	yes	
+0x57340	extvsEncodeSourceSwizzle	1768	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x57af0	extvsOperandsConflictInBank	144	yes	
 0x57b80	FUN_00057b80	360	no	indirect call (driver context / vtable / callback)
 0x57cf0	FUN_00057cf0	1532	no	indirect call (driver context / vtable / callback)
-0x58300	FUN_00058300	332	no	indirect call (driver context / vtable / callback)
+0x58300	extvsEmitSingleSourceInstruction	332	no	indirect call (driver context / vtable / callback)
 0x58450	FUN_00058450	872	no	indirect call (driver context / vtable / callback)
 0x587d0	FUN_000587d0	824	no	indirect call (driver context / vtable / callback)
 0x58b10	FUN_00058b10	824	no	indirect call (driver context / vtable / callback)
@@ -553,10 +553,10 @@
 0x5de50	FUN_0005de50	324	no	indirect call (driver context / vtable / callback)
 0x5dfa0	FUN_0005dfa0	304	no	indirect call (driver context / vtable / callback)
 0x5e0d0	FUN_0005e0d0	1676	no	indirect call (driver context / vtable / callback)
-0x5e770	FUN_0005e770	108	yes	
-0x5e7f0	FUN_0005e7f0	3156	no	indirect call (driver context / vtable / callback)
+0x5e770	popFirstNonNull32	108	yes	
+0x5e7f0	extvsAssignVertexInputs	3156	no	indirect call (driver context / vtable / callback)
 0x5f540	FUN_0005f540	688	no	indirect call (driver context / vtable / callback)
-0x5f810	FUN_0005f810	9624	no	indirect call (driver context / vtable / callback)
+0x5f810	extvsPrepareHardwareProgram	9624	no	indirect call (driver context / vtable / callback)
 0x61dc0	FUN_00061dc0	224	no	indirect call (driver context / vtable / callback)
 0x61eb0	FUN_00061eb0	604	no	indirect call (driver context / vtable / callback)
 0x62120	FUN_00062120	252	yes	
@@ -856,7 +856,7 @@
 0x96600	FUN_00096600	1872	no	indirect call (driver context / vtable / callback)
 0x96d80	FUN_00096d80	1700	no	indirect call (driver context / vtable / callback)
 0x97440	FUN_00097440	4212	no	indirect call (driver context / vtable / callback)
-0x98500	FUN_00098500	6432	no	indirect call (driver context / vtable / callback)
+0x98500	ffvpEmitLight	6432	no	indirect call (driver context / vtable / callback)
 0x99e50	FUN_00099e50	1796	no	indirect call (driver context / vtable / callback)
 0x9a590	FUN_0009a590	848	no	indirect call (driver context / vtable / callback)
 0x9a910	FUN_0009a910	120	no	indirect call (driver context / vtable / callback)

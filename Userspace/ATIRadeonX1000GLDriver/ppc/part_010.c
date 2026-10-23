@@ -2373,7 +2373,7 @@ int FUN_00070520(param_1, param_2, param_3, param_4)
         }
       }
       else {
-        iVar4 = FUN_00054da0(param_2 + 0x1c,*(int *)(iVar2 + 0x30));
+        iVar4 = extvsSymbolListGetIndex(param_2 + 0x1c,*(int *)(iVar2 + 0x30));
         iVar1 = *(int *)(param_2 + 0x20);
         iVar4 = iVar4 * 0x54;
       }

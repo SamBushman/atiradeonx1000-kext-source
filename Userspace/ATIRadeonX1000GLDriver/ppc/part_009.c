@@ -31,7 +31,7 @@ int FUN_0005bbc0(param_1, param_2, param_3)
   iVar5 = param_3 + 0x20;
   piVar6 = param_2 + 7;
   iVar4 = param_3 + 0x3c;
-  iVar2 = FUN_00057af0(piVar6,iVar5,iVar4);
+  iVar2 = extvsOperandsConflictInBank(piVar6,iVar5,iVar4);
   if (iVar2 == 0) {
     iVar2 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
     iVar7 = *(int *)(iVar2 + 0x18);
@@ -49,9 +49,9 @@ int FUN_0005bbc0(param_1, param_2, param_3)
       }
     }
     iVar2 = iVar7 * 0x10 + *(int *)(iVar2 + 0x1c);
-    FUN_00056f20(param_1,param_2,param_3 + 4,iVar2,3,0,0);
-    FUN_00057340(param_2,piVar6,iVar5,iVar2 + 4,0);
-    FUN_00057340(param_2,piVar6,iVar4,iVar2 + 8,0);
+    extvsEncodeSourceOperand(param_1,param_2,param_3 + 4,iVar2,3,0,0);
+    extvsEncodeSourceSwizzle(param_2,piVar6,iVar5,iVar2 + 4,0);
+    extvsEncodeSourceSwizzle(param_2,piVar6,iVar4,iVar2 + 8,0);
     uVar1 = *(uint *)(iVar2 + 8);
     uVar3 = 1;
     uVar1 = (uVar1 & 0xf1ffffff ^ 0x10000000) & 0x10000000 |
@@ -86,12 +86,12 @@ int FUN_0005bbc0(param_1, param_2, param_3)
     local_6c = 1;
     local_68 = 1;
     local_74 = uVar3;
-    FUN_00056f20(param_1,param_2,&local_78,iVar2,3,0,0);
-    FUN_00057340(param_2,piVar6,iVar5,iVar2 + 4,0);
+    extvsEncodeSourceOperand(param_1,param_2,&local_78,iVar2,3,0,0);
+    extvsEncodeSourceSwizzle(param_2,piVar6,iVar5,iVar2 + 4,0);
     uVar1 = *(uint *)(iVar2 + 4) & 0xfe001fff | 0x1248000;
     *(uint *)(iVar2 + 0xc) = uVar1;
     *(uint *)(iVar2 + 8) = uVar1;
-    FUN_00056f20(param_1,param_2,param_3 + 4,iVar2 + 0x10,3,0,0);
+    extvsEncodeSourceOperand(param_1,param_2,param_3 + 4,iVar2 + 0x10,3,0,0);
     local_5c = 3;
     local_44 = 0;
     local_54 = 0x87d5;
@@ -99,8 +99,8 @@ int FUN_0005bbc0(param_1, param_2, param_3)
     local_4c = 0x87d7;
     local_48 = 0x87d8;
     local_58 = uVar3;
-    FUN_00057340(param_2,piVar6,&local_5c,iVar2 + 0x14,0);
-    FUN_00057340(param_2,piVar6,iVar4,iVar2 + 0x18,0);
+    extvsEncodeSourceSwizzle(param_2,piVar6,&local_5c,iVar2 + 0x14,0);
+    extvsEncodeSourceSwizzle(param_2,piVar6,iVar4,iVar2 + 0x18,0);
     uVar1 = *(uint *)(iVar2 + 0x18);
     uVar3 = 2;
     uVar1 = (uVar1 & 0xf1ffffff ^ 0x10000000) & 0x10000000 |
@@ -150,7 +150,7 @@ int FUN_0005bf60(param_1, param_2, param_3)
   piVar5 = param_2 + 7;
   iVar7 = param_3 + 0x3c;
   iStack00000020 = param_3;
-  iVar3 = FUN_00057af0(piVar5,iVar6,iVar7);
+  iVar3 = extvsOperandsConflictInBank(piVar5,iVar6,iVar7);
   if (iVar3 == 0) {
     iVar3 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
     iVar10 = *(int *)(iVar3 + 0x18);
@@ -176,8 +176,8 @@ int FUN_0005bf60(param_1, param_2, param_3)
     local_8c = 1;
     local_88 = 1;
     local_94 = uVar4;
-    FUN_00056f20(param_1,param_2,&local_98,iVar3,2,0,0);
-    FUN_00057340(param_2,piVar5,iVar6,iVar3 + 4,0);
+    extvsEncodeSourceOperand(param_1,param_2,&local_98,iVar3,2,0,0);
+    extvsEncodeSourceSwizzle(param_2,piVar5,iVar6,iVar3 + 4,0);
     uVar2 = *(uint *)(iVar3 + 4);
     *(uint *)(iVar3 + 4) =
          (uVar2 & 0x4000000) << 1 |
@@ -185,7 +185,7 @@ int FUN_0005bf60(param_1, param_2, param_3)
          uVar2 >> 2 & 0x2000000 |
          (uVar2 & 0x70000) << 3 | (uVar2 & 0xe000) << 3 | uVar2 >> 6 & 0xe000 | uVar2 & 0xe0001fff |
          0x1000000;
-    FUN_00057340(param_2,piVar5,iVar7,iVar3 + 8,0);
+    extvsEncodeSourceSwizzle(param_2,piVar5,iVar7,iVar3 + 8,0);
     uVar2 = *(uint *)(iVar3 + 8);
     uVar2 = (uVar2 & 0x2000000) << 2 |
             uVar2 >> 1 & 0x4000000 |
@@ -194,8 +194,8 @@ int FUN_0005bf60(param_1, param_2, param_3)
             | 0x1000000;
     *(uint *)(iVar3 + 0xc) = uVar2;
     *(uint *)(iVar3 + 8) = uVar2;
-    FUN_00056f20(param_1,param_2,iStack00000020 + 4,iVar3 + 0x10,4,0,0);
-    FUN_00057340(param_2,piVar5,iVar6,iVar3 + 0x14,0);
+    extvsEncodeSourceOperand(param_1,param_2,iStack00000020 + 4,iVar3 + 0x10,4,0,0);
+    extvsEncodeSourceSwizzle(param_2,piVar5,iVar6,iVar3 + 0x14,0);
     uVar2 = *(uint *)(iVar3 + 0x14);
     *(uint *)(iVar3 + 0x14) =
          (uVar2 & 0x2000000) << 2 |
@@ -203,7 +203,7 @@ int FUN_0005bf60(param_1, param_2, param_3)
          uVar2 >> 1 & 0x2000000 |
          (uVar2 & 0xe000) << 6 | uVar2 >> 3 & 0x70000 | uVar2 >> 3 & 0xe000 | uVar2 & 0xe0001fff |
          0x1400000;
-    FUN_00057340(param_2,piVar5,iVar7,iVar3 + 0x18,0);
+    extvsEncodeSourceSwizzle(param_2,piVar5,iVar7,iVar3 + 0x18,0);
     uVar2 = *(uint *)(iVar3 + 0x18);
     *(uint *)(iVar3 + 0x18) =
          (uVar2 & 0x4000000) << 1 |
@@ -218,7 +218,7 @@ int FUN_0005bf60(param_1, param_2, param_3)
     local_68 = 0x87dc;
     local_64 = 0;
     local_78 = uVar4;
-    FUN_00057340(param_2,piVar5,&local_7c,iVar3 + 0x1c,0);
+    extvsEncodeSourceSwizzle(param_2,piVar5,&local_7c,iVar3 + 0x1c,0);
     uVar4 = 2;
   }
   else {
@@ -253,8 +253,8 @@ int FUN_0005bf60(param_1, param_2, param_3)
     local_88 = 1;
     local_84 = 1;
     local_94 = iVar10;
-    FUN_00056f20(param_1,param_2,&local_98,iVar9,3,0,0);
-    FUN_00057340(param_2,piVar5,iVar6,iVar9 + 4,0);
+    extvsEncodeSourceOperand(param_1,param_2,&local_98,iVar9,3,0,0);
+    extvsEncodeSourceSwizzle(param_2,piVar5,iVar6,iVar9 + 4,0);
     uVar2 = *(uint *)(iVar9 + 4) & 0xfe001fff | 0x1248000;
     *(uint *)(iVar9 + 0xc) = uVar2;
     *(uint *)(iVar9 + 8) = uVar2;
@@ -265,7 +265,7 @@ int FUN_0005bf60(param_1, param_2, param_3)
     local_8c = 1;
     local_88 = 1;
     local_94 = uVar4;
-    FUN_00056f20(param_1,param_2,&local_98,iVar9 + 0x10,2,0,0);
+    extvsEncodeSourceOperand(param_1,param_2,&local_98,iVar9 + 0x10,2,0,0);
     local_74 = 0x87d7;
     local_70 = 0x87d5;
     local_64 = 0;
@@ -273,8 +273,8 @@ int FUN_0005bf60(param_1, param_2, param_3)
     local_68 = 0x87dd;
     local_7c = 3;
     local_78 = iVar10;
-    FUN_00057340(param_2,piVar5,local_58,iVar9 + 0x14,0);
-    FUN_00057340(param_2,piVar5,iVar7,iVar9 + 0x18,0);
+    extvsEncodeSourceSwizzle(param_2,piVar5,local_58,iVar9 + 0x14,0);
+    extvsEncodeSourceSwizzle(param_2,piVar5,iVar7,iVar9 + 0x18,0);
     uVar2 = *(uint *)(iVar9 + 0x18);
     uVar2 = (uVar2 & 0x2000000) << 2 |
             uVar2 >> 1 & 0x4000000 |
@@ -283,7 +283,7 @@ int FUN_0005bf60(param_1, param_2, param_3)
             | 0x1000000;
     *(uint *)(iVar9 + 0x1c) = uVar2;
     *(uint *)(iVar9 + 0x18) = uVar2;
-    FUN_00056f20(param_1,param_2,iStack00000020 + 4,iVar9 + 0x20,4,0,0);
+    extvsEncodeSourceOperand(param_1,param_2,iStack00000020 + 4,iVar9 + 0x20,4,0,0);
     local_74 = 0x87d6;
     local_70 = 0x87d7;
     local_64 = 0;
@@ -291,8 +291,8 @@ int FUN_0005bf60(param_1, param_2, param_3)
     local_68 = 0x87de;
     local_7c = 3;
     local_78 = iVar10;
-    FUN_00057340(param_2,piVar5,local_58,iVar9 + 0x24,0);
-    FUN_00057340(param_2,piVar5,iVar7,iVar9 + 0x28,0);
+    extvsEncodeSourceSwizzle(param_2,piVar5,local_58,iVar9 + 0x24,0);
+    extvsEncodeSourceSwizzle(param_2,piVar5,iVar7,iVar9 + 0x28,0);
     uVar2 = *(uint *)(iVar9 + 0x28);
     *(uint *)(iVar9 + 0x28) =
          (uVar2 & 0x4000000) << 1 |
@@ -307,7 +307,7 @@ int FUN_0005bf60(param_1, param_2, param_3)
     local_68 = 0x87dc;
     local_64 = 0;
     local_78 = uVar4;
-    FUN_00057340(param_2,piVar5,local_58,iVar9 + 0x2c,0);
+    extvsEncodeSourceSwizzle(param_2,piVar5,local_58,iVar9 + 0x2c,0);
     uVar4 = 3;
   }
   return uVar4;
@@ -348,7 +348,7 @@ int FUN_0005c600(param_1, param_2, param_3)
     piVar5 = param_2 + 7;
     iVar4 = param_3 + 0x20;
     iVar6 = param_3 + 0x3c;
-    iVar2 = FUN_00057af0(piVar5,iVar4,iVar6);
+    iVar2 = extvsOperandsConflictInBank(piVar5,iVar4,iVar6);
     if (iVar2 == 0) {
       iVar7 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
       iVar2 = *(int *)(iVar7 + 0x18);
@@ -369,25 +369,25 @@ int FUN_0005c600(param_1, param_2, param_3)
       iVar2 = iVar2 * 0x10;
       iVar7 = param_3 + 4;
       iVar9 = iVar2 + iVar8;
-      FUN_00056f20(param_1,param_2,iVar7,iVar9,1,0,0);
+      extvsEncodeSourceOperand(param_1,param_2,iVar7,iVar9,1,0,0);
       *(uint *)(iVar2 + iVar8) = *(uint *)(iVar2 + iVar8) & 0xff1fffff;
-      FUN_00057340(param_2,piVar5,iVar4,iVar9 + 4,0);
-      FUN_00057340(param_2,piVar5,iVar6,iVar9 + 8,0);
+      extvsEncodeSourceSwizzle(param_2,piVar5,iVar4,iVar9 + 4,0);
+      extvsEncodeSourceSwizzle(param_2,piVar5,iVar6,iVar9 + 8,0);
       *(undefined4 *)(iVar9 + 0xc) = *(undefined4 *)(iVar9 + 8);
-      FUN_00056f20(param_1,param_2,iVar7,iVar9 + 0x10,1,0,0);
+      extvsEncodeSourceOperand(param_1,param_2,iVar7,iVar9 + 0x10,1,0,0);
       *(uint *)(iVar9 + 0x10) = *(uint *)(iVar9 + 0x10) & 0xff2fffff;
-      FUN_00057340(param_2,piVar5,iVar4,iVar9 + 0x14,1);
-      FUN_00057340(param_2,piVar5,iVar6,iVar9 + 0x18,0);
+      extvsEncodeSourceSwizzle(param_2,piVar5,iVar4,iVar9 + 0x14,1);
+      extvsEncodeSourceSwizzle(param_2,piVar5,iVar6,iVar9 + 0x18,0);
       *(undefined4 *)(iVar9 + 0x1c) = *(undefined4 *)(iVar9 + 0x18);
-      FUN_00056f20(param_1,param_2,iVar7,iVar9 + 0x20,1,0,0);
+      extvsEncodeSourceOperand(param_1,param_2,iVar7,iVar9 + 0x20,1,0,0);
       *(uint *)(iVar9 + 0x20) = *(uint *)(iVar9 + 0x20) & 0xff4fffff;
-      FUN_00057340(param_2,piVar5,iVar4,iVar9 + 0x24,2);
-      FUN_00057340(param_2,piVar5,iVar6,iVar9 + 0x28,0);
+      extvsEncodeSourceSwizzle(param_2,piVar5,iVar4,iVar9 + 0x24,2);
+      extvsEncodeSourceSwizzle(param_2,piVar5,iVar6,iVar9 + 0x28,0);
       *(undefined4 *)(iVar9 + 0x2c) = *(undefined4 *)(iVar9 + 0x28);
-      FUN_00056f20(param_1,param_2,iVar7,iVar9 + 0x30,1,0,0);
+      extvsEncodeSourceOperand(param_1,param_2,iVar7,iVar9 + 0x30,1,0,0);
       *(uint *)(iVar9 + 0x30) = *(uint *)(iVar9 + 0x30) & 0xff8fffff;
-      FUN_00057340(param_2,piVar5,iVar4,iVar9 + 0x34,3);
-      FUN_00057340(param_2,piVar5,iVar6,iVar9 + 0x38,0);
+      extvsEncodeSourceSwizzle(param_2,piVar5,iVar4,iVar9 + 0x34,3);
+      extvsEncodeSourceSwizzle(param_2,piVar5,iVar6,iVar9 + 0x38,0);
       *(undefined4 *)(iVar9 + 0x3c) = *(undefined4 *)(iVar9 + 0x38);
       return 4;
     }
@@ -419,14 +419,14 @@ int FUN_0005c600(param_1, param_2, param_3)
   uStack_7c = 1;
   uStack_78 = 1;
   uStack_84 = uVar3;
-  FUN_00056f20(param_1,param_2,&uStack_88,iVar4,3,0,0);
-  FUN_00057340(param_2,piVar5,param_3 + 0x3c,iVar4 + 4,0);
+  extvsEncodeSourceOperand(param_1,param_2,&uStack_88,iVar4,3,0,0);
+  extvsEncodeSourceSwizzle(param_2,piVar5,param_3 + 0x3c,iVar4 + 4,0);
   uVar1 = *(uint *)(iVar4 + 4) & 0xfe001fff | 0x1248000;
   *(uint *)(iVar4 + 0xc) = uVar1;
   *(uint *)(iVar4 + 8) = uVar1;
-  FUN_00056f20(param_1,param_2,iVar7,iVar4 + 0x10,1,0,0);
+  extvsEncodeSourceOperand(param_1,param_2,iVar7,iVar4 + 0x10,1,0,0);
   *(uint *)(iVar4 + 0x10) = *(uint *)(iVar4 + 0x10) & 0xff1fffff;
-  FUN_00057340(param_2,piVar5,iVar2,iVar4 + 0x14,0);
+  extvsEncodeSourceSwizzle(param_2,piVar5,iVar2,iVar4 + 0x14,0);
   uStack_6c = 3;
   uStack_54 = 0;
   uStack_60 = 0x87d6;
@@ -434,22 +434,22 @@ int FUN_0005c600(param_1, param_2, param_3)
   uStack_5c = 0x87d7;
   uStack_58 = 0x87d8;
   uStack_68 = uVar3;
-  FUN_00057340(param_2,piVar5,&uStack_6c,iVar4 + 0x18,0);
+  extvsEncodeSourceSwizzle(param_2,piVar5,&uStack_6c,iVar4 + 0x18,0);
   *(undefined4 *)(iVar4 + 0x1c) = *(undefined4 *)(iVar4 + 0x18);
-  FUN_00056f20(param_1,param_2,iVar7,iVar4 + 0x20,1,0,0);
+  extvsEncodeSourceOperand(param_1,param_2,iVar7,iVar4 + 0x20,1,0,0);
   *(uint *)(iVar4 + 0x20) = *(uint *)(iVar4 + 0x20) & 0xff2fffff;
-  FUN_00057340(param_2,piVar5,iVar2,iVar4 + 0x24,1);
-  FUN_00057340(param_2,piVar5,&uStack_6c,iVar4 + 0x28,0);
+  extvsEncodeSourceSwizzle(param_2,piVar5,iVar2,iVar4 + 0x24,1);
+  extvsEncodeSourceSwizzle(param_2,piVar5,&uStack_6c,iVar4 + 0x28,0);
   *(undefined4 *)(iVar4 + 0x2c) = *(undefined4 *)(iVar4 + 0x28);
-  FUN_00056f20(param_1,param_2,iVar7,iVar4 + 0x30,1,0,0);
+  extvsEncodeSourceOperand(param_1,param_2,iVar7,iVar4 + 0x30,1,0,0);
   *(uint *)(iVar4 + 0x30) = *(uint *)(iVar4 + 0x30) & 0xff4fffff;
-  FUN_00057340(param_2,piVar5,iVar2,iVar4 + 0x34,2);
-  FUN_00057340(param_2,piVar5,&uStack_6c,iVar4 + 0x38,0);
+  extvsEncodeSourceSwizzle(param_2,piVar5,iVar2,iVar4 + 0x34,2);
+  extvsEncodeSourceSwizzle(param_2,piVar5,&uStack_6c,iVar4 + 0x38,0);
   *(undefined4 *)(iVar4 + 0x3c) = *(undefined4 *)(iVar4 + 0x38);
-  FUN_00056f20(param_1,param_2,iVar7,iVar4 + 0x40,1,0,0);
+  extvsEncodeSourceOperand(param_1,param_2,iVar7,iVar4 + 0x40,1,0,0);
   *(uint *)(iVar4 + 0x40) = *(uint *)(iVar4 + 0x40) & 0xff8fffff;
-  FUN_00057340(param_2,piVar5,iVar2,iVar4 + 0x44,3);
-  FUN_00057340(param_2,piVar5,&uStack_6c,iVar4 + 0x48,0);
+  extvsEncodeSourceSwizzle(param_2,piVar5,iVar2,iVar4 + 0x44,3);
+  extvsEncodeSourceSwizzle(param_2,piVar5,&uStack_6c,iVar4 + 0x48,0);
   *(undefined4 *)(iVar4 + 0x4c) = *(undefined4 *)(iVar4 + 0x48);
   return 5;
 }
@@ -481,8 +481,8 @@ int FUN_0005cc20(param_1, param_2, param_3)
     }
   }
   iVar3 = iVar3 * 0x10 + *(int *)(iVar4 + 0x1c);
-  FUN_00056f20(param_1,param_2,param_3 + 4,iVar3,3,0,0);
-  FUN_00057340(param_2,param_2 + 7,param_3 + 0x20,iVar3 + 4,0);
+  extvsEncodeSourceOperand(param_1,param_2,param_3 + 4,iVar3,3,0,0);
+  extvsEncodeSourceSwizzle(param_2,param_2 + 7,param_3 + 0x20,iVar3 + 4,0);
   uVar1 = *(uint *)(iVar3 + 4) & 0xfe001fff | 0x1248000;
   *(uint *)(iVar3 + 0xc) = uVar1;
   *(uint *)(iVar3 + 8) = uVar1;
@@ -517,8 +517,8 @@ int FUN_0005cd60(param_1, param_2, param_3)
     }
   }
   iVar4 = iVar4 * 0x10 + *(int *)(iVar5 + 0x1c);
-  FUN_00056f20(param_1,param_2,param_3 + 4,iVar4,3,0,0);
-  FUN_00057340(param_2,param_2 + 7,param_3 + 0x20,iVar4 + 4,0);
+  extvsEncodeSourceOperand(param_1,param_2,param_3 + 4,iVar4,3,0,0);
+  extvsEncodeSourceSwizzle(param_2,param_2 + 7,param_3 + 0x20,iVar4 + 4,0);
   switch(*(undefined4 *)(param_3 + 0x28)) {
   case 0x87d5:
   case 0x87d9:
@@ -752,7 +752,7 @@ int FUN_0005d2f0(param_1, param_2, param_3)
   iVar7 = *(int *)(iVar6 + 0x1c);
   iVar8 = iVar8 * 0x10;
   iVar6 = iVar8 + iVar7;
-  FUN_00056f20(param_1,param_2,param_3 + 4,iVar6,3,0,0);
+  extvsEncodeSourceOperand(param_1,param_2,param_3 + 4,iVar6,3,0,0);
   uVar3 = *(uint *)(iVar8 + iVar7);
   uVar4 = (*(uint *)(param_3 + 0xc) & 1) << 0x14;
   *(uint *)(iVar8 + iVar7) = uVar4 | uVar3 & 0xffefffff;
@@ -762,7 +762,7 @@ int FUN_0005d2f0(param_1, param_2, param_3)
   *(uint *)(iVar8 + iVar7) = uVar2 | uVar1 | uVar4 | uVar3 & 0xff8fffff;
   *(uint *)(iVar8 + iVar7) =
        (*(uint *)(param_3 + 0x18) & 1) << 0x17 | uVar2 | uVar1 | uVar4 | uVar3 & 0xff0fffff;
-  FUN_00057340(param_2,param_2 + 7,param_3 + 0x20,iVar6 + 4,0);
+  extvsEncodeSourceSwizzle(param_2,param_2 + 7,param_3 + 0x20,iVar6 + 4,0);
   uVar4 = *(uint *)(iVar6 + 4) & 0xfe001fff | 0x1248000;
   *(uint *)(iVar6 + 0xc) = uVar4;
   *(uint *)(iVar6 + 8) = uVar4;
@@ -801,13 +801,13 @@ int FUN_0005d470(param_1, param_2, param_3)
   iVar3 = extvsOperandDataType(param_2 + 7,iVar5);
   if (*(uint *)(param_3 + 0x40) < 4) {
     if (iVar3 == 0x87bf) {
-      FUN_00056f20(param_1,param_2,iVar5,iVar4,3,0,0);
+      extvsEncodeSourceOperand(param_1,param_2,iVar5,iVar4,3,0,0);
     }
     else {
       if (iVar3 != 0x87c0) goto LAB_0005d600;
-      FUN_00056f20(param_1,param_2,iVar5,iVar4,3,0,*(uint *)(param_3 + 0x40));
+      extvsEncodeSourceOperand(param_1,param_2,iVar5,iVar4,3,0,*(uint *)(param_3 + 0x40));
     }
-    FUN_00057340(param_2,param_2 + 7,param_3 + 0x20,iVar4 + 4,0);
+    extvsEncodeSourceSwizzle(param_2,param_2 + 7,param_3 + 0x20,iVar4 + 4,0);
     uVar2 = 1;
     uVar1 = *(uint *)(iVar4 + 4) & 0xfe001fff | 0x1248000;
     *(uint *)(iVar4 + 0xc) = uVar1;
@@ -854,9 +854,9 @@ int FUN_0005d620(param_1, param_2, param_3)
   iVar2 = extvsOperandDataType(piVar4,iVar3);
   uVar6 = *(uint *)(param_3 + 0x40);
   if (uVar6 < 4) {
-    FUN_00056f20(param_1,param_2,param_3 + 4,iVar5,3,0,0);
+    extvsEncodeSourceOperand(param_1,param_2,param_3 + 4,iVar5,3,0,0);
     if (iVar2 == 0x87bf) {
-      FUN_00057340(param_2,piVar4,iVar3,iVar5 + 4,0);
+      extvsEncodeSourceSwizzle(param_2,piVar4,iVar3,iVar5 + 4,0);
       if (uVar6 == 1) {
         uVar6 = *(uint *)(iVar5 + 4) >> 0x10 & 7;
         uVar6 = uVar6 << 0x16 | uVar6 << 0x13 | uVar6 << 0xd | *(uint *)(iVar5 + 4) & 0xfe071fff;
@@ -881,7 +881,7 @@ int FUN_0005d620(param_1, param_2, param_3)
     }
     else {
       if (iVar2 != 0x87c0) goto LAB_0005d850;
-      FUN_00057340(param_2,piVar4,iVar3,iVar5 + 4,uVar6);
+      extvsEncodeSourceSwizzle(param_2,piVar4,iVar3,iVar5 + 4,uVar6);
 LAB_0005d81c:
       uVar6 = *(uint *)(iVar5 + 4);
     }
@@ -924,8 +924,8 @@ int FUN_0005d870(param_1, param_2, param_3)
     }
   }
   iVar3 = iVar3 * 0x10 + *(int *)(iVar4 + 0x1c);
-  FUN_00056f20(param_1,param_2,param_3 + 4,iVar3,4,1,0);
-  FUN_00057340(param_2,param_2 + 7,param_3 + 0x20,iVar3 + 4,0);
+  extvsEncodeSourceOperand(param_1,param_2,param_3 + 4,iVar3,4,1,0);
+  extvsEncodeSourceSwizzle(param_2,param_2 + 7,param_3 + 0x20,iVar3 + 4,0);
   uVar1 = *(uint *)(iVar3 + 4);
   *(uint *)(iVar3 + 0xc) = uVar1;
   *(uint *)(iVar3 + 4) = (uVar1 & 0x4000000) << 2 | (uVar1 & 0x70000) << 6 | uVar1 & 0xee3fffff;
@@ -964,7 +964,7 @@ int FUN_0005d9c0(param_1, param_2, param_3)
   iVar5 = param_3 + 0x20;
   piVar6 = param_2 + 7;
   iVar4 = param_3 + 0x3c;
-  iVar2 = FUN_00057af0(piVar6,iVar5,iVar4);
+  iVar2 = extvsOperandsConflictInBank(piVar6,iVar5,iVar4);
   if (iVar2 == 0) {
     iVar2 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
     iVar7 = *(int *)(iVar2 + 0x18);
@@ -982,9 +982,9 @@ int FUN_0005d9c0(param_1, param_2, param_3)
       }
     }
     iVar2 = iVar7 * 0x10 + *(int *)(iVar2 + 0x1c);
-    FUN_00056f20(param_1,param_2,param_3 + 4,iVar2,5,0,0);
-    FUN_00057340(param_2,piVar6,iVar5,iVar2 + 4,0);
-    FUN_00057340(param_2,piVar6,iVar4,iVar2 + 8,0);
+    extvsEncodeSourceOperand(param_1,param_2,param_3 + 4,iVar2,5,0,0);
+    extvsEncodeSourceSwizzle(param_2,piVar6,iVar5,iVar2 + 4,0);
+    extvsEncodeSourceSwizzle(param_2,piVar6,iVar4,iVar2 + 8,0);
     uVar3 = 1;
     *(undefined4 *)(iVar2 + 0xc) = *(undefined4 *)(iVar2 + 8);
   }
@@ -1013,12 +1013,12 @@ int FUN_0005d9c0(param_1, param_2, param_3)
     local_6c = 1;
     local_68 = 1;
     local_74 = uVar3;
-    FUN_00056f20(param_1,param_2,&local_78,iVar2,3,0,0);
-    FUN_00057340(param_2,piVar6,iVar5,iVar2 + 4,0);
+    extvsEncodeSourceOperand(param_1,param_2,&local_78,iVar2,3,0,0);
+    extvsEncodeSourceSwizzle(param_2,piVar6,iVar5,iVar2 + 4,0);
     uVar1 = *(uint *)(iVar2 + 4) & 0xfe001fff | 0x1248000;
     *(uint *)(iVar2 + 0xc) = uVar1;
     *(uint *)(iVar2 + 8) = uVar1;
-    FUN_00056f20(param_1,param_2,param_3 + 4,iVar2 + 0x10,5,0,0);
+    extvsEncodeSourceOperand(param_1,param_2,param_3 + 4,iVar2 + 0x10,5,0,0);
     local_5c = 3;
     local_44 = 0;
     local_54 = 0x87d5;
@@ -1026,8 +1026,8 @@ int FUN_0005d9c0(param_1, param_2, param_3)
     local_4c = 0x87d7;
     local_48 = 0x87d8;
     local_58 = uVar3;
-    FUN_00057340(param_2,piVar6,&local_5c,iVar2 + 0x14,0);
-    FUN_00057340(param_2,piVar6,iVar4,iVar2 + 0x18,0);
+    extvsEncodeSourceSwizzle(param_2,piVar6,&local_5c,iVar2 + 0x14,0);
+    extvsEncodeSourceSwizzle(param_2,piVar6,iVar4,iVar2 + 0x18,0);
     uVar3 = 2;
     *(undefined4 *)(iVar2 + 0x1c) = *(undefined4 *)(iVar2 + 0x18);
   }
@@ -1061,8 +1061,8 @@ int FUN_0005dd00(param_1, param_2, param_3)
     }
   }
   iVar3 = iVar3 * 0x10 + *(int *)(iVar4 + 0x1c);
-  FUN_00056f20(param_1,param_2,param_3 + 4,iVar3,1,1,0);
-  FUN_00057340(param_2,param_2 + 7,param_3 + 0x20,iVar3 + 4,0);
+  extvsEncodeSourceOperand(param_1,param_2,param_3 + 4,iVar3,1,1,0);
+  extvsEncodeSourceSwizzle(param_2,param_2 + 7,param_3 + 0x20,iVar3 + 4,0);
   uVar2 = *(uint *)(iVar3 + 4);
   uVar2 = (uVar2 & 0x2000000) << 3 | (uVar2 & 0xe000) << 9 | uVar2 & 0xee3fffff;
   *(uint *)(iVar3 + 0xc) = uVar2;
@@ -1098,8 +1098,8 @@ int FUN_0005de50(param_1, param_2, param_3)
     }
   }
   iVar3 = iVar3 * 0x10 + *(int *)(iVar4 + 0x1c);
-  FUN_00056f20(param_1,param_2,param_3 + 4,iVar3,2,1,0);
-  FUN_00057340(param_2,param_2 + 7,param_3 + 0x20,iVar3 + 4,0);
+  extvsEncodeSourceOperand(param_1,param_2,param_3 + 4,iVar3,2,1,0);
+  extvsEncodeSourceSwizzle(param_2,param_2 + 7,param_3 + 0x20,iVar3 + 4,0);
   uVar2 = *(uint *)(iVar3 + 4);
   uVar2 = (uVar2 & 0x2000000) << 3 | (uVar2 & 0xe000) << 9 | uVar2 & 0xee3fffff;
   *(uint *)(iVar3 + 0xc) = uVar2;
@@ -1134,8 +1134,8 @@ int FUN_0005dfa0(param_1, param_2, param_3)
     }
   }
   iVar2 = iVar2 * 0x10 + *(int *)(iVar3 + 0x1c);
-  FUN_00056f20(param_1,param_2,param_3 + 4,iVar2,0xd,0,0);
-  FUN_00057340(param_2,param_2 + 7,param_3 + 0x20,iVar2 + 4,0);
+  extvsEncodeSourceOperand(param_1,param_2,param_3 + 4,iVar2,0xd,0,0);
+  extvsEncodeSourceSwizzle(param_2,param_2 + 7,param_3 + 0x20,iVar2 + 4,0);
   *(undefined4 *)(iVar2 + 0xc) = *(undefined4 *)(iVar2 + 4);
   *(undefined4 *)(iVar2 + 8) = *(undefined4 *)(iVar2 + 4);
   return 1;
@@ -1207,25 +1207,25 @@ int FUN_0005e0d0(param_1, param_2, param_3)
     iVar5 = iVar6 * 0x10 + *(int *)(iVar5 + 0x1c);
     local_a0 = 1;
     piVar4 = param_2 + 7;
-    FUN_00056f20(param_1,param_2,&local_a8,iVar5,2,0,0);
+    extvsEncodeSourceOperand(param_1,param_2,&local_a8,iVar5,2,0,0);
     local_8c = 3;
     local_74 = 0;
     local_78 = 0x87d5;
     local_84 = 0x87d5;
     local_80 = 0x87d5;
     local_7c = 0x87d5;
-    FUN_00057340(param_2,piVar4,&local_8c,iVar5 + 4,0);
-    FUN_00057340(param_2,piVar4,&local_8c,iVar5 + 8,0);
+    extvsEncodeSourceSwizzle(param_2,piVar4,&local_8c,iVar5 + 4,0);
+    extvsEncodeSourceSwizzle(param_2,piVar4,&local_8c,iVar5 + 8,0);
     *(undefined4 *)(iVar5 + 0xc) = *(undefined4 *)(iVar5 + 8);
-    FUN_00056f20(param_1,param_2,&local_a8,iVar5 + 0x10,2,0,0);
-    FUN_00057340(param_2,piVar4,&local_8c,iVar5 + 0x14,0);
+    extvsEncodeSourceOperand(param_1,param_2,&local_a8,iVar5 + 0x10,2,0,0);
+    extvsEncodeSourceSwizzle(param_2,piVar4,&local_8c,iVar5 + 0x14,0);
     local_58 = 0;
     local_70 = 4;
     local_5c = 0x87d7;
     local_68 = 0x87d7;
     local_64 = 0x87d7;
     local_60 = 0x87d7;
-    FUN_00057340(param_2,piVar4,&local_70,iVar5 + 0x18,0);
+    extvsEncodeSourceSwizzle(param_2,piVar4,&local_70,iVar5 + 0x18,0);
     *(undefined4 *)(iVar5 + 0x1c) = *(undefined4 *)(iVar5 + 0x18);
     local_a8 = 1;
     local_a4 = 0x87bd;
@@ -1234,8 +1234,8 @@ int FUN_0005e0d0(param_1, param_2, param_3)
     local_98 = 0;
     local_94 = (uint)*(byte *)(iVar3 + 0x42);
     local_90 = 0;
-    FUN_00056f20(param_1,param_2,&local_a8,iVar5 + 0x20,3,1,0);
-    FUN_00057340(param_2,piVar4,&local_8c,iVar5 + 0x24,0);
+    extvsEncodeSourceOperand(param_1,param_2,&local_a8,iVar5 + 0x20,3,1,0);
+    extvsEncodeSourceSwizzle(param_2,piVar4,&local_8c,iVar5 + 0x24,0);
     uVar2 = 3;
     *(undefined4 *)(iVar5 + 0x2c) = *(undefined4 *)(iVar5 + 0x24);
     *(undefined4 *)(iVar5 + 0x28) = *(undefined4 *)(iVar5 + 0x24);
@@ -1264,21 +1264,21 @@ int FUN_0005e0d0(param_1, param_2, param_3)
     iVar5 = iVar6 * 0x10 + *(int *)(iVar5 + 0x1c);
     local_94 = (uint)*(byte *)(iVar3 + 0x42);
     local_90 = 0;
-    FUN_00056f20(param_1,param_2,&local_a8,iVar5,1,0,0);
+    extvsEncodeSourceOperand(param_1,param_2,&local_a8,iVar5,1,0,0);
     local_84 = 0x87dd;
     local_78 = 0x87dd;
     local_74 = 0;
     local_80 = 0x87de;
     local_8c = 3;
     local_7c = 0x87d5;
-    FUN_00057340(param_2,param_2 + 7,&local_8c,iVar5 + 4,0);
+    extvsEncodeSourceSwizzle(param_2,param_2 + 7,&local_8c,iVar5 + 4,0);
     local_5c = 0x87dd;
     local_58 = 0;
     local_68 = 0x87dd;
     local_64 = 0x87d6;
     local_60 = 0x87d7;
     local_70 = 4;
-    FUN_00057340(param_2,param_2 + 7,&local_70,iVar5 + 8,0);
+    extvsEncodeSourceSwizzle(param_2,param_2 + 7,&local_70,iVar5 + 8,0);
     uVar2 = 1;
     *(undefined4 *)(iVar5 + 0xc) = *(undefined4 *)(iVar5 + 8);
   }
@@ -1308,21 +1308,21 @@ int FUN_0005e0d0(param_1, param_2, param_3)
       iVar5 = iVar6 * 0x10 + *(int *)(iVar5 + 0x1c);
       local_a0 = 1;
       piVar4 = param_2 + 7;
-      FUN_00056f20(param_1,param_2,&local_a8,iVar5,2,0,0);
+      extvsEncodeSourceOperand(param_1,param_2,&local_a8,iVar5,2,0,0);
       local_8c = 3;
       local_74 = 0;
       local_78 = 0x87d5;
       local_84 = 0x87d5;
       local_80 = 0x87d5;
       local_7c = 0x87d5;
-      FUN_00057340(param_2,piVar4,&local_8c,iVar5 + 4,0);
+      extvsEncodeSourceSwizzle(param_2,piVar4,&local_8c,iVar5 + 4,0);
       local_58 = 0;
       local_70 = 4;
       local_5c = 0x87d7;
       local_68 = 0x87d7;
       local_64 = 0x87d7;
       local_60 = 0x87d7;
-      FUN_00057340(param_2,piVar4,&local_70,iVar5 + 8,0);
+      extvsEncodeSourceSwizzle(param_2,piVar4,&local_70,iVar5 + 8,0);
       *(undefined4 *)(iVar5 + 0xc) = *(undefined4 *)(iVar5 + 8);
       local_a8 = 1;
       local_a4 = 0x87bd;
@@ -1331,8 +1331,8 @@ int FUN_0005e0d0(param_1, param_2, param_3)
       local_98 = 0;
       local_94 = (uint)*(byte *)(iVar3 + 0x42);
       local_90 = 0;
-      FUN_00056f20(param_1,param_2,&local_a8,iVar5 + 0x10,3,1,0);
-      FUN_00057340(param_2,piVar4,&local_8c,iVar5 + 0x14,0);
+      extvsEncodeSourceOperand(param_1,param_2,&local_a8,iVar5 + 0x10,3,1,0);
+      extvsEncodeSourceSwizzle(param_2,piVar4,&local_8c,iVar5 + 0x14,0);
       uVar2 = 2;
       *(undefined4 *)(iVar5 + 0x1c) = *(undefined4 *)(iVar5 + 0x14);
       *(undefined4 *)(iVar5 + 0x18) = *(undefined4 *)(iVar5 + 0x14);
@@ -1341,45 +1341,45 @@ int FUN_0005e0d0(param_1, param_2, param_3)
   return uVar2;
 }
 
-/* FUN_0005e770 @ 0x5e770 (108 bytes) */
-int FUN_0005e770(param_1)
-  int param_1;
+/* popFirstNonNull32 @ 0x5e770 (108 bytes) */
+int popFirstNonNull32(pointerArray)
+  int pointerArray;
 {
-  uint loopIndex;
+  uint position;
   int iVar2;
   undefined4 *puVar3;
-  int iVar4;
+  int entry;
   uint uVar5;
   
-  loopIndex = 0;
+  position = 0;
   while( true ) {
-    iVar4 = *(int *)(param_1 + loopIndex * 4);
-    if ((iVar4 != 0) && (uVar5 = loopIndex + 1, uVar5 < 0x20)) {
+    entry = *(int *)(pointerArray + position * 4);
+    if ((entry != 0) && (uVar5 = position + 1, uVar5 < 0x20)) {
       iVar2 = 0x20 - uVar5;
-      puVar3 = (undefined4 *)(param_1 + uVar5 * 4);
+      puVar3 = (undefined4 *)(pointerArray + uVar5 * 4);
       do {
         puVar3[-1] = *puVar3;
         puVar3 = puVar3 + 1;
         iVar2 = iVar2 + -1;
       } while (iVar2 != 0);
     }
-    loopIndex = loopIndex + 1;
-    if (0x1f < loopIndex) break;
-    if (iVar4 != 0) {
-      return iVar4;
+    position = position + 1;
+    if (0x1f < position) break;
+    if (entry != 0) {
+      return entry;
     }
   }
-  return iVar4;
+  return entry;
 }
 
-/* FUN_0005e7f0 @ 0x5e7f0 (3156 bytes) */
-int FUN_0005e7f0(param_1, param_2)
-  int param_1;
-  int *param_2;
+/* extvsAssignVertexInputs @ 0x5e7f0 (3156 bytes) */
+int extvsAssignVertexInputs(ctx, shader)
+  int ctx;
+  int *shader;
 {
-  uint loopIndex3;
-  int loopIndex2;
-  int loopIndex;
+  uint instIndex;
+  int scalarVariantCount;
+  int matrixVariantCount;
   bool bVar1;
   bool bVar2;
   undefined4 uVar3;
@@ -1389,323 +1389,323 @@ int FUN_0005e7f0(param_1, param_2)
   int iVar7;
   uint uVar8;
   int iVar9;
-  int iVar10;
-  int iVar11;
+  int vectorVariantCount;
+  int programState;
   undefined4 *puVar12;
   uint uVar13;
   uint uVar14;
   int iVar15;
   int iVar16;
   int iVar17;
-  int local_248 [32];
-  int local_1c8 [32];
-  int local_148 [32];
-  int local_c8 [34];
+  int boundVariants [32];
+  int scalarVariants [32];
+  int vectorVariants [32];
+  int matrixVariants [34];
   
   iVar7 = 0;
   iVar15 = 0x20;
-  iVar11 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-  *(undefined4 *)(iVar11 + 0x234) = 1;
+  programState = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+  *(undefined4 *)(programState + 0x234) = 1;
   do {
-    *(undefined4 *)((int)local_248 + iVar7) = 0;
-    *(undefined4 *)(iVar7 + (int)local_1c8) = 0;
-    *(undefined4 *)(iVar7 + (int)local_148) = 0;
-    *(undefined4 *)(iVar7 + (int)local_c8) = 0;
+    *(undefined4 *)((int)boundVariants + iVar7) = 0;
+    *(undefined4 *)(iVar7 + (int)scalarVariants) = 0;
+    *(undefined4 *)(iVar7 + (int)vectorVariants) = 0;
+    *(undefined4 *)(iVar7 + (int)matrixVariants) = 0;
     iVar7 = iVar7 + 4;
     iVar15 = iVar15 + -1;
   } while (iVar15 != 0);
-  if (param_2[5] == 0) {
-    loopIndex2 = 0;
-    iVar10 = 0;
-    loopIndex = 0;
+  if (shader[5] == 0) {
+    scalarVariantCount = 0;
+    vectorVariantCount = 0;
+    matrixVariantCount = 0;
   }
   else {
     iVar7 = 0;
-    loopIndex3 = 0;
-    loopIndex2 = 0;
-    iVar10 = 0;
-    loopIndex = 0;
+    instIndex = 0;
+    scalarVariantCount = 0;
+    vectorVariantCount = 0;
+    matrixVariantCount = 0;
     do {
-      iVar5 = loopIndex3 * 0x74;
-      iVar17 = param_2[6];
+      iVar5 = instIndex * 0x74;
+      iVar17 = shader[6];
       iVar16 = iVar7;
       if (((*(int *)(iVar5 + iVar17 + 0x20) == 2) &&
-          (iVar4 = *(int *)(iVar5 + iVar17 + 0x24) * 0x54 + param_2[8],
+          (iVar4 = *(int *)(iVar5 + iVar17 + 0x24) * 0x54 + shader[8],
           *(int *)(iVar4 + 0x28) == 0x87c1)) && (*(char *)(iVar4 + 0x3d) == '\0')) {
         if ((*(char *)(iVar4 + 0x44) == '\0') || (*(int *)(iVar4 + 0x48) == 0x12)) {
           iVar7 = *(int *)(iVar4 + 0x24);
           if (iVar7 == 0x87bf) {
-            local_148[iVar10] = iVar4;
-            iVar10 = iVar10 + 1;
+            vectorVariants[vectorVariantCount] = iVar4;
+            vectorVariantCount = vectorVariantCount + 1;
           }
           else if (iVar7 == 0x87c0) {
-            local_c8[loopIndex] = iVar4;
-            loopIndex = loopIndex + 1;
+            matrixVariants[matrixVariantCount] = iVar4;
+            matrixVariantCount = matrixVariantCount + 1;
           }
           else if (iVar7 == 0x87be) {
-            local_1c8[loopIndex2] = iVar4;
-            loopIndex2 = loopIndex2 + 1;
+            scalarVariants[scalarVariantCount] = iVar4;
+            scalarVariantCount = scalarVariantCount + 1;
           }
         }
         else {
           iVar16 = iVar7 + 1;
-          local_248[iVar7] = iVar4;
+          boundVariants[iVar7] = iVar4;
           switch(*(undefined4 *)(iVar4 + 0x48)) {
           case 0:
-            *(undefined1 *)(iVar11 + 0x2c) = 1;
+            *(undefined1 *)(programState + 0x2c) = 1;
             break;
           case 1:
-            *(undefined1 *)(iVar11 + 0x2d) = 1;
-            param_2[0xc] = param_2[0xc] | 8;
+            *(undefined1 *)(programState + 0x2d) = 1;
+            shader[0xc] = shader[0xc] | 8;
             break;
           case 2:
             iVar7 = *(int *)(iVar4 + 0x4c);
-            *(undefined1 *)(iVar7 + iVar11 + 0x2e) = 1;
-            *(undefined1 *)((int)param_2 + iVar7 + 0x34) = 1;
-            param_2[0xc] = param_2[0xc] | 4;
+            *(undefined1 *)(iVar7 + programState + 0x2e) = 1;
+            *(undefined1 *)((int)shader + iVar7 + 0x34) = 1;
+            shader[0xc] = shader[0xc] | 4;
             break;
           case 3:
-            *(undefined1 *)(iVar11 + 0x36) = 1;
-            param_2[0xc] = param_2[0xc] | 1;
+            *(undefined1 *)(programState + 0x36) = 1;
+            shader[0xc] = shader[0xc] | 1;
             break;
           case 4:
-            *(undefined1 *)(iVar11 + 0x37) = 1;
+            *(undefined1 *)(programState + 0x37) = 1;
             break;
           case 5:
-            *(undefined1 *)(iVar11 + 0x38) = 1;
+            *(undefined1 *)(programState + 0x38) = 1;
             break;
           case 6:
-            *(undefined1 *)(iVar11 + 0x39) = 1;
+            *(undefined1 *)(programState + 0x39) = 1;
             break;
           case 7:
-            *(undefined1 *)(iVar11 + 0x36) = 1;
+            *(undefined1 *)(programState + 0x36) = 1;
             break;
           case 8:
-            *(undefined1 *)(iVar11 + 0x3b) = 1;
+            *(undefined1 *)(programState + 0x3b) = 1;
             break;
           case 9:
-            *(undefined1 *)(iVar11 + 0x3c) = 1;
+            *(undefined1 *)(programState + 0x3c) = 1;
             break;
           case 10:
-            *(undefined1 *)(iVar11 + 0x3d) = 1;
+            *(undefined1 *)(programState + 0x3d) = 1;
             break;
           case 0xb:
-            *(undefined1 *)(iVar11 + 0x3a) = 1;
+            *(undefined1 *)(programState + 0x3a) = 1;
             break;
           case 0xc:
-            *(undefined1 *)(iVar11 + 0x40) = 1;
+            *(undefined1 *)(programState + 0x40) = 1;
             break;
           case 0xd:
-            *(undefined1 *)(iVar11 + 0x41) = 1;
+            *(undefined1 *)(programState + 0x41) = 1;
             break;
           case 0xe:
-            *(undefined1 *)(iVar11 + 0x37) = 1;
-            param_2[0xc] = param_2[0xc] | 2;
+            *(undefined1 *)(programState + 0x37) = 1;
+            shader[0xc] = shader[0xc] | 2;
             break;
           case 0xf:
-            *(undefined1 *)(iVar11 + 0x3e) = 1;
-            param_2[0xc] = param_2[0xc] | 0x40;
+            *(undefined1 *)(programState + 0x3e) = 1;
+            shader[0xc] = shader[0xc] | 0x40;
             break;
           case 0x10:
-            *(undefined1 *)(iVar11 + 0x3f) = 1;
-            param_2[0xc] = param_2[0xc] | 0x80;
+            *(undefined1 *)(programState + 0x3f) = 1;
+            shader[0xc] = shader[0xc] | 0x80;
           }
         }
         *(undefined1 *)(iVar4 + 0x3d) = 1;
-        iVar17 = param_2[6];
-        param_2[0x16] = param_2[0x16] + 1;
+        iVar17 = shader[6];
+        shader[0x16] = shader[0x16] + 1;
       }
       iVar4 = iVar16;
       if (((*(int *)(iVar5 + iVar17 + 0x3c) == 2) &&
-          (iVar7 = *(int *)(iVar5 + iVar17 + 0x40) * 0x54 + param_2[8],
+          (iVar7 = *(int *)(iVar5 + iVar17 + 0x40) * 0x54 + shader[8],
           *(int *)(iVar7 + 0x28) == 0x87c1)) && (*(char *)(iVar7 + 0x3d) == '\0')) {
         if ((*(char *)(iVar7 + 0x44) == '\0') || (*(int *)(iVar7 + 0x48) == 0x12)) {
           iVar16 = *(int *)(iVar7 + 0x24);
           if (iVar16 == 0x87bf) {
-            local_148[iVar10] = iVar7;
-            iVar10 = iVar10 + 1;
+            vectorVariants[vectorVariantCount] = iVar7;
+            vectorVariantCount = vectorVariantCount + 1;
           }
           else if (iVar16 == 0x87c0) {
-            local_c8[loopIndex] = iVar7;
-            loopIndex = loopIndex + 1;
+            matrixVariants[matrixVariantCount] = iVar7;
+            matrixVariantCount = matrixVariantCount + 1;
           }
           else if (iVar16 == 0x87be) {
-            local_1c8[loopIndex2] = iVar7;
-            loopIndex2 = loopIndex2 + 1;
+            scalarVariants[scalarVariantCount] = iVar7;
+            scalarVariantCount = scalarVariantCount + 1;
           }
         }
         else {
           iVar4 = iVar16 + 1;
-          local_248[iVar16] = iVar7;
+          boundVariants[iVar16] = iVar7;
           switch(*(undefined4 *)(iVar7 + 0x48)) {
           case 0:
-            *(undefined1 *)(iVar11 + 0x2c) = 1;
+            *(undefined1 *)(programState + 0x2c) = 1;
             break;
           case 1:
-            *(undefined1 *)(iVar11 + 0x2d) = 1;
-            param_2[0xc] = param_2[0xc] | 8;
+            *(undefined1 *)(programState + 0x2d) = 1;
+            shader[0xc] = shader[0xc] | 8;
             break;
           case 2:
             iVar16 = *(int *)(iVar7 + 0x4c);
-            *(undefined1 *)(iVar16 + iVar11 + 0x2e) = 1;
-            *(undefined1 *)((int)param_2 + iVar16 + 0x34) = 1;
-            param_2[0xc] = param_2[0xc] | 4;
+            *(undefined1 *)(iVar16 + programState + 0x2e) = 1;
+            *(undefined1 *)((int)shader + iVar16 + 0x34) = 1;
+            shader[0xc] = shader[0xc] | 4;
             break;
           case 3:
-            *(undefined1 *)(iVar11 + 0x36) = 1;
-            param_2[0xc] = param_2[0xc] | 1;
+            *(undefined1 *)(programState + 0x36) = 1;
+            shader[0xc] = shader[0xc] | 1;
             break;
           case 4:
-            *(undefined1 *)(iVar11 + 0x37) = 1;
+            *(undefined1 *)(programState + 0x37) = 1;
             break;
           case 5:
-            *(undefined1 *)(iVar11 + 0x38) = 1;
+            *(undefined1 *)(programState + 0x38) = 1;
             break;
           case 6:
-            *(undefined1 *)(iVar11 + 0x39) = 1;
+            *(undefined1 *)(programState + 0x39) = 1;
             break;
           case 7:
-            *(undefined1 *)(iVar11 + 0x36) = 1;
+            *(undefined1 *)(programState + 0x36) = 1;
             break;
           case 8:
-            *(undefined1 *)(iVar11 + 0x3b) = 1;
+            *(undefined1 *)(programState + 0x3b) = 1;
             break;
           case 9:
-            *(undefined1 *)(iVar11 + 0x3c) = 1;
+            *(undefined1 *)(programState + 0x3c) = 1;
             break;
           case 10:
-            *(undefined1 *)(iVar11 + 0x3d) = 1;
+            *(undefined1 *)(programState + 0x3d) = 1;
             break;
           case 0xb:
-            *(undefined1 *)(iVar11 + 0x3a) = 1;
+            *(undefined1 *)(programState + 0x3a) = 1;
             break;
           case 0xc:
-            *(undefined1 *)(iVar11 + 0x40) = 1;
+            *(undefined1 *)(programState + 0x40) = 1;
             break;
           case 0xd:
-            *(undefined1 *)(iVar11 + 0x41) = 1;
+            *(undefined1 *)(programState + 0x41) = 1;
             break;
           case 0xe:
-            *(undefined1 *)(iVar11 + 0x37) = 1;
-            param_2[0xc] = param_2[0xc] | 2;
+            *(undefined1 *)(programState + 0x37) = 1;
+            shader[0xc] = shader[0xc] | 2;
             break;
           case 0xf:
-            *(undefined1 *)(iVar11 + 0x3e) = 1;
-            param_2[0xc] = param_2[0xc] | 0x40;
+            *(undefined1 *)(programState + 0x3e) = 1;
+            shader[0xc] = shader[0xc] | 0x40;
             break;
           case 0x10:
-            *(undefined1 *)(iVar11 + 0x3f) = 1;
-            param_2[0xc] = param_2[0xc] | 0x80;
+            *(undefined1 *)(programState + 0x3f) = 1;
+            shader[0xc] = shader[0xc] | 0x80;
           }
         }
         *(undefined1 *)(iVar7 + 0x3d) = 1;
-        iVar17 = param_2[6];
-        param_2[0x16] = param_2[0x16] + 1;
+        iVar17 = shader[6];
+        shader[0x16] = shader[0x16] + 1;
       }
       iVar7 = iVar4;
       if (((*(int *)(iVar5 + iVar17 + 0x58) == 2) &&
-          (iVar16 = *(int *)(iVar5 + iVar17 + 0x5c) * 0x54 + param_2[8],
+          (iVar16 = *(int *)(iVar5 + iVar17 + 0x5c) * 0x54 + shader[8],
           *(int *)(iVar16 + 0x28) == 0x87c1)) && (*(char *)(iVar16 + 0x3d) == '\0')) {
         if ((*(char *)(iVar16 + 0x44) == '\0') || (*(int *)(iVar16 + 0x48) == 0x12)) {
           iVar5 = *(int *)(iVar16 + 0x24);
           if (iVar5 == 0x87bf) {
-            local_148[iVar10] = iVar16;
-            iVar10 = iVar10 + 1;
+            vectorVariants[vectorVariantCount] = iVar16;
+            vectorVariantCount = vectorVariantCount + 1;
           }
           else if (iVar5 == 0x87c0) {
-            local_c8[loopIndex] = iVar16;
-            loopIndex = loopIndex + 1;
+            matrixVariants[matrixVariantCount] = iVar16;
+            matrixVariantCount = matrixVariantCount + 1;
           }
           else if (iVar5 == 0x87be) {
-            local_1c8[loopIndex2] = iVar16;
-            loopIndex2 = loopIndex2 + 1;
+            scalarVariants[scalarVariantCount] = iVar16;
+            scalarVariantCount = scalarVariantCount + 1;
           }
         }
         else {
           iVar7 = iVar4 + 1;
-          local_248[iVar4] = iVar16;
+          boundVariants[iVar4] = iVar16;
           switch(*(undefined4 *)(iVar16 + 0x48)) {
           case 0:
-            *(undefined1 *)(iVar11 + 0x2c) = 1;
+            *(undefined1 *)(programState + 0x2c) = 1;
             break;
           case 1:
-            *(undefined1 *)(iVar11 + 0x2d) = 1;
-            param_2[0xc] = param_2[0xc] | 8;
+            *(undefined1 *)(programState + 0x2d) = 1;
+            shader[0xc] = shader[0xc] | 8;
             break;
           case 2:
             iVar5 = *(int *)(iVar16 + 0x4c);
-            *(undefined1 *)(iVar5 + iVar11 + 0x2e) = 1;
-            *(undefined1 *)((int)param_2 + iVar5 + 0x34) = 1;
-            param_2[0xc] = param_2[0xc] | 4;
+            *(undefined1 *)(iVar5 + programState + 0x2e) = 1;
+            *(undefined1 *)((int)shader + iVar5 + 0x34) = 1;
+            shader[0xc] = shader[0xc] | 4;
             break;
           case 3:
-            *(undefined1 *)(iVar11 + 0x36) = 1;
-            param_2[0xc] = param_2[0xc] | 1;
+            *(undefined1 *)(programState + 0x36) = 1;
+            shader[0xc] = shader[0xc] | 1;
             break;
           case 4:
-            *(undefined1 *)(iVar11 + 0x37) = 1;
+            *(undefined1 *)(programState + 0x37) = 1;
             break;
           case 5:
-            *(undefined1 *)(iVar11 + 0x38) = 1;
+            *(undefined1 *)(programState + 0x38) = 1;
             break;
           case 6:
-            *(undefined1 *)(iVar11 + 0x39) = 1;
+            *(undefined1 *)(programState + 0x39) = 1;
             break;
           case 7:
-            *(undefined1 *)(iVar11 + 0x36) = 1;
+            *(undefined1 *)(programState + 0x36) = 1;
             break;
           case 8:
-            *(undefined1 *)(iVar11 + 0x3b) = 1;
+            *(undefined1 *)(programState + 0x3b) = 1;
             break;
           case 9:
-            *(undefined1 *)(iVar11 + 0x3c) = 1;
+            *(undefined1 *)(programState + 0x3c) = 1;
             break;
           case 10:
-            *(undefined1 *)(iVar11 + 0x3d) = 1;
+            *(undefined1 *)(programState + 0x3d) = 1;
             break;
           case 0xb:
-            *(undefined1 *)(iVar11 + 0x3a) = 1;
+            *(undefined1 *)(programState + 0x3a) = 1;
             break;
           case 0xc:
-            *(undefined1 *)(iVar11 + 0x40) = 1;
+            *(undefined1 *)(programState + 0x40) = 1;
             break;
           case 0xd:
-            *(undefined1 *)(iVar11 + 0x41) = 1;
+            *(undefined1 *)(programState + 0x41) = 1;
             break;
           case 0xe:
-            *(undefined1 *)(iVar11 + 0x37) = 1;
-            param_2[0xc] = param_2[0xc] | 2;
+            *(undefined1 *)(programState + 0x37) = 1;
+            shader[0xc] = shader[0xc] | 2;
             break;
           case 0xf:
-            *(undefined1 *)(iVar11 + 0x3e) = 1;
-            param_2[0xc] = param_2[0xc] | 0x40;
+            *(undefined1 *)(programState + 0x3e) = 1;
+            shader[0xc] = shader[0xc] | 0x40;
             break;
           case 0x10:
-            *(undefined1 *)(iVar11 + 0x3f) = 1;
-            param_2[0xc] = param_2[0xc] | 0x80;
+            *(undefined1 *)(programState + 0x3f) = 1;
+            shader[0xc] = shader[0xc] | 0x80;
           }
         }
         *(undefined1 *)(iVar16 + 0x3d) = 1;
-        param_2[0x16] = param_2[0x16] + 1;
+        shader[0x16] = shader[0x16] + 1;
       }
-      loopIndex3 = loopIndex3 + 1;
-    } while (loopIndex3 < (uint)param_2[5]);
+      instIndex = instIndex + 1;
+    } while (instIndex < (uint)shader[5]);
   }
-  if (*(char *)(iVar11 + 0x2c) != '\0') {
+  if (*(char *)(programState + 0x2c) != '\0') {
     iVar7 = 0;
     iVar16 = 0x20;
     do {
-      iVar5 = *(int *)((int)local_248 + iVar7);
+      iVar5 = *(int *)((int)boundVariants + iVar7);
       if (((iVar5 == 0) || (*(int *)(iVar5 + 0x48) != 0)) || (*(int *)(iVar5 + 0x4c) != 0)) {
         iVar5 = 0;
       }
       iVar16 = iVar16 + -1;
     } while ((iVar16 != 0) && (iVar7 = iVar7 + 4, iVar5 == 0));
     *(undefined4 *)(iVar5 + 4) = 0;
-    *(undefined4 *)(iVar11 + 0x198) = 0;
-    *(undefined1 *)(*(int *)(iVar11 + 0x24) + 0x10) = 1;
+    *(undefined4 *)(programState + 0x198) = 0;
+    *(undefined1 *)(*(int *)(programState + 0x24) + 0x10) = 1;
   }
-  bVar1 = iVar10 == 0;
+  bVar1 = vectorVariantCount == 0;
   uVar14 = 2;
   uVar13 = 0;
   DAT_001dba98 = 0xe;
@@ -1713,18 +1713,18 @@ int FUN_0005e7f0(param_1, param_2)
   puVar12 = &DAT_001dba44;
   do {
     if (!bVar1) {
-      iVar10 = iVar10 + -1;
-      puVar6 = (undefined4 *)((int (*)())FUN_0005e770)(local_148);
+      vectorVariantCount = vectorVariantCount + -1;
+      puVar6 = (undefined4 *)((int (*)())popFirstNonNull32)(vectorVariants);
       uVar3 = *puVar12;
-      bVar1 = iVar10 == 0;
+      bVar1 = vectorVariantCount == 0;
       puVar6[1] = uVar14;
       puVar12 = puVar12 + 1;
       uVar14 = uVar14 + 1;
       *puVar6 = uVar3;
-      iVar16 = iVar7 + *(int *)(iVar11 + 0x24);
+      iVar16 = iVar7 + *(int *)(programState + 0x24);
       iVar7 = iVar7 + 0x28;
       *(undefined1 *)(iVar16 + 0x10) = 1;
-      *(uint *)(iVar11 + 0x234) = 4 << (uVar13 & 0x3f) | *(uint *)(iVar11 + 0x234);
+      *(uint *)(programState + 0x234) = 4 << (uVar13 & 0x3f) | *(uint *)(programState + 0x234);
     }
     bVar2 = uVar13 != 7;
     uVar13 = uVar13 + 1;
@@ -1734,101 +1734,101 @@ int FUN_0005e7f0(param_1, param_2)
   puVar12 = (undefined4 *)(uVar14 * 4 + 0x1dba3c);
   do {
     if (!bVar1) {
-      iVar10 = iVar10 + -1;
-      puVar6 = (undefined4 *)((int (*)())FUN_0005e770)(local_148);
+      vectorVariantCount = vectorVariantCount + -1;
+      puVar6 = (undefined4 *)((int (*)())popFirstNonNull32)(vectorVariants);
       uVar3 = *puVar12;
-      bVar1 = iVar10 == 0;
+      bVar1 = vectorVariantCount == 0;
       puVar6[1] = uVar14;
       puVar12 = puVar12 + 1;
       uVar14 = uVar14 + 1;
       *puVar6 = uVar3;
-      iVar16 = iVar7 + *(int *)(iVar11 + 0x24);
+      iVar16 = iVar7 + *(int *)(programState + 0x24);
       iVar7 = iVar7 + 0x28;
       *(undefined1 *)(iVar16 + 0x10) = 1;
-      *(uint *)(iVar11 + 0x234) = 0x400 << (uVar13 & 0x3f) | *(uint *)(iVar11 + 0x234);
+      *(uint *)(programState + 0x234) = 0x400 << (uVar13 & 0x3f) | *(uint *)(programState + 0x234);
     }
     bVar2 = uVar13 != 7;
     uVar13 = uVar13 + 1;
   } while (bVar2);
   uVar13 = uVar14;
-  if (*(char *)(uVar14 * 0x28 + *(int *)(iVar11 + 0x24) + 0x10) != '\0') {
-    uVar8 = *(uint *)(iVar11 + 0x234);
+  if (*(char *)(uVar14 * 0x28 + *(int *)(programState + 0x24) + 0x10) != '\0') {
+    uVar8 = *(uint *)(programState + 0x234);
     uVar13 = uVar14 + 1;
-    *(uint *)(iVar11 + 0x234) = uVar8 | 0x40000;
-    if (*(char *)(uVar13 * 0x28 + *(int *)(iVar11 + 0x24) + 0x10) != '\0') {
+    *(uint *)(programState + 0x234) = uVar8 | 0x40000;
+    if (*(char *)(uVar13 * 0x28 + *(int *)(programState + 0x24) + 0x10) != '\0') {
       uVar13 = uVar14 + 2;
-      *(uint *)(iVar11 + 0x234) = uVar8 | 0xc0000;
+      *(uint *)(programState + 0x234) = uVar8 | 0xc0000;
     }
   }
   if (!bVar1) {
-    iVar10 = iVar10 + -1;
-    puVar12 = (undefined4 *)((int (*)())FUN_0005e770)(local_148);
+    vectorVariantCount = vectorVariantCount + -1;
+    puVar12 = (undefined4 *)((int (*)())popFirstNonNull32)(vectorVariants);
     iVar7 = uVar13 * 0x28;
-    bVar1 = iVar10 == 0;
+    bVar1 = vectorVariantCount == 0;
     uVar3 = *(undefined4 *)(uVar13 * 4 + 0x1dba3c);
     puVar12[1] = uVar13;
     uVar13 = uVar13 + 1;
     *puVar12 = uVar3;
-    *(undefined1 *)(iVar7 + *(int *)(iVar11 + 0x24) + 0x10) = 1;
-    *(uint *)(iVar11 + 0x234) = *(uint *)(iVar11 + 0x234) | 0x100000;
+    *(undefined1 *)(iVar7 + *(int *)(programState + 0x24) + 0x10) = 1;
+    *(uint *)(programState + 0x234) = *(uint *)(programState + 0x234) | 0x100000;
   }
-  if (((loopIndex2 != 0) || (!bVar1)) || (loopIndex != 0)) {
-    *(undefined1 *)(param_2 + 4) = 0;
-    if (loopIndex2 != 0) {
+  if (((scalarVariantCount != 0) || (!bVar1)) || (matrixVariantCount != 0)) {
+    *(undefined1 *)(shader + 4) = 0;
+    if (scalarVariantCount != 0) {
       iVar16 = uVar13 * 0x28;
       iVar7 = 0;
       do {
-        iVar5 = ((int (*)())FUN_0005e770)(local_1c8);
-        if (*(uint *)(iVar11 + 0x28) <= uVar13) {
-          uVar3 = (**(code **)(param_1 + 0x10))(*(uint *)(iVar11 + 0x28) + 0x10,0x28);
-          (**(code **)(((unsigned char *)0x00001344) + param_1))
-                    (uVar3,*(undefined4 *)(iVar11 + 0x24),*(int *)(iVar11 + 0x28) * 0x28);
-          (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar11 + 0x24));
-          *(undefined4 *)(iVar11 + 0x24) = uVar3;
-          *(int *)(iVar11 + 0x28) = *(int *)(iVar11 + 0x28) + 0x10;
+        iVar5 = ((int (*)())popFirstNonNull32)(scalarVariants);
+        if (*(uint *)(programState + 0x28) <= uVar13) {
+          uVar3 = (**(code **)(ctx + 0x10))(*(uint *)(programState + 0x28) + 0x10,0x28);
+          (**(code **)(((unsigned char *)0x00001344) + ctx))
+                    (uVar3,*(undefined4 *)(programState + 0x24),*(int *)(programState + 0x28) * 0x28);
+          (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x24));
+          *(undefined4 *)(programState + 0x24) = uVar3;
+          *(int *)(programState + 0x28) = *(int *)(programState + 0x28) + 0x10;
         }
         *(uint *)(iVar5 + 4) = uVar13;
         *(undefined4 *)(iVar5 + 8) = 0;
         iVar7 = iVar7 + 1;
         uVar13 = uVar13 + 1;
-        iVar5 = iVar16 + *(int *)(iVar11 + 0x24);
+        iVar5 = iVar16 + *(int *)(programState + 0x24);
         iVar16 = iVar16 + 0x28;
         *(undefined1 *)(iVar5 + 0x10) = 1;
-      } while (loopIndex2 != iVar7);
+      } while (scalarVariantCount != iVar7);
     }
     if (!bVar1) {
       iVar9 = uVar13 * 0x28;
       iVar7 = 0;
       do {
-        iVar16 = ((int (*)())FUN_0005e770)(local_148);
-        if (*(uint *)(iVar11 + 0x28) <= uVar13) {
-          uVar3 = (**(code **)(param_1 + 0x10))(*(uint *)(iVar11 + 0x28) + 0x10,0x28);
-          (**(code **)(((unsigned char *)0x00001344) + param_1))
-                    (uVar3,*(undefined4 *)(iVar11 + 0x24),*(int *)(iVar11 + 0x28) * 0x28);
-          (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar11 + 0x24));
-          *(undefined4 *)(iVar11 + 0x24) = uVar3;
-          *(int *)(iVar11 + 0x28) = *(int *)(iVar11 + 0x28) + 0x10;
+        iVar16 = ((int (*)())popFirstNonNull32)(vectorVariants);
+        if (*(uint *)(programState + 0x28) <= uVar13) {
+          uVar3 = (**(code **)(ctx + 0x10))(*(uint *)(programState + 0x28) + 0x10,0x28);
+          (**(code **)(((unsigned char *)0x00001344) + ctx))
+                    (uVar3,*(undefined4 *)(programState + 0x24),*(int *)(programState + 0x28) * 0x28);
+          (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x24));
+          *(undefined4 *)(programState + 0x24) = uVar3;
+          *(int *)(programState + 0x28) = *(int *)(programState + 0x28) + 0x10;
         }
         *(uint *)(iVar16 + 4) = uVar13;
         iVar7 = iVar7 + 1;
         uVar13 = uVar13 + 1;
-        iVar16 = *(int *)(iVar11 + 0x24) + iVar9;
+        iVar16 = *(int *)(programState + 0x24) + iVar9;
         iVar9 = iVar9 + 0x28;
         *(undefined1 *)(iVar16 + 0x10) = 1;
-      } while (iVar10 != iVar7);
+      } while (vectorVariantCount != iVar7);
     }
-    if (loopIndex != 0) {
+    if (matrixVariantCount != 0) {
       iVar9 = uVar13 * 0x28;
       iVar7 = 0;
       do {
-        iVar10 = ((int (*)())FUN_0005e770)(local_c8);
-        if (*(uint *)(iVar11 + 0x28) <= uVar13 + 3) {
-          uVar3 = (**(code **)(param_1 + 0x10))(*(uint *)(iVar11 + 0x28) + 0x10,0x28);
-          (**(code **)(((unsigned char *)0x00001344) + param_1))
-                    (uVar3,*(undefined4 *)(iVar11 + 0x24),*(int *)(iVar11 + 0x28) * 0x28);
-          (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar11 + 0x24));
-          *(undefined4 *)(iVar11 + 0x24) = uVar3;
-          *(int *)(iVar11 + 0x28) = *(int *)(iVar11 + 0x28) + 0x10;
+        vectorVariantCount = ((int (*)())popFirstNonNull32)(matrixVariants);
+        if (*(uint *)(programState + 0x28) <= uVar13 + 3) {
+          uVar3 = (**(code **)(ctx + 0x10))(*(uint *)(programState + 0x28) + 0x10,0x28);
+          (**(code **)(((unsigned char *)0x00001344) + ctx))
+                    (uVar3,*(undefined4 *)(programState + 0x24),*(int *)(programState + 0x28) * 0x28);
+          (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x24));
+          *(undefined4 *)(programState + 0x24) = uVar3;
+          *(int *)(programState + 0x28) = *(int *)(programState + 0x28) + 0x10;
         }
         iVar5 = 0;
         iVar17 = 4;
@@ -1836,9 +1836,9 @@ int FUN_0005e7f0(param_1, param_2)
         do {
           iVar4 = uVar13 + iVar5;
           iVar5 = iVar5 + 1;
-          *(int *)(iVar10 + 0x10) = iVar4;
-          iVar10 = iVar10 + 4;
-          iVar4 = iVar16 + *(int *)(iVar11 + 0x24);
+          *(int *)(vectorVariantCount + 0x10) = iVar4;
+          vectorVariantCount = vectorVariantCount + 4;
+          iVar4 = iVar16 + *(int *)(programState + 0x24);
           iVar16 = iVar16 + 0x28;
           *(undefined1 *)(iVar4 + 0x10) = 1;
           iVar17 = iVar17 + -1;
@@ -1846,10 +1846,10 @@ int FUN_0005e7f0(param_1, param_2)
         iVar7 = iVar7 + 1;
         uVar13 = uVar13 + 4;
         iVar9 = iVar9 + 0xa0;
-      } while (iVar7 != loopIndex);
+      } while (iVar7 != matrixVariantCount);
     }
   }
-  *(uint *)(iVar11 + 0x2a4) = uVar13;
+  *(uint *)(programState + 0x2a4) = uVar13;
   return;
 }
 
@@ -1948,13 +1948,14 @@ int FUN_0005f540(param_1, param_2)
   return;
 }
 
-/* FUN_0005f810 @ 0x5f810 (9624 bytes) - 14 of its vtable+0x1344 dispatch calls dropped a
+/* extvsPrepareHardwareProgram @ 0x5f810 (9624 bytes) */
+/* 14 of its vtable+0x1344 dispatch calls dropped a
  * genuine 3rd argument (the already-declared in_r5) that stock passes (found auditing #70 via
  * ExtendIndirectCalls.java / ground-truth disassembly); a 15th, differently-shaped call at the
  * same vtable slot already had its own real 3rd argument and needed no change. */
-int FUN_0005f810(param_1, param_2)
-  int param_1;
-  int *param_2;
+int extvsPrepareHardwareProgram(ctx, shader)
+  int ctx;
+  int *shader;
 {
   byte bVar1;
   bool bVar2;
@@ -1963,7 +1964,7 @@ int FUN_0005f810(param_1, param_2)
   uint uVar5;
   undefined1 uVar7;
   int *piVar6;
-  int iVar8;
+  int writeEnableSnapshot;
   uint in_r5;
   int in_r6;
   uint in_r7;
@@ -1982,7 +1983,7 @@ int FUN_0005f810(param_1, param_2)
   undefined4 uVar20;
   uint *puVar21;
   uint uVar22;
-  uint uVar23;
+  uint programState;
   int iVar24;
   undefined4 auStack_d8 [2];
   int iStack_d0;
@@ -1995,27 +1996,27 @@ int FUN_0005f810(param_1, param_2)
   undefined4 uStack_a8;
   undefined4 uStack_a4;
   
-  puVar21 = *(uint **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-  uVar23 = *puVar21;
-  if ((param_2[6] == 0) || (param_2[5] == 0)) {
+  puVar21 = *(uint **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+  programState = *puVar21;
+  if ((shader[6] == 0) || (shader[5] == 0)) {
     uVar7 = 1;
 LAB_00061d90:
-    param_2[0x19] = 0;
-    param_2[0xc] = 0;
-    param_2[0x15] = 0;
-    param_2[0x16] = 0;
-    param_2[0x17] = 0;
-    param_2[0x18] = 0;
+    shader[0x19] = 0;
+    shader[0xc] = 0;
+    shader[0x15] = 0;
+    shader[0x16] = 0;
+    shader[0x17] = 0;
+    shader[0x18] = 0;
   }
   else {
-    *(undefined1 *)(param_2 + 4) = 1;
-    ((int (*)())FUN_0005e7f0)(param_1,param_2);
-    iVar8 = (**(code **)(param_1 + 0xc))(param_2[5] << 4);
-    if (param_2[5] != 0) {
+    *(undefined1 *)(shader + 4) = 1;
+    ((int (*)())extvsAssignVertexInputs)(ctx,shader);
+    writeEnableSnapshot = (**(code **)(ctx + 0xc))(shader[5] << 4);
+    if (shader[5] != 0) {
       in_r5 = 0;
       in_r6 = 0;
       do {
-        iVar10 = param_2[6];
+        iVar10 = shader[6];
         iVar16 = in_r6 + iVar10;
         if (*(int *)(iVar16 + 4) == 1) {
           uVar5 = *(uint *)(iVar16 + 8);
@@ -2024,41 +2025,41 @@ LAB_00061d90:
               if (uVar5 < 0x6111) {
                 if (uVar5 < 0x610f) {
                   if (uVar5 == 0x610e) {
-                    *(undefined1 *)((int)param_2 + 0x79) = 1;
+                    *(undefined1 *)((int)shader + 0x79) = 1;
                   }
                 }
                 else {
-                  *(undefined1 *)((int)param_2 + (uVar5 - 0x60a0)) = 1;
+                  *(undefined1 *)((int)shader + (uVar5 - 0x60a0)) = 1;
                 }
               }
               else if (uVar5 == 0x879a) {
-                *(undefined1 *)(param_2 + 0x1b) = 1;
+                *(undefined1 *)(shader + 0x1b) = 1;
               }
             }
             else {
-              *(undefined1 *)((int)param_2 + (uVar5 - 0x872e)) = 1;
+              *(undefined1 *)((int)shader + (uVar5 - 0x872e)) = 1;
             }
           }
           else if (uVar5 < 0x87a5) {
             if (*(int *)(iVar16 + 0xc) != 0) {
-              *(byte *)((int)param_2 + (uVar5 - 0x872c)) =
-                   *(byte *)((int)param_2 + (uVar5 - 0x872c)) | 1;
+              *(byte *)((int)shader + (uVar5 - 0x872c)) =
+                   *(byte *)((int)shader + (uVar5 - 0x872c)) | 1;
             }
             if (*(int *)(iVar16 + 0x10) != 0) {
-              *(byte *)((int)param_2 + *(int *)(iVar16 + 8) + -0x872c) =
-                   *(byte *)((int)param_2 + *(int *)(iVar16 + 8) + -0x872c) | 2;
+              *(byte *)((int)shader + *(int *)(iVar16 + 8) + -0x872c) =
+                   *(byte *)((int)shader + *(int *)(iVar16 + 8) + -0x872c) | 2;
             }
             if (*(int *)(iVar16 + 0x14) != 0) {
-              *(byte *)((int)param_2 + *(int *)(iVar16 + 8) + -0x872c) =
-                   *(byte *)((int)param_2 + *(int *)(iVar16 + 8) + -0x872c) | 4;
+              *(byte *)((int)shader + *(int *)(iVar16 + 8) + -0x872c) =
+                   *(byte *)((int)shader + *(int *)(iVar16 + 8) + -0x872c) | 4;
             }
             if (*(int *)(iVar16 + 0x18) != 0) {
-              *(byte *)((int)param_2 + *(int *)(iVar16 + 8) + -0x872c) =
-                   *(byte *)((int)param_2 + *(int *)(iVar16 + 8) + -0x872c) | 8;
+              *(byte *)((int)shader + *(int *)(iVar16 + 8) + -0x872c) =
+                   *(byte *)((int)shader + *(int *)(iVar16 + 8) + -0x872c) | 8;
             }
           }
           else if (uVar5 == 0x87bd) {
-            *(undefined1 *)((int)param_2 + 0x7a) = 1;
+            *(undefined1 *)((int)shader + 0x7a) = 1;
           }
         }
         iVar10 = in_r6 + iVar10;
@@ -2066,50 +2067,50 @@ LAB_00061d90:
         in_r5 = in_r5 + 1;
         in_r6 = in_r6 + 0x74;
         in_r7 = *(uint *)(iVar10 + 0x18);
-        iVar11 = iVar16 + iVar8;
+        iVar11 = iVar16 + writeEnableSnapshot;
         uVar14 = *(undefined4 *)(iVar10 + 0x10);
         in_r8 = *(uint *)(iVar10 + 0x14);
-        *(undefined4 *)(iVar8 + iVar16) = *(undefined4 *)(iVar10 + 0xc);
+        *(undefined4 *)(writeEnableSnapshot + iVar16) = *(undefined4 *)(iVar10 + 0xc);
         *(uint *)(iVar11 + 0xc) = in_r7;
         *(undefined4 *)(iVar11 + 4) = uVar14;
         *(uint *)(iVar11 + 8) = in_r8;
-      } while (in_r5 < (uint)param_2[5]);
+      } while (in_r5 < (uint)shader[5]);
     }
-    if ((*(char *)((int)param_2 + 0x7a) == '\0') ||
-       (uVar7 = 1, (*(uint *)(param_1 + 0x44) & 0x1000) != 0)) {
+    if ((*(char *)((int)shader + 0x7a) == '\0') ||
+       (uVar7 = 1, (*(uint *)(ctx + 0x44) & 0x1000) != 0)) {
       uVar7 = 0;
     }
-    *(undefined1 *)(uVar23 + 0x42) = uVar7;
-    *(undefined1 *)(uVar23 + 0x43) = *(undefined1 *)((int)param_2 + 0x79);
-    if ((*(char *)((int)param_2 + 0x6f) != '\0') || (uVar7 = 0, *(char *)(param_2 + 0x1c) != '\0'))
+    *(undefined1 *)(programState + 0x42) = uVar7;
+    *(undefined1 *)(programState + 0x43) = *(undefined1 *)((int)shader + 0x79);
+    if ((*(char *)((int)shader + 0x6f) != '\0') || (uVar7 = 0, *(char *)(shader + 0x1c) != '\0'))
     {
       uVar7 = 1;
     }
-    *(undefined1 *)(uVar23 + 0x44) = uVar7;
-    uVar5 = *(uint *)(param_1 + 0x44);
+    *(undefined1 *)(programState + 0x44) = uVar7;
+    uVar5 = *(uint *)(ctx + 0x44);
     if ((uVar5 & 0x80) == 0) {
-      *(undefined1 *)((int)param_2 + 0x79) = 0;
-      uVar5 = *(uint *)(param_1 + 0x44);
+      *(undefined1 *)((int)shader + 0x79) = 0;
+      uVar5 = *(uint *)(ctx + 0x44);
     }
     if ((uVar5 & 0x40) == 0) {
-      *(undefined1 *)(param_2 + 0x1c) = 0;
-      *(undefined1 *)((int)param_2 + 0x6f) = 0;
+      *(undefined1 *)(shader + 0x1c) = 0;
+      *(undefined1 *)((int)shader + 0x6f) = 0;
     }
-    if ((*(char *)((int)param_2 + 0x7a) != '\0') && ((*(uint *)(param_1 + 0x44) & 0x800) != 0)) {
-      in_r7 = (uint)(byte)((unsigned char *)0x000011d1)[param_1];
-      in_r8 = in_r7 + (int)param_2;
+    if ((*(char *)((int)shader + 0x7a) != '\0') && ((*(uint *)(ctx + 0x44) & 0x800) != 0)) {
+      in_r7 = (uint)(byte)((unsigned char *)0x000011d1)[ctx];
+      in_r8 = in_r7 + (int)shader;
       if (*(char *)(in_r8 + 0x71) != '\0') {
-        uVar17 = param_2[5];
+        uVar17 = shader[5];
         uVar5 = 0;
         if (uVar17 != 0) {
           do {
-            iVar10 = uVar5 * 0x74 + param_2[6];
+            iVar10 = uVar5 * 0x74 + shader[6];
             if ((*(int *)(iVar10 + 4) == 1) && (*(int *)(iVar10 + 8) == in_r7 + 0x879d)) {
               *(undefined4 *)(iVar10 + 0x18) = 0;
               *(undefined4 *)(iVar10 + 0xc) = 0;
               *(undefined4 *)(iVar10 + 0x10) = 0;
               *(undefined4 *)(iVar10 + 0x14) = 0;
-              uVar17 = param_2[5];
+              uVar17 = shader[5];
             }
             uVar5 = uVar5 + 1;
           } while (uVar5 < uVar17);
@@ -2117,57 +2118,57 @@ LAB_00061d90:
       }
       *(undefined1 *)(in_r8 + 0x71) = 0xf;
     }
-    if ((*(char *)(param_2 + 0x1b) != '\0') && ((*(uint *)(param_1 + 0x44) & 0x400) != 0)) {
-      bVar1 = ((unsigned char *)0x000011d2)[param_1];
+    if ((*(char *)(shader + 0x1b) != '\0') && ((*(uint *)(ctx + 0x44) & 0x400) != 0)) {
+      bVar1 = ((unsigned char *)0x000011d2)[ctx];
       uVar5 = (uint)bVar1;
-      if ((*(char *)((int)param_2 + bVar1 + 0x71) != '\0') && (uVar17 = param_2[5], uVar17 != 0)) {
+      if ((*(char *)((int)shader + bVar1 + 0x71) != '\0') && (uVar17 = shader[5], uVar17 != 0)) {
         in_r8 = 0;
         in_r7 = 0;
         iVar10 = 0;
         in_r6 = bVar1 + 0x879d;
         do {
-          iVar16 = iVar10 + param_2[6];
+          iVar16 = iVar10 + shader[6];
           if ((*(int *)(iVar16 + 4) == 1) && (*(int *)(iVar16 + 8) == in_r6)) {
             *(undefined4 *)(iVar16 + 0x18) = 0;
             *(undefined4 *)(iVar16 + 0xc) = 0;
             *(undefined4 *)(iVar16 + 0x10) = 0;
             *(undefined4 *)(iVar16 + 0x14) = 0;
-            uVar17 = param_2[5];
+            uVar17 = shader[5];
           }
           in_r8 = in_r8 + 1;
           iVar10 = iVar10 + 0x74;
         } while (in_r8 < uVar17);
-        uVar5 = (uint)(byte)((unsigned char *)0x000011d2)[param_1];
+        uVar5 = (uint)(byte)((unsigned char *)0x000011d2)[ctx];
       }
-      *(undefined1 *)((int)param_2 + uVar5 + 0x71) = 0xf;
+      *(undefined1 *)((int)shader + uVar5 + 0x71) = 0xf;
     }
     iVar10 = 1;
-    *(undefined4 *)(uVar23 + 0x1e8) = 0;
-    if (*(char *)((int)param_2 + 0x79) != '\0') {
+    *(undefined4 *)(programState + 0x1e8) = 0;
+    if (*(char *)((int)shader + 0x79) != '\0') {
       iVar10 = 2;
-      *(undefined4 *)(uVar23 + 0x1fc) = 1;
+      *(undefined4 *)(programState + 0x1fc) = 1;
     }
-    uVar5 = param_2[0x1b];
-    if ((((uVar5 & 0xffffff) != 0) || (*(char *)(param_2 + 0x1c) != '\0')) ||
-       (*(char *)((int)param_2 + 0x7a) != '\0')) {
-      *(int *)(uVar23 + 0x1ec) = iVar10;
+    uVar5 = shader[0x1b];
+    if ((((uVar5 & 0xffffff) != 0) || (*(char *)(shader + 0x1c) != '\0')) ||
+       (*(char *)((int)shader + 0x7a) != '\0')) {
+      *(int *)(programState + 0x1ec) = iVar10;
       iVar10 = iVar10 + 1;
-      uVar5 = param_2[0x1b];
+      uVar5 = shader[0x1b];
     }
-    if ((((uVar5 & 0xffff) != 0) || (*(char *)(param_2 + 0x1c) != '\0')) ||
-       (*(char *)((int)param_2 + 0x7a) != '\0')) {
-      *(int *)(uVar23 + 0x1f0) = iVar10;
+    if ((((uVar5 & 0xffff) != 0) || (*(char *)(shader + 0x1c) != '\0')) ||
+       (*(char *)((int)shader + 0x7a) != '\0')) {
+      *(int *)(programState + 0x1f0) = iVar10;
       iVar10 = iVar10 + 1;
     }
-    if ((*(char *)((int)param_2 + 0x6f) != '\0') || (*(char *)(param_2 + 0x1c) != '\0')) {
+    if ((*(char *)((int)shader + 0x6f) != '\0') || (*(char *)(shader + 0x1c) != '\0')) {
       iVar16 = iVar10 + 1;
-      *(int *)(uVar23 + 500) = iVar10;
+      *(int *)(programState + 500) = iVar10;
       iVar10 = iVar10 + 2;
-      *(int *)(uVar23 + 0x1f8) = iVar16;
+      *(int *)(programState + 0x1f8) = iVar16;
     }
     iVar16 = 8;
-    piVar6 = param_2;
-    uVar5 = uVar23;
+    piVar6 = shader;
+    uVar5 = programState;
     do {
       if (*(char *)((int)piVar6 + 0x71) != '\0') {
         *(int *)(uVar5 + 0x200) = iVar10;
@@ -2177,29 +2178,29 @@ LAB_00061d90:
       uVar5 = uVar5 + 4;
       iVar16 = iVar16 + -1;
     } while (iVar16 != 0);
-    *(undefined4 *)(uVar23 + 0x22c) = 0;
-    *(undefined4 *)(uVar23 + 0x224) = 0;
-    if (param_2[5] != 0) {
+    *(undefined4 *)(programState + 0x22c) = 0;
+    *(undefined4 *)(programState + 0x224) = 0;
+    if (shader[5] != 0) {
       uVar5 = 0;
       iVar10 = 0;
       do {
-        iVar16 = param_2[6];
+        iVar16 = shader[6];
         if (*(int *)(iVar10 + iVar16 + 0x20) == 2) {
-          iVar18 = param_2[8];
+          iVar18 = shader[8];
           iVar11 = *(int *)(iVar10 + iVar16 + 0x24) * 0x54;
           in_r6 = iVar11 + iVar18;
           if ((*(int *)(in_r6 + 0x28) == 0x87c2) && (*(char *)(in_r6 + 0x3d) == '\0')) {
             if (*(int *)(in_r6 + 0x30) == 0) {
               if (*(uint *)(in_r6 + 0x34) < 2) {
-                in_r5 = uVar23;
-                FUN_00055da0(param_1,param_2,uVar23,in_r6);
-                iVar16 = param_2[6];
+                in_r5 = programState;
+                extvsAllocConstantRegisters(ctx,shader,programState,in_r6);
+                iVar16 = shader[6];
                 goto LAB_0005fdf0;
               }
             }
             else {
-              iVar11 = FUN_00054da0(param_2 + 7,*(int *)(in_r6 + 0x30));
-              iVar18 = param_2[8];
+              iVar11 = extvsSymbolListGetIndex(shader + 7,*(int *)(in_r6 + 0x30));
+              iVar18 = shader[8];
               iVar11 = iVar11 * 0x54;
             }
             if (*(int *)(iVar18 + iVar11 + 0x34) != 0) {
@@ -2209,28 +2210,28 @@ LAB_00061d90:
                 in_r6 = iVar16 + iVar18;
                 uVar17 = uVar17 + 1;
                 iVar16 = iVar16 + 0x54;
-                in_r5 = uVar23;
-                FUN_00055da0(param_1,param_2,uVar23,in_r6);
-                iVar18 = param_2[8];
+                in_r5 = programState;
+                extvsAllocConstantRegisters(ctx,shader,programState,in_r6);
+                iVar18 = shader[8];
               } while (uVar17 < *(uint *)(iVar18 + iVar11 + 0x34));
             }
-            iVar16 = param_2[6];
+            iVar16 = shader[6];
           }
         }
 LAB_0005fdf0:
         if (*(int *)(iVar10 + iVar16 + 0x3c) == 2) {
-          iVar19 = param_2[8];
+          iVar19 = shader[8];
           iVar11 = *(int *)(iVar10 + iVar16 + 0x40) * 0x54;
           iVar18 = iVar11 + iVar19;
           if ((*(int *)(iVar18 + 0x28) == 0x87c2) && (*(char *)(iVar18 + 0x3d) == '\0')) {
             if (*(int *)(iVar18 + 0x30) == 0) {
               if (1 < *(uint *)(iVar18 + 0x34)) goto LAB_00060230;
-              param_2[0x17] = param_2[0x17] + 1;
+              shader[0x17] = shader[0x17] + 1;
               if (*(char *)(iVar18 + 0x44) == '\0') {
-                *(int *)(uVar23 + 0x224) = *(int *)(uVar23 + 0x224) + 1;
+                *(int *)(programState + 0x224) = *(int *)(programState + 0x224) + 1;
               }
               else {
-                *(int *)(uVar23 + 0x22c) = *(int *)(uVar23 + 0x22c) + 1;
+                *(int *)(programState + 0x22c) = *(int *)(programState + 0x22c) + 1;
               }
               iVar16 = *(int *)(iVar18 + 0x24);
               *(undefined1 *)(iVar18 + 0x3d) = 1;
@@ -2239,10 +2240,10 @@ LAB_0005fdf0:
                 uVar17 = 0;
                 iVar16 = 0;
                 bVar2 = true;
-                *(int *)(uVar23 + 0x5c) = *(int *)(uVar23 + 0x5c) + 1;
-                while (uVar17 < *(uint *)(uVar23 + 0x58)) {
+                *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 1;
+                while (uVar17 < *(uint *)(programState + 0x58)) {
                   if (!bVar2) goto LAB_0005ffe8;
-                  if (*(char *)(iVar16 + *(int *)(uVar23 + 0x54) + 0x10) == '\0') {
+                  if (*(char *)(iVar16 + *(int *)(programState + 0x54) + 0x10) == '\0') {
                     in_r8 = 1;
                     bVar2 = false;
                   }
@@ -2252,35 +2253,35 @@ LAB_0005fdf0:
                   }
                 }
                 if (bVar2) {
-                  *(char *)(param_2 + 4) = (char)in_r8;
-                  iVar16 = *(int *)(uVar23 + 0x58);
-                  uVar14 = (**(code **)(param_1 + 0x10))(iVar16 + 0x10,0x28);
-                  in_r5 = *(int *)(uVar23 + 0x58) * 0x28;
-                  (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar14,*(undefined4 *)(uVar23 + 0x54),in_r5);
-                  (**(code **)(param_1 + 0x18))(*(undefined4 *)(uVar23 + 0x54));
-                  *(undefined4 *)(uVar23 + 0x54) = uVar14;
-                  *(int *)(uVar23 + 0x58) = *(int *)(uVar23 + 0x58) + 0x10;
+                  *(char *)(shader + 4) = (char)in_r8;
+                  iVar16 = *(int *)(programState + 0x58);
+                  uVar14 = (**(code **)(ctx + 0x10))(iVar16 + 0x10,0x28);
+                  in_r5 = *(int *)(programState + 0x58) * 0x28;
+                  (**(code **)(((unsigned char *)0x00001344) + ctx))(uVar14,*(undefined4 *)(programState + 0x54),in_r5);
+                  (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x54));
+                  *(undefined4 *)(programState + 0x54) = uVar14;
+                  *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
 LAB_00060078:
                   *(int *)(iVar18 + 4) = iVar16;
-                  *(undefined1 *)(iVar16 * 0x28 + *(int *)(uVar23 + 0x54) + 0x10) = 1;
-                  iVar16 = param_2[6];
+                  *(undefined1 *)(iVar16 * 0x28 + *(int *)(programState + 0x54) + 0x10) = 1;
+                  iVar16 = shader[6];
                   goto LAB_000608e0;
                 }
 LAB_0005ffe8:
                 *(uint *)(iVar18 + 4) = uVar17;
 LAB_0005ffec:
-                *(undefined1 *)(uVar17 * 0x28 + *(int *)(uVar23 + 0x54) + 0x10) = 1;
-                iVar16 = param_2[6];
+                *(undefined1 *)(uVar17 * 0x28 + *(int *)(programState + 0x54) + 0x10) = 1;
+                iVar16 = shader[6];
                 goto LAB_000608e0;
               }
               if (iVar16 == 0x87c0) {
                 uVar17 = 0;
                 iVar16 = 0;
                 bVar2 = true;
-                *(int *)(uVar23 + 0x5c) = *(int *)(uVar23 + 0x5c) + 4;
-                while (uVar17 < *(int *)(uVar23 + 0x58) - 3U) {
+                *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 4;
+                while (uVar17 < *(int *)(programState + 0x58) - 3U) {
                   if (!bVar2) goto LAB_000600f4;
-                  if (*(char *)(iVar16 + *(int *)(uVar23 + 0x54) + 0x10) == '\0') {
+                  if (*(char *)(iVar16 + *(int *)(programState + 0x54) + 0x10) == '\0') {
                     bVar2 = false;
                   }
                   else {
@@ -2291,7 +2292,7 @@ LAB_0005ffec:
                 if (!bVar2) {
 LAB_000600f4:
                   iVar16 = uVar17 * 0x28;
-                  iVar11 = iVar16 + *(int *)(uVar23 + 0x54);
+                  iVar11 = iVar16 + *(int *)(programState + 0x54);
                   if (((*(char *)(iVar11 + 0x38) == '\0') && (*(char *)(iVar11 + 0x60) == '\0')) &&
                      (*(char *)(iVar11 + 0x88) == '\0')) {
                     in_r8 = 0;
@@ -2302,7 +2303,7 @@ LAB_000600f4:
                       in_r8 = in_r8 + 1;
                       *(int *)(iVar18 + 0x10) = iVar19;
                       iVar18 = iVar18 + 4;
-                      iVar19 = iVar16 + *(int *)(uVar23 + 0x54);
+                      iVar19 = iVar16 + *(int *)(programState + 0x54);
                       iVar16 = iVar16 + 0x28;
                       *(undefined1 *)(iVar19 + 0x10) = 1;
                       iVar11 = iVar11 + -1;
@@ -2310,24 +2311,24 @@ LAB_000600f4:
                     goto LAB_000608d4;
                   }
                 }
-                *(undefined1 *)(param_2 + 4) = 0;
-                iVar19 = *(int *)(uVar23 + 0x58);
-                uVar14 = (**(code **)(param_1 + 0x10))(iVar19 + 0x10,0x28);
-                in_r5 = *(int *)(uVar23 + 0x58) * 0x28;
-                (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar14,*(undefined4 *)(uVar23 + 0x54),in_r5);
-                (**(code **)(param_1 + 0x18))(*(undefined4 *)(uVar23 + 0x54));
-                *(undefined4 *)(uVar23 + 0x54) = uVar14;
+                *(undefined1 *)(shader + 4) = 0;
+                iVar19 = *(int *)(programState + 0x58);
+                uVar14 = (**(code **)(ctx + 0x10))(iVar19 + 0x10,0x28);
+                in_r5 = *(int *)(programState + 0x58) * 0x28;
+                (**(code **)(((unsigned char *)0x00001344) + ctx))(uVar14,*(undefined4 *)(programState + 0x54),in_r5);
+                (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x54));
+                *(undefined4 *)(programState + 0x54) = uVar14;
                 iVar16 = iVar19 * 0x28;
                 iVar12 = 4;
                 iVar11 = 0;
                 in_r8 = 1;
-                *(int *)(uVar23 + 0x58) = *(int *)(uVar23 + 0x58) + 0x10;
+                *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
                 do {
                   iVar3 = iVar11 + iVar19;
                   iVar11 = iVar11 + 1;
                   *(int *)(iVar18 + 0x10) = iVar3;
                   iVar18 = iVar18 + 4;
-                  iVar3 = *(int *)(uVar23 + 0x54) + iVar16;
+                  iVar3 = *(int *)(programState + 0x54) + iVar16;
                   iVar16 = iVar16 + 0x28;
                   *(undefined1 *)(iVar3 + 0x10) = 1;
                   iVar12 = iVar12 + -1;
@@ -2338,10 +2339,10 @@ LAB_000600f4:
                 uVar17 = 0;
                 iVar16 = 0;
                 bVar2 = true;
-                *(int *)(uVar23 + 0x5c) = *(int *)(uVar23 + 0x5c) + 1;
-                while (uVar17 < *(uint *)(uVar23 + 0x58)) {
+                *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 1;
+                while (uVar17 < *(uint *)(programState + 0x58)) {
                   if (!bVar2) goto LAB_0005ff00;
-                  if (*(char *)(iVar16 + *(int *)(uVar23 + 0x54) + 0x10) == '\0') {
+                  if (*(char *)(iVar16 + *(int *)(programState + 0x54) + 0x10) == '\0') {
                     uVar14 = 1;
                     bVar2 = false;
                   }
@@ -2351,14 +2352,14 @@ LAB_000600f4:
                   }
                 }
                 if (bVar2) {
-                  *(char *)(param_2 + 4) = (char)uVar14;
-                  iVar16 = *(int *)(uVar23 + 0x58);
-                  uVar15 = (**(code **)(param_1 + 0x10))(iVar16 + 0x10,0x28);
-                  in_r5 = *(int *)(uVar23 + 0x58) * 0x28;
-                  (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar15,*(undefined4 *)(uVar23 + 0x54),in_r5);
-                  (**(code **)(param_1 + 0x18))(*(undefined4 *)(uVar23 + 0x54));
-                  *(undefined4 *)(uVar23 + 0x54) = uVar15;
-                  *(int *)(uVar23 + 0x58) = *(int *)(uVar23 + 0x58) + 0x10;
+                  *(char *)(shader + 4) = (char)uVar14;
+                  iVar16 = *(int *)(programState + 0x58);
+                  uVar15 = (**(code **)(ctx + 0x10))(iVar16 + 0x10,0x28);
+                  in_r5 = *(int *)(programState + 0x58) * 0x28;
+                  (**(code **)(((unsigned char *)0x00001344) + ctx))(uVar15,*(undefined4 *)(programState + 0x54),in_r5);
+                  (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x54));
+                  *(undefined4 *)(programState + 0x54) = uVar15;
+                  *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
                   *(undefined4 *)(iVar18 + 8) = uVar14;
                   goto LAB_00060078;
                 }
@@ -2369,8 +2370,8 @@ LAB_0005ff00:
               }
             }
             else {
-              iVar11 = FUN_00054da0(param_2 + 7,*(int *)(iVar18 + 0x30));
-              iVar19 = param_2[8];
+              iVar11 = extvsSymbolListGetIndex(shader + 7,*(int *)(iVar18 + 0x30));
+              iVar19 = shader[8];
               iVar11 = iVar11 * 0x54;
 LAB_00060230:
               if (*(int *)(iVar11 + iVar19 + 0x34) != 0) {
@@ -2379,12 +2380,12 @@ LAB_00060230:
                 do {
                   iVar18 = iVar19 + iVar16;
                   if (*(int *)(iVar18 + 0x28) == 0x87c2) {
-                    param_2[0x17] = param_2[0x17] + 1;
+                    shader[0x17] = shader[0x17] + 1;
                     if (*(char *)(iVar18 + 0x44) == '\0') {
-                      *(int *)(uVar23 + 0x224) = *(int *)(uVar23 + 0x224) + 1;
+                      *(int *)(programState + 0x224) = *(int *)(programState + 0x224) + 1;
                     }
                     else {
-                      *(int *)(uVar23 + 0x22c) = *(int *)(uVar23 + 0x22c) + 1;
+                      *(int *)(programState + 0x22c) = *(int *)(programState + 0x22c) + 1;
                     }
                     iVar19 = *(int *)(iVar18 + 0x24);
                     *(undefined1 *)(iVar18 + 0x3d) = 1;
@@ -2393,10 +2394,10 @@ LAB_00060230:
                         uVar22 = 0;
                         iVar19 = 0;
                         bVar2 = true;
-                        *(int *)(uVar23 + 0x5c) = *(int *)(uVar23 + 0x5c) + 4;
-                        while (uVar22 < *(int *)(uVar23 + 0x58) - 3U) {
+                        *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 4;
+                        while (uVar22 < *(int *)(programState + 0x58) - 3U) {
                           if (!bVar2) goto LAB_000603e0;
-                          if (*(char *)(iVar19 + *(int *)(uVar23 + 0x54) + 0x10) == '\0') {
+                          if (*(char *)(iVar19 + *(int *)(programState + 0x54) + 0x10) == '\0') {
                             bVar2 = false;
                           }
                           else {
@@ -2407,7 +2408,7 @@ LAB_00060230:
                         if (!bVar2) {
 LAB_000603e0:
                           uVar9 = uVar22 * 0x28;
-                          iVar19 = uVar9 + *(int *)(uVar23 + 0x54);
+                          iVar19 = uVar9 + *(int *)(programState + 0x54);
                           in_r8 = uVar9;
                           if (((*(char *)(iVar19 + 0x38) == '\0') &&
                               (*(char *)(iVar19 + 0x60) == '\0')) &&
@@ -2420,7 +2421,7 @@ LAB_000603e0:
                               in_r8 = in_r8 + 1;
                               *(int *)(iVar18 + 0x10) = iVar12;
                               iVar18 = iVar18 + 4;
-                              iVar12 = *(int *)(uVar23 + 0x54) + uVar9;
+                              iVar12 = *(int *)(programState + 0x54) + uVar9;
                               uVar9 = uVar9 + 0x28;
                               *(undefined1 *)(iVar12 + 0x10) = 1;
                               iVar19 = iVar19 + -1;
@@ -2428,26 +2429,26 @@ LAB_000603e0:
                             goto LAB_000608b8;
                           }
                         }
-                        *(undefined1 *)(param_2 + 4) = 0;
-                        iVar3 = *(int *)(uVar23 + 0x58);
-                        uVar14 = (**(code **)(param_1 + 0x10))
+                        *(undefined1 *)(shader + 4) = 0;
+                        iVar3 = *(int *)(programState + 0x58);
+                        uVar14 = (**(code **)(ctx + 0x10))
                                            (iVar3 + 0x10,0x28,in_r5,in_r6,in_r7,in_r8,0);
-                        in_r5 = *(int *)(uVar23 + 0x58) * 0x28;
-                        (**(code **)(((unsigned char *)0x00001344) + param_1))
-                                  (uVar14,*(undefined4 *)(uVar23 + 0x54),in_r5);
-                        (**(code **)(param_1 + 0x18))(*(undefined4 *)(uVar23 + 0x54));
-                        *(undefined4 *)(uVar23 + 0x54) = uVar14;
+                        in_r5 = *(int *)(programState + 0x58) * 0x28;
+                        (**(code **)(((unsigned char *)0x00001344) + ctx))
+                                  (uVar14,*(undefined4 *)(programState + 0x54),in_r5);
+                        (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x54));
+                        *(undefined4 *)(programState + 0x54) = uVar14;
                         iVar12 = iVar3 * 0x28;
                         iVar24 = 4;
                         iVar19 = 0;
                         in_r8 = 1;
-                        *(int *)(uVar23 + 0x58) = *(int *)(uVar23 + 0x58) + 0x10;
+                        *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
                         do {
                           iVar4 = iVar19 + iVar3;
                           iVar19 = iVar19 + 1;
                           *(int *)(iVar18 + 0x10) = iVar4;
                           iVar18 = iVar18 + 4;
-                          iVar4 = *(int *)(uVar23 + 0x54) + iVar12;
+                          iVar4 = *(int *)(programState + 0x54) + iVar12;
                           iVar12 = iVar12 + 0x28;
                           *(undefined1 *)(iVar4 + 0x10) = 1;
                           iVar24 = iVar24 + -1;
@@ -2458,10 +2459,10 @@ LAB_000603e0:
                         uVar22 = 0;
                         iVar19 = 0;
                         bVar2 = true;
-                        *(int *)(uVar23 + 0x5c) = *(int *)(uVar23 + 0x5c) + 1;
-                        while (uVar22 < *(uint *)(uVar23 + 0x58)) {
+                        *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 1;
+                        while (uVar22 < *(uint *)(programState + 0x58)) {
                           if (!bVar2) goto LAB_00060590;
-                          if (*(char *)(iVar19 + *(int *)(uVar23 + 0x54) + 0x10) == '\0') {
+                          if (*(char *)(iVar19 + *(int *)(programState + 0x54) + 0x10) == '\0') {
                             uVar14 = 1;
                             bVar2 = false;
                           }
@@ -2475,19 +2476,19 @@ LAB_0006058c:
 LAB_00060590:
                           *(uint *)(iVar18 + 4) = uVar22;
                           *(undefined4 *)(iVar18 + 8) = 0;
-                          *(undefined1 *)(uVar22 * 0x28 + *(int *)(uVar23 + 0x54) + 0x10) = 1;
-                          iVar19 = param_2[8];
+                          *(undefined1 *)(uVar22 * 0x28 + *(int *)(programState + 0x54) + 0x10) = 1;
+                          iVar19 = shader[8];
                           goto LAB_000608bc;
                         }
-                        *(char *)(param_2 + 4) = (char)uVar14;
-                        iVar19 = *(int *)(uVar23 + 0x58);
-                        uVar15 = (**(code **)(param_1 + 0x10))(iVar19 + 0x10,0x28);
-                        in_r5 = *(int *)(uVar23 + 0x58) * 0x28;
-                        (**(code **)(((unsigned char *)0x00001344) + param_1))
-                                  (uVar15,*(undefined4 *)(uVar23 + 0x54),in_r5);
-                        (**(code **)(param_1 + 0x18))(*(undefined4 *)(uVar23 + 0x54));
-                        *(undefined4 *)(uVar23 + 0x54) = uVar15;
-                        *(int *)(uVar23 + 0x58) = *(int *)(uVar23 + 0x58) + 0x10;
+                        *(char *)(shader + 4) = (char)uVar14;
+                        iVar19 = *(int *)(programState + 0x58);
+                        uVar15 = (**(code **)(ctx + 0x10))(iVar19 + 0x10,0x28);
+                        in_r5 = *(int *)(programState + 0x58) * 0x28;
+                        (**(code **)(((unsigned char *)0x00001344) + ctx))
+                                  (uVar15,*(undefined4 *)(programState + 0x54),in_r5);
+                        (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x54));
+                        *(undefined4 *)(programState + 0x54) = uVar15;
+                        *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
                         *(undefined4 *)(iVar18 + 8) = uVar14;
                         goto LAB_00060720;
                       }
@@ -2497,10 +2498,10 @@ LAB_00060590:
                     uVar22 = 0;
                     iVar19 = 0;
                     bVar2 = true;
-                    *(int *)(uVar23 + 0x5c) = *(int *)(uVar23 + 0x5c) + 1;
-                    while (uVar22 < *(uint *)(uVar23 + 0x58)) {
+                    *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 1;
+                    while (uVar22 < *(uint *)(programState + 0x58)) {
                       if (!bVar2) goto LAB_00060690;
-                      if (*(char *)(iVar19 + *(int *)(uVar23 + 0x54) + 0x10) == '\0') {
+                      if (*(char *)(iVar19 + *(int *)(programState + 0x54) + 0x10) == '\0') {
                         in_r8 = 1;
                         bVar2 = false;
                       }
@@ -2511,28 +2512,28 @@ LAB_00060590:
                     }
 LAB_0006068c:
                     if (bVar2) {
-                      *(char *)(param_2 + 4) = (char)in_r8;
-                      iVar19 = *(int *)(uVar23 + 0x58);
-                      uVar14 = (**(code **)(param_1 + 0x10))(iVar19 + 0x10,0x28);
-                      in_r5 = *(int *)(uVar23 + 0x58) * 0x28;
-                      (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar14,*(undefined4 *)(uVar23 + 0x54),in_r5);
-                      (**(code **)(param_1 + 0x18))(*(undefined4 *)(uVar23 + 0x54));
-                      *(undefined4 *)(uVar23 + 0x54) = uVar14;
-                      *(int *)(uVar23 + 0x58) = *(int *)(uVar23 + 0x58) + 0x10;
+                      *(char *)(shader + 4) = (char)in_r8;
+                      iVar19 = *(int *)(programState + 0x58);
+                      uVar14 = (**(code **)(ctx + 0x10))(iVar19 + 0x10,0x28);
+                      in_r5 = *(int *)(programState + 0x58) * 0x28;
+                      (**(code **)(((unsigned char *)0x00001344) + ctx))(uVar14,*(undefined4 *)(programState + 0x54),in_r5);
+                      (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x54));
+                      *(undefined4 *)(programState + 0x54) = uVar14;
+                      *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
 LAB_00060720:
                       *(int *)(iVar18 + 4) = iVar19;
-                      *(undefined1 *)(iVar19 * 0x28 + *(int *)(uVar23 + 0x54) + 0x10) = 1;
-                      iVar19 = param_2[8];
+                      *(undefined1 *)(iVar19 * 0x28 + *(int *)(programState + 0x54) + 0x10) = 1;
+                      iVar19 = shader[8];
                     }
                     else {
 LAB_00060690:
                       *(uint *)(iVar18 + 4) = uVar22;
-                      *(undefined1 *)(uVar22 * 0x28 + *(int *)(uVar23 + 0x54) + 0x10) = 1;
-                      iVar19 = param_2[8];
+                      *(undefined1 *)(uVar22 * 0x28 + *(int *)(programState + 0x54) + 0x10) = 1;
+                      iVar19 = shader[8];
                     }
                   }
                   else if (*(int *)(iVar18 + 0x28) == 0x87c3) {
-                    param_2[0x18] = param_2[0x18] + 1;
+                    shader[0x18] = shader[0x18] + 1;
                     *(undefined1 *)(iVar18 + 0x3d) = 1;
                     iVar19 = *(int *)(iVar18 + 0x24);
                     if (iVar19 == 0x87bf) {
@@ -2540,10 +2541,10 @@ LAB_00060690:
                       uVar22 = 0;
                       iVar19 = 0;
                       bVar2 = true;
-                      *(int *)(uVar23 + 0x5c) = *(int *)(uVar23 + 0x5c) + 1;
-                      while (uVar22 < *(uint *)(uVar23 + 0x58)) {
+                      *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 1;
+                      while (uVar22 < *(uint *)(programState + 0x58)) {
                         if (!bVar2) goto LAB_00060690;
-                        if (*(char *)(iVar19 + *(int *)(uVar23 + 0x54) + 0x10) == '\0') {
+                        if (*(char *)(iVar19 + *(int *)(programState + 0x54) + 0x10) == '\0') {
                           in_r8 = 1;
                           bVar2 = false;
                         }
@@ -2558,10 +2559,10 @@ LAB_00060690:
                       uVar22 = 0;
                       iVar19 = 0;
                       bVar2 = true;
-                      *(int *)(uVar23 + 0x5c) = *(int *)(uVar23 + 0x5c) + 4;
-                      while (uVar22 < *(int *)(uVar23 + 0x58) - 3U) {
+                      *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 4;
+                      while (uVar22 < *(int *)(programState + 0x58) - 3U) {
                         if (!bVar2) goto LAB_0006079c;
-                        if (*(char *)(iVar19 + *(int *)(uVar23 + 0x54) + 0x10) == '\0') {
+                        if (*(char *)(iVar19 + *(int *)(programState + 0x54) + 0x10) == '\0') {
                           bVar2 = false;
                         }
                         else {
@@ -2572,7 +2573,7 @@ LAB_00060690:
                       if (!bVar2) {
 LAB_0006079c:
                         uVar9 = uVar22 * 0x28;
-                        iVar19 = uVar9 + *(int *)(uVar23 + 0x54);
+                        iVar19 = uVar9 + *(int *)(programState + 0x54);
                         in_r8 = uVar9;
                         if (((*(char *)(iVar19 + 0x38) == '\0') &&
                             (*(char *)(iVar19 + 0x60) == '\0')) &&
@@ -2585,7 +2586,7 @@ LAB_0006079c:
                             in_r8 = in_r8 + 1;
                             *(int *)(iVar18 + 0x10) = iVar12;
                             iVar18 = iVar18 + 4;
-                            iVar12 = *(int *)(uVar23 + 0x54) + uVar9;
+                            iVar12 = *(int *)(programState + 0x54) + uVar9;
                             uVar9 = uVar9 + 0x28;
                             *(undefined1 *)(iVar12 + 0x10) = 1;
                             iVar19 = iVar19 + -1;
@@ -2593,25 +2594,25 @@ LAB_0006079c:
                           goto LAB_000608b8;
                         }
                       }
-                      *(undefined1 *)(param_2 + 4) = 0;
-                      iVar3 = *(int *)(uVar23 + 0x58);
-                      uVar14 = (**(code **)(param_1 + 0x10))
+                      *(undefined1 *)(shader + 4) = 0;
+                      iVar3 = *(int *)(programState + 0x58);
+                      uVar14 = (**(code **)(ctx + 0x10))
                                          (iVar3 + 0x10,0x28,in_r5,in_r6,in_r7,in_r8,0);
-                      in_r5 = *(int *)(uVar23 + 0x58) * 0x28;
-                      (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar14,*(undefined4 *)(uVar23 + 0x54),in_r5);
-                      (**(code **)(param_1 + 0x18))(*(undefined4 *)(uVar23 + 0x54));
-                      *(undefined4 *)(uVar23 + 0x54) = uVar14;
+                      in_r5 = *(int *)(programState + 0x58) * 0x28;
+                      (**(code **)(((unsigned char *)0x00001344) + ctx))(uVar14,*(undefined4 *)(programState + 0x54),in_r5);
+                      (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x54));
+                      *(undefined4 *)(programState + 0x54) = uVar14;
                       iVar12 = iVar3 * 0x28;
                       iVar24 = 4;
                       iVar19 = 0;
                       in_r8 = 1;
-                      *(int *)(uVar23 + 0x58) = *(int *)(uVar23 + 0x58) + 0x10;
+                      *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
                       do {
                         iVar4 = iVar19 + iVar3;
                         iVar19 = iVar19 + 1;
                         *(int *)(iVar18 + 0x10) = iVar4;
                         iVar18 = iVar18 + 4;
-                        iVar4 = *(int *)(uVar23 + 0x54) + iVar12;
+                        iVar4 = *(int *)(programState + 0x54) + iVar12;
                         iVar12 = iVar12 + 0x28;
                         *(undefined1 *)(iVar4 + 0x10) = 1;
                         iVar24 = iVar24 + -1;
@@ -2622,10 +2623,10 @@ LAB_0006079c:
                       uVar22 = 0;
                       iVar19 = 0;
                       bVar2 = true;
-                      *(int *)(uVar23 + 0x5c) = *(int *)(uVar23 + 0x5c) + 1;
-                      while (uVar22 < *(uint *)(uVar23 + 0x58)) {
+                      *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 1;
+                      while (uVar22 < *(uint *)(programState + 0x58)) {
                         if (!bVar2) goto LAB_00060590;
-                        if (*(char *)(iVar19 + *(int *)(uVar23 + 0x54) + 0x10) == '\0') {
+                        if (*(char *)(iVar19 + *(int *)(programState + 0x54) + 0x10) == '\0') {
                           uVar14 = 1;
                           bVar2 = false;
                         }
@@ -2637,7 +2638,7 @@ LAB_0006079c:
                       goto LAB_0006058c;
                     }
 LAB_000608b8:
-                    iVar19 = param_2[8];
+                    iVar19 = shader[8];
                   }
 LAB_000608bc:
                   uVar17 = uVar17 + 1;
@@ -2646,23 +2647,23 @@ LAB_000608bc:
               }
             }
 LAB_000608d4:
-            iVar16 = param_2[6];
+            iVar16 = shader[6];
           }
         }
 LAB_000608e0:
         if (*(int *)(iVar10 + iVar16 + 0x58) == 2) {
-          iVar18 = param_2[8];
+          iVar18 = shader[8];
           iVar16 = *(int *)(iVar10 + iVar16 + 0x5c) * 0x54;
           iVar11 = iVar16 + iVar18;
           if ((*(int *)(iVar11 + 0x28) == 0x87c2) && (*(char *)(iVar11 + 0x3d) == '\0')) {
             if (*(int *)(iVar11 + 0x30) == 0) {
               if (*(uint *)(iVar11 + 0x34) < 2) {
-                param_2[0x17] = param_2[0x17] + 1;
+                shader[0x17] = shader[0x17] + 1;
                 if (*(char *)(iVar11 + 0x44) == '\0') {
-                  *(int *)(uVar23 + 0x224) = *(int *)(uVar23 + 0x224) + 1;
+                  *(int *)(programState + 0x224) = *(int *)(programState + 0x224) + 1;
                 }
                 else {
-                  *(int *)(uVar23 + 0x22c) = *(int *)(uVar23 + 0x22c) + 1;
+                  *(int *)(programState + 0x22c) = *(int *)(programState + 0x22c) + 1;
                 }
                 iVar16 = *(int *)(iVar11 + 0x24);
                 *(undefined1 *)(iVar11 + 0x3d) = 1;
@@ -2671,10 +2672,10 @@ LAB_000608e0:
                   uVar17 = 0;
                   iVar16 = 0;
                   bVar2 = true;
-                  *(int *)(uVar23 + 0x5c) = *(int *)(uVar23 + 0x5c) + 1;
-                  while (uVar17 < *(uint *)(uVar23 + 0x58)) {
+                  *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 1;
+                  while (uVar17 < *(uint *)(programState + 0x58)) {
                     if (!bVar2) goto LAB_00060ad8;
-                    if (*(char *)(iVar16 + *(int *)(uVar23 + 0x54) + 0x10) == '\0') {
+                    if (*(char *)(iVar16 + *(int *)(programState + 0x54) + 0x10) == '\0') {
                       in_r8 = 1;
                       bVar2 = false;
                     }
@@ -2684,33 +2685,33 @@ LAB_000608e0:
                     }
                   }
                   if (bVar2) {
-                    *(char *)(param_2 + 4) = (char)in_r8;
-                    iVar16 = *(int *)(uVar23 + 0x58);
-                    uVar14 = (**(code **)(param_1 + 0x10))(iVar16 + 0x10,0x28);
-                    in_r5 = *(int *)(uVar23 + 0x58) * 0x28;
-                    (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar14,*(undefined4 *)(uVar23 + 0x54),in_r5);
-                    (**(code **)(param_1 + 0x18))(*(undefined4 *)(uVar23 + 0x54));
-                    *(undefined4 *)(uVar23 + 0x54) = uVar14;
-                    *(int *)(uVar23 + 0x58) = *(int *)(uVar23 + 0x58) + 0x10;
+                    *(char *)(shader + 4) = (char)in_r8;
+                    iVar16 = *(int *)(programState + 0x58);
+                    uVar14 = (**(code **)(ctx + 0x10))(iVar16 + 0x10,0x28);
+                    in_r5 = *(int *)(programState + 0x58) * 0x28;
+                    (**(code **)(((unsigned char *)0x00001344) + ctx))(uVar14,*(undefined4 *)(programState + 0x54),in_r5);
+                    (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x54));
+                    *(undefined4 *)(programState + 0x54) = uVar14;
+                    *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
 LAB_00060b64:
                     *(int *)(iVar11 + 4) = iVar16;
-                    *(undefined1 *)(iVar16 * 0x28 + *(int *)(uVar23 + 0x54) + 0x10) = 1;
+                    *(undefined1 *)(iVar16 * 0x28 + *(int *)(programState + 0x54) + 0x10) = 1;
                   }
                   else {
 LAB_00060ad8:
                     *(uint *)(iVar11 + 4) = uVar17;
 LAB_00060adc:
-                    *(undefined1 *)(uVar17 * 0x28 + *(int *)(uVar23 + 0x54) + 0x10) = 1;
+                    *(undefined1 *)(uVar17 * 0x28 + *(int *)(programState + 0x54) + 0x10) = 1;
                   }
                 }
                 else if (iVar16 == 0x87c0) {
                   uVar17 = 0;
                   iVar16 = 0;
                   bVar2 = true;
-                  *(int *)(uVar23 + 0x5c) = *(int *)(uVar23 + 0x5c) + 4;
-                  while (uVar17 < *(int *)(uVar23 + 0x58) - 3U) {
+                  *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 4;
+                  while (uVar17 < *(int *)(programState + 0x58) - 3U) {
                     if (!bVar2) goto LAB_00060bdc;
-                    if (*(char *)(iVar16 + *(int *)(uVar23 + 0x54) + 0x10) == '\0') {
+                    if (*(char *)(iVar16 + *(int *)(programState + 0x54) + 0x10) == '\0') {
                       bVar2 = false;
                     }
                     else {
@@ -2721,7 +2722,7 @@ LAB_00060adc:
                   if (!bVar2) {
 LAB_00060bdc:
                     iVar16 = uVar17 * 0x28;
-                    iVar18 = iVar16 + *(int *)(uVar23 + 0x54);
+                    iVar18 = iVar16 + *(int *)(programState + 0x54);
                     if (((*(char *)(iVar18 + 0x38) == '\0') && (*(char *)(iVar18 + 0x60) == '\0'))
                        && (*(char *)(iVar18 + 0x88) == '\0')) {
                       in_r8 = 0;
@@ -2732,7 +2733,7 @@ LAB_00060bdc:
                         in_r8 = in_r8 + 1;
                         *(int *)(iVar11 + 0x10) = iVar19;
                         iVar11 = iVar11 + 4;
-                        iVar19 = iVar16 + *(int *)(uVar23 + 0x54);
+                        iVar19 = iVar16 + *(int *)(programState + 0x54);
                         iVar16 = iVar16 + 0x28;
                         *(undefined1 *)(iVar19 + 0x10) = 1;
                         iVar18 = iVar18 + -1;
@@ -2740,24 +2741,24 @@ LAB_00060bdc:
                       goto LAB_000613b0;
                     }
                   }
-                  *(undefined1 *)(param_2 + 4) = 0;
-                  iVar19 = *(int *)(uVar23 + 0x58);
-                  uVar14 = (**(code **)(param_1 + 0x10))(iVar19 + 0x10,0x28);
-                  in_r5 = *(int *)(uVar23 + 0x58) * 0x28;
-                  (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar14,*(undefined4 *)(uVar23 + 0x54),in_r5);
-                  (**(code **)(param_1 + 0x18))(*(undefined4 *)(uVar23 + 0x54));
-                  *(undefined4 *)(uVar23 + 0x54) = uVar14;
+                  *(undefined1 *)(shader + 4) = 0;
+                  iVar19 = *(int *)(programState + 0x58);
+                  uVar14 = (**(code **)(ctx + 0x10))(iVar19 + 0x10,0x28);
+                  in_r5 = *(int *)(programState + 0x58) * 0x28;
+                  (**(code **)(((unsigned char *)0x00001344) + ctx))(uVar14,*(undefined4 *)(programState + 0x54),in_r5);
+                  (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x54));
+                  *(undefined4 *)(programState + 0x54) = uVar14;
                   iVar18 = iVar19 * 0x28;
                   iVar12 = 4;
                   iVar16 = 0;
                   in_r8 = 1;
-                  *(int *)(uVar23 + 0x58) = *(int *)(uVar23 + 0x58) + 0x10;
+                  *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
                   do {
                     iVar3 = iVar16 + iVar19;
                     iVar16 = iVar16 + 1;
                     *(int *)(iVar11 + 0x10) = iVar3;
                     iVar11 = iVar11 + 4;
-                    iVar3 = iVar18 + *(int *)(uVar23 + 0x54);
+                    iVar3 = iVar18 + *(int *)(programState + 0x54);
                     iVar18 = iVar18 + 0x28;
                     *(undefined1 *)(iVar3 + 0x10) = 1;
                     iVar12 = iVar12 + -1;
@@ -2768,10 +2769,10 @@ LAB_00060bdc:
                   uVar17 = 0;
                   iVar16 = 0;
                   bVar2 = true;
-                  *(int *)(uVar23 + 0x5c) = *(int *)(uVar23 + 0x5c) + 1;
-                  while (uVar17 < *(uint *)(uVar23 + 0x58)) {
+                  *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 1;
+                  while (uVar17 < *(uint *)(programState + 0x58)) {
                     if (!bVar2) goto LAB_000609f0;
-                    if (*(char *)(iVar16 + *(int *)(uVar23 + 0x54) + 0x10) == '\0') {
+                    if (*(char *)(iVar16 + *(int *)(programState + 0x54) + 0x10) == '\0') {
                       uVar14 = 1;
                       bVar2 = false;
                     }
@@ -2781,14 +2782,14 @@ LAB_00060bdc:
                     }
                   }
                   if (bVar2) {
-                    *(char *)(param_2 + 4) = (char)uVar14;
-                    iVar16 = *(int *)(uVar23 + 0x58);
-                    uVar15 = (**(code **)(param_1 + 0x10))(iVar16 + 0x10,0x28);
-                    in_r5 = *(int *)(uVar23 + 0x58) * 0x28;
-                    (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar15,*(undefined4 *)(uVar23 + 0x54),in_r5);
-                    (**(code **)(param_1 + 0x18))(*(undefined4 *)(uVar23 + 0x54));
-                    *(undefined4 *)(uVar23 + 0x54) = uVar15;
-                    *(int *)(uVar23 + 0x58) = *(int *)(uVar23 + 0x58) + 0x10;
+                    *(char *)(shader + 4) = (char)uVar14;
+                    iVar16 = *(int *)(programState + 0x58);
+                    uVar15 = (**(code **)(ctx + 0x10))(iVar16 + 0x10,0x28);
+                    in_r5 = *(int *)(programState + 0x58) * 0x28;
+                    (**(code **)(((unsigned char *)0x00001344) + ctx))(uVar15,*(undefined4 *)(programState + 0x54),in_r5);
+                    (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x54));
+                    *(undefined4 *)(programState + 0x54) = uVar15;
+                    *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
                     *(undefined4 *)(iVar11 + 8) = uVar14;
                     goto LAB_00060b64;
                   }
@@ -2801,8 +2802,8 @@ LAB_000609f0:
               }
             }
             else {
-              iVar16 = FUN_00054da0(param_2 + 7,*(int *)(iVar11 + 0x30));
-              iVar18 = param_2[8];
+              iVar16 = extvsSymbolListGetIndex(shader + 7,*(int *)(iVar11 + 0x30));
+              iVar18 = shader[8];
               iVar16 = iVar16 * 0x54;
             }
             if (*(int *)(iVar18 + iVar16 + 0x34) != 0) {
@@ -2811,12 +2812,12 @@ LAB_000609f0:
               do {
                 iVar19 = iVar18 + iVar11;
                 if (*(int *)(iVar19 + 0x28) == 0x87c2) {
-                  param_2[0x17] = param_2[0x17] + 1;
+                  shader[0x17] = shader[0x17] + 1;
                   if (*(char *)(iVar19 + 0x44) == '\0') {
-                    *(int *)(uVar23 + 0x224) = *(int *)(uVar23 + 0x224) + 1;
+                    *(int *)(programState + 0x224) = *(int *)(programState + 0x224) + 1;
                   }
                   else {
-                    *(int *)(uVar23 + 0x22c) = *(int *)(uVar23 + 0x22c) + 1;
+                    *(int *)(programState + 0x22c) = *(int *)(programState + 0x22c) + 1;
                   }
                   iVar18 = *(int *)(iVar19 + 0x24);
                   *(undefined1 *)(iVar19 + 0x3d) = 1;
@@ -2825,10 +2826,10 @@ LAB_000609f0:
                       uVar22 = 0;
                       iVar18 = 0;
                       bVar2 = true;
-                      *(int *)(uVar23 + 0x5c) = *(int *)(uVar23 + 0x5c) + 4;
-                      while (uVar22 < *(int *)(uVar23 + 0x58) - 3U) {
+                      *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 4;
+                      while (uVar22 < *(int *)(programState + 0x58) - 3U) {
                         if (!bVar2) goto LAB_00060ebc;
-                        if (*(char *)(iVar18 + *(int *)(uVar23 + 0x54) + 0x10) == '\0') {
+                        if (*(char *)(iVar18 + *(int *)(programState + 0x54) + 0x10) == '\0') {
                           bVar2 = false;
                         }
                         else {
@@ -2839,7 +2840,7 @@ LAB_000609f0:
                       if (!bVar2) {
 LAB_00060ebc:
                         uVar9 = uVar22 * 0x28;
-                        iVar18 = uVar9 + *(int *)(uVar23 + 0x54);
+                        iVar18 = uVar9 + *(int *)(programState + 0x54);
                         in_r8 = uVar9;
                         if (((*(char *)(iVar18 + 0x38) == '\0') &&
                             (*(char *)(iVar18 + 0x60) == '\0')) &&
@@ -2852,7 +2853,7 @@ LAB_00060ebc:
                             in_r8 = in_r8 + 1;
                             *(int *)(iVar19 + 0x10) = iVar12;
                             iVar19 = iVar19 + 4;
-                            iVar12 = *(int *)(uVar23 + 0x54) + uVar9;
+                            iVar12 = *(int *)(programState + 0x54) + uVar9;
                             uVar9 = uVar9 + 0x28;
                             *(undefined1 *)(iVar12 + 0x10) = 1;
                             iVar18 = iVar18 + -1;
@@ -2860,25 +2861,25 @@ LAB_00060ebc:
                           goto LAB_00061394;
                         }
                       }
-                      *(undefined1 *)(param_2 + 4) = 0;
-                      iVar3 = *(int *)(uVar23 + 0x58);
-                      uVar14 = (**(code **)(param_1 + 0x10))
+                      *(undefined1 *)(shader + 4) = 0;
+                      iVar3 = *(int *)(programState + 0x58);
+                      uVar14 = (**(code **)(ctx + 0x10))
                                          (iVar3 + 0x10,0x28,in_r5,in_r6,in_r7,in_r8,0);
-                      in_r5 = *(int *)(uVar23 + 0x58) * 0x28;
-                      (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar14,*(undefined4 *)(uVar23 + 0x54),in_r5);
-                      (**(code **)(param_1 + 0x18))(*(undefined4 *)(uVar23 + 0x54));
-                      *(undefined4 *)(uVar23 + 0x54) = uVar14;
+                      in_r5 = *(int *)(programState + 0x58) * 0x28;
+                      (**(code **)(((unsigned char *)0x00001344) + ctx))(uVar14,*(undefined4 *)(programState + 0x54),in_r5);
+                      (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x54));
+                      *(undefined4 *)(programState + 0x54) = uVar14;
                       iVar12 = iVar3 * 0x28;
                       iVar24 = 4;
                       iVar18 = 0;
                       in_r8 = 1;
-                      *(int *)(uVar23 + 0x58) = *(int *)(uVar23 + 0x58) + 0x10;
+                      *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
                       do {
                         iVar4 = iVar3 + iVar18;
                         iVar18 = iVar18 + 1;
                         *(int *)(iVar19 + 0x10) = iVar4;
                         iVar19 = iVar19 + 4;
-                        iVar4 = iVar12 + *(int *)(uVar23 + 0x54);
+                        iVar4 = iVar12 + *(int *)(programState + 0x54);
                         iVar12 = iVar12 + 0x28;
                         *(undefined1 *)(iVar4 + 0x10) = 1;
                         iVar24 = iVar24 + -1;
@@ -2889,10 +2890,10 @@ LAB_00060ebc:
                       uVar22 = 0;
                       iVar18 = 0;
                       bVar2 = true;
-                      *(int *)(uVar23 + 0x5c) = *(int *)(uVar23 + 0x5c) + 1;
-                      while (uVar22 < *(uint *)(uVar23 + 0x58)) {
+                      *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 1;
+                      while (uVar22 < *(uint *)(programState + 0x58)) {
                         if (!bVar2) goto LAB_0006106c;
-                        if (*(char *)(iVar18 + *(int *)(uVar23 + 0x54) + 0x10) == '\0') {
+                        if (*(char *)(iVar18 + *(int *)(programState + 0x54) + 0x10) == '\0') {
                           uVar14 = 1;
                           bVar2 = false;
                         }
@@ -2906,18 +2907,18 @@ LAB_00061068:
 LAB_0006106c:
                         *(uint *)(iVar19 + 4) = uVar22;
                         *(undefined4 *)(iVar19 + 8) = 0;
-                        *(undefined1 *)(uVar22 * 0x28 + *(int *)(uVar23 + 0x54) + 0x10) = 1;
-                        iVar18 = param_2[8];
+                        *(undefined1 *)(uVar22 * 0x28 + *(int *)(programState + 0x54) + 0x10) = 1;
+                        iVar18 = shader[8];
                         goto LAB_00061398;
                       }
-                      *(char *)(param_2 + 4) = (char)uVar14;
-                      iVar18 = *(int *)(uVar23 + 0x58);
-                      uVar15 = (**(code **)(param_1 + 0x10))(iVar18 + 0x10,0x28);
-                      in_r5 = *(int *)(uVar23 + 0x58) * 0x28;
-                      (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar15,*(undefined4 *)(uVar23 + 0x54),in_r5);
-                      (**(code **)(param_1 + 0x18))(*(undefined4 *)(uVar23 + 0x54));
-                      *(undefined4 *)(uVar23 + 0x54) = uVar15;
-                      *(int *)(uVar23 + 0x58) = *(int *)(uVar23 + 0x58) + 0x10;
+                      *(char *)(shader + 4) = (char)uVar14;
+                      iVar18 = *(int *)(programState + 0x58);
+                      uVar15 = (**(code **)(ctx + 0x10))(iVar18 + 0x10,0x28);
+                      in_r5 = *(int *)(programState + 0x58) * 0x28;
+                      (**(code **)(((unsigned char *)0x00001344) + ctx))(uVar15,*(undefined4 *)(programState + 0x54),in_r5);
+                      (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x54));
+                      *(undefined4 *)(programState + 0x54) = uVar15;
+                      *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
                       *(undefined4 *)(iVar19 + 8) = uVar14;
                       goto LAB_000611fc;
                     }
@@ -2927,10 +2928,10 @@ LAB_0006106c:
                   uVar22 = 0;
                   iVar18 = 0;
                   bVar2 = true;
-                  *(int *)(uVar23 + 0x5c) = *(int *)(uVar23 + 0x5c) + 1;
-                  while (uVar22 < *(uint *)(uVar23 + 0x58)) {
+                  *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 1;
+                  while (uVar22 < *(uint *)(programState + 0x58)) {
                     if (!bVar2) goto LAB_0006116c;
-                    if (*(char *)(iVar18 + *(int *)(uVar23 + 0x54) + 0x10) == '\0') {
+                    if (*(char *)(iVar18 + *(int *)(programState + 0x54) + 0x10) == '\0') {
                       in_r8 = 1;
                       bVar2 = false;
                     }
@@ -2941,28 +2942,28 @@ LAB_0006106c:
                   }
 LAB_00061168:
                   if (bVar2) {
-                    *(char *)(param_2 + 4) = (char)in_r8;
-                    iVar18 = *(int *)(uVar23 + 0x58);
-                    uVar14 = (**(code **)(param_1 + 0x10))(iVar18 + 0x10,0x28);
-                    in_r5 = *(int *)(uVar23 + 0x58) * 0x28;
-                    (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar14,*(undefined4 *)(uVar23 + 0x54),in_r5);
-                    (**(code **)(param_1 + 0x18))(*(undefined4 *)(uVar23 + 0x54));
-                    *(undefined4 *)(uVar23 + 0x54) = uVar14;
-                    *(int *)(uVar23 + 0x58) = *(int *)(uVar23 + 0x58) + 0x10;
+                    *(char *)(shader + 4) = (char)in_r8;
+                    iVar18 = *(int *)(programState + 0x58);
+                    uVar14 = (**(code **)(ctx + 0x10))(iVar18 + 0x10,0x28);
+                    in_r5 = *(int *)(programState + 0x58) * 0x28;
+                    (**(code **)(((unsigned char *)0x00001344) + ctx))(uVar14,*(undefined4 *)(programState + 0x54),in_r5);
+                    (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x54));
+                    *(undefined4 *)(programState + 0x54) = uVar14;
+                    *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
 LAB_000611fc:
                     *(int *)(iVar19 + 4) = iVar18;
-                    *(undefined1 *)(iVar18 * 0x28 + *(int *)(uVar23 + 0x54) + 0x10) = 1;
-                    iVar18 = param_2[8];
+                    *(undefined1 *)(iVar18 * 0x28 + *(int *)(programState + 0x54) + 0x10) = 1;
+                    iVar18 = shader[8];
                   }
                   else {
 LAB_0006116c:
                     *(uint *)(iVar19 + 4) = uVar22;
-                    *(undefined1 *)(uVar22 * 0x28 + *(int *)(uVar23 + 0x54) + 0x10) = 1;
-                    iVar18 = param_2[8];
+                    *(undefined1 *)(uVar22 * 0x28 + *(int *)(programState + 0x54) + 0x10) = 1;
+                    iVar18 = shader[8];
                   }
                 }
                 else if (*(int *)(iVar19 + 0x28) == 0x87c3) {
-                  param_2[0x18] = param_2[0x18] + 1;
+                  shader[0x18] = shader[0x18] + 1;
                   *(undefined1 *)(iVar19 + 0x3d) = 1;
                   iVar18 = *(int *)(iVar19 + 0x24);
                   if (iVar18 == 0x87bf) {
@@ -2970,10 +2971,10 @@ LAB_0006116c:
                     uVar22 = 0;
                     iVar18 = 0;
                     bVar2 = true;
-                    *(int *)(uVar23 + 0x5c) = *(int *)(uVar23 + 0x5c) + 1;
-                    while (uVar22 < *(uint *)(uVar23 + 0x58)) {
+                    *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 1;
+                    while (uVar22 < *(uint *)(programState + 0x58)) {
                       if (!bVar2) goto LAB_0006116c;
-                      if (*(char *)(iVar18 + *(int *)(uVar23 + 0x54) + 0x10) == '\0') {
+                      if (*(char *)(iVar18 + *(int *)(programState + 0x54) + 0x10) == '\0') {
                         in_r8 = 1;
                         bVar2 = false;
                       }
@@ -2988,10 +2989,10 @@ LAB_0006116c:
                     uVar22 = 0;
                     iVar18 = 0;
                     bVar2 = true;
-                    *(int *)(uVar23 + 0x5c) = *(int *)(uVar23 + 0x5c) + 4;
-                    while (uVar22 < *(int *)(uVar23 + 0x58) - 3U) {
+                    *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 4;
+                    while (uVar22 < *(int *)(programState + 0x58) - 3U) {
                       if (!bVar2) goto LAB_00061278;
-                      if (*(char *)(iVar18 + *(int *)(uVar23 + 0x54) + 0x10) == '\0') {
+                      if (*(char *)(iVar18 + *(int *)(programState + 0x54) + 0x10) == '\0') {
                         bVar2 = false;
                       }
                       else {
@@ -3002,7 +3003,7 @@ LAB_0006116c:
                     if (!bVar2) {
 LAB_00061278:
                       uVar9 = uVar22 * 0x28;
-                      iVar18 = uVar9 + *(int *)(uVar23 + 0x54);
+                      iVar18 = uVar9 + *(int *)(programState + 0x54);
                       in_r8 = uVar9;
                       if (((*(char *)(iVar18 + 0x38) == '\0') && (*(char *)(iVar18 + 0x60) == '\0'))
                          && (*(char *)(iVar18 + 0x88) == '\0')) {
@@ -3014,7 +3015,7 @@ LAB_00061278:
                           in_r8 = in_r8 + 1;
                           *(int *)(iVar19 + 0x10) = iVar12;
                           iVar19 = iVar19 + 4;
-                          iVar12 = *(int *)(uVar23 + 0x54) + uVar9;
+                          iVar12 = *(int *)(programState + 0x54) + uVar9;
                           uVar9 = uVar9 + 0x28;
                           *(undefined1 *)(iVar12 + 0x10) = 1;
                           iVar18 = iVar18 + -1;
@@ -3022,25 +3023,25 @@ LAB_00061278:
                         goto LAB_00061394;
                       }
                     }
-                    *(undefined1 *)(param_2 + 4) = 0;
-                    iVar3 = *(int *)(uVar23 + 0x58);
-                    uVar14 = (**(code **)(param_1 + 0x10))
+                    *(undefined1 *)(shader + 4) = 0;
+                    iVar3 = *(int *)(programState + 0x58);
+                    uVar14 = (**(code **)(ctx + 0x10))
                                        (iVar3 + 0x10,0x28,in_r5,in_r6,in_r7,in_r8,0);
-                    in_r5 = *(int *)(uVar23 + 0x58) * 0x28;
-                    (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar14,*(undefined4 *)(uVar23 + 0x54),in_r5);
-                    (**(code **)(param_1 + 0x18))(*(undefined4 *)(uVar23 + 0x54));
-                    *(undefined4 *)(uVar23 + 0x54) = uVar14;
+                    in_r5 = *(int *)(programState + 0x58) * 0x28;
+                    (**(code **)(((unsigned char *)0x00001344) + ctx))(uVar14,*(undefined4 *)(programState + 0x54),in_r5);
+                    (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x54));
+                    *(undefined4 *)(programState + 0x54) = uVar14;
                     iVar12 = iVar3 * 0x28;
                     iVar24 = 4;
                     iVar18 = 0;
                     in_r8 = 1;
-                    *(int *)(uVar23 + 0x58) = *(int *)(uVar23 + 0x58) + 0x10;
+                    *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
                     do {
                       iVar4 = iVar3 + iVar18;
                       iVar18 = iVar18 + 1;
                       *(int *)(iVar19 + 0x10) = iVar4;
                       iVar19 = iVar19 + 4;
-                      iVar4 = *(int *)(uVar23 + 0x54) + iVar12;
+                      iVar4 = *(int *)(programState + 0x54) + iVar12;
                       iVar12 = iVar12 + 0x28;
                       *(undefined1 *)(iVar4 + 0x10) = 1;
                       iVar24 = iVar24 + -1;
@@ -3051,10 +3052,10 @@ LAB_00061278:
                     uVar22 = 0;
                     iVar18 = 0;
                     bVar2 = true;
-                    *(int *)(uVar23 + 0x5c) = *(int *)(uVar23 + 0x5c) + 1;
-                    while (uVar22 < *(uint *)(uVar23 + 0x58)) {
+                    *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 1;
+                    while (uVar22 < *(uint *)(programState + 0x58)) {
                       if (!bVar2) goto LAB_0006106c;
-                      if (*(char *)(iVar18 + *(int *)(uVar23 + 0x54) + 0x10) == '\0') {
+                      if (*(char *)(iVar18 + *(int *)(programState + 0x54) + 0x10) == '\0') {
                         uVar14 = 1;
                         bVar2 = false;
                       }
@@ -3066,7 +3067,7 @@ LAB_00061278:
                     goto LAB_00061068;
                   }
 LAB_00061394:
-                  iVar18 = param_2[8];
+                  iVar18 = shader[8];
                 }
 LAB_00061398:
                 uVar17 = uVar17 + 1;
@@ -3078,27 +3079,27 @@ LAB_00061398:
 LAB_000613b0:
         uVar5 = uVar5 + 1;
         iVar10 = iVar10 + 0x74;
-      } while (uVar5 < (uint)param_2[5]);
-      if (param_2[5] != 0) {
+      } while (uVar5 < (uint)shader[5]);
+      if (shader[5] != 0) {
         uVar5 = 0;
         iVar10 = 0;
         do {
-          iVar16 = param_2[6];
+          iVar16 = shader[6];
           if (*(int *)(iVar10 + iVar16 + 0x20) == 2) {
-            iVar19 = param_2[8];
+            iVar19 = shader[8];
             iVar11 = *(int *)(iVar10 + iVar16 + 0x24) * 0x54;
             iVar18 = iVar11 + iVar19;
             if ((*(int *)(iVar18 + 0x28) == 0x87c3) && (*(char *)(iVar18 + 0x3d) == '\0')) {
               if (*(int *)(iVar18 + 0x30) == 0) {
                 if (*(uint *)(iVar18 + 0x34) < 2) {
-                  FUN_00055da0(param_1,param_2,uVar23,iVar18);
-                  iVar16 = param_2[6];
+                  extvsAllocConstantRegisters(ctx,shader,programState,iVar18);
+                  iVar16 = shader[6];
                   goto LAB_000614b0;
                 }
               }
               else {
-                iVar11 = FUN_00054da0(param_2 + 7,*(int *)(iVar18 + 0x30));
-                iVar19 = param_2[8];
+                iVar11 = extvsSymbolListGetIndex(shader + 7,*(int *)(iVar18 + 0x30));
+                iVar19 = shader[8];
                 iVar11 = iVar11 * 0x54;
               }
               if (*(int *)(iVar19 + iVar11 + 0x34) != 0) {
@@ -3108,29 +3109,29 @@ LAB_000613b0:
                   iVar19 = iVar16 + iVar19;
                   uVar17 = uVar17 + 1;
                   iVar16 = iVar16 + 0x54;
-                  FUN_00055da0(param_1,param_2,uVar23,iVar19);
-                  iVar19 = param_2[8];
+                  extvsAllocConstantRegisters(ctx,shader,programState,iVar19);
+                  iVar19 = shader[8];
                 } while (uVar17 < *(uint *)(iVar19 + iVar11 + 0x34));
               }
-              iVar16 = param_2[6];
+              iVar16 = shader[6];
             }
           }
 LAB_000614b0:
           if (*(int *)(iVar10 + iVar16 + 0x3c) == 2) {
-            iVar19 = param_2[8];
+            iVar19 = shader[8];
             iVar11 = *(int *)(iVar10 + iVar16 + 0x40) * 0x54;
             iVar18 = iVar11 + iVar19;
             if ((*(int *)(iVar18 + 0x28) == 0x87c3) && (*(char *)(iVar18 + 0x3d) == '\0')) {
               if (*(int *)(iVar18 + 0x30) == 0) {
                 if (*(uint *)(iVar18 + 0x34) < 2) {
-                  FUN_00055da0(param_1,param_2,uVar23,iVar18);
-                  iVar16 = param_2[6];
+                  extvsAllocConstantRegisters(ctx,shader,programState,iVar18);
+                  iVar16 = shader[6];
                   goto LAB_00061580;
                 }
               }
               else {
-                iVar11 = FUN_00054da0(param_2 + 7,*(int *)(iVar18 + 0x30));
-                iVar19 = param_2[8];
+                iVar11 = extvsSymbolListGetIndex(shader + 7,*(int *)(iVar18 + 0x30));
+                iVar19 = shader[8];
                 iVar11 = iVar11 * 0x54;
               }
               if (*(int *)(iVar19 + iVar11 + 0x34) != 0) {
@@ -3140,28 +3141,28 @@ LAB_000614b0:
                   iVar19 = iVar16 + iVar19;
                   uVar17 = uVar17 + 1;
                   iVar16 = iVar16 + 0x54;
-                  FUN_00055da0(param_1,param_2,uVar23,iVar19);
-                  iVar19 = param_2[8];
+                  extvsAllocConstantRegisters(ctx,shader,programState,iVar19);
+                  iVar19 = shader[8];
                 } while (uVar17 < *(uint *)(iVar19 + iVar11 + 0x34));
               }
-              iVar16 = param_2[6];
+              iVar16 = shader[6];
             }
           }
 LAB_00061580:
           if (*(int *)(iVar10 + iVar16 + 0x58) == 2) {
-            iVar18 = param_2[8];
+            iVar18 = shader[8];
             iVar16 = *(int *)(iVar10 + iVar16 + 0x5c) * 0x54;
             iVar11 = iVar16 + iVar18;
             if ((*(int *)(iVar11 + 0x28) == 0x87c3) && (*(char *)(iVar11 + 0x3d) == '\0')) {
               if (*(int *)(iVar11 + 0x30) == 0) {
                 if (*(uint *)(iVar11 + 0x34) < 2) {
-                  FUN_00055da0(param_1,param_2,uVar23,iVar11);
+                  extvsAllocConstantRegisters(ctx,shader,programState,iVar11);
                   goto LAB_00061650;
                 }
               }
               else {
-                iVar16 = FUN_00054da0(param_2 + 7,*(int *)(iVar11 + 0x30));
-                iVar18 = param_2[8];
+                iVar16 = extvsSymbolListGetIndex(shader + 7,*(int *)(iVar11 + 0x30));
+                iVar18 = shader[8];
                 iVar16 = iVar16 * 0x54;
               }
               if (*(int *)(iVar18 + iVar16 + 0x34) != 0) {
@@ -3171,8 +3172,8 @@ LAB_00061580:
                   iVar18 = iVar11 + iVar18;
                   uVar17 = uVar17 + 1;
                   iVar11 = iVar11 + 0x54;
-                  FUN_00055da0(param_1,param_2,uVar23,iVar18);
-                  iVar18 = param_2[8];
+                  extvsAllocConstantRegisters(ctx,shader,programState,iVar18);
+                  iVar18 = shader[8];
                 } while (uVar17 < *(uint *)(iVar18 + iVar16 + 0x34));
               }
             }
@@ -3180,70 +3181,70 @@ LAB_00061580:
 LAB_00061650:
           uVar5 = uVar5 + 1;
           iVar10 = iVar10 + 0x74;
-        } while (uVar5 < (uint)param_2[5]);
+        } while (uVar5 < (uint)shader[5]);
       }
     }
-    if ((*(char *)((int)param_2 + 0x7a) != '\0') && ((*(uint *)(param_1 + 0x44) & 0x1000000) != 0))
+    if ((*(char *)((int)shader + 0x7a) != '\0') && ((*(uint *)(ctx + 0x44) & 0x1000000) != 0))
     {
-      uVar5 = *(int *)(uVar23 + 0x5c) + 1;
-      *(int *)(uVar23 + 0x60) = *(int *)(uVar23 + 0x5c);
-      *(uint *)(uVar23 + 0x5c) = uVar5;
-      if (*(uint *)(uVar23 + 0x58) < uVar5) {
-        *(undefined1 *)(param_2 + 4) = 0;
-        uVar14 = (**(code **)(param_1 + 0x10))(*(int *)(uVar23 + 0x58) + 0x10,0x28);
-        (**(code **)(((unsigned char *)0x00001344) + param_1))
-                  (uVar14,*(undefined4 *)(uVar23 + 0x54),*(int *)(uVar23 + 0x58) * 0x28);
-        (**(code **)(param_1 + 0x18))(*(undefined4 *)(uVar23 + 0x54));
-        *(undefined4 *)(uVar23 + 0x54) = uVar14;
-        *(int *)(uVar23 + 0x58) = *(int *)(uVar23 + 0x58) + 0x10;
+      uVar5 = *(int *)(programState + 0x5c) + 1;
+      *(int *)(programState + 0x60) = *(int *)(programState + 0x5c);
+      *(uint *)(programState + 0x5c) = uVar5;
+      if (*(uint *)(programState + 0x58) < uVar5) {
+        *(undefined1 *)(shader + 4) = 0;
+        uVar14 = (**(code **)(ctx + 0x10))(*(int *)(programState + 0x58) + 0x10,0x28);
+        (**(code **)(((unsigned char *)0x00001344) + ctx))
+                  (uVar14,*(undefined4 *)(programState + 0x54),*(int *)(programState + 0x58) * 0x28);
+        (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x54));
+        *(undefined4 *)(programState + 0x54) = uVar14;
+        *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
       }
     }
     uVar17 = 0;
-    *(undefined4 *)(uVar23 + 0x18) = 0;
+    *(undefined4 *)(programState + 0x18) = 0;
     uVar5 = 0;
-    if (param_2[5] != 0) {
+    if (shader[5] != 0) {
       uVar22 = 0;
       iVar10 = 0;
       do {
-        if (0x20 < *(int *)(iVar10 + param_2[6]) - 0x8782U) {
-          param_2[0x19] = 0;
-          param_2[0xc] = 0;
-          param_2[0x15] = 0;
-          param_2[0x16] = 0;
-          param_2[0x17] = 0;
-          param_2[0x18] = 0;
+        if (0x20 < *(int *)(iVar10 + shader[6]) - 0x8782U) {
+          shader[0x19] = 0;
+          shader[0xc] = 0;
+          shader[0x15] = 0;
+          shader[0x16] = 0;
+          shader[0x17] = 0;
+          shader[0x18] = 0;
           return 0;
         }
-        FUN_000564c0(param_1,param_2,uVar23,iVar10 + param_2[6] + 4);
-        FUN_000564c0(param_1,param_2,uVar23,iVar10 + param_2[6] + 0x20);
-        FUN_000564c0(param_1,param_2,uVar23,iVar10 + param_2[6] + 0x3c);
-        iVar16 = iVar10 + param_2[6] + 0x58;
-        FUN_000564c0(param_1,param_2,uVar23,iVar16);
-        if (uVar17 < (uint)param_2[0x19]) {
-          uVar17 = param_2[0x19];
+        extvsAllocTempRegisters(ctx,shader,programState,iVar10 + shader[6] + 4);
+        extvsAllocTempRegisters(ctx,shader,programState,iVar10 + shader[6] + 0x20);
+        extvsAllocTempRegisters(ctx,shader,programState,iVar10 + shader[6] + 0x3c);
+        iVar16 = iVar10 + shader[6] + 0x58;
+        extvsAllocTempRegisters(ctx,shader,programState,iVar16);
+        if (uVar17 < (uint)shader[0x19]) {
+          uVar17 = shader[0x19];
         }
-        iVar11 = *(int *)(iVar10 + param_2[6]) + -0x8782;
-        iVar18 = (*(code *)(PTR_FUN_001db9b8)[iVar11])(param_1,param_2,iVar10 + param_2[6]);
+        iVar11 = *(int *)(iVar10 + shader[6]) + -0x8782;
+        iVar18 = (*(code *)(PTR_FUN_001db9b8)[iVar11])(ctx,shader,iVar10 + shader[6]);
         if (iVar18 < 0) {
           uVar7 = 0;
           goto LAB_00061d90;
         }
-        *(int *)(uVar23 + 0x18) = iVar18 + *(int *)(uVar23 + 0x18);
-        uVar5 = *(uint *)(param_1 + 0x44);
+        *(int *)(programState + 0x18) = iVar18 + *(int *)(programState + 0x18);
+        uVar5 = *(uint *)(ctx + 0x44);
         if ((uVar5 & 0x800) != 0) {
-          iVar18 = iVar10 + param_2[6];
+          iVar18 = iVar10 + shader[6];
           iVar19 = *(int *)(iVar18 + 4);
           if ((iVar19 == 1) && (*(int *)(iVar18 + 8) == 0x87bd)) {
-            bVar1 = ((unsigned char *)0x000011d1)[param_1];
+            bVar1 = ((unsigned char *)0x000011d1)[ctx];
             _memcpy(auStack_d8,iVar18,0x74);
             iStack_c8 = 0;
             iStack_c4 = 0;
             iStack_c0 = 0;
             iStack_d0 = bVar1 + 0x879d;
             iStack_cc = iVar19;
-            iVar18 = (*(code *)(PTR_FUN_001db9b8)[iVar11])(param_1,param_2,auStack_d8);
-            iVar12 = *(int *)(uVar23 + 0x18);
-            *(int *)(uVar23 + 0x18) = iVar18 + iVar12;
+            iVar18 = (*(code *)(PTR_FUN_001db9b8)[iVar11])(ctx,shader,auStack_d8);
+            iVar12 = *(int *)(programState + 0x18);
+            *(int *)(programState + 0x18) = iVar18 + iVar12;
             uStack_a4 = 0x87de;
             auStack_d8[0] = 0x8799;
             iStack_cc = 0;
@@ -3254,154 +3255,154 @@ LAB_00061650:
             iStack_c4 = iVar19;
             iStack_c0 = iVar19;
             iVar18 = (*(code *)PTR_FUN_001dba14)
-                               (param_1,param_2,auStack_d8,iVar16,in_r7,in_r8,iVar12);
-            *(int *)(uVar23 + 0x18) = iVar18 + *(int *)(uVar23 + 0x18);
-            uVar5 = *(uint *)(param_1 + 0x44);
+                               (ctx,shader,auStack_d8,iVar16,in_r7,in_r8,iVar12);
+            *(int *)(programState + 0x18) = iVar18 + *(int *)(programState + 0x18);
+            uVar5 = *(uint *)(ctx + 0x44);
           }
         }
-        if ((((uVar5 & 0x400) != 0) && (iVar18 = iVar10 + param_2[6], *(int *)(iVar18 + 4) == 1)) &&
+        if ((((uVar5 & 0x400) != 0) && (iVar18 = iVar10 + shader[6], *(int *)(iVar18 + 4) == 1)) &&
            (*(int *)(iVar18 + 8) == 0x879a)) {
           _memcpy(auStack_d8,iVar18,0x74);
-          iStack_d0 = (byte)((unsigned char *)0x000011d2)[param_1] + 0x879d;
+          iStack_d0 = (byte)((unsigned char *)0x000011d2)[ctx] + 0x879d;
           iVar16 = (*(code *)(PTR_FUN_001db9b8)[iVar11])
-                             (param_1,param_2,auStack_d8,iVar16,in_r7,in_r8,
+                             (ctx,shader,auStack_d8,iVar16,in_r7,in_r8,
                               (PTR_FUN_001db9b8)[iVar11]);
-          *(int *)(uVar23 + 0x18) = iVar16 + *(int *)(uVar23 + 0x18);
+          *(int *)(programState + 0x18) = iVar16 + *(int *)(programState + 0x18);
         }
-        if (*(char *)((int)param_2 + 0x7b) == '\0') {
-          FUN_00056be0(param_1,param_2,uVar22);
+        if (*(char *)((int)shader + 0x7b) == '\0') {
+          extvsFreeDeadTempSlots(ctx,shader,uVar22);
         }
-        if (((*(char *)((int)param_2 + 0x7a) != '\0') &&
-            ((*(uint *)(param_1 + 0x44) & 0x1000000) != 0)) &&
-           ((*(int *)(iVar10 + param_2[6] + 4) == 1 && (*(int *)(iVar10 + param_2[6] + 8) == 0x87bd)
+        if (((*(char *)((int)shader + 0x7a) != '\0') &&
+            ((*(uint *)(ctx + 0x44) & 0x1000000) != 0)) &&
+           ((*(int *)(iVar10 + shader[6] + 4) == 1 && (*(int *)(iVar10 + shader[6] + 8) == 0x87bd)
             ))) {
-          iVar11 = *(int *)(uVar23 + 0x18);
-          iVar16 = ((int (*)())FUN_0005e0d0)(param_1,param_2,iVar11 * 0x10 + *(int *)(uVar23 + 0x1c) + -0x10);
-          *(int *)(uVar23 + 0x18) = iVar11 + iVar16;
+          iVar11 = *(int *)(programState + 0x18);
+          iVar16 = ((int (*)())FUN_0005e0d0)(ctx,shader,iVar11 * 0x10 + *(int *)(programState + 0x1c) + -0x10);
+          *(int *)(programState + 0x18) = iVar11 + iVar16;
         }
-        uVar5 = param_2[5];
+        uVar5 = shader[5];
         uVar22 = uVar22 + 1;
         iVar10 = iVar10 + 0x74;
       } while (uVar22 < uVar5);
     }
-    iVar10 = *(int *)(uVar23 + 0x18);
-    param_2[0x19] = uVar17;
-    param_2[0x15] = iVar10;
+    iVar10 = *(int *)(programState + 0x18);
+    shader[0x19] = uVar17;
+    shader[0x15] = iVar10;
     if (uVar5 != 0) {
       uVar5 = 0;
       iVar10 = 0;
       do {
         iVar16 = uVar5 * 0x10;
         uVar5 = uVar5 + 1;
-        iVar11 = iVar16 + iVar8;
+        iVar11 = iVar16 + writeEnableSnapshot;
         uVar20 = *(undefined4 *)(iVar11 + 0xc);
         uVar14 = *(undefined4 *)(iVar11 + 4);
-        iVar18 = iVar10 + param_2[6];
+        iVar18 = iVar10 + shader[6];
         iVar10 = iVar10 + 0x74;
         uVar15 = *(undefined4 *)(iVar11 + 8);
-        *(undefined4 *)(iVar18 + 0xc) = *(undefined4 *)(iVar8 + iVar16);
+        *(undefined4 *)(iVar18 + 0xc) = *(undefined4 *)(writeEnableSnapshot + iVar16);
         *(undefined4 *)(iVar18 + 0x18) = uVar20;
         *(undefined4 *)(iVar18 + 0x10) = uVar14;
         *(undefined4 *)(iVar18 + 0x14) = uVar15;
-      } while (uVar5 < (uint)param_2[5]);
+      } while (uVar5 < (uint)shader[5]);
     }
-    (**(code **)(param_1 + 0x18))(iVar8);
-    iVar8 = *(int *)(uVar23 + 0x18);
-    *(undefined4 *)(uVar23 + 8) = 0;
-    if (iVar8 != 0) {
+    (**(code **)(ctx + 0x18))(writeEnableSnapshot);
+    writeEnableSnapshot = *(int *)(programState + 0x18);
+    *(undefined4 *)(programState + 8) = 0;
+    if (writeEnableSnapshot != 0) {
       do {
-        uVar17 = *(uint *)(iVar8 * 0x10 + *(int *)(uVar23 + 0x1c) + -0x10);
+        uVar17 = *(uint *)(writeEnableSnapshot * 0x10 + *(int *)(programState + 0x1c) + -0x10);
         uVar5 = uVar17 & 0xf00;
         if (((uVar5 == 0x200) || (uVar5 == 0x300)) && ((uVar17 & 0xfe000) == 0)) {
-          *(int *)(uVar23 + 8) = iVar8 + -1;
+          *(int *)(programState + 8) = writeEnableSnapshot + -1;
         }
-        iVar8 = iVar8 + -1;
-      } while ((iVar8 != 0) && (*(int *)(uVar23 + 8) == 0));
+        writeEnableSnapshot = writeEnableSnapshot + -1;
+      } while ((writeEnableSnapshot != 0) && (*(int *)(programState + 8) == 0));
     }
-    if (*(int *)(uVar23 + 0x224) != 0) {
-      uVar14 = (**(code **)(param_1 + 0xc))(*(int *)(uVar23 + 0x224) << 2);
-      *(undefined4 *)(uVar23 + 0x220) = uVar14;
-      uVar5 = param_2[7];
+    if (*(int *)(programState + 0x224) != 0) {
+      uVar14 = (**(code **)(ctx + 0xc))(*(int *)(programState + 0x224) << 2);
+      *(undefined4 *)(programState + 0x220) = uVar14;
+      uVar5 = shader[7];
       if (uVar5 != 0) {
         uVar17 = 0;
-        iVar8 = 0;
+        writeEnableSnapshot = 0;
         iVar10 = 0;
         do {
-          iVar16 = iVar10 + param_2[8];
+          iVar16 = iVar10 + shader[8];
           if (((*(char *)(iVar16 + 0x3d) != '\0') && (*(int *)(iVar16 + 0x28) == 0x87c2)) &&
              (*(char *)(iVar16 + 0x44) == '\0')) {
-            iVar16 = iVar8 * 4;
-            iVar8 = iVar8 + 1;
-            *(uint *)(iVar16 + *(int *)(uVar23 + 0x220)) = uVar17;
-            uVar5 = param_2[7];
+            iVar16 = writeEnableSnapshot * 4;
+            writeEnableSnapshot = writeEnableSnapshot + 1;
+            *(uint *)(iVar16 + *(int *)(programState + 0x220)) = uVar17;
+            uVar5 = shader[7];
           }
           uVar17 = uVar17 + 1;
           iVar10 = iVar10 + 0x54;
         } while (uVar17 < uVar5);
       }
     }
-    if (*(int *)(uVar23 + 0x22c) != 0) {
-      uVar14 = (**(code **)(param_1 + 0xc))(*(int *)(uVar23 + 0x22c) << 2);
-      *(undefined4 *)(uVar23 + 0x228) = uVar14;
-      uVar5 = param_2[7];
+    if (*(int *)(programState + 0x22c) != 0) {
+      uVar14 = (**(code **)(ctx + 0xc))(*(int *)(programState + 0x22c) << 2);
+      *(undefined4 *)(programState + 0x228) = uVar14;
+      uVar5 = shader[7];
       if (uVar5 != 0) {
         uVar17 = 0;
-        iVar8 = 0;
+        writeEnableSnapshot = 0;
         iVar10 = 0;
         do {
-          iVar16 = iVar10 + param_2[8];
+          iVar16 = iVar10 + shader[8];
           if (((*(char *)(iVar16 + 0x3d) != '\0') && (*(int *)(iVar16 + 0x28) == 0x87c2)) &&
              (*(char *)(iVar16 + 0x44) != '\0')) {
-            iVar11 = iVar8 * 4;
-            iVar8 = iVar8 + 1;
-            *(uint *)(iVar11 + *(int *)(uVar23 + 0x228)) = uVar17;
-            *(uint *)(uVar23 + 0x230) = *(uint *)(uVar23 + 0x230) | *(uint *)(iVar16 + 0x50);
-            uVar5 = param_2[7];
+            iVar11 = writeEnableSnapshot * 4;
+            writeEnableSnapshot = writeEnableSnapshot + 1;
+            *(uint *)(iVar11 + *(int *)(programState + 0x228)) = uVar17;
+            *(uint *)(programState + 0x230) = *(uint *)(programState + 0x230) | *(uint *)(iVar16 + 0x50);
+            uVar5 = shader[7];
           }
           uVar17 = uVar17 + 1;
           iVar10 = iVar10 + 0x54;
         } while (uVar17 < uVar5);
       }
     }
-    uVar5 = *(uint *)(uVar23 + 0x5c);
+    uVar5 = *(uint *)(programState + 0x5c);
     if (uVar5 != 0) {
       if (puVar21[0x23] < uVar5) {
-        uVar5 = (**(code **)(param_1 + 0x14))(puVar21[0x22],uVar5 << 4);
+        uVar5 = (**(code **)(ctx + 0x14))(puVar21[0x22],uVar5 << 4);
         puVar21[0x22] = uVar5;
-        puVar21[0x23] = *(uint *)(uVar23 + 0x5c);
+        puVar21[0x23] = *(uint *)(programState + 0x5c);
       }
-      if (param_2[0x18] != 0) {
-        uVar17 = param_2[7];
+      if (shader[0x18] != 0) {
+        uVar17 = shader[7];
         uVar5 = 0;
         if (uVar17 != 0) {
           do {
-            iVar8 = uVar5 * 0x54 + param_2[8];
-            if ((*(char *)(iVar8 + 0x3d) != '\0') && (*(int *)(iVar8 + 0x28) == 0x87c3)) {
-              puVar13 = *(undefined4 **)(iVar8 + 0x38);
+            writeEnableSnapshot = uVar5 * 0x54 + shader[8];
+            if ((*(char *)(writeEnableSnapshot + 0x3d) != '\0') && (*(int *)(writeEnableSnapshot + 0x28) == 0x87c3)) {
+              puVar13 = *(undefined4 **)(writeEnableSnapshot + 0x38);
               uVar14 = puVar13[3];
-              iVar8 = *(int *)(iVar8 + 4) * 0x10;
+              writeEnableSnapshot = *(int *)(writeEnableSnapshot + 4) * 0x10;
               uVar20 = puVar13[1];
               uVar15 = puVar13[2];
-              iVar10 = iVar8 + puVar21[0x22];
-              *(undefined4 *)(iVar8 + puVar21[0x22]) = *puVar13;
+              iVar10 = writeEnableSnapshot + puVar21[0x22];
+              *(undefined4 *)(writeEnableSnapshot + puVar21[0x22]) = *puVar13;
               *(undefined4 *)(iVar10 + 0xc) = uVar14;
               *(undefined4 *)(iVar10 + 4) = uVar20;
               *(undefined4 *)(iVar10 + 8) = uVar15;
-              uVar17 = param_2[7];
+              uVar17 = shader[7];
             }
             uVar5 = uVar5 + 1;
           } while (uVar5 < uVar17);
         }
       }
     }
-    ((int (*)())FUN_00062af0)(param_1,param_2);
-    ((int (*)())FUN_00062a70)(param_1,param_2);
-    *(undefined1 *)(param_2[1] + *(int *)(((unsigned char *)0x0000118c) + param_1)) = 0;
-    if (*(int *)(uVar23 + 0x2b8) != 0) {
-      (**(code **)(param_1 + 0x18))(*(int *)(uVar23 + 0x2b8));
-      *(undefined4 *)(uVar23 + 0x2b8) = 0;
+    ((int (*)())FUN_00062af0)(ctx,shader);
+    ((int (*)())FUN_00062a70)(ctx,shader);
+    *(undefined1 *)(shader[1] + *(int *)(((unsigned char *)0x0000118c) + ctx)) = 0;
+    if (*(int *)(programState + 0x2b8) != 0) {
+      (**(code **)(ctx + 0x18))(*(int *)(programState + 0x2b8));
+      *(undefined4 *)(programState + 0x2b8) = 0;
     }
-    uVar7 = *(undefined1 *)(param_2 + 4);
+    uVar7 = *(undefined1 *)(shader + 4);
   }
   return uVar7;
 }
@@ -9728,7 +9729,7 @@ asm(".set FUN_0005dfa0, _FUN_0005dfa0");
 asm(".globl FUN_0005f540");
 asm(".set FUN_0005f540, _FUN_0005f540");
 asm(".globl FUN_0005f810");
-asm(".set FUN_0005f810, _FUN_0005f810");
+asm(".set FUN_0005f810, _extvsPrepareHardwareProgram");
 asm(".globl FUN_00062370");
 asm(".set FUN_00062370, _FUN_00062370");
 asm(".globl FUN_000623e0");

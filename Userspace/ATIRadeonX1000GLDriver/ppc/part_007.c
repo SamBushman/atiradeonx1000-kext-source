@@ -4230,7 +4230,7 @@ int FUN_00052cc0(param_1)
       *(undefined **)(((unsigned char *)0x00001350) + param_1) = puVar1;
     }
     ((unsigned char *)0x000013b0)[param_1] = 8;
-    FUN_00054b20(param_1);
+    extvsInitState(param_1);
     uVar3 = 1;
   }
   return uVar3;
@@ -4267,10 +4267,10 @@ int FUN_00052ee0(param_1, param_2)
   int iVar2;
   
   iVar2 = *(int *)(((unsigned char *)0x00001168) + param_1) + 0x1c;
-  iVar1 = FUN_00054da0(iVar2,param_2);
+  iVar1 = extvsSymbolListGetIndex(iVar2,param_2);
   if (iVar1 == 0) {
     iVar2 = *(int *)(((unsigned char *)0x0000116c) + param_1) + 0x14;
-    iVar1 = FUN_00054da0(iVar2,param_2);
+    iVar1 = extvsSymbolListGetIndex(iVar2,param_2);
     if (iVar1 == 0) {
       return -0x3ffcf000;
     }
@@ -4291,10 +4291,10 @@ int FUN_00052f60(param_1, param_2)
   int iVar2;
   
   iVar2 = *(int *)(((unsigned char *)0x00001168) + param_1) + 0x1c;
-  iVar1 = FUN_00054da0(iVar2,param_2);
+  iVar1 = extvsSymbolListGetIndex(iVar2,param_2);
   if (iVar1 == 0) {
     iVar2 = *(int *)(((unsigned char *)0x0000116c) + param_1) + 0x14;
-    iVar1 = FUN_00054da0(iVar2,param_2);
+    iVar1 = extvsSymbolListGetIndex(iVar2,param_2);
     if (iVar1 == 0) {
       return 0;
     }
@@ -4438,8 +4438,8 @@ int FUN_00053190(param_1)
   return 0;
 }
 
-/* FUN_00053220 @ 0x53220 (284 bytes) */
-int FUN_00053220(param_1, param_2, param_3, param_4, param_5, param_6)
+/* extvsGetOrCreateStateSymbol @ 0x53220 (284 bytes) */
+int extvsGetOrCreateStateSymbol(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
   int param_2;
   int param_3;
@@ -4457,9 +4457,9 @@ int FUN_00053220(param_1, param_2, param_3, param_4, param_5, param_6)
   while( true ) {
     if (piVar1 == (int *)0x0) {
       iVar4 = *(int *)(((unsigned char *)0x0000116c) + param_1) + 0x14;
-      iVar2 = FUN_00055610(param_1,iVar4,param_4,param_5,0x87e1,0,0,param_3);
+      iVar2 = extvsCreateSymbol(param_1,iVar4,param_4,param_5,0x87e1,0,0,param_3);
       if (iVar2 != 0) {
-        iVar4 = FUN_00055a30(iVar4,iVar2);
+        iVar4 = extvsSymbolListGetSymbol(iVar4,iVar2);
         *(undefined4 *)(iVar4 + 0x50) = param_6;
         *(int *)(iVar4 + 0x48) = param_2;
         *(undefined1 *)(iVar4 + 0x44) = 1;
@@ -4479,8 +4479,8 @@ int FUN_00053220(param_1, param_2, param_3, param_4, param_5, param_6)
   return piVar1[2];
 }
 
-/* FUN_00053340 @ 0x53340 (368 bytes) */
-int FUN_00053340(param_1, param_2, param_3, param_4, param_5, param_6)
+/* glGenSymbolsEXT_impl @ 0x53340 (368 bytes) */
+int glGenSymbolsEXT_impl(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
   int param_2;
   int param_3;
@@ -4504,14 +4504,14 @@ int FUN_00053340(param_1, param_2, param_3, param_4, param_5, param_6)
     else {
       iVar3 = *(int *)(((unsigned char *)0x0000116c) + param_1) + 0x14;
     }
-    uVar5 = FUN_00055610(param_1,iVar3,param_2,param_3,param_4,0,param_5,param_6);
+    uVar5 = extvsCreateSymbol(param_1,iVar3,param_2,param_3,param_4,0,param_5,param_6);
     if (1 < param_5) {
       loopIndex = 1;
       do {
         iVar1 = param_5 - loopIndex;
         iVar2 = loopIndex + param_6;
         loopIndex = loopIndex + 1;
-        FUN_00055610(param_1,iVar3,param_2,param_3,param_4,uVar5,iVar1,iVar2);
+        extvsCreateSymbol(param_1,iVar3,param_2,param_3,param_4,uVar5,iVar1,iVar2);
       } while (param_5 != loopIndex);
     }
   }
@@ -4540,13 +4540,13 @@ int FUN_000534c0(param_1, param_2, param_3, param_4, param_5)
   local_48[2] = DAT_001aa58c;
   local_48[1] = DAT_001aa588;
   iVar1 = *(int *)(((unsigned char *)0x00001168) + param_1);
-  uVar2 = FUN_00055610(param_1,iVar1 + 0x1c,0x87bf,local_48[*param_3],0x87e1,0,param_2,*param_4);
+  uVar2 = extvsCreateSymbol(param_1,iVar1 + 0x1c,0x87bf,local_48[*param_3],0x87e1,0,param_2,*param_4);
   *param_5 = uVar2;
   if (1 < param_2) {
     uVar3 = 1;
     do {
       uVar4 = uVar3 + 1;
-      uVar2 = FUN_00055610(param_1,iVar1 + 0x1c,0x87bf,local_48[param_3[uVar3]],0x87e1,*param_5,
+      uVar2 = extvsCreateSymbol(param_1,iVar1 + 0x1c,0x87bf,local_48[param_3[uVar3]],0x87e1,*param_5,
                            param_2 - uVar3,param_4[uVar3]);
       param_5[uVar3] = uVar2;
       uVar3 = uVar4;
@@ -4565,7 +4565,7 @@ int FUN_00053610(param_1, param_2, param_3, param_4, param_5, param_6)
   undefined4 param_6;
 {
   if (((unsigned char *)0x00001170)[param_1] != '\0') {
-    FUN_000553c0(param_1,*(undefined4 *)(((unsigned char *)0x00001168) + param_1),param_2,param_3,param_4,param_5,
+    extvsAppendInstruction(param_1,*(undefined4 *)(((unsigned char *)0x00001168) + param_1),param_2,param_3,param_4,param_5,
                  param_6,0,&DAT_001db998,0,&DAT_001db998);
   }
   return;
@@ -4583,7 +4583,7 @@ int FUN_000536a0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined4 param_8;
 {
   if (((unsigned char *)0x00001170)[param_1] != '\0') {
-    FUN_000553c0(param_1,*(undefined4 *)(((unsigned char *)0x00001168) + param_1),param_2,param_3,param_4,param_5,
+    extvsAppendInstruction(param_1,*(undefined4 *)(((unsigned char *)0x00001168) + param_1),param_2,param_3,param_4,param_5,
                  param_6,param_7,param_8,0,&DAT_001db998);
   }
   return;
@@ -4603,7 +4603,7 @@ int FUN_00053730(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined4 param_10;
 {
   if (((unsigned char *)0x00001170)[param_1] != '\0') {
-    FUN_000553c0(param_1,*(undefined4 *)(((unsigned char *)0x00001168) + param_1),param_2,param_3,param_4,param_5,
+    extvsAppendInstruction(param_1,*(undefined4 *)(((unsigned char *)0x00001168) + param_1),param_2,param_3,param_4,param_5,
                  param_6,param_7,param_8,param_9,param_10);
   }
   return;
@@ -4635,7 +4635,7 @@ int FUN_000537c0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     uStack_34 = param_6;
     uStack_30 = param_7;
     uStack_2c = param_8;
-    iVar1 = FUN_000553c0(param_1,iVar2,0x879a,param_2,param_3,param_4,&iStack_38,0,&DAT_001db998,0,
+    iVar1 = extvsAppendInstruction(param_1,iVar2,0x879a,param_2,param_3,param_4,&iStack_38,0,&DAT_001db998,0,
                          &DAT_001db998);
     if ((iVar1 != 0) && (param_2 - 0x879dU < 0x10)) {
       *(undefined1 *)((param_2 - 0x879dU) + iVar2 + 0x44) = 1;
@@ -4653,8 +4653,8 @@ int extvsBeginShader(param_1)
   if (((unsigned char *)0x00001170)[param_1] == '\0') {
     uVar1 = *(undefined4 *)(((unsigned char *)0x00001168) + param_1);
     ((unsigned char *)0x00001170)[param_1] = 1;
-    FUN_00055300(param_1,uVar1);
-    FUN_00055b50(param_1,uVar1);
+    extvsFreeShaderObject(param_1,uVar1);
+    extvsInitShaderObject(param_1,uVar1);
     *(undefined4 *)(((unsigned char *)0x00001184) + param_1) = 0;
     *(undefined4 *)(((unsigned char *)0x00001174) + param_1) = 0;
     *(undefined4 *)(((unsigned char *)0x0000117c) + param_1) = 0;
@@ -4701,22 +4701,22 @@ int extvsEndShader(param_1)
   return;
 }
 
-/* FUN_00053a90 @ 0x53a90 (100 bytes) */
-int FUN_00053a90(param_1, param_2)
-  int param_1;
-  int param_2;
+/* extvsFindShaderIndex @ 0x53a90 (100 bytes) */
+int extvsFindShaderIndex(shaderTable, shaderId)
+  int shaderTable;
+  int shaderId;
 {
   int iVar1;
   int iVar2;
   int *piVar3;
   int iVar4;
   
-  iVar4 = *(int *)(param_1 + 4);
+  iVar4 = *(int *)(shaderTable + 4);
   if (iVar4 != 0) {
-    if (param_2 == *(int *)(*(int *)(param_1 + 0xc) + 8)) {
+    if (shaderId == *(int *)(*(int *)(shaderTable + 0xc) + 8)) {
       return 0;
     }
-    piVar3 = (int *)(*(int *)(param_1 + 0xc) + 0x84);
+    piVar3 = (int *)(*(int *)(shaderTable + 0xc) + 0x84);
     iVar2 = 0;
     while( true ) {
       iVar2 = iVar2 + 1;
@@ -4724,7 +4724,7 @@ int FUN_00053a90(param_1, param_2)
       if (iVar4 == 0) break;
       iVar1 = *piVar3;
       piVar3 = piVar3 + 0x1f;
-      if (param_2 == iVar1) {
+      if (shaderId == iVar1) {
         return iVar2;
       }
     }
@@ -4732,8 +4732,8 @@ int FUN_00053a90(param_1, param_2)
   return -1;
 }
 
-/* FUN_00053b00 @ 0x53b00 (84 bytes) */
-int FUN_00053b00(param_1, param_2)
+/* extvsGetShaderById @ 0x53b00 (84 bytes) */
+int extvsGetShaderById(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
@@ -4742,7 +4742,7 @@ int FUN_00053b00(param_1, param_2)
   int iVar3;
   
   iVar3 = *(int *)(((unsigned char *)0x0000116c) + param_1);
-  iVar2 = ((int (*)())FUN_00053a90)(iVar3,param_2);
+  iVar2 = ((int (*)())extvsFindShaderIndex)(iVar3,param_2);
   iVar1 = 0;
   if (-1 < iVar2) {
     iVar1 = iVar2 * 0x7c + *(int *)(iVar3 + 0xc);
@@ -4750,8 +4750,8 @@ int FUN_00053b00(param_1, param_2)
   return iVar1;
 }
 
-/* FUN_00053b60 @ 0x53b60 (568 bytes) */
-int FUN_00053b60(param_1, param_2)
+/* extvsBindShader @ 0x53b60 (568 bytes) */
+int extvsBindShader(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
@@ -4768,7 +4768,7 @@ int FUN_00053b60(param_1, param_2)
     *(int *)(*(int *)(((unsigned char *)0x00001168) + param_1) + 0xc) = iVar2 + -1;
   }
   if (((unsigned char *)0x00001170)[param_1] == '\0') {
-    iVar2 = ((int (*)())FUN_00053a90)(iVar6,param_2);
+    iVar2 = ((int (*)())extvsFindShaderIndex)(iVar6,param_2);
     if (iVar2 < 0) {
       uVar1 = *(uint *)(iVar6 + 4);
       if ((uVar1 & 0xf) == 0) {
@@ -4780,10 +4780,10 @@ int FUN_00053b60(param_1, param_2)
                   (iVar2,*(undefined4 *)(iVar6 + 0xc),*(int *)(iVar6 + 4) * 0x7c);
         (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar6 + 0xc));
         *(int *)(iVar6 + 0xc) = iVar2;
-        FUN_00055d00(param_1);
+        extvsRefreshBoundVertexPrograms(param_1);
         uVar1 = *(uint *)(iVar6 + 4);
       }
-      FUN_00055b50(param_1,uVar1 * 0x7c + *(int *)(iVar6 + 0xc));
+      extvsInitShaderObject(param_1,uVar1 * 0x7c + *(int *)(iVar6 + 0xc));
       *(undefined4 *)(*(int *)(iVar6 + 4) * 0x7c + *(int *)(iVar6 + 0xc) + 8) = param_2;
       *(undefined4 *)(((unsigned char *)0x00001188) + param_1) = *(undefined4 *)(iVar6 + 4);
       *(int *)(iVar6 + 4) = *(int *)(iVar6 + 4) + 1;
@@ -4856,4 +4856,4 @@ asm(".set FUN_0004de30, _FUN_0004de30");
  * "thunk_FUN_xxx" IS calling FUN_xxx - which is exactly what the original binary's trampoline
  * did. */
 asm(".globl _thunk_FUN_00053b60");
-asm(".set _thunk_FUN_00053b60, _FUN_00053b60");
+asm(".set _thunk_FUN_00053b60, _extvsBindShader");
