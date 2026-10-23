@@ -66,3 +66,6 @@ use	TSymbolTable__copyTable	puVar2	forceNewPtr	INFERRED	address of the pool allo
 use	TSymbolTable__copyTable	puVar2	freeListPtr	INFERRED	address of the pool allocator's free-list array	puVar2 = PTR__S_free_list		all	none
 use	yylex	uVar9	yyC	INFERRED	character class of the current input byte (meta table DAT_97c37983/DAT_97c37d83) during the DFA walk	uVar9 = \(uint\)\(byte\)\(DAT_97c37983\)	uVar9 = \(uint\)\*\(short \*\)\(&_yy_accept \+ iVar8\)
 use	yylex	uVar9	yyAct	INFERRED	flex yy_act: the accepting rule number selecting the action (EOF actions computed from yy_start)	uVar9 = \(uint\)\*\(short \*\)\(&_yy_accept \+ iVar8\)	
+use	ParseSymbol__ResolveOpenGLType	iVar3	typeIsArray	INFERRED	TType::isArray() (vtable slot 0x38) of the symbol's type	iVar3 = \(\*\*\(code \*\*\)\(\*a0 \+ 0x38\)\)	iVar3 = \(\*\*\(code \*\*\)\(\*\*\(int \*\*\)\(this \+ 0xc\) \+ 0x34\)\)
+use	ParseSymbol__ResolveOpenGLType	iVar3	typeIsMatrix	INFERRED	TType::isMatrix() (vtable slot 0x34) of the symbol's type	iVar3 = \(\*\*\(code \*\*\)\(\*\*\(int \*\*\)\(this \+ 0xc\) \+ 0x34\)\)	iVar3 = \(\*\*\(code \*\*\)\(\*\*\(int \*\*\)\(this \+ 0xc\) \+ 0x2c\)\)
+use	ParseSymbol__ResolveOpenGLType	iVar3	nominalSize	INFERRED	TType::getNominalSize() (vtable slot 0x2c): 1..4 selects the GL type	iVar3 = \(\*\*\(code \*\*\)\(\*\*\(int \*\*\)\(this \+ 0xc\) \+ 0x2c\)\)	

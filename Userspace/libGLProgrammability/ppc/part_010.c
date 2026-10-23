@@ -634,10 +634,12 @@ int __ZeqRK11ParseSymbolS1_(parseSymbol1, parseSymbol2)
 int ParseSymbol__ResolveOpenGLType(this)
   unsigned char * this;
 {
+  int nominalSize;
+  int typeIsMatrix;
   bool sizeIsFour;
   undefined2 glType;
   int *parseTreeType;
-  int iVar3;
+  int typeIsArray;
   uint basicType;
   undefined4 staleR4;
   undefined4 staleR5;
@@ -651,8 +653,8 @@ int ParseSymbol__ResolveOpenGLType(this)
     return;
   }
   isArrayOfStruct = 0;
-  iVar3 = (**(code **)(*parseTreeType + 0x38))(parseTreeType);
-  if ((iVar3 != 0) && (*(int *)(this + 0x48) == 0)) {
+  typeIsArray = (**(code **)(*parseTreeType + 0x38))(parseTreeType);
+  if ((typeIsArray != 0) && (*(int *)(this + 0x48) == 0)) {
     isArrayOfStruct = 1;
   }
   glType = 0x7fff;
@@ -666,22 +668,22 @@ int ParseSymbol__ResolveOpenGLType(this)
     default:
       goto switchD_97bba640_caseD_0;
     case 1:
-      iVar3 = (**(code **)(**(int **)(this + 0xc) + 0x34))
+      typeIsMatrix = (**(code **)(**(int **)(this + 0xc) + 0x34))
                         (*(int **)(this + 0xc),staleR4,staleR5,staleR6,staleR7,staleR8,basicType * 4);
-      if (iVar3 == 0) {
-        iVar3 = (**(code **)(**(int **)(this + 0xc) + 0x2c))(*(int **)(this + 0xc));
-        if (iVar3 == 2) {
+      if (typeIsMatrix == 0) {
+        nominalSize = (**(code **)(**(int **)(this + 0xc) + 0x2c))(*(int **)(this + 0xc));
+        if (nominalSize == 2) {
           glType = 0x8b50;
         }
-        else if (iVar3 < 3) {
-          if (iVar3 != 1) {
+        else if (nominalSize < 3) {
+          if (nominalSize != 1) {
             return;
           }
           glType = 0x1406;
         }
         else {
-          if (iVar3 != 3) {
-            sizeIsFour = iVar3 == 4;
+          if (nominalSize != 3) {
+            sizeIsFour = nominalSize == 4;
             glType = 0x8b52;
             goto LAB_97bba7d4;
           }
@@ -689,18 +691,18 @@ int ParseSymbol__ResolveOpenGLType(this)
         }
       }
       else {
-        iVar3 = (**(code **)(**(int **)(this + 0xc) + 0x2c))(*(int **)(this + 0xc));
-        if (iVar3 == 3) {
+        nominalSize = (**(code **)(**(int **)(this + 0xc) + 0x2c))(*(int **)(this + 0xc));
+        if (nominalSize == 3) {
           glType = 0x8b5b;
         }
-        else if (iVar3 < 4) {
-          if (iVar3 != 2) {
+        else if (nominalSize < 4) {
+          if (nominalSize != 2) {
             return;
           }
           glType = 0x8b5a;
         }
         else {
-          sizeIsFour = iVar3 == 4;
+          sizeIsFour = nominalSize == 4;
           glType = 0x8b5c;
 LAB_97bba7d4:
           if (!sizeIsFour) {
@@ -710,19 +712,19 @@ LAB_97bba7d4:
       }
       break;
     case 2:
-      iVar3 = (**(code **)(**(int **)(this + 0xc) + 0x2c))(*(int **)(this + 0xc));
-      if (iVar3 == 2) {
+      nominalSize = (**(code **)(**(int **)(this + 0xc) + 0x2c))(*(int **)(this + 0xc));
+      if (nominalSize == 2) {
         glType = 0x8b53;
       }
-      else if (iVar3 < 3) {
-        if (iVar3 != 1) {
+      else if (nominalSize < 3) {
+        if (nominalSize != 1) {
           return;
         }
         glType = 0x1404;
       }
       else {
-        if (iVar3 != 3) {
-          sizeIsFour = iVar3 == 4;
+        if (nominalSize != 3) {
+          sizeIsFour = nominalSize == 4;
           glType = 0x8b55;
           goto LAB_97bba7d4;
         }
@@ -730,19 +732,19 @@ LAB_97bba7d4:
       }
       break;
     case 3:
-      iVar3 = (**(code **)(**(int **)(this + 0xc) + 0x2c))(*(int **)(this + 0xc));
-      if (iVar3 == 2) {
+      nominalSize = (**(code **)(**(int **)(this + 0xc) + 0x2c))(*(int **)(this + 0xc));
+      if (nominalSize == 2) {
         glType = 0x8b57;
       }
-      else if (iVar3 < 3) {
-        if (iVar3 != 1) {
+      else if (nominalSize < 3) {
+        if (nominalSize != 1) {
           return;
         }
         glType = 0x8b56;
       }
       else {
-        if (iVar3 != 3) {
-          sizeIsFour = iVar3 == 4;
+        if (nominalSize != 3) {
+          sizeIsFour = nominalSize == 4;
           glType = 0x8b59;
           goto LAB_97bba7d4;
         }
