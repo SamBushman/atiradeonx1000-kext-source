@@ -49,9 +49,9 @@ local	_PPCRuntimeCompilerWriteDestinationAV	in_r7	leftoverR7	INFERRED	register v
 local	_PPCRuntimeCompilerWriteDestinationAV	in_r8	leftoverR8	INFERRED	register value left over from an earlier call or the caller (the decompiler shows it as a variable); it is only forwarded as an extra argument or copied
 local	_PPCRuntimeCompilerWriteDestinationAV	in_r9	leftoverR9	INFERRED	register value left over from an earlier call or the caller (the decompiler shows it as a variable); it is only forwarded as an extra argument or copied
 local	_PPCRuntimeCompilerWriteDestinationAV	in_r10	leftoverR10	INFERRED	register value left over from an earlier call or the caller (the decompiler shows it as a variable); it is only forwarded as an extra argument or copied
-local	_PPCRuntimeCompilerCompileNO	in_r6	leftoverR6	INFERRED	register value left over from an earlier call or the caller (the decompiler shows it as a variable); it is only forwarded as an extra argument or copied
-local	_PPCRuntimeCompilerCompileNO	in_r7	leftoverR7	INFERRED	register value left over from an earlier call or the caller (the decompiler shows it as a variable); it is only forwarded as an extra argument or copied
-local	_PPCRuntimeCompilerCompileNO	in_r8	leftoverR8	INFERRED	register value left over from an earlier call or the caller (the decompiler shows it as a variable); it is only forwarded as an extra argument or copied
+local	_PPCRuntimeCompilerCompileNO	in_r6	srcDescWord2	INFERRED	word 2 of the source descriptor, 3rd argument of LoadSourceNO (also forwarded as leftover r6)
+local	_PPCRuntimeCompilerCompileNO	in_r7	srcDescWord3	INFERRED	word 3 of the source descriptor, 4th argument of LoadSourceNO (also forwarded as leftover r7)
+local	_PPCRuntimeCompilerCompileNO	in_r8	srcDescWord4OrTemp	INFERRED	word 4 of the source descriptor, 5th argument of LoadSourceNO; also the emulator context pointer and relocation delta
 local	_PPCRuntimeCompilerCompileAV	extraout_r4	leftoverR4	INFERRED	register value left over from an earlier call or the caller (the decompiler shows it as a variable); it is only forwarded as an extra argument or copied
 local	_PPCRuntimeCompilerCompileAV	extraout_r4_00	leftoverR4_00	INFERRED	register value left over from an earlier call or the caller (the decompiler shows it as a variable); it is only forwarded as an extra argument or copied
 local	_PPCRuntimeCompilerCompileAV	extraout_r4_01	leftoverR4_01	INFERRED	register value left over from an earlier call or the caller (the decompiler shows it as a variable); it is only forwarded as an extra argument or copied
