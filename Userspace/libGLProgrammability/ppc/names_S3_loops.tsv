@@ -19,8 +19,8 @@ use	_FindHashLoc	iVar6	loopIndex	INFERRED	initialised to a literal, stepped by o
 use	_PrintAtomTable	iVar2	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#2	+6	all	all
 use	_CPPdefine	iVar2	loopIndex2	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#76	+7	all	all
 use	_CPPdefine	iVar8	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#22	+19	all	all
-use	_MacroExpand	iVar11	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#49	+52	all	all
-use	_MacroExpand	iVar11	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#141	+7	all	all
+use	_MacroExpand	iVar11	argIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#49	+52	all	all
+use	_MacroExpand	iVar11	argIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#141	+7	all	all
 use	_byte_scan	iVar3	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#389	+20	all	all
 use	_ReadToken	iVar2	loopIndex2	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#72	+11	all	all
 use	_ReadToken	iVar6	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#12	+98	all	all

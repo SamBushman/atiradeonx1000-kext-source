@@ -64,7 +64,7 @@ use	_CPPifdef	iVar2	lookUpSymbolResult	INFERRED	every definition of the web is t
 use	_CPPline	uVar3	atoiResult	INFERRED	every definition of the web is the result of a call to _atoi	^\s*uVar3\ =\ _atoi\(param_1\ \+\ 3\);$@1	+8	all	all
 use	_CPPversion	iVar2	atoiResult	INFERRED	every definition of the web is the result of a call to _atoi	^\s*iVar2\ =\ _atoi\(param_1\ \+\ 3\);$@1	+2	all	all
 use	_readCPPline	iVar3	chkCorrectElseNestingResult	INFERRED	every definition of the web is the result of a call to _ChkCorrectElseNesting	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_ChkCorrectElseNesting\)\(\);$@1	+1	all	all
-use	_PrescanMacroArg	uVar4	newTokenStreamResult	INFERRED	every definition of the web is the result of a call to _NewTokenStream	^\s*uVar4\ =\ _NewTokenStream\("macro\ arg",0\);$@1	+13	all	all
+use	_PrescanMacroArg	uVar4	expandedArg	INFERRED	every definition of the web is the result of a call to _NewTokenStream	^\s*uVar4\ =\ _NewTokenStream\("macro\ arg",0\);$@1	+13	all	all
 use	_macro_scan	iVar5	readTokenResult	INFERRED	every definition of the web is the result of a call to _ReadToken	^\s*iVar5\ =\ _ReadToken\(\*\(undefined4\ \*\)\(param_1\[6\]\ \+\ 8\),param_2\);$@1	+24	all	all
 use	_MacroExpand	iVar6	lookUpSymbolResult	INFERRED	every definition of the web is the result of a call to _LookUpSymbol	^\s*iVar6\ =\ _LookUpSymbol\(_macros,param_1\);$@1	+154	all	all
 use	_MacroExpand	iVar9	newTokenStreamResult	INFERRED	every definition of the web is the result of a call to _NewTokenStream	^\s*iVar9\ =\ _NewTokenStream\("macro\ arg",0\);$@1	+3	all	all
