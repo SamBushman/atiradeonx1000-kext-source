@@ -924,10 +924,10 @@ int BindingTable__AddSingleUniformReference(this, binding, isFragment)
 }
 
 /* BindingTable__InsertUniformArray @ 0x97bb136c (944 bytes) */
-int BindingTable__InsertUniformArray(this, binding, param_3, firstTable, endTable, parseSymbolTable)
+int BindingTable__InsertUniformArray(this, binding, unusedArg3, firstTable, endTable, parseSymbolTable)
   unsigned char * this;
   unsigned char * binding;
-  int param_3;
+  int unusedArg3;
   int firstTable;
   int endTable;
   unsigned char ** parseSymbolTable;
@@ -1533,10 +1533,10 @@ int DeleteLinker(shHandleBase)
 }
 
 /* UpdateOperations @ 0x97bb1ed0 (504 bytes) */
-int UpdateOperations(_PPStreamChunk1, _PPStreamChunk2, param_3, _PPStreamChunk3, numCopies, adjust)
+int UpdateOperations(_PPStreamChunk1, _PPStreamChunk2, unusedArg3, _PPStreamChunk3, numCopies, adjust)
   unsigned char * _PPStreamChunk1;
   unsigned char * _PPStreamChunk2;
-  int param_3;
+  int unusedArg3;
   unsigned char * _PPStreamChunk3;
   int numCopies;
   int adjust;
@@ -1549,7 +1549,7 @@ int UpdateOperations(_PPStreamChunk1, _PPStreamChunk2, param_3, _PPStreamChunk3,
   int chunkIdx;
   unsigned char * target;
   unsigned char * operand;
-  int iVar8;
+  int walkIdxNext;
   uint chunkInfo;
   unsigned char kind;
   int copyIdx;
@@ -1627,8 +1627,8 @@ LAB_97bb1fe8:
             if (matchesKind) {
 LAB_97bb2064:
               if ((uint)*(ushort *)(chunk + 0x1a) == (uint)*(ushort *)(_PPStreamChunk3 + 0x12) + copyIdx) {
-                iVar8 = walkIdx;
-                if ((walkIdx != chunkIdx) && (iVar8 = chunkIdx, walkIdx < chunkIdx)) {
+                walkIdxNext = walkIdx;
+                if ((walkIdx != chunkIdx) && (walkIdxNext = chunkIdx, walkIdx < chunkIdx)) {
                   walkIdx = chunkIdx - walkIdx;
                   do {
                     target = *(unsigned char **)(target + 8);
@@ -1636,7 +1636,7 @@ LAB_97bb2064:
                   } while (walkIdx != 0);
                 }
                 *(short *)(target + 0x1a) = *(short *)(target + 0x1a) - (short)adjust;
-                walkIdx = iVar8;
+                walkIdx = walkIdxNext;
               }
             }
           }

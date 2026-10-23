@@ -382,3 +382,9 @@ use	ParseOperand__isWriteable	uVar1	result	INFERRED	1 for writable qualifiers	^\
 use	ParseOperand__isWriteable	uVar1	result	INFERRED	1 for writable qualifiers	^\s*return\ uVar1;$	+1
 use	ParseOperand__isWriteable	uVar1	qualifier	INFERRED	TType::getQualifier() of the symbol's type	^\s*uVar1\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x24\)\)\(a0\);$	+2
 local	ParseOperand__isWriteable	a0	parseTreeType	INFERRED	the symbol's TType (+0xc)
+use	UpdateOperations	iVar8	walkIdxNext	INFERRED	new position in the chunk list walk	^\s*iVar8\ =\ iVar2;$@2	+1
+use	UpdateOperations	iVar8	walkIdxNext	INFERRED	new position in the chunk list walk	^\s*if\ \(\(iVar2\ !=\ iVar5\)\ \&\&\ \(iVar8\ =\ iVar5,\ iVar2\ <\ iVar5\)\)\ \{$@2	+1
+use	UpdateOperations	iVar8	walkIdxNext	INFERRED	new position in the chunk list walk	^\s*iVar2\ =\ iVar8;$@2	+1
+local	UpdateOperations	param_3	unusedArg3	INFERRED	third argument is not used by the function
+local	BindingTable__InsertUniformArray	param_3	unusedArg3	INFERRED	third argument is not used by the function
+local	_updateExtensionBehavior	local_1c0	firstExtNode	INFERRED	copy of the first node of the extension map (begin iterator) kept in a local and never read

@@ -180,9 +180,9 @@ use	initializeSymbolTable	iVar3	numStrings	INFERRED	every definition is the resu
 use	initializeSymbolTable	iVar3	numStrings	INFERRED	every definition is the result of a call whose name says it returns this	#128	+0	rhs	rhs
 use	initializeSymbolTable	piVar2	stringSizeArray	INFERRED	every definition is the result of a call whose name says it returns this	#126	+2	all	all
 use	TType__buildMangledName	uVar2	length	INFERRED	every definition is the result of a call whose name says it returns this	#31	+55	all	all
-use	TVariable__dump	pcVar1	qualifierString	INFERRED	every definition is the result of a call whose name says it returns this	#8	+1	all	all
-use	TVariable__dump	pcVar1	basicString	INFERRED	every definition is the result of a call whose name says it returns this	#11	+1	all	all
-use	TFunction__dump	pcVar3	basicString	INFERRED	every definition is the result of a call whose name says it returns this	#9	+1	all	all
+use	TVariable__dump	pcVar1	qualifierString	INFERRED	every definition is the result of a call whose name says it returns this	pcVar1 = \(char \*\)getQualifierString	+1	all	all
+use	TVariable__dump	pcVar1	basicString	INFERRED	every definition is the result of a call whose name says it returns this	pcVar1 = \(char \*\)TType__getBasicString	+1	all	all
+use	TFunction__dump	pcVar3	basicString	INFERRED	every definition is the result of a call whose name says it returns this	pcVar3 = \(char \*\)TType__getBasicString	+1	all	all
 use	__ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	uVar4	poolAllocator2	INFERRED	every definition is the result of a call whose name says it returns this	#19	+16	all	all
 use	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	uVar4	poolAllocator2	INFERRED	every definition is the result of a call whose name says it returns this	#19	+16	all	all
 use	__ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	uVar4	poolAllocator2	INFERRED	every definition is the result of a call whose name says it returns this	#19	+16	all	all

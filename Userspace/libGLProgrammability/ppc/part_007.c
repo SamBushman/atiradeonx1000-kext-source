@@ -935,7 +935,7 @@ int _updateExtensionBehavior(extensionName, behaviorName)
   undefined4 msgStrAlloc;
   char *msgStrData;
   undefined4 msgAllocCopy;
-  int local_1c0;
+  int firstExtNode;
   int endNodeAll;
   int findIter [4];
   undefined4 keyStrAlloc;
@@ -983,7 +983,7 @@ int _updateExtensionBehavior(extensionName, behaviorName)
   if (compareResult == 0) {
     if (1 < behavior2) {
       extIter[0] = *(int *)(*(int *)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) + 0x34) + 8);
-      local_1c0 = extIter[0];
+      firstExtNode = extIter[0];
       while (endNodeAll = *(int *)(*(int *)(*(int *)cppPtr + 0x2c) + 0x34), extIter[0] != endNodeAll
             ) {
         *(uint *)(extIter[0] + 0x18) = behavior2;
