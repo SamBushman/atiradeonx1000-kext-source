@@ -1,0 +1,24 @@
+# fork E4 (round 4): IL pipeline - translators to IL (fragment program), IL rewrite and IL assembler
+func	FUN_00048da0	fragmentProgramToIL	INFERRED	translator for a program whose target is GL_FRAGMENT_PROGRAM_ARB (0x8804) or GL_FRAGMENT_SHADER (0x8b30): appends an IL token stream to a growable buffer at translator+0x28 starting with the IL header words 1, 0x10200 (the same header FUN_000b3630 pushes), error codes 1 (out of memory), 2 (no program), 3 (bad target) in translator[9]
+local	FUN_00048da0	param_1	translator	INFERRED	[0] program object, [5] flags, [9] error code, +0x28 IL output buffer {data, count, capacity}
+func	FUN_00046e90	fragmentInstructionToIL	INFERRED	walks the program instruction words (count at program+0x50, offset +0x54, opcode = word >> 18 & 0xff indexing the 0x10-byte opcode info table at 0x1dac34) and emits IL for each; shares its translator state layout with FUN_00048da0
+local	FUN_00046e90	param_1	translator	INFERRED	same translator state as FUN_00048da0: [0] program object
+func	FUN_000cae90	ilRewriteForTextureState	INFERRED	two-pass rewrite of an IL token stream: pass one sizes the output (extra words for texture-dependent expansions), pass two copies tokens and expands texld according to the bound texture: depth textures (base format GL_DEPTH_COMPONENT 0x1902) get the GL_DEPTH_TEXTURE_MODE swizzle (GL_ALPHA 0x1906 / GL_LUMINANCE 0x1909 / GL_INTENSITY) and, with compare mode on, the shadow compare sequence
+local	FUN_000cae90	param_1	ctx	CONFIRMED	indexes the per-unit texture objects at ctx+0x13f8 and reads ctx+0x276c; ctx+4 -> renderer record
+local	FUN_000cae90	param_3	compileRecord	INFERRED	compile record of FUN_000b4400: [3] output token buffer, [0x2b]/[0x45] sampler info, byte +0x46 flag
+local	FUN_000cae90	param_4	ilSource	CONFIRMED	*param_4 is the IL token pointer, param_4[1] the word count (loop bound puVar40 + iVar46)
+local	FUN_000cae90	puVar40	ilTokens	CONFIRMED	= *param_4: start of the input IL tokens
+local	FUN_000cae90	iVar46	ilWordCount	CONFIRMED	= param_4[1]: number of input words
+local	FUN_000cae90	local_c1f8	readCursor	CONFIRMED	position in the input token stream, advanced past each decoded instruction
+local	FUN_000cae90	local_c1f4	writeCursor	CONFIRMED	position in the output token buffer; every case stores through it
+local	FUN_000cae90	local_c01c	depthTextureUnitMask	CONFIRMED	bit n set when texture unit n holds a GL_DEPTH_COMPONENT (0x1902) texture
+local	FUN_000cae90	local_c018	shadowCompareUnitMask	INFERRED	bit n set when that depth texture has compare mode on (texture object +0x5a non-zero)
+local	FUN_000cae90	local_bf94	depthTextureMode	INFERRED	per unit texture-object ushort at +0x58 (GL_DEPTH_TEXTURE_MODE: 0x1906 alpha / 0x1909 luminance / 0x8049 intensity); the compare function ushort (+0x5c) is stored 16 words further on
+local	FUN_000cae90	iVar47	extraOutputWords	INFERRED	output words added by token expansions (+110 for the end token, per the earlier analysis in the function comments)
+local	FUN_000cae90	iVar26	shadowExtraWords	INFERRED	0x1b extra words for each shadow-compare texld and 4 for the depth-texture-mode fixup
+func	FUN_000c8e50	ilAssembleProgram	INFERRED	walks an IL token stream and fills the 0x569c-byte program record built by FUN_000b57a0 (instruction counts at word 0x1009 / 0x1502 / 0x1587, per-instruction 5-word entries from word 0x1000, register usage); allocates and frees scratch with malloc/free and ends on _exit(0) for invalid tokens
+local	FUN_000c8e50	param_1	ctx	CONFIRMED	GL context (ctx+0x44 flags, ctx+0x186c/0x1870 buffers)
+local	FUN_000c8e50	param_2	programHeader	CONFIRMED	program record header: [0] IL token pointer, [1] word count (copied from the IL source), [6] ctx flag bit 7
+local	FUN_000c8e50	param_3	programBody	CONFIRMED	programHeader + 9 words (FUN_000b57a0 passes puVar4 + 9): array of 5-word entries from word 0x1000, counters at 0x1502/0x1587
+local	FUN_000c8e50	puVar31	ilTokens	CONFIRMED	= *param_2: IL token pointer
+local	FUN_000c8e50	iVar38	ilWordCount	CONFIRMED	= param_2[1]: word count (added to ctx flags for the instruction limit)

@@ -173,7 +173,7 @@
 0x17e10	FUN_00017e10	204	no	calls an import (CFNotificationCenterGetDistributedCenter); calls an import (CFNotificationCenterRemoveObserver); calls an import (CFRelease)
 0x17ee0	FUN_00017ee0	432	no	calls an import (fgets); calls an import (free); calls an import (getpid)
 0x18090	FUN_00018090	100	yes	
-0x18120	FUN_00018120	6016	no	calls an import (malloc); indirect call (driver context / vtable / callback)
+0x18120	glCopyPixels_impl	6016	no	calls an import (malloc); indirect call (driver context / vtable / callback)
 0x18a40	glDrawPixels_impl	3636	no	calls an import (free); calls an import (glgConvertType); calls an import (glgPixelCenters)
 0x198b0	FUN_000198b0	228	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x199a0	gld_drawPixelsDispatch	68	no	no static blocker: a test could reach it (needs arguments / state no test builds)
@@ -399,8 +399,8 @@
 0x46180	FUN_00046180	1528	no	calls an import (malloc); calls an import (realloc)
 0x467a0	FUN_000467a0	632	no	calls an import (malloc); calls an import (realloc)
 0x46a30	FUN_00046a30	1080	no	calls an import (malloc); calls an import (realloc)
-0x46e90	FUN_00046e90	7800	no	indirect call (driver context / vtable / callback)
-0x48da0	FUN_00048da0	6552	no	calls an import (malloc); calls an import (realloc)
+0x46e90	fragmentInstructionToIL	7800	no	indirect call (driver context / vtable / callback)
+0x48da0	fragmentProgramToIL	6552	no	calls an import (malloc); calls an import (realloc)
 0x4a7d0	FUN_0004a7d0	80	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x4a830	FUN_0004a830	40	no	tiny (40 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x4a860	FUN_0004a860	112	yes	
@@ -986,16 +986,16 @@
 0xac720	FUN_000ac720	7944	no	indirect call (driver context / vtable / callback)
 0xaec40	FUN_000aec40	3872	no	indirect call (driver context / vtable / callback)
 0xafe40	FUN_000afe40	5932	no	indirect call (driver context / vtable / callback)
-0xb15d0	FUN_000b15d0	180	no	indirect call (driver context / vtable / callback)
-0xb1690	FUN_000b1690	476	no	indirect call (driver context / vtable / callback)
-0xb1870	FUN_000b1870	800	no	indirect call (driver context / vtable / callback)
-0xb1b90	FUN_000b1b90	748	no	indirect call (driver context / vtable / callback)
-0xb1e80	FUN_000b1e80	932	no	indirect call (driver context / vtable / callback)
-0xb2260	FUN_000b2260	692	no	indirect call (driver context / vtable / callback)
-0xb25a0	FUN_000b25a0	2216	no	indirect call (driver context / vtable / callback)
-0xb2e60	FUN_000b2e60	636	no	indirect call (driver context / vtable / callback)
-0xb30e0	FUN_000b30e0	1352	no	indirect call (driver context / vtable / callback)
-0xb3630	FUN_000b3630	3316	no	indirect call (driver context / vtable / callback)
+0xb15d0	ilTokenBufPush	180	no	indirect call (driver context / vtable / callback)
+0xb1690	atifsEmitFinalColorClamp	476	no	indirect call (driver context / vtable / callback)
+0xb1870	atifsEmitAddSecondaryColor	800	no	indirect call (driver context / vtable / callback)
+0xb1b90	atifsEmitMoveWithWriteMask	748	no	indirect call (driver context / vtable / callback)
+0xb1e80	atifsEmitSourceOperand	932	no	indirect call (driver context / vtable / callback)
+0xb2260	atifsEmitDestinationOperand	692	no	indirect call (driver context / vtable / callback)
+0xb25a0	atifsEmitTextureOps	2216	no	indirect call (driver context / vtable / callback)
+0xb2e60	atifsEmitClearTemp0	636	no	indirect call (driver context / vtable / callback)
+0xb30e0	atifsEmitInputDeclarations	1352	no	indirect call (driver context / vtable / callback)
+0xb3630	atifsCompileCurrentShader	3316	no	indirect call (driver context / vtable / callback)
 0xb43f0	noop_b43f0	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0xb4400	FUN_000b4400	2136	no	calls an import (free)
 0xb4cd0	FUN_000b4cd0	608	yes	
@@ -1091,8 +1091,8 @@
 0xc8aa0	FUN_000c8aa0	780	yes	
 0xc8de0	FUN_000c8de0	76	no	calls an import (malloc)
 0xc8e30	FUN_000c8e30	28	no	tiny (28 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0xc8e50	FUN_000c8e50	7396	no	calls an import (exit); calls an import (free); calls an import (malloc)
-0xcae90	FUN_000cae90	7760	no	calls an import (exit); calls an import (free); calls an import (malloc)
+0xc8e50	ilAssembleProgram	7396	no	calls an import (exit); calls an import (free); calls an import (malloc)
+0xcae90	ilRewriteForTextureState	7760	no	calls an import (exit); calls an import (free); calls an import (malloc)
 0xcd05c	FUN_000cd05c	244	yes	
 0xcd154	FUN_000cd154	92	no	indirect call (driver context / vtable / callback)
 0xcd1b0	FUN_000cd1b0	20	yes	
@@ -1142,13 +1142,13 @@
 0xd4e08	FUN_000d4e08	92	yes	
 0xd4e64	FUN_000d4e64	40	yes	
 0xd4e8c	FUN_000d4e8c	84	yes	
-0xd4ef0	FUN_000d4ef0	628	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xd51a0	FUN_000d51a0	460	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xd4ef0	ffpsBuildRgbSourceOperand	628	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xd51a0	ffpsBuildAlphaSourceOperand	460	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0xd5390	FUN_000d5390	548	no	indirect call (driver context / vtable / callback)
 0xd55c0	FUN_000d55c0	832	no	indirect call (driver context / vtable / callback)
-0xd5900	FUN_000d5900	2612	no	indirect call (driver context / vtable / callback)
-0xd6340	FUN_000d6340	4540	no	indirect call (driver context / vtable / callback)
-0xd7520	FUN_000d7520	3832	no	indirect call (driver context / vtable / callback)
+0xd5900	ffpsEmitDeclarations	2612	no	indirect call (driver context / vtable / callback)
+0xd6340	ffpsEmitTexEnvCombine	4540	no	indirect call (driver context / vtable / callback)
+0xd7520	ffpsEmitTexEnvLegacy	3832	no	indirect call (driver context / vtable / callback)
 0xd8450	FUN_000d8450	5856	no	indirect call (driver context / vtable / callback)
 0xd9b58	FUN_000d9b58	84	yes	
 0xd9bac	FUN_000d9bac	228	yes	

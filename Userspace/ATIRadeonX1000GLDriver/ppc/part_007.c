@@ -902,7 +902,7 @@ LAB_0004d6b0:
       iVar3 = iVar3 + 0x78;
     } while (loopIndex < *(uint *)(iVar5 + 4));
   }
-  FUN_000b3630(param_1);
+  atifsCompileCurrentShader(param_1);
   return;
 }
 
@@ -1581,7 +1581,7 @@ LAB_0004e760:
     return;
   }
   if ((uVar20 & 0x2000) == 0) {
-    FUN_000b3630(param_1);
+    atifsCompileCurrentShader(param_1);
     return;
   }
   ((undefined4 (*)())FUN_000afe40)(param_1,0,param_3,param_4,fparam_1);
@@ -2012,7 +2012,7 @@ void FUN_0004f2e0(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
     (**(code **)(param_1 + 0x294c))(param_1,*(undefined4 *)(param_1 + 0x1e5c));
   }
   else if ((*(uint *)(param_1 + 0x44) & 0x2000) == 0) {
-    FUN_000b3630(param_1);
+    atifsCompileCurrentShader(param_1);
   }
   else {
     ((undefined4 (*)())FUN_000afe40)(param_1,0,param_3,param_4,fparam_1);

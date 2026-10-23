@@ -1,0 +1,35 @@
+# fork E4 (round 4): fixed-function pixel shader (texture environment) -> IL token stream (FUN_000d4ef0..FUN_000d7520)
+func	FUN_000d4ef0	ffpsBuildRgbSourceOperand	CONFIRMED	maps a GL_COMBINE_ARB RGB source (GL_TEXTUREn 0x84c0.., GL_CONSTANT 0x8576, GL_PRIMARY_COLOR 0x8577, GL_PREVIOUS 0x8578) and operand (GL_SRC_COLOR 0x300, ONE_MINUS 0x301, SRC_ALPHA 0x302, ONE_MINUS_SRC_ALPHA 0x303) to an IL source token and swizzle word
+func	FUN_000d51a0	ffpsBuildAlphaSourceOperand	CONFIRMED	same mapping for the alpha combiner (same source enums, alpha operands)
+local	FUN_000d4ef0	param_1	ctx	CONFIRMED	GL context (ctx+0x13b2 byte is read)
+local	FUN_000d4ef0	param_2	srcEnum	CONFIRMED	compared with 0x84c0.. / 0x8576 / 0x8577 / 0x8578
+local	FUN_000d4ef0	param_3	operandEnum	CONFIRMED	compared with 0x300..0x303 (GL_SRC_COLOR .. GL_ONE_MINUS_SRC_ALPHA)
+local	FUN_000d4ef0	param_4	outSrcToken	CONFIRMED	receives the IL source token (register type in bits 16..21)
+local	FUN_000d4ef0	param_5	outSwizzleWord	CONFIRMED	receives the second source word (swizzle / modifier bits)
+local	FUN_000d4ef0	param_6	unit	INFERRED	texture unit index: becomes the constant register or texture result register of that unit
+local	FUN_000d4ef0	puVar1	texUnitIndex	CONFIRMED	srcEnum - 0x84c0 (GL_TEXTURE0)
+local	FUN_000d51a0	param_1	ctx	CONFIRMED	GL context (ctx+0x13b2 byte is read)
+local	FUN_000d51a0	param_2	srcEnum	CONFIRMED	compared with 0x84c0.. / 0x8576 / 0x8577 / 0x8578
+local	FUN_000d51a0	param_3	operandEnum	CONFIRMED	compared with 0x300..0x303 (GL_SRC_COLOR .. GL_ONE_MINUS_SRC_ALPHA)
+local	FUN_000d51a0	param_4	outSrcToken	CONFIRMED	receives the IL source token (register type in bits 16..21)
+local	FUN_000d51a0	param_5	outSwizzleWord	CONFIRMED	receives the second source word (swizzle / modifier bits)
+local	FUN_000d51a0	param_6	unit	INFERRED	texture unit index: becomes the constant register or texture result register of that unit
+local	FUN_000d51a0	puVar1	texUnitIndex	CONFIRMED	srcEnum - 0x84c0 (GL_TEXTURE0)
+func	FUN_000d6340	ffpsEmitTexEnvCombine	CONFIRMED	fixed-function texture environment GL_COMBINE for one unit: GL_COMBINE_RGB/ALPHA function (GL_REPLACE 0x1e01 -> mov 0x47, MODULATE 0x2100 -> mul 0x49, ADD 0x104 -> add 3, ADD_SIGNED 0x8574, INTERPOLATE 0x8575 -> lrp 0x3f, SUBTRACT 0x84e7 -> sub 0x5b, DOT3_RGB/RGBA 0x86ae/0x86af and EXT 0x8740/0x8741 -> dp3 0x22, ATI MODULATE_ADD 0x8744 / SIGNED_ADD 0x8745 / SUBTRACT 0x8746 -> mad 0x40) emitted as IL instructions
+local	FUN_000d6340	param_1	ctx	CONFIRMED	GL context; per-unit texenv state at ctx + unit*0xcc
+local	FUN_000d6340	param_2	ilBuilder	CONFIRMED	growable IL buffer: +4 count, +8 capacity, +0xc data (same allocator callbacks as FUN_000b15d0)
+local	FUN_000d6340	param_4	unit	CONFIRMED	texture unit: state stride 0xcc, destination temp = unit + ctx byte 0x13b2
+local	FUN_000d6340	iVar6	unitState	CONFIRMED	ctx + unit*0xcc: +0x454 combine RGB func, +0x456..0x45a RGB sources, +0x45c.. alpha, +0x462.. operands, +0x474 RGB scale
+local	FUN_000d6340	fVar3	rgbScale	INFERRED	float at unitState+0x474 (GL_RGB_SCALE_ARB) compared with the 1.0/2.0/4.0 constants to pick the destination scale bits
+local	FUN_000d6340	uVar11	ilOpcode	CONFIRMED	IL opcode per combine function (mov 0x47, mul 0x49, add 3, lrp 0x3f, sub 0x5b, dp3 0x22, mad 0x40)
+local	FUN_000d6340	iVar10	argCount	CONFIRMED	number of sources the IL op takes (1 for REPLACE, 2 for MODULATE..., 3 for INTERPOLATE and MAD)
+local	FUN_000d6340	local_68	argOrder	INFERRED	maps IL operand position to combiner argument slot (e.g. INTERPOLATE uses slots 2,0,1)
+local	FUN_000d6340	local_98	srcTokens	CONFIRMED	IL source tokens of combiner arguments 0 and 1 (argument 2 is auStack_90)
+local	FUN_000d6340	local_8c	srcSwizzles	CONFIRMED	swizzle words of combiner arguments 0 and 1 (argument 2 is auStack_84)
+local	FUN_000d6340	auStack_90	srcToken2	INFERRED	third argument token; its address is passed as the output pointer
+local	FUN_000d6340	auStack_84	srcSwizzle2	INFERRED	third argument swizzle word; its address is passed as the output pointer
+local	FUN_000d6340	puVar15	countPtr	CONFIRMED	&ilBuilder->count
+local	FUN_000d6340	bVar2	textureUnitCount	INFERRED	byte ctx+0x13b2 added to the unit index to form the destination temp register
+local	FUN_000d6340	uVar13	dstWriteWord	INFERRED	destination write mask / scale word (0x115 x1, 0x515, 0x715 and 0x315 select the output scale from RGB_SCALE)
+func	FUN_000d5900	ffpsEmitDeclarations	INFERRED	pushes IL dclpi (0x16) declarations for colour0 (0x120000), colour1 (0x130000), texcoord inputs and other fixed-function inputs, then def (0x1c) constants such as 1.0 (0x3f800000)
+func	FUN_000d7520	ffpsEmitTexEnvLegacy	INFERRED	classic (non-COMBINE) texture environment: tests GL_MODULATE 0x2100 / GL_DECAL 0x2101 and the texture base formats (GL_ALPHA 0x1906, RGB 0x1907, RGBA 0x1908, LUMINANCE 0x1909, 0x190a, INTENSITY 0x8049, depth 0x81a5..0x81a7)

@@ -276,9 +276,9 @@ a7050	FUN_000a7050	r5	PASS-indirect	GARBAGE
 a7050	FUN_000a7050	r6	PASS-indirect	GARBAGE	
 afe40	FUN_000afe40	r7	PASS-indirect	GARBAGE	
 afe40	FUN_000afe40	r8	PASS-indirect	GARBAGE	
-b3630	FUN_000b3630	r6	PASS-indirect	GARBAGE	
-b3630	FUN_000b3630	r7	PASS-indirect	GARBAGE	
-b3630	FUN_000b3630	r8	PASS-indirect	GARBAGE	
+b3630	atifsCompileCurrentShader	r6	PASS-indirect	GARBAGE	
+b3630	atifsCompileCurrentShader	r7	PASS-indirect	GARBAGE	
+b3630	atifsCompileCurrentShader	r8	PASS-indirect	GARBAGE	
 b5400	FUN_000b5400	r5	PASS-indirect	GARBAGE	
 b5400	FUN_000b5400	r6	PASS-indirect	GARBAGE	
 b5400	FUN_000b5400	r7	PASS-indirect	GARBAGE	

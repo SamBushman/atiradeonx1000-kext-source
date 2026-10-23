@@ -792,7 +792,7 @@ int _gldChoosePixelFormat(formatListOut, attribList)
    * depthMask, a real, unrelated variable - so the gap between them (0x194-0x88=0x10c bytes) is
    * exactly where the stock compiler placed the array's further rows, accessed only through this
    * pointer arithmetic and never given individual names. Left as separate scalars (the same defect
-   * class fixed once already this session in auStack_c148/FUN_000cae90), the -O0 rebuild does not
+   * class fixed once already this session in auStack_c148/ilRewriteForTextureState), the -O0 rebuild does not
    * place them contiguously, so writes past row 0 miss into whatever real local happens to come
    * next on this build's stack - confirmed live: corrupts far enough to overwrite this function's
    * own formatListOut/attribList (live differential harness: _gldChoosePixelFormat crashes with

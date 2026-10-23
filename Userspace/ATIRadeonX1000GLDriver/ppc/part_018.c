@@ -368,7 +368,7 @@ int FUN_000c7930(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
    * uninitialized in that case (it has no earlier assignment anywhere in the function). Live-
    * verified on real hardware via a raw memory watchpoint: with *(param_2+0x22fc)==3 (this
    * function's own case), the returned puVar3 was garbage, corrupting a since-freed heap block's
-   * `free_list_t.previous` field the moment the caller wrote through it (FUN_000cae90
+   * `free_list_t.previous` field the moment the caller wrote through it (ilRewriteForTextureState
    * part_018.c:3651, `*puVar45 = ppppppuVar15;`) - confirmed via Apple's real scalable_malloc.c
    * checksum formula against the live-read corrupted bytes. puVar3 is meant to track the current
    * write pointer (== param_1) at this checkpoint regardless of which clause is true; made the
@@ -975,11 +975,11 @@ void FUN_000c8e30(int param_1,int param_2,double fparam_1,double fparam_2,double
   return;
 }
 
-/* FUN_000c8e50 @ 0xc8e50 (7396 bytes) */
-int FUN_000c8e50(param_1, param_2, param_3)
-  int param_1;
-  undefined4 *param_2;
-  uint *******param_3;
+/* ilAssembleProgram @ 0xc8e50 (7396 bytes) */
+int ilAssembleProgram(ctx, programHeader, programBody)
+  int ctx;
+  undefined4 *programHeader;
+  uint *******programBody;
 {
   bool bVar1;
   byte *pbVar2;
@@ -1015,14 +1015,14 @@ int FUN_000c8e50(param_1, param_2, param_3)
   uint unaff_r20;
   uint *******pppppppuVar30;
   uint unaff_r21;
-  uint *puVar31;
+  uint *ilTokens;
   uint uVar32;
   uint uVar33;
   uint uVar34;
   int iVar35;
   int iVar36;
   undefined1 *puVar37;
-  int iVar38;
+  int ilWordCount;
   int iVar39;
   uint *******local_2bb8;
   uint *local_2bb4;
@@ -1135,17 +1135,17 @@ int FUN_000c8e50(param_1, param_2, param_3)
   uint *local_6c;
   uint ******local_60;
   
-  iVar38 = 8;
+  ilWordCount = 8;
   iVar11 = 0;
   do {
     *(undefined4 *)((int)local_2b38 + iVar11) = 0xffffffff;
     *(undefined4 *)((int)local_2b58 + iVar11) = 0xffffffff;
     iVar11 = iVar11 + 4;
-    iVar38 = iVar38 + -1;
-  } while (iVar38 != 0);
-  pppppppuVar18 = param_3;
+    ilWordCount = ilWordCount + -1;
+  } while (ilWordCount != 0);
+  pppppppuVar18 = programBody;
   iVar11 = _malloc(0x400);
-  uVar21 = *(uint *)(param_1 + 0x44);
+  uVar21 = *(uint *)(ctx + 0x44);
   local_218 = 0;
   if ((uVar21 & 0x2000) == 0) {
     local_1e4 = uVar21 >> 0x18 & 1;
@@ -1157,17 +1157,17 @@ int FUN_000c8e50(param_1, param_2, param_3)
       local_1d8 = 0xffff;
     }
     else {
-      local_1d8 = (uint)(byte)((unsigned char *)0x000011d1)[param_1];
+      local_1d8 = (uint)(byte)((unsigned char *)0x000011d1)[ctx];
     }
   }
-  puVar31 = (uint *)*param_2;
+  ilTokens = (uint *)*programHeader;
   local_d8 = uVar21 >> 10 & 1;
   iVar39 = 8;
   local_23e4 = 0xffff;
-  local_d4 = (uint)(byte)((unsigned char *)0x000011d2)[param_1];
-  local_c4 = (uint)(param_2[6] == 0);
+  local_d4 = (uint)(byte)((unsigned char *)0x000011d2)[ctx];
+  local_c4 = (uint)(programHeader[6] == 0);
   local_23c0 = local_2b1c;
-  iVar38 = param_2[1];
+  ilWordCount = programHeader[1];
   local_23c4 = local_2b20;
   local_23c8 = local_2b24;
   local_1b4 = (uint *******)0x0;
@@ -1225,19 +1225,19 @@ int FUN_000c8e50(param_1, param_2, param_3)
   iVar36 = 0;
   iVar39 = 0;
   uVar21 = 0;
-  puVar29 = puVar31;
+  puVar29 = ilTokens;
 switchD_000c90cc_caseD_15:
   local_2bb4 = puVar29 + 2;
   puVar26 = local_2bb4;
 switchD_000c90cc_caseD_18:
   puVar29 = puVar26;
-  if (puVar29 < puVar31 + iVar38) goto code_r0x000c90a4;
+  if (puVar29 < ilTokens + ilWordCount) goto code_r0x000c90a4;
   if (local_220 != (uint *******)0x0) {
     puVar29 = (uint *)0x0;
     uVar33 = 0;
     goto LAB_000ca6bc;
   }
-  iVar36 = (iVar36 + iVar38) * 4;
+  iVar36 = (iVar36 + ilWordCount) * 4;
   local_2398 = local_23e8;
   if (local_239c != 0) {
     iVar36 = iVar36 + 0x48;
@@ -1300,9 +1300,9 @@ LAB_000c99d4:
   pppppppuVar20 = local_1b4;
   pppppppuVar25 = local_220;
   puVar29 = (uint *)_malloc(uVar33 + 0x10);
-  *puVar29 = *puVar31;
-  local_2bb4 = puVar31 + 2;
-  puVar29[1] = puVar31[1];
+  *puVar29 = *ilTokens;
+  local_2bb4 = ilTokens + 2;
+  puVar29[1] = ilTokens[1];
   puVar26 = local_2bb4;
   pppppppuVar30 = (uint *******)(puVar29 + 2);
   goto switchD_000c9ab8_caseD_18;
@@ -1606,21 +1606,21 @@ switchD_000c9ab8_caseD_18:
   local_2bb8 = pppppppuVar30;
   puVar19 = puVar26;
   pppppppuVar30 = local_2bb8;
-  if (puVar31 + iVar38 <= puVar19) {
+  if (ilTokens + ilWordCount <= puVar19) {
     uVar33 = uVar33 >> 2;
     local_23e0 = uVar21 | local_23e0;
 LAB_000ca6bc:
     if (local_220 != (uint *******)0x0) {
       return local_220;
     }
-    param_3[0x1587] = (uint ******)0x0;
-    iVar38 = 0;
-    param_3[0x1589] = (uint ******)0x0;
-    param_3[0x1502] = (uint ******)0x0;
-    pppppppuVar18 = param_3 + 0x1000;
+    programBody[0x1587] = (uint ******)0x0;
+    ilWordCount = 0;
+    programBody[0x1589] = (uint ******)0x0;
+    programBody[0x1502] = (uint ******)0x0;
+    pppppppuVar18 = programBody + 0x1000;
     puVar37 = auStack_2248;
-    pppppppuVar20 = param_3 + 0x1004;
-    puVar31 = local_6c;
+    pppppppuVar20 = programBody + 0x1004;
+    ilTokens = local_6c;
     do {
       pppppppuVar30 = pppppppuVar20 + 1;
       puVar26 = (uint *)(puVar37 + 8);
@@ -1628,7 +1628,7 @@ LAB_000ca6bc:
       iVar39 = 0x20;
       uVar21 = 0;
       do {
-        if ((1 << (uVar21 & 0x3f) & *puVar31) == 0) {
+        if ((1 << (uVar21 & 0x3f) & *ilTokens) == 0) {
           *(undefined1 *)pppppppuVar30 = 0;
         }
         else {
@@ -1638,8 +1638,8 @@ LAB_000ca6bc:
           ppppppuVar10 = (uint ******)puVar26[3];
           *(undefined1 *)(pppppppuVar25 + 4) = 1;
           pppppppuVar25[3] = ppppppuVar10;
-          if (param_3[0x1502] < (uint ******)(iVar38 + uVar21)) {
-            param_3[0x1502] = (uint ******)(iVar38 + uVar21);
+          if (programBody[0x1502] < (uint ******)(ilWordCount + uVar21)) {
+            programBody[0x1502] = (uint ******)(ilWordCount + uVar21);
           }
         }
         uVar21 = uVar21 + 1;
@@ -1648,24 +1648,24 @@ LAB_000ca6bc:
         pppppppuVar25 = pppppppuVar25 + 5;
         iVar39 = iVar39 + -1;
       } while (iVar39 != 0);
-      bVar4 = iVar38 != 0xe0;
+      bVar4 = ilWordCount != 0xe0;
       pppppppuVar20 = pppppppuVar20 + 0xa0;
       puVar37 = puVar37 + 0x200;
       pppppppuVar18 = pppppppuVar18 + 0xa0;
-      puVar31 = puVar31 + 1;
-      iVar38 = iVar38 + 0x20;
+      ilTokens = ilTokens + 1;
+      ilWordCount = ilWordCount + 0x20;
     } while (bVar4);
-    if ((int)param_3[0x1587] < (int)param_3[0x1502]) {
-      param_3[0x1587] = param_3[0x1502];
+    if ((int)programBody[0x1587] < (int)programBody[0x1502]) {
+      programBody[0x1587] = programBody[0x1502];
     }
     _memset(auStack_2b18,0,0xbc);
     _memset(auStack_2a5c,0,0x674);
-    iVar38 = (**(code **)(param_1 + 0xc))(*(undefined4 *)(param_1 + 0x1870));
+    ilWordCount = (**(code **)(ctx + 0xc))(*(undefined4 *)(ctx + 0x1870));
     local_2ac8 = uVar33 << 2;
     puVar27 = local_23dc;
     puVar16 = local_2ac0;
     iVar39 = 8;
-    local_2a60 = iVar38;
+    local_2a60 = ilWordCount;
     do {
       uVar9 = *puVar27;
       uVar13 = puVar27[8];
@@ -1692,28 +1692,28 @@ LAB_000ca6bc:
       cVar24 = cVar24 + '\x01';
       iVar39 = iVar39 + -1;
     } while (iVar39 != 0);
-    iVar39 = *(int *)(param_1 + 0x186c);
+    iVar39 = *(int *)(ctx + 0x186c);
     if (iVar39 == 0) {
-      FUN_000c6ff0(param_1,1);
-      iVar39 = *(int *)(param_1 + 0x186c);
+      FUN_000c6ff0(ctx,1);
+      iVar39 = *(int *)(ctx + 0x186c);
     }
     iVar39 = ((int (*)())FUN_000cd1b0)(iVar39,auStack_2b18,auStack_2a5c);
     if (iVar39 != 0) {
       return (uint *******)((int)((unsigned char *)0x0) + 2);
     }
-    param_3[0x1000] = local_2400;
+    programBody[0x1000] = local_2400;
     if (local_2400 != (uint ******)0x0) {
-      puVar31 = local_240c;
-      pppppppuVar18 = param_3;
+      ilTokens = local_240c;
+      pppppppuVar18 = programBody;
       if (local_2400 == (uint ******)0x0) {
         local_2400 = (uint ******)0x1;
       }
       do {
-        ppppppuVar10 = (uint ******)*puVar31;
-        ppppppuVar15 = (uint ******)puVar31[1];
-        ppppppuVar23 = (uint ******)puVar31[2];
-        ppppppuVar28 = (uint ******)puVar31[3];
-        puVar31 = puVar31 + 4;
+        ppppppuVar10 = (uint ******)*ilTokens;
+        ppppppuVar15 = (uint ******)ilTokens[1];
+        ppppppuVar23 = (uint ******)ilTokens[2];
+        ppppppuVar28 = (uint ******)ilTokens[3];
+        ilTokens = ilTokens + 4;
         *pppppppuVar18 = ppppppuVar10;
         pppppppuVar18[1] = ppppppuVar15;
         pppppppuVar18[2] = ppppppuVar23;
@@ -1722,20 +1722,20 @@ LAB_000ca6bc:
         local_2400 = (uint ******)((int)local_2400 - 1);
       } while (local_2400 != (uint ******)0x0);
     }
-    ppppppuVar10 = param_3[0x1502];
+    ppppppuVar10 = programBody[0x1502];
     if (ppppppuVar10 < local_23ec) {
-      param_3[0x1502] = local_23ec;
-      param_3[0x1501] = (uint ******)((int)local_23ec + 1);
+      programBody[0x1502] = local_23ec;
+      programBody[0x1501] = (uint ******)((int)local_23ec + 1);
       ppppppuVar10 = local_23ec;
     }
     else {
-      param_3[0x1501] = (uint ******)((int)ppppppuVar10 + 1);
+      programBody[0x1501] = (uint ******)((int)ppppppuVar10 + 1);
     }
     if ((uint ******)0xff < ppppppuVar10) {
-      param_3[0x1502] = (uint ******)0xff;
+      programBody[0x1502] = (uint ******)0xff;
     }
-    if ((uint ******)0x100 < param_3[0x1501]) {
-      param_3[0x1501] = (uint ******)0x100;
+    if ((uint ******)0x100 < programBody[0x1501]) {
+      programBody[0x1501] = (uint ******)0x100;
     }
     if (local_2a04 == 0) goto LAB_000caa4c;
     uVar33 = 0;
@@ -1755,7 +1755,7 @@ LAB_000ca6bc:
       }
       else if (*(int *)(iVar36 + 8) == 0x18) {
 LAB_000caa2c:
-        ((int (*)())FUN_000c8de0)(param_3 + 0x1589,iVar36);
+        ((int (*)())FUN_000c8de0)(programBody + 0x1589,iVar36);
         uVar21 = local_2a04;
       }
       uVar33 = uVar33 + 1;
@@ -1772,11 +1772,11 @@ LAB_000caa4c:
               ppppppuVar15 = *(uint *******)(iVar39 + local_29fc);
               iVar17 = FUN_000c7240(*(undefined4 *)(iVar36 + 4));
               ppppppuVar10 = *(uint *******)(iVar36 + 0x14);
-              *(undefined1 *)(param_3 + (int)(((unsigned char *)0x00001005) + (int)ppppppuVar15 * 5)) = 1;
-              param_3[(int)(((unsigned char *)0x00001001) + (int)ppppppuVar15 * 5 + iVar17)] = ppppppuVar10;
+              *(undefined1 *)(programBody + (int)(((unsigned char *)0x00001005) + (int)ppppppuVar15 * 5)) = 1;
+              programBody[(int)(((unsigned char *)0x00001001) + (int)ppppppuVar15 * 5 + iVar17)] = ppppppuVar10;
               uVar21 = local_2a08;
-              if (param_3[0x1502] < ppppppuVar15) {
-                param_3[0x1502] = ppppppuVar15;
+              if (programBody[0x1502] < ppppppuVar15) {
+                programBody[0x1502] = ppppppuVar15;
               }
             }
             uVar33 = uVar33 + 1;
@@ -1784,16 +1784,16 @@ LAB_000caa4c:
           } while (uVar33 < uVar21);
         }
         ppppppuVar10 = (uint ******)0x0;
-        *(undefined1 *)(param_3 + 0x1507) = 0;
-        param_3[0x1506] = (uint ******)0x0;
-        param_3[0x151d] = (uint ******)0x0;
-        param_3[0x151e] = (uint ******)0x0;
-        param_3[0x1503] = local_2958;
-        param_3[0x1504] = local_2654;
-        param_3[0x1505] = local_23fc;
-        param_3[0x1588] = (uint ******)0x0;
+        *(undefined1 *)(programBody + 0x1507) = 0;
+        programBody[0x1506] = (uint ******)0x0;
+        programBody[0x151d] = (uint ******)0x0;
+        programBody[0x151e] = (uint ******)0x0;
+        programBody[0x1503] = local_2958;
+        programBody[0x1504] = local_2654;
+        programBody[0x1505] = local_23fc;
+        programBody[0x1588] = (uint ******)0x0;
         if (local_2654 == (uint ******)0x0) {
-          ppppppuVar10 = param_3[0x151d];
+          ppppppuVar10 = programBody[0x151d];
         }
         else {
           pcVar14 = local_2650;
@@ -1804,53 +1804,53 @@ LAB_000caa4c:
             cVar24 = *pcVar14;
             if (cVar24 == '\x01') {
               ppppppuVar10 = (uint ******)((uint)ppppppuVar10 | 0x10000);
-              param_3[0x151d] = ppppppuVar10;
+              programBody[0x151d] = ppppppuVar10;
             }
             else if (cVar24 == '\0') {
               ppppppuVar10 = (uint ******)((uint)ppppppuVar10 | 1);
-              *(undefined1 *)(param_3 + 0x1507) = 1;
-              param_3[0x151d] = ppppppuVar10;
+              *(undefined1 *)(programBody + 0x1507) = 1;
+              programBody[0x151d] = ppppppuVar10;
             }
             else if (cVar24 == '\x02') {
               cVar24 = pcVar14[1];
               if (cVar24 == '\x01') {
                 ppppppuVar10 = (uint ******)((uint)ppppppuVar10 | 4);
-                param_3[0x151d] = ppppppuVar10;
+                programBody[0x151d] = ppppppuVar10;
               }
               else if (cVar24 == '\0') {
                 ppppppuVar10 = (uint ******)((uint)ppppppuVar10 | 2);
-                param_3[0x151d] = ppppppuVar10;
+                programBody[0x151d] = ppppppuVar10;
               }
               else if (cVar24 == '\x02') {
                 ppppppuVar10 = (uint ******)((uint)ppppppuVar10 | 8);
-                param_3[0x151d] = ppppppuVar10;
+                programBody[0x151d] = ppppppuVar10;
               }
               else if (cVar24 == '\x03') {
                 ppppppuVar10 = (uint ******)((uint)ppppppuVar10 | 0x10);
-                param_3[0x151d] = ppppppuVar10;
+                programBody[0x151d] = ppppppuVar10;
               }
             }
             else if (cVar24 == '\x05') {
-              param_3[0x151e] =
-                   (uint ******)(4 << ((uint)(byte)pcVar14[1] * 3 & 0x3f) | (uint)param_3[0x151e]);
-              param_3[0x1588] =
-                   (uint ******)(4 << ((uint)(byte)pcVar14[1] * 3 & 0x3f) | (uint)param_3[0x1588]);
+              programBody[0x151e] =
+                   (uint ******)(4 << ((uint)(byte)pcVar14[1] * 3 & 0x3f) | (uint)programBody[0x151e]);
+              programBody[0x1588] =
+                   (uint ******)(4 << ((uint)(byte)pcVar14[1] * 3 & 0x3f) | (uint)programBody[0x1588]);
             }
             pcVar14 = pcVar14 + 0xc;
             local_2654 = (uint ******)((int)local_2654 - 1);
           } while (local_2654 != (uint ******)0x0);
         }
         if (((uint)ppppppuVar10 & 0x18) != 0) {
-          param_3[0x151d] = (uint ******)((uint)ppppppuVar10 | 0x1c);
+          programBody[0x151d] = (uint ******)((uint)ppppppuVar10 | 0x1c);
         }
-        pppppppuVar18 = param_3 + 0x1571;
+        pppppppuVar18 = programBody + 0x1571;
         iVar39 = 0x16;
         do {
           *pppppppuVar18 = (uint ******)0x16;
           pppppppuVar18 = pppppppuVar18 + 1;
           iVar39 = iVar39 + -1;
         } while (iVar39 != 0);
-        ppppppuVar10 = param_3[0x1503];
+        ppppppuVar10 = programBody[0x1503];
         if (ppppppuVar10 != (uint ******)0x0) {
           puVar37 = &uStack_2954;
           ppppppuVar15 = ppppppuVar10;
@@ -1861,49 +1861,49 @@ LAB_000caa4c:
             pbVar2 = puVar37 + 1;
             pbVar5 = puVar37 + (int)(abStack_2950 + -(int)&uStack_2954);
             puVar37 = puVar37 + 0xc;
-            param_3[(int)(((unsigned char *)0x00001571) + *pbVar2)] = (uint ******)(uint)*pbVar5;
+            programBody[(int)(((unsigned char *)0x00001571) + *pbVar2)] = (uint ******)(uint)*pbVar5;
             ppppppuVar15 = (uint ******)((int)ppppppuVar15 + -1);
           } while (ppppppuVar15 != (uint ******)0x0);
         }
         if (ppppppuVar10 < (uint ******)0x2) {
           if (ppppppuVar10 == (uint ******)0x0) {
-            param_3[0x1571] = (uint ******)0x0;
-            param_3[0x1572] = (uint ******)0x1;
+            programBody[0x1571] = (uint ******)0x0;
+            programBody[0x1572] = (uint ******)0x1;
           }
-          else if (param_3[0x1571] == (uint ******)0x0) {
-            param_3[0x1572] = (uint ******)0x1;
+          else if (programBody[0x1571] == (uint ******)0x0) {
+            programBody[0x1572] = (uint ******)0x1;
           }
           else {
-            param_3[0x1572] = (uint ******)0x0;
+            programBody[0x1572] = (uint ******)0x0;
           }
         }
         iVar39 = *local_2408;
-        param_3[0x1520] = (uint ******)0x0;
-        param_3[0x151f] = (uint ******)(uint)(iVar39 != 0);
+        programBody[0x1520] = (uint ******)0x0;
+        programBody[0x151f] = (uint ******)(uint)(iVar39 != 0);
         if (((uint ******)(uint)(iVar39 != 0) != (uint ******)0x0) &&
            (iVar39 = *local_2408, 0 < iVar39)) {
-          pppppppuVar18 = param_3 + 0x1531;
+          pppppppuVar18 = programBody + 0x1531;
           ppppppuVar10 = (uint ******)0x0;
           do {
             pppppppuVar18[0x20] = (uint ******)0x0;
             *pppppppuVar18 = (uint ******)0x0;
             pppppppuVar18[0x10] = (uint ******)0x0;
             if (local_2408[(int)ppppppuVar10 * 7 + 3] == 0x3e) {
-              param_3[0x1520] =
-                   (uint ******)(2 << (((uint)ppppppuVar10 & 0x1f) << 1) | (uint)param_3[0x1520]);
-              *(char *)((int)param_3 + (int)ppppppuVar10 * 4 + 0x5547) =
+              programBody[0x1520] =
+                   (uint ******)(2 << (((uint)ppppppuVar10 & 0x1f) << 1) | (uint)programBody[0x1520]);
+              *(char *)((int)programBody + (int)ppppppuVar10 * 4 + 0x5547) =
                    (char)aiStack_1220[local_2408[(int)ppppppuVar10 * 7 + 4] * 4 + 1];
-              *(char *)((int)param_3 + (int)ppppppuVar10 * 4 + 0x5546) =
+              *(char *)((int)programBody + (int)ppppppuVar10 * 4 + 0x5546) =
                    (char)aiStack_1220[local_2408[(int)ppppppuVar10 * 7 + 4] * 4 + 2];
-              *(short *)((int)param_3 + (int)ppppppuVar10 * 4 + 0x54c6) =
+              *(short *)((int)programBody + (int)ppppppuVar10 * 4 + 0x54c6) =
                    (short)local_2408[(int)ppppppuVar10 * 7 + 5];
-              *(short *)(param_3 + (int)(((unsigned char *)0x00001531) + (int)ppppppuVar10)) =
+              *(short *)(programBody + (int)(((unsigned char *)0x00001531) + (int)ppppppuVar10)) =
                    (short)aiStack_1220[local_2408[(int)ppppppuVar10 * 7 + 4] * 4];
-              *(short *)((int)param_3 + (int)ppppppuVar10 * 4 + 0x5506) =
+              *(short *)((int)programBody + (int)ppppppuVar10 * 4 + 0x5506) =
                    (short)local_2408[(int)ppppppuVar10 * 7 + 7];
-              *(short *)(param_3 + (int)(((unsigned char *)0x00001541) + (int)ppppppuVar10)) =
+              *(short *)(programBody + (int)(((unsigned char *)0x00001541) + (int)ppppppuVar10)) =
                    (short)local_2408[(int)ppppppuVar10 * 7 + 5] + 1;
-              param_3[(int)(((unsigned char *)0x00001561) + local_2408[(int)ppppppuVar10 * 7 + 4])] = ppppppuVar10;
+              programBody[(int)(((unsigned char *)0x00001561) + local_2408[(int)ppppppuVar10 * 7 + 4])] = ppppppuVar10;
             }
             ppppppuVar10 = (uint ******)((int)ppppppuVar10 + 1);
             pppppppuVar18 = pppppppuVar18 + 1;
@@ -1922,8 +1922,8 @@ LAB_000caa4c:
         if (puVar29 != (uint *)0x0) {
           _free(puVar29);
         }
-        if (iVar38 != 0) {
-          _free(iVar38);
+        if (ilWordCount != 0) {
+          _free(ilWordCount);
         }
         if (local_29f8 != 0) {
           _free(local_29f8);
@@ -2418,12 +2418,12 @@ joined_r0x000ca538:
   goto switchD_000c9ab8_caseD_18;
 }
 
-/* FUN_000cae90 @ 0xcae90 (7760 bytes) */
-int FUN_000cae90(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
+/* ilRewriteForTextureState @ 0xcae90 (7760 bytes) */
+int ilRewriteForTextureState(ctx, param_2, compileRecord, ilSource, param_5)
+  int ctx;
   int *param_2;
-  uint *******param_3;
-  undefined4 *param_4;
+  uint *******compileRecord;
+  undefined4 *ilSource;
   undefined4 *param_5;
 {
   bool bVar1;
@@ -2452,7 +2452,7 @@ int FUN_000cae90(param_1, param_2, param_3, param_4, param_5)
   int iVar24;
   uint *******in_r8;
   byte *pbVar25;
-  int iVar26;
+  int shadowExtraWords;
   uint uVar27;
   uint *******pppppppuVar28;
   undefined4 uVar29;
@@ -2470,16 +2470,16 @@ int FUN_000cae90(param_1, param_2, param_3, param_4, param_5)
   uint unaff_r20;
   undefined1 *puVar38;
   uint ******ppppppuVar39;
-  uint *puVar40;
+  uint *ilTokens;
   float *pfVar41;
   uint uVar42;
   int iVar43;
   int *piVar44;
   undefined4 *puVar45;
-  int iVar46;
-  int iVar47;
-  uint *local_c1f8;
-  uint *******local_c1f4;
+  int ilWordCount;
+  int extraOutputWords;
+  uint *readCursor;
+  uint *******writeCursor;
   uint *******local_c1f0;
   uint local_c1ec [2];
   uint ******local_c1e4;
@@ -2529,12 +2529,12 @@ int FUN_000cae90(param_1, param_2, param_3, param_4, param_5)
   /* issue #64 live-repro: FUN_000c8910/FUN_000c8600 (reached via the command-stream token-1/0x47
    * opcode handlers below) treat their 3rd/4th argument - &local_c08c, passed directly or via an
    * alias (pppppppuVar19/local_88) at every call site in this function - as the base of a large
-   * per-context attribute-state array, indexing it at param_3[2] up to param_3[0x88a] (~8.7KB).
+   * per-context attribute-state array, indexing it at compileRecord[2] up to compileRecord[0x88a] (~8.7KB).
    * Declared as a single word, this overflowed onto whatever real stock places after it on the
    * stack. Live-verified on real hardware via a raw memory watchpoint at the real stock address:
-   * FUN_000c8600's `param_3[param_1+0x87c] = 1;` (opcode 0x47, param_1==0) is a real, deterministic
+   * FUN_000c8600's `compileRecord[ctx+0x87c] = 1;` (opcode 0x47, ctx==0) is a real, deterministic
    * write stock performs that the rebuild's undersized local_c08c can't - traced back through
-   * FUN_000cae90's own size-computation cascade (part_018.c:2758-2820) to the calloc(44) crash this
+   * ilRewriteForTextureState's own size-computation cascade (part_018.c:2758-2820) to the calloc(44) crash this
    * issue's title tracks: the write's real destination is 12 bytes past a stack region our size
    * computation reads back as a "flag" (local_9e9c[0]) to decide the command buffer's malloc size,
    * so leaving it unwritten undersizes that malloc by exactly the corruption this issue chases.
@@ -2545,7 +2545,7 @@ int FUN_000cae90(param_1, param_2, param_3, param_4, param_5)
   uint local_c084;
   /* issue #64 live-repro: the command-stream interpreter's source-side copy loop further down
    * ("puVar23 = local_c080; ... do{uVar21=*puVar23; uVar35=puVar23[8]; puVar23=puVar23+1; ...}
-   * while(iVar47!=0)" with iVar47 starting at 8) reads puVar23[0] and puVar23[8] across 8
+   * while(extraOutputWords!=0)" with extraOutputWords starting at 8) reads puVar23[0] and puVar23[8] across 8
    * iterations, reaching as far as local_c080+0x3c - 16 contiguous words (0x40 bytes), not just
    * local_c080's own declared 4. local_c070/c06c/c068/c064/c060/c050/c04c/c048/c044 are exactly
    * those remaining words by their own hex offsets. This is the read-side counterpart of the
@@ -2575,10 +2575,10 @@ int FUN_000cae90(param_1, param_2, param_3, param_4, param_5)
   int local_c028;
   int local_c024;
   int local_c020;
-  uint local_c01c;
-  uint local_c018;
+  uint depthTextureUnitMask;
+  uint shadowCompareUnitMask;
   undefined4 local_bfd4;
-  uint local_bf94 [16];
+  uint depthTextureMode [16];
   uint local_bf54 [16];
   uint local_bf14;
   uint local_bf04 [6];
@@ -2615,7 +2615,7 @@ int FUN_000cae90(param_1, param_2, param_3, param_4, param_5)
   /* Declared too small (72 bytes) vs. its own memset (0x9c88 = 40072 bytes) - this is the real
    * root cause of the shader/GLSL token-stream parser crash tracked on issue #64: this buffer is
    * the token stream's own backing storage (its address eventually becomes the base FUN_000e4a38
-   * walks via param_1+0x74), and at 72 declared bytes the memset was overflowing ~40KB into
+   * walks via ctx+0x74), and at 72 declared bytes the memset was overflowing ~40KB into
    * whatever the compiler placed after it on the stack - onto this same giant function's own many
    * other locals, corrupting them, AND leaving the "real" 40KB buffer's tail entirely unzeroed
    * (reading uninitialized stack garbage there once the token stream's real content ran out,
@@ -2635,85 +2635,85 @@ int FUN_000cae90(param_1, param_2, param_3, param_4, param_5)
   int *local_80;
   uint ******local_70;
   
-  iVar46 = 8;
+  ilWordCount = 8;
   iVar13 = 0;
   do {
     *(undefined4 *)((int)local_c168 + iVar13) = 0xffffffff;
     *(undefined4 *)((int)local_c188 + iVar13) = 0;
     iVar13 = iVar13 + 4;
-    iVar46 = iVar46 + -1;
-  } while (iVar46 != 0);
-  bVar3 = param_1 == 0;
+    ilWordCount = ilWordCount + -1;
+  } while (ilWordCount != 0);
+  bVar3 = ctx == 0;
   local_c168[0] = local_c168[0] & 0xffff0000;
-  pppppppuVar19 = param_3;
+  pppppppuVar19 = compileRecord;
   iVar13 = _malloc(0x400);
   local_9d20 = 0;
-  local_c018 = 0;
+  shadowCompareUnitMask = 0;
   local_9d70 = 0;
   local_9d6c = 0;
   if (bVar3) {
-    local_c01c = 0;
+    depthTextureUnitMask = 0;
   }
   else {
     in_r8 = (uint *******)0x0;
-    iVar47 = 0x10;
-    local_c018 = 0;
-    local_c01c = 0;
-    puVar34 = local_bf94;
+    extraOutputWords = 0x10;
+    shadowCompareUnitMask = 0;
+    depthTextureUnitMask = 0;
+    puVar34 = depthTextureMode;
     pppppppuVar19 = (uint *******)((int)((unsigned char *)0x0) + 1);
-    iVar46 = param_1;
+    ilWordCount = ctx;
     do {
-      iVar26 = *(int *)(((unsigned char *)0x000013f8) + iVar46);
-      if ((iVar26 != 0) && (*(short *)(iVar26 + 0x38) == 0x1902)) {
+      shadowExtraWords = *(int *)(((unsigned char *)0x000013f8) + ilWordCount);
+      if ((shadowExtraWords != 0) && (*(short *)(shadowExtraWords + 0x38) == 0x1902)) {
         uVar21 = 1 << ((uint)in_r8 & 0x3f);
-        local_c01c = uVar21 | local_c01c;
-        *puVar34 = (uint)*(ushort *)(iVar26 + 0x58);
-        puVar34[0x10] = (uint)*(ushort *)(iVar26 + 0x5c);
-        if (*(short *)(iVar26 + 0x5a) != 0) {
-          local_c018 = uVar21 | local_c018;
+        depthTextureUnitMask = uVar21 | depthTextureUnitMask;
+        *puVar34 = (uint)*(ushort *)(shadowExtraWords + 0x58);
+        puVar34[0x10] = (uint)*(ushort *)(shadowExtraWords + 0x5c);
+        if (*(short *)(shadowExtraWords + 0x5a) != 0) {
+          shadowCompareUnitMask = uVar21 | shadowCompareUnitMask;
         }
       }
       in_r8 = (uint *******)((int)in_r8 + 1);
-      iVar46 = iVar46 + 4;
+      ilWordCount = ilWordCount + 4;
       puVar34 = puVar34 + 1;
-      iVar47 = iVar47 + -1;
-    } while (iVar47 != 0);
+      extraOutputWords = extraOutputWords + -1;
+    } while (extraOutputWords != 0);
   }
-  if (*(char *)(param_3 + 0x46) == '\0') {
+  if (*(char *)(compileRecord + 0x46) == '\0') {
     local_9ebc = 0;
   }
   else {
-    local_9eb8 = param_3[0x2b];
+    local_9eb8 = compileRecord[0x2b];
     local_9ebc = 1;
     if (bVar3) {
       local_9eb4 = 0;
     }
     else {
-      local_9eb4 = *(undefined4 *)(param_1 + 0x276c);
+      local_9eb4 = *(undefined4 *)(ctx + 0x276c);
     }
   }
-  iVar46 = 0;
+  ilWordCount = 0;
   puVar34 = local_9dd4;
-  iVar47 = 0x10;
+  extraOutputWords = 0x10;
   do {
     *puVar34 = 0;
-    if ((!bVar3) && (*(int *)(((unsigned char *)0x000013f8) + iVar46 * 4 + *param_2) != 0)) {
-      *puVar34 = (uint)*(byte *)(*(int *)(((unsigned char *)0x000013f8) + iVar46 * 4 + *param_2) + 0x30);
+    if ((!bVar3) && (*(int *)(((unsigned char *)0x000013f8) + ilWordCount * 4 + *param_2) != 0)) {
+      *puVar34 = (uint)*(byte *)(*(int *)(((unsigned char *)0x000013f8) + ilWordCount * 4 + *param_2) + 0x30);
     }
-    iVar46 = iVar46 + 1;
+    ilWordCount = ilWordCount + 1;
     puVar34 = puVar34 + 1;
-    iVar47 = iVar47 + -1;
-  } while (iVar47 != 0);
+    extraOutputWords = extraOutputWords + -1;
+  } while (extraOutputWords != 0);
   local_9e58 = (uint *******)((int)((unsigned char *)0x0) + 1);
   local_9e88 = 0;
-  local_9d90 = param_3[0x45];
-  if ((bVar3) || (*(short *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(param_1 + 4) + 0x10)) != -0x7baf)) {
+  local_9d90 = compileRecord[0x45];
+  if ((bVar3) || (*(short *)(((unsigned char *)0x00002e06) + *(int *)(*(int *)(ctx + 4) + 0x10)) != -0x7baf)) {
     local_9d80 = 0;
   }
   else {
     local_9d80 = 1;
   }
-  puVar40 = (uint *)*param_4;
+  ilTokens = (uint *)*ilSource;
   local_c08c = (uint ******)0x0;
   local_c028 = 0;
   local_c088 = 0xffff;
@@ -2727,7 +2727,7 @@ int FUN_000cae90(param_1, param_2, param_3, param_4, param_5)
   local_c080[0] = local_c168[0];
   local_c044 = local_c16c;
   local_c048 = local_c170;
-  iVar46 = param_4[1];
+  ilWordCount = ilSource[1];
   local_c04c = local_c174;
   local_c050 = local_c178;
   local_c040 = 0;
@@ -2752,43 +2752,43 @@ int FUN_000cae90(param_1, param_2, param_3, param_4, param_5)
   local_c060[1] = local_c188[1];
   local_c060[0] = local_c188[0];
   puVar34 = local_bf04;
-  iVar47 = 8;
+  extraOutputWords = 8;
   do {
     *puVar34 = 0;
     puVar34[0x408] = 0;
     puVar34 = puVar34 + 1;
-    iVar47 = iVar47 + -1;
-  } while (iVar47 != 0);
+    extraOutputWords = extraOutputWords + -1;
+  } while (extraOutputWords != 0);
   local_80 = local_9e54;
-  iVar47 = 0x10;
+  extraOutputWords = 0x10;
   piVar18 = local_80;
   do {
     *piVar18 = 0;
     piVar18[0x10] = 0;
     piVar18 = piVar18 + 1;
-    iVar47 = iVar47 + -1;
-  } while (iVar47 != 0);
-  iVar47 = 0;
-  iVar26 = 0;
+    extraOutputWords = extraOutputWords + -1;
+  } while (extraOutputWords != 0);
+  extraOutputWords = 0;
+  shadowExtraWords = 0;
   uVar21 = 0;
-  puVar34 = puVar40;
+  puVar34 = ilTokens;
 switchD_000cb23c_caseD_15:
-  local_c1f8 = puVar34 + 2;
-  puVar23 = local_c1f8;
+  readCursor = puVar34 + 2;
+  puVar23 = readCursor;
 switchD_000cb23c_caseD_18:
   puVar34 = puVar23;
-  if (puVar34 < puVar40 + iVar46) goto code_r0x000cb214;
+  if (puVar34 < ilTokens + ilWordCount) goto code_r0x000cb214;
   if (local_9ec4 != 0) {
     puVar34 = (uint *)0x0;
     uVar35 = 0;
     goto LAB_000cc88c;
   }
-  iVar47 = (iVar46 + iVar47) * 4;
+  extraOutputWords = (ilWordCount + extraOutputWords) * 4;
   local_c03c = local_c08c;
   if (local_c040 != 0) {
-    iVar47 = iVar47 + 0x48;
+    extraOutputWords = extraOutputWords + 0x48;
   }
-  uVar35 = iVar47 + iVar26 * 4;
+  uVar35 = extraOutputWords + shadowExtraWords * 4;
   bVar5 = local_9ebc != 0;
   if (bVar5) {
     uVar35 = uVar35 + 0x14;
@@ -2824,14 +2824,14 @@ switchD_000cb23c_caseD_18:
   else if (local_9d90 == (uint ******)0x0) goto LAB_000cbb64;
   uVar27 = uVar27 + 8;
   piVar18 = local_9e9c;
-  iVar47 = 4;
+  extraOutputWords = 4;
   do {
     if (*piVar18 != 0) {
       uVar27 = uVar27 + 0x2c;
     }
     piVar18 = piVar18 + 1;
-    iVar47 = iVar47 + -1;
-  } while (iVar47 != 0);
+    extraOutputWords = extraOutputWords + -1;
+  } while (extraOutputWords != 0);
 LAB_000cbb64:
   if (((local_9e74 != 0) || (local_9e6c != 0)) || (uVar35 = uVar27, local_9e58 == (uint *******)0x0)
      ) {
@@ -2846,10 +2846,10 @@ LAB_000cbb64:
   bVar5 = true;
   pppppppuVar28 = local_9e58;
   puVar34 = (uint *)_malloc(uVar35 + 0x10);
-  *puVar34 = *puVar40;
-  local_c1f8 = puVar40 + 2;
-  puVar34[1] = puVar40[1];
-  puVar23 = local_c1f8;
+  *puVar34 = *ilTokens;
+  readCursor = ilTokens + 2;
+  puVar34[1] = ilTokens[1];
+  puVar23 = readCursor;
   pppppppuVar36 = (uint *******)(puVar34 + 2);
   goto switchD_000cbc48_caseD_18;
 code_r0x000cb214:
@@ -2924,12 +2924,12 @@ code_r0x000cb214:
   case 0x2b:
   case 0x4b:
   case 0x53:
-    local_c1f8 = puVar34 + 1;
-    puVar23 = local_c1f8;
+    readCursor = puVar34 + 1;
+    puVar23 = readCursor;
     goto switchD_000cb23c_caseD_18;
   /* issue #64 live-repro (crash #3, use-after-free): opcode 0x28 was lumped in with the
    * trivial single-word opcodes above in THIS sizing pass, contributing nothing extra to
-   * iVar47 (the buffer's extra-output-words budget). But the WRITE pass's real case 0x28
+   * extraOutputWords (the buffer's extra-output-words budget). But the WRITE pass's real case 0x28
    * (below, `puVar45 = FUN_000c7930(...); *puVar45 = ppppppuVar15;`) calls FUN_000c7930,
    * which - depending on live per-context state read from local_c08c/param_2 - can emit far
    * more than one output word: tallying every conditional block in FUN_000c7930 (part_018.c),
@@ -2938,17 +2938,17 @@ code_r0x000cb214:
    * 5 from the 0x220c/0x2204/0x2234 block, 9 from the final 0x2218/0x2220/0x2234 block),
    * plus the caller's own extra `*puVar45 = ppppppuVar15` word already covered by this
    * opcode's baseline 1-word allowance. Live-verified on real hardware: with a watchpoint on
-   * the corrupted freed heap block, `info locals` inside FUN_000cae90 at the exact fault
+   * the corrupted freed heap block, `info locals` inside ilRewriteForTextureState at the exact fault
    * showed puVar45 (the write's destination pointer, i.e. FUN_000c7930's real return value)
    * equal to the corrupted address, and ppppppuVar15 (the value written) equal to 0x28 - the
    * opcode number itself, confirming this exact call site. Splitting 0x28 out and adding its
-   * real worst-case bonus here (matching the existing iVar47/iVar26 bonus pattern used by
+   * real worst-case bonus here (matching the existing extraOutputWords/shadowExtraWords bonus pattern used by
    * cases 0x24/0x5d/0x5e above) so the command buffer is sized for what this opcode can
    * actually emit. */
   case 0x28:
-    iVar47 = iVar47 + 110;
-    local_c1f8 = puVar34 + 1;
-    puVar23 = local_c1f8;
+    extraOutputWords = extraOutputWords + 110;
+    readCursor = puVar34 + 1;
+    puVar23 = readCursor;
     goto switchD_000cb23c_caseD_18;
   case 7:
   case 0x11:
@@ -2956,18 +2956,18 @@ code_r0x000cb214:
     uVar29 = 0;
 LAB_000cb4b0:
     pppppppuVar19 = (uint *******)((int)((unsigned char *)0x0) + 2);
-    local_c1f8 = (uint *)((int (*)())FUN_000c8910)(puVar34,uVar29,2,&local_c08c);
-    puVar23 = local_c1f8;
+    readCursor = (uint *)((int (*)())FUN_000c8910)(puVar34,uVar29,2,&local_c08c);
+    puVar23 = readCursor;
     goto switchD_000cb23c_caseD_18;
   case 8:
   case 0x32:
-    local_c1f8 = puVar34 + 2;
-    puVar23 = local_c1f8;
+    readCursor = puVar34 + 2;
+    puVar23 = readCursor;
     goto switchD_000cb23c_caseD_18;
   case 9:
   case 0x1d:
-    local_c1f8 = puVar34 + 3;
-    puVar23 = local_c1f8;
+    readCursor = puVar34 + 3;
+    puVar23 = readCursor;
     goto switchD_000cb23c_caseD_18;
   case 10:
   case 0xd:
@@ -2977,21 +2977,21 @@ LAB_000cb4b0:
   case 0x40:
   case 100:
     pppppppuVar19 = (uint *******)((int)((unsigned char *)0x0) + 3);
-    local_c1f8 = (uint *)((int (*)())FUN_000c8910)(puVar34,1,3,&local_c08c);
-    puVar23 = local_c1f8;
+    readCursor = (uint *)((int (*)())FUN_000c8910)(puVar34,1,3,&local_c08c);
+    puVar23 = readCursor;
     goto switchD_000cb23c_caseD_18;
   case 0xf:
-    local_c1f8 = puVar34 + *(ushort *)((int)puVar34 + 6) + 2;
-    puVar23 = local_c1f8;
+    readCursor = puVar34 + *(ushort *)((int)puVar34 + 6) + 2;
+    puVar23 = readCursor;
     goto switchD_000cb23c_caseD_18;
   case 0x14:
-    local_c1f8 = puVar34 + 3;
-    puVar23 = local_c1f8;
+    readCursor = puVar34 + 3;
+    puVar23 = readCursor;
     goto switchD_000cb23c_caseD_18;
   case 0x15:
     goto switchD_000cb23c_caseD_15;
   case 0x16:
-    local_c1f8 = puVar34 + 1;
+    readCursor = puVar34 + 1;
     pppppppuVar19 = &local_c08c;
     uVar35 = puVar34[1];
     puVar8 = (undefined *)(uVar35 & 0x3f0000);
@@ -3019,20 +3019,20 @@ LAB_000cb4b0:
     }
     pppppppuVar19 = (uint *******)((uint)pppppppuVar19 >> 0x18 & 7);
     FUN_000c7270(&local_c08c,uVar35,pppppppuVar19);
-    local_c1f8 = local_c1f8 + 1;
-    puVar23 = local_c1f8;
+    readCursor = readCursor + 1;
+    puVar23 = readCursor;
     goto switchD_000cb23c_caseD_18;
   case 0x1a:
-    local_c1f8 = puVar34 + 1;
+    readCursor = puVar34 + 1;
     if ((int)pppppppuVar19 < 0) {
-      local_c1f8 = puVar34 + 2;
+      readCursor = puVar34 + 2;
     }
 LAB_000cb6d4:
-    local_c1f8 = local_c1f8 + 1;
-    puVar23 = local_c1f8;
+    readCursor = readCursor + 1;
+    puVar23 = readCursor;
     goto switchD_000cb23c_caseD_18;
   case 0x1c:
-    local_c1f8 = puVar34 + 1;
+    readCursor = puVar34 + 1;
     uVar12 = puVar34[1];
     uVar35 = uVar12 >> 0x10 & 0x3f;
     if (uVar35 == 1) {
@@ -3040,143 +3040,143 @@ LAB_000cb6d4:
       local_c1a8 = (uint ******)puVar34[2];
       local_c1a4 = puVar34[3];
       local_c1a0 = puVar34[4];
-      local_c1f8 = puVar34 + 6;
+      readCursor = puVar34 + 6;
       local_c19c = puVar34[5];
       FUN_000c7290(&local_c08c,uVar12 & 0xffff,pppppppuVar19);
-      puVar23 = local_c1f8;
+      puVar23 = readCursor;
     }
     else {
-      puVar23 = local_c1f8;
+      puVar23 = readCursor;
       if (uVar35 == 2) {
         pppppppuVar19 = &local_c1a8;
         local_c1a8 = (uint ******)puVar34[2];
         local_c1a4 = puVar34[3];
         local_c1a0 = puVar34[4];
-        local_c1f8 = puVar34 + 6;
+        readCursor = puVar34 + 6;
         local_c19c = puVar34[5];
         FUN_000c72f0(&local_c08c,uVar12 & 0xffff,pppppppuVar19);
-        puVar23 = local_c1f8;
+        puVar23 = readCursor;
       }
     }
     goto switchD_000cb23c_caseD_18;
   case 0x24:
     pppppppuVar19 = (uint *******)((int)((unsigned char *)0x0) + 2);
-    iVar47 = iVar47 + 5;
-    local_c1f8 = (uint *)((int (*)())FUN_000c8910)(puVar34,1,2,&local_c08c);
-    puVar23 = local_c1f8;
+    extraOutputWords = extraOutputWords + 5;
+    readCursor = (uint *)((int (*)())FUN_000c8910)(puVar34,1,2,&local_c08c);
+    puVar23 = readCursor;
     goto switchD_000cb23c_caseD_18;
   case 0x35:
     pppppppuVar19 = &local_c08c;
-    local_c1f8 = puVar34 + 2;
+    readCursor = puVar34 + 2;
     local_c1c0[0] = (uint ******)puVar34[1];
     ((int (*)())FUN_000c87d0)(local_c1c0,auStack_c1b4,pppppppuVar19);
-    puVar23 = local_c1f8;
+    puVar23 = readCursor;
     goto switchD_000cb23c_caseD_18;
   case 0x37:
     pppppppuVar19 = (uint *******)((int)((unsigned char *)0x0) + 1);
-    local_c1f8 = (uint *)((int (*)())FUN_000c8910)(puVar34,0,1,&local_c08c);
+    readCursor = (uint *)((int (*)())FUN_000c8910)(puVar34,0,1,&local_c08c);
     local_9e60 = 1;
-    puVar23 = local_c1f8;
+    puVar23 = readCursor;
     goto switchD_000cb23c_caseD_18;
   case 0x3e:
     uVar29 = 0;
     break;
   case 0x5d:
-    local_c1f8 = puVar34 + 2;
+    readCursor = puVar34 + 2;
     local_9d6c = local_9d6c + 1;
     uVar35 = puVar34[1];
     uVar12 = *puVar34;
     if ((((uVar12 & 0xc000000) == 0x4000000) ||
         (((uVar12 & 0xc000000) == 0x8000000 &&
-         ((1 << (*(byte *)((int)puVar34 + 1) & 0x3f) & local_c018) != 0)))) &&
-       (local_c01c << (*(byte *)((int)puVar34 + 1) & 0x3f) != 0)) {
-      iVar26 = iVar26 + 0x1b;
-      local_c018 = 1 << (*(byte *)((int)puVar34 + 1) & 0x3f) | local_c018;
+         ((1 << (*(byte *)((int)puVar34 + 1) & 0x3f) & shadowCompareUnitMask) != 0)))) &&
+       (depthTextureUnitMask << (*(byte *)((int)puVar34 + 1) & 0x3f) != 0)) {
+      shadowExtraWords = shadowExtraWords + 0x1b;
+      shadowCompareUnitMask = 1 << (*(byte *)((int)puVar34 + 1) & 0x3f) | shadowCompareUnitMask;
       uVar12 = *puVar34;
     }
     if ((int)uVar12 < 0) {
-      local_c1f8 = puVar34 + 3;
+      readCursor = puVar34 + 3;
       uVar12 = *puVar34;
     }
     if ((uVar12 & 0x40000000) != 0) {
-      local_c1f8 = local_c1f8 + 1;
+      readCursor = readCursor + 1;
     }
     if ((uVar35 & 0x400000) != 0) {
-      unaff_r20 = *local_c1f8;
-      local_c1f8 = local_c1f8 + 1;
+      unaff_r20 = *readCursor;
+      readCursor = readCursor + 1;
     }
     local_88 = &local_c08c;
     ((int (*)())FUN_000c8600)(uVar35 & 0xffff,uVar35 >> 0x10 & 0x3f,local_88,unaff_r20,uVar35 >> 0x16 & 1);
-    if ((1 << (*(byte *)((int)puVar34 + 1) & 0x3f) & local_c01c) != 0) {
-      iVar26 = iVar26 + 4;
+    if ((1 << (*(byte *)((int)puVar34 + 1) & 0x3f) & depthTextureUnitMask) != 0) {
+      shadowExtraWords = shadowExtraWords + 4;
     }
-    local_c1e4 = (uint ******)*local_c1f8;
-    puVar34 = local_c1f8 + 1;
+    local_c1e4 = (uint ******)*readCursor;
+    puVar34 = readCursor + 1;
     if (((uint)local_c1e4 & 0x400000) != 0) {
-      local_c1f0 = (uint *******)local_c1f8[1];
-      puVar34 = local_c1f8 + 2;
+      local_c1f0 = (uint *******)readCursor[1];
+      puVar34 = readCursor + 2;
     }
-    local_c1f8 = puVar34;
+    readCursor = puVar34;
     pppppppuVar19 = local_88;
     ((int (*)())FUN_000c87d0)(&local_c1e4,&local_c1f0,local_88);
-    puVar23 = local_c1f8;
+    puVar23 = readCursor;
     goto switchD_000cb23c_caseD_18;
   case 0x5e:
-    local_c1f8 = puVar34 + 2;
+    readCursor = puVar34 + 2;
     local_9d6c = local_9d6c + 1;
     uVar35 = puVar34[1];
     uVar12 = *puVar34;
     if ((((uVar12 & 0xc000000) == 0x4000000) ||
         (((uVar12 & 0xc000000) == 0x8000000 &&
-         ((1 << (*(byte *)((int)puVar34 + 1) & 0x3f) & local_c018) != 0)))) &&
-       (local_c01c << (*(byte *)((int)puVar34 + 1) & 0x3f) != 0)) {
-      iVar26 = iVar26 + 0x1b;
-      local_c018 = 1 << (*(byte *)((int)puVar34 + 1) & 0x3f) | local_c018;
+         ((1 << (*(byte *)((int)puVar34 + 1) & 0x3f) & shadowCompareUnitMask) != 0)))) &&
+       (depthTextureUnitMask << (*(byte *)((int)puVar34 + 1) & 0x3f) != 0)) {
+      shadowExtraWords = shadowExtraWords + 0x1b;
+      shadowCompareUnitMask = 1 << (*(byte *)((int)puVar34 + 1) & 0x3f) | shadowCompareUnitMask;
       uVar12 = *puVar34;
     }
     if ((int)uVar12 < 0) {
-      local_c1f8 = puVar34 + 3;
+      readCursor = puVar34 + 3;
       uVar12 = *puVar34;
     }
     if ((uVar12 & 0x40000000) != 0) {
-      local_c1f8 = local_c1f8 + 1;
+      readCursor = readCursor + 1;
     }
     if ((uVar35 & 0x400000) != 0) {
-      unaff_r19 = *local_c1f8;
-      local_c1f8 = local_c1f8 + 1;
+      unaff_r19 = *readCursor;
+      readCursor = readCursor + 1;
     }
     local_88 = &local_c08c;
     ((int (*)())FUN_000c8600)(uVar35 & 0xffff,uVar35 >> 0x10 & 0x3f,local_88,unaff_r19,uVar35 >> 0x16 & 1);
-    if ((1 << (*(byte *)((int)puVar34 + 1) & 0x3f) & local_c01c) != 0) {
-      iVar26 = iVar26 + 4;
+    if ((1 << (*(byte *)((int)puVar34 + 1) & 0x3f) & depthTextureUnitMask) != 0) {
+      shadowExtraWords = shadowExtraWords + 4;
     }
-    local_c1f0 = (uint *******)*local_c1f8;
-    puVar34 = local_c1f8 + 1;
+    local_c1f0 = (uint *******)*readCursor;
+    puVar34 = readCursor + 1;
     if (((uint)local_c1f0 & 0x400000) != 0) {
-      local_c1e4 = (uint ******)local_c1f8[1];
-      puVar34 = local_c1f8 + 2;
+      local_c1e4 = (uint ******)readCursor[1];
+      puVar34 = readCursor + 2;
     }
     local_c1ec[0] = *puVar34;
-    local_c1f8 = puVar34 + 1;
+    readCursor = puVar34 + 1;
     if ((local_c1ec[0] & 0x400000) != 0) {
       local_c1e0[0] = puVar34[1];
-      local_c1f8 = puVar34 + 2;
+      readCursor = puVar34 + 2;
     }
     ((int (*)())FUN_000c87d0)(&local_c1f0,&local_c1e4,local_88);
     pppppppuVar19 = local_88;
     ((int (*)())FUN_000c87d0)(local_c1ec,local_c1e0,local_88);
-    puVar23 = local_c1f8;
+    puVar23 = readCursor;
     goto switchD_000cb23c_caseD_18;
   }
   pppppppuVar19 = (uint *******)((int)((unsigned char *)0x0) + 1);
-  local_c1f8 = (uint *)((int (*)())FUN_000c8910)(puVar34,uVar29,1,&local_c08c);
-  puVar23 = local_c1f8;
+  readCursor = (uint *)((int (*)())FUN_000c8910)(puVar34,uVar29,1,&local_c08c);
+  puVar23 = readCursor;
   goto switchD_000cb23c_caseD_18;
 switchD_000cbc48_caseD_18:
-  local_c1f4 = pppppppuVar36;
+  writeCursor = pppppppuVar36;
   puVar22 = puVar23;
-  pppppppuVar36 = local_c1f4;
-  if (puVar40 + iVar46 <= puVar22) {
+  pppppppuVar36 = writeCursor;
+  if (ilTokens + ilWordCount <= puVar22) {
     uVar35 = uVar35 >> 2;
     local_c084 = uVar21 | local_c084;
 LAB_000cc88c:
@@ -3192,8 +3192,8 @@ LAB_000cc88c:
       *(undefined1 *)(param_2 + 0x7a6) = 1;
       *(undefined1 *)((int)param_2 + 0x1e2f) = 1;
       param_2[0x7a4] = local_c02c + 2;
-      param_3[0x2e] = (uint ******)(local_c034 + param_2[0x7c7]);
-      param_3[0x2f] = (uint ******)(local_c030 + param_2[0x7c7]);
+      compileRecord[0x2e] = (uint ******)(local_c034 + param_2[0x7c7]);
+      compileRecord[0x2f] = (uint ******)(local_c030 + param_2[0x7c7]);
     }
     if ((local_c028 == 0) || (local_c024 == 0x11)) {
       *(undefined1 *)((int)param_2 + 0x1e2e) = 0;
@@ -3207,8 +3207,8 @@ LAB_000cc88c:
     }
     else {
       param_2[0x7a3] = local_c020;
-      param_3[0x38] = (uint ******)(local_9d88 + param_2[0x7c7]);
-      param_3[0x39] = (uint ******)(local_9d84 + param_2[0x7c7]);
+      compileRecord[0x38] = (uint ******)(local_9d88 + param_2[0x7c7]);
+      compileRecord[0x39] = (uint ******)(local_9d84 + param_2[0x7c7]);
       *(undefined1 *)(param_2 + 0x7a8) = 1;
     }
     if (local_9e64 == 0) {
@@ -3223,10 +3223,10 @@ LAB_000cc88c:
     else {
       *(undefined1 *)(param_2 + 0x7c1) = 1;
     }
-    iVar46 = 8;
+    ilWordCount = 8;
     uVar21 = 0;
-    pppppppuVar28 = param_3 + 0x2c;
-    pppppppuVar19 = param_3;
+    pppppppuVar28 = compileRecord + 0x2c;
+    pppppppuVar19 = compileRecord;
     do {
       if ((1 << (uVar21 & 0x3f) & local_c084) == 0) {
         *(undefined1 *)(pppppppuVar19 + 0x2c) = 0;
@@ -3240,13 +3240,13 @@ LAB_000cc88c:
       uVar21 = uVar21 + 1;
       pppppppuVar28 = (uint *******)((int)pppppppuVar28 + 1);
       pppppppuVar19 = (uint *******)((int)pppppppuVar19 + 1);
-      iVar46 = iVar46 + -1;
-    } while (iVar46 != 0);
+      ilWordCount = ilWordCount + -1;
+    } while (ilWordCount != 0);
     param_2[0x7a9] = 0;
-    param_3[0x36] = (uint ******)0x0;
+    compileRecord[0x36] = (uint ******)0x0;
     uVar21 = 0;
-    iVar46 = 0x10;
-    *(undefined4 *)(((unsigned char *)0x000010e0) + (int)*param_3) = local_bfd4;
+    ilWordCount = 0x10;
+    *(undefined4 *)(((unsigned char *)0x000010e0) + (int)*compileRecord) = local_bfd4;
     piVar18 = local_80;
     piVar44 = param_2;
     piVar32 = param_2;
@@ -3258,7 +3258,7 @@ LAB_000cc88c:
       else {
         *(undefined1 *)(piVar32 + 0x582) = 1;
       }
-      if ((uVar12 & local_c01c) == 0) {
+      if ((uVar12 & depthTextureUnitMask) == 0) {
         *(undefined1 *)(piVar32 + 0x586) = 0;
       }
       else {
@@ -3274,88 +3274,88 @@ LAB_000cc88c:
       *(char *)(piVar32 + 0x56e) = (char)*piVar2;
       fVar10 = FLOAT_001aa0e8;
       piVar32 = (int *)((int)piVar32 + 1);
-      iVar46 = iVar46 + -1;
-    } while (iVar46 != 0);
-    iVar46 = 0;
+      ilWordCount = ilWordCount + -1;
+    } while (ilWordCount != 0);
+    ilWordCount = 0;
     piVar18 = param_2;
     piVar44 = param_2;
     do {
       if (((!bVar3) && (*(char *)(piVar44 + 0x586) != '\0')) &&
-         (iVar47 = *(int *)(((unsigned char *)0x000013f8) + iVar46 * 4 + *param_2), iVar47 != 0)) {
-        ((void (*)())FUN_000c8e30)(*param_3,(int)param_3[0x36] + (piVar18[0x7aa] - param_2[0x7c7]),
-                     (double)(fVar10 / *(float *)(iVar47 + 0x44)),
-                     (double)(fVar10 / *(float *)(iVar47 + 0x48)),(double)*(float *)(iVar47 + 0x50),
+         (extraOutputWords = *(int *)(((unsigned char *)0x000013f8) + ilWordCount * 4 + *param_2), extraOutputWords != 0)) {
+        ((void (*)())FUN_000c8e30)(*compileRecord,(int)compileRecord[0x36] + (piVar18[0x7aa] - param_2[0x7c7]),
+                     (double)(fVar10 / *(float *)(extraOutputWords + 0x44)),
+                     (double)(fVar10 / *(float *)(extraOutputWords + 0x48)),(double)*(float *)(extraOutputWords + 0x50),
                      (double)FLOAT_001aa0e8);
       }
-      bVar5 = iVar46 != 0xf;
+      bVar5 = ilWordCount != 0xf;
       piVar18 = piVar18 + 1;
       piVar44 = (int *)((int)piVar44 + 1);
-      iVar46 = iVar46 + 1;
+      ilWordCount = ilWordCount + 1;
     } while (bVar5);
     local_88 = &local_c08c;
-    iVar46 = 0;
-    puVar40 = local_aee4;
+    ilWordCount = 0;
+    ilTokens = local_aee4;
     puVar38 = auStack_beec;
     puVar37 = auStack_aecc;
     do {
       puVar45 = (undefined4 *)(puVar37 + 8);
       pfVar41 = (float *)(puVar38 + 8);
       uVar21 = 0;
-      iVar47 = iVar46 << 2;
+      extraOutputWords = ilWordCount << 2;
       do {
         uVar12 = 1 << (uVar21 & 0x3f);
-        if ((uVar12 & puVar40[-0x408]) != 0) {
-          ((void (*)())FUN_000c8e30)(*param_3,iVar46 + uVar21,(double)*pfVar41,(double)pfVar41[1],
+        if ((uVar12 & ilTokens[-0x408]) != 0) {
+          ((void (*)())FUN_000c8e30)(*compileRecord,ilWordCount + uVar21,(double)*pfVar41,(double)pfVar41[1],
                        (double)pfVar41[2],(double)pfVar41[3]);
         }
-        if ((uVar12 & *puVar40) != 0) {
+        if ((uVar12 & *ilTokens) != 0) {
           uVar33 = puVar45[1];
           uVar29 = *puVar45;
-          iVar26 = iVar47 + (int)*param_3;
-          ((unsigned char *)0x000036c9)[iVar26] = (char)puVar45[2];
-          ((unsigned char *)0x000036cb)[iVar26] = (char)uVar29;
-          ((unsigned char *)0x000036ca)[iVar26] = (char)uVar33;
+          shadowExtraWords = extraOutputWords + (int)*compileRecord;
+          ((unsigned char *)0x000036c9)[shadowExtraWords] = (char)puVar45[2];
+          ((unsigned char *)0x000036cb)[shadowExtraWords] = (char)uVar29;
+          ((unsigned char *)0x000036ca)[shadowExtraWords] = (char)uVar33;
         }
         bVar3 = uVar21 != 0x1f;
-        iVar47 = iVar47 + 4;
+        extraOutputWords = extraOutputWords + 4;
         puVar45 = puVar45 + 4;
         pfVar41 = pfVar41 + 4;
         uVar21 = uVar21 + 1;
       } while (bVar3);
-      bVar3 = iVar46 != 0xe0;
+      bVar3 = ilWordCount != 0xe0;
       puVar37 = puVar37 + 0x200;
       puVar38 = puVar38 + 0x200;
-      puVar40 = puVar40 + 1;
-      iVar46 = iVar46 + 0x20;
+      ilTokens = ilTokens + 1;
+      ilWordCount = ilWordCount + 0x20;
     } while (bVar3);
-    *(uint *)(((unsigned char *)0x00003748) + (int)*param_3) = local_aee4[0];
+    *(uint *)(((unsigned char *)0x00003748) + (int)*compileRecord) = local_aee4[0];
     _memset(auStack_c148,0,0xbc);
     _memset(auStack_9d1c,0,0x9c88);
-    iVar46 = _malloc(param_5[1]);
-    if (iVar46 == 0) {
+    ilWordCount = _malloc(param_5[1]);
+    if (ilWordCount == 0) {
       return -1;
     }
-    _memset(iVar46,0,param_5[1]);
+    _memset(ilWordCount,0,param_5[1]);
     local_c0f8 = uVar35 << 2;
     puVar23 = local_c080;
-    puVar40 = local_c0f0;
-    iVar47 = 8;
-    local_c090 = iVar46;
+    ilTokens = local_c0f0;
+    extraOutputWords = 8;
+    local_c090 = ilWordCount;
     do {
       uVar21 = *puVar23;
       uVar35 = puVar23[8];
       puVar23 = puVar23 + 1;
-      *puVar40 = uVar21;
-      puVar40[8] = uVar35;
-      puVar40 = puVar40 + 1;
-      iVar47 = iVar47 + -1;
-    } while (iVar47 != 0);
+      *ilTokens = uVar21;
+      ilTokens[8] = uVar35;
+      ilTokens = ilTokens + 1;
+      extraOutputWords = extraOutputWords + -1;
+    } while (extraOutputWords != 0);
     local_c100 = local_c198;
     local_9cd4 = 0x40;
     local_c198[0] = local_c198[0] & 0x403fffff | 0x62000000;
     local_c0fc = puVar34;
     local_9cbc = _malloc(0x900);
-    /* issue #64 live-repro (crash #6, past the iVar47-mask fix): local_9cc8 - the record count
+    /* issue #64 live-repro (crash #6, past the extraOutputWords-mask fix): local_9cc8 - the record count
      * later used as this loop's bound (`uVar21 = local_9cc8; ... while (uVar35 < uVar21)`,
      * below) - is read in several places but WRITTEN nowhere in this entire function; the only
      * thing ever done with its companion buffer is this _malloc(0x900) (64 records of 0x24
@@ -3374,35 +3374,35 @@ LAB_000cc88c:
      * Fixed the same way, for the same reason. */
     local_9cc8 = 0;
     local_9c18 = 0;
-    iVar47 = ((int (*)())FUN_000cd1b0)(*param_5,auStack_c148,auStack_9d1c);
-    if (iVar47 != 0) {
+    extraOutputWords = ((int (*)())FUN_000cd1b0)(*param_5,auStack_c148,auStack_9d1c);
+    if (extraOutputWords != 0) {
       return 2;
     }
-    iVar47 = 0;
+    extraOutputWords = 0;
     puVar37 = auStack_96d0;
     do {
-      _memcpy((int)param_3[3] + iVar47,puVar37,0x48);
-      ppppppuVar15 = param_3[3];
-      if ((*(int *)(iVar47 + (int)ppppppuVar15) == 1) &&
-         (*(char *)((int)ppppppuVar15 + iVar47 + 8) == '\x0f')) {
-        *(char *)((int)ppppppuVar15 + iVar47 + 8) = (char)local_c024;
+      _memcpy((int)compileRecord[3] + extraOutputWords,puVar37,0x48);
+      ppppppuVar15 = compileRecord[3];
+      if ((*(int *)(extraOutputWords + (int)ppppppuVar15) == 1) &&
+         (*(char *)((int)ppppppuVar15 + extraOutputWords + 8) == '\x0f')) {
+        *(char *)((int)ppppppuVar15 + extraOutputWords + 8) = (char)local_c024;
       }
-      iVar47 = iVar47 + 0x48;
+      extraOutputWords = extraOutputWords + 0x48;
       puVar37 = puVar37 + 0x48;
-    } while (iVar47 != 0x9360);
+    } while (extraOutputWords != 0x9360);
     iVar20 = 0;
-    iVar47 = 0;
-    iVar26 = 0;
+    extraOutputWords = 0;
+    shadowExtraWords = 0;
     iVar43 = 0x1a20;
     piVar18 = param_2 + 0x594;
     do {
-      uVar21 = *(uint *)((int)local_9c84 + iVar47) | *(uint *)((int)local_88 + iVar47 + 0x188);
-      *(uint *)(((unsigned char *)0x000010b8) + (int)(*param_3 + iVar20)) = uVar21;
+      uVar21 = *(uint *)((int)local_9c84 + extraOutputWords) | *(uint *)((int)local_88 + extraOutputWords + 0x188);
+      *(uint *)(((unsigned char *)0x000010b8) + (int)(*compileRecord + iVar20)) = uVar21;
       if (uVar21 != 0) {
         iVar24 = param_2[0x7c7];
         pbVar25 = (byte *)(piVar18 + 2);
         piVar44 = (int *)((int)param_2 + iVar43);
-        iVar30 = iVar26;
+        iVar30 = shadowExtraWords;
         do {
           bVar7 = (byte)uVar21;
           uVar21 = uVar21 >> 1;
@@ -3415,14 +3415,14 @@ LAB_000cc88c:
         } while (uVar21 != 0);
       }
       bVar3 = iVar20 != 7;
-      iVar47 = iVar47 + 4;
-      iVar26 = iVar26 + 0x20;
+      extraOutputWords = extraOutputWords + 4;
+      shadowExtraWords = shadowExtraWords + 0x20;
       piVar18 = piVar18 + 8;
       iVar43 = iVar43 + 0x80;
       iVar20 = iVar20 + 1;
     } while (bVar3);
-    if (*(int *)(((unsigned char *)0x000010b8) + (int)*param_3) == 0) {
-      *(undefined4 *)(((unsigned char *)0x000010d8) + (int)*param_3) = 0;
+    if (*(int *)(((unsigned char *)0x000010b8) + (int)*compileRecord) == 0) {
+      *(undefined4 *)(((unsigned char *)0x000010d8) + (int)*compileRecord) = 0;
     }
     for (; iStack_318 != 0; iStack_318 = iStack_318 + -1) {
     }
@@ -3433,34 +3433,34 @@ LAB_000cc88c:
         piVar18 = (int *)(uVar35 * 0x24 + local_9cbc);
         switch(piVar18[2]) {
         case 1:
-          iVar47 = piVar18[1];
-          ppppppuVar15 = *param_3;
-          iVar26 = *piVar18;
+          extraOutputWords = piVar18[1];
+          ppppppuVar15 = *compileRecord;
+          shadowExtraWords = *piVar18;
           /* issue #64 live-repro (crash #5, past the local_2c-cluster fix): this if-chain
-           * checks iVar47 (piVar18[1]) against exactly {1,0,2,3}, each mapping to one of 4
+           * checks extraOutputWords (piVar18[1]) against exactly {1,0,2,3}, each mapping to one of 4
            * consecutive byte offsets (0x24,0x23,0x25,0x26 respectively - i.e. really just
-           * `0x23 + iVar47` for iVar47 in that 2-bit range), but leaves ppppppuVar17 NULL for
+           * `0x23 + extraOutputWords` for extraOutputWords in that 2-bit range), but leaves ppppppuVar17 NULL for
            * any other value - a classic decompiled-masked-switch defect (Ghidra shows the
            * post-mask compares but drops the `& 3` itself; this project already carries
            * Tools/userspace/switch_ranges.py for the general form of this class). Live-verified
            * on real hardware: piVar18[1] held 128 (0x80) in a real run - not garbage, since
-           * piVar18[2]==1 correctly selected this case and piVar18[0]==3 was a sane iVar26 -
-           * and its low 2 bits (128 & 3 == 0) are exactly the "iVar47==0" case per the pattern
+           * piVar18[2]==1 correctly selected this case and piVar18[0]==3 was a sane shadowExtraWords -
+           * and its low 2 bits (128 & 3 == 0) are exactly the "extraOutputWords==0" case per the pattern
            * above, so the field is genuinely wider than 2 bits and this chain must mask it
            * before comparing. Rewritten to mask first; behavior for the four originally-
            * handled raw values (0-3, already within the mask's range) is unchanged. */
-          iVar47 = iVar47 & 3;
-          if (iVar47 == 1) {
-            ppppppuVar17 = ppppppuVar15 + iVar26 * 4 + 0x24;
+          extraOutputWords = extraOutputWords & 3;
+          if (extraOutputWords == 1) {
+            ppppppuVar17 = ppppppuVar15 + shadowExtraWords * 4 + 0x24;
           }
-          else if (iVar47 == 0) {
-            ppppppuVar17 = ppppppuVar15 + iVar26 * 4 + 0x23;
+          else if (extraOutputWords == 0) {
+            ppppppuVar17 = ppppppuVar15 + shadowExtraWords * 4 + 0x23;
           }
-          else if (iVar47 == 2) {
-            ppppppuVar17 = ppppppuVar15 + iVar26 * 4 + 0x25;
+          else if (extraOutputWords == 2) {
+            ppppppuVar17 = ppppppuVar15 + shadowExtraWords * 4 + 0x25;
           }
           else {
-            ppppppuVar17 = ppppppuVar15 + iVar26 * 4 + 0x26;
+            ppppppuVar17 = ppppppuVar15 + shadowExtraWords * 4 + 0x26;
           }
           *ppppppuVar17 = (uint *****)piVar18[5];
           uVar21 = local_9cc8;
@@ -3473,14 +3473,14 @@ LAB_000cc88c:
         case 0xb:
         case 0xc:
         case 0xd:
-          ((int (*)())FUN_000c8de0)(param_3 + 0x48,piVar18);
+          ((int (*)())FUN_000c8de0)(compileRecord + 0x48,piVar18);
           uVar21 = local_9cc8;
         }
         uVar35 = uVar35 + 1;
       } while (uVar35 < uVar21);
     }
     if (local_9c18 != 0) {
-      iVar47 = 0;
+      extraOutputWords = 0;
       pcVar31 = local_9c14;
       if (local_9c18 == 0) {
         local_9c18 = 1;
@@ -3489,7 +3489,7 @@ LAB_000cc88c:
         cVar6 = *pcVar31;
         pcVar31 = pcVar31 + 0xc;
         if (cVar6 != '\x02') {
-          iVar47 = iVar47 + 1;
+          extraOutputWords = extraOutputWords + 1;
         }
         if (cVar6 == '\x04') {
           *(undefined1 *)((int)param_2 + 0x1e2e) = 1;
@@ -3497,30 +3497,30 @@ LAB_000cc88c:
         }
         local_9c18 = local_9c18 + -1;
       } while (local_9c18 != 0);
-      iVar26 = 1;
-      if (8 < iVar47) goto LAB_000ccf90;
+      shadowExtraWords = 1;
+      if (8 < extraOutputWords) goto LAB_000ccf90;
     }
-    iVar26 = 0;
+    shadowExtraWords = 0;
 LAB_000ccf90:
     iVar20 = 0x10;
-    iVar47 = 0;
+    extraOutputWords = 0;
     do {
-      param_3[1][iVar47 * 4 + 0x42] = (uint *****)0x0;
-      param_3[1][iVar47 * 4 + 0x43] = (uint *****)0x1;
-      param_3[1][iVar47 * 4 + 0x44] = (uint *****)0x2;
-      param_3[1][iVar47 * 4 + 0x45] = (uint *****)0x3;
+      compileRecord[1][extraOutputWords * 4 + 0x42] = (uint *****)0x0;
+      compileRecord[1][extraOutputWords * 4 + 0x43] = (uint *****)0x1;
+      compileRecord[1][extraOutputWords * 4 + 0x44] = (uint *****)0x2;
+      compileRecord[1][extraOutputWords * 4 + 0x45] = (uint *****)0x3;
       iVar20 = iVar20 + -1;
-      iVar47 = iVar47 + 1;
+      extraOutputWords = extraOutputWords + 1;
     } while (iVar20 != 0);
     _free(local_9cbc);
-    _free(iVar46);
+    _free(ilWordCount);
     if (iVar13 != 0) {
       _free(iVar13);
     }
     if (puVar34 != (uint *)0x0) {
       _free(puVar34);
     }
-    return iVar26;
+    return shadowExtraWords;
   }
   ppppppuVar15 = (uint ******)*puVar22;
   uVar12 = (uint)ppppppuVar15 & 0xffff;
@@ -3546,14 +3546,14 @@ switchD_000cb23c_caseD_0:
     local_88 = &local_c08c;
     if (bVar5) {
       bVar5 = false;
-      local_c1f4 = (uint *******)
-                   ((int (*)())FUN_000c8110)(local_c1f4,local_88,pppppppuVar19,puVar22,puVar22,in_r8,local_88,
+      writeCursor = (uint *******)
+                   ((int (*)())FUN_000c8110)(writeCursor,local_88,pppppppuVar19,puVar22,puVar22,in_r8,local_88,
                                 pppppppuVar28);
     }
     pppppppuVar19 = (uint *******)((int)((unsigned char *)0x0) + 1);
-    local_c1f8 = (uint *)((int (*)())FUN_000c8aa0)(&local_c1f4,&local_c1f8,1,1,local_88);
-    puVar23 = local_c1f8;
-    pppppppuVar36 = local_c1f4;
+    readCursor = (uint *)((int (*)())FUN_000c8aa0)(&writeCursor,&readCursor,1,1,local_88);
+    puVar23 = readCursor;
+    pppppppuVar36 = writeCursor;
     goto switchD_000cbc48_caseD_18;
   case 3:
   case 0xc:
@@ -3575,14 +3575,14 @@ switchD_000cb23c_caseD_0:
     local_88 = &local_c08c;
     if (bVar5) {
       bVar5 = false;
-      local_c1f4 = (uint *******)
-                   ((int (*)())FUN_000c8110)(local_c1f4,local_88,pppppppuVar19,puVar22,puVar22,in_r8,local_88,
+      writeCursor = (uint *******)
+                   ((int (*)())FUN_000c8110)(writeCursor,local_88,pppppppuVar19,puVar22,puVar22,in_r8,local_88,
                                 pppppppuVar28);
     }
     pppppppuVar19 = (uint *******)((int)((unsigned char *)0x0) + 1);
-    local_c1f8 = (uint *)((int (*)())FUN_000c8aa0)(&local_c1f4,&local_c1f8,1,2,local_88);
-    puVar23 = local_c1f8;
-    pppppppuVar36 = local_c1f4;
+    readCursor = (uint *)((int (*)())FUN_000c8aa0)(&writeCursor,&readCursor,1,2,local_88);
+    puVar23 = readCursor;
+    pppppppuVar36 = writeCursor;
     goto switchD_000cbc48_caseD_18;
   case 6:
   case 0x10:
@@ -3592,39 +3592,39 @@ switchD_000cb23c_caseD_0:
   case 0x2b:
   case 0x4b:
   case 0x53:
-    local_c1f8 = puVar22 + 1;
-    *local_c1f4 = ppppppuVar15;
-    puVar23 = local_c1f8;
-    pppppppuVar36 = local_c1f4 + 1;
+    readCursor = puVar22 + 1;
+    *writeCursor = ppppppuVar15;
+    puVar23 = readCursor;
+    pppppppuVar36 = writeCursor + 1;
     goto switchD_000cbc48_caseD_18;
   case 7:
   case 0x11:
   case 0x34:
     pppppppuVar19 = (uint *******)0x0;
-    local_c1f8 = (uint *)((int (*)())FUN_000c8aa0)(&local_c1f4,&local_c1f8,0,2,&local_c08c);
-    puVar23 = local_c1f8;
-    pppppppuVar36 = local_c1f4;
+    readCursor = (uint *)((int (*)())FUN_000c8aa0)(&writeCursor,&readCursor,0,2,&local_c08c);
+    puVar23 = readCursor;
+    pppppppuVar36 = writeCursor;
     goto switchD_000cbc48_caseD_18;
   case 8:
   case 0x15:
   case 0x16:
   case 0x32:
-    *local_c1f4 = ppppppuVar15;
-    local_c1f8 = puVar22 + 2;
-    local_c1f4[1] = (uint ******)puVar22[1];
-    puVar23 = local_c1f8;
-    pppppppuVar36 = local_c1f4 + 2;
+    *writeCursor = ppppppuVar15;
+    readCursor = puVar22 + 2;
+    writeCursor[1] = (uint ******)puVar22[1];
+    puVar23 = readCursor;
+    pppppppuVar36 = writeCursor + 2;
     goto switchD_000cbc48_caseD_18;
   case 9:
   case 0x14:
   case 0x1d:
-    *local_c1f4 = ppppppuVar15;
-    local_c1f4[1] = (uint ******)puVar22[1];
-    local_c1f8 = puVar22 + 3;
-    local_c1f4[2] = (uint ******)puVar22[2];
-    puVar23 = local_c1f8;
-    pppppppuVar28 = local_c1f4 + 3;
-    pppppppuVar36 = local_c1f4 + 3;
+    *writeCursor = ppppppuVar15;
+    writeCursor[1] = (uint ******)puVar22[1];
+    readCursor = puVar22 + 3;
+    writeCursor[2] = (uint ******)puVar22[2];
+    puVar23 = readCursor;
+    pppppppuVar28 = writeCursor + 3;
+    pppppppuVar36 = writeCursor + 3;
     goto switchD_000cbc48_caseD_18;
   case 10:
   case 0xd:
@@ -3636,31 +3636,31 @@ switchD_000cb23c_caseD_0:
     local_88 = &local_c08c;
     if (bVar5) {
       bVar5 = false;
-      local_c1f4 = (uint *******)
-                   ((int (*)())FUN_000c8110)(local_c1f4,local_88,pppppppuVar19,puVar22,puVar22,in_r8,local_88,
+      writeCursor = (uint *******)
+                   ((int (*)())FUN_000c8110)(writeCursor,local_88,pppppppuVar19,puVar22,puVar22,in_r8,local_88,
                                 pppppppuVar28);
     }
     pppppppuVar19 = (uint *******)((int)((unsigned char *)0x0) + 1);
-    local_c1f8 = (uint *)((int (*)())FUN_000c8aa0)(&local_c1f4,&local_c1f8,1,3,local_88);
-    puVar23 = local_c1f8;
-    pppppppuVar36 = local_c1f4;
+    readCursor = (uint *)((int (*)())FUN_000c8aa0)(&writeCursor,&readCursor,1,3,local_88);
+    puVar23 = readCursor;
+    pppppppuVar36 = writeCursor;
     goto switchD_000cbc48_caseD_18;
   case 0xf:
-    local_c1f8 = puVar22 + 2;
-    *local_c1f4 = ppppppuVar15;
-    local_c1f4[1] = (uint ******)puVar22[1];
-    pppppppuVar36 = local_c1f4 + 2;
-    for (uVar12 = (uint)*(ushort *)((int)puVar22 + 6); puVar23 = local_c1f8, uVar12 != 0;
+    readCursor = puVar22 + 2;
+    *writeCursor = ppppppuVar15;
+    writeCursor[1] = (uint ******)puVar22[1];
+    pppppppuVar36 = writeCursor + 2;
+    for (uVar12 = (uint)*(ushort *)((int)puVar22 + 6); puVar23 = readCursor, uVar12 != 0;
         uVar12 = uVar12 - 1) {
-      ppppppuVar15 = (uint ******)*local_c1f8;
-      local_c1f8 = local_c1f8 + 1;
+      ppppppuVar15 = (uint ******)*readCursor;
+      readCursor = readCursor + 1;
       *pppppppuVar36 = ppppppuVar15;
       pppppppuVar36 = pppppppuVar36 + 1;
     }
   case 0x18:
     goto switchD_000cbc48_caseD_18;
   case 0x19:
-    local_c1f8 = puVar22 + 1;
+    readCursor = puVar22 + 1;
     if (((uint)ppppppuVar15 & 0x18000000) == 0) {
       uVar12 = *(uint *)((int)local_9dd4 + ((uint)ppppppuVar15 >> 0xe & 0x3fc));
       if (uVar12 != 2) {
@@ -3668,66 +3668,66 @@ switchD_000cb23c_caseD_0:
       }
       ppppppuVar15 = (uint ******)((uVar12 & 3) << 0x1b | (uint)ppppppuVar15 & 0xe7ffffff);
     }
-    *local_c1f4 = ppppppuVar15;
-    puVar23 = local_c1f8;
-    pppppppuVar36 = local_c1f4 + 1;
+    *writeCursor = ppppppuVar15;
+    puVar23 = readCursor;
+    pppppppuVar36 = writeCursor + 1;
     goto switchD_000cbc48_caseD_18;
   case 0x1a:
-    local_c1f8 = puVar22 + 1;
-    *local_c1f4 = ppppppuVar15;
-    pppppppuVar28 = local_c1f4 + 1;
+    readCursor = puVar22 + 1;
+    *writeCursor = ppppppuVar15;
+    pppppppuVar28 = writeCursor + 1;
     if ((int)ppppppuVar15 < 0) {
-      ppppppuVar15 = (uint ******)*local_c1f8;
-      local_c1f8 = puVar22 + 2;
-      local_c1f4[1] = ppppppuVar15;
-      pppppppuVar28 = local_c1f4 + 2;
+      ppppppuVar15 = (uint ******)*readCursor;
+      readCursor = puVar22 + 2;
+      writeCursor[1] = ppppppuVar15;
+      pppppppuVar28 = writeCursor + 2;
     }
-    local_c1f4 = pppppppuVar28;
-    ppppppuVar15 = (uint ******)*local_c1f8;
-    local_c1f8 = local_c1f8 + 1;
-    *local_c1f4 = ppppppuVar15;
-    puVar23 = local_c1f8;
+    writeCursor = pppppppuVar28;
+    ppppppuVar15 = (uint ******)*readCursor;
+    readCursor = readCursor + 1;
+    *writeCursor = ppppppuVar15;
+    puVar23 = readCursor;
     pppppppuVar28 = pppppppuVar36;
-    pppppppuVar36 = local_c1f4 + 1;
+    pppppppuVar36 = writeCursor + 1;
     goto switchD_000cbc48_caseD_18;
   case 0x1c:
-    local_c1f8 = puVar22 + 1;
-    pppppppuVar19 = local_c1f4 + 1;
-    *local_c1f4 = ppppppuVar15;
-    puVar23 = local_c1f8;
+    readCursor = puVar22 + 1;
+    pppppppuVar19 = writeCursor + 1;
+    *writeCursor = ppppppuVar15;
+    puVar23 = readCursor;
     pppppppuVar36 = pppppppuVar19;
     if ((puVar22[1] >> 0x10 & 0x3f) - 1 < 2) {
-      local_c1f4[1] = (uint ******)puVar22[1];
-      in_r8 = local_c1f4 + 6;
-      local_c1f4[2] = (uint ******)puVar22[2];
-      local_c1f4[3] = (uint ******)puVar22[3];
-      local_c1f4[4] = (uint ******)puVar22[4];
-      local_c1f8 = puVar22 + 6;
-      local_c1f4[5] = (uint ******)puVar22[5];
-      puVar23 = local_c1f8;
-      pppppppuVar28 = local_c1f4 + 5;
+      writeCursor[1] = (uint ******)puVar22[1];
+      in_r8 = writeCursor + 6;
+      writeCursor[2] = (uint ******)puVar22[2];
+      writeCursor[3] = (uint ******)puVar22[3];
+      writeCursor[4] = (uint ******)puVar22[4];
+      readCursor = puVar22 + 6;
+      writeCursor[5] = (uint ******)puVar22[5];
+      puVar23 = readCursor;
+      pppppppuVar28 = writeCursor + 5;
       pppppppuVar36 = in_r8;
     }
     goto switchD_000cbc48_caseD_18;
   case 0x28:
-    local_c1f8 = puVar22 + 1;
+    readCursor = puVar22 + 1;
     puVar45 = (undefined4 *)
-              ((int (*)())FUN_000c7930)(local_c1f4,&local_c08c,pppppppuVar19,puVar22,local_c1f8,in_r8,uVar12 * 4)
+              ((int (*)())FUN_000c7930)(writeCursor,&local_c08c,pppppppuVar19,puVar22,readCursor,in_r8,uVar12 * 4)
     ;
     *puVar45 = ppppppuVar15;
-    puVar23 = local_c1f8;
+    puVar23 = readCursor;
     pppppppuVar36 = (uint *******)(puVar45 + 1);
     goto switchD_000cbc48_caseD_18;
   case 0x35:
     pppppppuVar19 = &local_c08c;
-    *local_c1f4 = ppppppuVar15;
-    local_c1f8 = puVar22 + 2;
+    *writeCursor = ppppppuVar15;
+    readCursor = puVar22 + 2;
     local_c1c0[0] = (uint ******)puVar22[1];
-    local_c1f4 = local_c1f4 + 1;
+    writeCursor = writeCursor + 1;
     ((int (*)())FUN_000c8760)(local_c1c0,auStack_c1b4,pppppppuVar19);
-    *local_c1f4 = local_c1c0[0];
-    puVar23 = local_c1f8;
-    pppppppuVar36 = local_c1f4 + 1;
+    *writeCursor = local_c1c0[0];
+    puVar23 = readCursor;
+    pppppppuVar36 = writeCursor + 1;
     goto switchD_000cbc48_caseD_18;
   case 0x37:
   case 0x3e:
@@ -3740,10 +3740,10 @@ switchD_000cb23c_caseD_0:
     local_88 = &local_c08c;
     if (bVar5) {
       bVar5 = false;
-      local_c1f4 = (uint *******)
-                   ((int (*)())FUN_000c8110)(local_c1f4,local_88,pppppppuVar19,puVar22,puVar22,in_r8,local_88,
+      writeCursor = (uint *******)
+                   ((int (*)())FUN_000c8110)(writeCursor,local_88,pppppppuVar19,puVar22,puVar22,in_r8,local_88,
                                 pppppppuVar28);
-      puVar22 = local_c1f8;
+      puVar22 = readCursor;
     }
     ppppppuVar15 = (uint ******)*puVar22;
     puVar23 = puVar22 + 1;
@@ -3772,15 +3772,15 @@ switchD_000cb23c_caseD_0:
       unaff_r15 = (uint ******)puVar23[1];
     }
     local_c1cc = (uint ******)*puVar22;
-    local_c1f8 = puVar22 + 1;
+    readCursor = puVar22 + 1;
     if (((uint)local_c1cc & 0x400000) != 0) {
       local_c1d8 = (uint ******)puVar22[1];
-      local_c1f8 = puVar22 + 2;
+      readCursor = puVar22 + 2;
     }
     uVar9 = (uint)ppppppuVar15 & 0xc000000;
     if (uVar9 == 0x4000000) {
 LAB_000cc2a4:
-      if (local_c01c << (uVar12 & 0x3f) == 0) {
+      if (depthTextureUnitMask << (uVar12 & 0x3f) == 0) {
         local_84 = (uint ******)&local_c1cc;
         pppppppuVar36 = (uint *******)0x0;
         uVar42 = 1 << (uVar12 & 0x3f);
@@ -3789,7 +3789,7 @@ LAB_000cc2a4:
       else {
         local_84 = (uint ******)&local_c1cc;
         local_70 = (uint ******)&local_c1d8;
-        local_c1f4 = (uint *******)((int (*)())FUN_000c7460)(local_88,local_84,local_70,uVar27,local_c1f4);
+        writeCursor = (uint *******)((int (*)())FUN_000c7460)(local_88,local_84,local_70,uVar27,writeCursor);
         ppppppuVar14 = local_70;
         if (((uint)local_c1f0 & 0x400000) == 0) {
           pppppppuVar36 = (uint *******)0x0;
@@ -3805,7 +3805,7 @@ LAB_000cc2a4:
     }
     else if (uVar9 == 0x8000000) {
       uVar42 = 1 << (uVar12 & 0x3f);
-      if ((uVar42 & local_c018) != 0) goto LAB_000cc2a4;
+      if ((uVar42 & shadowCompareUnitMask) != 0) goto LAB_000cc2a4;
       local_84 = (uint ******)&local_c1cc;
       pppppppuVar36 = (uint *******)0x0;
       ppppppuVar14 = (uint ******)&local_c1d8;
@@ -3818,50 +3818,50 @@ LAB_000cc2a4:
     }
     pppppppuVar19 = local_88;
     ((int (*)())FUN_000c8760)(local_84,ppppppuVar14,local_88);
-    *local_c1f4 = ppppppuVar15;
-    pppppppuVar28 = local_c1f4 + 1;
+    *writeCursor = ppppppuVar15;
+    pppppppuVar28 = writeCursor + 1;
     if (bVar4) {
-      local_c1f4[1] = ppppppuVar17;
-      pppppppuVar28 = local_c1f4 + 2;
+      writeCursor[1] = ppppppuVar17;
+      pppppppuVar28 = writeCursor + 2;
     }
-    local_c1f4 = pppppppuVar28;
+    writeCursor = pppppppuVar28;
     if (bVar1) {
-      *local_c1f4 = ppppppuVar39;
-      local_c1f4 = local_c1f4 + 1;
+      *writeCursor = ppppppuVar39;
+      writeCursor = writeCursor + 1;
     }
-    *local_c1f4 = (uint ******)local_c1f0;
-    pppppppuVar28 = local_c1f4 + 1;
+    *writeCursor = (uint ******)local_c1f0;
+    pppppppuVar28 = writeCursor + 1;
     if (((uint)local_c1f0 & 0x400000) != 0) {
-      local_c1f4[1] = unaff_r15;
-      pppppppuVar28 = local_c1f4 + 2;
+      writeCursor[1] = unaff_r15;
+      pppppppuVar28 = writeCursor + 2;
     }
-    local_c1f4 = pppppppuVar28;
-    *local_c1f4 = local_c1cc;
+    writeCursor = pppppppuVar28;
+    *writeCursor = local_c1cc;
     pppppppuVar28 = (uint *******)((uint)local_c1cc & 0x400000);
-    pppppppuVar11 = local_c1f4 + 1;
+    pppppppuVar11 = writeCursor + 1;
     if (pppppppuVar28 != (uint *******)0x0) {
-      local_c1f4[1] = local_c1d8;
-      pppppppuVar11 = local_c1f4 + 2;
+      writeCursor[1] = local_c1d8;
+      pppppppuVar11 = writeCursor + 2;
     }
-    local_c1f4 = pppppppuVar11;
-    if (((uVar9 == 0x4000000) || ((uVar9 == 0x8000000 && ((uVar42 & local_c018) != 0)))) &&
-       (local_c01c << (uVar12 & 0x3f) != 0)) {
+    writeCursor = pppppppuVar11;
+    if (((uVar9 == 0x4000000) || ((uVar9 == 0x8000000 && ((uVar42 & shadowCompareUnitMask) != 0)))) &&
+       (depthTextureUnitMask << (uVar12 & 0x3f) != 0)) {
       pppppppuVar19 = (uint *******)&local_c1f0;
-      local_c1f4 = (uint *******)
+      writeCursor = (uint *******)
                    ((int (*)())FUN_000c7650)(local_88,local_84,pppppppuVar19,&local_c1e4,uVar27,pppppppuVar36,
-                                local_c1f4,pppppppuVar28);
+                                writeCursor,pppppppuVar28);
       in_r8 = pppppppuVar36;
     }
-    uVar42 = uVar42 & local_c01c;
+    uVar42 = uVar42 & depthTextureUnitMask;
     ppppppuVar15 = unaff_r15;
     goto joined_r0x000cc708;
   case 0x5e:
     if (bVar5) {
       bVar5 = false;
-      local_c1f4 = (uint *******)
-                   ((int (*)())FUN_000c8110)(local_c1f4,&local_c08c,pppppppuVar19,puVar22,puVar22,in_r8,
+      writeCursor = (uint *******)
+                   ((int (*)())FUN_000c8110)(writeCursor,&local_c08c,pppppppuVar19,puVar22,puVar22,in_r8,
                                 uVar12 * 4,pppppppuVar28);
-      puVar22 = local_c1f8;
+      puVar22 = readCursor;
     }
     ppppppuVar15 = (uint ******)*puVar22;
     puVar23 = puVar22 + 1;
@@ -3896,18 +3896,18 @@ LAB_000cc2a4:
       puVar23 = puVar22 + 2;
     }
     local_c1d4 = (uint ******)*puVar23;
-    local_c1f8 = puVar23 + 1;
+    readCursor = puVar23 + 1;
     if (((uint)local_c1d4 & 0x400000) != 0) {
       local_c1c8 = (uint ******)puVar23[1];
-      local_c1f8 = puVar23 + 2;
+      readCursor = puVar23 + 2;
     }
     uVar9 = (uint)ppppppuVar15 & 0xc000000;
     if (uVar9 == 0x4000000) {
 LAB_000cc588:
-      if (local_c01c << (uVar12 & 0x3f) != 0) {
+      if (depthTextureUnitMask << (uVar12 & 0x3f) != 0) {
         pppppppuVar19 = &local_c1cc;
-        local_c1f4 = (uint *******)
-                     ((int (*)())FUN_000c7460)(&local_c08c,&local_c1d8,pppppppuVar19,uVar27,local_c1f4);
+        writeCursor = (uint *******)
+                     ((int (*)())FUN_000c7460)(&local_c08c,&local_c1d8,pppppppuVar19,uVar27,writeCursor);
         if (((uint)local_c1f0 & 0x400000) != 0) {
           local_c1f0 = (uint *******)((uint)local_c1f0 & 0xffbfffff);
           in_r8 = (uint *******)((int)((unsigned char *)0x0) + 1);
@@ -3924,63 +3924,63 @@ LAB_000cc5bc:
       if (uVar9 != 0x8000000) goto LAB_000cc5bc;
       in_r8 = (uint *******)0x0;
       uVar42 = 1 << (uVar12 & 0x3f);
-      if ((uVar42 & local_c018) != 0) goto LAB_000cc588;
+      if ((uVar42 & shadowCompareUnitMask) != 0) goto LAB_000cc588;
     }
 LAB_000cc5e4:
-    *local_c1f4 = ppppppuVar15;
-    pppppppuVar28 = local_c1f4 + 1;
+    *writeCursor = ppppppuVar15;
+    pppppppuVar28 = writeCursor + 1;
     if (bVar4) {
-      local_c1f4[1] = ppppppuVar17;
-      pppppppuVar28 = local_c1f4 + 2;
+      writeCursor[1] = ppppppuVar17;
+      pppppppuVar28 = writeCursor + 2;
     }
-    local_c1f4 = pppppppuVar28;
+    writeCursor = pppppppuVar28;
     if (bVar1) {
-      *local_c1f4 = ppppppuVar39;
-      local_c1f4 = local_c1f4 + 1;
+      *writeCursor = ppppppuVar39;
+      writeCursor = writeCursor + 1;
     }
-    *local_c1f4 = (uint ******)local_c1f0;
-    pppppppuVar28 = local_c1f4 + 1;
+    *writeCursor = (uint ******)local_c1f0;
+    pppppppuVar28 = writeCursor + 1;
     if (((uint)local_c1f0 & 0x400000) != 0) {
-      local_c1f4[1] = unaff_r14;
-      pppppppuVar28 = local_c1f4 + 2;
+      writeCursor[1] = unaff_r14;
+      pppppppuVar28 = writeCursor + 2;
     }
-    local_c1f4 = pppppppuVar28;
-    *local_c1f4 = local_c1d8;
+    writeCursor = pppppppuVar28;
+    *writeCursor = local_c1d8;
     pppppppuVar28 = (uint *******)((uint)local_c1d8 & 0x400000);
-    pppppppuVar36 = local_c1f4 + 1;
+    pppppppuVar36 = writeCursor + 1;
     if (pppppppuVar28 != (uint *******)0x0) {
-      local_c1f4[1] = local_c1cc;
-      pppppppuVar36 = local_c1f4 + 2;
+      writeCursor[1] = local_c1cc;
+      pppppppuVar36 = writeCursor + 2;
     }
-    local_c1f4 = pppppppuVar36;
-    *local_c1f4 = local_c1d4;
-    pppppppuVar36 = local_c1f4 + 1;
+    writeCursor = pppppppuVar36;
+    *writeCursor = local_c1d4;
+    pppppppuVar36 = writeCursor + 1;
     if (((uint)local_c1d4 & 0x400000) != 0) {
-      local_c1f4[1] = local_c1c8;
-      pppppppuVar36 = local_c1f4 + 2;
+      writeCursor[1] = local_c1c8;
+      pppppppuVar36 = writeCursor + 2;
     }
-    local_c1f4 = pppppppuVar36;
-    if (((uVar9 == 0x4000000) || ((uVar9 == 0x8000000 && ((uVar42 & local_c018) != 0)))) &&
-       (local_c01c << (uVar12 & 0x3f) != 0)) {
+    writeCursor = pppppppuVar36;
+    if (((uVar9 == 0x4000000) || ((uVar9 == 0x8000000 && ((uVar42 & shadowCompareUnitMask) != 0)))) &&
+       (depthTextureUnitMask << (uVar12 & 0x3f) != 0)) {
       pppppppuVar19 = (uint *******)&local_c1f0;
-      local_c1f4 = (uint *******)
+      writeCursor = (uint *******)
                    ((int (*)())FUN_000c7650)(&local_c08c,&local_c1d8,pppppppuVar19,&local_c1e4,uVar27,in_r8,
-                                local_c1f4,pppppppuVar28);
+                                writeCursor,pppppppuVar28);
     }
-    uVar42 = uVar42 & local_c01c;
+    uVar42 = uVar42 & depthTextureUnitMask;
     ppppppuVar15 = unaff_r14;
 joined_r0x000cc708:
-    puVar23 = local_c1f8;
-    pppppppuVar36 = local_c1f4;
+    puVar23 = readCursor;
+    pppppppuVar36 = writeCursor;
     if (uVar42 != 0) {
-      in_r8 = local_c1f4 + 1;
-      *local_c1f4 = (uint ******)0x47;
+      in_r8 = writeCursor + 1;
+      *writeCursor = (uint ******)0x47;
       pppppppuVar28 = local_c1f0;
       if (((uint)local_c1f0 & 0x400000) == 0) {
         pppppppuVar28 = (uint *******)((uint)local_c1f0 | 0x400000);
         ppppppuVar15 = (uint ******)0x55;
       }
-      if (local_bf94[uVar27] == 0x1906) {
+      if (depthTextureMode[uVar27] == 0x1906) {
         if (((uint)ppppppuVar15 & 3) == 1) {
           ppppppuVar15 = (uint ******)((uint)ppppppuVar15 & 0xfffffffc | 2);
         }
@@ -3991,19 +3991,19 @@ joined_r0x000cc708:
           ppppppuVar15 = (uint ******)((uint)ppppppuVar15 & 0xffffffcf | 0x20);
         }
       }
-      else if ((local_bf94[uVar27] == 0x1909) && (((uint)ppppppuVar15 & 0xc0) == 0x40)) {
+      else if ((depthTextureMode[uVar27] == 0x1909) && (((uint)ppppppuVar15 & 0xc0) == 0x40)) {
         ppppppuVar15 = (uint ******)((uint)ppppppuVar15 & 0xffffff3f | 0xc0);
       }
       *in_r8 = (uint ******)pppppppuVar28;
-      local_c1f4[2] = ppppppuVar15;
-      local_c1f4[3] = (uint ******)((uint)pppppppuVar28 & 0x3fffff);
-      pppppppuVar36 = local_c1f4 + 4;
+      writeCursor[2] = ppppppuVar15;
+      writeCursor[3] = (uint ******)((uint)pppppppuVar28 & 0x3fffff);
+      pppppppuVar36 = writeCursor + 4;
     }
     goto switchD_000cbc48_caseD_18;
   }
-  local_c1f8 = (uint *)((int (*)())FUN_000c8aa0)(&local_c1f4,&local_c1f8,pppppppuVar19,1,&local_c08c);
-  puVar23 = local_c1f8;
-  pppppppuVar36 = local_c1f4;
+  readCursor = (uint *)((int (*)())FUN_000c8aa0)(&writeCursor,&readCursor,pppppppuVar19,1,&local_c08c);
+  puVar23 = readCursor;
+  pppppppuVar36 = writeCursor;
   goto switchD_000cbc48_caseD_18;
 }
 #undef local_c08c

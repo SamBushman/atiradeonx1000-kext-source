@@ -1171,7 +1171,7 @@ LAB_000260dc:
         iVar10 = piVar7[0xd];
         *(uint *)(iVar10 + 0x20) =
              (*(uint *)(param_1 + 0x1ae4) & 0x3c0) << 0xc | *(uint *)(iVar10 + 0x20) & 0xffc3ffff;
-        iVar9 = FUN_00048da0(piVar7);
+        iVar9 = fragmentProgramToIL(piVar7);
         if (iVar9 == 0) {
           *piVar15 = 0;
           arbfpProgramStringIL(piVar15,0,piVar7[0xb],piVar7[10]);

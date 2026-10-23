@@ -173,7 +173,7 @@
 17ee0	FUN_00017ee0	r10	PASS-no	17f00 bl 0x1a3ae0	; symbol stub for: _getpid
 17f1f8	FUN_0017f1f8	r7	PASS-deep	17f27c bl 0x1054ec
 17f1f8	FUN_0017f1f8	r8	PASS-deep	17f27c bl 0x1054ec
-18120	FUN_00018120	r10	PASS-no	18168 bl 0xa2f0
+18120	glCopyPixels_impl	r10	PASS-no	18168 bl 0xa2f0
 18ad08	R300SchedModel__vslot16	r7	PASS-indirect	18ad4c bl 0x1043f0
 18ad08	R300SchedModel__vslot16	r8	PASS-indirect	18ad4c bl 0x1043f0
 18b1bc	FUN_0018b1bc	r8	PASS-indirect	18b29c bl 0x19423c
@@ -248,9 +248,9 @@
 2ce40	FUN_0002ce40	r5	PASS-indirect	2cfb4 bctrl 
 2ce40	FUN_0002ce40	r6	PASS-indirect	2cfb4 bctrl 
 34200	glGenerateMipmap_impl	r8	PASS-no	34244 bl 0x1a3940	; symbol stub for: _pthread_mut
-48da0	FUN_00048da0	r4	RET	4a7cc blr 
-48da0	FUN_00048da0	r5	PASS-no	48f00 bl 0x1a38e0	; symbol stub for: _realloc
-48da0	FUN_00048da0	r6	PASS-no	48f00 bl 0x1a38e0	; symbol stub for: _realloc
+48da0	fragmentProgramToIL	r4	RET	4a7cc blr 
+48da0	fragmentProgramToIL	r5	PASS-no	48f00 bl 0x1a38e0	; symbol stub for: _realloc
+48da0	fragmentProgramToIL	r6	PASS-no	48f00 bl 0x1a38e0	; symbol stub for: _realloc
 4b480	FUN_0004b480	r5	PASS-indirect	4b4cc bctrl 
 4b480	FUN_0004b480	r6	PASS-indirect	4b4cc bctrl 
 4b480	FUN_0004b480	r7	PASS-indirect	4b4cc bctrl 
@@ -369,9 +369,9 @@ a7050	FUN_000a7050	r5	PASS-indirect	a721c bctrl
 a7050	FUN_000a7050	r6	PASS-indirect	a721c bctrl 
 afe40	FUN_000afe40	r7	PASS-indirect	afed8 bctrl 
 afe40	FUN_000afe40	r8	PASS-indirect	afed8 bctrl 
-b3630	FUN_000b3630	r6	PASS-indirect	b3764 bl 0xb15d0
-b3630	FUN_000b3630	r7	PASS-indirect	b3764 bl 0xb15d0
-b3630	FUN_000b3630	r8	PASS-indirect	b3764 bl 0xb15d0
+b3630	atifsCompileCurrentShader	r6	PASS-indirect	b3764 bl 0xb15d0
+b3630	atifsCompileCurrentShader	r7	PASS-indirect	b3764 bl 0xb15d0
+b3630	atifsCompileCurrentShader	r8	PASS-indirect	b3764 bl 0xb15d0
 b5010	FUN_000b5010	r7	PASS-no	b5068 bl 0xb4f50
 b5010	FUN_000b5010	r8	PASS-no	b5068 bl 0xb4f50
 b50a0	FUN_000b50a0	r6	PASS-no	b5144 bl 0xb4f50
@@ -398,7 +398,7 @@ bfa0	FUN_0000bfa0	r8	PASS-no	bfac bl 0x1a3264
 bfed0	FUN_000bfed0	r6	PASS-no	bfeec bl 0xc5e60
 bfed0	FUN_000bfed0	r7	PASS-no	bfeec bl 0xc5e60
 bfed0	FUN_000bfed0	r8	PASS-no	bfeec bl 0xc5e60
-cae90	FUN_000cae90	r8	PASS-no	caf14 bl 0x1a3660	; symbol stub for: _malloc
+cae90	ilRewriteForTextureState	r8	PASS-no	caf14 bl 0x1a3660	; symbol stub for: _malloc
 ce148	FUN_000ce148	r6	PASS-no	ce1a8 bl 0x1a3d00	; symbol stub for: _strlen
 ce148	FUN_000ce148	r7	PASS-no	ce1a8 bl 0x1a3d00	; symbol stub for: _strlen
 ce148	FUN_000ce148	r8	PASS-no	ce1a8 bl 0x1a3d00	; symbol stub for: _strlen

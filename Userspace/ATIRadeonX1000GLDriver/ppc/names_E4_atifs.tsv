@@ -1,0 +1,96 @@
+# fork E4 (round 4): GL_ATI_fragment_shader -> IL token stream translation (FUN_000b15d0..FUN_000b3630)
+func	FUN_000b15d0	ilTokenBufPush	CONFIRMED	appends one 32-bit word to a growable {count,capacity,data} buffer: grows by 0x80 words with ctx+0xc alloc / ctx+0x18 free, memcpy of the old words
+local	FUN_000b15d0	param_1	ctx	CONFIRMED	allocator callbacks at +0xc/+0x18; callers pass the GL context
+local	FUN_000b15d0	param_2	tokenBuf	CONFIRMED	growable IL token buffer {count, capacity, data} appended with the ctx allocator callbacks (ctx+0xc alloc, ctx+0x18 free) - FUN_000b15d0 is the plain push
+local	FUN_000b15d0	param_3	token	CONFIRMED	the word appended
+local	FUN_000b15d0	uVar1	pushIndexOrNewData	INFERRED	tokenBuf count, reused for the new data block while the buffer grows
+func	FUN_000b1690	atifsEmitFinalColorClamp	INFERRED	pushes IL opcode 0xe (colorclamp in the IL opcode table of notes_shader_formats.md), dst token 0x170000 (output colour), src token 0x40000 (temp 0)
+local	FUN_000b1690	param_1	ctx	CONFIRMED	allocator callbacks +0xc/+0x18 of the GL context
+local	FUN_000b1690	param_2	tokenBuf	CONFIRMED	growable IL token buffer {count, capacity, data} appended with the ctx allocator callbacks (ctx+0xc alloc, ctx+0x18 free) - FUN_000b15d0 is the plain push
+local	FUN_000b1690	uVar1	pushIndexOrNewData	INFERRED	tokenBuf count, reused for the new data block while the buffer grows
+func	FUN_000b1870	atifsEmitAddSecondaryColor	INFERRED	pushes IL opcode 3 (add): r0 = r0 + secondary colour (token 0x130000 + swizzle word 0x4210 = rgb,0) - called only when the separate-specular condition on ctx+0x44 holds
+local	FUN_000b1870	param_1	ctx	CONFIRMED	allocator callbacks +0xc/+0x18 of the GL context
+local	FUN_000b1870	param_2	tokenBuf	CONFIRMED	growable IL token buffer {count, capacity, data} appended with the ctx allocator callbacks (ctx+0xc alloc, ctx+0x18 free) - FUN_000b15d0 is the plain push
+local	FUN_000b1870	uVar1	pushIndexOrNewData	INFERRED	tokenBuf count, reused for the new data block while the buffer grows
+func	FUN_000b2e60	atifsEmitClearTemp0	CONFIRMED	pushes IL opcode 0x47 (mov): temp 0 = constant zero (src swizzle 0x4444 = 0,0,0,0)
+local	FUN_000b2e60	param_1	ctx	CONFIRMED	allocator callbacks +0xc/+0x18 of the GL context
+local	FUN_000b2e60	param_2	tokenBuf	CONFIRMED	growable IL token buffer {count, capacity, data} appended with the ctx allocator callbacks (ctx+0xc alloc, ctx+0x18 free) - FUN_000b15d0 is the plain push
+local	FUN_000b2e60	uVar1	pushIndexOrNewData	INFERRED	tokenBuf count, reused for the new data block while the buffer grows
+func	FUN_000b1b90	atifsEmitMoveWithWriteMask	INFERRED	pushes IL mov (0x47), dst token (GL_REG_n_ATI enum - 0x8921 | 0x440000), a component write-mask word built from the ATI mask bits, and the source temp token
+local	FUN_000b1b90	param_1	ctx	CONFIRMED	allocator callbacks of the GL context
+local	FUN_000b1b90	param_2	tokenBuf	CONFIRMED	growable IL token buffer {count, capacity, data} appended with the ctx allocator callbacks (ctx+0xc alloc, ctx+0x18 free) - FUN_000b15d0 is the plain push
+local	FUN_000b1b90	param_3	dstRegEnum	CONFIRMED	GL_REG_0_ATI.. enum: (param_3 + 0x76df) & 0xffff is its temp register index (0x8921 + 0x76df = 0x10000)
+local	FUN_000b1b90	param_4	srcTempIndex	INFERRED	pushed as (param_4 & 0xffff) | 0x40000: a temp-register source; FUN_000b3630 passes the scratch temp 6 it redirected a colour op into
+local	FUN_000b1b90	param_5	writeMask	CONFIRMED	tests bits 1/2/4/8 = GL_RED/GREEN/BLUE/ALPHA mask bits; 0 -> all components (0x15)
+local	FUN_000b1b90	uVar2	ilWriteMask	INFERRED	2-bit-per-component write mask word of the IL destination (0x15 = xyz, bit 6 = w)
+local	FUN_000b1b90	uVar1	pushIndexOrNewData	INFERRED	tokenBuf count, reused for the new data block while the buffer grows
+func	FUN_000b1e80	atifsEmitSourceOperand	CONFIRMED	builds an IL source operand from an ATI_fragment_shader argument {reg, ?, argMod, argRep}: GL_ZERO/GL_ONE, GL_REG_n_ATI (0x8921..), GL_CON_n_ATI (0x8941..), GL_PRIMARY_COLOR_ARB (0x8577), GL_SECONDARY_INTERPOLATOR_ATI (0x896d); argRep GL_RED..GL_ALPHA (0x1903..0x1906) -> replicate swizzle; argMod bits 2X/COMP/NEGATE/BIAS -> modifier bits
+local	FUN_000b1e80	param_1	ctx	CONFIRMED	allocator callbacks of the GL context
+local	FUN_000b1e80	param_2	tokenBuf	CONFIRMED	growable IL token buffer {count, capacity, data} appended with the ctx allocator callbacks (ctx+0xc alloc, ctx+0x18 free) - FUN_000b15d0 is the plain push
+local	FUN_000b1e80	param_3	srcArg	CONFIRMED	ATI_fragment_shader argument record: [0] register enum, [2] argMod bits, [3] argRep (GL_RED/GREEN/BLUE/ALPHA)
+local	FUN_000b1e80	param_6	regWritten	INFERRED	byte flags per GL_REG_0..5_ATI: a read of a register that was never written becomes the zero constant (0x4444)
+local	FUN_000b1e80	uVar1	argRep	CONFIRMED	param_3[3] compared with GL_GREEN 0x1904 / GL_BLUE 0x1905 / GL_ALPHA 0x1906 / GL_RED 0x1903
+local	FUN_000b1e80	uVar2	argMod	CONFIRMED	param_3[2]: bit 1 = GL_2X_BIT_ATI, 2 = GL_COMP_BIT_ATI, 4 = GL_NEGATE_BIT_ATI, 8 = GL_BIAS_BIT_ATI
+local	FUN_000b1e80	uVar4	srcToken	INFERRED	IL source token: register type in bits 16..21 (temp 4, const 1, texcoord 0x11, colour0 0x12, colour1 0x13), bit 22 = extra swizzle word follows
+local	FUN_000b1e80	puVar5	swizzleWord	INFERRED	second source word: component selects (0..3 = xyzw, 4 = 0, 5 = 1, 4 bits each) plus negate / modifier bits
+func	FUN_000b2260	atifsEmitDestinationOperand	CONFIRMED	builds an IL destination operand from an ATI_fragment_shader destination {reg, mask, mod}: GL_REG_n_ATI -> temp index, mask bits RED/GREEN/BLUE/ALPHA -> 2-bit write mask, mod bits (2X,4X,8X,HALF,QUARTER,EIGHTH, SATURATE 0x40) -> output modifier / clamp
+local	FUN_000b2260	param_1	ctx	CONFIRMED	allocator callbacks of the GL context
+local	FUN_000b2260	param_2	tokenBuf	CONFIRMED	growable IL token buffer {count, capacity, data} appended with the ctx allocator callbacks (ctx+0xc alloc, ctx+0x18 free) - FUN_000b15d0 is the plain push
+local	FUN_000b2260	param_3	dstArg	CONFIRMED	ATI_fragment_shader destination: [0] register enum, [1] mask bits, [2] dstMod bits
+local	FUN_000b2260	param_5	hasWriteMask	INFERRED	callers pass 1 for the colour op and 0 for the paired alpha op; when 0 only the modifier bits are encoded
+local	FUN_000b2260	param_6	regWritten	INFERRED	byte flags per GL_REG_0..5_ATI, set to 1 when a destination writes the register
+local	FUN_000b2260	uVar1	dstMask	CONFIRMED	param_3[1] tested with bits 1/2/4/8 (red/green/blue/alpha write mask)
+local	FUN_000b2260	uVar3	ilDstWord	INFERRED	second destination word: write mask (2 bits per component) | saturate 0x100 | output scale 0x200..0xc00
+local	FUN_000b2260	uVar4	dstToken	INFERRED	IL destination token: temp register index | 0x40000, 0x400000 = second word follows
+use	FUN_000b2260	uVar2	dstRegEnum	CONFIRMED	param_3[0]: GL_REG_n_ATI enum; +0x76df turns it into a temp index	uVar2 = \*param_3;	uVar2 = param_3\[2\];
+use	FUN_000b2260	uVar2	dstModBits	CONFIRMED	param_3[2]: bit 0x40 = GL_SATURATE_BIT_ATI, 1..0x20 = 2X,4X,8X,HALF,QUARTER,EIGHTH scale bits	uVar2 = param_3\[2\];	uVar2 = \*param_2;
+use	FUN_000b2260	uVar2	pushIndexOrNewData	INFERRED	tokenBuf count, reused for the new data block while the buffer grows	uVar2 = \*param_2;	
+func	FUN_000b25a0	atifsEmitTextureOps	CONFIRMED	emits IL texture instructions for one pass of an ATI_fragment_shader: records of 12 bytes {valid, isSample, swizzle (GL_SWIZZLE_STR_ATI 0x8976 / STQ 0x8977 / STR_DR 0x8978 / STQ_DQ 0x8979), coord source (GL_REG_n_ATI 0x8921.. or GL_TEXTURE0+n 0x84c0..)}; pass-through coords are IL mov (0x47), samples are IL texld (0x5d)
+local	FUN_000b25a0	param_1	ctx	CONFIRMED	allocator callbacks of the GL context
+local	FUN_000b25a0	param_2	tokenBuf	CONFIRMED	growable IL token buffer {count, capacity, data} appended with the ctx allocator callbacks (ctx+0xc alloc, ctx+0x18 free) - FUN_000b15d0 is the plain push
+local	FUN_000b25a0	param_3	fsState	CONFIRMED	&ctx->atiFragmentShader (ctx+0x1134): +0x10 current definition, +0x14 ops per pass
+local	FUN_000b25a0	param_4	pass	CONFIRMED	FUN_000b3630 passes its pass loop counter; selects row pass of the per-pass 12-byte records
+local	FUN_000b25a0	param_6	regWritten	INFERRED	byte flags per GL_REG_0..5_ATI: set when the texture op writes the register, tested for texcoord sources
+local	FUN_000b25a0	iVar4	shaderDef	CONFIRMED	*(fsState + 0x10): the current ATI_fragment_shader definition; +0xc is the table of texture-op records
+local	FUN_000b25a0	iVar8	recordOffset	INFERRED	byte offset of the 12-byte texture-op record of this pass and index
+local	FUN_000b25a0	iVar1	textureOp	INFERRED	pointer to the 12-byte texture-op record
+local	FUN_000b25a0	uVar6	swizzleMode	CONFIRMED	record +4: GL_SWIZZLE_STR_ATI 0x8976, _STQ 0x8977, _STR_DR 0x8978, _STQ_DQ 0x8979, or 0 for a plain pass-through
+local	FUN_000b25a0	puVar7	swizzleWord	INFERRED	source swizzle word: 0x3210 (xyzw) for STR, 0x3310 for STQ, 0x602510/0x603510 for the _DR/_DQ forms, 0x4444 for a pass-through with nothing bound
+local	FUN_000b25a0	uVar2	coordToken	INFERRED	IL source token built from the coordinate source (texcoord 0x110000 | n, or temp 0x40000 | n)
+local	FUN_000b25a0	uVar3	opsPerPassOrToken	INFERRED	ushort fsState+0x14 (ops per pass), reused as the push index / coordinate token
+func	FUN_000b30e0	atifsEmitInputDeclarations	CONFIRMED	pushes IL declarations: dclpi (0x16) for colour0 (0x120000), colour1 (0x130000, when the secondary colour is used) and each used texcoord (0x110000|n), and dclpt (0x19) for each texture unit sampled in a pass
+local	FUN_000b30e0	param_1	ctx	CONFIRMED	allocator callbacks of the GL context
+local	FUN_000b30e0	param_2	tokenBuf	CONFIRMED	growable IL token buffer {count, capacity, data} appended with the ctx allocator callbacks (ctx+0xc alloc, ctx+0x18 free) - FUN_000b15d0 is the plain push
+local	FUN_000b30e0	param_3	fsState	CONFIRMED	&ctx->atiFragmentShader (ctx+0x1134)
+local	FUN_000b30e0	param_4	shaderDef	CONFIRMED	current ATI_fragment_shader definition (FUN_000b3630 passes iVar23): +0x6c flag, +0xc sample-op table
+local	FUN_000b30e0	iVar5	rendererRec	INFERRED	*(*(ctx+4)+0x10): per-screen renderer record, +0x2d48 holds the 0x81fa chip-family short
+local	FUN_000b30e0	uVar4	pushIndex	INFERRED	tokenBuf count (this function pushes with the buffer already sized, so it is the plain index)
+local	FUN_000b30e0	uVar1	textureUnitCount	INFERRED	byte ctx+0x13b0: number of texture units; later the ushort fsState+0x14 count
+local	FUN_000b30e0	iVar3	sampleOps	INFERRED	shaderDef+0xc: the 12-byte sample-op records
+local	FUN_000b30e0	iVar2	secondPassOffset	INFERRED	byte offset of the record one pass-count further on
+func	FUN_000b3630	atifsCompileCurrentShader	CONFIRMED	translates the current GL_ATI_fragment_shader into an IL token stream (declarations, per pass texture ops, paired colour/alpha ALU ops, final colour clamp) and hands it to the program compiler; recompiles only when the cached program is stale
+local	FUN_000b3630	param_1	ctx	CONFIRMED	GL context
+local	FUN_000b3630	local_54	rendererRec	INFERRED	*(*(ctx+4)+0x10): per-screen renderer record
+local	FUN_000b3630	iVar23	shaderDef	CONFIRMED	current ATI_fragment_shader definition (ctx+0x1144, or +0x10 of *(ctx+0x1154)); +4 pass count, +0x10 colour ops, +0x1c alpha ops, +0x70 compiled-program table
+local	FUN_000b3630	puVar18	compiledProgram	INFERRED	entry of shaderDef+0x70 for the current variant: +0x118 secondary-add flag, +0x119 dirty, +0x11c texture-unit mask, +0x98.. per-unit constants
+local	FUN_000b3630	cVar7	wantSecondaryAdd	INFERRED	expected state of the separate-specular secondary-colour add, compared with the cached compiledProgram+0x118
+local	FUN_000b3630	a1	staleProgram	INFERRED	previous compiled program of this variant, released through ctx+0x1158
+local	FUN_000b3630	pcVar3	programSizeFn	INFERRED	ctx+0x1284 callback giving the compiled program size
+local	FUN_000b3630	pcVar19	callocFn	INFERRED	ctx+0x10 callback called as (1,size): calloc
+local	FUN_000b3630	local_6c	tokenCount	CONFIRMED	first word of the local {count,capacity,data} token buffer passed as &local_6c
+local	FUN_000b3630	local_68	tokenCapacity	CONFIRMED	second word of the local token buffer
+local	FUN_000b3630	local_64	tokenData	CONFIRMED	third word of the local token buffer
+local	FUN_000b3630	local_74	regWritten	INFERRED	8 byte flags per GL_REG_0..5_ATI, passed to the operand emitters
+local	FUN_000b3630	local_58	passCount	CONFIRMED	shaderDef+4: number of passes; the main loop runs it
+local	FUN_000b3630	piVar20	colorOp	CONFIRMED	0x4c-byte colour instruction record {op, dst{reg,mask,mod}, arg0..2}
+local	FUN_000b3630	piVar22	alphaOp	CONFIRMED	0x4c-byte alpha instruction record paired with colorOp
+local	FUN_000b3630	iVar15	nextColorOp	INFERRED	index of the next colour instruction
+local	FUN_000b3630	iVar16	nextAlphaOp	INFERRED	index of the next alpha instruction
+local	FUN_000b3630	iVar13	colorOpsDoneInPass	INFERRED	colour ops consumed in this pass
+local	FUN_000b3630	iVar14	alphaOpsDoneInPass	INFERRED	alpha ops consumed in this pass
+local	FUN_000b3630	iVar17	opsDoneInPass	INFERRED	total ops consumed in this pass
+local	FUN_000b3630	iVar24	instructionNumber	INFERRED	running instruction number compared with record +0x44
+local	FUN_000b3630	bVar1	redirectedToScratch	INFERRED	the colour op writes scratch temp 6 and is moved to its real destination afterwards (FUN_000b1b90)
+local	FUN_000b3630	bVar2	haveAlphaOp	CONFIRMED	piVar22 != NULL
+local	FUN_000b3630	uVar4	ilOpcode	CONFIRMED	IL opcode chosen per ATI op: add 3, mul 0x49, sub 0x5b, dp3 0x22, dp4 0x23, mad 0x40, lrp 0x3f, dp2add 0x21, mov 0x47 (notes_shader_formats.md)
+local	FUN_000b3630	local_78	ilOpcodeWord	INFERRED	ilOpcode widened for the push
