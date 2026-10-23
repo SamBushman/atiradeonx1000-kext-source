@@ -228,10 +228,10 @@ int std___Rb_tree_base_iterator___M_increment(this)
 }
 
 /* TType__copyType @ 0x97c34234 (800 bytes) */
-int TType__copyType(this, type, map)
+int TType__copyType(this, copyOf, remapper)
   unsigned char * this;
-  unsigned char * type;
-  unsigned char * map;
+  unsigned char * copyOf;
+  unsigned char * remapper;
 {
   uint uVar1;
   uint uVar2;
@@ -260,24 +260,24 @@ int TType__copyType(this, type, map)
   undefined4 local_40 [7];
   
   uVar4 = *(uint *)(this + 0x24);
-  uVar1 = (*(uint *)(type + 0x24) >> 0x13 & 0x3f) << 0x13;
+  uVar1 = (*(uint *)(copyOf + 0x24) >> 0x13 & 0x3f) << 0x13;
   *(uint *)(this + 0x24) = uVar1 | uVar4 & 0xfe07ffff;
-  uVar2 = *(uint *)(type + 0x24) & 0xfe000000;
+  uVar2 = *(uint *)(copyOf + 0x24) & 0xfe000000;
   *(uint *)(this + 0x24) = uVar2 | uVar1 | uVar4 & 0x7ffff;
-  uVar13 = *(uint *)(type + 0x24) & 0x7f800;
+  uVar13 = *(uint *)(copyOf + 0x24) & 0x7f800;
   *(uint *)(this + 0x24) = uVar13 | uVar2 | uVar1 | uVar4 & 0x7ff;
-  uVar3 = (*(uint *)(type + 0x24) >> 10 & 1) << 10;
+  uVar3 = (*(uint *)(copyOf + 0x24) >> 10 & 1) << 10;
   *(uint *)(this + 0x24) = uVar3 | uVar13 | uVar2 | uVar1 | uVar4 & 0x3ff;
   *(uint *)(this + 0x24) =
-       (*(uint *)(type + 0x24) >> 9 & 1) << 9 | uVar3 | uVar13 | uVar2 | uVar1 | uVar4 & 0x1ff;
-  iVar6 = *(int *)(type + 8);
-  *(undefined4 *)(this + 4) = *(undefined4 *)(type + 4);
+       (*(uint *)(copyOf + 0x24) >> 9 & 1) << 9 | uVar3 | uVar13 | uVar2 | uVar1 | uVar4 & 0x1ff;
+  iVar6 = *(int *)(copyOf + 8);
+  *(undefined4 *)(this + 4) = *(undefined4 *)(copyOf + 4);
   if (iVar6 == 0) {
     *(undefined4 *)(this + 8) = 0;
   }
   else {
-    ((int (*)())std___Rb_tree_TVector_TTypeLine___std__pair_TVector_TTypeLine__const_TVector_TTypeLine____std___Select1st_std__pair_TVector_TTypeLine__const_TVector_TTypeLine_____std__less_TVector_TTypeLine____std__allocator_std__pair_TVector_TTypeLine__const_TVector_TTypeLine_______find)(local_a0,map,this + 8);
-    local_90 = *(unsigned char **)map;
+    ((int (*)())std___Rb_tree_TVector_TTypeLine___std__pair_TVector_TTypeLine__const_TVector_TTypeLine____std___Select1st_std__pair_TVector_TTypeLine__const_TVector_TTypeLine_____std__less_TVector_TTypeLine____std__allocator_std__pair_TVector_TTypeLine__const_TVector_TTypeLine_______find)(local_a0,remapper,this + 8);
+    local_90 = *(unsigned char **)remapper;
     if (local_a0[0] == local_90) {
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
       puVar9 = (undefined4 *)TPoolAllocator__allocate(poolAllocator,0x10);
@@ -291,14 +291,14 @@ int TType__copyType(this, type, map)
         puVar11 = puVar9;
       }
       *(undefined4 **)(this + 8) = puVar11;
-      for (uVar13 = 0; iVar6 = *(int *)(*(int *)(type + 8) + 4),
-          uVar13 < (uint)(*(int *)(*(int *)(type + 8) + 8) - iVar6 >> 3); uVar13 = uVar13 + 1) {
+      for (uVar13 = 0; iVar6 = *(int *)(*(int *)(copyOf + 8) + 4),
+          uVar13 < (uint)(*(int *)(*(int *)(copyOf + 8) + 8) - iVar6 >> 3); uVar13 = uVar13 + 1) {
         local_6c = *(undefined4 *)(iVar6 + uVar13 * 8 + 4);
-        pTVar15 = *(unsigned char **)(*(int *)(*(int *)(type + 8) + 4) + uVar13 * 8);
+        pTVar15 = *(unsigned char **)(*(int *)(*(int *)(copyOf + 8) + 4) + uVar13 * 8);
         poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
         this_00 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
         *(undefined ***)this_00 = &PTR___ZN5TTypeD1Ev_a7b7d590;
-        ((int (*)())TType__copyType)(this_00,pTVar15,map);
+        ((int (*)())TType__copyType)(this_00,pTVar15,remapper);
         this_01 = *(unsigned char **)(this + 8);
         puVar11 = *(undefined4 **)(this_01 + 8);
         local_70 = this_00;
@@ -322,7 +322,7 @@ int TType__copyType(this, type, map)
     }
   }
   *(undefined4 *)(this + 0xc) = 0;
-  iVar6 = *(int *)(type + 0xc);
+  iVar6 = *(int *)(copyOf + 0xc);
   if (iVar6 != 0) {
     *(undefined1 *)(*(int *)(iVar6 + 4) + *(int *)(*(int *)(iVar6 + 4) + -0xc)) = *DAT_a7b7ba80;
     pcVar14 = *(char **)(iVar6 + 4);
@@ -338,7 +338,7 @@ int TType__copyType(this, type, map)
     *(void **)(this + 0xc) = pvVar5;
   }
   *(undefined4 *)(this + 0x10) = 0;
-  iVar6 = *(int *)(type + 0x10);
+  iVar6 = *(int *)(copyOf + 0x10);
   if (iVar6 != 0) {
     *(undefined1 *)(*(int *)(iVar6 + 4) + *(int *)(*(int *)(iVar6 + 4) + -0xc)) = *DAT_a7b7ba80;
     pcVar14 = *(char **)(iVar6 + 4);
@@ -354,7 +354,7 @@ int TType__copyType(this, type, map)
     *(void **)(this + 0x10) = pvVar5;
   }
   *(undefined4 *)(this + 0x14) = 0;
-  iVar6 = *(int *)(type + 0x14);
+  iVar6 = *(int *)(copyOf + 0x14);
   if (iVar6 != 0) {
     *(undefined1 *)(*(int *)(iVar6 + 4) + *(int *)(*(int *)(iVar6 + 4) + -0xc)) = *DAT_a7b7ba80;
     pcVar14 = *(char **)(iVar6 + 4);
@@ -369,8 +369,8 @@ int TType__copyType(this, type, map)
     }
     *(void **)(this + 0x14) = pvVar5;
   }
-  uVar12 = *(undefined4 *)(type + 0x1c);
-  uVar7 = *(undefined4 *)(type + 0x18);
+  uVar12 = *(undefined4 *)(copyOf + 0x1c);
+  uVar7 = *(undefined4 *)(copyOf + 0x18);
   *(undefined4 *)(this + 0x20) = 0;
   *(undefined4 *)(this + 0x18) = uVar7;
   *(undefined4 *)(this + 0x1c) = uVar12;

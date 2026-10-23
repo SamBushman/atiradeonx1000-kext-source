@@ -348,8 +348,6 @@ use	TPPStreamCompiler__equalOperands	iVar5	length	INFERRED	every definition is t
 use	TPPStreamCompiler__equalOperands	iVar5	length	INFERRED	every definition is the result of a call whose name says it returns this	#244	+0	rhs	rhs
 use	TPPStreamCompiler__equalOperands	iVar5	logicalSize	INFERRED	every definition is the result of a call whose name says it returns this	#338	+1	all	all
 use	TPPStreamCompiler__equalOperands	iVar6	length2	INFERRED	every definition is the result of a call whose name says it returns this	#246	+1	all	all
-use	TPPStreamCompiler__assignOperands	iVar6	length	INFERRED	every definition is the result of a call whose name says it returns this	#80	+1	all	all
-use	TPPStreamCompiler__assignOperands	uVar3	streamType	INFERRED	every definition is the result of a call whose name says it returns this	#221	+49	all	all
 use	TPPStreamCompiler__constructReplicate	iVar8	logicalSize	INFERRED	every definition is the result of a call whose name says it returns this	#84	+1	all	all
 use	TPPStreamCompiler__constructReplicate	uVar4	streamType	INFERRED	every definition is the result of a call whose name says it returns this	#82	+1	all	all
 use	TPPStreamCompiler__constructDiagonal	iVar6	logicalSize	INFERRED	every definition is the result of a call whose name says it returns this	#22	+174	all	all

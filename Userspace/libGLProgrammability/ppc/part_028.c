@@ -417,71 +417,75 @@ int __ZN13TIntermSymbolD0Ev(this)
 }
 
 /* std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______find @ 0x97c3294c (276 bytes) */
-int std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______find(this, text, param_3)
-  unsigned char * this;
-  int text;
-  int param_3;
+int std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______find(result, tree, key)
+  unsigned char * result;
+  int tree;
+  int key;
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  uint *puVar4;
-  void *pvVar5;
-  int iVar6;
-  uint uVar7;
-  uint uVar8;
-  uint local_40;
-  uint local_3c;
-  uint local_38;
-  uint local_34 [2];
+  uint candidateKeySize;
+  uint finalKeySize;
+  int nextNode;
+  int finalCompareResult;
+  int candidate;
+  int compareResult;
+  int node;
+  uint *minSizeRef;
+  void *keyChars;
+  int header;
+  uint nodeKeySize;
+  uint keySize;
+  uint minArgNodeSize;
+  uint minArgKeySize;
+  uint minArgFinalKeySize;
+  uint minArgFinalNodeSize [2];
   
-  iVar6 = *(int *)(text + 4);
-  iVar1 = iVar6;
-  if (*(int *)(iVar6 + 4) != 0) {
-    pvVar5 = *(void **)(param_3 + 4);
-    iVar3 = *(int *)(iVar6 + 4);
+  header = *(int *)(tree + 4);
+  candidate = header;
+  if (*(int *)(header + 4) != 0) {
+    keyChars = *(void **)(key + 4);
+    node = *(int *)(header + 4);
     do {
-      uVar7 = *(uint *)(*(int *)(iVar3 + 0x14) + -0xc);
-      local_40 = uVar7;
-      uVar8 = *(uint *)((int)pvVar5 + -0xc);
-      local_3c = uVar8;
-      puVar4 = &local_3c;
-      if (uVar7 <= uVar8) {
-        puVar4 = &local_40;
+      nodeKeySize = *(uint *)(*(int *)(node + 0x14) + -0xc);
+      minArgNodeSize = nodeKeySize;
+      keySize = *(uint *)((int)keyChars + -0xc);
+      minArgKeySize = keySize;
+      minSizeRef = &minArgKeySize;
+      if (nodeKeySize <= keySize) {
+        minSizeRef = &minArgNodeSize;
       }
-      iVar2 = _memcmp(*(void **)(iVar3 + 0x14),pvVar5,*puVar4);
-      if (iVar2 == 0) {
-        iVar2 = uVar7 - uVar8;
+      compareResult = _memcmp(*(void **)(node + 0x14),keyChars,*minSizeRef);
+      if (compareResult == 0) {
+        compareResult = nodeKeySize - keySize;
       }
-      if (iVar2 < 0) {
-        iVar2 = *(int *)(iVar3 + 0xc);
+      if (compareResult < 0) {
+        nextNode = *(int *)(node + 0xc);
       }
       else {
-        iVar2 = *(int *)(iVar3 + 8);
-        iVar1 = iVar3;
+        nextNode = *(int *)(node + 8);
+        candidate = node;
       }
-      iVar3 = iVar2;
-    } while (iVar2 != 0);
+      node = nextNode;
+    } while (nextNode != 0);
   }
-  if (iVar1 != iVar6) {
-    puVar4 = local_34;
-    uVar7 = *(uint *)((int)*(void **)(param_3 + 4) + -0xc);
-    local_38 = uVar7;
-    uVar8 = *(uint *)(*(int *)(iVar1 + 0x14) + -0xc);
-    local_34[0] = uVar8;
-    if (uVar7 <= uVar8) {
-      puVar4 = &local_38;
+  if (candidate != header) {
+    minSizeRef = minArgFinalNodeSize;
+    finalKeySize = *(uint *)((int)*(void **)(key + 4) + -0xc);
+    minArgFinalKeySize = finalKeySize;
+    candidateKeySize = *(uint *)(*(int *)(candidate + 0x14) + -0xc);
+    minArgFinalNodeSize[0] = candidateKeySize;
+    if (finalKeySize <= candidateKeySize) {
+      minSizeRef = &minArgFinalKeySize;
     }
-    iVar3 = _memcmp(*(void **)(param_3 + 4),*(void **)(iVar1 + 0x14),*puVar4);
-    if (iVar3 == 0) {
-      iVar3 = uVar7 - uVar8;
+    finalCompareResult = _memcmp(*(void **)(key + 4),*(void **)(candidate + 0x14),*minSizeRef);
+    if (finalCompareResult == 0) {
+      finalCompareResult = finalKeySize - candidateKeySize;
     }
-    if (-1 < iVar3) goto LAB_97c32a44;
+    if (-1 < finalCompareResult) goto LAB_97c32a44;
   }
-  iVar1 = iVar6;
+  candidate = header;
 LAB_97c32a44:
-  *(int *)this = iVar1;
-  return this;
+  *(int *)result = candidate;
+  return result;
 }
 
 /* __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_mm @ 0x97c32a60 (4 bytes) */
@@ -599,166 +603,167 @@ int __ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_EPKS4_RKS7_(this, 
 }
 
 /* std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior_____lower_bound @ 0x97c32cdc (176 bytes) */
-int std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior_____lower_bound(this, text, param_3)
-  unsigned char * this;
-  int text;
-  int param_3;
+int std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior_____lower_bound(result, tree, key)
+  unsigned char * result;
+  int tree;
+  int key;
 {
-  int iVar1;
-  uint *puVar2;
-  void *pvVar3;
-  int iVar4;
-  int iVar5;
-  uint uVar6;
-  uint uVar7;
-  uint local_40;
-  uint local_3c [6];
+  int nextNode;
+  int compareResult;
+  uint *minSizeRef;
+  void *keyChars;
+  int lowerBound;
+  int node;
+  uint nodeKeySize;
+  uint keySize;
+  uint minArgNodeSize;
+  uint minArgKeySize [6];
   
-  iVar4 = *(int *)(text + 4);
-  if (*(int *)(iVar4 + 4) != 0) {
-    pvVar3 = *(void **)(param_3 + 4);
-    iVar5 = *(int *)(iVar4 + 4);
+  lowerBound = *(int *)(tree + 4);
+  if (*(int *)(lowerBound + 4) != 0) {
+    keyChars = *(void **)(key + 4);
+    node = *(int *)(lowerBound + 4);
     do {
-      uVar6 = *(uint *)(*(int *)(iVar5 + 0x14) + -0xc);
-      local_40 = uVar6;
-      uVar7 = *(uint *)((int)pvVar3 + -0xc);
-      local_3c[0] = uVar7;
-      puVar2 = local_3c;
-      if (uVar6 <= uVar7) {
-        puVar2 = &local_40;
+      nodeKeySize = *(uint *)(*(int *)(node + 0x14) + -0xc);
+      minArgNodeSize = nodeKeySize;
+      keySize = *(uint *)((int)keyChars + -0xc);
+      minArgKeySize[0] = keySize;
+      minSizeRef = minArgKeySize;
+      if (nodeKeySize <= keySize) {
+        minSizeRef = &minArgNodeSize;
       }
-      iVar1 = _memcmp(*(void **)(iVar5 + 0x14),pvVar3,*puVar2);
-      if (iVar1 == 0) {
-        iVar1 = uVar6 - uVar7;
+      compareResult = _memcmp(*(void **)(node + 0x14),keyChars,*minSizeRef);
+      if (compareResult == 0) {
+        compareResult = nodeKeySize - keySize;
       }
-      if (iVar1 < 0) {
-        iVar1 = *(int *)(iVar5 + 0xc);
+      if (compareResult < 0) {
+        nextNode = *(int *)(node + 0xc);
       }
       else {
-        iVar1 = *(int *)(iVar5 + 8);
-        iVar4 = iVar5;
+        nextNode = *(int *)(node + 8);
+        lowerBound = node;
       }
-      iVar5 = iVar1;
-    } while (iVar1 != 0);
+      node = nextNode;
+    } while (nextNode != 0);
   }
-  *(int *)this = iVar4;
-  return this;
+  *(int *)result = lowerBound;
+  return result;
 }
 
 /* __ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBehaviorESt10_Select1stIS8_ESt4lessIS4_ES2_IS8_EE13insert_uniqueESt17_Rb_tree_iteratorIS8_RS8_PS8_ERKS8_ @ 0x97c32d8c (568 bytes) */
-int __ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBehaviorESt10_Select1stIS8_ESt4lessIS4_ES2_IS8_EE13insert_uniqueESt17_Rb_tree_iteratorIS8_RS8_PS8_ERKS8_(this, _Rb_tree_iterator, pair, text)
-  unsigned char * this;
-  unsigned char * _Rb_tree_iterator;
-  int *pair;
-  int text;
+int __ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBehaviorESt10_Select1stIS8_ESt4lessIS4_ES2_IS8_EE13insert_uniqueESt17_Rb_tree_iteratorIS8_RS8_PS8_ERKS8_(result, tree, position, value)
+  unsigned char * result;
+  unsigned char * tree;
+  int *position;
+  int value;
 {
-  int iVar1;
-  uint *puVar2;
-  uint uVar3;
-  void *pvVar4;
-  unsigned char * ppVar5;
-  uint uVar6;
-  unsigned char * ppVar7;
-  unsigned char * local_70 [4];
-  unsigned char * local_60 [4];
-  uint local_50;
-  uint local_4c;
-  uint local_48;
-  uint local_44;
-  uint local_40;
-  uint local_3c;
-  uint local_38;
-  uint local_34 [4];
+  int compareResult;
+  uint *minSizeRef;
+  uint sizeA;
+  void *valueKeyChars;
+  unsigned char * insertY;
+  uint sizeB;
+  unsigned char * insertX;
+  unsigned char * iterSlot [4];
+  unsigned char * nestedResult [4];
+  uint minArgBeginA;
+  uint minArgBeginB;
+  uint minArgEndA;
+  uint minArgEndB;
+  uint minArgBeforeA;
+  uint minArgBeforeB;
+  uint minArgHintA;
+  uint minArgHintB [4];
   
-  ppVar5 = *(unsigned char **)(_Rb_tree_iterator + 4);
-  ppVar7 = (unsigned char *)*pair;
-  if (ppVar7 == *(unsigned char **)(ppVar5 + 8)) {
-    if (*(int *)(_Rb_tree_iterator + 8) != 0) {
-      puVar2 = &local_4c;
-      uVar3 = *(uint *)(*(int *)(text + 4) + -0xc);
-      local_50 = uVar3;
-      uVar6 = *(uint *)(*(int *)(ppVar7 + 0x14) + -0xc);
-      local_4c = uVar6;
-      if (uVar3 <= uVar6) {
-        puVar2 = &local_50;
+  insertY = *(unsigned char **)(tree + 4);
+  insertX = (unsigned char *)*position;
+  if (insertX == *(unsigned char **)(insertY + 8)) {
+    if (*(int *)(tree + 8) != 0) {
+      minSizeRef = &minArgBeginB;
+      sizeA = *(uint *)(*(int *)(value + 4) + -0xc);
+      minArgBeginA = sizeA;
+      sizeB = *(uint *)(*(int *)(insertX + 0x14) + -0xc);
+      minArgBeginB = sizeB;
+      if (sizeA <= sizeB) {
+        minSizeRef = &minArgBeginA;
       }
-      iVar1 = _memcmp(*(void **)(text + 4),*(void **)(ppVar7 + 0x14),*puVar2);
-      if (iVar1 == 0) {
-        iVar1 = uVar3 - uVar6;
+      compareResult = _memcmp(*(void **)(value + 4),*(void **)(insertX + 0x14),*minSizeRef);
+      if (compareResult == 0) {
+        compareResult = sizeA - sizeB;
       }
-      ppVar5 = ppVar7;
-      if (iVar1 < 0) goto LAB_97c32f8c;
+      insertY = insertX;
+      if (compareResult < 0) goto LAB_97c32f8c;
     }
   }
   else {
-    if (ppVar7 != ppVar5) {
-      local_70[0] = ppVar7;
-      std___Rb_tree_base_iterator___M_decrement((unsigned char *)local_70);
-      ppVar5 = local_70[0];
-      pvVar4 = *(void **)(text + 4);
-      puVar2 = &local_3c;
-      uVar3 = *(uint *)(*(int *)(local_70[0] + 0x14) + -0xc);
-      local_40 = uVar3;
-      uVar6 = *(uint *)((int)pvVar4 + -0xc);
-      local_3c = uVar6;
-      if (uVar3 <= uVar6) {
-        puVar2 = &local_40;
+    if (insertX != insertY) {
+      iterSlot[0] = insertX;
+      std___Rb_tree_base_iterator___M_decrement((unsigned char *)iterSlot);
+      insertY = iterSlot[0];
+      valueKeyChars = *(void **)(value + 4);
+      minSizeRef = &minArgBeforeB;
+      sizeA = *(uint *)(*(int *)(iterSlot[0] + 0x14) + -0xc);
+      minArgBeforeA = sizeA;
+      sizeB = *(uint *)((int)valueKeyChars + -0xc);
+      minArgBeforeB = sizeB;
+      if (sizeA <= sizeB) {
+        minSizeRef = &minArgBeforeA;
       }
-      iVar1 = _memcmp(*(void **)(local_70[0] + 0x14),pvVar4,*puVar2);
-      if (iVar1 == 0) {
-        iVar1 = uVar3 - uVar6;
+      compareResult = _memcmp(*(void **)(iterSlot[0] + 0x14),valueKeyChars,*minSizeRef);
+      if (compareResult == 0) {
+        compareResult = sizeA - sizeB;
       }
-      if (iVar1 < 0) {
-        uVar6 = *(uint *)((int)pvVar4 + -0xc);
-        puVar2 = local_34;
-        local_38 = uVar6;
-        uVar3 = *(uint *)(*(int *)(*pair + 0x14) + -0xc);
-        local_34[0] = uVar3;
-        if (uVar6 <= uVar3) {
-          puVar2 = &local_38;
+      if (compareResult < 0) {
+        sizeB = *(uint *)((int)valueKeyChars + -0xc);
+        minSizeRef = minArgHintB;
+        minArgHintA = sizeB;
+        sizeA = *(uint *)(*(int *)(*position + 0x14) + -0xc);
+        minArgHintB[0] = sizeA;
+        if (sizeB <= sizeA) {
+          minSizeRef = &minArgHintA;
         }
-        iVar1 = _memcmp(pvVar4,*(void **)(*pair + 0x14),*puVar2);
-        if (iVar1 == 0) {
-          iVar1 = uVar6 - uVar3;
+        compareResult = _memcmp(valueKeyChars,*(void **)(*position + 0x14),*minSizeRef);
+        if (compareResult == 0) {
+          compareResult = sizeB - sizeA;
         }
-        if (iVar1 < 0) {
-          if (*(int *)(ppVar5 + 0xc) != 0) {
-            ppVar7 = (unsigned char *)*pair;
-            ppVar5 = ppVar7;
+        if (compareResult < 0) {
+          if (*(int *)(insertY + 0xc) != 0) {
+            insertX = (unsigned char *)*position;
+            insertY = insertX;
             goto LAB_97c32f8c;
           }
           goto LAB_97c32f68;
         }
       }
-      ((int (*)())__ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBehaviorESt10_Select1stIS8_ESt4lessIS4_ES2_IS8_EE13insert_uniqueERKS8_)((unsigned char *)local_60,_Rb_tree_iterator,text);
-      local_70[0] = local_60[0];
+      ((int (*)())__ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBehaviorESt10_Select1stIS8_ESt4lessIS4_ES2_IS8_EE13insert_uniqueERKS8_)((unsigned char *)nestedResult,tree,value);
+      iterSlot[0] = nestedResult[0];
       goto LAB_97c32fa8;
     }
-    puVar2 = &local_44;
-    uVar3 = *(uint *)(*(int *)(*(int *)(ppVar7 + 0xc) + 0x14) + -0xc);
-    local_48 = uVar3;
-    uVar6 = *(uint *)((int)*(void **)(text + 4) + -0xc);
-    local_44 = uVar6;
-    if (uVar3 <= uVar6) {
-      puVar2 = &local_48;
+    minSizeRef = &minArgEndB;
+    sizeA = *(uint *)(*(int *)(*(int *)(insertX + 0xc) + 0x14) + -0xc);
+    minArgEndA = sizeA;
+    sizeB = *(uint *)((int)*(void **)(value + 4) + -0xc);
+    minArgEndB = sizeB;
+    if (sizeA <= sizeB) {
+      minSizeRef = &minArgEndA;
     }
-    iVar1 = _memcmp(*(void **)(*(int *)(ppVar7 + 0xc) + 0x14),*(void **)(text + 4),*puVar2);
-    if (iVar1 == 0) {
-      iVar1 = uVar3 - uVar6;
+    compareResult = _memcmp(*(void **)(*(int *)(insertX + 0xc) + 0x14),*(void **)(value + 4),*minSizeRef);
+    if (compareResult == 0) {
+      compareResult = sizeA - sizeB;
     }
-    if (iVar1 < 0) {
-      ppVar5 = *(unsigned char **)(ppVar5 + 0xc);
+    if (compareResult < 0) {
+      insertY = *(unsigned char **)(insertY + 0xc);
 LAB_97c32f68:
-      ppVar7 = (unsigned char *)0x0;
+      insertX = (unsigned char *)0x0;
 LAB_97c32f8c:
-      ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_insert)(this,_Rb_tree_iterator,ppVar7,ppVar5,text);
-      return this;
+      ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_insert)(result,tree,insertX,insertY,value);
+      return result;
     }
   }
-  ((int (*)())__ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBehaviorESt10_Select1stIS8_ESt4lessIS4_ES2_IS8_EE13insert_uniqueERKS8_)((unsigned char *)local_70,_Rb_tree_iterator,text);
+  ((int (*)())__ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBehaviorESt10_Select1stIS8_ESt4lessIS4_ES2_IS8_EE13insert_uniqueERKS8_)((unsigned char *)iterSlot,tree,value);
 LAB_97c32fa8:
-  *(unsigned char **)this = local_70[0];
-  return this;
+  *(unsigned char **)result = iterSlot[0];
+  return result;
 }
 
 /* __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm @ 0x97c32fc4 (112 bytes) */
@@ -947,157 +952,163 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE10_M_replaceIPKcEERS3_N9__gnu_
 }
 
 /* std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_insert @ 0x97c33374 (356 bytes) */
-int std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_insert(this, _Rb_tree_node_base1, _Rb_tree_node_base2, pair, text)
-  unsigned char * this;
-  unsigned char * _Rb_tree_node_base1;
-  unsigned char * _Rb_tree_node_base2;
-  int pair;
-  unsigned char * text;
+int std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_insert(result, tree, x, y, value)
+  unsigned char * result;
+  unsigned char * tree;
+  unsigned char * x;
+  int y;
+  unsigned char * value;
 {
-  int iVar1;
-  unsigned char * p_Var2;
-  uint *puVar3;
-  uint uVar4;
-  uint uVar5;
-  uint local_30;
-  uint local_2c [4];
+  int compareResult;
+  int header;
+  unsigned char * newNode;
+  uint *minSizeRef;
+  uint yKeySize;
+  uint valueKeySize;
+  uint minArgValueSize;
+  uint minArgYSize [4];
   
-  if ((pair == *(int *)(_Rb_tree_node_base1 + 4)) || (_Rb_tree_node_base2 != (unsigned char *)0x0)) {
+  if ((y == *(int *)(tree + 4)) || (x != (unsigned char *)0x0)) {
 LAB_97c333f0:
-    p_Var2 = (unsigned char *)TPoolAllocator__allocate(*(unsigned char **)_Rb_tree_node_base1,0x1c);
-    if (p_Var2 + 0x10 != (unsigned char *)0x0) {
-      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(p_Var2 + 0x10,text);
-      *(undefined4 *)(p_Var2 + 0x18) = *(undefined4 *)(text + 8);
+    newNode = (unsigned char *)TPoolAllocator__allocate(*(unsigned char **)tree,0x1c);
+    if (newNode + 0x10 != (unsigned char *)0x0) {
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(newNode + 0x10,value);
+      *(undefined4 *)(newNode + 0x18) = *(undefined4 *)(value + 8);
     }
-    *(unsigned char **)(pair + 8) = p_Var2;
-    iVar1 = *(int *)(_Rb_tree_node_base1 + 4);
-    if (pair != iVar1) {
-      if (pair == *(int *)(iVar1 + 8)) {
-        *(unsigned char **)(iVar1 + 8) = p_Var2;
+    *(unsigned char **)(y + 8) = newNode;
+    header = *(int *)(tree + 4);
+    if (y != header) {
+      if (y == *(int *)(header + 8)) {
+        *(unsigned char **)(header + 8) = newNode;
       }
       goto LAB_97c33490;
     }
-    *(unsigned char **)(pair + 4) = p_Var2;
-    iVar1 = *(int *)(_Rb_tree_node_base1 + 4);
+    *(unsigned char **)(y + 4) = newNode;
+    header = *(int *)(tree + 4);
   }
   else {
-    puVar3 = local_2c;
-    uVar5 = *(uint *)(*(int *)(text + 4) + -0xc);
-    local_30 = uVar5;
-    uVar4 = *(uint *)((int)*(void **)(pair + 0x14) + -0xc);
-    local_2c[0] = uVar4;
-    if (uVar5 <= uVar4) {
-      puVar3 = &local_30;
+    minSizeRef = minArgYSize;
+    valueKeySize = *(uint *)(*(int *)(value + 4) + -0xc);
+    minArgValueSize = valueKeySize;
+    yKeySize = *(uint *)((int)*(void **)(y + 0x14) + -0xc);
+    minArgYSize[0] = yKeySize;
+    if (valueKeySize <= yKeySize) {
+      minSizeRef = &minArgValueSize;
     }
-    iVar1 = _memcmp(*(void **)(text + 4),*(void **)(pair + 0x14),*puVar3);
-    if (iVar1 == 0) {
-      iVar1 = uVar5 - uVar4;
+    compareResult = _memcmp(*(void **)(value + 4),*(void **)(y + 0x14),*minSizeRef);
+    if (compareResult == 0) {
+      compareResult = valueKeySize - yKeySize;
     }
-    if (iVar1 < 0) goto LAB_97c333f0;
-    p_Var2 = (unsigned char *)TPoolAllocator__allocate(*(unsigned char **)_Rb_tree_node_base1,0x1c);
-    if (p_Var2 + 0x10 != (unsigned char *)0x0) {
-      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(p_Var2 + 0x10,text);
-      *(undefined4 *)(p_Var2 + 0x18) = *(undefined4 *)(text + 8);
+    if (compareResult < 0) goto LAB_97c333f0;
+    newNode = (unsigned char *)TPoolAllocator__allocate(*(unsigned char **)tree,0x1c);
+    if (newNode + 0x10 != (unsigned char *)0x0) {
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(newNode + 0x10,value);
+      *(undefined4 *)(newNode + 0x18) = *(undefined4 *)(value + 8);
     }
-    *(unsigned char **)(pair + 0xc) = p_Var2;
-    iVar1 = *(int *)(_Rb_tree_node_base1 + 4);
-    if (pair != *(int *)(iVar1 + 0xc)) goto LAB_97c33490;
+    *(unsigned char **)(y + 0xc) = newNode;
+    header = *(int *)(tree + 4);
+    if (y != *(int *)(header + 0xc)) goto LAB_97c33490;
   }
-  *(unsigned char **)(iVar1 + 0xc) = p_Var2;
+  *(unsigned char **)(header + 0xc) = newNode;
 LAB_97c33490:
-  *(int *)(p_Var2 + 4) = pair;
-  *(undefined4 *)(p_Var2 + 0xc) = 0;
-  *(undefined4 *)(p_Var2 + 8) = 0;
-  std___Rb_tree_rebalance(p_Var2,(unsigned char **)(*(int *)(_Rb_tree_node_base1 + 4) + 4));
-  *(int *)(_Rb_tree_node_base1 + 8) = *(int *)(_Rb_tree_node_base1 + 8) + 1;
-  *(unsigned char **)this = p_Var2;
-  return this;
+  *(int *)(newNode + 4) = y;
+  *(undefined4 *)(newNode + 0xc) = 0;
+  *(undefined4 *)(newNode + 8) = 0;
+  std___Rb_tree_rebalance(newNode,(unsigned char **)(*(int *)(tree + 4) + 4));
+  *(int *)(tree + 8) = *(int *)(tree + 8) + 1;
+  *(unsigned char **)result = newNode;
+  return result;
 }
 
 /* __ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBehaviorESt10_Select1stIS8_ESt4lessIS4_ES2_IS8_EE13insert_uniqueERKS8_ @ 0x97c334d8 (388 bytes) */
-int __ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBehaviorESt10_Select1stIS8_ESt4lessIS4_ES2_IS8_EE13insert_uniqueERKS8_(this, pair, text)
-  unsigned char * this;
-  unsigned char * pair;
-  int text;
+int __ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBehaviorESt10_Select1stIS8_ESt4lessIS4_ES2_IS8_EE13insert_uniqueERKS8_(result, tree, value)
+  unsigned char * result;
+  unsigned char * tree;
+  int value;
 {
-  int iVar1;
-  uint *puVar2;
-  void *pvVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  uint uVar7;
-  uint uVar8;
-  int local_70 [4];
-  int local_60 [4];
-  int local_50 [4];
-  uint local_40;
-  uint local_3c;
-  uint local_38;
-  uint local_34;
+  uint valueKeySize2;
+  uint jKeySize;
+  int jNode;
+  int compareResult;
+  int comp;
+  int finalCompareResult;
+  uint *minSizeRef;
+  void *keyChars;
+  int header;
+  int y;
+  int x;
+  uint valueKeySize;
+  uint nodeKeySize;
+  int j [4];
+  int insertResultLeft [4];
+  int insertResultRight [4];
+  uint minArg1A;
+  uint minArg1B;
+  uint minArg2A;
+  uint minArg2B;
   
-  iVar4 = *(int *)(pair + 4);
-  iVar1 = 1;
-  iVar5 = iVar4;
-  if (*(int *)(iVar4 + 4) != 0) {
-    pvVar3 = *(void **)(text + 4);
-    iVar6 = *(int *)(iVar4 + 4);
+  header = *(int *)(tree + 4);
+  comp = 1;
+  y = header;
+  if (*(int *)(header + 4) != 0) {
+    keyChars = *(void **)(value + 4);
+    x = *(int *)(header + 4);
     do {
-      iVar5 = iVar6;
-      uVar7 = *(uint *)((int)pvVar3 + -0xc);
-      local_40 = uVar7;
-      uVar8 = *(uint *)(*(int *)(iVar5 + 0x14) + -0xc);
-      local_3c = uVar8;
-      puVar2 = &local_3c;
-      if (uVar7 <= uVar8) {
-        puVar2 = &local_40;
+      y = x;
+      valueKeySize = *(uint *)((int)keyChars + -0xc);
+      minArg1A = valueKeySize;
+      nodeKeySize = *(uint *)(*(int *)(y + 0x14) + -0xc);
+      minArg1B = nodeKeySize;
+      minSizeRef = &minArg1B;
+      if (valueKeySize <= nodeKeySize) {
+        minSizeRef = &minArg1A;
       }
-      iVar1 = _memcmp(pvVar3,*(void **)(iVar5 + 0x14),*puVar2);
-      if (iVar1 == 0) {
-        iVar1 = uVar7 - uVar8;
+      compareResult = _memcmp(keyChars,*(void **)(y + 0x14),*minSizeRef);
+      if (compareResult == 0) {
+        compareResult = valueKeySize - nodeKeySize;
       }
-      iVar1 = -(iVar1 >> 0x1f);
-      if (iVar1 == 0) {
-        iVar6 = *(int *)(iVar5 + 0xc);
+      comp = -(compareResult >> 0x1f);
+      if (comp == 0) {
+        x = *(int *)(y + 0xc);
       }
       else {
-        iVar6 = *(int *)(iVar5 + 8);
+        x = *(int *)(y + 8);
       }
-    } while (iVar6 != 0);
+    } while (x != 0);
   }
-  local_70[0] = iVar5;
-  if (iVar1 != 0) {
-    local_60[0] = *(int *)(iVar4 + 8);
-    if (iVar5 == local_60[0]) {
-      ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_insert)((unsigned char *)local_50,pair,(unsigned char *)0x0,iVar5,text);
+  j[0] = y;
+  if (comp != 0) {
+    insertResultLeft[0] = *(int *)(header + 8);
+    if (y == insertResultLeft[0]) {
+      ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_insert)((unsigned char *)insertResultRight,tree,(unsigned char *)0x0,y,value);
       goto LAB_97c3362c;
     }
-    std___Rb_tree_base_iterator___M_decrement((unsigned char *)local_70);
+    std___Rb_tree_base_iterator___M_decrement((unsigned char *)j);
   }
-  iVar1 = local_70[0];
-  puVar2 = &local_34;
-  uVar7 = *(uint *)(*(int *)(local_70[0] + 0x14) + -0xc);
-  local_38 = uVar7;
-  uVar8 = *(uint *)((int)*(void **)(text + 4) + -0xc);
-  local_34 = uVar8;
-  if (uVar7 <= uVar8) {
-    puVar2 = &local_38;
+  jNode = j[0];
+  minSizeRef = &minArg2B;
+  jKeySize = *(uint *)(*(int *)(j[0] + 0x14) + -0xc);
+  minArg2A = jKeySize;
+  valueKeySize2 = *(uint *)((int)*(void **)(value + 4) + -0xc);
+  minArg2B = valueKeySize2;
+  if (jKeySize <= valueKeySize2) {
+    minSizeRef = &minArg2A;
   }
-  iVar4 = _memcmp(*(void **)(local_70[0] + 0x14),*(void **)(text + 4),*puVar2);
-  if (iVar4 == 0) {
-    iVar4 = uVar7 - uVar8;
+  finalCompareResult = _memcmp(*(void **)(j[0] + 0x14),*(void **)(value + 4),*minSizeRef);
+  if (finalCompareResult == 0) {
+    finalCompareResult = jKeySize - valueKeySize2;
   }
-  if (-1 < iVar4) {
-    *(int *)this = iVar1;
-    *(undefined4 *)(this + 4) = 0;
-    return this;
+  if (-1 < finalCompareResult) {
+    *(int *)result = jNode;
+    *(undefined4 *)(result + 4) = 0;
+    return result;
   }
-  ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_insert)((unsigned char *)local_60,pair,(unsigned char *)0x0,iVar5,text);
-  local_50[0] = local_60[0];
+  ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_insert)((unsigned char *)insertResultLeft,tree,(unsigned char *)0x0,y,value);
+  insertResultRight[0] = insertResultLeft[0];
 LAB_97c3362c:
-  *(int *)this = local_50[0];
-  *(undefined4 *)(this + 4) = 1;
-  return this;
+  *(int *)result = insertResultRight[0];
+  *(undefined4 *)(result + 4) = 1;
+  return result;
 }
 
 /* __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcS3_EEEERS3_S8_S8_T_SA_ @ 0x97c3365c (152 bytes) */
@@ -1221,50 +1232,55 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4IPKcEET_S7_RKS2_(this, str1,
 
 /* std__vector_TPoolAllocator__tAllocState_std__allocator_TPoolAllocator__tAllocState_____M_insert_aux @ 0x97c3389c (640 bytes) */
 int std__vector_TPoolAllocator__tAllocState_std__allocator_TPoolAllocator__tAllocState_____M_insert_aux( unsigned char
-                   *this,undefined4 *param_2,undefined4 *param_3)
+                   *this,undefined4 *position,undefined4 *x)
 
 {
-  undefined4 *start;
+  undefined4 *srcCursor;
+  undefined4 *newStartAlloc;
+  int elemsToMove;
+  int oldCapacity;
+  int freeListIndex;
+  undefined *freeListBase;
+  undefined4 *finish;
   undefined4 atomicStore;
-  undefined *puVar1;
-  int iVar2;
-  int iVar3;
-  undefined4 uVar4;
-  undefined4 uVar5;
+  undefined *forceNewFlagPtr;
+  int oldSize;
+  int len;
+  undefined4 xWord0;
+  undefined4 movedWord;
   char *getenvResult;
-  void *pvVar7;
-  int iVar8;
-  undefined4 *puVar9;
-  undefined4 uVar10;
-  undefined4 *puVar11;
-  uint uVar12;
+  void *oldStartPtr;
+  int oldStart;
+  undefined4 xWord1;
+  undefined4 *copyDest;
+  uint lenBytes;
   char reservation;
   byte cr0Flags;
-  undefined4 *local_40 [2];
-  undefined4 *local_38;
-  void *local_34;
+  undefined4 *newFinish [2];
+  undefined4 *newStart;
+  void *destroyCursor;
   
-  puVar1 = PTR__S_force_new_a7b7c0e8;
-  start = *(undefined4 **)(this + 4);
-  if (start == *(undefined4 **)(this + 8)) {
-    iVar8 = *(int *)this;
-    iVar3 = 1;
-    iVar2 = (int)start - iVar8 >> 3;
-    cr0Flags = (iVar2 == 0) << 1;
-    if (iVar2 != 0) {
-      iVar3 = iVar2 << 1;
+  forceNewFlagPtr = PTR__S_force_new_a7b7c0e8;
+  finish = *(undefined4 **)(this + 4);
+  if (finish == *(undefined4 **)(this + 8)) {
+    oldStart = *(int *)this;
+    len = 1;
+    oldSize = (int)finish - oldStart >> 3;
+    cr0Flags = (oldSize == 0) << 1;
+    if (oldSize != 0) {
+      len = oldSize << 1;
     }
-    puVar9 = (undefined4 *)0x0;
-    uVar12 = 0;
-    if (iVar3 != 0) {
-      uVar12 = iVar3 * 8;
+    newStartAlloc = (undefined4 *)0x0;
+    lenBytes = 0;
+    if (len != 0) {
+      lenBytes = len * 8;
       if (*(int *)PTR__S_force_new_a7b7c0e8 == 0) {
         getenvResult = _getenv("GLIBCPP_FORCE_NEW");
         if (getenvResult == (char *)0x0) {
           do {
             if (reservation != '\0') {
-              atomicStore = storeWordConditionalIndexed(*(int *)puVar1 + -1,0,puVar1);
-              *(undefined4 *)puVar1 = atomicStore;
+              atomicStore = storeWordConditionalIndexed(*(int *)forceNewFlagPtr + -1,0,forceNewFlagPtr);
+              *(undefined4 *)forceNewFlagPtr = atomicStore;
               cr0Flags = 2;
             }
           } while (!(bool)(cr0Flags >> 1 & 1));
@@ -1272,78 +1288,78 @@ int std__vector_TPoolAllocator__tAllocState_std__allocator_TPoolAllocator__tAllo
         else {
           do {
             if (reservation != '\0') {
-              atomicStore = storeWordConditionalIndexed(*(int *)puVar1 + 1,0,puVar1);
-              *(undefined4 *)puVar1 = atomicStore;
+              atomicStore = storeWordConditionalIndexed(*(int *)forceNewFlagPtr + 1,0,forceNewFlagPtr);
+              *(undefined4 *)forceNewFlagPtr = atomicStore;
               cr0Flags = 2;
             }
           } while (!(bool)(cr0Flags >> 1 & 1));
         }
       }
-      puVar1 = PTR__S_free_list_a7b7c0e4;
-      if ((uVar12 < 0x81) && (*(int *)PTR__S_force_new_a7b7c0e8 < 1)) {
-        iVar3 = (uVar12 + 7 >> 1 & 0x7ffffffc) - 4;
+      freeListBase = PTR__S_free_list_a7b7c0e4;
+      if ((lenBytes < 0x81) && (*(int *)PTR__S_force_new_a7b7c0e8 < 1)) {
+        freeListIndex = (lenBytes + 7 >> 1 & 0x7ffffffc) - 4;
         _pthread_mutex_lock((pthread_mutex_t *)PTR__S_node_allocator_lock_a7b7c0e0);
-        puVar9 = *(undefined4 **)(puVar1 + iVar3);
-        if (puVar9 == (undefined4 *)0x0) {
-          puVar9 = (undefined4 *)std____default_alloc_template_true_0____S_refill(uVar12);
+        newStartAlloc = *(undefined4 **)(freeListBase + freeListIndex);
+        if (newStartAlloc == (undefined4 *)0x0) {
+          newStartAlloc = (undefined4 *)std____default_alloc_template_true_0____S_refill(lenBytes);
         }
         else {
-          *(undefined4 *)(puVar1 + iVar3) = *puVar9;
+          *(undefined4 *)(freeListBase + freeListIndex) = *newStartAlloc;
         }
-        if (puVar9 == (undefined4 *)0x0) {
+        if (newStartAlloc == (undefined4 *)0x0) {
           std____throw_bad_alloc();
         }
         _pthread_mutex_unlock((pthread_mutex_t *)PTR__S_node_allocator_lock_a7b7c0e0);
       }
       else {
-        puVar9 = operator_new(uVar12);
+        newStartAlloc = operator_new(lenBytes);
       }
-      iVar8 = *(int *)this;
+      oldStart = *(int *)this;
     }
-    local_38 = puVar9;
-    ((int (*)())std____uninitialized_copy_aux___gnu_cxx____normal_iterator_TPoolAllocator__tAllocState__std__vector_TPoolAllocator__tAllocState_std__allocator_TPoolAllocator__tAllocState______gnu_cxx____normal_iterator_TPoolAllocator__tAllocState__std__vector_TPoolAllocator__tAllocState_std__allocator_TPoolAllocator__tAllocState____)(local_40,iVar8,param_2,puVar9);
-    if (local_40[0] != (undefined4 *)0x0) {
-      uVar4 = *param_3;
-      local_40[0][1] = param_3[1];
-      *local_40[0] = uVar4;
+    newStart = newStartAlloc;
+    ((int (*)())std____uninitialized_copy_aux___gnu_cxx____normal_iterator_TPoolAllocator__tAllocState__std__vector_TPoolAllocator__tAllocState_std__allocator_TPoolAllocator__tAllocState______gnu_cxx____normal_iterator_TPoolAllocator__tAllocState__std__vector_TPoolAllocator__tAllocState_std__allocator_TPoolAllocator__tAllocState____)(newFinish,oldStart,position,newStartAlloc);
+    if (newFinish[0] != (undefined4 *)0x0) {
+      xWord0 = *x;
+      newFinish[0][1] = x[1];
+      *newFinish[0] = xWord0;
     }
-    ((int (*)())std____uninitialized_copy_aux___gnu_cxx____normal_iterator_TPoolAllocator__tAllocState__std__vector_TPoolAllocator__tAllocState_std__allocator_TPoolAllocator__tAllocState______gnu_cxx____normal_iterator_TPoolAllocator__tAllocState__std__vector_TPoolAllocator__tAllocState_std__allocator_TPoolAllocator__tAllocState____)(local_40,param_2,*(undefined4 *)(this + 4),local_40[0] + 2);
-    pvVar7 = *(void **)this;
-    for (local_34 = pvVar7; local_34 != *(void **)(this + 4); local_34 = (void *)((int)local_34 + 8)
+    ((int (*)())std____uninitialized_copy_aux___gnu_cxx____normal_iterator_TPoolAllocator__tAllocState__std__vector_TPoolAllocator__tAllocState_std__allocator_TPoolAllocator__tAllocState______gnu_cxx____normal_iterator_TPoolAllocator__tAllocState__std__vector_TPoolAllocator__tAllocState_std__allocator_TPoolAllocator__tAllocState____)(newFinish,position,*(undefined4 *)(this + 4),newFinish[0] + 2);
+    oldStartPtr = *(void **)this;
+    for (destroyCursor = oldStartPtr; destroyCursor != *(void **)(this + 4); destroyCursor = (void *)((int)destroyCursor + 8)
         ) {
     }
-    iVar3 = *(int *)(this + 8) - (int)pvVar7 >> 3;
-    if (iVar3 != 0) {
-      std____default_alloc_template_true_0___deallocate(pvVar7,iVar3 << 3);
+    oldCapacity = *(int *)(this + 8) - (int)oldStartPtr >> 3;
+    if (oldCapacity != 0) {
+      std____default_alloc_template_true_0___deallocate(oldStartPtr,oldCapacity << 3);
     }
-    *(undefined4 **)(this + 4) = local_40[0];
-    *(undefined4 **)this = local_38;
-    *(uint *)(this + 8) = (int)local_38 + uVar12;
+    *(undefined4 **)(this + 4) = newFinish[0];
+    *(undefined4 **)this = newStart;
+    *(uint *)(this + 8) = (int)newStart + lenBytes;
   }
   else {
-    puVar11 = (undefined4 *)0x0;
-    if (start != (undefined4 *)0x0) {
-      start[1] = start[-1];
-      *start = start[-2];
-      puVar11 = *(undefined4 **)(this + 4);
+    copyDest = (undefined4 *)0x0;
+    if (finish != (undefined4 *)0x0) {
+      finish[1] = finish[-1];
+      *finish = finish[-2];
+      copyDest = *(undefined4 **)(this + 4);
     }
-    *(undefined4 **)(this + 4) = puVar11 + 2;
-    uVar10 = param_3[1];
-    iVar3 = (int)(puVar11 + -2) - (int)param_2 >> 3;
-    uVar4 = *param_3;
-    puVar9 = puVar11 + -2;
-    if (0 < iVar3) {
+    *(undefined4 **)(this + 4) = copyDest + 2;
+    xWord1 = x[1];
+    elemsToMove = (int)(copyDest + -2) - (int)position >> 3;
+    xWord0 = *x;
+    srcCursor = copyDest + -2;
+    if (0 < elemsToMove) {
       do {
-        uVar5 = puVar9[-1];
-        puVar11[-2] = puVar9[-2];
-        puVar11[-1] = uVar5;
-        iVar3 = iVar3 + -1;
-        puVar11 = puVar11 + -2;
-        puVar9 = puVar9 + -2;
-      } while (iVar3 != 0);
+        movedWord = srcCursor[-1];
+        copyDest[-2] = srcCursor[-2];
+        copyDest[-1] = movedWord;
+        elemsToMove = elemsToMove + -1;
+        copyDest = copyDest + -2;
+        srcCursor = srcCursor + -2;
+      } while (elemsToMove != 0);
     }
-    param_2[1] = uVar10;
-    *param_2 = uVar4;
+    position[1] = xWord1;
+    *position = xWord0;
   }
   return;
 }
@@ -1417,47 +1433,53 @@ int std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Selec
 }
 
 /* std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_insert_aux @ 0x97c33bf8 (516 bytes) */
-int std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_insert_aux(this, param_2, symbolTableLevel)
+int std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_insert_aux(this, position, symbolTableLevel)
   unsigned char * this;
-  undefined4 *param_2;
+  undefined4 *position;
   undefined4 *symbolTableLevel;
 {
-  undefined4 *start;
-  int start2;
+  uint moveBytes;
+  void *backStart;
+  int finishCursor;
+  int oldCapacity;
+  int freeListIndex;
+  undefined *freeListBase;
+  undefined4 *finish;
+  int oldFinish;
   undefined4 atomicStore;
-  undefined *puVar1;
-  int iVar2;
-  undefined4 *puVar3;
-  int iVar4;
+  undefined *forceNewFlagPtr;
+  int oldSize;
+  undefined4 *newStart;
+  int len;
   char *getenvResult;
-  void *pvVar6;
-  uint uVar7;
-  undefined4 uVar8;
-  size_t sVar9;
+  void *oldStart;
+  uint lenBytes;
+  undefined4 xValue;
+  size_t frontBytes;
   char reservation;
   byte cr0Flags;
   
-  puVar1 = PTR__S_force_new_a7b7c0e8;
-  start = *(undefined4 **)(this + 4);
-  if (start == *(undefined4 **)(this + 8)) {
-    pvVar6 = *(void **)this;
-    iVar4 = 1;
-    iVar2 = (int)start - (int)pvVar6 >> 2;
-    cr0Flags = (iVar2 == 0) << 1;
-    if (iVar2 != 0) {
-      iVar4 = iVar2 << 1;
+  forceNewFlagPtr = PTR__S_force_new_a7b7c0e8;
+  finish = *(undefined4 **)(this + 4);
+  if (finish == *(undefined4 **)(this + 8)) {
+    oldStart = *(void **)this;
+    len = 1;
+    oldSize = (int)finish - (int)oldStart >> 2;
+    cr0Flags = (oldSize == 0) << 1;
+    if (oldSize != 0) {
+      len = oldSize << 1;
     }
-    puVar3 = (undefined4 *)0x0;
-    uVar7 = 0;
-    if (iVar4 != 0) {
-      uVar7 = iVar4 * 4;
+    newStart = (undefined4 *)0x0;
+    lenBytes = 0;
+    if (len != 0) {
+      lenBytes = len * 4;
       if (*(int *)PTR__S_force_new_a7b7c0e8 == 0) {
         getenvResult = _getenv("GLIBCPP_FORCE_NEW");
         if (getenvResult == (char *)0x0) {
           do {
             if (reservation != '\0') {
-              atomicStore = storeWordConditionalIndexed(*(int *)puVar1 + -1,0,puVar1);
-              *(undefined4 *)puVar1 = atomicStore;
+              atomicStore = storeWordConditionalIndexed(*(int *)forceNewFlagPtr + -1,0,forceNewFlagPtr);
+              *(undefined4 *)forceNewFlagPtr = atomicStore;
               cr0Flags = 2;
             }
           } while (!(bool)(cr0Flags >> 1 & 1));
@@ -1465,62 +1487,62 @@ int std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_inser
         else {
           do {
             if (reservation != '\0') {
-              atomicStore = storeWordConditionalIndexed(*(int *)puVar1 + 1,0,puVar1);
-              *(undefined4 *)puVar1 = atomicStore;
+              atomicStore = storeWordConditionalIndexed(*(int *)forceNewFlagPtr + 1,0,forceNewFlagPtr);
+              *(undefined4 *)forceNewFlagPtr = atomicStore;
               cr0Flags = 2;
             }
           } while (!(bool)(cr0Flags >> 1 & 1));
         }
       }
-      puVar1 = PTR__S_free_list_a7b7c0e4;
-      if ((uVar7 < 0x81) && (*(int *)PTR__S_force_new_a7b7c0e8 < 1)) {
-        iVar4 = (uVar7 + 7 >> 1 & 0x7ffffffc) - 4;
+      freeListBase = PTR__S_free_list_a7b7c0e4;
+      if ((lenBytes < 0x81) && (*(int *)PTR__S_force_new_a7b7c0e8 < 1)) {
+        freeListIndex = (lenBytes + 7 >> 1 & 0x7ffffffc) - 4;
         _pthread_mutex_lock((pthread_mutex_t *)PTR__S_node_allocator_lock_a7b7c0e0);
-        puVar3 = *(undefined4 **)(puVar1 + iVar4);
-        if (puVar3 == (undefined4 *)0x0) {
-          puVar3 = (undefined4 *)
-                   std____default_alloc_template_true_0____S_refill(uVar7 + 7 & 0xfffffff8);
+        newStart = *(undefined4 **)(freeListBase + freeListIndex);
+        if (newStart == (undefined4 *)0x0) {
+          newStart = (undefined4 *)
+                   std____default_alloc_template_true_0____S_refill(lenBytes + 7 & 0xfffffff8);
         }
         else {
-          *(undefined4 *)(puVar1 + iVar4) = *puVar3;
+          *(undefined4 *)(freeListBase + freeListIndex) = *newStart;
         }
-        if (puVar3 == (undefined4 *)0x0) {
+        if (newStart == (undefined4 *)0x0) {
           std____throw_bad_alloc();
         }
         _pthread_mutex_unlock((pthread_mutex_t *)PTR__S_node_allocator_lock_a7b7c0e0);
       }
       else {
-        puVar3 = operator_new(uVar7);
+        newStart = operator_new(lenBytes);
       }
-      pvVar6 = *(void **)this;
+      oldStart = *(void **)this;
     }
-    sVar9 = (int)param_2 - (int)pvVar6;
-    _memmove(puVar3,pvVar6,sVar9);
-    if ((int)puVar3 + sVar9 != 0) {
-      *(undefined4 *)((int)puVar3 + sVar9) = *symbolTableLevel;
+    frontBytes = (int)position - (int)oldStart;
+    _memmove(newStart,oldStart,frontBytes);
+    if ((int)newStart + frontBytes != 0) {
+      *(undefined4 *)((int)newStart + frontBytes) = *symbolTableLevel;
     }
-    start2 = *(int *)(this + 4);
-    pvVar6 = (void *)((int)puVar3 + sVar9 + 4);
-    _memmove(pvVar6,param_2,start2 - (int)param_2);
-    iVar4 = *(int *)(this + 8) - (int)*(void **)this >> 2;
-    if (iVar4 != 0) {
-      std____default_alloc_template_true_0___deallocate(*(void **)this,iVar4 << 2);
+    oldFinish = *(int *)(this + 4);
+    backStart = (void *)((int)newStart + frontBytes + 4);
+    _memmove(backStart,position,oldFinish - (int)position);
+    oldCapacity = *(int *)(this + 8) - (int)*(void **)this >> 2;
+    if (oldCapacity != 0) {
+      std____default_alloc_template_true_0___deallocate(*(void **)this,oldCapacity << 2);
     }
-    *(int *)(this + 4) = (int)pvVar6 + (start2 - (int)param_2);
-    *(undefined4 **)this = puVar3;
-    *(uint *)(this + 8) = (int)puVar3 + uVar7;
+    *(int *)(this + 4) = (int)backStart + (oldFinish - (int)position);
+    *(undefined4 **)this = newStart;
+    *(uint *)(this + 8) = (int)newStart + lenBytes;
   }
   else {
-    iVar4 = 0;
-    if (start != (undefined4 *)0x0) {
-      *start = start[-1];
-      iVar4 = *(int *)(this + 4);
+    finishCursor = 0;
+    if (finish != (undefined4 *)0x0) {
+      *finish = finish[-1];
+      finishCursor = *(int *)(this + 4);
     }
-    *(int *)(this + 4) = iVar4 + 4;
-    uVar7 = (iVar4 + -4) - (int)param_2 & 0xfffffffc;
-    uVar8 = *symbolTableLevel;
-    _memmove((void *)(iVar4 - uVar7),param_2,uVar7);
-    *param_2 = uVar8;
+    *(int *)(this + 4) = finishCursor + 4;
+    moveBytes = (finishCursor + -4) - (int)position & 0xfffffffc;
+    xValue = *symbolTableLevel;
+    _memmove((void *)(finishCursor - moveBytes),position,moveBytes);
+    *position = xValue;
   }
   return;
 }

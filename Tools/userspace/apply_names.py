@@ -240,7 +240,7 @@ def apply_uses(lines, s, e, name, uses, allrows, declset):
                 at = d0
             elif os.environ.get('USE_DECL', 'first') == 'end':    # after the last simple declaration: gcc allocates -O0 slots in declaration order
                 at = max(i for i in range(d0, d1) if re.match(DECL2, lines[i])) + 1
-            lines.insert(at, '%s%s%s;' % (m.group(1), m.group(2), new)); e += 1
+            lines.insert(at, '%s%s%s;' % (m.group(1), re.sub(r'(\*) $', r'\1', m.group(2)), new)); e += 1     # `T * x;` -> `T *x;`: the first form is not a declaration for declblock(), so inserting it at the top would shift every #N anchor of the function
             created.setdefault(old, []).append(new)
     # when nothing uses `old` any more, its first new name takes over old's declaration slot (gcc -O0 orders commutative operands, and allocates frame
     # slots, by declaration order: keeping the order keeps the object code); otherwise old stays declared
