@@ -118,8 +118,8 @@ int FUN_0017bd78(ctx, param_2, param_3, param_4)
   return iVar5;
 }
 
-/* FUN_0017bf70 @ 0x17bf70 (392 bytes) */
-int FUN_0017bf70(ctx)
+/* ValueKey__foldDot3SingleLaneSource @ 0x17bf70 (392 bytes) */
+int ValueKey__foldDot3SingleLaneSource(ctx)
   int ctx;
 {
   int exprRecord;
@@ -145,7 +145,7 @@ int FUN_0017bf70(ctx)
     a3 = 1;
     a4 = 1;
     a5 = 0;
-    iVar3 = FUN_00176854(ctx,loopRemaining,1,1,1,0);
+    iVar3 = ValueKey__lanesAreUnset(ctx,loopRemaining,1,1,1,0);
     if (iVar3 != 0) {
       loopIndex = 0;
       piVar9 = &DAT_001e6134;
@@ -163,7 +163,7 @@ LAB_0017c0b0:
             FUN_001745ac(ctx);
             return 1;
           }
-          iVar6 = ((int (*)())FUN_0010ab40)((double)*pfVar4);
+          iVar6 = ((int (*)())outputScaleExponent)((double)*pfVar4);
           if (iVar6 != 0) {
             a0 = *(int **)(*(int *)(ctx + 0x238) + 0x30c);
             iVar6 = iVar6 + *(int *)(*(int *)(ctx + 0xb0) + 0x124);
@@ -184,8 +184,8 @@ LAB_0017c0b0:
   } while( true );
 }
 
-/* FUN_0017c0f8 @ 0x17c0f8 (332 bytes) */
-int FUN_0017c0f8(ctx)
+/* ValueKey__foldDot4UnitVectorSource @ 0x17c0f8 (332 bytes) */
+int ValueKey__foldDot4UnitVectorSource(ctx)
   int ctx;
 {
   int exprRecord;
@@ -328,8 +328,8 @@ int FUN_0017c244(ctx, param_2)
   return iVar4;
 }
 
-/* FUN_0017c41c @ 0x17c41c (136 bytes) */
-int FUN_0017c41c(ctx)
+/* ValueKey__replaceWithSource2IfSourcesEqual23 @ 0x17c41c (136 bytes) */
+int ValueKey__replaceWithSource2IfSourcesEqual23(ctx)
   int ctx;
 {
   uint uVar1;
@@ -490,8 +490,8 @@ int FUN_0017c5e0(ctx)
   } while( true );
 }
 
-/* FUN_0017c774 @ 0x17c774 (276 bytes) */
-int FUN_0017c774(ctx)
+/* ValueKey__foldMulByPlusMinusOne @ 0x17c774 (276 bytes) */
+int ValueKey__foldMulByPlusMinusOne(ctx)
   int ctx;
 {
   int exprRecord;
@@ -532,8 +532,8 @@ int FUN_0017c774(ctx)
   return 0;
 }
 
-/* FUN_0017c888 @ 0x17c888 (136 bytes) */
-int FUN_0017c888(ctx)
+/* ValueKey__replaceWithSource1IfSourcesEqual @ 0x17c888 (136 bytes) */
+int ValueKey__replaceWithSource1IfSourcesEqual(ctx)
   int ctx;
 {
   uint uVar1;
@@ -1064,8 +1064,8 @@ int FUN_0017d26c(ctx, param_2)
   return member0xb0;
 }
 
-/* FUN_0017d3f8 @ 0x17d3f8 (232 bytes) */
-int FUN_0017d3f8(param_1)
+/* ValueKey__foldCompareSameSourcesToConstant @ 0x17d3f8 (232 bytes) */
+int ValueKey__foldCompareSameSourcesToConstant(param_1)
   int param_1;
 {
   undefined4 *loopIndex;
@@ -1079,7 +1079,7 @@ int FUN_0017d3f8(param_1)
     loopRemaining = *(int *)(param_1 + 0xb0);
     if (((*(uint *)(loopRemaining + 0xb8) & 1) == (*(uint *)(loopRemaining + 0xd0) & 1)) &&
        ((*(uint *)(loopRemaining + 0xb8) >> 1 & 1) == (*(uint *)(loopRemaining + 0xd0) >> 1 & 1))) {
-      loopRemaining = ((bool (*)())FUN_0010b820)(loopRemaining,(double)FLOAT_001aa0d4,(double)FLOAT_001aa0d4);
+      loopRemaining = ((bool (*)())evaluateCompareFloats)(loopRemaining,(double)FLOAT_001aa0d4,(double)FLOAT_001aa0d4);
       uVar3 = 0x3f800000;
       if (loopRemaining == 0) {
         uVar3 = 0;
@@ -1106,8 +1106,8 @@ int FUN_0017d3f8(param_1)
   return 0;
 }
 
-/* FUN_0017d4e0 @ 0x17d4e0 (156 bytes) */
-int FUN_0017d4e0(ctx)
+/* ValueKey__replaceWithZeroIfSourcesEqual @ 0x17d4e0 (156 bytes) */
+int ValueKey__replaceWithZeroIfSourcesEqual(ctx)
   int ctx;
 {
   uint uVar1;
@@ -1135,8 +1135,8 @@ int FUN_0017d4e0(ctx)
   return 0;
 }
 
-/* FUN_0017d57c @ 0x17d57c (148 bytes) */
-int FUN_0017d57c(param_1)
+/* ValueKey__foldMulByZero @ 0x17d57c (148 bytes) */
+int ValueKey__foldMulByZero(param_1)
   int param_1;
 {
   bool bVar1;
@@ -1704,8 +1704,8 @@ int FUN_0017e02c(ctx, param_2, param_3)
   return;
 }
 
-/* FUN_0017e1f4 @ 0x17e1f4 (324 bytes) */
-int FUN_0017e1f4(ctx)
+/* ValueKey__foldMulPowerOfTwoIntoOutputScale @ 0x17e1f4 (324 bytes) */
+int ValueKey__foldMulPowerOfTwoIntoOutputScale(ctx)
   int ctx;
 {
   bool bVar1;
@@ -1730,9 +1730,9 @@ int FUN_0017e1f4(ctx)
       else {
         fparam_1 = -(double)local_38[0];
       }
-      iVar2 = ((undefined4 (*)())FUN_0010aafc)(fparam_1);
+      iVar2 = ((undefined4 (*)())isOutputScaleValue)(fparam_1);
       if (iVar2 != 0) {
-        iVar2 = ((int (*)())FUN_0010ab40)(fparam_1);
+        iVar2 = ((int (*)())outputScaleExponent)(fparam_1);
         a0 = *(int **)(*(int *)(ctx + 0x238) + 0x30c);
         iVar2 = iVar2 + *(int *)(*(int *)(ctx + 0xb0) + 0x124);
         iVar3 = (**(code **)(*a0 + 0xfc))(a0,iVar2,*(int *)(ctx + 0xb0),in_r6,in_r7,in_r8,a0);
@@ -1883,8 +1883,8 @@ int FUN_0017e3f4(ctx, param_2, param_3, param_4)
   return;
 }
 
-/* FUN_0017e658 @ 0x17e658 (112 bytes) */
-int FUN_0017e658(param_1)
+/* ValueKey__foldMadZeroAddend @ 0x17e658 (112 bytes) */
+int ValueKey__foldMadZeroAddend(param_1)
   int param_1;
 {
   int callResult;
@@ -1898,8 +1898,8 @@ int FUN_0017e658(param_1)
   return callResult != 0;
 }
 
-/* FUN_0017e6c8 @ 0x17e6c8 (280 bytes) */
-int FUN_0017e6c8(ctx)
+/* ValueKey__foldMadByPlusMinusOne @ 0x17e6c8 (280 bytes) */
+int ValueKey__foldMadByPlusMinusOne(ctx)
   int ctx;
 {
   bool bVar1;
@@ -2417,8 +2417,8 @@ int FUN_0017f1f8(ctx)
   return 1;
 }
 
-/* FUN_0017f3f8 @ 0x17f3f8 (412 bytes) */
-int FUN_0017f3f8(ctx, param_2)
+/* ValueKey__foldMinMaxOfNegatedPair @ 0x17f3f8 (412 bytes) */
+int ValueKey__foldMinMaxOfNegatedPair(ctx, param_2)
   int ctx;
   uint param_2;
 {
@@ -2481,23 +2481,23 @@ LAB_0017f514:
   return 0;
 }
 
-/* FUN_0017f594 @ 0x17f594 (8 bytes) */
-int FUN_0017f594(param_1)
+/* ValueKey__foldMaxOfNegatedPair @ 0x17f594 (8 bytes) */
+int ValueKey__foldMaxOfNegatedPair(param_1)
   undefined4 param_1;
 {
   undefined4 callResult;
   
-  callResult = ((int (*)())FUN_0017f3f8)(param_1,1);
+  callResult = ((int (*)())ValueKey__foldMinMaxOfNegatedPair)(param_1,1);
   return callResult;
 }
 
-/* FUN_0017f59c @ 0x17f59c (8 bytes) */
-int FUN_0017f59c(param_1)
+/* ValueKey__foldMinOfNegatedPair @ 0x17f59c (8 bytes) */
+int ValueKey__foldMinOfNegatedPair(param_1)
   undefined4 param_1;
 {
   undefined4 callResult;
   
-  callResult = ((int (*)())FUN_0017f3f8)(param_1,0);
+  callResult = ((int (*)())ValueKey__foldMinMaxOfNegatedPair)(param_1,0);
   return callResult;
 }
 
@@ -2618,12 +2618,12 @@ int FUN_0017f7ec(ctx)
   loopIndex2 = *(int *)(ctx + 0xb0);
   loopIndex = *(int *)(*(int *)(loopIndex2 + 0x88) + 8);
   if (loopIndex == 0x1d) {
-    FUN_00177ad0(ctx);
-    loopIndex = ((int (*)())FUN_0017c0f8)(ctx);
+    ValueKey__cancelNegatedSourcePair(ctx);
+    loopIndex = ((int (*)())ValueKey__foldDot4UnitVectorSource)(ctx);
     if (loopIndex != 0) {
       return 0;
     }
-    loopIndex = FUN_0017ab4c(ctx);
+    loopIndex = ValueKey__foldDotPowerOfTwoIntoOutputScale(ctx);
     if (loopIndex != 0) {
       return 1;
     }
@@ -2639,11 +2639,11 @@ joined_r0x0017f980:
       if (loopIndex != 0) {
         return 0;
       }
-      loopIndex = ((int (*)())FUN_0017c888)(ctx);
+      loopIndex = ((int (*)())ValueKey__replaceWithSource1IfSourcesEqual)(ctx);
       if (loopIndex != 0) {
         return 0;
       }
-      loopIndex = ((int (*)())FUN_0017f594)(ctx);
+      loopIndex = ((int (*)())ValueKey__foldMaxOfNegatedPair)(ctx);
       if (loopIndex != 0) {
         return 0;
       }
@@ -2666,17 +2666,17 @@ joined_r0x0017f980:
     }
     else if (loopIndex < 0x18) {
       if (loopIndex == 0x13) {
-        FUN_00177ad0(ctx);
-        loopIndex = ((int (*)())FUN_0017d57c)(ctx);
+        ValueKey__cancelNegatedSourcePair(ctx);
+        loopIndex = ((int (*)())ValueKey__foldMulByZero)(ctx);
         if (loopIndex != 0) {
           return 0;
         }
-        loopIndex = ((int (*)())FUN_0017c774)(ctx);
+        loopIndex = ((int (*)())ValueKey__foldMulByPlusMinusOne)(ctx);
         if (loopIndex != 0) {
           return 0;
         }
         loopIndex = Compiler__isOptionEnabled(*(undefined4 *)(ctx + 0x238),0xc);
-        if ((loopIndex != 0) && (loopIndex = ((int (*)())FUN_0017e1f4)(ctx), loopIndex != 0)) {
+        if ((loopIndex != 0) && (loopIndex = ((int (*)())ValueKey__foldMulPowerOfTwoIntoOutputScale)(ctx), loopIndex != 0)) {
           return 0;
         }
         loopIndex2 = 0;
@@ -2698,16 +2698,16 @@ joined_r0x0017f980:
       }
       else {
         if (loopIndex != 0x14) goto LAB_0017fe28;
-        FUN_00177ad0(ctx);
+        ValueKey__cancelNegatedSourcePair(ctx);
         loopIndex = ((int (*)())FUN_0017cd18)(ctx);
         if (loopIndex != 0) {
           return 0;
         }
-        loopIndex = ((int (*)())FUN_0017e6c8)(ctx);
+        loopIndex = ((int (*)())ValueKey__foldMadByPlusMinusOne)(ctx);
         if (loopIndex != 0) {
           return 1;
         }
-        loopIndex = ((int (*)())FUN_0017e658)(ctx);
+        loopIndex = ((int (*)())ValueKey__foldMadZeroAddend)(ctx);
         if (loopIndex != 0) {
           return 1;
         }
@@ -2736,12 +2736,12 @@ joined_r0x0017f980:
     else {
       if (loopIndex != 0x19) {
         if (loopIndex == 0x1c) {
-          FUN_00177ad0(ctx);
-          loopIndex = ((int (*)())FUN_0017bf70)(ctx);
+          ValueKey__cancelNegatedSourcePair(ctx);
+          loopIndex = ((int (*)())ValueKey__foldDot3SingleLaneSource)(ctx);
           if (loopIndex != 0) {
             return 0;
           }
-          loopIndex = FUN_0017ab4c(ctx);
+          loopIndex = ValueKey__foldDotPowerOfTwoIntoOutputScale(ctx);
           goto joined_r0x0017f980;
         }
 LAB_0017fe28:
@@ -2752,11 +2752,11 @@ LAB_0017fe28:
       if (loopIndex != 0) {
         return 0;
       }
-      loopIndex = ((int (*)())FUN_0017c888)(ctx);
+      loopIndex = ((int (*)())ValueKey__replaceWithSource1IfSourcesEqual)(ctx);
       if (loopIndex != 0) {
         return 0;
       }
-      loopIndex = ((int (*)())FUN_0017f59c)(ctx);
+      loopIndex = ((int (*)())ValueKey__foldMinOfNegatedPair)(ctx);
       if (loopIndex != 0) {
         return 0;
       }
@@ -2785,7 +2785,7 @@ LAB_0017fe28:
       if (loopIndex != 0) {
         return 0;
       }
-      loopIndex = ((int (*)())FUN_0017c41c)(ctx);
+      loopIndex = ((int (*)())ValueKey__replaceWithSource2IfSourcesEqual23)(ctx);
       if (loopIndex != 0) {
         return 0;
       }
@@ -2815,7 +2815,7 @@ LAB_0017fe28:
       if (loopIndex != 0) {
         return 0;
       }
-      loopIndex = ((int (*)())FUN_0017d3f8)(ctx);
+      loopIndex = ((int (*)())ValueKey__foldCompareSameSourcesToConstant)(ctx);
       if (loopIndex != 0) {
         return 0;
       }
@@ -2828,7 +2828,7 @@ LAB_0017fe28:
           if (*(int *)(loopIndex + 0x658) <= *(int *)(*(int *)(loopIndex + 0x6c4) + 0xa8))
           goto LAB_0017fe30;
           if ((*loopIndex3 == 0x7ffffffe) && (loopIndex = FUN_00176954(ctx,loopIndex2), loopIndex == 0)) {
-            FUN_00179894(ctx,loopIndex2);
+            ValueKey__foldCompareSameSourcesValueNumber(ctx,loopIndex2);
           }
         }
         bVar1 = loopIndex2 != 3;
@@ -3334,10 +3334,10 @@ int ValueKey__simplifyModifiersAndAddressing(key)
       do {
         if (*loopIndex6 != '\0') {
           iVar19 = IRInst__getOperandRecord(loopIndex8,iVar17);
-          iVar19 = FUN_00176518(uVar22,(uint)*(byte *)(loopIndex4 + iVar19 + 0x10));
+          iVar19 = ValueKey__sourceKindIs4(uVar22,(uint)*(byte *)(loopIndex4 + iVar19 + 0x10));
           if (iVar19 == 0) {
             iVar19 = IRInst__getOperandRecord(*(undefined4 *)(key + 0xb0),iVar17);
-            iVar19 = FUN_001764fc(uVar22,(uint)*(byte *)(loopIndex4 + iVar19 + 0x10));
+            iVar19 = ValueKey__sourceKindIs1(uVar22,(uint)*(byte *)(loopIndex4 + iVar19 + 0x10));
             if ((iVar19 == 0) || (!bVar3)) {
 LAB_00180a10:
               loopIndex8 = *(int **)(key + 0xb0);
@@ -3442,7 +3442,7 @@ LAB_00180a14: ;
   loopIndex8 = *(int **)(key + 0xb0);
   if (loopIndex8[0x20] == 0) {
 LAB_001818e8:
-    if (((loopIndex8[5] & 2U) != 0) || (iVar17 = FUN_001789d4(loopIndex8), iVar17 != 0))
+    if (((loopIndex8[5] & 2U) != 0) || (iVar17 = IRInst__isOpcode8bOr8c(loopIndex8), iVar17 != 0))
     goto LAB_00180cb4;
   }
   else {
@@ -3501,7 +3501,7 @@ LAB_00180cb4:
               IRInst__setOperandRef(inst,1,*(undefined4 *)(iVar19 + 0x8c));
               IRInst__setOperandSource(inst,1,iVar19,0,*(undefined4 *)(key + 0x238));
               uVar21 = ~(uVar18 & local_9c);
-              FUN_000f3764(&local_70,uVar18 & local_9c);
+              laneBytes__clearSetLanes(&local_70,uVar18 & local_9c);
               *(undefined4 *)((int)inst + 0x9c) = local_70;
               FUN_000f370c(&local_6c,local_70);
               uVar22 = local_6c;
@@ -3556,7 +3556,7 @@ LAB_00181100:
                   loopIndex5 = IRInst__getOperandRecord(callResult,0);
                   WriteMask__fromSelectWord(&local_68,*(undefined4 *)(loopIndex5 + 0x10));
                   uVar18 = local_68 & local_9c;
-                  FUN_000f3764(&local_64,uVar18);
+                  laneBytes__clearSetLanes(&local_64,uVar18);
                   *(undefined4 *)((int)inst2 + 0x9c) = local_64;
                   FUN_000f370c(&local_60,local_64);
                   uVar22 = local_60;
@@ -3619,7 +3619,7 @@ LAB_00181220:
     }
     loopIndex8 = *(int **)(key + 0xb0);
   }
-  if (((loopIndex8[5] & 2U) == 0) && (iVar17 = FUN_001789d4(loopIndex8), iVar17 == 0)) {
+  if (((loopIndex8[5] & 2U) == 0) && (iVar17 = IRInst__isOpcode8bOr8c(loopIndex8), iVar17 == 0)) {
     return changed;
   }
 code_r0x001812b0:
@@ -5443,7 +5443,7 @@ code_r0x00184480:
                 *puVar5 = sourceDef;
               } while (loopIndex <= (int)uVar1);
             }
-            FUN_001940f0(puVar9,FUN_001819b4);
+            Vector__shellSort(puVar9,FUN_001819b4);
             Vector__removeAt(puVar10,vectorAlloc[2] + -1);
             loopIndex2 = vectorAlloc[2];
             if (loopIndex2 < *puVar10) {
@@ -5552,7 +5552,7 @@ code_r0x00184480:
           *puVar5 = sourceDef;
         } while (loopIndex <= (int)uVar1);
       }
-      FUN_001940f0(puVar9,FUN_001819b4);
+      Vector__shellSort(puVar9,FUN_001819b4);
       if (0 < (int)uVar1) {
         loopIndex2 = 0;
         loopIndex = 0;
@@ -5657,8 +5657,8 @@ int pass_minreg_order(scheduler, program)
   return Program__beginPass(program,(int)"minreg_order");
 }
 
-/* FUN_00184bcc @ 0x184bcc (36 bytes) */
-int FUN_00184bcc(param_1, param_2)
+/* compareIntsAscending @ 0x184bcc (36 bytes) */
+int compareIntsAscending(param_1, param_2)
   uint param_1;
   uint param_2;
 {
@@ -5869,7 +5869,7 @@ LAB_00185098:
     uVar8 = 0;
   }
   else {
-    FUN_001940f0(param_1[4],FUN_00184bcc);
+    Vector__shellSort(param_1[4],compareIntsAscending);
     loopIndex = (uint *)param_1[4];
     uVar6 = loopIndex[1];
     if (0 < (int)uVar6) {
@@ -6070,7 +6070,7 @@ LAB_00185628:
                 dVar22 = (double)(local_e0 * fVar2);
                 IROperand__setModifierBits(piVar5 + 0x2f,1,0);
                 IROperand__setModifierBits(piVar5 + 0x2f,2,0);
-                ((void (*)())FUN_000f79c4)(piVar5,param_3,2,dVar22,dVar22,dVar22,dVar22);
+                ((void (*)())IRInst__makeLiteralVec4Float)(piVar5,param_3,2,dVar22,dVar22,dVar22,dVar22);
               }
               else if (loopRemaining2 == 0x12) goto LAB_00185558;
               goto LAB_00185964;
@@ -6150,7 +6150,7 @@ LAB_00185558:
               *(undefined4 *)(loopRemaining2 + 0x10) = local_88;
               IROperand__setModifierBits(piVar5 + 0x35,2,uVar3 >> 1 & 1);
               IROperand__setModifierBits(piVar5 + 0x35,1,uVar3 & 1);
-              ((void (*)())FUN_000f79c4)(piVar5,param_3,2,dVar22,dVar22,dVar22,dVar22);
+              ((void (*)())IRInst__makeLiteralVec4Float)(piVar5,param_3,2,dVar22,dVar22,dVar22,dVar22);
               Block__insertInstAfter(local_78,local_74,piVar5);
               goto LAB_00185964;
             }

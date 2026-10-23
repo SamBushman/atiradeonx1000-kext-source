@@ -265,7 +265,7 @@ LAB_00191c54:
       loopIndex2 = loopIndex2 + 1;
       loopRemaining = loopRemaining + -1;
     } while (loopRemaining != 0);
-    ((void (*)())FUN_000f79c4)(inst,*(undefined4 *)(param_5 + 0x6c4),param_3,(double)GH_U2F((unsigned int)(local_50)),
+    ((void (*)())IRInst__makeLiteralVec4Float)(inst,*(undefined4 *)(param_5 + 0x6c4),param_3,(double)GH_U2F((unsigned int)(local_50)),
                  (double)fStack_4c,(double)fStack_48,(double)fStack_44);
     uVar4 = 1;
   }
@@ -702,9 +702,9 @@ int FUN_001922c4(param_1, param_2, inst, param_4)
     IROperand__setModifierBits(inst + 0x29,1,uVar8);
     IROperand__setModifierBits(inst + 0x29,2,uVar7);
     dVar13 = (double)FLOAT_001aa0e8;
-    ((void (*)())FUN_000f79c4)(inst,param_4,uVar10,dVar13,dVar13,dVar13,dVar13);
+    ((void (*)())IRInst__makeLiteralVec4Float)(inst,param_4,uVar10,dVar13,dVar13,dVar13,dVar13);
     dVar13 = (double)FLOAT_001aa0d4;
-    ((void (*)())FUN_000f79c4)(inst,param_4,uVar9,dVar13,dVar13,dVar13,dVar13);
+    ((void (*)())IRInst__makeLiteralVec4Float)(inst,param_4,uVar9,dVar13,dVar13,dVar13,dVar13);
     inst[0x25] = inst[0x53];
     inst[0x26] = 0;
     operandRecord = IRInst__getOperandRecord(inst2,0);
@@ -1468,8 +1468,8 @@ int FUN_00193e74(param_1, param_2, param_3)
   return callResult;
 }
 
-/* FUN_00193eb8 @ 0x193eb8 (76 bytes) */
-int FUN_00193eb8(param_1)
+/* Arena__bytesInUse @ 0x193eb8 (76 bytes) */
+int Arena__bytesInUse(param_1)
   int param_1;
 {
   int *piVar1;
@@ -1618,8 +1618,8 @@ int DList__count(list)
   return count;
 }
 
-/* FUN_00194060 @ 0x194060 (72 bytes) */
-int FUN_00194060(param_1)
+/* DListNode__ctor_194060 @ 0x194060 (72 bytes) */
+int DListNode__ctor_194060(param_1)
   undefined4 *param_1;
 {
   undefined *puVar1;
@@ -1654,8 +1654,8 @@ int DListNode__init(param_1)
   return;
 }
 
-/* FUN_001940f0 @ 0x1940f0 (280 bytes) */
-int FUN_001940f0(param_1, param_2)
+/* Vector__shellSort @ 0x1940f0 (280 bytes) */
+int Vector__shellSort(param_1, param_2)
   int param_1;
   code *param_2;
 {
@@ -1812,146 +1812,146 @@ LAB_001943c4:
   return found;
 }
 
-/* FUN_001943f0 @ 0x1943f0 (276 bytes) */
-int FUN_001943f0(param_1)
-  uint *param_1;
+/* HashTable__destroy_1943f0 @ 0x1943f0 (276 bytes) */
+int HashTable__destroy_1943f0(table)
+  uint *table;
 {
   uint uVar1;
-  int *piVar2;
+  int *slot;
   uint loopIndex;
-  int iVar4;
+  int elementBlock;
   uint loopIndex2;
-  uint *puVar6;
+  uint *bucket;
   
-  uVar1 = *param_1;
+  uVar1 = *table;
   if (uVar1 == 0) {
-    loopIndex = param_1[2];
+    loopIndex = table[2];
   }
   else {
-    loopIndex = param_1[2];
+    loopIndex = table[2];
     loopIndex2 = 0;
     do {
-      puVar6 = *(uint **)(loopIndex + loopIndex2 * 4);
-      if (puVar6 != (uint *)0x0) {
-        uVar1 = puVar6[1];
+      bucket = *(uint **)(loopIndex + loopIndex2 * 4);
+      if (bucket != (uint *)0x0) {
+        uVar1 = bucket[1];
         if (uVar1 != 0) {
           loopIndex = 0;
           do {
-            if (loopIndex < *puVar6) {
+            if (loopIndex < *bucket) {
               if (uVar1 <= loopIndex) {
-                _memset(uVar1 * 4 + puVar6[2],0,(loopIndex - uVar1) * 4 + 4);
-                puVar6[1] = loopIndex + 1;
+                _memset(uVar1 * 4 + bucket[2],0,(loopIndex - uVar1) * 4 + 4);
+                bucket[1] = loopIndex + 1;
               }
-              piVar2 = (int *)(loopIndex * 4 + puVar6[2]);
+              slot = (int *)(loopIndex * 4 + bucket[2]);
             }
             else {
-              piVar2 = (int *)((int (*)())Vector__elementRefGrow)(puVar6,loopIndex);
+              slot = (int *)((int (*)())Vector__elementRefGrow)(bucket,loopIndex);
             }
             loopIndex = loopIndex + 1;
-            iVar4 = *piVar2;
-            if (iVar4 != 0) {
-              ((int (*)())Arena__free)(*(undefined4 *)(iVar4 + -4),iVar4 + -4);
+            elementBlock = *slot;
+            if (elementBlock != 0) {
+              ((int (*)())Arena__free)(*(undefined4 *)(elementBlock + -4),elementBlock + -4);
             }
-            uVar1 = puVar6[1];
+            uVar1 = bucket[1];
           } while (loopIndex < uVar1);
-          loopIndex = param_1[2];
+          loopIndex = table[2];
         }
-        ((int (*)())Arena__free)(param_1[5],*(undefined4 *)(loopIndex + loopIndex2 * 4));
-        uVar1 = *param_1;
-        loopIndex = param_1[2];
+        ((int (*)())Arena__free)(table[5],*(undefined4 *)(loopIndex + loopIndex2 * 4));
+        uVar1 = *table;
+        loopIndex = table[2];
       }
       loopIndex2 = loopIndex2 + 1;
     } while (loopIndex2 < uVar1);
   }
-  return ((int (*)())Arena__free)(param_1[5],loopIndex);
+  return ((int (*)())Arena__free)(table[5],loopIndex);
 }
 
-/* FUN_00194504 @ 0x194504 (276 bytes) */
-int FUN_00194504(param_1)
-  uint *param_1;
+/* HashTable__destroy_194504 @ 0x194504 (276 bytes) */
+int HashTable__destroy_194504(table)
+  uint *table;
 {
   uint uVar1;
-  int *piVar2;
+  int *slot;
   uint loopIndex;
-  int iVar4;
+  int elementBlock;
   uint loopIndex2;
-  uint *puVar6;
+  uint *bucket;
   
-  uVar1 = *param_1;
+  uVar1 = *table;
   if (uVar1 == 0) {
-    loopIndex = param_1[2];
+    loopIndex = table[2];
   }
   else {
-    loopIndex = param_1[2];
+    loopIndex = table[2];
     loopIndex2 = 0;
     do {
-      puVar6 = *(uint **)(loopIndex + loopIndex2 * 4);
-      if (puVar6 != (uint *)0x0) {
-        uVar1 = puVar6[1];
+      bucket = *(uint **)(loopIndex + loopIndex2 * 4);
+      if (bucket != (uint *)0x0) {
+        uVar1 = bucket[1];
         if (uVar1 != 0) {
           loopIndex = 0;
           do {
-            if (loopIndex < *puVar6) {
+            if (loopIndex < *bucket) {
               if (uVar1 <= loopIndex) {
-                _memset(uVar1 * 4 + puVar6[2],0,(loopIndex - uVar1) * 4 + 4);
-                puVar6[1] = loopIndex + 1;
+                _memset(uVar1 * 4 + bucket[2],0,(loopIndex - uVar1) * 4 + 4);
+                bucket[1] = loopIndex + 1;
               }
-              piVar2 = (int *)(loopIndex * 4 + puVar6[2]);
+              slot = (int *)(loopIndex * 4 + bucket[2]);
             }
             else {
-              piVar2 = (int *)((int (*)())Vector__elementRefGrow)(puVar6,loopIndex);
+              slot = (int *)((int (*)())Vector__elementRefGrow)(bucket,loopIndex);
             }
             loopIndex = loopIndex + 1;
-            iVar4 = *piVar2;
-            if (iVar4 != 0) {
-              ((int (*)())Arena__free)(*(undefined4 *)(iVar4 + -4),iVar4 + -4);
+            elementBlock = *slot;
+            if (elementBlock != 0) {
+              ((int (*)())Arena__free)(*(undefined4 *)(elementBlock + -4),elementBlock + -4);
             }
-            uVar1 = puVar6[1];
+            uVar1 = bucket[1];
           } while (loopIndex < uVar1);
-          loopIndex = param_1[2];
+          loopIndex = table[2];
         }
-        ((int (*)())Arena__free)(param_1[5],*(undefined4 *)(loopIndex + loopIndex2 * 4));
-        uVar1 = *param_1;
-        loopIndex = param_1[2];
+        ((int (*)())Arena__free)(table[5],*(undefined4 *)(loopIndex + loopIndex2 * 4));
+        uVar1 = *table;
+        loopIndex = table[2];
       }
       loopIndex2 = loopIndex2 + 1;
     } while (loopIndex2 < uVar1);
   }
-  return ((int (*)())Arena__free)(param_1[5],loopIndex);
+  return ((int (*)())Arena__free)(table[5],loopIndex);
 }
 
-/* FUN_00194618 @ 0x194618 (264 bytes) */
-int FUN_00194618(param_1, param_2)
-  int *param_1;
-  undefined4 param_2;
+/* HashTable__findEntry @ 0x194618 (264 bytes) */
+int HashTable__findEntry(table, key)
+  int *table;
+  undefined4 key;
 {
   uint uVar1;
-  undefined4 *puVar2;
+  undefined4 *slot;
   int callResult;
   uint loopIndex;
-  uint *puVar5;
+  uint *bucket;
   
-  uVar1 = (*(code *)param_1[4])(param_2,param_2);
-  puVar5 = *(uint **)((uVar1 & *param_1 - 1U) * 4 + param_1[2]);
-  if ((puVar5 != (uint *)0x0) && (uVar1 = puVar5[1], uVar1 != 0)) {
+  uVar1 = (*(code *)table[4])(key,key);
+  bucket = *(uint **)((uVar1 & *table - 1U) * 4 + table[2]);
+  if ((bucket != (uint *)0x0) && (uVar1 = bucket[1], uVar1 != 0)) {
     loopIndex = 0;
     do {
-      if (loopIndex < *puVar5) {
+      if (loopIndex < *bucket) {
         if (uVar1 <= loopIndex) {
-          _memset(uVar1 * 4 + puVar5[2],0,(loopIndex - uVar1) * 4 + 4);
-          puVar5[1] = loopIndex + 1;
+          _memset(uVar1 * 4 + bucket[2],0,(loopIndex - uVar1) * 4 + 4);
+          bucket[1] = loopIndex + 1;
         }
-        puVar2 = (undefined4 *)(loopIndex * 4 + puVar5[2]);
+        slot = (undefined4 *)(loopIndex * 4 + bucket[2]);
       }
       else {
-        puVar2 = (undefined4 *)((int (*)())Vector__elementRefGrow)(puVar5,loopIndex);
+        slot = (undefined4 *)((int (*)())Vector__elementRefGrow)(bucket,loopIndex);
       }
-      puVar2 = (undefined4 *)*puVar2;
-      callResult = (*(code *)param_1[3])(*puVar2,param_2);
+      slot = (undefined4 *)*slot;
+      callResult = (*(code *)table[3])(*slot,key);
       if (callResult == 0) {
-  return puVar2;
+  return slot;
       }
-      uVar1 = puVar5[1];
+      uVar1 = bucket[1];
       loopIndex = loopIndex + 1;
     } while (loopIndex < uVar1);
   }
@@ -2102,8 +2102,8 @@ int FUN_00194a94(param_1, param_2)
   return ((int (*)())FUN_00194938)(param_1);
 }
 
-/* FUN_00194aa8 @ 0x194aa8 (260 bytes) */
-int FUN_00194aa8(param_1)
+/* HashTable__grow @ 0x194aa8 (260 bytes) */
+int HashTable__grow(param_1)
   uint *param_1;
 {
   uint allocation3;
@@ -2246,14 +2246,14 @@ int HashTable__insert(param_1, param_2)
   puVar3 = (undefined4 *)((int (*)())Vector__insertAt)(iVar5,0);
   *puVar3 = param_2;
   if (*param_1 < *(uint *)(iVar5 + 4)) {
-    ((int (*)())FUN_00194aa8)(param_1);
+    ((int (*)())HashTable__grow)(param_1);
   }
   param_1[1] = param_1[1] + 1;
   return;
 }
 
-/* FUN_00194e44 @ 0x194e44 (260 bytes) */
-int FUN_00194e44(param_1)
+/* HashTable__grow_194e44 @ 0x194e44 (260 bytes) */
+int HashTable__grow_194e44(param_1)
   uint *param_1;
 {
   uint allocation3;
@@ -2365,71 +2365,71 @@ int FUN_00194e44(param_1)
   return;
 }
 
-/* FUN_001950e0 @ 0x1950e0 (208 bytes) */
-int FUN_001950e0(param_1, param_2, param_3)
-  uint *param_1;
-  uint param_2;
-  uint param_3;
+/* HashTable__insert_1950e0 @ 0x1950e0 (208 bytes) */
+int HashTable__insert_1950e0(table, key, value)
+  uint *table;
+  uint key;
+  uint value;
 {
   uint allocation2;
   uint uVar1;
   uint *allocation;
-  undefined4 *puVar3;
+  undefined4 *slot;
   int iVar4;
   uint loopIndex;
-  uint *puVar6;
+  uint *bucket;
   
-  uVar1 = (*(code *)param_1[4])(param_2,param_2,param_3);
-  loopIndex = param_1[2];
-  iVar4 = (uVar1 & *param_1 - 1) * 4;
+  uVar1 = (*(code *)table[4])(key,key,value);
+  loopIndex = table[2];
+  iVar4 = (uVar1 & *table - 1) * 4;
   if (*(int *)(iVar4 + loopIndex) == 0) {
-    uVar1 = param_1[5];
+    uVar1 = table[5];
     allocation = (uint *)((int (*)())Arena__alloc)(uVar1,0x14);
     *allocation = uVar1;
-    uVar1 = param_1[5];
+    uVar1 = table[5];
     allocation[1] = 2;
     allocation[2] = 0;
     allocation[4] = uVar1;
     allocation2 = ((int (*)())Arena__alloc)(uVar1,8);
     allocation[3] = allocation2;
     *(uint **)(iVar4 + loopIndex) = allocation + 1;
-    loopIndex = param_1[2];
+    loopIndex = table[2];
   }
-  uVar1 = param_1[5];
-  puVar6 = *(uint **)(iVar4 + loopIndex);
+  uVar1 = table[5];
+  bucket = *(uint **)(iVar4 + loopIndex);
   allocation = (uint *)((int (*)())Arena__alloc)(uVar1,0xc);
   *allocation = uVar1;
-  allocation[1] = param_2;
-  allocation[2] = param_3;
-  uVar1 = puVar6[1];
+  allocation[1] = key;
+  allocation[2] = value;
+  uVar1 = bucket[1];
   if (uVar1 != 0) {
     loopIndex = 0;
     do {
-      if (loopIndex < *puVar6) {
+      if (loopIndex < *bucket) {
         if (uVar1 <= loopIndex) {
-          _memset(uVar1 * 4 + puVar6[2],0,(loopIndex - uVar1) * 4 + 4);
-          puVar6[1] = loopIndex + 1;
+          _memset(uVar1 * 4 + bucket[2],0,(loopIndex - uVar1) * 4 + 4);
+          bucket[1] = loopIndex + 1;
         }
-        puVar3 = (undefined4 *)(loopIndex * 4 + puVar6[2]);
+        slot = (undefined4 *)(loopIndex * 4 + bucket[2]);
       }
       else {
-        puVar3 = (undefined4 *)((int (*)())Vector__elementRefGrow)(puVar6,loopIndex);
+        slot = (undefined4 *)((int (*)())Vector__elementRefGrow)(bucket,loopIndex);
       }
       loopIndex = loopIndex + 1;
-      puVar3 = (undefined4 *)*puVar3;
-      iVar4 = (*(code *)param_1[3])(*puVar3,param_2);
-      if (((iVar4 == 0) && (param_3 == puVar3[1])) && (allocation + 1 != (uint *)0x0)) {
+      slot = (undefined4 *)*slot;
+      iVar4 = (*(code *)table[3])(*slot,key);
+      if (((iVar4 == 0) && (value == slot[1])) && (allocation + 1 != (uint *)0x0)) {
         ((int (*)())Arena__free)(*allocation,allocation);
       }
-      uVar1 = puVar6[1];
+      uVar1 = bucket[1];
     } while (loopIndex < uVar1);
   }
-  puVar3 = (undefined4 *)((int (*)())Vector__insertAt)(puVar6,0);
-  *puVar3 = allocation + 1;
-  if (*param_1 < puVar6[1]) {
-    ((int (*)())FUN_00194e44)(param_1);
+  slot = (undefined4 *)((int (*)())Vector__insertAt)(bucket,0);
+  *slot = allocation + 1;
+  if (*table < bucket[1]) {
+    ((int (*)())HashTable__grow_194e44)(table);
   }
-  param_1[1] = param_1[1] + 1;
+  table[1] = table[1] + 1;
   return;
 }
 

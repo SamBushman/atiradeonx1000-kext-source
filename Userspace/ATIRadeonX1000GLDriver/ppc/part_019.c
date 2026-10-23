@@ -1,9 +1,9 @@
 #include "decls.h"
 
-/* FUN_000d4e08 @ 0xd4e08 (92 bytes) */
-int FUN_000d4e08(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 *param_1;
-  int param_2;
+/* scDumpPixelProgramPsn @ 0xd4e08 (92 bytes) */
+int scDumpPixelProgramPsn(sinkRecord, shaderState, param_3, param_4, param_5, param_6, param_7, param_8)
+  undefined4 *sinkRecord;
+  int shaderState;
   undefined4 param_3;
   undefined4 param_4;
   undefined4 param_5;
@@ -11,42 +11,42 @@ int FUN_000d4e08(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined4 param_7;
   undefined4 param_8;
 {
-  DAT_001fa61c = *param_1;
-  DAT_001fa618 = param_1[1];
-  FUN_000d183c(param_2 + 0x64c,"SC Generated Shader",0,param_4,param_5,param_6,DAT_001fa618,param_8)
+  DAT_001fa61c = *sinkRecord;
+  DAT_001fa618 = sinkRecord[1];
+  FUN_000d183c(shaderState + 0x64c,"SC Generated Shader",0,param_4,param_5,param_6,DAT_001fa618,param_8)
   ;
   return 1;
 }
 
-/* FUN_000d4e64 @ 0xd4e64 (40 bytes) */
-int FUN_000d4e64()
+/* scDumpPixelProgramToStringStub @ 0xd4e64 (40 bytes) */
+int scDumpPixelProgramToStringStub()
 {
   undefined1 auStack_28 [40];
   
-  FUN_000d4df8(auStack_28);
+  psnClearSinkRecord2(auStack_28);
   return 0;
 }
 
-/* FUN_000d4e8c @ 0xd4e8c (60 bytes) */
-int FUN_000d4e8c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+/* scDumpPixelProgram @ 0xd4e8c (60 bytes) */
+int scDumpPixelProgram(sinkContext, shaderState, optionsArg, sinkFn, param_5, param_6, param_7)
+  undefined4 sinkContext;
+  undefined4 shaderState;
+  undefined4 optionsArg;
+  undefined4 sinkFn;
   undefined4 param_5;
   undefined4 param_6;
   undefined4 param_7;
 {
-  undefined4 uVar1;
+  undefined4 sinkFnCopy;
   undefined4 in_r10;
-  undefined4 local_38;
-  undefined4 local_34;
+  undefined4 sinkFnField;
+  undefined4 sinkContextField;
   
-  uVar1 = param_4;
-  FUN_000d4df8(&local_38);
-  local_38 = param_4;
-  local_34 = param_1;
-  ((int (*)())FUN_000d4e08)(&local_38,param_2,param_3,uVar1,param_5,param_6,param_7,in_r10);
+  sinkFnCopy = sinkFn;
+  psnClearSinkRecord2(&sinkFnField);
+  sinkFnField = sinkFn;
+  sinkContextField = sinkContext;
+  ((int (*)())scDumpPixelProgramPsn)(&sinkFnField,shaderState,optionsArg,sinkFnCopy,param_5,param_6,param_7,in_r10);
   return 0;
 }
 
@@ -2234,8 +2234,8 @@ int FUN_000d9b58(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   return -1;
 }
 
-/* FUN_000d9bac @ 0xd9bac (228 bytes) */
-undefined4 FUN_000d9bac(undefined4 param_1,int param_2,undefined4 param_3,int param_4,int param_5,int param_6,double fparam_1)
+/* scStoreConstantComponent @ 0xd9bac (228 bytes) */
+undefined4 scStoreConstantComponent(undefined4 param_1,int param_2,undefined4 param_3,int param_4,int param_5,int param_6,double fparam_1)
 {
   int iVar1;
   uint uVar2;
@@ -2724,8 +2724,8 @@ code_r0x000da340:
   return;
 }
 
-/* FUN_000da394 @ 0xda394 (68 bytes) */
-int FUN_000da394(param_1, param_2, param_3)
+/* scSetCallbackTables @ 0xda394 (68 bytes) */
+int scSetCallbackTables(param_1, param_2, param_3)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -2772,8 +2772,8 @@ int FUN_000da438(param_1, param_2)
   return;
 }
 
-/* FUN_000da458 @ 0xda458 (96 bytes) */
-int FUN_000da458(param_1, param_2)
+/* scDestroyCompilerObject @ 0xda458 (96 bytes) */
+int scDestroyCompilerObject(param_1, param_2)
   undefined4 *param_1;
   undefined4 param_2;
 {
@@ -2913,35 +2913,35 @@ double FUN_000da78c(uint param_1,double fparam_1)
   return dVar3;
 }
 
-/* FUN_000da8a8 @ 0xda8a8 (40 bytes) */
-int FUN_000da8a8(param_1)
-  undefined4 *param_1;
+/* ildisInitContext @ 0xda8a8 (40 bytes) */
+int ildisInitContext(disassembler)
+  undefined4 *disassembler;
 {
-  param_1[0x87] = 0;
-  *param_1 = 0;
-  param_1[0x84] = 0;
-  param_1[0x85] = 0;
-  param_1[0x86] = 0;
-  return _memset(param_1 + 4,0,0x200);
+  disassembler[0x87] = 0;
+  *disassembler = 0;
+  disassembler[0x84] = 0;
+  disassembler[0x85] = 0;
+  disassembler[0x86] = 0;
+  return _memset(disassembler + 4,0,0x200);
 }
 
-/* FUN_000da8d0 @ 0xda8d0 (16 bytes) */
-int FUN_000da8d0(param_1)
-  int param_1;
+/* ildisSkipToken @ 0xda8d0 (16 bytes) */
+int ildisSkipToken(disassembler)
+  int disassembler;
 {
-  *(int *)(param_1 + 8) = *(int *)(param_1 + 8) + 4;
+  *(int *)(disassembler + 8) = *(int *)(disassembler + 8) + 4;
   return;
 }
 
-/* FUN_000da8e0 @ 0xda8e0 (20 bytes) */
-int FUN_000da8e0(param_1, param_2)
-  int param_1;
-  int param_2;
+/* ildisSetIndent @ 0xda8e0 (20 bytes) */
+int ildisSetIndent(disassembler, indent)
+  int disassembler;
+  int indent;
 {
-  if (param_2 < 0) {
-    param_2 = 0;
+  if (indent < 0) {
+    indent = 0;
   }
-  *(int *)(param_1 + 0x21c) = param_2;
+  *(int *)(disassembler + 0x21c) = indent;
   return;
 }
 
@@ -2957,52 +2957,52 @@ int returnZero_da8fc()
   return 0;
 }
 
-/* FUN_000da904 @ 0xda904 (128 bytes) */
-int FUN_000da904(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+/* ildisAppendf @ 0xda904 (128 bytes) */
+int ildisAppendf(disassembler, format, fmtArgR5, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10)
+  int disassembler;
+  undefined4 format;
+  undefined4 fmtArgR5;
+  undefined4 fmtArgR6;
+  undefined4 fmtArgR7;
+  undefined4 fmtArgR8;
+  undefined4 fmtArgR9;
+  undefined4 fmtArgR10;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  uint uVar1;
+  unsigned int ghidra_home[8] = { disassembler, format, fmtArgR5, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  uint currentLength;
   undefined1 auStack_224 [536];
   
-  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = param_4;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = param_5;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = param_6;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = param_7;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = param_8;
-  printf_LDBLStub_1a3428(auStack_224,0x200,param_2,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)),param_5,param_6,param_7,param_8);
-  uVar1 = _strlen(param_1 + 0x10);
-  if (uVar1 <= 0x1ff - uVar1) {
-    _strcat(param_1 + 0x10,auStack_224);
+  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = fmtArgR5;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = fmtArgR6;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = fmtArgR7;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = fmtArgR8;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = fmtArgR9;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = fmtArgR10;
+  printf_LDBLStub_1a3428(auStack_224,0x200,format,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)),fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  currentLength = _strlen(disassembler + 0x10);
+  if (currentLength <= 0x1ff - currentLength) {
+    _strcat(disassembler + 0x10,auStack_224);
   }
   return;
 }
 
-/* FUN_000da984 @ 0xda984 (120 bytes) */
-int FUN_000da984(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+/* ildisFlushLine @ 0xda984 (120 bytes) */
+int ildisFlushLine(disassembler, passThroughR4, passThroughR5, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10)
+  int disassembler;
+  undefined4 passThroughR4;
+  undefined4 passThroughR5;
+  undefined4 fmtArgR6;
+  undefined4 fmtArgR7;
+  undefined4 fmtArgR8;
+  undefined4 fmtArgR9;
+  undefined4 fmtArgR10;
 {
-  if (*(int *)(param_1 + 0x210) != 0) {
-    ((int (*)())FUN_000da904)(param_1,"\r\n",param_3,param_4,param_5,param_6,param_7,param_8);
-    (*(code *)**(undefined4 **)(param_1 + 0x210))
-              (*(undefined4 *)(param_1 + 0x214),"",param_1 + 0x10,0);
+  if (*(int *)(disassembler + 0x210) != 0) {
+    ((int (*)())ildisAppendf)(disassembler,"\r\n",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+    (*(code *)**(undefined4 **)(disassembler + 0x210))
+              (*(undefined4 *)(disassembler + 0x214),"",disassembler + 0x10,0);
   }
-  *(undefined1 *)(param_1 + 0x10) = 0;
+  *(undefined1 *)(disassembler + 0x10) = 0;
   return;
 }
 
@@ -3033,7 +3033,7 @@ int FUN_000da9fc(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     uVar2 = param_3;
     do {
       iVar3 = iVar3 + 1;
-      ((int (*)())FUN_000da904)(param_1,"    ",uVar2,param_4,param_5,param_6,param_7,param_8);
+      ((int (*)())ildisAppendf)(param_1,"    ",uVar2,param_4,param_5,param_6,param_7,param_8);
     } while (param_2 != iVar3);
   }
   printf_LDBLStub_1a3428(auStack_234,0x200,param_3,&(*(unsigned int *)((unsigned char *)ghidra_home + 12)),param_5,param_6,param_7,param_8);
@@ -3044,580 +3044,580 @@ int FUN_000da9fc(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   return;
 }
 
-/* FUN_000daab0 @ 0xdaab0 (412 bytes) */
-int FUN_000daab0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  uint param_2;
-  int param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+/* ildisPrintNegateComponents @ 0xdaab0 (412 bytes) */
+int ildisPrintNegateComponents(disassembler, negateWord, useRgbaLetters, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10)
+  undefined4 disassembler;
+  uint negateWord;
+  int useRgbaLetters;
+  undefined4 fmtArgR6;
+  undefined4 fmtArgR7;
+  undefined4 fmtArgR8;
+  undefined4 fmtArgR9;
+  undefined4 fmtArgR10;
 {
-  bool bVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  char *pcVar5;
-  int iVar6;
+  bool negateX;
+  uint negateZ;
+  uint negateY;
+  uint negateW;
+  char *componentText;
+  int useRgbaLettersCopy;
   
-  bVar1 = (param_2 >> 3 & 1) != 0;
-  uVar3 = param_2 >> 7 & 1;
-  uVar2 = param_2 >> 0xb & 1;
-  uVar4 = param_2 >> 0xf & 1;
-  if ((((!bVar1) && (uVar3 == 0)) && (uVar2 == 0)) && (uVar4 == 0)) {
+  negateX = (negateWord >> 3 & 1) != 0;
+  negateY = negateWord >> 7 & 1;
+  negateZ = negateWord >> 0xb & 1;
+  negateW = negateWord >> 0xf & 1;
+  if ((((!negateX) && (negateY == 0)) && (negateZ == 0)) && (negateW == 0)) {
     return;
   }
-  iVar6 = param_3;
-  ((int (*)())FUN_000da904)(param_1,"_neg(",param_3,param_4,param_5,param_6,param_7,param_8);
-  if (bVar1) {
-    if (param_3 == 0) {
-      pcVar5 = "x";
+  useRgbaLettersCopy = useRgbaLetters;
+  ((int (*)())ildisAppendf)(disassembler,"_neg(",useRgbaLetters,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  if (negateX) {
+    if (useRgbaLetters == 0) {
+      componentText = "x";
     }
     else {
-      pcVar5 = "r";
+      componentText = "r";
     }
-    ((int (*)())FUN_000da904)(param_1,pcVar5,iVar6,param_4,param_5,param_6,param_7,param_8);
+    ((int (*)())ildisAppendf)(disassembler,componentText,useRgbaLettersCopy,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   }
-  if (uVar3 != 0) {
-    if (param_3 == 0) {
-      pcVar5 = "y";
+  if (negateY != 0) {
+    if (useRgbaLetters == 0) {
+      componentText = "y";
     }
     else {
-      pcVar5 = "g";
+      componentText = "g";
     }
-    ((int (*)())FUN_000da904)(param_1,pcVar5,iVar6,param_4,param_5,param_6,param_7,param_8);
+    ((int (*)())ildisAppendf)(disassembler,componentText,useRgbaLettersCopy,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   }
-  if (uVar2 != 0) {
-    if (param_3 == 0) {
-      pcVar5 = "z";
+  if (negateZ != 0) {
+    if (useRgbaLetters == 0) {
+      componentText = "z";
     }
     else {
-      pcVar5 = "b";
+      componentText = "b";
     }
-    ((int (*)())FUN_000da904)(param_1,pcVar5,iVar6,param_4,param_5,param_6,param_7,param_8);
+    ((int (*)())ildisAppendf)(disassembler,componentText,useRgbaLettersCopy,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   }
-  if (uVar4 != 0) {
-    if (param_3 == 0) {
-      pcVar5 = "w";
+  if (negateW != 0) {
+    if (useRgbaLetters == 0) {
+      componentText = "w";
     }
     else {
-      pcVar5 = "a";
+      componentText = "a";
     }
-    ((int (*)())FUN_000da904)(param_1,pcVar5,iVar6,param_4,param_5,param_6,param_7,param_8);
+    ((int (*)())ildisAppendf)(disassembler,componentText,useRgbaLettersCopy,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   }
-  ((int (*)())FUN_000da904)(param_1,")",iVar6,param_4,param_5,param_6,param_7,param_8);
+  ((int (*)())ildisAppendf)(disassembler,")",useRgbaLettersCopy,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   return;
 }
 
-/* FUN_000dac4c @ 0xdac4c (204 bytes) */
-int FUN_000dac4c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int *param_1;
-  undefined4 param_2;
-  int param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+/* ildisComponentSelectChar @ 0xdac4c (204 bytes) */
+int ildisComponentSelectChar(disassembler, componentSelect, useRgbaLetters, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10)
+  int *disassembler;
+  undefined4 componentSelect;
+  int useRgbaLetters;
+  undefined4 fmtArgR6;
+  undefined4 fmtArgR7;
+  undefined4 fmtArgR8;
+  undefined4 fmtArgR9;
+  undefined4 fmtArgR10;
 {
-  undefined4 uVar1;
+  undefined4 componentChar;
   
-  switch(param_2) {
+  switch(componentSelect) {
   case 0:
-    uVar1 = 0x78;
-    if (param_3 != 0) {
-      uVar1 = 0x72;
+    componentChar = 0x78;
+    if (useRgbaLetters != 0) {
+      componentChar = 0x72;
     }
     break;
   case 1:
-    uVar1 = 0x79;
-    if (param_3 != 0) {
-      uVar1 = 0x67;
+    componentChar = 0x79;
+    if (useRgbaLetters != 0) {
+      componentChar = 0x67;
     }
     break;
   case 2:
-    uVar1 = 0x7a;
-    if (param_3 != 0) {
-      uVar1 = 0x62;
+    componentChar = 0x7a;
+    if (useRgbaLetters != 0) {
+      componentChar = 0x62;
     }
     break;
   case 3:
-    uVar1 = 0x77;
-    if (param_3 != 0) {
-      uVar1 = 0x61;
+    componentChar = 0x77;
+    if (useRgbaLetters != 0) {
+      componentChar = 0x61;
     }
     break;
   case 4:
-    uVar1 = 0x30;
+    componentChar = 0x30;
     break;
   case 5:
-    uVar1 = 0x31;
+    componentChar = 0x31;
     break;
   default:
-    *param_1 = *param_1 + 1;
-    ((int (*)())FUN_000da904)(param_1,"!!!invalidCompSel!!!",param_3,param_4,param_5,param_6,param_7,param_8);
-    uVar1 = 0;
+    *disassembler = *disassembler + 1;
+    ((int (*)())ildisAppendf)(disassembler,"!!!invalidCompSel!!!",useRgbaLetters,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+    componentChar = 0;
   }
-  return uVar1;
+  return componentChar;
 }
 
-/* FUN_000dad30 @ 0xdad30 (300 bytes) */
-int FUN_000dad30(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  uint param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+/* ildisPrintSwizzle @ 0xdad30 (300 bytes) */
+int ildisPrintSwizzle(disassembler, swizzleWord, useRgbaLetters, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10)
+  undefined4 disassembler;
+  uint swizzleWord;
+  undefined4 useRgbaLetters;
+  undefined4 fmtArgR6;
+  undefined4 fmtArgR7;
+  undefined4 fmtArgR8;
+  undefined4 fmtArgR9;
+  undefined4 fmtArgR10;
 {
-  int iVar1;
-  int iVar2;
-  char local_28;
-  char local_27;
-  char local_26;
-  undefined1 local_25;
-  undefined1 local_24;
+  int swizzleChar3Value;
+  int compareResult;
+  char swizzleChar0;
+  char swizzleChar1;
+  char swizzleChar2;
+  undefined1 swizzleChar3;
+  undefined1 swizzleTerminator;
   
-  local_28 = ((int (*)())FUN_000dac4c)(param_1,param_2 & 7,param_3,param_4,param_5,param_6,param_7,param_8);
-  local_27 = ((int (*)())FUN_000dac4c)(param_1,param_2 >> 4 & 7,param_3,param_4,param_5,param_6,param_7,param_8);
-  local_26 = ((int (*)())FUN_000dac4c)(param_1,param_2 >> 8 & 7,param_3,param_4,param_5,param_6,param_7,param_8);
-  iVar1 = ((int (*)())FUN_000dac4c)(param_1,param_2 >> 0xc & 7,param_3,param_4,param_5,param_6,param_7,param_8);
-  local_25 = (undefined1)iVar1;
-  local_24 = 0;
-  iVar2 = _strcmp(&local_28,"rgba");
-  if ((iVar2 != 0) && (iVar2 = _strcmp(&local_28,"xyzw"), iVar2 != 0)) {
-    if ((((int)local_27 == (int)local_28) &&
-        (((int)local_26 == (int)local_27 && (iVar1 == local_26)))) &&
-       (((iVar1 - 0x61U & 0xff) < 0x1a || ((iVar1 - 0x41U & 0xff) < 0x1a)))) {
-      local_27 = '\0';
+  swizzleChar0 = ((int (*)())ildisComponentSelectChar)(disassembler,swizzleWord & 7,useRgbaLetters,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  swizzleChar1 = ((int (*)())ildisComponentSelectChar)(disassembler,swizzleWord >> 4 & 7,useRgbaLetters,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  swizzleChar2 = ((int (*)())ildisComponentSelectChar)(disassembler,swizzleWord >> 8 & 7,useRgbaLetters,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  swizzleChar3Value = ((int (*)())ildisComponentSelectChar)(disassembler,swizzleWord >> 0xc & 7,useRgbaLetters,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  swizzleChar3 = (undefined1)swizzleChar3Value;
+  swizzleTerminator = 0;
+  compareResult = _strcmp(&swizzleChar0,"rgba");
+  if ((compareResult != 0) && (compareResult = _strcmp(&swizzleChar0,"xyzw"), compareResult != 0)) {
+    if ((((int)swizzleChar1 == (int)swizzleChar0) &&
+        (((int)swizzleChar2 == (int)swizzleChar1 && (swizzleChar3Value == swizzleChar2)))) &&
+       (((swizzleChar3Value - 0x61U & 0xff) < 0x1a || ((swizzleChar3Value - 0x41U & 0xff) < 0x1a)))) {
+      swizzleChar1 = '\0';
     }
-    ((int (*)())FUN_000da904)(param_1,".",param_3,param_4,param_5,param_6,param_7,param_8);
-    ((int (*)())FUN_000da904)(param_1,&local_28,param_3,param_4,param_5,param_6,param_7,param_8);
+    ((int (*)())ildisAppendf)(disassembler,".",useRgbaLetters,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+    ((int (*)())ildisAppendf)(disassembler,&swizzleChar0,useRgbaLetters,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   }
   return;
 }
 
-/* FUN_000dae5c @ 0xdae5c (260 bytes) */
-int FUN_000dae5c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int *param_1;
-  uint param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  int param_7;
-  undefined4 param_8;
+/* ildisPrintResultModifiers @ 0xdae5c (260 bytes) */
+int ildisPrintResultModifiers(disassembler, resultModifierWord, passThroughR5, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10)
+  int *disassembler;
+  uint resultModifierWord;
+  undefined4 passThroughR5;
+  undefined4 fmtArgR6;
+  undefined4 fmtArgR7;
+  undefined4 fmtArgR8;
+  int fmtArgR9;
+  undefined4 fmtArgR10;
 {
-  uint uVar1;
-  char *pcVar2;
+  uint shiftCode;
+  char *suffixText;
   
-  if ((param_2 & 0x100) != 0) {
-    ((int (*)())FUN_000da904)(param_1,"_sat",param_3,param_4,param_5,param_6,param_7,param_8);
+  if ((resultModifierWord & 0x100) != 0) {
+    ((int (*)())ildisAppendf)(disassembler,"_sat",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   }
-  if ((param_2 & 0x1e00) == 0) {
+  if ((resultModifierWord & 0x1e00) == 0) {
     return;
   }
-  uVar1 = param_2 >> 9 & 0xf;
-  if (uVar1 < 7) {
-    param_7 = 0;
-    switch(uVar1) {
+  shiftCode = resultModifierWord >> 9 & 0xf;
+  if (shiftCode < 7) {
+    fmtArgR9 = 0;
+    switch(shiftCode) {
     case 0:
       goto switchD_000daebc_caseD_0;
     case 1:
-      pcVar2 = "_x2";
+      suffixText = "_x2";
       break;
     case 2:
-      pcVar2 = "_x4";
+      suffixText = "_x4";
       break;
     case 3:
-      pcVar2 = "_x8";
+      suffixText = "_x8";
       break;
     case 4:
-      pcVar2 = "_d2";
+      suffixText = "_d2";
       break;
     case 5:
-      pcVar2 = "_d4";
+      suffixText = "_d4";
       break;
     case 6:
-      pcVar2 = "_d8";
+      suffixText = "_d8";
     }
   }
   else {
 switchD_000daebc_caseD_0:
-    pcVar2 = "!!!invalidShift!!!";
-    *param_1 = *param_1 + 1;
+    suffixText = "!!!invalidShift!!!";
+    *disassembler = *disassembler + 1;
   }
-  ((int (*)())FUN_000da904)(param_1,pcVar2,param_3,param_4,param_5,param_6,param_7,param_8);
+  ((int (*)())ildisAppendf)(disassembler,suffixText,passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   return;
 }
 
-/* FUN_000daf7c @ 0xdaf7c (172 bytes) */
-int FUN_000daf7c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int *param_1;
-  uint param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+/* ildisPrintElementFormat @ 0xdaf7c (172 bytes) */
+int ildisPrintElementFormat(disassembler, elementFormat, passThroughR5, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9)
+  int *disassembler;
+  uint elementFormat;
+  undefined4 passThroughR5;
+  undefined4 fmtArgR6;
+  undefined4 fmtArgR7;
+  undefined4 fmtArgR8;
+  undefined4 fmtArgR9;
 {
-  int iVar1;
+  int passThroughR9Zero;
   
-  if (param_2 < 8) {
-    iVar1 = 0;
-    switch(param_2) {
+  if (elementFormat < 8) {
+    passThroughR9Zero = 0;
+    switch(elementFormat) {
     case 0:
-      ((int (*)())FUN_000da904)(param_1,"unknown",param_3,param_4,param_5,param_6,iVar1,0xdaf88);
+      ((int (*)())ildisAppendf)(disassembler,"unknown",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,passThroughR9Zero,0xdaf88);
       return;
     case 1:
-      ((int (*)())FUN_000da904)(param_1,"snorm",param_3,param_4,param_5,param_6,iVar1,0xdaf88);
+      ((int (*)())ildisAppendf)(disassembler,"snorm",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,passThroughR9Zero,0xdaf88);
       return;
     case 2:
-      ((int (*)())FUN_000da904)(param_1,"unorm",param_3,param_4,param_5,param_6,iVar1,0xdaf88);
+      ((int (*)())ildisAppendf)(disassembler,"unorm",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,passThroughR9Zero,0xdaf88);
       return;
     case 3:
-      ((int (*)())FUN_000da904)(param_1,"sint",param_3,param_4,param_5,param_6,iVar1,0xdaf88);
+      ((int (*)())ildisAppendf)(disassembler,"sint",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,passThroughR9Zero,0xdaf88);
       return;
     case 4:
-      ((int (*)())FUN_000da904)(param_1,"uint",param_3,param_4,param_5,param_6,iVar1,0xdaf88);
+      ((int (*)())ildisAppendf)(disassembler,"uint",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,passThroughR9Zero,0xdaf88);
       return;
     case 5:
-      ((int (*)())FUN_000da904)(param_1,"float",param_3,param_4,param_5,param_6,iVar1,0xdaf88);
+      ((int (*)())ildisAppendf)(disassembler,"float",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,passThroughR9Zero,0xdaf88);
       return;
     case 6:
-      ((int (*)())FUN_000da904)(param_1,"srgb",param_3,param_4,param_5,param_6,iVar1,0xdaf88);
+      ((int (*)())ildisAppendf)(disassembler,"srgb",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,passThroughR9Zero,0xdaf88);
       return;
     case 7:
-      ((int (*)())FUN_000da904)(param_1,"mixed",param_3,param_4,param_5,param_6,iVar1,0xdaf88);
+      ((int (*)())ildisAppendf)(disassembler,"mixed",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,passThroughR9Zero,0xdaf88);
       return;
     }
   }
-  *param_1 = *param_1 + 1;
-  ((int (*)())FUN_000da904)(param_1,"!!!invalidElemFormat!!!",param_3,param_4,param_5,param_6,param_7,0xdaf88);
+  *disassembler = *disassembler + 1;
+  ((int (*)())ildisAppendf)(disassembler,"!!!invalidElemFormat!!!",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdaf88);
   return;
 }
 
-/* FUN_000db048 @ 0xdb048 (224 bytes) */
-int FUN_000db048(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+/* ildisPrintFormatXyzw @ 0xdb048 (224 bytes) */
+int ildisPrintFormatXyzw(disassembler, passThroughR4, passThroughR5, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10)
+  int disassembler;
+  undefined4 passThroughR4;
+  undefined4 passThroughR5;
+  undefined4 fmtArgR6;
+  undefined4 fmtArgR7;
+  undefined4 fmtArgR8;
+  undefined4 fmtArgR9;
+  undefined4 fmtArgR10;
 {
-  uint uVar1;
+  uint formatWord;
   
-  uVar1 = **(uint **)(param_1 + 8);
-  *(uint **)(param_1 + 8) = *(uint **)(param_1 + 8) + 1;
-  ((int (*)())FUN_000da904)(param_1,"_fmtx(",param_3,param_4,param_5,param_6,param_7,param_8);
-  ((int (*)())FUN_000daf7c)(param_1,uVar1 >> 0x14 & 7,param_3,param_4,param_5,param_6,param_7);
-  ((int (*)())FUN_000da904)(param_1,")",param_3,param_4,param_5,param_6,param_7,param_8);
-  ((int (*)())FUN_000da904)(param_1,"_fmty(",param_3,param_4,param_5,param_6,param_7,param_8);
-  ((int (*)())FUN_000daf7c)(param_1,uVar1 >> 0x17 & 7,param_3,param_4,param_5,param_6,param_7);
-  ((int (*)())FUN_000da904)(param_1,")",param_3,param_4,param_5,param_6,param_7,param_8);
-  ((int (*)())FUN_000da904)(param_1,"_fmtz(",param_3,param_4,param_5,param_6,param_7,param_8);
-  ((int (*)())FUN_000daf7c)(param_1,uVar1 >> 0x1a & 7,param_3,param_4,param_5,param_6,param_7);
-  ((int (*)())FUN_000da904)(param_1,")",param_3,param_4,param_5,param_6,param_7,param_8);
-  ((int (*)())FUN_000da904)(param_1,"_fmtw(",param_3,param_4,param_5,param_6,param_7,param_8);
-  ((int (*)())FUN_000daf7c)(param_1,uVar1 >> 0x1d,param_3,param_4,param_5,param_6,param_7);
-  ((int (*)())FUN_000da904)(param_1,")",param_3,param_4,param_5,param_6,param_7,param_8);
+  formatWord = **(uint **)(disassembler + 8);
+  *(uint **)(disassembler + 8) = *(uint **)(disassembler + 8) + 1;
+  ((int (*)())ildisAppendf)(disassembler,"_fmtx(",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  ((int (*)())ildisPrintElementFormat)(disassembler,formatWord >> 0x14 & 7,passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
+  ((int (*)())ildisAppendf)(disassembler,")",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  ((int (*)())ildisAppendf)(disassembler,"_fmty(",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  ((int (*)())ildisPrintElementFormat)(disassembler,formatWord >> 0x17 & 7,passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
+  ((int (*)())ildisAppendf)(disassembler,")",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  ((int (*)())ildisAppendf)(disassembler,"_fmtz(",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  ((int (*)())ildisPrintElementFormat)(disassembler,formatWord >> 0x1a & 7,passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
+  ((int (*)())ildisAppendf)(disassembler,")",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  ((int (*)())ildisAppendf)(disassembler,"_fmtw(",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  ((int (*)())ildisPrintElementFormat)(disassembler,formatWord >> 0x1d,passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
+  ((int (*)())ildisAppendf)(disassembler,")",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   return;
 }
 
-/* FUN_000db128 @ 0xdb128 (156 bytes) */
-int FUN_000db128(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int *param_1;
-  int param_2;
-  char *param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+/* ildisModComponentChar @ 0xdb128 (156 bytes) */
+int ildisModComponentChar(disassembler, modComponentSelect, defaultComponentText, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10)
+  int *disassembler;
+  int modComponentSelect;
+  char *defaultComponentText;
+  undefined4 fmtArgR6;
+  undefined4 fmtArgR7;
+  undefined4 fmtArgR8;
+  undefined4 fmtArgR9;
+  undefined4 fmtArgR10;
 {
-  int iVar1;
+  int resultChar;
   
-  iVar1 = 0;
-  if (param_3 != (char *)0x0) {
-    if (param_2 == 1) {
-      iVar1 = (int)*param_3;
+  resultChar = 0;
+  if (defaultComponentText != (char *)0x0) {
+    if (modComponentSelect == 1) {
+      resultChar = (int)*defaultComponentText;
     }
     else {
-      if (param_2 < 2) {
-        if (param_2 == 0) {
+      if (modComponentSelect < 2) {
+        if (modComponentSelect == 0) {
           return 0x5f;
         }
       }
       else {
-        if (param_2 == 2) {
+        if (modComponentSelect == 2) {
           return 0x30;
         }
-        if (param_2 == 3) {
+        if (modComponentSelect == 3) {
           return 0x31;
         }
       }
-      *param_1 = *param_1 + 1;
-      ((int (*)())FUN_000da904)(param_1,"!!!invalidModComp!!!",param_3,param_4,param_5,param_6,param_1,param_8);
-      iVar1 = 0x20;
+      *disassembler = *disassembler + 1;
+      ((int (*)())ildisAppendf)(disassembler,"!!!invalidModComp!!!",defaultComponentText,fmtArgR6,fmtArgR7,fmtArgR8,disassembler,fmtArgR10);
+      resultChar = 0x20;
     }
   }
-  return iVar1;
+  return resultChar;
 }
 
-/* FUN_000db1c4 @ 0xdb1c4 (304 bytes) */
-int FUN_000db1c4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  uint param_2;
-  int param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+/* ildisPrintDestinationWriteMask @ 0xdb1c4 (304 bytes) */
+int ildisPrintDestinationWriteMask(disassembler, modifierWord, useRgbaLetters, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10)
+  undefined4 disassembler;
+  uint modifierWord;
+  int useRgbaLetters;
+  undefined4 fmtArgR6;
+  undefined4 fmtArgR7;
+  undefined4 fmtArgR8;
+  undefined4 fmtArgR9;
+  undefined4 fmtArgR10;
 {
-  bool bVar1;
-  char *pcVar2;
-  int iVar3;
-  char local_38 [36];
+  bool useRgbaLettersFlag;
+  char *defaultComponentText;
+  int charIndex;
+  char modifierChars [36];
   
-  if ((param_2 & 0xff) != 0x55) {
-    bVar1 = param_3 != 0;
-    if (bVar1) {
-      pcVar2 = "r";
+  if ((modifierWord & 0xff) != 0x55) {
+    useRgbaLettersFlag = useRgbaLetters != 0;
+    if (useRgbaLettersFlag) {
+      defaultComponentText = "r";
     }
     else {
-      pcVar2 = "x";
+      defaultComponentText = "x";
     }
-    local_38[0] = ((int (*)())FUN_000db128)(param_1,param_2 & 3,pcVar2,param_4,param_5,param_6,param_7,param_8);
-    if (bVar1) {
-      pcVar2 = "g";
-    }
-    else {
-      pcVar2 = "y";
-    }
-    local_38[1] = ((int (*)())FUN_000db128)(param_1,param_2 >> 2 & 3,pcVar2,param_4,param_5,param_6,param_7,
-                               param_8);
-    if (bVar1) {
-      pcVar2 = "b";
+    modifierChars[0] = ((int (*)())ildisModComponentChar)(disassembler,modifierWord & 3,defaultComponentText,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+    if (useRgbaLettersFlag) {
+      defaultComponentText = "g";
     }
     else {
-      pcVar2 = "z";
+      defaultComponentText = "y";
     }
-    local_38[2] = ((int (*)())FUN_000db128)(param_1,param_2 >> 4 & 3,pcVar2,param_4,param_5,param_6,param_7,
-                               param_8);
-    if (bVar1) {
-      pcVar2 = "a";
+    modifierChars[1] = ((int (*)())ildisModComponentChar)(disassembler,modifierWord >> 2 & 3,defaultComponentText,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,
+                               fmtArgR10);
+    if (useRgbaLettersFlag) {
+      defaultComponentText = "b";
     }
     else {
-      pcVar2 = "w";
+      defaultComponentText = "z";
     }
-    local_38[3] = ((int (*)())FUN_000db128)(param_1,param_2 >> 6 & 3,pcVar2,param_4,param_5,param_6,param_7,
-                               param_8);
-    ((int (*)())FUN_000da904)(param_1,".",pcVar2,param_4,param_5,param_6,param_7,param_8);
-    iVar3 = 0;
+    modifierChars[2] = ((int (*)())ildisModComponentChar)(disassembler,modifierWord >> 4 & 3,defaultComponentText,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,
+                               fmtArgR10);
+    if (useRgbaLettersFlag) {
+      defaultComponentText = "a";
+    }
+    else {
+      defaultComponentText = "w";
+    }
+    modifierChars[3] = ((int (*)())ildisModComponentChar)(disassembler,modifierWord >> 6 & 3,defaultComponentText,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,
+                               fmtArgR10);
+    ((int (*)())ildisAppendf)(disassembler,".",defaultComponentText,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+    charIndex = 0;
     do {
-      ((int (*)())FUN_000da904)(param_1,"%c",(int)local_38[iVar3],param_4,param_5,param_6,param_7,param_8);
-      bVar1 = iVar3 != 3;
-      iVar3 = iVar3 + 1;
-    } while (bVar1);
+      ((int (*)())ildisAppendf)(disassembler,"%c",(int)modifierChars[charIndex],fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+      useRgbaLettersFlag = charIndex != 3;
+      charIndex = charIndex + 1;
+    } while (useRgbaLettersFlag);
   }
   return;
 }
 
-/* FUN_000db2f4 @ 0xdb2f4 (92 bytes) */
-int FUN_000db2f4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+/* ildisPrintUnsigned @ 0xdb2f4 (92 bytes) */
+int ildisPrintUnsigned(disassembler, passThroughR4, passThroughR5, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10)
+  int disassembler;
+  undefined4 passThroughR4;
+  undefined4 passThroughR5;
+  undefined4 fmtArgR6;
+  undefined4 fmtArgR7;
+  undefined4 fmtArgR8;
+  undefined4 fmtArgR9;
+  undefined4 fmtArgR10;
 {
-  undefined4 uVar1;
-  undefined1 auStack_58 [76];
+  undefined4 value;
+  undefined1 textBuffer [76];
   
-  uVar1 = **(undefined4 **)(param_1 + 8);
-  *(undefined4 **)(param_1 + 8) = *(undefined4 **)(param_1 + 8) + 1;
-  printf_LDBLStub_1a32d0(auStack_58,"%lu",uVar1,param_4,param_5,param_6,param_7,param_8);
-  return ((int (*)())FUN_000da904)(param_1,auStack_58,uVar1,param_4,param_5,param_6,param_7,param_8);
+  value = **(undefined4 **)(disassembler + 8);
+  *(undefined4 **)(disassembler + 8) = *(undefined4 **)(disassembler + 8) + 1;
+  printf_LDBLStub_1a32d0(textBuffer,"%lu",value,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  return ((int (*)())ildisAppendf)(disassembler,textBuffer,value,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
 }
 
-/* FUN_000db350 @ 0xdb350 (244 bytes) */
-int FUN_000db350(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int *param_1;
-  uint param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  int param_7;
-  undefined4 param_8;
+/* ildisPrintCmpVal @ 0xdb350 (244 bytes) */
+int ildisPrintCmpVal(disassembler, cmpValWord, passThroughR5, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10)
+  int *disassembler;
+  uint cmpValWord;
+  undefined4 passThroughR5;
+  undefined4 fmtArgR6;
+  undefined4 fmtArgR7;
+  undefined4 fmtArgR8;
+  int fmtArgR9;
+  undefined4 fmtArgR10;
 {
-  uint uVar1;
+  uint cmpValCode;
   
-  ((int (*)())FUN_000da904)(param_1,"_cmpval(",param_3,param_4,param_5,param_6,param_7,param_8);
-  uVar1 = param_2 >> 0x16 & 7;
-  if (uVar1 < 5) {
-    param_7 = 0;
-    switch(uVar1) {
+  ((int (*)())ildisAppendf)(disassembler,"_cmpval(",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  cmpValCode = cmpValWord >> 0x16 & 7;
+  if (cmpValCode < 5) {
+    fmtArgR9 = 0;
+    switch(cmpValCode) {
     case 0:
-      ((int (*)())FUN_000da904)(param_1,"0.0",param_3,param_4,param_5,param_6,param_7,param_8);
+      ((int (*)())ildisAppendf)(disassembler,"0.0",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
       break;
     case 1:
-      ((int (*)())FUN_000da904)(param_1,"0.5",param_3,param_4,param_5,param_6,param_7,param_8);
+      ((int (*)())ildisAppendf)(disassembler,"0.5",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
       break;
     case 2:
-      ((int (*)())FUN_000da904)(param_1,"1.0",param_3,param_4,param_5,param_6,param_7,param_8);
+      ((int (*)())ildisAppendf)(disassembler,"1.0",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
       break;
     case 3:
-      ((int (*)())FUN_000da904)(param_1,"-0.5",param_3,param_4,param_5,param_6,param_7,param_8);
+      ((int (*)())ildisAppendf)(disassembler,"-0.5",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
       break;
     case 4:
-      ((int (*)())FUN_000da904)(param_1,"-1.0",param_3,param_4,param_5,param_6,param_7,param_8);
+      ((int (*)())ildisAppendf)(disassembler,"-1.0",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
     }
   }
   else {
-    *param_1 = *param_1 + 1;
-    ((int (*)())FUN_000da904)(param_1,"!!!invalidCmpVal!!!",param_3,param_4,param_5,param_6,param_7,param_8);
+    *disassembler = *disassembler + 1;
+    ((int (*)())ildisAppendf)(disassembler,"!!!invalidCmpVal!!!",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   }
-  ((int (*)())FUN_000da904)(param_1,")",param_3,param_4,param_5,param_6,param_7,param_8);
+  ((int (*)())ildisAppendf)(disassembler,")",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   return;
 }
 
-/* FUN_000db458 @ 0xdb458 (260 bytes) */
-int FUN_000db458(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int *param_1;
-  uint param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  int param_7;
-  undefined4 param_8;
+/* ildisPrintUsage @ 0xdb458 (260 bytes) */
+int ildisPrintUsage(disassembler, usageCode, passThroughR5, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10)
+  int *disassembler;
+  uint usageCode;
+  undefined4 passThroughR5;
+  undefined4 fmtArgR6;
+  undefined4 fmtArgR7;
+  undefined4 fmtArgR8;
+  int fmtArgR9;
+  undefined4 fmtArgR10;
 {
-  ((int (*)())FUN_000da904)(param_1,"_usage(",param_3,param_4,param_5,param_6,param_7,param_8);
-  if (param_2 < 6) {
-    param_7 = 0;
-    switch(param_2) {
+  ((int (*)())ildisAppendf)(disassembler,"_usage(",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  if (usageCode < 6) {
+    fmtArgR9 = 0;
+    switch(usageCode) {
     case 0:
-      ((int (*)())FUN_000da904)(param_1,"pos",param_3,param_4,param_5,param_6,param_7,param_8);
+      ((int (*)())ildisAppendf)(disassembler,"pos",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
       break;
     case 1:
-      ((int (*)())FUN_000da904)(param_1,"pointsize",param_3,param_4,param_5,param_6,param_7,param_8);
+      ((int (*)())ildisAppendf)(disassembler,"pointsize",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
       break;
     case 2:
-      ((int (*)())FUN_000da904)(param_1,"color",param_3,param_4,param_5,param_6,param_7,param_8);
+      ((int (*)())ildisAppendf)(disassembler,"color",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
       break;
     case 3:
-      ((int (*)())FUN_000da904)(param_1,"backcolor",param_3,param_4,param_5,param_6,param_7,param_8);
+      ((int (*)())ildisAppendf)(disassembler,"backcolor",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
       break;
     case 4:
-      ((int (*)())FUN_000da904)(param_1,"fog",param_3,param_4,param_5,param_6,param_7,param_8);
+      ((int (*)())ildisAppendf)(disassembler,"fog",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
       break;
     case 5:
-      ((int (*)())FUN_000da904)(param_1,"generic",param_3,param_4,param_5,param_6,param_7,param_8);
+      ((int (*)())ildisAppendf)(disassembler,"generic",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
     }
   }
   else {
-    *param_1 = *param_1 + 1;
-    ((int (*)())FUN_000da904)(param_1,"!!!invalid!!!",param_3,param_4,param_5,param_6,param_7,param_8);
+    *disassembler = *disassembler + 1;
+    ((int (*)())ildisAppendf)(disassembler,"!!!invalid!!!",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   }
-  ((int (*)())FUN_000da904)(param_1,")",param_3,param_4,param_5,param_6,param_7,param_8);
+  ((int (*)())ildisAppendf)(disassembler,")",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   return;
 }
 
-/* FUN_000db574 @ 0xdb574 (352 bytes) */
-void FUN_000db574(undefined4 param_1,uint param_2,uint param_3,uint param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
+/* ildisPrintFixedPoint @ 0xdb574 (352 bytes) */
+void ildisPrintFixedPoint(undefined4 disassembler,uint fieldBits,uint integerBits,uint fractionBits,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 {
-  float fVar1;
+  float integerPart;
   uint uVar2;
   int iVar3;
   uint uVar4;
-  undefined1 *puVar5;
+  undefined1 *textBufferPtr;
   undefined4 in_r7;
   undefined4 in_r8;
   uint uVar6;
   undefined4 in_r10;
   uint uVar7;
-  undefined1 auStack_128 [256];
+  undefined1 textBuffer [256];
   undefined4 local_28;
-  int iStack_24;
+  int fractionScale;
   undefined4 local_20;
-  uint uStack_1c;
+  uint integerField;
   undefined4 local_18;
-  uint uStack_14;
+  uint fractionField;
   
-  iStack_24 = 1 << (param_4 & 0x3f);
+  fractionScale = 1 << (fractionBits & 0x3f);
   local_28 = 0x43300000;
-  uStack_1c = 0;
-  if (1 < param_3) {
-    iVar3 = param_3 - 1;
-    uStack_1c = 0;
+  integerField = 0;
+  if (1 < integerBits) {
+    iVar3 = integerBits - 1;
+    integerField = 0;
     if (iVar3 != 0) {
       uVar6 = 0;
-      uStack_1c = 0;
+      integerField = 0;
       do {
         uVar7 = uVar6 & 0x3f;
         uVar6 = uVar6 + 1;
-        uStack_1c = uStack_1c | 1 << uVar7;
+        integerField = integerField | 1 << uVar7;
         iVar3 = iVar3 + -1;
       } while (iVar3 != 0);
-      uStack_1c = uStack_1c << (param_4 & 0x3f);
+      integerField = integerField << (fractionBits & 0x3f);
     }
-    uStack_1c = param_2 & uStack_1c;
+    integerField = fieldBits & integerField;
   }
   local_20 = 0x43300000;
-  uStack_1c = uStack_1c >> (param_4 & 0x3f);
-  fVar1 = (float)((double)CONCAT44(0x43300000,uStack_1c) - DOUBLE_001aa250);
-  if ((param_2 & 1 << ((param_4 + param_3) - 1 & 0x3f)) != 0) {
-    fVar1 = FLOAT_001aa114 - fVar1;
+  integerField = integerField >> (fractionBits & 0x3f);
+  integerPart = (float)((double)CONCAT44(0x43300000,integerField) - DOUBLE_001aa250);
+  if ((fieldBits & 1 << ((fractionBits + integerBits) - 1 & 0x3f)) != 0) {
+    integerPart = FLOAT_001aa114 - integerPart;
   }
-  uStack_14 = 0;
-  uVar6 = uStack_1c;
-  if (param_4 != 0) {
+  fractionField = 0;
+  uVar6 = integerField;
+  if (fractionBits != 0) {
     uVar4 = 0;
     uVar6 = 0;
-    uVar7 = param_4;
+    uVar7 = fractionBits;
     do {
       uVar2 = uVar4 & 0x3f;
       uVar4 = uVar4 + 1;
       uVar6 = uVar6 | 1 << uVar2;
       uVar7 = uVar7 - 1;
     } while (uVar7 != 0);
-    uStack_14 = uVar6 & param_2;
+    fractionField = uVar6 & fieldBits;
   }
   local_18 = 0x43300000;
-  puVar5 = auStack_128;
-  ((char * (*)())FUN_000cdc3c)(param_1,10,puVar5,
+  textBufferPtr = textBuffer;
+  ((char * (*)())FUN_000cdc3c)(disassembler,10,textBufferPtr,
                (double)((float)(DOUBLE_001aa200 /
-                               ((double)CONCAT44(0x43300000,iStack_24) - DOUBLE_001aa250)) *
-                        (float)((double)CONCAT44(0x43300000,uStack_14) - DOUBLE_001aa250) + fVar1));
-  ((int (*)())FUN_000da904)(param_1,auStack_128,puVar5,param_4,in_r7,in_r8,uVar6,in_r10);
+                               ((double)CONCAT44(0x43300000,fractionScale) - DOUBLE_001aa250)) *
+                        (float)((double)CONCAT44(0x43300000,fractionField) - DOUBLE_001aa250) + integerPart));
+  ((int (*)())ildisAppendf)(disassembler,textBuffer,textBufferPtr,fractionBits,in_r7,in_r8,uVar6,in_r10);
   return;
 }
 
-/* FUN_000db6d4 @ 0xdb6d4 (196 bytes) */
-int FUN_000db6d4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  uint param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+/* ildisPrintTexelOffsets @ 0xdb6d4 (196 bytes) */
+int ildisPrintTexelOffsets(disassembler, offsetsWord, passThroughR5, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10)
+  undefined4 disassembler;
+  uint offsetsWord;
+  undefined4 passThroughR5;
+  undefined4 fmtArgR6;
+  undefined4 fmtArgR7;
+  undefined4 fmtArgR8;
+  undefined4 fmtArgR9;
+  undefined4 fmtArgR10;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
+  undefined4 integerBitsArg;
+  undefined4 fractionBitsArg;
   double dVar3;
   double in_f2;
   double in_f3;
@@ -3631,227 +3631,227 @@ int FUN_000db6d4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   double in_stack_ffffffb8;
   double in_stack_ffffffc0;
   
-  dVar3 = (double)((int (*)())FUN_000da904)(param_1,"_xoffset(",param_3,param_4,param_5,param_6,param_7,param_8);
-  uVar1 = 7;
-  uVar2 = 1;
-  ((void (*)())FUN_000db574)(param_1,param_2 & 0xff,7,1,dVar3,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+  dVar3 = (double)((int (*)())ildisAppendf)(disassembler,"_xoffset(",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  integerBitsArg = 7;
+  fractionBitsArg = 1;
+  ((void (*)())ildisPrintFixedPoint)(disassembler,offsetsWord & 0xff,7,1,dVar3,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                in_stack_ffffffa8,in_stack_ffffffb0,in_stack_ffffffb8,in_stack_ffffffc0);
-  ((int (*)())FUN_000da904)(param_1,")",uVar1,uVar2,param_5,param_6,param_7,param_8);
-  dVar3 = (double)((int (*)())FUN_000da904)(param_1,"_yoffset(",uVar1,uVar2,param_5,param_6,param_7,param_8);
-  uVar1 = 7;
-  uVar2 = 1;
-  ((void (*)())FUN_000db574)(param_1,param_2 >> 8 & 0xff,7,1,dVar3,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+  ((int (*)())ildisAppendf)(disassembler,")",integerBitsArg,fractionBitsArg,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  dVar3 = (double)((int (*)())ildisAppendf)(disassembler,"_yoffset(",integerBitsArg,fractionBitsArg,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  integerBitsArg = 7;
+  fractionBitsArg = 1;
+  ((void (*)())ildisPrintFixedPoint)(disassembler,offsetsWord >> 8 & 0xff,7,1,dVar3,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                in_stack_ffffffa8,in_stack_ffffffb0,in_stack_ffffffb8,in_stack_ffffffc0);
-  ((int (*)())FUN_000da904)(param_1,")",uVar1,uVar2,param_5,param_6,param_7,param_8);
-  dVar3 = (double)((int (*)())FUN_000da904)(param_1,"_zoffset(",uVar1,uVar2,param_5,param_6,param_7,param_8);
-  uVar1 = 7;
-  uVar2 = 1;
-  ((void (*)())FUN_000db574)(param_1,param_2 >> 0x10 & 0xff,7,1,dVar3,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
+  ((int (*)())ildisAppendf)(disassembler,")",integerBitsArg,fractionBitsArg,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  dVar3 = (double)((int (*)())ildisAppendf)(disassembler,"_zoffset(",integerBitsArg,fractionBitsArg,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  integerBitsArg = 7;
+  fractionBitsArg = 1;
+  ((void (*)())ildisPrintFixedPoint)(disassembler,offsetsWord >> 0x10 & 0xff,7,1,dVar3,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
                in_stack_ffffffa8,in_stack_ffffffb0,in_stack_ffffffb8,in_stack_ffffffc0);
-  ((int (*)())FUN_000da904)(param_1,")",uVar1,uVar2,param_5,param_6,param_7,param_8);
+  ((int (*)())ildisAppendf)(disassembler,")",integerBitsArg,fractionBitsArg,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   return;
 }
 
-/* FUN_000db798 @ 0xdb798 (132 bytes) */
-int FUN_000db798(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  uint param_2;
-  uint param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+/* ildisPrintSignedField @ 0xdb798 (132 bytes) */
+int ildisPrintSignedField(disassembler, fieldValue, fieldWidth, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10)
+  undefined4 disassembler;
+  uint fieldValue;
+  uint fieldWidth;
+  undefined4 fmtArgR6;
+  undefined4 fmtArgR7;
+  undefined4 fmtArgR8;
+  undefined4 fmtArgR9;
+  undefined4 fmtArgR10;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  undefined1 auStack_118 [268];
+  uint fieldMask;
+  uint signBit;
+  uint magnitude;
+  undefined1 textBuffer [268];
   
-  uVar1 = (1 << (param_3 & 0x3f)) - 1;
-  uVar3 = uVar1 & param_2;
-  uVar2 = uVar3 & 1 << (param_3 - 1 & 0x3f);
-  if (uVar2 != 0) {
-    uVar3 = (uVar1 & ~uVar3) + 1;
-    ((int (*)())FUN_000da904)(param_1,"-",param_3 - 1,param_4,param_5,param_6,uVar2,param_8);
+  fieldMask = (1 << (fieldWidth & 0x3f)) - 1;
+  magnitude = fieldMask & fieldValue;
+  signBit = magnitude & 1 << (fieldWidth - 1 & 0x3f);
+  if (signBit != 0) {
+    magnitude = (fieldMask & ~magnitude) + 1;
+    ((int (*)())ildisAppendf)(disassembler,"-",fieldWidth - 1,fmtArgR6,fmtArgR7,fmtArgR8,signBit,fmtArgR10);
   }
-  printf_LDBLStub_1a32d0(auStack_118,"%lu",uVar3,param_4,param_5,param_6,uVar2,param_8);
-  return ((int (*)())FUN_000da904)(param_1,auStack_118,uVar3,param_4,param_5,param_6,uVar2,param_8);
+  printf_LDBLStub_1a32d0(textBuffer,"%lu",magnitude,fmtArgR6,fmtArgR7,fmtArgR8,signBit,fmtArgR10);
+  return ((int (*)())ildisAppendf)(disassembler,textBuffer,magnitude,fmtArgR6,fmtArgR7,fmtArgR8,signBit,fmtArgR10);
 }
 
-/* FUN_000db81c @ 0xdb81c (196 bytes) */
-int FUN_000db81c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int param_1;
-  uint param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+/* ildisPrintAddressOffsetImmediate @ 0xdb81c (196 bytes) */
+int ildisPrintAddressOffsetImmediate(disassembler, controlWord, passThroughR5, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10)
+  int disassembler;
+  uint controlWord;
+  undefined4 passThroughR5;
+  undefined4 fmtArgR6;
+  undefined4 fmtArgR7;
+  undefined4 fmtArgR8;
+  undefined4 fmtArgR9;
+  undefined4 fmtArgR10;
 {
-  undefined4 uVar1;
-  uint uVar2;
+  undefined4 fieldWidthArg;
+  uint offsetsWord;
   
-  if ((param_2 & 0x20000000) != 0) {
-    ((int (*)())FUN_000da904)(param_1,"_aoffimmi(",param_3,param_4,param_5,param_6,param_7,param_8);
-    uVar1 = 4;
-    uVar2 = **(uint **)(param_1 + 8);
-    *(uint **)(param_1 + 8) = *(uint **)(param_1 + 8) + 1;
-    ((int (*)())FUN_000db798)(param_1,uVar2 & 0xf,4,param_4,param_5,param_6,param_7,param_8);
-    ((int (*)())FUN_000da904)(param_1,",",uVar1,param_4,param_5,param_6,param_7,param_8);
-    uVar1 = 4;
-    ((int (*)())FUN_000db798)(param_1,uVar2 >> 4 & 0xf,4,param_4,param_5,param_6,param_7,param_8);
-    ((int (*)())FUN_000da904)(param_1,",",uVar1,param_4,param_5,param_6,param_7,param_8);
-    uVar1 = 4;
-    ((int (*)())FUN_000db798)(param_1,uVar2 >> 8 & 0xf,4,param_4,param_5,param_6,param_7,param_8);
-    ((int (*)())FUN_000da904)(param_1,")",uVar1,param_4,param_5,param_6,param_7,param_8);
+  if ((controlWord & 0x20000000) != 0) {
+    ((int (*)())ildisAppendf)(disassembler,"_aoffimmi(",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+    fieldWidthArg = 4;
+    offsetsWord = **(uint **)(disassembler + 8);
+    *(uint **)(disassembler + 8) = *(uint **)(disassembler + 8) + 1;
+    ((int (*)())ildisPrintSignedField)(disassembler,offsetsWord & 0xf,4,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+    ((int (*)())ildisAppendf)(disassembler,",",fieldWidthArg,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+    fieldWidthArg = 4;
+    ((int (*)())ildisPrintSignedField)(disassembler,offsetsWord >> 4 & 0xf,4,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+    ((int (*)())ildisAppendf)(disassembler,",",fieldWidthArg,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+    fieldWidthArg = 4;
+    ((int (*)())ildisPrintSignedField)(disassembler,offsetsWord >> 8 & 0xf,4,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+    ((int (*)())ildisAppendf)(disassembler,")",fieldWidthArg,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
     return;
   }
   return;
 }
 
-/* FUN_000db8e0 @ 0xdb8e0 (88 bytes) */
-int FUN_000db8e0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  uint param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+/* ildisPrintResourceSampler @ 0xdb8e0 (88 bytes) */
+int ildisPrintResourceSampler(disassembler, resourceSamplerWord, passThroughR5, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10)
+  undefined4 disassembler;
+  uint resourceSamplerWord;
+  undefined4 passThroughR5;
+  undefined4 fmtArgR6;
+  undefined4 fmtArgR7;
+  undefined4 fmtArgR8;
+  undefined4 fmtArgR9;
+  undefined4 fmtArgR10;
 {
-  uint uVar1;
-  uint uVar2;
-  undefined1 auStack_118 [268];
+  uint resourceIndex;
+  uint samplerIndex;
+  undefined1 textBuffer [268];
   
-  uVar2 = param_2 >> 0x18 & 0x1f;
-  uVar1 = param_2 >> 0x10 & 0xff;
-  printf_LDBLStub_1a32d0(auStack_118,"_resource(%d)_sampler(%d)",uVar1,uVar2,param_5,param_6,param_7,param_8);
-  return ((int (*)())FUN_000da904)(param_1,auStack_118,uVar1,uVar2,param_5,param_6,param_7,param_8);
+  samplerIndex = resourceSamplerWord >> 0x18 & 0x1f;
+  resourceIndex = resourceSamplerWord >> 0x10 & 0xff;
+  printf_LDBLStub_1a32d0(textBuffer,"_resource(%d)_sampler(%d)",resourceIndex,samplerIndex,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  return ((int (*)())ildisAppendf)(disassembler,textBuffer,resourceIndex,samplerIndex,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
 }
 
-/* FUN_000db938 @ 0xdb938 (280 bytes) */
-int FUN_000db938(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int *param_1;
-  uint param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  int param_7;
-  undefined4 param_8;
+/* ildisPrintAnisoMode @ 0xdb938 (280 bytes) */
+int ildisPrintAnisoMode(disassembler, anisoCode, passThroughR5, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10)
+  int *disassembler;
+  uint anisoCode;
+  undefined4 passThroughR5;
+  undefined4 fmtArgR6;
+  undefined4 fmtArgR7;
+  undefined4 fmtArgR8;
+  int fmtArgR9;
+  undefined4 fmtArgR10;
 {
-  ((int (*)())FUN_000da904)(param_1,"_aniso(",param_3,param_4,param_5,param_6,param_7,param_8);
-  if (param_2 < 7) {
-    param_7 = 0;
-    switch(param_2) {
+  ((int (*)())ildisAppendf)(disassembler,"_aniso(",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  if (anisoCode < 7) {
+    fmtArgR9 = 0;
+    switch(anisoCode) {
     case 0:
-      ((int (*)())FUN_000da904)(param_1,"unknown",param_3,param_4,param_5,param_6,param_7,param_8);
+      ((int (*)())ildisAppendf)(disassembler,"unknown",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
       break;
     case 1:
-      ((int (*)())FUN_000da904)(param_1,"disabled",param_3,param_4,param_5,param_6,param_7,param_8);
+      ((int (*)())ildisAppendf)(disassembler,"disabled",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
       break;
     case 2:
-      ((int (*)())FUN_000da904)(param_1,"1",param_3,param_4,param_5,param_6,param_7,param_8);
+      ((int (*)())ildisAppendf)(disassembler,"1",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
       break;
     case 3:
-      ((int (*)())FUN_000da904)(param_1,"2",param_3,param_4,param_5,param_6,param_7,param_8);
+      ((int (*)())ildisAppendf)(disassembler,"2",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
       break;
     case 4:
-      ((int (*)())FUN_000da904)(param_1,"4",param_3,param_4,param_5,param_6,param_7,param_8);
+      ((int (*)())ildisAppendf)(disassembler,"4",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
       break;
     case 5:
-      ((int (*)())FUN_000da904)(param_1,"8",param_3,param_4,param_5,param_6,param_7,param_8);
+      ((int (*)())ildisAppendf)(disassembler,"8",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
       break;
     case 6:
-      ((int (*)())FUN_000da904)(param_1,"16",param_3,param_4,param_5,param_6,param_7,param_8);
+      ((int (*)())ildisAppendf)(disassembler,"16",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
     }
   }
   else {
-    *param_1 = *param_1 + 1;
-    ((int (*)())FUN_000da904)(param_1,"!!invalid!!",param_3,param_4,param_5,param_6,param_7,param_8);
+    *disassembler = *disassembler + 1;
+    ((int (*)())ildisAppendf)(disassembler,"!!invalid!!",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   }
-  ((int (*)())FUN_000da904)(param_1,")",param_3,param_4,param_5,param_6,param_7,param_8);
+  ((int (*)())ildisAppendf)(disassembler,")",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   return;
 }
 
-/* FUN_000dba6c @ 0xdba6c (216 bytes) */
-int FUN_000dba6c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int *param_1;
-  int param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+/* ildisPrintMipFilter @ 0xdba6c (216 bytes) */
+int ildisPrintMipFilter(disassembler, mipFilterCode, passThroughR5, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10)
+  int *disassembler;
+  int mipFilterCode;
+  undefined4 passThroughR5;
+  undefined4 fmtArgR6;
+  undefined4 fmtArgR7;
+  undefined4 fmtArgR8;
+  undefined4 fmtArgR9;
+  undefined4 fmtArgR10;
 {
-  ((int (*)())FUN_000da904)(param_1,"_mip(",param_3,param_4,param_5,param_6,param_7,param_8);
-  if (param_2 == 1) {
-    ((int (*)())FUN_000da904)(param_1,"point",param_3,param_4,param_5,param_6,param_7,param_8);
+  ((int (*)())ildisAppendf)(disassembler,"_mip(",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  if (mipFilterCode == 1) {
+    ((int (*)())ildisAppendf)(disassembler,"point",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   }
-  else if (param_2 == 0) {
-    ((int (*)())FUN_000da904)(param_1,"unknown",param_3,param_4,param_5,param_6,param_7,param_8);
+  else if (mipFilterCode == 0) {
+    ((int (*)())ildisAppendf)(disassembler,"unknown",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   }
-  else if (param_2 == 2) {
-    ((int (*)())FUN_000da904)(param_1,"linear",param_3,param_4,param_5,param_6,param_7,param_8);
+  else if (mipFilterCode == 2) {
+    ((int (*)())ildisAppendf)(disassembler,"linear",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   }
-  else if (param_2 == 3) {
-    ((int (*)())FUN_000da904)(param_1,"base",param_3,param_4,param_5,param_6,param_7,param_8);
+  else if (mipFilterCode == 3) {
+    ((int (*)())ildisAppendf)(disassembler,"base",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   }
   else {
-    *param_1 = *param_1 + 1;
-    ((int (*)())FUN_000da904)(param_1,"!!invalid!!",param_3,param_4,param_5,param_6,param_7,param_8);
+    *disassembler = *disassembler + 1;
+    ((int (*)())ildisAppendf)(disassembler,"!!invalid!!",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   }
-  ((int (*)())FUN_000da904)(param_1,")",param_3,param_4,param_5,param_6,param_7,param_8);
+  ((int (*)())ildisAppendf)(disassembler,")",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   return;
 }
 
-/* FUN_000dbb44 @ 0xdbb44 (124 bytes) */
-int FUN_000dbb44(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int *param_1;
-  int param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+/* ildisPrintFilterName @ 0xdbb44 (124 bytes) */
+int ildisPrintFilterName(disassembler, filterCode, passThroughR5, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9)
+  int *disassembler;
+  int filterCode;
+  undefined4 passThroughR5;
+  undefined4 fmtArgR6;
+  undefined4 fmtArgR7;
+  undefined4 fmtArgR8;
+  undefined4 fmtArgR9;
 {
-  if (param_2 == 1) {
-    ((int (*)())FUN_000da904)(param_1,"point",param_3,param_4,param_5,param_6,param_7,0xdbb50);
+  if (filterCode == 1) {
+    ((int (*)())ildisAppendf)(disassembler,"point",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdbb50);
     return;
   }
-  if (param_2 == 0) {
-    ((int (*)())FUN_000da904)(param_1,"unknown",param_3,param_4,param_5,param_6,param_7,0xdbb50);
+  if (filterCode == 0) {
+    ((int (*)())ildisAppendf)(disassembler,"unknown",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdbb50);
     return;
   }
-  if (param_2 == 2) {
-    ((int (*)())FUN_000da904)(param_1,"linear",param_3,param_4,param_5,param_6,param_7,0xdbb50);
+  if (filterCode == 2) {
+    ((int (*)())ildisAppendf)(disassembler,"linear",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdbb50);
     return;
   }
-  if (param_2 == 3) {
-    ((int (*)())FUN_000da904)(param_1,"aniso",param_3,param_4,param_5,param_6,param_7,0xdbb50);
+  if (filterCode == 3) {
+    ((int (*)())ildisAppendf)(disassembler,"aniso",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdbb50);
     return;
   }
-  *param_1 = *param_1 + 1;
-  return ((int (*)())FUN_000da904)(param_1,"!!invalid!!",param_3,param_4,param_5,param_6,param_7,0xdbb50);
+  *disassembler = *disassembler + 1;
+  return ((int (*)())ildisAppendf)(disassembler,"!!invalid!!",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,0xdbb50);
 }
 
-/* FUN_000dbbc0 @ 0xdbbc0 (284 bytes) */
-int FUN_000dbbc0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  uint param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+/* ildisPrintFilterModes @ 0xdbbc0 (284 bytes) */
+int ildisPrintFilterModes(disassembler, filterWord, passThroughR5, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10)
+  undefined4 disassembler;
+  uint filterWord;
+  undefined4 passThroughR5;
+  undefined4 fmtArgR6;
+  undefined4 fmtArgR7;
+  undefined4 fmtArgR8;
+  undefined4 fmtArgR9;
+  undefined4 fmtArgR10;
 {
-  undefined4 uVar1;
-  undefined4 uVar2;
+  undefined4 integerBitsArg;
+  undefined4 fractionBitsArg;
   double fparam_1;
   double in_f2;
   double in_f3;
@@ -3865,27 +3865,27 @@ int FUN_000dbbc0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   double in_stack_ffffffb8;
   double in_stack_ffffffc0;
   
-  ((int (*)())FUN_000da904)(param_1,"_mag(",param_3,param_4,param_5,param_6,param_7,param_8);
-  ((int (*)())FUN_000dbb44)(param_1,param_2 & 7,param_3,param_4,param_5,param_6,param_7);
-  ((int (*)())FUN_000da904)(param_1,")",param_3,param_4,param_5,param_6,param_7,param_8);
-  ((int (*)())FUN_000da904)(param_1,"_min(",param_3,param_4,param_5,param_6,param_7,param_8);
-  ((int (*)())FUN_000dbb44)(param_1,param_2 >> 3 & 7,param_3,param_4,param_5,param_6,param_7);
-  ((int (*)())FUN_000da904)(param_1,")",param_3,param_4,param_5,param_6,param_7,param_8);
-  ((int (*)())FUN_000da904)(param_1,"_volmag(",param_3,param_4,param_5,param_6,param_7,param_8);
-  ((int (*)())FUN_000dbb44)(param_1,param_2 >> 6 & 7,param_3,param_4,param_5,param_6,param_7);
-  ((int (*)())FUN_000da904)(param_1,")",param_3,param_4,param_5,param_6,param_7,param_8);
-  ((int (*)())FUN_000da904)(param_1,"_volmin(",param_3,param_4,param_5,param_6,param_7,param_8);
-  ((int (*)())FUN_000dbb44)(param_1,param_2 >> 9 & 7,param_3,param_4,param_5,param_6,param_7);
-  ((int (*)())FUN_000da904)(param_1,")",param_3,param_4,param_5,param_6,param_7,param_8);
-  ((int (*)())FUN_000dba6c)(param_1,param_2 >> 0xc & 7,param_3,param_4,param_5,param_6,param_7,param_8);
-  ((int (*)())FUN_000db938)(param_1,param_2 >> 0xf & 7,param_3,param_4,param_5,param_6,param_7,param_8);
-  fparam_1 = (double)((int (*)())FUN_000da904)(param_1,"_lodbias(",param_3,param_4,param_5,param_6,param_7,
-                                  param_8);
-  uVar1 = 3;
-  uVar2 = 4;
-  ((void (*)())FUN_000db574)(param_1,param_2 >> 0x12 & 0x7f,3,4,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8
+  ((int (*)())ildisAppendf)(disassembler,"_mag(",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  ((int (*)())ildisPrintFilterName)(disassembler,filterWord & 7,passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
+  ((int (*)())ildisAppendf)(disassembler,")",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  ((int (*)())ildisAppendf)(disassembler,"_min(",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  ((int (*)())ildisPrintFilterName)(disassembler,filterWord >> 3 & 7,passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
+  ((int (*)())ildisAppendf)(disassembler,")",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  ((int (*)())ildisAppendf)(disassembler,"_volmag(",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  ((int (*)())ildisPrintFilterName)(disassembler,filterWord >> 6 & 7,passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
+  ((int (*)())ildisAppendf)(disassembler,")",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  ((int (*)())ildisAppendf)(disassembler,"_volmin(",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  ((int (*)())ildisPrintFilterName)(disassembler,filterWord >> 9 & 7,passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
+  ((int (*)())ildisAppendf)(disassembler,")",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  ((int (*)())ildisPrintMipFilter)(disassembler,filterWord >> 0xc & 7,passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  ((int (*)())ildisPrintAnisoMode)(disassembler,filterWord >> 0xf & 7,passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  fparam_1 = (double)((int (*)())ildisAppendf)(disassembler,"_lodbias(",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,
+                                  fmtArgR10);
+  integerBitsArg = 3;
+  fractionBitsArg = 4;
+  ((void (*)())ildisPrintFixedPoint)(disassembler,filterWord >> 0x12 & 0x7f,3,4,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8
                ,in_stack_ffffffa8,in_stack_ffffffb0,in_stack_ffffffb8,in_stack_ffffffc0);
-  ((int (*)())FUN_000da904)(param_1,")",uVar1,uVar2,param_5,param_6,param_7,param_8);
+  ((int (*)())ildisAppendf)(disassembler,")",integerBitsArg,fractionBitsArg,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   return;
 }
 

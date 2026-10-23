@@ -1,0 +1,542 @@
+# Fork I4: variable names for the IL disassembler (ildis*), SC dump wrappers; evidence per row. Pass-through naming follows names_R3_ddbcc.tsv (passThroughR4/R5, fmtArgR6..R10).
+local	ildisPrintNegateComponents	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintNegateComponents	param_2	negateWord	INFERRED	operand modifier word: bits 3/7/11/15 are the negate flags of x/y/z/w
+local	ildisPrintNegateComponents	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintNegateComponents	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintNegateComponents	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintNegateComponents	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintNegateComponents	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisPrintNegateComponents	param_3	useRgbaLetters	CONFIRMED	0 prints x/y/z/w, non-zero r/g/b/a (compared with 0 before choosing each letter)
+local	ildisPrintNegateComponents	bVar1	negateX	CONFIRMED	bit 3 of the modifier word
+local	ildisPrintNegateComponents	uVar3	negateY	CONFIRMED	bit 7
+local	ildisPrintNegateComponents	uVar2	negateZ	CONFIRMED	bit 11
+local	ildisPrintNegateComponents	uVar4	negateW	CONFIRMED	bit 15
+local	ildisPrintNegateComponents	pcVar5	componentText	CONFIRMED	letter string appended per negated component
+local	ildisPrintNegateComponents	iVar6	useRgbaLettersCopy	INFERRED	copy of param_3 kept for the append calls
+local	ildisComponentSelectChar	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisComponentSelectChar	param_2	componentSelect	CONFIRMED	3-bit swizzle component select: 0-3 x/y/z/w (r/g/b/a), 4 -> 0, 5 -> 1
+local	ildisComponentSelectChar	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisComponentSelectChar	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisComponentSelectChar	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisComponentSelectChar	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisComponentSelectChar	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisComponentSelectChar	param_3	useRgbaLetters	CONFIRMED	non-zero selects r/g/b/a letters
+local	ildisComponentSelectChar	uVar1	componentChar	CONFIRMED	the character returned (0x78 x, 0x79 y, 0x7a z, 0x77 w, 0x72 r ...)
+local	ildisPrintSwizzle	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintSwizzle	param_2	swizzleWord	CONFIRMED	four 3-bit component selects at bits 0, 4, 8, 12
+local	ildisPrintSwizzle	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintSwizzle	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintSwizzle	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintSwizzle	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintSwizzle	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisPrintSwizzle	param_3	useRgbaLetters	CONFIRMED	passed to ildisComponentSelectChar
+local	ildisPrintSwizzle	local_28	swizzleChar0	CONFIRMED	first component letter (swizzle bits 0-2)
+local	ildisPrintSwizzle	local_27	swizzleChar1	CONFIRMED	second component letter (bits 4-6)
+local	ildisPrintSwizzle	local_26	swizzleChar2	CONFIRMED	third component letter (bits 8-10)
+local	ildisPrintSwizzle	local_25	swizzleChar3	CONFIRMED	fourth component letter (bits 12-14)
+local	ildisPrintSwizzle	local_24	swizzleTerminator	CONFIRMED	NUL terminating the four-letter string
+local	ildisPrintSwizzle	iVar1	swizzleChar3Value	INFERRED	return value of the fourth ildisComponentSelectChar call
+local	ildisPrintSwizzle	iVar2	compareResult	CONFIRMED	strcmp against "rgba" / "xyzw"
+local	ildisPrintResultModifiers	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintResultModifiers	param_2	resultModifierWord	CONFIRMED	destination modifier word: bit 8 saturate, bits 9-12 shift code
+local	ildisPrintResultModifiers	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintResultModifiers	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintResultModifiers	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintResultModifiers	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintResultModifiers	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintResultModifiers	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisPrintResultModifiers	uVar1	shiftCode	CONFIRMED	bits 9-12: 1 x2, 2 x4, 3 x8, 4 d2, 5 d4, 6 d8
+local	ildisPrintResultModifiers	pcVar2	suffixText	CONFIRMED	"_x2" ... "!!!invalidShift!!!"
+local	ildisPrintElementFormat	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintElementFormat	param_2	elementFormat	CONFIRMED	0 unknown, 1 snorm, 2 unorm, 3 sint, 4 uint, 5 float, 6 srgb, 7 mixed
+local	ildisPrintElementFormat	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintElementFormat	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintElementFormat	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintElementFormat	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintElementFormat	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintElementFormat	iVar1	passThroughR9Zero	INFERRED	constant 0 forwarded in the r9 pass-through slot
+local	ildisPrintFormatXyzw	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintFormatXyzw	param_2	passThroughR4	INFERRED	Ghidra register-argument pass-through (r4): not used by this function
+local	ildisPrintFormatXyzw	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintFormatXyzw	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintFormatXyzw	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintFormatXyzw	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintFormatXyzw	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintFormatXyzw	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisPrintFormatXyzw	uVar1	formatWord	CONFIRMED	dword read at the cursor: 3-bit element formats at bits 20, 23, 26, 29 (x, y, z, w)
+local	ildisModComponentChar	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisModComponentChar	param_2	modComponentSelect	CONFIRMED	0 -> "_", 1 -> the component letter, 2 -> "0", 3 -> "1"
+local	ildisModComponentChar	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisModComponentChar	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisModComponentChar	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisModComponentChar	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisModComponentChar	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisModComponentChar	param_3	defaultComponentText	CONFIRMED	the letter used for select 1 (first character of this string)
+local	ildisModComponentChar	iVar1	resultChar	CONFIRMED	returned character
+local	ildisPrintModifierSwizzle	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintModifierSwizzle	param_2	modifierWord	CONFIRMED	four 2-bit modifier component selects at bits 0, 2, 4, 6; 0x55 (identity) prints nothing
+local	ildisPrintModifierSwizzle	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintModifierSwizzle	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintModifierSwizzle	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintModifierSwizzle	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintModifierSwizzle	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisPrintModifierSwizzle	param_3	useRgbaLetters	CONFIRMED	non-zero selects r/g/b/a letter strings
+local	ildisPrintModifierSwizzle	bVar1	useRgbaLettersFlag	CONFIRMED	param_3 != 0
+local	ildisPrintModifierSwizzle	pcVar2	defaultComponentText	CONFIRMED	the "x"/"r", "y"/"g", "z"/"b", "w"/"a" string passed as default letter
+local	ildisPrintModifierSwizzle	iVar3	charIndex	CONFIRMED	index of the component letter being printed
+local	ildisPrintModifierSwizzle	local_38	modifierChars	CONFIRMED	the four letters printed with "%c"
+local	ildisPrintUnsigned	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintUnsigned	param_2	passThroughR4	INFERRED	Ghidra register-argument pass-through (r4): not used by this function
+local	ildisPrintUnsigned	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintUnsigned	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintUnsigned	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintUnsigned	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintUnsigned	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintUnsigned	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisPrintUnsigned	uVar1	value	CONFIRMED	dword read at the cursor, printed with "%lu"
+local	ildisPrintUnsigned	auStack_58	textBuffer	CONFIRMED	sprintf destination
+local	ildisPrintCmpVal	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintCmpVal	param_2	cmpValWord	CONFIRMED	bits 22-24 select 0.0 / 0.5 / 1.0 / -0.5 / -1.0
+local	ildisPrintCmpVal	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintCmpVal	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintCmpVal	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintCmpVal	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintCmpVal	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintCmpVal	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisPrintCmpVal	uVar1	cmpValCode	CONFIRMED	bits 22-24 of the word
+local	ildisPrintUsage	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintUsage	param_2	usageCode	CONFIRMED	0 pos, 1 pointsize, 2 color, 3 backcolor, 4 fog, 5 generic
+local	ildisPrintUsage	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintUsage	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintUsage	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintUsage	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintUsage	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintUsage	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisPrintFixedPoint	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintFixedPoint	param_2	fieldBits	CONFIRMED	raw bits holding the fixed-point field
+local	ildisPrintFixedPoint	param_3	integerBits	CONFIRMED	width of the integer part (7 for texel offsets, 3 for lod bias)
+local	ildisPrintFixedPoint	param_4	fractionBits	CONFIRMED	width of the fraction part (1 for offsets, 4 for lod bias)
+local	ildisPrintFixedPoint	fVar1	integerPart	CONFIRMED	integer part converted through the 2^52 magic constant; 1.0 minus it when the top bit is set
+local	ildisPrintFixedPoint	iStack_24	fractionScale	CONFIRMED	1 << fractionBits
+local	ildisPrintFixedPoint	uStack_1c	integerField	CONFIRMED	integer bits shifted down
+local	ildisPrintFixedPoint	uStack_14	fractionField	CONFIRMED	fraction bits (mask & param_2)
+local	ildisPrintFixedPoint	auStack_128	textBuffer	CONFIRMED	formatted number text
+local	ildisPrintFixedPoint	puVar5	textBufferPtr	CONFIRMED	points at textBuffer, passed to FUN_000cdc3c and ildisAppendf
+local	ildisPrintTexelOffsets	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintTexelOffsets	param_2	offsetsWord	CONFIRMED	three 8-bit 7.1 fixed-point offsets at bits 0, 8, 16
+local	ildisPrintTexelOffsets	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintTexelOffsets	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintTexelOffsets	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintTexelOffsets	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintTexelOffsets	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintTexelOffsets	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisPrintTexelOffsets	uVar1	integerBitsArg	CONFIRMED	constant 7 passed as the integer width
+local	ildisPrintTexelOffsets	uVar2	fractionBitsArg	CONFIRMED	constant 1 passed as the fraction width
+local	ildisPrintSignedField	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintSignedField	param_2	fieldValue	CONFIRMED	raw bits of the field
+local	ildisPrintSignedField	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintSignedField	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintSignedField	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintSignedField	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintSignedField	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisPrintSignedField	param_3	fieldWidth	CONFIRMED	number of bits of the signed field
+local	ildisPrintSignedField	uVar1	fieldMask	CONFIRMED	(1 << width) - 1
+local	ildisPrintSignedField	uVar3	magnitude	CONFIRMED	the field value, or its two's-complement magnitude when negative
+local	ildisPrintSignedField	uVar2	signBit	CONFIRMED	the top bit of the field
+local	ildisPrintSignedField	auStack_118	textBuffer	CONFIRMED	sprintf destination
+local	ildisPrintAddressOffsetImmediate	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintAddressOffsetImmediate	param_2	controlWord	CONFIRMED	bit 29 requests the three immediate address offsets
+local	ildisPrintAddressOffsetImmediate	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintAddressOffsetImmediate	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintAddressOffsetImmediate	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintAddressOffsetImmediate	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintAddressOffsetImmediate	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintAddressOffsetImmediate	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisPrintAddressOffsetImmediate	uVar2	offsetsWord	CONFIRMED	dword read at the cursor: three 4-bit signed fields at bits 0, 4, 8
+local	ildisPrintAddressOffsetImmediate	uVar1	fieldWidthArg	CONFIRMED	constant 4 passed as the field width
+local	ildisPrintResourceSampler	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintResourceSampler	param_2	resourceSamplerWord	CONFIRMED	resource index in bits 16-23, sampler index in bits 24-28
+local	ildisPrintResourceSampler	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintResourceSampler	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintResourceSampler	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintResourceSampler	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintResourceSampler	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintResourceSampler	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisPrintResourceSampler	uVar1	resourceIndex	CONFIRMED	bits 16-23
+local	ildisPrintResourceSampler	uVar2	samplerIndex	CONFIRMED	bits 24-28
+local	ildisPrintResourceSampler	auStack_118	textBuffer	CONFIRMED	sprintf destination
+local	ildisPrintAnisoMode	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintAnisoMode	param_2	anisoCode	CONFIRMED	0 unknown, 1 disabled, 2 "1", 3 "2", 4 "4", 5 "8", 6 "16"
+local	ildisPrintAnisoMode	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintAnisoMode	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintAnisoMode	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintAnisoMode	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintAnisoMode	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintAnisoMode	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisPrintMipFilter	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintMipFilter	param_2	mipFilterCode	CONFIRMED	mip filter code printed after _mip(
+local	ildisPrintMipFilter	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintMipFilter	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintMipFilter	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintMipFilter	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintMipFilter	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintMipFilter	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisPrintFilterName	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintFilterName	param_2	filterCode	CONFIRMED	filter code: point / unknown / linear / aniso
+local	ildisPrintFilterName	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintFilterName	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintFilterName	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintFilterName	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintFilterName	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintFilterModes	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintFilterModes	param_2	filterWord	CONFIRMED	3-bit mag/min/volmag/volmin filters at bits 0, 3, 6, 9, mip at 12, aniso at 15, lod bias at 18-24
+local	ildisPrintFilterModes	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintFilterModes	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintFilterModes	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintFilterModes	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintFilterModes	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintFilterModes	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisPrintFilterModes	uVar1	integerBitsArg	CONFIRMED	constant 3 passed as the integer width of the lod bias
+local	ildisPrintFilterModes	uVar2	fractionBitsArg	CONFIRMED	constant 4 passed as the fraction width
+local	ildisPrintShadowMode	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintShadowMode	param_2	shadowModeWord	CONFIRMED	bits 26-27 select never / z / unknown
+local	ildisPrintShadowMode	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintShadowMode	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintShadowMode	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintShadowMode	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintShadowMode	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintShadowMode	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisPrintShadowMode	uVar1	shadowModeCode	CONFIRMED	bits 26-27
+local	ildisPrintBoundComponent	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintBoundComponent	param_2	boundCode	CONFIRMED	0 "-", 1 "0", 2 "1", 3 "*"
+local	ildisPrintBoundComponent	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintBoundComponent	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintBoundComponent	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintBoundComponent	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintBoundComponent	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintDclvoutOperands	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintDclvoutOperands	param_2	declarationWord	CONFIRMED	bits 16-20 usage, bits 21-28 usage index, bit 31 = a component-binding dword follows
+local	ildisPrintDclvoutOperands	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintDclvoutOperands	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintDclvoutOperands	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintDclvoutOperands	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintDclvoutOperands	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintDclvoutOperands	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisPrintDclvoutOperands	uVar1	usageIndexValue	CONFIRMED	bits 21-28, printed with _usageIndex(%d)
+local	ildisPrintDclvoutOperands	uVar2	componentWord	CONFIRMED	dword read at the cursor: 2-bit bound component codes for x, y, z, w at bits 0, 2, 4, 6 (dclpin also has flags in bits 8-10)
+local	ildisPrintDclvoutOperands	auStack_38	textBuffer	CONFIRMED	sprintf destination
+local	ildisPrintDclpinOperands	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintDclpinOperands	param_2	declarationWord	CONFIRMED	bits 16-20 usage, bits 21-28 usage index, bit 31 = a component-binding dword follows
+local	ildisPrintDclpinOperands	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintDclpinOperands	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintDclpinOperands	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintDclpinOperands	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintDclpinOperands	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintDclpinOperands	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisPrintDclpinOperands	uVar1	usageIndexValue	CONFIRMED	bits 21-28, printed with _usageIndex(%d)
+local	ildisPrintDclpinOperands	uVar2	componentWord	CONFIRMED	dword read at the cursor: 2-bit bound component codes for x, y, z, w at bits 0, 2, 4, 6 (dclpin also has flags in bits 8-10)
+local	ildisPrintDclpinOperands	auStack_38	textBuffer	CONFIRMED	sprintf destination
+local	ildisPrintDclvOperands	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintDclvOperands	param_2	declarationWord	CONFIRMED	bits 16-21 element index, bit 31 = a component-binding dword follows
+local	ildisPrintDclvOperands	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintDclvOperands	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintDclvOperands	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintDclvOperands	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintDclvOperands	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintDclvOperands	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisPrintDclvOperands	uVar1	elementIndex	CONFIRMED	bits 16-21, printed with _elem(%d)
+local	ildisPrintDclvOperands	uVar2	componentWord	CONFIRMED	dword read at the cursor: 2-bit bound component codes for x, y, z, w
+local	ildisPrintDclvOperands	auStack_38	textBuffer	CONFIRMED	sprintf destination
+local	ildisPrintDclpiOperands	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintDclpiOperands	param_2	declarationWord	CONFIRMED	bound component codes for x, y, z, w at bits 16, 18, 20, 22; bit 24 _center, bit 25 _origin
+local	ildisPrintDclpiOperands	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintDclpiOperands	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintDclpiOperands	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintDclpiOperands	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintDclpiOperands	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintDclpiOperands	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisPrintResourceType	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintResourceType	param_2	resourceTypeCode	CONFIRMED	0 unknown, 1 1d, 2 2d, 3 3d, 4 cubemap, 5 2dmsaa, 6 4c, 7 buffer, 8 1darray, 9 2darray
+local	ildisPrintResourceType	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintResourceType	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintResourceType	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintResourceType	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintResourceType	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintResourceType	iVar1	passThroughR9Zero	INFERRED	constant 0 forwarded in the r9 pass-through slot
+local	ildisPrintDclptCoordMode	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintDclptCoordMode	param_2	declarationWord	CONFIRMED	resource type in bits 24-26, coordinate mode in bits 27-28
+local	ildisPrintDclptCoordMode	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintDclptCoordMode	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintDclptCoordMode	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintDclptCoordMode	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintDclptCoordMode	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintDclptCoordMode	pcVar1	coordModeText	CONFIRMED	"_coordmode(normalized)" / "(unknown)" / "(unnormalized)"
+local	ildisPrintDclptCoordMode	uVar2	coordModeCode	CONFIRMED	bits 27-28
+local	ildisPrintDcldefComponent	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintDcldefComponent	param_2	componentCode	CONFIRMED	0 "0", 1 "1", 2 "*" (anything else counts an error)
+local	ildisPrintDcldefComponent	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintDcldefComponent	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintDcldefComponent	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintDcldefComponent	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintDcldefComponent	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintDcldefComponents	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintDcldefComponents	param_2	componentsWord	CONFIRMED	2-bit component codes for x, y, z, w at bits 8, 10, 12, 14
+local	ildisPrintDcldefComponents	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintDcldefComponents	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintDcldefComponents	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintDcldefComponents	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintDcldefComponents	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintDcldefComponents	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisPrintDcldefComponents	uStack0000001c	componentsWordHome	INFERRED	home slot where Ghidra spilled param_2
+local	ildisPrintDcldefComponents	uStack00000020	passThroughR5Home	INFERRED	home slot where Ghidra spilled param_3
+local	ildisPrintZeroOp	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintZeroOp	param_2	zeroOpWord	CONFIRMED	bits 16-17: 0 fltmax, 1 zero, 2 infinity, 3 inf_else_max
+local	ildisPrintZeroOp	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintZeroOp	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintZeroOp	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintZeroOp	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintZeroOp	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintZeroOp	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisPrintZeroOp	uVar1	zeroOpCode	CONFIRMED	bits 16-17
+local	ildisPrintStage	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintStage	param_2	stageWord	CONFIRMED	bits 16-23 are the stage number
+local	ildisPrintStage	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintStage	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintStage	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintStage	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintStage	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintStage	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisPrintStage	uVar1	stageIndex	CONFIRMED	bits 16-23
+local	ildisPrintStage	auStack_38	textBuffer	CONFIRMED	sprintf destination
+local	ildisPrintTexldmsModifiers	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintTexldmsModifiers	param_2	controlWord	CONFIRMED	bit 31: filter-mode dword follows; bit 30: texel-offset dword follows
+local	ildisPrintTexldmsModifiers	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintTexldmsModifiers	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintTexldmsModifiers	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintTexldmsModifiers	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintTexldmsModifiers	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintTexldmsModifiers	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisPrintTexldmsModifiers	uVar3	extraWord	CONFIRMED	dword read at the cursor (filter modes, then offsets)
+local	ildisPrintTexldmsModifiers	uVar1	integerBitsArg	CONFIRMED	constant 7 passed as the integer width
+local	ildisPrintTexldmsModifiers	uVar2	fractionBitsArg	CONFIRMED	constant 1 passed as the fraction width
+local	ildisPrintNormalizeFlag	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintNormalizeFlag	param_2	controlWord	CONFIRMED	the flag bit is tested in this word
+local	ildisPrintNormalizeFlag	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintNormalizeFlag	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintNormalizeFlag	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintNormalizeFlag	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintNormalizeFlag	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintRoundFlag	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintRoundFlag	param_2	controlWord	CONFIRMED	the flag bit is tested in this word
+local	ildisPrintRoundFlag	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintRoundFlag	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintRoundFlag	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintRoundFlag	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintRoundFlag	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintSampleFlag	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintSampleFlag	param_2	controlWord	CONFIRMED	the flag bit is tested in this word
+local	ildisPrintSampleFlag	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintSampleFlag	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintSampleFlag	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintSampleFlag	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintSampleFlag	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintCentroidFlag	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintCentroidFlag	param_2	controlWord	CONFIRMED	the flag bit is tested in this word
+local	ildisPrintCentroidFlag	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintCentroidFlag	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintCentroidFlag	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintCentroidFlag	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintCentroidFlag	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintSampleModifiers	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintSampleModifiers	param_2	controlWord	CONFIRMED	bit 31: filter-mode dword follows; bit 30: texel-offset dword follows; bit 25 _absolute
+local	ildisPrintSampleModifiers	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintSampleModifiers	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintSampleModifiers	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintSampleModifiers	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintSampleModifiers	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintSampleModifiers	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisPrintSampleModifiers	uVar2	filterWord	CONFIRMED	filter-mode dword read at the cursor (bit 25 = _qualitybias)
+local	ildisPrintSampleModifiers	uVar1	offsetsWord	CONFIRMED	texel-offset dword read at the cursor
+local	ildisPrintLoadModifiers	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintLoadModifiers	param_2	controlWord	CONFIRMED	bit 31: filter-mode dword follows; bit 30: texel-offset dword follows
+local	ildisPrintLoadModifiers	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintLoadModifiers	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintLoadModifiers	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintLoadModifiers	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintLoadModifiers	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintLoadModifiers	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisPrintLoadModifiers	uVar1	extraWord	CONFIRMED	dword read at the cursor (filter modes, then offsets)
+local	ildisPrintMatrixMode	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintMatrixMode	param_2	matrixModeWord	CONFIRMED	matrix size code
+local	ildisPrintMatrixMode	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintMatrixMode	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintMatrixMode	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintMatrixMode	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintMatrixMode	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintMatrixMode	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisPrintMatrixMode	uVar1	matrixCode	CONFIRMED	code selecting 4x4 / 4x3 / 3x4 / 3x3 / 3x2
+local	ildisPrintRelop	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintRelop	param_2	relopWord	CONFIRMED	bits 16-18: 0 ne, 1 eq, 2 ge, 3 gt, 4 le, 5 lt
+local	ildisPrintRelop	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintRelop	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintRelop	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintRelop	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintRelop	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintRelop	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisPrintRelop	uVar1	relopCode	CONFIRMED	bits 16-18
+local	ildisPrintRegisterType	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintRegisterType	param_2	registerTypeCode	CONFIRMED	register type 0..0x20 (b c i a r v vIndex ... o)
+local	ildisPrintRegisterType	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintRegisterType	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintRegisterType	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintRegisterType	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintRegisterType	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintRegisterType	pcVar1	registerTypeText	CONFIRMED	text appended for the register type
+local	ildisPrintDestAnd3Sources	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintDestAnd3Sources	param_2	passThroughR4	INFERRED	Ghidra register-argument pass-through (r4): not used by this function
+local	ildisPrintDestAnd3Sources	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintDestAnd3Sources	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintDestAnd3Sources	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintDestAnd3Sources	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintDestAnd3Sources	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintDestAnd3Sources	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisPrintDestAnd2Sources	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintDestAnd2Sources	param_2	passThroughR4	INFERRED	Ghidra register-argument pass-through (r4): not used by this function
+local	ildisPrintDestAnd2Sources	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintDestAnd2Sources	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintDestAnd2Sources	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintDestAnd2Sources	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintDestAnd2Sources	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintDestAnd2Sources	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisPrintDestAnd1Source	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintDestAnd1Source	param_2	passThroughR4	INFERRED	Ghidra register-argument pass-through (r4): not used by this function
+local	ildisPrintDestAnd1Source	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintDestAnd1Source	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintDestAnd1Source	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintDestAnd1Source	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintDestAnd1Source	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintDestAnd1Source	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisRun	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisRun	param_2	passThroughR4	INFERRED	Ghidra register-argument pass-through (r4): not used by this function
+local	ildisRun	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisRun	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisRun	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisRun	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintHeader	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintHeader	param_2	passThroughR4	INFERRED	Ghidra register-argument pass-through (r4): not used by this function
+local	ildisPrintHeader	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisPrintHeader	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintHeader	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintHeader	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintHeader	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisPrintHeader	uVar1	shaderType	CONFIRMED	bits 16-23 of the version token: 0 vs, 1 ps, 2 gs
+local	ildisPrintHeader	uVar4	minorVersion	CONFIRMED	bits 0-7 of the version token (last %d of il_%s_%d_%d)
+local	ildisPrintHeader	pcVar2	shaderTypeText	CONFIRMED	"ps" / "vs" / "gs"
+local	ildisPrintHeader	param_7	shaderTypeTextArg	CONFIRMED	the type text, passed as a printf argument (assigned in the branches)
+local	ildisPrintHeader	local_128	shaderTypeChar0	CONFIRMED	first character of the type text copy
+local	ildisPrintHeader	local_127	shaderTypeCharsRest	CONFIRMED	remaining characters of the type text copy
+local	ildisPrintProgram	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisPrintProgram	param_2	tokenStart	CONFIRMED	first token of the stream (stored at ctx+4 and ctx+8)
+local	ildisPrintProgram	param_3	tokenCount	CONFIRMED	number of dwords (stored at ctx+0xc)
+local	ildisDisassembleBody	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisDisassembleBody	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisDisassembleBody	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisDisassembleBody	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisDisassembleBody	param_2	tokenStart	CONFIRMED	first token (stored at ctx+4 and ctx+8)
+local	ildisDisassembleBody	param_3	tokenCount	CONFIRMED	number of dwords (ctx+0xc)
+local	ildisDisassembleBody	uVar1	lineBufferSize	CONFIRMED	0x200, the memset size of the line buffer at ctx+0x10
+local	ildisDisassembleTokens	param_1	sinkArg	CONFIRMED	stored at ctx+0x214 (local_34), the first argument of the sink callback
+local	ildisDisassembleTokens	param_2	tokenStart	CONFIRMED	first token, passed to ildisPrintProgram
+local	ildisDisassembleTokens	param_3	tokenCount	CONFIRMED	number of dwords, passed to ildisPrintProgram
+local	ildisDisassembleTokens	param_4	sinkRecord	CONFIRMED	stored at ctx+0x210 (local_38): record whose first word is the sink function
+local	ildisDisassembleTokens	local_38	sinkRecordField	CONFIRMED	ctx+0x210
+local	ildisDisassembleTokens	local_34	sinkArgField	CONFIRMED	ctx+0x214
+local	ildisAppendf	param_1	disassembler	CONFIRMED	context holding the line buffer at +0x10
+local	ildisAppendf	param_2	format	CONFIRMED	printf format string
+local	ildisAppendf	param_3	fmtArgR5	CONFIRMED	printf argument register spilled to the home area and passed on as the va_list
+local	ildisAppendf	param_4	fmtArgR6	CONFIRMED	printf argument register spilled to the home area and passed on as the va_list
+local	ildisAppendf	param_5	fmtArgR7	CONFIRMED	printf argument register spilled to the home area and passed on as the va_list
+local	ildisAppendf	param_6	fmtArgR8	CONFIRMED	printf argument register spilled to the home area and passed on as the va_list
+local	ildisAppendf	param_7	fmtArgR9	CONFIRMED	printf argument register spilled to the home area and passed on as the va_list
+local	ildisAppendf	param_8	fmtArgR10	CONFIRMED	printf argument register spilled to the home area and passed on as the va_list
+local	ildisAppendf	uVar1	currentLength	CONFIRMED	strlen of the line buffer
+local	ildisInitContext	param_1	disassembler	CONFIRMED	context being cleared
+local	ildisSetIndent	param_1	disassembler	CONFIRMED	context whose +0x21c indent is set
+local	ildisSetIndent	param_2	indent	CONFIRMED	new indent, clamped to >= 0
+local	ildisSkipToken	param_1	disassembler	CONFIRMED	context whose cursor (+8) advances by one dword
+local	ildisFlushLine	param_1	disassembler	CONFIRMED	first argument of every ildis function: the disassembler context (+8 cursor, +0x10 line buffer)
+local	ildisFlushLine	param_2	passThroughR4	INFERRED	Ghidra register-argument pass-through (r4): not used by this function
+local	ildisFlushLine	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to ildisAppendf / printf
+local	ildisFlushLine	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisFlushLine	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisFlushLine	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisFlushLine	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisFlushLine	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisPrintSourceOperand	param_1	disassembler	CONFIRMED	context; param_1[2] is the token cursor
+local	ildisPrintSourceOperand	param_2	passThroughR4	INFERRED	Ghidra register-argument pass-through (r4)
+local	ildisPrintSourceOperand	param_3	printedValue	INFERRED	first the pass-through r5, then reused as the value printed by sprintf
+local	ildisPrintSourceOperand	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintSourceOperand	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintSourceOperand	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintSourceOperand	bVar1	noModifierWord	CONFIRMED	bit 22 of the operand word is clear: no modifier (swizzle) dword follows
+local	ildisPrintSourceOperand	bVar2	indexPrinted	INFERRED	the register index was already printed (register types 0x1b / 0x1c)
+local	ildisPrintSourceOperand	uVar8	relativeMode	CONFIRMED	operand word & 0x1800000: 0x800000 address-register relative, 0x1000000 nested operand
+local	ildisPrintSourceOperand	uVar7	extraOperandCount	INFERRED	bit 25 of the operand word: number of extra operands printed after the first
+local	ildisPrintSourceOperand	uVar3	extraOperandBit	INFERRED	operand word & 0x2000000: selects "[%d]" over "%d" for the index
+local	ildisPrintSourceOperand	puVar5	tokenPtr	CONFIRMED	cursor value read at entry
+local	ildisPrintSourceOperand	auStack_b8	formatBuffer	CONFIRMED	sprintf destination
+local	ildisPrintSourceOperand	local_78	formatBuffer2	CONFIRMED	second sprintf destination ("+%lu")
+local	ildisPrintSourceOperand	uVar6	addressRegisterIndex	INFERRED	address register index ("a%d") from the relative word
+use	FUN_000dd1f8	uVar10	operandWord	CONFIRMED	the operand token read from the stream (bits 16-21 register type, 22 modifier dword, 23-24 relative mode, 25 extra operand, 26 literal index)	^\s*uVar10\ =\ \*puVar5;$@1	^\s*uVar10\ =\ unaff_r28\ >>\ 0x15\ &\ 7;$	all	none
+use	FUN_000dd1f8	uVar10	divCompSelect	CONFIRMED	bits 21-23 of the modifier dword: _divcomp component (1 y, 2 z, 3 w, 4 unknown)	^\s*uVar10\ =\ unaff_r28\ >>\ 0x15\ &\ 7;$@1		all	none
+use	FUN_000dd1f8	uVar4	letterStyle	CONFIRMED	returnZero_da8fc result: 0 selects the x/y/z/w letters	^\s*uVar4\ =\ FUN_000da8fc\(param_1,uVar10\);$@1	+1	all	rhs
+use	FUN_000dd1f8	uVar4	componentChar	CONFIRMED	character returned by ildisComponentSelectChar for the address register component	^\s*uVar4\ =\ FUN_000dac4c\(	+3	lhs	rhs
+use	FUN_000dd1f8	uVar4	letterStyle	CONFIRMED	returnZero_da8fc result: 0 selects the x/y/z/w letters	^\s*uVar4\ =\ FUN_000da8fc\(param_1,uVar10\);$@2		all	none
+local	ildisPrintDestinationOperand	param_1	disassembler	CONFIRMED	context; param_1[2] is the token cursor
+local	ildisPrintDestinationOperand	param_2	passThroughR4	INFERRED	Ghidra register-argument pass-through (r4)
+local	ildisPrintDestinationOperand	param_3	printedValue	INFERRED	first the pass-through r5, then reused as the value printed by sprintf
+local	ildisPrintDestinationOperand	param_4	fmtArgR6	INFERRED	printf argument register r6, forwarded unchanged
+local	ildisPrintDestinationOperand	param_5	fmtArgR7	INFERRED	printf argument register r7, forwarded unchanged
+local	ildisPrintDestinationOperand	param_6	fmtArgR8	INFERRED	printf argument register r8, forwarded unchanged
+local	ildisPrintDestinationOperand	param_7	fmtArgR9	INFERRED	printf argument register r9, forwarded unchanged
+local	ildisPrintDestinationOperand	param_8	fmtArgR10	INFERRED	printf argument register r10, forwarded unchanged
+local	ildisPrintDestinationOperand	bVar1	noModifierWord	CONFIRMED	bit 22 of the destination word is clear: no modifier dword follows
+local	ildisPrintDestinationOperand	bVar2	indexPrinted	INFERRED	the register index was already printed (register types 0x1b / 0x1c, or 0x1f with relative addressing)
+local	ildisPrintDestinationOperand	uVar7	operandWordOrIndex	INFERRED	the destination token; later narrowed to its 16-bit register index for printing
+local	ildisPrintDestinationOperand	uVar8	relativeModeOrWord	INFERRED	operand word & 0x1800000 (relative mode); reused for the second operand word of a 2-index register
+local	ildisPrintDestinationOperand	puVar5	tokenPtr	CONFIRMED	cursor value read at entry
+local	ildisPrintDestinationOperand	puVar3	registerTypeBits	CONFIRMED	operand word & 0x3f0000: register type in place
+local	ildisPrintDestinationOperand	uVar4	letterStyle	CONFIRMED	returnZero_da8f4 result: 0 selects x/y/z/w letters for the write mask
+local	ildisPrintDestinationOperand	auStack_b8	formatBuffer	CONFIRMED	sprintf destination
+local	ildisPrintDestinationOperand	auStack_78	formatBuffer2	CONFIRMED	second sprintf destination ("+%lu")
+local	scDumpSrcShader	param_1	sinkContext	INFERRED	same role as the parameter of the Impl function this wrapper forwards to (the wrapper spills r3..r10 and passes the address of one)
+local	scDumpSrcShader	param_2	shaderState	INFERRED	same role as the parameter of the Impl function this wrapper forwards to (the wrapper spills r3..r10 and passes the address of one)
+local	scDumpSrcShader	param_3	sinkRecord	INFERRED	same role as the parameter of the Impl function this wrapper forwards to (the wrapper spills r3..r10 and passes the address of one)
+local	scDumpSrcShader	param_4	argR6	INFERRED	same role as the parameter of the Impl function this wrapper forwards to (the wrapper spills r3..r10 and passes the address of one)
+local	scDumpSrcShader	param_5	argR7Text	INFERRED	same role as the parameter of the Impl function this wrapper forwards to (the wrapper spills r3..r10 and passes the address of one)
+local	scDumpSrcShader	param_6	argR8Text	INFERRED	same role as the parameter of the Impl function this wrapper forwards to (the wrapper spills r3..r10 and passes the address of one)
+local	scDumpSrcShader	param_7	argR9Text	INFERRED	same role as the parameter of the Impl function this wrapper forwards to (the wrapper spills r3..r10 and passes the address of one)
+local	scDumpSrcShader	param_8	argR10Text	INFERRED	same role as the parameter of the Impl function this wrapper forwards to (the wrapper spills r3..r10 and passes the address of one)
+local	scDumpShader	param_1	sinkArg	INFERRED	same role as the parameter of the Impl function this wrapper forwards to (the wrapper spills r3..r10 and passes the address of one)
+local	scDumpShader	param_2	shaderState	INFERRED	same role as the parameter of the Impl function this wrapper forwards to (the wrapper spills r3..r10 and passes the address of one)
+local	scDumpShader	param_3	optionsArg	INFERRED	same role as the parameter of the Impl function this wrapper forwards to (the wrapper spills r3..r10 and passes the address of one)
+local	scDumpShader	param_4	argR6	INFERRED	same role as the parameter of the Impl function this wrapper forwards to (the wrapper spills r3..r10 and passes the address of one)
+local	scDumpShader	param_5	sinkFn	INFERRED	same role as the parameter of the Impl function this wrapper forwards to (the wrapper spills r3..r10 and passes the address of one)
+local	scDumpShader	param_6	argR8	INFERRED	same role as the parameter of the Impl function this wrapper forwards to (the wrapper spills r3..r10 and passes the address of one)
+local	scDumpShader	param_7	argR9	INFERRED	same role as the parameter of the Impl function this wrapper forwards to (the wrapper spills r3..r10 and passes the address of one)
+local	scDumpShaderToString	param_1	sinkArg	INFERRED	same role as the parameter of the Impl function this wrapper forwards to (the wrapper spills r3..r10 and passes the address of one)
+local	scDumpShaderToString	param_2	shaderState	INFERRED	same role as the parameter of the Impl function this wrapper forwards to (the wrapper spills r3..r10 and passes the address of one)
+local	scDumpShaderToString	param_3	sinkFn	INFERRED	same role as the parameter of the Impl function this wrapper forwards to (the wrapper spills r3..r10 and passes the address of one)
+local	scDumpShaderToString	param_4	argR6	INFERRED	same role as the parameter of the Impl function this wrapper forwards to (the wrapper spills r3..r10 and passes the address of one)
+local	scDumpShaderToString	param_5	argR7	INFERRED	same role as the parameter of the Impl function this wrapper forwards to (the wrapper spills r3..r10 and passes the address of one)
+local	scDumpShaderToString	param_6	argR8	INFERRED	same role as the parameter of the Impl function this wrapper forwards to (the wrapper spills r3..r10 and passes the address of one)
+local	scDumpShaderToString	param_7	argR9	INFERRED	same role as the parameter of the Impl function this wrapper forwards to (the wrapper spills r3..r10 and passes the address of one)
+local	scDumpPixelProgramPsn	param_1	sinkRecord	CONFIRMED	record whose two words are stored into the globals 0x1fa618 / 0x1fa61c
+local	scDumpPixelProgramPsn	param_2	shaderState	CONFIRMED	shader state; the PSN program record is at +0x64c
+local	scDumpPixelProgram	param_1	sinkContext	INFERRED	stored at local_34, the sink argument of the record
+local	scDumpPixelProgram	param_2	shaderState	CONFIRMED	shader state passed to scDumpPixelProgramPsn
+local	scDumpPixelProgram	param_3	optionsArg	INFERRED	forwarded unchanged
+local	scDumpPixelProgram	param_4	sinkFn	INFERRED	stored at local_38, the sink function of the record
+local	scDumpPixelProgram	local_38	sinkFnField	CONFIRMED	first word of the two-word sink record
+local	scDumpPixelProgram	local_34	sinkContextField	CONFIRMED	second word of the two-word sink record
+local	scDumpPixelProgram	uVar1	sinkFnCopy	INFERRED	copy of param_4 saved before the record is cleared

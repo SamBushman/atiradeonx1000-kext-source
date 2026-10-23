@@ -2600,169 +2600,169 @@ bfd14	bfd60	table	FUN_000bfcc0	19
 bfecc	bfed0	padding	FUN_000bfcc0	1	
 c00ec	c00f0	padding	FUN_000bfed0	1	
 c0874	c0880	padding	FUN_000bfed0	3	
-c0a9c	c0aa0	padding	FUN_000c0880	1	
-c0ac4	c0ad0	padding	FUN_000c0880	3	
-c0ae8	c0af0	padding	FUN_000c0880	2	
-c0b08	c0b10	padding	FUN_000c0880	2	
-c0fc8	c0fd0	padding	FUN_000c0880	2	
-c1708	c1710	padding	FUN_000c0fd0	2	
-c1728	c1730	padding	FUN_000c0fd0	2	
-c175c	c1760	padding	FUN_000c0fd0	1	
-c1774	c1780	padding	FUN_000c0fd0	3	
-c17e8	c17f0	padding	FUN_000c1780	2	
-c18cc	c18d0	padding	FUN_000c1780	1	
-c1914	c1920	padding	FUN_000c1780	3	
-c1ad8	c1ae0	padding	FUN_000c1780	2	
-c1b04	c1b10	padding	FUN_000c1780	3	
-c1b1c	c1b20	padding	FUN_000c1780	1	
-c1c0c	c1c10	padding	FUN_000c1780	1	
-c1c68	c1c70	padding	FUN_000c1780	2	
-c1c94	c1ca0	padding	FUN_000c1780	3	
-c1cac	c1cb0	padding	FUN_000c1780	1	
-c1d54	c1d60	padding	FUN_000c1780	3	
-c1e38	c1e40	padding	FUN_000c1d60	2	
-c1e74	c1e80	padding	FUN_000c1d60	3	
-c1e88	c1e90	padding	FUN_000c1d60	2	
-c1f78	c1f80	padding	FUN_000c1e90	2	
-c1fe8	c1ff0	padding	FUN_000c1f80	2	
-c2074	c2080	padding	FUN_000c1f80	3	
-c20f4	c2100	padding	FUN_000c1f80	3	
-c2138	c2140	padding	FUN_000c1f80	2	
-c22f8	c2300	padding	FUN_000c1f80	2	
-c236c	c2370	padding	FUN_000c1f80	1	
-c243c	c2440	padding	FUN_000c1f80	1	
-c24ac	c24b0	padding	FUN_000c1f80	1	
-c25b4	c26b8	table	FUN_000c1f80	65	
-c2704	c2710	padding	FUN_000c1f80	3	
-c2824	c2834	millicode	FUN_000c1f80	4	
-c2e34	c2e40	padding	FUN_000c2834	3	
-c2e94	c2ea0	padding	FUN_000c2e70	3	
-c2f18	c2f20	padding	FUN_000c2ea0	2	
-c2f6c	c2f70	padding	FUN_000c2f20	1	
-c3004	c3010	padding	FUN_000c2fb0	3	
-c30c4	c30d0	padding	FUN_000c3090	3	
-c30f8	c3100	padding	FUN_000c30d0	2	
-c3238	c3240	padding	FUN_000c3100	2	
-c3274	c3280	padding	FUN_000c3240	3	
-c32e4	c32f0	padding	FUN_000c3240	3	
-c3434	c3440	padding	FUN_000c3240	3	
-c35f8	c3600	padding	FUN_000c3240	2	
-c3678	c3680	padding	FUN_000c3600	2	
-c36bc	c36c0	padding	FUN_000c3680	1	
-c36e8	c36f0	padding	FUN_000c3680	2	
-c3714	c3720	padding	FUN_000c36f0	3	
-c3738	c3740	padding	FUN_000c36f0	2	
-c37b8	c37c0	padding	FUN_000c3740	2	
-c3898	c38a0	padding	FUN_000c37c0	2	
-c3a98	c3aa0	padding	FUN_000c38a0	2	
-c3e48	c3e50	padding	FUN_000c3d60	2	
-c3fc8	c3fd0	padding	FUN_000c3e50	2	
-c4018	c4020	padding	FUN_000c3fd0	2	
-c42e8	c42f0	padding	FUN_000c3fd0	2	
-c44e8	c44f0	padding	FUN_000c42f0	2	
-c4694	c46a0	padding	FUN_000c42f0	3	
-c46d4	c46e0	padding	FUN_000c42f0	3	
-c4774	c4780	padding	FUN_000c42f0	3	
-c47fc	c4800	padding	FUN_000c42f0	1	
-c4824	c4830	padding	FUN_000c42f0	3	
-c4858	c4860	padding	FUN_000c42f0	2	
-c49d8	c49e0	padding	FUN_000c42f0	2	
-c49ec	c49f0	padding	FUN_000c42f0	1	
-c4a14	c4a20	padding	FUN_000c42f0	3	
-c4cd8	c4ce0	padding	FUN_000c42f0	2	
-c4da4	c4db0	padding	FUN_000c4ce0	3	
-c4dec	c4df0	padding	FUN_000c4ce0	1	
-c4e18	c4e20	padding	FUN_000c4ce0	2	
-c4e74	c4e80	padding	FUN_000c4ce0	3	
-c4ea4	c4eb0	padding	FUN_000c4ce0	3	
-c4efc	c4f00	padding	FUN_000c4ce0	1	
-c4f44	c4f50	padding	FUN_000c4ce0	3	
-c504c	c5050	padding	FUN_000c4ce0	1	
-c50ec	c50f0	padding	FUN_000c4ce0	1	
-c515c	c5160	padding	FUN_000c4ce0	1	
-c51fc	c5300	table	FUN_000c4ce0	65	
-c5354	c5360	padding	FUN_000c4ce0	3	
-c53d4	c53e0	padding	FUN_000c4ce0	3	
-c5454	c5460	padding	FUN_000c4ce0	3	
-c54a0	c5520	table	FUN_000c5460	32	
-c5528	c5530	padding	FUN_000c5460	2	
-c55b4	c5634	table	FUN_000c5460	32	
-c57a8	c57b0	padding	FUN_000c5460	2	
-c57f4	c5834	table	FUN_000c57b0	16	
-c5874	c58b4	table	FUN_000c57b0	16	
-c59b8	c59c0	padding	FUN_000c57b0	2	
-c59d4	c59e0	padding	FUN_000c59c0	3	
-c5a04	c5a10	padding	FUN_000c59c0	3	
-c5a48	c5a50	padding	FUN_000c59c0	2	
-c5a98	c5aa0	padding	FUN_000c59c0	2	
-c5ae4	c5af0	padding	FUN_000c59c0	3	
-c5b1c	c5b20	padding	FUN_000c59c0	1	
-c5b9c	c5ba0	padding	FUN_000c59c0	1	
-c5c3c	c5c40	padding	FUN_000c59c0	1	
-c5c44	c5c50	padding	FUN_000c59c0	3	
-c5c88	c5c90	padding	FUN_000c5c50	2	
-c5ce8	c5cf0	padding	FUN_000c5c50	2	
-c5d6c	c5d70	padding	FUN_000c5c50	1	
-c5da4	c5db0	padding	FUN_000c5c50	3	
-c5e1c	c5e20	padding	FUN_000c5c50	1	
-c5e44	c5e50	padding	FUN_000c5c50	3	
-c5e5c	c5e60	padding	FUN_000c5c50	1	
+c0a9c	c0aa0	padding	psnDecRecomputeSourceUsage	1	
+c0ac4	c0ad0	padding	psnDecRecomputeSourceUsage	3	
+c0ae8	c0af0	padding	psnDecRecomputeSourceUsage	2	
+c0b08	c0b10	padding	psnDecRecomputeSourceUsage	2	
+c0fc8	c0fd0	padding	psnDecRecomputeSourceUsage	2	
+c1708	c1710	padding	psnDecCanonicalizeEntry	2	
+c1728	c1730	padding	psnDecCanonicalizeEntry	2	
+c175c	c1760	padding	psnDecCanonicalizeEntry	1	
+c1774	c1780	padding	psnDecCanonicalizeEntry	3	
+c17e8	c17f0	padding	psnDecDecodeHwInstruction	2	
+c18cc	c18d0	padding	psnDecDecodeHwInstruction	1	
+c1914	c1920	padding	psnDecDecodeHwInstruction	3	
+c1ad8	c1ae0	padding	psnDecDecodeHwInstruction	2	
+c1b04	c1b10	padding	psnDecDecodeHwInstruction	3	
+c1b1c	c1b20	padding	psnDecDecodeHwInstruction	1	
+c1c0c	c1c10	padding	psnDecDecodeHwInstruction	1	
+c1c68	c1c70	padding	psnDecDecodeHwInstruction	2	
+c1c94	c1ca0	padding	psnDecDecodeHwInstruction	3	
+c1cac	c1cb0	padding	psnDecDecodeHwInstruction	1	
+c1d54	c1d60	padding	psnDecDecodeHwInstruction	3	
+c1e38	c1e40	padding	psnDecTrySwapAddressSlots	2	
+c1e74	c1e80	padding	psnDecTrySwapAddressSlots	3	
+c1e88	c1e90	padding	psnDecTrySwapAddressSlots	2	
+c1f78	c1f80	padding	psnDecSortAddressSlots	2	
+c1fe8	c1ff0	padding	psnDecEncodeHwWords	2	
+c2074	c2080	padding	psnDecEncodeHwWords	3	
+c20f4	c2100	padding	psnDecEncodeHwWords	3	
+c2138	c2140	padding	psnDecEncodeHwWords	2	
+c22f8	c2300	padding	psnDecEncodeHwWords	2	
+c236c	c2370	padding	psnDecEncodeHwWords	1	
+c243c	c2440	padding	psnDecEncodeHwWords	1	
+c24ac	c24b0	padding	psnDecEncodeHwWords	1	
+c25b4	c26b8	table	psnDecEncodeHwWords	65	
+c2704	c2710	padding	psnDecEncodeHwWords	3	
+c2824	c2834	millicode	psnDecEncodeHwWords	4	
+c2e34	c2e40	padding	psnDecAllocateTempsAndCompact	3	
+c2e94	c2ea0	padding	psnDecAlphaDestIs	3	
+c2f18	c2f20	padding	psnDecAlphaComponentReadsReg	2	
+c2f6c	c2f70	padding	psnDecAnySourceIsReg	1	
+c3004	c3010	padding	psnDecAnyPartialSourceIsReg	3	
+c30c4	c30d0	padding	psnDecFirstFreeAddressSlot	3	
+c30f8	c3100	padding	psnDecHasFreeAddressSlot	2	
+c3238	c3240	padding	psnDecRetargetSourceReg	2	
+c3274	c3280	padding	psnDecReplaceSourceAddress	3	
+c32e4	c32f0	padding	psnDecReplaceSourceAddress	3	
+c3434	c3440	padding	psnDecReplaceSourceAddress	3	
+c35f8	c3600	padding	psnDecReplaceSourceAddress	2	
+c3678	c3680	padding	psnDecReadsRegMask	2	
+c36bc	c36c0	padding	psnDecSourceHasPartialMask	1	
+c36e8	c36f0	padding	psnDecSourceHasPartialMask	2	
+c3714	c3720	padding	psnDecDestMatchesRegMask	3	
+c3738	c3740	padding	psnDecDestMatchesRegMask	2	
+c37b8	c37c0	padding	psnDecCanFoldIntoSlot	2	
+c3898	c38a0	padding	psnDecSwapAddressSlotsInSources	2	
+c3a98	c3aa0	padding	psnDecTryRebindAddressWithRollback	2	
+c3e48	c3e50	padding	psnConstantComponentsAreOne	2	
+c3fc8	c3fd0	padding	psnDecRangeHasConflict	2	
+c4018	c4020	padding	psnDecTryMergeAddressSlots	2	
+c42e8	c42f0	padding	psnDecTryMergeAddressSlots	2	
+c44e8	c44f0	padding	psnProgramToDecoded	2	
+c4694	c46a0	padding	psnProgramToDecoded	3	
+c46d4	c46e0	padding	psnProgramToDecoded	3	
+c4774	c4780	padding	psnProgramToDecoded	3	
+c47fc	c4800	padding	psnProgramToDecoded	1	
+c4824	c4830	padding	psnProgramToDecoded	3	
+c4858	c4860	padding	psnProgramToDecoded	2	
+c49d8	c49e0	padding	psnProgramToDecoded	2	
+c49ec	c49f0	padding	psnProgramToDecoded	1	
+c4a14	c4a20	padding	psnProgramToDecoded	3	
+c4cd8	c4ce0	padding	psnProgramToDecoded	2	
+c4da4	c4db0	padding	psnDecodedToProgram	3	
+c4dec	c4df0	padding	psnDecodedToProgram	1	
+c4e18	c4e20	padding	psnDecodedToProgram	2	
+c4e74	c4e80	padding	psnDecodedToProgram	3	
+c4ea4	c4eb0	padding	psnDecodedToProgram	3	
+c4efc	c4f00	padding	psnDecodedToProgram	1	
+c4f44	c4f50	padding	psnDecodedToProgram	3	
+c504c	c5050	padding	psnDecodedToProgram	1	
+c50ec	c50f0	padding	psnDecodedToProgram	1	
+c515c	c5160	padding	psnDecodedToProgram	1	
+c51fc	c5300	table	psnDecodedToProgram	65	
+c5354	c5360	padding	psnDecodedToProgram	3	
+c53d4	c53e0	padding	psnDecodedToProgram	3	
+c5454	c5460	padding	psnDecodedToProgram	3	
+c54a0	c5520	table	psnAccumulateRgbSelectRead	32	
+c5528	c5530	padding	psnAccumulateRgbSelectRead	2	
+c55b4	c5634	table	psnAccumulateRgbSelectRead	32	
+c57a8	c57b0	padding	psnAccumulateRgbSelectRead	2	
+c57f4	c5834	table	psnAccumulateAlphaSelectRead	16	
+c5874	c58b4	table	psnAccumulateAlphaSelectRead	16	
+c59b8	c59c0	padding	psnAccumulateAlphaSelectRead	2	
+c59d4	c59e0	padding	psnRaReleaseUse	3	
+c5a04	c5a10	padding	psnRaReleaseUse	3	
+c5a48	c5a50	padding	psnRaReleaseUse	2	
+c5a98	c5aa0	padding	psnRaReleaseUse	2	
+c5ae4	c5af0	padding	psnRaReleaseUse	3	
+c5b1c	c5b20	padding	psnRaReleaseUse	1	
+c5b9c	c5ba0	padding	psnRaReleaseUse	1	
+c5c3c	c5c40	padding	psnRaReleaseUse	1	
+c5c44	c5c50	padding	psnRaReleaseUse	3	
+c5c88	c5c90	padding	psnRaAssignDefinition	2	
+c5ce8	c5cf0	padding	psnRaAssignDefinition	2	
+c5d6c	c5d70	padding	psnRaAssignDefinition	1	
+c5da4	c5db0	padding	psnRaAssignDefinition	3	
+c5e1c	c5e20	padding	psnRaAssignDefinition	1	
+c5e44	c5e50	padding	psnRaAssignDefinition	3	
+c5e5c	c5e60	padding	psnRaAssignDefinition	1	
 c5fa8	c5fc0	table	FUN_000c5e60	6	
 c646c	c6470	padding	FUN_000c5e60	1	
-c6584	c6590	padding	FUN_000c6470	3	
-c66bc	c66c0	padding	FUN_000c6470	1	
-c67b4	c67c0	padding	FUN_000c6470	3	
-c6818	c6820	padding	FUN_000c6470	2	
-c6998	c69c0	table	FUN_000c6470	10	
-c6e40	c6e50	other	FUN_000c6470	4	
-c6e78	c6e80	padding	FUN_000c6e50	2	
-c6ee8	c6ef0	padding	FUN_000c6e90	2	
-c6f28	c6f30	padding	FUN_000c6ef0	2	
-c6f3c	c6f40	padding	FUN_000c6ef0	1	
-c6f4c	c6f50	padding	FUN_000c6ef0	1	
-c6f58	c6f60	padding	FUN_000c6ef0	2	
-c6f8c	c6f90	padding	FUN_000c6f60	1	
-c6fb8	c6fc0	padding	FUN_000c6f90	2	
-c6fe8	c6ff0	padding	FUN_000c6fc0	2	
+c6584	c6590	padding	psnReallocateTemps	3	
+c66bc	c66c0	padding	psnReallocateTemps	1	
+c67b4	c67c0	padding	psnReallocateTemps	3	
+c6818	c6820	padding	psnReallocateTemps	2	
+c6998	c69c0	table	psnReallocateTemps	10	
+c6e40	c6e50	other	psnReallocateTemps	4	
+c6e78	c6e80	padding	scCallbackFree	2	
+c6ee8	c6ef0	padding	scCallbackAppendFormatted	2	
+c6f28	c6f30	padding	scCallbackFopen	2	
+c6f3c	c6f40	padding	scCallbackFopen	1	
+c6f4c	c6f50	padding	scCallbackFopen	1	
+c6f58	c6f60	padding	scCallbackFopen	2	
+c6f8c	c6f90	padding	scCallbackFclose	1	
+c6fb8	c6fc0	padding	scCallbackFwrite	2	
+c6fe8	c6ff0	padding	scCallbackFread	2	
 c7108	c7110	padding	FUN_000c6ff0	2	
 c7118	c7120	padding	FUN_000c6ff0	2	
 c71d0	c71e0	other	FUN_000c6ff0	4	
-c7218	c7220	padding	FUN_000c71e0	2	
-c7234	c7240	padding	FUN_000c71e0	3	
-c726c	c7270	padding	FUN_000c7240	1	
-c7288	c7290	padding	FUN_000c7270	2	
-c72e8	c72f0	padding	FUN_000c7290	2	
-c7348	c7350	padding	FUN_000c72f0	2	
-c7388	c7390	padding	FUN_000c7350	2	
-c73b4	c73c0	padding	FUN_000c73a0	3	
-c73fc	c7400	padding	FUN_000c73c0	1	
-c7438	c7440	padding	FUN_000c73c0	2	
-c745c	c7460	padding	FUN_000c73c0	1	
-c7528	c7530	padding	FUN_000c7460	2	
-c7564	c7570	padding	FUN_000c7460	3	
-c7648	c7650	padding	FUN_000c7460	2	
-c7778	c7798	table	FUN_000c7650	8	
-c77fc	c7800	padding	FUN_000c7650	1	
-c78f8	c7900	padding	FUN_000c7650	2	
-c791c	c7920	padding	FUN_000c7650	1	
-c7928	c7930	padding	FUN_000c7650	2	
+c7218	c7220	padding	ilFreeRecordList	2	
+c7234	c7240	padding	ilFreeRecordList	3	
+c726c	c7270	padding	ilSelectorOneToThreeOrZero	1	
+c7288	c7290	padding	ilRecordInputSemantic	2	
+c72e8	c72f0	padding	ilRecordDefinedConstantPrimary	2	
+c7348	c7350	padding	ilRecordDefinedConstantSecondary	2	
+c7388	c7390	padding	ilAllocLowestFreeBit8	2	
+c73b4	c73c0	padding	ilNextCounterValue	3	
+c73fc	c7400	padding	ilPopFreeRegister	1	
+c7438	c7440	padding	ilPopFreeRegister	2	
+c745c	c7460	padding	ilPopFreeRegister	1	
+c7528	c7530	padding	ilEmitProjectiveDivide	2	
+c7564	c7570	padding	ilEmitProjectiveDivide	3	
+c7648	c7650	padding	ilEmitProjectiveDivide	2	
+c7778	c7798	table	ilEmitShadowCompare	8	
+c77fc	c7800	padding	ilEmitShadowCompare	1	
+c78f8	c7900	padding	ilEmitShadowCompare	2	
+c791c	c7920	padding	ilEmitShadowCompare	1	
+c7928	c7930	padding	ilEmitShadowCompare	2	
 c8104	c8110	padding	FUN_000c7930	3	
-c85f4	c8600	padding	FUN_000c8110	3	
+c85f4	c8600	padding	ilEmitPrologue	3	
 c8624	c8630	padding	FUN_000c8600	3	
 c86b8	c86c0	padding	FUN_000c8600	2	
 c86e4	c86f0	padding	FUN_000c8600	3	
 c870c	c8710	padding	FUN_000c8600	1	
-c87c8	c87d0	padding	FUN_000c8760	2	
-c88a4	c88b0	padding	FUN_000c87d0	3	
-c88fc	c8900	padding	FUN_000c87d0	1	
-c8908	c8910	padding	FUN_000c87d0	2	
-c8b24	c8b30	padding	FUN_000c8aa0	3	
-c8b7c	c8b80	padding	FUN_000c8aa0	1	
-c8c24	c8c30	padding	FUN_000c8aa0	3	
-c8cb4	c8cc0	padding	FUN_000c8aa0	3	
-c8d44	c8d50	padding	FUN_000c8aa0	3	
-c8e2c	c8e30	padding	FUN_000c8de0	1	
-c8e4c	c8e50	padding	FUN_000c8e30	1	
+c87c8	c87d0	padding	ilRemapSourceOperandRegister	2	
+c88a4	c88b0	padding	ilMarkOperandRegisterUsed	3	
+c88fc	c8900	padding	ilMarkOperandRegisterUsed	1	
+c8908	c8910	padding	ilMarkOperandRegisterUsed	2	
+c8b24	c8b30	padding	ilCopyInstructionRemapped	3	
+c8b7c	c8b80	padding	ilCopyInstructionRemapped	1	
+c8c24	c8c30	padding	ilCopyInstructionRemapped	3	
+c8cb4	c8cc0	padding	ilCopyInstructionRemapped	3	
+c8d44	c8d50	padding	ilCopyInstructionRemapped	3	
+c8e2c	c8e30	padding	ilPushDclRecord	1	
+c8e4c	c8e50	padding	ilStoreFloat4Constant	1	
 c90d0	c9264	table	ilAssembleProgram	101	
 c9988	c9990	padding	ilAssembleProgram	2	
 c9abc	c9c50	table	ilAssembleProgram	101	
@@ -2786,7 +2786,7 @@ cd380	cd388	other	FUN_000cd1c4	2
 ce2c8	ce2e0	table	FUN_000ce148	6	
 ce330	ce358	other	FUN_000ce148	10	_strcat
 ce41c	ce434	table	FUN_000ce148	6	
-ce568	ce580	table	FUN_000ce514	6	
+ce568	ce580	table	vsdisPrintOutputMapping	6	
 cead0	ceae8	table	FUN_000cea6c	6	
 cebcc	cebe4	table	FUN_000cea6c	6	
 cec34	cec5c	other	FUN_000cea6c	10	_strcat
@@ -2817,8 +2817,8 @@ d4704	d4720	table	FUN_000d183c	7
 d48a0	d48d0	table	FUN_000d183c	12	
 d4a2c	d4a48	table	FUN_000d183c	7	
 d4b88	d4b9c	table	FUN_000d183c	5	
-d4ec8	d4ecc	eh-pad	FUN_000d4e8c	1	__Unwind_Resume
-d4ee4	d4ef0	padding	FUN_000d4e8c	3	
+d4ec8	d4ecc	eh-pad	scDumpPixelProgram	1	__Unwind_Resume
+d4ee4	d4ef0	padding	scDumpPixelProgram	3	
 d4f1c	d4f20	padding	ffpsBuildRgbSourceOperand	1	
 d4f4c	d4f50	padding	ffpsBuildRgbSourceOperand	1	
 d4f74	d4f80	padding	ffpsBuildRgbSourceOperand	3	
@@ -2856,23 +2856,23 @@ d9f78	d9f80	other	FUN_000d9f3c	2
 da180	da184	eh-pad	FUN_000da0c0	1	__Unwind_Resume
 da578	da57c	eh-pad	FUN_000da4b8	1	__Unwind_Resume
 da880	da8a8	other	FUN_000da78c	10	
-dac88	daca0	table	FUN_000dac4c	6	
-daec0	daedc	table	FUN_000dae5c	7	
-dafb0	dafd0	table	FUN_000daf7c	8	
-db3a4	db3b8	table	FUN_000db350	5	
-db4a8	db4c0	table	FUN_000db458	6	
-db988	db9a4	table	FUN_000db938	7	
-dc2f8	dc320	table	FUN_000dc2c4	10	
-dc75c	dc770	table	FUN_000dc71c	5	
-dcc20	dcc34	table	FUN_000dcbcc	5	
-dcd28	dcd40	table	FUN_000dccd4	6	
-dcf28	dcfac	table	FUN_000dcef4	33	
-ddc20	ddf1c	table	FUN_000ddbcc	191	
-e0120	e0138	table	FUN_000ddbcc	6	
-e0790	e0794	millicode	FUN_000e0740	1	
+dac88	daca0	table	ildisComponentSelectChar	6	
+daec0	daedc	table	ildisPrintResultModifiers	7	
+dafb0	dafd0	table	ildisPrintElementFormat	8	
+db3a4	db3b8	table	ildisPrintCmpVal	5	
+db4a8	db4c0	table	ildisPrintUsage	6	
+db988	db9a4	table	ildisPrintAnisoMode	7	
+dc2f8	dc320	table	ildisPrintResourceType	10	
+dc75c	dc770	table	ildisPrintInputPrimitive	5	
+dcc20	dcc34	table	ildisPrintMatrixMode	5	
+dcd28	dcd40	table	ildisPrintRelop	6	
+dcf28	dcfac	table	ildisPrintRegisterType	33	
+ddc20	ddf1c	table	ildisPrintInstruction	191	
+e0120	e0138	table	ildisPrintInstruction	6	
+e0790	e0794	millicode	ildisDisassembleBody	1	
 e0cc4	e0cc8	millicode	FUN_000e0ca8	1	
 e0e04	e0e0c	millicode	FUN_000e0cd0	2	
-e1480	e1484	millicode	FUN_000e1464	1	
+e1480	e1484	millicode	Compiler__timerOutputFileName	1	
 e1a08	e1a0c	eh-pad	FUN_000e1920	1	__Unwind_Resume
 e1b30	e1b34	eh-pad	FUN_000e1a48	1	__Unwind_Resume
 e1bf0	e1bf4	millicode	FUN_000e1b70	1	
@@ -2977,7 +2977,7 @@ f2984	f2998	other	FUN_000f1d7c	5	0x193cc0
 f29b8	f29d0	eh-pad	FUN_000f1d7c	6	0x193cc0,__Unwind_Resume
 f3cf8	f3d38	table	FUN_000f3c30	16	
 f40d4	f4114	table	FUN_000f403c	16	
-f513c	f515c	eh-pad	FUN_000f4fdc	8	0x193cc0,__Unwind_Resume
+f513c	f515c	eh-pad	Compiler__getOrCreateLoadConstN	8	0x193cc0,__Unwind_Resume
 f6c50	f6c70	eh-pad	FUN_000f6a04	8	0x193cc0,__Unwind_Resume
 f8258	f8278	eh-pad	FUN_000f816c	8	0x193cc0,__Unwind_Resume
 f8430	f8450	eh-pad	FUN_000f83cc	8	0x193cc0,__Unwind_Resume
@@ -3042,7 +3042,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 10379c	1037b8	other	FUN_000fd5c8	7	0x193cc0
 103840	1038ec	table	FUN_000fd5c8	43	
 103cec	103cf8	eh-pad	FUN_000fd5c8	3	__Unwind_Resume
-103e80	103e84	millicode	FUN_00103e70	1	
+103e80	103e84	millicode	isLessThan2	1	
 10451c	10453c	other	FUN_001044e0	8	
 105164	10519c	eh-pad	IRInst__ctor_10502c	14	0x193cc0,__Unwind_Resume
 1052e8	105320	eh-pad	IRInst__ctor_1051b0	14	0x193cc0,__Unwind_Resume
@@ -3107,7 +3107,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 10b000	10b020	eh-pad	FUN_0010af38	8	0x193cc0,__Unwind_Resume
 10b384	10b39c	table	FUN_0010b32c	6	
 10b638	10b7f0	table	IRInst__getCompareCondition	110	
-10b874	10b88c	table	FUN_0010b820	6	
+10b874	10b88c	table	evaluateCompareFloats	6	
 10b9c0	10ba40	table	FUN_0010b93c	32	
 10be9c	10bebc	eh-pad	FUN_0010bd50	8	0x193cc0,__Unwind_Resume
 10c268	10c26c	eh-pad	FUN_0010c010	1	__Unwind_Resume
@@ -3305,7 +3305,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 137284	1372a4	eh-pad	FUN_0013719c	8	0x193cc0,__Unwind_Resume
 137620	137640	eh-pad	FUN_00137474	8	0x193cc0,__Unwind_Resume
 13785c	13787c	eh-pad	FUN_00137694	8	0x193cc0,__Unwind_Resume
-139384	1394a0	table	FUN_00139344	71	
+139384	1394a0	table	IRInst__isOpcodeInSet139344	71	
 139f4c	139f64	eh-pad	FUN_00139d40	6	0x193cc0,__Unwind_Resume
 13b49c	13b4b8	other	Program__hoistFetchInsts	7	0x193cc0
 13b808	13b824	other	Program__hoistFetchInsts	7	0x193cc0
@@ -3332,7 +3332,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 143e18	143e30	eh-pad	FUN_0014375c	6	0x193cc0,__Unwind_Resume
 146564	14657c	eh-pad	pass_post_pack_insts	6	0x193cc0,__Unwind_Resume
 1465d8	1465f0	eh-pad	FUN_0014657c	6	0x193cc0,__Unwind_Resume
-1473f0	1474a8	table	FUN_00147398	46	
+1473f0	1474a8	table	IRInst__isOpcodeInSet147398	46	
 148328	14832c	eh-pad	FUN_00147f54	1	__Unwind_Resume
 14b00c	14b010	eh-pad	Inst__collapseAlgebraic_0014acb8	1	__Unwind_Resume
 14b720	14b724	millicode	Inst__collapseAlgebraic_0014b150	1	
@@ -3398,7 +3398,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 172f04	172f0c	millicode	Compiler__peekValueNumber	2	
 172f20	172f24	millicode	Compiler__resetValueNumbers	1	
 172f2c	172f34	millicode	returnZero_172f24	2	
-1764dc	1764e0	millicode	FUN_00176474	1	
+1764dc	1764e0	millicode	ValueKey__findOrInsertLiteral	1	
 176e0c	176e20	other	FUN_00176d6c	5	
 178478	1784f8	table	FUN_00178338	32	
 1787b4	17887c	table	FUN_00178648	50	
@@ -3453,11 +3453,11 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 193bd0	193be8	other	FUN_00193b3c	6	
 193c74	193c94	eh-pad	FUN_00193c00	8	0x193cc0,__Unwind_Resume
 193d94	193d98	millicode	FUN_00193d18	1	
-193f04	193f08	millicode	FUN_00193eb8	1	
-194bac	194be8	eh-pad	FUN_00194aa8	15	0x193cc0,__Unwind_Resume
+193f04	193f08	millicode	Arena__bytesInUse	1	
+194bac	194be8	eh-pad	HashTable__grow	15	0x193cc0,__Unwind_Resume
 194dfc	194e1c	eh-pad	HashTable__insert	8	0x193cc0,__Unwind_Resume
-194f48	194f84	eh-pad	FUN_00194e44	15	0x193cc0,__Unwind_Resume
-1951b0	1951d0	eh-pad	FUN_001950e0	8	0x193cc0,__Unwind_Resume
+194f48	194f84	eh-pad	HashTable__grow_194e44	15	0x193cc0,__Unwind_Resume
+1951b0	1951d0	eh-pad	HashTable__insert_1950e0	8	0x193cc0,__Unwind_Resume
 195470	195474	millicode	packSourceModifier	1	
 195644	195650	millicode	R300MachineAssembler__vslot44_noOp	3	
 1961b0	1961c8	other	R300MachineAssembler__beginNextRecord	6	

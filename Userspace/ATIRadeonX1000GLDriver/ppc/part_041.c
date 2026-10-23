@@ -2027,8 +2027,8 @@ int FUN_00134ab8(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_00134b1c @ 0x134b1c (60 bytes) */
-int FUN_00134b1c(param_1, param_2, param_3)
+/* pairIndex @ 0x134b1c (60 bytes) */
+int pairIndex(param_1, param_2, param_3)
   undefined4 param_1;
   int param_2;
   int param_3;
@@ -2047,8 +2047,8 @@ int FUN_00134b1c(param_1, param_2, param_3)
   return iVar1 + ((int)uVar2 >> 1) + (uint)((int)uVar2 < 0 && (uVar2 & 1) != 0);
 }
 
-/* FUN_00134b58 @ 0x134b58 (76 bytes) */
-int FUN_00134b58(param_1, param_2, param_3)
+/* InterferenceMatrix__setPair @ 0x134b58 (76 bytes) */
+int InterferenceMatrix__setPair(param_1, param_2, param_3)
   int *param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -2057,21 +2057,21 @@ int FUN_00134b58(param_1, param_2, param_3)
   int iVar2;
   
   iVar2 = *param_1;
-  uVar1 = ((int (*)())FUN_00134b1c)(param_1,param_2,param_3);
+  uVar1 = ((int (*)())pairIndex)(param_1,param_2,param_3);
   iVar2 = (uVar1 >> 3 & 0x1ffffffc) + iVar2;
   *(uint *)(iVar2 + 8) = 1 << (uVar1 & 0x1f) | *(uint *)(iVar2 + 8);
   return;
 }
 
-/* FUN_00134ba4 @ 0x134ba4 (76 bytes) */
-int FUN_00134ba4(param_1, param_2, param_3)
+/* InterferenceMatrix__testPair @ 0x134ba4 (76 bytes) */
+int InterferenceMatrix__testPair(param_1, param_2, param_3)
   int *param_1;
   undefined4 param_2;
   undefined4 param_3;
 {
   uint uVar1;
   
-  uVar1 = ((int (*)())FUN_00134b1c)(param_1,param_2,param_3);
+  uVar1 = ((int (*)())pairIndex)(param_1,param_2,param_3);
   return *(uint *)((uVar1 >> 3 & 0x1ffffffc) + *param_1 + 8) >> (uVar1 & 0x1f) & 1;
 }
 
@@ -2098,23 +2098,23 @@ int FUN_00134c18(param_1, param_2, param_3)
 {
   bool bVar1;
   int callResult;
-  int iVar3;
+  int loopIndex;
   int iVar4;
   
-  iVar3 = 0;
+  loopIndex = 0;
   iVar4 = *(int *)(param_1 + 8);
   do {
-    callResult = ((int (*)())FUN_00134bf0)(param_3,*(undefined4 *)(iVar3 * 4 + iVar4),1);
+    callResult = ((int (*)())FUN_00134bf0)(param_3,*(undefined4 *)(loopIndex * 4 + iVar4),1);
     if (callResult == param_2) {
-      *(undefined4 *)(iVar3 * 4 + iVar4) = *(undefined4 *)(iVar4 + *(int *)(param_1 + 4) * 4);
+      *(undefined4 *)(loopIndex * 4 + iVar4) = *(undefined4 *)(iVar4 + *(int *)(param_1 + 4) * 4);
       *(int *)(param_1 + 4) = *(int *)(param_1 + 4) + -1;
     }
     else if ((*(int *)(param_1 + 4) == (*(int *)(param_1 + 4) / 7) * 7) &&
             (*(int *)(iVar4 + 0x1c) != 0)) {
       iVar4 = *(int *)(iVar4 + 0x1c);
     }
-    bVar1 = iVar3 != 6;
-    iVar3 = iVar3 + 1;
+    bVar1 = loopIndex != 6;
+    loopIndex = loopIndex + 1;
   } while (bVar1);
   return;
 }
@@ -2251,8 +2251,8 @@ int FUN_00134ef4(param_1, param_2, param_3, compiler)
   return;
 }
 
-/* FUN_00134fc0 @ 0x134fc0 (80 bytes) */
-int FUN_00134fc0(param_1, param_2, param_3, param_4, param_5)
+/* storeAfterLocate @ 0x134fc0 (80 bytes) */
+int storeAfterLocate(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_1;
   undefined4 param_2;
   int *param_3;
@@ -2410,8 +2410,8 @@ int FUN_00135334(param_1, param_2, param_3)
   undefined1 auStack_38 [4];
   undefined1 auStack_34 [28];
   
-  if ((param_2 != param_3) && (iVar1 = ((int (*)())FUN_00134ba4)(param_1,param_2,param_3), iVar1 == 0)) {
-    ((int (*)())FUN_00134b58)(param_1,param_2,param_3);
+  if ((param_2 != param_3) && (iVar1 = ((int (*)())InterferenceMatrix__testPair)(param_1,param_2,param_3), iVar1 == 0)) {
+    ((int (*)())InterferenceMatrix__setPair)(param_1,param_2,param_3);
     puVar4 = *(uint **)(param_1 + 4);
     if (param_2 < *puVar4) {
       uVar2 = puVar4[1];
@@ -2437,7 +2437,7 @@ int FUN_00135334(param_1, param_2, param_3)
     else {
       puVar3 = (undefined4 *)Vector__elementRefGrow(puVar4,param_2);
     }
-    ((int (*)())FUN_00134fc0)(*puVar3,param_3,auStack_38,auStack_34,*(undefined4 *)(param_1 + 0x2c));
+    ((int (*)())storeAfterLocate)(*puVar3,param_3,auStack_38,auStack_34,*(undefined4 *)(param_1 + 0x2c));
     puVar4 = *(uint **)(param_1 + 4);
     if (param_3 < *puVar4) {
       uVar2 = puVar4[1];
@@ -2463,7 +2463,7 @@ int FUN_00135334(param_1, param_2, param_3)
     else {
       puVar3 = (undefined4 *)Vector__elementRefGrow(puVar4,param_3);
     }
-    ((int (*)())FUN_00134fc0)(*puVar3,param_2,auStack_38,auStack_34,*(undefined4 *)(param_1 + 0x2c));
+    ((int (*)())storeAfterLocate)(*puVar3,param_2,auStack_38,auStack_34,*(undefined4 *)(param_1 + 0x2c));
   }
   return;
 }
@@ -2513,7 +2513,7 @@ int FUN_0013555c(param_1, param_2, param_3)
         iVar10 = 0;
       }
       callResult = ((int (*)())FUN_00134bf0)(param_1,*(undefined4 *)(iVar9 + iVar10 * 4),1);
-      if ((callResult != param_2) && (iVar6 = ((int (*)())FUN_00134ba4)(param_1,param_2,callResult), iVar6 == 0)) {
+      if ((callResult != param_2) && (iVar6 = ((int (*)())InterferenceMatrix__testPair)(param_1,param_2,callResult), iVar6 == 0)) {
         uVar4 = 1;
         ((int (*)())FUN_00135334)(param_1,param_2,callResult);
       }
@@ -2734,10 +2734,10 @@ int FUN_00135a2c(param_1, param_2, param_3)
         iVar10 = 0;
       }
       uVar4 = ((int (*)())FUN_00134bf0)(param_3,*(undefined4 *)(iVar9 + iVar10 * 4),1);
-      callResult = ((int (*)())FUN_00134ba4)(param_3,*(undefined4 *)(*param_1 * 4 + *(int *)(param_3 + 0x20)),uVar4);
+      callResult = ((int (*)())InterferenceMatrix__testPair)(param_3,*(undefined4 *)(*param_1 * 4 + *(int *)(param_3 + 0x20)),uVar4);
       if (callResult == 0) {
-        ((int (*)())FUN_00134fc0)(param_1,uVar4,auStack_48,auStack_44,*(undefined4 *)(param_3 + 0x2c));
-        ((int (*)())FUN_00134b58)(param_3,*(undefined4 *)(*param_1 * 4 + *(int *)(param_3 + 0x20)),uVar4);
+        ((int (*)())storeAfterLocate)(param_1,uVar4,auStack_48,auStack_44,*(undefined4 *)(param_3 + 0x2c));
+        ((int (*)())InterferenceMatrix__setPair)(param_3,*(undefined4 *)(*param_1 * 4 + *(int *)(param_3 + 0x20)),uVar4);
       }
       loopIndex = loopIndex + 1;
     } while (loopIndex < *(int *)(iVar7 + 4));
@@ -2762,7 +2762,7 @@ int FUN_00135c20(param_1, param_2, param_3)
   
   uVar1 = 1;
   if (param_2 != param_3) {
-    callResult = ((int (*)())FUN_00134ba4)(param_1,param_3,param_2);
+    callResult = ((int (*)())InterferenceMatrix__testPair)(param_1,param_3,param_2);
     uVar1 = 0;
     if (callResult == 0) {
       uVar5 = param_2;
@@ -3841,7 +3841,7 @@ int FUN_00137694(param_1, param_2)
       if (0 < iVar4) {
         loopIndex = 0;
         do {
-          uVar11 = ((int (*)())FUN_00134b1c)(param_1,loopIndex,iVar4);
+          uVar11 = ((int (*)())pairIndex)(param_1,loopIndex,iVar4);
           uVar6 = uVar11 >> 3 & 0x1ffffffc;
           if ((*(uint *)(uVar6 + iVar7 + 8) >> (uVar11 & 0x1f) & 1) != 0) {
             iVar1 = uVar6 + *param_1;
@@ -4074,8 +4074,8 @@ LAB_00137b2c:
   } while( true );
 }
 
-/* FUN_00137e74 @ 0x137e74 (36 bytes) */
-int FUN_00137e74(param_1, param_2, param_3)
+/* BitSet__testRegisterLane @ 0x137e74 (36 bytes) */
+int BitSet__testRegisterLane(param_1, param_2, param_3)
   int param_1;
   int param_2;
   int param_3;
@@ -4702,7 +4702,7 @@ LAB_00138d5c:
                   bitIndex = callResult << 2;
                   do {
                     if ((*(char *)((int)&usedComponents + componentNo) != '\0') &&
-                       (alreadyDefined = ((int (*)())FUN_00137e74)(block[0x42],callResult,componentNo), alreadyDefined == 0)) {
+                       (alreadyDefined = ((int (*)())BitSet__testRegisterLane)(block[0x42],callResult,componentNo), alreadyDefined == 0)) {
                       alreadyDefined = (bitIndex >> 3 & 0x1ffffffc) + block[0x40];
                       *(uint *)(alreadyDefined + 8) = 1 << (bitIndex & 0x1f) | *(uint *)(alreadyDefined + 8);
                     }
@@ -4728,7 +4728,7 @@ LAB_00138d5c:
                 do {
                   callResult = IRInst__getOperandRecord(walkInst,0);
                   if (((*(char *)(componentIndex + callResult + 0x10) == '\x01') &&
-                      (callResult = ((int (*)())FUN_00137e74)(block[0x42],sourceRegId,componentIndex), callResult == 0)) &&
+                      (callResult = ((int (*)())BitSet__testRegisterLane)(block[0x42],sourceRegId,componentIndex), callResult == 0)) &&
                      (callResult = ((int (*)())FUN_00138240)(sourceInst,componentIndex), callResult != 0)) {
                     callResult = (bitIndex >> 3 & 0x1ffffffc) + block[0x40];
                     *(uint *)(callResult + 8) = 1 << (bitIndex & 0x1f) | *(uint *)(callResult + 8);

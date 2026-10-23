@@ -1,0 +1,54 @@
+# Fork I4: variables of psnProgramToDecoded (FUN_000c42f0): strength-reduced record-field pointers named by record offset
+local	FUN_000c42f0	puVar16	recField0c	CONFIRMED	loop-invariant (strength-reduced) address of byte 0xc of the current 0x48-byte PSN record: initialised to header+0x54, advanced by 0x48 every iteration
+local	FUN_000c42f0	puVar9	recField0e	CONFIRMED	loop-invariant (strength-reduced) address of byte 0xe of the current 0x48-byte PSN record: initialised to header+0x56, advanced by 0x48 every iteration
+local	FUN_000c42f0	pbStack_e8	recField1f	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x1f of the current 0x48-byte PSN record: initialised to header+0x67, advanced by 0x48 every iteration
+local	FUN_000c42f0	pbStack_68	recField19	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x19 of the current 0x48-byte PSN record: initialised to header+0x61, advanced by 0x48 every iteration
+local	FUN_000c42f0	pbStack_6c	recField41	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x41 of the current 0x48-byte PSN record: initialised to header+0x89, advanced by 0x48 every iteration
+local	FUN_000c42f0	puStack_70	recField04	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x4 of the current 0x48-byte PSN record: initialised to header+0x4c, advanced by 0x48 every iteration
+local	FUN_000c42f0	puStack_74	recField08	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x8 of the current 0x48-byte PSN record: initialised to header+0x50, advanced by 0x48 every iteration
+local	FUN_000c42f0	pcStack_7c	recField09	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x9 of the current 0x48-byte PSN record: initialised to header+0x51, advanced by 0x48 every iteration
+local	FUN_000c42f0	puStack_80	recField06	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x6 of the current 0x48-byte PSN record: initialised to header+0x4e, advanced by 0x48 every iteration
+local	FUN_000c42f0	pbStack_84	recField0a	CONFIRMED	loop-invariant (strength-reduced) address of byte 0xa of the current 0x48-byte PSN record: initialised to header+0x52, advanced by 0x48 every iteration
+local	FUN_000c42f0	pbStack_88	recField0d	CONFIRMED	loop-invariant (strength-reduced) address of byte 0xd of the current 0x48-byte PSN record: initialised to header+0x55, advanced by 0x48 every iteration
+local	FUN_000c42f0	pbStack_8c	recField0b	CONFIRMED	loop-invariant (strength-reduced) address of byte 0xb of the current 0x48-byte PSN record: initialised to header+0x53, advanced by 0x48 every iteration
+local	FUN_000c42f0	pbStack_90	recField3f	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x3f of the current 0x48-byte PSN record: initialised to header+0x87, advanced by 0x48 every iteration
+local	FUN_000c42f0	pcStack_94	recField42	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x42 of the current 0x48-byte PSN record: initialised to header+0x8a, advanced by 0x48 every iteration
+local	FUN_000c42f0	pcStack_98	recField23	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x23 of the current 0x48-byte PSN record: initialised to header+0x6b, advanced by 0x48 every iteration
+local	FUN_000c42f0	pbStack_9c	recField22	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x22 of the current 0x48-byte PSN record: initialised to header+0x6a, advanced by 0x48 every iteration
+local	FUN_000c42f0	pcStack_a0	recField21	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x21 of the current 0x48-byte PSN record: initialised to header+0x69, advanced by 0x48 every iteration
+local	FUN_000c42f0	pbStack_a4	recField32	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x32 of the current 0x48-byte PSN record: initialised to header+0x7a, advanced by 0x48 every iteration
+local	FUN_000c42f0	puStack_a8	recField18	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x18 of the current 0x48-byte PSN record: initialised to header+0x60, advanced by 0x48 every iteration
+local	FUN_000c42f0	puStack_ac	recField20	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x20 of the current 0x48-byte PSN record: initialised to header+0x68, advanced by 0x48 every iteration
+local	FUN_000c42f0	puStack_b0	recField30	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x30 of the current 0x48-byte PSN record: initialised to header+0x78, advanced by 0x48 every iteration
+local	FUN_000c42f0	pcStack_b4	recField33	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x33 of the current 0x48-byte PSN record: initialised to header+0x7b, advanced by 0x48 every iteration
+local	FUN_000c42f0	puStack_bc	recField14	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x14 of the current 0x48-byte PSN record: initialised to header+0x5c, advanced by 0x48 every iteration
+local	FUN_000c42f0	pbStack_c0	recField16	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x16 of the current 0x48-byte PSN record: initialised to header+0x5e, advanced by 0x48 every iteration
+local	FUN_000c42f0	pbStack_c4	recField15	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x15 of the current 0x48-byte PSN record: initialised to header+0x5d, advanced by 0x48 every iteration
+local	FUN_000c42f0	puStack_cc	recField10	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x10 of the current 0x48-byte PSN record: initialised to header+0x58, advanced by 0x48 every iteration
+local	FUN_000c42f0	puStack_d0	recField12	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x12 of the current 0x48-byte PSN record: initialised to header+0x5a, advanced by 0x48 every iteration
+local	FUN_000c42f0	puVar23	recField1a	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x1a of the current 0x48-byte PSN record: initialised to header+0x62, advanced by 0x48 every iteration
+local	FUN_000c42f0	puStack_d8	recField2c	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x2c of the current 0x48-byte PSN record: initialised to header+0x74, advanced by 0x48 every iteration
+local	FUN_000c42f0	pbStack_dc	recField2f	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x2f of the current 0x48-byte PSN record: initialised to header+0x77, advanced by 0x48 every iteration
+local	FUN_000c42f0	pbStack_e0	recField3b	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x3b of the current 0x48-byte PSN record: initialised to header+0x83, advanced by 0x48 every iteration
+local	FUN_000c42f0	puVar20	recField40	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x40 of the current 0x48-byte PSN record: initialised to header+0x88, advanced by 0x48 every iteration
+local	FUN_000c42f0	pbVar28	recField31	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x31 of the current 0x48-byte PSN record: initialised to header+0x79, advanced by 0x48 every iteration
+local	FUN_000c42f0	puVar15	recField1c	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x1c of the current 0x48-byte PSN record: initialised to header+0x64, advanced by 0x48 every iteration
+local	FUN_000c42f0	puVar17	recField1e	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x1e of the current 0x48-byte PSN record: initialised to header+0x66, advanced by 0x48 every iteration
+local	FUN_000c42f0	pbVar26	recField2a	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x2a of the current 0x48-byte PSN record: initialised to header+0x72, advanced by 0x48 every iteration
+local	FUN_000c42f0	pbVar27	recField2d	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x2d of the current 0x48-byte PSN record: initialised to header+0x75, advanced by 0x48 every iteration
+local	FUN_000c42f0	pbVar18	recField2b	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x2b of the current 0x48-byte PSN record: initialised to header+0x73, advanced by 0x48 every iteration
+local	FUN_000c42f0	pbVar21	recField2e	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x2e of the current 0x48-byte PSN record: initialised to header+0x76, advanced by 0x48 every iteration
+local	FUN_000c42f0	pbVar24	recField39	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x39 of the current 0x48-byte PSN record: initialised to header+0x81, advanced by 0x48 every iteration
+local	FUN_000c42f0	puVar25	recField3c	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x3c of the current 0x48-byte PSN record: initialised to header+0x84, advanced by 0x48 every iteration
+local	FUN_000c42f0	pbVar19	recField3a	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x3a of the current 0x48-byte PSN record: initialised to header+0x82, advanced by 0x48 every iteration
+local	FUN_000c42f0	pbVar22	recField3d	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x3d of the current 0x48-byte PSN record: initialised to header+0x85, advanced by 0x48 every iteration
+local	FUN_000c42f0	pbStack_e4	recField3e	CONFIRMED	loop-invariant (strength-reduced) address of byte 0x3e of the current 0x48-byte PSN record: initialised to header+0x86, advanced by 0x48 every iteration
+local	FUN_000c42f0	puStack_d4	recField1aCopyd4	CONFIRMED	second induction copy of the address of byte 0x1a of the current PSN record (copied from puVar23 before the loop, advanced by 0x48 per iteration)
+local	FUN_000c42f0	puStack_c8	recField0eCopyc8	CONFIRMED	second induction copy of the address of byte 0xe of the current PSN record (copied from puVar9 before the loop, advanced by 0x48 per iteration)
+local	FUN_000c42f0	puStack_b8	recField0cCopyb8	CONFIRMED	second induction copy of the address of byte 0xc of the current PSN record (copied from puVar16 before the loop, advanced by 0x48 per iteration)
+local	FUN_000c42f0	puStack_78	recField0cCopy78	CONFIRMED	second induction copy of the address of byte 0xc of the current PSN record (copied from puVar16 before the loop, advanced by 0x48 per iteration)
+local	FUN_000c42f0	param_1	decodedProgram	CONFIRMED	destination decoded program: [0] entry count, [2] entry array (0xa0-byte entries, memset 0x80 each)
+local	FUN_000c42f0	param_2	recordCursor	CONFIRMED	PSN program pointer: starts at the header record and advances by 0x48 bytes per entry, so inside the loop it addresses the current record (kind at +0)
+local	FUN_000c42f0	puVar29	entry	CONFIRMED	current decoded entry (decodedProgram[2] + iStack_5c)
+local	FUN_000c42f0	iStack_5c	entryByteOffset	CONFIRMED	byte offset of the current entry in the entry array (+0xa0 per iteration)
+local	FUN_000c42f0	uStack_64	recordNumber	CONFIRMED	number of records converted so far (loop counter against the entry count *decodedProgram)

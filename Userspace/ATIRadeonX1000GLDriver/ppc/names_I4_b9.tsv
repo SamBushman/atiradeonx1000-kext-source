@@ -1,0 +1,252 @@
+use	psnDecAllocateTempsAndCompact	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar8\ !=\ 1;$	+1
+use	psnDecAllocateTempsAndCompact	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*\}\ while\ \(bVar1\);$	+1
+use	psnDecAllocateTempsAndCompact	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar2\ !=\ 0x40;$	+1
+use	psnDecAllocateTempsAndCompact	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*\}\ while\ \(bVar1\);$@2	+1
+use	psnDecAllocateTempsAndCompact	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar6\ !=\ 0x40;$	+1
+use	psnDecAllocateTempsAndCompact	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*\}\ while\ \(bVar1\);$@3	+1
+use	psnDecAllocateTempsAndCompact	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar10\ !=\ 1;$	+1
+use	psnDecAllocateTempsAndCompact	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*\}\ while\ \(bVar1\);$@4	+1
+use	psnDecAllocateTempsAndCompact	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar4\ !=\ 2;$	+1
+use	psnDecAllocateTempsAndCompact	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*\}\ while\ \(bVar1\);$@5	+1
+use	psnDecAllocateTempsAndCompact	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar8\ !=\ 1;$@2	+1
+use	psnDecAllocateTempsAndCompact	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*\}\ while\ \(bVar1\);$@6	+1
+use	psnDecAllocateTempsAndCompact	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar8\ !=\ 2;$	+1
+use	psnDecAllocateTempsAndCompact	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*\}\ while\ \(bVar1\);$@7	+1
+use	psnDecAllocateTempsAndCompact	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar2\ !=\ 1;$	+1
+use	psnDecAllocateTempsAndCompact	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*\}\ while\ \(bVar1\);$@8	+1
+use	psnDecAllocateTempsAndCompact	bVar1	outputHasDepthBit	INFERRED	bit 4 (0x10, depth / W output) of the half's output mask	^\s*bVar1\ =\ \(uVar14\ >>\ 4\ \&\ 1\)\ !=\ 0;$	+2
+use	psnDecAllocateTempsAndCompact	bVar1	outputHasDepthBit	INFERRED	bit 4 (0x10, depth / W output) of the half's output mask	^\s*if\ \(bVar1\)\ \{$	+1
+use	psnDecAllocateTempsAndCompact	iVar2	entryMode	CONFIRMED	entry mode word (+0x8c): 2 = ALU	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar25\ \+\ 0x8c\);$	+2
+use	psnDecAllocateTempsAndCompact	iVar2	entryMode	CONFIRMED	entry mode word (+0x8c): 2 = ALU	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar25\ \+\ 0x8c\);$@2	+1
+use	psnDecAllocateTempsAndCompact	iVar2	entryMode	CONFIRMED	entry mode word (+0x8c): 2 = ALU	^\s*if\ \(iVar2\ ==\ 2\)\ \{$@2	+1
+use	psnDecAllocateTempsAndCompact	iVar2	halfCursor	CONFIRMED	entry + half*0x40 while walking the two halves	^\s*iVar2\ =\ iVar25;$	+1
+use	psnDecAllocateTempsAndCompact	iVar2	halfCursor	CONFIRMED	entry + half*0x40 while walking the two halves	^\s*if\ \(\(\(\(\(\*\(ushort\ \*\)\(iVar2\ \+\ 6\)\ !=\ 0\)\ \&\&\ \(\(\*\(uint\ \*\)\(iVar2\ \+\ 0x30\)\ \&\ 0x400\)\ !=\ 0\)\)\ \&\&$	+8
+use	psnDecAllocateTempsAndCompact	iVar2	halfCursor	CONFIRMED	entry + half*0x40 while walking the two halves	^\s*iVar2\ =\ iVar2\ \+\ 0x40;$	+1
+use	psnDecAllocateTempsAndCompact	iVar2	halfCursor	CONFIRMED	entry + half*0x40 while walking the two halves	^\s*iVar2\ =\ iVar25;$@2	+1
+use	psnDecAllocateTempsAndCompact	iVar2	halfCursor	CONFIRMED	entry + half*0x40 while walking the two halves	^\s*puVar9\ =\ \(undefined2\ \*\)\(uVar24\ \+\ \(uint\)\*\(ushort\ \*\)\(iVar2\ \+\ 4\)\ \*\ 4\);$	+1
+use	psnDecAllocateTempsAndCompact	iVar2	halfCursor	CONFIRMED	entry + half*0x40 while walking the two halves	^\s*uVar15\ =\ uVar14\ \&\ \*\(ushort\ \*\)\(iVar2\ \+\ 6\);$	+2
+use	psnDecAllocateTempsAndCompact	iVar2	halfCursor	CONFIRMED	entry + half*0x40 while walking the two halves	^\s*\*\(undefined2\ \*\)\(iVar2\ \+\ 6\)\ =\ 0xf;$	+1
+use	psnDecAllocateTempsAndCompact	iVar2	halfCursor	CONFIRMED	entry + half*0x40 while walking the two halves	^\s*if\ \(\(\*\(short\ \*\)\(iVar2\ \+\ 2\)\ ==\ 0\ \&\&\ \*\(short\ \*\)\(iVar2\ \+\ 6\)\ ==\ 0\)\ \&\&$	+7
+use	psnDecAllocateTempsAndCompact	iVar2	halfCursor	CONFIRMED	entry + half*0x40 while walking the two halves	^\s*iVar2\ =\ iVar2\ \+\ 0x40;$@3	+1
+use	psnDecAllocateTempsAndCompact	iVar2	halfByteOffset	CONFIRMED	0 / 0x40	^\s*iVar2\ =\ 0;$	+1
+use	psnDecAllocateTempsAndCompact	iVar2	halfByteOffset	CONFIRMED	0 / 0x40	^\s*puVar18\ =\ \(ushort\ \*\)\(iVar2\ \+\ iVar25\);$	+1
+use	psnDecAllocateTempsAndCompact	iVar2	halfByteOffset	CONFIRMED	0 / 0x40	^\s*bVar1\ =\ iVar2\ !=\ 0x40;$	+2
+use	psnDecAllocateTempsAndCompact	iVar2	groupCursor	CONFIRMED	entry + 6*group: pointer to the group's usage / address words	^\s*iVar2\ =\ iVar25;$@3	+1
+use	psnDecAllocateTempsAndCompact	iVar2	groupCursor	CONFIRMED	entry + 6*group: pointer to the group's usage / address words	^\s*iVar5\ =\ iVar2\ \+\ 0x10;$	+1
+use	psnDecAllocateTempsAndCompact	iVar2	groupCursor	CONFIRMED	entry + 6*group: pointer to the group's usage / address words	^\s*iVar2\ =\ iVar2\ \+\ 6;$	+1
+use	psnDecAllocateTempsAndCompact	iVar2	groupCounter	CONFIRMED	counter over the two address groups	^\s*iVar2\ =\ 0;$@2	+1
+use	psnDecAllocateTempsAndCompact	iVar2	groupCounter	CONFIRMED	counter over the two address groups	^\s*bVar1\ =\ iVar2\ !=\ 1;$	+1
+use	psnDecAllocateTempsAndCompact	iVar2	groupCounter	CONFIRMED	counter over the two address groups	^\s*iVar2\ =\ iVar2\ \+\ 1;$	+1
+use	psnDecAllocateTempsAndCompact	iVar2	groupCounter	CONFIRMED	counter over the two address groups	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c0fd0\)\(iVar25,extraout_r4,iVar4,iVar5,uVar7,iVar2,psVar12,iVar6\);$	+1
+use	psnDecAllocateTempsAndCompact	iVar4	slotCounter	CONFIRMED	counter over the three address slots of a group	^\s*iVar4\ =\ 0;$	+1
+use	psnDecAllocateTempsAndCompact	iVar4	slotCounter	CONFIRMED	counter over the three address slots of a group	^\s*bVar1\ =\ iVar4\ !=\ 2;$	+1
+use	psnDecAllocateTempsAndCompact	iVar4	slotCounter	CONFIRMED	counter over the three address slots of a group	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+1
+use	psnDecAllocateTempsAndCompact	iVar4	slotCounter	CONFIRMED	counter over the three address slots of a group	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c0fd0\)\(iVar25,extraout_r4,iVar4,iVar5,uVar7,iVar2,psVar12,iVar6\);$	+1
+use	psnDecAllocateTempsAndCompact	iVar5	groupUsageBase	CONFIRMED	groupCursor + 0x10: the half 0 read-mask words of the group	^\s*iVar5\ =\ iVar2\ \+\ 0x10;$	+1
+use	psnDecAllocateTempsAndCompact	iVar5	groupUsageBase	CONFIRMED	groupCursor + 0x10: the half 0 read-mask words of the group	^\s*puVar19\ =\ \(ushort\ \*\)\(iVar5\ \+\ 4\);$	+1
+use	psnDecAllocateTempsAndCompact	iVar5	groupUsageBase	CONFIRMED	groupCursor + 0x10: the half 0 read-mask words of the group	^\s*iVar5\ =\ iVar5\ \+\ 2;$	+1
+use	psnDecAllocateTempsAndCompact	iVar5	groupUsageBase	CONFIRMED	groupCursor + 0x10: the half 0 read-mask words of the group	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c0fd0\)\(iVar25,extraout_r4,iVar4,iVar5,uVar7,iVar2,psVar12,iVar6\);$	+1
+use	psnDecAllocateTempsAndCompact	iVar6	slotOffset	CONFIRMED	0 / 3: index offset of the group's slots in the address table (3 slots per group)	^\s*iVar6\ =\ 0;$	+1
+use	psnDecAllocateTempsAndCompact	iVar6	slotOffset	CONFIRMED	0 / 3: index offset of the group's slots in the address table (3 slots per group)	^\s*if\ \(\(\(\(\(\*\(ushort\ \*\)\(iVar2\ \+\ 6\)\ !=\ 0\)\ \&\&\ \(\(\*\(uint\ \*\)\(iVar2\ \+\ 0x30\)\ \&\ 0x400\)\ !=\ 0\)\)\ \&\&$	+7
+use	psnDecAllocateTempsAndCompact	iVar6	slotOffset	CONFIRMED	0 / 3: index offset of the group's slots in the address table (3 slots per group)	^\s*iVar6\ =\ iVar6\ \+\ 3;$	+1
+use	psnDecAllocateTempsAndCompact	iVar6	halfByteOffset2	CONFIRMED	0 / 0x40	^\s*iVar6\ =\ 0;$@2	+1
+use	psnDecAllocateTempsAndCompact	iVar6	halfByteOffset2	CONFIRMED	0 / 0x40	^\s*bVar1\ =\ iVar6\ !=\ 0x40;$	+1
+use	psnDecAllocateTempsAndCompact	iVar6	halfByteOffset2	CONFIRMED	0 / 0x40	^\s*iVar6\ =\ iVar6\ \+\ 0x40;$	+1
+use	psnDecAllocateTempsAndCompact	iVar6	addressSlotOffset	CONFIRMED	0x80 + 6*group: byte offset of the group's address slots in the entry	^\s*iVar6\ =\ 0x80;$	+1
+use	psnDecAllocateTempsAndCompact	iVar6	addressSlotOffset	CONFIRMED	0x80 + 6*group: byte offset of the group's address slots in the entry	^\s*puVar18\ =\ \(ushort\ \*\)\(iVar25\ \+\ iVar6\);$	+1
+use	psnDecAllocateTempsAndCompact	iVar6	addressSlotOffset	CONFIRMED	0x80 + 6*group: byte offset of the group's address slots in the entry	^\s*iVar6\ =\ iVar6\ \+\ 6;$	+1
+use	psnDecAllocateTempsAndCompact	iVar6	groupUsageCursor	CONFIRMED	entry + 0x10 stepped by 6 per group	^\s*iVar6\ =\ iVar25\ \+\ 0x10;$	+1
+use	psnDecAllocateTempsAndCompact	iVar6	groupUsageCursor	CONFIRMED	entry + 0x10 stepped by 6 per group	^\s*psVar12\ =\ \(short\ \*\)\(iVar6\ \+\ 4\);$	+1
+use	psnDecAllocateTempsAndCompact	iVar6	groupUsageCursor	CONFIRMED	entry + 0x10 stepped by 6 per group	^\s*iVar6\ =\ iVar6\ \+\ 6;$@2	+1
+use	psnDecAllocateTempsAndCompact	iVar6	groupUsageCursor	CONFIRMED	entry + 0x10 stepped by 6 per group	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c0fd0\)\(iVar25,extraout_r4,iVar4,iVar5,uVar7,iVar2,psVar12,iVar6\);$	+1
+use	psnDecAllocateTempsAndCompact	iVar8	halfCounter	CONFIRMED	counter over the two halves / over the three address slots	^\s*iVar8\ =\ 0;$	+1
+use	psnDecAllocateTempsAndCompact	iVar8	halfCounter	CONFIRMED	counter over the two halves / over the three address slots	^\s*bVar1\ =\ iVar8\ !=\ 1;$	+1
+use	psnDecAllocateTempsAndCompact	iVar8	halfCounter	CONFIRMED	counter over the two halves / over the three address slots	^\s*iVar8\ =\ iVar8\ \+\ 1;$	+1
+use	psnDecAllocateTempsAndCompact	iVar8	halfCounter	CONFIRMED	counter over the two halves / over the three address slots	^\s*iVar8\ =\ 0;$@2	+1
+use	psnDecAllocateTempsAndCompact	iVar8	halfCounter	CONFIRMED	counter over the two halves / over the three address slots	^\s*bVar1\ =\ iVar8\ !=\ 1;$@2	+1
+use	psnDecAllocateTempsAndCompact	iVar8	halfCounter	CONFIRMED	counter over the two halves / over the three address slots	^\s*iVar8\ =\ iVar8\ \+\ 1;$@2	+1
+use	psnDecAllocateTempsAndCompact	iVar8	halfCounter	CONFIRMED	counter over the two halves / over the three address slots	^\s*iVar8\ =\ 0;$@3	+1
+use	psnDecAllocateTempsAndCompact	iVar8	halfCounter	CONFIRMED	counter over the two halves / over the three address slots	^\s*bVar1\ =\ iVar8\ !=\ 2;$	+1
+use	psnDecAllocateTempsAndCompact	iVar8	halfCounter	CONFIRMED	counter over the two halves / over the three address slots	^\s*iVar8\ =\ iVar8\ \+\ 1;$@3	+1
+use	psnDecAllocateTempsAndCompact	iVar10	halfCounter2	CONFIRMED	counter over the two halves while the read masks are ORed in	^\s*iVar10\ =\ 0;$	+1
+use	psnDecAllocateTempsAndCompact	iVar10	halfCounter2	CONFIRMED	counter over the two halves while the read masks are ORed in	^\s*bVar1\ =\ iVar10\ !=\ 1;$	+1
+use	psnDecAllocateTempsAndCompact	iVar10	halfCounter2	CONFIRMED	counter over the two halves while the read masks are ORed in	^\s*iVar10\ =\ iVar10\ \+\ 1;$	+1
+use	psnDecAllocateTempsAndCompact	iVar25	entry	CONFIRMED	the entry being processed: entry array + entryOffset	^\s*iVar25\ =\ iVar26\ \+\ param_2\[2\];$	+2
+use	psnDecAllocateTempsAndCompact	iVar25	entry	CONFIRMED	the entry being processed: entry array + entryOffset	^\s*iVar2\ =\ iVar25;$	+1
+use	psnDecAllocateTempsAndCompact	iVar25	entry	CONFIRMED	the entry being processed: entry array + entryOffset	^\s*if\ \(\(\(\(\(\*\(ushort\ \*\)\(iVar2\ \+\ 6\)\ !=\ 0\)\ \&\&\ \(\(\*\(uint\ \*\)\(iVar2\ \+\ 0x30\)\ \&\ 0x400\)\ !=\ 0\)\)\ \&\&$	+7
+use	psnDecAllocateTempsAndCompact	iVar25	entry	CONFIRMED	the entry being processed: entry array + entryOffset	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar25\ \+\ 0x8c\);$@2	+1
+use	psnDecAllocateTempsAndCompact	iVar25	entry	CONFIRMED	the entry being processed: entry array + entryOffset	^\s*puVar18\ =\ \(ushort\ \*\)\(iVar2\ \+\ iVar25\);$	+1
+use	psnDecAllocateTempsAndCompact	iVar25	entry	CONFIRMED	the entry being processed: entry array + entryOffset	^\s*uVar23\ =\ \*\(undefined2\ \*\)\(uVar24\ \+\ \(uint\)\*\(ushort\ \*\)\(iVar25\ \+\ 4\)\ \*\ 4\);$	+3
+use	psnDecAllocateTempsAndCompact	iVar25	entry	CONFIRMED	the entry being processed: entry array + entryOffset	^\s*if\ \(\(\*\(int\ \*\)\(iVar25\ \+\ 0x8c\)\ !=\ 2\)\ \&\&\ \(uVar15\ !=\ 0\)\)\ \{$	+1
+use	psnDecAllocateTempsAndCompact	iVar25	entry	CONFIRMED	the entry being processed: entry array + entryOffset	^\s*iVar2\ =\ iVar25;$@3	+1
+use	psnDecAllocateTempsAndCompact	iVar25	entry	CONFIRMED	the entry being processed: entry array + entryOffset	^\s*puVar18\ =\ \(ushort\ \*\)\(iVar25\ \+\ iVar6\);$	+1
+use	psnDecAllocateTempsAndCompact	iVar25	entry	CONFIRMED	the entry being processed: entry array + entryOffset	^\s*if\ \(\*\(short\ \*\)\(iVar25\ \+\ 6\)\ ==\ 0\)\ \{$	+1
+use	psnDecAllocateTempsAndCompact	iVar25	entry	CONFIRMED	the entry being processed: entry array + entryOffset	^\s*\*\(undefined2\ \*\)\(iVar25\ \+\ 4\)\ =\ uVar23;$	+2
+use	psnDecAllocateTempsAndCompact	iVar25	entry	CONFIRMED	the entry being processed: entry array + entryOffset	^\s*\*\(undefined2\ \*\)\(iVar25\ \+\ 0x44\)\ =\ uVar22;$	+1
+use	psnDecAllocateTempsAndCompact	iVar25	entry	CONFIRMED	the entry being processed: entry array + entryOffset	^\s*iVar6\ =\ iVar25\ \+\ 0x10;$	+1
+use	psnDecAllocateTempsAndCompact	iVar25	entry	CONFIRMED	the entry being processed: entry array + entryOffset	^\s*if\ \(\*\(int\ \*\)\(iVar25\ \+\ 0x8c\)\ ==\ 2\)\ \{$	+5
+use	psnDecAllocateTempsAndCompact	iVar26	initCounter	CONFIRMED	counts the four reserved render-target entries while they are initialised	^\s*iVar26\ =\ 4;$	+1
+use	psnDecAllocateTempsAndCompact	iVar26	initCounter	CONFIRMED	counts the four reserved render-target entries while they are initialised	^\s*iVar26\ =\ iVar26\ \+\ \-1;$	+2
+use	psnDecAllocateTempsAndCompact	iVar26	freeListIndex	CONFIRMED	index into the free-temp list while it is filled	^\s*iVar26\ =\ 0;$	+1
+use	psnDecAllocateTempsAndCompact	iVar26	freeListIndex	CONFIRMED	index into the free-temp list while it is filled	^\s*psStack_60\[iVar26\]\ =\ \(short\)uVar3;$	+1
+use	psnDecAllocateTempsAndCompact	iVar26	freeListIndex	CONFIRMED	index into the free-temp list while it is filled	^\s*iVar26\ =\ iVar26\ \+\ 1;$	+1
+use	psnDecAllocateTempsAndCompact	iVar26	entryOffset	CONFIRMED	byte offset of the current entry; starts at the last entry and goes down by 0xa0	^\s*iVar26\ =\ \(uVar11\ \-\ 1\)\ \*\ 0xa0;$	+1
+use	psnDecAllocateTempsAndCompact	iVar26	entryOffset	CONFIRMED	byte offset of the current entry; starts at the last entry and goes down by 0xa0	^\s*iVar25\ =\ iVar26\ \+\ param_2\[2\];$	+1
+use	psnDecAllocateTempsAndCompact	iVar26	entryOffset	CONFIRMED	byte offset of the current entry; starts at the last entry and goes down by 0xa0	^\s*iVar26\ =\ iVar26\ \+\ \-0xa0;$	+1
+use	psnDecAllocateTempsAndCompact	iVar26	scanEntry	CONFIRMED	entry being tested by the compaction loop	^\s*iVar26\ =\ param_2\[2\]\ \+\ uVar24\ \*\ 0xa0;$	+5
+use	psnDecAllocateTempsAndCompact	iVar26	scanEntry	CONFIRMED	entry being tested by the compaction loop	^\s*_memcpy\(uVar17\ \*\ 0xa0\ \+\ param_2\[2\],iVar26,0xa0\);$	+1
+use	psnDecAllocateTempsAndCompact	psVar21	targetLiveTable	INFERRED	four {render target, live mask} words placed after the temp table (+temps*4): the live components of each render target	^\s*psVar21\ =\ \(short\ \*\)\(uVar24\ \+\ uVar11\ \*\ 4\);$	+2
+use	psnDecAllocateTempsAndCompact	psVar21	targetLiveTable	INFERRED	four {render target, live mask} words placed after the temp table (+temps*4): the live components of each render target	^\s*psVar12\ =\ psVar21;$	+1
+use	psnDecAllocateTempsAndCompact	psVar21	targetLiveTable	INFERRED	four {render target, live mask} words placed after the temp table (+temps*4): the live components of each render target	^\s*psVar21\[1\]\ =\ psVar21\[1\]\ \|\ 0x10;$	+1
+use	psnDecAllocateTempsAndCompact	psVar21	targetLiveTable	INFERRED	four {render target, live mask} words placed after the temp table (+temps*4): the live components of each render target	^\s*if\ \(\(bVar1\)\ \&\&\ \(\(psVar21\[1\]\ \&\ 0x10U\)\ ==\ 0\)\)\ \{$	+1
+use	psnDecAllocateTempsAndCompact	psVar21	targetLiveTable	INFERRED	four {render target, live mask} words placed after the temp table (+temps*4): the live components of each render target	^\s*uVar14\ =\ \(psVar21\[\(uint\)uVar15\ \*\ 2\ \+\ 1\]\ \|\ 0x10U\)\ \&\ uVar14;$	+1
+use	psnDecAllocateTempsAndCompact	psVar21	targetLiveTable	INFERRED	four {render target, live mask} words placed after the temp table (+temps*4): the live components of each render target	^\s*psVar21\[\(uint\)uVar15\ \*\ 2\ \+\ 1\]\ =\ psVar21\[\(uint\)uVar15\ \*\ 2\ \+\ 1\]\ \&\ \~uVar14;$	+1
+use	psnDecAllocateTempsAndCompact	psVar21	targetLiveTable	INFERRED	four {render target, live mask} words placed after the temp table (+temps*4): the live components of each render target	^\s*psVar21\[1\]\ =\ psVar21\[1\]\ \&\ 0xffef;$	+1
+use	psnDecAllocateTempsAndCompact	puVar9	destMapEntry	INFERRED	{mapped register, live mask} table entry of the half's destination register	^\s*puVar9\ =\ \(undefined2\ \*\)\(uVar24\ \+\ \(uint\)\*\(ushort\ \*\)\(iVar2\ \+\ 4\)\ \*\ 4\);$	+2
+use	psnDecAllocateTempsAndCompact	puVar9	destMapEntry	INFERRED	{mapped register, live mask} table entry of the half's destination register	^\s*puVar9\[1\]\ =\ puVar9\[1\]\ \&\ \~uVar15;$	+1
+use	psnDecAllocateTempsAndCompact	puVar9	destMapEntry	INFERRED	{mapped register, live mask} table entry of the half's destination register	^\s*if\ \(\(\(puVar20\ !=\ \(uint\ \*\)0x0\)\ \&\&\ \(uVar14\ !=\ 0\)\)\ \&\&\ \(puVar9\[1\]\ ==\ 0\)\)\ \{$	+1
+use	psnDecAllocateTempsAndCompact	puVar9	destMapEntry	INFERRED	{mapped register, live mask} table entry of the half's destination register	^\s*\*\(undefined2\ \*\)\(uVar3\ \*\ 2\ \+\ puVar20\[2\]\)\ =\ \*puVar9;$	+1
+use	psnDecAllocateTempsAndCompact	puVar9	destMapEntry	INFERRED	{mapped register, live mask} table entry of the half's destination register	^\s*\*puVar9\ =\ 0;$	+1
+use	psnDecAllocateTempsAndCompact	puVar16	sourceMapEntry	INFERRED	{mapped register, live mask} table entry of the source address register	^\s*puVar16\ =\ \(ushort\ \*\)\(uVar24\ \+\ \(uint\)\*puVar18\ \*\ 4\);$	+1
+use	psnDecAllocateTempsAndCompact	puVar16	sourceMapEntry	INFERRED	{mapped register, live mask} table entry of the source address register	^\s*uVar14\ =\ puVar16\[1\];$	+1
+use	psnDecAllocateTempsAndCompact	puVar16	sourceMapEntry	INFERRED	{mapped register, live mask} table entry of the source address register	^\s*puVar16\[1\]\ =\ uVar15\ \|\ uVar14;$	+1
+use	psnDecAllocateTempsAndCompact	puVar16	sourceMapEntry	INFERRED	{mapped register, live mask} table entry of the source address register	^\s*\*puVar16\ =\ uVar14;$	+1
+use	psnDecAllocateTempsAndCompact	puVar18	halfWords	CONFIRMED	the half as ushorts: [0] render target, [1] output mask	^\s*puVar18\ =\ \(ushort\ \*\)\(iVar2\ \+\ iVar25\);$	+2
+use	psnDecAllocateTempsAndCompact	puVar18	halfWords	CONFIRMED	the half as ushorts: [0] render target, [1] output mask	^\s*puVar18\[1\]\ =\ uVar14;$	+1
+use	psnDecAllocateTempsAndCompact	puVar18	halfWords	CONFIRMED	the half as ushorts: [0] render target, [1] output mask	^\s*uVar15\ =\ \*puVar18;$	+1
+use	psnDecAllocateTempsAndCompact	puVar18	halfWords	CONFIRMED	the half as ushorts: [0] render target, [1] output mask	^\s*puVar18\[1\]\ =\ uVar14;$@2	+1
+use	psnDecAllocateTempsAndCompact	puVar18	addressSlotPtr	CONFIRMED	address slot ushort of the group (bit 15 = constant)	^\s*puVar18\ =\ \(ushort\ \*\)\(iVar25\ \+\ iVar6\);$	+1
+use	psnDecAllocateTempsAndCompact	puVar18	addressSlotPtr	CONFIRMED	address slot ushort of the group (bit 15 = constant)	^\s*if\ \(\(\*puVar18\ \&\ 0x8000\)\ ==\ 0\)\ \{$	+1
+use	psnDecAllocateTempsAndCompact	puVar18	addressSlotPtr	CONFIRMED	address slot ushort of the group (bit 15 = constant)	^\s*puVar16\ =\ \(ushort\ \*\)\(uVar24\ \+\ \(uint\)\*puVar18\ \*\ 4\);$	+1
+use	psnDecAllocateTempsAndCompact	puVar18	addressSlotPtr	CONFIRMED	address slot ushort of the group (bit 15 = constant)	^\s*puVar18\ =\ puVar18\ \+\ 1;$	+1
+use	psnDecAllocateTempsAndCompact	puVar19	readMaskPtr	CONFIRMED	read-mask ushort of the slot in the half (+0x40 bytes per half)	^\s*puVar19\ =\ \(ushort\ \*\)\(iVar5\ \+\ 4\);$	+1
+use	psnDecAllocateTempsAndCompact	puVar19	readMaskPtr	CONFIRMED	read-mask ushort of the slot in the half (+0x40 bytes per half)	^\s*uVar15\ =\ \*puVar19;$	+1
+use	psnDecAllocateTempsAndCompact	puVar19	readMaskPtr	CONFIRMED	read-mask ushort of the slot in the half (+0x40 bytes per half)	^\s*puVar19\ =\ puVar19\ \+\ 0x20;$	+1
+use	psnDecAllocateTempsAndCompact	puVar20	freeTempStack	INFERRED	{count, ?, data} stack of free temps, present only when the encode words were requested	^\s*puVar20\ =\ \(uint\ \*\)0x0;$	+1
+use	psnDecAllocateTempsAndCompact	puVar20	freeTempStack	INFERRED	{count, ?, data} stack of free temps, present only when the encode words were requested	^\s*puVar20\ =\ \&uStack_68;$	+1
+use	psnDecAllocateTempsAndCompact	puVar20	freeTempStack	INFERRED	{count, ?, data} stack of free temps, present only when the encode words were requested	^\s*if\ \(\(\(puVar20\ !=\ \(uint\ \*\)0x0\)\ \&\&\ \(uVar14\ !=\ 0\)\)\ \&\&\ \(puVar9\[1\]\ ==\ 0\)\)\ \{$	+4
+use	psnDecAllocateTempsAndCompact	sVar13	targetIndex	CONFIRMED	0..3 stored into the render-target table entries	^\s*sVar13\ =\ 0;$	+1
+use	psnDecAllocateTempsAndCompact	sVar13	targetIndex	CONFIRMED	0..3 stored into the render-target table entries	^\s*\*psVar12\ =\ sVar13;$	+1
+use	psnDecAllocateTempsAndCompact	sVar13	targetIndex	CONFIRMED	0..3 stored into the render-target table entries	^\s*sVar13\ =\ sVar13\ \+\ 1;$	+1
+use	psnDecAllocateTempsAndCompact	uStack_64	maxTempIndex	INFERRED	highest temp register handed out; the new temp count is this + 1	^\s*uStack_64\ =\ 0;$	+1
+use	psnDecAllocateTempsAndCompact	uStack_64	maxTempIndex	INFERRED	highest temp register handed out; the new temp count is this + 1	^\s*if\ \(uStack_64\ <\ uVar14\)\ \{$	+2
+use	psnDecAllocateTempsAndCompact	uStack_64	maxTempIndex	INFERRED	highest temp register handed out; the new temp count is this + 1	^\s*param_2\[1\]\ =\ uStack_64\ \+\ 1;$	+1
+use	psnDecAllocateTempsAndCompact	uVar11	entryCount	CONFIRMED	number of entries of the decoded program	^\s*uVar11\ =\ \*param_2;$	+2
+use	psnDecAllocateTempsAndCompact	uVar11	entryCount	CONFIRMED	number of entries of the decoded program	^\s*\}\ while\ \(uVar11\ !=\ uVar17\);$	+1
+use	psnDecAllocateTempsAndCompact	uVar11	entryCountAfterLoop	CONFIRMED	entry count re-read before the compaction loop	^\s*uVar11\ =\ \*param_2;$@2	+2
+use	psnDecAllocateTempsAndCompact	uVar11	entryCountAfterLoop	CONFIRMED	entry count re-read before the compaction loop	^\s*uVar11\ =\ \*param_2;$@3	+1
+use	psnDecAllocateTempsAndCompact	uVar11	entryCountAfterLoop	CONFIRMED	entry count re-read before the compaction loop	^\s*\}\ while\ \(uVar24\ <\ uVar11\);$	+1
+use	psnDecAllocateTempsAndCompact	uVar14	outputMask	CONFIRMED	ushort at half+2 (output mask)	^\s*uVar14\ =\ puVar18\[1\];$	+2
+use	psnDecAllocateTempsAndCompact	uVar14	outputMask	CONFIRMED	ushort at half+2 (output mask)	^\s*uVar14\ =\ uVar14\ \&\ 0xffef;$	+2
+use	psnDecAllocateTempsAndCompact	uVar14	outputMask	CONFIRMED	ushort at half+2 (output mask)	^\s*uVar14\ =\ \(psVar21\[\(uint\)uVar15\ \*\ 2\ \+\ 1\]\ \|\ 0x10U\)\ \&\ uVar14;$	+3
+use	psnDecAllocateTempsAndCompact	uVar14	destLiveMask	INFERRED	live component mask of the half's destination register	^\s*uVar14\ =\ puVar9\[1\];$	+2
+use	psnDecAllocateTempsAndCompact	uVar14	destLiveMask	INFERRED	live component mask of the half's destination register	^\s*if\ \(\(\(puVar20\ !=\ \(uint\ \*\)0x0\)\ \&\&\ \(uVar14\ !=\ 0\)\)\ \&\&\ \(puVar9\[1\]\ ==\ 0\)\)\ \{$	+1
+use	psnDecAllocateTempsAndCompact	uVar14	liveMaskBefore	INFERRED	live mask of the source register before it is ORed with the read mask	^\s*uVar14\ =\ puVar16\[1\];$	+1
+use	psnDecAllocateTempsAndCompact	uVar14	liveMaskBefore	INFERRED	live mask of the source register before it is ORed with the read mask	^\s*puVar16\[1\]\ =\ uVar15\ \|\ uVar14;$	+2
+use	psnDecAllocateTempsAndCompact	uVar14	newTempRegister	INFERRED	temp register popped from the free stack for a source that just became live	^\s*uVar14\ =\ psStack_60\[uStack_68\];$	+3
+use	psnDecAllocateTempsAndCompact	uVar14	newTempRegister	INFERRED	temp register popped from the free stack for a source that just became live	^\s*\*puVar16\ =\ uVar14;$	+1
+use	psnDecAllocateTempsAndCompact	uVar15	renderTarget	CONFIRMED	ushort at half+0 (render target index)	^\s*uVar15\ =\ \*puVar18;$	+2
+use	psnDecAllocateTempsAndCompact	uVar15	renderTarget	CONFIRMED	ushort at half+0 (render target index)	^\s*psVar21\[\(uint\)uVar15\ \*\ 2\ \+\ 1\]\ =\ psVar21\[\(uint\)uVar15\ \*\ 2\ \+\ 1\]\ \&\ \~uVar14;$	+1
+use	psnDecAllocateTempsAndCompact	uVar15	writeMaskLive	INFERRED	write mask of the half restricted to the live components	^\s*uVar15\ =\ uVar14\ \&\ \*\(ushort\ \*\)\(iVar2\ \+\ 6\);$	+4
+use	psnDecAllocateTempsAndCompact	uVar15	writeMaskLive	INFERRED	write mask of the half restricted to the live components	^\s*puVar9\[1\]\ =\ puVar9\[1\]\ \&\ \~uVar15;$	+1
+use	psnDecAllocateTempsAndCompact	uVar15	readMask	CONFIRMED	read mask of the slot being ORed into the register's live mask	^\s*uVar15\ =\ \*puVar19;$	+3
+use	psnDecAllocateTempsAndCompact	uVar17	freeEntryValue	CONFIRMED	free-list entry value (counts down from the number of temps)	^\s*uVar17\ =\ uStack_68;$	+1
+use	psnDecAllocateTempsAndCompact	uVar17	freeEntryValue	CONFIRMED	free-list entry value (counts down from the number of temps)	^\s*uVar3\ =\ uVar17\ \-\ 1;$	+2
+use	psnDecAllocateTempsAndCompact	uVar22	mappedAlphaDest	INFERRED	the alpha destination register mapped through the temp table, kept while the half is rewritten	^\s*uVar22\ =\ \*\(undefined2\ \*\)\(\(uint\)\*\(ushort\ \*\)\(iVar25\ \+\ 0x44\)\ \*\ 4\ \+\ uVar24\);$	+1
+use	psnDecAllocateTempsAndCompact	uVar22	mappedAlphaDest	INFERRED	the alpha destination register mapped through the temp table, kept while the half is rewritten	^\s*uVar22\ =\ 0;$	+1
+use	psnDecAllocateTempsAndCompact	uVar22	mappedAlphaDest	INFERRED	the alpha destination register mapped through the temp table, kept while the half is rewritten	^\s*\*\(undefined2\ \*\)\(iVar25\ \+\ 0x44\)\ =\ uVar22;$	+1
+use	psnDecAllocateTempsAndCompact	uVar23	mappedRgbDest	INFERRED	the RGB destination register mapped through the temp table	^\s*uVar23\ =\ \*\(undefined2\ \*\)\(uVar24\ \+\ \(uint\)\*\(ushort\ \*\)\(iVar25\ \+\ 4\)\ \*\ 4\);$	+1
+use	psnDecAllocateTempsAndCompact	uVar23	mappedRgbDest	INFERRED	the RGB destination register mapped through the temp table	^\s*uVar23\ =\ 0;$	+1
+use	psnDecAllocateTempsAndCompact	uVar23	mappedRgbDest	INFERRED	the RGB destination register mapped through the temp table	^\s*\*\(undefined2\ \*\)\(iVar25\ \+\ 4\)\ =\ uVar23;$	+1
+use	psnDecAllocateTempsAndCompact	uVar24	regMapTable	INFERRED	decodedProgram[3]: per-temp {mapped register, live mask} table	^\s*uVar24\ =\ param_2\[3\];$	+2
+use	psnDecAllocateTempsAndCompact	uVar24	regMapTable	INFERRED	decodedProgram[3]: per-temp {mapped register, live mask} table	^\s*_memset\(uVar24,0,\*\(int\ \*\)\(param_1\ \+\ 0x30\)\ <<\ 2\);$	+1
+use	psnDecAllocateTempsAndCompact	uVar24	regMapTable	INFERRED	decodedProgram[3]: per-temp {mapped register, live mask} table	^\s*uVar23\ =\ \*\(undefined2\ \*\)\(uVar24\ \+\ \(uint\)\*\(ushort\ \*\)\(iVar25\ \+\ 4\)\ \*\ 4\);$	+2
+use	psnDecAllocateTempsAndCompact	uVar24	regMapTable	INFERRED	decodedProgram[3]: per-temp {mapped register, live mask} table	^\s*puVar9\ =\ \(undefined2\ \*\)\(uVar24\ \+\ \(uint\)\*\(ushort\ \*\)\(iVar2\ \+\ 4\)\ \*\ 4\);$	+1
+use	psnDecAllocateTempsAndCompact	uVar24	regMapTable	INFERRED	decodedProgram[3]: per-temp {mapped register, live mask} table	^\s*puVar16\ =\ \(ushort\ \*\)\(uVar24\ \+\ \(uint\)\*puVar18\ \*\ 4\);$	+1
+use	psnDecAllocateTempsAndCompact	uVar24	regMapTable	INFERRED	decodedProgram[3]: per-temp {mapped register, live mask} table	^\s*psVar12\[0x36\]\ =\ \*\(short\ \*\)\(uVar24\ \+\ \(uint\)\(ushort\)psVar12\[0x36\]\ \*\ 4\);$	+1
+use	psnDecAllocateTempsAndCompact	uVar3	freeEntryNext	CONFIRMED	free-list entry value minus one	^\s*uVar3\ =\ uVar17\ \-\ 1;$	+3
+use	psnDecAllocateTempsAndCompact	uVar3	stackTop	CONFIRMED	current count of the free-temp stack	^\s*uVar3\ =\ \*puVar20;$	+3
+use	psnDecTryMergeAddressSlots	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar15\ !=\ 2;$	+1
+use	psnDecTryMergeAddressSlots	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*\}\ while\ \(bVar1\);$	+1
+use	psnDecTryMergeAddressSlots	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar12\ !=\ 2;$	+1
+use	psnDecTryMergeAddressSlots	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*\}\ while\ \(bVar1\);$@2	+1
+use	psnDecTryMergeAddressSlots	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar4\ !=\ 1;$	+1
+use	psnDecTryMergeAddressSlots	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*\}\ while\ \(bVar1\);$@3	+1
+use	psnDecTryMergeAddressSlots	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar10\ !=\ 2;$	+1
+use	psnDecTryMergeAddressSlots	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*\}\ while\ \(bVar1\);$@4	+1
+use	psnDecTryMergeAddressSlots	bVar1	lastSlotReached	CONFIRMED	slot search index == 2: all three address slots of the group were tried	^\s*bVar1\ =\ uVar11\ ==\ 2;$	+1
+use	psnDecTryMergeAddressSlots	bVar1	lastSlotReached	CONFIRMED	slot search index == 2: all three address slots of the group were tried	^\s*if\ \(bVar1\)\ \{$	+1
+use	psnDecTryMergeAddressSlots	bVar1	lastSlotReached	CONFIRMED	slot search index == 2: all three address slots of the group were tried	^\s*bVar1\ =\ uVar11\ ==\ 2;$@2	+1
+use	psnDecTryMergeAddressSlots	bVar1	lastSlotReached	CONFIRMED	slot search index == 2: all three address slots of the group were tried	^\s*if\ \(bVar1\)\ \{$@2	+1
+use	psnDecTryMergeAddressSlots	bVar1	lastSourceReached	CONFIRMED	source counter == 2: all three sources were processed	^\s*bVar1\ =\ iVar10\ ==\ 2;$	+1
+use	psnDecTryMergeAddressSlots	bVar1	lastSourceReached	CONFIRMED	source counter == 2: all three sources were processed	^\s*if\ \(bVar1\)\ \{$@3	+1
+use	psnDecTryMergeAddressSlots	iVar4	sourceSlotsA	CONFIRMED	entry (or the other entry when roles are reversed) advanced by 4 per source: the source select words counted in the first loop	^\s*iVar4\ =\ param_1;$	+1
+use	psnDecTryMergeAddressSlots	iVar4	sourceSlotsA	CONFIRMED	entry (or the other entry when roles are reversed) advanced by 4 per source: the source select words counted in the first loop	^\s*iVar4\ =\ param_2;$	+1
+use	psnDecTryMergeAddressSlots	iVar4	sourceSlotsA	CONFIRMED	entry (or the other entry when roles are reversed) advanced by 4 per source: the source select words counted in the first loop	^\s*uVar2\ =\ \*\(ushort\ \*\)\(iVar4\ \+\ 0x48\);$	+1
+use	psnDecTryMergeAddressSlots	iVar4	sourceSlotsA	CONFIRMED	entry (or the other entry when roles are reversed) advanced by 4 per source: the source select words counted in the first loop	^\s*iVar4\ =\ iVar4\ \+\ 4;$	+1
+use	psnDecTryMergeAddressSlots	iVar4	groupIndex	CONFIRMED	counter over the two address groups	^\s*iVar4\ =\ 0;$	+1
+use	psnDecTryMergeAddressSlots	iVar4	groupIndex	CONFIRMED	counter over the two address groups	^\s*bVar1\ =\ iVar4\ !=\ 1;$	+1
+use	psnDecTryMergeAddressSlots	iVar4	groupIndex	CONFIRMED	counter over the two address groups	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+1
+use	psnDecTryMergeAddressSlots	iVar4	halfByteOffset	CONFIRMED	0 / 0x40 (0x40 when roles are reversed): byte offset of the half that is moved	^\s*iVar4\ =\ \(uint\)\(param_3\ !=\ 0\)\ \*\ 0x40;$	+1
+use	psnDecTryMergeAddressSlots	iVar4	halfByteOffset	CONFIRMED	0 / 0x40 (0x40 when roles are reversed): byte offset of the half that is moved	^\s*iVar12\ =\ iVar4\ \+\ 0x16;$	+2
+use	psnDecTryMergeAddressSlots	iVar4	halfByteOffset	CONFIRMED	0 / 0x40 (0x40 when roles are reversed): byte offset of the half that is moved	^\s*puVar14\ =\ \(undefined2\ \*\)\(param_1\ \+\ iVar4\ \+\ 0x14\);$	+1
+use	psnDecTryMergeAddressSlots	iVar4	halfByteOffset	CONFIRMED	0 / 0x40 (0x40 when roles are reversed): byte offset of the half that is moved	^\s*iVar13\ =\ iVar4\ \+\ param_1;$	+2
+use	psnDecTryMergeAddressSlots	iVar4	halfByteOffset	CONFIRMED	0 / 0x40 (0x40 when roles are reversed): byte offset of the half that is moved	^\s*_memcpy\(iVar13,iVar4,0x40\);$	+2
+use	psnDecTryMergeAddressSlots	iVar4	halfByteOffset	CONFIRMED	0 / 0x40 (0x40 when roles are reversed): byte offset of the half that is moved	^\s*\*\(undefined2\ \*\)\(iVar4\ \+\ 6\)\ =\ 0;$	+2
+use	psnDecTryMergeAddressSlots	iVar12	sourceSlotsB	CONFIRMED	the other entry (or entry when roles are reversed) advanced by 4 per source	^\s*iVar12\ =\ param_2;$	+1
+use	psnDecTryMergeAddressSlots	iVar12	sourceSlotsB	CONFIRMED	the other entry (or entry when roles are reversed) advanced by 4 per source	^\s*iVar12\ =\ param_1;$	+1
+use	psnDecTryMergeAddressSlots	iVar12	sourceSlotsB	CONFIRMED	the other entry (or entry when roles are reversed) advanced by 4 per source	^\s*if\ \(\(\*\(ushort\ \*\)\(iVar12\ \+\ 8\)\ \&\ 0x200\)\ !=\ 0\)\ \{$	+1
+use	psnDecTryMergeAddressSlots	iVar12	sourceSlotsB	CONFIRMED	the other entry (or entry when roles are reversed) advanced by 4 per source	^\s*if\ \(\(\*\(ushort\ \*\)\(iVar12\ \+\ 8\)\ \&\ 0x100\)\ !=\ 0\)\ \{$	+1
+use	psnDecTryMergeAddressSlots	iVar12	sourceSlotsB	CONFIRMED	the other entry (or entry when roles are reversed) advanced by 4 per source	^\s*iVar12\ =\ iVar12\ \+\ 4;$	+1
+use	psnDecTryMergeAddressSlots	iVar12	slotIndexInit	CONFIRMED	counter over the three address slots while the free-slot flags are initialised	^\s*iVar12\ =\ 0;$	+1
+use	psnDecTryMergeAddressSlots	iVar12	slotIndexInit	CONFIRMED	counter over the three address slots while the free-slot flags are initialised	^\s*bVar1\ =\ iVar12\ !=\ 2;$	+1
+use	psnDecTryMergeAddressSlots	iVar12	slotIndexInit	CONFIRMED	counter over the three address slots while the free-slot flags are initialised	^\s*iVar12\ =\ iVar12\ \+\ 1;$	+1
+use	psnDecTryMergeAddressSlots	iVar13	usageHalfBase	INFERRED	entry + usage offset: the half's usage words	^\s*iVar13\ =\ param_1\ \+\ iVar12;$	+1
+use	psnDecTryMergeAddressSlots	iVar13	usageHalfBase	INFERRED	entry + usage offset: the half's usage words	^\s*puVar14\ =\ \(undefined2\ \*\)\(iVar13\ \+\ 4\);$	+1
+use	psnDecTryMergeAddressSlots	iVar13	destHalf	CONFIRMED	entry + halfByteOffset: the half that receives the other entry's half (memcpy 0x40)	^\s*iVar13\ =\ iVar4\ \+\ param_1;$	+1
+use	psnDecTryMergeAddressSlots	iVar13	destHalf	CONFIRMED	entry + halfByteOffset: the half that receives the other entry's half (memcpy 0x40)	^\s*uVar3\ =\ \*\(undefined2\ \*\)\(iVar13\ \+\ 0x2a\);$	+2
+use	psnDecTryMergeAddressSlots	iVar13	destHalf	CONFIRMED	entry + halfByteOffset: the half that receives the other entry's half (memcpy 0x40)	^\s*\*\(undefined2\ \*\)\(iVar13\ \+\ 0x2a\)\ =\ uVar3;$	+1
+use	psnDecTryMergeAddressSlots	iVar15	sourceCounter	CONFIRMED	counter over the three sources of the first counting loop	^\s*iVar15\ =\ 0;$	+1
+use	psnDecTryMergeAddressSlots	iVar15	sourceCounter	CONFIRMED	counter over the three sources of the first counting loop	^\s*bVar1\ =\ iVar15\ !=\ 2;$	+1
+use	psnDecTryMergeAddressSlots	iVar15	sourceCounter	CONFIRMED	counter over the three sources of the first counting loop	^\s*iVar15\ =\ iVar15\ \+\ 1;$	+1
+use	psnDecTryMergeAddressSlots	iVar10	sourceIndex	CONFIRMED	counter over the three sources of the moved half	^\s*iVar10\ =\ 0;$@2	+1
+use	psnDecTryMergeAddressSlots	iVar10	sourceIndex	CONFIRMED	counter over the three sources of the moved half	^\s*bVar1\ =\ iVar10\ ==\ 2;$	+1
+use	psnDecTryMergeAddressSlots	iVar10	sourceIndex	CONFIRMED	counter over the three sources of the moved half	^\s*iVar10\ =\ iVar10\ \+\ 1;$@3	+1
+use	psnDecTryMergeAddressSlots	iVar10	clearCounter	CONFIRMED	counter over the three source slots cleared after the move	^\s*iVar10\ =\ 0;$@3	+1
+use	psnDecTryMergeAddressSlots	iVar10	clearCounter	CONFIRMED	counter over the three source slots cleared after the move	^\s*bVar1\ =\ iVar10\ !=\ 2;$	+1
+use	psnDecTryMergeAddressSlots	iVar10	clearCounter	CONFIRMED	counter over the three source slots cleared after the move	^\s*iVar10\ =\ iVar10\ \+\ 1;$@4	+1
+use	psnDecTryMergeAddressSlots	psVar5	usageWordPtr	INFERRED	pointer into the usage words of the group being reset (-1 marks unused)	^\s*psVar5\ =\ puVar14\ \+\ 2;$	+1
+use	psnDecTryMergeAddressSlots	psVar5	usageWordPtr	INFERRED	pointer into the usage words of the group being reset (-1 marks unused)	^\s*if\ \(\(\*psVar5\ ==\ 0\)\ \&\&\ \(psVar5\[0x20\]\ ==\ 0\)\)\ \{$	+2
+use	psnDecTryMergeAddressSlots	psVar5	usageWordPtr	INFERRED	pointer into the usage words of the group being reset (-1 marks unused)	^\s*psVar5\ =\ psVar5\ \+\ 1;$	+1
+use	psnDecTryMergeAddressSlots	puVar16	otherSelectPtr	CONFIRMED	select ushort of source i of the moved half (otherEntry + halfByteOffset + 8 + 4*i)	^\s*puVar16\ =\ \(ushort\ \*\)\(param_2\ \+\ iVar4\ \+\ 8\);$	+1
+use	psnDecTryMergeAddressSlots	puVar16	otherSelectPtr	CONFIRMED	select ushort of source i of the moved half (otherEntry + halfByteOffset + 8 + 4*i)	^\s*uVar6\ =\ \(uint\)\*puVar16;$	+2
+use	psnDecTryMergeAddressSlots	puVar16	otherSelectPtr	CONFIRMED	select ushort of source i of the moved half (otherEntry + halfByteOffset + 8 + 4*i)	^\s*uVar6\ =\ \*puVar16\ \&\ 0xfffc\ \|\ uVar11;$	+2
+use	psnDecTryMergeAddressSlots	puVar16	otherSelectPtr	CONFIRMED	select ushort of source i of the moved half (otherEntry + halfByteOffset + 8 + 4*i)	^\s*uVar6\ =\ \*puVar16\ \&\ 0xfffc\ \|\ uVar11;$@2	+2
+use	psnDecTryMergeAddressSlots	puVar16	otherSelectPtr	CONFIRMED	select ushort of source i of the moved half (otherEntry + halfByteOffset + 8 + 4*i)	^\s*puVar16\ =\ puVar16\ \+\ 2;$	+1
+use	psnDecTryMergeAddressSlots	puVar7	clearSlotPtr	CONFIRMED	source slot of the moved-from half being zeroed	^\s*puVar7\ =\ \(undefined2\ \*\)\(iVar4\ \+\ 8\);$	+1
+use	psnDecTryMergeAddressSlots	puVar7	clearSlotPtr	CONFIRMED	source slot of the moved-from half being zeroed	^\s*\*puVar7\ =\ 0;$	+2
+use	psnDecTryMergeAddressSlots	puVar7	clearSlotPtr	CONFIRMED	source slot of the moved-from half being zeroed	^\s*puVar7\ =\ puVar7\ \+\ 2;$	+1
+use	psnDecTryMergeAddressSlots	uVar11	slotSearchIndex	CONFIRMED	index (0..2) of the entry's address slot being tried for the source's address	^\s*uVar11\ =\ 2;$	+1
+use	psnDecTryMergeAddressSlots	uVar11	slotSearchIndex	CONFIRMED	index (0..2) of the entry's address slot being tried for the source's address	^\s*uVar11\ =\ 0;$	+1
+use	psnDecTryMergeAddressSlots	uVar11	slotSearchIndex	CONFIRMED	index (0..2) of the entry's address slot being tried for the source's address	^\s*uVar6\ =\ \*puVar16\ \&\ 0xfffc\ \|\ uVar11;$	+1
+use	psnDecTryMergeAddressSlots	uVar11	slotSearchIndex	CONFIRMED	index (0..2) of the entry's address slot being tried for the source's address	^\s*bVar1\ =\ uVar11\ ==\ 2;$	+2
+use	psnDecTryMergeAddressSlots	uVar11	slotSearchIndex	CONFIRMED	index (0..2) of the entry's address slot being tried for the source's address	^\s*uVar11\ =\ 0;$@2	+1
+use	psnDecTryMergeAddressSlots	uVar11	slotSearchIndex	CONFIRMED	index (0..2) of the entry's address slot being tried for the source's address	^\s*uVar6\ =\ \*puVar16\ \&\ 0xfffc\ \|\ uVar11;$@2	+1
+use	psnDecTryMergeAddressSlots	uVar11	slotSearchIndex	CONFIRMED	index (0..2) of the entry's address slot being tried for the source's address	^\s*bVar1\ =\ uVar11\ ==\ 2;$@2	+2
+use	psnDecTryMergeAddressSlots	uVar11	slotSearchIndex	CONFIRMED	index (0..2) of the entry's address slot being tried for the source's address	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c0fd0\)\(param_1,extraout_r4,uVar8,param_4,uVar9,uVar11,iVar12,puVar14\);$	+1
+use	psnDecTryMergeAddressSlots	uVar11	slotSearchIndex	CONFIRMED	index (0..2) of the entry's address slot being tried for the source's address	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c0fd0\)\(param_2,extraout_r4_00,uVar8,param_4,uVar9,uVar11,iVar12,puVar14\);$	+1
+use	psnDecTryMergeAddressSlots	uVar6	otherSelect	CONFIRMED	select value of the moved source	^\s*uVar6\ =\ \(uint\)\*puVar16;$	+1
+use	psnDecTryMergeAddressSlots	uVar6	otherSelect	CONFIRMED	select value of the moved source	^\s*if\ \(\(uVar6\ \&\ 3\)\ ==\ 3\)\ \{$	+1
+use	psnDecTryMergeAddressSlots	uVar6	otherSelect	CONFIRMED	select value of the moved source	^\s*\*\(undefined2\ \*\)\(iVar12\ \+\ 0x80\)\ =\ \*\(undefined2\ \*\)\(\(uVar6\ \&\ 3\)\ \*\ 2\ \+\ param_2\ \+\ 0x80\);$	+1
+use	psnDecTryMergeAddressSlots	uVar6	otherSelect	CONFIRMED	select value of the moved source	^\s*uVar6\ =\ \*puVar16\ \&\ 0xfffc\ \|\ uVar11;$	+2
+use	psnDecTryMergeAddressSlots	uVar6	otherSelect	CONFIRMED	select value of the moved source	^\s*if\ \(\(uVar6\ \&\ 0x200\)\ !=\ 0\)\ \{$	+1
+use	psnDecTryMergeAddressSlots	uVar6	otherSelect	CONFIRMED	select value of the moved source	^\s*if\ \(\(uVar6\ \&\ 3\)\ ==\ 3\)\ \{$@2	+1
+use	psnDecTryMergeAddressSlots	uVar6	otherSelect	CONFIRMED	select value of the moved source	^\s*\*\(undefined2\ \*\)\(iVar12\ \+\ 0x86\)\ =\ \*\(undefined2\ \*\)\(\(uVar6\ \&\ 3\)\ \*\ 2\ \+\ param_2\ \+\ 0x86\);$	+1
+use	psnDecTryMergeAddressSlots	uVar6	otherSelect	CONFIRMED	select value of the moved source	^\s*uVar6\ =\ \*puVar16\ \&\ 0xfffc\ \|\ uVar11;$@2	+2
+use	psnDecTryMergeAddressSlots	uVar2	destSelectWord	INFERRED	ushort at +0x48 of the first source (source word stepping)	^\s*uVar2\ =\ \*\(ushort\ \*\)\(iVar4\ \+\ 0x48\);$	+2
+use	psnDecTryMergeAddressSlots	uVar2	destSelectWord	INFERRED	ushort at +0x48 of the first source (source word stepping)	^\s*uVar9\ =\ uVar2\ \&\ 0x100;$	+2
+use	psnDecTryMergeAddressSlots	uVar3	savedSrcpOp	CONFIRMED	pre-subtract op (+0x2a) of the destination half, restored after the memcpy	^\s*uVar3\ =\ \*\(undefined2\ \*\)\(iVar13\ \+\ 0x2a\);$	+1
+use	psnDecTryMergeAddressSlots	uVar3	savedSrcpOp	CONFIRMED	pre-subtract op (+0x2a) of the destination half, restored after the memcpy	^\s*\*\(undefined2\ \*\)\(iVar13\ \+\ 0x2a\)\ =\ uVar3;$	+1
+use	psnDecTryMergeAddressSlots	uVar8	halfSize	CONFIRMED	0x40: size of the half copied by memcpy	^\s*uVar8\ =\ 0x40;$	+1
+use	psnDecTryMergeAddressSlots	uVar8	halfSize	CONFIRMED	0x40: size of the half copied by memcpy	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c0fd0\)\(param_1,extraout_r4,uVar8,param_4,uVar9,uVar11,iVar12,puVar14\);$	+1
+use	psnDecTryMergeAddressSlots	uVar8	halfSize	CONFIRMED	0x40: size of the half copied by memcpy	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c0fd0\)\(param_2,extraout_r4_00,uVar8,param_4,uVar9,uVar11,iVar12,puVar14\);$	+1

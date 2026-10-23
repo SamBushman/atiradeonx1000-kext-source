@@ -497,7 +497,7 @@ extern int R520MachineAssembler__visitContinue();
 extern int FUN_0004a860();
 extern int extvsCreateSymbol();
 extern int extvsSymbolListGetSymbol();
-extern int FUN_000da458();
+extern int scDestroyCompilerObject();
 extern int Compiler__fail();
 extern int FUN_000e9294();
 extern int FUN_000f4a84();

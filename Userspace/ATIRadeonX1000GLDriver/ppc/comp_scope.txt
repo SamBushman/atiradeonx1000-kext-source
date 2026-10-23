@@ -17,7 +17,7 @@ IfHeaderStatic__ctor_eb9e0 compiler
 IfHeaderStatic__ctor_ebac8 compiler
 FUN_000ecc1c compiler
 HwLimits__vslot43_prependDefaultMov compiler
-FUN_000f4fdc compiler
+Compiler__getOrCreateLoadConstN compiler
 FUN_000f94dc compiler
 IRInst__clone compiler
 FUN_001044e0 compiler

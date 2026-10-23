@@ -365,8 +365,8 @@ LAB_0014736c:
   return uVar4;
 }
 
-/* FUN_00147398 @ 0x147398 (120 bytes) */
-int FUN_00147398(param_1)
+/* IRInst__isOpcodeInSet147398 @ 0x147398 (120 bytes) */
+int IRInst__isOpcodeInSet147398(param_1)
   int param_1;
 {
   int callResult;
@@ -839,7 +839,7 @@ int FUN_00147f54(inst, compiler)
         return inst;
       }
     }
-    iVar4 = ((undefined4 (*)())FUN_0010ab8c)(uniformSourceConstant,local_a8,(double)local_90);
+    iVar4 = ((undefined4 (*)())tryOutputScaleExponent)(uniformSourceConstant,local_a8,(double)local_90);
     if (iVar4 == 0) {
       return inst;
     }
@@ -926,9 +926,9 @@ int FUN_00147f54(inst, compiler)
       if (iVar17 == 3) {
         dVar19 = (double)FLOAT_001aa0e8;
         inst[0x49] = local_a8[0];
-        ((void (*)())FUN_000f79c4)(inst,iVar4,uVar16,dVar19,dVar19,dVar19,dVar19);
+        ((void (*)())IRInst__makeLiteralVec4Float)(inst,iVar4,uVar16,dVar19,dVar19,dVar19,dVar19);
         dVar19 = (double)FLOAT_001aa10c;
-        ((void (*)())FUN_000f79c4)(inst,iVar4,3,dVar19,dVar19,dVar19,dVar19);
+        ((void (*)())IRInst__makeLiteralVec4Float)(inst,iVar4,3,dVar19,dVar19,dVar19,dVar19);
         IROperand__setModifierBits(inst + 0x35,1,(uint)(local_90 < FLOAT_001aa0d4));
         return inst;
       }
@@ -1378,7 +1378,7 @@ int FUN_00148d8c(inst, param_2)
       if (*(char *)((int)&local_54 + iVar5) == '\0') {
         iVar7 = (**(code **)(*operandVReg + 0x24))(operandVReg);
         if ((((iVar7 == 0) || (iVar7 = IRInst__hasSingleUse(operandVReg,param_2), iVar7 == 0)) ||
-            (operandVReg[0x48] != 0)) || (iVar7 = ((int (*)())FUN_00147398)(operandVReg), iVar7 == 0)) {
+            (operandVReg[0x48] != 0)) || (iVar7 = ((int (*)())IRInst__isOpcodeInSet147398)(operandVReg), iVar7 == 0)) {
           return 0;
         }
         operandRecord2 = IRInst__getOperandRecord(operandVReg,0);
@@ -1399,7 +1399,7 @@ int FUN_00148d8c(inst, param_2)
           if (piVar8[0x48] != 0) {
             return 0;
           }
-          iVar7 = ((int (*)())FUN_00147398)(piVar8);
+          iVar7 = ((int (*)())IRInst__isOpcodeInSet147398)(piVar8);
           if (iVar7 == 0) {
             return 0;
           }
@@ -2127,7 +2127,7 @@ int FUN_00149de4(inst, param_2, inst2, param_4, compiler)
                         }
                         iVar17 = iVar17 + 1;
                         piVar7[0x21] = iVar17;
-                        ((void (*)())FUN_000f79c4)(piVar7,iVar14,iVar17,fparam_1,fparam_1,fparam_1,fparam_1);
+                        ((void (*)())IRInst__makeLiteralVec4Float)(piVar7,iVar14,iVar17,fparam_1,fparam_1,fparam_1,fparam_1);
                         operandRecord4 = IRInst__getOperandRecord(piVar7,iVar17);
                         *(undefined4 *)(operandRecord4 + 0x10) = 0x4040404;
                         (**(code **)(*piVar7 + 0x88))(piVar7,iVar17,iVar8,cVar3);
@@ -3523,7 +3523,7 @@ int Inst__collapseAlgebraic_0014caec(inst, param_2)
         IROperand__setModifierBits((int)inst2 + 0xbc,1,inst[0x34] & 1);
         IROperand__setModifierBits((int)inst2 + 0xa4,2,(uint)inst[0x2e] >> 1 & 1);
         IROperand__setModifierBits((int)inst2 + 0xbc,2,(uint)inst[0x34] >> 1 & 1);
-        ((void (*)())FUN_000f79c4)(inst2,param_2,3,0.0,0.0,0.0,0.0);
+        ((void (*)())IRInst__makeLiteralVec4Float)(inst2,param_2,3,0.0,0.0,0.0,0.0);
         *(int *)((int)inst2 + 0x98) = inst[0x26];
         *(undefined4 *)((int)inst2 + 0x94) = *(undefined4 *)((int)inst2 + 0x14c);
         local_50[1] = 0;
@@ -4189,7 +4189,7 @@ LAB_0014dd2c:
   else {
     *(int *)(sourceDef5 + 0x160) = *(int *)(pass + 0x478) + 1;
   }
-  ((void (*)())FUN_000f79c4)(node,pass,2,1.0,1.0,1.0,1.0);
+  ((void (*)())IRInst__makeLiteralVec4Float)(node,pass,2,1.0,1.0,1.0,1.0);
   FUN_00105894(sourceDef,*(undefined4 *)(pass + 8));
   return 1;
 }
@@ -5614,7 +5614,7 @@ int Inst__collapseAlgebraic_00150d38(inst, param_2)
       a0 = (int *)IRInst__getOperandSource(inst,iVar12);
       iVar5 = (**(code **)(*a0 + 100))(a0);
       if (((iVar5 != 0) && (a0[0x48] == 0)) && (((a0[5] & 0x200U) == 0 && (a0[0x49] != 0)))) {
-        dVar18 = (double)((double (*)())FUN_0010aad4)(a0[0x49]);
+        dVar18 = (double)((double (*)())outputScaleFromExponent)(a0[0x49]);
         local_7c = (float)dVar18;
         local_88 = (float)dVar18;
         local_84 = (float)dVar18;
@@ -9624,7 +9624,7 @@ int Inst__collapseAlgebraic_00158264(inst, param_2, inst2, param_4)
     if (bVar18) {
       fparam_1 = -fparam_1;
     }
-    iVar17 = ((undefined4 (*)())FUN_0010ab8c)(readMaskResult,&local_a8,fparam_1);
+    iVar17 = ((undefined4 (*)())tryOutputScaleExponent)(readMaskResult,&local_a8,fparam_1);
     if (((iVar17 != 0) && (local_a8 != 0)) &&
        (iVar17 = ((int (*)())FUN_0015800c)(inst2,operandVReg,local_a8,uVar14,local_68,param_4), iVar17 != 0)) {
       iVar17 = 0x14;

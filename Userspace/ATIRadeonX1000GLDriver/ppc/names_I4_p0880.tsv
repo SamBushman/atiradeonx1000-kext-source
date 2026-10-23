@@ -1,0 +1,200 @@
+# Fork I4 batch 5: web-split names of psnDecRecomputeSourceUsage
+use	psnDecRecomputeSourceUsage	uVar9	halfFlags	INFERRED	flags word at half+0x30 with bits 1,2,4-6 cleared before they are recomputed	^\s*uVar9\ =\ \*\(uint\ \*\)\(iVar14\ \+\ 0x30\)\ \&\ 0xffffff89;$	+2
+use	psnDecRecomputeSourceUsage	uVar9	halfFlags	INFERRED	flags word at half+0x30 with bits 1,2,4-6 cleared before they are recomputed	^\s*\*\(uint\ \*\)\(iVar14\ \+\ 0x30\)\ =\ uVar9\ \|\ 0x52;$	+1
+use	psnDecRecomputeSourceUsage	uVar9	sourceIndex	CONFIRMED	counter over the three source slots of the half (0..2)	^\s*uVar9\ =\ 0;$	+1
+use	psnDecRecomputeSourceUsage	uVar9	sourceIndex	CONFIRMED	counter over the three source slots of the half (0..2)	^\s*uVar6\ =\ \*\(ushort\ \*\)\(iVar14\ \+\ 8\ \+\ uVar9\ \*\ 4\);$	+2
+use	psnDecRecomputeSourceUsage	uVar9	sourceIndex	CONFIRMED	counter over the three source slots of the half (0..2)	^\s*uVar18\ =\ \(1\ <\ uVar9\)\ \+\ 3;$	+1
+use	psnDecRecomputeSourceUsage	uVar9	sourceIndex	CONFIRMED	counter over the three source slots of the half (0..2)	^\s*if\ \(\(iVar24\ ==\ 1\)\ \&\&\ \(uVar9\ ==\ 2\)\)\ \{$	+1
+use	psnDecRecomputeSourceUsage	iVar25	copyHalfNumber	INFERRED	halfIndex+1 of the half whose opcode is 0xd; afterwards the usage words of one half are copied to the other (1: half 0 <- half 1, 2: half 1 <- half 0)	^\s*iVar25\ =\ 0;$	+1
+use	psnDecRecomputeSourceUsage	iVar25	copyHalfNumber	INFERRED	halfIndex+1 of the half whose opcode is 0xd; afterwards the usage words of one half are copied to the other (1: half 0 <- half 1, 2: half 1 <- half 0)	^\s*iVar25\ =\ iVar26;$	+1
+use	psnDecRecomputeSourceUsage	iVar25	copyHalfNumber	INFERRED	halfIndex+1 of the half whose opcode is 0xd; afterwards the usage words of one half are copied to the other (1: half 0 <- half 1, 2: half 1 <- half 0)	^\s*if\ \(iVar25\ ==\ 1\)\ \{$	+1
+use	psnDecRecomputeSourceUsage	iVar25	copyHalfNumber	INFERRED	halfIndex+1 of the half whose opcode is 0xd; afterwards the usage words of one half are copied to the other (1: half 0 <- half 1, 2: half 1 <- half 0)	^\s*else\ if\ \(iVar25\ ==\ 2\)\ \{$	+1
+use	psnDecRecomputeSourceUsage	iVar25	halfCursor	CONFIRMED	pointer that walks the two halves (entry, entry+0x40) in the later loops	^\s*iVar25\ =\ param_1;$	+1
+use	psnDecRecomputeSourceUsage	iVar25	halfCursor	CONFIRMED	pointer that walks the two halves (entry, entry+0x40) in the later loops	^\s*if\ \(\(\*\(short\ \*\)\(iVar25\ \+\ 2\)\ ==\ 0\ \&\&\ \*\(short\ \*\)\(iVar25\ \+\ 6\)\ ==\ 0\)\ \&\&$	+3
+use	psnDecRecomputeSourceUsage	iVar25	halfCursor	CONFIRMED	pointer that walks the two halves (entry, entry+0x40) in the later loops	^\s*iVar25\ =\ iVar25\ \+\ 0x40;$	+1
+use	psnDecRecomputeSourceUsage	iVar25	halfCursor	CONFIRMED	pointer that walks the two halves (entry, entry+0x40) in the later loops	^\s*iVar25\ =\ param_1;$@2	+1
+use	psnDecRecomputeSourceUsage	iVar25	halfCursor	CONFIRMED	pointer that walks the two halves (entry, entry+0x40) in the later loops	^\s*if\ \(\(\*\(uint\ \*\)\(iVar25\ \+\ 0x70\)\ \&\ 6\)\ ==\ 0\)\ \{$	+1
+use	psnDecRecomputeSourceUsage	iVar25	halfCursor	CONFIRMED	pointer that walks the two halves (entry, entry+0x40) in the later loops	^\s*iVar25\ =\ iVar25\ \+\ \-0x40;$	+1
+use	psnDecRecomputeSourceUsage	iVar25	halfCursor	CONFIRMED	pointer that walks the two halves (entry, entry+0x40) in the later loops	^\s*iVar25\ =\ param_1;$@3	+1
+use	psnDecRecomputeSourceUsage	iVar25	halfCursor	CONFIRMED	pointer that walks the two halves (entry, entry+0x40) in the later loops	^\s*if\ \(\(\(\*\(short\ \*\)\(iVar25\ \+\ 2\)\ !=\ 0\ \|\|\ \*\(short\ \*\)\(iVar25\ \+\ 6\)\ !=\ 0\)\ \|\|$	+5
+use	psnDecRecomputeSourceUsage	iVar25	halfCursor	CONFIRMED	pointer that walks the two halves (entry, entry+0x40) in the later loops	^\s*iVar25\ =\ iVar25\ \+\ 0x40;$@2	+1
+use	psnDecRecomputeSourceUsage	uVar16	sourceSwizzle	CONFIRMED	ushort at half+8+source*4+2: component read mask in the low bits, 0x300 replicate mode, 0x1000 / 0x2000 negate / abs	^\s*uVar16\ =\ \*\(ushort\ \*\)\(iVar14\ \+\ 8\ \+\ uVar9\ \*\ 4\ \+\ 2\);$	+1
+use	psnDecRecomputeSourceUsage	uVar16	sourceSwizzle	CONFIRMED	ushort at half+8+source*4+2: component read mask in the low bits, 0x300 replicate mode, 0x1000 / 0x2000 negate / abs	^\s*uVar22\ =\ uVar16\ \&\ 0x300;$	+2
+use	psnDecRecomputeSourceUsage	uVar16	sourceSwizzle	CONFIRMED	ushort at half+8+source*4+2: component read mask in the low bits, 0x300 replicate mode, 0x1000 / 0x2000 negate / abs	^\s*if\ \(\(\(uVar13\ \&\ 0x10\)\ ==\ 0\)\ \&\&$	+3
+use	psnDecRecomputeSourceUsage	uVar16	sourceSwizzle	CONFIRMED	ushort at half+8+source*4+2: component read mask in the low bits, 0x300 replicate mode, 0x1000 / 0x2000 negate / abs	^\s*if\ \(\(uVar16\ \&\ 0x1000\)\ !=\ 0\)\ \{$	+1
+use	psnDecRecomputeSourceUsage	uVar16	sourceSwizzle	CONFIRMED	ushort at half+8+source*4+2: component read mask in the low bits, 0x300 replicate mode, 0x1000 / 0x2000 negate / abs	^\s*if\ \(\(uVar16\ \&\ 0x2000\)\ !=\ 0\)\ \{$	+1
+use	psnDecRecomputeSourceUsage	uVar16	writeAndOutputMask	INFERRED	half write mask (+6) | output mask (+2)	^\s*uVar16\ =\ \*\(ushort\ \*\)\(iVar14\ \+\ 6\)\ \|\ \*\(ushort\ \*\)\(iVar14\ \+\ 2\);$	+2
+use	psnDecRecomputeSourceUsage	uVar16	writeAndOutputMask	INFERRED	half write mask (+6) | output mask (+2)	^\s*uVar11\ =\ \(uVar7\ \&\ 1\)\ <<\ 2\ \|\ uVar16\ >>\ 1\ \&\ 3;$	+1
+use	psnDecRecomputeSourceUsage	uVar16	writeAndOutputMask	INFERRED	half write mask (+6) | output mask (+2)	^\s*uVar11\ =\ \(uVar7\ \&\ 2\)\ <<\ 1\ \|\ uVar16\ >>\ 1\ \&\ 2;$	+1
+use	psnDecRecomputeSourceUsage	uVar16	writeAndOutputMask	INFERRED	half write mask (+6) | output mask (+2)	^\s*uVar11\ =\ \(uVar7\ \&\ 3\)\ <<\ 1\ \|\ uVar16\ >>\ 2\ \&\ 1;$	+1
+use	psnDecRecomputeSourceUsage	uVar16	readComponentBits	INFERRED	the component bits ORed into the per-slot RGB-group read mask	^\s*uVar16\ =\ \(ushort\)uVar15;$	+2
+use	psnDecRecomputeSourceUsage	uVar16	readComponentBits	INFERRED	the component bits ORed into the per-slot RGB-group read mask	^\s*\*\(ushort\ \*\)\(iVar10\ \+\ iVar28\ \+\ 0x14\)\ =\ uVar16\ \|\ \*\(ushort\ \*\)\(iVar10\ \+\ iVar28\ \+\ 0x14\);$	+1
+use	psnDecRecomputeSourceUsage	uVar16	readComponentBits	INFERRED	the component bits ORed into the per-slot RGB-group read mask	^\s*\*\(ushort\ \*\)\(iVar17\ \+\ 0x20\)\ =\ uVar16\ \|\ \*\(ushort\ \*\)\(iVar17\ \+\ 0x20\);$	+3
+use	psnDecRecomputeSourceUsage	uVar16	readComponentBits	INFERRED	the component bits ORed into the per-slot RGB-group read mask	^\s*\*\(ushort\ \*\)\(iVar10\ \+\ iVar28\ \+\ 0x20\)\ =\ uVar16\ \|\ \*\(ushort\ \*\)\(iVar10\ \+\ iVar28\ \+\ 0x20\);$	+3
+use	psnDecRecomputeSourceUsage	uVar16	alphaReadComponentBits	INFERRED	the component bits ORed into the per-slot alpha-group read mask	^\s*uVar16\ =\ \(ushort\)uVar13\ \&\ 8;$	+1
+use	psnDecRecomputeSourceUsage	uVar16	alphaReadComponentBits	INFERRED	the component bits ORed into the per-slot alpha-group read mask	^\s*uVar16\ =\ 0;$	+1
+use	psnDecRecomputeSourceUsage	uVar16	alphaReadComponentBits	INFERRED	the component bits ORed into the per-slot alpha-group read mask	^\s*\*\(ushort\ \*\)\(iVar17\ \+\ 0x1a\)\ =\ uVar16\ \|\ \*\(ushort\ \*\)\(iVar17\ \+\ 0x1a\);$	+1
+use	psnDecRecomputeSourceUsage	uVar16	alphaReadComponentBits	INFERRED	the component bits ORed into the per-slot alpha-group read mask	^\s*\*\(ushort\ \*\)\(iVar10\ \+\ iVar28\ \+\ 0x1a\)\ =\ uVar16\ \|\ \*\(ushort\ \*\)\(iVar10\ \+\ iVar28\ \+\ 0x1a\);$	+1
+use	psnDecRecomputeSourceUsage	uVar16	alphaReadComponentBits	INFERRED	the component bits ORed into the per-slot alpha-group read mask	^\s*\*\(ushort\ \*\)\(iVar17\ \+\ 0x24\)\ =\ uVar16\ \|\ \*\(ushort\ \*\)\(iVar17\ \+\ 0x24\);$	+3
+use	psnDecRecomputeSourceUsage	uVar16	alphaReadComponentBits	INFERRED	the component bits ORed into the per-slot alpha-group read mask	^\s*\*\(ushort\ \*\)\(iVar10\ \+\ iVar28\ \+\ 0x24\)\ =\ uVar16\ \|\ \*\(ushort\ \*\)\(iVar10\ \+\ iVar28\ \+\ 0x24\);$	+3
+use	psnDecRecomputeSourceUsage	uVar22	componentMode	INFERRED	swizzle word & 0x300	^\s*uVar22\ =\ uVar16\ \&\ 0x300;$	+1
+use	psnDecRecomputeSourceUsage	uVar22	componentMode	INFERRED	swizzle word & 0x300	^\s*bVar2\ =\ uVar22\ ==\ 0x300;$	+1
+use	psnDecRecomputeSourceUsage	uVar22	componentMode	INFERRED	swizzle word & 0x300	^\s*if\ \(uVar22\ ==\ 0x200\)\ \{$	+1
+use	psnDecRecomputeSourceUsage	uVar22	componentMode	INFERRED	swizzle word & 0x300	^\s*else\ if\ \(uVar22\ ==\ 0x100\)\ \{$	+1
+use	psnDecRecomputeSourceUsage	uVar22	componentMode	INFERRED	swizzle word & 0x300	^\s*if\ \(uVar22\ ==\ 0x200\)\ \{$@2	+1
+use	psnDecRecomputeSourceUsage	uVar22	componentMode	INFERRED	swizzle word & 0x300	^\s*else\ if\ \(uVar22\ ==\ 0x100\)\ \{$@2	+1
+use	psnDecRecomputeSourceUsage	uVar22	maskWord	INFERRED	copy of a read-mask ushort before it is ORed	^\s*uVar22\ =\ \*\(ushort\ \*\)\(iVar17\ \+\ 0x14\);$	+1
+use	psnDecRecomputeSourceUsage	uVar22	maskWord	INFERRED	copy of a read-mask ushort before it is ORed	^\s*\*\(ushort\ \*\)\(iVar17\ \+\ 0x14\)\ =\ uVar16\ \|\ uVar22;$	+1
+use	psnDecRecomputeSourceUsage	uVar23	addressSlot	CONFIRMED	select & 3: which address slot the source reads (3 = result of another half)	^\s*uVar23\ =\ uVar6\ \&\ 3;$	+1
+use	psnDecRecomputeSourceUsage	uVar23	addressSlot	CONFIRMED	select & 3: which address slot the source reads (3 = result of another half)	^\s*bVar3\ =\ uVar23\ !=\ 3;$	+1
+use	psnDecRecomputeSourceUsage	uVar23	addressSlot	CONFIRMED	select & 3: which address slot the source reads (3 = result of another half)	^\s*uVar18\ =\ uVar23;$	+1
+use	psnDecRecomputeSourceUsage	uVar23	addressSlot	CONFIRMED	select & 3: which address slot the source reads (3 = result of another half)	^\s*uVar23\ =\ \(uint\)\(uVar5\ \-\ 1\ <\ 2\);$	+1
+use	psnDecRecomputeSourceUsage	uVar23	addressSlot	CONFIRMED	select & 3: which address slot the source reads (3 = result of another half)	^\s*iVar20\ =\ uVar23\ \*\ 2\ \+\ iVar14;$	+1
+use	psnDecRecomputeSourceUsage	uVar23	addressSlot	CONFIRMED	select & 3: which address slot the source reads (3 = result of another half)	^\s*iVar17\ =\ uVar23\ \*\ 2\ \+\ iVar28;$	+1
+use	psnDecRecomputeSourceUsage	uVar23	addressSlot	CONFIRMED	select & 3: which address slot the source reads (3 = result of another half)	^\s*iVar20\ =\ uVar23\ \*\ 2\ \+\ iVar14;$@2	+1
+use	psnDecRecomputeSourceUsage	uVar23	addressSlot	CONFIRMED	select & 3: which address slot the source reads (3 = result of another half)	^\s*iVar17\ =\ uVar23\ \*\ 2\ \+\ iVar28;$@2	+1
+use	psnDecRecomputeSourceUsage	bVar1	opcodeInSet1f1	CONFIRMED	(1 << opcode) & 0x1f1: opcodes 0 and 4-8	^\s*bVar1\ =\ \(1\ <<\ \(\(int\)\(short\)uVar4\ \&\ 0x3fU\)\ \&\ 0x1f1U\)\ !=\ 0;$	+1
+use	psnDecRecomputeSourceUsage	bVar1	opcodeInSet1f1	CONFIRMED	(1 << opcode) & 0x1f1: opcodes 0 and 4-8	^\s*if\ \(\(uVar4\ <\ 9\)\ \&\&\ \(bVar1\)\)\ \{$	+1
+use	psnDecRecomputeSourceUsage	bVar1	opcodeInSet1f1	CONFIRMED	(1 << opcode) & 0x1f1: opcodes 0 and 4-8	^\s*if\ \(\(\(\(bVar2\)\ \&\&\ \(uVar4\ <\ 9\)\)\ \&\&\ \(bVar1\)\)\ \&\&$	+2
+use	psnDecRecomputeSourceUsage	bVar1	loopContinue	CONFIRMED	loop-continue flag of the do-while loop over the halves	^\s*bVar1\ =\ iVar24\ !=\ 1;$	+1
+use	psnDecRecomputeSourceUsage	bVar1	loopContinue	CONFIRMED	loop-continue flag of the do-while loop over the halves	^\s*\}\ while\ \(bVar1\);$	+1
+use	psnDecRecomputeSourceUsage	bVar1	loopContinue	CONFIRMED	loop-continue flag of the do-while loop over the halves	^\s*bVar1\ =\ iVar24\ !=\ 1;$@2	+1
+use	psnDecRecomputeSourceUsage	bVar1	loopContinue	CONFIRMED	loop-continue flag of the do-while loop over the halves	^\s*\}\ while\ \(bVar1\);$@2	+1
+use	psnDecRecomputeSourceUsage	bVar2	componentModeIs300	INFERRED	componentMode == 0x300	^\s*bVar2\ =\ uVar22\ ==\ 0x300;$	+2
+use	psnDecRecomputeSourceUsage	bVar2	componentModeIs300	INFERRED	componentMode == 0x300	^\s*else\ if\ \(bVar2\)\ \{$	+1
+use	psnDecRecomputeSourceUsage	bVar2	componentModeIs300	INFERRED	componentMode == 0x300	^\s*else\ if\ \(bVar2\)\ \{$@2	+1
+use	psnDecRecomputeSourceUsage	bVar2	componentModeIs300	INFERRED	componentMode == 0x300	^\s*if\ \(\(\(\(bVar2\)\ \&\&\ \(uVar4\ <\ 9\)\)\ \&\&\ \(bVar1\)\)\ \&\&$	+2
+use	psnDecRecomputeSourceUsage	bVar2	loopContinue2	CONFIRMED	loop-continue flag of the do-while loop over the halves	^\s*bVar2\ =\ uVar9\ !=\ 2;$	+1
+use	psnDecRecomputeSourceUsage	bVar2	loopContinue2	CONFIRMED	loop-continue flag of the do-while loop over the halves	^\s*\}\ while\ \(bVar2\);$	+1
+use	psnDecRecomputeSourceUsage	bVar3	slotIsNotSrcp	CONFIRMED	address slot != 3	^\s*bVar3\ =\ uVar23\ !=\ 3;$	+2
+use	psnDecRecomputeSourceUsage	bVar3	slotIsNotSrcp	CONFIRMED	address slot != 3	^\s*if\ \(!bVar3\)\ \{$	+1
+use	psnDecRecomputeSourceUsage	bVar3	slotIsNotSrcp	CONFIRMED	address slot != 3	^\s*if\ \(!bVar3\)\ \{$@2	+1
+use	psnDecRecomputeSourceUsage	uVar4	opcode	CONFIRMED	ushort at half+0x28	^\s*uVar4\ =\ \*\(ushort\ \*\)\(iVar14\ \+\ 0x28\);$	+1
+use	psnDecRecomputeSourceUsage	uVar4	opcode	CONFIRMED	ushort at half+0x28	^\s*if\ \(uVar4\ ==\ 2\)\ \{$	+1
+use	psnDecRecomputeSourceUsage	uVar4	opcode	CONFIRMED	ushort at half+0x28	^\s*if\ \(uVar4\ ==\ 0xd\)\ \{$	+1
+use	psnDecRecomputeSourceUsage	uVar4	opcode	CONFIRMED	ushort at half+0x28	^\s*bVar1\ =\ \(1\ <<\ \(\(int\)\(short\)uVar4\ \&\ 0x3fU\)\ \&\ 0x1f1U\)\ !=\ 0;$	+1
+use	psnDecRecomputeSourceUsage	uVar4	opcode	CONFIRMED	ushort at half+0x28	^\s*if\ \(\(uVar4\ ==\ 3\)\ \&\&\ \(\(uVar13\ \|\ 0xfffffff9\)\ ==\ 0xffffffff\)\)\ \{$	+1
+use	psnDecRecomputeSourceUsage	uVar4	opcode	CONFIRMED	ushort at half+0x28	^\s*if\ \(\(uVar4\ <\ 9\)\ \&\&\ \(bVar1\)\)\ \{$	+1
+use	psnDecRecomputeSourceUsage	uVar4	opcode	CONFIRMED	ushort at half+0x28	^\s*if\ \(\(\(\(bVar2\)\ \&\&\ \(uVar4\ <\ 9\)\)\ \&\&\ \(bVar1\)\)\ \&\&$	+2
+use	psnDecRecomputeSourceUsage	uVar5	referencedSrcpOp	INFERRED	pre-subtract op (+0x2a) of the half a slot-3 source refers to	^\s*uVar5\ =\ \*\(ushort\ \*\)\(iVar10\ \*\ 0x40\ \+\ param_1\ \+\ 0x2a\);$	+1
+use	psnDecRecomputeSourceUsage	uVar5	referencedSrcpOp	INFERRED	pre-subtract op (+0x2a) of the half a slot-3 source refers to	^\s*uVar23\ =\ \(uint\)\(uVar5\ \-\ 1\ <\ 2\);$	+1
+use	psnDecRecomputeSourceUsage	uVar6	sourceSelect	CONFIRMED	ushort at half+8+source*4: bits 0-1 address slot, 0x100 / 0x200 RGB / alpha address group	^\s*uVar6\ =\ \*\(ushort\ \*\)\(iVar14\ \+\ 8\ \+\ uVar9\ \*\ 4\);$	+1
+use	psnDecRecomputeSourceUsage	uVar6	sourceSelect	CONFIRMED	ushort at half+8+source*4: bits 0-1 address slot, 0x100 / 0x200 RGB / alpha address group	^\s*uVar23\ =\ uVar6\ \&\ 3;$	+1
+use	psnDecRecomputeSourceUsage	uVar6	sourceSelect	CONFIRMED	ushort at half+8+source*4: bits 0-1 address slot, 0x100 / 0x200 RGB / alpha address group	^\s*uVar27\ =\ uVar6\ \&\ 0x300\ \|\ uVar27;$	+2
+use	psnDecRecomputeSourceUsage	uVar6	sourceSelect	CONFIRMED	ushort at half+8+source*4: bits 0-1 address slot, 0x100 / 0x200 RGB / alpha address group	^\s*if\ \(\(uVar6\ \&\ 0x100\)\ !=\ 0\)\ \{$	+1
+use	psnDecRecomputeSourceUsage	uVar6	sourceSelect	CONFIRMED	ushort at half+8+source*4: bits 0-1 address slot, 0x100 / 0x200 RGB / alpha address group	^\s*if\ \(\(uVar6\ \&\ 0x200\)\ !=\ 0\)\ \{$	+1
+use	psnDecRecomputeSourceUsage	uVar6	previousReadMask	INFERRED	read-mask ushort before it is ORed in	^\s*uVar6\ =\ \*\(ushort\ \*\)\(iVar17\ \+\ 0x1a\);$	+1
+use	psnDecRecomputeSourceUsage	uVar6	previousReadMask	INFERRED	read-mask ushort before it is ORed in	^\s*\*\(ushort\ \*\)\(iVar17\ \+\ 0x1a\)\ =\ uVar16\ \|\ uVar6;$	+1
+use	psnDecRecomputeSourceUsage	uVar7	writeAndOutputMaskWide	INFERRED	uVar16 widened to int	^\s*uVar7\ =\ \(uint\)uVar16;$	+2
+use	psnDecRecomputeSourceUsage	uVar7	writeAndOutputMaskWide	INFERRED	uVar16 widened to int	^\s*uVar11\ =\ \(uVar7\ \&\ 1\)\ <<\ 2\ \|\ uVar16\ >>\ 1\ \&\ 3;$	+1
+use	psnDecRecomputeSourceUsage	uVar7	writeAndOutputMaskWide	INFERRED	uVar16 widened to int	^\s*uVar11\ =\ \(uVar7\ \&\ 2\)\ <<\ 1\ \|\ uVar16\ >>\ 1\ \&\ 2;$	+1
+use	psnDecRecomputeSourceUsage	uVar7	writeAndOutputMaskWide	INFERRED	uVar16 widened to int	^\s*uVar11\ =\ \(uVar7\ \&\ 3\)\ <<\ 1\ \|\ uVar16\ >>\ 2\ \&\ 1;$	+1
+use	psnDecRecomputeSourceUsage	uVar8	defaultScaleBits	INFERRED	the constant at 0x1dbf94 written into the scale words of an unused half	^\s*uVar8\ =\ \(\*\(unsigned\ int\ \*\)\&DAT_001dbf94\);$	+1
+use	psnDecRecomputeSourceUsage	uVar8	defaultScaleBits	INFERRED	the constant at 0x1dbf94 written into the scale words of an unused half	^\s*puVar21\[\-3\]\ =\ uVar8;$	+3
+use	psnDecRecomputeSourceUsage	uVar11	replicatedMask	INFERRED	write/output mask re-ordered for the replicate mode (0x100 / 0x200 / 0x300)	^\s*uVar11\ =\ uVar7\ \&\ 0xffef;$	+1
+use	psnDecRecomputeSourceUsage	uVar11	replicatedMask	INFERRED	write/output mask re-ordered for the replicate mode (0x100 / 0x200 / 0x300)	^\s*uVar11\ =\ \(uVar7\ \&\ 1\)\ <<\ 2\ \|\ uVar16\ >>\ 1\ \&\ 3;$	+1
+use	psnDecRecomputeSourceUsage	uVar11	replicatedMask	INFERRED	write/output mask re-ordered for the replicate mode (0x100 / 0x200 / 0x300)	^\s*uVar11\ =\ \(uVar7\ \&\ 2\)\ <<\ 1\ \|\ uVar16\ >>\ 1\ \&\ 2;$	+1
+use	psnDecRecomputeSourceUsage	uVar11	replicatedMask	INFERRED	write/output mask re-ordered for the replicate mode (0x100 / 0x200 / 0x300)	^\s*uVar11\ =\ \(uVar7\ \&\ 3\)\ <<\ 1\ \|\ uVar16\ >>\ 2\ \&\ 1;$	+1
+use	psnDecRecomputeSourceUsage	uVar11	replicatedMask	INFERRED	write/output mask re-ordered for the replicate mode (0x100 / 0x200 / 0x300)	^\s*uVar15\ =\ uVar15\ \&\ uVar11;$	+1
+use	psnDecRecomputeSourceUsage	uVar13	componentSelect	INFERRED	swizzle word & 0x1f, restricted by the replicate mode	^\s*uVar13\ =\ uVar16\ \&\ 0x1f;$	+1
+use	psnDecRecomputeSourceUsage	uVar13	componentSelect	INFERRED	swizzle word & 0x1f, restricted by the replicate mode	^\s*if\ \(\(uVar4\ ==\ 3\)\ \&\&\ \(\(uVar13\ \|\ 0xfffffff9\)\ ==\ 0xffffffff\)\)\ \{$	+1
+use	psnDecRecomputeSourceUsage	uVar13	componentSelect	INFERRED	swizzle word & 0x1f, restricted by the replicate mode	^\s*uVar13\ =\ uVar18\ \&\ uVar13;$	+1
+use	psnDecRecomputeSourceUsage	uVar13	componentSelect	INFERRED	swizzle word & 0x1f, restricted by the replicate mode	^\s*if\ \(\(\(uVar13\ \&\ 0x10\)\ ==\ 0\)\ \&\&$	+3
+use	psnDecRecomputeSourceUsage	uVar13	componentSelect	INFERRED	swizzle word & 0x1f, restricted by the replicate mode	^\s*if\ \(uVar13\ ==\ 0x11\)\ \{$	+1
+use	psnDecRecomputeSourceUsage	uVar13	componentSelect	INFERRED	swizzle word & 0x1f, restricted by the replicate mode	^\s*else\ if\ \(uVar13\ ==\ 0x12\)\ \{$	+1
+use	psnDecRecomputeSourceUsage	uVar13	componentSelect	INFERRED	swizzle word & 0x1f, restricted by the replicate mode	^\s*else\ if\ \(uVar13\ ==\ 0x10\)\ \{$	+1
+use	psnDecRecomputeSourceUsage	uVar13	componentSelect	INFERRED	swizzle word & 0x1f, restricted by the replicate mode	^\s*uVar15\ =\ uVar13\ \&\ 7;$	+1
+use	psnDecRecomputeSourceUsage	uVar13	componentSelect	INFERRED	swizzle word & 0x1f, restricted by the replicate mode	^\s*uVar16\ =\ \(ushort\)uVar13\ \&\ 8;$	+1
+use	psnDecRecomputeSourceUsage	uVar15	readComponents	INFERRED	componentSelect & 7, restricted by the write mask	^\s*uVar15\ =\ uVar13\ \&\ 7;$	+2
+use	psnDecRecomputeSourceUsage	uVar15	readComponents	INFERRED	componentSelect & 7, restricted by the write mask	^\s*uVar15\ =\ uVar15\ \&\ uVar11;$	+1
+use	psnDecRecomputeSourceUsage	uVar15	readComponents	INFERRED	componentSelect & 7, restricted by the write mask	^\s*uVar16\ =\ \(ushort\)uVar15;$	+1
+use	psnDecRecomputeSourceUsage	uVar18	slotComponentMask	INFERRED	component mask derived for opcode 3 by source index and replicate mode	^\s*uVar18\ =\ \(1\ <\ uVar9\)\ \+\ 3;$	+1
+use	psnDecRecomputeSourceUsage	uVar18	slotComponentMask	INFERRED	component mask derived for opcode 3 by source index and replicate mode	^\s*uVar18\ =\ uVar18\ \*\ 4\ \&\ 4\ \|\ uVar18\ >>\ 1;$	+1
+use	psnDecRecomputeSourceUsage	uVar18	slotComponentMask	INFERRED	component mask derived for opcode 3 by source index and replicate mode	^\s*uVar18\ =\ uVar18\ \*\ 8\ \&\ 8\ \|\ uVar18\ \*\ 2\ \&\ 4\ \|\ uVar18\ >>\ 1\ \&\ 2;$	+1
+use	psnDecRecomputeSourceUsage	uVar18	slotComponentMask	INFERRED	component mask derived for opcode 3 by source index and replicate mode	^\s*uVar18\ =\ uVar18\ \*\ 2\ \&\ 6\ \|\ uVar18\ >>\ 2;$	+1
+use	psnDecRecomputeSourceUsage	uVar18	slotComponentMask	INFERRED	component mask derived for opcode 3 by source index and replicate mode	^\s*uVar13\ =\ uVar18\ \&\ uVar13;$	+1
+use	psnDecRecomputeSourceUsage	uVar18	readSlot	INFERRED	address slot whose read-mask word is updated (0 for slot-3 sources)	^\s*uVar18\ =\ uVar23;$	+1
+use	psnDecRecomputeSourceUsage	uVar18	readSlot	INFERRED	address slot whose read-mask word is updated (0 for slot-3 sources)	^\s*uVar18\ =\ 0;$	+1
+use	psnDecRecomputeSourceUsage	uVar18	readSlot	INFERRED	address slot whose read-mask word is updated (0 for slot-3 sources)	^\s*iVar10\ =\ uVar18\ \*\ 2;$	+1
+use	psnDecRecomputeSourceUsage	uVar18	readSlot	INFERRED	address slot whose read-mask word is updated (0 for slot-3 sources)	^\s*iVar10\ =\ uVar18\ \*\ 2;$@2	+1
+use	psnDecRecomputeSourceUsage	uVar27	srcpSelectsUsed	INFERRED	OR of the (select & 0x300) bits of the sources that read a half's result	^\s*uVar27\ =\ 0;$	+1
+use	psnDecRecomputeSourceUsage	uVar27	srcpSelectsUsed	INFERRED	OR of the (select & 0x300) bits of the sources that read a half's result	^\s*uVar27\ =\ uVar6\ \&\ 0x300\ \|\ uVar27;$	+1
+use	psnDecRecomputeSourceUsage	uVar27	srcpSelectsUsed	INFERRED	OR of the (select & 0x300) bits of the sources that read a half's result	^\s*if\ \(\(uVar27\ \&\ iVar24\ \*\ 0x100\)\ ==\ 0\)\ \{$	+1
+use	psnDecRecomputeSourceUsage	iVar10	referencedHalfIndex	INFERRED	(select & 0x300) >> 8 minus 1: the half a slot-3 source refers to	^\s*iVar10\ =\ \(\(uVar6\ \&\ 0x300\)\ >>\ 8\)\ \-\ 1;$	+3
+use	psnDecRecomputeSourceUsage	iVar10	slotByteOffset	CONFIRMED	readSlot*2: byte offset into the per-slot read-mask arrays	^\s*iVar10\ =\ uVar18\ \*\ 2;$	+2
+use	psnDecRecomputeSourceUsage	iVar10	slotByteOffset	CONFIRMED	readSlot*2: byte offset into the per-slot read-mask arrays	^\s*\*\(ushort\ \*\)\(iVar10\ \+\ iVar28\ \+\ 0x14\)\ =\ uVar16\ \|\ \*\(ushort\ \*\)\(iVar10\ \+\ iVar28\ \+\ 0x14\);$	+1
+use	psnDecRecomputeSourceUsage	iVar10	slotByteOffset	CONFIRMED	readSlot*2: byte offset into the per-slot read-mask arrays	^\s*\*\(ushort\ \*\)\(iVar10\ \+\ iVar28\ \+\ 0x20\)\ =\ uVar16\ \|\ \*\(ushort\ \*\)\(iVar10\ \+\ iVar28\ \+\ 0x20\);$	+1
+use	psnDecRecomputeSourceUsage	iVar10	slotByteOffset	CONFIRMED	readSlot*2: byte offset into the per-slot read-mask arrays	^\s*iVar10\ =\ uVar18\ \*\ 2;$@2	+2
+use	psnDecRecomputeSourceUsage	iVar10	slotByteOffset	CONFIRMED	readSlot*2: byte offset into the per-slot read-mask arrays	^\s*\*\(ushort\ \*\)\(iVar10\ \+\ iVar28\ \+\ 0x1a\)\ =\ uVar16\ \|\ \*\(ushort\ \*\)\(iVar10\ \+\ iVar28\ \+\ 0x1a\);$	+1
+use	psnDecRecomputeSourceUsage	iVar10	slotByteOffset	CONFIRMED	readSlot*2: byte offset into the per-slot read-mask arrays	^\s*\*\(ushort\ \*\)\(iVar10\ \+\ iVar28\ \+\ 0x24\)\ =\ uVar16\ \|\ \*\(ushort\ \*\)\(iVar10\ \+\ iVar28\ \+\ 0x24\);$	+1
+use	psnDecRecomputeSourceUsage	iVar12	sourceFlagsBase	CONFIRMED	half + 2*source: base of the per-source flag ushorts at +0x34	^\s*iVar12\ =\ iVar14;$	+1
+use	psnDecRecomputeSourceUsage	iVar12	sourceFlagsBase	CONFIRMED	half + 2*source: base of the per-source flag ushorts at +0x34	^\s*\*\(undefined2\ \*\)\(iVar12\ \+\ 0x34\)\ =\ 0;$	+2
+use	psnDecRecomputeSourceUsage	iVar12	sourceFlagsBase	CONFIRMED	half + 2*source: base of the per-source flag ushorts at +0x34	^\s*\*\(undefined2\ \*\)\(iVar12\ \+\ 0x34\)\ =\ 8;$	+1
+use	psnDecRecomputeSourceUsage	iVar12	sourceFlagsBase	CONFIRMED	half + 2*source: base of the per-source flag ushorts at +0x34	^\s*iVar12\ =\ iVar12\ \+\ 2;$	+1
+use	psnDecRecomputeSourceUsage	iVar14	half	CONFIRMED	entry + halfIndex*0x40	^\s*iVar14\ =\ param_1\ \+\ iVar24\ \*\ 0x40;$	+9
+use	psnDecRecomputeSourceUsage	iVar14	half	CONFIRMED	entry + halfIndex*0x40	^\s*\*\(uint\ \*\)\(iVar14\ \+\ 0x30\)\ =\ uVar9\ \|\ 0x52;$	+2
+use	psnDecRecomputeSourceUsage	iVar14	half	CONFIRMED	entry + halfIndex*0x40	^\s*iVar12\ =\ iVar14;$	+1
+use	psnDecRecomputeSourceUsage	iVar14	half	CONFIRMED	entry + halfIndex*0x40	^\s*uVar6\ =\ \*\(ushort\ \*\)\(iVar14\ \+\ 8\ \+\ uVar9\ \*\ 4\);$	+2
+use	psnDecRecomputeSourceUsage	iVar14	half	CONFIRMED	entry + halfIndex*0x40	^\s*\*\(uint\ \*\)\(iVar14\ \+\ 0x30\)\ =\ \*\(uint\ \*\)\(iVar14\ \+\ 0x30\)\ \|\ 0x10;$	+1
+use	psnDecRecomputeSourceUsage	iVar14	half	CONFIRMED	entry + halfIndex*0x40	^\s*if\ \(\(\(uVar13\ \&\ 0x10\)\ ==\ 0\)\ \&\&$	+3
+use	psnDecRecomputeSourceUsage	iVar14	half	CONFIRMED	entry + halfIndex*0x40	^\s*\*\(uint\ \*\)\(iVar14\ \+\ 0x30\)\ =\ \*\(uint\ \*\)\(iVar14\ \+\ 0x30\)\ \|\ 0x20;$	+1
+use	psnDecRecomputeSourceUsage	iVar14	half	CONFIRMED	entry + halfIndex*0x40	^\s*uVar16\ =\ \*\(ushort\ \*\)\(iVar14\ \+\ 6\)\ \|\ \*\(ushort\ \*\)\(iVar14\ \+\ 2\);$	+1
+use	psnDecRecomputeSourceUsage	iVar14	half	CONFIRMED	entry + halfIndex*0x40	^\s*iVar17\ =\ iVar10\ \+\ iVar14;$	+1
+use	psnDecRecomputeSourceUsage	iVar14	half	CONFIRMED	entry + halfIndex*0x40	^\s*iVar20\ =\ uVar23\ \*\ 2\ \+\ iVar14;$	+1
+use	psnDecRecomputeSourceUsage	iVar14	half	CONFIRMED	entry + halfIndex*0x40	^\s*if\ \(\(\(\(bVar2\)\ \&\&\ \(uVar4\ <\ 9\)\)\ \&\&\ \(bVar1\)\)\ \&\&$	+2
+use	psnDecRecomputeSourceUsage	iVar14	half	CONFIRMED	entry + halfIndex*0x40	^\s*iVar17\ =\ iVar10\ \+\ iVar14;$@2	+1
+use	psnDecRecomputeSourceUsage	iVar14	half	CONFIRMED	entry + halfIndex*0x40	^\s*iVar20\ =\ uVar23\ \*\ 2\ \+\ iVar14;$@2	+1
+use	psnDecRecomputeSourceUsage	iVar17	readMaskPtr	CONFIRMED	address of the read-mask ushort of readSlot in the half (+0x14 RGB group / +0x1a alpha group)	^\s*iVar17\ =\ iVar10\ \+\ iVar14;$	+1
+use	psnDecRecomputeSourceUsage	iVar17	readMaskPtr	CONFIRMED	address of the read-mask ushort of readSlot in the half (+0x14 RGB group / +0x1a alpha group)	^\s*\*\(ushort\ \*\)\(iVar17\ \+\ 0x14\)\ =\ uVar16\ \|\ \*\(ushort\ \*\)\(iVar17\ \+\ 0x14\);$	+1
+use	psnDecRecomputeSourceUsage	iVar17	readMaskPtr	CONFIRMED	address of the read-mask ushort of readSlot in the half (+0x14 RGB group / +0x1a alpha group)	^\s*\*\(ushort\ \*\)\(iVar17\ \+\ 0x20\)\ =\ uVar16\ \|\ \*\(ushort\ \*\)\(iVar17\ \+\ 0x20\);$	+1
+use	psnDecRecomputeSourceUsage	iVar17	readMaskPtr	CONFIRMED	address of the read-mask ushort of readSlot in the half (+0x14 RGB group / +0x1a alpha group)	^\s*iVar17\ =\ iVar10\ \+\ iVar14;$@2	+2
+use	psnDecRecomputeSourceUsage	iVar17	readMaskPtr	CONFIRMED	address of the read-mask ushort of readSlot in the half (+0x14 RGB group / +0x1a alpha group)	^\s*\*\(ushort\ \*\)\(iVar17\ \+\ 0x24\)\ =\ uVar16\ \|\ \*\(ushort\ \*\)\(iVar17\ \+\ 0x24\);$	+1
+use	psnDecRecomputeSourceUsage	iVar17	propagateReadMaskPtr	INFERRED	the same word of the mirrored half (propagateHalf)	^\s*iVar17\ =\ uVar23\ \*\ 2\ \+\ iVar28;$	+2
+use	psnDecRecomputeSourceUsage	iVar17	propagateReadMaskPtr	INFERRED	the same word of the mirrored half (propagateHalf)	^\s*\*\(ushort\ \*\)\(iVar17\ \+\ 0x14\)\ =\ uVar16\ \|\ uVar22;$	+2
+use	psnDecRecomputeSourceUsage	iVar17	propagateReadMaskPtr	INFERRED	the same word of the mirrored half (propagateHalf)	^\s*iVar17\ =\ uVar23\ \*\ 2\ \+\ iVar28;$@2	+2
+use	psnDecRecomputeSourceUsage	iVar17	propagateReadMaskPtr	INFERRED	the same word of the mirrored half (propagateHalf)	^\s*\*\(ushort\ \*\)\(iVar17\ \+\ 0x1a\)\ =\ uVar16\ \|\ uVar6;$	+2
+use	psnDecRecomputeSourceUsage	iVar20	srcpReadMaskPtr	INFERRED	address of the read-mask ushort of the half a slot-3 source refers to	^\s*iVar20\ =\ uVar23\ \*\ 2\ \+\ iVar14;$	+1
+use	psnDecRecomputeSourceUsage	iVar20	srcpReadMaskPtr	INFERRED	address of the read-mask ushort of the half a slot-3 source refers to	^\s*\*\(ushort\ \*\)\(iVar20\ \+\ 0x14\)\ =\ uVar16\ \|\ \*\(ushort\ \*\)\(iVar20\ \+\ 0x14\);$	+2
+use	psnDecRecomputeSourceUsage	iVar20	srcpReadMaskPtr	INFERRED	address of the read-mask ushort of the half a slot-3 source refers to	^\s*iVar20\ =\ uVar23\ \*\ 2\ \+\ iVar14;$@2	+1
+use	psnDecRecomputeSourceUsage	iVar20	srcpReadMaskPtr	INFERRED	address of the read-mask ushort of the half a slot-3 source refers to	^\s*\*\(ushort\ \*\)\(iVar20\ \+\ 0x1a\)\ =\ uVar16\ \|\ \*\(ushort\ \*\)\(iVar20\ \+\ 0x1a\);$	+2
+use	psnDecRecomputeSourceUsage	iVar24	halfIndex	CONFIRMED	0 = RGB half, 1 = alpha half in each loop over the halves	^\s*iVar24\ =\ 0;$	+1
+use	psnDecRecomputeSourceUsage	iVar24	halfIndex	CONFIRMED	0 = RGB half, 1 = alpha half in each loop over the halves	^\s*iVar14\ =\ param_1\ \+\ iVar24\ \*\ 0x40;$	+1
+use	psnDecRecomputeSourceUsage	iVar24	halfIndex	CONFIRMED	0 = RGB half, 1 = alpha half in each loop over the halves	^\s*iVar26\ =\ iVar24\ \+\ 1;$	+1
+use	psnDecRecomputeSourceUsage	iVar24	halfIndex	CONFIRMED	0 = RGB half, 1 = alpha half in each loop over the halves	^\s*if\ \(iVar24\ !=\ iVar10\)\ \{$	+1
+use	psnDecRecomputeSourceUsage	iVar24	halfIndex	CONFIRMED	0 = RGB half, 1 = alpha half in each loop over the halves	^\s*if\ \(\(iVar24\ ==\ 1\)\ \&\&\ \(uVar9\ ==\ 2\)\)\ \{$	+1
+use	psnDecRecomputeSourceUsage	iVar24	halfIndex	CONFIRMED	0 = RGB half, 1 = alpha half in each loop over the halves	^\s*iVar24\ =\ iVar26;$	+1
+use	psnDecRecomputeSourceUsage	iVar24	halfIndex	CONFIRMED	0 = RGB half, 1 = alpha half in each loop over the halves	^\s*iVar24\ =\ 0;$@2	+1
+use	psnDecRecomputeSourceUsage	iVar24	halfIndex	CONFIRMED	0 = RGB half, 1 = alpha half in each loop over the halves	^\s*bVar1\ =\ iVar24\ !=\ 1;$	+1
+use	psnDecRecomputeSourceUsage	iVar24	halfIndex	CONFIRMED	0 = RGB half, 1 = alpha half in each loop over the halves	^\s*iVar24\ =\ iVar24\ \+\ 1;$	+1
+use	psnDecRecomputeSourceUsage	iVar24	halfIndex	CONFIRMED	0 = RGB half, 1 = alpha half in each loop over the halves	^\s*iVar24\ =\ 0;$@3	+1
+use	psnDecRecomputeSourceUsage	iVar24	halfIndex	CONFIRMED	0 = RGB half, 1 = alpha half in each loop over the halves	^\s*iVar24\ =\ iVar24\ \+\ 1;$@2	+2
+use	psnDecRecomputeSourceUsage	iVar24	halfIndex	CONFIRMED	0 = RGB half, 1 = alpha half in each loop over the halves	^\s*\}\ while\ \(iVar24\ !=\ 2\);$	+1
+use	psnDecRecomputeSourceUsage	iVar24	halfIndex	CONFIRMED	0 = RGB half, 1 = alpha half in each loop over the halves	^\s*iVar24\ =\ 0;$@4	+1
+use	psnDecRecomputeSourceUsage	iVar24	halfIndex	CONFIRMED	0 = RGB half, 1 = alpha half in each loop over the halves	^\s*bVar1\ =\ iVar24\ !=\ 1;$@2	+1
+use	psnDecRecomputeSourceUsage	iVar24	halfIndex	CONFIRMED	0 = RGB half, 1 = alpha half in each loop over the halves	^\s*iVar24\ =\ iVar24\ \+\ 1;$@3	+1
+use	psnDecRecomputeSourceUsage	iVar26	nextHalfIndex	CONFIRMED	halfIndex + 1	^\s*iVar26\ =\ iVar24\ \+\ 1;$	+1
+use	psnDecRecomputeSourceUsage	iVar26	nextHalfIndex	CONFIRMED	halfIndex + 1	^\s*iVar25\ =\ iVar26;$	+1
+use	psnDecRecomputeSourceUsage	iVar26	nextHalfIndex	CONFIRMED	halfIndex + 1	^\s*iVar24\ =\ iVar26;$	+2
+use	psnDecRecomputeSourceUsage	iVar28	propagateHalf	INFERRED	half whose opcode is 2: its read masks are mirrored into the other half; cleared after source 2 of half 1	^\s*iVar28\ =\ 0;$	+1
+use	psnDecRecomputeSourceUsage	iVar28	propagateHalf	INFERRED	half whose opcode is 2: its read masks are mirrored into the other half; cleared after source 2 of half 1	^\s*iVar28\ =\ iVar14;$	+1
+use	psnDecRecomputeSourceUsage	iVar28	propagateHalf	INFERRED	half whose opcode is 2: its read masks are mirrored into the other half; cleared after source 2 of half 1	^\s*iVar28\ =\ 0;$@2	+1
+use	psnDecRecomputeSourceUsage	iVar28	propagateHalf	INFERRED	half whose opcode is 2: its read masks are mirrored into the other half; cleared after source 2 of half 1	^\s*if\ \(iVar28\ !=\ 0\)\ \{$	+2
+use	psnDecRecomputeSourceUsage	iVar28	propagateHalf	INFERRED	half whose opcode is 2: its read masks are mirrored into the other half; cleared after source 2 of half 1	^\s*if\ \(iVar28\ !=\ 0\)\ \{$@2	+2
+use	psnDecRecomputeSourceUsage	iVar28	propagateHalf	INFERRED	half whose opcode is 2: its read masks are mirrored into the other half; cleared after source 2 of half 1	^\s*\*\(ushort\ \*\)\(iVar10\ \+\ iVar28\ \+\ 0x20\)\ =\ uVar16\ \|\ \*\(ushort\ \*\)\(iVar10\ \+\ iVar28\ \+\ 0x20\);$	+1
+use	psnDecRecomputeSourceUsage	iVar28	propagateHalf	INFERRED	half whose opcode is 2: its read masks are mirrored into the other half; cleared after source 2 of half 1	^\s*if\ \(iVar28\ !=\ 0\)\ \{$@3	+2
+use	psnDecRecomputeSourceUsage	iVar28	propagateHalf	INFERRED	half whose opcode is 2: its read masks are mirrored into the other half; cleared after source 2 of half 1	^\s*if\ \(iVar28\ !=\ 0\)\ \{$@4	+2
+use	psnDecRecomputeSourceUsage	iVar28	propagateHalf	INFERRED	half whose opcode is 2: its read masks are mirrored into the other half; cleared after source 2 of half 1	^\s*\*\(ushort\ \*\)\(iVar10\ \+\ iVar28\ \+\ 0x24\)\ =\ uVar16\ \|\ \*\(ushort\ \*\)\(iVar10\ \+\ iVar28\ \+\ 0x24\);$	+1
+use	psnDecRecomputeSourceUsage	puVar19	sourceFlagsPtr	CONFIRMED	half + 0x34 + 2*source: the flag ushort being rebuilt	^\s*puVar19\ =\ \(ushort\ \*\)\(iVar12\ \+\ 0x34\);$	+1
+use	psnDecRecomputeSourceUsage	puVar19	sourceFlagsPtr	CONFIRMED	half + 0x34 + 2*source: the flag ushort being rebuilt	^\s*\*puVar19\ =\ \*puVar19\ \|\ 4;$	+1
+use	psnDecRecomputeSourceUsage	puVar19	sourceFlagsPtr	CONFIRMED	half + 0x34 + 2*source: the flag ushort being rebuilt	^\s*\*puVar19\ =\ \*puVar19\ \|\ 2;$	+1
+use	psnDecRecomputeSourceUsage	puVar19	sourceFlagsPtr	CONFIRMED	half + 0x34 + 2*source: the flag ushort being rebuilt	^\s*\*puVar19\ =\ \*puVar19\ \|\ 1;$	+1
+use	psnDecRecomputeSourceUsage	puVar19	sourceFlagsPtr	CONFIRMED	half + 0x34 + 2*source: the flag ushort being rebuilt	^\s*\*puVar19\ =\ \*puVar19\ \|\ 0x10;$	+1
+use	psnDecRecomputeSourceUsage	puVar19	sourceFlagsPtr	CONFIRMED	half + 0x34 + 2*source: the flag ushort being rebuilt	^\s*\*puVar19\ =\ \*puVar19\ \|\ 0x20;$	+1
+use	psnDecRecomputeSourceUsage	puVar19	sourceFlagsPtr	CONFIRMED	half + 0x34 + 2*source: the flag ushort being rebuilt	^\s*\*puVar19\ =\ \*puVar19\ \|\ 0x40;$	+1
+use	psnDecRecomputeSourceUsage	puVar21	usageCursor	INFERRED	walks half+0x14 in steps of 0x40 bytes in the final cleanup loops	^\s*puVar21\ =\ \(undefined4\ \*\)\(param_1\ \+\ 0x14\);$	+1
+use	psnDecRecomputeSourceUsage	puVar21	usageCursor	INFERRED	walks half+0x14 in steps of 0x40 bytes in the final cleanup loops	^\s*\*\(undefined2\ \*\)\(\(int\)puVar21\ \+\ 0x16\)\ =\ 0;$	+1
+use	psnDecRecomputeSourceUsage	puVar21	usageCursor	INFERRED	walks half+0x14 in steps of 0x40 bytes in the final cleanup loops	^\s*if\ \(\(\*\(short\ \*\)\(\(int\)puVar21\ \+\ \-0x12\)\ ==\ 0\ \&\&\ \*\(short\ \*\)\(\(int\)puVar21\ \+\ \-0xe\)\ ==\ 0\)\ \&\&$	+9
+use	psnDecRecomputeSourceUsage	puVar21	usageCursor	INFERRED	walks half+0x14 in steps of 0x40 bytes in the final cleanup loops	^\s*\*\(undefined2\ \*\)\(puVar21\ \+\ 9\)\ =\ 1;$	+4
+use	psnDecRecomputeSourceUsage	puVar21	usageCursor	INFERRED	walks half+0x14 in steps of 0x40 bytes in the final cleanup loops	^\s*\*\(undefined2\ \*\)\(puVar21\ \+\ 5\)\ =\ 0;$	+4
+use	psnDecRecomputeSourceUsage	puVar21	usageCursor	INFERRED	walks half+0x14 in steps of 0x40 bytes in the final cleanup loops	^\s*puVar21\ =\ puVar21\ \+\ 0x10;$	+1
+local	psnDecRecomputeSourceUsage	param_1	entry	CONFIRMED	the decoded entry (two 0x40-byte halves at +0 / +0x40, address slots at +0x80..+0x8a, mode at +0x8c); the last loop advances it by 0x3a per half as an induction pointer

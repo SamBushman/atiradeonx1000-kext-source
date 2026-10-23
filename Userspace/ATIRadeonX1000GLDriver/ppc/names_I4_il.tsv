@@ -1,0 +1,95 @@
+# Fork I4: parameters/locals of the IL assembly helpers (ilMarkOperandRegisterUsed ... ilEmitPrologue), evidence per row
+local	ilMarkOperandRegisterUsed	param_1	operandWords	CONFIRMED	pointer to the IL operand token (low 16 bits register index, bits 16-21 register type, bits 23-24 relative mode)
+local	ilMarkOperandRegisterUsed	param_2	operandExtraWordPtr	INFERRED	second dword of the operand (unused here)
+local	ilMarkOperandRegisterUsed	param_3	programRecord	CONFIRMED	program record: free-constant bitmaps at +0xc / +0x2c, mode word at +0x21c8
+local	ilMarkOperandRegisterUsed	uVar1	operandWord	CONFIRMED	the operand token
+local	ilMarkOperandRegisterUsed	uVar4	registerIndex	CONFIRMED	low 16 bits of the operand token
+local	ilMarkOperandRegisterUsed	uVar3	registerType	CONFIRMED	bits 16-21: 1 constant (c), 2 integer constant (i), 3, 0x15
+local	ilMarkInstructionRegistersUsed	param_1	tokens	CONFIRMED	IL instruction: opcode dword, optional destination token, then the source tokens
+local	ilMarkInstructionRegistersUsed	param_2	hasDestination	CONFIRMED	non-zero when a destination token follows the opcode
+local	ilMarkInstructionRegistersUsed	param_3	sourceCount	CONFIRMED	number of source operands to walk (0-3)
+local	ilMarkInstructionRegistersUsed	param_4	programRecord	CONFIRMED	program record updated through ilMarkOperandRegisterUsed
+local	ilMarkInstructionRegistersUsed	puVar4	cursor	CONFIRMED	current token position
+local	ilMarkInstructionRegistersUsed	puVar2	nextCursor	CONFIRMED	cursor after the operand just read (also the returned end)
+local	ilMarkInstructionRegistersUsed	uVar3	opcodeWord	CONFIRMED	first dword: opcode in the low 16 bits (0x48 = mova)
+local	ilMarkInstructionRegistersUsed	uVar5	destinationWord	CONFIRMED	destination token
+local	ilMarkInstructionRegistersUsed	uVar1	destinationExtraWord	INFERRED	second dword of the destination (when bit 22 is set), else the program record value passed through
+local	ilMarkInstructionRegistersUsed	local_48	sourceWord0	CONFIRMED	source operand 0 token
+local	ilMarkInstructionRegistersUsed	local_44	sourceWord1	CONFIRMED	source operand 1 token
+local	ilMarkInstructionRegistersUsed	local_40	sourceWord2	CONFIRMED	source operand 2 token
+local	ilMarkInstructionRegistersUsed	local_3c	sourceExtraWord0	CONFIRMED	second dword of source 0 (bit 22)
+local	ilMarkInstructionRegistersUsed	local_38	sourceExtraWord1	CONFIRMED	second dword of source 1
+local	ilMarkInstructionRegistersUsed	local_34	sourceExtraWord2	CONFIRMED	second dword of source 2
+local	ilCopyInstructionRemapped	param_1	dstCursorPtr	CONFIRMED	in/out: pointer to the output token cursor
+local	ilCopyInstructionRemapped	param_2	srcCursorPtr	CONFIRMED	in/out: pointer to the input token cursor
+local	ilCopyInstructionRemapped	param_3	hasDestination	CONFIRMED	non-zero when a destination token follows the opcode
+local	ilCopyInstructionRemapped	param_4	sourceCount	CONFIRMED	number of source operands (0-3)
+local	ilCopyInstructionRemapped	param_5	programRecord	CONFIRMED	program record holding the register remap tables (+0x21e0.., +0x232c..)
+local	ilCopyInstructionRemapped	puVar6	srcStart	CONFIRMED	input cursor at entry
+local	ilCopyInstructionRemapped	puVar5	dstStart	CONFIRMED	output cursor at entry
+local	ilCopyInstructionRemapped	puVar4	dstCursor	CONFIRMED	output position
+local	ilCopyInstructionRemapped	puVar7	srcCursor	CONFIRMED	input position
+local	ilCopyInstructionRemapped	puVar1	nextSrcCursor	INFERRED	input/output position after the operand just read
+local	ilCopyInstructionRemapped	uVar8	destinationWord	CONFIRMED	destination token, its register replaced from the remap tables
+local	ilCopyInstructionRemapped	iVar3	remapSlot	INFERRED	address of the per-output remap entry (+0x21e0 + index*4)
+local	ilCopyInstructionRemapped	local_58	sourceWord0	CONFIRMED	source 0 token
+local	ilCopyInstructionRemapped	local_54	sourceWord1	CONFIRMED	source 1 token
+local	ilCopyInstructionRemapped	local_50	sourceWord2	CONFIRMED	source 2 token
+local	ilCopyInstructionRemapped	local_4c	sourceExtraWord0	CONFIRMED	second dword of source 0
+local	ilCopyInstructionRemapped	local_48	sourceExtraWord1	CONFIRMED	second dword of source 1
+local	ilCopyInstructionRemapped	local_44	sourceExtraWord2	CONFIRMED	second dword of source 2
+local	ilRemapSourceOperandRegister	param_1	operandWords	CONFIRMED	source operand token (register type in bits 16-21)
+local	ilRemapSourceOperandRegister	param_2	operandExtraWord	INFERRED	second dword of the operand
+local	ilRemapSourceOperandRegister	param_3	programRecord	CONFIRMED	program record: +0x54 replacement temp, +0x232c remap table
+local	ilRemapSourceOperandRegister	uVar1	operandWord	CONFIRMED	the operand token
+local	ilEmitProjectiveDivide	param_1	programRecord	CONFIRMED	program record: +0x70 unit mask, +0x184 scratch temp register
+local	ilEmitProjectiveDivide	param_2	coordinateOperand	CONFIRMED	coordinate source operand: token and swizzle
+local	ilEmitProjectiveDivide	param_3	coordinateExtraWord	INFERRED	second dword of the coordinate operand; bits 21-23 pick the divisor component
+local	ilEmitProjectiveDivide	param_4	unitIndex	CONFIRMED	texture unit number tested against the mask at +0x70
+local	ilEmitProjectiveDivide	param_5	outCursor	CONFIRMED	output token cursor, returned advanced by 12 dwords (or unchanged when the unit is not affected)
+local	ilEmitProjectiveDivide	uVar2	scratchRegisterBits	INFERRED	program record +0x184, later the divisor component selector
+local	ilEmitProjectiveDivide	uVar3	divisorComponent	CONFIRMED	component select value (5 x? 1 y, 2 z, 3 w, 0) replicated into the four swizzle nibbles
+local	ilEmitProjectiveDivide	puVar4	replicatedSwizzle	CONFIRMED	divisor component replicated four times, or 0x5555 when the operand has no extra word
+local	ilEmitProjectiveDivide	uVar1	coordinateTokenHalf	INFERRED	low halfword of the coordinate token
+local	ilEmitShadowCompare	param_1	programRecord	CONFIRMED	program record: +0x70 unit mask, +0x138+unit*4 compare function, +0x180/+0x184 scratch temps, +0xb8 per-unit register
+local	ilEmitShadowCompare	param_3	coordinateOperand	CONFIRMED	coordinate source operand token
+local	ilEmitShadowCompare	param_4	coordinateExtraWordPtr	INFERRED	second operand dword, copied into the output when param_6 is set
+local	ilEmitShadowCompare	param_5	unitIndex	CONFIRMED	texture unit number
+local	ilEmitShadowCompare	param_6	copyExtraWord	INFERRED	non-zero: also emit the second operand dword (bit 22)
+local	ilEmitShadowCompare	param_7	outCursor	CONFIRMED	output token cursor, returned advanced
+local	ilEmitShadowCompare	iVar2	unitByteOffset	CONFIRMED	unitIndex * 4
+local	ilEmitShadowCompare	uVar5	compareSelectWord	CONFIRMED	select word chosen by the compare function (GL_NEVER..GL_ALWAYS = 0x200..0x207)
+local	ilEmitShadowCompare	puVar6	tokenPtr	INFERRED	position in the output after the sub instruction
+local	ilEmitPrologue	param_1	outCursor	CONFIRMED	output token cursor
+local	ilEmitPrologue	param_2	programRecord	CONFIRMED	program record whose implicit register slots (+0x21e0.., +0x2200, +0x2208, +0x2300.., +0x54..) are assigned
+local	ilEmitPrologue	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to a callee
+local	ilEmitPrologue	param_4	passThroughR6	INFERRED	Ghidra register-argument pass-through (r6): forwarded unchanged to a callee
+local	ilEmitPrologue	param_5	passThroughR7	INFERRED	Ghidra register-argument pass-through (r7): forwarded unchanged to a callee
+local	ilEmitPrologue	param_6	passThroughR8	INFERRED	Ghidra register-argument pass-through (r8): forwarded unchanged to a callee
+local	ilEmitPrologue	param_7	passThroughR9	INFERRED	Ghidra register-argument pass-through (r9): forwarded unchanged to a callee
+local	ilEmitPrologue	param_8	passThroughR10	INFERRED	Ghidra register-argument pass-through (r10): forwarded unchanged to a callee
+local	ilPushDclRecord	param_1	listHeadPtr	CONFIRMED	address of the list head pointer
+local	ilPushDclRecord	param_2	record	CONFIRMED	0x24-byte dcl record copied into the new node
+local	ilStoreFloat4Constant	param_1	programRecord	CONFIRMED	base of the constant table (+0x8c + index*0x10)
+local	ilStoreFloat4Constant	param_2	constantIndex	CONFIRMED	constant register number
+local	ilNextCounterValue	param_1	programRecord	CONFIRMED	counter at +0x50
+local	ilPopFreeRegister	param_1	programRecord	CONFIRMED	bitmap of eight words at +0xc
+local	ilAllocLowestFreeBit8	param_1	programRecord	CONFIRMED	8-bit allocation mask at +8
+local	ilAllocLowestFreeBit8	param_3	passThroughR5	INFERRED	Ghidra register-argument pass-through (r5): forwarded unchanged to a callee
+local	ilAllocLowestFreeBit8	param_4	passThroughR6	INFERRED	Ghidra register-argument pass-through (r6): forwarded unchanged to a callee
+local	ilAllocLowestFreeBit8	param_5	passThroughR7	INFERRED	Ghidra register-argument pass-through (r7): forwarded unchanged to a callee
+local	ilAllocLowestFreeBit8	param_6	passThroughR8	INFERRED	Ghidra register-argument pass-through (r8): forwarded unchanged to a callee
+local	ilAllocLowestFreeBit8	param_7	passThroughR9	INFERRED	Ghidra register-argument pass-through (r9): forwarded unchanged to a callee
+local	ilAllocLowestFreeBit8	param_8	passThroughR10	INFERRED	Ghidra register-argument pass-through (r10): forwarded unchanged to a callee
+local	ilAllocLowestFreeBit8	param_2	passThroughR4	INFERRED	Ghidra register-argument pass-through (r4)
+local	ilFreeRecordList	param_1	node	CONFIRMED	list node (next at +0x24)
+local	ilSelectorOneToThreeOrZero	param_1	selector	CONFIRMED	value mapped 1 -> 1, 2 -> 2, 3 -> 3, otherwise 0
+local	ilRecordInputSemantic	param_1	programRecord	CONFIRMED	record: +0x2238 value table, +0x2278 flag table
+local	ilRecordInputSemantic	param_2	inputIndex	CONFIRMED	input register number
+local	ilRecordInputSemantic	param_3	semanticValue	INFERRED	value stored for the input (3 bits of the dcl token)
+local	ilRecordDefinedConstantPrimary	param_1	programRecord	CONFIRMED	record holding the constant table and defined-bit words
+local	ilRecordDefinedConstantPrimary	param_2	constantIndex	CONFIRMED	constant register number
+local	ilRecordDefinedConstantPrimary	param_3	values	CONFIRMED	four-dword def value
+local	ilRecordDefinedConstantSecondary	param_1	programRecord	CONFIRMED	record holding the constant table and defined-bit words
+local	ilRecordDefinedConstantSecondary	param_2	constantIndex	CONFIRMED	constant register number
+local	ilRecordDefinedConstantSecondary	param_3	values	CONFIRMED	four-dword def value

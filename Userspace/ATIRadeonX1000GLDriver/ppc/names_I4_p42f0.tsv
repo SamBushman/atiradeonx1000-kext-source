@@ -1,0 +1,67 @@
+# Fork I4 batch 6: web-split names of psnProgramToDecoded (beyond the record-field pointers of names_I4_pdec.tsv)
+use	psnProgramToDecoded	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar13\ !=\ 2;$	+1
+use	psnProgramToDecoded	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*\}\ while\ \(bVar1\);$	+1
+use	psnProgramToDecoded	iVar13	slotCounter	CONFIRMED	counter over the three source slots of a half	^\s*iVar13\ =\ 0;$	+1
+use	psnProgramToDecoded	iVar13	slotCounter	CONFIRMED	counter over the three source slots of a half	^\s*bVar1\ =\ iVar13\ !=\ 2;$	+1
+use	psnProgramToDecoded	iVar13	slotCounter	CONFIRMED	counter over the three source slots of a half	^\s*iVar13\ =\ iVar13\ \+\ 1;$	+1
+use	psnProgramToDecoded	iVar13	slotCounter	CONFIRMED	counter over the three source slots of a half	^\s*iVar13\ =\ 0;$@2	+1
+use	psnProgramToDecoded	iVar13	slotCounter	CONFIRMED	counter over the three source slots of a half	^\s*iVar13\ =\ iVar13\ \+\ 1;$@2	+1
+use	psnProgramToDecoded	iVar13	slotCounter	CONFIRMED	counter over the three source slots of a half	^\s*if\ \(iVar13\ ==\ 1\)\ \{$	+1
+use	psnProgramToDecoded	iVar13	slotCounter	CONFIRMED	counter over the three source slots of a half	^\s*if\ \(iVar13\ ==\ 0\)\ goto\ LAB_000c4830;$	+2
+use	psnProgramToDecoded	iVar13	slotCounter	CONFIRMED	counter over the three source slots of a half	^\s*iVar13\ =\ 3;$	+1
+use	psnProgramToDecoded	iVar13	slotCounter	CONFIRMED	counter over the three source slots of a half	^\s*iVar13\ =\ 0;$@3	+1
+use	psnProgramToDecoded	iVar13	slotCounter	CONFIRMED	counter over the three source slots of a half	^\s*iVar13\ =\ iVar13\ \+\ 1;$@3	+1
+use	psnProgramToDecoded	iVar13	slotCounter	CONFIRMED	counter over the three source slots of a half	^\s*if\ \(iVar13\ ==\ 1\)\ \{$@2	+1
+use	psnProgramToDecoded	iVar13	slotCounter	CONFIRMED	counter over the three source slots of a half	^\s*if\ \(iVar13\ ==\ 0\)\ goto\ LAB_000c49b0;$	+2
+use	psnProgramToDecoded	iVar13	slotCounter	CONFIRMED	counter over the three source slots of a half	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c0fd0\)\(puVar29,extraout_r4,puVar7,pbVar8,pcVar10,puVar11,pbVar12,iVar13\);$	+1
+use	psnProgramToDecoded	puVar11	defaultSlotPtr	CONFIRMED	walks the source slots of the RGB half while the default operand words are stored	^\s*puVar11\ =\ puVar29;$	+1
+use	psnProgramToDecoded	puVar11	defaultSlotPtr	CONFIRMED	walks the source slots of the RGB half while the default operand words are stored	^\s*\*\(undefined4\ \*\)\(puVar11\ \+\ 4\)\ =\ \(\*\(unsigned\ int\ \*\)\&DAT_001dbf94\);$	+3
+use	psnProgramToDecoded	puVar11	rgbSourceSlotPtr	CONFIRMED	entry + 8: the RGB half's source slot being filled (ushort pointer, +4 ushorts)	^\s*puVar11\ =\ puVar29\ \+\ 4;$	+1
+use	psnProgramToDecoded	puVar11	rgbSourceSlotPtr	CONFIRMED	entry + 8: the RGB half's source slot being filled (ushort pointer, +4 ushorts)	^\s*\*\(undefined4\ \*\)puVar11\ =\ \*\(undefined4\ \*\)\(uVar5\ \*\ 4\ \+\ 0x1dc0d8\);$	+2
+use	psnProgramToDecoded	puVar11	rgbSourceSlotPtr	CONFIRMED	entry + 8: the RGB half's source slot being filled (ushort pointer, +4 ushorts)	^\s*puVar11\ =\ puVar11\ \+\ 2;$@2	+1
+use	psnProgramToDecoded	puVar11	alphaHalf	CONFIRMED	puVar29 + 0x20 ushorts = entry + 0x40: the alpha half	^\s*puVar11\ =\ puVar29\ \+\ 0x20;$	+1
+use	psnProgramToDecoded	puVar11	alphaHalf	CONFIRMED	puVar29 + 0x20 ushorts = entry + 0x40: the alpha half	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c0fd0\)\(puVar29,extraout_r4,puVar7,pbVar8,pcVar10,puVar11,pbVar12,iVar13\);$	+1
+use	psnProgramToDecoded	puVar14	defaultSlotPtr2	CONFIRMED	walks the source slots of the alpha half while the default operand words are stored	^\s*puVar14\ =\ puVar29;$	+1
+use	psnProgramToDecoded	puVar14	defaultSlotPtr2	CONFIRMED	walks the source slots of the alpha half while the default operand words are stored	^\s*puVar14\[0x3a\]\ =\ 1;$	+2
+use	psnProgramToDecoded	puVar14	defaultSlotPtr2	CONFIRMED	walks the source slots of the alpha half while the default operand words are stored	^\s*puVar14\ =\ puVar14\ \+\ 1;$	+1
+use	psnProgramToDecoded	puVar14	alphaSourceSlotPtr	CONFIRMED	entry + 0x48: the alpha half's source slot being filled	^\s*puVar14\ =\ puVar29\ \+\ 0x24;$	+1
+use	psnProgramToDecoded	puVar14	alphaSourceSlotPtr	CONFIRMED	entry + 0x48: the alpha half's source slot being filled	^\s*\*\(undefined4\ \*\)puVar14\ =\ \*\(undefined4\ \*\)\(uVar5\ \*\ 4\ \+\ 0x1dc04c\);$	+2
+use	psnProgramToDecoded	puVar14	alphaSourceSlotPtr	CONFIRMED	entry + 0x48: the alpha half's source slot being filled	^\s*puVar14\ =\ puVar14\ \+\ 2;$	+1
+use	psnProgramToDecoded	uVar30	rgbSourcesLeft	CONFIRMED	countdown of the RGB sources still to be filled	^\s*uVar30\ =\ uVar4;$	+1
+use	psnProgramToDecoded	uVar30	rgbSourcesLeft	CONFIRMED	countdown of the RGB sources still to be filled	^\s*uVar30\ =\ 1;$	+1
+use	psnProgramToDecoded	uVar30	rgbSourcesLeft	CONFIRMED	countdown of the RGB sources still to be filled	^\s*uVar30\ =\ uVar30\ \-\ 1;$	+2
+use	psnProgramToDecoded	uVar30	alphaSourcesLeft	CONFIRMED	countdown of the alpha sources still to be filled	^\s*uVar30\ =\ uVar4;$@2	+1
+use	psnProgramToDecoded	uVar30	alphaSourcesLeft	CONFIRMED	countdown of the alpha sources still to be filled	^\s*uVar30\ =\ 1;$@2	+1
+use	psnProgramToDecoded	uVar30	alphaSourcesLeft	CONFIRMED	countdown of the alpha sources still to be filled	^\s*uVar30\ =\ uVar30\ \-\ 1;$@2	+1
+use	psnProgramToDecoded	uVar30	alphaSourcesLeft	CONFIRMED	countdown of the alpha sources still to be filled	^\s*if\ \(uVar30\ ==\ 0\)\ goto\ LAB_000c4a74;$	+1
+use	psnProgramToDecoded	uVar4	recordKind	CONFIRMED	PSN record kind (dword at +0): 1 RS, 2 TEX, 3/4 ALU	^\s*uVar4\ =\ \*param_2;$	+2
+use	psnProgramToDecoded	uVar4	recordKind	CONFIRMED	PSN record kind (dword at +0): 1 RS, 2 TEX, 3/4 ALU	^\s*else\ if\ \(uVar4\ <\ 3\)\ \{$	+2
+use	psnProgramToDecoded	uVar4	recordKind	CONFIRMED	PSN record kind (dword at +0): 1 RS, 2 TEX, 3/4 ALU	^\s*else\ if\ \(uVar4\ <\ 5\)\ \{$	+1
+use	psnProgramToDecoded	uVar4	rgbSourceCount	INFERRED	number of RGB sources of the opcode (ushort at table 0x1dc15a + opcode*4)	^\s*uVar4\ =\ \(uint\)\*\(ushort\ \*\)\(\(uint\)\*pbVar28\ \*\ 4\ \+\ 0x1dc15a\);$	+2
+use	psnProgramToDecoded	uVar4	rgbSourceCount	INFERRED	number of RGB sources of the opcode (ushort at table 0x1dc15a + opcode*4)	^\s*uVar30\ =\ uVar4;$	+2
+use	psnProgramToDecoded	uVar4	alphaSourceCount	INFERRED	number of alpha sources of the opcode (ushort at table 0x1dc09a + opcode*4)	^\s*uVar4\ =\ \(uint\)\*\(ushort\ \*\)\(\(uint\)\*\(byte\ \*\)puVar20\ \*\ 4\ \+\ 0x1dc09a\);$	+1
+use	psnProgramToDecoded	uVar4	alphaSourceCount	INFERRED	number of alpha sources of the opcode (ushort at table 0x1dc09a + opcode*4)	^\s*if\ \(uVar4\ <\ 2\)\ \{$	+2
+use	psnProgramToDecoded	uVar4	alphaSourceCount	INFERRED	number of alpha sources of the opcode (ushort at table 0x1dc09a + opcode*4)	^\s*uVar30\ =\ uVar4;$@2	+2
+use	psnProgramToDecoded	uVar4	alphaSourceCount	INFERRED	number of alpha sources of the opcode (ushort at table 0x1dc09a + opcode*4)	^\s*if\ \(uVar4\ !=\ 0\)\ goto\ LAB_000c49a8;$	+1
+use	psnProgramToDecoded	uVar5	sourceSelectCode	CONFIRMED	select byte of the record (SEL_A/B/C style code) indexing the slot template table at 0x1dc0d8 / 0x1dc04c	^\s*uVar5\ =\ \(uint\)\*pbVar26;$	+1
+use	psnProgramToDecoded	uVar5	sourceSelectCode	CONFIRMED	select byte of the record (SEL_A/B/C style code) indexing the slot template table at 0x1dc0d8 / 0x1dc04c	^\s*\*\(undefined4\ \*\)puVar11\ =\ \*\(undefined4\ \*\)\(uVar5\ \*\ 4\ \+\ 0x1dc0d8\);$	+1
+use	psnProgramToDecoded	uVar5	sourceSelectCode	CONFIRMED	select byte of the record (SEL_A/B/C style code) indexing the slot template table at 0x1dc0d8 / 0x1dc04c	^\s*uVar5\ =\ \(uint\)\*pbVar18;$	+1
+use	psnProgramToDecoded	uVar5	sourceSelectCode	CONFIRMED	select byte of the record (SEL_A/B/C style code) indexing the slot template table at 0x1dc0d8 / 0x1dc04c	^\s*uVar5\ =\ \(uint\)\*\(byte\ \*\)puStack_d8;$	+1
+use	psnProgramToDecoded	uVar5	sourceSelectCode	CONFIRMED	select byte of the record (SEL_A/B/C style code) indexing the slot template table at 0x1dc0d8 / 0x1dc04c	^\s*uVar5\ =\ 0;$	+1
+use	psnProgramToDecoded	uVar5	sourceSelectCode	CONFIRMED	select byte of the record (SEL_A/B/C style code) indexing the slot template table at 0x1dc0d8 / 0x1dc04c	^\s*uVar5\ =\ \(uint\)\*pbVar24;$	+1
+use	psnProgramToDecoded	uVar5	sourceSelectCode	CONFIRMED	select byte of the record (SEL_A/B/C style code) indexing the slot template table at 0x1dc0d8 / 0x1dc04c	^\s*\*\(undefined4\ \*\)puVar14\ =\ \*\(undefined4\ \*\)\(uVar5\ \*\ 4\ \+\ 0x1dc04c\);$	+1
+use	psnProgramToDecoded	uVar5	sourceSelectCode	CONFIRMED	select byte of the record (SEL_A/B/C style code) indexing the slot template table at 0x1dc0d8 / 0x1dc04c	^\s*uVar5\ =\ \(uint\)\*pbVar19;$	+1
+use	psnProgramToDecoded	uVar5	sourceSelectCode	CONFIRMED	select byte of the record (SEL_A/B/C style code) indexing the slot template table at 0x1dc0d8 / 0x1dc04c	^\s*uVar5\ =\ \(uint\)\*pbStack_e0;$	+1
+use	psnProgramToDecoded	uVar5	sourceSelectCode	CONFIRMED	select byte of the record (SEL_A/B/C style code) indexing the slot template table at 0x1dc0d8 / 0x1dc04c	^\s*uVar5\ =\ 0;$@2	+1
+use	psnProgramToDecoded	uVar6	sourceModifier	CONFIRMED	modifier byte of the record, stored at bits 12-13 of the slot's swizzle word (MOD_A/B/C)	^\s*uVar6\ =\ \(ushort\)\*pbVar27;$	+1
+use	psnProgramToDecoded	uVar6	sourceModifier	CONFIRMED	modifier byte of the record, stored at bits 12-13 of the slot's swizzle word (MOD_A/B/C)	^\s*puVar11\[1\]\ =\ uVar6\ <<\ 0xc\ \|\ puVar11\[1\];$	+1
+use	psnProgramToDecoded	uVar6	sourceModifier	CONFIRMED	modifier byte of the record, stored at bits 12-13 of the slot's swizzle word (MOD_A/B/C)	^\s*uVar6\ =\ \(ushort\)\*pbVar21;$	+1
+use	psnProgramToDecoded	uVar6	sourceModifier	CONFIRMED	modifier byte of the record, stored at bits 12-13 of the slot's swizzle word (MOD_A/B/C)	^\s*uVar6\ =\ \(ushort\)\*pbStack_dc;$	+1
+use	psnProgramToDecoded	uVar6	sourceModifier	CONFIRMED	modifier byte of the record, stored at bits 12-13 of the slot's swizzle word (MOD_A/B/C)	^\s*uVar6\ =\ 0;$	+1
+use	psnProgramToDecoded	uVar6	sourceModifier	CONFIRMED	modifier byte of the record, stored at bits 12-13 of the slot's swizzle word (MOD_A/B/C)	^\s*uVar6\ =\ \(ushort\)\*\(byte\ \*\)puVar25;$	+1
+use	psnProgramToDecoded	uVar6	sourceModifier	CONFIRMED	modifier byte of the record, stored at bits 12-13 of the slot's swizzle word (MOD_A/B/C)	^\s*puVar14\[1\]\ =\ uVar6\ <<\ 0xc\ \|\ puVar14\[1\];$	+1
+use	psnProgramToDecoded	uVar6	sourceModifier	CONFIRMED	modifier byte of the record, stored at bits 12-13 of the slot's swizzle word (MOD_A/B/C)	^\s*uVar6\ =\ \(ushort\)\*pbVar22;$	+1
+use	psnProgramToDecoded	uVar6	sourceModifier	CONFIRMED	modifier byte of the record, stored at bits 12-13 of the slot's swizzle word (MOD_A/B/C)	^\s*uVar6\ =\ \(ushort\)\*pbStack_e4;$	+1
+use	psnProgramToDecoded	uVar6	sourceModifier	CONFIRMED	modifier byte of the record, stored at bits 12-13 of the slot's swizzle word (MOD_A/B/C)	^\s*uVar6\ =\ 0;$@2	+1
+use	psnProgramToDecoded	uVar3	defaultOperandWord2	INFERRED	the constant at 0x1dbf94 stored into the unused source slots	^\s*uVar3\ =\ \(\*\(unsigned\ int\ \*\)\&DAT_001dbf94\);$	+1
+use	psnProgramToDecoded	uVar3	defaultOperandWord2	INFERRED	the constant at 0x1dbf94 stored into the unused source slots	^\s*\*\(undefined4\ \*\)\(puVar11\ \+\ 0x24\)\ =\ uVar3;$	+1

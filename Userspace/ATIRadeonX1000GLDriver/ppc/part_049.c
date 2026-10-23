@@ -1081,7 +1081,7 @@ int Inst__r300Peephole_1882a4(inst, compiler)
           if (((int)*(char *)(a0 + 0x57) >> (uVar6 & 0x3f) & 1U) == 0) {
             return;
           }
-          iVar4 = ((undefined4 (*)())FUN_0010aafc)((double)GH_U2F((unsigned int)(a0[uVar6 * 6 + 8])));
+          iVar4 = ((undefined4 (*)())isOutputScaleValue)((double)GH_U2F((unsigned int)(a0[uVar6 * 6 + 8])));
           if (iVar4 == 0) {
             return;
           }
@@ -1096,10 +1096,10 @@ int Inst__r300Peephole_1882a4(inst, compiler)
         bVar1 = loopIndex != 3;
         loopIndex = loopIndex + 1;
       } while (bVar1);
-      loopIndex = ((int (*)())FUN_0010ab40)((double)GH_U2F((unsigned int)(a0[uVar5 * 6 + 8])));
+      loopIndex = ((int (*)())outputScaleExponent)((double)GH_U2F((unsigned int)(a0[uVar5 * 6 + 8])));
       iVar4 = (**(code **)(**(int **)(compiler + COMP_target) + 0xfc))(*(int **)(compiler + COMP_target),loopIndex,0);
       if (iVar4 != 0) {
-        ((void (*)())FUN_000f79c4)(inst,*(undefined4 *)(compiler + COMP_currentProgram),1,1.0,1.0,1.0,1.0);
+        ((void (*)())IRInst__makeLiteralVec4Float)(inst,*(undefined4 *)(compiler + COMP_currentProgram),1,1.0,1.0,1.0,1.0);
         inst[0x49] = loopIndex;
         loopIndex = IRInst__getOperandRecord(inst,1);
         *(undefined4 *)(loopIndex + 0x10) = 0x10203;
@@ -2478,7 +2478,7 @@ int R300SchedModel__vslot28(this, param_2)
                     operandVReg2 = IRInst__getOperandSource(operandVReg,1);
                     IRInst__setOperandSource(piVar2,1,operandVReg2,0,this[2]);
                     dVar19 = (double)FLOAT_001aa10c;
-                    ((void (*)())FUN_000f79c4)(piVar2,param_2,2,dVar19,dVar19,dVar19,dVar19);
+                    ((void (*)())IRInst__makeLiteralVec4Float)(piVar2,param_2,2,dVar19,dVar19,dVar19,dVar19);
                     loopIndex = IRInst__getOperandRecord(piVar2,1);
                     *(undefined4 *)(loopIndex + 0x10) = uVar16;
                     loopIndex3 = uVar3 ^ 1;
@@ -2499,7 +2499,7 @@ int R300SchedModel__vslot28(this, param_2)
                     operandVReg2 = IRInst__getOperandSource(operandVReg,1);
                     IRInst__setOperandSource(piVar2,1,operandVReg2,0,this[2]);
                     dVar19 = (double)FLOAT_001aa0e8;
-                    ((void (*)())FUN_000f79c4)(piVar2,param_2,2,dVar19,dVar19,dVar19,dVar19);
+                    ((void (*)())IRInst__makeLiteralVec4Float)(piVar2,param_2,2,dVar19,dVar19,dVar19,dVar19);
                     loopIndex = IRInst__getOperandRecord(piVar2,1);
                     *(undefined4 *)(loopIndex + 0x10) = uVar16;
                     loopIndex3 = uVar3 ^ 1;
@@ -4811,7 +4811,7 @@ code_r0x0018eb5c: ;
         if (loopIndex5 != 0x99) {
           if (loopIndex5 == 0x9c) {
             dVar22 = (double)FLOAT_001aa0e8;
-            ((void (*)())FUN_000f79c4)(piVar11,*(undefined4 *)(this[2] + 0x6c4),2,dVar22,dVar22,dVar22,dVar22);
+            ((void (*)())IRInst__makeLiteralVec4Float)(piVar11,*(undefined4 *)(this[2] + 0x6c4),2,dVar22,dVar22,dVar22,dVar22);
             IROperand__setModifierBits(piVar11 + 0x29,1,1);
           }
           else {
@@ -4824,9 +4824,9 @@ code_r0x0018eb5c: ;
         else {
           IROperand__setModifierBits(piVar11 + 0x29,1,1);
           dVar22 = (double)FLOAT_001aa0e8;
-          ((void (*)())FUN_000f79c4)(piVar11,*(undefined4 *)(this[2] + 0x6c4),2,dVar22,dVar22,dVar22,dVar22);
+          ((void (*)())IRInst__makeLiteralVec4Float)(piVar11,*(undefined4 *)(this[2] + 0x6c4),2,dVar22,dVar22,dVar22,dVar22);
           dVar22 = (double)FLOAT_001aa10c;
-          ((void (*)())FUN_000f79c4)(piVar11,*(undefined4 *)(this[2] + 0x6c4),3,dVar22,dVar22,dVar22,dVar22);
+          ((void (*)())IRInst__makeLiteralVec4Float)(piVar11,*(undefined4 *)(this[2] + 0x6c4),3,dVar22,dVar22,dVar22,dVar22);
           piVar11[0x49] = 1;
         }
         Block__insertInstAfter(*(undefined4 *)(loopIndex4 + 0x158),loopIndex4,piVar11);
@@ -5710,7 +5710,7 @@ int R300VSchedModel__vslot27(this, inst)
     *(undefined4 *)((int)callResult + 0x9c) = local_5c;
     *(int *)((int)callResult + 0xc) = local_60;
     FUN_00105e54(callResult,1,inst,1);
-    ((void (*)())FUN_000f79c4)(callResult,iVar12,2,0.0,0.0,0.0,0.0);
+    ((void (*)())IRInst__makeLiteralVec4Float)(callResult,iVar12,2,0.0,0.0,0.0,0.0);
     *(int *)((int)callResult + 0x160) = *(int *)(iVar12 + 0x478) + 2;
     Block__insertInstBefore(iVar14,inst,callResult);
     inst2 = IRInst__create(0x12,*(undefined4 *)(this + 8));
@@ -5722,7 +5722,7 @@ int R300VSchedModel__vslot27(this, inst)
     *(undefined4 *)((int)inst2 + 0x9c) = uVar4;
     IRInst__setOperandSource(inst2,1,callResult,0,*(undefined4 *)(this + 8));
     IROperand__setModifierBits((int)inst2 + 0xa4,1,1);
-    ((void (*)())FUN_000f79c4)(inst2,iVar12,2,1.0,1.0,1.0,1.0);
+    ((void (*)())IRInst__makeLiteralVec4Float)(inst2,iVar12,2,1.0,1.0,1.0,1.0);
     *(int *)((int)inst2 + 0x160) = *(int *)(iVar12 + 0x478) + 1;
     Block__insertInstBefore(iVar14,inst,inst2);
     inst3 = IRInst__create(0x13,*(undefined4 *)(this + 8));

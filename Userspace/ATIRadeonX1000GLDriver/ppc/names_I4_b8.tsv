@@ -1,0 +1,160 @@
+# Fork I4 batch 8: variables of the psnDec read-mask predicates and address-slot swap helpers
+use	psnDecAnySourceIsReg	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar7\ !=\ 2;$	+1
+use	psnDecAnySourceIsReg	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*\}\ while\ \(bVar1\);$	+1
+use	psnDecAnySourceIsReg	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar4\ !=\ 1;$	+1
+use	psnDecAnySourceIsReg	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*\}\ while\ \(bVar1\);$@2	+1
+use	psnDecAnySourceIsReg	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar3\ ==\ 1;$	+1
+use	psnDecAnySourceIsReg	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*if\ \(bVar1\)\ \{$	+1
+use	psnDecAnySourceIsReg	iVar3	halfIndex	CONFIRMED	0 = RGB half, 1 = alpha half	^\s*iVar3\ =\ 0;$	+1
+use	psnDecAnySourceIsReg	iVar3	halfIndex	CONFIRMED	0 = RGB half, 1 = alpha half	^\s*iVar2\ =\ iVar3\ \*\ 0x40\ \+\ param_1\ \+\ 0x10;$	+1
+use	psnDecAnySourceIsReg	iVar3	halfIndex	CONFIRMED	0 = RGB half, 1 = alpha half	^\s*bVar1\ =\ iVar3\ ==\ 1;$	+2
+use	psnDecAnySourceIsReg	iVar2	halfUsageBase	CONFIRMED	entry + halfIndex*0x40 + 0x10: the half's per-slot read-mask words (+0x14 RGB group, +0x1a alpha group)	^\s*iVar2\ =\ iVar3\ \*\ 0x40\ \+\ param_1\ \+\ 0x10;$	+1
+use	psnDecAnySourceIsReg	iVar2	halfUsageBase	CONFIRMED	entry + halfIndex*0x40 + 0x10: the half's per-slot read-mask words (+0x14 RGB group, +0x1a alpha group)	^\s*puVar6\ =\ \(ushort\ \*\)\(iVar2\ \+\ 4\);$	+1
+use	psnDecAnySourceIsReg	iVar2	halfUsageBase	CONFIRMED	entry + halfIndex*0x40 + 0x10: the half's per-slot read-mask words (+0x14 RGB group, +0x1a alpha group)	^\s*iVar2\ =\ iVar2\ \+\ 6;$	+1
+use	psnDecAnySourceIsReg	iVar5	addressGroupOffset	CONFIRMED	0 / 6: byte offset of the address group's slots (+0x80 RGB, +0x86 alpha) in the entry	^\s*iVar5\ =\ 0;$	+1
+use	psnDecAnySourceIsReg	iVar5	addressGroupOffset	CONFIRMED	0 / 6: byte offset of the address group's slots (+0x80 RGB, +0x86 alpha) in the entry	^\s*puVar8\ =\ \(ushort\ \*\)\(param_1\ \+\ iVar5\ \+\ 0x80\);$	+1
+use	psnDecAnySourceIsReg	iVar5	addressGroupOffset	CONFIRMED	0 / 6: byte offset of the address group's slots (+0x80 RGB, +0x86 alpha) in the entry	^\s*iVar5\ =\ iVar5\ \+\ 6;$	+1
+use	psnDecAnySourceIsReg	puVar6	readMaskPtr	CONFIRMED	read-mask ushort of the slot being tested	^\s*puVar6\ =\ \(ushort\ \*\)\(iVar2\ \+\ 4\);$	+1
+use	psnDecAnySourceIsReg	puVar6	readMaskPtr	CONFIRMED	read-mask ushort of the slot being tested	^\s*if\ \(\(\(\(\*\(unsigned\ short\ \*\)\(\(unsigned\ char\ \*\)\&\(param_2\)\ \+\ 2\)\)\ \&\ \*puVar6\)\ !=\ 0\)\ \&\&\ \(\*puVar8\ ==\ param_3\)\)\ \{$	+1
+use	psnDecAnySourceIsReg	puVar6	readMaskPtr	CONFIRMED	read-mask ushort of the slot being tested	^\s*puVar6\ =\ puVar6\ \+\ 1;$	+1
+use	psnDecAnySourceIsReg	puVar8	addressSlotPtr	CONFIRMED	address slot ushort (entry + 0x80 + group offset + 2*slot)	^\s*puVar8\ =\ \(ushort\ \*\)\(param_1\ \+\ iVar5\ \+\ 0x80\);$	+1
+use	psnDecAnySourceIsReg	puVar8	addressSlotPtr	CONFIRMED	address slot ushort (entry + 0x80 + group offset + 2*slot)	^\s*if\ \(\(\(\(\*\(unsigned\ short\ \*\)\(\(unsigned\ char\ \*\)\&\(param_2\)\ \+\ 2\)\)\ \&\ \*puVar6\)\ !=\ 0\)\ \&\&\ \(\*puVar8\ ==\ param_3\)\)\ \{$	+1
+use	psnDecAnySourceIsReg	puVar8	addressSlotPtr	CONFIRMED	address slot ushort (entry + 0x80 + group offset + 2*slot)	^\s*puVar8\ =\ puVar8\ \+\ 1;$	+1
+use	psnDecAnyPartialSourceIsReg	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar7\ !=\ 2;$	+1
+use	psnDecAnyPartialSourceIsReg	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*\}\ while\ \(bVar1\);$	+1
+use	psnDecAnyPartialSourceIsReg	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar4\ !=\ 1;$	+1
+use	psnDecAnyPartialSourceIsReg	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*\}\ while\ \(bVar1\);$@2	+1
+use	psnDecAnyPartialSourceIsReg	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar3\ ==\ 1;$	+1
+use	psnDecAnyPartialSourceIsReg	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*if\ \(bVar1\)\ \{$	+1
+use	psnDecAnyPartialSourceIsReg	iVar2	halfUsageBase	CONFIRMED	entry + halfIndex*0x40 + 0x10: the half's per-slot read-mask words (+0x14 RGB group, +0x1a alpha group)	^\s*iVar2\ =\ iVar3\ \*\ 0x40\ \+\ param_1\ \+\ 0x10;$	+1
+use	psnDecAnyPartialSourceIsReg	iVar2	halfUsageBase	CONFIRMED	entry + halfIndex*0x40 + 0x10: the half's per-slot read-mask words (+0x14 RGB group, +0x1a alpha group)	^\s*puVar6\ =\ \(ushort\ \*\)\(iVar2\ \+\ 4\);$	+1
+use	psnDecAnyPartialSourceIsReg	iVar2	halfUsageBase	CONFIRMED	entry + halfIndex*0x40 + 0x10: the half's per-slot read-mask words (+0x14 RGB group, +0x1a alpha group)	^\s*iVar2\ =\ iVar2\ \+\ 6;$	+1
+use	psnDecAnyPartialSourceIsReg	iVar3	halfIndex	CONFIRMED	0 = RGB half, 1 = alpha half	^\s*iVar3\ =\ 0;$	+1
+use	psnDecAnyPartialSourceIsReg	iVar3	halfIndex	CONFIRMED	0 = RGB half, 1 = alpha half	^\s*iVar2\ =\ iVar3\ \*\ 0x40\ \+\ param_1\ \+\ 0x10;$	+1
+use	psnDecAnyPartialSourceIsReg	iVar3	halfIndex	CONFIRMED	0 = RGB half, 1 = alpha half	^\s*bVar1\ =\ iVar3\ ==\ 1;$	+2
+use	psnDecAnyPartialSourceIsReg	iVar5	addressGroupOffset	CONFIRMED	0 / 6: byte offset of the address group's slots (+0x80 RGB, +0x86 alpha) in the entry	^\s*iVar5\ =\ 0;$	+1
+use	psnDecAnyPartialSourceIsReg	iVar5	addressGroupOffset	CONFIRMED	0 / 6: byte offset of the address group's slots (+0x80 RGB, +0x86 alpha) in the entry	^\s*puVar8\ =\ \(ushort\ \*\)\(param_1\ \+\ iVar5\ \+\ 0x80\);$	+1
+use	psnDecAnyPartialSourceIsReg	iVar5	addressGroupOffset	CONFIRMED	0 / 6: byte offset of the address group's slots (+0x80 RGB, +0x86 alpha) in the entry	^\s*iVar5\ =\ iVar5\ \+\ 6;$	+1
+use	psnDecAnyPartialSourceIsReg	puVar6	readMaskPtr	CONFIRMED	read-mask ushort of the slot being tested	^\s*puVar6\ =\ \(ushort\ \*\)\(iVar2\ \+\ 4\);$	+1
+use	psnDecAnyPartialSourceIsReg	puVar6	readMaskPtr	CONFIRMED	read-mask ushort of the slot being tested	^\s*if\ \(\(\(\(\*puVar6\ \&\ param_2\)\ !=\ 0\)\ \&\&\ \(\*puVar6\ !=\ param_2\)\)\ \&\&\ \(\*puVar8\ ==\ param_3\)\)\ \{$	+1
+use	psnDecAnyPartialSourceIsReg	puVar6	readMaskPtr	CONFIRMED	read-mask ushort of the slot being tested	^\s*puVar6\ =\ puVar6\ \+\ 1;$	+1
+use	psnDecAnyPartialSourceIsReg	puVar8	addressSlotPtr	CONFIRMED	address slot ushort (entry + 0x80 + group offset + 2*slot)	^\s*puVar8\ =\ \(ushort\ \*\)\(param_1\ \+\ iVar5\ \+\ 0x80\);$	+1
+use	psnDecAnyPartialSourceIsReg	puVar8	addressSlotPtr	CONFIRMED	address slot ushort (entry + 0x80 + group offset + 2*slot)	^\s*if\ \(\(\(\(\*puVar6\ \&\ param_2\)\ !=\ 0\)\ \&\&\ \(\*puVar6\ !=\ param_2\)\)\ \&\&\ \(\*puVar8\ ==\ param_3\)\)\ \{$	+1
+use	psnDecAnyPartialSourceIsReg	puVar8	addressSlotPtr	CONFIRMED	address slot ushort (entry + 0x80 + group offset + 2*slot)	^\s*puVar8\ =\ puVar8\ \+\ 1;$	+1
+use	psnDecAlphaComponentReadsReg	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar5\ !=\ 2;$	+1
+use	psnDecAlphaComponentReadsReg	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*\}\ while\ \(bVar1\);$	+1
+use	psnDecAlphaComponentReadsReg	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar4\ ==\ 1;$	+1
+use	psnDecAlphaComponentReadsReg	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*if\ \(bVar1\)\ \{$	+1
+use	psnDecAlphaComponentReadsReg	iVar4	groupIndex	CONFIRMED	0 = RGB address group, 1 = alpha address group	^\s*iVar4\ =\ 0;$	+1
+use	psnDecAlphaComponentReadsReg	iVar4	groupIndex	CONFIRMED	0 = RGB address group, 1 = alpha address group	^\s*bVar1\ =\ iVar4\ ==\ 1;$	+1
+use	psnDecAlphaComponentReadsReg	iVar4	groupIndex	CONFIRMED	0 = RGB address group, 1 = alpha address group	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+1
+use	psnDecAlphaComponentReadsReg	iVar6	halfOneBase	CONFIRMED	entry + 0x50 + 6*group: +4 is the alpha half's (half 1) read-mask word of slot 0 of the group (entry + 0x40 + 0x14)	^\s*iVar6\ =\ param_1\ \+\ 0x50;$	+1
+use	psnDecAlphaComponentReadsReg	iVar6	halfOneBase	CONFIRMED	entry + 0x50 + 6*group: +4 is the alpha half's (half 1) read-mask word of slot 0 of the group (entry + 0x40 + 0x14)	^\s*puVar2\ =\ \(ushort\ \*\)\(iVar6\ \+\ 4\);$	+1
+use	psnDecAlphaComponentReadsReg	iVar6	halfOneBase	CONFIRMED	entry + 0x50 + 6*group: +4 is the alpha half's (half 1) read-mask word of slot 0 of the group (entry + 0x40 + 0x14)	^\s*iVar6\ =\ iVar6\ \+\ 6;$	+1
+use	psnDecAlphaComponentReadsReg	iVar7	halfOneBaseRef	CONFIRMED	entry + 0x54 + 6*group: subtracted from the pointers to reach half 0's read-mask word of the same slot	^\s*iVar7\ =\ param_1\ \+\ 0x54;$	+1
+use	psnDecAlphaComponentReadsReg	iVar7	halfOneBaseRef	CONFIRMED	entry + 0x54 + 6*group: subtracted from the pointers to reach half 0's read-mask word of the same slot	^\s*if\ \(\(\(\*\(ushort\ \*\)\(\(iVar3\ \-\ iVar7\)\ \+\ \(int\)puVar2\)\ \&\ 8\)\ !=\ 0\)\ \|\|\ \(\(\*puVar2\ \&\ 8\)\ !=\ 0\)\)\ \{$	+1
+use	psnDecAlphaComponentReadsReg	iVar7	halfOneBaseRef	CONFIRMED	entry + 0x54 + 6*group: subtracted from the pointers to reach half 0's read-mask word of the same slot	^\s*iVar7\ =\ iVar7\ \+\ 6;$	+1
+use	psnDecAlphaComponentReadsReg	iVar3	halfZeroMaskBase	CONFIRMED	entry + 0x14 + 6*group: half 0's per-slot read-mask words of the group	^\s*iVar3\ =\ param_1\ \+\ 0x14;$	+1
+use	psnDecAlphaComponentReadsReg	iVar3	halfZeroMaskBase	CONFIRMED	entry + 0x14 + 6*group: half 0's per-slot read-mask words of the group	^\s*if\ \(\(\(\*\(ushort\ \*\)\(\(iVar3\ \-\ iVar7\)\ \+\ \(int\)puVar2\)\ \&\ 8\)\ !=\ 0\)\ \|\|\ \(\(\*puVar2\ \&\ 8\)\ !=\ 0\)\)\ \{$	+1
+use	psnDecAlphaComponentReadsReg	iVar3	halfZeroMaskBase	CONFIRMED	entry + 0x14 + 6*group: half 0's per-slot read-mask words of the group	^\s*iVar3\ =\ iVar3\ \+\ 6;$	+1
+use	psnDecAlphaComponentReadsReg	puVar2	halfOneMaskPtr	CONFIRMED	alpha half's read-mask ushort of the slot being tested (its +0x2c bytes is the slot's address word at entry+0x80..)	^\s*puVar2\ =\ \(ushort\ \*\)\(iVar6\ \+\ 4\);$	+1
+use	psnDecAlphaComponentReadsReg	puVar2	halfOneMaskPtr	CONFIRMED	alpha half's read-mask ushort of the slot being tested (its +0x2c bytes is the slot's address word at entry+0x80..)	^\s*if\ \(puVar2\[0x16\]\ ==\ param_2\)\ \{$	+2
+use	psnDecAlphaComponentReadsReg	puVar2	halfOneMaskPtr	CONFIRMED	alpha half's read-mask ushort of the slot being tested (its +0x2c bytes is the slot's address word at entry+0x80..)	^\s*puVar2\ =\ puVar2\ \+\ 1;$	+1
+use	psnDecReadsRegMask	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar5\ !=\ 1;$	+1
+use	psnDecReadsRegMask	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*\}\ while\ \(bVar1\);$	+1
+use	psnDecReadsRegMask	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar4\ ==\ 2;$	+1
+use	psnDecReadsRegMask	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*if\ \(bVar1\)\ \{$	+1
+use	psnDecReadsRegMask	iVar4	slotIndex	CONFIRMED	address slot 0..2 (the loops are transposed against psnDecAlphaComponentReadsReg: slot outer, group inner)	^\s*iVar4\ =\ 0;$	+1
+use	psnDecReadsRegMask	iVar4	slotIndex	CONFIRMED	address slot 0..2 (the loops are transposed against psnDecAlphaComponentReadsReg: slot outer, group inner)	^\s*bVar1\ =\ iVar4\ ==\ 2;$	+1
+use	psnDecReadsRegMask	iVar4	slotIndex	CONFIRMED	address slot 0..2 (the loops are transposed against psnDecAlphaComponentReadsReg: slot outer, group inner)	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+1
+use	psnDecReadsRegMask	iVar6	halfOneBase	CONFIRMED	entry + 0x50 + 2*slot: +4 is the alpha half's read-mask word of the slot in group 0	^\s*iVar6\ =\ param_1\ \+\ 0x50;$	+1
+use	psnDecReadsRegMask	iVar6	halfOneBase	CONFIRMED	entry + 0x50 + 2*slot: +4 is the alpha half's read-mask word of the slot in group 0	^\s*puVar2\ =\ \(ushort\ \*\)\(iVar6\ \+\ 4\);$	+1
+use	psnDecReadsRegMask	iVar6	halfOneBase	CONFIRMED	entry + 0x50 + 2*slot: +4 is the alpha half's read-mask word of the slot in group 0	^\s*iVar6\ =\ iVar6\ \+\ 2;$	+1
+use	psnDecReadsRegMask	iVar7	halfOneBaseRef	CONFIRMED	entry + 0x54 + 2*slot: subtracted from the pointers to reach half 0's read-mask word of the same slot	^\s*iVar7\ =\ param_1\ \+\ 0x54;$	+1
+use	psnDecReadsRegMask	iVar7	halfOneBaseRef	CONFIRMED	entry + 0x54 + 2*slot: subtracted from the pointers to reach half 0's read-mask word of the same slot	^\s*if\ \(\(\(\*\(ushort\ \*\)\(\(iVar3\ \-\ iVar7\)\ \+\ \(int\)puVar2\)\ \&\ \(\*\(unsigned\ short\ \*\)\(\(unsigned\ char\ \*\)\&\(param_3\)\ \+\ 2\)\)\)\ !=\ 0\)\ \|\|$	+2
+use	psnDecReadsRegMask	iVar7	halfOneBaseRef	CONFIRMED	entry + 0x54 + 2*slot: subtracted from the pointers to reach half 0's read-mask word of the same slot	^\s*iVar7\ =\ iVar7\ \+\ 2;$	+1
+use	psnDecReadsRegMask	iVar3	halfZeroMaskBase	CONFIRMED	entry + 0x14 + 2*slot: half 0's read-mask word of the slot in group 0	^\s*iVar3\ =\ param_1\ \+\ 0x14;$	+1
+use	psnDecReadsRegMask	iVar3	halfZeroMaskBase	CONFIRMED	entry + 0x14 + 2*slot: half 0's read-mask word of the slot in group 0	^\s*if\ \(\(\(\*\(ushort\ \*\)\(\(iVar3\ \-\ iVar7\)\ \+\ \(int\)puVar2\)\ \&\ \(\*\(unsigned\ short\ \*\)\(\(unsigned\ char\ \*\)\&\(param_3\)\ \+\ 2\)\)\)\ !=\ 0\)\ \|\|$	+2
+use	psnDecReadsRegMask	iVar3	halfZeroMaskBase	CONFIRMED	entry + 0x14 + 2*slot: half 0's read-mask word of the slot in group 0	^\s*iVar3\ =\ iVar3\ \+\ 2;$	+1
+use	psnDecReadsRegMask	puVar2	halfOneMaskPtr	CONFIRMED	alpha half's read-mask ushort of the slot being tested in the current group	^\s*puVar2\ =\ \(ushort\ \*\)\(iVar6\ \+\ 4\);$	+1
+use	psnDecReadsRegMask	puVar2	halfOneMaskPtr	CONFIRMED	alpha half's read-mask ushort of the slot being tested in the current group	^\s*if\ \(puVar2\[0x16\]\ ==\ param_2\)\ \{$	+3
+use	psnDecReadsRegMask	puVar2	halfOneMaskPtr	CONFIRMED	alpha half's read-mask ushort of the slot being tested in the current group	^\s*puVar2\ =\ puVar2\ \+\ 3;$	+1
+use	psnDecSourceHasPartialMask	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar4\ !=\ 1;$	+1
+use	psnDecSourceHasPartialMask	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*\}\ while\ \(bVar1\);$	+1
+use	psnDecSourceHasPartialMask	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar5\ ==\ 2;$	+1
+use	psnDecSourceHasPartialMask	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*if\ \(bVar1\)\ \{$	+1
+use	psnDecSourceHasPartialMask	iVar3	slotMaskBase	CONFIRMED	entry + 0x10 + 2*slot: base of the slot's read-mask words	^\s*iVar3\ =\ param_1\ \+\ 0x10;$	+1
+use	psnDecSourceHasPartialMask	iVar3	slotMaskBase	CONFIRMED	entry + 0x10 + 2*slot: base of the slot's read-mask words	^\s*puVar2\ =\ \(ushort\ \*\)\(iVar3\ \+\ 4\);$	+1
+use	psnDecSourceHasPartialMask	iVar3	slotMaskBase	CONFIRMED	entry + 0x10 + 2*slot: base of the slot's read-mask words	^\s*iVar3\ =\ iVar3\ \+\ 2;$	+1
+use	psnDecSourceHasPartialMask	iVar5	slotIndex	CONFIRMED	address slot 0..2	^\s*iVar5\ =\ 0;$	+1
+use	psnDecSourceHasPartialMask	iVar5	slotIndex	CONFIRMED	address slot 0..2	^\s*bVar1\ =\ iVar5\ ==\ 2;$	+1
+use	psnDecSourceHasPartialMask	iVar5	slotIndex	CONFIRMED	address slot 0..2	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
+use	psnDecSourceHasPartialMask	puVar2	readMaskPtr	CONFIRMED	read-mask ushort of the slot in the current group (its +0x6c bytes is the slot's address word)	^\s*puVar2\ =\ \(ushort\ \*\)\(iVar3\ \+\ 4\);$	+1
+use	psnDecSourceHasPartialMask	puVar2	readMaskPtr	CONFIRMED	read-mask ushort of the slot in the current group (its +0x6c bytes is the slot's address word)	^\s*if\ \(puVar2\[0x36\]\ ==\ param_2\)\ \{$	+2
+use	psnDecSourceHasPartialMask	puVar2	readMaskPtr	CONFIRMED	read-mask ushort of the slot in the current group (its +0x6c bytes is the slot's address word)	^\s*puVar2\ =\ puVar2\ \+\ 3;$	+1
+local	psnConstantComponentsAreOne	uVar1	constantUsable	CONFIRMED	bit constantIndex of the 64-bit usable-constant mask (maskHigh:maskLow)
+use	psnDecTrySwapAddressSlots	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar7\ !=\ 2;$	+1
+use	psnDecTrySwapAddressSlots	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*\}\ while\ \(bVar1\);$	+1
+use	psnDecTrySwapAddressSlots	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar8\ !=\ 0x40;$	+1
+use	psnDecTrySwapAddressSlots	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*\}\ while\ \(bVar1\);$@2	+1
+use	psnDecTrySwapAddressSlots	iVar5	slotMaskBase	CONFIRMED	entry + slot*4: the slot's pinned-mask words (+0x20 / +0x22 and +0x60 / +0x62) tested before the swap	^\s*iVar5\ =\ param_2\ \*\ 4\ \+\ param_1;$	+2
+use	psnDecTrySwapAddressSlots	iVar5	slotMaskBase	CONFIRMED	entry + slot*4: the slot's pinned-mask words (+0x20 / +0x22 and +0x60 / +0x62) tested before the swap	^\s*iVar5\ =\ param_2\ \*\ 4\ \+\ param_1;$@2	+2
+use	psnDecTrySwapAddressSlots	iVar5	slotAAddressPtr	CONFIRMED	address of address slot A of the group in the entry table (+0x80..)	^\s*iVar5\ =\ \(param_2\ \*\ 3\ \+\ param_3\)\ \*\ 2\ \+\ param_1;$	+3
+use	psnDecTrySwapAddressSlots	iVar5	halfCursor	CONFIRMED	entry + halfByteOffset: the half whose source selects are renumbered	^\s*iVar5\ =\ param_1\ \+\ iVar8;$	+1
+use	psnDecTrySwapAddressSlots	iVar5	halfCursor	CONFIRMED	entry + halfByteOffset: the half whose source selects are renumbered	^\s*uVar6\ =\ \*\(ushort\ \*\)\(iVar5\ \+\ 8\)\ \&\ 0x300;$	+2
+use	psnDecTrySwapAddressSlots	iVar5	halfCursor	CONFIRMED	entry + halfByteOffset: the half whose source selects are renumbered	^\s*\*\(ushort\ \*\)\(iVar5\ \+\ 8\)\ =\ \(ushort\)param_4\ \|\ uVar3;$	+1
+use	psnDecTrySwapAddressSlots	iVar5	halfCursor	CONFIRMED	entry + halfByteOffset: the half whose source selects are renumbered	^\s*\*\(ushort\ \*\)\(iVar5\ \+\ 8\)\ =\ \(ushort\)param_3\ \|\ uVar3;$	+1
+use	psnDecTrySwapAddressSlots	iVar5	halfCursor	CONFIRMED	entry + halfByteOffset: the half whose source selects are renumbered	^\s*iVar5\ =\ iVar5\ \+\ 4;$	+1
+use	psnDecTrySwapAddressSlots	iVar7	slotBAddressPtr	CONFIRMED	address of address slot B of the group	^\s*iVar7\ =\ \(param_2\ \*\ 3\ \+\ param_4\)\ \*\ 2\ \+\ param_1;$	+1
+use	psnDecTrySwapAddressSlots	iVar7	slotBAddressPtr	CONFIRMED	address of address slot B of the group	^\s*\*\(undefined2\ \*\)\(iVar5\ \+\ 0x80\)\ =\ \*\(undefined2\ \*\)\(iVar7\ \+\ 0x80\);$	+2
+use	psnDecTrySwapAddressSlots	iVar8	halfByteOffset	CONFIRMED	0 / 0x40	^\s*iVar8\ =\ 0;$	+1
+use	psnDecTrySwapAddressSlots	iVar8	halfByteOffset	CONFIRMED	0 / 0x40	^\s*iVar5\ =\ param_1\ \+\ iVar8;$	+1
+use	psnDecTrySwapAddressSlots	iVar8	halfByteOffset	CONFIRMED	0 / 0x40	^\s*bVar1\ =\ iVar8\ !=\ 0x40;$	+2
+use	psnDecTrySwapAddressSlots	uVar2	savedAddress	CONFIRMED	address of slot A kept while the two address words are exchanged	^\s*uVar2\ =\ \*\(undefined2\ \*\)\(iVar5\ \+\ 0x80\);$	+1
+use	psnDecTrySwapAddressSlots	uVar2	savedAddress	CONFIRMED	address of slot A kept while the two address words are exchanged	^\s*\*\(undefined2\ \*\)\(iVar7\ \+\ 0x80\)\ =\ uVar2;$	+1
+use	psnDecTrySwapAddressSlots	uVar6	selectGroupBits	CONFIRMED	source select & 0x300	^\s*uVar6\ =\ \*\(ushort\ \*\)\(iVar5\ \+\ 8\)\ \&\ 0x300;$	+1
+use	psnDecTrySwapAddressSlots	uVar6	selectGroupBits	CONFIRMED	source select & 0x300	^\s*if\ \(uVar6\ ==\ \(param_2\ \+\ 1\)\ \*\ 0x100\)\ \{$	+2
+use	psnDecTrySwapAddressSlots	uVar4	selectSlot	CONFIRMED	source select & 3	^\s*uVar4\ =\ \*\(ushort\ \*\)\(iVar5\ \+\ 8\)\ \&\ 3;$	+1
+use	psnDecTrySwapAddressSlots	uVar4	selectSlot	CONFIRMED	source select & 3	^\s*if\ \(param_3\ ==\ uVar4\)\ \{$	+1
+use	psnDecTrySwapAddressSlots	uVar4	selectSlot	CONFIRMED	source select & 3	^\s*else\ if\ \(param_4\ ==\ uVar4\)\ \{$	+1
+use	psnDecTrySwapAddressSlots	uVar3	selectGroupBitsShort	CONFIRMED	selectGroupBits as ushort, OR-ed into the rewritten select	^\s*uVar3\ =\ \(ushort\)uVar6;$	+1
+use	psnDecTrySwapAddressSlots	uVar3	selectGroupBitsShort	CONFIRMED	selectGroupBits as ushort, OR-ed into the rewritten select	^\s*\*\(ushort\ \*\)\(iVar5\ \+\ 8\)\ =\ \(ushort\)param_4\ \|\ uVar3;$	+1
+use	psnDecTrySwapAddressSlots	uVar3	selectGroupBitsShort	CONFIRMED	selectGroupBits as ushort, OR-ed into the rewritten select	^\s*\*\(ushort\ \*\)\(iVar5\ \+\ 8\)\ =\ \(ushort\)param_3\ \|\ uVar3;$	+1
+use	psnDecSwapAddressSlotsInSources	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar6\ !=\ 2;$	+1
+use	psnDecSwapAddressSlotsInSources	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*\}\ while\ \(bVar1\);$	+1
+use	psnDecSwapAddressSlotsInSources	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*bVar1\ =\ iVar8\ !=\ 1;$	+1
+use	psnDecSwapAddressSlotsInSources	bVar1	loopContinue	CONFIRMED	loop-continue flag of a do-while loop	^\s*\}\ while\ \(bVar1\);$@2	+1
+use	psnDecSwapAddressSlotsInSources	iVar5	halfCursor	CONFIRMED	entry + halfByteOffset: the half whose source selects are renumbered	^\s*iVar5\ =\ param_1;$	+1
+use	psnDecSwapAddressSlotsInSources	iVar5	halfCursor	CONFIRMED	entry + halfByteOffset: the half whose source selects are renumbered	^\s*puVar7\ =\ \(ushort\ \*\)\(iVar5\ \+\ 8\);$	+1
+use	psnDecSwapAddressSlotsInSources	iVar5	halfCursor	CONFIRMED	entry + halfByteOffset: the half whose source selects are renumbered	^\s*iVar5\ =\ iVar5\ \+\ 0x40;$	+1
+use	psnDecSwapAddressSlotsInSources	iVar5	slotAAddressPtr	CONFIRMED	address of address slot A (param_2) of the group	^\s*iVar5\ =\ \(param_4\ \*\ 3\ \+\ param_2\)\ \*\ 2\ \+\ param_1;$	+3
+use	psnDecSwapAddressSlotsInSources	iVar8	slotBAddressPtr	CONFIRMED	address of address slot B (param_3) of the group	^\s*iVar8\ =\ \(param_4\ \*\ 3\ \+\ param_3\)\ \*\ 2\ \+\ param_1;$	+1
+use	psnDecSwapAddressSlotsInSources	iVar8	slotBAddressPtr	CONFIRMED	address of address slot B (param_3) of the group	^\s*\*\(undefined2\ \*\)\(iVar5\ \+\ 0x80\)\ =\ \*\(undefined2\ \*\)\(iVar8\ \+\ 0x80\);$	+2
+use	psnDecSwapAddressSlotsInSources	puVar7	sourceSelectPtr	CONFIRMED	select ushort of the source slot being renumbered	^\s*puVar7\ =\ \(ushort\ \*\)\(iVar5\ \+\ 8\);$	+1
+use	psnDecSwapAddressSlotsInSources	puVar7	sourceSelectPtr	CONFIRMED	select ushort of the source slot being renumbered	^\s*uVar2\ =\ \*puVar7;$	+1
+use	psnDecSwapAddressSlotsInSources	puVar7	sourceSelectPtr	CONFIRMED	select ushort of the source slot being renumbered	^\s*\*puVar7\ =\ \(ushort\)param_3\ \|\ uVar2\ \&\ 0xfffc;$	+1
+use	psnDecSwapAddressSlotsInSources	puVar7	sourceSelectPtr	CONFIRMED	select ushort of the source slot being renumbered	^\s*\*puVar7\ =\ \(ushort\)param_2\ \|\ \*puVar7\ \&\ 0xfffc;$	+1
+use	psnDecSwapAddressSlotsInSources	puVar7	sourceSelectPtr	CONFIRMED	select ushort of the source slot being renumbered	^\s*puVar7\ =\ puVar7\ \+\ 2;$	+1
+use	psnDecSwapAddressSlotsInSources	uVar2	sourceSelect	CONFIRMED	select ushort of the source slot	^\s*uVar2\ =\ \*puVar7;$	+4
+use	psnDecSwapAddressSlotsInSources	uVar2	sourceSelect	CONFIRMED	select ushort of the source slot	^\s*if\ \(\(uVar2\ \&\ 3\)\ ==\ param_3\)\ \{$	+1
+use	psnDecSwapAddressSlotsInSources	uVar3	savedAddress	CONFIRMED	address of slot A kept while the two address words are exchanged	^\s*uVar3\ =\ \*\(undefined2\ \*\)\(iVar5\ \+\ 0x80\);$	+1
+use	psnDecSwapAddressSlotsInSources	uVar3	savedAddress	CONFIRMED	address of slot A kept while the two address words are exchanged	^\s*\*\(undefined2\ \*\)\(iVar8\ \+\ 0x80\)\ =\ uVar3;$	+1
+use	psnDecSwapAddressSlotsInSources	uVar4	groupSelectBits	CONFIRMED	0x100 (RGB group) / 0x200 (alpha group): select bits of the group	^\s*uVar4\ =\ 0x100;$	+1
+use	psnDecSwapAddressSlotsInSources	uVar4	groupSelectBits	CONFIRMED	0x100 (RGB group) / 0x200 (alpha group): select bits of the group	^\s*uVar4\ =\ 0x200;$	+1
+use	psnDecSwapAddressSlotsInSources	uVar4	groupSelectBits	CONFIRMED	0x100 (RGB group) / 0x200 (alpha group): select bits of the group	^\s*if\ \(\(\(uVar2\ \&\ 0x300\)\ !=\ 0\)\ \&\&\ \(\(uVar4\ \&\ uVar2\ \&\ 0x300\)\ !=\ 0\)\)\ \{$	+1
+use	psnDecSortAddressSlots	iVar2	groupSlots	CONFIRMED	entry + group*6: the three address slots of the group at +0x80 / +0x86	^\s*iVar2\ =\ param_2\ \*\ 6\ \+\ param_1;$	+2
+use	psnDecSortAddressSlots	iVar2	groupSlots	CONFIRMED	entry + group*6: the three address slots of the group at +0x80 / +0x86	^\s*iVar2\ =\ param_2\ \*\ 6\ \+\ param_1;$@2	+3
+use	psnDecSortAddressSlots	iVar2	groupSlots	CONFIRMED	entry + group*6: the three address slots of the group at +0x80 / +0x86	^\s*uVar1\ =\ \*\(ushort\ \*\)\(iVar2\ \+\ 0x82\);$@2	+1
+use	psnDecSortAddressSlots	iVar2	groupSlots	CONFIRMED	entry + group*6: the three address slots of the group at +0x80 / +0x86	^\s*if\ \(\*\(ushort\ \*\)\(iVar2\ \+\ 0x84\)\ <\ uVar1\)\ \{$	+1
+use	psnDecSortAddressSlots	uVar1	slotTwoAddress	CONFIRMED	address slot 1 (+0x82) read before it is compared	^\s*uVar1\ =\ \*\(ushort\ \*\)\(iVar2\ \+\ 0x82\);$	+2
+use	psnDecSortAddressSlots	uVar1	slotTwoAddress	CONFIRMED	address slot 1 (+0x82) read before it is compared	^\s*uVar1\ =\ \*\(ushort\ \*\)\(iVar2\ \+\ 0x82\);$@2	+1
+use	psnDecSortAddressSlots	uVar1	slotTwoAddress	CONFIRMED	address slot 1 (+0x82) read before it is compared	^\s*if\ \(\*\(ushort\ \*\)\(iVar2\ \+\ 0x84\)\ <\ uVar1\)\ \{$	+1
+use	psnDecSortAddressSlots	uVar3	swapResult	CONFIRMED	result of psnDecTrySwapAddressSlots	^\s*uVar3\ =\ \(\(int\ \(\*\)\(\)\)FUN_000c1d60\)\(param_1,param_2,0,1\);$	+1
+use	psnDecSortAddressSlots	uVar3	swapResult	CONFIRMED	result of psnDecTrySwapAddressSlots	^\s*uVar4\ =\ uVar4\ \|\ uVar3;$	+1
+use	psnDecSortAddressSlots	uVar3	swapResult	CONFIRMED	result of psnDecTrySwapAddressSlots	^\s*uVar3\ =\ \(\(int\ \(\*\)\(\)\)FUN_000c1d60\)\(param_1,param_2,1,2\);$	+2
+use	psnDecSortAddressSlots	uVar4	anySwapped	CONFIRMED	OR of the swap results: usage is recomputed when non-zero	^\s*uVar4\ =\ 0;$	+1
+use	psnDecSortAddressSlots	uVar4	anySwapped	CONFIRMED	OR of the swap results: usage is recomputed when non-zero	^\s*uVar4\ =\ \(\(int\ \(\*\)\(\)\)FUN_000c1d60\)\(param_1,param_2,1,2\);$	+1
+use	psnDecSortAddressSlots	uVar4	anySwapped	CONFIRMED	OR of the swap results: usage is recomputed when non-zero	^\s*uVar4\ =\ uVar4\ \|\ uVar3;$	+1
+use	psnDecSortAddressSlots	uVar4	anySwapped	CONFIRMED	OR of the swap results: usage is recomputed when non-zero	^\s*uVar4\ =\ uVar4\ \|\ uVar3;$@2	+1
+use	psnDecSortAddressSlots	uVar4	anySwapped	CONFIRMED	OR of the swap results: usage is recomputed when non-zero	^\s*if\ \(uVar4\ !=\ 0\)\ \{$	+1
+use	psnDecSortAddressSlots	uVar4	anySwapped	CONFIRMED	OR of the swap results: usage is recomputed when non-zero	^\s*return\ uVar4;$	+1

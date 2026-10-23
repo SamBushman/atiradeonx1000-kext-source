@@ -1404,7 +1404,7 @@ LAB_00197808:
           if ((instFlags & 1) != 0) {
             iVar11 = cursorInst[0x47];
             visitSlot = *(code **)(*this + 0x13c);
-            FUN_00105d04(local_48,cursorInst);
+            IRInst__firstLiteralSourceValue(local_48,cursorInst);
             (*visitSlot)(this,iVar11,local_48[0]);
             if ((cursorInst[5] & 0x10000U) == 0) {
               if ((cursorInst[5] & 2U) != 0) {

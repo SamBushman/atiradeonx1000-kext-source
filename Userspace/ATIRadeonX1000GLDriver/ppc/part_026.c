@@ -103,8 +103,8 @@ int FUN_000f4ddc(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_000f4fdc @ 0xf4fdc (352 bytes) */
-int FUN_000f4fdc(compiler, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+/* Compiler__getOrCreateLoadConstN @ 0xf4fdc (352 bytes) */
+int Compiler__getOrCreateLoadConstN(compiler, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   int *compiler;
   int param_2;
   undefined4 param_3;
@@ -129,7 +129,7 @@ int FUN_000f4fdc(compiler, param_2, param_3, param_4, param_5, param_6, param_7,
   undefined4 uStack0000002c;
   undefined4 uStack00000030;
   undefined4 uStack00000034;
-  /* issue #64 live-repro: same defect as FUN_000f6248 in this file (fixed earlier this session) -
+  /* issue #64 live-repro: same defect as Compiler__getOrCreateConstVectorN in this file (fixed earlier this session) -
    * called below as aiStack_9c[param_2] with param_2 observed as 4, one past this array's declared
    * 4 elements; local_8c (assigned right after, from compiler[5]) sits exactly at the missing 5th
    * index by its own hex offset (0x9c-0x8c=0x10). Extended to 5 elements; local_8c aliased to
@@ -241,92 +241,92 @@ int FUN_000f5248(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uStack0000002c = param_6;
   uStack00000030 = param_7;
   uStack00000034 = param_8;
-  uVar1 = ((int (*)())FUN_000f4fdc)(param_1,4,param_2,param_3,param_4,param_5,param_6,param_7);
+  uVar1 = ((int (*)())Compiler__getOrCreateLoadConstN)(param_1,4,param_2,param_3,param_4,param_5,param_6,param_7);
   return uVar1;
 }
 
-/* FUN_000f53c0 @ 0xf53c0 (396 bytes) */
-int FUN_000f53c0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+/* Compiler__getOrCreateLoadConst3 @ 0xf53c0 (396 bytes) */
+int Compiler__getOrCreateLoadConst3(compiler, operandWord0, operandWord1, operandWord2, operandWord3, operandWord4, operandWord5, operandWord6)
+  undefined4 compiler;
+  undefined4 operandWord0;
+  undefined4 operandWord1;
+  undefined4 operandWord2;
+  undefined4 operandWord3;
+  undefined4 operandWord4;
+  undefined4 operandWord5;
+  undefined4 operandWord6;
 {
-  undefined4 uStack0000001c;
-  undefined4 uStack00000020;
-  undefined4 uStack00000024;
-  undefined4 uStack00000028;
-  undefined4 uStack0000002c;
-  undefined4 uStack00000030;
-  undefined4 uStack00000034;
+  undefined4 operandWord0Home;
+  undefined4 operandWord1Home;
+  undefined4 operandWord2Home;
+  undefined4 operandWord3Home;
+  undefined4 operandWord4Home;
+  undefined4 operandWord5Home;
+  undefined4 operandWord6Home;
   
-  uStack0000001c = param_2;
-  uStack00000020 = param_3;
-  uStack00000024 = param_4;
-  uStack00000028 = param_5;
-  uStack0000002c = param_6;
-  uStack00000030 = param_7;
-  uStack00000034 = param_8;
-  return ((int (*)())FUN_000f4fdc)(param_1,3,param_2,param_3,param_4,param_5,param_6,param_7);
+  operandWord0Home = operandWord0;
+  operandWord1Home = operandWord1;
+  operandWord2Home = operandWord2;
+  operandWord3Home = operandWord3;
+  operandWord4Home = operandWord4;
+  operandWord5Home = operandWord5;
+  operandWord6Home = operandWord6;
+  return ((int (*)())Compiler__getOrCreateLoadConstN)(compiler,3,operandWord0,operandWord1,operandWord2,operandWord3,operandWord4,operandWord5);
 }
 
-/* FUN_000f554c @ 0xf554c (352 bytes) */
-int FUN_000f554c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+/* Compiler__getOrCreateLoadConst2 @ 0xf554c (352 bytes) */
+int Compiler__getOrCreateLoadConst2(compiler, operandWord0, operandWord1, operandWord2, operandWord3, operandWord4, operandWord5, operandWord6)
+  undefined4 compiler;
+  undefined4 operandWord0;
+  undefined4 operandWord1;
+  undefined4 operandWord2;
+  undefined4 operandWord3;
+  undefined4 operandWord4;
+  undefined4 operandWord5;
+  undefined4 operandWord6;
 {
-  undefined4 uStack0000001c;
-  undefined4 uStack00000020;
-  undefined4 uStack00000024;
-  undefined4 uStack00000028;
-  undefined4 uStack0000002c;
-  undefined4 uStack00000030;
-  undefined4 uStack00000034;
+  undefined4 operandWord0Home;
+  undefined4 operandWord1Home;
+  undefined4 operandWord2Home;
+  undefined4 operandWord3Home;
+  undefined4 operandWord4Home;
+  undefined4 operandWord5Home;
+  undefined4 operandWord6Home;
   
-  uStack0000001c = param_2;
-  uStack00000020 = param_3;
-  uStack00000024 = param_4;
-  uStack00000028 = param_5;
-  uStack0000002c = param_6;
-  uStack00000030 = param_7;
-  uStack00000034 = param_8;
-  return ((int (*)())FUN_000f4fdc)(param_1,2,param_2,param_3,param_4,param_5,param_6,param_7);
+  operandWord0Home = operandWord0;
+  operandWord1Home = operandWord1;
+  operandWord2Home = operandWord2;
+  operandWord3Home = operandWord3;
+  operandWord4Home = operandWord4;
+  operandWord5Home = operandWord5;
+  operandWord6Home = operandWord6;
+  return ((int (*)())Compiler__getOrCreateLoadConstN)(compiler,2,operandWord0,operandWord1,operandWord2,operandWord3,operandWord4,operandWord5);
 }
 
-/* FUN_000f56ac @ 0xf56ac (324 bytes) */
-int FUN_000f56ac(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+/* Compiler__getOrCreateLoadConst1 @ 0xf56ac (324 bytes) */
+int Compiler__getOrCreateLoadConst1(compiler, operandWord0, operandWord1, operandWord2, operandWord3, operandWord4, operandWord5)
+  undefined4 compiler;
+  undefined4 operandWord0;
+  undefined4 operandWord1;
+  undefined4 operandWord2;
+  undefined4 operandWord3;
+  undefined4 operandWord4;
+  undefined4 operandWord5;
 {
-  undefined4 uStack0000001c;
-  undefined4 uStack00000020;
-  undefined4 uStack00000024;
-  undefined4 uStack00000028;
-  undefined4 uStack0000002c;
-  undefined4 uStack00000030;
+  undefined4 operandWord0Home;
+  undefined4 operandWord1Home;
+  undefined4 operandWord2Home;
+  undefined4 operandWord3Home;
+  undefined4 operandWord4Home;
+  undefined4 operandWord5Home;
   
-  uStack0000001c = param_2;
-  uStack00000020 = param_3;
-  uStack00000024 = param_4;
-  uStack00000028 = param_5;
-  uStack0000002c = param_6;
-  uStack00000030 = param_7;
-  return ((int (*)())FUN_000f4fdc)(param_1,1,param_2,param_3,param_4,param_5,param_6,param_7);
+  operandWord0Home = operandWord0;
+  operandWord1Home = operandWord1;
+  operandWord2Home = operandWord2;
+  operandWord3Home = operandWord3;
+  operandWord4Home = operandWord4;
+  operandWord5Home = operandWord5;
+  return ((int (*)())Compiler__getOrCreateLoadConstN)(compiler,1,operandWord0,operandWord1,operandWord2,operandWord3,operandWord4,operandWord5);
 }
 
 /* FUN_000f57f0 @ 0xf57f0 (540 bytes) */
@@ -800,8 +800,8 @@ int FUN_000f60c4(param_1, param_2)
   return;
 }
 
-/* FUN_000f6248 @ 0xf6248 (532 bytes) */
-int FUN_000f6248(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+/* Compiler__getOrCreateConstVectorN @ 0xf6248 (532 bytes) */
+int Compiler__getOrCreateConstVectorN(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -917,119 +917,119 @@ int FUN_000f6248(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
 }
 #undef local_7c
 
-/* FUN_000f645c @ 0xf645c (376 bytes) */
-int FUN_000f645c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+/* Compiler__getOrCreateConstVector4 @ 0xf645c (376 bytes) */
+int Compiler__getOrCreateConstVector4(owner, operandWord0, operandWord1, operandWord2, operandWord3, operandWord4, operandWord5, operandWord6)
+  undefined4 owner;
+  undefined4 operandWord0;
+  undefined4 operandWord1;
+  undefined4 operandWord2;
+  undefined4 operandWord3;
+  undefined4 operandWord4;
+  undefined4 operandWord5;
+  undefined4 operandWord6;
 {
   undefined4 uVar1;
-  undefined4 uStack0000001c;
-  undefined4 uStack00000020;
-  undefined4 uStack00000024;
-  undefined4 uStack00000028;
-  undefined4 uStack0000002c;
-  undefined4 uStack00000030;
-  undefined4 uStack00000034;
+  undefined4 operandWord0Home;
+  undefined4 operandWord1Home;
+  undefined4 operandWord2Home;
+  undefined4 operandWord3Home;
+  undefined4 operandWord4Home;
+  undefined4 operandWord5Home;
+  undefined4 operandWord6Home;
   
-  uStack0000001c = param_2;
-  uStack00000020 = param_3;
-  uStack00000024 = param_4;
-  uStack00000028 = param_5;
-  uStack0000002c = param_6;
-  uStack00000030 = param_7;
-  uStack00000034 = param_8;
-  uVar1 = ((int (*)())FUN_000f6248)(param_1,4,param_2,param_3,param_4,param_5,param_6,param_7);
+  operandWord0Home = operandWord0;
+  operandWord1Home = operandWord1;
+  operandWord2Home = operandWord2;
+  operandWord3Home = operandWord3;
+  operandWord4Home = operandWord4;
+  operandWord5Home = operandWord5;
+  operandWord6Home = operandWord6;
+  uVar1 = ((int (*)())Compiler__getOrCreateConstVectorN)(owner,4,operandWord0,operandWord1,operandWord2,operandWord3,operandWord4,operandWord5);
   return uVar1;
 }
 
-/* FUN_000f65d4 @ 0xf65d4 (396 bytes) */
-int FUN_000f65d4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+/* Compiler__getOrCreateConstVector3 @ 0xf65d4 (396 bytes) */
+int Compiler__getOrCreateConstVector3(owner, operandWord0, operandWord1, operandWord2, operandWord3, operandWord4, operandWord5, operandWord6)
+  undefined4 owner;
+  undefined4 operandWord0;
+  undefined4 operandWord1;
+  undefined4 operandWord2;
+  undefined4 operandWord3;
+  undefined4 operandWord4;
+  undefined4 operandWord5;
+  undefined4 operandWord6;
 {
-  undefined4 uStack0000001c;
-  undefined4 uStack00000020;
-  undefined4 uStack00000024;
-  undefined4 uStack00000028;
-  undefined4 uStack0000002c;
-  undefined4 uStack00000030;
-  undefined4 uStack00000034;
+  undefined4 operandWord0Home;
+  undefined4 operandWord1Home;
+  undefined4 operandWord2Home;
+  undefined4 operandWord3Home;
+  undefined4 operandWord4Home;
+  undefined4 operandWord5Home;
+  undefined4 operandWord6Home;
   
-  uStack0000001c = param_2;
-  uStack00000020 = param_3;
-  uStack00000024 = param_4;
-  uStack00000028 = param_5;
-  uStack0000002c = param_6;
-  uStack00000030 = param_7;
-  uStack00000034 = param_8;
-  return ((int (*)())FUN_000f6248)(param_1,3,param_2,param_3,param_4,param_5,param_6,param_7);
+  operandWord0Home = operandWord0;
+  operandWord1Home = operandWord1;
+  operandWord2Home = operandWord2;
+  operandWord3Home = operandWord3;
+  operandWord4Home = operandWord4;
+  operandWord5Home = operandWord5;
+  operandWord6Home = operandWord6;
+  return ((int (*)())Compiler__getOrCreateConstVectorN)(owner,3,operandWord0,operandWord1,operandWord2,operandWord3,operandWord4,operandWord5);
 }
 
-/* FUN_000f6760 @ 0xf6760 (352 bytes) */
-int FUN_000f6760(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+/* Compiler__getOrCreateConstVector2 @ 0xf6760 (352 bytes) */
+int Compiler__getOrCreateConstVector2(owner, operandWord0, operandWord1, operandWord2, operandWord3, operandWord4, operandWord5, operandWord6)
+  undefined4 owner;
+  undefined4 operandWord0;
+  undefined4 operandWord1;
+  undefined4 operandWord2;
+  undefined4 operandWord3;
+  undefined4 operandWord4;
+  undefined4 operandWord5;
+  undefined4 operandWord6;
 {
-  undefined4 uStack0000001c;
-  undefined4 uStack00000020;
-  undefined4 uStack00000024;
-  undefined4 uStack00000028;
-  undefined4 uStack0000002c;
-  undefined4 uStack00000030;
-  undefined4 uStack00000034;
+  undefined4 operandWord0Home;
+  undefined4 operandWord1Home;
+  undefined4 operandWord2Home;
+  undefined4 operandWord3Home;
+  undefined4 operandWord4Home;
+  undefined4 operandWord5Home;
+  undefined4 operandWord6Home;
   
-  uStack0000001c = param_2;
-  uStack00000020 = param_3;
-  uStack00000024 = param_4;
-  uStack00000028 = param_5;
-  uStack0000002c = param_6;
-  uStack00000030 = param_7;
-  uStack00000034 = param_8;
-  return ((int (*)())FUN_000f6248)(param_1,2,param_2,param_3,param_4,param_5,param_6,param_7);
+  operandWord0Home = operandWord0;
+  operandWord1Home = operandWord1;
+  operandWord2Home = operandWord2;
+  operandWord3Home = operandWord3;
+  operandWord4Home = operandWord4;
+  operandWord5Home = operandWord5;
+  operandWord6Home = operandWord6;
+  return ((int (*)())Compiler__getOrCreateConstVectorN)(owner,2,operandWord0,operandWord1,operandWord2,operandWord3,operandWord4,operandWord5);
 }
 
-/* FUN_000f68c0 @ 0xf68c0 (324 bytes) */
-int FUN_000f68c0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+/* Compiler__getOrCreateConstVector1 @ 0xf68c0 (324 bytes) */
+int Compiler__getOrCreateConstVector1(owner, operandWord0, operandWord1, operandWord2, operandWord3, operandWord4, operandWord5)
+  undefined4 owner;
+  undefined4 operandWord0;
+  undefined4 operandWord1;
+  undefined4 operandWord2;
+  undefined4 operandWord3;
+  undefined4 operandWord4;
+  undefined4 operandWord5;
 {
-  undefined4 uStack0000001c;
-  undefined4 uStack00000020;
-  undefined4 uStack00000024;
-  undefined4 uStack00000028;
-  undefined4 uStack0000002c;
-  undefined4 uStack00000030;
+  undefined4 operandWord0Home;
+  undefined4 operandWord1Home;
+  undefined4 operandWord2Home;
+  undefined4 operandWord3Home;
+  undefined4 operandWord4Home;
+  undefined4 operandWord5Home;
   
-  uStack0000001c = param_2;
-  uStack00000020 = param_3;
-  uStack00000024 = param_4;
-  uStack00000028 = param_5;
-  uStack0000002c = param_6;
-  uStack00000030 = param_7;
-  return ((int (*)())FUN_000f6248)(param_1,1,param_2,param_3,param_4,param_5,param_6,param_7);
+  operandWord0Home = operandWord0;
+  operandWord1Home = operandWord1;
+  operandWord2Home = operandWord2;
+  operandWord3Home = operandWord3;
+  operandWord4Home = operandWord4;
+  operandWord5Home = operandWord5;
+  return ((int (*)())Compiler__getOrCreateConstVectorN)(owner,1,operandWord0,operandWord1,operandWord2,operandWord3,operandWord4,operandWord5);
 }
 
 /* FUN_000f6a04 @ 0xf6a04 (588 bytes) */
@@ -1483,7 +1483,7 @@ LAB_000f6f58:
             local_70 = local_270[4][3];
             local_68 = local_270[4][5];
             local_6c = local_270[4][4];
-            uVar13 = ((int (*)())FUN_000f6760)(*(undefined4 *)(param_2 + 0x3ac),local_244,local_240,local_23c,
+            uVar13 = ((int (*)())Compiler__getOrCreateConstVector2)(*(undefined4 *)(param_2 + 0x3ac),local_244,local_240,local_23c,
                                   local_238,local_234,local_230,local_7c);
           }
           else if (iVar6 < 3) {
@@ -1494,7 +1494,7 @@ LAB_000f6f58:
               local_220 = local_270[3][3];
               local_218 = local_270[3][5];
               local_21c = local_270[3][4];
-              uVar13 = ((int (*)())FUN_000f68c0)(*(undefined4 *)(param_2 + 0x3ac),local_22c,local_228,local_224,
+              uVar13 = ((int (*)())Compiler__getOrCreateConstVector1)(*(undefined4 *)(param_2 + 0x3ac),local_22c,local_228,local_224,
                                     local_220,local_21c,local_218);
             }
             else {
@@ -1521,7 +1521,7 @@ LAB_000f73f0:
             local_c0 = local_270[5][1];
             local_b0 = local_270[5][5];
             local_b4 = local_270[5][4];
-            uVar13 = ((int (*)())FUN_000f65d4)(*(undefined4 *)(param_2 + 0x3ac),local_94,local_90,local_8c,
+            uVar13 = ((int (*)())Compiler__getOrCreateConstVector3)(*(undefined4 *)(param_2 + 0x3ac),local_94,local_90,local_8c,
                                   local_88,local_84,local_80,local_ac);
           }
           else {
@@ -1550,7 +1550,7 @@ LAB_000f73f0:
             local_1a8 = local_270[6][3];
             local_1a0 = local_270[6][5];
             local_1a4 = local_270[6][4];
-            uVar13 = ((int (*)())FUN_000f645c)(*(undefined4 *)(param_2 + 0x3ac),local_dc,local_d8,local_d4,
+            uVar13 = ((int (*)())Compiler__getOrCreateConstVector4)(*(undefined4 *)(param_2 + 0x3ac),local_dc,local_d8,local_d4,
                                   local_d0,local_cc,local_c8,local_f4);
           }
           IRInst__setOperandRef(inst,(*(unsigned int *)((unsigned char *)ghidra_home + 8)),uVar13);
@@ -1569,7 +1569,7 @@ LAB_000f73f0:
           local_160 = local_270[4][3];
           local_158 = local_270[4][5];
           local_15c = local_270[4][4];
-          uVar8 = ((int (*)())FUN_000f554c)(*(undefined4 *)(param_2 + 0x3ac),local_154,local_150,local_14c,
+          uVar8 = ((int (*)())Compiler__getOrCreateLoadConst2)(*(undefined4 *)(param_2 + 0x3ac),local_154,local_150,local_14c,
                                local_148,local_144,local_140,local_16c);
           uVar3 = *(uint *)(param_2 + 0x30);
         }
@@ -1581,7 +1581,7 @@ LAB_000f73f0:
             local_130 = local_270[3][3];
             local_128 = local_270[3][5];
             local_12c = local_270[3][4];
-            uVar8 = ((int (*)())FUN_000f56ac)(*(undefined4 *)(param_2 + 0x3ac),local_13c,local_138,local_134,
+            uVar8 = ((int (*)())Compiler__getOrCreateLoadConst1)(*(undefined4 *)(param_2 + 0x3ac),local_13c,local_138,local_134,
                                  local_130,local_12c,local_128);
             uVar3 = *(uint *)(param_2 + 0x30);
           }
@@ -1609,7 +1609,7 @@ LAB_000f70d4:
           local_120 = local_270[5][1];
           local_110 = local_270[5][5];
           local_114 = local_270[5][4];
-          uVar8 = ((int (*)())FUN_000f53c0)(*(undefined4 *)(param_2 + 0x3ac),local_184,local_180,local_17c,
+          uVar8 = ((int (*)())Compiler__getOrCreateLoadConst3)(*(undefined4 *)(param_2 + 0x3ac),local_184,local_180,local_17c,
                                local_178,local_174,local_170,local_19c);
           uVar3 = *(uint *)(param_2 + 0x30);
         }
@@ -1665,8 +1665,8 @@ LAB_000f76c8:
   } while( true );
 }
 
-/* FUN_000f771c @ 0xf771c (340 bytes) */
-int FUN_000f771c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+/* IRInst__makeLiteralVec4Int @ 0xf771c (340 bytes) */
+int IRInst__makeLiteralVec4Int(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1723,8 +1723,8 @@ int FUN_000f7870(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 #ifndef FBITS
 #define FBITS(x) ({ float fbits_ = (float)(x); *(unsigned int *)&fbits_; })
 #endif
-/* FUN_000f79c4 @ 0xf79c4 (332 bytes) */
-void FUN_000f79c4(undefined4 param_1,undefined4 param_2,undefined4 param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+/* IRInst__makeLiteralVec4Float @ 0xf79c4 (332 bytes) */
+void IRInst__makeLiteralVec4Float(undefined4 param_1,undefined4 param_2,undefined4 param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
   undefined4 local_a0;
   undefined4 local_9c;
@@ -2146,8 +2146,8 @@ int FUN_000f83cc(param_1, param_2)
   return;
 }
 
-/* FUN_000f8588 @ 0xf8588 (72 bytes) */
-int FUN_000f8588(param_1, param_2)
+/* lazyEntryGet @ 0xf8588 (72 bytes) */
+int lazyEntryGet(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -2196,7 +2196,7 @@ int FUN_000f85d0(param_1)
         iVar2 = *(int *)(iVar8 + *(int *)(iVar2 + 8));
         if (iVar2 != 0) {
           iVar9 = param_1[1];
-          iVar2 = ((int (*)())FUN_000f8588)(param_1,*(undefined4 *)(iVar2 + 0xe4));
+          iVar2 = ((int (*)())lazyEntryGet)(param_1,*(undefined4 *)(iVar2 + 0xe4));
           uVar1 = *(uint *)(iVar2 * 4 + iVar9);
           if (uVar1 < *(uint *)(iVar4 + param_1[1])) {
             *(uint *)(iVar4 + param_1[1]) = uVar1;
@@ -2215,7 +2215,7 @@ int FUN_000f85d0(param_1)
       for (piVar12 = *(int **)(*(int *)(iVar4 + *param_1) * 4 + param_1[5]); piVar12 != (int *)0x0;
           piVar12 = (int *)piVar12[1]) {
         iVar7 = *piVar12 * 4;
-        iVar8 = ((int (*)())FUN_000f8588)(param_1,*piVar12);
+        iVar8 = ((int (*)())lazyEntryGet)(param_1,*piVar12);
         iVar2 = *(int *)(param_1[1] + iVar7);
         if (iVar2 == *(int *)(iVar8 * 4 + param_1[1])) {
           *(int *)(iVar7 + param_1[2]) = iVar2;
@@ -2346,8 +2346,8 @@ int FUN_000f89a4(param_1, param_2)
   return *(undefined4 *)(param_1 * 0x24 + param_2 + 0x10);
 }
 
-/* FUN_000f89b4 @ 0xf89b4 (52 bytes) */
-int FUN_000f89b4(param_1)
+/* tableWordOrEight @ 0xf89b4 (52 bytes) */
+int tableWordOrEight(param_1)
   uint param_1;
 {
   if (5 < param_1) {
@@ -2356,8 +2356,8 @@ int FUN_000f89b4(param_1)
   return *(undefined4 *)(PTR_DAT_001e8b84 + param_1 * 4);
 }
 
-/* FUN_000f89e8 @ 0xf89e8 (36 bytes) */
-int FUN_000f89e8(param_1)
+/* remapSelect1To0 @ 0xf89e8 (36 bytes) */
+int remapSelect1To0(param_1)
   int param_1;
 {
   if (param_1 == 1) {
@@ -2366,8 +2366,8 @@ int FUN_000f89e8(param_1)
   return 2 - (uint)(param_1 == 2);
 }
 
-/* FUN_000f8a0c @ 0xf8a0c (36 bytes) */
-int FUN_000f8a0c(param_1)
+/* remapSelectSmall @ 0xf8a0c (36 bytes) */
+int remapSelectSmall(param_1)
   int param_1;
 {
   if (param_1 == 1) {
@@ -2638,7 +2638,7 @@ int FUN_000f9038(param_1, param_2, param_3)
   dVar3 = (double)FLOAT_001aa0d4;
   *(undefined4 *)(operandRecord + 0xc) = 0;
   *(undefined4 *)(operandRecord + 8) = param_2;
-  ((void (*)())FUN_000f79c4)(inst,param_1,2,dVar3,dVar3,dVar3,dVar3);
+  ((void (*)())IRInst__makeLiteralVec4Float)(inst,param_1,2,dVar3,dVar3,dVar3,dVar3);
   DList__pushBack(param_3,inst);
   inst = IRInst__create(0x19,*(undefined4 *)(param_1 + 8));
   operandRecord = IRInst__getOperandRecord(inst,0);
@@ -2648,7 +2648,7 @@ int FUN_000f9038(param_1, param_2, param_3)
   dVar3 = (double)FLOAT_001aa0e8;
   *(undefined4 *)(operandRecord + 0xc) = 0;
   *(undefined4 *)(operandRecord + 8) = param_2;
-  ((void (*)())FUN_000f79c4)(inst,param_1,2,dVar3,dVar3,dVar3,dVar3);
+  ((void (*)())IRInst__makeLiteralVec4Float)(inst,param_1,2,dVar3,dVar3,dVar3,dVar3);
   DList__pushBack(param_3,inst);
   return inst;
 }
@@ -2729,7 +2729,7 @@ int FUN_000f92fc(param_1, inst, param_3)
     *(undefined4 *)(operandRecord + 0xc) = 0;
     *(int *)(operandRecord + 8) = iVar5;
     uVar1 = inst[0x4d];
-    ((int (*)())FUN_000f771c)(inst2,param_1,1,uVar1 & 0xffff | 0x60000,uVar1 & 0xffff | 0x70000,
+    ((int (*)())IRInst__makeLiteralVec4Int)(inst2,param_1,1,uVar1 & 0xffff | 0x60000,uVar1 & 0xffff | 0x70000,
                  uVar1 & 0xffff | 0x70000,uVar1 & 0xffff | 0x70000);
     iVar6 = inst[0x2b];
     iVar7 = inst[0x2c];
@@ -3005,7 +3005,7 @@ int FUN_000f9a58(pass, param_2, param_3, param_4, param_5)
     *(undefined4 *)(operandRecord2 + 0xc) = 0;
     fparam_1 = (double)*(float *)(&DAT_001aa9fc + uVar14 * 4);
     *(int *)(operandRecord2 + 8) = iVar20;
-    ((void (*)())FUN_000f79c4)(pvVar4,pass,2,fparam_1,fparam_1,fparam_1,fparam_1);
+    ((void (*)())IRInst__makeLiteralVec4Float)(pvVar4,pass,2,fparam_1,fparam_1,fparam_1,fparam_1);
     DList__pushBack(param_2,pvVar4);
   }
   uVar14 = 0;
@@ -3027,7 +3027,7 @@ int FUN_000f9a58(pass, param_2, param_3, param_4, param_5)
     operandRecord2 = IRInst__getOperandRecord(pvVar4,0);
     *(undefined4 *)(operandRecord2 + 0xc) = 0;
     *(int *)(operandRecord2 + 8) = iVar20;
-    ((void (*)())FUN_000f79c4)(pvVar4,pass,1,0.0,0.0,0.0,0.0);
+    ((void (*)())IRInst__makeLiteralVec4Float)(pvVar4,pass,1,0.0,0.0,0.0,0.0);
     iVar5 = 4;
     uVar17 = 0;
     pvVar3 = pvVar4;
@@ -3063,7 +3063,7 @@ int FUN_000f9a58(pass, param_2, param_3, param_4, param_5)
     operandRecord2 = IRInst__getOperandRecord(pvVar4,0);
     *(undefined4 *)(operandRecord2 + 0xc) = 0;
     *(int *)(operandRecord2 + 8) = iVar20;
-    ((void (*)())FUN_000f79c4)(pvVar4,pass,1,1.0,1.0,1.0,1.0);
+    ((void (*)())IRInst__makeLiteralVec4Float)(pvVar4,pass,1,1.0,1.0,1.0,1.0);
     iVar5 = 4;
     uVar17 = 0;
     pvVar3 = pvVar4;
@@ -4607,7 +4607,7 @@ LAB_000fc74c:
     *(undefined4 *)(operandRecord2 + 0xc) = 0;
     *(dword **)(operandRecord2 + 8) = pdVar25;
     pdVar17 = (dword *)((int)((unsigned char *)0x0) + 1);
-    ((void (*)())FUN_000f79c4)(inst,param_1,1,fparam_1,fparam_2,fparam_3,fparam_4);
+    ((void (*)())IRInst__makeLiteralVec4Float)(inst,param_1,1,fparam_1,fparam_2,fparam_3,fparam_4);
     *(undefined4 *)((int)inst + 0x9c) = local_98;
     DList__pushBack(param_2,inst);
     uVar22 = *param_4;
@@ -4642,7 +4642,7 @@ LAB_000fc74c:
     pdVar17 = (dword *)((int)((unsigned char *)0x0) + 2);
     *(undefined4 *)(operandRecord2 + 0xc) = 0;
     *(dword **)(operandRecord2 + 8) = pdVar26;
-    ((void (*)())FUN_000f79c4)(inst,param_1,2,0.0,0.0,0.0,0.0);
+    ((void (*)())IRInst__makeLiteralVec4Float)(inst,param_1,2,0.0,0.0,0.0,0.0);
     arena = FUN_000ec208(param_1,uVar24);
     operandRecord2 = IRInst__getOperandRecord(inst,1);
     *(dword **)(operandRecord2 + 8) = pdVar31;
@@ -4676,7 +4676,7 @@ LAB_000fc74c:
     pdVar17 = (dword *)((int)((unsigned char *)0x0) + 2);
     uVar24 = 4;
     bVar2 = true;
-    ((void (*)())FUN_000f79c4)(inst,param_1,2,1.0,1.0,1.0,1.0);
+    ((void (*)())IRInst__makeLiteralVec4Float)(inst,param_1,2,1.0,1.0,1.0,1.0);
     DList__pushBack(param_2,inst);
     uVar22 = *param_4;
     arena = extraout_r4_12;
@@ -4702,7 +4702,7 @@ LAB_000fc74c:
         ((int (*)())FUN_000f8f88)(param_4,inst);
       }
       pdVar17 = (dword *)((int)((unsigned char *)0x0) + 2);
-      ((void (*)())FUN_000f79c4)(inst,param_1,2,2.0,2.0,2.0,2.0);
+      ((void (*)())IRInst__makeLiteralVec4Float)(inst,param_1,2,2.0,2.0,2.0,2.0);
       pdVar31 = pdVar25;
     }
     else {
@@ -4722,7 +4722,7 @@ LAB_000fc74c:
       if (!bVar2) {
         ((int (*)())FUN_000f8f88)(param_4,inst);
       }
-      ((void (*)())FUN_000f79c4)(inst,param_1,2,0.5,0.5,0.5,0.5);
+      ((void (*)())IRInst__makeLiteralVec4Float)(inst,param_1,2,0.5,0.5,0.5,0.5);
       pdVar17 = (dword *)((int)((unsigned char *)0x0) + 1);
       IROperand__setModifierBits((int)inst + 0xbc,1,1);
       pdVar31 = pdVar25;
@@ -4753,8 +4753,8 @@ LAB_000fc74c:
     }
     uVar24 = 4;
     bVar2 = true;
-    ((void (*)())FUN_000f79c4)(inst,param_1,2,2.0,2.0,2.0,2.0);
-    ((void (*)())FUN_000f79c4)(inst,param_1,3,1.0,1.0,1.0,1.0);
+    ((void (*)())IRInst__makeLiteralVec4Float)(inst,param_1,2,2.0,2.0,2.0,2.0);
+    ((void (*)())IRInst__makeLiteralVec4Float)(inst,param_1,3,1.0,1.0,1.0,1.0);
     pdVar17 = (dword *)((int)((unsigned char *)0x0) + 1);
     IROperand__setModifierBits((int)inst + 0xd4,1,1);
     DList__pushBack(param_2,inst);
@@ -4776,7 +4776,7 @@ code_r0x000fcda8:
     operandRecord2 = IRInst__getOperandRecord(inst,1);
     *(undefined4 *)(operandRecord2 + 0xc) = arena;
     *(dword **)(operandRecord2 + 8) = pdVar31;
-    ((void (*)())FUN_000f79c4)(inst,param_1,2,1.0,1.0,1.0,1.0);
+    ((void (*)())IRInst__makeLiteralVec4Float)(inst,param_1,2,1.0,1.0,1.0,1.0);
     arena = FUN_000ec208(param_1,uVar24);
     operandRecord2 = IRInst__getOperandRecord(inst,3);
     *(undefined4 *)(operandRecord2 + 0xc) = arena;
@@ -4801,7 +4801,7 @@ code_r0x000fcda8:
     *(undefined4 *)(operandRecord2 + 0xc) = 0;
     *(dword **)(operandRecord2 + 8) = pdVar26;
     bVar2 = true;
-    ((void (*)())FUN_000f79c4)(inst,param_1,3,1.0,1.0,1.0,1.0);
+    ((void (*)())IRInst__makeLiteralVec4Float)(inst,param_1,3,1.0,1.0,1.0,1.0);
     pdVar17 = (dword *)((int)((unsigned char *)0x0) + 1);
     IROperand__setModifierBits((int)inst + 0xd4,1,1);
     DList__pushBack(param_2,inst);
@@ -5692,7 +5692,7 @@ code_r0x000fed00:
       ((int (*)())FUN_000f8aa0)(param_1,&local_178,ppppuVar45,1,piVar18);
       iVar43 = IRInst__getOperandRecord(piVar18,1);
       *(undefined4 *)(iVar43 + 0x10) = 0;
-      ((void (*)())FUN_000f79c4)(piVar18,param_1,2,0.0,1.0,0.0,0.0);
+      ((void (*)())IRInst__makeLiteralVec4Float)(piVar18,param_1,2,0.0,1.0,0.0,0.0);
       local_8c = (uint)(short)((ushort)((uint)pppppuVar15 >> 0x10) & 0x3f);
       local_80 = local_8c | 0x120000;
       in_r8 = (uint ******)(local_8c | 0x100000);
@@ -5700,7 +5700,7 @@ code_r0x000fed00:
       local_8c = local_8c | 0xf0000;
       local_88 = (uint *****)in_r8;
       local_84 = (uint *****)in_r7;
-      ((int (*)())FUN_000f771c)(piVar18,param_1,3,local_80,in_r7,in_r8,local_8c);
+      ((int (*)())IRInst__makeLiteralVec4Int)(piVar18,param_1,3,local_80,in_r7,in_r8,local_8c);
       iVar43 = IRInst__getOperandRecord(piVar18,0);
       *(undefined4 *)(iVar43 + 0xc) = 0x2b;
       *(undefined4 *)(iVar43 + 8) = 0;
@@ -6605,7 +6605,7 @@ code_r0x00103718:
         fVar5 = 1.0;
 code_r0x001021c0:
         dVar54 = (double)fVar5;
-        ((void (*)())FUN_000f79c4)(ppppppuVar48,param_1,2,dVar54,dVar54,dVar54,dVar54);
+        ((void (*)())IRInst__makeLiteralVec4Float)(ppppppuVar48,param_1,2,dVar54,dVar54,dVar54,dVar54);
         IROperand__setModifierBits(ppppppuVar48 + 0x2f,1,1);
       }
       else if (uVar10 < 3) {
@@ -6623,7 +6623,7 @@ code_r0x001021c0:
           fVar5 = 1.0;
         }
         dVar54 = (double)fVar5;
-        ((void (*)())FUN_000f79c4)(ppppppuVar48,param_1,2,dVar54,dVar54,dVar54,dVar54);
+        ((void (*)())IRInst__makeLiteralVec4Float)(ppppppuVar48,param_1,2,dVar54,dVar54,dVar54,dVar54);
       }
 code_r0x00102220:
       ((int (*)())FUN_000f92fc)(param_1,ppppppuVar48,local_180);
@@ -6864,17 +6864,17 @@ code_r0x00101020:
       puVar26[0xd] = 0;
       puVar26[0xe] = 0;
       if ((int)*ppppppuVar49 < 0) {
-        uVar31 = ((int (*)())FUN_000f8a0c)((uint)param_2[0x25] & 7);
+        uVar31 = ((int (*)())remapSelectSmall)((uint)param_2[0x25] & 7);
         *puVar26 = uVar31;
-        uVar31 = ((int (*)())FUN_000f8a0c)((uint)param_2[0x25] >> 3 & 7);
+        uVar31 = ((int (*)())remapSelectSmall)((uint)param_2[0x25] >> 3 & 7);
         puVar26[1] = uVar31;
-        uVar31 = ((int (*)())FUN_000f8a0c)((uint)param_2[0x25] >> 0xc & 7);
+        uVar31 = ((int (*)())remapSelectSmall)((uint)param_2[0x25] >> 0xc & 7);
         puVar26[2] = uVar31;
-        uVar31 = ((int (*)())FUN_000f8a0c)((uint)param_2[0x25] >> 6 & 7);
+        uVar31 = ((int (*)())remapSelectSmall)((uint)param_2[0x25] >> 6 & 7);
         puVar26[5] = uVar31;
-        uVar31 = ((int (*)())FUN_000f8a0c)((uint)param_2[0x25] >> 9 & 7);
+        uVar31 = ((int (*)())remapSelectSmall)((uint)param_2[0x25] >> 9 & 7);
         puVar26[6] = uVar31;
-        uVar31 = ((int (*)())FUN_000f8a0c)((uint)param_2[0x25] >> 0xf & 7);
+        uVar31 = ((int (*)())remapSelectSmall)((uint)param_2[0x25] >> 0xf & 7);
         puVar26[3] = uVar31;
         puVar26[0xb] = (ushort)((uint)param_2[0x25] >> 0x12) & 0x7f;
         if ((uVar10 & 4) != 0) {
@@ -6982,7 +6982,7 @@ code_r0x00101020:
         IRInst__setOperandRef(pvVar16,2,uVar50);
         iVar43 = IRInst__getOperandRecord(pvVar16,2);
         *(undefined4 *)(iVar43 + 0x10) = 0x2020202;
-        ((void (*)())FUN_000f79c4)(pvVar16,param_1,3,1.5,1.5,1.5,1.5);
+        ((void (*)())IRInst__makeLiteralVec4Float)(pvVar16,param_1,3,1.5,1.5,1.5,1.5);
         ((int (*)())FUN_000f92fc)(param_1,pvVar16,local_180);
         piVar18 = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
         IRInst__setOperandRef(piVar18,0,uVar50);
@@ -7103,7 +7103,7 @@ code_r0x001019bc:
           ((int (*)())FUN_000f92fc)(param_1,pvVar16,local_180);
           iVar43 = *(int *)(param_1 + 0x78);
         }
-        iVar43 = ((int (*)())FUN_000f89e8)(*(undefined4 *)(iVar20 + iVar43));
+        iVar43 = ((int (*)())remapSelect1To0)(*(undefined4 *)(iVar20 + iVar43));
         piVar18[0x4e] = iVar43;
         *(short *)(piVar18[0x4f] + 0x12) = (short)local_c4;
         ((int (*)())FUN_000f92fc)(param_1,piVar18,local_180);
@@ -7124,7 +7124,7 @@ code_r0x001019bc:
           local_9c = local_98 | 0x130000;
           local_98 = local_98 | 0x130000;
           *(int *)(iVar43 + 8) = iVar21;
-          ((int (*)())FUN_000f771c)(pvVar16,param_1,2,local_90,local_94,local_98,local_9c);
+          ((int (*)())IRInst__makeLiteralVec4Int)(pvVar16,param_1,2,local_90,local_94,local_98,local_9c);
           ((int (*)())FUN_000f92fc)(param_1,pvVar16,local_180);
         }
       }
@@ -7202,7 +7202,7 @@ code_r0x001019bc:
       }
       *(uint *)(param_1 + 0x84) = 1 << ((uint)pppppuVar11 & 0x3f) | *(uint *)(param_1 + 0x84);
       pppppuVar15 = (uint *****)
-                    ((int (*)())FUN_000f89e8)(*(undefined4 *)(*(int *)(param_1 + 0x78) + (int)pppppuVar11 * 0xc))
+                    ((int (*)())remapSelect1To0)(*(undefined4 *)(*(int *)(param_1 + 0x78) + (int)pppppuVar11 * 0xc))
       ;
       ppppppuVar48[0x4c] = pppppuVar11;
       ppppppuVar48[0x4e] = pppppuVar15;
@@ -7218,7 +7218,7 @@ code_r0x001019bc:
       iVar43 = IRInst__getOperandRecord(ppppppuVar48,1);
       *(uint *******)(iVar43 + 0x10) = ppppppuVar39;
       pppppuVar15 = (uint *****)
-                    ((int (*)())FUN_000f89e8)(*(undefined4 *)((int)pppppuVar11 * 0xc + *(int *)(param_1 + 0x78)))
+                    ((int (*)())remapSelect1To0)(*(undefined4 *)((int)pppppuVar11 * 0xc + *(int *)(param_1 + 0x78)))
       ;
       ppppppuVar48[0x4e] = pppppuVar15;
       ((int (*)())FUN_000f92fc)(param_1,ppppppuVar48,local_180);
@@ -7296,7 +7296,7 @@ code_r0x001019bc:
         *(uint *)(param_1 + 0x7c) = uVar10;
       }
       *(uint *)(param_1 + 0x84) = 1 << (uVar10 & 0x3f) | *(uint *)(param_1 + 0x84);
-      arena = ((int (*)())FUN_000f89e8)(*(undefined4 *)(uVar10 * 0xc + *(int *)(param_1 + 0x78)));
+      arena = ((int (*)())remapSelect1To0)(*(undefined4 *)(uVar10 * 0xc + *(int *)(param_1 + 0x78)));
       *(undefined4 *)((int)pvVar16 + 0x138) = arena;
       *(uint *)((int)pvVar16 + 0x130) = uVar10;
       *(ushort *)(*(int *)((int)pvVar16 + 0x13c) + 0x12) = uVar7;
@@ -7314,7 +7314,7 @@ code_r0x00101cbc:
       goto code_r0x00101d1c;
     case 0x30:
       iVar43 = iVar47 + (int)local_17c * 4;
-      ((void (*)())FUN_000f79c4)(ppppppuVar38,param_1,ppppppuVar40,(double)*(float *)(iVar43 + 4),
+      ((void (*)())IRInst__makeLiteralVec4Float)(ppppppuVar38,param_1,ppppppuVar40,(double)*(float *)(iVar43 + 4),
                    (double)*(float *)(iVar43 + 8),(double)*(float *)(iVar43 + 0xc),
                    (double)*(float *)(iVar43 + 0x10));
       iVar43 = IRInst__getOperandRecord(ppppppuVar38,ppppppuVar40);
@@ -7372,8 +7372,8 @@ code_r0x00101cbc:
       switch(*(undefined4 *)(iVar47 + (int)local_17c * 4)) {
       case 0x62:
         pvVar16 = IRInst__create(0x8b,*(undefined4 *)(param_1 + 8));
-        ((void (*)())FUN_000f79c4)(pvVar16,param_1,1,1.0,1.0,1.0,1.0);
-        ((void (*)())FUN_000f79c4)(pvVar16,param_1,2,1.0,1.0,1.0,1.0);
+        ((void (*)())IRInst__makeLiteralVec4Float)(pvVar16,param_1,1,1.0,1.0,1.0,1.0);
+        ((void (*)())IRInst__makeLiteralVec4Float)(pvVar16,param_1,2,1.0,1.0,1.0,1.0);
         *(undefined4 *)((int)pvVar16 + 300) = 0;
         arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
         puVar32 = (undefined4 *)Arena__alloc(arena,0x15c);
@@ -7743,7 +7743,7 @@ code_r0x00103300:
     case 0x42:
       local_17c = (int *)((int)local_17c + 1);
       dVar54 = (double)*(float *)(iVar47 + (int)local_17c * 4);
-      ((void (*)())FUN_000f79c4)(ppppppuVar38,param_1,ppppppuVar40,dVar54,dVar54,dVar54,dVar54);
+      ((void (*)())IRInst__makeLiteralVec4Float)(ppppppuVar38,param_1,ppppppuVar40,dVar54,dVar54,dVar54,dVar54);
       goto code_r0x001025c0;
     case 0x43:
     case 0x44:
@@ -7812,7 +7812,7 @@ code_r0x001022b4:
       ppppppuVar38[0x4c] = pppppuVar15;
       local_bc = 0;
       pppppuVar15 = (uint *****)
-                    ((int (*)())FUN_000f89e8)(*(undefined4 *)((int)pppppuVar15 * 0xc + *(int *)(param_1 + 0x78)))
+                    ((int (*)())remapSelect1To0)(*(undefined4 *)((int)pppppuVar15 * 0xc + *(int *)(param_1 + 0x78)))
       ;
       ppppppuVar38[0x4e] = pppppuVar15;
       break;

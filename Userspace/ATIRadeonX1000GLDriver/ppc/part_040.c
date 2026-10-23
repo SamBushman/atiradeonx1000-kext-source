@@ -475,8 +475,8 @@ int FUN_0012bb48(param_1, param_2)
   return param_2;
 }
 
-/* FUN_0012c0e4 @ 0x12c0e4 (80 bytes) */
-int FUN_0012c0e4(param_1)
+/* Program__hasKillTexture @ 0x12c0e4 (80 bytes) */
+int Program__hasKillTexture(param_1)
   int param_1;
 {
   int iVar1;
@@ -522,8 +522,8 @@ int FudoPs__vslot69_shouldFlattenIf(this, param_2, param_3, param_4, param_5, pa
   if (iVar4 != 0) {
     iVar9 = *(int *)(param_2 + 0x134);
     iVar8 = *(int *)(param_2 + 0x138);
-    iVar4 = ((int (*)())FUN_0012c0e4)(iVar9);
-    if ((iVar4 == 0) && (iVar4 = ((int (*)())FUN_0012c0e4)(iVar8), iVar4 == 0)) {
+    iVar4 = ((int (*)())Program__hasKillTexture)(iVar9);
+    if ((iVar4 == 0) && (iVar4 = ((int (*)())Program__hasKillTexture)(iVar8), iVar4 == 0)) {
       uVar7 = 3;
       uVar11 = FUN_000e0830(param_3,0,3);
       if ((int)((ulonglong)uVar11 >> 0x20) == 0) {
@@ -2090,7 +2090,7 @@ int FUN_0012eacc(param_1)
   *(int *)(operandRecord3 + 8) = iVar23;
   fparam_1 = (double)FLOAT_001aa0d4;
   *(undefined4 *)(operandRecord3 + 0xc) = 0;
-  ((void (*)())FUN_000f79c4)(arena,param_1,1,fparam_1,fparam_1,fparam_1,fparam_1);
+  ((void (*)())IRInst__makeLiteralVec4Float)(arena,param_1,1,fparam_1,fparam_1,fparam_1,fparam_1);
   FUN_000f92fc(param_1,arena,*(undefined4 *)(param_1 + 0x3a0));
   iVar24 = *(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1;
   *(int *)(*(int *)(param_1 + 8) + 0x3ac) = iVar24;
@@ -3045,8 +3045,8 @@ int FUN_001304a4(param_1)
   return iVar5;
 }
 
-/* FUN_0013056c @ 0x13056c (40 bytes) */
-int FUN_0013056c(param_1, param_2)
+/* BitSet__setBit42c @ 0x13056c (40 bytes) */
+int BitSet__setBit42c(param_1, param_2)
   int param_1;
   uint param_2;
 {

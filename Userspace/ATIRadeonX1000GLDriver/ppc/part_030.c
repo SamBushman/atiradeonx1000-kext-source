@@ -631,14 +631,14 @@ int FUN_0010aa7c(this, compiler)
   return;
 }
 
-/* FUN_0010aad4 @ 0x10aad4 (40 bytes) */
-double FUN_0010aad4(int param_1)
+/* outputScaleFromExponent @ 0x10aad4 (40 bytes) */
+double outputScaleFromExponent(int param_1)
 {
   return (double)*(float *)(&DAT_001af9ec + param_1 * 4);
 }
 
-/* FUN_0010aafc @ 0x10aafc (68 bytes) */
-undefined4 FUN_0010aafc(double fparam_1)
+/* isOutputScaleValue @ 0x10aafc (68 bytes) */
+undefined4 isOutputScaleValue(double fparam_1)
 {
   float *pfVar1;
   int iVar2;
@@ -655,8 +655,8 @@ undefined4 FUN_0010aafc(double fparam_1)
   return 0;
 }
 
-/* FUN_0010ab40 @ 0x10ab40 (76 bytes) */
-int FUN_0010ab40(double fparam_1)
+/* outputScaleExponent @ 0x10ab40 (76 bytes) */
+int outputScaleExponent(double fparam_1)
 {
   float *pfVar1;
   int iVar2;
@@ -676,8 +676,8 @@ int FUN_0010ab40(double fparam_1)
   return 0;
 }
 
-/* FUN_0010ab8c @ 0x10ab8c (172 bytes) */
-undefined4 FUN_0010ab8c(undefined4 param_1,undefined4 *param_2,double fparam_1)
+/* tryOutputScaleExponent @ 0x10ab8c (172 bytes) */
+undefined4 tryOutputScaleExponent(undefined4 param_1,undefined4 *param_2,double fparam_1)
 {
   undefined4 uVar1;
   
@@ -819,7 +819,7 @@ int FUN_0010aee8(param_1, param_2, param_3_w)
   float param_3 = GH_U2F(param_3_w);
   double dVar1;
   
-  dVar1 = (double)((double (*)())FUN_0010aad4)(*(undefined4 *)(param_2 + 0x124));
+  dVar1 = (double)((double (*)())outputScaleFromExponent)(*(undefined4 *)(param_2 + 0x124));
   *param_1 = (float)(dVar1 * (double)param_3);
   return param_1;
 }
@@ -1037,7 +1037,7 @@ int FUN_0010b32c(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefi
   else {
     uVar2 = 1;
   }
-  ((void (*)())FUN_000f79c4)(inst,uVar5,uVar2,fparam_1,fparam_1,fparam_1,fparam_1);
+  ((void (*)())IRInst__makeLiteralVec4Float)(inst,uVar5,uVar2,fparam_1,fparam_1,fparam_1,fparam_1);
   iVar6 = *(int *)(compiler + 0x3ac) + -1;
   *(int *)(compiler + 0x3ac) = iVar6;
   operandRecord = IRInst__getOperandRecord(inst,0);
@@ -1122,8 +1122,8 @@ int IRInst__getCompareCondition(inst)
   }
 }
 
-/* FUN_0010b820 @ 0x10b820 (220 bytes) */
-bool FUN_0010b820(undefined4 param_1,double fparam_1,double fparam_2)
+/* evaluateCompareFloats @ 0x10b820 (220 bytes) */
+bool evaluateCompareFloats(undefined4 param_1,double fparam_1,double fparam_2)
 {
   undefined4 compareCondition;
   bool bVar2;
@@ -1343,7 +1343,7 @@ void FUN_0010bd50(int inst,undefined4 param_2,int param_3,int compiler,double fp
   undefined4 *puVar6;
   
   *(int *)(inst + 0x84) = param_3;
-  ((void (*)())FUN_000f79c4)(inst,*(undefined4 *)(compiler + 0x6c4),param_3,fparam_1,fparam_1,fparam_1,fparam_1)
+  ((void (*)())IRInst__makeLiteralVec4Float)(inst,*(undefined4 *)(compiler + 0x6c4),param_3,fparam_1,fparam_1,fparam_1,fparam_1)
   ;
   arena = DAT_001af9fc;
   if (param_3 == 0) {

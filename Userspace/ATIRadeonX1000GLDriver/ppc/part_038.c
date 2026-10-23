@@ -288,22 +288,22 @@ int ImmedConstBuffer__vslot283(this, param_2, param_3, compiler)
   return allocation + 1;
 }
 
-/* FUN_00126878 @ 0x126878 (44 bytes) */
-int FUN_00126878(param_1)
+/* RegKind__flagBit1 @ 0x126878 (44 bytes) */
+int RegKind__flagBit1(param_1)
   int param_1;
 {
   return *(uint *)(&DAT_001ea904 + param_1 * 0x10) >> 1 & 1;
 }
 
-/* FUN_001268a4 @ 0x1268a4 (44 bytes) */
-int FUN_001268a4(param_1)
+/* RegKind__flagBit9 @ 0x1268a4 (44 bytes) */
+int RegKind__flagBit9(param_1)
   int param_1;
 {
   return *(uint *)(&DAT_001ea904 + param_1 * 0x10) >> 9 & 1;
 }
 
-/* FUN_001268d0 @ 0x1268d0 (40 bytes) */
-int FUN_001268d0(param_1)
+/* RegKind__byte4 @ 0x1268d0 (40 bytes) */
+int RegKind__byte4(param_1)
   int param_1;
 {
   return (DAT_001ea908)[param_1 * 0x10];
@@ -604,29 +604,29 @@ int ImmedConstBuffer__vslot39(this, param_2, param_3, compiler)
   return allocation + 1;
 }
 
-/* FUN_00127264 @ 0x127264 (8 bytes) */
-int FUN_00127264(param_1)
+/* ConstKey__lanes1 @ 0x127264 (8 bytes) */
+int ConstKey__lanes1(param_1)
   int param_1;
 {
   return *(undefined4 *)(param_1 + 0x20);
 }
 
-/* FUN_0012726c @ 0x12726c (16 bytes) */
-int FUN_0012726c(param_1)
+/* ConstKey__lanes2 @ 0x12726c (16 bytes) */
+int ConstKey__lanes2(param_1)
   int param_1;
 {
   return *(int *)(param_1 + 0x20) + *(int *)(param_1 + 0x38);
 }
 
-/* FUN_0012727c @ 0x12727c (24 bytes) */
-int FUN_0012727c(param_1)
+/* ConstKey__lanes3 @ 0x12727c (24 bytes) */
+int ConstKey__lanes3(param_1)
   int param_1;
 {
   return *(int *)(param_1 + 0x20) + *(int *)(param_1 + 0x38) + *(int *)(param_1 + 0x50);
 }
 
-/* FUN_00127294 @ 0x127294 (32 bytes) */
-int FUN_00127294(param_1)
+/* ConstKey__lanes4 @ 0x127294 (32 bytes) */
+int ConstKey__lanes4(param_1)
   int param_1;
 {
   return *(int *)(param_1 + 0x20) + *(int *)(param_1 + 0x38) + *(int *)(param_1 + 0x50) +
@@ -831,8 +831,8 @@ int FUN_00127608(param_1, param_2, param_3, param_4)
   return callResult;
 }
 
-/* FUN_0012766c @ 0x12766c (52 bytes) */
-int FUN_0012766c(param_1, param_2)
+/* ConstKey__compare1 @ 0x12766c (52 bytes) */
+int ConstKey__compare1(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -843,8 +843,8 @@ int FUN_0012766c(param_1, param_2)
   return 0xffffffff;
 }
 
-/* FUN_001276a0 @ 0x1276a0 (92 bytes) */
-int FUN_001276a0(param_1, param_2)
+/* ConstKey__compare2 @ 0x1276a0 (92 bytes) */
+int ConstKey__compare2(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -858,8 +858,8 @@ int FUN_001276a0(param_1, param_2)
   return 0xffffffff;
 }
 
-/* FUN_001276fc @ 0x1276fc (124 bytes) */
-int FUN_001276fc(param_1, param_2)
+/* ConstKey__compare3 @ 0x1276fc (124 bytes) */
+int ConstKey__compare3(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -878,8 +878,8 @@ int FUN_001276fc(param_1, param_2)
   return 0xffffffff;
 }
 
-/* FUN_00127778 @ 0x127778 (156 bytes) */
-int FUN_00127778(param_1, param_2)
+/* ConstKey__compare4 @ 0x127778 (156 bytes) */
+int ConstKey__compare4(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -900,8 +900,8 @@ int FUN_00127778(param_1, param_2)
   return 0xffffffff;
 }
 
-/* FUN_00127814 @ 0x127814 (60 bytes) */
-int FUN_00127814(param_1, param_2)
+/* keyEqualsThreeWords @ 0x127814 (60 bytes) */
+int keyEqualsThreeWords(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -1004,7 +1004,7 @@ int FUN_00127994(compiler, param_2)
   puVar5 = allocation + 1;
   *allocation = arena;
   uVar1 = 1;
-  allocation[4] = FUN_00127814;
+  allocation[4] = keyEqualsThreeWords;
   allocation[1] = 1;
   iVar3 = 0x20;
   allocation[5] = FUN_001272b4;
@@ -1025,10 +1025,10 @@ int FUN_00127994(compiler, param_2)
   puVar5 = allocation + 1;
   *allocation = arena;
   uVar1 = 1;
-  allocation[4] = FUN_0012766c;
+  allocation[4] = ConstKey__compare1;
   allocation[1] = 1;
   iVar3 = 0x20;
-  allocation[5] = FUN_00127264;
+  allocation[5] = ConstKey__lanes1;
   allocation[6] = arena;
   do {
     uVar1 = uVar1 << 1;
@@ -1046,10 +1046,10 @@ int FUN_00127994(compiler, param_2)
   puVar5 = allocation + 1;
   *allocation = arena;
   uVar1 = 1;
-  allocation[4] = FUN_001276a0;
+  allocation[4] = ConstKey__compare2;
   allocation[1] = 1;
   iVar3 = 0x20;
-  allocation[5] = FUN_0012726c;
+  allocation[5] = ConstKey__lanes2;
   allocation[6] = arena;
   do {
     uVar1 = uVar1 << 1;
@@ -1067,10 +1067,10 @@ int FUN_00127994(compiler, param_2)
   puVar5 = allocation + 1;
   *allocation = arena;
   uVar1 = 1;
-  allocation[4] = FUN_001276fc;
+  allocation[4] = ConstKey__compare3;
   allocation[1] = 1;
   iVar3 = 0x20;
-  allocation[5] = FUN_0012727c;
+  allocation[5] = ConstKey__lanes3;
   allocation[6] = arena;
   do {
     uVar1 = uVar1 << 1;
@@ -1088,10 +1088,10 @@ int FUN_00127994(compiler, param_2)
   puVar5 = allocation + 1;
   *allocation = arena;
   uVar1 = 1;
-  allocation[4] = FUN_00127778;
+  allocation[4] = ConstKey__compare4;
   allocation[1] = 1;
   iVar3 = 0x20;
-  allocation[5] = FUN_00127294;
+  allocation[5] = ConstKey__lanes4;
   allocation[6] = arena;
   do {
     uVar1 = uVar1 << 1;
@@ -1248,4 +1248,4 @@ asm(".set FUN_00127ecc, _KhanPs__vslot78_getLimit_0x20Or0x40");
  * "thunk_FUN_xxx" IS calling FUN_xxx - which is exactly what the original binary's trampoline
  * did. */
 asm(".globl _thunk_FUN_001268a4");
-asm(".set _thunk_FUN_001268a4, _FUN_001268a4");
+asm(".set _thunk_FUN_001268a4, _RegKind__flagBit9");

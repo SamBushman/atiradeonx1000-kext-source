@@ -47,8 +47,8 @@ int FUN_000f2e18(param_1)
   return 1;
 }
 
-/* FUN_000f2e50 @ 0xf2e50 (72 bytes) */
-int FUN_000f2e50(param_1, param_2)
+/* laneBytes__mapTwoThreeToOne @ 0xf2e50 (72 bytes) */
+int laneBytes__mapTwoThreeToOne(param_1, param_2)
   undefined4 *param_1;
   undefined4 param_2;
 {
@@ -70,8 +70,8 @@ int FUN_000f2e50(param_1, param_2)
   return param_1;
 }
 
-/* FUN_000f2e98 @ 0xf2e98 (144 bytes) */
-int FUN_000f2e98(param_1, param_2)
+/* laneBytes__mergeOneAndTwo @ 0xf2e98 (144 bytes) */
+int laneBytes__mergeOneAndTwo(param_1, param_2)
   undefined4 *param_1;
   undefined4 param_2;
 {
@@ -226,8 +226,8 @@ int FUN_000f302c(param_1, param_2, param_3)
   return param_1;
 }
 
-/* FUN_000f308c @ 0xf308c (72 bytes) */
-int FUN_000f308c(param_1)
+/* laneBytes__commonSelect @ 0xf308c (72 bytes) */
+int laneBytes__commonSelect(param_1)
   undefined4 param_1;
 {
   unsigned int ghidra_home[8] = { param_1, 0, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
@@ -694,8 +694,8 @@ int FUN_000f370c(param_1, param_2)
   return;
 }
 
-/* FUN_000f3764 @ 0xf3764 (84 bytes) */
-int FUN_000f3764(param_1, param_2)
+/* laneBytes__clearSetLanes @ 0xf3764 (84 bytes) */
+int laneBytes__clearSetLanes(param_1, param_2)
   undefined4 *param_1;
   undefined4 param_2;
 {
@@ -758,8 +758,8 @@ int FUN_000f3884(param_1)
   return uVar1;
 }
 
-/* FUN_000f388c @ 0xf388c (124 bytes) */
-int FUN_000f388c(param_1, param_2, param_3)
+/* laneMask__fromSelectBytes @ 0xf388c (124 bytes) */
+int laneMask__fromSelectBytes(param_1, param_2, param_3)
   undefined4 *param_1;
   uint param_2;
   int param_3;
@@ -1228,7 +1228,7 @@ switchD_000f40d0_caseD_2:
     return param_1;
   case 3:
     if (param_3 - 1U < 2) {
-      ((int (*)())FUN_000f388c)(&local_40,local_58,2);
+      ((int (*)())laneMask__fromSelectBytes)(&local_40,local_58,2);
       *param_1 = local_40;
       return param_1;
     }
@@ -1237,11 +1237,11 @@ switchD_000f40d0_caseD_2:
     }
     goto LAB_000f4584;
   case 4:
-    ((int (*)())FUN_000f388c)(&local_3c,local_58,3);
+    ((int (*)())laneMask__fromSelectBytes)(&local_3c,local_58,3);
     *param_1 = local_3c;
     break;
   case 5:
-    ((int (*)())FUN_000f388c)(&local_38,local_58,4);
+    ((int (*)())laneMask__fromSelectBytes)(&local_38,local_58,4);
     *param_1 = local_38;
     break;
   case 6:
@@ -1258,19 +1258,19 @@ switchD_000f40d0_caseD_2:
       } while (bVar1);
     }
     else {
-      ((int (*)())FUN_000f388c)(&local_34,local_58,4);
+      ((int (*)())laneMask__fromSelectBytes)(&local_34,local_58,4);
       *param_1 = local_34;
     }
     break;
   case 7:
     if (param_3 < 3) {
-      ((int (*)())FUN_000f388c)(&local_30,local_58,3);
+      ((int (*)())laneMask__fromSelectBytes)(&local_30,local_58,3);
       *param_1 = local_30;
       return param_1;
     }
     goto LAB_000f4594;
   case 8:
-    ((int (*)())FUN_000f388c)(&local_2c,local_58,4);
+    ((int (*)())laneMask__fromSelectBytes)(&local_2c,local_58,4);
     *param_1 = local_2c;
     break;
   case 9:
@@ -1648,8 +1648,8 @@ int FUN_000f4a5c(param_1)
   return iVar1;
 }
 
-/* FUN_000f4a70 @ 0xf4a70 (20 bytes) */
-int FUN_000f4a70(param_1)
+/* isRegKindBelow21 @ 0xf4a70 (20 bytes) */
+int isRegKindBelow21(param_1)
   uint param_1;
 {
   return param_1 >> 0x10 < 0x15;
@@ -1724,8 +1724,8 @@ LAB_000f4b94:
   return iVar1;
 }
 
-/* FUN_000f4bc8 @ 0xf4bc8 (32 bytes) */
-int FUN_000f4bc8(param_1_w, param_2_w)
+/* floatLess @ 0xf4bc8 (32 bytes) */
+int floatLess(param_1_w, param_2_w)
   unsigned int param_1_w;
   unsigned int param_2_w;
 {
@@ -1734,8 +1734,8 @@ int FUN_000f4bc8(param_1_w, param_2_w)
   return param_2 < param_1;
 }
 
-/* FUN_000f4be8 @ 0xf4be8 (92 bytes) */
-int FUN_000f4be8(param_1, param_2)
+/* BitSet__findFirstSet @ 0xf4be8 (92 bytes) */
+int BitSet__findFirstSet(param_1, param_2)
   uint *param_1;
   int param_2;
 {
@@ -1776,73 +1776,75 @@ int noop_f4c44()
   return;
 }
 
-/* FUN_000f4c48 @ 0xf4c48 (268 bytes) */
-int FUN_000f4c48(param_1, param_2, param_3, param_4, param_5, param_6)
-  int param_1;
-  int param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+/* ConstKey__compareOrdered @ 0xf4c48 (268 bytes) */
+int ConstKey__compareOrdered(keyA, keyB, passThroughR5, passThroughR6, passThroughR7, passThroughR8)
+  int keyA;
+  int keyB;
+  undefined4 passThroughR5;
+  undefined4 passThroughR6;
+  undefined4 passThroughR7;
+  undefined4 passThroughR8;
 {
-  int iVar1;
-  uint uVar2;
-  int iVar3;
-  int iVar4;
-  bool bVar5;
-  int iVar6;
+  uint kindA;
+  int operandIndex;
+  int operandA;
+  uint presenceBit;
+  int operandB;
+  int presentOperands;
+  bool aIsLess;
+  int presenceLoopRemaining;
   
-  iVar4 = 0;
-  uVar2 = 3;
-  iVar6 = 4;
+  presentOperands = 0;
+  presenceBit = 3;
+  presenceLoopRemaining = 4;
   do {
-    if (((int)*(char *)(param_1 + 0x15c) >> (uVar2 & 0x3f) & 1U) == 0) {
-      if (((int)*(char *)(param_2 + 0x15c) >> (uVar2 & 0x3f) & 1U) != 0) {
+    if (((int)*(char *)(keyA + 0x15c) >> (presenceBit & 0x3f) & 1U) == 0) {
+      if (((int)*(char *)(keyB + 0x15c) >> (presenceBit & 0x3f) & 1U) != 0) {
         return 1;
       }
     }
     else {
-      if (((int)*(char *)(param_2 + 0x15c) >> (uVar2 & 0x3f) & 1U) == 0) {
+      if (((int)*(char *)(keyB + 0x15c) >> (presenceBit & 0x3f) & 1U) == 0) {
         return 0xffffffff;
       }
-      iVar4 = iVar4 + 1;
+      presentOperands = presentOperands + 1;
     }
-    uVar2 = uVar2 - 1;
-    iVar6 = iVar6 + -1;
-  } while (iVar6 != 0);
-  if (0 < iVar4) {
-    iVar6 = 0;
+    presenceBit = presenceBit - 1;
+    presenceLoopRemaining = presenceLoopRemaining + -1;
+  } while (presenceLoopRemaining != 0);
+  if (0 < presentOperands) {
+    operandIndex = 0;
     do {
-      iVar1 = iVar6 * 0x18 + 0x10;
-      iVar3 = param_2 + iVar1;
-      iVar1 = param_1 + iVar1;
-      uVar2 = *(uint *)(iVar1 + 0xc);
-      if (uVar2 != *(uint *)(iVar3 + 0xc)) {
-        bVar5 = uVar2 < *(uint *)(iVar3 + 0xc);
+      operandA = operandIndex * 0x18 + 0x10;
+      operandB = keyB + operandA;
+      operandA = keyA + operandA;
+      kindA = *(uint *)(operandA + 0xc);
+      if (kindA != *(uint *)(operandB + 0xc)) {
+        aIsLess = kindA < *(uint *)(operandB + 0xc);
 LAB_000f4d20:
-        if (!bVar5) {
+        if (!aIsLess) {
           return 1;
         }
         return 0xffffffff;
       }
-      if (*(uint *)(iVar1 + 0x10) != *(uint *)(iVar3 + 0x10)) {
-        if (uVar2 == 2) {
-          bVar5 = *(float *)(iVar1 + 0x10) < *(float *)(iVar3 + 0x10);
+      if (*(uint *)(operandA + 0x10) != *(uint *)(operandB + 0x10)) {
+        if (kindA == 2) {
+          aIsLess = *(float *)(operandA + 0x10) < *(float *)(operandB + 0x10);
         }
         else {
-          bVar5 = *(uint *)(iVar1 + 0x10) < *(uint *)(iVar3 + 0x10);
+          aIsLess = *(uint *)(operandA + 0x10) < *(uint *)(operandB + 0x10);
         }
         goto LAB_000f4d20;
       }
-      iVar4 = iVar4 + -1;
-      iVar6 = iVar6 + 1;
-    } while (iVar4 != 0);
+      presentOperands = presentOperands + -1;
+      operandIndex = operandIndex + 1;
+    } while (presentOperands != 0);
   }
   return 0;
 }
 
-/* FUN_000f4d54 @ 0xf4d54 (44 bytes) */
-int FUN_000f4d54(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+/* ConstKey__countPresentOperands @ 0xf4d54 (44 bytes) */
+int ConstKey__countPresentOperands(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;

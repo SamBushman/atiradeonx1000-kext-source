@@ -68,7 +68,7 @@ int R520VMachineAssembler__vslot27_assembleLoopHeader(this, node, block, param_4
       IROperand__setModifierBits(condValueInst + 0x29,1,uVar8 & 1);
       operandVReg = IRInst__getOperandSource(branchInst,1);
       IRInst__setOperandSource(condValueInst,1,operandVReg,0,compiler);
-      ((void (*)())FUN_000f79c4)(condValueInst,piVar11,2,1.0,1.0,1.0,1.0);
+      ((void (*)())IRInst__makeLiteralVec4Float)(condValueInst,piVar11,2,1.0,1.0,1.0,1.0);
       IROperand__setModifierBits(condValueInst + 0x2f,1,1);
       iVar5 = R300VMachineAssembler__getOrAllocateScratchRegister(this,piVar11);
       condValueInst[0x25] = iVar5;
@@ -591,7 +591,7 @@ int R520VMachineAssembler__vslot24_assembleWithPredicateSet(this, node, block, c
         *(undefined4 *)(iVar3 + 0x94) = uVar7;
         *(undefined4 *)(iVar3 + 0x9c) = uVar1;
         *(undefined4 *)(iVar3 + 0x98) = 0;
-        ((void (*)())FUN_000f79c4)(iVar3,piVar8,1,fparam_1,fparam_1,fparam_1,fparam_1);
+        ((void (*)())IRInst__makeLiteralVec4Float)(iVar3,piVar8,1,fparam_1,fparam_1,fparam_1,fparam_1);
         *(uint *)(iVar3 + 0x14) = *(uint *)(iVar3 + 0x14) & 0xfffffffb;
         Block__appendInst(node,iVar3);
         puVar9 = (uint *)this[0x25];
@@ -859,8 +859,8 @@ int FUN_0019ebdc(param_1)
   return 1;
 }
 
-/* FUN_0019ec88 @ 0x19ec88 (108 bytes) */
-int FUN_0019ec88(param_1, param_2, param_3)
+/* ilSkipRelativeAddressWords @ 0x19ec88 (108 bytes) */
+int ilSkipRelativeAddressWords(param_1, param_2, param_3)
   int param_1;
   int param_2;
   int param_3;
@@ -876,7 +876,7 @@ int FUN_0019ec88(param_1, param_2, param_3)
     if (-1 < param_2) {
       do {
         loopIndex = loopIndex + 1;
-        iVar1 = ((int (*)())FUN_0019ecf4)(param_3);
+        iVar1 = ((int (*)())ilSourceOperandWordCount)(param_3);
         param_3 = param_3 + iVar1 * 4;
       } while (loopIndex <= param_2);
     }
@@ -884,8 +884,8 @@ int FUN_0019ec88(param_1, param_2, param_3)
   return param_3;
 }
 
-/* FUN_0019ecf4 @ 0x19ecf4 (192 bytes) */
-int FUN_0019ecf4(param_1)
+/* ilSourceOperandWordCount @ 0x19ecf4 (192 bytes) */
+int ilSourceOperandWordCount(param_1)
   uint *param_1;
 {
   uint uVar1;
@@ -906,14 +906,14 @@ int FUN_0019ecf4(param_1)
     else {
       do {
         loopIndex2 = loopIndex2 + 1;
-        iVar2 = ((int (*)())FUN_0019ecf4)(loopIndex);
+        iVar2 = ((int (*)())ilSourceOperandWordCount)(loopIndex);
         uVar1 = *param_1;
         loopIndex = loopIndex + iVar2;
       } while (loopIndex2 < (uVar1 >> 0x19 & 1));
     }
     if ((uVar1 & 0x1800000) == 0) goto LAB_0019ed78;
   }
-  loopIndex = (uint *)((int (*)())FUN_0019ec88)(uVar1 >> 0x17 & 3,uVar1 >> 0x19 & 1,loopIndex);
+  loopIndex = (uint *)((int (*)())ilSkipRelativeAddressWords)(uVar1 >> 0x17 & 3,uVar1 >> 0x19 & 1,loopIndex);
   uVar1 = *param_1;
 LAB_0019ed78:
   if ((uVar1 & 0x4000000) != 0) {
@@ -922,8 +922,8 @@ LAB_0019ed78:
   return (int)loopIndex - (int)param_1 >> 2;
 }
 
-/* FUN_0019edb4 @ 0x19edb4 (84 bytes) */
-int FUN_0019edb4(param_1)
+/* ilInstructionHeaderWordCount @ 0x19edb4 (84 bytes) */
+int ilInstructionHeaderWordCount(param_1)
   uint *param_1;
 {
   uint *puVar1;
@@ -944,8 +944,8 @@ int FUN_0019edb4(param_1)
   return (int)puVar1 - (int)param_1 >> 2;
 }
 
-/* FUN_0019ee08 @ 0x19ee08 (108 bytes) */
-int FUN_0019ee08(param_1)
+/* ilDestinationOperandWordCount @ 0x19ee08 (108 bytes) */
+int ilDestinationOperandWordCount(param_1)
   uint *param_1;
 {
   uint uVar1;
@@ -957,7 +957,7 @@ int FUN_0019ee08(param_1)
     puVar2 = param_1 + 2;
   }
   if ((uVar1 & 0x1800000) != 0) {
-    puVar2 = (uint *)((int (*)())FUN_0019ec88)(uVar1 >> 0x17 & 3,uVar1 >> 0x19 & 1,puVar2);
+    puVar2 = (uint *)((int (*)())ilSkipRelativeAddressWords)(uVar1 >> 0x17 & 3,uVar1 >> 0x19 & 1,puVar2);
     uVar1 = *param_1;
   }
   if ((uVar1 & 0x4000000) != 0) {

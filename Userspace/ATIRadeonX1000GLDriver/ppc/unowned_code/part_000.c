@@ -1428,7 +1428,7 @@ int orph_c71d0(param_1)
   if (puVar2 != (undefined4 *)0x0) {
     pcVar3 = (code *)*puVar2;
     uVar1 = puVar2[1];
-    FUN_000da458(puVar2,1);
+    scDestroyCompilerObject(puVar2,1);
     (*pcVar3)(uVar1,puVar2);
     uVar1 = 0;
   }

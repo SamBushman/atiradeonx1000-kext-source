@@ -342,7 +342,7 @@ int IrMulAddFloat__fold(this, result, operands)
 {
   double product;
   
-  product = (double)((double (*)())FUN_00113554)((double)*(float *)(operands + 4),(double)*(float *)(operands + 8));
+  product = (double)((double (*)())mulFloatZeroAnnihilates)((double)*(float *)(operands + 4),(double)*(float *)(operands + 8));
   *result = (float)(product + (double)*(float *)(operands + 0xc));
   return 1;
 }
@@ -386,9 +386,9 @@ int IrDot3__foldVector(this, result, srcA, srcB)
   double productY;
   double productZ;
   
-  productX = (double)((double (*)())FUN_00113554)((double)*srcA,(double)*srcB);
-  productY = (double)((double (*)())FUN_00113554)((double)srcA[1],(double)srcB[1]);
-  productZ = (double)((double (*)())FUN_00113554)((double)srcA[2],(double)srcB[2]);
+  productX = (double)((double (*)())mulFloatZeroAnnihilates)((double)*srcA,(double)*srcB);
+  productY = (double)((double (*)())mulFloatZeroAnnihilates)((double)srcA[1],(double)srcB[1]);
+  productZ = (double)((double (*)())mulFloatZeroAnnihilates)((double)srcA[2],(double)srcB[2]);
   *result = (float)((double)(float)(productX + productY) + productZ);
   return;
 }
@@ -405,10 +405,10 @@ int IrDot4__foldVector(this, result, srcA, srcB)
   double productZ;
   double productW;
   
-  productX = (double)((double (*)())FUN_00113554)((double)*srcA,(double)*srcB);
-  productY = (double)((double (*)())FUN_00113554)((double)srcA[1],(double)srcB[1]);
-  productZ = (double)((double (*)())FUN_00113554)((double)srcA[2],(double)srcB[2]);
-  productW = (double)((double (*)())FUN_00113554)((double)srcA[3],(double)srcB[3]);
+  productX = (double)((double (*)())mulFloatZeroAnnihilates)((double)*srcA,(double)*srcB);
+  productY = (double)((double (*)())mulFloatZeroAnnihilates)((double)srcA[1],(double)srcB[1]);
+  productZ = (double)((double (*)())mulFloatZeroAnnihilates)((double)srcA[2],(double)srcB[2]);
+  productW = (double)((double (*)())mulFloatZeroAnnihilates)((double)srcA[3],(double)srcB[3]);
   *result = (float)((double)(float)((double)(float)(productX + productY) + productZ) + productW);
   return;
 }
@@ -424,8 +424,8 @@ int IrDot2Add__foldVector(this, result, srcA, srcB, addOperand)
   double productX;
   double productY;
   
-  productX = (double)((double (*)())FUN_00113554)((double)*srcA,(double)*srcB);
-  productY = (double)((double (*)())FUN_00113554)((double)srcA[1],(double)srcB[1]);
+  productX = (double)((double (*)())mulFloatZeroAnnihilates)((double)*srcA,(double)*srcB);
+  productY = (double)((double (*)())mulFloatZeroAnnihilates)((double)srcA[1],(double)srcB[1]);
   *result = (float)(productX + productY) + *(float *)(addOperand + 8);
   return;
 }
