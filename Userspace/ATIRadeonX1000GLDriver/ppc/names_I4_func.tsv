@@ -1,0 +1,263 @@
+# Fork I4 (round 5): upper-half (>=0xc0000) GLDriver functions that no table/subsystem had classified. Evidence per row. 
+# Cluster P (0xc0880-0xc6470): the R300 pixel-shader ("PSN" native format) decoded-instruction optimiser. A "decoded program" is {+0 count, +4 temp count, +8 -> array of 0xa0-byte entries}; one entry = two 0x40-byte halves (RGB at +0x00, alpha at +0x40: +4/+6 dest reg and write mask, +8.. three 4-byte source slots, +0x28 opcode, +0x30 flags) plus six ushort source-address slots at +0x80..+0x8a and a mode word at +0x8c (0 = R100-style words, 1 = R200-style, 2 = R300 US words).
+func	FUN_000c0880	psnDecRecomputeSourceUsage	INFERRED	for both halves of a decoded entry: clears the per-source read-mask words (+0x14..+0x24), then re-derives them from the three source slots (address-select bits 0x300, component swizzle fields, opcode class bit-set 0x1f1) and the flags at +0x30; called after every edit by c0fd0/c1780/c1e90/c2834/c3100/c3240/c38a0/c3fd0/c42f0
+func	FUN_000c0fd0	psnDecCanonicalizeEntry	INFERRED	merges source-address slots that hold the same address (0x80 vs 0x82/0x84 compare, then clears the select bit ^1/^3), turns opcode 5 and 7 forms with identical operands into opcode 0 (mov) and swaps commutative operands; calls psnDecRecomputeSourceUsage when anything changed
+func	FUN_000c1780	psnDecDecodeHwInstruction	INFERRED	memsets the 0x80 header of a decoded entry and unpacks one hardware instruction from the word arrays by the mode at +0x8c/ +0x90 (mode 0: 1 word at +4, mode 2: R300 US words at +0x98/+0x198/+0x298/+0x398 holding the 6-bit address fields); the inverse of psnDecEncodeHwWords
+func	FUN_000c1d60	psnDecTrySwapAddressSlots	INFERRED	swaps address slots a and b (ushort at (group*3+i)*2+0x80) of one group unless a source of the entry is pinned (flag 0x10 or non-zero masks at +0x20/+0x60), then renumbers every source slot selecting that group (select bits 0x300 == (group+1)*0x100)
+func	FUN_000c1e90	psnDecSortAddressSlots	INFERRED	bubble-orders the three address slots of a group (compares +0x80/+0x82/+0x84, swaps through psnDecTrySwapAddressSlots) and recomputes the usage when any swap happened
+func	FUN_000c1f80	psnDecEncodeHwWords	INFERRED	for every entry of the decoded program: packs dest/sources/opcode back into the hardware instruction words (mode 0 words at param_2+4.., mode 1 words at param_3+0x18..), the inverse of psnDecDecodeHwInstruction
+func	FUN_000c2834	psnDecAllocateTempsAndCompact	INFERRED	walks the entries from the last to the first with a stack of free temp indices (the 4 reserved at start, then count..0), assigns the lowest free temp to each destination whose first use is seen, drops entries with no write/side effect (memcpy compaction), stores the new count and temp count, then calls psnDecEncodeHwWords
+func	FUN_000c2e40	psnMaskIsSingleComponent	INFERRED	true for a low-nibble mask equal to 1, 2, 4 or 8 only
+func	FUN_000c2e70	psnDecAlphaDestIs	INFERRED	true when the entry's alpha half writes (flag 8 in +0x46) the register in param_2 (+0x44)
+func	FUN_000c2ea0	psnDecAlphaComponentReadsReg	INFERRED	scans the source slots of both halves for register param_2 whose usage mask has the alpha bit (8) set
+func	FUN_000c2f20	psnDecAnySourceIsReg	INFERRED	scans every source usage mask (entry +0x14 stride) intersecting param_2 against the address slots equal to param_3 over both halves and three slots
+func	FUN_000c2fb0	psnDecAnyPartialSourceIsReg	INFERRED	like psnDecAnySourceIsReg but requires the usage mask to overlap param_2 without being equal to it (partial component use)
+func	FUN_000c3050	psnDecMaskCoveredByDests	INFERRED	removes from param_2 the components written by the RGB dest (+4/+6) and the alpha dest (+0x44/+0x46) when they target register param_3 and returns whether nothing is left
+func	FUN_000c3090	psnDecFirstFreeAddressSlot	INFERRED	index (0..2) of the first of the three group-1 address slots (ushort at +0x86..) that is 0xffff, or -1
+func	FUN_000c30d0	psnDecHasFreeAddressSlot	INFERRED	boolean of psnDecFirstFreeAddressSlot >= 0
+func	FUN_000c3100	psnDecRetargetSourceReg	INFERRED	for both halves rewrites every source slot that reads register param_2 at address param_5 so that it reads register param_3 through select param_4 (writes the new address into the slot table), then recomputes usage and re-canonicalises when mode 2
+func	FUN_000c3240	psnDecReplaceSourceAddress	INFERRED	replaces address param_2 of the sources reading register param_6 by param_3: counts which slots other operands use (aiStack_58[6] table), frees unused slots (0xffff), finds a free slot for param_3 and rewires the slot selects; returns 0 and restores the old address when none is free
+func	FUN_000c3600	psnDecReadsRegMask	INFERRED	true when a source usage mask of the entry overlaps param_3 for a source slot whose address is register param_2
+func	FUN_000c3680	psnDecSourceHasPartialMask	INFERRED	true when a source slot at address param_2 has a usage mask that overlaps param_3 but also uses components outside it
+func	FUN_000c36f0	psnDecDestMatchesRegMask	INFERRED	true when either half's dest register (+4) equals param_2 and its write mask (+6) overlaps param_3
+func	FUN_000c3740	psnDecCanFoldIntoSlot	INFERRED	true when none of the three source selects of half (param_2 == 8 picks alpha) selects the fixed slot 3 and the other half's flag 0x20 is clear and param_3 is not 1 or 2
+func	FUN_000c37c0	psnDecSwapAddressSlotsInSources	INFERRED	swaps address slots param_2 and param_3 (the group chosen by param_4) in the table at +0x80 and rewrites every source select (bits 0-1) of that group accordingly
+func	FUN_000c38a0	psnDecTryRebindAddressWithRollback	INFERRED	saves the 0xa0-byte entry (memcpy to the stack), frees unused address slots, rebinds an address through psnDecSwapAddressSlotsInSources, recomputes and canonicalises, and memcpy-restores the saved entry when the result is rejected (return 1 only on success)
+func	FUN_000c3d60	psnConstantComponentsAreOne	INFERRED	checks bit param_4 of the 64-bit mask (param_2:param_3) and that every component selected by param_5 of the constant at param_1+param_4*16 equals the float at 0x1aa108
+func	FUN_000c3e50	psnDecRangeHasConflict	INFERRED	walks entries param_3-1 down to param_2 and returns 1 as soon as one reads or writes the destination registers (+4/+6, +0x44/+0x46) of entry param_3, or one of its source registers, via psnDecReadsRegMask/psnDecDestMatchesRegMask; 0 when the range is clear
+func	FUN_000c3fd0	psnDecTryMergeAddressSlots	INFERRED	for two mode-2 entries counts the sources of each that use the group-0/group-1 selects (0x100/0x200) and, when both counts stay below 4, copies the free address slots of one entry into the other (0xffff slots at +0x80/+0x86 receive the other's address) and rewrites the selects; returns 0 when no slot is free
+func	FUN_000c42f0	psnProgramToDecoded	INFERRED	converts a PSN program (records of 0x48 bytes at param_2+0x48 onwards, kind at +0: 2 = TEX, 3/4 = ALU) into decoded entries (param_1[2] + n*0xa0): memset 0x80, copies the register/mask/swizzle/opcode/modifier byte fields of the record into the two halves, then runs psnDecRecomputeSourceUsage and psnDecCanonicalizeEntry
+func	FUN_000c4ce0	psnDecodedToProgram	INFERRED	inverse of psnProgramToDecoded: memsets each destination PSN record (0x48 bytes), reads the decoded entries (0xa0 stride, mode word +0x8c) and writes kind-2 (TEX) / ALU records with their byte fields back
+func	FUN_000c5460	psnRgbSelectToComponentBit	INFERRED	switch over the 0..0x13 RGB operand select code: 0/4/8/0xf r or no change, 1/5/9/0x10 -> 1, 2/6/10/0x11 -> 2, 3/7/0xb/0x12 -> 4, 0xc-0xe/0x13 -> 8; ORs the component bit into a usage mask when (param_2 & 7)
+func	FUN_000c57b0	psnAlphaSelectToComponentBit	INFERRED	same idea for the alpha-side select codes 0..0xf (groups 0/3/6/0xc -> 1, 1/4/7/0xd -> 2, 2/5/8/0xe -> 4, 9/10/0xb/0xf -> 8), guarded by mask bit 8
+func	FUN_000c59c0	psnRaReleaseUse	INFERRED	register allocator step: looks up the (virtual register, mask) pair in the sorted interval table, clears the mask bits, and returns the physical register to the sorted free list (memmove insert) once no component is still in use
+func	FUN_000c5c50	psnRaAssignDefinition	INFERRED	register allocator step: records a (register, mask) definition in the interval table (marks the entry 0xffff if it was empty), pulls the lowest free physical register from the free list and splits/compacts the list entries
+func	FUN_000c6470	psnReallocateTemps	INFERRED	walks a PSN program's records (0x48 stride from param_2+8 count) with two interval tables (_memset of 8*count bytes) and renumbers every TEX/ALU temp through psnRaReleaseUse/psnRaAssignDefinition
+# Cluster S (0xc6e50-0xc6fc0): the callback table FUN_000c6ff0 hands to the shader-compiler creator FUN_000cd05c (stored at local+0x34..+0x4c)
+func	FUN_000c6e50	scCallbackFree	CONFIRMED	body is _free(param_2); stored in the callback block next to the allocator FUN_000c6e40 by FUN_000c6ff0
+func	FUN_000c6e80	scCallbackGetFlagZero	INFERRED	stores 0 through its third argument and returns 0 (a query callback that always answers "none")
+func	FUN_000c6e90	scCallbackAppendFormatted	CONFIRMED	strcpy of the old text into a 0x108 stack buffer, strlen, then printf-style formatting of the varargs into the buffer after it (_snprintf stub, size 0x100 - length)
+func	FUN_000c6ef0	scCallbackFopen	CONFIRMED	mode 1 -> _fopen(path,"r"), 2 -> "w", 3 -> "r+", otherwise NULL
+func	FUN_000c6f60	scCallbackFclose	CONFIRMED	returns (_fclose(file) == 0)
+func	FUN_000c6f90	scCallbackFwrite	CONFIRMED	_fwrite(buffer,1,count,file) when file and buffer are non-null, else 0
+func	FUN_000c6fc0	scCallbackFread	CONFIRMED	_fread(buffer,1,count,file) when file and buffer are non-null, else 0
+# Cluster I (0xc71e0-0xc8e30): helpers of the IL passes ilAssembleProgram (0xc8e50) and ilRewriteForTextureState (0xcae90), which both allocate their scratch record at the same 0x23xx offsets
+func	FUN_000c71e0	ilFreeRecordList	CONFIRMED	recursive free of a singly linked list: next pointer at +0x24, _free(node) on the way out
+func	FUN_000c7240	ilSelectorOneToThreeOrZero	INFERRED	returns 2 for 2, 3 for 3, 1 for 1 and 0 otherwise; used on the type / component fields of dcl records (+4 / +0xc) before indexing the 4-wide tables
+func	FUN_000c7270	ilRecordInputSemantic	INFERRED	stores value param_3 into the table at record+0x2238 and sets the flag word at record+0x2278 for input index param_2 (called per dclpi/dclpt token)
+func	FUN_000c7290	ilRecordDefinedConstantPrimary	INFERRED	copies the four words of a def constant to record+0x1a8+idx*0x10 and sets bit idx (word idx/32) in the defined mask at +0x188
+func	FUN_000c72f0	ilRecordDefinedConstantSecondary	INFERRED	same as ilRecordDefinedConstantPrimary against the second set (values at +0x11c8+idx*0x10, mask at +0x11a8); the two are called in sequence for each def token
+func	FUN_000c7350	ilAllocLowestFreeBit8	INFERRED	finds the lowest clear bit of the 8-bit mask at +8, sets it and returns its index; 0x11 when all eight are taken
+func	FUN_000c73a0	ilNextCounterValue	INFERRED	increments the counter at +0x50 and returns the new value; used to hand out the implicit register numbers in ilEmitPrologue
+func	FUN_000c73c0	ilPopFreeRegister	INFERRED	pops the lowest set bit out of the eight-word bitmap at +0xc and returns its index (word*32+bit), -1 when empty
+func	FUN_000c7460	ilEmitProjectiveDivide	INFERRED	when unit bit param_4 is set in the mask at +0x70 emits rcp (0x51) of a swizzled coordinate component (selected by bits 21-23 of the coordinate word: x,y,z,w -> replicate swizzles 0x0000..0x5555 chosen from {1,5,2,3,0}) into temp +0x184 and then mul (0x49) of the coordinate by it; the texld q divide
+func	FUN_000c7650	ilEmitShadowCompare	CONFIRMED	emits sub (0x5b) and the following compare select keyed on the texture compare function stored at record+0x138+unit*4: the cases are exactly GL_NEVER 0x200 .. GL_ALWAYS 0x207
+func	FUN_000c8110	ilEmitPrologue	INFERRED	allocates counter values for the implicit registers (record+0x21e0..0x2208, 0x2300..0x2308, 0x54..0x60) and emits the leading IL tokens (dclpi 0x16 headers, rcp 0x51 / mad 0x40 / mul 0x49 / dcldef 0x15 sequences) into the output cursor; called repeatedly from ilRewriteForTextureState
+func	FUN_000c8760	ilRemapSourceOperandRegister	INFERRED	rewrites a source operand word: register type 0x16 becomes type 4 with the index from +0x54, type 0xf is replaced through the table at +0x232c indexed by the old index
+func	FUN_000c87d0	ilMarkOperandRegisterUsed	INFERRED	for register type 1 / 2 clears the bit (or all 8 words when the relative-addressing bits 0x1800000 are set) in the free bitmap at +0xc / +0x2c; types 3 and 0x15 set the mode word at +0x21c8 to 5
+func	FUN_000c8910	ilMarkInstructionRegistersUsed	INFERRED	for one IL instruction (cursor, hasDest, sourceCount): walks the destination then each source operand word (skipping the second word when bit 22 is set and the relative word when bits 23-24 are set) and applies ilMarkOperandRegisterUsed to each; opcode 0x48 (mova) with a non-zero index sets the mode word to 5
+func	FUN_000c8aa0	ilCopyInstructionRemapped	INFERRED	copies one IL instruction from the source cursor to the destination cursor, rewriting the destination register type (0x17 output colour, 0x10, 0xe, 0xd, 0xf) via the tables at +0x21e0/+0x2200/+0x2208/+0x2234/+0x232c and each source with ilRemapSourceOperandRegister
+func	FUN_000c8de0	ilPushDclRecord	CONFIRMED	malloc(0x28), links the new node in front of the list head (next at +0x24) and memcpy's 0x24 bytes of the dcl record into it; freed by ilFreeRecordList
+func	FUN_000c8e30	ilStoreFloat4Constant	CONFIRMED	stores four doubles converted to float at param_1+0x8c+idx*0x10 (+0x90, +0x94, +0x98)
+# Cluster A (0xcd154-0xd4e8c): the "SC" shader-compiler public API (create/destroy, dump entry points) and its dump helpers. Evidence: the 0xcd05c creator checks the callback block FUN_000c6ff0 builds (+0x30 alloc, +0x34 free, +0x38.. +0x4c io callbacks), the dumpers print "SC_SRCSHADER Dump" / "SC_SHADERSTATE:" strings.
+func	FUN_000cd154	scDestroy	INFERRED	NULL -> 3; otherwise reads the free callback (obj[0]) and its user data (obj[1]), tears down the compiler object (FUN_000da458) and frees obj through the callback
+func	FUN_000cd1d8	scCheckHandle	INFERRED	returns 3 for a NULL handle, 0 otherwise (parameter check used by the API entry points)
+func	FUN_000cd1ec	scDisassembleIL	INFERRED	variadic API wrapper: spills its register arguments to the home area and passes the address of the 4th as va_list to FUN_000cd388
+func	FUN_000cd214	scDumpSrcShader	INFERRED	variadic API wrapper (same spill pattern) around FUN_000cd404, the SC_SRCSHADER dumper
+func	FUN_000cd23c	scDumpShader	INFERRED	variadic API wrapper around FUN_000cdba4 (dumps a compiled vertex/pixel program)
+func	FUN_000cd264	scDumpShaderToString	INFERRED	variadic API wrapper around FUN_000cdbe4 (formats the same dump into a caller buffer)
+func	FUN_000cd388	scDisassembleILImpl	INFERRED	guards three pointer arguments and tail-calls FUN_000e06d8 (IL token-stream disassembler)
+func	FUN_000cd3a4	scLogToSink	CONFIRMED	spills varargs and calls the sink callback record[0](sinkContext, "", format, va_list...); every line of the SC_* dumps goes through it
+func	FUN_000cd404	scDumpSrcShaderImpl	CONFIRMED	prints "; ------------- SC_SRCSHADER Dump" followed by "SC_SHADERSTATE: u32NumIntVSConst/PSConst/GSConst", the integer constants (i%d = Count, LoopStart, LoopStep) and the boolean constants (b%d = TRUE/FALSE) per stage, then the float constants through FUN_000cdc3c
+func	FUN_000cdba4	scDumpShaderImpl	INFERRED	checks shaderState+0xfc in 1..3, then shaderState+0xf8: 0 -> vsDisassembleVertexProgram, 1 -> FUN_000d4e8c (pixel program PSN dump)
+func	FUN_000cdbe4	scDumpShaderToStringImpl	INFERRED	same dispatch as scDumpShaderImpl: 0 -> vsDisassembleToString, 1 -> FUN_000d4e64
+func	FUN_000cdc24	scShaderStateFlag	UNKNOWN	returns 1 when state+0x4c is NULL, else the byte at (*(state+0x4c))+5
+func	FUN_000ce020	vsdisClearSinkRecord	INFERRED	zeroes a 4-word record (used as the output sink by vsDisassembleToString / vsDisassembleVertexProgram before the dump)
+func	FUN_000ce038	vsdisClearSinkRecord2	INFERRED	identical body to vsdisClearSinkRecord (zeroes 4 words); the second copy called from vsDisassembleVertexProgram
+func	FUN_000ce4e4	vsdisPrintInputDx	CONFIRMED	prints ";    v%d = dx v%d" when bit 0 of the input map entry is set
+func	FUN_000ce514	vsdisPrintOutputMapping	INFERRED	prints one output semantic mapping line: names IL_pos / IL_color / IL_fog or a generic "%d", and the destination "o%d.%c" / "o%d.%c%c%c%c" with the xyzw write-mask letters
+func	FUN_000ce88c	vsdisPrintShaderData	CONFIRMED	prints the "VS Data" banner, "; Input Semantic Mappings" / "; Output Semantic Mappings" (or "No input/output mappings") and "; Num Insts = %d"
+func	FUN_000cfc94	vsdisFlowOpcodeName	CONFIRMED	flow opcode -> text: 0x3e "loop   ", 0x35 "ifnz  ", 8 "call   ", 9 "callnz ", 0x53 "ret    ", else "unknown"
+func	FUN_000cfd24	vsdisPrintFlowInstruction	CONFIRMED	prints the "CF- IF B%d != 0, if/else/endif", "CF- CALL at %d, subroutine from %d to %d" and "CF- Loop I%d first in loop / last in loop" lines
+func	FUN_000d10a8	psnSwizzleIsAlphaSourceForm	CONFIRMED	notes_shader_formats.md section 7: true for (w & 0xe000) == 0x6000, (w & 0x1c00) == 0xc00 or (w & 0x380) == 0x180
+func	FUN_000d4de8	psnClearSinkRecord	INFERRED	zeroes a 2-word record
+func	FUN_000d4df8	psnClearSinkRecord2	INFERRED	identical body to psnClearSinkRecord; called by FUN_000d4e64 / FUN_000d4e8c
+func	FUN_000d4e08	scDumpPixelProgramPsn	CONFIRMED	stores the sink record into the globals at 0x1fa618/0x1fa61c and calls FUN_000d183c (the R300PSN raw-listing dump) on state+0x64c with the title "SC Generated Shader"
+func	FUN_000d4e64	scDumpPixelProgramToStringStub	INFERRED	clears a local 2-word record and returns 0 (the string variant does nothing for pixel programs)
+func	FUN_000d4e8c	scDumpPixelProgram	INFERRED	clears a record, stores sink fn/context into it and calls scDumpPixelProgramPsn; returns 0
+# Cluster L (0xda458-0xe0740): the AMD-IL token-stream disassembler. Context: +0 error count, +4 first token, +8 cursor, +0xc token count, +0x10 text line buffer (0x200), +0x210 sink record, +0x214 sink arg, +0x218 is-pixel-shader flag, +0x21c indent. FUN_000da904 appends printf text to the line buffer, FUN_000da984 flushes it to the sink.
+func	FUN_000da904	ildisAppendf	CONFIRMED	vsnprintf into a 0x200 stack buffer then strcat onto the line buffer at ctx+0x10 when it fits
+func	FUN_000da8a8	ildisInitContext	INFERRED	clears ctx+0, +0x210..+0x21c fields and memsets the 0x200-byte line buffer at +0x10
+func	FUN_000da8d0	ildisSkipToken	CONFIRMED	advances the cursor ctx+8 by one dword
+func	FUN_000da8e0	ildisSetIndent	CONFIRMED	stores max(param_2, 0) at ctx+0x21c
+func	FUN_000da984	ildisFlushLine	CONFIRMED	when a sink record exists appends "\r\n" and calls sink[0](sinkArg, "", lineBuffer, 0), then clears the line buffer
+func	FUN_000daab0	ildisPrintNegateComponents	CONFIRMED	prints "_neg(" then the components whose bits 3/7/11/15 are set as x,y,z,w (param_3 == 0) or r,g,b,a, then ")"
+func	FUN_000dac4c	ildisComponentSelectChar	CONFIRMED	component select 0..3 -> x/y/z/w (or r/g/b/a), 4 -> '0', 5 -> '1', anything else counts an error and prints "!!!invalidCompSel!!!"
+func	FUN_000dad30	ildisPrintSwizzle	CONFIRMED	builds the four swizzle characters from 3-bit fields at bits 0, 4, 8, 12 and prints "." plus them unless the swizzle is the identity ("rgba"/"xyzw"); collapses repeated single letters
+func	FUN_000dae5c	ildisPrintResultModifiers	CONFIRMED	prints "_sat" for bit 8 and the shift suffix _x2/_x4/_x8/_d2/_d4/_d8 for bits 9-12, "!!!invalidShift!!!" otherwise
+func	FUN_000daf7c	ildisPrintElementFormat	CONFIRMED	element format 0..7 -> unknown/snorm/unorm/sint/uint/float/srgb/mixed, else "!!!invalidElemFormat!!!"
+func	FUN_000db048	ildisPrintFormatXyzw	CONFIRMED	prints _fmtx( _fmty( _fmtz( _fmtw( with ildisPrintElementFormat for each component format field
+func	FUN_000db128	ildisModComponentChar	CONFIRMED	modifier component select: 0 '_', 1 the component letter, 2 '0', 3 '1'; else "!!!invalidModComp!!!"
+func	FUN_000db1c4	ildisPrintModifierSwizzle	INFERRED	prints a four-component modifier mask using the letter table r,x,g,y,b,z,a,w and '%c' output, via ildisModComponentChar
+func	FUN_000db2f4	ildisPrintUnsigned	CONFIRMED	reads one dword at the cursor and prints it with "%lu"
+func	FUN_000db350	ildisPrintCmpVal	CONFIRMED	prints _cmpval( with 0.0 / 0.5 / 1.0 / -0.5 / -1.0 per component ("!!!invalidCmpVal!!!" otherwise)
+func	FUN_000db458	ildisPrintUsage	CONFIRMED	_usage( pos / pointsize / color / backcolor / fog / generic, "!!!invalid!!!" otherwise
+func	FUN_000db574	ildisPrintFixedPoint	CONFIRMED	extracts a fixed-point field (value, integer bits, fraction bits) from param_2, converts it to a double using the 2^52 magic constant, formats it with FUN_000cdc3c (10 significant digits) and appends it; called with (7,1) for offsets and (3,4) for lod bias
+func	FUN_000db6d4	ildisPrintTexelOffsets	CONFIRMED	prints _xoffset( _yoffset( _zoffset( with ildisPrintFixedPoint of each 8-bit field
+func	FUN_000db798	ildisPrintSignedField	CONFIRMED	prints a field of param_3 bits as a signed decimal: "-" and the two's-complement magnitude when the top bit is set, "%lu" otherwise
+func	FUN_000db81c	ildisPrintAddressOffsetImmediate	CONFIRMED	prints _aoffimmi( with three signed 4-bit fields separated by "," and ")"
+func	FUN_000db8e0	ildisPrintResourceSampler	CONFIRMED	prints "_resource(%d)_sampler(%d)" from the two fields of the word
+func	FUN_000db938	ildisPrintAnisoMode	CONFIRMED	prints _aniso( unknown / disabled / 1 / 2 / 4 / 8 / 16
+func	FUN_000dba6c	ildisPrintMipFilter	CONFIRMED	prints _mip( point / unknown / linear / base
+func	FUN_000dbb44	ildisPrintFilterName	CONFIRMED	prints point / unknown / linear / aniso / "!!invalid!!" for a filter field
+func	FUN_000dbbc0	ildisPrintFilterModes	CONFIRMED	prints _mag( _min( _volmag( _volmin( and _lodbias( groups using ildisPrintFilterName / ildisPrintFixedPoint
+func	FUN_000dbcdc	ildisPrintShadowMode	CONFIRMED	prints _shadowmode( z / never / unknown, "!!invalid!!" otherwise
+func	FUN_000dbd9c	ildisPrintBoundComponent	CONFIRMED	component code -> "0", "-", "1" or "*" (the usage index pattern characters), else "!!!invalid!!!"
+func	FUN_000dbe18	ildisPrintDclvoutOperands	CONFIRMED	prints _usageIndex(%d) followed by _x( _y( _z( _w( with ildisPrintBoundComponent per component
+func	FUN_000dbf34	ildisPrintDclpinOperands	CONFIRMED	like ildisPrintDclvoutOperands plus the interpolation suffixes _centroid / _constant / _noperspective
+func	FUN_000dc098	ildisPrintDclvOperands	CONFIRMED	prints _elem(%d) followed by the _x( _y( _z( _w( component bindings
+func	FUN_000dc1ac	ildisPrintDclpiOperands	INFERRED	prints the operands of dclpi (called from its case in ildisPrintInstruction): _x( _y( _z( _w( component bindings and the _center / _origin suffix
+func	FUN_000dc2c4	ildisPrintResourceType	CONFIRMED	prints _type( unknown / 1d / 2d / 3d / cubemap / 2dmsaa / 4c / buffer / 1darray / 2darray
+func	FUN_000dc3b0	ildisPrintDclptCoordMode	CONFIRMED	prints _coordmode( normalized / unknown / unnormalized
+func	FUN_000dc454	ildisPrintDcldefComponent	INFERRED	component code -> "0", "1", "*" or "!!!invalid!!!" (the component pattern printed for dcldef)
+func	FUN_000dc4bc	ildisPrintDcldefComponents	INFERRED	prints _x( )_y( )_z( )_w( ) with ildisPrintDcldefComponent for the four fields
+func	FUN_000dc57c	ildisPrintZeroOp	CONFIRMED	prints _zeroop( zero / fltmax / infinity / inf_else_max
+func	FUN_000dc658	ildisPrintOutputTopology	CONFIRMED	prints _line_strip or _point_list
+func	FUN_000dc71c	ildisPrintInputPrimitive	CONFIRMED	prints _point / _line / _triangle / _line_adj
+func	FUN_000dc83c	ildisPrintStage	CONFIRMED	prints "_stage(%d)"
+func	FUN_000dc88c	ildisPrintTexldmsModifiers	CONFIRMED	prints _mag( _min( _xoffset( _yoffset( groups (called from the texldms case of ildisPrintInstruction)
+func	FUN_000dc9d0	ildisPrintNormalizeFlag	CONFIRMED	prints "_normalize"
+func	FUN_000dc9f4	ildisPrintRoundFlag	CONFIRMED	prints "_round"
+func	FUN_000dca18	ildisPrintSampleFlag	CONFIRMED	prints "_sample"
+func	FUN_000dca3c	ildisPrintCentroidFlag	CONFIRMED	prints "_centroid"
+func	FUN_000dca60	ildisPrintSampleModifiers	CONFIRMED	prints _stage, _centroid, "_absolute", the shadow mode, and optional extended words (filter modes with "_qualitybias" and texel offsets) selected by bits 31 / 30 / 25 of the control word
+func	FUN_000dcb34	ildisPrintLoadModifiers	INFERRED	like ildisPrintSampleModifiers without the absolute/qualitybias parts: stage, centroid, shadow mode, then the optional filter-mode word (bit 31) and texel-offset word (bit 30)
+func	FUN_000dcbcc	ildisPrintMatrixMode	CONFIRMED	prints _matrix( 4x4 / 4x3 / 3x4 / 3x3 / 3x2
+func	FUN_000dccd4	ildisPrintRelop	CONFIRMED	prints _relop( ne / eq / ge / gt / le / lt
+func	FUN_000dcdf4	ildisPrintHeader	CONFIRMED	reads the version token: type 0 "vs", 1 "ps", 2 "gs", prints "il_%s_%d_%d" (major, minor) and sets ctx+0x218 = (type == ps)
+func	FUN_000dcef4	ildisPrintRegisterType	CONFIRMED	register type -> b / c / i / a / r / v / vIndex / vBaryCoord / vPrimIndex / vQuadIndex / o / vPixIn, else "!!!invalidRegType!!!"
+func	FUN_000dd1f8	ildisPrintSourceOperand	CONFIRMED	reads the operand word(s) at the cursor and prints a source: register type (ildisPrintRegisterType), index ("%d" / "[%lu]" / "[%d]" for relative addressing with "a%d" / "al" and ".%c" component), then the negate set and swizzle through ildisPrintNegateComponents / ildisPrintSwizzle
+func	FUN_000dd6bc	ildisPrintDestinationOperand	CONFIRMED	reads the destination word(s): prints result modifiers (_sat / shift via ildisPrintResultModifiers) first, then " " and register type, index and relative addressing, then the write mask
+func	FUN_000dda98	ildisPrintDestAnd3Sources	CONFIRMED	ildisPrintDestinationOperand then three ", "-separated ildisPrintSourceOperand and a line flush
+func	FUN_000ddb14	ildisPrintDestAnd2Sources	CONFIRMED	destination plus two sources, then flush
+func	FUN_000ddb7c	ildisPrintDestAnd1Source	CONFIRMED	destination plus one source, then flush
+func	FUN_000ddbcc	ildisPrintInstruction	CONFIRMED	notes_shader_formats.md section 5: prints one IL instruction by opcode (big switch over the mnemonic table); returns the next cursor and a continue flag
+func	FUN_000e0640	ildisRun	INFERRED	loops ildisPrintInstruction while the cursor (ctx+8) is below start+count*4 and the continue flag is set
+func	FUN_000e0694	ildisPrintProgram	INFERRED	sets start/cursor/count, skips the version dword, prints the header (ildisPrintHeader) and runs the instruction loop
+func	FUN_000e06d8	ildisDisassembleTokens	INFERRED	builds a 0x248-byte context on the stack (ildisInitContext), stores sink fn/arg and calls ildisPrintProgram; the body of scDisassembleIL
+func	FUN_000e0740	ildisDisassembleBody	INFERRED	sets start/cursor/count, clears the 0x200-byte line buffer and runs the instruction loop (no header)
+# Constructors: the function stores `PTR_DAT_<nl_symbol_ptr cell> + 8` (cell -> vtable via link/symbol_map.tsv, vtable -> class via the RTTI tree in notes_compiler_ir.md 1.1) at *this after calling its base-class constructor
+func	FUN_000eac08	BreakOrContinueBlock__ctor_eac08	INFERRED	stores the vtable of BreakOrContinueBlock (+8) at *this after chaining to the base constructor and initialising the per-class fields; the class comes from the nl_symbol_ptr cell resolved through link/symbol_map.tsv and the RTTI vtable list
+func	FUN_000eac60	BreakOrContinueBlock__ctor_eac60	INFERRED	stores the vtable of BreakOrContinueBlock (+8) at *this after chaining to the base constructor and initialising the per-class fields; the class comes from the nl_symbol_ptr cell resolved through link/symbol_map.tsv and the RTTI vtable list
+func	FUN_00107250	IRVertexFetch__ctor_107250	INFERRED	stores the vtable of IRVertexFetch (+8) at *this after chaining to the base constructor and initialising the per-class fields; the class comes from the nl_symbol_ptr cell resolved through link/symbol_map.tsv and the RTTI vtable list
+func	FUN_001072d0	IRVertexFetch__ctor_1072d0	INFERRED	stores the vtable of IRVertexFetch (+8) at *this after chaining to the base constructor and initialising the per-class fields; the class comes from the nl_symbol_ptr cell resolved through link/symbol_map.tsv and the RTTI vtable list
+func	FUN_00107600	IRTextureFetchGradients__ctor_107600	INFERRED	stores the vtable of IRTextureFetchGradients (+8) at *this after chaining to the base constructor and initialising the per-class fields; the class comes from the nl_symbol_ptr cell resolved through link/symbol_map.tsv and the RTTI vtable list
+func	FUN_00107864	IRTextureFetchGradients__ctor_107864	INFERRED	stores the vtable of IRTextureFetchGradients (+8) at *this after chaining to the base constructor and initialising the per-class fields; the class comes from the nl_symbol_ptr cell resolved through link/symbol_map.tsv and the RTTI vtable list
+func	FUN_0010792c	IRMemLoad__ctor_10792c	INFERRED	stores the vtable of IRMemLoad (+8) at *this after chaining to the base constructor and initialising the per-class fields; the class comes from the nl_symbol_ptr cell resolved through link/symbol_map.tsv and the RTTI vtable list
+func	FUN_001079d4	IRMemStore__ctor_1079d4	INFERRED	stores the vtable of IRMemStore (+8) at *this after chaining to the base constructor and initialising the per-class fields; the class comes from the nl_symbol_ptr cell resolved through link/symbol_map.tsv and the RTTI vtable list
+func	FUN_00107a28	IRZeroary__ctor_107a28	INFERRED	stores the vtable of IRZeroary (+8) at *this after chaining to the base constructor and initialising the per-class fields; the class comes from the nl_symbol_ptr cell resolved through link/symbol_map.tsv and the RTTI vtable list
+func	FUN_00107ba8	IRZeroary__ctor_107ba8	INFERRED	stores the vtable of IRZeroary (+8) at *this after chaining to the base constructor and initialising the per-class fields; the class comes from the nl_symbol_ptr cell resolved through link/symbol_map.tsv and the RTTI vtable list
+func	FUN_00107a74	IRNop__ctor_107a74	INFERRED	stores the vtable of IRNop (+8) at *this after chaining to the base constructor and initialising the per-class fields; the class comes from the nl_symbol_ptr cell resolved through link/symbol_map.tsv and the RTTI vtable list
+func	FUN_00107b4c	IRNop__ctor_107b4c	INFERRED	stores the vtable of IRNop (+8) at *this after chaining to the base constructor and initialising the per-class fields; the class comes from the nl_symbol_ptr cell resolved through link/symbol_map.tsv and the RTTI vtable list
+func	FUN_00107d38	IRMov__ctor_107d38	INFERRED	stores the vtable of IRMov (+8) at *this after chaining to the base constructor and initialising the per-class fields; the class comes from the nl_symbol_ptr cell resolved through link/symbol_map.tsv and the RTTI vtable list
+func	FUN_00108870	IRExportColorAndFog__ctor_108870	INFERRED	stores the vtable of IRExportColorAndFog (+8) at *this after chaining to the base constructor and initialising the per-class fields; the class comes from the nl_symbol_ptr cell resolved through link/symbol_map.tsv and the RTTI vtable list
+func	FUN_001088c4	IRExportColorAndFog__ctor_1088c4	INFERRED	stores the vtable of IRExportColorAndFog (+8) at *this after chaining to the base constructor and initialising the per-class fields; the class comes from the nl_symbol_ptr cell resolved through link/symbol_map.tsv and the RTTI vtable list
+func	FUN_00108e8c	IRUndefined__ctor_108e8c	INFERRED	stores the vtable of IRUndefined (+8) at *this after chaining to the base constructor and initialising the per-class fields; the class comes from the nl_symbol_ptr cell resolved through link/symbol_map.tsv and the RTTI vtable list
+func	FUN_00108f5c	IRUndefined__ctor_108f5c	INFERRED	stores the vtable of IRUndefined (+8) at *this after chaining to the base constructor and initialising the per-class fields; the class comes from the nl_symbol_ptr cell resolved through link/symbol_map.tsv and the RTTI vtable list
+func	FUN_0010900c	IRUndefined__ctor_10900c	INFERRED	stores the vtable of IRUndefined (+8) at *this after chaining to the base constructor and initialising the per-class fields; the class comes from the nl_symbol_ptr cell resolved through link/symbol_map.tsv and the RTTI vtable list
+func	FUN_001093b8	IRLoadTemp__ctor_1093b8	INFERRED	stores the vtable of IRLoadTemp (+8) at *this after chaining to the base constructor and initialising the per-class fields; the class comes from the nl_symbol_ptr cell resolved through link/symbol_map.tsv and the RTTI vtable list
+func	FUN_001094fc	IRLoadTemp__ctor_1094fc	INFERRED	stores the vtable of IRLoadTemp (+8) at *this after chaining to the base constructor and initialising the per-class fields; the class comes from the nl_symbol_ptr cell resolved through link/symbol_map.tsv and the RTTI vtable list
+func	FUN_001095b4	IRLoadTemp__ctor_1095b4	INFERRED	stores the vtable of IRLoadTemp (+8) at *this after chaining to the base constructor and initialising the per-class fields; the class comes from the nl_symbol_ptr cell resolved through link/symbol_map.tsv and the RTTI vtable list
+func	FUN_00125f40	AddrIndexedSet__ctor_125f40	INFERRED	stores the vtable of AddrIndexedSet (+8) at *this after chaining to the base constructor and initialising the per-class fields; the class comes from the nl_symbol_ptr cell resolved through link/symbol_map.tsv and the RTTI vtable list
+func	FUN_00125fe8	LoopRegister__ctor_125fe8	INFERRED	stores the vtable of LoopRegister (+8) at *this after chaining to the base constructor and initialising the per-class fields; the class comes from the nl_symbol_ptr cell resolved through link/symbol_map.tsv and the RTTI vtable list
+func	FUN_00194060	DListNode__ctor_194060	INFERRED	stores the vtable of DListNode (+8) at *this after chaining to the base constructor and initialising the per-class fields; the class comes from the nl_symbol_ptr cell resolved through link/symbol_map.tsv and the RTTI vtable list
+# Compiler (SC) leaf helpers, grouped by evidence
+func	FUN_000e0794	Compiler__setOptionBit	CONFIRMED	sets bit n of the byte bitset at compiler+0x59c (|= 1<<(n&7) on byte n>>3); inverse of Compiler__isOptionEnabled's test
+func	FUN_000e07b8	Compiler__clearOptionBit	CONFIRMED	clears bit n of the byte bitset at compiler+0x59c
+func	FUN_000e0cc8	testBit24	CONFIRMED	returns (param_2 >> 24) & 1
+func	FUN_000e0ea0	noop_e0ea0	CONFIRMED	body is a bare return
+func	FUN_000e0ebc	isWhitespaceChar	CONFIRMED	true for ' ' (0x20), '\t' (9), '\n' (10) and '\r' (0xd)
+func	FUN_000e138c	noop_e138c	CONFIRMED	body is a bare return
+func	FUN_000e1464	Compiler__timerOutputFileName	CONFIRMED	returns the string "timer.out"
+func	FUN_000e1484	Compiler__releaseOutputBuffer	CONFIRMED	when compiler+0x584 is set, calls the release callback (+0x34c) with its user data (+0x354) and the buffer, then clears +0x584
+func	FUN_000e14d4	Compiler__setTableEntry534	INFERRED	stores param_3 into the three-entry table at compiler+0x534+index*4 (read back by Compiler__selectEntry534ByProgramFlags)
+func	FUN_000e15b8	Compiler__propagateFlag5a1Bit1	INFERRED	copies bit 1 of the byte at compiler+0x5a1 into the +0x28 word of the three objects at +0x370/+0x374/+0x378
+func	FUN_000e15dc	Compiler__selectEntry534ByProgramFlags	INFERRED	picks compiler+0x534/+0x538/+0x53c by the program flags (*(compiler+0x6c4)+0x30: bit 0 / 0x2000 / 0x4000), default +0x534
+func	FUN_000e16b8	Compiler__selectBlockByProgramFlags	INFERRED	picks the word at (*(compiler+0x398))+0x38 / +0x3c / +0x40 by program flag 0x2000 / 1 / 0x4000 (0 when none)
+func	FUN_000e1704	Compiler__setBitInSelectedBlockB8	INFERRED	sets bit n (word n/32) at +0xb8 of the block returned by Compiler__selectBlockByProgramFlags
+func	FUN_000e175c	Compiler__setBitInSelectedBlockD8	INFERRED	same with the word at +0xd8
+func	FUN_000e17b4	Compiler__setBitInSelectedBlock98	INFERRED	same with the word at +0x98
+func	FUN_000e2a44	moduloDifference	CONFIRMED	returns a - b, adding param_3 when the difference is negative (circular distance)
+func	FUN_000e4400	setWord30	CONFIRMED	stores param_2 at param_1+0x30
+func	FUN_000e7924	Block__nearestCommonAncestor	INFERRED	repeatedly asks FUN_000e78f8 whether either block contains the other and otherwise steps both through the parent at +0xf0; returns the containing block
+func	FUN_000e798c	Block__vectorF8NonEmpty	CONFIRMED	returns *(*(block+0xf8)+4) != 0 (count of the vector at +0xf8; the vectors at +0xd0/+0xd4 are the ones Block::verify walks)
+func	FUN_000e79fc	Block__vectorD4NonEmpty	CONFIRMED	returns *(*(block+0xd4)+4) != 0 (count of the vector at +0xd4, which Block::verify walks)
+func	FUN_000e7c98	Block__resolveRedirect	INFERRED	calls virtual slot 0x38 on *(block+0xa0) and, when bit 3 of its flags are set, follows its +4 link
+func	FUN_000e7de4	Block__isInVectorD4Of	INFERRED	returns 1 when param_1 occurs in the vector at *(param_2+0xd4) (1-based scan of count *(vec+4) over the entries at *(vec+8)); a second scan of param_1's +0xd0 vector for param_2 follows but its result is unused (a compiled-out assertion)
+func	FUN_000ec1ec	callTargetSlot25	CONFIRMED	virtual call through byte offset 100 (slot 25) of the target object at *(arg+8)+0x30c (COMP_target)
+func	FUN_000f2e50	laneBytes__mapTwoThreeToOne	CONFIRMED	copies four lane bytes replacing any byte equal to 2 or 3 with 1
+func	FUN_000f2e98	laneBytes__mergeOneAndTwo	CONFIRMED	when the four lane bytes contain both a 1 and a 2, rewrites every 1 to 3
+func	FUN_000f308c	laneBytes__commonSelect	CONFIRMED	scans four lane bytes ignoring value 4 and returns the common value, or -1 when two different values appear
+func	FUN_000f3764	laneBytes__clearSetLanes	CONFIRMED	writes a four-byte mask where every lane whose input byte is non-zero becomes 0 (rest take the constant at 0x1aa838)
+func	FUN_000f388c	laneMask__fromSelectBytes	CONFIRMED	clears a 4-byte mask then sets mask[select] = 1 for each of the first param_3 select bytes of the packed word param_2 (byte values below 4)
+func	FUN_000f4a70	isRegKindBelow21	CONFIRMED	returns (param_1 >> 16) < 0x15
+func	FUN_000f4bc8	floatLess	CONFIRMED	returns param_2 < param_1 for floats passed as bits (GH_U2F)
+func	FUN_000f4be8	BitSet__findFirstSet	CONFIRMED	scans param_2 words for the first set bit; returns its index, -1 when none
+func	FUN_000f89b4	tableWordOrEight	CONFIRMED	returns 8 when the index is above 5, otherwise the word at PTR_DAT_001e8b84[index]
+func	FUN_000f89e8	remapSelect1To0	CONFIRMED	1 -> 0, 2 -> 1, otherwise 2
+func	FUN_000f8a0c	remapSelectSmall	CONFIRMED	1 -> 0, 2 -> 1, otherwise 3
+func	FUN_000f8588	lazyEntryGet	INFERRED	if table[param_2] at +0xc is non-null resolves it (FUN_000f83cc) then returns the entry at +0x10
+func	FUN_00103e54	constantZeroFloat	CONFIRMED	returns the float at 0x1aa0d4 (0.0)
+func	FUN_00103e70	isLessThan2	CONFIRMED	returns param_1 < 2
+func	FUN_00103fe8	operandsHaveSameConstant	INFERRED	compares the two words at +0x94/+0x98 of two operand records 0x18 bytes apart
+func	FUN_001040b0	RegKind__laneCount	INFERRED	from the kind table entry flags: 0x400 -> 4, 0x800 -> 3, else 2 for kind 7 and 1 otherwise
+func	FUN_0010485c	Inst__nearestCommonAncestorBlock	INFERRED	like Block__nearestCommonAncestor on the blocks (+0x158) of two instructions, then resolves the redirect with Block__resolveRedirect
+func	FUN_00104330	IRVertexFetch__initSemantics	INFERRED	zeroes +0xac, +0x98, stores 0x1f at +0xb0 and the constant 0x1af9c0 at +0x9c (called by both IRVertexFetch constructors)
+func	FUN_00105d04	IRInst__firstLiteralSourceValue	INFERRED	scans the operand records from the first source up to the last; returns the +0x10 value of the first operand whose +4 object has flag 0x80000 set, else the constant 0x1af9bc
+func	FUN_0010aad4	outputScaleFromExponent	CONFIRMED	float at 0x1af9ec + exponent*4: the table 0x1af9e0..0x1af9f8 holds 0.125 0.25 0.5 1 2 4 8, i.e. the IL output shift scales d8 d4 d2 / x2 x4 x8
+func	FUN_0010aafc	isOutputScaleValue	CONFIRMED	true when the float equals one of the seven entries of the output-scale table
+func	FUN_0010ab40	outputScaleExponent	CONFIRMED	index of the float in the output-scale table minus 3 (-3..3), 0 when absent
+func	FUN_0010ab8c	tryOutputScaleExponent	CONFIRMED	maps 0.125 0.25 0.5 1 2 4 8 to -3..3 and stores it through param_2; returns whether the float was one of them
+func	FUN_0010b820	evaluateCompareFloats	CONFIRMED	evaluates IRInst__getCompareCondition(inst) on two floats: 0 ==, 1 !=, 2 >, 3 >=, 4 <, 5 <=
+func	FUN_00113554	mulFloatZeroAnnihilates	CONFIRMED	returns 0.0 when either operand is 0.0 (so 0*inf = 0), otherwise the single-precision product; called by the Ir*__fold routines for mul-add, dot3, dot4, dot2add
+func	FUN_00126878	RegKind__flagBit1	CONFIRMED	(table[kind*0x10] >> 1) & 1 on the register-kind table at 0x1ea904; siblings RegKind__flagBit0/6/7/8
+func	FUN_001268a4	RegKind__flagBit9	CONFIRMED	(table[kind*0x10] >> 9) & 1
+func	FUN_001268d0	RegKind__byte4	CONFIRMED	byte at +4 of the register-kind table entry (DAT_001ea908[kind*0x10])
+func	FUN_00127264	ConstKey__lanes1	INFERRED	width of operand 0 (+0x20) in the 0x18-byte operand descriptors that Compiler__getOrCreateLoadConstN builds
+func	FUN_0012726c	ConstKey__lanes2	INFERRED	sum of the widths (+0x20, +0x38) of operands 0..1
+func	FUN_0012727c	ConstKey__lanes3	INFERRED	sum of the widths (+0x20, +0x38, +0x50) of operands 0..2
+func	FUN_00127294	ConstKey__lanes4	INFERRED	sum of the widths of operands 0..3
+func	FUN_0012766c	ConstKey__compare1	CONFIRMED	hash-table comparator: 0 when the presence bit 0 of the byte at +0x15c and the width at +0x20 agree, else -1
+func	FUN_001276a0	ConstKey__compare2	CONFIRMED	same for two operands (presence bits 0-1, widths +0x20/+0x38)
+func	FUN_001276fc	ConstKey__compare3	CONFIRMED	same for three operands (bits 0-2, widths +0x20/+0x38/+0x50)
+func	FUN_00127778	ConstKey__compare4	CONFIRMED	same for four operands (bits 0-3, widths +0x20/+0x38/+0x50/+0x68)
+func	FUN_00127814	keyEqualsThreeWords	CONFIRMED	returns 0 when the words at +4, +8, +0xc of both records agree, else -1
+func	FUN_0012c0e4	Program__hasKillTexture	INFERRED	walks the +8 chain from the node at +0x98 and returns 1 for the first one that has flag bit 0 and opcode 0x77 (IrFetchTextureMapKill)
+func	FUN_00134b1c	pairIndex	CONFIRMED	triangular index of an unordered pair (a,b): min + max*(max-1)/2
+func	FUN_00134b58	InterferenceMatrix__setPair	INFERRED	sets the bit pairIndex(a,b) in the bit matrix chunks (word at +8 + index/32)
+func	FUN_00134ba4	InterferenceMatrix__testPair	INFERRED	tests the bit pairIndex(a,b)
+func	FUN_00137e74	BitSet__testRegisterLane	INFERRED	tests bit (reg*4 + lane) of a bitset whose words start at +8
+func	FUN_0013056c	BitSet__setBit42c	INFERRED	sets bit n in the bitset whose chunk pointer is at +0x42c (words at +8)
+func	FUN_00134fc0	storeAfterLocate	CONFIRMED	calls FUN_00134ef4 then stores param_2 at (*param_4)[*param_3]
+func	FUN_00139344	IRInst__isOpcodeInSet139344	CONFIRMED	true for the opcode (instruction info word +8) in {0x69, 0x6b, 0x75, 0x76, 0x9e, 0x9f, 0xa0, 0xa1, 0xaf}
+func	FUN_00147398	IRInst__isOpcodeInSet147398	CONFIRMED	true when FUN_00147238 holds or the opcode is one of 0x13, 0x24-0x26, 0x31, 0x3e-0x40
+func	FUN_001396a0	IRInst__markOpcode13After12	CONFIRMED	when the instruction's opcode is 0x13 and the other's is not 0x12 sets flag 0x20000
+func	FUN_00176350	classifyConstantRange	CONFIRMED	float -> 1 for 1.0, 3 for -1.0, 2 for 0.0, 4 when in 0..1, 5 when in -1..0, else 0
+func	FUN_00176474	ValueKey__findOrInsertLiteral	INFERRED	scans the three literal slots of a source row (16-byte rows at +0x168 - 0xc... ) for the value (returns slot+1) or for the -1.0 sentinel (stores the value, returns slot+1); 0 when full
+func	FUN_001764fc	ValueKey__sourceKindIs1	CONFIRMED	returns *(key+0xa0+n*4) == 1
+func	FUN_00176518	ValueKey__sourceKindIs4	CONFIRMED	returns *(key+0xa0+n*4) == 4
+func	FUN_00176854	ValueKey__lanesAreUnset	CONFIRMED	true when for every lane selected by param_3..param_6 the lane value number at +0x168+0x10*src+4*lane is negative
+func	FUN_001789d4	IRInst__isOpcode8bOr8c	CONFIRMED	(opcode - 0x8b) < 2
+func	FUN_00184bcc	compareIntsAscending	CONFIRMED	three-way compare: 0 when equal, 1 when param_2 < param_1, else -1
+func	FUN_001940f0	Vector__shellSort	CONFIRMED	Knuth shell sort (gap = 3*gap+1 up, /3 down) of the element array (+8) of count (+4) using the comparator in param_2
+func	FUN_00193eb8	Arena__bytesInUse	INFERRED	sums the sizes (+4) of all chunks chained from the first block at +4 minus the unused tail (end - cursor)
+func	FUN_00194aa8	HashTable__grow	CONFIRMED	called from HashTable__insert when a bucket exceeds the capacity: doubles the bucket count, allocates the new bucket array and rehashes every entry
+func	FUN_00194e44	HashTable__grow_194e44	INFERRED	same rehash as HashTable__grow for the pair table that FUN_001950e0 fills
+func	FUN_001950e0	HashTable__insert_1950e0	INFERRED	like HashTable__insert but allocates a 0xc-byte {arena, key, value} entry for the pair (param_2, param_3)
+func	FUN_00194618	HashTable__findEntry	INFERRED	like HashTable__find, but the comparator (+0xc) is applied to the first word of the pointed-to entry and the entry pointer is returned
+func	FUN_001943f0	HashTable__destroy_1943f0	INFERRED	frees every element block (Arena__free of ptr-4), every bucket vector and the bucket array
+func	FUN_00194504	HashTable__destroy_194504	INFERRED	same body as the other destroy: element blocks, buckets, bucket array
+func	FUN_0019ec88	ilSkipRelativeAddressWords	INFERRED	advances an IL token pointer past the extra words of a relative-address operand (mode 1: 1 word; otherwise skips param_2+1 source operands)
+func	FUN_0019ecf4	ilSourceOperandWordCount	CONFIRMED	number of dwords of an IL source operand: 1, +1 for bit 22 (second word), nested operands for bit 25, relative-address words for bits 23-24, +1 for bit 26 (the same fields ildisPrintSourceOperand consumes)
+func	FUN_0019edb4	ilInstructionHeaderWordCount	INFERRED	opcode 0x7d -> 1; otherwise 1 (+1 when bit 31 is set); opcode 0x17 stops there, else +1 when bit 30 is set; returns the word count
+func	FUN_0019ee08	ilDestinationOperandWordCount	INFERRED	like ilSourceOperandWordCount without the nested-operand loop: 1, +1 bit 22, relative words bits 23-24, +1 bit 26

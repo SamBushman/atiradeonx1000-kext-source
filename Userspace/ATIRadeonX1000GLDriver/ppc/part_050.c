@@ -1468,8 +1468,8 @@ int FUN_00193e74(param_1, param_2, param_3)
   return callResult;
 }
 
-/* FUN_00193eb8 @ 0x193eb8 (76 bytes) */
-int FUN_00193eb8(param_1)
+/* Arena__bytesInUse @ 0x193eb8 (76 bytes) */
+int Arena__bytesInUse(param_1)
   int param_1;
 {
   int *piVar1;
@@ -1618,8 +1618,8 @@ int DList__count(list)
   return count;
 }
 
-/* FUN_00194060 @ 0x194060 (72 bytes) */
-int FUN_00194060(param_1)
+/* DListNode__ctor_194060 @ 0x194060 (72 bytes) */
+int DListNode__ctor_194060(param_1)
   undefined4 *param_1;
 {
   undefined *puVar1;
@@ -1654,8 +1654,8 @@ int DListNode__init(param_1)
   return;
 }
 
-/* FUN_001940f0 @ 0x1940f0 (280 bytes) */
-int FUN_001940f0(param_1, param_2)
+/* Vector__shellSort @ 0x1940f0 (280 bytes) */
+int Vector__shellSort(param_1, param_2)
   int param_1;
   code *param_2;
 {
@@ -1812,8 +1812,8 @@ LAB_001943c4:
   return found;
 }
 
-/* FUN_001943f0 @ 0x1943f0 (276 bytes) */
-int FUN_001943f0(param_1)
+/* HashTable__destroy_1943f0 @ 0x1943f0 (276 bytes) */
+int HashTable__destroy_1943f0(param_1)
   uint *param_1;
 {
   uint uVar1;
@@ -1866,8 +1866,8 @@ int FUN_001943f0(param_1)
   return ((int (*)())Arena__free)(param_1[5],loopIndex);
 }
 
-/* FUN_00194504 @ 0x194504 (276 bytes) */
-int FUN_00194504(param_1)
+/* HashTable__destroy_194504 @ 0x194504 (276 bytes) */
+int HashTable__destroy_194504(param_1)
   uint *param_1;
 {
   uint uVar1;
@@ -1920,8 +1920,8 @@ int FUN_00194504(param_1)
   return ((int (*)())Arena__free)(param_1[5],loopIndex);
 }
 
-/* FUN_00194618 @ 0x194618 (264 bytes) */
-int FUN_00194618(param_1, param_2)
+/* HashTable__findEntry @ 0x194618 (264 bytes) */
+int HashTable__findEntry(param_1, param_2)
   int *param_1;
   undefined4 param_2;
 {
@@ -2102,8 +2102,8 @@ int FUN_00194a94(param_1, param_2)
   return ((int (*)())FUN_00194938)(param_1);
 }
 
-/* FUN_00194aa8 @ 0x194aa8 (260 bytes) */
-int FUN_00194aa8(param_1)
+/* HashTable__grow @ 0x194aa8 (260 bytes) */
+int HashTable__grow(param_1)
   uint *param_1;
 {
   uint allocation3;
@@ -2246,14 +2246,14 @@ int HashTable__insert(param_1, param_2)
   puVar3 = (undefined4 *)((int (*)())Vector__insertAt)(iVar5,0);
   *puVar3 = param_2;
   if (*param_1 < *(uint *)(iVar5 + 4)) {
-    ((int (*)())FUN_00194aa8)(param_1);
+    ((int (*)())HashTable__grow)(param_1);
   }
   param_1[1] = param_1[1] + 1;
   return;
 }
 
-/* FUN_00194e44 @ 0x194e44 (260 bytes) */
-int FUN_00194e44(param_1)
+/* HashTable__grow_194e44 @ 0x194e44 (260 bytes) */
+int HashTable__grow_194e44(param_1)
   uint *param_1;
 {
   uint allocation3;
@@ -2365,8 +2365,8 @@ int FUN_00194e44(param_1)
   return;
 }
 
-/* FUN_001950e0 @ 0x1950e0 (208 bytes) */
-int FUN_001950e0(param_1, param_2, param_3)
+/* HashTable__insert_1950e0 @ 0x1950e0 (208 bytes) */
+int HashTable__insert_1950e0(param_1, param_2, param_3)
   uint *param_1;
   uint param_2;
   uint param_3;
@@ -2427,7 +2427,7 @@ int FUN_001950e0(param_1, param_2, param_3)
   puVar3 = (undefined4 *)((int (*)())Vector__insertAt)(puVar6,0);
   *puVar3 = allocation + 1;
   if (*param_1 < puVar6[1]) {
-    ((int (*)())FUN_00194e44)(param_1);
+    ((int (*)())HashTable__grow_194e44)(param_1);
   }
   param_1[1] = param_1[1] + 1;
   return;

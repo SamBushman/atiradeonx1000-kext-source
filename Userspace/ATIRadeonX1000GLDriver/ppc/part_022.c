@@ -1769,8 +1769,8 @@ int FUN_000e78f8(param_1, param_2)
   return 0;
 }
 
-/* FUN_000e7924 @ 0xe7924 (104 bytes) */
-int FUN_000e7924(param_1, param_2)
+/* Block__nearestCommonAncestor @ 0xe7924 (104 bytes) */
+int Block__nearestCommonAncestor(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -1785,8 +1785,8 @@ int FUN_000e7924(param_1, param_2)
   return iVar2;
 }
 
-/* FUN_000e798c @ 0xe798c (20 bytes) */
-int FUN_000e798c(param_1)
+/* Block__vectorF8NonEmpty @ 0xe798c (20 bytes) */
+int Block__vectorF8NonEmpty(param_1)
   int param_1;
 {
   return *(int *)(*(int *)(param_1 + 0xf8) + 4) != 0;
@@ -1827,8 +1827,8 @@ int FUN_000e79e8(param_1)
   return *(int *)(*(int *)(param_1 + 0xd0) + 4) != 0;
 }
 
-/* FUN_000e79fc @ 0xe79fc (20 bytes) */
-int FUN_000e79fc(param_1)
+/* Block__vectorD4NonEmpty @ 0xe79fc (20 bytes) */
+int Block__vectorD4NonEmpty(param_1)
   int param_1;
 {
   return *(int *)(*(int *)(param_1 + 0xd4) + 4) != 0;
@@ -1935,8 +1935,8 @@ int FUN_000e7b9c(param_1)
   return piVar3;
 }
 
-/* FUN_000e7c98 @ 0xe7c98 (88 bytes) */
-int FUN_000e7c98(param_1)
+/* Block__resolveRedirect @ 0xe7c98 (88 bytes) */
+int Block__resolveRedirect(param_1)
   int param_1;
 {
   int *piVar1;
@@ -1993,8 +1993,8 @@ int FUN_000e7d5c(param_1)
   return *(undefined4 *)(sourceDef + 0x94);
 }
 
-/* FUN_000e7de4 @ 0xe7de4 (172 bytes) */
-int FUN_000e7de4(param_1, param_2)
+/* Block__isInVectorD4Of @ 0xe7de4 (172 bytes) */
+int Block__isInVectorD4Of(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -2740,7 +2740,7 @@ int Block__connect(fromBlock, toBlock)
 {
   int alreadyLinked;
   
-  alreadyLinked = ((int (*)())FUN_000e7de4)(fromBlock,toBlock);
+  alreadyLinked = ((int (*)())Block__isInVectorD4Of)(fromBlock,toBlock);
   if (alreadyLinked == 0) {
     ((int (*)())FUN_000e8dd4)(fromBlock,toBlock);
     ((int (*)())FUN_000e8d5c)(toBlock,fromBlock);

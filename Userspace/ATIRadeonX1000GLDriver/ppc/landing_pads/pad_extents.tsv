@@ -1,7 +1,7 @@
 cd10c	cd110	FUN_000cd05c
 d0340	d0344	vsDisassembleToString
 d0398	d039c	vsDisassembleVertexProgram
-d4ec8	d4ecc	FUN_000d4e8c
+d4ec8	d4ecc	scDumpPixelProgram
 da180	da184	FUN_000da0c0
 da578	da57c	FUN_000da4b8
 e1a08	e1a0c	FUN_000e1920
@@ -549,12 +549,12 @@ ffd5c	ffd60	FUN_000fd5c8
 19323c	193240	FudoPs__peepholeCombine
 193b88	193ba8	FUN_00193b3c
 193c74	193c94	FUN_00193c00
-194bac	194bc8	FUN_00194aa8
-194bc8	194be8	FUN_00194aa8
+194bac	194bc8	HashTable__grow
+194bc8	194be8	HashTable__grow
 194dfc	194e1c	HashTable__insert
-194f48	194f64	FUN_00194e44
-194f64	194f84	FUN_00194e44
-1951b0	1951d0	FUN_001950e0
+194f48	194f64	HashTable__grow_194e44
+194f64	194f84	HashTable__grow_194e44
+1951b0	1951d0	HashTable__insert_1950e0
 19b998	19b9ac	FUN_0019d480
 19ba28	19ba3c	FUN_0019d480
 19bab0	19bac4	R300VMachineAssembler__deleting_dtor

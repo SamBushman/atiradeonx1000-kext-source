@@ -1,7 +1,7 @@
 #include "decls.h"
 
-/* FUN_000c73c0 @ 0xc73c0 (144 bytes) */
-int FUN_000c73c0(param_1)
+/* ilPopFreeRegister @ 0xc73c0 (144 bytes) */
+int ilPopFreeRegister(param_1)
   int param_1;
 {
   int iVar1;
@@ -39,8 +39,8 @@ int FUN_000c73c0(param_1)
   return -1;
 }
 
-/* FUN_000c7460 @ 0xc7460 (468 bytes) */
-int FUN_000c7460(param_1, param_2, param_3, param_4, param_5)
+/* ilEmitProjectiveDivide @ 0xc7460 (468 bytes) */
+int ilEmitProjectiveDivide(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   uint *param_2;
   uint *param_3;
@@ -99,8 +99,8 @@ LAB_000c7584:
   return param_5 + 0xc;
 }
 
-/* FUN_000c7650 @ 0xc7650 (680 bytes) */
-int FUN_000c7650(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+/* ilEmitShadowCompare @ 0xc7650 (680 bytes) */
+int ilEmitShadowCompare(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   int param_1;
   undefined4 param_2;
   uint *param_3;
@@ -399,8 +399,8 @@ int FUN_000c7930(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   return puVar3;
 }
 
-/* FUN_000c8110 @ 0xc8110 (1252 bytes) */
-int FUN_000c8110(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+/* ilEmitPrologue @ 0xc8110 (1252 bytes) */
+int ilEmitPrologue(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   uint *param_1;
   int param_2;
   undefined4 param_3;
@@ -427,39 +427,39 @@ int FUN_000c8110(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined4 local_54;
   undefined4 local_50;
   
-  uVar3 = FUN_000c73a0(param_2);
+  uVar3 = ilNextCounterValue(param_2);
   *(undefined4 *)(param_2 + 0x21e0) = uVar3;
-  uVar3 = FUN_000c73a0(param_2);
+  uVar3 = ilNextCounterValue(param_2);
   *(undefined4 *)(param_2 + 0x21e4) = uVar3;
-  uVar3 = FUN_000c73a0(param_2);
+  uVar3 = ilNextCounterValue(param_2);
   *(undefined4 *)(param_2 + 0x21e8) = uVar3;
-  uVar3 = FUN_000c73a0(param_2);
+  uVar3 = ilNextCounterValue(param_2);
   *(undefined4 *)(param_2 + 0x21ec) = uVar3;
   if (*(int *)(param_2 + 0x2324) != 0) {
-    uVar3 = FUN_000c73a0(param_2);
+    uVar3 = ilNextCounterValue(param_2);
     *(undefined4 *)(param_2 + 9000) = uVar3;
   }
-  uVar3 = FUN_000c73a0(param_2);
+  uVar3 = ilNextCounterValue(param_2);
   *(undefined4 *)(param_2 + 0x2200) = uVar3;
-  uVar12 = FUN_000c73a0(param_2);
+  uVar12 = ilNextCounterValue(param_2);
   *(int *)(param_2 + 0x2208) = (int)((ulonglong)uVar12 >> 0x20);
   if (*(int *)(param_2 + 100) != 0) {
-    uVar3 = FUN_000c7350(param_2,(int)uVar12,param_3,param_4,param_5,param_6,param_7,param_8);
+    uVar3 = ilAllocLowestFreeBit8(param_2,(int)uVar12,param_3,param_4,param_5,param_6,param_7,param_8);
     *(undefined4 *)(param_2 + 0x68) = uVar3;
   }
   if (*(int *)(param_2 + 0x22fc) != 0) {
-    uVar3 = FUN_000c73a0(param_2);
+    uVar3 = ilNextCounterValue(param_2);
     *(undefined4 *)(param_2 + 0x2300) = uVar3;
-    uVar3 = ((int (*)())FUN_000c73c0)(param_2);
+    uVar3 = ((int (*)())ilPopFreeRegister)(param_2);
     *(undefined4 *)(param_2 + 0x2304) = uVar3;
-    uVar3 = ((int (*)())FUN_000c73c0)(param_2);
+    uVar3 = ((int (*)())ilPopFreeRegister)(param_2);
     *(undefined4 *)(param_2 + 0x2308) = uVar3;
     *param_1 = 0x1ff0016;
     param_1[1] = *(uint *)(param_2 + 0x68) & 0xffff | 0x110000;
     param_1 = param_1 + 2;
   }
   if (*(int *)(param_2 + 0x21d0) != 0) {
-    uVar3 = FUN_000c73a0(param_2);
+    uVar3 = ilNextCounterValue(param_2);
     *(undefined4 *)(param_2 + 0x21dc) = uVar3;
     *param_1 = 0x1ff0016;
     param_1[1] = *(uint *)(param_2 + 0x21d4) & 0xffff | 0x110000;
@@ -467,13 +467,13 @@ int FUN_000c8110(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     param_1 = param_1 + 3;
   }
   if (*(int *)(param_2 + 0x4c) != 0) {
-    uVar3 = FUN_000c73a0(param_2);
+    uVar3 = ilNextCounterValue(param_2);
     *(undefined4 *)(param_2 + 0x54) = uVar3;
-    uVar3 = ((int (*)())FUN_000c73c0)(param_2);
+    uVar3 = ((int (*)())ilPopFreeRegister)(param_2);
     *(undefined4 *)(param_2 + 0x58) = uVar3;
-    uVar12 = ((int (*)())FUN_000c73c0)(param_2);
+    uVar12 = ((int (*)())ilPopFreeRegister)(param_2);
     *(int *)(param_2 + 0x5c) = (int)((ulonglong)uVar12 >> 0x20);
-    uVar3 = FUN_000c7350(param_2,(int)uVar12,param_3,param_4,param_5,param_6,param_7,param_8);
+    uVar3 = ilAllocLowestFreeBit8(param_2,(int)uVar12,param_3,param_4,param_5,param_6,param_7,param_8);
     *(undefined4 *)(param_2 + 0x60) = uVar3;
     *param_1 = 0x1ff0016;
     uVar6 = *(uint *)(param_2 + 0x60);
@@ -517,14 +517,14 @@ int FUN_000c8110(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     do {
       uVar10 = 1 << (uVar8 & 0x3f);
       if (((uVar2 | uVar6) & uVar10) != 0) {
-        uVar3 = ((int (*)())FUN_000c73c0)(param_2);
+        uVar3 = ((int (*)())ilPopFreeRegister)(param_2);
         *(undefined4 *)(iVar9 + 0xb8) = uVar3;
         if (uVar7 == 0) {
           uVar7 = 1;
         }
       }
       if ((uVar10 & *(uint *)(param_2 + 0x74)) != 0) {
-        uVar3 = FUN_000c73a0(param_2);
+        uVar3 = ilNextCounterValue(param_2);
         *(undefined4 *)(param_2 + 0x184) = uVar3;
         if (uVar7 < 2) {
           uVar7 = 2;
@@ -539,7 +539,7 @@ int FUN_000c8110(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
       iVar9 = param_2;
       do {
         loopIndex = loopIndex + 1;
-        uVar3 = FUN_000c73a0(param_2);
+        uVar3 = ilNextCounterValue(param_2);
         *(undefined4 *)(iVar9 + 0x17c) = uVar3;
         iVar9 = iVar9 + 4;
       } while (loopIndex != uVar7);
@@ -634,8 +634,8 @@ LAB_000c8650:
   return;
 }
 
-/* FUN_000c8760 @ 0xc8760 (104 bytes) */
-int FUN_000c8760(param_1, param_2, param_3)
+/* ilRemapSourceOperandRegister @ 0xc8760 (104 bytes) */
+int ilRemapSourceOperandRegister(param_1, param_2, param_3)
   uint *param_1;
   undefined4 param_2;
   int param_3;
@@ -656,8 +656,8 @@ int FUN_000c8760(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_000c87d0 @ 0xc87d0 (296 bytes) */
-int FUN_000c87d0(param_1, param_2, param_3)
+/* ilMarkOperandRegisterUsed @ 0xc87d0 (296 bytes) */
+int ilMarkOperandRegisterUsed(param_1, param_2, param_3)
   uint *param_1;
   undefined4 param_2;
   int param_3;
@@ -730,8 +730,8 @@ LAB_000c88e4:
   return;
 }
 
-/* FUN_000c8910 @ 0xc8910 (400 bytes) */
-int FUN_000c8910(param_1, param_2, param_3, param_4)
+/* ilMarkInstructionRegistersUsed @ 0xc8910 (400 bytes) */
+int ilMarkInstructionRegistersUsed(param_1, param_2, param_3, param_4)
   uint *param_1;
   int param_2;
   int param_3;
@@ -779,7 +779,7 @@ int FUN_000c8910(param_1, param_2, param_3, param_4)
     if ((local_48 & 0x1800000) != 0) {
       puVar4 = puVar4 + 1;
     }
-    ((int (*)())FUN_000c87d0)(&local_48,&local_3c,param_4);
+    ((int (*)())ilMarkOperandRegisterUsed)(&local_48,&local_3c,param_4);
   }
   if (1 < param_3) {
     local_44 = *puVar4;
@@ -792,7 +792,7 @@ int FUN_000c8910(param_1, param_2, param_3, param_4)
     if ((local_44 & 0x1800000) != 0) {
       puVar4 = puVar4 + 1;
     }
-    ((int (*)())FUN_000c87d0)(&local_44,&local_38,param_4);
+    ((int (*)())ilMarkOperandRegisterUsed)(&local_44,&local_38,param_4);
   }
   puVar2 = puVar4;
   if (2 < param_3) {
@@ -805,13 +805,13 @@ int FUN_000c8910(param_1, param_2, param_3, param_4)
     if ((local_40 & 0x1800000) != 0) {
       puVar2 = puVar2 + 1;
     }
-    ((int (*)())FUN_000c87d0)(&local_40,local_34,param_4);
+    ((int (*)())ilMarkOperandRegisterUsed)(&local_40,local_34,param_4);
   }
   return puVar2;
 }
 
-/* FUN_000c8aa0 @ 0xc8aa0 (780 bytes) */
-int FUN_000c8aa0(param_1, param_2, param_3, param_4, param_5)
+/* ilCopyInstructionRemapped @ 0xc8aa0 (780 bytes) */
+int ilCopyInstructionRemapped(param_1, param_2, param_3, param_4, param_5)
   undefined4 *param_1;
   undefined4 *param_2;
   int param_3;
@@ -881,7 +881,7 @@ int FUN_000c8aa0(param_1, param_2, param_3, param_4, param_5)
       puVar1 = puVar7 + 2;
     }
     puVar7 = puVar1;
-    ((int (*)())FUN_000c8760)(&local_58,&local_4c,param_5);
+    ((int (*)())ilRemapSourceOperandRegister)(&local_58,&local_4c,param_5);
     *puVar4 = local_58;
     puVar1 = puVar4 + 1;
     if ((local_58 & 0x400000) != 0) {
@@ -904,7 +904,7 @@ int FUN_000c8aa0(param_1, param_2, param_3, param_4, param_5)
       puVar1 = puVar7 + 2;
     }
     puVar7 = puVar1;
-    ((int (*)())FUN_000c8760)(&local_54,&local_48,param_5);
+    ((int (*)())ilRemapSourceOperandRegister)(&local_54,&local_48,param_5);
     *puVar4 = local_54;
     puVar1 = puVar4 + 1;
     if ((local_54 & 0x400000) != 0) {
@@ -927,7 +927,7 @@ int FUN_000c8aa0(param_1, param_2, param_3, param_4, param_5)
       puVar1 = puVar7 + 2;
     }
     puVar7 = puVar1;
-    ((int (*)())FUN_000c8760)(&local_50,local_44,param_5);
+    ((int (*)())ilRemapSourceOperandRegister)(&local_50,local_44,param_5);
     *puVar4 = local_50;
     puVar1 = puVar4 + 1;
     if ((local_50 & 0x400000) != 0) {
@@ -947,8 +947,8 @@ int FUN_000c8aa0(param_1, param_2, param_3, param_4, param_5)
   return puVar7;
 }
 
-/* FUN_000c8de0 @ 0xc8de0 (76 bytes) */
-int FUN_000c8de0(param_1, param_2)
+/* ilPushDclRecord @ 0xc8de0 (76 bytes) */
+int ilPushDclRecord(param_1, param_2)
   int *param_1;
   undefined4 param_2;
 {
@@ -962,8 +962,8 @@ int FUN_000c8de0(param_1, param_2)
   return _memcpy(allocation,param_2,0x24);
 }
 
-/* FUN_000c8e30 @ 0xc8e30 (28 bytes) */
-void FUN_000c8e30(int param_1,int param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+/* ilStoreFloat4Constant @ 0xc8e30 (28 bytes) */
+void ilStoreFloat4Constant(int param_1,int param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
   int iVar1;
   
@@ -1388,7 +1388,7 @@ code_r0x000c90a4:
     uVar9 = 0;
 LAB_000c9340:
     pppppppuVar18 = (uint *******)((int)((unsigned char *)0x0) + 2);
-    local_2bb4 = (uint *)((int (*)())FUN_000c8910)(puVar29,uVar9,2,&local_23e8);
+    local_2bb4 = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(puVar29,uVar9,2,&local_23e8);
     puVar26 = local_2bb4;
     goto switchD_000c90cc_caseD_18;
   case 8:
@@ -1409,7 +1409,7 @@ LAB_000c9340:
   case 0x40:
   case 100:
     pppppppuVar18 = (uint *******)((int)((unsigned char *)0x0) + 3);
-    local_2bb4 = (uint *)((int (*)())FUN_000c8910)(puVar29,1,3,&local_23e8);
+    local_2bb4 = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(puVar29,1,3,&local_23e8);
     puVar26 = local_2bb4;
     goto switchD_000c90cc_caseD_18;
   case 0xf:
@@ -1450,7 +1450,7 @@ LAB_000c9340:
       local_2270 = 1 << ((uint)pppppppuVar18 >> 0x10 & 0x3f) | local_2270;
     }
     pppppppuVar18 = (uint *******)((uint)pppppppuVar18 >> 0x18 & 7);
-    FUN_000c7270(&local_23e8,uVar33,pppppppuVar18);
+    ilRecordInputSemantic(&local_23e8,uVar33,pppppppuVar18);
     local_2bb4 = local_2bb4 + 1;
     puVar26 = local_2bb4;
     goto switchD_000c90cc_caseD_18;
@@ -1474,7 +1474,7 @@ LAB_000c9564:
       local_2b60 = puVar29[4];
       local_2bb4 = puVar29 + 6;
       local_2b5c = puVar29[5];
-      FUN_000c7290(&local_23e8,uVar32 & 0xffff,pppppppuVar18);
+      ilRecordDefinedConstantPrimary(&local_23e8,uVar32 & 0xffff,pppppppuVar18);
       puVar26 = local_2bb4;
     }
     else {
@@ -1486,7 +1486,7 @@ LAB_000c9564:
         local_2b60 = puVar29[4];
         local_2bb4 = puVar29 + 6;
         local_2b5c = puVar29[5];
-        FUN_000c72f0(&local_23e8,uVar32 & 0xffff,pppppppuVar18);
+        ilRecordDefinedConstantSecondary(&local_23e8,uVar32 & 0xffff,pppppppuVar18);
         puVar26 = local_2bb4;
       }
     }
@@ -1494,19 +1494,19 @@ LAB_000c9564:
   case 0x24:
     pppppppuVar18 = (uint *******)((int)((unsigned char *)0x0) + 2);
     iVar36 = iVar36 + 5;
-    local_2bb4 = (uint *)((int (*)())FUN_000c8910)(puVar29,1,2,&local_23e8);
+    local_2bb4 = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(puVar29,1,2,&local_23e8);
     puVar26 = local_2bb4;
     goto switchD_000c90cc_caseD_18;
   case 0x35:
     pppppppuVar18 = &local_23e8;
     local_2bb4 = puVar29 + 2;
     local_2b8c[0] = (uint ******)puVar29[1];
-    ((int (*)())FUN_000c87d0)(local_2b8c,auStack_2b80,pppppppuVar18);
+    ((int (*)())ilMarkOperandRegisterUsed)(local_2b8c,auStack_2b80,pppppppuVar18);
     puVar26 = local_2bb4;
     goto switchD_000c90cc_caseD_18;
   case 0x37:
     pppppppuVar18 = (uint *******)((int)((unsigned char *)0x0) + 1);
-    local_2bb4 = (uint *)((int (*)())FUN_000c8910)(puVar29,0,1,&local_23e8);
+    local_2bb4 = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(puVar29,0,1,&local_23e8);
     local_1bc = 1;
     puVar26 = local_2bb4;
     goto switchD_000c90cc_caseD_18;
@@ -1549,7 +1549,7 @@ LAB_000c9564:
       puVar29 = local_2bb4 + 2;
     }
     local_2bb4 = puVar29;
-    ((int (*)())FUN_000c87d0)(&local_2b74,&local_2bb0,pppppppuVar18);
+    ((int (*)())ilMarkOperandRegisterUsed)(&local_2b74,&local_2bb0,pppppppuVar18);
     puVar26 = local_2bb4;
     goto switchD_000c90cc_caseD_18;
   case 0x5e:
@@ -1593,13 +1593,13 @@ LAB_000c9564:
       local_2ba0[0] = puVar29[1];
       local_2bb4 = puVar29 + 2;
     }
-    ((int (*)())FUN_000c87d0)(&local_2bb0,&local_2ba4,pppppppuVar18);
-    ((int (*)())FUN_000c87d0)(local_2bac,local_2ba0,pppppppuVar18);
+    ((int (*)())ilMarkOperandRegisterUsed)(&local_2bb0,&local_2ba4,pppppppuVar18);
+    ((int (*)())ilMarkOperandRegisterUsed)(local_2bac,local_2ba0,pppppppuVar18);
     puVar26 = local_2bb4;
     goto switchD_000c90cc_caseD_18;
   }
   pppppppuVar18 = (uint *******)((int)((unsigned char *)0x0) + 1);
-  local_2bb4 = (uint *)((int (*)())FUN_000c8910)(puVar29,uVar9,1,&local_23e8);
+  local_2bb4 = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(puVar29,uVar9,1,&local_23e8);
   puVar26 = local_2bb4;
   goto switchD_000c90cc_caseD_18;
 switchD_000c9ab8_caseD_18:
@@ -1748,14 +1748,14 @@ LAB_000ca6bc:
         iVar35 = *(int *)(iVar39 + local_29f8);
         iVar17 = ((int)uVar32 >> 5) + (uint)((int)uVar32 < 0 && (uVar32 & 0x1f) != 0);
         if ((1 << (uVar32 + iVar17 * -0x20 & 0x3f) & local_2260[iVar17]) == 0) goto LAB_000caa2c;
-        iVar17 = FUN_000c7240(*(undefined4 *)(iVar36 + 4));
-        iVar36 = FUN_000c7240(*(undefined4 *)(iVar36 + 0xc));
+        iVar17 = ilSelectorOneToThreeOrZero(*(undefined4 *)(iVar36 + 4));
+        iVar36 = ilSelectorOneToThreeOrZero(*(undefined4 *)(iVar36 + 0xc));
         local_78 = (longlong)(int)local_2240[uVar32 * 4 + iVar36];
         aiStack_1220[iVar35 * 4 + iVar17] = (int)local_2240[uVar32 * 4 + iVar36];
       }
       else if (*(int *)(iVar36 + 8) == 0x18) {
 LAB_000caa2c:
-        ((int (*)())FUN_000c8de0)(programBody + 0x1589,iVar36);
+        ((int (*)())ilPushDclRecord)(programBody + 0x1589,iVar36);
         uVar21 = local_2a04;
       }
       uVar33 = uVar33 + 1;
@@ -1770,7 +1770,7 @@ LAB_000caa4c:
             iVar36 = iVar39 + local_29fc;
             if (*(int *)(iVar36 + 8) == 1) {
               ppppppuVar15 = *(uint *******)(iVar39 + local_29fc);
-              iVar17 = FUN_000c7240(*(undefined4 *)(iVar36 + 4));
+              iVar17 = ilSelectorOneToThreeOrZero(*(undefined4 *)(iVar36 + 4));
               ppppppuVar10 = *(uint *******)(iVar36 + 0x14);
               *(undefined1 *)(programBody + (int)(((unsigned char *)0x00001005) + (int)ppppppuVar15 * 5)) = 1;
               programBody[(int)(((unsigned char *)0x00001001) + (int)ppppppuVar15 * 5 + iVar17)] = ppppppuVar10;
@@ -1960,11 +1960,11 @@ switchD_000c90cc_caseD_0:
     if (bVar4) {
       bVar4 = false;
       local_2bb8 = (uint *******)
-                   ((int (*)())FUN_000c8110)(local_2bb8,&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,
+                   ((int (*)())ilEmitPrologue)(local_2bb8,&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,
                                 iVar39,pppppppuVar25);
     }
     pppppppuVar18 = (uint *******)((int)((unsigned char *)0x0) + 1);
-    local_2bb4 = (uint *)((int (*)())FUN_000c8aa0)(&local_2bb8,&local_2bb4,1,1,&local_23e8);
+    local_2bb4 = (uint *)((int (*)())ilCopyInstructionRemapped)(&local_2bb8,&local_2bb4,1,1,&local_23e8);
     puVar26 = local_2bb4;
     pppppppuVar30 = local_2bb8;
     goto switchD_000c9ab8_caseD_18;
@@ -1988,11 +1988,11 @@ switchD_000c90cc_caseD_0:
     if (bVar4) {
       bVar4 = false;
       local_2bb8 = (uint *******)
-                   ((int (*)())FUN_000c8110)(local_2bb8,&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,
+                   ((int (*)())ilEmitPrologue)(local_2bb8,&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,
                                 iVar39,pppppppuVar25);
     }
     pppppppuVar18 = (uint *******)((int)((unsigned char *)0x0) + 1);
-    local_2bb4 = (uint *)((int (*)())FUN_000c8aa0)(&local_2bb8,&local_2bb4,1,2,&local_23e8);
+    local_2bb4 = (uint *)((int (*)())ilCopyInstructionRemapped)(&local_2bb8,&local_2bb4,1,2,&local_23e8);
     puVar26 = local_2bb4;
     pppppppuVar30 = local_2bb8;
     goto switchD_000c9ab8_caseD_18;
@@ -2013,7 +2013,7 @@ switchD_000c90cc_caseD_0:
   case 0x11:
   case 0x34:
     pppppppuVar18 = (uint *******)0x0;
-    local_2bb4 = (uint *)((int (*)())FUN_000c8aa0)(&local_2bb8,&local_2bb4,0,2,&local_23e8);
+    local_2bb4 = (uint *)((int (*)())ilCopyInstructionRemapped)(&local_2bb8,&local_2bb4,0,2,&local_23e8);
     puVar26 = local_2bb4;
     pppppppuVar30 = local_2bb8;
     goto switchD_000c9ab8_caseD_18;
@@ -2048,11 +2048,11 @@ switchD_000c90cc_caseD_0:
     if (bVar4) {
       bVar4 = false;
       local_2bb8 = (uint *******)
-                   ((int (*)())FUN_000c8110)(local_2bb8,&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,
+                   ((int (*)())ilEmitPrologue)(local_2bb8,&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,
                                 iVar39,pppppppuVar25);
     }
     pppppppuVar18 = (uint *******)((int)((unsigned char *)0x0) + 1);
-    local_2bb4 = (uint *)((int (*)())FUN_000c8aa0)(&local_2bb8,&local_2bb4,1,3,&local_23e8);
+    local_2bb4 = (uint *)((int (*)())ilCopyInstructionRemapped)(&local_2bb8,&local_2bb4,1,3,&local_23e8);
     puVar26 = local_2bb4;
     pppppppuVar30 = local_2bb8;
     goto switchD_000c9ab8_caseD_18;
@@ -2135,7 +2135,7 @@ switchD_000c90cc_caseD_0:
     local_2bb4 = puVar19 + 2;
     local_2b8c[0] = (uint ******)puVar19[1];
     local_2bb8 = local_2bb8 + 1;
-    ((int (*)())FUN_000c8760)(local_2b8c,auStack_2b80,pppppppuVar18);
+    ((int (*)())ilRemapSourceOperandRegister)(local_2b8c,auStack_2b80,pppppppuVar18);
     *local_2bb8 = local_2b8c[0];
     puVar26 = local_2bb4;
     pppppppuVar30 = local_2bb8 + 1;
@@ -2151,7 +2151,7 @@ switchD_000c90cc_caseD_0:
     if (bVar4) {
       bVar4 = false;
       local_2bb8 = (uint *******)
-                   ((int (*)())FUN_000c8110)(local_2bb8,&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,
+                   ((int (*)())ilEmitPrologue)(local_2bb8,&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,
                                 iVar39,pppppppuVar25);
       puVar19 = local_2bb4;
     }
@@ -2199,7 +2199,7 @@ LAB_000ca0e4:
       else {
         local_60 = (uint ******)&local_2b98;
         local_70 = (uint ******)&local_2b74;
-        local_2bb8 = (uint *******)((int (*)())FUN_000c7460)(&local_23e8,local_70,local_60,uVar22,local_2bb8);
+        local_2bb8 = (uint *******)((int (*)())ilEmitProjectiveDivide)(&local_23e8,local_70,local_60,uVar22,local_2bb8);
         ppppppuVar28 = local_60;
         if (((uint)local_2ba4 & 0x400000) == 0) {
           pppppppuVar30 = (uint *******)0x0;
@@ -2227,7 +2227,7 @@ LAB_000ca0e4:
       ppppppuVar28 = (uint ******)&local_2b98;
     }
     pppppppuVar18 = &local_23e8;
-    ((int (*)())FUN_000c8760)(local_70,ppppppuVar28,&local_23e8);
+    ((int (*)())ilRemapSourceOperandRegister)(local_70,ppppppuVar28,&local_23e8);
     *local_2bb8 = ppppppuVar10;
     pppppppuVar25 = local_2bb8 + 1;
     if (bVar3) {
@@ -2258,7 +2258,7 @@ LAB_000ca0e4:
        (local_2378 << (uVar32 & 0x3f) != 0)) {
       pppppppuVar18 = (uint *******)&local_2ba4;
       local_2bb8 = (uint *******)
-                   ((int (*)())FUN_000c7650)(&local_23e8,local_70,pppppppuVar18,&local_2bb0,uVar22,pppppppuVar30,
+                   ((int (*)())ilEmitShadowCompare)(&local_23e8,local_70,pppppppuVar18,&local_2bb0,uVar22,pppppppuVar30,
                                 local_2bb8,pppppppuVar25);
       pppppppuVar20 = pppppppuVar30;
     }
@@ -2269,7 +2269,7 @@ LAB_000ca0e4:
     if (bVar4) {
       bVar4 = false;
       local_2bb8 = (uint *******)
-                   ((int (*)())FUN_000c8110)(local_2bb8,&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,
+                   ((int (*)())ilEmitPrologue)(local_2bb8,&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,
                                 iVar39,pppppppuVar25);
       puVar19 = local_2bb4;
     }
@@ -2317,7 +2317,7 @@ LAB_000ca3b8:
       if (local_2378 << (uVar32 & 0x3f) != 0) {
         pppppppuVar18 = &local_2b74;
         local_2bb8 = (uint *******)
-                     ((int (*)())FUN_000c7460)(&local_23e8,&local_2b98,pppppppuVar18,uVar22,local_2bb8);
+                     ((int (*)())ilEmitProjectiveDivide)(&local_23e8,&local_2b98,pppppppuVar18,uVar22,local_2bb8);
         if (((uint)local_2ba4 & 0x400000) != 0) {
           local_2ba4 = (uint *******)((uint)local_2ba4 & 0xffbfffff);
           pppppppuVar20 = (uint *******)((int)((unsigned char *)0x0) + 1);
@@ -2375,7 +2375,7 @@ LAB_000ca414:
        pppppppuVar25 != (uint *******)0x0)) {
       pppppppuVar18 = (uint *******)&local_2ba4;
       local_2bb8 = (uint *******)
-                   ((int (*)())FUN_000c7650)(&local_23e8,&local_2b98,pppppppuVar18,&local_2bb0,uVar22,
+                   ((int (*)())ilEmitShadowCompare)(&local_23e8,&local_2b98,pppppppuVar18,&local_2bb0,uVar22,
                                 pppppppuVar20,local_2bb8,pppppppuVar25);
     }
     uVar34 = uVar34 & local_2378;
@@ -2412,7 +2412,7 @@ joined_r0x000ca538:
     }
     goto switchD_000c9ab8_caseD_18;
   }
-  local_2bb4 = (uint *)((int (*)())FUN_000c8aa0)(&local_2bb8,&local_2bb4,pppppppuVar18,1,&local_23e8);
+  local_2bb4 = (uint *)((int (*)())ilCopyInstructionRemapped)(&local_2bb8,&local_2bb4,pppppppuVar18,1,&local_23e8);
   puVar26 = local_2bb4;
   pppppppuVar30 = local_2bb8;
   goto switchD_000c9ab8_caseD_18;
@@ -2526,7 +2526,7 @@ int ilRewriteForTextureState(ctx, param_2, compileRecord, ilSource, param_5)
 #define local_c0f0 ((uint *)(auStack_c148 + 0x58))
 #define local_c0d0 ((uint *)(auStack_c148 + 0x78))
 #define local_c090 (*(int *)(auStack_c148 + 0xb8))
-  /* issue #64 live-repro: FUN_000c8910/FUN_000c8600 (reached via the command-stream token-1/0x47
+  /* issue #64 live-repro: ilMarkInstructionRegistersUsed/FUN_000c8600 (reached via the command-stream token-1/0x47
    * opcode handlers below) treat their 3rd/4th argument - &local_c08c, passed directly or via an
    * alias (pppppppuVar19/local_88) at every call site in this function - as the base of a large
    * per-context attribute-state array, indexing it at compileRecord[2] up to compileRecord[0x88a] (~8.7KB).
@@ -2956,7 +2956,7 @@ code_r0x000cb214:
     uVar29 = 0;
 LAB_000cb4b0:
     pppppppuVar19 = (uint *******)((int)((unsigned char *)0x0) + 2);
-    readCursor = (uint *)((int (*)())FUN_000c8910)(puVar34,uVar29,2,&local_c08c);
+    readCursor = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(puVar34,uVar29,2,&local_c08c);
     puVar23 = readCursor;
     goto switchD_000cb23c_caseD_18;
   case 8:
@@ -2977,7 +2977,7 @@ LAB_000cb4b0:
   case 0x40:
   case 100:
     pppppppuVar19 = (uint *******)((int)((unsigned char *)0x0) + 3);
-    readCursor = (uint *)((int (*)())FUN_000c8910)(puVar34,1,3,&local_c08c);
+    readCursor = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(puVar34,1,3,&local_c08c);
     puVar23 = readCursor;
     goto switchD_000cb23c_caseD_18;
   case 0xf:
@@ -3018,7 +3018,7 @@ LAB_000cb4b0:
       local_bf14 = 1 << ((uint)pppppppuVar19 >> 0x10 & 0x3f) | local_bf14;
     }
     pppppppuVar19 = (uint *******)((uint)pppppppuVar19 >> 0x18 & 7);
-    FUN_000c7270(&local_c08c,uVar35,pppppppuVar19);
+    ilRecordInputSemantic(&local_c08c,uVar35,pppppppuVar19);
     readCursor = readCursor + 1;
     puVar23 = readCursor;
     goto switchD_000cb23c_caseD_18;
@@ -3042,7 +3042,7 @@ LAB_000cb6d4:
       local_c1a0 = puVar34[4];
       readCursor = puVar34 + 6;
       local_c19c = puVar34[5];
-      FUN_000c7290(&local_c08c,uVar12 & 0xffff,pppppppuVar19);
+      ilRecordDefinedConstantPrimary(&local_c08c,uVar12 & 0xffff,pppppppuVar19);
       puVar23 = readCursor;
     }
     else {
@@ -3054,7 +3054,7 @@ LAB_000cb6d4:
         local_c1a0 = puVar34[4];
         readCursor = puVar34 + 6;
         local_c19c = puVar34[5];
-        FUN_000c72f0(&local_c08c,uVar12 & 0xffff,pppppppuVar19);
+        ilRecordDefinedConstantSecondary(&local_c08c,uVar12 & 0xffff,pppppppuVar19);
         puVar23 = readCursor;
       }
     }
@@ -3062,19 +3062,19 @@ LAB_000cb6d4:
   case 0x24:
     pppppppuVar19 = (uint *******)((int)((unsigned char *)0x0) + 2);
     extraOutputWords = extraOutputWords + 5;
-    readCursor = (uint *)((int (*)())FUN_000c8910)(puVar34,1,2,&local_c08c);
+    readCursor = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(puVar34,1,2,&local_c08c);
     puVar23 = readCursor;
     goto switchD_000cb23c_caseD_18;
   case 0x35:
     pppppppuVar19 = &local_c08c;
     readCursor = puVar34 + 2;
     local_c1c0[0] = (uint ******)puVar34[1];
-    ((int (*)())FUN_000c87d0)(local_c1c0,auStack_c1b4,pppppppuVar19);
+    ((int (*)())ilMarkOperandRegisterUsed)(local_c1c0,auStack_c1b4,pppppppuVar19);
     puVar23 = readCursor;
     goto switchD_000cb23c_caseD_18;
   case 0x37:
     pppppppuVar19 = (uint *******)((int)((unsigned char *)0x0) + 1);
-    readCursor = (uint *)((int (*)())FUN_000c8910)(puVar34,0,1,&local_c08c);
+    readCursor = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(puVar34,0,1,&local_c08c);
     local_9e60 = 1;
     puVar23 = readCursor;
     goto switchD_000cb23c_caseD_18;
@@ -3118,7 +3118,7 @@ LAB_000cb6d4:
     }
     readCursor = puVar34;
     pppppppuVar19 = local_88;
-    ((int (*)())FUN_000c87d0)(&local_c1e4,&local_c1f0,local_88);
+    ((int (*)())ilMarkOperandRegisterUsed)(&local_c1e4,&local_c1f0,local_88);
     puVar23 = readCursor;
     goto switchD_000cb23c_caseD_18;
   case 0x5e:
@@ -3162,14 +3162,14 @@ LAB_000cb6d4:
       local_c1e0[0] = puVar34[1];
       readCursor = puVar34 + 2;
     }
-    ((int (*)())FUN_000c87d0)(&local_c1f0,&local_c1e4,local_88);
+    ((int (*)())ilMarkOperandRegisterUsed)(&local_c1f0,&local_c1e4,local_88);
     pppppppuVar19 = local_88;
-    ((int (*)())FUN_000c87d0)(local_c1ec,local_c1e0,local_88);
+    ((int (*)())ilMarkOperandRegisterUsed)(local_c1ec,local_c1e0,local_88);
     puVar23 = readCursor;
     goto switchD_000cb23c_caseD_18;
   }
   pppppppuVar19 = (uint *******)((int)((unsigned char *)0x0) + 1);
-  readCursor = (uint *)((int (*)())FUN_000c8910)(puVar34,uVar29,1,&local_c08c);
+  readCursor = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(puVar34,uVar29,1,&local_c08c);
   puVar23 = readCursor;
   goto switchD_000cb23c_caseD_18;
 switchD_000cbc48_caseD_18:
@@ -3282,7 +3282,7 @@ LAB_000cc88c:
     do {
       if (((!bVar3) && (*(char *)(piVar44 + 0x586) != '\0')) &&
          (extraOutputWords = *(int *)(((unsigned char *)0x000013f8) + ilWordCount * 4 + *param_2), extraOutputWords != 0)) {
-        ((void (*)())FUN_000c8e30)(*compileRecord,(int)compileRecord[0x36] + (piVar18[0x7aa] - param_2[0x7c7]),
+        ((void (*)())ilStoreFloat4Constant)(*compileRecord,(int)compileRecord[0x36] + (piVar18[0x7aa] - param_2[0x7c7]),
                      (double)(fVar10 / *(float *)(extraOutputWords + 0x44)),
                      (double)(fVar10 / *(float *)(extraOutputWords + 0x48)),(double)*(float *)(extraOutputWords + 0x50),
                      (double)FLOAT_001aa0e8);
@@ -3305,7 +3305,7 @@ LAB_000cc88c:
       do {
         uVar12 = 1 << (uVar21 & 0x3f);
         if ((uVar12 & ilTokens[-0x408]) != 0) {
-          ((void (*)())FUN_000c8e30)(*compileRecord,ilWordCount + uVar21,(double)*pfVar41,(double)pfVar41[1],
+          ((void (*)())ilStoreFloat4Constant)(*compileRecord,ilWordCount + uVar21,(double)*pfVar41,(double)pfVar41[1],
                        (double)pfVar41[2],(double)pfVar41[3]);
         }
         if ((uVar12 & *ilTokens) != 0) {
@@ -3473,7 +3473,7 @@ LAB_000cc88c:
         case 0xb:
         case 0xc:
         case 0xd:
-          ((int (*)())FUN_000c8de0)(compileRecord + 0x48,piVar18);
+          ((int (*)())ilPushDclRecord)(compileRecord + 0x48,piVar18);
           uVar21 = local_9cc8;
         }
         uVar35 = uVar35 + 1;
@@ -3547,11 +3547,11 @@ switchD_000cb23c_caseD_0:
     if (bVar5) {
       bVar5 = false;
       writeCursor = (uint *******)
-                   ((int (*)())FUN_000c8110)(writeCursor,local_88,pppppppuVar19,puVar22,puVar22,in_r8,local_88,
+                   ((int (*)())ilEmitPrologue)(writeCursor,local_88,pppppppuVar19,puVar22,puVar22,in_r8,local_88,
                                 pppppppuVar28);
     }
     pppppppuVar19 = (uint *******)((int)((unsigned char *)0x0) + 1);
-    readCursor = (uint *)((int (*)())FUN_000c8aa0)(&writeCursor,&readCursor,1,1,local_88);
+    readCursor = (uint *)((int (*)())ilCopyInstructionRemapped)(&writeCursor,&readCursor,1,1,local_88);
     puVar23 = readCursor;
     pppppppuVar36 = writeCursor;
     goto switchD_000cbc48_caseD_18;
@@ -3576,11 +3576,11 @@ switchD_000cb23c_caseD_0:
     if (bVar5) {
       bVar5 = false;
       writeCursor = (uint *******)
-                   ((int (*)())FUN_000c8110)(writeCursor,local_88,pppppppuVar19,puVar22,puVar22,in_r8,local_88,
+                   ((int (*)())ilEmitPrologue)(writeCursor,local_88,pppppppuVar19,puVar22,puVar22,in_r8,local_88,
                                 pppppppuVar28);
     }
     pppppppuVar19 = (uint *******)((int)((unsigned char *)0x0) + 1);
-    readCursor = (uint *)((int (*)())FUN_000c8aa0)(&writeCursor,&readCursor,1,2,local_88);
+    readCursor = (uint *)((int (*)())ilCopyInstructionRemapped)(&writeCursor,&readCursor,1,2,local_88);
     puVar23 = readCursor;
     pppppppuVar36 = writeCursor;
     goto switchD_000cbc48_caseD_18;
@@ -3601,7 +3601,7 @@ switchD_000cb23c_caseD_0:
   case 0x11:
   case 0x34:
     pppppppuVar19 = (uint *******)0x0;
-    readCursor = (uint *)((int (*)())FUN_000c8aa0)(&writeCursor,&readCursor,0,2,&local_c08c);
+    readCursor = (uint *)((int (*)())ilCopyInstructionRemapped)(&writeCursor,&readCursor,0,2,&local_c08c);
     puVar23 = readCursor;
     pppppppuVar36 = writeCursor;
     goto switchD_000cbc48_caseD_18;
@@ -3637,11 +3637,11 @@ switchD_000cb23c_caseD_0:
     if (bVar5) {
       bVar5 = false;
       writeCursor = (uint *******)
-                   ((int (*)())FUN_000c8110)(writeCursor,local_88,pppppppuVar19,puVar22,puVar22,in_r8,local_88,
+                   ((int (*)())ilEmitPrologue)(writeCursor,local_88,pppppppuVar19,puVar22,puVar22,in_r8,local_88,
                                 pppppppuVar28);
     }
     pppppppuVar19 = (uint *******)((int)((unsigned char *)0x0) + 1);
-    readCursor = (uint *)((int (*)())FUN_000c8aa0)(&writeCursor,&readCursor,1,3,local_88);
+    readCursor = (uint *)((int (*)())ilCopyInstructionRemapped)(&writeCursor,&readCursor,1,3,local_88);
     puVar23 = readCursor;
     pppppppuVar36 = writeCursor;
     goto switchD_000cbc48_caseD_18;
@@ -3724,7 +3724,7 @@ switchD_000cb23c_caseD_0:
     readCursor = puVar22 + 2;
     local_c1c0[0] = (uint ******)puVar22[1];
     writeCursor = writeCursor + 1;
-    ((int (*)())FUN_000c8760)(local_c1c0,auStack_c1b4,pppppppuVar19);
+    ((int (*)())ilRemapSourceOperandRegister)(local_c1c0,auStack_c1b4,pppppppuVar19);
     *writeCursor = local_c1c0[0];
     puVar23 = readCursor;
     pppppppuVar36 = writeCursor + 1;
@@ -3741,7 +3741,7 @@ switchD_000cb23c_caseD_0:
     if (bVar5) {
       bVar5 = false;
       writeCursor = (uint *******)
-                   ((int (*)())FUN_000c8110)(writeCursor,local_88,pppppppuVar19,puVar22,puVar22,in_r8,local_88,
+                   ((int (*)())ilEmitPrologue)(writeCursor,local_88,pppppppuVar19,puVar22,puVar22,in_r8,local_88,
                                 pppppppuVar28);
       puVar22 = readCursor;
     }
@@ -3789,7 +3789,7 @@ LAB_000cc2a4:
       else {
         local_84 = (uint ******)&local_c1cc;
         local_70 = (uint ******)&local_c1d8;
-        writeCursor = (uint *******)((int (*)())FUN_000c7460)(local_88,local_84,local_70,uVar27,writeCursor);
+        writeCursor = (uint *******)((int (*)())ilEmitProjectiveDivide)(local_88,local_84,local_70,uVar27,writeCursor);
         ppppppuVar14 = local_70;
         if (((uint)local_c1f0 & 0x400000) == 0) {
           pppppppuVar36 = (uint *******)0x0;
@@ -3817,7 +3817,7 @@ LAB_000cc2a4:
       ppppppuVar14 = (uint ******)&local_c1d8;
     }
     pppppppuVar19 = local_88;
-    ((int (*)())FUN_000c8760)(local_84,ppppppuVar14,local_88);
+    ((int (*)())ilRemapSourceOperandRegister)(local_84,ppppppuVar14,local_88);
     *writeCursor = ppppppuVar15;
     pppppppuVar28 = writeCursor + 1;
     if (bVar4) {
@@ -3848,7 +3848,7 @@ LAB_000cc2a4:
        (depthTextureUnitMask << (uVar12 & 0x3f) != 0)) {
       pppppppuVar19 = (uint *******)&local_c1f0;
       writeCursor = (uint *******)
-                   ((int (*)())FUN_000c7650)(local_88,local_84,pppppppuVar19,&local_c1e4,uVar27,pppppppuVar36,
+                   ((int (*)())ilEmitShadowCompare)(local_88,local_84,pppppppuVar19,&local_c1e4,uVar27,pppppppuVar36,
                                 writeCursor,pppppppuVar28);
       in_r8 = pppppppuVar36;
     }
@@ -3859,7 +3859,7 @@ LAB_000cc2a4:
     if (bVar5) {
       bVar5 = false;
       writeCursor = (uint *******)
-                   ((int (*)())FUN_000c8110)(writeCursor,&local_c08c,pppppppuVar19,puVar22,puVar22,in_r8,
+                   ((int (*)())ilEmitPrologue)(writeCursor,&local_c08c,pppppppuVar19,puVar22,puVar22,in_r8,
                                 uVar12 * 4,pppppppuVar28);
       puVar22 = readCursor;
     }
@@ -3907,7 +3907,7 @@ LAB_000cc588:
       if (depthTextureUnitMask << (uVar12 & 0x3f) != 0) {
         pppppppuVar19 = &local_c1cc;
         writeCursor = (uint *******)
-                     ((int (*)())FUN_000c7460)(&local_c08c,&local_c1d8,pppppppuVar19,uVar27,writeCursor);
+                     ((int (*)())ilEmitProjectiveDivide)(&local_c08c,&local_c1d8,pppppppuVar19,uVar27,writeCursor);
         if (((uint)local_c1f0 & 0x400000) != 0) {
           local_c1f0 = (uint *******)((uint)local_c1f0 & 0xffbfffff);
           in_r8 = (uint *******)((int)((unsigned char *)0x0) + 1);
@@ -3964,7 +3964,7 @@ LAB_000cc5e4:
        (depthTextureUnitMask << (uVar12 & 0x3f) != 0)) {
       pppppppuVar19 = (uint *******)&local_c1f0;
       writeCursor = (uint *******)
-                   ((int (*)())FUN_000c7650)(&local_c08c,&local_c1d8,pppppppuVar19,&local_c1e4,uVar27,in_r8,
+                   ((int (*)())ilEmitShadowCompare)(&local_c08c,&local_c1d8,pppppppuVar19,&local_c1e4,uVar27,in_r8,
                                 writeCursor,pppppppuVar28);
     }
     uVar42 = uVar42 & depthTextureUnitMask;
@@ -4001,7 +4001,7 @@ joined_r0x000cc708:
     }
     goto switchD_000cbc48_caseD_18;
   }
-  readCursor = (uint *)((int (*)())FUN_000c8aa0)(&writeCursor,&readCursor,pppppppuVar19,1,&local_c08c);
+  readCursor = (uint *)((int (*)())ilCopyInstructionRemapped)(&writeCursor,&readCursor,pppppppuVar19,1,&local_c08c);
   puVar23 = readCursor;
   pppppppuVar36 = writeCursor;
   goto switchD_000cbc48_caseD_18;
@@ -4049,8 +4049,8 @@ int FUN_000cd05c(param_1, param_2, param_3)
   return a1;
 }
 
-/* FUN_000cd154 @ 0xcd154 (92 bytes) */
-int FUN_000cd154(param_1)
+/* scDestroy @ 0xcd154 (92 bytes) */
+int scDestroy(param_1)
   undefined4 *param_1;
 {
   undefined4 uVar1;
@@ -4141,8 +4141,8 @@ int FUN_000cd1c4(param_1, param_2, param_3, param_4)
   return 2;
 }
 
-/* FUN_000cd1d8 @ 0xcd1d8 (20 bytes) */
-int FUN_000cd1d8(param_1)
+/* scCheckHandle @ 0xcd1d8 (20 bytes) */
+int scCheckHandle(param_1)
   int param_1;
 {
   if (param_1 == 0) {
@@ -4151,8 +4151,8 @@ int FUN_000cd1d8(param_1)
   return 0;
 }
 
-/* FUN_000cd1ec @ 0xcd1ec (40 bytes) */
-int FUN_000cd1ec(param_1, param_2, param_3, param_4)
+/* scDisassembleIL @ 0xcd1ec (40 bytes) */
+int scDisassembleIL(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -4161,11 +4161,11 @@ int FUN_000cd1ec(param_1, param_2, param_3, param_4)
   unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = param_4;
-  return ((int (*)())FUN_000cd388)(param_1,param_2,param_3,&(*(unsigned int *)((unsigned char *)ghidra_home + 12)));
+  return ((int (*)())scDisassembleILImpl)(param_1,param_2,param_3,&(*(unsigned int *)((unsigned char *)ghidra_home + 12)));
 }
 
-/* FUN_000cd214 @ 0xcd214 (40 bytes) */
-int FUN_000cd214(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+/* scDumpSrcShader @ 0xcd214 (40 bytes) */
+int scDumpSrcShader(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -4178,11 +4178,11 @@ int FUN_000cd214(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
-  return ((int (*)())FUN_000cd404)(param_1,param_2,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)),param_4,param_5,param_6,param_7,param_8);
+  return ((int (*)())scDumpSrcShaderImpl)(param_1,param_2,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)),param_4,param_5,param_6,param_7,param_8);
 }
 
-/* FUN_000cd23c @ 0xcd23c (40 bytes) */
-int FUN_000cd23c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+/* scDumpShader @ 0xcd23c (40 bytes) */
+int scDumpShader(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -4194,11 +4194,11 @@ int FUN_000cd23c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = param_5;
-  return ((int (*)())FUN_000cdba4)(param_1,param_2,param_3,param_4,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)),param_6,param_7);
+  return ((int (*)())scDumpShaderImpl)(param_1,param_2,param_3,param_4,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)),param_6,param_7);
 }
 
-/* FUN_000cd264 @ 0xcd264 (40 bytes) */
-int FUN_000cd264(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+/* scDumpShaderToString @ 0xcd264 (40 bytes) */
+int scDumpShaderToString(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -4210,7 +4210,7 @@ int FUN_000cd264(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
-  return ((int (*)())FUN_000cdbe4)(param_1,param_2,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)),param_4,param_5,param_6,param_7);
+  return ((int (*)())scDumpShaderToStringImpl)(param_1,param_2,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)),param_4,param_5,param_6,param_7);
 }
 
 /* FUN_000cd290 @ 0xcd290 (88 bytes) */
@@ -4245,8 +4245,8 @@ int FUN_000cd290(param_1)
   }
 }
 
-/* FUN_000cd388 @ 0xcd388 (28 bytes) */
-int FUN_000cd388(param_1, param_2, param_3, param_4)
+/* scDisassembleILImpl @ 0xcd388 (28 bytes) */
+int scDisassembleILImpl(param_1, param_2, param_3, param_4)
   undefined4 param_1;
   int param_2;
   int param_3;
@@ -4261,11 +4261,11 @@ int FUN_000cd388(param_1, param_2, param_3, param_4)
   if (param_3 == 0) {
     return;
   }
-  return FUN_000e06d8(param_1,param_2,param_3,param_4);
+  return ildisDisassembleTokens(param_1,param_2,param_3,param_4);
 }
 
-/* FUN_000cd3a4 @ 0xcd3a4 (96 bytes) */
-int FUN_000cd3a4(sinkContext, sinkRecord, argR5, argR6, argR7, argR8, argR9, argR10)
+/* scLogToSink @ 0xcd3a4 (96 bytes) */
+int scLogToSink(sinkContext, sinkRecord, argR5, argR6, argR7, argR8, argR9, argR10)
   undefined4 sinkContext;
   undefined4 *sinkRecord;
   undefined4 argR5;
@@ -4285,8 +4285,8 @@ int FUN_000cd3a4(sinkContext, sinkRecord, argR5, argR6, argR7, argR8, argR9, arg
   return (*(code *)*sinkRecord)(sinkContext,"",argR5,&(*(unsigned int *)((unsigned char *)ghidra_home + 12)),argR7,argR8,argR9,argR10);
 }
 
-/* FUN_000cd404 @ 0xcd404 (1952 bytes) */
-int FUN_000cd404(sinkContext, shaderState, sinkRecord, argR6, argR7Text, argR8Text, argR9Text, argR10Text)
+/* scDumpSrcShaderImpl @ 0xcd404 (1952 bytes) */
+int scDumpSrcShaderImpl(sinkContext, shaderState, sinkRecord, argR6, argR7Text, argR8Text, argR9Text, argR10Text)
   undefined4 sinkContext;
   int *shaderState;
   int sinkRecord;
@@ -4311,17 +4311,17 @@ int FUN_000cd404(sinkContext, shaderState, sinkRecord, argR6, argR7Text, argR8Te
   if (sinkRecord == 0) {
     return;
   }
-  ((int (*)())FUN_000cd3a4)(sinkContext,sinkRecord,"; ------------- SC_SRCSHADER Dump ------------------\r\n",argR6,
+  ((int (*)())scLogToSink)(sinkContext,sinkRecord,"; ------------- SC_SRCSHADER Dump ------------------\r\n",argR6,
                argR7Text,argR8Text,argR9Text,argR10Text);
-  ((int (*)())FUN_000cd3a4)(sinkContext,sinkRecord,"SC_SHADERSTATE: u32NumIntVSConst = %d\r\n",shaderState[3],argR7Text,
+  ((int (*)())scLogToSink)(sinkContext,sinkRecord,"SC_SHADERSTATE: u32NumIntVSConst = %d\r\n",shaderState[3],argR7Text,
                argR8Text,argR9Text,argR10Text);
-  ((int (*)())FUN_000cd3a4)(sinkContext,sinkRecord,"SC_SHADERSTATE: u32NumIntPSConst = %d\r\n",shaderState[4],argR7Text,
+  ((int (*)())scLogToSink)(sinkContext,sinkRecord,"SC_SHADERSTATE: u32NumIntPSConst = %d\r\n",shaderState[4],argR7Text,
                argR8Text,argR9Text,argR10Text);
   constIndex = shaderState[5];
-  ((int (*)())FUN_000cd3a4)(sinkContext,sinkRecord,"SC_SHADERSTATE: u32NumIntGSConst = %d\r\n",constIndex,argR7Text,argR8Text,
+  ((int (*)())scLogToSink)(sinkContext,sinkRecord,"SC_SHADERSTATE: u32NumIntGSConst = %d\r\n",constIndex,argR7Text,argR8Text,
                argR9Text,argR10Text);
   if (((shaderState[3] != 0) && (*shaderState != 0)) &&
-     (((int (*)())FUN_000cd3a4)(sinkContext,sinkRecord,"\r\nSC_SHADERSTATE: *** Integer VS Constants",constIndex,argR7Text,
+     (((int (*)())scLogToSink)(sinkContext,sinkRecord,"\r\nSC_SHADERSTATE: *** Integer VS Constants",constIndex,argR7Text,
                    argR8Text,argR9Text,argR10Text), shaderState[3] != 0)) {
     nextConstIndex = 0;
     do {
@@ -4331,13 +4331,13 @@ int FUN_000cd404(sinkContext, shaderState, sinkRecord, argR6, argR7Text, argR8Te
       argR8Text = *(undefined1 **)(constEntryOffset + 4);
       argR9Text = *(undefined1 **)(constEntryOffset + 8);
       nextConstIndex = constIndex + 1;
-      ((int (*)())FUN_000cd3a4)(sinkContext,sinkRecord,
+      ((int (*)())scLogToSink)(sinkContext,sinkRecord,
                    "SC_SHADERSTATE: i%d = Count(%d), LoopStart(%d), LoopStep(%d)\r\n",constIndex,argR7Text,
                    argR8Text,argR9Text,argR10Text);
     } while (nextConstIndex < (uint)shaderState[3]);
   }
   if ((shaderState[4] != 0) &&
-     (((int (*)())FUN_000cd3a4)(sinkContext,sinkRecord,"\r\nSC_SHADERSTATE: *** Integer PS Constants",constIndex,argR7Text,
+     (((int (*)())scLogToSink)(sinkContext,sinkRecord,"\r\nSC_SHADERSTATE: *** Integer PS Constants",constIndex,argR7Text,
                    argR8Text,argR9Text,argR10Text), shaderState[4] != 0)) {
     nextConstIndex = 0;
     do {
@@ -4347,13 +4347,13 @@ int FUN_000cd404(sinkContext, shaderState, sinkRecord, argR6, argR7Text, argR8Te
       argR8Text = *(undefined1 **)(constEntryOffset + 4);
       argR9Text = *(undefined1 **)(constEntryOffset + 8);
       nextConstIndex = constIndex + 1;
-      ((int (*)())FUN_000cd3a4)(sinkContext,sinkRecord,
+      ((int (*)())scLogToSink)(sinkContext,sinkRecord,
                    "SC_SHADERSTATE: i%d = Count(%d), LoopStart(%d), LoopStep(%d)\r\n",constIndex,argR7Text,
                    argR8Text,argR9Text,argR10Text);
     } while (nextConstIndex < (uint)shaderState[4]);
   }
   if ((shaderState[5] != 0) &&
-     (((int (*)())FUN_000cd3a4)(sinkContext,sinkRecord,"\r\nSC_SHADERSTATE: *** Integer GS Constants",constIndex,argR7Text,
+     (((int (*)())scLogToSink)(sinkContext,sinkRecord,"\r\nSC_SHADERSTATE: *** Integer GS Constants",constIndex,argR7Text,
                    argR8Text,argR9Text,argR10Text), shaderState[5] != 0)) {
     constIndex = 0;
     do {
@@ -4362,22 +4362,22 @@ int FUN_000cd404(sinkContext, shaderState, sinkRecord, argR6, argR7Text, argR8Te
       argR8Text = *(undefined1 **)(constEntryOffset + 4);
       argR9Text = *(undefined1 **)(constEntryOffset + 8);
       nextConstIndex = constIndex + 1;
-      ((int (*)())FUN_000cd3a4)(sinkContext,sinkRecord,
+      ((int (*)())scLogToSink)(sinkContext,sinkRecord,
                    "SC_SHADERSTATE: i%d = Count(%d), LoopStart(%d), LoopStep(%d)\r\n",constIndex,argR7Text,
                    argR8Text,argR9Text,argR10Text);
       constIndex = nextConstIndex;
     } while (nextConstIndex < (uint)shaderState[5]);
   }
-  ((int (*)())FUN_000cd3a4)(sinkContext,sinkRecord,"SC_SHADERSTATE: u32NumBoolVSConst = %d\r\n",shaderState[9],argR7Text,
+  ((int (*)())scLogToSink)(sinkContext,sinkRecord,"SC_SHADERSTATE: u32NumBoolVSConst = %d\r\n",shaderState[9],argR7Text,
                argR8Text,argR9Text,argR10Text);
-  ((int (*)())FUN_000cd3a4)(sinkContext,sinkRecord,"SC_SHADERSTATE: u32NumBoolPSConst = %d\r\n",shaderState[10],argR7Text,
+  ((int (*)())scLogToSink)(sinkContext,sinkRecord,"SC_SHADERSTATE: u32NumBoolPSConst = %d\r\n",shaderState[10],argR7Text,
                argR8Text,argR9Text,argR10Text);
   constIndex = shaderState[0xb];
-  ((int (*)())FUN_000cd3a4)(sinkContext,sinkRecord,"SC_SHADERSTATE: u32NumBoolGSConst = %d\r\n",constIndex,argR7Text,argR8Text,
+  ((int (*)())scLogToSink)(sinkContext,sinkRecord,"SC_SHADERSTATE: u32NumBoolGSConst = %d\r\n",constIndex,argR7Text,argR8Text,
                argR9Text,argR10Text);
   if (shaderState[9] == 0) goto LAB_000cd7d0;
   if (shaderState[6] != 0) {
-    ((int (*)())FUN_000cd3a4)(sinkContext,sinkRecord,"\r\nSC_SHADERSTATE: *** Bool VS Constants",constIndex,argR7Text,argR8Text,
+    ((int (*)())scLogToSink)(sinkContext,sinkRecord,"\r\nSC_SHADERSTATE: *** Bool VS Constants",constIndex,argR7Text,argR8Text,
                  argR9Text,argR10Text);
     if (shaderState[9] == 0) goto LAB_000cd7d0;
     nextConstIndex = 0;
@@ -4390,14 +4390,14 @@ int FUN_000cd404(sinkContext, shaderState, sinkRecord, argR6, argR7Text, argR8Te
         argR7Text = "TRUE";
       }
       constIndex = nextConstIndex;
-      ((int (*)())FUN_000cd3a4)(sinkContext,sinkRecord,"SC_SHADERSTATE: b%d = %s\r\n",nextConstIndex,argR7Text,argR8Text,argR9Text,
+      ((int (*)())scLogToSink)(sinkContext,sinkRecord,"SC_SHADERSTATE: b%d = %s\r\n",nextConstIndex,argR7Text,argR8Text,argR9Text,
                    argR10Text);
       nextConstIndex = nextConstIndex + 1;
     } while (nextConstIndex < (uint)shaderState[9]);
     if (shaderState[9] == 0) goto LAB_000cd7d0;
   }
   if (shaderState[7] != 0) {
-    ((int (*)())FUN_000cd3a4)(sinkContext,sinkRecord,"\r\nSC_SHADERSTATE: *** Bool PS Constants",constIndex,argR7Text,argR8Text,
+    ((int (*)())scLogToSink)(sinkContext,sinkRecord,"\r\nSC_SHADERSTATE: *** Bool PS Constants",constIndex,argR7Text,argR8Text,
                  argR9Text,argR10Text);
     if (shaderState[10] != 0) {
       nextConstIndex = 0;
@@ -4410,7 +4410,7 @@ int FUN_000cd404(sinkContext, shaderState, sinkRecord, argR6, argR7Text, argR8Te
           argR7Text = "TRUE";
         }
         constIndex = nextConstIndex;
-        ((int (*)())FUN_000cd3a4)(sinkContext,sinkRecord,"SC_SHADERSTATE: b%d = %s\r\n",nextConstIndex,argR7Text,argR8Text,argR9Text,
+        ((int (*)())scLogToSink)(sinkContext,sinkRecord,"SC_SHADERSTATE: b%d = %s\r\n",nextConstIndex,argR7Text,argR8Text,argR9Text,
                      argR10Text);
         nextConstIndex = nextConstIndex + 1;
       } while (nextConstIndex < (uint)shaderState[10]);
@@ -4418,7 +4418,7 @@ int FUN_000cd404(sinkContext, shaderState, sinkRecord, argR6, argR7Text, argR8Te
     if (shaderState[9] == 0) goto LAB_000cd7d0;
   }
   if ((shaderState[8] != 0) &&
-     (((int (*)())FUN_000cd3a4)(sinkContext,sinkRecord,"\r\nSC_SHADERSTATE: *** Bool GS Constants",constIndex,argR7Text,argR8Text
+     (((int (*)())scLogToSink)(sinkContext,sinkRecord,"\r\nSC_SHADERSTATE: *** Bool GS Constants",constIndex,argR7Text,argR8Text
                    ,argR9Text,argR10Text), shaderState[0xb] != 0)) {
     constIndex = 0;
     do {
@@ -4429,21 +4429,21 @@ int FUN_000cd404(sinkContext, shaderState, sinkRecord, argR6, argR7Text, argR8Te
       else {
         argR7Text = "TRUE";
       }
-      ((int (*)())FUN_000cd3a4)(sinkContext,sinkRecord,"SC_SHADERSTATE: b%d = %s\r\n",constIndex,argR7Text,argR8Text,argR9Text,
+      ((int (*)())scLogToSink)(sinkContext,sinkRecord,"SC_SHADERSTATE: b%d = %s\r\n",constIndex,argR7Text,argR8Text,argR9Text,
                    argR10Text);
       constIndex = constIndex + 1;
     } while (constIndex < (uint)shaderState[0xb]);
   }
 LAB_000cd7d0:
-  ((int (*)())FUN_000cd3a4)(sinkContext,sinkRecord,"SC_SHADERSTATE: u32NumFloatVSConst = %d\r\n",shaderState[0xf],argR7Text,
+  ((int (*)())scLogToSink)(sinkContext,sinkRecord,"SC_SHADERSTATE: u32NumFloatVSConst = %d\r\n",shaderState[0xf],argR7Text,
                argR8Text,argR9Text,argR10Text);
-  ((int (*)())FUN_000cd3a4)(sinkContext,sinkRecord,"SC_SHADERSTATE: u32NumFloatPSConst = %d\r\n",shaderState[0x10],argR7Text,
+  ((int (*)())scLogToSink)(sinkContext,sinkRecord,"SC_SHADERSTATE: u32NumFloatPSConst = %d\r\n",shaderState[0x10],argR7Text,
                argR8Text,argR9Text,argR10Text);
   constIndex = shaderState[0x11];
-  ((int (*)())FUN_000cd3a4)(sinkContext,sinkRecord,"SC_SHADERSTATE: u32NumFloatGSConst = %d\r\n",constIndex,argR7Text,argR8Text,
+  ((int (*)())scLogToSink)(sinkContext,sinkRecord,"SC_SHADERSTATE: u32NumFloatGSConst = %d\r\n",constIndex,argR7Text,argR8Text,
                argR9Text,argR10Text);
   if (((shaderState[0xf] != 0) && (shaderState[0xc] != 0)) &&
-     (floatTextResult = ((int (*)())FUN_000cd3a4)(sinkContext,sinkRecord,"\r\nSC_SHADERSTATE: *** Float VS Constants",constIndex,
+     (floatTextResult = ((int (*)())scLogToSink)(sinkContext,sinkRecord,"\r\nSC_SHADERSTATE: *** Float VS Constants",constIndex,
                            argR7Text,argR8Text,argR9Text,argR10Text), shaderState[0xf] != 0)) {
     nextConstIndex = 0;
     do {
@@ -4458,12 +4458,12 @@ LAB_000cd7d0:
       argR8Text = componentText1;
       argR9Text = componentText2;
       argR10Text = componentText3;
-      floatTextResult = ((int (*)())FUN_000cd3a4)(sinkContext,sinkRecord,"SC_SHADERSTATE: c%d = (%s,%s,%s,%s)\r\n",constIndex,argR7Text,
+      floatTextResult = ((int (*)())scLogToSink)(sinkContext,sinkRecord,"SC_SHADERSTATE: c%d = (%s,%s,%s,%s)\r\n",constIndex,argR7Text,
                            componentText1,componentText2,componentText3);
     } while (nextConstIndex < (uint)shaderState[0xf]);
   }
   if (((shaderState[0x10] != 0) && (shaderState[0xd] != 0)) &&
-     (floatTextResult = ((int (*)())FUN_000cd3a4)(sinkContext,sinkRecord,"\r\nSC_SHADERSTATE: *** Float PS Constants",constIndex,
+     (floatTextResult = ((int (*)())scLogToSink)(sinkContext,sinkRecord,"\r\nSC_SHADERSTATE: *** Float PS Constants",constIndex,
                            argR7Text,argR8Text,argR9Text,argR10Text), shaderState[0x10] != 0)) {
     nextConstIndex = 0;
     do {
@@ -4478,12 +4478,12 @@ LAB_000cd7d0:
       argR8Text = componentText1;
       argR9Text = componentText2;
       argR10Text = componentText3;
-      floatTextResult = ((int (*)())FUN_000cd3a4)(sinkContext,sinkRecord,"SC_SHADERSTATE: c%d = (%s,%s,%s,%s)\r\n",constIndex,argR7Text,
+      floatTextResult = ((int (*)())scLogToSink)(sinkContext,sinkRecord,"SC_SHADERSTATE: c%d = (%s,%s,%s,%s)\r\n",constIndex,argR7Text,
                            componentText1,componentText2,componentText3);
     } while (nextConstIndex < (uint)shaderState[0x10]);
   }
   if (((shaderState[0x11] != 0) && (shaderState[0xe] != 0)) &&
-     (floatTextResult = ((int (*)())FUN_000cd3a4)(sinkContext,sinkRecord,"\r\nSC_SHADERSTATE: *** Float GS Constants",constIndex,
+     (floatTextResult = ((int (*)())scLogToSink)(sinkContext,sinkRecord,"\r\nSC_SHADERSTATE: *** Float GS Constants",constIndex,
                            argR7Text,argR8Text,argR9Text,argR10Text), shaderState[0x11] != 0)) {
     constIndex = 0;
     do {
@@ -4497,23 +4497,23 @@ LAB_000cd7d0:
       argR8Text = componentText1;
       argR9Text = componentText2;
       argR10Text = componentText3;
-      floatTextResult = ((int (*)())FUN_000cd3a4)(sinkContext,sinkRecord,"SC_SHADERSTATE: c%d = (%s,%s,%s,%s)\r\n",constIndex,argR7Text,
+      floatTextResult = ((int (*)())scLogToSink)(sinkContext,sinkRecord,"SC_SHADERSTATE: c%d = (%s,%s,%s,%s)\r\n",constIndex,argR7Text,
                            componentText1,componentText2,componentText3);
       constIndex = nextConstIndex;
     } while (nextConstIndex < (uint)shaderState[0x11]);
   }
-  ((int (*)())FUN_000cd3a4)(sinkContext,sinkRecord,"u32Copts = 0x%08X",shaderState[0x15],argR7Text,argR8Text,argR9Text,argR10Text);
-  ((int (*)())FUN_000cd3a4)(sinkContext,sinkRecord,"fConstantsAvailable = %d",shaderState[0x16],shaderState[0x17],shaderState[0x18],
+  ((int (*)())scLogToSink)(sinkContext,sinkRecord,"u32Copts = 0x%08X",shaderState[0x15],argR7Text,argR8Text,argR9Text,argR10Text);
+  ((int (*)())scLogToSink)(sinkContext,sinkRecord,"fConstantsAvailable = %d",shaderState[0x16],shaderState[0x17],shaderState[0x18],
                shaderState[0x19],shaderState[0x1a]);
-  ((int (*)())FUN_000cd3a4)(sinkContext,sinkRecord,"iConstantsAvailable = %d",shaderState[0x1e],shaderState[0x1f],shaderState[0x20],
+  ((int (*)())scLogToSink)(sinkContext,sinkRecord,"iConstantsAvailable = %d",shaderState[0x1e],shaderState[0x1f],shaderState[0x20],
                shaderState[0x21],shaderState[0x22]);
-  ((int (*)())FUN_000cd3a4)(sinkContext,sinkRecord,"bConstantsAvailable = %d",shaderState[0x26],shaderState[0x27],shaderState[0x28],
+  ((int (*)())scLogToSink)(sinkContext,sinkRecord,"bConstantsAvailable = %d",shaderState[0x26],shaderState[0x27],shaderState[0x28],
                shaderState[0x29],shaderState[0x2a]);
   return;
 }
 
-/* FUN_000cdba4 @ 0xcdba4 (64 bytes) */
-int FUN_000cdba4(sinkArg, shaderState, optionsArg, argR6, sinkFn, argR8, argR9)
+/* scDumpShaderImpl @ 0xcdba4 (64 bytes) */
+int scDumpShaderImpl(sinkArg, shaderState, optionsArg, argR6, sinkFn, argR8, argR9)
   undefined4 sinkArg;
   int shaderState;
   undefined4 optionsArg;
@@ -4538,11 +4538,11 @@ int FUN_000cdba4(sinkArg, shaderState, optionsArg, argR6, sinkFn, argR8, argR9)
   if (*(int *)(shaderState + 0xf8) != 1) {
     return;
   }
-  return FUN_000d4e8c(sinkArg,shaderState,optionsArg,sinkFn,sinkFn,argR8,shaderState);
+  return scDumpPixelProgram(sinkArg,shaderState,optionsArg,sinkFn,sinkFn,argR8,shaderState);
 }
 
-/* FUN_000cdbe4 @ 0xcdbe4 (60 bytes) */
-int FUN_000cdbe4(sinkArg, shaderState, sinkFn, argR6, argR7, argR8, argR9)
+/* scDumpShaderToStringImpl @ 0xcdbe4 (60 bytes) */
+int scDumpShaderToStringImpl(sinkArg, shaderState, sinkFn, argR6, argR7, argR8, argR9)
   undefined4 sinkArg;
   int shaderState;
   int sinkFn;
@@ -4567,7 +4567,7 @@ int FUN_000cdbe4(sinkArg, shaderState, sinkFn, argR6, argR7, argR8, argR9)
   if (*(int *)(shaderState + 0xf8) != 1) {
     return;
   }
-  return FUN_000d4e64();
+  return scDumpPixelProgramToStringStub();
 }
 
 /* noop_cdc20 @ 0xcdc20 (4 bytes) */
@@ -4576,8 +4576,8 @@ int noop_cdc20()
   return;
 }
 
-/* FUN_000cdc24 @ 0xcdc24 (24 bytes) */
-int FUN_000cdc24(param_1)
+/* scShaderStateFlag @ 0xcdc24 (24 bytes) */
+int scShaderStateFlag(param_1)
   int param_1;
 {
   if (*(int *)(param_1 + 0x4c) == 0) {
@@ -4768,8 +4768,8 @@ char * FUN_000cdc3c(undefined4 unusedArg,int significantDigits,char *outText,dou
   return outText;
 }
 
-/* FUN_000ce020 @ 0xce020 (24 bytes) */
-int FUN_000ce020(emptyRecord)
+/* vsdisClearSinkRecord @ 0xce020 (24 bytes) */
+int vsdisClearSinkRecord(emptyRecord)
   undefined4 *emptyRecord;
 {
   emptyRecord[3] = 0;
@@ -4779,8 +4779,8 @@ int FUN_000ce020(emptyRecord)
   return;
 }
 
-/* FUN_000ce038 @ 0xce038 (24 bytes) */
-int FUN_000ce038(emptyRecord)
+/* vsdisClearSinkRecord2 @ 0xce038 (24 bytes) */
+int vsdisClearSinkRecord2(emptyRecord)
   undefined4 *emptyRecord;
 {
   emptyRecord[3] = 0;
@@ -4968,8 +4968,8 @@ int FUN_000ce148(disasmCtx, sourceWordPtr, outText)
   return sourceWordPtr + 1;
 }
 
-/* FUN_000ce4e4 @ 0xce4e4 (48 bytes) */
-int FUN_000ce4e4(disasmCtx, inputMapEntry, argR5, argR6, argR7, argR8, argR9)
+/* vsdisPrintInputDx @ 0xce4e4 (48 bytes) */
+int vsdisPrintInputDx(disasmCtx, inputMapEntry, argR5, argR6, argR7, argR8, argR9)
   undefined4 disasmCtx;
   uint *inputMapEntry;
   undefined4 argR5;
@@ -4985,8 +4985,8 @@ int FUN_000ce4e4(disasmCtx, inputMapEntry, argR5, argR6, argR7, argR8, argR9)
                (uint)*(byte *)((int)inputMapEntry + 1),argR7,argR8,argR9,0xce4ec);
 }
 
-/* FUN_000ce514 @ 0xce514 (864 bytes) */
-int FUN_000ce514(disasmCtx, outputMapEntry, argR5, argR6, argR7, argR8, argR9, argR10Value)
+/* vsdisPrintOutputMapping @ 0xce514 (864 bytes) */
+int vsdisPrintOutputMapping(disasmCtx, outputMapEntry, argR5, argR6, argR7, argR8, argR9, argR10Value)
   undefined4 disasmCtx;
   char *outputMapEntry;
   undefined4 argR5;
@@ -5146,8 +5146,8 @@ int FUN_000ce514(disasmCtx, outputMapEntry, argR5, argR6, argR7, argR8, argR9, a
   return;
 }
 
-/* FUN_000ce88c @ 0xce88c (480 bytes) */
-int FUN_000ce88c(disasmCtx, shaderState, mapIndexArg, argR6, argR7, argR8, argR9, argR10)
+/* vsdisPrintShaderData @ 0xce88c (480 bytes) */
+int vsdisPrintShaderData(disasmCtx, shaderState, mapIndexArg, argR6, argR7, argR8, argR9, argR10)
   undefined4 disasmCtx;
   int shaderState;
   int mapIndexArg;
@@ -5177,7 +5177,7 @@ int FUN_000ce88c(disasmCtx, shaderState, mapIndexArg, argR6, argR7, argR8, argR9
     mapEntryPtr = shaderState + 0x108;
     do {
       mapIndexArg = mapIndex;
-      ((int (*)())FUN_000ce4e4)(disasmCtx,mapEntryPtr,mapIndex,argR6,argR7,argR8,argR9);
+      ((int (*)())vsdisPrintInputDx)(disasmCtx,mapEntryPtr,mapIndex,argR6,argR7,argR8,argR9);
       moreEntries = mapIndex != 0x3f;
       mapIndex = mapIndex + 1;
       mapEntryPtr = mapEntryPtr + 0xc;
@@ -5194,7 +5194,7 @@ int FUN_000ce88c(disasmCtx, shaderState, mapIndexArg, argR6, argR7, argR8, argR9
     mapEntryPtr = shaderState + 0x40c;
     do {
       mapIndexArg = mapIndex;
-      ((int (*)())FUN_000ce514)(disasmCtx,mapEntryPtr,mapIndex,argR6,argR7,argR8,argR9,argR10);
+      ((int (*)())vsdisPrintOutputMapping)(disasmCtx,mapEntryPtr,mapIndex,argR6,argR7,argR8,argR9,argR10);
       moreEntries = mapIndex != 0x2f;
       mapIndex = mapIndex + 1;
       mapEntryPtr = mapEntryPtr + 0xc;
@@ -5881,8 +5881,8 @@ int FUN_000cf2ec(disasmCtx, instructionWordPtr, mnemonicText, flagOut, sourceCou
   return returnCode;
 }
 
-/* FUN_000cfc94 @ 0xcfc94 (144 bytes) */
-int FUN_000cfc94(disasmCtx, flowOpcode)
+/* vsdisFlowOpcodeName @ 0xcfc94 (144 bytes) */
+int vsdisFlowOpcodeName(disasmCtx, flowOpcode)
   undefined4 disasmCtx;
   uint flowOpcode;
 {
@@ -5908,8 +5908,8 @@ int FUN_000cfc94(disasmCtx, flowOpcode)
   return "unknown";
 }
 
-/* FUN_000cfd24 @ 0xcfd24 (524 bytes) */
-int FUN_000cfd24(disasmCtx, labelEntry, argR5, argR6, argR7, argR8, argR9, argR10)
+/* vsdisPrintFlowInstruction @ 0xcfd24 (524 bytes) */
+int vsdisPrintFlowInstruction(disasmCtx, labelEntry, argR5, argR6, argR7, argR8, argR9, argR10)
   undefined4 disasmCtx;
   int *labelEntry;
   undefined4 argR5;
@@ -5997,7 +5997,7 @@ LAB_000cfef0:
     }
   }
   formatValueD = *labelEntry;
-  flowOpName = ((int (*)())FUN_000cfc94)(disasmCtx,flowOp);
+  flowOpName = ((int (*)())vsdisFlowOpcodeName)(disasmCtx,flowOp);
   argR8 = labelEntry[3];
   ((int (*)())FUN_000ce050)(disasmCtx,"\nNot = %d, op=%s(%d), reg =%d",formatValueD,flowOpName,flowOp,argR8,argR9,argR10);
   formatValueD = labelEntry[4];
@@ -6050,7 +6050,7 @@ int vsDisassembleLine(disassembler, instructionWords, lineBuffer, argR6, argR7, 
       shaderStateOrLabel = loopIndex * 0x1c + *(int *)(shaderStateOrLabel + 0x654);
       labelTableOrLine = (int *)(*(int *)(shaderStateOrLabel + 0x14) + 1);
       if (labelTableOrLine == currentInstNumber) {
-        ((int (*)())FUN_000cfd24)(disassembler,shaderStateOrLabel + 4,currentInstNumber,argR6Saved,argR7Saved,argR8,labelTableOrLine,argR10);
+        ((int (*)())vsdisPrintFlowInstruction)(disassembler,shaderStateOrLabel + 4,currentInstNumber,argR6Saved,argR7Saved,argR8,labelTableOrLine,argR10);
         currentInstNumber = (int *)disassembler[1];
       }
       loopIndex = loopIndex + 1;
@@ -6199,10 +6199,10 @@ int vsDisassembleToString(sinkArg, shaderState, sinkFn, argR6, argR7, argR8, arg
   undefined4 sinkRecordArg;
   
   sinkFnCopy = sinkFn;
-  ((int (*)())FUN_000ce038)(sinkRecordHeader);
+  ((int (*)())vsdisClearSinkRecord2)(sinkRecordHeader);
   sinkRecordFn = sinkFn;
   sinkRecordArg = sinkArg;
-  ((int (*)())FUN_000ce88c)(sinkRecordHeader,shaderState,sinkFnCopy,argR6,argR7,argR8,argR9,argR10);
+  ((int (*)())vsdisPrintShaderData)(sinkRecordHeader,shaderState,sinkFnCopy,argR6,argR7,argR8,argR9,argR10);
   return 0;
 }
 
@@ -6223,7 +6223,7 @@ int vsDisassembleVertexProgram(sinkArg, shaderState, optionsArg, sinkFn, argR7, 
   undefined4 sinkRecordArg;
   
   sinkFnCopy = sinkFn;
-  ((int (*)())FUN_000ce038)(sinkRecordHeader);
+  ((int (*)())vsdisClearSinkRecord2)(sinkRecordHeader);
   sinkRecordFn = sinkFn;
   sinkRecordArg = sinkArg;
   ((int (*)())vsDisassemble)(sinkRecordHeader,shaderState,optionsArg,sinkFnCopy,argR7,argR8,argR9,argR10);
@@ -6823,8 +6823,8 @@ LAB_000d1004:
   return;
 }
 
-/* FUN_000d10a8 @ 0xd10a8 (52 bytes) */
-int FUN_000d10a8(param_1)
+/* psnSwizzleIsAlphaSourceForm @ 0xd10a8 (52 bytes) */
+int psnSwizzleIsAlphaSourceForm(param_1)
   uint param_1;
 {
   if ((((param_1 & 0xe000) != 0x6000) && ((param_1 & 0x1c00) != 0xc00)) &&
@@ -7036,7 +7036,7 @@ LAB_000d14bc:
     rgbAddrBSaved = rgbAddrB;
     alphaAddrASaved = alphaAddrA;
     alphaAddrBSaved = alphaAddrB;
-    auxCheckResult = ((int (*)())FUN_000d10a8)(swizzleWord & 0xffff);
+    auxCheckResult = ((int (*)())psnSwizzleIsAlphaSourceForm)(swizzleWord & 0xffff);
     if (auxCheckResult == 0) {
       if (sourceSelect == 1) {
         ((double (*)())FUN_000d10dc)(operandText,rgbAddrB,rgbAddrBSaved,rgbAddrCSaved,alphaAddrASaved,alphaAddrBSaved,modifierPrefix,sourceSelectCopy,floatArg1Saved);
@@ -8691,13 +8691,13 @@ LAB_000d2654:
               rgbSrcpNeededFlag = false;
             }
             else {
-              auxCheckResult = ((int (*)())FUN_000d10a8)((uint)rgbAuxA);
+              auxCheckResult = ((int (*)())psnSwizzleIsAlphaSourceForm)((uint)rgbAuxA);
               rgbSrcpNeededFlag = true;
               if (auxCheckResult != 0) goto LAB_000d2654;
             }
             if (!rgbSelectANotSrcp) {
               alphaSrcpNeededFlag = true;
-              auxCheckResult = ((int (*)())FUN_000d10a8)((uint)rgbAuxA);
+              auxCheckResult = ((int (*)())psnSwizzleIsAlphaSourceForm)((uint)rgbAuxA);
               if (auxCheckResult != 0) goto LAB_000d2674;
             }
             alphaSrcpNeededFlag = false;
@@ -8714,7 +8714,7 @@ LAB_000d269c:
               srcpNeedBit = 0;
             }
             else {
-              auxCheckResult = ((int (*)())FUN_000d10a8)((uint)rgbAuxB);
+              auxCheckResult = ((int (*)())psnSwizzleIsAlphaSourceForm)((uint)rgbAuxB);
               srcpNeedBit = 1;
               if (auxCheckResult != 0) goto LAB_000d269c;
             }
@@ -8724,7 +8724,7 @@ LAB_000d26bc:
               srcpNeedBit = 0;
             }
             else {
-              auxCheckResult = ((int (*)())FUN_000d10a8)((uint)rgbAuxB);
+              auxCheckResult = ((int (*)())psnSwizzleIsAlphaSourceForm)((uint)rgbAuxB);
               srcpNeedBit = 1;
               if (auxCheckResult == 0) goto LAB_000d26bc;
             }
@@ -8737,7 +8737,7 @@ LAB_000d26ec:
               srcpNeedBit = 0;
             }
             else {
-              auxCheckResult = ((int (*)())FUN_000d10a8)((uint)rgbAuxC);
+              auxCheckResult = ((int (*)())psnSwizzleIsAlphaSourceForm)((uint)rgbAuxC);
               srcpNeedBit = 1;
               if (auxCheckResult != 0) goto LAB_000d26ec;
             }
@@ -8747,7 +8747,7 @@ LAB_000d270c:
               srcpNeedBit = 0;
             }
             else {
-              auxCheckResult = ((int (*)())FUN_000d10a8)((uint)rgbAuxC);
+              auxCheckResult = ((int (*)())psnSwizzleIsAlphaSourceForm)((uint)rgbAuxC);
               srcpNeedBit = 1;
               if (auxCheckResult == 0) goto LAB_000d270c;
             }
@@ -9336,8 +9336,8 @@ switchD_000d324c_caseD_4:
   return;
 }
 
-/* FUN_000d4de8 @ 0xd4de8 (16 bytes) */
-int FUN_000d4de8(param_1)
+/* psnClearSinkRecord @ 0xd4de8 (16 bytes) */
+int psnClearSinkRecord(param_1)
   undefined4 *param_1;
 {
   param_1[1] = 0;
@@ -9345,8 +9345,8 @@ int FUN_000d4de8(param_1)
   return;
 }
 
-/* FUN_000d4df8 @ 0xd4df8 (16 bytes) */
-int FUN_000d4df8(param_1)
+/* psnClearSinkRecord2 @ 0xd4df8 (16 bytes) */
+int psnClearSinkRecord2(param_1)
   undefined4 *param_1;
 {
   param_1[1] = 0;

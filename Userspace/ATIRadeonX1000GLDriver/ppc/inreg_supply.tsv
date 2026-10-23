@@ -289,8 +289,8 @@ b6580	FUN_000b6580	r7	PASS-indirect	GARBAGE
 b6580	FUN_000b6580	r8	PASS-indirect	GARBAGE	
 bd9a0	FUN_000bd9a0	r7	PASS-indirect	GARBAGE	
 bd9a0	FUN_000bd9a0	r8	PASS-indirect	GARBAGE	
-db574	FUN_000db574	r8	PASS-import	GARBAGE	
-db574	FUN_000db574	r10	PASS-import	GARBAGE	
+db574	ildisPrintFixedPoint	r8	PASS-import	GARBAGE	
+db574	ildisPrintFixedPoint	r10	PASS-import	GARBAGE	
 e36bc	FUN_000e36bc	r8	PASS-deep	GARBAGE	
 e36bc	FUN_000e36bc	r9	PASS-deep	GARBAGE	
 e36bc	FUN_000e36bc	r10	PASS-deep	GARBAGE	

@@ -8379,7 +8379,7 @@ int FUN_000b5f40(param_1, param_2)
   iVar1 = *(int *)(param_2 + 0x14);
   if (iVar1 != 0) {
     if (*(int *)(iVar1 + 0x5648) != 0) {
-      FUN_000c71e0(*(int *)(iVar1 + 0x5648));
+      ilFreeRecordList(*(int *)(iVar1 + 0x5648));
       iVar1 = *(int *)(param_2 + 0x14);
     }
     _free(iVar1);

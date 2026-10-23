@@ -4401,8 +4401,8 @@ int PrimitiveIndex__ctor_125db8(this, param_2, param_3, param_4, compiler)
   return;
 }
 
-/* FUN_00125f40 @ 0x125f40 (84 bytes) */
-int FUN_00125f40(param_1, param_2, param_3, param_4, param_5)
+/* AddrIndexedSet__ctor_125f40 @ 0x125f40 (84 bytes) */
+int AddrIndexedSet__ctor_125f40(param_1, param_2, param_3, param_4, param_5)
   undefined4 *param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -4437,8 +4437,8 @@ int FUN_00125f94(param_1, param_2, param_3, param_4, param_5)
   return;
 }
 
-/* FUN_00125fe8 @ 0x125fe8 (76 bytes) */
-int FUN_00125fe8(param_1, param_2, param_3, param_4, param_5)
+/* LoopRegister__ctor_125fe8 @ 0x125fe8 (76 bytes) */
+int LoopRegister__ctor_125fe8(param_1, param_2, param_3, param_4, param_5)
   undefined4 *param_1;
   undefined4 param_2;
   undefined4 param_3;

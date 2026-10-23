@@ -407,17 +407,17 @@ ced58	FUN_000ced58	r8	PASS-no	cf034 bl 0x1a3fa0	; symbol stub for: _strcat
 ced58	FUN_000ced58	r10	PASS-no	cf034 bl 0x1a3fa0	; symbol stub for: _strcat
 d0304	vsDisassembleToString	r10	PASS-no	d0324 bl 0xce038
 d035c	vsDisassembleVertexProgram	r10	PASS-no	d037c bl 0xce038
-d4e8c	FUN_000d4e8c	r10	PASS-no	d4eac bl 0xd4df8
-db574	FUN_000db574	r7	PASS-no	db69c bl 0xcdc3c
-db574	FUN_000db574	r8	PASS-import		
-db574	FUN_000db574	r10	PASS-import		
-dc3b0	FUN_000dc3b0	r10	PASS-no	dc3d8 bl 0xdc2c4
-dd1f8	FUN_000dd1f8	r10	PASS-no	dd540 bl 0xda8fc
-e0694	FUN_000e0694	r6	PASS-no	e06b4 bl 0xda8d0
-e0694	FUN_000e0694	r7	PASS-no	e06b4 bl 0xda8d0
-e0694	FUN_000e0694	r8	PASS-no	e06b4 bl 0xda8d0
-e0694	FUN_000e0694	r9	PASS-no	e06b4 bl 0xda8d0
-e0694	FUN_000e0694	r10	PASS-no	e06b4 bl 0xda8d0
+d4e8c	scDumpPixelProgram	r10	PASS-no	d4eac bl 0xd4df8
+db574	ildisPrintFixedPoint	r7	PASS-no	db69c bl 0xcdc3c
+db574	ildisPrintFixedPoint	r8	PASS-import		
+db574	ildisPrintFixedPoint	r10	PASS-import		
+dc3b0	ildisPrintDclptCoordMode	r10	PASS-no	dc3d8 bl 0xdc2c4
+dd1f8	ildisPrintSourceOperand	r10	PASS-no	dd540 bl 0xda8fc
+e0694	ildisPrintProgram	r6	PASS-no	e06b4 bl 0xda8d0
+e0694	ildisPrintProgram	r7	PASS-no	e06b4 bl 0xda8d0
+e0694	ildisPrintProgram	r8	PASS-no	e06b4 bl 0xda8d0
+e0694	ildisPrintProgram	r9	PASS-no	e06b4 bl 0xda8d0
+e0694	ildisPrintProgram	r10	PASS-no	e06b4 bl 0xda8d0
 e2094	FUN_000e2094	r6	PASS-no	e20b4 bl 0xe15b8
 e2094	FUN_000e2094	r7	PASS-no	e20b4 bl 0xe15b8
 e2094	FUN_000e2094	r8	PASS-no	e20b4 bl 0xe15b8

@@ -819,8 +819,8 @@ int EntryBlock__ctor_eabbc(this, param_2)
   return;
 }
 
-/* FUN_000eac08 @ 0xeac08 (88 bytes) */
-int FUN_000eac08(this, param_2)
+/* BreakOrContinueBlock__ctor_eac08 @ 0xeac08 (88 bytes) */
+int BreakOrContinueBlock__ctor_eac08(this, param_2)
   undefined4 *this;
   int param_2;
 {
@@ -836,8 +836,8 @@ int FUN_000eac08(this, param_2)
   return;
 }
 
-/* FUN_000eac60 @ 0xeac60 (88 bytes) */
-int FUN_000eac60(this, param_2)
+/* BreakOrContinueBlock__ctor_eac60 @ 0xeac60 (88 bytes) */
+int BreakOrContinueBlock__ctor_eac60(this, param_2)
   undefined4 *this;
   int param_2;
 {
@@ -1462,7 +1462,7 @@ int BreakBlock__ctor_ebe70(this, param_2)
   undefined4 *this;
   undefined4 param_2;
 {
-  ((int (*)())FUN_000eac60)(this,param_2);
+  ((int (*)())BreakOrContinueBlock__ctor_eac60)(this,param_2);
   *this = &PTR_FUN_001e9e20;
   return;
 }
@@ -1472,7 +1472,7 @@ int BreakBlock__ctor_ebeb4(this, param_2)
   undefined4 *this;
   undefined4 param_2;
 {
-  ((int (*)())FUN_000eac60)(this,param_2);
+  ((int (*)())BreakOrContinueBlock__ctor_eac60)(this,param_2);
   *this = &PTR_FUN_001e9e20;
   return;
 }
@@ -1496,7 +1496,7 @@ int ContinueBlock__ctor_ebf70(this, param_2)
   undefined4 *this;
   undefined4 param_2;
 {
-  ((int (*)())FUN_000eac60)(this,param_2);
+  ((int (*)())BreakOrContinueBlock__ctor_eac60)(this,param_2);
   *this = &PTR_FUN_001e9e78;
   return;
 }
@@ -1506,7 +1506,7 @@ int ContinueBlock__ctor_ebfb4(this, param_2)
   undefined4 *this;
   undefined4 param_2;
 {
-  ((int (*)())FUN_000eac60)(this,param_2);
+  ((int (*)())BreakOrContinueBlock__ctor_eac60)(this,param_2);
   *this = &PTR_FUN_001e9e78;
   return;
 }

@@ -50,14 +50,14 @@ int FUN_00103d78(undefined4 param_1,int param_2,uint param_3,double fparam_1)
                                       DOUBLE_001aa1e0));
 }
 
-/* FUN_00103e54 @ 0x103e54 (28 bytes) */
-double FUN_00103e54( void)
+/* constantZeroFloat @ 0x103e54 (28 bytes) */
+double constantZeroFloat( void)
 {
   return (double)FLOAT_001aa0d4;
 }
 
-/* FUN_00103e70 @ 0x103e70 (16 bytes) */
-int FUN_00103e70(param_1)
+/* isLessThan2 @ 0x103e70 (16 bytes) */
+int isLessThan2(param_1)
   uint param_1;
 {
   return param_1 < 2;
@@ -149,8 +149,8 @@ int IRInst__copyBodyFrom(param_1, param_2)
   return ((int (*)())IRInst__restoreCounters)(param_1,&local_28);
 }
 
-/* FUN_00103fe8 @ 0x103fe8 (52 bytes) */
-int FUN_00103fe8(param_1, param_2, param_3)
+/* operandsHaveSameConstant @ 0x103fe8 (52 bytes) */
+int operandsHaveSameConstant(param_1, param_2, param_3)
   int param_1;
   int param_2;
   int param_3;
@@ -201,8 +201,8 @@ int FUN_0010406c(param_1)
   return 0x15;
 }
 
-/* FUN_001040b0 @ 0x1040b0 (84 bytes) */
-int FUN_001040b0(param_1)
+/* RegKind__laneCount @ 0x1040b0 (84 bytes) */
+int RegKind__laneCount(param_1)
   int param_1;
 {
   if ((*(uint *)(PTR_PTR_001e8c60 + param_1 * 0x10 + 4) & 0x400) != 0) {
@@ -346,8 +346,8 @@ int FUN_001042bc(param_1, param_2)
   return loopIndex;
 }
 
-/* FUN_00104330 @ 0x104330 (52 bytes) */
-int FUN_00104330(param_1)
+/* IRVertexFetch__initSemantics @ 0x104330 (52 bytes) */
+int IRVertexFetch__initSemantics(param_1)
   int param_1;
 {
   *(undefined4 *)(param_1 + 0xac) = 0;
@@ -615,8 +615,8 @@ int FUN_00104800(param_1, param_2)
   return 1;
 }
 
-/* FUN_0010485c @ 0x10485c (120 bytes) */
-int FUN_0010485c(param_1, param_2)
+/* Inst__nearestCommonAncestorBlock @ 0x10485c (120 bytes) */
+int Inst__nearestCommonAncestorBlock(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -627,8 +627,8 @@ int FUN_0010485c(param_1, param_2)
   iVar1 = ((int (*)())FUN_00104800)(param_1,param_2);
   iVar3 = param_1;
   if ((iVar1 == 0) && (iVar1 = ((int (*)())FUN_00104800)(param_2,param_1), iVar3 = param_2, iVar1 == 0)) {
-    uVar2 = FUN_000e7924(*(undefined4 *)(param_1 + 0x158),*(undefined4 *)(param_2 + 0x158));
-    iVar3 = FUN_000e7c98(uVar2);
+    uVar2 = Block__nearestCommonAncestor(*(undefined4 *)(param_1 + 0x158),*(undefined4 *)(param_2 + 0x158));
+    iVar3 = Block__resolveRedirect(uVar2);
     return iVar3;
   }
   return iVar3;

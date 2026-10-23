@@ -60,8 +60,8 @@ LAB_0013932c:
   return uVar2;
 }
 
-/* FUN_00139344 @ 0x139344 (80 bytes) */
-int FUN_00139344(param_1)
+/* IRInst__isOpcodeInSet139344 @ 0x139344 (80 bytes) */
+int IRInst__isOpcodeInSet139344(param_1)
   int param_1;
 {
   switch(*(undefined4 *)(*(int *)(param_1 + 0x88) + 8)) {
@@ -110,7 +110,7 @@ int Program__moveInterpFetchesOutOfIfs(param_1)
       if (iVar5 != 0) {
         do {
           iVar6 = iVar5;
-          iVar5 = ((int (*)())FUN_00139344)(iVar7);
+          iVar5 = ((int (*)())IRInst__isOpcodeInSet139344)(iVar7);
           if (iVar5 != 0) {
             operandVReg = (int *)IRInst__getOperandSource(iVar7,1);
             iVar5 = (**(code **)(*operandVReg + 0x4c))(operandVReg);
@@ -164,8 +164,8 @@ LAB_00139654:
   return;
 }
 
-/* FUN_001396a0 @ 0x1396a0 (48 bytes) */
-int FUN_001396a0(param_1, param_2)
+/* IRInst__markOpcode13After12 @ 0x1396a0 (48 bytes) */
+int IRInst__markOpcode13After12(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -1415,7 +1415,7 @@ int Program__hoistFetchInsts(param_1)
             while (loopIndex2 < *(int *)(iVar4 + 0x84)) {
               loopIndex2 = loopIndex2 + 1;
               iVar3 = IRInst__getOperandSource(iVar4,loopIndex2);
-              iVar6 = ((int (*)())FUN_00139344)(iVar3);
+              iVar6 = ((int (*)())IRInst__isOpcodeInSet139344)(iVar3);
               if ((((iVar6 != 0) && (*(int *)(*(int *)(iVar3 + 0x158) + 0xb8) == 0)) &&
                   (iVar6 = ((int (*)())FUN_0013b1e8)(iVar3,param_1), iVar6 != 0)) &&
                  (iVar6 != *(int *)(iVar3 + 0x158))) {
@@ -3084,7 +3084,7 @@ LAB_0013dcf0:
                                 }
                                 *allocation = piVar20;
                               }
-                              ((int (*)())FUN_001396a0)(piVar7,piVar20);
+                              ((int (*)())IRInst__markOpcode13After12)(piVar7,piVar20);
                               goto code_r0x0013e80c;
                             }
                             puVar21 = (uint *)piVar7[4];
@@ -8505,7 +8505,7 @@ int FUN_001467e8(param_1, param_2)
   int *piVar2;
   int *piVar3;
   
-  iVar1 = ((int (*)())FUN_00139344)(param_1);
+  iVar1 = ((int (*)())IRInst__isOpcodeInSet139344)(param_1);
   if (iVar1 != 0) {
     piVar2 = *(int **)(param_2 + 0x3a0);
     for (piVar3 = *(int **)(param_1 + 0x158); piVar2 != piVar3; piVar3 = (int *)piVar3[0x3c]) {

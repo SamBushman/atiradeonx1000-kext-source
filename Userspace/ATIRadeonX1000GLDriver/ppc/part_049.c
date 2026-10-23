@@ -1081,7 +1081,7 @@ int Inst__r300Peephole_1882a4(inst, compiler)
           if (((int)*(char *)(a0 + 0x57) >> (uVar6 & 0x3f) & 1U) == 0) {
             return;
           }
-          iVar4 = ((undefined4 (*)())FUN_0010aafc)((double)GH_U2F((unsigned int)(a0[uVar6 * 6 + 8])));
+          iVar4 = ((undefined4 (*)())isOutputScaleValue)((double)GH_U2F((unsigned int)(a0[uVar6 * 6 + 8])));
           if (iVar4 == 0) {
             return;
           }
@@ -1096,7 +1096,7 @@ int Inst__r300Peephole_1882a4(inst, compiler)
         bVar1 = loopIndex != 3;
         loopIndex = loopIndex + 1;
       } while (bVar1);
-      loopIndex = ((int (*)())FUN_0010ab40)((double)GH_U2F((unsigned int)(a0[uVar5 * 6 + 8])));
+      loopIndex = ((int (*)())outputScaleExponent)((double)GH_U2F((unsigned int)(a0[uVar5 * 6 + 8])));
       iVar4 = (**(code **)(**(int **)(compiler + COMP_target) + 0xfc))(*(int **)(compiler + COMP_target),loopIndex,0);
       if (iVar4 != 0) {
         ((void (*)())FUN_000f79c4)(inst,*(undefined4 *)(compiler + COMP_currentProgram),1,1.0,1.0,1.0,1.0);

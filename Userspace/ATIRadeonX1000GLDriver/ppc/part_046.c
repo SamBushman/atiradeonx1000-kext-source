@@ -1349,7 +1349,7 @@ LAB_00174efc:
               else {
                 pfVar5 = (float *)Compiler__exprRecordForValueNumber(param_1[0x8e],loopIndex3[0x5e]);
                 local_30 = *pfVar5;
-                loopIndex2 = ((bool (*)())FUN_0010b820)(param_1[0x2c],(double)local_30,0.0);
+                loopIndex2 = ((bool (*)())evaluateCompareFloats)(param_1[0x2c],(double)local_30,0.0);
                 loopIndex2 = (loopIndex2 == 0) + 2;
                 loopRemaining = param_1[loopIndex2 * 4 + loopIndex + 0x5a];
                 if (loopRemaining < 0) {
@@ -1460,7 +1460,7 @@ LAB_0017547c:
       if (loopIndex3[0x5e] < 0) {
         pfVar5 = (float *)Compiler__exprRecordForValueNumber(param_1[0x8e],loopIndex3[0x5e]);
         local_30 = *pfVar5;
-        loopIndex2 = ((bool (*)())FUN_0010b820)(param_1[0x2c],(double)local_30,0.0);
+        loopIndex2 = ((bool (*)())evaluateCompareFloats)(param_1[0x2c],(double)local_30,0.0);
         loopIndex2 = (loopIndex2 == 0) + 2;
         loopIndex = param_1[loopIndex2 * 4 + iVar9 + 0x5a];
         if (loopIndex < 0) {
@@ -2012,8 +2012,8 @@ int FUN_00176324(param_1)
   return 0;
 }
 
-/* FUN_00176350 @ 0x176350 (148 bytes) */
-undefined4 FUN_00176350(double fparam_1)
+/* classifyConstantRange @ 0x176350 (148 bytes) */
+undefined4 classifyConstantRange(double fparam_1)
 {
   if (fparam_1 == (double)FLOAT_001aa0e8) {
     return 1;
@@ -2071,8 +2071,8 @@ int FUN_001763e4(param_1, param_2)
   return 1;
 }
 
-/* FUN_00176474 @ 0x176474 (104 bytes) */
-int FUN_00176474(undefined4 param_1,int param_2,int param_3,double fparam_1)
+/* ValueKey__findOrInsertLiteral @ 0x176474 (104 bytes) */
+int ValueKey__findOrInsertLiteral(undefined4 param_1,int param_2,int param_3,double fparam_1)
 {
   bool bVar1;
   int loopIndex;
@@ -2104,16 +2104,16 @@ int FUN_001764e0(param_1, param_2)
   return *(int *)(param_2 * 4 + param_1 + 0x70) == 4;
 }
 
-/* FUN_001764fc @ 0x1764fc (28 bytes) */
-int FUN_001764fc(param_1, param_2)
+/* ValueKey__sourceKindIs1 @ 0x1764fc (28 bytes) */
+int ValueKey__sourceKindIs1(param_1, param_2)
   int param_1;
   int param_2;
 {
   return *(int *)(param_2 * 4 + param_1 + 0xa0) == 1;
 }
 
-/* FUN_00176518 @ 0x176518 (28 bytes) */
-int FUN_00176518(param_1, param_2)
+/* ValueKey__sourceKindIs4 @ 0x176518 (28 bytes) */
+int ValueKey__sourceKindIs4(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -2289,8 +2289,8 @@ int FUN_001767d8(ctx, param_2)
   return 0;
 }
 
-/* FUN_00176854 @ 0x176854 (128 bytes) */
-int FUN_00176854(param_1, param_2, param_3, param_4, param_5, param_6)
+/* ValueKey__lanesAreUnset @ 0x176854 (128 bytes) */
+int ValueKey__lanesAreUnset(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
   int param_2;
   int param_3;
@@ -2349,7 +2349,7 @@ int FUN_00176954(ctx, param_2)
   if ((*(int *)(iVar5 + 0x178) < 0) && (*(int *)(iVar5 + 0x188) < 0)) {
     pfVar1 = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),*(int *)(iVar5 + 0x178));
     pfVar2 = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),*(undefined4 *)(iVar5 + 0x188));
-    iVar5 = ((bool (*)())FUN_0010b820)(*(undefined4 *)(ctx + 0xb0),(double)*pfVar1,(double)*pfVar2);
+    iVar5 = ((bool (*)())evaluateCompareFloats)(*(undefined4 *)(ctx + 0xb0),(double)*pfVar1,(double)*pfVar2);
     uVar4 = 0x3f800000;
     if (iVar5 == 0) {
       uVar4 = 0;

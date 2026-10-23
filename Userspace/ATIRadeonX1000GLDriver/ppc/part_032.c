@@ -1765,7 +1765,7 @@ int Program__packPsInputs(param_1)
   piVar24 = (int *)((int *)piVar17[0x26])[2];
   do {
     if (piVar24 == (int *)0x0) {
-      FUN_001940f0(puVar18,FUN_0010e4ec);
+      Vector__shellSort(puVar18,FUN_0010e4ec);
       if (0 < (int)uVar14) {
         uVar23 = 0;
         do {
@@ -2065,7 +2065,7 @@ LAB_0011293c:
   iVar1 = FUN_0010f4d4(param_2);
   *(int *)(param_2 + 0x3e4) = iVar1;
   if (iVar1 == 0) {
-    FUN_001940f0(*(undefined4 *)(param_2 + 0x420),FUN_0010e870);
+    Vector__shellSort(*(undefined4 *)(param_2 + 0x420),FUN_0010e870);
     puVar16 = *(uint **)(param_2 + 0x420);
     uVar13 = puVar16[1];
     if (uVar13 != 0) {
@@ -2152,7 +2152,7 @@ LAB_0011293c:
     ((int (*)())FUN_0010fd98)(2,puVar16,&local_58,param_2);
 LAB_00112c28:
     ((int (*)())FUN_0010fd98)(3,*(undefined4 *)(param_2 + 0x424),&local_58,param_2);
-    FUN_001940f0(*(undefined4 *)(param_2 + 0x41c),FUN_0010e8c4);
+    Vector__shellSort(*(undefined4 *)(param_2 + 0x41c),FUN_0010e8c4);
     ((int (*)())FUN_0010fd98)(1,*(undefined4 *)(param_2 + 0x41c),&local_58,param_2);
   }
   else {
@@ -2476,8 +2476,8 @@ int FUN_001134bc(param_1, param_2, param_3)
   return 0;
 }
 
-/* FUN_00113554 @ 0x113554 (56 bytes) */
-double FUN_00113554(double fparam_1,double fparam_2)
+/* mulFloatZeroAnnihilates @ 0x113554 (56 bytes) */
+double mulFloatZeroAnnihilates(double fparam_1,double fparam_2)
 {
   double dVar1;
   

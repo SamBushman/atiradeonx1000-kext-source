@@ -47,8 +47,8 @@ int FUN_000f2e18(param_1)
   return 1;
 }
 
-/* FUN_000f2e50 @ 0xf2e50 (72 bytes) */
-int FUN_000f2e50(param_1, param_2)
+/* laneBytes__mapTwoThreeToOne @ 0xf2e50 (72 bytes) */
+int laneBytes__mapTwoThreeToOne(param_1, param_2)
   undefined4 *param_1;
   undefined4 param_2;
 {
@@ -70,8 +70,8 @@ int FUN_000f2e50(param_1, param_2)
   return param_1;
 }
 
-/* FUN_000f2e98 @ 0xf2e98 (144 bytes) */
-int FUN_000f2e98(param_1, param_2)
+/* laneBytes__mergeOneAndTwo @ 0xf2e98 (144 bytes) */
+int laneBytes__mergeOneAndTwo(param_1, param_2)
   undefined4 *param_1;
   undefined4 param_2;
 {
@@ -226,8 +226,8 @@ int FUN_000f302c(param_1, param_2, param_3)
   return param_1;
 }
 
-/* FUN_000f308c @ 0xf308c (72 bytes) */
-int FUN_000f308c(param_1)
+/* laneBytes__commonSelect @ 0xf308c (72 bytes) */
+int laneBytes__commonSelect(param_1)
   undefined4 param_1;
 {
   unsigned int ghidra_home[8] = { param_1, 0, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
@@ -694,8 +694,8 @@ int FUN_000f370c(param_1, param_2)
   return;
 }
 
-/* FUN_000f3764 @ 0xf3764 (84 bytes) */
-int FUN_000f3764(param_1, param_2)
+/* laneBytes__clearSetLanes @ 0xf3764 (84 bytes) */
+int laneBytes__clearSetLanes(param_1, param_2)
   undefined4 *param_1;
   undefined4 param_2;
 {
@@ -758,8 +758,8 @@ int FUN_000f3884(param_1)
   return uVar1;
 }
 
-/* FUN_000f388c @ 0xf388c (124 bytes) */
-int FUN_000f388c(param_1, param_2, param_3)
+/* laneMask__fromSelectBytes @ 0xf388c (124 bytes) */
+int laneMask__fromSelectBytes(param_1, param_2, param_3)
   undefined4 *param_1;
   uint param_2;
   int param_3;
@@ -1228,7 +1228,7 @@ switchD_000f40d0_caseD_2:
     return param_1;
   case 3:
     if (param_3 - 1U < 2) {
-      ((int (*)())FUN_000f388c)(&local_40,local_58,2);
+      ((int (*)())laneMask__fromSelectBytes)(&local_40,local_58,2);
       *param_1 = local_40;
       return param_1;
     }
@@ -1237,11 +1237,11 @@ switchD_000f40d0_caseD_2:
     }
     goto LAB_000f4584;
   case 4:
-    ((int (*)())FUN_000f388c)(&local_3c,local_58,3);
+    ((int (*)())laneMask__fromSelectBytes)(&local_3c,local_58,3);
     *param_1 = local_3c;
     break;
   case 5:
-    ((int (*)())FUN_000f388c)(&local_38,local_58,4);
+    ((int (*)())laneMask__fromSelectBytes)(&local_38,local_58,4);
     *param_1 = local_38;
     break;
   case 6:
@@ -1258,19 +1258,19 @@ switchD_000f40d0_caseD_2:
       } while (bVar1);
     }
     else {
-      ((int (*)())FUN_000f388c)(&local_34,local_58,4);
+      ((int (*)())laneMask__fromSelectBytes)(&local_34,local_58,4);
       *param_1 = local_34;
     }
     break;
   case 7:
     if (param_3 < 3) {
-      ((int (*)())FUN_000f388c)(&local_30,local_58,3);
+      ((int (*)())laneMask__fromSelectBytes)(&local_30,local_58,3);
       *param_1 = local_30;
       return param_1;
     }
     goto LAB_000f4594;
   case 8:
-    ((int (*)())FUN_000f388c)(&local_2c,local_58,4);
+    ((int (*)())laneMask__fromSelectBytes)(&local_2c,local_58,4);
     *param_1 = local_2c;
     break;
   case 9:
@@ -1648,8 +1648,8 @@ int FUN_000f4a5c(param_1)
   return iVar1;
 }
 
-/* FUN_000f4a70 @ 0xf4a70 (20 bytes) */
-int FUN_000f4a70(param_1)
+/* isRegKindBelow21 @ 0xf4a70 (20 bytes) */
+int isRegKindBelow21(param_1)
   uint param_1;
 {
   return param_1 >> 0x10 < 0x15;
@@ -1724,8 +1724,8 @@ LAB_000f4b94:
   return iVar1;
 }
 
-/* FUN_000f4bc8 @ 0xf4bc8 (32 bytes) */
-int FUN_000f4bc8(param_1_w, param_2_w)
+/* floatLess @ 0xf4bc8 (32 bytes) */
+int floatLess(param_1_w, param_2_w)
   unsigned int param_1_w;
   unsigned int param_2_w;
 {
@@ -1734,8 +1734,8 @@ int FUN_000f4bc8(param_1_w, param_2_w)
   return param_2 < param_1;
 }
 
-/* FUN_000f4be8 @ 0xf4be8 (92 bytes) */
-int FUN_000f4be8(param_1, param_2)
+/* BitSet__findFirstSet @ 0xf4be8 (92 bytes) */
+int BitSet__findFirstSet(param_1, param_2)
   uint *param_1;
   int param_2;
 {

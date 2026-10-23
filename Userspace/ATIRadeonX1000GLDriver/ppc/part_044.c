@@ -438,7 +438,7 @@ LAB_0015977c:
         goto LAB_0015977c;
         FUN_0010b2dc(&local_28,inst,1,a0[uVar7 * 6 + 8]);
         FUN_0010b284(&local_24,inst,1,local_28);
-        iVar4 = ((bool (*)())FUN_0010b820)(inst,(double)local_24,0.0);
+        iVar4 = ((bool (*)())evaluateCompareFloats)(inst,(double)local_24,0.0);
         iVar4 = (iVar4 == 0) + 2;
         if ((iVar2 != -1) && (bVar1 = iVar4 != iVar2, iVar4 = iVar2, bVar1)) goto LAB_0015977c;
       }
@@ -5472,7 +5472,7 @@ LAB_00162370:
     inst3 = inst;
     if (iVar16 != 0) {
       iVar7 = 0;
-      dVar21 = (double)((double (*)())FUN_0010aad4)(iVar6);
+      dVar21 = (double)((double (*)())outputScaleFromExponent)(iVar6);
       pfVar4 = local_b8;
       do {
         operandRecord = IRInst__getOperandRecord(inst2,0);
@@ -5499,7 +5499,7 @@ LAB_00162370:
   }
   iVar16 = iVar6;
   iVar6 = 0;
-  dVar21 = (double)((double (*)())FUN_0010aad4)(iVar16);
+  dVar21 = (double)((double (*)())outputScaleFromExponent)(iVar16);
   pfVar4 = local_b8;
   do {
     operandRecord2 = IRInst__getOperandRecord(inst3,0);
@@ -5528,7 +5528,7 @@ LAB_001627ec:
     pfVar4 = pfVar4 + 1;
     iVar6 = iVar6 + -1;
   } while (iVar6 != 0);
-  dVar21 = (double)((double (*)())FUN_0010aad4)(iVar16);
+  dVar21 = (double)((double (*)())outputScaleFromExponent)(iVar16);
   iVar6 = 0;
   local_c4 = local_d8;
   iVar7 = 4;

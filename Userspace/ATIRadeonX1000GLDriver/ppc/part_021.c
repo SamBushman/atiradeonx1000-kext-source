@@ -1,7 +1,7 @@
 #include "decls.h"
 
-/* FUN_000e15b8 @ 0xe15b8 (36 bytes) */
-int FUN_000e15b8(param_1)
+/* Compiler__propagateFlag5a1Bit1 @ 0xe15b8 (36 bytes) */
+int Compiler__propagateFlag5a1Bit1(param_1)
   int param_1;
 {
   uint uVar1;
@@ -13,8 +13,8 @@ int FUN_000e15b8(param_1)
   return;
 }
 
-/* FUN_000e15dc @ 0xe15dc (64 bytes) */
-int FUN_000e15dc(param_1)
+/* Compiler__selectEntry534ByProgramFlags @ 0xe15dc (64 bytes) */
+int Compiler__selectEntry534ByProgramFlags(param_1)
   int param_1;
 {
   uint uVar1;
@@ -70,8 +70,8 @@ LAB_000e16a4:
   return uVar2;
 }
 
-/* FUN_000e16b8 @ 0xe16b8 (76 bytes) */
-int FUN_000e16b8(param_1)
+/* Compiler__selectBlockByProgramFlags @ 0xe16b8 (76 bytes) */
+int Compiler__selectBlockByProgramFlags(param_1)
   int param_1;
 {
   uint uVar1;
@@ -89,45 +89,45 @@ int FUN_000e16b8(param_1)
   return *(undefined4 *)(*(int *)(param_1 + 0x398) + 0x40);
 }
 
-/* FUN_000e1704 @ 0xe1704 (88 bytes) */
-int FUN_000e1704(param_1, param_2)
+/* Compiler__setBitInSelectedBlockB8 @ 0xe1704 (88 bytes) */
+int Compiler__setBitInSelectedBlockB8(param_1, param_2)
   undefined4 param_1;
   uint param_2;
 {
   int iVar1;
   int iVar2;
   
-  iVar2 = ((int (*)())FUN_000e16b8)(param_1);
+  iVar2 = ((int (*)())Compiler__selectBlockByProgramFlags)(param_1);
   iVar1 = ((int)param_2 >> 5) + (uint)((int)param_2 < 0 && (param_2 & 0x1f) != 0);
   iVar2 = iVar1 * 4 + iVar2;
   *(uint *)(iVar2 + 0xb8) = 1 << (param_2 + iVar1 * -0x20 & 0x3f) | *(uint *)(iVar2 + 0xb8);
   return;
 }
 
-/* FUN_000e175c @ 0xe175c (88 bytes) */
-int FUN_000e175c(param_1, param_2)
+/* Compiler__setBitInSelectedBlockD8 @ 0xe175c (88 bytes) */
+int Compiler__setBitInSelectedBlockD8(param_1, param_2)
   undefined4 param_1;
   uint param_2;
 {
   int iVar1;
   int iVar2;
   
-  iVar2 = ((int (*)())FUN_000e16b8)(param_1);
+  iVar2 = ((int (*)())Compiler__selectBlockByProgramFlags)(param_1);
   iVar1 = ((int)param_2 >> 5) + (uint)((int)param_2 < 0 && (param_2 & 0x1f) != 0);
   iVar2 = iVar1 * 4 + iVar2;
   *(uint *)(iVar2 + 0xd8) = 1 << (param_2 + iVar1 * -0x20 & 0x3f) | *(uint *)(iVar2 + 0xd8);
   return;
 }
 
-/* FUN_000e17b4 @ 0xe17b4 (88 bytes) */
-int FUN_000e17b4(param_1, param_2)
+/* Compiler__setBitInSelectedBlock98 @ 0xe17b4 (88 bytes) */
+int Compiler__setBitInSelectedBlock98(param_1, param_2)
   undefined4 param_1;
   uint param_2;
 {
   int iVar1;
   int iVar2;
   
-  iVar2 = ((int (*)())FUN_000e16b8)(param_1);
+  iVar2 = ((int (*)())Compiler__selectBlockByProgramFlags)(param_1);
   iVar1 = ((int)param_2 >> 5) + (uint)((int)param_2 < 0 && (param_2 & 0x1f) != 0);
   iVar2 = iVar1 * 4 + iVar2;
   *(uint *)(iVar2 + 0x98) = 1 << (param_2 + iVar1 * -0x20 & 0x3f) | *(uint *)(iVar2 + 0x98);
@@ -546,7 +546,7 @@ int FUN_000e2094(compiler, param_2)
   undefined4 *puVar7;
   undefined8 deleteComputationsThatCouldBeVsEnabled;
   
-  ((int (*)())FUN_000e15b8)(compiler);
+  ((int (*)())Compiler__propagateFlag5a1Bit1)(compiler);
   *(char **)(compiler + 0x5a8) = "INITIAL_INPUT";
   *(char **)(compiler + 0x5bc) = "BUILD_SSA";
   *(char **)(compiler + 0x5d0) = "REDUCE_DEP";
@@ -589,7 +589,7 @@ int FUN_000e2094(compiler, param_2)
         pcVar4 = *(char **)(param_2 + 0x14);
         uVar5 = *(undefined4 *)(pcVar4 + iVar2 * 4);
       }
-      ((int (*)())FUN_000e4400)(puVar7,uVar5);
+      ((int (*)())setWord30)(puVar7,uVar5);
     }
     (**(code **)(**(int **)(compiler + COMP_target) + 0x60))(*(int **)(compiler + COMP_target));
     FUN_000ef498(*(undefined4 *)(compiler + COMP_currentProgram),puVar7);
@@ -897,8 +897,8 @@ int FUN_000e2a04(param_1, param_2)
   return iVar1;
 }
 
-/* FUN_000e2a44 @ 0xe2a44 (16 bytes) */
-int FUN_000e2a44(param_1, param_2, param_3)
+/* moduloDifference @ 0xe2a44 (16 bytes) */
+int moduloDifference(param_1, param_2, param_3)
   int param_1;
   int param_2;
   int param_3;
@@ -1054,7 +1054,7 @@ int FUN_000e2c78(param_1, param_2, param_3)
         iVar16 = *(int *)(iVar3 + 0x20);
         uVar12 = *(undefined4 *)(param_1 + 0x94);
         uVar15 = *(undefined4 *)(param_3 + 0x398);
-        uVar5 = ((int (*)())FUN_000e16b8)(param_3);
+        uVar5 = ((int (*)())Compiler__selectBlockByProgramFlags)(param_3);
         FUN_000d9d74(uVar15,uVar12,(uint)(iVar16 == 1),uVar7,uVar5,0);
       }
       bVar1 = uVar7 != 3;
@@ -1080,7 +1080,7 @@ int FUN_000e2c78(param_1, param_2, param_3)
             uVar15 = *(undefined4 *)(param_1 + 0x94);
             uVar12 = *(undefined4 *)(iVar16 + 0x20);
             uVar8 = *(undefined4 *)(param_3 + 0x398);
-            uVar5 = ((int (*)())FUN_000e16b8)(param_3);
+            uVar5 = ((int (*)())Compiler__selectBlockByProgramFlags)(param_3);
             FUN_000d9c90(uVar8,uVar15,uVar12,uVar7,uVar5,0);
           }
           else {
@@ -1091,7 +1091,7 @@ int FUN_000e2c78(param_1, param_2, param_3)
             uVar12 = *(undefined4 *)(iVar16 + 0x2c);
             uVar14 = *(undefined4 *)(param_3 + 0x398);
             uVar11 = *(undefined4 *)(iVar16 + 0x30);
-            uVar5 = ((int (*)())FUN_000e16b8)(param_3);
+            uVar5 = ((int (*)())Compiler__selectBlockByProgramFlags)(param_3);
             FUN_000d9e98(uVar14,uVar13,uVar7,iVar4,uVar10,uVar8,uVar15,uVar12,uVar11,uVar5);
           }
         }
@@ -1118,14 +1118,14 @@ int FUN_000e2c78(param_1, param_2, param_3)
         sVar2 = *(short *)(iVar16 + 0x22);
         uVar15 = *(undefined4 *)(param_3 + 0x398);
         iVar3 = (int)*(short *)(iVar16 + 0x20);
-        uVar5 = ((int (*)())FUN_000e16b8)(param_3);
+        uVar5 = ((int (*)())Compiler__selectBlockByProgramFlags)(param_3);
         FUN_000d9e58(uVar15,uVar12,iVar3,(int)sVar2,uVar7,uVar5);
       }
       else {
         fVar6 = GH_U2F((unsigned int)((**(code **)(*param_2 + 0x8c))(param_2,iVar9)));
         uVar12 = *(undefined4 *)(param_1 + 0x94);
         uVar15 = *(undefined4 *)(param_3 + 0x398);
-        uVar5 = ((int (*)())FUN_000e16b8)(param_3);
+        uVar5 = ((int (*)())Compiler__selectBlockByProgramFlags)(param_3);
         ((undefined4 (*)())FUN_000d9bac)(uVar15,uVar12,iVar3,uVar7,uVar5,(uint)(iVar4 == 0xc),(double)fVar6);
       }
     }
@@ -1199,7 +1199,7 @@ int MachineAssembler__vslot34_declareDestinationLanesByClass(this, inst)
     do {
       operandRecord = IRInst__getOperandRecord(inst,0);
       if (*(char *)(iVar2 + operandRecord + 0x10) != '\x01') {
-        ((int (*)())FUN_000e17b4)(*(undefined4 *)(this + 0xc),uVar3);
+        ((int (*)())Compiler__setBitInSelectedBlock98)(*(undefined4 *)(this + 0xc),uVar3);
       }
       bVar1 = iVar2 != 3;
       iVar2 = iVar2 + 1;
@@ -1211,7 +1211,7 @@ int MachineAssembler__vslot34_declareDestinationLanesByClass(this, inst)
     do {
       operandRecord = IRInst__getOperandRecord(inst,0);
       if (*(char *)(iVar2 + operandRecord + 0x10) != '\x01') {
-        ((int (*)())FUN_000e175c)(*(undefined4 *)(this + 0xc),uVar3);
+        ((int (*)())Compiler__setBitInSelectedBlockD8)(*(undefined4 *)(this + 0xc),uVar3);
       }
       bVar1 = iVar2 != 3;
       iVar2 = iVar2 + 1;
@@ -1223,7 +1223,7 @@ int MachineAssembler__vslot34_declareDestinationLanesByClass(this, inst)
     do {
       operandRecord = IRInst__getOperandRecord(inst,0);
       if (*(char *)(iVar2 + operandRecord + 0x10) != '\x01') {
-        ((int (*)())FUN_000e1704)(*(undefined4 *)(this + 0xc),uVar3);
+        ((int (*)())Compiler__setBitInSelectedBlockB8)(*(undefined4 *)(this + 0xc),uVar3);
       }
       bVar1 = iVar2 != 3;
       iVar2 = iVar2 + 1;
@@ -1932,8 +1932,8 @@ int FUN_000e43ec(param_1)
   return *(int *)(param_1 + 0x7c) == 3;
 }
 
-/* FUN_000e4400 @ 0xe4400 (8 bytes) */
-int FUN_000e4400(param_1, param_2)
+/* setWord30 @ 0xe4400 (8 bytes) */
+int setWord30(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {

@@ -365,8 +365,8 @@ LAB_0014736c:
   return uVar4;
 }
 
-/* FUN_00147398 @ 0x147398 (120 bytes) */
-int FUN_00147398(param_1)
+/* IRInst__isOpcodeInSet147398 @ 0x147398 (120 bytes) */
+int IRInst__isOpcodeInSet147398(param_1)
   int param_1;
 {
   int callResult;
@@ -839,7 +839,7 @@ int FUN_00147f54(inst, compiler)
         return inst;
       }
     }
-    iVar4 = ((undefined4 (*)())FUN_0010ab8c)(uniformSourceConstant,local_a8,(double)local_90);
+    iVar4 = ((undefined4 (*)())tryOutputScaleExponent)(uniformSourceConstant,local_a8,(double)local_90);
     if (iVar4 == 0) {
       return inst;
     }
@@ -1378,7 +1378,7 @@ int FUN_00148d8c(inst, param_2)
       if (*(char *)((int)&local_54 + iVar5) == '\0') {
         iVar7 = (**(code **)(*operandVReg + 0x24))(operandVReg);
         if ((((iVar7 == 0) || (iVar7 = IRInst__hasSingleUse(operandVReg,param_2), iVar7 == 0)) ||
-            (operandVReg[0x48] != 0)) || (iVar7 = ((int (*)())FUN_00147398)(operandVReg), iVar7 == 0)) {
+            (operandVReg[0x48] != 0)) || (iVar7 = ((int (*)())IRInst__isOpcodeInSet147398)(operandVReg), iVar7 == 0)) {
           return 0;
         }
         operandRecord2 = IRInst__getOperandRecord(operandVReg,0);
@@ -1399,7 +1399,7 @@ int FUN_00148d8c(inst, param_2)
           if (piVar8[0x48] != 0) {
             return 0;
           }
-          iVar7 = ((int (*)())FUN_00147398)(piVar8);
+          iVar7 = ((int (*)())IRInst__isOpcodeInSet147398)(piVar8);
           if (iVar7 == 0) {
             return 0;
           }
@@ -5614,7 +5614,7 @@ int Inst__collapseAlgebraic_00150d38(inst, param_2)
       a0 = (int *)IRInst__getOperandSource(inst,iVar12);
       iVar5 = (**(code **)(*a0 + 100))(a0);
       if (((iVar5 != 0) && (a0[0x48] == 0)) && (((a0[5] & 0x200U) == 0 && (a0[0x49] != 0)))) {
-        dVar18 = (double)((double (*)())FUN_0010aad4)(a0[0x49]);
+        dVar18 = (double)((double (*)())outputScaleFromExponent)(a0[0x49]);
         local_7c = (float)dVar18;
         local_88 = (float)dVar18;
         local_84 = (float)dVar18;
@@ -9624,7 +9624,7 @@ int Inst__collapseAlgebraic_00158264(inst, param_2, inst2, param_4)
     if (bVar18) {
       fparam_1 = -fparam_1;
     }
-    iVar17 = ((undefined4 (*)())FUN_0010ab8c)(readMaskResult,&local_a8,fparam_1);
+    iVar17 = ((undefined4 (*)())tryOutputScaleExponent)(readMaskResult,&local_a8,fparam_1);
     if (((iVar17 != 0) && (local_a8 != 0)) &&
        (iVar17 = ((int (*)())FUN_0015800c)(inst2,operandVReg,local_a8,uVar14,local_68,param_4), iVar17 != 0)) {
       iVar17 = 0x14;

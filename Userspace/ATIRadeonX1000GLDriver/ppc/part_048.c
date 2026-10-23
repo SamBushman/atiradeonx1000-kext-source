@@ -145,7 +145,7 @@ int FUN_0017bf70(ctx)
     a3 = 1;
     a4 = 1;
     a5 = 0;
-    iVar3 = FUN_00176854(ctx,loopRemaining,1,1,1,0);
+    iVar3 = ValueKey__lanesAreUnset(ctx,loopRemaining,1,1,1,0);
     if (iVar3 != 0) {
       loopIndex = 0;
       piVar9 = &DAT_001e6134;
@@ -163,7 +163,7 @@ LAB_0017c0b0:
             FUN_001745ac(ctx);
             return 1;
           }
-          iVar6 = ((int (*)())FUN_0010ab40)((double)*pfVar4);
+          iVar6 = ((int (*)())outputScaleExponent)((double)*pfVar4);
           if (iVar6 != 0) {
             a0 = *(int **)(*(int *)(ctx + 0x238) + 0x30c);
             iVar6 = iVar6 + *(int *)(*(int *)(ctx + 0xb0) + 0x124);
@@ -1079,7 +1079,7 @@ int FUN_0017d3f8(param_1)
     loopRemaining = *(int *)(param_1 + 0xb0);
     if (((*(uint *)(loopRemaining + 0xb8) & 1) == (*(uint *)(loopRemaining + 0xd0) & 1)) &&
        ((*(uint *)(loopRemaining + 0xb8) >> 1 & 1) == (*(uint *)(loopRemaining + 0xd0) >> 1 & 1))) {
-      loopRemaining = ((bool (*)())FUN_0010b820)(loopRemaining,(double)FLOAT_001aa0d4,(double)FLOAT_001aa0d4);
+      loopRemaining = ((bool (*)())evaluateCompareFloats)(loopRemaining,(double)FLOAT_001aa0d4,(double)FLOAT_001aa0d4);
       uVar3 = 0x3f800000;
       if (loopRemaining == 0) {
         uVar3 = 0;
@@ -1730,9 +1730,9 @@ int FUN_0017e1f4(ctx)
       else {
         fparam_1 = -(double)local_38[0];
       }
-      iVar2 = ((undefined4 (*)())FUN_0010aafc)(fparam_1);
+      iVar2 = ((undefined4 (*)())isOutputScaleValue)(fparam_1);
       if (iVar2 != 0) {
-        iVar2 = ((int (*)())FUN_0010ab40)(fparam_1);
+        iVar2 = ((int (*)())outputScaleExponent)(fparam_1);
         a0 = *(int **)(*(int *)(ctx + 0x238) + 0x30c);
         iVar2 = iVar2 + *(int *)(*(int *)(ctx + 0xb0) + 0x124);
         iVar3 = (**(code **)(*a0 + 0xfc))(a0,iVar2,*(int *)(ctx + 0xb0),in_r6,in_r7,in_r8,a0);
@@ -3334,10 +3334,10 @@ int ValueKey__simplifyModifiersAndAddressing(key)
       do {
         if (*loopIndex6 != '\0') {
           iVar19 = IRInst__getOperandRecord(loopIndex8,iVar17);
-          iVar19 = FUN_00176518(uVar22,(uint)*(byte *)(loopIndex4 + iVar19 + 0x10));
+          iVar19 = ValueKey__sourceKindIs4(uVar22,(uint)*(byte *)(loopIndex4 + iVar19 + 0x10));
           if (iVar19 == 0) {
             iVar19 = IRInst__getOperandRecord(*(undefined4 *)(key + 0xb0),iVar17);
-            iVar19 = FUN_001764fc(uVar22,(uint)*(byte *)(loopIndex4 + iVar19 + 0x10));
+            iVar19 = ValueKey__sourceKindIs1(uVar22,(uint)*(byte *)(loopIndex4 + iVar19 + 0x10));
             if ((iVar19 == 0) || (!bVar3)) {
 LAB_00180a10:
               loopIndex8 = *(int **)(key + 0xb0);
@@ -3442,7 +3442,7 @@ LAB_00180a14: ;
   loopIndex8 = *(int **)(key + 0xb0);
   if (loopIndex8[0x20] == 0) {
 LAB_001818e8:
-    if (((loopIndex8[5] & 2U) != 0) || (iVar17 = FUN_001789d4(loopIndex8), iVar17 != 0))
+    if (((loopIndex8[5] & 2U) != 0) || (iVar17 = IRInst__isOpcode8bOr8c(loopIndex8), iVar17 != 0))
     goto LAB_00180cb4;
   }
   else {
@@ -3501,7 +3501,7 @@ LAB_00180cb4:
               IRInst__setOperandRef(inst,1,*(undefined4 *)(iVar19 + 0x8c));
               IRInst__setOperandSource(inst,1,iVar19,0,*(undefined4 *)(key + 0x238));
               uVar21 = ~(uVar18 & local_9c);
-              FUN_000f3764(&local_70,uVar18 & local_9c);
+              laneBytes__clearSetLanes(&local_70,uVar18 & local_9c);
               *(undefined4 *)((int)inst + 0x9c) = local_70;
               FUN_000f370c(&local_6c,local_70);
               uVar22 = local_6c;
@@ -3556,7 +3556,7 @@ LAB_00181100:
                   loopIndex5 = IRInst__getOperandRecord(callResult,0);
                   WriteMask__fromSelectWord(&local_68,*(undefined4 *)(loopIndex5 + 0x10));
                   uVar18 = local_68 & local_9c;
-                  FUN_000f3764(&local_64,uVar18);
+                  laneBytes__clearSetLanes(&local_64,uVar18);
                   *(undefined4 *)((int)inst2 + 0x9c) = local_64;
                   FUN_000f370c(&local_60,local_64);
                   uVar22 = local_60;
@@ -3619,7 +3619,7 @@ LAB_00181220:
     }
     loopIndex8 = *(int **)(key + 0xb0);
   }
-  if (((loopIndex8[5] & 2U) == 0) && (iVar17 = FUN_001789d4(loopIndex8), iVar17 == 0)) {
+  if (((loopIndex8[5] & 2U) == 0) && (iVar17 = IRInst__isOpcode8bOr8c(loopIndex8), iVar17 == 0)) {
     return changed;
   }
 code_r0x001812b0:
@@ -5443,7 +5443,7 @@ code_r0x00184480:
                 *puVar5 = sourceDef;
               } while (loopIndex <= (int)uVar1);
             }
-            FUN_001940f0(puVar9,FUN_001819b4);
+            Vector__shellSort(puVar9,FUN_001819b4);
             Vector__removeAt(puVar10,vectorAlloc[2] + -1);
             loopIndex2 = vectorAlloc[2];
             if (loopIndex2 < *puVar10) {
@@ -5552,7 +5552,7 @@ code_r0x00184480:
           *puVar5 = sourceDef;
         } while (loopIndex <= (int)uVar1);
       }
-      FUN_001940f0(puVar9,FUN_001819b4);
+      Vector__shellSort(puVar9,FUN_001819b4);
       if (0 < (int)uVar1) {
         loopIndex2 = 0;
         loopIndex = 0;
@@ -5657,8 +5657,8 @@ int pass_minreg_order(scheduler, program)
   return Program__beginPass(program,(int)"minreg_order");
 }
 
-/* FUN_00184bcc @ 0x184bcc (36 bytes) */
-int FUN_00184bcc(param_1, param_2)
+/* compareIntsAscending @ 0x184bcc (36 bytes) */
+int compareIntsAscending(param_1, param_2)
   uint param_1;
   uint param_2;
 {
@@ -5869,7 +5869,7 @@ LAB_00185098:
     uVar8 = 0;
   }
   else {
-    FUN_001940f0(param_1[4],FUN_00184bcc);
+    Vector__shellSort(param_1[4],compareIntsAscending);
     loopIndex = (uint *)param_1[4];
     uVar6 = loopIndex[1];
     if (0 < (int)uVar6) {
