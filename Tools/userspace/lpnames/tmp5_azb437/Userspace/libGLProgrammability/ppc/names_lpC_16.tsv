@@ -1,0 +1,287 @@
+local	InitializeGlobalPools	in_r3	scratchR3	UNKNOWN	return register carried when the pools already exist
+local	InitializeGlobalPools	uVar1	pushResult	INFERRED	TPoolAllocator::push() result returned
+local	FreeGlobalPools	in_r3	scratchR3	UNKNOWN	return register carried through
+local	__ZN14TPoolAllocatorC2Ebii	param_2	global	INFERRED	TPoolAllocator global flag stored at +0
+local	__ZN14TPoolAllocatorC2Ebii	param_3	growthIncrement	INFERRED	page size, raised to at least 0x1000 (stored at +4 and +0x14)
+local	__ZN14TPoolAllocatorC2Ebii	param_4	allocationAlignment	INFERRED	requested alignment, rounded to a power of two (stored at +8)
+use	__ZN14TPoolAllocatorC2Ebii	uVar1	alignment	INFERRED	alignment rounded to a multiple of 4, at least 4, then to a power of two	^\s*uVar1\ =\ \*\(uint\ \*\)\(\(int\)this\ \+\ 8\)\ \&\ 0xfffffffc;$	+1
+use	__ZN14TPoolAllocatorC2Ebii	uVar1	alignment	INFERRED	alignment rounded to a multiple of 4, at least 4, then to a power of two	^\s*\*\(uint\ \*\)\(\(int\)this\ \+\ 8\)\ =\ uVar1;$	+2
+use	__ZN14TPoolAllocatorC2Ebii	uVar1	alignment	INFERRED	alignment rounded to a multiple of 4, at least 4, then to a power of two	^\s*uVar1\ =\ 1;$	+1
+use	__ZN14TPoolAllocatorC2Ebii	uVar1	alignment	INFERRED	alignment rounded to a multiple of 4, at least 4, then to a power of two	^\s*uVar1\ =\ uVar1\ <<\ 1;$	+2
+use	__ZN14TPoolAllocatorC2Ebii	uVar1	alignment	INFERRED	alignment rounded to a multiple of 4, at least 4, then to a power of two	^\s*\*\(uint\ \*\)\(\(int\)this\ \+\ 8\)\ =\ uVar1;$@2	+3
+local	__ZN14TPoolAllocatorC1Ebii	param_2	global	INFERRED	TPoolAllocator global flag stored at +0
+local	__ZN14TPoolAllocatorC1Ebii	param_3	growthIncrement	INFERRED	page size, raised to at least 0x1000 (stored at +4 and +0x14)
+local	__ZN14TPoolAllocatorC1Ebii	param_4	allocationAlignment	INFERRED	requested alignment, rounded to a power of two (stored at +8)
+use	__ZN14TPoolAllocatorC1Ebii	uVar1	alignment	INFERRED	alignment rounded to a multiple of 4, at least 4, then to a power of two	^\s*uVar1\ =\ \*\(uint\ \*\)\(\(int\)this\ \+\ 8\)\ \&\ 0xfffffffc;$	+1
+use	__ZN14TPoolAllocatorC1Ebii	uVar1	alignment	INFERRED	alignment rounded to a multiple of 4, at least 4, then to a power of two	^\s*\*\(uint\ \*\)\(\(int\)this\ \+\ 8\)\ =\ uVar1;$	+2
+use	__ZN14TPoolAllocatorC1Ebii	uVar1	alignment	INFERRED	alignment rounded to a multiple of 4, at least 4, then to a power of two	^\s*uVar1\ =\ 1;$	+1
+use	__ZN14TPoolAllocatorC1Ebii	uVar1	alignment	INFERRED	alignment rounded to a multiple of 4, at least 4, then to a power of two	^\s*uVar1\ =\ uVar1\ <<\ 1;$	+2
+use	__ZN14TPoolAllocatorC1Ebii	uVar1	alignment	INFERRED	alignment rounded to a multiple of 4, at least 4, then to a power of two	^\s*\*\(uint\ \*\)\(\(int\)this\ \+\ 8\)\ =\ uVar1;$@2	+3
+local	__ZN14TPoolAllocatorC4Ebii	param_2	global	INFERRED	TPoolAllocator global flag stored at +0
+local	__ZN14TPoolAllocatorC4Ebii	param_3	growthIncrement	INFERRED	page size, raised to at least 0x1000 (stored at +4 and +0x14)
+local	__ZN14TPoolAllocatorC4Ebii	param_4	allocationAlignment	INFERRED	requested alignment, rounded to a power of two (stored at +8)
+use	__ZN14TPoolAllocatorC4Ebii	uVar1	alignment	INFERRED	alignment rounded to a multiple of 4, at least 4, then to a power of two	^\s*uVar1\ =\ \*\(uint\ \*\)\(\(int\)this\ \+\ 8\)\ \&\ 0xfffffffc;$	+1
+use	__ZN14TPoolAllocatorC4Ebii	uVar1	alignment	INFERRED	alignment rounded to a multiple of 4, at least 4, then to a power of two	^\s*\*\(uint\ \*\)\(\(int\)this\ \+\ 8\)\ =\ uVar1;$	+2
+use	__ZN14TPoolAllocatorC4Ebii	uVar1	alignment	INFERRED	alignment rounded to a multiple of 4, at least 4, then to a power of two	^\s*uVar1\ =\ 1;$	+1
+use	__ZN14TPoolAllocatorC4Ebii	uVar1	alignment	INFERRED	alignment rounded to a multiple of 4, at least 4, then to a power of two	^\s*uVar1\ =\ uVar1\ <<\ 1;$	+2
+use	__ZN14TPoolAllocatorC4Ebii	uVar1	alignment	INFERRED	alignment rounded to a multiple of 4, at least 4, then to a power of two	^\s*\*\(uint\ \*\)\(\(int\)this\ \+\ 8\)\ =\ uVar1;$@2	+3
+use	__ZN14TPoolAllocatorD4Ev	iVar2	stackEntry	INFERRED	w0 cursor over the tAllocState stack (8-byte entries); w1 capacity of the stack vector in entries	^\s*for\ \(iVar2\ =\ \*\(int\ \*\)\(\(int\)this\ \+\ 0x20\);\ iVar2\ !=\ \*\(int\ \*\)\(\(int\)this\ \+\ 0x24\);\ iVar2\ =\ iVar2\ \+\ 8\)\ \{$	+1
+use	__ZN14TPoolAllocatorD4Ev	iVar2	stackCapacityEntries	INFERRED	w0 cursor over the tAllocState stack (8-byte entries); w1 capacity of the stack vector in entries	^\s*iVar2\ =\ \*\(int\ \*\)\(\(int\)this\ \+\ 0x28\)\ \-\ \(int\)\*\(void\ \*\*\)\(\(int\)this\ \+\ 0x20\)\ >>\ 3;$	+3
+use	__ZN14TPoolAllocatorD4Ev	puVar1	page	INFERRED	page being freed from the in-use list (+0x1c) / free list (+0x18)	^\s*puVar1\ =\ \*\(void\ \*\*\)\(\(int\)this\ \+\ 0x1c\);$	+4
+use	__ZN14TPoolAllocatorD4Ev	puVar1	page	INFERRED	page being freed from the in-use list (+0x1c) / free list (+0x18)	^\s*puVar1\ =\ pvVar3;$	+1
+use	__ZN14TPoolAllocatorD4Ev	puVar1	page	INFERRED	page being freed from the in-use list (+0x1c) / free list (+0x18)	^\s*puVar1\ =\ \*\(void\ \*\*\)\(\(int\)this\ \+\ 0x18\);$	+4
+use	__ZN14TPoolAllocatorD4Ev	puVar1	page	INFERRED	page being freed from the in-use list (+0x1c) / free list (+0x18)	^\s*puVar1\ =\ pvVar3;$@2	+1
+use	__ZN14TPoolAllocatorD4Ev	pvVar3	nextPage	INFERRED	next page saved before the current page is freed	^\s*pvVar3\ =\ \(void\ \*\)\*puVar1;$	+1
+use	__ZN14TPoolAllocatorD4Ev	pvVar3	nextPage	INFERRED	next page saved before the current page is freed	^\s*\*\(void\ \*\*\)\(\(int\)this\ \+\ 0x1c\)\ =\ pvVar3;$	+2
+use	__ZN14TPoolAllocatorD4Ev	pvVar3	nextPage	INFERRED	next page saved before the current page is freed	^\s*pvVar3\ =\ \(void\ \*\)\*puVar1;$@2	+1
+use	__ZN14TPoolAllocatorD4Ev	pvVar3	nextPage	INFERRED	next page saved before the current page is freed	^\s*\*\(void\ \*\*\)\(\(int\)this\ \+\ 0x18\)\ =\ pvVar3;$	+2
+local	TAllocation__checkGuardBlock	param_2	offset	INFERRED	offset of the guard block within the allocation
+local	TAllocation__checkGuardBlock	param_3	expectedValue	INFERRED	expected guard byte value
+local	TPoolAllocator__push	iVar2	newStackEnd	INFERRED	tAllocState stack end pointer after the entry was written
+local	TPoolAllocator__push	local_1c	savedPageCopy	INFERRED	copy of the saved in-use list head for the insert_aux call
+local	TPoolAllocator__push	local_20	savedOffsetCopy	INFERRED	copy of the saved current page offset for the insert_aux call
+local	TPoolAllocator__push	local_2c	savedPage	INFERRED	in-use page list head at push time (tAllocState.page)
+local	TPoolAllocator__push	local_30	savedOffset	INFERRED	current page offset at push time (tAllocState.offset)
+local	TPoolAllocator__push	puVar1	stackEnd	INFERRED	end of the tAllocState stack (+0x24)
+local	TPoolAllocator__pop	puVar1	page	INFERRED	page being released from the in-use list
+local	TPoolAllocator__pop	pvVar2	savedPage	INFERRED	page list head recorded by the matching push
+local	TPoolAllocator__pop	pvVar3	nextPage	INFERRED	next page saved before the current page is released
+local	TPoolAllocator__allocate	param_2	numBytes	INFERRED	requested allocation size
+local	TPoolAllocator__allocate	fVar1	guardBlockSizeF	INFERRED	TAllocation::guardBlockSize read as float
+local	TPoolAllocator__allocate	iVar6	offsetThenResult	INFERRED	current page offset, replaced by the returned allocation address
+local	TPoolAllocator__allocate	iVar7	allocationSize	INFERRED	numBytes plus the two guard blocks
+local	TPoolAllocator__allocate	uVar2	prevPage	INFERRED	previous in-use page stored in the new page header
+local	TPoolAllocator__allocate	uVar3	pageSize	INFERRED	allocator page size (+4)
+use	TPoolAllocator__allocate	puVar4	page	INFERRED	page taken from the free list or newly allocated	^\s*puVar4\ =\ \*\(undefined4\ \*\*\)\(this\ \+\ 0x18\);$	+4
+use	TPoolAllocator__allocate	puVar4	page	INFERRED	page taken from the free list or newly allocated	^\s*\*\(undefined4\ \*\)\(this\ \+\ 0x18\)\ =\ \*puVar4;$	+1
+use	TPoolAllocator__allocate	puVar4	page	INFERRED	page taken from the free list or newly allocated	^\s*puVar4\[1\]\ =\ 1;$	+3
+use	TPoolAllocator__allocate	puVar4	page	INFERRED	page taken from the free list or newly allocated	^\s*\*\(undefined4\ \*\*\)\(this\ \+\ 0x1c\)\ =\ puVar4;$@2	+1
+use	TPoolAllocator__allocate	uVar5	endOffset	INFERRED	w0 current page offset + allocationSize; w1 page size reloaded for the page count	^\s*uVar5\ =\ iVar6\ \+\ iVar7;$	+1
+use	TPoolAllocator__allocate	uVar5	endOffset	INFERRED	w0 current page offset + allocationSize; w1 page size reloaded for the page count	^\s*if\ \(uVar3\ <\ uVar5\)\ \{$	+1
+use	TPoolAllocator__allocate	uVar5	endOffset	INFERRED	w0 current page offset + allocationSize; w1 page size reloaded for the page count	^\s*\*\(uint\ \*\)\(this\ \+\ 0x14\)\ =\ uVar5\ \+\ \*\(uint\ \*\)\(this\ \+\ 0xc\)\ \&\ \~\*\(uint\ \*\)\(this\ \+\ 0xc\);$	+1
+use	TPoolAllocator__allocate	uVar5	pageSizeReload	INFERRED	w0 current page offset + allocationSize; w1 page size reloaded for the page count	^\s*uVar5\ =\ \*\(uint\ \*\)\(this\ \+\ 4\);$	+1
+use	TPoolAllocator__allocate	uVar5	pageSizeReload	INFERRED	w0 current page offset + allocationSize; w1 page size reloaded for the page count	^\s*puVar4\[1\]\ =\ \(\(uVar8\ \+\ uVar5\)\ \-\ 1\)\ /\ uVar5;$	+1
+local	TPoolAllocator__allocate	uVar8	multiPageSize	INFERRED	allocationSize plus the page header skip: size of a multi-page allocation
+local	TAllocation__checkAllocList	bVar1	beginVal	INFERRED	guard block begin value
+local	TAllocation__checkAllocList	bVar2	endVal	INFERRED	guard block end value
+local	TAllocation__checkAllocList	fVar3	guardBlockSizeF	INFERRED	guard block size as float
+local	TAllocation__checkAllocList	uVar4	allocationSize	INFERRED	size recorded in the allocation header
+local	QualifierWritten	param_3	scratchR5	UNKNOWN	register leftover forwarded through the vtable call
+local	QualifierWritten	param_4	scratchR6	UNKNOWN	register leftover forwarded through the vtable call
+local	QualifierWritten	param_5	scratchR7	UNKNOWN	register leftover forwarded through the vtable call
+local	QualifierWritten	param_6	scratchR8	UNKNOWN	register leftover forwarded through the vtable call
+local	QualifierWritten	param_7	scratchR9	UNKNOWN	register leftover forwarded through the vtable call
+local	QualifierWritten	param_8	scratchR10	UNKNOWN	register leftover forwarded through the vtable call
+local	QualifierWritten	local_50	visitSymbolFn	INFERRED	TIntermTraverser member +0x00 (AliveSymbol)
+local	QualifierWritten	local_4c	visitConstantUnionFn	INFERRED	TIntermTraverser member +0x04
+local	QualifierWritten	local_48	visitBinaryFn	INFERRED	TIntermTraverser member +0x08
+local	QualifierWritten	local_44	visitUnaryFn	INFERRED	TIntermTraverser member +0x0c
+local	QualifierWritten	local_40	visitSelectionFn	INFERRED	TIntermTraverser member +0x10 (AliveSelection)
+local	QualifierWritten	local_3c	visitAggregateFn	INFERRED	TIntermTraverser member +0x14
+local	QualifierWritten	local_38	visitLoopFn	INFERRED	TIntermTraverser member +0x18
+local	QualifierWritten	local_34	visitBranchFn	INFERRED	TIntermTraverser member +0x1c
+local	QualifierWritten	local_30	depth	INFERRED	TIntermTraverser depth (+0x20)
+local	QualifierWritten	local_2c	preVisit	INFERRED	TIntermTraverser preVisit (+0x24)
+local	QualifierWritten	local_28	postVisit	INFERRED	TIntermTraverser postVisit (+0x28)
+local	QualifierWritten	local_24	rightToLeft	INFERRED	TIntermTraverser rightToLeft (+0x2c)
+local	QualifierWritten	local_20	found	INFERRED	traverser +0x30: set to 1 by AliveSymbol when a symbol with the qualifier is found
+local	QualifierWritten	local_1c	wantedQualifier	INFERRED	traverser +0x34: the qualifier being searched for
+local	AliveSymbol	iVar1	symbolQualifier	INFERRED	symbol->getQualifier() (vtable +0x44), compared with the wanted qualifier
+local	AliveSelection	param_1	preVisit	INFERRED	traversal visit flag
+local	RemoveBinary	param_1	preVisit	INFERRED	traversal visit flag
+local	RemoveUnary	param_1	preVisit	INFERRED	traversal visit flag
+local	RemoveAggregate	param_1	preVisit	INFERRED	traversal visit flag
+local	RemoveSelection	param_1	preVisit	INFERRED	traversal visit flag
+local	RemoveAllTreeNodes	in_r5	scratchR5	UNKNOWN	register leftover forwarded through the vtable call
+local	RemoveAllTreeNodes	in_r6	scratchR6	UNKNOWN	register leftover forwarded through the vtable call
+local	RemoveAllTreeNodes	in_r7	scratchR7	UNKNOWN	register leftover forwarded through the vtable call
+local	RemoveAllTreeNodes	in_r8	scratchR8	UNKNOWN	register leftover forwarded through the vtable call
+local	RemoveAllTreeNodes	local_40	visitSymbolFn	INFERRED	TIntermTraverser member +0x00 (RemoveSymbol)
+local	RemoveAllTreeNodes	local_3c	visitConstantUnionFn	INFERRED	TIntermTraverser member +0x04 (RemoveConstantUnion)
+local	RemoveAllTreeNodes	local_38	visitBinaryFn	INFERRED	TIntermTraverser member +0x08 (RemoveBinary)
+local	RemoveAllTreeNodes	local_34	visitUnaryFn	INFERRED	TIntermTraverser member +0x0c (RemoveUnary)
+local	RemoveAllTreeNodes	local_30	visitSelectionFn	INFERRED	TIntermTraverser member +0x10 (RemoveSelection)
+local	RemoveAllTreeNodes	local_2c	visitAggregateFn	INFERRED	TIntermTraverser member +0x14 (RemoveAggregate)
+local	RemoveAllTreeNodes	local_28	visitLoopFn	INFERRED	TIntermTraverser member +0x18
+local	RemoveAllTreeNodes	local_24	visitBranchFn	INFERRED	TIntermTraverser member +0x1c
+local	RemoveAllTreeNodes	local_20	depth	INFERRED	TIntermTraverser depth (+0x20)
+local	RemoveAllTreeNodes	local_1c	preVisit	INFERRED	TIntermTraverser preVisit (+0x24)
+local	RemoveAllTreeNodes	local_18	postVisit	INFERRED	TIntermTraverser postVisit (+0x28): nodes are deleted after their children
+local	RemoveAllTreeNodes	local_14	rightToLeft	INFERRED	TIntermTraverser rightToLeft (+0x2c)
+local	GetSymbolTable	param_1	languageIndex	INFERRED	index into the per-language symbol table array
+local	GetSymbolTable	puVar1	slotCursor	INFERRED	cursor initialising the symbol table slots on first use
+local	_ShInitialize	local_34	emptyStringAllocator2	INFERRED	second default std::string temp: allocator word
+local	_ShInitialize	local_38	emptyStringData2	INFERRED	second default std::string temp: character pointer
+local	_ShInitialize	local_3c	emptyStringAllocator1	INFERRED	first default std::string temp: allocator word
+local	_ShInitialize	local_40	emptyStringData1	INFERRED	first default std::string temp: character pointer
+use	_ShInitialize	piVar2	emptyRepRefCount	INFERRED	refcount of the shared empty string rep, atomically incremented	^\s*piVar2\ =\ \(int\ \*\)\(PTR__S_empty_rep_storage_a7b7c0f0\ \+\ 8\);$	+1
+use	_ShInitialize	piVar2	emptyRepRefCount	INFERRED	refcount of the shared empty string rep, atomically incremented	^\s*iVar3\ =\ storeWordConditionalIndexed\(\*piVar2\ \+\ 1,0,piVar2\);$	+2
+use	_ShInitialize	piVar2	emptyRepRefCount	INFERRED	refcount of the shared empty string rep, atomically incremented	^\s*iVar3\ =\ storeWordConditionalIndexed\(\*piVar2\ \+\ 1,0,piVar2\);$@2	+2
+local	_ShInitialize	uVar6	result	INFERRED	1 on success, 0 when InitProcess fails
+local	_ShConstructCompiler	param_2	debugOptions	INFERRED	second argument forwarded to ConstructCompiler
+local	_ShDestruct	param_1	handle	INFERRED	ShHandle: vtable +8 getAsCompiler, +0xc getAsLinker
+use	_ShDestruct	iVar1	compilerObj	INFERRED	w0 handle->getAsCompiler(); w1 handle->getAsLinker()	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 8\)\)\(param_1\);$	+2
+use	_ShDestruct	iVar1	linkerObj	INFERRED	w0 handle->getAsCompiler(); w1 handle->getAsLinker()	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0xc\)\)\(param_1\);$	+2
+use	initializeSymbolTable	iVar3	levelCount	INFERRED	w1 number of levels already in the symbol table (asserted 0 or 1); w2 reloaded vector finish pointer value	^\s*iVar3\ =\ \*\(int\ \*\)\(this\ \+\ 4\)\ \-\ \*\(int\ \*\)this\ >>\ 2;$	+3
+use	initializeSymbolTable	iVar3	finishValue	INFERRED	w1 number of levels already in the symbol table (asserted 0 or 1); w2 reloaded vector finish pointer value	^\s*iVar3\ =\ 0;$	+1
+use	initializeSymbolTable	iVar3	finishValue	INFERRED	w1 number of levels already in the symbol table (asserted 0 or 1); w2 reloaded vector finish pointer value	^\s*iVar3\ =\ \*\(int\ \*\)\(this\ \+\ 4\);$	+1
+use	initializeSymbolTable	iVar3	finishValue	INFERRED	w1 number of levels already in the symbol table (asserted 0 or 1); w2 reloaded vector finish pointer value	^\s*\*\(int\ \*\)\(this\ \+\ 4\)\ =\ iVar3\ \+\ 4;$	+1
+use	initializeSymbolTable	local_100	extBehaviorAllocator	INFERRED	pool allocator of the extension behavior map (TParseContext +0x30)	^\s*local_100\ =\ \(unsigned\ char\ \*\)\(\(int\ \(\*\)\(\)\)GetGlobalPoolAllocator\)\(\);$	+1
+use	initializeSymbolTable	local_100	extBehaviorAllocator	INFERRED	pool allocator of the extension behavior map (TParseContext +0x30)	^\s*local_c0\ =\ local_100;$	+2
+use	initializeSymbolTable	local_100	extBehaviorAllocator	INFERRED	pool allocator of the extension behavior map (TParseContext +0x30)	^\s*std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_erase\(\(unsigned\ char$	+2
+use	initializeSymbolTable	local_100	extBehaviorAllocator	INFERRED	pool allocator of the extension behavior map (TParseContext +0x30)	^\s*std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_erase\(\(unsigned\ char$@2	+2
+local	initializeSymbolTable	local_10c	pcWord1c	INFERRED	TParseContext word (+0x1c), zero-initialised
+local	initializeSymbolTable	local_110	pcWord18	INFERRED	TParseContext word (+0x18), zero-initialised
+local	initializeSymbolTable	local_114	pcWord14	INFERRED	TParseContext word (+0x14), zero-initialised
+local	initializeSymbolTable	local_118	pcNumErrors	INFERRED	TParseContext numErrors, zero-initialised
+local	initializeSymbolTable	local_11c	pcRecoveredFromError	INFERRED	TParseContext recoveredFromError, zero-initialised
+local	initializeSymbolTable	local_120	pcTreeRoot	INFERRED	TParseContext treeRoot, zero-initialised
+local	initializeSymbolTable	local_124	pcLanguage	INFERRED	TParseContext language (the language argument)
+local	initializeSymbolTable	local_128	pcInfoSink	INFERRED	TParseContext info sink (the infoSink argument)
+use	initializeSymbolTable	local_12c	pcSymbolTable	INFERRED	TParseContext symbol table (this+4 of the language table)	^\s*local_12c\ =\ this;$	+1
+use	initializeSymbolTable	local_130	pcIntermediate	INFERRED	TParseContext intermediate: points at the stack TIntermediate	^\s*local_130\ =\ local_40;$	+1
+use	initializeSymbolTable	local_130	pcIntermediate	INFERRED	TParseContext intermediate: points at the stack TIntermediate	^\s*iVar3\ =\ PaParseStrings\(ppcVar7,piVar2,iVar3,0,\(unsigned\ char\ \*\)\&local_130\);$	+1
+local	initializeSymbolTable	local_40	intermediateStorage	INFERRED	stack TIntermediate object; word 0 is the info sink
+local	initializeSymbolTable	local_70	destroyArgA	INFERRED	allocator argument for the destroy of the empty string rep (success path)
+local	initializeSymbolTable	local_80	levelSlot	INFERRED	one-element slot holding the new TSymbolTableLevel for vector::insert
+use	initializeSymbolTable	local_90	levelAllocator	INFERRED	pool allocator used for the new symbol table level	^\s*local_90\ =\ \(unsigned\ char\ \*\)\(\(int\ \(\*\)\(\)\)GetGlobalPoolAllocator\)\(\);$	+2
+use	initializeSymbolTable	local_90	levelAllocator	INFERRED	pool allocator used for the new symbol table level	^\s*puVar5\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)TPoolAllocator__allocate\)\(local_90,0x1c\);$	+1
+local	initializeSymbolTable	local_a0	emptyStringAllocatorCopy	INFERRED	copy of the allocator of the shared empty string
+use	initializeSymbolTable	local_b0	pragmaMapAllocatorCopy	INFERRED	copy of the pragma map allocator	^\s*local_b0\ =\ local_e8;$	+1
+use	initializeSymbolTable	local_c0	extBehaviorAllocatorCopy	INFERRED	copy of the extension behavior map allocator	^\s*local_c0\ =\ local_100;$	+1
+local	initializeSymbolTable	local_d4	emptyStringChars	INFERRED	character pointer of the shared empty string (rep + 0xc)
+local	initializeSymbolTable	local_d8	emptyStringAllocator	INFERRED	allocator of the shared empty string
+use	initializeSymbolTable	local_e0	pragmaMapCount	INFERRED	node count of the pragma map (TParseContext +0x50)	^\s*local_e0\ =\ 0;$	+1
+use	initializeSymbolTable	local_e0	pragmaMapCount	INFERRED	node count of the pragma map (TParseContext +0x50)	^\s*if\ \(local_e0\ !=\ 0\)\ \{$	+1
+use	initializeSymbolTable	local_e0	pragmaMapCount	INFERRED	node count of the pragma map (TParseContext +0x50)	^\s*if\ \(local_e0\ !=\ 0\)\ \{$@2	+1
+use	initializeSymbolTable	local_e0	pragmaMapCount	INFERRED	node count of the pragma map (TParseContext +0x50)	^\s*local_e0\ =\ 0;$@2	+1
+use	initializeSymbolTable	local_e0	pragmaMapCount	INFERRED	node count of the pragma map (TParseContext +0x50)	^\s*local_e0\ =\ 0;$@3	+1
+use	initializeSymbolTable	local_e4	pragmaMapHeader	INFERRED	header node of the pragma map (TParseContext +0x4c)	^\s*local_e4\ =\ \(undefined4\ \*\)0x0;$	+1
+use	initializeSymbolTable	local_e4	pragmaMapHeader	INFERRED	header node of the pragma map (TParseContext +0x4c)	^\s*local_e4\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)TPoolAllocator__allocate\)\(local_e8,0x20\);$	+1
+use	initializeSymbolTable	local_e4	pragmaMapHeader	INFERRED	header node of the pragma map (TParseContext +0x4c)	^\s*\*local_e4\ =\ 0;$	+2
+use	initializeSymbolTable	local_e4	pragmaMapHeader	INFERRED	header node of the pragma map (TParseContext +0x4c)	^\s*local_e4\[2\]\ =\ local_e4;$	+1
+use	initializeSymbolTable	local_e4	pragmaMapHeader	INFERRED	header node of the pragma map (TParseContext +0x4c)	^\s*local_e4\[3\]\ =\ local_e4;$	+1
+use	initializeSymbolTable	local_e4	pragmaMapHeader	INFERRED	header node of the pragma map (TParseContext +0x4c)	^\s*std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_erase\(\(unsigned\ char$	+5
+use	initializeSymbolTable	local_e4	pragmaMapHeader	INFERRED	header node of the pragma map (TParseContext +0x4c)	^\s*std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_erase\(\(unsigned\ char$@2	+5
+use	initializeSymbolTable	local_e8	pragmaMapAllocator	INFERRED	pool allocator of the pragma map (TParseContext +0x48)	^\s*local_e8\ =\ \(unsigned\ char\ \*\)\(\(int\ \(\*\)\(\)\)GetGlobalPoolAllocator\)\(\);$	+1
+use	initializeSymbolTable	local_e8	pragmaMapAllocator	INFERRED	pool allocator of the pragma map (TParseContext +0x48)	^\s*local_b0\ =\ local_e8;$	+2
+use	initializeSymbolTable	local_e8	pragmaMapAllocator	INFERRED	pool allocator of the pragma map (TParseContext +0x48)	^\s*std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_erase\(\(unsigned\ char$	+2
+use	initializeSymbolTable	local_e8	pragmaMapAllocator	INFERRED	pool allocator of the pragma map (TParseContext +0x48)	^\s*std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_erase\(\(unsigned\ char$@2	+2
+local	initializeSymbolTable	local_ec	pcFlagZero	INFERRED	TParseContext word zero-initialised after the extension map
+local	initializeSymbolTable	local_f0	pcFlagOne	INFERRED	TParseContext word initialised to 1 after the extension map
+local	initializeSymbolTable	local_f8	extBehaviorCount	INFERRED	node count of the extension behavior map (TParseContext +0x38)
+use	initializeSymbolTable	local_fc	extBehaviorHeader	INFERRED	header node of the extension behavior map (TParseContext +0x34)	^\s*local_fc\ =\ \(undefined4\ \*\)0x0;$	+1
+use	initializeSymbolTable	local_fc	extBehaviorHeader	INFERRED	header node of the extension behavior map (TParseContext +0x34)	^\s*local_fc\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)TPoolAllocator__allocate\)\(local_100,0x1c\);$	+1
+use	initializeSymbolTable	local_fc	extBehaviorHeader	INFERRED	header node of the extension behavior map (TParseContext +0x34)	^\s*\*local_fc\ =\ 0;$	+4
+use	initializeSymbolTable	local_fc	extBehaviorHeader	INFERRED	header node of the extension behavior map (TParseContext +0x34)	^\s*std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_erase\(\(unsigned\ char$	+5
+use	initializeSymbolTable	local_fc	extBehaviorHeader	INFERRED	header node of the extension behavior map (TParseContext +0x34)	^\s*std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_erase\(\(unsigned\ char$@2	+5
+use	initializeSymbolTable	piVar2	emptyRepRefCount	INFERRED	w0 refcount of the shared empty string rep, atomically incremented; w1 symbol table level vector finish pointer	^\s*piVar2\ =\ \(int\ \*\)\(local_d4\ \+\ 8\);$	+1
+use	initializeSymbolTable	piVar2	emptyRepRefCount	INFERRED	w0 refcount of the shared empty string rep, atomically incremented; w1 symbol table level vector finish pointer	^\s*iVar3\ =\ storeWordConditionalIndexed\(\*piVar2\ \+\ 1,0,piVar2\);$	+2
+use	initializeSymbolTable	piVar2	levelsFinish	INFERRED	w0 refcount of the shared empty string rep, atomically incremented; w1 symbol table level vector finish pointer	^\s*piVar2\ =\ \*\(int\ \*\*\)\(this\ \+\ 4\);$	+1
+use	initializeSymbolTable	piVar2	levelsFinish	INFERRED	w0 refcount of the shared empty string rep, atomically incremented; w1 symbol table level vector finish pointer	^\s*if\ \(piVar2\ ==\ \*\(int\ \*\*\)\(this\ \+\ 8\)\)\ \{$	+1
+use	initializeSymbolTable	piVar2	levelsFinish	INFERRED	w0 refcount of the shared empty string rep, atomically incremented; w1 symbol table level vector finish pointer	^\s*\(this,piVar2,local_80\);$	+1
+use	initializeSymbolTable	piVar2	levelsFinish	INFERRED	w0 refcount of the shared empty string rep, atomically incremented; w1 symbol table level vector finish pointer	^\s*if\ \(piVar2\ !=\ \(int\ \*\)0x0\)\ \{$	+2
+use	initializeSymbolTable	ppcVar7	stringArray	INFERRED	built-in source string array for the current index	^\s*ppcVar7\ =\ \(char\ \*\*\)TBuiltIns__getStringArray\(param_1,local_124,uVar9\);$	+1
+use	initializeSymbolTable	ppcVar7	stringArray	INFERRED	built-in source string array for the current index	^\s*iVar3\ =\ PaParseStrings\(ppcVar7,piVar2,iVar3,0,\(unsigned\ char\ \*\)\&local_130\);$	+1
+use	initializeSymbolTable	puVar4	newLevel	INFERRED	w1 new TSymbolTableLevel; w2 allocator argument pointer for the destroy of the empty string rep	^\s*puVar4\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)TPoolAllocator__allocate\)\(this_00,0x10\);$	+1
+use	initializeSymbolTable	puVar4	newLevel	INFERRED	w1 new TSymbolTableLevel; w2 allocator argument pointer for the destroy of the empty string rep	^\s*\*puVar4\ =\ local_90;$	+2
+use	initializeSymbolTable	puVar4	newLevel	INFERRED	w1 new TSymbolTableLevel; w2 allocator argument pointer for the destroy of the empty string rep	^\s*puVar4\[2\]\ =\ 0;$	+2
+use	initializeSymbolTable	puVar4	newLevel	INFERRED	w1 new TSymbolTableLevel; w2 allocator argument pointer for the destroy of the empty string rep	^\s*\*\(undefined4\ \*\)\(puVar4\[1\]\ \+\ 4\)\ =\ 0;$	+3
+use	initializeSymbolTable	puVar4	newLevel	INFERRED	w1 new TSymbolTableLevel; w2 allocator argument pointer for the destroy of the empty string rep	^\s*local_80\[0\]\ =\ puVar4;$	+1
+use	initializeSymbolTable	puVar4	newLevel	INFERRED	w1 new TSymbolTableLevel; w2 allocator argument pointer for the destroy of the empty string rep	^\s*\*piVar2\ =\ \(int\)puVar4;$	+1
+use	initializeSymbolTable	puVar4	destroyArg	INFERRED	w1 new TSymbolTableLevel; w2 allocator argument pointer for the destroy of the empty string rep	^\s*puVar4\ =\ auStack_60;$	+1
+use	initializeSymbolTable	puVar4	destroyArg	INFERRED	w1 new TSymbolTableLevel; w2 allocator argument pointer for the destroy of the empty string rep	^\s*puVar4\ =\ auStack_50;$	+1
+use	initializeSymbolTable	puVar4	destroyArg	INFERRED	w1 new TSymbolTableLevel; w2 allocator argument pointer for the destroy of the empty string rep	^\s*\(\(unsigned\ char\ \*\)\(local_d4\ \+\ \-0xc\),puVar4\);$	+1
+local	initializeSymbolTable	puVar5	levelRoot	INFERRED	pool-allocated root node of the new level's symbol map
+local	initializeSymbolTable	uVar6	numStringArrays	INFERRED	number of built-in source string arrays for the language
+local	initializeSymbolTable	uVar8	result	INFERRED	1 when the built-ins parsed, else 0
+local	initializeSymbolTable	uVar9	arrayIndex	INFERRED	built-in string array being parsed
+use	_ShCompile	bVar1	levelCountTooBig	INFERRED	w0 symbol table has more than 3 levels; w1/w2 debugOptions & 1 == 0 (do not dump the tree)	^\s*bVar1\ =\ 3\ <\ \(uint\)\(\(int\)local_17c\ \-\ \(int\)local_180\ >>\ 2\);$	+2
+use	_ShCompile	bVar1	levelCountTooBig	INFERRED	w0 symbol table has more than 3 levels; w1/w2 debugOptions & 1 == 0 (do not dump the tree)	^\s*uVar13\ =\ \(uint\)!bVar1;$	+1
+use	_ShCompile	bVar1	noDebugOutput	INFERRED	w0 symbol table has more than 3 levels; w1/w2 debugOptions & 1 == 0 (do not dump the tree)	^\s*bVar1\ =\ \(param_5\ \&\ 1\)\ ==\ 0;$	+3
+use	_ShCompile	bVar1	noDebugOutput	INFERRED	w0 symbol table has more than 3 levels; w1/w2 debugOptions & 1 == 0 (do not dump the tree)	^\s*bVar1\ =\ \(param_5\ \&\ 1\)\ ==\ 0;$@2	+3
+local	_ShCompile	iStack_8c	numErrorsStringChars	INFERRED	character pointer of the error count string
+use	_ShCompile	iVar3	stringRepLength	INFERRED	w0 length of the info sink string rep; w1 atomic refcount store result; w4 PaParseStrings result for the shader source; w6 number of symbol table levels	^\s*iVar3\ =\ \*\(int\ \*\)\(pcVar14\ \+\ \-0xc\);$	+1
+use	_ShCompile	iVar3	stringRepLength	INFERRED	w0 length of the info sink string rep; w1 atomic refcount store result; w4 PaParseStrings result for the shader source; w6 number of symbol table levels	^\s*if\ \(\(\(\*\(int\ \*\)\(pcVar12\ \+\ \-4\)\ <\ 1\)\ \&\&\ \(pcVar12\ <=\ pcVar14\)\)\ \&\&\ \(pcVar14\ <=\ pcVar12\ \+\ iVar3\)\)\ \{$	+1
+use	_ShCompile	iVar3	stringRepLength	INFERRED	w0 length of the info sink string rep; w1 atomic refcount store result; w4 PaParseStrings result for the shader source; w6 number of symbol table levels	^\s*\(this,pcVar12,pcVar12\ \+\ iVar3,pcVar14,pcVar14,0\);$	+1
+use	_ShCompile	iVar3	stringRepLength	INFERRED	w0 length of the info sink string rep; w1 atomic refcount store result; w4 PaParseStrings result for the shader source; w6 number of symbol table levels	^\s*\(this,pcVar12,pcVar12\ \+\ iVar3,pcVar14,pcVar14\);$	+1
+use	_ShCompile	iVar3	atomicStoreB	INFERRED	w0 length of the info sink string rep; w1 atomic refcount store result; w4 PaParseStrings result for the shader source; w6 number of symbol table levels	^\s*iVar3\ =\ storeWordConditionalIndexed\(\*piVar4\ \+\ 1,0,piVar4\);$	+2
+use	_ShCompile	iVar3	parseResult	INFERRED	w0 length of the info sink string rep; w1 atomic refcount store result; w4 PaParseStrings result for the shader source; w6 number of symbol table levels	^\s*iVar3\ =\ PaParseStrings\(param_2,\(int\ \*\)0x0,param_3,0,\(unsigned\ char\ \*\)\&local_140\);$	+1
+use	_ShCompile	iVar3	parseResult	INFERRED	w0 length of the info sink string rep; w1 atomic refcount store result; w4 PaParseStrings result for the shader source; w6 number of symbol table levels	^\s*if\ \(iVar3\ !=\ 0\)\ \{$@2	+1
+use	_ShCompile	iVar3	parseResult	INFERRED	w0 length of the info sink string rep; w1 atomic refcount store result; w4 PaParseStrings result for the shader source; w6 number of symbol table levels	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar6\ \+\ 0x14\)\)\(piVar6,local_130\);$	+2
+use	_ShCompile	iVar3	parseResult	INFERRED	w0 length of the info sink string rep; w1 atomic refcount store result; w4 PaParseStrings result for the shader source; w6 number of symbol table levels	^\s*iVar3\ =\ \*piVar6;$	+1
+use	_ShCompile	iVar3	parseResult	INFERRED	w0 length of the info sink string rep; w1 atomic refcount store result; w4 PaParseStrings result for the shader source; w6 number of symbol table levels	^\s*iVar2\ =\ storeWordConditionalIndexed\(iVar3\ \+\ \-1,0,piVar6\);$	+1
+use	_ShCompile	iVar3	parseResult	INFERRED	w0 length of the info sink string rep; w1 atomic refcount store result; w4 PaParseStrings result for the shader source; w6 number of symbol table levels	^\s*if\ \(iVar3\ <\ 1\)\ \{$	+1
+use	_ShCompile	iVar3	parseResult	INFERRED	w0 length of the info sink string rep; w1 atomic refcount store result; w4 PaParseStrings result for the shader source; w6 number of symbol table levels	^\s*for\ \(;\ iVar3\ =\ \(int\)local_17c\ \-\ \(int\)pvVar10\ >>\ 2,\ iVar3\ !=\ 1;\ local_17c\ =\ local_17c\ \+\ \-1\)\ \{$	+2
+use	_ShCompile	iVar3	levelCount	INFERRED	w0 length of the info sink string rep; w1 atomic refcount store result; w4 PaParseStrings result for the shader source; w6 number of symbol table levels	^\s*iVar3\ =\ \(int\)local_178\ \-\ \(int\)pvVar10\ >>\ 2;$	+3
+local	_ShCompile	local_100	extBehaviorFlagOne	INFERRED	word after the extension behavior map in the TParseContext, initialised to 1
+local	_ShCompile	local_11c	pcWord1c	INFERRED	TParseContext word (+0x1c), zero-initialised
+local	_ShCompile	local_120	pcWord18	INFERRED	TParseContext word (+0x18), zero-initialised
+local	_ShCompile	local_124	pcWord14	INFERRED	TParseContext word (+0x14), zero-initialised
+use	_ShCompile	local_160	levelAllocator1	INFERRED	pool allocator of the first copied symbol table level	^\s*local_160\ =\ \(unsigned\ char\ \*\)\(\(int\ \(\*\)\(\)\)GetGlobalPoolAllocator\)\(\);$	+2
+use	_ShCompile	local_160	levelAllocator1	INFERRED	pool allocator of the first copied symbol table level	^\s*puVar9\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)TPoolAllocator__allocate\)\(local_160,0x1c\);$	+1
+local	_ShCompile	local_50	destroyArg	INFERRED	allocator argument for the destroy of the empty string rep
+use	_ShCompile	local_a0	levelAllocator2	INFERRED	pool allocator of the second (shader) symbol table level	^\s*local_a0\ =\ \(unsigned\ char\ \*\)\(\(int\ \(\*\)\(\)\)GetGlobalPoolAllocator\)\(\);$	+2
+use	_ShCompile	local_a0	levelAllocator2	INFERRED	pool allocator of the second (shader) symbol table level	^\s*puVar9\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)TPoolAllocator__allocate\)\(local_a0,0x1c\);$	+1
+local	_ShCompile	local_b0	emptyStringAllocatorCopy	INFERRED	copy of the allocator of the shared empty string
+use	_ShCompile	local_c0	stringMapAllocatorCopy	INFERRED	copy of the string map allocator	^\s*local_c0\ =\ local_f8;$	+1
+use	_ShCompile	local_d0	extBehaviorAllocatorCopy	INFERRED	copy of the extension behavior map allocator	^\s*local_d0\ =\ local_110;$	+1
+local	_ShCompile	local_e4	emptyStringChars	INFERRED	character pointer of the shared empty string (rep + 0xc)
+local	_ShCompile	local_e8	emptyStringAllocator	INFERRED	allocator of the shared empty string
+local	_ShCompile	local_fc	extBehaviorFlagZero	INFERRED	word after the extension behavior map in the TParseContext, initialised to 0
+use	_ShCompile	pcVar12	infoSinkChars	INFERRED	w1 character pointer of the compiler info sink string; w2 character pointer of the info log; w3 trailing message text appended to the info sink	^\s*pcVar12\ =\ \(char\ \*\)\*this;$	+2
+use	_ShCompile	pcVar12	infoSinkChars	INFERRED	w1 character pointer of the compiler info sink string; w2 character pointer of the info log; w3 trailing message text appended to the info sink	^\s*\(this,pcVar12,pcVar12\ \+\ iVar3,pcVar14,pcVar14,0\);$	+1
+use	_ShCompile	pcVar12	infoSinkChars	INFERRED	w1 character pointer of the compiler info sink string; w2 character pointer of the info log; w3 trailing message text appended to the info sink	^\s*\(this,pcVar12,pcVar12\ \+\ iVar3,pcVar14,pcVar14\);$	+1
+use	_ShCompile	pcVar12	infoLogChars	INFERRED	w1 character pointer of the compiler info sink string; w2 character pointer of the info log; w3 trailing message text appended to the info sink	^\s*pcVar12\ =\ \*\(char\ \*\*\)\(piVar6\[1\]\ \+\ 8\);$	+2
+use	_ShCompile	pcVar12	messageText	INFERRED	w1 character pointer of the compiler info sink string; w2 character pointer of the info log; w3 trailing message text appended to the info sink	^\s*pcVar12\ =\ "\\n";$	+1
+use	_ShCompile	pcVar12	messageText	INFERRED	w1 character pointer of the compiler info sink string; w2 character pointer of the info log; w3 trailing message text appended to the info sink	^\s*pcVar12\ =\ "\ compilation\ errors\.\ No\ code\ generated\.";$	+1
+use	_ShCompile	pcVar12	messageText	INFERRED	w1 character pointer of the compiler info sink string; w2 character pointer of the info log; w3 trailing message text appended to the info sink	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar10,pcVar12\);$	+1
+local	_ShCompile	piVar4	emptyRepRefCount	INFERRED	refcount of the shared empty string rep, atomically incremented
+use	_ShCompile	puVar8	symbolTableForLanguage	INFERRED	w1 built-in symbol table of the language; w2/w3 new TSymbolTableLevel	^\s*puVar8\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)GetSymbolTable\)\(piVar6\[2\]\);$	+1
+use	_ShCompile	puVar8	symbolTableForLanguage	INFERRED	w1 built-in symbol table of the language; w2/w3 new TSymbolTableLevel	^\s*\(\(unsigned\ char\ \*\)\&local_180,0,\*puVar8\);$	+2
+use	_ShCompile	puVar8	newLevel1	INFERRED	w1 built-in symbol table of the language; w2/w3 new TSymbolTableLevel	^\s*puVar8\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)TPoolAllocator__allocate\)\(pTVar7,0x10\);$	+1
+use	_ShCompile	puVar8	newLevel1	INFERRED	w1 built-in symbol table of the language; w2/w3 new TSymbolTableLevel	^\s*\*puVar8\ =\ local_160;$	+2
+use	_ShCompile	puVar8	newLevel1	INFERRED	w1 built-in symbol table of the language; w2/w3 new TSymbolTableLevel	^\s*puVar8\[2\]\ =\ 0;$	+2
+use	_ShCompile	puVar8	newLevel1	INFERRED	w1 built-in symbol table of the language; w2/w3 new TSymbolTableLevel	^\s*\*\(undefined4\ \*\)\(puVar8\[1\]\ \+\ 4\)\ =\ 0;$	+4
+use	_ShCompile	puVar8	newLevel1	INFERRED	w1 built-in symbol table of the language; w2/w3 new TSymbolTableLevel	^\s*\*local_17c\ =\ \(int\)puVar8;$	+1
+use	_ShCompile	puVar8	newLevel2	INFERRED	w1 built-in symbol table of the language; w2/w3 new TSymbolTableLevel	^\s*puVar8\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)TPoolAllocator__allocate\)\(pTVar7,0x10\);$@2	+1
+use	_ShCompile	puVar8	newLevel2	INFERRED	w1 built-in symbol table of the language; w2/w3 new TSymbolTableLevel	^\s*\*puVar8\ =\ local_a0;$	+2
+use	_ShCompile	puVar8	newLevel2	INFERRED	w1 built-in symbol table of the language; w2/w3 new TSymbolTableLevel	^\s*puVar8\[2\]\ =\ 0;$@2	+2
+use	_ShCompile	puVar8	newLevel2	INFERRED	w1 built-in symbol table of the language; w2/w3 new TSymbolTableLevel	^\s*\*\(undefined4\ \*\)\(puVar8\[1\]\ \+\ 4\)\ =\ 0;$@2	+4
+use	_ShCompile	puVar8	newLevel2	INFERRED	w1 built-in symbol table of the language; w2/w3 new TSymbolTableLevel	^\s*\*local_17c\ =\ \(int\)puVar8;$@2	+1
+use	_ShCompile	puVar9	levelRoot	INFERRED	pool-allocated root node of the new level's symbol map	^\s*puVar9\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)TPoolAllocator__allocate\)\(local_160,0x1c\);$	+1
+use	_ShCompile	puVar9	levelRoot	INFERRED	pool-allocated root node of the new level's symbol map	^\s*puVar8\[1\]\ =\ puVar9;$	+2
+use	_ShCompile	puVar9	levelRoot	INFERRED	pool-allocated root node of the new level's symbol map	^\s*puVar9\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)TPoolAllocator__allocate\)\(local_a0,0x1c\);$	+1
+use	_ShCompile	puVar9	levelRoot	INFERRED	pool-allocated root node of the new level's symbol map	^\s*puVar8\[1\]\ =\ puVar9;$@2	+2
+use	_ShCompile	pvVar10	infoSinkRef	INFERRED	copy of the info sink pointer; symbol table level vector start	^\s*pvVar10\ =\ local_138;$	+1
+use	_ShCompile	pvVar10	infoSinkRef	INFERRED	copy of the info sink pointer; symbol table level vector start	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar10,"Wrong\ symbol\ table\ level\.\ No\ code\ generated\."\);$	+2
+use	_ShCompile	pvVar10	infoSinkRef	INFERRED	copy of the info sink pointer; symbol table level vector start	^\s*pvVar10\ =\ local_138;$@2	+1
+use	_ShCompile	pvVar10	infoSinkRef	INFERRED	copy of the info sink pointer; symbol table level vector start	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar10,"Parser\ found\ no\ code\ to\ compile\ in\ source\ strings\."\);$	+2
+use	_ShCompile	pvVar10	infoSinkRef	INFERRED	copy of the info sink pointer; symbol table level vector start	^\s*pvVar10\ =\ local_138;$@3	+1
+use	_ShCompile	pvVar10	infoSinkRef	INFERRED	copy of the info sink pointer; symbol table level vector start	^\s*\(pvVar10,"Parse\ tree\ post\-processing\ failure\.\ No\ code\ generated\."\);$	+2
+use	_ShCompile	pvVar10	infoSinkRef	INFERRED	copy of the info sink pointer; symbol table level vector start	^\s*pvVar10\ =\ local_138;$@4	+1
+use	_ShCompile	pvVar10	infoSinkRef	INFERRED	copy of the info sink pointer; symbol table level vector start	^\s*\(pvVar10,\(unsigned\ char\ \*\)\&uStack_90\);$	+1
+use	_ShCompile	pvVar10	infoSinkRef	INFERRED	copy of the info sink pointer; symbol table level vector start	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar10,pcVar12\);$	+1
+use	_ShCompile	pvVar10	levelsBase	INFERRED	copy of the info sink pointer; symbol table level vector start	^\s*pvVar10\ =\ local_180;$	+3
+use	_ShCompile	pvVar10	levelsBase	INFERRED	copy of the info sink pointer; symbol table level vector start	^\s*pvVar10\ =\ local_180;$@2	+1
+use	_ShCompile	pvVar10	levelsBase	INFERRED	copy of the info sink pointer; symbol table level vector start	^\s*pvVar10\ =\ local_180;$@3	+1
+use	_ShCompile	pvVar10	levelsBase	INFERRED	copy of the info sink pointer; symbol table level vector start	^\s*pvVar10\ =\ local_180;$@4	+1
+use	_ShCompile	pvVar10	levelsBase	INFERRED	copy of the info sink pointer; symbol table level vector start	^\s*for\ \(;\ uVar5\ =\ \(int\)local_17c\ \-\ \(int\)pvVar10\ >>\ 2,\ 1\ <\ uVar5;\ local_17c\ =\ local_17c\ \+\ \-1\)\ \{$	+2
+use	_ShCompile	pvVar10	levelsBase	INFERRED	copy of the info sink pointer; symbol table level vector start	^\s*pvVar10\ =\ local_180;$@5	+1
+use	_ShCompile	pvVar10	levelsBase	INFERRED	copy of the info sink pointer; symbol table level vector start	^\s*iVar3\ =\ \(int\)local_178\ \-\ \(int\)pvVar10\ >>\ 2;$	+1
+use	_ShCompile	pvVar10	levelsBase	INFERRED	copy of the info sink pointer; symbol table level vector start	^\s*std____default_alloc_template_true_0___deallocate\(pvVar10,iVar3\ <<\ 2\);$	+1
+use	_ShCompile	pvVar11	levelToDestroy	INFERRED	symbol table level being destroyed	^\s*pvVar11\ =\ \*\(void\ \*\*\)\(\(int\)pvVar10\ \+\ \(iVar3\ \+\ \-1\)\ \*\ 4\);$	+3
+use	_ShCompile	pvVar11	levelToDestroy	INFERRED	symbol table level being destroyed	^\s*pvVar11\ =\ \*\(void\ \*\*\)\(\(int\)pvVar10\ \+\ \(uVar5\ \-\ 1\)\ \*\ 4\);$	+3
+local	_ShCompile	uStack_90	numErrorsString	INFERRED	TString holding the error count (address taken)
+local	_ShCompile	uVar5	levelCount2	INFERRED	number of symbol table levels in the cleanup loop
+local	_ShLink	param_1	handle	INFERRED	ShHandle of the linker (vtable +0xc getAsLinker)
+local	_ShLink	param_2	shaderHandles	INFERRED	array of compiled shader handles to link
+local	_ShLink	param_3	numShaders	INFERRED	number of shaders
+local	_ShLink	param_4	linkerWord80	INFERRED	stored into the linker at +0x80
+local	_ShLink	param_5	linkerWord7c	INFERRED	stored into the linker at +0x7c
+local	_ShLink	iVar2	hasObjectCode	INFERRED	compiler->getObjectCode() non-null (vtable +0x20)
+local	_ShLink	iVar5	shaderIndexThenLinkResult	INFERRED	loop index over the shaders, then the TGenericLinker::link result
+local	_ShLink	pcVar3	messagePrefix	INFERRED	"INTERNAL ERROR: " / "ERROR: "
+local	_ShLink	pcVar4	messageText	INFERRED	error message text
+local	_ShLink	piVar1	shaderHandleThenCompiler	INFERRED	shader handle from the array, then its getAsCompiler() result
+local	ShSetEncryptionMethod	param_1	unusedArg1	UNKNOWN	never read

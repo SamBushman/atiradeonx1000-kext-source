@@ -1,0 +1,37 @@
+use	TIntermBranch__compileNode	iVar9	paramTypeKind	INFERRED	kind from the parameter type object virtual slot 0x24 (10 / 0xb select out-parameter kinds)	^\s*iVar9\ =\ \(\*\*\(code\ \*\*\)\(iVar9\ \+\ 0x24\)\)\(piVar8,uVar5,param_3,param_4,param_5,param_6,iVar9\),$	+1	lhs	none
+use	TIntermBranch__compileNode	iVar9	paramTypeVtable	INFERRED	vtable pointer of the parameter type object	^\s*iVar9\ =\ \(\*\*\(code\ \*\*\)\(iVar9\ \+\ 0x24\)\)\(piVar8,uVar5,param_3,param_4,param_5,param_6,iVar9\),$	+1	rhs	none
+use	TIntermBranch__compileNode	iVar9	paramTypeVtable	INFERRED	vtable pointer of the parameter type object	^\s*\(\(piVar8\ =\ \*\(int\ \*\*\)\(\*\*\(int\ \*\*\)\(iVar2\ \+\ iVar6\)\ \+\ 0xc\),\ iVar9\ =\ \*piVar8,$	+1
+use	TIntermBranch__compileNode	iVar9	paramTypeKind	INFERRED	kind from the parameter type object virtual slot 0x24	^\s*iVar9\ ==\ 10\ \|\|$	+1
+use	TIntermBranch__compileNode	iVar9	paramTypeKind	INFERRED	kind from the parameter type object virtual slot 0x24	^\s*iVar9\ =\ \(\*\*\(code\ \*\*\)\(\*piVar8\ \+\ 0x24\)\)$	+1
+use	TIntermBranch__compileNode	iVar9	paramTypeKind	INFERRED	kind from the parameter type object virtual slot 0x24	^\s*uVar5\ =\ extraout_r4_01,\ iVar9\ ==\ 0xb\)\)\)\)\ \{$	+1
+use	TIntermBranch__compileNode	uVar1	returnGLType	INFERRED	GL type enum of the return value operand (0x1404 int, 0x1406 float, 0x8b56 bool)	^\s*uVar1\ =\ \*\(ushort\ \*\)\(local_24\ \+\ 0x18\);$	+1
+use	TIntermBranch__compileNode	uVar1	returnGLType	INFERRED	GL type enum of the return value operand (0x1404 int, 0x1406 float, 0x8b56 bool)	^\s*uVar1\ =\ \*\(ushort\ \*\)\(\*\(int\ \*\)local_24\ \+\ 0x2c\);$	+1
+use	TIntermBranch__compileNode	uVar1	returnGLType	INFERRED	GL type enum of the return value operand (0x1404 int, 0x1406 float, 0x8b56 bool)	^\s*if\ \(uVar1\ ==\ 0x1406\)\ \{$	+1
+use	TIntermBranch__compileNode	uVar1	returnGLType	INFERRED	GL type enum of the return value operand (0x1404 int, 0x1406 float, 0x8b56 bool)	^\s*else\ if\ \(uVar1\ <\ 0x1407\)\ \{$	+2
+use	TIntermBranch__compileNode	uVar1	returnGLType	INFERRED	GL type enum of the return value operand (0x1404 int, 0x1406 float, 0x8b56 bool)	^\s*else\ if\ \(uVar1\ ==\ 0x8b56\)\ \{$	+1
+use	TIntermBranch__compileNode	pPVar3	operandToFree	INFERRED	ParseOperand to destroy	^\s*pPVar3\ =\ local_2c;$	+1
+use	TIntermBranch__compileNode	pPVar3	operandToFree	INFERRED	ParseOperand to destroy	^\s*__ZdlPv\(pPVar3\);$	+1
+use	TIntermBranch__compileNode	pPVar3	operandToFree	INFERRED	ParseOperand to destroy	^\s*pPVar3\ =\ local_24;$	+1
+use	TIntermBranch__compileNode	pPVar3	operandToFree	INFERRED	ParseOperand to destroy	^\s*__ZdlPv\(pPVar3\);$@2	+1
+use	TIntermBranch__compileNode	pPVar3	operandToFree	INFERRED	ParseOperand to destroy	^\s*pPVar3\ =\ local_28;$	+1
+use	TIntermBranch__compileNode	pPVar3	operandToFree	INFERRED	ParseOperand to destroy	^\s*__ZdlPv\(pPVar3\);$@3	+1
+use	TIntermBranch__compileNode	uVar5	carriedR4	INFERRED	r4 value carried through the function and forwarded as a stray register argument	^\s*uVar5\ =\ extraout_r4;$	+1
+use	TIntermBranch__compileNode	uVar5	carriedR4	INFERRED	r4 value carried through the function and forwarded as a stray register argument	^\s*uVar5\ =\ extraout_r4_00;$	+1
+use	TIntermBranch__compileNode	uVar5	carriedR4	INFERRED	r4 value carried through the function and forwarded as a stray register argument	^\s*\(this,uVar5,param_3,param_4,param_5,param_6,\*\(undefined4\ \*\*\)this\);$	+1
+use	TIntermBranch__compileNode	uVar5	carriedR4	INFERRED	r4 value carried through the function and forwarded as a stray register argument	^\s*\(this,uVar5,param_3,param_4,param_5,param_6,\*\(undefined4\ \*\*\)this\);$@2	+1
+use	TIntermBranch__compileNode	uVar5	carriedR4	INFERRED	r4 value carried through the function and forwarded as a stray register argument	^\s*\(this,uVar5,param_3,param_4,param_5,param_6,\*\(undefined4\ \*\*\)this\);$@3	+1
+use	TIntermBranch__compileNode	uVar5	carriedR4	INFERRED	r4 value carried through the function and forwarded as a stray register argument	^\s*uVar5\ =\ \(undefined4\)uVar12;$	+1
+use	TIntermBranch__compileNode	uVar5	carriedR4	INFERRED	r4 value carried through the function and forwarded as a stray register argument	^\s*if\ \(\(\*\(int\ \*\*\)\(iVar2\ \+\ iVar6\)\ !=\ \(int\ \*\)0x0\)\ \&\&$	+8
+use	TIntermBranch__compileNode	uVar5	carriedR4	INFERRED	r4 value carried through the function and forwarded as a stray register argument	^\s*uVar5\ =\ extraout_r4_02;$	+1
+use	TIntermBranch__compileNode	uVar5	carriedR4	INFERRED	r4 value carried through the function and forwarded as a stray register argument	^\s*uVar5\ =\ extraout_r4_03;$	+1
+use	TIntermBranch__compileNode	uVar5	breakLabel	INFERRED	ParseWhileLoopStack__breakLabel: text of the enclosing loop end label	^\s*uVar5\ =\ ParseWhileLoopStack__breakLabel\(\(unsigned\ char\ \*\)\(param_2\ \+\ 0x5c\)\);$	+2
+use	TIntermBranch__compileNode	uVar5	continueLabel	INFERRED	ParseWhileLoopStack__continueLabel: text of the enclosing loop start label	^\s*uVar5\ =\ ParseWhileLoopStack__continueLabel\(\(unsigned\ char\ \*\)\(param_2\ \+\ 0x5c\)\);$	+2
+use	TIntermBranch__compileNode	piVar8	returnExprNode	INFERRED	this+0xc: the return/discard expression node (virtual slot 0xc compiles it)	^\s*piVar8\ =\ \*\(int\ \*\*\)\(this\ \+\ 0xc\);$	+1
+use	TIntermBranch__compileNode	piVar8	returnExprNode	INFERRED	this+0xc: the return/discard expression node (virtual slot 0xc compiles it)	^\s*if\ \(piVar8\ !=\ \(int\ \*\)0x0\)\ \{$	+1
+use	TIntermBranch__compileNode	piVar8	returnExprNode	INFERRED	this+0xc: the return/discard expression node (virtual slot 0xc compiles it)	^\s*\(\*\*\(code\ \*\*\)\(\*piVar8\ \+\ 0xc\)\)\(piVar8,param_2,param_3,param_4,param_5,param_6,piVar8\);$	+1
+use	TIntermBranch__compileNode	piVar8	paramTypeObj	INFERRED	type object of a call parameter (*(*param+0xc))	^\s*if\ \(\(\*\(int\ \*\*\)\(iVar2\ \+\ iVar6\)\ !=\ \(int\ \*\)0x0\)\ \&\&$	+8
+use	TIntermBranch__compileNode	uVar12	paramListPair	INFERRED	64-bit pair returned by ParseFunctionStack__getCurrentParamList (high word = the list)	^\s*uVar12\ =\ ParseFunctionStack__getCurrentParamList\(this_00\);$	+3
+local	TIntermBranch__compileNode	param_3	strayArg3	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermBranch__compileNode	param_4	strayArg4	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermBranch__compileNode	param_5	strayArg5	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermBranch__compileNode	param_6	strayArg6	INFERRED	extra register-argument slot forwarded as a dead stray argument
