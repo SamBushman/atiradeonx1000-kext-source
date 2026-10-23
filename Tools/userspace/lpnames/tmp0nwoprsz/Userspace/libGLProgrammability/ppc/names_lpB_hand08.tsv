@@ -1,0 +1,12 @@
+use	_PrintAtomTable	iVar2	counterIndex	INFERRED	down-counter over the three hash collision counters	*		all	none
+local	_lBuildFloatValue	param_1	digits	CONFIRMED	decimal digit characters of the mantissa (3Dlabs lBuildFloatValue(str, len, exp))
+local	_lBuildFloatValue	param_2	digitCount	CONFIRMED	number of digits in `digits`
+local	_lBuildFloatValue	param_3	exponent10	CONFIRMED	decimal exponent applied to the mantissa
+local	_lBuildFloatValue	fVar1	resultFloat	INFERRED	mantissa*10^exp rounded to float; checked for overflow to Inf
+local	_lBuildFloatValue	pcVar2	digitPtr	INFERRED	points at the current digit
+local	_lBuildFloatValue	uVar3	expRemaining	INFERRED	|exponent| shifted right as the power-of-ten ladder is built
+local	_lBuildFloatValue	iVar4	digitIndex	INFERRED	index of the next digit
+local	_lBuildFloatValue	iVar5	digitsLeft	INFERRED	down-counter of digits
+local	_lBuildFloatValue	dVar6	tenPower	INFERRED	10^(2^k) squaring ladder for the exponent
+local	_lBuildFloatValue	dVar7	mantissa	INFERRED	accumulated decimal mantissa, then scaled by 10^exp
+local	_lBuildFloatValue	dVar8	scale	INFERRED	10^|exp| built from tenPower

@@ -1,0 +1,43 @@
+# local rows for yyparse (L1): single-role variables and Ghidra register artifacts; the reused scratch variables of the grammar actions stay unnamed (see report)
+local	yyparse	in_cr0	cr0	INFERRED	condition-register field 0 of the lwarx/stwcx refcount decrement loops: set to 2 (EQ) after a successful conditional store, also the result of (x == 0) << 1
+local	yyparse	in_RESERVE	reservation	INFERRED	Ghidra register-reservation flag of the lwarx/stwcx loop that decrements the std::string rep refcount
+local	yyparse	a0	stackNode	INFERRED	value read from yyvsp+0x10 (a node pointer of the right-hand symbol), tested for NULL and released via its virtual destructor
+local	yyparse	a0_00	newNode	INFERRED	TPoolAllocator__allocate(...,0x40) result: node whose fields 7..9 receive the pass-through registers
+local	yyparse	a3	r6Pass	UNKNOWN	register r6 left by the previous call, stored into newNode[9]
+local	yyparse	a4	emptyText	CONFIRMED	assigned the empty string literal "" and passed as the fifth text argument of TParseContext::error
+local	yyparse	a4_00	r7Pass	UNKNOWN	register r7 left by the previous call, stored into newNode[8]
+local	yyparse	a5	r8Pass	UNKNOWN	register r8 left by the previous call, stored into newNode[7]
+local	yyparse	extraout_r4	r4Out0	UNKNOWN	Ghidra extra-output variable: r4 after a call that returns a pointer pair; only forwarded
+local	yyparse	extraout_r4_00	r4Out1	UNKNOWN	Ghidra extra-output variable: r4 after a call that returns a pointer pair; only forwarded
+local	yyparse	extraout_r4_01	r4Out2	UNKNOWN	Ghidra extra-output variable: r4 after a call that returns a pointer pair; only forwarded
+local	yyparse	extraout_r4_02	r4Out3	UNKNOWN	Ghidra extra-output variable: r4 after a call that returns a pointer pair; only forwarded
+local	yyparse	extraout_r4_03	r4Out4	UNKNOWN	Ghidra extra-output variable: r4 after a call that returns a pointer pair; only forwarded
+local	yyparse	extraout_r4_04	r4Out5	UNKNOWN	Ghidra extra-output variable: r4 after a call that returns a pointer pair; only forwarded
+local	yyparse	extraout_r4_05	r4Out6	UNKNOWN	Ghidra extra-output variable: r4 after a call that returns a pointer pair; only forwarded
+local	yyparse	extraout_r4_06	r4Out7	UNKNOWN	Ghidra extra-output variable: r4 after a call that returns a pointer pair; only forwarded
+local	yyparse	extraout_r4_07	r4Out8	UNKNOWN	Ghidra extra-output variable: r4 after a call that returns a pointer pair; only forwarded
+local	yyparse	extraout_r4_08	r4Out9	UNKNOWN	Ghidra extra-output variable: r4 after a call that returns a pointer pair; only forwarded
+local	yyparse	extraout_r4_09	r4Out10	UNKNOWN	Ghidra extra-output variable: r4 after a call that returns a pointer pair; only forwarded
+local	yyparse	extraout_r4_10	r4Out11	UNKNOWN	Ghidra extra-output variable: r4 after a call that returns a pointer pair; only forwarded
+local	yyparse	extraout_r4_11	r4Out12	UNKNOWN	Ghidra extra-output variable: r4 after a call that returns a pointer pair; only forwarded
+local	yyparse	extraout_r4_12	r4Out13	UNKNOWN	Ghidra extra-output variable: r4 after a call that returns a pointer pair; only forwarded
+local	yyparse	extraout_r4_13	r4Out14	UNKNOWN	Ghidra extra-output variable: r4 after a call that returns a pointer pair; only forwarded
+local	yyparse	extraout_r4_14	r4Out15	UNKNOWN	Ghidra extra-output variable: r4 after a call that returns a pointer pair; only forwarded
+local	yyparse	extraout_r4_15	r4Out16	UNKNOWN	Ghidra extra-output variable: r4 after a call that returns a pointer pair; only forwarded
+local	yyparse	extraout_r4_16	r4Out17	UNKNOWN	Ghidra extra-output variable: r4 after a call that returns a pointer pair; only forwarded
+local	yyparse	extraout_r4_17	r4Out18	UNKNOWN	Ghidra extra-output variable: r4 after a call that returns a pointer pair; only forwarded
+local	yyparse	extraout_r4_18	r4Out19	UNKNOWN	Ghidra extra-output variable: r4 after a call that returns a pointer pair; only forwarded
+local	yyparse	a1	r4In0	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	yyparse	a1_00	r4In1	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	yyparse	a1_01	r4In2	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	yyparse	a1_02	r4In3	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	yyparse	a1_03	r4In4	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	yyparse	a1_04	r4In5	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	yyparse	a1_05	r4In6	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	yyparse	a1_06	r4In7	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	yyparse	a1_07	r4In8	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	yyparse	a1_08	r4In9	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	yyparse	a1_09	r4In10	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	yyparse	a1_10	r4In11	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	yyparse	a1_11	r4In12	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	yyparse	a1_12	r4In13	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call

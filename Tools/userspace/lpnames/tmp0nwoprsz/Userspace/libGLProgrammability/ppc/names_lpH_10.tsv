@@ -1,0 +1,79 @@
+use	TIntermBinary__indirectNode	piVar4	leftChildType	INFERRED	type of the left child node (virtual slot 0x3c)	^\s*piVar4\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(this\ \+\ 0x34\)\ \+\ 0x3c\)\)\(\*\(int\ \*\*\)\(this\ \+\ 0x34\)\);$	+2
+use	TIntermBinary__indirectNode	piVar4	fieldType	INFERRED	type of the selected structure field (fields array + index*8)	^\s*piVar4\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(local_58\ \+\ 4\)\ \+\ iVar2\);$	+2
+use	TIntermBinary__indirectNode	iVar2	binaryOp	INFERRED	this+0x30: the binary operator (0x2d array index, 0x2e vector/matrix index, 0x2f struct field select)	^\s*iVar2\ =\ \*\(int\ \*\)\(this\ \+\ 0x30\);$	+2
+use	TIntermBinary__indirectNode	iVar2	binaryOp	INFERRED	this+0x30: the binary operator (0x2d array index, 0x2e vector/matrix index, 0x2f struct field select)	^\s*if\ \(iVar2\ ==\ 0x2e\)\ \{$	+1
+use	TIntermBinary__indirectNode	iVar2	binaryOp	INFERRED	this+0x30: the binary operator (0x2d array index, 0x2e vector/matrix index, 0x2f struct field select)	^\s*if\ \(iVar2\ !=\ 0x2f\)\ goto\ LAB_97bc3364;$	+1
+use	TIntermBinary__indirectNode	iVar2	typeQueryResult	INFERRED	result of the left type virtual slot 0x34 (zero: nothing to register)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x34\)\)\(piVar4\);$	+1
+use	TIntermBinary__indirectNode	iVar2	typeQueryResult	INFERRED	result of the left type virtual slot 0x34 (zero: nothing to register)	^\s*if\ \(iVar2\ ==\ 0\)\ goto\ LAB_97bc3364;$	+1
+use	TIntermBinary__indirectNode	iVar2	fieldByteOffset	INFERRED	field index * 8: byte offset into the structure field array	^\s*iVar2\ =\ uVar10\ \*\ 8;$	+1
+use	TIntermBinary__indirectNode	iVar2	fieldByteOffset	INFERRED	field index * 8: byte offset into the structure field array	^\s*piVar4\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(local_58\ \+\ 4\)\ \+\ iVar2\);$	+1
+use	TIntermBinary__indirectNode	iVar2	fieldByteOffset	INFERRED	field index * 8: byte offset into the structure field array	^\s*ParseSymbol__SetParseTreeType\(pPVar5,\*\(unsigned\ char\ \*\*\)\(\*\(int\ \*\)\(local_58\ \+\ 4\)\ \+\ iVar2\)\);$	+1
+use	TIntermBinary__indirectNode	bVar1	leftIsNull	INFERRED	the left operand compiled to null (no result)	^\s*bVar1\ =\ this_02\ ==\ \(unsigned\ char\ \*\)0x0;$	+1
+use	TIntermBinary__indirectNode	bVar1	leftIsNull	INFERRED	the left operand compiled to null (no result)	^\s*if\ \(bVar1\)\ goto\ LAB_97bc3364;$	+1
+use	TIntermBinary__indirectNode	bVar1	leftIsNull	INFERRED	the left operand compiled to null (no result)	^\s*bVar1\ =\ pPVar7\ ==\ \(unsigned\ char\ \*\)0x0;$	+1
+use	TIntermBinary__indirectNode	bVar1	leftIsNull	INFERRED	the left operand compiled to null (no result)	^\s*if\ \(\(!bVar1\)\ \&\&\ \(pPVar7\ !=\ this_02\)\)\ \{$	+1
+use	TIntermBinary__indirectNode	uVar3	sourceLine	INFERRED	virtual slot 0 of the node (line), stored to compiler+0x90	^\s*uVar3\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this\);$	+2
+use	TIntermBinary__indirectNode	pPVar5	leftSymbol	INFERRED	*leftOperand: the ParseSymbol being indexed / selected from	^\s*pPVar5\ =\ \*\(unsigned\ char\ \*\*\)this_02;$	+2
+use	TIntermBinary__indirectNode	pPVar5	leftSymbol	INFERRED	*leftOperand: the ParseSymbol being indexed / selected from	^\s*pPVar5\ =\ \*\(unsigned\ char\ \*\*\)this_02;$@4	+2
+use	TIntermBinary__indirectNode	pPVar5	leftSymbol	INFERRED	*leftOperand: the ParseSymbol being indexed / selected from	^\s*ParseSymbol__ResolveOpenGLType\(pPVar5\);$@2	+1
+use	TIntermBinary__indirectNode	pPVar5	leftSymbol	INFERRED	*leftOperand: the ParseSymbol being indexed / selected from	^\s*pPVar5\ =\ \*\(unsigned\ char\ \*\*\)this_02;$@2	+3
+use	TIntermBinary__indirectNode	pPVar5	leftSymbol	INFERRED	*leftOperand: the ParseSymbol being indexed / selected from	^\s*pPVar5\ =\ \*\(unsigned\ char\ \*\*\)this_02;$@3	+1
+use	TIntermBinary__indirectNode	pPVar5	leftSymbol	INFERRED	*leftOperand: the ParseSymbol being indexed / selected from	^\s*if\ \(pPVar5\ ==\ \(unsigned\ char\ \*\)0x0\)\ \{$	+1
+use	TIntermBinary__indirectNode	pPVar5	leftSymbol	INFERRED	*leftOperand: the ParseSymbol being indexed / selected from	^\s*ParseSymbol__CatName\(pPVar5,"\."\);$	+1
+use	TIntermBinary__indirectNode	pPVar5	leftSymbol	INFERRED	*leftOperand: the ParseSymbol being indexed / selected from	^\s*ParseSymbol__CatName\(pPVar5,\*\(char\ \*\*\)\(iVar8\ \+\ 4\)\);$	+2
+use	TIntermBinary__indirectNode	pTVar6	leftNodeType	INFERRED	type of the left child node (virtual slot 0x3c) for the indirect operand	^\s*pTVar6\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(this\ \+\ 0x34\)\ \+\ 0x3c\)\)\(\*\(int\ \*\*\)\(this\ \+\ 0x34\)\);$	+1
+use	TIntermBinary__indirectNode	pTVar6	leftNodeType	INFERRED	type of the left child node (virtual slot 0x3c) for the indirect operand	^\s*TPPStreamCompiler__newIndirectOperandFromConstant\(param_2,this_02,pTVar6\);$	+1
+use	TIntermBinary__indirectNode	pPVar7	resultOperand	INFERRED	the operand returned: left operand (modified in place) or the new indirect operand	^\s*pPVar7\ =\ \(unsigned\ char\ \*\)0x0;$	+1
+use	TIntermBinary__indirectNode	pPVar7	resultOperand	INFERRED	the operand returned: left operand (modified in place) or the new indirect operand	^\s*pPVar7\ =\ this_02;$	+1
+use	TIntermBinary__indirectNode	pPVar7	resultOperand	INFERRED	the operand returned: left operand (modified in place) or the new indirect operand	^\s*pPVar7\ =\ \(unsigned\ char\ \*\)$	+1
+use	TIntermBinary__indirectNode	pPVar7	resultOperand	INFERRED	the operand returned: left operand (modified in place) or the new indirect operand	^\s*bVar1\ =\ pPVar7\ ==\ \(unsigned\ char\ \*\)0x0;$	+2
+use	TIntermBinary__indirectNode	pPVar7	resultOperand	INFERRED	the operand returned: left operand (modified in place) or the new indirect operand	^\s*pPVar7\ =\ this_02;$@2	+1
+use	TIntermBinary__indirectNode	pPVar7	resultOperand	INFERRED	the operand returned: left operand (modified in place) or the new indirect operand	^\s*pPVar7\ =\ this_02;$@3	+1
+use	TIntermBinary__indirectNode	pPVar7	resultOperand	INFERRED	the operand returned: left operand (modified in place) or the new indirect operand	^\s*pPVar7\ =\ this_02;$@4	+1
+use	TIntermBinary__indirectNode	pPVar7	resultOperand	INFERRED	the operand returned: left operand (modified in place) or the new indirect operand	^\s*if\ \(\(!bVar1\)\ \&\&\ \(pPVar7\ !=\ this_02\)\)\ \{$	+1
+use	TIntermBinary__indirectNode	pPVar7	resultOperand	INFERRED	the operand returned: left operand (modified in place) or the new indirect operand	^\s*return\ pPVar7;$	+1
+use	TIntermBinary__indirectNode	this_00	symbolTable	INFERRED	compiler+0x68: the ParseSymbolTable that processOperand registers into	^\s*this_00\ =\ \*\(unsigned\ char\ \*\*\)\(param_2\ \+\ 0x68\);$	+1
+use	TIntermBinary__indirectNode	this_00	symbolTable	INFERRED	compiler+0x68: the ParseSymbolTable that processOperand registers into	^\s*this_00\ =\ \*\(unsigned\ char\ \*\*\)\(param_2\ \+\ 0x68\);$@2	+1
+use	TIntermBinary__indirectNode	this_00	symbolTable	INFERRED	compiler+0x68: the ParseSymbolTable that processOperand registers into	^\s*\(\(int\ \(\*\)\(\)\)ParseSymbolTable__processOperand\)\(this_00,this_02\);$	+1
+use	TIntermBinary__indirectNode	iVar8	fieldName	INFERRED	TString* returned by the field type virtual slot 0x1c (field name); +4 is its data	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x1c\)\)\(piVar4\);$	+3
+use	TIntermBinary__indirectNode	puVar9	rightConstData	INFERRED	right operand constant data (operand+4): the struct field index	^\s*puVar9\ =\ \*\(uint\ \*\*\)\(\(int\)this_01\ \+\ 4\);$	+2
+use	TIntermBinary__indirectNode	puVar9	rightConstData	INFERRED	right operand constant data (operand+4): the struct field index	^\s*\(param_2,\(char\ \*\)0x1,\(char\ \*\)0x0,$@2	+3
+use	TIntermBinary__indirectNode	puVar9	rightConstData	INFERRED	right operand constant data (operand+4): the struct field index	^\s*\(param_2,\(char\ \*\)0x1,\(char\ \*\)0x0,$@3	+3
+use	TIntermBinary__indirectNode	puVar9	rightConstData	INFERRED	right operand constant data (operand+4): the struct field index	^\s*\(param_2,\(char\ \*\)0x1,\(char\ \*\)0x0,$@4	+3
+use	TIntermBinary__indirectNode	this_01	rightOperand	INFERRED	result of compiling the right child (index / field selector)	^\s*this_01\ =\ \(void\ \*\)0x0;$	+1
+use	TIntermBinary__indirectNode	this_01	rightOperand	INFERRED	result of compiling the right child (index / field selector)	^\s*this_01\ =\ \(void\ \*\)\(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x10\)\)\(piVar4,param_2\);$	+1
+use	TIntermBinary__indirectNode	this_01	rightOperand	INFERRED	result of compiling the right child (index / field selector)	^\s*uVar10\ =\ \*\*\(uint\ \*\*\)\(\(int\)this_01\ \+\ 4\);$	+1
+use	TIntermBinary__indirectNode	this_01	rightOperand	INFERRED	result of compiling the right child (index / field selector)	^\s*puVar9\ =\ \*\(uint\ \*\*\)\(\(int\)this_01\ \+\ 4\);$	+1
+use	TIntermBinary__indirectNode	this_01	rightOperand	INFERRED	result of compiling the right child (index / field selector)	^\s*if\ \(this_01\ !=\ \(void\ \*\)0x0\)\ \{$	+3
+use	TIntermBinary__indirectNode	this_02	leftOperand	INFERRED	result of compiling the left child (array / vector / structure)	^\s*this_02\ =\ \(unsigned\ char\ \*\)0x0;$	+1
+use	TIntermBinary__indirectNode	this_02	leftOperand	INFERRED	result of compiling the left child (array / vector / structure)	^\s*this_02\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x10\)\)\(piVar4,param_2\);$	+1
+use	TIntermBinary__indirectNode	this_02	leftOperand	INFERRED	result of compiling the left child (array / vector / structure)	^\s*bVar1\ =\ this_02\ ==\ \(unsigned\ char\ \*\)0x0;$	+1
+use	TIntermBinary__indirectNode	this_02	leftOperand	INFERRED	result of compiling the left child (array / vector / structure)	^\s*pPVar7\ =\ this_02;$	+3
+use	TIntermBinary__indirectNode	this_02	leftOperand	INFERRED	result of compiling the left child (array / vector / structure)	^\s*ParseSymbol__CatName\(\*\(unsigned\ char\ \*\*\)this_02,\(char\ \*\)local_60\);$	+1
+use	TIntermBinary__indirectNode	this_02	leftOperand	INFERRED	result of compiling the left child (array / vector / structure)	^\s*pPVar5\ =\ \*\(unsigned\ char\ \*\*\)this_02;$	+1
+use	TIntermBinary__indirectNode	this_02	leftOperand	INFERRED	result of compiling the left child (array / vector / structure)	^\s*if\ \(\*\(int\ \*\)this_02\ ==\ 0\)\ \{$	+1
+use	TIntermBinary__indirectNode	this_02	leftOperand	INFERRED	result of compiling the left child (array / vector / structure)	^\s*TPPStreamCompiler__newIndirectOperandFromConstant\(param_2,this_02,pTVar6\);$	+3
+use	TIntermBinary__indirectNode	this_02	leftOperand	INFERRED	result of compiling the left child (array / vector / structure)	^\s*this_02\ =\ pPVar7;$	+1
+use	TIntermBinary__indirectNode	this_02	leftOperand	INFERRED	result of compiling the left child (array / vector / structure)	^\s*if\ \(\*\(int\ \*\)\(\*\(int\ \*\)this_02\ \+\ 0x4c\)\ ==\ 0\)\ \{$	+1
+use	TIntermBinary__indirectNode	this_02	leftOperand	INFERRED	result of compiling the left child (array / vector / structure)	^\s*pPVar7\ =\ this_02;$@2	+1
+use	TIntermBinary__indirectNode	this_02	leftOperand	INFERRED	result of compiling the left child (array / vector / structure)	^\s*\(\(int\ \(\*\)\(\)\)ParseSymbolTable__processOperand\)\(\*\(unsigned\ char\ \*\*\)\(param_2\ \+\ 0x68\),this_02\);$	+2
+use	TIntermBinary__indirectNode	this_02	leftOperand	INFERRED	result of compiling the left child (array / vector / structure)	^\s*ParseSymbol__CatName\(\*\(unsigned\ char\ \*\*\)this_02,\(char\ \*\)local_60\);$@2	+1
+use	TIntermBinary__indirectNode	this_02	leftOperand	INFERRED	result of compiling the left child (array / vector / structure)	^\s*pPVar5\ =\ \*\(unsigned\ char\ \*\*\)this_02;$@2	+1
+use	TIntermBinary__indirectNode	this_02	leftOperand	INFERRED	result of compiling the left child (array / vector / structure)	^\s*\(\(int\ \(\*\)\(\)\)ParseSymbolTable__processOperand\)\(this_00,this_02\);$	+2
+use	TIntermBinary__indirectNode	this_02	leftOperand	INFERRED	result of compiling the left child (array / vector / structure)	^\s*pPVar5\ =\ \*\(unsigned\ char\ \*\*\)this_02;$@3	+1
+use	TIntermBinary__indirectNode	this_02	leftOperand	INFERRED	result of compiling the left child (array / vector / structure)	^\s*pPVar5\ =\ \*\(unsigned\ char\ \*\*\)this_02;$@4	+1
+use	TIntermBinary__indirectNode	this_02	leftOperand	INFERRED	result of compiling the left child (array / vector / structure)	^\s*pPVar7\ =\ this_02;$@4	+1
+use	TIntermBinary__indirectNode	this_02	leftOperand	INFERRED	result of compiling the left child (array / vector / structure)	^\s*if\ \(\(!bVar1\)\ \&\&\ \(pPVar7\ !=\ this_02\)\)\ \{$	+3
+use	TIntermBinary__indirectNode	uVar10	constIndex	INFERRED	constant array index (first word of the right operand constant)	^\s*uVar10\ =\ \*\*\(uint\ \*\*\)\(\(int\)this_01\ \+\ 4\);$	+1
+use	TIntermBinary__indirectNode	uVar10	constIndex	INFERRED	constant array index (first word of the right operand constant)	^\s*ParseSymbol__AddDirectIndex\(\*\(unsigned\ char\ \*\*\)this_02,uVar10\);$	+2
+use	TIntermBinary__indirectNode	uVar10	fieldIndex	INFERRED	structure field index (first word of the right operand constant)	^\s*uVar10\ =\ \*puVar9;$	+1
+use	TIntermBinary__indirectNode	uVar10	fieldIndex	INFERRED	structure field index (first word of the right operand constant)	^\s*if\ \(\(uint\)\(\*\(int\ \*\)\(local_58\ \+\ 8\)\ \-\ \*\(int\ \*\)\(local_58\ \+\ 4\)\ >>\ 3\)\ <=\ uVar10\)\ \{$	+1
+use	TIntermBinary__indirectNode	uVar10	fieldIndex	INFERRED	structure field index (first word of the right operand constant)	^\s*iVar2\ =\ uVar10\ \*\ 8;$	+1
+local	TIntermBinary__indirectNode	local_60	typeOrIndexBuf	INFERRED	address-taken scratch: "[%d]" index text buffer and the TType object written by the left type virtual call
+local	TIntermBinary__indirectNode	local_58	typeStructFields	INFERRED	structure field list of the TType object overlaid at local_60 (+8)
+local	TIntermBinary__indirectNode	param_3	strayArg3	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermBinary__indirectNode	param_4	strayArg4	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermBinary__indirectNode	param_5	strayArg5	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermBinary__indirectNode	param_6	strayArg6	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermBinary__indirectNode	param_7	strayArg7	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermBinary__indirectNode	param_8	strayArg8	INFERRED	extra register-argument slot forwarded as a dead stray argument

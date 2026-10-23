@@ -1,0 +1,341 @@
+# local	FUNCTION	old	new	tier	evidence
+local	yyparse	param_1	parseContext	CONFIRMED	passed as the first argument of TParseContext__error/recover/addConstStruct and dereferenced at +0 for the TIntermediate
+local	yyparse	pTVar46	yyssp	CONFIRMED	bison skeleton: short state-stack pointer, += 2 per push, compared against yyss + yystacksize - 1
+local	yyparse	pTVar45	yyss	CONFIRMED	bison skeleton: base of the short state stack (local_2ca0 initially, alloca copy after growth)
+local	yyparse	pTVar56	yyvsp	CONFIRMED	bison skeleton: semantic-value stack pointer, += 0x2c per push (YYSTYPE is 0x2c bytes), indexed at (1-yylen)*0x2c by the reductions
+local	yyparse	pTVar42	yyvs	CONFIRMED	bison skeleton: base of the semantic-value stack (aTStack_2b10 initially)
+local	yyparse	pTVar41	yystacksize	CONFIRMED	bison skeleton: starts at 200 (YYINITDEPTH), capped at 10000 (YYMAXDEPTH) before doubling; "parser stack overflow" test is > 9999
+local	yyparse	local_60	yyssBytes	INFERRED	yystacksize * sizeof(short): the size passed to the alloca/memcpy of the state stack
+local	yyparse	iVar43	yyerrstatus	CONFIRMED	bison skeleton: 0, set to 3 after an error, decremented per shifted token
+local	yyparse	iVar44	yychar	CONFIRMED	bison skeleton: lookahead token, -2 (YYEMPTY) until yylex is called
+local	yyparse	iVar48	yystateOrYylen	INFERRED	the state number (indexes yypact/yydefact) and, after a reduce, yylen = yyr2[yyn]; gcc shared one register
+local	yyparse	sVar1	yypactEntry	CONFIRMED	yypact[yystate]; -0x8000 (YYFLAG) means default reduction
+local	yyparse	aYStack_8b0	yylval	CONFIRMED	target of yylex(&yylval, ...) and memcpy-ed to the new yyvsp slot
+local	yyparse	local_880	yyval	CONFIRMED	default $$ copy of the 0x2c-byte value at yyvsp[1-yylen]; assigned by every reduction action
+local	yyparse	aTStack_2b10	yyvsInit	CONFIRMED	yyvs initial array: 200 * 0x2c = 8800 bytes
+local	yyparse	local_2ca0	yyssInit	CONFIRMED	yyss initial array: 200 shorts = 400 bytes
+local	_glpDisassemble2Op	param_1	inst	INFERRED	instruction words: [0] bits 18-25 opcode (<= 0x70), bits 29-31 source count, [3..8] operand words
+local	_glpDisassemble2Op	param_2	outText	CONFIRMED	characters are written starting here; *param_4 = end - param_2
+local	_glpDisassemble2Op	param_3	outWordCount	INFERRED	*param_3 = (inst[0] >> 29) + 1
+local	_glpDisassemble2Op	param_4	outTextLength	CONFIRMED	*param_4 = iVar6 - param_2, the number of characters written
+local	_glpDisassemble2Op	param_9	stateFlags	UNKNOWN	bits 0x1001/0x1003/0x2000/0x3001 or-ed in per opcode, [1] & 0x100000 tested
+local	_glpDisassemble2Op	param_10	shaderType	CONFIRMED	compared with 0x8b31 (GL_VERTEX_SHADER) and 0x8b30 (GL_FRAGMENT_SHADER)
+local	_glpDisassemble2Op	puVar2	opStringTable	CONFIRMED	PTR__ppstreamOpString: table of mnemonic strings indexed by opcode*4
+local	_glpDisassemble2Op	cVar3	ch	CONFIRMED	current character of the inlined strcpy of each emitted mnemonic/string
+local	_glpPPDisassemble	param_1	program	INFERRED	program image: [0] shader type (0x8b30/0x8b31 tests), [0x12] instruction count, [5]/[0x1b] table offsets
+local	_glpPPDisassemble	local_ac	outBuf	CONFIRMED	malloc(0x800) text buffer, grown by _adjustAllocation(&capacity, &buf, &cursor)
+local	_glpPPDisassemble	local_b0	outBufCapacity	CONFIRMED	0x800, passed as the capacity argument of _adjustAllocation
+local	_glpPPDisassemble	local_a8	outCursor	CONFIRMED	write position in outBuf; third argument of _adjustAllocation
+local	_glpPPDisassemble	cVar8	ch	CONFIRMED	current character of the inlined strcpy
+local	_InterpreterEmulateOp	param_1	machine	INFERRED	first argument of every _InterpreterLoadSource call; *param_1 holds the state with tables at +0xd80
+local	_InterpreterEmulateOp	param_2	inst	INFERRED	instruction record: [0] opcode, [3..]/[0xd..]/[0x16..] operand blocks
+local	_InterpreterEmulateOp	local_130	opVec	INFERRED	12 floats: result [0..3], first source [4..7], second source [8..11] (MUL: [0..3] = [4..7] * [8..11])
+local	_glpPPShaderToProgramString	param_1	shader	INFERRED	*param_1 compared with 0x8b30 (GL_FRAGMENT_SHADER); [4]/[6] operand tables
+local	_glpPPShaderToProgramString	cVar2	ch	CONFIRMED	current character of the inlined strcpy
+local	_PPCRuntimeCompilerCompileAV	param_1	compiler	CONFIRMED	first argument of _PPCRuntimeCompilerInitialise; object fields at +0xe20/0xe28/0xe30
+local	TIntermConstantUnion__fold	param_4	infoSink	CONFIRMED	receives TInfoSinkBase::append("INTERNAL ERROR: ") calls
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	param_1	language	INFERRED	parameter type in the mangled name (__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable)
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	param_2	symbolTable	INFERRED	parameter type in the mangled name (__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable)
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	param_1	language	INFERRED	parameter type in the mangled name (__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource)
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	param_2	symbolTable	INFERRED	parameter type in the mangled name (__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource)
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	param_3	builtInResource	INFERRED	parameter type in the mangled name (__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource)
+local	__ZN13TInfoSinkBase6appendEPKc	param_2	str	INFERRED	parameter type in the mangled name (__ZN13TInfoSinkBase6appendEPKc)
+local	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	param_2	intermTyped1	INFERRED	parameter type in the mangled name (__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i)
+local	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	param_3	intermTyped2	INFERRED	parameter type in the mangled name (__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i)
+local	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	param_4	intermTyped3	INFERRED	parameter type in the mangled name (__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i)
+local	__ZN13TIntermediate9addBranchE9TOperatori	param_2	op	INFERRED	parameter type in the mangled name (__ZN13TIntermediate9addBranchE9TOperatori)
+local	__ZN13TIntermediate9addBranchE9TOperatorP12TIntermTypedi	param_2	op	INFERRED	parameter type in the mangled name (__ZN13TIntermediate9addBranchE9TOperatorP12TIntermTypedi)
+local	__ZN13TIntermediate9addBranchE9TOperatorP12TIntermTypedi	param_3	intermTyped	INFERRED	parameter type in the mangled name (__ZN13TIntermediate9addBranchE9TOperatorP12TIntermTypedi)
+local	__ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__gnu_cxx17__normal_iteratorIPS2_St6vectorIS2_14pool_allocatorIS2_EEEEP16TIntermAggregate	param_2	vector	INFERRED	parameter type in the mangled name (__ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__gnu_cxx17__normal_iteratorIPS2_St6vectorIS2_14pool_allocatorIS2_EEEEP16TIntermAggregate)
+local	__ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__gnu_cxx17__normal_iteratorIPS2_St6vectorIS2_14pool_allocatorIS2_EEEEP16TIntermAggregate	param_3	type	INFERRED	parameter type in the mangled name (__ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__gnu_cxx17__normal_iteratorIPS2_St6vectorIS2_14pool_allocatorIS2_EEEEP16TIntermAggregate)
+local	__ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__gnu_cxx17__normal_iteratorIPS2_St6vectorIS2_14pool_allocatorIS2_EEEEP16TIntermAggregate	param_5	__normal_iterator	INFERRED	parameter type in the mangled name (__ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__gnu_cxx17__normal_iteratorIPS2_St6vectorIS2_14pool_allocatorIS2_EEEEP16TIntermAggregate)
+local	__ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__gnu_cxx17__normal_iteratorIPS2_St6vectorIS2_14pool_allocatorIS2_EEEEP16TIntermAggregate	param_6	intermAggregate	INFERRED	parameter type in the mangled name (__ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__gnu_cxx17__normal_iteratorIPS2_St6vectorIS2_14pool_allocatorIS2_EEEEP16TIntermAggregate)
+local	__ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggregate	param_2	intermTyped	INFERRED	parameter type in the mangled name (__ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggregate)
+local	__ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggregate	param_3	type	INFERRED	parameter type in the mangled name (__ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggregate)
+local	__ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggregate	param_4	intermAggregate	INFERRED	parameter type in the mangled name (__ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggregate)
+local	__ZN13TParseContext14boolErrorCheckEiRK11TPublicType	param_3	publicType	INFERRED	parameter type in the mangled name (__ZN13TParseContext14boolErrorCheckEiRK11TPublicType)
+local	__ZN7TSymbolC2ERKS_	param_2	symbol	INFERRED	parameter type in the mangled name (__ZN7TSymbolC2ERKS_)
+local	__ZN7TSymbolC1ERKS_	param_2	symbol	INFERRED	parameter type in the mangled name (__ZN7TSymbolC1ERKS_)
+local	__ZN7BindingC2ERKS_	param_2	binding	INFERRED	parameter type in the mangled name (__ZN7BindingC2ERKS_)
+local	__ZN7BindingC1ERKS_	param_2	binding	INFERRED	parameter type in the mangled name (__ZN7BindingC1ERKS_)
+local	__ZN11ParseSymbolC2ERKS_	param_2	parseSymbol	INFERRED	parameter type in the mangled name (__ZN11ParseSymbolC2ERKS_)
+local	__ZN11ParseSymbolC1ERKS_	param_2	parseSymbol	INFERRED	parameter type in the mangled name (__ZN11ParseSymbolC1ERKS_)
+local	__ZN12ParseOperandC2ERKS_	param_2	parseOperand	INFERRED	parameter type in the mangled name (__ZN12ParseOperandC2ERKS_)
+local	__ZN12ParseOperandC1ERKS_	param_2	parseOperand	INFERRED	parameter type in the mangled name (__ZN12ParseOperandC1ERKS_)
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	param_2	operands	INFERRED	array of ParseOperand* handled together (the mangled signature is IndirectAddressHandler(ParseOperand**, int))
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_	param_2	operandAPtr	INFERRED	ParseOperand** of the first operand (copied into operandCopy0 and written back)
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_	param_3	operandBPtr	INFERRED	ParseOperand** of the second operand
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_	param_2	parseOperand1	INFERRED	parameter type in the mangled name (__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_)
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_	param_3	parseOperand2	INFERRED	parameter type in the mangled name (__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_)
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_	param_4	parseOperand3	INFERRED	parameter type in the mangled name (__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_)
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_S2_	param_2	parseOperand1	INFERRED	parameter type in the mangled name (__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_S2_)
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_S2_	param_3	parseOperand2	INFERRED	parameter type in the mangled name (__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_S2_)
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_S2_	param_4	parseOperand3	INFERRED	parameter type in the mangled name (__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_S2_)
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_S2_	param_5	parseOperand4	INFERRED	parameter type in the mangled name (__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_S2_)
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_i	param_2	parseOperand1	INFERRED	parameter type in the mangled name (__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_i)
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_i	param_3	parseOperand2	INFERRED	parameter type in the mangled name (__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_i)
+local	__ZN17TPPStreamCompilerC2E11EShLanguagei	param_2	language	INFERRED	parameter type in the mangled name (__ZN17TPPStreamCompilerC2E11EShLanguagei)
+local	__ZN17TPPStreamCompilerC1E11EShLanguagei	param_2	language	INFERRED	parameter type in the mangled name (__ZN17TPPStreamCompilerC1E11EShLanguagei)
+local	__ZNSsC2EPKcmRKSaIcE	param_2	str	INFERRED	parameter type in the mangled name (__ZNSsC2EPKcmRKSaIcE)
+local	__ZNSsC1EPKcmRKSaIcE	param_2	str	INFERRED	parameter type in the mangled name (__ZNSsC1EPKcmRKSaIcE)
+local	__ZNSsC2EPKcRKSaIcE	param_2	str	INFERRED	parameter type in the mangled name (__ZNSsC2EPKcRKSaIcE)
+local	__ZNSsC1EPKcRKSaIcE	param_2	str	INFERRED	parameter type in the mangled name (__ZNSsC1EPKcRKSaIcE)
+local	__ZNSs6assignEPKcm	param_2	str	INFERRED	parameter type in the mangled name (__ZNSs6assignEPKcm)
+local	__ZNSs6assignEPKc	param_2	str	INFERRED	parameter type in the mangled name (__ZNSs6assignEPKc)
+local	__ZNSs7replaceEmmPKcm	param_4	str	INFERRED	parameter type in the mangled name (__ZNSs7replaceEmmPKcm)
+local	__ZNSs6appendEPKc	param_2	str	INFERRED	parameter type in the mangled name (__ZNSs6appendEPKc)
+local	__ZNSs6appendEPKcm	param_2	str	INFERRED	parameter type in the mangled name (__ZNSs6appendEPKcm)
+local	__ZNSs6insertEN9__gnu_cxx17__normal_iteratorIPcSsEEmc	param_2	p	INFERRED	parameter type in the mangled name (__ZNSs6insertEN9__gnu_cxx17__normal_iteratorIPcSsEEmc)
+local	__ZNSs6insertEmPKcm	param_3	str	INFERRED	parameter type in the mangled name (__ZNSs6insertEmPKcm)
+local	__ZNSs6insertEmPKc	param_3	str	INFERRED	parameter type in the mangled name (__ZNSs6insertEmPKc)
+local	__ZNSs7replaceEmmPKc	param_4	str	INFERRED	parameter type in the mangled name (__ZNSs7replaceEmmPKc)
+local	__ZNKSs4findEPKcmm	param_2	str	INFERRED	parameter type in the mangled name (__ZNKSs4findEPKcmm)
+local	__ZNKSs4findEPKcm	param_2	str	INFERRED	parameter type in the mangled name (__ZNKSs4findEPKcm)
+local	__ZNKSs5rfindEPKcmm	param_2	str	INFERRED	parameter type in the mangled name (__ZNKSs5rfindEPKcmm)
+local	__ZNKSs5rfindEPKcm	param_2	str	INFERRED	parameter type in the mangled name (__ZNKSs5rfindEPKcm)
+local	__ZNKSs13find_first_ofEPKcmm	param_2	str	INFERRED	parameter type in the mangled name (__ZNKSs13find_first_ofEPKcmm)
+local	__ZNKSs13find_first_ofEPKcm	param_2	str	INFERRED	parameter type in the mangled name (__ZNKSs13find_first_ofEPKcm)
+local	__ZNKSs12find_last_ofEPKcmm	param_2	str	INFERRED	parameter type in the mangled name (__ZNKSs12find_last_ofEPKcmm)
+local	__ZNKSs12find_last_ofEPKcm	param_2	str	INFERRED	parameter type in the mangled name (__ZNKSs12find_last_ofEPKcm)
+local	__ZNKSs17find_first_not_ofEPKcmm	param_2	str	INFERRED	parameter type in the mangled name (__ZNKSs17find_first_not_ofEPKcmm)
+local	__ZNKSs17find_first_not_ofEPKcm	param_2	str	INFERRED	parameter type in the mangled name (__ZNKSs17find_first_not_ofEPKcm)
+local	__ZNKSs16find_last_not_ofEPKcmm	param_2	str	INFERRED	parameter type in the mangled name (__ZNKSs16find_last_not_ofEPKcmm)
+local	__ZNKSs16find_last_not_ofEPKcm	param_2	str	INFERRED	parameter type in the mangled name (__ZNKSs16find_last_not_ofEPKcm)
+local	__ZNKSs7compareEPKc	param_2	str	INFERRED	parameter type in the mangled name (__ZNKSs7compareEPKc)
+local	__ZNKSs7compareEmmPKc	param_4	str	INFERRED	parameter type in the mangled name (__ZNKSs7compareEmmPKc)
+local	__ZNKSs7compareEmmPKcm	param_4	str	INFERRED	parameter type in the mangled name (__ZNKSs7compareEmmPKcm)
+local	__ZNKSaIcE7addressERKc	param_2	str	INFERRED	parameter type in the mangled name (__ZNKSaIcE7addressERKc)
+local	__ZNSaIcE9constructEPcRKc	param_3	str	INFERRED	parameter type in the mangled name (__ZNSaIcE9constructEPcRKc)
+local	__ZNKSt9type_infoeqERKS_	param_2	type_info	INFERRED	parameter type in the mangled name (__ZNKSt9type_infoeqERKS_)
+local	__ZNK10__cxxabiv117__class_type_info20__do_find_public_srcEiPKvPKS0_S2_	param_4	srcType	INFERRED	parameter type in the mangled name (__ZNK10__cxxabiv117__class_type_info20__do_find_public_srcEiPKvPKS0_S2_)
+local	__ZNK10__cxxabiv120__si_class_type_info20__do_find_public_srcEiPKvPKNS_17__class_type_infoES2_	param_4	srcType	INFERRED	parameter type in the mangled name (__ZNK10__cxxabiv120__si_class_type_info20__do_find_public_srcEiPKvPKNS_17__class_type_infoES2_)
+local	__ZNK10__cxxabiv117__class_type_info12__do_dyncastEiNS0_10__sub_kindEPKS0_PKvS3_S5_RNS0_16__dyncast_resultE	param_3	accessPath	INFERRED	parameter type in the mangled name (__ZNK10__cxxabiv117__class_type_info12__do_dyncastEiNS0_10__sub_kindEPKS0_PKvS3_S5_RNS0_16__dyncast_resultE)
+local	__ZNK10__cxxabiv117__class_type_info12__do_dyncastEiNS0_10__sub_kindEPKS0_PKvS3_S5_RNS0_16__dyncast_resultE	param_4	dstType	INFERRED	parameter type in the mangled name (__ZNK10__cxxabiv117__class_type_info12__do_dyncastEiNS0_10__sub_kindEPKS0_PKvS3_S5_RNS0_16__dyncast_resultE)
+local	__ZNK10__cxxabiv117__class_type_info12__do_dyncastEiNS0_10__sub_kindEPKS0_PKvS3_S5_RNS0_16__dyncast_resultE	param_6	srcType	INFERRED	parameter type in the mangled name (__ZNK10__cxxabiv117__class_type_info12__do_dyncastEiNS0_10__sub_kindEPKS0_PKvS3_S5_RNS0_16__dyncast_resultE)
+local	__ZNK10__cxxabiv117__class_type_info12__do_dyncastEiNS0_10__sub_kindEPKS0_PKvS3_S5_RNS0_16__dyncast_resultE	param_8	result	INFERRED	parameter type in the mangled name (__ZNK10__cxxabiv117__class_type_info12__do_dyncastEiNS0_10__sub_kindEPKS0_PKvS3_S5_RNS0_16__dyncast_resultE)
+local	__ZNK10__cxxabiv120__si_class_type_info12__do_dyncastEiNS_17__class_type_info10__sub_kindEPKS1_PKvS4_S6_RNS1_16__dyncast_resultE	param_3	accessPath	INFERRED	parameter type in the mangled name (__ZNK10__cxxabiv120__si_class_type_info12__do_dyncastEiNS_17__class_type_info10__sub_kindEPKS1_PKvS4_S6_RNS1_16__dyncast_resultE)
+local	__ZNK10__cxxabiv120__si_class_type_info12__do_dyncastEiNS_17__class_type_info10__sub_kindEPKS1_PKvS4_S6_RNS1_16__dyncast_resultE	param_4	dstType	INFERRED	parameter type in the mangled name (__ZNK10__cxxabiv120__si_class_type_info12__do_dyncastEiNS_17__class_type_info10__sub_kindEPKS1_PKvS4_S6_RNS1_16__dyncast_resultE)
+local	__ZNK10__cxxabiv120__si_class_type_info12__do_dyncastEiNS_17__class_type_info10__sub_kindEPKS1_PKvS4_S6_RNS1_16__dyncast_resultE	param_6	srcType	INFERRED	parameter type in the mangled name (__ZNK10__cxxabiv120__si_class_type_info12__do_dyncastEiNS_17__class_type_info10__sub_kindEPKS1_PKvS4_S6_RNS1_16__dyncast_resultE)
+local	__ZNK10__cxxabiv120__si_class_type_info12__do_dyncastEiNS_17__class_type_info10__sub_kindEPKS1_PKvS4_S6_RNS1_16__dyncast_resultE	param_8	result	INFERRED	parameter type in the mangled name (__ZNK10__cxxabiv120__si_class_type_info12__do_dyncastEiNS_17__class_type_info10__sub_kindEPKS1_PKvS4_S6_RNS1_16__dyncast_resultE)
+local	__ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PKvRNS0_15__upcast_resultE	param_2	dstType	INFERRED	parameter type in the mangled name (__ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PKvRNS0_15__upcast_resultE)
+local	__ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PKvRNS0_15__upcast_resultE	param_4	result	INFERRED	parameter type in the mangled name (__ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PKvRNS0_15__upcast_resultE)
+local	__ZNK10__cxxabiv120__si_class_type_info11__do_upcastEPKNS_17__class_type_infoEPKvRNS1_15__upcast_resultE	param_2	dstType	INFERRED	parameter type in the mangled name (__ZNK10__cxxabiv120__si_class_type_info11__do_upcastEPKNS_17__class_type_infoEPKvRNS1_15__upcast_resultE)
+local	__ZNK10__cxxabiv120__si_class_type_info11__do_upcastEPKNS_17__class_type_infoEPKvRNS1_15__upcast_resultE	param_4	result	INFERRED	parameter type in the mangled name (__ZNK10__cxxabiv120__si_class_type_info11__do_upcastEPKNS_17__class_type_infoEPKvRNS1_15__upcast_resultE)
+local	__Z21base_of_encoded_valuehP15_Unwind_Context	param_2	_Unwind_Context	INFERRED	parameter type in the mangled name (__Z21base_of_encoded_valuehP15_Unwind_Context)
+local	__Z15get_ttype_entryP16lsda_header_infoj	param_1	info	INFERRED	parameter type in the mangled name (__Z15get_ttype_entryP16lsda_header_infoj)
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_	param_2	str	INFERRED	parameter type in the mangled name (__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_)
+local	__ZN5TType7setTypeE10TBasicTypeibbi	param_2	basicType	INFERRED	parameter type in the mangled name (__ZN5TType7setTypeE10TBasicTypeibbi)
+local	__ZN5TType7setTypeE10TBasicTypeibPS_	param_2	basicType	INFERRED	parameter type in the mangled name (__ZN5TType7setTypeE10TBasicTypeibPS_)
+local	__ZN5TType7setTypeE10TBasicTypeibPS_	param_5	type	INFERRED	parameter type in the mangled name (__ZN5TType7setTypeE10TBasicTypeibPS_)
+local	__ZNKSbIcSt11char_traitsIcE14pool_allocatorIcEE7compareEPKc	param_2	str	INFERRED	parameter type in the mangled name (__ZNKSbIcSt11char_traitsIcE14pool_allocatorIcEE7compareEPKc)
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm	param_2	str	INFERRED	parameter type in the mangled name (__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm)
+local	_PPEmulatorInit	param_1	emulator	INFERRED	dereferenced as the PPEmulator object (2 field accesses); every PPEmulator* function takes it first
+local	_PPParserMacroSetParamStringsCount	param_1	macro	INFERRED	dereferenced as the PPParser object (2 field accesses); every PPParser* function takes it first
+local	_PPParserMacroSetParamString	param_1	macro	INFERRED	dereferenced as the PPParser object (3 field accesses); every PPParser* function takes it first
+local	_PPParserScopeAddMacro	param_1	scope	INFERRED	dereferenced as the PPParser object (7 field accesses); every PPParser* function takes it first
+local	_PPParserAddScope	param_1	parser	INFERRED	dereferenced as the PPParser object (8 field accesses); every PPParser* function takes it first
+local	_PPParserAttachString	param_1	parser	INFERRED	dereferenced as the PPParser object (13 field accesses); every PPParser* function takes it first
+local	_PPParserAttachStream	param_1	parser	INFERRED	dereferenced as the PPParser object (4 field accesses); every PPParser* function takes it first
+local	_PPParserScopeAttachStream	param_1	scope	INFERRED	dereferenced as the PPParser object (3 field accesses); every PPParser* function takes it first
+local	_PPParserParse	param_1	parser	INFERRED	dereferenced as the PPParser object (4 field accesses); every PPParser* function takes it first
+local	_PPParserParseVersion	param_1	parser	INFERRED	dereferenced as the PPParser object (5 field accesses); every PPParser* function takes it first
+local	_PPParserGetPart	param_1	parser	INFERRED	dereferenced as the PPParser object (16 field accesses); every PPParser* function takes it first
+local	_PPParserGetCharacter	param_1	parser	INFERRED	dereferenced as the PPParser object (11 field accesses); every PPParser* function takes it first
+local	_PPParserParseOptionIdentifier	param_1	parser	INFERRED	dereferenced as the PPParser object (40 field accesses); every PPParser* function takes it first
+local	_PPStreamChunkListAddChunk	param_1	chunkList	INFERRED	dereferenced as the PPStream object (9 field accesses); every PPStream* function takes it first
+local	_PPParserReturnCharacter	param_1	parser	INFERRED	dereferenced as the PPParser object (9 field accesses); every PPParser* function takes it first
+local	_PPParserParseStatement	param_1	parser	INFERRED	dereferenced as the PPParser object (9 field accesses); every PPParser* function takes it first
+local	_PPParserParseParameterDeclaration	param_1	parser	INFERRED	dereferenced as the PPParser object (2 field accesses); every PPParser* function takes it first
+local	_PPParserValidateName	param_1	parser	INFERRED	dereferenced as the PPParser object (8 field accesses); every PPParser* function takes it first
+local	_PPParserIdentifierSetName	param_1	identifier	INFERRED	dereferenced as the PPParser object (5 field accesses); every PPParser* function takes it first
+local	_PPParserScopeAddIdentifier	param_1	scope	INFERRED	dereferenced as the PPParser object (9 field accesses); every PPParser* function takes it first
+local	_PPParserScopeFindIdentifier	param_1	scope	INFERRED	dereferenced as the PPParser object (2 field accesses); every PPParser* function takes it first
+local	_PPParserParseParamBinding	param_1	parser	INFERRED	dereferenced as the PPParser object (34 field accesses); every PPParser* function takes it first
+local	_PPParserParseAttributeDeclaration	param_1	parser	INFERRED	dereferenced as the PPParser object (2 field accesses); every PPParser* function takes it first
+local	_PPParserParseAttributeBinding	param_1	parser	INFERRED	dereferenced as the PPParser object (11 field accesses); every PPParser* function takes it first
+local	_PPParserParseOutputDeclaration	param_1	parser	INFERRED	dereferenced as the PPParser object (2 field accesses); every PPParser* function takes it first
+local	_PPParserParseOutputBinding	param_1	parser	INFERRED	dereferenced as the PPParser object (10 field accesses); every PPParser* function takes it first
+local	_PPParserParseOperation	param_1	parser	INFERRED	dereferenced as the PPParser object (8 field accesses); every PPParser* function takes it first
+local	_PPParserParseDestination	param_1	parser	INFERRED	dereferenced as the PPParser object (3 field accesses); every PPParser* function takes it first
+local	_PPParserParseSwizzleSourceVar	param_1	parser	INFERRED	dereferenced as the PPParser object (2 field accesses); every PPParser* function takes it first
+local	_PPParserParseSourceVar	param_1	parser	INFERRED	dereferenced as the PPParser object (4 field accesses); every PPParser* function takes it first
+local	_PPStreamAttribBindingIsEqual	param_1	chunkBinding	INFERRED	dereferenced as the PPStream object (3 field accesses); every PPStream* function takes it first
+local	_PPStreamOutputBindingIsEqual	param_1	chunkBinding	INFERRED	dereferenced as the PPStream object (3 field accesses); every PPStream* function takes it first
+local	_PPStreamParamBindingIsEqual	param_1	chunkBinding	INFERRED	dereferenced as the PPStream object (3 field accesses); every PPStream* function takes it first
+local	_PPStreamChunkListGetStream	param_1	chunkList	INFERRED	dereferenced as the PPStream object (3 field accesses); every PPStream* function takes it first
+local	_PPStreamChunkGetStream	param_1	outEntry	INFERRED	dereferenced as the PPStream object (5 field accesses); every PPStream* function takes it first
+local	_PPStreamChunkListCreateFromChunkList	param_1	sourceList	INFERRED	dereferenced as the PPStream object (2 field accesses); every PPStream* function takes it first
+local	_PPStreamChunkCreateFromChunk	param_1	chunk	INFERRED	dereferenced as the PPStream object (4 field accesses); every PPStream* function takes it first
+local	_PPStreamChunkListSort	param_1	chunkList	INFERRED	dereferenced as the PPStream object (5 field accesses); every PPStream* function takes it first
+local	_PPStreamAttachOperationsChunkList	param_1	stream	INFERRED	dereferenced as the PPStream object (2 field accesses); every PPStream* function takes it first
+local	_PPStreamChunkListFree	param_1	chunkList	INFERRED	dereferenced as the PPStream object (3 field accesses); every PPStream* function takes it first
+local	_PPStreamChunkListRemoveChunk	param_1	chunkList	INFERRED	dereferenced as the PPStream object (5 field accesses); every PPStream* function takes it first
+local	_PPStreamAttachParamBindingsChunkList	param_1	stream	INFERRED	dereferenced as the PPStream object (2 field accesses); every PPStream* function takes it first
+local	_PPStreamAttachParamBindingArraysChunkList	param_1	stream	INFERRED	dereferenced as the PPStream object (2 field accesses); every PPStream* function takes it first
+local	_PPStreamGetStream	param_1	stream	INFERRED	dereferenced as the PPStream object (35 field accesses); every PPStream* function takes it first
+local	_PPStreamChunkListGetMaxIndex	param_1	chunkList	INFERRED	dereferenced as the PPStream object (2 field accesses); every PPStream* function takes it first
+local	_PPEmulatorProgramInitialiseHandleBanks	param_1	bank	INFERRED	dereferenced as the PPEmulator object (11 field accesses); every PPEmulator* function takes it first
+local	_PPEmulatorProgramConvertFromPPStream	param_1	emulator	INFERRED	dereferenced as the PPEmulator object (68 field accesses); every PPEmulator* function takes it first
+local	_PPStreamChunkListChunkAtIndex	param_1	chunkList	INFERRED	dereferenced as the PPStream object (2 field accesses); every PPStream* function takes it first
+local	_PPParserShutdown	param_1	parser	INFERRED	dereferenced as the PPParser object (2 field accesses); every PPParser* function takes it first
+local	_PPParserRemoveScope	param_1	parser	INFERRED	dereferenced as the PPParser object (2 field accesses); every PPParser* function takes it first
+local	_PPParserScopeFree	param_1	scope	INFERRED	dereferenced as the PPParser object (5 field accesses); every PPParser* function takes it first
+local	_PPParserScopeRemoveIdentifier	param_1	scope	INFERRED	dereferenced as the PPParser object (3 field accesses); every PPParser* function takes it first
+local	_PPParserScopeRemoveMacro	param_1	scope	INFERRED	dereferenced as the PPParser object (2 field accesses); every PPParser* function takes it first
+local	_PPParserMacroFree	param_1	macro	INFERRED	dereferenced as the PPParser object (8 field accesses); every PPParser* function takes it first
+local	_PPParserParseTempDeclaration	param_1	parser	INFERRED	dereferenced as the PPParser object (8 field accesses); every PPParser* function takes it first
+local	_PPParserParseTextureSourceVar	param_1	parser	INFERRED	dereferenced as the PPParser object (7 field accesses); every PPParser* function takes it first
+local	_PPEmulatorFree	param_1	emulator	INFERRED	dereferenced as the PPEmulator object (2 field accesses); every PPEmulator* function takes it first
+local	_PPStreamFree	param_1	stream	INFERRED	dereferenced as the PPStream object (12 field accesses); every PPStream* function takes it first
+local	_PPEmulatorProgramFree	param_1	emulator	INFERRED	dereferenced as the PPEmulator object (15 field accesses); every PPEmulator* function takes it first
+local	_PPParserParseAliasDeclaration	param_1	parser	INFERRED	dereferenced as the PPParser object (5 field accesses); every PPParser* function takes it first
+local	_PPParserMacroGetReplaceString	param_1	macro	INFERRED	dereferenced as the PPParser object (6 field accesses); every PPParser* function takes it first
+local	_HashString	cVar1	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar1 != '\0')`
+local	_HashString2	cVar3	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar3 != '\0')`
+local	yy_scan_string	cVar1	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar1 != '\0')`
+local	scpy	cVar1	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar1 != '\0')`
+local	ParseSymbol__ChangeArrayNameForArrayIndex	cVar1	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar1 != '\0')`
+local	ParseSymbolTable__GetString	cVar9	kindFilter	CONFIRMED	current character of the inlined strcpy: `while (cVar9 != '\0')`
+local	_PPCRuntimeCompilerInitialise	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (4 field accesses); every PPCRuntimeCompiler* function takes it first
+local	_PPCRuntimeCompilerInitialiseRegisterAllocator	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (5 field accesses); every PPCRuntimeCompiler* function takes it first
+local	_PPCRuntimeCompilerInitialiseVariableInfo	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (10 field accesses); every PPCRuntimeCompiler* function takes it first
+local	_PPCRuntimeCompilerFree	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (5 field accesses); every PPCRuntimeCompiler* function takes it first
+local	_PPCRuntimeCompilerSetOptionFlags	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (2 field accesses); every PPCRuntimeCompiler* function takes it first
+local	_PPCRuntimeCompilerCalculateIndirectAddress	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (9 field accesses); every PPCRuntimeCompiler* function takes it first
+local	_PPCRuntimeCompilerLoadRegister	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (48 field accesses); every PPCRuntimeCompiler* function takes it first
+local	_PPCRuntimeCompilerBackupRegister	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (76 field accesses); every PPCRuntimeCompiler* function takes it first
+local	_PPCRuntimeCompilerSaveRegisterToMemory	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (35 field accesses); every PPCRuntimeCompiler* function takes it first
+local	_PPCRuntimeCompilerSetRegister	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (4 field accesses); every PPCRuntimeCompiler* function takes it first
+local	_PPCRuntimeCompilerBuildTransferSwizzle	param_1	swizzleOut	INFERRED	first parameter is the 4-byte output array, not the compiler
+local	_PPCRuntimeCompilerSwizzleRegisterAV	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (50 field accesses); every PPCRuntimeCompiler* function takes it first
+local	_PPCRuntimeCompilerFindVariableInfo	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (3 field accesses); every PPCRuntimeCompiler* function takes it first
+local	_PPCRuntimeCompilerLoadSourceNO	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (6 field accesses); every PPCRuntimeCompiler* function takes it first
+local	_PPCRuntimeCompilerLoadSourceAV	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (3 field accesses); every PPCRuntimeCompiler* function takes it first
+local	_PPCRuntimeCompilerWriteDestinationNO	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (4 field accesses); every PPCRuntimeCompiler* function takes it first
+local	_PPCRuntimeCompilerWriteDestinationAV	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (14 field accesses); every PPCRuntimeCompiler* function takes it first
+local	_PPCRuntimeCompilerTestConditionRegisterAV	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (22 field accesses); every PPCRuntimeCompiler* function takes it first
+local	_PPCRuntimeCompilerWriteFinalFragmentToBuffer	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (29 field accesses); every PPCRuntimeCompiler* function takes it first
+local	_PPCRuntimeCompilerWritePrologNO	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (39 field accesses); every PPCRuntimeCompiler* function takes it first
+local	_PPCRuntimeCompilerWriteEpilogNO	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (14 field accesses); every PPCRuntimeCompiler* function takes it first
+local	_PPCRuntimeCompilerWritePrologAV	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (52 field accesses); every PPCRuntimeCompiler* function takes it first
+local	_PPCRuntimeCompilerWriteEpilogAV	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (10 field accesses); every PPCRuntimeCompiler* function takes it first
+local	_PPCRuntimeCompilerStride	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (26 field accesses); every PPCRuntimeCompiler* function takes it first
+local	_PPCRuntimeCompilerLoop	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (4 field accesses); every PPCRuntimeCompiler* function takes it first
+local	_PPCRuntimeCompilerCompileNO	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (232 field accesses); every PPCRuntimeCompiler* function takes it first
+local	_PPEmulatorGetEmulationLevel	param_1	emulator	INFERRED	dereferenced as the PPEmulator object (2 field accesses); every PPEmulator* function takes it first
+local	_PPEmulatorFramebufferFormat	param_1	emulator	INFERRED	dereferenced as the PPEmulator object (2 field accesses); every PPEmulator* function takes it first
+local	_PPEmulatorRun	param_1	emulator	INFERRED	dereferenced as the PPEmulator object (2 field accesses); every PPEmulator* function takes it first
+local	_PPEmulatorBuild	param_1	emulator	INFERRED	dereferenced as the PPEmulator object (2 field accesses); every PPEmulator* function takes it first
+local	_PPEmulatorVariableSwizzleFromMask	param_1	emulator	INFERRED	dereferenced as the PPEmulator object (6 field accesses); every PPEmulator* function takes it first
+local	_PPEmulatorVariableMaskFromSwizzle	param_1	emulator	INFERRED	dereferenced as the PPEmulator object (4 field accesses); every PPEmulator* function takes it first
+local	_glpWriteSizeTypePrecision	cVar1	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar1 != '\0')`
+local	_glpWritePrecision	cVar1	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar1 != '\0')`
+local	_glpWriteOperandSize	cVar1	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar1 != '\0')`
+local	_glpWriteSizeType	cVar1	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar1 != '\0')`
+local	_glpWriteClampSat	cVar1	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar1 != '\0')`
+local	_glpWriteDestinationOperand_97be6730	cVar1	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar1 != '\0')`
+local	_glpWriteAddressOperand	cVar1	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar1 != '\0')`
+local	_glpWriteSourceOperandType	cVar1	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar1 != '\0')`
+local	_glpWriteSourceOperandSwizzle	cVar1	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar1 != '\0')`
+local	_glpWriteSourceOperandExtendedSwizzle	cVar1	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar1 != '\0')`
+local	_glpWriteSourceOperand_97be7fc0	cVar1	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar1 != '\0')`
+local	_glpWriteBranchOperand	cVar1	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar1 != '\0')`
+local	_glpWriteTextureOperand_97be8478	cVar1	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar1 != '\0')`
+local	_glpDisassemble1Op	cVar2	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar2 != '\0')`
+local	_PPStreamChunkCompare	param_1	chunk	CONFIRMED	_PPStreamChunk record (type byte at +0, prev +4, next +8, payload +0xc) compared by type-dependent payload size
+local	_PPStreamChunkListInsertChunkBeforeChunk	param_1	chunkList	CONFIRMED	_PPStreamChunkList header: head +0, tail +4, count +8 (stream[2] is incremented on insert)
+local	_PPStreamChunkListInsertChunkAfterChunk	param_1	chunkList	CONFIRMED	_PPStreamChunkList header: head +0, tail +4, count +8 (stream[2] is incremented on insert)
+local	_PPStreamChunkListRemoveChunkNoFree	param_1	chunkList	CONFIRMED	_PPStreamChunkList header: head +0, tail +4, count +8 (count decremented on removal)
+local	_PPStreamChunkListCompare	param_1	chunkList	CONFIRMED	_PPStreamChunkList header: head +0, count +8 compared, chunks walked through next (+8)
+local	_PPStreamDuplicate	param_1	stream	INFERRED	dereferenced as the PPStream object (14 field accesses); every PPStream* function takes it first
+local	_PPStreamInsertOperationBeforeChunk	param_1	stream	INFERRED	dereferenced as the PPStream object (2 field accesses); every PPStream* function takes it first
+local	_PPStreamInsertOperationAfterChunk	param_1	stream	INFERRED	dereferenced as the PPStream object (2 field accesses); every PPStream* function takes it first
+local	_PPStreamAddLabel	param_1	stream	INFERRED	dereferenced as the PPStream object (2 field accesses); every PPStream* function takes it first
+local	_PPStreamRemoveLabelsAtOperationIndex	param_1	stream	INFERRED	dereferenced as the PPStream object (2 field accesses); every PPStream* function takes it first
+local	_PPStreamAttachStream	param_1	stream	INFERRED	dereferenced as the PPStream object (13 field accesses); every PPStream* function takes it first
+local	_PPStreamCompare	param_1	stream	INFERRED	dereferenced as the PPStream object (13 field accesses); every PPStream* function takes it first
+local	_PPStreamChangeBranchTargets	param_1	stream	INFERRED	dereferenced as the PPStream object (2 field accesses); every PPStream* function takes it first
+local	_PPStreamPackIndices	param_1	stream	INFERRED	dereferenced as the PPStream object (12 field accesses); every PPStream* function takes it first
+local	_PPStreamSortParamConstants	param_1	stream	INFERRED	dereferenced as the PPStream object (4 field accesses); every PPStream* function takes it first
+local	_PPStreamResolveBranches	param_1	stream	INFERRED	dereferenced as the PPStream object (2 field accesses); every PPStream* function takes it first
+local	_PPStreamGetArray	param_1	stream	INFERRED	dereferenced as the PPStream object (2 field accesses); every PPStream* function takes it first
+local	_PPStreamFindDuplicateChunk	param_1	stream	INFERRED	dereferenced as the PPStream object (12 field accesses); every PPStream* function takes it first
+local	_PPStreamRemoveOperation	param_1	stream	INFERRED	dereferenced as the PPStream object (3 field accesses); every PPStream* function takes it first
+local	_glpSourceSign	cVar1	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar1 != '\0')`
+local	_glpSourceType	cVar1	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar1 != '\0')`
+local	_glpSourceComponents	cVar1	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar1 != '\0')`
+local	_glpWriteComponentsWithDestinationSwizzle	cVar1	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar1 != '\0')`
+local	_glpWriteDestinationMask	cVar2	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar2 != '\0')`
+local	_glpWriteDestinationOperand_97bf3658	cVar1	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar1 != '\0')`
+local	_glpWriteTextureOperand_97bf37b4	cVar1	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar1 != '\0')`
+local	_BitSetClone	param_1	bitSet	INFERRED	dereferenced as the BitSet object (2 field accesses); every BitSet* function takes it first
+local	_BitSetGetSizeInBits	param_1	bitSet	INFERRED	dereferenced as the BitSet object (2 field accesses); every BitSet* function takes it first
+local	_BitSetSetEquals	param_1	bitSet	INFERRED	dereferenced as the BitSet object (2 field accesses); every BitSet* function takes it first
+local	_BitSetClearEquals	param_1	bitSet	INFERRED	dereferenced as the BitSet object (2 field accesses); every BitSet* function takes it first
+local	_BitSetSetRangeEqualsInternal	param_1	bitSet	INFERRED	dereferenced as the BitSet object (4 field accesses); every BitSet* function takes it first
+local	_BitSetExpandEquals	param_1	bitSet	INFERRED	dereferenced as the BitSet object (2 field accesses); every BitSet* function takes it first
+local	_BitSetSetSizeEquals	param_1	bitSet	INFERRED	dereferenced as the BitSet object (7 field accesses); every BitSet* function takes it first
+local	_BitSetNextSetBit	param_1	bitSet	INFERRED	dereferenced as the BitSet object (5 field accesses); every BitSet* function takes it first
+local	_BitSetAndEquals	param_1	bitSet	INFERRED	dereferenced as the BitSet object (5 field accesses); every BitSet* function takes it first
+local	_BitSetAndNotEquals	param_1	bitSet	INFERRED	dereferenced as the BitSet object (5 field accesses); every BitSet* function takes it first
+local	_BitSetOrEquals	param_1	bitSet	INFERRED	dereferenced as the BitSet object (5 field accesses); every BitSet* function takes it first
+local	_BitSetXorEquals	param_1	bitSet	INFERRED	dereferenced as the BitSet object (5 field accesses); every BitSet* function takes it first
+local	_BitSetCopyEquals	param_1	bitSet	INFERRED	dereferenced as the BitSet object (4 field accesses); every BitSet* function takes it first
+local	_BitSetEqualsTest	param_1	bitSet	INFERRED	dereferenced as the BitSet object (3 field accesses); every BitSet* function takes it first
+local	_BitSetAndTest	param_1	bitSet	INFERRED	dereferenced as the BitSet object (3 field accesses); every BitSet* function takes it first
+local	_BitSetAndNotTest	param_1	bitSet	INFERRED	dereferenced as the BitSet object (3 field accesses); every BitSet* function takes it first
+local	_BitSetOrTest	param_1	bitSet	INFERRED	dereferenced as the BitSet object (3 field accesses); every BitSet* function takes it first
+local	_BitSetXorTest	param_1	bitSet	INFERRED	dereferenced as the BitSet object (3 field accesses); every BitSet* function takes it first
+local	_HashSetFree	param_1	hashSet	INFERRED	dereferenced as the HashSet object (6 field accesses); every HashSet* function takes it first
+local	_HashSetAdd	param_1	hashSet	INFERRED	dereferenced as the HashSet object (6 field accesses); every HashSet* function takes it first
+local	_HashSetGet	param_1	hashSet	INFERRED	dereferenced as the HashSet object (6 field accesses); every HashSet* function takes it first
+local	_HashSetRemove	param_1	hashSet	INFERRED	dereferenced as the HashSet object (6 field accesses); every HashSet* function takes it first
+local	_HashSetIteratorNext	param_1	iterator	INFERRED	dereferenced as the HashSet object (9 field accesses); every HashSet* function takes it first
+local	_HashTableFree	param_1	hashTable	INFERRED	dereferenced as the HashTable object (3 field accesses); every HashTable* function takes it first
+local	_HashTableAdd	param_1	hashTable	INFERRED	dereferenced as the HashTable object (2 field accesses); every HashTable* function takes it first
+local	_HashTableGet	param_1	hashTable	INFERRED	dereferenced as the HashTable object (2 field accesses); every HashTable* function takes it first
+local	_HashTableRemove	param_1	hashTable	INFERRED	dereferenced as the HashTable object (2 field accesses); every HashTable* function takes it first
+local	_PPParserMacroCreateFromMacro	param_1	sourceMacro	INFERRED	dereferenced as the PPParser object (9 field accesses); every PPParser* function takes it first
+local	_PPParserIdentifierCreateFromIdentifier	param_1	sourceIdentifier	INFERRED	dereferenced as the PPParser object (7 field accesses); every PPParser* function takes it first
+local	_PPParserScopeCreateFromScope	param_1	sourceScope	INFERRED	dereferenced as the PPParser object (6 field accesses); every PPParser* function takes it first
+local	_PPParserInherit	param_1	parser	INFERRED	dereferenced as the PPParser object (5 field accesses); every PPParser* function takes it first
+local	_PPParserParseIndirectArray	param_1	parser	INFERRED	dereferenced as the PPParser object (3 field accesses); every PPParser* function takes it first
+local	_PPParserParseAddressDeclaration	param_1	parser	INFERRED	dereferenced as the PPParser object (8 field accesses); every PPParser* function takes it first
+local	_PPParserParseLabel	param_1	parser	INFERRED	dereferenced as the PPParser object (3 field accesses); every PPParser* function takes it first
+local	_PPParserParseAddressDestination	param_1	parser	INFERRED	dereferenced as the PPParser object (5 field accesses); every PPParser* function takes it first
+local	_PPParserParseBranchCondition	param_1	parser	INFERRED	dereferenced as the PPParser object (2 field accesses); every PPParser* function takes it first
+local	_PPParserParseMacroDeclaration	param_1	parser	INFERRED	dereferenced as the PPParser object (13 field accesses); every PPParser* function takes it first
+local	_PPParserExpandMacro	param_1	parser	INFERRED	dereferenced as the PPParser object (11 field accesses); every PPParser* function takes it first
+local	_PPParserBuildErrorString	param_1	parser	INFERRED	dereferenced as the PPParser object (3 field accesses); every PPParser* function takes it first
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	piVar7	symbol	INFERRED	0x40-byte object from TPoolAllocator::allocate, vtable set to the TSymbol-family vtable and inserted into the symbol table, once per built-in
+local	_EmulateOp	param_2	inst	INFERRED	instruction record: [3..] operands, +0x10/+0x14 packed flags, passed to _GetValidArgs
+local	_EmulateOp	param_3	hashSet	CONFIRMED	first argument of _HashSetGet/_HashSetAdd
+local	_EmulateOp	local_d0	operandIds	INFERRED	operand register ids (from *(ushort*)(operand+0x16)) added to the hash set; [0..2] sources, [3] destination, [4] scratch
+local	_EmulateOp	pfVar22	src0	INFERRED	float vector of operand local_d0[0] (record + 0x18), 0 when the operand has no value
+local	_EmulateOp	pfVar19	src1	INFERRED	float vector of operand local_d0[1]
+local	_EmulateOp	pfVar15	src2	INFERRED	float vector of operand local_d0[2]
+local	TParseContext__executeInitializer	param_2	line	CONFIRMED	passed as the line argument of reservedErrorCheck/voidErrorCheck/addAssign
+local	TParseContext__executeInitializer	param_3	identifier	CONFIRMED	second argument of TParseContext__reservedErrorCheck(this, line, identifier)
+local	TParseContext__executeInitializer	param_4	publicType	INFERRED	third argument of voidErrorCheck(this, line, identifier, publicType); fields +0x14/+0x18 read
+local	TParseContext__executeInitializer	param_5	initializer	CONFIRMED	right-hand side of TIntermediate__addAssign(.., symbol, param_5, line) and TType__getCompleteString(param_5 + 8)
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	pTVar6	poolAllocator	CONFIRMED	every assignment is GetGlobalPoolAllocator() (14)
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	pTVar5	poolAllocator	CONFIRMED	every assignment is GetGlobalPoolAllocator() (2)
+local	TIntermediate__setAggregateOperator	pTVar5	poolAllocator	CONFIRMED	every assignment is GetGlobalPoolAllocator() (2)
+local	TIntermediate__addConversion	pTVar9	poolAllocator	CONFIRMED	every assignment is GetGlobalPoolAllocator() (2)
+local	TIntermediate__addSwizzle	pTVar5	poolAllocator	CONFIRMED	every assignment is GetGlobalPoolAllocator() (2)
+local	TIntermConstantUnion__fold	pTVar16	poolAllocator	CONFIRMED	every assignment is GetGlobalPoolAllocator() (33)
+local	__ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__gnu_cxx17__normal_iteratorIPS2_St6vectorIS2_14pool_allocatorIS2_EEEEP16TIntermAggregate	pTVar10	poolAllocator	CONFIRMED	every assignment is GetGlobalPoolAllocator() (2)
+local	TIntermediate__removeMatrixConstNode	pTVar9	poolAllocator	CONFIRMED	every assignment is GetGlobalPoolAllocator() (2)
+local	__ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	pTVar5	poolAllocator	CONFIRMED	every assignment is GetGlobalPoolAllocator() (2)
+local	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	pTVar5	poolAllocator	CONFIRMED	every assignment is GetGlobalPoolAllocator() (2)
+local	__ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	pTVar5	poolAllocator	CONFIRMED	every assignment is GetGlobalPoolAllocator() (2)
+local	TSymbolTableLevel__clone	pTVar3	poolAllocator	CONFIRMED	every assignment is GetGlobalPoolAllocator() (2)
+local	yyparse	pTVar17	poolAllocator	CONFIRMED	every assignment is GetGlobalPoolAllocator() (49)
+local	yylex	pTVar6	poolAllocator	CONFIRMED	every assignment is GetGlobalPoolAllocator() (2)
+local	TIntermBinary__compileNode	param_2	compiler	INFERRED	dereferenced as the stream compiler (+0x70 stream passed to _PPStreamAddLabel, +0x90 result slot); 7 field accesses
+local	TIntermUnary__compileNode	param_2	compiler	INFERRED	dereferenced as the stream compiler (+0x70 stream passed to _PPStreamAddLabel, +0x90 result slot); 3 field accesses
+local	TIntermAggregate__compileNode	param_2	compiler	INFERRED	dereferenced as the stream compiler (+0x70 stream passed to _PPStreamAddLabel, +0x90 result slot); 28 field accesses
+local	TIntermSelection__compileNode	param_2	compiler	INFERRED	dereferenced as the stream compiler (+0x70 stream passed to _PPStreamAddLabel, +0x90 result slot); 6 field accesses
+local	TIntermLoop__compileNode	param_2	compiler	INFERRED	dereferenced as the stream compiler (+0x70 stream passed to _PPStreamAddLabel, +0x90 result slot); 9 field accesses
+local	TIntermBranch__compileNode	param_2	compiler	INFERRED	dereferenced as the stream compiler (+0x70 stream passed to _PPStreamAddLabel, +0x90 result slot); 6 field accesses
+local	TType__copyType	pTVar8	poolAllocator	CONFIRMED	every assignment is GetGlobalPoolAllocator() (5)

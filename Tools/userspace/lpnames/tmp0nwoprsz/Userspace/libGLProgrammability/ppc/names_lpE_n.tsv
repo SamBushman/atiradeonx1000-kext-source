@@ -1,0 +1,24 @@
+local	TPPStreamCompiler__constructFromOperand	param_4	argCount	CONFIRMED	number of arguments available
+local	TPPStreamCompiler__constructFromOperand	sVar2	symbolGlType	CONFIRMED	OpenGL type (+0x2c) of the destination symbol: 0x7ffe struct, 0x7fff array, else a basic or matrix type switched on
+local	TPPStreamCompiler__constructFromOperand	iVar16	consumedArgs	CONFIRMED	number of arguments consumed so far; returned to the caller
+local	TPPStreamCompiler__constructFromOperand	local_58	parentName	CONFIRMED	destination symbol +0x14: the struct's name, the prefix of every field symbol name
+local	TPPStreamCompiler__constructFromOperand	bVar1	noParentName	CONFIRMED	parentName is NULL, so the field name alone becomes the child symbol name
+local	TPPStreamCompiler__constructFromOperand	local_60	childOperandSlot	CONFIRMED	slot holding the child operand of the current struct field, passed as destination to the recursive call
+local	TPPStreamCompiler__constructFromOperand	local_5c	elemOperandSlot	CONFIRMED	slot holding the child operand of the current array element, passed as destination to the recursive call
+local	TPPStreamCompiler__constructFromOperand	acStack_70	indexSuffix	CONFIRMED	sprintf buffer holding the [i] suffix passed to ParseSymbol__CatName
+local	TPPStreamCompiler__constructFromOperand	pPVar7	childSymbol	CONFIRMED	new ParseSymbol of the child (struct field or array element)
+local	TPPStreamCompiler__constructFromOperand	ppPVar8	argFieldOperands	CONFIRMED	malloc'd array of one operand per field of a struct-typed argument
+local	TPPStreamCompiler__constructFromOperand	uVar14	fieldIndex	CONFIRMED	index of the destination struct field being built
+local	TPPStreamCompiler__constructFromOperand	piVar4	fieldType	CONFIRMED	TType* of the field (TTypeLine at structFieldList +4 plus index*8); vtable slot 0x1c = getFieldName
+local	TPPStreamCompiler__constructFromOperand	this_00	argFieldSymbol	CONFIRMED	new ParseSymbol of one field of a struct-typed argument
+local	TPPStreamCompiler__constructFromOperand	this_01	fieldSymbolToFree	CONFIRMED	symbol of a struct/array argument field destroyed after the recursive call
+local	TPPStreamCompiler__constructFromOperand	uVar17	cleanupIndex	CONFIRMED	index over argFieldOperands while they are destroyed
+local	TPPStreamCompiler__constructFromOperand	uVar20	callResult	INFERRED	64-bit pair returned by the recursive call: low word leftover register, high word the number of arguments it consumed
+use	TPPStreamCompiler__constructFromOperand	iVar15	argIndex	CONFIRMED	index of the next argument in argOperands for the array path (0 at start)	iVar15 = 0;	iVar15 = \*\(int \*\)\(\*\(int \*\)\(iVar3 \+ 0xc\) \+ 8\);
+use	TPPStreamCompiler__constructFromOperand	iVar15	structFieldList	CONFIRMED	TTypeList* of the destination's struct type (parse-tree type +8): begin at +4, end at +8, 8-byte entries	iVar15 = \*\(int \*\)\(\*\(int \*\)\(iVar3 \+ 0xc\) \+ 8\);	else if \(sVar2 == 0x7fff\)
+use	TPPStreamCompiler__constructFromOperand	iVar15	argIndex	CONFIRMED	index of the next argument in argOperands for the array path	else if \(sVar2 == 0x7fff\)	
+use	TPPStreamCompiler__constructFromOperand	iVar5	argParentName	CONFIRMED	argument symbol +0x14: the name prefix for the argument's field operands	iVar5 = \*\(int \*\)\(iVar3 \+ 0x14\);	
+use	TPPStreamCompiler__constructFromOperand	uVar13	fieldCount	CONFIRMED	number of fields of the destination struct: (end - begin) >> 3	uVar13 = \*\(int \*\)\(iVar15 \+ 8\) - iVar3 >> 3;	uVar13 = 0;
+use	TPPStreamCompiler__constructFromOperand	uVar13	elemIndex	CONFIRMED	array element being built, counts up to the array size (symbol +0x2e)	uVar13 = 0;	
+use	TPPStreamCompiler__constructFromOperand	uVar18	fieldNameChars	CONFIRMED	character pointer (TString +4) of the field name	uVar18 = \*\(uint \*\)\(iVar3 \+ 4\);	uVar18 = \*\(int \*\)\(iVar3 \+ 8\) - \*\(int \*\)\(iVar3 \+ 4\) >> 3;
+use	TPPStreamCompiler__constructFromOperand	uVar18	argFieldCount	CONFIRMED	number of fields of the struct-typed argument	uVar18 = \*\(int \*\)\(iVar3 \+ 8\) - \*\(int \*\)\(iVar3 \+ 4\) >> 3;	

@@ -295,33 +295,33 @@ int ParseSymbolTable__processOperand(this, parseOperand)
   unsigned char * this;
   unsigned char * parseOperand;
 {
-  bool bVar1;
-  unsigned char * pPVar2;
-  int iVar3;
-  unsigned char * this_00;
+  bool noSymbol;
+  unsigned char *tableSymbol;
+  int builtinSwizzle;
+  unsigned char * operandSymbol;
   
   if (((parseOperand != (unsigned char *)0x0) &&
-      (this_00 = *(unsigned char **)parseOperand, this_00 != (unsigned char *)0x0)) &&
-     (*(int *)(this_00 + 0x50) == 0)) {
-    if (*(int *)(this_00 + 0x48) == 0) {
-      *(undefined2 *)(this_00 + 0x30) = 0;
+      (operandSymbol = *(unsigned char **)parseOperand, operandSymbol != (unsigned char *)0x0)) &&
+     (*(int *)(operandSymbol + 0x50) == 0)) {
+    if (*(int *)(operandSymbol + 0x48) == 0) {
+      *(undefined2 *)(operandSymbol + 0x30) = 0;
     }
     else {
-      ParseSymbol__SetArrayPositionFromLastIndex(this_00);
+      ParseSymbol__SetArrayPositionFromLastIndex(operandSymbol);
     }
-    pPVar2 = (unsigned char *)((int (*)())ParseSymbolTable__FindSymbol)(this,this_00);
-    if (pPVar2 == (unsigned char *)0x0) {
-      pPVar2 = (unsigned char *)((int (*)())ParseSymbolTable__InsertSymbol)(this,this_00);
-      bVar1 = pPVar2 == (unsigned char *)0x0;
+    tableSymbol = (unsigned char *)((int (*)())ParseSymbolTable__FindSymbol)(this,operandSymbol);
+    if (tableSymbol == (unsigned char *)0x0) {
+      tableSymbol = (unsigned char *)((int (*)())ParseSymbolTable__InsertSymbol)(this,operandSymbol);
+      noSymbol = tableSymbol == (unsigned char *)0x0;
     }
     else {
-      __ZN11ParseSymbolD1Ev(this_00);
-      __ZdlPv(this_00);
-      bVar1 = false;
+      __ZN11ParseSymbolD1Ev(operandSymbol);
+      __ZdlPv(operandSymbol);
+      noSymbol = false;
     }
-    if (((!bVar1) && (*(unsigned char **)parseOperand = pPVar2, *(int *)(pPVar2 + 0x34) != 0)) &&
-       (iVar3 = GetBuiltInInitialSwizzle(pPVar2), iVar3 != 0)) {
-      ParseOperand__AddSwizzle(parseOperand,(uchar)iVar3);
+    if (((!noSymbol) && (*(unsigned char **)parseOperand = tableSymbol, *(int *)(tableSymbol + 0x34) != 0)) &&
+       (builtinSwizzle = GetBuiltInInitialSwizzle(tableSymbol), builtinSwizzle != 0)) {
+      ParseOperand__AddSwizzle(parseOperand,(uchar)builtinSwizzle);
       return;
     }
   }
@@ -333,32 +333,33 @@ int ParseSymbolTable__AddSymbol(this, parseSymbol)
   unsigned char * this;
   unsigned char * parseSymbol;
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
+  int lastInBucket;
+  int bucketOffset;
+  int chainNext;
+  int buckets;
   
   if (*(int *)(this + 4) == 0) {
     *(unsigned char **)this = parseSymbol;
-    iVar3 = *(int *)(this + 8);
-    iVar1 = (*(uint *)(parseSymbol + 0x1c) -
+    buckets = *(int *)(this + 8);
+    bucketOffset = (*(uint *)(parseSymbol + 0x1c) -
             (*(uint *)(parseSymbol + 0x1c) / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10)) * 4;
   }
   else {
     *(unsigned char **)(*(int *)(this + 4) + 8) = parseSymbol;
-    iVar3 = *(int *)(this + 8);
-    iVar1 = (*(uint *)(parseSymbol + 0x1c) -
+    buckets = *(int *)(this + 8);
+    bucketOffset = (*(uint *)(parseSymbol + 0x1c) -
             (*(uint *)(parseSymbol + 0x1c) / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10)) * 4;
-    iVar2 = *(int *)(iVar1 + iVar3);
-    if (*(int *)(iVar1 + iVar3) != 0) {
+    chainNext = *(int *)(bucketOffset + buckets);
+    if (*(int *)(bucketOffset + buckets) != 0) {
       do {
-        iVar1 = iVar2;
-        iVar2 = *(int *)(iVar1 + 4);
-      } while (iVar2 != 0);
-      *(unsigned char **)(iVar1 + 4) = parseSymbol;
+        lastInBucket = chainNext;
+        chainNext = *(int *)(lastInBucket + 4);
+      } while (chainNext != 0);
+      *(unsigned char **)(lastInBucket + 4) = parseSymbol;
       goto LAB_97bbc4f8;
     }
   }
-  *(unsigned char **)(iVar1 + iVar3) = parseSymbol;
+  *(unsigned char **)(bucketOffset + buckets) = parseSymbol;
 LAB_97bbc4f8:
   *(unsigned char **)(this + 4) = parseSymbol;
   *(int *)(this + 0x14) = *(int *)(this + 0x14) + 1;
@@ -625,39 +626,39 @@ LAB_97bbc984:
 int ParseSymbolTable__FinishArrayAddition(this)
   unsigned char * this;
 {
-  byte bVar1;
-  short sVar2;
-  int iVar3;
-  int iVar4;
+  byte chunkKind;
+  short counterLow;
+  int arrayTrackingMode;
+  int firstChunk;
   
-  iVar3 = *(int *)(this + 0x50);
-  if (((iVar3 == 0) || (*(int *)(this + 0x40) != 0)) || (*(int *)(this + 0x44) == 0)) {
-    if (iVar3 != 0) {
+  arrayTrackingMode = *(int *)(this + 0x50);
+  if (((arrayTrackingMode == 0) || (*(int *)(this + 0x40) != 0)) || (*(int *)(this + 0x44) == 0)) {
+    if (arrayTrackingMode != 0) {
       return;
     }
     if (*(int *)(this + 0x44) == 0) {
       return;
     }
   }
-  bVar1 = **(byte **)(this + 0x48);
-  if (bVar1 != 2) {
-    if (bVar1 < 3) {
-      if ((bVar1 != 0) ||
-         (iVar4 = *(int *)(*(int *)(*(int *)(this + 0xc) + 8) + 4), *(short *)(iVar4 + 0x12) != 0))
+  chunkKind = **(byte **)(this + 0x48);
+  if (chunkKind != 2) {
+    if (chunkKind < 3) {
+      if ((chunkKind != 0) ||
+         (firstChunk = *(int *)(*(int *)(*(int *)(this + 0xc) + 8) + 4), *(short *)(firstChunk + 0x12) != 0))
       goto LAB_97bbcba4;
-      sVar2 = *(short *)(this + 0x3a);
+      counterLow = *(short *)(this + 0x3a);
     }
     else {
-      if ((bVar1 != 3) ||
-         (iVar4 = *(int *)(*(int *)(*(int *)(this + 0xc) + 0x14) + 4), *(short *)(iVar4 + 0x12) != 0
+      if ((chunkKind != 3) ||
+         (firstChunk = *(int *)(*(int *)(*(int *)(this + 0xc) + 0x14) + 4), *(short *)(firstChunk + 0x12) != 0
          )) goto LAB_97bbcba4;
-      sVar2 = *(short *)(this + 0x26);
+      counterLow = *(short *)(this + 0x26);
     }
-    *(short *)(iVar4 + 0x12) = sVar2 + -1;
-    iVar3 = *(int *)(this + 0x50);
+    *(short *)(firstChunk + 0x12) = counterLow + -1;
+    arrayTrackingMode = *(int *)(this + 0x50);
   }
 LAB_97bbcba4:
-  if (iVar3 == 0) {
+  if (arrayTrackingMode == 0) {
     *(undefined4 *)(this + 0x44) = 0;
     *(undefined4 *)(this + 0x40) = 0;
     return;
@@ -1267,28 +1268,28 @@ int ParseSymbolTable__FindNextParamSymbolByName(this, parseSymbol, str)
   char *str;
 {
   int length;
-  int iVar2;
-  int iVar3;
-  int iVar4;
+  int foundOrCompare;
+  int symbolName;
+  int symbolCursor;
   
-  iVar2 = 0;
+  foundOrCompare = 0;
   if (str != (char *)0x0) {
     length = _strlen(str);
     if (parseSymbol == (unsigned char *)0x0) {
-      iVar4 = *(int *)this;
+      symbolCursor = *(int *)this;
     }
     else {
-      iVar4 = *(int *)(parseSymbol + 8);
+      symbolCursor = *(int *)(parseSymbol + 8);
     }
-    while ((iVar2 = 0, iVar4 != 0 &&
-           (((iVar3 = *(int *)(iVar4 + 0x14), iVar3 == 0 ||
-             (iVar2 = _strncmp(str,iVar3,length), iVar2 != 0)) ||
-            ((iVar2 = iVar4, *(int *)(iVar4 + 0x20) != length &&
-             ((*(char *)(iVar3 + length) != '.' && (*(char *)(iVar3 + length) != '['))))))))) {
-      iVar4 = *(int *)(iVar4 + 8);
+    while ((foundOrCompare = 0, symbolCursor != 0 &&
+           (((symbolName = *(int *)(symbolCursor + 0x14), symbolName == 0 ||
+             (foundOrCompare = _strncmp(str,symbolName,length), foundOrCompare != 0)) ||
+            ((foundOrCompare = symbolCursor, *(int *)(symbolCursor + 0x20) != length &&
+             ((*(char *)(symbolName + length) != '.' && (*(char *)(symbolName + length) != '['))))))))) {
+      symbolCursor = *(int *)(symbolCursor + 8);
     }
   }
-  return iVar2;
+  return foundOrCompare;
 }
 
 /* ParseSymbolTable__RemoveSymbol @ 0x97bbda94 (600 bytes) */
@@ -1296,32 +1297,32 @@ int ParseSymbolTable__RemoveSymbol(this, parseSymbol)
   unsigned char * this;
   unsigned char * parseSymbol;
 {
-  byte bVar1;
-  unsigned char * pPVar2;
-  unsigned char * pPVar3;
-  unsigned char * pPVar4;
-  uint uVar5;
-  int iVar6;
-  uint uVar7;
-  byte *pbVar8;
+  byte chunkKind;
+  unsigned char *prevSymbol;
+  unsigned char *cursorSymbol;
+  unsigned char *curSymbol;
+  uint vec4Count;
+  int scalerWidth;
+  uint vec4Index;
+  byte *chunk;
   
-  uVar7 = 0;
-  uVar5 = GetVec4sForType((uint)*(ushort *)(parseSymbol + 0x2c));
-  pbVar8 = *(byte **)parseSymbol;
-  if (uVar5 != 0) {
+  vec4Index = 0;
+  vec4Count = GetVec4sForType((uint)*(ushort *)(parseSymbol + 0x2c));
+  chunk = *(byte **)parseSymbol;
+  if (vec4Count != 0) {
     do {
-      bVar1 = *pbVar8;
-      if (bVar1 == 2) {
+      chunkKind = *chunk;
+      if (chunkKind == 2) {
 LAB_97bbdb58:
         *(int *)(this + 0x18) = *(int *)(this + 0x18) + -1;
-        if ((*(uint *)(pbVar8 + 0xc) & 0xf0000) == 0x90000) {
+        if ((*(uint *)(chunk + 0xc) & 0xf0000) == 0x90000) {
           *(int *)(this + 0x1c) = *(int *)(this + 0x1c) + -1;
-          iVar6 = GetScalerWidthForType((uint)*(ushort *)(parseSymbol + 0x2c));
-          *(int *)(this + 0x20) = *(int *)(this + 0x20) - iVar6;
+          scalerWidth = GetScalerWidthForType((uint)*(ushort *)(parseSymbol + 0x2c));
+          *(int *)(this + 0x20) = *(int *)(this + 0x20) - scalerWidth;
         }
       }
-      else if (bVar1 < 3) {
-        if (bVar1 == 0) {
+      else if (chunkKind < 3) {
+        if (chunkKind == 0) {
           if (*(int *)(parseSymbol + 0x60) == 0) {
             if (*(int *)(parseSymbol + 0x5c) != 0) {
               *(int *)(this + 0x34) = *(int *)(this + 0x34) + -1;
@@ -1329,71 +1330,71 @@ LAB_97bbdb58:
           }
           else {
             *(int *)(this + 0x1c) = *(int *)(this + 0x1c) + -1;
-            iVar6 = GetScalerWidthForType((uint)*(ushort *)(parseSymbol + 0x2c));
-            *(int *)(this + 0x20) = *(int *)(this + 0x20) - iVar6;
+            scalerWidth = GetScalerWidthForType((uint)*(ushort *)(parseSymbol + 0x2c));
+            *(int *)(this + 0x20) = *(int *)(this + 0x20) - scalerWidth;
           }
           *(int *)(this + 0x38) = *(int *)(this + 0x38) + -1;
           goto LAB_97bbdb58;
         }
       }
-      else if (bVar1 == 3) {
+      else if (chunkKind == 3) {
         *(int *)(this + 0x24) = *(int *)(this + 0x24) + -1;
-        if ((*(uint *)(pbVar8 + 0xc) & 0x1f0000) == 0x20000) {
+        if ((*(uint *)(chunk + 0xc) & 0x1f0000) == 0x20000) {
           *(int *)(this + 0x2c) = *(int *)(this + 0x2c) + -1;
         }
-        else if ((*(uint *)(pbVar8 + 0xc) & 0x1f0000) == 0x10000) {
+        else if ((*(uint *)(chunk + 0xc) & 0x1f0000) == 0x10000) {
           *(int *)(this + 0x28) = *(int *)(this + 0x28) + -1;
         }
       }
-      else if (bVar1 == 4) {
+      else if (chunkKind == 4) {
         *(int *)(this + 0x30) = *(int *)(this + 0x30) + -1;
       }
-      uVar7 = uVar7 + 1;
-    } while (uVar7 < uVar5);
+      vec4Index = vec4Index + 1;
+    } while (vec4Index < vec4Count);
   }
   *(int *)(this + 0x14) = *(int *)(this + 0x14) + -1;
-  pPVar2 = (unsigned char *)0x0;
-  for (pPVar3 = *(unsigned char **)
+  prevSymbol = (unsigned char *)0x0;
+  for (cursorSymbol = *(unsigned char **)
                  ((*(uint *)(parseSymbol + 0x1c) -
                   (*(uint *)(parseSymbol + 0x1c) / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10)) * 4
-                 + *(int *)(this + 8)); pPVar3 != (unsigned char *)0x0;
-      pPVar3 = *(unsigned char **)(pPVar3 + 4)) {
-    if (pPVar3 == parseSymbol) {
-      if (pPVar2 == (unsigned char *)0x0) {
+                 + *(int *)(this + 8)); cursorSymbol != (unsigned char *)0x0;
+      cursorSymbol = *(unsigned char **)(cursorSymbol + 4)) {
+    if (cursorSymbol == parseSymbol) {
+      if (prevSymbol == (unsigned char *)0x0) {
         *(undefined4 *)
          ((*(uint *)(parseSymbol + 0x1c) -
           (*(uint *)(parseSymbol + 0x1c) / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10)) * 4 +
          *(int *)(this + 8)) = *(undefined4 *)(parseSymbol + 4);
       }
       else {
-        *(undefined4 *)(pPVar2 + 4) = *(undefined4 *)(parseSymbol + 4);
+        *(undefined4 *)(prevSymbol + 4) = *(undefined4 *)(parseSymbol + 4);
       }
     }
-    pPVar2 = pPVar3;
+    prevSymbol = cursorSymbol;
   }
-  pPVar3 = *(unsigned char **)this;
-  pPVar2 = (unsigned char *)0x0;
+  cursorSymbol = *(unsigned char **)this;
+  prevSymbol = (unsigned char *)0x0;
   do {
-    pPVar4 = pPVar3;
-    if (pPVar4 == (unsigned char *)0x0) {
+    curSymbol = cursorSymbol;
+    if (curSymbol == (unsigned char *)0x0) {
 LAB_97bbdcd0:
       *(undefined4 *)(parseSymbol + 0x50) = 0;
       return;
     }
-    if (pPVar4 == parseSymbol) {
-      if (pPVar2 == (unsigned char *)0x0) {
+    if (curSymbol == parseSymbol) {
+      if (prevSymbol == (unsigned char *)0x0) {
         *(undefined4 *)this = *(undefined4 *)(parseSymbol + 8);
       }
       else {
-        *(undefined4 *)(pPVar2 + 8) = *(undefined4 *)(parseSymbol + 8);
+        *(undefined4 *)(prevSymbol + 8) = *(undefined4 *)(parseSymbol + 8);
       }
-      if (*(unsigned char **)(this + 4) == pPVar4) {
-        *(unsigned char **)(this + 4) = pPVar2;
+      if (*(unsigned char **)(this + 4) == curSymbol) {
+        *(unsigned char **)(this + 4) = prevSymbol;
       }
       goto LAB_97bbdcd0;
     }
-    pPVar3 = *(unsigned char **)(pPVar4 + 8);
-    pPVar2 = pPVar4;
+    cursorSymbol = *(unsigned char **)(curSymbol + 8);
+    prevSymbol = curSymbol;
   } while( true );
 }
 
@@ -1527,50 +1528,50 @@ LAB_97bbdf8c:
 int ParseSymbolTable__CopySymbolTable(this)
   unsigned char * this;
 {
-  undefined4 uVar1;
-  unsigned char * this_00;
-  unsigned char * this_01;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  undefined4 uVar5;
-  undefined4 uVar6;
-  undefined4 uVar7;
-  undefined4 uVar8;
-  undefined4 uVar9;
-  unsigned char * pPVar10;
+  undefined4 counter1c;
+  unsigned char *newTable;
+  unsigned char *newSymbol;
+  undefined4 counter3c;
+  undefined4 counter38;
+  undefined4 counter34;
+  undefined4 counter30;
+  undefined4 counter2c;
+  undefined4 counter20;
+  undefined4 counter28;
+  undefined4 counter24;
+  unsigned char *srcSymbol;
   
-  this_00 = operator_new(0x54);
-  ((int (*)())__ZN16ParseSymbolTableC1Ej)(this_00,0x80);
-  for (pPVar10 = *(unsigned char **)this; pPVar10 != (unsigned char *)0x0;
-      pPVar10 = *(unsigned char **)(pPVar10 + 8)) {
-    this_01 = operator_new(100);
-    __ZN11ParseSymbolC1Ev(this_01);
-    ParseSymbol__operator_(this_01,pPVar10);
-    ParseSymbol__SetChunk(this_01,*(unsigned char **)pPVar10);
-    *(undefined4 *)(this_01 + 0x44) = 0;
-    ((int (*)())ParseSymbolTable__AddSymbol)(this_00,this_01);
+  newTable = operator_new(0x54);
+  ((int (*)())__ZN16ParseSymbolTableC1Ej)(newTable,0x80);
+  for (srcSymbol = *(unsigned char **)this; srcSymbol != (unsigned char *)0x0;
+      srcSymbol = *(unsigned char **)(srcSymbol + 8)) {
+    newSymbol = operator_new(100);
+    __ZN11ParseSymbolC1Ev(newSymbol);
+    ParseSymbol__operator_(newSymbol,srcSymbol);
+    ParseSymbol__SetChunk(newSymbol,*(unsigned char **)srcSymbol);
+    *(undefined4 *)(newSymbol + 0x44) = 0;
+    ((int (*)())ParseSymbolTable__AddSymbol)(newTable,newSymbol);
   }
-  uVar2 = *(undefined4 *)(this + 0x3c);
-  uVar1 = *(undefined4 *)(this + 0x1c);
-  uVar7 = *(undefined4 *)(this + 0x20);
-  uVar9 = *(undefined4 *)(this + 0x24);
-  uVar8 = *(undefined4 *)(this + 0x28);
-  uVar6 = *(undefined4 *)(this + 0x2c);
-  uVar5 = *(undefined4 *)(this + 0x30);
-  uVar4 = *(undefined4 *)(this + 0x34);
-  uVar3 = *(undefined4 *)(this + 0x38);
-  *(undefined4 *)(this_00 + 0x18) = *(undefined4 *)(this + 0x18);
-  *(undefined4 *)(this_00 + 0x1c) = uVar1;
-  *(undefined4 *)(this_00 + 0x20) = uVar7;
-  *(undefined4 *)(this_00 + 0x24) = uVar9;
-  *(undefined4 *)(this_00 + 0x28) = uVar8;
-  *(undefined4 *)(this_00 + 0x2c) = uVar6;
-  *(undefined4 *)(this_00 + 0x30) = uVar5;
-  *(undefined4 *)(this_00 + 0x34) = uVar4;
-  *(undefined4 *)(this_00 + 0x38) = uVar3;
-  *(undefined4 *)(this_00 + 0x3c) = uVar2;
-  return this_00;
+  counter3c = *(undefined4 *)(this + 0x3c);
+  counter1c = *(undefined4 *)(this + 0x1c);
+  counter20 = *(undefined4 *)(this + 0x20);
+  counter24 = *(undefined4 *)(this + 0x24);
+  counter28 = *(undefined4 *)(this + 0x28);
+  counter2c = *(undefined4 *)(this + 0x2c);
+  counter30 = *(undefined4 *)(this + 0x30);
+  counter34 = *(undefined4 *)(this + 0x34);
+  counter38 = *(undefined4 *)(this + 0x38);
+  *(undefined4 *)(newTable + 0x18) = *(undefined4 *)(this + 0x18);
+  *(undefined4 *)(newTable + 0x1c) = counter1c;
+  *(undefined4 *)(newTable + 0x20) = counter20;
+  *(undefined4 *)(newTable + 0x24) = counter24;
+  *(undefined4 *)(newTable + 0x28) = counter28;
+  *(undefined4 *)(newTable + 0x2c) = counter2c;
+  *(undefined4 *)(newTable + 0x30) = counter30;
+  *(undefined4 *)(newTable + 0x34) = counter34;
+  *(undefined4 *)(newTable + 0x38) = counter38;
+  *(undefined4 *)(newTable + 0x3c) = counter3c;
+  return newTable;
 }
 
 /* ParseSymbolTable__ChangeChunk @ 0x97bbe090 (128 bytes) */
@@ -1798,49 +1799,49 @@ LAB_97bbe53c:
 }
 
 /* TIntermSymbol__compileNode @ 0x97bbe56c (304 bytes) */
-int TIntermSymbol__compileNode(this, pPStreamCompiler, param_3, param_4, param_5, param_6)
+int TIntermSymbol__compileNode(this, pPStreamCompiler, strayArg3, strayArg4, strayArg5, strayArg6)
   unsigned char * this;
   unsigned char * pPStreamCompiler;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+  undefined4 strayArg3;
+  undefined4 strayArg4;
+  undefined4 strayArg5;
+  undefined4 strayArg6;
 {
   undefined4 typePointer;
   undefined4 id;
-  undefined1 *puVar1;
+  undefined1 *terminalCharPtr;
   int symbol;
-  undefined4 uVar3;
-  unsigned char * this_00;
-  unsigned char * pTVar4;
+  undefined4 sourceLine;
+  unsigned char *newSymbol;
+  unsigned char *symbolType;
   undefined4 r4In0;
   int r9In0;
-  undefined4 *this_01;
+  undefined4 *symbolOperand;
   
-  this_01 = (undefined4 *)0x0;
-  symbol = (**(code **)(*(int *)this + 0x60))(this,pPStreamCompiler,param_3,param_4,param_5,param_6);
-  puVar1 = DAT_a7b7bd04;
+  symbolOperand = (undefined4 *)0x0;
+  symbol = (**(code **)(*(int *)this + 0x60))(this,pPStreamCompiler,strayArg3,strayArg4,strayArg5,strayArg6);
+  terminalCharPtr = DAT_a7b7bd04;
   r9In0 = *(int *)(symbol + 4);
   *(undefined1 *)(r9In0 + *(int *)(r9In0 + -0xc)) = *DAT_a7b7bd04;
   if (*(int *)(symbol + 4) != 0) {
-    uVar3 = (*(code *)**(undefined4 **)this)(this,r4In0,param_3,param_4,param_5,param_6,r9In0);
-    *(undefined4 *)(pPStreamCompiler + 0x90) = uVar3;
-    this_00 = operator_new(100);
-    __ZN11ParseSymbolC1Ev(this_00);
+    sourceLine = (*(code *)**(undefined4 **)this)(this,r4In0,strayArg3,strayArg4,strayArg5,strayArg6,r9In0);
+    *(undefined4 *)(pPStreamCompiler + 0x90) = sourceLine;
+    newSymbol = operator_new(100);
+    __ZN11ParseSymbolC1Ev(newSymbol);
     symbol = (**(code **)(*(int *)this + 0x60))(this);
-    *(undefined1 *)(*(int *)(symbol + 4) + *(int *)(*(int *)(symbol + 4) + -0xc)) = *puVar1;
-    ParseSymbol__SetName(this_00,*(char **)(symbol + 4));
+    *(undefined1 *)(*(int *)(symbol + 4) + *(int *)(*(int *)(symbol + 4) + -0xc)) = *terminalCharPtr;
+    ParseSymbol__SetName(newSymbol,*(char **)(symbol + 4));
     id = (**(code **)(*(int *)this + 0x5c))(this);
-    *(undefined4 *)(this_00 + 0x28) = id;
-    pTVar4 = (unsigned char *)(**(code **)(*(int *)this + 0x3c))(this);
-    ParseSymbol__SetParseTreeType(this_00,pTVar4);
+    *(undefined4 *)(newSymbol + 0x28) = id;
+    symbolType = (unsigned char *)(**(code **)(*(int *)this + 0x3c))(this);
+    ParseSymbol__SetParseTreeType(newSymbol,symbolType);
     typePointer = (**(code **)(*(int *)this + 0x3c))(this);
-    *(undefined4 *)(this_00 + 0x10) = typePointer;
-    this_01 = operator_new(0x38);
-    __ZN12ParseOperandC1Ev(this_01);
-    *this_01 = this_00;
+    *(undefined4 *)(newSymbol + 0x10) = typePointer;
+    symbolOperand = operator_new(0x38);
+    __ZN12ParseOperandC1Ev(symbolOperand);
+    *symbolOperand = newSymbol;
   }
-  return this_01;
+  return symbolOperand;
 }
 
 /* TIntermConstantUnion__compileNode @ 0x97bbe69c (340 bytes) */
@@ -4771,49 +4772,49 @@ int TIntermBranch__compileNode(this, compiler, strayArg3, strayArg4, strayArg5, 
 }
 
 /* TIntermSymbol__indirectNode @ 0x97bc2d44 (312 bytes) */
-int TIntermSymbol__indirectNode(this, pPStreamCompiler, param_3, param_4, param_5, param_6)
+int TIntermSymbol__indirectNode(this, pPStreamCompiler, strayArg3, strayArg4, strayArg5, strayArg6)
   unsigned char * this;
   unsigned char * pPStreamCompiler;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+  undefined4 strayArg3;
+  undefined4 strayArg4;
+  undefined4 strayArg5;
+  undefined4 strayArg6;
 {
   undefined4 typePointer;
   undefined4 id;
-  undefined1 *puVar1;
+  undefined1 *terminalCharPtr;
   int symbol;
-  undefined4 uVar3;
-  unsigned char * this_00;
-  unsigned char * pTVar4;
+  undefined4 sourceLine;
+  unsigned char *newSymbol;
+  unsigned char *symbolType;
   undefined4 r4In0;
   int r9In0;
-  undefined4 *this_01;
+  undefined4 *symbolOperand;
   
-  this_01 = (undefined4 *)0x0;
-  symbol = (**(code **)(*(int *)this + 0x60))(this,pPStreamCompiler,param_3,param_4,param_5,param_6);
-  puVar1 = DAT_a7b7bd0c;
+  symbolOperand = (undefined4 *)0x0;
+  symbol = (**(code **)(*(int *)this + 0x60))(this,pPStreamCompiler,strayArg3,strayArg4,strayArg5,strayArg6);
+  terminalCharPtr = DAT_a7b7bd0c;
   r9In0 = *(int *)(symbol + 4);
   *(undefined1 *)(r9In0 + *(int *)(r9In0 + -0xc)) = *DAT_a7b7bd0c;
   if (**(char **)(symbol + 4) != '\0') {
-    uVar3 = (*(code *)**(undefined4 **)this)(this,r4In0,param_3,param_4,param_5,param_6,r9In0);
-    *(undefined4 *)(pPStreamCompiler + 0x90) = uVar3;
-    this_00 = operator_new(100);
-    __ZN11ParseSymbolC1Ev(this_00);
+    sourceLine = (*(code *)**(undefined4 **)this)(this,r4In0,strayArg3,strayArg4,strayArg5,strayArg6,r9In0);
+    *(undefined4 *)(pPStreamCompiler + 0x90) = sourceLine;
+    newSymbol = operator_new(100);
+    __ZN11ParseSymbolC1Ev(newSymbol);
     symbol = (**(code **)(*(int *)this + 0x60))(this);
-    *(undefined1 *)(*(int *)(symbol + 4) + *(int *)(*(int *)(symbol + 4) + -0xc)) = *puVar1;
-    ParseSymbol__SetName(this_00,*(char **)(symbol + 4));
+    *(undefined1 *)(*(int *)(symbol + 4) + *(int *)(*(int *)(symbol + 4) + -0xc)) = *terminalCharPtr;
+    ParseSymbol__SetName(newSymbol,*(char **)(symbol + 4));
     id = (**(code **)(*(int *)this + 0x5c))(this);
-    *(undefined4 *)(this_00 + 0x28) = id;
-    pTVar4 = (unsigned char *)(**(code **)(*(int *)this + 0x3c))(this);
-    ParseSymbol__SetParseTreeType(this_00,pTVar4);
+    *(undefined4 *)(newSymbol + 0x28) = id;
+    symbolType = (unsigned char *)(**(code **)(*(int *)this + 0x3c))(this);
+    ParseSymbol__SetParseTreeType(newSymbol,symbolType);
     typePointer = (**(code **)(*(int *)this + 0x3c))(this);
-    *(undefined4 *)(this_00 + 0x10) = typePointer;
-    this_01 = operator_new(0x38);
-    __ZN12ParseOperandC1Ev(this_01);
-    *this_01 = this_00;
+    *(undefined4 *)(newSymbol + 0x10) = typePointer;
+    symbolOperand = operator_new(0x38);
+    __ZN12ParseOperandC1Ev(symbolOperand);
+    *symbolOperand = newSymbol;
   }
-  return this_01;
+  return symbolOperand;
 }
 
 /* TIntermConstantUnion__indirectNode @ 0x97bc2e7c (340 bytes) */
@@ -5045,23 +5046,23 @@ LAB_97bc3364:
 }
 
 /* TIntermUnary__indirectNode @ 0x97bc33b8 (112 bytes) */
-int TIntermUnary__indirectNode(this, pPStreamCompiler, param_3, param_4, param_5, param_6)
+int TIntermUnary__indirectNode(this, pPStreamCompiler, strayArg3, strayArg4, strayArg5, strayArg6)
   unsigned char * this;
   unsigned char * pPStreamCompiler;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+  undefined4 strayArg3;
+  undefined4 strayArg4;
+  undefined4 strayArg5;
+  undefined4 strayArg6;
 {
-  undefined4 uVar1;
-  void *this_00;
+  undefined4 sourceLine;
+  void *childResult;
   
-  uVar1 = (*(code *)**(undefined4 **)this)(this,pPStreamCompiler,param_3,param_4,param_5,param_6);
-  *(undefined4 *)(pPStreamCompiler + 0x90) = uVar1;
-  this_00 = (void *)(**(code **)(**(int **)(this + 0x34) + 0x10))(*(int **)(this + 0x34),pPStreamCompiler);
-  if (this_00 != (void *)0x0) {
-    __ZN12ParseOperandD1Ev(this_00);
-    __ZdlPv(this_00);
+  sourceLine = (*(code *)**(undefined4 **)this)(this,pPStreamCompiler,strayArg3,strayArg4,strayArg5,strayArg6);
+  *(undefined4 *)(pPStreamCompiler + 0x90) = sourceLine;
+  childResult = (void *)(**(code **)(**(int **)(this + 0x34) + 0x10))(*(int **)(this + 0x34),pPStreamCompiler);
+  if (childResult != (void *)0x0) {
+    __ZN12ParseOperandD1Ev(childResult);
+    __ZdlPv(childResult);
   }
   return 0;
 }
@@ -5120,30 +5121,30 @@ int TIntermSelection__indirectNode(this, pPStreamCompiler)
   unsigned char * pPStreamCompiler;
 {
   int *falseBlock;
-  void *pvVar1;
-  int *piVar2;
+  void *childResult;
+  int *trueBlock;
   
-  piVar2 = (int *)0x0;
+  trueBlock = (int *)0x0;
   if (*(int *)(this + 0x34) != 0) {
-    pvVar1 = (void *)(**(code **)(**(int **)(this + 0x30) + 0x10))(*(int **)(this + 0x30));
-    if (pvVar1 != (void *)0x0) {
-      __ZN12ParseOperandD1Ev(pvVar1);
-      __ZdlPv(pvVar1);
+    childResult = (void *)(**(code **)(**(int **)(this + 0x30) + 0x10))(*(int **)(this + 0x30));
+    if (childResult != (void *)0x0) {
+      __ZN12ParseOperandD1Ev(childResult);
+      __ZdlPv(childResult);
     }
-    piVar2 = *(int **)(this + 0x34);
+    trueBlock = *(int **)(this + 0x34);
   }
-  if (piVar2 != (int *)0x0) {
-    pvVar1 = (void *)(**(code **)(*piVar2 + 0x10))(piVar2,pPStreamCompiler);
-    if (pvVar1 != (void *)0x0) {
-      __ZN12ParseOperandD1Ev(pvVar1);
-      __ZdlPv(pvVar1);
+  if (trueBlock != (int *)0x0) {
+    childResult = (void *)(**(code **)(*trueBlock + 0x10))(trueBlock,pPStreamCompiler);
+    if (childResult != (void *)0x0) {
+      __ZN12ParseOperandD1Ev(childResult);
+      __ZdlPv(childResult);
     }
   }
   falseBlock = *(int **)(this + 0x38);
   if ((falseBlock != (int *)0x0) &&
-     (pvVar1 = (void *)(**(code **)(*falseBlock + 0x10))(falseBlock,pPStreamCompiler), pvVar1 != (void *)0x0)) {
-    __ZN12ParseOperandD1Ev(pvVar1);
-    __ZdlPv(pvVar1);
+     (childResult = (void *)(**(code **)(*falseBlock + 0x10))(falseBlock,pPStreamCompiler), childResult != (void *)0x0)) {
+    __ZN12ParseOperandD1Ev(childResult);
+    __ZdlPv(childResult);
   }
   return 0;
 }
@@ -5153,30 +5154,32 @@ int TIntermLoop__indirectNode(this, pPStreamCompiler)
   unsigned char * this;
   unsigned char * pPStreamCompiler;
 {
-  int *piVar1;
-  void *pvVar2;
+  int *terminalNode;
+  int *bodyNode;
+  int *testNode;
+  void *childResult;
   
-  piVar1 = *(int **)(this + 0xc);
-  if (piVar1 != (int *)0x0) {
-    pvVar2 = (void *)(**(code **)(*piVar1 + 0x10))(piVar1);
-    if (pvVar2 != (void *)0x0) {
-      __ZN12ParseOperandD1Ev(pvVar2);
-      __ZdlPv(pvVar2);
+  testNode = *(int **)(this + 0xc);
+  if (testNode != (int *)0x0) {
+    childResult = (void *)(**(code **)(*testNode + 0x10))(testNode);
+    if (childResult != (void *)0x0) {
+      __ZN12ParseOperandD1Ev(childResult);
+      __ZdlPv(childResult);
     }
   }
-  piVar1 = *(int **)(this + 8);
-  if (piVar1 != (int *)0x0) {
-    pvVar2 = (void *)(**(code **)(*piVar1 + 0x10))(piVar1,pPStreamCompiler);
-    if (pvVar2 != (void *)0x0) {
-      __ZN12ParseOperandD1Ev(pvVar2);
-      __ZdlPv(pvVar2);
+  bodyNode = *(int **)(this + 8);
+  if (bodyNode != (int *)0x0) {
+    childResult = (void *)(**(code **)(*bodyNode + 0x10))(bodyNode,pPStreamCompiler);
+    if (childResult != (void *)0x0) {
+      __ZN12ParseOperandD1Ev(childResult);
+      __ZdlPv(childResult);
     }
   }
-  piVar1 = *(int **)(this + 0x10);
-  if ((piVar1 != (int *)0x0) &&
-     (pvVar2 = (void *)(**(code **)(*piVar1 + 0x10))(piVar1,pPStreamCompiler), pvVar2 != (void *)0x0)) {
-    __ZN12ParseOperandD1Ev(pvVar2);
-    __ZdlPv(pvVar2);
+  terminalNode = *(int **)(this + 0x10);
+  if ((terminalNode != (int *)0x0) &&
+     (childResult = (void *)(**(code **)(*terminalNode + 0x10))(terminalNode,pPStreamCompiler), childResult != (void *)0x0)) {
+    __ZN12ParseOperandD1Ev(childResult);
+    __ZdlPv(childResult);
   }
   return 0;
 }
@@ -5332,42 +5335,43 @@ int ConstantAllocationList__addConstant(this, constantId, values, glType)
 }
 
 /* ConstantAllocationList__updateConstant @ 0x97bc38b8 (128 bytes) */
-int ConstantAllocationList__updateConstant(this, param_2, param_3, param_4)
+int ConstantAllocationList__updateConstant(this, constantId, newValues, expectedUsage)
   unsigned char * this;
-  int param_2;
-  bool *param_3;
-  uint param_4;
+  int constantId;
+  bool *newValues;
+  uint expectedUsage;
 {
+  int entries;
   int loopIndex2;
-  int iVar1;
-  int iVar2;
+  int byteOffset;
+  int entryId;
   int loopIndex;
-  int *piVar4;
-  int iVar5;
+  int *entryCursor;
+  int entryCount;
   
-  iVar5 = *(int *)(this + 4);
+  entryCount = *(int *)(this + 4);
   loopIndex = 0;
-  if (0 < iVar5) {
-    piVar4 = *(int **)this;
+  if (0 < entryCount) {
+    entryCursor = *(int **)this;
     do {
-      iVar2 = *piVar4;
-      piVar4 = piVar4 + 6;
-      if (param_2 == iVar2) break;
+      entryId = *entryCursor;
+      entryCursor = entryCursor + 6;
+      if (constantId == entryId) break;
       loopIndex = loopIndex + 1;
-    } while (loopIndex < iVar5);
+    } while (loopIndex < entryCount);
   }
-  if (iVar5 <= loopIndex) {
+  if (entryCount <= loopIndex) {
     return;
   }
-  iVar5 = *(int *)this;
+  entries = *(int *)this;
   loopIndex2 = 0;
-  if (*(ushort *)(loopIndex * 0x18 + iVar5 + 0x14) == param_4) {
+  if (*(ushort *)(loopIndex * 0x18 + entries + 0x14) == expectedUsage) {
     while( true ) {
-      iVar1 = loopIndex2 * 4;
+      byteOffset = loopIndex2 * 4;
       loopIndex2 = loopIndex2 + 1;
-      *(undefined4 *)(iVar1 + loopIndex * 0x18 + iVar5 + 4) = *(undefined4 *)(param_3 + iVar1);
+      *(undefined4 *)(byteOffset + loopIndex * 0x18 + entries + 4) = *(undefined4 *)(newValues + byteOffset);
       if (3 < loopIndex2) break;
-      iVar5 = *(int *)this;
+      entries = *(int *)this;
     }
     return;
   }
@@ -5375,42 +5379,44 @@ int ConstantAllocationList__updateConstant(this, param_2, param_3, param_4)
 }
 
 /* ConstantAllocationList__getConstantUsage @ 0x97bc3938 (132 bytes) */
-int ConstantAllocationList__getConstantUsage(this, param_2, param_3, param_4)
+int ConstantAllocationList__getConstantUsage(this, constantId, outValues, outUsage)
   unsigned char * this;
-  int param_2;
-  bool *param_3;
-  ushort *param_4;
+  int constantId;
+  bool *outValues;
+  ushort *outUsage;
 {
-  int iVar1;
+  int byteOffset;
+  int wordsLeft;
+  int entryId;
   int loopIndex;
-  int *piVar3;
-  undefined4 uVar4;
-  int iVar5;
+  int *entryCursor;
+  undefined4 found;
+  int entryCount;
   
-  iVar5 = *(int *)(this + 4);
+  entryCount = *(int *)(this + 4);
   loopIndex = 0;
-  if (0 < iVar5) {
-    piVar3 = *(int **)this;
+  if (0 < entryCount) {
+    entryCursor = *(int **)this;
     do {
-      iVar1 = *piVar3;
-      piVar3 = piVar3 + 6;
-      if (param_2 == iVar1) break;
+      entryId = *entryCursor;
+      entryCursor = entryCursor + 6;
+      if (constantId == entryId) break;
       loopIndex = loopIndex + 1;
-    } while (loopIndex < iVar5);
+    } while (loopIndex < entryCount);
   }
-  uVar4 = 0;
-  if (loopIndex < iVar5) {
-    iVar5 = 0;
-    iVar1 = 4;
-    *param_4 = *(ushort *)(loopIndex * 0x18 + *(int *)this + 0x14);
+  found = 0;
+  if (loopIndex < entryCount) {
+    byteOffset = 0;
+    wordsLeft = 4;
+    *outUsage = *(ushort *)(loopIndex * 0x18 + *(int *)this + 0x14);
     do {
-      uVar4 = 1;
-      *(undefined4 *)(param_3 + iVar5) = *(undefined4 *)(iVar5 + loopIndex * 0x18 + *(int *)this + 4);
-      iVar5 = iVar5 + 4;
-      iVar1 = iVar1 + -1;
-    } while (iVar1 != 0);
+      found = 1;
+      *(undefined4 *)(outValues + byteOffset) = *(undefined4 *)(byteOffset + loopIndex * 0x18 + *(int *)this + 4);
+      byteOffset = byteOffset + 4;
+      wordsLeft = wordsLeft + -1;
+    } while (wordsLeft != 0);
   }
-  return uVar4;
+  return found;
 }
 
 /* newQueue @ 0x97bc39bc (20 bytes) */
@@ -5431,27 +5437,27 @@ int size(q)
 }
 
 /* store @ 0x97bc39d8 (108 bytes) */
-int store(q, param_2)
+int store(q, item)
   unsigned char * q;
-  void *param_2;
+  void *item;
 {
-  int iVar1;
+  int oldSize;
   undefined4 *allocation;
   
   allocation = (undefined4 *)_malloc(8);
-  iVar1 = *(int *)(q + 8);
-  *allocation = param_2;
+  oldSize = *(int *)(q + 8);
+  *allocation = item;
   allocation[1] = 0;
-  if (iVar1 == 0) {
+  if (oldSize == 0) {
     *(undefined4 **)q = allocation;
-    iVar1 = 0;
+    oldSize = 0;
   }
   else {
     *(undefined4 **)(*(int *)(q + 4) + 4) = allocation;
-    iVar1 = *(int *)(q + 8);
+    oldSize = *(int *)(q + 8);
   }
   *(undefined4 **)(q + 4) = allocation;
-  *(int *)(q + 8) = iVar1 + 1;
+  *(int *)(q + 8) = oldSize + 1;
   return;
 }
 
