@@ -2028,16 +2028,16 @@ LAB_97c0ce78:
 }
 
 /* _UpdateScope @ 0x97c0efd8 (96 bytes) */
-int _UpdateScope(param_1, param_2)
-  int param_1;
-  int *param_2;
+int _UpdateScope(operationChunk, scopeDepth)
+  int operationChunk;
+  int *scopeDepth;
 {
-  switch(*(uint *)(param_1 + 0xc) >> 0x12 & 0xff) {
+  switch(*(uint *)(operationChunk + 0xc) >> 0x12 & 0xff) {
   case 0x55:
   case 0x56:
   case 0x57:
   case 0x6a:
-    *param_2 = *param_2 + 1;
+    *scopeDepth = *scopeDepth + 1;
     return;
   case 0x58:
   case 0x5c:
@@ -2059,7 +2059,7 @@ int _UpdateScope(param_1, param_2)
   case 0x5a:
   case 0x5b:
   case 0x6b:
-    *param_2 = *param_2 + -1;
+    *scopeDepth = *scopeDepth + -1;
 switchD_97c0f014_caseD_58:
     return;
   default:
@@ -3082,90 +3082,90 @@ int _ConstantPropagateFold(compileContext)
 }
 
 /* _glpDCBAlloc @ 0x97c108e0 (68 bytes) */
-int _glpDCBAlloc(param_1)
-  int param_1;
+int _glpDCBAlloc(byteCount)
+  int byteCount;
 {
   int allocation;
-  uint uVar2;
+  uint alignedBlock;
   
-  allocation = _malloc(param_1 + 0x3fU & 0xffffffe0);
-  uVar2 = 0;
+  allocation = _malloc(byteCount + 0x3fU & 0xffffffe0);
+  alignedBlock = 0;
   if (allocation != 0) {
-    uVar2 = allocation + 0x20U & 0xffffffe0;
-    *(char *)(uVar2 - 1) = (char)uVar2 - (char)allocation;
+    alignedBlock = allocation + 0x20U & 0xffffffe0;
+    *(char *)(alignedBlock - 1) = (char)alignedBlock - (char)allocation;
   }
-  return uVar2;
+  return alignedBlock;
 }
 
 /* _glpDCBRealloc @ 0x97c10924 (256 bytes) */
-int _glpDCBRealloc(param_1, in_r4)
-  int param_1;
-  int in_r4;
+int _glpDCBRealloc(block, newSize)
+  int block;
+  int newSize;
 {
   uint glpDCBAllocResult;
-  int iVar1;
-  uint uVar2;
-  uint uVar3;
-  int iVar4;
+  int byteOffset;
+  uint newHeaderOffset;
+  uint alignedBlock;
+  int wordsLeft;
   int allocation;
-  int iVar6;
-  uint uVar7;
+  int wordIndex;
+  uint oldHeaderOffset;
   
-  if (in_r4 < 1) {
-    if (param_1 != 0) {
-      ((int (*)())_glpDCBFree)(param_1);
+  if (newSize < 1) {
+    if (block != 0) {
+      ((int (*)())_glpDCBFree)(block);
     }
-    uVar3 = 0;
+    alignedBlock = 0;
   }
   else {
-    if (param_1 == 0) {
-      glpDCBAllocResult = ((int (*)())_glpDCBAlloc)(in_r4);
+    if (block == 0) {
+      glpDCBAllocResult = ((int (*)())_glpDCBAlloc)(newSize);
       return glpDCBAllocResult;
     }
-    uVar7 = (uint)*(byte *)(param_1 + -1);
-    allocation = _realloc(param_1 - uVar7,in_r4 + 0x3fU & 0xffffffe0);
-    uVar3 = 0;
+    oldHeaderOffset = (uint)*(byte *)(block + -1);
+    allocation = _realloc(block - oldHeaderOffset,newSize + 0x3fU & 0xffffffe0);
+    alignedBlock = 0;
     if (allocation != 0) {
-      uVar3 = allocation + 0x20U & 0xffffffe0;
-      uVar2 = uVar3 - allocation & 0xff;
-      if (uVar2 != uVar7) {
-        iVar4 = in_r4 + 3 >> 2;
-        if (uVar2 < uVar7) {
-          iVar6 = 0;
-          if (0 < iVar4) {
+      alignedBlock = allocation + 0x20U & 0xffffffe0;
+      newHeaderOffset = alignedBlock - allocation & 0xff;
+      if (newHeaderOffset != oldHeaderOffset) {
+        wordsLeft = newSize + 3 >> 2;
+        if (newHeaderOffset < oldHeaderOffset) {
+          wordIndex = 0;
+          if (0 < wordsLeft) {
             do {
-              iVar1 = iVar6 * 4;
-              iVar6 = iVar6 + 1;
-              *(undefined4 *)(iVar1 + uVar3) = *(undefined4 *)(iVar1 + allocation + uVar7);
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              byteOffset = wordIndex * 4;
+              wordIndex = wordIndex + 1;
+              *(undefined4 *)(byteOffset + alignedBlock) = *(undefined4 *)(byteOffset + allocation + oldHeaderOffset);
+              wordsLeft = wordsLeft + -1;
+            } while (wordsLeft != 0);
           }
         }
         else {
-          iVar6 = iVar4 + -1;
-          if (-1 < iVar6) {
+          wordIndex = wordsLeft + -1;
+          if (-1 < wordIndex) {
             do {
-              iVar1 = iVar6 * 4;
-              iVar6 = iVar6 + -1;
-              *(undefined4 *)(iVar1 + uVar3) = *(undefined4 *)(iVar1 + allocation + uVar7);
-              iVar4 = iVar4 + -1;
-            } while (iVar4 != 0);
+              byteOffset = wordIndex * 4;
+              wordIndex = wordIndex + -1;
+              *(undefined4 *)(byteOffset + alignedBlock) = *(undefined4 *)(byteOffset + allocation + oldHeaderOffset);
+              wordsLeft = wordsLeft + -1;
+            } while (wordsLeft != 0);
           }
         }
-        *(char *)(uVar3 - 1) = (char)(uVar3 - allocation);
+        *(char *)(alignedBlock - 1) = (char)(alignedBlock - allocation);
       }
     }
   }
-  return uVar3;
+  return alignedBlock;
 }
 
 /* _glpDCBFree @ 0x97c10a24 (12 bytes) */
-int _glpDCBFree(param_1)
-  int param_1;
+int _glpDCBFree(block)
+  int block;
 {
   undefined4 extraout_r3;
   
-  _free(param_1 - (uint)*(byte *)(param_1 + -1));
+  _free(block - (uint)*(byte *)(block + -1));
   return extraout_r3;
 }
 
@@ -4338,389 +4338,401 @@ int _PPParserBuildErrorString(parser, param_2, param_3)
 }
 
 /* _pow_10 @ 0x97c12464 (156 bytes) */
-double _pow_10(int param_1)
+double _pow_10(int exponent)
 {
-  undefined *puVar1;
-  double dVar2;
+  undefined *tableEntry;
+  double result;
   
-  dVar2 = DOUBLE_97c30a60;
-  if (param_1 < 1) {
-    if (-1 < param_1) {
+  result = DOUBLE_97c30a60;
+  if (exponent < 1) {
+    if (-1 < exponent) {
       return DOUBLE_97c30a60;
     }
-    for (; param_1 < -0x20; param_1 = param_1 + 0x20) {
-      dVar2 = dVar2 * DOUBLE_97c30aa8;
+    for (; exponent < -0x20; exponent = exponent + 0x20) {
+      result = result * DOUBLE_97c30aa8;
     }
-    puVar1 = &_down_1 + param_1 * -8;
+    tableEntry = &_down_1 + exponent * -8;
   }
   else {
-    for (; 0x20 < param_1; param_1 = param_1 + -0x20) {
-      dVar2 = dVar2 * DOUBLE_97c30ab0;
+    for (; 0x20 < exponent; exponent = exponent + -0x20) {
+      result = result * DOUBLE_97c30ab0;
     }
-    puVar1 = &_up_0 + param_1 * 8;
+    tableEntry = &_up_0 + exponent * 8;
   }
-  return dVar2 * *(double *)(puVar1 + -8);
+  return result * *(double *)(tableEntry + -8);
 }
 
 /* _glp_strtod @ 0x97c12500 (824 bytes) */
-double _glp_strtod(byte *param_1,undefined4 *param_2)
+double _glp_strtod(byte *str,undefined4 *endPtr)
 {
+  byte *exponentDigitCursor;
+  byte *exponentStart;
+  byte *fractionDigitCursor;
+  double exponentValue;
+  double fraction;
   double pow_10Result;
-  bool bVar1;
-  bool bVar2;
-  bool bVar3;
-  bool bVar4;
-  int iVar5;
-  byte bVar6;
-  byte *pbVar7;
-  byte *pbVar8;
-  double dVar9;
-  double dVar10;
-  double dVar11;
-  byte *pbStack00000018;
+  bool isDecimalPoint;
+  bool sawDigits;
+  bool isExponentNegative;
+  bool isNegative;
+  int digitsLeft;
+  byte currentChar;
+  byte *integerDigitCursor;
+  byte *fractionStart;
+  double value;
+  double placeValue;
+  double exponentPlaceValue;
+  byte *endCursor;
   
-  bVar4 = false;
-  bVar3 = false;
-  bVar2 = false;
-  if (*param_1 == 0x2b) {
+  isNegative = false;
+  isExponentNegative = false;
+  sawDigits = false;
+  if (*str == 0x2b) {
 LAB_97c12560:
-    param_1 = param_1 + 1;
+    str = str + 1;
   }
-  else if (*param_1 == 0x2d) {
-    bVar4 = true;
+  else if (*str == 0x2d) {
+    isNegative = true;
     goto LAB_97c12560;
   }
-  bVar6 = *param_1;
-  bVar1 = bVar6 == 0x2e;
-  pbStack00000018 = param_1;
-  dVar9 = DOUBLE_97c30a48;
-  if (bVar6 == 0) {
+  currentChar = *str;
+  isDecimalPoint = currentChar == 0x2e;
+  endCursor = str;
+  value = DOUBLE_97c30a48;
+  if (currentChar == 0) {
 LAB_97c12644:
-    if (bVar1) goto LAB_97c12648;
+    if (isDecimalPoint) goto LAB_97c12648;
   }
   else {
-    if (!bVar1) {
-      if ((bVar6 != 0x65) && (pbVar7 = param_1, bVar6 != 0x45)) {
-        while (bVar6 - 0x30 < 10) {
-          bVar6 = pbVar7[1];
-          pbVar7 = pbVar7 + 1;
+    if (!isDecimalPoint) {
+      if ((currentChar != 0x65) && (integerDigitCursor = str, currentChar != 0x45)) {
+        while (currentChar - 0x30 < 10) {
+          currentChar = integerDigitCursor[1];
+          integerDigitCursor = integerDigitCursor + 1;
         }
         if (&STACKARG(0x0) != (undefined1 *)0xffffffe8) {
-          pbStack00000018 = pbVar7;
+          endCursor = integerDigitCursor;
         }
-        pbVar7 = pbVar7 + -1;
-        if (param_1 <= pbVar7) {
-          iVar5 = (int)pbVar7 - (int)(param_1 + -1);
-          dVar10 = DOUBLE_97c30a60;
+        integerDigitCursor = integerDigitCursor + -1;
+        if (str <= integerDigitCursor) {
+          digitsLeft = (int)integerDigitCursor - (int)(str + -1);
+          placeValue = DOUBLE_97c30a60;
           do {
-            bVar6 = *pbVar7;
-            pbVar7 = pbVar7 + -1;
-            dVar9 = ((double)CONCAT44(0x43300000,(int)(char)bVar6 - 0x30U ^ 0x80000000) -
-                    DOUBLE_97c30a58) * dVar10 + dVar9;
-            dVar10 = dVar10 * DOUBLE_97c30a50;
-            iVar5 = iVar5 + -1;
-          } while (iVar5 != 0);
+            currentChar = *integerDigitCursor;
+            integerDigitCursor = integerDigitCursor + -1;
+            value = ((double)CONCAT44(0x43300000,(int)(char)currentChar - 0x30U ^ 0x80000000) -
+                    DOUBLE_97c30a58) * placeValue + value;
+            placeValue = placeValue * DOUBLE_97c30a50;
+            digitsLeft = digitsLeft + -1;
+          } while (digitsLeft != 0);
         }
-        bVar6 = *pbStack00000018;
-        bVar2 = true;
-        bVar1 = bVar6 == 0x2e;
+        currentChar = *endCursor;
+        sawDigits = true;
+        isDecimalPoint = currentChar == 0x2e;
       }
       goto LAB_97c12644;
     }
 LAB_97c12648:
-    pbVar8 = pbStack00000018 + 1;
-    bVar6 = pbStack00000018[1];
-    pbVar7 = pbVar8;
-    while (bVar6 - 0x30 < 10) {
-      pbVar7 = pbVar7 + 1;
-      bVar6 = *pbVar7;
+    fractionStart = endCursor + 1;
+    currentChar = endCursor[1];
+    fractionDigitCursor = fractionStart;
+    while (currentChar - 0x30 < 10) {
+      fractionDigitCursor = fractionDigitCursor + 1;
+      currentChar = *fractionDigitCursor;
     }
-    dVar10 = DOUBLE_97c30a48;
+    fraction = DOUBLE_97c30a48;
     if (&STACKARG(0x0) != (undefined1 *)0xffffffe8) {
-      pbStack00000018 = pbVar7;
+      endCursor = fractionDigitCursor;
     }
-    while (pbVar7 = pbVar7 + -1, pbVar8 <= pbVar7) {
-      dVar10 = dVar10 * DOUBLE_97c30ab8 +
-               ((double)CONCAT44(0x43300000,(int)(char)*pbVar7 - 0x30U ^ 0x80000000) -
+    while (fractionDigitCursor = fractionDigitCursor + -1, fractionStart <= fractionDigitCursor) {
+      fraction = fraction * DOUBLE_97c30ab8 +
+               ((double)CONCAT44(0x43300000,(int)(char)*fractionDigitCursor - 0x30U ^ 0x80000000) -
                DOUBLE_97c30a58);
     }
-    bVar2 = true;
-    bVar6 = *pbStack00000018;
-    dVar9 = dVar10 * DOUBLE_97c30ab8 + dVar9;
+    sawDigits = true;
+    currentChar = *endCursor;
+    value = fraction * DOUBLE_97c30ab8 + value;
   }
-  if ((!bVar2) || ((bVar6 != 0x65 && (bVar6 != 0x45)))) goto LAB_97c12804;
-  pbVar7 = pbStack00000018 + 1;
-  if (*pbVar7 == 0x2b) {
+  if ((!sawDigits) || ((currentChar != 0x65 && (currentChar != 0x45)))) goto LAB_97c12804;
+  exponentStart = endCursor + 1;
+  if (*exponentStart == 0x2b) {
 LAB_97c12738:
-    pbVar7 = pbStack00000018 + 2;
+    exponentStart = endCursor + 2;
   }
-  else if (*pbVar7 == 0x2d) {
-    bVar3 = true;
+  else if (*exponentStart == 0x2d) {
+    isExponentNegative = true;
     goto LAB_97c12738;
   }
-  bVar6 = *pbVar7;
-  pbVar8 = pbVar7;
-  while (bVar6 - 0x30 < 10) {
-    pbVar8 = pbVar8 + 1;
-    bVar6 = *pbVar8;
+  currentChar = *exponentStart;
+  exponentDigitCursor = exponentStart;
+  while (currentChar - 0x30 < 10) {
+    exponentDigitCursor = exponentDigitCursor + 1;
+    currentChar = *exponentDigitCursor;
   }
-  pbStack00000018 = pbVar7;
+  endCursor = exponentStart;
   if (&STACKARG(0x0) != (undefined1 *)0xffffffe8) {
-    pbStack00000018 = pbVar8;
+    endCursor = exponentDigitCursor;
   }
-  pbVar8 = pbVar8 + -1;
-  dVar10 = DOUBLE_97c30a48;
-  if (pbVar7 <= pbVar8) {
-    iVar5 = (int)pbVar8 - (int)(pbVar7 + -1);
-    dVar11 = DOUBLE_97c30a60;
+  exponentDigitCursor = exponentDigitCursor + -1;
+  exponentValue = DOUBLE_97c30a48;
+  if (exponentStart <= exponentDigitCursor) {
+    digitsLeft = (int)exponentDigitCursor - (int)(exponentStart + -1);
+    exponentPlaceValue = DOUBLE_97c30a60;
     do {
-      bVar6 = *pbVar8;
-      pbVar8 = pbVar8 + -1;
-      dVar10 = ((double)CONCAT44(0x43300000,(int)(char)bVar6 - 0x30U ^ 0x80000000) - DOUBLE_97c30a58
-               ) * dVar11 + dVar10;
-      dVar11 = dVar11 * DOUBLE_97c30a50;
-      iVar5 = iVar5 + -1;
-    } while (iVar5 != 0);
+      currentChar = *exponentDigitCursor;
+      exponentDigitCursor = exponentDigitCursor + -1;
+      exponentValue = ((double)CONCAT44(0x43300000,(int)(char)currentChar - 0x30U ^ 0x80000000) - DOUBLE_97c30a58
+               ) * exponentPlaceValue + exponentValue;
+      exponentPlaceValue = exponentPlaceValue * DOUBLE_97c30a50;
+      digitsLeft = digitsLeft + -1;
+    } while (digitsLeft != 0);
   }
-  if (bVar3) {
-    dVar10 = -dVar10;
+  if (isExponentNegative) {
+    exponentValue = -exponentValue;
   }
-  pow_10Result = (double)((double (*)())_pow_10)((int)dVar10);
-  dVar9 = dVar9 * pow_10Result;
+  pow_10Result = (double)((double (*)())_pow_10)((int)exponentValue);
+  value = value * pow_10Result;
 LAB_97c12804:
-  if (bVar4) {
-    dVar9 = -dVar9;
+  if (isNegative) {
+    value = -value;
   }
-  if (param_2 != (undefined4 *)0x0) {
-    *param_2 = pbStack00000018;
+  if (endPtr != (undefined4 *)0x0) {
+    *endPtr = endCursor;
   }
-  return dVar9;
+  return value;
 }
 
 /* _glp_dtostr @ 0x97c12838 (1096 bytes) */
-char * _glp_dtostr(undefined4 param_1,undefined4 param_2,char *param_3,uint param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+char * _glp_dtostr(undefined4 unusedArg1,undefined4 unusedArg2,char *outBuffer,uint bufferSize,double value,double tolerance,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
+  char *exponentReverseEnd;
+  char *result;
+  char *exponentStart;
+  double tenForFraction;
+  double fraction;
+  double roundedValue;
+  double scaledValue;
   double pow_10Result2;
   double pow_10Result;
   double roundResult;
   double floorResult2;
   double floorResult;
-  char *pcVar1;
-  char cVar2;
-  double dVar3;
-  int iVar4;
-  char *pcVar5;
-  char *pcVar6;
-  char *pcVar7;
-  double dVar8;
-  double dVar9;
-  double dVar10;
-  double dVar11;
-  uint local_50 [6];
+  char *exponentCursor;
+  char swapTemp;
+  double tenth;
+  int swapSpan;
+  char *bufferEnd;
+  char *writeCursor;
+  char *reverseEnd;
+  double zero;
+  double ten;
+  double scaledTolerance;
+  double quotient;
+  uint exponent [6];
   
-  dVar8 = DOUBLE_97c30a48;
-  pcVar5 = param_3 + param_4;
-  if (fparam_2 <= DOUBLE_97c30a48) {
-    fparam_2 = DOUBLE_97c30ac0;
+  zero = DOUBLE_97c30a48;
+  bufferEnd = outBuffer + bufferSize;
+  if (tolerance <= DOUBLE_97c30a48) {
+    tolerance = DOUBLE_97c30ac0;
   }
-  if (param_4 < 2) {
+  if (bufferSize < 2) {
     return (char *)0x0;
   }
-  if (fparam_1 < DOUBLE_97c30a48) {
-    fparam_1 = -fparam_1;
-    *param_3 = '-';
-    param_3 = param_3 + 1;
+  if (value < DOUBLE_97c30a48) {
+    value = -value;
+    *outBuffer = '-';
+    outBuffer = outBuffer + 1;
   }
-  dVar10 = fparam_2;
-  if (dVar8 < fparam_1) {
-    if ((fparam_1 < DOUBLE_97c30ac8) || (DOUBLE_97c30ad8 < fparam_1)) {
-      _frexp(fparam_1,local_50);
-      roundResult = _round(((double)CONCAT44(0x43300000,local_50[0] ^ 0x80000000) - DOUBLE_97c30a58) *
+  scaledTolerance = tolerance;
+  if (zero < value) {
+    if ((value < DOUBLE_97c30ac8) || (DOUBLE_97c30ad8 < value)) {
+      _frexp(value,exponent);
+      roundResult = _round(((double)CONCAT44(0x43300000,exponent[0] ^ 0x80000000) - DOUBLE_97c30a58) *
                      DOUBLE_97c30ad0);
-      local_50[0] = (uint)(int)roundResult;
-      pow_10Result = (double)((double (*)())_pow_10)(local_50[0]);
-      pow_10Result2 = (double)((double (*)())_pow_10)(-local_50[0]);
-      dVar10 = fparam_2 * pow_10Result;
-      dVar8 = fparam_1 * pow_10Result2;
+      exponent[0] = (uint)(int)roundResult;
+      pow_10Result = (double)((double (*)())_pow_10)(exponent[0]);
+      pow_10Result2 = (double)((double (*)())_pow_10)(-exponent[0]);
+      scaledTolerance = tolerance * pow_10Result;
+      scaledValue = value * pow_10Result2;
     }
     else {
-      local_50[0] = 0;
-      dVar8 = fparam_1;
+      exponent[0] = 0;
+      scaledValue = value;
     }
-    for (; DOUBLE_97c30a50 <= dVar8 + fparam_2 * DOUBLE_97c30a88; dVar8 = dVar8 * DOUBLE_97c30ab8) {
-      local_50[0] = local_50[0] + 1;
-      dVar10 = dVar10 * DOUBLE_97c30a50;
+    for (; DOUBLE_97c30a50 <= scaledValue + tolerance * DOUBLE_97c30a88; scaledValue = scaledValue * DOUBLE_97c30ab8) {
+      exponent[0] = exponent[0] + 1;
+      scaledTolerance = scaledTolerance * DOUBLE_97c30a50;
     }
-    for (; dVar8 + fparam_2 * DOUBLE_97c30a88 < DOUBLE_97c30a60; dVar8 = dVar8 * DOUBLE_97c30a50) {
-      local_50[0] = local_50[0] - 1;
-      dVar10 = dVar10 * DOUBLE_97c30ab8;
+    for (; scaledValue + tolerance * DOUBLE_97c30a88 < DOUBLE_97c30a60; scaledValue = scaledValue * DOUBLE_97c30a50) {
+      exponent[0] = exponent[0] - 1;
+      scaledTolerance = scaledTolerance * DOUBLE_97c30ab8;
     }
-    if (3 < (int)(((int)local_50[0] >> 0x1f ^ local_50[0]) - ((int)local_50[0] >> 0x1f)))
+    if (3 < (int)(((int)exponent[0] >> 0x1f ^ exponent[0]) - ((int)exponent[0] >> 0x1f)))
     goto LAB_97c12a28;
   }
-  local_50[0] = 0;
-  dVar8 = fparam_1;
-  fparam_2 = dVar10;
+  exponent[0] = 0;
+  scaledValue = value;
+  tolerance = scaledTolerance;
 LAB_97c12a28:
-  dVar8 = fparam_2 * DOUBLE_97c30a88 + dVar8;
-  floorResult = _floor(dVar8);
-  dVar3 = DOUBLE_97c30ab8;
-  dVar9 = DOUBLE_97c30a50;
-  pcVar6 = param_3;
-  while (fparam_2 < floorResult) {
-    if (pcVar6 == pcVar5) {
+  roundedValue = tolerance * DOUBLE_97c30a88 + scaledValue;
+  floorResult = _floor(roundedValue);
+  tenth = DOUBLE_97c30ab8;
+  ten = DOUBLE_97c30a50;
+  writeCursor = outBuffer;
+  while (tolerance < floorResult) {
+    if (writeCursor == bufferEnd) {
       return (char *)0x0;
     }
-    dVar11 = floorResult * dVar3;
-    floorResult = _floor(dVar11);
-    *pcVar6 = (char)(int)((dVar11 - floorResult) * dVar9) + '0';
-    pcVar6 = pcVar6 + 1;
+    quotient = floorResult * tenth;
+    floorResult = _floor(quotient);
+    *writeCursor = (char)(int)((quotient - floorResult) * ten) + '0';
+    writeCursor = writeCursor + 1;
   }
-  if (param_3 < pcVar6) {
-    iVar4 = (int)pcVar6 - (int)param_3;
-    pcVar7 = pcVar6;
-    while (1 < iVar4) {
-      pcVar7 = pcVar7 + -1;
-      cVar2 = *pcVar7;
-      *pcVar7 = *param_3;
-      *param_3 = cVar2;
-      param_3 = param_3 + 1;
-      iVar4 = (int)pcVar7 - (int)param_3;
+  if (outBuffer < writeCursor) {
+    swapSpan = (int)writeCursor - (int)outBuffer;
+    reverseEnd = writeCursor;
+    while (1 < swapSpan) {
+      reverseEnd = reverseEnd + -1;
+      swapTemp = *reverseEnd;
+      *reverseEnd = *outBuffer;
+      *outBuffer = swapTemp;
+      outBuffer = outBuffer + 1;
+      swapSpan = (int)reverseEnd - (int)outBuffer;
     }
   }
   else {
-    *pcVar6 = '0';
-    pcVar6 = pcVar6 + 1;
+    *writeCursor = '0';
+    writeCursor = writeCursor + 1;
   }
-  floorResult2 = _floor(dVar8);
-  dVar10 = DOUBLE_97c30a50;
-  dVar8 = dVar8 - floorResult2;
-  if (dVar8 <= fparam_2) {
-    if (local_50[0] == 0) {
-      if ((int)pcVar5 - (int)pcVar6 < 2) {
+  floorResult2 = _floor(roundedValue);
+  tenForFraction = DOUBLE_97c30a50;
+  fraction = roundedValue - floorResult2;
+  if (fraction <= tolerance) {
+    if (exponent[0] == 0) {
+      if ((int)bufferEnd - (int)writeCursor < 2) {
         return (char *)0x0;
       }
-      *pcVar6 = '.';
-      pcVar6[1] = '0';
-      pcVar6 = pcVar6 + 2;
+      *writeCursor = '.';
+      writeCursor[1] = '0';
+      writeCursor = writeCursor + 2;
     }
   }
   else {
-    if (pcVar6 == pcVar5) {
+    if (writeCursor == bufferEnd) {
       return (char *)0x0;
     }
-    *pcVar6 = '.';
-    pcVar6 = pcVar6 + 1;
+    *writeCursor = '.';
+    writeCursor = writeCursor + 1;
     do {
-      if (pcVar6 == pcVar5) {
+      if (writeCursor == bufferEnd) {
         return (char *)0x0;
       }
-      dVar8 = dVar8 * dVar10;
-      fparam_2 = fparam_2 * dVar10;
-      floorResult2 = _floor(dVar8);
-      dVar8 = dVar8 - floorResult2;
-      *pcVar6 = (char)(int)floorResult2 + '0';
-      pcVar6 = pcVar6 + 1;
-    } while (fparam_2 < dVar8);
+      fraction = fraction * tenForFraction;
+      tolerance = tolerance * tenForFraction;
+      floorResult2 = _floor(fraction);
+      fraction = fraction - floorResult2;
+      *writeCursor = (char)(int)floorResult2 + '0';
+      writeCursor = writeCursor + 1;
+    } while (tolerance < fraction);
   }
-  if (local_50[0] != 0) {
-    if ((int)pcVar5 - (int)pcVar6 < 3) {
+  if (exponent[0] != 0) {
+    if ((int)bufferEnd - (int)writeCursor < 3) {
       return (char *)0x0;
     }
-    *pcVar6 = 'e';
-    pcVar7 = pcVar6 + 1;
-    pcVar1 = pcVar7;
-    if ((int)local_50[0] < 0) {
-      local_50[0] = -local_50[0];
-      *pcVar7 = '-';
-      pcVar7 = pcVar6 + 2;
-      pcVar1 = pcVar7;
+    *writeCursor = 'e';
+    exponentStart = writeCursor + 1;
+    exponentCursor = exponentStart;
+    if ((int)exponent[0] < 0) {
+      exponent[0] = -exponent[0];
+      *exponentStart = '-';
+      exponentStart = writeCursor + 2;
+      exponentCursor = exponentStart;
     }
-    while (pcVar6 = pcVar1, 0 < (int)local_50[0]) {
-      if (pcVar6 == pcVar5) {
+    while (writeCursor = exponentCursor, 0 < (int)exponent[0]) {
+      if (writeCursor == bufferEnd) {
         return (char *)0x0;
       }
-      *pcVar6 = (char)local_50[0] + (char)((int)local_50[0] / 10) * -10 + '0';
-      local_50[0] = (int)local_50[0] / 10;
-      pcVar1 = pcVar6 + 1;
+      *writeCursor = (char)exponent[0] + (char)((int)exponent[0] / 10) * -10 + '0';
+      exponent[0] = (int)exponent[0] / 10;
+      exponentCursor = writeCursor + 1;
     }
-    iVar4 = (int)pcVar6 - (int)pcVar7;
-    pcVar1 = pcVar6;
-    while (1 < iVar4) {
-      pcVar1 = pcVar1 + -1;
-      cVar2 = *pcVar1;
-      *pcVar1 = *pcVar7;
-      *pcVar7 = cVar2;
-      pcVar7 = pcVar7 + 1;
-      iVar4 = (int)pcVar1 - (int)pcVar7;
+    swapSpan = (int)writeCursor - (int)exponentStart;
+    exponentReverseEnd = writeCursor;
+    while (1 < swapSpan) {
+      exponentReverseEnd = exponentReverseEnd + -1;
+      swapTemp = *exponentReverseEnd;
+      *exponentReverseEnd = *exponentStart;
+      *exponentStart = swapTemp;
+      exponentStart = exponentStart + 1;
+      swapSpan = (int)exponentReverseEnd - (int)exponentStart;
     }
   }
-  pcVar7 = (char *)0x0;
-  if (pcVar6 != pcVar5) {
-    *pcVar6 = '\0';
-    pcVar7 = pcVar6;
+  result = (char *)0x0;
+  if (writeCursor != bufferEnd) {
+    *writeCursor = '\0';
+    result = writeCursor;
   }
-  return pcVar7;
+  return result;
 }
 
 /* std____throw_bad_exception @ 0x97c12c80 (68 bytes) */
 int std____throw_bad_exception()
 {
-  undefined *puVar1;
-  undefined *puVar2;
-  undefined4 *puVar3;
+  undefined *destructor;
+  undefined *typeInfo;
+  undefined4 *exceptionObject;
   
-  puVar3 = (undefined4 *)___cxa_allocate_exception(4);
-  puVar2 = PTR_typeinfo_a7b7c180;
-  puVar1 = PTR___ZNSt13bad_exceptionD1Ev_a7b7c17c;
-  *puVar3 = PTR_vtable_a7b7c184 + 8;
+  exceptionObject = (undefined4 *)___cxa_allocate_exception(4);
+  typeInfo = PTR_typeinfo_a7b7c180;
+  destructor = PTR___ZNSt13bad_exceptionD1Ev_a7b7c17c;
+  *exceptionObject = PTR_vtable_a7b7c184 + 8;
                     
-  ___cxa_throw(puVar3,puVar2,puVar1);
+  ___cxa_throw(exceptionObject,typeInfo,destructor);
 }
 
 /* std____throw_bad_alloc @ 0x97c12cc4 (68 bytes) */
 int std____throw_bad_alloc()
 {
-  undefined *puVar1;
-  undefined *puVar2;
-  undefined4 *puVar3;
+  undefined *destructor;
+  undefined *typeInfo;
+  undefined4 *exceptionObject;
   
-  puVar3 = (undefined4 *)___cxa_allocate_exception(4);
-  puVar2 = PTR_typeinfo_a7b7c174;
-  puVar1 = PTR___ZNSt9bad_allocD1Ev_a7b7c170;
-  *puVar3 = PTR_vtable_a7b7c178 + 8;
+  exceptionObject = (undefined4 *)___cxa_allocate_exception(4);
+  typeInfo = PTR_typeinfo_a7b7c174;
+  destructor = PTR___ZNSt9bad_allocD1Ev_a7b7c170;
+  *exceptionObject = PTR_vtable_a7b7c178 + 8;
                     
-  ___cxa_throw(puVar3,puVar2,puVar1);
+  ___cxa_throw(exceptionObject,typeInfo,destructor);
 }
 
 /* std____throw_bad_cast @ 0x97c12d08 (68 bytes) */
 int std____throw_bad_cast()
 {
-  undefined *puVar1;
-  undefined *puVar2;
-  undefined4 *puVar3;
+  undefined *destructor;
+  undefined *typeInfo;
+  undefined4 *exceptionObject;
   
-  puVar3 = (undefined4 *)___cxa_allocate_exception(4);
-  puVar2 = PTR_typeinfo_a7b7c168;
-  puVar1 = PTR___ZNSt8bad_castD1Ev_a7b7c164;
-  *puVar3 = PTR_vtable_a7b7c16c + 8;
+  exceptionObject = (undefined4 *)___cxa_allocate_exception(4);
+  typeInfo = PTR_typeinfo_a7b7c168;
+  destructor = PTR___ZNSt8bad_castD1Ev_a7b7c164;
+  *exceptionObject = PTR_vtable_a7b7c16c + 8;
                     
-  ___cxa_throw(puVar3,puVar2,puVar1);
+  ___cxa_throw(exceptionObject,typeInfo,destructor);
 }
 
 /* std____throw_bad_typeid @ 0x97c12d4c (68 bytes) */
 int std____throw_bad_typeid()
 {
-  undefined *puVar1;
-  undefined *puVar2;
-  undefined4 *puVar3;
+  undefined *destructor;
+  undefined *typeInfo;
+  undefined4 *exceptionObject;
   
-  puVar3 = (undefined4 *)___cxa_allocate_exception(4);
-  puVar2 = PTR_typeinfo_a7b7c15c;
-  puVar1 = PTR___ZNSt10bad_typeidD1Ev_a7b7c158;
-  *puVar3 = PTR_vtable_a7b7c160 + 8;
+  exceptionObject = (undefined4 *)___cxa_allocate_exception(4);
+  typeInfo = PTR_typeinfo_a7b7c15c;
+  destructor = PTR___ZNSt10bad_typeidD1Ev_a7b7c158;
+  *exceptionObject = PTR_vtable_a7b7c160 + 8;
                     
-  ___cxa_throw(puVar3,puVar2,puVar1);
+  ___cxa_throw(exceptionObject,typeInfo,destructor);
 }
 
 /* std____throw_logic_error @ 0x97c12d90 (108 bytes) */
@@ -4733,14 +4745,14 @@ int std____throw_logic_error(str)
   void *this;
   char reservation;
   byte cr0Reg;
-  int local_40 [4];
-  unsigned char aaStack_30 [16];
-  undefined1 auStack_20 [24];
+  int messageString [4];
+  unsigned char stringAllocator [16];
+  undefined1 destroyAllocator [24];
   
-  __ZNSsC1EPKcRKSaIcE(local_40,str,aaStack_30);
+  __ZNSsC1EPKcRKSaIcE(messageString,str,stringAllocator);
   this = (void *)___cxa_allocate_exception(8);
-  __ZNSt11logic_errorC1ERKSs(this,(unsigned char *)local_40);
-  refCountPtr = (int *)(local_40[0] + -4);
+  __ZNSt11logic_errorC1ERKSs(this,(unsigned char *)messageString);
+  refCountPtr = (int *)(messageString[0] + -4);
   do {
     oldRefCount = *refCountPtr;
     if (reservation != '\0') {
@@ -4750,7 +4762,7 @@ int std____throw_logic_error(str)
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
   if (oldRefCount < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc),auStack_20);
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(messageString[0] + -0xc),destroyAllocator);
   }
                     
   ___cxa_throw(this,PTR_typeinfo_a7b7c154,PTR___ZNSt11logic_errorD1Ev_a7b7c150);
@@ -4766,14 +4778,14 @@ int std____throw_domain_error(str)
   void *this;
   char reservation;
   byte cr0Reg;
-  int local_40 [4];
-  unsigned char aaStack_30 [16];
-  undefined1 auStack_20 [24];
+  int messageString [4];
+  unsigned char stringAllocator [16];
+  undefined1 destroyAllocator [24];
   
-  __ZNSsC1EPKcRKSaIcE(local_40,str,aaStack_30);
+  __ZNSsC1EPKcRKSaIcE(messageString,str,stringAllocator);
   this = (void *)___cxa_allocate_exception(8);
-  __ZNSt12domain_errorC1ERKSs(this,(unsigned char *)local_40);
-  refCountPtr = (int *)(local_40[0] + -4);
+  __ZNSt12domain_errorC1ERKSs(this,(unsigned char *)messageString);
+  refCountPtr = (int *)(messageString[0] + -4);
   do {
     oldRefCount = *refCountPtr;
     if (reservation != '\0') {
@@ -4783,7 +4795,7 @@ int std____throw_domain_error(str)
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
   if (oldRefCount < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc),auStack_20);
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(messageString[0] + -0xc),destroyAllocator);
   }
                     
   ___cxa_throw(this,PTR_typeinfo_a7b7c14c,PTR___ZNSt12domain_errorD1Ev_a7b7c148);
@@ -4799,14 +4811,14 @@ int std____throw_invalid_argument(str)
   void *this;
   char reservation;
   byte cr0Reg;
-  int local_40 [4];
-  unsigned char aaStack_30 [16];
-  undefined1 auStack_20 [24];
+  int messageString [4];
+  unsigned char stringAllocator [16];
+  undefined1 destroyAllocator [24];
   
-  __ZNSsC1EPKcRKSaIcE(local_40,str,aaStack_30);
+  __ZNSsC1EPKcRKSaIcE(messageString,str,stringAllocator);
   this = (void *)___cxa_allocate_exception(8);
-  __ZNSt16invalid_argumentC1ERKSs(this,(unsigned char *)local_40);
-  refCountPtr = (int *)(local_40[0] + -4);
+  __ZNSt16invalid_argumentC1ERKSs(this,(unsigned char *)messageString);
+  refCountPtr = (int *)(messageString[0] + -4);
   do {
     oldRefCount = *refCountPtr;
     if (reservation != '\0') {
@@ -4816,7 +4828,7 @@ int std____throw_invalid_argument(str)
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
   if (oldRefCount < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc),auStack_20);
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(messageString[0] + -0xc),destroyAllocator);
   }
                     
   ___cxa_throw(this,PTR_typeinfo_a7b7c144,PTR___ZNSt16invalid_argumentD1Ev_a7b7c140);
@@ -4832,14 +4844,14 @@ int std____throw_length_error(str)
   void *this;
   char reservation;
   byte cr0Reg;
-  int local_40 [4];
-  unsigned char aaStack_30 [16];
-  undefined1 auStack_20 [24];
+  int messageString [4];
+  unsigned char stringAllocator [16];
+  undefined1 destroyAllocator [24];
   
-  __ZNSsC1EPKcRKSaIcE(local_40,str,aaStack_30);
+  __ZNSsC1EPKcRKSaIcE(messageString,str,stringAllocator);
   this = (void *)___cxa_allocate_exception(8);
-  __ZNSt12length_errorC1ERKSs(this,(unsigned char *)local_40);
-  refCountPtr = (int *)(local_40[0] + -4);
+  __ZNSt12length_errorC1ERKSs(this,(unsigned char *)messageString);
+  refCountPtr = (int *)(messageString[0] + -4);
   do {
     oldRefCount = *refCountPtr;
     if (reservation != '\0') {
@@ -4849,7 +4861,7 @@ int std____throw_length_error(str)
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
   if (oldRefCount < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc),auStack_20);
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(messageString[0] + -0xc),destroyAllocator);
   }
                     
   ___cxa_throw(this,PTR_typeinfo_a7b7c13c,PTR___ZNSt12length_errorD1Ev_a7b7c138);
@@ -4865,14 +4877,14 @@ int std____throw_out_of_range(str)
   void *this;
   char reservation;
   byte cr0Reg;
-  int local_40 [4];
-  unsigned char aaStack_30 [16];
-  undefined1 auStack_20 [24];
+  int messageString [4];
+  unsigned char stringAllocator [16];
+  undefined1 destroyAllocator [24];
   
-  __ZNSsC1EPKcRKSaIcE(local_40,str,aaStack_30);
+  __ZNSsC1EPKcRKSaIcE(messageString,str,stringAllocator);
   this = (void *)___cxa_allocate_exception(8);
-  __ZNSt12out_of_rangeC1ERKSs(this,(unsigned char *)local_40);
-  refCountPtr = (int *)(local_40[0] + -4);
+  __ZNSt12out_of_rangeC1ERKSs(this,(unsigned char *)messageString);
+  refCountPtr = (int *)(messageString[0] + -4);
   do {
     oldRefCount = *refCountPtr;
     if (reservation != '\0') {
@@ -4882,7 +4894,7 @@ int std____throw_out_of_range(str)
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
   if (oldRefCount < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc),auStack_20);
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(messageString[0] + -0xc),destroyAllocator);
   }
                     
   ___cxa_throw(this,PTR_typeinfo_a7b7c134,PTR___ZNSt12out_of_rangeD1Ev_a7b7c130);
@@ -4898,14 +4910,14 @@ int std____throw_runtime_error(str)
   void *this;
   char reservation;
   byte cr0Reg;
-  int local_40 [4];
-  unsigned char aaStack_30 [16];
-  undefined1 auStack_20 [24];
+  int messageString [4];
+  unsigned char stringAllocator [16];
+  undefined1 destroyAllocator [24];
   
-  __ZNSsC1EPKcRKSaIcE(local_40,str,aaStack_30);
+  __ZNSsC1EPKcRKSaIcE(messageString,str,stringAllocator);
   this = (void *)___cxa_allocate_exception(8);
-  __ZNSt13runtime_errorC1ERKSs(this,(unsigned char *)local_40);
-  refCountPtr = (int *)(local_40[0] + -4);
+  __ZNSt13runtime_errorC1ERKSs(this,(unsigned char *)messageString);
+  refCountPtr = (int *)(messageString[0] + -4);
   do {
     oldRefCount = *refCountPtr;
     if (reservation != '\0') {
@@ -4915,7 +4927,7 @@ int std____throw_runtime_error(str)
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
   if (oldRefCount < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc),auStack_20);
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(messageString[0] + -0xc),destroyAllocator);
   }
                     
   ___cxa_throw(this,PTR_typeinfo_a7b7c12c,PTR___ZNSt13runtime_errorD1Ev_a7b7c128);
@@ -4931,14 +4943,14 @@ int std____throw_range_error(str)
   void *this;
   char reservation;
   byte cr0Reg;
-  int local_40 [4];
-  unsigned char aaStack_30 [16];
-  undefined1 auStack_20 [24];
+  int messageString [4];
+  unsigned char stringAllocator [16];
+  undefined1 destroyAllocator [24];
   
-  __ZNSsC1EPKcRKSaIcE(local_40,str,aaStack_30);
+  __ZNSsC1EPKcRKSaIcE(messageString,str,stringAllocator);
   this = (void *)___cxa_allocate_exception(8);
-  __ZNSt11range_errorC1ERKSs(this,(unsigned char *)local_40);
-  refCountPtr = (int *)(local_40[0] + -4);
+  __ZNSt11range_errorC1ERKSs(this,(unsigned char *)messageString);
+  refCountPtr = (int *)(messageString[0] + -4);
   do {
     oldRefCount = *refCountPtr;
     if (reservation != '\0') {
@@ -4948,7 +4960,7 @@ int std____throw_range_error(str)
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
   if (oldRefCount < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc),auStack_20);
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(messageString[0] + -0xc),destroyAllocator);
   }
                     
   ___cxa_throw(this,PTR_typeinfo_a7b7c124,PTR___ZNSt11range_errorD1Ev_a7b7c120);
@@ -4964,14 +4976,14 @@ int std____throw_overflow_error(str)
   void *this;
   char reservation;
   byte cr0Reg;
-  int local_40 [4];
-  unsigned char aaStack_30 [16];
-  undefined1 auStack_20 [24];
+  int messageString [4];
+  unsigned char stringAllocator [16];
+  undefined1 destroyAllocator [24];
   
-  __ZNSsC1EPKcRKSaIcE(local_40,str,aaStack_30);
+  __ZNSsC1EPKcRKSaIcE(messageString,str,stringAllocator);
   this = (void *)___cxa_allocate_exception(8);
-  __ZNSt14overflow_errorC1ERKSs(this,(unsigned char *)local_40);
-  refCountPtr = (int *)(local_40[0] + -4);
+  __ZNSt14overflow_errorC1ERKSs(this,(unsigned char *)messageString);
+  refCountPtr = (int *)(messageString[0] + -4);
   do {
     oldRefCount = *refCountPtr;
     if (reservation != '\0') {
@@ -4981,7 +4993,7 @@ int std____throw_overflow_error(str)
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
   if (oldRefCount < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc),auStack_20);
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(messageString[0] + -0xc),destroyAllocator);
   }
                     
   ___cxa_throw(this,PTR_typeinfo_a7b7c11c,PTR___ZNSt14overflow_errorD1Ev_a7b7c118);
@@ -4997,14 +5009,14 @@ int std____throw_underflow_error(str)
   void *this;
   char reservation;
   byte cr0Reg;
-  int local_40 [4];
-  unsigned char aaStack_30 [16];
-  undefined1 auStack_20 [24];
+  int messageString [4];
+  unsigned char stringAllocator [16];
+  undefined1 destroyAllocator [24];
   
-  __ZNSsC1EPKcRKSaIcE(local_40,str,aaStack_30);
+  __ZNSsC1EPKcRKSaIcE(messageString,str,stringAllocator);
   this = (void *)___cxa_allocate_exception(8);
-  __ZNSt15underflow_errorC1ERKSs(this,(unsigned char *)local_40);
-  refCountPtr = (int *)(local_40[0] + -4);
+  __ZNSt15underflow_errorC1ERKSs(this,(unsigned char *)messageString);
+  refCountPtr = (int *)(messageString[0] + -4);
   do {
     oldRefCount = *refCountPtr;
     if (reservation != '\0') {
@@ -5014,7 +5026,7 @@ int std____throw_underflow_error(str)
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
   if (oldRefCount < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc),auStack_20);
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(messageString[0] + -0xc),destroyAllocator);
   }
                     
   ___cxa_throw(this,PTR_typeinfo_a7b7c114,PTR___ZNSt15underflow_errorD1Ev_a7b7c110);
