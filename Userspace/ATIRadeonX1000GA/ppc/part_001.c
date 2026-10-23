@@ -3184,7 +3184,7 @@ int _radeonFill(accel, unusedArg2, fillFlags, blitFlags, fillReq, patternBuf)
   uint fillKind;
   uint nextTileLeft;
   uint tileLeft;
-  uint idxPlus8Block1;
+  uint firstTileRightUnclamped;
   uint fillColor;
   dword *cmdWrite;
   undefined4 *rectEntry;
@@ -3290,16 +3290,16 @@ int _radeonFill(accel, unusedArg2, fillFlags, blitFlags, fillReq, patternBuf)
   int progIdx88;
   int progIdx87;
   int progIdx86;
-  int idxPlus36Block2;
-  int idxPlus34Block2;
-  int idxPlus33Block2;
-  int idxPlus32Block2;
-  int idxPlus31Block2;
-  int idxPlus30Block2;
-  int idxPlus29Block2;
-  int idxPlus27Block2;
-  int idxPlus24Block2;
-  int idxPlus23Block2;
+  int fillQuadVtx2ScrVIdx;
+  int fillQuadVtx2PosIdx;
+  int fillQuadVtx1TexVIdx;
+  int fillQuadVtx1TexUIdx;
+  int fillQuadVtx1ScrVIdx;
+  int fillQuadVtx1ScrUIdx;
+  int fillQuadVtx1PosIdx;
+  int fillQuadVtx0TexUIdx;
+  int fillQuadVtx0PosIdx;
+  int fillQuadFormatIdx;
   int tileHdrByteOff;
   float fillAlphaF;
   float fillBlueF;
@@ -3466,10 +3466,10 @@ int _radeonFill(accel, unusedArg2, fillFlags, blitFlags, fillReq, patternBuf)
           texOriginU = (float)((double)CONCAT44(0x43300000,texOriginUInt) - 4503599627370496.0);
           texOriginV = (float)((double)CONCAT44(0x43300000,texOriginVInt) - 4503599627370496.0);
           if (dstTop < dstBottom) {
-            idxPlus8Block1 = dstLeft + 8;
+            firstTileRightUnclamped = dstLeft + 8;
             tileRightLimit = dstRight;
-            if (idxPlus8Block1 < dstRight) {
-              tileRightLimit = idxPlus8Block1;
+            if (firstTileRightUnclamped < dstRight) {
+              tileRightLimit = firstTileRightUnclamped;
             }
             i2dHi10 = 0x43300000;
             firstTile = true;
@@ -3497,12 +3497,12 @@ int _radeonFill(accel, unusedArg2, fillFlags, blitFlags, fillReq, patternBuf)
                   tileHeight = tileBottom - tileTop;
                   tileTopF = (float)((double)CONCAT44(0x43300000,tileTop) - 4503599627370496.0);
                   tileBottomF = (float)((double)CONCAT44(0x43300000,tileBottom) - 4503599627370496.0);
-                  tileRowTopNext = idxPlus8Block1;
+                  tileRowTopNext = firstTileRightUnclamped;
                   tileLeft = dstLeft;
                   tileRight = tileRightLimit;
                   goto LAB_00008bec;
                 }
-                nextTileLeft = idxPlus8Block1;
+                nextTileLeft = firstTileRightUnclamped;
                 if (cmdWordsLeft < 0xd4) {
                   scratchWord0 = *(uint *)(accel + 0x18);
                   scratchWord1 = 0;
@@ -3930,8 +3930,8 @@ int _radeonFill(accel, unusedArg2, fillFlags, blitFlags, fillReq, patternBuf)
                   cmdWrite[streamIdxBase + 0x13] = 0;
                   cmdWrite[streamIdxBase + 0x14] = 0x12f5;
                   cmdWrite[streamIdxBase + 0x15] = 0;
-                  idxPlus23Block2 = streamIdxBase + 0x17;
-                  idxPlus24Block2 = streamIdxBase + 0x18;
+                  fillQuadFormatIdx = streamIdxBase + 0x17;
+                  fillQuadVtx0PosIdx = streamIdxBase + 0x18;
                   tileIdx26 = streamIdxBase + 0x30;
                   i2dHi17 = 0x43300000;
                   i2dHi18 = 0x43300000;
@@ -3939,16 +3939,16 @@ int _radeonFill(accel, unusedArg2, fillFlags, blitFlags, fillReq, patternBuf)
                   tileIdx3 = streamIdxBase + 0x19;
                   tileTopSpill = tileTop;
                   tileBottomSpill = tileBottom;
-                  idxPlus30Block2 = streamIdxBase + 0x1e;
-                  idxPlus31Block2 = streamIdxBase + 0x1f;
-                  idxPlus27Block2 = streamIdxBase + 0x1b;
-                  idxPlus34Block2 = streamIdxBase + 0x22;
-                  idxPlus36Block2 = streamIdxBase + 0x24;
+                  fillQuadVtx1ScrUIdx = streamIdxBase + 0x1e;
+                  fillQuadVtx1ScrVIdx = streamIdxBase + 0x1f;
+                  fillQuadVtx0TexUIdx = streamIdxBase + 0x1b;
+                  fillQuadVtx2PosIdx = streamIdxBase + 0x22;
+                  fillQuadVtx2ScrVIdx = streamIdxBase + 0x24;
                   tileHdrByteOff = (streamIdxBase + 0x16) * 4;
-                  idxPlus29Block2 = streamIdxBase + 0x1d;
-                  idxPlus32Block2 = streamIdxBase + 0x20;
+                  fillQuadVtx1PosIdx = streamIdxBase + 0x1d;
+                  fillQuadVtx1TexUIdx = streamIdxBase + 0x20;
                   tileIdx6 = streamIdxBase + 0x1c;
-                  idxPlus33Block2 = streamIdxBase + 0x21;
+                  fillQuadVtx1TexVIdx = streamIdxBase + 0x21;
                   tileIdx15 = streamIdxBase + 0x25;
                   tileIdx16 = streamIdxBase + 0x26;
                   tileIdx13 = streamIdxBase + 0x23;
@@ -3984,7 +3984,7 @@ int _radeonFill(accel, unusedArg2, fillFlags, blitFlags, fillReq, patternBuf)
                     quadSlot3 = (uint)GH_F2U((float)((quadSlot2 * tileBottomF)));
                     quadSlot2 = quadSlot2 * tileTopF;
                     *(undefined4 *)((int)cmdWrite + tileHdrByteOff) = 0xc0143500;
-                    cmdWrite[idxPlus23Block2] = 0x4003d;
+                    cmdWrite[fillQuadFormatIdx] = 0x4003d;
                     tileWidth = tileRight - curTileLeft;
                     if ((tileWidth == 8) && (tileHeight == 8)) {
                       i2dHi29 = 0x43300000;
@@ -4036,26 +4036,26 @@ int _radeonFill(accel, unusedArg2, fillFlags, blitFlags, fillReq, patternBuf)
                                                       4503601774854144.0)))));
                       tileWidthSpill = tileWidth;
                     }
-                    cmdWrite[idxPlus24Block2] = curTileLeft | tileBottomHi;
+                    cmdWrite[fillQuadVtx0PosIdx] = curTileLeft | tileBottomHi;
                     scrU0 = *quadSlot0Ptr;
                     cmdWrite[tileIdx3] = (dword)GH_F2U(scrU0);
                     scrV1Bits = *quadSlot3Ptr;
                     cmdWrite[tileIdx4] = scrV1Bits;
                     texU0 = *quadSlot4Ptr;
-                    cmdWrite[idxPlus27Block2] = (dword)GH_F2U(texU0);
+                    cmdWrite[fillQuadVtx0TexUIdx] = (dword)GH_F2U(texU0);
                     texV1Bits = *scratchWord2Ref;
                     cmdWrite[tileIdx6] = texV1Bits;
-                    cmdWrite[idxPlus29Block2] = curTileLeft | tileTopHi;
-                    cmdWrite[idxPlus30Block2] = (dword)GH_F2U(scrU0);
+                    cmdWrite[fillQuadVtx1PosIdx] = curTileLeft | tileTopHi;
+                    cmdWrite[fillQuadVtx1ScrUIdx] = (dword)GH_F2U(scrU0);
                     scrV0 = *quadSlot2Ptr;
-                    cmdWrite[idxPlus31Block2] = (dword)GH_F2U(scrV0);
-                    cmdWrite[idxPlus32Block2] = (dword)GH_F2U(texU0);
+                    cmdWrite[fillQuadVtx1ScrVIdx] = (dword)GH_F2U(scrV0);
+                    cmdWrite[fillQuadVtx1TexUIdx] = (dword)GH_F2U(texU0);
                     texV0 = *quadSlot6Ptr;
-                    cmdWrite[idxPlus33Block2] = (dword)GH_F2U(texV0);
-                    cmdWrite[idxPlus34Block2] = tileRight | tileTopHi;
+                    cmdWrite[fillQuadVtx1TexVIdx] = (dword)GH_F2U(texV0);
+                    cmdWrite[fillQuadVtx2PosIdx] = tileRight | tileTopHi;
                     scrU1 = *quadSlot1Ptr;
                     cmdWrite[tileIdx13] = (dword)GH_F2U(scrU1);
-                    cmdWrite[idxPlus36Block2] = (dword)GH_F2U(scrV0);
+                    cmdWrite[fillQuadVtx2ScrVIdx] = (dword)GH_F2U(scrV0);
                     texU1 = *quadSlot5Ptr;
                     cmdWrite[tileIdx15] = (dword)GH_F2U(texU1);
                     cmdWrite[tileIdx16] = (dword)GH_F2U(texV0);
@@ -4097,17 +4097,17 @@ LAB_00008bec:
                     tileIdx6 = 6;
                     tileIdx4 = 4;
                     screenHeight = *(short *)(accel + 0x52);
-                    idxPlus36Block2 = 0xe;
-                    idxPlus34Block2 = 0xc;
-                    idxPlus32Block2 = 10;
-                    idxPlus31Block2 = 9;
-                    idxPlus30Block2 = 8;
-                    idxPlus29Block2 = 7;
-                    idxPlus33Block2 = 0xb;
-                    idxPlus24Block2 = 2;
+                    fillQuadVtx2ScrVIdx = 0xe;
+                    fillQuadVtx2PosIdx = 0xc;
+                    fillQuadVtx1TexUIdx = 10;
+                    fillQuadVtx1ScrVIdx = 9;
+                    fillQuadVtx1ScrUIdx = 8;
+                    fillQuadVtx1PosIdx = 7;
+                    fillQuadVtx1TexVIdx = 0xb;
+                    fillQuadVtx0PosIdx = 2;
                     tileIdx3 = 3;
-                    idxPlus27Block2 = 5;
-                    idxPlus23Block2 = 1;
+                    fillQuadVtx0TexUIdx = 5;
+                    fillQuadFormatIdx = 1;
                     tileHdrByteOff = 0;
                     nextTileLeft = tileRowTopNext;
                     curTileLeft = tileLeft;
@@ -5125,11 +5125,11 @@ int _radeonSolidScanlines(accel, unusedArg2, unusedArg3, blitFlags, scanReq, pac
   undefined *taskPtr;
   dword *cmdPtrPlus44Or3Block1;
   dword *cmdPtrPlus6Block2;
-  int idxPlus3Block3;
+  int scanPacketWord3Idx;
   uint *lastHeader;
-  int idxPlus1Block3;
+  int scanPacketWord1Idx;
   uint cmdBufferBase;
-  int idxPlus2Block3;
+  int scanPacketWord2Idx;
   dword *cmdPtrPlus40Or2Block1;
   uint dstTop;
   uint cmdWordsLeft;
@@ -5159,7 +5159,7 @@ int _radeonSolidScanlines(accel, unusedArg2, unusedArg3, blitFlags, scanReq, pac
   uint i2dLo7;
   undefined4 i2dHi12;
   uint i2dLo8;
-  uint idxPlus8Block4;
+  uint firstTileRightUnclamped;
   undefined4 *scanEntry;
   undefined4 flushWaitWord;
   uint dstLeftMasked;
@@ -5339,10 +5339,10 @@ int _radeonSolidScanlines(accel, unusedArg2, unusedArg3, blitFlags, scanReq, pac
           dstRight = *(int *)(accel + 0x60) + scanEntry[0x1a];
           texOriginU = (float)((double)CONCAT44(0x43300000,texOriginUInt) - 4503599627370496.0);
           if (dstTop < dstBottom) {
-            idxPlus8Block4 = dstLeft + 8;
+            firstTileRightUnclamped = dstLeft + 8;
             tileRightLimit = dstRight;
-            if (idxPlus8Block4 < dstRight) {
-              tileRightLimit = idxPlus8Block4;
+            if (firstTileRightUnclamped < dstRight) {
+              tileRightLimit = firstTileRightUnclamped;
             }
             dstLeftMasked = dstLeft & 0x1fff;
             dstRightMasked = dstRight & 0x1fff;
@@ -5359,7 +5359,7 @@ int _radeonSolidScanlines(accel, unusedArg2, unusedArg3, blitFlags, scanReq, pac
                   tileBottomHi = tileBottom << 0x10;
                   tileTopHi = tileTop << 0x10;
                   tileHeight = tileBottom - tileTop;
-                  tileBottomNext = idxPlus8Block4;
+                  tileBottomNext = firstTileRightUnclamped;
                   goto LAB_0000c1c8;
                 }
                 if (cmdWordsLeft < 0x8e) {
@@ -5384,7 +5384,7 @@ int _radeonSolidScanlines(accel, unusedArg2, unusedArg3, blitFlags, scanReq, pac
                     tileHeight = tileBottom - tileTop;
                     *(undefined4 *)(scratchWord0 + 0x1c) = 0;
                     cmdWrite = (dword *)(scratchWord0 + 0x20);
-                    nextTileLeft = idxPlus8Block4;
+                    nextTileLeft = firstTileRightUnclamped;
                     *(uint *)(accel + 0x18) = scratchWord0;
                     cmdWord10 = (dword *)(scratchWord0 + 0x48);
                     *(uint *)(accel + 0x7c) = scratchWord0 + 0x1c;
@@ -5403,7 +5403,7 @@ int _radeonSolidScanlines(accel, unusedArg2, unusedArg3, blitFlags, scanReq, pac
                     tileBottomHi = tileBottom << 0x10;
                     tileHeight = tileBottom - tileTop;
                     tileTopHi = tileTop << 0x10;
-                    nextTileLeft = idxPlus8Block4;
+                    nextTileLeft = firstTileRightUnclamped;
                     *(undefined4 *)(accel + 0x7c) = 0;
                     *(undefined4 *)(accel + 0x18) = 0;
                     cmdWrite = (dword *)0x0;
@@ -5427,7 +5427,7 @@ int _radeonSolidScanlines(accel, unusedArg2, unusedArg3, blitFlags, scanReq, pac
                   cmdWord1 = cmdWrite + 1;
                   cmdPtrPlus40Or2Block1 = cmdWrite + 2;
                   cmdPtrPlus44Or3Block1 = cmdWrite + 3;
-                  nextTileLeft = idxPlus8Block4;
+                  nextTileLeft = firstTileRightUnclamped;
                   cmdWord4 = cmdWrite + 4;
                   cmdWord5 = cmdWrite + 5;
                   cmdPtrPlus6Block2 = cmdWrite + 6;
@@ -5456,9 +5456,9 @@ int _radeonSolidScanlines(accel, unusedArg2, unusedArg3, blitFlags, scanReq, pac
                   cmdWordsLeft = cmdWordsLeft - 10;
                   setupWords = ((int (*)())_radeon3DCopySetup)(accel,cmdWord10,patternDesc + 0xc,patternFormat,0,0,0,0);
                   regByteOffset = setupWords << 2;
-                  idxPlus1Block3 = setupWords + 1;
-                  idxPlus2Block3 = setupWords + 2;
-                  idxPlus3Block3 = setupWords + 3;
+                  scanPacketWord1Idx = setupWords + 1;
+                  scanPacketWord2Idx = setupWords + 2;
+                  scanPacketWord3Idx = setupWords + 3;
                   regIdxNext = setupWords + 4;
                   cmdWrite = cmdWord10;
                   while( true ) {
@@ -5468,14 +5468,14 @@ int _radeonSolidScanlines(accel, unusedArg2, unusedArg3, blitFlags, scanReq, pac
                       headerBytes[1] = '\0';
                       headerBytes[2] = '\x10';
                       headerBytes[3] = -8;
-                      cmdWrite[idxPlus1Block3] = dstLeftMasked | dstTop * 0x2000 & 0x3ffe000;
-                      cmdWrite[idxPlus2Block3] = 0x10f9;
-                      cmdWrite[idxPlus3Block3] = dstRightMasked | dstBottom * 0x2000 & 0x3ffe000;
+                      cmdWrite[scanPacketWord1Idx] = dstLeftMasked | dstTop * 0x2000 & 0x3ffe000;
+                      cmdWrite[scanPacketWord2Idx] = 0x10f9;
+                      cmdWrite[scanPacketWord3Idx] = dstRightMasked | dstBottom * 0x2000 & 0x3ffe000;
                       regByteOffset = regIdxNext << 2;
-                      idxPlus1Block3 = regIdxNext + 1;
-                      idxPlus2Block3 = regIdxNext + 2;
+                      scanPacketWord1Idx = regIdxNext + 1;
+                      scanPacketWord2Idx = regIdxNext + 2;
                       needsRegSetup = 0;
-                      idxPlus3Block3 = regIdxNext + 3;
+                      scanPacketWord3Idx = regIdxNext + 3;
                       setupWords = regIdxNext;
                       regIdxNext = regIdxNext + 4;
                     }
@@ -5486,7 +5486,7 @@ int _radeonSolidScanlines(accel, unusedArg2, unusedArg3, blitFlags, scanReq, pac
                       headerBytes[1] = '\f';
                       headerBytes[2] = '5';
                       headerBytes[3] = '\0';
-                      cmdWrite[idxPlus1Block3] = drawCountWord;
+                      cmdWrite[scanPacketWord1Idx] = drawCountWord;
                       i2dHi9 = 0x43300000;
                       i2dLo5 = (int)*(short *)(patternDesc + 0x10) ^ 0x80000000;
                       u0Norm = (float)((double)(texOriginU + 0.0) *
@@ -5507,8 +5507,8 @@ int _radeonSolidScanlines(accel, unusedArg2, unusedArg3, blitFlags, scanReq, pac
                       v1Norm = (float)((double)(texOriginV + 8.0) *
                                       (1.0 / ((double)CONCAT44(0x43300000,i2dLo8) -
                                              4503601774854144.0)));
-                      cmdWrite[idxPlus2Block3] = tileLeft | tileBottomHi;
-                      cmdWrite[idxPlus3Block3] = (dword)GH_F2U(u0Norm);
+                      cmdWrite[scanPacketWord2Idx] = tileLeft | tileBottomHi;
+                      cmdWrite[scanPacketWord3Idx] = (dword)GH_F2U(u0Norm);
                       cmdWrite[regIdxNext] = (dword)GH_F2U(v1Norm);
                       cmdWrite[setupWords + 5] = tileLeft | tileTopHi;
                       cmdWrite[setupWords + 6] = (dword)GH_F2U(u0Norm);
@@ -5526,7 +5526,7 @@ int _radeonSolidScanlines(accel, unusedArg2, unusedArg3, blitFlags, scanReq, pac
                       headerBytes[1] = '\f';
                       headerBytes[2] = '5';
                       headerBytes[3] = '\0';
-                      cmdWrite[idxPlus1Block3] = drawCountWord;
+                      cmdWrite[scanPacketWord1Idx] = drawCountWord;
                       i2dHi5 = 0x43300000;
                       i2dLo1 = (int)*(short *)(patternDesc + 0x10) ^ 0x80000000;
                       u0NormAlt = (float)((double)(texOriginU + 0.0) *
@@ -5550,8 +5550,8 @@ int _radeonSolidScanlines(accel, unusedArg2, unusedArg3, blitFlags, scanReq, pac
                                                                4503599627370496.0)) *
                                       (1.0 / ((double)CONCAT44(0x43300000,i2dLo4) -
                                              4503601774854144.0)));
-                      cmdWrite[idxPlus2Block3] = tileBottomHi | tileLeft;
-                      cmdWrite[idxPlus3Block3] = (dword)GH_F2U(u0NormAlt);
+                      cmdWrite[scanPacketWord2Idx] = tileBottomHi | tileLeft;
+                      cmdWrite[scanPacketWord3Idx] = (dword)GH_F2U(u0NormAlt);
                       cmdWrite[regIdxNext] = (dword)GH_F2U(v1Norm);
                       cmdWrite[setupWords + 5] = tileTopHi | tileLeft;
                       cmdWrite[setupWords + 6] = (dword)GH_F2U(u0NormAlt);
@@ -5582,9 +5582,9 @@ int _radeonSolidScanlines(accel, unusedArg2, unusedArg3, blitFlags, scanReq, pac
 LAB_0000c1c8:
                     if (cmdWordsLeft < 0x16) break;
                     regIdxNext = 4;
-                    idxPlus3Block3 = 3;
-                    idxPlus2Block3 = 2;
-                    idxPlus1Block3 = 1;
+                    scanPacketWord3Idx = 3;
+                    scanPacketWord2Idx = 2;
+                    scanPacketWord1Idx = 1;
                     regByteOffset = 0;
                     setupWords = 0;
                     nextTileLeft = tileBottomNext;

@@ -1,0 +1,15 @@
+use	_radeonSolidScanlines	local_114	firstTileRightUnclamped	INFERRED	dstLeft + 8: right edge of the first 8-pixel pattern tile column before clamping to dstRight	#117	+89	all	none
+use	_radeonSolidScanlines	iVar27	scanPacketWord1Idx	INFERRED	word 1 after the first word of the current packet: rect TL / 0x10f9 / rect BR on the register-setup pass, vertex format / vertex 0 position / vertex 0 u on a draw (one slot for both: the gate shows the loop reaches both uses from either assignment)	#234	+129	all	none
+use	_radeonSolidScanlines	iVar30	scanPacketWord2Idx	INFERRED	word 2 after the first word of the current packet: rect TL / 0x10f9 / rect BR on the register-setup pass, vertex format / vertex 0 position / vertex 0 u on a draw (one slot for both: the gate shows the loop reaches both uses from either assignment)	#235	+127	all	none
+use	_radeonSolidScanlines	iVar21	scanPacketWord3Idx	INFERRED	word 3 after the first word of the current packet: rect TL / 0x10f9 / rect BR on the register-setup pass, vertex format / vertex 0 position / vertex 0 u on a draw (one slot for both: the gate shows the loop reaches both uses from either assignment)	#236	+125	all	none
+use	_radeonFill	uVar38	firstTileRightUnclamped	INFERRED	dstLeft + 8: right edge of the first 8-pixel pattern tile column before clamping to dstRight	#42	+37	all	none
+use	_radeonFill	local_13c	fillQuadFormatIdx	INFERRED	0x4003d vertex-format word	#506	+178	all	none
+use	_radeonFill	local_140	fillQuadVtx0PosIdx	INFERRED	vertex 0 position (x|y<<16) word	#507	+174	all	none
+use	_radeonFill	local_14c	fillQuadVtx1ScrUIdx	INFERRED	vertex 1 screen-texture u word	#515	+163	all	none
+use	_radeonFill	local_150	fillQuadVtx1ScrVIdx	INFERRED	vertex 1 screen-texture v word	#516	+161	all	none
+use	_radeonFill	local_144	fillQuadVtx0TexUIdx	INFERRED	vertex 0 pattern-texture u word	#517	+166	all	none
+use	_radeonFill	local_15c	fillQuadVtx2PosIdx	INFERRED	vertex 2 position (x|y<<16) word	#518	+157	all	none
+use	_radeonFill	local_160	fillQuadVtx2ScrVIdx	INFERRED	vertex 2 screen-texture v word	#519	+155	all	none
+use	_radeonFill	local_148	fillQuadVtx1PosIdx	INFERRED	vertex 1 position (x|y<<16) word	#521	+158	all	none
+use	_radeonFill	local_154	fillQuadVtx1TexUIdx	INFERRED	vertex 1 pattern-texture u word	#522	+154	all	none
+use	_radeonFill	local_158	fillQuadVtx1TexVIdx	INFERRED	vertex 1 pattern-texture v word	#524	+156	all	none
