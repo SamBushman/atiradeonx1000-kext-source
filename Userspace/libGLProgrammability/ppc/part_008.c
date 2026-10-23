@@ -716,12 +716,13 @@ int BindingTable__FindAttribBinding(this, binding)
   unsigned char * this;
   unsigned char * binding;
 {
-  int iVar1;
+  int isEqual;
+  int hashIdx;
   unsigned char * this_00;
   
-  iVar1 = Binding__GetHash(binding,*(uint *)this);
-  this_00 = *(unsigned char **)(iVar1 * 4 + *(int *)(this + 0x10));
-  while ((this_00 != (unsigned char *)0x0 && (iVar1 = __ZeqRK7BindingS1_(this_00,binding), iVar1 != 1))) {
+  hashIdx = Binding__GetHash(binding,*(uint *)this);
+  this_00 = *(unsigned char **)(hashIdx * 4 + *(int *)(this + 0x10));
+  while ((this_00 != (unsigned char *)0x0 && (isEqual = __ZeqRK7BindingS1_(this_00,binding), isEqual != 1))) {
     this_00 = (unsigned char *)((int (*)())Binding__GetNextBindingInHash)(this_00);
   }
   return this_00;
@@ -1087,12 +1088,13 @@ int BindingTable__FindUniformBinding(this, binding)
   unsigned char * this;
   unsigned char * binding;
 {
-  int iVar1;
+  int isEqual;
+  int hashIdx;
   unsigned char * this_00;
   
-  iVar1 = Binding__GetHash(binding,*(uint *)this);
-  this_00 = *(unsigned char **)(iVar1 * 4 + *(int *)(this + 0x18));
-  while ((this_00 != (unsigned char *)0x0 && (iVar1 = __ZeqRK7BindingS1_(this_00,binding), iVar1 != 1))) {
+  hashIdx = Binding__GetHash(binding,*(uint *)this);
+  this_00 = *(unsigned char **)(hashIdx * 4 + *(int *)(this + 0x18));
+  while ((this_00 != (unsigned char *)0x0 && (isEqual = __ZeqRK7BindingS1_(this_00,binding), isEqual != 1))) {
     this_00 = (unsigned char *)((int (*)())Binding__GetNextBindingInHash)(this_00);
   }
   return this_00;

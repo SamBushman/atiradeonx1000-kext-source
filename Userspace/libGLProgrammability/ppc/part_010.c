@@ -639,11 +639,11 @@ int ParseSymbol__ResolveOpenGLType(this)
   int *parseTreeType;
   int iVar3;
   uint basicType;
-  undefined4 a1;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleR4;
+  undefined4 staleR5;
+  undefined4 staleR6;
+  undefined4 staleR7;
+  undefined4 staleR8;
   int isArrayOfStruct;
   
   parseTreeType = *(int **)(this + 0xc);
@@ -667,7 +667,7 @@ int ParseSymbol__ResolveOpenGLType(this)
       goto switchD_97bba640_caseD_0;
     case 1:
       iVar3 = (**(code **)(**(int **)(this + 0xc) + 0x34))
-                        (*(int **)(this + 0xc),a1,in_r5,in_r6,in_r7,in_r8,basicType * 4);
+                        (*(int **)(this + 0xc),staleR4,staleR5,staleR6,staleR7,staleR8,basicType * 4);
       if (iVar3 == 0) {
         iVar3 = (**(code **)(**(int **)(this + 0xc) + 0x2c))(*(int **)(this + 0xc));
         if (iVar3 == 2) {
@@ -902,33 +902,34 @@ int ParseSymbol__RemoveNameBackToChar(this, stopChar)
   unsigned char * this;
   int stopChar;
 {
+  int newLen;
   char *chPtr;
   bool found;
-  int iVar3;
+  int scanPos;
   int charIdx;
   
-  iVar3 = *(int *)(this + 0x20);
+  scanPos = *(int *)(this + 0x20);
   found = false;
-  if (-1 < iVar3) {
+  if (-1 < scanPos) {
     do {
-      if (*(char *)(*(int *)(this + 0x14) + iVar3) == stopChar) {
+      if (*(char *)(*(int *)(this + 0x14) + scanPos) == stopChar) {
         found = true;
       }
-      *(undefined1 *)(*(int *)(this + 0x14) + iVar3) = 0;
-      iVar3 = iVar3 + -1;
-    } while ((-1 < iVar3) && (!found));
+      *(undefined1 *)(*(int *)(this + 0x14) + scanPos) = 0;
+      scanPos = scanPos + -1;
+    } while ((-1 < scanPos) && (!found));
   }
-  iVar3 = iVar3 + 1;
+  newLen = scanPos + 1;
   charIdx = 0;
   *(undefined4 *)(this + 0x1c) = 0;
-  *(int *)(this + 0x20) = iVar3;
-  if (0 < iVar3) {
+  *(int *)(this + 0x20) = newLen;
+  if (0 < newLen) {
     do {
       chPtr = (char *)(*(int *)(this + 0x14) + charIdx);
       charIdx = charIdx + 1;
       *(int *)(this + 0x1c) = *(int *)(this + 0x1c) + (int)*chPtr;
-      iVar3 = iVar3 + -1;
-    } while (iVar3 != 0);
+      newLen = newLen + -1;
+    } while (newLen != 0);
     return;
   }
   return;
@@ -1097,18 +1098,19 @@ int ParseSymbol__AddDirectIndex(this, directIndex)
 int ParseSymbol__PopDirectIndex(this)
   unsigned char * this;
 {
-  int iVar1;
+  int byteOffset;
+  int oldCount;
   uint loopIndex;
   
-  iVar1 = *(int *)(this + 0x24);
+  oldCount = *(int *)(this + 0x24);
   loopIndex = 0;
-  *(int *)(this + 0x24) = iVar1 + -1;
-  if (iVar1 + -1 != 0) {
+  *(int *)(this + 0x24) = oldCount + -1;
+  if (oldCount + -1 != 0) {
     do {
-      iVar1 = loopIndex * 4;
+      byteOffset = loopIndex * 4;
       loopIndex = loopIndex + 1;
-      *(undefined4 *)(iVar1 + *(int *)(this + 0x18)) =
-           *(undefined4 *)(iVar1 + *(int *)(this + 0x18) + 4);
+      *(undefined4 *)(byteOffset + *(int *)(this + 0x18)) =
+           *(undefined4 *)(byteOffset + *(int *)(this + 0x18) + 4);
     } while (loopIndex < *(uint *)(this + 0x24));
     return;
   }
@@ -1613,18 +1615,19 @@ int ParseOperand__AddDirectIndex(this, directIndex)
 int ParseOperand__PopDirectIndex(this)
   unsigned char * this;
 {
-  int iVar1;
+  int byteOffset;
+  int oldCount;
   uint loopIndex;
   
-  iVar1 = *(int *)(this + 0x20);
+  oldCount = *(int *)(this + 0x20);
   loopIndex = 0;
-  *(int *)(this + 0x20) = iVar1 + -1;
-  if (iVar1 + -1 != 0) {
+  *(int *)(this + 0x20) = oldCount + -1;
+  if (oldCount + -1 != 0) {
     do {
-      iVar1 = loopIndex * 4;
+      byteOffset = loopIndex * 4;
       loopIndex = loopIndex + 1;
-      *(undefined4 *)(iVar1 + *(int *)(this + 0x1c)) =
-           *(undefined4 *)(iVar1 + *(int *)(this + 0x1c) + 4);
+      *(undefined4 *)(byteOffset + *(int *)(this + 0x1c)) =
+           *(undefined4 *)(byteOffset + *(int *)(this + 0x1c) + 4);
     } while (loopIndex < *(uint *)(this + 0x20));
     return;
   }
@@ -1947,18 +1950,18 @@ int ParseOperand__IsMatrix(this)
 int ParseOperand__GetBaseSize(this)
   unsigned char * this;
 {
-  int iVar1;
+  int baseSize;
   
   if (*(int *)this == 0) {
-    iVar1 = *(int *)(this + 0x24);
+    baseSize = *(int *)(this + 0x24);
   }
   else {
-    iVar1 = *(int *)(this + 0x14);
-    if (iVar1 == 0) {
-      iVar1 = GetScalerWidthForType((uint)*(ushort *)(*(int *)this + 0x2c));
+    baseSize = *(int *)(this + 0x14);
+    if (baseSize == 0) {
+      baseSize = GetScalerWidthForType((uint)*(ushort *)(*(int *)this + 0x2c));
     }
   }
-  return iVar1;
+  return baseSize;
 }
 
 /* ParseOperand__GetLogicalSize @ 0x97bbbda0 (132 bytes) */

@@ -256,16 +256,16 @@ int _ShGetAttribLocation(handle, str)
   char *str;
 {
   int linkerObj;
-  undefined4 uVar2;
+  undefined4 location;
   
-  uVar2 = 0xffffffff;
+  location = 0xffffffff;
   if ((handle != (int *)0x0) && (linkerObj = (**(code **)(*handle + 0xc))(handle), linkerObj != 0)) {
-    uVar2 = 0xffffffff;
+    location = 0xffffffff;
     if (*(unsigned char **)(linkerObj + 4) != (unsigned char *)0x0) {
-      uVar2 = BindingTable__FindAttribBindingLocationByName(*(unsigned char **)(linkerObj + 4),str);
+      location = BindingTable__FindAttribBindingLocationByName(*(unsigned char **)(linkerObj + 4),str);
     }
   }
-  return uVar2;
+  return location;
 }
 
 /* _ShGetUniformLocation @ 0x97ba22d4 (112 bytes) */
@@ -274,17 +274,17 @@ int _ShGetUniformLocation(handle, str)
   char *str;
 {
   int linkerObj;
-  undefined4 uVar2;
+  undefined4 location;
   
-  uVar2 = 0xffffffff;
+  location = 0xffffffff;
   if ((handle != (int *)0x0) && (linkerObj = (**(code **)(*handle + 0xc))(handle), linkerObj != 0)) {
-    uVar2 = 0xffffffff;
+    location = 0xffffffff;
     if (*(unsigned char **)(linkerObj + 4) != (unsigned char *)0x0) {
-      uVar2 = BindingTable__FindClientUniformBindingLocationByName
+      location = BindingTable__FindClientUniformBindingLocationByName
                         (*(unsigned char **)(linkerObj + 4),str);
     }
   }
-  return uVar2;
+  return location;
 }
 
 /* _ShGetPPStreamManager @ 0x97ba2344 (92 bytes) */
@@ -568,24 +568,24 @@ int TFunction__dump(this, infoSink)
   unsigned char * infoSink;
 {
   int mangledName;
-  undefined1 *puVar1;
-  int iVar2;
+  undefined1 *terminalPtr;
+  int nameData;
   char *basicString;
-  int iVar4;
+  int symbolName;
   unsigned char * this_00;
   
-  puVar1 = DAT_a7b7ba80;
-  iVar4 = *(int *)(this + 4);
+  terminalPtr = DAT_a7b7ba80;
+  symbolName = *(int *)(this + 4);
   this_00 = infoSink + 8;
-  iVar2 = *(int *)(iVar4 + 4);
-  *(undefined1 *)(iVar2 + *(int *)(iVar2 + -0xc)) = *DAT_a7b7ba80;
-  __ZN13TInfoSinkBase6appendEPKc(this_00,*(char **)(iVar4 + 4));
+  nameData = *(int *)(symbolName + 4);
+  *(undefined1 *)(nameData + *(int *)(nameData + -0xc)) = *DAT_a7b7ba80;
+  __ZN13TInfoSinkBase6appendEPKc(this_00,*(char **)(symbolName + 4));
   __ZN13TInfoSinkBase6appendEPKc(this_00,": ");
   basicString = (char *)TType__getBasicString(*(uint *)(this + 0x40) >> 0x13 & 0x3f);
   __ZN13TInfoSinkBase6appendEPKc(this_00,basicString);
   __ZN13TInfoSinkBase6appendEPKc(this_00," ");
   mangledName = (**(code **)(*(int *)this + 8))(this);
-  *(undefined1 *)(*(int *)(mangledName + 4) + *(int *)(*(int *)(mangledName + 4) + -0xc)) = *puVar1;
+  *(undefined1 *)(*(int *)(mangledName + 4) + *(int *)(*(int *)(mangledName + 4) + -0xc)) = *terminalPtr;
   __ZN13TInfoSinkBase6appendEPKc(this_00,*(char **)(mangledName + 4));
   return __ZN13TInfoSinkBase6appendEPKc(this_00,"\n");
 }
@@ -595,19 +595,19 @@ int TSymbolTableLevel__dump(this, infoSink)
   unsigned char * this;
   unsigned char * infoSink;
 {
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleR5;
+  undefined4 staleR6;
+  undefined4 staleR7;
+  undefined4 staleR8;
   int a6;
-  int local_20 [4];
+  int iter [4];
   
   a6 = *(int *)(this + 4);
-  local_20[0] = *(int *)(a6 + 8);
-  while (local_20[0] != a6) {
-    (**(code **)(**(int **)(local_20[0] + 0x18) + 0x14))
-              (*(int **)(local_20[0] + 0x18),infoSink,in_r5,in_r6,in_r7,in_r8,a6);
-    std___Rb_tree_base_iterator___M_increment((unsigned char *)local_20);
+  iter[0] = *(int *)(a6 + 8);
+  while (iter[0] != a6) {
+    (**(code **)(**(int **)(iter[0] + 0x18) + 0x14))
+              (*(int **)(iter[0] + 0x18),infoSink,staleR5,staleR6,staleR7,staleR8,a6);
+    std___Rb_tree_base_iterator___M_increment((unsigned char *)iter);
     a6 = *(int *)(this + 4);
   }
   return;
@@ -698,7 +698,7 @@ int __ZN9TFunctionD4Ev(this)
   int paramPtr;
   char reservation;
   byte cr0Reg;
-  undefined4 local_20 [5];
+  undefined4 destroyAlloc [5];
   
   paramPtr = *(int *)((int)this + 0x10);
   *(int *)this = DAT_a7b7ba7c + 8;
@@ -711,7 +711,7 @@ int __ZN9TFunctionD4Ev(this)
     }
   }
   paramEnd = *(int *)((int)this + 0x48);
-  local_20[0] = *(undefined4 *)((int)this + 0x44);
+  destroyAlloc[0] = *(undefined4 *)((int)this + 0x44);
   refCountPtr = (int *)(paramEnd + -4);
   do {
     oldRefCount = *refCountPtr;
@@ -723,7 +723,7 @@ int __ZN9TFunctionD4Ev(this)
   } while (!(bool)(cr0Reg >> 1 & 1));
   if (oldRefCount < 1) {
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-              ((unsigned char *)(paramEnd + -0xc),local_20);
+              ((unsigned char *)(paramEnd + -0xc),destroyAlloc);
   }
   paramEnd = *(int *)((int)this + 0x10);
   *(undefined ***)((int)this + 0x1c) = &PTR___ZN5TTypeD1Ev_a7b7d590;
@@ -748,9 +748,9 @@ int __ZN17TSymbolTableLevelD1Ev(this)
 }
 
 /* __ZN17TSymbolTableLevelD4Ev @ 0x97ba2da0 (184 bytes) */
-int __ZN17TSymbolTableLevelD4Ev(this, param_2)
+int __ZN17TSymbolTableLevelD4Ev(this, staleR4)
   void *this;
-  undefined4 param_2;
+  undefined4 staleR4;
 {
   int *symbol;
   undefined4 extraout_r4;
@@ -767,11 +767,11 @@ int __ZN17TSymbolTableLevelD4Ev(this, param_2)
     do {
       symbol = *(int **)(iter[0] + 0x18);
       if (symbol != (int *)0x0) {
-        (**(code **)(*symbol + 4))(symbol,param_2,staleR5,staleR6,staleR7,staleR8,treeEnd);
+        (**(code **)(*symbol + 4))(symbol,staleR4,staleR5,staleR6,staleR7,staleR8,treeEnd);
       }
       std___Rb_tree_base_iterator___M_increment((unsigned char *)iter);
       treeEnd = *(int *)((int)this + 4);
-      param_2 = extraout_r4;
+      staleR4 = extraout_r4;
     } while (iter[0] != treeEnd);
   }
   if (*(int *)((int)this + 8) != 0) {
@@ -1552,9 +1552,10 @@ int TSymbolTable__copyTable(this, symbolTable)
   unsigned char * this;
   unsigned char * symbolTable;
 {
+  undefined *freeListPtr;
   int getenvResult;
   undefined4 atomicStore;
-  undefined *puVar2;
+  undefined *forceNewPtr;
   int iVar3;
   undefined4 *treeHeader;
   uint loopIndex;
@@ -1564,15 +1565,15 @@ int TSymbolTable__copyTable(this, symbolTable)
   int typeMapCount;
   undefined4 clonedLevel [5];
   
-  puVar2 = PTR__S_force_new_a7b7c0e8;
+  forceNewPtr = PTR__S_force_new_a7b7c0e8;
   typeMap = (undefined4 *)0x0;
   if (*(int *)PTR__S_force_new_a7b7c0e8 == 0) {
     getenvResult = _getenv("GLIBCPP_FORCE_NEW");
     if (getenvResult == 0) {
       do {
         if (reservation != '\0') {
-          atomicStore = storeWordConditionalIndexed(*(int *)puVar2 + -1,0,puVar2);
-          *(undefined4 *)puVar2 = atomicStore;
+          atomicStore = storeWordConditionalIndexed(*(int *)forceNewPtr + -1,0,forceNewPtr);
+          *(undefined4 *)forceNewPtr = atomicStore;
           cr0Reg = 2;
         }
       } while (!(bool)(cr0Reg >> 1 & 1));
@@ -1580,22 +1581,22 @@ int TSymbolTable__copyTable(this, symbolTable)
     else {
       do {
         if (reservation != '\0') {
-          atomicStore = storeWordConditionalIndexed(*(int *)puVar2 + 1,0,puVar2);
-          *(undefined4 *)puVar2 = atomicStore;
+          atomicStore = storeWordConditionalIndexed(*(int *)forceNewPtr + 1,0,forceNewPtr);
+          *(undefined4 *)forceNewPtr = atomicStore;
           cr0Reg = 2;
         }
       } while (!(bool)(cr0Reg >> 1 & 1));
     }
   }
-  puVar2 = PTR__S_free_list_a7b7c0e4;
+  freeListPtr = PTR__S_free_list_a7b7c0e4;
   if (*(int *)PTR__S_force_new_a7b7c0e8 < 1) {
     _pthread_mutex_lock(PTR__S_node_allocator_lock_a7b7c0e0);
-    treeHeader = *(undefined4 **)(puVar2 + 8);
+    treeHeader = *(undefined4 **)(freeListPtr + 8);
     if (treeHeader == (undefined4 *)0x0) {
       treeHeader = (undefined4 *)std____default_alloc_template_true_0____S_refill(0x18);
     }
     else {
-      *(undefined4 *)(puVar2 + 8) = *treeHeader;
+      *(undefined4 *)(freeListPtr + 8) = *treeHeader;
     }
     if (treeHeader == (undefined4 *)0x0) {
       std____throw_bad_alloc();
@@ -8015,6 +8016,7 @@ int yylex(yYSTYPE, parseContext)
   unsigned char * yYSTYPE;
   void *parseContext;
 {
+  uint yyAct;
   int nxtIndex;
   byte *matchStart;
   char *tokenLine;
@@ -8025,7 +8027,7 @@ int yylex(yYSTYPE, parseContext)
   void *stringMem;
   undefined4 token;
   int stateOffset;
-  uint uVar9;
+  uint yyC;
   undefined *yyDefPtr;
   byte *yyBp;
   int iVar12;
@@ -8059,17 +8061,17 @@ LAB_97bac214:
   yyDefPtr = &_yy_def;
   stateOffset = iVar12 << 1;
   do {
-    uVar9 = (uint)(byte)(DAT_97c37983)[(uint)*_yy_c_buf_p * 4];
+    yyC = (uint)(byte)(DAT_97c37983)[(uint)*_yy_c_buf_p * 4];
     if (*(short *)(&_yy_accept + stateOffset) != 0) {
       _yy_last_accepting_cpos = _yy_c_buf_p;
       _yy_last_accepting_state = iVar12;
     }
-    while (nxtIndex = ((int)*(short *)(&_yy_base + stateOffset) + uVar9) * 2,
+    while (nxtIndex = ((int)*(short *)(&_yy_base + stateOffset) + yyC) * 2,
           *(short *)(&_yy_chk + nxtIndex) != iVar12) {
       iVar12 = (int)*(short *)(&_yy_def + stateOffset);
       stateOffset = iVar12 << 1;
       if (0x199 < iVar12) {
-        uVar9 = (uint)(byte)(DAT_97c37d83)[uVar9 * 4];
+        yyC = (uint)(byte)(DAT_97c37d83)[yyC * 4];
       }
     }
     iVar12 = (int)*(short *)(&_yy_nxt + nxtIndex);
@@ -8077,10 +8079,10 @@ LAB_97bac214:
     stateOffset = iVar12 * 2;
   } while (*(short *)(&_yy_base + stateOffset) != 0x260);
 LAB_97bac2e4:
-  uVar9 = (uint)*(short *)(&_yy_accept + stateOffset);
+  yyAct = (uint)*(short *)(&_yy_accept + stateOffset);
   yyCp = _yy_c_buf_p;
-  if (uVar9 == 0) {
-    uVar9 = (uint)*(short *)(&_yy_accept + _yy_last_accepting_state * 2);
+  if (yyAct == 0) {
+    yyAct = (uint)*(short *)(&_yy_accept + _yy_last_accepting_state * 2);
     yyCp = _yy_last_accepting_cpos;
   }
   _yyleng = (int)yyCp - (int)yyBp;
@@ -8091,11 +8093,11 @@ LAB_97bac2e4:
 LAB_97bac330:
   tokenLine = _yylineno;
   matchStart = _yytext;
-  if (0x93 < uVar9) {
+  if (0x93 < yyAct) {
     yy_fatal_error("fatal flex scanner internal error--no action found");
     goto switchD_97bac34c_caseD_1;
   }
-  switch(uVar9) {
+  switch(yyAct) {
   case 0:
     *yyCp = _yy_hold_char;
     _yytext = yyBp;
@@ -8499,7 +8501,7 @@ LAB_97bad2c8:
   case 0x59:
     *(char **)yYSTYPE = _yylineno;
     TParseContext__error
-              ((int)parseContext,_yylineno,"Invalid Octal number.",(char *)_yytext,"","",uVar9 * 4,
+              ((int)parseContext,_yylineno,"Invalid Octal number.",(char *)_yytext,"","",yyAct * 4,
                yyDefPtr);
     TParseContext__recover(parseContext);
     token = 0;
@@ -8783,10 +8785,10 @@ LAB_97bad2c8:
   }
   return token;
 LAB_97bad2f8:
-  uVar9 = _yy_start - 1;
+  yyAct = _yy_start - 1;
   _yy_did_buffer_switch_on_eof = 0;
   _yy_c_buf_p = _yytext;
-  uVar9 = ((int)uVar9 >> 1) + (uint)((int)uVar9 < 0 && (uVar9 & 1) != 0) + 0x92;
+  yyAct = ((int)yyAct >> 1) + (uint)((int)yyAct < 0 && (yyAct & 1) != 0) + 0x92;
   goto LAB_97bac330;
 LAB_97bad344:
   _yy_c_buf_p = (byte *)(*(int *)(_yy_current_buffer + 4) + _yy_n_chars);
@@ -8958,14 +8960,14 @@ int yy_try_NUL_trans(yyCurrentState)
 /* yyinput @ 0x97bad7f0 (272 bytes) */
 int yyinput()
 {
-  byte *pbVar1;
-  byte bVar2;
-  int iVar3;
+  byte *savedCp;
+  byte ch;
+  int savedText;
   int yy_get_next_bufferResult;
   
   *_yy_c_buf_p = _yy_hold_char;
-  pbVar1 = _yy_c_buf_p;
-  iVar3 = _yytext;
+  savedCp = _yy_c_buf_p;
+  savedText = _yytext;
   if (*_yy_c_buf_p == 0) {
     if (_yy_c_buf_p < (byte *)(*(int *)(_yy_current_buffer + 4) + _yy_n_chars)) {
       *_yy_c_buf_p = 0;
@@ -8978,7 +8980,7 @@ int yyinput()
       }
       if (yy_get_next_bufferResult < 2) {
         if (yy_get_next_bufferResult == 0) {
-          _yy_c_buf_p = pbVar1 + (_yytext - iVar3);
+          _yy_c_buf_p = savedCp + (_yytext - savedText);
         }
       }
       else if (yy_get_next_bufferResult == 2) {
@@ -8987,12 +8989,12 @@ int yyinput()
       }
     }
   }
-  bVar2 = *_yy_c_buf_p;
+  ch = *_yy_c_buf_p;
   *_yy_c_buf_p = 0;
-  pbVar1 = _yy_c_buf_p + 1;
+  savedCp = _yy_c_buf_p + 1;
   _yy_c_buf_p = _yy_c_buf_p + 1;
-  _yy_hold_char = *pbVar1;
-  return (uint)bVar2;
+  _yy_hold_char = *savedCp;
+  return (uint)ch;
 }
 
 /* yyrestart @ 0x97bad900 (104 bytes) */

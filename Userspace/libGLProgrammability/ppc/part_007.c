@@ -18,14 +18,14 @@ int yy_delete_buffer(yy_buffer_state)
 }
 
 /* yy_init_buffer @ 0x97badb5c (68 bytes) */
-int yy_init_buffer(yy_buffer_state, param_2)
+int yy_init_buffer(yy_buffer_state, file)
   unsigned char * yy_buffer_state;
-  unsigned char * param_2;
+  unsigned char * file;
 {
   ((int (*)())yy_flush_buffer)(yy_buffer_state);
   *(undefined4 *)(yy_buffer_state + 0x18) = 0;
   *(undefined4 *)(yy_buffer_state + 0x20) = 1;
-  *(unsigned char **)yy_buffer_state = param_2;
+  *(unsigned char **)yy_buffer_state = file;
   return;
 }
 
@@ -137,12 +137,12 @@ int yy_fatal_error(str)
 }
 
 /* yy_flex_alloc @ 0x97baddd0 (4 bytes) */
-int yy_flex_alloc(param_1)
-  uint param_1;
+int yy_flex_alloc(bytes)
+  uint bytes;
 {
                     
                     
-  return _malloc(param_1);
+  return _malloc(bytes);
 }
 
 /* yy_flex_realloc @ 0x97baddd4 (4 bytes) */
@@ -156,12 +156,12 @@ int yy_flex_realloc(ptr, newSize)
 }
 
 /* yy_flex_free @ 0x97baddd8 (4 bytes) */
-int yy_flex_free(param_1)
-  void *param_1;
+int yy_flex_free(ptr)
+  void *ptr;
 {
                     
                     
-  return _free(param_1);
+  return _free(ptr);
 }
 
 /* PaParseStrings @ 0x97badddc (452 bytes) */
@@ -243,15 +243,15 @@ LAB_97badf80:
 }
 
 /* yyerror @ 0x97badfa0 (184 bytes) */
-int yyerror(msg, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int yyerror(msg, staleR4, staleR5, staleR6, staleR7, staleR8, staleR9, staleR10)
   char *msg;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+  undefined4 staleR4;
+  undefined4 staleR5;
+  undefined4 staleR6;
+  undefined4 staleR7;
+  undefined4 staleR8;
+  undefined4 staleR9;
+  undefined4 staleR10;
 {
   undefined *cppPtr;
   int parseContext;
@@ -266,7 +266,7 @@ int yyerror(msg, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
     }
     tokenText = "pre-mature EOF";
   }
-  TParseContext__error(parseContext,_yylineno,"syntax error",tokenText,msg,"",param_7,param_8);
+  TParseContext__error(parseContext,_yylineno,"syntax error",tokenText,msg,"",staleR9,staleR10);
   TParseContext__recover(*(unsigned char **)(*(int *)cppPtr + 0x2c));
   return;
 }
@@ -431,33 +431,33 @@ int _CPPWarningToInfoLog(str)
 }
 
 /* _CPPShInfoLogMsg @ 0x97bae468 (100 bytes) */
-int _CPPShInfoLogMsg(msg, param_2, param_3, param_4, param_5, param_6, param_7)
+int _CPPShInfoLogMsg(msg, staleR4, staleR5, staleR6, staleR7, staleR8, staleR9)
   undefined4 msg;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 staleR4;
+  undefined4 staleR5;
+  undefined4 staleR6;
+  undefined4 staleR7;
+  undefined4 staleR8;
+  undefined4 staleR9;
 {
   undefined *cppPtr;
   undefined4 staleR10;
   
   cppPtr = PTR__cpp_a7b7c0a4;
   TParseContext__error
-            (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c),_yylineno,"","",msg,"",param_7,staleR10);
+            (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c),_yylineno,"","",msg,"",staleR9,staleR10);
   return TParseContext__recover(*(unsigned char **)(*(int *)cppPtr + 0x2c));
 }
 
 /* _CPPErrorToInfoLog @ 0x97bae4cc (104 bytes) */
-int _CPPErrorToInfoLog(msg, param_2, param_3, param_4, param_5, param_6, param_7)
+int _CPPErrorToInfoLog(msg, staleR4, staleR5, staleR6, staleR7, staleR8, staleR9)
   undefined4 msg;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 staleR4;
+  undefined4 staleR5;
+  undefined4 staleR6;
+  undefined4 staleR7;
+  undefined4 staleR8;
+  undefined4 staleR9;
 {
   undefined *cppPtr;
   undefined4 staleR10;
@@ -465,23 +465,23 @@ int _CPPErrorToInfoLog(msg, param_2, param_3, param_4, param_5, param_6, param_7
   cppPtr = PTR__cpp_a7b7c0a4;
   TParseContext__error
             (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c),_yylineno,"syntax error","",msg,"",
-             param_7,staleR10);
+             staleR9,staleR10);
   return TParseContext__recover(*(unsigned char **)(*(int *)cppPtr + 0x2c));
 }
 
 /* _SetLineNumber @ 0x97bae534 (44 bytes) */
-int _SetLineNumber(param_1)
-  uint param_1;
+int _SetLineNumber(lineNumber)
+  uint lineNumber;
 {
-  _yylineno = _yylineno & 0xffff0000 | param_1;
+  _yylineno = _yylineno & 0xffff0000 | lineNumber;
   return;
 }
 
 /* _SetStringNumber @ 0x97bae560 (44 bytes) */
-int _SetStringNumber(param_1)
-  int param_1;
+int _SetStringNumber(stringNumber)
+  int stringNumber;
 {
-  _yylineno = param_1 << 0x10 | (uint)(*(unsigned short *)((unsigned char *)&(_yylineno) + 2));
+  _yylineno = stringNumber << 0x10 | (uint)(*(unsigned short *)((unsigned char *)&(_yylineno) + 2));
   return _yylineno;
 }
 
@@ -1696,19 +1696,19 @@ LAB_97bafd98:
 }
 
 /* PrintTemp @ 0x97bafdc4 (76 bytes) */
-int PrintTemp(_PPStreamToken, param_2)
+int PrintTemp(_PPStreamToken, ordinalIn)
   undefined4 _PPStreamToken;
-  uint param_2;
+  uint ordinalIn;
 {
   char *allocation;
   int copyEnd;
-  undefined4 uStack00000018;
-  uint uStack0000001c;
+  undefined4 bindingWord;
+  uint ordinal;
   
-  uStack00000018 = _PPStreamToken;
-  uStack0000001c = param_2;
+  bindingWord = _PPStreamToken;
+  ordinal = ordinalIn;
   allocation = (char *)_malloc(0x10);
-  copyEnd = ((int (*)())ncpy)(allocation,uStack0000001c & 0xffff);
+  copyEnd = ((int (*)())ncpy)(allocation,ordinal & 0xffff);
   allocation[copyEnd] = '\0';
   return allocation;
 }
@@ -1980,12 +1980,12 @@ int __ZeqRK7BindingS1_(binding1, binding2)
   unsigned char * binding1;
   unsigned char * binding2;
 {
-  int iVar1;
+  int nameCmp;
   
   if (((*(int *)(binding1 + 0xc) == *(int *)(binding2 + 0xc)) &&
       (*(int *)(binding1 + 0x10) == *(int *)(binding2 + 0x10))) &&
-     (iVar1 = _strncmp(*(undefined4 *)(binding1 + 8),*(undefined4 *)(binding2 + 8),
-                       *(int *)(binding1 + 0x10)), iVar1 == 0)) {
+     (nameCmp = _strncmp(*(undefined4 *)(binding1 + 8),*(undefined4 *)(binding2 + 8),
+                       *(int *)(binding1 + 0x10)), nameCmp == 0)) {
     return 1;
   }
   return 0;
@@ -2127,44 +2127,45 @@ int Binding__RemoveNameBackToChar(this, stopChar)
   unsigned char * this;
   int stopChar;
 {
+  int newLen;
   char *chPtr;
   bool found;
-  int iVar3;
+  int scanPos;
   int charIdx;
   
-  iVar3 = *(int *)(this + 0x10);
+  scanPos = *(int *)(this + 0x10);
   found = false;
-  if (-1 < iVar3) {
+  if (-1 < scanPos) {
     do {
-      if (*(char *)(*(int *)(this + 8) + iVar3) == stopChar) {
+      if (*(char *)(*(int *)(this + 8) + scanPos) == stopChar) {
         found = true;
       }
-      *(undefined1 *)(*(int *)(this + 8) + iVar3) = 0;
-      iVar3 = iVar3 + -1;
-    } while ((-1 < iVar3) && (!found));
+      *(undefined1 *)(*(int *)(this + 8) + scanPos) = 0;
+      scanPos = scanPos + -1;
+    } while ((-1 < scanPos) && (!found));
   }
-  iVar3 = iVar3 + 1;
+  newLen = scanPos + 1;
   charIdx = 0;
   *(undefined4 *)(this + 0xc) = 0;
-  *(int *)(this + 0x10) = iVar3;
-  if (0 < iVar3) {
+  *(int *)(this + 0x10) = newLen;
+  if (0 < newLen) {
     do {
       chPtr = (char *)(*(int *)(this + 8) + charIdx);
       charIdx = charIdx + 1;
       *(int *)(this + 0xc) = *(int *)(this + 0xc) + (int)*chPtr;
-      iVar3 = iVar3 + -1;
-    } while (iVar3 != 0);
+      newLen = newLen + -1;
+    } while (newLen != 0);
     return;
   }
   return;
 }
 
 /* Binding__GetHash @ 0x97bb042c (20 bytes) */
-int Binding__GetHash(this, param_2)
+int Binding__GetHash(this, numBuckets)
   unsigned char * this;
-  uint param_2;
+  uint numBuckets;
 {
-  return *(uint *)(this + 0xc) - (*(uint *)(this + 0xc) / param_2) * param_2;
+  return *(uint *)(this + 0xc) - (*(uint *)(this + 0xc) / numBuckets) * numBuckets;
 }
 
 /* Binding__IsClientRequest @ 0x97bb0440 (8 bytes) */
@@ -2175,11 +2176,11 @@ int Binding__IsClientRequest(this)
 }
 
 /* Binding__SetClientRequest @ 0x97bb0448 (8 bytes) */
-int Binding__SetClientRequest(this, param_2)
+int Binding__SetClientRequest(this, isClientRequest)
   unsigned char * this;
-  undefined4 param_2;
+  undefined4 isClientRequest;
 {
-  *(undefined4 *)(this + 0x2c) = param_2;
+  *(undefined4 *)(this + 0x2c) = isClientRequest;
   return;
 }
 
@@ -2191,11 +2192,11 @@ int Binding__IsBuiltIn(this)
 }
 
 /* Binding__SetBuiltIn @ 0x97bb0458 (8 bytes) */
-int Binding__SetBuiltIn(this, param_2)
+int Binding__SetBuiltIn(this, isBuiltIn)
   unsigned char * this;
-  undefined4 param_2;
+  undefined4 isBuiltIn;
 {
-  *(undefined4 *)(this + 0x30) = param_2;
+  *(undefined4 *)(this + 0x30) = isBuiltIn;
   return;
 }
 
