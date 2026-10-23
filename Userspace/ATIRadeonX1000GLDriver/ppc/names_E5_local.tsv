@@ -83,3 +83,20 @@ local	FUN_0005f810	param_1	ctx	CONFIRMED	vtable-like hooks at +0xc/+0x10/+0x18 a
 local	FUN_0005f810	param_2	shader	CONFIRMED	instruction count [5], instructions [6], symbols [8]
 local	FUN_0005f810	uVar23	programState	INFERRED	hardware program state (same object as in extvsAssignVertexInputs)
 local	FUN_0005f810	iVar8	writeEnableSnapshot	INFERRED	16 bytes per instruction copied from record +0xc..+0x1b
+local	FUN_00057340	param_1	shader	CONFIRMED	passed the caller's shader object
+local	FUN_00057340	param_2	symbolList	CONFIRMED	caller passes shader+0x1c
+local	FUN_00057340	param_3	operand	CONFIRMED	selectors at operand+8..+0x14
+local	FUN_00057340	param_4	outWord	CONFIRMED	receives the packed source word
+local	FUN_00057af0	param_1	symbolList	CONFIRMED	records at +4
+local	FUN_00057af0	param_2	operandA	CONFIRMED	type word 2 and symbol index
+local	FUN_00057af0	param_3	operandB	CONFIRMED	type word 2 and symbol index
+local	FUN_00057af0	iVar1	storageA	CONFIRMED	symbol+0x28 of operand A
+local	FUN_00057af0	iVar2	storageB	CONFIRMED	symbol+0x28 of operand B
+local	FUN_00058300	param_1	ctx	CONFIRMED	allocator and copy hooks at +0xc/+0x18/+0x1344
+local	FUN_00058300	param_2	shader	CONFIRMED	extvsEncodeSourceOperand(ctx, shader, ...)
+local	FUN_00058300	param_3	inst	CONFIRMED	0x74-byte instruction record: destination at +4, source 0 at +0x20
+local	FUN_00058300	iVar4	programState	INFERRED	output instruction array +0x1c, count +0x18, capacity +0x20
+local	FUN_00058300	iVar3	outInst	CONFIRMED	the 0x10-byte output record
+local	FUN_00098500	param_1	programBuilder	INFERRED	light parameter records at +0xf8 (0x3c bytes each), state at +0x3d4
+local	FUN_00098500	param_2	lightIndex	INFERRED	selects the 0x3c-byte record and the 0x80-byte light state
+local	FUN_00098500	iVar16	lightRecord	INFERRED	param_1 + 0xf8 + lightIndex*0x3c

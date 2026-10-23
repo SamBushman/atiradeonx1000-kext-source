@@ -516,11 +516,11 @@
 0x56b80	extvsOperandUsesTempSlot	80	yes	
 0x56be0	extvsFreeDeadTempSlots	816	yes	
 0x56f20	extvsEncodeSourceOperand	988	yes	
-0x57340	FUN_00057340	1768	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x57af0	FUN_00057af0	144	yes	
+0x57340	extvsEncodeSourceSwizzle	1768	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x57af0	extvsOperandsConflictInBank	144	yes	
 0x57b80	FUN_00057b80	360	no	indirect call (driver context / vtable / callback)
 0x57cf0	FUN_00057cf0	1532	no	indirect call (driver context / vtable / callback)
-0x58300	FUN_00058300	332	no	indirect call (driver context / vtable / callback)
+0x58300	extvsEmitSingleSourceInstruction	332	no	indirect call (driver context / vtable / callback)
 0x58450	FUN_00058450	872	no	indirect call (driver context / vtable / callback)
 0x587d0	FUN_000587d0	824	no	indirect call (driver context / vtable / callback)
 0x58b10	FUN_00058b10	824	no	indirect call (driver context / vtable / callback)
@@ -856,7 +856,7 @@
 0x96600	FUN_00096600	1872	no	indirect call (driver context / vtable / callback)
 0x96d80	FUN_00096d80	1700	no	indirect call (driver context / vtable / callback)
 0x97440	FUN_00097440	4212	no	indirect call (driver context / vtable / callback)
-0x98500	FUN_00098500	6432	no	indirect call (driver context / vtable / callback)
+0x98500	ffvpEmitLight	6432	no	indirect call (driver context / vtable / callback)
 0x99e50	FUN_00099e50	1796	no	indirect call (driver context / vtable / callback)
 0x9a590	FUN_0009a590	848	no	indirect call (driver context / vtable / callback)
 0x9a910	FUN_0009a910	120	no	indirect call (driver context / vtable / callback)

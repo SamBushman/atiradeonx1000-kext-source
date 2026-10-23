@@ -515,11 +515,11 @@
 0x56b80	80	extvsOperandUsesTempSlot	part_008	converted
 0x56be0	816	extvsFreeDeadTempSlots	part_008	converted
 0x56f20	988	extvsEncodeSourceOperand	part_008	converted
-0x57340	1768	FUN_00057340	part_008	converted
-0x57af0	144	FUN_00057af0	part_008	converted
+0x57340	1768	extvsEncodeSourceSwizzle	part_008	converted
+0x57af0	144	extvsOperandsConflictInBank	part_008	converted
 0x57b80	360	FUN_00057b80	part_008	converted
 0x57cf0	1532	FUN_00057cf0	part_008	converted
-0x58300	332	FUN_00058300	part_008	converted
+0x58300	332	extvsEmitSingleSourceInstruction	part_008	converted
 0x58450	872	FUN_00058450	part_008	converted
 0x587d0	824	FUN_000587d0	part_008	converted
 0x58b10	824	FUN_00058b10	part_008	converted
@@ -855,7 +855,7 @@
 0x96600	1872	FUN_00096600	part_014	converted
 0x96d80	1700	FUN_00096d80	part_014	converted
 0x97440	4212	FUN_00097440	part_014	converted
-0x98500	6432	FUN_00098500	part_014	converted
+0x98500	6432	ffvpEmitLight	part_014	converted
 0x99e50	1796	FUN_00099e50	part_014	converted
 0x9a590	848	FUN_0009a590	part_014	converted
 0x9a910	120	FUN_0009a910	part_014	converted
