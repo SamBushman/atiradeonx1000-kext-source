@@ -849,12 +849,12 @@ int TCompiler__setDebugOptions(this)
 int TCompiler__getNewCompilationAllocator(this)
   unsigned char * this;
 {
-  unsigned char * this_00;
+  unsigned char * poolAllocator;
   
-  this_00 = (unsigned char *)(this + 0x10);
-  TPoolAllocator__pop(this_00);
-  TPoolAllocator__push(this_00);
-  return this_00;
+  poolAllocator = (unsigned char *)(this + 0x10);
+  TPoolAllocator__pop(poolAllocator);
+  TPoolAllocator__push(poolAllocator);
+  return poolAllocator;
 }
 
 /* TPPStreamCompiler__setOpimizationLevel @ 0x97c34c68 (8 bytes) */

@@ -56,17 +56,17 @@ int _PPCRuntimeCompilerBuildTransferSwizzle(compiler, param_2, param_3)
 }
 
 /* _PPCRuntimeCompilerSwizzleRegisterAV @ 0x97bda13c (2444 bytes) */
-int _PPCRuntimeCompilerSwizzleRegisterAV(compiler, param_2, param_3)
+int _PPCRuntimeCompilerSwizzleRegisterAV(compiler, vectorReg, swizzle)
   int compiler;
-  int param_2;
-  uint *param_3;
+  int vectorReg;
+  uint *swizzle;
 {
   uint vectorInstWord8;
   uint vectorInstWord7;
   uint vectorInstWord5;
   uint vectorInstWord4;
-  int vectorInstWord2;
-  int vectorInstWord;
+  int srcRegB;
+  int srcRegA;
   uint *codeCursor2;
   uint *codeCursor;
   int iVar1;
@@ -80,9 +80,9 @@ int _PPCRuntimeCompilerSwizzleRegisterAV(compiler, param_2, param_3)
   uint *puVar9;
   uint uVar10;
   uint uVar11;
-  uint *vectorInstWord3;
+  uint *emitPtr2;
   
-  vectorInstWord5 = *param_3;
+  vectorInstWord5 = *swizzle;
   iVar4 = 1;
   iVar5 = 1;
   vectorInstWord6 = (vectorInstWord5 & 0x3000000) << 4 | (vectorInstWord5 & 0x30000) << 8 | (vectorInstWord5 & 0x300) << 0xc |
@@ -155,7 +155,7 @@ LAB_97bda240:
 LAB_97bda304:
   if (iVar5 == 4) {
     codeCursor = *(uint **)(compiler + 0xe30);
-    *codeCursor = param_2 << 0x15 | (vectorInstWord6 >> (vectorInstWord8 * -4 + 0x1c & 0x3f) & 0xf) << 0x10 | param_2 << 0xb
+    *codeCursor = vectorReg << 0x15 | (vectorInstWord6 >> (vectorInstWord8 * -4 + 0x1c & 0x3f) & 0xf) << 0x10 | vectorReg << 0xb
               | 0x1000028c;
     *(uint **)(compiler + 0xe30) = codeCursor + 1;
     return;
@@ -165,7 +165,7 @@ LAB_97bda304:
     if (vectorInstWord7 == 0) {
       return;
     }
-    vectorInstWord5 = param_2 << 0x15 | param_2 << 0x10 | param_2 << 0xb;
+    vectorInstWord5 = vectorReg << 0x15 | vectorReg << 0x10 | vectorReg << 0xb;
     vectorInstWord7 = vectorInstWord7 << 8;
 LAB_97bda710:
     codeWritePtr = *(uint **)(compiler + 0xe30);
@@ -175,83 +175,83 @@ LAB_97bdaabc:
   }
   else {
     if (iVar5 == 3) {
-      vectorInstWord5 = param_2 << 0xb;
+      vectorInstWord5 = vectorReg << 0xb;
       vectorInstWord7 = vectorInstWord6 >> (vectorInstWord8 * -4 + 0x10 & 0x3f);
       codeCursor = *(uint **)(compiler + 0xe30);
       *codeCursor = (vectorInstWord6 >> (vectorInstWord8 * -4 + 0x1c & 0x3f) & 0xf) << 0x10 | 0x600000 | vectorInstWord5 | 0x1000028c;
       *(uint **)(compiler + 0xe30) = codeCursor + 1;
-      vectorInstWord = param_2;
+      srcRegA = vectorReg;
       if ((vectorInstWord7 & 0xf) != 0) {
-        vectorInstWord = 4;
-        codeCursor[1] = param_2 << 0x10 | 0x800000U | vectorInstWord5 | (vectorInstWord7 & 3) << 8 | 0x1000002c;
+        srcRegA = 4;
+        codeCursor[1] = vectorReg << 0x10 | 0x800000U | vectorInstWord5 | (vectorInstWord7 & 3) << 8 | 0x1000002c;
         *(uint **)(compiler + 0xe30) = codeCursor + 2;
       }
       codeCursor = *(uint **)(compiler + 0xe30);
-      *codeCursor = param_2 << 0x15 | 0x30000U | vectorInstWord << 0xb | 0x1000012c;
+      *codeCursor = vectorReg << 0x15 | 0x30000U | srcRegA << 0xb | 0x1000012c;
       codeWritePtr = codeCursor + 1;
       *(uint **)(compiler + 0xe30) = codeWritePtr;
       if (vectorInstWord8 == 0) {
         return;
       }
-      vectorInstWord5 = param_2 << 0x15 | param_2 << 0x10 | vectorInstWord5;
+      vectorInstWord5 = vectorReg << 0x15 | vectorReg << 0x10 | vectorInstWord5;
       vectorInstWord7 = vectorInstWord8;
     }
     else {
       if (iVar4 != 3) {
         if (iVar5 == 2) {
-          vectorInstWord5 = param_2 << 0xb;
+          vectorInstWord5 = vectorReg << 0xb;
           vectorInstWord4 = vectorInstWord6 >> (vectorInstWord8 * -4 + 0x14 & 0x3f);
           vectorInstWord7 = vectorInstWord4 & 0xf;
           uVar10 = vectorInstWord6 >> (vectorInstWord8 * -4 + 0x10 & 0x3f) & 0xf;
           codeCursor = *(uint **)(compiler + 0xe30);
           *codeCursor = (vectorInstWord6 >> (vectorInstWord8 * -4 + 0x1c & 0x3f) & 0xf) << 0x10 | 0x600000 | vectorInstWord5 |
                     0x1000028c;
-          vectorInstWord3 = codeCursor + 1;
-          *(uint **)(compiler + 0xe30) = vectorInstWord3;
+          emitPtr2 = codeCursor + 1;
+          *(uint **)(compiler + 0xe30) = emitPtr2;
           if (uVar10 == (vectorInstWord7 + 1 & 3)) {
-            vectorInstWord = param_2;
+            srcRegA = vectorReg;
             if (vectorInstWord7 != 0) {
-              vectorInstWord = 4;
-              *vectorInstWord3 = param_2 << 0x10 | 0x800000U | vectorInstWord5 | (vectorInstWord4 & 3) << 8 | 0x1000002c;
+              srcRegA = 4;
+              *emitPtr2 = vectorReg << 0x10 | 0x800000U | vectorInstWord5 | (vectorInstWord4 & 3) << 8 | 0x1000002c;
               *(uint **)(compiler + 0xe30) = codeCursor + 2;
             }
             codeCursor2 = *(uint **)(compiler + 0xe30);
-            vectorInstWord7 = param_2 << 0x15 | 0x30000U | vectorInstWord << 0xb | 0x1000022c;
+            vectorInstWord7 = vectorReg << 0x15 | 0x30000U | srcRegA << 0xb | 0x1000022c;
 LAB_97bda6e8:
             *codeCursor2 = vectorInstWord7;
             puVar9 = codeCursor2 + 1;
           }
           else {
             if (uVar10 != vectorInstWord7) {
-              vectorInstWord = param_2;
+              srcRegA = vectorReg;
               if (vectorInstWord7 != 0) {
-                vectorInstWord = 4;
-                *vectorInstWord3 = param_2 << 0x10 | 0x800000U | vectorInstWord5 | (vectorInstWord4 & 3) << 8 | 0x1000002c;
+                srcRegA = 4;
+                *emitPtr2 = vectorReg << 0x10 | 0x800000U | vectorInstWord5 | (vectorInstWord4 & 3) << 8 | 0x1000002c;
                 *(uint **)(compiler + 0xe30) = codeCursor + 2;
               }
               vectorInstWord6 = vectorInstWord6 >> (vectorInstWord8 * -4 + 0x10 & 0x3f);
               codeCursor = *(uint **)(compiler + 0xe30);
-              *codeCursor = vectorInstWord << 0xb | 0x1063012c;
+              *codeCursor = srcRegA << 0xb | 0x1063012c;
               *(uint **)(compiler + 0xe30) = codeCursor + 1;
-              vectorInstWord = param_2;
+              srcRegA = vectorReg;
               if ((vectorInstWord6 & 0xf) != 0) {
-                vectorInstWord = 4;
-                codeCursor[1] = param_2 << 0x10 | 0x800000U | vectorInstWord5 | (vectorInstWord6 & 3) << 8 | 0x1000002c;
+                srcRegA = 4;
+                codeCursor[1] = vectorReg << 0x10 | 0x800000U | vectorInstWord5 | (vectorInstWord6 & 3) << 8 | 0x1000002c;
                 *(uint **)(compiler + 0xe30) = codeCursor + 2;
               }
               codeCursor2 = *(uint **)(compiler + 0xe30);
-              vectorInstWord7 = param_2 << 0x15 | 0x30000U | vectorInstWord << 0xb | 0x1000012c;
+              vectorInstWord7 = vectorReg << 0x15 | 0x30000U | srcRegA << 0xb | 0x1000012c;
               goto LAB_97bda6e8;
             }
             puVar9 = codeCursor + 3;
-            codeCursor[2] = param_2 << 0x15 | 0x1003222c;
-            *vectorInstWord3 = vectorInstWord7 << 0x10 | 0x800000 | vectorInstWord5 | 0x1000028c;
+            codeCursor[2] = vectorReg << 0x15 | 0x1003222c;
+            *emitPtr2 = vectorInstWord7 << 0x10 | 0x800000 | vectorInstWord5 | 0x1000028c;
           }
           *(uint **)(compiler + 0xe30) = puVar9;
           if (vectorInstWord8 == 0) {
             return;
           }
-          vectorInstWord5 = param_2 << 0x15 | param_2 << 0x10 | vectorInstWord5;
+          vectorInstWord5 = vectorReg << 0x15 | vectorReg << 0x10 | vectorInstWord5;
           vectorInstWord7 = vectorInstWord8;
 LAB_97bda70c:
           vectorInstWord7 = (4 - vectorInstWord7) * 0x100;
@@ -259,11 +259,11 @@ LAB_97bda70c:
         }
         if (iVar4 == 2) {
           uVar2 = vectorInstWord6 >> (vectorInstWord7 * -4 + 0x1c & 0x3f) & 0xf;
-          vectorInstWord = param_2;
+          srcRegA = vectorReg;
           if (uVar2 != 2) {
             codeCursor = *(uint **)(compiler + 0xe30);
-            vectorInstWord = 3;
-            *codeCursor = param_2 << 0x10 | 0x600000U | param_2 << 0xb | (uVar2 * 4 + 8) * 0x40 & 0x300
+            srcRegA = 3;
+            *codeCursor = vectorReg << 0x10 | 0x600000U | vectorReg << 0xb | (uVar2 * 4 + 8) * 0x40 & 0x300
                       | 0x1000002c;
             *(uint **)(compiler + 0xe30) = codeCursor + 1;
           }
@@ -271,120 +271,120 @@ LAB_97bda70c:
           vectorInstWord5 = uVar10 & 0xf;
           uVar7 = vectorInstWord6 >> (vectorInstWord7 * -4 + 0x10 & 0x3f) & 0xf;
           if (uVar7 == (vectorInstWord5 + 1 & 3)) {
-            vectorInstWord2 = param_2;
+            srcRegB = vectorReg;
             if (vectorInstWord5 != 0) {
               codeCursor = *(uint **)(compiler + 0xe30);
-              vectorInstWord2 = 4;
-              *codeCursor = param_2 << 0x10 | 0x800000U | param_2 << 0xb | (uVar10 & 3) << 8 |
+              srcRegB = 4;
+              *codeCursor = vectorReg << 0x10 | 0x800000U | vectorReg << 0xb | (uVar10 & 3) << 8 |
                         0x1000002c;
               *(uint **)(compiler + 0xe30) = codeCursor + 1;
             }
             codeWritePtr = *(uint **)(compiler + 0xe30);
-            *codeWritePtr = param_2 << 0x15 | vectorInstWord << 0x10 | vectorInstWord2 << 0xb | 0x1000022c;
+            *codeWritePtr = vectorReg << 0x15 | srcRegA << 0x10 | srcRegB << 0xb | 0x1000022c;
 LAB_97bda854:
             *(uint **)(compiler + 0xe30) = codeWritePtr + 1;
           }
           else {
             if (uVar7 == vectorInstWord5) {
               codeCursor = *(uint **)(compiler + 0xe30);
-              *codeCursor = vectorInstWord5 << 0x10 | 0x800000 | param_2 << 0xb | 0x1000028c;
+              *codeCursor = vectorInstWord5 << 0x10 | 0x800000 | vectorReg << 0xb | 0x1000028c;
               codeWritePtr = codeCursor + 1;
-              *codeWritePtr = param_2 << 0x15 | vectorInstWord << 0x10 | 0x1000222c;
+              *codeWritePtr = vectorReg << 0x15 | srcRegA << 0x10 | 0x1000222c;
               goto LAB_97bda854;
             }
-            vectorInstWord2 = param_2;
+            srcRegB = vectorReg;
             if (vectorInstWord5 != 0) {
               codeCursor = *(uint **)(compiler + 0xe30);
-              vectorInstWord2 = 4;
-              *codeCursor = param_2 << 0x10 | 0x800000U | param_2 << 0xb | (uVar10 & 3) << 8 |
+              srcRegB = 4;
+              *codeCursor = vectorReg << 0x10 | 0x800000U | vectorReg << 0xb | (uVar10 & 3) << 8 |
                         0x1000002c;
               *(uint **)(compiler + 0xe30) = codeCursor + 1;
             }
             vectorInstWord6 = vectorInstWord6 >> (vectorInstWord7 * -4 + 0x10 & 0x3f);
             codeCursor = *(uint **)(compiler + 0xe30);
-            *codeCursor = vectorInstWord << 0x10 | vectorInstWord2 << 0xb | 0x1060012c;
+            *codeCursor = srcRegA << 0x10 | srcRegB << 0xb | 0x1060012c;
             *(uint **)(compiler + 0xe30) = codeCursor + 1;
-            vectorInstWord = param_2;
+            srcRegA = vectorReg;
             if ((vectorInstWord6 & 0xf) != 0) {
-              vectorInstWord = 4;
-              codeCursor[1] = param_2 << 0x10 | 0x800000U | param_2 << 0xb | (vectorInstWord6 & 3) << 8 |
+              srcRegA = 4;
+              codeCursor[1] = vectorReg << 0x10 | 0x800000U | vectorReg << 0xb | (vectorInstWord6 & 3) << 8 |
                           0x1000002c;
               *(uint **)(compiler + 0xe30) = codeCursor + 2;
             }
             codeCursor = *(uint **)(compiler + 0xe30);
-            *codeCursor = param_2 << 0x15 | 0x30000U | vectorInstWord << 0xb | 0x1000012c;
+            *codeCursor = vectorReg << 0x15 | 0x30000U | srcRegA << 0xb | 0x1000012c;
             *(uint **)(compiler + 0xe30) = codeCursor + 1;
           }
           if (vectorInstWord7 == 0) {
             return;
           }
-          vectorInstWord5 = param_2 << 0x15 | param_2 << 0x10 | param_2 << 0xb;
+          vectorInstWord5 = vectorReg << 0x15 | vectorReg << 0x10 | vectorReg << 0xb;
           goto LAB_97bda70c;
         }
         uVar6 = (vectorInstWord5 & 0x3000000) >> 0x18;
-        vectorInstWord = param_2;
+        srcRegA = vectorReg;
         if (uVar6 != 3) {
           codeCursor = *(uint **)(compiler + 0xe30);
-          vectorInstWord = 3;
-          *codeCursor = param_2 << 0x10 | 0x600000U | param_2 << 0xb | (uVar6 * 4 + 4) * 0x40 & 0x300 |
+          srcRegA = 3;
+          *codeCursor = vectorReg << 0x10 | 0x600000U | vectorReg << 0xb | (uVar6 * 4 + 4) * 0x40 & 0x300 |
                     0x1000002c;
           *(uint **)(compiler + 0xe30) = codeCursor + 1;
         }
-        vectorInstWord2 = param_2;
+        srcRegB = vectorReg;
         if ((vectorInstWord5 & 0x30000) != 0) {
           codeCursor = *(uint **)(compiler + 0xe30);
-          vectorInstWord2 = 4;
-          *codeCursor = param_2 << 0x10 | 0x800000U | param_2 << 0xb | ((vectorInstWord5 & 0x30000) >> 0x10) << 8
+          srcRegB = 4;
+          *codeCursor = vectorReg << 0x10 | 0x800000U | vectorReg << 0xb | ((vectorInstWord5 & 0x30000) >> 0x10) << 8
                     | 0x1000002c;
           *(uint **)(compiler + 0xe30) = codeCursor + 1;
         }
         codeCursor = *(uint **)(compiler + 0xe30);
-        *codeCursor = vectorInstWord << 0x10 | vectorInstWord2 << 0xb | 0x1060012c;
+        *codeCursor = srcRegA << 0x10 | srcRegB << 0xb | 0x1060012c;
         *(uint **)(compiler + 0xe30) = codeCursor + 1;
-        vectorInstWord = param_2;
+        srcRegA = vectorReg;
         if ((vectorInstWord5 & 0x300) != 0) {
-          vectorInstWord = 4;
-          codeCursor[1] = param_2 << 0x10 | 0x800000U | param_2 << 0xb | vectorInstWord5 & 0x300 | 0x1000002c;
+          srcRegA = 4;
+          codeCursor[1] = vectorReg << 0x10 | 0x800000U | vectorReg << 0xb | vectorInstWord5 & 0x300 | 0x1000002c;
           *(uint **)(compiler + 0xe30) = codeCursor + 2;
         }
         codeCursor = *(uint **)(compiler + 0xe30);
-        *codeCursor = vectorInstWord << 0xb | 0x1063012c;
+        *codeCursor = srcRegA << 0xb | 0x1063012c;
         *(uint **)(compiler + 0xe30) = codeCursor + 1;
-        vectorInstWord = param_2;
+        srcRegA = vectorReg;
         if ((vectorInstWord5 & 3) != 0) {
-          vectorInstWord = 4;
-          codeCursor[1] = param_2 << 0x10 | 0x800000U | param_2 << 0xb | (vectorInstWord5 & 3) << 8 | 0x1000002c;
+          srcRegA = 4;
+          codeCursor[1] = vectorReg << 0x10 | 0x800000U | vectorReg << 0xb | (vectorInstWord5 & 3) << 8 | 0x1000002c;
           *(uint **)(compiler + 0xe30) = codeCursor + 2;
         }
         codeWritePtr = *(uint **)(compiler + 0xe30);
-        vectorInstWord7 = param_2 << 0x15 | 0x30000U | vectorInstWord << 0xb | 0x1000012c;
+        vectorInstWord7 = vectorReg << 0x15 | 0x30000U | srcRegA << 0xb | 0x1000012c;
         goto LAB_97bdaabc;
       }
       uVar2 = vectorInstWord6 >> (vectorInstWord7 * -4 + 0x1c & 0x3f) & 0xf;
-      vectorInstWord = param_2;
+      srcRegA = vectorReg;
       if (uVar2 != 1) {
         codeCursor = *(uint **)(compiler + 0xe30);
-        vectorInstWord = 3;
-        *codeCursor = param_2 << 0x10 | 0x600000U | param_2 << 0xb | (uVar2 * 4 + 0xc) * 0x40 & 0x300 |
+        srcRegA = 3;
+        *codeCursor = vectorReg << 0x10 | 0x600000U | vectorReg << 0xb | (uVar2 * 4 + 0xc) * 0x40 & 0x300 |
                   0x1000002c;
         *(uint **)(compiler + 0xe30) = codeCursor + 1;
       }
       vectorInstWord6 = vectorInstWord6 >> (vectorInstWord7 * -4 + 0x10 & 0x3f);
-      vectorInstWord2 = param_2;
+      srcRegB = vectorReg;
       if ((vectorInstWord6 & 0xf) != 0) {
         codeCursor = *(uint **)(compiler + 0xe30);
-        vectorInstWord2 = 4;
-        *codeCursor = param_2 << 0x10 | 0x800000U | param_2 << 0xb | (vectorInstWord6 & 3) << 8 | 0x1000002c;
+        srcRegB = 4;
+        *codeCursor = vectorReg << 0x10 | 0x800000U | vectorReg << 0xb | (vectorInstWord6 & 3) << 8 | 0x1000002c;
         *(uint **)(compiler + 0xe30) = codeCursor + 1;
       }
       codeCursor = *(uint **)(compiler + 0xe30);
-      *codeCursor = param_2 << 0x15 | vectorInstWord << 0x10 | vectorInstWord2 << 0xb | 0x1000012c;
+      *codeCursor = vectorReg << 0x15 | srcRegA << 0x10 | srcRegB << 0xb | 0x1000012c;
       codeWritePtr = codeCursor + 1;
       *(uint **)(compiler + 0xe30) = codeWritePtr;
       if (vectorInstWord7 == 0) {
         return;
       }
-      vectorInstWord5 = param_2 << 0x15 | param_2 << 0x10 | param_2 << 0xb;
+      vectorInstWord5 = vectorReg << 0x15 | vectorReg << 0x10 | vectorReg << 0xb;
     }
     *codeWritePtr = vectorInstWord5 | (4 - vectorInstWord7) * 0x100 & 0x300 | 0x1000002c;
   }

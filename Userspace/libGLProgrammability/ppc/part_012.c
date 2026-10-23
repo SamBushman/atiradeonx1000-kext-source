@@ -2749,6 +2749,12 @@ int TPPStreamCompiler__constructFromOperand(this, destOperandPtr, argOperands, a
   unsigned char ** argOperands;
   int argCount;
 {
+  uint argFieldIndex;
+  int argNameBufferSize;
+  unsigned char *elemOperand;
+  unsigned char *operandToFree;
+  unsigned char *argFieldOperand;
+  unsigned char *childOperand;
   int argStructFieldList;
   int argSymbol;
   int nameBufferSize;
@@ -2767,18 +2773,18 @@ int TPPStreamCompiler__constructFromOperand(this, destOperandPtr, argOperands, a
   char *allocation;
   unsigned char * childSymbol;
   unsigned char ** argFieldOperands;
-  int iVar9;
-  int iVar10;
+  int argFieldNameString;
+  int parentNameLength;
   unsigned char * argFieldSymbol;
   unsigned char ** extraout_r4;
   unsigned char ** extraout_r4_00;
   unsigned char ** extraout_r4_01;
   unsigned char ** extraout_r4_02;
-  unsigned char ** a2;
-  uint uVar11;
+  unsigned char ** argCursor;
+  uint remainingArgs;
   undefined4 in_r7;
   undefined4 in_r8;
-  unsigned char * pPVar12;
+  unsigned char *destOperand;
   uint a6;
   uint fieldCount;
   uint fieldIndex;
@@ -2787,7 +2793,7 @@ int TPPStreamCompiler__constructFromOperand(this, destOperandPtr, argOperands, a
   uint cleanupIndex;
   void *fieldSymbolToFree;
   uint fieldNameChars;
-  undefined4 uVar19;
+  undefined4 argFieldNameChars;
   undefined8 callResult;
   char indexSuffix [16];
   unsigned char * childOperandSlot;
@@ -2795,11 +2801,11 @@ int TPPStreamCompiler__constructFromOperand(this, destOperandPtr, argOperands, a
   int parentName;
   int local_54;
   
-  pPVar12 = *destOperandPtr;
+  destOperand = *destOperandPtr;
   argIndex = 0;
   consumedArgs = 0;
-  if (pPVar12 != (unsigned char *)0x0) {
-    destSymbol = *(int *)pPVar12;
+  if (destOperand != (unsigned char *)0x0) {
+    destSymbol = *(int *)destOperand;
     symbolGlType = *(short *)(destSymbol + 0x2c);
     consumedArgs = argIndex;
     if (symbolGlType == 0x7ffe) {
@@ -2813,11 +2819,11 @@ int TPPStreamCompiler__constructFromOperand(this, destOperandPtr, argOperands, a
           a6 = 0xa7b7736c;
           noParentName = parentName == 0;
           local_54 = -0x58488c94;
-          a2 = argOperands;
-          uVar11 = argCount;
+          argCursor = argOperands;
+          remainingArgs = argCount;
           while( true ) {
             fieldType = *(int **)(fieldsBegin + fieldIndex * 8);
-            fieldNameString = (**(code **)(*fieldType + 0x1c))(fieldType,destOperandPtr,a2,uVar11,in_r7,in_r8,a6);
+            fieldNameString = (**(code **)(*fieldType + 0x1c))(fieldType,destOperandPtr,argCursor,remainingArgs,in_r7,in_r8,a6);
             a6 = *(uint *)(*(int *)(fieldNameString + 4) + -0xc);
             *(undefined1 *)(*(int *)(fieldNameString + 4) + a6) = **(undefined1 **)(local_54 + 0x4a30);
             fieldNameChars = *(uint *)(fieldNameString + 4);
@@ -2833,11 +2839,11 @@ int TPPStreamCompiler__constructFromOperand(this, destOperandPtr, argOperands, a
             }
             else {
               _sprintf(allocation,DAT_a7b7bd8c,parentName,fieldNameChars);
-              uVar11 = fieldNameChars;
+              remainingArgs = fieldNameChars;
             }
-            pPVar12 = operator_new(0x38);
-            __ZN12ParseOperandC1Ev(pPVar12);
-            childOperandSlot = pPVar12;
+            childOperand = operator_new(0x38);
+            __ZN12ParseOperandC1Ev(childOperand);
+            childOperandSlot = childOperand;
             childSymbol = operator_new(100);
             __ZN11ParseSymbolC1Ev(childSymbol);
             ParseSymbol__SetName(childSymbol,allocation);
@@ -2845,58 +2851,58 @@ int TPPStreamCompiler__constructFromOperand(this, destOperandPtr, argOperands, a
             ParseSymbol__SetParseTreeType(childSymbol,*(unsigned char **)(*(int *)(structFieldList + 4) + fieldIndex * 8));
             *(unsigned char **)childOperandSlot = childSymbol;
             if ((*(short *)(childSymbol + 0x2c) == 0x7ffe) || (*(short *)(childSymbol + 0x2c) == 0x7fff)) {
-              a2 = argOperands + consumedArgs;
+              argCursor = argOperands + consumedArgs;
               argSymbol = *(int *)argOperands[consumedArgs];
               if (*(short *)(argSymbol + 0x2c) == 0x7ffe) {
                 argParentName = *(int *)(argSymbol + 0x14);
                 argStructFieldList = *(int *)(*(int *)(argSymbol + 0xc) + 8);
                 destOperandPtr = extraout_r4;
                 if (argStructFieldList != 0) {
-                  uVar11 = 0;
+                  argFieldIndex = 0;
                   argFieldCount = *(int *)(argStructFieldList + 8) - *(int *)(argStructFieldList + 4) >> 3;
                   argFieldOperands = (unsigned char **)_malloc(fieldCount << 2);
                   if (argFieldCount != 0) {
                     do {
-                      fieldType = *(int **)(*(int *)(argStructFieldList + 4) + uVar11 * 8);
-                      iVar9 = (**(code **)(*fieldType + 0x1c))(fieldType);
+                      fieldType = *(int **)(*(int *)(argStructFieldList + 4) + argFieldIndex * 8);
+                      argFieldNameString = (**(code **)(*fieldType + 0x1c))(fieldType);
                       a6 = (uint)*DAT_a7b7bd9c;
-                      *(byte *)(*(int *)(iVar9 + 4) + *(int *)(*(int *)(iVar9 + 4) + -0xc)) =
+                      *(byte *)(*(int *)(argFieldNameString + 4) + *(int *)(*(int *)(argFieldNameString + 4) + -0xc)) =
                            *DAT_a7b7bd9c;
-                      uVar19 = *(undefined4 *)(iVar9 + 4);
-                      iVar9 = _strlen(uVar19);
-                      iVar9 = iVar9 + 1;
+                      argFieldNameChars = *(undefined4 *)(argFieldNameString + 4);
+                      argNameBufferSize = _strlen(argFieldNameChars);
+                      argNameBufferSize = argNameBufferSize + 1;
                       if (argParentName != 0) {
-                        iVar10 = _strlen(argParentName);
-                        iVar9 = iVar9 + iVar10 + 1;
+                        parentNameLength = _strlen(argParentName);
+                        argNameBufferSize = argNameBufferSize + parentNameLength + 1;
                       }
-                      allocation = (char *)_malloc(iVar9);
+                      allocation = (char *)_malloc(argNameBufferSize);
                       if (argParentName == 0) {
-                        _strcpy(allocation,uVar19);
+                        _strcpy(allocation,argFieldNameChars);
                       }
                       else {
-                        _sprintf(allocation,DAT_a7b7bd8c,argParentName,uVar19);
+                        _sprintf(allocation,DAT_a7b7bd8c,argParentName,argFieldNameChars);
                       }
-                      pPVar12 = operator_new(0x38);
-                      __ZN12ParseOperandC1Ev(pPVar12);
-                      argFieldOperands[uVar11] = pPVar12;
+                      argFieldOperand = operator_new(0x38);
+                      __ZN12ParseOperandC1Ev(argFieldOperand);
+                      argFieldOperands[argFieldIndex] = argFieldOperand;
                       argFieldSymbol = operator_new(100);
                       __ZN11ParseSymbolC1Ev(argFieldSymbol);
                       ParseSymbol__SetName(argFieldSymbol,allocation);
                       _free(allocation);
                       ParseSymbol__SetParseTreeType
-                                (argFieldSymbol,*(unsigned char **)(*(int *)(argStructFieldList + 4) + uVar11 * 8));
-                      *(unsigned char **)argFieldOperands[uVar11] = argFieldSymbol;
+                                (argFieldSymbol,*(unsigned char **)(*(int *)(argStructFieldList + 4) + argFieldIndex * 8));
+                      *(unsigned char **)argFieldOperands[argFieldIndex] = argFieldSymbol;
                       if ((*(short *)(argFieldSymbol + 0x2c) != 0x7ffe) &&
                          (*(short *)(argFieldSymbol + 0x2c) != 0x7fff)) {
                         ParseSymbolTable__processOperand
-                                  (*(unsigned char **)(this + 0x68),argFieldOperands[uVar11]);
+                                  (*(unsigned char **)(this + 0x68),argFieldOperands[argFieldIndex]);
                       }
-                      uVar11 = uVar11 + 1;
-                    } while (uVar11 < argFieldCount);
+                      argFieldIndex = argFieldIndex + 1;
+                    } while (argFieldIndex < argFieldCount);
                   }
                   cleanupIndex = 0;
-                  a2 = argFieldOperands;
-                  uVar11 = argFieldCount;
+                  argCursor = argFieldOperands;
+                  remainingArgs = argFieldCount;
                   ((int (*)())TPPStreamCompiler__constructFromOperand)(this,&childOperandSlot,argFieldOperands,argFieldCount);
                   consumedArgs = consumedArgs + 1;
                   if (argFieldCount != 0) {
@@ -2908,10 +2914,10 @@ int TPPStreamCompiler__constructFromOperand(this, destOperandPtr, argOperands, a
                         __ZN11ParseSymbolD1Ev(fieldSymbolToFree);
                         __ZdlPv(fieldSymbolToFree);
                       }
-                      pPVar12 = argFieldOperands[cleanupIndex];
-                      if (pPVar12 != (unsigned char *)0x0) {
-                        __ZN12ParseOperandD1Ev(pPVar12);
-                        __ZdlPv(pPVar12);
+                      operandToFree = argFieldOperands[cleanupIndex];
+                      if (operandToFree != (unsigned char *)0x0) {
+                        __ZN12ParseOperandD1Ev(operandToFree);
+                        __ZdlPv(operandToFree);
                       }
                       cleanupIndex = cleanupIndex + 1;
                     } while (cleanupIndex < argFieldCount);
@@ -2921,8 +2927,8 @@ int TPPStreamCompiler__constructFromOperand(this, destOperandPtr, argOperands, a
                 }
               }
               else {
-                uVar11 = argCount - consumedArgs;
-                callResult = ((int (*)())TPPStreamCompiler__constructFromOperand)(this,&childOperandSlot,a2,uVar11);
+                remainingArgs = argCount - consumedArgs;
+                callResult = ((int (*)())TPPStreamCompiler__constructFromOperand)(this,&childOperandSlot,argCursor,remainingArgs);
                 destOperandPtr = (unsigned char **)callResult;
                 consumedArgs = consumedArgs + (int)((ulonglong)callResult >> 0x20);
               }
@@ -2935,16 +2941,16 @@ int TPPStreamCompiler__constructFromOperand(this, destOperandPtr, argOperands, a
             }
             else {
               ParseSymbolTable__processOperand(*(unsigned char **)(this + 0x68),childOperandSlot);
-              uVar11 = argCount - consumedArgs;
-              a2 = argOperands + consumedArgs;
-              callResult = ((int (*)())TPPStreamCompiler__constructFromOperand)(this,&childOperandSlot,a2,uVar11);
+              remainingArgs = argCount - consumedArgs;
+              argCursor = argOperands + consumedArgs;
+              callResult = ((int (*)())TPPStreamCompiler__constructFromOperand)(this,&childOperandSlot,argCursor,remainingArgs);
               destOperandPtr = (unsigned char **)callResult;
               consumedArgs = consumedArgs + (int)((ulonglong)callResult >> 0x20);
             }
-            pPVar12 = childOperandSlot;
+            operandToFree = childOperandSlot;
             if (childOperandSlot != (unsigned char *)0x0) {
               __ZN12ParseOperandD1Ev(childOperandSlot);
-              __ZdlPv(pPVar12);
+              __ZdlPv(operandToFree);
               destOperandPtr = extraout_r4_02;
             }
             fieldIndex = fieldIndex + 1;
@@ -2958,9 +2964,9 @@ int TPPStreamCompiler__constructFromOperand(this, destOperandPtr, argOperands, a
       elemIndex = 0;
       if (0 < *(short *)(destSymbol + 0x2e)) {
         do {
-          pPVar12 = operator_new(0x38);
-          __ZN12ParseOperandC1Ev(pPVar12);
-          elemOperandSlot = pPVar12;
+          elemOperand = operator_new(0x38);
+          __ZN12ParseOperandC1Ev(elemOperand);
+          elemOperandSlot = elemOperand;
           childSymbol = operator_new(100);
           __ZN11ParseSymbolC1Ev(childSymbol);
           ParseSymbol__SetName(childSymbol,*(char **)(*(int *)*destOperandPtr + 0x14));
@@ -2983,11 +2989,11 @@ int TPPStreamCompiler__constructFromOperand(this, destOperandPtr, argOperands, a
             ParseSymbolTable__processOperand(*(unsigned char **)(this + 0x68),elemOperandSlot);
             consumedArgs = ((int (*)())TPPStreamCompiler__constructFromOperand)(this,&elemOperandSlot,argOperands + argIndex,argCount - argIndex);
           }
-          pPVar12 = elemOperandSlot;
+          operandToFree = elemOperandSlot;
           consumedArgs = argIndex + consumedArgs;
           if (elemOperandSlot != (unsigned char *)0x0) {
             __ZN12ParseOperandD1Ev(elemOperandSlot);
-            __ZdlPv(pPVar12);
+            __ZdlPv(operandToFree);
           }
           elemIndex = elemIndex + 1;
           argIndex = consumedArgs;
@@ -2996,7 +3002,7 @@ int TPPStreamCompiler__constructFromOperand(this, destOperandPtr, argOperands, a
     }
     else {
       if (destSymbol == 0) {
-        symbolGlType = *(short *)(pPVar12 + 0x18);
+        symbolGlType = *(short *)(destOperand + 0x18);
       }
       switch(symbolGlType) {
       case -0x74b0:

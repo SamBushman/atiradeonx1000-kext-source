@@ -915,29 +915,29 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE15_M_replace_safeIPKcEERS3_N9_
 }
 
 /* __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE10_M_replaceIPKcEERS3_N9__gnu_cxx17__normal_iteratorIPcS3_EESB_T_SC_St18input_iterator_tag @ 0x97c332c8 (172 bytes) */
-int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE10_M_replaceIPKcEERS3_N9__gnu_cxx17__normal_iteratorIPcS3_EESB_T_SC_St18input_iterator_tag(this, param_2, param_3, str1, str2)
+int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE10_M_replaceIPKcEERS3_N9__gnu_cxx17__normal_iteratorIPcS3_EESB_T_SC_St18input_iterator_tag(this, i1, i2, first, last)
   void *this;
-  undefined4 param_2;
-  char *param_3;
-  char *str1;
-  char *str2;
+  undefined4 i1;
+  char *i2;
+  char *first;
+  char *last;
 {
   int atomicStore;
   int *refCountPtr;
   int oldRefCount;
-  unsigned char * psVar4;
+  unsigned char *result;
   char reservation;
   byte cr0Reg;
-  undefined4 local_50;
-  int local_4c;
-  undefined4 local_40 [4];
-  undefined4 local_30 [5];
+  undefined4 tempAllocator;
+  int tempData;
+  undefined4 allocatorArg [4];
+  undefined4 allocatorCopy [5];
   
-  local_40[0] = GetGlobalPoolAllocator();
-  ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1IPKcEET_S7_RKS2_)(&local_50,str1,str2,(unsigned char *)local_40);
-  psVar4 = ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcS3_EEEERS3_S8_S8_T_SA_)(this,param_2,param_3,local_4c,local_4c + *(int *)(local_4c + -0xc));
-  refCountPtr = (int *)(local_4c + -4);
-  local_30[0] = local_50;
+  allocatorArg[0] = GetGlobalPoolAllocator();
+  ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1IPKcEET_S7_RKS2_)(&tempAllocator,first,last,(unsigned char *)allocatorArg);
+  result = ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcS3_EEEERS3_S8_S8_T_SA_)(this,i1,i2,tempData,tempData + *(int *)(tempData + -0xc));
+  refCountPtr = (int *)(tempData + -4);
+  allocatorCopy[0] = tempAllocator;
   do {
     oldRefCount = *refCountPtr;
     if (reservation != '\0') {
@@ -948,9 +948,9 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE10_M_replaceIPKcEERS3_N9__gnu_
   } while (!(bool)(cr0Reg >> 1 & 1));
   if (oldRefCount < 1) {
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-              ((unsigned char *)(local_4c + -0xc),local_30);
+              ((unsigned char *)(tempData + -0xc),allocatorCopy);
   }
-  return psVar4;
+  return result;
 }
 
 /* std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_insert @ 0x97c33374 (356 bytes) */
