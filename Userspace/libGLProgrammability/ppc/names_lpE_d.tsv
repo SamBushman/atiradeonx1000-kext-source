@@ -1,0 +1,27 @@
+local	TPPStreamCompiler__equalOperands	sVar1	symbolGlType	CONFIRMED	OpenGL type (+0x2c) of operand A's symbol, tested against 0x7ffe (struct marker) and 0x7fff (array marker)
+local	TPPStreamCompiler__equalOperands	uVar12	combineStreamType	CONFIRMED	GetPPStreamTypeForGLType of the combine temp's type, stored in bits 23..25 of the combine operation's flags word
+local	TPPStreamCompiler__equalOperands	local_a0	fieldDescA	INFERRED	first word of the two-word operand descriptor filled by getOperandAs{Dest,Source}Var in the struct-field loop
+local	TPPStreamCompiler__equalOperands	local_9c	fieldDescB	INFERRED	second word of the two-word operand descriptor in the struct-field loop
+local	TPPStreamCompiler__equalOperands	iVar16	fieldIndex	CONFIRMED	index of the struct field being compared, counts down from fieldCount-1 to 0
+local	TPPStreamCompiler__equalOperands	iVar17	operandSide	CONFIRMED	0 = operand A, 1 = operand B: selects operandSlots[side] and the sub-operand slot operandSlots[side+2]
+local	TPPStreamCompiler__equalOperands	a0	fieldType	CONFIRMED	TType* of struct field fieldIndex (TTypeLine at fieldsBegin + index*8); vtable slot 0x1c = getFieldName
+local	TPPStreamCompiler__equalOperands	a0_00	parentName	CONFIRMED	name string (ParseSymbol +0x14) of operandSlots[side]'s symbol, the prefix of the field symbol name
+local	TPPStreamCompiler__equalOperands	a1	fieldNameChars	CONFIRMED	character pointer (TString +4) of the field name, terminated in place then concatenated onto parentName
+use	TPPStreamCompiler__equalOperands	uVar10	streamType	CONFIRMED	GetPPStreamTypeForGLType of the result type: bits 23..25 of the compare operation's flags word	uVar10 = GetPPStreamTypeForGLType\(\(uint\)uVar2\);@1	+2
+use	TPPStreamCompiler__equalOperands	uVar10	elementIndex	CONFIRMED	array element being compared, from size-1 down to 0	uVar10 = \(int\)\*\(short \*\)\(iVar4 \+ 0x2e\) - 1;	iVar4 = \*\(int \*\)\(\*\(int \*\)\(iVar4 \+ 0xc\) \+ 8\);
+use	TPPStreamCompiler__equalOperands	uVar10	structStreamType	CONFIRMED	GetPPStreamTypeForGLType of the result type in the struct-field combine operation	uVar10 = GetPPStreamTypeForGLType\(\(uint\)uVar2\);@2	+2
+use	TPPStreamCompiler__equalOperands	iVar4	operandASymbol	CONFIRMED	ParseSymbol of operand A (operandSlots[0] +0): +0x2c OpenGL type, +0x2e array size, +0xc parse-tree type	iVar4 = \*\(int \*\)local_68\[0\];	iVar4 = 0;
+use	TPPStreamCompiler__equalOperands	iVar4	operandSlotOffset	CONFIRMED	byte offset 0 / 4 of operand A / B in operandSlots while the two element operands are built	iVar4 = 0;	ppPVar13 = local_68 \+ 3;
+use	TPPStreamCompiler__equalOperands	iVar4	operandASymbol	CONFIRMED	operand A's symbol, source of the structure's field list	iVar4 = \*\(int \*\)\(\*\(int \*\)\(iVar4 \+ 0xc\) \+ 8\);	+1	rhs
+use	TPPStreamCompiler__equalOperands	iVar4	structFieldList	CONFIRMED	TTypeList* of operand A's struct type (parse-tree type +8): begin at +4, end at +8, 8-byte entries	iVar4 = \*\(int \*\)\(\*\(int \*\)\(iVar4 \+ 0xc\) \+ 8\);		lhs
+use	TPPStreamCompiler__equalOperands	iVar5	elementSourceSymbol	CONFIRMED	ParseSymbol of the operand being split (operandSlots[side]), source of the +0x28 temp index copied to the element symbol; the value also reaches the leftover 7th-argument reads of the element getOperandAsSourceVar calls	iVar5 = \*\*\(int \*\*\)\(\(int\)local_68 \+ iVar4\);	iVar5 = \*\(int \*\)\(iVar4 \+ 4\);
+use	TPPStreamCompiler__equalOperands	iVar5	fieldsBegin	CONFIRMED	start of the struct's field entries (structFieldList +4)	iVar5 = \*\(int \*\)\(iVar4 \+ 4\);@1	iVar5 = \(\*\*\(code \*\*\)\(\*a0 \+ 0x1c\)\)
+use	TPPStreamCompiler__equalOperands	iVar5	fieldNameString	CONFIRMED	TString* from TType vtable slot 0x1c (getFieldName)	iVar5 = \(\*\*\(code \*\*\)\(\*a0 \+ 0x1c\)\)	iVar5 = _strlen\(a1\);
+use	TPPStreamCompiler__equalOperands	iVar5	nameBufferSize	CONFIRMED	strlen(field name) + 1 (+ strlen(parent name) + 1): size of the malloc'd symbol name	iVar5 = iVar5 \+ 1;	if \(a0_00 == \(unsigned char \*\*\)0x0\) \{	lhs
+use	TPPStreamCompiler__equalOperands	iVar5	fieldsBegin	CONFIRMED	start of the struct's field entries, reloaded for the next field	iVar5 = \*\(int \*\)\(iVar4 \+ 4\);@2	+1
+use	TPPStreamCompiler__equalOperands	iVar5	fieldsBegin	CONFIRMED	start of the struct's field entries, reloaded for the next field	iVar5 = \*\(int \*\)\(iVar4 \+ 4\);@3	+1
+use	TPPStreamCompiler__equalOperands	iVar18	compareOpcode	CONFIRMED	0x31 when isEqualTest else 0x36: opcode of the compare operation, shifted into bits 18..25 of the header	iVar18 = 0x31;	local_dc = \(local_80 >> 0xc & 1\) << 0x1c
+use	TPPStreamCompiler__equalOperands	iVar18	resultLogicalSize	CONFIRMED	ParseOperand__GetLogicalSize of the result operand: flags bits 26..27 store size-1	iVar18 = ParseOperand__GetLogicalSize\(local_70\[0\]\);@1	+2
+use	TPPStreamCompiler__equalOperands	iVar18	sideCountdown	CONFIRMED	1 then 0: builds the element operand for side B then side A	iVar18 = 1;	ppPVar13 = local_68 \+ 3;
+use	TPPStreamCompiler__equalOperands	iVar18	arrayCombineLogicalSize	CONFIRMED	ParseOperand__GetLogicalSize of the combine result operand: flags bits 26..27 store size-1	iVar18 = ParseOperand__GetLogicalSize\(local_70\[0\]\);@2	+2
+use	TPPStreamCompiler__equalOperands	uVar9	structCombinedResultOperand	CONFIRMED	newTemporary result: the operand that receives the AND/OR of the previous partial result and this field's compare	uVar9 = \(\(int \(\*\)\(\)\)TPPStreamCompiler__newTemporary\)\(this,param_2\);	iVar16 = iVar16 \+ -1;

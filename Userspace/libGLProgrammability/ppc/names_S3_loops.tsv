@@ -59,7 +59,7 @@ use	ConstantAllocationList__updateConstant	iVar2	loopIndex2	INFERRED	initialised
 use	ConstantAllocationList__updateConstant	iVar3	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#1	+19	all	all
 use	ConstantAllocationList__getConstantUsage	iVar2	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#1	+17	all	all
 use	TPPStreamCompiler__constructDiagonal	iVar13	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#21	+196	all	all
-use	TPPStreamCompiler__constructElement	uVar10	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#60	+234	all	all
+use	TPPStreamCompiler__constructElement	uVar10	pendingConstLanes	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#60	+234	all	all
 use	TPPStreamCompiler__getConstantAsSourceVar	uVar3	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#123	+13	all	all
 use	FunctionTable__clear	iVar2	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#0	+8	all	all
 use	FunctionTable__addFunction	iVar4	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#5	+22	all	all

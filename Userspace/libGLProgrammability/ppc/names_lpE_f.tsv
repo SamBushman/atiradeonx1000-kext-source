@@ -1,0 +1,13 @@
+local	TPPStreamCompiler__duplicateDestinationSource	param_4	srcDescA	CONFIRMED	first word of the source operand descriptor (opSrc0A)
+local	TPPStreamCompiler__duplicateDestinationSource	param_5	srcDescB	CONFIRMED	second word of the source descriptor (opSrc0B)
+local	TPPStreamCompiler__duplicateDestinationSource	uVar4	destEqualsSource	INFERRED	result: 1 while destination and source describe the same register, size and component selection (the move is then skipped by assignOperands), 0 on the first difference
+local	TPPStreamCompiler__duplicateDestinationSource	uVar2	componentSelector	INFERRED	2-bit source component selector extracted for each written destination component (x, y, z, w fields of the descriptor)
+local	TPPStreamCompiler__duplicateDestinationSource	uVar3	expectedSourceBits	INFERRED	source swizzle bit pattern that selector value must equal in srcDescA
+local	TPPStreamCompiler__duplicateDestinationSource	bVar1	swizzleMatches	INFERRED	srcDescA's masked swizzle bits equal the expected pattern for the selector
+local	TPPStreamCompiler__getArrayOffset	puVar3	foundSymbol	CONFIRMED	ParseSymbolTable__FindFirstElement result: a table symbol whose first word is its chunk
+local	TPPStreamCompiler__getArrayOffset	bVar2	chunkKind	CONFIRMED	chunk kind byte (+0): 0 temp, 2/3/4 varying and constant kinds are the register-holding ones
+local	TPPStreamCompiler__getArrayOffset	bVar1	isRegisterChunk	INFERRED	chunk kind is one of 0, 2, 3, 4
+local	TPPStreamCompiler__getArrayOffset	uVar4	baseRegister	INFERRED	register index (chunk +0x12) of the array symbol itself, 0 when not found
+local	TPPStreamCompiler__getArrayOffset	uVar5	elementRegister	INFERRED	register index (chunk +0x12) of the symbol for element [1]; the function returns elementRegister - baseRegister
+local	TPPStreamCompiler__getArrayOffset	this_00	elementSymbol	CONFIRMED	temporary ParseSymbol named name[1] (RemoveArrayIndex, AddDirectIndex 1, CatName) used only to look up element 1
+local	TPPStreamCompiler__getArrayOffset	acStack_30	indexSuffix	CONFIRMED	sprintf buffer holding the [1] suffix passed to ParseSymbol__CatName
