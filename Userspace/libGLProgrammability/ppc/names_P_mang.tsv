@@ -297,8 +297,8 @@ local	__ZN12ParseOperandC4ERKS_	param_2	parseOperand	INFERRED	argument type Pars
 local	ParseOperand__operator_	param_2	parseOperand	INFERRED	argument type ParseOperand& in the mangled symbol (__ZN12ParseOperandaSERS_); assumes no hidden struct-return argument
 local	__ZeqRK12ParseOperandS1_	param_1	parseOperand1	INFERRED	argument type ParseOperand const& in the mangled symbol (__ZeqRK12ParseOperandS1_); assumes no hidden struct-return argument
 local	__ZeqRK12ParseOperandS1_	param_2	parseOperand2	INFERRED	argument type ParseOperand const& in the mangled symbol (__ZeqRK12ParseOperandS1_); assumes no hidden struct-return argument
-local	ParseOperand__GetAsDestVar	param_1	this	INFERRED	member function of ParseOperand per the mangled symbol; first argument is this (no struct-return assumed)
-local	ParseOperand__GetAsSourceVar	param_1	this	INFERRED	member function of ParseOperand per the mangled symbol; first argument is this (no struct-return assumed)
+local	ParseOperand__GetAsDestVar	param_1	destDesc	INFERRED	member function of ParseOperand per the mangled symbol; first argument is this (no struct-return assumed)
+local	ParseOperand__GetAsSourceVar	param_1	srcDesc	INFERRED	member function of ParseOperand per the mangled symbol; first argument is this (no struct-return assumed)
 local	ParseSymbolTable__processOperand	param_2	parseOperand	INFERRED	argument type ParseOperand* in the mangled symbol (__ZN16ParseSymbolTable14processOperandEP12ParseOperand); assumes no hidden struct-return argument
 local	ParseSymbolTable__AddSymbol	param_2	parseSymbol	INFERRED	argument type ParseSymbol* in the mangled symbol (__ZN16ParseSymbolTable9AddSymbolEP11ParseSymbol); assumes no hidden struct-return argument
 local	ParseSymbolTable__InsertSingleSymbol	param_2	parseSymbol	INFERRED	argument type ParseSymbol* in the mangled symbol (__ZN16ParseSymbolTable18InsertSingleSymbolEP11ParseSymbol); assumes no hidden struct-return argument
