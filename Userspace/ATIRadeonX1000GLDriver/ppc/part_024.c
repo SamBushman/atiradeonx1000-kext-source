@@ -149,17 +149,17 @@ int FUN_000ec2c4(param_1, param_2)
 int Program__freeWorkArrays(program)
   int program;
 {
-  if (*(int *)(program + 0x394) != 0) {
-    Arena__free(*(undefined4 *)(*(int *)(program + 8) + 0x374),*(int *)(program + 0x394));
-    *(undefined4 *)(program + 0x394) = 0;
+  if (*(int *)(program + PROG_workArray0) != 0) {
+    Arena__free(*(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaA),*(int *)(program + PROG_workArray0));
+    *(undefined4 *)(program + PROG_workArray0) = 0;
   }
-  if (*(int *)(program + 0x398) != 0) {
-    Arena__free(*(undefined4 *)(*(int *)(program + 8) + 0x374),*(int *)(program + 0x398));
-    *(undefined4 *)(program + 0x398) = 0;
+  if (*(int *)(program + PROG_workArray1) != 0) {
+    Arena__free(*(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaA),*(int *)(program + PROG_workArray1));
+    *(undefined4 *)(program + PROG_workArray1) = 0;
   }
-  if (*(int *)(program + 0x39c) != 0) {
-    Arena__free(*(undefined4 *)(*(int *)(program + 8) + 0x374),*(int *)(program + 0x39c));
-    *(undefined4 *)(program + 0x39c) = 0;
+  if (*(int *)(program + PROG_workArray2) != 0) {
+    Arena__free(*(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaA),*(int *)(program + PROG_workArray2));
+    *(undefined4 *)(program + PROG_workArray2) = 0;
   }
   return;
 }

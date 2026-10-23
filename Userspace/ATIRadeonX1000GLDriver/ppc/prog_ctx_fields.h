@@ -9,6 +9,9 @@ enum {
   PROG_mixInstCount = 0x228,   /* CONFIRMED */
   PROG_uselessPhiCount = 0x22c,   /* CONFIRMED */
   PROG_blockListHead = 0x384,   /* CONFIRMED */
+  PROG_workArray0 = 0x394,   /* CONFIRMED */
+  PROG_workArray1 = 0x398,   /* CONFIRMED */
+  PROG_workArray2 = 0x39c,   /* CONFIRMED */
   PROG_entryBlock = 0x3a0,   /* INFERRED */
   PROG_instructionVector = 0x3c4,   /* CONFIRMED */
   PROG_scopeExprTables = 0x404,   /* CONFIRMED */

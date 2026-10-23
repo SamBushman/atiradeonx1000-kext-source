@@ -2062,16 +2062,16 @@ int Program__scanUsevectorChains(program)
   #define vec2Data (*(int *)(local_44_buf + 0x08))
   #define vec2Arena (*(undefined4 *)(local_44_buf + 0x0c))
   
-  *(int *)(program + 0x474) = *(int *)(program + 0x474) + 1;
-  vecArena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
+  *(int *)(program + PROG_visitStamp) = *(int *)(program + PROG_visitStamp) + 1;
+  vecArena = *(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaB);
   vecCount = 0;
   vecCapacity = 2;
   vecData = Arena__alloc(vecArena,8);
-  vec2Arena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
+  vec2Arena = *(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaB);
   vec2Capacity = 2;
   vec2Count = 0;
   vec2Data = Arena__alloc(vec2Arena,8);
-  iVar8 = *(int *)(program + 0x3c4);
+  iVar8 = *(int *)(program + PROG_instructionVector);
   loopIndex = 1;
   instByteOffset = 0;
 LAB_0013c9f4:
@@ -2111,13 +2111,13 @@ LAB_0013c9e0:
       if (uVar6 == 0) goto code_r0x0013c9e8;
       if (descending) {
         if (currentInst != 0) {
-          movAndShiftUsevectorEnabled = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x14);
+          movAndShiftUsevectorEnabled = Compiler__isOptionEnabled(*(undefined4 *)(program + PROG_compiler),0x14);
           if (movAndShiftUsevectorEnabled != 0) {
-            currentInst = FUN_00147f54(currentInst,*(undefined4 *)(program + 8));
+            currentInst = FUN_00147f54(currentInst,*(undefined4 *)(program + PROG_compiler));
           }
           uVar6 = vecCount;
-          if (*(int *)(program + 0x474) != *(int *)(currentInst + 0x150)) {
-            *(int *)(currentInst + 0x150) = *(int *)(program + 0x474);
+          if (*(int *)(program + PROG_visitStamp) != *(int *)(currentInst + 0x150)) {
+            *(int *)(currentInst + 0x150) = *(int *)(program + PROG_visitStamp);
             iVar8 = IRInst__getOperandSource(currentInst,1);
             uVar6 = vecCount;
             if (iVar8 == 0) goto LAB_0013c8f0;
@@ -2212,7 +2212,7 @@ LAB_0013c8f0:
   }
   goto LAB_0013c9ec;
 code_r0x0013c9e8:
-  iVar8 = *(int *)(program + 0x3c4);
+  iVar8 = *(int *)(program + PROG_instructionVector);
 LAB_0013c9ec:
   loopIndex = loopIndex + 1;
   instByteOffset = instByteOffset + 4;

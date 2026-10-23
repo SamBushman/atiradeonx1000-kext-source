@@ -16,6 +16,9 @@ field	PROG	0x40c	scopeSwizzleTables	CONFIRMED	scope stack of the swizzle tables 
 field	PROG	0x410	scopeBlocks	CONFIRMED	the block that opened each scope (same section)
 field	PROG	0x474	visitStamp	CONFIRMED	inst+0x150 visit stamps are compared with it (notes_compiler_passes.md 2.1, pass_ssa_build set-up)
 field	PROG	0x478	useEpoch	CONFIRMED	IRInst__useCount reads inst+0x160 relative to program+0x478; the epoch advances by compiler+0x324 * 4 (notes_compiler_passes.md)
+field	PROG	0x394	workArray0	CONFIRMED	Program__freeWorkArrays frees it with Arena__free(compiler arenaA) and zeroes it; pass_remove_empty_graphs zeroes it after a CFG change
+field	PROG	0x398	workArray1	CONFIRMED	same: freed and zeroed by Program__freeWorkArrays
+field	PROG	0x39c	workArray2	CONFIRMED	same: freed and zeroed by Program__freeWorkArrays
 field	COMP	0x30c	target	CONFIRMED	the target description object (HwLimits family KhanPs/KhanVs/FudoPs/FudoVs): virtual calls at slots 0x60/0x104/0xe0/0xf0 (notes_compiler_ir.md 5.2, notes_compiler_opcodes.md)
 field	COMP	0x324	nextInstId	CONFIRMED	IRInst constructor takes the next id from it (notes_compiler_ir.md 5.2)
 field	COMP	0x32c	nextBlockId	CONFIRMED	Block constructor takes the next id from it
