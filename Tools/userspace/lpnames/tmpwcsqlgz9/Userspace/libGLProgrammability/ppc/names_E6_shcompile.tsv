@@ -1,0 +1,27 @@
+local	_ShCompile	param_1	handle	CONFIRMED	ShHandle: vtable slot 8 (getAsCompiler) returns the TCompiler used below
+local	_ShCompile	param_3	numStrings	CONFIRMED	count of shader source strings: 0 returns early, passed to PaParseStrings as the string count
+local	_ShCompile	param_4	optLevel	INFERRED	nonzero requests code generation: forwarded to compiler vtable slot 0x34 before slot 0x14 (compile); 0 prints "No errors. No code generation or linking was requested."
+local	_ShCompile	param_5	debugOptions	INFERRED	bit 0 selects TIntermediate::outputTree; forwarded to compiler vtable slot 0x38
+local	_ShCompile	piVar6	compiler	CONFIRMED	result of handle vtable slot 8 (getAsCompiler): TCompiler; +4 infoSink, +8 language
+local	_ShCompile	local_3c	preprocessorBuiltinStrings	CONFIRMED	array whose element 0 is GetPreprocessorBuiltinString(): parsed first as a built-in source string
+local	_ShCompile	local_40	intermediate	INFERRED	TIntermediate object (holds the infoSink): passed as &local_40 to postProcess / outputTree / remove and stored as the parse context's intermediate
+local	_ShCompile	local_140	parseContextIntermediate	INFERRED	first TParseContext member: pointer to the intermediate object, then the stack parse context passed to PaParseStrings
+local	_ShCompile	local_13c	symbolTableLevelsPtr	CONFIRMED	pointer to the symbol table level vector (&local_180)
+local	_ShCompile	local_138	infoSink	CONFIRMED	compiler infoSink (compiler+4): TInfoSinkBase::append receiver in every error path
+local	_ShCompile	local_134	language	INFERRED	compiler+8 (EShLanguage, also passed to GetSymbolTable)
+local	_ShCompile	local_130	treeRoot	CONFIRMED	parse tree root (TIntermNode*) produced by the parser; passed to postProcess, outputTree, remove and the compile call
+local	_ShCompile	local_12c	errorFlag	INFERRED	parse context error indicator: zero allows post-processing and code generation
+local	_ShCompile	local_128	numErrors	INFERRED	formatted with sprintf("%d") and appended before " compilation errors. No code generated."
+local	_ShCompile	local_180	symbolTableLevelsBegin	CONFIRMED	begin pointer of the std::vector<TSymbolTableLevel*> (levels are pushed with _M_insert_aux)
+local	_ShCompile	local_17c	symbolTableLevelsEnd	CONFIRMED	end pointer of that vector (count = (end-begin)>>2)
+local	_ShCompile	local_178	symbolTableLevelsCapacityEnd	CONFIRMED	end-of-storage pointer of that vector
+local	_ShCompile	local_174	symbolTableNextId	INFERRED	copy of the built-in symbol table's +0xc counter (nextId)
+local	_ShCompile	local_10c	extensionBehaviorHeader	CONFIRMED	header node of the std::map<std::string, TBehavior> (extension behaviour map) initialised by initializeExtensionBehavior
+local	_ShCompile	local_110	extensionBehaviorAllocator	CONFIRMED	pool allocator of that map
+local	_ShCompile	local_108	extensionBehaviorCount	CONFIRMED	node count of that map (erased when nonzero)
+local	_ShCompile	local_f4	stringMapHeader	CONFIRMED	header node of the second std::map<std::string, std::string> held by the parse context
+local	_ShCompile	local_f8	stringMapAllocator	CONFIRMED	pool allocator of that map
+local	_ShCompile	local_f0	stringMapCount	CONFIRMED	node count of that map (erased when nonzero)
+local	_ShCompile	uVar13	success	CONFIRMED	1 until a parse, post-process or symbol-table error clears it; returned
+local	_ShCompile	local_150	newLevelSlot	INFERRED	one-element array holding the new TSymbolTableLevel* pushed on the level vector
+local	_ShCompile	pcVar14	stringRepData	INFERRED	character data pointer of the std::string used by the inlined _M_replace calls

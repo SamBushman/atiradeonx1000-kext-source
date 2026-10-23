@@ -1,0 +1,66 @@
+local	__ZNKSs5rfindEcm	iVar2	thisSize	CONFIRMED	this->size() (rep length at data-0xc)
+local	__ZNKSs5rfindEcm	uVar3	i	CONFIRMED	search index, counted down from min(pos, size-1)
+local	__ZNKSs5rfindEcm	bVar1	wasZero	CONFIRMED	i == 0 before the decrement: loop ends
+local	__ZNKSs13find_first_ofEPKcmm	iVar1	data	CONFIRMED	this->_M_data()
+local	__ZNKSs12find_last_ofEPKcmm	pvVar3	found	CONFIRMED	memchr(str, this[i], n) result
+local	__ZNKSs12find_last_ofEPKcmm	uVar4	i	CONFIRMED	search index, counted down from min(pos, size-1); 0xffffffff = npos
+local	__ZNKSs12find_last_ofEPKcmm	bVar1	wasZero	CONFIRMED	i == 0 before the decrement: loop ends
+local	__ZNKSs16find_last_not_ofEPKcmm	pvVar3	found	CONFIRMED	memchr(str, this[i], n) result
+local	__ZNKSs16find_last_not_ofEPKcmm	uVar4	i	CONFIRMED	search index, counted down from min(pos, size-1); 0xffffffff = npos
+local	__ZNKSs16find_last_not_ofEPKcmm	bVar1	wasZero	CONFIRMED	i == 0 before the decrement: loop ends
+local	__ZNKSs16find_last_not_ofEcm	iVar2	thisSize	CONFIRMED	this->size()
+local	__ZNKSs16find_last_not_ofEcm	uVar3	i	CONFIRMED	search index, counted down from min(pos, size-1)
+local	__ZNKSs16find_last_not_ofEcm	bVar1	wasZero	CONFIRMED	i == 0 before the decrement: loop ends
+local	std__string__substr	param_3	pos	CONFIRMED	substr position; > size throws out_of_range
+local	std__string__substr	param_4	n	CONFIRMED	substr length
+local	__ZNKSs7compareERKSs	iVar1	r	CONFIRMED	traits::compare result, then size difference when equal
+local	__ZNKSs7compareERKSs	puVar2	minRef	CONFIRMED	std::min<size_type>(a, b) result reference
+local	__ZNKSs7compareERKSs	uVar3	thisSize	CONFIRMED	this->size()
+local	__ZNKSs7compareERKSs	uVar4	strSize	CONFIRMED	str.size()
+local	__ZNKSs7compareERKSs	local_20	thisSizeCopy	CONFIRMED	stack copy of this->size() for the std::min reference
+local	__ZNKSs7compareERKSs	local_1c	strSizeCopy	CONFIRMED	stack copy of str.size() for the std::min reference
+local	__ZNKSs7compareEmmRKSs	uVar1	strSize	CONFIRMED	str.size()
+local	__ZNKSs7compareEmmRKSs	puVar2	minRef	CONFIRMED	std::min<size_type> result reference
+local	__ZNKSs7compareEmmRKSs	iVar4	strData	CONFIRMED	str.data()
+local	__ZNKSs7compareEmmRKSs	local_30	thisSizeMinusPos1	CONFIRMED	this->size() - pos1
+local	__ZNKSs7compareEmmRKSs	local_2c	rsizeCopy	CONFIRMED	stack copy of rsize for the std::min reference
+local	__ZNKSs7compareEmmRKSs	local_28	strSizeCopy	CONFIRMED	stack copy of str.size() for the std::min reference
+use	__ZNKSs7compareEmmRKSs	iVar3	thisData	CONFIRMED	this->_M_data()	^\s*iVar3\ =\ \*\(int\ \*\)this;$	^\s*iVar3\ =\ _memcmp\(iVar3\ \+\ param_2,iVar4,\*puVar2\);$	all	rhs
+use	__ZNKSs7compareEmmRKSs	iVar3	r	CONFIRMED	traits::compare result, then rsize - str.size() when equal	^\s*iVar3\ =\ _memcmp\(iVar3\ \+\ param_2,iVar4,\*puVar2\);$		lhs	none
+use	__ZNKSs7compareEmmRKSs	uVar5	thisSize	CONFIRMED	this->size()	^\s*uVar5\ =\ \*\(uint\ \*\)\(iVar3\ \+\ \-0xc\);$	^\s*uVar5\ =\ \*puVar2;$	all	none
+use	__ZNKSs7compareEmmRKSs	uVar5	rsize	CONFIRMED	min(this->size() - pos1, n1)	^\s*uVar5\ =\ \*puVar2;$		all	none
+local	__ZNKSs7compareEmmRKSsmm	puVar1	minRef	CONFIRMED	std::min<size_type> result reference
+local	__ZNKSs7compareEmmRKSsmm	iVar3	strData	CONFIRMED	str.data()
+local	__ZNKSs7compareEmmRKSsmm	local_30	thisSizeMinusPos1	CONFIRMED	this->size() - pos1
+local	__ZNKSs7compareEmmRKSsmm	local_2c	strSizeMinusPos2	CONFIRMED	str.size() - pos2
+local	__ZNKSs7compareEmmRKSsmm	local_28	rsizeCopy	CONFIRMED	stack copy of rsize for the std::min reference
+local	__ZNKSs7compareEmmRKSsmm	local_24	osizeCopy	CONFIRMED	stack copy of osize for the std::min reference
+use	__ZNKSs7compareEmmRKSsmm	iVar2	thisData	CONFIRMED	this->_M_data()	^\s*iVar2\ =\ \*\(int\ \*\)this;$	^\s*iVar2\ =\ _memcmp\(iVar2\ \+\ param_2,iVar3\ \+\ param_5,\*puVar1\);$	all	rhs
+use	__ZNKSs7compareEmmRKSsmm	iVar2	r	CONFIRMED	traits::compare result, then rsize - osize when equal	^\s*iVar2\ =\ _memcmp\(iVar2\ \+\ param_2,iVar3\ \+\ param_5,\*puVar1\);$		lhs	none
+use	__ZNKSs7compareEmmRKSsmm	uVar5	thisSize	CONFIRMED	this->size()	^\s*uVar5\ =\ \*\(uint\ \*\)\(iVar2\ \+\ \-0xc\);$	^\s*uVar5\ =\ \*puVar1;$	all	none
+use	__ZNKSs7compareEmmRKSsmm	uVar5	osize	CONFIRMED	min(str.size() - pos2, n2)	^\s*uVar5\ =\ \*puVar1;$		all	none
+use	__ZNKSs7compareEmmRKSsmm	uVar4	strSize	CONFIRMED	str.size()	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar3\ \+\ \-0xc\);$	^\s*uVar4\ =\ \*puVar1;$	all	none
+use	__ZNKSs7compareEmmRKSsmm	uVar4	rsize	CONFIRMED	min(this->size() - pos1, n1)	^\s*uVar4\ =\ \*puVar1;$		all	none
+local	__ZNKSs7compareEPKc	puVar2	minRef	CONFIRMED	std::min<size_type> result reference
+local	__ZNKSs7compareEPKc	iVar3	r	CONFIRMED	traits::compare result, then size difference when equal
+local	__ZNKSs7compareEPKc	local_30	thisSizeCopy	CONFIRMED	stack copy of this->size() for the std::min reference
+local	__ZNKSs7compareEPKc	local_2c	strLenCopy	CONFIRMED	stack copy of strlen(str) for the std::min reference
+local	__ZNKSs7compareEmmPKc	uVar2	strLen	CONFIRMED	strlen(str)
+local	__ZNKSs7compareEmmPKc	puVar1	minRef	CONFIRMED	std::min<size_type> result reference
+local	__ZNKSs7compareEmmPKc	local_30	thisSizeMinusPos1	CONFIRMED	this->size() - pos1
+local	__ZNKSs7compareEmmPKc	local_2c	rsizeCopy	CONFIRMED	stack copy of rsize for the std::min reference
+local	__ZNKSs7compareEmmPKc	local_28	strLenCopy	CONFIRMED	stack copy of strlen(str) for the std::min reference
+use	__ZNKSs7compareEmmPKc	iVar3	thisData	CONFIRMED	this->_M_data()	^\s*iVar3\ =\ \*\(int\ \*\)this;$	^\s*iVar3\ =\ _memcmp\(iVar3\ \+\ param_2,param_4,\*puVar1\);$	all	rhs
+use	__ZNKSs7compareEmmPKc	iVar3	r	CONFIRMED	traits::compare result, then rsize - strlen when equal	^\s*iVar3\ =\ _memcmp\(iVar3\ \+\ param_2,param_4,\*puVar1\);$		lhs	none
+use	__ZNKSs7compareEmmPKc	uVar4	thisSize	CONFIRMED	this->size()	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar3\ \+\ \-0xc\);$	^\s*uVar4\ =\ \*puVar1;$	all	none
+use	__ZNKSs7compareEmmPKc	uVar4	rsize	CONFIRMED	min(this->size() - pos1, n1)	^\s*uVar4\ =\ \*puVar1;$		all	none
+local	__ZNKSs7compareEmmPKcm	puVar1	minRef	CONFIRMED	std::min<size_type> result reference
+local	__ZNKSs7compareEmmPKcm	local_30	strLenCopy	CONFIRMED	strlen(str), kept on the stack for the std::min reference
+local	__ZNKSs7compareEmmPKcm	local_2c	thisSizeMinusPos1	CONFIRMED	this->size() - pos1
+local	__ZNKSs7compareEmmPKcm	local_28	rsizeCopy	CONFIRMED	stack copy of rsize for the std::min reference
+local	__ZNKSs7compareEmmPKcm	local_24	osizeCopy	CONFIRMED	stack copy of osize for the std::min reference
+local	__ZNKSs7compareEmmPKcm	uVar4	rsize	CONFIRMED	min(this->size() - pos1, n1)
+use	__ZNKSs7compareEmmPKcm	iVar2	thisData	CONFIRMED	this->_M_data()	^\s*iVar2\ =\ \*\(int\ \*\)this;$	^\s*iVar2\ =\ _memcmp\(iVar2\ \+\ param_2,param_4,\*puVar1\);$	all	rhs
+use	__ZNKSs7compareEmmPKcm	iVar2	r	CONFIRMED	traits::compare result, then rsize - osize when equal	^\s*iVar2\ =\ _memcmp\(iVar2\ \+\ param_2,param_4,\*puVar1\);$		lhs	none
+use	__ZNKSs7compareEmmPKcm	uVar3	thisSize	CONFIRMED	this->size()	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar2\ \+\ \-0xc\);$	^\s*uVar3\ =\ \*puVar1;$	all	none
+use	__ZNKSs7compareEmmPKcm	uVar3	osize	CONFIRMED	min(strlen(str) - pos2, ...) the clamped length of str	^\s*uVar3\ =\ \*puVar1;$		all	none

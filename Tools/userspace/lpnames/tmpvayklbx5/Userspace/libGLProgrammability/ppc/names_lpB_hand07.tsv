@@ -1,0 +1,65 @@
+local	_FreeMacro	param_1	macro	CONFIRMED	MacroSymbol*: +8 is the body TokenStream
+local	_PushEofSrc	uVar1	eofUngetchFn	INFERRED	DAT_a7b7b00c stored in inputSrc[3] (ungetch slot)
+local	_PushEofSrc	uVar2	eofScanGetchFn	INFERRED	DAT_a7b7b010 stored in inputSrc[1] (scan) and [2] (getch)
+local	_PushEofSrc	iVar4	cppState	INFERRED	*cpp: the cpp state whose +0x20 is currentInput
+local	_PopEofSrc	puVar1	inputSrc	INFERRED	cpp->currentInput: popped when it is the EOF source
+local	_PopEofSrc	extraout_r3	extraOut1	INFERRED	Ghidra extra-output of r3 after _free; returned
+local	_PrescanMacroArg	param_1	argStream	CONFIRMED	TokenStream* of one macro argument (3Dlabs PrescanMacroArg(a, yylvalpp))
+local	_PrescanMacroArg	param_2	yylvalpp	CONFIRMED	yystypepp*
+local	_PrescanMacroArg	puVar1	cppRef	INFERRED	&_cpp GOT pointer
+local	_PrescanMacroArg	iVar2	token	CONFIRMED	token read from the stream / scanned from the macro expansion
+use	_PrescanMacroArg	iVar3	macroSymbol	INFERRED	_LookUpSymbol result for an identifier in the argument	iVar3\ =\ _LookUpSymbol	+1	all	none
+use	_PrescanMacroArg	iVar3	expandResult	INFERRED	_MacroExpand result: nonzero when the macro expanded	iVar3\ =\ \(\(int\ \(\*\)\(\)\)_MacroExpand\)	+1	all	none
+local	_macro_scan	param_1	macroInput	CONFIRMED	MacroInputSrc*: [0] prev, [6] &mac (argc, formal args), [7] actual-argument token streams
+local	_macro_scan	param_2	yylvalpp	CONFIRMED	yystypepp*
+local	_macro_scan	param_3	unusedArg3	INFERRED	forwarded to the ungetch vtable call; set to 0 when an argument is substituted
+local	_macro_scan	param_4	unusedArg4	INFERRED	forwarded to the ungetch vtable call
+local	_macro_scan	param_5	unusedArg5	INFERRED	forwarded to the ungetch vtable call
+local	_macro_scan	param_6	unusedArg6	INFERRED	forwarded to the ungetch vtable call
+local	_macro_scan	bVar1	noMoreFormals	INFERRED	formalIndex < 0: all formal arguments compared
+local	_macro_scan	puVar2	cppRef	INFERRED	&_cpp GOT pointer
+local	_macro_scan	iVar3	formalAtom	INFERRED	atom of the formal argument being compared with yylvalpp->sc_ident
+local	_macro_scan	piVar4	formalCursor	INFERRED	walks mac.args backwards
+local	_macro_scan	iVar6	formalIndex	INFERRED	index of the current formal argument, counts down from argc-1
+use	_macro_scan	iVar5	argStreams	INFERRED	macroInput->args: actual-argument token streams, freed at the end of the expansion	^\s*iVar5\ =\ param_1\[7\];@1	^LAB_97b87fc4:	all	none
+use	_macro_scan	iVar5	currentInput	INFERRED	cpp->currentInput: its vtable ungetch/scan is called	*		all	none
+local	_ChkCorrectElseNesting	iVar1	elseSlot	INFERRED	address of cpp->elsedepth[elsetracker] (+0x38 + 4*index): flag "an #else was seen at this level"
+local	_InitCPPStruct	uVar1	success	INFERRED	return value 0/1
+local	_InitCPPStruct	puVar3	clearCursor	INFERRED	walks the 16-byte cpp header backwards while clearing it
+local	_InitCPPStruct	iVar4	clearCount	INFERRED	down-counter 0x10
+local	_ResetPreprocessor	iVar1	elseIndex	INFERRED	cpp->elsetracker (+0x138) while clearing the 0x40-entry elsedepth array
+local	_InitPreprocessor	puVar1	atableRef	INFERRED	&_atable GOT pointer
+local	_InitPreprocessor	uVar3	result	INFERRED	return value (0 on success)
+local	_mem_CreatePool	param_1	growthSize	CONFIRMED	page size, default 0x10000 (3Dlabs mem_CreatePool(growthSize, alignment))
+local	_mem_CreatePool	param_2	alignment	CONFIRMED	alignment, default 8; must be a power of two
+local	_mem_CreatePool	puVar1	pool	CONFIRMED	Pool* result (NULL when the arguments are invalid or malloc fails)
+local	_mem_CreatePool	uVar3	alignMask	INFERRED	alignment-1
+local	_mem_FreePool	param_1	pool	CONFIRMED	Pool* whose cleanups run and pages are freed
+local	_mem_FreePool	piVar1	cleanup	INFERRED	cleanup record {next, fn, arg} from pool+0x14
+local	_mem_FreePool	iVar2	nextPage	INFERRED	next page of the pool saved before the free
+local	_mem_Alloc	param_1	pool	CONFIRMED	Pool*: [1] current pointer, [2] page end, [3] growth size, [4] alignment mask
+local	_mem_Alloc	param_2	byteCount	CONFIRMED	bytes requested
+local	_mem_Alloc	uVar5	alignMask	INFERRED	pool->alignment mask
+local	_mem_Alloc	uVar2	allocPtr	INFERRED	start of the allocation (pool->current before the bump); returned
+local	_mem_Alloc	uVar1	alignedSize	INFERRED	size rounded up to the alignment (the alignment itself for size 0)
+local	_mem_Alloc	uVar4	newCurrent	INFERRED	pool->current after the bump (overflow-checked)
+local	_mem_AddCleanup	param_1	pool	CONFIRMED	Pool*; +0x14 is the cleanup list head
+local	_mem_AddCleanup	param_2	cleanupFn	CONFIRMED	function called at pool destruction
+local	_mem_AddCleanup	param_3	cleanupArg	CONFIRMED	argument passed to cleanupFn
+use	_mem_AddCleanup	uVar1	oldHead	INFERRED	previous cleanup list head linked behind the new record	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x14\);	+3	all	none
+use	_mem_AddCleanup	uVar1	result	INFERRED	0 on success, -1 when the record cannot be allocated	*		all	none
+local	_InitScanner	param_1	cpp	CONFIRMED	Cpp* being initialised: +0x20 currentInput, +0x18 buffer cursor
+local	_str_getch	param_1	stringSrc	CONFIRMED	StringInputSrc*: [5] line number, [6] read cursor
+local	_str_getch	cVar1	ch	INFERRED	character returned
+local	_str_getch	uVar2	prevInput	INFERRED	stringSrc->prev: restored as currentInput at the end of all strings
+local	_str_getch	iVar3	stringIndex	INFERRED	cpp->currentString (+0x144) after the increment, compared with the string count at +0x14c
+local	_str_getch	pcVar4	cursor	INFERRED	stringSrc->p: next character of the current string
+local	_str_getch	iVar5	cppState	INFERRED	*cpp: the cpp state
+local	FUN_97b88a90	param_1	stringSrc	CONFIRMED	StringInputSrc* (str_ungetch body)
+local	FUN_97b88a90	param_2	ch	CONFIRMED	character pushed back
+local	FUN_97b88a90	unaff_r2	cursor	CONFIRMED	stringSrc->p loaded by the entry stub; the pushback steps it back one char
+local	_ScanFromString	param_1	string	CONFIRMED	NUL-terminated shader source string to scan
+local	_ScanFromString	iVar4	cppState	INFERRED	*cpp: the cpp state whose +0x20 is currentInput
+use	_ScanFromString	uVar1	scanFn	INFERRED	DAT_a7b7b038: scan slot (inputSrc[1])	^\s*uVar1\ =\ DAT_a7b7b038;	^\s*uVar1\ =\ DAT_a7b7b030;	all	none
+use	_ScanFromString	uVar1	ungetchFn	INFERRED	DAT_a7b7b030: ungetch slot (inputSrc[3])	^\s*uVar1\ =\ DAT_a7b7b030;		all	none
+local	_ScanFromString	uVar2	getchFn	INFERRED	DAT_a7b7b034: getch slot (inputSrc[2])

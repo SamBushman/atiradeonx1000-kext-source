@@ -1,0 +1,4672 @@
+#include "decls.h"
+
+/* TGenericLinker__MergeCompilers @ 0x97bb21dc (200 bytes) */
+int TGenericLinker__MergeCompilers(this, stage)
+  unsigned char * this;
+  int stage;
+{
+  bool symbolMissing;
+  char labelDigit;
+  byte chunkKind;
+  int stageOffset;
+  unsigned char * stageEntryCopy1;
+  unsigned char * stageEntryCopy2;
+  unsigned char * stageEntryCopy3;
+  int objectIndexOrPhase;
+  char *messageOrCharCursor;
+  int objectOffsetOrTemp;
+  int objectFirstChunk;
+  int objectChunkCount;
+  undefined4 stringLengthOrArg;
+  int newChunkOrTemp;
+  int compareResultOrIndex;
+  char *labelDigitCursor;
+  undefined4 uVar17;
+  unsigned char * parseSymbol;
+  unsigned char * newConstantChunk;
+  uint chunkWord;
+  byte *symbolChunk;
+  bool success;
+  int opIndexBaseOrObjectIndex;
+  undefined4 *mergedSymbol;
+  unsigned char * objectFunctionTable;
+  int chunkLabelName;
+  int chunkCursorOrTemp;
+  void *infoSinkOrNewTable;
+  unsigned char * stageEntry;
+  unsigned char * constantChunk;
+  char labelNumberText [16];
+  int stageRequirementMet;
+  unsigned char * stageEntrySave1;
+  unsigned char * stageEntrySave2;
+  unsigned char * stageEntrySave3;
+  
+  stageOffset = stage * 4;
+  objectFirstChunk = _malloc(*(int *)(this + stageOffset + 0x20) << 2);
+  objectChunkCount = _malloc(*(int *)(this + stageOffset + 0x20) << 2);
+  messageOrCharCursor = DAT_a7b7bb0c;
+  objectIndexOrPhase = *(int *)(this + stageOffset + 0x20);
+  stageRequirementMet = 0;
+  if (10000 < objectIndexOrPhase) {
+    infoSinkOrNewTable = *(void **)(this + 0x84);
+                    
+    __ZN13TInfoSinkBase6appendEPKc(infoSinkOrNewTable,"ERROR: ");
+    __ZN13TInfoSinkBase6appendEPKc(infoSinkOrNewTable,messageOrCharCursor);
+    __ZN13TInfoSinkBase6appendEPKc(infoSinkOrNewTable,"\n");
+  }
+  success = 10000 >= objectIndexOrPhase;
+  if (success) {
+    stringLengthOrArg = _PPStreamCreate();
+    *(undefined4 *)(this + stageOffset + 0x30) = stringLengthOrArg;
+    infoSinkOrNewTable = operator_new(0x54);
+    __ZN16ParseSymbolTableC1Ej(infoSinkOrNewTable,0x80);
+    *(void **)(this + stageOffset + 0x28) = infoSinkOrNewTable;
+    *(undefined4 *)((int)infoSinkOrNewTable + 0xc) = *(undefined4 *)(this + stageOffset + 0x30);
+    if (stage == 0) {
+      **(undefined4 **)(this + 0x30) = 0x8b31;
+      stageRequirementMet = 0;
+      *(undefined4 *)(*(int *)(this + 0x28) + 0x3c) = 0;
+    }
+    else {
+      **(undefined4 **)(this + stageOffset + 0x30) = 0x8b30;
+      stageRequirementMet = 1;
+      *(undefined4 *)(*(int *)(this + stageOffset + 0x28) + 0x3c) = 1;
+    }
+  }
+  if (success) {
+    stageEntry = this + stageOffset;
+    objectIndexOrPhase = 0;
+    opIndexBaseOrObjectIndex = 0;
+    _memset(objectFirstChunk,0,*(int *)(stageEntry + 0x20) << 2);
+    _memset(objectChunkCount,0,*(int *)(stageEntry + 0x20) << 2);
+    stageEntryCopy1 = stageEntry;
+    stageEntryCopy2 = stageEntry;
+    stageEntryCopy3 = stageEntry;
+    if (0 < *(int *)(stageEntry + 0x20)) {
+      do {
+        stageEntrySave3 = stageEntryCopy3;
+        stageEntrySave2 = stageEntryCopy2;
+        stageEntrySave1 = stageEntryCopy1;
+        objectOffsetOrTemp = objectIndexOrPhase * 4;
+        chunkCursorOrTemp = **(int **)(*(int *)(objectOffsetOrTemp + *(int *)(stageEntry + 0x18)) + 0x20);
+        while (chunkCursorOrTemp != 0) {
+          newChunkOrTemp = _PPStreamChunkCreateFromChunk(chunkCursorOrTemp);
+          _PPStreamChunkListAddChunk(*(undefined4 *)(*(int *)(stageEntry + 0x30) + 0x20),newChunkOrTemp);
+          if (*(int *)(objectOffsetOrTemp + objectFirstChunk) == 0) {
+            *(int *)(objectOffsetOrTemp + objectFirstChunk) = newChunkOrTemp;
+          }
+          chunkWord = *(uint *)(newChunkOrTemp + 0x10);
+          *(uint *)(newChunkOrTemp + 0xc) =
+               (*(uint *)(newChunkOrTemp + 0xc) & 0x3ffff) + opIndexBaseOrObjectIndex & 0x3ffff |
+               *(uint *)(newChunkOrTemp + 0xc) & 0xfffc0000;
+          if ((chunkWord & 0x3ffff) != 0) {
+            *(uint *)(newChunkOrTemp + 0x10) = (chunkWord & 0x3ffff) + opIndexBaseOrObjectIndex & 0x3ffff | chunkWord & 0xfffc0000;
+          }
+          if (*(int *)(newChunkOrTemp + 0x40) != 0) {
+            chunkLabelName = newChunkOrTemp + 0x44;
+            stringLengthOrArg = _strlen("gl__WhileBody_");
+            compareResultOrIndex = _strncmp(chunkLabelName,"gl__WhileBody_",stringLengthOrArg);
+            if (compareResultOrIndex != 0) {
+              stringLengthOrArg = _strlen("gl__WhileEnd_");
+              compareResultOrIndex = _strncmp(chunkLabelName,"gl__WhileEnd_",stringLengthOrArg);
+              if (compareResultOrIndex != 0) {
+                stringLengthOrArg = _strlen("gl__WhileStart_");
+                compareResultOrIndex = _strncmp(chunkLabelName,"gl__WhileStart_",stringLengthOrArg);
+                if (compareResultOrIndex != 0) {
+                  stringLengthOrArg = _strlen("gl__WhileEndIf_");
+                  compareResultOrIndex = _strncmp(chunkLabelName,"gl__WhileEndIf_",stringLengthOrArg);
+                  if (compareResultOrIndex != 0) {
+                    stringLengthOrArg = _strlen("gl__IfElse");
+                    compareResultOrIndex = _strncmp(chunkLabelName,"gl__IfElse",stringLengthOrArg);
+                    if (compareResultOrIndex != 0) {
+                      stringLengthOrArg = _strlen("gl__IfEnd_");
+                      compareResultOrIndex = _strncmp(chunkLabelName,"gl__IfEnd_",stringLengthOrArg);
+                      if (compareResultOrIndex != 0) goto code_r0x97bb257c;
+                    }
+                  }
+                }
+              }
+            }
+            _sprintf(labelNumberText,"%04d",objectIndexOrPhase);
+            labelDigitCursor = (char *)(newChunkOrTemp + 0x44);
+            messageOrCharCursor = labelNumberText;
+            newChunkOrTemp = 4;
+            do {
+              labelDigit = *messageOrCharCursor;
+              messageOrCharCursor = messageOrCharCursor + 1;
+              *labelDigitCursor = labelDigit;
+              labelDigitCursor = labelDigitCursor + 1;
+              newChunkOrTemp = newChunkOrTemp + -1;
+            } while (newChunkOrTemp != 0);
+          }
+code_r0x97bb257c:
+          chunkCursorOrTemp = *(int *)(chunkCursorOrTemp + 8);
+          *(int *)(objectOffsetOrTemp + objectChunkCount) = *(int *)(objectOffsetOrTemp + objectChunkCount) + 1;
+        }
+        stageEntryCopy1 = stageEntrySave1;
+        stageEntryCopy2 = stageEntrySave3;
+        for (chunkCursorOrTemp = **(int **)(*(int *)(objectOffsetOrTemp + *(int *)(stageEntry + 0x18)) + 0x24);
+            stageEntrySave1 = stageEntryCopy1, stageEntrySave3 = stageEntryCopy2, chunkCursorOrTemp != 0; chunkCursorOrTemp = *(int *)(chunkCursorOrTemp + 8)) {
+          newChunkOrTemp = _PPStreamChunkCreateFromChunk(chunkCursorOrTemp);
+          _PPStreamChunkListAddChunk(*(undefined4 *)(*(int *)(stageEntry + 0x30) + 0x24),newChunkOrTemp);
+          *(int *)(newChunkOrTemp + 0xc) = *(int *)(newChunkOrTemp + 0xc) + opIndexBaseOrObjectIndex;
+          if (*(int *)(newChunkOrTemp + 0x10) != 0) {
+            chunkLabelName = newChunkOrTemp + 0x14;
+            stringLengthOrArg = _strlen("gl__WhileBody_");
+            compareResultOrIndex = _strncmp(chunkLabelName,"gl__WhileBody_",stringLengthOrArg);
+            if (compareResultOrIndex != 0) {
+              stringLengthOrArg = _strlen("gl__WhileEnd_");
+              compareResultOrIndex = _strncmp(chunkLabelName,"gl__WhileEnd_",stringLengthOrArg);
+              if (compareResultOrIndex != 0) {
+                stringLengthOrArg = _strlen("gl__WhileStart_");
+                compareResultOrIndex = _strncmp(chunkLabelName,"gl__WhileStart_",stringLengthOrArg);
+                if (compareResultOrIndex != 0) {
+                  stringLengthOrArg = _strlen("gl__WhileEndIf_");
+                  compareResultOrIndex = _strncmp(chunkLabelName,"gl__WhileEndIf_",stringLengthOrArg);
+                  if (compareResultOrIndex != 0) {
+                    stringLengthOrArg = _strlen("gl__IfElse");
+                    compareResultOrIndex = _strncmp(chunkLabelName,"gl__IfElse",stringLengthOrArg);
+                    if (compareResultOrIndex != 0) {
+                      stringLengthOrArg = _strlen("gl__IfEnd_");
+                      compareResultOrIndex = _strncmp(chunkLabelName,"gl__IfEnd_",stringLengthOrArg);
+                      if (compareResultOrIndex != 0) goto code_r0x97bb26e0;
+                    }
+                  }
+                }
+              }
+            }
+            _sprintf(labelNumberText,"%04d",objectIndexOrPhase);
+            labelDigitCursor = (char *)(newChunkOrTemp + 0x14);
+            messageOrCharCursor = labelNumberText;
+            newChunkOrTemp = 4;
+            do {
+              labelDigit = *messageOrCharCursor;
+              messageOrCharCursor = messageOrCharCursor + 1;
+              *labelDigitCursor = labelDigit;
+              labelDigitCursor = labelDigitCursor + 1;
+              newChunkOrTemp = newChunkOrTemp + -1;
+            } while (newChunkOrTemp != 0);
+          }
+code_r0x97bb26e0:
+          stageEntryCopy1 = stageEntrySave1;
+          stageEntryCopy2 = stageEntrySave3;
+        }
+        newChunkOrTemp = 0;
+        objectFunctionTable = *(unsigned char **)(*(int *)(objectOffsetOrTemp + *(int *)(stageEntry + 8)) + 0x6c);
+        chunkCursorOrTemp = *(int *)(objectFunctionTable + 4);
+        if (0 < chunkCursorOrTemp) {
+          do {
+            compareResultOrIndex = 0;
+            if (0 < *(int *)(*(int *)(stageEntryCopy1 + 0x38) + 4)) {
+              do {
+                stringLengthOrArg = FunctionTable__getFunctionName(*(unsigned char **)(stageEntryCopy2 + 0x38),compareResultOrIndex);
+                uVar17 = FunctionTable__getFunctionName(objectFunctionTable,newChunkOrTemp);
+                chunkCursorOrTemp = _strcmp(stringLengthOrArg,uVar17);
+                if (chunkCursorOrTemp == 0) {
+                  chunkCursorOrTemp = FunctionTable__getFirstOp(*(unsigned char **)(stageEntryCopy2 + 0x38),compareResultOrIndex);
+                  FunctionTable__setFirstOp
+                            (*(unsigned char **)(stageEntryCopy2 + 0x38),compareResultOrIndex,chunkCursorOrTemp + opIndexBaseOrObjectIndex);
+                  chunkCursorOrTemp = FunctionTable__getLastOp(*(unsigned char **)(stageEntryCopy2 + 0x38),compareResultOrIndex);
+                  FunctionTable__setLastOp
+                            (*(unsigned char **)(stageEntryCopy2 + 0x38),compareResultOrIndex,chunkCursorOrTemp + opIndexBaseOrObjectIndex);
+                }
+                compareResultOrIndex = compareResultOrIndex + 1;
+              } while (compareResultOrIndex < *(int *)(*(int *)(stageEntryCopy2 + 0x38) + 4));
+              chunkCursorOrTemp = *(int *)(objectFunctionTable + 4);
+            }
+            newChunkOrTemp = newChunkOrTemp + 1;
+          } while (newChunkOrTemp < chunkCursorOrTemp);
+        }
+        opIndexBaseOrObjectIndex = opIndexBaseOrObjectIndex + *(int *)(objectOffsetOrTemp + objectChunkCount);
+        if (*(int *)(*(int *)(objectOffsetOrTemp + *(int *)(stageEntrySave2 + 8)) + 0xa4) != 0) {
+          stageRequirementMet = 1;
+        }
+        objectIndexOrPhase = objectIndexOrPhase + 1;
+        stageEntryCopy1 = stageEntrySave1;
+        stageEntryCopy2 = stageEntrySave2;
+        stageEntryCopy3 = stageEntrySave3;
+      } while (objectIndexOrPhase < *(int *)(stageEntrySave2 + 0x20));
+    }
+    messageOrCharCursor = UNK_a7b7bb10;
+    if (stageRequirementMet == 0) {
+      infoSinkOrNewTable = *(void **)(this + 0x84);
+                    
+      __ZN13TInfoSinkBase6appendEPKc(infoSinkOrNewTable,"ERROR: ");
+      __ZN13TInfoSinkBase6appendEPKc(infoSinkOrNewTable,messageOrCharCursor);
+      success = false;
+      __ZN13TInfoSinkBase6appendEPKc(infoSinkOrNewTable,"\n");
+    }
+  }
+  if (success) {
+    objectIndexOrPhase = 1;
+    do {
+      opIndexBaseOrObjectIndex = 0;
+      if (0 < *(int *)(this + stageOffset + 0x20)) {
+        do {
+          objectOffsetOrTemp = opIndexBaseOrObjectIndex * 4;
+          for (parseSymbol = (unsigned char *)
+                         ParseSymbolTable__NextSymbol
+                                   (*(unsigned char **)(objectOffsetOrTemp + *(int *)(this + stageOffset + 0x10)),
+                                    (unsigned char *)0x0); parseSymbol != (unsigned char *)0x0;
+              parseSymbol = (unsigned char *)
+                        ParseSymbolTable__NextSymbol
+                                  (*(unsigned char **)(objectOffsetOrTemp + *(int *)(this + stageOffset + 0x10)),
+                                   parseSymbol)) {
+            if (objectIndexOrPhase == *(int *)(parseSymbol + 0x54)) {
+              mergedSymbol = (undefined4 *)0x0;
+              if (*(int *)(parseSymbol + 0x38) == 0) {
+                symbolMissing = true;
+code_r0x97bb2ab4:
+                if (symbolMissing) goto code_r0x97bb2ab8;
+              }
+              else {
+                mergedSymbol = (undefined4 *)
+                          ParseSymbolTable__FindGlobalSymbolByName
+                                    (*(unsigned char **)(this + stageOffset + 0x28),
+                                     *(char **)(parseSymbol + 0x14));
+                symbolMissing = mergedSymbol == (undefined4 *)0x0;
+                if (!symbolMissing) {
+                  if (*(short *)(mergedSymbol + 0xb) == *(short *)(parseSymbol + 0x2c)) {
+                    if (*(short *)((int)mergedSymbol + 0x2e) == *(short *)(parseSymbol + 0x2e))
+                    goto code_r0x97bb2ab4;
+                    stringLengthOrArg = mergedSymbol[5];
+                    chunkCursorOrTemp = _strlen(UNK_a7b7bb18);
+                    newChunkOrTemp = _strlen(stringLengthOrArg);
+                    compareResultOrIndex = _strlen((&_shaderString)[stage]);
+                    messageOrCharCursor = (char *)_malloc(chunkCursorOrTemp + newChunkOrTemp + compareResultOrIndex + 1);
+                    _sprintf(messageOrCharCursor,UNK_a7b7bb18,stringLengthOrArg,(&_shaderString)[stage]);
+                    infoSinkOrNewTable = *(void **)(this + 0x84);
+                    
+                  }
+                  else {
+                    stringLengthOrArg = mergedSymbol[5];
+                    chunkCursorOrTemp = _strlen(UNK_a7b7bb14);
+                    newChunkOrTemp = _strlen(stringLengthOrArg);
+                    compareResultOrIndex = _strlen((&_shaderString)[stage]);
+                    messageOrCharCursor = (char *)_malloc(chunkCursorOrTemp + newChunkOrTemp + compareResultOrIndex + 1);
+                    _sprintf(messageOrCharCursor,UNK_a7b7bb14,stringLengthOrArg,(&_shaderString)[stage]);
+                    infoSinkOrNewTable = *(void **)(this + 0x84);
+                    
+                  }
+                  __ZN13TInfoSinkBase6appendEPKc(infoSinkOrNewTable,"ERROR: ");
+                  __ZN13TInfoSinkBase6appendEPKc(infoSinkOrNewTable,messageOrCharCursor);
+                  __ZN13TInfoSinkBase6appendEPKc(infoSinkOrNewTable,"\n");
+                  _free(messageOrCharCursor);
+                  success = false;
+                  goto code_r0x97bb2ab4;
+                }
+code_r0x97bb2ab8:
+                stringLengthOrArg = 0;
+                uVar17 = 0;
+                if ((objectIndexOrPhase != 0) && (symbolChunk = *(byte **)parseSymbol, symbolChunk != (byte *)0x0)) {
+                  chunkKind = *symbolChunk;
+                  if (chunkKind != 2) {
+                    if (chunkKind < 3) {
+                      if ((chunkKind == 0) &&
+                         (chunkCursorOrTemp = **(int **)(*(int *)(objectOffsetOrTemp + *(int *)(this + stageOffset + 0x18)) + 8),
+                         chunkCursorOrTemp != 0)) {
+                        do {
+                          if (*(short *)(symbolChunk + 0x12) == *(short *)(chunkCursorOrTemp + 0xe)) {
+                            stringLengthOrArg = 1;
+                          }
+                          if (*(short *)(symbolChunk + 0x12) == *(short *)(chunkCursorOrTemp + 0x12)) {
+                            uVar17 = 1;
+                          }
+                          chunkCursorOrTemp = *(int *)(chunkCursorOrTemp + 8);
+                        } while (chunkCursorOrTemp != 0);
+                      }
+                    }
+                    else if ((chunkKind == 3) &&
+                            (chunkCursorOrTemp = **(int **)(*(int *)(objectOffsetOrTemp + *(int *)(this + stageOffset + 0x18)) +
+                                                0x14), chunkCursorOrTemp != 0)) {
+                      do {
+                        if (*(short *)(symbolChunk + 0x12) == *(short *)(chunkCursorOrTemp + 0xe)) {
+                          stringLengthOrArg = 1;
+                        }
+                        if (*(short *)(symbolChunk + 0x12) == *(short *)(chunkCursorOrTemp + 0x12)) {
+                          uVar17 = 1;
+                        }
+                        chunkCursorOrTemp = *(int *)(chunkCursorOrTemp + 8);
+                      } while (chunkCursorOrTemp != 0);
+                    }
+                  }
+                }
+                mergedSymbol = (undefined4 *)
+                          ParseSymbolTable__AddFromExternalSymbol
+                                    (*(unsigned char **)(this + stageOffset + 0x28),parseSymbol,stringLengthOrArg,
+                                     uVar17);
+              }
+              if ((success != true) || (mergedSymbol == (undefined4 *)0x0)) {
+                if ((success == true) && (mergedSymbol == (undefined4 *)0x0)) {
+                  stringLengthOrArg = *(undefined4 *)(parseSymbol + 0x14);
+                  chunkCursorOrTemp = _strlen(DAT_a7b7bbc0);
+                  newChunkOrTemp = _strlen(stringLengthOrArg);
+                  messageOrCharCursor = (char *)_malloc(chunkCursorOrTemp + newChunkOrTemp + 1);
+                  _sprintf(messageOrCharCursor,UNK_a7b7bb90,stringLengthOrArg);
+                  infoSinkOrNewTable = *(void **)(this + 0x84);
+                    
+                  __ZN13TInfoSinkBase6appendEPKc(infoSinkOrNewTable,"ERROR: ");
+                  __ZN13TInfoSinkBase6appendEPKc(infoSinkOrNewTable,messageOrCharCursor);
+                  __ZN13TInfoSinkBase6appendEPKc(infoSinkOrNewTable,"\n");
+                  _free(messageOrCharCursor);
+                  success = false;
+                }
+              }
+              else {
+                chunkCursorOrTemp = TGenericLinker__FindChunkDelta(this,*(unsigned char **)parseSymbol,(unsigned char *)*mergedSymbol)
+                ;
+                if (chunkCursorOrTemp != 0) {
+                  newChunkOrTemp = ((int (*)())GetVec4sForType)((uint)*(ushort *)(parseSymbol + 0x2c));
+                  UpdateOperations(*(unsigned char **)(objectOffsetOrTemp + objectFirstChunk),
+                                   (unsigned char *)
+                                   **(undefined4 **)
+                                     (*(int *)(objectOffsetOrTemp + *(int *)(this + stageOffset + 0x18)) + 0x20),
+                                   *(int *)(objectOffsetOrTemp + objectChunkCount),*(unsigned char **)parseSymbol,newChunkOrTemp,
+                                   chunkCursorOrTemp);
+                }
+              }
+            }
+          }
+          opIndexBaseOrObjectIndex = opIndexBaseOrObjectIndex + 1;
+        } while (opIndexBaseOrObjectIndex < *(int *)(this + stageOffset + 0x20));
+      }
+      objectIndexOrPhase = objectIndexOrPhase + -1;
+    } while (-1 < objectIndexOrPhase);
+    if (success == true) {
+      objectIndexOrPhase = 0;
+      if (0 < *(int *)(this + stageOffset + 0x20)) {
+        do {
+          opIndexBaseOrObjectIndex = objectIndexOrPhase * 4;
+          for (constantChunk = (unsigned char *)
+                         **(undefined4 **)(*(int *)(opIndexBaseOrObjectIndex + *(int *)(this + stageOffset + 0x18)) + 0x10);
+              constantChunk != (unsigned char *)0x0; constantChunk = *(unsigned char **)(constantChunk + 8)) {
+            chunkWord = *(uint *)(constantChunk + 0xc);
+            if ((chunkWord & 0x1f0000) == 0x110000) {
+              objectOffsetOrTemp = *(int *)(*(int *)(this + stageOffset + 0x28) + 0x24);
+              *(int *)(*(int *)(this + stageOffset + 0x28) + 0x24) = objectOffsetOrTemp + 1;
+              newConstantChunk = (unsigned char *)_PPStreamChunkCreateFromChunk(constantChunk);
+              _PPStreamChunkListAddChunk
+                        (*(undefined4 *)(*(int *)(this + stageOffset + 0x30) + 0x10),newConstantChunk);
+              *(short *)(newConstantChunk + 0x12) = (short)objectOffsetOrTemp;
+              objectOffsetOrTemp = TGenericLinker__FindChunkDelta(this,constantChunk,newConstantChunk);
+              UpdateOperations(*(unsigned char **)(opIndexBaseOrObjectIndex + objectFirstChunk),
+                               (unsigned char *)
+                               **(undefined4 **)
+                                 (*(int *)(opIndexBaseOrObjectIndex + *(int *)(this + stageOffset + 0x18)) + 0x20),
+                               *(int *)(opIndexBaseOrObjectIndex + objectChunkCount),constantChunk,1,objectOffsetOrTemp);
+              *(undefined2 *)(newConstantChunk + 0xe) =
+                   *(undefined2 *)(*(int *)(*(int *)(this + stageOffset + 0x30) + 0x2c) + 10);
+              objectOffsetOrTemp = _PPStreamChunkListChunkAtIndex
+                                 (*(undefined4 *)
+                                   (*(int *)(opIndexBaseOrObjectIndex + *(int *)(this + stageOffset + 0x18)) + 0x2c),
+                                  chunkWord & 0xffff);
+              _PPStreamAddConstant(*(undefined4 *)(this + stageOffset + 0x30),objectOffsetOrTemp + 0xc);
+            }
+          }
+          objectIndexOrPhase = objectIndexOrPhase + 1;
+        } while (objectIndexOrPhase < *(int *)(this + stageOffset + 0x20));
+      }
+      objectFirstChunk = 0;
+      objectIndexOrPhase = 0;
+      if (0 < *(int *)(this + stageOffset + 0x20)) {
+        do {
+          objectChunkCount = 0;
+          for (opIndexBaseOrObjectIndex = **(int **)(*(int *)(objectFirstChunk * 4 + *(int *)(this + stageOffset + 0x18)) + 0xc);
+              opIndexBaseOrObjectIndex != 0; opIndexBaseOrObjectIndex = *(int *)(opIndexBaseOrObjectIndex + 8)) {
+            objectChunkCount = objectChunkCount + 1;
+            if (objectIndexOrPhase < objectChunkCount) {
+              stringLengthOrArg = _PPStreamChunkCreateFromChunk(opIndexBaseOrObjectIndex);
+              _PPStreamChunkListAddChunk
+                        (*(undefined4 *)(*(int *)(this + stageOffset + 0x30) + 0xc),stringLengthOrArg);
+              objectIndexOrPhase = objectChunkCount;
+            }
+          }
+          objectFirstChunk = objectFirstChunk + 1;
+        } while (objectFirstChunk < *(int *)(this + stageOffset + 0x20));
+      }
+      objectIndexOrPhase = 0;
+      if (0 < *(int *)(this + stageOffset + 0x20)) {
+        do {
+          for (objectFirstChunk = **(int **)(*(int *)(objectIndexOrPhase * 4 + *(int *)(this + stageOffset + 0x18)) + 0x30);
+              objectFirstChunk != 0; objectFirstChunk = *(int *)(objectFirstChunk + 8)) {
+            objectChunkCount = **(int **)(*(int *)(this + stageOffset + 0x30) + 0x30);
+            if (objectChunkCount != 0) {
+              do {
+                if (*(char *)(objectChunkCount + 0xf) == *(char *)(objectFirstChunk + 0xf)) goto code_r0x97bb2f70;
+                objectChunkCount = *(int *)(objectChunkCount + 8);
+              } while (objectChunkCount != 0);
+            }
+            stringLengthOrArg = _PPStreamChunkCreateFromChunk(objectFirstChunk);
+            _PPStreamChunkListAddChunk(*(undefined4 *)(*(int *)(this + stageOffset + 0x30) + 0x30),stringLengthOrArg)
+            ;
+code_r0x97bb2f70: ;
+          }
+          objectIndexOrPhase = objectIndexOrPhase + 1;
+        } while (objectIndexOrPhase < *(int *)(this + stageOffset + 0x20));
+      }
+    }
+  }
+  if (success == false) {
+    if (*(int *)(this + stageOffset + 0x30) != 0) {
+      _PPStreamFree(*(int *)(this + stageOffset + 0x30));
+    }
+    infoSinkOrNewTable = *(void **)(this + stageOffset + 0x28);
+    *(undefined4 *)(this + stageOffset + 0x30) = 0;
+    if (infoSinkOrNewTable != (void *)0x0) {
+      __ZN16ParseSymbolTableD1Ev(infoSinkOrNewTable);
+      __ZdlPv(infoSinkOrNewTable);
+    }
+    *(undefined4 *)(this + stageOffset + 0x28) = 0;
+  }
+  return success;
+}
+
+/* TGenericLinker__CreateFromStreamWithSymbolTableUpdate @ 0x97bb2ff0 (820 bytes) */
+int TGenericLinker__CreateFromStreamWithSymbolTableUpdate(this, _PPStream, parseSymbolTable)
+  unsigned char * this;
+  unsigned char * _PPStream;
+  unsigned char * parseSymbolTable;
+{
+  char *pcVar1;
+  undefined4 *puVar2;
+  unsigned char * p_Var3;
+  undefined4 uVar4;
+  unsigned char * p_Var5;
+  int iVar6;
+  void *this_00;
+  
+  puVar2 = (undefined4 *)_PPStreamCreate();
+  *puVar2 = *(undefined4 *)_PPStream;
+  *(undefined4 **)(parseSymbolTable + 0xc) = puVar2;
+  for (p_Var5 = (unsigned char *)**(undefined4 **)(_PPStream + 4); p_Var5 != (unsigned char *)0x0;
+      p_Var5 = *(unsigned char **)(p_Var5 + 8)) {
+    p_Var3 = (unsigned char *)_PPStreamChunkCreateFromChunk(p_Var5);
+    _PPStreamChunkListAddChunk(puVar2[1],p_Var3);
+    ParseSymbolTable__ChangeChunk(parseSymbolTable,p_Var5,p_Var3,1);
+  }
+  for (iVar6 = **(int **)(_PPStream + 8); iVar6 != 0; iVar6 = *(int *)(iVar6 + 8)) {
+    uVar4 = _PPStreamChunkCreateFromChunk(iVar6);
+    _PPStreamChunkListAddChunk(puVar2[2],uVar4);
+  }
+  for (iVar6 = **(int **)(_PPStream + 0xc); iVar6 != 0; iVar6 = *(int *)(iVar6 + 8)) {
+    uVar4 = _PPStreamChunkCreateFromChunk(iVar6);
+    _PPStreamChunkListAddChunk(puVar2[3],uVar4);
+  }
+  for (p_Var5 = (unsigned char *)**(undefined4 **)(_PPStream + 0x10); p_Var5 != (unsigned char *)0x0
+      ; p_Var5 = *(unsigned char **)(p_Var5 + 8)) {
+    p_Var3 = (unsigned char *)_PPStreamChunkCreateFromChunk(p_Var5);
+    _PPStreamChunkListAddChunk(puVar2[4],p_Var3);
+    ParseSymbolTable__ChangeChunk(parseSymbolTable,p_Var5,p_Var3,1);
+  }
+  for (iVar6 = **(int **)(_PPStream + 0x14); iVar6 != 0; iVar6 = *(int *)(iVar6 + 8)) {
+    uVar4 = _PPStreamChunkCreateFromChunk(iVar6);
+    _PPStreamChunkListAddChunk(puVar2[5],uVar4);
+  }
+  for (p_Var5 = (unsigned char *)**(undefined4 **)(_PPStream + 0x18); p_Var5 != (unsigned char *)0x0
+      ; p_Var5 = *(unsigned char **)(p_Var5 + 8)) {
+    p_Var3 = (unsigned char *)_PPStreamChunkCreateFromChunk(p_Var5);
+    _PPStreamChunkListAddChunk(puVar2[6],p_Var3);
+    ParseSymbolTable__ChangeChunk(parseSymbolTable,p_Var5,p_Var3,1);
+  }
+  for (p_Var5 = (unsigned char *)**(undefined4 **)(_PPStream + 0x1c); p_Var5 != (unsigned char *)0x0
+      ; p_Var5 = *(unsigned char **)(p_Var5 + 8)) {
+    p_Var3 = (unsigned char *)_PPStreamChunkCreateFromChunk(p_Var5);
+    _PPStreamChunkListAddChunk(puVar2[7],p_Var3);
+    ParseSymbolTable__ChangeChunk(parseSymbolTable,p_Var5,p_Var3,1);
+  }
+  for (iVar6 = **(int **)(_PPStream + 0x20); iVar6 != 0; iVar6 = *(int *)(iVar6 + 8)) {
+    uVar4 = _PPStreamChunkCreateFromChunk(iVar6);
+    _PPStreamChunkListAddChunk(puVar2[8],uVar4);
+  }
+  for (iVar6 = **(int **)(_PPStream + 0x24); iVar6 != 0; iVar6 = *(int *)(iVar6 + 8)) {
+    uVar4 = _PPStreamChunkCreateFromChunk(iVar6);
+    _PPStreamChunkListAddChunk(puVar2[9],uVar4);
+  }
+  for (iVar6 = **(int **)(_PPStream + 0x2c); iVar6 != 0; iVar6 = *(int *)(iVar6 + 8)) {
+    uVar4 = _PPStreamChunkCreateFromChunk(iVar6);
+    _PPStreamChunkListAddChunk(puVar2[0xb],uVar4);
+  }
+  for (iVar6 = **(int **)(_PPStream + 0x28); iVar6 != 0; iVar6 = *(int *)(iVar6 + 8)) {
+    uVar4 = _PPStreamChunkCreateFromChunk(iVar6);
+    _PPStreamChunkListAddChunk(puVar2[10],uVar4);
+  }
+  for (iVar6 = **(int **)(_PPStream + 0x30); iVar6 != 0; iVar6 = *(int *)(iVar6 + 8)) {
+    uVar4 = _PPStreamChunkCreateFromChunk(iVar6);
+    _PPStreamChunkListAddChunk(puVar2[0xc],uVar4);
+  }
+  iVar6 = _PPStreamCompare(_PPStream,puVar2);
+  pcVar1 = DAT_a7b7bb88;
+  if (iVar6 == 1) {
+    this_00 = *(void **)(this + 0x84);
+                    
+    __ZN13TInfoSinkBase6appendEPKc(this_00,"INTERNAL ERROR: ");
+    __ZN13TInfoSinkBase6appendEPKc(this_00,pcVar1);
+    __ZN13TInfoSinkBase6appendEPKc(this_00,"\n");
+    _PPStreamFree(puVar2);
+    puVar2 = (undefined4 *)0x0;
+  }
+  return puVar2;
+}
+
+/* TGenericLinker__RemoveUnreachableFunctions @ 0x97bb33bc (480 bytes) */
+int TGenericLinker__RemoveUnreachableFunctions(this)
+  unsigned char * this;
+{
+  uint lastOp;
+  int length;
+  int compareResult;
+  int functionName;
+  int length2;
+  bool bVar1;
+  int iVar2;
+  int iVar3;
+  int iVar4;
+  int iVar5;
+  uint firstOp;
+  int length3;
+  char *allocation;
+  int loopIndex;
+  int iVar10;
+  uint uVar11;
+  void *pvVar12;
+  int iVar13;
+  
+  loopIndex = 0;
+code_r0x97bb33e4:
+  iVar2 = loopIndex * 4;
+code_r0x97bb33e8:
+  bVar1 = false;
+  iVar10 = 0;
+  if ((*(int *)(this + iVar2 + 0x38) != 0) && (0 < *(int *)(*(int *)(this + iVar2 + 0x38) + 4))) {
+code_r0x97bb3410:
+    functionName = FunctionTable__getFunctionName(*(unsigned char **)(this + iVar2 + 0x38),iVar10);
+    compareResult = _memcmp(functionName,"main(",6);
+    iVar13 = iVar10;
+    if (compareResult != 0) {
+      for (iVar4 = **(int **)(*(int *)(this + iVar2 + 0x30) + 0x20); iVar4 != 0;
+          iVar4 = *(int *)(iVar4 + 8)) {
+        if ((((*(uint *)(iVar4 + 0xc) & 0x3fc0000) == 0x1300000) && (*(int *)(iVar4 + 0x40) != 0))
+           && (iVar5 = _strcmp(iVar4 + 0x44,functionName), iVar5 == 0)) goto LAB_97bb37a8;
+      }
+      for (iVar13 = **(int **)(*(int *)(this + iVar2 + 0x30) + 0x20); iVar13 != 0;
+          iVar13 = *(int *)(iVar13 + 8)) {
+        uVar11 = *(uint *)(iVar13 + 0xc);
+        firstOp = FunctionTable__getFirstOp(*(unsigned char **)(this + iVar2 + 0x38),iVar10);
+        if ((uVar11 & 0x3ffff) == firstOp) {
+          bVar1 = false;
+          goto LAB_97bb361c;
+        }
+      }
+      length2 = _strlen(DAT_a7b7baec);
+      length = _strlen((&_shaderString)[loopIndex]);
+      iVar5 = _strlen(functionName);
+      allocation = (char *)_malloc(length2 + length + iVar5 + 9);
+      FunctionTable__getFirstOp(*(unsigned char **)(this + iVar2 + 0x38),iVar10);
+      _sprintf(allocation,DAT_a7b7baec,functionName,(&_shaderString)[loopIndex]);
+      pvVar12 = *(void **)(this + 0x84);
+                    
+      __ZN13TInfoSinkBase6appendEPKc(pvVar12,"INTERNAL ERROR: ");
+      __ZN13TInfoSinkBase6appendEPKc(pvVar12,allocation);
+      __ZN13TInfoSinkBase6appendEPKc(pvVar12,"\n");
+      _free(allocation);
+      goto code_r0x97bb3790;
+    }
+    goto LAB_97bb37a8;
+  }
+  goto LAB_97bb37d4;
+  while( true ) {
+    if ((*(uint *)(iVar13 + 0xc) & 0x3ffff) == 0) {
+      length = _strlen(DAT_a7b7baf0);
+      iVar5 = _strlen((&_shaderString)[loopIndex]);
+      length3 = _strlen(functionName);
+      allocation = (char *)_malloc(length + iVar5 + length3 + 1);
+      _sprintf(allocation,DAT_a7b7baf0,functionName,(&_shaderString)[loopIndex]);
+      pvVar12 = *(void **)(this + 0x84);
+                    
+      __ZN13TInfoSinkBase6appendEPKc(pvVar12,"INTERNAL ERROR: ");
+      __ZN13TInfoSinkBase6appendEPKc(pvVar12,allocation);
+      __ZN13TInfoSinkBase6appendEPKc(pvVar12,"\n");
+      _free(allocation);
+    }
+    else {
+      _PPStreamRemoveLabelsAtOperationIndex
+                (*(undefined4 *)(this + iVar2 + 0x30),*(uint *)(iVar13 + 0xc) & 0x3ffff);
+      iVar4 = *(int *)(iVar13 + 8);
+      bVar1 = iVar4 == 0;
+      if (!bVar1) {
+        *(uint *)(iVar4 + 0xc) =
+             (*(uint *)(iVar13 + 0xc) >> 0x1a & 7) << 0x1a | *(uint *)(iVar4 + 0xc) & 0xe3ffffff;
+      }
+      _PPStreamChunkListRemoveChunk(*(undefined4 *)(*(int *)(this + iVar2 + 0x30) + 0x20),iVar13);
+      iVar13 = iVar4;
+    }
+    if (bVar1) break;
+LAB_97bb361c:
+    uVar11 = *(uint *)(iVar13 + 0xc);
+    lastOp = FunctionTable__getLastOp(*(unsigned char **)(this + iVar2 + 0x38),iVar10);
+    if ((uVar11 & 0x3ffff) == lastOp) {
+      if (!bVar1) {
+        iVar3 = *(int *)(iVar13 + 8);
+        if (iVar3 != 0) {
+          *(uint *)(iVar3 + 0xc) =
+               (*(uint *)(iVar13 + 0xc) >> 0x1a & 7) << 0x1a | *(uint *)(iVar3 + 0xc) & 0xe3ffffff;
+        }
+        uVar11 = *(uint *)(iVar13 + 0xc);
+        lastOp = FunctionTable__getLastOp(*(unsigned char **)(this + iVar2 + 0x38),iVar10);
+        if ((uVar11 & 0x3ffff) == lastOp) {
+          _PPStreamChunkListRemoveChunk
+                    (*(undefined4 *)(*(int *)(this + iVar2 + 0x30) + 0x20),iVar13);
+        }
+      }
+      break;
+    }
+  }
+code_r0x97bb3790:
+  iVar13 = iVar10 + -1;
+  bVar1 = true;
+  FunctionTable__removeFunction(*(unsigned char **)(this + iVar2 + 0x38),iVar10);
+LAB_97bb37a8:
+  iVar10 = iVar13 + 1;
+  if ((*(int *)(this + iVar2 + 0x38) == 0) ||
+     (*(int *)(*(int *)(this + iVar2 + 0x38) + 4) <= iVar10)) goto code_r0x97bb37cc;
+  goto code_r0x97bb3410;
+code_r0x97bb37cc:
+  if (!bVar1) goto LAB_97bb37d4;
+  goto code_r0x97bb33e8;
+LAB_97bb37d4:
+  loopIndex = loopIndex + 1;
+  if (1 < loopIndex) {
+    return;
+  }
+  goto code_r0x97bb33e4;
+}
+
+/* TGenericLinker__RenumberLabels @ 0x97bb37fc (40 bytes) */
+int TGenericLinker__RenumberLabels(this, _PPStreamChunk, param_3, param_4)
+  unsigned char * this;
+  unsigned char * _PPStreamChunk;
+  uint param_3;
+  uint param_4;
+{
+  if (_PPStreamChunk != (unsigned char *)0x0) {
+    do {
+      if (param_3 == *(uint *)(_PPStreamChunk + 0xc)) {
+        *(uint *)(_PPStreamChunk + 0xc) = param_4;
+      }
+      _PPStreamChunk = *(unsigned char **)(_PPStreamChunk + 8);
+    } while (_PPStreamChunk != (unsigned char *)0x0);
+    return;
+  }
+  return;
+}
+
+/* TGenericLinker__RemoveUnusedRegisters @ 0x97bb3824 (820 bytes) */
+int TGenericLinker__RemoveUnusedRegisters(this)
+  unsigned char * this;
+{
+  bool bVar1;
+  unsigned char * this_00;
+  uint uVar2;
+  uint uVar3;
+  unsigned char * pPVar4;
+  int iVar5;
+  undefined4 uVar6;
+  int iVar7;
+  byte bVar8;
+  int iVar9;
+  int iVar10;
+  unsigned char * pTVar11;
+  byte *pbVar12;
+  int iVar13;
+  int iVar14;
+  byte *pbVar15;
+  int iVar16;
+  
+  iVar10 = 0;
+  iVar9 = 0;
+  pTVar11 = this;
+  do {
+    if (*(unsigned char **)(pTVar11 + 0x28) != (unsigned char *)0x0) {
+      pPVar4 = (unsigned char *)
+               ParseSymbolTable__NextSymbol
+                         (*(unsigned char **)(pTVar11 + 0x28),(unsigned char *)0x0);
+      while (this_00 = pPVar4, this_00 != (unsigned char *)0x0) {
+        iVar16 = *(int *)(this_00 + 0x54);
+        pbVar12 = *(byte **)this_00;
+        iVar14 = **(int **)(*(int *)(pTVar11 + 0x30) + 0x20);
+        if (iVar14 == 0) {
+          bVar1 = iVar16 == 0;
+LAB_97bb3a3c:
+          if (!bVar1) goto LAB_97bb3b10;
+          pPVar4 = (unsigned char *)
+                   ParseSymbolTable__NextSymbol(*(unsigned char **)(pTVar11 + 0x28),this_00);
+          ParseSymbolTable__RemoveSymbol(*(unsigned char **)(pTVar11 + 0x28),this_00);
+          for (iVar14 = 0; iVar16 = ((int (*)())GetVec4sForType)((uint)*(ushort *)(this_00 + 0x2c)),
+              iVar14 < iVar16; iVar14 = iVar14 + 1) {
+            bVar8 = *pbVar12;
+            pbVar15 = *(byte **)(pbVar12 + 8);
+            if (bVar8 == 2) {
+              uVar6 = *(undefined4 *)(*(int *)(this + iVar9 + 0x30) + 0x18);
+LAB_97bb3ad8:
+              _PPStreamChunkListRemoveChunk(uVar6,pbVar12);
+            }
+            else {
+              if (2 < bVar8) {
+                if (bVar8 == 3) {
+                  uVar6 = *(undefined4 *)(*(int *)(this + iVar9 + 0x30) + 0x10);
+                }
+                else {
+                  if (bVar8 != 4) goto LAB_97bb3adc;
+                  uVar6 = *(undefined4 *)(*(int *)(this + iVar9 + 0x30) + 0x1c);
+                }
+                goto LAB_97bb3ad8;
+              }
+              if (bVar8 == 0) {
+                uVar6 = *(undefined4 *)(*(int *)(this + iVar9 + 0x30) + 4);
+                goto LAB_97bb3ad8;
+              }
+            }
+LAB_97bb3adc:
+            pbVar12 = pbVar15;
+          }
+          if (this_00 != (unsigned char *)0x0) {
+            __ZN11ParseSymbolD1Ev(this_00);
+            __ZdlPv(this_00);
+          }
+        }
+        else {
+          bVar1 = iVar16 == 0;
+          if (bVar1) {
+            do {
+              iVar13 = 0;
+              while ((iVar5 = ((int (*)())GetVec4sForType)((uint)*(ushort *)(this_00 + 0x2c)), iVar13 < iVar5 &&
+                     (bVar1))) {
+                iVar5 = 0;
+                uVar2 = *(uint *)(iVar14 + 0xc) >> 0x1d;
+                if (iVar16 < (int)uVar2) {
+                  bVar8 = *pbVar12;
+                  iVar7 = iVar14 + 0x10;
+                  do {
+                    if (bVar8 == 2) {
+                      if (*(int *)(this_00 + 0x34) != 0) {
+                        if ((*(uint *)(iVar7 + 0xc) & 0x3800000) != 0) goto LAB_97bb3954;
+LAB_97bb393c:
+                        if ((uint)*(ushort *)(iVar7 + 0x12) !=
+                            (uint)*(ushort *)(pbVar12 + 0x12) + iVar13) goto LAB_97bb3954;
+                      }
+LAB_97bb3950:
+                      iVar16 = 1;
+                    }
+                    else if (bVar8 < 3) {
+                      if (bVar8 == 0) {
+                        bVar1 = (*(uint *)(iVar7 + 0xc) >> 0x17 & 7) == 1;
+                        goto LAB_97bb3938;
+                      }
+                    }
+                    else {
+                      if (bVar8 == 3) {
+                        if (*(int *)(this_00 + 0x34) == 0) goto LAB_97bb3950;
+                        bVar1 = (*(uint *)(iVar7 + 0xc) >> 0x17 & 7) == 2;
+                      }
+                      else {
+                        if (bVar8 != 4) goto LAB_97bb3954;
+                        bVar1 = (*(uint *)(iVar7 + 0xc) >> 0x17 & 7) == 3;
+                      }
+LAB_97bb3938:
+                      if (bVar1) goto LAB_97bb393c;
+                    }
+LAB_97bb3954:
+                    iVar5 = iVar5 + 1;
+                    iVar7 = iVar7 + 8;
+                  } while ((iVar5 < (int)uVar2) && (iVar16 == 0));
+                }
+                else {
+                  bVar8 = *pbVar12;
+                }
+                if (bVar8 == 2) {
+                  if (*(int *)(this_00 + 0x34) != 0) {
+                    if ((*(uint *)(iVar14 + 0x14) & 0xe0000) != 0) goto LAB_97bb3a08;
+LAB_97bb39f0:
+                    if ((uint)*(ushort *)(iVar14 + 0x1a) !=
+                        (uint)*(ushort *)(pbVar12 + 0x12) + iVar13) goto LAB_97bb3a08;
+                  }
+LAB_97bb3a04:
+                  iVar16 = 1;
+                }
+                else if (bVar8 < 3) {
+                  if (bVar8 == 0) {
+                    uVar2 = *(uint *)(iVar14 + 0x14);
+                    uVar3 = 0x20000;
+                    goto LAB_97bb39e4;
+                  }
+                }
+                else {
+                  if (bVar8 == 3) {
+                    if (*(int *)(this_00 + 0x34) == 0) goto LAB_97bb3a04;
+                    uVar2 = *(uint *)(iVar14 + 0x14);
+                    uVar3 = 0x40000;
+                  }
+                  else {
+                    if (bVar8 != 4) goto LAB_97bb3a08;
+                    uVar2 = *(uint *)(iVar14 + 0x14);
+                    uVar3 = 0x60000;
+                  }
+LAB_97bb39e4:
+                  if ((uVar2 & 0xe0000) == uVar3) goto LAB_97bb39f0;
+                }
+LAB_97bb3a08:
+                bVar1 = iVar16 == 0;
+                iVar13 = iVar13 + 1;
+              }
+              iVar14 = *(int *)(iVar14 + 8);
+              if (iVar14 == 0) goto LAB_97bb3a3c;
+            } while (bVar1);
+          }
+LAB_97bb3b10:
+          pPVar4 = (unsigned char *)
+                   ParseSymbolTable__NextSymbol(*(unsigned char **)(pTVar11 + 0x28),this_00);
+        }
+      }
+    }
+    iVar10 = iVar10 + 1;
+    iVar9 = iVar9 + 4;
+    pTVar11 = pTVar11 + 4;
+    if (1 < iVar10) {
+      return;
+    }
+  } while( true );
+}
+
+/* TGenericLinker__RemoveExtraVertexOutputs @ 0x97bb3b58 (280 bytes) */
+int TGenericLinker__RemoveExtraVertexOutputs(this)
+  unsigned char * this;
+{
+  bool bVar1;
+  unsigned char * pPVar2;
+  unsigned char * pPVar3;
+  int iVar4;
+  int iVar5;
+  char *pcVar6;
+  char *pcVar7;
+  char *pcVar8;
+  void *this_00;
+  
+  if (*(unsigned char **)(this + 0x28) != (unsigned char *)0x0) {
+    pPVar3 = (unsigned char *)
+             ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),(unsigned char *)0x0);
+joined_r0x97bb3b94:
+    pPVar2 = pPVar3;
+    if (pPVar2 != (unsigned char *)0x0) {
+      pPVar3 = (unsigned char *)
+               ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar2);
+      if ((**(char **)pPVar2 == '\0') && (*(int *)(pPVar2 + 0x5c) != 0)) {
+        pcVar8 = *(char **)(pPVar2 + 0x14);
+        if (*(unsigned char **)(this + 0x2c) == (unsigned char *)0x0) {
+          iVar4 = _strlen(DAT_a7b7bae0);
+          iVar5 = _strlen(pcVar8);
+          pcVar6 = (char *)_malloc(iVar4 + iVar5 + 1);
+          bVar1 = true;
+          pcVar7 = DAT_a7b7bae0;
+        }
+        else {
+          iVar4 = ParseSymbolTable__FindGlobalSymbolByName
+                            (*(unsigned char **)(this + 0x2c),pcVar8);
+          bVar1 = iVar4 == 0;
+          if (!bVar1) goto joined_r0x97bb3b94;
+          iVar4 = _strlen(DAT_a7b7bad8);
+          iVar5 = _strlen(pcVar8);
+          pcVar6 = (char *)_malloc(iVar4 + iVar5 + 1);
+          pcVar7 = DAT_a7b7bad8;
+        }
+        _sprintf(pcVar6,pcVar7,pcVar8);
+        if (bVar1) {
+          this_00 = *(void **)(this + 0x84);
+                    
+          __ZN13TInfoSinkBase6appendEPKc(this_00,"WARNING: ");
+          __ZN13TInfoSinkBase6appendEPKc(this_00,pcVar6);
+          __ZN13TInfoSinkBase6appendEPKc(this_00,"\n");
+          _free(pcVar6);
+        }
+      }
+      goto joined_r0x97bb3b94;
+    }
+  }
+  return;
+}
+
+/* TGenericLinker__FixOutputReads @ 0x97bb3d14 (1160 bytes) */
+int TGenericLinker__FixOutputReads(this)
+  unsigned char * this;
+{
+  int insertedOp;
+  uint componentCount;
+  uint chunkHeader;
+  uint fnIdx;
+  uint mainLastOp;
+  uint chunkHeaderWord;
+  int opChunk;
+  bool mainReached;
+  undefined4 functionName;
+  int compareResult;
+  ushort outputReg;
+  bool outputIsRead;
+  int operandCursor;
+  undefined4 maxIndex;
+  uint operandCount;
+  int operandCursor2;
+  int stageOffset;
+  int stage;
+  unsigned char * stageEntry;
+  int outputSymbol;
+  uint operandIdx;
+  uint tempUsageFlags;
+  undefined4 opChunkOrTempIndex;
+  int tempUsageWord2;
+  int tempUsageWord3;
+  undefined4 opHeader;
+  uint opFlags;
+  uint opDest0;
+  uint opDest1;
+  uint opSrc0A;
+  uint opSrc0B;
+  undefined4 opSrc1A;
+  undefined4 opSrc1B;
+  undefined4 opSrc2A;
+  undefined4 opSrc2B;
+  undefined4 opAuxA;
+  undefined4 opAuxB;
+  undefined4 opLine;
+  undefined4 opWord13;
+  
+  stage = 0;
+  stageOffset = 0;
+  stageEntry = this;
+  do {
+    if (*(int *)(stageEntry + 0x30) != 0) {
+      for (outputSymbol = **(int **)(*(int *)(stageEntry + 0x30) + 0x1c); outputSymbol != 0;
+          outputSymbol = *(int *)(outputSymbol + 8)) {
+        outputIsRead = false;
+        outputReg = *(ushort *)(outputSymbol + 0x12);
+        opChunkOrTempIndex = **(int **)(*(int *)(stageEntry + 0x30) + 0x20);
+        if (opChunkOrTempIndex != 0) {
+          do {
+            operandIdx = 0;
+            operandCount = *(uint *)(opChunkOrTempIndex + 0xc) >> 0x1d;
+            if (operandCount != 0) {
+              operandCursor = opChunkOrTempIndex + 0x10;
+              do {
+                if ((((*(uint *)(operandCursor + 0xc) >> 0x17 & 7) == 3) &&
+                    (*(ushort *)(operandCursor + 0x12) == outputReg)) ||
+                   (((*(uint *)(opChunkOrTempIndex + 0xc) & 0x3fc0000) == 0x1b40000 &&
+                    (((*(uint *)(opChunkOrTempIndex + 0x14) & 0xe0000) == 0x60000 &&
+                     (*(ushort *)(opChunkOrTempIndex + 0x1a) == outputReg)))))) {
+                  outputIsRead = true;
+                  break;
+                }
+                if (outputIsRead) break;
+                operandIdx = operandIdx + 1;
+                operandCursor = operandCursor + 8;
+              } while (operandIdx < operandCount);
+            }
+            opChunkOrTempIndex = *(int *)(opChunkOrTempIndex + 8);
+          } while (opChunkOrTempIndex != 0);
+          if (outputIsRead) {
+            tempUsageFlags = 0;
+            tempUsageWord2 = opChunkOrTempIndex;
+            tempUsageWord3 = opChunkOrTempIndex;
+            maxIndex = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(*(int *)(stageEntry + 0x30) + 4));
+            opChunkOrTempIndex = CONCAT22((*(unsigned short *)((unsigned char *)&(opChunkOrTempIndex) + 0)),(short)maxIndex + 1);
+            tempUsageFlags = (*(uint *)(outputSymbol + 0xc) >> 0x18 & 3) << 0x18 |
+                       (*(uint *)(outputSymbol + 0xc) >> 0x1a & 7) << 0x1a |
+                       *(uint *)(outputSymbol + 0xc) & 0xe0000000 | tempUsageFlags & 0xffffff;
+            _PPStreamAddTempUsage(*(undefined4 *)(stageEntry + 0x30),&tempUsageFlags);
+            for (opChunk = **(int **)(*(int *)(stageEntry + 0x30) + 0x20); opChunk != 0;
+                opChunk = *(int *)(opChunk + 8)) {
+              if (((*(uint *)(opChunk + 0x14) & 0xe0000) == 0x60000) &&
+                 (*(ushort *)(opChunk + 0x1a) == outputReg)) {
+                *(uint *)(opChunk + 0x14) = *(uint *)(opChunk + 0x14) & 0xfff1ffff | 0x20000;
+                *(undefined2 *)(opChunk + 0x1a) = (*(unsigned short *)((unsigned char *)&(opChunkOrTempIndex) + 2));
+              }
+              chunkHeaderWord = *(uint *)(opChunk + 0xc);
+              operandIdx = 0;
+              if (chunkHeaderWord >> 0x1d != 0) {
+                operandCursor2 = opChunk + 0x10;
+                do {
+                  if (((*(uint *)(operandCursor2 + 0xc) >> 0x17 & 7) == 3) &&
+                     (*(ushort *)(operandCursor2 + 0x12) == outputReg)) {
+                    *(uint *)(operandCursor2 + 0xc) = *(uint *)(operandCursor2 + 0xc) & 0xfc7fffff | 0x800000;
+                    *(undefined2 *)(operandCursor2 + 0x12) = (*(unsigned short *)((unsigned char *)&(opChunkOrTempIndex) + 2));
+                    chunkHeaderWord = *(uint *)(opChunk + 0xc);
+                  }
+                  operandIdx = operandIdx + 1;
+                  operandCursor2 = operandCursor2 + 8;
+                } while (operandIdx < chunkHeaderWord >> 0x1d);
+              }
+            }
+            mainReached = false;
+            mainLastOp = 0;
+            fnIdx = 0;
+            if ((*(int *)(stageEntry + 0x38) != 0) && (*(int *)(*(int *)(stageEntry + 0x38) + 4) != 0)) {
+              do {
+                functionName = FunctionTable__getFunctionName(*(unsigned char **)(stageEntry + 0x38),fnIdx);
+                compareResult = _memcmp(functionName,"main(",6);
+                if (compareResult == 0) {
+                  mainLastOp = FunctionTable__getLastOp(*(unsigned char **)(stageEntry + 0x38),fnIdx);
+                }
+                fnIdx = fnIdx + 1;
+              } while ((*(int *)(stageEntry + 0x38) != 0) &&
+                      (fnIdx < *(uint *)(*(int *)(stageEntry + 0x38) + 4)));
+            }
+            for (opChunk = **(int **)(*(int *)(stageEntry + 0x30) + 0x20); opChunk != 0;
+                opChunk = *(int *)(opChunk + 8)) {
+              chunkHeader = *(uint *)(opChunk + 0xc);
+              if ((chunkHeader & 0x3ffff) == 0) {
+                mainReached = true;
+              }
+              if ((mainReached) && ((chunkHeader & 0x3fc0000) == 0x1340000)) {
+                componentCount = tempUsageFlags >> 0x18 & 3;
+                opDest0 = componentCount << 10 | 0x6c;
+                opSrc1A = 0;
+                opSrc1B = 0;
+                opSrc2A = 0;
+                opSrc2B = 0;
+                opAuxA = 0;
+                opAuxB = 0;
+                opLine = *(undefined4 *)(opChunk + 0x3c);
+                opHeader = 0x20000000;
+                opWord13 = 0;
+                if (componentCount == 1) {
+LAB_97bb40ac:
+                  opDest0 = opDest0 | 0x4000;
+LAB_97bb40b4:
+                  opDest0 = opDest0 | 0x2000;
+                }
+                else {
+                  if (componentCount == 0) goto LAB_97bb40b4;
+                  if (componentCount == 2) {
+LAB_97bb40a4:
+                    opDest0 = opDest0 | 0x8000;
+                    goto LAB_97bb40ac;
+                  }
+                  if (componentCount == 3) {
+                    opDest0 = 0x10c6c;
+                    goto LAB_97bb40a4;
+                  }
+                }
+                componentCount = tempUsageFlags >> 0x18 & 3;
+                opFlags = (tempUsageFlags >> 0x1d & 3) << 0x12 |
+                           componentCount << 0x1a | (tempUsageFlags >> 0x1a & 7) << 0x17;
+                opDest0 = opDest0 | 0x60000;
+                opSrc0A = componentCount << 0xc | 0x8d8000;
+                opSrc0B = opChunkOrTempIndex & 0xffff;
+                opDest1 = (uint)outputReg;
+                insertedOp = _PPStreamInsertOperationAfterChunk
+                                  (*(undefined4 *)(this + stageOffset + 0x30),&opHeader,0,0,
+                                   *(undefined4 *)(opChunk + 4));
+                _PPStreamChangeBranchTargets
+                          (*(undefined4 *)(this + stageOffset + 0x30),*(uint *)(opChunk + 0xc) & 0x3ffff,
+                           *(uint *)(insertedOp + 0xc) & 0x3ffff);
+                chunkHeader = *(uint *)(opChunk + 0xc);
+              }
+              if (mainLastOp == (chunkHeader & 0x3ffff)) break;
+            }
+          }
+        }
+      }
+    }
+    stage = stage + 1;
+    stageOffset = stageOffset + 4;
+    stageEntry = stageEntry + 4;
+    if (1 < stage) {
+      return;
+    }
+  } while( true );
+}
+
+/* TGenericLinker__OptimizeFunctionIO @ 0x97bb419c (696 bytes) */
+int TGenericLinker__OptimizeFunctionIO(this)
+  unsigned char * this;
+{
+  bool bVar1;
+  int iVar2;
+  int r3In0;
+  int iVar3;
+  char *allocation;
+  unsigned char * pPVar5;
+  uint uVar6;
+  int iVar7;
+  uint uVar8;
+  undefined4 uVar9;
+  int iVar10;
+  int iVar11;
+  char *p0;
+  int iVar12;
+  int iVar13;
+  uint uVar14;
+  uint uVar15;
+  unsigned char * p_Var16;
+  void *this_00;
+  unsigned char * p_Var17;
+  int iVar18;
+  int local_70;
+  int local_6c;
+  uint local_60;
+  int local_5c;
+  
+  iVar12 = 0;
+  do {
+    iVar2 = iVar12 * 4;
+    iVar18 = 0;
+    if ((*(int *)(this + iVar2 + 0x38) != 0) && (0 < *(int *)(*(int *)(this + iVar2 + 0x38) + 4))) {
+      do {
+        iVar13 = 0;
+        r3In0 = FunctionTable__getFunctionName(*(unsigned char **)(this + iVar2 + 0x38),iVar18);
+        iVar3 = _memcmp(r3In0,"main(",6);
+        if (iVar3 != 0) {
+          for (; iVar3 = FunctionTable__getNumParams
+                                   (*(unsigned char **)(this + iVar2 + 0x38),iVar18), iVar13 < iVar3
+              ; iVar13 = iVar13 + 1) {
+            iVar3 = _strlen(r3In0);
+            allocation = (char *)_malloc(iVar3 + 9);
+            _sprintf(allocation,"%s_%i",r3In0,iVar13);
+            for (pPVar5 = (unsigned char *)
+                          ParseSymbolTable__FindNextParamSymbolByName
+                                    (*(unsigned char **)(this + iVar2 + 0x28),(unsigned char *)0x0,
+                                     allocation); pPVar5 != (unsigned char *)0x0;
+                pPVar5 = (unsigned char *)
+                         ParseSymbolTable__FindNextParamSymbolByName
+                                   (*(unsigned char **)(this + iVar2 + 0x28),pPVar5,allocation)) {
+              uVar14 = 0;
+              uVar6 = ((int (*)())GetVec4sForType)((uint)*(ushort *)(pPVar5 + 0x2c));
+              iVar3 = *(int *)pPVar5;
+              if (uVar6 != 0) {
+                do {
+                  local_60 = 0;
+                  local_5c = 0;
+                  local_70 = 0;
+                  local_6c = 0;
+                  p_Var17 = (unsigned char *)**(int **)(*(int *)(this + iVar2 + 0x30) + 0x20);
+                  iVar7 = FunctionTable__getEmpty(*(unsigned char **)(this + iVar2 + 0x38),iVar18);
+                  if (iVar7 == 0) {
+                    for (; bVar1 = p_Var17 == (unsigned char *)0x0, !bVar1;
+                        p_Var17 = *(unsigned char **)(p_Var17 + 8)) {
+                      uVar15 = *(uint *)(p_Var17 + 0xc);
+                      uVar8 = FunctionTable__getFirstOp
+                                        (*(unsigned char **)(this + iVar2 + 0x38),iVar18);
+                      if ((uVar15 & 0x3ffff) == uVar8) goto LAB_97bb43a0;
+                    }
+                    iVar7 = _strlen(DAT_a7b7baec);
+                    iVar10 = _strlen((&_shaderString)[iVar12]);
+                    iVar11 = _strlen(r3In0);
+                    p0 = (char *)_malloc(iVar7 + iVar10 + iVar11 + 9);
+                    uVar8 = FunctionTable__getFirstOp(*(unsigned char **)(this + iVar2 + 0x38),iVar18);
+                    _sprintf(p0,DAT_a7b7baec,r3In0,(&_shaderString)[iVar12],uVar8);
+                    this_00 = *(void **)(this + 0x84);
+                    
+                    __ZN13TInfoSinkBase6appendEPKc(this_00,"INTERNAL ERROR: ");
+                    __ZN13TInfoSinkBase6appendEPKc(this_00,p0);
+                    __ZN13TInfoSinkBase6appendEPKc(this_00,"\n");
+                    _free(p0);
+                  }
+LAB_97bb44d0:
+                  p_Var17 = (unsigned char *)
+                            **(undefined4 **)(*(int *)(this + iVar2 + 0x30) + 0x20);
+joined_r0x97bb44e4:
+                  while (p_Var16 = p_Var17, p_Var16 != (unsigned char *)0x0) {
+                    p_Var17 = *(unsigned char **)(p_Var16 + 8);
+                    if ((*(uint *)(p_Var16 + 0xc) & 0x3fc0000) != 0) goto code_r0x97bb456c;
+                    if (((*(uint *)(p_Var16 + 0x1c) & 0x3800000) == 0x800000) &&
+                       ((uint)*(ushort *)(p_Var16 + 0x22) == *(ushort *)(iVar3 + 0x12) + uVar14))
+                    goto code_r0x97bb4598;
+                    if (((*(uint *)(p_Var16 + 0x14) & 0xe0000) == 0x20000) &&
+                       ((uint)*(ushort *)(p_Var16 + 0x1a) == *(ushort *)(iVar3 + 0x12) + uVar14)) {
+                      if (local_70 == 0 && local_6c == 0) goto code_r0x97bb45b4;
+                      *(int *)(p_Var16 + 0x18) = local_6c;
+                      *(int *)(p_Var16 + 0x14) = local_70;
+                    }
+                  }
+                  uVar14 = uVar14 + 1;
+                } while (uVar14 < uVar6);
+              }
+            }
+            _free(allocation);
+          }
+          p_Var17 = (unsigned char *)**(undefined4 **)(*(int *)(this + iVar2 + 0x30) + 0x20);
+          while (p_Var16 = p_Var17, p_Var16 != (unsigned char *)0x0) {
+            p_Var17 = *(unsigned char **)(p_Var16 + 8);
+            iVar3 = FunctionTable__getEmpty(*(unsigned char **)(this + iVar2 + 0x38),iVar18);
+            if ((((iVar3 != 0) && ((*(uint *)(p_Var16 + 0xc) & 0x3fc0000) == 0x1300000)) &&
+                (*(int *)(p_Var16 + 0x40) != 0)) && (iVar3 = _strcmp(p_Var16 + 0x44,r3In0), iVar3 == 0)
+               ) {
+              FunctionTable__updateForRemovingChunk
+                        (*(unsigned char **)(this + iVar2 + 0x38),p_Var16);
+              _PPStreamRemoveOperation(*(undefined4 *)(this + iVar2 + 0x30),p_Var16);
+            }
+          }
+        }
+        iVar18 = iVar18 + 1;
+      } while ((*(int *)(this + iVar2 + 0x38) != 0) &&
+              (iVar18 < *(int *)(*(int *)(this + iVar2 + 0x38) + 4)));
+    }
+    iVar12 = iVar12 + 1;
+    if (1 < iVar12) {
+      return;
+    }
+  } while( true );
+LAB_97bb43a0:
+  if (((bVar1) ||
+      (uVar15 = *(uint *)(p_Var17 + 0xc),
+      uVar8 = FunctionTable__getLastOp(*(unsigned char **)(this + iVar2 + 0x38),iVar18),
+      uVar8 < (uVar15 & 0x3ffff))) || ((*(uint *)(p_Var17 + 0xc) & 0x3ffff) == 0))
+  goto LAB_97bb44d0;
+  p_Var16 = *(unsigned char **)(p_Var17 + 8);
+  if ((*(uint *)(p_Var17 + 0xc) & 0x3fc0000) == 0) {
+    uVar8 = *(uint *)(p_Var17 + 0x1c);
+    if (((uVar8 & 0x3800000) == 0x800000) &&
+       ((uint)*(ushort *)(p_Var17 + 0x22) == *(ushort *)(iVar3 + 0x12) + uVar14)) {
+      local_6c = *(int *)(p_Var17 + 0x18);
+      local_70 = *(int *)(p_Var17 + 0x14);
+      FunctionTable__updateForRemovingChunk(*(unsigned char **)(this + iVar2 + 0x38),p_Var17);
+      uVar9 = *(undefined4 *)(this + iVar2 + 0x30);
+    }
+    else {
+      if (((*(uint *)(p_Var17 + 0x14) & 0xe0000) != 0x20000) ||
+         ((uint)*(ushort *)(p_Var17 + 0x1a) != *(ushort *)(iVar3 + 0x12) + uVar14))
+      goto LAB_97bb4398;
+      local_5c = *(int *)(p_Var17 + 0x20);
+      FunctionTable__updateForRemovingChunk(*(unsigned char **)(this + iVar2 + 0x38),p_Var17);
+      uVar9 = *(undefined4 *)(this + iVar2 + 0x30);
+      local_60 = uVar8;
+    }
+    _PPStreamRemoveOperation(uVar9,p_Var17);
+  }
+LAB_97bb4398:
+  bVar1 = p_Var16 == (unsigned char *)0x0;
+  p_Var17 = p_Var16;
+  goto LAB_97bb43a0;
+code_r0x97bb456c:
+  if ((((*(uint *)(p_Var16 + 0xc) & 0x3fc0000) == 0x1b40000) &&
+      ((*(uint *)(p_Var16 + 0x1c) & 0x3800000) == 0x800000)) &&
+     ((uint)*(ushort *)(p_Var16 + 0x22) == *(ushort *)(iVar3 + 0x12) + uVar14)) {
+code_r0x97bb4598:
+    if (local_60 == 0 && local_5c == 0) {
+code_r0x97bb45b4:
+      FunctionTable__updateForRemovingChunk(*(unsigned char **)(this + iVar2 + 0x38),p_Var16);
+      _PPStreamRemoveOperation(*(undefined4 *)(this + iVar2 + 0x30),p_Var16);
+    }
+    else {
+      *(int *)(p_Var16 + 0x20) = local_5c;
+      *(uint *)(p_Var16 + 0x1c) = local_60;
+    }
+  }
+  goto joined_r0x97bb44e4;
+}
+
+/* TGenericLinker__GetRemapTableString @ 0x97bb46f8 (412 bytes) */
+int TGenericLinker__GetRemapTableString(this)
+  unsigned char * this;
+{
+  int length;
+  char *pcVar1;
+  int iVar2;
+  int iVar3;
+  int iVar4;
+  char *allocation;
+  int iVar6;
+  undefined4 *puVar7;
+  unsigned char * pTVar8;
+  
+  pTVar8 = this + 0x40;
+  length = _strlen(_linkUtilString);
+  puVar7 = &DAT_a7b7bb38;
+  iVar3 = length + 2;
+  do {
+    iVar2 = *(int *)pTVar8;
+    pTVar8 = pTVar8 + 4;
+    if ((iVar2 == 0) ||
+       (iVar2 = BindingTable__GetSizeActiveUserUniforms(*(unsigned char **)(this + 4)), iVar2 == 0))
+    {
+      iVar2 = _strlen(*puVar7);
+      iVar3 = iVar3 + iVar2;
+    }
+    else {
+      iVar2 = _strlen(puVar7[-3]);
+      iVar3 = iVar3 + iVar2;
+      for (iVar2 = 0; iVar4 = BindingTable__GetSizeActiveUserUniforms(*(unsigned char **)(this + 4)),
+          iVar2 < iVar4; iVar2 = iVar2 + 1) {
+        iVar4 = _strlen(DAT_a7b7bb34);
+        iVar3 = iVar3 + iVar4 + 0x10;
+      }
+    }
+    puVar7 = puVar7 + 1;
+  } while ((int)puVar7 < -0x584844c3);
+  allocation = (char *)_malloc(iVar3);
+  pcVar1 = _linkUtilString;
+  *allocation = '\0';
+  _sprintf(allocation,pcVar1);
+  puVar7 = &DAT_a7b7bb38;
+  pTVar8 = this + 0x40;
+  iVar3 = 0;
+  iVar2 = 1;
+  do {
+    iVar4 = *(int *)pTVar8;
+    pTVar8 = pTVar8 + 4;
+    if ((iVar4 == 0) ||
+       (iVar4 = BindingTable__GetSizeActiveUserUniforms(*(unsigned char **)(this + 4)), iVar4 == 0))
+    {
+      _sprintf(allocation,(char *)*puVar7,allocation);
+    }
+    else {
+      _sprintf(allocation,(char *)puVar7[-3],allocation);
+      for (iVar4 = 0; iVar6 = BindingTable__GetSizeActiveUserUniforms(*(unsigned char **)(this + 4)),
+          iVar4 < iVar6; iVar4 = iVar4 + 1) {
+        _sprintf(allocation,DAT_a7b7bb34,allocation,iVar4,
+                 *(undefined4 *)(iVar4 * 4 + *(int *)(this + iVar3 + 0x40)));
+      }
+    }
+    iVar2 = iVar2 + -1;
+    iVar3 = iVar3 + 4;
+    puVar7 = puVar7 + 1;
+  } while (-1 < iVar2);
+  return allocation;
+}
+
+/* TGenericLinker__GetBindingTableString @ 0x97bb4894 (384 bytes) */
+int TGenericLinker__GetBindingTableString(this)
+  unsigned char * this;
+{
+  int sizeActiveAttributes;
+  int numActiveAttributeBindings;
+  undefined4 string;
+  int length;
+  int length2;
+  char *p0;
+  int r6In0;
+  int r7In0;
+  int r8In0;
+  undefined4 numActiveAttributeBindings2;
+  undefined4 sizeActiveAttributes2;
+  undefined4 sizeActiveUserAttributes;
+  undefined4 numActiveUniformBindings;
+  undefined4 sizeActiveUserUniforms;
+  int in_stack_ffffff88;
+  
+  string = BindingTable__GetString(*(unsigned char **)(this + 4),3);
+  if (*(int *)(this + 0x74) < 0) {
+    length = _strlen(DAT_a7b7bb44);
+    length2 = _strlen(string);
+    p0 = (char *)_malloc(length + length2 + 0x29);
+    *p0 = '\0';
+    numActiveAttributeBindings2 = BindingTable__GetNumActiveAttributeBindings(*(unsigned char **)(this + 4));
+    sizeActiveAttributes2 = BindingTable__GetSizeActiveAttributes(*(unsigned char **)(this + 4));
+    sizeActiveUserAttributes = BindingTable__GetSizeActiveUserAttributes(*(unsigned char **)(this + 4));
+    numActiveUniformBindings = BindingTable__GetNumActiveUniformBindings(*(unsigned char **)(this + 4));
+    sizeActiveUserUniforms = BindingTable__GetSizeActiveUserUniforms(*(unsigned char **)(this + 4));
+    _sprintf(p0,DAT_a7b7bb44,numActiveAttributeBindings2,sizeActiveAttributes2,sizeActiveUserAttributes,numActiveUniformBindings,sizeActiveUserUniforms,string);
+  }
+  else {
+    length = _strlen(DAT_a7b7bb40);
+    length2 = _strlen(string);
+    p0 = (char *)_malloc(length + length2 + 0x29);
+    *p0 = '\0';
+    numActiveAttributeBindings = BindingTable__GetNumActiveAttributeBindings(*(unsigned char **)(this + 4));
+    sizeActiveAttributes = BindingTable__GetSizeActiveAttributes(*(unsigned char **)(this + 4));
+    r6In0 = BindingTable__GetSizeActiveUserAttributes(*(unsigned char **)(this + 4));
+    r7In0 = BindingTable__GetNumActiveUniformBindings(*(unsigned char **)(this + 4));
+    r8In0 = BindingTable__GetSizeActiveUserUniforms(*(unsigned char **)(this + 4));
+    _sprintf(p0,DAT_a7b7bb40,*(int *)(this + 0x74),numActiveAttributeBindings,sizeActiveAttributes,r6In0,r7In0,r8In0,string);
+  }
+  _free(string);
+  return p0;
+}
+
+/* TGenericLinker__GetFullTableString @ 0x97bb4a14 (152 bytes) */
+int TGenericLinker__GetFullTableString(this)
+  unsigned char * this;
+{
+  undefined4 remapTableString;
+  undefined4 bindingTableString;
+  int length;
+  int length2;
+  char *allocation;
+  
+  remapTableString = ((int (*)())TGenericLinker__GetRemapTableString)(this);
+  bindingTableString = ((int (*)())TGenericLinker__GetBindingTableString)(this);
+  length = _strlen(remapTableString);
+  length2 = _strlen(bindingTableString);
+  allocation = (char *)_malloc(length + length2 + 1);
+  *allocation = '\0';
+  _sprintf(allocation,"%s%s",bindingTableString,remapTableString);
+  _free(bindingTableString);
+  _free(remapTableString);
+  return allocation;
+}
+
+/* TGenericLinker__ReportStats @ 0x97bb4aac (4 bytes) */
+int TGenericLinker__ReportStats()
+{
+  return;
+}
+
+/* TGenericLinker__InsertClientAttribBinding @ 0x97bb4ab0 (92 bytes) */
+int TGenericLinker__InsertClientAttribBinding(this, binding)
+  unsigned char * this;
+  unsigned char * binding;
+{
+  int findAttribBindingResult;
+  undefined4 insertClientAttribBindingResult;
+  
+  findAttribBindingResult = BindingTable__FindAttribBinding(*(unsigned char **)(this + 4),binding);
+  if (findAttribBindingResult == 0) {
+    insertClientAttribBindingResult = BindingTable__InsertClientAttribBinding(*(unsigned char **)(this + 4),binding);
+    return insertClientAttribBindingResult;
+  }
+  return 0;
+}
+
+/* TGenericLinker__AddAttribBinding @ 0x97bb4b0c (276 bytes) */
+int TGenericLinker__AddAttribBinding(param_1, str, param_3, param_4)
+  char *param_1;
+  char *str;
+  undefined4 param_3;
+  undefined4 param_4;
+{
+  unsigned char * this;
+  int iVar1;
+  undefined4 uVar2;
+  int iVar3;
+  char *pcVar4;
+  void *pvVar5;
+  
+  this = operator_new(0x38);
+  __ZN7BindingC1Ev(this);
+  pcVar4 = DAT_a7b7bb84;
+  if (this == (unsigned char *)0x0) {
+    pvVar5 = *(void **)(param_1 + 0x84);
+                    
+    __ZN13TInfoSinkBase6appendEPKc(pvVar5,"INTERNAL ERROR: ");
+    __ZN13TInfoSinkBase6appendEPKc(pvVar5,pcVar4);
+    __ZN13TInfoSinkBase6appendEPKc(pvVar5,"\n");
+  }
+  else {
+    Binding__SetName(this,str);
+    iVar1 = BindingTable__FindAttribBinding(*(unsigned char **)(param_1 + 4),this);
+    if (iVar1 == 0) {
+      Binding__SetClientRequest(this,0);
+      Binding__SetOpenGLType(this,(*(unsigned short *)((unsigned char *)&(param_3) + 2)));
+      Binding__SetDecSize(this,1);
+      Binding__SetActualSize(this,1);
+      Binding__SetBuiltIn(this,param_4);
+      iVar1 = BindingTable__InsertAttribBinding(*(unsigned char **)(param_1 + 4),this);
+      if (iVar1 != 0) {
+        return iVar1;
+      }
+      uVar2 = BindingTable__GetAttribBindingNameByLocation(*(unsigned char **)(param_1 + 4),0);
+      iVar1 = _strlen(_linkErrorString);
+      iVar3 = _strlen(uVar2);
+      pcVar4 = (char *)_malloc(iVar1 + iVar3 + 1);
+      _sprintf(pcVar4,_linkErrorString,uVar2);
+      pvVar5 = *(void **)(param_1 + 0x84);
+                    
+      __ZN13TInfoSinkBase6appendEPKc(pvVar5,"ERROR: ");
+      __ZN13TInfoSinkBase6appendEPKc(pvVar5,pcVar4);
+      __ZN13TInfoSinkBase6appendEPKc(pvVar5,"\n");
+      _free(pcVar4);
+      return 0;
+    }
+    __ZN7BindingD1Ev(this);
+    __ZdlPv(this);
+  }
+  return 0;
+}
+
+/* TGenericLinker__CollectClientAttributeBindings @ 0x97bb4d6c (216 bytes) */
+int TGenericLinker__CollectClientAttributeBindings(this)
+  unsigned char * this;
+{
+  unsigned char * pBVar1;
+  int iVar2;
+  int iVar3;
+  char *pcVar4;
+  int iVar5;
+  undefined4 uVar6;
+  void *pvVar7;
+  
+  if (*(int *)(this + 0x28) == 0) {
+    for (pBVar1 = (unsigned char *)
+                  BindingTable__NextAttribRequestBinding
+                            (*(unsigned char **)(this + 4),(unsigned char *)0x0); pBVar1 != (unsigned char *)0x0;
+        pBVar1 = (unsigned char *)
+                 BindingTable__NextAttribRequestBinding(*(unsigned char **)(this + 4),pBVar1)) {
+      uVar6 = *(undefined4 *)(pBVar1 + 8);
+      iVar2 = _strlen(UNK_a7b7bac8);
+      iVar5 = _strlen(uVar6);
+      pcVar4 = (char *)_malloc(iVar2 + iVar5 + 1);
+      _sprintf(pcVar4,UNK_a7b7bac8,uVar6);
+      pvVar7 = *(void **)(this + 0x84);
+                    
+      __ZN13TInfoSinkBase6appendEPKc(pvVar7,"WARNING: ");
+      __ZN13TInfoSinkBase6appendEPKc(pvVar7,pcVar4);
+      __ZN13TInfoSinkBase6appendEPKc(pvVar7,"\n");
+      _free(pcVar4);
+    }
+  }
+  else {
+    for (pBVar1 = (unsigned char *)
+                  BindingTable__NextAttribRequestBinding
+                            (*(unsigned char **)(this + 4),(unsigned char *)0x0); pBVar1 != (unsigned char *)0x0;
+        pBVar1 = (unsigned char *)
+                 BindingTable__NextAttribRequestBinding(*(unsigned char **)(this + 4),pBVar1)) {
+      iVar2 = ParseSymbolTable__FindGlobalSymbolByName
+                        (*(unsigned char **)(this + 0x28),*(char **)(pBVar1 + 8));
+      if (iVar2 == 0) {
+        uVar6 = *(undefined4 *)(pBVar1 + 8);
+        iVar2 = _strlen(UNK_a7b7bac4);
+        iVar5 = _strlen(uVar6);
+        pcVar4 = (char *)_malloc(iVar2 + iVar5 + 1);
+        _sprintf(pcVar4,UNK_a7b7bac4,uVar6);
+        pvVar7 = *(void **)(this + 0x84);
+                    
+        __ZN13TInfoSinkBase6appendEPKc(pvVar7,"WARNING: ");
+        __ZN13TInfoSinkBase6appendEPKc(pvVar7,pcVar4);
+        __ZN13TInfoSinkBase6appendEPKc(pvVar7,"\n");
+        _free(pcVar4);
+      }
+      else {
+        Binding__SetOpenGLType(pBVar1,*(ushort *)(iVar2 + 0x2c));
+        Binding__SetActualSize(pBVar1,1);
+        Binding__SetDecSize(pBVar1,1);
+        iVar5 = *(int *)(iVar2 + 0x34);
+        if (iVar5 == 1) {
+          uVar6 = *(undefined4 *)(pBVar1 + 8);
+          iVar5 = _strlen(DAT_a7b7bb68);
+          iVar3 = _strlen(uVar6);
+          pcVar4 = (char *)_malloc(iVar5 + iVar3 + 1);
+          _sprintf(pcVar4,DAT_a7b7bb68,uVar6);
+          pvVar7 = *(void **)(this + 0x84);
+                    
+          __ZN13TInfoSinkBase6appendEPKc(pvVar7,"INTERNAL ERROR: ");
+          __ZN13TInfoSinkBase6appendEPKc(pvVar7,pcVar4);
+          __ZN13TInfoSinkBase6appendEPKc(pvVar7,"\n");
+          _free(pcVar4);
+          iVar5 = *(int *)(iVar2 + 0x34);
+        }
+        Binding__SetBuiltIn(pBVar1,iVar5);
+        InsertClientAttribBinding((unsigned char *)this,pBVar1);
+      }
+    }
+  }
+  return 1;
+}
+
+/* TGenericLinker__CollectAttributeBindings @ 0x97bb50dc (996 bytes) */
+int TGenericLinker__CollectAttributeBindings(this)
+  unsigned char * this;
+{
+  unsigned char * pPVar1;
+  uint uVar2;
+  
+  if (*(unsigned char **)(this + 0x28) != (unsigned char *)0x0) {
+    for (pPVar1 = (unsigned char *)
+                  ParseSymbolTable__NextSymbol
+                            (*(unsigned char **)(this + 0x28),(unsigned char *)0x0);
+        pPVar1 != (unsigned char *)0x0;
+        pPVar1 = (unsigned char *)
+                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar1)) {
+      if (((**(char **)pPVar1 == '\x02') && (*(short *)(pPVar1 + 0x2c) == -0x74a4)) &&
+         (*(int *)(pPVar1 + 0x34) == 0)) {
+        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,*(undefined4 *)(pPVar1 + 0x14),0x8b5c,0);
+      }
+    }
+    for (pPVar1 = (unsigned char *)
+                  ParseSymbolTable__NextSymbol
+                            (*(unsigned char **)(this + 0x28),(unsigned char *)0x0);
+        pPVar1 != (unsigned char *)0x0;
+        pPVar1 = (unsigned char *)
+                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar1)) {
+      if (((**(char **)pPVar1 == '\x02') && (*(short *)(pPVar1 + 0x2c) == -0x74a5)) &&
+         (*(int *)(pPVar1 + 0x34) == 0)) {
+        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,*(undefined4 *)(pPVar1 + 0x14),0x8b5b,0);
+      }
+    }
+    for (pPVar1 = (unsigned char *)
+                  ParseSymbolTable__NextSymbol
+                            (*(unsigned char **)(this + 0x28),(unsigned char *)0x0);
+        pPVar1 != (unsigned char *)0x0;
+        pPVar1 = (unsigned char *)
+                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar1)) {
+      if (((**(char **)pPVar1 == '\x02') && (*(short *)(pPVar1 + 0x2c) == -0x74a6)) &&
+         (*(int *)(pPVar1 + 0x34) == 0)) {
+        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,*(undefined4 *)(pPVar1 + 0x14),0x8b5a,0);
+      }
+    }
+    for (pPVar1 = (unsigned char *)
+                  ParseSymbolTable__NextSymbol
+                            (*(unsigned char **)(this + 0x28),(unsigned char *)0x0);
+        pPVar1 != (unsigned char *)0x0;
+        pPVar1 = (unsigned char *)
+                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar1)) {
+      if ((((**(char **)pPVar1 == '\x02') &&
+           (uVar2 = (uint)*(ushort *)(pPVar1 + 0x2c), uVar2 != 0x8b5c)) && (uVar2 != 0x8b5b)) &&
+         ((uVar2 != 0x8b5a && (*(int *)(pPVar1 + 0x34) == 0)))) {
+        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,*(undefined4 *)(pPVar1 + 0x14),uVar2,0);
+      }
+    }
+    for (pPVar1 = (unsigned char *)
+                  ParseSymbolTable__NextSymbol
+                            (*(unsigned char **)(this + 0x28),(unsigned char *)0x0);
+        pPVar1 != (unsigned char *)0x0;
+        pPVar1 = (unsigned char *)
+                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar1)) {
+      if (((**(char **)pPVar1 == '\x02') && (*(short *)(pPVar1 + 0x2c) == -0x74a4)) &&
+         (*(int *)(pPVar1 + 0x34) != 0)) {
+        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,*(undefined4 *)(pPVar1 + 0x14),0x8b5c,1);
+      }
+    }
+    for (pPVar1 = (unsigned char *)
+                  ParseSymbolTable__NextSymbol
+                            (*(unsigned char **)(this + 0x28),(unsigned char *)0x0);
+        pPVar1 != (unsigned char *)0x0;
+        pPVar1 = (unsigned char *)
+                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar1)) {
+      if (((**(char **)pPVar1 == '\x02') && (*(short *)(pPVar1 + 0x2c) == -0x74a5)) &&
+         (*(int *)(pPVar1 + 0x34) != 0)) {
+        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,*(undefined4 *)(pPVar1 + 0x14),0x8b5b,1);
+      }
+    }
+    for (pPVar1 = (unsigned char *)
+                  ParseSymbolTable__NextSymbol
+                            (*(unsigned char **)(this + 0x28),(unsigned char *)0x0);
+        pPVar1 != (unsigned char *)0x0;
+        pPVar1 = (unsigned char *)
+                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar1)) {
+      if (((**(char **)pPVar1 == '\x02') && (*(short *)(pPVar1 + 0x2c) == -0x74a6)) &&
+         (*(int *)(pPVar1 + 0x34) != 0)) {
+        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,*(undefined4 *)(pPVar1 + 0x14),0x8b5a,1);
+      }
+    }
+    for (pPVar1 = (unsigned char *)
+                  ParseSymbolTable__NextSymbol
+                            (*(unsigned char **)(this + 0x28),(unsigned char *)0x0);
+        pPVar1 != (unsigned char *)0x0;
+        pPVar1 = (unsigned char *)
+                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar1)) {
+      if (((**(char **)pPVar1 == '\x02') &&
+          (uVar2 = (uint)*(ushort *)(pPVar1 + 0x2c), uVar2 != 0x8b5c)) &&
+         ((uVar2 != 0x8b5b && ((uVar2 != 0x8b5a && (*(int *)(pPVar1 + 0x34) != 0)))))) {
+        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,*(undefined4 *)(pPVar1 + 0x14),uVar2,1);
+      }
+    }
+  }
+  return 1;
+}
+
+/* TGenericLinker__RemapVertexAttributes @ 0x97bb54c0 (200 bytes) */
+int TGenericLinker__RemapVertexAttributes(this)
+  unsigned char * this;
+{
+  short sVar1;
+  unsigned char * this_00;
+  int iVar2;
+  undefined4 *puVar3;
+  int iVar4;
+  undefined4 uVar5;
+  uint uVar6;
+  char *pcVar7;
+  undefined4 uVar8;
+  uint uVar9;
+  void *this_01;
+  
+  uVar8 = 1;
+  this_00 = (unsigned char *)BindingTable__NextAttribBinding(*(unsigned char **)(this + 4),(unsigned char *)0x0);
+joined_r0x97bb54f0:
+  if (this_00 == (unsigned char *)0x0) {
+    return uVar8;
+  }
+  iVar2 = Binding__IsBuiltIn(this_00);
+  if (((iVar2 == 0) && (*(unsigned char **)(this + 0x28) != (unsigned char *)0x0)) &&
+     (puVar3 = (undefined4 *)
+               ParseSymbolTable__FindGlobalSymbolByName
+                         (*(unsigned char **)(this + 0x28),*(char **)(this_00 + 8)),
+     puVar3 != (undefined4 *)0x0)) {
+    pcVar7 = (char *)*puVar3;
+    if (*pcVar7 != '\x02') {
+      uVar8 = puVar3[5];
+      iVar2 = _strlen(DAT_a7b7bb6c);
+      iVar4 = _strlen(uVar8);
+      pcVar7 = (char *)_malloc(iVar2 + iVar4 + 1);
+      _sprintf(pcVar7,DAT_a7b7bb6c,uVar8);
+      this_01 = *(void **)(this + 0x84);
+                    
+      __ZN13TInfoSinkBase6appendEPKc(this_01,"INTERNAL ERROR: ");
+      __ZN13TInfoSinkBase6appendEPKc(this_01,pcVar7);
+      __ZN13TInfoSinkBase6appendEPKc(this_01,"\n");
+      _free(pcVar7);
+      uVar8 = 0;
+      pcVar7 = (char *)*puVar3;
+    }
+    if ((*pcVar7 == '\x02') && ((*(uint *)(pcVar7 + 0xc) & 0xf0000) == 0x90000)) {
+      sVar1 = *(short *)(pcVar7 + 0x12);
+      iVar4 = Binding__GetLocation(this_00);
+      for (iVar2 = **(int **)(*(int *)(this + 0x30) + 0x18); iVar2 != 0; iVar2 = *(int *)(iVar2 + 8)
+          ) {
+        uVar9 = 0;
+        if (*(short *)(iVar2 + 0x12) == sVar1) goto code_r0x97bb567c;
+      }
+    }
+  }
+  goto LAB_97bb56a8;
+code_r0x97bb567c:
+  while( true ) {
+    uVar5 = Binding__GetOpenGLType(this_00);
+    uVar6 = ((int (*)())GetVec4sForType)(uVar5);
+    if ((uVar6 <= uVar9) || (iVar2 == 0)) break;
+    uVar6 = iVar4 + uVar9;
+    uVar9 = uVar9 + 1;
+    *(uint *)(iVar2 + 0xc) = uVar6 & 0x1f | *(uint *)(iVar2 + 0xc) & 0xffffffe0;
+    iVar2 = *(int *)(iVar2 + 8);
+  }
+LAB_97bb56a8:
+  this_00 = (unsigned char *)BindingTable__NextAttribBinding(*(unsigned char **)(this + 4),this_00);
+  goto joined_r0x97bb54f0;
+}
+
+/* TGenericLinker__AllocateTextureUnitsForVaryings @ 0x97bb56d4 (468 bytes) */
+int TGenericLinker__AllocateTextureUnitsForVaryings(this)
+  unsigned char * this;
+{
+  int ppStreamManager;
+  uint loopIndex;
+  uint firstOp;
+  bool slotsFree;
+  uint uVar2;
+  uint uVar3;
+  unsigned char * this_00;
+  int iVar4;
+  uint *slotPlanCursor;
+  uint uVar6;
+  unsigned char * parseSymbol;
+  char *messageText;
+  uint uVar9;
+  int *vertexSymbol;
+  unsigned char * functionTable;
+  int iVar12;
+  undefined4 uVar13;
+  int iVar14;
+  undefined4 uVar15;
+  char *messagePrefix;
+  uint uVar17;
+  uint bindingIndexOrComponentCount;
+  int iVar19;
+  int *slotMapCursor;
+  uint uVar21;
+  undefined4 success;
+  ushort bindingChunkIndex;
+  int slotIndexOrTemp;
+  int allocationIdOrCounter;
+  undefined4 uVar26;
+  int usedSetCountOrSlotMap;
+  void *infoSink;
+  uint uVar29;
+  uint slotPlan [14];
+  undefined4 local_a8;
+  undefined4 local_a4;
+  undefined4 local_a0;
+  undefined4 local_9c;
+  undefined4 local_98;
+  undefined4 local_94;
+  undefined4 local_90;
+  undefined4 local_8c;
+  uint outputBindingWord;
+  undefined4 outputBindingChunkIndex;
+  uint local_70;
+  undefined4 local_6c;
+  uint vec4Index;
+  int insideMain;
+  uint *local_58;
+  
+  *(undefined4 *)(this + 0x74) = 0xffffffff;
+  *(undefined4 *)(this + 0x78) = 0;
+  success = 1;
+  usedSetCountOrSlotMap = 0;
+  allocationIdOrCounter = 0;
+  slotIndexOrTemp = 0;
+  if (*(unsigned char **)(this + 0x28) != (unsigned char *)0x0) {
+    for (parseSymbol = (unsigned char *)
+                  ParseSymbolTable__NextSymbol
+                            (*(unsigned char **)(this + 0x28),(unsigned char *)0x0);
+        parseSymbol != (unsigned char *)0x0;
+        parseSymbol = (unsigned char *)
+                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),parseSymbol)) {
+      if ((**(char **)parseSymbol == '\x04') &&
+         (bindingIndexOrComponentCount = *(uint *)(*(char **)parseSymbol + 0xc), (bindingIndexOrComponentCount & 0xf0000) == 0x60000)) {
+        bindingIndexOrComponentCount = bindingIndexOrComponentCount & 0x1f;
+        *(uint *)(this + 0x78) = *(uint *)(this + 0x78) | 1 << bindingIndexOrComponentCount;
+        if (*(int *)(this + 0x74) < (int)bindingIndexOrComponentCount) {
+          *(uint *)(this + 0x74) = bindingIndexOrComponentCount;
+        }
+        usedSetCountOrSlotMap = usedSetCountOrSlotMap + 1;
+      }
+    }
+  }
+  this_00 = *(unsigned char **)(this + 0x2c);
+  if (this_00 != (unsigned char *)0x0) {
+    allocationIdOrCounter = *(int *)(this_00 + 0x1c);
+    slotIndexOrTemp = *(int *)(this_00 + 0x20);
+    for (parseSymbol = (unsigned char *)ParseSymbolTable__NextSymbol(this_00,(unsigned char *)0x0);
+        parseSymbol != (unsigned char *)0x0;
+        parseSymbol = (unsigned char *)
+                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x2c),parseSymbol)) {
+      if ((**(char **)parseSymbol == '\x02') &&
+         (bindingIndexOrComponentCount = *(uint *)(*(char **)parseSymbol + 0xc), (bindingIndexOrComponentCount & 0xf0000) == 0x70000)) {
+        bindingIndexOrComponentCount = bindingIndexOrComponentCount & 0x1f;
+        if (*(int *)(this + 0x74) < (int)bindingIndexOrComponentCount) {
+          *(uint *)(this + 0x74) = bindingIndexOrComponentCount;
+        }
+        if ((*(uint *)(this + 0x78) & 1 << bindingIndexOrComponentCount) == 0) {
+          usedSetCountOrSlotMap = usedSetCountOrSlotMap + 1;
+        }
+        *(uint *)(this + 0x78) = *(uint *)(this + 0x78) | 1 << bindingIndexOrComponentCount;
+      }
+    }
+  }
+  if (allocationIdOrCounter != 0) {
+    if ((*(int *)(this + 0x28) == 0) || (*(int *)(this + 0x2c) == 0)) {
+      if (*(unsigned char **)(this + 0x2c) != (unsigned char *)0x0) {
+        for (parseSymbol = (unsigned char *)
+                      ParseSymbolTable__NextSymbol
+                                (*(unsigned char **)(this + 0x2c),(unsigned char *)0x0);
+            parseSymbol != (unsigned char *)0x0;
+            parseSymbol = (unsigned char *)
+                     ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),parseSymbol)) {
+          if ((**(char **)parseSymbol == '\0') && (*(int *)(parseSymbol + 0x60) != 0)) {
+            success = *(undefined4 *)(parseSymbol + 0x14);
+            usedSetCountOrSlotMap = _strlen(UNK_a7b7badc);
+            slotIndexOrTemp = _strlen(success);
+            messageText = (char *)_malloc(usedSetCountOrSlotMap + slotIndexOrTemp + 1);
+            _sprintf(messageText,UNK_a7b7badc,success);
+            infoSink = *(void **)(this + 0x84);
+                    
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,messageText);
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
+            success = 0;
+            _free(messageText);
+          }
+        }
+      }
+    }
+    else {
+      allocationIdOrCounter = 1;
+      slotIndexOrTemp = usedSetCountOrSlotMap * 4 + slotIndexOrTemp;
+      if (slotIndexOrTemp < 0x21) {
+        usedSetCountOrSlotMap = _malloc(0x80);
+        _memset(usedSetCountOrSlotMap,0,0x80);
+        for (parseSymbol = (unsigned char *)
+                      ParseSymbolTable__NextSymbol
+                                (*(unsigned char **)(this + 0x2c),(unsigned char *)0x0);
+            parseSymbol != (unsigned char *)0x0;
+            parseSymbol = (unsigned char *)
+                     ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x2c),parseSymbol)) {
+          if ((**(char **)parseSymbol == '\x02') &&
+             (bindingIndexOrComponentCount = *(uint *)(*(char **)parseSymbol + 0xc), (bindingIndexOrComponentCount & 0xf0000) == 0x70000)) {
+            slotIndexOrTemp = (bindingIndexOrComponentCount & 0x1f) * 0x10;
+            iVar4 = -allocationIdOrCounter;
+            iVar19 = slotIndexOrTemp + usedSetCountOrSlotMap;
+            *(int *)(usedSetCountOrSlotMap + slotIndexOrTemp) = iVar4;
+            allocationIdOrCounter = allocationIdOrCounter + 1;
+            *(int *)(iVar19 + 0xc) = iVar4;
+            *(int *)(iVar19 + 4) = iVar4;
+            *(int *)(iVar19 + 8) = iVar4;
+          }
+        }
+        for (parseSymbol = (unsigned char *)
+                      ParseSymbolTable__NextSymbol
+                                (*(unsigned char **)(this + 0x28),(unsigned char *)0x0);
+            parseSymbol != (unsigned char *)0x0;
+            parseSymbol = (unsigned char *)
+                     ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),parseSymbol)) {
+          if ((**(char **)parseSymbol == '\x04') &&
+             (bindingIndexOrComponentCount = *(uint *)(*(char **)parseSymbol + 0xc), (bindingIndexOrComponentCount & 0xf0000) == 0x60000)) {
+            slotIndexOrTemp = (bindingIndexOrComponentCount & 0x1f) * 0x10;
+            iVar4 = -allocationIdOrCounter;
+            iVar19 = slotIndexOrTemp + usedSetCountOrSlotMap;
+            *(int *)(usedSetCountOrSlotMap + slotIndexOrTemp) = iVar4;
+            allocationIdOrCounter = allocationIdOrCounter + 1;
+            *(int *)(iVar19 + 0xc) = iVar4;
+            *(int *)(iVar19 + 4) = iVar4;
+            *(int *)(iVar19 + 8) = iVar4;
+          }
+        }
+        bindingIndexOrComponentCount = 4;
+        do {
+          for (parseSymbol = (unsigned char *)
+                        ParseSymbolTable__NextSymbol
+                                  (*(unsigned char **)(this + 0x2c),(unsigned char *)0x0);
+              parseSymbol != (unsigned char *)0x0;
+              parseSymbol = (unsigned char *)
+                       ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x2c),parseSymbol)) {
+            if (((**(char **)parseSymbol == '\0') && (*(int *)(parseSymbol + 0x60) != 0)) &&
+               (uVar9 = ((int (*)())GetScalerWidthForType)((uint)*(ushort *)(parseSymbol + 0x2c)), bindingIndexOrComponentCount == uVar9)) {
+              vertexSymbol = (int *)ParseSymbolTable__FindGlobalSymbolByName
+                                         (*(unsigned char **)(this + 0x28),
+                                          *(char **)(parseSymbol + 0x14));
+              if (((vertexSymbol == (int *)0x0) ||
+                  (uVar9 = (uint)*(ushort *)(parseSymbol + 0x2c), uVar9 != *(ushort *)(vertexSymbol + 0xb)))
+                 || ((*(char *)*vertexSymbol != '\0' || (vec4Index = 0, vertexSymbol[0x17] == 0)))) {
+                success = 0;
+                if (vertexSymbol == (int *)0x0) {
+code_r0x97bb689c:
+                  uVar13 = *(undefined4 *)(parseSymbol + 0x14);
+                  slotIndexOrTemp = _strlen(UNK_a7b7bad4);
+                  iVar4 = _strlen(uVar13);
+                  messageText = (char *)_malloc(slotIndexOrTemp + iVar4 + 1);
+                  _sprintf(messageText,UNK_a7b7bad4,uVar13);
+                  infoSink = *(void **)(this + 0x84);
+                    
+override_jmp_97bb67f0_case_0:
+                  messagePrefix = "ERROR: ";
+                }
+                else {
+                  if (*(short *)(parseSymbol + 0x2c) != *(short *)(vertexSymbol + 0xb)) {
+                    uVar26 = *(undefined4 *)(parseSymbol + 0x14);
+                    slotIndexOrTemp = _strlen(UNK_a7b7bad0);
+                    iVar4 = _strlen(uVar26);
+                    uVar13 = ((int (*)())GetShaderStringForType)((uint)*(ushort *)(vertexSymbol + 0xb));
+                    iVar19 = _strlen(uVar13);
+                    uVar13 = ((int (*)())GetShaderStringForType)((uint)*(ushort *)(parseSymbol + 0x2c));
+                    iVar14 = _strlen(uVar13);
+                    messageText = (char *)_malloc(slotIndexOrTemp + iVar4 + iVar19 + iVar14 + 1);
+                    uVar13 = ((int (*)())GetShaderStringForType)((uint)*(ushort *)(parseSymbol + 0x2c));
+                    uVar15 = ((int (*)())GetShaderStringForType)((uint)*(ushort *)(vertexSymbol + 0xb));
+                    _sprintf(messageText,UNK_a7b7bad0,uVar26,uVar15,uVar13);
+                    infoSink = *(void **)(this + 0x84);
+                    
+                    goto override_jmp_97bb67f0_case_0;
+                  }
+                  if ((*(char *)*vertexSymbol == '\0') && (vertexSymbol[0x17] == 0)) goto code_r0x97bb689c;
+                  uVar13 = *(undefined4 *)(parseSymbol + 0x14);
+                  slotIndexOrTemp = _strlen(UNK_a7b7bb70);
+                  iVar4 = _strlen(uVar13);
+                  messageText = (char *)_malloc(slotIndexOrTemp + iVar4 + 1);
+                  _sprintf(messageText,UNK_a7b7bb70,uVar13);
+                  infoSink = *(void **)(this + 0x84);
+                  messagePrefix = "INTERNAL ERROR: ";
+                    
+                }
+                __ZN13TInfoSinkBase6appendEPKc(infoSink,messagePrefix);
+                __ZN13TInfoSinkBase6appendEPKc(infoSink,messageText);
+                __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
+                _free(messageText);
+              }
+              else {
+                while (uVar9 = ((int (*)())GetVec4sForType)(uVar9), vec4Index < uVar9) {
+                  slotPlan[7] = 0xffffffff;
+                  slotPlan[3] = 0xffffffff;
+                  slotPlan[4] = 0xffffffff;
+                  slotIndexOrTemp = 0;
+                  slotPlan[5] = 0xffffffff;
+                  slotPlan[6] = 0xffffffff;
+                  slotPlan[0] = 0xffffffff;
+                  slotPlan[1] = 0xffffffff;
+                  slotPlan[2] = 0xffffffff;
+                  do {
+                    slotsFree = true;
+                    if (bindingIndexOrComponentCount == 2) {
+                      iVar4 = slotIndexOrTemp << 2;
+code_r0x97bb5b68:
+                      if (*(int *)(iVar4 + usedSetCountOrSlotMap + 4) == 0) {
+code_r0x97bb5b80:
+                        if (*(int *)(iVar4 + usedSetCountOrSlotMap) == 0) goto code_r0x97bb5b90;
+                      }
+code_r0x97bb5b8c:
+                      slotsFree = false;
+                    }
+                    else {
+                      if (2 < bindingIndexOrComponentCount) {
+                        if (bindingIndexOrComponentCount == 3) {
+                          iVar4 = slotIndexOrTemp << 2;
+code_r0x97bb5b50:
+                          if (*(int *)(iVar4 + usedSetCountOrSlotMap + 8) == 0) goto code_r0x97bb5b68;
+                        }
+                        else {
+                          if (bindingIndexOrComponentCount != 4) goto code_r0x97bb5b90;
+                          iVar4 = slotIndexOrTemp * 4;
+                          if (*(int *)(iVar4 + usedSetCountOrSlotMap + 0xc) == 0) goto code_r0x97bb5b50;
+                        }
+                        goto code_r0x97bb5b8c;
+                      }
+                      if (bindingIndexOrComponentCount == 1) {
+                        iVar4 = slotIndexOrTemp << 2;
+                        goto code_r0x97bb5b80;
+                      }
+                    }
+code_r0x97bb5b90:
+                    slotsFree = !slotsFree;
+                    if ((!slotsFree) && (uVar9 = 0, bindingIndexOrComponentCount != 0)) {
+                      slotMapCursor = (int *)(slotIndexOrTemp * 4 + usedSetCountOrSlotMap);
+                      slotPlanCursor = slotPlan;
+                      uVar29 = bindingIndexOrComponentCount;
+                      do {
+                        uVar2 = *(uint *)(this + 0x78);
+                        slotPlanCursor[4] = uVar9;
+                        uVar9 = uVar9 + 1;
+                        *(uint *)(this + 0x78) = uVar2 | 1 << (slotIndexOrTemp >> 2 & 0x3fU);
+                        *slotPlanCursor = slotIndexOrTemp >> 2;
+                        slotPlanCursor = slotPlanCursor + 1;
+                        *slotMapCursor = allocationIdOrCounter;
+                        slotMapCursor = slotMapCursor + 1;
+                        uVar29 = uVar29 - 1;
+                      } while (uVar29 != 0);
+                    }
+                    slotIndexOrTemp = slotIndexOrTemp + 4;
+                  } while ((slotIndexOrTemp < 0x20) && (slotsFree));
+                  slotIndexOrTemp = 0;
+                  if (slotsFree) {
+                    do {
+                      uVar9 = 1;
+                      if (-bindingIndexOrComponentCount == -4) {
+code_r0x97bb5ccc:
+                        if (!slotsFree) goto code_r0x97bb5cd0;
+                      }
+                      else {
+                        if (slotsFree) {
+                          do {
+                            slotsFree = true;
+                            if (bindingIndexOrComponentCount == 2) {
+code_r0x97bb5c80:
+                              if (*(int *)((slotIndexOrTemp + uVar9) * 4 + usedSetCountOrSlotMap + 4) == 0) {
+code_r0x97bb5c9c:
+                                if (*(int *)(usedSetCountOrSlotMap + (slotIndexOrTemp + uVar9) * 4) == 0)
+                                goto code_r0x97bb5cb0;
+                              }
+code_r0x97bb5cac:
+                              slotsFree = false;
+                            }
+                            else if (bindingIndexOrComponentCount < 3) {
+                              if (bindingIndexOrComponentCount == 1) goto code_r0x97bb5c9c;
+                            }
+                            else if (bindingIndexOrComponentCount == 3) {
+                              if (*(int *)((slotIndexOrTemp + uVar9) * 4 + usedSetCountOrSlotMap + 8) == 0)
+                              goto code_r0x97bb5c80;
+                              goto code_r0x97bb5cac;
+                            }
+code_r0x97bb5cb0:
+                            uVar9 = uVar9 + 1;
+                            if (-bindingIndexOrComponentCount + 4 < uVar9) {
+                              slotsFree = !slotsFree;
+                              goto code_r0x97bb5ccc;
+                            }
+                          } while (!slotsFree);
+                          slotsFree = false;
+                        }
+code_r0x97bb5cd0:
+                        iVar4 = 0;
+                        if (bindingIndexOrComponentCount != 0) {
+                          slotMapCursor = (int *)((slotIndexOrTemp + (uVar9 - 1)) * 4 + usedSetCountOrSlotMap);
+                          slotPlanCursor = slotPlan;
+                          uVar29 = bindingIndexOrComponentCount;
+                          do {
+                            uVar2 = *(uint *)(this + 0x78);
+                            slotPlanCursor[4] = iVar4 + (uVar9 - 1);
+                            iVar4 = iVar4 + 1;
+                            *(uint *)(this + 0x78) = uVar2 | 1 << (slotIndexOrTemp >> 2 & 0x3fU);
+                            *slotPlanCursor = slotIndexOrTemp >> 2;
+                            slotPlanCursor = slotPlanCursor + 1;
+                            *slotMapCursor = allocationIdOrCounter;
+                            slotMapCursor = slotMapCursor + 1;
+                            uVar29 = uVar29 - 1;
+                          } while (uVar29 != 0);
+                        }
+                      }
+                      slotIndexOrTemp = slotIndexOrTemp + 4;
+                    } while ((slotIndexOrTemp < 0x20) && (slotsFree));
+                  }
+                  uVar9 = 0;
+                  if ((bindingIndexOrComponentCount != 0) && (slotsFree)) {
+                    do {
+                      uVar29 = 0;
+                      loopIndex = 0;
+                      if (slotsFree) {
+                        do {
+                          uVar17 = uVar29;
+                          if (*(int *)(loopIndex * 4 + usedSetCountOrSlotMap) == 0) {
+                            uVar3 = ((int)loopIndex >> 2) + (uint)((int)loopIndex < 0 && (loopIndex & 3) != 0);
+                            slotPlan[uVar29] = uVar3;
+                            uVar17 = uVar29 + 1;
+                            *(uint *)(this + 0x78) = *(uint *)(this + 0x78) | 1 << (uVar3 & 0x3f);
+                            slotPlan[uVar29 + 4] = loopIndex + uVar3 * -4;
+                            *(int *)(loopIndex * 4 + usedSetCountOrSlotMap) = allocationIdOrCounter;
+                          }
+                          if (uVar17 == bindingIndexOrComponentCount) {
+                            slotsFree = false;
+                          }
+                          loopIndex = loopIndex + 1;
+                        } while (((int)loopIndex < 0x20) && (uVar29 = uVar17, slotsFree));
+                      }
+                      uVar9 = uVar9 + 1;
+                    } while ((uVar9 < bindingIndexOrComponentCount) && (slotsFree));
+                  }
+                  messageText = UNK_a7b7bacc;
+                  allocationIdOrCounter = allocationIdOrCounter + 1;
+                  if (slotsFree) {
+                    success = 0;
+                    infoSink = *(void **)(this + 0x84);
+                    
+                    __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
+                    __ZN13TInfoSinkBase6appendEPKc(infoSink,messageText);
+                    __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
+                  }
+                  else {
+                    functionTable = *(unsigned char **)(this + 0x38);
+                    insideMain = 0;
+                    uVar9 = 0;
+                    if ((functionTable != (unsigned char *)0x0) && (*(int *)(functionTable + 4) != 0)) {
+                      while( true ) {
+                        uVar13 = FunctionTable__getFunctionName(functionTable,uVar9);
+                        slotIndexOrTemp = _memcmp(uVar13,"main(",6);
+                        if (slotIndexOrTemp == 0) break;
+                        functionTable = *(unsigned char **)(this + 0x38);
+                        uVar9 = uVar9 + 1;
+                        if ((functionTable == (unsigned char *)0x0) || (*(uint *)(functionTable + 4) <= uVar9))
+                        break;
+                      }
+                    }
+                    for (slotIndexOrTemp = **(int **)(*(int *)(this + 0x30) + 0x20); slotIndexOrTemp != 0;
+                        slotIndexOrTemp = *(int *)(slotIndexOrTemp + 8)) {
+                      uVar29 = FunctionTable__getFirstOp(*(unsigned char **)(this + 0x38),uVar9);
+                      if (uVar29 == (*(uint *)(slotIndexOrTemp + 0xc) & 0x3ffff)) {
+                        insideMain = 1;
+                      }
+                      if (((insideMain != 0) && ((*(uint *)(slotIndexOrTemp + 0xc) & 0x3fc0000) == 0x1340000))
+                         && (uVar29 = 0, bindingIndexOrComponentCount != 0)) {
+                        iVar4 = 0;
+                        local_58 = slotPlan + 8;
+code_r0x97bb5ec0:
+                        ppStreamManager = *(int *)(this + 0x30);
+                        loopIndex = 0;
+                        uVar17 = *(uint *)((int)slotPlan + iVar4);
+                        for (iVar19 = **(int **)(ppStreamManager + 0x1c); iVar19 != 0;
+                            iVar19 = *(int *)(iVar19 + 8)) {
+                          if (((*(uint *)(iVar19 + 0xc) & 0xf0000) == 0x60000) &&
+                             ((*(uint *)(iVar19 + 0xc) & 0x1f) == uVar17)) {
+                            bindingChunkIndex = *(ushort *)(iVar19 + 0x12);
+                            uVar3 = 3;
+                            slotMapCursor = (int *)(uVar17 * 0x10 + usedSetCountOrSlotMap + 0xc);
+                            goto code_r0x97bb5f28;
+                          }
+                        }
+                        outputBindingChunkIndex = 0;
+                        outputBindingWord = uVar17 & 0x1f | 0x4060000;
+                        slotMapCursor = (int *)(uVar17 * 0x10 + usedSetCountOrSlotMap + 0xc);
+                        uVar3 = 3;
+                        do {
+                          iVar19 = *slotMapCursor;
+                          slotMapCursor = slotMapCursor + -1;
+                          if (iVar19 != 0) {
+                            outputBindingWord = (uVar3 & 3) << 0x18 | uVar17 & 0x1f | 0x4060000;
+                            break;
+                          }
+                          uVar3 = uVar3 - 1;
+                        } while (-1 < (int)uVar3);
+                        uVar13 = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(ppStreamManager + 0x1c));
+                        bindingChunkIndex = (short)uVar13 + 1;
+                        outputBindingChunkIndex = CONCAT22((*(unsigned short *)((unsigned char *)&(outputBindingChunkIndex) + 0)),bindingChunkIndex);
+                        _PPStreamAddOutputBinding(*(undefined4 *)(this + 0x30),&outputBindingWord);
+code_r0x97bb5fe4:
+                        ppStreamManager = *(int *)(this + 0x30);
+                        goto code_r0x97bb5fe8;
+                      }
+code_r0x97bb61d0:
+                      uVar29 = FunctionTable__getLastOp(*(unsigned char **)(this + 0x38),uVar9);
+                      if (uVar29 == (*(uint *)(slotIndexOrTemp + 0xc) & 0x3ffff)) break;
+                    }
+                    functionTable = *(unsigned char **)(this + 0x3c);
+                    uVar9 = 0;
+                    if ((functionTable != (unsigned char *)0x0) && (*(int *)(functionTable + 4) != 0)) {
+                      while( true ) {
+                        uVar13 = FunctionTable__getFunctionName(functionTable,uVar9);
+                        slotIndexOrTemp = _memcmp(uVar13,"main(",6);
+                        if (slotIndexOrTemp == 0) break;
+                        functionTable = *(unsigned char **)(this + 0x3c);
+                        uVar9 = uVar9 + 1;
+                        if ((functionTable == (unsigned char *)0x0) || (*(uint *)(functionTable + 4) <= uVar9))
+                        break;
+                      }
+                    }
+                    for (slotIndexOrTemp = **(int **)(*(int *)(this + 0x34) + 0x20); slotIndexOrTemp != 0;
+                        slotIndexOrTemp = *(int *)(slotIndexOrTemp + 8)) {
+                      uVar29 = FunctionTable__getFirstOp(*(unsigned char **)(this + 0x3c),uVar9);
+                      if (uVar29 == (*(uint *)(slotIndexOrTemp + 0xc) & 0x3ffff)) {
+                        uVar29 = 0;
+                        if (bindingIndexOrComponentCount != 0) {
+                          local_58 = slotPlan + 8;
+                          iVar4 = 0;
+                          goto code_r0x97bb62a8;
+                        }
+                        break;
+                      }
+                    }
+                  }
+code_r0x97bb6720:
+                  uVar9 = (uint)*(ushort *)(parseSymbol + 0x2c);
+                  vec4Index = vec4Index + 1;
+                }
+              }
+            }
+          }
+          bindingIndexOrComponentCount = bindingIndexOrComponentCount - 1;
+        } while (bindingIndexOrComponentCount != 0);
+        slotIndexOrTemp = 0;
+        *(undefined4 *)(this + 0x74) = 0xffffffff;
+        allocationIdOrCounter = 8;
+        do {
+          iVar4 = slotIndexOrTemp * 4 + usedSetCountOrSlotMap;
+          if ((((*(int *)(usedSetCountOrSlotMap + slotIndexOrTemp * 4) != 0) || (*(int *)(iVar4 + 4) != 0)) ||
+              (*(int *)(iVar4 + 8) != 0)) || (*(int *)(iVar4 + 0xc) != 0)) {
+            *(int *)(this + 0x74) = slotIndexOrTemp >> 2;
+          }
+          slotIndexOrTemp = slotIndexOrTemp + 4;
+          allocationIdOrCounter = allocationIdOrCounter + -1;
+        } while (allocationIdOrCounter != 0);
+        if (usedSetCountOrSlotMap != 0) {
+          _free(usedSetCountOrSlotMap);
+        }
+      }
+      else {
+        usedSetCountOrSlotMap = _strlen(DAT_a7b7bb00);
+        messageText = (char *)_malloc(usedSetCountOrSlotMap + 0x11);
+        _sprintf(messageText,DAT_a7b7bb00,0x20,slotIndexOrTemp);
+        infoSink = *(void **)(this + 0x84);
+                    
+        __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
+        __ZN13TInfoSinkBase6appendEPKc(infoSink,messageText);
+        __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
+        _free(messageText);
+        success = 0;
+      }
+    }
+  }
+  return success;
+  while (uVar3 = uVar3 - 1, -1 < (int)uVar3) {
+code_r0x97bb5f28:
+    iVar12 = *slotMapCursor;
+    slotMapCursor = slotMapCursor + -1;
+    if (iVar12 != 0) {
+      *(uint *)(iVar19 + 0xc) = (uVar3 & 3) << 0x18 | *(uint *)(iVar19 + 0xc) & 0xfcffffff;
+      goto code_r0x97bb5fe4;
+    }
+  }
+code_r0x97bb5fe8:
+  local_a8 = 0;
+  local_a4 = 0;
+  local_a0 = 0;
+  local_9c = 0;
+  local_98 = 0;
+  local_94 = 0;
+  slotPlan[9] = 0;
+  uVar3 = 0x60000;
+  uVar21 = 0x800000;
+  slotPlan[8] = 0x20000000;
+  slotPlan[0xc] = 0x800000;
+  slotPlan[10] = 0x60000;
+  local_90 = *(undefined4 *)(slotIndexOrTemp + 0x3c);
+  slotPlan[0xb] = (uint)bindingChunkIndex;
+  local_8c = 0;
+  slotPlan[0xd] = (uint)(ushort)(*(short *)(*vertexSymbol + 0x12) + (short)vec4Index);
+  uVar6 = *(uint *)((int)slotPlan + iVar4);
+  while ((uVar6 == uVar17 && (uVar29 < bindingIndexOrComponentCount))) {
+    uVar6 = *(uint *)((int)slotPlan + iVar4 + 0x10);
+    if (uVar6 == 1) {
+      uVar3 = (loopIndex & 3) << 6 | uVar3 & 0xffffff3f | 0x4000;
+code_r0x97bb60fc:
+      uVar3 = (uVar6 & 3) << 10 | uVar3 & 0xfffff3ff;
+      slotPlan[10] = uVar3;
+    }
+    else {
+      if (1 < (int)uVar6) {
+        if (uVar6 == 2) {
+          uVar3 = (loopIndex & 3) << 4 | uVar3 & 0xffffffcf | 0x8000;
+        }
+        else {
+          if (uVar6 != 3) goto code_r0x97bb6108;
+          uVar3 = (loopIndex & 3) << 2 | uVar3 & 0xfffffff3 | 0x10000;
+        }
+        goto code_r0x97bb60fc;
+      }
+      if (uVar6 == 0) {
+        uVar3 = (loopIndex & 3) << 8 | uVar3 & 0xfffffcff | 0x2000;
+        goto code_r0x97bb60fc;
+      }
+    }
+code_r0x97bb6108:
+    if (loopIndex == 1) {
+      uVar21 = (uVar29 & 3) << 0x13 | uVar21 & 0xffe7ffff;
+code_r0x97bb6150:
+      slotPlan[0xc] = uVar21;
+    }
+    else {
+      if (1 < (int)loopIndex) {
+        if (loopIndex == 2) {
+          uVar21 = (uVar29 & 3) << 0x11 | uVar21 & 0xfff9ffff;
+        }
+        else {
+          if (loopIndex != 3) goto code_r0x97bb6154;
+          uVar21 = (uVar29 & 3) << 0xf | uVar21 & 0xfffe7fff;
+        }
+        goto code_r0x97bb6150;
+      }
+      if (loopIndex == 0) {
+        uVar21 = (uVar29 & 3) << 0x15 | uVar21 & 0xff9fffff;
+        goto code_r0x97bb6150;
+      }
+    }
+code_r0x97bb6154:
+    uVar29 = uVar29 + 1;
+    loopIndex = loopIndex + 1;
+    iVar4 = uVar29 * 4;
+    uVar6 = slotPlan[uVar29];
+  }
+  slotPlan[0xc] = (loopIndex - 1) * 0x1000 & 0x3000 | uVar21;
+  slotPlan[9] = (loopIndex - 1) * 0x4000000 & 0xc000000 | 0x800000;
+  iVar19 = _PPStreamInsertOperationAfterChunk(ppStreamManager,local_58,0,0,*(undefined4 *)(slotIndexOrTemp + 4));
+  _PPStreamChangeBranchTargets
+            (*(undefined4 *)(this + 0x30),*(uint *)(slotIndexOrTemp + 0xc) & 0x3ffff,
+             *(uint *)(iVar19 + 0xc) & 0x3ffff);
+  if (bindingIndexOrComponentCount <= uVar29) goto code_r0x97bb61d0;
+  goto code_r0x97bb5ec0;
+code_r0x97bb62a8:
+  loopIndex = 0;
+  uVar17 = *(uint *)((int)slotPlan + iVar4);
+  for (iVar19 = **(int **)(*(int *)(this + 0x34) + 0x18); iVar19 != 0; iVar19 = *(int *)(iVar19 + 8)
+      ) {
+    if (((*(uint *)(iVar19 + 0xc) & 0xf0000) == 0x70000) &&
+       ((*(uint *)(iVar19 + 0xc) & 0x1f) == uVar17)) {
+      bindingChunkIndex = *(ushort *)(iVar19 + 0x12);
+      uVar3 = 3;
+      slotMapCursor = (int *)(uVar17 * 0x10 + usedSetCountOrSlotMap + 0xc);
+      goto code_r0x97bb630c;
+    }
+  }
+  local_6c = 0;
+  local_70 = uVar17 & 0x1f | 0x4070000;
+  slotMapCursor = (int *)(uVar17 * 0x10 + usedSetCountOrSlotMap + 0xc);
+  uVar3 = 3;
+  do {
+    iVar19 = *slotMapCursor;
+    slotMapCursor = slotMapCursor + -1;
+    if (iVar19 != 0) {
+      local_70 = (uVar3 & 3) << 0x18 | uVar17 & 0x1f | 0x4070000;
+      break;
+    }
+    uVar3 = uVar3 - 1;
+  } while (-1 < (int)uVar3);
+  uVar13 = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(*(int *)(this + 0x34) + 0x18));
+  bindingChunkIndex = (short)uVar13 + 1;
+  local_6c = CONCAT22((*(unsigned short *)((unsigned char *)&(local_6c) + 0)),bindingChunkIndex);
+  _PPStreamAddAttribBinding(*(undefined4 *)(this + 0x34),&local_70);
+  goto code_r0x97bb63d0;
+  while (uVar3 = uVar3 - 1, -1 < (int)uVar3) {
+code_r0x97bb630c:
+    iVar14 = *slotMapCursor;
+    slotMapCursor = slotMapCursor + -1;
+    if (iVar14 != 0) {
+      *(uint *)(iVar19 + 0xc) = (uVar3 & 3) << 0x18 | *(uint *)(iVar19 + 0xc) & 0xfcffffff;
+      break;
+    }
+  }
+code_r0x97bb63d0:
+  local_a8 = 0;
+  local_a4 = 0;
+  local_a0 = 0;
+  local_9c = 0;
+  local_98 = 0;
+  local_94 = 0;
+  slotPlan[0xb] = 0;
+  slotPlan[9] = 0;
+  uVar21 = 0x20000;
+  slotPlan[8] = 0x20000000;
+  slotPlan[10] = 0x20000;
+  local_90 = *(undefined4 *)(slotIndexOrTemp + 0x3c);
+  local_8c = 0;
+  uVar3 = 0;
+  slotPlan[0xd] = (uint)bindingChunkIndex;
+  slotPlan[0xc] = 0;
+  uVar6 = *(uint *)((int)slotPlan + iVar4);
+  slotPlan[0xb] = (uint)(ushort)(*(short *)(*(int *)parseSymbol + 0x12) + (short)vec4Index);
+  while ((uVar6 == uVar17 && (uVar29 < bindingIndexOrComponentCount))) {
+    if (loopIndex == 1) {
+      uVar21 = (uVar29 & 3) << 6 | uVar21 & 0xffffff3f | 0x4000;
+code_r0x97bb64dc:
+      slotPlan[10] = uVar21;
+    }
+    else {
+      if (1 < (int)loopIndex) {
+        if (loopIndex == 2) {
+          uVar21 = (uVar29 & 3) << 4 | uVar21 & 0xffffffcf | 0x8000;
+        }
+        else {
+          if (loopIndex != 3) goto code_r0x97bb64e0;
+          uVar21 = (uVar29 & 3) << 2 | uVar21 & 0xfffffff3 | 0x10000;
+        }
+        uVar21 = (loopIndex & 3) << 10 | uVar21 & 0xfffff3ff;
+        goto code_r0x97bb64dc;
+      }
+      if (loopIndex == 0) {
+        uVar21 = (uVar29 & 3) << 8 | uVar21 & 0xfffffcff | 0x2000;
+        goto code_r0x97bb64dc;
+      }
+    }
+code_r0x97bb64e0:
+    if (loopIndex == 1) {
+      uVar3 = (*(uint *)((int)slotPlan + iVar4 + 0x10) & 3) << 0x13 | uVar3 & 0xffe7ffff;
+code_r0x97bb6544:
+      slotPlan[0xc] = uVar3;
+    }
+    else {
+      if (1 < (int)loopIndex) {
+        if (loopIndex == 2) {
+          uVar3 = (*(uint *)((int)slotPlan + iVar4 + 0x10) & 3) << 0x11 | uVar3 & 0xfff9ffff;
+        }
+        else {
+          if (loopIndex != 3) goto code_r0x97bb6548;
+          uVar3 = (*(uint *)((int)slotPlan + iVar4 + 0x10) & 3) << 0xf | uVar3 & 0xfffe7fff;
+        }
+        goto code_r0x97bb6544;
+      }
+      if (loopIndex == 0) {
+        uVar3 = (*(uint *)((int)slotPlan + iVar4 + 0x10) & 3) << 0x15 | uVar3 & 0xff9fffff;
+        goto code_r0x97bb6544;
+      }
+    }
+code_r0x97bb6548:
+    uVar29 = uVar29 + 1;
+    loopIndex = loopIndex + 1;
+    iVar4 = uVar29 * 4;
+    uVar6 = slotPlan[uVar29];
+  }
+  iVar19 = loopIndex - 1;
+  slotPlan[0xc] = iVar19 * 0x1000 & 0x3000U | uVar3;
+  slotPlan[10] = iVar19 * 0x400 & 0xc00U | uVar21 & 0xfffff3ff;
+  slotPlan[9] = iVar19 * 0x4000000 & 0xc000000U | 0x800000;
+  firstOp = FunctionTable__getFirstOp(*(unsigned char **)(this + 0x3c),uVar9);
+  if (firstOp == (*(uint *)(slotIndexOrTemp + 0xc) & 0x3ffff)) {
+    iVar19 = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(*(int *)(this + 0x34) + 0x20));
+    *(uint *)(slotIndexOrTemp + 0xc) = iVar19 + 1U & 0x3ffff | *(uint *)(slotIndexOrTemp + 0xc) & 0xfffc0000;
+    uVar13 = FunctionTable__getFirstOp(*(unsigned char **)(this + 0x3c),uVar9);
+    _PPStreamChangeBranchTargets
+              (*(undefined4 *)(this + 0x34),uVar13,*(uint *)(slotIndexOrTemp + 0xc) & 0x3ffff);
+  }
+  iVar19 = _PPStreamInsertOperationAfterChunk
+                     (*(undefined4 *)(this + 0x34),local_58,0,1,*(undefined4 *)(slotIndexOrTemp + 4));
+  if (iVar19 != 0) {
+    FunctionTable__setFirstOp(*(unsigned char **)(this + 0x3c),uVar9,0);
+    for (iVar14 = **(int **)(*(int *)(this + 0x34) + 0x24); slotIndexOrTemp = iVar19, iVar14 != 0;
+        iVar14 = *(int *)(iVar14 + 8)) {
+      iVar12 = _memcmp("main(",iVar14 + 0x14,6);
+      if (iVar12 == 0) {
+        *(undefined4 *)(iVar14 + 0xc) = 0;
+        break;
+      }
+    }
+  }
+  if (bindingIndexOrComponentCount <= uVar29) goto code_r0x97bb6720;
+  goto code_r0x97bb62a8;
+}
+
+/* TGenericLinker__CoalesceCommonUniforms @ 0x97bb6b48 (484 bytes) */
+int TGenericLinker__CoalesceCommonUniforms(this)
+  unsigned char * this;
+{
+  unsigned char _Var1;
+  uint uVar2;
+  unsigned char * pPVar3;
+  unsigned char * this_00;
+  int iVar4;
+  uint uVar5;
+  int iVar6;
+  int iVar7;
+  unsigned char * p_Var8;
+  unsigned char * pTVar9;
+  unsigned char * p_Var10;
+  undefined8 local_70;
+  uint local_60;
+  uint uStack_5c;
+  
+  iVar7 = 0;
+  iVar6 = 0;
+  pTVar9 = this;
+  do {
+    if (*(unsigned char **)(pTVar9 + 0x28) != (unsigned char *)0x0) {
+      for (pPVar3 = (unsigned char *)
+                    ParseSymbolTable__NextSymbol
+                              (*(unsigned char **)(pTVar9 + 0x28),(unsigned char *)0x0);
+          pPVar3 != (unsigned char *)0x0;
+          pPVar3 = (unsigned char *)
+                   ParseSymbolTable__NextSymbol(*(unsigned char **)(pTVar9 + 0x28),pPVar3)) {
+        p_Var10 = *(unsigned char **)pPVar3;
+        if ((p_Var10 != (unsigned char *)0x0) && (*p_Var10 == 0x3)) {
+          (*(unsigned int *)((unsigned char *)&(local_70) + 0)) = (uint)(*(ulonglong *)(p_Var10 + 0xc) >> 0x20);
+          uVar2 = ((*(unsigned int *)((unsigned char *)&(local_70) + 0)) & 0xfcffffff) >> 0x10 & 0x1f;
+          local_70 = *(ulonglong *)(p_Var10 + 0xc) & 0xfcffffffffff0000;
+          if ((2 < uVar2) &&
+             ((uVar2 < 0x13 &&
+              (this_00 = (unsigned char *)
+                         ParseSymbolTable__NextSymbol(*(unsigned char **)(pTVar9 + 0x28),pPVar3),
+              this_00 != (unsigned char *)0x0)))) {
+            _Var1 = *p_Var10;
+            while (_Var1 == 0x3) {
+              p_Var8 = *(unsigned char **)this_00;
+              if (((p_Var8 != (unsigned char *)0x0) && (p_Var8 != p_Var10)) &&
+                 (*p_Var8 == 0x3)) {
+                local_60 = (uint)((ulonglong)*(undefined8 *)(p_Var8 + 0xc) >> 0x20);
+                uStack_5c = (uint)*(undefined8 *)(p_Var8 + 0xc) & 0xffff0000;
+                if ((((local_60 & 0xfcffffff) == (*(unsigned int *)((unsigned char *)&(local_70) + 0))) && (uStack_5c == (*(unsigned int *)((unsigned char *)&(local_70) + 4))))
+                   && (iVar4 = _PPStreamGetArray(*(undefined4 *)(this + iVar6 + 0x30),2,
+                                                 (uint)*(ushort *)(p_Var8 + 0x12)), iVar4 == -1)) {
+                  _PPStreamRenumberOperandIndices
+                            (*(undefined4 *)(this + iVar6 + 0x30),p_Var8,
+                             (uint)*(ushort *)(p_Var10 + 0x12));
+                  uVar5 = *(uint *)(p_Var10 + 0xc) >> 0x18 & 3;
+                  uVar2 = *(uint *)(p_Var8 + 0xc) >> 0x18 & 3;
+                  if (uVar2 < uVar5) {
+                    uVar2 = uVar5;
+                  }
+                  *(uint *)(p_Var10 + 0xc) = uVar2 << 0x18 | *(uint *)(p_Var10 + 0xc) & 0xfcffffff;
+                  _PPStreamChunkListRemoveChunk
+                            (*(undefined4 *)(*(int *)(this + iVar6 + 0x30) + 0x10),p_Var8);
+                  ParseSymbol__SetChunk(this_00,p_Var10);
+                  *(undefined4 *)(this_00 + 0x44) = 0;
+                }
+              }
+              this_00 = (unsigned char *)
+                        ParseSymbolTable__NextSymbol
+                                  (*(unsigned char **)(this + iVar6 + 0x28),this_00);
+              if (this_00 == (unsigned char *)0x0) break;
+              _Var1 = *p_Var10;
+            }
+          }
+        }
+      }
+    }
+    iVar7 = iVar7 + 1;
+    iVar6 = iVar6 + 4;
+    pTVar9 = pTVar9 + 4;
+    if (1 < iVar7) {
+      return 1;
+    }
+  } while( true );
+}
+
+/* TGenericLinker__BuildUniformRemapTables @ 0x97bb6d2c (372 bytes) */
+int TGenericLinker__BuildUniformRemapTables(this)
+  unsigned char * this;
+{
+  bool bVar1;
+  unsigned char * this_00;
+  int iVar2;
+  undefined4 uVar3;
+  int iVar4;
+  int *piVar5;
+  char *pcVar6;
+  int iVar7;
+  uint uVar8;
+  uint uVar9;
+  undefined4 uVar10;
+  int iVar11;
+  unsigned char * pTVar12;
+  int iVar13;
+  int iVar14;
+  uint uVar15;
+  uint uVar16;
+  void *pvVar17;
+  
+  uVar10 = 1;
+  this_00 = (unsigned char *)BindingTable__NextUniformBinding(*(unsigned char **)(this + 4),(unsigned char *)0x0)
+  ;
+  iVar11 = 0;
+  pTVar12 = this;
+  do {
+    iVar2 = BindingTable__GetSizeActiveUserUniforms(*(unsigned char **)(this + 4));
+    uVar3 = _malloc(iVar2 * 4 + 0xfU & 0xfffffff0);
+    *(undefined4 *)(pTVar12 + 0x40) = uVar3;
+    if (*(int *)(pTVar12 + 0x28) == 0) {
+      *(undefined4 *)(pTVar12 + 0x48) = 0;
+    }
+    else {
+      *(undefined4 *)(pTVar12 + 0x48) = *(undefined4 *)(*(int *)(pTVar12 + 0x28) + 0x28);
+    }
+    for (iVar2 = 0; iVar4 = BindingTable__GetSizeActiveUserUniforms(*(unsigned char **)(this + 4)),
+        iVar2 < iVar4; iVar2 = iVar2 + 1) {
+      *(undefined4 *)(iVar2 * 4 + *(int *)(pTVar12 + 0x40)) = 0xffffffff;
+    }
+    iVar11 = iVar11 + 1;
+    pTVar12 = pTVar12 + 4;
+  } while (iVar11 < 2);
+  for (; this_00 != (unsigned char *)0x0;
+      this_00 = (unsigned char *)BindingTable__NextUniformBinding(*(unsigned char **)(this + 4),this_00)) {
+    iVar11 = Binding__IsBuiltIn(this_00);
+    if (iVar11 == 0) {
+      uVar9 = 0;
+      bVar1 = false;
+      iVar11 = 0;
+      do {
+        if ((*(unsigned char **)(this + iVar11 * 4 + 0x28) != (unsigned char *)0x0) &&
+           (piVar5 = (int *)ParseSymbolTable__FindGlobalSymbolByName
+                                      (*(unsigned char **)(this + iVar11 * 4 + 0x28),
+                                       *(char **)(this_00 + 8)), piVar5 != (int *)0x0)) {
+          if ((*(char *)*piVar5 != '\x03') ||
+             ((*(uint *)((char *)*piVar5 + 0xc) & 0x1f0000) != 0x10000)) {
+            iVar13 = piVar5[5];
+            iVar2 = _strlen(DAT_a7b7bb74);
+            iVar4 = _strlen(iVar13);
+            pcVar6 = (char *)_malloc(iVar2 + iVar4 + 1);
+            _sprintf(pcVar6,DAT_a7b7bb74,iVar13);
+            pvVar17 = *(void **)(this + 0x84);
+                    
+            __ZN13TInfoSinkBase6appendEPKc(pvVar17,"INTERNAL ERROR: ");
+            __ZN13TInfoSinkBase6appendEPKc(pvVar17,pcVar6);
+            __ZN13TInfoSinkBase6appendEPKc(pvVar17,"\n");
+            uVar10 = 0;
+            _free(pcVar6);
+          }
+          if (bVar1) {
+            if (*(ushort *)(piVar5 + 0xb) != uVar9) {
+              iVar14 = piVar5[5];
+              iVar2 = _strlen(UNK_a7b7bae4);
+              iVar4 = _strlen(iVar14);
+              uVar10 = ((int (*)())GetShaderStringForType)(uVar9);
+              iVar13 = _strlen(uVar10);
+              uVar10 = ((int (*)())GetShaderStringForType)((uint)*(ushort *)(piVar5 + 0xb));
+              iVar7 = _strlen(uVar10);
+              pcVar6 = (char *)_malloc(iVar2 + iVar4 + iVar13 + iVar7 + 1);
+              uVar10 = ((int (*)())GetShaderStringForType)((uint)*(ushort *)(piVar5 + 0xb));
+              uVar3 = ((int (*)())GetShaderStringForType)(uVar9);
+              _sprintf(pcVar6,UNK_a7b7bae4,iVar14,uVar3,uVar10);
+              pvVar17 = *(void **)(this + 0x84);
+                    
+              __ZN13TInfoSinkBase6appendEPKc(pvVar17,"ERROR: ");
+              __ZN13TInfoSinkBase6appendEPKc(pvVar17,pcVar6);
+              __ZN13TInfoSinkBase6appendEPKc(pvVar17,"\n");
+              uVar10 = 0;
+              _free(pcVar6);
+            }
+          }
+          else {
+            uVar9 = (uint)*(ushort *)(piVar5 + 0xb);
+            bVar1 = true;
+          }
+          uVar16 = (uint)*(ushort *)(*piVar5 + 0xe);
+          for (uVar15 = 0; uVar8 = Binding__GetBindingSlots(this_00), uVar15 < uVar8;
+              uVar15 = uVar15 + 1) {
+            iVar2 = Binding__GetLocation(this_00);
+            *(uint *)((iVar2 + uVar15) * 4 + *(int *)(this + iVar11 * 4 + 0x40)) = uVar16;
+            uVar16 = uVar16 + 1;
+          }
+        }
+        iVar11 = iVar11 + 1;
+      } while (iVar11 < 2);
+    }
+  }
+  iVar11 = 0;
+  iVar2 = 0;
+  for (iVar4 = 0; iVar13 = BindingTable__GetSizeActiveUserUniforms(*(unsigned char **)(this + 4)),
+      pcVar6 = UNK_a7b7bb04, iVar4 < iVar13; iVar4 = iVar4 + 1) {
+    if (*(int *)(iVar4 * 4 + *(int *)(this + 0x40)) != -1) {
+      iVar11 = iVar11 + 1;
+    }
+    if (*(int *)(iVar4 * 4 + *(int *)(this + 0x44)) != -1) {
+      iVar2 = iVar2 + 1;
+    }
+  }
+  if (*(int *)(this + 0x48) != iVar11) {
+    pvVar17 = *(void **)(this + 0x84);
+                    
+    __ZN13TInfoSinkBase6appendEPKc(pvVar17,"INTERNAL ERROR: ");
+    __ZN13TInfoSinkBase6appendEPKc(pvVar17,pcVar6);
+    __ZN13TInfoSinkBase6appendEPKc(pvVar17,"\n");
+    uVar10 = 0;
+  }
+  pcVar6 = UNK_a7b7bb08;
+  if (*(int *)(this + 0x4c) != iVar2) {
+    pvVar17 = *(void **)(this + 0x84);
+                    
+    __ZN13TInfoSinkBase6appendEPKc(pvVar17,"INTERNAL ERROR: ");
+    __ZN13TInfoSinkBase6appendEPKc(pvVar17,pcVar6);
+    __ZN13TInfoSinkBase6appendEPKc(pvVar17,"\n");
+    uVar10 = 0;
+  }
+  return uVar10;
+}
+
+/* TGenericLinker__InsertUniformBindingFromSymbol @ 0x97bb727c (388 bytes) */
+int TGenericLinker__InsertUniformBindingFromSymbol(this, parseSymbol, param_3)
+  unsigned char * this;
+  unsigned char * parseSymbol;
+  int param_3;
+{
+  unsigned char * this_00;
+  unsigned char * pBVar1;
+  int iVar2;
+  int iVar3;
+  char *pcVar4;
+  undefined4 uVar5;
+  void *this_01;
+  
+  uVar5 = 1;
+  if ((**(char **)parseSymbol == '\x03') &&
+     ((*(uint *)(*(char **)parseSymbol + 0xc) & 0x1f0000) != 0x110000)) {
+    this_00 = operator_new(0x38);
+    __ZN7BindingC1Ev(this_00);
+    if (this_00 == (unsigned char *)0x0) {
+      uVar5 = *(undefined4 *)(parseSymbol + 0x14);
+      iVar2 = _strlen(DAT_a7b7bb7c);
+      iVar3 = _strlen(uVar5);
+      pcVar4 = (char *)_malloc(iVar2 + iVar3 + 1);
+      _sprintf(pcVar4,DAT_a7b7bb7c,uVar5);
+      this_01 = *(void **)(this + 0x84);
+                    
+      __ZN13TInfoSinkBase6appendEPKc(this_01,"INTERNAL ERROR: ");
+      __ZN13TInfoSinkBase6appendEPKc(this_01,pcVar4);
+      __ZN13TInfoSinkBase6appendEPKc(this_01,"\n");
+      _free(pcVar4);
+      uVar5 = 0;
+    }
+    else {
+      Binding__SetName(this_00,*(char **)(parseSymbol + 0x14));
+      pBVar1 = (unsigned char *)BindingTable__FindUniformBinding(*(unsigned char **)(this + 4),this_00);
+      if (pBVar1 == (unsigned char *)0x0) {
+        Binding__SetClientRequest(this_00,0);
+        Binding__SetOpenGLType(this_00,*(ushort *)(parseSymbol + 0x2c));
+        Binding__SetDecSize(this_00,(int)*(short *)(parseSymbol + 0x2e));
+        Binding__SetActualSize(this_00,1);
+        Binding__SetBuiltIn(this_00,*(undefined4 *)(parseSymbol + 0x34));
+        if (*(short *)(parseSymbol + 0x2e) == 1) {
+          BindingTable__InsertSingleUniform(*(unsigned char **)(this + 4),this_00,param_3);
+        }
+        else {
+          BindingTable__InsertUniformArray
+                    (*(unsigned char **)(this + 4),this_00,(int)*(short *)(parseSymbol + 0x30),param_3,2,
+                     (unsigned char **)(this + 0x28));
+        }
+      }
+      else {
+        if (*(short *)(parseSymbol + 0x2e) == 1) {
+          BindingTable__AddSingleUniformReference(*(unsigned char **)(this + 4),pBVar1,param_3);
+        }
+        __ZN7BindingD1Ev(this_00);
+        __ZdlPv(this_00);
+      }
+    }
+  }
+  return uVar5;
+}
+
+/* TGenericLinker__CollectUniformBindings @ 0x97bb7498 (296 bytes) */
+int TGenericLinker__CollectUniformBindings(this)
+  unsigned char * this;
+{
+  unsigned char * pPVar1;
+  unsigned char * pPVar2;
+  int iVar3;
+  undefined4 uVar4;
+  unsigned char * pTVar5;
+  int iVar6;
+  unsigned char * pTVar7;
+  
+  uVar4 = 1;
+  iVar6 = 0;
+  pTVar7 = this + 0x28;
+  pTVar5 = this;
+  do {
+    pPVar1 = *(unsigned char **)pTVar7;
+    pTVar7 = pTVar7 + 4;
+    if (pPVar1 != (unsigned char *)0x0) {
+      for (pPVar2 = (unsigned char *)ParseSymbolTable__NextSymbol(pPVar1,(unsigned char *)0x0);
+          pPVar2 != (unsigned char *)0x0;
+          pPVar2 = (unsigned char *)
+                   ParseSymbolTable__NextSymbol(*(unsigned char **)(pTVar5 + 0x28),pPVar2)) {
+        if ((*(int *)(pPVar2 + 0x34) == 0) &&
+           (iVar3 = ((int (*)())TGenericLinker__InsertUniformBindingFromSymbol)(this,pPVar2,iVar6), iVar3 == 0)) {
+          uVar4 = 0;
+        }
+      }
+    }
+    iVar6 = iVar6 + 1;
+    pTVar5 = pTVar5 + 4;
+  } while (iVar6 < 2);
+  iVar6 = 0;
+  pTVar7 = this + 0x28;
+  pTVar5 = this;
+  do {
+    pPVar1 = *(unsigned char **)pTVar7;
+    pTVar7 = pTVar7 + 4;
+    if (pPVar1 != (unsigned char *)0x0) {
+      for (pPVar2 = (unsigned char *)ParseSymbolTable__NextSymbol(pPVar1,(unsigned char *)0x0);
+          pPVar2 != (unsigned char *)0x0;
+          pPVar2 = (unsigned char *)
+                   ParseSymbolTable__NextSymbol(*(unsigned char **)(pTVar5 + 0x28),pPVar2)) {
+        if ((*(int *)(pPVar2 + 0x34) != 0) &&
+           (iVar3 = ((int (*)())TGenericLinker__InsertUniformBindingFromSymbol)(this,pPVar2,iVar6), iVar3 == 0)) {
+          uVar4 = 0;
+        }
+      }
+    }
+    iVar6 = iVar6 + 1;
+    pTVar5 = pTVar5 + 4;
+  } while (iVar6 < 2);
+  return uVar4;
+}
+
+/* TGenericLinker__CreateFunctionTable @ 0x97bb75c0 (428 bytes) */
+int TGenericLinker__CreateFunctionTable(this, stage)
+  unsigned char * this;
+  int stage;
+{
+  int calleeNameLen;
+  int compareResult2;
+  int shaderStringLen2;
+  int scanFnIdx;
+  int nameCopy;
+  int duplicateNameLen;
+  int msgFormatLen;
+  int scanObjIdx;
+  int earlierFnIdx;
+  int calleeName;
+  int mergedFnIdx;
+  char *errorMessage;
+  uint charIdx;
+  uint lastOp;
+  undefined4 calleeScanName;
+  undefined4 otherFnName;
+  undefined4 returnVal;
+  bool calleeFound;
+  int opChunk;
+  unsigned char * scanFnTable;
+  int stageOffset;
+  bool isDuplicate;
+  bool calleeMissing;
+  bool errorFound;
+  unsigned char * mergedTable;
+  undefined4 emptyFlag;
+  undefined4 thisFnName;
+  int compareResult;
+  uint nameLen;
+  int msgFormatLen2;
+  int shaderStringLen;
+  int nameCopyLen;
+  char *fnName;
+  int objectIdx;
+  int earlierObjIdx;
+  int fnIdx;
+  unsigned char * objectFnTable;
+  unsigned char * earlierFnTable;
+  int numParams;
+  uint firstOp;
+  void *infoSink;
+  
+  stageOffset = stage * 4;
+  mergedTable = operator_new(8);
+  errorFound = false;
+  __ZN13FunctionTableC1Ev(mergedTable);
+  objectIdx = 0;
+  if (0 < *(int *)(this + stageOffset + 0x20)) {
+    do {
+      fnIdx = 0;
+      objectFnTable = *(unsigned char **)(*(int *)(objectIdx * 4 + *(int *)(this + stageOffset + 8)) + 0x6c);
+      if (0 < *(int *)(objectFnTable + 4)) {
+        do {
+          isDuplicate = false;
+          earlierObjIdx = 0;
+          if (objectIdx < 1) {
+LAB_97bb7818:
+            fnName = (char *)FunctionTable__getFunctionName(objectFnTable,fnIdx);
+            mergedFnIdx = FunctionTable__addFunction(mergedTable,fnName);
+            emptyFlag = FunctionTable__getEmpty(objectFnTable,fnIdx);
+            FunctionTable__setEmpty(mergedTable,mergedFnIdx,emptyFlag);
+            returnVal = FunctionTable__getReturnVal(objectFnTable,fnIdx);
+            FunctionTable__setReturnVal(mergedTable,mergedFnIdx,returnVal);
+            numParams = FunctionTable__getNumParams(objectFnTable,fnIdx);
+            FunctionTable__setNumParams(mergedTable,mergedFnIdx,numParams);
+            firstOp = FunctionTable__getFirstOp(objectFnTable,fnIdx);
+            FunctionTable__setFirstOp(mergedTable,mergedFnIdx,firstOp);
+            lastOp = FunctionTable__getLastOp(objectFnTable,fnIdx);
+            FunctionTable__setLastOp(mergedTable,mergedFnIdx,lastOp);
+          }
+          else {
+            do {
+              earlierFnIdx = 0;
+              earlierFnTable = *(unsigned char **)
+                         (*(int *)(earlierObjIdx * 4 + *(int *)(this + stageOffset + 8)) + 0x6c);
+              if (0 < *(int *)(earlierFnTable + 4)) {
+                do {
+                  otherFnName = FunctionTable__getFunctionName(earlierFnTable,earlierFnIdx);
+                  thisFnName = FunctionTable__getFunctionName(objectFnTable,fnIdx);
+                  compareResult = _strcmp(otherFnName,thisFnName);
+                  if (compareResult == 0) {
+                    otherFnName = FunctionTable__getFunctionName(earlierFnTable,earlierFnIdx);
+                    duplicateNameLen = _strlen(otherFnName);
+                    nameCopy = _malloc(duplicateNameLen + 1);
+                    otherFnName = FunctionTable__getFunctionName(earlierFnTable,earlierFnIdx);
+                    _strcpy(nameCopy,otherFnName);
+                    for (charIdx = 0; nameLen = _strlen(nameCopy), charIdx < nameLen; charIdx = charIdx + 1) {
+                      if (*(char *)(nameCopy + charIdx) == '(') {
+                        *(undefined1 *)(nameCopy + charIdx) = 0;
+                      }
+                    }
+                    msgFormatLen2 = _strlen(DAT_a7b7bb20);
+                    shaderStringLen = _strlen((&_shaderString)[stage]);
+                    nameCopyLen = _strlen(nameCopy);
+                    errorMessage = (char *)_malloc(msgFormatLen2 + shaderStringLen + nameCopyLen + 1);
+                    _sprintf(errorMessage,DAT_a7b7bb20,nameCopy,(&_shaderString)[stage]);
+                    infoSink = *(void **)(this + 0x84);
+                    
+                    __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
+                    __ZN13TInfoSinkBase6appendEPKc(infoSink,errorMessage);
+                    __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
+                    _free(errorMessage);
+                    _free(nameCopy);
+                    isDuplicate = true;
+                  }
+                  earlierFnIdx = earlierFnIdx + 1;
+                } while (earlierFnIdx < *(int *)(earlierFnTable + 4));
+              }
+              earlierObjIdx = earlierObjIdx + 1;
+            } while (earlierObjIdx < objectIdx);
+            if (!isDuplicate) goto LAB_97bb7818;
+          }
+          fnIdx = fnIdx + 1;
+          errorFound = (bool)(errorFound | isDuplicate);
+        } while (fnIdx < *(int *)(objectFnTable + 4));
+      }
+      for (opChunk = **(int **)(*(int *)(objectIdx * 4 + *(int *)(this + stageOffset + 0x18)) + 0x20);
+          opChunk != 0; opChunk = *(int *)(opChunk + 8)) {
+        if ((*(uint *)(opChunk + 0xc) & 0x3fc0000) == 0x1300000) {
+          calleeFound = false;
+          scanObjIdx = 0;
+          calleeName = _malloc(*(int *)(opChunk + 0x40) + 1);
+          _strcpy(calleeName,opChunk + 0x44);
+          if (*(int *)(this + stageOffset + 0x20) < 1) {
+            calleeMissing = true;
+          }
+          else {
+            do {
+              scanFnIdx = 0;
+              scanFnTable = *(unsigned char **)
+                         (*(int *)(scanObjIdx * 4 + *(int *)(this + stageOffset + 8)) + 0x6c);
+              if (0 < *(int *)(scanFnTable + 4)) {
+                do {
+                  calleeScanName = FunctionTable__getFunctionName(scanFnTable,scanFnIdx);
+                  compareResult2 = _strcmp(calleeName,calleeScanName);
+                  if (compareResult2 == 0) {
+                    calleeFound = true;
+                    break;
+                  }
+                  scanFnIdx = scanFnIdx + 1;
+                } while (scanFnIdx < *(int *)(scanFnTable + 4));
+              }
+              calleeMissing = !calleeFound;
+              if (!calleeMissing) goto code_r0x97bb7ad8;
+              scanObjIdx = scanObjIdx + 1;
+            } while (scanObjIdx < *(int *)(this + stageOffset + 0x20));
+          }
+          if (calleeMissing) {
+            for (charIdx = 0; nameLen = _strlen(calleeName), charIdx < nameLen; charIdx = charIdx + 1) {
+              if (*(char *)(calleeName + charIdx) == '(') {
+                *(undefined1 *)(calleeName + charIdx) = 0;
+              }
+            }
+            msgFormatLen = _strlen(UNK_a7b7bb24);
+            shaderStringLen2 = _strlen((&_shaderString)[stage]);
+            calleeNameLen = _strlen(calleeName);
+            errorMessage = (char *)_malloc(msgFormatLen + shaderStringLen2 + calleeNameLen + 1);
+            _sprintf(errorMessage,UNK_a7b7bb24,calleeName,(&_shaderString)[stage]);
+            infoSink = *(void **)(this + 0x84);
+                    
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,errorMessage);
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
+            _free(errorMessage);
+            errorFound = true;
+          }
+code_r0x97bb7ad8:
+          _free(calleeName);
+        }
+      }
+      objectIdx = objectIdx + 1;
+    } while (objectIdx < *(int *)(this + stageOffset + 0x20));
+    if (errorFound) goto code_r0x97bb7b18;
+  }
+  if (*(int *)(mergedTable + 4) != 0) {
+    return mergedTable;
+  }
+code_r0x97bb7b18:
+  if (mergedTable != (unsigned char *)0x0) {
+    __ZN13FunctionTableD1Ev(mergedTable);
+    __ZdlPv(mergedTable);
+  }
+  return (unsigned char *)0x0;
+}
+
+/* TGenericLinker__BuildSymbolTableList @ 0x97bb7b4c (352 bytes) */
+int TGenericLinker__BuildSymbolTableList(this, param_2, param_3)
+  unsigned char * this;
+  void **param_2;
+  int param_3;
+{
+  char *allocation;
+  bool bVar1;
+  int iVar2;
+  int *piVar3;
+  int iVar4;
+  size_t length;
+  size_t length2;
+  char *pcVar7;
+  void **r4Out0;
+  void **r4Out1;
+  void **r4In0;
+  undefined4 in_r6;
+  undefined4 in_r7;
+  undefined4 in_r8;
+  unsigned char * pTVar8;
+  undefined4 r10In0;
+  int iVar9;
+  int iVar10;
+  int iVar11;
+  int iVar12;
+  void *pvVar13;
+  int local_50 [2];
+  undefined8 local_48;
+  undefined8 local_40 [2];
+  
+  iVar10 = 0;
+  pTVar8 = (unsigned char *)0x0;
+  r10In0 = 0;
+  local_50[0] = 0;
+  local_50[1] = 0;
+  local_48 = DAT_97c38fb0;
+  iVar12 = 1;
+  local_40[0] = DAT_97c38fb8;
+  r4In0 = param_2;
+  iVar11 = param_3;
+  if (param_3 < 1) {
+LAB_97bb7d6c:
+    bVar1 = false;
+    if (iVar12 == 1) {
+      iVar11 = 0;
+      do {
+        if ((local_50[iVar11] == 0) && (0 < *(int *)(this + iVar11 * 4 + 0x20))) {
+          length = _strlen(UNK_a7b7bab8);
+          length2 = _strlen((char *)(&_shaderString)[iVar11]);
+          allocation = _malloc(length + length2 + 1);
+          _sprintf(allocation,UNK_a7b7bab8,(&_shaderString)[iVar11]);
+          pvVar13 = *(void **)(this + 0x84);
+                    
+override_jmp_97bb7df4_case_0:
+          __ZN13TInfoSinkBase6appendEPKc(pvVar13,"ERROR: ");
+          __ZN13TInfoSinkBase6appendEPKc(pvVar13,allocation);
+          __ZN13TInfoSinkBase6appendEPKc(pvVar13,"\n");
+          _free(allocation);
+          iVar12 = 0;
+        }
+        else if (1 < local_50[iVar11]) {
+          length = _strlen(UNK_a7b7babc);
+          length2 = _strlen((char *)(&_shaderString)[iVar11]);
+          allocation = _malloc(length + length2 + 9);
+          _sprintf(allocation,UNK_a7b7babc,local_50[iVar11],(&_shaderString)[iVar11]);
+          pvVar13 = *(void **)(this + 0x84);
+                    
+          goto override_jmp_97bb7df4_case_0;
+        }
+        iVar11 = iVar11 + 1;
+      } while (iVar11 < 2);
+      bVar1 = iVar12 == 1;
+      if (bVar1) {
+        pTVar8 = this;
+        do {
+          pvVar13 = _malloc(*(int *)(pTVar8 + 0x20) << 2);
+          *(void **)(pTVar8 + 8) = pvVar13;
+          pvVar13 = _malloc(*(int *)(pTVar8 + 0x20) << 2);
+          *(void **)(pTVar8 + 0x10) = pvVar13;
+          pvVar13 = _malloc(*(int *)(pTVar8 + 0x20) << 2);
+          *(void **)(pTVar8 + 0x18) = pvVar13;
+          pTVar8 = pTVar8 + 4;
+        } while ((int)pTVar8 <= (int)(this + 4));
+      }
+    }
+  }
+  else {
+    do {
+      piVar3 = param_2[iVar10];
+      if (piVar3 == (int *)0x0) {
+        pTVar8 = (unsigned char *)&_linkIntErrorString;
+        pvVar13 = *(void **)(this + 0x84);
+        pcVar7 = DAT_a7b7bb64;
+                    
+override_jmp_97bb7c58_case_0:
+        __ZN13TInfoSinkBase6appendEPKc(pvVar13,"INTERNAL ERROR: ");
+        __ZN13TInfoSinkBase6appendEPKc(pvVar13,pcVar7);
+        __ZN13TInfoSinkBase6appendEPKc(pvVar13,"\n");
+        iVar12 = 0;
+        r4In0 = r4Out1;
+      }
+      else {
+        iVar4 = (**(code **)(*piVar3 + 8))(piVar3,r4In0,iVar11,in_r6,in_r7,in_r8,pTVar8,r10In0);
+        if (iVar4 == 0) {
+          pTVar8 = (unsigned char *)&_linkIntErrorString;
+          pvVar13 = *(void **)(this + 0x84);
+          pcVar7 = DAT_a7b7bb64;
+                    
+          goto override_jmp_97bb7c58_case_0;
+        }
+        iVar2 = 0;
+        if (*(int *)(iVar4 + 8) != 0) {
+          if (*(int *)(iVar4 + 8) != 1) {
+            pvVar13 = *(void **)(this + 0x84);
+            pcVar7 = _linkIntErrorString;
+                    
+            goto override_jmp_97bb7c58_case_0;
+          }
+          iVar2 = 1;
+        }
+        if (*(int *)(iVar4 + 0xac) != 0) {
+          local_50[iVar2] = local_50[iVar2] + 1;
+          *(int *)((int)local_40 + iVar2 * 4 + -8) = iVar10;
+        }
+        pTVar8 = this + iVar2 * 4;
+        *(int *)(pTVar8 + 0x20) = *(int *)(pTVar8 + 0x20) + 1;
+        r4In0 = r4Out0;
+      }
+      iVar10 = iVar10 + 1;
+      if (param_3 <= iVar10) goto LAB_97bb7d6c;
+    } while (iVar12 == 1);
+    bVar1 = false;
+  }
+  iVar11 = 0;
+  if ((0 < param_3) && (bVar1)) {
+    do {
+      piVar3 = *param_2;
+      param_2 = param_2 + 1;
+      if ((piVar3 != (int *)0x0) && (iVar10 = (**(code **)(*piVar3 + 8))(piVar3), iVar10 != 0)) {
+        iVar4 = (uint)(*(int *)(iVar10 + 8) != 0) * 4;
+        if (*(int *)((int)local_40 + iVar4 + -8) == iVar11) {
+          **(int **)(this + iVar4 + 8) = iVar10;
+          **(undefined4 **)(this + iVar4 + 0x10) = *(undefined4 *)(iVar10 + 0x68);
+          **(undefined4 **)(this + iVar4 + 0x18) = *(undefined4 *)(iVar10 + 0x70);
+        }
+        else {
+          *(int *)(*(int *)((int)local_40 + iVar4) * 4 + *(int *)(this + iVar4 + 8)) = iVar10;
+          *(undefined4 *)(*(int *)((int)local_40 + iVar4) * 4 + *(int *)(this + iVar4 + 0x10)) =
+               *(undefined4 *)(iVar10 + 0x68);
+          iVar2 = *(int *)((int)local_40 + iVar4);
+          iVar9 = *(int *)(this + iVar4 + 0x18);
+          *(int *)((int)local_40 + iVar4) = iVar2 + 1;
+          *(undefined4 *)(iVar2 * 4 + iVar9) = *(undefined4 *)(iVar10 + 0x70);
+        }
+      }
+      iVar11 = iVar11 + 1;
+    } while (iVar11 < param_3);
+  }
+  return iVar12;
+}
+
+/* TGenericLinker__BuildProcessingComponents @ 0x97bb8054 (200 bytes) */
+int TGenericLinker__BuildProcessingComponents(this, param_2)
+  void **this;
+  int param_2;
+{
+  void *createFromStreamWithSymbolTableUpdateResult;
+  void *createFunctionTableResult;
+  unsigned char * pPVar2;
+  undefined4 uVar3;
+  int iVar4;
+  void **ppvVar5;
+  
+  uVar3 = 1;
+  iVar4 = 0;
+  ppvVar5 = this;
+  do {
+    if (0 < (int)ppvVar5[8]) {
+      createFunctionTableResult = (void *)((int (*)())TGenericLinker__CreateFunctionTable)((unsigned char *)this,iVar4);
+      ppvVar5[0xe] = createFunctionTableResult;
+      if (createFunctionTableResult == (void *)0x0) {
+        uVar3 = 0;
+      }
+      else if (ppvVar5[8] == (void *)0x1) {
+        pPVar2 = (unsigned char *)
+                 ParseSymbolTable__CopySymbolTable
+                           (*(unsigned char **)(*(int *)ppvVar5[2] + 0x68));
+        ppvVar5[10] = pPVar2;
+        createFromStreamWithSymbolTableUpdateResult = (void *)((int (*)())TGenericLinker__CreateFromStreamWithSymbolTableUpdate)((unsigned char *)this,
+                                    *(unsigned char **)(*(int *)ppvVar5[2] + 0x70),pPVar2);
+        ppvVar5[0xc] = createFromStreamWithSymbolTableUpdateResult;
+      }
+      else if (1 < (int)ppvVar5[8]) {
+        uVar3 = ((int (*)())TGenericLinker__MergeCompilers)((unsigned char *)this,iVar4);
+      }
+    }
+    iVar4 = iVar4 + 1;
+    ppvVar5 = ppvVar5 + 1;
+  } while (iVar4 < 2);
+  return uVar3;
+}
+
+/* __ZN14TGenericLinkerC2Ei @ 0x97bb811c (4 bytes) */
+int __ZN14TGenericLinkerC2Ei(this, param_2)
+  void *this;
+  int param_2;
+{
+  int atomicStore;
+  undefined *puVar1;
+  int *piVar2;
+  undefined4 *allocation;
+  void *this_00;
+  int iVar4;
+  char reservation;
+  byte cr0Reg;
+  
+  *(int *)this = DAT_a7b7bba0 + 8;
+  *(int *)((int)this + 0x7c) = param_2;
+  allocation = operator_new(0x10);
+  puVar1 = PTR__S_empty_rep_storage_a7b7c0f0;
+  piVar2 = (int *)(PTR__S_empty_rep_storage_a7b7c0f0 + 8);
+  do {
+    if (reservation != '\0') {
+      atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
+      *piVar2 = atomicStore;
+      cr0Reg = 2;
+    }
+  } while (!(bool)(cr0Reg >> 1 & 1));
+  allocation[1] = 4;
+  *allocation = puVar1 + 0xc;
+  do {
+    if (reservation != '\0') {
+      atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
+      *piVar2 = atomicStore;
+      cr0Reg = 2;
+    }
+  } while (!(bool)(cr0Reg >> 1 & 1));
+  allocation[2] = puVar1 + 0xc;
+  allocation[3] = 4;
+  *(undefined4 *)((int)this + 0x80) = 1;
+  *(undefined4 **)((int)this + 0x84) = allocation;
+  *(int *)((int)this + 0x7c) = param_2;
+  this_00 = operator_new(0x48);
+  __ZN12BindingTableC1Ej(this_00,0x80);
+  *(void **)((int)this + 4) = this_00;
+  iVar4 = (int)this + 4;
+  *(undefined4 *)((int)this + 0x5c) = 0;
+  *(undefined4 *)((int)this + 0x50) = 0;
+  *(undefined4 *)((int)this + 0x54) = 0;
+  *(undefined4 *)((int)this + 0x58) = 0;
+  do {
+    *(undefined4 *)((int)this + 8) = 0;
+    *(undefined4 *)((int)this + 0x10) = 0;
+    *(undefined4 *)((int)this + 0x18) = 0;
+    *(undefined4 *)((int)this + 0x20) = 0;
+    *(undefined4 *)((int)this + 0x28) = 0;
+    *(undefined4 *)((int)this + 0x30) = 0;
+    *(undefined4 *)((int)this + 0x38) = 0;
+    *(undefined4 *)((int)this + 0x40) = 0;
+    *(undefined4 *)((int)this + 0x48) = 0;
+    this = (void *)((int)this + 4);
+  } while ((int)this <= iVar4);
+  return;
+}
+
+/* __ZN14TGenericLinkerC1Ei @ 0x97bb8120 (4 bytes) */
+int __ZN14TGenericLinkerC1Ei(this, param_2)
+  void *this;
+  int param_2;
+{
+  int atomicStore;
+  undefined *puVar1;
+  int *piVar2;
+  undefined4 *allocation;
+  void *this_00;
+  int iVar4;
+  char reservation;
+  byte cr0Reg;
+  
+  *(int *)this = DAT_a7b7bba0 + 8;
+  *(int *)((int)this + 0x7c) = param_2;
+  allocation = operator_new(0x10);
+  puVar1 = PTR__S_empty_rep_storage_a7b7c0f0;
+  piVar2 = (int *)(PTR__S_empty_rep_storage_a7b7c0f0 + 8);
+  do {
+    if (reservation != '\0') {
+      atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
+      *piVar2 = atomicStore;
+      cr0Reg = 2;
+    }
+  } while (!(bool)(cr0Reg >> 1 & 1));
+  allocation[1] = 4;
+  *allocation = puVar1 + 0xc;
+  do {
+    if (reservation != '\0') {
+      atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
+      *piVar2 = atomicStore;
+      cr0Reg = 2;
+    }
+  } while (!(bool)(cr0Reg >> 1 & 1));
+  allocation[2] = puVar1 + 0xc;
+  allocation[3] = 4;
+  *(undefined4 *)((int)this + 0x80) = 1;
+  *(undefined4 **)((int)this + 0x84) = allocation;
+  *(int *)((int)this + 0x7c) = param_2;
+  this_00 = operator_new(0x48);
+  __ZN12BindingTableC1Ej(this_00,0x80);
+  *(void **)((int)this + 4) = this_00;
+  iVar4 = (int)this + 4;
+  *(undefined4 *)((int)this + 0x5c) = 0;
+  *(undefined4 *)((int)this + 0x50) = 0;
+  *(undefined4 *)((int)this + 0x54) = 0;
+  *(undefined4 *)((int)this + 0x58) = 0;
+  do {
+    *(undefined4 *)((int)this + 8) = 0;
+    *(undefined4 *)((int)this + 0x10) = 0;
+    *(undefined4 *)((int)this + 0x18) = 0;
+    *(undefined4 *)((int)this + 0x20) = 0;
+    *(undefined4 *)((int)this + 0x28) = 0;
+    *(undefined4 *)((int)this + 0x30) = 0;
+    *(undefined4 *)((int)this + 0x38) = 0;
+    *(undefined4 *)((int)this + 0x40) = 0;
+    *(undefined4 *)((int)this + 0x48) = 0;
+    this = (void *)((int)this + 4);
+  } while ((int)this <= iVar4);
+  return;
+}
+
+/* __ZN14TGenericLinkerC4Ei @ 0x97bb8124 (268 bytes) */
+int __ZN14TGenericLinkerC4Ei(this, param_2)
+  void *this;
+  int param_2;
+{
+  int atomicStore;
+  undefined *puVar1;
+  int *piVar2;
+  undefined4 *allocation;
+  void *this_00;
+  int iVar4;
+  char reservation;
+  byte cr0Reg;
+  
+  *(int *)this = DAT_a7b7bba0 + 8;
+  *(int *)((int)this + 0x7c) = param_2;
+  allocation = operator_new(0x10);
+  puVar1 = PTR__S_empty_rep_storage_a7b7c0f0;
+  piVar2 = (int *)(PTR__S_empty_rep_storage_a7b7c0f0 + 8);
+  do {
+    if (reservation != '\0') {
+      atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
+      *piVar2 = atomicStore;
+      cr0Reg = 2;
+    }
+  } while (!(bool)(cr0Reg >> 1 & 1));
+  allocation[1] = 4;
+  *allocation = puVar1 + 0xc;
+  do {
+    if (reservation != '\0') {
+      atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
+      *piVar2 = atomicStore;
+      cr0Reg = 2;
+    }
+  } while (!(bool)(cr0Reg >> 1 & 1));
+  allocation[2] = puVar1 + 0xc;
+  allocation[3] = 4;
+  *(undefined4 *)((int)this + 0x80) = 1;
+  *(undefined4 **)((int)this + 0x84) = allocation;
+  *(int *)((int)this + 0x7c) = param_2;
+  this_00 = operator_new(0x48);
+  __ZN12BindingTableC1Ej(this_00,0x80);
+  *(void **)((int)this + 4) = this_00;
+  iVar4 = (int)this + 4;
+  *(undefined4 *)((int)this + 0x5c) = 0;
+  *(undefined4 *)((int)this + 0x50) = 0;
+  *(undefined4 *)((int)this + 0x54) = 0;
+  *(undefined4 *)((int)this + 0x58) = 0;
+  do {
+    *(undefined4 *)((int)this + 8) = 0;
+    *(undefined4 *)((int)this + 0x10) = 0;
+    *(undefined4 *)((int)this + 0x18) = 0;
+    *(undefined4 *)((int)this + 0x20) = 0;
+    *(undefined4 *)((int)this + 0x28) = 0;
+    *(undefined4 *)((int)this + 0x30) = 0;
+    *(undefined4 *)((int)this + 0x38) = 0;
+    *(undefined4 *)((int)this + 0x40) = 0;
+    *(undefined4 *)((int)this + 0x48) = 0;
+    this = (void *)((int)this + 4);
+  } while ((int)this <= iVar4);
+  return;
+}
+
+/* __ZN14TGenericLinkerD2Ev @ 0x97bb8230 (8 bytes) */
+int __ZN14TGenericLinkerD2Ev(this)
+  void *this;
+{
+  return ((int (*)())__ZN14TGenericLinkerD4Ev)(this,0);
+}
+
+/* __ZN14TGenericLinkerD1Ev @ 0x97bb8238 (8 bytes) */
+int __ZN14TGenericLinkerD1Ev(this)
+  void *this;
+{
+  return ((int (*)())__ZN14TGenericLinkerD4Ev)(this,2);
+}
+
+/* __ZN14TGenericLinkerD0Ev @ 0x97bb8240 (8 bytes) */
+int __ZN14TGenericLinkerD0Ev(this)
+  void *this;
+{
+  return ((int (*)())__ZN14TGenericLinkerD4Ev)(this,3);
+}
+
+/* __ZN14TGenericLinkerD4Ev @ 0x97bb8248 (244 bytes) */
+int __ZN14TGenericLinkerD4Ev(this, param_2)
+  void *this;
+  uint param_2;
+{
+  int atomicStore;
+  int *refCountPtr;
+  int oldRefCount;
+  int iVar4;
+  int *piVar5;
+  void *this_00;
+  char reservation;
+  byte cr0Reg;
+  undefined1 auStack_30 [28];
+  
+  *(int *)this = DAT_a7b7bba0 + 8;
+  ((int (*)())TGenericLinker__reset)(this);
+  piVar5 = *(int **)((int)this + 0x84);
+  if (piVar5 != (int *)0x0) {
+    iVar4 = piVar5[2];
+    refCountPtr = (int *)(iVar4 + -4);
+    do {
+      oldRefCount = *refCountPtr;
+      if (reservation != '\0') {
+        atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+        *refCountPtr = atomicStore;
+        cr0Reg = 2;
+      }
+    } while (!(bool)(cr0Reg >> 1 & 1));
+    if (oldRefCount < 1) {
+      __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(iVar4 + -0xc),auStack_30);
+    }
+    iVar4 = *piVar5;
+    refCountPtr = (int *)(iVar4 + -4);
+    do {
+      oldRefCount = *refCountPtr;
+      if (reservation != '\0') {
+        atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+        *refCountPtr = atomicStore;
+        cr0Reg = 2;
+      }
+    } while (!(bool)(cr0Reg >> 1 & 1));
+    if (oldRefCount < 1) {
+      __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(iVar4 + -0xc),auStack_30);
+    }
+    __ZdlPv(piVar5);
+  }
+  this_00 = *(void **)((int)this + 4);
+  if (this_00 != (void *)0x0) {
+    __ZN12BindingTableD1Ev(this_00);
+    __ZdlPv(this_00);
+  }
+  *(undefined ***)this = &PTR___ZN13TShHandleBaseD1Ev_a7b7d700;
+  if ((param_2 & 1) != 0) {
+    __ZdlPv(this);
+  }
+  return;
+}
+
+/* TGenericLinker__getShaderLocalParamRemapTable @ 0x97bb833c (40 bytes) */
+int TGenericLinker__getShaderLocalParamRemapTable(this, language)
+  unsigned char * this;
+  int language;
+{
+  if (language == 0) {
+    return *(undefined4 *)(this + 0x40);
+  }
+  if (language != 1) {
+    return 0;
+  }
+  return *(undefined4 *)(this + 0x44);
+}
+
+/* TGenericLinker__getNumShaderLocalParams @ 0x97bb8364 (40 bytes) */
+int TGenericLinker__getNumShaderLocalParams(this, language)
+  unsigned char * this;
+  int language;
+{
+  if (language == 0) {
+    return *(undefined4 *)(this + 0x48);
+  }
+  if (language != 1) {
+    return 0;
+  }
+  return *(undefined4 *)(this + 0x4c);
+}
+
+/* TGenericLinker__attributeBindingRequest @ 0x97bb838c (196 bytes) */
+int TGenericLinker__attributeBindingRequest(this, param_2, str)
+  unsigned char * this;
+  ulong param_2;
+  char *str;
+{
+  int compareResult;
+  int insertAttribRequestBindingResult;
+  unsigned char * this_00;
+  
+  compareResult = _memcmp(str,"gl_",3);
+  if (compareResult != 0) {
+    this_00 = operator_new(0x38);
+    __ZN7BindingC1Ev(this_00);
+    Binding__SetName(this_00,str);
+    Binding__SetLocation(this_00,param_2);
+    Binding__SetClientRequest(this_00,1);
+    insertAttribRequestBindingResult = BindingTable__InsertAttribRequestBinding(*(unsigned char **)(this + 4),this_00);
+    if ((insertAttribRequestBindingResult == 0) && (this_00 != (unsigned char *)0x0)) {
+      __ZN7BindingD1Ev(this_00);
+      __ZdlPv(this_00);
+      return;
+    }
+  }
+  return;
+}
+
+/* TGenericLinker__getActiveUniform @ 0x97bb8450 (192 bytes) */
+int TGenericLinker__getActiveUniform(this, param_2, param_3, param_4, param_5, param_6, str)
+  unsigned char * this;
+  ulong param_2;
+  long param_3;
+  long *param_4;
+  long *param_5;
+  ulong *param_6;
+  char *str;
+{
+  unsigned char * this_00;
+  undefined4 uVar1;
+  long lVar2;
+  ulong uVar3;
+  
+  this_00 = (unsigned char *)BindingTable__FindUniformBindingByIndex(*(unsigned char **)(this + 4),param_2)
+  ;
+  uVar1 = 0;
+  if (this_00 != (unsigned char *)0x0) {
+    if (param_3 == 0) {
+      if (param_4 != (long *)0x0) {
+        *param_4 = 0;
+      }
+    }
+    else {
+      _strncpy(str,*(char **)(this_00 + 8),param_3);
+      str[param_3 + -1] = '\0';
+      if (param_4 != (long *)0x0) {
+        lVar2 = _strlen(str);
+        *param_4 = lVar2;
+      }
+    }
+    if (param_5 != (long *)0x0) {
+      lVar2 = Binding__GetActualSize(this_00);
+      *param_5 = lVar2;
+    }
+    if (param_6 != (ulong *)0x0) {
+      uVar3 = Binding__GetOpenGLType(this_00);
+      *param_6 = uVar3;
+    }
+    uVar1 = 1;
+  }
+  return uVar1;
+}
+
+/* TGenericLinker__getUniformTypeInfo @ 0x97bb8510 (172 bytes) */
+int TGenericLinker__getUniformTypeInfo(this, param_2, param_3, param_4, param_5)
+  unsigned char * this;
+  long param_2;
+  long *param_3;
+  ulong *param_4;
+  uchar *param_5;
+{
+  undefined4 uVar1;
+  unsigned char * this_00;
+  int iVar2;
+  int iVar3;
+  uint uVar4;
+  ulong uVar5;
+  
+  this_00 = (unsigned char *)
+            BindingTable__FindUniformBindingByLocation(*(unsigned char **)(this + 4),param_2);
+  uVar1 = 0;
+  if (this_00 != (unsigned char *)0x0) {
+    if (param_3 != (long *)0x0) {
+      iVar2 = Binding__GetActualSize(this_00);
+      iVar3 = Binding__GetLocation(this_00);
+      uVar4 = Binding__GetBindingBasicSize(this_00);
+      *param_3 = iVar2 - (uint)(param_2 - iVar3) / uVar4;
+    }
+    if (param_4 != (ulong *)0x0) {
+      uVar5 = Binding__GetOpenGLType(this_00);
+      *param_4 = uVar5;
+    }
+    if (param_5 != (uchar *)0x0) {
+      *param_5 = (uchar)this_00[0x34];
+      *(unsigned char *)(param_5 + 1) = this_00[0x35];
+    }
+    uVar1 = 1;
+  }
+  return uVar1;
+}
+
+/* TGenericLinker__getActiveAttrib @ 0x97bb85bc (188 bytes) */
+int TGenericLinker__getActiveAttrib(this, param_2, param_3, param_4, param_5, param_6, str)
+  unsigned char * this;
+  ulong param_2;
+  long param_3;
+  long *param_4;
+  long *param_5;
+  ulong *param_6;
+  char *str;
+{
+  unsigned char * this_00;
+  undefined4 uVar1;
+  long lVar2;
+  ulong uVar3;
+  
+  this_00 = (unsigned char *)BindingTable__GetAttribBindingByIndex(*(unsigned char **)(this + 4),param_2);
+  uVar1 = 0;
+  if (this_00 != (unsigned char *)0x0) {
+    if (param_3 == 0) {
+      if (param_4 != (long *)0x0) {
+        *param_4 = 0;
+      }
+    }
+    else {
+      _strncpy(str,*(char **)(this_00 + 8),param_3);
+      str[param_3 + -1] = '\0';
+      if (param_4 != (long *)0x0) {
+        *param_4 = *(long *)(this_00 + 0x10);
+      }
+    }
+    if (param_5 != (long *)0x0) {
+      lVar2 = Binding__GetActualSize(this_00);
+      *param_5 = lVar2;
+    }
+    if (param_6 != (ulong *)0x0) {
+      uVar3 = Binding__GetOpenGLType(this_00);
+      *param_6 = uVar3;
+    }
+    uVar1 = 1;
+  }
+  return uVar1;
+}
+
+/* TGenericLinker__getPPStreamManager @ 0x97bb8678 (40 bytes) */
+int TGenericLinker__getPPStreamManager(this, language)
+  unsigned char * this;
+  int language;
+{
+  if (language == 0) {
+    return *(undefined4 *)(this + 0x30);
+  }
+  if (language != 1) {
+    return 0;
+  }
+  return *(undefined4 *)(this + 0x34);
+}
+
+/* TGenericLinker__reset @ 0x97bb86a0 (412 bytes) */
+int TGenericLinker__reset(this)
+  unsigned char * this;
+{
+  void *pvVar1;
+  unsigned char * pTVar2;
+  
+  if (*(int *)(this + 0x50) != 0) {
+    _free(*(int *)(this + 0x50));
+  }
+  *(undefined4 *)(this + 0x50) = 0;
+  if (*(int *)(this + 0x5c) != 0) {
+    _free(*(int *)(this + 0x5c));
+  }
+  *(undefined4 *)(this + 0x5c) = 0;
+  if (*(int *)(this + 0x54) != 0) {
+    _free(*(int *)(this + 0x54));
+  }
+  *(undefined4 *)(this + 0x54) = 0;
+  if (*(int *)(this + 0x58) != 0) {
+    _free(*(int *)(this + 0x58));
+  }
+  *(undefined4 *)(this + 0x58) = 0;
+  pTVar2 = this;
+  do {
+    if (*(int *)(pTVar2 + 0x30) != 0) {
+      _PPStreamFree(*(int *)(pTVar2 + 0x30));
+    }
+    pvVar1 = *(void **)(pTVar2 + 0x28);
+    *(undefined4 *)(pTVar2 + 0x30) = 0;
+    if (pvVar1 != (void *)0x0) {
+      __ZN16ParseSymbolTableD1Ev(pvVar1);
+      __ZdlPv(pvVar1);
+    }
+    pvVar1 = *(void **)(pTVar2 + 0x38);
+    *(undefined4 *)(pTVar2 + 0x28) = 0;
+    if (pvVar1 != (void *)0x0) {
+      __ZN13FunctionTableD1Ev(pvVar1);
+      __ZdlPv(pvVar1);
+    }
+    *(undefined4 *)(pTVar2 + 0x38) = 0;
+    pTVar2 = pTVar2 + 4;
+  } while ((int)pTVar2 <= (int)(this + 4));
+  pTVar2 = this;
+  do {
+    if (*(int *)(pTVar2 + 8) != 0) {
+      _free(*(int *)(pTVar2 + 8));
+    }
+    *(undefined4 *)(pTVar2 + 8) = 0;
+    if (*(int *)(pTVar2 + 0x10) != 0) {
+      _free(*(int *)(pTVar2 + 0x10));
+    }
+    *(undefined4 *)(pTVar2 + 0x10) = 0;
+    if (*(int *)(pTVar2 + 0x18) != 0) {
+      _free(*(int *)(pTVar2 + 0x18));
+    }
+    *(undefined4 *)(pTVar2 + 0x20) = 0;
+    *(undefined4 *)(pTVar2 + 0x18) = 0;
+    pTVar2 = pTVar2 + 4;
+  } while ((int)pTVar2 <= (int)(this + 4));
+  pTVar2 = this;
+  do {
+    if (*(int *)(pTVar2 + 0x40) != 0) {
+      _free(*(int *)(pTVar2 + 0x40));
+    }
+    *(undefined4 *)(pTVar2 + 0x40) = 0;
+    *(undefined4 *)(pTVar2 + 0x48) = 0;
+    pTVar2 = pTVar2 + 4;
+  } while ((int)pTVar2 <= (int)(this + 4));
+  BindingTable__ClearInternalBindings(*(unsigned char **)(this + 4));
+  *(undefined4 *)(this + 0x78) = 0;
+  *(undefined4 *)(this + 0x74) = 0xffffffff;
+  *(undefined4 *)(this + 0x60) = 0;
+  *(undefined4 *)(this + 100) = 0;
+  *(undefined4 *)(this + 0x68) = 0;
+  *(undefined4 *)(this + 0x6c) = 0;
+  *(undefined4 *)(this + 0x70) = 0;
+  return;
+}
+
+/* TGenericLinker__link @ 0x97bb883c (372 bytes) */
+int TGenericLinker__link(this, param_2, param_3)
+  unsigned char * this;
+  void **param_2;
+  int param_3;
+{
+  int numActiveVertexSamplers3;
+  int numActiveFragmentSamplers3;
+  int buildUniformRemapTablesResult;
+  int remapVertexAttributesResult;
+  int collectUniformBindingsResult;
+  int collectAttributeBindingsResult;
+  int collectClientAttributeBindingsResult;
+  int allocateTextureUnitsForVaryingsResult;
+  int loopIndex;
+  undefined4 numActiveFragmentSamplers2;
+  undefined4 numActiveVertexSamplers2;
+  undefined4 sizeActiveFragmentUniforms2;
+  undefined4 sizeActiveVertexUniforms2;
+  int numActiveFragmentSamplers;
+  int numActiveVertexSamplers;
+  int sizeActiveFragmentUniforms;
+  int sizeActiveVertexUniforms;
+  int sizeActiveAttributes;
+  bool bVar1;
+  int iVar2;
+  int iVar3;
+  char *allocation;
+  undefined4 sizeActiveAttributes2;
+  int iVar6;
+  unsigned char * pTVar7;
+  void *pvVar8;
+  
+  iVar6 = 1;
+  if (0 < param_3) {
+    iVar6 = ((int (*)())TGenericLinker__BuildSymbolTableList)(this,param_2,param_3);
+    if ((iVar6 == 1) && (iVar6 = ((int (*)())TGenericLinker__BuildProcessingComponents)((void **)this,(int)param_2), iVar6 == 1))
+    {
+      ((int (*)())TGenericLinker__RemoveExtraVertexOutputs)(this);
+      ((int (*)())TGenericLinker__FixOutputReads)(this);
+      allocateTextureUnitsForVaryingsResult = ((int (*)())TGenericLinker__AllocateTextureUnitsForVaryings)(this);
+      if (allocateTextureUnitsForVaryingsResult == 0) {
+        iVar6 = 0;
+      }
+      if (1 < *(int *)(this + 0x80)) {
+        ((int (*)())TGenericLinker__OptimizeFunctionIO)(this);
+        ((int (*)())TGenericLinker__RemoveUnreachableFunctions)(this);
+        if (2 < *(int *)(this + 0x80)) {
+          ((int (*)())TGenericLinker__RemoveUnusedRegisters)(this);
+        }
+      }
+      pTVar7 = this;
+      do {
+        if (*(int *)(pTVar7 + 0x30) != 0) {
+          ((int (*)())TGenericLinker__CoalesceCommonUniforms)(this);
+          _PPStreamSortParamConstants(*(undefined4 *)(pTVar7 + 0x30));
+          _PPStreamPackIndices(*(undefined4 *)(pTVar7 + 0x30));
+        }
+        pTVar7 = pTVar7 + 4;
+      } while ((int)pTVar7 <= (int)(this + 4));
+      if (allocateTextureUnitsForVaryingsResult != 0) {
+        loopIndex = 0;
+        do {
+          if ((*(int *)(this + loopIndex * 4 + 0x30) != 0) &&
+             (iVar3 = _PPStreamResolveBranches(*(int *)(this + loopIndex * 4 + 0x30)), iVar3 != 0)) {
+            iVar6 = _strlen(DAT_a7b7bb1c);
+            iVar3 = _strlen((&_shaderString)[loopIndex]);
+            allocation = (char *)_malloc(iVar6 + iVar3 + 1);
+            _sprintf(allocation,DAT_a7b7bb1c,(&_shaderString)[loopIndex]);
+            pvVar8 = *(void **)(this + 0x84);
+                    
+            __ZN13TInfoSinkBase6appendEPKc(pvVar8,"ERROR: ");
+            __ZN13TInfoSinkBase6appendEPKc(pvVar8,allocation);
+            __ZN13TInfoSinkBase6appendEPKc(pvVar8,"\n");
+            _free(allocation);
+            iVar6 = 0;
+          }
+          loopIndex = loopIndex + 1;
+        } while (loopIndex < 2);
+        if (iVar6 == 1) {
+          collectClientAttributeBindingsResult = ((int (*)())TGenericLinker__CollectClientAttributeBindings)(this);
+          if (collectClientAttributeBindingsResult == 0) {
+            iVar6 = 0;
+          }
+          collectAttributeBindingsResult = ((int (*)())TGenericLinker__CollectAttributeBindings)(this);
+          if (collectAttributeBindingsResult == 0) {
+            iVar6 = 0;
+          }
+          collectUniformBindingsResult = ((int (*)())TGenericLinker__CollectUniformBindings)(this);
+          if (collectUniformBindingsResult == 0) {
+            iVar6 = 0;
+          }
+          sizeActiveAttributes = BindingTable__GetSizeActiveAttributes(*(unsigned char **)(this + 4));
+          if (0x10 < sizeActiveAttributes) {
+            iVar6 = _strlen(UNK_a7b7bae8);
+            allocation = (char *)_malloc(iVar6 + 0x11);
+            sizeActiveAttributes2 = BindingTable__GetSizeActiveAttributes(*(unsigned char **)(this + 4));
+            _sprintf(allocation,UNK_a7b7bae8,0x10,sizeActiveAttributes2);
+            pvVar8 = *(void **)(this + 0x84);
+                    
+            __ZN13TInfoSinkBase6appendEPKc(pvVar8,"ERROR: ");
+            __ZN13TInfoSinkBase6appendEPKc(pvVar8,allocation);
+            __ZN13TInfoSinkBase6appendEPKc(pvVar8,"\n");
+            _free(allocation);
+            iVar6 = 0;
+          }
+          sizeActiveVertexUniforms = BindingTable__GetSizeActiveVertexUniforms(*(unsigned char **)(this + 4));
+          if (0x200 < sizeActiveVertexUniforms) {
+            iVar6 = _strlen(DAT_a7b7baec);
+            allocation = (char *)_malloc(iVar6 + 0x11);
+            sizeActiveVertexUniforms2 = BindingTable__GetSizeActiveVertexUniforms(*(unsigned char **)(this + 4));
+            _sprintf(allocation,DAT_a7b7baec,0x200,sizeActiveVertexUniforms2);
+            pvVar8 = *(void **)(this + 0x84);
+                    
+            __ZN13TInfoSinkBase6appendEPKc(pvVar8,"ERROR: ");
+            __ZN13TInfoSinkBase6appendEPKc(pvVar8,allocation);
+            __ZN13TInfoSinkBase6appendEPKc(pvVar8,"\n");
+            _free(allocation);
+            iVar6 = 0;
+          }
+          sizeActiveFragmentUniforms = BindingTable__GetSizeActiveFragmentUniforms(*(unsigned char **)(this + 4));
+          if (0x200 < sizeActiveFragmentUniforms) {
+            iVar6 = _strlen(DAT_a7b7baf0);
+            allocation = (char *)_malloc(iVar6 + 0x11);
+            sizeActiveFragmentUniforms2 = BindingTable__GetSizeActiveFragmentUniforms(*(unsigned char **)(this + 4));
+            _sprintf(allocation,DAT_a7b7baf0,0x200,sizeActiveFragmentUniforms2);
+            pvVar8 = *(void **)(this + 0x84);
+                    
+            __ZN13TInfoSinkBase6appendEPKc(pvVar8,"ERROR: ");
+            __ZN13TInfoSinkBase6appendEPKc(pvVar8,allocation);
+            __ZN13TInfoSinkBase6appendEPKc(pvVar8,"\n");
+            _free(allocation);
+            iVar6 = 0;
+          }
+          numActiveVertexSamplers = BindingTable__GetNumActiveVertexSamplers(*(unsigned char **)(this + 4));
+          if (0 < numActiveVertexSamplers) {
+            iVar6 = _strlen(UNK_a7b7baf4);
+            allocation = (char *)_malloc(iVar6 + 0x11);
+            numActiveVertexSamplers2 = BindingTable__GetNumActiveVertexSamplers(*(unsigned char **)(this + 4));
+            _sprintf(allocation,UNK_a7b7baf4,0,numActiveVertexSamplers2);
+            pvVar8 = *(void **)(this + 0x84);
+                    
+            __ZN13TInfoSinkBase6appendEPKc(pvVar8,"ERROR: ");
+            __ZN13TInfoSinkBase6appendEPKc(pvVar8,allocation);
+            __ZN13TInfoSinkBase6appendEPKc(pvVar8,"\n");
+            _free(allocation);
+            iVar6 = 0;
+          }
+          numActiveFragmentSamplers = BindingTable__GetNumActiveFragmentSamplers(*(unsigned char **)(this + 4));
+          if (0x10 < numActiveFragmentSamplers) {
+            iVar6 = _strlen(UNK_a7b7baf8);
+            allocation = (char *)_malloc(iVar6 + 0x11);
+            numActiveFragmentSamplers2 = BindingTable__GetNumActiveFragmentSamplers(*(unsigned char **)(this + 4));
+            _sprintf(allocation,UNK_a7b7baf8,0x10,numActiveFragmentSamplers2);
+            pvVar8 = *(void **)(this + 0x84);
+                    
+            __ZN13TInfoSinkBase6appendEPKc(pvVar8,"ERROR: ");
+            __ZN13TInfoSinkBase6appendEPKc(pvVar8,allocation);
+            __ZN13TInfoSinkBase6appendEPKc(pvVar8,"\n");
+            _free(allocation);
+            iVar6 = 0;
+          }
+          numActiveVertexSamplers = BindingTable__GetNumActiveVertexSamplers(*(unsigned char **)(this + 4));
+          numActiveFragmentSamplers3 = BindingTable__GetNumActiveFragmentSamplers(*(unsigned char **)(this + 4));
+          if (0x10 < numActiveVertexSamplers + numActiveFragmentSamplers3) {
+            iVar6 = _strlen(UNK_a7b7bafc);
+            allocation = (char *)_malloc(iVar6 + 0x11);
+            numActiveVertexSamplers3 = BindingTable__GetNumActiveVertexSamplers(*(unsigned char **)(this + 4));
+            numActiveFragmentSamplers = BindingTable__GetNumActiveFragmentSamplers(*(unsigned char **)(this + 4));
+            _sprintf(allocation,UNK_a7b7bafc,0x10,numActiveVertexSamplers3 + numActiveFragmentSamplers);
+            pvVar8 = *(void **)(this + 0x84);
+                    
+            __ZN13TInfoSinkBase6appendEPKc(pvVar8,"ERROR: ");
+            __ZN13TInfoSinkBase6appendEPKc(pvVar8,allocation);
+            __ZN13TInfoSinkBase6appendEPKc(pvVar8,"\n");
+            _free(allocation);
+            iVar6 = 0;
+          }
+          if (iVar6 == 1) {
+            remapVertexAttributesResult = ((int (*)())TGenericLinker__RemapVertexAttributes)(this);
+            if (remapVertexAttributesResult == 0) {
+              iVar6 = 0;
+            }
+            bVar1 = iVar6 == 1;
+            buildUniformRemapTablesResult = ((int (*)())TGenericLinker__BuildUniformRemapTables)(this);
+            if (buildUniformRemapTablesResult == 0) {
+              iVar6 = 0;
+            }
+            if ((buildUniformRemapTablesResult != 0 && bVar1) && (3 < *(int *)(this + 0x80))) {
+              pTVar7 = this + 0x30;
+              iVar2 = 1;
+              do {
+                iVar3 = *(int *)pTVar7;
+                pTVar7 = pTVar7 + 4;
+                if (iVar3 != 0) {
+                  _glpPPShaderLinearizeStreamMgr(iVar3,0xfd);
+                }
+                iVar2 = iVar2 + -1;
+              } while (-1 < iVar2);
+            }
+          }
+        }
+      }
+    }
+    if (iVar6 == 0) {
+      reset(this);
+    }
+  }
+  return iVar6;
+}
+
+/* TGenericLinker__getStatsString @ 0x97bb9098 (104 bytes) */
+int TGenericLinker__getStatsString(this)
+  unsigned char * this;
+{
+  int length;
+  int iVar1;
+  undefined4 allocation;
+  
+  iVar1 = *(int *)(this + 0x50);
+  if (iVar1 == 0) {
+    length = _strlen(DAT_a7b7bb5c);
+    allocation = _malloc(length * 4 + 4);
+    *(undefined4 *)(this + 0x50) = allocation;
+    _strcpy(allocation,DAT_a7b7bb5c);
+    iVar1 = *(int *)(this + 0x50);
+  }
+  return iVar1;
+}
+
+/* TGenericLinker__getPPStreamString @ 0x97bb9100 (604 bytes) */
+int TGenericLinker__getPPStreamString(this)
+  unsigned char * this;
+{
+  bool bVar1;
+  int iVar2;
+  undefined4 allocation;
+  int length;
+  char *allocation2;
+  void *pvVar6;
+  void *pvVar7;
+  int local_30 [5];
+  
+  pvVar6 = (void *)0x0;
+  pvVar7 = (void *)0x0;
+  if (*(int *)(this + 0x54) != 0) {
+    _free(*(int *)(this + 0x54));
+  }
+  *(undefined4 *)(this + 0x54) = 0;
+  iVar2 = _strlen(DAT_a7b7bb4c);
+  if (*(int *)(this + 0x30) == 0) {
+    length = _strlen(DAT_a7b7bb58);
+    pvVar6 = (void *)_malloc(length + 1);
+    _strcpy(pvVar6,DAT_a7b7bb58);
+  }
+  else {
+    _PPStreamGetStream(*(int *)(this + 0x30),0,local_30);
+    if (local_30[0] != 0) {
+      allocation = _malloc(local_30[0] * 8 + 0xfU & 0xfffffff0);
+      _PPStreamGetStream(*(undefined4 *)(this + 0x30),allocation,local_30);
+      pvVar6 = _glpPPDisassemble(allocation);
+      _free(allocation);
+    }
+  }
+  if (pvVar6 != (void *)0x0) {
+    length = _strlen(pvVar6);
+    iVar2 = iVar2 + length;
+  }
+  length = _strlen(DAT_a7b7bb48);
+  iVar2 = iVar2 + length;
+  if (*(int *)(this + 0x34) == 0) {
+    length = _strlen(DAT_a7b7bb58);
+    pvVar7 = (void *)_malloc(length + 1);
+    _strcpy(pvVar7,DAT_a7b7bb58);
+  }
+  else {
+    _PPStreamGetStream(*(int *)(this + 0x34),0,local_30);
+    if (local_30[0] != 0) {
+      allocation = _malloc(local_30[0] * 8 + 0xfU & 0xfffffff0);
+      _PPStreamGetStream(*(undefined4 *)(this + 0x34),allocation,local_30);
+      pvVar7 = _glpPPDisassemble(allocation);
+      _free(allocation);
+    }
+  }
+  bVar1 = pvVar7 == (void *)0x0;
+  if (!bVar1) {
+    length = _strlen(pvVar7);
+    iVar2 = iVar2 + length;
+  }
+  allocation2 = (char *)_malloc(iVar2 + 8);
+  *(char **)(this + 0x54) = allocation2;
+  _sprintf(allocation2,"%s\n",DAT_a7b7bb4c);
+  if (pvVar6 == (void *)0x0) {
+    _sprintf(*(char **)(this + 0x54),"%s\n\n%s\n",*(char **)(this + 0x54),DAT_a7b7bb48);
+  }
+  else {
+    _sprintf(*(char **)(this + 0x54),"%s%s\n\n%s\n",*(char **)(this + 0x54),pvVar6,DAT_a7b7bb48);
+  }
+  if (bVar1) {
+    _sprintf(*(char **)(this + 0x54),"%s\n",*(char **)(this + 0x54));
+  }
+  else {
+    _sprintf(*(char **)(this + 0x54),"%s%s\n",*(char **)(this + 0x54),pvVar7);
+  }
+  if (pvVar6 != (void *)0x0) {
+    _free(pvVar6);
+  }
+  if (!bVar1) {
+    _free(pvVar7);
+  }
+  return *(undefined4 *)(this + 0x54);
+}
+
+/* TGenericLinker__getShaderToProgramString @ 0x97bb935c (768 bytes) */
+int TGenericLinker__getShaderToProgramString(this)
+  unsigned char * this;
+{
+  int length3;
+  int length2;
+  int length;
+  bool bVar1;
+  int iVar2;
+  undefined4 allocation;
+  int glpPPShaderLinearizeResult;
+  char *allocation2;
+  int iVar6;
+  int iVar7;
+  int local_30 [4];
+  
+  iVar6 = 0;
+  iVar7 = 0;
+  if (*(int *)(this + 0x58) != 0) {
+    _free(*(int *)(this + 0x58));
+  }
+  *(undefined4 *)(this + 0x58) = 0;
+  iVar2 = _strlen(DAT_a7b7bb54);
+  if (*(int *)(this + 0x30) == 0) {
+    length2 = _strlen(DAT_a7b7bb58);
+    iVar6 = _malloc(length2 + 1);
+    _strcpy(iVar6,DAT_a7b7bb58);
+  }
+  else {
+    _PPStreamGetStream(*(int *)(this + 0x30),0,local_30);
+    if (local_30[0] != 0) {
+      allocation = _malloc(local_30[0] * 8 + 0xfU & 0xfffffff0);
+      _PPStreamGetStream(*(undefined4 *)(this + 0x30),allocation,local_30);
+      if (*(int *)(this + 0x80) < 4) {
+        iVar6 = _glpPPShaderToProgramString(allocation,0,0);
+      }
+      else {
+        glpPPShaderLinearizeResult = _glpPPShaderLinearize(allocation,0xff);
+        iVar6 = 0;
+        if (glpPPShaderLinearizeResult != 0) {
+          iVar6 = _glpPPShaderToProgramString(glpPPShaderLinearizeResult,0,0);
+          _glpFreePPShaderLinearize(glpPPShaderLinearizeResult);
+        }
+      }
+      _free(allocation);
+    }
+  }
+  if (iVar6 != 0) {
+    length = _strlen(iVar6);
+    iVar2 = iVar2 + length;
+  }
+  length = _strlen(DAT_a7b7bb50);
+  iVar2 = iVar2 + length;
+  if (*(int *)(this + 0x34) == 0) {
+    length3 = _strlen(DAT_a7b7bb58);
+    iVar7 = _malloc(length3 + 1);
+    _strcpy(iVar7,DAT_a7b7bb58);
+  }
+  else {
+    _PPStreamGetStream(*(int *)(this + 0x34),0,local_30);
+    if (local_30[0] != 0) {
+      allocation = _malloc(local_30[0] * 8 + 0xfU & 0xfffffff0);
+      _PPStreamGetStream(*(undefined4 *)(this + 0x34),allocation,local_30);
+      if (*(int *)(this + 0x80) < 4) {
+        iVar7 = _glpPPShaderToProgramString(allocation,0,0);
+      }
+      else {
+        glpPPShaderLinearizeResult = _glpPPShaderLinearize(allocation,0xff);
+        iVar7 = 0;
+        if (glpPPShaderLinearizeResult != 0) {
+          iVar7 = _glpPPShaderToProgramString(glpPPShaderLinearizeResult,0,0);
+          _glpFreePPShaderLinearize(glpPPShaderLinearizeResult);
+        }
+      }
+      _free(allocation);
+    }
+  }
+  bVar1 = iVar7 == 0;
+  if (!bVar1) {
+    length = _strlen(iVar7);
+    iVar2 = iVar2 + length;
+  }
+  allocation2 = (char *)_malloc(iVar2 + 8);
+  *(char **)(this + 0x58) = allocation2;
+  _sprintf(allocation2,"%s\n",DAT_a7b7bb54);
+  if (iVar6 == 0) {
+    _sprintf(*(char **)(this + 0x58),"%s\n\n",*(char **)(this + 0x58));
+  }
+  else {
+    _sprintf(*(char **)(this + 0x58),"%s%s\n\n",*(char **)(this + 0x58),iVar6);
+  }
+  _sprintf(*(char **)(this + 0x58),"%s%s\n",*(char **)(this + 0x58),DAT_a7b7bb50);
+  if (bVar1) {
+    _sprintf(*(char **)(this + 0x58),"%s\n",*(char **)(this + 0x58));
+  }
+  else {
+    _sprintf(*(char **)(this + 0x58),"%s%s\n",*(char **)(this + 0x58),iVar7);
+  }
+  if (iVar6 != 0) {
+    _free(iVar6);
+  }
+  if (!bVar1) {
+    _free(iVar7);
+  }
+  return *(undefined4 *)(this + 0x58);
+}
+
+/* TGenericLinker__getTableString @ 0x97bb965c (68 bytes) */
+int TGenericLinker__getTableString(this)
+  unsigned char * this;
+{
+  int iVar1;
+  
+  iVar1 = *(int *)(this + 0x5c);
+  if (iVar1 == 0) {
+    iVar1 = ((int (*)())TGenericLinker__GetFullTableString)(this);
+    *(int *)(this + 0x5c) = iVar1;
+  }
+  return iVar1;
+}
+
+/* GetGLStringForType @ 0x97bb96a0 (168 bytes) */
+int GetGLStringForType(param_1)
+  int param_1;
+{
+  if (param_1 == 0x1404) {
+    return _glTypeNameStrings;
+  }
+  if (param_1 == 0x1406) {
+    return DAT_a7b7bc28;
+  }
+  if ((param_1 + 0x74b0U & 0xffff) < 0x15) {
+    return *(undefined4 *)(param_1 * 4 + -0x584a7114);
+  }
+  if (param_1 == 0x7ffe) {
+    return DAT_a7b7bc80;
+  }
+  if (param_1 == 0x7fff) {
+    return DAT_a7b7bc84;
+  }
+  return DAT_a7b7bc88;
+}
+
+/* GetShaderStringForType @ 0x97bb9748 (168 bytes) */
+int GetShaderStringForType(param_1)
+  int param_1;
+{
+  if (param_1 == 0x1404) {
+    return _shaderTypeNameStrings;
+  }
+  if (param_1 == 0x1406) {
+    return DAT_a7b7bc90;
+  }
+  if ((param_1 + 0x74b0U & 0xffff) < 0x15) {
+    return *(undefined4 *)(param_1 * 4 + -0x584a70ac);
+  }
+  if (param_1 == 0x7ffe) {
+    return DAT_a7b7bce8;
+  }
+  if (param_1 == 0x7fff) {
+    return DAT_a7b7bcec;
+  }
+  return DAT_a7b7bcf0;
+}
+
+/* GetVec4sForType @ 0x97bb97f0 (136 bytes) */
+int GetVec4sForType(param_1)
+  int param_1;
+{
+  if (param_1 == 0x8b5a) {
+    return 2;
+  }
+  if (param_1 < 0x8b5b) {
+    if (param_1 != 0x1406) {
+      if (param_1 < 0x1407) {
+        if (param_1 != 0x1404) {
+          return 0;
+        }
+      }
+      else if (param_1 < 0x8b50) {
+        return 0;
+      }
+    }
+  }
+  else {
+    if (param_1 == 0x8b5c) {
+      return 4;
+    }
+    if (param_1 < 0x8b5c) {
+      return 3;
+    }
+    if (0x8b64 < param_1) {
+      return 0;
+    }
+  }
+  return 1;
+}
+
+/* GetPPStreamTypeForGLType @ 0x97bb9878 (164 bytes) */
+int GetPPStreamTypeForGLType(param_1)
+  int param_1;
+{
+  if (param_1 < 0x8b56) {
+    if (param_1 < 0x8b53) {
+      if (param_1 == 0x1406) {
+        return 1;
+      }
+      if (param_1 < 0x1407) {
+        if (param_1 == 0x1404) {
+          return 3;
+        }
+      }
+      else if (0x8b4f < param_1) {
+        return 1;
+      }
+      return 0;
+    }
+  }
+  else {
+    if (param_1 < 0x8b5d) {
+      if (0x8b59 < param_1) {
+        return 1;
+      }
+      return 4;
+    }
+    if (0x8b64 < param_1) {
+      return 0;
+    }
+  }
+  return 3;
+}
+
+/* GetScalerWidthForType @ 0x97bb991c (260 bytes) */
+int GetScalerWidthForType(param_1)
+  int param_1;
+{
+  if (param_1 == 0x8b56) {
+    return 1;
+  }
+  if (0x8b56 < param_1) {
+    if (param_1 == 0x8b5a) {
+      return 2;
+    }
+    if (param_1 < 0x8b5b) {
+      if (param_1 != 0x8b58) {
+        if (param_1 < 0x8b59) {
+          return 2;
+        }
+        return 4;
+      }
+    }
+    else {
+      if (param_1 == 0x8b5c) {
+        return 4;
+      }
+      if (0x8b5b < param_1) {
+        if (param_1 < 0x8b65) {
+          return 1;
+        }
+        return 0;
+      }
+    }
+    return 3;
+  }
+  if (param_1 == 0x8b51) {
+    return 3;
+  }
+  if (param_1 < 0x8b52) {
+    if (param_1 == 0x1406) {
+      return 1;
+    }
+    if (param_1 < 0x1407) {
+      if (param_1 == 0x1404) {
+        return 1;
+      }
+    }
+    else if (param_1 == 0x8b50) {
+      return 2;
+    }
+    return 0;
+  }
+  if (param_1 == 0x8b53) {
+    return 2;
+  }
+  if (param_1 < 0x8b53) {
+    return 4;
+  }
+  if (param_1 == 0x8b54) {
+    return 3;
+  }
+  if (param_1 == 0x8b55) {
+    return 4;
+  }
+  return 0;
+}
+
+/* getOpenGLTypeFromTType @ 0x97bb9a20 (676 bytes) */
+int getOpenGLTypeFromTType(type)
+  unsigned char * type;
+{
+  int iVar1;
+  uint uVar2;
+  undefined4 r4In0;
+  undefined4 in_r5;
+  undefined4 in_r6;
+  undefined4 in_r7;
+  undefined4 in_r8;
+  undefined4 uVar3;
+  
+  uVar3 = 0x1400;
+  iVar1 = (**(code **)(*(int *)type + 0x38))(type);
+  if (iVar1 == 0) {
+    uVar2 = (**(code **)(*(int *)type + 0x20))(type);
+    if (uVar2 < 0x10) {
+      switch(uVar2) {
+      case 1:
+        iVar1 = (**(code **)(*(int *)type + 0x34))(type,r4In0,in_r5,in_r6,in_r7,in_r8,uVar2 * 4);
+        if (iVar1 == 0) {
+          iVar1 = (**(code **)(*(int *)type + 0x2c))(type);
+          if (iVar1 == 2) {
+            uVar3 = 0x8b50;
+          }
+          else if (iVar1 < 3) {
+            if (iVar1 == 1) {
+              uVar3 = 0x1406;
+            }
+          }
+          else if (iVar1 == 3) {
+            uVar3 = 0x8b51;
+          }
+          else if (iVar1 == 4) {
+            uVar3 = 0x8b52;
+          }
+        }
+        else {
+          iVar1 = (**(code **)(*(int *)type + 0x2c))(type);
+          if (iVar1 == 3) {
+            uVar3 = 0x8b5b;
+          }
+          else if (iVar1 < 4) {
+            if (iVar1 == 2) {
+              uVar3 = 0x8b5a;
+            }
+          }
+          else if (iVar1 == 4) {
+            uVar3 = 0x8b5c;
+          }
+        }
+        break;
+      case 2:
+        iVar1 = (**(code **)(*(int *)type + 0x2c))(type);
+        if (iVar1 == 2) {
+          uVar3 = 0x8b53;
+        }
+        else if (iVar1 < 3) {
+          if (iVar1 == 1) {
+            uVar3 = 0x1404;
+          }
+        }
+        else if (iVar1 == 3) {
+          uVar3 = 0x8b54;
+        }
+        else if (iVar1 == 4) {
+          uVar3 = 0x8b55;
+        }
+        break;
+      case 3:
+        iVar1 = (**(code **)(*(int *)type + 0x2c))(type);
+        if (iVar1 == 2) {
+          uVar3 = 0x8b57;
+        }
+        else if (iVar1 < 3) {
+          if (iVar1 == 1) {
+            uVar3 = 0x8b56;
+          }
+        }
+        else if (iVar1 == 3) {
+          uVar3 = 0x8b58;
+        }
+        else if (iVar1 == 4) {
+          uVar3 = 0x8b59;
+        }
+        break;
+      case 5:
+        uVar3 = 0x8b5d;
+        break;
+      case 6:
+        uVar3 = 0x8b5e;
+        break;
+      case 7:
+        uVar3 = 0x8b5f;
+        break;
+      case 8:
+        uVar3 = 0x8b60;
+        break;
+      case 9:
+        uVar3 = 0x8b61;
+        break;
+      case 10:
+        uVar3 = 0x8b62;
+        break;
+      case 0xb:
+        uVar3 = 0x8b63;
+        break;
+      case 0xc:
+        uVar3 = 0x8b64;
+        break;
+      case 0xe:
+        uVar3 = 0x7ffe;
+      }
+    }
+  }
+  else {
+    uVar3 = 0x7fff;
+  }
+  return uVar3;
+}
+
+/* __ZN20AddressTempAllocatorC2Ev @ 0x97bb9d04 (4 bytes) */
+int __ZN20AddressTempAllocatorC2Ev(this)
+  void *this;
+{
+  *(undefined4 *)((int)this + 4) = 0;
+  *(undefined4 *)this = 0;
+  return;
+}
+
+/* __ZN20AddressTempAllocatorC1Ev @ 0x97bb9d08 (4 bytes) */
+int __ZN20AddressTempAllocatorC1Ev(this)
+  void *this;
+{
+  return ((int (*)())__ZN20AddressTempAllocatorC4Ev)(this);
+}
+
+/* __ZN20AddressTempAllocatorC4Ev @ 0x97bb9d0c (16 bytes) */
+int __ZN20AddressTempAllocatorC4Ev(this)
+  void *this;
+{
+  *(undefined4 *)((int)this + 4) = 0;
+  *(undefined4 *)this = 0;
+  return;
+}
+
+/* __ZN20AddressTempAllocatorD2Ev @ 0x97bb9d1c (8 bytes) */
+int __ZN20AddressTempAllocatorD2Ev(this)
+  void *this;
+{
+  return ((int (*)())__ZN20AddressTempAllocatorD4Ev)(this);
+}
+
+/* __ZN20AddressTempAllocatorD1Ev @ 0x97bb9d24 (8 bytes) */
+int __ZN20AddressTempAllocatorD1Ev(this)
+  void *this;
+{
+  return ((int (*)())__ZN20AddressTempAllocatorD4Ev)(this);
+}
+
+/* __ZN20AddressTempAllocatorD4Ev @ 0x97bb9d2c (16 bytes) */
+int __ZN20AddressTempAllocatorD4Ev(this)
+  void *this;
+{
+  if (*(int *)this == 0) {
+    return;
+  }
+  return _free(*(int *)this);
+}
+
+/* AddressTempAllocator__getTemporary @ 0x97bb9d3c (316 bytes) */
+int AddressTempAllocator__getTemporary(this)
+  unsigned char * this;
+{
+  int oldCapacity;
+  int copyOffset;
+  int slotValue;
+  uint capacity;
+  int table;
+  int *slotCursor;
+  int oldTable;
+  int copyIdx;
+  int slotOffset;
+  uint slot;
+  int copyLeft;
+  
+  slot = 0;
+  capacity = *(uint *)(this + 4);
+  slotOffset = 0;
+  if (capacity != 0) {
+    slotCursor = *(int **)this;
+    slotValue = *slotCursor;
+    while (slotValue != 0) {
+      slot = slot + 1;
+      slotOffset = slot * 4;
+      if (capacity <= slot) break;
+      slotCursor = slotCursor + 1;
+      slotValue = *slotCursor;
+    }
+  }
+  if (capacity <= slot) {
+    table = _malloc(capacity * 4 + 0x40);
+    oldCapacity = *(int *)(this + 4);
+    copyIdx = 0;
+    if (oldCapacity != 0) {
+      oldTable = *(int *)this;
+      copyLeft = oldCapacity;
+      do {
+        copyOffset = copyIdx * 4;
+        copyIdx = copyIdx + 1;
+        *(undefined4 *)(copyOffset + table) = *(undefined4 *)(copyOffset + oldTable);
+        copyLeft = copyLeft + -1;
+      } while (copyLeft != 0);
+    }
+    _memset(oldCapacity * 4 + table,0,0x40);
+    if (*(int *)this != 0) {
+      _free(*(int *)this);
+    }
+    *(int *)this = table;
+    capacity = *(int *)(this + 4) + 0x10;
+    *(uint *)(this + 4) = capacity;
+    if (slot < capacity) {
+      if (*(int *)(slotOffset + table) != 0) {
+        slotCursor = (int *)(slot * 4 + table);
+        do {
+          slot = slot + 1;
+          slotOffset = slot * 4;
+          if (capacity <= slot) break;
+          slotCursor = slotCursor + 1;
+        } while (*slotCursor != 0);
+      }
+      goto LAB_97bb9e58;
+    }
+  }
+  table = *(int *)this;
+LAB_97bb9e58:
+  *(undefined4 *)(slotOffset + table) = 1;
+  return slot;
+}
+
+/* AddressTempAllocator__releaseTemporary @ 0x97bb9e78 (20 bytes) */
+int AddressTempAllocator__releaseTemporary(this, param_2)
+  unsigned char * this;
+  uint param_2;
+{
+  *(undefined4 *)(param_2 * 4 + *(int *)this) = 0;
+  return;
+}
+
+/* __ZN18TemporaryAllocatorC2Ev @ 0x97bb9e8c (4 bytes) */
+int __ZN18TemporaryAllocatorC2Ev(this)
+  void *this;
+{
+  int iVar1;
+  
+  iVar1 = 0x19;
+  do {
+    *(undefined4 *)this = 0;
+    *(undefined4 *)((int)this + 100) = 0;
+    this = (void *)((int)this + 4);
+    iVar1 = iVar1 + -1;
+  } while (iVar1 != 0);
+  return;
+}
+

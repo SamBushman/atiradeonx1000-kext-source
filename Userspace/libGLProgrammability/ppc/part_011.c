@@ -2744,14 +2744,61 @@ LAB_97bbfb3c:
 }
 
 /* TIntermAggregate__compileNode @ 0x97bbfca4 (4308 bytes) */
-int TIntermAggregate__compileNode(this, compiler, parseOperand2, param_4, param_5, param_6)
+int TIntermAggregate__compileNode(this, compiler, parseOperand2, strayArg4, strayArg5, strayArg6)
   unsigned char * this;
   unsigned char * compiler;
   unsigned char ** parseOperand2;
-  int param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+  int strayArg4;
+  undefined4 strayArg5;
+  undefined4 strayArg6;
 {
+  unsigned char *constructedType;
+  unsigned char *paramType;
+  char *functionNameData;
+  char *nodeType;
+  undefined4 functionIsEmpty;
+  undefined4 newParamOperand;
+  undefined4 labelLength;
+  undefined4 sourceLine;
+  int *childTypeObj;
+  int *operandTypeObj;
+  int *queuedNode;
+  int lastOpIndexNow;
+  int callArgTypeKind;
+  int callArgTypeVtable;
+  int lastParamOpIndex;
+  int functionFirstOp;
+  int copyBackIndex;
+  int paramByteOffset;
+  int lastOpBefore;
+  int pendingQueueSize;
+  int mainNameCompare;
+  int operandsLeft;
+  int argTypeKind;
+  int argTypeVtable;
+  int curLastOpIndex;
+  int paramScanIndex;
+  int returnNameData;
+  int isWriteableFlag;
+  int paramSetupIndex;
+  int lastOperation;
+  int ppStream;
+  uint operatorOffset;
+  uint ppStreamType;
+  uint srcOperandOffset;
+  uint lastOpIndexAtEnd;
+  uint opHeaderWord;
+  int logicalSize;
+  int firstChildTypeInfo;
+  int src2SelectCode;
+  int headerOpcode;
+  int lastOpIndex;
+  int paramIndex;
+  int paramOperandArray;
+  int operatorTimes4;
+  int typeKindCode;
+  int callNestingDepth;
+  int functionIndex;
   int *refCountPtr;
   int oldRefCount;
   int newRefCount;
@@ -2760,19 +2807,17 @@ int TIntermAggregate__compileNode(this, compiler, parseOperand2, param_4, param_
   int name3;
   int name4;
   bool hasChildren;
-  byte bVar2;
-  ushort uVar3;
-  byte *newlineCharPtr;
-  undefined **ppuVar5;
-  int iVar6;
-  undefined4 uVar7;
-  int iVar8;
-  char *pcVar9;
-  unsigned char * pTVar10;
-  int *piVar11;
+  byte terminalChar;
+  ushort operandGLType;
+  byte *terminalCharPtr;
+  undefined **stackTypeVtable;
+  int aggregateOp;
+  undefined4 carriedR4;
+  int calleeNameObj;
+  unsigned char *resultType;
   unsigned char ** childOperandCopies;
-  unsigned char * this_00;
-  unsigned char * this_01;
+  unsigned char * functionTable;
+  unsigned char * operandCopy;
   undefined4 r4Out0;
   undefined4 r4In0;
   undefined4 r4In1;
@@ -2795,27 +2840,26 @@ int TIntermAggregate__compileNode(this, compiler, parseOperand2, param_4, param_
   undefined4 r4Out13;
   undefined4 r4In6;
   undefined4 r4In7;
-  unsigned char ** ppPVar13;
-  unsigned char ** ppPVar14;
-  unsigned char * a2;
-  uint uVar15;
-  int iVar16;
+  unsigned char ** operandArraySel;
+  unsigned char ** paramSlotPtr;
+  unsigned char * opHeaderOrParamSlotPtr;
+  uint returnTypeBits;
+  int defReturnNameData;
   uint operatorCode;
-  uint uVar17;
   uint r10In0;
   int childCount;
   unsigned char ** childOperands;
-  int ppStream;
-  undefined4 *puVar21;
-  unsigned char * pPVar22;
-  undefined4 uVar23;
-  uint *puVar24;
+  int labelNameObj;
+  undefined4 *paramListCursor;
+  unsigned char * functionStack;
+  undefined4 returnValueName;
+  uint *srcSlotCursor;
   unsigned char * childOperand;
   undefined4 *childCursor;
-  void *pvVar27;
+  void *operandTemp;
   char reservation;
   byte cr0Reg;
-  undefined8 uVar28;
+  undefined8 resultAndR4Pair;
   uint opHeaderAndFlags [2];
   undefined **opDest0;
   uint opDest1;
@@ -2833,8 +2877,8 @@ int TIntermAggregate__compileNode(this, compiler, parseOperand2, param_4, param_
   uint stackTypeArraySize;
   uint stackTypeBits;
   undefined **destroyAllocatorArg [4];
-  unsigned char * local_50;
-  unsigned char * local_4c;
+  unsigned char * paramTempOperand;
+  unsigned char * argTempOperand;
   unsigned char * resultOperand [3];
   
   childOperands = (unsigned char **)0x0;
@@ -2856,83 +2900,83 @@ int TIntermAggregate__compileNode(this, compiler, parseOperand2, param_4, param_
   ppStream = *(int *)(compiler + 0x70);
   childCount = *(int *)(this + 0x3c) - *(int *)(this + 0x38) >> 2;
   opLine = (*(code *)**(undefined4 **)this)
-                       (this,compiler,parseOperand2,param_4,param_5,param_6,*(int *)(this + 0x38));
-  uVar7 = (*(code *)**(undefined4 **)this)(this);
-  *(undefined4 *)(compiler + 0x90) = uVar7;
-  iVar6 = *(int *)(this + 0x30);
-  if (iVar6 == 3) {
+                       (this,compiler,parseOperand2,strayArg4,strayArg5,strayArg6,*(int *)(this + 0x38));
+  sourceLine = (*(code *)**(undefined4 **)this)(this);
+  *(undefined4 *)(compiler + 0x90) = sourceLine;
+  aggregateOp = *(int *)(this + 0x30);
+  if (aggregateOp == 3) {
     name = (**(code **)(*(int *)this + 0x6c))(this);
-    newlineCharPtr = DAT_a7b7bd04;
+    terminalCharPtr = DAT_a7b7bd04;
     *(byte *)(*(int *)(name + 4) + *(int *)(*(int *)(name + 4) + -0xc)) = *DAT_a7b7bd04;
-    uVar7 = _strlen(*(undefined4 *)(name + 4));
+    labelLength = _strlen(*(undefined4 *)(name + 4));
     name = (**(code **)(*(int *)this + 0x6c))(this);
-    *(byte *)(*(int *)(name + 4) + *(int *)(*(int *)(name + 4) + -0xc)) = *newlineCharPtr;
-    _PPStreamAddLabel(ppStream,*(undefined4 *)(name + 4),uVar7);
+    *(byte *)(*(int *)(name + 4) + *(int *)(*(int *)(name + 4) + -0xc)) = *terminalCharPtr;
+    _PPStreamAddLabel(ppStream,*(undefined4 *)(name + 4),labelLength);
     name = (**(code **)(*(int *)this + 0x6c))(this);
-    *(byte *)(*(int *)(name + 4) + *(int *)(*(int *)(name + 4) + -0xc)) = *newlineCharPtr;
-    iVar6 = FunctionTable__addFunction(*(unsigned char **)(compiler + 0x6c),*(char **)(name + 4));
+    *(byte *)(*(int *)(name + 4) + *(int *)(*(int *)(name + 4) + -0xc)) = *terminalCharPtr;
+    functionIndex = FunctionTable__addFunction(*(unsigned char **)(compiler + 0x6c),*(char **)(name + 4));
     name2 = (**(code **)(*(int *)this + 0x6c))(this);
-    *(byte *)(*(int *)(name2 + 4) + *(int *)(*(int *)(name2 + 4) + -0xc)) = *newlineCharPtr;
+    *(byte *)(*(int *)(name2 + 4) + *(int *)(*(int *)(name2 + 4) + -0xc)) = *terminalCharPtr;
     ParseFunctionStack__push((unsigned char *)(compiler + 0x58),*(char **)(name2 + 4));
     name2 = (**(code **)(*(int *)this + 0x6c))(this);
-    *(byte *)(*(int *)(name2 + 4) + *(int *)(*(int *)(name2 + 4) + -0xc)) = *newlineCharPtr;
-    iVar8 = _memcmp(*(undefined4 *)(name2 + 4),"main(",5);
-    if (iVar8 == 0) {
+    *(byte *)(*(int *)(name2 + 4) + *(int *)(*(int *)(name2 + 4) + -0xc)) = *terminalCharPtr;
+    mainNameCompare = _memcmp(*(undefined4 *)(name2 + 4),"main(",5);
+    if (mainNameCompare == 0) {
       parseOperand2 = (unsigned char **)0x0;
-      FunctionTable__setFirstOp(*(unsigned char **)(compiler + 0x6c),iVar6,0);
+      FunctionTable__setFirstOp(*(unsigned char **)(compiler + 0x6c),functionIndex,0);
       *(undefined4 *)(compiler + 0xac) = 1;
-      while (iVar8 = ((int (*)())size)((unsigned char *)(compiler + 0x4c)), iVar8 != 0) {
-        piVar11 = (int *)fetch((unsigned char *)(compiler + 0x4c));
-        (**(code **)(*piVar11 + 0xc))(piVar11,compiler);
+      while (pendingQueueSize = ((int (*)())size)((unsigned char *)(compiler + 0x4c)), pendingQueueSize != 0) {
+        queuedNode = (int *)fetch((unsigned char *)(compiler + 0x4c));
+        (**(code **)(*queuedNode + 0xc))(queuedNode,compiler);
       }
     }
     else {
-      iVar8 = TPPStreamCompiler__LastOperationIndex(compiler);
+      lastOpBefore = TPPStreamCompiler__LastOperationIndex(compiler);
       parseOperand2 = (unsigned char **)0x1;
-      if (iVar8 != -1) {
-        parseOperand2 = (unsigned char **)(iVar8 + 1);
+      if (lastOpBefore != -1) {
+        parseOperand2 = (unsigned char **)(lastOpBefore + 1);
       }
-      FunctionTable__setFirstOp(*(unsigned char **)(compiler + 0x6c),iVar6,(uint)parseOperand2);
+      FunctionTable__setFirstOp(*(unsigned char **)(compiler + 0x6c),functionIndex,(uint)parseOperand2);
     }
     (**(code **)(*(int *)this + 0x38))(&stackType,this);
-    uVar15 = stackTypeBits & 0x1f80000;
-    cr0Reg = (uVar15 == 0) << 1;
+    returnTypeBits = stackTypeBits & 0x1f80000;
+    cr0Reg = (returnTypeBits == 0) << 1;
     stackType = &PTR___ZN5TTypeD1Ev_a7b7d730;
-    uVar7 = r4In0;
-    if (uVar15 != 0) {
-      name2 = (**(code **)(*(int *)this + 0x6c))(this,r4In0,parseOperand2,param_4,param_5,param_6,uVar15);
-      iVar16 = *(int *)(name2 + 4);
-      *(byte *)(iVar16 + *(int *)(iVar16 + -0xc)) = *DAT_a7b7bd04;
-      uVar7 = *(undefined4 *)(name2 + 4);
-      pcVar9 = (char *)(**(code **)(*(int *)this + 0x3c))
-                                 (this,r4In1,parseOperand2,param_4,param_5,param_6,iVar16,name2);
-      resultOperand[0] = (unsigned char *)TPPStreamCompiler__newReturnValue((unsigned char *)compiler,pcVar9,uVar7)
+    carriedR4 = r4In0;
+    if (returnTypeBits != 0) {
+      name2 = (**(code **)(*(int *)this + 0x6c))(this,r4In0,parseOperand2,strayArg4,strayArg5,strayArg6,returnTypeBits);
+      defReturnNameData = *(int *)(name2 + 4);
+      *(byte *)(defReturnNameData + *(int *)(defReturnNameData + -0xc)) = *DAT_a7b7bd04;
+      carriedR4 = *(undefined4 *)(name2 + 4);
+      nodeType = (char *)(**(code **)(*(int *)this + 0x3c))
+                                 (this,r4In1,parseOperand2,strayArg4,strayArg5,strayArg6,defReturnNameData,name2);
+      resultOperand[0] = (unsigned char *)TPPStreamCompiler__newReturnValue((unsigned char *)compiler,nodeType,carriedR4)
       ;
       parseOperand2 = (unsigned char **)0x1;
-      FunctionTable__setReturnVal(*(unsigned char **)(compiler + 0x6c),iVar6,1);
-      uVar7 = r4Out1;
+      FunctionTable__setReturnVal(*(unsigned char **)(compiler + 0x6c),functionIndex,1);
+      carriedR4 = r4Out1;
     }
   }
   else {
-    uVar7 = r4Out0;
-    if ((iVar6 != 2) && (iVar6 == 1)) {
-      iVar6 = *(int *)(compiler + 0x98);
-      if (0 < iVar6) {
-        uVar28 = ParseFunctionStack__empty((unsigned char *)(compiler + 0x58));
-        uVar7 = (undefined4)uVar28;
-        if ((int)((ulonglong)uVar28 >> 0x20) != 0) {
+    carriedR4 = r4Out0;
+    if ((aggregateOp != 2) && (aggregateOp == 1)) {
+      callNestingDepth = *(int *)(compiler + 0x98);
+      if (0 < callNestingDepth) {
+        resultAndR4Pair = ParseFunctionStack__empty((unsigned char *)(compiler + 0x58));
+        carriedR4 = (undefined4)resultAndR4Pair;
+        if ((int)((ulonglong)resultAndR4Pair >> 0x20) != 0) {
           ((int (*)())store)((unsigned char *)(compiler + 0x4c),this);
           return (unsigned char *)0x0;
         }
-        iVar6 = *(int *)(compiler + 0x98);
+        callNestingDepth = *(int *)(compiler + 0x98);
       }
-      *(int *)(compiler + 0x98) = iVar6 + 1;
+      *(int *)(compiler + 0x98) = callNestingDepth + 1;
     }
   }
   hasChildren = childCount != 0;
   if (hasChildren) {
     childOperands = (unsigned char **)_malloc(childCount << 2);
-    uVar7 = r4Out2;
+    carriedR4 = r4Out2;
     childOperandCopies = childOperands;
     for (childCursor = *(undefined4 **)(this + 0x38); childCursor != *(undefined4 **)(this + 0x3c);
         childCursor = childCursor + 1) {
@@ -2940,17 +2984,17 @@ int TIntermAggregate__compileNode(this, compiler, parseOperand2, param_4, param_
       *childOperandCopies = childOperand;
       childOperandCopies = childOperandCopies + 1;
       ((int (*)())ParseSymbolTable__processOperand)(*(unsigned char **)(compiler + 0x68),childOperand);
-      uVar7 = r4Out3;
+      carriedR4 = r4Out3;
     }
   }
-  uVar28 = CONCAT44(resultOperand[0],uVar7);
+  resultAndR4Pair = CONCAT44(resultOperand[0],carriedR4);
   operatorCode = *(uint *)(this + 0x30);
   r10In0 = (*(uint *)(&_operatorToken + operatorCode * 4) & 0xff) << 0x12 |
        childCount << 0x1d | opHeaderAndFlags[0] & 0x1c03ffff;
-  uVar15 = r10In0;
+  opHeaderWord = r10In0;
   switch(operatorCode) {
   case 0x15:
-    uVar15 = childCount << 0x1d | opHeaderAndFlags[0] & 0x1c03ffff | 0x8c0000;
+    opHeaderWord = childCount << 0x1d | opHeaderAndFlags[0] & 0x1c03ffff | 0x8c0000;
   case 0x17:
   case 0x1f:
   case 0x20:
@@ -2999,37 +3043,37 @@ int TIntermAggregate__compileNode(this, compiler, parseOperand2, param_4, param_
   case 0xa1:
   case 0xa2:
   case 0xa3:
-    opHeaderAndFlags[0] = uVar15;
-    pTVar10 = (unsigned char *)(**(code **)(*(int *)this + 0x3c))
-                                 (this,uVar7,parseOperand2,param_4,param_5,operatorCode,operatorCode * 4,r10In0);
-    uVar28 = TPPStreamCompiler__newTemporary(compiler,pTVar10);
+    opHeaderAndFlags[0] = opHeaderWord;
+    resultType = (unsigned char *)(**(code **)(*(int *)this + 0x3c))
+                                 (this,carriedR4,parseOperand2,strayArg4,strayArg5,operatorCode,operatorCode * 4,r10In0);
+    resultAndR4Pair = TPPStreamCompiler__newTemporary(compiler,resultType);
     operatorCode = *(uint *)(this + 0x30);
-    uVar15 = opHeaderAndFlags[0];
+    opHeaderWord = opHeaderAndFlags[0];
     break;
   case 0x25:
-    uVar28 = CONCAT44(childOperands[childCount + -1],uVar7);
+    resultAndR4Pair = CONCAT44(childOperands[childCount + -1],carriedR4);
   }
-  opHeaderAndFlags[0] = uVar15;
-  resultOperand[0] = (unsigned char *)((ulonglong)uVar28 >> 0x20);
+  opHeaderAndFlags[0] = opHeaderWord;
+  resultOperand[0] = (unsigned char *)((ulonglong)resultAndR4Pair >> 0x20);
   if ((((resultOperand[0] != (unsigned char *)0x0) && (operatorCode != 3)) && (*(int *)resultOperand[0] != 0)) &&
-     (piVar11 = *(int **)(*(int *)resultOperand[0] + 0xc), piVar11 != (int *)0x0)) {
-    iVar6 = (**(code **)(*piVar11 + 0x24))(piVar11,(int)uVar28,parseOperand2,param_4,param_5,operatorCode);
-    uVar28 = CONCAT44(resultOperand[0],r4Out4);
-    if (iVar6 == 0xd) {
+     (operandTypeObj = *(int **)(*(int *)resultOperand[0] + 0xc), operandTypeObj != (int *)0x0)) {
+    typeKindCode = (**(code **)(*operandTypeObj + 0x24))(operandTypeObj,(int)resultAndR4Pair,parseOperand2,strayArg4,strayArg5,operatorCode);
+    resultAndR4Pair = CONCAT44(resultOperand[0],r4Out4);
+    if (typeKindCode == 0xd) {
       *(undefined4 *)(compiler + 0xa4) = 1;
     }
     operatorCode = *(uint *)(this + 0x30);
   }
-  resultOperand[0] = (unsigned char *)((ulonglong)uVar28 >> 0x20);
+  resultOperand[0] = (unsigned char *)((ulonglong)resultAndR4Pair >> 0x20);
   if (0xa3 < operatorCode) {
 switchD_97bc03dc_caseD_0:
     TType__getCompleteString(&stackType,this + 8);
-    bVar2 = *DAT_a7b7bd04;
-    *(byte *)(stackTypeArraySize + *(int *)(stackTypeArraySize - 0xc)) = bVar2;
+    terminalChar = *DAT_a7b7bd04;
+    *(byte *)(stackTypeArraySize + *(int *)(stackTypeArraySize - 0xc)) = terminalChar;
     TPPStreamCompiler__error
               (compiler,(char *)0x1,(char *)0x0,
                "TIntermAggregate::compileNode- unhandle operation %s at %d\n",stackTypeArraySize,
-               *(undefined4 *)(this + 4),(uint)bVar2,r10In0);
+               *(undefined4 *)(this + 4),(uint)terminalChar,r10In0);
     refCountPtr = (int *)(stackTypeArraySize - 4);
     destroyAllocatorArg[0] = stackType;
     do {
@@ -3046,7 +3090,7 @@ switchD_97bc03dc_caseD_0:
     }
     goto switchD_97bc03dc_caseD_25;
   }
-  iVar6 = operatorCode * 4;
+  operatorTimes4 = operatorCode * 4;
   switch(operatorCode) {
   default:
     goto switchD_97bc03dc_caseD_0;
@@ -3054,99 +3098,99 @@ switchD_97bc03dc_caseD_0:
     *(int *)(compiler + 0x98) = *(int *)(compiler + 0x98) + -1;
     break;
   case 2:
-    iVar6 = 0;
+    paramOperandArray = 0;
     childOperandCopies = (unsigned char **)0x0;
     if (hasChildren) {
-      iVar6 = _malloc(childCount << 2);
+      paramOperandArray = _malloc(childCount << 2);
       childOperandCopies = (unsigned char **)_malloc(childCount << 2);
-      uVar28 = CONCAT44(resultOperand[0],r4Out12);
+      resultAndR4Pair = CONCAT44(resultOperand[0],r4Out12);
     }
-    newlineCharPtr = DAT_a7b7bd04;
-    resultOperand[0] = (unsigned char *)((ulonglong)uVar28 >> 0x20);
-    ppStream = 0;
+    terminalCharPtr = DAT_a7b7bd04;
+    resultOperand[0] = (unsigned char *)((ulonglong)resultAndR4Pair >> 0x20);
+    paramSetupIndex = 0;
     childCursor = *(undefined4 **)(this + 0x38);
     if (0 < childCount) {
       do {
-        iVar8 = ppStream * 4;
+        paramByteOffset = paramSetupIndex * 4;
         name4 = (**(code **)(*(int *)this + 0x6c))(this);
-        bVar2 = *newlineCharPtr;
-        *(byte *)(*(int *)(name4 + 4) + *(int *)(*(int *)(name4 + 4) + -0xc)) = bVar2;
-        pcVar9 = *(char **)(name4 + 4);
-        piVar11 = (int *)(**(code **)(*(int *)*childCursor + 0x14))
-                                   ((int *)*childCursor,r4In5,parseOperand2,param_4,param_5,operatorCode,(uint)bVar2);
-        pTVar10 = (unsigned char *)(**(code **)(*piVar11 + 0x3c))(piVar11);
-        uVar7 = TPPStreamCompiler__newParam(compiler,pTVar10,pcVar9,ppStream);
-        *(undefined4 *)(iVar8 + iVar6) = uVar7;
-        if ((*(int *)(childOperands[ppStream] + 0xc) == 0) && (*(int *)(childOperands[ppStream] + 8) == 0)) {
-          childOperandCopies[ppStream] = (unsigned char *)0x0;
+        terminalChar = *terminalCharPtr;
+        *(byte *)(*(int *)(name4 + 4) + *(int *)(*(int *)(name4 + 4) + -0xc)) = terminalChar;
+        functionNameData = *(char **)(name4 + 4);
+        childTypeObj = (int *)(**(code **)(*(int *)*childCursor + 0x14))
+                                   ((int *)*childCursor,r4In5,parseOperand2,strayArg4,strayArg5,operatorCode,(uint)terminalChar);
+        paramType = (unsigned char *)(**(code **)(*childTypeObj + 0x3c))(childTypeObj);
+        newParamOperand = TPPStreamCompiler__newParam(compiler,paramType,functionNameData,paramSetupIndex);
+        *(undefined4 *)(paramByteOffset + paramOperandArray) = newParamOperand;
+        if ((*(int *)(childOperands[paramSetupIndex] + 0xc) == 0) && (*(int *)(childOperands[paramSetupIndex] + 8) == 0)) {
+          childOperandCopies[paramSetupIndex] = (unsigned char *)0x0;
         }
         else {
-          this_01 = operator_new(0x38);
-          __ZN12ParseOperandC1ERKS_(this_01,childOperands[ppStream]);
-          childOperandCopies[ppStream] = this_01;
-          childOperand = childOperands[ppStream];
+          operandCopy = operator_new(0x38);
+          __ZN12ParseOperandC1ERKS_(operandCopy,childOperands[paramSetupIndex]);
+          childOperandCopies[paramSetupIndex] = operandCopy;
+          childOperand = childOperands[paramSetupIndex];
           if (*(int *)(childOperand + 0xc) != 0) {
-            pvVar27 = operator_new(0x38);
-            __ZN12ParseOperandC1ERKS_(pvVar27,*(unsigned char **)(childOperands[ppStream] + 0xc));
-            *(void **)(this_01 + 0xc) = pvVar27;
-            childOperand = childOperands[ppStream];
+            operandTemp = operator_new(0x38);
+            __ZN12ParseOperandC1ERKS_(operandTemp,*(unsigned char **)(childOperands[paramSetupIndex] + 0xc));
+            *(void **)(operandCopy + 0xc) = operandTemp;
+            childOperand = childOperands[paramSetupIndex];
           }
           if (*(int *)(childOperand + 8) != 0) {
-            childOperand = childOperandCopies[ppStream];
-            pvVar27 = operator_new(0x38);
-            __ZN12ParseOperandC1ERKS_(pvVar27,*(unsigned char **)(childOperands[ppStream] + 8));
-            *(void **)(childOperand + 8) = pvVar27;
+            childOperand = childOperandCopies[paramSetupIndex];
+            operandTemp = operator_new(0x38);
+            __ZN12ParseOperandC1ERKS_(operandTemp,*(unsigned char **)(childOperands[paramSetupIndex] + 8));
+            *(void **)(childOperand + 8) = operandTemp;
           }
         }
-        parseOperand2 = childOperands + ppStream;
-        ppStream = ppStream + 1;
-        param_4 = 0;
-        TPPStreamCompiler__assignOperands(compiler,(unsigned char **)(iVar6 + iVar8),parseOperand2,0);
-        uVar28 = CONCAT44(resultOperand[0],r4Out13);
+        parseOperand2 = childOperands + paramSetupIndex;
+        paramSetupIndex = paramSetupIndex + 1;
+        strayArg4 = 0;
+        TPPStreamCompiler__assignOperands(compiler,(unsigned char **)(paramOperandArray + paramByteOffset),parseOperand2,0);
+        resultAndR4Pair = CONCAT44(resultOperand[0],r4Out13);
         childCursor = childCursor + 1;
-      } while (ppStream < childCount);
+      } while (paramSetupIndex < childCount);
     }
-    resultOperand[0] = (unsigned char *)((ulonglong)uVar28 >> 0x20);
+    resultOperand[0] = (unsigned char *)((ulonglong)resultAndR4Pair >> 0x20);
     opHeaderAndFlags[0] = opHeaderAndFlags[0] & 0x1c03ffff | 0x1300000;
-    iVar8 = 0;
-    ppStream = (**(code **)(*(int *)this + 0x6c))
-                       (this,(int)uVar28,parseOperand2,param_4,param_5,operatorCode,*(int *)this);
-    newlineCharPtr = DAT_a7b7bd04;
-    *(byte *)(*(int *)(ppStream + 4) + *(int *)(*(int *)(ppStream + 4) + -0xc)) = *DAT_a7b7bd04;
-    opLabelLength = _strlen(*(undefined4 *)(ppStream + 4));
+    copyBackIndex = 0;
+    labelNameObj = (**(code **)(*(int *)this + 0x6c))
+                       (this,(int)resultAndR4Pair,parseOperand2,strayArg4,strayArg5,operatorCode,*(int *)this);
+    terminalCharPtr = DAT_a7b7bd04;
+    *(byte *)(*(int *)(labelNameObj + 4) + *(int *)(*(int *)(labelNameObj + 4) + -0xc)) = *DAT_a7b7bd04;
+    opLabelLength = _strlen(*(undefined4 *)(labelNameObj + 4));
     name3 = (**(code **)(*(int *)this + 0x6c))(this);
-    a2 = (unsigned char *)opHeaderAndFlags;
-    uVar7 = 0;
-    *(byte *)(*(int *)(name3 + 4) + *(int *)(*(int *)(name3 + 4) + -0xc)) = *newlineCharPtr;
-    pcVar9 = *(char **)(name3 + 4);
-    TPPStreamCompiler__AddOperation(compiler,(unsigned char **)0x0,a2,pcVar9,0);
+    opHeaderOrParamSlotPtr = (unsigned char *)opHeaderAndFlags;
+    carriedR4 = 0;
+    *(byte *)(*(int *)(name3 + 4) + *(int *)(*(int *)(name3 + 4) + -0xc)) = *terminalCharPtr;
+    functionNameData = *(char **)(name3 + 4);
+    TPPStreamCompiler__AddOperation(compiler,(unsigned char **)0x0,opHeaderOrParamSlotPtr,functionNameData,0);
     if (0 < childCount) {
       do {
-        ppStream = ParseOperand__isWriteable(childOperands[iVar8]);
-        if (ppStream != 0) {
-          ppPVar13 = childOperandCopies;
-          if (childOperandCopies[iVar8] == (unsigned char *)0x0) {
-            ppPVar13 = childOperands;
+        isWriteableFlag = ParseOperand__isWriteable(childOperands[copyBackIndex]);
+        if (isWriteableFlag != 0) {
+          operandArraySel = childOperandCopies;
+          if (childOperandCopies[copyBackIndex] == (unsigned char *)0x0) {
+            operandArraySel = childOperands;
           }
-          a2 = (unsigned char *)(iVar6 + iVar8 * 4);
-          pcVar9 = (char *)0x0;
-          TPPStreamCompiler__assignOperands(compiler,ppPVar13 + iVar8,(unsigned char **)a2,0);
+          opHeaderOrParamSlotPtr = (unsigned char *)(paramOperandArray + copyBackIndex * 4);
+          functionNameData = (char *)0x0;
+          TPPStreamCompiler__assignOperands(compiler,operandArraySel + copyBackIndex,(unsigned char **)opHeaderOrParamSlotPtr,0);
         }
-        pvVar27 = *(void **)(iVar8 * 4 + iVar6);
-        if (pvVar27 != (void *)0x0) {
-          __ZN12ParseOperandD1Ev(pvVar27);
-          __ZdlPv(pvVar27);
+        operandTemp = *(void **)(copyBackIndex * 4 + paramOperandArray);
+        if (operandTemp != (void *)0x0) {
+          __ZN12ParseOperandD1Ev(operandTemp);
+          __ZdlPv(operandTemp);
         }
-        childOperand = childOperandCopies[iVar8];
+        childOperand = childOperandCopies[copyBackIndex];
         if (childOperand != (unsigned char *)0x0) {
           __ZN12ParseOperandD1Ev(childOperand);
           __ZdlPv(childOperand);
         }
-        iVar8 = iVar8 + 1;
-      } while (iVar8 < childCount);
+        copyBackIndex = copyBackIndex + 1;
+      } while (copyBackIndex < childCount);
     }
-    if (iVar6 != 0) {
-      _free(iVar6);
+    if (paramOperandArray != 0) {
+      _free(paramOperandArray);
     }
     if (childOperandCopies != (unsigned char **)0x0) {
       _free(childOperandCopies);
@@ -3154,76 +3198,76 @@ switchD_97bc03dc_caseD_0:
     (**(code **)(*(int *)this + 0x38))(&stackType,this);
     stackType = &PTR___ZN5TTypeD1Ev_a7b7d730;
     if ((stackTypeBits & 0x1f80000) != 0) {
-      name = (**(code **)(*(int *)this + 0x6c))(this,r4In6,a2,pcVar9,uVar7,operatorCode,stackTypeBits & 0x1f80000)
+      name = (**(code **)(*(int *)this + 0x6c))(this,r4In6,opHeaderOrParamSlotPtr,functionNameData,carriedR4,operatorCode,stackTypeBits & 0x1f80000)
       ;
-      ppStream = *(int *)(name + 4);
-      *(byte *)(ppStream + *(int *)(ppStream + -0xc)) = *DAT_a7b7bd04;
-      uVar23 = *(undefined4 *)(name + 4);
-      pcVar9 = (char *)(**(code **)(*(int *)this + 0x3c))
-                                 (this,r4In7,a2,pcVar9,uVar7,operatorCode,ppStream,name);
+      returnNameData = *(int *)(name + 4);
+      *(byte *)(returnNameData + *(int *)(returnNameData + -0xc)) = *DAT_a7b7bd04;
+      returnValueName = *(undefined4 *)(name + 4);
+      nodeType = (char *)(**(code **)(*(int *)this + 0x3c))
+                                 (this,r4In7,opHeaderOrParamSlotPtr,nodeType,carriedR4,operatorCode,returnNameData,name);
       resultOperand[0] = (unsigned char *)
-                    TPPStreamCompiler__newReturnValue((unsigned char *)compiler,pcVar9,uVar23);
+                    TPPStreamCompiler__newReturnValue((unsigned char *)compiler,nodeType,returnValueName);
     }
     break;
   case 3:
-    pPVar22 = (unsigned char *)(compiler + 0x58);
-    childCursor = (undefined4 *)ParseFunctionStack__getCurrentParamList(pPVar22);
-    childOperandCopies = (unsigned char **)ParseFunctionStack__getCurrentNumParams(pPVar22);
-    pcVar9 = (char *)ParseFunctionStack__current(pPVar22);
-    iVar6 = FunctionTable__findFunction
-                      (*(unsigned char **)(compiler + 0x6c),pcVar9,parseOperand2,param_4,param_5,operatorCode);
-    iVar8 = FunctionTable__getFirstOp(*(unsigned char **)(compiler + 0x6c),iVar6);
-    if (iVar8 == 0) {
+    functionStack = (unsigned char *)(compiler + 0x58);
+    childCursor = (undefined4 *)ParseFunctionStack__getCurrentParamList(functionStack);
+    childOperandCopies = (unsigned char **)ParseFunctionStack__getCurrentNumParams(functionStack);
+    functionNameData = (char *)ParseFunctionStack__current(functionStack);
+    functionIndex = FunctionTable__findFunction
+                      (*(unsigned char **)(compiler + 0x6c),functionNameData,parseOperand2,strayArg4,strayArg5,operatorCode);
+    functionFirstOp = FunctionTable__getFirstOp(*(unsigned char **)(compiler + 0x6c),functionIndex);
+    if (functionFirstOp == 0) {
 LAB_97bc06f4:
-      this_00 = *(unsigned char **)(compiler + 0x6c);
-      uVar7 = 0;
+      functionTable = *(unsigned char **)(compiler + 0x6c);
+      functionIsEmpty = 0;
     }
     else {
-      iVar8 = ParseFunctionStack__getLastParamOpIndex(pPVar22);
-      iVar16 = TPPStreamCompiler__LastOperationIndex(compiler);
-      if (iVar8 != iVar16) goto LAB_97bc06f4;
-      this_00 = *(unsigned char **)(compiler + 0x6c);
-      uVar7 = 1;
+      lastParamOpIndex = ParseFunctionStack__getLastParamOpIndex(functionStack);
+      lastOpIndexNow = TPPStreamCompiler__LastOperationIndex(compiler);
+      if (lastParamOpIndex != lastOpIndexNow) goto LAB_97bc06f4;
+      functionTable = *(unsigned char **)(compiler + 0x6c);
+      functionIsEmpty = 1;
     }
-    FunctionTable__setEmpty(this_00,iVar6,uVar7);
-    ppPVar13 = childOperandCopies;
-    FunctionTable__setNumParams(*(unsigned char **)(compiler + 0x6c),iVar6,(int)childOperandCopies);
-    iVar8 = (**(code **)(*(int *)this + 0x6c))(this);
-    *(byte *)(*(int *)(iVar8 + 4) + *(int *)(*(int *)(iVar8 + 4) + -0xc)) = *DAT_a7b7bd04;
-    pcVar9 = *(char **)(iVar8 + 4);
-    ppStream = *(int *)(*(int *)(ppStream + 0x20) + 4);
-    uVar7 = r4Out5;
-    if ((ppStream == 0) || ((*(uint *)(ppStream + 0xc) & 0x3fc0000) != 0x1340000)) {
+    FunctionTable__setEmpty(functionTable,functionIndex,functionIsEmpty);
+    operandArraySel = childOperandCopies;
+    FunctionTable__setNumParams(*(unsigned char **)(compiler + 0x6c),functionIndex,(int)childOperandCopies);
+    calleeNameObj = (**(code **)(*(int *)this + 0x6c))(this);
+    *(byte *)(*(int *)(calleeNameObj + 4) + *(int *)(*(int *)(calleeNameObj + 4) + -0xc)) = *DAT_a7b7bd04;
+    functionNameData = *(char **)(calleeNameObj + 4);
+    lastOperation = *(int *)(*(int *)(ppStream + 0x20) + 4);
+    carriedR4 = r4Out5;
+    if ((lastOperation == 0) || ((*(uint *)(lastOperation + 0xc) & 0x3fc0000) != 0x1340000)) {
 LAB_97bc0788:
-      ppStream = 0;
+      paramScanIndex = 0;
       if (0 < (int)childOperandCopies) {
         do {
-          ppPVar14 = (unsigned char **)(childCursor + ppStream);
-          if (((int *)childCursor[ppStream] != (int *)0x0) &&
-             ((piVar11 = *(int **)(*(int *)childCursor[ppStream] + 0xc), iVar8 = *piVar11,
-              iVar8 = (**(code **)(iVar8 + 0x24))(piVar11,uVar7,ppPVar13,param_4,param_5,operatorCode,iVar8),
-              iVar8 == 10 ||
-              (piVar11 = *(int **)(*(int *)childCursor[ppStream] + 0xc),
-              iVar8 = (**(code **)(*piVar11 + 0x24))
-                                (piVar11,r4In2,ppPVar13,param_4,param_5,operatorCode,*(int *)childCursor[ppStream]),
-              uVar7 = r4Out6, iVar8 == 0xb)))) {
-            local_50 = (unsigned char *)
+          paramSlotPtr = (unsigned char **)(childCursor + paramScanIndex);
+          if (((int *)childCursor[paramScanIndex] != (int *)0x0) &&
+             ((operandTypeObj = *(int **)(*(int *)childCursor[paramScanIndex] + 0xc), callArgTypeVtable = *operandTypeObj,
+              callArgTypeKind = (**(code **)(callArgTypeVtable + 0x24))(operandTypeObj,carriedR4,operandArraySel,strayArg4,strayArg5,operatorCode,callArgTypeVtable),
+              callArgTypeKind == 10 ||
+              (operandTypeObj = *(int **)(*(int *)childCursor[paramScanIndex] + 0xc),
+              callArgTypeKind = (**(code **)(*operandTypeObj + 0x24))
+                                (operandTypeObj,r4In2,operandArraySel,strayArg4,strayArg5,operatorCode,*(int *)childCursor[paramScanIndex]),
+              carriedR4 = r4Out6, callArgTypeKind == 0xb)))) {
+            paramTempOperand = (unsigned char *)
                        TPPStreamCompiler__newParam
-                                 (compiler,*(unsigned char **)(*(int *)childCursor[ppStream] + 0xc),pcVar9,ppStream);
-            param_4 = 0;
-            TPPStreamCompiler__assignOperands(compiler,&local_50,ppPVar14,0);
-            childOperand = local_50;
-            uVar7 = r4Out7;
-            ppPVar13 = ppPVar14;
-            if (local_50 != (unsigned char *)0x0) {
-              __ZN12ParseOperandD1Ev(local_50);
+                                 (compiler,*(unsigned char **)(*(int *)childCursor[paramScanIndex] + 0xc),functionNameData,paramScanIndex);
+            strayArg4 = 0;
+            TPPStreamCompiler__assignOperands(compiler,&paramTempOperand,paramSlotPtr,0);
+            childOperand = paramTempOperand;
+            carriedR4 = r4Out7;
+            operandArraySel = paramSlotPtr;
+            if (paramTempOperand != (unsigned char *)0x0) {
+              __ZN12ParseOperandD1Ev(paramTempOperand);
               __ZdlPv(childOperand);
-              uVar7 = r4Out8;
-              ppPVar13 = ppPVar14;
+              carriedR4 = r4Out8;
+              operandArraySel = paramSlotPtr;
             }
           }
-          ppStream = ppStream + 1;
-        } while (ppStream < (int)childOperandCopies);
+          paramScanIndex = paramScanIndex + 1;
+        } while (paramScanIndex < (int)childOperandCopies);
       }
       opHeaderAndFlags[1] = 0;
       opAuxA = (undefined **)0x0;
@@ -3239,76 +3283,76 @@ LAB_97bc0788:
       opLabelLength = 0;
       opHeaderAndFlags[0] = 0x1340000;
       opLine = 0;
-      opLine = (*(code *)**(undefined4 **)this)(this,uVar7,ppPVar13,param_4,param_5,operatorCode,0x1340000);
+      opLine = (*(code *)**(undefined4 **)this)(this,carriedR4,operandArraySel,strayArg4,strayArg5,operatorCode,0x1340000);
       TPPStreamCompiler__AddOperation
                 (compiler,(unsigned char **)0x0,(unsigned char *)opHeaderAndFlags,(char *)0x0,0);
     }
     else {
-      ppStream = TPPStreamCompiler__LastOperationIndex(compiler);
-      uVar28 = FunctionTable__getFirstOp(*(unsigned char **)(compiler + 0x6c),iVar6);
-      uVar7 = (undefined4)uVar28;
-      if (ppStream < (int)((ulonglong)uVar28 >> 0x20)) goto LAB_97bc0788;
+      curLastOpIndex = TPPStreamCompiler__LastOperationIndex(compiler);
+      resultAndR4Pair = FunctionTable__getFirstOp(*(unsigned char **)(compiler + 0x6c),functionIndex);
+      carriedR4 = (undefined4)resultAndR4Pair;
+      if (curLastOpIndex < (int)((ulonglong)resultAndR4Pair >> 0x20)) goto LAB_97bc0788;
     }
     if (childCursor != (undefined4 *)0x0) {
-      puVar21 = childCursor;
+      paramListCursor = childCursor;
       if (0 < (int)childOperandCopies) {
         do {
-          pvVar27 = (void *)*puVar21;
-          if (pvVar27 != (void *)0x0) {
-            __ZN12ParseOperandD1Ev(pvVar27);
-            __ZdlPv(pvVar27);
+          operandTemp = (void *)*paramListCursor;
+          if (operandTemp != (void *)0x0) {
+            __ZN12ParseOperandD1Ev(operandTemp);
+            __ZdlPv(operandTemp);
           }
           childOperandCopies = (unsigned char **)((int)childOperandCopies + -1);
-          puVar21 = puVar21 + 1;
+          paramListCursor = paramListCursor + 1;
         } while (childOperandCopies != (unsigned char **)0x0);
       }
       _free(childCursor);
     }
-    ParseFunctionStack__pop(pPVar22);
-    uVar15 = TPPStreamCompiler__LastOperationIndex(compiler);
-    FunctionTable__setLastOp(*(unsigned char **)(compiler + 0x6c),iVar6,uVar15);
+    ParseFunctionStack__pop(functionStack);
+    lastOpIndexAtEnd = TPPStreamCompiler__LastOperationIndex(compiler);
+    FunctionTable__setLastOp(*(unsigned char **)(compiler + 0x6c),functionIndex,lastOpIndexAtEnd);
     break;
   case 4:
-    pPVar22 = (unsigned char *)(compiler + 0x58);
-    iVar6 = 0;
-    uVar28 = ParseFunctionStack__current(pPVar22);
-    uVar7 = (undefined4)uVar28;
+    functionStack = (unsigned char *)(compiler + 0x58);
+    paramIndex = 0;
+    resultAndR4Pair = ParseFunctionStack__current(functionStack);
+    carriedR4 = (undefined4)resultAndR4Pair;
     if (0 < childCount) {
       do {
-        if ((childOperands[iVar6] != (unsigned char *)0x0) &&
-           (((piVar11 = *(int **)(*(int *)childOperands[iVar6] + 0xc), ppStream = *piVar11,
-             ppStream = (**(code **)(ppStream + 0x24))(piVar11,uVar7,parseOperand2,param_4,param_5,operatorCode,ppStream),
-             ppStream == 9 ||
-             (piVar11 = *(int **)(*(int *)childOperands[iVar6] + 0xc),
-             ppStream = (**(code **)(*piVar11 + 0x24))
-                                (piVar11,r4In3,parseOperand2,param_4,param_5,operatorCode,*(int *)childOperands[iVar6]),
-             ppStream == 0xb)) ||
-            (piVar11 = *(int **)(*(int *)childOperands[iVar6] + 0xc),
-            ppStream = (**(code **)(*piVar11 + 0x24))
-                               (piVar11,r4In4,parseOperand2,param_4,param_5,operatorCode,*(int *)childOperands[iVar6]),
-            uVar7 = r4Out9, ppStream == 0xc)))) {
-          local_4c = (unsigned char *)
+        if ((childOperands[paramIndex] != (unsigned char *)0x0) &&
+           (((operandTypeObj = *(int **)(*(int *)childOperands[paramIndex] + 0xc), argTypeVtable = *operandTypeObj,
+             argTypeKind = (**(code **)(argTypeVtable + 0x24))(operandTypeObj,carriedR4,parseOperand2,strayArg4,strayArg5,operatorCode,argTypeVtable),
+             argTypeKind == 9 ||
+             (operandTypeObj = *(int **)(*(int *)childOperands[paramIndex] + 0xc),
+             argTypeKind = (**(code **)(*operandTypeObj + 0x24))
+                                (operandTypeObj,r4In3,parseOperand2,strayArg4,strayArg5,operatorCode,*(int *)childOperands[paramIndex]),
+             argTypeKind == 0xb)) ||
+            (operandTypeObj = *(int **)(*(int *)childOperands[paramIndex] + 0xc),
+            argTypeKind = (**(code **)(*operandTypeObj + 0x24))
+                               (operandTypeObj,r4In4,parseOperand2,strayArg4,strayArg5,operatorCode,*(int *)childOperands[paramIndex]),
+            carriedR4 = r4Out9, argTypeKind == 0xc)))) {
+          argTempOperand = (unsigned char *)
                      TPPStreamCompiler__newParam
-                               (compiler,*(unsigned char **)(*(int *)childOperands[iVar6] + 0xc),
-                                (char *)((ulonglong)uVar28 >> 0x20),iVar6);
-          parseOperand2 = &local_4c;
-          param_4 = 0;
-          TPPStreamCompiler__assignOperands(compiler,childOperands + iVar6,parseOperand2,0);
-          childOperand = local_4c;
-          uVar7 = r4Out10;
-          if (local_4c != (unsigned char *)0x0) {
-            __ZN12ParseOperandD1Ev(local_4c);
+                               (compiler,*(unsigned char **)(*(int *)childOperands[paramIndex] + 0xc),
+                                (char *)((ulonglong)resultAndR4Pair >> 0x20),paramIndex);
+          parseOperand2 = &argTempOperand;
+          strayArg4 = 0;
+          TPPStreamCompiler__assignOperands(compiler,childOperands + paramIndex,parseOperand2,0);
+          childOperand = argTempOperand;
+          carriedR4 = r4Out10;
+          if (argTempOperand != (unsigned char *)0x0) {
+            __ZN12ParseOperandD1Ev(argTempOperand);
             __ZdlPv(childOperand);
-            uVar7 = r4Out11;
+            carriedR4 = r4Out11;
           }
         }
-        iVar6 = iVar6 + 1;
-      } while (iVar6 < childCount);
+        paramIndex = paramIndex + 1;
+      } while (paramIndex < childCount);
     }
-    iVar6 = TPPStreamCompiler__LastOperationIndex(compiler);
-    ParseFunctionStack__setLastParamOpIndex(pPVar22,iVar6);
-    ParseFunctionStack__setCurrentParamList(pPVar22,childOperands);
-    ParseFunctionStack__setCurrentNumParams(pPVar22,childCount);
+    lastOpIndex = TPPStreamCompiler__LastOperationIndex(compiler);
+    ParseFunctionStack__setLastParamOpIndex(functionStack,lastOpIndex);
+    ParseFunctionStack__setCurrentParamList(functionStack,childOperands);
+    ParseFunctionStack__setCurrentNumParams(functionStack,childCount);
     break;
   case 0x15:
   case 0x17:
@@ -3329,69 +3373,69 @@ LAB_97bc0788:
   case 0x50:
   case 0x51:
   case 0x52:
-    param_4 = childCount;
+    strayArg4 = childCount;
     __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_i
               (compiler,resultOperand,childOperands,childCount);
     if (0 < childCount) {
-      puVar24 = opHeaderAndFlags;
-      ppStream = childCount;
+      srcSlotCursor = opHeaderAndFlags;
+      operandsLeft = childCount;
       childOperandCopies = childOperands;
       do {
         childOperand = *childOperandCopies;
         childOperandCopies = childOperandCopies + 1;
         TPPStreamCompiler__getOperandAsSourceVar
-                  ((unsigned char *)&stackType,compiler,childOperand,param_4,param_5,operatorCode,iVar6,r10In0);
-        ppuVar5 = stackType;
-        ppStream = ppStream + -1;
-        puVar24[5] = stackTypeArraySize;
-        puVar24[4] = (uint)ppuVar5;
-        puVar24 = puVar24 + 2;
-      } while (ppStream != 0);
+                  ((unsigned char *)&stackType,compiler,childOperand,strayArg4,strayArg5,operatorCode,operatorTimes4,r10In0);
+        stackTypeVtable = stackType;
+        operandsLeft = operandsLeft + -1;
+        srcSlotCursor[5] = stackTypeArraySize;
+        srcSlotCursor[4] = (uint)stackTypeVtable;
+        srcSlotCursor = srcSlotCursor + 2;
+      } while (operandsLeft != 0);
     }
     goto LAB_97bc11d8;
   case 0x25:
     break;
   case 0x38:
-    param_4 = childCount;
+    strayArg4 = childCount;
     __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_i
               (compiler,resultOperand,childOperands,childCount);
     if (0 < childCount) {
-      puVar24 = opHeaderAndFlags;
-      ppStream = childCount;
+      srcSlotCursor = opHeaderAndFlags;
+      operandsLeft = childCount;
       childOperandCopies = childOperands;
       do {
         childOperand = *childOperandCopies;
         childOperandCopies = childOperandCopies + 1;
         TPPStreamCompiler__getOperandAsSourceVar
-                  ((unsigned char *)&stackType,compiler,childOperand,param_4,param_5,operatorCode,iVar6,r10In0);
-        ppuVar5 = stackType;
-        ppStream = ppStream + -1;
-        puVar24[5] = stackTypeArraySize;
-        puVar24[4] = (uint)ppuVar5;
-        puVar24 = puVar24 + 2;
-      } while (ppStream != 0);
+                  ((unsigned char *)&stackType,compiler,childOperand,strayArg4,strayArg5,operatorCode,operatorTimes4,r10In0);
+        stackTypeVtable = stackType;
+        operandsLeft = operandsLeft + -1;
+        srcSlotCursor[5] = stackTypeArraySize;
+        srcSlotCursor[4] = (uint)stackTypeVtable;
+        srcSlotCursor = srcSlotCursor + 2;
+      } while (operandsLeft != 0);
     }
     goto LAB_97bc11d8;
   case 0x48:
   case 0x49:
-    param_4 = childCount;
+    strayArg4 = childCount;
     __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_i
               (compiler,resultOperand,childOperands,childCount);
     if (0 < childCount) {
-      puVar24 = opHeaderAndFlags + childCount * 2;
-      ppStream = childCount;
+      srcSlotCursor = opHeaderAndFlags + childCount * 2;
+      operandsLeft = childCount;
       childOperandCopies = childOperands;
       do {
         childOperand = *childOperandCopies;
         childOperandCopies = childOperandCopies + 1;
         TPPStreamCompiler__getOperandAsSourceVar
-                  ((unsigned char *)&stackType,compiler,childOperand,param_4,param_5,operatorCode,iVar6,r10In0);
-        ppuVar5 = stackType;
-        ppStream = ppStream + -1;
-        puVar24[3] = stackTypeArraySize;
-        puVar24[2] = (uint)ppuVar5;
-        puVar24 = puVar24 + -2;
-      } while (ppStream != 0);
+                  ((unsigned char *)&stackType,compiler,childOperand,strayArg4,strayArg5,operatorCode,operatorTimes4,r10In0);
+        stackTypeVtable = stackType;
+        operandsLeft = operandsLeft + -1;
+        srcSlotCursor[3] = stackTypeArraySize;
+        srcSlotCursor[2] = (uint)stackTypeVtable;
+        srcSlotCursor = srcSlotCursor + -2;
+      } while (operandsLeft != 0);
     }
     goto LAB_97bc11d8;
   case 0x66:
@@ -3410,8 +3454,8 @@ LAB_97bc0788:
   case 0x73:
   case 0x74:
   case 0x75:
-    pTVar10 = (unsigned char *)(**(code **)(*(int *)this + 0x3c))(this);
-    resultOperand[0] = (unsigned char *)TPPStreamCompiler__construct(compiler,pTVar10,childOperands,childCount);
+    constructedType = (unsigned char *)(**(code **)(*(int *)this + 0x3c))(this);
+    resultOperand[0] = (unsigned char *)TPPStreamCompiler__construct(compiler,constructedType,childOperands,childCount);
     break;
   case 0x85:
     childCount = 2;
@@ -3422,11 +3466,11 @@ LAB_97bc0788:
     childOperand = (unsigned char *)TPPStreamCompiler__getMVP(compiler);
     *childOperands = childOperand;
     TPPStreamCompiler__getOperandAsSourceVar
-              ((unsigned char *)&stackType,compiler,childOperand,param_4,param_5,operatorCode,iVar6,r10In0);
+              ((unsigned char *)&stackType,compiler,childOperand,strayArg4,strayArg5,operatorCode,operatorTimes4,r10In0);
     opSrc0A = stackType;
     opSrc0B = stackTypeArraySize;
     TPPStreamCompiler__getOperandAsSourceVar
-              ((unsigned char *)&stackType,compiler,childOperands[1],param_4,param_5,operatorCode,iVar6,r10In0);
+              ((unsigned char *)&stackType,compiler,childOperands[1],strayArg4,strayArg5,operatorCode,operatorTimes4,r10In0);
     opSrc1A = stackType;
     opSrc1B = stackTypeArraySize;
     goto LAB_97bc11d8;
@@ -3449,19 +3493,19 @@ LAB_97bc0788:
       case 0x96:
       case 0x98:
       case 0x99:
-        iVar6 = 0x44;
+        headerOpcode = 0x44;
         break;
       case 0x8b:
       case 0x8f:
       case 0x93:
       case 0x9a:
       case 0x9b:
-        iVar6 = 0x45;
+        headerOpcode = 0x45;
         break;
       default:
         goto switchD_97bc03dc_caseD_8c;
       }
-      opHeaderAndFlags[0] = iVar6 << 0x12 | opHeaderAndFlags[0] & 0xfc03ffff;
+      opHeaderAndFlags[0] = headerOpcode << 0x12 | opHeaderAndFlags[0] & 0xfc03ffff;
     }
   case 0x8c:
   case 0x8d:
@@ -3479,68 +3523,68 @@ LAB_97bc0788:
   case 0xa2:
   case 0xa3:
 switchD_97bc03dc_caseD_8c:
-    uVar17 = operatorCode - 0x8a;
-    iVar6 = 4;
-    uVar15 = uVar17;
-    if (uVar17 < 0x1a) {
-      uVar15 = uVar17 * 4;
-      switch(uVar17) {
+    operatorOffset = operatorCode - 0x8a;
+    src2SelectCode = 4;
+    srcOperandOffset = operatorOffset;
+    if (operatorOffset < 0x1a) {
+      srcOperandOffset = operatorOffset * 4;
+      switch(operatorOffset) {
       default:
-        iVar6 = 4;
+        src2SelectCode = 4;
         break;
       case 4:
       case 5:
       case 6:
       case 7:
-        iVar6 = 3;
+        src2SelectCode = 3;
         break;
       case 8:
       case 9:
       case 10:
       case 0xb:
-        iVar6 = 1;
+        src2SelectCode = 1;
         break;
       case 0xc:
       case 0xd:
-        iVar6 = 0;
+        src2SelectCode = 0;
         break;
       case 0xe:
       case 0x10:
       case 0x12:
       case 0x14:
-        iVar6 = 7;
+        src2SelectCode = 7;
         break;
       case 0xf:
       case 0x11:
       case 0x13:
       case 0x15:
-        iVar6 = 6;
+        src2SelectCode = 6;
         break;
       case 0x16:
       case 0x17:
-        iVar6 = 2;
+        src2SelectCode = 2;
         break;
       case 0x18:
       case 0x19:
-        iVar6 = 5;
+        src2SelectCode = 5;
       }
     }
-    param_4 = childCount;
+    strayArg4 = childCount;
     __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_i
               (compiler,resultOperand,childOperands,childCount);
     if (hasChildren) {
       TPPStreamCompiler__getOperandAsSourceVar
-                ((unsigned char *)&stackType,compiler,childOperands[1],param_4,param_5,operatorCode,uVar15,r10In0);
+                ((unsigned char *)&stackType,compiler,childOperands[1],strayArg4,strayArg5,operatorCode,srcOperandOffset,r10In0);
       opSrc0A = stackType;
       opSrc0B = stackTypeArraySize;
       TPPStreamCompiler__getOperandAsSourceVar
-                ((unsigned char *)&stackType,compiler,*childOperands,param_4,param_5,operatorCode,uVar15,r10In0);
-      opSrc2A = iVar6 << 5 | opSrc2A & 0xffffff1f;
+                ((unsigned char *)&stackType,compiler,*childOperands,strayArg4,strayArg5,operatorCode,srcOperandOffset,r10In0);
+      opSrc2A = src2SelectCode << 5 | opSrc2A & 0xffffff1f;
       opSrc1A = stackType;
       opSrc1B = stackTypeArraySize;
       if (childCount == 3) {
         TPPStreamCompiler__getOperandAsSourceVar
-                  ((unsigned char *)&stackType,compiler,childOperands[2],param_4,param_5,operatorCode,opSrc2A,r10In0);
+                  ((unsigned char *)&stackType,compiler,childOperands[2],strayArg4,strayArg5,operatorCode,opSrc2A,r10In0);
         opAuxA = stackType;
         opAuxB = stackTypeArraySize;
       }
@@ -3548,36 +3592,36 @@ switchD_97bc03dc_caseD_8c:
     opHeaderAndFlags[0] = (childCount + 1) * 0x20000000 | opHeaderAndFlags[0] & 0x1fffffff;
 LAB_97bc11d8:
     TPPStreamCompiler__getOperandAsDestVar
-              ((unsigned char *)&stackType,compiler,resultOperand[0],param_4,param_5,operatorCode);
+              ((unsigned char *)&stackType,compiler,resultOperand[0],strayArg4,strayArg5,operatorCode);
     opDest0 = stackType;
     opDest1 = stackTypeArraySize;
     if ((*(int *)(this + 0x30) == 0x4c) || (*(int *)(this + 0x30) == 0x4d)) {
       opHeaderAndFlags[1] = ((uint)opSrc0A >> 0xe & 1) << 0x1c | opHeaderAndFlags[1] & 0xefffffff;
-      iVar6 = *(int *)*childOperands;
-      if (iVar6 == 0) {
-        uVar3 = *(ushort *)(*childOperands + 0x18);
+      firstChildTypeInfo = *(int *)*childOperands;
+      if (firstChildTypeInfo == 0) {
+        operandGLType = *(ushort *)(*childOperands + 0x18);
       }
       else {
-        uVar3 = *(ushort *)(iVar6 + 0x2c);
+        operandGLType = *(ushort *)(firstChildTypeInfo + 0x2c);
       }
-      uVar15 = GetPPStreamTypeForGLType((uint)uVar3);
-      opHeaderAndFlags[1] = (uVar15 & 7) << 0x17 | opHeaderAndFlags[1] & 0xfc7fffff;
+      ppStreamType = GetPPStreamTypeForGLType((uint)operandGLType);
+      opHeaderAndFlags[1] = (ppStreamType & 7) << 0x17 | opHeaderAndFlags[1] & 0xfc7fffff;
       childOperand = *childOperands;
     }
     else {
       opHeaderAndFlags[1] = ((uint)stackType >> 0xc & 1) << 0x1c | opHeaderAndFlags[1] & 0xefffffff;
       if (*(int *)resultOperand[0] == 0) {
-        uVar3 = *(ushort *)(resultOperand[0] + 0x18);
+        operandGLType = *(ushort *)(resultOperand[0] + 0x18);
       }
       else {
-        uVar3 = *(ushort *)(*(int *)resultOperand[0] + 0x2c);
+        operandGLType = *(ushort *)(*(int *)resultOperand[0] + 0x2c);
       }
-      uVar15 = GetPPStreamTypeForGLType((uint)uVar3);
-      opHeaderAndFlags[1] = (uVar15 & 7) << 0x17 | opHeaderAndFlags[1] & 0xfc7fffff;
+      ppStreamType = GetPPStreamTypeForGLType((uint)operandGLType);
+      opHeaderAndFlags[1] = (ppStreamType & 7) << 0x17 | opHeaderAndFlags[1] & 0xfc7fffff;
       childOperand = resultOperand[0];
     }
-    iVar6 = ParseOperand__GetLogicalSize(childOperand);
-    opHeaderAndFlags[1] = (iVar6 + -1) * 0x4000000 & 0xc000000U | opHeaderAndFlags[1] & 0xf3ffffff;
+    logicalSize = ParseOperand__GetLogicalSize(childOperand);
+    opHeaderAndFlags[1] = (logicalSize + -1) * 0x4000000 & 0xc000000U | opHeaderAndFlags[1] & 0xf3ffffff;
     TPPStreamCompiler__AddOperation(compiler,resultOperand,(unsigned char *)opHeaderAndFlags,(char *)0x0,0);
   }
 switchD_97bc03dc_caseD_25:

@@ -1,0 +1,13 @@
+local	_ClearRegisterState	auStack_20	setIterator	CONFIRMED	removes and frees every RegInfo in the known-register set
+local	_glpDCBFree	extraout_r3	freeReturn	CONFIRMED	value left in r3 by _free
+local	_glp_dtostr	fparam_3	unusedFloatArg3	CONFIRMED	floating-point argument registers f3.. that the function does not use
+local	_glp_dtostr	fparam_4	unusedFloatArg4	CONFIRMED	floating-point argument registers f3.. that the function does not use
+local	_glp_dtostr	fparam_5	unusedFloatArg5	CONFIRMED	floating-point argument registers f3.. that the function does not use
+local	_glp_dtostr	fparam_6	unusedFloatArg6	CONFIRMED	floating-point argument registers f3.. that the function does not use
+local	_glp_dtostr	fparam_7	unusedFloatArg7	CONFIRMED	floating-point argument registers f3.. that the function does not use
+local	_glp_dtostr	fparam_8	unusedFloatArg8	CONFIRMED	floating-point argument registers f3.. that the function does not use
+local	_glp_dtostr	fparam_9	unusedFloatArg9	CONFIRMED	floating-point argument registers f3.. that the function does not use
+local	_glp_dtostr	fparam_10	unusedFloatArg10	CONFIRMED	floating-point argument registers f3.. that the function does not use
+local	_glp_dtostr	fparam_11	unusedFloatArg11	CONFIRMED	floating-point argument registers f3.. that the function does not use
+local	_glp_dtostr	fparam_12	unusedFloatArg12	CONFIRMED	floating-point argument registers f3.. that the function does not use
+local	_glp_dtostr	fparam_13	unusedFloatArg13	CONFIRMED	floating-point argument registers f3.. that the function does not use

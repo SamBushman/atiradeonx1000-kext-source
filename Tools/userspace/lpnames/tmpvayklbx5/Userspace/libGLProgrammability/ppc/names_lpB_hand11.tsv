@@ -1,0 +1,23 @@
+local	_PPParserParseOption	local_110	optionToken	CONFIRMED	token read after OPTION; compared with ";" at the end
+local	_PPParserParseOption	iVar2	status	INFERRED	parser status code (0 ok, 1 no more, 3 not an option, 0x1e/0x2d errors)
+local	_PPParserParseOptionIdentifier	auStack_120	optionName	CONFIRMED	option identifier text compared with ARB_fog_exp, ARB_precision_hint_*, NV_vertex_program2, ...
+local	_PPParserParseOptionIdentifier	uVar2	stream	INFERRED	parser->stream (+0x1c) passed to _PPStreamAddOption
+local	_PPParserParseOptionIdentifier	uVar3	optionId	INFERRED	option number recorded by _PPStreamAddOption (1 fog exp ... 0xd shadow)
+local	_PPParserParseOptionIdentifier	local_20	bindingWord	INFERRED	attribute binding word (0x10000 = position) of ARB_position_invariant
+local	_PPParserParseOptionIdentifier	local_1c	bindingIndex	INFERRED	attribute binding index (parser+0x24 counter, low 16 bits)
+local	_PPStreamAddOption	param_1	stream	CONFIRMED	PPStream*: +0x30 is the options chunk list
+local	_PPStreamAddOption	param_2	optionId	CONFIRMED	option number stored at chunk+0xf
+local	_PPStreamAddOption	uVar2	optionList	INFERRED	stream->options chunk list
+local	_PPStreamChunkListAddChunk	param_2	chunk	CONFIRMED	chunk appended to the doubly linked list (+4 prev, +8 next)
+local	_PPStreamAddAttribBinding	param_1	stream	CONFIRMED	PPStream*: +0x18 is the attribute-binding chunk list
+local	_PPStreamAddAttribBinding	param_2	binding	CONFIRMED	two-word attribute binding record
+local	_PPStreamAddAttribBinding	uVar2	bindingList	INFERRED	stream->attribute-binding chunk list
+local	_PPStreamAddAttribBinding	uVar3	bindingWord0	INFERRED	binding[0]
+local	_PPStreamAddAttribBinding	uVar4	bindingWord1	INFERRED	binding[1]
+local	_PPParserReturnPart	iVar1	status	INFERRED	_PPParserReturnCharacter result: nonzero at the start of the text
+local	_PPParserReturnPart	iVar2	partLength	INFERRED	characters stepped back over
+local	_PPParserReturnPart	local_20	ch	INFERRED	character stepped back over
+local	_PPParserReturnCharacter	param_2	outChar	CONFIRMED	receives the character stepped back over; newlines become spaces
+local	_PPParserReturnCharacter	bVar1	sawNewline	INFERRED	a newline was stepped over before the final character
+local	_PPParserReturnCharacter	iVar2	pos	INFERRED	parser->pos (index into the text)
+local	_PPParserReturnCharacter	uVar3	atStart	INFERRED	1 at the start of the text, else 0

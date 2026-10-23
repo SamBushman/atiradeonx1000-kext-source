@@ -1,0 +1,78 @@
+local	_InterpreterTextureSamplerSampleTexel1D	param_1	sampler	CONFIRMED	texture sampler state ([0] object table, [10] set to 1 when a level of detail was computed)
+local	_InterpreterTextureSamplerSampleTexel1D	param_2	textureUnit	CONFIRMED	texture unit: index into the object table *sampler
+local	_InterpreterTextureSamplerSampleTexel1D	param_3	unusedArg3	UNKNOWN	not read
+local	_InterpreterTextureSamplerSampleTexel1D	param_4	texCoord	CONFIRMED	texture coordinate (s,t,r,q) forwarded to CalculateLambda and the FromLevel samplers
+local	_InterpreterTextureSamplerSampleTexel1D	param_5	texelOut	CONFIRMED	receives the filtered RGBA texel as float[4]
+local	_InterpreterTextureSamplerSampleTexel1D	piVar2	textureObject	CONFIRMED	texture object (*sampler)[unit]; *textureObject is the sampler state (minification filter at +0x16); words [8], [0xc], [0x10] are float LOD limits/bias
+local	_InterpreterTextureSamplerSampleTexel1D	uVar3	baseLevel	INFERRED	integer mip level: floor of the clamped level of detail (0 for non-mipmap filters)
+local	_InterpreterTextureSamplerSampleTexel1D	fVar1	oneMinusLodFrac	INFERRED	1 - fractional level of detail: weight of the finer level
+local	_InterpreterTextureSamplerSampleTexel1D	local_40	lodBiasedClamped	INFERRED	lambda + texture object LOD bias, clamped below by the minimum LOD
+local	_InterpreterTextureSamplerSampleTexel1D	local_60	intCastScratchA	UNKNOWN	8-byte store Ghidra shows for the (longlong)(int) cast; never read
+local	_InterpreterTextureSamplerSampleTexel1D	local_58	intCastScratchB	UNKNOWN	8-byte store Ghidra shows for the (longlong)(int) cast; never read
+local	_InterpreterTextureSamplerSampleTexel1D	fparam_1_00	levelSampleResult	UNKNOWN	double return value of the FromLevel sampler, passed on as junk
+local	_InterpreterTextureSamplerSampleTexel1D	local_80	texelBaseLevelr	INFERRED	float[4] filled by SampleTexel1DFromLevel for mip level baseLevel / baseLevel+1; blended by the final lerp
+local	_InterpreterTextureSamplerSampleTexel1D	local_7c	texelBaseLevelg	INFERRED	float[4] filled by SampleTexel1DFromLevel for mip level baseLevel / baseLevel+1; blended by the final lerp
+local	_InterpreterTextureSamplerSampleTexel1D	local_78	texelBaseLevelb	INFERRED	float[4] filled by SampleTexel1DFromLevel for mip level baseLevel / baseLevel+1; blended by the final lerp
+local	_InterpreterTextureSamplerSampleTexel1D	local_74	texelBaseLevela	INFERRED	float[4] filled by SampleTexel1DFromLevel for mip level baseLevel / baseLevel+1; blended by the final lerp
+local	_InterpreterTextureSamplerSampleTexel1D	local_70	texelNextLevelr	INFERRED	float[4] filled by SampleTexel1DFromLevel for mip level baseLevel / baseLevel+1; blended by the final lerp
+local	_InterpreterTextureSamplerSampleTexel1D	local_6c	texelNextLevelg	INFERRED	float[4] filled by SampleTexel1DFromLevel for mip level baseLevel / baseLevel+1; blended by the final lerp
+local	_InterpreterTextureSamplerSampleTexel1D	local_68	texelNextLevelb	INFERRED	float[4] filled by SampleTexel1DFromLevel for mip level baseLevel / baseLevel+1; blended by the final lerp
+local	_InterpreterTextureSamplerSampleTexel1D	local_64	texelNextLevela	INFERRED	float[4] filled by SampleTexel1DFromLevel for mip level baseLevel / baseLevel+1; blended by the final lerp
+use	_InterpreterTextureSamplerSampleTexel1D	dVar4	lambda	INFERRED	level of detail returned by CalculateLambda	^\s*dVar4\ =\ \(double\)\(\(double\ \(\*\)\(\)\)_InterpreterTextureSamplerCalculateLambda1D\)\(param_1,param_4,param_2,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,$	+4
+use	_InterpreterTextureSamplerSampleTexel1D	dVar4	lodOrFrac	INFERRED	clamped level of detail, then reused for its fractional part (x = f(x))	^\s*dVar4\ =\ fparam_1;$	+1
+use	_InterpreterTextureSamplerSampleTexel1D	dVar4	lodOrFrac	INFERRED	clamped level of detail, then reused for its fractional part (x = f(x))	^\s*dVar4\ =\ \(double\)GH_U2F\(\(unsigned\ int\)\(piVar2\[8\]\)\);$	+1
+use	_InterpreterTextureSamplerSampleTexel1D	dVar4	lodOrFrac	INFERRED	clamped level of detail, then reused for its fractional part (x = f(x))	^\s*if\ \(DOUBLE_97c30a78\ <=\ dVar4\)\ \{$	+3
+use	_InterpreterTextureSamplerSampleTexel1D	dVar4	lodOrFrac	INFERRED	clamped level of detail, then reused for its fractional part (x = f(x))	^\s*uVar3\ =\ \(uint\)\(int\)dVar4;$	+1
+use	_InterpreterTextureSamplerSampleTexel1D	dVar4	lodOrFrac	INFERRED	clamped level of detail, then reused for its fractional part (x = f(x))	^\s*dVar4\ =\ \(double\)\(float\)\(dVar4\ \-\ \(double\)\(float\)\(\(double\)CONCAT44\(0x43300000,uVar3\)\ \-$	+7
+local	_InterpreterTextureSamplerSampleTexel2D	param_1	sampler	CONFIRMED	texture sampler state ([0] object table, [10] set to 1 when a level of detail was computed)
+local	_InterpreterTextureSamplerSampleTexel2D	param_2	textureUnit	CONFIRMED	texture unit: index into the object table *sampler
+local	_InterpreterTextureSamplerSampleTexel2D	param_3	unusedArg3	UNKNOWN	not read
+local	_InterpreterTextureSamplerSampleTexel2D	param_4	texCoord	CONFIRMED	texture coordinate (s,t,r,q) forwarded to CalculateLambda and the FromLevel samplers
+local	_InterpreterTextureSamplerSampleTexel2D	param_5	texelOut	CONFIRMED	receives the filtered RGBA texel as float[4]
+local	_InterpreterTextureSamplerSampleTexel2D	piVar2	textureObject	CONFIRMED	texture object (*sampler)[unit]; *textureObject is the sampler state (minification filter at +0x16); words [8], [0xc], [0x10] are float LOD limits/bias
+local	_InterpreterTextureSamplerSampleTexel2D	uVar3	baseLevel	INFERRED	integer mip level: floor of the clamped level of detail (0 for non-mipmap filters)
+local	_InterpreterTextureSamplerSampleTexel2D	fVar1	oneMinusLodFrac	INFERRED	1 - fractional level of detail: weight of the finer level
+local	_InterpreterTextureSamplerSampleTexel2D	local_40	lodBiasedClamped	INFERRED	lambda + texture object LOD bias, clamped below by the minimum LOD
+local	_InterpreterTextureSamplerSampleTexel2D	local_60	intCastScratchA	UNKNOWN	8-byte store Ghidra shows for the (longlong)(int) cast; never read
+local	_InterpreterTextureSamplerSampleTexel2D	local_58	intCastScratchB	UNKNOWN	8-byte store Ghidra shows for the (longlong)(int) cast; never read
+local	_InterpreterTextureSamplerSampleTexel2D	fparam_1_00	levelSampleResult	UNKNOWN	double return value of the FromLevel sampler, passed on as junk
+local	_InterpreterTextureSamplerSampleTexel2D	local_80	texelBaseLevelr	INFERRED	float[4] filled by SampleTexel2DFromLevel for mip level baseLevel / baseLevel+1; blended by the final lerp
+local	_InterpreterTextureSamplerSampleTexel2D	local_7c	texelBaseLevelg	INFERRED	float[4] filled by SampleTexel2DFromLevel for mip level baseLevel / baseLevel+1; blended by the final lerp
+local	_InterpreterTextureSamplerSampleTexel2D	local_78	texelBaseLevelb	INFERRED	float[4] filled by SampleTexel2DFromLevel for mip level baseLevel / baseLevel+1; blended by the final lerp
+local	_InterpreterTextureSamplerSampleTexel2D	local_74	texelBaseLevela	INFERRED	float[4] filled by SampleTexel2DFromLevel for mip level baseLevel / baseLevel+1; blended by the final lerp
+local	_InterpreterTextureSamplerSampleTexel2D	local_70	texelNextLevelr	INFERRED	float[4] filled by SampleTexel2DFromLevel for mip level baseLevel / baseLevel+1; blended by the final lerp
+local	_InterpreterTextureSamplerSampleTexel2D	local_6c	texelNextLevelg	INFERRED	float[4] filled by SampleTexel2DFromLevel for mip level baseLevel / baseLevel+1; blended by the final lerp
+local	_InterpreterTextureSamplerSampleTexel2D	local_68	texelNextLevelb	INFERRED	float[4] filled by SampleTexel2DFromLevel for mip level baseLevel / baseLevel+1; blended by the final lerp
+local	_InterpreterTextureSamplerSampleTexel2D	local_64	texelNextLevela	INFERRED	float[4] filled by SampleTexel2DFromLevel for mip level baseLevel / baseLevel+1; blended by the final lerp
+use	_InterpreterTextureSamplerSampleTexel2D	dVar4	lambda	INFERRED	level of detail returned by CalculateLambda	^\s*dVar4\ =\ \(double\)\(\(double\ \(\*\)\(\)\)_InterpreterTextureSamplerCalculateLambda2D\)\(param_1,param_4,param_2,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,$	+4
+use	_InterpreterTextureSamplerSampleTexel2D	dVar4	lodOrFrac	INFERRED	clamped level of detail, then reused for its fractional part (x = f(x))	^\s*dVar4\ =\ fparam_1;$	+1
+use	_InterpreterTextureSamplerSampleTexel2D	dVar4	lodOrFrac	INFERRED	clamped level of detail, then reused for its fractional part (x = f(x))	^\s*dVar4\ =\ \(double\)GH_U2F\(\(unsigned\ int\)\(piVar2\[8\]\)\);$	+1
+use	_InterpreterTextureSamplerSampleTexel2D	dVar4	lodOrFrac	INFERRED	clamped level of detail, then reused for its fractional part (x = f(x))	^\s*if\ \(DOUBLE_97c30a78\ <=\ dVar4\)\ \{$	+3
+use	_InterpreterTextureSamplerSampleTexel2D	dVar4	lodOrFrac	INFERRED	clamped level of detail, then reused for its fractional part (x = f(x))	^\s*uVar3\ =\ \(uint\)\(int\)dVar4;$	+1
+use	_InterpreterTextureSamplerSampleTexel2D	dVar4	lodOrFrac	INFERRED	clamped level of detail, then reused for its fractional part (x = f(x))	^\s*dVar4\ =\ \(double\)\(float\)\(dVar4\ \-\ \(double\)\(float\)\(\(double\)CONCAT44\(0x43300000,uVar3\)\ \-$	+7
+local	_InterpreterTextureSamplerSampleTexel3D	param_1	sampler	CONFIRMED	texture sampler state ([0] object table, [10] set to 1 when a level of detail was computed)
+local	_InterpreterTextureSamplerSampleTexel3D	param_2	textureUnit	CONFIRMED	texture unit: index into the object table *sampler
+local	_InterpreterTextureSamplerSampleTexel3D	param_3	unusedArg3	UNKNOWN	not read
+local	_InterpreterTextureSamplerSampleTexel3D	param_4	texCoord	CONFIRMED	texture coordinate (s,t,r,q) forwarded to CalculateLambda and the FromLevel samplers
+local	_InterpreterTextureSamplerSampleTexel3D	param_5	texelOut	CONFIRMED	receives the filtered RGBA texel as float[4]
+local	_InterpreterTextureSamplerSampleTexel3D	piVar2	textureObject	CONFIRMED	texture object (*sampler)[unit]; *textureObject is the sampler state (minification filter at +0x16); words [8], [0xc], [0x10] are float LOD limits/bias
+local	_InterpreterTextureSamplerSampleTexel3D	uVar3	baseLevel	INFERRED	integer mip level: floor of the clamped level of detail (0 for non-mipmap filters)
+local	_InterpreterTextureSamplerSampleTexel3D	fVar1	oneMinusLodFrac	INFERRED	1 - fractional level of detail: weight of the finer level
+local	_InterpreterTextureSamplerSampleTexel3D	local_40	lodBiasedClamped	INFERRED	lambda + texture object LOD bias, clamped below by the minimum LOD
+local	_InterpreterTextureSamplerSampleTexel3D	local_60	intCastScratchA	UNKNOWN	8-byte store Ghidra shows for the (longlong)(int) cast; never read
+local	_InterpreterTextureSamplerSampleTexel3D	local_58	intCastScratchB	UNKNOWN	8-byte store Ghidra shows for the (longlong)(int) cast; never read
+local	_InterpreterTextureSamplerSampleTexel3D	fparam_1_00	levelSampleResult	UNKNOWN	double return value of the FromLevel sampler, passed on as junk
+local	_InterpreterTextureSamplerSampleTexel3D	local_80	texelBaseLevelr	INFERRED	float[4] filled by SampleTexel3DFromLevel for mip level baseLevel / baseLevel+1; blended by the final lerp
+local	_InterpreterTextureSamplerSampleTexel3D	local_7c	texelBaseLevelg	INFERRED	float[4] filled by SampleTexel3DFromLevel for mip level baseLevel / baseLevel+1; blended by the final lerp
+local	_InterpreterTextureSamplerSampleTexel3D	local_78	texelBaseLevelb	INFERRED	float[4] filled by SampleTexel3DFromLevel for mip level baseLevel / baseLevel+1; blended by the final lerp
+local	_InterpreterTextureSamplerSampleTexel3D	local_74	texelBaseLevela	INFERRED	float[4] filled by SampleTexel3DFromLevel for mip level baseLevel / baseLevel+1; blended by the final lerp
+local	_InterpreterTextureSamplerSampleTexel3D	local_70	texelNextLevelr	INFERRED	float[4] filled by SampleTexel3DFromLevel for mip level baseLevel / baseLevel+1; blended by the final lerp
+local	_InterpreterTextureSamplerSampleTexel3D	local_6c	texelNextLevelg	INFERRED	float[4] filled by SampleTexel3DFromLevel for mip level baseLevel / baseLevel+1; blended by the final lerp
+local	_InterpreterTextureSamplerSampleTexel3D	local_68	texelNextLevelb	INFERRED	float[4] filled by SampleTexel3DFromLevel for mip level baseLevel / baseLevel+1; blended by the final lerp
+local	_InterpreterTextureSamplerSampleTexel3D	local_64	texelNextLevela	INFERRED	float[4] filled by SampleTexel3DFromLevel for mip level baseLevel / baseLevel+1; blended by the final lerp
+use	_InterpreterTextureSamplerSampleTexel3D	dVar4	lambda	INFERRED	level of detail returned by CalculateLambda	^\s*dVar4\ =\ \(double\)\(\(double\ \(\*\)\(\)\)_InterpreterTextureSamplerCalculateLambda3D\)\(param_1,param_4,param_2,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,$	+4
+use	_InterpreterTextureSamplerSampleTexel3D	dVar4	lodOrFrac	INFERRED	clamped level of detail, then reused for its fractional part (x = f(x))	^\s*dVar4\ =\ fparam_1;$	+1
+use	_InterpreterTextureSamplerSampleTexel3D	dVar4	lodOrFrac	INFERRED	clamped level of detail, then reused for its fractional part (x = f(x))	^\s*dVar4\ =\ \(double\)GH_U2F\(\(unsigned\ int\)\(piVar2\[8\]\)\);$	+1
+use	_InterpreterTextureSamplerSampleTexel3D	dVar4	lodOrFrac	INFERRED	clamped level of detail, then reused for its fractional part (x = f(x))	^\s*if\ \(DOUBLE_97c30a78\ <=\ dVar4\)\ \{$	+3
+use	_InterpreterTextureSamplerSampleTexel3D	dVar4	lodOrFrac	INFERRED	clamped level of detail, then reused for its fractional part (x = f(x))	^\s*uVar3\ =\ \(uint\)\(int\)dVar4;$	+1
+use	_InterpreterTextureSamplerSampleTexel3D	dVar4	lodOrFrac	INFERRED	clamped level of detail, then reused for its fractional part (x = f(x))	^\s*dVar4\ =\ \(double\)\(float\)\(dVar4\ \-\ \(double\)\(float\)\(\(double\)CONCAT44\(0x43300000,uVar3\)\ \-$	+7

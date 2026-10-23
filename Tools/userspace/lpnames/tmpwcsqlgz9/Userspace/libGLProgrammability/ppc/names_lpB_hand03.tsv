@@ -1,0 +1,76 @@
+local	_CPPelse	param_1	matchElse	CONFIRMED	nonzero: stop at a matching #else/#elif (3Dlabs CPPelse(matchelse, yylvalpp))
+local	_CPPelse	param_2	yylvalpp	CONFIRMED	yystypepp*: [2] sc_ident
+local	_CPPelse	param_3	unusedArg3	INFERRED	never read as an input; forwarded to the scan/error calls
+local	_CPPelse	param_4	unusedArg4	INFERRED	never read as an input; forwarded to the scan/error calls
+local	_CPPelse	param_5	unusedArg5	INFERRED	never read as an input; forwarded to the scan/error calls
+local	_CPPelse	param_6	unusedArg6	INFERRED	never read as an input; forwarded to the scan/error calls
+local	_CPPelse	param_7	unusedArg7	INFERRED	never read as an input; forwarded to the scan/error calls
+local	_CPPelse	puVar1	cppRef	INFERRED	&_cpp GOT pointer
+local	_CPPelse	iVar2	directiveAtom	INFERRED	yylvalpp->sc_ident compared with the if/ifdef/ifndef/endif/else/elif atoms
+local	_CPPelse	iVar3	token	CONFIRMED	token from currentInput->scan
+local	_CPPelse	extraout_r4	extraOut1	INFERRED	Ghidra extra-output of r4; only forwarded
+local	_op_logor	param_1	lhs	CONFIRMED	left operand of logical-or (cpp.c unop/binop table entry)
+local	_op_logor	param_2	rhs	CONFIRMED	right operand of ||
+local	_op_logand	param_1	lhs	CONFIRMED	left operand of && (cpp.c unop/binop table entry)
+local	_op_logand	param_2	rhs	CONFIRMED	right operand of &&
+local	_op_or	param_1	lhs	CONFIRMED	left operand of bitwise-or (cpp.c unop/binop table entry)
+local	_op_or	param_2	rhs	CONFIRMED	right operand of bitwise-or
+local	_op_xor	param_1	lhs	CONFIRMED	left operand of ^ (cpp.c unop/binop table entry)
+local	_op_xor	param_2	rhs	CONFIRMED	right operand of ^
+local	_op_and	param_1	lhs	CONFIRMED	left operand of & (cpp.c unop/binop table entry)
+local	_op_and	param_2	rhs	CONFIRMED	right operand of &
+local	_op_eq	param_1	lhs	CONFIRMED	left operand of == (cpp.c unop/binop table entry)
+local	_op_eq	param_2	rhs	CONFIRMED	right operand of ==
+local	_op_ne	param_1	lhs	CONFIRMED	left operand of != (cpp.c unop/binop table entry)
+local	_op_ne	param_2	rhs	CONFIRMED	right operand of !=
+local	_op_ge	param_1	lhs	CONFIRMED	left operand of >= (cpp.c unop/binop table entry)
+local	_op_ge	param_2	rhs	CONFIRMED	right operand of >=
+local	_op_le	param_1	lhs	CONFIRMED	left operand of <= (cpp.c unop/binop table entry)
+local	_op_le	param_2	rhs	CONFIRMED	right operand of <=
+local	_op_gt	param_1	lhs	CONFIRMED	left operand of > (cpp.c unop/binop table entry)
+local	_op_gt	param_2	rhs	CONFIRMED	right operand of >
+local	_op_lt	param_1	lhs	CONFIRMED	left operand of < (cpp.c unop/binop table entry)
+local	_op_lt	param_2	rhs	CONFIRMED	right operand of <
+local	_op_shl	param_1	lhs	CONFIRMED	left operand of << (cpp.c unop/binop table entry)
+local	_op_shl	param_2	rhs	CONFIRMED	right operand of <<
+local	_op_div	param_1	lhs	CONFIRMED	left operand of / (cpp.c unop/binop table entry)
+local	_op_div	param_2	rhs	CONFIRMED	right operand of /
+local	_op_mod	param_1	lhs	CONFIRMED	left operand of % (cpp.c unop/binop table entry)
+local	_op_mod	param_2	rhs	CONFIRMED	right operand of %
+local	_op_cmpl	param_1	value	CONFIRMED	operand of ~
+local	_op_not	param_1	value	CONFIRMED	operand of !
+local	_eval	param_1	token	CONFIRMED	current token handed to eval (3Dlabs eval(token, prec, res, err, yylvalpp))
+local	_eval	param_2	precedence	CONFIRMED	minimum operator precedence this call may consume
+local	_eval	param_3	result	CONFIRMED	int* receiving the value of the sub-expression
+local	_eval	param_4	errorFlag	CONFIRMED	int* error flag; set to 1 by "incorrect preprocessor directive"
+local	_eval	param_5	yylvalpp	CONFIRMED	yystypepp* passed to every scan call
+local	_eval	bVar1	hadOpenParen	INFERRED	`defined(` seen: needs the closing )
+local	_eval	puVar2	cppRef	INFERRED	&_cpp GOT pointer
+local	_eval	piVar7	cppRefInt	INFERRED	&_cpp GOT pointer viewed as int*; *cppRefInt is the cpp state
+local	_eval	iVar5	nextToken	INFERRED	token after the operand: scan results and the value returned
+local	_eval	a0	lhsValue	INFERRED	*result saved as the left operand before the right side is evaluated
+local	_eval	a2	aliasResult	INFERRED	Ghidra copy of param_3, forwarded as a dead register argument
+local	_eval	a4	aliasYylvalpp	INFERRED	Ghidra copy of param_5, forwarded as a dead register argument
+local	_eval	extraout_r4	extraOut1	INFERRED	Ghidra extra-output of r4; only forwarded
+local	_eval	extraout_r4_00	extraOut2	INFERRED	same
+local	_eval	extraout_r4_01	extraOut3	INFERRED	same
+local	_eval	extraout_r4_02	extraOut4	INFERRED	int copy of nextToken used as the second half of a returned pair
+local	_eval	in_r8	leftoverR8	INFERRED	Ghidra input-register artifact; only forwarded
+local	_eval	in_r9	cppState	INFERRED	*_cpp: the cpp state whose +0x20 is currentInput; also forwarded
+local	_eval	uVar10	r4TokenPair	INFERRED	Ghidra 64-bit pair (high=token, low=r4) kept for the error call
+use	_eval	piVar6	binopCursor	INFERRED	walks the 17-entry binop table (stride 0xc) backwards	^\s*piVar6\ =\ &DAT_a7b7cf14;	^\s*iVar4\ =\ \*\(int\ \*\)\(&UNK_a7b7ce4c	all	none
+use	_eval	piVar6	aliasErrorFlag	INFERRED	Ghidra copy of param_4 forwarded as a dead register argument	*		all	none
+use	_eval	iVar4	tableToken	INFERRED	token of the current binop table entry	^\s*while\ \(iVar4\ =\ \*piVar6	+1	all	none
+use	_eval	iVar4	opPrecedence	INFERRED	precedence column of the matched binop entry	^\s*iVar4\ =\ \*\(int\ \*\)\(&UNK_a7b7ce4c	^\s*uVar8\ =\ \(\*\*\(code\ \*\*\)\(&UNK_a7b7ce50	all	none
+use	_eval	iVar3	binopIndex	INFERRED	index of the matched binop table entry (counts down from 0x11)	^\s*iVar3\ =\ 0x11;	^\s*if\ \(\*param_4\ !=\ 0\)	all	none
+use	_eval	iVar3	unopIndex	INFERRED	index of the matched unop table entry (counts down from 3)	^\s*iVar3\ =\ 3;	^LAB_97b86fdc:	all	none
+use	_eval	iVar3	errFlag	INFERRED	*errorFlag read before the binop loop	*		all	none
+use	_eval	uVar8	r4Artifact	INFERRED	Ghidra extra-output of r4 around the defined( scan	^\s*uVar8\ =\ extraout_r4;	^\s*uVar8\ =\ 0;	all	none
+use	_eval	uVar8	definedValue	INFERRED	1 when the identifier after `defined` is a live macro, else 0	^\s*uVar8\ =\ 0;	+7	all	none
+use	_eval	uVar8	binopResult	INFERRED	result of the binop function applied to lhsValue and *result	^\s*uVar8\ =\ \(\*\*\(code\ \*\*\)\(&UNK_a7b7ce50	+2	all	none
+use	_eval	uVar8	unopResult	INFERRED	result of the unop function applied to *result	^\s*uVar8\ =\ \(\*\*\(code\ \*\*\)\(&UNK_a7b7cf24	+2	all	none
+use	_eval	uVar8	scanToken	INFERRED	token from currentInput->scan, passed on as eval's first argument	*		all	none
+use	_CPPelse	iVar4	afterElseToken	INFERRED	token read after #else/#elif while checking for the trailing newline	^\s*iVar4\ =\ \(\*\*\(code	^\s*\}\ while\ \(iVar2\ !=\ _elifAtom\);	all	none
+use	_CPPelse	iVar4	ifDepth	INFERRED	cpp->ifdepth (+0x34) read before it is decremented	^\s*iVar4\ =\ \*\(int\ \*\)\(\*\(int\ \*\)puVar1\ \+\ 0x34\);	+5	all	none
+use	_CPPelse	iVar4	ifDepth	INFERRED	cpp->ifdepth (+0x34) read before it is decremented	^\s*iVar4\ =\ \*\(int\ \*\)\(\*\(int\ \*\)puVar1\ \+\ 0x34\);@2		all	none
+use	_CPPelse	iVar4	skipDepth	INFERRED	nesting depth of #if blocks entered while skipping	*		all	none

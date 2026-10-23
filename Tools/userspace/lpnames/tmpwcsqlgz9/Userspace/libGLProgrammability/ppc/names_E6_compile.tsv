@@ -1,0 +1,103 @@
+local	TIntermLoop__compileNode	local_b0	opHeader	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 0: opcode in bits 25..18, operand class above (constant stores such as 0x1a80000/0x21540000 are opcode<<18)
+local	TIntermLoop__compileNode	local_ac	opFlags	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 1: modifier/condition flags (saturate/type/size bits are or-ed in after the operand descriptors are fetched)
+local	TIntermLoop__compileNode	local_a8	opDest0	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 2: destination operand descriptor first word (TPPStreamCompiler__getOperandAsDestVar output)
+local	TIntermLoop__compileNode	local_a4	opDest1	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 3: destination operand descriptor second word
+local	TIntermLoop__compileNode	local_a0	opSrc0A	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 4: source 0 operand descriptor first word (getOperandAsSourceVar output)
+local	TIntermLoop__compileNode	local_9c	opSrc0B	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 5: source 0 operand descriptor second word
+local	TIntermLoop__compileNode	local_98	opSrc1A	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 6: source 1 descriptor first word
+local	TIntermLoop__compileNode	local_94	opSrc1B	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 7: source 1 descriptor second word
+local	TIntermLoop__compileNode	local_90	opSrc2A	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 8: source 2 descriptor first word
+local	TIntermLoop__compileNode	local_8c	opSrc2B	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 9: source 2 descriptor second word
+local	TIntermLoop__compileNode	local_88	opAuxA	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 10: auxiliary (condition) operand first word, zero-initialised
+local	TIntermLoop__compileNode	local_84	opAuxB	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 11: auxiliary operand second word
+local	TIntermLoop__compileNode	local_80	opLine	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 12: source line, set from TIntermNode vtable slot 0 (getLine)
+local	TIntermLoop__compileNode	local_7c	opLabelLength	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 13: length of the label text passed as the str argument of TPPStreamCompiler::AddOperation (local = _strlen(label))
+local	TIntermSelection__compileNode	local_b0	opHeader	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 0: opcode in bits 25..18, operand class above (constant stores such as 0x1a80000/0x21540000 are opcode<<18)
+local	TIntermSelection__compileNode	local_ac	opFlags	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 1: modifier/condition flags (saturate/type/size bits are or-ed in after the operand descriptors are fetched)
+local	TIntermSelection__compileNode	local_a8	opDest0	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 2: destination operand descriptor first word (TPPStreamCompiler__getOperandAsDestVar output)
+local	TIntermSelection__compileNode	local_a4	opDest1	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 3: destination operand descriptor second word
+local	TIntermSelection__compileNode	local_a0	opSrc0A	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 4: source 0 operand descriptor first word (getOperandAsSourceVar output)
+local	TIntermSelection__compileNode	local_9c	opSrc0B	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 5: source 0 operand descriptor second word
+local	TIntermSelection__compileNode	local_98	opSrc1A	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 6: source 1 descriptor first word
+local	TIntermSelection__compileNode	local_94	opSrc1B	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 7: source 1 descriptor second word
+local	TIntermSelection__compileNode	local_90	opSrc2A	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 8: source 2 descriptor first word
+local	TIntermSelection__compileNode	local_8c	opSrc2B	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 9: source 2 descriptor second word
+local	TIntermSelection__compileNode	local_88	opAuxA	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 10: auxiliary (condition) operand first word, zero-initialised
+local	TIntermSelection__compileNode	local_84	opAuxB	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 11: auxiliary operand second word
+local	TIntermSelection__compileNode	local_80	opLine	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 12: source line, set from TIntermNode vtable slot 0 (getLine)
+local	TIntermSelection__compileNode	local_7c	opLabelLength	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 13: length of the label text passed as the str argument of TPPStreamCompiler::AddOperation (local = _strlen(label))
+local	TIntermBranch__compileNode	local_b0	opHeader	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 0: opcode in bits 25..18, operand class above (constant stores such as 0x1a80000/0x21540000 are opcode<<18)
+local	TIntermBranch__compileNode	local_ac	opFlags	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 1: modifier/condition flags (saturate/type/size bits are or-ed in after the operand descriptors are fetched)
+local	TIntermBranch__compileNode	local_a8	opDest0	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 2: destination operand descriptor first word (TPPStreamCompiler__getOperandAsDestVar output)
+local	TIntermBranch__compileNode	local_a4	opDest1	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 3: destination operand descriptor second word
+local	TIntermBranch__compileNode	local_a0	opSrc0A	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 4: source 0 operand descriptor first word (getOperandAsSourceVar output)
+local	TIntermBranch__compileNode	local_9c	opSrc0B	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 5: source 0 operand descriptor second word
+local	TIntermBranch__compileNode	local_98	opSrc1A	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 6: source 1 descriptor first word
+local	TIntermBranch__compileNode	local_94	opSrc1B	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 7: source 1 descriptor second word
+local	TIntermBranch__compileNode	local_90	opSrc2A	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 8: source 2 descriptor first word
+local	TIntermBranch__compileNode	local_8c	opSrc2B	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 9: source 2 descriptor second word
+local	TIntermBranch__compileNode	local_88	opAuxA	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 10: auxiliary (condition) operand first word, zero-initialised
+local	TIntermBranch__compileNode	local_84	opAuxB	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 11: auxiliary operand second word
+local	TIntermBranch__compileNode	local_80	opLine	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 12: source line, set from TIntermNode vtable slot 0 (getLine)
+local	TIntermBranch__compileNode	local_7c	opLabelLength	INFERRED	_PPStreamOperation record (14 words) built on the stack and passed to AddOperation; word 13: length of the label text passed as the str argument of TPPStreamCompiler::AddOperation (local = _strlen(label))
+local	TIntermLoop__compileNode	iVar17	loopId	CONFIRMED	value of compiler+0x8c (the running label counter) before the increment; appended to gl__WhileBody_/WhileEnd_/WhileStart_/WhileEndIf_ labels
+local	TIntermLoop__compileNode	iVar16	ppStream	CONFIRMED	compiler+0x70: the PPStream receiving operations and labels (_PPStreamAddLabel(ppStream, ...))
+local	TIntermLoop__compileNode	piVar15	operationChunkList	CONFIRMED	*(ppStream+0x20): the operation chunk list whose head is walked to find the last chunk
+local	TIntermLoop__compileNode	acStack_130	whileBodyLabel	CONFIRMED	sprintf("%s%d", "gl__WhileBody_", loopId)
+local	TIntermLoop__compileNode	acStack_110	whileEndLabel	CONFIRMED	sprintf("%s%d", "gl__WhileEnd_", loopId); pushed on the ParseWhileLoopStack as the break label
+local	TIntermLoop__compileNode	acStack_f0	whileStartLabel	CONFIRMED	sprintf("%s%d", "gl__WhileStart_", loopId)
+local	TIntermLoop__compileNode	acStack_d0	whileEndIfLabel	CONFIRMED	sprintf("%s%d", "gl__WhileEndIf_", loopId)
+local	TIntermLoop__compileNode	local_60	conditionTemp	INFERRED	ParseOperand* result of TPPStreamCompiler__newTemporary for the loop condition; destroyed after use
+local	TIntermLoop__compileNode	local_5c	conditionOperand	INFERRED	array whose element 0 is the compiled condition expression operand (TIntermNode slot 3 compileNode)
+local	TIntermLoop__compileNode	a5	labelPrefixArg	UNKNOWN	Ghidra argument-register artifact holding the string "gl__WhileEndIf_"
+local	TIntermLoop__compileNode	iVar8	chunkCursorOrTemp	INFERRED	chunk cursor of the operation list walk (next at +8), then the logical-size result
+local	TIntermLoop__compileNode	uVar1	glTypeCode	INFERRED	GL type code (+0x18 or the symbol's +0x2c) mapped by GetPPStreamTypeForGLType
+local	TIntermLoop__compileNode	uVar7	ppStreamType	INFERRED	result of GetPPStreamTypeForGLType (3 bits stored into record flags bits 23..25)
+local	TIntermSelection__compileNode	pcVar10	labelId	CONFIRMED	value of compiler+0x8c before the increment; appended to gl__IfElse_/gl__IfEnd_
+local	TIntermSelection__compileNode	iVar12	ppStream	CONFIRMED	compiler+0x70: the PPStream receiving operations and labels
+local	TIntermSelection__compileNode	acStack_f0	ifElseLabel	CONFIRMED	sprintf("%s%d", "gl__IfElse_", labelId)
+local	TIntermSelection__compileNode	acStack_d0	ifEndLabel	CONFIRMED	sprintf("%s%d", "gl__IfEnd_", labelId)
+local	TIntermSelection__compileNode	pPVar6	conditionOperand	CONFIRMED	operand compiled from the condition child (this+0x30, slot 3 compileNode) and run through ParseSymbolTable__processOperand
+local	TIntermSelection__compileNode	local_38	falseOperand	INFERRED	operand compiled from the false block (this+0x38)
+local	TIntermSelection__compileNode	iVar13	conditionConstant	INFERRED	constant value of the condition when it folds (operand+4 deref), else 1
+local	TIntermSelection__compileNode	uVar14	conditionIsConstant	INFERRED	1 when the condition operand carries a constant (operand+4 != 0)
+local	TIntermSelection__compileNode	bVar1	conditionNotConstant	INFERRED	uVar14 == 0: emit a real conditional branch to the else label
+local	TIntermSelection__compileNode	bVar3	foldedToDiscard	INFERRED	set when the true block was a single kill/branch operation that was merged into a conditional discard
+local	TIntermSelection__compileNode	iVar9	operationCountBefore	INFERRED	TPPStreamCompiler__LastOperationIndex before compiling the true block
+local	TIntermSelection__compileNode	uVar2	glTypeCode	INFERRED	GL type code of the operand mapped by GetPPStreamTypeForGLType
+local	TIntermSelection__compileNode	uVar7	ppStreamType	INFERRED	result of GetPPStreamTypeForGLType
+local	TIntermBranch__compileNode	iVar4	branchKind	CONFIRMED	*(this+8): 0x62 = discard (kill), 99 = return, 100 = break, 0x65 = continue (the four arms of the function)
+local	TIntermBranch__compileNode	local_24	returnValueOperand	CONFIRMED	operand compiled from the branch's child expression (this+0xc) for return/discard
+local	TIntermBranch__compileNode	local_28	returnSlot	INFERRED	ParseOperand* from TPPStreamCompiler__newReturnValue: the function's return value slot
+local	TIntermBranch__compileNode	local_2c	paramOperand	INFERRED	ParseOperand* from TPPStreamCompiler__newParam for an in/out parameter copied back before return
+local	TIntermBranch__compileNode	local_30	minusOne	CONFIRMED	0xbf800000 = -1.0f constant passed to getConstantAsSourceVar for the kill operation
+local	TIntermBranch__compileNode	pcVar7	labelText	INFERRED	label argument of AddOperation: function name for return, break label for break
+local	TIntermBranch__compileNode	this_00	functionStack	CONFIRMED	compiler+0x58 ParseFunctionStack
+local	TIntermBranch__compileNode	ppPVar11	paramSlot	INFERRED	pointer to the param operand slot being assigned
+local	TIntermBranch__compileNode	iVar10	paramIndex	CONFIRMED	loop index over ParseFunctionStack__getCurrentNumParams
+local	TIntermBranch__compileNode	iVar6	paramList	CONFIRMED	second half of ParseFunctionStack__getCurrentParamList
+local	TIntermBranch__compileNode	iVar2	paramByteOffset	INFERRED	paramIndex*4
+local	TIntermAggregate__compileNode	local_d0	opHeaderAndFlags	INFERRED	words 0-1 of the _PPStreamOperation record (14 words, local_d0[2], local_c8 ... local_9c): opcode<<18 | child count<<29 | flags; filled from _operatorToken[operator]
+local	TIntermAggregate__compileNode	local_c8	opDest0	INFERRED	record word 2: destination operand descriptor first word
+local	TIntermAggregate__compileNode	local_c4	opDest1	INFERRED	record word 3: destination operand descriptor second word
+local	TIntermAggregate__compileNode	local_c0	opSrc0A	INFERRED	record word 4: source 0 descriptor first word
+local	TIntermAggregate__compileNode	local_bc	opSrc0B	INFERRED	record word 5: source 0 descriptor second word
+local	TIntermAggregate__compileNode	local_b8	opSrc1A	INFERRED	record word 6: source 1 descriptor first word
+local	TIntermAggregate__compileNode	local_b4	opSrc1B	INFERRED	record word 7: source 1 descriptor second word
+local	TIntermAggregate__compileNode	local_b0	opSrc2A	INFERRED	record word 8: source 2 descriptor first word
+local	TIntermAggregate__compileNode	local_ac	opSrc2B	INFERRED	record word 9: source 2 descriptor second word
+local	TIntermAggregate__compileNode	local_a8	opAuxA	INFERRED	record word 10: auxiliary operand first word, zero-initialised
+local	TIntermAggregate__compileNode	local_a4	opAuxB	INFERRED	record word 11: auxiliary operand second word
+local	TIntermAggregate__compileNode	local_a0	opLine	CONFIRMED	record word 12: TIntermNode slot 0 (getLine) result stored right after the record is cleared
+local	TIntermAggregate__compileNode	local_9c	opLabelLength	CONFIRMED	record word 13: _strlen of the function-name label passed as the str argument of AddOperation
+local	TIntermAggregate__compileNode	iVar20	ppStream	CONFIRMED	compiler+0x70: the PPStream receiving operations and labels (_PPStreamAddLabel(ppStream, ...))
+local	TIntermAggregate__compileNode	iVar18	childCount	CONFIRMED	(sequence end - sequence begin) >> 2 where the sequence is this+0x38/+0x3c
+local	TIntermAggregate__compileNode	ppPVar19	childOperands	CONFIRMED	malloc(childCount*4) array of ParseOperand* results of compiling each child (slot 3 compileNode)
+local	TIntermAggregate__compileNode	ppPVar12	childOperandCopies	INFERRED	array of copies (new ParseOperand copy-constructed) made for the function-call argument operands
+local	TIntermAggregate__compileNode	puVar26	childCursor	CONFIRMED	cursor over the aggregate's sequence of TIntermNode* children
+local	TIntermAggregate__compileNode	pPVar25	childOperand	CONFIRMED	ParseOperand* returned by compiling the current child, then passed to ParseSymbolTable__processOperand
+local	TIntermAggregate__compileNode	local_48	resultOperand	INFERRED	array whose element 0 is the aggregate's result ParseOperand* (newTemporary / newReturnValue); passed as the destination slot of AddOperation
+local	TIntermAggregate__compileNode	local_60	destroyAllocatorArg	INFERRED	stack slot holding the allocator reference argument of the inlined std::string _Rep::_M_destroy call
+local	TIntermAggregate__compileNode	bVar1	hasChildren	CONFIRMED	childCount != 0
+local	TIntermAggregate__compileNode	a5	operatorCode	INFERRED	*(this+0x30): the aggregate operator, used to index _operatorToken and in the two switch statements
+local	TIntermAggregate__compileNode	pbVar4	newlineCharPtr	INFERRED	pointer to the character stored at the end of function-name strings (DAT_a7b7bd04), used as the string terminator fix-up

@@ -90,7 +90,6 @@ local	TIntermAggregate__compileNode	local_a8	opAuxA	INFERRED	record word 10: aux
 local	TIntermAggregate__compileNode	local_a4	opAuxB	INFERRED	record word 11: auxiliary operand second word
 local	TIntermAggregate__compileNode	local_a0	opLine	CONFIRMED	record word 12: TIntermNode slot 0 (getLine) result stored right after the record is cleared
 local	TIntermAggregate__compileNode	local_9c	opLabelLength	CONFIRMED	record word 13: _strlen of the function-name label passed as the str argument of AddOperation
-local	TIntermAggregate__compileNode	iVar20	ppStream	CONFIRMED	compiler+0x70: the PPStream receiving operations and labels (_PPStreamAddLabel(ppStream, ...))
 local	TIntermAggregate__compileNode	iVar18	childCount	CONFIRMED	(sequence end - sequence begin) >> 2 where the sequence is this+0x38/+0x3c
 local	TIntermAggregate__compileNode	ppPVar19	childOperands	CONFIRMED	malloc(childCount*4) array of ParseOperand* results of compiling each child (slot 3 compileNode)
 local	TIntermAggregate__compileNode	ppPVar12	childOperandCopies	INFERRED	array of copies (new ParseOperand copy-constructed) made for the function-call argument operands
@@ -100,4 +99,4 @@ local	TIntermAggregate__compileNode	local_48	resultOperand	INFERRED	array whose 
 local	TIntermAggregate__compileNode	local_60	destroyAllocatorArg	INFERRED	stack slot holding the allocator reference argument of the inlined std::string _Rep::_M_destroy call
 local	TIntermAggregate__compileNode	bVar1	hasChildren	CONFIRMED	childCount != 0
 local	TIntermAggregate__compileNode	a5	operatorCode	INFERRED	*(this+0x30): the aggregate operator, used to index _operatorToken and in the two switch statements
-local	TIntermAggregate__compileNode	pbVar4	newlineCharPtr	INFERRED	pointer to the character stored at the end of function-name strings (DAT_a7b7bd04), used as the string terminator fix-up
+local	TIntermAggregate__compileNode	pbVar4	terminalCharPtr	INFERRED	pointer to the std::string _S_terminal character, stored at data[length] (inlined c_str)

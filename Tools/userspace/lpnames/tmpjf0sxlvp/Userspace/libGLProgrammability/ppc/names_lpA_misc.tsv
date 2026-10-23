@@ -1,0 +1,71 @@
+local	yyinput	pbVar1	savedCp	INFERRED	flex yyinput(): returns the next character, refilling through yy_get_next_buffer; savedCp/savedText remember yy_c_buf_p and yytext across the refill
+local	yyinput	bVar2	ch	INFERRED	flex yyinput(): returns the next character, refilling through yy_get_next_buffer; savedCp/savedText remember yy_c_buf_p and yytext across the refill
+local	yyinput	iVar3	savedText	INFERRED	flex yyinput(): returns the next character, refilling through yy_get_next_buffer; savedCp/savedText remember yy_c_buf_p and yytext across the refill
+local	TFunction__dump	puVar1	terminalPtr	INFERRED	TFunction::dump(infoSink): "<name>: <return basic type> <mangled name>\n"
+local	TFunction__dump	iVar2	nameData	INFERRED	TFunction::dump(infoSink): "<name>: <return basic type> <mangled name>\n"
+local	TFunction__dump	iVar4	symbolName	INFERRED	TFunction::dump(infoSink): "<name>: <return basic type> <mangled name>\n"
+local	_ShGetAttribLocation	uVar2	location	INFERRED	ShGetAttribLocation(handle,name): attribute binding location by name from the linker binding table, -1 when absent
+local	_ShGetUniformLocation	uVar2	location	INFERRED	ShGetUniformLocation(handle,name): uniform binding location by name, -1 when absent
+local	yy_init_buffer	param_2	file	INFERRED	flex yy_init_buffer(b,file): yy_flush_buffer, is_interactive and fill-buffer flags, stores the input file at b+0
+local	yy_flex_alloc	param_1	bytes	INFERRED	flex yy_flex_alloc(size) = malloc
+local	yy_flex_free	param_1	ptr	INFERRED	flex yy_flex_free(ptr) = free
+local	_SetLineNumber	param_1	lineNumber	INFERRED	sets the preprocessor's current line number
+local	_SetStringNumber	param_1	stringNumber	INFERRED	sets the preprocessor's current source string number
+local	PrintTemp	param_2	ordinalIn	INFERRED	PrintTemp(bindingWord,ordinal): text of a temporary binding (just the ordinal)
+local	PrintTemp	uStack0000001c	ordinal	INFERRED	PrintTemp(bindingWord,ordinal): text of a temporary binding (just the ordinal)
+local	PrintTemp	uStack00000018	bindingWord	INFERRED	PrintTemp(bindingWord,ordinal): text of a temporary binding (just the ordinal)
+local	Binding__GetHash	param_2	numBuckets	INFERRED	Binding::GetHash(numBuckets) = hash key (+0xc) modulo numBuckets
+local	Binding__SetClientRequest	param_2	isClientRequest	INFERRED	Binding::SetClientRequest: stores the client-request flag (+0x2c)
+local	Binding__SetBuiltIn	param_2	isBuiltIn	INFERRED	Binding::SetBuiltIn: stores the built-in flag (+0x30)
+local	__ZeqRK7BindingS1_	iVar1	nameCmp	INFERRED	Binding::operator==: same hash key (+0xc), same name length (+0x10) and strncmp of the names
+local	yyerror	param_2	staleR4	INFERRED	yyerror has a single real argument (the message); the other parameters are stale argument registers Ghidra forwards to TParseContext::error
+local	yyerror	param_3	staleR5	INFERRED	yyerror has a single real argument (the message); the other parameters are stale argument registers Ghidra forwards to TParseContext::error
+local	yyerror	param_4	staleR6	INFERRED	yyerror has a single real argument (the message); the other parameters are stale argument registers Ghidra forwards to TParseContext::error
+local	yyerror	param_5	staleR7	INFERRED	yyerror has a single real argument (the message); the other parameters are stale argument registers Ghidra forwards to TParseContext::error
+local	yyerror	param_6	staleR8	INFERRED	yyerror has a single real argument (the message); the other parameters are stale argument registers Ghidra forwards to TParseContext::error
+local	yyerror	param_7	staleR9	INFERRED	yyerror has a single real argument (the message); the other parameters are stale argument registers Ghidra forwards to TParseContext::error
+local	yyerror	param_8	staleR10	INFERRED	yyerror has a single real argument (the message); the other parameters are stale argument registers Ghidra forwards to TParseContext::error
+local	_CPPShInfoLogMsg	param_2	staleR4	INFERRED	_CPPShInfoLogMsg has a single real argument (the message); the other parameters are stale argument registers forwarded to TParseContext::error
+local	_CPPShInfoLogMsg	param_3	staleR5	INFERRED	_CPPShInfoLogMsg has a single real argument (the message); the other parameters are stale argument registers forwarded to TParseContext::error
+local	_CPPShInfoLogMsg	param_4	staleR6	INFERRED	_CPPShInfoLogMsg has a single real argument (the message); the other parameters are stale argument registers forwarded to TParseContext::error
+local	_CPPShInfoLogMsg	param_5	staleR7	INFERRED	_CPPShInfoLogMsg has a single real argument (the message); the other parameters are stale argument registers forwarded to TParseContext::error
+local	_CPPShInfoLogMsg	param_6	staleR8	INFERRED	_CPPShInfoLogMsg has a single real argument (the message); the other parameters are stale argument registers forwarded to TParseContext::error
+local	_CPPShInfoLogMsg	param_7	staleR9	INFERRED	_CPPShInfoLogMsg has a single real argument (the message); the other parameters are stale argument registers forwarded to TParseContext::error
+local	_CPPErrorToInfoLog	param_2	staleR4	INFERRED	_CPPErrorToInfoLog has a single real argument (the message); the other parameters are stale argument registers forwarded to TParseContext::error
+local	_CPPErrorToInfoLog	param_3	staleR5	INFERRED	_CPPErrorToInfoLog has a single real argument (the message); the other parameters are stale argument registers forwarded to TParseContext::error
+local	_CPPErrorToInfoLog	param_4	staleR6	INFERRED	_CPPErrorToInfoLog has a single real argument (the message); the other parameters are stale argument registers forwarded to TParseContext::error
+local	_CPPErrorToInfoLog	param_5	staleR7	INFERRED	_CPPErrorToInfoLog has a single real argument (the message); the other parameters are stale argument registers forwarded to TParseContext::error
+local	_CPPErrorToInfoLog	param_6	staleR8	INFERRED	_CPPErrorToInfoLog has a single real argument (the message); the other parameters are stale argument registers forwarded to TParseContext::error
+local	_CPPErrorToInfoLog	param_7	staleR9	INFERRED	_CPPErrorToInfoLog has a single real argument (the message); the other parameters are stale argument registers forwarded to TParseContext::error
+local	ParseOperand__GetBaseSize	iVar1	baseSize	INFERRED	base component count: the operand's own size (+0x24) without a symbol, else its swizzle count (+0x14) or the symbol type's scaler width
+local	__ZN9TFunctionD4Ev	local_20	destroyAlloc	INFERRED	TFunction destructor: allocator word passed to _Rep::_M_destroy
+local	__ZN17TSymbolTableLevelD4Ev	param_2	staleR4	INFERRED	stale argument register forwarded to the symbol's virtual destructor call
+local	TSymbolTableLevel__dump	local_20	iter	INFERRED	TSymbolTableLevel::dump(infoSink): calls each symbol's virtual dump (slot 5) over the std::map; the register values are stale arguments of that call
+local	TSymbolTableLevel__dump	in_r5	staleR5	INFERRED	TSymbolTableLevel::dump(infoSink): calls each symbol's virtual dump (slot 5) over the std::map; the register values are stale arguments of that call
+local	TSymbolTableLevel__dump	in_r6	staleR6	INFERRED	TSymbolTableLevel::dump(infoSink): calls each symbol's virtual dump (slot 5) over the std::map; the register values are stale arguments of that call
+local	TSymbolTableLevel__dump	in_r7	staleR7	INFERRED	TSymbolTableLevel::dump(infoSink): calls each symbol's virtual dump (slot 5) over the std::map; the register values are stale arguments of that call
+local	TSymbolTableLevel__dump	in_r8	staleR8	INFERRED	TSymbolTableLevel::dump(infoSink): calls each symbol's virtual dump (slot 5) over the std::map; the register values are stale arguments of that call
+local	ParseSymbol__ResolveOpenGLType	a1	staleR4	INFERRED	stale argument registers of the TType virtual calls
+local	ParseSymbol__ResolveOpenGLType	in_r5	staleR5	INFERRED	stale argument registers of the TType virtual calls
+local	ParseSymbol__ResolveOpenGLType	in_r6	staleR6	INFERRED	stale argument registers of the TType virtual calls
+local	ParseSymbol__ResolveOpenGLType	in_r7	staleR7	INFERRED	stale argument registers of the TType virtual calls
+local	ParseSymbol__ResolveOpenGLType	in_r8	staleR8	INFERRED	stale argument registers of the TType virtual calls
+use	ParseSymbol__PopDirectIndex	iVar1	oldCount	INFERRED	direct-index count before the pop	iVar1 = \*\(int \*\)\(this \+ 0x24\)	iVar1 = uVar2 \* 4	all	none
+use	ParseSymbol__PopDirectIndex	iVar1	byteOffset	INFERRED	byte offset of the entry being shifted down	iVar1 = uVar2 \* 4	
+use	ParseOperand__PopDirectIndex	iVar1	oldCount	INFERRED	direct-index count before the pop	iVar1 = \*\(int \*\)\(this \+ 0x20\)	iVar1 = uVar2 \* 4
+use	ParseOperand__PopDirectIndex	iVar1	byteOffset	INFERRED	byte offset of the entry being shifted down	iVar1 = uVar2 \* 4	
+use	BindingTable__FindAttribBinding	iVar1	hashIdx	INFERRED	hash bucket index of the binding	iVar1 = Binding__GetHash	while
+use	BindingTable__FindAttribBinding	iVar1	isEqual	INFERRED	result of Binding operator== against the bucket entry	while	
+use	BindingTable__FindUniformBinding	iVar1	hashIdx	INFERRED	hash bucket index of the binding	iVar1 = Binding__GetHash	while
+use	BindingTable__FindUniformBinding	iVar1	isEqual	INFERRED	result of Binding operator== against the bucket entry	while	
+use	ParseSymbol__RemoveNameBackToChar	iVar3	scanPos	INFERRED	scan position walking back through the name (+0x14)	iVar3 = \*\(int \*\)\(this \+ 0x20\)	iVar3 = iVar3 \+ 1	all	rhs
+use	ParseSymbol__RemoveNameBackToChar	iVar3	newLen	INFERRED	new name length after truncation (also counts the hash loop down)	iVar3 = iVar3 \+ 1		lhs	none
+use	Binding__RemoveNameBackToChar	iVar3	scanPos	INFERRED	scan position walking back through the name (+8)	iVar3 = \*\(int \*\)\(this \+ 0x10\)	iVar3 = iVar3 \+ 1	all	rhs
+use	Binding__RemoveNameBackToChar	iVar3	newLen	INFERRED	new name length after truncation (also counts the hash loop down)	iVar3 = iVar3 \+ 1		lhs	none
+use	TSymbolTable__copyTable	puVar2	forceNewPtr	INFERRED	address of the pool allocator's _S_force_new flag	puVar2 = PTR__S_force_new	puVar2 = PTR__S_free_list	all	none
+use	TSymbolTable__copyTable	puVar2	freeListPtr	INFERRED	address of the pool allocator's free-list array	puVar2 = PTR__S_free_list		all	none
+use	yylex	uVar9	yyC	INFERRED	character class of the current input byte (meta table DAT_97c37983/DAT_97c37d83) during the DFA walk	uVar9 = \(uint\)\(byte\)\(DAT_97c37983\)	uVar9 = \(uint\)\*\(short \*\)\(&_yy_accept \+ iVar8\)
+use	yylex	uVar9	yyAct	INFERRED	flex yy_act: the accepting rule number selecting the action (EOF actions computed from yy_start)	uVar9 = \(uint\)\*\(short \*\)\(&_yy_accept \+ iVar8\)	
+use	ParseSymbol__ResolveOpenGLType	iVar3	typeIsArray	INFERRED	TType::isArray() (vtable slot 0x38) of the symbol's type	iVar3 = \(\*\*\(code \*\*\)\(\*a0 \+ 0x38\)\)	iVar3 = \(\*\*\(code \*\*\)\(\*\*\(int \*\*\)\(this \+ 0xc\) \+ 0x34\)\)
+use	ParseSymbol__ResolveOpenGLType	iVar3	typeIsMatrix	INFERRED	TType::isMatrix() (vtable slot 0x34) of the symbol's type	iVar3 = \(\*\*\(code \*\*\)\(\*\*\(int \*\*\)\(this \+ 0xc\) \+ 0x34\)\)	iVar3 = \(\*\*\(code \*\*\)\(\*\*\(int \*\*\)\(this \+ 0xc\) \+ 0x2c\)\)
+use	ParseSymbol__ResolveOpenGLType	iVar3	nominalSize	INFERRED	TType::getNominalSize() (vtable slot 0x2c): 1..4 selects the GL type	iVar3 = \(\*\*\(code \*\*\)\(\*\*\(int \*\*\)\(this \+ 0xc\) \+ 0x2c\)\)	

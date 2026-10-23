@@ -1,0 +1,45 @@
+local	FunctionTable__addFunction	iVar3	oldEntries	INFERRED	function entry array before growth (this[0])
+local	FunctionTable__addFunction	iVar5	entryOffset	INFERRED	byte offset (index*0x18) of the entry being copied
+local	FunctionTable__addFunction	iVar9	srcEntry	INFERRED	old entry being copied
+local	FunctionTable__addFunction	iVar1	dstEntry	INFERRED	new entry receiving the copy
+local	FunctionTable__addFunction	uVar6	entryWord3	INFERRED	entry word +0xc (numParams)
+local	FunctionTable__addFunction	uVar7	entryWord1	INFERRED	entry word +4 (returnVal)
+local	FunctionTable__addFunction	uVar8	entryWord2	INFERRED	entry word +8 (empty flag)
+local	FunctionTable__addFunction	uVar10	functionCount	INFERRED	number of entries before the add (this[1])
+local	FunctionTable__addFunction	iVar4	entries	INFERRED	function entry array after growth
+local	FunctionTable__addFunction	iVar2	newIndex	INFERRED	index of the new function; returned
+local	FunctionTable__removeFunction	param_2	functionIndex	CONFIRMED	index of the function removed
+local	FunctionTable__removeFunction	iVar5	entryOffset	INFERRED	byte offset (index*0x18) of the entry being moved down
+local	FunctionTable__removeFunction	iVar1	entry	INFERRED	entry being overwritten by its successor (also holds the function count)
+local	FunctionTable__removeFunction	uVar2	nextWord3	INFERRED	successor entry word +0xc (numParams)
+local	FunctionTable__removeFunction	uVar3	nextWord2	INFERRED	successor entry word +8 (empty flag)
+local	FunctionTable__removeFunction	uVar4	nextWord1	INFERRED	successor entry word +4 (returnVal)
+local	FunctionTable__setReturnVal	param_2	functionIndex	CONFIRMED	function table index
+local	FunctionTable__setReturnVal	param_3	value	CONFIRMED	new return value stored at entry+0x4
+local	FunctionTable__setEmpty	param_2	functionIndex	CONFIRMED	function table index
+local	FunctionTable__setEmpty	param_3	value	CONFIRMED	new empty flag stored at entry+0x8
+local	FunctionTable__setNumParams	param_2	functionIndex	CONFIRMED	function table index
+local	FunctionTable__setNumParams	param_3	value	CONFIRMED	new number of parameters stored at entry+0xc
+local	FunctionTable__setFirstOp	param_2	functionIndex	CONFIRMED	function table index
+local	FunctionTable__setFirstOp	param_3	value	CONFIRMED	new first operation index stored at entry+0x10
+local	FunctionTable__setLastOp	param_2	functionIndex	CONFIRMED	function table index
+local	FunctionTable__setLastOp	param_3	value	CONFIRMED	new last operation index stored at entry+0x14
+local	FunctionTable__getFunctionName	param_2	functionIndex	CONFIRMED	function table index
+local	FunctionTable__clear	puVar1	entryName	INFERRED	function name pointer of the entry being freed
+local	FunctionTable__clear	iVar3	entryOffset	INFERRED	byte offset (index*0x18) of the entry
+local	FunctionTable__findFunction	param_3	unusedArg3	INFERRED	unused (forwarded register)
+local	FunctionTable__findFunction	param_4	unusedArg4	INFERRED	unused (forwarded register)
+local	FunctionTable__findFunction	param_5	unusedArg5	INFERRED	unused (forwarded register)
+local	FunctionTable__findFunction	param_6	unusedArg6	INFERRED	unused (forwarded register)
+local	FunctionTable__findFunction	iVar1	functionCount	INFERRED	number of functions in the table
+local	FunctionTable__findFunction	iVar2	entryOffset	INFERRED	byte offset (index*0x18) of the entry
+local	FunctionTable__findFunction	iVar3	index	INFERRED	index of the matching function (-1 if none)
+local	FunctionTable__updateForRemovingChunk	iVar2	entryOffset	INFERRED	byte offset (index*0x18) of the entry
+local	FunctionTable__updateForRemovingChunk	iVar3	entries	INFERRED	function entry array (this[0])
+local	FunctionTable__updateForRemovingChunk	iVar4	entry	INFERRED	function entry being fixed up
+local	FunctionTable__updateForRemovingChunk	uVar5	chunkWord	INFERRED	removed chunk word 0 (index in the low 18 bits)
+local	TPPStreamCompiler__compile	uVar1	opWord	INFERRED	operation chunk word 0 before the carry is merged in
+local	TPPStreamCompiler__compile	iVar2	opChunkOrResult	INFERRED	operation chunk being renumbered, then this->compileResult (+0xc)
+local	TPPStreamCompiler__compile	iVar3	ppStream	INFERRED	this->ppStream (+0x70)
+local	TPPStreamCompiler__compile	uVar6	carryBits	INFERRED	precision bits carried from the previous operation chunk (word >> 29)
+local	TPPStreamCompiler__compile	local_20	streamEntryCount	INFERRED	entry count from _PPStreamGetStream

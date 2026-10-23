@@ -1,0 +1,35 @@
+local	TPPStreamCompiler__getNewConstantSourceVar	param_3	values	CONFIRMED	the constant's value words, valueCount of them
+local	TPPStreamCompiler__getNewConstantSourceVar	param_4	valueCount	CONFIRMED	number of components (1..4): (valueCount-1) goes into descriptor bits 12..13 and chunk word 0 bits 24..25
+local	TPPStreamCompiler__getNewConstantSourceVar	param_5	glType	CONFIRMED	OpenGL type of the constant: GetPPStreamTypeForGLType input and the type recorded in the ConstantAllocationList
+local	TPPStreamCompiler__getNewConstantSourceVar	uVar8	constantChunkList	CONFIRMED	stream +0x10: the chunk list a new constant chunk is appended to
+local	TPPStreamCompiler__getNewConstantSourceVar	local_60	constantValues	CONFIRMED	the four value words handed to _PPStreamAddConstant
+local	TPPStreamCompiler__getNewConstantSourceVar	local_50	chunkWord0	CONFIRMED	word 0 of the new chunk (+0xc): class 0x11 in bits 16..20, type and size bits, constant index in the low half
+local	TPPStreamCompiler__getNewConstantSourceVar	local_4c	chunkWord1	CONFIRMED	word 1 of the new chunk (+0x10): the chunk id taken from symbol table +0x24 (counter, masked to 16 bits)
+local	TPPStreamCompiler__getNewConstantSourceVar	local_40	laneUsedFlags	CONFIRMED	per-lane used flags (1 for each of the valueCount lanes) given to ConstantAllocationList__addConstant
+local	TPPStreamCompiler__getNewConstantSourceVar	uVar4	constantIndex	CONFIRMED	chunkWord1 as stored, masked again for addConstant
+local	TPPStreamCompiler__getNewConstantSourceVar	uVar3	chunkClassBits	INFERRED	chunk word 0 >> 16: register class bits placed back into the new word 0
+local	TPPStreamCompiler__getNewConstantSourceVar	uVar2	newConstantIndex	INFERRED	halfword +10 of the stream's constant list, the low half of chunk word 0
+local	TPPStreamCompiler__getNewConstantSourceVar	uVar1	constantWord	CONFIRMED	one value word read from values and stored in constantValues
+local	TPPStreamCompiler__getNewConstantSourceVar	puVar7	laneFlagCursor	CONFIRMED	walks laneUsedFlags setting 1 per copied value
+use	TPPStreamCompiler__getNewConstantSourceVar	iVar9	constantList	CONFIRMED	stream +0x2c: the stream's constant array whose halfword +10 gives the new constant index	iVar9 = \*\(int \*\)\(\*\(int \*\)\(param_2 \+ 0x70\) \+ 0x2c\);	iVar9 = 0;
+use	TPPStreamCompiler__getNewConstantSourceVar	iVar9	valueIndex	CONFIRMED	index of the value being copied (also the lane flag index)	iVar9 = 0;@1	iVar9 = 0;
+use	TPPStreamCompiler__getNewConstantSourceVar	iVar9	valueIndex	CONFIRMED	index of the value being copied in the non-tracking path	iVar9 = 0;@2	
+local	TPPStreamCompiler__getConstantAsSourceVar	param_3	values	CONFIRMED	the constant's value words (floats), valueCount of them
+local	TPPStreamCompiler__getConstantAsSourceVar	param_4	valueCount	CONFIRMED	number of components 1..4
+local	TPPStreamCompiler__getConstantAsSourceVar	param_5	glType	CONFIRMED	OpenGL type of the constant, compared with the type recorded for each existing constant
+local	TPPStreamCompiler__getConstantAsSourceVar	uVar5	constantList	CONFIRMED	stream +0x2c: the stream's constant array indexed by chunk register
+local	TPPStreamCompiler__getConstantAsSourceVar	local_70	laneUsed	CONFIRMED	per-lane used flags of the candidate constant, from ConstantAllocationList__getConstantUsage; initialised from four data words
+local	TPPStreamCompiler__getConstantAsSourceVar	local_60	usageGlTypes	CONFIRMED	per-constant GL types from getConstantUsage; entry 0 is compared with glType
+local	TPPStreamCompiler__getConstantAsSourceVar	local_50	mergedLaneFlags	CONFIRMED	lanes of the new value already satisfied while merging into a partly used constant
+local	TPPStreamCompiler__getConstantAsSourceVar	bVar2	chunkCompatible	CONFIRMED	cleared when a used lane of the candidate constant holds a different value
+use	TPPStreamCompiler__getConstantAsSourceVar	piVar6	chunkList	CONFIRMED	stream +0x10: the chunk list; *chunkList is the first chunk	piVar6 = \*\(int \*\*\)\(\*\(int \*\)\(param_2 \+ 0x70\) \+ 0x10\);	piVar6 = local_50;
+use	TPPStreamCompiler__getConstantAsSourceVar	piVar6	flagCursor	CONFIRMED	walks mergedLaneFlags to check every lane got a value	piVar6 = local_50;	
+use	TPPStreamCompiler__getConstantAsSourceVar	iVar7	chunkCursor	CONFIRMED	walks the stream's constant chunk list (next at +8)	iVar7 = \*piVar6;@1	
+use	TPPStreamCompiler__getConstantAsSourceVar	iVar4	laneFilled	CONFIRMED	mergedLaneFlags entry of the lane being checked	iVar4 = \*piVar6;	+3
+use	TPPStreamCompiler__getConstantAsSourceVar	uVar3	xSelector	CONFIRMED	descriptor bits 21..22: the x component selector, replicated into y z w when valueCount is 1	uVar3 = \*\(uint \*\)param_1 >> 0x15 & 3;	
+
+local	TPPStreamCompiler__getConstantAsSourceVar	local_80	scratchWord0	INFERRED	first word of an 8-byte stack buffer: the chunk word 0 (+0xc) of the constant chunk being compared in the scans, and the first descriptor word returned through the address-taken buffer by getNewConstantSourceVar (the same frame slot, which the compile gate does not let us split)
+local	TPPStreamCompiler__getConstantAsSourceVar	local_7c	scratchWord1	INFERRED	second word of the same buffer: chunk word 1 (+0x10) in the scans, second descriptor word of getNewConstantSourceVar's result
+use	TPPStreamCompiler__getConstantAsSourceVar	bVar1	noExactMatch	CONFIRMED	no existing constant equals the value (after the first scan)	bVar1 = !bVar1;	+1	lhs
+use	TPPStreamCompiler__getConstantAsSourceVar	bVar1	noExactMatch	CONFIRMED	no exact match: try merging next, then create a new constant	bVar1 = true;@2	
+use	TPPStreamCompiler__getConstantAsSourceVar	bVar1	exactMatchFound	CONFIRMED	an existing constant holds every value; its register is stored in the descriptor	bVar1 = false;	LAB_97bc8720:
