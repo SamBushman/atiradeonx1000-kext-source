@@ -206,7 +206,7 @@ local	_PPCRuntimeCompilerLoadRegister	param_1	compiler	INFERRED	dereferenced as 
 local	_PPCRuntimeCompilerBackupRegister	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (76 field accesses); every PPCRuntimeCompiler* function takes it first
 local	_PPCRuntimeCompilerSaveRegisterToMemory	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (35 field accesses); every PPCRuntimeCompiler* function takes it first
 local	_PPCRuntimeCompilerSetRegister	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (4 field accesses); every PPCRuntimeCompiler* function takes it first
-local	_PPCRuntimeCompilerBuildTransferSwizzle	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (6 field accesses); every PPCRuntimeCompiler* function takes it first
+local	_PPCRuntimeCompilerBuildTransferSwizzle	param_1	swizzleOut	INFERRED	first parameter is the 4-byte output array, not the compiler
 local	_PPCRuntimeCompilerSwizzleRegisterAV	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (50 field accesses); every PPCRuntimeCompiler* function takes it first
 local	_PPCRuntimeCompilerFindVariableInfo	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (3 field accesses); every PPCRuntimeCompiler* function takes it first
 local	_PPCRuntimeCompilerLoadSourceNO	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (6 field accesses); every PPCRuntimeCompiler* function takes it first

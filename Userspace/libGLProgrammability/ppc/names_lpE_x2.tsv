@@ -526,3 +526,88 @@ use	_PPCRuntimeCompilerSwizzleRegisterAV	uVar10	shiftedSelectors	CONFIRMED	selec
 use	_PPCRuntimeCompilerSwizzleRegisterAV	puVar9	nextCursor	INFERRED	code cursor after the instructions just written (cursor+1 or cursor+3), stored back into compiler+0xe30	^\s*puVar9\ =\ puVar9\ \+\ 1;$	+0	lhs	lhs
 use	_PPCRuntimeCompilerSwizzleRegisterAV	puVar9	nextCursor	INFERRED	code cursor after the instructions just written (cursor+1 or cursor+3), stored back into compiler+0xe30	^\s*puVar9\ =\ puVar8\ \+\ 3;$	+0	lhs	lhs
 use	_PPCRuntimeCompilerSwizzleRegisterAV	puVar9	nextCursor	INFERRED	code cursor after the instructions just written (cursor+1 or cursor+3), stored back into compiler+0xe30	^\s*\*\(uint\ \*\*\)\(param_1\ \+\ 0xe30\)\ =\ puVar9;$	+1
+local	_PPCRuntimeCompilerStride	iVar3	programInfo	CONFIRMED	program info at compiler+0xe24
+local	_PPCRuntimeCompilerStride	puVar4	cursorAfterOps	CONFIRMED	code cursor after the words stored in this branch
+local	_PPCRuntimeCompilerStride	uVar1	immediateHalf	CONFIRMED	16-bit immediate (program info +0xda/+0xde) OR-ed into an addi
+local	_PPCRuntimeCompilerLoop	uVar1	wordsBack	CONFIRMED	distance in words from the loop start (compiler+0xe38) to the code cursor
+local	_PPCRuntimeCompilerGetCompiledResult	param_1	compiler	CONFIRMED	runtime compiler; compiled code buffer at +0xe2c
+local	_PPCTextureSamplerInitialise	param_1	sampler	CONFIRMED	texture sampler state; +0x14 unit and +0x18 dimension code reset to -1
+local	_PPCTextureSamplerAttachGLDContext	param_1	sampler	CONFIRMED	texture sampler state
+local	_PPCTextureSamplerAttachGLDContext	param_2	gldContext	CONFIRMED	GL driver context stored at sampler[0]
+local	_PPCTextureSamplerSetProjectionEnabled	param_1	sampler	CONFIRMED	texture sampler state
+local	_PPCTextureSamplerSetProjectionEnabled	param_2	projectionEnabled	CONFIRMED	stored at sampler+0x20
+local	_PPCTextureSamplerSetLodBiasEnabled	param_1	sampler	CONFIRMED	texture sampler state
+local	_PPCTextureSamplerSetLodBiasEnabled	param_2	lodBiasEnabled	CONFIRMED	stored at sampler+0x24
+local	_PPCTextureSamplerAttachDerivatives	param_1	sampler	CONFIRMED	texture sampler state
+local	_PPCTextureSamplerAttachDerivatives	param_2	derivatives	INFERRED	derivative data stored at sampler+0xc
+local	_PPCTextureSamplerAttachDerivatives	fparam_1	derivativeScale	INFERRED	float stored at sampler+0x10
+local	_PPCTextureSamplerSampleTexel1DRTCNO	param_1	sampler	CONFIRMED	texture sampler state, unused for this dimension
+local	_PPCTextureSamplerSampleTexel1DRTCNO	param_2	textureUnit	CONFIRMED	texture unit, unused for this dimension
+local	_PPCTextureSamplerSampleTexel1DRTCNO	param_3	codeCursor	CONFIRMED	code cursor returned unchanged: no code is emitted for this dimension
+local	_PPCTextureSamplerSampleTexel3DRTCNO	param_1	sampler	CONFIRMED	texture sampler state, unused for this dimension
+local	_PPCTextureSamplerSampleTexel3DRTCNO	param_2	textureUnit	CONFIRMED	texture unit, unused for this dimension
+local	_PPCTextureSamplerSampleTexel3DRTCNO	param_3	codeCursor	CONFIRMED	code cursor returned unchanged: no code is emitted for this dimension
+local	_PPCRuntimeCompilerGetBaseIndexInRegister	param_1	compiler	CONFIRMED	runtime compiler; register table at +0x18 with 0x38-byte entries
+local	_PPCRuntimeCompilerGetBaseIndexInRegister	param_2	registerIndex	CONFIRMED	index of the register entry whose base index (ushort at +0x18) is returned
+local	_PPCNoiseGeneratorCalculate1DAVRTC	param_1	noiseTable	CONFIRMED	noise table, not used by the emitted code
+local	_PPCNoiseGeneratorCalculate1DAVRTC	param_2	codeCursor	CONFIRMED	JIT code write pointer; the noise sequence is emitted through it and the end pointer returned
+local	_PPCNoiseGeneratorCalculate2DAVRTC	param_1	noiseTable	CONFIRMED	noise table, not used by the emitted code
+local	_PPCNoiseGeneratorCalculate2DAVRTC	param_2	codeCursor	CONFIRMED	JIT code write pointer; the noise sequence is emitted through it and the end pointer returned
+local	_PPCNoiseGeneratorCalculate3DAVRTC	param_1	noiseTable	CONFIRMED	noise table, not used by the emitted code
+local	_PPCNoiseGeneratorCalculate3DAVRTC	param_2	codeCursor	CONFIRMED	JIT code write pointer; the noise sequence is emitted through it and the end pointer returned
+local	_PPCNoiseGeneratorCalculate4DAVRTC	param_1	noiseTable	CONFIRMED	noise table, not used
+local	_PPCNoiseGeneratorCalculate4DAVRTC	param_2	codeCursor	CONFIRMED	code cursor returned unchanged: no code emitted for 4D
+local	_PPCRasterOpMachineInitialise	param_1	machine	CONFIRMED	raster op machine: [0] emulator context, [1] runtime compiler, both cleared
+local	_PPCRasterOpMachineAttachEmulatorContext	param_1	machine	CONFIRMED	raster op machine
+local	_PPCRasterOpMachineAttachEmulatorContext	param_2	emulatorContext	CONFIRMED	stored at machine[0]
+local	_PPCRasterOpMachineAttachRuntimeCompiler	param_1	machine	CONFIRMED	raster op machine
+local	_PPCRasterOpMachineAttachRuntimeCompiler	param_2	runtimeCompiler	CONFIRMED	stored at machine+4
+local	_PPCRuntimeCompilerBuildTransferSwizzle	param_2	sourceComponents	CONFIRMED	four component characters of the source in storage order
+local	_PPCRuntimeCompilerBuildTransferSwizzle	param_3	requestedComponents	CONFIRMED	four component characters requested, in output order
+local	_PPCRuntimeCompilerBuildTransferSwizzle	cVar1	wantedComponent	CONFIRMED	component character being looked up
+local	_PPCRuntimeCompilerBuildTransferSwizzle	puVar3	swizzleLast	CONFIRMED	address of the last output byte
+local	_PPCRuntimeCompilerFindVariableInfo	param_2	variableKey	CONFIRMED	key compared with the first word of each 8-byte variable entry
+local	_PPCRuntimeCompilerFindVariableInfo	param_3	leftoverR5	INFERRED	register value left over from the caller, unused
+local	_PPCRuntimeCompilerFindVariableInfo	param_4	leftoverR6	INFERRED	register value left over from the caller, unused
+local	_PPCRuntimeCompilerFindVariableInfo	param_5	leftoverR7	INFERRED	register value left over from the caller, unused
+local	_PPCRuntimeCompilerFindVariableInfo	param_6	leftoverR8	INFERRED	register value left over from the caller, unused
+local	_PPCRuntimeCompilerFindVariableInfo	param_7	leftoverR9	INFERRED	register value left over from the caller, unused
+local	_PPCRuntimeCompilerFindVariableInfo	param_8	leftoverR10	INFERRED	register value left over from the caller, unused
+local	_PPCRuntimeCompilerFindVariableInfo	piVar1	variableEntry	CONFIRMED	8-byte entry of the variable table at compiler+0xe00 (count at +0xe04)
+local	_PPCRuntimeCompilerLoadSourceNO	iVar1	firstRegister	CONFIRMED	sourceSlot*4: first of the four registers loaded for this source
+local	_PPCRuntimeCompilerLoadSourceNO	iVar4	registerIndex	CONFIRMED	register backed up and dirtied (firstRegister + component)
+local	_PPCRuntimeCompilerLoadSourceNO	puVar2	negateTemplate	CONFIRMED	_glpNegateSource{A,B,C}RTC code template for sourceSlot 0/1/2
+local	_PPCRuntimeCompilerLoadSourceNO	uVar6	nextElement	CONFIRMED	element index + 1 of the LoadRegister loop
+local	_PPCRuntimeCompilerWriteFinalFragmentToBuffer	param_2	leftoverR4	INFERRED	register value left over from the caller, unused
+local	_PPCRuntimeCompilerWriteFinalFragmentToBuffer	param_3	leftoverR5	INFERRED	register value left over from the caller, unused
+local	_PPCRuntimeCompilerWriteFinalFragmentToBuffer	param_4	leftoverR6	INFERRED	register value left over from the caller, unused
+local	_PPCRuntimeCompilerWriteFinalFragmentToBuffer	param_5	leftoverR7	INFERRED	register value left over from the caller, unused
+local	_PPCRuntimeCompilerWriteFinalFragmentToBuffer	param_6	leftoverR8	INFERRED	register value left over from the caller, unused
+local	_PPCRuntimeCompilerWriteFinalFragmentToBuffer	param_7	leftoverR9	INFERRED	register value left over from the caller, unused
+local	_PPCRuntimeCompilerWriteFinalFragmentToBuffer	param_8	leftoverR10	INFERRED	register value left over from the caller, unused
+local	_PPCRuntimeCompilerWriteFinalFragmentToBuffer	puVar5	cursorAfterFormatConvert	CONFIRMED	code cursor after the first word of the RGBAFFFF to ARGB8888 conversion
+local	_PPCRuntimeCompilerWritePrologNO	iVar7	programInfo2	CONFIRMED	program info pointer re-read from compiler+0xe24
+local	_PPCRuntimeCompilerWritePrologNO	piVar4	fprSlotPtr	CONFIRMED	floating-point register slot (0x38 bytes per entry) tested for use before saving
+local	_PPCRuntimeCompilerWriteEpilogNO	iVar2	fprCountdown	CONFIRMED	floating-point registers left to restore
+local	_PPCRuntimeCompilerWritePrologAV	puVar1	cursorAfterMtctr	CONFIRMED	code cursor after the mtctr word, passed to _glpRTCAddAChunk
+local	_PPCRuntimeCompilerWriteEpilogAV	puVar4	cursorAfterMove	CONFIRMED	code cursor after the mr r5,r3 word, passed to _glpRTCAddAChunk
+local	_PPCRuntimeCompilerLoadSourceNO	uStack0000001c	opOffsetsCopy	INFERRED	copy of the incoming stack argument opOffsets kept in a local slot (the callee re-reads it after calls)
+local	_PPCRuntimeCompilerLoadSourceNO	uStack00000020	opBankCopy	INFERRED	copy of the incoming stack argument opBank kept in a local slot (the callee re-reads it after calls)
+local	_PPCRuntimeCompilerLoadSourceNO	uStack00000024	opSwizzleCopy	INFERRED	copy of the incoming stack argument opSwizzle kept in a local slot (the callee re-reads it after calls)
+local	_PPCRuntimeCompilerLoadSourceNO	uStack00000028	opIndexInfoCopy	INFERRED	copy of the incoming stack argument opIndexInfo kept in a local slot (the callee re-reads it after calls)
+local	_PPCRuntimeCompilerLoadSourceNO	uStack0000002c	opStorageCopy	INFERRED	copy of the incoming stack argument opStorage kept in a local slot (the callee re-reads it after calls)
+local	_PPCRuntimeCompilerLoadSourceNO	uStack00000030	opFlags5Copy	INFERRED	copy of the incoming stack argument opFlags5 kept in a local slot (the callee re-reads it after calls)
+local	_PPCRuntimeCompilerLoadSourceNO	uStack00000034	opTypeCopy	INFERRED	copy of the incoming stack argument opType kept in a local slot (the callee re-reads it after calls)
+local	_PPCRuntimeCompilerLoadSourceAV	uStack00000020	opBankCopy	INFERRED	copy of the incoming stack argument opBank kept in a local slot (the callee re-reads it after calls)
+local	_PPCRuntimeCompilerLoadSourceAV	uStack00000024	opSwizzleCopy	INFERRED	copy of the incoming stack argument opSwizzle kept in a local slot (the callee re-reads it after calls)
+local	_PPCRuntimeCompilerLoadSourceAV	uStack00000028	opIndexInfoCopy	INFERRED	copy of the incoming stack argument opIndexInfo kept in a local slot (the callee re-reads it after calls)
+local	_PPCRuntimeCompilerLoadSourceAV	uStack0000002c	opStorageCopy	INFERRED	copy of the incoming stack argument opStorage kept in a local slot (the callee re-reads it after calls)
+local	_PPCRuntimeCompilerLoadSourceAV	uStack00000030	opFlags5Copy	INFERRED	copy of the incoming stack argument opFlags5 kept in a local slot (the callee re-reads it after calls)
+local	_PPCRuntimeCompilerLoadSourceAV	uStack00000034	opTypeCopy	INFERRED	copy of the incoming stack argument opType kept in a local slot (the callee re-reads it after calls)
+local	_PPCRuntimeCompilerTestConditionRegisterAV	uStack0000001c	condDescWord0Copy	INFERRED	copy of the incoming stack argument condDescWord0 kept in a local slot (the callee re-reads it after calls)
+local	_PPCRuntimeCompilerTestConditionRegisterAV	uStack00000020	condDescWord1Copy	INFERRED	copy of the incoming stack argument condDescWord1 kept in a local slot (the callee re-reads it after calls)
+local	_PPCRuntimeCompilerTestConditionRegisterAV	uStack00000024	condDescWord2Copy	INFERRED	copy of the incoming stack argument condDescWord2 kept in a local slot (the callee re-reads it after calls)
+local	_PPCRuntimeCompilerTestConditionRegisterAV	uStack00000028	condDescWord3Copy	INFERRED	copy of the incoming stack argument condDescWord3 kept in a local slot (the callee re-reads it after calls)
+local	_PPCRuntimeCompilerTestConditionRegisterAV	uStack0000002c	condDescWord4Copy	INFERRED	copy of the incoming stack argument condDescWord4 kept in a local slot (the callee re-reads it after calls)
+local	_PPCRuntimeCompilerTestConditionRegisterAV	uStack00000030	condDescWord5Copy	INFERRED	copy of the incoming stack argument condDescWord5 kept in a local slot (the callee re-reads it after calls)
+local	_PPCRuntimeCompilerTestConditionRegisterAV	uStack00000034	condDescWord6Copy	INFERRED	copy of the incoming stack argument condDescWord6 kept in a local slot (the callee re-reads it after calls)
