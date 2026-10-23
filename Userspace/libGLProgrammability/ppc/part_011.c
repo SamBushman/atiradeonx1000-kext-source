@@ -1897,6 +1897,14 @@ int TIntermBinary__compileNode(this, compiler, unusedArg3, unusedArg4, unusedArg
   undefined4 unusedArg5;
   undefined4 unusedArg6;
 {
+  unsigned char * leftOperandToDelete;
+  unsigned char * rightOperandToDelete;
+  unsigned char * operandWorkPtr;
+  unsigned char * addrTempArg;
+  undefined4 *swizzleIter;
+  int operatorTokenOffset;
+  int fieldNameString;
+  int logicalSize;
   int resultQualifier;
   int binaryOp;
   int swizzleMap;
@@ -1920,12 +1928,12 @@ int TIntermBinary__compileNode(this, compiler, unusedArg3, unusedArg4, unusedArg
   int isArrayResult;
   ushort glType;
   unsigned char * leftOperandToFree;
-  int iVar3;
+  int op;
   undefined4 currentLine;
   int *leftType;
   int leftIsArray;
   unsigned char * leftNodeType;
-  unsigned char * pPVar8;
+  unsigned char * newLeftOperand;
   unsigned char * leftSymbol;
   undefined1 swizzleComponent;
   int rightAggregate;
@@ -1939,7 +1947,7 @@ int TIntermBinary__compileNode(this, compiler, unusedArg3, unusedArg4, unusedArg
   undefined4 r4Out0;
   undefined4 r4Out1;
   unsigned char ** operandSlotPtr;
-  undefined4 *puVar16;
+  undefined4 *thisVtable;
   uint *rightConstData;
   undefined4 zeroCallArg;
   uint indexValue;
@@ -1988,15 +1996,15 @@ int TIntermBinary__compileNode(this, compiler, unusedArg3, unusedArg4, unusedArg
   rightOperand = (unsigned char *)0x0;
   opLine = 0;
   opLine = (*(code *)**(undefined4 **)this)(this,compiler,unusedArg3,unusedArg4,unusedArg5,unusedArg6);
-  puVar16 = *(undefined4 **)this;
+  thisVtable = *(undefined4 **)this;
   opHeader = opHeader & 0x1fffffff | 0x40000000;
-  currentLine = (*(code *)*puVar16)(this,r4In0,unusedArg3,unusedArg4,unusedArg5,unusedArg6,puVar16);
+  currentLine = (*(code *)*thisVtable)(this,r4In0,unusedArg3,unusedArg4,unusedArg5,unusedArg6,thisVtable);
   *(undefined4 *)(compiler + 0x90) = currentLine;
   left = *(int **)(this + 0x34);
   if (left != (int *)0x0) {
     leftOperand = (unsigned char *)(**(code **)(*left + 0xc))(left,compiler);
-    iVar3 = *(int *)(this + 0x30);
-    if (((iVar3 != 0x2d) && (iVar3 != 0x2e)) && (iVar3 != 0x2f)) {
+    op = *(int *)(this + 0x30);
+    if (((op != 0x2d) && (op != 0x2e)) && (op != 0x2f)) {
       ((int (*)())ParseSymbolTable__processOperand)(*(unsigned char **)(compiler + 0x68),leftOperand);
     }
   }
@@ -2005,13 +2013,13 @@ int TIntermBinary__compileNode(this, compiler, unusedArg3, unusedArg4, unusedArg
     rightOperand = (unsigned char *)(**(code **)(*right + 0xc))(right,compiler);
     ((int (*)())ParseSymbolTable__processOperand)(*(unsigned char **)(compiler + 0x68),rightOperand);
   }
-  iVar3 = *(int *)(this + 0x30);
-  if (iVar3 == 0x2d) {
+  op = *(int *)(this + 0x30);
+  if (op == 0x2d) {
     ((int (*)())ParseSymbolTable__processOperand)(*(unsigned char **)(compiler + 0x68),rightOperand);
     rightConstData = *(uint **)(rightOperand + 4);
     indexValue = *rightConstData;
     leftType = (int *)(**(code **)(**(int **)(this + 0x34) + 0x3c))
-                              (*(int **)(this + 0x34),r4In1,unusedArg3,unusedArg4,iVar3,unusedArg6,rightConstData);
+                              (*(int **)(this + 0x34),r4In1,unusedArg3,unusedArg4,op,unusedArg6,rightConstData);
     leftIsArray = (**(code **)(*leftType + 0x38))(leftType);
     if (leftIsArray == 0) {
       ParseOperand__AddDirectIndex(leftOperand,indexValue);
@@ -2032,17 +2040,17 @@ LAB_97bbf03c:
         TPPStreamCompiler__error
                   (compiler,(char *)0x1,(char *)0x0,
                    "TIntermBinary::compileNode: Array index results in another array, this is not handled"
-                   ,iVar3,unusedArg6,rightConstData,zeroCallArg);
+                   ,op,unusedArg6,rightConstData,zeroCallArg);
       }
     }
 LAB_97bbf04c:
     resultOperand[0] = leftOperand;
     goto LAB_97bbf4fc;
   }
-  if (iVar3 == 0x2e) {
+  if (op == 0x2e) {
     if (*(int *)leftOperand == 0) {
       leftNodeType = (unsigned char *)(**(code **)(**(int **)(this + 0x34) + 0x3c))(*(int **)(this + 0x34));
-      pPVar8 = (unsigned char *)
+      newLeftOperand = (unsigned char *)
                TPPStreamCompiler__newIndirectOperandFromConstant(compiler,leftOperand,leftNodeType);
       leftOperandToFree = leftOperand;
       if (leftOperand != (unsigned char *)0x0) {
@@ -2053,7 +2061,7 @@ LAB_97bbf04c:
     else {
       leftType = (int *)(**(code **)(**(int **)(this + 0x34) + 0x3c))(*(int **)(this + 0x34));
       leftIsArray = (**(code **)(*leftType + 0x38))(leftType);
-      pPVar8 = leftOperand;
+      newLeftOperand = leftOperand;
       if (leftIsArray != 0) {
         _sprintf((char *)&operandDescOrSprintfBuffer,"[%d]",0);
         ParseSymbol__CatName(*(unsigned char **)leftOperand,(char *)&operandDescOrSprintfBuffer);
@@ -2062,7 +2070,7 @@ LAB_97bbf04c:
           leftSymbol = *(unsigned char **)leftOperand;
           *(undefined4 *)(leftSymbol + 0x48) = 1;
           ParseSymbol__ResolveOpenGLType(leftSymbol);
-          pPVar8 = leftOperand;
+          newLeftOperand = leftOperand;
         }
         else {
           unusedArg4 = 
@@ -2070,12 +2078,12 @@ LAB_97bbf04c:
           TPPStreamCompiler__error
                     (compiler,(char *)0x1,(char *)0x0,
                      "TIntermBinary::compileNode: Array index results in another array, this is not handled"
-                     ,iVar3,unusedArg6,puVar16,zeroCallArg);
-          pPVar8 = leftOperand;
+                     ,op,unusedArg6,thisVtable,zeroCallArg);
+          newLeftOperand = leftOperand;
         }
       }
     }
-    leftOperand = pPVar8;
+    leftOperand = newLeftOperand;
     leftType = (int *)(**(code **)(**(int **)(this + 0x34) + 0x3c))(*(int **)(this + 0x34));
     leftIsArray = (**(code **)(*leftType + 0x38))(leftType);
     if (leftIsArray == 0) {
@@ -2111,11 +2119,11 @@ LAB_97bbf04c:
       if (arrayStride < 2) {
         opHeader = opHeader & 0x3c03ffff | 0x20000000;
         TPPStreamCompiler__getOperandAsDestVar
-                  ((unsigned char *)&operandDescOrSprintfBuffer,compiler,addrTempOperand,unusedArg4,iVar3,unusedArg6);
+                  ((unsigned char *)&operandDescOrSprintfBuffer,compiler,addrTempOperand,unusedArg4,op,unusedArg6);
         opDest0 = operandDescOrSprintfBuffer;
         opDest1 = operandDescB;
         TPPStreamCompiler__getOperandAsSourceVar
-                  ((unsigned char *)&operandDescOrSprintfBuffer,compiler,rightOperand,unusedArg4,iVar3,unusedArg6,puVar16,zeroCallArg);
+                  ((unsigned char *)&operandDescOrSprintfBuffer,compiler,rightOperand,unusedArg4,op,unusedArg6,thisVtable,zeroCallArg);
         opFlags = (opDest0 >> 0xc & 1) << 0x1c | opFlags & 0xefffffff;
         opSrc0A = operandDescOrSprintfBuffer;
         opSrc0B = operandDescB;
@@ -2123,11 +2131,11 @@ LAB_97bbf04c:
       else {
         opHeader = opHeader & 0xfc03ffff | 0x880000;
         TPPStreamCompiler__getOperandAsDestVar
-                  ((unsigned char *)&operandDescOrSprintfBuffer,compiler,addrTempOperand,unusedArg4,iVar3,unusedArg6);
+                  ((unsigned char *)&operandDescOrSprintfBuffer,compiler,addrTempOperand,unusedArg4,op,unusedArg6);
         opDest0 = operandDescOrSprintfBuffer;
         opDest1 = operandDescB;
         TPPStreamCompiler__getOperandAsSourceVar
-                  ((unsigned char *)&operandDescOrSprintfBuffer,compiler,rightOperand,unusedArg4,iVar3,unusedArg6,puVar16,zeroCallArg);
+                  ((unsigned char *)&operandDescOrSprintfBuffer,compiler,rightOperand,unusedArg4,op,unusedArg6,thisVtable,zeroCallArg);
         opSrc0A = operandDescOrSprintfBuffer;
         opSrc0B = operandDescB;
         if (*(int *)addrTempOperand == 0) {
@@ -2150,8 +2158,8 @@ LAB_97bbf04c:
       }
       ppStreamType = GetPPStreamTypeForGLType((uint)glType);
       opFlags = (ppStreamType & 7) << 0x17 | opFlags & 0xfc7fffff;
-      iVar3 = ParseOperand__GetLogicalSize(addrTempOperand);
-      opFlags = (iVar3 + -1) * 0x4000000 & 0xc000000U | opFlags & 0xf3ffffff;
+      logicalSize = ParseOperand__GetLogicalSize(addrTempOperand);
+      opFlags = (logicalSize + -1) * 0x4000000 & 0xc000000U | opFlags & 0xf3ffffff;
       TPPStreamCompiler__AddOperation
                 (compiler,&addrTempOperand,(unsigned char *)&opHeader,(char *)0x0,0);
       *(unsigned char **)(resultOperand[0] + 8) = addrTempOperand;
@@ -2160,15 +2168,15 @@ LAB_97bbf04c:
     if (arrayStride < 2) {
       opHeader = opHeader & 0xfc03ffff | 0x7c0000;
       TPPStreamCompiler__getOperandAsDestVar
-                ((unsigned char *)&operandDescOrSprintfBuffer,compiler,addrTempOperand,unusedArg4,iVar3,unusedArg6);
+                ((unsigned char *)&operandDescOrSprintfBuffer,compiler,addrTempOperand,unusedArg4,op,unusedArg6);
       opDest0 = operandDescOrSprintfBuffer;
       opDest1 = operandDescB;
       TPPStreamCompiler__getOperandAsSourceVar
-                ((unsigned char *)&operandDescOrSprintfBuffer,compiler,rightOperand,unusedArg4,iVar3,unusedArg6,puVar16,zeroCallArg);
+                ((unsigned char *)&operandDescOrSprintfBuffer,compiler,rightOperand,unusedArg4,op,unusedArg6,thisVtable,zeroCallArg);
       opSrc0A = operandDescOrSprintfBuffer;
       opSrc0B = operandDescB;
       TPPStreamCompiler__getOperandAsSourceVar
-                ((unsigned char *)&operandDescOrSprintfBuffer,compiler,addrTempOperand,unusedArg4,iVar3,unusedArg6,puVar16,zeroCallArg);
+                ((unsigned char *)&operandDescOrSprintfBuffer,compiler,addrTempOperand,unusedArg4,op,unusedArg6,thisVtable,zeroCallArg);
       opFlags = (opDest0 >> 0xc & 1) << 0x1c | opFlags & 0xefffffff;
       opSrc1A = operandDescOrSprintfBuffer;
       opSrc1B = operandDescB;
@@ -2176,11 +2184,11 @@ LAB_97bbf04c:
     else {
       opHeader = opHeader & 0x7c03ffff | 0x60fc0000;
       TPPStreamCompiler__getOperandAsDestVar
-                ((unsigned char *)&operandDescOrSprintfBuffer,compiler,addrTempOperand,unusedArg4,iVar3,unusedArg6);
+                ((unsigned char *)&operandDescOrSprintfBuffer,compiler,addrTempOperand,unusedArg4,op,unusedArg6);
       opDest0 = operandDescOrSprintfBuffer;
       opDest1 = operandDescB;
       TPPStreamCompiler__getOperandAsSourceVar
-                ((unsigned char *)&operandDescOrSprintfBuffer,compiler,rightOperand,unusedArg4,iVar3,unusedArg6,puVar16,zeroCallArg);
+                ((unsigned char *)&operandDescOrSprintfBuffer,compiler,rightOperand,unusedArg4,op,unusedArg6,thisVtable,zeroCallArg);
       opSrc0A = operandDescOrSprintfBuffer;
       opSrc0B = operandDescB;
       if (*(int *)addrTempOperand == 0) {
@@ -2191,13 +2199,13 @@ LAB_97bbf04c:
       }
       glTypeArg = (uint)glType;
       callArgOne = 1;
-      pPVar8 = addrTempOperand;
+      addrTempArg = addrTempOperand;
       TPPStreamCompiler__getConstantAsSourceVar
                 ((unsigned char *)&operandDescOrSprintfBuffer,(uint)compiler,&arrayStride,1,glTypeArg);
       opSrc1A = operandDescOrSprintfBuffer;
       opSrc1B = operandDescB;
       TPPStreamCompiler__getOperandAsSourceVar
-                ((unsigned char *)&operandDescOrSprintfBuffer,compiler,addrTempOperand,callArgOne,glTypeArg,unusedArg6,pPVar8,zeroCallArg);
+                ((unsigned char *)&operandDescOrSprintfBuffer,compiler,addrTempOperand,callArgOne,glTypeArg,unusedArg6,addrTempArg,zeroCallArg);
       opFlags = (opDest0 >> 0xc & 1) << 0x1c | opFlags & 0xefffffff;
       opSrc2A = operandDescOrSprintfBuffer;
       opSrc2B = operandDescB;
@@ -2210,12 +2218,12 @@ LAB_97bbf04c:
     }
     ppStreamType = GetPPStreamTypeForGLType((uint)glType);
     opFlags = (ppStreamType & 7) << 0x17 | opFlags & 0xfc7fffff;
-    iVar3 = ParseOperand__GetLogicalSize(addrTempOperand);
-    opFlags = (iVar3 + -1) * 0x4000000 & 0xc000000U | opFlags & 0xf3ffffff;
+    logicalSize = ParseOperand__GetLogicalSize(addrTempOperand);
+    opFlags = (logicalSize + -1) * 0x4000000 & 0xc000000U | opFlags & 0xf3ffffff;
     operandSlotPtr = &addrTempOperand;
   }
   else {
-    if (iVar3 == 0x2f) {
+    if (op == 0x2f) {
       leftSymbol = *(unsigned char **)leftOperand;
       (**(code **)(**(int **)(this + 0x34) + 0x38))(structType,*(int **)(this + 0x34));
       structType[0] = &PTR___ZN5TTypeD1Ev_a7b7d730;
@@ -2224,14 +2232,14 @@ LAB_97bbf04c:
       ParseSymbol__CatName(leftSymbol,".");
       fieldType = *(int **)(*(int *)(structTypeFields + 4) + fieldIndex * 8);
       fieldTypeVtable = *fieldType;
-      iVar3 = (**(code **)(fieldTypeVtable + 0x1c))(fieldType,r4In2,unusedArg3,unusedArg4,iVar3,unusedArg6,fieldTypeVtable);
-      *(undefined1 *)(*(int *)(iVar3 + 4) + *(int *)(*(int *)(iVar3 + 4) + -0xc)) = *DAT_a7b7bd04;
-      ParseSymbol__CatName(leftSymbol,*(char **)(iVar3 + 4));
+      fieldNameString = (**(code **)(fieldTypeVtable + 0x1c))(fieldType,r4In2,unusedArg3,unusedArg4,op,unusedArg6,fieldTypeVtable);
+      *(undefined1 *)(*(int *)(fieldNameString + 4) + *(int *)(*(int *)(fieldNameString + 4) + -0xc)) = *DAT_a7b7bd04;
+      ParseSymbol__CatName(leftSymbol,*(char **)(fieldNameString + 4));
       ParseSymbol__SetParseTreeType(leftSymbol,*(unsigned char **)(*(int *)(structTypeFields + 4) + fieldIndex * 8));
       symbolIsArray = 0;
       goto LAB_97bbf03c;
     }
-    if (iVar3 == 0x30) {
+    if (op == 0x30) {
       swizzleMap = 0;
       resultOperand[0] = leftOperand;
       swizzleCount = *(int *)(leftOperand + 0x14);
@@ -2251,30 +2259,30 @@ LAB_97bbf04c:
       if (rightAggregate == 0) {
         TPPStreamCompiler__error
                   (compiler,(char *)0x1,*(char **)(*(int *)leftOperand + 0x14),
-                   "Right hand child of vector swizzle is not an aggregate node.",iVar3,unusedArg6,
+                   "Right hand child of vector swizzle is not an aggregate node.",op,unusedArg6,
                    *(int *)leftOperand,zeroCallArg);
       }
       else {
         rightAggregateNode = (int *)(**(code **)(**(int **)(this + 0x38) + 0x1c))(*(int **)(this + 0x38));
         swizzleSequence = (**(code **)(*rightAggregateNode + 100))(rightAggregateNode);
-        for (puVar16 = *(undefined4 **)(swizzleSequence + 4); puVar16 != *(undefined4 **)(swizzleSequence + 8);
-            puVar16 = puVar16 + 1) {
-          swizzleChildTyped = (int *)(**(code **)(*(int *)*puVar16 + 0x14))((int *)*puVar16);
+        for (swizzleIter = *(undefined4 **)(swizzleSequence + 4); swizzleIter != *(undefined4 **)(swizzleSequence + 8);
+            swizzleIter = swizzleIter + 1) {
+          swizzleChildTyped = (int *)(**(code **)(*(int *)*swizzleIter + 0x14))((int *)*swizzleIter);
           swizzleConstant = (**(code **)(*swizzleChildTyped + 0x18))(swizzleChildTyped);
           if (swizzleConstant == 0) {
             TPPStreamCompiler__error
                       (compiler,(char *)0x1,*(char **)(*(int *)leftOperand + 0x14),
-                       "Unexpected non-constant in vector swizzle.",iVar3,unusedArg6,*(int *)leftOperand,
+                       "Unexpected non-constant in vector swizzle.",op,unusedArg6,*(int *)leftOperand,
                        zeroCallArg);
           }
           else {
             if (swizzleCount == 0) {
-              swizzleChildTyped = (int *)(**(code **)(*(int *)*puVar16 + 0x14))((int *)*puVar16,r4In3);
+              swizzleChildTyped = (int *)(**(code **)(*(int *)*swizzleIter + 0x14))((int *)*swizzleIter,r4In3);
               swizzleConstant = (**(code **)(*swizzleChildTyped + 0x18))(swizzleChildTyped);
               newSwizzleComponent = *(uchar *)(*(int *)(swizzleConstant + 0x30) + 3);
             }
             else {
-              swizzleChildTyped = (int *)(**(code **)(*(int *)*puVar16 + 0x14))((int *)*puVar16);
+              swizzleChildTyped = (int *)(**(code **)(*(int *)*swizzleIter + 0x14))((int *)*swizzleIter);
               swizzleConstant = (**(code **)(*swizzleChildTyped + 0x18))(swizzleChildTyped);
               newSwizzleComponent = *(uchar *)(swizzleMap + **(int **)(swizzleConstant + 0x30));
             }
@@ -2284,13 +2292,13 @@ LAB_97bbf04c:
       }
       goto LAB_97bbf4fc;
     }
-    if (iVar3 < 0x31) {
-      if (iVar3 - 0x1dU < 2) {
+    if (op < 0x31) {
+      if (op - 0x1dU < 2) {
         thisType = (unsigned char *)(**(code **)(*(int *)this + 0x3c))(this);
-        pPVar8 = (unsigned char *)&leftOperand;
+        operandWorkPtr = (unsigned char *)&leftOperand;
         operandSlotPtr = &rightOperand;
         operandPairResult = TPPStreamCompiler__equalOperands
-                           (compiler,thisType,(unsigned char **)pPVar8,operandSlotPtr,(uint)(iVar3 == 0x1d));
+                           (compiler,thisType,(unsigned char **)operandWorkPtr,operandSlotPtr,(uint)(op == 0x1d));
       }
       else {
 LAB_97bbf334:
@@ -2301,43 +2309,43 @@ LAB_97bbf334:
                   (compiler,resultOperand,&leftOperand,operandSlotPtr);
 LAB_97bbf370:
         TPPStreamCompiler__getOperandAsSourceVar
-                  ((unsigned char *)&operandDescOrSprintfBuffer,compiler,leftOperand,operandSlotPtr,iVar3,unusedArg6,puVar16,zeroCallArg)
+                  ((unsigned char *)&operandDescOrSprintfBuffer,compiler,leftOperand,operandSlotPtr,op,unusedArg6,thisVtable,zeroCallArg)
         ;
         opSrc0A = operandDescOrSprintfBuffer;
         opSrc0B = operandDescB;
         TPPStreamCompiler__getOperandAsSourceVar
-                  ((unsigned char *)&operandDescOrSprintfBuffer,compiler,rightOperand,operandSlotPtr,iVar3,unusedArg6,puVar16,zeroCallArg)
+                  ((unsigned char *)&operandDescOrSprintfBuffer,compiler,rightOperand,operandSlotPtr,op,unusedArg6,thisVtable,zeroCallArg)
         ;
         opSrc1A = operandDescOrSprintfBuffer;
         opSrc1B = operandDescB;
-        pPVar8 = resultOperand[0];
+        operandWorkPtr = resultOperand[0];
         TPPStreamCompiler__getOperandAsDestVar
-                  ((unsigned char *)&operandDescOrSprintfBuffer,compiler,resultOperand[0],operandSlotPtr,iVar3,unusedArg6);
+                  ((unsigned char *)&operandDescOrSprintfBuffer,compiler,resultOperand[0],operandSlotPtr,op,unusedArg6);
         operandPairResult = CONCAT44(resultOperand[0],r4Out1);
         opDest0 = operandDescOrSprintfBuffer;
         opDest1 = operandDescB;
       }
     }
     else {
-      if (iVar3 != 0x76) {
-        if ((iVar3 < 0x76) || (0x7e < iVar3)) goto LAB_97bbf334;
+      if (op != 0x76) {
+        if ((op < 0x76) || (0x7e < op)) goto LAB_97bbf334;
         if ((*(int *)(leftOperand + 0xc) == 0) && (*(int *)(leftOperand + 8) == 0)) {
           resultOperand[0] = leftOperand;
         }
         else {
-          pPVar8 = operator_new(0x38);
-          __ZN12ParseOperandC1ERKS_(pPVar8,leftOperand);
-          resultOperand[0] = pPVar8;
+          operandWorkPtr = operator_new(0x38);
+          __ZN12ParseOperandC1ERKS_(operandWorkPtr,leftOperand);
+          resultOperand[0] = operandWorkPtr;
           if (*(int *)(leftOperand + 0xc) != 0) {
             operandCopy = operator_new(0x38);
             __ZN12ParseOperandC1ERKS_(operandCopy,*(unsigned char **)(leftOperand + 0xc));
-            *(void **)(pPVar8 + 0xc) = operandCopy;
+            *(void **)(operandWorkPtr + 0xc) = operandCopy;
           }
-          pPVar8 = resultOperand[0];
+          operandWorkPtr = resultOperand[0];
           if (*(int *)(leftOperand + 8) != 0) {
             operandCopy = operator_new(0x38);
             __ZN12ParseOperandC1ERKS_(operandCopy,*(unsigned char **)(leftOperand + 8));
-            *(void **)(pPVar8 + 8) = operandCopy;
+            *(void **)(operandWorkPtr + 8) = operandCopy;
           }
         }
         operandSlotPtr = &rightOperand;
@@ -2345,19 +2353,19 @@ LAB_97bbf370:
                   (compiler,resultOperand,&leftOperand,operandSlotPtr);
         goto LAB_97bbf370;
       }
-      pPVar8 = (unsigned char *)&rightOperand;
+      operandWorkPtr = (unsigned char *)&rightOperand;
       operandSlotPtr = (unsigned char **)0x1;
       resultOperand[0] = leftOperand;
-      TPPStreamCompiler__assignOperands(compiler,&leftOperand,(unsigned char **)pPVar8,1);
+      TPPStreamCompiler__assignOperands(compiler,&leftOperand,(unsigned char **)operandWorkPtr,1);
       operandPairResult = CONCAT44(resultOperand[0],r4Out0);
     }
     resultOperand[0] = (unsigned char *)((ulonglong)operandPairResult >> 0x20);
     binaryOp = *(int *)(this + 0x30);
-    iVar3 = binaryOp * 4;
-    opHeader = (*(uint *)(&_operatorToken + iVar3) & 0xff) << 0x12 | opHeader & 0xfc03ffff;
+    operatorTokenOffset = binaryOp * 4;
+    opHeader = (*(uint *)(&_operatorToken + operatorTokenOffset) & 0xff) << 0x12 | opHeader & 0xfc03ffff;
     resultParseType = *(int **)(*(int *)resultOperand[0] + 0xc);
     if (resultParseType != (int *)0x0) {
-      resultQualifier = (**(code **)(*resultParseType + 0x24))(resultParseType,(int)operandPairResult,pPVar8,operandSlotPtr,binaryOp,unusedArg6,iVar3);
+      resultQualifier = (**(code **)(*resultParseType + 0x24))(resultParseType,(int)operandPairResult,operandWorkPtr,operandSlotPtr,binaryOp,unusedArg6,operatorTokenOffset);
       if (resultQualifier == 0xd) {
         *(undefined4 *)(compiler + 0xa4) = 1;
       }
@@ -2377,7 +2385,7 @@ LAB_97bbf46c:
         TPPStreamCompiler__error
                   (compiler,(char *)0x1,(char *)0x0,
                    "TIntermBinary::compileNode: Unsupported operation (TOperator: %d)",binaryOp,unusedArg6
-                   ,iVar3,zeroCallArg);
+                   ,operatorTokenOffset,zeroCallArg);
         goto LAB_97bbf4fc;
       }
     }
@@ -2391,21 +2399,21 @@ LAB_97bbf46c:
     }
     ppStreamType = GetPPStreamTypeForGLType((uint)glType);
     opFlags = (ppStreamType & 7) << 0x17 | opFlags & 0xfc7fffff;
-    iVar3 = ParseOperand__GetLogicalSize(resultOperand[0]);
-    opFlags = (iVar3 + -1) * 0x4000000 & 0xc000000U | opFlags & 0xf3ffffff;
+    logicalSize = ParseOperand__GetLogicalSize(resultOperand[0]);
+    opFlags = (logicalSize + -1) * 0x4000000 & 0xc000000U | opFlags & 0xf3ffffff;
     operandSlotPtr = resultOperand;
   }
   TPPStreamCompiler__AddOperation(compiler,operandSlotPtr,(unsigned char *)&opHeader,(char *)0x0,0);
 LAB_97bbf4fc:
-  pPVar8 = rightOperand;
+  rightOperandToDelete = rightOperand;
   if (rightOperand != (unsigned char *)0x0) {
     __ZN12ParseOperandD1Ev(rightOperand);
-    __ZdlPv(pPVar8);
+    __ZdlPv(rightOperandToDelete);
   }
-  pPVar8 = leftOperand;
+  leftOperandToDelete = leftOperand;
   if ((leftOperand != (unsigned char *)0x0) && (resultOperand[0] != leftOperand)) {
     __ZN12ParseOperandD1Ev(leftOperand);
-    __ZdlPv(pPVar8);
+    __ZdlPv(leftOperandToDelete);
   }
   return resultOperand[0];
 }
