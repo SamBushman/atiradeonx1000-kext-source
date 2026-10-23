@@ -1,51 +1,51 @@
 #include "decls.h"
 
 /* __ZNSs6rbeginEv @ 0x97c13f18 (60 bytes) */
-int __ZNSs6rbeginEv(this, param_2)
-  void *this;
-  undefined4 param_2;
+int __ZNSs6rbeginEv(result, self)
+  void *result;
+  undefined4 self;
 {
-  undefined4 local_20 [5];
+  undefined4 endIter [5];
   
-  __ZNSs3endEv(local_20,param_2);
-  *(undefined4 *)((int)this + 4) = local_20[0];
-  return this;
+  __ZNSs3endEv(endIter,self);
+  *(undefined4 *)((int)result + 4) = endIter[0];
+  return result;
 }
 
 /* __ZNKSs6rbeginEv @ 0x97c13f54 (60 bytes) */
-int __ZNKSs6rbeginEv(this, param_2)
-  void *this;
-  undefined4 param_2;
+int __ZNKSs6rbeginEv(result, self)
+  void *result;
+  undefined4 self;
 {
-  undefined4 local_20 [5];
+  undefined4 endIter [5];
   
-  __ZNKSs3endEv(local_20,param_2);
-  *(undefined4 *)((int)this + 4) = local_20[0];
-  return this;
+  __ZNKSs3endEv(endIter,self);
+  *(undefined4 *)((int)result + 4) = endIter[0];
+  return result;
 }
 
 /* __ZNSs4rendEv @ 0x97c13f90 (60 bytes) */
-int __ZNSs4rendEv(this, param_2)
-  void *this;
-  undefined4 param_2;
+int __ZNSs4rendEv(result, self)
+  void *result;
+  undefined4 self;
 {
-  undefined4 local_20 [5];
+  undefined4 beginIter [5];
   
-  __ZNSs5beginEv(local_20,param_2);
-  *(undefined4 *)((int)this + 4) = local_20[0];
-  return this;
+  __ZNSs5beginEv(beginIter,self);
+  *(undefined4 *)((int)result + 4) = beginIter[0];
+  return result;
 }
 
 /* __ZNKSs4rendEv @ 0x97c13fcc (60 bytes) */
-int __ZNKSs4rendEv(this, param_2)
-  void *this;
-  undefined4 param_2;
+int __ZNKSs4rendEv(result, self)
+  void *result;
+  undefined4 self;
 {
-  undefined4 local_20 [5];
+  undefined4 beginIter [5];
   
-  __ZNKSs5beginEv(local_20,param_2);
-  *(undefined4 *)((int)this + 4) = local_20[0];
-  return this;
+  __ZNKSs5beginEv(beginIter,self);
+  *(undefined4 *)((int)result + 4) = beginIter[0];
+  return result;
 }
 
 /* __ZNKSs6lengthEv @ 0x97c14008 (12 bytes) */
@@ -56,89 +56,89 @@ int __ZNKSs6lengthEv(this)
 }
 
 /* __ZNSs7replaceEmmPKcm @ 0x97c14014 (316 bytes) */
-int __ZNSs7replaceEmmPKcm(this, pos1, n1, str, pos2)
+int __ZNSs7replaceEmmPKcm(this, pos1, n1, str, n2)
   void *this;
   ulong pos1;
   ulong n1;
   char *str;
-  ulong pos2;
+  ulong n2;
 {
   char *data;
-  uint uVar2;
-  int local_30;
-  int local_2c [4];
+  uint strSize;
+  int ibeginIterA;
+  int ibeginIterB [4];
   
-  uVar2 = *(uint *)(*(int *)this + -0xc);
-  if (uVar2 < pos1) {
+  strSize = *(uint *)(*(int *)this + -0xc);
+  if (strSize < pos1) {
     std____throw_out_of_range("basic_string::replace");
   }
-  if (uVar2 - pos1 <= n1) {
-    n1 = uVar2 - pos1;
+  if (strSize - pos1 <= n1) {
+    n1 = strSize - pos1;
   }
-  if (0x3ffffffc - pos2 < uVar2 - n1) {
+  if (0x3ffffffc - n2 < strSize - n1) {
     std____throw_length_error("basic_string::replace");
   }
   data = *(char **)this;
-  if (((*(int *)(data + -4) < 1) && (data <= str)) && (str <= data + uVar2)) {
-    __ZNKSs9_M_ibeginEv(local_2c,this);
-    __ZNKSs9_M_ibeginEv(&local_30,this);
+  if (((*(int *)(data + -4) < 1) && (data <= str)) && (str <= data + strSize)) {
+    __ZNKSs9_M_ibeginEv(ibeginIterB,this);
+    __ZNKSs9_M_ibeginEv(&ibeginIterA,this);
     __ZNSs10_M_replaceIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18input_iterator_tag
-              (this,local_30 + pos1,(char *)(local_2c[0] + pos1 + n1),str,
-               str + pos2,0);
+              (this,ibeginIterA + pos1,(char *)(ibeginIterB[0] + pos1 + n1),str,
+               str + n2,0);
   }
   else {
-    __ZNKSs9_M_ibeginEv(&local_30,this);
-    __ZNKSs9_M_ibeginEv(local_2c,this);
+    __ZNKSs9_M_ibeginEv(&ibeginIterA,this);
+    __ZNKSs9_M_ibeginEv(ibeginIterB,this);
     __ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_
-              (this,local_2c[0] + pos1,local_30 + pos1 + n1,str,str + pos2);
+              (this,ibeginIterB[0] + pos1,ibeginIterA + pos1 + n1,str,str + n2);
   }
   return;
 }
 
 /* __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S1_S1_ @ 0x97c14150 (344 bytes) */
-int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S1_S1_(this, i1, param_3, str1, str2)
+int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S1_S1_(this, i1, i2, k1, k2)
   void *this;
   int i1;
-  int param_3;
-  char *str1;
-  int str2;
+  int i2;
+  char *k1;
+  int k2;
 {
   char *data;
-  uint uVar2;
-  uint uVar3;
-  int iVar4;
-  uint uVar5;
-  int local_30;
-  int local_2c;
-  int local_28 [2];
+  uint startOff;
+  uint len1;
+  int len2;
+  uint strSize;
+  int ibeginIter;
+  int ibeginIterA;
+  int ibeginIterB [2];
   
-  __ZNKSs9_M_ibeginEv(&local_30,this);
-  iVar4 = str2 - (int)str1;
-  uVar5 = *(uint *)(*(int *)this + -0xc);
-  uVar2 = i1 - local_30;
-  if (uVar5 < uVar2) {
+  __ZNKSs9_M_ibeginEv(&ibeginIter,this);
+  len2 = k2 - (int)k1;
+  strSize = *(uint *)(*(int *)this + -0xc);
+  startOff = i1 - ibeginIter;
+  if (strSize < startOff) {
     std____throw_out_of_range("basic_string::replace");
   }
-  uVar3 = param_3 - i1;
-  if (uVar5 - uVar2 <= (uint)(param_3 - i1)) {
-    uVar3 = uVar5 - uVar2;
+  len1 = i2 - i1;
+  if (strSize - startOff <= (uint)(i2 - i1)) {
+    len1 = strSize - startOff;
   }
-  if (0x3ffffffcU - iVar4 < uVar5 - uVar3) {
+  if (0x3ffffffcU - len2 < strSize - len1) {
     std____throw_length_error("basic_string::replace");
   }
   data = *(char **)this;
-  if (((*(int *)(data + -4) < 1) && (data <= str1)) && (str1 <= data + uVar5)) {
-    __ZNKSs9_M_ibeginEv(local_28,this);
-    __ZNKSs9_M_ibeginEv(&local_2c,this);
+  if (((*(int *)(data + -4) < 1) && (data <= k1)) && (k1 <= data + strSize)) {
+    __ZNKSs9_M_ibeginEv(ibeginIterB,this);
+    __ZNKSs9_M_ibeginEv(&ibeginIterA,this);
     __ZNSs10_M_replaceIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18input_iterator_tag
-              (this,local_2c + uVar2,(char *)(local_28[0] + uVar2 + uVar3),str1,str1 + iVar4,0
+              (this,ibeginIterA + startOff,(char *)(ibeginIterB[0] + startOff + len1),k1,k1 + len2,0
               );
   }
   else {
-    __ZNKSs9_M_ibeginEv(&local_2c,this);
-    __ZNKSs9_M_ibeginEv(local_28,this);
+    __ZNKSs9_M_ibeginEv(&ibeginIterA,this);
+    __ZNKSs9_M_ibeginEv(ibeginIterB,this);
     __ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_
-              (this,local_28[0] + uVar2,local_2c + uVar2 + uVar3,str1,str1 + iVar4);
+              (this,ibeginIterB[0] + startOff,ibeginIterA + startOff + len1,k1,k1 + len2);
   }
   return;
 }
@@ -149,143 +149,144 @@ int __ZNSs5eraseEmm(this, pos, n)
   ulong pos;
   undefined4 n;
 {
-  char *pcVar1;
-  char *pcVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  int local_40;
-  int local_3c;
-  int local_38;
-  int local_34;
-  int local_30 [5];
+  char *curData;
+  char *data;
+  uint startOff;
+  uint eraseLen;
+  uint strSize;
+  int posIter;
+  int endIter;
+  int ibeginIter;
+  int ibeginIterA;
+  int ibeginIterB [5];
   
-  std__string___M_check((ulong)&local_40,this,pos);
-  __ZNKSs7_M_foldEmm((ulong)&local_3c,this,pos,n);
-  pcVar2 = *(char **)this;
-  __ZNKSs9_M_ibeginEv(&local_38,this);
-  uVar5 = *(uint *)(*(int *)this + -0xc);
-  uVar3 = local_40 - local_38;
-  if (uVar5 < uVar3) {
+  std__string___M_check((ulong)&posIter,this,pos);
+  __ZNKSs7_M_foldEmm((ulong)&endIter,this,pos,n);
+  data = *(char **)this;
+  __ZNKSs9_M_ibeginEv(&ibeginIter,this);
+  strSize = *(uint *)(*(int *)this + -0xc);
+  startOff = posIter - ibeginIter;
+  if (strSize < startOff) {
     std____throw_out_of_range("basic_string::replace");
   }
-  uVar4 = local_3c - local_40;
-  if (uVar5 - uVar3 <= (uint)(local_3c - local_40)) {
-    uVar4 = uVar5 - uVar3;
+  eraseLen = endIter - posIter;
+  if (strSize - startOff <= (uint)(endIter - posIter)) {
+    eraseLen = strSize - startOff;
   }
-  if (0x3ffffffc < uVar5 - uVar4) {
+  if (0x3ffffffc < strSize - eraseLen) {
     std____throw_length_error("basic_string::replace");
   }
-  pcVar1 = *(char **)this;
-  if (((*(int *)(pcVar1 + -4) < 1) && (pcVar1 <= pcVar2)) && (pcVar2 <= pcVar1 + uVar5)) {
-    __ZNKSs9_M_ibeginEv(local_30,this);
-    __ZNKSs9_M_ibeginEv(&local_34,this);
+  curData = *(char **)this;
+  if (((*(int *)(curData + -4) < 1) && (curData <= data)) && (data <= curData + strSize)) {
+    __ZNKSs9_M_ibeginEv(ibeginIterB,this);
+    __ZNKSs9_M_ibeginEv(&ibeginIterA,this);
     __ZNSs10_M_replaceIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18input_iterator_tag
-              (this,local_34 + uVar3,(char *)(local_30[0] + uVar3 + uVar4),pcVar2,pcVar2,0);
+              (this,ibeginIterA + startOff,(char *)(ibeginIterB[0] + startOff + eraseLen),data,data,0);
   }
   else {
-    __ZNKSs9_M_ibeginEv(&local_34,this);
-    __ZNKSs9_M_ibeginEv(local_30,this);
+    __ZNKSs9_M_ibeginEv(&ibeginIterA,this);
+    __ZNKSs9_M_ibeginEv(ibeginIterB,this);
     __ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_
-              ((void *)this,local_30[0] + uVar3,local_34 + uVar3 + uVar4,pcVar2,pcVar2);
+              ((void *)this,ibeginIterB[0] + startOff,ibeginIterA + startOff + eraseLen,data,data);
   }
   return;
 }
 
 /* __ZNSs6resizeEmc @ 0x97c14420 (448 bytes) */
-int __ZNSs6resizeEmc(this, pos, c)
+int __ZNSs6resizeEmc(this, n, c)
   void *this;
-  ulong pos;
+  ulong n;
   int c;
 {
-  uint uVar1;
+  uint startOff;
+  uint origSize;
   char *data2;
-  undefined3 in_register_00000014;
+  undefined3 cHigh24;
   char *data;
-  uint uVar4;
-  uint uVar5;
-  int local_40;
-  int local_3c;
-  int local_38;
-  int local_34;
-  int local_30 [5];
+  uint strSize;
+  uint eraseLen;
+  int posIter;
+  int endIter;
+  int ibeginIter;
+  int ibeginIterA;
+  int ibeginIterB [5];
   
-  if (0x3ffffffc < pos) {
+  if (0x3ffffffc < n) {
     std____throw_length_error("basic_string::resize");
   }
-  uVar1 = *(uint *)(*(int *)this + -0xc);
-  if (uVar1 < pos) {
-    ((int (*)())__ZNSs6appendEmc)(this,pos - uVar1,CONCAT31(in_register_00000014,c));
+  origSize = *(uint *)(*(int *)this + -0xc);
+  if (origSize < n) {
+    ((int (*)())__ZNSs6appendEmc)(this,n - origSize,CONCAT31(cHigh24,c));
   }
-  else if (pos < uVar1) {
-    std__string___M_check((ulong)&local_40,this,pos);
-    __ZNKSs7_M_foldEmm((ulong)&local_3c,(ulong)this,pos,0xffffffff);
+  else if (n < origSize) {
+    std__string___M_check((ulong)&posIter,this,n);
+    __ZNKSs7_M_foldEmm((ulong)&endIter,(ulong)this,n,0xffffffff);
     data = *(char **)this;
-    __ZNKSs9_M_ibeginEv(&local_38,this);
-    uVar4 = *(uint *)(*(int *)this + -0xc);
-    uVar1 = local_40 - local_38;
-    if (uVar4 < uVar1) {
+    __ZNKSs9_M_ibeginEv(&ibeginIter,this);
+    strSize = *(uint *)(*(int *)this + -0xc);
+    startOff = posIter - ibeginIter;
+    if (strSize < startOff) {
       std____throw_out_of_range("basic_string::replace");
     }
-    uVar5 = local_3c - local_40;
-    if (uVar4 - uVar1 <= (uint)(local_3c - local_40)) {
-      uVar5 = uVar4 - uVar1;
+    eraseLen = endIter - posIter;
+    if (strSize - startOff <= (uint)(endIter - posIter)) {
+      eraseLen = strSize - startOff;
     }
-    if (0x3ffffffc < uVar4 - uVar5) {
+    if (0x3ffffffc < strSize - eraseLen) {
       std____throw_length_error("basic_string::replace");
     }
     data2 = *(char **)this;
-    if (((*(int *)(data2 + -4) < 1) && (data2 <= data)) && (data <= data2 + uVar4)) {
-      __ZNKSs9_M_ibeginEv(local_30,this);
-      __ZNKSs9_M_ibeginEv(&local_34,this);
+    if (((*(int *)(data2 + -4) < 1) && (data2 <= data)) && (data <= data2 + strSize)) {
+      __ZNKSs9_M_ibeginEv(ibeginIterB,this);
+      __ZNKSs9_M_ibeginEv(&ibeginIterA,this);
       __ZNSs10_M_replaceIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18input_iterator_tag
-                (this,local_34 + uVar1,(char *)(local_30[0] + uVar1 + uVar5),data,data,0);
+                (this,ibeginIterA + startOff,(char *)(ibeginIterB[0] + startOff + eraseLen),data,data,0);
     }
     else {
-      __ZNKSs9_M_ibeginEv(&local_34,this);
-      __ZNKSs9_M_ibeginEv(local_30,this);
+      __ZNKSs9_M_ibeginEv(&ibeginIterA,this);
+      __ZNKSs9_M_ibeginEv(ibeginIterB,this);
       __ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_
-                (this,local_30[0] + uVar1,local_34 + uVar1 + uVar5,data,data);
+                (this,ibeginIterB[0] + startOff,ibeginIterA + startOff + eraseLen,data,data);
     }
   }
   return;
 }
 
 /* __ZNSs6resizeEm @ 0x97c145e0 (8 bytes) */
-int __ZNSs6resizeEm(this, pos)
+int __ZNSs6resizeEm(this, n)
   void *this;
-  ulong pos;
+  ulong n;
 {
-  return ((int (*)())__ZNSs6resizeEmc)(this,pos,'\0');
+  return ((int (*)())__ZNSs6resizeEmc)(this,n,'\0');
 }
 
 /* __ZNSs7reserveEm @ 0x97c145e8 (204 bytes) */
-int __ZNSs7reserveEm(this, pos)
+int __ZNSs7reserveEm(this, res)
   void *this;
-  ulong pos;
+  ulong res;
 {
   int atomicStore;
   int *refCountPtr;
   int oldRefCount;
-  undefined4 uVar4;
+  undefined4 newData;
   int data;
   char reservation;
   byte cr0Reg;
-  unsigned char aaStack_20 [20];
+  unsigned char allocatorTmp [20];
   
   data = *(int *)this;
-  if ((*(uint *)(data + -8) < pos) || (0 < *(int *)(data + -4))) {
-    if (0x3ffffffc < pos) {
+  if ((*(uint *)(data + -8) < res) || (0 < *(int *)(data + -4))) {
+    if (0x3ffffffc < res) {
       std____throw_length_error("basic_string::reserve");
       data = *(int *)this;
     }
-    if (pos < *(uint *)(data + -0xc)) {
-      pos = *(uint *)(data + -0xc);
+    if (res < *(uint *)(data + -0xc)) {
+      res = *(uint *)(data + -0xc);
     }
     __ZNKSs13get_allocatorEv();
-    uVar4 = __ZNSs4_Rep8_M_cloneERKSaIcEm
-                      ((void *)(*(int *)this + -0xc),aaStack_20,
-                       pos - *(int *)(*(int *)this + -0xc));
+    newData = __ZNSs4_Rep8_M_cloneERKSaIcEm
+                      ((void *)(*(int *)this + -0xc),allocatorTmp,
+                       res - *(int *)(*(int *)this + -0xc));
     data = *(int *)this;
     refCountPtr = (int *)(data + -4);
     do {
@@ -297,9 +298,9 @@ int __ZNSs7reserveEm(this, pos)
       }
     } while (!(bool)(cr0Reg >> 1 & 1));
     if (oldRefCount < 1) {
-      __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(data + -0xc),(uint)aaStack_20);
+      __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(data + -0xc),(uint)allocatorTmp);
     }
-    *(undefined4 *)this = uVar4;
+    *(undefined4 *)this = newData;
   }
   return;
 }
@@ -319,20 +320,20 @@ int __ZNKSs5emptyEv(this)
 }
 
 /* __ZNKSsixEm @ 0x97c146f4 (12 bytes) */
-int __ZNKSsixEm(this, param_2)
+int __ZNKSsixEm(this, pos)
   void *this;
-  ulong param_2;
+  ulong pos;
 {
-  return *(int *)this + param_2;
+  return *(int *)this + pos;
 }
 
 /* __ZNSsixEm @ 0x97c14700 (56 bytes) */
-int __ZNSsixEm(this, param_2)
+int __ZNSsixEm(this, pos)
   void *this;
-  ulong param_2;
+  ulong pos;
 {
   __ZNSs7_M_leakEv(this);
-  return *(int *)this + param_2;
+  return *(int *)this + pos;
 }
 
 /* __ZNKSs2atEm @ 0x97c14738 (88 bytes) */
@@ -393,13 +394,13 @@ int __ZNSspLEPKc(this, str)
 }
 
 /* __ZNSspLEc @ 0x97c14874 (12 bytes) */
-int __ZNSspLEc(this, param_2)
+int __ZNSspLEc(this, c)
   void *this;
-  int param_2;
+  int c;
 {
-  undefined3 in_register_00000010;
+  undefined3 cHigh24;
   
-  return ((int (*)())__ZNSs6appendEmc)(this,1,CONCAT31(in_register_00000010,param_2));
+  return ((int (*)())__ZNSs6appendEmc)(this,1,CONCAT31(cHigh24,c));
 }
 
 /* __ZNSs6appendERKSs @ 0x97c14880 (164 bytes) */
@@ -407,22 +408,22 @@ int __ZNSs6appendERKSs(this, text)
   void *this;
   unsigned char * text;
 {
-  ulong uVar1;
-  undefined4 local_30;
-  undefined4 local_2c;
-  undefined4 local_28;
-  undefined4 local_24 [4];
+  ulong newLen;
+  undefined4 iendIterA;
+  undefined4 iendIterB;
+  undefined4 textBeginIter;
+  undefined4 textEndIter [4];
   
-  uVar1 = *(int *)(*(int *)text + -0xc) + *(int *)(*(int *)this + -0xc);
-  if (*(uint *)(*(int *)this + -8) < uVar1) {
-    ((int (*)())__ZNSs7reserveEm)(this,uVar1);
+  newLen = *(int *)(*(int *)text + -0xc) + *(int *)(*(int *)this + -0xc);
+  if (*(uint *)(*(int *)this + -8) < newLen) {
+    ((int (*)())__ZNSs7reserveEm)(this,newLen);
   }
-  __ZNKSs7_M_iendEv(&local_30,this);
-  __ZNKSs7_M_iendEv(&local_2c,this);
-  __ZNKSs9_M_ibeginEv(&local_28,text);
-  __ZNKSs7_M_iendEv(local_24,text);
+  __ZNKSs7_M_iendEv(&iendIterA,this);
+  __ZNKSs7_M_iendEv(&iendIterB,this);
+  __ZNKSs9_M_ibeginEv(&textBeginIter,text);
+  __ZNKSs7_M_iendEv(textEndIter,text);
   return __ZNSs15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcSsEEEERSsS3_S3_T_S5_
-            (this,local_30,local_2c,local_28,local_24[0]);
+            (this,iendIterA,iendIterB,textBeginIter,textEndIter[0]);
 }
 
 /* __ZNSs6appendERKSsmm @ 0x97c14924 (216 bytes) */
@@ -433,82 +434,82 @@ int __ZNSs6appendERKSsmm(this, text, pos, n)
   ulong n;
 {
   unsigned int ghidra_home[8] = { this, text, pos, n, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  ulong uVar1;
-  uint *puVar2;
-  undefined4 local_40;
-  undefined4 local_3c;
-  undefined4 local_38;
-  undefined4 local_34;
-  uint local_30 [6];
+  ulong newLen;
+  uint *copyLenPtr;
+  undefined4 iendIterA;
+  undefined4 iendIterB;
+  undefined4 textPosIter;
+  undefined4 textEndIter;
+  uint textRemaining [6];
   
-  puVar2 = &(*(unsigned int *)((unsigned char *)ghidra_home + 12));
-  local_30[0] = *(int *)(*(int *)text + -0xc) - pos;
-  if (local_30[0] <= n) {
-    puVar2 = local_30;
+  copyLenPtr = &(*(unsigned int *)((unsigned char *)ghidra_home + 12));
+  textRemaining[0] = *(int *)(*(int *)text + -0xc) - pos;
+  if (textRemaining[0] <= n) {
+    copyLenPtr = textRemaining;
   }
-  uVar1 = *puVar2 + *(int *)(*(int *)this + -0xc);
+  newLen = *copyLenPtr + *(int *)(*(int *)this + -0xc);
   (*(ulong *)((unsigned char *)ghidra_home + 12)) = n;
-  if (*(uint *)(*(int *)this + -8) < uVar1) {
-    ((int (*)())__ZNSs7reserveEm)(this,uVar1);
+  if (*(uint *)(*(int *)this + -8) < newLen) {
+    ((int (*)())__ZNSs7reserveEm)(this,newLen);
   }
-  __ZNKSs7_M_iendEv(&local_40,this);
-  __ZNKSs7_M_iendEv(&local_3c,this);
-  std__string___M_check((ulong)&local_38,text,pos);
-  __ZNKSs7_M_foldEmm((ulong)&local_34,(ulong)text,pos,(*(ulong *)((unsigned char *)ghidra_home + 12)));
+  __ZNKSs7_M_iendEv(&iendIterA,this);
+  __ZNKSs7_M_iendEv(&iendIterB,this);
+  std__string___M_check((ulong)&textPosIter,text,pos);
+  __ZNKSs7_M_foldEmm((ulong)&textEndIter,(ulong)text,pos,(*(ulong *)((unsigned char *)ghidra_home + 12)));
   return __ZNSs15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcSsEEEERSsS3_S3_T_S5_
-            (this,local_40,local_3c,local_38,local_34);
+            (this,iendIterA,iendIterB,textPosIter,textEndIter);
 }
 
 /* __ZNSs6appendEPKcm @ 0x97c149fc (132 bytes) */
-int __ZNSs6appendEPKcm(this, str, pos)
+int __ZNSs6appendEPKcm(this, str, n)
   void *this;
   char *str;
-  ulong pos;
+  ulong n;
 {
-  ulong uVar1;
-  undefined4 local_30;
-  undefined4 local_2c [6];
+  ulong newLen;
+  undefined4 iendIterA;
+  undefined4 iendIterB [6];
   
-  uVar1 = pos + *(int *)(*(int *)this + -0xc);
-  if (*(uint *)(*(int *)this + -8) < uVar1) {
-    ((int (*)())__ZNSs7reserveEm)(this,uVar1);
+  newLen = n + *(int *)(*(int *)this + -0xc);
+  if (*(uint *)(*(int *)this + -8) < newLen) {
+    ((int (*)())__ZNSs7reserveEm)(this,newLen);
   }
-  __ZNKSs7_M_iendEv(&local_30,this);
-  __ZNKSs7_M_iendEv(local_2c,this);
+  __ZNKSs7_M_iendEv(&iendIterA,this);
+  __ZNKSs7_M_iendEv(iendIterB,this);
   return __ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_
-            (this,local_30,local_2c[0],str,str + pos);
+            (this,iendIterA,iendIterB[0],str,str + n);
 }
 
 /* __ZNSs6appendEmc @ 0x97c14a80 (128 bytes) */
-int __ZNSs6appendEmc(this, pos, c)
+int __ZNSs6appendEmc(this, n, c)
   void *this;
-  ulong pos;
+  ulong n;
   undefined4 c;
 {
-  ulong uVar1;
-  undefined4 local_30;
-  undefined4 local_2c [6];
+  ulong newLen;
+  undefined4 iendIterA;
+  undefined4 iendIterB [6];
   
-  uVar1 = pos + *(int *)(*(int *)this + -0xc);
-  if (*(uint *)(*(int *)this + -8) < uVar1) {
-    ((int (*)())__ZNSs7reserveEm)(this,uVar1);
+  newLen = n + *(int *)(*(int *)this + -0xc);
+  if (*(uint *)(*(int *)this + -8) < newLen) {
+    ((int (*)())__ZNSs7reserveEm)(this,newLen);
   }
-  __ZNKSs7_M_iendEv(&local_30,this);
-  __ZNKSs7_M_iendEv(local_2c,this);
-  return ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc)(this,local_30,local_2c[0],pos,c);
+  __ZNKSs7_M_iendEv(&iendIterA,this);
+  __ZNKSs7_M_iendEv(iendIterB,this);
+  return ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc)(this,iendIterA,iendIterB[0],n,c);
 }
 
 /* std__string__push_back @ 0x97c14b00 (96 bytes) */
-int std__string__push_back(this, param_2)
+int std__string__push_back(this, c)
   unsigned char * this;
-  undefined4 param_2;
+  undefined4 c;
 {
-  undefined4 local_30;
-  undefined4 local_2c [6];
+  undefined4 iendIterA;
+  undefined4 iendIterB [6];
   
-  __ZNKSs7_M_iendEv(&local_30,this);
-  __ZNKSs7_M_iendEv(local_2c,this);
-  return ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc)(this,local_30,local_2c[0],1,param_2);
+  __ZNKSs7_M_iendEv(&iendIterA,this);
+  __ZNKSs7_M_iendEv(iendIterB,this);
+  return ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc)(this,iendIterA,iendIterB[0],1,c);
 }
 
 /* __ZNSs6assignERKSs @ 0x97c14b60 (104 bytes) */
@@ -520,17 +521,17 @@ int __ZNSs6assignERKSs(this, text)
   int atomicStore;
   int *refCountPtr;
   int oldRefCount;
-  undefined4 uVar4;
-  int iVar5;
+  undefined4 newData;
+  int textData;
   char reservation;
   byte cr0Reg;
-  unsigned char aaStack_40 [44];
+  unsigned char allocatorTmp [44];
   
   if (*(int *)this + -0xc != *(int *)text + -0xc) {
     __ZNKSs13get_allocatorEv();
-    iVar5 = *(int *)text;
+    textData = *(int *)text;
     __ZNKSs13get_allocatorEv();
-    uVar4 = __ZNSs4_Rep7_M_grabERKSaIcES2_((unsigned char *)(iVar5 + -0xc),aaStack_40);
+    newData = __ZNSs4_Rep7_M_grabERKSaIcES2_((unsigned char *)(textData + -0xc),allocatorTmp);
     data = *(int *)this;
     refCountPtr = (int *)(data + -4);
     do {
@@ -544,7 +545,7 @@ int __ZNSs6assignERKSs(this, text)
     if (oldRefCount < 1) {
       __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(data + -0xc));
     }
-    *(undefined4 *)this = uVar4;
+    *(undefined4 *)this = newData;
   }
   return this;
 }
@@ -557,135 +558,137 @@ int __ZNSs6assignERKSsmm(this, text, pos, n)
   ulong n;
 {
   uint repLength;
-  int iVar1;
-  uint uVar2;
+  int textData;
+  uint textRemaining;
   
-  iVar1 = *(int *)text;
-  repLength = *(uint *)(iVar1 + -0xc);
+  textData = *(int *)text;
+  repLength = *(uint *)(textData + -0xc);
   if (repLength < pos) {
     std____throw_out_of_range("basic_string::assign");
-    iVar1 = *(int *)text;
+    textData = *(int *)text;
   }
-  uVar2 = repLength - pos;
-  if (uVar2 <= n) {
-    n = uVar2;
+  textRemaining = repLength - pos;
+  if (textRemaining <= n) {
+    n = textRemaining;
   }
-  return __ZNSs6assignEPKcm(this,(char *)(iVar1 + pos),n);
+  return __ZNSs6assignEPKcm(this,(char *)(textData + pos),n);
 }
 
 /* __ZNSs6insertEN9__gnu_cxx17__normal_iteratorIPcSsEEmc @ 0x97c14c90 (16 bytes) */
-int __ZNSs6insertEN9__gnu_cxx17__normal_iteratorIPcSsEEmc(this, __normal_iterator, param_3, pos1)
+int __ZNSs6insertEN9__gnu_cxx17__normal_iteratorIPcSsEEmc(this, p, n, c)
   void *this;
-  undefined4 __normal_iterator;
-  undefined4 param_3;
-  undefined4 pos1;
+  undefined4 p;
+  undefined4 n;
+  undefined4 c;
 {
-  return ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc)(this,__normal_iterator,__normal_iterator,param_3,pos1);
+  return ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc)(this,p,p,n,c);
 }
 
 /* __ZNSs6insertEmPKcm @ 0x97c14ca0 (332 bytes) */
-int __ZNSs6insertEmPKcm(this, pos1, str, n1)
+int __ZNSs6insertEmPKcm(this, pos1, str, n)
   void *this;
   ulong pos1;
   char *str;
-  ulong n1;
+  ulong n;
 {
   char *data;
-  char *pcVar1;
-  char *pcVar2;
-  int iVar3;
-  uint uVar4;
-  char *pcVar5;
-  int local_30;
-  int local_2c [4];
+  char *srcAdj;
+  char *srcRest;
+  int nLeft;
+  uint strSize;
+  char *dstPtr;
+  int ibeginIterA;
+  int ibeginIterB [4];
   
-  uVar4 = *(uint *)(*(int *)this + -0xc);
-  if (uVar4 < pos1) {
+  strSize = *(uint *)(*(int *)this + -0xc);
+  if (strSize < pos1) {
     std____throw_out_of_range("basic_string::insert");
   }
-  if (0x3ffffffc - n1 < uVar4) {
+  if (0x3ffffffc - n < strSize) {
     std____throw_length_error("basic_string::insert");
   }
   data = *(char **)this;
-  if (((*(int *)(data + -4) < 1) && (data <= str)) && (str <= data + uVar4)) {
-    __ZNSs9_M_mutateEmmm(this,pos1,0,n1);
-    pcVar1 = str + (*(int *)this - (int)data);
-    pcVar5 = (char *)(*(int *)this + pos1);
-    pcVar2 = pcVar1;
-    if ((pcVar5 < pcVar1 + n1) && (pcVar2 = pcVar1 + n1, pcVar1 < pcVar5)) {
-      iVar3 = (int)pcVar5 - (int)pcVar1;
-      _memcpy(pcVar5,pcVar1,iVar3);
-      pcVar2 = pcVar5 + n1;
-      pcVar5 = pcVar5 + iVar3;
-      n1 = n1 - iVar3;
+  if (((*(int *)(data + -4) < 1) && (data <= str)) && (str <= data + strSize)) {
+    __ZNSs9_M_mutateEmmm(this,pos1,0,n);
+    srcAdj = str + (*(int *)this - (int)data);
+    dstPtr = (char *)(*(int *)this + pos1);
+    srcRest = srcAdj;
+    if ((dstPtr < srcAdj + n) && (srcRest = srcAdj + n, srcAdj < dstPtr)) {
+      nLeft = (int)dstPtr - (int)srcAdj;
+      _memcpy(dstPtr,srcAdj,nLeft);
+      srcRest = dstPtr + n;
+      dstPtr = dstPtr + nLeft;
+      n = n - nLeft;
     }
-    _memcpy(pcVar5,pcVar2,n1);
+    _memcpy(dstPtr,srcRest,n);
   }
   else {
-    __ZNKSs9_M_ibeginEv(&local_30,this);
-    __ZNKSs9_M_ibeginEv(local_2c,this);
+    __ZNKSs9_M_ibeginEv(&ibeginIterA,this);
+    __ZNKSs9_M_ibeginEv(ibeginIterB,this);
     this = __ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_
-                     (this,local_2c[0] + pos1,local_30 + pos1,str,str + n1);
+                     (this,ibeginIterB[0] + pos1,ibeginIterA + pos1,str,str + n);
   }
   return this;
 }
 
 /* __ZNSs6insertEmRKSsmm @ 0x97c14dec (388 bytes) */
-int __ZNSs6insertEmRKSsmm(this, pos1, text, n1, pos2)
+int __ZNSs6insertEmRKSsmm(this, pos1, text, pos2, n)
   void *this;
   ulong pos1;
   unsigned char * text;
-  ulong n1;
   ulong pos2;
+  ulong n;
 {
+  uint strSize;
+  int nLeft;
   uint repLength;
   char *data;
-  char *pcVar1;
-  int iVar2;
-  char *pcVar3;
-  uint uVar4;
-  char *pcVar5;
-  int local_30;
-  int local_2c [3];
+  char *srcAdj;
+  int textData;
+  char *srcRest;
+  uint textRemaining;
+  char *dstPtr;
+  int ibeginIterA;
+  int ibeginIterB [3];
   
-  iVar2 = *(int *)text;
-  repLength = *(uint *)(iVar2 + -0xc);
-  if (repLength < n1) {
+  textData = *(int *)text;
+  repLength = *(uint *)(textData + -0xc);
+  if (repLength < pos2) {
     std____throw_out_of_range("basic_string::insert");
-    iVar2 = *(int *)text;
+    textData = *(int *)text;
   }
-  uVar4 = repLength - n1;
-  if (uVar4 <= pos2) {
-    pos2 = uVar4;
+  textRemaining = repLength - pos2;
+  if (textRemaining <= n) {
+    n = textRemaining;
   }
-  pcVar1 = (char *)(iVar2 + n1);
-  uVar4 = *(uint *)(*(int *)this + -0xc);
-  if (uVar4 < pos1) {
+  srcAdj = (char *)(textData + pos2);
+  strSize = *(uint *)(*(int *)this + -0xc);
+  if (strSize < pos1) {
     std____throw_out_of_range("basic_string::insert");
   }
-  if (0x3ffffffc - pos2 < uVar4) {
+  if (0x3ffffffc - n < strSize) {
     std____throw_length_error("basic_string::insert");
   }
   data = *(char **)this;
-  if (((*(int *)(data + -4) < 1) && (data <= pcVar1)) && (pcVar1 <= data + uVar4)) {
-    __ZNSs9_M_mutateEmmm(this,pos1,0,pos2);
-    pcVar1 = pcVar1 + (*(int *)this - (int)data);
-    pcVar5 = (char *)(*(int *)this + pos1);
-    pcVar3 = pcVar1;
-    if ((pcVar5 < pcVar1 + pos2) && (pcVar3 = pcVar1 + pos2, pcVar1 < pcVar5)) {
-      iVar2 = (int)pcVar5 - (int)pcVar1;
-      _memcpy(pcVar5,pcVar1,iVar2);
-      pcVar3 = pcVar5 + pos2;
-      pcVar5 = pcVar5 + iVar2;
-      pos2 = pos2 - iVar2;
+  if (((*(int *)(data + -4) < 1) && (data <= srcAdj)) && (srcAdj <= data + strSize)) {
+    __ZNSs9_M_mutateEmmm(this,pos1,0,n);
+    srcAdj = srcAdj + (*(int *)this - (int)data);
+    dstPtr = (char *)(*(int *)this + pos1);
+    srcRest = srcAdj;
+    if ((dstPtr < srcAdj + n) && (srcRest = srcAdj + n, srcAdj < dstPtr)) {
+      nLeft = (int)dstPtr - (int)srcAdj;
+      _memcpy(dstPtr,srcAdj,nLeft);
+      srcRest = dstPtr + n;
+      dstPtr = dstPtr + nLeft;
+      n = n - nLeft;
     }
-    _memcpy(pcVar5,pcVar3,pos2);
+    _memcpy(dstPtr,srcRest,n);
   }
   else {
-    __ZNKSs9_M_ibeginEv(&local_30,this);
-    __ZNKSs9_M_ibeginEv(local_2c,this);
+    __ZNKSs9_M_ibeginEv(&ibeginIterA,this);
+    __ZNKSs9_M_ibeginEv(ibeginIterB,this);
     this = __ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_
-                     (this,local_2c[0] + pos1,local_30 + pos1,pcVar1,pcVar1 + pos2);
+                     (this,ibeginIterB[0] + pos1,ibeginIterA + pos1,srcAdj,srcAdj + n);
   }
   return this;
 }
@@ -697,44 +700,44 @@ int __ZNSs6insertEmRKSs(this, pos1, text)
   unsigned char * text;
 {
   char *data;
-  ulong uVar1;
-  char *pcVar2;
-  char *pcVar3;
-  int iVar4;
-  uint uVar5;
-  char *pcVar6;
-  int local_30;
-  int local_2c [4];
+  ulong textLen;
+  char *srcAdj;
+  char *srcRest;
+  int nLeft;
+  uint strSize;
+  char *dstPtr;
+  int ibeginIterA;
+  int ibeginIterB [4];
   
-  pcVar2 = *(char **)text;
-  uVar5 = *(uint *)(*(int *)this + -0xc);
-  uVar1 = *(ulong *)(pcVar2 + -0xc);
-  if (uVar5 < pos1) {
+  srcAdj = *(char **)text;
+  strSize = *(uint *)(*(int *)this + -0xc);
+  textLen = *(ulong *)(srcAdj + -0xc);
+  if (strSize < pos1) {
     std____throw_out_of_range("basic_string::insert");
   }
-  if (0x3ffffffc - uVar1 < uVar5) {
+  if (0x3ffffffc - textLen < strSize) {
     std____throw_length_error("basic_string::insert");
   }
   data = *(char **)this;
-  if (((*(int *)(data + -4) < 1) && (data <= pcVar2)) && (pcVar2 <= data + uVar5)) {
-    __ZNSs9_M_mutateEmmm(this,pos1,0,uVar1);
-    pcVar2 = pcVar2 + (*(int *)this - (int)data);
-    pcVar6 = (char *)(*(int *)this + pos1);
-    pcVar3 = pcVar2;
-    if ((pcVar6 < pcVar2 + uVar1) && (pcVar3 = pcVar2 + uVar1, pcVar2 < pcVar6)) {
-      iVar4 = (int)pcVar6 - (int)pcVar2;
-      _memcpy(pcVar6,pcVar2,iVar4);
-      pcVar3 = pcVar6 + uVar1;
-      pcVar6 = pcVar6 + iVar4;
-      uVar1 = uVar1 - iVar4;
+  if (((*(int *)(data + -4) < 1) && (data <= srcAdj)) && (srcAdj <= data + strSize)) {
+    __ZNSs9_M_mutateEmmm(this,pos1,0,textLen);
+    srcAdj = srcAdj + (*(int *)this - (int)data);
+    dstPtr = (char *)(*(int *)this + pos1);
+    srcRest = srcAdj;
+    if ((dstPtr < srcAdj + textLen) && (srcRest = srcAdj + textLen, srcAdj < dstPtr)) {
+      nLeft = (int)dstPtr - (int)srcAdj;
+      _memcpy(dstPtr,srcAdj,nLeft);
+      srcRest = dstPtr + textLen;
+      dstPtr = dstPtr + nLeft;
+      textLen = textLen - nLeft;
     }
-    _memcpy(pcVar6,pcVar3,uVar1);
+    _memcpy(dstPtr,srcRest,textLen);
   }
   else {
-    __ZNKSs9_M_ibeginEv(&local_30,this);
-    __ZNKSs9_M_ibeginEv(local_2c,this);
+    __ZNKSs9_M_ibeginEv(&ibeginIterA,this);
+    __ZNKSs9_M_ibeginEv(ibeginIterB,this);
     this = __ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_
-                     (this,local_2c[0] + pos1,local_30 + pos1,pcVar2,pcVar2 + uVar1);
+                     (this,ibeginIterB[0] + pos1,ibeginIterA + pos1,srcAdj,srcAdj + textLen);
   }
   return this;
 }
@@ -752,74 +755,74 @@ int __ZNSs6insertEmPKc(this, pos1, str)
 }
 
 /* __ZNSs6insertEmmc @ 0x97c15104 (92 bytes) */
-int __ZNSs6insertEmmc(this, pos1, n1, c)
+int __ZNSs6insertEmmc(this, pos, n, c)
   void *this;
-  ulong pos1;
-  ulong n1;
+  ulong pos;
+  ulong n;
   undefined4 c;
 {
-  undefined4 local_30 [7];
+  undefined4 posIter [7];
   
-  std__string___M_check((ulong)local_30,this,pos1);
-  ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc)(this,local_30[0],local_30[0],n1,c);
+  std__string___M_check((ulong)posIter,this,pos);
+  ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc)(this,posIter[0],posIter[0],n,c);
   return this;
 }
 
 /* __ZNSs6insertEN9__gnu_cxx17__normal_iteratorIPcSsEEc @ 0x97c15160 (148 bytes) */
-int __ZNSs6insertEN9__gnu_cxx17__normal_iteratorIPcSsEEc(this, i1, param_3, c)
+int __ZNSs6insertEN9__gnu_cxx17__normal_iteratorIPcSsEEc(result, this, p, c)
+  int *result;
   int *this;
-  int *i1;
-  int param_3;
+  int p;
   undefined4 c;
 {
-  int iVar1;
-  int local_30 [6];
+  int posOffset;
+  int iterTmp [6];
   
-  __ZNKSs9_M_ibeginEv(local_30,i1);
-  iVar1 = param_3 - local_30[0];
-  std__string___M_check((ulong)local_30,i1,iVar1);
-  ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc)(i1,local_30[0],local_30[0],1,c);
-  *(undefined4 *)(*i1 + -4) = 0xffffffff;
-  __ZNKSs9_M_ibeginEv(local_30,i1);
-  *this = local_30[0] + iVar1;
-  return this;
+  __ZNKSs9_M_ibeginEv(iterTmp,this);
+  posOffset = p - iterTmp[0];
+  std__string___M_check((ulong)iterTmp,this,posOffset);
+  ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc)(this,iterTmp[0],iterTmp[0],1,c);
+  *(undefined4 *)(*this + -4) = 0xffffffff;
+  __ZNKSs9_M_ibeginEv(iterTmp,this);
+  *result = iterTmp[0] + posOffset;
+  return result;
 }
 
 /* __ZNSs5eraseEN9__gnu_cxx17__normal_iteratorIPcSsEE @ 0x97c151f4 (128 bytes) */
-int __ZNSs5eraseEN9__gnu_cxx17__normal_iteratorIPcSsEE(this, i1, param_3)
+int __ZNSs5eraseEN9__gnu_cxx17__normal_iteratorIPcSsEE(result, this, p)
+  int *result;
   int *this;
-  int *i1;
-  int param_3;
+  int p;
 {
-  int iVar1;
-  int local_30 [7];
+  int posOffset;
+  int iterTmp [7];
   
-  __ZNKSs9_M_ibeginEv(local_30,i1);
-  iVar1 = param_3 - local_30[0];
-  ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S1_S1_)(i1,param_3,param_3 + 1,*i1,*i1);
-  *(undefined4 *)(*i1 + -4) = 0xffffffff;
-  __ZNKSs9_M_ibeginEv(local_30,i1);
-  *this = local_30[0] + iVar1;
-  return this;
+  __ZNKSs9_M_ibeginEv(iterTmp,this);
+  posOffset = p - iterTmp[0];
+  ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S1_S1_)(this,p,p + 1,*this,*this);
+  *(undefined4 *)(*this + -4) = 0xffffffff;
+  __ZNKSs9_M_ibeginEv(iterTmp,this);
+  *result = iterTmp[0] + posOffset;
+  return result;
 }
 
 /* __ZNSs5eraseEN9__gnu_cxx17__normal_iteratorIPcSsEES2_ @ 0x97c15274 (132 bytes) */
-int __ZNSs5eraseEN9__gnu_cxx17__normal_iteratorIPcSsEES2_(this, i1, param_3, param_4)
+int __ZNSs5eraseEN9__gnu_cxx17__normal_iteratorIPcSsEES2_(result, this, first, last)
+  int *result;
   int *this;
-  int *i1;
-  int param_3;
-  undefined4 param_4;
+  int first;
+  undefined4 last;
 {
-  int iVar1;
-  int local_30 [6];
+  int posOffset;
+  int iterTmp [6];
   
-  __ZNKSs9_M_ibeginEv(local_30,i1);
-  iVar1 = param_3 - local_30[0];
-  ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S1_S1_)(i1,param_3,param_4,*i1,*i1);
-  *(undefined4 *)(*i1 + -4) = 0xffffffff;
-  __ZNKSs9_M_ibeginEv(local_30,i1);
-  *this = local_30[0] + iVar1;
-  return this;
+  __ZNKSs9_M_ibeginEv(iterTmp,this);
+  posOffset = first - iterTmp[0];
+  ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S1_S1_)(this,first,last,*this,*this);
+  *(undefined4 *)(*this + -4) = 0xffffffff;
+  __ZNKSs9_M_ibeginEv(iterTmp,this);
+  *result = iterTmp[0] + posOffset;
+  return result;
 }
 
 /* __ZNSs7replaceEmmRKSs @ 0x97c152f8 (12 bytes) */
@@ -844,20 +847,20 @@ int __ZNSs7replaceEmmRKSsmm(this, pos1, n1, text, pos2, n2)
   ulong n2;
 {
   uint repLength;
-  int iVar1;
-  uint uVar2;
+  int textData;
+  uint textRemaining;
   
-  iVar1 = *(int *)text;
-  repLength = *(uint *)(iVar1 + -0xc);
+  textData = *(int *)text;
+  repLength = *(uint *)(textData + -0xc);
   if (repLength < pos2) {
     std____throw_out_of_range("basic_string::replace");
-    iVar1 = *(int *)text;
+    textData = *(int *)text;
   }
-  uVar2 = repLength - pos2;
-  if (uVar2 <= n2) {
-    n2 = uVar2;
+  textRemaining = repLength - pos2;
+  if (textRemaining <= n2) {
+    n2 = textRemaining;
   }
-  return ((int (*)())__ZNSs7replaceEmmPKcm)(this,pos1,n1,(char *)(iVar1 + pos2),n2);
+  return ((int (*)())__ZNSs7replaceEmmPKcm)(this,pos1,n1,(char *)(textData + pos2),n2);
 }
 
 /* __ZNSs7replaceEmmPKc @ 0x97c1538c (80 bytes) */
@@ -874,181 +877,181 @@ int __ZNSs7replaceEmmPKc(this, pos1, n1, str)
 }
 
 /* __ZNSs7replaceEmmmc @ 0x97c153dc (120 bytes) */
-int __ZNSs7replaceEmmmc(this, pos1, n1, pos2, c)
+int __ZNSs7replaceEmmmc(this, pos1, n1, n2, c)
   void *this;
   ulong pos1;
   ulong n1;
-  ulong pos2;
+  ulong n2;
   undefined4 c;
 {
-  undefined4 local_30;
-  undefined4 local_2c [4];
+  undefined4 posIter;
+  undefined4 endIter [4];
   
-  std__string___M_check((ulong)&local_30,this,pos1);
-  __ZNKSs7_M_foldEmm((ulong)local_2c,(ulong)this,pos1,n1);
-  return ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc)(this,local_30,local_2c[0],pos2,c);
+  std__string___M_check((ulong)&posIter,this,pos1);
+  __ZNKSs7_M_foldEmm((ulong)endIter,(ulong)this,pos1,n1);
+  return ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc)(this,posIter,endIter[0],n2,c);
 }
 
 /* __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKcm @ 0x97c15454 (96 bytes) */
-int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKcm(this, i1, param_3, str, charPtr)
+int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKcm(this, i1, i2, str, n)
   void *this;
   int i1;
-  int param_3;
+  int i2;
   char *str;
-  ulong charPtr;
+  ulong n;
 {
-  int local_30 [5];
+  int ibeginIter [5];
   
-  __ZNKSs9_M_ibeginEv(local_30,this);
-  return ((int (*)())__ZNSs7replaceEmmPKcm)(this,i1 - local_30[0],param_3 - i1,str,charPtr);
+  __ZNKSs9_M_ibeginEv(ibeginIter,this);
+  return ((int (*)())__ZNSs7replaceEmmPKcm)(this,i1 - ibeginIter[0],i2 - i1,str,n);
 }
 
 /* __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_RKSs @ 0x97c154b4 (96 bytes) */
-int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_RKSs(this, i1, param_3, text)
+int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_RKSs(this, i1, i2, text)
   void *this;
   int i1;
-  int param_3;
+  int i2;
   undefined4 *text;
 {
-  char *pcVar1;
+  char *textData;
   ulong repLength;
-  int local_30 [5];
+  int ibeginIter [5];
   
-  pcVar1 = (char *)*text;
-  repLength = *(ulong *)(pcVar1 + -0xc);
-  __ZNKSs9_M_ibeginEv(local_30,this);
-  return ((int (*)())__ZNSs7replaceEmmPKcm)(this,i1 - local_30[0],param_3 - i1,pcVar1,repLength);
+  textData = (char *)*text;
+  repLength = *(ulong *)(textData + -0xc);
+  __ZNKSs9_M_ibeginEv(ibeginIter,this);
+  return ((int (*)())__ZNSs7replaceEmmPKcm)(this,i1 - ibeginIter[0],i2 - i1,textData,repLength);
 }
 
 /* __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKc @ 0x97c15514 (80 bytes) */
-int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKc(this, i1, param_3, str)
+int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKc(this, i1, i2, str)
   void *this;
   undefined4 i1;
-  undefined4 param_3;
+  undefined4 i2;
   undefined4 str;
 {
   undefined4 length;
   
   length = _strlen(str);
-  return ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKcm)(this,i1,param_3,str,length);
+  return ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKcm)(this,i1,i2,str,length);
 }
 
 /* __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc @ 0x97c15564 (180 bytes) */
-int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc(this, i1, param_3, param_4, pos1)
+int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc(this, i1, i2, n, c)
   void *this;
   int i1;
-  int param_3;
-  uint param_4;
-  undefined4 pos1;
+  int i2;
+  uint n;
+  undefined4 c;
 {
-  int local_30 [6];
+  int ibeginIter [6];
   
-  __ZNKSs9_M_ibeginEv(local_30,this);
-  if (0x3ffffffcU - (*(int *)(*(int *)this + -0xc) - (param_3 - i1)) <= param_4) {
+  __ZNKSs9_M_ibeginEv(ibeginIter,this);
+  if (0x3ffffffcU - (*(int *)(*(int *)this + -0xc) - (i2 - i1)) <= n) {
     std____throw_length_error("basic_string::replace");
   }
-  __ZNSs9_M_mutateEmmm(this,i1 - local_30[0],param_3 - i1,param_4);
-  if (param_4 != 0) {
-    _memset(*(int *)this + (i1 - local_30[0]),pos1,param_4);
+  __ZNSs9_M_mutateEmmm(this,i1 - ibeginIter[0],i2 - i1,n);
+  if (n != 0) {
+    _memset(*(int *)this + (i1 - ibeginIter[0]),c,n);
   }
   return this;
 }
 
 /* __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKcS4_ @ 0x97c15618 (96 bytes) */
-int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKcS4_(this, i1, param_3, str1, str2)
+int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKcS4_(this, i1, i2, k1, k2)
   void *this;
   int i1;
-  int param_3;
-  char *str1;
-  int str2;
+  int i2;
+  char *k1;
+  int k2;
 {
-  int local_30 [5];
+  int ibeginIter [5];
   
-  __ZNKSs9_M_ibeginEv(local_30,this);
-  ((int (*)())__ZNSs7replaceEmmPKcm)(this,i1 - local_30[0],param_3 - i1,str1,str2 - (int)str1)
+  __ZNKSs9_M_ibeginEv(ibeginIter,this);
+  ((int (*)())__ZNSs7replaceEmmPKcm)(this,i1 - ibeginIter[0],i2 - i1,k1,k2 - (int)k1)
   ;
   return;
 }
 
 /* __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S2_S2_ @ 0x97c15678 (96 bytes) */
-int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S2_S2_(this, i1, param_3, str, param_5)
+int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S2_S2_(this, i1, i2, k1, k2)
   void *this;
   int i1;
-  int param_3;
-  char *str;
-  int param_5;
+  int i2;
+  char *k1;
+  int k2;
 {
-  int local_30 [5];
+  int ibeginIter [5];
   
-  __ZNKSs9_M_ibeginEv(local_30,this);
-  ((int (*)())__ZNSs7replaceEmmPKcm)(this,i1 - local_30[0],param_3 - i1,str,param_5 - (int)str)
+  __ZNKSs9_M_ibeginEv(ibeginIter,this);
+  ((int (*)())__ZNSs7replaceEmmPKcm)(this,i1 - ibeginIter[0],i2 - i1,k1,k2 - (int)k1)
   ;
   return;
 }
 
 /* __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_NS0_IPKcSsEES5_ @ 0x97c156d8 (96 bytes) */
-int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_NS0_IPKcSsEES5_(this, i1, param_3, str, param_5)
+int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_NS0_IPKcSsEES5_(this, i1, i2, k1, k2)
   void *this;
   int i1;
-  int param_3;
-  char *str;
-  int param_5;
+  int i2;
+  char *k1;
+  int k2;
 {
-  int local_30 [5];
+  int ibeginIter [5];
   
-  __ZNKSs9_M_ibeginEv(local_30,this);
-  ((int (*)())__ZNSs7replaceEmmPKcm)(this,i1 - local_30[0],param_3 - i1,str,param_5 - (int)str)
+  __ZNKSs9_M_ibeginEv(ibeginIter,this);
+  ((int (*)())__ZNSs7replaceEmmPKcm)(this,i1 - ibeginIter[0],i2 - i1,k1,k2 - (int)k1)
   ;
   return;
 }
 
 /* std__string___S_construct @ 0x97c15738 (140 bytes) */
-int std__string___S_construct(this, param_2, param_3)
-  ulong this;
-  undefined4 param_2;
-  unsigned char * param_3;
+int std__string___S_construct(n, c, alloc)
+  ulong n;
+  undefined4 c;
+  unsigned char * alloc;
 {
-  ulong *puVar1;
-  ulong *puVar2;
+  ulong *resultData;
+  ulong *rep;
   char reservation;
   
-  if (this == 0) {
+  if (n == 0) {
     if (reservation != '\0') {
       DAT_a7b7bf8c = storeWordConditionalIndexed(DAT_a7b7bf8c + 1,0,0xa7b7bf8c);
     }
-    puVar1 = (ulong *)&DAT_a7b7bf90;
+    resultData = (ulong *)&DAT_a7b7bf90;
   }
   else {
-    puVar2 = (ulong *)__ZNSs4_Rep9_S_createEmRKSaIcE(this,param_3);
-    puVar1 = puVar2 + 3;
-    _memset(puVar1,param_2,this);
-    *puVar2 = this;
-    *(undefined1 *)((int)puVar1 + this) = 0;
+    rep = (ulong *)__ZNSs4_Rep9_S_createEmRKSaIcE(n,alloc);
+    resultData = rep + 3;
+    _memset(resultData,c,n);
+    *rep = n;
+    *(undefined1 *)((int)resultData + n) = 0;
   }
-  return puVar1;
+  return resultData;
 }
 
 /* std__string__copy @ 0x97c157c4 (132 bytes) */
-int std__string__copy(this, str, param_3, param_4)
+int std__string__copy(this, str, n, pos)
   unsigned char * this;
   char *str;
-  ulong param_3;
-  ulong param_4;
+  ulong n;
+  ulong pos;
 {
-  uint uVar1;
+  uint remaining;
   int data;
   
   data = *(int *)this;
-  if (*(uint *)(data + -0xc) < param_4) {
+  if (*(uint *)(data + -0xc) < pos) {
     std____throw_out_of_range("basic_string::copy");
     data = *(int *)this;
   }
-  uVar1 = *(int *)(data + -0xc) - param_4;
-  if (uVar1 < param_3) {
-    param_3 = uVar1;
+  remaining = *(int *)(data + -0xc) - pos;
+  if (remaining < n) {
+    n = remaining;
   }
-  _memcpy(str,data + param_4,param_3);
-  return param_3;
+  _memcpy(str,data + pos,n);
+  return n;
 }
 
 /* __ZNSs4swapERSs @ 0x97c15848 (140 bytes) */
@@ -1094,24 +1097,24 @@ int __ZNKSs4findEPKcmm(this, str, pos, n)
   ulong pos;
   ulong n;
 {
-  uint uVar1;
+  uint endPos;
   int compareResult;
-  uint uVar3;
-  int iVar4;
+  uint strSize;
+  int cur;
   
-  uVar1 = pos + n;
-  uVar3 = *(uint *)(*(int *)this + -0xc);
-  if (uVar1 <= uVar3) {
-    iVar4 = pos + *(int *)this;
+  endPos = pos + n;
+  strSize = *(uint *)(*(int *)this + -0xc);
+  if (endPos <= strSize) {
+    cur = pos + *(int *)this;
     do {
-      compareResult = _memcmp(iVar4,str,n);
+      compareResult = _memcmp(cur,str,n);
       if (compareResult == 0) {
         return pos;
       }
-      uVar1 = uVar1 + 1;
+      endPos = endPos + 1;
       pos = pos + 1;
-      iVar4 = iVar4 + 1;
-    } while (uVar1 <= uVar3);
+      cur = cur + 1;
+    } while (endPos <= strSize);
   }
   return 0xffffffff;
 }
@@ -1144,19 +1147,19 @@ int __ZNKSs4findEcm(this, c, pos)
   ulong pos;
 {
   void *memchrResult;
-  int iVar2;
+  int result;
   int data;
-  char cStack0000001c;
+  char cSpill;
   
-  iVar2 = -1;
+  result = -1;
   data = *(int *)this;
   if ((pos < *(uint *)(data + -0xc)) &&
-     (cStack0000001c = c,
+     (cSpill = c,
      memchrResult = _memchr((void *)(data + pos),(int)c,*(uint *)(data + -0xc) - pos),
      memchrResult != (void *)0x0)) {
-    iVar2 = (int)memchrResult - data;
+    result = (int)memchrResult - data;
   }
-  return iVar2;
+  return result;
 }
 
 /* __ZNKSs5rfindERKSsm @ 0x97c15a40 (12 bytes) */
@@ -1176,28 +1179,28 @@ int __ZNKSs5rfindEPKcmm(this, str, pos, n)
   ulong n;
 {
   unsigned int ghidra_home[8] = { this, str, pos, n, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  uint uVar1;
-  uint *puVar2;
-  int iVar3;
-  int iVar4;
-  uint local_30 [7];
+  uint curPos;
+  uint *startPtr;
+  int cmpResult;
+  int data;
+  uint maxPos [7];
   
-  iVar4 = *(int *)this;
-  local_30[0] = *(uint *)(iVar4 + -0xc);
-  if (n <= local_30[0]) {
-    local_30[0] = local_30[0] - n;
-    puVar2 = &(*(unsigned int *)((unsigned char *)ghidra_home + 8));
-    if (local_30[0] <= pos) {
-      puVar2 = local_30;
+  data = *(int *)this;
+  maxPos[0] = *(uint *)(data + -0xc);
+  if (n <= maxPos[0]) {
+    maxPos[0] = maxPos[0] - n;
+    startPtr = &(*(unsigned int *)((unsigned char *)ghidra_home + 8));
+    if (maxPos[0] <= pos) {
+      startPtr = maxPos;
     }
-    (*(uint *)((unsigned char *)ghidra_home + 8)) = *puVar2;
+    (*(uint *)((unsigned char *)ghidra_home + 8)) = *startPtr;
     do {
-      uVar1 = (*(uint *)((unsigned char *)ghidra_home + 8));
-      iVar3 = _memcmp(iVar4 + (*(uint *)((unsigned char *)ghidra_home + 8)),str,n);
-      if (iVar3 == 0) {
-        return uVar1;
+      curPos = (*(uint *)((unsigned char *)ghidra_home + 8));
+      cmpResult = _memcmp(data + (*(uint *)((unsigned char *)ghidra_home + 8)),str,n);
+      if (cmpResult == 0) {
+        return curPos;
       }
-      (*(uint *)((unsigned char *)ghidra_home + 8)) = uVar1 - 1;
+      (*(uint *)((unsigned char *)ghidra_home + 8)) = curPos - 1;
     } while ((*(uint *)((unsigned char *)ghidra_home + 8)) != 0xffffffff);
   }
   return 0xffffffff;

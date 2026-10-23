@@ -485,7 +485,7 @@ use	__ZNSs4_Rep10_M_disposeERKSaIcE	iVar1	atomicStore	INFERRED	every definition 
 use	__ZNSs9_M_mutateEmmm	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#36	+1	all	all
 use	__ZNSs4_Rep10_M_refcopyEv	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#3	+1	all	all
 use	__ZNSsC1ERKSs	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#12	+1	all	all
-use	__ZNSs4_Rep7_M_grabERKSaIcES2_	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#11	+1	all	all
+use	__ZNSs4_Rep7_M_grabERKSaIcES2_	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	(iVar1|atomicStore) = \w*storeWordConditionalIndexed	+1	all	all
 use	__ZNSsC4ERKSs	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#12	+1	all	all
 use	__ZNSsD4Ev	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#8	+1	all	all
 use	__ZNSs7reserveEm	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#20	+1	all	all

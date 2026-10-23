@@ -85,7 +85,7 @@ local	__ZNSs6assignEPKc	param_2	str	INFERRED	parameter type in the mangled name 
 local	__ZNSs7replaceEmmPKcm	param_4	str	INFERRED	parameter type in the mangled name (__ZNSs7replaceEmmPKcm)
 local	__ZNSs6appendEPKc	param_2	str	INFERRED	parameter type in the mangled name (__ZNSs6appendEPKc)
 local	__ZNSs6appendEPKcm	param_2	str	INFERRED	parameter type in the mangled name (__ZNSs6appendEPKcm)
-local	__ZNSs6insertEN9__gnu_cxx17__normal_iteratorIPcSsEEmc	param_2	__normal_iterator	INFERRED	parameter type in the mangled name (__ZNSs6insertEN9__gnu_cxx17__normal_iteratorIPcSsEEmc)
+local	__ZNSs6insertEN9__gnu_cxx17__normal_iteratorIPcSsEEmc	param_2	p	INFERRED	parameter type in the mangled name (__ZNSs6insertEN9__gnu_cxx17__normal_iteratorIPcSsEEmc)
 local	__ZNSs6insertEmPKcm	param_3	str	INFERRED	parameter type in the mangled name (__ZNSs6insertEmPKcm)
 local	__ZNSs6insertEmPKc	param_3	str	INFERRED	parameter type in the mangled name (__ZNSs6insertEmPKc)
 local	__ZNSs7replaceEmmPKc	param_4	str	INFERRED	parameter type in the mangled name (__ZNSs7replaceEmmPKc)
