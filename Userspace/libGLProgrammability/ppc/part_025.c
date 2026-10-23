@@ -898,272 +898,276 @@ LAB_97c196cc:
 }
 
 /* parse_lsda_header @ 0x97c196ec (216 bytes) */
-int parse_lsda_header(context, param_2, info)
+int parse_lsda_header(context, p, info)
   unsigned char * context;
-  uchar *param_2;
+  uchar *p;
   unsigned char * info;
 {
-  unsigned char uVar1;
-  uint uVar2;
-  int iVar3;
-  uint uVar4;
-  unsigned char * plVar5;
-  unsigned char * plVar6;
-  uint local_30 [7];
+  unsigned char * ttypeTable;
+  unsigned char regionStart;
+  uint lpStartBase;
+  int callSiteTable;
+  uint lpStartEncoding;
+  unsigned char * lsdaCursor;
+  unsigned char * afterEncodingByte;
+  uint tmp [7];
   
   if (context == (unsigned char *)0x0) {
-    uVar1 = 0;
+    regionStart = 0;
   }
   else {
-    uVar1 = ((int (*)())__Unwind_GetRegionStart)(context);
+    regionStart = ((int (*)())__Unwind_GetRegionStart)(context);
   }
-  *(unsigned char *)info = uVar1;
-  uVar4 = (uint)*param_2;
-  plVar5 = (unsigned char *)(param_2 + 1);
-  if (uVar4 == 0xff) {
-    *(unsigned char *)(info + 4) = uVar1;
+  *(unsigned char *)info = regionStart;
+  lpStartEncoding = (uint)*p;
+  lsdaCursor = (unsigned char *)(p + 1);
+  if (lpStartEncoding == 0xff) {
+    *(unsigned char *)(info + 4) = regionStart;
   }
   else {
-    uVar2 = ((int (*)())__Z21base_of_encoded_valuehP15_Unwind_Context)(uVar4,context);
-    plVar5 = (unsigned char *)
-             ((int (*)())__Z28read_encoded_value_with_basehjPKhPj)(uVar4,uVar2,(uchar *)plVar5,(uint *)(info + 4));
+    lpStartBase = ((int (*)())__Z21base_of_encoded_valuehP15_Unwind_Context)(lpStartEncoding,context);
+    lsdaCursor = (unsigned char *)
+             ((int (*)())__Z28read_encoded_value_with_basehjPKhPj)(lpStartEncoding,lpStartBase,(uchar *)lsdaCursor,(uint *)(info + 4));
   }
-  plVar6 = plVar5 + 1;
-  info[0x14] = *plVar5;
-  plVar5 = (unsigned char *)0x0;
+  afterEncodingByte = lsdaCursor + 1;
+  info[0x14] = *lsdaCursor;
+  ttypeTable = (unsigned char *)0x0;
   if (info[0x14] != 0xff) {
-    plVar6 = (unsigned char *)((int (*)())__Z12read_uleb128PKhPj)((uchar *)plVar6,local_30);
-    plVar5 = plVar6 + local_30[0];
+    afterEncodingByte = (unsigned char *)((int (*)())__Z12read_uleb128PKhPj)((uchar *)afterEncodingByte,tmp);
+    ttypeTable = afterEncodingByte + tmp[0];
   }
-  *(unsigned char **)(info + 0xc) = plVar5;
-  info[0x15] = *plVar6;
-  iVar3 = ((int (*)())__Z12read_uleb128PKhPj)((uchar *)(plVar6 + 1),local_30);
-  *(uint *)(info + 0x10) = iVar3 + local_30[0];
-  return iVar3;
+  *(unsigned char **)(info + 0xc) = ttypeTable;
+  info[0x15] = *afterEncodingByte;
+  callSiteTable = ((int (*)())__Z12read_uleb128PKhPj)((uchar *)(afterEncodingByte + 1),tmp);
+  *(uint *)(info + 0x10) = callSiteTable + tmp[0];
+  return callSiteTable;
 }
 
 /* __Z15get_ttype_entryP16lsda_header_infoj @ 0x97c197c4 (84 bytes) */
-int __Z15get_ttype_entryP16lsda_header_infoj(info, param_2)
+int __Z15get_ttype_entryP16lsda_header_infoj(info, i)
   unsigned char * info;
-  uint param_2;
+  uint i;
 {
-  int iVar1;
-  uint local_20 [4];
+  int entrySize;
+  uint entry [4];
   
-  iVar1 = ((int (*)())__Z21size_of_encoded_valueh)((uint)(byte)info[0x14]);
+  entrySize = ((int (*)())__Z21size_of_encoded_valueh)((uint)(byte)info[0x14]);
   ((int (*)())__Z28read_encoded_value_with_basehjPKhPj)((uint)(byte)info[0x14],*(uint *)(info + 8),
-             (uchar *)(*(int *)(info + 0xc) - param_2 * iVar1),local_20);
-  return local_20[0];
+             (uchar *)(*(int *)(info + 0xc) - i * entrySize),entry);
+  return entry[0];
 }
 
 /* get_adjusted_ptr @ 0x97c19818 (152 bytes) */
-int get_adjusted_ptr(catchType, throwType, param_3)
+int get_adjusted_ptr(catchType, throwType, thrownPtrP)
   unsigned char * catchType;
   unsigned char * throwType;
-  void **param_3;
+  void **thrownPtrP;
 {
-  int iVar1;
-  undefined4 *local_20 [4];
+  int throwIsPointer;
+  undefined4 *thrownPtr [4];
   
-  local_20[0] = *param_3;
-  iVar1 = (**(code **)(*(int *)throwType + 8))(throwType,throwType,param_3);
-  if (iVar1 != 0) {
-    local_20[0] = (undefined4 *)*local_20[0];
+  thrownPtr[0] = *thrownPtrP;
+  throwIsPointer = (**(code **)(*(int *)throwType + 8))(throwType,throwType,thrownPtrP);
+  if (throwIsPointer != 0) {
+    thrownPtr[0] = (undefined4 *)*thrownPtr[0];
   }
-  iVar1 = (**(code **)(*(int *)catchType + 0x10))(catchType,throwType,local_20,1);
-  if (iVar1 != 0) {
-    *param_3 = local_20[0];
+  throwIsPointer = (**(code **)(*(int *)catchType + 0x10))(catchType,throwType,thrownPtr,1);
+  if (throwIsPointer != 0) {
+    *thrownPtrP = thrownPtr[0];
   }
-  return iVar1 != 0;
+  return throwIsPointer != 0;
 }
 
 /* check_exception_spec @ 0x97c198b0 (124 bytes) */
-int check_exception_spec(info, throwType, param_3, param_4)
+int check_exception_spec(info, throwType, thrownPtr, filterValue)
   unsigned char * info;
   unsigned char * throwType;
-  void *param_3;
-  int param_4;
+  void *thrownPtr;
+  int filterValue;
 {
-  unsigned int ghidra_home[8] = { info, throwType, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  unsigned char * ptVar1;
-  int iVar2;
-  uchar *puVar3;
-  uint local_20 [4];
+  unsigned int ghidra_home[8] = { info, throwType, thrownPtr, filterValue, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned char * catchType;
+  int adjusted;
+  uchar *specCursor;
+  uint tmp [4];
   
-  puVar3 = (uchar *)((*(int *)(info + 0xc) - param_4) + -1);
-  (*(void * *)((unsigned char *)ghidra_home + 8)) = param_3;
+  specCursor = (uchar *)((*(int *)(info + 0xc) - filterValue) + -1);
+  (*(void * *)((unsigned char *)ghidra_home + 8)) = thrownPtr;
   do {
-    puVar3 = (uchar *)((int (*)())__Z12read_uleb128PKhPj)(puVar3,local_20);
-    if (local_20[0] == 0) {
+    specCursor = (uchar *)((int (*)())__Z12read_uleb128PKhPj)(specCursor,tmp);
+    if (tmp[0] == 0) {
       return 0;
     }
-    ptVar1 = (unsigned char *)((int (*)())__Z15get_ttype_entryP16lsda_header_infoj)(info,local_20[0]);
-    iVar2 = ((int (*)())get_adjusted_ptr)(ptVar1,throwType,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
-  } while (iVar2 == 0);
+    catchType = (unsigned char *)((int (*)())__Z15get_ttype_entryP16lsda_header_infoj)(info,tmp[0]);
+    adjusted = ((int (*)())get_adjusted_ptr)(catchType,throwType,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
+  } while (adjusted == 0);
   return 1;
 }
 
 /* ___gxx_personality_v0 @ 0x97c1992c (976 bytes) */
-int ___gxx_personality_v0(param_1, param_2, param_3, param_4, param_5, param_6)
-  int param_1;
-  uint param_2;
-  int param_3;
-  int param_4;
-  unsigned char param_5;
-  unsigned char * param_6;
+int ___gxx_personality_v0(version, actions, exceptionClassLo, exceptionClassHi, ueHeader, context)
+  int version;
+  uint actions;
+  int exceptionClassLo;
+  int exceptionClassHi;
+  unsigned char ueHeader;
+  unsigned char * context;
 {
-  bool bVar1;
+  bool sawCleanup;
+  uint handlerTest;
+  uint foundType;
+  bool foundTerminate;
   uchar *languageSpecificData;
-  uchar *puVar3;
+  uchar *p;
   unsigned char iP;
-  uint uVar5;
-  uchar *puVar6;
-  unsigned char * ptVar7;
-  int iVar8;
-  undefined4 uVar9;
-  unsigned char new_value;
-  unsigned char new_value_00;
-  uchar *puVar10;
-  unsigned char * ptVar11;
-  uint uVar12;
-  int iStack_80;
-  int iStack_7c;
-  undefined4 uStack_78;
-  uchar *puStack_70;
-  byte bStack_6c;
-  byte bStack_6b;
-  uint uStack_60;
-  uint uStack_5c;
-  uint uStack_58;
-  uint uStack_54;
-  uint uStack_50;
-  int iStack_4c;
-  void *apvStack_48 [2];
+  uint callSiteBase;
+  uchar *pAfterCallSite;
+  unsigned char * catchType;
+  int adjustedOk;
+  undefined4 reloadedTTypeBase;
+  unsigned char landingPad;
+  unsigned char handlerSwitchValue;
+  uchar *actionRecord;
+  unsigned char * throwType;
+  uint callSiteEncoding;
+  int infoStart;
+  int infoLPStart;
+  undefined4 infoTTypeBase;
+  uchar *infoActionTable;
+  byte infoTTypeEncoding;
+  byte infoCallSiteEncoding;
+  uint csStart;
+  uint csLen;
+  uint csLandingPad;
+  uint csAction;
+  uint arFilter;
+  int arDisp;
+  void *thrownPtr [2];
   
-  apvStack_48[0] = (void *)(param_5 + 0x20);
-  if (param_1 != 1) {
+  thrownPtr[0] = (void *)(ueHeader + 0x20);
+  if (version != 1) {
     return 3;
   }
-  if (((param_2 == 6) && (param_3 == 0x474e5543)) && (param_4 == 0x432b2b00)) {
-    new_value = *(unsigned char *)(param_5 - 0xc);
-    new_value_00 = *(unsigned char *)(param_5 - 0x18);
-    bVar1 = new_value == 0;
+  if (((actions == 6) && (exceptionClassLo == 0x474e5543)) && (exceptionClassHi == 0x432b2b00)) {
+    landingPad = *(unsigned char *)(ueHeader - 0xc);
+    handlerSwitchValue = *(unsigned char *)(ueHeader - 0x18);
+    foundTerminate = landingPad == 0;
     goto LAB_97c19c74;
   }
-  languageSpecificData = (uchar *)((int (*)())__Unwind_GetLanguageSpecificData)(param_6);
+  languageSpecificData = (uchar *)((int (*)())__Unwind_GetLanguageSpecificData)(context);
   if (languageSpecificData == (uchar *)0x0) {
     return 8;
   }
-  new_value = 0;
-  puVar3 = (uchar *)((int (*)())parse_lsda_header)(param_6,languageSpecificData,(unsigned char *)&iStack_80);
-  puVar10 = (uchar *)0x0;
-  new_value_00 = 0;
-  uStack_78 = ((int (*)())__Z21base_of_encoded_valuehP15_Unwind_Context)((uint)bStack_6c,param_6);
-  iP = __Unwind_GetIP(param_6);
-  if (puVar3 < puStack_70) {
+  landingPad = 0;
+  p = (uchar *)((int (*)())parse_lsda_header)(context,languageSpecificData,(unsigned char *)&infoStart);
+  actionRecord = (uchar *)0x0;
+  handlerSwitchValue = 0;
+  infoTTypeBase = ((int (*)())__Z21base_of_encoded_valuehP15_Unwind_Context)((uint)infoTTypeEncoding,context);
+  iP = __Unwind_GetIP(context);
+  if (p < infoActionTable) {
     do {
-      uVar12 = (uint)bStack_6b;
-      uVar5 = ((int (*)())__Z21base_of_encoded_valuehP15_Unwind_Context)(uVar12,(unsigned char *)0x0);
-      puVar3 = (uchar *)((int (*)())__Z28read_encoded_value_with_basehjPKhPj)(uVar12,uVar5,puVar3,&uStack_60);
-      uVar12 = (uint)bStack_6b;
-      uVar5 = ((int (*)())__Z21base_of_encoded_valuehP15_Unwind_Context)(uVar12,(unsigned char *)0x0);
-      puVar3 = (uchar *)((int (*)())__Z28read_encoded_value_with_basehjPKhPj)(uVar12,uVar5,puVar3,&uStack_5c);
-      uVar12 = (uint)bStack_6b;
-      uVar5 = ((int (*)())__Z21base_of_encoded_valuehP15_Unwind_Context)(uVar12,(unsigned char *)0x0);
-      puVar3 = (uchar *)((int (*)())__Z28read_encoded_value_with_basehjPKhPj)(uVar12,uVar5,puVar3,&uStack_58);
-      puVar6 = (uchar *)((int (*)())__Z12read_uleb128PKhPj)(puVar3,&uStack_54);
-      puVar3 = puStack_70;
-      if ((iStack_80 + uStack_60 <= iP - 1) &&
-         (puVar3 = puVar6, iP - 1 < iStack_80 + uStack_60 + uStack_5c)) {
-        if (uStack_58 != 0) {
-          new_value = iStack_7c + uStack_58;
+      callSiteEncoding = (uint)infoCallSiteEncoding;
+      callSiteBase = ((int (*)())__Z21base_of_encoded_valuehP15_Unwind_Context)(callSiteEncoding,(unsigned char *)0x0);
+      p = (uchar *)((int (*)())__Z28read_encoded_value_with_basehjPKhPj)(callSiteEncoding,callSiteBase,p,&csStart);
+      callSiteEncoding = (uint)infoCallSiteEncoding;
+      callSiteBase = ((int (*)())__Z21base_of_encoded_valuehP15_Unwind_Context)(callSiteEncoding,(unsigned char *)0x0);
+      p = (uchar *)((int (*)())__Z28read_encoded_value_with_basehjPKhPj)(callSiteEncoding,callSiteBase,p,&csLen);
+      callSiteEncoding = (uint)infoCallSiteEncoding;
+      callSiteBase = ((int (*)())__Z21base_of_encoded_valuehP15_Unwind_Context)(callSiteEncoding,(unsigned char *)0x0);
+      p = (uchar *)((int (*)())__Z28read_encoded_value_with_basehjPKhPj)(callSiteEncoding,callSiteBase,p,&csLandingPad);
+      pAfterCallSite = (uchar *)((int (*)())__Z12read_uleb128PKhPj)(p,&csAction);
+      p = infoActionTable;
+      if ((infoStart + csStart <= iP - 1) &&
+         (p = pAfterCallSite, iP - 1 < infoStart + csStart + csLen)) {
+        if (csLandingPad != 0) {
+          landingPad = infoLPStart + csLandingPad;
         }
-        if (uStack_54 != 0) {
-          puVar10 = puStack_70 + (uStack_54 - 1);
+        if (csAction != 0) {
+          actionRecord = infoActionTable + (csAction - 1);
         }
-        if (new_value == 0) {
+        if (landingPad == 0) {
           return 8;
         }
-        uVar5 = 2;
-        if (puVar10 == (uchar *)0x0) goto LAB_97c19c1c;
-        bVar1 = false;
-        if ((((param_2 & 8) == 0) && (param_3 == 0x474e5543)) && (param_4 == 0x432b2b00)) {
-          ptVar11 = *(unsigned char **)(param_5 - 0x30);
+        foundType = 2;
+        if (actionRecord == (uchar *)0x0) goto LAB_97c19c1c;
+        sawCleanup = false;
+        if ((((actions & 8) == 0) && (exceptionClassLo == 0x474e5543)) && (exceptionClassHi == 0x432b2b00)) {
+          throwType = *(unsigned char **)(ueHeader - 0x30);
         }
         else {
-          ptVar11 = (unsigned char *)0x0;
+          throwType = (unsigned char *)0x0;
         }
         goto LAB_97c19b58;
       }
-    } while (puVar3 < puStack_70);
+    } while (p < infoActionTable);
   }
-  uVar5 = (param_2 ^ 8) >> 3 & 1;
+  foundType = (actions ^ 8) >> 3 & 1;
 LAB_97c19c0c:
-  if (uVar5 == 0) {
+  if (foundType == 0) {
     return 8;
   }
 LAB_97c19c1c:
-  bVar1 = uVar5 == 1;
-  if ((param_2 & 1) != 0) {
-    if (uVar5 != 2) {
-      if ((param_3 == 0x474e5543) && (param_4 == 0x432b2b00)) {
-        *(unsigned char *)(param_5 - 0xc) = new_value;
-        *(unsigned char *)(param_5 - 0x18) = new_value_00;
-        *(uchar **)(param_5 - 0x14) = puVar10;
-        *(uchar **)(param_5 - 0x10) = languageSpecificData;
-        *(void **)(param_5 - 8) = apvStack_48[0];
+  foundTerminate = foundType == 1;
+  if ((actions & 1) != 0) {
+    if (foundType != 2) {
+      if ((exceptionClassLo == 0x474e5543) && (exceptionClassHi == 0x432b2b00)) {
+        *(unsigned char *)(ueHeader - 0xc) = landingPad;
+        *(unsigned char *)(ueHeader - 0x18) = handlerSwitchValue;
+        *(uchar **)(ueHeader - 0x14) = actionRecord;
+        *(uchar **)(ueHeader - 0x10) = languageSpecificData;
+        *(void **)(ueHeader - 8) = thrownPtr[0];
       }
       return 6;
     }
     return 8;
   }
 LAB_97c19c74:
-  if (bVar1) {
-    ((int (*)())___cxa_begin_catch)(param_5);
-    ((int (*)())__cxxabiv1____terminate)(*(unsigned char **)(param_5 - 0x24));
+  if (foundTerminate) {
+    ((int (*)())___cxa_begin_catch)(ueHeader);
+    ((int (*)())__cxxabiv1____terminate)(*(unsigned char **)(ueHeader - 0x24));
   }
-  if ((int)new_value_00 < 0) {
-    ((int (*)())parse_lsda_header)(param_6,*(uchar **)(param_5 - 0x10),(unsigned char *)&iStack_80);
-    uVar9 = ((int (*)())__Z21base_of_encoded_valuehP15_Unwind_Context)((uint)bStack_6c,param_6);
-    *(undefined4 *)(param_5 - 0xc) = uVar9;
+  if ((int)handlerSwitchValue < 0) {
+    ((int (*)())parse_lsda_header)(context,*(uchar **)(ueHeader - 0x10),(unsigned char *)&infoStart);
+    reloadedTTypeBase = ((int (*)())__Z21base_of_encoded_valuehP15_Unwind_Context)((uint)infoTTypeEncoding,context);
+    *(undefined4 *)(ueHeader - 0xc) = reloadedTTypeBase;
   }
-  __Unwind_SetGR(param_6,3,param_5);
-  __Unwind_SetGR(param_6,4,new_value_00);
-  __Unwind_SetIP(param_6,new_value);
+  __Unwind_SetGR(context,3,ueHeader);
+  __Unwind_SetGR(context,4,handlerSwitchValue);
+  __Unwind_SetIP(context,landingPad);
   return 7;
 LAB_97c19b58:
-  puVar3 = (uchar *)((int (*)())__Z12read_sleb128PKhPi)(puVar10,(int *)&uStack_50);
-  ((int (*)())__Z12read_sleb128PKhPi)(puVar3,&iStack_4c);
-  if (uStack_50 == 0) {
-    bVar1 = true;
+  p = (uchar *)((int (*)())__Z12read_sleb128PKhPi)(actionRecord,(int *)&arFilter);
+  ((int (*)())__Z12read_sleb128PKhPi)(p,&arDisp);
+  if (arFilter == 0) {
+    sawCleanup = true;
   }
   else {
-    if (0 < (int)uStack_50) {
-      ptVar7 = (unsigned char *)
-               ((int (*)())__Z15get_ttype_entryP16lsda_header_infoj)((unsigned char *)&iStack_80,uStack_50);
-      uVar5 = param_2 & 8;
-      if (ptVar7 == (unsigned char *)0x0) goto joined_r0x97c19bd8;
-      if ((ptVar11 == (unsigned char *)0x0) ||
-         (iVar8 = ((int (*)())get_adjusted_ptr)(ptVar7,ptVar11,apvStack_48), iVar8 == 0)) goto LAB_97c19bdc;
+    if (0 < (int)arFilter) {
+      catchType = (unsigned char *)
+               ((int (*)())__Z15get_ttype_entryP16lsda_header_infoj)((unsigned char *)&infoStart,arFilter);
+      handlerTest = actions & 8;
+      if (catchType == (unsigned char *)0x0) goto joined_r0x97c19bd8;
+      if ((throwType == (unsigned char *)0x0) ||
+         (adjustedOk = ((int (*)())get_adjusted_ptr)(catchType,throwType,thrownPtr), adjustedOk == 0)) goto LAB_97c19bdc;
 LAB_97c19bf0:
-      uVar5 = 3;
-      new_value_00 = uStack_50;
+      foundType = 3;
+      handlerSwitchValue = arFilter;
       goto LAB_97c19c1c;
     }
-    if (ptVar11 != (unsigned char *)0x0) {
-      uVar5 = ((int (*)())check_exception_spec)((unsigned char *)&iStack_80,ptVar11,apvStack_48[0],uStack_50);
+    if (throwType != (unsigned char *)0x0) {
+      handlerTest = ((int (*)())check_exception_spec)((unsigned char *)&infoStart,throwType,thrownPtr[0],arFilter);
 joined_r0x97c19bd8:
-      if (uVar5 == 0) goto LAB_97c19bf0;
+      if (handlerTest == 0) goto LAB_97c19bf0;
     }
   }
 LAB_97c19bdc:
-  if (iStack_4c == 0) goto LAB_97c19bfc;
-  puVar10 = puVar3 + iStack_4c;
+  if (arDisp == 0) goto LAB_97c19bfc;
+  actionRecord = p + arDisp;
   goto LAB_97c19b58;
 LAB_97c19bfc:
-  uVar5 = 2;
-  if (!bVar1) {
-    uVar5 = 0;
+  foundType = 2;
+  if (!sawCleanup) {
+    foundType = 0;
     goto LAB_97c19c0c;
   }
   goto LAB_97c19c1c;
