@@ -442,11 +442,11 @@ use	_BitSetNew	puVar1	allocation	INFERRED	every definition is the result of a ca
 use	_BitSetNew	uVar2	allocation2	INFERRED	every definition is the result of a call whose name says it returns this	#4	+0	lhs	lhs
 use	_BitSetNew	uVar2	allocation2	INFERRED	every definition is the result of a call whose name says it returns this	#5	+0	all	all
 use	_BitSetSetSizeEquals	uVar1	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#2	+1	all	all
-use	_HashSetNew	puVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#0	+23	all	all
-use	_HashSetNew	uVar3	allocation2	INFERRED	every definition is the result of a call whose name says it returns this	#10	+2	all	all
-use	_HashSetNew	uVar4	allocation3	INFERRED	every definition is the result of a call whose name says it returns this	#19	+1	all	all
-use	_HashSetAdd	uVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#32	+0	lhs	lhs
-use	_HashSetAdd	uVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#33	+1	all	all
+use	_HashSetNew	puVar2	hashSet	INFERRED	every definition is the result of a call whose name says it returns this	#0	+23	all	all
+use	_HashSetNew	uVar3	buckets	INFERRED	every definition is the result of a call whose name says it returns this	#10	+2	all	all
+use	_HashSetNew	uVar4	bucketEntries	INFERRED	every definition is the result of a call whose name says it returns this	#19	+1	all	all
+use	_HashSetAdd	uVar3	grownEntries	INFERRED	every definition is the result of a call whose name says it returns this	#32	+0	lhs	lhs
+use	_HashSetAdd	uVar3	grownEntries	INFERRED	every definition is the result of a call whose name says it returns this	#33	+1	all	all
 use	_HashTableNew	puVar1	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#0	+3	all	all
 use	_HashTableAdd	puVar4	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#39	+8	all	all
 use	_HashTableAdd	uVar5	allocation2	INFERRED	every definition is the result of a call whose name says it returns this	#36	+0	lhs	lhs

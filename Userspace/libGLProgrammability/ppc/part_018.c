@@ -1,188 +1,188 @@
 #include "decls.h"
 
 /* _BitSetXorEquals @ 0x97c08238 (128 bytes) */
-int _BitSetXorEquals(bitSet, param_2)
+int _BitSetXorEquals(bitSet, otherBitSet)
   undefined4 *bitSet;
-  undefined4 *param_2;
+  undefined4 *otherBitSet;
 {
-  int iVar1;
-  int iVar2;
-  uint uVar3;
+  int byteOffset;
+  int wordIndex;
+  uint wordsLeft;
   
-  _BitSetExpandEquals(bitSet,*param_2);
-  _BitSetExpandEquals(param_2,*bitSet);
-  iVar2 = 0;
-  for (uVar3 = (uint)bitSet[1] >> 2; uVar3 != 0; uVar3 = uVar3 - 1) {
-    iVar1 = iVar2 * 4;
-    iVar2 = iVar2 + 1;
-    *(uint *)(iVar1 + bitSet[2]) = *(uint *)(iVar1 + bitSet[2]) ^ *(uint *)(iVar1 + param_2[2]);
+  _BitSetExpandEquals(bitSet,*otherBitSet);
+  _BitSetExpandEquals(otherBitSet,*bitSet);
+  wordIndex = 0;
+  for (wordsLeft = (uint)bitSet[1] >> 2; wordsLeft != 0; wordsLeft = wordsLeft - 1) {
+    byteOffset = wordIndex * 4;
+    wordIndex = wordIndex + 1;
+    *(uint *)(byteOffset + bitSet[2]) = *(uint *)(byteOffset + bitSet[2]) ^ *(uint *)(byteOffset + otherBitSet[2]);
   }
   return bitSet;
 }
 
 /* _BitSetCopyEquals @ 0x97c082b8 (120 bytes) */
-int _BitSetCopyEquals(bitSet, param_2)
+int _BitSetCopyEquals(bitSet, otherBitSet)
   undefined4 *bitSet;
-  undefined4 *param_2;
+  undefined4 *otherBitSet;
 {
-  int iVar1;
-  int iVar2;
-  uint uVar3;
+  int byteOffset;
+  int wordIndex;
+  uint wordsLeft;
   
-  _BitSetExpandEquals(bitSet,*param_2);
-  _BitSetExpandEquals(param_2,*bitSet);
-  iVar2 = 0;
-  for (uVar3 = (uint)bitSet[1] >> 2; uVar3 != 0; uVar3 = uVar3 - 1) {
-    iVar1 = iVar2 * 4;
-    iVar2 = iVar2 + 1;
-    *(undefined4 *)(iVar1 + bitSet[2]) = *(undefined4 *)(iVar1 + param_2[2]);
+  _BitSetExpandEquals(bitSet,*otherBitSet);
+  _BitSetExpandEquals(otherBitSet,*bitSet);
+  wordIndex = 0;
+  for (wordsLeft = (uint)bitSet[1] >> 2; wordsLeft != 0; wordsLeft = wordsLeft - 1) {
+    byteOffset = wordIndex * 4;
+    wordIndex = wordIndex + 1;
+    *(undefined4 *)(byteOffset + bitSet[2]) = *(undefined4 *)(byteOffset + otherBitSet[2]);
   }
   return bitSet;
 }
 
 /* _BitSetEqualsTest @ 0x97c08330 (144 bytes) */
-int _BitSetEqualsTest(bitSet, param_2)
+int _BitSetEqualsTest(bitSet, otherBitSet)
   int *bitSet;
-  undefined4 *param_2;
+  undefined4 *otherBitSet;
 {
   int bitSetEquals;
   int bitSetEquals2;
-  int iVar3;
-  undefined4 uVar4;
+  int sizeInBits;
+  undefined4 isEqual;
   int loopIndex;
   
-  uVar4 = 1;
-  _BitSetExpandEquals(bitSet,*param_2);
+  isEqual = 1;
+  _BitSetExpandEquals(bitSet,*otherBitSet);
   loopIndex = 0;
-  _BitSetExpandEquals(param_2,*bitSet);
-  iVar3 = *bitSet;
-  if (0 < iVar3) {
+  _BitSetExpandEquals(otherBitSet,*bitSet);
+  sizeInBits = *bitSet;
+  if (0 < sizeInBits) {
     do {
       bitSetEquals = _BitSetGetEquals(bitSet,loopIndex);
-      bitSetEquals2 = _BitSetGetEquals(param_2,loopIndex);
+      bitSetEquals2 = _BitSetGetEquals(otherBitSet,loopIndex);
       if (bitSetEquals != bitSetEquals2) {
-        uVar4 = 0;
+        isEqual = 0;
       }
       loopIndex = loopIndex + 1;
-    } while (loopIndex < iVar3);
+    } while (loopIndex < sizeInBits);
   }
-  return uVar4;
+  return isEqual;
 }
 
 /* _BitSetAndTest @ 0x97c083c0 (136 bytes) */
-int _BitSetAndTest(bitSet, param_2)
+int _BitSetAndTest(bitSet, otherBitSet)
   int *bitSet;
-  undefined4 *param_2;
+  undefined4 *otherBitSet;
 {
   uint bitSetEquals;
-  uint uVar2;
-  int iVar3;
-  uint uVar4;
-  int iVar5;
-  int iVar6;
+  uint otherBit;
+  int sizeInBits;
+  uint anyCommonBit;
+  int bitIndex;
+  int nextBitIndex;
   
-  uVar4 = 0;
-  _BitSetExpandEquals(bitSet,*param_2);
-  _BitSetExpandEquals(param_2,*bitSet);
-  iVar3 = *bitSet;
-  iVar5 = 0;
-  if (0 < iVar3) {
+  anyCommonBit = 0;
+  _BitSetExpandEquals(bitSet,*otherBitSet);
+  _BitSetExpandEquals(otherBitSet,*bitSet);
+  sizeInBits = *bitSet;
+  bitIndex = 0;
+  if (0 < sizeInBits) {
     do {
-      bitSetEquals = _BitSetGetEquals(bitSet,iVar5);
-      iVar6 = iVar5 + 1;
-      uVar2 = _BitSetGetEquals(param_2,iVar5);
-      uVar4 = uVar4 | bitSetEquals & uVar2;
-      iVar5 = iVar6;
-    } while (iVar6 < iVar3);
+      bitSetEquals = _BitSetGetEquals(bitSet,bitIndex);
+      nextBitIndex = bitIndex + 1;
+      otherBit = _BitSetGetEquals(otherBitSet,bitIndex);
+      anyCommonBit = anyCommonBit | bitSetEquals & otherBit;
+      bitIndex = nextBitIndex;
+    } while (nextBitIndex < sizeInBits);
   }
-  return uVar4;
+  return anyCommonBit;
 }
 
 /* _BitSetAndNotTest @ 0x97c08448 (136 bytes) */
-int _BitSetAndNotTest(bitSet, param_2)
+int _BitSetAndNotTest(bitSet, otherBitSet)
   int *bitSet;
-  undefined4 *param_2;
+  undefined4 *otherBitSet;
 {
   uint bitSetEquals;
   uint bitSetEquals2;
-  int iVar3;
-  uint uVar4;
-  int iVar5;
-  int iVar6;
+  int sizeInBits;
+  uint anyBitOnlyInThis;
+  int bitIndex;
+  int nextBitIndex;
   
-  uVar4 = 0;
-  _BitSetExpandEquals(bitSet,*param_2);
-  _BitSetExpandEquals(param_2,*bitSet);
-  iVar3 = *bitSet;
-  iVar5 = 0;
-  if (0 < iVar3) {
+  anyBitOnlyInThis = 0;
+  _BitSetExpandEquals(bitSet,*otherBitSet);
+  _BitSetExpandEquals(otherBitSet,*bitSet);
+  sizeInBits = *bitSet;
+  bitIndex = 0;
+  if (0 < sizeInBits) {
     do {
-      bitSetEquals = _BitSetGetEquals(bitSet,iVar5);
-      iVar6 = iVar5 + 1;
-      bitSetEquals2 = _BitSetGetEquals(param_2,iVar5);
-      uVar4 = uVar4 | bitSetEquals & ~bitSetEquals2;
-      iVar5 = iVar6;
-    } while (iVar6 < iVar3);
+      bitSetEquals = _BitSetGetEquals(bitSet,bitIndex);
+      nextBitIndex = bitIndex + 1;
+      bitSetEquals2 = _BitSetGetEquals(otherBitSet,bitIndex);
+      anyBitOnlyInThis = anyBitOnlyInThis | bitSetEquals & ~bitSetEquals2;
+      bitIndex = nextBitIndex;
+    } while (nextBitIndex < sizeInBits);
   }
-  return uVar4;
+  return anyBitOnlyInThis;
 }
 
 /* _BitSetOrTest @ 0x97c084d0 (136 bytes) */
-int _BitSetOrTest(bitSet, param_2)
+int _BitSetOrTest(bitSet, otherBitSet)
   int *bitSet;
-  undefined4 *param_2;
+  undefined4 *otherBitSet;
 {
   uint bitSetEquals;
   uint bitSetEquals2;
-  int iVar3;
-  uint uVar4;
-  int iVar5;
-  int iVar6;
+  int sizeInBits;
+  uint anyBitInEither;
+  int bitIndex;
+  int nextBitIndex;
   
-  uVar4 = 0;
-  _BitSetExpandEquals(bitSet,*param_2);
-  _BitSetExpandEquals(param_2,*bitSet);
-  iVar3 = *bitSet;
-  iVar5 = 0;
-  if (0 < iVar3) {
+  anyBitInEither = 0;
+  _BitSetExpandEquals(bitSet,*otherBitSet);
+  _BitSetExpandEquals(otherBitSet,*bitSet);
+  sizeInBits = *bitSet;
+  bitIndex = 0;
+  if (0 < sizeInBits) {
     do {
-      bitSetEquals = _BitSetGetEquals(bitSet,iVar5);
-      iVar6 = iVar5 + 1;
-      bitSetEquals2 = _BitSetGetEquals(param_2,iVar5);
-      uVar4 = uVar4 | bitSetEquals | bitSetEquals2;
-      iVar5 = iVar6;
-    } while (iVar6 < iVar3);
+      bitSetEquals = _BitSetGetEquals(bitSet,bitIndex);
+      nextBitIndex = bitIndex + 1;
+      bitSetEquals2 = _BitSetGetEquals(otherBitSet,bitIndex);
+      anyBitInEither = anyBitInEither | bitSetEquals | bitSetEquals2;
+      bitIndex = nextBitIndex;
+    } while (nextBitIndex < sizeInBits);
   }
-  return uVar4;
+  return anyBitInEither;
 }
 
 /* _BitSetXorTest @ 0x97c08558 (136 bytes) */
-int _BitSetXorTest(bitSet, param_2)
+int _BitSetXorTest(bitSet, otherBitSet)
   int *bitSet;
-  undefined4 *param_2;
+  undefined4 *otherBitSet;
 {
   uint bitSetEquals;
   uint bitSetEquals2;
-  int iVar3;
-  uint uVar4;
-  int iVar5;
-  int iVar6;
+  int sizeInBits;
+  uint anyDifferingBit;
+  int bitIndex;
+  int nextBitIndex;
   
-  uVar4 = 0;
-  _BitSetExpandEquals(bitSet,*param_2);
-  _BitSetExpandEquals(param_2,*bitSet);
-  iVar3 = *bitSet;
-  iVar5 = 0;
-  if (0 < iVar3) {
+  anyDifferingBit = 0;
+  _BitSetExpandEquals(bitSet,*otherBitSet);
+  _BitSetExpandEquals(otherBitSet,*bitSet);
+  sizeInBits = *bitSet;
+  bitIndex = 0;
+  if (0 < sizeInBits) {
     do {
-      bitSetEquals = _BitSetGetEquals(bitSet,iVar5);
-      iVar6 = iVar5 + 1;
-      bitSetEquals2 = _BitSetGetEquals(param_2,iVar5);
-      uVar4 = uVar4 | bitSetEquals ^ bitSetEquals2;
-      iVar5 = iVar6;
-    } while (iVar6 < iVar3);
+      bitSetEquals = _BitSetGetEquals(bitSet,bitIndex);
+      nextBitIndex = bitIndex + 1;
+      bitSetEquals2 = _BitSetGetEquals(otherBitSet,bitIndex);
+      anyDifferingBit = anyDifferingBit | bitSetEquals ^ bitSetEquals2;
+      bitIndex = nextBitIndex;
+    } while (nextBitIndex < sizeInBits);
   }
-  return uVar4;
+  return anyDifferingBit;
 }
 
 /* _defaultHashFunction @ 0x97c085e0 (4 bytes) */
@@ -192,260 +192,269 @@ int _defaultHashFunction()
 }
 
 /* _defaultEqualsFunction @ 0x97c085e4 (8 bytes) */
-int _defaultEqualsFunction(param_1, param_2)
-  int param_1;
-  int param_2;
+int _defaultEqualsFunction(key1, key2)
+  int key1;
+  int key2;
 {
-  return param_1 - param_2;
+  return key1 - key2;
 }
 
 /* _HashSetNew @ 0x97c085ec (192 bytes) */
-int _HashSetNew(param_1, param_2, param_3)
-  uint param_1;
-  uint param_2;
-  uint param_3;
+int _HashSetNew(bucketCount, hashFunction, equalsFunction)
+  uint bucketCount;
+  uint hashFunction;
+  uint equalsFunction;
 {
-  uint allocation2;
-  int iVar1;
-  uint *allocation;
-  uint uVar3;
-  undefined4 allocation3;
+  uint buckets;
+  int bucketOffset;
+  uint *hashSet;
+  uint bucketBase;
+  undefined4 bucketEntries;
   uint loopIndex;
   
-  allocation = (uint *)_malloc(0x10);
-  if (param_2 == 0) {
-    param_2 = DAT_a7b7bf70;
+  hashSet = (uint *)_malloc(0x10);
+  if (hashFunction == 0) {
+    hashFunction = DAT_a7b7bf70;
   }
-  allocation[2] = param_2;
-  if (param_3 == 0) {
-    param_3 = DAT_a7b7bf6c;
+  hashSet[2] = hashFunction;
+  if (equalsFunction == 0) {
+    equalsFunction = DAT_a7b7bf6c;
   }
-  allocation[3] = param_3;
-  *allocation = param_1;
-  allocation2 = _malloc(param_1 << 3);
+  hashSet[3] = equalsFunction;
+  *hashSet = bucketCount;
+  buckets = _malloc(bucketCount << 3);
   loopIndex = 0;
-  allocation[1] = allocation2;
-  if (*allocation != 0) {
+  hashSet[1] = buckets;
+  if (*hashSet != 0) {
     do {
-      uVar3 = allocation[1];
-      iVar1 = loopIndex * 8;
+      bucketBase = hashSet[1];
+      bucketOffset = loopIndex * 8;
       loopIndex = loopIndex + 1;
-      *(undefined4 *)(uVar3 + iVar1) = 0;
-      allocation3 = _malloc(4);
-      *(undefined4 *)(uVar3 + iVar1 + 4) = allocation3;
-    } while (loopIndex < *allocation);
+      *(undefined4 *)(bucketBase + bucketOffset) = 0;
+      bucketEntries = _malloc(4);
+      *(undefined4 *)(bucketBase + bucketOffset + 4) = bucketEntries;
+    } while (loopIndex < *hashSet);
   }
-  return allocation;
+  return hashSet;
 }
 
 /* _HashSetFree @ 0x97c086ac (132 bytes) */
 int _HashSetFree(hashSet)
   uint *hashSet;
 {
-  uint uVar1;
-  int iVar2;
-  uint uVar3;
+  uint buckets;
+  int bucketEntries;
+  uint bucketCount;
   uint loopIndex;
   
   loopIndex = 0;
-  uVar3 = *hashSet;
-  if (uVar3 == 0) {
-    uVar1 = hashSet[1];
+  bucketCount = *hashSet;
+  if (bucketCount == 0) {
+    buckets = hashSet[1];
   }
   else {
-    uVar1 = hashSet[1];
+    buckets = hashSet[1];
     do {
-      iVar2 = *(int *)(uVar1 + loopIndex * 8 + 4);
-      if (iVar2 != 0) {
-        _free(iVar2);
-        uVar3 = *hashSet;
-        uVar1 = hashSet[1];
+      bucketEntries = *(int *)(buckets + loopIndex * 8 + 4);
+      if (bucketEntries != 0) {
+        _free(bucketEntries);
+        bucketCount = *hashSet;
+        buckets = hashSet[1];
       }
       loopIndex = loopIndex + 1;
-    } while (loopIndex < uVar3);
+    } while (loopIndex < bucketCount);
   }
-  if (uVar1 != 0) {
-    _free(uVar1);
+  if (buckets != 0) {
+    _free(buckets);
   }
   return _free(hashSet);
 }
 
 /* _HashSetAdd @ 0x97c08730 (272 bytes) */
-int _HashSetAdd(hashSet, param_2)
+int _HashSetAdd(hashSet, element)
   uint *hashSet;
-  undefined4 param_2;
+  undefined4 element;
 {
-  uint allocation;
-  uint uVar1;
-  int iVar2;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  uint a6;
-  uint uVar3;
+  uint oldEntryCount;
+  int equalsResult;
+  int entry;
+  uint bucketEntries;
+  uint grownEntries;
+  uint hashCode;
+  int bucketOffset;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
+  undefined4 unusedArg8;
+  uint buckets;
+  uint firstFreeSlot;
   uint loopIndex;
-  uint *puVar5;
+  uint *bucket;
   
   loopIndex = 0;
-  uVar3 = 0xffffffff;
-  uVar1 = (*(code *)hashSet[2])(param_2,param_2);
-  a6 = hashSet[1];
-  iVar2 = (uVar1 - (uVar1 / *hashSet) * *hashSet) * 8;
-  puVar5 = (uint *)(a6 + iVar2);
-  if (*(int *)(a6 + iVar2) == 0) {
-    uVar1 = puVar5[1];
+  firstFreeSlot = 0xffffffff;
+  hashCode = (*(code *)hashSet[2])(element,element);
+  buckets = hashSet[1];
+  bucketOffset = (hashCode - (hashCode / *hashSet) * *hashSet) * 8;
+  bucket = (uint *)(buckets + bucketOffset);
+  if (*(int *)(buckets + bucketOffset) == 0) {
+    bucketEntries = bucket[1];
   }
   else {
-    uVar1 = puVar5[1];
+    bucketEntries = bucket[1];
     do {
-      iVar2 = *(int *)(uVar1 + loopIndex * 4);
-      if (iVar2 == 0) {
-        if (uVar3 == 0xffffffff) {
-          uVar3 = loopIndex;
+      entry = *(int *)(bucketEntries + loopIndex * 4);
+      if (entry == 0) {
+        if (firstFreeSlot == 0xffffffff) {
+          firstFreeSlot = loopIndex;
         }
       }
       else {
-        iVar2 = (*(code *)hashSet[3])(iVar2,param_2,in_r5,in_r6,in_r7,in_r8,a6);
-        if (iVar2 == 0) {
-          *(undefined4 *)(uVar1 + loopIndex * 4) = param_2;
+        equalsResult = (*(code *)hashSet[3])(entry,element,unusedArg5,unusedArg6,unusedArg7,unusedArg8,buckets);
+        if (equalsResult == 0) {
+          *(undefined4 *)(bucketEntries + loopIndex * 4) = element;
           return hashSet;
         }
-        uVar1 = puVar5[1];
+        bucketEntries = bucket[1];
       }
       loopIndex = loopIndex + 1;
-    } while (loopIndex < *puVar5);
+    } while (loopIndex < *bucket);
   }
-  if (uVar3 == 0xffffffff) {
-    uVar3 = *puVar5;
-    *puVar5 = uVar3 + 1;
-    allocation = _realloc(uVar1,(uVar3 + 1) * 4);
-    puVar5[1] = allocation;
-    *(undefined4 *)(allocation + *puVar5 * 4 + -4) = param_2;
+  if (firstFreeSlot == 0xffffffff) {
+    oldEntryCount = *bucket;
+    *bucket = oldEntryCount + 1;
+    grownEntries = _realloc(bucketEntries,(oldEntryCount + 1) * 4);
+    bucket[1] = grownEntries;
+    *(undefined4 *)(grownEntries + *bucket * 4 + -4) = element;
   }
   else {
-    *(undefined4 *)(uVar1 + uVar3 * 4) = param_2;
+    *(undefined4 *)(bucketEntries + firstFreeSlot * 4) = element;
   }
   return hashSet;
 }
 
 /* _HashSetGet @ 0x97c08840 (176 bytes) */
-int _HashSetGet(hashSet, param_2)
+int _HashSetGet(hashSet, element)
   uint *hashSet;
-  undefined4 param_2;
+  undefined4 element;
 {
-  uint uVar1;
-  int iVar2;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  uint a6;
-  uint *puVar3;
+  int entryOrEqualsResult;
+  uint bucketEntries;
+  uint hashCode;
+  int bucketOffset;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
+  undefined4 unusedArg8;
+  uint buckets;
+  uint *bucket;
   uint loopIndex;
   
   loopIndex = 0;
-  uVar1 = (*(code *)hashSet[2])(param_2,param_2);
-  a6 = hashSet[1];
-  iVar2 = (uVar1 - (uVar1 / *hashSet) * *hashSet) * 8;
-  puVar3 = (uint *)(a6 + iVar2);
-  if (*(int *)(a6 + iVar2) != 0) {
+  hashCode = (*(code *)hashSet[2])(element,element);
+  buckets = hashSet[1];
+  bucketOffset = (hashCode - (hashCode / *hashSet) * *hashSet) * 8;
+  bucket = (uint *)(buckets + bucketOffset);
+  if (*(int *)(buckets + bucketOffset) != 0) {
     do {
-      uVar1 = puVar3[1];
-      iVar2 = *(int *)(uVar1 + loopIndex * 4);
-      if ((iVar2 != 0) &&
-         (iVar2 = (*(code *)hashSet[3])(iVar2,param_2,in_r5,in_r6,in_r7,in_r8,a6), iVar2 == 0)) {
-        return *(undefined4 *)(uVar1 + loopIndex * 4);
+      bucketEntries = bucket[1];
+      entryOrEqualsResult = *(int *)(bucketEntries + loopIndex * 4);
+      if ((entryOrEqualsResult != 0) &&
+         (entryOrEqualsResult = (*(code *)hashSet[3])(entryOrEqualsResult,element,unusedArg5,unusedArg6,unusedArg7,unusedArg8,buckets), entryOrEqualsResult == 0)) {
+        return *(undefined4 *)(bucketEntries + loopIndex * 4);
       }
       loopIndex = loopIndex + 1;
-    } while (loopIndex < *puVar3);
+    } while (loopIndex < *bucket);
   }
   return 0;
 }
 
 /* _HashSetRemove @ 0x97c088f0 (184 bytes) */
-int _HashSetRemove(hashSet, param_2)
+int _HashSetRemove(hashSet, element)
   uint *hashSet;
-  undefined4 param_2;
+  undefined4 element;
 {
-  int iVar1;
-  undefined4 uVar2;
-  uint uVar3;
-  int iVar4;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  uint a6;
-  uint *puVar5;
+  int entryOffset;
+  uint bucketEntries;
+  int bucketOffset;
+  undefined4 removedEntry;
+  uint hashCode;
+  int equalsResult;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
+  undefined4 unusedArg8;
+  uint buckets;
+  uint *bucket;
   uint loopIndex;
   
   loopIndex = 0;
-  uVar3 = (*(code *)hashSet[2])(param_2,param_2);
-  a6 = hashSet[1];
-  iVar1 = (uVar3 - (uVar3 / *hashSet) * *hashSet) * 8;
-  puVar5 = (uint *)(a6 + iVar1);
-  if (*(int *)(a6 + iVar1) != 0) {
+  hashCode = (*(code *)hashSet[2])(element,element);
+  buckets = hashSet[1];
+  bucketOffset = (hashCode - (hashCode / *hashSet) * *hashSet) * 8;
+  bucket = (uint *)(buckets + bucketOffset);
+  if (*(int *)(buckets + bucketOffset) != 0) {
     do {
-      uVar3 = puVar5[1];
-      iVar1 = loopIndex * 4;
-      if ((*(int *)(uVar3 + iVar1) != 0) &&
-         (iVar4 = (*(code *)hashSet[3])(*(int *)(uVar3 + iVar1),param_2,in_r5,in_r6,in_r7,in_r8,a6),
-         iVar4 == 0)) {
-        uVar2 = *(undefined4 *)(uVar3 + iVar1);
-        *(undefined4 *)(uVar3 + iVar1) = 0;
-        return uVar2;
+      bucketEntries = bucket[1];
+      entryOffset = loopIndex * 4;
+      if ((*(int *)(bucketEntries + entryOffset) != 0) &&
+         (equalsResult = (*(code *)hashSet[3])(*(int *)(bucketEntries + entryOffset),element,unusedArg5,unusedArg6,unusedArg7,unusedArg8,buckets),
+         equalsResult == 0)) {
+        removedEntry = *(undefined4 *)(bucketEntries + entryOffset);
+        *(undefined4 *)(bucketEntries + entryOffset) = 0;
+        return removedEntry;
       }
       loopIndex = loopIndex + 1;
-    } while (loopIndex < *puVar5);
+    } while (loopIndex < *bucket);
   }
   return 0;
 }
 
 /* _HashSetIteratorSetup @ 0x97c089a8 (24 bytes) */
-int _HashSetIteratorSetup(param_1, param_2)
-  undefined4 param_1;
-  undefined4 *param_2;
+int _HashSetIteratorSetup(hashSet, iterator)
+  undefined4 hashSet;
+  undefined4 *iterator;
 {
-  *param_2 = param_1;
-  param_2[2] = 0;
-  param_2[1] = 0;
-  return param_2;
+  *iterator = hashSet;
+  iterator[2] = 0;
+  iterator[1] = 0;
+  return iterator;
 }
 
 /* _HashSetIteratorNext @ 0x97c089c0 (160 bytes) */
-int _HashSetIteratorNext(hashSet)
-  undefined4 *hashSet;
+int _HashSetIteratorNext(iterator)
+  undefined4 *iterator;
 {
-  uint uVar1;
-  int iVar2;
-  uint *puVar3;
-  uint *puVar4;
-  uint uVar5;
+  uint bucketEntries;
+  uint bucketIndex;
+  int entryOffset;
+  uint *hashSet;
+  uint *bucket;
+  uint entryIndex;
   
-  puVar3 = (uint *)*hashSet;
-  uVar1 = hashSet[1];
-  if (uVar1 < *puVar3) {
+  hashSet = (uint *)*iterator;
+  bucketIndex = iterator[1];
+  if (bucketIndex < *hashSet) {
     do {
-      uVar5 = hashSet[2];
-      puVar4 = (uint *)(puVar3[1] + uVar1 * 8);
-      if (uVar5 < *(uint *)(puVar3[1] + uVar1 * 8)) {
-        iVar2 = uVar5 << 2;
+      entryIndex = iterator[2];
+      bucket = (uint *)(hashSet[1] + bucketIndex * 8);
+      if (entryIndex < *(uint *)(hashSet[1] + bucketIndex * 8)) {
+        entryOffset = entryIndex << 2;
         do {
-          uVar5 = uVar5 + 1;
-          uVar1 = puVar4[1];
-          if (*(int *)(uVar1 + iVar2) != 0) {
-            hashSet[2] = uVar5;
-            return *(undefined4 *)(uVar1 + iVar2);
+          entryIndex = entryIndex + 1;
+          bucketEntries = bucket[1];
+          if (*(int *)(bucketEntries + entryOffset) != 0) {
+            iterator[2] = entryIndex;
+            return *(undefined4 *)(bucketEntries + entryOffset);
           }
-          hashSet[2] = uVar5;
-          iVar2 = iVar2 + 4;
-        } while (uVar5 < *puVar4);
+          iterator[2] = entryIndex;
+          entryOffset = entryOffset + 4;
+        } while (entryIndex < *bucket);
       }
-      hashSet[2] = 0;
-      uVar1 = hashSet[1] + 1;
-      hashSet[1] = uVar1;
-    } while (uVar1 < *puVar3);
+      iterator[2] = 0;
+      bucketIndex = iterator[1] + 1;
+      iterator[1] = bucketIndex;
+    } while (bucketIndex < *hashSet);
   }
   return 0;
 }

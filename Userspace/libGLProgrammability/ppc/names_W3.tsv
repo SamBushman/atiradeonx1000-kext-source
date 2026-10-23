@@ -290,7 +290,7 @@ local	_HashSetFree	param_1	hashSet	INFERRED	dereferenced as the HashSet object (
 local	_HashSetAdd	param_1	hashSet	INFERRED	dereferenced as the HashSet object (6 field accesses); every HashSet* function takes it first
 local	_HashSetGet	param_1	hashSet	INFERRED	dereferenced as the HashSet object (6 field accesses); every HashSet* function takes it first
 local	_HashSetRemove	param_1	hashSet	INFERRED	dereferenced as the HashSet object (6 field accesses); every HashSet* function takes it first
-local	_HashSetIteratorNext	param_1	hashSet	INFERRED	dereferenced as the HashSet object (9 field accesses); every HashSet* function takes it first
+local	_HashSetIteratorNext	param_1	iterator	INFERRED	dereferenced as the HashSet object (9 field accesses); every HashSet* function takes it first
 local	_HashTableFree	param_1	hashTable	INFERRED	dereferenced as the HashTable object (3 field accesses); every HashTable* function takes it first
 local	_HashTableAdd	param_1	hashTable	INFERRED	dereferenced as the HashTable object (2 field accesses); every HashTable* function takes it first
 local	_HashTableGet	param_1	hashTable	INFERRED	dereferenced as the HashTable object (2 field accesses); every HashTable* function takes it first
