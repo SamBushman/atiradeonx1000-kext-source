@@ -1411,36 +1411,79 @@ LAB_00004b14:
 /* FUN_000055a4 @ 0x55a4 (11396 bytes) */
 int FUN_000055a4(int accel,undefined4 unusedArg2,undefined4 unusedArg3,uint blitFlags,int blitReq,dword srcRef,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8)
 {
+  uint rightTileDstRight;
+  float rightTileV0;
+  float rightTileU1;
+  float leftTileU1;
+  float leftTileU0;
+  float leftTileRightEdgeF;
+  float rightTileU0;
+  float rightTileLeftEdgeF;
+  float invLeftTileWidth;
+  float invRightTileWidth;
+  float invSrcHeight;
+  float zeroTexCoord;
+  float overflowVScale;
+  float uScale;
+  float vScale;
+  float texBottomV;
+  float texTopV;
+  float texLeftU;
+  uint dstRectBottomClamped;
+  int overflowSetupWords;
+  int overflowHeight;
+  int rectBottomY;
+  int srcHeightClamped;
+  int srcRightEdge;
+  int regionY;
+  int regionX;
+  int dstRectBottomUnclamped;
+  int dstRectTop;
+  int dstLeftIntLow;
+  int rectX;
+  int srcRightIntLow;
+  int overflowBoundaryY;
+  int topLeftCornerIdx;
+  int lastTexWordIdx;
+  dword scratchWord3Saved;
+  dword scratchWord2Copy;
+  dword scratchWord1Saved;
+  dword scratchWord2Cached;
+  dword scratchWord0Copy;
+  dword scratchWord1Copy;
+  dword scratchWord3Copy;
+  dword scratchWord0Cached;
+  dword offscreenField7;
   bool isScreenCopyOrNeedsSetup;
   double srcBottomExact;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  float fVar6;
+  float srcLeftPx;
+  float srcTopPx;
+  float srcHeightPx;
+  float srcBottomPx;
   uint yPacked16;
   float widthRatio;
   float heightRatio;
-  float fVar11;
+  float texRightU;
   float texV0;
   float texV1;
   bool needsSetup;
   undefined *taskPtr;
-  int iVar16;
+  int dstRectBottom;
   undefined4 *srcSurface;
   uint *lastHeader;
-  int iVar19;
+  int flushRegIdx;
   int blockEndIdx;
   int idxPlus5Or22Or13Or20Or19Block1;
   int idxPlus7Or5Or22Or8Or20Block1;
   dword *cmdWord2;
   int idxPlus8Or7Or4Or1Block1;
   dword *cmdWord3;
-  int iVar26;
-  dword dVar27;
+  int drawRegIdx;
+  dword srcDescField7;
   int idxPlus6Or4Or5Or2Or1Block1;
   dword *cmdWord4;
-  dword dVar31;
-  dword dVar32;
+  dword srcDescField4;
+  dword scratchWord2Saved;
   dword *cmdWord5;
   int idxPlus3Or8Or2Block1;
   int idxPlus4Or6Or1Or5Or3Block1;
@@ -1453,7 +1496,7 @@ int FUN_000055a4(int accel,undefined4 unusedArg2,undefined4 unusedArg3,uint blit
   int idxPlus13Or14Or8Or7Or5Block1;
   int idxPlus14Or15Or9Or11Or6Block1;
   int idxPlus15Or16Or10Or13Or7Block1;
-  uint uVar45;
+  uint dstBottomHigh16;
   int idxPlus16Or17Or11Or14Block1;
   int idxPlus17Or18Or12Or15Or13Block1;
   uint cmdWordsLeft;
@@ -1464,7 +1507,7 @@ int FUN_000055a4(int accel,undefined4 unusedArg2,undefined4 unusedArg3,uint blit
   dword *cmdWrite;
   int *regionRect;
   uint blitKindOrWordsLeft;
-  int iVar56;
+  int srcRectWordIdx;
   int idxPlus2Or18Block4;
   int idxPlus4Or15Block5;
   double srcLeftExact;
@@ -1474,12 +1517,12 @@ int FUN_000055a4(int accel,undefined4 unusedArg2,undefined4 unusedArg3,uint blit
   double srcTopFloat;
   double srcRightFloat;
   double srcBottomFloat;
-  undefined4 local_368;
+  undefined4 srcQueryOutSize;
   uint scratchWord0;
   uint scratchWord1;
   uint scratchWord2;
   uint scratchWord3;
-  dword local_354 [3];
+  dword srcQueryBlock [3];
   short srcWidth;
   undefined4 i2dHi1;
   uint i2dLo1;
@@ -1530,13 +1573,13 @@ int FUN_000055a4(int accel,undefined4 unusedArg2,undefined4 unusedArg3,uint blit
   undefined4 i2dHi20;
   uint i2dLo18;
   undefined4 i2dHi21;
-  int iStack_234;
+  int srcHeightI2dLo;
   undefined4 i2dHi22;
   uint i2dLo19;
   undefined4 i2dHi23;
   uint i2dLo20;
   undefined4 i2dHi24;
-  int iStack_21c;
+  int overflowHeightI2dLo;
   undefined4 i2dHi25;
   uint i2dLo21;
   undefined4 i2dHi26;
@@ -1546,7 +1589,7 @@ int FUN_000055a4(int accel,undefined4 unusedArg2,undefined4 unusedArg3,uint blit
   undefined4 i2dHi28;
   uint i2dLo24;
   undefined4 i2dHi29;
-  uint uStack_1f4;
+  uint leftTileSrcRightI2dLo;
   undefined4 i2dHi30;
   uint i2dLo25;
   undefined4 i2dHi31;
@@ -1558,7 +1601,7 @@ int FUN_000055a4(int accel,undefined4 unusedArg2,undefined4 unusedArg3,uint blit
   longlong d2iScratch9;
   longlong d2iScratch10;
   undefined4 i2dHi34;
-  uint uStack_1bc;
+  uint rightTileSrcLeftI2dLo;
   undefined4 i2dHi35;
   uint i2dLo29;
   undefined4 i2dHi36;
@@ -1576,7 +1619,7 @@ int FUN_000055a4(int accel,undefined4 unusedArg2,undefined4 unusedArg3,uint blit
   int regionIndex3;
   int regionIndex2;
   int regionIndex;
-  uint local_16c;
+  uint leftTileDstLeft;
   int *srcDescCopy2;
   short *rectHeightPtr;
   short *rectYPtr;
@@ -1588,13 +1631,13 @@ int FUN_000055a4(int accel,undefined4 unusedArg2,undefined4 unusedArg3,uint blit
   int idxPlus14Block7;
   int sizeMismatch;
   dword blitCommandHeader;
-  uint local_13c;
-  uint local_138;
-  uint local_134;
-  uint local_130;
-  uint local_12c;
-  uint local_128;
-  uint local_124;
+  uint rightTileDstBottom;
+  uint rightTileDstTop;
+  uint regionDstLeft;
+  uint rightTileDstLeft;
+  uint leftTileDstBottom;
+  uint leftTileDstTop;
+  uint leftTileDstRight;
   uint splitRow;
   uint splitRemainder;
   uint splitRowPlus2;
@@ -1611,7 +1654,7 @@ int FUN_000055a4(int accel,undefined4 unusedArg2,undefined4 unusedArg3,uint blit
   int srcOriginX;
   int dstOffsetY;
   int dstOffsetX;
-  int local_e0;
+  int offscreenRegionIndex;
   undefined4 *offscreenDesc;
   dword *srcDesc;
   int *regionFirstRect;
@@ -1702,19 +1745,19 @@ LAB_000056ac:
         if (blitKindOrWordsLeft != 0x7000) {
           return -0x1ffffd44;
         }
-        local_354[1] = 0x800;
-        local_368 = 0x30;
-        local_354[0] = srcRef;
+        srcQueryBlock[1] = 0x800;
+        srcQueryOutSize = 0x30;
+        srcQueryBlock[0] = srcRef;
         srcHandle = srcRef;
         ioResult = _io_connect_method_scalarI_structureO
-                           (*(undefined4 *)(accel + 0xc),2,local_354,2,local_354 + 2,&local_368);
+                           (*(undefined4 *)(accel + 0xc),2,srcQueryBlock,2,srcQueryBlock + 2,&srcQueryOutSize);
         if (ioResult != 0) {
           return ioResult;
         }
         srcOriginX = 0;
         srcOriginY = 0;
         blitCommandHeader = 0xc000000;
-        srcDesc = local_354 + 2;
+        srcDesc = srcQueryBlock + 2;
       }
     }
     taskPtr = PTR_0000e694;
@@ -1725,9 +1768,9 @@ LAB_000056ac:
     }
     dstOffsetY = *(int *)(blitReq + 0x5c) - (int)*(short *)((int)regionRect + 6);
     srcDescWidth = srcDesc[2];
-    dVar31 = srcDesc[4];
+    srcDescField4 = srcDesc[4];
     dstOffsetX = *(int *)(blitReq + 0x58) - (int)*(short *)(regionRect + 1);
-    dVar27 = srcDesc[7];
+    srcDescField7 = srcDesc[7];
     srcFormat = srcDesc[9];
     srcDescHeight = srcDesc[3];
     if ((srcDescWidth != (int)srcWidth) ||
@@ -1813,7 +1856,7 @@ LAB_000056ac:
         flushWaitWord3 = 0xc000;
         srcDescCopy1 = regionFirstRect;
         scratchWord2Ptr = &scratchWord2;
-        local_e0 = 0;
+        offscreenRegionIndex = 0;
         needsSetup = true;
         surfaceFormatWord = srcFormat & 0x1f | 0x53000;
         do {
@@ -1950,12 +1993,12 @@ LAB_00005e7c:
           *(dword **)(accel + 0x7c) = cmdWord1 + 1;
           cmdWord1[1] = 0x10000000;
           cmdWord1[2] = *(dword *)*DAT_0000e6e4;
-          dVar27 = DAT_0000e6e4[7];
+          offscreenField7 = DAT_0000e6e4[7];
           cmdWord1[4] = 6;
-          cmdWord1[3] = dVar27;
+          cmdWord1[3] = offscreenField7;
           if (needsSetup) {
             setupWords1 = ((int (*)())_radeon3DCopySetup)(accel,cmdWrite,srcDesc,srcFormat,0,0,0,0);
-            iVar56 = setupWords1 + 1;
+            srcRectWordIdx = setupWords1 + 1;
             blockEndIdx = setupWords1 + 0x16;
             regByteOffset = setupWords1 << 2;
             idxPlus2Or18Block4 = setupWords1 + 2;
@@ -1976,7 +2019,7 @@ LAB_00005e7c:
             idxPlus17Or18Or12Or15Or13Block1 = setupWords1 + 0x11;
             idxPlus18Or19Or16Or14Block1 = setupWords1 + 0x12;
             idxPlus19Or10Or17Block2 = setupWords1 + 0x13;
-            iVar19 = setupWords1 + 0x14;
+            flushRegIdx = setupWords1 + 0x14;
             setupWords1 = setupWords1 + 0x15;
           }
           else {
@@ -1992,7 +2035,7 @@ LAB_00005e7c:
             regByteOffset = 0x18;
             idxPlus2Or18Block4 = 8;
             idxPlus3Or8Or2Block1 = 9;
-            iVar56 = 7;
+            srcRectWordIdx = 7;
             idxPlus4Or6Or1Or5Or3Block1 = 10;
             idxPlus5Or22Or13Or20Or19Block1 = 0xb;
             idxPlus6Or4Or5Or2Or1Block1 = 0xc;
@@ -2009,12 +2052,12 @@ LAB_00005e7c:
             idxPlus17Or18Or12Or15Or13Block1 = 0x17;
             idxPlus18Or19Or16Or14Block1 = 0x18;
             idxPlus19Or10Or17Block2 = 0x19;
-            iVar19 = 0x1a;
+            flushRegIdx = 0x1a;
             setupWords1 = 0x1b;
             blockEndIdx = 0x1c;
           }
           *(undefined4 *)((int)cmdWrite + regByteOffset) = 0x10f8;
-          cmdWrite[iVar56] = srcLeftInt & 0x1fff | (srcTopInt & 0x1fff) << 0xd;
+          cmdWrite[srcRectWordIdx] = srcLeftInt & 0x1fff | (srcTopInt & 0x1fff) << 0xd;
           cmdWrite[idxPlus2Or18Block4] = 0x10f9;
           cmdWrite[idxPlus3Or8Or2Block1] = srcRightInt & 0x1fff | (srcBottomInt & 0x1fff) << 0xd;
           cmdWrite[idxPlus4Or6Or1Or5Or3Block1] = 0xc00c3500;
@@ -2036,31 +2079,31 @@ LAB_00005e7c:
           scratchWord0 = (uint)GH_F2U((float)(srcBottomFloat * (1.0 / ((double)CONCAT44(0x43300000,i2dLo10) -
                                                     4503601774854144.0))));
           cmdWrite[idxPlus6Or4Or5Or2Or1Block1] = srcLeftInt | srcBottomInt << 0x10;
-          dVar31 = *scratchWord3Ptr;
-          cmdWrite[idxPlus7Or5Or22Or8Or20Block1] = dVar31;
-          dVar27 = *scratchWord0Ptr;
-          cmdWrite[idxPlus8Or7Or4Or1Block1] = dVar27;
+          scratchWord3Copy = *scratchWord3Ptr;
+          cmdWrite[idxPlus7Or5Or22Or8Or20Block1] = scratchWord3Copy;
+          scratchWord0Cached = *scratchWord0Ptr;
+          cmdWrite[idxPlus8Or7Or4Or1Block1] = scratchWord0Cached;
           cmdWrite[idxPlus9Or2Or10Or16Block1] = srcLeftInt | srcTopInt << 0x10;
-          cmdWrite[idxPlus10Or11Or20Or12Block1] = dVar31;
-          dVar31 = *scratchWord1Ptr;
-          cmdWrite[idxPlus11Or12Or6Or22Block1] = dVar31;
+          cmdWrite[idxPlus10Or11Or20Or12Block1] = scratchWord3Copy;
+          scratchWord1Copy = *scratchWord1Ptr;
+          cmdWrite[idxPlus11Or12Or6Or22Block1] = scratchWord1Copy;
           cmdWrite[idxPlus12Or13Or7Or6Or4Block1] = srcRightInt | srcTopInt << 0x10;
-          dVar32 = *scratchWord2Ptr;
-          cmdWrite[idxPlus13Or14Or8Or7Or5Block1] = dVar32;
-          cmdWrite[idxPlus14Or15Or9Or11Or6Block1] = dVar31;
+          scratchWord2Saved = *scratchWord2Ptr;
+          cmdWrite[idxPlus13Or14Or8Or7Or5Block1] = scratchWord2Saved;
+          cmdWrite[idxPlus14Or15Or9Or11Or6Block1] = scratchWord1Copy;
           cmdWrite[idxPlus15Or16Or10Or13Or7Block1] = srcRightInt | srcBottomInt << 0x10;
-          cmdWrite[idxPlus16Or17Or11Or14Block1] = dVar32;
-          cmdWrite[idxPlus17Or18Or12Or15Or13Block1] = dVar27;
+          cmdWrite[idxPlus16Or17Or11Or14Block1] = scratchWord2Saved;
+          cmdWrite[idxPlus17Or18Or12Or15Or13Block1] = scratchWord0Cached;
           cmdWrite[idxPlus18Or19Or16Or14Block1] = 0x1393;
           cmdWrite[idxPlus19Or10Or17Block2] = 10;
-          cmdWrite[iVar19] = 0x5c8;
+          cmdWrite[flushRegIdx] = 0x5c8;
           cmdWrite[setupWords1] = 0x20000;
           blitKindOrWordsLeft = (cmdWordsLeft - 6) - blockEndIdx;
           cmdWrite = cmdWrite + blockEndIdx;
           dstRectLeft = dstOffsetX + *(short *)srcDescCopy1;
           cmdWordsLeft = dstRectLeft + (int)*(short *)(srcDescCopy1 + 1);
-          iVar56 = dstOffsetY + (short)*srcDescCopy1;
-          iVar16 = iVar56 + *(short *)((int)srcDescCopy1 + 6);
+          dstRectTop = dstOffsetY + (short)*srcDescCopy1;
+          dstRectBottom = dstRectTop + *(short *)((int)srcDescCopy1 + 6);
           if (blitKindOrWordsLeft < 0x22) {
             scratchWord2 = *(uint *)(accel + 0x18);
             scratchWord3 = 0;
@@ -2178,12 +2221,12 @@ LAB_00005e7c:
             idxPlus5Or22Or13Or20Or19Block1 = 0x1c;
           }
           *(undefined4 *)((int)cmdWrite + regByteOffset2) = 0x10f8;
-          cmdWrite[idxPlus1Block6] = dstRectLeft & 0x1fff | iVar56 * 0x2000 & 0x3ffe000U;
+          cmdWrite[idxPlus1Block6] = dstRectLeft & 0x1fff | dstRectTop * 0x2000 & 0x3ffe000U;
           cmdWrite[idxPlus2Block6] = 0x10f9;
-          cmdWrite[idxPlus3Block6] = cmdWordsLeft & 0x1fff | iVar16 * 0x2000 & 0x3ffe000U;
+          cmdWrite[idxPlus3Block6] = cmdWordsLeft & 0x1fff | dstRectBottom * 0x2000 & 0x3ffe000U;
           cmdWrite[idxPlus6Or4Or5Or2Or1Block1] = 0xc00c3500;
           cmdWrite[idxPlus7Or5Or22Or8Or20Block1] = 0x4003d;
-          uVar45 = iVar16 * 0x10000;
+          dstBottomHigh16 = dstRectBottom * 0x10000;
           i2dHi13 = 0x43300000;
           i2dLo11 = (int)*(short *)(offscreenDesc + 1) ^ 0x80000000;
           scratchWord0 = (uint)GH_F2U((float)(srcLeftFloat * (1.0 / ((double)CONCAT44(0x43300000,i2dLo11) -
@@ -2200,37 +2243,37 @@ LAB_00005e7c:
           i2dLo14 = (int)*(short *)((int)offscreenDesc + 6) ^ 0x80000000;
           scratchWord2 = (uint)GH_F2U((float)(srcBottomFloat * (1.0 / ((double)CONCAT44(0x43300000,i2dLo14) -
                                                     4503601774854144.0))));
-          cmdWrite[idxPlus4Or6Or1Or5Or3Block1] = dstRectLeft | uVar45;
-          dVar31 = *scratchWord0Ptr;
-          cmdWrite[idxPlus8Or7Or4Or1Block1] = dVar31;
-          dVar27 = *scratchWord2Ptr;
-          cmdWrite[idxPlus3Or8Or2Block1] = dVar27;
-          cmdWrite[idxPlus9Or2Or10Or16Block1] = dstRectLeft | iVar56 * 0x10000;
-          cmdWrite[idxPlus19Or10Or17Block2] = dVar31;
-          dVar31 = *scratchWord3Ptr;
-          cmdWrite[idxPlus10Or11Or20Or12Block1] = dVar31;
-          cmdWrite[idxPlus11Or12Or6Or22Block1] = cmdWordsLeft | iVar56 * 0x10000;
-          dVar32 = *scratchWord1Ptr;
-          cmdWrite[idxPlus12Or13Or7Or6Or4Block1] = dVar32;
-          cmdWrite[idxPlus13Or14Or8Or7Or5Block1] = dVar31;
-          cmdWrite[idxPlus14Or15Or9Or11Or6Block1] = cmdWordsLeft | uVar45;
-          cmdWrite[idxPlus15Or16Or10Or13Or7Block1] = dVar32;
-          cmdWrite[idxPlus16Or17Or11Or14Block1] = dVar27;
+          cmdWrite[idxPlus4Or6Or1Or5Or3Block1] = dstRectLeft | dstBottomHigh16;
+          scratchWord0Copy = *scratchWord0Ptr;
+          cmdWrite[idxPlus8Or7Or4Or1Block1] = scratchWord0Copy;
+          scratchWord2Cached = *scratchWord2Ptr;
+          cmdWrite[idxPlus3Or8Or2Block1] = scratchWord2Cached;
+          cmdWrite[idxPlus9Or2Or10Or16Block1] = dstRectLeft | dstRectTop * 0x10000;
+          cmdWrite[idxPlus19Or10Or17Block2] = scratchWord0Copy;
+          scratchWord3Copy = *scratchWord3Ptr;
+          cmdWrite[idxPlus10Or11Or20Or12Block1] = scratchWord3Copy;
+          cmdWrite[idxPlus11Or12Or6Or22Block1] = cmdWordsLeft | dstRectTop * 0x10000;
+          scratchWord1Saved = *scratchWord1Ptr;
+          cmdWrite[idxPlus12Or13Or7Or6Or4Block1] = scratchWord1Saved;
+          cmdWrite[idxPlus13Or14Or8Or7Or5Block1] = scratchWord3Copy;
+          cmdWrite[idxPlus14Or15Or9Or11Or6Block1] = cmdWordsLeft | dstBottomHigh16;
+          cmdWrite[idxPlus15Or16Or10Or13Or7Block1] = scratchWord1Saved;
+          cmdWrite[idxPlus16Or17Or11Or14Block1] = scratchWord2Cached;
           cmdWrite[idxPlus17Or18Or12Or15Or13Block1] = 0x1393;
           cmdWrite[idxPlus18Or19Or16Or14Block1] = 10;
           cmdWrite[blockEndIdx] = 0x5c8;
           cmdWrite[setupWords2] = 0x20000;
           cmdWordsLeft = (blitKindOrWordsLeft - 6) - idxPlus5Or22Or13Or20Or19Block1;
           cmdWrite = cmdWrite + idxPlus5Or22Or13Or20Or19Block1;
-          local_e0 = local_e0 + 1;
+          offscreenRegionIndex = offscreenRegionIndex + 1;
           srcDescCopy1 = srcDescCopy1 + 2;
           needsSetup = false;
-        } while (regionCount != local_e0);
+        } while (regionCount != offscreenRegionIndex);
       }
     }
     else if (offscreenWidth < 0x1001) {
       if (regionCount != 0) {
-        tileHeightWords = dVar31 * dVar27 * 0x1000;
+        tileHeightWords = srcDescField4 * srcDescField7 * 0x1000;
         scratchWord2Ptr = &scratchWord2;
         scratchWord0Ptr = &scratchWord0;
         scratchWord1Ptr = &scratchWord1;
@@ -2245,44 +2288,44 @@ LAB_00005e7c:
           i2dLo15 = srcOriginX + *(short *)regionRect ^ 0x80000000;
           dstRectLeft = dstOffsetX + *(short *)regionRect;
           i2dHi18 = 0x43300000;
-          iVar56 = dstOffsetY + (short)*regionRect;
+          dstRectTop = dstOffsetY + (short)*regionRect;
           i2dLo16 = srcOriginY + (short)*regionRect ^ 0x80000000;
           i2dHi19 = 0x43300000;
           i2dLo17 = (int)*(short *)(regionRect + 1) ^ 0x80000000;
           blitKindOrWordsLeft = dstRectLeft + (int)*(short *)(regionRect + 1);
-          fVar3 = (float)((double)CONCAT44(0x43300000,i2dLo15) - 4503601774854144.0);
+          srcLeftPx = (float)((double)CONCAT44(0x43300000,i2dLo15) - 4503601774854144.0);
           i2dHi20 = 0x43300000;
           i2dLo18 = (int)*(short *)((int)regionRect + 6) ^ 0x80000000;
-          uVar45 = iVar56 + *(short *)((int)regionRect + 6);
-          fVar4 = (float)((double)CONCAT44(0x43300000,i2dLo16) - 4503601774854144.0);
-          iVar16 = (int)*(short *)((int)srcDesc + 6);
-          fVar6 = fVar4 + (float)((double)CONCAT44(0x43300000,i2dLo18) - 4503601774854144.0);
-          if (iVar16 < 0x1000) {
+          dstRectBottomClamped = dstRectTop + *(short *)((int)regionRect + 6);
+          srcTopPx = (float)((double)CONCAT44(0x43300000,i2dLo16) - 4503601774854144.0);
+          srcHeightClamped = (int)*(short *)((int)srcDesc + 6);
+          srcBottomPx = srcTopPx + (float)((double)CONCAT44(0x43300000,i2dLo18) - 4503601774854144.0);
+          if (srcHeightClamped < 0x1000) {
             i2dHi21 = 0x43300000;
-            fVar5 = (float)((double)CONCAT44(0x43300000,iVar16) - 4503599627370496.0);
-            iStack_234 = iVar16;
+            srcHeightPx = (float)((double)CONCAT44(0x43300000,srcHeightClamped) - 4503599627370496.0);
+            srcHeightI2dLo = srcHeightClamped;
           }
           else {
-            fVar5 = 4096.0;
-            if (4096.0 <= fVar6) {
-              iVar16 = 0x1000;
-              uVar45 = dstOffsetY + 0x1000;
-              fVar6 = fVar5;
+            srcHeightPx = 4096.0;
+            if (4096.0 <= srcBottomPx) {
+              srcHeightClamped = 0x1000;
+              dstRectBottomClamped = dstOffsetY + 0x1000;
+              srcBottomPx = srcHeightPx;
             }
             else {
-              iVar16 = 0x1000;
+              srcHeightClamped = 0x1000;
             }
           }
           i2dHi22 = 0x43300000;
           i2dLo19 = (int)*(short *)(srcDesc + 1) ^ 0x80000000;
-          fVar5 = heightRatio * (1.0 / fVar5);
-          fVar6 = fVar6 * fVar5;
-          fVar4 = fVar4 * fVar5;
-          fVar5 = widthRatio * (1.0 / (float)((double)CONCAT44(0x43300000,i2dLo19) -
+          vScale = heightRatio * (1.0 / srcHeightPx);
+          texBottomV = srcBottomPx * vScale;
+          texTopV = srcTopPx * vScale;
+          uScale = widthRatio * (1.0 / (float)((double)CONCAT44(0x43300000,i2dLo19) -
                                         4503601774854144.0));
-          fVar11 = (fVar3 + (float)((double)CONCAT44(0x43300000,i2dLo17) - 4503601774854144.0)) *
-                   fVar5;
-          fVar3 = fVar3 * fVar5;
+          texRightU = (srcLeftPx + (float)((double)CONCAT44(0x43300000,i2dLo17) - 4503601774854144.0)) *
+                   uScale;
+          texLeftU = srcLeftPx * uScale;
           if (isScreenCopyOrNeedsSetup) {
             if (cmdWordsLeft < 0x8a) {
               scratchWord1 = *(uint *)(accel + 0x18);
@@ -2345,14 +2388,14 @@ LAB_00006d28:
             *cmdWord4 = 0;
             *cmdWord5 = 0;
             cmdWordsLeft = cmdWordsLeft - 6;
-            setupWords3 = ((int (*)())_radeon3DCopySetup)(accel,cmdPtrPlus6Block3,srcDesc,srcFormat,sizeMismatch,0,0,iVar16);
+            setupWords3 = ((int (*)())_radeon3DCopySetup)(accel,cmdPtrPlus6Block3,srcDesc,srcFormat,sizeMismatch,0,0,srcHeightClamped);
             idxPlus14Block7 = setupWords3 + 0xe;
             idxPlus15Block7 = setupWords3 + 0xf;
             idxPlus7Or5Or22Or8Or20Block1 = setupWords3 + 0x16;
             regByteOffset = setupWords3 << 2;
             idxPlus16Block7 = setupWords3 + 0x10;
-            iVar19 = setupWords3 + 0x11;
-            iVar26 = setupWords3 + 0x12;
+            lastTexWordIdx = setupWords3 + 0x11;
+            drawRegIdx = setupWords3 + 0x12;
             idxPlus4Or6Or1Or5Or3Block1 = setupWords3 + 1;
             idxPlus9Or2Or10Or16Block1 = setupWords3 + 2;
             idxPlus3Or8Or2Block1 = setupWords3 + 3;
@@ -2405,11 +2448,11 @@ LAB_00006d28:
             idxPlus4Or6Or1Or5Or3Block1 = 1;
             idxPlus14Block7 = 0xe;
             idxPlus15Block7 = 0xf;
-            iVar19 = 0x11;
+            lastTexWordIdx = 0x11;
             idxPlus16Block7 = 0x10;
             idxPlus9Or2Or10Or16Block1 = 2;
             idxPlus3Or8Or2Block1 = 3;
-            iVar26 = 0x12;
+            drawRegIdx = 0x12;
             idxPlus8Or7Or4Or1Block1 = 4;
             idxPlus6Or4Or5Or2Or1Block1 = 5;
             idxPlus11Or12Or6Or22Block1 = 6;
@@ -2427,52 +2470,52 @@ LAB_00006d28:
           }
           *(undefined4 *)((int)cmdWrite + regByteOffset) = 0x10f8;
           leftMasked = dstRectLeft & 0x1fff;
-          cmdWrite[idxPlus4Or6Or1Or5Or3Block1] = leftMasked | iVar56 * 0x2000 & 0x3ffe000U;
+          cmdWrite[idxPlus4Or6Or1Or5Or3Block1] = leftMasked | dstRectTop * 0x2000 & 0x3ffe000U;
           cmdWrite[idxPlus9Or2Or10Or16Block1] = 0x10f9;
           topMasked = blitKindOrWordsLeft & 0x1fff;
-          cmdWrite[idxPlus3Or8Or2Block1] = topMasked | (uVar45 & 0x1fff) << 0xd;
+          cmdWrite[idxPlus3Or8Or2Block1] = topMasked | (dstRectBottomClamped & 0x1fff) << 0xd;
           cmdWrite[idxPlus8Or7Or4Or1Block1] = 0xc00c3500;
           cmdWrite[idxPlus6Or4Or5Or2Or1Block1] = 0x4003d;
-          cmdWrite[idxPlus11Or12Or6Or22Block1] = dstRectLeft | uVar45 << 0x10;
-          dVar31 = *scratchWord2Ptr;
-          cmdWrite[idxPlus12Or13Or7Or6Or4Block1] = dVar31;
-          dVar27 = *scratchWord0Ptr;
-          cmdWrite[idxPlus13Or14Or8Or7Or5Block1] = dVar27;
-          cmdWrite[idxPlus14Or15Or9Or11Or6Block1] = dstRectLeft | iVar56 * 0x10000;
-          cmdWrite[idxPlus15Or16Or10Or13Or7Block1] = dVar31;
-          dVar31 = *scratchWord1Ptr;
-          cmdWrite[idxPlus16Or17Or11Or14Block1] = dVar31;
-          cmdWrite[idxPlus17Or18Or12Or15Or13Block1] = blitKindOrWordsLeft | iVar56 * 0x10000;
-          dVar32 = *scratchWord3Ptr;
-          cmdWrite[idxPlus5Or22Or13Or20Or19Block1] = dVar32;
-          cmdWrite[idxPlus14Block7] = dVar31;
-          cmdWrite[idxPlus15Block7] = blitKindOrWordsLeft | uVar45 << 0x10;
-          cmdWrite[idxPlus16Block7] = dVar32;
-          cmdWrite[iVar19] = dVar27;
-          cmdWrite[iVar26] = 0x1393;
+          cmdWrite[idxPlus11Or12Or6Or22Block1] = dstRectLeft | dstRectBottomClamped << 0x10;
+          scratchWord2Copy = *scratchWord2Ptr;
+          cmdWrite[idxPlus12Or13Or7Or6Or4Block1] = scratchWord2Copy;
+          scratchWord0Cached = *scratchWord0Ptr;
+          cmdWrite[idxPlus13Or14Or8Or7Or5Block1] = scratchWord0Cached;
+          cmdWrite[idxPlus14Or15Or9Or11Or6Block1] = dstRectLeft | dstRectTop * 0x10000;
+          cmdWrite[idxPlus15Or16Or10Or13Or7Block1] = scratchWord2Copy;
+          scratchWord1Copy = *scratchWord1Ptr;
+          cmdWrite[idxPlus16Or17Or11Or14Block1] = scratchWord1Copy;
+          cmdWrite[idxPlus17Or18Or12Or15Or13Block1] = blitKindOrWordsLeft | dstRectTop * 0x10000;
+          scratchWord3Saved = *scratchWord3Ptr;
+          cmdWrite[idxPlus5Or22Or13Or20Or19Block1] = scratchWord3Saved;
+          cmdWrite[idxPlus14Block7] = scratchWord1Copy;
+          cmdWrite[idxPlus15Block7] = blitKindOrWordsLeft | dstRectBottomClamped << 0x10;
+          cmdWrite[idxPlus16Block7] = scratchWord3Saved;
+          cmdWrite[lastTexWordIdx] = scratchWord0Cached;
+          cmdWrite[drawRegIdx] = 0x1393;
           cmdWrite[idxPlus18Or19Or16Or14Block1] = 10;
           cmdWrite[idxPlus10Or11Or20Or12Block1] = 0x5c8;
           cmdWrite[setupWords3] = 0x20000;
           cmdWordsLeft = cmdWordsLeft - idxPlus7Or5Or22Or8Or20Block1;
           isScreenCopyOrNeedsSetup = false;
           cmdWrite = cmdWrite + idxPlus7Or5Or22Or8Or20Block1;
-          iVar16 = (int)*rectYPtr + (int)*rectHeightPtr;
-          scratchWord0 = (uint)GH_F2U((float)(fVar6));
-          scratchWord1 = (uint)GH_F2U((float)(fVar4));
-          scratchWord2 = (uint)GH_F2U((float)(fVar3));
-          scratchWord3 = (uint)GH_F2U((float)(fVar11));
-          if (0xfff < iVar16) {
+          rectBottomY = (int)*rectYPtr + (int)*rectHeightPtr;
+          scratchWord0 = (uint)GH_F2U((float)(texBottomV));
+          scratchWord1 = (uint)GH_F2U((float)(texTopV));
+          scratchWord2 = (uint)GH_F2U((float)(texLeftU));
+          scratchWord3 = (uint)GH_F2U((float)(texRightU));
+          if (0xfff < rectBottomY) {
             i2dHi23 = 0x43300000;
-            iVar26 = dstOffsetY + 0x1000;
-            iVar56 = dstOffsetY + *rectYPtr + (int)*rectHeightPtr;
-            i2dLo20 = (srcOriginY + iVar16) - 0x1000U ^ 0x80000000;
+            overflowBoundaryY = dstOffsetY + 0x1000;
+            dstRectBottomUnclamped = dstOffsetY + *rectYPtr + (int)*rectHeightPtr;
+            i2dLo20 = (srcOriginY + rectBottomY) - 0x1000U ^ 0x80000000;
             i2dHi24 = 0x43300000;
-            iVar16 = *(short *)((int)srcDesc + 6) + -0x1000;
-            fVar5 = heightRatio * (1.0 / (float)((double)CONCAT44(0x43300000,iVar16) - 4503599627370496.0
+            overflowHeight = *(short *)((int)srcDesc + 6) + -0x1000;
+            overflowVScale = heightRatio * (1.0 / (float)((double)CONCAT44(0x43300000,overflowHeight) - 4503599627370496.0
                                            ));
-            texV0 = (float)((double)CONCAT44(0x43300000,i2dLo20) - 4503601774854144.0) * fVar5;
-            fVar5 = fVar5 * 0.0;
-            iStack_21c = iVar16;
+            texV0 = (float)((double)CONCAT44(0x43300000,i2dLo20) - 4503601774854144.0) * overflowVScale;
+            zeroTexCoord = overflowVScale * 0.0;
+            overflowHeightI2dLo = overflowHeight;
             if (cmdWordsLeft < 0x8a) {
               scratchWord3 = *(uint *)(accel + 0x18);
               scratchWord2 = 0;
@@ -2531,37 +2574,37 @@ LAB_00006d28:
             *cmdWord3 = tileHeightWords;
             *cmdWord4 = 0;
             *cmdWord5 = 0;
-            iVar16 = ((int (*)())_radeon3DCopySetup)(accel,cmdPtrPlus6Block3,srcDesc,srcFormat,sizeMismatch,0,0,iVar16);
-            cmdPtrPlus6Block3[iVar16] = 0x10f8;
-            cmdPtrPlus6Block3[iVar16 + 1] = leftMasked | iVar26 * 0x2000 & 0x3ffe000U;
-            cmdPtrPlus6Block3[iVar16 + 2] = 0x10f9;
-            cmdPtrPlus6Block3[iVar16 + 3] = topMasked | iVar56 * 0x2000 & 0x3ffe000U;
-            cmdPtrPlus6Block3[iVar16 + 4] = 0xc00c3500;
-            cmdPtrPlus6Block3[iVar16 + 5] = 0x4003d;
-            uVar45 = iVar56 * 0x10000;
-            cmdPtrPlus6Block3[iVar16 + 6] = dstRectLeft | uVar45;
-            cmdPtrPlus6Block3[iVar16 + 7] = (dword)GH_F2U((float)(fVar3));
-            cmdPtrPlus6Block3[iVar16 + 8] = (dword)GH_F2U((float)(texV0));
-            yPacked16 = iVar26 * 0x10000;
-            cmdPtrPlus6Block3[iVar16 + 9] = dstRectLeft | yPacked16;
-            cmdPtrPlus6Block3[iVar16 + 10] = (dword)GH_F2U((float)(fVar3));
-            cmdPtrPlus6Block3[iVar16 + 0xb] = (dword)GH_F2U((float)(fVar5));
-            cmdPtrPlus6Block3[iVar16 + 0xc] = blitKindOrWordsLeft | yPacked16;
-            cmdPtrPlus6Block3[iVar16 + 0xd] = (dword)GH_F2U((float)(fVar11));
-            cmdPtrPlus6Block3[iVar16 + 0xe] = (dword)GH_F2U((float)(fVar5));
-            cmdPtrPlus6Block3[iVar16 + 0xf] = blitKindOrWordsLeft | uVar45;
-            cmdPtrPlus6Block3[iVar16 + 0x10] = (dword)GH_F2U((float)(fVar11));
-            cmdPtrPlus6Block3[iVar16 + 0x11] = (dword)GH_F2U((float)(texV0));
-            cmdPtrPlus6Block3[iVar16 + 0x12] = 0x1393;
-            cmdPtrPlus6Block3[iVar16 + 0x13] = 10;
-            cmdPtrPlus6Block3[iVar16 + 0x14] = 0x5c8;
-            cmdPtrPlus6Block3[iVar16 + 0x15] = 0x20000;
-            cmdWordsLeft = (cmdWordsLeft - 6) - (iVar16 + 0x16);
+            overflowSetupWords = ((int (*)())_radeon3DCopySetup)(accel,cmdPtrPlus6Block3,srcDesc,srcFormat,sizeMismatch,0,0,overflowHeight);
+            cmdPtrPlus6Block3[overflowSetupWords] = 0x10f8;
+            cmdPtrPlus6Block3[overflowSetupWords + 1] = leftMasked | overflowBoundaryY * 0x2000 & 0x3ffe000U;
+            cmdPtrPlus6Block3[overflowSetupWords + 2] = 0x10f9;
+            cmdPtrPlus6Block3[overflowSetupWords + 3] = topMasked | dstRectBottomUnclamped * 0x2000 & 0x3ffe000U;
+            cmdPtrPlus6Block3[overflowSetupWords + 4] = 0xc00c3500;
+            cmdPtrPlus6Block3[overflowSetupWords + 5] = 0x4003d;
+            dstBottomHigh16 = dstRectBottomUnclamped * 0x10000;
+            cmdPtrPlus6Block3[overflowSetupWords + 6] = dstRectLeft | dstBottomHigh16;
+            cmdPtrPlus6Block3[overflowSetupWords + 7] = (dword)GH_F2U((float)(texLeftU));
+            cmdPtrPlus6Block3[overflowSetupWords + 8] = (dword)GH_F2U((float)(texV0));
+            yPacked16 = overflowBoundaryY * 0x10000;
+            cmdPtrPlus6Block3[overflowSetupWords + 9] = dstRectLeft | yPacked16;
+            cmdPtrPlus6Block3[overflowSetupWords + 10] = (dword)GH_F2U((float)(texLeftU));
+            cmdPtrPlus6Block3[overflowSetupWords + 0xb] = (dword)GH_F2U((float)(zeroTexCoord));
+            cmdPtrPlus6Block3[overflowSetupWords + 0xc] = blitKindOrWordsLeft | yPacked16;
+            cmdPtrPlus6Block3[overflowSetupWords + 0xd] = (dword)GH_F2U((float)(texRightU));
+            cmdPtrPlus6Block3[overflowSetupWords + 0xe] = (dword)GH_F2U((float)(zeroTexCoord));
+            cmdPtrPlus6Block3[overflowSetupWords + 0xf] = blitKindOrWordsLeft | dstBottomHigh16;
+            cmdPtrPlus6Block3[overflowSetupWords + 0x10] = (dword)GH_F2U((float)(texRightU));
+            cmdPtrPlus6Block3[overflowSetupWords + 0x11] = (dword)GH_F2U((float)(texV0));
+            cmdPtrPlus6Block3[overflowSetupWords + 0x12] = 0x1393;
+            cmdPtrPlus6Block3[overflowSetupWords + 0x13] = 10;
+            cmdPtrPlus6Block3[overflowSetupWords + 0x14] = 0x5c8;
+            cmdPtrPlus6Block3[overflowSetupWords + 0x15] = 0x20000;
+            cmdWordsLeft = (cmdWordsLeft - 6) - (overflowSetupWords + 0x16);
             isScreenCopyOrNeedsSetup = true;
-            cmdWrite = cmdPtrPlus6Block3 + iVar16 + 0x16;
-            scratchWord0 = (uint)GH_F2U((float)(fVar3));
-            scratchWord1 = (uint)GH_F2U((float)(fVar11));
-            scratchWord2 = (uint)GH_F2U((float)(fVar5));
+            cmdWrite = cmdPtrPlus6Block3 + overflowSetupWords + 0x16;
+            scratchWord0 = (uint)GH_F2U((float)(texLeftU));
+            scratchWord1 = (uint)GH_F2U((float)(texRightU));
+            scratchWord2 = (uint)GH_F2U((float)(zeroTexCoord));
             scratchWord3 = (uint)GH_F2U((float)(texV0));
           }
           regionRect = regionRect + 2;
@@ -2579,33 +2622,33 @@ LAB_00006d28:
       i2dLo21 = (int)*(short *)((int)srcDesc + 6) ^ 0x80000000;
       i2dLo23 = splitRemainder ^ 0x80000000;
       i2dLo22 = splitRowPlus2 ^ 0x80000000;
-      fVar3 = 1.0 / (float)((double)CONCAT44(0x43300000,i2dLo21) - 4503601774854144.0);
-      fVar4 = 1.0 / (float)((double)CONCAT44(0x43300000,i2dLo23) - 4503601774854144.0);
-      fVar6 = 1.0 / (float)((double)CONCAT44(0x43300000,i2dLo22) - 4503601774854144.0);
+      invSrcHeight = 1.0 / (float)((double)CONCAT44(0x43300000,i2dLo21) - 4503601774854144.0);
+      invRightTileWidth = 1.0 / (float)((double)CONCAT44(0x43300000,i2dLo23) - 4503601774854144.0);
+      invLeftTileWidth = 1.0 / (float)((double)CONCAT44(0x43300000,i2dLo22) - 4503601774854144.0);
       if (regionCount != 0) {
         isScreenCopyOrNeedsSetup = true;
         regionIndex2 = 0;
         flushWaitWord2 = 0xc000;
         srcDescCopy2 = regionFirstRect;
         do {
-          iVar56 = (int)*(short *)srcDescCopy2;
-          if (srcOriginX + iVar56 < (int)splitRowPlus2) {
-            i2dLo24 = srcOriginX + iVar56 ^ 0x80000000;
+          regionX = (int)*(short *)srcDescCopy2;
+          if (srcOriginX + regionX < (int)splitRowPlus2) {
+            i2dLo24 = srcOriginX + regionX ^ 0x80000000;
             i2dHi28 = 0x43300000;
-            blitKindOrWordsLeft = srcOriginX + iVar56 + *(short *)(srcDescCopy2 + 1);
-            uStack_1f4 = splitRowPlus2;
+            blitKindOrWordsLeft = srcOriginX + regionX + *(short *)(srcDescCopy2 + 1);
+            leftTileSrcRightI2dLo = splitRowPlus2;
             if ((int)blitKindOrWordsLeft < (int)splitRowPlus2) {
-              uStack_1f4 = blitKindOrWordsLeft;
+              leftTileSrcRightI2dLo = blitKindOrWordsLeft;
             }
-            uStack_1f4 = uStack_1f4 ^ 0x80000000;
+            leftTileSrcRightI2dLo = leftTileSrcRightI2dLo ^ 0x80000000;
             i2dHi29 = 0x43300000;
-            local_16c = dstOffsetX + iVar56;
-            blitKindOrWordsLeft = local_16c + (int)*(short *)(srcDescCopy2 + 1);
-            iVar56 = (int)(short)*srcDescCopy2;
+            leftTileDstLeft = dstOffsetX + regionX;
+            blitKindOrWordsLeft = leftTileDstLeft + (int)*(short *)(srcDescCopy2 + 1);
+            regionY = (int)(short)*srcDescCopy2;
             i2dHi30 = 0x43300000;
-            i2dLo25 = srcOriginY + iVar56 ^ 0x80000000;
+            i2dLo25 = srcOriginY + regionY ^ 0x80000000;
             i2dHi31 = 0x43300000;
-            i2dLo26 = srcOriginY + iVar56 + *(short *)((int)srcDescCopy2 + 6) ^ 0x80000000;
+            i2dLo26 = srcOriginY + regionY + *(short *)((int)srcDescCopy2 + 6) ^ 0x80000000;
             if ((int)splitRowPlus2 < (int)blitKindOrWordsLeft) {
               i2dHi32 = 0x43300000;
               i2dLo27 = dstOffsetX + splitRowPlus2 ^ 0x80000000;
@@ -2617,26 +2660,26 @@ LAB_00006d28:
               blitKindOrWordsLeft = i2dLo28;
             }
             srcRightExact = (double)CONCAT44(0x43300000,blitKindOrWordsLeft) - 4503601774854144.0;
-            fVar5 = (float)srcRightExact;
-            if (2.1474836e+09 <= fVar5) {
-              iVar26 = (int)(fVar5 - 2.1474836e+09);
-              d2iScratch10 = (longlong)iVar26;
-              local_124 = iVar26 + 0x80000000;
+            leftTileRightEdgeF = (float)srcRightExact;
+            if (2.1474836e+09 <= leftTileRightEdgeF) {
+              srcRightIntLow = (int)(leftTileRightEdgeF - 2.1474836e+09);
+              d2iScratch10 = (longlong)srcRightIntLow;
+              leftTileDstRight = srcRightIntLow + 0x80000000;
             }
             else {
-              local_124 = (uint)(int)srcRightExact;
-              d2iScratch9 = (longlong)(int)local_124;
+              leftTileDstRight = (uint)(int)srcRightExact;
+              d2iScratch9 = (longlong)(int)leftTileDstRight;
             }
-            fVar5 = widthRatio * fVar6 * (float)((double)CONCAT44(0x43300000,i2dLo24) -
+            leftTileU0 = widthRatio * invLeftTileWidth * (float)((double)CONCAT44(0x43300000,i2dLo24) -
                                            4503601774854144.0);
-            fVar11 = widthRatio * fVar6 * (float)((double)CONCAT44(0x43300000,uStack_1f4) -
+            leftTileU1 = widthRatio * invLeftTileWidth * (float)((double)CONCAT44(0x43300000,leftTileSrcRightI2dLo) -
                                             4503601774854144.0);
-            texV0 = heightRatio * fVar3 * (float)((double)CONCAT44(0x43300000,i2dLo25) -
+            texV0 = heightRatio * invSrcHeight * (float)((double)CONCAT44(0x43300000,i2dLo25) -
                                              4503601774854144.0);
-            texV1 = heightRatio * fVar3 * (float)((double)CONCAT44(0x43300000,i2dLo26) -
+            texV1 = heightRatio * invSrcHeight * (float)((double)CONCAT44(0x43300000,i2dLo26) -
                                              4503601774854144.0);
-            local_128 = dstOffsetY + iVar56;
-            local_12c = local_128 + (int)*(short *)((int)srcDescCopy2 + 6);
+            leftTileDstTop = dstOffsetY + regionY;
+            leftTileDstBottom = leftTileDstTop + (int)*(short *)((int)srcDescCopy2 + 6);
             if (isScreenCopyOrNeedsSetup) {
               if (cmdWordsLeft < 0x9e) {
                 scratchWord1 = *(uint *)(accel + 0x18);
@@ -2699,7 +2742,7 @@ LAB_00006d28:
               setupWords4 = ((int (*)())_radeon3DCopySetup)(accel,cmdPtrPlus6Block3,srcDesc,srcFormat,sizeMismatch,0,splitRowPlus2,0)
               ;
 LAB_0000789c:
-              iVar19 = setupWords4 + 9;
+              topLeftCornerIdx = setupWords4 + 9;
               idxPlus11Or12Or6Or22Block1 = setupWords4 + 0x16;
               regByteOffset2 = setupWords4 << 2;
               idxPlus8Or7Or4Or1Block1 = setupWords4 + 1;
@@ -2779,7 +2822,7 @@ LAB_0000789c:
               regByteOffset2 = 0;
               idxPlus8Or7Or4Or1Block1 = 1;
               idxPlus6Or4Or5Or2Or1Block1 = 2;
-              iVar19 = 9;
+              topLeftCornerIdx = 9;
               idxPlus3Or8Or2Block1 = 3;
               idxPlus4Or15Block5 = 4;
               idxPlus4Or6Or1Or5Or3Block1 = 5;
@@ -2801,22 +2844,22 @@ LAB_0000789c:
               idxPlus11Or12Or6Or22Block1 = 0x16;
             }
             *(undefined4 *)((int)cmdWrite + regByteOffset2) = 0x10f8;
-            cmdWrite[idxPlus8Or7Or4Or1Block1] = local_16c & 0x1fff | (local_128 & 0x1fff) << 0xd;
+            cmdWrite[idxPlus8Or7Or4Or1Block1] = leftTileDstLeft & 0x1fff | (leftTileDstTop & 0x1fff) << 0xd;
             cmdWrite[idxPlus6Or4Or5Or2Or1Block1] = 0x10f9;
-            cmdWrite[idxPlus3Or8Or2Block1] = local_124 & 0x1fff | (local_12c & 0x1fff) << 0xd;
+            cmdWrite[idxPlus3Or8Or2Block1] = leftTileDstRight & 0x1fff | (leftTileDstBottom & 0x1fff) << 0xd;
             cmdWrite[idxPlus4Or15Block5] = 0xc00c3500;
             cmdWrite[idxPlus4Or6Or1Or5Or3Block1] = 0x4003d;
-            cmdWrite[idxPlus12Or13Or7Or6Or4Block1] = local_16c | local_12c << 0x10;
-            cmdWrite[idxPlus13Or14Or8Or7Or5Block1] = (dword)GH_F2U((float)(fVar5));
+            cmdWrite[idxPlus12Or13Or7Or6Or4Block1] = leftTileDstLeft | leftTileDstBottom << 0x10;
+            cmdWrite[idxPlus13Or14Or8Or7Or5Block1] = (dword)GH_F2U((float)(leftTileU0));
             cmdWrite[idxPlus7Or5Or22Or8Or20Block1] = (dword)GH_F2U((float)(texV1));
-            cmdWrite[iVar19] = local_16c | local_128 << 0x10;
-            cmdWrite[idxPlus9Or2Or10Or16Block1] = (dword)GH_F2U((float)(fVar5));
+            cmdWrite[topLeftCornerIdx] = leftTileDstLeft | leftTileDstTop << 0x10;
+            cmdWrite[idxPlus9Or2Or10Or16Block1] = (dword)GH_F2U((float)(leftTileU0));
             cmdWrite[idxPlus14Or15Or9Or11Or6Block1] = (dword)GH_F2U((float)(texV0));
-            cmdWrite[idxPlus10Or11Or20Or12Block1] = local_124 | local_128 << 0x10;
-            cmdWrite[idxPlus15Or16Or10Or13Or7Block1] = (dword)GH_F2U((float)(fVar11));
+            cmdWrite[idxPlus10Or11Or20Or12Block1] = leftTileDstRight | leftTileDstTop << 0x10;
+            cmdWrite[idxPlus15Or16Or10Or13Or7Block1] = (dword)GH_F2U((float)(leftTileU1));
             cmdWrite[idxPlus16Or17Or11Or14Block1] = (dword)GH_F2U((float)(texV0));
-            cmdWrite[idxPlus17Or18Or12Or15Or13Block1] = local_124 | local_12c << 0x10;
-            cmdWrite[idxPlus18Or19Or16Or14Block1] = (dword)GH_F2U((float)(fVar11));
+            cmdWrite[idxPlus17Or18Or12Or15Or13Block1] = leftTileDstRight | leftTileDstBottom << 0x10;
+            cmdWrite[idxPlus18Or19Or16Or14Block1] = (dword)GH_F2U((float)(leftTileU1));
             cmdWrite[idxPlus19Or10Or17Block2] = (dword)GH_F2U((float)(texV1));
             cmdWrite[idxPlus2Or18Block4] = 0x1393;
             cmdWrite[blockEndIdx] = 10;
@@ -2827,8 +2870,8 @@ LAB_0000789c:
             cmdWrite = cmdWrite + idxPlus11Or12Or6Or22Block1;
             scratchWord0 = (uint)GH_F2U((float)(texV1));
             scratchWord1 = (uint)GH_F2U((float)(texV0));
-            scratchWord2 = (uint)GH_F2U((float)(fVar11));
-            scratchWord3 = (uint)GH_F2U((float)(fVar5));
+            scratchWord2 = (uint)GH_F2U((float)(leftTileU1));
+            scratchWord3 = (uint)GH_F2U((float)(leftTileU0));
           }
           regionIndex2 = regionIndex2 + 1;
           srcDescCopy2 = srcDescCopy2 + 2;
@@ -2838,27 +2881,27 @@ LAB_0000789c:
         flushWaitWord = 0xc000;
         regionRect = regionFirstRect;
         do {
-          iVar26 = (int)*(short *)regionRect;
-          iVar56 = iVar26 + *(short *)(regionRect + 1) + srcOriginX;
-          if ((int)splitRow < iVar56) {
-            uStack_1bc = splitRow;
-            if ((int)splitRow < iVar26 + srcOriginX) {
-              uStack_1bc = iVar26 + srcOriginX;
+          rectX = (int)*(short *)regionRect;
+          srcRightEdge = rectX + *(short *)(regionRect + 1) + srcOriginX;
+          if ((int)splitRow < srcRightEdge) {
+            rightTileSrcLeftI2dLo = splitRow;
+            if ((int)splitRow < rectX + srcOriginX) {
+              rightTileSrcLeftI2dLo = rectX + srcOriginX;
             }
-            uStack_1bc = uStack_1bc ^ 0x80000000;
+            rightTileSrcLeftI2dLo = rightTileSrcLeftI2dLo ^ 0x80000000;
             i2dLo29 = splitRow ^ 0x80000000;
-            i2dLo30 = iVar56 - splitRow ^ 0x80000000;
-            local_134 = dstOffsetX + iVar26;
+            i2dLo30 = srcRightEdge - splitRow ^ 0x80000000;
+            regionDstLeft = dstOffsetX + rectX;
             i2dHi34 = 0x43300000;
             i2dHi35 = 0x43300000;
             i2dHi36 = 0x43300000;
-            iVar56 = (int)(short)*regionRect;
+            regionY = (int)(short)*regionRect;
             i2dHi37 = 0x43300000;
-            i2dLo31 = iVar56 + srcOriginY ^ 0x80000000;
+            i2dLo31 = regionY + srcOriginY ^ 0x80000000;
             i2dHi38 = 0x43300000;
-            i2dLo32 = iVar56 + *(short *)((int)regionRect + 6) + srcOriginX ^ 0x80000000;
-            if ((int)splitRow < (int)local_134) {
-              i2dLo33 = local_134 ^ 0x80000000;
+            i2dLo32 = regionY + *(short *)((int)regionRect + 6) + srcOriginX ^ 0x80000000;
+            if ((int)splitRow < (int)regionDstLeft) {
+              i2dLo33 = regionDstLeft ^ 0x80000000;
               i2dHi39 = 0x43300000;
               blitKindOrWordsLeft = i2dLo33;
             }
@@ -2868,29 +2911,29 @@ LAB_0000789c:
               blitKindOrWordsLeft = i2dLo34;
             }
             srcRightExact = (double)CONCAT44(0x43300000,blitKindOrWordsLeft) - 4503601774854144.0;
-            fVar6 = (float)srcRightExact;
-            if (2.1474836e+09 <= fVar6) {
-              iVar26 = (int)(fVar6 - 2.1474836e+09);
-              d2iScratch12 = (longlong)iVar26;
-              local_130 = iVar26 + 0x80000000;
+            rightTileLeftEdgeF = (float)srcRightExact;
+            if (2.1474836e+09 <= rightTileLeftEdgeF) {
+              dstLeftIntLow = (int)(rightTileLeftEdgeF - 2.1474836e+09);
+              d2iScratch12 = (longlong)dstLeftIntLow;
+              rightTileDstLeft = dstLeftIntLow + 0x80000000;
             }
             else {
-              local_130 = (uint)(int)srcRightExact;
-              d2iScratch11 = (longlong)(int)local_130;
+              rightTileDstLeft = (uint)(int)srcRightExact;
+              d2iScratch11 = (longlong)(int)rightTileDstLeft;
             }
-            local_134 = local_134 + (int)*(short *)(regionRect + 1);
-            fVar6 = widthRatio * fVar4 * ((float)((double)CONCAT44(0x43300000,uStack_1bc) -
+            rightTileDstRight = regionDstLeft + (int)*(short *)(regionRect + 1);
+            rightTileU0 = widthRatio * invRightTileWidth * ((float)((double)CONCAT44(0x43300000,rightTileSrcLeftI2dLo) -
                                             4503601774854144.0) -
                                     (float)((double)CONCAT44(0x43300000,i2dLo29) -
                                            4503601774854144.0));
-            fVar5 = widthRatio * fVar4 * (float)((double)CONCAT44(0x43300000,i2dLo30) -
+            rightTileU1 = widthRatio * invRightTileWidth * (float)((double)CONCAT44(0x43300000,i2dLo30) -
                                            4503601774854144.0);
-            fVar11 = heightRatio * fVar3 * (float)((double)CONCAT44(0x43300000,i2dLo31) -
+            rightTileV0 = heightRatio * invSrcHeight * (float)((double)CONCAT44(0x43300000,i2dLo31) -
                                              4503601774854144.0);
-            texV0 = heightRatio * fVar3 * (float)((double)CONCAT44(0x43300000,i2dLo32) -
+            texV0 = heightRatio * invSrcHeight * (float)((double)CONCAT44(0x43300000,i2dLo32) -
                                              4503601774854144.0);
-            local_138 = dstOffsetY + iVar56;
-            local_13c = local_138 + (int)*(short *)((int)regionRect + 6);
+            rightTileDstTop = dstOffsetY + regionY;
+            rightTileDstBottom = rightTileDstTop + (int)*(short *)((int)regionRect + 6);
             if (isScreenCopyOrNeedsSetup) {
               if (cmdWordsLeft < 0x9e) {
                 scratchWord2 = *(uint *)(accel + 0x18);
@@ -2953,7 +2996,7 @@ LAB_0000789c:
               setupWords4 = ((int (*)())_radeon3DCopySetup)(accel,cmdPtrPlus6Block3,srcDesc,srcFormat,sizeMismatch,0,splitRemainder,0)
               ;
 LAB_00007ff0:
-              iVar19 = setupWords4 + 9;
+              topLeftCornerIdx = setupWords4 + 9;
               blockEndIdx = setupWords4 + 10;
               idxPlus11Or12Or6Or22Block1 = setupWords4 + 0x16;
               regByteOffset2 = setupWords4 << 2;
@@ -3032,7 +3075,7 @@ LAB_00007ff0:
               }
               regByteOffset2 = 0;
               idxPlus6Or4Or5Or2Or1Block1 = 1;
-              iVar19 = 9;
+              topLeftCornerIdx = 9;
               idxPlus3Or8Or2Block1 = 2;
               idxPlus4Or6Or1Or5Or3Block1 = 3;
               blockEndIdx = 10;
@@ -3055,22 +3098,22 @@ LAB_00007ff0:
               idxPlus11Or12Or6Or22Block1 = 0x16;
             }
             *(undefined4 *)((int)cmdWrite + regByteOffset2) = 0x10f8;
-            cmdWrite[idxPlus6Or4Or5Or2Or1Block1] = local_130 & 0x1fff | (local_138 & 0x1fff) << 0xd;
+            cmdWrite[idxPlus6Or4Or5Or2Or1Block1] = rightTileDstLeft & 0x1fff | (rightTileDstTop & 0x1fff) << 0xd;
             cmdWrite[idxPlus3Or8Or2Block1] = 0x10f9;
-            cmdWrite[idxPlus4Or6Or1Or5Or3Block1] = local_134 & 0x1fff | (local_13c & 0x1fff) << 0xd;
+            cmdWrite[idxPlus4Or6Or1Or5Or3Block1] = rightTileDstRight & 0x1fff | (rightTileDstBottom & 0x1fff) << 0xd;
             cmdWrite[idxPlus12Or13Or7Or6Or4Block1] = 0xc00c3500;
             cmdWrite[idxPlus13Or14Or8Or7Or5Block1] = 0x4003d;
-            cmdWrite[idxPlus14Or15Or9Or11Or6Block1] = local_130 | local_13c << 0x10;
-            cmdWrite[idxPlus15Or16Or10Or13Or7Block1] = (dword)GH_F2U((float)(fVar6));
+            cmdWrite[idxPlus14Or15Or9Or11Or6Block1] = rightTileDstLeft | rightTileDstBottom << 0x10;
+            cmdWrite[idxPlus15Or16Or10Or13Or7Block1] = (dword)GH_F2U((float)(rightTileU0));
             cmdWrite[idxPlus8Or7Or4Or1Block1] = (dword)GH_F2U((float)(texV0));
-            cmdWrite[iVar19] = local_130 | local_138 << 0x10;
-            cmdWrite[blockEndIdx] = (dword)GH_F2U((float)(fVar6));
-            cmdWrite[idxPlus16Or17Or11Or14Block1] = (dword)GH_F2U((float)(fVar11));
-            cmdWrite[idxPlus10Or11Or20Or12Block1] = local_134 | local_138 << 0x10;
-            cmdWrite[idxPlus17Or18Or12Or15Or13Block1] = (dword)GH_F2U((float)(fVar5));
-            cmdWrite[idxPlus18Or19Or16Or14Block1] = (dword)GH_F2U((float)(fVar11));
-            cmdWrite[idxPlus4Or15Block5] = local_134 | local_13c << 0x10;
-            cmdWrite[idxPlus9Or2Or10Or16Block1] = (dword)GH_F2U((float)(fVar5));
+            cmdWrite[topLeftCornerIdx] = rightTileDstLeft | rightTileDstTop << 0x10;
+            cmdWrite[blockEndIdx] = (dword)GH_F2U((float)(rightTileU0));
+            cmdWrite[idxPlus16Or17Or11Or14Block1] = (dword)GH_F2U((float)(rightTileV0));
+            cmdWrite[idxPlus10Or11Or20Or12Block1] = rightTileDstRight | rightTileDstTop << 0x10;
+            cmdWrite[idxPlus17Or18Or12Or15Or13Block1] = (dword)GH_F2U((float)(rightTileU1));
+            cmdWrite[idxPlus18Or19Or16Or14Block1] = (dword)GH_F2U((float)(rightTileV0));
+            cmdWrite[idxPlus4Or15Block5] = rightTileDstRight | rightTileDstBottom << 0x10;
+            cmdWrite[idxPlus9Or2Or10Or16Block1] = (dword)GH_F2U((float)(rightTileU1));
             cmdWrite[idxPlus19Or10Or17Block2] = (dword)GH_F2U((float)(texV0));
             cmdWrite[idxPlus2Or18Block4] = 0x1393;
             cmdWrite[idxPlus5Or22Or13Or20Or19Block1] = 10;
@@ -3079,9 +3122,9 @@ LAB_00007ff0:
             cmdWordsLeft = cmdWordsLeft - idxPlus11Or12Or6Or22Block1;
             isScreenCopyOrNeedsSetup = false;
             cmdWrite = cmdWrite + idxPlus11Or12Or6Or22Block1;
-            scratchWord0 = (uint)GH_F2U((float)(fVar11));
-            scratchWord1 = (uint)GH_F2U((float)(fVar5));
-            scratchWord2 = (uint)GH_F2U((float)(fVar6));
+            scratchWord0 = (uint)GH_F2U((float)(rightTileV0));
+            scratchWord1 = (uint)GH_F2U((float)(rightTileU1));
+            scratchWord2 = (uint)GH_F2U((float)(rightTileU0));
             scratchWord3 = (uint)GH_F2U((float)(texV0));
           }
           regionRect = regionRect + 2;

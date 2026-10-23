@@ -1,0 +1,79 @@
+use	FUN_000055a4	dVar31	srcDescField4	UNKNOWN	srcDesc[4], only read for tileHeightWords	#246	+1	all	none
+use	FUN_000055a4	dVar27	srcDescField7	UNKNOWN	srcDesc[7], only read for tileHeightWords	#248	+1	all	none
+use	FUN_000055a4	dVar31	srcDescField4	UNKNOWN	srcDesc[4] read for tileHeightWords	#751	+1	all	none
+use	FUN_000055a4	dVar27	srcDescField7	UNKNOWN	srcDesc[7] read for tileHeightWords	#751	+1	all	none
+use	FUN_000055a4	dVar27	offscreenField7	INFERRED	DAT_0000e6e4[7], stored to cmdWord1[3]	#471	+88	all	none
+use	FUN_000055a4	dVar27	scratchWord0Cached	CONFIRMED	= *scratchWord0Ptr, reloaded into command words	#559	+13	all	none
+use	FUN_000055a4	dVar31	scratchWord3Copy	CONFIRMED	= *scratchWord3Ptr, reloaded into command words	#557	+6	all	none
+use	FUN_000055a4	dVar31	scratchWord1Copy	CONFIRMED	= *scratchWord1Ptr, reloaded into command words	#563	+6	all	none
+use	FUN_000055a4	dVar32	scratchWord2Saved	CONFIRMED	= *scratchWord2Ptr, reloaded into command words	#566	+5	all	none
+use	FUN_000055a4	dVar31	scratchWord0Copy	CONFIRMED	= *scratchWord0Ptr, reloaded into command words	#722	+6	all	none
+use	FUN_000055a4	dVar31	scratchWord3Copy	CONFIRMED	= *scratchWord3Ptr, reloaded into command words	#728	+6	all	none
+use	FUN_000055a4	dVar27	scratchWord2Cached	CONFIRMED	= *scratchWord2Ptr, reloaded into command words	#724	+13	all	none
+use	FUN_000055a4	dVar32	scratchWord1Saved	CONFIRMED	= *scratchWord1Ptr, reloaded into command words	#731	+5	all	none
+use	FUN_000055a4	dVar31	scratchWord2Copy	CONFIRMED	= *scratchWord2Ptr, reloaded into command words	#955	+6	all	none
+use	FUN_000055a4	dVar31	scratchWord1Copy	CONFIRMED	= *scratchWord1Ptr, reloaded into command words	#961	+6	all	none
+use	FUN_000055a4	dVar27	scratchWord0Cached	CONFIRMED	= *scratchWord0Ptr, reloaded into command words	#957	+13	all	none
+use	FUN_000055a4	dVar32	scratchWord3Saved	CONFIRMED	= *scratchWord3Ptr, reloaded into command words	#964	+5	all	none
+use	FUN_000055a4	iVar19	flushRegIdx	INFERRED	index of the 0x5c8 flush-register word closing the loop A block	#497	+78	all	none
+use	FUN_000055a4	iVar19	lastTexWordIdx	INFERRED	index of the last texture-coordinate word of the loop B quad	#872	+98	all	none
+use	FUN_000055a4	iVar19	topLeftCornerIdx	INFERRED	index of the (left | top<<16) corner word of the left-tile quad	#1220	+111	all	none
+use	FUN_000055a4	iVar19	topLeftCornerIdx	INFERRED	index of the (left | top<<16) corner word of the right-tile quad	#1474	+111	all	none
+use	FUN_000055a4	iVar26	drawRegIdx	INFERRED	index of the 0x1393 draw-register word closing the loop B quad	#873	+98	all	none
+use	FUN_000055a4	iVar26	overflowBoundaryY	INFERRED	destination row of the 4096-row boundary; top of the overflow quad	#984	+80	all	none
+use	FUN_000055a4	iVar26	srcRightIntLow	INFERRED	(int)(right - 2^31): low half of the unsigned float->int conversion	#1140	+3	all	none
+use	FUN_000055a4	iVar26	rectX	CONFIRMED	region rect x (short at +0)	#1359	+32	all	none
+use	FUN_000055a4	iVar26	dstLeftIntLow	INFERRED	(int)(left - 2^31): low half of the unsigned float->int conversion	#1391	+3	all	none
+use	FUN_000055a4	iVar56	srcRectWordIdx	INFERRED	index of the packed (left|top<<13) source word of the loop A block	#476	+60	all	none
+use	FUN_000055a4	iVar56	dstRectTop	INFERRED	dstOffsetY + region y: top edge of the destination rect	#580	+405	all	none
+use	FUN_000055a4	iVar56	dstRectBottomUnclamped	INFERRED	dstOffsetY + y + height: bottom edge before the 4096-row clamp	#985	+102	all	none
+use	FUN_000055a4	iVar56	regionX	CONFIRMED	region rect x (short at +0)	#1109	+13	all	none
+use	FUN_000055a4	iVar56	regionY	CONFIRMED	region rect y (short at +2)	#1122	+231	all	none
+use	FUN_000055a4	iVar56	srcRightEdge	INFERRED	region x + width + srcOriginX: right edge in source space	#1360	+13	all	none
+use	FUN_000055a4	iVar56	regionY	CONFIRMED	region rect y (short at +2)	#1373	+234	all	none
+use	FUN_000055a4	iVar16	dstRectBottom	INFERRED	dstRectTop + height: bottom edge of the destination rect	#581	+124	all	none
+use	FUN_000055a4	iVar16	srcHeightClamped	INFERRED	srcDesc height, clamped to the 0x1000-row texture limit	#776	+201	all	none
+use	FUN_000055a4	iVar16	rectBottomY	INFERRED	region y + height: bottom row, tested against the 0x1000-row limit	#977	+11	all	none
+use	FUN_000055a4	iVar16	overflowHeight	INFERRED	srcDesc height - 0x1000: rows beyond the texture limit	#988	+64	all	rhs
+use	FUN_000055a4	iVar16	overflowSetupWords	INFERRED	return of _radeon3DCopySetup: word count the overflow quad starts after	#1052	+30	lhs	none
+use	FUN_000055a4	uVar45	dstBottomHigh16	INFERRED	bottom edge shifted into the high half of a corner word	#704	+42	all	none
+use	FUN_000055a4	uVar45	dstRectBottomClamped	INFERRED	dstRectTop + height, clamped to the 0x1000-row boundary	#774	+285	all	none
+use	FUN_000055a4	uVar45	dstBottomHigh16	INFERRED	bottom edge shifted into the high half of a corner word	#1059	+28	all	none
+use	FUN_000055a4	fVar3	srcLeftPx	INFERRED	srcOriginX + region x as float	#771	+32	all	rhs
+use	FUN_000055a4	fVar3	texLeftU	INFERRED	left x * uScale: stored as a quad texture word	#803	+284	lhs	none
+use	FUN_000055a4	fVar4	srcTopPx	INFERRED	srcOriginY + region y as float	#775	+23	all	rhs
+use	FUN_000055a4	fVar4	texTopV	INFERRED	top y * vScale: stored as a quad texture word	#798	+289	lhs	none
+use	FUN_000055a4	fVar6	srcBottomPx	INFERRED	top + height as float, clamped to 4096.0	#777	+20	all	rhs
+use	FUN_000055a4	fVar6	texBottomV	INFERRED	bottom y * vScale: stored as a quad texture word	#797	+290	lhs	none
+use	FUN_000055a4	fVar5	srcHeightPx	INFERRED	source height as float (4096.0 when clamped)	#780	+16	all	rhs
+use	FUN_000055a4	fVar5	vScale	INFERRED	heightRatio / height: pixel row -> texture V	#796	+3	lhs	none
+use	FUN_000055a4	fVar5	uScale	INFERRED	widthRatio / width: pixel column -> texture U	#799	+5	all	none
+use	FUN_000055a4	fVar5	overflowVScale	INFERRED	heightRatio / overflowHeight: pixel row -> texture V for the overflow quad	#989	+3	all	rhs
+use	FUN_000055a4	fVar5	zeroTexCoord	INFERRED	overflowVScale * 0.0 = 0.0 texture word of the overflow quad	#992	+95	lhs	none
+use	FUN_000055a4	fVar11	texRightU	INFERRED	(left + width) * uScale: stored as a quad texture word	#801	+286	all	none
+use	FUN_000055a4	fVar3	invSrcHeight	INFERRED	1 / srcDesc height	#1100	+507	all	none
+use	FUN_000055a4	fVar4	invRightTileWidth	INFERRED	1 / splitRemainder	#1101	+506	all	none
+use	FUN_000055a4	fVar6	invLeftTileWidth	INFERRED	1 / splitRowPlus2	#1102	+287	all	none
+use	FUN_000055a4	fVar6	rightTileLeftEdgeF	INFERRED	clamped dst left edge as float (int conversion temp)	#1389	+11	all	none
+use	FUN_000055a4	fVar6	rightTileU0	INFERRED	right-tile left U: widthRatio * invRightTileWidth * (x - splitRow)	#1400	+207	all	none
+use	FUN_000055a4	fVar5	leftTileRightEdgeF	INFERRED	clamped dst right edge as float (int conversion temp)	#1138	+10	all	none
+use	FUN_000055a4	fVar5	leftTileU0	INFERRED	left-tile left U: widthRatio * invLeftTileWidth * x	#1148	+205	all	none
+use	FUN_000055a4	fVar11	leftTileU1	INFERRED	left-tile right U	#1150	+203	all	none
+use	FUN_000055a4	fVar5	rightTileU1	INFERRED	right-tile right U	#1404	+203	all	none
+use	FUN_000055a4	fVar11	rightTileV0	INFERRED	right-tile top V: heightRatio * invSrcHeight * y	#1406	+201	all	none
+use	FUN_000055a4	local_134	regionDstLeft	INFERRED	dstOffsetX + region x	#1369	+30	all	rhs
+use	FUN_000055a4	local_134	rightTileDstRight	INFERRED	regionDstLeft + width: right edge of the right-tile rect	#1399	+208	lhs	none
+local	FUN_000055a4	local_16c	leftTileDstLeft	INFERRED	dstOffsetX + region x in the left-tile pass
+local	FUN_000055a4	local_124	leftTileDstRight	INFERRED	clamped right edge of the left-tile rect
+local	FUN_000055a4	local_128	leftTileDstTop	INFERRED	dstOffsetY + region y in the left-tile pass
+local	FUN_000055a4	local_12c	leftTileDstBottom	INFERRED	leftTileDstTop + height
+local	FUN_000055a4	local_130	rightTileDstLeft	INFERRED	clamped left edge of the right-tile rect
+local	FUN_000055a4	local_138	rightTileDstTop	INFERRED	dstOffsetY + region y in the right-tile pass
+local	FUN_000055a4	local_13c	rightTileDstBottom	INFERRED	rightTileDstTop + height
+local	FUN_000055a4	uStack_1f4	leftTileSrcRightI2dLo	INFERRED	min(splitRowPlus2, src right) ^ 0x80000000: low word of the int->double trick
+local	FUN_000055a4	uStack_1bc	rightTileSrcLeftI2dLo	INFERRED	max(splitRow, src left) ^ 0x80000000: low word of the int->double trick
+local	FUN_000055a4	iStack_234	srcHeightI2dLo	INFERRED	iVar16 stored as the low word of the unsigned int->double trick
+local	FUN_000055a4	iStack_21c	overflowHeightI2dLo	INFERRED	overflow height stored as the low word of the unsigned int->double trick
+local	FUN_000055a4	local_e0	offscreenRegionIndex	CONFIRMED	loop A counter compared with regionCount
+local	FUN_000055a4	local_368	srcQueryOutSize	CONFIRMED	&local_368 is the structure-output size of _io_connect_method_scalarI_structureO (0x30)
+local	FUN_000055a4	local_354	srcQueryBlock	INFERRED	scalar inputs [0]=srcRef,[1]=0x800 then the 0x30-byte srcDesc output at +2
