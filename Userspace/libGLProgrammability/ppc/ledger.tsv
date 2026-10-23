@@ -1518,7 +1518,7 @@
 0x97c190cc	8	__ZNSt9bad_allocD1Ev	part_025	converted
 0x97c190d4	8	__ZNSt9bad_allocD0Ev	part_025	converted
 0x97c190dc	88	__ZNSt9bad_allocD4Ev	part_025	converted
-0x97c1913c	220	FUN_97c1913c	part_025	converted
+0x97c1913c	220	___cxa_allocate_exception_97c1913c	part_025	converted
 0x97c19218	152	___cxa_free_exception	part_025	converted
 0x97c192b0	88	__gxx_exception_cleanup	part_025	converted
 0x97c19308	216	___cxa_throw	part_025	converted
@@ -1532,7 +1532,7 @@
 0x97c19818	152	get_adjusted_ptr	part_025	converted
 0x97c198b0	124	check_exception_spec	part_025	converted
 0x97c1992c	976	___gxx_personality_v0	part_025	converted
-0x97c19d00	232	FUN_97c19d00	part_025	converted
+0x97c19d00	232	___cxa_call_unexpected_97c19d00	part_025	converted
 0x97c19de8	28	__cxxabiv1____terminate	part_025	converted
 0x97c19e0c	56	std__terminate	part_025	converted
 0x97c19e44	28	__cxxabiv1____unexpected	part_025	converted

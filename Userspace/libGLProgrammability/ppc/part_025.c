@@ -11,21 +11,23 @@ int __ZNK10__cxxabiv120__si_class_type_info12__do_dyncastEiNS_17__class_type_inf
   int srcPtr;
   int *result;
 {
-  int iVar1;
-  undefined4 uVar2;
+  int dst2srcKind;
+  int isSrcType;
+  int isDstType;
+  undefined4 baseDyncastResult;
   
-  iVar1 = __ZNKSt9type_infoeqERKS_(this,dstType);
-  if (iVar1 == 0) {
-    if ((objPtr == srcPtr) && (iVar1 = __ZNKSt9type_infoeqERKS_(this,srcType), iVar1 != 0)) {
+  isDstType = __ZNKSt9type_infoeqERKS_(this,dstType);
+  if (isDstType == 0) {
+    if ((objPtr == srcPtr) && (isSrcType = __ZNKSt9type_infoeqERKS_(this,srcType), isSrcType != 0)) {
       result[2] = accessPath;
       return 0;
     }
                     
                     
-    uVar2 = (**(code **)(**(int **)((int)this + 8) + 0x1c))
+    baseDyncastResult = (**(code **)(**(int **)((int)this + 8) + 0x1c))
                       (*(int **)((int)this + 8),src2dst,accessPath,dstType,objPtr,srcType,srcPtr,
                        result);
-    return uVar2;
+    return baseDyncastResult;
   }
   result[1] = accessPath;
   *result = objPtr;
@@ -35,12 +37,12 @@ int __ZNK10__cxxabiv120__si_class_type_info12__do_dyncastEiNS_17__class_type_inf
     }
   }
   else {
-    iVar1 = 6;
+    dst2srcKind = 6;
     if (objPtr + src2dst == srcPtr) goto LAB_97c1866c;
   }
-  iVar1 = 1;
+  dst2srcKind = 1;
 LAB_97c1866c:
-  result[3] = iVar1;
+  result[3] = dst2srcKind;
   return 0;
 }
 
@@ -260,15 +262,15 @@ int __ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PKvRNS0_15__upcast_re
   void *objPtr;
   unsigned char * result;
 {
-  int iVar1;
+  int isDstType;
   
-  iVar1 = __ZNKSt9type_infoeqERKS_(this,(unsigned char *)dstType);
-  if (iVar1 != 0) {
+  isDstType = __ZNKSt9type_infoeqERKS_(this,(unsigned char *)dstType);
+  if (isDstType != 0) {
     *(void **)result = objPtr;
     *(undefined4 *)(result + 4) = 6;
     *(undefined4 *)(result + 0xc) = 8;
   }
-  return iVar1 != 0;
+  return isDstType != 0;
 }
 
 /* __ZNK10__cxxabiv120__si_class_type_info11__do_upcastEPKNS_17__class_type_infoEPKvRNS1_15__upcast_resultE @ 0x97c18b88 (116 bytes) */
@@ -278,16 +280,16 @@ int __ZNK10__cxxabiv120__si_class_type_info11__do_upcastEPKNS_17__class_type_inf
   void *objPtr;
   unsigned char * result;
 {
-  int iVar1;
-  undefined4 uVar2;
+  int classUpcastOk;
+  undefined4 baseUpcastResult;
   
-  iVar1 = ((int (*)())__ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PKvRNS0_15__upcast_resultE)(this,dstType,objPtr,result);
-  if (iVar1 == 0) {
+  classUpcastOk = ((int (*)())__ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PKvRNS0_15__upcast_resultE)(this,dstType,objPtr,result);
+  if (classUpcastOk == 0) {
                     
                     
-    uVar2 = (**(code **)(**(int **)((int)this + 8) + 0x18))
+    baseUpcastResult = (**(code **)(**(int **)((int)this + 8) + 0x18))
                       (*(int **)((int)this + 8),dstType,objPtr,result);
-    return uVar2;
+    return baseUpcastResult;
   }
   return 1;
 }
@@ -471,12 +473,12 @@ int __ZNSt9exceptionD0Ev(this)
 }
 
 /* __ZNSt9exceptionD4Ev @ 0x97c18f88 (72 bytes) */
-int __ZNSt9exceptionD4Ev(this, param_2)
+int __ZNSt9exceptionD4Ev(this, deleteFlags)
   void *this;
-  uint param_2;
+  uint deleteFlags;
 {
   *(int *)this = DAT_a7b7c034 + 8;
-  if ((param_2 & 1) != 0) {
+  if ((deleteFlags & 1) != 0) {
     __ZdlPv(this);
   }
   return;
@@ -504,13 +506,13 @@ int __ZNSt13bad_exceptionD0Ev(this)
 }
 
 /* __ZNSt13bad_exceptionD4Ev @ 0x97c18fe8 (88 bytes) */
-int __ZNSt13bad_exceptionD4Ev(this, param_2)
+int __ZNSt13bad_exceptionD4Ev(this, deleteFlags)
   void *this;
-  uint param_2;
+  uint deleteFlags;
 {
   *(int *)this = DAT_a7b7c030 + 8;
   ((int (*)())__ZNSt9exceptionD2Ev)(this);
-  if ((param_2 & 1) != 0) {
+  if ((deleteFlags & 1) != 0) {
     __ZdlPv(this);
   }
   return;
@@ -524,18 +526,18 @@ int __ZNKSt9exception4whatEv(this)
 }
 
 /* std__set_new_handler @ 0x97c19050 (68 bytes) */
-int std__set_new_handler(param_1)
-  unsigned char * param_1;
+int std__set_new_handler(newHandler)
+  unsigned char * newHandler;
 {
-  int iVar1;
+  int oldHandler;
   
-  iVar1 = __keymgr_get_per_thread_data(2);
-  if (iVar1 == 0) {
-    iVar1 = (int)___new_handler;
+  oldHandler = __keymgr_get_per_thread_data(2);
+  if (oldHandler == 0) {
+    oldHandler = (int)___new_handler;
   }
-  __keymgr_set_per_thread_data(2,param_1);
-  ___new_handler = param_1;
-  return iVar1;
+  __keymgr_set_per_thread_data(2,newHandler);
+  ___new_handler = newHandler;
+  return oldHandler;
 }
 
 /* __ZNSt9bad_allocD2Ev @ 0x97c190c4 (8 bytes) */
@@ -560,152 +562,153 @@ int __ZNSt9bad_allocD0Ev(this)
 }
 
 /* __ZNSt9bad_allocD4Ev @ 0x97c190dc (88 bytes) */
-int __ZNSt9bad_allocD4Ev(this, param_2)
+int __ZNSt9bad_allocD4Ev(this, deleteFlags)
   void *this;
-  uint param_2;
+  uint deleteFlags;
 {
   *(int *)this = DAT_a7b7c03c + 8;
   ((int (*)())__ZNSt9exceptionD2Ev)(this);
-  if ((param_2 & 1) != 0) {
+  if ((deleteFlags & 1) != 0) {
     __ZdlPv(this);
   }
   return;
 }
 
-/* FUN_97c1913c @ 0x97c1913c (220 bytes) */
-int FUN_97c1913c(param_1)
-  int param_1;
+/* ___cxa_allocate_exception_97c1913c @ 0x97c1913c (220 bytes) */
+int ___cxa_allocate_exception_97c1913c(thrownSize)
+  int thrownSize;
 {
-  bool bVar1;
-  uint uVar2;
-  undefined *puVar3;
+  bool allocFailed;
+  uint emergencyBits;
+  undefined *exceptionBlock;
   uint loopIndex;
   
-  puVar3 = (undefined *)_malloc(param_1 + 0x50U);
-  if (puVar3 == (undefined *)0x0) {
+  exceptionBlock = (undefined *)_malloc(thrownSize + 0x50U);
+  if (exceptionBlock == (undefined *)0x0) {
     _pthread_mutex_lock(&_emergency_mutex);
     loopIndex = 0;
-    bVar1 = true;
-    uVar2 = _emergency_used;
-    if (param_1 + 0x50U < 0x101) {
+    allocFailed = true;
+    emergencyBits = _emergency_used;
+    if (thrownSize + 0x50U < 0x101) {
       do {
-        if ((uVar2 & 1) == 0) {
+        if ((emergencyBits & 1) == 0) {
           _emergency_used = _emergency_used | 1 << (loopIndex & 0x3f);
-          puVar3 = &_emergency_buffer + loopIndex * 0x100;
-          bVar1 = puVar3 == (undefined *)0x0;
+          exceptionBlock = &_emergency_buffer + loopIndex * 0x100;
+          allocFailed = exceptionBlock == (undefined *)0x0;
           break;
         }
         loopIndex = loopIndex + 1;
-        uVar2 = uVar2 >> 1;
+        emergencyBits = emergencyBits >> 1;
       } while (loopIndex < 2);
     }
     _pthread_mutex_unlock(&_emergency_mutex);
-    if (bVar1) {
+    if (allocFailed) {
       ((int (*)())std__terminate)();
     }
   }
-  _memset(puVar3,0,0x50);
-  return puVar3 + 0x50;
+  _memset(exceptionBlock,0,0x50);
+  return exceptionBlock + 0x50;
 }
 
 /* ___cxa_free_exception @ 0x97c19218 (152 bytes) */
-int ___cxa_free_exception(param_1)
-  undefined4 *param_1;
+int ___cxa_free_exception(thrownObject)
+  undefined4 *thrownObject;
 {
-  uint uVar1;
+  uint emergencySlot;
   
-  if (((undefined4 *)0xa7b7e86f < param_1) && (param_1 < &_emergency_used)) {
+  if (((undefined4 *)0xa7b7e86f < thrownObject) && (thrownObject < &_emergency_used)) {
     _pthread_mutex_lock(&_emergency_mutex);
-    uVar1 = (uint)(param_1 + 0x161205e4) >> 8 & 0x1f;
-    _emergency_used = _emergency_used & (-2 << uVar1 | 0xfffffffeU >> 0x20 - uVar1);
+    emergencySlot = (uint)(thrownObject + 0x161205e4) >> 8 & 0x1f;
+    _emergency_used = _emergency_used & (-2 << emergencySlot | 0xfffffffeU >> 0x20 - emergencySlot);
     _pthread_mutex_unlock(&_emergency_mutex);
     return;
   }
-  return _free(param_1 + -0x14);
+  return _free(thrownObject + -0x14);
 }
 
 /* __gxx_exception_cleanup @ 0x97c192b0 (88 bytes) */
-int __gxx_exception_cleanup(_Unwind_Reason_Code, param_2)
+int __gxx_exception_cleanup(_Unwind_Reason_Code, exception)
   unsigned char _Unwind_Reason_Code;
-  _Unwind_Exception *param_2;
+  _Unwind_Exception *exception;
 {
   _Unwind_Exception *r4Out0;
-  unsigned char * puVar1;
+  unsigned char * header;
   
-  puVar1 = &param_2[-2].private_2;
+  header = &exception[-2].private_2;
   if (_URC_FOREIGN_EXCEPTION_CAUGHT < _Unwind_Reason_Code) {
-    ((int (*)())__cxxabiv1____terminate)((unsigned char *)param_2[-2].reserved[2]);
-    param_2 = r4Out0;
+    ((int (*)())__cxxabiv1____terminate)((unsigned char *)exception[-2].reserved[2]);
+    exception = r4Out0;
   }
-  if ((code *)puVar1[1] != (code *)0x0) {
-    (*(code *)puVar1[1])(param_2 + 1);
+  if ((code *)header[1] != (code *)0x0) {
+    (*(code *)header[1])(exception + 1);
   }
-  return ((int (*)())___cxa_free_exception)(param_2 + 1);
+  return ((int (*)())___cxa_free_exception)(exception + 1);
 }
 
 /* ___cxa_throw @ 0x97c19308 (216 bytes) */
-int ___cxa_throw(param_1, param_2, param_3)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+int ___cxa_throw(thrownObject, tinfo, dest)
+  int thrownObject;
+  undefined4 tinfo;
+  undefined4 dest;
 {
-  uint terminateResult;
+  undefined4 valueSize;
+  uint encodingR3;
   int cxa_get_globalsResult;
-  undefined *puVar1;
-  undefined *puVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  int iVar5;
+  undefined *terminateHandlerSlot;
+  undefined *unexpectedHandlerSlot;
+  undefined4 terminateHandler;
+  undefined4 exceptionCleanup;
+  int caughtException;
   int *cxa_get_globalsResult2;
-  uint uVar7;
+  uint format;
   
-  puVar2 = PTR___unexpected_handler_a7b7c18c;
-  *(undefined4 *)(param_1 + -0x50) = param_2;
-  *(undefined4 *)(param_1 + -0x4c) = param_3;
-  puVar1 = PTR___terminate_handler_a7b7c188;
-  *(undefined4 *)(param_1 + -0x48) = *(undefined4 *)puVar2;
-  uVar4 = DAT_a7b7c06c;
-  uVar3 = *(undefined4 *)puVar1;
-  *(undefined4 *)(param_1 + -0x20) = 0x474e5543;
-  *(undefined4 *)(param_1 + -0x1c) = 0x432b2b00;
-  *(undefined4 *)(param_1 + -0x18) = uVar4;
-  *(undefined4 *)(param_1 + -0x44) = uVar3;
+  unexpectedHandlerSlot = PTR___unexpected_handler_a7b7c18c;
+  *(undefined4 *)(thrownObject + -0x50) = tinfo;
+  *(undefined4 *)(thrownObject + -0x4c) = dest;
+  terminateHandlerSlot = PTR___terminate_handler_a7b7c188;
+  *(undefined4 *)(thrownObject + -0x48) = *(undefined4 *)unexpectedHandlerSlot;
+  exceptionCleanup = DAT_a7b7c06c;
+  terminateHandler = *(undefined4 *)terminateHandlerSlot;
+  *(undefined4 *)(thrownObject + -0x20) = 0x474e5543;
+  *(undefined4 *)(thrownObject + -0x1c) = 0x432b2b00;
+  *(undefined4 *)(thrownObject + -0x18) = exceptionCleanup;
+  *(undefined4 *)(thrownObject + -0x44) = terminateHandler;
   cxa_get_globalsResult = ((int (*)())___cxa_get_globals)();
   *(int *)(cxa_get_globalsResult + 4) = *(int *)(cxa_get_globalsResult + 4) + 1;
-  __Unwind_RaiseException((_Unwind_Exception *)(param_1 + -0x20));
-  ((int (*)())___cxa_begin_catch)((_Unwind_Exception *)(param_1 + -0x20));
+  __Unwind_RaiseException((_Unwind_Exception *)(thrownObject + -0x20));
+  ((int (*)())___cxa_begin_catch)((_Unwind_Exception *)(thrownObject + -0x20));
   ((int (*)())std__terminate)();
   cxa_get_globalsResult2 = (int *)((int (*)())___cxa_get_globals)();
-  iVar5 = *cxa_get_globalsResult2;
-  if (iVar5 != 0) {
-    *(int *)(iVar5 + 0x14) = -*(int *)(iVar5 + 0x14);
-    __Unwind_RaiseException((_Unwind_Exception *)(iVar5 + 0x30));
-    ((int (*)())___cxa_begin_catch)((_Unwind_Exception *)(iVar5 + 0x30));
+  caughtException = *cxa_get_globalsResult2;
+  if (caughtException != 0) {
+    *(int *)(caughtException + 0x14) = -*(int *)(caughtException + 0x14);
+    __Unwind_RaiseException((_Unwind_Exception *)(caughtException + 0x30));
+    ((int (*)())___cxa_begin_catch)((_Unwind_Exception *)(caughtException + 0x30));
   }
-  terminateResult = ((int (*)())std__terminate)();
-  uVar4 = 0;
-  if (terminateResult != 0xff) {
-    uVar7 = terminateResult & 7;
-    uVar4 = 2;
-    if (uVar7 != 2) {
-      if (uVar7 < 3) {
-        if (uVar7 != 0) {
+  encodingR3 = ((int (*)())std__terminate)();
+  valueSize = 0;
+  if (encodingR3 != 0xff) {
+    format = encodingR3 & 7;
+    valueSize = 2;
+    if (format != 2) {
+      if (format < 3) {
+        if (format != 0) {
 LAB_97c19440:
                     
           _abort();
         }
-        uVar4 = 4;
+        valueSize = 4;
       }
       else {
-        uVar4 = 4;
-        if (uVar7 != 3) {
-          if (uVar7 != 4) goto LAB_97c19440;
-          uVar4 = 8;
+        valueSize = 4;
+        if (format != 3) {
+          if (format != 4) goto LAB_97c19440;
+          valueSize = 8;
         }
       }
     }
   }
-  return uVar4;
+  return valueSize;
 }
 
 /* __Z21size_of_encoded_valueh @ 0x97c193e0 (120 bytes) */
@@ -791,7 +794,7 @@ int __Z12read_uleb128PKhPj(p, val)
   uchar *p;
   uint *val;
 {
-  byte bVar1;
+  byte leb128Byte;
   uint shiftForByte;
   uint shift;
   uint result;
@@ -799,12 +802,12 @@ int __Z12read_uleb128PKhPj(p, val)
   shift = 0;
   result = 0;
   do {
-    bVar1 = *p;
+    leb128Byte = *p;
     p = p + 1;
     shiftForByte = shift & 0x3f;
     shift = shift + 7;
-    result = result | (bVar1 & 0x7f) << shiftForByte;
-  } while ((bVar1 & 0x80) != 0);
+    result = result | (leb128Byte & 0x7f) << shiftForByte;
+  } while ((leb128Byte & 0x80) != 0);
   *val = result;
   return p;
 }
@@ -814,7 +817,7 @@ int __Z12read_sleb128PKhPi(p, val)
   uchar *p;
   int *val;
 {
-  byte bVar1;
+  byte leb128Byte;
   uint shiftForByte;
   uint shift;
   uint result;
@@ -822,13 +825,13 @@ int __Z12read_sleb128PKhPi(p, val)
   shift = 0;
   result = 0;
   do {
-    bVar1 = *p;
+    leb128Byte = *p;
     p = p + 1;
     shiftForByte = shift & 0x3f;
     shift = shift + 7;
-    result = result | (bVar1 & 0x7f) << shiftForByte;
-  } while ((bVar1 & 0x80) != 0);
-  if ((shift < 0x20) && ((bVar1 & 0x40) != 0)) {
+    result = result | (leb128Byte & 0x7f) << shiftForByte;
+  } while ((leb128Byte & 0x80) != 0);
+  if ((shift < 0x20) && ((leb128Byte & 0x40) != 0)) {
     result = result | -1 << (shift & 0x3f);
   }
   *val = result;
@@ -1173,48 +1176,49 @@ LAB_97c19bfc:
   goto LAB_97c19c1c;
 }
 
-/* FUN_97c19d00 @ 0x97c19d00 (232 bytes) */
-int FUN_97c19d00(param_1)
-  int param_1;
+/* ___cxa_call_unexpected_97c19d00 @ 0x97c19d00 (232 bytes) */
+int ___cxa_call_unexpected_97c19d00(excObj)
+  int excObj;
 {
+  undefined4 *badException;
   undefined4 __terminateResult;
   undefined4 *cxa_get_globals_fastResult;
-  undefined *puVar1;
-  undefined *puVar2;
+  undefined *badExceptionDtor;
+  undefined *badExceptionTypeinfo;
   undefined4 __unexpectedResult;
-  undefined4 *puVar4;
+  undefined4 *currentException;
   int check_exception_specResult;
   code *r3Out0;
-  unsigned char * p_Var6;
-  int iVar7;
-  uchar *puVar8;
+  unsigned char * terminateHandler;
+  int handlerSwitchValue;
+  uchar *languageSpecificData;
   unsigned char alStack_40 [8];
-  undefined4 uStack_38;
+  undefined4 savedTTypeBase;
   
-  ((int (*)())___cxa_begin_catch)(param_1);
-  uStack_38 = *(undefined4 *)(param_1 + -0xc);
-  puVar8 = *(uchar **)(param_1 + -0x10);
-  iVar7 = *(int *)(param_1 + -0x18);
-  p_Var6 = *(unsigned char **)(param_1 + -0x24);
-  __unexpectedResult = ((int (*)())__cxxabiv1____unexpected)(*(unsigned char **)(param_1 + -0x28));
+  ((int (*)())___cxa_begin_catch)(excObj);
+  savedTTypeBase = *(undefined4 *)(excObj + -0xc);
+  languageSpecificData = *(uchar **)(excObj + -0x10);
+  handlerSwitchValue = *(int *)(excObj + -0x18);
+  terminateHandler = *(unsigned char **)(excObj + -0x24);
+  __unexpectedResult = ((int (*)())__cxxabiv1____unexpected)(*(unsigned char **)(excObj + -0x28));
   ((int (*)())___cxa_begin_catch)(__unexpectedResult);
   cxa_get_globals_fastResult = (undefined4 *)((int (*)())___cxa_get_globals_fast)();
-  puVar4 = (undefined4 *)*cxa_get_globals_fastResult;
-  ((int (*)())parse_lsda_header)((unsigned char *)0x0,puVar8,alStack_40);
-  check_exception_specResult = ((int (*)())check_exception_spec)(alStack_40,(unsigned char *)*puVar4,puVar4 + 0x14,iVar7);
+  currentException = (undefined4 *)*cxa_get_globals_fastResult;
+  ((int (*)())parse_lsda_header)((unsigned char *)0x0,languageSpecificData,alStack_40);
+  check_exception_specResult = ((int (*)())check_exception_spec)(alStack_40,(unsigned char *)*currentException,currentException + 0x14,handlerSwitchValue);
   if (check_exception_specResult != 0) {
     ___cxa_rethrow();
   }
-  puVar2 = PTR_typeinfo_a7b7c180;
-  check_exception_specResult = ((int (*)())check_exception_spec)(alStack_40,(unsigned char *)PTR_typeinfo_a7b7c180,(void *)0x0,iVar7);
+  badExceptionTypeinfo = PTR_typeinfo_a7b7c180;
+  check_exception_specResult = ((int (*)())check_exception_spec)(alStack_40,(unsigned char *)PTR_typeinfo_a7b7c180,(void *)0x0,handlerSwitchValue);
   if (check_exception_specResult != 0) {
-    puVar4 = (undefined4 *)___cxa_allocate_exception(4);
-    puVar1 = PTR___ZNSt13bad_exceptionD1Ev_a7b7c17c;
-    *puVar4 = PTR_vtable_a7b7c184 + 8;
+    badException = (undefined4 *)___cxa_allocate_exception(4);
+    badExceptionDtor = PTR___ZNSt13bad_exceptionD1Ev_a7b7c17c;
+    *badException = PTR_vtable_a7b7c184 + 8;
                     
-    ((int (*)())___cxa_throw)(puVar4,puVar2,puVar1);
+    ((int (*)())___cxa_throw)(badException,badExceptionTypeinfo,badExceptionDtor);
   }
-  __terminateResult = ((int (*)())__cxxabiv1____terminate)(p_Var6);
+  __terminateResult = ((int (*)())__cxxabiv1____terminate)(terminateHandler);
   ((int (*)())___cxa_end_catch)();
   ((int (*)())___cxa_end_catch)();
   __Unwind_Resume(__terminateResult);
@@ -1224,10 +1228,10 @@ int FUN_97c19d00(param_1)
 }
 
 /* __cxxabiv1____terminate @ 0x97c19de8 (28 bytes) */
-int __cxxabiv1____terminate(param_1)
-  unsigned char * param_1;
+int __cxxabiv1____terminate(handler)
+  unsigned char * handler;
 {
-  ((int (*)())param_1)(param_1);
+  ((int (*)())handler)(handler);
                     
   _abort();
 }
@@ -1246,135 +1250,135 @@ int std__terminate()
 }
 
 /* __cxxabiv1____unexpected @ 0x97c19e44 (28 bytes) */
-int __cxxabiv1____unexpected(param_1)
-  unsigned char * param_1;
+int __cxxabiv1____unexpected(handler)
+  unsigned char * handler;
 {
   unsigned char * p_Var1;
-  undefined4 uVar2;
-  int iVar3;
+  undefined4 newTerminateHandler;
+  int oldTerminateHandler;
   
-  ((int (*)())param_1)(param_1);
+  ((int (*)())handler)(handler);
   ((int (*)())std__terminate)();
   p_Var1 = (unsigned char *)__keymgr_get_per_thread_data(3);
   if (p_Var1 != (unsigned char *)0x0) {
     __unexpected_handler = p_Var1;
   }
-  uVar2 = ((int (*)())__cxxabiv1____unexpected)(__unexpected_handler);
-  iVar3 = __keymgr_get_per_thread_data(4);
-  __keymgr_set_per_thread_data(4,uVar2);
-  if (iVar3 == 0) {
-    iVar3 = __terminate_handler;
+  newTerminateHandler = ((int (*)())__cxxabiv1____unexpected)(__unexpected_handler);
+  oldTerminateHandler = __keymgr_get_per_thread_data(4);
+  __keymgr_set_per_thread_data(4,newTerminateHandler);
+  if (oldTerminateHandler == 0) {
+    oldTerminateHandler = __terminate_handler;
   }
-  __terminate_handler = uVar2;
-  return iVar3;
+  __terminate_handler = newTerminateHandler;
+  return oldTerminateHandler;
 }
 
 /* std__unexpected @ 0x97c19e60 (56 bytes) */
 int std__unexpected()
 {
   unsigned char * p_Var1;
-  undefined4 uVar2;
-  int iVar3;
+  undefined4 newTerminateHandler;
+  int oldTerminateHandler;
   
   p_Var1 = (unsigned char *)__keymgr_get_per_thread_data(3);
   if (p_Var1 != (unsigned char *)0x0) {
     __cxxabiv1____unexpected_handler = p_Var1;
   }
-  uVar2 = ((int (*)())__cxxabiv1____unexpected)(__cxxabiv1____unexpected_handler);
-  iVar3 = __keymgr_get_per_thread_data(4);
-  __keymgr_set_per_thread_data(4,uVar2);
-  if (iVar3 == 0) {
-    iVar3 = __cxxabiv1____terminate_handler;
+  newTerminateHandler = ((int (*)())__cxxabiv1____unexpected)(__cxxabiv1____unexpected_handler);
+  oldTerminateHandler = __keymgr_get_per_thread_data(4);
+  __keymgr_set_per_thread_data(4,newTerminateHandler);
+  if (oldTerminateHandler == 0) {
+    oldTerminateHandler = __cxxabiv1____terminate_handler;
   }
-  __cxxabiv1____terminate_handler = uVar2;
-  return iVar3;
+  __cxxabiv1____terminate_handler = newTerminateHandler;
+  return oldTerminateHandler;
 }
 
 /* std__set_terminate @ 0x97c19e98 (72 bytes) */
-int std__set_terminate(param_1)
-  unsigned char * param_1;
+int std__set_terminate(newHandler)
+  unsigned char * newHandler;
 {
-  int iVar1;
+  int oldHandler;
   
-  iVar1 = __keymgr_get_per_thread_data(4);
-  __keymgr_set_per_thread_data(4,param_1);
-  if (iVar1 == 0) {
-    iVar1 = (int)__cxxabiv1____terminate_handler;
+  oldHandler = __keymgr_get_per_thread_data(4);
+  __keymgr_set_per_thread_data(4,newHandler);
+  if (oldHandler == 0) {
+    oldHandler = (int)__cxxabiv1____terminate_handler;
   }
-  __cxxabiv1____terminate_handler = param_1;
-  return iVar1;
+  __cxxabiv1____terminate_handler = newHandler;
+  return oldHandler;
 }
 
 /* std__set_unexpected @ 0x97c19f0c (72 bytes) */
-int std__set_unexpected(param_1)
-  unsigned char * param_1;
+int std__set_unexpected(newHandler)
+  unsigned char * newHandler;
 {
-  int iVar1;
+  int oldHandler;
   
-  iVar1 = __keymgr_get_per_thread_data(3);
-  __keymgr_set_per_thread_data(3,param_1);
-  if (iVar1 == 0) {
-    iVar1 = (int)__cxxabiv1____unexpected_handler;
+  oldHandler = __keymgr_get_per_thread_data(3);
+  __keymgr_set_per_thread_data(3,newHandler);
+  if (oldHandler == 0) {
+    oldHandler = (int)__cxxabiv1____unexpected_handler;
   }
-  __cxxabiv1____unexpected_handler = param_1;
-  return iVar1;
+  __cxxabiv1____unexpected_handler = newHandler;
+  return oldHandler;
 }
 
 /* ___cxa_begin_catch @ 0x97c19f80 (108 bytes) */
-int ___cxa_begin_catch(param_1)
-  int param_1;
+int ___cxa_begin_catch(exceptionObject)
+  int exceptionObject;
 {
-  int iVar1;
-  int iVar2;
+  int oldCaughtExceptions;
+  int handlerCount;
   int *cxa_get_globalsResult;
   
   cxa_get_globalsResult = (int *)((int (*)())___cxa_get_globals)();
-  iVar2 = *(int *)(param_1 + -0x1c);
-  iVar1 = *cxa_get_globalsResult;
-  if (iVar2 < 0) {
-    iVar2 = -iVar2;
+  handlerCount = *(int *)(exceptionObject + -0x1c);
+  oldCaughtExceptions = *cxa_get_globalsResult;
+  if (handlerCount < 0) {
+    handlerCount = -handlerCount;
   }
-  *(int *)(param_1 + -0x1c) = iVar2 + 1;
+  *(int *)(exceptionObject + -0x1c) = handlerCount + 1;
   cxa_get_globalsResult[1] = cxa_get_globalsResult[1] + -1;
-  if (param_1 + -0x30 != iVar1) {
-    *(int *)(param_1 + -0x20) = iVar1;
-    *cxa_get_globalsResult = param_1 + -0x30;
+  if (exceptionObject + -0x30 != oldCaughtExceptions) {
+    *(int *)(exceptionObject + -0x20) = oldCaughtExceptions;
+    *cxa_get_globalsResult = exceptionObject + -0x30;
   }
-  return *(undefined4 *)(param_1 + -8);
+  return *(undefined4 *)(exceptionObject + -8);
 }
 
 /* ___cxa_end_catch @ 0x97c19fec (144 bytes) */
 int ___cxa_end_catch()
 {
   int *cxa_get_globals_fastResult;
-  int iVar2;
-  undefined4 r3Out0;
-  int iVar3;
+  int header;
+  undefined4 r3AfterDelete;
+  int handlerCount;
   
   cxa_get_globals_fastResult = (int *)((int (*)())___cxa_get_globals_fast)();
-  iVar2 = *cxa_get_globals_fastResult;
-  iVar3 = *(int *)(iVar2 + 0x14);
-  if (iVar3 < 0) {
-    iVar3 = iVar3 + 1;
-    if (iVar3 == 0) {
+  header = *cxa_get_globals_fastResult;
+  handlerCount = *(int *)(header + 0x14);
+  if (handlerCount < 0) {
+    handlerCount = handlerCount + 1;
+    if (handlerCount == 0) {
       cxa_get_globals_fastResult[1] = cxa_get_globals_fastResult[1] + 1;
-      *cxa_get_globals_fastResult = *(int *)(iVar2 + 0x10);
+      *cxa_get_globals_fastResult = *(int *)(header + 0x10);
     }
   }
   else {
-    iVar3 = iVar3 + -1;
-    if (iVar3 == 0) {
-      *cxa_get_globals_fastResult = *(int *)(iVar2 + 0x10);
-      __Unwind_DeleteException((_Unwind_Exception *)(iVar2 + 0x30));
-      return r3Out0;
+    handlerCount = handlerCount + -1;
+    if (handlerCount == 0) {
+      *cxa_get_globals_fastResult = *(int *)(header + 0x10);
+      __Unwind_DeleteException((_Unwind_Exception *)(header + 0x30));
+      return r3AfterDelete;
     }
-    if (iVar3 < 0) {
+    if (handlerCount < 0) {
                     
       _abort();
     }
   }
-  *(int *)(iVar2 + 0x14) = iVar3;
-  return iVar2;
+  *(int *)(header + 0x14) = handlerCount;
+  return header;
 }
 
 /* __ZSt18uncaught_exceptionv @ 0x97c1a07c (44 bytes) */
@@ -1438,17 +1442,17 @@ LAB_97c1a1b4:
 }
 
 /* ___eprintf @ 0x97c1a1d8 (76 bytes) */
-int ___eprintf(param_1, param_2, param_3, param_4)
-  char *param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+int ___eprintf(format, arg1, arg2, arg3)
+  char *format;
+  undefined4 arg1;
+  undefined4 arg2;
+  undefined4 arg3;
 {
-  undefined *puVar1;
+  undefined *stderrBase;
   
-  puVar1 = PTR_DAT_a7b7c0bc;
-  _fprintf((FILE *)(PTR_DAT_a7b7c0bc + 0xb0),param_1,param_2,param_3,param_4);
-  _fflush(puVar1 + 0xb0);
+  stderrBase = PTR_DAT_a7b7c0bc;
+  _fprintf((FILE *)(PTR_DAT_a7b7c0bc + 0xb0),format,arg1,arg2,arg3);
+  _fflush(stderrBase + 0xb0);
                     
   _abort();
 }
@@ -1570,7 +1574,7 @@ int _read_uleb128_97c1a3ec(p, val)
   byte *p;
   uint *val;
 {
-  byte bVar1;
+  byte leb128Byte;
   uint shiftForByte;
   uint shift;
   uint result;
@@ -1578,12 +1582,12 @@ int _read_uleb128_97c1a3ec(p, val)
   shift = 0;
   result = 0;
   do {
-    bVar1 = *p;
+    leb128Byte = *p;
     p = p + 1;
     shiftForByte = shift & 0x3f;
     shift = shift + 7;
-    result = result | (bVar1 & 0x7f) << shiftForByte;
-  } while ((bVar1 & 0x80) != 0);
+    result = result | (leb128Byte & 0x7f) << shiftForByte;
+  } while ((leb128Byte & 0x80) != 0);
   *val = result;
   return p;
 }
@@ -1593,7 +1597,7 @@ int _read_sleb128_97c1a41c(p, val)
   byte *p;
   uint *val;
 {
-  byte bVar1;
+  byte leb128Byte;
   uint shiftForByte;
   uint shift;
   uint result;
@@ -1601,13 +1605,13 @@ int _read_sleb128_97c1a41c(p, val)
   shift = 0;
   result = 0;
   do {
-    bVar1 = *p;
+    leb128Byte = *p;
     p = p + 1;
     shiftForByte = shift & 0x3f;
     shift = shift + 7;
-    result = result | (bVar1 & 0x7f) << shiftForByte;
-  } while ((bVar1 & 0x80) != 0);
-  if ((shift < 0x20) && ((bVar1 & 0x40) != 0)) {
+    result = result | (leb128Byte & 0x7f) << shiftForByte;
+  } while ((leb128Byte & 0x80) != 0);
+  if ((shift < 0x20) && ((leb128Byte & 0x40) != 0)) {
     result = result | -1 << (shift & 0x3f);
   }
   *val = result;
