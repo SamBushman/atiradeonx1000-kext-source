@@ -189,7 +189,7 @@ local	_PPEmulatorFree	param_1	emulator	INFERRED	dereferenced as the PPEmulator o
 local	_PPStreamFree	param_1	stream	INFERRED	dereferenced as the PPStream object (12 field accesses); every PPStream* function takes it first
 local	_PPEmulatorProgramFree	param_1	emulator	INFERRED	dereferenced as the PPEmulator object (15 field accesses); every PPEmulator* function takes it first
 local	_PPParserParseAliasDeclaration	param_1	parser	INFERRED	dereferenced as the PPParser object (5 field accesses); every PPParser* function takes it first
-local	_PPParserMacroGetReplaceString	param_1	parser	INFERRED	dereferenced as the PPParser object (6 field accesses); every PPParser* function takes it first
+local	_PPParserMacroGetReplaceString	param_1	macro	INFERRED	dereferenced as the PPParser object (6 field accesses); every PPParser* function takes it first
 local	_HashString	cVar1	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar1 != '\0')`
 local	_HashString2	cVar3	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar3 != '\0')`
 local	yy_scan_string	cVar1	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar1 != '\0')`

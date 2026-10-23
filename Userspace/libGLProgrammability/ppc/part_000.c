@@ -1250,8 +1250,7 @@ int _PPParserParseStatement(parser)
   int keywordCompare;
   int longShortMode;
   int optionCompare;
-  int labelStatus;
-  int partLength;
+  int partLengthOrStatus;
   int ppParserExpandMacroResult;
   int ppParserScopeFindMacroResult;
   int ppParserParseOperationResult;
@@ -1271,9 +1270,9 @@ int _PPParserParseStatement(parser)
   undefined1 partBuf [256];
   char suffixedName [20];
   
-  partLength = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
+  partLengthOrStatus = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
   longShortMode = 0;
-  if (partLength == 0) {
+  if (partLengthOrStatus == 0) {
     return 1;
   }
   if ((*(uint *)(parser + 0x48c) & 0x22) != 0) {
@@ -1286,8 +1285,8 @@ int _PPParserParseStatement(parser)
       if (compareResult != 0) goto LAB_97b7db80;
       longShortMode = 2;
     }
-    partLength = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
-    if (partLength == 0) {
+    partLengthOrStatus = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
+    if (partLengthOrStatus == 0) {
       return 1;
     }
   }
@@ -1555,9 +1554,9 @@ LAB_97b7e160:
                           if (profile != 0x36) {
 LAB_97b7e1b4:
                             if (((profile & 0x10) != 0) &&
-                               (labelStatus = _PPParserParseLabel(parser,partBuf,labelStatus), labelStatus != 3))
+                               (partLengthOrStatus = _PPParserParseLabel(parser,partBuf,partLengthOrStatus), partLengthOrStatus != 3))
                             {
-                              return labelStatus;
+                              return partLengthOrStatus;
                             }
                             ppParserScopeFindMacroResult = ((int (*)())_PPParserScopeFindMacro)(*(undefined4 *)(parser + 0x44c),partBuf);
                             if (ppParserScopeFindMacroResult != 0) {
