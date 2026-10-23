@@ -1956,10 +1956,10 @@ int _PPParserScopeFindIdentifier(parser, param_2)
 }
 
 /* _PPParserParseParamBinding @ 0x97b7ebac (5900 bytes) */
-int _PPParserParseParamBinding(parser, param_2, param_3)
+int _PPParserParseParamBinding(parser, isBraceList, bindingCountOut)
   int parser;
-  int param_2;
-  int *param_3;
+  int isBraceList;
+  int *bindingCountOut;
 {
   int arrayResult;
   int part;
@@ -1968,16 +1968,16 @@ int _PPParserParseParamBinding(parser, param_2, param_3)
   int compareResult;
   bool bVar1;
   bool bVar2;
-  uint uVar3;
-  char cVar4;
-  int iVar5;
-  undefined4 uVar6;
+  uint programTypeOrIndex;
+  char savedChar;
+  int parseResultOrBindingClass;
+  undefined4 ppStream;
   int part2;
-  undefined4 *puVar8;
+  undefined4 *constantValues;
   int loopIndex;
-  char local_180 [256];
-  undefined4 local_80;
-  undefined4 local_7c;
+  char partText [256];
+  undefined4 bindingWord;
+  undefined4 bindingOrdinalWord;
   undefined4 local_78;
   undefined4 local_74;
   uint local_70;
@@ -1991,290 +1991,290 @@ int _PPParserParseParamBinding(parser, param_2, param_3)
   undefined4 local_4c;
   undefined4 local_48;
   undefined4 local_44;
-  undefined4 local_40;
-  uint local_3c [4];
+  undefined4 arrayStart;
+  uint arrayEnd [4];
   
-  bVar1 = param_2 == 0;
-  uVar3 = *(uint *)(parser + 0x48c);
+  bVar1 = isBraceList == 0;
+  programTypeOrIndex = *(uint *)(parser + 0x48c);
   loopIndex = 0;
   if (!bVar1) {
-    part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+    part = ((int (*)())_PPParserGetPart)(parser,partText,0);
     if (part == 0) {
       return 0x2d;
     }
-    if (local_180[0] != '{') {
+    if (partText[0] != '{') {
       return 10;
     }
   }
-  bVar2 = ((uVar3 ^ 2) >> 1 & 1) == 0;
+  bVar2 = ((programTypeOrIndex ^ 2) >> 1 & 1) == 0;
   local_6c = 0;
   local_70 = (uint)*(ushort *)(parser + 0x22);
   do {
-    part = ((int (*)())_PPParserGetPart)(parser,local_180,1);
+    part = ((int (*)())_PPParserGetPart)(parser,partText,1);
     if (part == 0) {
       return 0x2d;
     }
     local_74 = 0;
-    local_7c = (uint)*(ushort *)(parser + 0x22);
-    local_80 = 0;
+    bindingOrdinalWord = (uint)*(ushort *)(parser + 0x22);
+    bindingWord = 0;
     local_78 = 0;
-    compareResult = _memcmp(local_180,"program",8);
+    compareResult = _memcmp(partText,"program",8);
     if (compareResult == 0) {
-      part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+      part = ((int (*)())_PPParserGetPart)(parser,partText,0);
       if (part == 0) {
         return 0x2d;
       }
-      if (local_180[0] != '.') {
+      if (partText[0] != '.') {
         return 10;
       }
       if (part != 1) {
         return 10;
       }
-      part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+      part = ((int (*)())_PPParserGetPart)(parser,partText,0);
       if (part == 0) {
         return 0x2d;
       }
-      compareResult = _memcmp(local_180,"env",4);
+      compareResult = _memcmp(partText,"env",4);
       if (compareResult == 0) {
-        local_80 = local_80 & 0xffe0ffff | 0x20000;
+        bindingWord = bindingWord & 0xffe0ffff | 0x20000;
         if (bVar1) {
-          iVar5 = ((int (*)())_PPParserParseArray)(parser,&local_40);
-          local_3c[0] = local_40;
+          parseResultOrBindingClass = ((int (*)())_PPParserParseArray)(parser,&arrayStart);
+          arrayEnd[0] = arrayStart;
         }
         else {
-          iVar5 = _PPParserParseRangeArray(parser,&local_40,local_3c);
+          parseResultOrBindingClass = _PPParserParseRangeArray(parser,&arrayStart,arrayEnd);
         }
-        if (iVar5 != 0) {
-          return iVar5;
+        if (parseResultOrBindingClass != 0) {
+          return parseResultOrBindingClass;
         }
-        uVar3 = local_40;
+        programTypeOrIndex = arrayStart;
         while( true ) {
-          if (*(uint *)(parser + 0x450) <= uVar3) {
+          if (*(uint *)(parser + 0x450) <= programTypeOrIndex) {
             return 0x2e;
           }
-          local_80 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_80) + 0)),(short)uVar3);
-          ((int (*)())_PPStreamAddParamBinding)(*(undefined4 *)(parser + 0x1c),&local_80);
-          if (uVar3 == local_3c[0]) break;
+          bindingWord = CONCAT22((*(unsigned short *)((unsigned char *)&(bindingWord) + 0)),(short)programTypeOrIndex);
+          ((int (*)())_PPStreamAddParamBinding)(*(undefined4 *)(parser + 0x1c),&bindingWord);
+          if (programTypeOrIndex == arrayEnd[0]) break;
           loopIndex = loopIndex + 1;
-          uVar3 = uVar3 + 1;
-          iVar5 = *(int *)(parser + 0x20) + 1;
-          local_7c = CONCAT22((*(unsigned short *)((unsigned char *)&(local_7c) + 0)),(short)iVar5);
-          *(int *)(parser + 0x20) = iVar5;
+          programTypeOrIndex = programTypeOrIndex + 1;
+          parseResultOrBindingClass = *(int *)(parser + 0x20) + 1;
+          bindingOrdinalWord = CONCAT22((*(unsigned short *)((unsigned char *)&(bindingOrdinalWord) + 0)),(short)parseResultOrBindingClass);
+          *(int *)(parser + 0x20) = parseResultOrBindingClass;
         }
       }
       else {
-        compareResult = _memcmp(local_180,"local",6);
+        compareResult = _memcmp(partText,"local",6);
         if (compareResult == 0) {
-          local_80 = local_80 & 0xffe0ffff | 0x10000;
+          bindingWord = bindingWord & 0xffe0ffff | 0x10000;
           if (bVar1) {
-            iVar5 = ((int (*)())_PPParserParseArray)(parser,&local_40);
-            local_3c[0] = local_40;
+            parseResultOrBindingClass = ((int (*)())_PPParserParseArray)(parser,&arrayStart);
+            arrayEnd[0] = arrayStart;
           }
           else {
-            iVar5 = _PPParserParseRangeArray(parser,&local_40,local_3c);
+            parseResultOrBindingClass = _PPParserParseRangeArray(parser,&arrayStart,arrayEnd);
           }
-          if (iVar5 != 0) {
-            return iVar5;
+          if (parseResultOrBindingClass != 0) {
+            return parseResultOrBindingClass;
           }
-          uVar3 = local_40;
+          programTypeOrIndex = arrayStart;
           while( true ) {
-            if (*(uint *)(parser + 0x454) <= uVar3) {
+            if (*(uint *)(parser + 0x454) <= programTypeOrIndex) {
               return 0x2f;
             }
-            local_80 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_80) + 0)),(short)uVar3);
-            ((int (*)())_PPStreamAddParamBinding)(*(undefined4 *)(parser + 0x1c),&local_80);
-            if (uVar3 == local_3c[0]) break;
+            bindingWord = CONCAT22((*(unsigned short *)((unsigned char *)&(bindingWord) + 0)),(short)programTypeOrIndex);
+            ((int (*)())_PPStreamAddParamBinding)(*(undefined4 *)(parser + 0x1c),&bindingWord);
+            if (programTypeOrIndex == arrayEnd[0]) break;
             loopIndex = loopIndex + 1;
-            uVar3 = uVar3 + 1;
-            iVar5 = *(int *)(parser + 0x20) + 1;
-            local_7c = CONCAT22((*(unsigned short *)((unsigned char *)&(local_7c) + 0)),(short)iVar5);
-            *(int *)(parser + 0x20) = iVar5;
+            programTypeOrIndex = programTypeOrIndex + 1;
+            parseResultOrBindingClass = *(int *)(parser + 0x20) + 1;
+            bindingOrdinalWord = CONCAT22((*(unsigned short *)((unsigned char *)&(bindingOrdinalWord) + 0)),(short)parseResultOrBindingClass);
+            *(int *)(parser + 0x20) = parseResultOrBindingClass;
           }
         }
       }
     }
     else {
-      compareResult = _memcmp(local_180,"state",6);
+      compareResult = _memcmp(partText,"state",6);
       if (compareResult == 0) {
-        part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+        part = ((int (*)())_PPParserGetPart)(parser,partText,0);
         if (part == 0) {
           return 0x2d;
         }
-        if (local_180[0] != '.') {
+        if (partText[0] != '.') {
           return 10;
         }
         if (part != 1) {
           return 10;
         }
-        part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+        part = ((int (*)())_PPParserGetPart)(parser,partText,0);
         if (part == 0) {
           return 0x2d;
         }
-        compareResult = _memcmp(local_180,"material",9);
+        compareResult = _memcmp(partText,"material",9);
         if (compareResult == 0) {
-          local_80 = local_80 & 0xffe0fffe | 0x50000;
-          part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+          bindingWord = bindingWord & 0xffe0fffe | 0x50000;
+          part = ((int (*)())_PPParserGetPart)(parser,partText,0);
           if (part == 0) {
             return 0x2d;
           }
-          if (local_180[0] != '.') {
+          if (partText[0] != '.') {
             return 10;
           }
           if (part != 1) {
             return 10;
           }
-          part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+          part = ((int (*)())_PPParserGetPart)(parser,partText,0);
           if (part == 0) {
             return 0x2d;
           }
-          compareResult = _memcmp(local_180,"front",6);
+          compareResult = _memcmp(partText,"front",6);
           if (compareResult == 0) {
 LAB_97b7ef9c:
-            part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+            part = ((int (*)())_PPParserGetPart)(parser,partText,0);
             if (part == 0) {
               return 0x2d;
             }
-            if ((local_180[0] != '.') || (part != 1)) {
+            if ((partText[0] != '.') || (part != 1)) {
               return 10;
             }
-            part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+            part = ((int (*)())_PPParserGetPart)(parser,partText,0);
             if (part == 0) {
               return 0x2d;
             }
           }
           else {
-            compareResult = _memcmp(local_180,"back",5);
+            compareResult = _memcmp(partText,"back",5);
             if (compareResult == 0) {
-              local_80 = local_80 | 1;
+              bindingWord = bindingWord | 1;
               goto LAB_97b7ef9c;
             }
           }
-          compareResult = _memcmp(local_180,"ambient",8);
+          compareResult = _memcmp(partText,"ambient",8);
           if (compareResult == 0) {
-            local_80 = local_80 & 0xfffffff1;
+            bindingWord = bindingWord & 0xfffffff1;
           }
           else {
-            compareResult = _memcmp(local_180,"diffuse",8);
+            compareResult = _memcmp(partText,"diffuse",8);
             if (compareResult == 0) {
-              iVar5 = 1;
+              parseResultOrBindingClass = 1;
 LAB_97b7f0a8:
-              local_80 = iVar5 << 1 | local_80 & 0xfffffff1;
+              bindingWord = parseResultOrBindingClass << 1 | bindingWord & 0xfffffff1;
             }
             else {
-              compareResult = _memcmp(local_180,"specular",9);
+              compareResult = _memcmp(partText,"specular",9);
               if (compareResult == 0) {
-                local_80 = local_80 & 0xfffffff1 | 4;
+                bindingWord = bindingWord & 0xfffffff1 | 4;
               }
               else {
-                compareResult = _memcmp(local_180,"emission",9);
+                compareResult = _memcmp(partText,"emission",9);
                 if (compareResult != 0) {
-                  compareResult = _memcmp(local_180,"shininess",10);
+                  compareResult = _memcmp(partText,"shininess",10);
                   if (compareResult != 0) {
                     return 10;
                   }
-                  iVar5 = 4;
+                  parseResultOrBindingClass = 4;
                   goto LAB_97b7f0a8;
                 }
-                local_80 = local_80 & 0xfffffff1 | 6;
+                bindingWord = bindingWord & 0xfffffff1 | 6;
               }
             }
           }
         }
         else {
-          compareResult = _memcmp(local_180,"normalscale",0xc);
+          compareResult = _memcmp(partText,"normalscale",0xc);
           if (compareResult == 0) {
-            uVar6 = *(undefined4 *)(parser + 0x1c);
-            iVar5 = 0x12;
+            ppStream = *(undefined4 *)(parser + 0x1c);
+            parseResultOrBindingClass = 0x12;
 LAB_97b7fbb8:
-            local_80 = iVar5 << 0x10 | local_80 & 0xffe0ffff;
+            bindingWord = parseResultOrBindingClass << 0x10 | bindingWord & 0xffe0ffff;
             goto LAB_97b801d0;
           }
-          compareResult = _memcmp(local_180,"light",6);
+          compareResult = _memcmp(partText,"light",6);
           if (compareResult == 0) {
-            local_80 = local_80 & 0xffe0ffff | 0x30000;
-            arrayResult = ((int (*)())_PPParserParseArray)(parser,&local_40);
+            bindingWord = bindingWord & 0xffe0ffff | 0x30000;
+            arrayResult = ((int (*)())_PPParserParseArray)(parser,&arrayStart);
             if (arrayResult != 0) {
               return arrayResult;
             }
-            if (*(uint *)(parser + 0x484) <= local_40) {
+            if (*(uint *)(parser + 0x484) <= arrayStart) {
               return 0x3c;
             }
-            local_80 = CONCAT31((*(unsigned int *)((unsigned char *)&(local_80) + 0)),(undefined1)local_40);
-            part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+            bindingWord = CONCAT31((*(unsigned int *)((unsigned char *)&(bindingWord) + 0)),(undefined1)arrayStart);
+            part = ((int (*)())_PPParserGetPart)(parser,partText,0);
             if (part == 0) {
               return 0x2d;
             }
-            if (local_180[0] != '.') {
+            if (partText[0] != '.') {
               return 10;
             }
             if (part != 1) {
               return 10;
             }
-            part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+            part = ((int (*)())_PPParserGetPart)(parser,partText,0);
             if (part == 0) {
               return 0x2d;
             }
-            compareResult = _memcmp(local_180,"ambient",8);
+            compareResult = _memcmp(partText,"ambient",8);
             if (compareResult == 0) {
-              local_80 = local_80 & 0xfffff0ff;
+              bindingWord = bindingWord & 0xfffff0ff;
             }
             else {
-              compareResult = _memcmp(local_180,"diffuse",8);
+              compareResult = _memcmp(partText,"diffuse",8);
               if (compareResult == 0) {
-                local_80 = local_80 & 0xfffff0ff | 0x100;
+                bindingWord = bindingWord & 0xfffff0ff | 0x100;
               }
               else {
-                compareResult = _memcmp(local_180,"specular",9);
+                compareResult = _memcmp(partText,"specular",9);
                 if (compareResult == 0) {
-                  local_80 = local_80 & 0xfffff0ff | 0x200;
+                  bindingWord = bindingWord & 0xfffff0ff | 0x200;
                 }
                 else {
-                  compareResult = _memcmp(local_180,"position",9);
+                  compareResult = _memcmp(partText,"position",9);
                   if (compareResult == 0) {
-                    local_80 = local_80 & 0xfffff0ff | 0x300;
+                    bindingWord = bindingWord & 0xfffff0ff | 0x300;
                   }
                   else {
-                    compareResult = _memcmp(local_180,"attenuation",0xc);
+                    compareResult = _memcmp(partText,"attenuation",0xc);
                     if (compareResult == 0) {
-                      local_80 = local_80 & 0xfffff0ff | 0x500;
+                      bindingWord = bindingWord & 0xfffff0ff | 0x500;
                     }
                     else {
-                      compareResult = _memcmp(local_180,"spot",5);
+                      compareResult = _memcmp(partText,"spot",5);
                       if (compareResult == 0) {
-                        part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                        part = ((int (*)())_PPParserGetPart)(parser,partText,0);
                         if (part == 0) {
                           return 0x2d;
                         }
-                        if (local_180[0] != '.') {
+                        if (partText[0] != '.') {
                           return 10;
                         }
                         if (part != 1) {
                           return 10;
                         }
-                        part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                        part = ((int (*)())_PPParserGetPart)(parser,partText,0);
                         if (part == 0) {
                           return 0x2d;
                         }
-                        compareResult = _memcmp(local_180,"direction",10);
+                        compareResult = _memcmp(partText,"direction",10);
                         if (compareResult != 0) {
                           return 10;
                         }
-                        iVar5 = 4;
+                        parseResultOrBindingClass = 4;
                       }
                       else {
-                        compareResult = _memcmp(local_180,"half",5);
+                        compareResult = _memcmp(partText,"half",5);
                         if (compareResult == 0) {
-                          iVar5 = 6;
+                          parseResultOrBindingClass = 6;
                         }
                         else {
-                          compareResult = _memcmp(local_180,"spotcutoff",0xb);
+                          compareResult = _memcmp(partText,"spotcutoff",0xb);
                           if (compareResult != 0) {
                             return 10;
                           }
-                          iVar5 = 7;
+                          parseResultOrBindingClass = 7;
                         }
                       }
-                      local_80 = iVar5 << 8 | local_80 & 0xfffff0ff;
+                      bindingWord = parseResultOrBindingClass << 8 | bindingWord & 0xfffff0ff;
                     }
                   }
                 }
@@ -2282,425 +2282,425 @@ LAB_97b7fbb8:
             }
           }
           else {
-            compareResult = _memcmp(local_180,"lightmodel",0xb);
+            compareResult = _memcmp(partText,"lightmodel",0xb);
             if (compareResult == 0) {
-              part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+              part = ((int (*)())_PPParserGetPart)(parser,partText,0);
               if (part == 0) {
                 return 0x2d;
               }
-              if (local_180[0] != '.') {
+              if (partText[0] != '.') {
                 return 10;
               }
               if (part != 1) {
                 return 10;
               }
-              part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+              part = ((int (*)())_PPParserGetPart)(parser,partText,0);
               if (part == 0) {
                 return 0x2d;
               }
-              compareResult = _memcmp(local_180,"ambient",8);
+              compareResult = _memcmp(partText,"ambient",8);
               if (compareResult != 0) {
-                compareResult = _memcmp(local_180,"front",6);
+                compareResult = _memcmp(partText,"front",6);
                 if (compareResult == 0) {
-                  local_80 = local_80 & 0xfffffffe;
+                  bindingWord = bindingWord & 0xfffffffe;
 LAB_97b7f420:
-                  part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                  part = ((int (*)())_PPParserGetPart)(parser,partText,0);
                   if (part == 0) {
                     return 0x2d;
                   }
-                  if (local_180[0] != '.') {
+                  if (partText[0] != '.') {
                     return 10;
                   }
                   if (part != 1) {
                     return 10;
                   }
-                  part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                  part = ((int (*)())_PPParserGetPart)(parser,partText,0);
                   if (part == 0) {
                     return 0x2d;
                   }
                 }
                 else {
-                  compareResult = _memcmp(local_180,"back",5);
+                  compareResult = _memcmp(partText,"back",5);
                   if (compareResult == 0) {
-                    local_80 = local_80 | 1;
+                    bindingWord = bindingWord | 1;
                     goto LAB_97b7f420;
                   }
                 }
-                compareResult = _memcmp(local_180,"scenecolor",0xb);
+                compareResult = _memcmp(partText,"scenecolor",0xb);
                 if (compareResult != 0) {
                   return 10;
                 }
-                local_80 = local_80 & 0xffe0fff1 | 0x5000a;
+                bindingWord = bindingWord & 0xffe0fff1 | 0x5000a;
                 goto LAB_97b7fa44;
               }
-              iVar5 = 6;
+              parseResultOrBindingClass = 6;
               goto LAB_97b7fa3c;
             }
-            compareResult = _memcmp(local_180,"lightprod",10);
+            compareResult = _memcmp(partText,"lightprod",10);
             if (compareResult == 0) {
-              local_80 = local_80 & 0xffe0feff | 0x40000;
-              arrayResult = ((int (*)())_PPParserParseArray)(parser,&local_40);
+              bindingWord = bindingWord & 0xffe0feff | 0x40000;
+              arrayResult = ((int (*)())_PPParserParseArray)(parser,&arrayStart);
               if (arrayResult != 0) {
                 return arrayResult;
               }
-              local_80 = CONCAT31((*(unsigned int *)((unsigned char *)&(local_80) + 0)),(undefined1)local_40);
-              part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+              bindingWord = CONCAT31((*(unsigned int *)((unsigned char *)&(bindingWord) + 0)),(undefined1)arrayStart);
+              part = ((int (*)())_PPParserGetPart)(parser,partText,0);
               if (part == 0) {
                 return 0x2d;
               }
-              if (local_180[0] != '.') {
+              if (partText[0] != '.') {
                 return 10;
               }
               if (part != 1) {
                 return 10;
               }
-              part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+              part = ((int (*)())_PPParserGetPart)(parser,partText,0);
               if (part == 0) {
                 return 0x2d;
               }
-              compareResult = _memcmp(local_180,"front",6);
+              compareResult = _memcmp(partText,"front",6);
               if (compareResult == 0) {
 LAB_97b7f59c:
-                part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                part = ((int (*)())_PPParserGetPart)(parser,partText,0);
                 if (part == 0) {
                   return 0x2d;
                 }
-                if (local_180[0] != '.') {
+                if (partText[0] != '.') {
                   return 10;
                 }
                 if (part != 1) {
                   return 10;
                 }
-                part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                part = ((int (*)())_PPParserGetPart)(parser,partText,0);
                 if (part == 0) {
                   return 0x2d;
                 }
               }
               else {
-                compareResult = _memcmp(local_180,"back",5);
+                compareResult = _memcmp(partText,"back",5);
                 if (compareResult == 0) {
-                  local_80 = local_80 | 0x100;
+                  bindingWord = bindingWord | 0x100;
                   goto LAB_97b7f59c;
                 }
               }
-              compareResult = _memcmp(local_180,"ambient",8);
+              compareResult = _memcmp(partText,"ambient",8);
               if (compareResult == 0) {
-                local_80 = local_80 & 0xfffff9ff;
+                bindingWord = bindingWord & 0xfffff9ff;
               }
               else {
-                compareResult = _memcmp(local_180,"diffuse",8);
+                compareResult = _memcmp(partText,"diffuse",8);
                 if (compareResult == 0) {
-                  local_80 = local_80 & 0xfffff9ff | 0x200;
+                  bindingWord = bindingWord & 0xfffff9ff | 0x200;
                 }
                 else {
-                  compareResult = _memcmp(local_180,"specular",9);
+                  compareResult = _memcmp(partText,"specular",9);
                   if (compareResult != 0) {
                     return 10;
                   }
-                  local_80 = local_80 & 0xfffff9ff | 0x400;
+                  bindingWord = bindingWord & 0xfffff9ff | 0x400;
                 }
               }
               goto LAB_97b7fa44;
             }
             if (bVar2) {
-              compareResult = _memcmp(local_180,"texenv",7);
+              compareResult = _memcmp(partText,"texenv",7);
               if (compareResult != 0) goto LAB_97b7f980;
-              local_80 = local_80 & 0xffe0ffe0 | 0x90000;
-              part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+              bindingWord = bindingWord & 0xffe0ffe0 | 0x90000;
+              part = ((int (*)())_PPParserGetPart)(parser,partText,0);
               if (part == 0) {
                 return 0x2d;
               }
-              if (local_180[0] == '[') {
+              if (partText[0] == '[') {
                 ((int (*)())_PPParserReturnPart)(parser);
-                arrayResult = ((int (*)())_PPParserParseArray)(parser,&local_40);
+                arrayResult = ((int (*)())_PPParserParseArray)(parser,&arrayStart);
                 if (arrayResult != 0) {
                   return arrayResult;
                 }
-                local_80 = local_40 & 0x1f | local_80 & 0xffffffe0;
-                part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                bindingWord = arrayStart & 0x1f | bindingWord & 0xffffffe0;
+                part = ((int (*)())_PPParserGetPart)(parser,partText,0);
                 if (part == 0) {
                   return 0x2d;
                 }
               }
-              if (local_180[0] != '.') {
+              if (partText[0] != '.') {
                 return 10;
               }
               if (part != 1) {
                 return 10;
               }
-              part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+              part = ((int (*)())_PPParserGetPart)(parser,partText,0);
               if (part == 0) {
                 return 0x2d;
               }
-              compareResult = _memcmp(local_180,"color",6);
+              compareResult = _memcmp(partText,"color",6);
 LAB_97b7fae0:
               if (compareResult != 0) {
                 return 10;
               }
             }
             else {
-              compareResult = _memcmp(local_180,"texgen",7);
+              compareResult = _memcmp(partText,"texgen",7);
               if (compareResult == 0) {
-                part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                part = ((int (*)())_PPParserGetPart)(parser,partText,0);
                 if (part == 0) {
                   return 0x2d;
                 }
-                if (local_180[0] == '[') {
+                if (partText[0] == '[') {
                   ((int (*)())_PPParserReturnPart)(parser);
-                  arrayResult = ((int (*)())_PPParserParseArray)(parser,&local_40);
+                  arrayResult = ((int (*)())_PPParserParseArray)(parser,&arrayStart);
                   if (arrayResult != 0) {
                     return arrayResult;
                   }
-                  if (*(uint *)(parser + 0x470) <= local_40) {
+                  if (*(uint *)(parser + 0x470) <= arrayStart) {
                     return 0x38;
                   }
-                  local_80 = local_40 & 0x1f | local_80 & 0xffffffe0;
-                  part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                  bindingWord = arrayStart & 0x1f | bindingWord & 0xffffffe0;
+                  part = ((int (*)())_PPParserGetPart)(parser,partText,0);
                   if (part == 0) {
                     return 0x2d;
                   }
                 }
                 else {
-                  local_80 = local_80 & 0xffffffe0;
+                  bindingWord = bindingWord & 0xffffffe0;
                 }
-                if (local_180[0] != '.') {
+                if (partText[0] != '.') {
                   return 10;
                 }
                 if (part != 1) {
                   return 10;
                 }
-                part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                part = ((int (*)())_PPParserGetPart)(parser,partText,0);
                 if (part == 0) {
                   return 0x2d;
                 }
-                compareResult = _memcmp(local_180,"eye",4);
+                compareResult = _memcmp(partText,"eye",4);
                 if (compareResult == 0) {
-                  iVar5 = 7;
+                  parseResultOrBindingClass = 7;
                 }
                 else {
-                  compareResult = _memcmp(local_180,"object",7);
+                  compareResult = _memcmp(partText,"object",7);
                   if (compareResult != 0) {
                     return 10;
                   }
-                  iVar5 = 8;
+                  parseResultOrBindingClass = 8;
                 }
-                local_80 = iVar5 << 0x10 | local_80 & 0xffe0ffff;
-                part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                bindingWord = parseResultOrBindingClass << 0x10 | bindingWord & 0xffe0ffff;
+                part = ((int (*)())_PPParserGetPart)(parser,partText,0);
                 if (part == 0) {
                   return 0x2d;
                 }
-                if (local_180[0] != '.') {
+                if (partText[0] != '.') {
                   return 10;
                 }
                 if (part != 1) {
                   return 10;
                 }
-                part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                part = ((int (*)())_PPParserGetPart)(parser,partText,0);
                 if (part == 0) {
                   return 0x2d;
                 }
-                compareResult = _memcmp(local_180,"s",2);
+                compareResult = _memcmp(partText,"s",2);
                 if (compareResult == 0) {
-                  local_80 = local_80 & 0xffffff1f;
+                  bindingWord = bindingWord & 0xffffff1f;
                 }
                 else {
-                  compareResult = _memcmp(local_180,"t",2);
+                  compareResult = _memcmp(partText,"t",2);
                   if (compareResult == 0) {
-                    local_80 = local_80 & 0xffffff1f | 0x20;
+                    bindingWord = bindingWord & 0xffffff1f | 0x20;
                   }
                   else {
-                    compareResult = _memcmp(local_180,"r",2);
+                    compareResult = _memcmp(partText,"r",2);
                     if (compareResult == 0) {
-                      local_80 = local_80 & 0xffffff1f | 0x40;
+                      bindingWord = bindingWord & 0xffffff1f | 0x40;
                     }
                     else {
-                      compareResult = _memcmp(local_180,"q",2);
+                      compareResult = _memcmp(partText,"q",2);
                       if (compareResult != 0) {
                         return 0x11;
                       }
-                      local_80 = local_80 & 0xffffff1f | 0x60;
+                      bindingWord = bindingWord & 0xffffff1f | 0x60;
                     }
                   }
                 }
                 goto LAB_97b7fa44;
               }
 LAB_97b7f980:
-              compareResult = _memcmp(local_180,"fog",4);
+              compareResult = _memcmp(partText,"fog",4);
               if (compareResult == 0) {
-                part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                part = ((int (*)())_PPParserGetPart)(parser,partText,0);
                 if (part == 0) {
                   return 0x2d;
                 }
-                if (local_180[0] != '.') {
+                if (partText[0] != '.') {
                   return 10;
                 }
                 if (part != 1) {
                   return 10;
                 }
-                part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                part = ((int (*)())_PPParserGetPart)(parser,partText,0);
                 if (part == 0) {
                   return 0x2d;
                 }
-                compareResult = _memcmp(local_180,"color",6);
+                compareResult = _memcmp(partText,"color",6);
                 if (compareResult == 0) {
-                  iVar5 = 0xb;
+                  parseResultOrBindingClass = 0xb;
                 }
                 else {
-                  compareResult = _memcmp(local_180,"params",7);
+                  compareResult = _memcmp(partText,"params",7);
                   if (compareResult != 0) {
                     return 10;
                   }
-                  iVar5 = 0xc;
+                  parseResultOrBindingClass = 0xc;
                 }
               }
               else {
                 if (bVar2) {
-                  compareResult = _memcmp(local_180,"depth",6);
+                  compareResult = _memcmp(partText,"depth",6);
                   if (compareResult != 0) {
 LAB_97b7fc90:
-                    compareResult = _memcmp(local_180,"matrix",7);
+                    compareResult = _memcmp(partText,"matrix",7);
                     if (compareResult != 0) {
                       return 10;
                     }
-                    local_80 = local_80 & 0xffe03fff | 0x100000;
-                    part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                    bindingWord = bindingWord & 0xffe03fff | 0x100000;
+                    part = ((int (*)())_PPParserGetPart)(parser,partText,0);
                     if (part == 0) {
                       return 0x2d;
                     }
-                    if (local_180[0] != '.') {
+                    if (partText[0] != '.') {
                       return 10;
                     }
                     if (part != 1) {
                       return 10;
                     }
-                    part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                    part = ((int (*)())_PPParserGetPart)(parser,partText,0);
                     if (part == 0) {
                       return 0x2d;
                     }
-                    compareResult = _memcmp(local_180,"modelview",10);
+                    compareResult = _memcmp(partText,"modelview",10);
                     if (compareResult == 0) {
-                      local_80 = local_80 & 0xfffff8ff | 0x300;
-                      part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                      bindingWord = bindingWord & 0xfffff8ff | 0x300;
+                      part = ((int (*)())_PPParserGetPart)(parser,partText,0);
                       if (part == 0) {
                         return 0x2d;
                       }
                       ((int (*)())_PPParserReturnPart)(parser);
-                      if (local_180[0] == '[') {
+                      if (partText[0] == '[') {
 LAB_97b7fe54:
-                        arrayResult = ((int (*)())_PPParserParseArray)(parser,&local_40);
+                        arrayResult = ((int (*)())_PPParserParseArray)(parser,&arrayStart);
                         if (arrayResult != 0) {
                           return arrayResult;
                         }
 LAB_97b7fec8:
-                        local_80 = CONCAT31((*(unsigned int *)((unsigned char *)&(local_80) + 0)),(undefined1)local_40);
+                        bindingWord = CONCAT31((*(unsigned int *)((unsigned char *)&(bindingWord) + 0)),(undefined1)arrayStart);
                       }
                       else {
-                        local_80 = local_80 & 0xffffff00;
+                        bindingWord = bindingWord & 0xffffff00;
                       }
                     }
                     else {
-                      compareResult = _memcmp(local_180,"projection",0xb);
+                      compareResult = _memcmp(partText,"projection",0xb);
                       if (compareResult == 0) {
-                        local_80 = local_80 & 0xfffff8ff | 0x100;
+                        bindingWord = bindingWord & 0xfffff8ff | 0x100;
                       }
                       else {
-                        compareResult = _memcmp(local_180,"mvp",4);
+                        compareResult = _memcmp(partText,"mvp",4);
                         if (compareResult == 0) {
-                          local_80 = local_80 & 0xfffff8ff;
+                          bindingWord = bindingWord & 0xfffff8ff;
                         }
                         else {
-                          compareResult = _memcmp(local_180,"color",6);
+                          compareResult = _memcmp(partText,"color",6);
                           if (compareResult == 0) {
-                            local_80 = local_80 & 0xfffff8ff | 0x200;
+                            bindingWord = bindingWord & 0xfffff8ff | 0x200;
                           }
                           else {
-                            compareResult = _memcmp(local_180,"texture",8);
+                            compareResult = _memcmp(partText,"texture",8);
                             if (compareResult != 0) {
-                              compareResult = _memcmp(local_180,"program",8);
+                              compareResult = _memcmp(partText,"program",8);
                               if (compareResult != 0) {
                                 return 10;
                               }
-                              local_80 = local_80 & 0xfffff8ff | 0x500;
-                              arrayResult = ((int (*)())_PPParserParseArray)(parser,&local_40);
+                              bindingWord = bindingWord & 0xfffff8ff | 0x500;
+                              arrayResult = ((int (*)())_PPParserParseArray)(parser,&arrayStart);
                               if (arrayResult != 0) {
                                 return arrayResult;
                               }
-                              if (*(uint *)(parser + 0x458) <= local_40) {
+                              if (*(uint *)(parser + 0x458) <= arrayStart) {
                                 return 0x30;
                               }
                               goto LAB_97b7fec8;
                             }
-                            local_80 = local_80 & 0xfffff8ff | 0x400;
-                            part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                            bindingWord = bindingWord & 0xfffff8ff | 0x400;
+                            part = ((int (*)())_PPParserGetPart)(parser,partText,0);
                             if (part == 0) {
                               return 0x2d;
                             }
                             ((int (*)())_PPParserReturnPart)(parser);
-                            if (local_180[0] == '[') goto LAB_97b7fe54;
-                            local_80 = local_80 & 0xffffff00;
+                            if (partText[0] == '[') goto LAB_97b7fe54;
+                            bindingWord = bindingWord & 0xffffff00;
                           }
                         }
                       }
                     }
-                    part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-                    cVar4 = local_180[0];
+                    part = ((int (*)())_PPParserGetPart)(parser,partText,0);
+                    savedChar = partText[0];
                     if (part == 0) {
                       return 0x2d;
                     }
-                    local_180[0] = cVar4;
-                    if ((local_180[0] == '.') && (part == 1)) {
-                      part2 = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                    partText[0] = savedChar;
+                    if ((partText[0] == '.') && (part == 1)) {
+                      part2 = ((int (*)())_PPParserGetPart)(parser,partText,0);
                       if (part2 == 0) {
                         return 0x2d;
                       }
-                      compareResult2 = _memcmp(local_180,"inverse",8);
+                      compareResult2 = _memcmp(partText,"inverse",8);
                       if (compareResult2 == 0) {
-                        local_80 = local_80 & 0xffff3fff | 0x8000;
+                        bindingWord = bindingWord & 0xffff3fff | 0x8000;
                       }
                       else {
-                        compareResult2 = _memcmp(local_180,"transpose",10);
+                        compareResult2 = _memcmp(partText,"transpose",10);
                         if (compareResult2 == 0) {
-                          local_80 = local_80 & 0xffff3fff | 0x4000;
+                          bindingWord = bindingWord & 0xffff3fff | 0x4000;
                         }
                         else {
-                          compareResult2 = _memcmp(local_180,"invtrans",9);
+                          compareResult2 = _memcmp(partText,"invtrans",9);
                           if (compareResult2 != 0) {
                             ((int (*)())_PPParserReturnPart)(parser);
-                            local_180[1] = 0;
-                            local_180[0] = cVar4;
-                            cVar4 = '.';
+                            partText[1] = 0;
+                            partText[0] = savedChar;
+                            savedChar = '.';
                             goto LAB_97b7ffd8;
                           }
-                          local_80 = local_80 & 0xffff3fff | 0xc000;
+                          bindingWord = bindingWord & 0xffff3fff | 0xc000;
                         }
                       }
-                      part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
-                      cVar4 = local_180[0];
+                      part = ((int (*)())_PPParserGetPart)(parser,partText,0);
+                      savedChar = partText[0];
                       if (part == 0) {
                         return 0x2d;
                       }
                     }
 LAB_97b7ffd8:
-                    local_40 = 0;
-                    local_3c[0] = 3;
-                    if ((cVar4 == '.') && (part == 1)) {
-                      part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                    arrayStart = 0;
+                    arrayEnd[0] = 3;
+                    if ((savedChar == '.') && (part == 1)) {
+                      part = ((int (*)())_PPParserGetPart)(parser,partText,0);
                       if (part == 0) {
                         return 0x2d;
                       }
-                      compareResult = _memcmp(local_180,"row",4);
+                      compareResult = _memcmp(partText,"row",4);
                       if (compareResult != 0) {
                         return 10;
                       }
                       if (bVar1) {
-                        iVar5 = ((int (*)())_PPParserParseArray)(parser,&local_40);
-                        local_3c[0] = local_40;
+                        parseResultOrBindingClass = ((int (*)())_PPParserParseArray)(parser,&arrayStart);
+                        arrayEnd[0] = arrayStart;
                       }
                       else {
-                        iVar5 = _PPParserParseRangeArray(parser,&local_40,local_3c);
+                        parseResultOrBindingClass = _PPParserParseRangeArray(parser,&arrayStart,arrayEnd);
                       }
-                      if (iVar5 != 0) {
-                        return iVar5;
+                      if (parseResultOrBindingClass != 0) {
+                        return parseResultOrBindingClass;
                       }
                     }
                     else {
@@ -2709,114 +2709,114 @@ LAB_97b7ffd8:
                       }
                       ((int (*)())_PPParserReturnPart)(parser);
                     }
-                    if (3 < (int)local_40) {
+                    if (3 < (int)arrayStart) {
                       return 10;
                     }
-                    if (3 < (int)local_3c[0]) {
+                    if (3 < (int)arrayEnd[0]) {
                       return 10;
                     }
-                    uVar3 = local_40;
+                    programTypeOrIndex = arrayStart;
                     while( true ) {
-                      local_80 = (uVar3 & 3) << 0xc | local_80 & 0xffffcfff;
-                      ((int (*)())_PPStreamAddParamBinding)(*(undefined4 *)(parser + 0x1c),&local_80);
-                      if (uVar3 == local_3c[0]) break;
+                      bindingWord = (programTypeOrIndex & 3) << 0xc | bindingWord & 0xffffcfff;
+                      ((int (*)())_PPStreamAddParamBinding)(*(undefined4 *)(parser + 0x1c),&bindingWord);
+                      if (programTypeOrIndex == arrayEnd[0]) break;
                       loopIndex = loopIndex + 1;
-                      uVar3 = uVar3 + 1;
-                      iVar5 = *(int *)(parser + 0x20) + 1;
-                      local_7c = CONCAT22((*(unsigned short *)((unsigned char *)&(local_7c) + 0)),(short)iVar5);
-                      *(int *)(parser + 0x20) = iVar5;
+                      programTypeOrIndex = programTypeOrIndex + 1;
+                      parseResultOrBindingClass = *(int *)(parser + 0x20) + 1;
+                      bindingOrdinalWord = CONCAT22((*(unsigned short *)((unsigned char *)&(bindingOrdinalWord) + 0)),(short)parseResultOrBindingClass);
+                      *(int *)(parser + 0x20) = parseResultOrBindingClass;
                     }
                     goto LAB_97b801d4;
                   }
-                  local_80 = local_80 & 0xffe0ffff | 0xf0000;
-                  part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                  bindingWord = bindingWord & 0xffe0ffff | 0xf0000;
+                  part = ((int (*)())_PPParserGetPart)(parser,partText,0);
                   if (part == 0) {
                     return 0x2d;
                   }
-                  if (local_180[0] != '.') {
+                  if (partText[0] != '.') {
                     return 10;
                   }
                   if (part != 1) {
                     return 10;
                   }
-                  part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                  part = ((int (*)())_PPParserGetPart)(parser,partText,0);
                   if (part == 0) {
                     return 0x2d;
                   }
-                  compareResult = _memcmp(local_180,"range",6);
+                  compareResult = _memcmp(partText,"range",6);
                   goto LAB_97b7fae0;
                 }
-                compareResult = _memcmp(local_180,"clip",5);
+                compareResult = _memcmp(partText,"clip",5);
                 if (compareResult == 0) {
-                  arrayResult = ((int (*)())_PPParserParseArray)(parser,&local_40);
+                  arrayResult = ((int (*)())_PPParserParseArray)(parser,&arrayStart);
                   if (arrayResult != 0) {
                     return arrayResult;
                   }
-                  if (*(uint *)(parser + 0x480) <= local_40) {
+                  if (*(uint *)(parser + 0x480) <= arrayStart) {
                     return 0x3b;
                   }
-                  local_80 = CONCAT31((*(unsigned int *)((unsigned char *)&(local_80) + 0)),(undefined1)local_40);
-                  part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                  bindingWord = CONCAT31((*(unsigned int *)((unsigned char *)&(bindingWord) + 0)),(undefined1)arrayStart);
+                  part = ((int (*)())_PPParserGetPart)(parser,partText,0);
                   if (part == 0) {
                     return 0x2d;
                   }
-                  if (local_180[0] != '.') {
+                  if (partText[0] != '.') {
                     return 10;
                   }
                   if (part != 1) {
                     return 10;
                   }
-                  part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                  part = ((int (*)())_PPParserGetPart)(parser,partText,0);
                   if (part == 0) {
                     return 0x2d;
                   }
-                  compareResult = _memcmp(local_180,"plane",6);
+                  compareResult = _memcmp(partText,"plane",6);
                   if (compareResult != 0) {
                     return 10;
                   }
-                  uVar6 = *(undefined4 *)(parser + 0x1c);
-                  iVar5 = 10;
+                  ppStream = *(undefined4 *)(parser + 0x1c);
+                  parseResultOrBindingClass = 10;
                   goto LAB_97b7fbb8;
                 }
-                compareResult = _memcmp(local_180,"point",6);
+                compareResult = _memcmp(partText,"point",6);
                 if (compareResult != 0) goto LAB_97b7fc90;
-                part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                part = ((int (*)())_PPParserGetPart)(parser,partText,0);
                 if (part == 0) {
                   return 0x2d;
                 }
-                if (local_180[0] != '.') {
+                if (partText[0] != '.') {
                   return 10;
                 }
                 if (part != 1) {
                   return 10;
                 }
-                part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+                part = ((int (*)())_PPParserGetPart)(parser,partText,0);
                 if (part == 0) {
                   return 0x2d;
                 }
-                compareResult = _memcmp(local_180,"size",5);
+                compareResult = _memcmp(partText,"size",5);
                 if (compareResult == 0) {
-                  iVar5 = 0xd;
+                  parseResultOrBindingClass = 0xd;
                 }
                 else {
-                  compareResult = _memcmp(local_180,"attenuation",0xc);
+                  compareResult = _memcmp(partText,"attenuation",0xc);
                   if (compareResult != 0) {
                     return 10;
                   }
-                  iVar5 = 0xe;
+                  parseResultOrBindingClass = 0xe;
                 }
               }
 LAB_97b7fa3c:
-              local_80 = iVar5 << 0x10 | local_80 & 0xffe0ffff;
+              bindingWord = parseResultOrBindingClass << 0x10 | bindingWord & 0xffe0ffff;
             }
           }
         }
 LAB_97b7fa44:
-        uVar6 = *(undefined4 *)(parser + 0x1c);
+        ppStream = *(undefined4 *)(parser + 0x1c);
       }
       else {
-        if (local_180[0] == '{') {
-          local_80 = 0x110000;
+        if (partText[0] == '{') {
+          bindingWord = 0x110000;
           local_60 = 0;
           local_54 = 0x3f800000;
           local_58 = 0;
@@ -2825,70 +2825,70 @@ LAB_97b7fa44:
           if (scalars != 0) {
             return scalars;
           }
-          part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+          part = ((int (*)())_PPParserGetPart)(parser,partText,0);
           if (part == 0) {
             return 0x2d;
           }
-          if (local_180[0] != '}') {
+          if (partText[0] != '}') {
             return 10;
           }
-          uVar6 = *(undefined4 *)(parser + 0x1c);
-          puVar8 = &local_60;
+          ppStream = *(undefined4 *)(parser + 0x1c);
+          constantValues = &local_60;
         }
         else {
           ((int (*)())_PPParserReturnPart)(parser);
-          puVar8 = &local_50;
-          local_80 = local_80 & 0xffe0ffff | 0x110000;
-          scalars = _PPParserGetScalars(parser,puVar8,1);
+          constantValues = &local_50;
+          bindingWord = bindingWord & 0xffe0ffff | 0x110000;
+          scalars = _PPParserGetScalars(parser,constantValues,1);
           if (scalars != 0) {
             return 10;
           }
-          uVar6 = *(undefined4 *)(parser + 0x1c);
+          ppStream = *(undefined4 *)(parser + 0x1c);
           local_44 = local_50;
           local_4c = local_50;
           local_48 = local_50;
         }
-        _PPStreamAddConstant(uVar6,puVar8);
-        uVar6 = *(undefined4 *)(parser + 0x1c);
-        local_80 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_80) + 0)),(short)*(int *)(parser + 0x2c));
+        _PPStreamAddConstant(ppStream,constantValues);
+        ppStream = *(undefined4 *)(parser + 0x1c);
+        bindingWord = CONCAT22((*(unsigned short *)((unsigned char *)&(bindingWord) + 0)),(short)*(int *)(parser + 0x2c));
         *(int *)(parser + 0x2c) = *(int *)(parser + 0x2c) + 1;
       }
 LAB_97b801d0:
-      ((int (*)())_PPStreamAddParamBinding)(uVar6,&local_80);
+      ((int (*)())_PPStreamAddParamBinding)(ppStream,&bindingWord);
     }
 LAB_97b801d4:
     loopIndex = loopIndex + 1;
     *(int *)(parser + 0x20) = *(int *)(parser + 0x20) + 1;
     if (bVar1) goto LAB_97b80220;
-    part = ((int (*)())_PPParserGetPart)(parser,local_180,0);
+    part = ((int (*)())_PPParserGetPart)(parser,partText,0);
     if (part == 0) {
       return 0x2d;
     }
-  } while (local_180[0] == ',');
-  iVar5 = 10;
-  if (local_180[0] == '}') {
+  } while (partText[0] == ',');
+  parseResultOrBindingClass = 10;
+  if (partText[0] == '}') {
 LAB_97b80220:
-    if (*param_3 == 0) {
-      *param_3 = loopIndex;
+    if (*bindingCountOut == 0) {
+      *bindingCountOut = loopIndex;
     }
-    else if (*param_3 != loopIndex) {
+    else if (*bindingCountOut != loopIndex) {
       return 0x25;
     }
-    uVar3 = *(uint *)(parser + 0x20);
-    iVar5 = 0x34;
-    if (uVar3 <= *(uint *)(parser + 0x464)) {
+    programTypeOrIndex = *(uint *)(parser + 0x20);
+    parseResultOrBindingClass = 0x34;
+    if (programTypeOrIndex <= *(uint *)(parser + 0x464)) {
       local_6c = CONCAT22(local_6c,*(short *)(parser + 0x22) + -1);
       if (1 < loopIndex) {
         _PPStreamAddParamBindingArray(*(undefined4 *)(parser + 0x1c),&local_70);
-        uVar3 = *(uint *)(parser + 0x20);
+        programTypeOrIndex = *(uint *)(parser + 0x20);
       }
-      iVar5 = 0x34;
-      if (uVar3 < 0x101) {
-        iVar5 = 0;
+      parseResultOrBindingClass = 0x34;
+      if (programTypeOrIndex < 0x101) {
+        parseResultOrBindingClass = 0;
       }
     }
   }
-  return iVar5;
+  return parseResultOrBindingClass;
 }
 
 /* _PPParserScopeFindMacro @ 0x97b802b8 (100 bytes) */

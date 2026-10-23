@@ -119,9 +119,9 @@ LAB_97b88e60:
 }
 
 /* _byte_scan @ 0x97b88ee4 (3060 bytes) */
-int _byte_scan(param_1, param_2, param_3, param_4, param_5, param_6)
+int _byte_scan(param_1, token, param_3, param_4, param_5, param_6)
   undefined4 param_1;
-  uint *param_2;
+  uint *token;
   undefined4 param_3;
   undefined4 param_4;
   undefined4 param_5;
@@ -130,9 +130,9 @@ int _byte_scan(param_1, param_2, param_3, param_4, param_5, param_6)
   uint lookUpAddStringResult;
   int result;
   int loopIndex;
-  bool bVar1;
-  char cVar2;
-  int iVar3;
+  bool overflowReported;
+  char digitChar;
+  int charOrTokenCode;
   int a1;
   undefined4 extraout_r4;
   undefined4 extraout_r4_00;
@@ -147,36 +147,36 @@ int _byte_scan(param_1, param_2, param_3, param_4, param_5, param_6)
   undefined4 extraout_r4_08;
   undefined4 extraout_r4_09;
   undefined4 extraout_r4_10;
-  uint *puVar5;
-  uint uVar6;
+  uint *tokenAlias;
+  uint digitValue;
   uint uVar7;
-  undefined1 *puVar8;
+  undefined1 *lexemeCursor;
   int cppContext;
-  int iVar10;
-  uint *puVar11;
-  undefined1 local_2d0 [144];
-  undefined1 local_240 [536];
+  int lexemeLength;
+  uint *digitCursor;
+  undefined1 identifierText [144];
+  undefined1 stringLiteralText [536];
   
   uVar7 = 0;
   cppContext = *(int *)PTR__cpp_a7b7c0a4;
 LAB_97b88f18:
-  *param_2 = 0;
-  iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
-  while (((iVar3 == 0x20 || (iVar3 == 9)) || (iVar3 == 0xd))) {
-    *param_2 = 1;
-    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
+  *token = 0;
+  charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+  while (((charOrTokenCode == 0x20 || (charOrTokenCode == 9)) || (charOrTokenCode == 0xd))) {
+    *token = 1;
+    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
   }
-  if (iVar3 != -1) {
+  if (charOrTokenCode != -1) {
     *(undefined2 *)(cppContext + 0x30) = *(undefined2 *)(*(int *)(cppContext + 0x20) + 0x12);
     *(undefined2 *)(cppContext + 0x32) = *(undefined2 *)(*(int *)(cppContext + 0x20) + 0x16);
   }
-  iVar10 = 0;
-  if (0x7d < iVar3 + 1U) {
+  lexemeLength = 0;
+  if (0x7d < charOrTokenCode + 1U) {
 LAB_97b89cb4:
-    return iVar3;
+    return charOrTokenCode;
   }
-  uVar6 = (iVar3 + 1U) * 4;
-  switch(iVar3) {
+  digitValue = (charOrTokenCode + 1U) * 4;
+  switch(charOrTokenCode) {
   case 0:
   case 1:
   case 2:
@@ -226,212 +226,212 @@ LAB_97b89cb4:
   case 0x7b:
     goto LAB_97b89cb4;
   case 0x21:
-    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
-    if (iVar3 != 0x3d) {
-      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
+    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    if (charOrTokenCode != 0x3d) {
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
       return 0x21;
     }
     return 0x113;
   case 0x22:
-    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
-    bVar1 = iVar3 == 0x22;
+    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    overflowReported = charOrTokenCode == 0x22;
     uVar4 = extraout_r4_08;
-    if (((bVar1) || (iVar3 == 10)) || (iVar3 == -1)) goto LAB_97b89c74;
-    puVar8 = local_240;
+    if (((overflowReported) || (charOrTokenCode == 10)) || (charOrTokenCode == -1)) goto LAB_97b89c74;
+    lexemeCursor = stringLiteralText;
     goto LAB_97b89bf4;
   case 0x25:
-    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
-    if (iVar3 == 0x3d) {
+    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    if (charOrTokenCode == 0x3d) {
       return 0x104;
     }
-    if (iVar3 != 0x3e) {
-      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
+    if (charOrTokenCode != 0x3e) {
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
       return 0x25;
     }
     return 0x120;
   case 0x26:
-    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
-    if (iVar3 == 0x26) {
+    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    if (charOrTokenCode == 0x26) {
       return 0x101;
     }
-    if (iVar3 != 0x3d) {
-      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
+    if (charOrTokenCode != 0x3d) {
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
       return 0x26;
     }
     return 0x11a;
   case 0x2a:
-    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
-    if (iVar3 != 0x3d) {
-      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
+    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    if (charOrTokenCode != 0x3d) {
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
       return 0x2a;
     }
     return 0x107;
   case 0x2b:
-    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
-    if (iVar3 == 0x2b) {
+    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    if (charOrTokenCode == 0x2b) {
       return 0x115;
     }
-    if (iVar3 != 0x3d) {
-      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
+    if (charOrTokenCode != 0x3d) {
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
       return 0x2b;
     }
     return 0x105;
   case 0x2d:
-    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
-    if (iVar3 == 0x2d) {
+    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    if (charOrTokenCode == 0x2d) {
       return 0x112;
     }
-    if (iVar3 != 0x3d) {
-      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
+    if (charOrTokenCode != 0x3d) {
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
       return 0x2d;
     }
     return 0x103;
   case 0x2e:
-    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
-    if (9 < iVar3 - 0x30U) {
-      if (iVar3 != 0x2e) {
-        (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
+    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    if (9 < charOrTokenCode - 0x30U) {
+      if (charOrTokenCode != 0x2e) {
+        (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
         return 0x2e;
       }
       return -1;
     }
-    (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
-    iVar10 = 0;
+    (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
+    lexemeLength = 0;
     a1 = 0x2e;
     goto LAB_97b89a54;
   case 0x2f:
-    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
-    if (iVar3 != 0x2f) break;
+    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    if (charOrTokenCode != 0x2f) break;
     do {
-      iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
-      if (iVar3 == 10) {
+      charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+      if (charOrTokenCode == 10) {
         return 10;
       }
-    } while (iVar3 != -1);
+    } while (charOrTokenCode != -1);
 switchD_97b88fcc_caseD_ffffffff:
     return -1;
   case 0x30:
-    *(char *)(param_2 + 3) = (char)iVar3;
-    iVar10 = 1;
-    a1 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
+    *(char *)(token + 3) = (char)charOrTokenCode;
+    lexemeLength = 1;
+    a1 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
     if ((a1 == 0x78) || (a1 == 0x58)) {
-      *(char *)((int)param_2 + 0xd) = (char)a1;
-      iVar10 = 2;
-      a1 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
-      uVar6 = a1 - 0x30;
-      if ((uVar6 < 10) || ((a1 - 0x41U < 6 || (a1 - 0x61U < 6)))) {
-        puVar8 = (undefined1 *)((int)param_2 + 0xe);
-        bVar1 = false;
+      *(char *)((int)token + 0xd) = (char)a1;
+      lexemeLength = 2;
+      a1 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+      digitValue = a1 - 0x30;
+      if ((digitValue < 10) || ((a1 - 0x41U < 6 || (a1 - 0x61U < 6)))) {
+        lexemeCursor = (undefined1 *)((int)token + 0xe);
+        overflowReported = false;
         uVar7 = 0;
         uVar4 = extraout_r4_00;
         do {
-          *puVar8 = (char)a1;
-          iVar10 = iVar10 + 1;
-          puVar8 = puVar8 + 1;
+          *lexemeCursor = (char)a1;
+          lexemeLength = lexemeLength + 1;
+          lexemeCursor = lexemeCursor + 1;
           if ((int)uVar7 < 0x10000000) {
-            if ((9 < uVar6) && (uVar6 = a1 - 0x37, 5 < a1 - 0x41U)) {
-              uVar6 = a1 - 0x57;
+            if ((9 < digitValue) && (digitValue = a1 - 0x37, 5 < a1 - 0x41U)) {
+              digitValue = a1 - 0x57;
             }
-            uVar7 = uVar7 << 4 | uVar6;
+            uVar7 = uVar7 << 4 | digitValue;
           }
           else {
-            if (!bVar1) {
+            if (!overflowReported) {
               _CPPErrorToInfoLog("ERROR___HEX_CONST_OVERFLOW",uVar4,param_3,param_4,param_5,param_6,
-                                 uVar6);
+                                 digitValue);
             }
-            bVar1 = true;
+            overflowReported = true;
           }
-          a1 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
-          uVar6 = a1 - 0x30;
+          a1 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+          digitValue = a1 - 0x30;
           uVar4 = extraout_r4_01;
-        } while (((uVar6 < 10) || (a1 - 0x41U < 6)) || (a1 - 0x61U < 6));
+        } while (((digitValue < 10) || (a1 - 0x41U < 6)) || (a1 - 0x61U < 6));
       }
       else {
         _CPPErrorToInfoLog("ERROR___ERROR_IN_HEX_CONSTANT",extraout_r4_00,param_3,param_4,param_5,
-                           param_6,uVar6);
+                           param_6,digitValue);
       }
       goto LAB_97b89458;
     }
-    uVar6 = a1 - 0x30;
-    if (uVar6 < 8) {
-      bVar1 = false;
+    digitValue = a1 - 0x30;
+    if (digitValue < 8) {
+      overflowReported = false;
       uVar7 = 0;
-      puVar8 = (undefined1 *)((int)param_2 + 0xd);
+      lexemeCursor = (undefined1 *)((int)token + 0xd);
       uVar4 = extraout_r4;
       do {
-        *puVar8 = (char)a1;
-        iVar10 = iVar10 + 1;
-        puVar8 = puVar8 + 1;
+        *lexemeCursor = (char)a1;
+        lexemeLength = lexemeLength + 1;
+        lexemeCursor = lexemeCursor + 1;
         if ((int)uVar7 < 0x20000000) {
-          uVar7 = uVar7 << 3 | uVar6;
+          uVar7 = uVar7 << 3 | digitValue;
         }
         else {
-          if (!bVar1) {
+          if (!overflowReported) {
             _CPPErrorToInfoLog("ERROR___OCT_CONST_OVERFLOW",uVar4,param_3,param_4,param_5,param_6,
-                               uVar6);
+                               digitValue);
           }
-          bVar1 = true;
+          overflowReported = true;
         }
-        a1 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
-        uVar6 = a1 - 0x30;
+        a1 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+        digitValue = a1 - 0x30;
         uVar4 = extraout_r4_02;
-      } while (uVar6 < 8);
+      } while (digitValue < 8);
       if ((((a1 == 0x2e) || (a1 == 0x65)) || ((a1 == 0x66 || ((a1 == 0x68 || (a1 == 0x78)))))) ||
          (a1 == 0x45)) goto LAB_97b89a54;
 LAB_97b89458:
-      *(undefined1 *)((int)param_2 + iVar10 + 0xc) = 0;
-      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),a1,param_2);
-      *param_2 = uVar7;
+      *(undefined1 *)((int)token + lexemeLength + 0xc) = 0;
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),a1,token);
+      *token = uVar7;
       return 0x10f;
     }
-    iVar3 = 0x30;
-    (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),a1,param_2);
+    charOrTokenCode = 0x30;
+    (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),a1,token);
 switchD_97b88fcc_caseD_31:
-    puVar8 = (undefined1 *)((int)param_2 + iVar10 + 0xc);
-    a1 = iVar3;
+    lexemeCursor = (undefined1 *)((int)token + lexemeLength + 0xc);
+    a1 = charOrTokenCode;
     do {
-      if (iVar10 < 0x80) {
-        if ((0 < iVar10) || (a1 != 0x30)) {
-          *puVar8 = (char)a1;
-          iVar10 = iVar10 + 1;
-          puVar8 = puVar8 + 1;
+      if (lexemeLength < 0x80) {
+        if ((0 < lexemeLength) || (a1 != 0x30)) {
+          *lexemeCursor = (char)a1;
+          lexemeLength = lexemeLength + 1;
+          lexemeCursor = lexemeCursor + 1;
         }
-        a1 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
+        a1 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
       }
     } while (a1 - 0x30U < 10);
     if (((((a1 != 0x2e) && (a1 != 0x65)) && (a1 != 0x66)) && ((a1 != 0x68 && (a1 != 0x78)))) &&
        (a1 != 0x45)) {
-      *(undefined1 *)((int)param_2 + iVar10 + 0xc) = 0;
+      *(undefined1 *)((int)token + lexemeLength + 0xc) = 0;
       uVar7 = 0;
-      bVar1 = false;
-      puVar5 = param_2;
-      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),a1,param_2,param_4);
-      if (0 < iVar10) {
-        puVar11 = param_2 + 3;
+      overflowReported = false;
+      tokenAlias = token;
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),a1,token,param_4);
+      if (0 < lexemeLength) {
+        digitCursor = token + 3;
         uVar4 = extraout_r4_03;
         do {
-          cVar2 = *(char *)puVar11;
-          puVar11 = (uint *)((int)puVar11 + 1);
-          if ((0xccccccc < (int)uVar7) || ((uVar7 == 0xccccccc && (7 < cVar2 + -0x30)))) {
-            if (!bVar1) {
-              _CPPErrorToInfoLog("ERROR___INTEGER_CONST_OVERFLOW",uVar4,puVar5,param_4,param_5,
-                                 param_6,uVar6);
+          digitChar = *(char *)digitCursor;
+          digitCursor = (uint *)((int)digitCursor + 1);
+          if ((0xccccccc < (int)uVar7) || ((uVar7 == 0xccccccc && (7 < digitChar + -0x30)))) {
+            if (!overflowReported) {
+              _CPPErrorToInfoLog("ERROR___INTEGER_CONST_OVERFLOW",uVar4,tokenAlias,param_4,param_5,
+                                 param_6,digitValue);
               uVar4 = extraout_r4_04;
             }
-            bVar1 = true;
+            overflowReported = true;
           }
-          iVar10 = iVar10 + -1;
-          uVar7 = uVar7 * 10 + cVar2 + -0x30;
-        } while (iVar10 != 0);
+          lexemeLength = lexemeLength + -1;
+          uVar7 = uVar7 * 10 + digitChar + -0x30;
+        } while (lexemeLength != 0);
       }
-      *param_2 = uVar7;
+      *token = uVar7;
       if (uVar7 == 0) {
-        *(undefined2 *)(param_2 + 3) = 0x3000;
+        *(undefined2 *)(token + 3) = 0x3000;
       }
       return 0x10f;
     }
 LAB_97b89a54:
-    result = ((int (*)())_lFloatConst)(param_2 + 3,iVar10,a1,param_2);
+    result = ((int (*)())_lFloatConst)(token + 3,lexemeLength,a1,token);
     return result;
   case 0x31:
   case 0x32:
@@ -444,155 +444,155 @@ LAB_97b89a54:
   case 0x39:
     goto switchD_97b88fcc_caseD_31;
   case 0x3a:
-    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
-    if (iVar3 != 0x3e) {
-      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
+    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    if (charOrTokenCode != 0x3e) {
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
       return 0x3a;
     }
     return 0x11e;
   case 0x3c:
-    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
-    if (iVar3 == 0x3c) {
-      iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
-      if (iVar3 != 0x3d) {
-        (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
+    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    if (charOrTokenCode == 0x3c) {
+      charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+      if (charOrTokenCode != 0x3d) {
+        (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
         return 0x111;
       }
       return 0x119;
     }
-    if (iVar3 == 0x3d) {
+    if (charOrTokenCode == 0x3d) {
       return 0x110;
     }
-    if (iVar3 == 0x25) {
+    if (charOrTokenCode == 0x25) {
       return 0x11f;
     }
-    if (iVar3 != 0x3a) {
-      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
+    if (charOrTokenCode != 0x3a) {
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
       return 0x3c;
     }
     return 0x11d;
   case 0x3d:
-    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
-    if (iVar3 != 0x3d) {
-      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
+    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    if (charOrTokenCode != 0x3d) {
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
       return 0x3d;
     }
     return 0x108;
   case 0x3e:
-    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
-    if (iVar3 != 0x3e) {
-      if (iVar3 != 0x3d) {
-        (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
+    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    if (charOrTokenCode != 0x3e) {
+      if (charOrTokenCode != 0x3d) {
+        (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
         return 0x3e;
       }
       return 0x10c;
     }
-    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
-    if (iVar3 != 0x3d) {
-      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
+    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    if (charOrTokenCode != 0x3d) {
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
       return 0x10d;
     }
     return 0x118;
   default:
-    bVar1 = false;
+    overflowReported = false;
     do {
-      if (!bVar1) {
-        local_2d0[iVar10] = (char)iVar3;
-        iVar10 = iVar10 + 1;
-        bVar1 = 0x7f < iVar10;
+      if (!overflowReported) {
+        identifierText[lexemeLength] = (char)charOrTokenCode;
+        lexemeLength = lexemeLength + 1;
+        overflowReported = 0x7f < lexemeLength;
       }
-      iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))
-                        (*(int *)(cppContext + 0x20),param_2,param_3,param_4,param_5,param_6,uVar6);
-    } while (((iVar3 - 0x61U < 0x1a) || (iVar3 - 0x41U < 0x1a)) ||
-            ((iVar3 - 0x30U < 10 || (iVar3 == 0x5f))));
-    if (bVar1) {
-      iVar10 = 0x7f;
+      charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))
+                        (*(int *)(cppContext + 0x20),token,param_3,param_4,param_5,param_6,digitValue);
+    } while (((charOrTokenCode - 0x61U < 0x1a) || (charOrTokenCode - 0x41U < 0x1a)) ||
+            ((charOrTokenCode - 0x30U < 10 || (charOrTokenCode == 0x5f))));
+    if (overflowReported) {
+      lexemeLength = 0x7f;
     }
-    local_2d0[iVar10] = 0;
-    (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
-    lookUpAddStringResult = _LookUpAddString(*(undefined4 *)PTR__atable_a7b7c0ac,local_2d0);
-    param_2[2] = lookUpAddStringResult;
+    identifierText[lexemeLength] = 0;
+    (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
+    lookUpAddStringResult = _LookUpAddString(*(undefined4 *)PTR__atable_a7b7c0ac,identifierText);
+    token[2] = lookUpAddStringResult;
     return 0x10e;
   case 0x5e:
-    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
-    if (iVar3 == 0x5e) {
+    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    if (charOrTokenCode == 0x5e) {
       return 0x109;
     }
-    if (iVar3 != 0x3d) {
-      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
+    if (charOrTokenCode != 0x3d) {
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
       return 0x5e;
     }
     return 0x11c;
   case 0x7c:
-    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
-    if (iVar3 == 0x7c) {
+    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    if (charOrTokenCode == 0x7c) {
       return 0x114;
     }
-    if (iVar3 != 0x3d) {
-      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
+    if (charOrTokenCode != 0x3d) {
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
       return 0x7c;
     }
     return 0x11b;
   case -1:
     goto switchD_97b88fcc_caseD_ffffffff;
   }
-  if (iVar3 != 0x2a) {
-    if (iVar3 != 0x3d) {
-      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),iVar3,param_2);
+  if (charOrTokenCode != 0x2a) {
+    if (charOrTokenCode != 0x3d) {
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
       return 0x2f;
     }
     return 0x106;
   }
   loopIndex = 0;
-  iVar10 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
+  lexemeLength = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
   uVar4 = extraout_r4_05;
   do {
-    while (iVar10 != 0x2a) {
-      if (iVar10 == 10) {
+    while (lexemeLength != 0x2a) {
+      if (lexemeLength == 10) {
         loopIndex = loopIndex + 1;
       }
-      if (iVar10 == -1) {
+      if (lexemeLength == -1) {
 LAB_97b89b60:
-        _CPPErrorToInfoLog("ERROR___EOF_IN_COMMENT",uVar4,param_3,param_4,param_5,param_6,uVar6);
+        _CPPErrorToInfoLog("ERROR___EOF_IN_COMMENT",uVar4,param_3,param_4,param_5,param_6,digitValue);
         return -1;
       }
-      iVar10 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
+      lexemeLength = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
       uVar4 = extraout_r4_06;
     }
-    iVar10 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
+    lexemeLength = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
     uVar4 = extraout_r4_07;
-    if (iVar10 == -1) goto LAB_97b89b60;
-  } while (iVar10 != 0x2f);
+    if (lexemeLength == -1) goto LAB_97b89b60;
+  } while (lexemeLength != 0x2f);
   if (loopIndex != 0) {
     return 10;
   }
   goto LAB_97b88f18;
 LAB_97b89bf4:
-  if (iVar3 == 0x5c) {
-    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
-    bVar1 = iVar3 == 0x22;
+  if (charOrTokenCode == 0x5c) {
+    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    overflowReported = charOrTokenCode == 0x22;
     uVar4 = extraout_r4_09;
-    if ((iVar3 == 10) || (iVar3 == -1)) {
+    if ((charOrTokenCode == 10) || (charOrTokenCode == -1)) {
 LAB_97b89c74:
-      local_240[iVar10] = 0;
-      if (!bVar1) {
-        _CPPErrorToInfoLog("ERROR___CPP_EOL_IN_STRING",uVar4,param_3,param_4,param_5,param_6,uVar6);
+      stringLiteralText[lexemeLength] = 0;
+      if (!overflowReported) {
+        _CPPErrorToInfoLog("ERROR___CPP_EOL_IN_STRING",uVar4,param_3,param_4,param_5,param_6,digitValue);
         return 0x10a;
       }
-      lookUpAddStringResult = _LookUpAddString(*(undefined4 *)PTR__atable_a7b7c0ac,local_240);
-      param_2[2] = lookUpAddStringResult;
+      lookUpAddStringResult = _LookUpAddString(*(undefined4 *)PTR__atable_a7b7c0ac,stringLiteralText);
+      token[2] = lookUpAddStringResult;
       return 0x116;
     }
   }
-  if (iVar10 < 0x200) {
-    *puVar8 = (char)iVar3;
-    iVar10 = iVar10 + 1;
-    puVar8 = puVar8 + 1;
-    iVar3 = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),param_2);
+  if (lexemeLength < 0x200) {
+    *lexemeCursor = (char)charOrTokenCode;
+    lexemeLength = lexemeLength + 1;
+    lexemeCursor = lexemeCursor + 1;
+    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
     uVar4 = extraout_r4_10;
   }
-  bVar1 = iVar3 == 0x22;
-  if (((bVar1) || (iVar3 == 10)) || (iVar3 == -1)) goto LAB_97b89c74;
+  overflowReported = charOrTokenCode == 0x22;
+  if (((overflowReported) || (charOrTokenCode == 10)) || (charOrTokenCode == -1)) goto LAB_97b89c74;
   goto LAB_97b89bf4;
 }
 
