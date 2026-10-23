@@ -7675,7 +7675,7 @@ void FUN_0004a8f0(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
     ((undefined4 (*)())FUN_000afe40)(param_1,0,param_3,param_4,fparam_1);
     return;
   }
-  FUN_000b3630(param_1);
+  atifsCompileCurrentShader(param_1);
   return;
 }
 

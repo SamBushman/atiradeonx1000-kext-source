@@ -369,9 +369,9 @@ a7050	FUN_000a7050	r5	PASS-indirect	a721c bctrl
 a7050	FUN_000a7050	r6	PASS-indirect	a721c bctrl 
 afe40	FUN_000afe40	r7	PASS-indirect	afed8 bctrl 
 afe40	FUN_000afe40	r8	PASS-indirect	afed8 bctrl 
-b3630	FUN_000b3630	r6	PASS-indirect	b3764 bl 0xb15d0
-b3630	FUN_000b3630	r7	PASS-indirect	b3764 bl 0xb15d0
-b3630	FUN_000b3630	r8	PASS-indirect	b3764 bl 0xb15d0
+b3630	atifsCompileCurrentShader	r6	PASS-indirect	b3764 bl 0xb15d0
+b3630	atifsCompileCurrentShader	r7	PASS-indirect	b3764 bl 0xb15d0
+b3630	atifsCompileCurrentShader	r8	PASS-indirect	b3764 bl 0xb15d0
 b5010	FUN_000b5010	r7	PASS-no	b5068 bl 0xb4f50
 b5010	FUN_000b5010	r8	PASS-no	b5068 bl 0xb4f50
 b50a0	FUN_000b50a0	r6	PASS-no	b5144 bl 0xb4f50
