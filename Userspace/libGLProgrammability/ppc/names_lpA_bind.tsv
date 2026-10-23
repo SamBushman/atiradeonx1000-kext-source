@@ -1,0 +1,15 @@
+local	BindingTable__GetString	param_2	kind	INFERRED	BindingTable::GetString(kind): builds the printable dump (malloc'd, doubled with realloc as it grows) of one binding list (kind 0 client attrib requests, 1 attribs, 2 uniforms, 3 = 0..2, 4..6 the same three as hash-bucket tables, 7 = 4..6)
+local	BindingTable__GetString	pcVar2	result	INFERRED	BindingTable::GetString(kind): builds the printable dump (malloc'd, doubled with realloc as it grows) of one binding list (kind 0 client attrib requests, 1 attribs, 2 uniforms, 3 = 0..2, 4..6 the same three as hash-bucket tables, 7 = 4..6)
+local	BindingTable__GetString	uVar9	capacity	INFERRED	BindingTable::GetString(kind): builds the printable dump (malloc'd, doubled with realloc as it grows) of one binding list (kind 0 client attrib requests, 1 attribs, 2 uniforms, 3 = 0..2, 4..6 the same three as hash-bucket tables, 7 = 4..6)
+local	BindingTable__GetString	pcVar6	header	INFERRED	BindingTable::GetString(kind): builds the printable dump (malloc'd, doubled with realloc as it grows) of one binding list (kind 0 client attrib requests, 1 attribs, 2 uniforms, 3 = 0..2, 4..6 the same three as hash-bucket tables, 7 = 4..6)
+local	BindingTable__GetString	bVar1	listEmpty	INFERRED	BindingTable::GetString(kind): builds the printable dump (malloc'd, doubled with realloc as it grows) of one binding list (kind 0 client attrib requests, 1 attribs, 2 uniforms, 3 = 0..2, 4..6 the same three as hash-bucket tables, 7 = 4..6)
+local	BindingTable__GetString	this_00	binding	INFERRED	BindingTable::GetString(kind): builds the printable dump (malloc'd, doubled with realloc as it grows) of one binding list (kind 0 client attrib requests, 1 attribs, 2 uniforms, 3 = 0..2, 4..6 the same three as hash-bucket tables, 7 = 4..6)
+use	BindingTable__GetString	pcVar7	buf	INFERRED	growing output buffer (previous realloc result)		if \(param_2 == 5\)
+use	BindingTable__GetString	pcVar7	kindHeader	INFERRED	header text chosen for the hash-table kinds 4..6	if \(param_2 == 5\)@1	LAB_97bb1cf0:
+use	BindingTable__GetString	pcVar7	buf	INFERRED	growing output buffer (previous realloc result)	LAB_97bb1cf0:	
+use	BindingTable__GetString	iVar8	usedLen	INFERRED	text length accumulated so far (compared with the capacity)		if \(param_2 == 3\)
+use	BindingTable__GetString	iVar8	kindIdx	INFERRED	loop counter over the three kinds 0..2 of kind 3	iVar8 = 0;@2	iVar3 = 4;
+use	BindingTable__GetString	iVar8	kindStr	INFERRED	string returned for hash kind iVar3 (4..6)	iVar8 = \w+\(this,iVar3\)	if \(param_2 == 5\)
+use	BindingTable__GetString	iVar8	usedLen	INFERRED	text length accumulated so far	if \(param_2 == 5\)@1	
+use	BindingTable__GetString	iVar3	kindCounter	INFERRED	counter over the hash kinds 4..6 of kind 7	iVar3 = 4;	if \(param_2 == 5\)
+use	BindingTable__GetString	iVar3	bucketArray	INFERRED	bucket pointer array of the selected binding table kind	if \(param_2 == 5\)@2	

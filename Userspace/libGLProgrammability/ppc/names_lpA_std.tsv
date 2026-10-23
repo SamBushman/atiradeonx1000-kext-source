@@ -148,3 +148,76 @@ local	__ZNSspLEc	param_2	c	INFERRED	operator+=(char c)
 local	std__string__push_back	param_2	c	INFERRED	push_back(char c)
 local	__ZNKSsixEm	param_2	pos	INFERRED	operator[](pos) const
 local	__ZNSsixEm	param_2	pos	INFERRED	operator[](pos)
+local	std__string___M_check	param_2	self	INFERRED	_M_check(pos): throws out_of_range("basic_string::_M_check") if pos > size, result iterator = _M_ibegin()+pos stored through the hidden return pointer
+local	std__string___M_check	param_3	pos	INFERRED	_M_check(pos): throws out_of_range("basic_string::_M_check") if pos > size, result iterator = _M_ibegin()+pos stored through the hidden return pointer
+local	std__string___M_check	local_20	ibeginIter	INFERRED	_M_check(pos): throws out_of_range("basic_string::_M_check") if pos > size, result iterator = _M_ibegin()+pos stored through the hidden return pointer
+local	__ZNKSs7_M_foldEmm	param_4	n	INFERRED	_M_fold(pos,n): n clamped to size-pos, result iterator = _M_ibegin()+pos+n through the hidden return pointer
+local	__ZNKSs7_M_foldEmm	uVar1	remaining	INFERRED	_M_fold(pos,n): n clamped to size-pos, result iterator = _M_ibegin()+pos+n through the hidden return pointer
+local	__ZNKSs7_M_foldEmm	local_20	ibeginIter	INFERRED	_M_fold(pos,n): n clamped to size-pos, result iterator = _M_ibegin()+pos+n through the hidden return pointer
+local	__ZNSs4_Rep10_M_disposeERKSaIcE	in_r4	alloc	INFERRED	_Rep::_M_dispose(alloc): atomic decrement of the refcount word at rep+8; _M_destroy(alloc) when it was <=0
+local	__ZNSs4_Rep10_M_disposeERKSaIcE	paVar2	refCountPtr	INFERRED	_Rep::_M_dispose(alloc): atomic decrement of the refcount word at rep+8; _M_destroy(alloc) when it was <=0
+local	__ZNSs4_Rep10_M_disposeERKSaIcE	iVar3	oldRefCount	INFERRED	_Rep::_M_dispose(alloc): atomic decrement of the refcount word at rep+8; _M_destroy(alloc) when it was <=0
+local	__ZNSs9_M_mutateEmmm	iVar4	curData	INFERRED	libstdc++ 4.0 _M_mutate(pos,len1,len2): tailSrc=data+pos+len1, tailLen=size-pos-len1, newSize=size+len2-len1; reallocates through _Rep::_S_create(newCapacity) when shared or too small; curData is the data pointer whose rep is reset to sharable at the end
+local	__ZNSs9_M_mutateEmmm	iVar6	tailSrc	INFERRED	libstdc++ 4.0 _M_mutate(pos,len1,len2): tailSrc=data+pos+len1, tailLen=size-pos-len1, newSize=size+len2-len1; reallocates through _Rep::_S_create(newCapacity) when shared or too small; curData is the data pointer whose rep is reset to sharable at the end
+local	__ZNSs9_M_mutateEmmm	iVar7	tailLen	INFERRED	libstdc++ 4.0 _M_mutate(pos,len1,len2): tailSrc=data+pos+len1, tailLen=size-pos-len1, newSize=size+len2-len1; reallocates through _Rep::_S_create(newCapacity) when shared or too small; curData is the data pointer whose rep is reset to sharable at the end
+local	__ZNSs9_M_mutateEmmm	uVar8	newSize	INFERRED	libstdc++ 4.0 _M_mutate(pos,len1,len2): tailSrc=data+pos+len1, tailLen=size-pos-len1, newSize=size+len2-len1; reallocates through _Rep::_S_create(newCapacity) when shared or too small; curData is the data pointer whose rep is reset to sharable at the end
+local	__ZNSs9_M_mutateEmmm	uVar5	newCapacity	INFERRED	libstdc++ 4.0 _M_mutate(pos,len1,len2): tailSrc=data+pos+len1, tailLen=size-pos-len1, newSize=size+len2-len1; reallocates through _Rep::_S_create(newCapacity) when shared or too small; curData is the data pointer whose rep is reset to sharable at the end
+local	__ZNSs9_M_mutateEmmm	aaStack_40	allocatorTmp	INFERRED	libstdc++ 4.0 _M_mutate(pos,len1,len2): tailSrc=data+pos+len1, tailLen=size-pos-len1, newSize=size+len2-len1; reallocates through _Rep::_S_create(newCapacity) when shared or too small; curData is the data pointer whose rep is reset to sharable at the end
+local	__ZNSs4_Rep10_M_refcopyEv	piVar2	refCountPtr	INFERRED	_Rep::_M_refcopy: atomic increment of the refcount word at rep+8, returns rep+0xc (the data)
+local	__ZNSsC4ERKSaIcE	pcVar1	emptyData	INFERRED	string(alloc): _S_construct(0,0,alloc) gives the shared empty data
+local	__ZNSsC1ERKSs	piVar2	refCountPtr	INFERRED	string(str) copy ctor: share the rep (refcount++) or _M_clone when leaked (refcount<0)
+local	__ZNSsC1ERKSs	pcVar3	data	INFERRED	string(str) copy ctor: share the rep (refcount++) or _M_clone when leaked (refcount<0)
+local	__ZNSsC1ERKSs	aaStack_50	cloneAlloc	INFERRED	string(str) copy ctor: share the rep (refcount++) or _M_clone when leaked (refcount<0)
+local	__ZNSsC1ERKSs	aaStack_30	hiderAlloc	INFERRED	string(str) copy ctor: share the rep (refcount++) or _M_clone when leaked (refcount<0)
+local	__ZNSsC4ERKSs	piVar2	refCountPtr	INFERRED	string(str) copy ctor: share the rep (refcount++) or _M_clone when leaked (refcount<0)
+local	__ZNSsC4ERKSs	pcVar3	data	INFERRED	string(str) copy ctor: share the rep (refcount++) or _M_clone when leaked (refcount<0)
+local	__ZNSsC4ERKSs	aaStack_50	cloneAlloc	INFERRED	string(str) copy ctor: share the rep (refcount++) or _M_clone when leaked (refcount<0)
+local	__ZNSsC4ERKSs	aaStack_30	hiderAlloc	INFERRED	string(str) copy ctor: share the rep (refcount++) or _M_clone when leaked (refcount<0)
+local	__ZNSsC1ERKSsmm	pcVar1	newData	INFERRED	string(str,pos,n): _M_check(pos) and _M_fold(pos,n) give the source range for _S_construct
+local	__ZNSsC1ERKSsmm	uStack_50	posIter	INFERRED	string(str,pos,n): _M_check(pos) and _M_fold(pos,n) give the source range for _S_construct
+local	__ZNSsC1ERKSsmm	auStack_4c	endIter	INFERRED	string(str,pos,n): _M_check(pos) and _M_fold(pos,n) give the source range for _S_construct
+local	__ZNSsC1ERKSsmm	aaStack_40	ctorAlloc	INFERRED	string(str,pos,n): _M_check(pos) and _M_fold(pos,n) give the source range for _S_construct
+local	__ZNSsC1ERKSsmm	aaStack_30	hiderAlloc	INFERRED	string(str,pos,n): _M_check(pos) and _M_fold(pos,n) give the source range for _S_construct
+local	__ZNSsC4ERKSsmm	pcVar1	newData	INFERRED	string(str,pos,n): _M_check(pos) and _M_fold(pos,n) give the source range for _S_construct
+local	__ZNSsC4ERKSsmm	local_50	posIter	INFERRED	string(str,pos,n): _M_check(pos) and _M_fold(pos,n) give the source range for _S_construct
+local	__ZNSsC4ERKSsmm	local_4c	endIter	INFERRED	string(str,pos,n): _M_check(pos) and _M_fold(pos,n) give the source range for _S_construct
+local	__ZNSsC4ERKSsmm	aaStack_40	ctorAlloc	INFERRED	string(str,pos,n): _M_check(pos) and _M_fold(pos,n) give the source range for _S_construct
+local	__ZNSsC4ERKSsmm	aaStack_30	hiderAlloc	INFERRED	string(str,pos,n): _M_check(pos) and _M_fold(pos,n) give the source range for _S_construct
+local	__ZNSsC4ERKSsmmRKSaIcE	pcVar1	newData	INFERRED	string(str,pos,n,alloc): _M_check(pos) and _M_fold(pos,n) give the source range for _S_construct
+local	__ZNSsC4ERKSsmmRKSaIcE	local_30	posIter	INFERRED	string(str,pos,n,alloc): _M_check(pos) and _M_fold(pos,n) give the source range for _S_construct
+local	__ZNSsC4ERKSsmmRKSaIcE	local_2c	endIter	INFERRED	string(str,pos,n,alloc): _M_check(pos) and _M_fold(pos,n) give the source range for _S_construct
+local	__ZNSsC4EPKcmRKSaIcE	pcVar1	newData	INFERRED	string(s,n,alloc): _S_construct(s,s+n,alloc)
+local	__ZNSsC4EmcRKSaIcE	pcVar1	newData	INFERRED	string(n,c,alloc): _S_construct(n,c,alloc); in_register_00000014 is the upper 24 bits of c
+local	__ZNSsC4EmcRKSaIcE	in_register_00000014	cHigh24	INFERRED	string(n,c,alloc): _S_construct(n,c,alloc); in_register_00000014 is the upper 24 bits of c
+local	__ZNSs6assignEPKcm	psVar2	result	INFERRED	libstdc++ 4.0 assign(s,n): when s aliases the buffer memmove/memcpy in place, else _M_replace_safe(_M_ibegin(),_M_iend(),s,s+n)
+local	__ZNSs6assignEPKcm	local_30	ibeginIter	INFERRED	libstdc++ 4.0 assign(s,n): when s aliases the buffer memmove/memcpy in place, else _M_replace_safe(_M_ibegin(),_M_iend(),s,s+n)
+local	__ZNSs6assignEPKcm	local_2c	iendIter	INFERRED	libstdc++ 4.0 assign(s,n): when s aliases the buffer memmove/memcpy in place, else _M_replace_safe(_M_ibegin(),_M_iend(),s,s+n)
+local	__ZNSs6assignEPKc	psVar3	result	INFERRED	libstdc++ 4.0 assign(s) = assign(s,strlen(s)): in-place when s aliases the buffer, else _M_replace_safe
+local	__ZNSs6assignEPKc	local_30	ibeginIter	INFERRED	libstdc++ 4.0 assign(s) = assign(s,strlen(s)): in-place when s aliases the buffer, else _M_replace_safe
+local	__ZNSs6assignEPKc	local_2c	iendIter	INFERRED	libstdc++ 4.0 assign(s) = assign(s,strlen(s)): in-place when s aliases the buffer, else _M_replace_safe
+local	__ZNSsaSEPKc	psVar3	result	INFERRED	operator=(const char*) = assign(s,strlen(s))
+local	__ZNSsaSEPKc	local_30	ibeginIter	INFERRED	operator=(const char*) = assign(s,strlen(s))
+local	__ZNSsaSEPKc	local_2c	iendIter	INFERRED	operator=(const char*) = assign(s,strlen(s))
+local	__ZNSs6assignEmc	local_30	ibeginIter	INFERRED	assign(n,c): replace(_M_ibegin(),_M_iend(),n,c)
+local	__ZNSs6assignEmc	local_2c	iendIter	INFERRED	assign(n,c): replace(_M_ibegin(),_M_iend(),n,c)
+local	__ZNSsaSEc	param_2	c	INFERRED	operator=(char c): replace(_M_ibegin(),_M_iend(),1,c)
+local	__ZNSsaSEc	local_30	ibeginIter	INFERRED	operator=(char c): replace(_M_ibegin(),_M_iend(),1,c)
+local	__ZNSsaSEc	local_2c	iendIter	INFERRED	operator=(char c): replace(_M_ibegin(),_M_iend(),1,c)
+local	__ZNSs5beginEv	param_2	self	INFERRED	begin(): leaks the rep (_M_leak) and returns the data pointer through the hidden return pointer; second argument is the string
+local	__ZNKSs5beginEv	param_2	self	INFERRED	begin() const: data pointer through the hidden return pointer; second argument is the string
+local	__ZNSs3endEv	param_2	self	INFERRED	end(): _M_leak then data+size through the hidden return pointer; second argument is the string
+local	__ZNKSs3endEv	param_2	self	INFERRED	end() const: data+size through the hidden return pointer; second argument is the string
+use	__ZNSs4_Rep7_M_grabERKSaIcES2_	paVar2	cloned	INFERRED	result of _M_clone for a leaked rep	paVar2 = \(unsigned char \*\)__ZNSs4_Rep8_M_clone	paVar2 = (this|param_1) \+ 8
+use	__ZNSs4_Rep7_M_grabERKSaIcES2_	paVar2	refCountPtr	INFERRED	pointer to the refcount word at rep+8	paVar2 = (this|param_1) \+ 8;	
+use	__ZNSsC2EPKcRKSaIcE	pcVar2	endPtr	INFERRED	end of the C string (str+strlen(str)), or -1 for a null pointer	if \(\w+ == \(char \*\)0x0\)	pcVar2 = \w+_S_construct
+use	__ZNSsC2EPKcRKSaIcE	pcVar2	newData	INFERRED	data pointer returned by _S_construct (left-hand side of the call)	pcVar2 = \w+_S_construct	\(\w+,pcVar2,\w+,0\);
+use	__ZNSsC2EPKcRKSaIcE	pcVar2	endPtr	INFERRED	end pointer argument of _S_construct	\(\w+,pcVar2,\w+,0\);	+1
+use	__ZNSsC2EPKcRKSaIcE	pcVar2	newData	INFERRED	data pointer returned by _S_construct	_Alloc_hiderC4EPcRKSaIcE\)\(this,pcVar2	
+use	__ZNSsC1EPKcRKSaIcE	pcVar2	endPtr	INFERRED	end of the C string (str+strlen(str)), or -1 for a null pointer	if \(\w+ == \(char \*\)0x0\)	pcVar2 = \w+_S_construct
+use	__ZNSsC1EPKcRKSaIcE	pcVar2	newData	INFERRED	data pointer returned by _S_construct (left-hand side of the call)	pcVar2 = \w+_S_construct	\(\w+,pcVar2,\w+,0\);
+use	__ZNSsC1EPKcRKSaIcE	pcVar2	endPtr	INFERRED	end pointer argument of _S_construct	\(\w+,pcVar2,\w+,0\);	+1
+use	__ZNSsC1EPKcRKSaIcE	pcVar2	newData	INFERRED	data pointer returned by _S_construct	_Alloc_hiderC4EPcRKSaIcE\)\(this,pcVar2	
+use	__ZNSsC4EPKcRKSaIcE	pcVar2	endPtr	INFERRED	end of the C string (str+strlen(str)), or -1 for a null pointer	if \(\w+ == \(char \*\)0x0\)	pcVar2 = \w+_S_construct
+use	__ZNSsC4EPKcRKSaIcE	pcVar2	newData	INFERRED	data pointer returned by _S_construct (left-hand side of the call)	pcVar2 = \w+_S_construct	\(\w+,pcVar2,\w+,0\);
+use	__ZNSsC4EPKcRKSaIcE	pcVar2	endPtr	INFERRED	end pointer argument of _S_construct	\(\w+,pcVar2,\w+,0\);	+1
+use	__ZNSsC4EPKcRKSaIcE	pcVar2	newData	INFERRED	data pointer returned by _S_construct	_Alloc_hiderC4EPcRKSaIcE\)\(this,pcVar2	

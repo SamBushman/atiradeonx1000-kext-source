@@ -401,8 +401,8 @@ local	std____throw_underflow_error	param_1	str	INFERRED	argument type char const
 local	__ZNSs7_M_dataEPc	param_2	str	INFERRED	argument type char* in the mangled symbol (__ZNSs7_M_dataEPc); assumes no hidden struct-return argument
 local	__ZNKSs9_M_ibeginEv	param_1	this	INFERRED	member function of std::basic_string<char, std::char_traits<char>, std::allocator<char> > per the mangled symbol; first argument is this (no struct-return assumed)
 local	__ZNKSs7_M_iendEv	param_1	this	INFERRED	member function of std::basic_string<char, std::char_traits<char>, std::allocator<char> > per the mangled symbol; first argument is this (no struct-return assumed)
-local	std__string___M_check	param_1	this	INFERRED	member function of std::basic_string<char, std::char_traits<char>, std::allocator<char> > per the mangled symbol; first argument is this (no struct-return assumed)
-local	__ZNKSs7_M_foldEmm	param_1	this	INFERRED	member function of std::basic_string<char, std::char_traits<char>, std::allocator<char> > per the mangled symbol; first argument is this (no struct-return assumed)
+local	std__string___M_check	param_1	result	INFERRED	member function of std::basic_string<char, std::char_traits<char>, std::allocator<char> > per the mangled symbol; first argument is this (no struct-return assumed)
+local	__ZNKSs7_M_foldEmm	param_1	result	INFERRED	member function of std::basic_string<char, std::char_traits<char>, std::allocator<char> > per the mangled symbol; first argument is this (no struct-return assumed)
 local	__ZNSs13_S_copy_charsEPcS_S_	param_1	this	INFERRED	member function of std::basic_string<char, std::char_traits<char>, std::allocator<char> > per the mangled symbol; first argument is this (no struct-return assumed)
 local	__ZNSs13_S_copy_charsEPcS_S_	param_2	str1	INFERRED	argument type char* in the mangled symbol (__ZNSs13_S_copy_charsEPcS_S_); assumes no hidden struct-return argument
 local	__ZNSs13_S_copy_charsEPcS_S_	param_3	str2	INFERRED	argument type char* in the mangled symbol (__ZNSs13_S_copy_charsEPcS_S_); assumes no hidden struct-return argument
@@ -450,10 +450,10 @@ local	__ZNSsC1EmcRKSaIcE	param_4	allocator	INFERRED	argument type std::allocator
 local	__ZNSsC4EmcRKSaIcE	param_4	allocator	INFERRED	argument type std::allocator<char> const& in the mangled symbol (__ZNSsC4EmcRKSaIcE); assumes no hidden struct-return argument
 local	__ZNSsaSERKSs	param_2	text	INFERRED	argument type std::basic_string<char, std::char_traits<char>, std::allocator<char> > const& in the mangled symbol (__ZNSsaSERKSs); assumes no hidden struct-return argument
 local	__ZNSsaSEPKc	param_2	str	INFERRED	argument type char const* in the mangled symbol (__ZNSsaSEPKc); assumes no hidden struct-return argument
-local	__ZNSs5beginEv	param_1	this	INFERRED	member function of std::basic_string<char, std::char_traits<char>, std::allocator<char> > per the mangled symbol; first argument is this (no struct-return assumed)
-local	__ZNKSs5beginEv	param_1	this	INFERRED	member function of std::basic_string<char, std::char_traits<char>, std::allocator<char> > per the mangled symbol; first argument is this (no struct-return assumed)
-local	__ZNSs3endEv	param_1	this	INFERRED	member function of std::basic_string<char, std::char_traits<char>, std::allocator<char> > per the mangled symbol; first argument is this (no struct-return assumed)
-local	__ZNKSs3endEv	param_1	this	INFERRED	member function of std::basic_string<char, std::char_traits<char>, std::allocator<char> > per the mangled symbol; first argument is this (no struct-return assumed)
+local	__ZNSs5beginEv	param_1	result	INFERRED	member function of std::basic_string<char, std::char_traits<char>, std::allocator<char> > per the mangled symbol; first argument is this (no struct-return assumed)
+local	__ZNKSs5beginEv	param_1	result	INFERRED	member function of std::basic_string<char, std::char_traits<char>, std::allocator<char> > per the mangled symbol; first argument is this (no struct-return assumed)
+local	__ZNSs3endEv	param_1	result	INFERRED	member function of std::basic_string<char, std::char_traits<char>, std::allocator<char> > per the mangled symbol; first argument is this (no struct-return assumed)
+local	__ZNKSs3endEv	param_1	result	INFERRED	member function of std::basic_string<char, std::char_traits<char>, std::allocator<char> > per the mangled symbol; first argument is this (no struct-return assumed)
 local	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S1_S1_	param_4	k1	INFERRED	argument type char* in the mangled symbol (__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S1_S1_); assumes no hidden struct-return argument
 local	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S1_S1_	param_5	k2	INFERRED	argument type char* in the mangled symbol (__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S1_S1_); assumes no hidden struct-return argument
 local	__ZNSs5eraseEmm	param_1	this	INFERRED	member function of std::basic_string<char, std::char_traits<char>, std::allocator<char> > per the mangled symbol; first argument is this (no struct-return assumed)

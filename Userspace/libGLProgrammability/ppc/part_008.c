@@ -1266,75 +1266,75 @@ int BindingTable__GetNumActiveFragmentSamplers(this)
 }
 
 /* BindingTable__GetString @ 0x97bb1a74 (1028 bytes) */
-int BindingTable__GetString(this, param_2)
+int BindingTable__GetString(this, kind)
   unsigned char * this;
-  int param_2;
+  int kind;
 {
   int stringValue;
   int string;
-  bool bVar1;
-  char *pcVar2;
+  bool listEmpty;
+  char *result;
   int iVar3;
   int length;
   int length2;
-  char *pcVar6;
+  char *header;
   char *pcVar7;
   int iVar8;
-  uint uVar9;
+  uint capacity;
   uint loopIndex;
-  unsigned char * this_00;
+  unsigned char * binding;
   
-  this_00 = (unsigned char *)0x0;
-  pcVar2 = (char *)_malloc(0x800);
-  uVar9 = 0x800;
+  binding = (unsigned char *)0x0;
+  result = (char *)_malloc(0x800);
+  capacity = 0x800;
   iVar8 = 0;
-  if (pcVar2 == (char *)0x0) {
+  if (result == (char *)0x0) {
     return (char *)0x0;
   }
-  *pcVar2 = '\0';
-  pcVar7 = pcVar2;
-  if (2 < param_2) {
-    if (param_2 == 3) {
+  *result = '\0';
+  pcVar7 = result;
+  if (2 < kind) {
+    if (kind == 3) {
       iVar8 = 0;
       do {
         string = GetString(this,iVar8);
-        pcVar2 = pcVar7;
+        result = pcVar7;
         if (string != 0) {
           length = _strlen(string);
           length2 = _strlen(pcVar7);
-          pcVar2 = (char *)_realloc(pcVar7,length + length2 + 1);
-          if (pcVar2 == (char *)0x0) goto LAB_97bb1ddc;
-          _sprintf(pcVar2,"%s%s",pcVar2,string);
+          result = (char *)_realloc(pcVar7,length + length2 + 1);
+          if (result == (char *)0x0) goto LAB_97bb1ddc;
+          _sprintf(result,"%s%s",result,string);
           _free(string);
         }
         iVar8 = iVar8 + 1;
-        pcVar7 = pcVar2;
+        pcVar7 = result;
         if (2 < iVar8) {
-          return pcVar2;
+          return result;
         }
       } while( true );
     }
     iVar3 = 4;
-    if (6 < param_2) {
+    if (6 < kind) {
       do {
         iVar8 = GetString(this,iVar3);
-        pcVar2 = pcVar7;
+        result = pcVar7;
         if (iVar8 != 0) {
           length = _strlen(iVar8);
           length2 = _strlen(pcVar7);
-          pcVar2 = (char *)_realloc(pcVar7,length + length2 + 1);
-          if (pcVar2 == (char *)0x0) goto LAB_97bb1ddc;
-          _sprintf(pcVar2,"%s%s",pcVar2,iVar8);
+          result = (char *)_realloc(pcVar7,length + length2 + 1);
+          if (result == (char *)0x0) goto LAB_97bb1ddc;
+          _sprintf(result,"%s%s",result,iVar8);
           _free(iVar8);
         }
         iVar3 = iVar3 + 1;
-        pcVar7 = pcVar2;
+        pcVar7 = result;
         if (6 < iVar3) {
-          return pcVar2;
+          return result;
         }
       } while( true );
     }
-    if (param_2 == 5) {
+    if (kind == 5) {
       if (**(int **)(this + 0x10) == 0) {
         pcVar7 = "\n No Attribute Bindings\n";
       }
@@ -1342,8 +1342,8 @@ int BindingTable__GetString(this, param_2)
         pcVar7 = "\n Attribute Bindings: [Index: (Location) \'Name\'- Type Shader]\n";
       }
     }
-    else if (5 < param_2) {
-      if (param_2 != 6) goto LAB_97bb1cf0;
+    else if (5 < kind) {
+      if (kind != 6) goto LAB_97bb1cf0;
       if (**(int **)(this + 0x18) == 0) {
         pcVar7 = "\n No Uniform Bindings\n";
       }
@@ -1352,7 +1352,7 @@ int BindingTable__GetString(this, param_2)
       }
     }
     else {
-      if (param_2 != 4) goto LAB_97bb1cf0;
+      if (kind != 4) goto LAB_97bb1cf0;
       if (**(int **)(this + 8) == 0) {
         pcVar7 = "\n No Client Attribute Requests\n";
       }
@@ -1360,117 +1360,117 @@ int BindingTable__GetString(this, param_2)
         pcVar7 = "\n Client Attribute Requests: [Index: (Location) \'Name\'- Type Shader]\n";
       }
     }
-    _sprintf(pcVar2,pcVar7);
+    _sprintf(result,pcVar7);
 LAB_97bb1cf0:
     loopIndex = 0;
     if (*(int *)this == 0) {
-      return pcVar2;
+      return result;
     }
     do {
-      if (param_2 == 5) {
+      if (kind == 5) {
         iVar3 = *(int *)(this + 0x10);
 LAB_97bb1d30:
-        this_00 = *(unsigned char **)(loopIndex * 4 + iVar3);
+        binding = *(unsigned char **)(loopIndex * 4 + iVar3);
       }
-      else if (5 < param_2) {
-        if (param_2 == 6) {
+      else if (5 < kind) {
+        if (kind == 6) {
           iVar3 = *(int *)(this + 0x18);
           goto LAB_97bb1d30;
         }
       }
-      else if (param_2 == 4) {
+      else if (kind == 4) {
         iVar3 = *(int *)(this + 8);
         goto LAB_97bb1d30;
       }
-      if (this_00 != (unsigned char *)0x0) {
-        _sprintf(pcVar2,"%s  --- Hash %d ---\n",pcVar2,loopIndex);
-        pcVar7 = pcVar2;
+      if (binding != (unsigned char *)0x0) {
+        _sprintf(result,"%s  --- Hash %d ---\n",result,loopIndex);
+        pcVar7 = result;
         do {
-          stringValue = ((int (*)())Binding__GetString)(this_00);
+          stringValue = ((int (*)())Binding__GetString)(binding);
           if (stringValue != 0) {
             length = _strlen(stringValue);
             iVar8 = iVar8 + length;
             _sprintf(pcVar7,"%s   %s",pcVar7,stringValue);
             _free(stringValue);
           }
-          pcVar2 = pcVar7;
-          if (uVar9 < iVar8 + 0x300U) {
-            uVar9 = uVar9 << 1;
-            pcVar2 = (char *)_realloc(pcVar7,uVar9);
-            if (pcVar2 == (char *)0x0) goto LAB_97bb1ddc;
+          result = pcVar7;
+          if (capacity < iVar8 + 0x300U) {
+            capacity = capacity << 1;
+            result = (char *)_realloc(pcVar7,capacity);
+            if (result == (char *)0x0) goto LAB_97bb1ddc;
           }
-          this_00 = (unsigned char *)((int (*)())Binding__GetNextBindingInHash)(this_00);
-          pcVar7 = pcVar2;
-        } while (this_00 != (unsigned char *)0x0);
+          binding = (unsigned char *)((int (*)())Binding__GetNextBindingInHash)(binding);
+          pcVar7 = result;
+        } while (binding != (unsigned char *)0x0);
       }
       loopIndex = loopIndex + 1;
       if (*(uint *)this <= loopIndex) {
-        return pcVar2;
+        return result;
       }
     } while( true );
   }
-  if (param_2 == 1) {
-    this_00 = *(unsigned char **)(this + 0xc);
-    bVar1 = this_00 == (unsigned char *)0x0;
-    if (bVar1) {
-      pcVar6 = "\n No Attribute Bindings\n";
+  if (kind == 1) {
+    binding = *(unsigned char **)(this + 0xc);
+    listEmpty = binding == (unsigned char *)0x0;
+    if (listEmpty) {
+      header = "\n No Attribute Bindings\n";
     }
     else {
-      pcVar6 = "\n Attribute Bindings: [Index: (Location) \'Name\'- Type Shader]\n";
+      header = "\n Attribute Bindings: [Index: (Location) \'Name\'- Type Shader]\n";
     }
   }
-  else if (param_2 < 2) {
-    bVar1 = true;
-    if (param_2 != 0) goto LAB_97bb1b5c;
-    this_00 = *(unsigned char **)(this + 4);
-    bVar1 = this_00 == (unsigned char *)0x0;
-    if (bVar1) {
-      pcVar6 = "\n No Client Attribute Requests\n";
+  else if (kind < 2) {
+    listEmpty = true;
+    if (kind != 0) goto LAB_97bb1b5c;
+    binding = *(unsigned char **)(this + 4);
+    listEmpty = binding == (unsigned char *)0x0;
+    if (listEmpty) {
+      header = "\n No Client Attribute Requests\n";
     }
     else {
-      pcVar6 = "\n Client Attribute Requests: [Index: (Location) \'Name\'- Type Shader]\n";
+      header = "\n Client Attribute Requests: [Index: (Location) \'Name\'- Type Shader]\n";
     }
   }
   else {
-    if (param_2 != 2) {
-      bVar1 = true;
+    if (kind != 2) {
+      listEmpty = true;
       goto LAB_97bb1b5c;
     }
-    this_00 = *(unsigned char **)(this + 0x14);
-    bVar1 = this_00 == (unsigned char *)0x0;
-    if (bVar1) {
-      pcVar6 = "\n No Uniform Bindings\n";
+    binding = *(unsigned char **)(this + 0x14);
+    listEmpty = binding == (unsigned char *)0x0;
+    if (listEmpty) {
+      header = "\n No Uniform Bindings\n";
     }
     else {
-      pcVar6 = "\n Uniform Bindings: [Index: (Location) \'Name\'- Type Shader]\n";
+      header = "\n Uniform Bindings: [Index: (Location) \'Name\'- Type Shader]\n";
     }
   }
-  _sprintf(pcVar2,pcVar6);
+  _sprintf(result,header);
 LAB_97bb1b5c:
-  if (!bVar1) {
+  if (!listEmpty) {
     do {
-      stringValue = ((int (*)())Binding__GetString)(this_00);
+      stringValue = ((int (*)())Binding__GetString)(binding);
       if (stringValue != 0) {
         length = _strlen(stringValue);
         iVar8 = iVar8 + length;
         _sprintf(pcVar7,"%s  %s",pcVar7,stringValue);
         _free(stringValue);
       }
-      pcVar2 = pcVar7;
-      if (uVar9 < iVar8 + 0x300U) {
-        uVar9 = uVar9 << 1;
-        pcVar2 = (char *)_realloc(pcVar7,uVar9);
-        if (pcVar2 == (char *)0x0) {
+      result = pcVar7;
+      if (capacity < iVar8 + 0x300U) {
+        capacity = capacity << 1;
+        result = (char *)_realloc(pcVar7,capacity);
+        if (result == (char *)0x0) {
 LAB_97bb1ddc:
           _free(pcVar7);
           return (char *)0x0;
         }
       }
-      this_00 = (unsigned char *)((int (*)())Binding__GetNextBinding)(this_00);
-      pcVar7 = pcVar2;
-    } while (this_00 != (unsigned char *)0x0);
+      binding = (unsigned char *)((int (*)())Binding__GetNextBinding)(binding);
+      pcVar7 = result;
+    } while (binding != (unsigned char *)0x0);
   }
-  return pcVar2;
+  return result;
 }
 
 /* ConstructLinker @ 0x97bb1e78 (64 bytes) */
