@@ -4033,12 +4033,12 @@ LAB_97ba0fd8:
 }
 
 /* _ShCompile @ 0x97ba10c8 (1888 bytes) */
-int _ShCompile(param_1, str, param_3, param_4, param_5)
-  int *param_1;
+int _ShCompile(handle, str, numStrings, optLevel, debugOptions)
+  int *handle;
   char **str;
-  int param_3;
-  int param_4;
-  uint param_5;
+  int numStrings;
+  int optLevel;
+  uint debugOptions;
 {
   int *refCountPtr;
   int oldRefCount;
@@ -4049,42 +4049,42 @@ int _ShCompile(param_1, str, param_3, param_4, param_5)
   int iVar3;
   int *piVar4;
   uint uVar5;
-  int *piVar6;
+  int *compiler;
   unsigned char * pTVar7;
   undefined4 *puVar8;
   undefined4 *puVar9;
   void *pvVar10;
   void *pvVar11;
   char *pcVar12;
-  uint uVar13;
-  char *pcVar14;
+  uint success;
+  char *stringRepData;
   uint *this;
   char reservation;
   byte cr0Flags;
-  void *local_180;
-  int *local_17c;
-  int *local_178;
-  undefined4 local_174;
+  void *symbolTableLevelsBegin;
+  int *symbolTableLevelsEnd;
+  int *symbolTableLevelsCapacityEnd;
+  undefined4 symbolTableNextId;
   unsigned char * local_160;
-  undefined4 *local_150 [4];
-  int *local_140;
-  unsigned char * local_13c;
-  void *local_138;
-  int local_134;
-  unsigned char * local_130;
-  int local_12c;
-  undefined4 local_128;
+  undefined4 *newLevelSlot [4];
+  int *parseContextIntermediate;
+  unsigned char * symbolTableLevelsPtr;
+  void *infoSink;
+  int language;
+  unsigned char * treeRoot;
+  int errorFlag;
+  undefined4 numErrors;
   undefined4 local_124;
   undefined4 local_120;
   undefined4 local_11c;
-  unsigned char * local_110;
-  undefined4 *local_10c;
-  int local_108;
+  unsigned char * extensionBehaviorAllocator;
+  undefined4 *extensionBehaviorHeader;
+  int extensionBehaviorCount;
   undefined4 local_100;
   undefined4 local_fc;
-  unsigned char * local_f8;
-  undefined4 *local_f4;
-  int local_f0;
+  unsigned char * stringMapAllocator;
+  undefined4 *stringMapHeader;
+  int stringMapCount;
   undefined4 local_e8;
   int local_e4;
   unsigned char * local_d0;
@@ -4097,48 +4097,48 @@ int _ShCompile(param_1, str, param_3, param_4, param_5)
   undefined4 auStack_70 [4];
   undefined4 auStack_60 [4];
   undefined4 local_50 [4];
-  int local_40;
-  char *local_3c [3];
+  int intermediate;
+  char *preprocessorBuiltinStrings [3];
   
-  local_3c[0] = (char *)GetPreprocessorBuiltinString();
-  if (param_1 == (int *)0x0) {
+  preprocessorBuiltinStrings[0] = (char *)GetPreprocessorBuiltinString();
+  if (handle == (int *)0x0) {
     return 0;
   }
-  piVar6 = (int *)(**(code **)(*param_1 + 8))(param_1);
-  cr0Flags = (piVar6 == (int *)0x0) << 1;
-  if (piVar6 == (int *)0x0) {
+  compiler = (int *)(**(code **)(*handle + 8))(handle);
+  cr0Flags = (compiler == (int *)0x0) << 1;
+  if (compiler == (int *)0x0) {
     return 0;
   }
   _pthread_mutex_lock(&_glsl_allocator_lock);
   pTVar7 = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
   ((int (*)())TPoolAllocator__push)(pTVar7);
-  (**(code **)(*piVar6 + 0x18))(piVar6);
-  this = (uint *)piVar6[1];
-  pcVar14 = (char *)*this;
-  iVar3 = *(int *)(pcVar14 + -0xc);
+  (**(code **)(*compiler + 0x18))(compiler);
+  this = (uint *)compiler[1];
+  stringRepData = (char *)*this;
+  iVar3 = *(int *)(stringRepData + -0xc);
   pcVar12 = (char *)*this;
-  if (((*(int *)(pcVar12 + -4) < 1) && (pcVar12 <= pcVar14)) && (pcVar14 <= pcVar12 + iVar3)) {
+  if (((*(int *)(pcVar12 + -4) < 1) && (pcVar12 <= stringRepData)) && (stringRepData <= pcVar12 + iVar3)) {
     __ZNSs10_M_replaceIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18input_iterator_tag
-              (this,pcVar12,pcVar12 + iVar3,pcVar14,pcVar14,0);
+              (this,pcVar12,pcVar12 + iVar3,stringRepData,stringRepData,0);
   }
   else {
     __ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_
-              (this,pcVar12,pcVar12 + iVar3,pcVar14,pcVar14);
+              (this,pcVar12,pcVar12 + iVar3,stringRepData,stringRepData);
   }
-  pcVar12 = *(char **)(piVar6[1] + 8);
-  __ZNSs7replaceEmmPKcm((void *)(piVar6[1] + 8),0,*(ulong *)(pcVar12 + -0xc),pcVar12,0);
-  if (param_3 == 0) {
+  pcVar12 = *(char **)(compiler[1] + 8);
+  __ZNSs7replaceEmmPKcm((void *)(compiler[1] + 8),0,*(ulong *)(pcVar12 + -0xc),pcVar12,0);
+  if (numStrings == 0) {
     _pthread_mutex_unlock(&_glsl_allocator_lock);
     return 1;
   }
-  local_40 = piVar6[1];
-  puVar8 = (undefined4 *)((int (*)())GetSymbolTable)(piVar6[2]);
-  local_180 = (void *)0x0;
-  local_17c = (int *)0x0;
-  local_178 = (int *)0x0;
+  intermediate = compiler[1];
+  puVar8 = (undefined4 *)((int (*)())GetSymbolTable)(compiler[2]);
+  symbolTableLevelsBegin = (void *)0x0;
+  symbolTableLevelsEnd = (int *)0x0;
+  symbolTableLevelsCapacityEnd = (int *)0x0;
   std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_insert_aux
-            ((unsigned char *)&local_180,0,*puVar8);
-  local_174 = puVar8[3];
+            ((unsigned char *)&symbolTableLevelsBegin,0,*puVar8);
+  symbolTableNextId = puVar8[3];
   pTVar7 = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
   puVar8 = (undefined4 *)((int (*)())TPoolAllocator__allocate)(pTVar7,0x10);
   local_160 = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
@@ -4151,50 +4151,50 @@ int _ShCompile(param_1, str, param_3, param_4, param_5)
   *(undefined4 *)(puVar8[1] + 4) = 0;
   *(undefined4 *)(puVar8[1] + 8) = puVar8[1];
   *(undefined4 *)(puVar8[1] + 0xc) = puVar8[1];
-  local_150[0] = puVar8;
-  if (local_17c == local_178) {
+  newLevelSlot[0] = puVar8;
+  if (symbolTableLevelsEnd == symbolTableLevelsCapacityEnd) {
     std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_insert_aux
-              ((unsigned char *)&local_180,local_17c
-               ,local_150);
+              ((unsigned char *)&symbolTableLevelsBegin,symbolTableLevelsEnd
+               ,newLevelSlot);
   }
   else {
-    if (local_17c != (int *)0x0) {
-      *local_17c = (int)puVar8;
+    if (symbolTableLevelsEnd != (int *)0x0) {
+      *symbolTableLevelsEnd = (int)puVar8;
     }
-    local_17c = local_17c + 1;
+    symbolTableLevelsEnd = symbolTableLevelsEnd + 1;
   }
-  local_138 = (void *)piVar6[1];
-  local_134 = piVar6[2];
-  local_140 = &local_40;
-  local_130 = (unsigned char *)0x0;
-  local_12c = 0;
-  local_128 = 0;
+  infoSink = (void *)compiler[1];
+  language = compiler[2];
+  parseContextIntermediate = &intermediate;
+  treeRoot = (unsigned char *)0x0;
+  errorFlag = 0;
+  numErrors = 0;
   local_124 = 0;
   local_120 = 0;
   local_11c = 0;
-  local_13c = (unsigned char *)&local_180;
-  local_110 = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
-  local_10c = (undefined4 *)0x0;
-  local_d0 = local_110;
-  local_10c = (undefined4 *)((int (*)())TPoolAllocator__allocate)(local_110,0x1c);
-  local_108 = 0;
-  *local_10c = 0;
-  local_10c[1] = 0;
-  local_10c[2] = local_10c;
-  local_10c[3] = local_10c;
+  symbolTableLevelsPtr = (unsigned char *)&symbolTableLevelsBegin;
+  extensionBehaviorAllocator = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
+  extensionBehaviorHeader = (undefined4 *)0x0;
+  local_d0 = extensionBehaviorAllocator;
+  extensionBehaviorHeader = (undefined4 *)((int (*)())TPoolAllocator__allocate)(extensionBehaviorAllocator,0x1c);
+  extensionBehaviorCount = 0;
+  *extensionBehaviorHeader = 0;
+  extensionBehaviorHeader[1] = 0;
+  extensionBehaviorHeader[2] = extensionBehaviorHeader;
+  extensionBehaviorHeader[3] = extensionBehaviorHeader;
   local_100 = 1;
   local_fc = 0;
-  local_f8 = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
-  local_f4 = (undefined4 *)0x0;
-  local_c0 = local_f8;
-  local_f4 = (undefined4 *)((int (*)())TPoolAllocator__allocate)(local_f8,0x20);
-  local_f0 = 0;
-  *local_f4 = 0;
+  stringMapAllocator = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
+  stringMapHeader = (undefined4 *)0x0;
+  local_c0 = stringMapAllocator;
+  stringMapHeader = (undefined4 *)((int (*)())TPoolAllocator__allocate)(stringMapAllocator,0x20);
+  stringMapCount = 0;
+  *stringMapHeader = 0;
   local_e4 = DAT_a7b7ba70;
-  local_f4[1] = 0;
+  stringMapHeader[1] = 0;
   piVar4 = (int *)(local_e4 + 8);
-  local_f4[2] = local_f4;
-  local_f4[3] = local_f4;
+  stringMapHeader[2] = stringMapHeader;
+  stringMapHeader[3] = stringMapHeader;
   do {
     if (reservation != '\0') {
       iVar3 = storeWordConditionalIndexed(*piVar4 + 1,0,piVar4);
@@ -4205,7 +4205,7 @@ int _ShCompile(param_1, str, param_3, param_4, param_5)
   local_e8 = ((int (*)())GetGlobalPoolAllocator)();
   local_e4 = local_e4 + 0xc;
   local_b0 = local_e8;
-  ((int (*)())TParseContext__initializeExtensionBehavior)((unsigned char *)&local_140);
+  ((int (*)())TParseContext__initializeExtensionBehavior)((unsigned char *)&parseContextIntermediate);
   setInitialState();
   _InitPreprocessor();
   pTVar7 = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
@@ -4220,74 +4220,74 @@ int _ShCompile(param_1, str, param_3, param_4, param_5)
   *(undefined4 *)(puVar8[1] + 4) = 0;
   *(undefined4 *)(puVar8[1] + 8) = puVar8[1];
   *(undefined4 *)(puVar8[1] + 0xc) = puVar8[1];
-  local_150[0] = puVar8;
-  if (local_17c == local_178) {
+  newLevelSlot[0] = puVar8;
+  if (symbolTableLevelsEnd == symbolTableLevelsCapacityEnd) {
     std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_insert_aux
-              ((unsigned char *)&local_180,local_17c
-               ,local_150);
+              ((unsigned char *)&symbolTableLevelsBegin,symbolTableLevelsEnd
+               ,newLevelSlot);
   }
   else {
-    if (local_17c != (int *)0x0) {
-      *local_17c = (int)puVar8;
+    if (symbolTableLevelsEnd != (int *)0x0) {
+      *symbolTableLevelsEnd = (int)puVar8;
     }
-    local_17c = local_17c + 1;
+    symbolTableLevelsEnd = symbolTableLevelsEnd + 1;
   }
-  pvVar10 = local_138;
-  bVar1 = 3 < (uint)((int)local_17c - (int)local_180 >> 2);
+  pvVar10 = infoSink;
+  bVar1 = 3 < (uint)((int)symbolTableLevelsEnd - (int)symbolTableLevelsBegin >> 2);
   if (bVar1) {
-    __ZN13TInfoSinkBase6appendEPKc(local_138,"INTERNAL ERROR: ");
+    __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
     __ZN13TInfoSinkBase6appendEPKc(pvVar10,"Wrong symbol table level. No code generated.");
     __ZN13TInfoSinkBase6appendEPKc(pvVar10,"\n");
   }
-  uVar13 = (uint)!bVar1;
-  if (uVar13 == 1) {
-    insertBuiltInArrayAtGlobalLevelResult = ((int (*)())TParseContext__insertBuiltInArrayAtGlobalLevel)((unsigned char *)&local_140);
+  success = (uint)!bVar1;
+  if (success == 1) {
+    insertBuiltInArrayAtGlobalLevelResult = ((int (*)())TParseContext__insertBuiltInArrayAtGlobalLevel)((unsigned char *)&parseContextIntermediate);
     if (insertBuiltInArrayAtGlobalLevelResult == 0) {
-      paParseStringsResult = PaParseStrings(local_3c,(int *)0x0,1,0,(unsigned char *)&local_140);
+      paParseStringsResult = PaParseStrings(preprocessorBuiltinStrings,(int *)0x0,1,0,(unsigned char *)&parseContextIntermediate);
       if (paParseStringsResult != 0) {
-        uVar13 = 0;
+        success = 0;
       }
     }
     else {
-      uVar13 = 0;
+      success = 0;
     }
   }
-  iVar3 = PaParseStrings(str,(int *)0x0,param_3,0,(unsigned char *)&local_140);
-  pvVar10 = local_138;
+  iVar3 = PaParseStrings(str,(int *)0x0,numStrings,0,(unsigned char *)&parseContextIntermediate);
+  pvVar10 = infoSink;
   if (iVar3 != 0) {
-    uVar13 = 0;
+    success = 0;
   }
-  if ((uVar13 == 1) && (local_130 != (unsigned char *)0x0)) {
-    if (local_12c == 0) {
-      uVar13 = TIntermediate__postProcess((unsigned char *)&local_40,local_130);
-      pvVar10 = local_138;
-      if (uVar13 != 1) {
-        __ZN13TInfoSinkBase6appendEPKc(local_138,"INTERNAL ERROR: ");
+  if ((success == 1) && (treeRoot != (unsigned char *)0x0)) {
+    if (errorFlag == 0) {
+      success = TIntermediate__postProcess((unsigned char *)&intermediate,treeRoot);
+      pvVar10 = infoSink;
+      if (success != 1) {
+        __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
         __ZN13TInfoSinkBase6appendEPKc
                   (pvVar10,"Parse tree post-processing failure. No code generated.");
         __ZN13TInfoSinkBase6appendEPKc(pvVar10,"\n");
         goto LAB_97ba18d4;
       }
-      if (param_4 != 0) {
-        bVar1 = (param_5 & 1) == 0;
+      if (optLevel != 0) {
+        bVar1 = (debugOptions & 1) == 0;
         cr0Flags = bVar1 << 1;
         if (!bVar1) {
-          TIntermediate__outputTree((unsigned char *)&local_40,local_130);
+          TIntermediate__outputTree((unsigned char *)&intermediate,treeRoot);
         }
-        (**(code **)(*piVar6 + 0x34))(piVar6,param_4);
-        (**(code **)(*piVar6 + 0x38))(piVar6,param_5);
-        iVar3 = (**(code **)(*piVar6 + 0x14))(piVar6,local_130);
+        (**(code **)(*compiler + 0x34))(compiler,optLevel);
+        (**(code **)(*compiler + 0x38))(compiler,debugOptions);
+        iVar3 = (**(code **)(*compiler + 0x14))(compiler,treeRoot);
         if (iVar3 != 0) goto LAB_97ba18d4;
         goto LAB_97ba18cc;
       }
       __ZN13TInfoSinkBase6appendEPKc
-                (local_138,"No errors.  No code generation or linking was requested.");
+                (infoSink,"No errors.  No code generation or linking was requested.");
       pcVar12 = "\n";
     }
     else {
-      __ZN13TInfoSinkBase6appendEPKc(local_138,"ERROR: ");
-      pvVar10 = local_138;
-      _sprintf(acStack_80,"%d",local_128);
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
+      pvVar10 = infoSink;
+      _sprintf(acStack_80,"%d",numErrors);
       auStack_70[0] = ((int (*)())GetGlobalPoolAllocator)();
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
                 ((unsigned char *)&uStack_90,acStack_80,(unsigned char *)auStack_70);
@@ -4308,31 +4308,31 @@ int _ShCompile(param_1, str, param_3, param_4, param_5)
                   ((unsigned char *)(iStack_8c + -0xc),auStack_60);
       }
       pcVar12 = " compilation errors. No code generated.";
-      uVar13 = 0;
+      success = 0;
     }
     __ZN13TInfoSinkBase6appendEPKc(pvVar10,pcVar12);
-    bVar1 = (param_5 & 1) == 0;
+    bVar1 = (debugOptions & 1) == 0;
     cr0Flags = bVar1 << 1;
     if (!bVar1) {
-      TIntermediate__outputTree((unsigned char *)&local_40,local_130);
+      TIntermediate__outputTree((unsigned char *)&intermediate,treeRoot);
     }
   }
   else {
-    if (local_130 != (unsigned char *)0x0) goto LAB_97ba18d4;
-    __ZN13TInfoSinkBase6appendEPKc(local_138,"ERROR: ");
+    if (treeRoot != (unsigned char *)0x0) goto LAB_97ba18d4;
+    __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
     __ZN13TInfoSinkBase6appendEPKc(pvVar10,"Parser found no code to compile in source strings.");
     __ZN13TInfoSinkBase6appendEPKc(pvVar10,"\n");
 LAB_97ba18cc:
-    uVar13 = 0;
+    success = 0;
   }
 LAB_97ba18d4:
-  TIntermediate__remove((unsigned char *)&local_40,local_130);
-  pvVar10 = local_180;
-  for (; iVar3 = (int)local_17c - (int)pvVar10 >> 2, iVar3 != 1; local_17c = local_17c + -1) {
+  TIntermediate__remove((unsigned char *)&intermediate,treeRoot);
+  pvVar10 = symbolTableLevelsBegin;
+  for (; iVar3 = (int)symbolTableLevelsEnd - (int)pvVar10 >> 2, iVar3 != 1; symbolTableLevelsEnd = symbolTableLevelsEnd + -1) {
     pvVar11 = *(void **)((int)pvVar10 + (iVar3 + -1) * 4);
     if (pvVar11 != (void *)0x0) {
       __ZN17TSymbolTableLevelD1Ev(pvVar11);
-      pvVar10 = local_180;
+      pvVar10 = symbolTableLevelsBegin;
     }
   }
   _FinalizePreprocessor();
@@ -4353,36 +4353,36 @@ LAB_97ba18d4:
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
               ((unsigned char *)(local_e4 + -0xc),local_50);
   }
-  if (local_f0 != 0) {
+  if (stringMapCount != 0) {
     std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_erase((unsigned char
-                *)&local_f8,(unsigned char *)local_f4[1]);
-    local_f4[2] = local_f4;
-    local_f4[1] = 0;
-    local_f4[3] = local_f4;
-    local_f0 = 0;
+                *)&stringMapAllocator,(unsigned char *)stringMapHeader[1]);
+    stringMapHeader[2] = stringMapHeader;
+    stringMapHeader[1] = 0;
+    stringMapHeader[3] = stringMapHeader;
+    stringMapCount = 0;
   }
-  pvVar10 = local_180;
-  if (local_108 != 0) {
+  pvVar10 = symbolTableLevelsBegin;
+  if (extensionBehaviorCount != 0) {
     std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_erase((unsigned char
-                *)&local_110,(unsigned char *)local_10c[1]);
-    local_10c[2] = local_10c;
-    local_10c[1] = 0;
-    local_10c[3] = local_10c;
-    local_108 = 0;
-    pvVar10 = local_180;
+                *)&extensionBehaviorAllocator,(unsigned char *)extensionBehaviorHeader[1]);
+    extensionBehaviorHeader[2] = extensionBehaviorHeader;
+    extensionBehaviorHeader[1] = 0;
+    extensionBehaviorHeader[3] = extensionBehaviorHeader;
+    extensionBehaviorCount = 0;
+    pvVar10 = symbolTableLevelsBegin;
   }
-  for (; uVar5 = (int)local_17c - (int)pvVar10 >> 2, 1 < uVar5; local_17c = local_17c + -1) {
+  for (; uVar5 = (int)symbolTableLevelsEnd - (int)pvVar10 >> 2, 1 < uVar5; symbolTableLevelsEnd = symbolTableLevelsEnd + -1) {
     pvVar11 = *(void **)((int)pvVar10 + (uVar5 - 1) * 4);
     if (pvVar11 != (void *)0x0) {
       __ZN17TSymbolTableLevelD1Ev(pvVar11);
-      pvVar10 = local_180;
+      pvVar10 = symbolTableLevelsBegin;
     }
   }
-  iVar3 = (int)local_178 - (int)pvVar10 >> 2;
+  iVar3 = (int)symbolTableLevelsCapacityEnd - (int)pvVar10 >> 2;
   if (iVar3 != 0) {
     std____default_alloc_template_true_0___deallocate(pvVar10,iVar3 << 2);
   }
-  return uVar13;
+  return success;
 }
 
 /* _ShLink @ 0x97ba1a6c (284 bytes) */
