@@ -1,0 +1,924 @@
+local	FUN_00186a88	param_2	operandIndex	INFERRED	operand number of the consumer that reads inst2
+local	FUN_00186a88	param_4	program	INFERRED	the program: +8 is the compiler handed to IRInst__create / IRInst__setOperandSource, +0x3ac the value-number table
+use	FUN_00186a88	bVar1	isFloatConstant	INFERRED	IRInst__getUniformSourceConstant found a splat constant of kind 2 (float)	^\s*if\ \(\((?:iVar7|loopRemaining)\ ==\ 0\)\ \|\|\ \(bVar1\ =\ true,\ local_6c\ !=\ 2\)\)\ \{$	+2	all	none
+use	FUN_00186a88	bVar1	isFloatConstant	INFERRED	IRInst__getUniformSourceConstant found a splat constant of kind 2 (float)	^\s*if\ \(bVar1\)\ \{$	+1	all	none
+local	FUN_00186a88	local_6c	constantKind	INFERRED	kind word filled by IRInst__getUniformSourceConstant (2 = float), tested right after the call
+local	FUN_00186a88	local_68	constantValue	INFERRED	float value filled by IRInst__getUniformSourceConstant; compared with +-1.0 and +-0.5
+local	FUN_00186a88	local_7c	constLanes	INFERRED	the four component values of a constant source collected through its swizzle; key of the value-number lookup FUN_000f5f94 / FUN_000f57f0
+use	FUN_00186a88	loopIndex	numSources	CONFIRMED	IRInst vslot 5 (getNumSources)	^\s*(?:iVar4|loopIndex)\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_1|inst)\ \+\ 0x14\)\)\((?:param_1|inst)\);$	+2	all	none
+use	FUN_00186a88	loopIndex	isPresub	CONFIRMED	IRInst vslot 23 (isPresub) of the consumer	^\s*(?:iVar4|loopIndex)\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_1|inst)\ \+\ 0x5c\)\)\((?:param_1|inst)\);$	+2	all	none
+use	FUN_00186a88	loopIndex	isFetch	CONFIRMED	IRInst vslot 10 (isFetch)	^\s*(?:iVar4|loopIndex)\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_1|inst)\ \+\ 0x28\)\)\((?:param_1|inst)\);$	+2	all	none
+use	FUN_00186a88	loopIndex	isMov	CONFIRMED	IRInst vslot 25 (isMov)	^\s*(?:iVar4|loopIndex)\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_1|inst)\ \+\ 100\)\)\((?:param_1|inst)\);$	+2	all	none
+use	FUN_00186a88	loopIndex	operandNumber	INFERRED	source operand number 1..numSources of the mov	^\s*for\ \((?:iVar4|loopIndex)\ =\ 1;\ (?:iVar5|loopIndex2)\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_1|inst)\ \+\ 0x14\)\)\((?:param_1|inst)\),\ (?:iVar4|loopIndex)\ <=\ (?:iVar5|loopIndex2);$	+4	all	none
+use	FUN_00186a88	loopIndex	flagBit0Result	INFERRED	RegKind__flagBit0(inst[0x26])	^\s*\(\((?:iVar4|loopIndex)\ =\ FUN_00126760\((?:param_1|inst)\[0x26\]\),\ (?:iVar4|loopIndex)\ !=\ 0\ \&\&\ \(\((?:param_1|inst)\[5\]\ \&\ 2U\)\ ==\ 0\)\)\)\)\ \&\&$	+1	all	none
+use	FUN_00186a88	loopIndex	isUndefined	CONFIRMED	IRInst vslot 20 (isUndefined)	^\s*\((?:iVar4|loopIndex)\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_1|inst)\ \+\ 0x50\)\)\((?:param_1|inst)\),\ (?:iVar4|loopIndex)\ ==\ 0\)\)\ \{$	+1	all	none
+use	FUN_00186a88	loopIndex	selectsLeft	INFERRED	countdown over the four destination select bytes	^\s*(?:iVar4|loopIndex)\ =\ 4;$	+1	all	none
+use	FUN_00186a88	loopIndex	selectsLeft	INFERRED	countdown over the four destination select bytes	^\s*(?:iVar4|loopIndex)\ =\ (?:iVar4|loopIndex)\ \+\ \-1;$	+2	all	none
+use	FUN_00186a88	piVar11	destSelectCursor	INFERRED	walks the four destination select bytes at inst + 0x9c	^\s*piVar11\ =\ (?:param_1|inst);$	+1	all	none
+use	FUN_00186a88	piVar11	destSelectCursor	INFERRED	walks the four destination select bytes at inst + 0x9c	^\s*if\ \(\(uint\)\(\*\(byte\ \*\)\(piVar11\ \+\ 0x27\)\ \-\ 2\)\ <\ 2\)\ goto\ LAB_001874d4;$	+2	all	none
+use	FUN_00186a88	loopIndex	isPresub	CONFIRMED	IRInst vslot 23 (isPresub) of the producer	^\s*(?:iVar4|loopIndex)\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_3|inst2)\ \+\ 0x5c\)\)\((?:param_3|inst2)\);$	+2	all	none
+use	FUN_00186a88	loopIndex	sourceNumber	INFERRED	source operand number 1..inst2[0x21]	^\s*(?:iVar4|loopIndex)\ =\ 1;$	+1	all	none
+use	FUN_00186a88	loopIndex	sourceNumber	INFERRED	source operand number 1..inst2[0x21]	^\s*(?:piVar6|loopIndex4)\ =\ \(int\ \*\)FUN_00105594\((?:param_3|inst2),(?:iVar4|loopIndex)\);$	+1	all	none
+use	FUN_00186a88	loopIndex	sourceNumber	INFERRED	source operand number 1..inst2[0x21]	^\s*(?:iVar4|loopIndex)\ =\ (?:iVar4|loopIndex)\ \+\ 1;$	+2	all	none
+use	FUN_00186a88	loopIndex4	producerSource	INFERRED	IRInst__getOperandSource(inst2, sourceNumber)	^\s*(?:piVar6|loopIndex4)\ =\ \(int\ \*\)FUN_00105594\((?:param_3|inst2),(?:iVar4|loopIndex)\);$	+2	all	none
+use	FUN_00186a88	loopIndex	opcodeInfo	INFERRED	inst2[0x22]: opcode info, +8 is the opcode (0x12 add, 0x31 mov, 0x14 mul-add)	^\s*(?:iVar4|loopIndex)\ =\ (?:param_3|inst2)\[0x22\];$	+1	all	none
+use	FUN_00186a88	loopIndex	opcodeInfo	INFERRED	inst2[0x22]: opcode info, +8 is the opcode (0x12 add, 0x31 mov, 0x14 mul-add)	^\s*if\ \(\*\(int\ \*\)\((?:iVar4|loopIndex)\ \+\ 8\)\ ==\ 0x12\)\ \{$	+1	all	none
+use	FUN_00186a88	loopIndex	opcodeInfo	INFERRED	inst2[0x22]: opcode info, +8 is the opcode (0x12 add, 0x31 mov, 0x14 mul-add)	^\s*if\ \(\*\(int\ \*\)\((?:iVar4|loopIndex)\ \+\ 8\)\ ==\ 0x31\)\ \{$	+1	all	none
+use	FUN_00186a88	loopIndex	opcodeInfo	INFERRED	inst2[0x22]: opcode info, +8 is the opcode (0x12 add, 0x31 mov, 0x14 mul-add)	^\s*(?:iVar4|loopIndex)\ =\ (?:param_3|inst2)\[0x22\];$@2	+1	all	none
+use	FUN_00186a88	loopIndex	opcodeInfo	INFERRED	inst2[0x22]: opcode info, +8 is the opcode (0x12 add, 0x31 mov, 0x14 mul-add)	^\s*if\ \(\*\(int\ \*\)\((?:iVar4|loopIndex)\ \+\ 8\)\ !=\ 0x14\)\ \{$	+1	all	none
+use	FUN_00186a88	uVar13	destSelect	INFERRED	destination select word of the producer (record + 0x10)	^\s*uVar13\ =\ \*\(undefined4\ \*\)\((?:iVar5|loopIndex2)\ \+\ 0x10\);$	+1	all	none
+use	FUN_00186a88	uVar13	destSelect	INFERRED	destination select word of the producer (record + 0x10)	^\s*(?:iVar7|loopRemaining)\ =\ FUN_000f5cf0\((?:param_3|inst2),2,uVar13,(?:piVar6|loopIndex4)\);$	+1	all	none
+use	FUN_00186a88	uVar13	destSelect	INFERRED	destination select word of the producer (record + 0x10)	^\s*(?:iVar7|loopRemaining)\ =\ FUN_000f5c0c\((?:param_3|inst2),2,uVar13,local_a4\ \+\ 6\);$	+1	all	none
+use	FUN_00186a88	uVar13	destSelect	INFERRED	destination select word of the producer (record + 0x10)	^\s*(?:iVar7|loopRemaining)\ =\ FUN_000f5c0c\((?:param_3|inst2),3,uVar13,local_a4\ \+\ 2\);$	+1	all	none
+use	FUN_00186a88	loopIndex	operandRecord	INFERRED	IRInst__getOperandRecord(inst2, 1)	^\s*(?:iVar4|loopIndex)\ =\ FUN_001054ec\((?:param_3|inst2),1\);$	+1	all	none
+use	FUN_00186a88	loopIndex	operandRecord	INFERRED	IRInst__getOperandRecord(inst2, 1)	^\s*local_a4\[0\]\ =\ \*\(int\ \*\*\)\((?:iVar4|loopIndex)\ \+\ 0x10\);$	+1	all	none
+use	FUN_00186a88	loopIndex	lanesLeft	INFERRED	countdown over the four constant lanes	^\s*(?:iVar4|loopIndex)\ =\ 4;$@2	+1	all	none
+use	FUN_00186a88	loopIndex	lanesLeft	INFERRED	countdown over the four constant lanes	^\s*(?:iVar4|loopIndex)\ =\ (?:iVar4|loopIndex)\ \+\ \-1;$@2	+2	all	none
+use	FUN_00186a88	uVar2	laneSelect	INFERRED	select byte of the lane (4 = unused)	^\s*uVar2\ =\ \(uint\)\*\(byte\ \*\)\((?:iVar5|loopIndex2)\ \+\ \(int\)local_a4\);$	+3	all	none
+use	FUN_00186a88	uVar2	laneSelect	INFERRED	select byte of the lane (4 = unused)	^\s*uVar2\ =\ \(uint\)\*\(byte\ \*\)\((?:iVar4|loopIndex)\ \+\ \(int\)local_a4\);$	+3	all	none
+use	FUN_00186a88	loopIndex	laneNumber	INFERRED	lane number 0..3	^\s*(?:iVar4|loopIndex)\ =\ 0;$	+1	all	none
+use	FUN_00186a88	loopIndex	laneNumber	INFERRED	lane number 0..3	^\s*uVar2\ =\ \(uint\)\*\(byte\ \*\)\((?:iVar4|loopIndex)\ \+\ \(int\)local_a4\);$	+1	all	none
+use	FUN_00186a88	loopIndex	laneNumber	INFERRED	lane number 0..3	^\s*(?:iVar4|loopIndex)\ =\ (?:iVar4|loopIndex)\ \+\ 1;$@2	+1	all	none
+use	FUN_00186a88	loopRemaining	source1Record	INFERRED	IRInst__getOperandRecord(inst2, 1)	^\s*(?:iVar7|loopRemaining)\ =\ FUN_001054ec\((?:param_3|inst2),1\);$	+2	all	none
+use	FUN_00186a88	loopRemaining	firstSourceIsPresub	CONFIRMED	IRInst vslot 23 (isPresub) of the first source	^\s*(?:iVar7|loopRemaining)\ =\ \(\*\*\(code\ \*\*\)\(\*local_a8\ \+\ 0x5c\)\)\(local_a8\);$	+2	all	none
+use	FUN_00186a88	uVar14	valueNumberTable	INFERRED	program + 0x3ac	^\s*uVar14\ =\ \*\(undefined4\ \*\)\(param_4\ \+\ 0x3ac\);$	+2	all	none
+use	FUN_00186a88	uVar14	valueNumberTable	INFERRED	program + 0x3ac	^\s*local_a8\ =\ \(int\ \*\)FUN_000f57f0\(uVar14,local_7c,local_a4,(?:iVar7|loopRemaining)\);$	+1	all	none
+use	FUN_00186a88	uVar13	programValueTable	INFERRED	program + 0x3ac	^\s*uVar13\ =\ \*\(undefined4\ \*\)\(param_4\ \+\ 0x3ac\);$	+2	all	none
+use	FUN_00186a88	uVar13	programValueTable	INFERRED	program + 0x3ac	^\s*local_a4\[1\]\ =\ \(int\ \*\)FUN_000f57f0\(uVar13,local_7c,local_a4,(?:piVar6|loopIndex4)\);$	+1	all	none
+use	FUN_00186a88	loopIndex4	laneCursor	INFERRED	walks constLanes while the lane values are collected	^\s*(?:piVar6|loopIndex4)\ =\ local_7c;$	+1	all	none
+use	FUN_00186a88	loopIndex4	laneCursor	INFERRED	walks constLanes while the lane values are collected	^\s*\*(?:piVar6|loopIndex4)\ =\ local_a8\[uVar2\ \*\ 6\ \+\ 8\];$	+1	all	none
+use	FUN_00186a88	loopIndex4	laneCursor	INFERRED	walks constLanes while the lane values are collected	^\s*(?:piVar6|loopIndex4)\ =\ (?:piVar6|loopIndex4)\ \+\ 1;$	+1	all	none
+use	FUN_00186a88	loopIndex4	laneCursor	INFERRED	walks constLanes while the lane values are collected	^\s*local_a8\ =\ \(int\ \*\)FUN_000f5f94\(uVar14,local_7c,local_a4,(?:iVar7|loopRemaining),uVar10,uVar9,(?:piVar6|loopIndex4)\);$	+1	all	none
+use	FUN_00186a88	loopIndex4	selectWord	INFERRED	select word saved before the value-number lookup	^\s*(?:piVar6|loopIndex4)\ =\ local_a4\[0\];$	+1	all	none
+use	FUN_00186a88	loopIndex4	selectWord	INFERRED	select word saved before the value-number lookup	^\s*\*\(int\ \*\*\)\((?:iVar7|loopRemaining)\ \+\ 0x10\)\ =\ (?:piVar6|loopIndex4);$	+1	all	none
+use	FUN_00186a88	loopIndex4	selectWord	INFERRED	select word saved before the value-number lookup	^\s*(?:piVar6|loopIndex4)\ =\ local_a4\[0\];$@2	+1	all	none
+use	FUN_00186a88	loopIndex4	selectWord	INFERRED	select word saved before the value-number lookup	^\s*\*\(int\ \*\*\)\((?:iVar7|loopRemaining)\ \+\ 0x10\)\ =\ (?:piVar6|loopIndex4);$@2	+1	all	none
+use	FUN_00186a88	loopRemaining	uniformConstantFound	CONFIRMED	IRInst__getUniformSourceConstant result	^\s*(?:iVar7|loopRemaining)\ =\ FUN_000f5cf0\((?:param_3|inst2),2,uVar13,(?:piVar6|loopIndex4)\);$	+2	all	none
+use	FUN_00186a88	loopRemaining	uniformConstantFound	CONFIRMED	IRInst__getUniformSourceConstant result	^\s*if\ \(\(\(\(local_68\ ==\ 0\.5\)\ \|\|\ \(local_68\ ==\ \-0\.5\)\)\ \&\&$	+3	all	none
+use	FUN_00186a88	loopIndex4	constantKindPtr	INFERRED	&constantKind	^\s*(?:piVar6|loopIndex4)\ =\ \&local_6c;$	+2	all	none
+use	FUN_00186a88	loopIndex4	constantKindPtr	INFERRED	&constantKind	^\s*local_a4\[1\]\ =\ \(int\ \*\)FUN_000f5f94\(uVar13,local_7c,local_a4,(?:piVar6|loopIndex4),uVar10,uVar9,(?:piVar12|loopIndex3)\);$	+1	all	none
+use	FUN_00186a88	loopIndex4	constantKindPtr	INFERRED	&constantKind	^\s*local_a4\[1\]\ =\ \(int\ \*\)FUN_000f57f0\(uVar13,local_7c,local_a4,(?:piVar6|loopIndex4)\);$	+1	all	none
+use	FUN_00186a88	loopRemaining	destRecord	INFERRED	IRInst__getOperandRecord(inst3, 0)	^\s*(?:iVar7|loopRemaining)\ =\ FUN_001054ec\((?:pvVar8|inst3),0\);$	+3	all	none
+use	FUN_00186a88	loopRemaining	destRecord	INFERRED	IRInst__getOperandRecord(inst3, 0)	^\s*(?:iVar7|loopRemaining)\ =\ FUN_001054ec\((?:pvVar8|inst3),0\);$@2	+3	all	none
+use	FUN_00186a88	loopRemaining	destRecord	INFERRED	IRInst__getOperandRecord(inst3, 0)	^\s*(?:iVar7|loopRemaining)\ =\ FUN_001054ec\((?:pvVar8|inst3),0\);$@3	+3	all	none
+use	FUN_00186a88	loopRemaining	destRecord	INFERRED	IRInst__getOperandRecord(inst3, 0)	^\s*(?:iVar7|loopRemaining)\ =\ FUN_001054ec\((?:pvVar8|inst3),0\);$@4	+3	all	none
+use	FUN_00186a88	loopRemaining	destRecord	INFERRED	IRInst__getOperandRecord(inst3, 0)	^\s*(?:iVar7|loopRemaining)\ =\ FUN_001054ec\((?:pvVar8|inst3),0\);$@5	+3	all	none
+use	FUN_00186a88	uVar10	newRegId	INFERRED	inst3 + 0x14c: the new instruction's own register id, stored into its destination record (+8)	^\s*uVar10\ =\ \*\(undefined4\ \*\)\(\(int\)(?:pvVar8|inst3)\ \+\ 0x14c\);$	+1	all	none
+use	FUN_00186a88	uVar10	newRegId	INFERRED	inst3 + 0x14c: the new instruction's own register id, stored into its destination record (+8)	^\s*\*\(undefined4\ \*\)\((?:iVar7|loopRemaining)\ \+\ 8\)\ =\ uVar10;$	+1	all	none
+use	FUN_00186a88	uVar10	newRegId	INFERRED	inst3 + 0x14c	^\s*uVar10\ =\ \*\(undefined4\ \*\)\(\(int\)(?:pvVar8|inst3)\ \+\ 0x14c\);$@2	+1	all	none
+use	FUN_00186a88	uVar10	newRegId	INFERRED	inst3 + 0x14c	^\s*\*\(undefined4\ \*\)\((?:iVar7|loopRemaining)\ \+\ 8\)\ =\ uVar10;$@2	+1	all	none
+use	FUN_00186a88	uVar10	newRegId	INFERRED	inst3 + 0x14c	^\s*uVar10\ =\ \*\(undefined4\ \*\)\(\(int\)(?:pvVar8|inst3)\ \+\ 0x14c\);$@3	+1	all	none
+use	FUN_00186a88	uVar10	newRegId	INFERRED	inst3 + 0x14c	^\s*\*\(undefined4\ \*\)\((?:iVar7|loopRemaining)\ \+\ 8\)\ =\ uVar10;$@3	+1	all	none
+use	FUN_00186a88	uVar10	newRegId	INFERRED	inst3 + 0x14c	^\s*uVar10\ =\ \*\(undefined4\ \*\)\(\(int\)(?:pvVar8|inst3)\ \+\ 0x14c\);$@4	+1	all	none
+use	FUN_00186a88	uVar10	newRegId	INFERRED	inst3 + 0x14c	^\s*\*\(undefined4\ \*\)\((?:iVar7|loopRemaining)\ \+\ 8\)\ =\ uVar10;$@4	+1	all	none
+use	FUN_00186a88	uVar10	newRegId	INFERRED	inst3 + 0x14c	^\s*uVar10\ =\ \*\(undefined4\ \*\)\(\(int\)(?:pvVar8|inst3)\ \+\ 0x14c\);$@5	+1	all	none
+use	FUN_00186a88	uVar10	newRegId	INFERRED	inst3 + 0x14c	^\s*\*\(undefined4\ \*\)\((?:iVar7|loopRemaining)\ \+\ 8\)\ =\ uVar10;$@5	+1	all	none
+use	FUN_00186a88	uVar10	compiler	INFERRED	program + 8	^\s*uVar10\ =\ \*\(undefined4\ \*\)\(param_4\ \+\ 8\);$@2	+1	all	none
+use	FUN_00186a88	uVar10	compiler	INFERRED	program + 8	^\s*uVar10\ =\ \*\(undefined4\ \*\)\(param_4\ \+\ 8\);$@3	+1	all	none
+use	FUN_00186a88	uVar10	compiler	INFERRED	program + 8	^\s*FUN_00106004\((?:pvVar8|inst3),1,(?:piVar6|loopIndex4),0,uVar10\);$	+1	all	none
+use	FUN_00186a88	uVar10	presubOpcode	INFERRED	0x9b (IrPresubAdd) when the two negate bits agree, else 0x9a (IrPresubSub)	^\s*uVar10\ =\ 0x9b;$	+1	all	none
+use	FUN_00186a88	uVar10	presubOpcode	INFERRED	0x9b (IrPresubAdd) when the two negate bits agree, else 0x9a (IrPresubSub)	^\s*uVar10\ =\ 0x9a;$	+1	all	none
+use	FUN_00186a88	uVar10	presubOpcode	INFERRED	0x9b (IrPresubAdd) when the two negate bits agree, else 0x9a (IrPresubSub)	^\s*(?:pvVar8|inst3)\ =\ FUN_001043f0\(uVar10,uVar9\);$	+1	all	none
+use	FUN_00186a88	uVar9	createOwner	INFERRED	program + 8: second argument of IRInst__create	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(param_4\ \+\ 8\);$	+1	all	none
+use	FUN_00186a88	uVar9	createOwner	INFERRED	program + 8: second argument of IRInst__create	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(param_4\ \+\ 8\);$@2	+1	all	none
+use	FUN_00186a88	uVar9	createOwner	INFERRED	program + 8: second argument of IRInst__create	^\s*(?:pvVar8|inst3)\ =\ FUN_001043f0\(uVar10,uVar9\);$	+1	all	none
+use	FUN_00186a88	uVar10	sourceRegKind	INFERRED	register kind (+0x98) of operand 1's definition, 0 when none	^\s*uVar10\ =\ 0;$	+1	all	none
+use	FUN_00186a88	uVar10	sourceRegKind	INFERRED	register kind (+0x98) of operand 1's definition, 0 when none	^\s*uVar10\ =\ \*\(undefined4\ \*\)\((?:iVar7|loopRemaining)\ \+\ 0x98\);$	+1	all	none
+use	FUN_00186a88	uVar10	sourceRegKind	INFERRED	register kind (+0x98) of operand 1's definition, 0 when none	^\s*(?:iVar7|loopRemaining)\ =\ FUN_001267b8\(uVar10\);$	+1	all	none
+use	FUN_00186a88	uVar10	sourceRegKind	INFERRED	register kind (+0x98) of operand 1's definition, 0 when none	^\s*uVar10\ =\ 0;$@2	+1	all	none
+use	FUN_00186a88	uVar10	sourceRegKind	INFERRED	register kind (+0x98) of operand 1's definition, 0 when none	^\s*uVar10\ =\ \*\(undefined4\ \*\)\((?:iVar7|loopRemaining)\ \+\ 0x98\);$@2	+1	all	none
+use	FUN_00186a88	uVar10	sourceRegKind	INFERRED	register kind (+0x98) of operand 1's definition, 0 when none	^\s*(?:iVar7|loopRemaining)\ =\ FUN_001267b8\(uVar10\);$@2	+1	all	none
+use	FUN_00186a88	loopRemaining	operandSource	INFERRED	IRInst__getOperandSource(inst2, 1)	^\s*(?:iVar7|loopRemaining)\ =\ FUN_00105594\((?:param_3|inst2),1\);$	+1	all	none
+use	FUN_00186a88	loopRemaining	operandSource	INFERRED	IRInst__getOperandSource(inst2, 1)	^\s*if\ \((?:iVar7|loopRemaining)\ !=\ 0\)\ \{$@3	+1	all	none
+use	FUN_00186a88	loopRemaining	operandSource	INFERRED	IRInst__getOperandSource(inst2, 1)	^\s*(?:iVar7|loopRemaining)\ =\ FUN_00105594\((?:param_3|inst2),1\);$@2	+2	all	none
+use	FUN_00186a88	loopRemaining	operandSource	INFERRED	IRInst__getOperandSource(inst2, 1)	^\s*(?:iVar7|loopRemaining)\ =\ FUN_00105594\((?:param_3|inst2),1\);$@3	+2	all	none
+use	FUN_00186a88	loopRemaining	operandSource	INFERRED	IRInst__getOperandSource(inst2, 1)	^\s*(?:iVar7|loopRemaining)\ =\ FUN_00105594\((?:param_3|inst2),1\);$@4	+2	all	none
+use	FUN_00186a88	loopIndex4	operandSource2	INFERRED	IRInst__getOperandSource(inst2, 1)	^\s*(?:piVar6|loopIndex4)\ =\ \(int\ \*\)FUN_00105594\((?:param_3|inst2),1\);$	+2	all	none
+use	FUN_00186a88	loopIndex4	operandSource2	INFERRED	IRInst__getOperandSource(inst2, 1)	^\s*(?:piVar6|loopIndex4)\ =\ \(int\ \*\)FUN_00105594\((?:param_3|inst2),1\);$@2	+2	all	none
+use	FUN_00186a88	loopRemaining	firstSourceIsPresub	CONFIRMED	IRInst vslot 23 (isPresub) of operand 1's definition	^\s*(?:iVar7|loopRemaining)\ =\ \(\*\*\(code\ \*\*\)\(\*(?:piVar6|loopIndex4)\ \+\ 0x5c\)\)\((?:piVar6|loopIndex4)\);$	+2	all	none
+use	FUN_00186a88	loopRemaining	firstSourceIsPresub	CONFIRMED	IRInst vslot 23 (isPresub) of operand 1's definition	^\s*(?:iVar7|loopRemaining)\ =\ \(\*\*\(code\ \*\*\)\(\*(?:piVar6|loopIndex4)\ \+\ 0x5c\)\)\((?:piVar6|loopIndex4)\);$@2	+2	all	none
+use	FUN_00186a88	loopRemaining	commitResult	INFERRED	FUN_00185da4 result: the replacement was committed	^\s*(?:iVar7|loopRemaining)\ =\ FUN_00185da4\(param_2,uVar2,(?:param_1|inst),(?:pvVar8|inst3),(?:param_3|inst2),param_4,param_5,param_6,param_7,piVar11\)$	+1	all	none
+use	FUN_00186a88	loopRemaining	commitResult	INFERRED	FUN_00185da4 result: the replacement was committed	^\s*return\ (?:iVar7|loopRemaining);$@2	+1	all	none
+use	FUN_00186a88	loopRemaining	commitResult	INFERRED	FUN_00185da4 result: the replacement was committed	^\s*(?:iVar7|loopRemaining)\ =\ FUN_00185da4\(param_2,\(uint\)\(local_68\ ==\ \-0\.5\),(?:param_1|inst),(?:pvVar8|inst3),(?:param_3|inst2),param_4,param_5$	+3	all	none
+use	FUN_00186a88	loopRemaining	commitResult	INFERRED	FUN_00185da4 result: the replacement was committed	^\s*return\ (?:iVar7|loopRemaining);$	+1	all	none
+use	FUN_00186a88	uVar2	inst2Flags	INFERRED	inst2[5] (0x200 = more than five sources)	^\s*uVar2\ =\ (?:param_3|inst2)\[5\];$	+1	all	none
+use	FUN_00186a88	uVar2	inst2Flags	INFERRED	inst2[5] (0x200 = more than five sources)	^\s*if\ \(\(uVar2\ \&\ 0x200\)\ !=\ 0\)\ \{$	+1	all	none
+use	FUN_00186a88	uVar2	inst2Flags	INFERRED	inst2[5] (0x200 = more than five sources)	^\s*uVar2\ =\ local_a8\[5\];$	+1	all	none
+use	FUN_00186a88	uVar2	inst2Flags	INFERRED	inst2[5] (0x200 = more than five sources)	^\s*if\ \(\(uVar2\ \&\ 0x200\)\ !=\ 0\)\ \{$@2	+1	all	none
+use	FUN_00186a88	uVar2	negate	INFERRED	whether the new presub negates its result; passed to FUN_00185da4	^\s*uVar2\ =\ \(uint\)\(local_68\ ==\ \-1\.0\);$	+2	all	none
+use	FUN_00186a88	uVar2	negate	INFERRED	whether the new presub negates its result; passed to FUN_00185da4	^\s*uVar2\ =\ (?:param_3|inst2)\[0x2e\]\ \&\ 1;$	+1	all	none
+use	FUN_00186a88	uVar2	negate	INFERRED	whether the new presub negates its result; passed to FUN_00185da4	^\s*uVar2\ =\ 1;$	+1	all	none
+use	FUN_00186a88	uVar2	negate	INFERRED	whether the new presub negates its result; passed to FUN_00185da4	^\s*uVar2\ =\ 0;$	+1	all	none
+use	FUN_00186a88	uVar2	negate	INFERRED	whether the new presub negates its result; passed to FUN_00185da4	^\s*uVar2\ =\ (?:param_3|inst2)\[0x3a\]\ \&\ 1;$	+1	all	none
+use	FUN_00186a88	uVar2	negate	INFERRED	whether the new presub negates its result; passed to FUN_00185da4	^\s*if\ \(uVar3\ ==\ uVar2\)\ \{$	+1	all	none
+use	FUN_00186a88	uVar2	negate	INFERRED	whether the new presub negates its result; passed to FUN_00185da4	^\s*(?:iVar7|loopRemaining)\ =\ FUN_00185da4\(param_2,uVar2,(?:param_1|inst),(?:pvVar8|inst3),(?:param_3|inst2),param_4,param_5,param_6,param_7,piVar11\)$	+1	all	none
+use	FUN_00186a88	uVar3	otherNegate	INFERRED	XOR of the producer's two source negate bits	^\s*uVar3\ =\ 1;$	+1	all	none
+use	FUN_00186a88	uVar3	otherNegate	INFERRED	XOR of the producer's two source negate bits	^\s*uVar3\ =\ 0;$	+1	all	none
+use	FUN_00186a88	uVar3	otherNegate	INFERRED	XOR of the producer's two source negate bits	^\s*if\ \(uVar3\ ==\ uVar2\)\ \{$	+1	all	none
+use	FUN_00186a88	piVar11	originalInst2	INFERRED	the original producer when a clone replaced it (0 otherwise)	^\s*piVar11\ =\ \(int\ \*\)0x0;$	+1	all	none
+use	FUN_00186a88	piVar11	originalInst2	INFERRED	the original producer when a clone replaced it (0 otherwise)	^\s*piVar11\ =\ (?:param_3|inst2);$	+1	all	none
+use	FUN_00186a88	piVar11	originalInst2	INFERRED	the original producer when a clone replaced it (0 otherwise)	^\s*(?:iVar7|loopRemaining)\ =\ FUN_00185da4\(param_2,\(uint\)\(local_68\ ==\ \-0\.5\),(?:param_1|inst),(?:pvVar8|inst3),(?:param_3|inst2),param_4,param_5$	+2	all	none
+use	FUN_00186a88	piVar11	originalInst2	INFERRED	the original producer when a clone replaced it (0 otherwise)	^\s*(?:iVar7|loopRemaining)\ =\ FUN_00185da4\(param_2,uVar2,(?:param_1|inst),(?:pvVar8|inst3),(?:param_3|inst2),param_4,param_5,param_6,param_7,piVar11\)$	+1	all	none
+use	FUN_00186a88	loopRemaining	programCopy	INFERRED	copy of program passed as an argument of the value-number lookup	^\s*(?:iVar7|loopRemaining)\ =\ param_4;$	+1	all	none
+use	FUN_00186a88	loopRemaining	programCopy	INFERRED	copy of program passed as an argument of the value-number lookup	^\s*local_a8\ =\ \(int\ \*\)FUN_000f5f94\(uVar14,local_7c,local_a4,(?:iVar7|loopRemaining),uVar10,uVar9,(?:piVar6|loopIndex4)\);$	+1	all	none
+use	FUN_00186a88	loopRemaining	programCopy	INFERRED	copy of program passed as an argument of the value-number lookup	^\s*local_a8\ =\ \(int\ \*\)FUN_000f57f0\(uVar14,local_7c,local_a4,(?:iVar7|loopRemaining)\);$	+1	all	none
+use	FUN_00186a88	loopRemaining	source1Record	INFERRED	IRInst__getOperandRecord(inst2, 2)	^\s*(?:iVar7|loopRemaining)\ =\ FUN_001054ec\((?:param_3|inst2),2\);$	+1	all	none
+use	FUN_00186a88	loopRemaining	source1Record	INFERRED	IRInst__getOperandRecord(inst2, 2)	^\s*local_a4\[0\]\ =\ \*\(int\ \*\*\)\((?:iVar7|loopRemaining)\ \+\ 0x10\);$	+1	all	none
+use	FUN_00186a88	loopRemaining	lanesRemaining	INFERRED	countdown over the four constant lanes	^\s*(?:iVar7|loopRemaining)\ =\ 4;$	+1	all	none
+use	FUN_00186a88	loopRemaining	lanesRemaining	INFERRED	countdown over the four constant lanes	^\s*(?:iVar7|loopRemaining)\ =\ (?:iVar7|loopRemaining)\ \+\ \-1;$	+2	all	none
+use	FUN_00186a88	loopRemaining	constantLaneResult	INFERRED	FUN_000f5c0c(inst2, 2, destSelect, ...): source 2 is a constant matching the given lanes	^\s*(?:iVar7|loopRemaining)\ =\ FUN_000f5c0c\((?:param_3|inst2),2,uVar13,local_a4\ \+\ 6\);$	+2	all	none
+use	FUN_00186a88	loopRemaining	constantLaneResult	INFERRED	FUN_000f5c0c(inst2, 3, destSelect, ...): source 3 is a constant matching the given lanes	^\s*(?:iVar7|loopRemaining)\ =\ FUN_000f5c0c\((?:param_3|inst2),3,uVar13,local_a4\ \+\ 2\);$	+2	all	none
+use	FUN_00186a88	loopRemaining	operandKindIsConstant	INFERRED	FUN_001267b8(register kind): kind flag 0x11	^\s*(?:iVar7|loopRemaining)\ =\ FUN_001267b8\(uVar10\);$	+2	all	none
+use	FUN_00186a88	loopRemaining	operandKindIsConstant	INFERRED	FUN_001267b8(register kind): kind flag 0x11	^\s*(?:iVar7|loopRemaining)\ =\ FUN_001267b8\(uVar10\);$@2	+2	all	none
+use	FUN_00186a88	loopIndex	sourceRegKindIsConstant	INFERRED	FUN_001267b8(register kind of operand 1): kind flag 0x11	^\s*(?:iVar4|loopIndex)\ =\ FUN_001267b8\(local_a8\[0x26\]\);$	+2	all	none
+local	FUN_0018cdd8	param_1	sourceState	INFERRED	per-pass source bookkeeping: +0/+4 one single source per slot (FUN_0018d388), +8..+0x14 one source pair per slot (this function), +0x18.. three source entries per slot (FUN_0018c7f4)
+local	FUN_0018cdd8	param_2	sourceA	INFERRED	first source of the pair
+local	FUN_0018cdd8	param_3	sourceB	INFERRED	second source of the pair
+local	FUN_0018cdd8	param_4	slot	INFERRED	ALU slot index: 0 or 1 (it indexes 8-byte pair records and 4-byte single entries)
+local	FUN_0018cdd8	iVar5	pairOffset	INFERRED	slot * 8: offset of the slot's pair record in sourceState + 8, later rebased to the record address
+use	FUN_0018cdd8	piVar6	pairFirst	INFERRED	first source already recorded in the slot's pair record (+8)	^\s*piVar6\ =\ \*\(int\ \*\*\)\(iVar3\ \+\ 8\);$	+2	all	none
+use	FUN_0018cdd8	piVar6	pairFirst	INFERRED	first source already recorded in the slot's pair record (+8)	^\s*if\ \(piVar6\ ==\ param_2\)\ \{$	+1	all	none
+use	FUN_0018cdd8	piVar6	pairFirst	INFERRED	first source already recorded in the slot's pair record (+8)	^\s*if\ \(\(\(\(\(param_2\ !=\ \(int\ \*\)0x0\)\ \&\&\ \(piVar6\[0x20\]\ !=\ 0\)\)\ \&\&$	+8	all	none
+use	FUN_0018cdd8	piVar4	pairSecond	INFERRED	second source already recorded in the slot's pair record (+0xc)	^\s*if\ \(\(piVar6\ ==\ \(int\ \*\)0x0\)\ \|\|\ \(piVar4\ =\ \*\(int\ \*\*\)\(iVar3\ \+\ 0xc\),\ piVar4\ ==\ \(int\ \*\)0x0\)\)\ \{$	+1	all	none
+use	FUN_0018cdd8	piVar4	pairSecond	INFERRED	second source already recorded in the slot's pair record (+0xc)	^\s*if\ \(\(param_3\ !=\ piVar4\)\ \&\&$	+11	all	none
+use	FUN_0018cdd8	piVar4	pairSecond	INFERRED	second source already recorded in the slot's pair record (+0xc)	^\s*piVar4\ =\ \*\(int\ \*\*\)\(iVar3\ \+\ 0xc\);$	+1	all	none
+use	FUN_0018cdd8	piVar6	singleSource	INFERRED	single source recorded for the slot (sourceState[slot])	^\s*piVar6\ =\ \*\(int\ \*\*\)\(iVar3\ \+\ param_1\);$	+24	all	none
+use	FUN_0018cdd8	piVar6	pairEntry	INFERRED	pair record entry (+8, then +0xc) compared with the swapped pair	^\s*piVar6\ =\ \*\(int\ \*\*\)\(iVar5\ \+\ 8\);$	+22	all	none
+local	FUN_0018cdd8	iVar1	regTestResult	INFERRED	result of the RegKind__flagBit0 / isUndefined tests that decide whether two sources are the same hardware value
+local	FUN_0018cdd8	uVar2	result	INFERRED	1 when the pair fits, 0 otherwise
+local	FUN_00187ad8	param_2	program	INFERRED	the program (+8 compiler, +0x478 current level counter)
+use	FUN_00187ad8	iVar2	cndOpcode	CONFIRMED	opcode of cndInst, must be one of the three Cnd opcodes	^\s*iVar2\ =\ \*\(int\ \*\)\((?:piVar5|callResult)\[0x22\]\ \+\ 8\);$	+2	all	none
+use	FUN_00187ad8	iVar6	splatCheckResult	INFERRED	IRInst__sourceIsSplatConstant of source 2 / source 3 of cndInst against the two literal pairs that make the select a 0/1 value	^\s*iVar6\ =\ \(\(undefined4\ \(\*\)\(\)\)FUN_00139838\)\((?:piVar5|callResult),2,\(double\)FLOAT_001aa0d4\);$	+2	all	none
+use	FUN_00187ad8	puVar24	useList	CONFIRMED	cndInst + 0x10: vector of the instructions using cndInst	^\s*puVar24\ =\ \(uint\ \*\)(?:piVar5|callResult)\[4\];$	+2	all	none
+use	FUN_00187ad8	puVar24	useList	CONFIRMED	cndInst + 0x10: vector of the instructions using cndInst	^\s*if\ \((?:uVar22|loopIndex3)\ <\ \*puVar24\)\ \{$	+2	all	none
+use	FUN_00187ad8	puVar24	useList	CONFIRMED	cndInst + 0x10: vector of the instructions using cndInst	^\s*_memset\((?:uVar7|loopIndex4)\ \*\ 4\ \+\ puVar24\[2\],0,\((?:uVar22|loopIndex3)\ \-\ (?:uVar7|loopIndex4)\)\ \*\ 4\ \+\ 4\);$	+2	all	none
+use	FUN_00187ad8	puVar24	useList	CONFIRMED	cndInst + 0x10: vector of the instructions using cndInst	^\s*piVar8\ =\ \(int\ \*\)\(iVar6\ \+\ puVar24\[2\]\);$	+1	all	none
+use	FUN_00187ad8	puVar24	useList	CONFIRMED	cndInst + 0x10: vector of the instructions using cndInst	^\s*piVar8\ =\ \(int\ \*\)FUN_0019423c\(puVar24,(?:uVar22|loopIndex3)\);$	+1	all	none
+use	FUN_00187ad8	puVar24	useList	CONFIRMED	cndInst + 0x10: vector of the instructions using cndInst	^\s*puVar24\ =\ \(uint\ \*\)(?:piVar5|callResult)\[4\];$@2	+1	all	none
+use	FUN_00187ad8	puVar24	useList	CONFIRMED	cndInst + 0x10: vector of the instructions using cndInst	^\s*if\ \(uVar18\ <\ \*puVar24\)\ \{$	+2	all	none
+use	FUN_00187ad8	puVar24	useList	CONFIRMED	cndInst + 0x10: vector of the instructions using cndInst	^\s*_memset\((?:uVar19|loopIndex2)\ \*\ 4\ \+\ puVar24\[2\],0,\(uVar18\ \-\ (?:uVar19|loopIndex2)\)\ \*\ 4\ \+\ 4\);$	+2	all	none
+use	FUN_00187ad8	puVar24	useList	CONFIRMED	cndInst + 0x10: vector of the instructions using cndInst	^\s*piVar11\ =\ \(int\ \*\)\(iVar4\ \+\ puVar24\[2\]\);$	+1	all	none
+use	FUN_00187ad8	puVar24	useList	CONFIRMED	cndInst + 0x10: vector of the instructions using cndInst	^\s*piVar11\ =\ \(int\ \*\)FUN_0019423c\(puVar24,uVar18\);$	+1	all	none
+use	FUN_00187ad8	puVar24	useList	CONFIRMED	cndInst + 0x10: vector of the instructions using cndInst	^\s*puVar24\ =\ \(uint\ \*\)(?:piVar5|callResult)\[4\];$@3	+1	all	none
+use	FUN_00187ad8	puVar24	useList	CONFIRMED	cndInst + 0x10: vector of the instructions using cndInst	^\s*if\ \(puVar24\[1\]\ ==\ 0\)\ \{$	+1	all	none
+use	FUN_00187ad8	puVar24	useList	CONFIRMED	cndInst + 0x10: vector of the instructions using cndInst	^\s*puVar24\ =\ \(uint\ \*\)(?:piVar5|callResult)\[4\];$@4	+1	all	none
+use	FUN_00187ad8	puVar24	useList	CONFIRMED	cndInst + 0x10: vector of the instructions using cndInst	^\s*puVar24\ =\ \(uint\ \*\)(?:piVar5|callResult)\[4\];$@5	+1	all	none
+use	FUN_00187ad8	uVar3	useCount	INFERRED	useList[1]: number of users	^\s*uVar3\ =\ puVar24\[1\];$	+2	all	none
+use	FUN_00187ad8	uVar3	useCount	INFERRED	useList[1]: number of users	^\s*if\ \((?:uVar19|loopIndex2)\ ==\ uVar3\)\ goto\ LAB_00187cfc;$	+1	all	none
+use	FUN_00187ad8	uVar3	useCount	INFERRED	useList[1]: number of users	^\s*if\ \((?:uVar22|loopIndex3)\ ==\ uVar3\)\ goto\ code_r0x00188258;$	+1	all	none
+use	FUN_00187ad8	uVar18	useIndex	INFERRED	index into useList, walked backwards	^\s*uVar18\ =\ uVar3\ \-\ 1;$	+3	all	none
+use	FUN_00187ad8	uVar18	useIndex	INFERRED	index into useList, walked backwards	^\s*(?:uVar22|loopIndex3)\ =\ uVar18;$	+1	all	none
+use	FUN_00187ad8	uVar18	useIndex	INFERRED	index into useList, walked backwards	^\s*if\ \(\-1\ <\ \(int\)uVar18\)\ \{$@2	+2	all	none
+use	FUN_00187ad8	uVar18	useIndex	INFERRED	index into useList, walked backwards	^\s*if\ \(uVar18\ <\ \*puVar24\)\ \{$	+1	all	none
+use	FUN_00187ad8	uVar18	useIndex	INFERRED	index into useList, walked backwards	^\s*if\ \((?:uVar19|loopIndex2)\ <=\ uVar18\)\ \{$	+3	all	none
+use	FUN_00187ad8	uVar18	useIndex	INFERRED	index into useList, walked backwards	^\s*piVar11\ =\ \(int\ \*\)FUN_0019423c\(puVar24,uVar18\);$	+1	all	none
+use	FUN_00187ad8	uVar18	useIndex	INFERRED	index into useList, walked backwards	^\s*FUN_00194208\((?:piVar5|callResult)\[4\],uVar18\);$	+1	all	none
+use	FUN_00187ad8	uVar18	useIndex	INFERRED	index into useList, walked backwards	^\s*uVar18\ =\ uVar18\ \-\ 1;$	+1	all	none
+use	FUN_00187ad8	iVar6	useByteOffset	INFERRED	4 * useIndex	^\s*iVar6\ =\ uVar18\ \*\ 4;$	+1	all	none
+use	FUN_00187ad8	iVar6	useByteOffset	INFERRED	4 * useIndex	^\s*piVar8\ =\ \(int\ \*\)\(iVar6\ \+\ puVar24\[2\]\);$	+1	all	none
+use	FUN_00187ad8	iVar6	useByteOffset	INFERRED	4 * useIndex	^\s*iVar6\ =\ iVar6\ \+\ \-4;$	+1	all	none
+use	FUN_00187ad8	iVar4	opcodeInfo	INFERRED	opcode info (+0x88) of the user, +8 is its opcode (0x13 mul, 0x14 mul-add, 0x12 add)	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar26\ \+\ 0x88\);$	+1	all	none
+use	FUN_00187ad8	iVar4	opcodeInfo	INFERRED	opcode info (+0x88) of the user, +8 is its opcode (0x13 mul, 0x14 mul-add, 0x12 add)	^\s*if\ \(\*\(int\ \*\)\(iVar4\ \+\ 8\)\ !=\ 0x13\)\ \{$	+2	all	none
+use	FUN_00187ad8	iVar4	opcodeInfo	INFERRED	opcode info (+0x88) of the user, +8 is its opcode (0x13 mul, 0x14 mul-add, 0x12 add)	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar26\ \+\ 0x88\);$@2	+1	all	none
+use	FUN_00187ad8	iVar4	opcodeInfo	INFERRED	opcode info (+0x88) of the user, +8 is its opcode (0x13 mul, 0x14 mul-add, 0x12 add)	^\s*if\ \(\*\(int\ \*\)\(iVar4\ \+\ 8\)\ ==\ 0x12\)\ \{$	+1	all	none
+use	FUN_00187ad8	iVar26	userInst	INFERRED	user of cndInst being examined	^\s*iVar26\ =\ \*piVar8;$	+2	all	none
+use	FUN_00187ad8	iVar26	userInst	INFERRED	user of cndInst being examined	^\s*(?:piVar9|operandVReg3)\ =\ \(int\ \*\)FUN_00105594\(iVar26,1\);$	+4	all	none
+use	FUN_00187ad8	iVar26	userInst	INFERRED	user of cndInst being examined	^\s*(?:piVar9|operandVReg3)\ =\ \(int\ \*\)FUN_00105594\(iVar26,1\);$@2	+2	all	none
+use	FUN_00187ad8	piVar8	useSlot	INFERRED	slot of useList[useIndex]	^\s*piVar8\ =\ \(int\ \*\)\(iVar6\ \+\ puVar24\[2\]\);$	+1	all	none
+use	FUN_00187ad8	piVar8	useSlot	INFERRED	slot of useList[useIndex]	^\s*piVar8\ =\ \(int\ \*\)FUN_0019423c\(puVar24,(?:uVar22|loopIndex3)\);$	+1	all	none
+use	FUN_00187ad8	piVar8	useSlot	INFERRED	slot of useList[useIndex]	^\s*iVar26\ =\ \*piVar8;$	+1	all	none
+use	FUN_00187ad8	piVar8	otherOperand	INFERRED	operand of the add / mul-add user that is not cndInst	^\s*piVar8\ =\ piVar11;$	+1	all	none
+use	FUN_00187ad8	piVar8	otherOperand	INFERRED	operand of the add / mul-add user that is not cndInst	^\s*piVar8\ =\ piVar10;$	+3	all	none
+use	FUN_00187ad8	piVar8	otherOperand	INFERRED	operand of the add / mul-add user that is not cndInst	^\s*piVar11\ =\ piVar8;$	+1	all	none
+use	FUN_00187ad8	piVar11	commonOperand	INFERRED	the other operand all add / mul-add users share; a user with a different one aborts the fold	^\s*piVar11\ =\ \(int\ \*\)0x0;$	+1	all	none
+use	FUN_00187ad8	piVar11	commonOperand	INFERRED	the other operand all add / mul-add users share; a user with a different one aborts the fold	^\s*piVar8\ =\ piVar11;$	+1	all	none
+use	FUN_00187ad8	piVar11	commonOperand	INFERRED	the other operand all add / mul-add users share; a user with a different one aborts the fold	^\s*if\ \(\(\((?:piVar5|callResult)\ !=\ (?:piVar9|operandVReg3)\)\ \&\&\ \(piVar8\ =\ (?:piVar9|operandVReg3),\ (?:piVar5|callResult)\ !=\ piVar10\)\)\ \|\|$	+2	all	none
+use	FUN_00187ad8	piVar11	commonOperand	INFERRED	the other operand all add / mul-add users share; a user with a different one aborts the fold	^\s*piVar11\ =\ piVar8;$	+1	all	none
+use	FUN_00187ad8	iVar6	programLevel	INFERRED	program + 0x478, the level counter new instructions are placed relative to (inst + 0x160)	^\s*iVar6\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x478\);$	+1	all	none
+use	FUN_00187ad8	iVar6	programLevel	INFERRED	program + 0x478, the level counter new instructions are placed relative to (inst + 0x160)	^\s*iVar14\ =\ \*\(int\ \*\)\(iVar26\ \+\ 0x160\)\ \-\ iVar6;$	+1	all	none
+use	FUN_00187ad8	iVar6	programLevel	INFERRED	program + 0x478, the level counter new instructions are placed relative to (inst + 0x160)	^\s*piVar11\[0x58\]\ =\ iVar6\ \+\ iVar14;$	+1	all	none
+use	FUN_00187ad8	iVar6	programLevel	INFERRED	program + 0x478, the level counter new instructions are placed relative to (inst + 0x160)	^\s*if\ \(iVar6\ <\ \*\(int\ \*\)\((?:iVar23|loopIndex)\ \+\ 0x160\)\)\ \{$	+1	all	none
+use	FUN_00187ad8	iVar6	programLevel	INFERRED	program + 0x478, the level counter new instructions are placed relative to (inst + 0x160)	^\s*\*\(int\ \*\)\((?:iVar23|loopIndex)\ \+\ 0x160\)\ =\ iVar6\ \+\ 1;$	+1	all	none
+use	FUN_00187ad8	iVar4	userByteOffset	INFERRED	4 * useIndex in the second walk	^\s*iVar4\ =\ uVar18\ \*\ 4;$	+1	all	none
+use	FUN_00187ad8	iVar4	userByteOffset	INFERRED	4 * useIndex in the second walk	^\s*piVar11\ =\ \(int\ \*\)\(iVar4\ \+\ puVar24\[2\]\);$	+1	all	none
+use	FUN_00187ad8	iVar4	userByteOffset	INFERRED	4 * useIndex in the second walk	^\s*iVar4\ =\ iVar4\ \+\ \-4;$	+1	all	none
+use	FUN_00187ad8	piVar11	userSlot	INFERRED	slot of useList[useIndex]	^\s*piVar11\ =\ \(int\ \*\)\(iVar4\ \+\ puVar24\[2\]\);$	+1	all	none
+use	FUN_00187ad8	piVar11	userSlot	INFERRED	slot of useList[useIndex]	^\s*piVar11\ =\ \(int\ \*\)FUN_0019423c\(puVar24,uVar18\);$	+1	all	none
+use	FUN_00187ad8	piVar11	userSlot	INFERRED	slot of useList[useIndex]	^\s*iVar26\ =\ \*piVar11;$	+1	all	none
+use	FUN_00187ad8	iVar26	userInst	INFERRED	multiply user of cndInst being folded	^\s*iVar26\ =\ \*piVar11;$	+3	all	none
+use	FUN_00187ad8	iVar26	userInst	INFERRED	multiply user of cndInst being folded	^\s*piVar11\ =\ \(int\ \*\)FUN_00105594\(iVar26,2\);$	+1	all	none
+use	FUN_00187ad8	iVar26	userInst	INFERRED	multiply user of cndInst being folded	^\s*if\ \(\(\*\(uint\ \*\)\(iVar26\ \+\ 0x14\)\ \&\ 0x200\)\ !=\ 0\)\ \{$	+2	all	none
+use	FUN_00187ad8	iVar26	userInst	INFERRED	multiply user of cndInst being folded	^\s*(?:uVar12|operandRecord)\ =\ FUN_001054ec\(iVar26,0\);$	+1	all	none
+use	FUN_00187ad8	iVar26	userInst	INFERRED	multiply user of cndInst being folded	^\s*local_60\ =\ FUN_00105594\(iVar26,(?:iVar23|loopIndex)\);$	+3	all	none
+use	FUN_00187ad8	iVar26	userInst	INFERRED	multiply user of cndInst being folded	^\s*iVar13\ =\ FUN_001054ec\(iVar26,uVar21\);$	+1	all	none
+use	FUN_00187ad8	iVar26	userInst	INFERRED	multiply user of cndInst being folded	^\s*(?:uVar19|loopIndex2)\ =\ \*\(uint\ \*\)\((?:iVar23|loopIndex)\ \*\ 0x18\ \+\ iVar26\ \+\ 0xa0\);$	+1	all	none
+use	FUN_00187ad8	iVar26	userInst	INFERRED	multiply user of cndInst being folded	^\s*local_70\ =\ \*\(undefined4\ \*\)\(iVar26\ \+\ 8\);$	+2	all	none
+use	FUN_00187ad8	iVar26	userInst	INFERRED	multiply user of cndInst being folded	^\s*(?:iVar23|loopIndex)\ =\ \*\(int\ \*\)\(iVar26\ \+\ 0x10\);$	+1	all	none
+use	FUN_00187ad8	iVar26	userInst	INFERRED	multiply user of cndInst being folded	^\s*FUN_0019401c\(iVar26\);$	+6	all	none
+use	FUN_00187ad8	iVar26	userInst	INFERRED	multiply user of cndInst being folded	^\s*iVar14\ =\ FUN_00105594\(iVar26,\*\(undefined4\ \*\)\(iVar26\ \+\ 0x84\)\);$	+1	all	none
+use	FUN_00187ad8	iVar26	userInst	INFERRED	multiply user of cndInst being folded	^\s*if\ \(iVar26\ ==\ \*piVar11\)\ \{$	+1	all	none
+use	FUN_00187ad8	iVar26	userInst	INFERRED	multiply user of cndInst being folded	^\s*iVar14\ =\ FUN_00105594\(iVar26,\*\(undefined4\ \*\)\(iVar26\ \+\ 0x84\)\);$@2	+1	all	none
+use	FUN_00187ad8	iVar26	userInst	INFERRED	multiply user of cndInst being folded	^\s*FUN_00106004\(iVar26,\*\(undefined4\ \*\)\(iVar26\ \+\ 0x84\),0,1,uVar21\);$	+3	all	none
+use	FUN_00187ad8	iVar26	userInst	INFERRED	multiply user of cndInst being folded	^\s*iVar14\ =\ \*\(int\ \*\)\(iVar26\ \+\ 0x160\)\ \-\ iVar6;$	+1	all	none
+use	FUN_00187ad8	iVar26	userInst	INFERRED	multiply user of cndInst being folded	^\s*piVar11\ =\ \(int\ \*\)FUN_00103ebc\((?:piVar5|callResult),iVar26,\*\(undefined4\ \*\)\(param_2\ \+\ 8\),1\);$	+1	all	none
+use	FUN_00187ad8	uVar21	cndOperandNumber	INFERRED	operand number (1 or 2) of the user that reads cndInst	^\s*uVar21\ =\ 1;$	+1	all	none
+use	FUN_00187ad8	uVar21	cndOperandNumber	INFERRED	operand number (1 or 2) of the user that reads cndInst	^\s*uVar21\ =\ 2;$	+1	all	none
+use	FUN_00187ad8	uVar21	cndOperandNumber	INFERRED	operand number (1 or 2) of the user that reads cndInst	^\s*iVar13\ =\ FUN_001054ec\(iVar26,uVar21\);$	+1	all	none
+local	FUN_00187ad8	local_5c	destRecordCopy	INFERRED	copy of the user's destination operand record, re-applied to the rewritten instruction
+local	FUN_00187ad8	local_60	otherSource	INFERRED	the user's other factor (the source that is not cndInst)
+local	FUN_00187ad8	local_64	otherAbs	INFERRED	modifier bit 2 of the other factor's operand
+local	FUN_00187ad8	local_68	otherNegate	INFERRED	modifier bit 1 of the other factor's operand
+local	FUN_00187ad8	local_6c	cndPrev	INFERRED	cndInst[1], its list predecessor: where cndInst is linked back into the block
+local	FUN_00187ad8	local_70	userNext	INFERRED	the user's list successor: the rewritten instruction is inserted before it
+local	FUN_00187ad8	local_74	userBlock	INFERRED	the user's block (+0x158)
+local	FUN_00187ad8	local_78	otherSelect	INFERRED	select word of the other factor's operand record
+local	FUN_00187ad8	local_98	cndOperandSelect	INFERRED	select word of the operand that reads cndInst; its bytes give the lane map
+use	FUN_00187ad8	iVar13	cndBlock	INFERRED	cndInst[0x56]: block of cndInst	^\s*iVar13\ =\ (?:piVar5|callResult)\[0x56\];$	+1	all	none
+use	FUN_00187ad8	iVar13	cndBlock	INFERRED	cndInst[0x56]: block of cndInst	^\s*FUN_000e7738\(iVar13,local_6c,(?:piVar5|callResult)\);$	+1	all	none
+use	FUN_00187ad8	iVar14	levelOffset	INFERRED	user level (+0x160) minus programLevel, clamped at 0	^\s*iVar14\ =\ \*\(int\ \*\)\(iVar26\ \+\ 0x160\)\ \-\ iVar6;$	+3	all	none
+use	FUN_00187ad8	iVar14	levelOffset	INFERRED	user level (+0x160) minus programLevel, clamped at 0	^\s*piVar11\[0x58\]\ =\ iVar6\ \+\ iVar14;$	+1	all	none
+use	FUN_00187ad8	iVar16	userRegId	INFERRED	user + 0x14c, kept on the rewritten instruction	^\s*iVar16\ =\ \*\(int\ \*\)\(iVar26\ \+\ 0x14c\);$	+1	all	none
+use	FUN_00187ad8	iVar16	userRegId	INFERRED	user + 0x14c, kept on the rewritten instruction	^\s*piVar11\[0x53\]\ =\ iVar16;$	+1	all	none
+use	FUN_00187ad8	iVar27	userField120	INFERRED	user + 0x120, kept on the rewritten instruction	^\s*iVar27\ =\ \*\(int\ \*\)\(iVar26\ \+\ 0x120\);$	+1	all	none
+use	FUN_00187ad8	iVar27	userField120	INFERRED	user + 0x120, kept on the rewritten instruction	^\s*piVar11\[0x48\]\ =\ iVar27;$	+1	all	none
+use	FUN_00187ad8	iVar17	userField124	INFERRED	user + 0x124, kept on the rewritten instruction	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar26\ \+\ 0x124\);$	+1	all	none
+use	FUN_00187ad8	iVar17	userField124	INFERRED	user + 0x124, kept on the rewritten instruction	^\s*piVar11\[0x49\]\ =\ iVar17;$	+1	all	none
+use	FUN_00187ad8	iVar20	extraSource	INFERRED	the user's extra (6th+) operand source when flag 0x200 is set, else 0	^\s*iVar20\ =\ 0;$	+1	all	none
+use	FUN_00187ad8	iVar20	extraSource	INFERRED	the user's extra (6th+) operand source when flag 0x200 is set, else 0	^\s*iVar20\ =\ FUN_00105594\(iVar26,\*\(undefined4\ \*\)\(iVar26\ \+\ 0x84\)\);$	+1	all	none
+use	FUN_00187ad8	iVar20	extraSource	INFERRED	the user's extra (6th+) operand source when flag 0x200 is set, else 0	^\s*if\ \(iVar20\ !=\ 0\)\ \{$	+2	all	none
+use	FUN_00187ad8	iVar20	extraSource	INFERRED	the user's extra (6th+) operand source when flag 0x200 is set, else 0	^\s*for\ \(iVar13\ =\ 1;\ iVar20\ =\ \(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x14\)\)\(piVar11\),\ iVar13\ <=\ iVar20;$	+2	all	none
+use	FUN_00187ad8	iVar20	extraSource	INFERRED	the user's extra (6th+) operand source when flag 0x200 is set, else 0	^\s*iVar20\ =\ FUN_001054ec\((?:piVar5|callResult),iVar13\);$	+2	all	none
+use	FUN_00187ad8	uVar21	compiler	INFERRED	program + 8	^\s*uVar21\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 8\);$	+1	all	none
+use	FUN_00187ad8	uVar21	compiler	INFERRED	program + 8	^\s*FUN_00106004\(iVar26,\*\(undefined4\ \*\)\(iVar26\ \+\ 0x84\),0,1,uVar21\);$	+1	all	none
+use	FUN_00187ad8	puVar24	sourceUseList	INFERRED	use list of the user's extra source: the user is removed from it	^\s*puVar24\ =\ \*\(uint\ \*\*\)\(iVar14\ \+\ 0x10\);$	+2	all	none
+use	FUN_00187ad8	puVar24	sourceUseList	INFERRED	use list of the user's extra source: the user is removed from it	^\s*if\ \((?:uVar7|loopIndex4)\ <\ \*puVar24\)\ \{$	+1	all	none
+use	FUN_00187ad8	puVar24	sourceUseList	INFERRED	use list of the user's extra source: the user is removed from it	^\s*_memset\((?:uVar19|loopIndex2)\ \*\ 4\ \+\ puVar24\[2\],0,\((?:uVar7|loopIndex4)\ \-\ (?:uVar19|loopIndex2)\)\ \*\ 4\ \+\ 4\);$	+2	all	none
+use	FUN_00187ad8	puVar24	sourceUseList	INFERRED	use list of the user's extra source: the user is removed from it	^\s*piVar11\ =\ \(int\ \*\)\((?:uVar7|loopIndex4)\ \*\ 4\ \+\ puVar24\[2\]\);$	+1	all	none
+use	FUN_00187ad8	puVar24	sourceUseList	INFERRED	use list of the user's extra source: the user is removed from it	^\s*piVar11\ =\ \(int\ \*\)FUN_0019423c\(puVar24,(?:uVar7|loopIndex4)\);$	+1	all	none
+use	FUN_00187ad8	puVar24	sourceUseList	INFERRED	use list of the user's extra source: the user is removed from it	^\s*FUN_00194208\(puVar24,(?:uVar7|loopIndex4)\);$	+1	all	none
+use	FUN_00187ad8	puVar24	sourceUseList	INFERRED	use list of the user's extra source: the user is removed from it	^\s*(?:uVar19|loopIndex2)\ =\ puVar24\[1\];$@3	+1	all	none
+use	FUN_00187ad8	puVar24	newSourceUseList	INFERRED	use list of the rewritten instruction's operand 1: the instruction is appended	^\s*puVar24\ =\ \*\(uint\ \*\*\)\((?:iVar23|loopIndex)\ \+\ 0x10\);$	+6	all	none
+use	FUN_00187ad8	puVar24	newSourceUseList	INFERRED	use list of the rewritten instruction's operand 1: the instruction is appended	^\s*puVar15\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar24,(?:uVar19|loopIndex2)\);$	+1	all	none
+use	FUN_00187ad8	puVar15	appendSlot	INFERRED	new slot at the end of newSourceUseList	^\s*puVar15\ =\ \(undefined4\ \*\)\((?:uVar19|loopIndex2)\ \*\ 4\ \+\ puVar24\[2\]\);$	+1	all	none
+use	FUN_00187ad8	puVar15	appendSlot	INFERRED	new slot at the end of newSourceUseList	^\s*puVar15\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar24,(?:uVar19|loopIndex2)\);$	+1	all	none
+use	FUN_00187ad8	puVar15	appendSlot	INFERRED	new slot at the end of newSourceUseList	^\s*\*puVar15\ =\ piVar11;$	+1	all	none
+use	FUN_00187ad8	piVar11	foldedInst	INFERRED	the user object overwritten in place with a copy of cndInst (FUN_00103ebc), now selecting between the other factor and zero	^\s*piVar11\ =\ \(int\ \*\)FUN_00103ebc\((?:piVar5|callResult),iVar26,\*\(undefined4\ \*\)\(param_2\ \+\ 8\),1\);$	+1	all	none
+use	FUN_00187ad8	piVar11	foldedInst	INFERRED	the user object overwritten in place with a copy of cndInst (FUN_00103ebc), now selecting between the other factor and zero	^\s*FUN_001062c0\(piVar11,0,local_5c,\*\(undefined4\ \*\)\(param_2\ \+\ 8\)\);$	+2	all	none
+use	FUN_00187ad8	piVar11	foldedInst	INFERRED	the user object overwritten in place with a copy of cndInst (FUN_00103ebc), now selecting between the other factor and zero	^\s*FUN_000e7700\(local_74,local_70,piVar11\);$	+3	all	none
+use	FUN_00187ad8	piVar11	foldedInst	INFERRED	the user object overwritten in place with a copy of cndInst (FUN_00103ebc), now selecting between the other factor and zero	^\s*FUN_00106804\(piVar11,iVar20,1,\*\(undefined4\ \*\)\(param_2\ \+\ 8\)\);$	+1	all	none
+use	FUN_00187ad8	piVar11	foldedInst	INFERRED	the user object overwritten in place with a copy of cndInst (FUN_00103ebc), now selecting between the other factor and zero	^\s*piVar11\[4\]\ =\ (?:iVar23|loopIndex);$	+3	all	none
+use	FUN_00187ad8	piVar11	foldedInst	INFERRED	the user object overwritten in place with a copy of cndInst (FUN_00103ebc), now selecting between the other factor and zero	^\s*piVar11\[0x27\]\ =\ local_78;$	+1	all	none
+use	FUN_00187ad8	piVar11	foldedInst	INFERRED	the user object overwritten in place with a copy of cndInst (FUN_00103ebc), now selecting between the other factor and zero	^\s*(?:iVar23|loopIndex)\ =\ FUN_001054ec\(piVar11,iVar26\);$	+1	all	none
+use	FUN_00187ad8	piVar11	foldedInst	INFERRED	the user object overwritten in place with a copy of cndInst (FUN_00103ebc), now selecting between the other factor and zero	^\s*FUN_00103d50\(piVar11\ \+\ iVar26\ \*\ 6\ \+\ 0x23,2,local_64\);$	+3	all	none
+use	FUN_00187ad8	piVar11	foldedInst	INFERRED	the user object overwritten in place with a copy of cndInst (FUN_00103ebc), now selecting between the other factor and zero	^\s*\*puVar15\ =\ piVar11;$	+1	all	none
+use	FUN_00187ad8	piVar11	foldedInst	INFERRED	the user object overwritten in place with a copy of cndInst (FUN_00103ebc), now selecting between the other factor and zero	^\s*iVar13\ =\ FUN_001054ec\(piVar11,0\);$	+1	all	none
+use	FUN_00187ad8	piVar11	foldedInst	INFERRED	the user object overwritten in place with a copy of cndInst (FUN_00103ebc), now selecting between the other factor and zero	^\s*for\ \(iVar13\ =\ 1;\ iVar20\ =\ \(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x14\)\)\(piVar11\),\ iVar13\ <=\ iVar20;$	+2	all	none
+use	FUN_00187ad8	piVar11	foldedInst	INFERRED	the user object overwritten in place with a copy of cndInst (FUN_00103ebc), now selecting between the other factor and zero	^\s*\(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x88\)\)\(piVar11,iVar13,(?:iVar23|loopIndex),4\);$	+1	all	none
+use	FUN_00187ad8	piVar11	foldedInst	INFERRED	the user object overwritten in place with a copy of cndInst (FUN_00103ebc), now selecting between the other factor and zero	^\s*pcVar25\ =\ \*\(code\ \*\*\)\(\*piVar11\ \+\ 0x88\);$	+1	all	none
+use	FUN_00187ad8	piVar11	foldedInst	INFERRED	the user object overwritten in place with a copy of cndInst (FUN_00103ebc), now selecting between the other factor and zero	^\s*\(\*pcVar25\)\(piVar11,iVar13,(?:iVar23|loopIndex),\*\(undefined1\ \*\)\((?:uVar19|loopIndex2)\ \+\ iVar20\ \+\ 0x10\)\);$	+1	all	none
+use	FUN_00187ad8	iVar26	selectOperand	INFERRED	operand of the rewritten select that receives the other factor: 2, or 3 when source 2 of cndInst is the literal	^\s*iVar26\ =\ \(iVar2\ ==\ 0\)\ \+\ 2;$	+1	all	none
+use	FUN_00187ad8	iVar26	selectOperand	INFERRED	operand of the rewritten select that receives the other factor: 2, or 3 when source 2 of cndInst is the literal	^\s*FUN_00106004\(piVar11,iVar26,local_60,1,\*\(undefined4\ \*\)\(param_2\ \+\ 8\)\);$	+1	all	none
+use	FUN_00187ad8	iVar26	selectOperand	INFERRED	operand of the rewritten select that receives the other factor: 2, or 3 when source 2 of cndInst is the literal	^\s*if\ \(iVar26\ ==\ 0\)\ \{$	+1	all	none
+use	FUN_00187ad8	iVar26	selectOperand	INFERRED	operand of the rewritten select that receives the other factor: 2, or 3 when source 2 of cndInst is the literal	^\s*(?:iVar23|loopIndex)\ =\ FUN_001054ec\(piVar11,iVar26\);$	+1	all	none
+use	FUN_00187ad8	iVar26	selectOperand	INFERRED	operand of the rewritten select that receives the other factor: 2, or 3 when source 2 of cndInst is the literal	^\s*FUN_00103d50\(piVar11\ \+\ iVar26\ \*\ 6\ \+\ 0x23,2,local_64\);$	+2	all	none
+use	FUN_00187ad8	iVar26	selectOperand	INFERRED	operand of the rewritten select that receives the other factor: 2, or 3 when source 2 of cndInst is the literal	^\s*if\ \(iVar26\ !=\ iVar13\)\ \{$	+1	all	none
+use	FUN_00187ad8	iVar13	operandNumber	INFERRED	operand number 1..count of the rewritten instruction	^\s*for\ \(iVar13\ =\ 1;\ iVar20\ =\ \(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x14\)\)\(piVar11\),\ iVar13\ <=\ iVar20;$	+3	all	none
+use	FUN_00187ad8	iVar13	operandNumber	INFERRED	operand number 1..count of the rewritten instruction	^\s*\(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x88\)\)\(piVar11,iVar13,(?:iVar23|loopIndex),4\);$	+1	all	none
+use	FUN_00187ad8	iVar13	operandNumber	INFERRED	operand number 1..count of the rewritten instruction	^\s*iVar20\ =\ FUN_001054ec\((?:piVar5|callResult),iVar13\);$	+2	all	none
+use	FUN_00187ad8	pcVar25	setLaneSelect	INFERRED	IRInst vslot 0x88 on the rewritten instruction: set the select of one lane of an operand	^\s*pcVar25\ =\ \*\(code\ \*\*\)\(\*piVar11\ \+\ 0x88\);$	+1	all	none
+use	FUN_00187ad8	pcVar25	setLaneSelect	INFERRED	IRInst vslot 0x88 on the rewritten instruction: set the select of one lane of an operand	^\s*\(\*pcVar25\)\(piVar11,iVar13,(?:iVar23|loopIndex),\*\(undefined1\ \*\)\((?:uVar19|loopIndex2)\ \+\ iVar20\ \+\ 0x10\)\);$	+1	all	none
+use	FUN_00187ad8	bVar1	moreLanes	INFERRED	do/while condition over the four lanes	^\s*bVar1\ =\ (?:iVar23|loopIndex)\ !=\ 3;$	+1	all	none
+use	FUN_00187ad8	bVar1	moreLanes	INFERRED	do/while condition over the four lanes	^\s*\}\ while\ \(bVar1\);$	+1	all	none
+local	R300SchedModel__legalizeInstruction	iVar17	program	CONFIRMED	*(compiler + 0x6c4): the program; passed to IRInst__hasSingleUse, +0x238 / +0x474 are its counters
+use	R300SchedModel__legalizeInstruction	bVar1	moreComponents	INFERRED	do/while condition over the four components	^\s*bVar1\ =\ (?:uVar21|loopIndex7)\ !=\ 3;$	+1	all	none
+use	R300SchedModel__legalizeInstruction	bVar1	moreComponents	INFERRED	do/while condition over the four components	^\s*\}\ while\ \(bVar1\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	bVar2	pushUpFailed	INFERRED	set when a negation cannot be pushed through a producer: a mov is inserted instead	^\s*bVar2\ =\ false;$	+1	all	none
+use	R300SchedModel__legalizeInstruction	bVar2	pushUpFailed	INFERRED	set when a negation cannot be pushed through a producer: a mov is inserted instead	^\s*bVar2\ =\ true;$	+1	all	none
+use	R300SchedModel__legalizeInstruction	bVar2	pushUpFailed	INFERRED	set when a negation cannot be pushed through a producer: a mov is inserted instead	^\s*if\ \(bVar2\)\ goto\ LAB_0018e6e0;$	+1	all	none
+use	R300SchedModel__legalizeInstruction	bVar2	pushUpFailed	INFERRED	set when a negation cannot be pushed through a producer: a mov is inserted instead	^\s*if\ \(bVar2\)\ \{$	+1	all	none
+use	R300SchedModel__legalizeInstruction	bVar2	moreLanes	INFERRED	do/while condition over the four components	^\s*bVar2\ =\ (?:iVar5|loopIndex4)\ !=\ 3;$	+1	all	none
+use	R300SchedModel__legalizeInstruction	bVar2	moreLanes	INFERRED	do/while condition over the four components	^\s*\}\ while\ \(bVar2\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	bVar2	noMovYet	INFERRED	true while no mov has been inserted for the sources of the fetch	^\s*bVar2\ =\ piVar6\ ==\ \(int\ \*\)0x0;$	+1	all	none
+use	R300SchedModel__legalizeInstruction	bVar2	noMovYet	INFERRED	true while no mov has been inserted for the sources of the fetch	^\s*if\ \(bVar2\)\ \{$@2	+2	all	none
+use	R300SchedModel__legalizeInstruction	bVar2	noMovYet	INFERRED	true while no mov has been inserted for the sources of the fetch	^\s*if\ \(!bVar2\)\ \{$	+1	all	none
+use	R300SchedModel__legalizeInstruction	bVar2	moreLanes	INFERRED	do/while condition over the four components	^\s*bVar2\ =\ (?:iVar14|loopIndex2)\ !=\ 3;$	+1	all	none
+use	R300SchedModel__legalizeInstruction	bVar2	moreLanes	INFERRED	do/while condition over the four components	^\s*\}\ while\ \(bVar2\);$@2	+1	all	none
+use	R300SchedModel__legalizeInstruction	bVar2	laneSelected	INFERRED	a lane of the new mov reads a source lane	^\s*bVar2\ =\ false;$@2	+1	all	none
+use	R300SchedModel__legalizeInstruction	bVar2	laneSelected	INFERRED	a lane of the new mov reads a source lane	^\s*bVar2\ =\ true;$@2	+1	all	none
+use	R300SchedModel__legalizeInstruction	bVar2	laneSelected	INFERRED	a lane of the new mov reads a source lane	^\s*if\ \(bVar2\)\ \{$@3	+1	all	none
+use	R300SchedModel__legalizeInstruction	bVar3	hasMarkedMov	INFERRED	a mov source was deferred to the second list (its flag 0x80000000 is set at the end)	^\s*bVar3\ =\ false;$	+1	all	none
+use	R300SchedModel__legalizeInstruction	bVar3	hasMarkedMov	INFERRED	a mov source was deferred to the second list (its flag 0x80000000 is set at the end)	^\s*bVar3\ =\ true;$	+1	all	none
+use	R300SchedModel__legalizeInstruction	bVar3	hasMarkedMov	INFERRED	a mov source was deferred to the second list (its flag 0x80000000 is set at the end)	^\s*if\ \(bVar3\)\ \{$	+1	all	none
+use	R300SchedModel__legalizeInstruction	bVar3	moreSwizzleBytes	INFERRED	do/while condition over the four components	^\s*bVar3\ =\ (?:iVar7|loopIndex5)\ !=\ 3;$	+1	all	none
+use	R300SchedModel__legalizeInstruction	bVar3	moreSwizzleBytes	INFERRED	do/while condition over the four components	^\s*\}\ while\ \(bVar3\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	insertedMov	INFERRED	the mov (IrMovFloat, 0x31) inserted for the kill's source, or the first mov inserted for a fetch's sources; 0 when none	^\s*piVar6\ =\ \(int\ \*\)0x0;$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	insertedMov	INFERRED	the mov (IrMovFloat, 0x31) inserted for the kill's source, or the first mov inserted for a fetch's sources; 0 when none	^\s*piVar6\ =\ \(int\ \*\)FUN_001043f0\(0x31,(?:param_1|this)\[2\]\);$	+5	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	insertedMov	INFERRED	the mov (IrMovFloat, 0x31) inserted for the kill's source, or the first mov inserted for a fetch's sources; 0 when none	^\s*piVar6\[0x27\]\ =\ DAT_001b2a80;$	+2	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	insertedMov	INFERRED	the mov (IrMovFloat, 0x31) inserted for the kill's source, or the first mov inserted for a fetch's sources; 0 when none	^\s*\(\*\*\(code\ \*\*\)\(\*piVar6\ \+\ 0x88\)\)\(piVar6,1,(?:uVar21|loopIndex7),(?:uVar21|loopIndex7)\);$	+2	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	insertedMov	INFERRED	the mov (IrMovFloat, 0x31) inserted for the kill's source, or the first mov inserted for a fetch's sources; 0 when none	^\s*FUN_000e7700\(iVar15,(?:param_2|inst),piVar6\);$	+2	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	insertedMov	INFERRED	the mov (IrMovFloat, 0x31) inserted for the kill's source, or the first mov inserted for a fetch's sources; 0 when none	^\s*piVar6\ =\ \(int\ \*\)0x0;$@4	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	insertedMov	INFERRED	the mov (IrMovFloat, 0x31) inserted for the kill's source, or the first mov inserted for a fetch's sources; 0 when none	^\s*bVar2\ =\ piVar6\ ==\ \(int\ \*\)0x0;$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	insertedMov	INFERRED	the mov (IrMovFloat, 0x31) inserted for the kill's source, or the first mov inserted for a fetch's sources; 0 when none	^\s*piVar6\ =\ (?:piVar10|inst2);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	insertedMov	INFERRED	the mov (IrMovFloat, 0x31) inserted for the kill's source, or the first mov inserted for a fetch's sources; 0 when none	^\s*(?:param_2|inst)\ =\ piVar6;$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	pushSlot	INFERRED	new slot at the end of the walk stack	^\s*piVar6\ =\ \(int\ \*\)\((?:iVar7|loopIndex5)\ \+\ local_8c\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	pushSlot	INFERRED	new slot at the end of the walk stack	^\s*piVar6\ =\ \(int\ \*\)FUN_0019423c\(\&local_94,local_90\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	pushSlot	INFERRED	new slot at the end of the walk stack	^\s*\*piVar6\ =\ (?:iVar5|loopIndex4);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	topSlot	INFERRED	slot of the top walk stack entry	^\s*piVar6\ =\ \(int\ \*\)0x0;$@2	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	topSlot	INFERRED	slot of the top walk stack entry	^\s*piVar6\ =\ \(int\ \*\)\((?:uVar21|loopIndex7)\ \*\ 4\ \+\ local_8c\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	topSlot	INFERRED	slot of the top walk stack entry	^\s*(?:iVar20|loopIndex3)\ =\ \*piVar6;$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	sourceDef	INFERRED	the definition of source `loopIndex` of the walked instruction (0x40 negation push-up)	^\s*piVar6\ =\ \(int\ \*\)FUN_00105594\((?:iVar20|loopIndex3),(?:iVar12|loopIndex)\);$	+4	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	sourceDef	INFERRED	the definition of source `loopIndex` of the walked instruction (0x40 negation push-up)	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*piVar6\ \+\ 0x48\)\)\(piVar6\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	sourceDef	INFERRED	the definition of source `loopIndex` of the walked instruction (0x40 negation push-up)	^\s*iVar8\ =\ FUN_0010497c\(piVar6,iVar17\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	sourceDef	INFERRED	the definition of source `loopIndex` of the walked instruction (0x40 negation push-up)	^\s*iVar8\ =\ \*\(int\ \*\)\(piVar6\[0x22\]\ \+\ 8\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	sourceDef	INFERRED	the definition of source `loopIndex` of the walked instruction (0x40 negation push-up)	^\s*FUN_00103d50\(piVar6\ \+\ 0x29,1,piVar6\[0x2e\]\ \&\ 1U\ \^\ 1\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	sourceDef	INFERRED	the definition of source `loopIndex` of the walked instruction (0x40 negation push-up)	^\s*FUN_00103d50\(piVar6\ \+\ 0x29,1,piVar6\[0x2e\]\ \&\ 1U\ \^\ 1\);$@2	+2	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	sourceDef	INFERRED	the definition of source `loopIndex` of the walked instruction (0x40 negation push-up)	^\s*FUN_00103d50\(piVar6\ \+\ 0x29,1,piVar6\[0x2e\]\ \&\ 1U\ \^\ 1\);$@3	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	sourceDef	INFERRED	the definition of source `loopIndex` of the walked instruction (0x40 negation push-up)	^\s*iVar8\ =\ \(\(undefined4\ \(\*\)\(\)\)FUN_00139838\)\(piVar6,2,\(double\)FLOAT_001aa0d4\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	sourceDef	INFERRED	the definition of source `loopIndex` of the walked instruction (0x40 negation push-up)	^\s*FUN_00103d50\(piVar6\ \+\ 0x2f,1,piVar6\[0x34\]\ \&\ 1U\ \^\ 1\);$@2	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	sourceDef	INFERRED	the definition of source `loopIndex` of the walked instruction (0x40 negation push-up)	^\s*iVar8\ =\ \(\(undefined4\ \(\*\)\(\)\)FUN_00139838\)\(piVar6,3,\(double\)FLOAT_001aa0d4\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	sourceDef	INFERRED	the definition of source `loopIndex` of the walked instruction (0x40 negation push-up)	^\s*FUN_00103d50\(piVar6\ \+\ 0x35,1,piVar6\[0x3a\]\ \&\ 1U\ \^\ 1\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	sourceDef	INFERRED	the definition of source `loopIndex` of the walked instruction (0x40 negation push-up)	^\s*piVar11\ =\ piVar6;$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	sourceDef	INFERRED	the definition of source `loopIndex` of the walked instruction (0x40 negation push-up)	^\s*iVar8\ =\ FUN_001054ec\(piVar6,0\);$	+4	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	sourceDef	INFERRED	the definition of source `loopIndex` of the walked instruction (0x40 negation push-up)	^\s*iVar8\ =\ FUN_001132f0\(\*\(undefined4\ \*\)\(piVar6\[0x22\]\ \+\ 8\),(?:param_1|this)\[2\]\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	sourceDef	INFERRED	the definition of source `loopIndex` of the walked instruction (0x40 negation push-up)	^\s*if\ \(\*\(int\ \*\)\(piVar6\[0x22\]\ \+\ 8\)\ ==\ 0x31\)\ \{$	+2	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	sourceDef	INFERRED	the definition of source `loopIndex` of the walked instruction (0x40 negation push-up)	^\s*iVar8\ =\ FUN_00105594\(piVar6,1\);$@2	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	sourceDef	INFERRED	the definition of source `loopIndex` of the walked instruction (0x40 negation push-up)	^\s*\*puVar9\ =\ piVar6;$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	sourceDef	INFERRED	the definition of source `loopIndex` of the walked instruction (0x40 negation push-up)	^\s*\*puVar9\ =\ piVar6;$@2	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	stackTopSlot	INFERRED	slot of the top entry of the deferred-mov list	^\s*piVar6\ =\ \(int\ \*\)0x0;$@3	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	stackTopSlot	INFERRED	slot of the top entry of the deferred-mov list	^\s*piVar6\ =\ \(int\ \*\)\((?:uVar21|loopIndex7)\ \*\ 4\ \+\ local_84\[2\]\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	stackTopSlot	INFERRED	slot of the top entry of the deferred-mov list	^\s*(?:iVar5|loopIndex4)\ =\ \*piVar6;$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	targetInst	INFERRED	the instruction the following stages work on: inst, or the mov inserted in front of an IrDsx/IrDsy	^\s*piVar6\ =\ (?:param_2|inst);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	targetInst	INFERRED	the instruction the following stages work on: inst, or the mov inserted in front of an IrDsx/IrDsy	^\s*piVar6\ =\ \(int\ \*\)FUN_001043f0\(0x31,(?:param_1|this)\[2\]\);$@2	+3	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	targetInst	INFERRED	the instruction the following stages work on: inst, or the mov inserted in front of an IrDsx/IrDsy	^\s*(?:iVar5|loopIndex4)\ =\ FUN_001054ec\(piVar6,0\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	targetInst	INFERRED	the instruction the following stages work on: inst, or the mov inserted in front of an IrDsx/IrDsy	^\s*FUN_00106004\(piVar6,1,uVar13,0,(?:param_1|this)\[2\]\);$	+3	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	targetInst	INFERRED	the instruction the following stages work on: inst, or the mov inserted in front of an IrDsx/IrDsy	^\s*(?:iVar5|loopIndex4)\ =\ FUN_001054ec\(piVar6,1\);$@2	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	targetInst	INFERRED	the instruction the following stages work on: inst, or the mov inserted in front of an IrDsx/IrDsy	^\s*FUN_000e7700\(iVar15,(?:param_2|inst),piVar6\);$@2	+2	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	targetInst	INFERRED	the instruction the following stages work on: inst, or the mov inserted in front of an IrDsx/IrDsy	^\s*(?:iVar5|loopIndex4)\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_1|this)\ \+\ 0x88\)\)\((?:param_1|this),piVar6\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	targetInst	INFERRED	the instruction the following stages work on: inst, or the mov inserted in front of an IrDsx/IrDsy	^\s*for\ \(;\ (?:iVar5|loopIndex4)\ =\ \(\*\*\(code\ \*\*\)\(\*piVar6\ \+\ 0x14\)\)\(piVar6\),\ (?:iVar14|loopIndex2)\ <=\ (?:iVar5|loopIndex4);\ (?:iVar14|loopIndex2)\ =\ (?:iVar14|loopIndex2)\ \+\ 1\)\ \{$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	targetInst	INFERRED	the instruction the following stages work on: inst, or the mov inserted in front of an IrDsx/IrDsy	^\s*\(\*\*\(code\ \*\*\)\(\*(?:param_1|this)\ \+\ 0x68\)\)\((?:param_1|this),piVar6,(?:iVar14|loopIndex2),local_84,\&local_98,(?:param_1|this)\[2\]\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	targetInst	INFERRED	the instruction the following stages work on: inst, or the mov inserted in front of an IrDsx/IrDsy	^\s*if\ \(\(\*\(int\ \*\)\(piVar6\[0x22\]\ \+\ 8\)\ ==\ 0x31\)\ \|\|\ \(\*\(int\ \*\)\(piVar6\[0x22\]\ \+\ 8\)\ ==\ 0x30\)\)\ \{$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	targetInst	INFERRED	the instruction the following stages work on: inst, or the mov inserted in front of an IrDsx/IrDsy	^\s*FUN_00103f84\((?:iVar5|loopIndex4),piVar6\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	targetInst	INFERRED	the instruction the following stages work on: inst, or the mov inserted in front of an IrDsx/IrDsy	^\s*FUN_000e7700\(iVar15,piVar6,(?:iVar5|loopIndex4)\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	targetInst	INFERRED	the instruction the following stages work on: inst, or the mov inserted in front of an IrDsx/IrDsy	^\s*FUN_00103f84\((?:iVar7|loopIndex5),piVar6\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	targetInst	INFERRED	the instruction the following stages work on: inst, or the mov inserted in front of an IrDsx/IrDsy	^\s*FUN_000e7700\(iVar15,piVar6,(?:iVar7|loopIndex5)\);$	+2	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	targetInst	INFERRED	the instruction the following stages work on: inst, or the mov inserted in front of an IrDsx/IrDsy	^\s*(?:iVar7|loopIndex5)\ =\ FUN_001054ec\(piVar6,1\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	targetInst	INFERRED	the instruction the following stages work on: inst, or the mov inserted in front of an IrDsx/IrDsy	^\s*piVar6\[0x27\]\ =\ local_60;$	+3	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	targetInst	INFERRED	the instruction the following stages work on: inst, or the mov inserted in front of an IrDsx/IrDsy	^\s*piVar11\ =\ \(int\ \*\)FUN_00105594\(piVar6,(?:iVar14|loopIndex2)\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	targetInst	INFERRED	the instruction the following stages work on: inst, or the mov inserted in front of an IrDsx/IrDsy	^\s*FUN_000e7700\(iVar15,piVar6,(?:iVar5|loopIndex4)\);$@2	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	targetInst	INFERRED	the instruction the following stages work on: inst, or the mov inserted in front of an IrDsx/IrDsy	^\s*FUN_00106004\(piVar6,(?:iVar14|loopIndex2),(?:iVar5|loopIndex4),0,(?:param_1|this)\[2\]\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	targetInst	INFERRED	the instruction the following stages work on: inst, or the mov inserted in front of an IrDsx/IrDsy	^\s*(?:iVar5|loopIndex4)\ =\ \(\(int\ \(\*\)\(\)\)FUN_0018da48\)\(piVar6,(?:param_1|this)\[2\]\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	targetInst	INFERRED	the instruction the following stages work on: inst, or the mov inserted in front of an IrDsx/IrDsy	^\s*for\ \(;\ (?:iVar5|loopIndex4)\ =\ \(\*\*\(code\ \*\*\)\(\*piVar6\ \+\ 0x14\)\)\(piVar6\),\ iVar17\ <=\ (?:iVar5|loopIndex4);\ iVar17\ =\ iVar17\ \+\ 1\)\ \{$	+2	all	none
+use	R300SchedModel__legalizeInstruction	piVar6	targetInst	INFERRED	the instruction the following stages work on: inst, or the mov inserted in front of an IrDsx/IrDsy	^\s*(?:iVar5|loopIndex4)\ =\ \(\(int\ \(\*\)\(\)\)FUN_0018da48\)\(piVar6,(?:param_1|this)\[2\]\);$@2	+1	all	none
+use	R300SchedModel__legalizeInstruction	iVar8	flagBit12Result	CONFIRMED	OpcodeTraits__flagBit12(opcode, compiler)	^\s*iVar8\ =\ FUN_001132a4\(\*\(undefined4\ \*\)\(piVar6\[0x22\]\ \+\ 8\),(?:param_1|this)\[2\]\);$	+2	all	none
+use	R300SchedModel__legalizeInstruction	iVar8	isLoadConst	CONFIRMED	IRInst vslot 18 (isLoadConst)	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*piVar6\ \+\ 0x48\)\)\(piVar6\);$	+2	all	none
+use	R300SchedModel__legalizeInstruction	iVar8	hasSingleUse	CONFIRMED	IRInst__hasSingleUse(source, program)	^\s*iVar8\ =\ FUN_0010497c\(piVar6,iVar17\);$	+2	all	none
+use	R300SchedModel__legalizeInstruction	iVar8	producerOpcode	INFERRED	opcode of the source's definition (0x31 mov, 0x12 add, 0x13 mul, 0x14 mul-add, 0x24..0x26 cnd)	^\s*iVar8\ =\ \*\(int\ \*\)\(piVar6\[0x22\]\ \+\ 8\);$	+2	all	none
+use	R300SchedModel__legalizeInstruction	iVar8	producerOpcode	INFERRED	opcode of the source's definition (0x31 mov, 0x12 add, 0x13 mul, 0x14 mul-add, 0x24..0x26 cnd)	^\s*else\ if\ \(iVar8\ ==\ 0x12\)\ \{$	+1	all	none
+use	R300SchedModel__legalizeInstruction	iVar8	producerOpcode	INFERRED	opcode of the source's definition (0x31 mov, 0x12 add, 0x13 mul, 0x14 mul-add, 0x24..0x26 cnd)	^\s*if\ \(iVar8\ ==\ 0x13\)\ goto\ LAB_0018e4e0;$	+2	all	none
+use	R300SchedModel__legalizeInstruction	iVar8	producerOpcode	INFERRED	opcode of the source's definition (0x31 mov, 0x12 add, 0x13 mul, 0x14 mul-add, 0x24..0x26 cnd)	^\s*if\ \(\(\(iVar8\ !=\ 0x24\)\ \&\&\ \(iVar8\ !=\ 0x25\)\)\ \&\&\ \(iVar8\ !=\ 0x26\)\)$	+2	all	none
+use	R300SchedModel__legalizeInstruction	iVar8	splatCheck	INFERRED	IRInst__sourceIsSplatConstant of source 2 against the literal that makes the source negation-neutral	^\s*iVar8\ =\ \(\(undefined4\ \(\*\)\(\)\)FUN_00139838\)\(piVar6,2,\(double\)FLOAT_001aa0d4\);$	+2	all	none
+use	R300SchedModel__legalizeInstruction	iVar8	splatCheck	INFERRED	IRInst__sourceIsSplatConstant of source 3	^\s*iVar8\ =\ \(\(undefined4\ \(\*\)\(\)\)FUN_00139838\)\(piVar6,3,\(double\)FLOAT_001aa0d4\);$	+2	all	none
+use	R300SchedModel__legalizeInstruction	iVar8	splatCheck	INFERRED	IRInst__sourceIsSplatConstant of the walked operand	^\s*iVar8\ =\ \(\(undefined4\ \(\*\)\(\)\)FUN_00139838\)\((?:iVar20|loopIndex3),(?:iVar12|loopIndex),\(double\)FLOAT_001aa0d4\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	iVar8	splatCheck	INFERRED	IRInst__sourceIsSplatConstant of the walked operand	^\s*if\ \(iVar8\ !=\ 0\)\ goto\ LAB_0018e5a0;$@2	+1	all	none
+use	R300SchedModel__legalizeInstruction	iVar8	operandRecord	CONFIRMED	IRInst__getOperandRecord(source, 0)	^\s*iVar8\ =\ FUN_001054ec\(piVar6,0\);$	+4	all	none
+use	R300SchedModel__legalizeInstruction	iVar8	flagBit13Result	CONFIRMED	OpcodeTraits__flagBit13(opcode, compiler)	^\s*iVar8\ =\ FUN_001132f0\(\*\(undefined4\ \*\)\(piVar6\[0x22\]\ \+\ 8\),(?:param_1|this)\[2\]\);$	+2	all	none
+use	R300SchedModel__legalizeInstruction	iVar8	appendByteOffset	INFERRED	4 * count of the deferred-mov list	^\s*iVar8\ =\ local_84\[1\]\ \*\ 4;$	+2	all	none
+use	R300SchedModel__legalizeInstruction	iVar8	appendByteOffset	INFERRED	4 * count of the deferred-mov list	^\s*puVar9\ =\ \(undefined4\ \*\)\(iVar8\ \+\ local_84\[2\]\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	iVar8	pushByteOffset	INFERRED	4 * count of the walk stack	^\s*iVar8\ =\ local_90\ \*\ 4;$	+1	all	none
+use	R300SchedModel__legalizeInstruction	iVar8	pushByteOffset	INFERRED	4 * count of the walk stack	^\s*_memset\(iVar8\ \+\ local_8c,0,4\);$	+2	all	none
+use	R300SchedModel__legalizeInstruction	puVar9	listAppendSlot	INFERRED	new slot at the end of the deferred-mov list	^\s*puVar9\ =\ \(undefined4\ \*\)\(iVar8\ \+\ local_84\[2\]\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	puVar9	listAppendSlot	INFERRED	new slot at the end of the deferred-mov list	^\s*puVar9\ =\ \(undefined4\ \*\)FUN_0019423c\(local_84,local_84\[1\]\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	puVar9	listAppendSlot	INFERRED	new slot at the end of the deferred-mov list	^\s*\*puVar9\ =\ piVar6;$	+1	all	none
+use	R300SchedModel__legalizeInstruction	puVar9	stackAppendSlot	INFERRED	new slot at the end of the walk stack	^\s*puVar9\ =\ \(undefined4\ \*\)\(iVar8\ \+\ local_8c\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	puVar9	stackAppendSlot	INFERRED	new slot at the end of the walk stack	^\s*puVar9\ =\ \(undefined4\ \*\)FUN_0019423c\(\&local_94,local_90\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	puVar9	stackAppendSlot	INFERRED	new slot at the end of the walk stack	^\s*\*puVar9\ =\ piVar6;$@2	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar11	constRecordCursor	INFERRED	walks the operand records of the source four at a time (stride 6 words) while testing for literal float lanes	^\s*piVar11\ =\ piVar6;$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar11	constRecordCursor	INFERRED	walks the operand records of the source four at a time (stride 6 words) while testing for literal float lanes	^\s*if\ \(\(\*\(char\ \*\)\((?:uVar21|loopIndex7)\ \+\ iVar8\ \+\ 0x10\)\ !=\ '\\x01'\)\ \&\&$	+3	all	none
+use	R300SchedModel__legalizeInstruction	piVar11	constRecordCursor	INFERRED	walks the operand records of the source four at a time (stride 6 words) while testing for literal float lanes	^\s*piVar11\ =\ piVar11\ \+\ 6;$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar11	operandSource	INFERRED	IRInst__getOperandSource(inst, loopIndex4)	^\s*piVar11\ =\ \(int\ \*\)FUN_00105594\((?:param_2|inst),(?:iVar5|loopIndex4)\);$	+2	all	none
+use	R300SchedModel__legalizeInstruction	piVar11	operandSource	INFERRED	IRInst__getOperandSource(inst, loopIndex4)	^\s*piVar11\ =\ \(int\ \*\)FUN_00105594\((?:param_2|inst),(?:iVar5|loopIndex4)\);$@2	+2	all	none
+use	R300SchedModel__legalizeInstruction	piVar11	operandSource	INFERRED	IRInst__getOperandSource(inst, loopIndex4)	^\s*piVar11\ =\ \(int\ \*\)FUN_00105594\((?:param_2|inst),(?:iVar5|loopIndex4)\);$@3	+2	all	none
+use	R300SchedModel__legalizeInstruction	piVar11	destSelectCursor	INFERRED	walks the four destination select bytes (+0x9c) of the new mov	^\s*piVar11\ =\ (?:piVar10|inst2);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar11	destSelectCursor	INFERRED	walks the four destination select bytes (+0x9c) of the new mov	^\s*\*\(undefined1\ \*\)\(piVar11\ \+\ 0x27\)\ =\ 1;$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar11	destSelectCursor	INFERRED	walks the four destination select bytes (+0x9c) of the new mov	^\s*piVar11\ =\ \(int\ \*\)\(\(int\)piVar11\ \+\ 1\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar11	splitSource	INFERRED	source of the operand being split into several reads	^\s*piVar11\ =\ \(int\ \*\)FUN_00105594\(piVar6,(?:iVar14|loopIndex2)\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar11	splitSource	INFERRED	source of the operand being split into several reads	^\s*FUN_00106004\((?:iVar5|loopIndex4),1,piVar11,0,(?:param_1|this)\[2\]\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar11	splitSource	INFERRED	source of the operand being split into several reads	^\s*if\ \(\(\(\(piVar11\[0x20\]\ !=\ 0\)\ \&\&\ \((?:iVar7|loopIndex5)\ =\ FUN_00126760\(piVar11\[0x26\]\),\ (?:iVar7|loopIndex5)\ !=\ 0\)\)\ \&\&$	+3	all	none
+use	R300SchedModel__legalizeInstruction	piVar11	splitSource	INFERRED	source of the operand being split into several reads	^\s*FUN_00106804\((?:iVar5|loopIndex4),piVar11,0,(?:param_1|this)\[2\]\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar11	candidateSource	INFERRED	source of the operand (the operand of a mix when it is one) tested for a presub definition	^\s*piVar11\ =\ \(int\ \*\)FUN_00105594\(piVar6,iVar17\);$	+2	all	none
+use	R300SchedModel__legalizeInstruction	piVar11	candidateSource	INFERRED	source of the operand (the operand of a mix when it is one) tested for a presub definition	^\s*piVar11\ =\ \(int\ \*\)FUN_00105594\(piVar11,1\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar11	candidateSource	INFERRED	source of the operand (the operand of a mix when it is one) tested for a presub definition	^\s*(?:iVar5|loopIndex4)\ =\ \(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x5c\)\)\(piVar11\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar11	candidateSource	INFERRED	source of the operand (the operand of a mix when it is one) tested for a presub definition	^\s*uVar13\ =\ FUN_00105594\(piVar11,1\);$	+2	all	none
+use	R300SchedModel__legalizeInstruction	piVar11	candidateSource	INFERRED	source of the operand (the operand of a mix when it is one) tested for a presub definition	^\s*(?:iVar5|loopIndex4)\ =\ FUN_001054ec\(piVar11,1\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar11	candidateSource	INFERRED	source of the operand (the operand of a mix when it is one) tested for a presub definition	^\s*(?:iVar5|loopIndex4)\ =\ \(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x14\)\)\(piVar11\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar11	candidateSource	INFERRED	source of the operand (the operand of a mix when it is one) tested for a presub definition	^\s*uVar16\ =\ FUN_00105594\(piVar11,2\);$	+2	all	none
+use	R300SchedModel__legalizeInstruction	piVar11	candidateSource	INFERRED	source of the operand (the operand of a mix when it is one) tested for a presub definition	^\s*(?:iVar5|loopIndex4)\ =\ piVar11\[1\];$	+3	all	none
+use	R300SchedModel__legalizeInstruction	piVar11	candidateSource	INFERRED	source of the operand (the operand of a mix when it is one) tested for a presub definition	^\s*FUN_00108174\(piVar11,0x12,(?:param_1|this)\[2\]\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar11	candidateSource	INFERRED	source of the operand (the operand of a mix when it is one) tested for a presub definition	^\s*FUN_00108304\(piVar11,0x14,(?:param_1|this)\[2\]\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar11	candidateSource	INFERRED	source of the operand (the operand of a mix when it is one) tested for a presub definition	^\s*(?:iVar12|loopIndex)\ =\ piVar11\[0x53\];$	+2	all	none
+use	R300SchedModel__legalizeInstruction	piVar11	candidateSource	INFERRED	source of the operand (the operand of a mix when it is one) tested for a presub definition	^\s*piVar11\[0x27\]\ =\ (?:iVar14|loopIndex2);$	+3	all	none
+use	R300SchedModel__legalizeInstruction	piVar11	candidateSource	INFERRED	source of the operand (the operand of a mix when it is one) tested for a presub definition	^\s*\(\(void\ \(\*\)\(\)\)FUN_000f79c4\)\(piVar11,\*\(undefined4\ \*\)\((?:param_1|this)\[2\]\ \+\ 0x6c4\),2,dVar22,dVar22,dVar22,dVar22\);$	+2	all	none
+use	R300SchedModel__legalizeInstruction	piVar11	candidateSource	INFERRED	source of the operand (the operand of a mix when it is one) tested for a presub definition	^\s*FUN_00106004\(piVar11,2,uVar16,0,(?:param_1|this)\[2\]\);$	+2	all	none
+use	R300SchedModel__legalizeInstruction	piVar11	candidateSource	INFERRED	source of the operand (the operand of a mix when it is one) tested for a presub definition	^\s*FUN_00103d50\(piVar11\ \+\ 0x2f,1,\(uint\)\((?:iVar7|loopIndex5)\ ==\ 0x9a\)\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar11	candidateSource	INFERRED	source of the operand (the operand of a mix when it is one) tested for a presub definition	^\s*FUN_00103d50\(piVar11\ \+\ 0x29,1,1\);$@2	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar11	candidateSource	INFERRED	source of the operand (the operand of a mix when it is one) tested for a presub definition	^\s*\(\(void\ \(\*\)\(\)\)FUN_000f79c4\)\(piVar11,\*\(undefined4\ \*\)\((?:param_1|this)\[2\]\ \+\ 0x6c4\),2,dVar22,dVar22,dVar22,dVar22\);$@2	+1	all	none
+use	R300SchedModel__legalizeInstruction	piVar11	candidateSource	INFERRED	source of the operand (the operand of a mix when it is one) tested for a presub definition	^\s*\(\(void\ \(\*\)\(\)\)FUN_000f79c4\)\(piVar11,\*\(undefined4\ \*\)\((?:param_1|this)\[2\]\ \+\ 0x6c4\),3,dVar22,dVar22,dVar22,dVar22\);$	+2	all	none
+use	R300SchedModel__legalizeInstruction	piVar11	candidateSource	INFERRED	source of the operand (the operand of a mix when it is one) tested for a presub definition	^\s*FUN_000e7738\(\*\(undefined4\ \*\)\((?:iVar5|loopIndex4)\ \+\ 0x158\),(?:iVar5|loopIndex4),piVar11\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	uVar13	newNegate	INFERRED	negate bit written into the consumer operand's modifier bits (1 when the producer chain was negated)	^\s*uVar13\ =\ 0;$	+1	all	none
+use	R300SchedModel__legalizeInstruction	uVar13	newNegate	INFERRED	negate bit written into the consumer operand's modifier bits (1 when the producer chain was negated)	^\s*uVar13\ =\ 1;$	+1	all	none
+use	R300SchedModel__legalizeInstruction	uVar13	newNegate	INFERRED	negate bit written into the consumer operand's modifier bits (1 when the producer chain was negated)	^\s*FUN_00103d50\((?:iVar7|loopIndex5)\ \+\ (?:iVar20|loopIndex3)\ \+\ 0x8c,1,uVar13\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	uVar13	identitySelect	INFERRED	DAT_001b2a68: the identity select word of the new mov	^\s*uVar13\ =\ DAT_001b2a68;$	+1	all	none
+use	R300SchedModel__legalizeInstruction	uVar13	identitySelect	INFERRED	DAT_001b2a68: the identity select word of the new mov	^\s*\*\(undefined4\ \*\)\((?:iVar5|loopIndex4)\ \+\ 0x10\)\ =\ uVar13;$	+1	all	none
+use	R300SchedModel__legalizeInstruction	uVar13	result	INFERRED	1 when the instruction was changed	^\s*uVar13\ =\ 0;$@2	+1	all	none
+use	R300SchedModel__legalizeInstruction	uVar13	result	INFERRED	1 when the instruction was changed	^\s*uVar13\ =\ 1;$@2	+1	all	none
+use	R300SchedModel__legalizeInstruction	uVar13	result	INFERRED	1 when the instruction was changed	^\s*uVar13\ =\ 1;$@3	+1	all	none
+use	R300SchedModel__legalizeInstruction	uVar13	result	INFERRED	1 when the instruction was changed	^\s*uVar13\ =\ 1;$@4	+1	all	none
+use	R300SchedModel__legalizeInstruction	uVar13	result	INFERRED	1 when the instruction was changed	^\s*uVar13\ =\ 1;$@5	+1	all	none
+use	R300SchedModel__legalizeInstruction	uVar13	result	INFERRED	1 when the instruction was changed	^\s*uVar13\ =\ 1;$@6	+1	all	none
+use	R300SchedModel__legalizeInstruction	uVar13	result	INFERRED	1 when the instruction was changed	^\s*return\ uVar13;$	+1	all	none
+use	R300SchedModel__legalizeInstruction	uVar13	movSource	INFERRED	IRInst__getOperandSource(inst, loopIndex4)	^\s*uVar13\ =\ FUN_00105594\((?:param_2|inst),(?:iVar5|loopIndex4)\);$	+2	all	none
+use	R300SchedModel__legalizeInstruction	uVar13	movSource	INFERRED	IRInst__getOperandSource(inst, 1)	^\s*uVar13\ =\ FUN_00105594\((?:param_2|inst),1\);$	+2	all	none
+use	R300SchedModel__legalizeInstruction	uVar13	selectWord	INFERRED	select word of the operand record (+0x10), copied to the new mov	^\s*uVar13\ =\ \*\(undefined4\ \*\)\((?:iVar14|loopIndex2)\ \+\ 0x10\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	uVar13	selectWord	INFERRED	select word of the operand record (+0x10), copied to the new mov	^\s*\*\(undefined4\ \*\)\((?:iVar14|loopIndex2)\ \+\ 0x10\)\ =\ uVar13;$	+1	all	none
+use	R300SchedModel__legalizeInstruction	uVar13	selectWord	INFERRED	select word of the operand record (+0x10), copied to the new mov	^\s*uVar13\ =\ \*\(undefined4\ \*\)\((?:iVar5|loopIndex4)\ \+\ 0x10\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	uVar13	selectWord	INFERRED	select word of the operand record (+0x10), copied to the new mov	^\s*\*\(undefined4\ \*\)\((?:iVar5|loopIndex4)\ \+\ 0x10\)\ =\ uVar13;$@2	+1	all	none
+use	R300SchedModel__legalizeInstruction	uVar13	selectWord	INFERRED	select word of the operand record (+0x10), copied to the new mov	^\s*uVar13\ =\ \*\(undefined4\ \*\)\((?:iVar5|loopIndex4)\ \+\ 0x10\);$@2	+1	all	none
+use	R300SchedModel__legalizeInstruction	uVar13	selectWord	INFERRED	select word of the operand record (+0x10), copied to the new mov	^\s*\*\(undefined4\ \*\)\((?:iVar5|loopIndex4)\ \+\ 0x10\)\ =\ uVar13;$@3	+1	all	none
+use	R300SchedModel__legalizeInstruction	uVar13	presubSource1	INFERRED	operand 1 of the presub being expanded	^\s*uVar13\ =\ FUN_00105594\(piVar11,1\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	uVar13	presubSource1	INFERRED	operand 1 of the presub being expanded	^\s*FUN_00106004\(piVar11,1,uVar13,0,(?:param_1|this)\[2\]\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	uVar16	mixInnerSource	INFERRED	operand 1 of the operand's definition	^\s*uVar16\ =\ FUN_00105594\((?:param_2|inst),(?:iVar5|loopIndex4)\);$	+3	all	none
+use	R300SchedModel__legalizeInstruction	uVar16	inputSource	INFERRED	IRInst__getOperandSource(inst, loopIndex4)	^\s*uVar16\ =\ FUN_00105594\((?:param_2|inst),(?:iVar5|loopIndex4)\);$@2	+2	all	none
+use	R300SchedModel__legalizeInstruction	uVar16	foldedSource	INFERRED	result of FUN_0010cb48 on the operand's definition	^\s*uVar16\ =\ FUN_00105594\((?:param_2|inst),(?:iVar5|loopIndex4)\);$@3	+3	all	none
+use	R300SchedModel__legalizeInstruction	uVar16	presubSource2	INFERRED	operand 2 of the presub being expanded, 0 when it has one operand	^\s*uVar16\ =\ 0;$	+1	all	none
+use	R300SchedModel__legalizeInstruction	uVar16	presubSource2	INFERRED	operand 2 of the presub being expanded, 0 when it has one operand	^\s*uVar16\ =\ FUN_00105594\(piVar11,2\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	uVar16	presubSource2	INFERRED	operand 2 of the presub being expanded, 0 when it has one operand	^\s*FUN_00106004\(piVar11,2,uVar16,0,(?:param_1|this)\[2\]\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	uVar19	presubSelect1	INFERRED	select word of operand 1 of the presub	^\s*uVar19\ =\ \*\(undefined4\ \*\)\((?:iVar5|loopIndex4)\ \+\ 0x10\);$	+1	all	none
+use	R300SchedModel__legalizeInstruction	uVar19	presubSelect1	INFERRED	select word of operand 1 of the presub	^\s*\*\(undefined4\ \*\)\((?:iVar14|loopIndex2)\ \+\ 0x10\)\ =\ uVar19;$	+1	all	none
+use	R300SchedModel__legalizeInstruction	dVar22	literalValue	INFERRED	literal (FLOAT_001aa0e8 / FLOAT_001aa10c) passed to FUN_000f79c4 to set a literal source	^\s*dVar22\ =\ \(double\)FLOAT_001aa0e8;$	+2	all	none
+use	R300SchedModel__legalizeInstruction	dVar22	literalValue	INFERRED	literal passed to FUN_000f79c4	^\s*dVar22\ =\ \(double\)FLOAT_001aa0e8;$@2	+2	all	none
+use	R300SchedModel__legalizeInstruction	dVar22	literalValue	INFERRED	literal passed to FUN_000f79c4	^\s*dVar22\ =\ \(double\)FLOAT_001aa10c;$	+2	all	none
+use	R300SchedModel__legalizeInstruction	fVar4	zeroLiteral	INFERRED	FLOAT_001aa0d4: literal the constant lanes are compared with	^\s*fVar4\ =\ FLOAT_001aa0d4;$	+1	all	none
+use	R300SchedModel__legalizeInstruction	fVar4	zeroLiteral	INFERRED	FLOAT_001aa0d4: literal the constant lanes are compared with	^\s*if\ \(\(\*\(char\ \*\)\((?:uVar21|loopIndex7)\ \+\ iVar8\ \+\ 0x10\)\ !=\ '\\x01'\)\ \&\&$	+3	all	none
+local	R300SchedModel__legalizeInstruction	local_5c	clearedSelectTemp	INFERRED	SelectWord__clearReadComponents output of the per-group mov
+local	R300SchedModel__legalizeInstruction	local_60	clearedSelectLast	INFERRED	SelectWord__clearReadComponents output for the last group (stored into targetInst + 0x9c)
+local	R300SchedModel__legalizeInstruction	local_64	clearedSelectMiddle	INFERRED	SelectWord__clearReadComponents output for a middle group
+local	R300SchedModel__legalizeInstruction	local_68	clearedSelectFirst	INFERRED	SelectWord__clearReadComponents output for the first group
+local	R300SchedModel__legalizeInstruction	local_98	swizzleGroupCount	INFERRED	number of select groups filled in by R300SchedModel slot 26 (0x68)
+local	R300SchedModel__legalizeInstruction	local_94	walkStackCapacity	INFERRED	capacity word of the growable stack of instructions walked for the negation push-up
+local	R300SchedModel__legalizeInstruction	local_90	walkStackCount	INFERRED	count word of that stack
+local	R300SchedModel__legalizeInstruction	local_8c	walkStackData	INFERRED	data pointer of that stack
+use	R300VSchedModel__vslot27	iVar11	compiler	CONFIRMED	*(this + 8)	^\s*iVar11\ =\ \*\(int\ \*\)\((?:param_1|this)\ \+\ 8\);$	+1	all	none
+use	R300VSchedModel__vslot27	iVar11	compiler	CONFIRMED	*(this + 8)	^\s*iVar12\ =\ \*\(int\ \*\)\(iVar11\ \+\ 0x6c4\);$	+3	all	none
+local	R300VSchedModel__vslot27	iVar12	program	CONFIRMED	*(compiler + 0x6c4); +0x238 is its inserted-instruction counter, +0x478 the level counter
+local	R300VSchedModel__vslot27	iVar14	block	INFERRED	inst[0x56]: the block the new instructions are inserted into
+use	R300VSchedModel__vslot27	iVar11	supportsAbs	INFERRED	HwLimits slot 0x88 on the target description: when zero, abs source modifiers are lowered to max(x, -x)	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 0x88\)\)\(piVar1\);$	+2	all	none
+use	R300VSchedModel__vslot27	piVar1	target	CONFIRMED	*(compiler + 0x30c): the target description	^\s*piVar1\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\((?:param_1|this)\ \+\ 8\)\ \+\ 0x30c\);$	+2	all	none
+use	R300VSchedModel__vslot27	piVar1	target	CONFIRMED	*(compiler + 0x30c): the target description	^\s*piVar1\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\((?:param_1|this)\ \+\ 8\)\ \+\ 0x30c\);$@2	+2	all	none
+use	R300VSchedModel__vslot27	piVar1	operandCursor	INFERRED	walks the operand records of inst (stride 6 words from inst + 0x26)	^\s*piVar1\ =\ (?:param_2|inst)\ \+\ 0x26;$	+1	all	none
+use	R300VSchedModel__vslot27	piVar1	operandCursor	INFERRED	walks the operand records of inst (stride 6 words from inst + 0x26)	^\s*if\ \(\(piVar1\[8\]\ \&\ 2U\)\ !=\ 0\)\ \{$	+1	all	none
+use	R300VSchedModel__vslot27	piVar1	operandCursor	INFERRED	walks the operand records of inst (stride 6 words from inst + 0x26)	^\s*FUN_00103d50\(piVar1\ \+\ 3,2,0\);$	+1	all	none
+use	R300VSchedModel__vslot27	piVar1	operandCursor	INFERRED	walks the operand records of inst (stride 6 words from inst + 0x26)	^\s*piVar1\ =\ piVar1\ \+\ 6;$	+1	all	none
+use	R300VSchedModel__vslot27	iVar11	operandNumber	INFERRED	source operand number 1..numSources	^\s*for\ \(iVar11\ =\ 1;\ iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_2|inst)\ \+\ 0x14\)\)\((?:param_2|inst)\),\ iVar11\ <=\ iVar2;$	+2	all	none
+use	R300VSchedModel__vslot27	iVar11	operandNumber	INFERRED	source operand number 1..numSources	^\s*uVar4\ =\ FUN_00105594\((?:param_2|inst),iVar11\);$	+1	all	none
+use	R300VSchedModel__vslot27	iVar11	operandNumber	INFERRED	source operand number 1..numSources	^\s*iVar2\ =\ FUN_001054ec\((?:param_2|inst),iVar11\);$	+1	all	none
+use	R300VSchedModel__vslot27	iVar11	operandNumber	INFERRED	source operand number 1..numSources	^\s*FUN_00106004\((?:param_2|inst),iVar11,iVar2,0,\*\(undefined4\ \*\)\((?:param_1|this)\ \+\ 8\)\);$	+1	all	none
+use	R300VSchedModel__vslot27	iVar2	numSources	CONFIRMED	IRInst vslot 5 (getNumSources)	^\s*for\ \(iVar11\ =\ 1;\ iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_2|inst)\ \+\ 0x14\)\)\((?:param_2|inst)\),\ iVar11\ <=\ iVar2;$	+2	all	none
+use	R300VSchedModel__vslot27	iVar2	numSources	CONFIRMED	IRInst vslot 5 (getNumSources)	^\s*iVar2\ =\ FUN_00113258\(\*\(undefined4\ \*\)\((?:param_2|inst)\[0x22\]\ \+\ 8\),\*\(undefined4\ \*\)\((?:param_1|this)\ \+\ 8\)\);$	+2	all	none
+use	R300VSchedModel__vslot27	iVar2	numSources	CONFIRMED	IRInst vslot 5 (getNumSources)	^\s*iVar2\ =\ FUN_00165604\(iVar14,(?:pvVar5|callResult)\);$	+2	all	none
+use	R300VSchedModel__vslot27	iVar2	numSources	CONFIRMED	IRInst vslot 5 (getNumSources)	^\s*FUN_000e7700\(iVar14,(?:param_2|inst),iVar2\);$	+1	all	none
+use	R300VSchedModel__vslot27	iVar2	numSources	CONFIRMED	IRInst vslot 5 (getNumSources)	^\s*FUN_00106004\((?:param_2|inst),iVar11,iVar2,0,\*\(undefined4\ \*\)\((?:param_1|this)\ \+\ 8\)\);$	+1	all	none
+use	R300VSchedModel__vslot27	iVar2	operandRecord	CONFIRMED	IRInst__getOperandRecord(inst, operandNumber)	^\s*iVar2\ =\ FUN_001054ec\((?:param_2|inst),iVar11\);$	+2	all	none
+use	R300VSchedModel__vslot27	uVar4	sourceDef	INFERRED	IRInst__getOperandSource(inst, operandNumber)	^\s*uVar4\ =\ FUN_00105594\((?:param_2|inst),iVar11\);$	+1	all	none
+use	R300VSchedModel__vslot27	uVar4	sourceDef	INFERRED	IRInst__getOperandSource(inst, operandNumber)	^\s*FUN_00106004\((?:pvVar5|callResult),1,uVar4,0,\*\(undefined4\ \*\)\((?:param_1|this)\ \+\ 8\)\);$	+2	all	none
+use	R300VSchedModel__vslot27	uVar13	changed	INFERRED	result: 1 once an instruction was inserted or rewritten	^\s*uVar13\ =\ 0;$	+1	all	none
+use	R300VSchedModel__vslot27	uVar13	changed	INFERRED	result: 1 once an instruction was inserted or rewritten	^\s*uVar13\ =\ 1;$	+1	all	none
+use	R300VSchedModel__vslot27	uVar13	changed	INFERRED	result: 1 once an instruction was inserted or rewritten	^\s*return\ uVar13;$	+1	all	none
+use	R300VSchedModel__vslot27	uVar13	changed	INFERRED	result: 1 once an instruction was inserted or rewritten	^\s*uVar13\ =\ 1;$@2	+1	all	none
+use	R300VSchedModel__vslot27	uVar13	changed	INFERRED	result: 1 once an instruction was inserted or rewritten	^\s*uVar13\ =\ 1;$@3	+1	all	none
+use	R300VSchedModel__vslot27	uVar13	changed	INFERRED	result: 1 once an instruction was inserted or rewritten	^\s*uVar13\ =\ 1;$@4	+1	all	none
+use	R300VSchedModel__vslot27	uVar13	changed	INFERRED	result: 1 once an instruction was inserted or rewritten	^\s*uVar13\ =\ 1;$@5	+1	all	none
+use	R300VSchedModel__vslot27	uVar13	usedMask	INFERRED	component mask read from the operand's select word	^\s*uVar13\ =\ local_68;$	+1	all	none
+use	R300VSchedModel__vslot27	uVar13	usedMask	INFERRED	component mask read from the operand's select word	^\s*\*\(undefined4\ \*\)\(\(int\)(?:pvVar5|callResult)\ \+\ 0xc\)\ =\ uVar13;$	+1	all	none
+use	R300VSchedModel__vslot27	iVar11	src1Record	CONFIRMED	IRInst__getOperandRecord(inst, 1)	^\s*iVar11\ =\ FUN_001054ec\((?:param_2|inst),1\);$	+2	all	none
+use	R300VSchedModel__vslot27	uVar4	src2Record	CONFIRMED	IRInst__getOperandRecord(inst, 2)	^\s*uVar4\ =\ FUN_001054ec\((?:param_2|inst),2\);$	+2	all	none
+use	R300VSchedModel__vslot27	uVar4	src3Record	CONFIRMED	IRInst__getOperandRecord(inst, 3)	^\s*uVar4\ =\ FUN_001054ec\((?:param_2|inst),3\);$	+2	all	none
+use	R300VSchedModel__vslot27	iVar11	destRecord	CONFIRMED	IRInst__getOperandRecord(callResult, 0)	^\s*iVar11\ =\ FUN_001054ec\((?:pvVar5|callResult),0\);$	+2	all	none
+use	R300VSchedModel__vslot27	uVar4	destSelect	INFERRED	destination select word (record + 0x10)	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(iVar11\ \+\ 0x10\);$	+1	all	none
+use	R300VSchedModel__vslot27	uVar4	destSelect	INFERRED	destination select word (record + 0x10)	^\s*\*\(undefined4\ \*\)\(\(int\)(?:pvVar6|inst2)\ \+\ 0x9c\)\ =\ uVar4;$	+1	all	none
+use	R300VSchedModel__vslot27	iVar11	destRecord	CONFIRMED	IRInst__getOperandRecord(callResult, 0)	^\s*iVar11\ =\ FUN_001054ec\((?:pvVar5|callResult),0\);$@2	+2	all	none
+use	R300VSchedModel__vslot27	uVar4	destSelect	INFERRED	destination select word (record + 0x10)	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(iVar11\ \+\ 0x10\);$@2	+1	all	none
+use	R300VSchedModel__vslot27	uVar4	destSelect	INFERRED	destination select word (record + 0x10)	^\s*\*\(undefined4\ \*\)\(\(int\)(?:pvVar7|inst3)\ \+\ 0x9c\)\ =\ uVar4;$	+1	all	none
+use	R300VSchedModel__vslot27	uVar4	newSrc2Record	CONFIRMED	IRInst__getOperandRecord(inst3, 2)	^\s*uVar4\ =\ FUN_001054ec\((?:pvVar7|inst3),2\);$	+2	all	none
+use	R300VSchedModel__vslot27	uVar4	instSrc2Record	CONFIRMED	IRInst__getOperandRecord(inst, 2)	^\s*uVar4\ =\ FUN_001054ec\((?:param_2|inst),2\);$@2	+2	all	none
+use	R300VSchedModel__vslot27	iVar11	levelOffset	INFERRED	inst level (inst[0x58]) minus program + 0x478, clamped at 0	^\s*iVar11\ =\ (?:param_2|inst)\[0x58\]\ \-\ \*\(int\ \*\)\(iVar12\ \+\ 0x478\);$	+3	all	none
+use	R300VSchedModel__vslot27	iVar11	levelOffset	INFERRED	inst level (inst[0x58]) minus program + 0x478, clamped at 0	^\s*(?:param_2|inst)\[0x58\]\ =\ iVar11\ \+\ \*\(int\ \*\)\(iVar12\ \+\ 0x478\);$	+1	all	none
+use	R300VSchedModel__vslot27	iVar10	numSources2	CONFIRMED	IRInst vslot 5 (getNumSources)	^\s*iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_2|inst)\ \+\ 0x14\)\)\((?:param_2|inst)\);$	+2	all	none
+use	R300VSchedModel__vslot27	uVar4	sourceDef	INFERRED	IRInst__getOperandSource(inst, loopIndex)	^\s*uVar4\ =\ FUN_00105594\((?:param_2|inst),(?:iVar15|loopIndex)\);$	+1	all	none
+use	R300VSchedModel__vslot27	uVar4	sourceDef	INFERRED	IRInst__getOperandSource(inst, loopIndex)	^\s*FUN_00106004\((?:pvVar5|callResult),1,uVar4,0,\*\(undefined4\ \*\)\((?:param_1|this)\ \+\ 8\)\);$@2	+1	all	none
+use	R300VSchedModel__vslot27	uVar4	sourceDef	INFERRED	IRInst__getOperandSource(inst, loopIndex)	^\s*FUN_00106004\((?:pvVar5|callResult),1,uVar4,0,\*\(undefined4\ \*\)\((?:param_1|this)\ \+\ 8\)\);$@3	+1	all	none
+local	R300VSchedModel__vslot27	local_a8	sourceBank	INFERRED	bank (1 or 2) of the restricted register source i reads, from FUN_00190100
+local	R300VSchedModel__vslot27	local_a4	sourceIndex	INFERRED	register index within that bank, from FUN_00190100
+local	R300VSchedModel__vslot27	local_a0	otherBank	INFERRED	bank of another source, from FUN_00190100
+local	R300VSchedModel__vslot27	local_9c	otherIndex	INFERRED	register index of that source
+use	R300VSchedModel__vslot27	iVar11	seenIndexBank1	INFERRED	index of the bank-1 register already read by an earlier source (-1 none)	^\s*iVar11\ =\ \-1;$	+1	all	none
+use	R300VSchedModel__vslot27	iVar11	seenIndexBank1	INFERRED	index of the bank-1 register already read by an earlier source (-1 none)	^\s*iVar10\ =\ iVar11;$	+1	all	none
+use	R300VSchedModel__vslot27	iVar11	seenIndexBank1	INFERRED	index of the bank-1 register already read by an earlier source (-1 none)	^\s*if\ \(\(\(local_a8\ ==\ 1\)\ \&\&\ \(iVar10\ =\ local_a4,\ \-1\ <\ iVar11\)\)\ \&\&\ \(iVar11\ !=\ local_a4\)\)\ \{$	+1	all	none
+use	R300VSchedModel__vslot27	iVar11	seenIndexBank1	INFERRED	index of the bank-1 register already read by an earlier source (-1 none)	^\s*iVar10\ =\ iVar11;$@2	+1	all	none
+use	R300VSchedModel__vslot27	iVar11	seenIndexBank1	INFERRED	index of the bank-1 register already read by an earlier source (-1 none)	^\s*iVar10\ =\ iVar11;$@3	+1	all	none
+use	R300VSchedModel__vslot27	iVar11	seenIndexBank1	INFERRED	index of the bank-1 register already read by an earlier source (-1 none)	^\s*iVar11\ =\ iVar10;$	+1	all	none
+use	R300VSchedModel__vslot27	iVar2	seenIndexBank2	INFERRED	index of the bank-2 register already read by an earlier source (-1 none)	^\s*iVar2\ =\ \-1;$	+1	all	none
+use	R300VSchedModel__vslot27	iVar2	seenIndexBank2	INFERRED	index of the bank-2 register already read by an earlier source (-1 none)	^\s*iVar16\ =\ iVar2;$	+1	all	none
+use	R300VSchedModel__vslot27	iVar2	seenIndexBank2	INFERRED	index of the bank-2 register already read by an earlier source (-1 none)	^\s*if\ \(\(iVar2\ <\ 0\)\ \|\|\ \(iVar2\ ==\ local_a4\)\)\ goto\ code_r0x0019125c;$	+1	all	none
+use	R300VSchedModel__vslot27	iVar2	seenIndexBank2	INFERRED	index of the bank-2 register already read by an earlier source (-1 none)	^\s*iVar16\ =\ iVar2;$@2	+1	all	none
+use	R300VSchedModel__vslot27	iVar2	seenIndexBank2	INFERRED	index of the bank-2 register already read by an earlier source (-1 none)	^\s*iVar16\ =\ iVar2;$@3	+1	all	none
+use	R300VSchedModel__vslot27	iVar2	seenIndexBank2	INFERRED	index of the bank-2 register already read by an earlier source (-1 none)	^\s*iVar16\ =\ iVar2;$@4	+1	all	none
+use	R300VSchedModel__vslot27	iVar2	seenIndexBank2	INFERRED	index of the bank-2 register already read by an earlier source (-1 none)	^\s*iVar2\ =\ iVar16;$	+1	all	none
+use	R300VSchedModel__vslot27	iVar10	nextSeenBank1	INFERRED	seenIndexBank1 carried to the next source	^\s*iVar10\ =\ iVar11;$	+1	all	none
+use	R300VSchedModel__vslot27	iVar10	nextSeenBank1	INFERRED	seenIndexBank1 carried to the next source	^\s*if\ \(\(\(local_a8\ ==\ 1\)\ \&\&\ \(iVar10\ =\ local_a4,\ \-1\ <\ iVar11\)\)\ \&\&\ \(iVar11\ !=\ local_a4\)\)\ \{$	+1	all	none
+use	R300VSchedModel__vslot27	iVar10	nextSeenBank1	INFERRED	seenIndexBank1 carried to the next source	^\s*iVar10\ =\ iVar11;$@2	+1	all	none
+use	R300VSchedModel__vslot27	iVar10	nextSeenBank1	INFERRED	seenIndexBank1 carried to the next source	^\s*iVar10\ =\ iVar11;$@3	+1	all	none
+use	R300VSchedModel__vslot27	iVar10	nextSeenBank1	INFERRED	seenIndexBank1 carried to the next source	^\s*iVar11\ =\ iVar10;$	+1	all	none
+use	R300VSchedModel__vslot27	iVar16	nextSeenBank2	INFERRED	seenIndexBank2 carried to the next source	^\s*iVar16\ =\ iVar2;$	+1	all	none
+use	R300VSchedModel__vslot27	iVar16	nextSeenBank2	INFERRED	seenIndexBank2 carried to the next source	^\s*iVar16\ =\ local_a4;$	+1	all	none
+use	R300VSchedModel__vslot27	iVar16	nextSeenBank2	INFERRED	seenIndexBank2 carried to the next source	^\s*iVar16\ =\ iVar2;$@2	+1	all	none
+use	R300VSchedModel__vslot27	iVar16	nextSeenBank2	INFERRED	seenIndexBank2 carried to the next source	^\s*for\ \(iVar10\ =\ 1;\ iVar16\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_2|inst)\ \+\ 0x14\)\)\((?:param_2|inst)\),\ iVar10\ <=\ iVar16;$	+2	all	none
+use	R300VSchedModel__vslot27	iVar16	nextSeenBank2	INFERRED	seenIndexBank2 carried to the next source	^\s*iVar16\ =\ \(\(int\ \(\*\)\(\)\)FUN_00190100\)\((?:param_1|this),(?:param_2|inst),iVar10,\&local_a0,\&local_9c\);$	+4	all	none
+use	R300VSchedModel__vslot27	iVar16	nextSeenBank2	INFERRED	seenIndexBank2 carried to the next source	^\s*iVar16\ =\ iVar2;$@3	+1	all	none
+use	R300VSchedModel__vslot27	iVar16	nextSeenBank2	INFERRED	seenIndexBank2 carried to the next source	^\s*iVar16\ =\ iVar2;$@4	+1	all	none
+use	R300VSchedModel__vslot27	iVar16	nextSeenBank2	INFERRED	seenIndexBank2 carried to the next source	^\s*iVar2\ =\ iVar16;$	+1	all	none
+use	R300VSchedModel__vslot27	iVar16	scanIndex	INFERRED	source number 1..numSources while the sources reading the same register are replaced	^\s*for\ \(iVar16\ =\ 1;\ iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_2|inst)\ \+\ 0x14\)\)\((?:param_2|inst)\),\ iVar16\ <=\ iVar8;$	+3	all	none
+use	R300VSchedModel__vslot27	iVar16	scanIndex	INFERRED	source number 1..numSources while the sources reading the same register are replaced	^\s*iVar8\ =\ FUN_001054ec\((?:param_2|inst),iVar16\);$	+1	all	none
+use	R300VSchedModel__vslot27	iVar16	scanIndex	INFERRED	source number 1..numSources while the sources reading the same register are replaced	^\s*FUN_00106004\((?:param_2|inst),iVar16,(?:pvVar5|callResult),0,\*\(undefined4\ \*\)\((?:param_1|this)\ \+\ 8\)\);$	+1	all	none
+use	R300VSchedModel__vslot27	iVar10	scanIndex2	INFERRED	source number 1..numSources	^\s*for\ \(iVar10\ =\ 1;\ iVar16\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_2|inst)\ \+\ 0x14\)\)\((?:param_2|inst)\),\ iVar10\ <=\ iVar16;$	+2	all	none
+use	R300VSchedModel__vslot27	iVar10	scanIndex2	INFERRED	source number 1..numSources	^\s*iVar16\ =\ \(\(int\ \(\*\)\(\)\)FUN_00190100\)\((?:param_1|this),(?:param_2|inst),iVar10,\&local_a0,\&local_9c\);$	+1	all	none
+use	R300VSchedModel__vslot27	iVar10	scanIndex2	INFERRED	source number 1..numSources	^\s*iVar16\ =\ FUN_001054ec\((?:param_2|inst),iVar10\);$	+1	all	none
+use	R300VSchedModel__vslot27	iVar10	scanIndex2	INFERRED	source number 1..numSources	^\s*FUN_00106004\((?:param_2|inst),iVar10,(?:pvVar5|callResult),0,\*\(undefined4\ \*\)\((?:param_1|this)\ \+\ 8\)\);$	+1	all	none
+use	R300VSchedModel__vslot27	iVar16	scanIndex	INFERRED	source number 1..numSources	^\s*iVar16\ =\ 1;$	+1	all	none
+use	R300VSchedModel__vslot27	iVar16	scanIndex	INFERRED	source number 1..numSources	^\s*for\ \(;\ iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_2|inst)\ \+\ 0x14\)\)\((?:param_2|inst)\),\ iVar16\ <=\ iVar8;$	+3	all	none
+use	R300VSchedModel__vslot27	iVar16	scanIndex	INFERRED	source number 1..numSources	^\s*FUN_00106004\((?:param_2|inst),iVar16,iVar10,0,\*\(undefined4\ \*\)\((?:param_1|this)\ \+\ 8\)\);$	+1	all	none
+use	R300VSchedModel__vslot27	iVar16	canonicalMov	INFERRED	FUN_00165604(block, callResult): the equivalent mov already in the block, or callResult itself	^\s*iVar16\ =\ FUN_00165604\(iVar14,(?:pvVar5|callResult)\);$	+2	all	none
+use	R300VSchedModel__vslot27	iVar16	canonicalMov	INFERRED	FUN_00165604(block, callResult): the equivalent mov already in the block, or callResult itself	^\s*FUN_000e7700\(iVar14,(?:param_2|inst),iVar16\);$	+1	all	none
+use	R300VSchedModel__vslot27	iVar16	canonicalMov	INFERRED	FUN_00165604(block, callResult): the equivalent mov already in the block, or callResult itself	^\s*FUN_00106004\((?:param_2|inst),iVar8,iVar16,0,\*\(undefined4\ \*\)\((?:param_1|this)\ \+\ 8\)\);$	+1	all	none
+use	R300VSchedModel__vslot27	iVar10	canonicalMov2	INFERRED	FUN_00165604(block, callResult): the equivalent mov already in the block, or callResult itself	^\s*iVar10\ =\ FUN_00165604\(iVar14,(?:pvVar5|callResult)\);$	+2	all	none
+use	R300VSchedModel__vslot27	iVar10	canonicalMov2	INFERRED	FUN_00165604(block, callResult): the equivalent mov already in the block, or callResult itself	^\s*FUN_000e7700\(iVar14,(?:param_2|inst),iVar10\);$	+1	all	none
+use	R300VSchedModel__vslot27	iVar10	canonicalMov2	INFERRED	FUN_00165604(block, callResult): the equivalent mov already in the block, or callResult itself	^\s*FUN_00106004\((?:param_2|inst),iVar16,iVar10,0,\*\(undefined4\ \*\)\((?:param_1|this)\ \+\ 8\)\);$	+1	all	none
+use	R300VSchedModel__vslot27	iVar9	numSources3	CONFIRMED	IRInst vslot 5 (getNumSources)	^\s*for\ \(;\ iVar9\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_2|inst)\ \+\ 0x14\)\)\((?:param_2|inst)\),\ iVar8\ <=\ iVar9;\ iVar8\ =\ iVar8\ \+\ 1\)$	+1	all	none
+local	R300VSchedModel__vslot28	param_2	program	CONFIRMED	the program (+900 head of the block list)
+local	R300VSchedModel__vslot28	iVar9	block	CONFIRMED	current block (program + 900, then block + 8)
+use	R300VSchedModel__vslot28	iVar2	nextBlock	INFERRED	block + 8: the next block, tested against 0 at the top of the loop	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar9\ \+\ 8\);$	+1	all	none
+use	R300VSchedModel__vslot28	iVar2	nextBlock	INFERRED	block + 8: the next block, tested against 0 at the top of the loop	^\s*if\ \(iVar2\ ==\ 0\)\ \{$	+1	all	none
+use	R300VSchedModel__vslot28	iVar2	nextBlock	INFERRED	block + 8: the next block, tested against 0 at the top of the loop	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar9\ \+\ 8\);$@2	+1	all	none
+use	R300VSchedModel__vslot28	iVar2	inst	INFERRED	current instruction of the forward walk (block + 0x98 list)	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar9\ \+\ 0x98\);$	+1	all	none
+use	R300VSchedModel__vslot28	iVar2	inst	INFERRED	current instruction of the forward walk (block + 0x98 list)	^\s*if\ \(\(\*\(uint\ \*\)\(iVar2\ \+\ 0x14\)\ \&\ 1\)\ !=\ 0\)\ \{$	+2	all	none
+use	R300VSchedModel__vslot28	iVar2	inst	INFERRED	current instruction of the forward walk (block + 0x98 list)	^\s*\(\*\*\(code\ \*\*\)\(\*(?:param_1|this)\ \+\ 0x6c\)\)\((?:param_1|this),iVar2\);$	+2	all	none
+use	R300VSchedModel__vslot28	iVar2	inst	INFERRED	current instruction of the forward walk (block + 0x98 list)	^\s*piVar5\ =\ \(int\ \*\)FUN_00105594\(iVar2,1\);$	+1	all	none
+use	R300VSchedModel__vslot28	iVar2	inst	INFERRED	current instruction of the forward walk (block + 0x98 list)	^\s*(?:iVar3|loopIndex)\ =\ \*\(int\ \*\)\(iVar2\ \+\ 8\);$	+2	all	none
+use	R300VSchedModel__vslot28	iVar2	inst	INFERRED	current instruction of the forward walk (block + 0x98 list)	^\s*(?:iVar3|loopIndex)\ =\ \*\(int\ \*\)\(iVar2\ \+\ 8\);$@2	+1	all	none
+use	R300VSchedModel__vslot28	iVar2	inst	INFERRED	current instruction of the forward walk (block + 0x98 list)	^\s*iVar2\ =\ (?:iVar3|loopIndex);$	+1	all	none
+use	R300VSchedModel__vslot28	iVar2	opcodeInfo	INFERRED	inst[0x22]: opcode info of the instruction, +8 is the opcode	^\s*iVar2\ =\ piVar5\[0x22\];$	+2	all	none
+use	R300VSchedModel__vslot28	iVar2	opcodeInfo	INFERRED	inst[0x22]: opcode info of the instruction, +8 is the opcode	^\s*iVar2\ =\ piVar5\[0x22\];$@2	+1	all	none
+use	R300VSchedModel__vslot28	iVar2	opcodeInfo	INFERRED	inst[0x22]: opcode info of the instruction, +8 is the opcode	^\s*iVar2\ =\ piVar5\[0x22\];$@3	+1	all	none
+use	R300VSchedModel__vslot28	iVar2	opcodeInfo	INFERRED	inst[0x22]: opcode info of the instruction, +8 is the opcode	^\s*iVar2\ =\ FUN_00113090\(\*\(undefined4\ \*\)\(iVar2\ \+\ 8\),(?:param_1|this)\[2\]\);$	+2	all	none
+use	R300VSchedModel__vslot28	iVar2	slot12Result	INFERRED	R300VSchedModel slot 12 (0x30) on the instruction	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_1|this)\ \+\ 0x30\)\)\((?:param_1|this),piVar5\);$	+2	all	none
+use	R300VSchedModel__vslot28	iVar2	numSources	CONFIRMED	IRInst vslot 5 (getNumSources)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x14\)\)\(piVar5\);$	+1	all	none
+use	R300VSchedModel__vslot28	iVar2	numSources	CONFIRMED	IRInst vslot 5 (getNumSources)	^\s*if\ \(iVar2\ ==\ 2\)\ \{$	+1	all	none
+use	R300VSchedModel__vslot28	piVar5	inst2	INFERRED	current instruction of the backward walk (block + 0xa0 list, linked through +4)	^\s*piVar5\ =\ \*\(int\ \*\*\)\(iVar9\ \+\ 0xa0\);$	+1	all	none
+use	R300VSchedModel__vslot28	piVar5	inst2	INFERRED	current instruction of the backward walk (block + 0xa0 list, linked through +4)	^\s*if\ \(\(piVar5\[5\]\ \&\ 1U\)\ !=\ 0\)\ \{$	+2	all	none
+use	R300VSchedModel__vslot28	piVar5	inst2	INFERRED	current instruction of the backward walk (block + 0xa0 list, linked through +4)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_1|this)\ \+\ 0x30\)\)\((?:param_1|this),piVar5\);$	+1	all	none
+use	R300VSchedModel__vslot28	piVar5	inst2	INFERRED	current instruction of the backward walk (block + 0xa0 list, linked through +4)	^\s*iVar2\ =\ piVar5\[0x22\];$@2	+1	all	none
+use	R300VSchedModel__vslot28	piVar5	inst2	INFERRED	current instruction of the backward walk (block + 0xa0 list, linked through +4)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x14\)\)\(piVar5\);$	+1	all	none
+use	R300VSchedModel__vslot28	piVar5	inst2	INFERRED	current instruction of the backward walk (block + 0xa0 list, linked through +4)	^\s*(?:iVar6|operandRecord)\ =\ FUN_001054ec\(piVar5,0\);$	+1	all	none
+use	R300VSchedModel__vslot28	piVar5	inst2	INFERRED	current instruction of the backward walk (block + 0xa0 list, linked through +4)	^\s*(?:iVar6|operandRecord)\ =\ FUN_001054ec\(piVar5,1\);$	+1	all	none
+use	R300VSchedModel__vslot28	piVar5	inst2	INFERRED	current instruction of the backward walk (block + 0xa0 list, linked through +4)	^\s*(?:iVar6|operandRecord)\ =\ FUN_001054ec\(piVar5,2\);$	+1	all	none
+use	R300VSchedModel__vslot28	piVar5	inst2	INFERRED	current instruction of the backward walk (block + 0xa0 list, linked through +4)	^\s*FUN_0010bb9c\(piVar5,uVar8,uVar7,0,0,(?:param_1|this)\[2\]\);$	+2	all	none
+use	R300VSchedModel__vslot28	piVar5	inst2	INFERRED	current instruction of the backward walk (block + 0xa0 list, linked through +4)	^\s*if\ \(\(iVar2\ ==\ 0\)\ \|\|\ \(piVar5\[0x26\]\ !=\ 0\)\)\ \{$	+2	all	none
+use	R300VSchedModel__vslot28	piVar5	inst2	INFERRED	current instruction of the backward walk (block + 0xa0 list, linked through +4)	^\s*piVar4\ =\ \(int\ \*\)piVar5\[1\];$@2	+2	all	none
+use	R300VSchedModel__vslot28	piVar5	inst2	INFERRED	current instruction of the backward walk (block + 0xa0 list, linked through +4)	^\s*piVar5\ =\ piVar4;$	+1	all	none
+use	R300VSchedModel__vslot28	piVar4	prevInst	INFERRED	the previous instruction, read before the current one is rewritten	^\s*for\ \(piVar4\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar9\ \+\ 0xa0\)\)\[1\];\ piVar4\ !=\ \(int\ \*\)0x0;$	+2	all	none
+use	R300VSchedModel__vslot28	piVar4	prevInst	INFERRED	the previous instruction, read before the current one is rewritten	^\s*piVar4\ =\ \(int\ \*\)piVar5\[1\];$	+1	all	none
+use	R300VSchedModel__vslot28	piVar4	prevInst	INFERRED	the previous instruction, read before the current one is rewritten	^\s*piVar4\ =\ \(int\ \*\)piVar5\[1\];$@2	+1	all	none
+use	R300VSchedModel__vslot28	piVar4	prevInst	INFERRED	the previous instruction, read before the current one is rewritten	^\s*piVar5\ =\ piVar4;$	+1	all	none
+use	R300VSchedModel__vslot28	uVar7	source2Select	INFERRED	select byte of operand 2 for the written lane (-1 none)	^\s*uVar7\ =\ 0xffffffff;$	+1	all	none
+use	R300VSchedModel__vslot28	uVar7	source2Select	INFERRED	select byte of operand 2 for the written lane (-1 none)	^\s*uVar7\ =\ \(uint\)\*\(byte\ \*\)\((?:iVar3|loopIndex)\ \+\ (?:iVar6|operandRecord)\ \+\ 0x10\);$	+1	all	none
+use	R300VSchedModel__vslot28	uVar7	source2Select	INFERRED	select byte of operand 2 for the written lane (-1 none)	^\s*FUN_0010bb9c\(piVar5,uVar8,uVar7,0,0,(?:param_1|this)\[2\]\);$	+1	all	none
+use	R300VSchedModel__vslot28	uVar8	source1Select	INFERRED	select byte of operand 1 for the written lane (-1 none)	^\s*uVar8\ =\ 0xffffffff;$	+1	all	none
+use	R300VSchedModel__vslot28	uVar8	source1Select	INFERRED	select byte of operand 1 for the written lane (-1 none)	^\s*uVar8\ =\ \(uint\)\*\(byte\ \*\)\((?:iVar3|loopIndex)\ \+\ (?:iVar6|operandRecord)\ \+\ 0x10\);$	+1	all	none
+use	R300VSchedModel__vslot28	uVar8	source1Select	INFERRED	select byte of operand 1 for the written lane (-1 none)	^\s*FUN_0010bb9c\(piVar5,uVar8,uVar7,0,0,(?:param_1|this)\[2\]\);$	+1	all	none
+use	R300VSchedModel__vslot28	bVar1	moreComponents	INFERRED	do/while condition over the four components	^\s*bVar1\ =\ (?:iVar3|loopIndex)\ !=\ 3;$	+1	all	none
+use	R300VSchedModel__vslot28	bVar1	moreComponents	INFERRED	do/while condition over the four components	^\s*\}\ while\ \(bVar1\);$	+1	all	none
+local	R300VSchedModel__vslot4_addInstruction	param_1	this	CONFIRMED	the vertex resource model: +0x18 / +0x1c opcodes held by the two math slots, +0x20.. bank per source slot, +0x2c.. register index per source slot
+local	R300VSchedModel__vslot4_addInstruction	param_2	inst	INFERRED	the instruction being added
+local	R300VSchedModel__vslot4_addInstruction	uVar2	sourceSlot	INFERRED	source slot (1..3) handed to FUN_00190100 for the last source of the instruction
+local	R300VSchedModel__vslot4_addInstruction	piVar3	bankWord	INFERRED	this + 0x24 / this + 0x28: bank word of source slot 2 / 3
+local	R300VSchedModel__vslot4_addInstruction	piVar4	indexWord	INFERRED	this + 0x30 / this + 0x34: register index word of source slot 2 / 3
+local	R300VSchedModel__vslot3_canAddInstruction	param_1	this	CONFIRMED	the vertex resource model: +0x18/+0x1c opcodes held by the two math slots (negative = empty), +0x20.. bank / index of the three source slots
+local	R300VSchedModel__vslot3_canAddInstruction	param_2	inst	INFERRED	the instruction being tried
+local	R300VSchedModel__vslot3_canAddInstruction	local_38	slot0Bank	INFERRED	trial copy of this[8]: bank of source slot 0 (1 or 2), as FUN_00190100 classifies the instruction's first source
+local	R300VSchedModel__vslot3_canAddInstruction	local_34	slot1Bank	INFERRED	trial copy of this[9]: bank of source slot 1
+local	R300VSchedModel__vslot3_canAddInstruction	local_30	slot2Bank	INFERRED	trial copy of this[10]: bank of source slot 2
+local	R300VSchedModel__vslot3_canAddInstruction	local_2c	slot0Index	INFERRED	trial copy of this[0xb]: register index of source slot 0
+local	R300VSchedModel__vslot3_canAddInstruction	local_28	slot1Index	INFERRED	trial copy of this[0xc]: register index of source slot 1
+local	R300VSchedModel__vslot3_canAddInstruction	local_24	slot2Index	INFERRED	trial copy of this[0xd]: register index of source slot 2 (index 0 of the array is used)
+local	R300VSchedModel__vslot3_canAddInstruction	uVar2	fits	INFERRED	1 when the instruction can be added, 0 when its sources conflict
+use	R300VSchedModel__vslot3_canAddInstruction	callResult	resourceClass	CONFIRMED	ResourceModel slot 19 (0x4c): the instruction's resource class (0, 2 or 3 take different paths)	^\s*(?:iVar1|callResult)\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x4c\)\)$	+1	all	none
+use	R300VSchedModel__vslot3_canAddInstruction	callResult	resourceClass	CONFIRMED	ResourceModel slot 19 (0x4c): the instruction's resource class (0, 2 or 3 take different paths)	^\s*if\ \((?:iVar1|callResult)\ ==\ 0\)\ \{$	+1	all	none
+use	R300VSchedModel__vslot3_canAddInstruction	callResult	resourceClass	CONFIRMED	ResourceModel slot 19 (0x4c): the instruction's resource class (0, 2 or 3 take different paths)	^\s*if\ \((?:iVar1|callResult)\ ==\ 3\)\ \{$	+1	all	none
+use	R300VSchedModel__vslot3_canAddInstruction	callResult	resourceClass	CONFIRMED	ResourceModel slot 19 (0x4c): the instruction's resource class (0, 2 or 3 take different paths)	^\s*else\ if\ \((?:iVar1|callResult)\ ==\ 2\)\ \{$	+1	all	none
+use	R300VSchedModel__vslot3_canAddInstruction	callResult	numSources	CONFIRMED	IRInst vslot 5 (getNumSources)	^\s*(?:iVar1|callResult)\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x14\)\)\(param_2\);$	+2	all	none
+use	R300VSchedModel__vslot3_canAddInstruction	callResult	numSources	CONFIRMED	IRInst vslot 5 (getNumSources)	^\s*(?:iVar1|callResult)\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x14\)\)\(param_2\);$@2	+2	all	none
+use	R300VSchedModel__vslot3_canAddInstruction	callResult	numSources	CONFIRMED	IRInst vslot 5 (getNumSources)	^\s*(?:iVar1|callResult)\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x14\)\)\(param_2\);$@3	+2	all	none
+use	R300VSchedModel__vslot3_canAddInstruction	callResult	numSources	CONFIRMED	IRInst vslot 5 (getNumSources)	^\s*(?:iVar1|callResult)\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x14\)\)\(param_2\);$@4	+2	all	none
+use	R300VSchedModel__vslot3_canAddInstruction	callResult	numSources	CONFIRMED	IRInst vslot 5 (getNumSources)	^\s*(?:iVar1|callResult)\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x14\)\)\(param_2\);$@5	+2	all	none
+use	R300VSchedModel__vslot3_canAddInstruction	callResult	numSources	CONFIRMED	IRInst vslot 5 (getNumSources)	^\s*(?:iVar1|callResult)\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x14\)\)\(param_2\);$@6	+2	all	none
+local	R300VSchedModel__vslot17	param_2	node	INFERRED	the SchedNode (+0x38 instruction, +0x40 successor edges, +0x48 per-component consumer counts, +0x58 resource class, +0x60 group)
+local	R300VSchedModel__vslot17	piVar17	nodeInst	INFERRED	node + 0x38: its instruction
+use	R300VSchedModel__vslot17	uVar4	instFlags	INFERRED	inst[5]: flag word tested for 0x20, 0x40 and 2	^\s*if\ \(\(\(\(\(\*\(int\ \*\)\(param_2\ \+\ 0x60\)\ ==\ 0\)\ \&\&\ \(piVar17\[0x20\]\ !=\ 0\)\)\ \&\&$	+5	all	none
+use	R300VSchedModel__vslot17	iVar5	flagBit0Result	INFERRED	RegKind__flagBit0(inst[0x26])	^\s*\(iVar5\ =\ FUN_00126760\(piVar17\[0x26\]\),\ iVar5\ !=\ 0\)\)\ \&\&$	+1	all	none
+use	R300VSchedModel__vslot17	iVar5	isUndefined	CONFIRMED	IRInst vslot 20 (isUndefined)	^\s*\(\(\(piVar17\[5\]\ \&\ 2U\)\ ==\ 0\ \&\&\ \(iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar17\ \+\ 0x50\)\)\(piVar17\),\ iVar5\ ==\ 0\)\)\)\)$	+1	all	none
+use	R300VSchedModel__vslot17	iVar5	opcodeCategory	INFERRED	field +0x34 of the opcode's 0x38-byte record in the table at PTR_DAT_001e9140	^\s*iVar5\ =\ \*\(int\ \*\)\(PTR_DAT_001e9140\ \+\ \*\(int\ \*\)\(piVar17\[0x22\]\ \+\ 8\)\ \*\ 0x38\ \+\ 0x34\);$	+3	all	none
+use	R300VSchedModel__vslot17	iVar5	opcodeCategory	INFERRED	field +0x34 of the opcode's 0x38-byte record in the table at PTR_DAT_001e9140	^\s*if\ \(iVar5\ ==\ 0\)\ \{$	+1	all	none
+use	R300VSchedModel__vslot17	iVar7	writtenComp	INFERRED	latest component whose destination select byte is 0 (written)	^\s*iVar7\ =\ iVar13;$	+2	all	none
+use	R300VSchedModel__vslot17	iVar7	writtenComp	INFERRED	latest component whose destination select byte is 0 (written)	^\s*iVar7\ =\ iVar13;$@2	+1	all	none
+use	R300VSchedModel__vslot17	iVar7	writtenComp	INFERRED	latest component whose destination select byte is 0 (written)	^\s*iVar13\ =\ iVar7;$	+1	all	none
+use	R300VSchedModel__vslot17	iVar7	writtenComp	INFERRED	latest component whose destination select byte is 0 (written)	^\s*if\ \(\(iVar13\ !=\ iVar7\)\ \|\|\ \(bVar2\)\)\ \{$	+1	all	none
+use	R300VSchedModel__vslot17	iVar7	writtenComp	INFERRED	latest component whose destination select byte is 0 (written)	^\s*uVar3\ =\ \*\(undefined1\ \*\)\(iVar7\ \+\ iVar13\ \+\ 0x10\);$	+1	all	none
+use	R300VSchedModel__vslot17	iVar13	prevWrittenComp	INFERRED	writtenComp of the previous component step, -1 before the first written one	^\s*iVar13\ =\ \-1;$	+1	all	none
+use	R300VSchedModel__vslot17	iVar13	prevWrittenComp	INFERRED	writtenComp of the previous component step, -1 before the first written one	^\s*iVar7\ =\ iVar13;$	+2	all	none
+use	R300VSchedModel__vslot17	iVar13	prevWrittenComp	INFERRED	writtenComp of the previous component step, -1 before the first written one	^\s*iVar7\ =\ iVar13;$@2	+1	all	none
+use	R300VSchedModel__vslot17	iVar13	prevWrittenComp	INFERRED	writtenComp of the previous component step, -1 before the first written one	^\s*iVar13\ =\ iVar7;$	+1	all	none
+use	R300VSchedModel__vslot17	bVar2	multipleWritten	INFERRED	more than one component is written	^\s*bVar2\ =\ false;$	+1	all	none
+use	R300VSchedModel__vslot17	bVar2	multipleWritten	INFERRED	more than one component is written	^\s*bVar2\ =\ true;$	+1	all	none
+use	R300VSchedModel__vslot17	bVar2	multipleWritten	INFERRED	more than one component is written	^\s*if\ \(\(iVar13\ !=\ iVar7\)\ \|\|\ \(bVar2\)\)\ \{$	+1	all	none
+use	R300VSchedModel__vslot17	bVar1	moreComponents	INFERRED	do/while condition over the four components	^\s*bVar1\ =\ (?:iVar15|loopIndex)\ !=\ 3;$	+1	all	none
+use	R300VSchedModel__vslot17	bVar1	moreComponents	INFERRED	do/while condition over the four components	^\s*\}\ while\ \(bVar1\);$	+1	all	none
+use	R300VSchedModel__vslot17	iVar13	targetComponent	INFERRED	the rotating component counter this[0xe] taken as the new result component	^\s*iVar13\ =\ (?:param_1|this)\[0xe\];$	+3	all	none
+use	R300VSchedModel__vslot17	iVar13	targetComponent	INFERRED	the rotating component counter this[0xe] taken as the new result component	^\s*if\ \(\(iVar13\ !=\ iVar7\)\ \|\|\ \(bVar2\)\)\ \{$	+1	all	none
+use	R300VSchedModel__vslot17	iVar13	targetComponent	INFERRED	the rotating component counter this[0xe] taken as the new result component	^\s*\*\(undefined1\ \*\)\(iVar13\ \+\ (?:iVar15|loopIndex)\ \+\ 0x18\)\ =\ 1;$	+2	all	none
+use	R300VSchedModel__vslot17	iVar13	targetComponent	INFERRED	the rotating component counter this[0xe] taken as the new result component	^\s*\(\*\*\(code\ \*\*\)\(\*piVar9\ \+\ 0x88\)\)\(piVar9,(?:iVar15|loopIndex),(?:iVar6|loopIndex2),iVar13\);$	+1	all	none
+use	R300VSchedModel__vslot17	iVar13	targetComponent	INFERRED	the rotating component counter this[0xe] taken as the new result component	^\s*\*\(undefined1\ \*\)\(\(int\)piVar17\ \+\ iVar13\ \+\ 0x9c\)\ =\ 0;$	+1	all	none
+use	R300VSchedModel__vslot17	iVar13	targetComponent	INFERRED	the rotating component counter this[0xe] taken as the new result component	^\s*\*\(undefined1\ \*\)\(\(int\)piVar17\ \+\ iVar13\ \+\ 0xc\)\ =\ 1;$	+1	all	none
+use	R300VSchedModel__vslot17	iVar13	targetComponent	INFERRED	the rotating component counter this[0xe] taken as the new result component	^\s*for\ \(iVar5\ =\ 1;\ iVar13\ =\ \(\*\*\(code\ \*\*\)\(\*piVar17\ \+\ 0x14\)\)\(piVar17\),\ iVar5\ <=\ iVar13;$	+3	all	none
+use	R300VSchedModel__vslot17	iVar13	targetComponent	INFERRED	the rotating component counter this[0xe] taken as the new result component	^\s*uVar3\ =\ \*\(undefined1\ \*\)\(iVar7\ \+\ iVar13\ \+\ 0x10\);$	+1	all	none
+use	R300VSchedModel__vslot17	uVar4	succEdgeCount	INFERRED	count of node's successor edges	^\s*uVar4\ =\ puVar16\[1\];$	+2	all	none
+use	R300VSchedModel__vslot17	uVar4	succEdgeCount	INFERRED	count of node's successor edges	^\s*if\ \(uVar4\ ==\ (?:uVar14|loopIndex3)\)\ break;$	+1	all	none
+use	R300VSchedModel__vslot17	puVar16	succEdges	CONFIRMED	node + 0x40: vector of successor edges	^\s*puVar16\ =\ \*\(uint\ \*\*\)\(param_2\ \+\ 0x40\);$	+1	all	none
+use	R300VSchedModel__vslot17	puVar16	succEdges	CONFIRMED	node + 0x40: vector of successor edges	^\s*uVar4\ =\ puVar16\[1\];$	+1	all	none
+use	R300VSchedModel__vslot17	puVar16	succEdges	CONFIRMED	node + 0x40: vector of successor edges	^\s*if\ \((?:uVar14|loopIndex3)\ <\ \*puVar16\)\ \{$	+2	all	none
+use	R300VSchedModel__vslot17	puVar16	succEdges	CONFIRMED	node + 0x40: vector of successor edges	^\s*_memset\(uVar8\ \*\ 4\ \+\ puVar16\[2\],0,\((?:uVar14|loopIndex3)\ \-\ uVar8\)\ \*\ 4\ \+\ 4\);$	+2	all	none
+use	R300VSchedModel__vslot17	puVar16	succEdges	CONFIRMED	node + 0x40: vector of successor edges	^\s*piVar9\ =\ \(int\ \*\)\((?:uVar14|loopIndex3)\ \*\ 4\ \+\ puVar16\[2\]\);$	+1	all	none
+use	R300VSchedModel__vslot17	puVar16	succEdges	CONFIRMED	node + 0x40: vector of successor edges	^\s*piVar9\ =\ \(int\ \*\)FUN_0019423c\(puVar16,(?:uVar14|loopIndex3)\);$	+1	all	none
+use	R300VSchedModel__vslot17	puVar16	succEdges	CONFIRMED	node + 0x40: vector of successor edges	^\s*puVar16\ =\ \*\(uint\ \*\*\)\(param_2\ \+\ 0x40\);$@2	+1	all	none
+use	R300VSchedModel__vslot17	uVar8	vectorCount	INFERRED	vector count word read by the inlined element accessor	^\s*uVar8\ =\ puVar16\[1\];$	+3	all	none
+use	R300VSchedModel__vslot17	piVar9	succSlot	INFERRED	slot of succEdges[edgeIndex]	^\s*piVar9\ =\ \(int\ \*\)\((?:uVar14|loopIndex3)\ \*\ 4\ \+\ puVar16\[2\]\);$	+1	all	none
+use	R300VSchedModel__vslot17	piVar9	succSlot	INFERRED	slot of succEdges[edgeIndex]	^\s*piVar9\ =\ \(int\ \*\)FUN_0019423c\(puVar16,(?:uVar14|loopIndex3)\);$	+1	all	none
+use	R300VSchedModel__vslot17	piVar9	succSlot	INFERRED	slot of succEdges[edgeIndex]	^\s*(?:iVar15|loopIndex)\ =\ \*piVar9;$	+1	all	none
+use	R300VSchedModel__vslot17	piVar9	consumerInst	INFERRED	instruction of the consumer reached through the successor edge	^\s*piVar9\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\((?:iVar15|loopIndex)\ \+\ 4\)\ \+\ 0x38\);$	+4	all	none
+use	R300VSchedModel__vslot17	piVar9	consumerInst	INFERRED	instruction of the consumer reached through the successor edge	^\s*(?:iVar11|operandRecord)\ =\ FUN_001054ec\(piVar9,(?:iVar15|loopIndex)\);$	+1	all	none
+use	R300VSchedModel__vslot17	piVar9	consumerInst	INFERRED	instruction of the consumer reached through the successor edge	^\s*\(\*\*\(code\ \*\*\)\(\*piVar9\ \+\ 0x88\)\)\(piVar9,(?:iVar15|loopIndex),(?:iVar6|loopIndex2),iVar13\);$	+1	all	none
+use	R300VSchedModel__vslot17	bVar2	moreLanes	INFERRED	do/while condition over the four lanes	^\s*bVar2\ =\ (?:iVar6|loopIndex2)\ !=\ 3;$	+1	all	none
+use	R300VSchedModel__vslot17	bVar2	moreLanes	INFERRED	do/while condition over the four lanes	^\s*\}\ while\ \(bVar2\);$	+1	all	none
+use	R300VSchedModel__vslot17	iVar5	sourceNumber	INFERRED	source operand number 1..count of the instruction	^\s*for\ \(iVar5\ =\ 1;\ iVar13\ =\ \(\*\*\(code\ \*\*\)\(\*piVar17\ \+\ 0x14\)\)\(piVar17\),\ iVar5\ <=\ iVar13;$	+3	all	none
+use	R300VSchedModel__vslot17	iVar5	sourceNumber	INFERRED	source operand number 1..count of the instruction	^\s*\(\*\*\(code\ \*\*\)\(\*piVar17\ \+\ 0x88\)\)\(piVar17,iVar5,(?:iVar15|loopIndex),uVar3\);$	+1	all	none
+use	R300VSchedModel__vslot17	uVar3	laneByte	INFERRED	select byte of the operand's first used lane, applied to all four lanes	^\s*uVar3\ =\ \*\(undefined1\ \*\)\(iVar7\ \+\ iVar13\ \+\ 0x10\);$	+1	all	none
+use	R300VSchedModel__vslot17	uVar3	laneByte	INFERRED	select byte of the operand's first used lane, applied to all four lanes	^\s*\(\*\*\(code\ \*\*\)\(\*piVar17\ \+\ 0x88\)\)\(piVar17,iVar5,(?:iVar15|loopIndex),uVar3\);$	+1	all	none
+use	R300VSchedModel__vslot17	bVar2	moreLanes2	INFERRED	do/while condition over the four lanes	^\s*bVar2\ =\ (?:iVar15|loopIndex)\ !=\ 3;$	+1	all	none
+use	R300VSchedModel__vslot17	bVar2	moreLanes2	INFERRED	do/while condition over the four lanes	^\s*\}\ while\ \(bVar2\);$@2	+1	all	none
+use	R300VSchedModel__vslot17	uVar12	resourceClass	INFERRED	ResourceModel slot 19 (0x4c): the node's new resource class	^\s*uVar12\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_1|this)\ \+\ 0x4c\)\)\((?:param_1|this),piVar17\);$	+2	all	none
+use	R300VSchedModel__vslot19	iVar1	flagBit2Result	CONFIRMED	OpcodeTraits__flagBit2(opcode, compiler)	^\s*iVar1\ =\ FUN_00113090\(\*\(undefined4\ \*\)\((?:param_2|inst)\[0x22\]\ \+\ 8\),\*\(undefined4\ \*\)\((?:param_1|this)\ \+\ 8\)\);$	+2	all	none
+use	R300VSchedModel__vslot19	iVar1	numSources	CONFIRMED	IRInst vslot 5 (getNumSources)	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_2|inst)\ \+\ 0x14\)\)\((?:param_2|inst)\);$	+2	all	none
+use	R300VSchedModel__vslot19	iVar1	operandNumber	INFERRED	source operand number 0..count looking for a constant source (FUN_00105dbc)	^\s*for\ \(iVar1\ =\ 0;\ iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_2|inst)\ \+\ 0x14\)\)\((?:param_2|inst)\),\ iVar1\ <=\ iVar2;$	+3	all	none
+use	R300VSchedModel__vslot19	iVar2	numSources2	CONFIRMED	IRInst vslot 5 (getNumSources)	^\s*for\ \(iVar1\ =\ 0;\ iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_2|inst)\ \+\ 0x14\)\)\((?:param_2|inst)\),\ iVar1\ <=\ iVar2;$	+4	all	none
+use	R300VSchedModel__vslot19	iVar1	numSources	CONFIRMED	IRInst vslot 5 (getNumSources)	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_2|inst)\ \+\ 0x14\)\)\((?:param_2|inst)\);$@2	+2	all	none
+use	R300VSchedModel__vslot19	iVar1	numSources	CONFIRMED	IRInst vslot 5 (getNumSources)	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_2|inst)\ \+\ 0x14\)\)\((?:param_2|inst)\);$@3	+2	all	none
+use	R300VSchedModel__vslot19	iVar1	src3Record	CONFIRMED	IRInst__getOperandRecord(inst, 3)	^\s*iVar1\ =\ FUN_001054ec\((?:param_2|inst),3\);$	+2	all	none
+use	R300VSchedModel__vslot19	iVar2	src3Select	INFERRED	select word of operand 3 (record + 0x10)	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar1\ \+\ 0x10\);$	+1	all	none
+use	R300VSchedModel__vslot19	iVar2	src3Select	INFERRED	select word of operand 3 (record + 0x10)	^\s*if\ \(iVar2\ !=\ \*\(int\ \*\)\(iVar1\ \+\ 0x10\)\)\ \{$	+1	all	none
+use	R300VSchedModel__vslot19	iVar1	src2Record	CONFIRMED	IRInst__getOperandRecord(inst, 2)	^\s*iVar1\ =\ FUN_001054ec\((?:param_2|inst),2\);$	+2	all	none
+use	R300VSchedModel__vslot19	iVar1	flagBit0Result	INFERRED	RegKind__flagBit0(register kind of source 1)	^\s*iVar1\ =\ FUN_00126760\((?:piVar3|callResult)\[0x26\]\);$	+2	all	none
+use	R300VSchedModel__vslot19	iVar1	isUndefined	CONFIRMED	IRInst vslot 20 (isUndefined) of source 1	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*(?:piVar3|callResult)\ \+\ 0x50\)\)\((?:piVar3|callResult)\);$	+2	all	none
+use	R300VSchedModel__vslot19	iVar1	flagBit0Result	INFERRED	RegKind__flagBit0(register kind of source 2)	^\s*iVar1\ =\ FUN_00126760\((?:piVar4|callResult2)\[0x26\]\);$	+2	all	none
+use	R300VSchedModel__vslot19	iVar1	isUndefined	CONFIRMED	IRInst vslot 20 (isUndefined) of source 2	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*(?:piVar4|callResult2)\ \+\ 0x50\)\)\((?:piVar4|callResult2)\);$	+2	all	none
+local	R300VSchedModel__vslot14	param_2	node	INFERRED	the SchedNode (+0x38 instruction, +0x58 resource class)
+local	R300VSchedModel__vslot14	piVar8	nodeInst	INFERRED	node + 0x38: its instruction
+use	R300VSchedModel__vslot14	iVar2	opcode	INFERRED	opcode of the instruction (inst[0x22] + 8)	^\s*iVar2\ =\ \*\(int\ \*\)\(piVar8\[0x22\]\ \+\ 8\);$	+2	all	none
+use	R300VSchedModel__vslot14	iVar2	opcode	INFERRED	opcode of the instruction (inst[0x22] + 8)	^\s*else\ if\ \(\(iVar2\ ==\ 0x31\)\ \|\|\ \(\*\(int\ \*\)\(piVar8\[0x22\]\ \+\ 8\)\ ==\ 0x13\)\)\ \{$	+1	all	none
+use	R300VSchedModel__vslot14	iVar2	numSources	CONFIRMED	IRInst vslot 5 (getNumSources)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar8\ \+\ 0x14\)\)\(piVar8\);$	+1	all	none
+use	R300VSchedModel__vslot14	iVar2	numSources	CONFIRMED	IRInst vslot 5 (getNumSources)	^\s*if\ \(iVar2\ ==\ 2\)\ \{$	+1	all	none
+use	R300VSchedModel__vslot14	bVar1	moreComponents	INFERRED	do/while condition over the four components	^\s*bVar1\ =\ (?:iVar7|loopIndex)\ !=\ 3;$	+1	all	none
+use	R300VSchedModel__vslot14	bVar1	moreComponents	INFERRED	do/while condition over the four components	^\s*\}\ while\ \(bVar1\);$	+1	all	none
+use	R300VSchedModel__vslot14	uVar6	source1Select	INFERRED	select byte of operand 1 for the written lane (-1 none)	^\s*uVar6\ =\ 0xffffffff;$	+1	all	none
+use	R300VSchedModel__vslot14	uVar6	source1Select	INFERRED	select byte of operand 1 for the written lane (-1 none)	^\s*uVar6\ =\ \(uint\)\*\(byte\ \*\)\((?:iVar7|loopIndex)\ \+\ (?:iVar3|operandRecord)\ \+\ 0x10\);$	+1	all	none
+use	R300VSchedModel__vslot14	uVar6	source1Select	INFERRED	select byte of operand 1 for the written lane (-1 none)	^\s*FUN_0010bb9c\(piVar8,uVar6,uVar5,0,0,(?:param_1|this)\[2\]\);$	+1	all	none
+use	R300VSchedModel__vslot14	uVar5	source2Select	INFERRED	select byte of operand 2 for the written lane (-1 none)	^\s*uVar5\ =\ 0xffffffff;$	+1	all	none
+use	R300VSchedModel__vslot14	uVar5	source2Select	INFERRED	select byte of operand 2 for the written lane (-1 none)	^\s*uVar5\ =\ \(uint\)\*\(byte\ \*\)\((?:iVar7|loopIndex)\ \+\ (?:iVar3|operandRecord)\ \+\ 0x10\);$	+1	all	none
+use	R300VSchedModel__vslot14	uVar5	source2Select	INFERRED	select byte of operand 2 for the written lane (-1 none)	^\s*FUN_0010bb9c\(piVar8,uVar6,uVar5,0,0,(?:param_1|this)\[2\]\);$	+1	all	none
+use	R300VSchedModel__vslot14	uVar4	resourceClass	INFERRED	ResourceModel slot 19 (0x4c): the node's new resource class, stored at node + 0x58	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_1|this)\ \+\ 0x4c\)\)\((?:param_1|this),piVar8\);$	+2	all	none
+use	R300VSchedModel__vslot12	iVar1	opcode	INFERRED	opcode of the instruction (0x66 / 0x36 are always accepted)	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar2\ \+\ 8\);$	+2	all	none
+use	R300VSchedModel__vslot12	iVar1	opcode	INFERRED	opcode of the instruction (0x66 / 0x36 are always accepted)	^\s*if\ \(iVar1\ ==\ 0x31\)\ \{$	+3	all	none
+use	R300VSchedModel__vslot12	iVar1	opcode	INFERRED	opcode of the instruction (0x66 / 0x36 are always accepted)	^\s*if\ \(\(\(\*\(int\ \*\)\(iVar2\ \+\ 8\)\ ==\ 0x13\)\ \&\&\ \(iVar1\ =\ FUN_000f3a30\((?:param_2|inst)\),\ iVar1\ ==\ 1\)\)\ \&\&$	+2	all	none
+use	R300VSchedModel__vslot12	iVar2	opcodeInfo	INFERRED	inst + 0x88: opcode info record, +8 is the opcode	^\s*iVar2\ =\ \*\(int\ \*\)\((?:param_2|inst)\ \+\ 0x88\);$	+2	all	none
+use	R300VSchedModel__vslot12	iVar2	opcodeInfo	INFERRED	inst + 0x88: opcode info record, +8 is the opcode	^\s*iVar2\ =\ \*\(int\ \*\)\((?:param_2|inst)\ \+\ 0x88\);$@2	+1	all	none
+use	R300VSchedModel__vslot12	iVar2	opcodeInfo	INFERRED	inst + 0x88: opcode info record, +8 is the opcode	^\s*if\ \(\(\(\*\(int\ \*\)\(iVar2\ \+\ 8\)\ ==\ 0x13\)\ \&\&\ \(iVar1\ =\ FUN_000f3a30\((?:param_2|inst)\),\ iVar1\ ==\ 1\)\)\ \&\&$	+2	all	none
+use	R300VSchedModel__vslot12	iVar1	source1Def	CONFIRMED	IRInst__getOperandSource(inst, 1)	^\s*iVar1\ =\ FUN_00105594\((?:param_2|inst),1\);$	+1	all	none
+use	R300VSchedModel__vslot12	iVar1	source1Def	CONFIRMED	IRInst__getOperandSource(inst, 1)	^\s*if\ \(iVar1\ ==\ iVar2\)\ \{$	+1	all	none
+use	R300VSchedModel__vslot12	iVar1	source1Def	CONFIRMED	IRInst__getOperandSource(inst, 1)	^\s*if\ \(\(\(\(\((?:piVar3|operandVReg)\[0x20\]\ !=\ 0\)\ \&\&\ \(iVar1\ =\ FUN_00126760\((?:piVar3|operandVReg)\[0x26\]\),\ iVar1\ !=\ 0\)\)\ \&\&$	+6	all	none
+use	R300VSchedModel__vslot12	iVar2	source2Def	CONFIRMED	IRInst__getOperandSource(inst, 2)	^\s*iVar2\ =\ FUN_00105594\((?:param_2|inst),2\);$	+2	all	none
+local	R300SchedModel__vslot28	param_2	program	CONFIRMED	the program: +900 head of the block list, +8 the compiler
+local	R300SchedModel__vslot28	iVar14	block	CONFIRMED	current block (program + 900, then block + 8)
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block (list head at block + 0x98), pass A	^\s*piVar2\ =\ \*\(int\ \*\*\)\(iVar14\ \+\ 0x98\);$	+1	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block (list head at block + 0x98), pass A	^\s*if\ \(\(piVar2\[5\]\ \&\ 1U\)\ !=\ 0\)\ \{$	+3	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block (list head at block + 0x98), pass A	^\s*if\ \(\((?:iVar18|loopIndex)\ !=\ 0\)\ \&\&\ \(\(piVar2\[0x2e\]\ \&\ 2U\)\ ==\ 0\)\)\ \{$	+3	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block (list head at block + 0x98), pass A	^\s*(?:iVar9|loopRemaining)\ =\ piVar2\[1\];$	+1	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block (list head at block + 0x98), pass A	^\s*iVar11\ =\ piVar2\[0x25\];$	+3	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block (list head at block + 0x98), pass A	^\s*iVar10\ =\ FUN_001054ec\(piVar2,1\);$	+3	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block (list head at block + 0x98), pass A	^\s*iVar10\ =\ piVar2\[0x48\];$	+1	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block (list head at block + 0x98), pass A	^\s*(?:iVar8|loopIndex2)\ =\ FUN_00105594\(piVar2,piVar2\[0x21\]\);$	+1	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block (list head at block + 0x98), pass A	^\s*FUN_0019401c\(piVar2\);$	+7	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block (list head at block + 0x98), pass A	^\s*piVar2\[5\]\ =\ piVar2\[5\]\ \&\ 0xffffffbf;$	+1	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block (list head at block + 0x98), pass A	^\s*piVar2\[5\]\ =\ piVar2\[5\]\ \|\ 0x40;$	+1	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block (list head at block + 0x98), pass A	^\s*FUN_0010469c\(piVar2,\*\(undefined4\ \*\)\((?:param_1|this)\[2\]\ \+\ 0x6c4\),iVar12,iVar11\);$	+1	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block (list head at block + 0x98), pass A	^\s*FUN_00106804\(piVar2,(?:iVar8|loopIndex2),0,(?:param_1|this)\[2\]\);$	+1	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block (list head at block + 0x98), pass A	^\s*FUN_000e7738\(iVar14,(?:iVar9|loopRemaining),piVar2\);$	+1	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block (list head at block + 0x98), pass A	^\s*FUN_00106004\(piVar2,1,(?:uVar6|operandVReg2),0,(?:param_1|this)\[2\]\);$	+1	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block (list head at block + 0x98), pass A	^\s*FUN_00106004\(piVar2,2,(?:uVar6|operandVReg2),0,(?:param_1|this)\[2\]\);$	+2	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block (list head at block + 0x98), pass A	^\s*(?:iVar18|loopIndex)\ =\ FUN_001054ec\(piVar2,2\);$	+1	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block (list head at block + 0x98), pass A	^\s*FUN_00103d50\(piVar2\ \+\ 0x29,1,uVar3\);$	+2	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block (list head at block + 0x98), pass A	^\s*FUN_00106004\(piVar2,1,(?:uVar6|operandVReg2),0,(?:param_1|this)\[2\]\);$@2	+1	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block (list head at block + 0x98), pass A	^\s*\(\(void\ \(\*\)\(\)\)FUN_000f79c4\)\(piVar2,param_2,2,dVar19,dVar19,dVar19,dVar19\);$	+2	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block (list head at block + 0x98), pass A	^\s*FUN_00106004\(piVar2,1,(?:uVar6|operandVReg2),0,(?:param_1|this)\[2\]\);$@3	+1	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block (list head at block + 0x98), pass A	^\s*FUN_00106004\(piVar2,2,(?:uVar6|operandVReg2),0,(?:param_1|this)\[2\]\);$@2	+2	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block (list head at block + 0x98), pass A	^\s*(?:iVar18|loopIndex)\ =\ FUN_001054ec\(piVar2,2\);$@2	+1	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block (list head at block + 0x98), pass A	^\s*FUN_00106004\(piVar2,1,(?:uVar6|operandVReg2),0,(?:param_1|this)\[2\]\);$@4	+1	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block (list head at block + 0x98), pass A	^\s*\(\(void\ \(\*\)\(\)\)FUN_000f79c4\)\(piVar2,param_2,2,dVar19,dVar19,dVar19,dVar19\);$@2	+2	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block (list head at block + 0x98), pass A	^\s*FUN_00103d50\(piVar2\ \+\ 0x29,1,(?:uVar17|loopIndex3)\);$	+2	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block (list head at block + 0x98), pass A	^\s*piVar4\ =\ \(int\ \*\)piVar2\[2\];$	+1	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block (list head at block + 0x98), pass A	^\s*for\ \((?:iVar18|loopIndex)\ =\ 1;\ iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*piVar2\ \+\ 0x14\)\)\(piVar2\),\ (?:iVar18|loopIndex)\ <=\ iVar10;$	+3	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block (list head at block + 0x98), pass A	^\s*FUN_00106004\(piVar2,(?:iVar18|loopIndex),(?:piVar7|callResult),0,(?:param_1|this)\[2\]\);$	+1	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block (list head at block + 0x98), pass A	^\s*piVar4\ =\ \(int\ \*\)piVar2\[2\];$@2	+1	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block (list head at block + 0x98), pass A	^\s*piVar2\ =\ piVar4;$	+1	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block, pass B	^\s*piVar2\ =\ \*\(int\ \*\*\)\(iVar14\ \+\ 0x98\);$@2	+1	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block, pass B	^\s*if\ \(\(piVar2\[5\]\ \&\ 1U\)\ !=\ 0\)\ \{$@2	+1	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block, pass B	^\s*for\ \(;\ (?:iVar18|loopIndex)\ =\ \(\*\*\(code\ \*\*\)\(\*piVar2\ \+\ 0x14\)\)\(piVar2\),\ iVar10\ <=\ (?:iVar18|loopIndex);$	+3	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block, pass B	^\s*(?:iVar8|loopIndex2)\ =\ FUN_001054ec\(piVar2,iVar10\);$	+1	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block, pass B	^\s*(?:iVar8|loopIndex2)\ =\ FUN_001054ec\(piVar2,iVar10\);$@2	+1	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block, pass B	^\s*piVar2\[0x27\]\ =\ DAT_001b2a64;$	+1	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block, pass B	^\s*(?:iVar8|loopIndex2)\ =\ FUN_001054ec\(piVar2,iVar10\);$@3	+1	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block, pass B	^\s*if\ \(\*\(int\ \*\)\(piVar2\[0x22\]\ \+\ 8\)\ ==\ 0x8e\)\ \{$	+2	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block, pass B	^\s*\(\*\*\(code\ \*\*\)\(\*(?:param_1|this)\ \+\ 0x6c\)\)\((?:param_1|this),piVar2\);$	+2	all	none
+use	R300SchedModel__vslot28	piVar2	inst	INFERRED	current instruction of the block, pass B	^\s*piVar2\ =\ piVar4;$@2	+1	all	none
+use	R300SchedModel__vslot28	piVar4	nextInst	INFERRED	the next instruction, read before the current one is rewritten	^\s*for\ \(piVar4\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar14\ \+\ 0x98\)\)\[2\];\ piVar4\ !=\ \(int\ \*\)0x0;$	+2	all	none
+use	R300SchedModel__vslot28	piVar4	nextInst	INFERRED	the next instruction, read before the current one is rewritten	^\s*piVar4\ =\ \(int\ \*\)piVar2\[2\];$	+1	all	none
+use	R300SchedModel__vslot28	piVar4	nextInst	INFERRED	the next instruction, read before the current one is rewritten	^\s*piVar4\ =\ \(int\ \*\)piVar2\[2\];$@2	+1	all	none
+use	R300SchedModel__vslot28	piVar4	nextInst	INFERRED	the next instruction, read before the current one is rewritten	^\s*piVar2\ =\ piVar4;$	+1	all	none
+use	R300SchedModel__vslot28	piVar4	nextInst	INFERRED	the next instruction, read before the current one is rewritten	^\s*for\ \(piVar4\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar14\ \+\ 0x98\)\)\[2\];\ piVar4\ !=\ \(int\ \*\)0x0;$@2	+2	all	none
+use	R300SchedModel__vslot28	piVar4	nextInst	INFERRED	the next instruction, read before the current one is rewritten	^\s*piVar4\ =\ \(int\ \*\)piVar2\[2\];$@3	+1	all	none
+use	R300SchedModel__vslot28	piVar4	nextInst	INFERRED	the next instruction, read before the current one is rewritten	^\s*piVar4\ =\ \(int\ \*\)piVar2\[2\];$@4	+1	all	none
+use	R300SchedModel__vslot28	piVar4	nextInst	INFERRED	the next instruction, read before the current one is rewritten	^\s*piVar2\ =\ piVar4;$@2	+1	all	none
+local	R300SchedModel__vslot28	puVar5	hashAlloc	CONFIRMED	Arena__alloc(arena, 0x1c): the register-keyed hash set (equality and hash functions at +0x10/+0x14, bucket array at +0xc)
+local	R300SchedModel__vslot28	puVar15	hashSet	CONFIRMED	hashAlloc + 1: bucket count word, buckets via hashAlloc[3]
+use	R300SchedModel__vslot28	uVar3	bucketCount	INFERRED	power-of-two bucket count found by doubling	^\s*uVar3\ =\ 1;$	+1	all	none
+use	R300SchedModel__vslot28	uVar3	bucketCount	INFERRED	power-of-two bucket count found by doubling	^\s*uVar3\ =\ uVar3\ <<\ 1;$	+2	all	none
+use	R300SchedModel__vslot28	uVar3	bucketCount	INFERRED	power-of-two bucket count found by doubling	^\s*\*puVar15\ =\ uVar3;$	+1	all	none
+use	R300SchedModel__vslot28	uVar3	sourceNegate	INFERRED	inst[0x2e] & 1: negate bit of the mov's source, kept when the mov becomes an add	^\s*uVar3\ =\ piVar2\[0x2e\]\ \&\ 1;$	+1	all	none
+use	R300SchedModel__vslot28	uVar3	sourceNegate	INFERRED	inst[0x2e] & 1: negate bit of the mov's source, kept when the mov becomes an add	^\s*FUN_00103d50\(piVar2\ \+\ 0x29,1,uVar3\);$	+2	all	none
+use	R300SchedModel__vslot28	uVar3	sourceNegate	INFERRED	inst[0x2e] & 1: negate bit of the mov's source, kept when the mov becomes an add	^\s*(?:uVar17|loopIndex3)\ =\ uVar3\ \^\ 1;$	+1	all	none
+use	R300SchedModel__vslot28	uVar3	sourceNegate	INFERRED	inst[0x2e] & 1: negate bit of the mov's source, kept when the mov becomes an add	^\s*(?:uVar17|loopIndex3)\ =\ uVar3;$	+1	all	none
+use	R300SchedModel__vslot28	uVar3	sourceNegate	INFERRED	inst[0x2e] & 1: negate bit of the mov's source, kept when the mov becomes an add	^\s*(?:uVar17|loopIndex3)\ =\ uVar3\ \^\ 1;$@2	+1	all	none
+use	R300SchedModel__vslot28	uVar3	sourceNegate	INFERRED	inst[0x2e] & 1: negate bit of the mov's source, kept when the mov becomes an add	^\s*FUN_00103d50\(piVar2\ \+\ 0x2f,1,uVar3\);$	+1	all	none
+use	R300SchedModel__vslot28	uVar3	bucketCountWord	INFERRED	hashSet[0]: number of buckets, for freeing them	^\s*uVar3\ =\ \*puVar15;$	+2	all	none
+use	R300SchedModel__vslot28	uVar3	bucketCountWord	INFERRED	hashSet[0]: number of buckets, for freeing them	^\s*uVar3\ =\ \*puVar15;$@2	+1	all	none
+use	R300SchedModel__vslot28	uVar3	bucketCountWord	INFERRED	hashSet[0]: number of buckets, for freeing them	^\s*\}\ while\ \((?:uVar17|loopIndex3)\ <\ uVar3\);$	+1	all	none
+use	R300SchedModel__vslot28	uVar3	laneSelectWord	INFERRED	select word of the source operand split into lanes	^\s*uVar3\ =\ local_60;$	+1	all	none
+use	R300SchedModel__vslot28	uVar3	laneSelectWord	INFERRED	select word of the source operand split into lanes	^\s*if\ \(\(\(\((?:iVar18|loopIndex)\ !=\ 0\)\ \&\&$	+6	all	none
+use	R300SchedModel__vslot28	uVar16	bucketArray	INFERRED	Arena__alloc result: the zeroed bucket array	^\s*uVar16\ =\ FUN_00193e18\(uVar16,\*puVar15\ <<\ 2\);$	+3	all	none
+use	R300SchedModel__vslot28	uVar16	sourceSelect	INFERRED	select word of the mov's source record (+0x10), copied to the new add's sources	^\s*uVar16\ =\ \*\(undefined4\ \*\)\(iVar10\ \+\ 0x10\);$	+1	all	none
+use	R300SchedModel__vslot28	uVar16	sourceSelect	INFERRED	select word of the mov's source record (+0x10), copied to the new add's sources	^\s*\*\(undefined4\ \*\)\((?:iVar18|loopIndex)\ \+\ 0x10\)\ =\ uVar16;$	+1	all	none
+use	R300SchedModel__vslot28	uVar16	sourceSelect	INFERRED	select word of the mov's source record (+0x10), copied to the new add's sources	^\s*\*\(undefined4\ \*\)\((?:iVar18|loopIndex)\ \+\ 0x10\)\ =\ uVar16;$@2	+1	all	none
+use	R300SchedModel__vslot28	uVar16	sourceSelect	INFERRED	select word of the mov's source record (+0x10), copied to the new add's sources	^\s*\*\(undefined4\ \*\)\((?:iVar18|loopIndex)\ \+\ 0x10\)\ =\ uVar16;$@3	+1	all	none
+use	R300SchedModel__vslot28	uVar16	sourceSelect	INFERRED	select word of the mov's source record (+0x10), copied to the new add's sources	^\s*\*\(undefined4\ \*\)\((?:iVar18|loopIndex)\ \+\ 0x10\)\ =\ uVar16;$@4	+1	all	none
+use	R300SchedModel__vslot28	uVar16	sourceSelect	INFERRED	select word of the mov's source record (+0x10), copied to the new add's sources	^\s*\*\(undefined4\ \*\)\((?:iVar18|loopIndex)\ \+\ 0x10\)\ =\ uVar16;$@5	+1	all	none
+use	R300SchedModel__vslot28	uVar16	sourceSelect	INFERRED	select word of the mov's source record (+0x10), copied to the new add's sources	^\s*\*\(undefined4\ \*\)\((?:iVar18|loopIndex)\ \+\ 0x10\)\ =\ uVar16;$@6	+1	all	none
+use	R300SchedModel__vslot28	uVar16	mergedSelect	INFERRED	select word of the merged presub after maskUnused	^\s*uVar16\ =\ local_64;$	+1	all	none
+use	R300SchedModel__vslot28	uVar16	mergedSelect	INFERRED	select word of the merged presub after maskUnused	^\s*\*\(undefined4\ \*\)\(iVar10\ \+\ 0x10\)\ =\ uVar16;$	+1	all	none
+use	R300SchedModel__vslot28	uVar16	mergedSelect	INFERRED	select word of the merged presub after maskUnused	^\s*\*\(undefined4\ \*\)\(iVar10\ \+\ 0x10\)\ =\ uVar16;$@2	+1	all	none
+use	R300SchedModel__vslot28	iVar10	destRecord	CONFIRMED	IRInst__getOperandRecord(existingPresub, 0)	^\s*iVar10\ =\ FUN_001054ec\((?:piVar7|callResult),0\);$	+2	all	none
+use	R300SchedModel__vslot28	iVar10	fullSelect	INFERRED	DAT_001b2a64: select-word constant used to mask unused lanes	^\s*iVar10\ =\ DAT_001b2a64;$	+1	all	none
+use	R300SchedModel__vslot28	iVar10	fullSelect	INFERRED	DAT_001b2a64: select-word constant used to mask unused lanes	^\s*FUN_000f3340\(\&local_64,iVar10,local_68\);$	+1	all	none
+use	R300SchedModel__vslot28	iVar10	source1Record	CONFIRMED	IRInst__getOperandRecord(existingPresub, 1)	^\s*iVar10\ =\ FUN_001054ec\((?:piVar7|callResult),1\);$	+2	all	none
+local	R300SchedModel__vslot28	iVar11	virtualReg	INFERRED	inst[0x25]: register id kept on the rewritten instruction
+local	R300SchedModel__vslot28	iVar12	regKind	INFERRED	inst[0x26]: register kind kept on the rewritten instruction
+local	R300SchedModel__vslot28	iVar13	destSelect	INFERRED	destination select word (record + 0x10) of the mov, restored on the rewritten instruction
+local	R300SchedModel__vslot28	cVar1	laneSelect	INFERRED	one select byte of the existing presub's destination (1 = unused)
+use	R300SchedModel__vslot28	dVar19	literalValue	INFERRED	literal (FLOAT_001aa10c) passed to FUN_000f79c4 to set a literal source	^\s*dVar19\ =\ \(double\)FLOAT_001aa10c;$	+2	all	none
+use	R300SchedModel__vslot28	dVar19	literalValue	INFERRED	literal (FLOAT_001aa0e8) passed to FUN_000f79c4	^\s*dVar19\ =\ \(double\)FLOAT_001aa0e8;$	+2	all	none
+local	R300SchedModel__vslot11	param_2	node	INFERRED	the SchedNode (+0x38 instruction, +0x58 resource class, +0x60 group)
+local	R300SchedModel__vslot11	param_3	writerArrays	INFERRED	scheduler + 0x4d: one array per component, indexed by hardware register, holding the node that last wrote it
+local	R300SchedModel__vslot11	pbVar6	groupBytes	INFERRED	node + 0x60: the group record; its first four bytes are the lanes the group already writes
+local	R300SchedModel__vslot11	local_48	freeLanes	INFERRED	one byte per component: 0 = lane taken by another writer with pending consumers, nonzero = free; 0x1010101 when the node has no group
+use	R300SchedModel__vslot11	uVar3	groupMaskWord	INFERRED	0x1010101 minus the group's lane bytes	^\s*uVar3\ =\ 0x1010101\ \-$	+1	all	none
+use	R300SchedModel__vslot11	uVar3	groupMaskWord	INFERRED	0x1010101 minus the group's lane bytes	^\s*local_48\ =\ uVar3\ \*\ 0x1000000\ \|\ \(uVar3\ \&\ 0xff00\)\ <<\ 8\ \|\ uVar3\ >>\ 8\ \&\ 0xff00\ \|\ uVar3\ >>\ 0x18;$	+1	all	none
+use	R300SchedModel__vslot11	iVar4	groupReg	INFERRED	group + 4: the hardware register assigned to the group	^\s*iVar4\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_2\ \+\ 0x60\)\ \+\ 4\);$	+2	all	none
+use	R300SchedModel__vslot11	iVar4	groupReg	INFERRED	group + 4: the hardware register assigned to the group	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar4\ \*\ 4\ \+\ \*\(int\ \*\)\(param_3\ \+\ (?:iVar7|loopIndex)\ \*\ 4\)\);$	+1	all	none
+use	R300SchedModel__vslot11	iVar5	writerNode	INFERRED	node that last wrote the register's component, 0 when none	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar4\ \*\ 4\ \+\ \*\(int\ \*\)\(param_3\ \+\ (?:iVar7|loopIndex)\ \*\ 4\)\);$	+2	all	none
+use	R300SchedModel__vslot11	iVar4	targetLane	INFERRED	the free lane chosen for the result (3 for scalar destinations, else the first written component)	^\s*iVar4\ =\ 3;$	+1	all	none
+use	R300SchedModel__vslot11	iVar4	targetLane	INFERRED	the free lane chosen for the result (3 for scalar destinations, else the first written component)	^\s*iVar4\ =\ FUN_000f30d4\(\*\(undefined4\ \*\)\(iVar4\ \+\ 0x10\)\);$	+1	all	none
+use	R300SchedModel__vslot11	iVar4	targetLane	INFERRED	the free lane chosen for the result (3 for scalar destinations, else the first written component)	^\s*\*\(undefined1\ \*\)\(\(int\)a0\ \+\ iVar4\ \+\ 0x9c\)\ =\ 1;$	+2	all	none
+use	R300SchedModel__vslot11	iVar4	targetLane	INFERRED	the free lane chosen for the result (3 for scalar destinations, else the first written component)	^\s*uVar2\ =\ \*\(undefined1\ \*\)\(iVar4\ \+\ (?:iVar8|loopRemaining)\ \+\ 0x10\);$	+2	all	none
+use	R300SchedModel__vslot11	iVar4	targetLane	INFERRED	the free lane chosen for the result (3 for scalar destinations, else the first written component)	^\s*\*\(undefined1\ \*\)\(\(int\)a0\ \+\ iVar4\ \+\ 0x9c\)\ =\ 0;$	+2	all	none
+use	R300SchedModel__vslot11	iVar4	targetLane	INFERRED	the free lane chosen for the result (3 for scalar destinations, else the first written component)	^\s*\(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x88\)\)\(a0,iVar5,iVar4,uVar2\);$	+1	all	none
+use	R300SchedModel__vslot11	iVar4	targetLane	INFERRED	the free lane chosen for the result (3 for scalar destinations, else the first written component)	^\s*\(\(int\ \(\*\)\(\)\)FUN_0018b1bc\)\((?:param_1|this),param_2,iVar4,iVar4,(?:iVar7|loopIndex)\);$	+1	all	none
+use	R300SchedModel__vslot11	iVar5	sourceNumber	INFERRED	source operand number 1..count while the lane is swapped in the selects	^\s*iVar5\ =\ 1;$	+1	all	none
+use	R300SchedModel__vslot11	iVar5	sourceNumber	INFERRED	source operand number 1..count while the lane is swapped in the selects	^\s*for\ \(;\ (?:iVar8|loopRemaining)\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x14\)\)\(a0\),\ iVar5\ <=\ (?:iVar8|loopRemaining);\ iVar5\ =\ iVar5\ \+\ 1\)\ \{$	+2	all	none
+use	R300SchedModel__vslot11	iVar5	sourceNumber	INFERRED	source operand number 1..count while the lane is swapped in the selects	^\s*\(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x88\)\)\(a0,iVar5,iVar4,4,in_r7,in_r8,iVar4\ \+\ (?:iVar8|loopRemaining)\);$	+2	all	none
+use	R300SchedModel__vslot11	iVar5	sourceNumber	INFERRED	source operand number 1..count while the lane is swapped back	^\s*iVar5\ =\ 1;$@2	+1	all	none
+use	R300SchedModel__vslot11	iVar5	sourceNumber	INFERRED	source operand number 1..count while the lane is swapped back	^\s*for\ \(;\ (?:iVar8|loopRemaining)\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x14\)\)\(a0\),\ iVar5\ <=\ (?:iVar8|loopRemaining);\ iVar5\ =\ iVar5\ \+\ 1\)\ \{$@2	+2	all	none
+use	R300SchedModel__vslot11	iVar5	sourceNumber	INFERRED	source operand number 1..count while the lane is swapped back	^\s*\(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x88\)\)\(a0,iVar5,(?:iVar7|loopIndex),4,in_r7,in_r8,(?:iVar7|loopIndex)\ \+\ (?:iVar8|loopRemaining)\);$	+2	all	none
+use	R300SchedModel__vslot11	uVar2	laneSelect	INFERRED	select byte of the source for the old lane	^\s*uVar2\ =\ \*\(undefined1\ \*\)\(iVar4\ \+\ (?:iVar8|loopRemaining)\ \+\ 0x10\);$	+1	all	none
+use	R300SchedModel__vslot11	uVar2	laneSelect	INFERRED	select byte of the source for the old lane	^\s*\(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x88\)\)\(a0,iVar5,(?:iVar7|loopIndex),uVar2\);$	+1	all	none
+use	R300SchedModel__vslot11	uVar2	laneSelect	INFERRED	select byte of the source for the chosen lane	^\s*uVar2\ =\ \*\(undefined1\ \*\)\((?:iVar7|loopIndex)\ \+\ (?:iVar8|loopRemaining)\ \+\ 0x10\);$	+1	all	none
+use	R300SchedModel__vslot11	uVar2	laneSelect	INFERRED	select byte of the source for the chosen lane	^\s*\(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x88\)\)\(a0,iVar5,iVar4,uVar2\);$	+1	all	none
+use	R300SchedModel__vslot11	bVar1	lastScan	INFERRED	scan reached lane 2	^\s*bVar1\ =\ (?:iVar7|loopIndex)\ ==\ 2;$	+1	all	none
+use	R300SchedModel__vslot11	bVar1	lastScan	INFERRED	scan reached lane 2	^\s*if\ \(bVar1\)\ \{$	+1	all	none
+local	R300SchedModel__vslot11	a0	nodeInst	INFERRED	node + 0x38: its instruction
+local	R300SchedModel__vslot26	param_3	operandNumber	INFERRED	source operand number whose select word is examined
+local	R300SchedModel__vslot26	param_4	selectsOut	INFERRED	array receiving the replacement select words, one per read
+local	R300SchedModel__vslot26	param_5	groupCount	INFERRED	receives the number of select words written to selectsOut
+local	R300SchedModel__vslot26	uVar4	selectWord	INFERRED	select word of the operand record (+0x10), canonicalised in place when it is split
+use	R300SchedModel__vslot26	iVar1	operandRecord	CONFIRMED	IRInst__getOperandRecord(inst, operandNumber)	^\s*iVar1\ =\ FUN_001054ec\((?:param_2|inst),param_3\);$	+2	all	none
+use	R300SchedModel__vslot26	iVar1	isFetch	CONFIRMED	IRInst vslot 10 (isFetch)	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_2|inst)\ \+\ 0x28\)\)\((?:param_2|inst)\);$	+2	all	none
+use	R300SchedModel__vslot26	iVar1	isPresub	CONFIRMED	IRInst vslot 23 (isPresub) of inst	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_2|inst)\ \+\ 0x5c\)\)\((?:param_2|inst)\);$	+2	all	none
+use	R300SchedModel__vslot26	iVar1	isSourceSelectIdentity	CONFIRMED	IRInst__isSourceSelectIdentity(inst, 1)	^\s*iVar1\ =\ FUN_000f31e8\((?:param_2|inst),1\);$	+2	all	none
+use	R300SchedModel__vslot26	iVar1	numSources	CONFIRMED	IRInst vslot 5 (getNumSources)	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_2|inst)\ \+\ 0x14\)\)\((?:param_2|inst)\);$	+2	all	none
+use	R300SchedModel__vslot26	iVar1	sourceIsPresub	CONFIRMED	IRInst vslot 23 (isPresub) of the source definition	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x5c\)\)\(a0\);$	+2	all	none
+use	R300SchedModel__vslot26	iVar1	selectIsNative	INFERRED	the select word needs no split (SelectWord__isDefaultAfterCanonicalise / matchesAnyKnownPattern / matchesDefaultPattern)	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_001896f8\)\(uVar4\);$	+1	all	none
+use	R300SchedModel__vslot26	iVar1	selectIsNative	INFERRED	the select word needs no split (SelectWord__isDefaultAfterCanonicalise / matchesAnyKnownPattern / matchesDefaultPattern)	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_00189788\)\(uVar4\);$	+1	all	none
+use	R300SchedModel__vslot26	iVar1	selectIsNative	INFERRED	the select word needs no split (SelectWord__isDefaultAfterCanonicalise / matchesAnyKnownPattern / matchesDefaultPattern)	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_0018976c\)\(uVar4\);$	+1	all	none
+use	R300SchedModel__vslot26	iVar1	selectIsNative	INFERRED	the select word needs no split (SelectWord__isDefaultAfterCanonicalise / matchesAnyKnownPattern / matchesDefaultPattern)	^\s*if\ \(iVar1\ ==\ 0\)\ \{$@4	+1	all	none
+use	R300SchedModel__vslot26	iVar1	tableRow	INFERRED	4 * base-5 index of the select word's bytes (weights 125, 25, 5, 1) into the split table	^\s*iVar1\ =\ \(\(uVar4\ >>\ 0x18\)\ \*\ 0x7d\ \+\ \(uVar4\ >>\ 0x10\ \&\ 0xff\)\ \*\ 0x19\ \+\ \(uVar4\ >>\ 8\ \&\ 0xff\)\ \*\ 5\ \+$	+5	all	none
+use	R300SchedModel__vslot26	iVar1	operandRecord	CONFIRMED	IRInst__getOperandRecord(inst, operandNumber)	^\s*iVar1\ =\ FUN_001054ec\((?:param_2|inst),param_3\);$@2	+2	all	none
+use	R300SchedModel__vslot26	iVar2	tableEntry	INFERRED	split table entry walked until the end marker 0x4040404	^\s*for\ \(iVar2\ =\ \*\(int\ \*\)\(\&DAT_001b0240\ \+\ \(iVar1\ \+\ \*param_5\)\ \*\ 4\);\ iVar2\ !=\ 0x4040404;$	+2	all	none
+use	R300SchedModel__vslot26	iVar2	tableEntry	INFERRED	split table entry walked until the end marker 0x4040404	^\s*iVar2\ =\ \*param_5;$	+2	all	none
+use	R300SchedModel__vslot26	uVar3	entryWord	INFERRED	split table entry, byte-swapped into the output select word	^\s*uVar3\ =\ \*\(uint\ \*\)\(\&DAT_001b0240\ \+\ \(iVar1\ \+\ \*param_5\)\ \*\ 4\);$	+1	all	none
+use	R300SchedModel__vslot26	uVar3	entryWord	INFERRED	split table entry, byte-swapped into the output select word	^\s*uVar3\ <<\ 0x18\ \|\ \(uVar3\ \&\ 0xff00\)\ <<\ 8\ \|\ uVar3\ >>\ 8\ \&\ 0xff00\ \|\ uVar3\ >>\ 0x18;$	+1	all	none
+local	R300SchedModel__vslot16	param_3	trialSelect	INFERRED	in/out: the select byte tried for the replacement's source lanes; counted down while canAdd refuses and the target has flag 0x400
+local	R300SchedModel__vslot16	param_4	resultLane	INFERRED	out: the destination component of the replacement (3 or 1)
+local	R300SchedModel__vslot16	a0	newInst	INFERRED	the replacement instruction created with IRInst__create
+use	R300SchedModel__vslot16	iVar1	opcode	INFERRED	opcode of inst (inst[0x22] + 8): 0x1c, 0x1d or 0x1e	^\s*iVar1\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\((?:param_2|inst)\ \+\ 0x88\)\ \+\ 8\);$	+2	all	none
+use	R300SchedModel__vslot16	iVar1	opcode	INFERRED	opcode of inst (inst[0x22] + 8): 0x1c, 0x1d or 0x1e	^\s*if\ \(iVar1\ !=\ 0x1e\)\ \{$	+2	all	none
+use	R300SchedModel__vslot16	iVar1	canAdd	INFERRED	ResourceModel slot 3 (canAddInstruction) on newInst	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_1|this)\ \+\ 0xc\)\)\((?:param_1|this),a0\);$	+2	all	none
+use	R300SchedModel__vslot16	iVar1	canAdd	INFERRED	ResourceModel slot 3 (canAddInstruction) on newInst	^\s*\}\ while\ \(\(\(\*\(uint\ \*\)\(\*\(int\ \*\)\((?:param_1|this)\[2\]\ \+\ 0x30c\)\ \+\ 8\)\ \&\ 0x400\)\ !=\ 0\)\ \&\&$	+2	all	none
+use	R300SchedModel__vslot16	iVar1	canAdd	INFERRED	ResourceModel slot 3 (canAddInstruction) on newInst	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_1|this)\ \+\ 0xc\)\)\((?:param_1|this),a0\);$@2	+2	all	none
+use	R300SchedModel__vslot16	iVar1	newInstVtable	INFERRED	*newInst: vtable of the rejected instruction, whose slot 1 deletes it	^\s*iVar1\ =\ \*a0;$	+1	all	none
+use	R300SchedModel__vslot16	iVar1	newInstVtable	INFERRED	*newInst: vtable of the rejected instruction, whose slot 1 deletes it	^\s*iVar1\ =\ \*a0;$@2	+1	all	none
+use	R300SchedModel__vslot16	iVar1	newInstVtable	INFERRED	*newInst: vtable of the rejected instruction, whose slot 1 deletes it	^\s*\(\*\*\(code\ \*\*\)\(iVar1\ \+\ 4\)\)\(a0\);$	+1	all	none
+use	R300SchedModel__vslot16	iVar1	canAdd	INFERRED	ResourceModel slot 3 (canAddInstruction) on newInst	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_1|this)\ \+\ 0xc\)\)\((?:param_1|this),a0\);$@3	+2	all	none
+use	R300SchedModel__vslot16	iVar1	trialSelectNext	INFERRED	*trialSelect, decremented for the next try	^\s*iVar1\ =\ \*param_3;$	+3	all	none
+use	R300SchedModel__vslot16	iVar4	trialSelectValue	INFERRED	*trialSelect: select byte tried for sources 1 and 2	^\s*iVar4\ =\ \*param_3;$	+1	all	none
+use	R300SchedModel__vslot16	iVar4	trialSelectValue	INFERRED	*trialSelect: select byte tried for sources 1 and 2	^\s*\(\*pcVar3\)\(a0,1,3,\*\(undefined1\ \*\)\(iVar4\ \+\ iVar1\ \+\ 0x10\)\);$	+1	all	none
+use	R300SchedModel__vslot16	iVar4	trialSelectValue	INFERRED	*trialSelect: select byte tried for source 2	^\s*iVar4\ =\ \*param_3;$@2	+1	all	none
+use	R300SchedModel__vslot16	iVar4	trialSelectValue	INFERRED	*trialSelect: select byte tried for source 2	^\s*\(\*pcVar3\)\(a0,2,3,\*\(undefined1\ \*\)\(iVar4\ \+\ iVar1\ \+\ 0x10\)\);$	+1	all	none
+use	R300SchedModel__vslot16	iVar4	trialSelectValue	INFERRED	*trialSelect: select byte tried for sources 1 and 2	^\s*iVar4\ =\ \*param_3;$@3	+1	all	none
+use	R300SchedModel__vslot16	iVar4	trialSelectValue	INFERRED	*trialSelect: select byte tried for sources 1 and 2	^\s*\(\*pcVar3\)\(a0,1,3,\*\(undefined1\ \*\)\(iVar4\ \+\ iVar1\ \+\ 0x10\)\);$@2	+1	all	none
+use	R300SchedModel__vslot16	iVar4	trialSelectValue	INFERRED	*trialSelect: select byte tried for source 2	^\s*iVar4\ =\ \*param_3;$@4	+1	all	none
+use	R300SchedModel__vslot16	iVar4	trialSelectValue	INFERRED	*trialSelect: select byte tried for source 2	^\s*\(\*pcVar3\)\(a0,2,3,\*\(undefined1\ \*\)\(iVar4\ \+\ iVar1\ \+\ 0x10\)\);$@2	+1	all	none
+use	R300SchedModel__vslot16	pcVar3	setSourceSelect	INFERRED	IRInst vslot 0x88 on newInst: set one lane's select of an operand	^\s*pcVar3\ =\ \*\(code\ \*\*\)\(\*a0\ \+\ 0x88\);$	+1	all	none
+use	R300SchedModel__vslot16	pcVar3	setSourceSelect	INFERRED	IRInst vslot 0x88 on newInst: set one lane's select of an operand	^\s*\(\*pcVar3\)\(a0,1,3,\*\(undefined1\ \*\)\(iVar4\ \+\ iVar1\ \+\ 0x10\)\);$	+1	all	none
+use	R300SchedModel__vslot16	pcVar3	setSourceSelect	INFERRED	IRInst vslot 0x88 on newInst	^\s*pcVar3\ =\ \*\(code\ \*\*\)\(\*a0\ \+\ 0x88\);$@2	+1	all	none
+use	R300SchedModel__vslot16	pcVar3	setSourceSelect	INFERRED	IRInst vslot 0x88 on newInst	^\s*\(\*pcVar3\)\(a0,2,3,\*\(undefined1\ \*\)\(iVar4\ \+\ iVar1\ \+\ 0x10\)\);$	+1	all	none
+use	R300SchedModel__vslot16	pcVar3	setSourceSelect	INFERRED	IRInst vslot 0x88 on newInst	^\s*pcVar3\ =\ \*\(code\ \*\*\)\(\*a0\ \+\ 0x88\);$@3	+1	all	none
+use	R300SchedModel__vslot16	pcVar3	setSourceSelect	INFERRED	IRInst vslot 0x88 on newInst	^\s*\(\*pcVar3\)\(a0,1,3,\*\(undefined1\ \*\)\(iVar4\ \+\ iVar1\ \+\ 0x10\)\);$@2	+1	all	none
+use	R300SchedModel__vslot16	pcVar3	setSourceSelect	INFERRED	IRInst vslot 0x88 on newInst	^\s*pcVar3\ =\ \*\(code\ \*\*\)\(\*a0\ \+\ 0x88\);$@4	+1	all	none
+use	R300SchedModel__vslot16	pcVar3	setSourceSelect	INFERRED	IRInst vslot 0x88 on newInst	^\s*\(\*pcVar3\)\(a0,2,3,\*\(undefined1\ \*\)\(iVar4\ \+\ iVar1\ \+\ 0x10\)\);$@2	+1	all	none
+use	R300SchedModel__vslot16	pcVar3	setSourceSelect	INFERRED	IRInst vslot 0x88 on newInst	^\s*pcVar3\ =\ \*\(code\ \*\*\)\(\*a0\ \+\ 0x88\);$@5	+1	all	none
+use	R300SchedModel__vslot16	pcVar3	setSourceSelect	INFERRED	IRInst vslot 0x88 on newInst	^\s*\(\*pcVar3\)\(a0,3,3,\*\(undefined1\ \*\)\(iVar1\ \+\ 0x12\)\);$	+1	all	none
+local	R300SchedModel__vslot14	param_2	node	INFERRED	the SchedNode (+0x38 instruction, +0x58 resource class, +0x5c special flag)
+local	R300SchedModel__vslot14	a0	nodeInst	INFERRED	node + 0x38: its instruction
+use	R300SchedModel__vslot14	uVar2	instFlags	INFERRED	a0[5]: flag word	^\s*uVar2\ =\ a0\[5\];$	+1	all	none
+use	R300SchedModel__vslot14	uVar2	instFlags	INFERRED	a0[5]: flag word	^\s*uVar2\ =\ a0\[5\];$@2	+2	all	none
+use	R300SchedModel__vslot14	uVar2	instFlags	INFERRED	a0[5]: flag word	^\s*uVar2\ =\ a0\[5\];$@3	+1	all	none
+use	R300SchedModel__vslot14	uVar2	instFlags	INFERRED	a0[5]: flag word	^\s*if\ \(\(\(uVar2\ \&\ 2\)\ ==\ 0\)\ \&\&\ \(iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x5c\)\)\(a0\),\ iVar4\ ==\ 0\)\)\ \{$	+1	all	none
+use	R300SchedModel__vslot14	iVar4	flagBit0Result	INFERRED	RegKind__flagBit0(a0[0x26])	^\s*if\ \(\(a0\[0x20\]\ ==\ 0\)\ \|\|\ \(iVar4\ =\ FUN_00126760\(a0\[0x26\]\),\ iVar4\ ==\ 0\)\)\ \{$	+1	all	none
+use	R300SchedModel__vslot14	iVar4	flagBit0Result	INFERRED	RegKind__flagBit0(a0[0x26])	^\s*if\ \(\(\(uVar2\ \&\ 2\)\ ==\ 0\)\ \&\&\ \(iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x5c\)\)\(a0\),\ iVar4\ ==\ 0\)\)\ \{$	+1	all	none
+use	R300SchedModel__vslot14	iVar4	destRecord	CONFIRMED	IRInst__getOperandRecord(a0, 0)	^\s*iVar4\ =\ FUN_001054ec\(a0,0\);$	+3	all	none
+use	R300SchedModel__vslot14	iVar7	opcodeCategory	INFERRED	field +0x34 of the opcode's 0x38-byte record in the table at PTR_DAT_001e913c (5 = scalar-only)	^\s*iVar7\ =\ \*\(int\ \*\)\(PTR_DAT_001e913c\ \+\ \*\(int\ \*\)\(a0\[0x22\]\ \+\ 8\)\ \*\ 0x38\ \+\ 0x34\);$	+1	all	none
+use	R300SchedModel__vslot14	iVar7	opcodeCategory	INFERRED	field +0x34 of the opcode's 0x38-byte record in the table at PTR_DAT_001e913c (5 = scalar-only)	^\s*if\ \(\(iVar7\ ==\ 0\)\ \&\&\ \(iVar4\ =\ FUN_000f3a30\(a0\),\ 1\ <\ iVar4\)\)\ \{$	+1	all	none
+use	R300SchedModel__vslot14	iVar7	opcodeCategory	INFERRED	field +0x34 of the opcode's 0x38-byte record in the table at PTR_DAT_001e913c (5 = scalar-only)	^\s*else\ if\ \(iVar7\ ==\ 5\)\ \{$	+1	all	none
+use	R300SchedModel__vslot14	iVar7	opcodeCategory	INFERRED	field +0x34 of the opcode's 0x38-byte record in the table at PTR_DAT_001e913c (5 = scalar-only)	^\s*if\ \(\(\(iVar7\ \-\ 1U\ <\ 2\)\ \|\|\ \(iVar7\ ==\ 5\)\)\ \|\|\ \((?:iVar6|loopIndex)\ =\ 1,\ a2\ !=\ iVar4\)\)\ \{$	+1	all	none
+use	R300SchedModel__vslot14	iVar7	opcodeCategory	INFERRED	field +0x34 of the opcode's 0x38-byte record in the table at PTR_DAT_001e913c (5 = scalar-only)	^\s*if\ \(\(iVar7\ ==\ 0\)\ \&\&\ \(iVar7\ =\ FUN_000f3a30\(a0\),\ 1\ <\ iVar7\)\)\ \{$	+1	all	none
+use	R300SchedModel__vslot14	iVar8	resultLane	INFERRED	the lane the result is written to (3 for scalar destinations, else the first written / unwritten component)	^\s*iVar8\ =\ FUN_000f3108\(\*\(undefined4\ \*\)\(iVar4\ \+\ 0x10\)\);$	+1	all	none
+use	R300SchedModel__vslot14	iVar8	resultLane	INFERRED	the lane the result is written to (3 for scalar destinations, else the first written / unwritten component)	^\s*iVar8\ =\ \*\(int\ \*\)\((?:param_1|this)\ \+\ 0x68\);$	+3	all	none
+use	R300SchedModel__vslot14	iVar8	resultLane	INFERRED	the lane the result is written to (3 for scalar destinations, else the first written / unwritten component)	^\s*iVar8\ =\ 3;$	+1	all	none
+use	R300SchedModel__vslot14	iVar8	resultLane	INFERRED	the lane the result is written to (3 for scalar destinations, else the first written / unwritten component)	^\s*iVar8\ =\ 3;$@2	+1	all	none
+use	R300SchedModel__vslot14	iVar8	resultLane	INFERRED	the lane the result is written to (3 for scalar destinations, else the first written / unwritten component)	^\s*\*\(undefined1\ \*\)\(\(int\)a0\ \+\ iVar8\ \+\ 0xc\)\ =\ 1;$	+3	all	none
+use	R300SchedModel__vslot14	iVar8	resultLane	INFERRED	the lane the result is written to (3 for scalar destinations, else the first written / unwritten component)	^\s*\(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x88\)\)\(a0,(?:iVar6|loopIndex),iVar8,uVar1\);$	+1	all	none
+use	R300SchedModel__vslot14	iVar8	resultLane	INFERRED	the lane the result is written to (3 for scalar destinations, else the first written / unwritten component)	^\s*return\ \(\(int\ \(\*\)\(\)\)FUN_0018b1bc\)\((?:param_1|this),param_2,a2,iVar4,iVar8\);$	+1	all	none
+use	R300SchedModel__vslot14	iVar4	lastLane	INFERRED	last lane of the range of lanes marked used (first lane for single-lane results)	^\s*iVar4\ =\ 3;$	+1	all	none
+use	R300SchedModel__vslot14	iVar4	lastLane	INFERRED	last lane of the range of lanes marked used (first lane for single-lane results)	^\s*iVar4\ =\ 3;$@2	+1	all	none
+use	R300SchedModel__vslot14	iVar4	lastLane	INFERRED	last lane of the range of lanes marked used (first lane for single-lane results)	^\s*iVar4\ =\ 3;$@3	+1	all	none
+use	R300SchedModel__vslot14	iVar4	lastLane	INFERRED	last lane of the range of lanes marked used (first lane for single-lane results)	^\s*iVar4\ =\ 2;$	+1	all	none
+use	R300SchedModel__vslot14	iVar4	lastLane	INFERRED	last lane of the range of lanes marked used (first lane for single-lane results)	^\s*iVar4\ =\ a2;$	+1	all	none
+use	R300SchedModel__vslot14	iVar4	lastLane	INFERRED	last lane of the range of lanes marked used (first lane for single-lane results)	^\s*\}\ while\ \((?:iVar6|loopIndex)\ <=\ iVar4\);$	+1	all	none
+use	R300SchedModel__vslot14	iVar4	lastLane	INFERRED	last lane of the range of lanes marked used (first lane for single-lane results)	^\s*if\ \(\(\(iVar7\ \-\ 1U\ <\ 2\)\ \|\|\ \(iVar7\ ==\ 5\)\)\ \|\|\ \((?:iVar6|loopIndex)\ =\ 1,\ a2\ !=\ iVar4\)\)\ \{$	+1	all	none
+use	R300SchedModel__vslot14	iVar4	lastLane	INFERRED	last lane of the range of lanes marked used (first lane for single-lane results)	^\s*return\ \(\(int\ \(\*\)\(\)\)FUN_0018b1bc\)\((?:param_1|this),param_2,a2,iVar4,iVar8\);$	+1	all	none
+use	R300SchedModel__vslot14	uVar1	laneSelect	INFERRED	select byte of the source for the old lane, moved to the result lane	^\s*uVar1\ =\ \*\(undefined1\ \*\)\(a2\ \+\ (?:iVar5|operandRecord)\ \+\ 0x10\);$	+1	all	none
+use	R300SchedModel__vslot14	uVar1	laneSelect	INFERRED	select byte of the source for the old lane, moved to the result lane	^\s*\(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x88\)\)\(a0,(?:iVar6|loopIndex),iVar8,uVar1\);$	+1	all	none

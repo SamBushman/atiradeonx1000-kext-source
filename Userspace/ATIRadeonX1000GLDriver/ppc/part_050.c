@@ -5,38 +5,40 @@ int R300VSchedModel__vslot12(this, inst)
   undefined4 this;
   int inst;
 {
-  int iVar1;
-  int iVar2;
+  int source2Def;
+  int source1Def;
+  int opcode;
+  int opcodeInfo;
   int *operandVReg;
   
   if (((*(uint *)(inst + 0x14) & 2) == 0) &&
      ((*(int *)(inst + 0x98) == 0 || (*(int *)(inst + 0x98) == 1)))) {
-    iVar2 = *(int *)(inst + 0x88);
-    iVar1 = *(int *)(iVar2 + 8);
-    if ((iVar1 == 0x66) || (iVar1 == 0x36)) {
+    opcodeInfo = *(int *)(inst + 0x88);
+    opcode = *(int *)(opcodeInfo + 8);
+    if ((opcode == 0x66) || (opcode == 0x36)) {
       return 1;
     }
-    if (iVar1 == 0x31) {
-      iVar1 = IRInst__countWrittenComponents(inst);
-      if (iVar1 == 1) {
+    if (opcode == 0x31) {
+      opcode = IRInst__countWrittenComponents(inst);
+      if (opcode == 1) {
         return 1;
       }
-      iVar2 = *(int *)(inst + 0x88);
+      opcodeInfo = *(int *)(inst + 0x88);
     }
-    if (((*(int *)(iVar2 + 8) == 0x13) && (iVar1 = IRInst__countWrittenComponents(inst), iVar1 == 1)) &&
+    if (((*(int *)(opcodeInfo + 8) == 0x13) && (opcode = IRInst__countWrittenComponents(inst), opcode == 1)) &&
        ((*(uint *)(inst + 0xb8) & 1) == (*(uint *)(inst + 0xd0) & 1))) {
-      iVar1 = IRInst__getOperandSource(inst,1);
-      iVar2 = IRInst__getOperandSource(inst,2);
-      if (iVar1 == iVar2) {
+      source1Def = IRInst__getOperandSource(inst,1);
+      source2Def = IRInst__getOperandSource(inst,2);
+      if (source1Def == source2Def) {
         return 1;
       }
       operandVReg = (int *)IRInst__getOperandSource(inst,1);
-      if (((((operandVReg[0x20] != 0) && (iVar1 = RegKind__flagBit0(operandVReg[0x26]), iVar1 != 0)) &&
+      if (((((operandVReg[0x20] != 0) && (source1Def = RegKind__flagBit0(operandVReg[0x26]), source1Def != 0)) &&
            (((operandVReg[5] & 2U) == 0 &&
-            ((iVar1 = (**(code **)(*operandVReg + 0x50))(operandVReg), iVar1 == 0 &&
+            ((source1Def = (**(code **)(*operandVReg + 0x50))(operandVReg), source1Def == 0 &&
              (operandVReg = (int *)IRInst__getOperandSource(inst,2), operandVReg[0x20] != 0)))))) &&
-          (iVar1 = RegKind__flagBit0(operandVReg[0x26]), iVar1 != 0)) &&
-         (((operandVReg[5] & 2U) == 0 && (iVar1 = (**(code **)(*operandVReg + 0x50))(operandVReg), iVar1 == 0)))) {
+          (source1Def = RegKind__flagBit0(operandVReg[0x26]), source1Def != 0)) &&
+         (((operandVReg[5] & 2U) == 0 && (source1Def = (**(code **)(*operandVReg + 0x50))(operandVReg), source1Def == 0)))) {
         return 1;
       }
     }

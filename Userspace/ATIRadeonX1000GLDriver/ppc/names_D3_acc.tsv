@@ -1071,7 +1071,7 @@ use	FUN_0016dd04	iVar4	sourceDef2	CONFIRMED	IRInst__getOperandSource: the value/
 use	FUN_0016ff54	iVar13	sourceDef	CONFIRMED	IRInst__getOperandSource: the value/instruction feeding the operand (record +4)	^\s*iVar13\ =\ FUN_00105594\(\*\(undefined4\ \*\)\(\*piVar12\ \+\ 0x38\),1\);$@1	+2	all	all
 use	FUN_0016ff54	iVar14	sourceDef2	CONFIRMED	IRInst__getOperandSource: the value/instruction feeding the operand (record +4)	^\s*iVar14\ =\ FUN_00105594\(\*\(undefined4\ \*\)\(iVar23\ \+\ 0x38\),piVar9\[4\]\);$@1	+2	all	all
 use	FUN_0016ff54	iVar17	operandRecord2	CONFIRMED	IRInst__getOperandRecord: address of the 0x18-byte operand record	^\s*iVar17\ =\ FUN_001054ec\(piVar9,0\);$@2	+3	all	all
-use	FUN_0016ff54	iVar22	operandRecord	CONFIRMED	IRInst__getOperandRecord: address of the 0x18-byte operand record	^\s*iVar22\ =\ FUN_001054ec\(\*\(undefined4\ \*\)\(iVar30\ \+\ 0x38\),1\);$@1	+1	all	all
+use	FUN_0016ff54	iVar22	operandRecord	CONFIRMED	IRInst__getOperandRecord: address of the 0x18-byte operand record	^\s*iVar22\ =\ FUN_001054ec\(\*\(undefined4\ \*\)\((?:iVar30|node)\ \+\ 0x38\),1\);$@1	+1	all	all
 use	FUN_0016ff54	iVar22	operandRecord	CONFIRMED	IRInst__getOperandRecord: address of the 0x18-byte operand record	^\s*iVar22\ =\ FUN_001054ec\(iVar22,1\);$@1	+0	lhs	lhs
 use	FUN_0016ff54	iVar22	operandRecord	CONFIRMED	IRInst__getOperandRecord: address of the 0x18-byte operand record	^\s*\*\(undefined4\ \*\)\(iVar22\ \+\ 0x10\)\ =\ in_stack_ffffffbc;$@1	+0	all	all
 use	pass_sched_preprocess_and_schedule_inst	iVar9	listCount	CONFIRMED	DList__count: number of nodes	^\s*iVar9\ =\ FUN_00194034\(iVar8\ \+\ 0x90\);$@1	+1	all	all

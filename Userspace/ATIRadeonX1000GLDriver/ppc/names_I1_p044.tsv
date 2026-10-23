@@ -1,0 +1,732 @@
+local	Scheduler__transformDotProduct	iVar12	savedField120	INFERRED	inst[0x48] (+0x120), restored on the rewritten instruction
+local	Scheduler__transformDotProduct	iVar13	savedField124	INFERRED	inst[0x49] (+0x124), restored on the rewritten instruction
+local	Scheduler__transformDotProduct	iVar15	savedRegKind	INFERRED	inst[0x26]: register kind
+local	Scheduler__transformDotProduct	iVar16	savedRegId	INFERRED	inst[0x25]: virtual register id
+use	Scheduler__transformDotProduct	iVar8	savedWriteMask	INFERRED	inst[3]: component write mask	^\s*iVar8\ =\ (?:piVar25|inst)\[3\];$	+1	all	none
+use	Scheduler__transformDotProduct	iVar8	savedWriteMask	INFERRED	inst[3]: component write mask	^\s*piVar19\[3\]\ =\ iVar8;$	+1	all	none
+use	Scheduler__transformDotProduct	iVar8	savedWriteMask	INFERRED	inst[3]: component write mask	^\s*(?:piVar25|inst)\[3\]\ =\ iVar8;$	+1	all	none
+use	Scheduler__transformDotProduct	iVar8	savedWriteMask	INFERRED	inst[3]: component write mask	^\s*piVar19\[3\]\ =\ iVar8;$@2	+1	all	none
+use	Scheduler__transformDotProduct	iVar18	savedDestSelect	INFERRED	select word of the destination operand (record + 0x10)	^\s*iVar18\ =\ \*\(int\ \*\)\(iVar8\ \+\ 0x10\);$	+1	all	none
+use	Scheduler__transformDotProduct	iVar18	savedDestSelect	INFERRED	select word of the destination operand (record + 0x10)	^\s*piVar19\[0x27\]\ =\ iVar18;$	+1	all	none
+use	Scheduler__transformDotProduct	iVar18	savedDestSelect	INFERRED	select word of the destination operand (record + 0x10)	^\s*(?:piVar25|inst)\[0x27\]\ =\ iVar18;$	+1	all	none
+use	Scheduler__transformDotProduct	iVar18	savedDestSelect	INFERRED	select word of the destination operand (record + 0x10)	^\s*(?:piVar25|inst)\[0x27\]\ =\ iVar18;$@2	+1	all	none
+use	Scheduler__transformDotProduct	iVar18	savedDestSelect	INFERRED	select word of the destination operand (record + 0x10)	^\s*(?:piVar25|inst)\[0x27\]\ =\ iVar18;$@3	+1	all	none
+use	Scheduler__transformDotProduct	uVar4	instFlags	INFERRED	inst[5]	^\s*uVar4\ =\ (?:piVar25|inst)\[5\];$	+1	all	none
+use	Scheduler__transformDotProduct	uVar4	instFlags	INFERRED	inst[5]	^\s*uVar17\ =\ uVar4\ >>\ 1\ \&\ 1;$	+2	all	none
+use	Scheduler__transformDotProduct	uVar4	instFlags	INFERRED	inst[5]	^\s*if\ \(\(uVar4\ \&\ 0x200\)\ !=\ 0\)\ \{$	+1	all	none
+local	Scheduler__transformDotProduct	uVar17	hasHardwareRegister	INFERRED	inst flag bit 1: the register was assigned to a fixed hardware register (restored through IRInst__setHardwareRegisterAndAdd)
+local	Scheduler__transformDotProduct	uVar14	savedFlag20	INFERRED	inst flag bit 5 (0x20), restored on the rewritten instruction
+local	Scheduler__transformDotProduct	local_60	source1Def	CONFIRMED	IRInst__getOperandSource(inst, 1)
+local	Scheduler__transformDotProduct	local_64	source2Def	CONFIRMED	IRInst__getOperandSource(inst, 2)
+local	Scheduler__transformDotProduct	local_68	source1Negate	INFERRED	modifier bit 1 of operand 1 (inst[0x2e] & 1)
+local	Scheduler__transformDotProduct	local_70	source1Abs	INFERRED	modifier bit 2 of operand 1
+local	Scheduler__transformDotProduct	local_6c	source2Negate	INFERRED	modifier bit 1 of operand 2 (inst[0x34] & 1)
+local	Scheduler__transformDotProduct	local_74	source2Abs	INFERRED	modifier bit 2 of operand 2
+local	Scheduler__transformDotProduct	local_78	extraSource	INFERRED	the instruction's extra (6th+) operand source when flag 0x200 is set, else 0
+local	Scheduler__transformDotProduct	local_80	source1Select	INFERRED	select word of operand 1 before the rewrite
+local	Scheduler__transformDotProduct	local_7c	source2Select	INFERRED	select word of operand 2 before the rewrite
+use	Scheduler__transformDotProduct	iVar5	helperOpcode	INFERRED	opcode of the helper instruction: 0x13 mul, 0x14 mul-add, 0x1c dot product	^\s*iVar5\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\((?:iVar6|helperInst)\ \+\ 0x88\)\ \+\ 8\);$	+1	all	none
+use	Scheduler__transformDotProduct	iVar5	helperOpcode	INFERRED	opcode of the helper instruction: 0x13 mul, 0x14 mul-add, 0x1c dot product	^\s*if\ \(iVar5\ ==\ 0x13\)\ \{$	+1	all	none
+use	Scheduler__transformDotProduct	iVar5	helperOpcode	INFERRED	opcode of the helper instruction: 0x13 mul, 0x14 mul-add, 0x1c dot product	^\s*if\ \(iVar5\ !=\ 0x14\)\ \{$	+2	all	none
+use	Scheduler__transformDotProduct	iVar5	lane	INFERRED	lane number counted from outCount up to the last lane	^\s*iVar5\ =\ (?:local_88|outCount);$	+1	all	none
+use	Scheduler__transformDotProduct	iVar5	lane	INFERRED	lane number counted from outCount up to the last lane	^\s*iVar23\ =\ iVar5\ \+\ 1;$	+1	all	none
+use	Scheduler__transformDotProduct	iVar5	lane	INFERRED	lane number counted from outCount up to the last lane	^\s*\(\*\*\(code\ \*\*\)\(\*(?:piVar25|inst)\ \+\ 0x88\)\)\((?:piVar25|inst),1,iVar5,uVar1\);$	+1	all	none
+use	Scheduler__transformDotProduct	iVar5	lane	INFERRED	lane number counted from outCount up to the last lane	^\s*\(\*\*\(code\ \*\*\)\(\*(?:piVar25|inst)\ \+\ 0x88\)\)\((?:piVar25|inst),2,iVar5,uVar1\);$	+2	all	none
+use	Scheduler__transformDotProduct	iVar23	nextLane	INFERRED	lane + 1	^\s*iVar23\ =\ iVar5\ \+\ 1;$	+1	all	none
+use	Scheduler__transformDotProduct	iVar23	nextLane	INFERRED	lane + 1	^\s*iVar5\ =\ iVar23;$	+2	all	none
+use	Scheduler__transformDotProduct	iVar5	lane	INFERRED	lane number counted from outCount up to the last lane	^\s*iVar5\ =\ (?:local_88|outCount);$@2	+1	all	none
+use	Scheduler__transformDotProduct	iVar5	lane	INFERRED	lane number counted from outCount up to the last lane	^\s*iVar23\ =\ iVar5\ \+\ 1;$@2	+1	all	none
+use	Scheduler__transformDotProduct	iVar5	lane	INFERRED	lane number counted from outCount up to the last lane	^\s*\(\*\*\(code\ \*\*\)\(\*(?:piVar25|inst)\ \+\ 0x88\)\)\((?:piVar25|inst),1,iVar5,uVar1\);$@2	+1	all	none
+use	Scheduler__transformDotProduct	iVar5	lane	INFERRED	lane number counted from outCount up to the last lane	^\s*\(\*\*\(code\ \*\*\)\(\*(?:piVar25|inst)\ \+\ 0x88\)\)\((?:piVar25|inst),2,iVar5,uVar1\);$@2	+2	all	none
+use	Scheduler__transformDotProduct	iVar23	nextLane	INFERRED	lane + 1	^\s*iVar23\ =\ iVar5\ \+\ 1;$@2	+1	all	none
+use	Scheduler__transformDotProduct	iVar23	nextLane	INFERRED	lane + 1	^\s*iVar5\ =\ iVar23;$@2	+2	all	none
+use	Scheduler__transformDotProduct	iVar18	lane2	INFERRED	lane number counted from outCount up to the last lane	^\s*iVar18\ =\ (?:local_88|outCount);$	+1	all	none
+use	Scheduler__transformDotProduct	iVar18	lane2	INFERRED	lane number counted from outCount up to the last lane	^\s*iVar5\ =\ iVar18\ \+\ 1;$	+1	all	none
+use	Scheduler__transformDotProduct	iVar18	lane2	INFERRED	lane number counted from outCount up to the last lane	^\s*\(\*\*\(code\ \*\*\)\(\*(?:piVar25|inst)\ \+\ 0x88\)\)\((?:piVar25|inst),1,iVar18,uVar1\);$	+1	all	none
+use	Scheduler__transformDotProduct	iVar18	lane2	INFERRED	lane number counted from outCount up to the last lane	^\s*\(\*\*\(code\ \*\*\)\(\*(?:piVar25|inst)\ \+\ 0x88\)\)\((?:piVar25|inst),2,iVar18,uVar1\);$	+2	all	none
+use	Scheduler__transformDotProduct	iVar5	nextLane2	INFERRED	lane + 1	^\s*iVar5\ =\ iVar18\ \+\ 1;$	+1	all	none
+use	Scheduler__transformDotProduct	iVar5	nextLane2	INFERRED	lane + 1	^\s*iVar18\ =\ iVar5;$	+2	all	none
+use	Scheduler__transformDotProduct	puVar20	source1SelectCursor	INFERRED	walks the select bytes of source1Select after outCount	^\s*puVar20\ =\ \(undefined1\ \*\)\(\(int\)\&local_80\ \+\ (?:local_88|outCount)\ \+\ 1\);$	+1	all	none
+use	Scheduler__transformDotProduct	puVar20	source1SelectCursor	INFERRED	walks the select bytes of source1Select after outCount	^\s*uVar1\ =\ \*puVar20;$	+2	all	none
+use	Scheduler__transformDotProduct	puVar20	source1SelectCursor	INFERRED	walks the select bytes of source1Select after outCount	^\s*puVar20\ =\ \(undefined1\ \*\)\(\(int\)\&local_80\ \+\ (?:local_88|outCount)\ \+\ 1\);$@2	+1	all	none
+use	Scheduler__transformDotProduct	puVar20	source1SelectCursor	INFERRED	walks the select bytes of source1Select after outCount	^\s*uVar1\ =\ \*puVar20;$@2	+2	all	none
+use	Scheduler__transformDotProduct	puVar20	source1SelectCursor	INFERRED	walks the select bytes of source1Select after outCount	^\s*puVar20\ =\ \(undefined1\ \*\)\(\(int\)\&local_80\ \+\ (?:local_88|outCount)\ \+\ 1\);$@3	+1	all	none
+use	Scheduler__transformDotProduct	puVar20	source1SelectCursor	INFERRED	walks the select bytes of source1Select after outCount	^\s*uVar1\ =\ \*puVar20;$@3	+2	all	none
+use	Scheduler__transformDotProduct	puVar21	source2SelectCursor	INFERRED	walks the select bytes of source2Select after outCount	^\s*puVar21\ =\ \(undefined1\ \*\)\(\(int\)\&local_7c\ \+\ (?:local_88|outCount)\ \+\ 1\);$	+1	all	none
+use	Scheduler__transformDotProduct	puVar21	source2SelectCursor	INFERRED	walks the select bytes of source2Select after outCount	^\s*uVar1\ =\ \*puVar21;$	+2	all	none
+use	Scheduler__transformDotProduct	puVar21	source2SelectCursor	INFERRED	walks the select bytes of source2Select after outCount	^\s*puVar21\ =\ \(undefined1\ \*\)\(\(int\)\&local_7c\ \+\ (?:local_88|outCount)\ \+\ 1\);$@2	+1	all	none
+use	Scheduler__transformDotProduct	puVar21	source2SelectCursor	INFERRED	walks the select bytes of source2Select after outCount	^\s*uVar1\ =\ \*puVar21;$@2	+2	all	none
+use	Scheduler__transformDotProduct	puVar21	source2SelectCursor	INFERRED	walks the select bytes of source2Select after outCount	^\s*puVar21\ =\ \(undefined1\ \*\)\(\(int\)\&local_7c\ \+\ (?:local_88|outCount)\ \+\ 1\);$@3	+1	all	none
+use	Scheduler__transformDotProduct	puVar21	source2SelectCursor	INFERRED	walks the select bytes of source2Select after outCount	^\s*uVar1\ =\ \*puVar21;$@3	+2	all	none
+use	Scheduler__transformDotProduct	uVar1	laneSelect	INFERRED	select byte of the lane	^\s*uVar1\ =\ \*puVar20;$	+1	all	none
+use	Scheduler__transformDotProduct	uVar1	laneSelect	INFERRED	select byte of the lane	^\s*\(\*\*\(code\ \*\*\)\(\*(?:piVar25|inst)\ \+\ 0x88\)\)\((?:piVar25|inst),1,iVar5,uVar1\);$	+1	all	none
+use	Scheduler__transformDotProduct	uVar1	laneSelect	INFERRED	select byte of the lane	^\s*uVar1\ =\ \*puVar21;$	+1	all	none
+use	Scheduler__transformDotProduct	uVar1	laneSelect	INFERRED	select byte of the lane	^\s*\(\*\*\(code\ \*\*\)\(\*(?:piVar25|inst)\ \+\ 0x88\)\)\((?:piVar25|inst),2,iVar5,uVar1\);$	+1	all	none
+use	Scheduler__transformDotProduct	uVar1	laneSelect	INFERRED	select byte of the lane	^\s*uVar1\ =\ \*puVar20;$@2	+1	all	none
+use	Scheduler__transformDotProduct	uVar1	laneSelect	INFERRED	select byte of the lane	^\s*\(\*\*\(code\ \*\*\)\(\*(?:piVar25|inst)\ \+\ 0x88\)\)\((?:piVar25|inst),1,iVar5,uVar1\);$@2	+1	all	none
+use	Scheduler__transformDotProduct	uVar1	laneSelect	INFERRED	select byte of the lane	^\s*uVar1\ =\ \*puVar21;$@2	+1	all	none
+use	Scheduler__transformDotProduct	uVar1	laneSelect	INFERRED	select byte of the lane	^\s*\(\*\*\(code\ \*\*\)\(\*(?:piVar25|inst)\ \+\ 0x88\)\)\((?:piVar25|inst),2,iVar5,uVar1\);$@2	+1	all	none
+use	Scheduler__transformDotProduct	uVar1	laneSelect	INFERRED	select byte of the lane	^\s*uVar1\ =\ \*puVar20;$@3	+1	all	none
+use	Scheduler__transformDotProduct	uVar1	laneSelect	INFERRED	select byte of the lane	^\s*\(\*\*\(code\ \*\*\)\(\*(?:piVar25|inst)\ \+\ 0x88\)\)\((?:piVar25|inst),1,iVar18,uVar1\);$	+1	all	none
+use	Scheduler__transformDotProduct	uVar1	laneSelect	INFERRED	select byte of the lane	^\s*uVar1\ =\ \*puVar21;$@3	+1	all	none
+use	Scheduler__transformDotProduct	uVar1	laneSelect	INFERRED	select byte of the lane	^\s*\(\*\*\(code\ \*\*\)\(\*(?:piVar25|inst)\ \+\ 0x88\)\)\((?:piVar25|inst),2,iVar18,uVar1\);$	+1	all	none
+use	Scheduler__transformDotProduct	uVar4	source1SelectWord	INFERRED	source1Select, written back into operand 1's record	^\s*uVar4\ =\ local_80;$	+1	all	none
+use	Scheduler__transformDotProduct	uVar4	source1SelectWord	INFERRED	source1Select, written back into operand 1's record	^\s*\*\(uint\ \*\)\(iVar5\ \+\ 0x10\)\ =\ uVar4;$	+1	all	none
+use	Scheduler__transformDotProduct	uVar4	source1SelectWord	INFERRED	source1Select, written back into operand 1's record	^\s*uVar4\ =\ local_80;$@2	+1	all	none
+use	Scheduler__transformDotProduct	uVar4	source1SelectWord	INFERRED	source1Select, written back into operand 1's record	^\s*\*\(uint\ \*\)\(iVar5\ \+\ 0x10\)\ =\ uVar4;$@2	+1	all	none
+use	Scheduler__transformDotProduct	uVar4	source1SelectWord	INFERRED	source1Select, written back into operand 1's record	^\s*uVar4\ =\ local_80;$@3	+1	all	none
+use	Scheduler__transformDotProduct	uVar4	source1SelectWord	INFERRED	source1Select, written back into operand 1's record	^\s*\*\(uint\ \*\)\(iVar18\ \+\ 0x10\)\ =\ uVar4;$	+1	all	none
+use	Scheduler__transformDotProduct	uVar3	source2SelectWord	INFERRED	source2Select, written back into operand 2's record	^\s*uVar3\ =\ local_7c;$	+1	all	none
+use	Scheduler__transformDotProduct	uVar3	source2SelectWord	INFERRED	source2Select, written back into operand 2's record	^\s*\*\(uint\ \*\)\(iVar5\ \+\ 0x10\)\ =\ uVar3;$	+1	all	none
+use	Scheduler__transformDotProduct	uVar3	source2SelectWord	INFERRED	source2Select, written back into operand 2's record	^\s*uVar3\ =\ local_7c;$@2	+1	all	none
+use	Scheduler__transformDotProduct	uVar3	source2SelectWord	INFERRED	source2Select, written back into operand 2's record	^\s*\*\(uint\ \*\)\(iVar5\ \+\ 0x10\)\ =\ uVar3;$@2	+1	all	none
+use	Scheduler__transformDotProduct	uVar3	source2SelectWord	INFERRED	source2Select, written back into operand 2's record	^\s*uVar3\ =\ local_7c;$@3	+1	all	none
+use	Scheduler__transformDotProduct	uVar3	source2SelectWord	INFERRED	source2Select, written back into operand 2's record	^\s*\*\(uint\ \*\)\(iVar18\ \+\ 0x10\)\ =\ uVar3;$	+1	all	none
+use	Scheduler__transformDotProduct	uVar4	vectorCount	INFERRED	vector count word read by the inlined element accessor	^\s*uVar4\ =\ puVar24\[1\];$	+5	all	none
+use	Scheduler__transformDotProduct	uVar4	vectorCount	INFERRED	vector count word read by the inlined element accessor	^\s*(?:piVar25|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar24,uVar4\);$	+1	all	none
+use	Scheduler__transformDotProduct	uVar4	vectorCount	INFERRED	vector count word read by the inlined element accessor	^\s*uVar4\ =\ puVar24\[1\];$@2	+5	all	none
+use	Scheduler__transformDotProduct	uVar4	vectorCount	INFERRED	vector count word read by the inlined element accessor	^\s*(?:piVar25|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar24,uVar4\);$@2	+1	all	none
+use	Scheduler__transformDotProduct	uVar4	vectorCount	INFERRED	vector count word read by the inlined element accessor	^\s*uVar4\ =\ puVar24\[1\];$@3	+5	all	none
+use	Scheduler__transformDotProduct	uVar4	vectorCount	INFERRED	vector count word read by the inlined element accessor	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar24,uVar4\);$	+1	all	none
+use	Scheduler__transformDotProduct	uVar4	vectorCount	INFERRED	vector count word read by the inlined element accessor	^\s*uVar4\ =\ puVar24\[1\];$@4	+5	all	none
+use	Scheduler__transformDotProduct	uVar4	vectorCount	INFERRED	vector count word read by the inlined element accessor	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar24,uVar4\);$@2	+1	all	none
+use	Scheduler__transformDotProduct	puVar24	helperSuccEdges	CONFIRMED	helperNode + 0x40: successor edge vector	^\s*puVar24\ =\ \*\(uint\ \*\*\)\((?:iVar7|helperNode)\ \+\ 0x40\);$	+6	all	none
+use	Scheduler__transformDotProduct	puVar24	helperSuccEdges	CONFIRMED	helperNode + 0x40: successor edge vector	^\s*(?:piVar25|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar24,uVar4\);$	+1	all	none
+use	Scheduler__transformDotProduct	puVar24	nodePredEdges	CONFIRMED	node + 0x44: predecessor edge vector	^\s*puVar24\ =\ \*\(uint\ \*\*\)\((?:param_2|node)\ \+\ 0x44\);$	+6	all	none
+use	Scheduler__transformDotProduct	puVar24	nodePredEdges	CONFIRMED	node + 0x44: predecessor edge vector	^\s*(?:piVar25|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar24,uVar4\);$@2	+1	all	none
+use	Scheduler__transformDotProduct	puVar24	helperSuccEdges	CONFIRMED	helperNode + 0x40: successor edge vector	^\s*puVar24\ =\ \*\(uint\ \*\*\)\((?:iVar7|helperNode)\ \+\ 0x40\);$@2	+6	all	none
+use	Scheduler__transformDotProduct	puVar24	helperSuccEdges	CONFIRMED	helperNode + 0x40: successor edge vector	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar24,uVar4\);$	+1	all	none
+use	Scheduler__transformDotProduct	puVar24	nodePredEdges	CONFIRMED	node + 0x44: predecessor edge vector	^\s*puVar24\ =\ \*\(uint\ \*\*\)\((?:param_2|node)\ \+\ 0x44\);$@2	+6	all	none
+use	Scheduler__transformDotProduct	puVar24	nodePredEdges	CONFIRMED	node + 0x44: predecessor edge vector	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar24,uVar4\);$@2	+1	all	none
+use	Scheduler__transformDotProduct	puVar11	appendSlot	INFERRED	new slot at the end of the edge vector	^\s*puVar11\ =\ \(undefined4\ \*\)\(uVar4\ \*\ 4\ \+\ puVar24\[2\]\);$	+1	all	none
+use	Scheduler__transformDotProduct	puVar11	appendSlot	INFERRED	new slot at the end of the edge vector	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar24,uVar4\);$	+1	all	none
+use	Scheduler__transformDotProduct	puVar11	appendSlot	INFERRED	new slot at the end of the edge vector	^\s*\*puVar11\ =\ puVar26;$	+1	all	none
+use	Scheduler__transformDotProduct	puVar11	appendSlot	INFERRED	new slot at the end of the edge vector	^\s*puVar11\ =\ \(undefined4\ \*\)\(uVar4\ \*\ 4\ \+\ puVar24\[2\]\);$@2	+1	all	none
+use	Scheduler__transformDotProduct	puVar11	appendSlot	INFERRED	new slot at the end of the edge vector	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar24,uVar4\);$@2	+1	all	none
+use	Scheduler__transformDotProduct	puVar11	appendSlot	INFERRED	new slot at the end of the edge vector	^\s*\*puVar11\ =\ puVar26;$@2	+1	all	none
+use	Scheduler__transformDotProduct	puVar26	edgeRecord	INFERRED	edgeAlloc + 1: the DepEdge pointer	^\s*puVar26\ =\ (?:puVar10|edgeAlloc)\ \+\ 1;$	+1	all	none
+use	Scheduler__transformDotProduct	puVar26	edgeRecord	INFERRED	edgeAlloc + 1: the DepEdge pointer	^\s*\*\(undefined1\ \*\)\(\(int\)puVar26\ \+\ (?:local_84|outSelector)\ \+\ 0x18\)\ =\ 1;$	+1	all	none
+use	Scheduler__transformDotProduct	puVar26	edgeRecord	INFERRED	edgeAlloc + 1: the DepEdge pointer	^\s*\*puVar11\ =\ puVar26;$	+1	all	none
+use	Scheduler__transformDotProduct	puVar26	edgeRecord	INFERRED	edgeAlloc + 1: the DepEdge pointer	^\s*\*puVar11\ =\ puVar26;$@2	+1	all	none
+use	Scheduler__transformDotProduct	puVar2	selectTable	INFERRED	PTR_DAT_001e8b8c: per-component select-word table of the compiler	^\s*puVar2\ =\ PTR_DAT_001e8b8c;$	+1	all	none
+use	Scheduler__transformDotProduct	puVar2	selectTable	INFERRED	PTR_DAT_001e8b8c: per-component select-word table of the compiler	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(puVar2\ \+\ \(local_7c\ \&\ 0xff\)\ \*\ 4\);$	+1	all	none
+use	Scheduler__transformDotProduct	puVar2	selectTable	INFERRED	PTR_DAT_001e8b8c: per-component select-word table of the compiler	^\s*puVar2\ =\ PTR_DAT_001e8b8c;$@2	+1	all	none
+use	Scheduler__transformDotProduct	puVar2	selectTable	INFERRED	PTR_DAT_001e8b8c: per-component select-word table of the compiler	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(puVar2\ \+\ \(uint\)\*\(byte\ \*\)\(\(int\)\&local_7c\ \+\ \(1\ \-\ (?:local_88|outCount)\)\)\ \*\ 4\);$	+1	all	none
+use	Scheduler__transformDotProduct	puVar2	selectTable	INFERRED	PTR_DAT_001e8b8c: per-component select-word table of the compiler	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(puVar2\ \+\ (?:local_84|outSelector)\ \*\ 4\);$	+1	all	none
+use	Scheduler__transformDotProduct	piVar19	resultInst	INFERRED	the instruction that receives the extra source and the helper: inst, or 0 on the paths that rewrote nothing	^\s*piVar19\ =\ (?:piVar25|inst);$	+1	all	none
+use	Scheduler__transformDotProduct	piVar19	resultInst	INFERRED	the instruction that receives the extra source and the helper: inst, or 0 on the paths that rewrote nothing	^\s*piVar19\ =\ \(int\ \*\)0x0;$	+1	all	none
+use	Scheduler__transformDotProduct	piVar19	resultInst	INFERRED	the instruction that receives the extra source and the helper: inst, or 0 on the paths that rewrote nothing	^\s*piVar19\ =\ (?:piVar25|inst);$@2	+1	all	none
+use	Scheduler__transformDotProduct	piVar19	resultInst	INFERRED	the instruction that receives the extra source and the helper: inst, or 0 on the paths that rewrote nothing	^\s*piVar19\[0x25\]\ =\ iVar16;$	+2	all	none
+use	Scheduler__transformDotProduct	piVar19	resultInst	INFERRED	the instruction that receives the extra source and the helper: inst, or 0 on the paths that rewrote nothing	^\s*piVar19\[5\]\ =\ piVar19\[5\]\ \&\ 0xffffffdf;$	+1	all	none
+use	Scheduler__transformDotProduct	piVar19	resultInst	INFERRED	the instruction that receives the extra source and the helper: inst, or 0 on the paths that rewrote nothing	^\s*piVar19\[5\]\ =\ piVar19\[5\]\ \|\ 0x20;$	+1	all	none
+use	Scheduler__transformDotProduct	piVar19	resultInst	INFERRED	the instruction that receives the extra source and the helper: inst, or 0 on the paths that rewrote nothing	^\s*FUN_0010469c\(piVar19,(?:param_1|scheduler)\[1\],iVar15,iVar16\);$	+1	all	none
+use	Scheduler__transformDotProduct	piVar19	resultInst	INFERRED	the instruction that receives the extra source and the helper: inst, or 0 on the paths that rewrote nothing	^\s*piVar19\[0x27\]\ =\ iVar18;$	+10	all	none
+use	Scheduler__transformDotProduct	piVar19	resultInst	INFERRED	the instruction that receives the extra source and the helper: inst, or 0 on the paths that rewrote nothing	^\s*piVar19\ =\ \(int\ \*\)0x0;$@2	+1	all	none
+use	Scheduler__transformDotProduct	piVar19	resultInst	INFERRED	the instruction that receives the extra source and the helper: inst, or 0 on the paths that rewrote nothing	^\s*piVar19\ =\ (?:piVar25|inst);$@3	+1	all	none
+use	Scheduler__transformDotProduct	piVar19	resultInst	INFERRED	the instruction that receives the extra source and the helper: inst, or 0 on the paths that rewrote nothing	^\s*piVar19\[0x25\]\ =\ iVar16;$@2	+2	all	none
+use	Scheduler__transformDotProduct	piVar19	resultInst	INFERRED	the instruction that receives the extra source and the helper: inst, or 0 on the paths that rewrote nothing	^\s*piVar19\[5\]\ =\ piVar19\[5\]\ \&\ 0xffffffdf;$@2	+1	all	none
+use	Scheduler__transformDotProduct	piVar19	resultInst	INFERRED	the instruction that receives the extra source and the helper: inst, or 0 on the paths that rewrote nothing	^\s*piVar19\[5\]\ =\ piVar19\[5\]\ \|\ 0x20;$@2	+1	all	none
+use	Scheduler__transformDotProduct	piVar19	resultInst	INFERRED	the instruction that receives the extra source and the helper: inst, or 0 on the paths that rewrote nothing	^\s*FUN_0010469c\(piVar19,(?:param_1|scheduler)\[1\],iVar15,iVar16\);$@2	+1	all	none
+use	Scheduler__transformDotProduct	piVar19	resultInst	INFERRED	the instruction that receives the extra source and the helper: inst, or 0 on the paths that rewrote nothing	^\s*piVar19\[0x48\]\ =\ iVar12;$@2	+10	all	none
+use	Scheduler__transformDotProduct	piVar19	resultInst	INFERRED	the instruction that receives the extra source and the helper: inst, or 0 on the paths that rewrote nothing	^\s*FUN_00106804\(piVar19,local_78,0,\*(?:param_1|scheduler)\);$	+1	all	none
+use	Scheduler__transformDotProduct	piVar19	resultInst	INFERRED	the instruction that receives the extra source and the helper: inst, or 0 on the paths that rewrote nothing	^\s*uVar9\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)(?:param_1|scheduler)\[2\]\ \+\ 0x4c\)\)\(\(int\ \*\)(?:param_1|scheduler)\[2\],piVar19\);$	+1	all	none
+use	Scheduler__transformDotProduct	piVar19	resultInst	INFERRED	the instruction that receives the extra source and the helper: inst, or 0 on the paths that rewrote nothing	^\s*uVar9\ =\ \(\(int\ \(\*\)\(\)\)FUN_00164e7c\)\((?:param_1|scheduler),(?:iVar6|helperInst),piVar19,0,3,0\);$	+1	all	none
+use	Scheduler__transformDotProduct	uVar9	selectConst	INFERRED	DAT_001b01a0 / UNK_001b019c: select-word constant written into operand 3	^\s*uVar9\ =\ DAT_001b01a0;$	+1	all	none
+use	Scheduler__transformDotProduct	uVar9	selectConst	INFERRED	DAT_001b01a0 / UNK_001b019c: select-word constant written into operand 3	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ 0x10\)\ =\ uVar9;$	+1	all	none
+use	Scheduler__transformDotProduct	uVar9	selectConst	INFERRED	DAT_001b01a0: select-word constant written into operand 3	^\s*uVar9\ =\ DAT_001b01a0;$@2	+1	all	none
+use	Scheduler__transformDotProduct	uVar9	selectConst	INFERRED	DAT_001b01a0: select-word constant written into operand 3	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ 0x10\)\ =\ uVar9;$@2	+1	all	none
+use	Scheduler__transformDotProduct	uVar9	selectConst	INFERRED	UNK_001b019c: select-word constant written into operand 3	^\s*uVar9\ =\ UNK_001b019c;$	+1	all	none
+use	Scheduler__transformDotProduct	uVar9	selectConst	INFERRED	UNK_001b019c: select-word constant written into operand 3	^\s*\*\(undefined4\ \*\)\(iVar8\ \+\ 0x10\)\ =\ uVar9;$@3	+1	all	none
+use	Scheduler__transformDotProduct	uVar9	selectConst	INFERRED	DAT_001b01a0: select-word constant written into operand 3	^\s*uVar9\ =\ DAT_001b01a0;$@3	+1	all	none
+use	Scheduler__transformDotProduct	uVar9	selectConst	INFERRED	DAT_001b01a0: select-word constant written into operand 3	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ 0x10\)\ =\ uVar9;$@4	+1	all	none
+use	Scheduler__transformDotProduct	uVar9	selectWord	INFERRED	select word looked up in selectTable for a source lane	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(PTR_DAT_001e8b8c\ \+\ \(local_80\ \&\ 0xff\)\ \*\ 4\);$	+1	all	none
+use	Scheduler__transformDotProduct	uVar9	selectWord	INFERRED	select word looked up in selectTable for a source lane	^\s*\*\(undefined4\ \*\)\(iVar8\ \+\ 0x10\)\ =\ uVar9;$	+1	all	none
+use	Scheduler__transformDotProduct	uVar9	selectWord	INFERRED	select word looked up in selectTable for a source lane	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(puVar2\ \+\ \(local_7c\ \&\ 0xff\)\ \*\ 4\);$	+1	all	none
+use	Scheduler__transformDotProduct	uVar9	selectWord	INFERRED	select word looked up in selectTable for a source lane	^\s*\*\(undefined4\ \*\)\(iVar8\ \+\ 0x10\)\ =\ uVar9;$@2	+1	all	none
+use	Scheduler__transformDotProduct	uVar9	selectWord	INFERRED	select word looked up in selectTable for a source lane	^\s*uVar9\ =\ \*\(undefined4\ \*\)$	+1	all	none
+use	Scheduler__transformDotProduct	uVar9	selectWord	INFERRED	select word looked up in selectTable for a source lane	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ 0x10\)\ =\ uVar9;$	+1	all	none
+use	Scheduler__transformDotProduct	uVar9	selectWord	INFERRED	select word looked up in selectTable for a source lane	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(puVar2\ \+\ \(uint\)\*\(byte\ \*\)\(\(int\)\&local_7c\ \+\ \(1\ \-\ (?:local_88|outCount)\)\)\ \*\ 4\);$	+1	all	none
+use	Scheduler__transformDotProduct	uVar9	selectWord	INFERRED	select word looked up in selectTable for a source lane	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ 0x10\)\ =\ uVar9;$@2	+1	all	none
+use	Scheduler__transformDotProduct	uVar9	selectWord	INFERRED	select word looked up in selectTable for the helper's lane	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(puVar2\ \+\ (?:local_84|outSelector)\ \*\ 4\);$	+1	all	none
+use	Scheduler__transformDotProduct	uVar9	selectWord	INFERRED	select word looked up in selectTable for the helper's lane	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ 0x10\)\ =\ uVar9;$@3	+1	all	none
+use	Scheduler__transformDotProduct	uVar9	resourceClass	INFERRED	ResourceModel slot 19 (0x4c) on the rewritten instruction, stored at node + 0x58	^\s*uVar9\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)(?:param_1|scheduler)\[2\]\ \+\ 0x4c\)\)\(\(int\ \*\)(?:param_1|scheduler)\[2\],(?:piVar25|inst)\);$	+2	all	none
+use	Scheduler__transformDotProduct	uVar9	resourceClass	INFERRED	ResourceModel slot 19 (0x4c) on the rewritten instruction, stored at node + 0x58	^\s*uVar9\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)(?:param_1|scheduler)\[2\]\ \+\ 0x4c\)\)\(\(int\ \*\)(?:param_1|scheduler)\[2\],piVar19\);$	+2	all	none
+use	Scheduler__transformDotProduct	uVar9	specialFlag	INFERRED	1 when option 0x28 is on and ResourceModel slot 13 holds: stored at node + 0x5c	^\s*uVar9\ =\ 1;$	+1	all	none
+use	Scheduler__transformDotProduct	uVar9	specialFlag	INFERRED	1 when option 0x28 is on and ResourceModel slot 13 holds: stored at node + 0x5c	^\s*uVar9\ =\ 0;$	+1	all	none
+use	Scheduler__transformDotProduct	uVar9	specialFlag	INFERRED	1 when option 0x28 is on and ResourceModel slot 13 holds: stored at node + 0x5c	^\s*\*\(undefined4\ \*\)\((?:param_2|node)\ \+\ 0x5c\)\ =\ uVar9;$	+1	all	none
+use	Scheduler__transformDotProduct	uVar9	specialFlag	INFERRED	1 when option 0x28 is on and ResourceModel slot 13 holds: stored at node + 0x5c	^\s*uVar9\ =\ 1;$@2	+1	all	none
+use	Scheduler__transformDotProduct	uVar9	specialFlag	INFERRED	1 when option 0x28 is on and ResourceModel slot 13 holds: stored at node + 0x5c	^\s*uVar9\ =\ 0;$@2	+1	all	none
+use	Scheduler__transformDotProduct	uVar9	specialFlag	INFERRED	1 when option 0x28 is on and ResourceModel slot 13 holds: stored at node + 0x5c	^\s*\*\(undefined4\ \*\)\((?:param_2|node)\ \+\ 0x5c\)\ =\ uVar9;$@2	+1	all	none
+use	Scheduler__transformDotProduct	uVar9	edgeConst	INFERRED	DAT_001b0194: word stored at edge + 0x1c	^\s*uVar9\ =\ DAT_001b0194;$	+1	all	none
+use	Scheduler__transformDotProduct	uVar9	edgeConst	INFERRED	DAT_001b0194: word stored at edge + 0x1c	^\s*(?:puVar10|edgeAlloc)\[7\]\ =\ uVar9;$	+1	all	none
+use	Scheduler__transformDotProduct	uVar9	edgeConst	INFERRED	DAT_001b0194: word stored at edge + 0x1c	^\s*uVar9\ =\ DAT_001b0194;$@2	+1	all	none
+use	Scheduler__transformDotProduct	uVar9	edgeConst	INFERRED	DAT_001b0194: word stored at edge + 0x1c	^\s*(?:puVar10|edgeAlloc)\[7\]\ =\ uVar9;$@2	+1	all	none
+use	Scheduler__transformDotProduct	uVar9	latency	INFERRED	Scheduler__getDependencyLatency(helper inst, inst): edge latency	^\s*uVar9\ =\ \(\(int\ \(\*\)\(\)\)FUN_00164e7c\)\((?:param_1|scheduler),(?:iVar6|helperInst),(?:piVar25|inst),0,3,0\);$	+2	all	none
+use	Scheduler__transformDotProduct	uVar9	latency	INFERRED	Scheduler__getDependencyLatency(helper inst, inst): edge latency	^\s*uVar9\ =\ \(\(int\ \(\*\)\(\)\)FUN_00164e7c\)\((?:param_1|scheduler),(?:iVar6|helperInst),piVar19,0,3,0\);$	+2	all	none
+use	Scheduler__transformDotProduct	iVar8	selectsRewritable	INFERRED	ResourceModel slot 13 (0x34) result	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)(?:param_1|scheduler)\[2\]\ \+\ 0x34\)\)\(\(int\ \*\)(?:param_1|scheduler)\[2\],(?:param_2|node)\);$	+1	all	none
+use	Scheduler__transformDotProduct	iVar8	selectsRewritable	INFERRED	ResourceModel slot 13 (0x34) result	^\s*if\ \(iVar8\ !=\ 0\)\ goto\ code_r0x001699c4;$	+1	all	none
+use	Scheduler__transformDotProduct	iVar8	selectsRewritable	INFERRED	ResourceModel slot 13 (0x34) result	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)(?:param_1|scheduler)\[2\]\ \+\ 0x34\)\)\(\(int\ \*\)(?:param_1|scheduler)\[2\],(?:param_2|node)\);$@2	+1	all	none
+use	Scheduler__transformDotProduct	iVar8	selectsRewritable	INFERRED	ResourceModel slot 13 (0x34) result	^\s*if\ \(iVar8\ !=\ 0\)\ goto\ LAB_00169620;$	+1	all	none
+use	Scheduler__transformDotProduct	iVar8	pendingPreds	INFERRED	node + 0x34: remaining unscheduled predecessors	^\s*iVar8\ =\ \*\(int\ \*\)\((?:param_2|node)\ \+\ 0x34\);$	+1	all	none
+use	Scheduler__transformDotProduct	iVar8	pendingPreds	INFERRED	node + 0x34: remaining unscheduled predecessors	^\s*\*\(int\ \*\)\((?:param_2|node)\ \+\ 0x34\)\ =\ iVar8\ \+\ 1;$	+1	all	none
+local	Scheduler__computeBlockRegisterSets	param_1	scheduler	CONFIRMED	the Scheduler object
+use	Scheduler__computeBlockRegisterSets	iVar6	program	CONFIRMED	scheduler[1]: the program (+900 head of the block list, +0x474 pass counter)	^\s*iVar6\ =\ param_1\[1\];$	+2	all	none
+use	Scheduler__computeBlockRegisterSets	iVar6	program	CONFIRMED	scheduler[1]: the program (+900 head of the block list, +0x474 pass counter)	^\s*iVar6\ =\ param_1\[1\];$@2	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar6	program	CONFIRMED	scheduler[1]: the program (+900 head of the block list, +0x474 pass counter)	^\s*\*\(int\ \*\)\(iVar6\ \+\ 0x474\)\ =\ \*\(int\ \*\)\(iVar6\ \+\ 0x474\)\ \+\ 1;$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar6	registerCount	CONFIRMED	scheduler[0x51]: number of hardware registers	^\s*iVar6\ =\ param_1\[0x51\];$	+2	all	none
+use	Scheduler__computeBlockRegisterSets	iVar6	registerCount	CONFIRMED	scheduler[0x51]: number of hardware registers	^\s*(?:puVar7|allocation)\[2\]\ =\ iVar6;$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar6	registerCount	CONFIRMED	scheduler[0x51]: number of hardware registers	^\s*iVar6\ =\ param_1\[0x51\];$@2	+2	all	none
+use	Scheduler__computeBlockRegisterSets	iVar6	registerCount	CONFIRMED	scheduler[0x51]: number of hardware registers	^\s*(?:puVar7|allocation)\[2\]\ =\ iVar6;$@2	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar6	nextBlock	INFERRED	block + 8 of the current block, kept while the block's instructions are walked	^\s*iVar6\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar8\ \+\ 900\)\ \+\ 8\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar6	nextBlock	INFERRED	block + 8 of the current block, kept while the block's instructions are walked	^\s*if\ \(iVar6\ !=\ 0\)\ \{$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar6	nextBlock	INFERRED	block + 8 of the current block, kept while the block's instructions are walked	^\s*iVar8\ =\ iVar6;$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar6	nextBlock	INFERRED	block + 8 of the current block, kept while the block's instructions are walked	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar8\ \+\ 8\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar6	operandByteOffset	INFERRED	4 * operand ordinal	^\s*iVar6\ =\ 0;$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar6	operandByteOffset	INFERRED	4 * operand ordinal	^\s*piVar15\ =\ \(int\ \*\)\(iVar6\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar17\ \+\ 0xd4\)\ \+\ 8\)\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar6	operandByteOffset	INFERRED	4 * operand ordinal	^\s*piVar15\ =\ \(int\ \*\)\(iVar6\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar17\ \+\ 0xd4\)\ \+\ 8\)\);$@2	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar6	operandByteOffset	INFERRED	4 * operand ordinal	^\s*piVar10\ =\ \(int\ \*\)\(iVar6\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar17\ \+\ 0xd4\)\ \+\ 8\)\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar6	operandByteOffset	INFERRED	4 * operand ordinal	^\s*iVar6\ =\ iVar6\ \+\ 4;$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar6	blockArray	INFERRED	FUN_000ec5b8(program): array of the program's blocks, indexed 1..DList__count(program + 0x37c)	^\s*iVar6\ =\ FUN_000ec5b8\(iVar8\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar6	blockArray	INFERRED	FUN_000ec5b8(program): array of the program's blocks, indexed 1..DList__count(program + 0x37c)	^\s*piVar5\ =\ \*\(int\ \*\*\)\(iVar6\ \+\ iVar17\ \*\ 4\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	uVar19	wordCount	INFERRED	(registerCount + 31) >> 5: words of a bit set	^\s*uVar19\ =\ iVar6\ \+\ 0x1fU\ >>\ 5;$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	uVar19	wordCount	INFERRED	(registerCount + 31) >> 5: words of a bit set	^\s*(?:puVar7|allocation)\ =\ \(undefined4\ \*\)FUN_00193e18\((?:uVar18|arena),uVar19\ \*\ 4\ \+\ 0xc\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	uVar19	wordCount	INFERRED	(registerCount + 31) >> 5: words of a bit set	^\s*(?:puVar7|allocation)\[1\]\ =\ uVar19;$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	uVar19	wordCount	INFERRED	(registerCount + 31) >> 5: words of a bit set	^\s*if\ \(uVar19\ !=\ 0\)\ \{$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	uVar19	wordCount	INFERRED	(registerCount + 31) >> 5: words of a bit set	^\s*if\ \(uVar19\ ==\ 0\)\ \{$	+2	all	none
+use	Scheduler__computeBlockRegisterSets	uVar19	wordCount	INFERRED	(registerCount + 31) >> 5: words of a bit set	^\s*uVar19\ =\ uVar19\ \-\ 1;$	+2	all	none
+use	Scheduler__computeBlockRegisterSets	uVar19	wordCount	INFERRED	(registerCount + 31) >> 5: words of a bit set	^\s*uVar19\ =\ iVar6\ \+\ 0x1fU\ >>\ 5;$@2	+1	all	none
+use	Scheduler__computeBlockRegisterSets	uVar19	wordCount	INFERRED	(registerCount + 31) >> 5: words of a bit set	^\s*(?:puVar7|allocation)\ =\ \(undefined4\ \*\)FUN_00193e18\((?:uVar18|arena),uVar19\ \*\ 4\ \+\ 0xc\);$@2	+1	all	none
+use	Scheduler__computeBlockRegisterSets	uVar19	wordCount	INFERRED	(registerCount + 31) >> 5: words of a bit set	^\s*(?:puVar7|allocation)\[1\]\ =\ uVar19;$@2	+1	all	none
+use	Scheduler__computeBlockRegisterSets	uVar19	wordCount	INFERRED	(registerCount + 31) >> 5: words of a bit set	^\s*if\ \(uVar19\ !=\ 0\)\ \{$@2	+1	all	none
+use	Scheduler__computeBlockRegisterSets	uVar19	wordCount	INFERRED	(registerCount + 31) >> 5: words of a bit set	^\s*if\ \(uVar19\ ==\ 0\)\ \{$@2	+2	all	none
+use	Scheduler__computeBlockRegisterSets	uVar19	wordCount	INFERRED	(registerCount + 31) >> 5: words of a bit set	^\s*uVar19\ =\ uVar19\ \-\ 1;$@2	+2	all	none
+use	Scheduler__computeBlockRegisterSets	uVar19	operandOrdinal	INFERRED	0-based operand number, indexes the phi's predecessor blocks	^\s*uVar19\ =\ 0;$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	uVar19	operandOrdinal	INFERRED	0-based operand number, indexes the phi's predecessor blocks	^\s*if\ \(uVar19\ <\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar17\ \+\ 0xd4\)\ \+\ 4\)\)\ \{$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	uVar19	operandOrdinal	INFERRED	0-based operand number, indexes the phi's predecessor blocks	^\s*if\ \(uVar19\ <\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar17\ \+\ 0xd4\)\ \+\ 4\)\)\ \{$@2	+1	all	none
+use	Scheduler__computeBlockRegisterSets	uVar19	operandOrdinal	INFERRED	0-based operand number, indexes the phi's predecessor blocks	^\s*if\ \(uVar19\ <\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar17\ \+\ 0xd4\)\ \+\ 4\)\)\ \{$@3	+1	all	none
+use	Scheduler__computeBlockRegisterSets	uVar19	operandOrdinal	INFERRED	0-based operand number, indexes the phi's predecessor blocks	^\s*uVar19\ =\ uVar19\ \+\ 1;$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	uVar19	successorNumber	INFERRED	1-based index into the successor vector of the block	^\s*for\ \(uVar19\ =\ 1;\ uVar19\ <=\ \*\(uint\ \*\)\(piVar5\[0x34\]\ \+\ 4\);\ uVar19\ =\ uVar19\ \+\ 1\)\ \{$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar17	block	CONFIRMED	current block (program + 900, then block + 8)	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar6\ \+\ 900\);$	+2	all	none
+use	Scheduler__computeBlockRegisterSets	iVar17	block	CONFIRMED	current block (program + 900, then block + 8)	^\s*\*\(undefined4\ \*\*\)\(iVar17\ \+\ 0x104\)\ =\ puVar14;$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar17	block	CONFIRMED	current block (program + 900, then block + 8)	^\s*\*\(undefined4\ \*\*\)\(iVar17\ \+\ 0x100\)\ =\ puVar14;$	+4	all	none
+use	Scheduler__computeBlockRegisterSets	iVar17	block	CONFIRMED	current block of the instruction walk	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar8\ \+\ 900\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar17	block	CONFIRMED	current block of the instruction walk	^\s*piVar5\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar17\ \+\ 0x98\)\)\[2\];$	+2	all	none
+use	Scheduler__computeBlockRegisterSets	iVar17	block	CONFIRMED	current block of the instruction walk	^\s*iVar11\ =\ \(uVar4\ >>\ 3\ \&\ 0x1ffffffc\)\ \+\ \*\(int\ \*\)\(iVar17\ \+\ 0x100\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar17	block	CONFIRMED	current block of the instruction walk	^\s*if\ \(uVar19\ <\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar17\ \+\ 0xd4\)\ \+\ 4\)\)\ \{$	+2	all	none
+use	Scheduler__computeBlockRegisterSets	iVar17	block	CONFIRMED	current block of the instruction walk	^\s*iVar12\ =\ \(uVar4\ >>\ 3\ \&\ 0x1ffffffc\)\ \+\ \*\(int\ \*\)\(iVar17\ \+\ 0x100\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar17	block	CONFIRMED	current block of the instruction walk	^\s*if\ \(uVar19\ <\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar17\ \+\ 0xd4\)\ \+\ 4\)\)\ \{$@2	+2	all	none
+use	Scheduler__computeBlockRegisterSets	iVar17	block	CONFIRMED	current block of the instruction walk	^\s*iVar9\ =\ \(uVar4\ >>\ 3\ \&\ 0x1ffffffc\)\ \+\ \*\(int\ \*\)\(iVar17\ \+\ 0x100\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar17	block	CONFIRMED	current block of the instruction walk	^\s*if\ \(uVar19\ <\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar17\ \+\ 0xd4\)\ \+\ 4\)\)\ \{$@3	+2	all	none
+use	Scheduler__computeBlockRegisterSets	iVar17	block	CONFIRMED	current block of the instruction walk	^\s*iVar8\ =\ \*\(int\ \*\)\(iVar17\ \+\ 8\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar17	block	CONFIRMED	current block of the instruction walk	^\s*iVar17\ =\ iVar8;$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar17	blockNumber	INFERRED	1-based index into blockArray	^\s*for\ \(iVar17\ =\ 1;\ iVar8\ =\ FUN_00194034\(param_1\[1\]\ \+\ 0x37c\),\ iVar17\ <=\ iVar8;\ iVar17\ =\ iVar17\ \+\ 1\)$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar17	blockNumber	INFERRED	1-based index into blockArray	^\s*piVar5\ =\ \*\(int\ \*\*\)\(iVar6\ \+\ iVar17\ \*\ 4\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	puVar14	bitSet	CONFIRMED	allocation + 1: the new register bit set (word count at +0, bit count at +4)	^\s*puVar14\ =\ (?:puVar7|allocation)\ \+\ 1;$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	puVar14	bitSet	CONFIRMED	allocation + 1: the new register bit set (word count at +0, bit count at +4)	^\s*(?:puVar7|allocation)\ =\ puVar14;$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	puVar14	bitSet	CONFIRMED	allocation + 1: the new register bit set (word count at +0, bit count at +4)	^\s*\*\(undefined4\ \*\*\)\(iVar17\ \+\ 0x104\)\ =\ puVar14;$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	puVar14	bitSet	CONFIRMED	allocation + 1: the new register bit set	^\s*puVar14\ =\ (?:puVar7|allocation)\ \+\ 1;$@2	+1	all	none
+use	Scheduler__computeBlockRegisterSets	puVar14	bitSet	CONFIRMED	allocation + 1: the new register bit set	^\s*(?:puVar7|allocation)\ =\ puVar14;$@2	+1	all	none
+use	Scheduler__computeBlockRegisterSets	puVar14	bitSet	CONFIRMED	allocation + 1: the new register bit set	^\s*\*\(undefined4\ \*\*\)\(iVar17\ \+\ 0x100\)\ =\ puVar14;$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar16	inst	INFERRED	current instruction of the block (list head at block + 0x98)	^\s*piVar16\ =\ \*\(int\ \*\*\)\(iVar17\ \+\ 0x98\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar16	inst	INFERRED	current instruction of the block (list head at block + 0x98)	^\s*if\ \(\(\(piVar16\[5\]\ \&\ 1U\)\ !=\ 0\)\ \&\&\ \(0\ <\ piVar16\[0x21\]\)\)\ \{$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar16	inst	INFERRED	current instruction of the block (list head at block + 0x98)	^\s*piVar5\ =\ \(int\ \*\)FUN_00105594\(piVar16,iVar8\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar16	inst	INFERRED	current instruction of the block (list head at block + 0x98)	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar16\ \+\ 0x7c\)\)\(piVar16\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar16	inst	INFERRED	current instruction of the block (list head at block + 0x98)	^\s*iVar13\ =\ \(\*\*\(code\ \*\*\)\(\*piVar16\ \+\ 0x7c\)\)\(piVar16\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar16	inst	INFERRED	current instruction of the block (list head at block + 0x98)	^\s*iVar9\ =\ \(\*\*\(code\ \*\*\)\(\*piVar16\ \+\ 0x7c\)\)\(piVar16\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar16	inst	INFERRED	current instruction of the block (list head at block + 0x98)	^\s*\}\ while\ \(iVar8\ <=\ piVar16\[0x21\]\);$	+2	all	none
+use	Scheduler__computeBlockRegisterSets	piVar16	inst	INFERRED	current instruction of the block (list head at block + 0x98)	^\s*piVar16\ =\ piVar10;$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar5	nextInst	INFERRED	the next instruction, read before the current one is walked	^\s*piVar5\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar17\ \+\ 0x98\)\)\[2\];$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar5	nextInst	INFERRED	the next instruction, read before the current one is walked	^\s*if\ \(piVar5\ !=\ \(int\ \*\)0x0\)\ \{$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar5	nextInst	INFERRED	the next instruction, read before the current one is walked	^\s*piVar10\ =\ piVar5;$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar5	nextInst	INFERRED	the next instruction, read before the current one is walked	^\s*piVar5\ =\ \(int\ \*\)piVar10\[2\];$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar10	followingInst	INFERRED	inst[2] after the operands were processed	^\s*piVar10\ =\ piVar5;$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar10	followingInst	INFERRED	inst[2] after the operands were processed	^\s*piVar10\ =\ \(int\ \*\)piVar16\[2\];$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar10	followingInst	INFERRED	inst[2] after the operands were processed	^\s*piVar5\ =\ \(int\ \*\)piVar10\[2\];$	+3	all	none
+use	Scheduler__computeBlockRegisterSets	iVar8	operandNumber	INFERRED	source operand number 1..count of the instruction	^\s*iVar8\ =\ 1;$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar8	operandNumber	INFERRED	source operand number 1..count of the instruction	^\s*piVar5\ =\ \(int\ \*\)FUN_00105594\(piVar16,iVar8\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar8	operandNumber	INFERRED	source operand number 1..count of the instruction	^\s*iVar8\ =\ iVar8\ \+\ 1;$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar8	operandNumber	INFERRED	source operand number 1..count of the instruction	^\s*\}\ while\ \(iVar8\ <=\ piVar16\[0x21\]\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar5	sourceDef	INFERRED	IRInst__getOperandSource(inst, operandNumber)	^\s*piVar5\ =\ \(int\ \*\)FUN_00105594\(piVar16,iVar8\);$	+5	all	none
+use	Scheduler__computeBlockRegisterSets	piVar5	sourceDef	INFERRED	IRInst__getOperandSource(inst, operandNumber)	^\s*piVar10\ =\ \(int\ \*\)FUN_00105594\(piVar5,iVar9\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar5	sourceDef	INFERRED	IRInst__getOperandSource(inst, operandNumber)	^\s*\}\ while\ \(iVar9\ <=\ piVar5\[0x21\]\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar5	sourceDef	INFERRED	IRInst__getOperandSource(inst, operandNumber)	^\s*uVar4\ =\ piVar5\[0x25\];$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar5	sourceDef	INFERRED	IRInst__getOperandSource(inst, operandNumber)	^\s*uVar4\ =\ piVar5\[0x25\];$@2	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar10	mixSource	INFERRED	IRInst__getOperandSource(sourceDef, n): operand of a presub / mix source	^\s*piVar10\ =\ \(int\ \*\)FUN_00105594\(piVar5,iVar9\);$	+2	all	none
+use	Scheduler__computeBlockRegisterSets	piVar10	mixSource	INFERRED	IRInst__getOperandSource(sourceDef, n): operand of a presub / mix source	^\s*if\ \(\(\(piVar10\[5\]\ \&\ 0x40U\)\ !=\ 0\)\ \&\&$	+2	all	none
+use	Scheduler__computeBlockRegisterSets	piVar10	mixSource	INFERRED	IRInst__getOperandSource(sourceDef, n): operand of a presub / mix source	^\s*uVar4\ =\ piVar10\[0x25\];$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar10	mixSource	INFERRED	IRInst__getOperandSource(sourceDef, n): operand of a presub / mix source	^\s*uVar4\ =\ piVar10\[0x25\];$@2	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar10	mixSource	INFERRED	IRInst__getOperandSource(sourceDef, n): operand of a presub / mix source	^\s*else\ if\ \(0\ <\ piVar10\[0x21\]\)\ \{$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar10	mixSource	INFERRED	IRInst__getOperandSource(sourceDef, n): operand of a presub / mix source	^\s*iVar12\ =\ FUN_00105594\(piVar10,iVar11\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar10	mixSource	INFERRED	IRInst__getOperandSource(sourceDef, n): operand of a presub / mix source	^\s*\}\ while\ \(iVar11\ <=\ piVar10\[0x21\]\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar12	innerSource	INFERRED	IRInst__getOperandSource(mixSource, n): operand of the operand's own presub / mix	^\s*iVar12\ =\ FUN_00105594\(piVar10,iVar11\);$	+3	all	none
+use	Scheduler__computeBlockRegisterSets	iVar12	innerSource	INFERRED	IRInst__getOperandSource(mixSource, n): operand of the operand's own presub / mix	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar12\ \+\ 0x94\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar12	innerSource	INFERRED	IRInst__getOperandSource(mixSource, n): operand of the operand's own presub / mix	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar12\ \+\ 0x94\);$@2	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar9	isPhi	CONFIRMED	IRInst vslot 31 (0x7c, isPhi) of the instruction	^\s*iVar9\ =\ \(\*\*\(code\ \*\*\)\(\*piVar16\ \+\ 0x7c\)\)\(piVar16\);$	+2	all	none
+use	Scheduler__computeBlockRegisterSets	iVar11	isPhi2	CONFIRMED	IRInst vslot 31 (0x7c, isPhi) of the instruction	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar16\ \+\ 0x7c\)\)\(piVar16\);$	+2	all	none
+use	Scheduler__computeBlockRegisterSets	iVar13	isPhi3	CONFIRMED	IRInst vslot 31 (0x7c, isPhi) of the instruction	^\s*if\ \(\(\(\*\(uint\ \*\)\(iVar12\ \+\ 0x14\)\ \&\ 0x40\)\ !=\ 0\)\ \&\&$	+4	all	none
+use	Scheduler__computeBlockRegisterSets	uVar4	registerId	INFERRED	source[0x25]: the register id whose bit is set	^\s*uVar4\ =\ piVar10\[0x25\];$	+2	all	none
+use	Scheduler__computeBlockRegisterSets	uVar4	registerId	INFERRED	source[0x25]: the register id whose bit is set	^\s*uVar4\ =\ piVar10\[0x25\];$@2	+2	all	none
+use	Scheduler__computeBlockRegisterSets	uVar4	registerId	INFERRED	source[0x25]: the register id whose bit is set	^\s*\*\(uint\ \*\)\(iVar11\ \+\ 8\)\ =\ 1\ <<\ \(uVar4\ \&\ 0x1f\)\ \|\ \*\(uint\ \*\)\(iVar11\ \+\ 8\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	uVar4	registerId	INFERRED	source[0x25]: the register id whose bit is set	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar12\ \+\ 0x94\);$	+2	all	none
+use	Scheduler__computeBlockRegisterSets	uVar4	registerId	INFERRED	source[0x25]: the register id whose bit is set	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar12\ \+\ 0x94\);$@2	+2	all	none
+use	Scheduler__computeBlockRegisterSets	uVar4	registerId	INFERRED	source[0x25]: the register id whose bit is set	^\s*\*\(uint\ \*\)\(iVar12\ \+\ 8\)\ =\ 1\ <<\ \(uVar4\ \&\ 0x1f\)\ \|\ \*\(uint\ \*\)\(iVar12\ \+\ 8\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	uVar4	registerId	INFERRED	source[0x25]: the register id whose bit is set	^\s*uVar4\ =\ piVar5\[0x25\];$	+2	all	none
+use	Scheduler__computeBlockRegisterSets	uVar4	registerId	INFERRED	source[0x25]: the register id whose bit is set	^\s*uVar4\ =\ piVar5\[0x25\];$@2	+2	all	none
+use	Scheduler__computeBlockRegisterSets	uVar4	registerId	INFERRED	source[0x25]: the register id whose bit is set	^\s*\*\(uint\ \*\)\(iVar9\ \+\ 8\)\ =\ 1\ <<\ \(uVar4\ \&\ 0x1f\)\ \|\ \*\(uint\ \*\)\(iVar9\ \+\ 8\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar11	wordAddress	INFERRED	address of the bit set word holding the register's bit	^\s*iVar11\ =\ \(uVar4\ >>\ 3\ \&\ 0x1ffffffc\)\ \+\ \*\(int\ \*\)\(iVar17\ \+\ 0x100\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar11	wordAddress	INFERRED	address of the bit set word holding the register's bit	^\s*iVar11\ =\ \(uVar4\ >>\ 3\ \&\ 0x1ffffffc\)\ \+\ \*\(int\ \*\)\(\*piVar15\ \+\ 0x104\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar11	wordAddress	INFERRED	address of the bit set word holding the register's bit	^\s*\*\(uint\ \*\)\(iVar11\ \+\ 8\)\ =\ 1\ <<\ \(uVar4\ \&\ 0x1f\)\ \|\ \*\(uint\ \*\)\(iVar11\ \+\ 8\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar12	wordAddress2	INFERRED	address of the bit set word holding the register's bit	^\s*iVar12\ =\ \(uVar4\ >>\ 3\ \&\ 0x1ffffffc\)\ \+\ \*\(int\ \*\)\(iVar17\ \+\ 0x100\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar12	wordAddress2	INFERRED	address of the bit set word holding the register's bit	^\s*iVar12\ =\ \(uVar4\ >>\ 3\ \&\ 0x1ffffffc\)\ \+\ \*\(int\ \*\)\(\*piVar15\ \+\ 0x104\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar12	wordAddress2	INFERRED	address of the bit set word holding the register's bit	^\s*\*\(uint\ \*\)\(iVar12\ \+\ 8\)\ =\ 1\ <<\ \(uVar4\ \&\ 0x1f\)\ \|\ \*\(uint\ \*\)\(iVar12\ \+\ 8\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar15	predBlockRef	INFERRED	slot of the phi operand's predecessor block in the block's predecessor vector (0 when out of range)	^\s*piVar15\ =\ \(int\ \*\)0x0;$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar15	predBlockRef	INFERRED	slot of the phi operand's predecessor block in the block's predecessor vector (0 when out of range)	^\s*piVar15\ =\ \(int\ \*\)\(iVar6\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar17\ \+\ 0xd4\)\ \+\ 8\)\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar15	predBlockRef	INFERRED	slot of the phi operand's predecessor block in the block's predecessor vector (0 when out of range)	^\s*iVar11\ =\ \(uVar4\ >>\ 3\ \&\ 0x1ffffffc\)\ \+\ \*\(int\ \*\)\(\*piVar15\ \+\ 0x104\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar15	predBlockRef	INFERRED	slot of the phi operand's predecessor block in the block's predecessor vector (0 when out of range)	^\s*piVar15\ =\ \(int\ \*\)0x0;$@2	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar15	predBlockRef	INFERRED	slot of the phi operand's predecessor block in the block's predecessor vector (0 when out of range)	^\s*piVar15\ =\ \(int\ \*\)\(iVar6\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar17\ \+\ 0xd4\)\ \+\ 8\)\);$@2	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar15	predBlockRef	INFERRED	slot of the phi operand's predecessor block in the block's predecessor vector (0 when out of range)	^\s*iVar12\ =\ \(uVar4\ >>\ 3\ \&\ 0x1ffffffc\)\ \+\ \*\(int\ \*\)\(\*piVar15\ \+\ 0x104\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar10	predBlockRef2	INFERRED	slot of the phi operand's predecessor block in the block's predecessor vector (0 when out of range)	^\s*piVar10\ =\ \(int\ \*\)0x0;$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar10	predBlockRef2	INFERRED	slot of the phi operand's predecessor block in the block's predecessor vector (0 when out of range)	^\s*piVar10\ =\ \(int\ \*\)\(iVar6\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar17\ \+\ 0xd4\)\ \+\ 8\)\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar10	predBlockRef2	INFERRED	slot of the phi operand's predecessor block in the block's predecessor vector (0 when out of range)	^\s*iVar9\ =\ \(uVar4\ >>\ 3\ \&\ 0x1ffffffc\)\ \+\ \*\(int\ \*\)\(\*piVar10\ \+\ 0x104\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar5	blockRecord	INFERRED	blockArray[blockNumber]	^\s*piVar5\ =\ \*\(int\ \*\*\)\(iVar6\ \+\ iVar17\ \*\ 4\);$	+2	all	none
+use	Scheduler__computeBlockRegisterSets	piVar5	blockRecord	INFERRED	blockArray[blockNumber]	^\s*for\ \(uVar19\ =\ 1;\ uVar19\ <=\ \*\(uint\ \*\)\(piVar5\[0x34\]\ \+\ 4\);\ uVar19\ =\ uVar19\ \+\ 1\)\ \{$	+2	all	none
+use	Scheduler__computeBlockRegisterSets	piVar5	blockRecord	INFERRED	blockArray[blockNumber]	^\s*piVar16\ =\ \(int\ \*\)piVar5\[0x41\];$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar5	blockRecord	INFERRED	blockArray[blockNumber]	^\s*piVar16\ =\ \(int\ \*\)piVar5\[0x40\];$	+2	all	none
+use	Scheduler__computeBlockRegisterSets	iVar8	successorByteOffset	INFERRED	4 * successor index	^\s*iVar8\ =\ 0;$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar8	successorByteOffset	INFERRED	4 * successor index	^\s*iVar9\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(piVar5\[0x34\]\ \+\ 8\)\ \+\ iVar8\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar8	successorByteOffset	INFERRED	4 * successor index	^\s*iVar8\ =\ iVar8\ \+\ 4;$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar9	successorBlock	INFERRED	the successor block (+0x100 its live-in set)	^\s*iVar9\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(piVar5\[0x34\]\ \+\ 8\)\ \+\ iVar8\);$	+2	all	none
+use	Scheduler__computeBlockRegisterSets	iVar9	successorBlock	INFERRED	the successor block (+0x100 its live-in set)	^\s*iVar11\ =\ \*\(int\ \*\)\(iVar9\ \+\ 0x100\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar11	successorSetCursor	INFERRED	walks the successor's live-in set words	^\s*iVar11\ =\ \*\(int\ \*\)\(iVar9\ \+\ 0x100\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar11	successorSetCursor	INFERRED	walks the successor's live-in set words	^\s*puVar1\ =\ \(uint\ \*\)\(iVar11\ \+\ 8\);$	+2	all	none
+use	Scheduler__computeBlockRegisterSets	piVar16	liveOutCursor	INFERRED	walks the block's live-out set (block + 0x104) words	^\s*piVar16\ =\ \(int\ \*\)piVar5\[0x41\];$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar16	liveOutCursor	INFERRED	walks the block's live-out set (block + 0x104) words	^\s*iVar9\ =\ \*piVar16;$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar16	liveOutCursor	INFERRED	walks the block's live-out set (block + 0x104) words	^\s*piVar16\[2\]\ =\ piVar16\[2\]\ \|\ \*puVar1;$	+2	all	none
+use	Scheduler__computeBlockRegisterSets	iVar9	wordsLeft	INFERRED	word count of the set, counted down	^\s*iVar9\ =\ \*piVar16;$	+4	all	none
+use	Scheduler__computeBlockRegisterSets	iVar9	wordsLeft	INFERRED	word count of the set, counted down	^\s*iVar9\ =\ iVar9\ \+\ \-1;$	+2	all	none
+use	Scheduler__computeBlockRegisterSets	puVar1	setWord	INFERRED	word of the successor's set	^\s*puVar1\ =\ \(uint\ \*\)\(iVar11\ \+\ 8\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	puVar1	setWord	INFERRED	word of the successor's set	^\s*piVar16\[2\]\ =\ piVar16\[2\]\ \|\ \*puVar1;$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar16	liveInCursor	INFERRED	walks the block's live-in set (block + 0x100) words	^\s*piVar16\ =\ \(int\ \*\)piVar5\[0x40\];$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar16	liveInCursor	INFERRED	walks the block's live-in set (block + 0x100) words	^\s*iVar9\ =\ \*piVar16;$@2	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar16	liveInCursor	INFERRED	walks the block's live-in set (block + 0x100) words	^\s*piVar5\ =\ piVar16;$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar16	liveInCursor	INFERRED	walks the block's live-in set (block + 0x100) words	^\s*if\ \(\(piVar16\[2\]\ \|\ \*\(uint\ \*\)\(iVar8\ \+\ 8\)\)\ ==\ piVar16\[2\]\)\ \{$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	piVar16	liveInCursor	INFERRED	walks the block's live-in set (block + 0x100) words	^\s*piVar16\[2\]\ =\ piVar16\[2\]\ \|\ \*puVar1;$@2	+2	all	none
+use	Scheduler__computeBlockRegisterSets	bVar3	changed	INFERRED	a set grew during this sweep	^\s*bVar3\ =\ false;$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	bVar3	changed	INFERRED	a set grew during this sweep	^\s*bVar3\ =\ true;$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	bVar3	changed	INFERRED	a set grew during this sweep	^\s*if\ \(!bVar3\)\ \{$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar9	wordsLeft	INFERRED	word count of the set, counted down	^\s*iVar9\ =\ \*piVar16;$@2	+2	all	none
+use	Scheduler__computeBlockRegisterSets	iVar9	wordsLeft	INFERRED	word count of the set, counted down	^\s*iVar12\ =\ iVar9;$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	iVar9	wordsLeft	INFERRED	word count of the set, counted down	^\s*if\ \(iVar9\ !=\ 0\)\ \{$@4	+3	all	none
+use	Scheduler__computeBlockRegisterSets	iVar9	wordsLeft	INFERRED	word count of the set, counted down	^\s*iVar9\ =\ iVar9\ \+\ \-1;$@2	+2	all	none
+use	Scheduler__computeBlockRegisterSets	puVar1	setWord	INFERRED	word of the live-out set	^\s*puVar1\ =\ \(uint\ \*\)\(iVar8\ \+\ 8\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	puVar1	setWord	INFERRED	word of the live-out set	^\s*piVar16\[2\]\ =\ piVar16\[2\]\ \|\ \*puVar1;$@2	+1	all	none
+use	Scheduler__computeBlockRegisterSets	puVar1	setWord	INFERRED	word of the live-in set	^\s*puVar1\ =\ \(uint\ \*\)\(piVar5\ \+\ 3\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	puVar1	setWord	INFERRED	word of the live-in set	^\s*\}\ while\ \(\(\*puVar1\ \|\ \*puVar2\)\ ==\ \*puVar1\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	puVar2	setWord2	INFERRED	word of the live-out set	^\s*puVar2\ =\ \(uint\ \*\)\(iVar11\ \+\ 0xc\);$	+1	all	none
+use	Scheduler__computeBlockRegisterSets	puVar2	setWord2	INFERRED	word of the live-out set	^\s*\}\ while\ \(\(\*puVar1\ \|\ \*puVar2\)\ ==\ \*puVar1\);$	+1	all	none
+local	Scheduler__computeNodePriorities	piVar13	usedFetchSlots	INFERRED	bit set (32 bits, header at allocation) of the per-instruction slot indexes (inst + 0x134) of fetch-class nodes
+local	Scheduler__computeNodePriorities	local_68	heightHistogram	INFERRED	number of fetch-class nodes with height 0..3, sorted into descending order at the end
+local	Scheduler__computeNodePriorities	local_54	totalNodes	INFERRED	node count at entry: the number of backward steps
+local	Scheduler__computeNodePriorities	uVar14	processedCount	INFERRED	backward steps done so far
+use	Scheduler__computeNodePriorities	bVar1	hasDeepFetch	INFERRED	a fetch-class node has height > 0	^\s*bVar1\ =\ false;$	+1	all	none
+use	Scheduler__computeNodePriorities	bVar1	hasDeepFetch	INFERRED	a fetch-class node has height > 0	^\s*bVar1\ =\ false;$@2	+1	all	none
+use	Scheduler__computeNodePriorities	bVar1	hasDeepFetch	INFERRED	a fetch-class node has height > 0	^\s*bVar1\ =\ true;$	+1	all	none
+use	Scheduler__computeNodePriorities	bVar1	hasDeepFetch	INFERRED	a fetch-class node has height > 0	^\s*if\ \(\(bVar1\)\ \&\&\ \(iVar11\ =\ (?:puVar5|allocation)\[2\],\ iVar11\ !=\ 0\)\)\ \{$	+1	all	none
+use	Scheduler__computeNodePriorities	bVar2	moreBits	INFERRED	do/while condition over the 32 bits of the descendant mask	^\s*bVar2\ =\ uVar17\ !=\ 0x1f;$	+1	all	none
+use	Scheduler__computeNodePriorities	bVar2	moreBits	INFERRED	do/while condition over the 32 bits of the descendant mask	^\s*\}\ while\ \(bVar2\);$	+1	all	none
+use	Scheduler__computeNodePriorities	iVar11	zeroOffset	INFERRED	byte offset while heightHistogram is cleared	^\s*iVar11\ =\ 0;$@2	+1	all	none
+use	Scheduler__computeNodePriorities	iVar11	zeroOffset	INFERRED	byte offset while heightHistogram is cleared	^\s*\*\(undefined4\ \*\)\(iVar11\ \+\ \(int\)local_68\)\ =\ 0;$	+2	all	none
+use	Scheduler__computeNodePriorities	iVar11	wordsLeft	INFERRED	word count of usedFetchSlots, counted down while it is cleared	^\s*iVar11\ =\ \*piVar13;$	+2	all	none
+use	Scheduler__computeNodePriorities	iVar11	wordsLeft	INFERRED	word count of usedFetchSlots, counted down while it is cleared	^\s*if\ \(iVar11\ ==\ 0\)\ \{$	+2	all	none
+use	Scheduler__computeNodePriorities	iVar11	wordsLeft	INFERRED	word count of usedFetchSlots, counted down while it is cleared	^\s*iVar11\ =\ iVar11\ \+\ \-1;$	+2	all	none
+use	Scheduler__computeNodePriorities	iVar11	nodeByteOffset	INFERRED	4 * nodeIndex	^\s*iVar11\ =\ (?:uVar15|nodeIndex)\ \*\ 4;$	+3	all	none
+use	Scheduler__computeNodePriorities	iVar11	nodeByteOffset	INFERRED	4 * nodeIndex	^\s*piVar4\ =\ \(int\ \*\)\(iVar11\ \+\ puVar20\[2\]\);$	+1	all	none
+use	Scheduler__computeNodePriorities	iVar11	nodeByteOffset	INFERRED	4 * nodeIndex	^\s*iVar11\ =\ iVar11\ \+\ \-4;$	+1	all	none
+use	Scheduler__computeNodePriorities	iVar10	nextNodeByteOffset	INFERRED	4 * (nodeIndex + 1)	^\s*iVar10\ =\ iVar11\ \+\ 4;$	+1	all	none
+use	Scheduler__computeNodePriorities	iVar10	nextNodeByteOffset	INFERRED	4 * (nodeIndex + 1)	^\s*iVar3\ =\ iVar10;$	+1	all	none
+use	Scheduler__computeNodePriorities	iVar10	nextNodeByteOffset	INFERRED	4 * (nodeIndex + 1)	^\s*iVar10\ =\ iVar10\ \+\ \-4;$	+1	all	none
+use	Scheduler__computeNodePriorities	iVar11	maxNodeHeight	INFERRED	target description + 0x54: largest node height the scheduler supports	^\s*iVar11\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\*(?:param_1|scheduler)\ \+\ 0x30c\)\ \+\ 0x54\);$	+2	all	none
+use	Scheduler__computeNodePriorities	iVar11	maxNodeHeight	INFERRED	target description + 0x54: largest node height the scheduler supports	^\s*iVar11\ =\ iVar11\ \-\ (?:iVar21|maxHeight);$	+2	all	none
+use	Scheduler__computeNodePriorities	iVar11	maxNodeHeight	INFERRED	target description + 0x54: largest node height the scheduler supports	^\s*if\ \(\(int\)local_68\[1\]\ <\ \(int\)local_68\[0\]\ /\ iVar11\)\ \{$	+2	all	none
+use	Scheduler__computeNodePriorities	iVar11	maxNodeHeight	INFERRED	target description + 0x54: largest node height the scheduler supports	^\s*if\ \(\(int\)\(iVar11\ \*\ (?:uVar18|nodeCount)\)\ <\ \(int\)local_68\[0\]\)\ \{$	+1	all	none
+use	Scheduler__computeNodePriorities	iVar11	maxNodeHeight	INFERRED	target description + 0x54: largest node height the scheduler supports	^\s*if\ \(\(iVar11\ \+\ \-1\ ==\ 2\)\ \&\&\ \(\(int\)local_68\[0\]\ <\ \(int\)\(local_68\[1\]\ <<\ 1\)\)\)\ \{$	+1	all	none
+use	Scheduler__computeNodePriorities	iVar11	largestBucket	INFERRED	largest entry of heightHistogram	^\s*iVar11\ =\ 0;$@3	+1	all	none
+use	Scheduler__computeNodePriorities	iVar11	largestBucket	INFERRED	largest entry of heightHistogram	^\s*if\ \(iVar11\ <\ iVar3\)\ \{$	+2	all	none
+use	Scheduler__computeNodePriorities	iVar11	largestBucket	INFERRED	largest entry of heightHistogram	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)(?:param_1|scheduler)\[2\]\ \+\ 0x58\)\)\(\(int\ \*\)(?:param_1|scheduler)\[2\],iVar11,(?:local_58|maxDepth)\);$	+2	all	none
+use	Scheduler__computeNodePriorities	iVar11	halfTotal	INFERRED	heightHistogram[0] / 2, rounded up	^\s*iVar11\ =\ \(\(int\)local_68\[0\]\ >>\ 1\)\ \+\ \(uint\)\(\(int\)local_68\[0\]\ <\ 0\ \&\&\ \(local_68\[0\]\ \&\ 1\)\ !=\ 0\);$	+3	all	none
+use	Scheduler__computeNodePriorities	iVar11	priorityThreshold	INFERRED	ResourceModel slot 22 (0x58) result: stored in scheduler[8]	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)(?:param_1|scheduler)\[2\]\ \+\ 0x58\)\)\(\(int\ \*\)(?:param_1|scheduler)\[2\],local_68\[0\],(?:local_58|maxDepth),iVar10\);$	+4	all	none
+use	Scheduler__computeNodePriorities	iVar11	priorityThreshold	INFERRED	ResourceModel slot 22 (0x58) result: stored in scheduler[8]	^\s*iVar11\ =\ iVar11\ \+\ \-1;$@2	+2	all	none
+use	Scheduler__computeNodePriorities	iVar11	minPriority	INFERRED	scheduler[10] raised to its floor, stored back	^\s*iVar11\ =\ (?:param_1|scheduler)\[10\];$	+3	all	none
+use	Scheduler__computeNodePriorities	iVar11	minPriority	INFERRED	scheduler[10] raised to its floor, stored back	^\s*iVar11\ =\ (?:param_1|scheduler)\[10\];$@2	+3	all	none
+use	Scheduler__computeNodePriorities	iVar11	minPriority	INFERRED	scheduler[10] raised to its floor, stored back	^\s*(?:param_1|scheduler)\[10\]\ =\ iVar11;$	+1	all	none
+use	Scheduler__computeNodePriorities	iVar10	targetDepth	INFERRED	ResourceModel slot 23 (0x5c): the model's target depth, stored in scheduler[0x45]	^\s*iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)(?:param_1|scheduler)\[2\]\ \+\ 0x5c\)\)\(\(int\ \*\)(?:param_1|scheduler)\[2\]\);$	+1	all	none
+use	Scheduler__computeNodePriorities	iVar10	targetDepth	INFERRED	ResourceModel slot 23 (0x5c): the model's target depth, stored in scheduler[0x45]	^\s*(?:param_1|scheduler)\[0x45\]\ =\ iVar10;$	+2	all	none
+use	Scheduler__computeNodePriorities	iVar10	targetDepth	INFERRED	ResourceModel slot 23 (0x5c): the model's target depth, stored in scheduler[0x45]	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)(?:param_1|scheduler)\[2\]\ \+\ 0x58\)\)\(\(int\ \*\)(?:param_1|scheduler)\[2\],local_68\[0\],(?:local_58|maxDepth),iVar10\);$	+1	all	none
+use	Scheduler__computeNodePriorities	iVar10	bucketsLeft	INFERRED	countdown over the four histogram buckets	^\s*iVar10\ =\ 4;$	+1	all	none
+use	Scheduler__computeNodePriorities	iVar10	bucketsLeft	INFERRED	countdown over the four histogram buckets	^\s*iVar10\ =\ iVar10\ \+\ \-1;$	+2	all	none
+use	Scheduler__computeNodePriorities	iVar3	balanceEnabled	CONFIRMED	Compiler__isOptionEnabled(compiler, 0x28) OPT_BALANCE	^\s*iVar3\ =\ FUN_000e07dc\(\*(?:param_1|scheduler),0x28\);$	+2	all	none
+use	Scheduler__computeNodePriorities	iVar3	selectsRewritable	INFERRED	ResourceModel slot 13 (0x34) result	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)(?:param_1|scheduler)\[2\]\ \+\ 0x34\)\)\(\(int\ \*\)(?:param_1|scheduler)\[2\],(?:iVar12|node)\);$	+1	all	none
+use	Scheduler__computeNodePriorities	iVar3	selectsRewritable	INFERRED	ResourceModel slot 13 (0x34) result	^\s*if\ \(iVar3\ ==\ 0\)\ goto\ LAB_001672b8;$	+1	all	none
+use	Scheduler__computeNodePriorities	iVar3	nodeDepth	INFERRED	node + 0x14, raised to the depth of each consumer plus the edge latency	^\s*iVar3\ =\ \*\(int\ \*\)\((?:iVar12|node)\ \+\ 0x14\);$	+1	all	none
+use	Scheduler__computeNodePriorities	iVar3	nodeDepth	INFERRED	node + 0x14, raised to the depth of each consumer plus the edge latency	^\s*if\ \(iVar3\ <\ (?:iVar8|edge)\)\ \{$	+2	all	none
+use	Scheduler__computeNodePriorities	iVar3	nodeDepth	INFERRED	node + 0x14, raised to the depth of each consumer plus the edge latency	^\s*\*\(int\ \*\)\((?:iVar12|node)\ \+\ 0x14\)\ =\ iVar3;$	+1	all	none
+use	Scheduler__computeNodePriorities	iVar3	nodeHeight	INFERRED	node + 0xc	^\s*iVar3\ =\ \*\(int\ \*\)\((?:iVar12|node)\ \+\ 0xc\);$	+3	all	none
+use	Scheduler__computeNodePriorities	iVar3	nodeHeight	INFERRED	node + 0xc	^\s*if\ \(iVar3\ <\ 4\)\ \{$	+2	all	none
+use	Scheduler__computeNodePriorities	iVar3	nodeHeight	INFERRED	node + 0xc	^\s*if\ \(0\ <\ iVar3\)\ \{$	+1	all	none
+use	Scheduler__computeNodePriorities	iVar3	isTextureFetch	CONFIRMED	IRInst vslot 12 (0x30, isTextureFetch) of the node's instruction	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\((?:iVar12|node)\ \+\ 0x38\)\ \+\ 0x30\)\)\(\*\(int\ \*\*\)\((?:iVar12|node)\ \+\ 0x38\)\);$	+2	all	none
+use	Scheduler__computeNodePriorities	iVar3	resourceSlot10Result	INFERRED	ResourceModel slot 10 (0x28) on the node's instruction	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)(?:param_1|scheduler)\[2\]\ \+\ 0x28\)\)$	+1	all	none
+use	Scheduler__computeNodePriorities	iVar3	resourceSlot10Result	INFERRED	ResourceModel slot 10 (0x28) on the node's instruction	^\s*if\ \(iVar3\ !=\ 0\)\ goto\ LAB_00167574;$	+1	all	none
+use	Scheduler__computeNodePriorities	iVar3	producerCountCursor	INFERRED	walks the per-component consumer counters (+0x48) of the producer	^\s*iVar3\ =\ (?:iVar8|edge);$@2	+1	all	none
+use	Scheduler__computeNodePriorities	iVar3	producerCountCursor	INFERRED	walks the per-component consumer counters (+0x48) of the producer	^\s*\*\(int\ \*\)\(iVar3\ \+\ 0x48\)\ =\ \*\(int\ \*\)\(iVar3\ \+\ 0x48\)\ \+\ 1;$	+1	all	none
+use	Scheduler__computeNodePriorities	iVar3	producerCountCursor	INFERRED	walks the per-component consumer counters (+0x48) of the producer	^\s*iVar3\ =\ iVar3\ \+\ 4;$	+1	all	none
+use	Scheduler__computeNodePriorities	iVar3	threadIsFetchClass	INFERRED	ThreadModel slot 8 (0x20) on the node's instruction	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)(?:param_1|scheduler)\[3\]\ \+\ 0x20\)\)$	+1	all	none
+use	Scheduler__computeNodePriorities	iVar3	threadIsFetchClass	INFERRED	ThreadModel slot 8 (0x20) on the node's instruction	^\s*if\ \(\(iVar3\ ==\ 0\)\ \&\&$	+3	all	none
+use	Scheduler__computeNodePriorities	iVar3	nodeHeight	INFERRED	node + 0xc, compared with the producer's height	^\s*iVar3\ =\ \*\(int\ \*\)\((?:iVar12|node)\ \+\ 0xc\);$@2	+1	all	none
+use	Scheduler__computeNodePriorities	iVar3	nodeHeight	INFERRED	node + 0xc, compared with the producer's height	^\s*(?:iVar22|neighbourNode)\ =\ iVar3;$	+1	all	none
+use	Scheduler__computeNodePriorities	iVar3	nodeHeight	INFERRED	node + 0xc, compared with the producer's height	^\s*iVar3\ =\ \*\(int\ \*\)\((?:iVar12|node)\ \+\ 0xc\)\ \+\ 1;$	+2	all	none
+use	Scheduler__computeNodePriorities	iVar3	descendantByteOffset	INFERRED	4 * index of the node whose descendant bit is examined	^\s*iVar3\ =\ iVar10;$	+1	all	none
+use	Scheduler__computeNodePriorities	iVar3	descendantByteOffset	INFERRED	4 * index of the node whose descendant bit is examined	^\s*piVar4\ =\ \(int\ \*\)\(iVar3\ \+\ puVar20\[2\]\);$	+1	all	none
+use	Scheduler__computeNodePriorities	iVar3	descendantByteOffset	INFERRED	4 * index of the node whose descendant bit is examined	^\s*iVar3\ =\ iVar3\ \+\ 4;$@2	+1	all	none
+use	Scheduler__computeNodePriorities	iVar3	bucketCount	INFERRED	entry of heightHistogram	^\s*iVar3\ =\ \*\(int\ \*\)\((?:iVar21|maxHeight)\ \+\ \(int\)local_68\);$	+3	all	none
+use	Scheduler__computeNodePriorities	iVar3	sortIndex	INFERRED	outer index of the descending sort of heightHistogram	^\s*iVar3\ =\ 0;$	+1	all	none
+use	Scheduler__computeNodePriorities	iVar3	sortIndex	INFERRED	outer index of the descending sort of heightHistogram	^\s*iVar3\ =\ iVar3\ \+\ 1;$	+4	all	none
+use	Scheduler__computeNodePriorities	iVar3	sortIndex	INFERRED	outer index of the descending sort of heightHistogram	^\s*\}\ while\ \(iVar3\ <=\ (?:iVar21|maxHeight)\);$	+1	all	none
+use	Scheduler__computeNodePriorities	uVar7	vectorCount	INFERRED	vector count word read by the inlined element accessor	^\s*uVar7\ =\ puVar20\[1\];$	+3	all	none
+use	Scheduler__computeNodePriorities	uVar7	succEdgeIndex	INFERRED	index into the successor edge vector	^\s*uVar7\ =\ 0;$	+1	all	none
+use	Scheduler__computeNodePriorities	uVar7	succEdgeIndex	INFERRED	index into the successor edge vector	^\s*if\ \(uVar7\ <\ \*puVar20\)\ \{$	+1	all	none
+use	Scheduler__computeNodePriorities	uVar7	succEdgeIndex	INFERRED	index into the successor edge vector	^\s*if\ \(uVar9\ <=\ uVar7\)\ \{$	+3	all	none
+use	Scheduler__computeNodePriorities	uVar7	succEdgeIndex	INFERRED	index into the successor edge vector	^\s*piVar4\ =\ \(int\ \*\)\(uVar7\ \*\ 4\ \+\ puVar20\[2\]\);$	+1	all	none
+use	Scheduler__computeNodePriorities	uVar7	succEdgeIndex	INFERRED	index into the successor edge vector	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\(puVar20,uVar7\);$	+1	all	none
+use	Scheduler__computeNodePriorities	uVar7	succEdgeIndex	INFERRED	index into the successor edge vector	^\s*uVar7\ =\ uVar7\ \+\ 1;$	+1	all	none
+use	Scheduler__computeNodePriorities	uVar7	succEdgeIndex	INFERRED	index into the successor edge vector	^\s*if\ \(uVar17\ ==\ uVar7\)\ break;$	+1	all	none
+use	Scheduler__computeNodePriorities	uVar7	fetchSlot	INFERRED	inst + 0x134: slot index of the fetch instruction	^\s*uVar7\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)\((?:iVar12|node)\ \+\ 0x38\)\ \+\ 0x134\);$	+3	all	none
+use	Scheduler__computeNodePriorities	uVar7	fetchSlot	INFERRED	inst + 0x134: slot index of the fetch instruction	^\s*uVar17\ =\ uVar7\ >>\ 3\ \&\ 0x1ffffffc;$	+1	all	none
+use	Scheduler__computeNodePriorities	uVar7	fetchSlot	INFERRED	inst + 0x134: slot index of the fetch instruction	^\s*1\ <<\ \(uVar7\ \&\ 0x1f\)\ \|\ \*\(uint\ \*\)\(\(int\)piVar13\ \+\ uVar17\ \+\ 8\);$	+1	all	none
+use	Scheduler__computeNodePriorities	uVar7	vectorCount	INFERRED	vector count word read by the inlined element accessor	^\s*uVar7\ =\ puVar20\[1\];$@2	+2	all	none
+use	Scheduler__computeNodePriorities	uVar7	vectorCount	INFERRED	vector count word read by the inlined element accessor	^\s*if\ \(uVar7\ ==\ uVar17\)\ break;$	+1	all	none
+use	Scheduler__computeNodePriorities	uVar7	descendantNodeIndex	INFERRED	index of the node whose descendant bit is examined	^\s*uVar7\ =\ (?:uVar18|nodeCount);$	+1	all	none
+use	Scheduler__computeNodePriorities	uVar7	descendantNodeIndex	INFERRED	index of the node whose descendant bit is examined	^\s*if\ \(uVar7\ <\ \*puVar20\)\ \{$@2	+1	all	none
+use	Scheduler__computeNodePriorities	uVar7	descendantNodeIndex	INFERRED	index of the node whose descendant bit is examined	^\s*if\ \(uVar9\ <=\ uVar7\)\ \{$@2	+3	all	none
+use	Scheduler__computeNodePriorities	uVar7	descendantNodeIndex	INFERRED	index of the node whose descendant bit is examined	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\(puVar20,uVar7\);$@2	+1	all	none
+use	Scheduler__computeNodePriorities	uVar7	descendantNodeIndex	INFERRED	index of the node whose descendant bit is examined	^\s*uVar7\ =\ uVar7\ \+\ 1;$@2	+1	all	none
+use	Scheduler__computeNodePriorities	uVar9	vectorCount2	INFERRED	vector count word	^\s*uVar9\ =\ puVar20\[1\];$	+3	all	none
+use	Scheduler__computeNodePriorities	uVar9	descendantBits	INFERRED	descendant mask of the consumer shifted into this node's frame	^\s*uVar9\ =\ \*\(int\ \*\)\((?:iVar6|descendantMasks)\ \+\ (?:iVar8|edge)\ \*\ 4\)\ <<\ \((?:iVar8|edge)\ \-\ (?:uVar15|nodeIndex)\ \&\ 0x3f\)\ \|\ \*(?:puVar16|descendantMask);$	+3	all	none
+use	Scheduler__computeNodePriorities	uVar9	vectorCount2	INFERRED	vector count word	^\s*uVar9\ =\ puVar20\[1\];$@2	+3	all	none
+use	Scheduler__computeNodePriorities	uVar9	vectorCount2	INFERRED	vector count word	^\s*uVar9\ =\ puVar20\[1\];$@3	+3	all	none
+use	Scheduler__computeNodePriorities	uVar17	succEdgeCount	INFERRED	count of the successor edges	^\s*uVar17\ =\ puVar20\[1\];$	+2	all	none
+use	Scheduler__computeNodePriorities	uVar17	succEdgeCount	INFERRED	count of the successor edges	^\s*if\ \(uVar17\ ==\ uVar7\)\ break;$	+1	all	none
+use	Scheduler__computeNodePriorities	uVar17	fetchSlotWordOffset	INFERRED	byte offset of the usedFetchSlots word holding the slot's bit	^\s*uVar17\ =\ uVar7\ >>\ 3\ \&\ 0x1ffffffc;$	+3	all	none
+use	Scheduler__computeNodePriorities	uVar17	predEdgeIndex	INFERRED	index into the predecessor edge vector	^\s*uVar17\ =\ 0;$	+1	all	none
+use	Scheduler__computeNodePriorities	uVar17	predEdgeIndex	INFERRED	index into the predecessor edge vector	^\s*if\ \(uVar17\ <\ \*puVar20\)\ \{$	+1	all	none
+use	Scheduler__computeNodePriorities	uVar17	predEdgeIndex	INFERRED	index into the predecessor edge vector	^\s*if\ \(uVar9\ <=\ uVar17\)\ \{$	+3	all	none
+use	Scheduler__computeNodePriorities	uVar17	predEdgeIndex	INFERRED	index into the predecessor edge vector	^\s*piVar4\ =\ \(int\ \*\)\(uVar17\ \*\ 4\ \+\ puVar20\[2\]\);$	+1	all	none
+use	Scheduler__computeNodePriorities	uVar17	predEdgeIndex	INFERRED	index into the predecessor edge vector	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\(puVar20,uVar17\);$	+1	all	none
+use	Scheduler__computeNodePriorities	uVar17	predEdgeIndex	INFERRED	index into the predecessor edge vector	^\s*uVar17\ =\ uVar17\ \+\ 1;$	+1	all	none
+use	Scheduler__computeNodePriorities	uVar17	predEdgeIndex	INFERRED	index into the predecessor edge vector	^\s*if\ \(uVar7\ ==\ uVar17\)\ break;$	+1	all	none
+use	Scheduler__computeNodePriorities	uVar17	descendantBit	INFERRED	bit number 0..31 of the descendant mask	^\s*uVar17\ =\ 0;$@2	+1	all	none
+use	Scheduler__computeNodePriorities	uVar17	descendantBit	INFERRED	bit number 0..31 of the descendant mask	^\s*if\ \(\(1\ <<\ \(uVar17\ \&\ 0x3f\)\ \&\ \*(?:puVar16|descendantMask)\)\ !=\ 0\)\ \{$	+1	all	none
+use	Scheduler__computeNodePriorities	uVar17	descendantBit	INFERRED	bit number 0..31 of the descendant mask	^\s*bVar2\ =\ uVar17\ !=\ 0x1f;$	+1	all	none
+use	Scheduler__computeNodePriorities	uVar17	descendantBit	INFERRED	bit number 0..31 of the descendant mask	^\s*uVar17\ =\ uVar17\ \+\ 1;$@2	+1	all	none
+use	Scheduler__computeNodePriorities	piVar4	bitSetCursor	INFERRED	walks usedFetchSlots while it is cleared	^\s*piVar4\ =\ piVar13;$	+1	all	none
+use	Scheduler__computeNodePriorities	piVar4	bitSetCursor	INFERRED	walks usedFetchSlots while it is cleared	^\s*piVar4\[2\]\ =\ 0;$	+1	all	none
+use	Scheduler__computeNodePriorities	piVar4	bitSetCursor	INFERRED	walks usedFetchSlots while it is cleared	^\s*piVar4\ =\ piVar4\ \+\ 1;$	+1	all	none
+use	Scheduler__computeNodePriorities	piVar4	bitSetCursor	INFERRED	walks usedFetchSlots while it is cleared	^\s*piVar4\ =\ piVar13;$@2	+1	all	none
+use	Scheduler__computeNodePriorities	piVar4	bitSetCursor	INFERRED	walks usedFetchSlots while it is cleared	^\s*piVar4\[2\]\ =\ 0;$@2	+2	all	none
+use	Scheduler__computeNodePriorities	piVar4	nodeSlot	INFERRED	slot of the node vector element	^\s*piVar4\ =\ \(int\ \*\)\(iVar11\ \+\ puVar20\[2\]\);$	+1	all	none
+use	Scheduler__computeNodePriorities	piVar4	nodeSlot	INFERRED	slot of the node vector element	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\(puVar20,(?:uVar15|nodeIndex)\);$	+1	all	none
+use	Scheduler__computeNodePriorities	piVar4	nodeSlot	INFERRED	slot of the node vector element	^\s*(?:iVar12|node)\ =\ \*piVar4;$	+1	all	none
+use	Scheduler__computeNodePriorities	piVar4	succEdgeSlot	INFERRED	slot of the successor edge vector element	^\s*piVar4\ =\ \(int\ \*\)\(uVar7\ \*\ 4\ \+\ puVar20\[2\]\);$	+1	all	none
+use	Scheduler__computeNodePriorities	piVar4	succEdgeSlot	INFERRED	slot of the successor edge vector element	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\(puVar20,uVar7\);$	+1	all	none
+use	Scheduler__computeNodePriorities	piVar4	succEdgeSlot	INFERRED	slot of the successor edge vector element	^\s*(?:iVar8|edge)\ =\ \*piVar4;$	+1	all	none
+use	Scheduler__computeNodePriorities	piVar4	predEdge	INFERRED	the predecessor edge, then a cursor over its four component bytes	^\s*piVar4\ =\ \(int\ \*\)\(uVar17\ \*\ 4\ \+\ puVar20\[2\]\);$	+1	all	none
+use	Scheduler__computeNodePriorities	piVar4	predEdge	INFERRED	the predecessor edge, then a cursor over its four component bytes	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\(puVar20,uVar17\);$	+1	all	none
+use	Scheduler__computeNodePriorities	piVar4	predEdge	INFERRED	the predecessor edge, then a cursor over its four component bytes	^\s*piVar4\ =\ \(int\ \*\)\*piVar4;$	+3	all	none
+use	Scheduler__computeNodePriorities	piVar4	predEdge	INFERRED	the predecessor edge, then a cursor over its four component bytes	^\s*if\ \(\*\(char\ \*\)\(piVar4\ \+\ 6\)\ !=\ '\\0'\)\ \{$	+1	all	none
+use	Scheduler__computeNodePriorities	piVar4	predEdge	INFERRED	the predecessor edge, then a cursor over its four component bytes	^\s*piVar4\ =\ \(int\ \*\)\(\(int\)piVar4\ \+\ 1\);$	+1	all	none
+use	Scheduler__computeNodePriorities	piVar4	descendantNodeSlot	INFERRED	slot of the node vector element of the descendant	^\s*piVar4\ =\ \(int\ \*\)\(iVar3\ \+\ puVar20\[2\]\);$	+1	all	none
+use	Scheduler__computeNodePriorities	piVar4	descendantNodeSlot	INFERRED	slot of the node vector element of the descendant	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\(puVar20,uVar7\);$@2	+1	all	none
+use	Scheduler__computeNodePriorities	piVar4	descendantNodeSlot	INFERRED	slot of the node vector element of the descendant	^\s*/\*\ issue\ \#76:\ same\ shared\-array\ gap\ as\ elsewhere\ in\ this\ function\ \-\ \*piVar4\ \(the$	+2	all	none
+use	Scheduler__computeNodePriorities	piVar4	descendantNodeSlot	INFERRED	slot of the node vector element of the descendant	^\s*if\ \(\*piVar4\ ==\ 0\)\ goto\ LAB_issue76_skip_1670fc_inner;$	+3	all	none
+use	Scheduler__computeNodePriorities	puVar20	allNodes	CONFIRMED	scheduler[6]: vector of all nodes	^\s*puVar20\ =\ \(uint\ \*\)(?:param_1|scheduler)\[6\];$	+3	all	none
+use	Scheduler__computeNodePriorities	puVar20	allNodes	CONFIRMED	scheduler[6]: vector of all nodes	^\s*_memset\(uVar7\ \*\ 4\ \+\ puVar20\[2\],0,\((?:uVar15|nodeIndex)\ \-\ uVar7\)\ \*\ 4\ \+\ 4\);$	+2	all	none
+use	Scheduler__computeNodePriorities	puVar20	allNodes	CONFIRMED	scheduler[6]: vector of all nodes	^\s*piVar4\ =\ \(int\ \*\)\(iVar11\ \+\ puVar20\[2\]\);$	+1	all	none
+use	Scheduler__computeNodePriorities	puVar20	allNodes	CONFIRMED	scheduler[6]: vector of all nodes	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\(puVar20,(?:uVar15|nodeIndex)\);$	+1	all	none
+use	Scheduler__computeNodePriorities	puVar20	succEdges	CONFIRMED	node + 0x40: successor edge vector	^\s*puVar20\ =\ \*\(uint\ \*\*\)\((?:iVar12|node)\ \+\ 0x40\);$	+2	all	none
+use	Scheduler__computeNodePriorities	puVar20	succEdges	CONFIRMED	node + 0x40: successor edge vector	^\s*if\ \(uVar7\ <\ \*puVar20\)\ \{$	+2	all	none
+use	Scheduler__computeNodePriorities	puVar20	succEdges	CONFIRMED	node + 0x40: successor edge vector	^\s*_memset\(uVar9\ \*\ 4\ \+\ puVar20\[2\],0,\(uVar7\ \-\ uVar9\)\ \*\ 4\ \+\ 4\);$	+2	all	none
+use	Scheduler__computeNodePriorities	puVar20	succEdges	CONFIRMED	node + 0x40: successor edge vector	^\s*piVar4\ =\ \(int\ \*\)\(uVar7\ \*\ 4\ \+\ puVar20\[2\]\);$	+1	all	none
+use	Scheduler__computeNodePriorities	puVar20	succEdges	CONFIRMED	node + 0x40: successor edge vector	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\(puVar20,uVar7\);$	+1	all	none
+use	Scheduler__computeNodePriorities	puVar20	succEdges	CONFIRMED	node + 0x40: successor edge vector	^\s*puVar20\ =\ \*\(uint\ \*\*\)\((?:iVar12|node)\ \+\ 0x40\);$@2	+1	all	none
+use	Scheduler__computeNodePriorities	puVar20	predEdges	CONFIRMED	node + 0x44: predecessor edge vector	^\s*puVar20\ =\ \*\(uint\ \*\*\)\((?:iVar12|node)\ \+\ 0x44\);$	+1	all	none
+use	Scheduler__computeNodePriorities	puVar20	predEdges	CONFIRMED	node + 0x44: predecessor edge vector	^\s*uVar7\ =\ puVar20\[1\];$@2	+1	all	none
+use	Scheduler__computeNodePriorities	puVar20	predEdges	CONFIRMED	node + 0x44: predecessor edge vector	^\s*if\ \(uVar17\ <\ \*puVar20\)\ \{$	+2	all	none
+use	Scheduler__computeNodePriorities	puVar20	predEdges	CONFIRMED	node + 0x44: predecessor edge vector	^\s*_memset\(uVar9\ \*\ 4\ \+\ puVar20\[2\],0,\(uVar17\ \-\ uVar9\)\ \*\ 4\ \+\ 4\);$	+2	all	none
+use	Scheduler__computeNodePriorities	puVar20	predEdges	CONFIRMED	node + 0x44: predecessor edge vector	^\s*piVar4\ =\ \(int\ \*\)\(uVar17\ \*\ 4\ \+\ puVar20\[2\]\);$	+1	all	none
+use	Scheduler__computeNodePriorities	puVar20	predEdges	CONFIRMED	node + 0x44: predecessor edge vector	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\(puVar20,uVar17\);$	+1	all	none
+use	Scheduler__computeNodePriorities	puVar20	predEdges	CONFIRMED	node + 0x44: predecessor edge vector	^\s*puVar20\ =\ \*\(uint\ \*\*\)\((?:iVar12|node)\ \+\ 0x44\);$@2	+1	all	none
+use	Scheduler__computeNodePriorities	puVar20	allNodes	CONFIRMED	scheduler[6]: vector of all nodes	^\s*puVar20\ =\ \(uint\ \*\)(?:param_1|scheduler)\[6\];$@2	+3	all	none
+use	Scheduler__computeNodePriorities	puVar20	allNodes	CONFIRMED	scheduler[6]: vector of all nodes	^\s*_memset\(uVar9\ \*\ 4\ \+\ puVar20\[2\],0,\(uVar7\ \-\ uVar9\)\ \*\ 4\ \+\ 4\);$@2	+2	all	none
+use	Scheduler__computeNodePriorities	puVar20	allNodes	CONFIRMED	scheduler[6]: vector of all nodes	^\s*piVar4\ =\ \(int\ \*\)\(iVar3\ \+\ puVar20\[2\]\);$	+1	all	none
+use	Scheduler__computeNodePriorities	puVar20	allNodes	CONFIRMED	scheduler[6]: vector of all nodes	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\(puVar20,uVar7\);$@2	+1	all	none
+use	Scheduler__computeNodePriorities	puVar20	heightCursor	INFERRED	inner cursor of the descending sort of heightHistogram	^\s*puVar20\ =\ local_68\ \+\ iVar3;$	+1	all	none
+use	Scheduler__computeNodePriorities	puVar20	heightCursor	INFERRED	inner cursor of the descending sort of heightHistogram	^\s*if\ \(\(int\)(?:uVar18|nodeCount)\ <\ \(int\)\*puVar20\)\ \{$	+3	all	none
+use	Scheduler__computeNodePriorities	puVar20	heightCursor	INFERRED	inner cursor of the descending sort of heightHistogram	^\s*puVar20\ =\ puVar20\ \+\ 1;$	+1	all	none
+local	Scheduler__markGlobalValues	local_38	writeMask	INFERRED	WriteMask__fromSelectWord output: the write mask of the destination, stored in inst[3]
+use	Scheduler__markGlobalValues	iVar2	registerArraySize	INFERRED	4 * the compiler's register id count (+0x324): size of the two arrays	^\s*iVar2\ =\ \*\(int\ \*\)\(\*(?:param_1|scheduler)\ \+\ 0x324\)\ <<\ 2;$	+3	all	none
+use	Scheduler__markGlobalValues	iVar2	program	CONFIRMED	scheduler[1]: the program (+900 block list head)	^\s*iVar2\ =\ (?:param_1|scheduler)\[1\];$	+3	all	none
+use	Scheduler__markGlobalValues	iVar2	program	CONFIRMED	scheduler[1]: the program (+900 block list head)	^\s*iVar2\ =\ (?:param_1|scheduler)\[1\];$@2	+1	all	none
+use	Scheduler__markGlobalValues	iVar2	program	CONFIRMED	scheduler[1]: the program (+900 block list head)	^\s*iVar3\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar2\ \+\ 900\)\ \+\ 8\);$	+2	all	none
+use	Scheduler__markGlobalValues	iVar2	program	CONFIRMED	scheduler[1]: the program (+900 block list head)	^\s*iVar2\ =\ (?:param_1|scheduler)\[1\];$@3	+1	all	none
+use	Scheduler__markGlobalValues	iVar2	program	CONFIRMED	scheduler[1]: the program (+900 block list head)	^\s*iVar3\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar2\ \+\ 900\)\ \+\ 8\);$@2	+1	all	none
+use	Scheduler__markGlobalValues	iVar2	program	CONFIRMED	scheduler[1]: the program (+900 block list head)	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar2\ \+\ 900\);$	+1	all	none
+use	Scheduler__markGlobalValues	iVar2	program	CONFIRMED	scheduler[1]: the program (+900 block list head)	^\s*iVar3\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar2\ \+\ 0x98\)\ \+\ 8\);$	+2	all	none
+use	Scheduler__markGlobalValues	iVar2	program	CONFIRMED	scheduler[1]: the program (+900 block list head)	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar2\ \+\ 8\);$	+1	all	none
+use	Scheduler__markGlobalValues	iVar2	program	CONFIRMED	scheduler[1]: the program (+900 block list head)	^\s*iVar2\ =\ iVar6;$	+1	all	none
+use	Scheduler__markGlobalValues	iVar2	blockSlot5Result	INFERRED	Block vslot 5 (0x14) of the current block: when non-zero the instruction is global (flag 0x20)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x14\)\)\(piVar12\);$	+2	all	none
+use	Scheduler__markGlobalValues	iVar2	isPhi	CONFIRMED	IRInst vslot 31 (0x7c, isPhi)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x7c\)\)\(piVar5\);$	+5	all	none
+use	Scheduler__markGlobalValues	iVar2	operandNumber	INFERRED	source operand number 1..count	^\s*iVar2\ =\ 1;$	+1	all	none
+use	Scheduler__markGlobalValues	iVar2	operandNumber	INFERRED	source operand number 1..count	^\s*piVar11\ =\ \(int\ \*\)FUN_00105594\(piVar5,iVar2\);$	+1	all	none
+use	Scheduler__markGlobalValues	iVar2	operandNumber	INFERRED	source operand number 1..count	^\s*iVar2\ =\ iVar2\ \+\ 1;$	+2	all	none
+use	Scheduler__markGlobalValues	iVar2	operandNumber	INFERRED	source operand number 1..count	^\s*iVar2\ =\ 1;$@2	+1	all	none
+use	Scheduler__markGlobalValues	iVar2	operandNumber	INFERRED	source operand number 1..count	^\s*iVar9\ =\ FUN_00105594\(piVar5,iVar2\);$	+1	all	none
+use	Scheduler__markGlobalValues	iVar2	operandNumber	INFERRED	source operand number 1..count	^\s*iVar2\ =\ iVar2\ \+\ 1;$@2	+1	all	none
+use	Scheduler__markGlobalValues	iVar2	operandNumber	INFERRED	source operand number 1..count	^\s*\}\ while\ \(iVar2\ <=\ iVar3\);$	+1	all	none
+use	Scheduler__markGlobalValues	iVar2	isMov	CONFIRMED	IRInst vslot 25 (0x64, isMov)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 100\)\)\(piVar12\);$	+2	all	none
+use	Scheduler__markGlobalValues	iVar2	rootOfDest	INFERRED	disjointSetFindRoot of the instruction's register id	^\s*iVar2\ =\ FUN_001952d8\(piVar12\[0x53\],(?:iVar7|unionFindParents)\);$	+2	all	none
+use	Scheduler__markGlobalValues	iVar2	operandNumber	INFERRED	source operand number 1..count	^\s*for\ \(iVar2\ =\ 1;\ iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x14\)\)\(piVar12\),\ iVar2\ <=\ iVar3;$	+5	all	none
+use	Scheduler__markGlobalValues	iVar2	operandNumber	INFERRED	source operand number 1..count	^\s*if\ \(\(\(piVar12\[0x20\]\ !=\ 0\)\ \&\&$	+3	all	none
+use	Scheduler__markGlobalValues	iVar2	selectsLeft	INFERRED	countdown over the four destination select bytes	^\s*iVar2\ =\ 4;$	+1	all	none
+use	Scheduler__markGlobalValues	iVar2	selectsLeft	INFERRED	countdown over the four destination select bytes	^\s*iVar2\ =\ iVar2\ \+\ \-1;$	+2	all	none
+use	Scheduler__markGlobalValues	iVar2	sourceRoot	INFERRED	root of the first source's register id in the union-find set	^\s*iVar2\ =\ FUN_001952d8\(uVar13,(?:iVar7|unionFindParents)\);$	+3	all	none
+use	Scheduler__markGlobalValues	iVar2	sourceRoot	INFERRED	root of the first source's register id in the union-find set	^\s*\*\(undefined4\ \*\)\((?:iVar8|rootIsGlobal)\ \+\ iVar2\ \*\ 4\)\ =\ uVar13;$	+1	all	none
+use	Scheduler__markGlobalValues	iVar2	sourceRoot	INFERRED	root of the first source's register id in the union-find set	^\s*if\ \(iVar2\ <=\ iVar3\)\ goto\ LAB_0016a3ec;$	+1	all	none
+use	Scheduler__markGlobalValues	iVar2	sourceRoot	INFERRED	root of the first source's register id in the union-find set	^\s*iVar2\ =\ FUN_001952d8\(uVar13,(?:iVar7|unionFindParents)\);$@2	+3	all	none
+use	Scheduler__markGlobalValues	iVar2	sourceRoot	INFERRED	root of the first source's register id in the union-find set	^\s*\*\(undefined4\ \*\)\((?:iVar8|rootIsGlobal)\ \+\ iVar2\ \*\ 4\)\ =\ uVar13;$@2	+1	all	none
+use	Scheduler__markGlobalValues	iVar2	sourceRoot	INFERRED	root of the first source's register id in the union-find set	^\s*if\ \(iVar2\ <=\ iVar3\)\ \{$	+1	all	none
+use	Scheduler__markGlobalValues	iVar2	sourceRoot	INFERRED	root of the first source's register id in the union-find set	^\s*iVar10\ =\ iVar2;$	+2	all	none
+use	Scheduler__markGlobalValues	iVar2	sourceRoot	INFERRED	root of the first source's register id in the union-find set	^\s*FUN_00195330\(iVar10,iVar2,(?:iVar7|unionFindParents)\);$	+1	all	none
+use	Scheduler__markGlobalValues	iVar3	isPresub	CONFIRMED	IRInst vslot 23 (0x5c, isPresub) of the source	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x5c\)\)\(piVar11\);$	+2	all	none
+use	Scheduler__markGlobalValues	iVar3	innerOperandNumber	INFERRED	operand number of the source's own presub / mix	^\s*iVar3\ =\ 1;$	+1	all	none
+use	Scheduler__markGlobalValues	iVar3	innerOperandNumber	INFERRED	operand number of the source's own presub / mix	^\s*piVar4\ =\ \(int\ \*\)FUN_00105594\(piVar11,iVar3\);$	+1	all	none
+use	Scheduler__markGlobalValues	iVar3	innerOperandNumber	INFERRED	operand number of the source's own presub / mix	^\s*iVar3\ =\ iVar3\ \+\ 1;$	+2	all	none
+use	Scheduler__markGlobalValues	iVar3	numSources	INFERRED	inst[0x21]: number of sources, read after the loop step	^\s*iVar3\ =\ piVar5\[0x21\];$	+1	all	none
+use	Scheduler__markGlobalValues	iVar3	numSources	INFERRED	inst[0x21]: number of sources, read after the loop step	^\s*\}\ while\ \(iVar2\ <=\ iVar3\);$	+1	all	none
+use	Scheduler__markGlobalValues	iVar3	root	INFERRED	disjointSetFindRoot of the instruction's register id	^\s*iVar3\ =\ FUN_001952d8\(\*\(undefined4\ \*\)\(iVar14\ \+\ 0x14c\),(?:iVar7|unionFindParents)\);$	+2	all	none
+use	Scheduler__markGlobalValues	iVar9	innerIsPresub	CONFIRMED	IRInst vslot 23 (0x5c, isPresub) of the inner source	^\s*iVar9\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x5c\)\)\(piVar4\);$	+2	all	none
+use	Scheduler__markGlobalValues	iVar9	block	CONFIRMED	current block of the second walk	^\s*iVar9\ =\ \*\(int\ \*\)\(iVar2\ \+\ 900\);$	+1	all	none
+use	Scheduler__markGlobalValues	iVar9	block	CONFIRMED	current block of the second walk	^\s*piVar11\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar9\ \+\ 0x98\)\)\[2\];$	+2	all	none
+use	Scheduler__markGlobalValues	iVar9	block	CONFIRMED	current block of the second walk	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar9\ \+\ 8\);$	+1	all	none
+use	Scheduler__markGlobalValues	iVar9	block	CONFIRMED	current block of the second walk	^\s*iVar9\ =\ iVar2;$	+1	all	none
+use	Scheduler__markGlobalValues	iVar9	globalCount	INFERRED	number of instructions marked global (logged)	^\s*iVar9\ =\ 0;$	+1	all	none
+use	Scheduler__markGlobalValues	iVar9	globalCount	INFERRED	number of instructions marked global (logged)	^\s*iVar9\ =\ 0;$@2	+1	all	none
+use	Scheduler__markGlobalValues	iVar9	globalCount	INFERRED	number of instructions marked global (logged)	^\s*iVar9\ =\ iVar9\ \+\ 1;$@2	+1	all	none
+use	Scheduler__markGlobalValues	iVar9	globalCount	INFERRED	number of instructions marked global (logged)	^\s*FUN_000e0e0c\(\*(?:param_1|scheduler),"Scheduler\ :\ %d\ out\ of\ %d\ instructions\ are\ marked\ global\\n",iVar9,iVar10,$	+2	all	none
+use	Scheduler__markGlobalValues	iVar10	lowRoot	INFERRED	the smaller of the two roots, parent of the other after storeIndexedWord	^\s*iVar10\ =\ iVar3;$	+1	all	none
+use	Scheduler__markGlobalValues	iVar10	lowRoot	INFERRED	the smaller of the two roots, parent of the other after storeIndexedWord	^\s*iVar10\ =\ iVar3;$@2	+1	all	none
+use	Scheduler__markGlobalValues	iVar10	lowRoot	INFERRED	the smaller of the two roots, parent of the other after storeIndexedWord	^\s*iVar10\ =\ iVar2;$	+1	all	none
+use	Scheduler__markGlobalValues	iVar10	lowRoot	INFERRED	the smaller of the two roots, parent of the other after storeIndexedWord	^\s*FUN_00195330\(iVar10,iVar2,(?:iVar7|unionFindParents)\);$	+1	all	none
+use	Scheduler__markGlobalValues	iVar10	instCount	INFERRED	number of instructions walked (logged)	^\s*iVar10\ =\ 0;$	+1	all	none
+use	Scheduler__markGlobalValues	iVar10	instCount	INFERRED	number of instructions walked (logged)	^\s*iVar10\ =\ 0;$@2	+1	all	none
+use	Scheduler__markGlobalValues	iVar10	instCount	INFERRED	number of instructions walked (logged)	^\s*iVar10\ =\ iVar10\ \+\ 1;$	+1	all	none
+use	Scheduler__markGlobalValues	iVar10	instCount	INFERRED	number of instructions walked (logged)	^\s*FUN_000e0e0c\(\*(?:param_1|scheduler),"Scheduler\ :\ %d\ out\ of\ %d\ instructions\ are\ marked\ global\\n",iVar9,iVar10,$	+2	all	none
+local	Scheduler__markGlobalValues	iVar14	inst	INFERRED	current instruction of the final walk
+use	Scheduler__markGlobalValues	piVar12	block2	CONFIRMED	current block of the first walk	^\s*piVar12\ =\ \*\(int\ \*\*\)\(iVar2\ \+\ 900\);$	+1	all	none
+use	Scheduler__markGlobalValues	piVar12	block2	CONFIRMED	current block of the first walk	^\s*piVar11\ =\ \(int\ \*\)\(\(int\ \*\)piVar12\[0x26\]\)\[2\];$	+2	all	none
+use	Scheduler__markGlobalValues	piVar12	block2	CONFIRMED	current block of the first walk	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x14\)\)\(piVar12\);$	+1	all	none
+use	Scheduler__markGlobalValues	piVar12	block2	CONFIRMED	current block of the first walk	^\s*piVar4\ =\ \(int\ \*\)piVar12\[2\];$	+1	all	none
+use	Scheduler__markGlobalValues	piVar12	block2	CONFIRMED	current block of the first walk	^\s*piVar12\ =\ piVar4;$	+1	all	none
+use	Scheduler__markGlobalValues	piVar12	inst2	INFERRED	current instruction of the second walk	^\s*piVar12\ =\ \*\(int\ \*\*\)\(iVar9\ \+\ 0x98\);$	+1	all	none
+use	Scheduler__markGlobalValues	piVar12	inst2	INFERRED	current instruction of the second walk	^\s*if\ \(\(piVar12\[5\]\ \&\ 1U\)\ !=\ 0\)\ \{$	+3	all	none
+use	Scheduler__markGlobalValues	piVar12	inst2	INFERRED	current instruction of the second walk	^\s*uVar1\ =\ piVar12\[5\];$	+1	all	none
+use	Scheduler__markGlobalValues	piVar12	inst2	INFERRED	current instruction of the second walk	^\s*iVar2\ =\ FUN_001952d8\(piVar12\[0x53\],(?:iVar7|unionFindParents)\);$	+1	all	none
+use	Scheduler__markGlobalValues	piVar12	inst2	INFERRED	current instruction of the second walk	^\s*piVar5\ =\ \(int\ \*\)piVar12\[2\];$	+1	all	none
+use	Scheduler__markGlobalValues	piVar12	inst2	INFERRED	current instruction of the second walk	^\s*for\ \(iVar2\ =\ 1;\ iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x14\)\)\(piVar12\),\ iVar2\ <=\ iVar3;$	+5	all	none
+use	Scheduler__markGlobalValues	piVar12	inst2	INFERRED	current instruction of the second walk	^\s*if\ \(\(piVar12\[0x48\]\ !=\ 0\)\ \|\|\ \(piVar12\[0x49\]\ !=\ 0\)\)\ goto\ LAB_0016a1fc;$	+4	all	none
+use	Scheduler__markGlobalValues	piVar12	inst2	INFERRED	current instruction of the second walk	^\s*piVar11\ =\ piVar12;$	+1	all	none
+use	Scheduler__markGlobalValues	piVar12	inst2	INFERRED	current instruction of the second walk	^\s*FUN_001054ec\(piVar12,0\);$	+2	all	none
+use	Scheduler__markGlobalValues	piVar12	inst2	INFERRED	current instruction of the second walk	^\s*uVar1\ =\ piVar12\[5\];$@2	+1	all	none
+use	Scheduler__markGlobalValues	piVar12	inst2	INFERRED	current instruction of the second walk	^\s*iVar3\ =\ piVar12\[0x53\];$	+2	all	none
+use	Scheduler__markGlobalValues	piVar12	inst2	INFERRED	current instruction of the second walk	^\s*if\ \(\(\(\*\(int\ \*\)\((?:iVar8|rootIsGlobal)\ \+\ iVar2\ \*\ 4\)\ ==\ 0\)\ \&\&\ \(\*\(int\ \*\)\((?:iVar8|rootIsGlobal)\ \+\ iVar3\ \*\ 4\)\ ==\ 0\)\)\ \&\&$	+3	all	none
+use	Scheduler__markGlobalValues	piVar12	inst2	INFERRED	current instruction of the second walk	^\s*iVar3\ =\ piVar12\[0x53\];$@2	+2	all	none
+use	Scheduler__markGlobalValues	piVar12	inst2	INFERRED	current instruction of the second walk	^\s*if\ \(\(\(\*\(int\ \*\)\((?:iVar8|rootIsGlobal)\ \+\ iVar2\ \*\ 4\)\ ==\ 0\)\ \&\&\ \(\*\(int\ \*\)\((?:iVar8|rootIsGlobal)\ \+\ iVar3\ \*\ 4\)\ ==\ 0\)\)\ \&\&$@2	+3	all	none
+use	Scheduler__markGlobalValues	piVar12	inst2	INFERRED	current instruction of the second walk	^\s*piVar5\ =\ \(int\ \*\)piVar12\[2\];$@2	+1	all	none
+use	Scheduler__markGlobalValues	piVar12	inst2	INFERRED	current instruction of the second walk	^\s*piVar12\ =\ piVar5;$	+1	all	none
+use	Scheduler__markGlobalValues	piVar5	inst3	INFERRED	current instruction of the first walk (list head at block + 0x98)	^\s*piVar5\ =\ \(int\ \*\)piVar12\[0x26\];$	+1	all	none
+use	Scheduler__markGlobalValues	piVar5	inst3	INFERRED	current instruction of the first walk (list head at block + 0x98)	^\s*if\ \(\(piVar5\[5\]\ \&\ 1U\)\ !=\ 0\)\ \{$	+4	all	none
+use	Scheduler__markGlobalValues	piVar5	inst3	INFERRED	current instruction of the first walk (list head at block + 0x98)	^\s*piVar5\[3\]\ =\ local_38\[0\];$	+1	all	none
+use	Scheduler__markGlobalValues	piVar5	inst3	INFERRED	current instruction of the first walk (list head at block + 0x98)	^\s*FUN_00106004\(piVar5,0,0,0,in_r7\);$	+1	all	none
+use	Scheduler__markGlobalValues	piVar5	inst3	INFERRED	current instruction of the first walk (list head at block + 0x98)	^\s*piVar5\[5\]\ =\ piVar5\[5\]\ \|\ 0x20;$	+1	all	none
+use	Scheduler__markGlobalValues	piVar5	inst3	INFERRED	current instruction of the first walk (list head at block + 0x98)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x7c\)\)\(piVar5\);$	+1	all	none
+use	Scheduler__markGlobalValues	piVar5	inst3	INFERRED	current instruction of the first walk (list head at block + 0x98)	^\s*if\ \(\(\*\(int\ \*\)\(piVar5\[0x22\]\ \+\ 8\)\ ==\ 0x32\)\ \&\&$	+5	all	none
+use	Scheduler__markGlobalValues	piVar5	inst3	INFERRED	current instruction of the first walk (list head at block + 0x98)	^\s*if\ \(0\ <\ piVar5\[0x21\]\)\ \{$	+1	all	none
+use	Scheduler__markGlobalValues	piVar5	inst3	INFERRED	current instruction of the first walk (list head at block + 0x98)	^\s*piVar11\ =\ \(int\ \*\)FUN_00105594\(piVar5,iVar2\);$	+1	all	none
+use	Scheduler__markGlobalValues	piVar5	inst3	INFERRED	current instruction of the first walk (list head at block + 0x98)	^\s*if\ \(piVar11\[0x56\]\ !=\ piVar5\[0x56\]\)\ \{$	+1	all	none
+use	Scheduler__markGlobalValues	piVar5	inst3	INFERRED	current instruction of the first walk (list head at block + 0x98)	^\s*if\ \(piVar4\[0x56\]\ !=\ piVar5\[0x56\]\)\ \{$	+1	all	none
+use	Scheduler__markGlobalValues	piVar5	inst3	INFERRED	current instruction of the first walk (list head at block + 0x98)	^\s*if\ \(\*\(int\ \*\)\(iVar10\ \+\ 0x158\)\ !=\ piVar5\[0x56\]\)\ \{$	+1	all	none
+use	Scheduler__markGlobalValues	piVar5	inst3	INFERRED	current instruction of the first walk (list head at block + 0x98)	^\s*\}\ while\ \(iVar2\ <=\ piVar5\[0x21\]\);$	+1	all	none
+use	Scheduler__markGlobalValues	piVar5	inst3	INFERRED	current instruction of the first walk (list head at block + 0x98)	^\s*piVar5\[5\]\ =\ piVar5\[5\]\ \|\ 0x20;$@3	+2	all	none
+use	Scheduler__markGlobalValues	piVar5	inst3	INFERRED	current instruction of the first walk (list head at block + 0x98)	^\s*iVar9\ =\ FUN_00105594\(piVar5,iVar2\);$	+2	all	none
+use	Scheduler__markGlobalValues	piVar5	inst3	INFERRED	current instruction of the first walk (list head at block + 0x98)	^\s*piVar4\ =\ \(int\ \*\)piVar5\[2\];$@2	+1	all	none
+use	Scheduler__markGlobalValues	piVar5	inst3	INFERRED	current instruction of the first walk (list head at block + 0x98)	^\s*piVar5\ =\ piVar4;$	+1	all	none
+use	Scheduler__markGlobalValues	piVar5	followingInst	INFERRED	inst[2] after the instruction was processed	^\s*piVar5\ =\ piVar11;$	+1	all	none
+use	Scheduler__markGlobalValues	piVar5	followingInst	INFERRED	inst[2] after the instruction was processed	^\s*piVar5\ =\ \(int\ \*\)piVar12\[2\];$	+1	all	none
+use	Scheduler__markGlobalValues	piVar5	followingInst	INFERRED	inst[2] after the instruction was processed	^\s*piVar5\ =\ \(int\ \*\)piVar12\[2\];$@2	+1	all	none
+use	Scheduler__markGlobalValues	piVar5	followingInst	INFERRED	inst[2] after the instruction was processed	^\s*piVar11\ =\ \(int\ \*\)piVar5\[2\];$	+3	all	none
+use	Scheduler__markGlobalValues	piVar11	nextBlock	INFERRED	the next block, read before the current one is walked	^\s*piVar11\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar2\ \+\ 900\)\)\[2\];$	+1	all	none
+use	Scheduler__markGlobalValues	piVar11	nextBlock	INFERRED	the next block, read before the current one is walked	^\s*if\ \(piVar11\ !=\ \(int\ \*\)0x0\)\ \{$	+1	all	none
+use	Scheduler__markGlobalValues	piVar11	nextBlock	INFERRED	the next block, read before the current one is walked	^\s*piVar4\ =\ piVar11;$	+1	all	none
+use	Scheduler__markGlobalValues	piVar11	nextBlock	INFERRED	the next block, read before the current one is walked	^\s*piVar11\ =\ \(int\ \*\)piVar4\[2\];$@2	+1	all	none
+use	Scheduler__markGlobalValues	piVar11	nextInst	INFERRED	the next instruction, read before the current one is walked	^\s*piVar11\ =\ \(int\ \*\)\(\(int\ \*\)piVar12\[0x26\]\)\[2\];$	+1	all	none
+use	Scheduler__markGlobalValues	piVar11	nextInst	INFERRED	the next instruction, read before the current one is walked	^\s*if\ \(piVar11\ !=\ \(int\ \*\)0x0\)\ \{$@2	+1	all	none
+use	Scheduler__markGlobalValues	piVar11	nextInst	INFERRED	the next instruction, read before the current one is walked	^\s*piVar4\ =\ piVar11;$@2	+1	all	none
+use	Scheduler__markGlobalValues	piVar11	nextInst	INFERRED	the next instruction, read before the current one is walked	^\s*piVar11\ =\ \(int\ \*\)piVar4\[2\];$	+1	all	none
+use	Scheduler__markGlobalValues	piVar11	nextInst	INFERRED	the next instruction, read before the current one is walked	^\s*piVar11\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar9\ \+\ 0x98\)\)\[2\];$	+1	all	none
+use	Scheduler__markGlobalValues	piVar11	nextInst	INFERRED	the next instruction, read before the current one is walked	^\s*if\ \(piVar11\ !=\ \(int\ \*\)0x0\)\ \{$@3	+1	all	none
+use	Scheduler__markGlobalValues	piVar11	nextInst	INFERRED	the next instruction, read before the current one is walked	^\s*piVar5\ =\ piVar11;$	+1	all	none
+use	Scheduler__markGlobalValues	piVar11	nextInst	INFERRED	the next instruction, read before the current one is walked	^\s*piVar11\ =\ \(int\ \*\)piVar5\[2\];$	+1	all	none
+use	Scheduler__markGlobalValues	piVar11	selectCursor	INFERRED	walks the four destination select bytes (inst + 0x9c)	^\s*piVar11\ =\ piVar12;$	+1	all	none
+use	Scheduler__markGlobalValues	piVar11	selectCursor	INFERRED	walks the four destination select bytes (inst + 0x9c)	^\s*if\ \(\(uint\)\(\*\(byte\ \*\)\(piVar11\ \+\ 0x27\)\ \-\ 2\)\ <\ 2\)\ goto\ LAB_0016a1fc;$	+2	all	none
+use	Scheduler__markGlobalValues	uVar13	sourceRegId	INFERRED	first source's register id (+0x14c)	^\s*uVar13\ =\ \*\(undefined4\ \*\)\(iVar2\ \+\ 0x14c\);$	+1	all	none
+use	Scheduler__markGlobalValues	uVar13	sourceRegId	INFERRED	first source's register id (+0x14c)	^\s*iVar2\ =\ FUN_001952d8\(uVar13,(?:iVar7|unionFindParents)\);$	+1	all	none
+use	Scheduler__markGlobalValues	uVar13	rootValue	INFERRED	1 when either root is already global or the instruction / source is flagged, else 0: stored into rootIsGlobal for both roots	^\s*uVar13\ =\ 0;$	+1	all	none
+use	Scheduler__markGlobalValues	uVar13	rootValue	INFERRED	1 when either root is already global or the instruction / source is flagged, else 0: stored into rootIsGlobal for both roots	^\s*uVar13\ =\ 1;$	+1	all	none
+use	Scheduler__markGlobalValues	uVar13	rootValue	INFERRED	1 when either root is already global or the instruction / source is flagged, else 0: stored into rootIsGlobal for both roots	^\s*\*\(undefined4\ \*\)\((?:iVar8|rootIsGlobal)\ \+\ iVar2\ \*\ 4\)\ =\ uVar13;$	+2	all	none
+use	Scheduler__markGlobalValues	uVar13	sourceRegId	INFERRED	last source's register id (+0x14c)	^\s*uVar13\ =\ \*\(undefined4\ \*\)\(iVar2\ \+\ 0x14c\);$@2	+1	all	none
+use	Scheduler__markGlobalValues	uVar13	sourceRegId	INFERRED	last source's register id (+0x14c)	^\s*iVar2\ =\ FUN_001952d8\(uVar13,(?:iVar7|unionFindParents)\);$@2	+1	all	none
+use	Scheduler__markGlobalValues	uVar13	rootValue	INFERRED	1 when either root is already global or the instruction / source is flagged, else 0	^\s*uVar13\ =\ 0;$@2	+1	all	none
+use	Scheduler__markGlobalValues	uVar13	rootValue	INFERRED	1 when either root is already global or the instruction / source is flagged, else 0	^\s*uVar13\ =\ 1;$@2	+1	all	none
+use	Scheduler__markGlobalValues	uVar13	rootValue	INFERRED	1 when either root is already global or the instruction / source is flagged, else 0	^\s*\*\(undefined4\ \*\)\((?:iVar8|rootIsGlobal)\ \+\ iVar2\ \*\ 4\)\ =\ uVar13;$@2	+2	all	none
+use	Scheduler__markGlobalValues	uVar1	instFlags	INFERRED	inst[5]	^\s*uVar1\ =\ piVar12\[5\];$	+1	all	none
+use	Scheduler__markGlobalValues	uVar1	instFlags	INFERRED	inst[5]	^\s*if\ \(\(uVar1\ \&\ 0x20\)\ !=\ 0\)\ \{$	+1	all	none
+use	Scheduler__markGlobalValues	uVar1	instFlags	INFERRED	inst[5]	^\s*uVar1\ =\ piVar12\[5\];$@2	+2	all	none
+use	Scheduler__markGlobalValues	uVar1	instFlags	INFERRED	inst[5] with flag 0x20 cleared or set from the root's global bit	^\s*uVar1\ =\ \*\(uint\ \*\)\(iVar14\ \+\ 0x14\)\ \&\ 0xffffffdf;$	+2	all	none
+use	Scheduler__markGlobalValues	uVar1	instFlags	INFERRED	inst[5] with flag 0x20 cleared or set from the root's global bit	^\s*uVar1\ =\ \*\(uint\ \*\)\(iVar14\ \+\ 0x14\)\ \|\ 0x20;$	+2	all	none
+use	Scheduler__markGlobalValues	uVar1	instFlags	INFERRED	inst[5] with flag 0x20 cleared or set from the root's global bit	^\s*if\ \(\(uVar1\ \&\ 0x20\)\ !=\ 0\)\ \{$@2	+1	all	none
+use	Scheduler__addOperandDependencyEdges	bVar2	producerInBlock	INFERRED	the producer is a node of this block (not an external node)	^\s*bVar2\ =\ iVar16\ ==\ 0;$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	bVar2	producerInBlock	INFERRED	the producer is a node of this block (not an external node)	^\s*if\ \(bVar2\)\ \{$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	bVar2	producerInBlock	INFERRED	the producer is a node of this block (not an external node)	^\s*bVar2\ =\ false;$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	iVar16	isExternalProducer	INFERRED	1 when the producer lives outside the block (Scheduler__findOrCreateExternalNode), else 0	^\s*iVar16\ =\ 0;$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	iVar16	isExternalProducer	INFERRED	1 when the producer lives outside the block (Scheduler__findOrCreateExternalNode), else 0	^\s*iVar16\ =\ 1;$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	iVar16	isExternalProducer	INFERRED	1 when the producer lives outside the block (Scheduler__findOrCreateExternalNode), else 0	^\s*bVar2\ =\ iVar16\ ==\ 0;$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	iVar16	isExternalProducer	INFERRED	1 when the producer lives outside the block (Scheduler__findOrCreateExternalNode), else 0	^\s*uVar17\ =\ \(\(uint\)\*\(byte\ \*\)\(\(int\)\&local_88\ \+\ iVar16\ \+\ 3\)\ <<\ 0x18\ \|$	+8	all	none
+use	Scheduler__addOperandDependencyEdges	iVar16	isExternalProducer	INFERRED	1 when the producer lives outside the block (Scheduler__findOrCreateExternalNode), else 0	^\s*iVar16\ =\ 1;$@2	+1	all	none
+use	Scheduler__addOperandDependencyEdges	iVar16	partialWriterA	INFERRED	first producer node of an overlapping pair of partial writers	^\s*iVar16\ =\ \*piVar3;$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	iVar16	partialWriterA	INFERRED	first producer node of an overlapping pair of partial writers	^\s*(?:puVar13|edge)\[2\]\ =\ iVar16;$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	iVar16	partialWriterA	INFERRED	first producer node of an overlapping pair of partial writers	^\s*(?:uVar18|arena)\ =\ \(\(int\ \(\*\)\(\)\)FUN_00164e7c\)\((?:param_1|scheduler),\*\(undefined4\ \*\)\(iVar11\ \+\ 0x38\),$	+2	all	none
+use	Scheduler__addOperandDependencyEdges	iVar16	partialWriterA	INFERRED	first producer node of an overlapping pair of partial writers	^\s*iVar16\ =\ \*piVar3;$@2	+1	all	none
+use	Scheduler__addOperandDependencyEdges	iVar16	partialWriterA	INFERRED	first producer node of an overlapping pair of partial writers	^\s*(?:puVar13|edge)\[7\]\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar16\ \+\ 0x38\)\ \+\ 0xc\)\ \&$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	iVar11	isPresub	CONFIRMED	IRInst vslot 23 (0x5c, isPresub) of inst	^\s*if\ \(\(\(iVar15\ ==\ 0\)\ \&\&\ \(piVar10\ =\ \(int\ \*\)FUN_00105594\((?:param_3|inst),(?:iVar5|effectiveOperandIndex)\),\ piVar3\ !=\ piVar10\)\)$	+2	all	none
+use	Scheduler__addOperandDependencyEdges	iVar11	isPresub	CONFIRMED	IRInst vslot 23 (0x5c, isPresub) of inst	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x54\)\)\(piVar3\);$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	iVar11	isPresub	CONFIRMED	IRInst vslot 23 (0x5c, isPresub) of inst	^\s*if\ \(\(iVar11\ !=\ 0\)\ \&\&\ \(piVar3\[0x21\]\ !=\ 0\)\)\ \{$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	iVar11	partialWriterB	INFERRED	second producer node of an overlapping pair of partial writers	^\s*iVar11\ =\ \*piVar7;$	+2	all	none
+use	Scheduler__addOperandDependencyEdges	iVar11	partialWriterB	INFERRED	second producer node of an overlapping pair of partial writers	^\s*(?:uVar18|arena)\ =\ \(\(int\ \(\*\)\(\)\)FUN_00164e7c\)\((?:param_1|scheduler),\*\(undefined4\ \*\)\(iVar11\ \+\ 0x38\),$	+2	all	none
+use	Scheduler__addOperandDependencyEdges	iVar11	partialWriterB	INFERRED	second producer node of an overlapping pair of partial writers	^\s*iVar11\ =\ \*piVar7;$@2	+1	all	none
+use	Scheduler__addOperandDependencyEdges	iVar11	partialWriterB	INFERRED	second producer node of an overlapping pair of partial writers	^\s*\*\(uint\ \*\)\(\*\(int\ \*\)\(iVar11\ \+\ 0x38\)\ \+\ 0xc\);$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	iVar15	numSources	CONFIRMED	IRInst vslot 5 (getNumSources)	^\s*iVar15\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_3|inst)\ \+\ 0x14\)\)\((?:param_3|inst)\);$	+2	all	none
+use	Scheduler__addOperandDependencyEdges	iVar15	isMix	CONFIRMED	IRInst vslot 24 (0x60, isMix) of the consumer's source	^\s*iVar15\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x60\)\)\(piVar7\);$	+2	all	none
+use	Scheduler__addOperandDependencyEdges	iVar15	edgeCount	INFERRED	number of data edges created so far (entries of edgeList)	^\s*iVar15\ =\ 0;$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	iVar15	edgeCount	INFERRED	number of data edges created so far (entries of edgeList)	^\s*if\ \(\(\(iVar15\ ==\ 0\)\ \&\&\ \(piVar10\ =\ \(int\ \*\)FUN_00105594\((?:param_3|inst),(?:iVar5|effectiveOperandIndex)\),\ piVar3\ !=\ piVar10\)\)$	+2	all	none
+use	Scheduler__addOperandDependencyEdges	iVar15	edgeCount	INFERRED	number of data edges created so far (entries of edgeList)	^\s*iVar15\ =\ iVar15\ \+\ 1;$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	iVar15	edgeCount	INFERRED	number of data edges created so far (entries of edgeList)	^\s*if\ \(iVar15\ <\ 1\)\ \{$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	iVar15	edgeCount	INFERRED	number of data edges created so far (entries of edgeList)	^\s*if\ \((?:iVar5|effectiveOperandIndex)\ <\ iVar15\)\ \{$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	iVar15	edgeCount	INFERRED	number of data edges created so far (entries of edgeList)	^\s*\}\ while\ \(iVar15\ \-\ (?:iVar5|effectiveOperandIndex)\ !=\ (?:iVar4|producerNode)\);$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	iVar15	edgeCount	INFERRED	number of data edges created so far (entries of edgeList)	^\s*\}\ while\ \((?:iVar5|effectiveOperandIndex)\ !=\ iVar15\);$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	piVar10	currentSource	INFERRED	IRInst__getOperandSource(inst, effectiveOperandIndex)	^\s*if\ \(\(\(iVar15\ ==\ 0\)\ \&\&\ \(piVar10\ =\ \(int\ \*\)FUN_00105594\((?:param_3|inst),(?:iVar5|effectiveOperandIndex)\),\ piVar3\ !=\ piVar10\)\)$	+2	all	none
+use	Scheduler__addOperandDependencyEdges	piVar10	currentSource	INFERRED	IRInst__getOperandSource(inst, effectiveOperandIndex)	^\s*piVar10\ =\ \(int\ \*\)FUN_00105594\(piVar3,piVar3\[0x21\]\);$	+2	all	none
+use	Scheduler__addOperandDependencyEdges	piVar10	maskSource	INFERRED	operandVReg, or operand 1 of it when it is a projection: the instruction whose thread-model flag goes into edge + 0x1c	^\s*piVar10\ =\ piVar3;$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	piVar10	maskSource	INFERRED	operandVReg, or operand 1 of it when it is a projection: the instruction whose thread-model flag goes into edge + 0x1c	^\s*piVar10\ =\ \(int\ \*\)FUN_00105594\(piVar3,1\);$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	piVar10	maskSource	INFERRED	operandVReg, or operand 1 of it when it is a projection: the instruction whose thread-model flag goes into edge + 0x1c	^\s*(?:uVar18|arena)\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)(?:param_1|scheduler)\[3\]\ \+\ 0x20\)\)\(\(int\ \*\)(?:param_1|scheduler)\[3\],piVar10\);$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	piVar10	appendSlot	INFERRED	new slot at the end of the edge vector	^\s*piVar10\ =\ \(int\ \*\)\(uVar17\ \*\ 4\ \+\ puVar19\[2\]\);$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	piVar10	appendSlot	INFERRED	new slot at the end of the edge vector	^\s*piVar10\ =\ \(int\ \*\)FUN_0019423c\(puVar19,uVar17\);$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	piVar10	appendSlot	INFERRED	new slot at the end of the edge vector	^\s*\*piVar10\ =\ \(int\)(?:puVar13|edge);$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	piVar10	appendSlot	INFERRED	new slot at the end of the edge vector	^\s*piVar10\ =\ \(int\ \*\)\(uVar17\ \*\ 4\ \+\ puVar19\[2\]\);$@2	+1	all	none
+use	Scheduler__addOperandDependencyEdges	piVar10	appendSlot	INFERRED	new slot at the end of the edge vector	^\s*piVar10\ =\ \(int\ \*\)FUN_0019423c\(puVar19,uVar17\);$@2	+1	all	none
+use	Scheduler__addOperandDependencyEdges	piVar10	appendSlot	INFERRED	new slot at the end of the edge vector	^\s*\*piVar10\ =\ \(int\)(?:puVar13|edge);$@2	+1	all	none
+use	Scheduler__addOperandDependencyEdges	piVar3	edgeA	INFERRED	data edge taken from edgeList	^\s*piVar3\ =\ \(int\ \*\)\*puVar6;$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	piVar3	edgeA	INFERRED	data edge taken from edgeList	^\s*if\ \(\(\*\(uint\ \*\)\(\*\(int\ \*\)\(\*piVar3\ \+\ 0x38\)\ \+\ 0xc\)\ \&$	+2	all	none
+use	Scheduler__addOperandDependencyEdges	piVar3	edgeA	INFERRED	data edge taken from edgeList	^\s*iVar16\ =\ \*piVar3;$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	piVar3	edgeA	INFERRED	data edge taken from edgeList	^\s*iVar16\ =\ \*piVar3;$@2	+1	all	none
+use	Scheduler__addOperandDependencyEdges	piVar3	appendSlot2	INFERRED	new slot at the end of the edge vector	^\s*piVar3\ =\ \(int\ \*\)\(uVar17\ \*\ 4\ \+\ puVar19\[2\]\);$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	piVar3	appendSlot2	INFERRED	new slot at the end of the edge vector	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar19,uVar17\);$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	piVar3	appendSlot2	INFERRED	new slot at the end of the edge vector	^\s*\*piVar3\ =\ \(int\)\(puVar6\ \+\ 1\);$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	piVar3	appendSlot2	INFERRED	new slot at the end of the edge vector	^\s*piVar3\ =\ \(int\ \*\)\(uVar17\ \*\ 4\ \+\ puVar19\[2\]\);$@2	+1	all	none
+use	Scheduler__addOperandDependencyEdges	piVar3	appendSlot2	INFERRED	new slot at the end of the edge vector	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar19,uVar17\);$@2	+1	all	none
+use	Scheduler__addOperandDependencyEdges	piVar3	appendSlot2	INFERRED	new slot at the end of the edge vector	^\s*\*piVar3\ =\ \(int\)\(puVar6\ \+\ 1\);$@2	+1	all	none
+use	Scheduler__addOperandDependencyEdges	piVar7	producerSlot	INFERRED	slot of scheduler[6][producer index]	^\s*piVar7\ =\ \(int\ \*\)\(uVar17\ \*\ 4\ \+\ puVar19\[2\]\);$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	piVar7	producerSlot	INFERRED	slot of scheduler[6][producer index]	^\s*piVar7\ =\ \(int\ \*\)FUN_0019423c\(puVar19,uVar17\);$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	piVar7	producerSlot	INFERRED	slot of scheduler[6][producer index]	^\s*(?:iVar4|producerNode)\ =\ \*piVar7;$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	piVar7	edgeListSlot	INFERRED	slot of edgeList receiving the new edge	^\s*piVar7\ =\ puVar6\ \+\ 2;$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	piVar7	edgeListSlot	INFERRED	slot of edgeList receiving the new edge	^\s*\*piVar7\ =\ \(int\)(?:puVar13|edge);$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	piVar7	edgeListSlot	INFERRED	slot of edgeList receiving the new edge	^\s*piVar7\ =\ piVar7\ \+\ 1;$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	piVar7	edgeB	INFERRED	data edge taken from edgeList	^\s*piVar7\ =\ \(int\ \*\)\*(?:puVar9|edgeAlloc);$	+3	all	none
+use	Scheduler__addOperandDependencyEdges	piVar7	edgeB	INFERRED	data edge taken from edgeList	^\s*iVar11\ =\ \*piVar7;$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	piVar7	edgeB	INFERRED	data edge taken from edgeList	^\s*iVar11\ =\ \*piVar7;$@2	+1	all	none
+use	Scheduler__addOperandDependencyEdges	piVar7	producerSlot	INFERRED	slot of scheduler[6][producer index]	^\s*piVar7\ =\ \(int\ \*\)\(uVar17\ \*\ 4\ \+\ puVar19\[2\]\);$@2	+1	all	none
+use	Scheduler__addOperandDependencyEdges	piVar7	producerSlot	INFERRED	slot of scheduler[6][producer index]	^\s*piVar7\ =\ \(int\ \*\)FUN_0019423c\(puVar19,uVar17\);$@2	+1	all	none
+use	Scheduler__addOperandDependencyEdges	piVar7	producerSlot	INFERRED	slot of scheduler[6][producer index]	^\s*(?:iVar4|producerNode)\ =\ \*piVar7;$@2	+1	all	none
+use	Scheduler__addOperandDependencyEdges	puVar14	appendSlot3	INFERRED	new slot at the end of the edge vector	^\s*puVar14\ =\ \(undefined4\ \*\)\(uVar17\ \*\ 4\ \+\ puVar19\[2\]\);$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	puVar14	appendSlot3	INFERRED	new slot at the end of the edge vector	^\s*puVar14\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar19,uVar17\);$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	puVar14	appendSlot3	INFERRED	new slot at the end of the edge vector	^\s*\*puVar14\ =\ (?:puVar13|edge)\ \+\ 1;$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	puVar14	appendSlot3	INFERRED	new slot at the end of the edge vector	^\s*puVar14\ =\ \(undefined4\ \*\)\(uVar17\ \*\ 4\ \+\ puVar19\[2\]\);$@2	+1	all	none
+use	Scheduler__addOperandDependencyEdges	puVar14	appendSlot3	INFERRED	new slot at the end of the edge vector	^\s*puVar14\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar19,uVar17\);$@2	+1	all	none
+use	Scheduler__addOperandDependencyEdges	puVar14	appendSlot3	INFERRED	new slot at the end of the edge vector	^\s*\*puVar14\ =\ (?:puVar13|edge)\ \+\ 1;$@2	+1	all	none
+use	Scheduler__addOperandDependencyEdges	puVar19	allNodes	CONFIRMED	scheduler[6]: vector of all nodes	^\s*puVar19\ =\ \(uint\ \*\)(?:param_1|scheduler)\[6\];$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	puVar19	allNodes	CONFIRMED	scheduler[6]: vector of all nodes	^\s*if\ \(uVar17\ <\ \*puVar19\)\ \{$	+2	all	none
+use	Scheduler__addOperandDependencyEdges	puVar19	allNodes	CONFIRMED	scheduler[6]: vector of all nodes	^\s*_memset\(uVar12\ \*\ 4\ \+\ puVar19\[2\],0,\(uVar17\ \-\ uVar12\)\ \*\ 4\ \+\ 4\);$	+2	all	none
+use	Scheduler__addOperandDependencyEdges	puVar19	allNodes	CONFIRMED	scheduler[6]: vector of all nodes	^\s*piVar7\ =\ \(int\ \*\)\(uVar17\ \*\ 4\ \+\ puVar19\[2\]\);$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	puVar19	allNodes	CONFIRMED	scheduler[6]: vector of all nodes	^\s*piVar7\ =\ \(int\ \*\)FUN_0019423c\(puVar19,uVar17\);$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	puVar19	producerSuccEdges	CONFIRMED	producerNode + 0x40: successor edge vector	^\s*puVar19\ =\ \*\(uint\ \*\*\)\((?:iVar4|producerNode)\ \+\ 0x40\);$	+6	all	none
+use	Scheduler__addOperandDependencyEdges	puVar19	producerSuccEdges	CONFIRMED	producerNode + 0x40: successor edge vector	^\s*piVar10\ =\ \(int\ \*\)FUN_0019423c\(puVar19,uVar17\);$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	puVar19	consumerPredEdges	CONFIRMED	consumerNode + 0x44: predecessor edge vector	^\s*puVar19\ =\ \*\(uint\ \*\*\)\((?:param_2|consumerNode)\ \+\ 0x44\);$	+6	all	none
+use	Scheduler__addOperandDependencyEdges	puVar19	consumerPredEdges	CONFIRMED	consumerNode + 0x44: predecessor edge vector	^\s*piVar10\ =\ \(int\ \*\)FUN_0019423c\(puVar19,uVar17\);$@2	+1	all	none
+use	Scheduler__addOperandDependencyEdges	puVar19	writerBSuccEdges	CONFIRMED	edge from-node + 0x40: successor edge vector	^\s*puVar19\ =\ \*\(uint\ \*\*\)\((?:puVar13|edge)\[1\]\ \+\ 0x40\);$	+6	all	none
+use	Scheduler__addOperandDependencyEdges	puVar19	writerBSuccEdges	CONFIRMED	edge from-node + 0x40: successor edge vector	^\s*puVar14\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar19,uVar17\);$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	puVar19	writerAPredEdges	CONFIRMED	edge to-node + 0x44: predecessor edge vector	^\s*puVar19\ =\ \*\(uint\ \*\*\)\((?:puVar13|edge)\[2\]\ \+\ 0x44\);$	+6	all	none
+use	Scheduler__addOperandDependencyEdges	puVar19	writerAPredEdges	CONFIRMED	edge to-node + 0x44: predecessor edge vector	^\s*puVar14\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar19,uVar17\);$@2	+1	all	none
+use	Scheduler__addOperandDependencyEdges	puVar19	producerSuccEdges	CONFIRMED	producerNode + 0x40: successor edge vector	^\s*puVar19\ =\ \*\(uint\ \*\*\)\((?:iVar4|producerNode)\ \+\ 0x40\);$@2	+6	all	none
+use	Scheduler__addOperandDependencyEdges	puVar19	producerSuccEdges	CONFIRMED	producerNode + 0x40: successor edge vector	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar19,uVar17\);$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	puVar19	consumerPredEdges	CONFIRMED	consumerNode + 0x44: predecessor edge vector	^\s*puVar19\ =\ \*\(uint\ \*\*\)\((?:param_2|consumerNode)\ \+\ 0x44\);$@2	+6	all	none
+use	Scheduler__addOperandDependencyEdges	puVar19	consumerPredEdges	CONFIRMED	consumerNode + 0x44: predecessor edge vector	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar19,uVar17\);$@2	+1	all	none
+use	Scheduler__addOperandDependencyEdges	puVar19	allNodes	CONFIRMED	scheduler[6]: vector of all nodes	^\s*puVar19\ =\ \(uint\ \*\)(?:param_1|scheduler)\[6\];$@2	+1	all	none
+use	Scheduler__addOperandDependencyEdges	puVar19	allNodes	CONFIRMED	scheduler[6]: vector of all nodes	^\s*if\ \(uVar17\ <\ \*puVar19\)\ \{$@8	+2	all	none
+use	Scheduler__addOperandDependencyEdges	puVar19	allNodes	CONFIRMED	scheduler[6]: vector of all nodes	^\s*_memset\(uVar12\ \*\ 4\ \+\ puVar19\[2\],0,\(uVar17\ \-\ uVar12\)\ \*\ 4\ \+\ 4\);$@2	+2	all	none
+use	Scheduler__addOperandDependencyEdges	puVar19	allNodes	CONFIRMED	scheduler[6]: vector of all nodes	^\s*piVar7\ =\ \(int\ \*\)\(uVar17\ \*\ 4\ \+\ puVar19\[2\]\);$@2	+1	all	none
+use	Scheduler__addOperandDependencyEdges	puVar19	allNodes	CONFIRMED	scheduler[6]: vector of all nodes	^\s*piVar7\ =\ \(int\ \*\)FUN_0019423c\(puVar19,uVar17\);$@2	+1	all	none
+use	Scheduler__addOperandDependencyEdges	puVar6	maskCursor	INFERRED	walks the mask / edge list starting at local_88	^\s*puVar6\ =\ \&local_88;$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	puVar6	maskCursor	INFERRED	walks the mask / edge list starting at local_88	^\s*piVar7\ =\ puVar6\ \+\ 2;$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	puVar6	maskCursor	INFERRED	walks the mask / edge list starting at local_88	^\s*puVar6\ =\ puVar6\ \+\ 1;$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	puVar6	edgeListCursor	INFERRED	walks edgeList while kind-3 edges are added	^\s*puVar6\ =\ local_80;$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	puVar6	edgeListCursor	INFERRED	walks edgeList while kind-3 edges are added	^\s*piVar3\ =\ \(int\ \*\)\*puVar6;$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	puVar6	edgeListCursor	INFERRED	walks edgeList while kind-3 edges are added	^\s*puVar6\ =\ puVar6\ \+\ 1;$@2	+1	all	none
+use	Scheduler__addOperandDependencyEdges	puVar6	singleEdgeAlloc	CONFIRMED	Arena__alloc(arena, 0x24): the new DepEdge on the paths without a component split; edge pointer = alloc + 1	^\s*puVar6\ =\ \(undefined4\ \*\)FUN_00193e18\((?:uVar18|arena),0x24\);$	+10	all	none
+use	Scheduler__addOperandDependencyEdges	puVar6	singleEdgeAlloc	CONFIRMED	Arena__alloc(arena, 0x24): the new DepEdge on the paths without a component split; edge pointer = alloc + 1	^\s*puVar6\[5\]\ =\ (?:param_4|operandIndex);$	+4	all	none
+use	Scheduler__addOperandDependencyEdges	puVar6	singleEdgeAlloc	CONFIRMED	Arena__alloc(arena, 0x24): the new DepEdge on the paths without a component split; edge pointer = alloc + 1	^\s*puVar6\ =\ \(undefined4\ \*\)FUN_00193e18\((?:uVar18|arena),0x24\);$@2	+10	all	none
+use	Scheduler__addOperandDependencyEdges	puVar6	singleEdgeAlloc	CONFIRMED	Arena__alloc(arena, 0x24): the new DepEdge on the paths without a component split; edge pointer = alloc + 1	^\s*puVar6\[4\]\ =\ (?:uVar18|arena);$@2	+2	all	none
+use	Scheduler__addOperandDependencyEdges	puVar6	singleEdgeAlloc	CONFIRMED	Arena__alloc(arena, 0x24): the new DepEdge on the paths without a component split; edge pointer = alloc + 1	^\s*\*piVar3\ =\ \(int\)\(puVar6\ \+\ 1\);$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	puVar6	singleEdgeAlloc	CONFIRMED	Arena__alloc(arena, 0x24): the new DepEdge on the paths without a component split; edge pointer = alloc + 1	^\s*\*piVar3\ =\ \(int\)\(puVar6\ \+\ 1\);$@2	+1	all	none
+use	Scheduler__addOperandDependencyEdges	uVar12	vectorCount	INFERRED	vector count word	^\s*uVar12\ =\ puVar19\[1\];$	+3	all	none
+use	Scheduler__addOperandDependencyEdges	uVar12	vectorCount	INFERRED	vector count word	^\s*uVar12\ =\ puVar19\[1\];$@2	+3	all	none
+use	Scheduler__addOperandDependencyEdges	uVar17	producerIndex	INFERRED	operandVReg[0x54]: index of the producer instruction's node in scheduler[6]	^\s*uVar17\ =\ piVar3\[0x54\];$	+2	all	none
+use	Scheduler__addOperandDependencyEdges	uVar17	producerIndex	INFERRED	operandVReg[0x54]: index of the producer instruction's node in scheduler[6]	^\s*if\ \(uVar12\ <=\ uVar17\)\ \{$	+3	all	none
+use	Scheduler__addOperandDependencyEdges	uVar17	producerIndex	INFERRED	operandVReg[0x54]: index of the producer instruction's node in scheduler[6]	^\s*piVar7\ =\ \(int\ \*\)\(uVar17\ \*\ 4\ \+\ puVar19\[2\]\);$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	uVar17	producerIndex	INFERRED	operandVReg[0x54]: index of the producer instruction's node in scheduler[6]	^\s*piVar7\ =\ \(int\ \*\)FUN_0019423c\(puVar19,uVar17\);$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	uVar17	vectorCount2	INFERRED	vector count word	^\s*uVar17\ =\ puVar19\[1\];$	+5	all	none
+use	Scheduler__addOperandDependencyEdges	uVar17	vectorCount2	INFERRED	vector count word	^\s*piVar10\ =\ \(int\ \*\)FUN_0019423c\(puVar19,uVar17\);$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	uVar17	vectorCount2	INFERRED	vector count word	^\s*uVar17\ =\ puVar19\[1\];$@2	+5	all	none
+use	Scheduler__addOperandDependencyEdges	uVar17	vectorCount2	INFERRED	vector count word	^\s*piVar10\ =\ \(int\ \*\)FUN_0019423c\(puVar19,uVar17\);$@2	+1	all	none
+use	Scheduler__addOperandDependencyEdges	uVar17	remainingLanes	INFERRED	lanes of the operand not yet covered, after subtracting the lanes the producer provides	^\s*uVar17\ =\ \(\(uint\)\*\(byte\ \*\)\(\(int\)\&local_88\ \+\ iVar16\ \+\ 3\)\ <<\ 0x18\ \|$	+4	all	none
+use	Scheduler__addOperandDependencyEdges	uVar17	remainingLanes	INFERRED	lanes of the operand not yet covered, after subtracting the lanes the producer provides	^\s*local_88\ =\ uVar17\ \*\ 0x1000000\ \|\ \(uVar17\ \&\ 0xff00\)\ <<\ 8\ \|\ uVar17\ >>\ 8\ \&\ 0xff00\ \|$	+2	all	none
+use	Scheduler__addOperandDependencyEdges	uVar17	vectorCount2	INFERRED	vector count word	^\s*uVar17\ =\ puVar19\[1\];$@3	+5	all	none
+use	Scheduler__addOperandDependencyEdges	uVar17	vectorCount2	INFERRED	vector count word	^\s*puVar14\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar19,uVar17\);$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	uVar17	vectorCount2	INFERRED	vector count word	^\s*uVar17\ =\ puVar19\[1\];$@4	+5	all	none
+use	Scheduler__addOperandDependencyEdges	uVar17	vectorCount2	INFERRED	vector count word	^\s*puVar14\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar19,uVar17\);$@2	+1	all	none
+use	Scheduler__addOperandDependencyEdges	uVar17	vectorCount2	INFERRED	vector count word	^\s*uVar17\ =\ puVar19\[1\];$@5	+5	all	none
+use	Scheduler__addOperandDependencyEdges	uVar17	vectorCount2	INFERRED	vector count word	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar19,uVar17\);$	+1	all	none
+use	Scheduler__addOperandDependencyEdges	uVar17	vectorCount2	INFERRED	vector count word	^\s*uVar17\ =\ puVar19\[1\];$@6	+5	all	none
+use	Scheduler__addOperandDependencyEdges	uVar17	vectorCount2	INFERRED	vector count word	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar19,uVar17\);$@2	+1	all	none
+use	Scheduler__addOperandDependencyEdges	uVar17	producerIndex	INFERRED	operandVReg[0x54]: index of the producer instruction's node in scheduler[6]	^\s*uVar17\ =\ piVar3\[0x54\];$@2	+2	all	none
+use	Scheduler__addOperandDependencyEdges	uVar17	producerIndex	INFERRED	operandVReg[0x54]: index of the producer instruction's node in scheduler[6]	^\s*if\ \(uVar12\ <=\ uVar17\)\ \{$@2	+3	all	none
+use	Scheduler__addOperandDependencyEdges	uVar17	producerIndex	INFERRED	operandVReg[0x54]: index of the producer instruction's node in scheduler[6]	^\s*piVar7\ =\ \(int\ \*\)\(uVar17\ \*\ 4\ \+\ puVar19\[2\]\);$@2	+1	all	none
+use	Scheduler__addOperandDependencyEdges	uVar17	producerIndex	INFERRED	operandVReg[0x54]: index of the producer instruction's node in scheduler[6]	^\s*piVar7\ =\ \(int\ \*\)FUN_0019423c\(puVar19,uVar17\);$@2	+1	all	none
+local	Scheduler__addOperandDependencyEdges	local_84	coveredLanes	INFERRED	producer write mask & remaining lanes: stored at edge + 0x18 (component bytes)
+local	Scheduler__addOperandDependencyEdges	local_80	edgeList	INFERRED	up to six data edges created for this operand

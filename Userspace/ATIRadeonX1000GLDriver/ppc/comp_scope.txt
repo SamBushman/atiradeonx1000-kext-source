@@ -147,7 +147,7 @@ FUN_0013719c compiler
 HwLimits__computeBlockLiveness compiler
 FUN_00147f54 compiler
 FUN_00149de4 compiler
-FUN_0016c1fc compiler
+Scheduler__assignBundleRegisters compiler
 FUN_001746c8 compiler
 FUN_0017a130 compiler
 FUN_0017ae28 compiler

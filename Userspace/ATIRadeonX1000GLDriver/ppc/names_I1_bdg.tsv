@@ -1,0 +1,471 @@
+use	Scheduler__buildDependencyGraph	bVar1	hasLoopIndexSource	INFERRED	set when a source operand is a loop-index load (class 44); then ordering edges of kind 5 are added around it	^\s*bVar1\ =\ false;$	+1	all	none
+use	Scheduler__buildDependencyGraph	bVar1	hasLoopIndexSource	INFERRED	set when a source operand is a loop-index load (class 44); then ordering edges of kind 5 are added around it	^\s*bVar1\ =\ true;$	+1	all	none
+use	Scheduler__buildDependencyGraph	bVar1	hasLoopIndexSource	INFERRED	set when a source operand is a loop-index load (class 44); then ordering edges of kind 5 are added around it	^\s*if\ \(bVar1\)\ \{$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar7	schedulerReorderEnabled	CONFIRMED	Compiler__isOptionEnabled(compiler, 0x24): OPT_SCHEDULER_REORDER; when off the nodes are chained in program order with kind-1 edges	^\s*iVar7\ =\ FUN_000e07dc\(\*(?:param_1|scheduler),0x24\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar7	schedulerReorderEnabled	CONFIRMED	Compiler__isOptionEnabled(compiler, 0x24): OPT_SCHEDULER_REORDER; when off the nodes are chained in program order with kind-1 edges	^\s*if\ \(iVar7\ ==\ 0\)\ \{$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar7	isEntryOrExit	INFERRED	IRInst vslot 13 (isEntry) then vslot 14 (isExit): entry/exit pseudo instructions get no node	^\s*iVar7\ =\ \(\*\*\(code\ \*\*\)\(\*(?:piVar14|inst)\ \+\ 0x34\)\)\((?:piVar14|inst)\);$	+2	all	none
+use	Scheduler__buildDependencyGraph	iVar7	needsNoNode	INFERRED	IRInst__needsNoSchedulerNode(inst)	^\s*iVar7\ =\ \(\(int\ \(\*\)\(\)\)FUN_00164df4\)\((?:piVar14|inst)\);$	+2	all	none
+use	Scheduler__buildDependencyGraph	iVar7	trackedRegisterTest	INFERRED	IRInst__writesTrackedRegister, then ThreadModel slots 0x2c and 0x28 on the instruction: any of them makes the block need the register hash	^\s*iVar7\ =\ \(\(int\ \(\*\)\(\)\)FUN_00164fc0\)\((?:piVar14|inst)\);$	+6	all	none
+use	Scheduler__buildDependencyGraph	iVar7	fieldsLeft	INFERRED	countdown while zeroing the four per-component consumer counters of the new SchedNode	^\s*iVar7\ =\ 4;$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar7	fieldsLeft	INFERRED	countdown while zeroing the four per-component consumer counters of the new SchedNode	^\s*iVar7\ =\ iVar7\ \+\ \-1;$	+2	all	none
+use	Scheduler__buildDependencyGraph	iVar7	operandIndex	INFERRED	source operand number 1..inst[0x21]	^\s*iVar7\ =\ 1;$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar7	operandIndex	INFERRED	source operand number 1..inst[0x21]	^\s*\(\(int\ \(\*\)\(\)\)FUN_00168468\)\((?:param_1|scheduler),(?:puVar24|schedNode),(?:piVar14|inst),iVar7,0\);$	+2	all	none
+use	Scheduler__buildDependencyGraph	iVar7	operandIndex	INFERRED	source operand number 1..inst[0x21]	^\s*piVar4\ =\ \(int\ \*\)FUN_00105594\((?:piVar14|inst),iVar7\);$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar7	operandIndex	INFERRED	source operand number 1..inst[0x21]	^\s*(?:uVar26|arena)\ =\ FUN_00105594\((?:piVar14|inst),iVar7\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar7	operandIndex	INFERRED	source operand number 1..inst[0x21]	^\s*piVar4\ =\ \(int\ \*\)FUN_00105594\((?:piVar14|inst),iVar7\);$@3	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar7	operandIndex	INFERRED	source operand number 1..inst[0x21]	^\s*\(\(int\ \(\*\)\(\)\)FUN_00168468\)\((?:param_1|scheduler),(?:puVar24|schedNode),piVar4,iVar7,iVar17\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar7	operandIndex	INFERRED	source operand number 1..inst[0x21]	^\s*(?:uVar26|arena)\ =\ FUN_00105594\((?:piVar14|inst),iVar7\);$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar7	operandIndex	INFERRED	source operand number 1..inst[0x21]	^\s*iVar7\ =\ iVar7\ \+\ 1;$	+2	all	none
+use	Scheduler__buildDependencyGraph	iVar7	isProjectionOfClass44	CONFIRMED	IRInst__isProjectionOfClass44 of the producer	^\s*iVar7\ =\ FUN_00104644\(\*\(undefined4\ \*\)\(iVar17\ \+\ 0x38\)\);$	+2	all	none
+use	Scheduler__buildDependencyGraph	iVar7	isProjectionOfClass44	CONFIRMED	IRInst__isProjectionOfClass44 of the other producer	^\s*iVar7\ =\ FUN_00104644\(\*\(undefined4\ \*\)\(iVar16\ \+\ 0x38\)\);$	+2	all	none
+use	Scheduler__buildDependencyGraph	iVar7	nodeByteOffset	INFERRED	4 * node index into the all-nodes vector	^\s*iVar7\ =\ uVar13\ \*\ 4;$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar7	nodeByteOffset	INFERRED	4 * node index into the all-nodes vector	^\s*piVar4\ =\ \(int\ \*\)\(iVar7\ \+\ (?:puVar25|lastWriterSet)\[2\]\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar7	nodeByteOffset	INFERRED	4 * node index into the all-nodes vector	^\s*iVar7\ =\ iVar7\ \+\ \-4;$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar7	nodeByteOffset	INFERRED	4 * node index into the all-nodes vector (backward walk)	^\s*iVar7\ =\ (?:uVar20|nodeIndex)\ \*\ 4;$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar7	nodeByteOffset	INFERRED	4 * node index into the all-nodes vector (backward walk)	^\s*piVar4\ =\ \(int\ \*\)\(iVar7\ \+\ puVar27\[2\]\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar7	nodeByteOffset	INFERRED	4 * node index into the all-nodes vector (backward walk)	^\s*iVar7\ =\ iVar7\ \+\ \-4;$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar7	prevNodeInst	INFERRED	instruction of the previous node in program order (serial chain edge)	^\s*iVar7\ =\ \*\(int\ \*\)\(iVar17\ \+\ 0x38\);$	+2	all	none
+use	Scheduler__buildDependencyGraph	iVar7	prevNodeInst	INFERRED	instruction of the previous node in program order (serial chain edge)	^\s*(?:uVar26|arena)\ =\ \(\(int\ \(\*\)\(\)\)FUN_00164e7c\)\((?:param_1|scheduler),iVar7,(?:piVar14|inst),0,0,1\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar7	newVirtualReg	INFERRED	compiler counter (+0x3c4) incremented and stored in inst[0x25]	^\s*iVar7\ =\ \*\(int\ \*\)\(\*(?:param_1|scheduler)\ \+\ 0x3c4\)\ \+\ 1;$	+2	all	none
+use	Scheduler__buildDependencyGraph	iVar7	newVirtualReg	INFERRED	compiler counter (+0x3c4) incremented and stored in inst[0x25]	^\s*(?:piVar14|inst)\[0x25\]\ =\ iVar7;$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar7	newVirtualReg	INFERRED	compiler counter (+0x3c4) incremented and stored in inst[0x25]	^\s*iVar7\ =\ \*\(int\ \*\)\(\*(?:param_1|scheduler)\ \+\ 0x3c4\)\ \+\ 1;$@2	+3	all	none
+use	Scheduler__buildDependencyGraph	iVar7	flagBit0Result	INFERRED	RegKind__flagBit0(inst[0x26])	^\s*if\ \(\(\(\(\((?:piVar14|inst)\[0x20\]\ ==\ 0\)\ \|\|\ \(iVar7\ =\ FUN_00126760\((?:piVar14|inst)\[0x26\]\),\ iVar7\ ==\ 0\)\)\ \|\|$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar7	isUndefined	INFERRED	IRInst vslot 20 (isUndefined)	^\s*\(\(iVar7\ =\ \(\*\*\(code\ \*\*\)\(\*(?:piVar14|inst)\ \+\ 0x50\)\)\((?:piVar14|inst)\),\ iVar7\ !=\ 0\ \|\|$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar7	schedulerAllocRegEnabled	CONFIRMED	Compiler__isOptionEnabled(compiler, 0x25) OPT_SCHEDULER_ALLOC_REG	^\s*\(\(\((?:piVar14|inst)\[5\]\ \&\ 0x20U\)\ ==\ 0\ \&\&\ \(iVar7\ =\ FUN_000e07dc\(\*(?:param_1|scheduler),0x25\),\ iVar7\ !=\ 0\)\)\)\)$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar7	flagBit0Result	INFERRED	RegKind__flagBit0(inst[0x26])	^\s*\(iVar7\ =\ FUN_00126760\((?:piVar14|inst)\[0x26\]\),\ iVar7\ !=\ 0\)\ \&\&$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar7	isUndefined	INFERRED	IRInst vslot 20 (isUndefined)	^\s*\(iVar7\ =\ \(\*\*\(code\ \*\*\)\(\*(?:piVar14|inst)\ \+\ 0x50\)\)\((?:piVar14|inst)\),\ iVar7\ ==\ 0\)\ \&\&$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar7	schedulerAllocRegEnabled	CONFIRMED	Compiler__isOptionEnabled(compiler, 0x25) OPT_SCHEDULER_ALLOC_REG	^\s*\(iVar7\ =\ FUN_000e07dc\(\*(?:param_1|scheduler),0x25\),\ iVar7\ ==\ 0\)\)\)\ \{$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar7	sizeAttemptsLeft	INFERRED	countdown bounding the doubling loop that sizes the hash table	^\s*iVar7\ =\ 0x20;$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar7	sizeAttemptsLeft	INFERRED	countdown bounding the doubling loop that sizes the hash table	^\s*iVar7\ =\ iVar7\ \+\ \-1;$@2	+2	all	none
+use	Scheduler__buildDependencyGraph	iVar7	hashBuckets	INFERRED	bucket array (hash alloc + 0xc) walked while freeing the hash set	^\s*iVar7\ =\ puVar11\[3\];$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar7	hashBuckets	INFERRED	bucket array (hash alloc + 0xc) walked while freeing the hash set	^\s*iVar7\ =\ puVar11\[3\];$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar7	hashBuckets	INFERRED	bucket array (hash alloc + 0xc) walked while freeing the hash set	^\s*iVar17\ =\ \*\(int\ \*\)\((?:uVar20|nodeIndex)\ \*\ 4\ \+\ iVar7\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar7	hashBuckets	INFERRED	bucket array (hash alloc + 0xc) walked while freeing the hash set	^\s*iVar7\ =\ puVar11\[3\];$@3	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar7	hashBuckets	INFERRED	bucket array (hash alloc + 0xc) walked while freeing the hash set	^\s*FUN_00193cc0\(puVar11\[6\],iVar7\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar5	nextInst	INFERRED	inst[2]: the next instruction of the block	^\s*piVar5\ =\ piVar4;$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar5	nextInst	INFERRED	inst[2]: the next instruction of the block	^\s*piVar5\ =\ \(int\ \*\)(?:piVar14|inst)\[2\];$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar5	nextInst	INFERRED	inst[2]: the next instruction of the block	^\s*piVar5\ =\ \(int\ \*\)(?:piVar14|inst)\[2\];$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar5	nextInst	INFERRED	inst[2]: the next instruction of the block	^\s*piVar5\ =\ \(int\ \*\)(?:piVar14|inst)\[2\];$@3	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar5	nextInst	INFERRED	inst[2]: the next instruction of the block	^\s*piVar4\ =\ \(int\ \*\)piVar5\[2\];$	+3	all	none
+use	Scheduler__buildDependencyGraph	piVar4	instAfterNext	INFERRED	nextInst[2]: loop termination test	^\s*piVar4\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\((?:param_1|scheduler)\[4\]\ \+\ 0x98\)\)\[2\];$	+2	all	none
+use	Scheduler__buildDependencyGraph	piVar4	instAfterNext	INFERRED	nextInst[2]: loop termination test	^\s*piVar5\ =\ piVar4;$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	instAfterNext	INFERRED	nextInst[2]: loop termination test	^\s*piVar4\ =\ \(int\ \*\)piVar5\[2\];$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	sourceDef	INFERRED	IRInst__getOperandSource(inst, operandIndex): the instruction defining the source	^\s*piVar4\ =\ \(int\ \*\)FUN_00105594\((?:piVar14|inst),iVar7\);$	+2	all	none
+use	Scheduler__buildDependencyGraph	piVar4	sourceDef	INFERRED	IRInst__getOperandSource(inst, operandIndex)	^\s*piVar4\ =\ \(int\ \*\)FUN_00105594\((?:piVar14|inst),iVar7\);$@2	+2	all	none
+use	Scheduler__buildDependencyGraph	piVar4	sourceDef	INFERRED	IRInst__getOperandSource(inst, operandIndex); replaced by the mix/presub operand 1 when that is a presub	^\s*piVar4\ =\ \(int\ \*\)FUN_00105594\((?:piVar14|inst),iVar7\);$@3	+2	all	none
+use	Scheduler__buildDependencyGraph	piVar4	sourceDef	INFERRED	IRInst__getOperandSource(inst, operandIndex); replaced by the mix/presub operand 1 when that is a presub	^\s*piVar5\ =\ \(int\ \*\)FUN_00105594\(piVar4,1\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	sourceDef	INFERRED	IRInst__getOperandSource(inst, operandIndex); replaced by the mix/presub operand 1 when that is a presub	^\s*piVar4\ =\ \(int\ \*\)FUN_00105594\(piVar4,1\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	sourceDef	INFERRED	IRInst__getOperandSource(inst, operandIndex); replaced by the mix/presub operand 1 when that is a presub	^\s*for\ \(iVar17\ =\ 1;\ iVar16\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x14\)\)\(piVar4\),\ iVar17\ <=\ iVar16;$	+3	all	none
+use	Scheduler__buildDependencyGraph	piVar5	presubSource	INFERRED	operand 1 of a mix source	^\s*piVar5\ =\ \(int\ \*\)FUN_00105594\(piVar4,1\);$	+2	all	none
+use	Scheduler__buildDependencyGraph	iVar17	isPresub	INFERRED	IRInst vslot 23 (isPresub) of the source	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x5c\)\)\(piVar4\);$	+2	all	none
+use	Scheduler__buildDependencyGraph	iVar17	isMix	INFERRED	IRInst vslot 24 (isMix) of the source	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x60\)\)\(piVar4\);$	+2	all	none
+use	Scheduler__buildDependencyGraph	iVar17	isProjectionOfClass26or3a	CONFIRMED	IRInst__isProjectionOfClass26or3a of the source	^\s*iVar17\ =\ FUN_001045e4\((?:uVar26|arena)\);$	+2	all	none
+use	Scheduler__buildDependencyGraph	iVar17	targetSlot53Result	INFERRED	HwLimits slot 0xd4 on the target description	^\s*\(iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(\*(?:param_1|scheduler)\ \+\ 0x30c\)\ \+\ 0xd4\)\)$	+2	all	none
+use	Scheduler__buildDependencyGraph	iVar17	isMix	INFERRED	IRInst vslot 24 (isMix) of the source	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x60\)\)\(piVar4\);$@2	+2	all	none
+use	Scheduler__buildDependencyGraph	iVar17	isPresub	INFERRED	IRInst vslot 23 (isPresub) of the mix operand	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x5c\)\)\(piVar5\);$	+2	all	none
+use	Scheduler__buildDependencyGraph	iVar16	sourceOperandCount	INFERRED	IRInst vslot 5 (getNumSources) of the source	^\s*for\ \(iVar17\ =\ 1;\ iVar16\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x14\)\)\(piVar4\),\ iVar17\ <=\ iVar16;$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar17	sourceOperandIndex	INFERRED	operand number of the source instruction whose own sources also get edges	^\s*for\ \(iVar17\ =\ 1;\ iVar16\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x14\)\)\(piVar4\),\ iVar17\ <=\ iVar16;$	+3	all	none
+use	Scheduler__buildDependencyGraph	iVar17	sourceIsLoopIndexLoad	CONFIRMED	IRInst__isProjectionOfClass44 of the source	^\s*iVar17\ =\ FUN_00104644\((?:uVar26|arena)\);$	+2	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	nodePredEdges	CONFIRMED	nodeAlloc[0x12]: predecessor edge vector of the new node	^\s*(?:puVar25|lastWriterSet)\ =\ \(uint\ \*\)(?:puVar15|nodeAlloc)\[0x12\];$	+1	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	nodePredEdges	CONFIRMED	nodeAlloc[0x12]: predecessor edge vector of the new node	^\s*uVar21\ =\ (?:puVar25|lastWriterSet)\[1\];$	+1	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	nodePredEdges	CONFIRMED	nodeAlloc[0x12]: predecessor edge vector of the new node	^\s*if\ \(uVar13\ <\ \*(?:puVar25|lastWriterSet)\)\ \{$	+2	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	nodePredEdges	CONFIRMED	nodeAlloc[0x12]: predecessor edge vector of the new node	^\s*_memset\(uVar9\ \*\ 4\ \+\ (?:puVar25|lastWriterSet)\[2\],0,\(uVar13\ \-\ uVar9\)\ \*\ 4\ \+\ 4\);$	+2	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	nodePredEdges	CONFIRMED	nodeAlloc[0x12]: predecessor edge vector of the new node	^\s*puVar11\ =\ \(undefined4\ \*\)\(uVar13\ \*\ 4\ \+\ (?:puVar25|lastWriterSet)\[2\]\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	nodePredEdges	CONFIRMED	nodeAlloc[0x12]: predecessor edge vector of the new node	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\((?:puVar25|lastWriterSet),uVar13\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	nodePredEdges	CONFIRMED	nodeAlloc[0x12]: predecessor edge vector of the new node	^\s*(?:puVar25|lastWriterSet)\ =\ \(uint\ \*\)(?:puVar15|nodeAlloc)\[0x12\];$@3	+1	all	none
+use	Scheduler__buildDependencyGraph	uVar21	predEdgeCount	INFERRED	count of the new node's predecessor edges	^\s*uVar21\ =\ (?:puVar25|lastWriterSet)\[1\];$	+2	all	none
+use	Scheduler__buildDependencyGraph	uVar21	predEdgeCount	INFERRED	count of the new node's predecessor edges	^\s*\}\ while\ \(uVar21\ !=\ uVar9\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	uVar21	predEdgeCount	INFERRED	count of the new node's predecessor edges	^\s*if\ \(uVar21\ ==\ uVar13\)\ break;$	+1	all	none
+use	Scheduler__buildDependencyGraph	uVar13	predEdgeIndex	INFERRED	index into the new node's predecessor edges	^\s*uVar13\ =\ 0;$	+1	all	none
+use	Scheduler__buildDependencyGraph	uVar13	predEdgeIndex	INFERRED	index into the new node's predecessor edges	^\s*if\ \(uVar13\ <\ \*(?:puVar25|lastWriterSet)\)\ \{$	+1	all	none
+use	Scheduler__buildDependencyGraph	uVar13	predEdgeIndex	INFERRED	index into the new node's predecessor edges	^\s*if\ \(uVar9\ <=\ uVar13\)\ \{$	+3	all	none
+use	Scheduler__buildDependencyGraph	uVar13	predEdgeIndex	INFERRED	index into the new node's predecessor edges	^\s*puVar11\ =\ \(undefined4\ \*\)\(uVar13\ \*\ 4\ \+\ (?:puVar25|lastWriterSet)\[2\]\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	uVar13	predEdgeIndex	INFERRED	index into the new node's predecessor edges	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\((?:puVar25|lastWriterSet),uVar13\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	uVar13	predEdgeIndex	INFERRED	index into the new node's predecessor edges	^\s*uVar13\ =\ uVar13\ \+\ 1;$	+2	all	none
+use	Scheduler__buildDependencyGraph	uVar9	elementCount	INFERRED	vector count word read by the inlined element accessor	^\s*uVar9\ =\ (?:puVar25|lastWriterSet)\[1\];$	+3	all	none
+use	Scheduler__buildDependencyGraph	puVar11	predEdgeSlot	INFERRED	slot of the predecessor edge vector element	^\s*puVar11\ =\ \(undefined4\ \*\)\(uVar13\ \*\ 4\ \+\ (?:puVar25|lastWriterSet)\[2\]\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar11	predEdgeSlot	INFERRED	slot of the predecessor edge vector element	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\((?:puVar25|lastWriterSet),uVar13\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar11	predEdgeSlot	INFERRED	slot of the predecessor edge vector element	^\s*iVar17\ =\ \*\(int\ \*\)\*puVar11;$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar17	operandProducer	INFERRED	producer node of the predecessor edge (edge+0 is the `from` node)	^\s*iVar17\ =\ \*\(int\ \*\)\*puVar11;$	+2	all	none
+use	Scheduler__buildDependencyGraph	iVar17	operandProducer	INFERRED	producer node of the predecessor edge (edge+0 is the `from` node)	^\s*if\ \(\(iVar7\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar17\ \+\ 0x3c\)\ <\ \*\(int\ \*\)\(iVar16\ \+\ 0x3c\)\)\)\ \{$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar17	operandProducer	INFERRED	producer node of the predecessor edge (edge+0 is the `from` node)	^\s*puVar11\[1\]\ =\ iVar17;$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar17	operandProducer	INFERRED	producer node of the predecessor edge (edge+0 is the `from` node)	^\s*(?:uVar26|arena)\ =\ \(\(int\ \(\*\)\(\)\)FUN_00164e7c\)\((?:param_1|scheduler),\*\(undefined4\ \*\)\(iVar17\ \+\ 0x38\),$	+2	all	none
+use	Scheduler__buildDependencyGraph	iVar17	operandProducer	INFERRED	producer node of the predecessor edge (edge+0 is the `from` node)	^\s*(?:puVar25|lastWriterSet)\ =\ \*\(uint\ \*\*\)\(iVar17\ \+\ 0x40\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	nodePredEdges	CONFIRMED	nodeAlloc[0x12]: predecessor edge vector of the new node	^\s*(?:puVar25|lastWriterSet)\ =\ \(uint\ \*\)(?:puVar15|nodeAlloc)\[0x12\];$@2	+3	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	nodePredEdges	CONFIRMED	nodeAlloc[0x12]: predecessor edge vector of the new node	^\s*_memset\(uVar8\ \*\ 4\ \+\ (?:puVar25|lastWriterSet)\[2\],0,\(uVar9\ \-\ uVar8\)\ \*\ 4\ \+\ 4\);$	+2	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	nodePredEdges	CONFIRMED	nodeAlloc[0x12]: predecessor edge vector of the new node	^\s*puVar11\ =\ \(undefined4\ \*\)\(uVar9\ \*\ 4\ \+\ (?:puVar25|lastWriterSet)\[2\]\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	nodePredEdges	CONFIRMED	nodeAlloc[0x12]: predecessor edge vector of the new node	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\((?:puVar25|lastWriterSet),uVar9\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	uVar9	innerEdgeIndex	INFERRED	second index into the new node's predecessor edges	^\s*uVar9\ =\ 0;$	+1	all	none
+use	Scheduler__buildDependencyGraph	uVar9	innerEdgeIndex	INFERRED	second index into the new node's predecessor edges	^\s*if\ \(uVar9\ <\ \*(?:puVar25|lastWriterSet)\)\ \{$	+1	all	none
+use	Scheduler__buildDependencyGraph	uVar9	innerEdgeIndex	INFERRED	second index into the new node's predecessor edges	^\s*if\ \(uVar8\ <=\ uVar9\)\ \{$	+3	all	none
+use	Scheduler__buildDependencyGraph	uVar9	innerEdgeIndex	INFERRED	second index into the new node's predecessor edges	^\s*puVar11\ =\ \(undefined4\ \*\)\(uVar9\ \*\ 4\ \+\ (?:puVar25|lastWriterSet)\[2\]\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	uVar9	innerEdgeIndex	INFERRED	second index into the new node's predecessor edges	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\((?:puVar25|lastWriterSet),uVar9\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	uVar9	innerEdgeIndex	INFERRED	second index into the new node's predecessor edges	^\s*uVar9\ =\ uVar9\ \+\ 1;$	+2	all	none
+use	Scheduler__buildDependencyGraph	uVar8	edgeVectorCount	INFERRED	vector count word read by the inlined element accessor	^\s*uVar8\ =\ (?:puVar25|lastWriterSet)\[1\];$	+3	all	none
+use	Scheduler__buildDependencyGraph	puVar11	predEdgeSlot	INFERRED	slot of the predecessor edge vector element	^\s*puVar11\ =\ \(undefined4\ \*\)\(uVar9\ \*\ 4\ \+\ (?:puVar25|lastWriterSet)\[2\]\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar11	predEdgeSlot	INFERRED	slot of the predecessor edge vector element	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\((?:puVar25|lastWriterSet),uVar9\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar11	predEdgeSlot	INFERRED	slot of the predecessor edge vector element	^\s*iVar16\ =\ \*\(int\ \*\)\*puVar11;$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar16	loopIndexProducer	INFERRED	producer node of another predecessor edge that is a loop-index load placed after operandProducer: the kind-5 edge points at it	^\s*iVar16\ =\ \*\(int\ \*\)\*puVar11;$	+3	all	none
+use	Scheduler__buildDependencyGraph	iVar16	loopIndexProducer	INFERRED	producer node of another predecessor edge that is a loop-index load placed after operandProducer: the kind-5 edge points at it	^\s*puVar11\[2\]\ =\ iVar16;$	+3	all	none
+use	Scheduler__buildDependencyGraph	iVar16	loopIndexProducer	INFERRED	producer node of another predecessor edge that is a loop-index load placed after operandProducer: the kind-5 edge points at it	^\s*(?:puVar25|lastWriterSet)\ =\ \*\(uint\ \*\*\)\(iVar16\ \+\ 0x44\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar11	edgeAlloc	CONFIRMED	Arena__alloc(arena, 0x24): the new DepEdge; edge pointer = alloc + 1	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_00193e18\((?:uVar26|arena),0x24\);$	+10	all	none
+use	Scheduler__buildDependencyGraph	puVar11	edgeAlloc	CONFIRMED	Arena__alloc(arena, 0x24): the new DepEdge; edge pointer = alloc + 1	^\s*puVar11\[4\]\ =\ (?:uVar26|arena);$@3	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar11	edgeAlloc	CONFIRMED	Arena__alloc(arena, 0x24): the new DepEdge; edge pointer = alloc + 1	^\s*\*piVar4\ =\ \(int\)\(puVar11\ \+\ 1\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar11	edgeAlloc	CONFIRMED	Arena__alloc(arena, 0x24): the new DepEdge; edge pointer = alloc + 1	^\s*\*piVar4\ =\ \(int\)\(puVar11\ \+\ 1\);$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	producerSuccEdges	CONFIRMED	operandProducer + 0x40: successor edge vector	^\s*(?:puVar25|lastWriterSet)\ =\ \*\(uint\ \*\*\)\(iVar17\ \+\ 0x40\);$	+6	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	producerSuccEdges	CONFIRMED	operandProducer + 0x40: successor edge vector	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\((?:puVar25|lastWriterSet),uVar8\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	uVar8	edgeVectorCount	INFERRED	vector count word	^\s*uVar8\ =\ (?:puVar25|lastWriterSet)\[1\];$@2	+5	all	none
+use	Scheduler__buildDependencyGraph	uVar8	edgeVectorCount	INFERRED	vector count word	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\((?:puVar25|lastWriterSet),uVar8\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	appendSlot	INFERRED	new slot at the end of the edge vector	^\s*piVar4\ =\ \(int\ \*\)\(uVar8\ \*\ 4\ \+\ (?:puVar25|lastWriterSet)\[2\]\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	appendSlot	INFERRED	new slot at the end of the edge vector	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\((?:puVar25|lastWriterSet),uVar8\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	appendSlot	INFERRED	new slot at the end of the edge vector	^\s*\*piVar4\ =\ \(int\)\(puVar11\ \+\ 1\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	loopIndexPredEdges	CONFIRMED	loopIndexProducer + 0x44: predecessor edge vector	^\s*(?:puVar25|lastWriterSet)\ =\ \*\(uint\ \*\*\)\(iVar16\ \+\ 0x44\);$	+6	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	loopIndexPredEdges	CONFIRMED	loopIndexProducer + 0x44: predecessor edge vector	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\((?:puVar25|lastWriterSet),uVar8\);$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	uVar8	edgeVectorCount	INFERRED	vector count word	^\s*uVar8\ =\ (?:puVar25|lastWriterSet)\[1\];$@3	+5	all	none
+use	Scheduler__buildDependencyGraph	uVar8	edgeVectorCount	INFERRED	vector count word	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\((?:puVar25|lastWriterSet),uVar8\);$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	appendSlot	INFERRED	new slot at the end of the edge vector	^\s*piVar4\ =\ \(int\ \*\)\(uVar8\ \*\ 4\ \+\ (?:puVar25|lastWriterSet)\[2\]\);$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	appendSlot	INFERRED	new slot at the end of the edge vector	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\((?:puVar25|lastWriterSet),uVar8\);$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	appendSlot	INFERRED	new slot at the end of the edge vector	^\s*\*piVar4\ =\ \(int\)\(puVar11\ \+\ 1\);$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	uVar13	chainIndex	INFERRED	index of the earlier node in the all-nodes vector, walked backwards	^\s*uVar13\ =\ (?:uVar20|nodeIndex)\ \-\ 1;$	+1	all	none
+use	Scheduler__buildDependencyGraph	uVar13	chainIndex	INFERRED	index of the earlier node in the all-nodes vector, walked backwards	^\s*if\ \(\-1\ <\ \(int\)uVar13\)\ \{$	+1	all	none
+use	Scheduler__buildDependencyGraph	uVar13	chainIndex	INFERRED	index of the earlier node in the all-nodes vector, walked backwards	^\s*iVar7\ =\ uVar13\ \*\ 4;$	+1	all	none
+use	Scheduler__buildDependencyGraph	uVar13	chainIndex	INFERRED	index of the earlier node in the all-nodes vector, walked backwards	^\s*if\ \(uVar13\ <\ \*(?:puVar25|lastWriterSet)\)\ \{$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	uVar13	chainIndex	INFERRED	index of the earlier node in the all-nodes vector, walked backwards	^\s*if\ \(uVar9\ <=\ uVar13\)\ \{$@2	+3	all	none
+use	Scheduler__buildDependencyGraph	uVar13	chainIndex	INFERRED	index of the earlier node in the all-nodes vector, walked backwards	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\((?:puVar25|lastWriterSet),uVar13\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	uVar13	chainIndex	INFERRED	index of the earlier node in the all-nodes vector, walked backwards	^\s*uVar13\ =\ uVar13\ \-\ 1;$	+1	all	none
+use	Scheduler__buildDependencyGraph	uVar21	chainStep	INFERRED	number of earlier nodes already visited	^\s*uVar21\ =\ 0;$	+1	all	none
+use	Scheduler__buildDependencyGraph	uVar21	chainStep	INFERRED	number of earlier nodes already visited	^\s*uVar21\ =\ uVar21\ \+\ 1;$	+1	all	none
+use	Scheduler__buildDependencyGraph	uVar21	chainStep	INFERRED	number of earlier nodes already visited	^\s*\}\ while\ \(uVar21\ !=\ (?:uVar20|nodeIndex)\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	allNodes	CONFIRMED	scheduler[6]: vector of all nodes of the block	^\s*(?:puVar25|lastWriterSet)\ =\ \(uint\ \*\)(?:param_1|scheduler)\[6\];$	+3	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	allNodes	CONFIRMED	scheduler[6]: vector of all nodes of the block	^\s*_memset\(uVar9\ \*\ 4\ \+\ (?:puVar25|lastWriterSet)\[2\],0,\(uVar13\ \-\ uVar9\)\ \*\ 4\ \+\ 4\);$@2	+2	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	allNodes	CONFIRMED	scheduler[6]: vector of all nodes of the block	^\s*piVar4\ =\ \(int\ \*\)\(iVar7\ \+\ (?:puVar25|lastWriterSet)\[2\]\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	allNodes	CONFIRMED	scheduler[6]: vector of all nodes of the block	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\((?:puVar25|lastWriterSet),uVar13\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	uVar9	elementCount	INFERRED	vector count word	^\s*uVar9\ =\ (?:puVar25|lastWriterSet)\[1\];$@2	+3	all	none
+use	Scheduler__buildDependencyGraph	piVar4	nodeSlot	INFERRED	slot of allNodes[chainIndex]	^\s*piVar4\ =\ \(int\ \*\)\(iVar7\ \+\ (?:puVar25|lastWriterSet)\[2\]\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	nodeSlot	INFERRED	slot of allNodes[chainIndex]	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\((?:puVar25|lastWriterSet),uVar13\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	nodeSlot	INFERRED	slot of allNodes[chainIndex]	^\s*iVar17\ =\ \*piVar4;$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar17	chainNode	INFERRED	earlier node in program order	^\s*iVar17\ =\ \*piVar4;$	+2	all	none
+use	Scheduler__buildDependencyGraph	iVar17	chainNode	INFERRED	earlier node in program order	^\s*puVar11\[1\]\ =\ iVar17;$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar17	chainNode	INFERRED	earlier node in program order	^\s*(?:puVar25|lastWriterSet)\ =\ \*\(uint\ \*\*\)\(iVar17\ \+\ 0x40\);$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar16	chainNodeInst	INFERRED	instruction of chainNode	^\s*iVar16\ =\ \*\(int\ \*\)\(iVar17\ \+\ 0x38\);$	+3	all	none
+use	Scheduler__buildDependencyGraph	iVar16	chainNodeInst	INFERRED	instruction of chainNode	^\s*(?:uVar26|arena)\ =\ \(\(int\ \(\*\)\(\)\)FUN_00164e7c\)\((?:param_1|scheduler),iVar16,(?:piVar14|inst),0,0,1\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar11	edgeAlloc	CONFIRMED	Arena__alloc(arena, 0x24): the new serial-order DepEdge (kind 1)	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_00193e18\((?:uVar26|arena),0x24\);$@2	+10	all	none
+use	Scheduler__buildDependencyGraph	puVar11	edgeAlloc	CONFIRMED	Arena__alloc(arena, 0x24): the new serial-order DepEdge (kind 1)	^\s*puVar11\[4\]\ =\ (?:uVar26|arena);$@4	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar11	edgeAlloc	CONFIRMED	Arena__alloc(arena, 0x24): the new serial-order DepEdge (kind 1)	^\s*\*puVar10\ =\ puVar11\ \+\ 1;$	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar11	edgeAlloc	CONFIRMED	Arena__alloc(arena, 0x24): the new serial-order DepEdge (kind 1)	^\s*\*puVar10\ =\ puVar11\ \+\ 1;$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	uVar9	elementCount	INFERRED	vector count word	^\s*uVar9\ =\ (?:puVar25|lastWriterSet)\[1\];$@3	+5	all	none
+use	Scheduler__buildDependencyGraph	uVar9	elementCount	INFERRED	vector count word	^\s*puVar10\ =\ \(undefined4\ \*\)FUN_0019423c\((?:puVar25|lastWriterSet),uVar9\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	chainNodeSuccEdges	CONFIRMED	chainNode + 0x40: successor edge vector	^\s*(?:puVar25|lastWriterSet)\ =\ \*\(uint\ \*\*\)\(iVar17\ \+\ 0x40\);$@2	+6	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	chainNodeSuccEdges	CONFIRMED	chainNode + 0x40: successor edge vector	^\s*puVar10\ =\ \(undefined4\ \*\)FUN_0019423c\((?:puVar25|lastWriterSet),uVar9\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar10	succAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*puVar10\ =\ \(undefined4\ \*\)\(uVar9\ \*\ 4\ \+\ (?:puVar25|lastWriterSet)\[2\]\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar10	succAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*puVar10\ =\ \(undefined4\ \*\)FUN_0019423c\((?:puVar25|lastWriterSet),uVar9\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar10	succAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*\*puVar10\ =\ puVar11\ \+\ 1;$	+1	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	nodePredEdges	CONFIRMED	nodeAlloc[0x12]: predecessor edge vector of the new node	^\s*(?:puVar25|lastWriterSet)\ =\ \(uint\ \*\)(?:puVar15|nodeAlloc)\[0x12\];$@4	+6	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	nodePredEdges	CONFIRMED	nodeAlloc[0x12]: predecessor edge vector of the new node	^\s*puVar10\ =\ \(undefined4\ \*\)FUN_0019423c\((?:puVar25|lastWriterSet),uVar9\);$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	uVar9	elementCount	INFERRED	vector count word	^\s*uVar9\ =\ (?:puVar25|lastWriterSet)\[1\];$@4	+5	all	none
+use	Scheduler__buildDependencyGraph	uVar9	elementCount	INFERRED	vector count word	^\s*puVar10\ =\ \(undefined4\ \*\)FUN_0019423c\((?:puVar25|lastWriterSet),uVar9\);$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar10	succAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*puVar10\ =\ \(undefined4\ \*\)\(uVar9\ \*\ 4\ \+\ (?:puVar25|lastWriterSet)\[2\]\);$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar10	succAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*puVar10\ =\ \(undefined4\ \*\)FUN_0019423c\((?:puVar25|lastWriterSet),uVar9\);$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar10	succAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*\*puVar10\ =\ puVar11\ \+\ 1;$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	allNodes	CONFIRMED	scheduler[6]: vector of all nodes of the block	^\s*(?:puVar25|lastWriterSet)\ =\ \(uint\ \*\)(?:param_1|scheduler)\[6\];$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	allNodes	CONFIRMED	scheduler[6]: vector of all nodes of the block	^\s*if\ \(uVar13\ <\ \*(?:puVar25|lastWriterSet)\)\ \{$@3	+2	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	allNodes	CONFIRMED	scheduler[6]: vector of all nodes of the block	^\s*_memset\(uVar21\ \*\ 4\ \+\ (?:puVar25|lastWriterSet)\[2\],0,\(uVar13\ \-\ uVar21\)\ \*\ 4\ \+\ 4\);$	+2	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	allNodes	CONFIRMED	scheduler[6]: vector of all nodes of the block	^\s*piVar4\ =\ \(int\ \*\)\(uVar13\ \*\ 4\ \+\ (?:puVar25|lastWriterSet)\[2\]\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	allNodes	CONFIRMED	scheduler[6]: vector of all nodes of the block	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\((?:puVar25|lastWriterSet),uVar13\);$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	uVar13	prevNodeIndex	INFERRED	nodeIndex - 1: index of the previous node	^\s*uVar13\ =\ (?:uVar20|nodeIndex)\ \-\ 1;$@2	+2	all	none
+use	Scheduler__buildDependencyGraph	uVar13	prevNodeIndex	INFERRED	nodeIndex - 1: index of the previous node	^\s*if\ \(uVar21\ <=\ uVar13\)\ \{$	+2	all	none
+use	Scheduler__buildDependencyGraph	uVar13	prevNodeIndex	INFERRED	nodeIndex - 1: index of the previous node	^\s*piVar4\ =\ \(int\ \*\)\(uVar13\ \*\ 4\ \+\ (?:puVar25|lastWriterSet)\[2\]\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	uVar13	prevNodeIndex	INFERRED	nodeIndex - 1: index of the previous node	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\((?:puVar25|lastWriterSet),uVar13\);$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	uVar21	lengthWord	INFERRED	vector count word	^\s*uVar21\ =\ (?:puVar25|lastWriterSet)\[1\];$@2	+3	all	none
+use	Scheduler__buildDependencyGraph	piVar4	nodeSlot	INFERRED	slot of allNodes[prevNodeIndex]	^\s*piVar4\ =\ \(int\ \*\)\(uVar13\ \*\ 4\ \+\ (?:puVar25|lastWriterSet)\[2\]\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	nodeSlot	INFERRED	slot of allNodes[prevNodeIndex]	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\((?:puVar25|lastWriterSet),uVar13\);$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	nodeSlot	INFERRED	slot of allNodes[prevNodeIndex]	^\s*iVar17\ =\ \*piVar4;$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar17	prevNode	INFERRED	previous node in program order	^\s*iVar17\ =\ \*piVar4;$@2	+2	all	none
+use	Scheduler__buildDependencyGraph	iVar17	prevNode	INFERRED	previous node in program order	^\s*puVar11\[1\]\ =\ iVar17;$@3	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar17	prevNode	INFERRED	previous node in program order	^\s*(?:puVar25|lastWriterSet)\ =\ \*\(uint\ \*\*\)\(iVar17\ \+\ 0x40\);$@3	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar11	edgeAlloc	CONFIRMED	Arena__alloc(arena, 0x24): the new serial-order DepEdge (kind 1)	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_00193e18\((?:uVar26|arena),0x24\);$@3	+10	all	none
+use	Scheduler__buildDependencyGraph	puVar11	edgeAlloc	CONFIRMED	Arena__alloc(arena, 0x24): the new serial-order DepEdge (kind 1)	^\s*puVar11\[4\]\ =\ (?:uVar26|arena);$@5	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar11	edgeAlloc	CONFIRMED	Arena__alloc(arena, 0x24): the new serial-order DepEdge (kind 1)	^\s*\*piVar4\ =\ \(int\)\(puVar11\ \+\ 1\);$@3	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar11	edgeAlloc	CONFIRMED	Arena__alloc(arena, 0x24): the new serial-order DepEdge (kind 1)	^\s*\*piVar4\ =\ \(int\)\(puVar11\ \+\ 1\);$@4	+1	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	prevNodeSuccEdges	CONFIRMED	prevNode + 0x40: successor edge vector	^\s*(?:puVar25|lastWriterSet)\ =\ \*\(uint\ \*\*\)\(iVar17\ \+\ 0x40\);$@3	+6	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	prevNodeSuccEdges	CONFIRMED	prevNode + 0x40: successor edge vector	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\((?:puVar25|lastWriterSet),uVar13\);$@3	+1	all	none
+use	Scheduler__buildDependencyGraph	uVar13	countWord	INFERRED	vector count word	^\s*uVar13\ =\ (?:puVar25|lastWriterSet)\[1\];$	+5	all	none
+use	Scheduler__buildDependencyGraph	uVar13	countWord	INFERRED	vector count word	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\((?:puVar25|lastWriterSet),uVar13\);$@3	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	appendSlot	INFERRED	new slot at the end of the edge vector	^\s*piVar4\ =\ \(int\ \*\)\(uVar13\ \*\ 4\ \+\ (?:puVar25|lastWriterSet)\[2\]\);$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	appendSlot	INFERRED	new slot at the end of the edge vector	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\((?:puVar25|lastWriterSet),uVar13\);$@3	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	appendSlot	INFERRED	new slot at the end of the edge vector	^\s*\*piVar4\ =\ \(int\)\(puVar11\ \+\ 1\);$@3	+1	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	nodePredEdges	CONFIRMED	nodeAlloc[0x12]: predecessor edge vector of the new node	^\s*(?:puVar25|lastWriterSet)\ =\ \(uint\ \*\)(?:puVar15|nodeAlloc)\[0x12\];$@5	+6	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	nodePredEdges	CONFIRMED	nodeAlloc[0x12]: predecessor edge vector of the new node	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\((?:puVar25|lastWriterSet),uVar13\);$@4	+1	all	none
+use	Scheduler__buildDependencyGraph	uVar13	countWord	INFERRED	vector count word	^\s*uVar13\ =\ (?:puVar25|lastWriterSet)\[1\];$@2	+5	all	none
+use	Scheduler__buildDependencyGraph	uVar13	countWord	INFERRED	vector count word	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\((?:puVar25|lastWriterSet),uVar13\);$@4	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	appendSlot	INFERRED	new slot at the end of the edge vector	^\s*piVar4\ =\ \(int\ \*\)\(uVar13\ \*\ 4\ \+\ (?:puVar25|lastWriterSet)\[2\]\);$@3	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	appendSlot	INFERRED	new slot at the end of the edge vector	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\((?:puVar25|lastWriterSet),uVar13\);$@4	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	appendSlot	INFERRED	new slot at the end of the edge vector	^\s*\*piVar4\ =\ \(int\)\(puVar11\ \+\ 1\);$@4	+1	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	allNodes	CONFIRMED	scheduler[6]: vector of all nodes of the block	^\s*(?:puVar25|lastWriterSet)\ =\ \(uint\ \*\)(?:param_1|scheduler)\[6\];$@3	+6	all	none
+use	Scheduler__buildDependencyGraph	lastWriterSet	allNodes	CONFIRMED	scheduler[6]: vector of all nodes of the block	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\((?:puVar25|lastWriterSet),uVar13\);$@5	+1	all	none
+use	Scheduler__buildDependencyGraph	uVar13	countWord	INFERRED	vector count word	^\s*uVar13\ =\ (?:puVar25|lastWriterSet)\[1\];$@3	+5	all	none
+use	Scheduler__buildDependencyGraph	uVar13	countWord	INFERRED	vector count word	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\((?:puVar25|lastWriterSet),uVar13\);$@5	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	nodeSlot	INFERRED	new slot at the end of allNodes (receives schedNode)	^\s*piVar4\ =\ \(int\ \*\)\(uVar13\ \*\ 4\ \+\ (?:puVar25|lastWriterSet)\[2\]\);$@4	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	nodeSlot	INFERRED	new slot at the end of allNodes (receives schedNode)	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\((?:puVar25|lastWriterSet),uVar13\);$@5	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	nodeSlot	INFERRED	new slot at the end of allNodes (receives schedNode)	^\s*\*piVar4\ =\ \(int\)(?:puVar24|schedNode);$	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar11	zeroCursor	INFERRED	walks the SchedNode's four per-component consumer counters while clearing them	^\s*puVar11\ =\ (?:puVar24|schedNode);$	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar11	zeroCursor	INFERRED	walks the SchedNode's four per-component consumer counters while clearing them	^\s*puVar11\[0x12\]\ =\ 0;$	+2	all	none
+use	Scheduler__buildDependencyGraph	puVar11	predVectorAlloc	CONFIRMED	Arena__alloc(arena, 0x14): header of the predecessor edge vector (nodeAlloc[0x12])	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_00193e18\((?:uVar26|arena),0x14\);$	+5	all	none
+use	Scheduler__buildDependencyGraph	puVar11	predVectorAlloc	CONFIRMED	Arena__alloc(arena, 0x14): header of the predecessor edge vector (nodeAlloc[0x12])	^\s*puVar11\[3\]\ =\ (?:uVar26|arena);$	+2	all	none
+use	Scheduler__buildDependencyGraph	puVar11	succVectorAlloc	CONFIRMED	Arena__alloc(arena, 0x14): header of the successor edge vector (nodeAlloc[0x11])	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_00193e18\((?:uVar26|arena),0x14\);$@2	+5	all	none
+use	Scheduler__buildDependencyGraph	puVar11	succVectorAlloc	CONFIRMED	Arena__alloc(arena, 0x14): header of the successor edge vector (nodeAlloc[0x11])	^\s*puVar11\[3\]\ =\ (?:uVar26|arena);$@2	+2	all	none
+use	Scheduler__buildDependencyGraph	puVar3	nodeVtableBase	INFERRED	PTR_DAT_001e9138: vtable base of SchedNode (stored +8 into nodeAlloc[1])	^\s*puVar3\ =\ PTR_DAT_001e9138;$	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar3	nodeVtableBase	INFERRED	PTR_DAT_001e9138: vtable base of SchedNode (stored +8 into nodeAlloc[1])	^\s*(?:puVar15|nodeAlloc)\[1\]\ =\ puVar3\ \+\ 8;$	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar6	nodeVtableTemp	INFERRED	PTR_DAT_001e8b48 + 8, overwritten by the SchedNode vtable	^\s*puVar6\ =\ PTR_DAT_001e8b48\ \+\ 8;$	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar6	nodeVtableTemp	INFERRED	PTR_DAT_001e8b48 + 8, overwritten by the SchedNode vtable	^\s*(?:puVar15|nodeAlloc)\[1\]\ =\ puVar6;$	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar11	hashAlloc	CONFIRMED	Arena__alloc(arena, 0x1c): the register-keyed hash set (header, bucket array at +0xc, equality VRegKey__equals, hash VRegKey__hash)	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_00193e18\((?:uVar26|arena),0x1c\);$	+3	all	none
+use	Scheduler__buildDependencyGraph	puVar11	hashAlloc	CONFIRMED	Arena__alloc(arena, 0x1c): the register-keyed hash set (header, bucket array at +0xc, equality VRegKey__equals, hash VRegKey__hash)	^\s*puVar11\[4\]\ =\ FUN_00164bac;$	+3	all	none
+use	Scheduler__buildDependencyGraph	puVar11	hashAlloc	CONFIRMED	Arena__alloc(arena, 0x1c): the register-keyed hash set (header, bucket array at +0xc, equality VRegKey__equals, hash VRegKey__hash)	^\s*puVar11\[6\]\ =\ (?:uVar26|arena);$	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar11	hashAlloc	CONFIRMED	Arena__alloc(arena, 0x1c): the register-keyed hash set (header, bucket array at +0xc, equality VRegKey__equals, hash VRegKey__hash)	^\s*puVar11\[2\]\ =\ 0;$@3	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar11	hashAlloc	CONFIRMED	Arena__alloc(arena, 0x1c): the register-keyed hash set (header, bucket array at +0xc, equality VRegKey__equals, hash VRegKey__hash)	^\s*puVar11\[3\]\ =\ (?:uVar26|arena);$@3	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar11	hashAlloc	CONFIRMED	Arena__alloc(arena, 0x1c): the register-keyed hash set (header, bucket array at +0xc, equality VRegKey__equals, hash VRegKey__hash)	^\s*iVar7\ =\ puVar11\[3\];$	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar11	hashAlloc	CONFIRMED	Arena__alloc(arena, 0x1c): the register-keyed hash set (header, bucket array at +0xc, equality VRegKey__equals, hash VRegKey__hash)	^\s*iVar7\ =\ puVar11\[3\];$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar11	hashAlloc	CONFIRMED	Arena__alloc(arena, 0x1c): the register-keyed hash set (header, bucket array at +0xc, equality VRegKey__equals, hash VRegKey__hash)	^\s*FUN_00193cc0\(puVar11\[6\],iVar17\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar11	hashAlloc	CONFIRMED	Arena__alloc(arena, 0x1c): the register-keyed hash set (header, bucket array at +0xc, equality VRegKey__equals, hash VRegKey__hash)	^\s*iVar7\ =\ puVar11\[3\];$@3	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar11	hashAlloc	CONFIRMED	Arena__alloc(arena, 0x1c): the register-keyed hash set (header, bucket array at +0xc, equality VRegKey__equals, hash VRegKey__hash)	^\s*FUN_00193cc0\(puVar11\[6\],iVar7\);$	+2	all	none
+local	Scheduler__buildDependencyGraph	local_54	visitedCount	INFERRED	iteration counter of the backward walk
+local	Scheduler__buildDependencyGraph	local_58	lastNodeIndex	INFERRED	nodeIndex of the last node: the backward walk runs lastNodeIndex + 1 times
+use	Scheduler__buildDependencyGraph	puVar27	nodeVector	CONFIRMED	scheduler[6]: vector of all nodes	^\s*puVar27\ =\ \(uint\ \*\)(?:param_1|scheduler)\[6\];$	+3	all	none
+use	Scheduler__buildDependencyGraph	puVar27	nodeVector	CONFIRMED	scheduler[6]: vector of all nodes	^\s*_memset\((?:uVar19|dotProductLimit)\ \*\ 4\ \+\ puVar27\[2\],0,\((?:uVar20|nodeIndex)\ \-\ (?:uVar19|dotProductLimit)\)\ \*\ 4\ \+\ 4\);$	+2	all	none
+use	Scheduler__buildDependencyGraph	puVar27	nodeVector	CONFIRMED	scheduler[6]: vector of all nodes	^\s*piVar4\ =\ \(int\ \*\)\(iVar7\ \+\ puVar27\[2\]\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar27	nodeVector	CONFIRMED	scheduler[6]: vector of all nodes	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar20|nodeIndex)\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	nodeSlot	INFERRED	slot of allNodes[nodeIndex]	^\s*piVar4\ =\ \(int\ \*\)\(iVar7\ \+\ puVar27\[2\]\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	nodeSlot	INFERRED	slot of allNodes[nodeIndex]	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar20|nodeIndex)\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	nodeSlot	INFERRED	slot of allNodes[nodeIndex]	^\s*iVar22\ =\ \*piVar4;$	+1	all	none
+local	Scheduler__buildDependencyGraph	iVar22	curNode	INFERRED	node being processed by the backward walk
+use	Scheduler__buildDependencyGraph	piVar4	curInst	INFERRED	instruction of curNode	^\s*piVar4\ =\ \*\(int\ \*\*\)\(iVar22\ \+\ 0x38\);$	+2	all	none
+use	Scheduler__buildDependencyGraph	piVar4	curInst	INFERRED	instruction of curNode	^\s*iVar12\ =\ FUN_00194834\((?:puVar25|lastWriterSet),piVar4\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	curInst	INFERRED	instruction of curNode	^\s*(?:uVar26|arena)\ =\ \(\(int\ \(\*\)\(\)\)FUN_00164e7c\)\((?:param_1|scheduler),piVar4,iVar12,0,0,1\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	curInst	INFERRED	instruction of curNode	^\s*FUN_00194d44\((?:puVar25|lastWriterSet),piVar4\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	curInst	INFERRED	instruction of curNode	^\s*iVar23\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)(?:param_1|scheduler)\[3\]\ \+\ 0x28\)\)\(\(int\ \*\)(?:param_1|scheduler)\[3\],piVar4\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	curInst	INFERRED	instruction of curNode	^\s*(?:uVar26|arena)\ =\ \(\(int\ \(\*\)\(\)\)FUN_00164e7c\)\((?:param_1|scheduler),piVar4,\*\(undefined4\ \*\)\(iVar17\ \+\ 0x38\),0,0,4\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	curInst	INFERRED	instruction of curNode	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)(?:param_1|scheduler)\[3\]\ \+\ 0x2c\)\)\(\(int\ \*\)(?:param_1|scheduler)\[3\],piVar4\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	curInst	INFERRED	instruction of curNode	^\s*(?:uVar26|arena)\ =\ \(\(int\ \(\*\)\(\)\)FUN_00164e7c\)\((?:param_1|scheduler),piVar4,\*\(undefined4\ \*\)\(iVar16\ \+\ 0x38\),0,0,4\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	curInst	INFERRED	instruction of curNode	^\s*if\ \(0\ <\ piVar4\[0x21\]\)\ \{$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	curInst	INFERRED	instruction of curNode	^\s*(?:uVar26|arena)\ =\ FUN_00105594\(piVar4,iVar17\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	curInst	INFERRED	instruction of curNode	^\s*(?:uVar26|arena)\ =\ FUN_00105594\(piVar4,iVar17\);$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	curInst	INFERRED	instruction of curNode	^\s*if\ \(\((?:piVar14|inst)\ !=\ \(int\ \*\)0x0\)\ \&\&\ \(piVar4\ !=\ (?:piVar14|inst)\)\)\ \{$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	curInst	INFERRED	instruction of curNode	^\s*(?:uVar26|arena)\ =\ \(\(int\ \(\*\)\(\)\)FUN_00164e7c\)\((?:param_1|scheduler),piVar4,(?:piVar14|inst),iVar17,0,2\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	curInst	INFERRED	instruction of curNode	^\s*\}\ while\ \(iVar17\ <=\ piVar4\[0x21\]\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	curInst	INFERRED	instruction of curNode	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x28\)\)\(piVar4\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	curInst	INFERRED	instruction of curNode	^\s*(?:uVar26|arena)\ =\ \(\(int\ \(\*\)\(\)\)FUN_00164e7c\)\((?:param_1|scheduler),piVar4,\*\(undefined4\ \*\)\(iVar23\ \+\ 0x38\),0,0,4\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	curInst	INFERRED	instruction of curNode	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x24\)\)\(piVar4\);$	+2	all	none
+use	Scheduler__buildDependencyGraph	piVar4	curInst	INFERRED	instruction of curNode	^\s*(?:uVar26|arena)\ =\ \(\(int\ \(\*\)\(\)\)FUN_00164e7c\)\((?:param_1|scheduler),piVar4,\*\(undefined4\ \*\)\(iVar12\ \+\ 0x38\),0,0,4\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	curInst	INFERRED	instruction of curNode	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)(?:param_1|scheduler)\[3\]\ \+\ 0x20\)\)\(\(int\ \*\)(?:param_1|scheduler)\[3\],piVar4\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	curInst	INFERRED	instruction of curNode	^\s*(?:uVar26|arena)\ =\ \(\(int\ \(\*\)\(\)\)FUN_00164e7c\)\((?:param_1|scheduler),piVar4,\*\(undefined4\ \*\)\(iVar17\ \+\ 0x38\),0,0,4\);$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar4	curInst	INFERRED	instruction of curNode	^\s*if\ \(\(\(\*\(int\ \*\)\((?:param_1|scheduler)\[1\]\ \+\ 0x33c\)\ !=\ 0\)\ \&\&$	+5	all	none
+use	Scheduler__buildDependencyGraph	piVar4	curInst	INFERRED	instruction of curNode	^\s*(?:uVar26|arena)\ =\ \(\(int\ \(\*\)\(\)\)FUN_00164e7c\)\((?:param_1|scheduler),piVar4,\*\(undefined4\ \*\)\(iVar17\ \+\ 0x38\),0,0,2\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar12	latestSlot10Node	INFERRED	most recent (later in program order) node for which ThreadModel slot 0x28 held; carried to the next iteration	^\s*iVar12\ =\ 0;$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar12	latestSlot10Node	INFERRED	most recent (later in program order) node for which ThreadModel slot 0x28 held; carried to the next iteration	^\s*iVar12\ =\ iVar17;$	+2	all	none
+use	Scheduler__buildDependencyGraph	iVar12	latestSlot10Node	INFERRED	most recent (later in program order) node for which ThreadModel slot 0x28 held; carried to the next iteration	^\s*if\ \(\(\(iVar17\ !=\ 0\)\ \&\&\ \(\(piVar4\[5\]\ \&\ 2U\)\ ==\ 0\)\)\ \&\&\ \(iVar12\ !=\ 0\)\)\ \{$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar12	latestSlot10Node	INFERRED	most recent (later in program order) node for which ThreadModel slot 0x28 held; carried to the next iteration	^\s*(?:puVar15|nodeAlloc)\[2\]\ =\ iVar12;$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar12	latestSlot10Node	INFERRED	most recent (later in program order) node for which ThreadModel slot 0x28 held; carried to the next iteration	^\s*(?:uVar26|arena)\ =\ \(\(int\ \(\*\)\(\)\)FUN_00164e7c\)\((?:param_1|scheduler),piVar4,\*\(undefined4\ \*\)\(iVar12\ \+\ 0x38\),0,0,4\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar12	latestSlot10Node	INFERRED	most recent (later in program order) node for which ThreadModel slot 0x28 held; carried to the next iteration	^\s*puVar27\ =\ \*\(uint\ \*\*\)\(iVar12\ \+\ 0x44\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar12	latestSlot10Node	INFERRED	most recent (later in program order) node for which ThreadModel slot 0x28 held; carried to the next iteration	^\s*iVar17\ =\ iVar12;$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar23	latestSlot11Node	INFERRED	most recent (later in program order) node for which ThreadModel slot 0x2c held; carried to the next iteration	^\s*iVar23\ =\ 0;$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar23	latestSlot11Node	INFERRED	most recent (later in program order) node for which ThreadModel slot 0x2c held; carried to the next iteration	^\s*iVar23\ =\ iVar16;$	+2	all	none
+use	Scheduler__buildDependencyGraph	iVar23	latestSlot11Node	INFERRED	most recent (later in program order) node for which ThreadModel slot 0x2c held; carried to the next iteration	^\s*if\ \(\(iVar17\ !=\ 0\)\ \&\&\ \(iVar23\ !=\ 0\)\)\ \{$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar23	latestSlot11Node	INFERRED	most recent (later in program order) node for which ThreadModel slot 0x2c held; carried to the next iteration	^\s*(?:puVar15|nodeAlloc)\[2\]\ =\ iVar23;$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar23	latestSlot11Node	INFERRED	most recent (later in program order) node for which ThreadModel slot 0x2c held; carried to the next iteration	^\s*(?:uVar26|arena)\ =\ \(\(int\ \(\*\)\(\)\)FUN_00164e7c\)\((?:param_1|scheduler),piVar4,\*\(undefined4\ \*\)\(iVar23\ \+\ 0x38\),0,0,4\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar23	latestSlot11Node	INFERRED	most recent (later in program order) node for which ThreadModel slot 0x2c held; carried to the next iteration	^\s*puVar27\ =\ \*\(uint\ \*\*\)\(iVar23\ \+\ 0x44\);$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar23	latestSlot11Node	INFERRED	most recent (later in program order) node for which ThreadModel slot 0x2c held; carried to the next iteration	^\s*iVar16\ =\ iVar23;$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar17	carriedSlot10Node	INFERRED	latestSlot10Node of the previous iteration	^\s*iVar17\ =\ 0;$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar17	carriedSlot10Node	INFERRED	latestSlot10Node of the previous iteration	^\s*iVar12\ =\ iVar17;$	+2	all	none
+use	Scheduler__buildDependencyGraph	iVar17	carriedSlot10Node	INFERRED	latestSlot10Node of the previous iteration	^\s*(?:puVar15|nodeAlloc)\[2\]\ =\ iVar17;$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar17	carriedSlot10Node	INFERRED	latestSlot10Node of the previous iteration	^\s*(?:uVar26|arena)\ =\ \(\(int\ \(\*\)\(\)\)FUN_00164e7c\)\((?:param_1|scheduler),piVar4,\*\(undefined4\ \*\)\(iVar17\ \+\ 0x38\),0,0,4\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar17	carriedSlot10Node	INFERRED	latestSlot10Node of the previous iteration	^\s*puVar27\ =\ \*\(uint\ \*\*\)\(iVar17\ \+\ 0x44\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar17	carriedSlot10Node	INFERRED	latestSlot10Node of the previous iteration	^\s*iVar17\ =\ iVar12;$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar16	carriedSlot11Node	INFERRED	latestSlot11Node of the previous iteration	^\s*iVar16\ =\ 0;$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar16	carriedSlot11Node	INFERRED	latestSlot11Node of the previous iteration	^\s*iVar23\ =\ iVar16;$	+2	all	none
+use	Scheduler__buildDependencyGraph	iVar16	carriedSlot11Node	INFERRED	latestSlot11Node of the previous iteration	^\s*(?:puVar15|nodeAlloc)\[2\]\ =\ iVar16;$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar16	carriedSlot11Node	INFERRED	latestSlot11Node of the previous iteration	^\s*(?:uVar26|arena)\ =\ \(\(int\ \(\*\)\(\)\)FUN_00164e7c\)\((?:param_1|scheduler),piVar4,\*\(undefined4\ \*\)\(iVar16\ \+\ 0x38\),0,0,4\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar16	carriedSlot11Node	INFERRED	latestSlot11Node of the previous iteration	^\s*puVar27\ =\ \*\(uint\ \*\*\)\(iVar16\ \+\ 0x44\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar16	carriedSlot11Node	INFERRED	latestSlot11Node of the previous iteration	^\s*iVar16\ =\ iVar23;$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar12	writesTrackedRegister	INFERRED	IRInst__writesTrackedRegister(curInst)	^\s*iVar12\ =\ \(\(int\ \(\*\)\(\)\)FUN_00164fc0\)\(piVar4\);$	+2	all	none
+use	Scheduler__buildDependencyGraph	iVar12	laterWriterInst	INFERRED	HashTable__find: the later instruction writing the same register	^\s*iVar12\ =\ FUN_00194834\((?:puVar25|lastWriterSet),piVar4\);$	+2	all	none
+use	Scheduler__buildDependencyGraph	iVar12	laterWriterInst	INFERRED	HashTable__find: the later instruction writing the same register	^\s*(?:uVar19|dotProductLimit)\ =\ \*\(uint\ \*\)\(iVar12\ \+\ 0x150\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar12	laterWriterInst	INFERRED	HashTable__find: the later instruction writing the same register	^\s*(?:uVar26|arena)\ =\ \(\(int\ \(\*\)\(\)\)FUN_00164e7c\)\((?:param_1|scheduler),piVar4,iVar12,0,0,1\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar12	laterWriterInst	INFERRED	HashTable__find: the later instruction writing the same register	^\s*FUN_00194720\((?:puVar25|lastWriterSet),iVar12\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar27	nodeVector	CONFIRMED	scheduler[6]: vector of all nodes	^\s*puVar27\ =\ \(uint\ \*\)(?:param_1|scheduler)\[6\];$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar27	nodeVector	CONFIRMED	scheduler[6]: vector of all nodes	^\s*if\ \((?:uVar19|dotProductLimit)\ <\ \*puVar27\)\ \{$	+2	all	none
+use	Scheduler__buildDependencyGraph	puVar27	nodeVector	CONFIRMED	scheduler[6]: vector of all nodes	^\s*_memset\(uVar13\ \*\ 4\ \+\ puVar27\[2\],0,\((?:uVar19|dotProductLimit)\ \-\ uVar13\)\ \*\ 4\ \+\ 4\);$	+2	all	none
+use	Scheduler__buildDependencyGraph	puVar27	nodeVector	CONFIRMED	scheduler[6]: vector of all nodes	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)\((?:uVar19|dotProductLimit)\ \*\ 4\ \+\ puVar27\[2\]\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar27	nodeVector	CONFIRMED	scheduler[6]: vector of all nodes	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	uVar13	countWord	INFERRED	vector count word	^\s*uVar13\ =\ puVar27\[1\];$	+3	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	laterWriterIndex	INFERRED	laterWriterInst[0x54]: its node index	^\s*(?:uVar19|dotProductLimit)\ =\ \*\(uint\ \*\)\(iVar12\ \+\ 0x150\);$	+2	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	laterWriterIndex	INFERRED	laterWriterInst[0x54]: its node index	^\s*if\ \(uVar13\ <=\ (?:uVar19|dotProductLimit)\)\ \{$	+3	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	laterWriterIndex	INFERRED	laterWriterInst[0x54]: its node index	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)\((?:uVar19|dotProductLimit)\ \*\ 4\ \+\ puVar27\[2\]\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	laterWriterIndex	INFERRED	laterWriterInst[0x54]: its node index	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	laterWriterNodeSlot	INFERRED	slot of allNodes[laterWriterIndex]	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)\((?:uVar19|dotProductLimit)\ \*\ 4\ \+\ puVar27\[2\]\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	laterWriterNodeSlot	INFERRED	slot of allNodes[laterWriterIndex]	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	laterWriterNodeSlot	INFERRED	slot of allNodes[laterWriterIndex]	^\s*iVar23\ =\ \*(?:piVar14|inst);$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar23	laterWriterNode	INFERRED	node of the later writer: the write-after-write edge (kind 1) goes from curNode to it	^\s*iVar23\ =\ \*(?:piVar14|inst);$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar23	laterWriterNode	INFERRED	node of the later writer: the write-after-write edge (kind 1) goes from curNode to it	^\s*(?:puVar15|nodeAlloc)\[2\]\ =\ iVar23;$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar23	laterWriterNode	INFERRED	node of the later writer: the write-after-write edge (kind 1) goes from curNode to it	^\s*puVar27\ =\ \*\(uint\ \*\*\)\(iVar23\ \+\ 0x44\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar27	curSuccEdges	CONFIRMED	curNode + 0x40: successor edge vector	^\s*puVar27\ =\ \*\(uint\ \*\*\)\(iVar22\ \+\ 0x40\);$	+6	all	none
+use	Scheduler__buildDependencyGraph	puVar27	curSuccEdges	CONFIRMED	curNode + 0x40: successor edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	vectorCount	INFERRED	vector count word	^\s*(?:uVar19|dotProductLimit)\ =\ puVar27\[1\];$@2	+5	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	vectorCount	INFERRED	vector count word	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)\((?:uVar19|dotProductLimit)\ \*\ 4\ \+\ puVar27\[2\]\);$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*\*(?:piVar14|inst)\ =\ \(int\)\((?:puVar15|nodeAlloc)\ \+\ 1\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar27	laterWriterPredEdges	CONFIRMED	laterWriterNode + 0x44: predecessor edge vector	^\s*puVar27\ =\ \*\(uint\ \*\*\)\(iVar23\ \+\ 0x44\);$	+6	all	none
+use	Scheduler__buildDependencyGraph	puVar27	laterWriterPredEdges	CONFIRMED	laterWriterNode + 0x44: predecessor edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@3	+1	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	vectorCount	INFERRED	vector count word	^\s*(?:uVar19|dotProductLimit)\ =\ puVar27\[1\];$@3	+5	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	vectorCount	INFERRED	vector count word	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@3	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)\((?:uVar19|dotProductLimit)\ \*\ 4\ \+\ puVar27\[2\]\);$@3	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@3	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*\*(?:piVar14|inst)\ =\ \(int\)\((?:puVar15|nodeAlloc)\ \+\ 1\);$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar23	threadSlot10Result	INFERRED	ThreadModel slot 0x28 on curInst	^\s*iVar23\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)(?:param_1|scheduler)\[3\]\ \+\ 0x28\)\)\(\(int\ \*\)(?:param_1|scheduler)\[3\],piVar4\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar23	threadSlot10Result	INFERRED	ThreadModel slot 0x28 on curInst	^\s*if\ \(\(iVar23\ !=\ 0\)\ \&\&\ \(iVar12\ =\ iVar22,\ iVar17\ !=\ 0\)\)\ \{$	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar27	curSuccEdges	CONFIRMED	curNode + 0x40: successor edge vector	^\s*puVar27\ =\ \*\(uint\ \*\*\)\(iVar22\ \+\ 0x40\);$@2	+6	all	none
+use	Scheduler__buildDependencyGraph	puVar27	curSuccEdges	CONFIRMED	curNode + 0x40: successor edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@4	+1	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	vectorCount	INFERRED	vector count word	^\s*(?:uVar19|dotProductLimit)\ =\ puVar27\[1\];$@4	+5	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	vectorCount	INFERRED	vector count word	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@4	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)\((?:uVar19|dotProductLimit)\ \*\ 4\ \+\ puVar27\[2\]\);$@4	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@4	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*\*(?:piVar14|inst)\ =\ \(int\)\((?:puVar15|nodeAlloc)\ \+\ 1\);$@3	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar27	carriedSlot10PredEdges	CONFIRMED	carriedSlot10Node + 0x44: predecessor edge vector	^\s*puVar27\ =\ \*\(uint\ \*\*\)\(iVar17\ \+\ 0x44\);$	+6	all	none
+use	Scheduler__buildDependencyGraph	puVar27	carriedSlot10PredEdges	CONFIRMED	carriedSlot10Node + 0x44: predecessor edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@5	+1	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	vectorCount	INFERRED	vector count word	^\s*(?:uVar19|dotProductLimit)\ =\ puVar27\[1\];$@5	+5	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	vectorCount	INFERRED	vector count word	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@5	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)\((?:uVar19|dotProductLimit)\ \*\ 4\ \+\ puVar27\[2\]\);$@5	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@5	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*\*(?:piVar14|inst)\ =\ \(int\)\((?:puVar15|nodeAlloc)\ \+\ 1\);$@4	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar17	threadSlot11Result	INFERRED	ThreadModel slot 0x2c on curInst	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)(?:param_1|scheduler)\[3\]\ \+\ 0x2c\)\)\(\(int\ \*\)(?:param_1|scheduler)\[3\],piVar4\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar17	threadSlot11Result	INFERRED	ThreadModel slot 0x2c on curInst	^\s*if\ \(\(iVar17\ !=\ 0\)\ \&\&\ \(iVar23\ =\ iVar22,\ iVar16\ !=\ 0\)\)\ \{$	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar27	curSuccEdges	CONFIRMED	curNode + 0x40: successor edge vector	^\s*puVar27\ =\ \*\(uint\ \*\*\)\(iVar22\ \+\ 0x40\);$@3	+6	all	none
+use	Scheduler__buildDependencyGraph	puVar27	curSuccEdges	CONFIRMED	curNode + 0x40: successor edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@6	+1	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	vectorCount	INFERRED	vector count word	^\s*(?:uVar19|dotProductLimit)\ =\ puVar27\[1\];$@6	+5	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	vectorCount	INFERRED	vector count word	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@6	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)\((?:uVar19|dotProductLimit)\ \*\ 4\ \+\ puVar27\[2\]\);$@6	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@6	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*\*(?:piVar14|inst)\ =\ \(int\)\((?:puVar15|nodeAlloc)\ \+\ 1\);$@5	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar27	carriedSlot11PredEdges	CONFIRMED	carriedSlot11Node + 0x44: predecessor edge vector	^\s*puVar27\ =\ \*\(uint\ \*\*\)\(iVar16\ \+\ 0x44\);$	+6	all	none
+use	Scheduler__buildDependencyGraph	puVar27	carriedSlot11PredEdges	CONFIRMED	carriedSlot11Node + 0x44: predecessor edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@7	+1	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	vectorCount	INFERRED	vector count word	^\s*(?:uVar19|dotProductLimit)\ =\ puVar27\[1\];$@7	+5	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	vectorCount	INFERRED	vector count word	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@7	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)\((?:uVar19|dotProductLimit)\ \*\ 4\ \+\ puVar27\[2\]\);$@7	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@7	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*\*(?:piVar14|inst)\ =\ \(int\)\((?:puVar15|nodeAlloc)\ \+\ 1\);$@6	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar17	sourceNumber	INFERRED	source operand number 1..piVar4[0x21]	^\s*iVar17\ =\ 1;$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar17	sourceNumber	INFERRED	source operand number 1..piVar4[0x21]	^\s*(?:uVar26|arena)\ =\ FUN_00105594\(piVar4,iVar17\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar17	sourceNumber	INFERRED	source operand number 1..piVar4[0x21]	^\s*(?:uVar26|arena)\ =\ FUN_00105594\(piVar4,iVar17\);$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar17	sourceNumber	INFERRED	source operand number 1..piVar4[0x21]	^\s*(?:uVar26|arena)\ =\ \(\(int\ \(\*\)\(\)\)FUN_00164e7c\)\((?:param_1|scheduler),piVar4,(?:piVar14|inst),iVar17,0,2\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar17	sourceNumber	INFERRED	source operand number 1..piVar4[0x21]	^\s*iVar17\ =\ iVar17\ \+\ 1;$	+2	all	none
+use	Scheduler__buildDependencyGraph	iVar16	sourceWritesTracked	INFERRED	IRInst__writesTrackedRegister of the source definition	^\s*iVar16\ =\ \(\(int\ \(\*\)\(\)\)FUN_00164fc0\)\((?:uVar26|arena)\);$	+2	all	none
+use	Scheduler__buildDependencyGraph	inst	readerWriterInst	INFERRED	HashTable__find: the later instruction writing the register this source reads	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_00194834\((?:puVar25|lastWriterSet),(?:uVar26|arena)\);$	+2	all	none
+use	Scheduler__buildDependencyGraph	inst	readerWriterInst	INFERRED	HashTable__find: the later instruction writing the register this source reads	^\s*(?:uVar19|dotProductLimit)\ =\ (?:piVar14|inst)\[0x54\];$	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	readerWriterInst	INFERRED	HashTable__find: the later instruction writing the register this source reads	^\s*(?:uVar26|arena)\ =\ \(\(int\ \(\*\)\(\)\)FUN_00164e7c\)\((?:param_1|scheduler),piVar4,(?:piVar14|inst),iVar17,0,2\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar27	nodeVector	CONFIRMED	scheduler[6]: vector of all nodes	^\s*puVar27\ =\ \(uint\ \*\)(?:param_1|scheduler)\[6\];$@3	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar27	nodeVector	CONFIRMED	scheduler[6]: vector of all nodes	^\s*if\ \((?:uVar19|dotProductLimit)\ <\ \*puVar27\)\ \{$@8	+2	all	none
+use	Scheduler__buildDependencyGraph	puVar27	nodeVector	CONFIRMED	scheduler[6]: vector of all nodes	^\s*_memset\(uVar13\ \*\ 4\ \+\ puVar27\[2\],0,\((?:uVar19|dotProductLimit)\ \-\ uVar13\)\ \*\ 4\ \+\ 4\);$@2	+2	all	none
+use	Scheduler__buildDependencyGraph	puVar27	nodeVector	CONFIRMED	scheduler[6]: vector of all nodes	^\s*piVar5\ =\ \(int\ \*\)\((?:uVar19|dotProductLimit)\ \*\ 4\ \+\ puVar27\[2\]\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar27	nodeVector	CONFIRMED	scheduler[6]: vector of all nodes	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	readerWriterIndex	INFERRED	readerWriterInst[0x54]: its node index	^\s*(?:uVar19|dotProductLimit)\ =\ (?:piVar14|inst)\[0x54\];$	+2	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	readerWriterIndex	INFERRED	readerWriterInst[0x54]: its node index	^\s*if\ \(uVar13\ <=\ (?:uVar19|dotProductLimit)\)\ \{$@2	+3	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	readerWriterIndex	INFERRED	readerWriterInst[0x54]: its node index	^\s*piVar5\ =\ \(int\ \*\)\((?:uVar19|dotProductLimit)\ \*\ 4\ \+\ puVar27\[2\]\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	readerWriterIndex	INFERRED	readerWriterInst[0x54]: its node index	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar5	writerNodeSlot	INFERRED	slot of allNodes[readerWriterIndex]	^\s*piVar5\ =\ \(int\ \*\)\((?:uVar19|dotProductLimit)\ \*\ 4\ \+\ puVar27\[2\]\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar5	writerNodeSlot	INFERRED	slot of allNodes[readerWriterIndex]	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	piVar5	writerNodeSlot	INFERRED	slot of allNodes[readerWriterIndex]	^\s*iVar16\ =\ \*piVar5;$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar16	readerWriterNode	INFERRED	node of the later writer: the anti-dependence edge (kind 2) goes from curNode to it	^\s*iVar16\ =\ \*piVar5;$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar16	readerWriterNode	INFERRED	node of the later writer: the anti-dependence edge (kind 2) goes from curNode to it	^\s*(?:puVar15|nodeAlloc)\[2\]\ =\ iVar16;$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar16	readerWriterNode	INFERRED	node of the later writer: the anti-dependence edge (kind 2) goes from curNode to it	^\s*puVar27\ =\ \*\(uint\ \*\*\)\(iVar16\ \+\ 0x44\);$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar27	curSuccEdges	CONFIRMED	curNode + 0x40: successor edge vector	^\s*puVar27\ =\ \*\(uint\ \*\*\)\(iVar22\ \+\ 0x40\);$@4	+6	all	none
+use	Scheduler__buildDependencyGraph	puVar27	curSuccEdges	CONFIRMED	curNode + 0x40: successor edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@8	+1	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	vectorCount	INFERRED	vector count word	^\s*(?:uVar19|dotProductLimit)\ =\ puVar27\[1\];$@8	+5	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	vectorCount	INFERRED	vector count word	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@8	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)\((?:uVar19|dotProductLimit)\ \*\ 4\ \+\ puVar27\[2\]\);$@8	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@8	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*\*(?:piVar14|inst)\ =\ \(int\)\((?:puVar15|nodeAlloc)\ \+\ 1\);$@7	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar27	readerWriterPredEdges	CONFIRMED	readerWriterNode + 0x44: predecessor edge vector	^\s*puVar27\ =\ \*\(uint\ \*\*\)\(iVar16\ \+\ 0x44\);$@2	+6	all	none
+use	Scheduler__buildDependencyGraph	puVar27	readerWriterPredEdges	CONFIRMED	readerWriterNode + 0x44: predecessor edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@9	+1	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	vectorCount	INFERRED	vector count word	^\s*(?:uVar19|dotProductLimit)\ =\ puVar27\[1\];$@9	+5	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	vectorCount	INFERRED	vector count word	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@9	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)\((?:uVar19|dotProductLimit)\ \*\ 4\ \+\ puVar27\[2\]\);$@9	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@9	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*\*(?:piVar14|inst)\ =\ \(int\)\((?:puVar15|nodeAlloc)\ \+\ 1\);$@8	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar17	isFetch	INFERRED	IRInst vslot 10 (isFetch) of curInst	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x28\)\)\(piVar4\);$	+2	all	none
+use	Scheduler__buildDependencyGraph	puVar27	curSuccEdges	CONFIRMED	curNode + 0x40: successor edge vector	^\s*puVar27\ =\ \*\(uint\ \*\*\)\(iVar22\ \+\ 0x40\);$@5	+6	all	none
+use	Scheduler__buildDependencyGraph	puVar27	curSuccEdges	CONFIRMED	curNode + 0x40: successor edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@10	+1	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	vectorCount	INFERRED	vector count word	^\s*(?:uVar19|dotProductLimit)\ =\ puVar27\[1\];$@10	+5	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	vectorCount	INFERRED	vector count word	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@10	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)\((?:uVar19|dotProductLimit)\ \*\ 4\ \+\ puVar27\[2\]\);$@10	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@10	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*\*(?:piVar14|inst)\ =\ \(int\)\((?:puVar15|nodeAlloc)\ \+\ 1\);$@9	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar27	slot11PredEdges	CONFIRMED	latestSlot11Node + 0x44: predecessor edge vector	^\s*puVar27\ =\ \*\(uint\ \*\*\)\(iVar23\ \+\ 0x44\);$@2	+6	all	none
+use	Scheduler__buildDependencyGraph	puVar27	slot11PredEdges	CONFIRMED	latestSlot11Node + 0x44: predecessor edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@11	+1	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	vectorCount	INFERRED	vector count word	^\s*(?:uVar19|dotProductLimit)\ =\ puVar27\[1\];$@11	+5	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	vectorCount	INFERRED	vector count word	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@11	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)\((?:uVar19|dotProductLimit)\ \*\ 4\ \+\ puVar27\[2\]\);$@11	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@11	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*\*(?:piVar14|inst)\ =\ \(int\)\((?:puVar15|nodeAlloc)\ \+\ 1\);$@10	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar17	isAlu	INFERRED	IRInst vslot 9 (isAlu) of curInst	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x24\)\)\(piVar4\);$	+2	all	none
+use	Scheduler__buildDependencyGraph	puVar27	curSuccEdges	CONFIRMED	curNode + 0x40: successor edge vector	^\s*puVar27\ =\ \*\(uint\ \*\*\)\(iVar22\ \+\ 0x40\);$@6	+6	all	none
+use	Scheduler__buildDependencyGraph	puVar27	curSuccEdges	CONFIRMED	curNode + 0x40: successor edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@12	+1	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	vectorCount	INFERRED	vector count word	^\s*(?:uVar19|dotProductLimit)\ =\ puVar27\[1\];$@12	+5	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	vectorCount	INFERRED	vector count word	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@12	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)\((?:uVar19|dotProductLimit)\ \*\ 4\ \+\ puVar27\[2\]\);$@12	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@12	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*\*(?:piVar14|inst)\ =\ \(int\)\((?:puVar15|nodeAlloc)\ \+\ 1\);$@11	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar27	slot10PredEdges	CONFIRMED	latestSlot10Node + 0x44: predecessor edge vector	^\s*puVar27\ =\ \*\(uint\ \*\*\)\(iVar12\ \+\ 0x44\);$	+6	all	none
+use	Scheduler__buildDependencyGraph	puVar27	slot10PredEdges	CONFIRMED	latestSlot10Node + 0x44: predecessor edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@13	+1	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	vectorCount	INFERRED	vector count word	^\s*(?:uVar19|dotProductLimit)\ =\ puVar27\[1\];$@13	+5	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	vectorCount	INFERRED	vector count word	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@13	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)\((?:uVar19|dotProductLimit)\ \*\ 4\ \+\ puVar27\[2\]\);$@13	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@13	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*\*(?:piVar14|inst)\ =\ \(int\)\((?:puVar15|nodeAlloc)\ \+\ 1\);$@12	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar17	threadIsFetchClass	INFERRED	ThreadModel slot 8 (fetch class) on curInst, then DList__isEmpty of the chain list	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)(?:param_1|scheduler)\[3\]\ \+\ 0x20\)\)\(\(int\ \*\)(?:param_1|scheduler)\[3\],piVar4\);$	+2	all	none
+use	Scheduler__buildDependencyGraph	iVar17	listNode	INFERRED	node of the chain list walked through its next links	^\s*iVar17\ =\ local_70;$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar17	listNode	INFERRED	node of the chain list walked through its next links	^\s*(?:puVar15|nodeAlloc)\[2\]\ =\ iVar17;$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar17	listNode	INFERRED	node of the chain list walked through its next links	^\s*(?:uVar26|arena)\ =\ \(\(int\ \(\*\)\(\)\)FUN_00164e7c\)\((?:param_1|scheduler),piVar4,\*\(undefined4\ \*\)\(iVar17\ \+\ 0x38\),0,0,4\);$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar17	listNode	INFERRED	node of the chain list walked through its next links	^\s*puVar27\ =\ \*\(uint\ \*\*\)\(iVar17\ \+\ 0x44\);$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar17	listNode	INFERRED	node of the chain list walked through its next links	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar17\ \+\ 8\);$	+2	all	none
+use	Scheduler__buildDependencyGraph	iVar16	listNext	INFERRED	next link of the chain list node	^\s*iVar16\ =\ \*\(int\ \*\)\(local_70\ \+\ 8\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar16	listNext	INFERRED	next link of the chain list node	^\s*while\ \(iVar16\ !=\ 0\)\ \{$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar16	listNext	INFERRED	next link of the chain list node	^\s*iVar16\ =\ \*\(int\ \*\)\(iVar17\ \+\ 8\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar27	curSuccEdges	CONFIRMED	curNode + 0x40: successor edge vector	^\s*puVar27\ =\ \*\(uint\ \*\*\)\(iVar22\ \+\ 0x40\);$@7	+6	all	none
+use	Scheduler__buildDependencyGraph	puVar27	curSuccEdges	CONFIRMED	curNode + 0x40: successor edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@14	+1	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	vectorCount	INFERRED	vector count word	^\s*(?:uVar19|dotProductLimit)\ =\ puVar27\[1\];$@14	+5	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	vectorCount	INFERRED	vector count word	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@14	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)\((?:uVar19|dotProductLimit)\ \*\ 4\ \+\ puVar27\[2\]\);$@14	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@14	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*\*(?:piVar14|inst)\ =\ \(int\)\((?:puVar15|nodeAlloc)\ \+\ 1\);$@13	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar27	listNodePredEdges	CONFIRMED	listNode + 0x44: predecessor edge vector	^\s*puVar27\ =\ \*\(uint\ \*\*\)\(iVar17\ \+\ 0x44\);$@2	+6	all	none
+use	Scheduler__buildDependencyGraph	puVar27	listNodePredEdges	CONFIRMED	listNode + 0x44: predecessor edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@15	+1	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	vectorCount	INFERRED	vector count word	^\s*(?:uVar19|dotProductLimit)\ =\ puVar27\[1\];$@15	+5	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	vectorCount	INFERRED	vector count word	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@15	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)\((?:uVar19|dotProductLimit)\ \*\ 4\ \+\ puVar27\[2\]\);$@15	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@15	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*\*(?:piVar14|inst)\ =\ \(int\)\((?:puVar15|nodeAlloc)\ \+\ 1\);$@14	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar17	resourceSlot10Result	INFERRED	ResourceModel slot 0x28 on curInst	^\s*\(iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)(?:param_1|scheduler)\[2\]\ \+\ 0x28\)\)\(\(int\ \*\)(?:param_1|scheduler)\[2\],piVar4\),$	+2	all	none
+use	Scheduler__buildDependencyGraph	iVar16	listNext	INFERRED	next link of the chain list node	^\s*iVar16\ =\ \*\(int\ \*\)\(local_70\ \+\ 8\);$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar16	listNext	INFERRED	next link of the chain list node	^\s*while\ \(iVar18\ =\ iVar16,\ iVar18\ !=\ 0\)\ \{$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar16	listNext	INFERRED	next link of the chain list node	^\s*iVar16\ =\ \*\(int\ \*\)\(iVar18\ \+\ 8\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar17	listNode	INFERRED	node of the chain list walked through its next links	^\s*iVar17\ =\ local_70;$@2	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar17	listNode	INFERRED	node of the chain list walked through its next links	^\s*if\ \(\*\(int\ \*\)\(iVar17\ \+\ 0x38\)\ ==\ \*\(int\ \*\)\((?:param_1|scheduler)\[1\]\ \+\ 0x33c\)\)\ \{$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar17	listNode	INFERRED	node of the chain list walked through its next links	^\s*(?:puVar15|nodeAlloc)\[2\]\ =\ iVar17;$@3	+2	all	none
+use	Scheduler__buildDependencyGraph	iVar17	listNode	INFERRED	node of the chain list walked through its next links	^\s*puVar27\ =\ \*\(uint\ \*\*\)\(iVar17\ \+\ 0x44\);$@3	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar17	listNode	INFERRED	node of the chain list walked through its next links	^\s*iVar18\ =\ \*\(int\ \*\)\(iVar17\ \+\ 8\);$	+1	all	none
+use	Scheduler__buildDependencyGraph	iVar17	listNode	INFERRED	node of the chain list walked through its next links	^\s*iVar17\ =\ iVar18;$	+1	all	none
+local	Scheduler__buildDependencyGraph	iVar18	listNextNode	INFERRED	next node of the chain list
+use	Scheduler__buildDependencyGraph	puVar27	curSuccEdges	CONFIRMED	curNode + 0x40: successor edge vector	^\s*puVar27\ =\ \*\(uint\ \*\*\)\(iVar22\ \+\ 0x40\);$@8	+6	all	none
+use	Scheduler__buildDependencyGraph	puVar27	curSuccEdges	CONFIRMED	curNode + 0x40: successor edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@16	+1	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	vectorCount	INFERRED	vector count word	^\s*(?:uVar19|dotProductLimit)\ =\ puVar27\[1\];$@16	+5	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	vectorCount	INFERRED	vector count word	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@16	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)\((?:uVar19|dotProductLimit)\ \*\ 4\ \+\ puVar27\[2\]\);$@16	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@16	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*\*(?:piVar14|inst)\ =\ \(int\)\((?:puVar15|nodeAlloc)\ \+\ 1\);$@15	+1	all	none
+use	Scheduler__buildDependencyGraph	puVar27	listNodePredEdges	CONFIRMED	listNode + 0x44: predecessor edge vector	^\s*puVar27\ =\ \*\(uint\ \*\*\)\(iVar17\ \+\ 0x44\);$@3	+6	all	none
+use	Scheduler__buildDependencyGraph	puVar27	listNodePredEdges	CONFIRMED	listNode + 0x44: predecessor edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@17	+1	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	vectorCount	INFERRED	vector count word	^\s*(?:uVar19|dotProductLimit)\ =\ puVar27\[1\];$@17	+5	all	none
+use	Scheduler__buildDependencyGraph	dotProductLimit	vectorCount	INFERRED	vector count word	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@17	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)\((?:uVar19|dotProductLimit)\ \*\ 4\ \+\ puVar27\[2\]\);$@17	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*(?:piVar14|inst)\ =\ \(int\ \*\)FUN_0019423c\(puVar27,(?:uVar19|dotProductLimit)\);$@17	+1	all	none
+use	Scheduler__buildDependencyGraph	inst	edgeAppendSlot	INFERRED	new slot at the end of the edge vector	^\s*\*(?:piVar14|inst)\ =\ \(int\)\((?:puVar15|nodeAlloc)\ \+\ 1\);$@16	+1	all	none

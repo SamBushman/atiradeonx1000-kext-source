@@ -1,0 +1,13 @@
+local	R300SchedModel__vslot19	param_2	inst	INFERRED	the instruction
+local	R300SchedModel__vslot19	uVar2	resourceClass	INFERRED	returned class: 3 for fetches and instructions both slots can take
+local	R300SchedModel__vslot19	local_28	vectorSlotUse	INFERRED	filled by FUN_00189df4: component slot the instruction needs in the vector part (-1 none)
+local	R300SchedModel__vslot19	local_24	scalarSlotUse	INFERRED	filled by FUN_00189df4: component slot the instruction needs in the scalar part (-1 none); only index 0 is used
+use	R300SchedModel__vslot34	iVar3	operandNumber	INFERRED	source operand number 1..count	^\s*iVar3\ =\ 1;$	+1	all	none
+use	R300SchedModel__vslot34	iVar3	operandNumber	INFERRED	source operand number 1..count	^\s*for\ \(;\ (?:iVar1|callResult)\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_2|inst)\ \+\ 0x14\)\)\((?:param_2|inst)\),\ iVar3\ <=\ (?:iVar1|callResult);\ iVar3\ =\ iVar3\ \+\ 1\)\ \{$	+2	all	none
+use	R300SchedModel__vslot34	iVar3	operandNumber	INFERRED	source operand number 1..count	^\s*a0\ =\ \(int\ \*\)FUN_00105594\((?:param_2|inst),iVar3\);$	+1	all	none
+use	R300SchedModel__vslot34	iVar3	source1Select	INFERRED	select word of operand 1 (record + 0x10), compared with operand 2's	^\s*iVar3\ =\ \*\(int\ \*\)\((?:iVar1|callResult)\ \+\ 0x10\);$	+1	all	none
+use	R300SchedModel__vslot34	iVar3	source1Select	INFERRED	select word of operand 1 (record + 0x10), compared with operand 2's	^\s*if\ \(iVar3\ !=\ \*\(int\ \*\)\((?:iVar1|callResult)\ \+\ 0x10\)\)\ \{$	+1	all	none
+use	R300SchedModel__vslot34	uVar2	matchesDefaultPattern	INFERRED	SelectWord__matchesDefaultPattern of operand 1	^\s*uVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_0018976c\)\(\*\(undefined4\ \*\)\((?:iVar1|callResult)\ \+\ 0x10\)\);$	+2	all	none
+use	R300SchedModel__vslot34	uVar2	selectWord	INFERRED	select word of the operand (record + 0x10)	^\s*uVar2\ =\ \*\(undefined4\ \*\)\((?:iVar1|callResult)\ \+\ 0x10\);$	+1	all	none
+use	R300SchedModel__vslot34	uVar2	selectWord	INFERRED	select word of the operand (record + 0x10)	^\s*(?:iVar1|callResult)\ =\ \(\(int\ \(\*\)\(\)\)FUN_001896f8\)\(uVar2\);$	+1	all	none
+use	R300SchedModel__vslot34	uVar2	selectWord	INFERRED	select word of the operand (record + 0x10)	^\s*(?:iVar1|callResult)\ =\ \(\(int\ \(\*\)\(\)\)FUN_00189788\)\(uVar2\);$	+1	all	none

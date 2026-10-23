@@ -1,0 +1,125 @@
+use	Scheduler__packDotProductCandidates	iVar6	node	INFERRED	node being examined (scheduler[6]... element)	^\s*iVar6\ =\ \*piVar3;$	+1	all	none
+use	Scheduler__packDotProductCandidates	iVar6	node	INFERRED	node being examined (scheduler[6]... element)	^\s*if\ \(iVar6\ ==\ 0\)\ goto\ LAB_issue76_skip_169b70;$	+1	all	none
+use	Scheduler__packDotProductCandidates	iVar6	node	INFERRED	node being examined (scheduler[6]... element)	^\s*puVar10\ =\ \*\(uint\ \*\*\)\(iVar6\ \+\ 0x44\);$	+1	all	none
+use	Scheduler__packDotProductCandidates	iVar6	node	INFERRED	node being examined (scheduler[6]... element)	^\s*iVar11\ =\ \*\(int\ \*\)\(iVar6\ \+\ 0x18\);$	+2	all	none
+use	Scheduler__packDotProductCandidates	iVar6	node	INFERRED	node being examined (scheduler[6]... element)	^\s*\*\(int\ \*\)\(iVar6\ \+\ 0x18\)\ =\ iVar11;$	+1	all	none
+use	Scheduler__packDotProductCandidates	iVar6	node	INFERRED	node being examined (scheduler[6]... element)	^\s*puVar10\ =\ \*\(uint\ \*\*\)\(iVar6\ \+\ 0x44\);$@2	+1	all	none
+use	Scheduler__packDotProductCandidates	iVar6	node	INFERRED	node being examined (scheduler[6]... element)	^\s*if\ \(\(\*\(uint\ \*\)\(\*\(int\ \*\)\(iVar6\ \+\ 0x38\)\ \+\ 0x14\)\ \&\ 2\)\ !=\ 0\)\ \{$	+1	all	none
+use	Scheduler__packDotProductCandidates	iVar6	node	INFERRED	node being examined (scheduler[6]... element)	^\s*\}\ while\ \(\*\(int\ \*\)\(iVar6\ \+\ 0x18\)\ <=\ \*\(int\ \*\)\(iVar1\ \+\ 0x18\)\);$	+2	all	none
+use	Scheduler__packDotProductCandidates	iVar6	node	INFERRED	node being examined (scheduler[6]... element)	^\s*FUN_00193f64\(auStack_48,iVar6\);$	+1	all	none
+use	Scheduler__packDotProductCandidates	iVar6	node	INFERRED	node being examined (scheduler[6]... element)	^\s*while\ \(iVar6\ =\ FUN_00193f08\(auStack_48\),\ iVar6\ ==\ 0\)\ \{$	+1	all	none
+use	Scheduler__packDotProductCandidates	iVar6	node	INFERRED	node being examined (scheduler[6]... element)	^\s*iVar6\ =\ local_40;$	+1	all	none
+use	Scheduler__packDotProductCandidates	iVar6	node	INFERRED	node being examined (scheduler[6]... element)	^\s*iVar11\ =\ \*\(int\ \*\)\(iVar6\ \+\ 8\);$	+2	all	none
+use	Scheduler__packDotProductCandidates	iVar6	node	INFERRED	node being examined (scheduler[6]... element)	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 0x68\)\ =\ 1;$	+1	all	none
+use	Scheduler__packDotProductCandidates	iVar6	node	INFERRED	node being examined (scheduler[6]... element)	^\s*if\ \(\*\(int\ \*\)\(iVar6\ \+\ 0x68\)\ !=\ 0\)\ \{$	+1	all	none
+use	Scheduler__packDotProductCandidates	puVar10	allNodes	CONFIRMED	scheduler[6]: vector of all nodes	^\s*puVar10\ =\ \*\(uint\ \*\*\)\((?:param_1|scheduler)\ \+\ 0x18\);$	+2	all	none
+use	Scheduler__packDotProductCandidates	puVar10	allNodes	CONFIRMED	scheduler[6]: vector of all nodes	^\s*if\ \(uVar8\ <\ \*puVar10\)\ \{$	+2	all	none
+use	Scheduler__packDotProductCandidates	puVar10	allNodes	CONFIRMED	scheduler[6]: vector of all nodes	^\s*_memset\(uVar2\ \*\ 4\ \+\ puVar10\[2\],0,\(uVar8\ \-\ uVar2\)\ \*\ 4\ \+\ 4\);$	+2	all	none
+use	Scheduler__packDotProductCandidates	puVar10	allNodes	CONFIRMED	scheduler[6]: vector of all nodes	^\s*piVar3\ =\ \(int\ \*\)\(uVar8\ \*\ 4\ \+\ puVar10\[2\]\);$	+1	all	none
+use	Scheduler__packDotProductCandidates	puVar10	allNodes	CONFIRMED	scheduler[6]: vector of all nodes	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar10,uVar8\);$	+1	all	none
+use	Scheduler__packDotProductCandidates	puVar10	allNodes	CONFIRMED	scheduler[6]: vector of all nodes	^\s*puVar10\ =\ \*\(uint\ \*\*\)\((?:param_1|scheduler)\ \+\ 0x18\);$@2	+1	all	none
+use	Scheduler__packDotProductCandidates	puVar10	predEdges	CONFIRMED	node + 0x44: predecessor edge vector walked for the priority	^\s*puVar10\ =\ \*\(uint\ \*\*\)\(iVar6\ \+\ 0x44\);$	+2	all	none
+use	Scheduler__packDotProductCandidates	puVar10	predEdges	CONFIRMED	node + 0x44: predecessor edge vector walked for the priority	^\s*if\ \(uVar2\ <\ \*puVar10\)\ \{$	+2	all	none
+use	Scheduler__packDotProductCandidates	puVar10	predEdges	CONFIRMED	node + 0x44: predecessor edge vector walked for the priority	^\s*_memset\(uVar4\ \*\ 4\ \+\ puVar10\[2\],0,\(uVar2\ \-\ uVar4\)\ \*\ 4\ \+\ 4\);$	+2	all	none
+use	Scheduler__packDotProductCandidates	puVar10	predEdges	CONFIRMED	node + 0x44: predecessor edge vector walked for the priority	^\s*piVar3\ =\ \(int\ \*\)\(uVar2\ \*\ 4\ \+\ puVar10\[2\]\);$	+1	all	none
+use	Scheduler__packDotProductCandidates	puVar10	predEdges	CONFIRMED	node + 0x44: predecessor edge vector walked for the priority	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar10,uVar2\);$	+1	all	none
+use	Scheduler__packDotProductCandidates	puVar10	predEdges	CONFIRMED	node + 0x44: predecessor edge vector walked for the priority	^\s*puVar10\ =\ \*\(uint\ \*\*\)\(iVar6\ \+\ 0x44\);$@2	+1	all	none
+use	Scheduler__packDotProductCandidates	piVar3	nodeSlot	INFERRED	slot of the node vector element	^\s*piVar3\ =\ \(int\ \*\)\(uVar8\ \*\ 4\ \+\ puVar10\[2\]\);$	+1	all	none
+use	Scheduler__packDotProductCandidates	piVar3	nodeSlot	INFERRED	slot of the node vector element	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar10,uVar8\);$	+1	all	none
+use	Scheduler__packDotProductCandidates	piVar3	nodeSlot	INFERRED	slot of the node vector element	^\s*iVar6\ =\ \*piVar3;$	+1	all	none
+use	Scheduler__packDotProductCandidates	piVar3	predEdgeSlot	INFERRED	slot of the predecessor edge vector element	^\s*piVar3\ =\ \(int\ \*\)\(uVar2\ \*\ 4\ \+\ puVar10\[2\]\);$	+1	all	none
+use	Scheduler__packDotProductCandidates	piVar3	predEdgeSlot	INFERRED	slot of the predecessor edge vector element	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar10,uVar2\);$	+1	all	none
+use	Scheduler__packDotProductCandidates	piVar3	predEdgeSlot	INFERRED	slot of the predecessor edge vector element	^\s*iVar1\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\*piVar3\ \+\ 0x18\)\ \+\ \(\(int\ \*\)\*piVar3\)\[3\];$	+1	all	none
+use	Scheduler__packDotProductCandidates	uVar8	nodeIndex	INFERRED	index into the node vector	^\s*uVar8\ =\ 0;$	+1	all	none
+use	Scheduler__packDotProductCandidates	uVar8	nodeIndex	INFERRED	index into the node vector	^\s*if\ \(uVar8\ <\ \*puVar10\)\ \{$	+1	all	none
+use	Scheduler__packDotProductCandidates	uVar8	nodeIndex	INFERRED	index into the node vector	^\s*if\ \(uVar2\ <=\ uVar8\)\ \{$	+3	all	none
+use	Scheduler__packDotProductCandidates	uVar8	nodeIndex	INFERRED	index into the node vector	^\s*piVar3\ =\ \(int\ \*\)\(uVar8\ \*\ 4\ \+\ puVar10\[2\]\);$	+1	all	none
+use	Scheduler__packDotProductCandidates	uVar8	nodeIndex	INFERRED	index into the node vector	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar10,uVar8\);$	+1	all	none
+use	Scheduler__packDotProductCandidates	uVar8	nodeIndex	INFERRED	index into the node vector	^\s*uVar8\ =\ uVar8\ \+\ 1;$	+2	all	none
+use	Scheduler__packDotProductCandidates	uVar7	nodeCount	INFERRED	count of the node vector	^\s*uVar7\ =\ puVar10\[1\];$	+2	all	none
+use	Scheduler__packDotProductCandidates	uVar7	nodeCount	INFERRED	count of the node vector	^\s*if\ \(uVar7\ ==\ uVar8\)\ break;$	+1	all	none
+use	Scheduler__packDotProductCandidates	uVar9	predEdgeCount	INFERRED	count of the predecessor edge vector	^\s*uVar9\ =\ puVar10\[1\];$	+2	all	none
+use	Scheduler__packDotProductCandidates	uVar9	predEdgeCount	INFERRED	count of the predecessor edge vector	^\s*if\ \(uVar9\ ==\ uVar2\)\ break;$	+1	all	none
+use	Scheduler__packDotProductCandidates	uVar2	vectorCount	INFERRED	vector count word read by the inlined element accessor	^\s*uVar2\ =\ puVar10\[1\];$	+3	all	none
+use	Scheduler__packDotProductCandidates	uVar4	vectorCount2	INFERRED	vector count word read by the inlined element accessor	^\s*uVar4\ =\ puVar10\[1\];$	+3	all	none
+use	Scheduler__packDotProductCandidates	iVar11	priority	INFERRED	node + 0x18 after the max with the edge's priority	^\s*iVar11\ =\ \*\(int\ \*\)\(iVar6\ \+\ 0x18\);$	+1	all	none
+use	Scheduler__packDotProductCandidates	iVar11	priority	INFERRED	node + 0x18 after the max with the edge's priority	^\s*iVar11\ =\ iVar1;$	+1	all	none
+use	Scheduler__packDotProductCandidates	iVar11	priority	INFERRED	node + 0x18 after the max with the edge's priority	^\s*\*\(int\ \*\)\(iVar6\ \+\ 0x18\)\ =\ iVar11;$	+1	all	none
+use	Scheduler__packDotProductCandidates	iVar11	sortedCursor	INFERRED	walks the sorted candidate list (auStack_48) to the insertion point	^\s*iVar11\ =\ local_40;$	+1	all	none
+use	Scheduler__packDotProductCandidates	iVar11	sortedCursor	INFERRED	walks the sorted candidate list (auStack_48) to the insertion point	^\s*iVar1\ =\ iVar11;$	+1	all	none
+use	Scheduler__packDotProductCandidates	iVar11	sortedCursor	INFERRED	walks the sorted candidate list (auStack_48) to the insertion point	^\s*iVar11\ =\ \*\(int\ \*\)\(iVar1\ \+\ 8\);$	+1	all	none
+use	Scheduler__packDotProductCandidates	iVar11	nextSortedNode	INFERRED	next node of the sorted list, 0 at its end	^\s*iVar11\ =\ 0;$	+1	all	none
+use	Scheduler__packDotProductCandidates	iVar11	nextSortedNode	INFERRED	next node of the sorted list, 0 at its end	^\s*iVar11\ =\ \*\(int\ \*\)\(iVar1\ \+\ 8\);$@2	+1	all	none
+use	Scheduler__packDotProductCandidates	iVar11	nextSortedNode	INFERRED	next node of the sorted list, 0 at its end	^\s*if\ \(iVar11\ ==\ 0\)\ \{$	+1	all	none
+use	Scheduler__packDotProductCandidates	iVar11	nextCandidate	INFERRED	next list node after the first candidate	^\s*iVar11\ =\ \*\(int\ \*\)\(iVar6\ \+\ 8\);$	+1	all	none
+use	Scheduler__packDotProductCandidates	iVar11	nextCandidate	INFERRED	next list node after the first candidate	^\s*while\ \(iVar1\ =\ iVar11,\ iVar11\ =\ \*\(int\ \*\)\(iVar1\ \+\ 8\),\ iVar11\ !=\ 0\)\ \{$	+1	all	none
+use	Scheduler__packDotProductCandidates	iVar5	canAdd	INFERRED	ResourceModel slot 3 (canAddInstruction) for the following candidate	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\((?:param_1|scheduler)\ \+\ 8\)\ \+\ 0xc\)\)$	+1	all	none
+use	Scheduler__packDotProductCandidates	iVar5	canAdd	INFERRED	ResourceModel slot 3 (canAddInstruction) for the following candidate	^\s*if\ \(iVar5\ !=\ 0\)\ \{$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	uVar11	nodeCount	INFERRED	scheduler[6][1]: number of nodes	^\s*uVar11\ =\ \*\(uint\ \*\)\((?:param_1|scheduler)\[6\]\ \+\ 4\);$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	uVar11	nodeCount	INFERRED	scheduler[6][1]: number of nodes	^\s*if\ \(0\ <\ \(int\)uVar11\)\ \{$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	uVar11	nodeCount	INFERRED	scheduler[6][1]: number of nodes	^\s*\}\ while\ \(uVar11\ !=\ uVar14\);$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	piVar4	nodeSlot	INFERRED	slot of the node vector element	^\s*piVar4\ =\ \(int\ \*\)\(uVar14\ \*\ 4\ \+\ puVar17\[2\]\);$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	piVar4	nodeSlot	INFERRED	slot of the node vector element	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\(puVar17,uVar14\);$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	piVar4	nodeSlot	INFERRED	slot of the node vector element	^\s*(?:iVar13|node)\ =\ \*piVar4;$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	piVar4	nodeSlot	INFERRED	slot of the node vector element	^\s*if\ \(\(\(\(\(\*\(int\ \*\)\((?:iVar13|node)\ \+\ 0x60\)\ ==\ 0\)\ \&\&$	+5	all	none
+use	Scheduler__buildCoScheduleGroups	puVar17	allNodes	CONFIRMED	scheduler[6]: vector of all nodes	^\s*puVar17\ =\ \(uint\ \*\)(?:param_1|scheduler)\[6\];$	+3	all	none
+use	Scheduler__buildCoScheduleGroups	puVar17	allNodes	CONFIRMED	scheduler[6]: vector of all nodes	^\s*_memset\(uVar3\ \*\ 4\ \+\ puVar17\[2\],0,\(uVar14\ \-\ uVar3\)\ \*\ 4\ \+\ 4\);$	+2	all	none
+use	Scheduler__buildCoScheduleGroups	puVar17	allNodes	CONFIRMED	scheduler[6]: vector of all nodes	^\s*piVar4\ =\ \(int\ \*\)\(uVar14\ \*\ 4\ \+\ puVar17\[2\]\);$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	puVar17	allNodes	CONFIRMED	scheduler[6]: vector of all nodes	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\(puVar17,uVar14\);$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	uVar3	vectorCount	INFERRED	vector count word read by the inlined element accessor	^\s*uVar3\ =\ puVar17\[1\];$	+3	all	none
+use	Scheduler__buildCoScheduleGroups	uVar3	defaultMaskWord	INFERRED	DAT_001b01a8: initial lane mask / cycle bound word of a new group record	^\s*uVar3\ =\ DAT_001b01a8;$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	uVar3	defaultMaskWord	INFERRED	DAT_001b01a8: initial lane mask / cycle bound word of a new group record	^\s*(?:puVar6|allocation)\[1\]\ =\ uVar3;$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	uVar2	defaultSelectWord	INFERRED	DAT_001b0198: initial select bytes of a new group record	^\s*uVar2\ =\ DAT_001b0198;$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	uVar2	defaultSelectWord	INFERRED	DAT_001b0198: initial select bytes of a new group record	^\s*(?:puVar6|allocation)\[4\]\ =\ uVar2;$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	puVar17	zeroCursor	INFERRED	walks the new group record's four trailing words while they are cleared	^\s*puVar17\ =\ (?:puVar10|groupRecord);$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	puVar17	zeroCursor	INFERRED	walks the new group record's four trailing words while they are cleared	^\s*puVar17\[6\]\ =\ 0;$	+2	all	none
+use	Scheduler__buildCoScheduleGroups	uVar3	stackCountBefore	INFERRED	work stack count before the push of the seed node	^\s*uVar3\ =\ local_64_vec;$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	uVar3	stackCountBefore	INFERRED	work stack count before the push of the seed node	^\s*local_64_vec\ =\ uVar3\ \+\ 1;$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	piVar4	pushSlot	INFERRED	slot appended at the end of the work stack	^\s*piVar4\ =\ \(int\ \*\)\(iVar5\ \+\ local_60_vec\);$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	piVar4	pushSlot	INFERRED	slot appended at the end of the work stack	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\(\&local_68_vec,local_64_vec\);$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	piVar4	pushSlot	INFERRED	slot appended at the end of the work stack	^\s*\*piVar4\ =\ (?:iVar13|node);$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	uVar3	topIndex	INFERRED	index of the top work stack entry	^\s*uVar3\ =\ local_64_vec\ \-\ 1;$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	uVar3	topIndex	INFERRED	index of the top work stack entry	^\s*if\ \(uVar3\ <\ local_64_vec\)\ \{$	+2	all	none
+use	Scheduler__buildCoScheduleGroups	uVar3	topIndex	INFERRED	index of the top work stack entry	^\s*FUN_00194208\(\&local_68_vec,uVar3\);$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	piVar4	topSlot	INFERRED	slot of the top work stack entry	^\s*piVar4\ =\ \(int\ \*\)0x0;$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	piVar4	topSlot	INFERRED	slot of the top work stack entry	^\s*piVar4\ =\ \(int\ \*\)\(uVar3\ \*\ 4\ \+\ local_60_vec\);$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	piVar4	topSlot	INFERRED	slot of the top work stack entry	^\s*iVar5\ =\ \*piVar4;$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	puVar17	succEdges	CONFIRMED	workNode + 0x40: successor edge vector	^\s*puVar17\ =\ \*\(uint\ \*\*\)\(iVar5\ \+\ 0x40\);$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	puVar17	succEdges	CONFIRMED	workNode + 0x40: successor edge vector	^\s*uVar3\ =\ puVar17\[1\];$@2	+1	all	none
+use	Scheduler__buildCoScheduleGroups	puVar17	succEdges	CONFIRMED	workNode + 0x40: successor edge vector	^\s*if\ \(uVar15\ <\ \*puVar17\)\ \{$	+2	all	none
+use	Scheduler__buildCoScheduleGroups	puVar17	succEdges	CONFIRMED	workNode + 0x40: successor edge vector	^\s*_memset\(uVar7\ \*\ 4\ \+\ puVar17\[2\],0,\(uVar15\ \-\ uVar7\)\ \*\ 4\ \+\ 4\);$	+2	all	none
+use	Scheduler__buildCoScheduleGroups	puVar17	succEdges	CONFIRMED	workNode + 0x40: successor edge vector	^\s*piVar4\ =\ \(int\ \*\)\(uVar15\ \*\ 4\ \+\ puVar17\[2\]\);$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	puVar17	succEdges	CONFIRMED	workNode + 0x40: successor edge vector	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\(puVar17,uVar15\);$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	puVar17	succEdges	CONFIRMED	workNode + 0x40: successor edge vector	^\s*puVar17\ =\ \*\(uint\ \*\*\)\(iVar5\ \+\ 0x40\);$@2	+1	all	none
+use	Scheduler__buildCoScheduleGroups	uVar3	vectorCount	INFERRED	vector count word read by the inlined element accessor	^\s*uVar3\ =\ puVar17\[1\];$@2	+2	all	none
+use	Scheduler__buildCoScheduleGroups	uVar3	vectorCount	INFERRED	vector count word read by the inlined element accessor	^\s*if\ \(uVar3\ ==\ uVar15\)\ break;$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	uVar7	succEdgeCount	INFERRED	count of workNode's successor edges	^\s*uVar7\ =\ puVar17\[1\];$	+3	all	none
+use	Scheduler__buildCoScheduleGroups	piVar4	succEdgeSlot	INFERRED	slot of the successor edge vector element	^\s*piVar4\ =\ \(int\ \*\)\(uVar15\ \*\ 4\ \+\ puVar17\[2\]\);$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	piVar4	succEdgeSlot	INFERRED	slot of the successor edge vector element	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\(puVar17,uVar15\);$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	piVar4	succEdgeSlot	INFERRED	slot of the successor edge vector element	^\s*iVar16\ =\ \*piVar4;$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	iVar16	succEdge	INFERRED	successor edge of the work node	^\s*iVar16\ =\ \*piVar4;$	+3	all	none
+use	Scheduler__buildCoScheduleGroups	iVar16	succEdge	INFERRED	successor edge of the work node	^\s*if\ \(\(\(piVar4\[2\]\ ==\ 0\)\ \&\&\ \(piVar4\[4\]\ ==\ \*\(int\ \*\)\(iVar16\ \+\ 0x10\)\)\)\ \&\&$	+2	all	none
+use	Scheduler__buildCoScheduleGroups	iVar12	consumerNode	INFERRED	the successor edge's `to` node	^\s*iVar12\ =\ \*\(int\ \*\)\(iVar16\ \+\ 4\);$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	iVar12	consumerNode	INFERRED	the successor edge's `to` node	^\s*puVar17\ =\ \*\(uint\ \*\*\)\(iVar12\ \+\ 0x44\);$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	iVar12	consumerNode	INFERRED	the successor edge's `to` node	^\s*puVar17\ =\ \*\(uint\ \*\*\)\(iVar12\ \+\ 0x44\);$@2	+1	all	none
+use	Scheduler__buildCoScheduleGroups	puVar17	consumerPredEdges	CONFIRMED	consumerNode + 0x44: predecessor edge vector	^\s*puVar17\ =\ \*\(uint\ \*\*\)\(iVar12\ \+\ 0x44\);$	+2	all	none
+use	Scheduler__buildCoScheduleGroups	puVar17	consumerPredEdges	CONFIRMED	consumerNode + 0x44: predecessor edge vector	^\s*if\ \(uVar19\ <\ \*puVar17\)\ \{$	+2	all	none
+use	Scheduler__buildCoScheduleGroups	puVar17	consumerPredEdges	CONFIRMED	consumerNode + 0x44: predecessor edge vector	^\s*_memset\(uVar8\ \*\ 4\ \+\ puVar17\[2\],0,\(uVar19\ \-\ uVar8\)\ \*\ 4\ \+\ 4\);$	+2	all	none
+use	Scheduler__buildCoScheduleGroups	puVar17	consumerPredEdges	CONFIRMED	consumerNode + 0x44: predecessor edge vector	^\s*(?:puVar6|allocation)\ =\ \(undefined4\ \*\)\(uVar19\ \*\ 4\ \+\ puVar17\[2\]\);$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	puVar17	consumerPredEdges	CONFIRMED	consumerNode + 0x44: predecessor edge vector	^\s*(?:puVar6|allocation)\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar17,uVar19\);$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	puVar17	consumerPredEdges	CONFIRMED	consumerNode + 0x44: predecessor edge vector	^\s*puVar17\ =\ \*\(uint\ \*\*\)\(iVar12\ \+\ 0x44\);$@2	+1	all	none
+use	Scheduler__buildCoScheduleGroups	uVar7	consumerPredCount	INFERRED	count of the consumer's predecessor edges	^\s*uVar7\ =\ puVar17\[1\];$@2	+2	all	none
+use	Scheduler__buildCoScheduleGroups	uVar7	consumerPredCount	INFERRED	count of the consumer's predecessor edges	^\s*if\ \(uVar7\ ==\ uVar19\)\ break;$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	uVar8	vectorCount2	INFERRED	vector count word read by the inlined element accessor	^\s*uVar8\ =\ puVar17\[1\];$	+3	all	none
+use	Scheduler__buildCoScheduleGroups	piVar4	siblingEdge	INFERRED	predecessor edge of the consumer for the same operand: its `from` node joins the group	^\s*piVar4\ =\ \(int\ \*\)\*(?:puVar6|allocation);$	+3	all	none
+use	Scheduler__buildCoScheduleGroups	piVar4	siblingEdge	INFERRED	predecessor edge of the consumer for the same operand: its `from` node joins the group	^\s*\*\(uint\ \*\*\)\(\*piVar4\ \+\ 0x60\)\ =\ (?:puVar10|groupRecord);$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	piVar4	siblingEdge	INFERRED	predecessor edge of the consumer for the same operand: its `from` node joins the group	^\s*\*(?:puVar10|groupRecord)\ =\ \*(?:puVar10|groupRecord)\ \|\ \*\(uint\ \*\)\(\*\(int\ \*\)\(\*piVar4\ \+\ 0x38\)\ \+\ 0xc\);$	+2	all	none
+use	Scheduler__buildCoScheduleGroups	uVar8	stackCountBeforeSibling	INFERRED	work stack count before the sibling is pushed	^\s*uVar8\ =\ local_64_vec;$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	uVar8	stackCountBeforeSibling	INFERRED	work stack count before the sibling is pushed	^\s*local_64_vec\ =\ uVar8\ \+\ 1;$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	iVar9	siblingNode	INFERRED	the sibling producer node pushed on the work stack	^\s*iVar9\ =\ \*piVar4;$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	iVar9	siblingNode	INFERRED	the sibling producer node pushed on the work stack	^\s*\*piVar4\ =\ iVar9;$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	iVar1	pushByteOffset	INFERRED	4 * work stack count	^\s*iVar1\ =\ local_64_vec\ \*\ 4;$	+2	all	none
+use	Scheduler__buildCoScheduleGroups	iVar1	pushByteOffset	INFERRED	4 * work stack count	^\s*piVar4\ =\ \(int\ \*\)\(iVar1\ \+\ local_60_vec\);$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	piVar4	pushSlot	INFERRED	slot appended at the end of the work stack	^\s*piVar4\ =\ \(int\ \*\)\(iVar1\ \+\ local_60_vec\);$	+1	all	none
+use	Scheduler__buildCoScheduleGroups	piVar4	pushSlot	INFERRED	slot appended at the end of the work stack	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\(\&local_68_vec,local_64_vec\);$@2	+1	all	none
+use	Scheduler__buildCoScheduleGroups	piVar4	pushSlot	INFERRED	slot appended at the end of the work stack	^\s*\*piVar4\ =\ iVar9;$	+1	all	none

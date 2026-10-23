@@ -1,0 +1,126 @@
+use	pass_sched_preprocess_and_schedule_inst	iVar4	threadModel	CONFIRMED	Compiler__getThreadModel(compiler): scheduler[3]	^\s*iVar4\ =\ FUN_0010ddd8\(\*(?:param_1|scheduler)\);$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar4	slotsLeft	INFERRED	countdown over the five bundle slots cleared at creation	^\s*iVar4\ =\ 5;$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar4	slotsLeft	INFERRED	countdown over the five bundle slots cleared at creation	^\s*iVar4\ =\ iVar4\ \+\ \-1;$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar4	fileSize0	INFERRED	HwLimits slot 78 (0x138): size of register file 0	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x138\)\)\(piVar7,\*(?:param_1|scheduler)\);$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar4	fileSize0	INFERRED	HwLimits slot 78 (0x138): size of register file 0	^\s*iVar4\ =\ iVar4\ \+\ iVar8;$	+3	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar4	fileSize0	INFERRED	HwLimits slot 78 (0x138): size of register file 0	^\s*(?:puVar5|allocation)\[2\]\ =\ iVar4;$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar4	wordsLeft	INFERRED	word count of the live-out bit set, counted down while it is cleared	^\s*iVar4\ =\ \*piVar7;$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar4	wordsLeft	INFERRED	word count of the live-out bit set, counted down while it is cleared	^\s*if\ \(iVar4\ ==\ 0\)\ \{$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar4	wordsLeft	INFERRED	word count of the live-out bit set, counted down while it is cleared	^\s*iVar4\ =\ iVar4\ \+\ \-1;$@2	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar4	fileRegCount	INFERRED	HwLimits slot 79 (0x13c): number of registers of the second file; the last-use arrays exist only when it is positive	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(\*(?:param_1|scheduler)\ \+\ 0x30c\)\ \+\ 0x13c\)\)\(\);$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar4	fileRegCount	INFERRED	HwLimits slot 79 (0x13c): number of registers of the second file; the last-use arrays exist only when it is positive	^\s*iVar8\ =\ FUN_00193e18\(\*\(undefined4\ \*\)\(iVar8\ \+\ 0x378\),iVar4\ <<\ 2\);$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar4	registerCount	CONFIRMED	scheduler[0x51]: number of hardware registers (file 0 + file 1)	^\s*iVar4\ =\ (?:param_1|scheduler)\[0x51\];$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar4	registerCount	CONFIRMED	scheduler[0x51]: number of hardware registers (file 0 + file 1)	^\s*(?:param_1|scheduler)\[0x52\]\ =\ iVar4;$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar4	registerCount	CONFIRMED	scheduler[0x51]: number of hardware registers (file 0 + file 1)	^\s*iVar4\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar8\ \+\ 0x3a0\)\ \+\ 0xd0\);$	+3	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar4	registerCount	CONFIRMED	scheduler[0x51]: number of hardware registers (file 0 + file 1)	^\s*iVar4\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar8\ \+\ 0x3a8\)\ \+\ 0xd4\);$	+3	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar4	registerCount	CONFIRMED	scheduler[0x51]: number of hardware registers (file 0 + file 1)	^\s*iVar4\ =\ (?:param_1|scheduler)\[1\];$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar4	registerCount	CONFIRMED	scheduler[0x51]: number of hardware registers (file 0 + file 1)	^\s*\*\(undefined4\ \*\)\(iVar8\ \+\ 0x118\)\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x474\);$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar4	registerCount	CONFIRMED	scheduler[0x51]: number of hardware registers (file 0 + file 1)	^\s*FUN_000e0e0c\(\*(?:param_1|scheduler),"Scheduler\ :\ Total\ cycles\ %d\\n",(?:param_1|scheduler)\[100\],in_r6,in_r7,in_r8,iVar4,in_r10\)$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar4	registerCount	CONFIRMED	scheduler[0x51]: number of hardware registers (file 0 + file 1)	^\s*FUN_000e0e0c\(\*(?:param_1|scheduler),"Scheduler\ :\ Total\ dot\-product\ transformed\ %d\\n",(?:param_1|scheduler)\[0x6a\],in_r6,in_r7,$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar4	liveOutSet	CONFIRMED	scheduler[0x4c]: the live-out register bit set, freed at the end	^\s*iVar4\ =\ (?:param_1|scheduler)\[0x4c\];$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar4	liveOutSet	CONFIRMED	scheduler[0x4c]: the live-out register bit set, freed at the end	^\s*if\ \(iVar4\ !=\ 0\)\ \{$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar4	bundleRecord	CONFIRMED	scheduler[0xc]: the bundle record, freed at the end	^\s*iVar4\ =\ (?:param_1|scheduler)\[0xc\];$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar4	bundleRecord	CONFIRMED	scheduler[0xc]: the bundle record, freed at the end	^\s*\*\(undefined\ \*\*\)\(iVar4\ \+\ 0x14\)\ =\ puVar3;$	+3	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar4	nodeVector	CONFIRMED	scheduler[6]: vector of all nodes, freed at the end	^\s*iVar4\ =\ (?:param_1|scheduler)\[6\];$	+4	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar4	externalNodeVector	CONFIRMED	scheduler[5]: vector of external nodes, freed at the end	^\s*iVar4\ =\ (?:param_1|scheduler)\[5\];$	+5	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar8	fileSize1	INFERRED	HwLimits slot 80 (0x140): size of register file 1	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x140\)\)\(piVar7,\*(?:param_1|scheduler)\);$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar8	writerArray	INFERRED	Arena__alloc: the per-component latest-writer array (scheduler[0x4d + component])	^\s*iVar8\ =\ FUN_00193e18\(\*\(undefined4\ \*\)\(\*(?:param_1|scheduler)\ \+\ 0x378\),(?:param_1|scheduler)\[0x51\]\ <<\ 2\);$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar8	compiler	INFERRED	*scheduler: the compiler	^\s*iVar8\ =\ \*(?:param_1|scheduler);$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar8	compiler	INFERRED	*scheduler: the compiler	^\s*iVar8\ =\ FUN_00193e18\(\*\(undefined4\ \*\)\(iVar8\ \+\ 0x378\),iVar4\ <<\ 2\);$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar8	entrySuccessorCount	INFERRED	Block__successorCount of the entry block (program + 0x3a0)	^\s*iVar8\ =\ FUN_000e79d0\(\*\(undefined4\ \*\)\((?:param_1|scheduler)\[1\]\ \+\ 0x3a0\)\);$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar8	programAlias	INFERRED	scheduler[1]: the program	^\s*iVar8\ =\ (?:param_1|scheduler)\[1\];$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar8	programAlias	INFERRED	scheduler[1]: the program	^\s*iVar4\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar8\ \+\ 0x3a0\)\ \+\ 0xd0\);$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar8	programAlias	INFERRED	scheduler[1]: the program	^\s*piVar15\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(iVar8\ \+\ 0x3a0\)\ \+\ 0xa0\);$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar8	programAlias	INFERRED	scheduler[1]: the program	^\s*iVar8\ =\ (?:param_1|scheduler)\[1\];$@2	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar8	programAlias	INFERRED	scheduler[1]: the program	^\s*\*\(undefined4\ \*\)\(iVar8\ \+\ 0x3a4\)\ =\ (?:uVar12|arena);$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar8	isEntry	CONFIRMED	IRInst vslot 13 (0x34, isEntry) of the instruction	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*piVar15\ \+\ 0x34\)\)\(piVar15\);$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar8	exitPredecessorCount	INFERRED	Block__predecessorCount of the exit block (program + 0x3a8)	^\s*iVar8\ =\ FUN_000e79dc\(\*\(undefined4\ \*\)\((?:param_1|scheduler)\[1\]\ \+\ 0x3a8\)\);$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar8	programAlias	INFERRED	scheduler[1]: the program	^\s*iVar8\ =\ (?:param_1|scheduler)\[1\];$@3	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar8	programAlias	INFERRED	scheduler[1]: the program	^\s*iVar4\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar8\ \+\ 0x3a8\)\ \+\ 0xd4\);$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar8	programAlias	INFERRED	scheduler[1]: the program	^\s*piVar15\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(iVar8\ \+\ 0x3a8\)\ \+\ 0x98\);$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar8	programAlias	INFERRED	scheduler[1]: the program	^\s*iVar8\ =\ (?:param_1|scheduler)\[1\];$@4	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar8	programAlias	INFERRED	scheduler[1]: the program	^\s*\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)(?:param_1|scheduler)\[2\]\ \+\ 0x70\)\)\(\(int\ \*\)(?:param_1|scheduler)\[2\],iVar8\);$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar8	isEntry	CONFIRMED	IRInst vslot 13 (0x34, isEntry) of the instruction	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*piVar15\ \+\ 0x34\)\)\(piVar15\);$@2	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar8	isExport	CONFIRMED	IRInst vslot 26 (0x68, isExport) of the instruction	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*piVar15\ \+\ 0x68\)\)\(piVar15\);$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar8	isUndefined	CONFIRMED	IRInst vslot 20 (0x50, isUndefined) of the export's source	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*piVar13\ \+\ 0x50\)\)\(\);$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar8	minRegSortEnabled	CONFIRMED	Compiler__isOptionEnabled(compiler, 0x43) OPT_MIN_REG_SORT	^\s*iVar8\ =\ FUN_000e07dc\(\*(?:param_1|scheduler),0x43\);$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar8	block	INFERRED	current block of the program's list (program + 900, then block + 8)	^\s*iVar8\ =\ \*\(int\ \*\)\((?:param_1|scheduler)\[1\]\ \+\ 900\);$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar8	block	INFERRED	current block of the program's list (program + 900, then block + 8)	^\s*iVar9\ =\ FUN_00194034\(iVar8\ \+\ 0x90\);$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar8	block	INFERRED	current block of the program's list (program + 900, then block + 8)	^\s*\(\(int\ \(\*\)\(\)\)FUN_00170e6c\)\((?:param_1|scheduler),iVar8\);$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar8	block	INFERRED	current block of the program's list (program + 900, then block + 8)	^\s*\*\(undefined4\ \*\)\(iVar8\ \+\ 0x118\)\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x474\);$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar8	block	INFERRED	current block of the program's list (program + 900, then block + 8)	^\s*iVar8\ =\ \*\(int\ \*\)\(iVar8\ \+\ 8\);$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar8	regIndex	INFERRED	register number 0.. marked as used	^\s*iVar8\ =\ 0;$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar8	regIndex	INFERRED	register number 0.. marked as used	^\s*iVar9\ =\ iVar8\ \+\ 1;$	+3	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar8	fileSize02	INFERRED	HwLimits slot 78 (0x138): size of register file 0	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(\*(?:param_1|scheduler)\ \+\ 0x30c\)\ \+\ 0x138\)\)\(\);$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar8	fileSize02	INFERRED	HwLimits slot 78 (0x138): size of register file 0	^\s*iVar10\ =\ iVar8\ \+\ iVar9;$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar8	fileSize02	INFERRED	HwLimits slot 78 (0x138): size of register file 0	^\s*iVar11\ =\ iVar8\ \+\ iVar9\ \+\ iVar10;$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar8	poolRoot	INFERRED	arena owning the external-node vector header	^\s*iVar8\ =\ \*\(int\ \*\)\(iVar4\ \+\ \-4\);$	+4	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar9	lastUseArray	INFERRED	Arena__alloc: the per-component last-use array of the temp file	^\s*iVar9\ =\ FUN_00193e18\(\*\(undefined4\ \*\)\(\*(?:param_1|scheduler)\ \+\ 0x378\),(?:param_1|scheduler)\[0x51\]\ <<\ 2\);$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar9	lastUseArray	INFERRED	Arena__alloc: the per-component last-use array of the temp file	^\s*piVar7\[0x54\]\ =\ iVar9;$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar9	nextBlock	INFERRED	block + 8, loop condition	^\s*iVar9\ =\ \*\(int\ \*\)\(iVar8\ \+\ 8\);$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar9	nextBlock	INFERRED	block + 8, loop condition	^\s*iVar9\ =\ \*\(int\ \*\)\(iVar8\ \+\ 8\);$@2	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar9	regIndex2	INFERRED	register number + 1	^\s*iVar9\ =\ iVar8\ \+\ 1;$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar9	regIndex2	INFERRED	register number + 1	^\s*iVar8\ =\ iVar9;$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar9	regIndex2	INFERRED	register number of file 1 marked as used	^\s*iVar9\ =\ 0;$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar9	regIndex2	INFERRED	register number of file 1 marked as used	^\s*iVar10\ =\ iVar8\ \+\ iVar9;$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar9	regIndex2	INFERRED	register number of file 1 marked as used	^\s*\}\ while\ \(iVar9\ <=\ (?:param_1|scheduler)\[0x67\]\);$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar9	fileSize12	INFERRED	HwLimits slot 80 (0x140): size of register file 1	^\s*iVar9\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(\*(?:param_1|scheduler)\ \+\ 0x30c\)\ \+\ 0x140\)\)\(\);$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar9	fileSize12	INFERRED	HwLimits slot 80 (0x140): size of register file 1	^\s*iVar11\ =\ iVar8\ \+\ iVar9\ \+\ iVar10;$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar9	fileSize12	INFERRED	HwLimits slot 80 (0x140): size of register file 1	^\s*if\ \(\(\*\(int\ \*\)\(iVar8\ \+\ 0x28\)\ !=\ 0\)\ \&\&\ \(iVar9\ =\ \*\(int\ \*\)\(iVar8\ \+\ 0x14\),\ iVar9\ ==\ iVar4\ \+\ \-4\)\)\ \{$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar10	hwRegister	INFERRED	register number of file 1 passed to Program__markHwRegUsed	^\s*iVar10\ =\ iVar8\ \+\ iVar9;$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar10	hwRegister	INFERRED	register number of file 1 passed to Program__markHwRegUsed	^\s*FUN_00130444\((?:param_1|scheduler)\[1\],iVar10\);$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar11	hwRegister2	INFERRED	register number of the second file passed to Program__markHwRegUsed	^\s*iVar11\ =\ iVar8\ \+\ iVar9\ \+\ iVar10;$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	iVar11	hwRegister2	INFERRED	register number of the second file passed to Program__markHwRegUsed	^\s*FUN_00130444\((?:param_1|scheduler)\[1\],iVar11\);$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	bVar1	noSecondFile	INFERRED	the second register file is empty: no last-use arrays	^\s*bVar1\ =\ iVar4\ <\ 1;$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	bVar1	noSecondFile	INFERRED	the second register file is empty: no last-use arrays	^\s*if\ \(bVar1\)\ \{$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	bVar1	noSecondFile	INFERRED	the second register file is empty: no last-use arrays	^\s*if\ \(!bVar1\)\ \{$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	bVar1	noSecondFile	INFERRED	the second register file is empty: no last-use arrays	^\s*if\ \(!bVar1\)\ \{$@2	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar7	target	CONFIRMED	*(compiler + 0x30c): the target description	^\s*piVar7\ =\ \*\(int\ \*\*\)\(\*(?:param_1|scheduler)\ \+\ 0x30c\);$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar7	target	CONFIRMED	*(compiler + 0x30c): the target description	^\s*piVar7\ =\ \*\(int\ \*\*\)\(\*(?:param_1|scheduler)\ \+\ 0x30c\);$@2	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar7	liveOutBitSet	INFERRED	allocation + 1: the new live-out bit set	^\s*piVar7\ =\ (?:puVar5|allocation)\ \+\ 1;$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar7	liveOutBitSet	INFERRED	allocation + 1: the new live-out bit set	^\s*iVar4\ =\ \*piVar7;$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar7	liveOutBitSet	INFERRED	allocation + 1: the new live-out bit set	^\s*(?:param_1|scheduler)\[0x4c\]\ =\ \(int\)piVar7;$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar7	componentArrayCursor	INFERRED	walks scheduler + component: the four component array slots	^\s*piVar7\ =\ (?:param_1|scheduler);$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar7	componentArrayCursor	INFERRED	walks scheduler + component: the four component array slots	^\s*piVar7\[0x4d\]\ =\ iVar8;$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar7	componentArrayCursor	INFERRED	walks scheduler + component: the four component array slots	^\s*piVar7\[0x54\]\ =\ 0;$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar7	componentArrayCursor	INFERRED	walks scheduler + component: the four component array slots	^\s*piVar7\[0x54\]\ =\ iVar9;$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar7	componentArrayCursor	INFERRED	walks scheduler + component: the four component array slots	^\s*piVar7\[0x58\]\ =\ iVar8;$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar7	componentArrayCursor	INFERRED	walks scheduler + component: the four component array slots	^\s*piVar7\ =\ piVar7\ \+\ 1;$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar7	componentArrayCursor	INFERRED	walks scheduler + component: the four component array slots	^\s*\}\ while\ \(piVar7\ !=\ piVar15\);$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar13	bitSetCursor	INFERRED	walks the live-out bit set while it is cleared	^\s*piVar13\ =\ piVar7;$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar13	bitSetCursor	INFERRED	walks the live-out bit set while it is cleared	^\s*piVar13\[2\]\ =\ 0;$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar13	followingInst	INFERRED	the instruction after the one handled (entry block walk, backwards)	^\s*piVar13\ =\ \(int\ \*\)piVar15\[1\];$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar13	followingInst	INFERRED	the instruction after the one handled (entry block walk, backwards)	^\s*piVar14\ =\ piVar13;$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar13	followingInst	INFERRED	the instruction after the one handled (entry block walk, backwards)	^\s*piVar13\ =\ \(int\ \*\)piVar14\[1\];$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar13	followingInst	INFERRED	the instruction after the one handled (entry block walk, backwards)	^\s*\}\ while\ \(piVar13\ !=\ \(int\ \*\)0x0\);$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar13	followingInst	INFERRED	the instruction after the one handled (exit block walk)	^\s*piVar13\ =\ \(int\ \*\)piVar15\[2\];$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar13	followingInst	INFERRED	the instruction after the one handled (exit block walk)	^\s*piVar14\ =\ piVar13;$@2	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar13	followingInst	INFERRED	the instruction after the one handled (exit block walk)	^\s*piVar13\ =\ \(int\ \*\)piVar14\[2\];$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar13	followingInst	INFERRED	the instruction after the one handled (exit block walk)	^\s*\}\ while\ \(piVar13\ !=\ \(int\ \*\)0x0\);$@2	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar13	componentCursor	INFERRED	walks scheduler + component while the arrays are freed	^\s*piVar13\ =\ (?:param_1|scheduler);$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar13	componentCursor	INFERRED	walks scheduler + component while the arrays are freed	^\s*FUN_00193cc0\(\*\(undefined4\ \*\)\(\*(?:param_1|scheduler)\ \+\ 0x378\),piVar13\[0x54\]\);$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar13	componentCursor	INFERRED	walks scheduler + component while the arrays are freed	^\s*piVar15\ =\ piVar13\ \+\ 1;$	+3	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar14	handledInst	INFERRED	the instruction just examined	^\s*piVar14\ =\ piVar13;$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar14	handledInst	INFERRED	the instruction just examined	^\s*piVar13\ =\ \(int\ \*\)piVar14\[1\];$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar14	handledInst	INFERRED	the instruction just examined	^\s*piVar14\ =\ piVar13;$@2	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar14	handledInst	INFERRED	the instruction just examined	^\s*piVar13\ =\ \(int\ \*\)piVar14\[2\];$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar15	inst	INFERRED	current instruction of the entry block's successor (walked backwards)	^\s*piVar15\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(iVar8\ \+\ 0x3a0\)\ \+\ 0xa0\);$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar15	inst	INFERRED	current instruction of the entry block's successor (walked backwards)	^\s*piVar13\ =\ \(int\ \*\)piVar15\[1\];$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar15	inst	INFERRED	current instruction of the entry block's successor (walked backwards)	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*piVar15\ \+\ 0x34\)\)\(piVar15\);$	+4	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar15	inst	INFERRED	current instruction of the entry block's successor (walked backwards)	^\s*piVar15\ =\ piVar14;$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar15	inst	INFERRED	current instruction of the exit block's predecessor	^\s*piVar15\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(iVar8\ \+\ 0x3a8\)\ \+\ 0x98\);$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar15	inst	INFERRED	current instruction of the exit block's predecessor	^\s*piVar13\ =\ \(int\ \*\)piVar15\[2\];$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar15	inst	INFERRED	current instruction of the exit block's predecessor	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*piVar15\ \+\ 0x34\)\)\(piVar15\);$@2	+3	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar15	inst	INFERRED	current instruction of the exit block's predecessor	^\s*piVar13\ =\ \(int\ \*\)FUN_00105594\(piVar15,1\);$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar15	inst	INFERRED	current instruction of the exit block's predecessor	^\s*FUN_0019401c\(piVar15\);$@2	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar15	inst	INFERRED	current instruction of the exit block's predecessor	^\s*piVar15\ =\ piVar14;$@2	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar15	nextComponentCursor	INFERRED	piVar13 + 1	^\s*piVar15\ =\ piVar13\ \+\ 1;$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	piVar15	nextComponentCursor	INFERRED	piVar13 + 1	^\s*piVar13\ =\ piVar15;$	+2	all	none
+use	pass_sched_preprocess_and_schedule_inst	puVar3	deadVtable	INFERRED	PTR_DAT_001e8b48 + 8: vtable stored into the bundle's list sentinels before they are freed	^\s*puVar3\ =\ PTR_DAT_001e8b48\ \+\ 8;$	+3	all	none
+use	pass_sched_preprocess_and_schedule_inst	puVar6	bundleAlloc	CONFIRMED	Arena__alloc(arena, 0x30): the bundle record (five slots and a DList)	^\s*puVar6\ =\ \(undefined4\ \*\)FUN_00193e18\((?:uVar12|arena),0x30\);$	+3	all	none
+use	pass_sched_preprocess_and_schedule_inst	puVar6	bundleAlloc	CONFIRMED	Arena__alloc(arena, 0x30): the bundle record (five slots and a DList)	^\s*(?:puVar5|allocation)\ =\ puVar6\ \+\ 1;$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	puVar6	bundleAlloc	CONFIRMED	Arena__alloc(arena, 0x30): the bundle record (five slots and a DList)	^\s*(?:param_1|scheduler)\[0xc\]\ =\ \(int\)\(puVar6\ \+\ 1\);$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	uVar2	wordCount	INFERRED	(registerCount + 31) >> 5: words of the live-out bit set	^\s*uVar2\ =\ iVar4\ \+\ 0x1fU\ >>\ 5;$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	uVar2	wordCount	INFERRED	(registerCount + 31) >> 5: words of the live-out bit set	^\s*(?:puVar5|allocation)\ =\ \(undefined4\ \*\)FUN_00193e18\((?:uVar12|arena),uVar2\ \*\ 4\ \+\ 0xc\);$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	uVar2	wordCount	INFERRED	(registerCount + 31) >> 5: words of the live-out bit set	^\s*(?:puVar5|allocation)\[1\]\ =\ uVar2;$	+1	all	none
+use	pass_sched_preprocess_and_schedule_inst	uVar2	wordCount	INFERRED	(registerCount + 31) >> 5: words of the live-out bit set	^\s*if\ \(uVar2\ !=\ 0\)\ \{$	+1	all	none
