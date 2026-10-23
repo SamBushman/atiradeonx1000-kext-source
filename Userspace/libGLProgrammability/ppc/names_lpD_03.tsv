@@ -78,7 +78,7 @@ local	__cxxabiv1____vmi_class_type_info____do_upcast	a2	adjustedObjPtr	CONFIRMED
 local	___dynamic_cast	a0	whole	CONFIRMED	whole_type = vtable[-1]: the type_info of the most derived object
 local	__gxx_exception_cleanup	extraout_r4	r4Out0	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
 local	FUN_97c19d00	extraout_r3	r3Out0	UNKNOWN	Ghidra extra-output variable: value of r3 after a call; only forwarded
-local	___cxa_end_catch	extraout_r3	r3Out0	UNKNOWN	Ghidra extra-output variable: value of r3 after a call; only forwarded
+local	___cxa_end_catch	extraout_r3	r3AfterDelete	UNKNOWN	Ghidra extra-output variable: value of r3 after a call; only forwarded
 local	___deregister_frame	extraout_r3	r3Out0	UNKNOWN	Ghidra extra-output variable: value of r3 after a call; only forwarded
 local	_init_object	extraout_r3	r3Out0	UNKNOWN	Ghidra extra-output variable: value of r3 after a call; only forwarded
 local	TType__setStructSize	a0	r3In0	UNKNOWN	Ghidra input-register variable: r3 as left by the previous call, forwarded to the next call

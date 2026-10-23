@@ -53,7 +53,6 @@ local	___cxa_begin_catch	iVar1	oldCaughtExceptions	CONFIRMED	globals->caughtExce
 local	___cxa_begin_catch	iVar2	handlerCount	CONFIRMED	header->handlerCount (-0x1c): made positive then incremented
 local	___cxa_end_catch	iVar2	header	CONFIRMED	globals->caughtExceptions: the __cxa_exception header being finished
 local	___cxa_end_catch	iVar3	handlerCount	CONFIRMED	header->handlerCount (+0x14); the exception is deleted when it reaches 0
-local	___cxa_end_catch	r3Out0	r3AfterDelete	UNKNOWN	r3 as left after _Unwind_DeleteException
 local	__Z12read_uleb128PKhPj	bVar1	leb128Byte	CONFIRMED	current LEB128 byte (low 7 bits payload, bit 7 continuation)
 local	__Z12read_sleb128PKhPi	bVar1	leb128Byte	CONFIRMED	current LEB128 byte (low 7 bits payload, bit 7 continuation, bit 6 sign)
 local	_read_uleb128_97c1a3ec	bVar1	leb128Byte	CONFIRMED	current LEB128 byte
