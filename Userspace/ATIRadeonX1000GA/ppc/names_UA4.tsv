@@ -1,0 +1,13 @@
+use	__AllocateSurface	uVar1	srcPitch	INFERRED	surfaceDesc[6]: row pitch in bytes; record[7] = pitch / bytesPerPixel	#6	+6	all	none
+use	__AllocateSurface	uVar12	bytesPerPixel	INFERRED	record[10] filled by __DecodePixelFormat	#7	+27	all	none
+use	__AllocateSurface	uVar2	descWidth	INFERRED	surfaceDesc[4]: width in pixels	#12	+18	all	none
+use	__AllocateSurface	uVar1	descHeight	INFERRED	surfaceDesc[5]: height in rows	#14	+4	all	rhs
+use	__AllocateSurface	uVar1	dataDwords	INFERRED	(bytesPerPixel*width*height + 3) >> 2, halved until below 0x4000 dwords per repeat	#18	+7	lhs	none
+use	__AllocateSurface	uVar2	repeatHeight	INFERRED	surfaceDesc[5], halved once per doubling of the repeat count	#30	+65	all	none
+use	__AllocateSurface	uVar1	dataDwords	INFERRED	bytesPerPixel*width*height >> 2, halved until below 0x4000 dwords per repeat	#33	+62	all	none
+use	__AllocateSurface	uVar12	repeatRows	INFERRED	copy of repeatHeight: rows copied per repeat	#34	+61	all	none
+use	__AllocateSurface	uVar2	descPitch	INFERRED	surfaceDesc[6]: row pitch, must be a multiple of 0x40	#106	+12	all	none
+use	__AllocateSurface	uVar1	descWidthPx	INFERRED	surfaceDesc[4]: width in pixels	#110	+4	all	none
+use	__AllocateSurface	uVar1	tiledPitch	INFERRED	surfaceDesc[6] after the 128-byte pitch alignment	#156	+4	all	none
+use	__AllocateSurface	uVar1	tiledWidth	INFERRED	surfaceDesc[4]: width in pixels	#160	+4	all	none
+use	__AllocateSurface	uVar2	tiledHeight	INFERRED	surfaceDesc[5]: height in rows	#162	+4	all	none

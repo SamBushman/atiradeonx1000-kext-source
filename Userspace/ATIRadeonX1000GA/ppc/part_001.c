@@ -7,8 +7,17 @@ int __AllocateSurface(accel, flags, surfaceDesc, vramAddress)
   uint *surfaceDesc;
   undefined4 vramAddress;
 {
-  uint uVar1;
-  uint uVar2;
+  uint tiledHeight;
+  uint tiledWidth;
+  uint tiledPitch;
+  uint descWidthPx;
+  uint descPitch;
+  uint repeatRows;
+  uint repeatHeight;
+  uint dataDwords;
+  uint descHeight;
+  uint srcPitch;
+  uint descWidth;
   undefined4 *record;
   int status;
   uint width;
@@ -18,7 +27,7 @@ int __AllocateSurface(accel, flags, surfaceDesc, vramAddress)
   uint rowBytes;
   uint srcNext;
   uint srcRow;
-  uint uVar12;
+  uint bytesPerPixel;
   uint rowIndex;
   int *cmdCursor;
   uint tiledFormatCode;
@@ -37,55 +46,55 @@ int __AllocateSurface(accel, flags, surfaceDesc, vramAddress)
       status = __DecodePixelFormat(surfaceDesc[1],record + 0xc,record + 0xd,record + 10,&formatCode,
                                   record + 0xb,0,record + 0xe);
       if (status == 0) goto LAB_00002cb0;
-      uVar1 = surfaceDesc[6];
-      uVar12 = record[10];
+      srcPitch = surfaceDesc[6];
+      bytesPerPixel = record[10];
       status = 1;
       *(undefined2 *)((int)record + 0xe) = 0;
       *(undefined2 *)(record + 3) = 0;
-      record[7] = uVar1 / uVar12;
-      uVar2 = surfaceDesc[4];
-      *(short *)(record + 4) = (short)uVar2;
-      uVar1 = surfaceDesc[5];
-      record[5] = uVar2;
-      *(short *)((int)record + 0x12) = (short)uVar1;
-      record[6] = uVar1;
-      uVar1 = uVar12 * uVar2 * uVar1 + 3;
-      scalarIn1 = (uVar1 & 0xfffffffc) + 0xfff & 0xfffff000;
-      for (uVar1 = uVar1 >> 2; 0x3fff < uVar1; uVar1 = uVar1 >> 1) {
+      record[7] = srcPitch / bytesPerPixel;
+      descWidth = surfaceDesc[4];
+      *(short *)(record + 4) = (short)descWidth;
+      descHeight = surfaceDesc[5];
+      record[5] = descWidth;
+      *(short *)((int)record + 0x12) = (short)descHeight;
+      record[6] = descHeight;
+      dataDwords = bytesPerPixel * descWidth * descHeight + 3;
+      scalarIn1 = (dataDwords & 0xfffffffc) + 0xfff & 0xfffff000;
+      for (dataDwords = dataDwords >> 2; 0x3fff < dataDwords; dataDwords = dataDwords >> 1) {
         status = status << 1;
       }
       outCount = 2;
-      scalarIn0 = ((uVar1 + 0xd) * status + 0x27) * 4 & 0xffffffe0;
+      scalarIn0 = ((dataDwords + 0xd) * status + 0x27) * 4 & 0xffffffe0;
       status = _io_connect_method_scalarI_scalarO
                         (*(undefined4 *)(accel + 0xc),9,&scalarIn0,2,&scalarOut0,&outCount);
       if (status == 0) {
         *record = scalarOut1;
         width = surfaceDesc[4];
-        uVar2 = surfaceDesc[5];
+        repeatHeight = surfaceDesc[5];
         srcNext = *surfaceDesc;
-        rowBytes = uVar12 * width;
-        uVar1 = uVar12 * width * uVar2 >> 2;
-        uVar12 = uVar2;
-        if (uVar1 < 0x4000) {
+        rowBytes = bytesPerPixel * width;
+        dataDwords = bytesPerPixel * width * repeatHeight >> 2;
+        repeatRows = repeatHeight;
+        if (dataDwords < 0x4000) {
           status = 1;
         }
         else {
           status = 1;
           do {
-            uVar1 = uVar1 >> 1;
-            uVar2 = uVar2 >> 1;
-            uVar12 = uVar12 >> 1;
+            dataDwords = dataDwords >> 1;
+            repeatHeight = repeatHeight >> 1;
+            repeatRows = repeatRows >> 1;
             status = status << 1;
-          } while (0x3fff < uVar1);
+          } while (0x3fff < dataDwords);
         }
         paddedRowBytes = 0x20;
         if (0x1f < rowBytes) {
           paddedRowBytes = rowBytes;
         }
-        *scalarOut0 = (uVar1 + 0xd) * status + 8;
-        scalarOut0[6] = uVar1 + 0xd;
+        *scalarOut0 = (dataDwords + 0xd) * status + 8;
+        scalarOut0[6] = dataDwords + 0xd;
         scalarOut0[7] = status;
-        scalarOut0[5] = paddedRowBytes * uVar2;
+        scalarOut0[5] = paddedRowBytes * repeatHeight;
         scalarOut0[0x20] = 0x1393;
         scalarOut0[0x21] = 10;
         scalarOut0[0x22] = 0x5c8;
@@ -109,10 +118,10 @@ int __AllocateSurface(accel, flags, surfaceDesc, vramAddress)
             cmdCursor[8] = 0;
             cmdCursor[9] = 0x1050e;
             cmdCursor[10] = 0;
-            cmdCursor[0xb] = width | uVar2 << 0x10;
-            cmdCursor[0xc] = (uVar1 - 1) * 0x10000 | 0x85f0;
+            cmdCursor[0xb] = width | repeatHeight << 0x10;
+            cmdCursor[0xc] = (dataDwords - 1) * 0x10000 | 0x85f0;
             cmdCursor = cmdCursor + 0xd;
-            if (uVar12 != 0) {
+            if (repeatRows != 0) {
               rowIndex = 0;
               srcRow = srcNext;
               do {
@@ -121,7 +130,7 @@ int __AllocateSurface(accel, flags, surfaceDesc, vramAddress)
                 _bcopy(srcRow,cmdCursor,rowBytes);
                 cmdCursor = (int *)((int)cmdCursor + (rowBytes & 0xfffffffc));
                 srcRow = srcNext;
-              } while (rowIndex != uVar12);
+              } while (rowIndex != repeatRows);
             }
             repeatIndex = repeatIndex + 1;
           } while (status != repeatIndex);
@@ -137,18 +146,18 @@ int __AllocateSurface(accel, flags, surfaceDesc, vramAddress)
     else if (((surfaceDesc[6] & 0x3f) == 0) &&
             (status = __DecodePixelFormat(surfaceDesc[1],record + 0xc,record + 0xd,record + 10,0,
                                          record + 0xb,0,record + 0xe), status != 0)) {
-      uVar2 = surfaceDesc[6];
+      descPitch = surfaceDesc[6];
       *(undefined2 *)((int)record + 0xe) = 0;
       *(undefined2 *)(record + 3) = 0;
-      record[7] = uVar2 / (uint)record[10];
-      uVar1 = surfaceDesc[4];
-      *(short *)(record + 4) = (short)uVar1;
+      record[7] = descPitch / (uint)record[10];
+      descWidthPx = surfaceDesc[4];
+      *(short *)(record + 4) = (short)descWidthPx;
       scalarIn2 = surfaceDesc[5];
-      record[5] = uVar1;
+      record[5] = descWidthPx;
       *(short *)((int)record + 0x12) = (short)scalarIn2;
       record[6] = scalarIn2;
       outCount = 1;
-      scalarIn2 = scalarIn2 * uVar2;
+      scalarIn2 = scalarIn2 * descPitch;
       scalarIn1 = *surfaceDesc;
       scalarIn0 = flags;
       status = _io_connect_method_scalarI_scalarO
@@ -187,16 +196,16 @@ LAB_00002cb0:
         if (status == 0) {
           status = 0;
           *record = scalarOut1;
-          uVar1 = surfaceDesc[6];
+          tiledPitch = surfaceDesc[6];
           *(undefined2 *)((int)record + 0xe) = 0;
           *(undefined2 *)(record + 3) = 0;
-          record[7] = uVar1 / (uint)record[10];
-          uVar1 = surfaceDesc[4];
-          *(short *)(record + 4) = (short)uVar1;
-          uVar2 = surfaceDesc[5];
-          record[5] = uVar1;
-          *(short *)((int)record + 0x12) = (short)uVar2;
-          record[6] = uVar2;
+          record[7] = tiledPitch / (uint)record[10];
+          tiledWidth = surfaceDesc[4];
+          *(short *)(record + 4) = (short)tiledWidth;
+          tiledHeight = surfaceDesc[5];
+          record[5] = tiledWidth;
+          *(short *)((int)record + 0x12) = (short)tiledHeight;
+          record[6] = tiledHeight;
           record[1] = scalarOut0;
           surfaceDesc[9] = 2;
           goto LAB_00002ce0;
