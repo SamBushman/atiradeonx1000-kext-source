@@ -4878,158 +4878,162 @@ LAB_97bc2f80:
 }
 
 /* TIntermBinary__indirectNode @ 0x97bc2fd0 (1000 bytes) */
-int TIntermBinary__indirectNode(this, pPStreamCompiler, param_3, param_4, param_5, param_6, param_7, param_8)
+int TIntermBinary__indirectNode(this, pPStreamCompiler, strayArg3, strayArg4, strayArg5, strayArg6, strayArg7, strayArg8)
   unsigned char * this;
   unsigned char * pPStreamCompiler;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+  undefined4 strayArg3;
+  undefined4 strayArg4;
+  undefined4 strayArg5;
+  undefined4 strayArg6;
+  undefined4 strayArg7;
+  undefined4 strayArg8;
 {
+  uint fieldIndex;
+  int fieldByteOffset;
+  int typeQueryResult;
+  int *fieldType;
   int *right;
   int *left;
   int isArrayResult;
-  bool bVar1;
-  int iVar2;
-  undefined4 uVar3;
-  int *piVar4;
-  unsigned char * pPVar5;
-  unsigned char * pTVar6;
-  unsigned char * pPVar7;
-  unsigned char * this_00;
-  int iVar8;
-  uint *puVar9;
-  void *this_01;
-  unsigned char * this_02;
-  uint uVar10;
-  undefined **local_60 [2];
-  int local_58;
+  bool leftIsNull;
+  int binaryOp;
+  undefined4 sourceLine;
+  int *leftChildType;
+  unsigned char *leftSymbol;
+  unsigned char *leftNodeType;
+  unsigned char *resultOperand;
+  unsigned char *symbolTable;
+  int fieldName;
+  uint *rightConstData;
+  void *rightOperand;
+  unsigned char *leftOperand;
+  uint constIndex;
+  undefined **typeOrIndexBuf [2];
+  int typeStructFields;
   undefined **stackType;
   uint stackTypeArraySize;
   
-  this_02 = (unsigned char *)0x0;
-  this_01 = (void *)0x0;
-  uVar3 = (*(code *)**(undefined4 **)this)(this);
-  *(undefined4 *)(pPStreamCompiler + 0x90) = uVar3;
+  leftOperand = (unsigned char *)0x0;
+  rightOperand = (void *)0x0;
+  sourceLine = (*(code *)**(undefined4 **)this)(this);
+  *(undefined4 *)(pPStreamCompiler + 0x90) = sourceLine;
   left = *(int **)(this + 0x34);
   if (left != (int *)0x0) {
-    this_02 = (unsigned char *)(**(code **)(*left + 0x10))(left,pPStreamCompiler);
+    leftOperand = (unsigned char *)(**(code **)(*left + 0x10))(left,pPStreamCompiler);
   }
   right = *(int **)(this + 0x38);
   if (right != (int *)0x0) {
-    this_01 = (void *)(**(code **)(*right + 0x10))(right,pPStreamCompiler);
+    rightOperand = (void *)(**(code **)(*right + 0x10))(right,pPStreamCompiler);
   }
-  bVar1 = this_02 == (unsigned char *)0x0;
-  pPVar7 = (unsigned char *)0x0;
-  if (bVar1) goto LAB_97bc3364;
-  iVar2 = *(int *)(this + 0x30);
-  if (iVar2 == 0x2d) {
-    uVar10 = **(uint **)((int)this_01 + 4);
-    pPVar7 = this_02;
-    if (*(int *)(*(unsigned char **)this_02 + 0x4c) == 0) goto LAB_97bc3364;
-    ParseSymbol__AddDirectIndex(*(unsigned char **)this_02,uVar10);
-    _sprintf((char *)local_60,"[%d]",uVar10);
-    ParseSymbol__CatName(*(unsigned char **)this_02,(char *)local_60);
+  leftIsNull = leftOperand == (unsigned char *)0x0;
+  resultOperand = (unsigned char *)0x0;
+  if (leftIsNull) goto LAB_97bc3364;
+  binaryOp = *(int *)(this + 0x30);
+  if (binaryOp == 0x2d) {
+    constIndex = **(uint **)((int)rightOperand + 4);
+    resultOperand = leftOperand;
+    if (*(int *)(*(unsigned char **)leftOperand + 0x4c) == 0) goto LAB_97bc3364;
+    ParseSymbol__AddDirectIndex(*(unsigned char **)leftOperand,constIndex);
+    _sprintf((char *)typeOrIndexBuf,"[%d]",constIndex);
+    ParseSymbol__CatName(*(unsigned char **)leftOperand,(char *)typeOrIndexBuf);
     isArrayResult = (**(code **)(*(int *)this + 0x54))(this);
     if (isArrayResult != 0) {
       TPPStreamCompiler__error
                 (pPStreamCompiler,(char *)0x1,(char *)0x0,
                  "TIntermBinary::: Array index results in another array, this is not handled",
-                 param_5,param_6,param_7,param_8);
+                 strayArg5,strayArg6,strayArg7,strayArg8);
       goto LAB_97bc3364;
     }
-    pPVar5 = *(unsigned char **)this_02;
-    *(undefined4 *)(pPVar5 + 0x48) = 1;
+    leftSymbol = *(unsigned char **)leftOperand;
+    *(undefined4 *)(leftSymbol + 0x48) = 1;
   }
   else {
-    if (iVar2 == 0x2e) {
-      if (*(int *)this_02 == 0) {
-        pTVar6 = (unsigned char *)(**(code **)(**(int **)(this + 0x34) + 0x3c))(*(int **)(this + 0x34));
-        pPVar7 = (unsigned char *)
-                 TPPStreamCompiler__newIndirectOperandFromConstant(pPStreamCompiler,this_02,pTVar6);
-        __ZN12ParseOperandD1Ev(this_02);
-        __ZdlPv(this_02);
-        bVar1 = pPVar7 == (unsigned char *)0x0;
-        this_02 = pPVar7;
+    if (binaryOp == 0x2e) {
+      if (*(int *)leftOperand == 0) {
+        leftNodeType = (unsigned char *)(**(code **)(**(int **)(this + 0x34) + 0x3c))(*(int **)(this + 0x34));
+        resultOperand = (unsigned char *)
+                 TPPStreamCompiler__newIndirectOperandFromConstant(pPStreamCompiler,leftOperand,leftNodeType);
+        __ZN12ParseOperandD1Ev(leftOperand);
+        __ZdlPv(leftOperand);
+        leftIsNull = resultOperand == (unsigned char *)0x0;
+        leftOperand = resultOperand;
       }
       else {
-        if (*(int *)(*(int *)this_02 + 0x4c) == 0) {
-          piVar4 = (int *)(**(code **)(**(int **)(this + 0x34) + 0x3c))(*(int **)(this + 0x34));
-          iVar2 = (**(code **)(*piVar4 + 0x34))(piVar4);
-          pPVar7 = this_02;
-          if (iVar2 == 0) goto LAB_97bc3364;
-          this_00 = *(unsigned char **)(pPStreamCompiler + 0x68);
+        if (*(int *)(*(int *)leftOperand + 0x4c) == 0) {
+          leftChildType = (int *)(**(code **)(**(int **)(this + 0x34) + 0x3c))(*(int **)(this + 0x34));
+          typeQueryResult = (**(code **)(*leftChildType + 0x34))(leftChildType);
+          resultOperand = leftOperand;
+          if (typeQueryResult == 0) goto LAB_97bc3364;
+          symbolTable = *(unsigned char **)(pPStreamCompiler + 0x68);
           *(undefined4 *)(pPStreamCompiler + 0xa8) = 1;
         }
         else {
           (**(code **)(**(int **)(this + 0x34) + 0x38))(&stackType,*(int **)(this + 0x34));
           *(undefined4 *)(pPStreamCompiler + 0xa8) = 1;
           stackType = &PTR___ZN5TTypeD1Ev_a7b7d778;
-          ((int (*)())ParseSymbolTable__processOperand)(*(unsigned char **)(pPStreamCompiler + 0x68),this_02);
-          ParseSymbol__AddDirectIndex(*(unsigned char **)this_02,stackTypeArraySize);
-          _sprintf((char *)local_60,"[%d]",0);
-          ParseSymbol__CatName(*(unsigned char **)this_02,(char *)local_60);
+          ((int (*)())ParseSymbolTable__processOperand)(*(unsigned char **)(pPStreamCompiler + 0x68),leftOperand);
+          ParseSymbol__AddDirectIndex(*(unsigned char **)leftOperand,stackTypeArraySize);
+          _sprintf((char *)typeOrIndexBuf,"[%d]",0);
+          ParseSymbol__CatName(*(unsigned char **)leftOperand,(char *)typeOrIndexBuf);
           isArrayResult = (**(code **)(*(int *)this + 0x54))(this);
           if (isArrayResult == 0) {
-            pPVar5 = *(unsigned char **)this_02;
-            *(undefined4 *)(pPVar5 + 0x48) = 1;
-            ParseSymbol__ResolveOpenGLType(pPVar5);
+            leftSymbol = *(unsigned char **)leftOperand;
+            *(undefined4 *)(leftSymbol + 0x48) = 1;
+            ParseSymbol__ResolveOpenGLType(leftSymbol);
           }
-          this_00 = *(unsigned char **)(pPStreamCompiler + 0x68);
+          symbolTable = *(unsigned char **)(pPStreamCompiler + 0x68);
         }
-        ((int (*)())ParseSymbolTable__processOperand)(this_00,this_02);
-        pPVar7 = this_02;
+        ((int (*)())ParseSymbolTable__processOperand)(symbolTable,leftOperand);
+        resultOperand = leftOperand;
       }
       goto LAB_97bc3364;
     }
-    if (iVar2 != 0x2f) goto LAB_97bc3364;
-    pPVar5 = *(unsigned char **)this_02;
-    (**(code **)(**(int **)(this + 0x34) + 0x38))(local_60,*(int **)(this + 0x34));
-    local_60[0] = &PTR___ZN5TTypeD1Ev_a7b7d778;
-    puVar9 = *(uint **)((int)this_01 + 4);
-    uVar10 = *puVar9;
-    if (pPVar5 == (unsigned char *)0x0) {
+    if (binaryOp != 0x2f) goto LAB_97bc3364;
+    leftSymbol = *(unsigned char **)leftOperand;
+    (**(code **)(**(int **)(this + 0x34) + 0x38))(typeOrIndexBuf,*(int **)(this + 0x34));
+    typeOrIndexBuf[0] = &PTR___ZN5TTypeD1Ev_a7b7d778;
+    rightConstData = *(uint **)((int)rightOperand + 4);
+    fieldIndex = *rightConstData;
+    if (leftSymbol == (unsigned char *)0x0) {
       TPPStreamCompiler__error
                 (pPStreamCompiler,(char *)0x1,(char *)0x0,
-                 "TIntermBinary::indirectNode: Structure symbol, parse error.",param_5,param_6,
-                 puVar9,param_8);
+                 "TIntermBinary::indirectNode: Structure symbol, parse error.",strayArg5,strayArg6,
+                 rightConstData,strayArg8);
     }
-    if (local_58 == 0) {
+    if (typeStructFields == 0) {
       TPPStreamCompiler__error
                 (pPStreamCompiler,(char *)0x1,(char *)0x0,
-                 "TIntermBinary::indirectNode: No structure fields, parse error.",param_5,param_6,
-                 puVar9,param_8);
+                 "TIntermBinary::indirectNode: No structure fields, parse error.",strayArg5,strayArg6,
+                 rightConstData,strayArg8);
     }
-    if ((uint)(*(int *)(local_58 + 8) - *(int *)(local_58 + 4) >> 3) <= uVar10) {
+    if ((uint)(*(int *)(typeStructFields + 8) - *(int *)(typeStructFields + 4) >> 3) <= fieldIndex) {
       TPPStreamCompiler__error
                 (pPStreamCompiler,(char *)0x1,(char *)0x0,
                  "TIntermBinary::indirectNode: Structure index too big for field size, parse error",
-                 param_5,param_6,puVar9,param_8);
+                 strayArg5,strayArg6,rightConstData,strayArg8);
     }
-    iVar2 = uVar10 * 8;
-    ParseSymbol__CatName(pPVar5,".");
-    piVar4 = *(int **)(*(int *)(local_58 + 4) + iVar2);
-    iVar8 = (**(code **)(*piVar4 + 0x1c))(piVar4);
-    *(undefined1 *)(*(int *)(iVar8 + 4) + *(int *)(*(int *)(iVar8 + 4) + -0xc)) = *DAT_a7b7bd0c;
-    ParseSymbol__CatName(pPVar5,*(char **)(iVar8 + 4));
-    ParseSymbol__SetParseTreeType(pPVar5,*(unsigned char **)(*(int *)(local_58 + 4) + iVar2));
-    pPVar5 = *(unsigned char **)this_02;
-    *(undefined4 *)(pPVar5 + 0x48) = 0;
+    fieldByteOffset = fieldIndex * 8;
+    ParseSymbol__CatName(leftSymbol,".");
+    fieldType = *(int **)(*(int *)(typeStructFields + 4) + fieldByteOffset);
+    fieldName = (**(code **)(*fieldType + 0x1c))(fieldType);
+    *(undefined1 *)(*(int *)(fieldName + 4) + *(int *)(*(int *)(fieldName + 4) + -0xc)) = *DAT_a7b7bd0c;
+    ParseSymbol__CatName(leftSymbol,*(char **)(fieldName + 4));
+    ParseSymbol__SetParseTreeType(leftSymbol,*(unsigned char **)(*(int *)(typeStructFields + 4) + fieldByteOffset));
+    leftSymbol = *(unsigned char **)leftOperand;
+    *(undefined4 *)(leftSymbol + 0x48) = 0;
   }
-  ParseSymbol__ResolveOpenGLType(pPVar5);
-  pPVar7 = this_02;
+  ParseSymbol__ResolveOpenGLType(leftSymbol);
+  resultOperand = leftOperand;
 LAB_97bc3364:
-  if (this_01 != (void *)0x0) {
-    __ZN12ParseOperandD1Ev(this_01);
-    __ZdlPv(this_01);
+  if (rightOperand != (void *)0x0) {
+    __ZN12ParseOperandD1Ev(rightOperand);
+    __ZdlPv(rightOperand);
   }
-  if ((!bVar1) && (pPVar7 != this_02)) {
-    __ZN12ParseOperandD1Ev(this_02);
-    __ZdlPv(this_02);
+  if ((!leftIsNull) && (resultOperand != leftOperand)) {
+    __ZN12ParseOperandD1Ev(leftOperand);
+    __ZdlPv(leftOperand);
   }
-  return pPVar7;
+  return resultOperand;
 }
 
 /* TIntermUnary__indirectNode @ 0x97bc33b8 (112 bytes) */

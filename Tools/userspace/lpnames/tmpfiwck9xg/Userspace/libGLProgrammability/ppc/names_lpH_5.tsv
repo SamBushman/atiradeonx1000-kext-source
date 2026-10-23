@@ -1,0 +1,30 @@
+use	ParseSymbolTable__AddFromExternalSymbol	iVar2	nextSrcChunk	INFERRED	next chunk (+8) of the source symbol chunk list, cloned for each further vec4	^\s*if\ \(\(uVar9\ !=\ 0\)\ \&\&\ \(iVar2\ =\ \*\(int\ \*\)\(iVar7\ \+\ 8\),\ iVar2\ !=\ 0\)\)\ \{$	+3
+use	ParseSymbolTable__AddFromExternalSymbol	iVar2	nextIndex	INFERRED	per-kind running counter of the symbol table stored into the chunk index field and incremented	^\s*iVar2\ =\ \*\(int\ \*\)\(this\ \+\ 0x18\);$	+3
+use	ParseSymbolTable__AddFromExternalSymbol	iVar2	nextIndex	INFERRED	per-kind running counter of the symbol table stored into the chunk index field and incremented	^\s*iVar2\ =\ \*\(int\ \*\)\(this\ \+\ 0x38\);$	+3
+use	ParseSymbolTable__AddFromExternalSymbol	iVar2	nextIndex	INFERRED	per-kind running counter of the symbol table stored into the chunk index field and incremented	^\s*iVar2\ =\ \*\(int\ \*\)\(this\ \+\ 0x24\);$	+3
+use	ParseSymbolTable__AddFromExternalSymbol	iVar2	nextIndex	INFERRED	per-kind running counter of the symbol table stored into the chunk index field and incremented	^\s*iVar2\ =\ \*\(int\ \*\)\(this\ \+\ 0x2c\);$	+3
+use	ParseSymbolTable__AddFromExternalSymbol	iVar2	nextIndex	INFERRED	per-kind running counter of the symbol table stored into the chunk index field and incremented	^\s*iVar2\ =\ \*\(int\ \*\)\(this\ \+\ 0x28\);$	+3
+use	ParseSymbolTable__AddFromExternalSymbol	iVar2	nextIndex	INFERRED	per-kind running counter of the symbol table stored into the chunk index field and incremented	^\s*iVar2\ =\ \*\(int\ \*\)\(this\ \+\ 0x30\);$	+3
+use	ParseSymbolTable__AddFromExternalSymbol	iVar2	scalerWidth	INFERRED	GetScalerWidthForType result added to the table register-width counter (this+0x20)	^\s*iVar2\ =\ GetScalerWidthForType\(\(uint\)\*\(ushort\ \*\)\(this_00\ \+\ 0x2c\)\);$	+2
+use	ParseSymbolTable__AddFromExternalSymbol	iVar2	scalerWidth	INFERRED	GetScalerWidthForType result added to the table register-width counter (this+0x20)	^\s*iVar2\ =\ GetScalerWidthForType\(\(uint\)\*\(ushort\ \*\)\(this_00\ \+\ 0x2c\)\);$@2	+2
+use	ParseSymbolTable__AddFromExternalSymbol	iVar2	firstChunk	INFERRED	first chunk of the PPStream list whose index word is patched	^\s*\(iVar2\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(this\ \+\ 0xc\)\ \+\ 8\)\ \+\ 4\),$	+2
+use	ParseSymbolTable__AddFromExternalSymbol	iVar2	firstChunk	INFERRED	first chunk of the PPStream list whose index word is patched	^\s*\*\(short\ \*\)\(iVar2\ \+\ 0x12\)\ =\ sVar4\ \+\ \-1;$	+1
+use	ParseSymbolTable__AddFromExternalSymbol	iVar2	firstChunk	INFERRED	first chunk of the PPStream list whose index word is patched	^\s*\(iVar2\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(this\ \+\ 0xc\)\ \+\ 0x14\)\ \+\ 4\),$	+2
+use	ParseSymbolTable__AddFromExternalSymbol	uVar3	registerSlot	INFERRED	running register-slot counter (this+0x1c / +0x34) stored into the chunk header low 5 bits	^\s*uVar3\ =\ \*\(uint\ \*\)\(this\ \+\ 0x1c\);$	+3
+use	ParseSymbolTable__AddFromExternalSymbol	uVar3	registerSlot	INFERRED	running register-slot counter (this+0x1c / +0x34) stored into the chunk header low 5 bits	^\s*uVar3\ =\ \*\(uint\ \*\)\(this\ \+\ 0x34\);$	+3
+use	ParseSymbolTable__AddFromExternalSymbol	uVar3	registerSlot	INFERRED	running register-slot counter (this+0x1c / +0x34) stored into the chunk header low 5 bits	^\s*uVar3\ =\ \*\(uint\ \*\)\(this\ \+\ 0x1c\);$@2	+3
+use	ParseSymbolTable__AddFromExternalSymbol	uVar3	registerClassBits	INFERRED	chunk header word & 0x1f0000: register class selecting which counter to bump	^\s*uVar3\ =\ \*\(uint\ \*\)\(pbVar10\ \+\ 0xc\)\ \&\ 0x1f0000;$	+2
+use	ParseSymbolTable__AddFromExternalSymbol	uVar3	registerClassBits	INFERRED	chunk header word & 0x1f0000: register class selecting which counter to bump	^\s*else\ if\ \(uVar3\ ==\ 0x10000\)\ \{$	+1
+use	ParseSymbolTable__AddFromExternalSymbol	uVar3	registerClassBits	INFERRED	chunk header word & 0x1f0000: register class selecting which counter to bump	^\s*else\ if\ \(uVar3\ ==\ 0x100000\)\ \{$	+1
+local	ParseSymbolTable__AddFromExternalSymbol	sVar4	counterLow	INFERRED	low 16 bits of a table counter (this+0x3a / this+0x26) minus one: index of the previous chunk
+local	ParseSymbolTable__AddFromExternalSymbol	bVar1	chunkKind	INFERRED	kind byte of the chunk: 0 temp/uniform, 2 fragment varying, 3 constant/param, 4 vertex varying
+local	ParseSymbolTable__AddFromExternalSymbol	this_00	newSymbol	INFERRED	the new ParseSymbol (operator_new(100)) copied from the external symbol
+local	ParseSymbolTable__AddFromExternalSymbol	p_Var5	symbolChunk	INFERRED	copy of the external symbol chunk created for the new symbol
+local	ParseSymbolTable__AddFromExternalSymbol	uVar6	vec4Count	INFERRED	GetVec4sForType of the symbol type: number of vec4 registers it occupies
+local	ParseSymbolTable__AddFromExternalSymbol	iVar7	srcChunk	INFERRED	cursor over the external symbol chunk list (symbol+0, then +8 next)
+local	ParseSymbolTable__AddFromExternalSymbol	iVar8	chunkList	INFERRED	PPStream chunk list for the chunk kind that the new chunks are added to
+local	ParseSymbolTable__AddFromExternalSymbol	uVar9	vec4Index	INFERRED	loop index over the symbol vec4 registers
+local	ParseSymbolTable__AddFromExternalSymbol	pbVar10	curChunk	INFERRED	current chunk (symbol chunk, then clones per extra vec4)
+local	ParseSymbolTable__AddFromExternalSymbol	local_50	usageEntry	INFERRED	two-word usage record {index, 0} given to _PPStreamAddTempUsageArray / AddParamBindingArray
+local	ParseSymbolTable__AddFromExternalSymbol	param_3	addFirstUsage	INFERRED	non-zero: register a usage array for the first vec4 chunk
+local	ParseSymbolTable__AddFromExternalSymbol	param_4	patchPrevIndex	INFERRED	non-zero: patch the index word of the list first chunk on the last vec4

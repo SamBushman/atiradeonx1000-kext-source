@@ -1,0 +1,17 @@
+local	_InterpreterRasterOpMachine_Blending	fVar1	clampValue	INFERRED	value kept by the fsel-style clamp of the current colour component
+local	_InterpreterRasterOpMachine_Blending	fVar2	clampLimit1	INFERRED	0.0/1.0 clamp limit loaded for the next component compare
+local	_InterpreterRasterOpMachine_Blending	fVar3	clampLimit2	INFERRED	0.0/1.0 clamp limit loaded for the next component compare
+local	_InterpreterRasterOpMachine_Blending	fVar4	clampLimit3OrValue	INFERRED	clamp limit, also the value kept by the first clamp
+local	_InterpreterRasterOpMachine_Blending	local_30	clampValueCarry	INFERRED	previous clampValue carried across the clamp steps (stack spill of the fsel result)
+local	GetChunkForSymbol	param_2	shaderStage	INFERRED	TPPStreamCompiler+0x3c: 0 selects the vertex-stage chunk kinds in GetBuiltInChunkForSymbol
+local	GetChunkForSymbol	bVar1	isTypedKind	INFERRED	chunk kind carries a stream type / width (kinds 0, 2, 3, 4)
+local	GetChunkForSymbol	bVar2	chunkKind	INFERRED	chunk kind byte (*chunk)
+local	GetChunkForSymbol	uVar3	swizzleBits	INFERRED	component count field (chunk word >> 24 & 3), raised to the built-in initial swizzle
+local	GetChunkForSymbol	iVar4	compareResult	INFERRED	memcmp of the symbol name with "gl_"
+local	GetChunkForSymbol	pbVar5	chunk	INFERRED	pp-stream chunk created for the symbol
+local	GetChunkForSymbol	uVar6	typeKind	INFERRED	symbol type's kind from its vtable (+0x24): selects the chunk kind
+local	GetChunkForSymbol	uVar7	chunkWord	INFERRED	chunk word 0 with the width field updated
+use	GetChunkForSymbol	iVar8	symbolName	INFERRED	symbol name (parseSymbol+0x14), tested for the gl_ prefix	#0	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(param_1\ \+\ 0xc\)\ \+\ 0x20\)\)	all	none
+use	GetChunkForSymbol	iVar8	basicTypeCode	INFERRED	symbol type's basic-type code (vtable +0x20); 5..12 marks sampler types	*		all	none
+local	GetBuiltInChunkForSymbol	param_2	shaderStage	INFERRED	TPPStreamCompiler+0x3c: 0 selects the vertex-stage chunk kinds
+local	GetBuiltInChunkForSymbol	uVar5	chunkWordTexcoord	INFERRED	chunk word 0 with class 7 (texcoord) set

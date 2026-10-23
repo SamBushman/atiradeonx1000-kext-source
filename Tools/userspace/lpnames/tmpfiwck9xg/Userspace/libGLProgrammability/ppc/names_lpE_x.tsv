@@ -1,0 +1,9 @@
+local	std__vector_int_pool_allocator_int_____M_insert_aux	param_2	position	CONFIRMED	libstdc++ vector::_M_insert_aux(iterator __position, const T& __x): the insertion point
+local	std__vector_int_pool_allocator_int_____M_insert_aux	param_3	intValue	CONFIRMED	the int to insert (const int&)
+local	std__vector_int_pool_allocator_int_____M_insert_aux	pvVar6	backStart	CONFIRMED	new storage position after the inserted element: where the back half is moved to
+local	std__vector_int_pool_allocator_int_____M_insert_aux	sVar8	frontBytes	CONFIRMED	position - start: bytes of the front half moved to the new storage
+local	std__vector_int_pool_allocator_int_____M_insert_aux	uVar1	moveBytes	CONFIRMED	bytes between position and finish-1 shifted up by one element
+local	std__vector_int_pool_allocator_int_____M_insert_aux	uVar7	xValue	CONFIRMED	*intValue, stored at position after the shift
+use	std__vector_int_pool_allocator_int_____M_insert_aux	iVar2	oldSize	CONFIRMED	(finish - start) >> 2: the element count, size() in __old_size	iVar2 = \(int\)puVar3 - \*\(int \*\)\(this \+ 4\) >> 2;	iVar2 = \*\(int \*\)\(this \+ 8\);
+use	std__vector_int_pool_allocator_int_____M_insert_aux	iVar4	len	CONFIRMED	new capacity in elements: 2 * size, or 1 when empty (__len)	iVar4 = 1;	iVar4 = 0;
+use	std__vector_int_pool_allocator_int_____M_insert_aux	iVar4	finishCursor	CONFIRMED	finish (this +8) read back after the construct-at-finish step; the end of the block that is shifted up	iVar4 = 0;	
