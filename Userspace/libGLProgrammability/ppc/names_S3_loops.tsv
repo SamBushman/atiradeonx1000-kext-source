@@ -5,8 +5,8 @@ use	_PPParserParseOperation	uVar9	loopIndex	INFERRED	initialised to a literal, s
 use	_PPStreamChunkListGetStream	uVar3	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#17	+8	all	all
 use	_PPStreamChunkListGetMaxIndex	uVar4	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#2	+37	all	all
 use	_PPEmulatorProgramInitialiseHandleBanks	uVar4	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#0	+34	all	all
-use	_PPEmulatorProgramConvertFromPPStream	uVar2	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#229	+144	all	all
-use	_PPEmulatorProgramConvertFromPPStream	uVar22	loopIndex2	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#53	+354	all	all
+use	_PPEmulatorProgramConvertFromPPStream	uVar2	srcOperandLoop	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#229	+144	all	all
+use	_PPEmulatorProgramConvertFromPPStream	uVar22	opIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#53	+354	all	all
 use	_PPParserMacroFree	uVar4	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#0	+17	all	all
 use	_PPParserGetScalars	iVar2	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#3	+13	all	all
 use	_PPParserParseTempDeclaration	uVar4	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#51	+11	all	all

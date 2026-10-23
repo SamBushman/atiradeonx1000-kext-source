@@ -164,7 +164,7 @@ local	_PPStreamOutputBindingIsEqual	param_1	chunkBinding	INFERRED	dereferenced a
 local	_PPStreamParamBindingIsEqual	param_1	chunkBinding	INFERRED	dereferenced as the PPStream object (3 field accesses); every PPStream* function takes it first
 local	_PPStreamChunkListGetStream	param_1	chunkList	INFERRED	dereferenced as the PPStream object (3 field accesses); every PPStream* function takes it first
 local	_PPStreamChunkGetStream	param_1	stream	INFERRED	dereferenced as the PPStream object (5 field accesses); every PPStream* function takes it first
-local	_PPStreamChunkListCreateFromChunkList	param_1	chunkList	INFERRED	dereferenced as the PPStream object (2 field accesses); every PPStream* function takes it first
+local	_PPStreamChunkListCreateFromChunkList	param_1	sourceList	INFERRED	dereferenced as the PPStream object (2 field accesses); every PPStream* function takes it first
 local	_PPStreamChunkCreateFromChunk	param_1	chunk	INFERRED	dereferenced as the PPStream object (4 field accesses); every PPStream* function takes it first
 local	_PPStreamChunkListSort	param_1	stream	INFERRED	dereferenced as the PPStream object (5 field accesses); every PPStream* function takes it first
 local	_PPStreamAttachOperationsChunkList	param_1	stream	INFERRED	dereferenced as the PPStream object (2 field accesses); every PPStream* function takes it first

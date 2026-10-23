@@ -4339,15 +4339,15 @@ LAB_97b824b4:
 }
 
 /* _PPStreamChunkListCreateFromChunkList @ 0x97b824dc (96 bytes) */
-int _PPStreamChunkListCreateFromChunkList(chunkList)
-  int *chunkList;
+int _PPStreamChunkListCreateFromChunkList(sourceList)
+  int *sourceList;
 {
   undefined4 chunkList;
   undefined4 chunk;
   int sourceChunk;
   
   chunkList = ((int (*)())_PPStreamChunkListCreate)();
-  for (sourceChunk = *chunkList; sourceChunk != 0; sourceChunk = *(int *)(sourceChunk + 8)) {
+  for (sourceChunk = *sourceList; sourceChunk != 0; sourceChunk = *(int *)(sourceChunk + 8)) {
     chunk = ((int (*)())_PPStreamChunkCreateFromChunk)(sourceChunk);
     ((int (*)())_PPStreamChunkListAddChunk)(chunkList,chunk);
   }

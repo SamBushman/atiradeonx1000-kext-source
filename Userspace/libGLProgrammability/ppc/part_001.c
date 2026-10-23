@@ -406,120 +406,130 @@ int _PPEmulatorProgramInitialiseHandleBanks(emulator, param_2, param_3, param_4,
 }
 
 /* _PPEmulatorProgramConvertFromPPStream @ 0x97b82ee4 (2768 bytes) */
-int _PPEmulatorProgramConvertFromPPStream(emulator, param_2)
+int _PPEmulatorProgramConvertFromPPStream(emulator, ppStream)
   undefined4 *emulator;
-  undefined4 *param_2;
+  undefined4 *ppStream;
 {
-  int chunk2;
-  int chunk;
-  uint loopIndex;
+  int constDest;
+  int constByteOffset;
+  int constIndex;
+  int opChunk;
+  int constsLeft;
+  int optionsLeft;
+  int srcIndex;
+  int constChunk;
+  int optionChunk;
+  uint opCount;
+  int destBindingChunk;
+  int srcBindingChunk;
+  uint srcOperandLoop;
   undefined4 allocation;
-  ushort uVar1;
-  byte bVar4;
-  uint uVar2;
-  uint uVar3;
-  int *piVar5;
-  int iVar6;
-  int iVar7;
-  undefined4 uVar8;
-  uint *puVar9;
-  undefined4 uVar10;
-  undefined4 uVar11;
-  int *piVar12;
-  uint uVar13;
-  uint uVar14;
-  int *piVar15;
-  undefined4 uVar16;
-  undefined4 uVar17;
-  int iVar18;
-  uint uVar19;
-  uint uVar20;
-  int iVar21;
-  uint loopIndex2;
-  uint uVar23;
-  int iVar24;
-  int iVar25;
-  int *piVar26;
-  uint *puVar27;
+  ushort operandOrdinal;
+  byte fieldByte;
+  uint workWord3;
+  uint workWord4;
+  int *optionList;
+  int texChunk;
+  int registerFileBase;
+  undefined4 constWord3;
+  uint *inst;
+  undefined4 constWord2;
+  undefined4 constWord1;
+  int *constantList;
+  uint workWord;
+  uint workWord2;
+  int *texBindingList;
+  undefined4 outputBindingList;
+  undefined4 paramBindingList;
+  int attribBindingList;
+  uint engineFlags;
+  uint texUnit;
+  int srcWordOffset;
+  uint opIndex;
+  uint registerAddr;
+  int srcRecOffset;
+  int texLeft;
+  int *opList;
+  uint *opHeader;
   
-  uVar23 = 0;
-  uVar19 = 0xf;
-  emulator[0xe] = *param_2;
-  piVar26 = (int *)param_2[8];
-  iVar18 = param_2[6];
-  piVar5 = (int *)param_2[0xc];
-  piVar15 = (int *)param_2[10];
-  uVar16 = param_2[7];
-  uVar17 = param_2[4];
-  piVar12 = (int *)param_2[0xb];
-  uVar20 = piVar26[2];
+  registerAddr = 0;
+  engineFlags = 0xf;
+  emulator[0xe] = *ppStream;
+  opList = (int *)ppStream[8];
+  attribBindingList = ppStream[6];
+  optionList = (int *)ppStream[0xc];
+  texBindingList = (int *)ppStream[10];
+  outputBindingList = ppStream[7];
+  paramBindingList = ppStream[4];
+  constantList = (int *)ppStream[0xb];
+  opCount = opList[2];
   emulator[0xd] = 0;
-  emulator[0x2f] = *(int *)(iVar18 + 8) << 4;
-  iVar6 = *piVar5;
-  for (iVar25 = piVar5[2]; iVar25 != 0; iVar25 = iVar25 + -1) {
-    if (*(char *)(iVar6 + 0xf) == '\x06') {
+  emulator[0x2f] = *(int *)(attribBindingList + 8) << 4;
+  optionChunk = *optionList;
+  for (optionsLeft = optionList[2]; optionsLeft != 0; optionsLeft = optionsLeft + -1) {
+    if (*(char *)(optionChunk + 0xf) == '\x06') {
       emulator[0xb] = 1;
     }
-    else if (*(char *)(iVar6 + 0xf) == '\a') {
+    else if (*(char *)(optionChunk + 0xf) == '\a') {
       emulator[0xc] = 1;
     }
-    iVar6 = *(int *)(iVar6 + 8);
+    optionChunk = *(int *)(optionChunk + 8);
   }
   if ((emulator[0xc] != 0) || (*(int *)PTR_DAT_a7b7c100 == 0)) {
-    uVar19 = 7;
+    engineFlags = 7;
   }
   if ((emulator[0xb] != 0) ||
      ((*(int *)PTR_DAT_a7b7c100 == 0 && ((emulator[0xe] - 0x8b30 < 2 || (emulator[0xe] == 0x8804))))))
   {
-    uVar19 = uVar19 & 0xfffffffd;
+    engineFlags = engineFlags & 0xfffffffd;
   }
-  iVar25 = piVar12[2];
-  iVar6 = *piVar12;
-  if (iVar25 != 0) {
-    iVar21 = 0;
-    allocation = _malloc(iVar25 << 4);
+  constsLeft = constantList[2];
+  constChunk = *constantList;
+  if (constsLeft != 0) {
+    constIndex = 0;
+    allocation = _malloc(constsLeft << 4);
     emulator[0x2c] = allocation;
-    for (; iVar25 != 0; iVar25 = iVar25 + -1) {
-      iVar24 = iVar21 * 0x10;
-      uVar8 = *(undefined4 *)(iVar6 + 0x18);
-      iVar21 = iVar21 + 1;
-      uVar11 = *(undefined4 *)(iVar6 + 0x10);
-      uVar10 = *(undefined4 *)(iVar6 + 0x14);
-      iVar7 = iVar24 + emulator[0x2c];
-      *(undefined4 *)(iVar24 + emulator[0x2c]) = *(undefined4 *)(iVar6 + 0xc);
-      *(undefined4 *)(iVar7 + 0xc) = uVar8;
-      *(undefined4 *)(iVar7 + 4) = uVar11;
-      *(undefined4 *)(iVar7 + 8) = uVar10;
-      iVar6 = *(int *)(iVar6 + 8);
+    for (; constsLeft != 0; constsLeft = constsLeft + -1) {
+      constByteOffset = constIndex * 0x10;
+      constWord3 = *(undefined4 *)(constChunk + 0x18);
+      constIndex = constIndex + 1;
+      constWord1 = *(undefined4 *)(constChunk + 0x10);
+      constWord2 = *(undefined4 *)(constChunk + 0x14);
+      constDest = constByteOffset + emulator[0x2c];
+      *(undefined4 *)(constByteOffset + emulator[0x2c]) = *(undefined4 *)(constChunk + 0xc);
+      *(undefined4 *)(constDest + 0xc) = constWord3;
+      *(undefined4 *)(constDest + 4) = constWord1;
+      *(undefined4 *)(constDest + 8) = constWord2;
+      constChunk = *(int *)(constChunk + 8);
     }
   }
-  if (uVar20 != 0) {
-    puVar9 = (uint *)_calloc(0x11c,uVar20);
-    loopIndex2 = 0;
-    *emulator = puVar9;
-    emulator[1] = puVar9 + uVar20 * 0x47 + -0x47;
-    iVar25 = *piVar26;
-    emulator[0x48] = puVar9;
-    if (uVar20 != 0) {
+  if (opCount != 0) {
+    inst = (uint *)_calloc(0x11c,opCount);
+    opIndex = 0;
+    *emulator = inst;
+    emulator[1] = inst + opCount * 0x47 + -0x47;
+    opChunk = *opList;
+    emulator[0x48] = inst;
+    if (opCount != 0) {
       do {
-        puVar27 = (uint *)(iVar25 + 0xc);
-        *puVar9 = *(uint *)(iVar25 + 0xc) >> 0x12 & 0xff;
-        *(byte *)(puVar9 + 1) = (byte)(*(uint *)(iVar25 + 0x10) >> 0x14) & 1;
+        opHeader = (uint *)(opChunk + 0xc);
+        *inst = *(uint *)(opChunk + 0xc) >> 0x12 & 0xff;
+        *(byte *)(inst + 1) = (byte)(*(uint *)(opChunk + 0x10) >> 0x14) & 1;
         if (emulator[0xe] - 0x8b30 < 2) {
-          *(byte *)((int)puVar9 + 5) =
-               ((byte)((uint)*(undefined4 *)(iVar25 + 0x10) >> 0x1a) & 3) + 1;
+          *(byte *)((int)inst + 5) =
+               ((byte)((uint)*(undefined4 *)(opChunk + 0x10) >> 0x1a) & 3) + 1;
         }
         else {
-          *(undefined1 *)((int)puVar9 + 5) = 4;
+          *(undefined1 *)((int)inst + 5) = 4;
         }
-        *(byte *)((int)puVar9 + 6) = (byte)(*(uint *)(iVar25 + 0x10) >> 0x16) & 1;
-        puVar9[2] = *(uint *)(iVar25 + 0x10) & 0x3ffff;
-        puVar9[0x45] = *(uint *)(iVar25 + 0x3c);
-        if ((*puVar27 & 0x3ffff) == 0) {
-          emulator[0x48] = puVar9;
+        *(byte *)((int)inst + 6) = (byte)(*(uint *)(opChunk + 0x10) >> 0x16) & 1;
+        inst[2] = *(uint *)(opChunk + 0x10) & 0x3ffff;
+        inst[0x45] = *(uint *)(opChunk + 0x3c);
+        if ((*opHeader & 0x3ffff) == 0) {
+          emulator[0x48] = inst;
         }
-        uVar13 = *puVar9;
-        switch(uVar13) {
+        workWord = *inst;
+        switch(workWord) {
         default:
           goto switchD_97b83138_caseD_0;
         case 1:
@@ -529,22 +539,22 @@ int _PPEmulatorProgramConvertFromPPStream(emulator, param_2)
         case 0x2b:
         case 0x38:
         case 0x41:
-          uVar13 = emulator[0xd] | 0x40;
+          workWord = emulator[0xd] | 0x40;
           break;
         case 0x48:
-          uVar13 = emulator[0xd] | 0x200;
+          workWord = emulator[0xd] | 0x200;
         }
-        emulator[0xd] = uVar13;
-        uVar13 = *puVar9;
+        emulator[0xd] = workWord;
+        workWord = *inst;
 switchD_97b83138_caseD_0:
-        switch(uVar13) {
+        switch(workWord) {
         case 4:
         case 5:
         case 0x11:
         case 0x42:
         case 0x43:
         case 0x48:
-          uVar13 = emulator[0xd] | 0x400;
+          workWord = emulator[0xd] | 0x400;
           break;
         default:
           goto switchD_97b832a0_caseD_6;
@@ -557,268 +567,268 @@ switchD_97b83138_caseD_0:
         case 0x59:
         case 0x5a:
         case 0x5b:
-          uVar13 = emulator[0xd] | 0x800;
+          workWord = emulator[0xd] | 0x800;
           break;
         case 0x4f:
-          uVar13 = emulator[0xd] | 0x8000;
+          workWord = emulator[0xd] | 0x8000;
         }
-        emulator[0xd] = uVar13;
-        uVar13 = *puVar9;
+        emulator[0xd] = workWord;
+        workWord = *inst;
 switchD_97b832a0_caseD_6:
-        if (uVar13 == 0x4e) {
-          *puVar9 = 0x22;
+        if (workWord == 0x4e) {
+          *inst = 0x22;
         }
-        uVar13 = *(uint *)(iVar25 + 0x14) >> 0x11 & 7;
-        if (uVar13 == 1) {
-          *(undefined2 *)(puVar9 + 7) = 0;
+        workWord = *(uint *)(opChunk + 0x14) >> 0x11 & 7;
+        if (workWord == 1) {
+          *(undefined2 *)(inst + 7) = 0;
           emulator[0xd] = emulator[0xd] | 1;
-          uVar23 = emulator[0x20] + (uint)*(ushort *)(iVar25 + 0x1a) * 0x10;
+          registerAddr = emulator[0x20] + (uint)*(ushort *)(opChunk + 0x1a) * 0x10;
         }
-        else if (uVar13 == 3) {
-          chunk2 = ((int (*)())_PPStreamChunkListChunkAtIndex)(uVar16,(uint)*(ushort *)(iVar25 + 0x1a));
-          if ((*(uint *)(chunk2 + 0xc) >> 0x10 & 0xf) == 7) {
+        else if (workWord == 3) {
+          destBindingChunk = ((int (*)())_PPStreamChunkListChunkAtIndex)(outputBindingList,(uint)*(ushort *)(opChunk + 0x1a));
+          if ((*(uint *)(destBindingChunk + 0xc) >> 0x10 & 0xf) == 7) {
             emulator[0xd] = emulator[0xd] | 0x2000;
-            *(undefined2 *)(puVar9 + 7) = 9;
+            *(undefined2 *)(inst + 7) = 9;
           }
           else {
-            *(undefined2 *)(puVar9 + 7) = 1;
+            *(undefined2 *)(inst + 7) = 1;
           }
           emulator[0xd] = emulator[0xd] | 2;
-          uVar23 = emulator[0x23] + (uint)*(ushort *)(chunk2 + 0x12) * 0x10;
+          registerAddr = emulator[0x23] + (uint)*(ushort *)(destBindingChunk + 0x12) * 0x10;
         }
-        puVar9[3] = uVar23;
-        if (*(int *)(iVar25 + 0x18) < 0) {
-          *(undefined1 *)((int)puVar9 + 0x1f) = 1;
-          *(short *)(puVar9 + 6) = (short)(char)((uint)(*(int *)(iVar25 + 0x18) << 4) >> 0x18);
+        inst[3] = registerAddr;
+        if (*(int *)(opChunk + 0x18) < 0) {
+          *(undefined1 *)((int)inst + 0x1f) = 1;
+          *(short *)(inst + 6) = (short)(char)((uint)(*(int *)(opChunk + 0x18) << 4) >> 0x18);
         }
-        *(undefined1 *)((int)puVar9 + 0x1e) = 0;
+        *(undefined1 *)((int)inst + 0x1e) = 0;
         if (emulator[0xe] - 0x8b30 < 2) {
-          *(byte *)(puVar9 + 5) = (byte)((uint)*(undefined4 *)(iVar25 + 0x14) >> 8) & 3;
-          *(byte *)((int)puVar9 + 0x15) = (byte)(*(uint *)(iVar25 + 0x14) >> 6) & 3;
-          *(byte *)((int)puVar9 + 0x16) = (byte)(*(uint *)(iVar25 + 0x14) >> 4) & 3;
-          *(byte *)((int)puVar9 + 0x17) = (byte)(*(uint *)(iVar25 + 0x14) >> 2) & 3;
+          *(byte *)(inst + 5) = (byte)((uint)*(undefined4 *)(opChunk + 0x14) >> 8) & 3;
+          *(byte *)((int)inst + 0x15) = (byte)(*(uint *)(opChunk + 0x14) >> 6) & 3;
+          *(byte *)((int)inst + 0x16) = (byte)(*(uint *)(opChunk + 0x14) >> 4) & 3;
+          *(byte *)((int)inst + 0x17) = (byte)(*(uint *)(opChunk + 0x14) >> 2) & 3;
         }
         else {
-          *(undefined1 *)(puVar9 + 5) = 0;
-          *(undefined1 *)((int)puVar9 + 0x15) = 1;
-          *(undefined1 *)((int)puVar9 + 0x16) = 2;
-          *(undefined1 *)((int)puVar9 + 0x17) = 3;
+          *(undefined1 *)(inst + 5) = 0;
+          *(undefined1 *)((int)inst + 0x15) = 1;
+          *(undefined1 *)((int)inst + 0x16) = 2;
+          *(undefined1 *)((int)inst + 0x17) = 3;
         }
-        if (*(short *)(puVar9 + 7) == 9) {
-          bVar4 = 4;
+        if (*(short *)(inst + 7) == 9) {
+          fieldByte = 4;
 LAB_97b835e0:
-          *(byte *)(puVar9 + 10) = bVar4;
+          *(byte *)(inst + 10) = fieldByte;
         }
         else {
-          *(undefined1 *)(puVar9 + 10) = 0xf;
-          uVar13 = *(uint *)(iVar25 + 0x14);
-          if ((uVar13 & 0x2000) == 0) {
-            *(undefined1 *)(puVar9 + 10) = 0xe;
-            uVar13 = *(uint *)(iVar25 + 0x14);
+          *(undefined1 *)(inst + 10) = 0xf;
+          workWord = *(uint *)(opChunk + 0x14);
+          if ((workWord & 0x2000) == 0) {
+            *(undefined1 *)(inst + 10) = 0xe;
+            workWord = *(uint *)(opChunk + 0x14);
           }
-          if ((uVar13 & 0x4000) == 0) {
-            *(byte *)(puVar9 + 10) = *(byte *)(puVar9 + 10) & 0xfd;
-            uVar13 = *(uint *)(iVar25 + 0x14);
+          if ((workWord & 0x4000) == 0) {
+            *(byte *)(inst + 10) = *(byte *)(inst + 10) & 0xfd;
+            workWord = *(uint *)(opChunk + 0x14);
           }
-          if ((uVar13 & 0x8000) == 0) {
-            *(byte *)(puVar9 + 10) = *(byte *)(puVar9 + 10) & 0xfb;
-            uVar13 = *(uint *)(iVar25 + 0x14);
+          if ((workWord & 0x8000) == 0) {
+            *(byte *)(inst + 10) = *(byte *)(inst + 10) & 0xfb;
+            workWord = *(uint *)(opChunk + 0x14);
           }
-          if ((uVar13 & 0x10000) == 0) {
-            bVar4 = *(byte *)(puVar9 + 10) & 0xf7;
+          if ((workWord & 0x10000) == 0) {
+            fieldByte = *(byte *)(inst + 10) & 0xf7;
             goto LAB_97b835e0;
           }
         }
         if (emulator[0xe] - 0x8b30 < 2) {
-          *(byte *)(puVar9 + 8) = (byte)(*(uint *)(iVar25 + 0x14) >> 0xc) & 1;
-          *(byte *)((int)puVar9 + 0x21) = ((byte)(*(uint *)(iVar25 + 0x14) >> 10) & 3) + 1;
-          uVar13 = *(uint *)(iVar25 + 0x10) >> 0x17 & 7;
+          *(byte *)(inst + 8) = (byte)(*(uint *)(opChunk + 0x14) >> 0xc) & 1;
+          *(byte *)((int)inst + 0x21) = ((byte)(*(uint *)(opChunk + 0x14) >> 10) & 3) + 1;
+          workWord = *(uint *)(opChunk + 0x10) >> 0x17 & 7;
         }
         else {
-          *(undefined1 *)(puVar9 + 8) = 0;
-          uVar13 = 1;
-          *(undefined1 *)((int)puVar9 + 0x21) = 4;
+          *(undefined1 *)(inst + 8) = 0;
+          workWord = 1;
+          *(undefined1 *)((int)inst + 0x21) = 4;
         }
-        puVar9[9] = uVar13;
-        uVar14 = *puVar9;
-        *(byte *)((int)puVar9 + 0x29) = (byte)((uint)*(undefined4 *)(iVar25 + 0x14) >> 0x1c) & 7;
-        *(byte *)((int)puVar9 + 0x2a) = (byte)((uint)*(undefined4 *)(iVar25 + 0x14) >> 0x1a) & 3;
-        *(byte *)((int)puVar9 + 0x2b) = (byte)((uint)*(undefined4 *)(iVar25 + 0x14) >> 0x18) & 3;
-        *(byte *)(puVar9 + 0xb) = (byte)(*(uint *)(iVar25 + 0x14) >> 0x16) & 3;
-        *(byte *)((int)puVar9 + 0x2d) = (byte)(*(uint *)(iVar25 + 0x14) >> 0x14) & 3;
-        uVar13 = *puVar27 >> 0x1d;
-        puVar9[0xc] = uVar13;
-        if (uVar14 == 0x41) {
-          uVar2 = 1;
+        inst[9] = workWord;
+        workWord2 = *inst;
+        *(byte *)((int)inst + 0x29) = (byte)((uint)*(undefined4 *)(opChunk + 0x14) >> 0x1c) & 7;
+        *(byte *)((int)inst + 0x2a) = (byte)((uint)*(undefined4 *)(opChunk + 0x14) >> 0x1a) & 3;
+        *(byte *)((int)inst + 0x2b) = (byte)((uint)*(undefined4 *)(opChunk + 0x14) >> 0x18) & 3;
+        *(byte *)(inst + 0xb) = (byte)(*(uint *)(opChunk + 0x14) >> 0x16) & 3;
+        *(byte *)((int)inst + 0x2d) = (byte)(*(uint *)(opChunk + 0x14) >> 0x14) & 3;
+        workWord = *opHeader >> 0x1d;
+        inst[0xc] = workWord;
+        if (workWord2 == 0x41) {
+          workWord3 = 1;
 LAB_97b83714:
-          puVar9[0xc] = uVar2;
+          inst[0xc] = workWord3;
         }
-        else if (uVar14 == 0x6d) {
-          uVar13 = 3;
-          puVar9[0xc] = 3;
-          uVar14 = *(uint *)(iVar25 + 0x18);
-          uVar2 = *(uint *)(iVar25 + 0x14);
-          *(uint *)(iVar25 + 0x2c) = uVar14 & 0x80000000 | *(uint *)(iVar25 + 0x2c) & 0x7fffffff;
-          *(char *)(iVar25 + 0x2f) = (char)(uVar14 >> 0x14);
-          *(short *)(iVar25 + 0x32) = (short)uVar14;
-          *(uint *)(iVar25 + 0x2c) =
-               (uVar2 >> 10 & 3) << 0xc |
-               (uVar2 >> 0xc & 1) << 0xe |
-               (uVar2 >> 0x11 & 7) << 0x17 | *(uint *)(iVar25 + 0x2c) & 0xfc080fff | 0xd8000;
-          uVar14 = *puVar9;
+        else if (workWord2 == 0x6d) {
+          workWord = 3;
+          inst[0xc] = 3;
+          workWord2 = *(uint *)(opChunk + 0x18);
+          workWord3 = *(uint *)(opChunk + 0x14);
+          *(uint *)(opChunk + 0x2c) = workWord2 & 0x80000000 | *(uint *)(opChunk + 0x2c) & 0x7fffffff;
+          *(char *)(opChunk + 0x2f) = (char)(workWord2 >> 0x14);
+          *(short *)(opChunk + 0x32) = (short)workWord2;
+          *(uint *)(opChunk + 0x2c) =
+               (workWord3 >> 10 & 3) << 0xc |
+               (workWord3 >> 0xc & 1) << 0xe |
+               (workWord3 >> 0x11 & 7) << 0x17 | *(uint *)(opChunk + 0x2c) & 0xfc080fff | 0xd8000;
+          workWord2 = *inst;
         }
-        else if (uVar14 - 0x42 < 4) {
-          uVar2 = uVar13 - 1;
+        else if (workWord2 - 0x42 < 4) {
+          workWord3 = workWord - 1;
           goto LAB_97b83714;
         }
-        loopIndex = 0;
-        iVar6 = 0;
-        if (uVar13 != 0) {
+        srcOperandLoop = 0;
+        srcIndex = 0;
+        if (workWord != 0) {
           do {
-            if (uVar14 == 0x41) {
-              if (loopIndex != 1) goto LAB_97b837e4;
-              *(byte *)(puVar9 + iVar6 * 9 + 0xf) = (byte)(*(uint *)(iVar25 + 0x24) >> 0xc) & 0xf;
-              *(byte *)((int)puVar9 + iVar6 * 0x24 + 0x3d) =
-                   (byte)((uint)*(undefined4 *)(iVar25 + 0x24) >> 8) & 0xf;
-              *(byte *)((int)puVar9 + iVar6 * 0x24 + 0x3e) =
-                   (byte)(*(uint *)(iVar25 + 0x24) >> 4) & 0xf;
-              *(byte *)((int)puVar9 + iVar6 * 0x24 + 0x3f) =
-                   (byte)*(undefined4 *)(iVar25 + 0x24) & 0xf;
+            if (workWord2 == 0x41) {
+              if (srcOperandLoop != 1) goto LAB_97b837e4;
+              *(byte *)(inst + srcIndex * 9 + 0xf) = (byte)(*(uint *)(opChunk + 0x24) >> 0xc) & 0xf;
+              *(byte *)((int)inst + srcIndex * 0x24 + 0x3d) =
+                   (byte)((uint)*(undefined4 *)(opChunk + 0x24) >> 8) & 0xf;
+              *(byte *)((int)inst + srcIndex * 0x24 + 0x3e) =
+                   (byte)(*(uint *)(opChunk + 0x24) >> 4) & 0xf;
+              *(byte *)((int)inst + srcIndex * 0x24 + 0x3f) =
+                   (byte)*(undefined4 *)(opChunk + 0x24) & 0xf;
               goto LAB_97b83af4;
             }
-            if ((0x40 < uVar14) && (uVar14 < 0x46)) {
+            if ((0x40 < workWord2) && (workWord2 < 0x46)) {
               if (1 < emulator[0xe] - 0x8b30) {
-                if (loopIndex == 1) {
-                  puVar9[0x44] = *(uint *)(iVar25 + 0x24) >> 5 & 7;
-                  uVar3 = *(uint *)(iVar25 + 0x24);
+                if (srcOperandLoop == 1) {
+                  inst[0x44] = *(uint *)(opChunk + 0x24) >> 5 & 7;
+                  workWord4 = *(uint *)(opChunk + 0x24);
                   goto LAB_97b83794;
                 }
                 goto LAB_97b837e4;
               }
-              if (loopIndex != 2) goto LAB_97b837e4;
-              puVar9[0x44] = *(uint *)(iVar25 + 0x2c) >> 5 & 7;
-              uVar3 = *(uint *)(iVar25 + 0x2c);
+              if (srcOperandLoop != 2) goto LAB_97b837e4;
+              inst[0x44] = *(uint *)(opChunk + 0x2c) >> 5 & 7;
+              workWord4 = *(uint *)(opChunk + 0x2c);
 LAB_97b83794:
-              iVar6 = iVar6 + -1;
-              puVar9[0x43] = uVar3 & 0x1f;
+              srcIndex = srcIndex + -1;
+              inst[0x43] = workWord4 & 0x1f;
               goto LAB_97b83af8;
             }
 LAB_97b837e4:
-            iVar24 = iVar6 * 0x24;
-            iVar21 = loopIndex * 8;
-            puVar9[iVar6 * 9 + 0x13] = 1;
-            uVar14 = puVar27[loopIndex * 2 + 4] >> 0x17 & 7;
-            if (uVar14 == 1) {
-              *(undefined2 *)(puVar9 + iVar6 * 9 + 0x11) = 0;
-              iVar7 = emulator[0x20];
+            srcRecOffset = srcIndex * 0x24;
+            srcWordOffset = srcOperandLoop * 8;
+            inst[srcIndex * 9 + 0x13] = 1;
+            workWord2 = opHeader[srcOperandLoop * 2 + 4] >> 0x17 & 7;
+            if (workWord2 == 1) {
+              *(undefined2 *)(inst + srcIndex * 9 + 0x11) = 0;
+              registerFileBase = emulator[0x20];
               emulator[0xd] = emulator[0xd] | 1;
-              uVar1 = *(ushort *)((int)puVar27 + iVar21 + 0x16);
-              puVar9[iVar6 * 9 + 0xe] = 0;
-              uVar23 = iVar7 + (uint)uVar1 * 0x10;
+              operandOrdinal = *(ushort *)((int)opHeader + srcWordOffset + 0x16);
+              inst[srcIndex * 9 + 0xe] = 0;
+              registerAddr = registerFileBase + (uint)operandOrdinal * 0x10;
               goto LAB_97b839f4;
             }
-            if (1 < uVar14) {
-              if (uVar14 == 2) {
-                chunk = ((int (*)())_PPStreamChunkListChunkAtIndex)(uVar17,(uint)*(ushort *)((int)puVar27 + iVar21 + 0x16));
-                uVar23 = *(uint *)(chunk + 0xc) >> 0x10 & 0x1f;
-                if (uVar23 == 1) {
-                  *(undefined2 *)(puVar9 + iVar6 * 9 + 0x11) = 5;
-                  iVar7 = emulator[0x29];
-                  uVar23 = emulator[0xd] | 0x20;
+            if (1 < workWord2) {
+              if (workWord2 == 2) {
+                srcBindingChunk = ((int (*)())_PPStreamChunkListChunkAtIndex)(paramBindingList,(uint)*(ushort *)((int)opHeader + srcWordOffset + 0x16));
+                registerAddr = *(uint *)(srcBindingChunk + 0xc) >> 0x10 & 0x1f;
+                if (registerAddr == 1) {
+                  *(undefined2 *)(inst + srcIndex * 9 + 0x11) = 5;
+                  registerFileBase = emulator[0x29];
+                  registerAddr = emulator[0xd] | 0x20;
                 }
-                else if (uVar23 == 0x11) {
-                  *(undefined2 *)(puVar9 + iVar6 * 9 + 0x11) = 3;
-                  iVar7 = emulator[0x29];
-                  uVar23 = emulator[0xd] | 8;
+                else if (registerAddr == 0x11) {
+                  *(undefined2 *)(inst + srcIndex * 9 + 0x11) = 3;
+                  registerFileBase = emulator[0x29];
+                  registerAddr = emulator[0xd] | 8;
                 }
                 else {
-                  *(undefined2 *)(puVar9 + iVar6 * 9 + 0x11) = 4;
-                  iVar7 = emulator[0x29];
-                  uVar23 = emulator[0xd] | 0x10;
+                  *(undefined2 *)(inst + srcIndex * 9 + 0x11) = 4;
+                  registerFileBase = emulator[0x29];
+                  registerAddr = emulator[0xd] | 0x10;
                 }
-                emulator[0xd] = uVar23;
-                uVar23 = iVar7 + (uint)*(ushort *)(chunk + 0x12) * 0x10;
-                puVar9[iVar6 * 9 + 0xe] = 3;
-                puVar9[iVar6 * 9 + 0x13] = *(uint *)(chunk + 0xc) >> 0x1a & 7;
+                emulator[0xd] = registerAddr;
+                registerAddr = registerFileBase + (uint)*(ushort *)(srcBindingChunk + 0x12) * 0x10;
+                inst[srcIndex * 9 + 0xe] = 3;
+                inst[srcIndex * 9 + 0x13] = *(uint *)(srcBindingChunk + 0xc) >> 0x1a & 7;
               }
               goto LAB_97b839f4;
             }
-            if (uVar14 != 0) goto LAB_97b839f4;
-            chunk = ((int (*)())_PPStreamChunkListChunkAtIndex)(iVar18,(uint)*(ushort *)((int)puVar27 + iVar21 + 0x16));
-            *(undefined2 *)(puVar9 + iVar6 * 9 + 0x11) = 2;
-            switch(*(uint *)(chunk + 0xc) >> 0x10 & 0xf) {
+            if (workWord2 != 0) goto LAB_97b839f4;
+            srcBindingChunk = ((int (*)())_PPStreamChunkListChunkAtIndex)(attribBindingList,(uint)*(ushort *)((int)opHeader + srcWordOffset + 0x16));
+            *(undefined2 *)(inst + srcIndex * 9 + 0x11) = 2;
+            switch(*(uint *)(srcBindingChunk + 0xc) >> 0x10 & 0xf) {
             default:
               goto switchD_97b83930_caseD_0;
             case 1:
-              uVar23 = emulator[0xd] | 0x10080;
+              registerAddr = emulator[0xd] | 0x10080;
               break;
             case 2:
-              uVar23 = emulator[0xd] | 0x20000;
+              registerAddr = emulator[0xd] | 0x20000;
               break;
             case 3:
-              uVar23 = emulator[0xd] | 0x40000;
+              registerAddr = emulator[0xd] | 0x40000;
               break;
             case 5:
-              uVar23 = emulator[0xd] | 0x80000;
+              registerAddr = emulator[0xd] | 0x80000;
               break;
             case 7:
-              emulator[0xd] = emulator[0xd] | 1 << (*(uint *)(chunk + 0xc) & 0x1f) + 0x14;
+              emulator[0xd] = emulator[0xd] | 1 << (*(uint *)(srcBindingChunk + 0xc) & 0x1f) + 0x14;
               goto switchD_97b83930_caseD_0;
             case 9:
-              if ((*(uint *)(chunk + 0xc) & 0x1f) == 0) {
-                uVar23 = emulator[0xd] | 0x100;
+              if ((*(uint *)(srcBindingChunk + 0xc) & 0x1f) == 0) {
+                registerAddr = emulator[0xd] | 0x100;
                 break;
               }
               goto switchD_97b83930_caseD_0;
             }
-            emulator[0xd] = uVar23;
+            emulator[0xd] = registerAddr;
 switchD_97b83930_caseD_0:
-            iVar7 = emulator[0x26];
+            registerFileBase = emulator[0x26];
             emulator[0xd] = emulator[0xd] | 4;
-            uVar1 = *(ushort *)(chunk + 0x12);
-            puVar9[iVar6 * 9 + 0xe] = 2;
-            uVar23 = iVar7 + (uint)uVar1 * 0x10;
+            operandOrdinal = *(ushort *)(srcBindingChunk + 0x12);
+            inst[srcIndex * 9 + 0xe] = 2;
+            registerAddr = registerFileBase + (uint)operandOrdinal * 0x10;
 LAB_97b839f4:
-            puVar9[iVar6 * 9 + 0xd] = uVar23;
-            uVar14 = puVar27[loopIndex * 2 + 4];
-            if ((int)uVar14 < 0) {
-              *(undefined1 *)((int)puVar9 + iVar24 + 0x47) = 1;
-              *(short *)(puVar9 + iVar6 * 9 + 0x10) = (short)(char)puVar27[loopIndex * 2 + 4];
-              uVar14 = puVar27[loopIndex * 2 + 4];
+            inst[srcIndex * 9 + 0xd] = registerAddr;
+            workWord2 = opHeader[srcOperandLoop * 2 + 4];
+            if ((int)workWord2 < 0) {
+              *(undefined1 *)((int)inst + srcRecOffset + 0x47) = 1;
+              *(short *)(inst + srcIndex * 9 + 0x10) = (short)(char)opHeader[srcOperandLoop * 2 + 4];
+              workWord2 = opHeader[srcOperandLoop * 2 + 4];
             }
-            *(byte *)((int)puVar9 + iVar24 + 0x46) = (byte)(uVar14 >> 0x1b) & 1;
-            *(undefined1 *)(puVar9 + iVar6 * 9 + 0x14) = 0xf;
+            *(byte *)((int)inst + srcRecOffset + 0x46) = (byte)(workWord2 >> 0x1b) & 1;
+            *(undefined1 *)(inst + srcIndex * 9 + 0x14) = 0xf;
             if (emulator[0xe] - 0x8b30 < 2) {
-              *(byte *)(puVar9 + iVar6 * 9 + 0x12) = (byte)(puVar27[loopIndex * 2 + 4] >> 0xe) & 1;
-              *(byte *)((int)puVar9 + iVar24 + 0x49) =
-                   ((byte)(puVar27[loopIndex * 2 + 4] >> 0xc) & 3) + 1;
+              *(byte *)(inst + srcIndex * 9 + 0x12) = (byte)(opHeader[srcOperandLoop * 2 + 4] >> 0xe) & 1;
+              *(byte *)((int)inst + srcRecOffset + 0x49) =
+                   ((byte)(opHeader[srcOperandLoop * 2 + 4] >> 0xc) & 3) + 1;
             }
             else {
-              *(undefined1 *)((int)puVar9 + iVar24 + 0x49) = 4;
-              *(undefined1 *)(puVar9 + iVar6 * 9 + 0x12) = 0;
+              *(undefined1 *)((int)inst + srcRecOffset + 0x49) = 4;
+              *(undefined1 *)(inst + srcIndex * 9 + 0x12) = 0;
             }
-            if (*(char *)((int)puVar9 + iVar24 + 0x49) == '\x01') {
-              *(byte *)(puVar9 + iVar6 * 9 + 0xf) = (byte)(puVar27[loopIndex * 2 + 4] >> 0x15) & 3;
-              *(byte *)((int)puVar9 + iVar24 + 0x3d) = (byte)(puVar27[loopIndex * 2 + 4] >> 0x15) & 3;
-              *(byte *)((int)puVar9 + iVar24 + 0x3e) = (byte)(puVar27[loopIndex * 2 + 4] >> 0x15) & 3;
-              bVar4 = (byte)(puVar27[loopIndex * 2 + 4] >> 0x15);
+            if (*(char *)((int)inst + srcRecOffset + 0x49) == '\x01') {
+              *(byte *)(inst + srcIndex * 9 + 0xf) = (byte)(opHeader[srcOperandLoop * 2 + 4] >> 0x15) & 3;
+              *(byte *)((int)inst + srcRecOffset + 0x3d) = (byte)(opHeader[srcOperandLoop * 2 + 4] >> 0x15) & 3;
+              *(byte *)((int)inst + srcRecOffset + 0x3e) = (byte)(opHeader[srcOperandLoop * 2 + 4] >> 0x15) & 3;
+              fieldByte = (byte)(opHeader[srcOperandLoop * 2 + 4] >> 0x15);
             }
             else {
-              *(byte *)(puVar9 + iVar6 * 9 + 0xf) = (byte)(puVar27[loopIndex * 2 + 4] >> 0x15) & 3;
-              *(byte *)((int)puVar9 + iVar24 + 0x3d) = (byte)(puVar27[loopIndex * 2 + 4] >> 0x13) & 3;
-              *(byte *)((int)puVar9 + iVar24 + 0x3e) = (byte)(puVar27[loopIndex * 2 + 4] >> 0x11) & 3;
-              bVar4 = (byte)(puVar27[loopIndex * 2 + 4] >> 0xf);
+              *(byte *)(inst + srcIndex * 9 + 0xf) = (byte)(opHeader[srcOperandLoop * 2 + 4] >> 0x15) & 3;
+              *(byte *)((int)inst + srcRecOffset + 0x3d) = (byte)(opHeader[srcOperandLoop * 2 + 4] >> 0x13) & 3;
+              *(byte *)((int)inst + srcRecOffset + 0x3e) = (byte)(opHeader[srcOperandLoop * 2 + 4] >> 0x11) & 3;
+              fieldByte = (byte)(opHeader[srcOperandLoop * 2 + 4] >> 0xf);
             }
-            *(byte *)((int)puVar9 + iVar24 + 0x3f) = bVar4 & 3;
+            *(byte *)((int)inst + srcRecOffset + 0x3f) = fieldByte & 3;
 LAB_97b83af4:
-            uVar14 = *puVar9;
+            workWord2 = *inst;
 LAB_97b83af8:
-            loopIndex = loopIndex + 1;
-            iVar6 = iVar6 + 1;
-          } while (loopIndex < uVar13);
+            srcOperandLoop = srcOperandLoop + 1;
+            srcIndex = srcIndex + 1;
+          } while (srcOperandLoop < workWord);
         }
-        if (uVar19 != 0) {
-          switch(uVar14) {
+        if (engineFlags != 0) {
+          switch(workWord2) {
           case 0xf:
           case 0x1b:
           case 0x1c:
@@ -831,51 +841,51 @@ LAB_97b83af8:
           case 0x57:
           case 0x5a:
           case 0x5b:
-            uVar19 = uVar19 & 0xfffffffd;
+            engineFlags = engineFlags & 0xfffffffd;
           }
         }
-        switch(uVar14) {
+        switch(workWord2) {
         case 0x4a:
         case 0x56:
         case 0x57:
         case 0x5a:
         case 0x5b:
-          uVar19 = 0;
+          engineFlags = 0;
         }
-        puVar27 = puVar9 + 0x47;
-        iVar25 = *(int *)(iVar25 + 8);
-        if (puVar9 == (uint *)emulator[1]) {
-          puVar27 = (uint *)0x0;
+        opHeader = inst + 0x47;
+        opChunk = *(int *)(opChunk + 8);
+        if (inst == (uint *)emulator[1]) {
+          opHeader = (uint *)0x0;
         }
-        loopIndex2 = loopIndex2 + 1;
-        puVar9 = puVar27;
-      } while (loopIndex2 < uVar20);
+        opIndex = opIndex + 1;
+        inst = opHeader;
+      } while (opIndex < opCount);
     }
     if ((emulator[0xe] == 0x8804) || (emulator[0xe] == 0x8b30)) {
-      iVar6 = *piVar15;
-      for (iVar25 = piVar15[2]; iVar25 != 0; iVar25 = iVar25 + -1) {
-        emulator[0xf] = emulator[0xf] | 1 << (*(uint *)(iVar6 + 0xc) >> 0x18 & 7);
-        uVar20 = *(uint *)(iVar6 + 0xc) >> 0x18 & 7;
-        if (uVar20 == 2) {
-          uVar20 = emulator[0xd] | 0x1000;
+      texChunk = *texBindingList;
+      for (texLeft = texBindingList[2]; texLeft != 0; texLeft = texLeft + -1) {
+        emulator[0xf] = emulator[0xf] | 1 << (*(uint *)(texChunk + 0xc) >> 0x18 & 7);
+        texUnit = *(uint *)(texChunk + 0xc) >> 0x18 & 7;
+        if (texUnit == 2) {
+          texUnit = emulator[0xd] | 0x1000;
 LAB_97b83d90:
-          emulator[0xd] = uVar20;
+          emulator[0xd] = texUnit;
         }
-        else if (uVar20 == 1) {
-          uVar20 = emulator[0xd] | 0x4000;
+        else if (texUnit == 1) {
+          texUnit = emulator[0xd] | 0x4000;
           goto LAB_97b83d90;
         }
-        uVar23 = *(uint *)(iVar6 + 0xc);
-        uVar20 = uVar23 >> 0x15 & 0x38;
-        *(undefined4 *)((int)emulator + uVar20 + 0x44) = *(undefined4 *)(iVar6 + 0x10);
-        *(uint *)((int)emulator + uVar20 + 0x40) = uVar23;
-        iVar6 = *(int *)(iVar6 + 8);
+        registerAddr = *(uint *)(texChunk + 0xc);
+        texUnit = registerAddr >> 0x15 & 0x38;
+        *(undefined4 *)((int)emulator + texUnit + 0x44) = *(undefined4 *)(texChunk + 0x10);
+        *(uint *)((int)emulator + texUnit + 0x40) = registerAddr;
+        texChunk = *(int *)(texChunk + 8);
       }
     }
     if ((emulator[0xd] & 0x800) != 0) {
-      uVar19 = uVar19 & 0xfffffffb;
+      engineFlags = engineFlags & 0xfffffffb;
     }
-    emulator[0x49] = uVar19;
+    emulator[0x49] = engineFlags;
   }
   return;
 }
