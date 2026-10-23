@@ -568,8 +568,8 @@ int FUN_001779f0(ctx)
   return;
 }
 
-/* FUN_00177ad0 @ 0x177ad0 (124 bytes) */
-int FUN_00177ad0(ctx)
+/* ValueKey__cancelNegatedSourcePair @ 0x177ad0 (124 bytes) */
+int ValueKey__cancelNegatedSourcePair(ctx)
   int ctx;
 {
   int member0xb0;
@@ -1673,8 +1673,8 @@ int FUN_001797d0(ctx, param_2)
   return 0;
 }
 
-/* FUN_00179894 @ 0x179894 (184 bytes) */
-int FUN_00179894(ctx, param_2)
+/* ValueKey__foldCompareSameSourcesValueNumber @ 0x179894 (184 bytes) */
+int ValueKey__foldCompareSameSourcesValueNumber(ctx, param_2)
   int ctx;
   int param_2;
 {
@@ -2046,7 +2046,7 @@ int FUN_0017a130(param_1, param_2, inst, compiler)
     operandRecord = IRInst__getOperandRecord(inst,param_1);
     *(undefined4 *)(operandRecord + 0x10) = uVar4;
   }
-  ((void (*)())FUN_000f79c4)(inst,*(undefined4 *)(compiler + COMP_currentProgram),param_1,(double)*param_2,(double)param_2[1],
+  ((void (*)())IRInst__makeLiteralVec4Float)(inst,*(undefined4 *)(compiler + COMP_currentProgram),param_1,(double)*param_2,(double)param_2[1],
                (double)param_2[2],(double)param_2[3]);
   piVar1 = *(int **)(*(int *)(param_1 * 0x18 + inst + 0x8c) + 0x18);
   if (*piVar1 == 0) {
@@ -2095,7 +2095,7 @@ int FUN_0017a294(ctx, param_2, param_3)
     FUN_00104be8(member0xb0,1);
     uVar3 = ((int (*)())FUN_0017a130)(1,param_2,*(undefined4 *)(ctx + 0xb0),param_3);
     *(undefined4 *)(ctx + 0x214) = uVar3;
-    ((void (*)())FUN_000f79c4)(*(undefined4 *)(ctx + 0xb0),*(undefined4 *)(param_3 + 0x6c4),1,(double)*param_2
+    ((void (*)())IRInst__makeLiteralVec4Float)(*(undefined4 *)(ctx + 0xb0),*(undefined4 *)(param_3 + 0x6c4),1,(double)*param_2
                  ,(double)param_2[1],(double)param_2[2],(double)param_2[3]);
     FUN_00104be8(*(undefined4 *)(ctx + 0xb0),2);
     local_24 = DAT_001b01ec;
@@ -2110,7 +2110,7 @@ int FUN_0017a294(ctx, param_2, param_3)
     FUN_00104be8(member0xb0,1);
     uVar3 = ((int (*)())FUN_0017a130)(1,param_2,*(undefined4 *)(ctx + 0xb0),param_3);
     *(undefined4 *)(ctx + 0x214) = uVar3;
-    ((void (*)())FUN_000f79c4)(*(undefined4 *)(ctx + 0xb0),*(undefined4 *)(param_3 + 0x6c4),1,(double)*param_2
+    ((void (*)())IRInst__makeLiteralVec4Float)(*(undefined4 *)(ctx + 0xb0),*(undefined4 *)(param_3 + 0x6c4),1,(double)*param_2
                  ,(double)param_2[1],(double)param_2[2],(double)param_2[3]);
     *(undefined4 *)(*(int *)(ctx + 0xb0) + 300) = 0;
   }
@@ -2473,8 +2473,8 @@ int FUN_0017a8a4(ctx)
   return 1;
 }
 
-/* FUN_0017ab4c @ 0x17ab4c (472 bytes) */
-int FUN_0017ab4c(ctx)
+/* ValueKey__foldDotPowerOfTwoIntoOutputScale @ 0x17ab4c (472 bytes) */
+int ValueKey__foldDotPowerOfTwoIntoOutputScale(ctx)
   int ctx;
 {
   bool bVar1;

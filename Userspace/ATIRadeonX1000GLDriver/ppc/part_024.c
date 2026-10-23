@@ -741,7 +741,7 @@ int HwLimits__vslot43_prependDefaultMov(this, inst, param_3, compiler)
   if (*(int *)(iVar1 + 0x10) != DAT_001aa800) {
     inst2 = IRInst__create(0x31,compiler);
     fparam_1 = (double)FLOAT_001aa0d4;
-    ((void (*)())FUN_000f79c4)(inst2,*(undefined4 *)(compiler + COMP_currentProgram),1,fparam_1,fparam_1,fparam_1,
+    ((void (*)())IRInst__makeLiteralVec4Float)(inst2,*(undefined4 *)(compiler + COMP_currentProgram),1,fparam_1,fparam_1,fparam_1,
                  (double)FLOAT_001aa0e8);
     IRInst__setOperandRef(inst2,0,*(undefined4 *)(inst + 0xa4));
     iVar3 = IRInst__getOperandRecord(inst,0);
@@ -1826,7 +1826,7 @@ LAB_000eed14:
     *(undefined4 *)(operandRecord4 + 0xc) = 9;
     *(undefined4 *)(operandRecord4 + 8) = 0;
     allocation[0x28] = arena;
-    ((void (*)())FUN_000f79c4)(puVar11,param_1,1,dVar13,dVar13,dVar13,dVar13);
+    ((void (*)())IRInst__makeLiteralVec4Float)(puVar11,param_1,1,dVar13,dVar13,dVar13,dVar13);
     FUN_000f92fc(param_1,puVar11,*(undefined4 *)(param_1 + 0x3a8));
   }
   iVar7 = *(int *)(param_1 + 0x34c);
@@ -1844,7 +1844,7 @@ LAB_000eee08:
   arena = *(undefined4 *)(operandRecord + 0x10);
   operandRecord = IRInst__getOperandRecord(inst,1);
   *(undefined4 *)(operandRecord + 0x10) = arena;
-  ((void (*)())FUN_000f79c4)(inst,param_1,2,0.5000000596046448,dVar13,dVar13,dVar13);
+  ((void (*)())IRInst__makeLiteralVec4Float)(inst,param_1,2,0.5000000596046448,dVar13,dVar13,dVar13);
   arena = *(undefined4 *)(param_1 + 0x3ac);
   iVar3 = *(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1;
   *(int *)(*(int *)(param_1 + 8) + 0x3ac) = iVar3;
@@ -1859,7 +1859,7 @@ LAB_000eee08:
   uVar10 = *(undefined4 *)(operandRecord2 + 0x10);
   operandRecord2 = IRInst__getOperandRecord(newInst2,1);
   *(undefined4 *)(operandRecord2 + 0x10) = uVar10;
-  ((void (*)())FUN_000f79c4)(newInst2,param_1,2,0.9999999403953552,dVar13,dVar13,dVar13);
+  ((void (*)())IRInst__makeLiteralVec4Float)(newInst2,param_1,2,0.9999999403953552,dVar13,dVar13,dVar13);
   uVar10 = *(undefined4 *)(param_1 + 0x3ac);
   iVar5 = *(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1;
   *(int *)(*(int *)(param_1 + 8) + 0x3ac) = iVar5;
@@ -1872,7 +1872,7 @@ LAB_000eee08:
   uVar4 = DAT_001aa810;
   operandRecord3 = IRInst__getOperandRecord(newInst,1);
   *(undefined4 *)(operandRecord3 + 0x10) = uVar4;
-  ((void (*)())FUN_000f79c4)(newInst,param_1,2,0.9999999403953552,dVar13,dVar13,dVar13);
+  ((void (*)())IRInst__makeLiteralVec4Float)(newInst,param_1,2,0.9999999403953552,dVar13,dVar13,dVar13);
   IRInst__setOperandRef(newInst,3,uVar10);
   operandRecord3 = IRInst__getOperandRecord(newInst,3);
   *(undefined4 *)(operandRecord3 + 0x10) = uVar4;
@@ -2805,7 +2805,7 @@ LAB_000f0628:
     piVar5 = *(int **)(*(int *)(param_1 + 8) + 0x30c);
     iVar4 = (**(code **)(*piVar5 + 0xfc))(piVar5,iVar3,inst);
     if (iVar4 != 0) {
-      ((void (*)())FUN_000f79c4)(inst,*(undefined4 *)(*(int *)(param_1 + 8) + 0x6c4),1,1.0,1.0,1.0,1.0);
+      ((void (*)())IRInst__makeLiteralVec4Float)(inst,*(undefined4 *)(*(int *)(param_1 + 8) + 0x6c4),1,1.0,1.0,1.0,1.0);
       inst[0x49] = iVar3;
       operandRecord = IRInst__getOperandRecord(inst,1);
       *(undefined4 *)(operandRecord + 0x10) = 0x10203;

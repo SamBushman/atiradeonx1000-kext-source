@@ -290,9 +290,9 @@ f1d7c	FUN_000f1d7c	f2958	f295c	f2984	cleanup
 f1d7c	FUN_000f1d7c	f297c	f2980	f29b8	cleanup
 f1d7c	FUN_000f1d7c	f29a0	f29a4	-	no-handler
 f1d7c	FUN_000f1d7c	f29cc	f29d0	-	no-handler
-f4fdc	FUN_000f4fdc	f50ec	f510c	-	no-handler
-f4fdc	FUN_000f4fdc	f511c	f5120	f513c	cleanup
-f4fdc	FUN_000f4fdc	f5158	f5230	-	no-handler
+f4fdc	Compiler__getOrCreateLoadConstN	f50ec	f510c	-	no-handler
+f4fdc	Compiler__getOrCreateLoadConstN	f511c	f5120	f513c	cleanup
+f4fdc	Compiler__getOrCreateLoadConstN	f5158	f5230	-	no-handler
 f6a04	FUN_000f6a04	f6a48	f6be8	-	no-handler
 f6a04	FUN_000f6a04	f6bf8	f6bfc	f6c50	cleanup
 f6a04	FUN_000f6a04	f6c28	f6c2c	-	no-handler

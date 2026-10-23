@@ -8344,9 +8344,9 @@ int psnDecTryMergeAddressSlots(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* psnProgramToDecoded @ 0xc42f0 (2444 bytes) */
-int psnProgramToDecoded(param_1, param_2)
-  uint *param_1;
-  uint *param_2;
+int psnProgramToDecoded(decodedProgram, recordCursor)
+  uint *decodedProgram;
+  uint *recordCursor;
 {
   bool bVar1;
   byte bVar2;
@@ -8357,219 +8357,219 @@ int psnProgramToDecoded(param_1, param_2)
   undefined4 extraout_r4;
   uint *puVar7;
   byte *pbVar8;
-  ushort *puVar9;
+  ushort *recField0e;
   char *pcVar10;
   ushort *puVar11;
   byte *pbVar12;
   int iVar13;
   ushort *puVar14;
-  uint *puVar15;
-  uint *puVar16;
-  ushort *puVar17;
-  byte *pbVar18;
-  byte *pbVar19;
-  uint *puVar20;
-  byte *pbVar21;
-  byte *pbVar22;
-  ushort *puVar23;
-  byte *pbVar24;
-  uint *puVar25;
-  byte *pbVar26;
-  byte *pbVar27;
-  byte *pbVar28;
-  ushort *puVar29;
+  uint *recField1c;
+  uint *recField0c;
+  ushort *recField1e;
+  byte *recField2b;
+  byte *recField3a;
+  uint *recField40;
+  byte *recField2e;
+  byte *recField3d;
+  ushort *recField1a;
+  byte *recField39;
+  uint *recField3c;
+  byte *recField2a;
+  byte *recField2d;
+  byte *recField31;
+  ushort *entry;
   uint uVar30;
   uint *puStack00000018;
-  byte *pbStack_e8;
-  byte *pbStack_e4;
-  byte *pbStack_e0;
-  byte *pbStack_dc;
-  uint *puStack_d8;
-  ushort *puStack_d4;
-  ushort *puStack_d0;
-  uint *puStack_cc;
-  ushort *puStack_c8;
-  byte *pbStack_c4;
-  byte *pbStack_c0;
-  uint *puStack_bc;
-  uint *puStack_b8;
-  char *pcStack_b4;
-  uint *puStack_b0;
-  uint *puStack_ac;
-  uint *puStack_a8;
-  byte *pbStack_a4;
-  char *pcStack_a0;
-  byte *pbStack_9c;
-  char *pcStack_98;
-  char *pcStack_94;
-  byte *pbStack_90;
-  byte *pbStack_8c;
-  byte *pbStack_88;
-  byte *pbStack_84;
-  ushort *puStack_80;
-  char *pcStack_7c;
-  uint *puStack_78;
-  uint *puStack_74;
-  uint *puStack_70;
-  byte *pbStack_6c;
-  byte *pbStack_68;
-  uint uStack_64;
-  int iStack_5c;
+  byte *recField1f;
+  byte *recField3e;
+  byte *recField3b;
+  byte *recField2f;
+  uint *recField2c;
+  ushort *recField1aCopyd4;
+  ushort *recField12;
+  uint *recField10;
+  ushort *recField0eCopyc8;
+  byte *recField15;
+  byte *recField16;
+  uint *recField14;
+  uint *recField0cCopyb8;
+  char *recField33;
+  uint *recField30;
+  uint *recField20;
+  uint *recField18;
+  byte *recField32;
+  char *recField21;
+  byte *recField22;
+  char *recField23;
+  char *recField42;
+  byte *recField3f;
+  byte *recField0b;
+  byte *recField0d;
+  byte *recField0a;
+  ushort *recField06;
+  char *recField09;
+  uint *recField0cCopy78;
+  uint *recField08;
+  uint *recField04;
+  byte *recField41;
+  byte *recField19;
+  uint recordNumber;
+  int entryByteOffset;
   
-  *(undefined1 *)(param_1 + 4) = *(undefined1 *)(param_2 + 3);
-  *(undefined1 *)((int)param_1 + 0x11) = *(undefined1 *)((int)param_2 + 0xd);
-  if (*param_1 != 0) {
-    puVar16 = param_2 + 0x15;
-    puVar9 = (ushort *)((int)param_2 + 0x56);
-    pbStack_e8 = (byte *)((int)param_2 + 0x67);
-    pbStack_68 = (byte *)((int)param_2 + 0x61);
-    pbStack_6c = (byte *)((int)param_2 + 0x89);
-    puStack_70 = param_2 + 0x13;
-    puStack_74 = param_2 + 0x14;
-    pcStack_7c = (char *)((int)param_2 + 0x51);
-    puStack_80 = (ushort *)((int)param_2 + 0x4e);
-    pbStack_84 = (byte *)((int)param_2 + 0x52);
-    pbStack_88 = (byte *)((int)param_2 + 0x55);
-    pbStack_8c = (byte *)((int)param_2 + 0x53);
-    pbStack_90 = (byte *)((int)param_2 + 0x87);
-    pcStack_94 = (char *)((int)param_2 + 0x8a);
-    pcStack_98 = (char *)((int)param_2 + 0x6b);
-    pbStack_9c = (byte *)((int)param_2 + 0x6a);
-    pcStack_a0 = (char *)((int)param_2 + 0x69);
-    pbStack_a4 = (byte *)((int)param_2 + 0x7a);
-    puStack_a8 = param_2 + 0x18;
-    puStack_ac = param_2 + 0x1a;
-    puStack_b0 = param_2 + 0x1e;
-    pcStack_b4 = (char *)((int)param_2 + 0x7b);
-    puStack_bc = param_2 + 0x17;
-    pbStack_c0 = (byte *)((int)param_2 + 0x5e);
-    pbStack_c4 = (byte *)((int)param_2 + 0x5d);
-    puStack_cc = param_2 + 0x16;
-    puStack_d0 = (ushort *)((int)param_2 + 0x5a);
-    puVar23 = (ushort *)((int)param_2 + 0x62);
-    puStack_d8 = param_2 + 0x1d;
-    pbStack_dc = (byte *)((int)param_2 + 0x77);
-    pbStack_e0 = (byte *)((int)param_2 + 0x83);
-    puVar20 = param_2 + 0x22;
-    pbVar28 = (byte *)((int)param_2 + 0x79);
-    puVar15 = param_2 + 0x19;
-    puVar17 = (ushort *)((int)param_2 + 0x66);
-    pbVar26 = (byte *)((int)param_2 + 0x72);
-    pbVar27 = (byte *)((int)param_2 + 0x75);
-    pbVar18 = (byte *)((int)param_2 + 0x73);
-    pbVar21 = (byte *)((int)param_2 + 0x76);
-    pbVar24 = (byte *)((int)param_2 + 0x81);
-    puVar25 = param_2 + 0x21;
-    pbVar19 = (byte *)((int)param_2 + 0x82);
-    pbVar22 = (byte *)((int)param_2 + 0x85);
-    pbStack_e4 = (byte *)((int)param_2 + 0x86);
-    uStack_64 = 0;
-    iStack_5c = 0;
-    puStack00000018 = param_1;
-    puStack_d4 = puVar23;
-    puStack_c8 = puVar9;
-    puStack_b8 = puVar16;
-    puStack_78 = puVar16;
+  *(undefined1 *)(decodedProgram + 4) = *(undefined1 *)(recordCursor + 3);
+  *(undefined1 *)((int)decodedProgram + 0x11) = *(undefined1 *)((int)recordCursor + 0xd);
+  if (*decodedProgram != 0) {
+    recField0c = recordCursor + 0x15;
+    recField0e = (ushort *)((int)recordCursor + 0x56);
+    recField1f = (byte *)((int)recordCursor + 0x67);
+    recField19 = (byte *)((int)recordCursor + 0x61);
+    recField41 = (byte *)((int)recordCursor + 0x89);
+    recField04 = recordCursor + 0x13;
+    recField08 = recordCursor + 0x14;
+    recField09 = (char *)((int)recordCursor + 0x51);
+    recField06 = (ushort *)((int)recordCursor + 0x4e);
+    recField0a = (byte *)((int)recordCursor + 0x52);
+    recField0d = (byte *)((int)recordCursor + 0x55);
+    recField0b = (byte *)((int)recordCursor + 0x53);
+    recField3f = (byte *)((int)recordCursor + 0x87);
+    recField42 = (char *)((int)recordCursor + 0x8a);
+    recField23 = (char *)((int)recordCursor + 0x6b);
+    recField22 = (byte *)((int)recordCursor + 0x6a);
+    recField21 = (char *)((int)recordCursor + 0x69);
+    recField32 = (byte *)((int)recordCursor + 0x7a);
+    recField18 = recordCursor + 0x18;
+    recField20 = recordCursor + 0x1a;
+    recField30 = recordCursor + 0x1e;
+    recField33 = (char *)((int)recordCursor + 0x7b);
+    recField14 = recordCursor + 0x17;
+    recField16 = (byte *)((int)recordCursor + 0x5e);
+    recField15 = (byte *)((int)recordCursor + 0x5d);
+    recField10 = recordCursor + 0x16;
+    recField12 = (ushort *)((int)recordCursor + 0x5a);
+    recField1a = (ushort *)((int)recordCursor + 0x62);
+    recField2c = recordCursor + 0x1d;
+    recField2f = (byte *)((int)recordCursor + 0x77);
+    recField3b = (byte *)((int)recordCursor + 0x83);
+    recField40 = recordCursor + 0x22;
+    recField31 = (byte *)((int)recordCursor + 0x79);
+    recField1c = recordCursor + 0x19;
+    recField1e = (ushort *)((int)recordCursor + 0x66);
+    recField2a = (byte *)((int)recordCursor + 0x72);
+    recField2d = (byte *)((int)recordCursor + 0x75);
+    recField2b = (byte *)((int)recordCursor + 0x73);
+    recField2e = (byte *)((int)recordCursor + 0x76);
+    recField39 = (byte *)((int)recordCursor + 0x81);
+    recField3c = recordCursor + 0x21;
+    recField3a = (byte *)((int)recordCursor + 0x82);
+    recField3d = (byte *)((int)recordCursor + 0x85);
+    recField3e = (byte *)((int)recordCursor + 0x86);
+    recordNumber = 0;
+    entryByteOffset = 0;
+    puStack00000018 = decodedProgram;
+    recField1aCopyd4 = recField1a;
+    recField0eCopyc8 = recField0e;
+    recField0cCopyb8 = recField0c;
+    recField0cCopy78 = recField0c;
     do {
-      param_2 = param_2 + 0x12;
-      puVar29 = (ushort *)(iStack_5c + puStack00000018[2]);
-      _memset(puVar29,0,0x80);
-      puVar29[0x40] = 0;
-      puVar29[0x41] = 0;
-      puVar29[0x44] = 0;
-      puVar29[0x45] = 0;
-      puVar29[0x42] = 0;
-      puVar29[0x43] = 0;
-      uVar4 = *param_2;
+      recordCursor = recordCursor + 0x12;
+      entry = (ushort *)(entryByteOffset + puStack00000018[2]);
+      _memset(entry,0,0x80);
+      entry[0x40] = 0;
+      entry[0x41] = 0;
+      entry[0x44] = 0;
+      entry[0x45] = 0;
+      entry[0x42] = 0;
+      entry[0x43] = 0;
+      uVar4 = *recordCursor;
       if (uVar4 == 2) {
-        puVar29[0x48] = 0;
-        puVar29[0x49] = 0;
-        puVar29[0x4a] = 0;
-        puVar29[0x4b] = 0;
-        puVar29[0x46] = 0;
-        puVar29[0x47] = 1;
-        bVar2 = *(byte *)puVar23;
+        entry[0x48] = 0;
+        entry[0x49] = 0;
+        entry[0x4a] = 0;
+        entry[0x4b] = 0;
+        entry[0x46] = 0;
+        entry[0x47] = 1;
+        bVar2 = *(byte *)recField1a;
         uVar6 = (ushort)bVar2;
         if (bVar2 == 2) {
-          puVar29[10] = 0xf;
-          uVar6 = *puVar9;
-          puVar29[0x1d] = 1;
-          puVar29[0x18] = 0;
-          puVar29[0x19] = 1;
-          puVar29[0x40] = uVar6;
-          uVar6 = (ushort)*(byte *)puVar23;
+          entry[10] = 0xf;
+          uVar6 = *recField0e;
+          entry[0x1d] = 1;
+          entry[0x18] = 0;
+          entry[0x19] = 1;
+          entry[0x40] = uVar6;
+          uVar6 = (ushort)*(byte *)recField1a;
         }
         else if (bVar2 < 3) {
           if (bVar2 == 1) {
 LAB_000c46e8:
-            puVar29[3] = 0xf;
-            puVar29[2] = *(ushort *)puVar16;
-            puVar29[10] = ~(ushort)*pbStack_e8 & 0xf;
-            puVar29[0x40] = *puVar9;
-            uVar6 = (ushort)*(byte *)puVar23;
+            entry[3] = 0xf;
+            entry[2] = *(ushort *)recField0c;
+            entry[10] = ~(ushort)*recField1f & 0xf;
+            entry[0x40] = *recField0e;
+            uVar6 = (ushort)*(byte *)recField1a;
           }
         }
         else if (bVar2 < 5) goto LAB_000c46e8;
-        bVar2 = *pbStack_68;
-        puVar29[0x16] = 0x3f80;
-        puVar29[0x17] = 0;
-        puVar29[0x14] = (ushort)bVar2 << 8 | uVar6;
+        bVar2 = *recField19;
+        entry[0x16] = 0x3f80;
+        entry[0x17] = 0;
+        entry[0x14] = (ushort)bVar2 << 8 | uVar6;
       }
       else if (uVar4 < 3) {
         if (uVar4 == 1) {
-          puVar29[0x46] = 0;
-          puVar29[0x47] = 0;
-          puVar29[0x48] = 0;
-          puVar29[0x49] = 0;
-          puVar29[0x4a] = 0;
-          puVar29[0x4b] = 0;
-          if (*pbStack_8c == 0) {
-            puVar29[0x16] = 0x3f80;
-            puVar29[0x17] = 0;
+          entry[0x46] = 0;
+          entry[0x47] = 0;
+          entry[0x48] = 0;
+          entry[0x49] = 0;
+          entry[0x4a] = 0;
+          entry[0x4b] = 0;
+          if (*recField0b == 0) {
+            entry[0x16] = 0x3f80;
+            entry[0x17] = 0;
           }
           else {
-            puVar29[3] = 0xf;
-            uVar6 = *puStack_80;
-            puVar29[10] = 0xf;
-            puVar29[2] = uVar6;
-            puVar29[0x40] = *pbStack_84 | 0xc000;
-            *(undefined4 *)(puVar29 + 0x16) = *(undefined4 *)((uint)*pbStack_88 * 4 + 0x1dc198);
-            bVar2 = *pbStack_8c;
+            entry[3] = 0xf;
+            uVar6 = *recField06;
+            entry[10] = 0xf;
+            entry[2] = uVar6;
+            entry[0x40] = *recField0a | 0xc000;
+            *(undefined4 *)(entry + 0x16) = *(undefined4 *)((uint)*recField0d * 4 + 0x1dc198);
+            bVar2 = *recField0b;
             if ((bVar2 == 2) || (bVar2 == 3)) {
-              puVar29[0x1d] = (ushort)bVar2;
+              entry[0x1d] = (ushort)bVar2;
             }
           }
-          if (*pcStack_7c == '\0') {
-            puVar29[0x36] = 0x3f80;
-            puVar29[0x37] = 0;
+          if (*recField09 == '\0') {
+            entry[0x36] = 0x3f80;
+            entry[0x37] = 0;
           }
           else {
-            puVar29[0x23] = 0xf;
-            uVar6 = *(ushort *)puStack_70;
-            puVar29[0x2d] = 0xf;
-            puVar29[0x22] = uVar6;
-            puVar29[0x43] = *(byte *)puStack_74 | 0xa000;
-            *(undefined4 *)(puVar29 + 0x36) =
-                 *(undefined4 *)((uint)*(byte *)puStack_78 * 4 + 0x1dc198);
+            entry[0x23] = 0xf;
+            uVar6 = *(ushort *)recField04;
+            entry[0x2d] = 0xf;
+            entry[0x22] = uVar6;
+            entry[0x43] = *(byte *)recField08 | 0xa000;
+            *(undefined4 *)(entry + 0x36) =
+                 *(undefined4 *)((uint)*(byte *)recField0cCopy78 * 4 + 0x1dc198);
           }
         }
       }
       else if (uVar4 < 5) {
-        puVar29[0x48] = 0;
-        puVar29[0x49] = 0;
-        puVar29[0x4a] = 0;
-        puVar29[0x4b] = 0;
-        puVar29[0x46] = 0;
-        puVar29[0x47] = 2;
+        entry[0x48] = 0;
+        entry[0x49] = 0;
+        entry[0x4a] = 0;
+        entry[0x4b] = 0;
+        entry[0x46] = 0;
+        entry[0x47] = 2;
         iVar13 = 0;
-        puVar29[0x40] = *puStack_c8;
-        puVar29[0x41] = *(ushort *)puStack_cc;
-        puVar29[0x42] = *puStack_d0;
-        puVar29[0x43] = *puStack_d4;
-        puVar29[0x44] = *(ushort *)puVar15;
-        puVar29[0x45] = *puVar17;
-        puVar11 = puVar29;
-        puVar14 = puVar29;
+        entry[0x40] = *recField0eCopyc8;
+        entry[0x41] = *(ushort *)recField10;
+        entry[0x42] = *recField12;
+        entry[0x43] = *recField1aCopyd4;
+        entry[0x44] = *(ushort *)recField1c;
+        entry[0x45] = *recField1e;
+        puVar11 = entry;
+        puVar14 = entry;
         do {
           puVar14[0x3a] = 1;
           puVar14[0x1a] = 1;
@@ -8581,18 +8581,18 @@ LAB_000c46e8:
           *(undefined4 *)(puVar11 + 0x24) = uVar3;
           puVar11 = puVar11 + 2;
         } while (bVar1);
-        puVar29[2] = *(ushort *)puStack_b8;
-        puVar29[3] = (ushort)*(byte *)puStack_bc;
-        *puVar29 = (ushort)*pbStack_c0;
-        puVar29[1] = (ushort)*pbStack_c4;
-        puVar29[0x14] = *(ushort *)((uint)*pbVar28 * 4 + 0x1dc158);
-        uVar4 = (uint)*(ushort *)((uint)*pbVar28 * 4 + 0x1dc15a);
+        entry[2] = *(ushort *)recField0cCopyb8;
+        entry[3] = (ushort)*(byte *)recField14;
+        *entry = (ushort)*recField16;
+        entry[1] = (ushort)*recField15;
+        entry[0x14] = *(ushort *)((uint)*recField31 * 4 + 0x1dc158);
+        uVar4 = (uint)*(ushort *)((uint)*recField31 * 4 + 0x1dc15a);
         if (uVar4 != 0) {
 LAB_000c4830:
-          uVar5 = (uint)*pbVar26;
-          uVar6 = (ushort)*pbVar27;
+          uVar5 = (uint)*recField2a;
+          uVar6 = (ushort)*recField2d;
           iVar13 = 0;
-          puVar11 = puVar29 + 4;
+          puVar11 = entry + 4;
           uVar30 = uVar4;
           if (uVar4 == 0) {
             uVar30 = 1;
@@ -8604,14 +8604,14 @@ LAB_000c4830:
             uVar30 = uVar30 - 1;
             if (uVar30 == 0) goto LAB_000c48b4;
             if (iVar13 == 1) {
-              uVar5 = (uint)*pbVar18;
-              uVar6 = (ushort)*pbVar21;
+              uVar5 = (uint)*recField2b;
+              uVar6 = (ushort)*recField2e;
             }
             else {
               if (iVar13 == 0) goto LAB_000c4830;
               if (iVar13 == 2) {
-                uVar5 = (uint)*(byte *)puStack_d8;
-                uVar6 = (ushort)*pbStack_dc;
+                uVar5 = (uint)*(byte *)recField2c;
+                uVar6 = (ushort)*recField2f;
               }
               else {
                 uVar5 = 0;
@@ -8623,35 +8623,35 @@ LAB_000c4830:
         }
         iVar13 = 3;
 LAB_000c48b4:
-        puVar29[0x15] = (ushort)*(byte *)puStack_b0;
-        if (*pcStack_b4 == '\x01') {
-          *(uint *)(puVar29 + 0x18) = *(uint *)(puVar29 + 0x18) | 8;
+        entry[0x15] = (ushort)*(byte *)recField30;
+        if (*recField33 == '\x01') {
+          *(uint *)(entry + 0x18) = *(uint *)(entry + 0x18) | 8;
         }
-        puVar11 = puVar29 + 0x20;
-        *(undefined4 *)(puVar29 + 0x16) = *(undefined4 *)((uint)*pbStack_a4 * 4 + 0x1dc198);
-        puVar29[0x22] = *(ushort *)puStack_a8;
-        if (*(char *)puStack_ac != '\0') {
-          puVar29[0x23] = 8;
+        puVar11 = entry + 0x20;
+        *(undefined4 *)(entry + 0x16) = *(undefined4 *)((uint)*recField32 * 4 + 0x1dc198);
+        entry[0x22] = *(ushort *)recField18;
+        if (*(char *)recField20 != '\0') {
+          entry[0x23] = 8;
         }
-        puVar29[0x20] = (ushort)*pbStack_9c;
-        if (*pcStack_a0 != '\0') {
-          puVar29[0x21] = 8;
+        entry[0x20] = (ushort)*recField22;
+        if (*recField21 != '\0') {
+          entry[0x21] = 8;
         }
-        if (*pcStack_98 != '\0') {
-          puVar29[0x21] = puVar29[0x21] | 0x10;
+        if (*recField23 != '\0') {
+          entry[0x21] = entry[0x21] | 0x10;
         }
-        puVar29[0x34] = *(ushort *)((uint)*(byte *)puVar20 * 4 + 0x1dc098);
-        uVar4 = (uint)*(ushort *)((uint)*(byte *)puVar20 * 4 + 0x1dc09a);
-        if (*pbVar28 == 2) {
+        entry[0x34] = *(ushort *)((uint)*(byte *)recField40 * 4 + 0x1dc098);
+        uVar4 = (uint)*(ushort *)((uint)*(byte *)recField40 * 4 + 0x1dc09a);
+        if (*recField31 == 2) {
           if (uVar4 < 2) {
             uVar4 = 2;
           }
 LAB_000c49a8:
 LAB_000c49b0:
-          uVar5 = (uint)*pbVar24;
-          uVar6 = (ushort)*(byte *)puVar25;
+          uVar5 = (uint)*recField39;
+          uVar6 = (ushort)*(byte *)recField3c;
           iVar13 = 0;
-          puVar14 = puVar29 + 0x24;
+          puVar14 = entry + 0x24;
           uVar30 = uVar4;
           if (uVar4 == 0) {
             uVar30 = 1;
@@ -8664,14 +8664,14 @@ LAB_000c49b0:
             puVar7 = (uint *)0x1dc04c;
             if (uVar30 == 0) goto LAB_000c4a74;
             if (iVar13 == 1) {
-              uVar5 = (uint)*pbVar19;
-              uVar6 = (ushort)*pbVar22;
+              uVar5 = (uint)*recField3a;
+              uVar6 = (ushort)*recField3d;
             }
             else {
               if (iVar13 == 0) goto LAB_000c49b0;
               if (iVar13 == 2) {
-                uVar5 = (uint)*pbStack_e0;
-                uVar6 = (ushort)*pbStack_e4;
+                uVar5 = (uint)*recField3b;
+                uVar6 = (ushort)*recField3e;
               }
               else {
                 uVar5 = 0;
@@ -8681,71 +8681,71 @@ LAB_000c49b0:
             puVar14 = puVar14 + 2;
           } while( true );
         }
-        puVar7 = puStack_ac;
+        puVar7 = recField20;
         if (uVar4 != 0) goto LAB_000c49a8;
 LAB_000c4a74:
-        puVar29[0x35] = (ushort)*pbStack_90;
-        if (*pcStack_94 == '\x01') {
-          *(uint *)(puVar29 + 0x38) = *(uint *)(puVar29 + 0x38) | 8;
+        entry[0x35] = (ushort)*recField3f;
+        if (*recField42 == '\x01') {
+          *(uint *)(entry + 0x38) = *(uint *)(entry + 0x38) | 8;
         }
-        *(undefined4 *)(puVar29 + 0x36) = *(undefined4 *)((uint)*pbStack_6c * 4 + 0x1dc198);
-        pbVar8 = pbStack_90;
-        pcVar10 = pcStack_94;
-        pbVar12 = pbStack_6c;
-        ((int (*)())psnDecRecomputeSourceUsage)(puVar29);
-        ((int (*)())psnDecCanonicalizeEntry)(puVar29,extraout_r4,puVar7,pbVar8,pcVar10,puVar11,pbVar12,iVar13);
+        *(undefined4 *)(entry + 0x36) = *(undefined4 *)((uint)*recField41 * 4 + 0x1dc198);
+        pbVar8 = recField3f;
+        pcVar10 = recField42;
+        pbVar12 = recField41;
+        ((int (*)())psnDecRecomputeSourceUsage)(entry);
+        ((int (*)())psnDecCanonicalizeEntry)(entry,extraout_r4,puVar7,pbVar8,pcVar10,puVar11,pbVar12,iVar13);
       }
-      puVar23 = puVar23 + 0x24;
-      puVar20 = puVar20 + 0x12;
-      pbVar28 = pbVar28 + 0x48;
-      puVar15 = puVar15 + 0x12;
-      puVar17 = puVar17 + 0x24;
-      pbVar26 = pbVar26 + 0x48;
-      pbVar27 = pbVar27 + 0x48;
-      uStack_64 = uStack_64 + 1;
-      pbVar18 = pbVar18 + 0x48;
-      iStack_5c = iStack_5c + 0xa0;
-      pbStack_68 = pbStack_68 + 0x48;
-      pbStack_6c = pbStack_6c + 0x48;
-      puStack_70 = puStack_70 + 0x12;
-      pbVar21 = pbVar21 + 0x48;
-      puStack_74 = puStack_74 + 0x12;
-      pbVar24 = pbVar24 + 0x48;
-      puVar25 = puVar25 + 0x12;
-      pcStack_7c = pcStack_7c + 0x48;
-      puStack_80 = puStack_80 + 0x24;
-      pbStack_84 = pbStack_84 + 0x48;
-      puStack_78 = puStack_78 + 0x12;
-      pbStack_88 = pbStack_88 + 0x48;
-      pbStack_8c = pbStack_8c + 0x48;
-      pcStack_94 = pcStack_94 + 0x48;
-      pbVar19 = pbVar19 + 0x48;
-      pbVar22 = pbVar22 + 0x48;
-      pcStack_98 = pcStack_98 + 0x48;
-      pbStack_90 = pbStack_90 + 0x48;
-      pbStack_9c = pbStack_9c + 0x48;
-      puVar16 = puVar16 + 0x12;
-      puVar9 = puVar9 + 0x24;
-      pcStack_a0 = pcStack_a0 + 0x48;
-      pbStack_a4 = pbStack_a4 + 0x48;
-      puStack_a8 = puStack_a8 + 0x12;
-      puStack_ac = puStack_ac + 0x12;
-      puStack_b0 = puStack_b0 + 0x12;
-      pcStack_b4 = pcStack_b4 + 0x48;
-      puStack_b8 = puStack_b8 + 0x12;
-      puStack_bc = puStack_bc + 0x12;
-      pbStack_c0 = pbStack_c0 + 0x48;
-      pbStack_c4 = pbStack_c4 + 0x48;
-      puStack_c8 = puStack_c8 + 0x24;
-      puStack_cc = puStack_cc + 0x12;
-      puStack_d0 = puStack_d0 + 0x24;
-      puStack_d4 = puStack_d4 + 0x24;
-      puStack_d8 = puStack_d8 + 0x12;
-      pbStack_dc = pbStack_dc + 0x48;
-      pbStack_e0 = pbStack_e0 + 0x48;
-      pbStack_e4 = pbStack_e4 + 0x48;
-      pbStack_e8 = pbStack_e8 + 0x48;
-    } while (uStack_64 < *puStack00000018);
+      recField1a = recField1a + 0x24;
+      recField40 = recField40 + 0x12;
+      recField31 = recField31 + 0x48;
+      recField1c = recField1c + 0x12;
+      recField1e = recField1e + 0x24;
+      recField2a = recField2a + 0x48;
+      recField2d = recField2d + 0x48;
+      recordNumber = recordNumber + 1;
+      recField2b = recField2b + 0x48;
+      entryByteOffset = entryByteOffset + 0xa0;
+      recField19 = recField19 + 0x48;
+      recField41 = recField41 + 0x48;
+      recField04 = recField04 + 0x12;
+      recField2e = recField2e + 0x48;
+      recField08 = recField08 + 0x12;
+      recField39 = recField39 + 0x48;
+      recField3c = recField3c + 0x12;
+      recField09 = recField09 + 0x48;
+      recField06 = recField06 + 0x24;
+      recField0a = recField0a + 0x48;
+      recField0cCopy78 = recField0cCopy78 + 0x12;
+      recField0d = recField0d + 0x48;
+      recField0b = recField0b + 0x48;
+      recField42 = recField42 + 0x48;
+      recField3a = recField3a + 0x48;
+      recField3d = recField3d + 0x48;
+      recField23 = recField23 + 0x48;
+      recField3f = recField3f + 0x48;
+      recField22 = recField22 + 0x48;
+      recField0c = recField0c + 0x12;
+      recField0e = recField0e + 0x24;
+      recField21 = recField21 + 0x48;
+      recField32 = recField32 + 0x48;
+      recField18 = recField18 + 0x12;
+      recField20 = recField20 + 0x12;
+      recField30 = recField30 + 0x12;
+      recField33 = recField33 + 0x48;
+      recField0cCopyb8 = recField0cCopyb8 + 0x12;
+      recField14 = recField14 + 0x12;
+      recField16 = recField16 + 0x48;
+      recField15 = recField15 + 0x48;
+      recField0eCopyc8 = recField0eCopyc8 + 0x24;
+      recField10 = recField10 + 0x12;
+      recField12 = recField12 + 0x24;
+      recField1aCopyd4 = recField1aCopyd4 + 0x24;
+      recField2c = recField2c + 0x12;
+      recField2f = recField2f + 0x48;
+      recField3b = recField3b + 0x48;
+      recField3e = recField3e + 0x48;
+      recField1f = recField1f + 0x48;
+    } while (recordNumber < *puStack00000018);
   }
   return;
 }
@@ -10415,49 +10415,49 @@ int FUN_000c6ff0(param_1, param_2)
 #undef local_78
 
 /* ilFreeRecordList @ 0xc71e0 (76 bytes) */
-int ilFreeRecordList(param_1)
-  int param_1;
+int ilFreeRecordList(node)
+  int node;
 {
-  if (param_1 != 0) {
-    ((int (*)())ilFreeRecordList)(*(undefined4 *)(param_1 + 0x24));
-    _free(param_1);
+  if (node != 0) {
+    ((int (*)())ilFreeRecordList)(*(undefined4 *)(node + 0x24));
+    _free(node);
     return;
   }
   return;
 }
 
 /* ilSelectorOneToThreeOrZero @ 0xc7240 (44 bytes) */
-int ilSelectorOneToThreeOrZero(param_1)
-  int param_1;
+int ilSelectorOneToThreeOrZero(selector)
+  int selector;
 {
   undefined1 uVar1;
   
   uVar1 = 2;
-  if ((param_1 != 2) && (uVar1 = 3, param_1 != 3)) {
-    uVar1 = param_1 == 1;
+  if ((selector != 2) && (uVar1 = 3, selector != 3)) {
+    uVar1 = selector == 1;
   }
   return uVar1;
 }
 
 /* ilRecordInputSemantic @ 0xc7270 (24 bytes) */
-int ilRecordInputSemantic(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  undefined4 param_3;
+int ilRecordInputSemantic(programRecord, inputIndex, semanticValue)
+  int programRecord;
+  int inputIndex;
+  undefined4 semanticValue;
 {
   int iVar1;
   
-  iVar1 = param_2 * 4 + param_1;
+  iVar1 = inputIndex * 4 + programRecord;
   *(undefined4 *)(iVar1 + 0x2278) = 1;
-  *(undefined4 *)(iVar1 + 0x2238) = param_3;
+  *(undefined4 *)(iVar1 + 0x2238) = semanticValue;
   return;
 }
 
 /* ilRecordDefinedConstantPrimary @ 0xc7290 (88 bytes) */
-int ilRecordDefinedConstantPrimary(param_1, param_2, param_3)
-  int param_1;
-  uint param_2;
-  undefined4 *param_3;
+int ilRecordDefinedConstantPrimary(programRecord, constantIndex, values)
+  int programRecord;
+  uint constantIndex;
+  undefined4 *values;
 {
   undefined4 uVar1;
   int iVar2;
@@ -10465,24 +10465,24 @@ int ilRecordDefinedConstantPrimary(param_1, param_2, param_3)
   uint uVar4;
   int iVar5;
   
-  iVar2 = ((int)param_2 >> 5) + (uint)((int)param_2 < 0 && (param_2 & 0x1f) != 0);
-  iVar3 = param_2 * 0x10 + param_1;
-  iVar5 = iVar2 * 4 + param_1;
-  *(undefined4 *)(iVar3 + 0x1a8) = *param_3;
+  iVar2 = ((int)constantIndex >> 5) + (uint)((int)constantIndex < 0 && (constantIndex & 0x1f) != 0);
+  iVar3 = constantIndex * 0x10 + programRecord;
+  iVar5 = iVar2 * 4 + programRecord;
+  *(undefined4 *)(iVar3 + 0x1a8) = *values;
   uVar4 = *(uint *)(iVar5 + 0x188);
-  *(undefined4 *)(iVar3 + 0x1ac) = param_3[1];
-  *(undefined4 *)(iVar3 + 0x1b0) = param_3[2];
-  uVar1 = param_3[3];
-  *(uint *)(iVar5 + 0x188) = 1 << (param_2 + iVar2 * -0x20 & 0x3f) | uVar4;
+  *(undefined4 *)(iVar3 + 0x1ac) = values[1];
+  *(undefined4 *)(iVar3 + 0x1b0) = values[2];
+  uVar1 = values[3];
+  *(uint *)(iVar5 + 0x188) = 1 << (constantIndex + iVar2 * -0x20 & 0x3f) | uVar4;
   *(undefined4 *)(iVar3 + 0x1b4) = uVar1;
   return;
 }
 
 /* ilRecordDefinedConstantSecondary @ 0xc72f0 (88 bytes) */
-int ilRecordDefinedConstantSecondary(param_1, param_2, param_3)
-  int param_1;
-  uint param_2;
-  undefined4 *param_3;
+int ilRecordDefinedConstantSecondary(programRecord, constantIndex, values)
+  int programRecord;
+  uint constantIndex;
+  undefined4 *values;
 {
   int iVar1;
   undefined4 uVar2;
@@ -10490,29 +10490,29 @@ int ilRecordDefinedConstantSecondary(param_1, param_2, param_3)
   int iVar4;
   int iVar5;
   
-  iVar1 = ((int)param_2 >> 5) + (uint)((int)param_2 < 0 && (param_2 & 0x1f) != 0);
-  iVar5 = param_2 * 0x10 + param_1;
-  *(undefined4 *)(((unsigned char *)0x000011c8) + iVar5) = *param_3;
-  iVar4 = iVar1 * 4 + param_1;
+  iVar1 = ((int)constantIndex >> 5) + (uint)((int)constantIndex < 0 && (constantIndex & 0x1f) != 0);
+  iVar5 = constantIndex * 0x10 + programRecord;
+  *(undefined4 *)(((unsigned char *)0x000011c8) + iVar5) = *values;
+  iVar4 = iVar1 * 4 + programRecord;
   uVar3 = *(uint *)(((unsigned char *)0x000011a8) + iVar4);
-  *(undefined4 *)((int)((unsigned char *)0x000011cc) + iVar5) = param_3[1];
-  *(undefined4 *)(((unsigned char *)0x000011d0U) + iVar5) = param_3[2];
-  uVar2 = param_3[3];
-  *(uint *)(((unsigned char *)0x000011a8) + iVar4) = 1 << (param_2 + iVar1 * -0x20 & 0x3f) | uVar3;
+  *(undefined4 *)((int)((unsigned char *)0x000011cc) + iVar5) = values[1];
+  *(undefined4 *)(((unsigned char *)0x000011d0U) + iVar5) = values[2];
+  uVar2 = values[3];
+  *(uint *)(((unsigned char *)0x000011a8) + iVar4) = 1 << (constantIndex + iVar1 * -0x20 & 0x3f) | uVar3;
   *(undefined4 *)(((unsigned char *)0x000011d4) + iVar5) = uVar2;
   return;
 }
 
 /* ilAllocLowestFreeBit8 @ 0xc7350 (72 bytes) */
-int ilAllocLowestFreeBit8(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int ilAllocLowestFreeBit8(programRecord, passThroughR4, passThroughR5, passThroughR6, passThroughR7, passThroughR8, passThroughR9, passThroughR10)
+  int programRecord;
+  undefined4 passThroughR4;
+  undefined4 passThroughR5;
+  undefined4 passThroughR6;
+  undefined4 passThroughR7;
+  undefined4 passThroughR8;
+  undefined4 passThroughR9;
+  undefined4 passThroughR10;
 {
   uint uVar1;
   uint uVar2;
@@ -10522,8 +10522,8 @@ int ilAllocLowestFreeBit8(param_1, param_2, param_3, param_4, param_5, param_6, 
   iVar3 = 8;
   do {
     uVar1 = 1 << (uVar2 & 0x3f);
-    if ((uVar1 & *(uint *)(param_1 + 8)) == 0) {
-      *(uint *)(param_1 + 8) = uVar1 | *(uint *)(param_1 + 8);
+    if ((uVar1 & *(uint *)(programRecord + 8)) == 0) {
+      *(uint *)(programRecord + 8) = uVar1 | *(uint *)(programRecord + 8);
       return uVar2;
     }
     uVar2 = uVar2 + 1;
@@ -10533,10 +10533,10 @@ int ilAllocLowestFreeBit8(param_1, param_2, param_3, param_4, param_5, param_6, 
 }
 
 /* ilNextCounterValue @ 0xc73a0 (20 bytes) */
-int ilNextCounterValue(param_1)
-  int param_1;
+int ilNextCounterValue(programRecord)
+  int programRecord;
 {
-  *(int *)(param_1 + 0x50) = *(int *)(param_1 + 0x50) + 1;
+  *(int *)(programRecord + 0x50) = *(int *)(programRecord + 0x50) + 1;
   return;
 }
 

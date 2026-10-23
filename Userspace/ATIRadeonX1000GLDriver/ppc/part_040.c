@@ -2090,7 +2090,7 @@ int FUN_0012eacc(param_1)
   *(int *)(operandRecord3 + 8) = iVar23;
   fparam_1 = (double)FLOAT_001aa0d4;
   *(undefined4 *)(operandRecord3 + 0xc) = 0;
-  ((void (*)())FUN_000f79c4)(arena,param_1,1,fparam_1,fparam_1,fparam_1,fparam_1);
+  ((void (*)())IRInst__makeLiteralVec4Float)(arena,param_1,1,fparam_1,fparam_1,fparam_1,fparam_1);
   FUN_000f92fc(param_1,arena,*(undefined4 *)(param_1 + 0x3a0));
   iVar24 = *(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1;
   *(int *)(*(int *)(param_1 + 8) + 0x3ac) = iVar24;

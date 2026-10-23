@@ -1,0 +1,18 @@
+# Fork I4: variables of the HashTable internals (grow, pair insert, destroy, findEntry)
+local	HashTable__insert_1950e0	param_1	table	CONFIRMED	hash table: [0] bucket count, [1] element count, [2] bucket vector array, [3] equality callback, [4] hash callback, [5] arena
+local	HashTable__insert_1950e0	param_2	key	CONFIRMED	key hashed by table[4] and compared by table[3]
+local	HashTable__insert_1950e0	param_3	value	CONFIRMED	value stored beside the key in the 0xc-byte entry {arena, key, value}
+local	HashTable__insert_1950e0	puVar6	bucket	CONFIRMED	bucket vector {cap, count, data} chosen by hash & (bucketCount-1)
+local	HashTable__insert_1950e0	puVar3	slot	CONFIRMED	address of the element slot being read / written
+local	HashTable__destroy_1943f0	param_1	table	CONFIRMED	hash table: [0] bucket count, [1] element count, [2] bucket vector array, [3] equality callback, [4] hash callback, [5] arena
+local	HashTable__destroy_1943f0	puVar6	bucket	CONFIRMED	bucket vector being freed
+local	HashTable__destroy_1943f0	piVar2	slot	CONFIRMED	address of the element slot
+local	HashTable__destroy_1943f0	iVar4	elementBlock	INFERRED	element pointer; its arena header is at -4
+local	HashTable__destroy_194504	param_1	table	CONFIRMED	hash table: [0] bucket count, [1] element count, [2] bucket vector array, [3] equality callback, [4] hash callback, [5] arena
+local	HashTable__destroy_194504	puVar6	bucket	CONFIRMED	bucket vector being freed
+local	HashTable__destroy_194504	piVar2	slot	CONFIRMED	address of the element slot
+local	HashTable__destroy_194504	iVar4	elementBlock	INFERRED	element pointer; its arena header is at -4
+local	HashTable__findEntry	param_1	table	CONFIRMED	hash table: [0] bucket count, [1] element count, [2] bucket vector array, [3] equality callback, [4] hash callback, [5] arena
+local	HashTable__findEntry	param_2	key	CONFIRMED	key passed to the hash and equality callbacks
+local	HashTable__findEntry	puVar5	bucket	CONFIRMED	bucket vector {cap, count, data}
+local	HashTable__findEntry	puVar2	slot	CONFIRMED	address of the entry pointer slot

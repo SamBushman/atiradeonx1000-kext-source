@@ -872,7 +872,7 @@ int FUN_00159b58(node, param_2, pass)
                 }
                 fparam_1 = (double)fVar1;
                 piVar4 = (int *)0x0;
-                ((void (*)())FUN_000f79c4)(node,pass,1,fparam_1,fparam_1,fparam_1,fparam_1);
+                ((void (*)())IRInst__makeLiteralVec4Float)(node,pass,1,fparam_1,fparam_1,fparam_1,fparam_1);
               }
               else {
                 piVar4 = (int *)IRInst__getOperandSource(sourceDef,1);
@@ -2035,7 +2035,7 @@ LAB_0015c078:
       } while (bVar1);
       piVar20[0x21] = 2;
       iVar7 = 0;
-      ((void (*)())FUN_000f79c4)(piVar20,pass,2,1.0,1.0,1.0,1.0);
+      ((void (*)())IRInst__makeLiteralVec4Float)(piVar20,pass,2,1.0,1.0,1.0,1.0);
       do {
         if (*(char *)((int)&local_7c + iVar7) != '\x01') {
           (**(code **)(*piVar20 + 0x88))(piVar20,1,iVar7,4);
@@ -2055,7 +2055,7 @@ LAB_0015c078:
         if (*(char *)((int)&local_7c + iVar7) != '\x01') {
           iVar17 = iVar17 + 1;
           operandVReg[0x21] = iVar17;
-          ((void (*)())FUN_000f79c4)(operandVReg,pass,iVar17,1.0,1.0,1.0,1.0);
+          ((void (*)())IRInst__makeLiteralVec4Float)(operandVReg,pass,iVar17,1.0,1.0,1.0,1.0);
           (**(code **)(*operandVReg + 0x88))(operandVReg,iVar17,iVar7,iVar7);
           *(undefined1 *)(piVar27 + 0x27) = 0;
         }
@@ -2307,7 +2307,7 @@ LAB_0015ca9c:
               piVar9[0x27] = local_88;
               IRInst__setOperandSource(piVar9,1,piVar8,0,*(undefined4 *)(param_2 + 8));
               piVar9[0x21] = 2;
-              ((void (*)())FUN_000f79c4)(piVar9,param_2,2,fparam_1,fparam_1,fparam_1,fparam_1);
+              ((void (*)())IRInst__makeLiteralVec4Float)(piVar9,param_2,2,fparam_1,fparam_1,fparam_1,fparam_1);
               do {
                 if (*(char *)((int)&local_88 + iVar5) != '\x01') {
                   if (*(char *)((int)&local_80 + iVar5) == '\x04') {
@@ -2372,7 +2372,7 @@ LAB_0015ca9c:
               }
               iVar5 = iVar5 + 1;
               piVar8[0x21] = iVar5;
-              ((void (*)())FUN_000f79c4)(piVar8,param_2,iVar5,fparam_1,fparam_1,fparam_1,fparam_1);
+              ((void (*)())IRInst__makeLiteralVec4Float)(piVar8,param_2,iVar5,fparam_1,fparam_1,fparam_1,fparam_1);
               operandRecord4 = IRInst__getOperandRecord(piVar8,iVar5);
               *(undefined4 *)(operandRecord4 + 0x10) = 0x4040404;
               iVar15 = 0;
@@ -2869,7 +2869,7 @@ LAB_0015cf80:
           *(int *)(iVar6 + 0x160) = *(int *)(pass + 0x478) + 1;
         }
         *(undefined4 *)(iVar13 + 0x84) = 2;
-        ((void (*)())FUN_000f79c4)(iVar13,pass,2,0.0,0.0,0.0,0.0);
+        ((void (*)())IRInst__makeLiteralVec4Float)(iVar13,pass,2,0.0,0.0,0.0,0.0);
         operandRecord4 = IRInst__getOperandRecord(piVar15,1);
         uVar12 = *(undefined4 *)(operandRecord4 + 0x10);
         operandRecord4 = IRInst__getOperandRecord(iVar13,2);
@@ -4823,7 +4823,7 @@ int FUN_00160eb0(param_1, param_2, inst, param_4)
           FUN_00108448(inst,0x31,*(undefined4 *)(param_4 + 8));
           *(int *)(inst + 0x9c) = iVar4;
           Block__insertInstAfter(*(undefined4 *)(iVar5 + 0x158),iVar5,inst);
-          ((void (*)())FUN_000f79c4)(inst,param_4,1,1.0,1.0,1.0,1.0);
+          ((void (*)())IRInst__makeLiteralVec4Float)(inst,param_4,1,1.0,1.0,1.0,1.0);
           IRInst__restoreCounters(inst,&local_60);
           if (piVar12 != (int *)0x0) {
             IRInst__setExtraOperandSource(inst,piVar12,0,*(undefined4 *)(param_4 + 8));
@@ -6393,7 +6393,7 @@ LAB_00163c2c:
     }
     piVar8[0x21] = 2;
     iVar4 = 0;
-    ((void (*)())FUN_000f79c4)(piVar8,pass,2,fparam_1,fparam_1,fparam_1,fparam_1);
+    ((void (*)())IRInst__makeLiteralVec4Float)(piVar8,pass,2,fparam_1,fparam_1,fparam_1,fparam_1);
     do {
       if (*(char *)((int)&local_b0 + iVar4) != '\x01') {
         (**(code **)(*piVar8 + 0x88))(piVar8,1,iVar4,*(undefined1 *)((int)&local_a0 + iVar4));
@@ -6460,7 +6460,7 @@ LAB_00163c2c:
     }
     iVar4 = iVar4 + 1;
     piVar8[0x21] = iVar4;
-    ((void (*)())FUN_000f79c4)(piVar8,pass,iVar4,fparam_1,fparam_1,fparam_1,fparam_1);
+    ((void (*)())IRInst__makeLiteralVec4Float)(piVar8,pass,iVar4,fparam_1,fparam_1,fparam_1,fparam_1);
     operandRecord3 = IRInst__getOperandRecord(piVar8,iVar4);
     *(undefined4 *)(operandRecord3 + 0x10) = 0x4040404;
     iVar19 = 0;
@@ -6504,7 +6504,7 @@ LAB_00164300:
     }
     piVar8[0x21] = 2;
     iVar4 = 0;
-    ((void (*)())FUN_000f79c4)(piVar8,pass,2,0.0,0.0,0.0,0.0);
+    ((void (*)())IRInst__makeLiteralVec4Float)(piVar8,pass,2,0.0,0.0,0.0,0.0);
     do {
       if (*(char *)((int)&local_b0 + iVar4) != '\x01') {
         (**(code **)(*piVar8 + 0x88))(piVar8,1,iVar4,*(undefined1 *)((int)&local_ac + iVar4));
@@ -6571,7 +6571,7 @@ LAB_00164300:
     }
     iVar4 = iVar4 + 1;
     piVar9[0x21] = iVar4;
-    ((void (*)())FUN_000f79c4)(piVar9,pass,iVar4,0.0,0.0,0.0,0.0);
+    ((void (*)())IRInst__makeLiteralVec4Float)(piVar9,pass,iVar4,0.0,0.0,0.0,0.0);
     operandRecord3 = IRInst__getOperandRecord(piVar9,iVar4);
     *(undefined4 *)(operandRecord3 + 0x10) = 0x4040404;
     iVar19 = 0;

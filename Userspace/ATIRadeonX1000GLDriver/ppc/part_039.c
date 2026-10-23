@@ -427,7 +427,7 @@ int KhanPs__vslot59_tryEncodeSourceConstant(this, inst, srcIndex, laneSwizzle, c
     local_30 = local_54[3];
     iVar3 = FUN_000f5c0c(inst,srcIndex,uVar1,local_64);
     if (iVar3 != 0) {
-      ((void (*)())FUN_000f79c4)(inst,*(undefined4 *)(compiler + 0x6c4),srcIndex,(double)local_64[0],
+      ((void (*)())IRInst__makeLiteralVec4Float)(inst,*(undefined4 *)(compiler + 0x6c4),srcIndex,(double)local_64[0],
                    (double)local_64[1],(double)local_64[2],(double)local_64[3]);
       return 1;
     }
@@ -438,7 +438,7 @@ int KhanPs__vslot59_tryEncodeSourceConstant(this, inst, srcIndex, laneSwizzle, c
       return 0;
     }
   }
-  ((void (*)())FUN_000f79c4)(inst,*(undefined4 *)(compiler + 0x6c4),srcIndex,(double)local_64[0],
+  ((void (*)())IRInst__makeLiteralVec4Float)(inst,*(undefined4 *)(compiler + 0x6c4),srcIndex,(double)local_64[0],
                (double)local_64[1],(double)local_64[2],(double)local_64[3]);
   if ((inst[srcIndex * 6 + 0x28] & 2U) != 0) {
     return 1;
@@ -550,10 +550,10 @@ int KhanPs__vslot5_materializeSpecialRegister(this, param_2, compiler)
         iVar5 = IRInst__getOperandRecord(newInst,1);
         dVar10 = (double)FLOAT_001aa108;
         *(undefined4 *)(iVar5 + 0x10) = uVar1;
-        ((void (*)())FUN_000f79c4)(newInst,*(undefined4 *)(compiler + COMP_currentProgram),2,dVar10,dVar10,dVar10,dVar10);
+        ((void (*)())IRInst__makeLiteralVec4Float)(newInst,*(undefined4 *)(compiler + COMP_currentProgram),2,dVar10,dVar10,dVar10,dVar10);
         IROperand__setModifierBits(newInst + 0x2f,1,1);
         dVar10 = (double)FLOAT_001aa0e8;
-        ((void (*)())FUN_000f79c4)(newInst,*(undefined4 *)(compiler + COMP_currentProgram),3,dVar10,dVar10,dVar10,dVar10);
+        ((void (*)())IRInst__makeLiteralVec4Float)(newInst,*(undefined4 *)(compiler + COMP_currentProgram),3,dVar10,dVar10,dVar10,dVar10);
         VReg__addUse(callResult,1,newInst);
         FUN_0012306c(uVar3,newInst);
         Block__appendInst(*(undefined4 *)(iVar6 + 0x3a0),newInst);
@@ -1228,7 +1228,7 @@ LAB_00129b30:
       pfVar5 = pfVar5 + 1;
       iVar3 = iVar3 + -1;
     } while (iVar3 != 0);
-    ((void (*)())FUN_000f79c4)(inst,*(undefined4 *)(compiler + 0x6c4),srcIndex,(double)GH_U2F((unsigned int)(local_50)),
+    ((void (*)())IRInst__makeLiteralVec4Float)(inst,*(undefined4 *)(compiler + 0x6c4),srcIndex,(double)GH_U2F((unsigned int)(local_50)),
                  (double)fStack_4c,(double)fStack_48,(double)fStack_44);
     uVar4 = 1;
   }

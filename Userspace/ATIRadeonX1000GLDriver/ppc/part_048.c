@@ -118,8 +118,8 @@ int FUN_0017bd78(ctx, param_2, param_3, param_4)
   return iVar5;
 }
 
-/* FUN_0017bf70 @ 0x17bf70 (392 bytes) */
-int FUN_0017bf70(ctx)
+/* ValueKey__foldDot3SingleLaneSource @ 0x17bf70 (392 bytes) */
+int ValueKey__foldDot3SingleLaneSource(ctx)
   int ctx;
 {
   int exprRecord;
@@ -184,8 +184,8 @@ LAB_0017c0b0:
   } while( true );
 }
 
-/* FUN_0017c0f8 @ 0x17c0f8 (332 bytes) */
-int FUN_0017c0f8(ctx)
+/* ValueKey__foldDot4UnitVectorSource @ 0x17c0f8 (332 bytes) */
+int ValueKey__foldDot4UnitVectorSource(ctx)
   int ctx;
 {
   int exprRecord;
@@ -328,8 +328,8 @@ int FUN_0017c244(ctx, param_2)
   return iVar4;
 }
 
-/* FUN_0017c41c @ 0x17c41c (136 bytes) */
-int FUN_0017c41c(ctx)
+/* ValueKey__replaceWithSource2IfSourcesEqual23 @ 0x17c41c (136 bytes) */
+int ValueKey__replaceWithSource2IfSourcesEqual23(ctx)
   int ctx;
 {
   uint uVar1;
@@ -490,8 +490,8 @@ int FUN_0017c5e0(ctx)
   } while( true );
 }
 
-/* FUN_0017c774 @ 0x17c774 (276 bytes) */
-int FUN_0017c774(ctx)
+/* ValueKey__foldMulByPlusMinusOne @ 0x17c774 (276 bytes) */
+int ValueKey__foldMulByPlusMinusOne(ctx)
   int ctx;
 {
   int exprRecord;
@@ -532,8 +532,8 @@ int FUN_0017c774(ctx)
   return 0;
 }
 
-/* FUN_0017c888 @ 0x17c888 (136 bytes) */
-int FUN_0017c888(ctx)
+/* ValueKey__replaceWithSource1IfSourcesEqual @ 0x17c888 (136 bytes) */
+int ValueKey__replaceWithSource1IfSourcesEqual(ctx)
   int ctx;
 {
   uint uVar1;
@@ -1064,8 +1064,8 @@ int FUN_0017d26c(ctx, param_2)
   return member0xb0;
 }
 
-/* FUN_0017d3f8 @ 0x17d3f8 (232 bytes) */
-int FUN_0017d3f8(param_1)
+/* ValueKey__foldCompareSameSourcesToConstant @ 0x17d3f8 (232 bytes) */
+int ValueKey__foldCompareSameSourcesToConstant(param_1)
   int param_1;
 {
   undefined4 *loopIndex;
@@ -1106,8 +1106,8 @@ int FUN_0017d3f8(param_1)
   return 0;
 }
 
-/* FUN_0017d4e0 @ 0x17d4e0 (156 bytes) */
-int FUN_0017d4e0(ctx)
+/* ValueKey__replaceWithZeroIfSourcesEqual @ 0x17d4e0 (156 bytes) */
+int ValueKey__replaceWithZeroIfSourcesEqual(ctx)
   int ctx;
 {
   uint uVar1;
@@ -1135,8 +1135,8 @@ int FUN_0017d4e0(ctx)
   return 0;
 }
 
-/* FUN_0017d57c @ 0x17d57c (148 bytes) */
-int FUN_0017d57c(param_1)
+/* ValueKey__foldMulByZero @ 0x17d57c (148 bytes) */
+int ValueKey__foldMulByZero(param_1)
   int param_1;
 {
   bool bVar1;
@@ -1704,8 +1704,8 @@ int FUN_0017e02c(ctx, param_2, param_3)
   return;
 }
 
-/* FUN_0017e1f4 @ 0x17e1f4 (324 bytes) */
-int FUN_0017e1f4(ctx)
+/* ValueKey__foldMulPowerOfTwoIntoOutputScale @ 0x17e1f4 (324 bytes) */
+int ValueKey__foldMulPowerOfTwoIntoOutputScale(ctx)
   int ctx;
 {
   bool bVar1;
@@ -1883,8 +1883,8 @@ int FUN_0017e3f4(ctx, param_2, param_3, param_4)
   return;
 }
 
-/* FUN_0017e658 @ 0x17e658 (112 bytes) */
-int FUN_0017e658(param_1)
+/* ValueKey__foldMadZeroAddend @ 0x17e658 (112 bytes) */
+int ValueKey__foldMadZeroAddend(param_1)
   int param_1;
 {
   int callResult;
@@ -1898,8 +1898,8 @@ int FUN_0017e658(param_1)
   return callResult != 0;
 }
 
-/* FUN_0017e6c8 @ 0x17e6c8 (280 bytes) */
-int FUN_0017e6c8(ctx)
+/* ValueKey__foldMadByPlusMinusOne @ 0x17e6c8 (280 bytes) */
+int ValueKey__foldMadByPlusMinusOne(ctx)
   int ctx;
 {
   bool bVar1;
@@ -2618,12 +2618,12 @@ int FUN_0017f7ec(ctx)
   loopIndex2 = *(int *)(ctx + 0xb0);
   loopIndex = *(int *)(*(int *)(loopIndex2 + 0x88) + 8);
   if (loopIndex == 0x1d) {
-    FUN_00177ad0(ctx);
-    loopIndex = ((int (*)())FUN_0017c0f8)(ctx);
+    ValueKey__cancelNegatedSourcePair(ctx);
+    loopIndex = ((int (*)())ValueKey__foldDot4UnitVectorSource)(ctx);
     if (loopIndex != 0) {
       return 0;
     }
-    loopIndex = FUN_0017ab4c(ctx);
+    loopIndex = ValueKey__foldDotPowerOfTwoIntoOutputScale(ctx);
     if (loopIndex != 0) {
       return 1;
     }
@@ -2639,7 +2639,7 @@ joined_r0x0017f980:
       if (loopIndex != 0) {
         return 0;
       }
-      loopIndex = ((int (*)())FUN_0017c888)(ctx);
+      loopIndex = ((int (*)())ValueKey__replaceWithSource1IfSourcesEqual)(ctx);
       if (loopIndex != 0) {
         return 0;
       }
@@ -2666,17 +2666,17 @@ joined_r0x0017f980:
     }
     else if (loopIndex < 0x18) {
       if (loopIndex == 0x13) {
-        FUN_00177ad0(ctx);
-        loopIndex = ((int (*)())FUN_0017d57c)(ctx);
+        ValueKey__cancelNegatedSourcePair(ctx);
+        loopIndex = ((int (*)())ValueKey__foldMulByZero)(ctx);
         if (loopIndex != 0) {
           return 0;
         }
-        loopIndex = ((int (*)())FUN_0017c774)(ctx);
+        loopIndex = ((int (*)())ValueKey__foldMulByPlusMinusOne)(ctx);
         if (loopIndex != 0) {
           return 0;
         }
         loopIndex = Compiler__isOptionEnabled(*(undefined4 *)(ctx + 0x238),0xc);
-        if ((loopIndex != 0) && (loopIndex = ((int (*)())FUN_0017e1f4)(ctx), loopIndex != 0)) {
+        if ((loopIndex != 0) && (loopIndex = ((int (*)())ValueKey__foldMulPowerOfTwoIntoOutputScale)(ctx), loopIndex != 0)) {
           return 0;
         }
         loopIndex2 = 0;
@@ -2698,16 +2698,16 @@ joined_r0x0017f980:
       }
       else {
         if (loopIndex != 0x14) goto LAB_0017fe28;
-        FUN_00177ad0(ctx);
+        ValueKey__cancelNegatedSourcePair(ctx);
         loopIndex = ((int (*)())FUN_0017cd18)(ctx);
         if (loopIndex != 0) {
           return 0;
         }
-        loopIndex = ((int (*)())FUN_0017e6c8)(ctx);
+        loopIndex = ((int (*)())ValueKey__foldMadByPlusMinusOne)(ctx);
         if (loopIndex != 0) {
           return 1;
         }
-        loopIndex = ((int (*)())FUN_0017e658)(ctx);
+        loopIndex = ((int (*)())ValueKey__foldMadZeroAddend)(ctx);
         if (loopIndex != 0) {
           return 1;
         }
@@ -2736,12 +2736,12 @@ joined_r0x0017f980:
     else {
       if (loopIndex != 0x19) {
         if (loopIndex == 0x1c) {
-          FUN_00177ad0(ctx);
-          loopIndex = ((int (*)())FUN_0017bf70)(ctx);
+          ValueKey__cancelNegatedSourcePair(ctx);
+          loopIndex = ((int (*)())ValueKey__foldDot3SingleLaneSource)(ctx);
           if (loopIndex != 0) {
             return 0;
           }
-          loopIndex = FUN_0017ab4c(ctx);
+          loopIndex = ValueKey__foldDotPowerOfTwoIntoOutputScale(ctx);
           goto joined_r0x0017f980;
         }
 LAB_0017fe28:
@@ -2752,7 +2752,7 @@ LAB_0017fe28:
       if (loopIndex != 0) {
         return 0;
       }
-      loopIndex = ((int (*)())FUN_0017c888)(ctx);
+      loopIndex = ((int (*)())ValueKey__replaceWithSource1IfSourcesEqual)(ctx);
       if (loopIndex != 0) {
         return 0;
       }
@@ -2785,7 +2785,7 @@ LAB_0017fe28:
       if (loopIndex != 0) {
         return 0;
       }
-      loopIndex = ((int (*)())FUN_0017c41c)(ctx);
+      loopIndex = ((int (*)())ValueKey__replaceWithSource2IfSourcesEqual23)(ctx);
       if (loopIndex != 0) {
         return 0;
       }
@@ -2815,7 +2815,7 @@ LAB_0017fe28:
       if (loopIndex != 0) {
         return 0;
       }
-      loopIndex = ((int (*)())FUN_0017d3f8)(ctx);
+      loopIndex = ((int (*)())ValueKey__foldCompareSameSourcesToConstant)(ctx);
       if (loopIndex != 0) {
         return 0;
       }
@@ -2828,7 +2828,7 @@ LAB_0017fe28:
           if (*(int *)(loopIndex + 0x658) <= *(int *)(*(int *)(loopIndex + 0x6c4) + 0xa8))
           goto LAB_0017fe30;
           if ((*loopIndex3 == 0x7ffffffe) && (loopIndex = FUN_00176954(ctx,loopIndex2), loopIndex == 0)) {
-            FUN_00179894(ctx,loopIndex2);
+            ValueKey__foldCompareSameSourcesValueNumber(ctx,loopIndex2);
           }
         }
         bVar1 = loopIndex2 != 3;
@@ -6070,7 +6070,7 @@ LAB_00185628:
                 dVar22 = (double)(local_e0 * fVar2);
                 IROperand__setModifierBits(piVar5 + 0x2f,1,0);
                 IROperand__setModifierBits(piVar5 + 0x2f,2,0);
-                ((void (*)())FUN_000f79c4)(piVar5,param_3,2,dVar22,dVar22,dVar22,dVar22);
+                ((void (*)())IRInst__makeLiteralVec4Float)(piVar5,param_3,2,dVar22,dVar22,dVar22,dVar22);
               }
               else if (loopRemaining2 == 0x12) goto LAB_00185558;
               goto LAB_00185964;
@@ -6150,7 +6150,7 @@ LAB_00185558:
               *(undefined4 *)(loopRemaining2 + 0x10) = local_88;
               IROperand__setModifierBits(piVar5 + 0x35,2,uVar3 >> 1 & 1);
               IROperand__setModifierBits(piVar5 + 0x35,1,uVar3 & 1);
-              ((void (*)())FUN_000f79c4)(piVar5,param_3,2,dVar22,dVar22,dVar22,dVar22);
+              ((void (*)())IRInst__makeLiteralVec4Float)(piVar5,param_3,2,dVar22,dVar22,dVar22,dVar22);
               Block__insertInstAfter(local_78,local_74,piVar5);
               goto LAB_00185964;
             }

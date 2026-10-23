@@ -1556,15 +1556,15 @@
 0xf4bc8	floatLess	32	no	tiny (32 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0xf4be8	BitSet__findFirstSet	92	yes	
 0xf4c44	noop_f4c44	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0xf4c48	FUN_000f4c48	268	yes	
-0xf4d54	FUN_000f4d54	44	yes	
+0xf4c48	ConstKey__compareOrdered	268	yes	
+0xf4d54	ConstKey__countPresentOperands	44	yes	
 0xf4d80	FUN_000f4d80	92	yes	
 0xf4ddc	FUN_000f4ddc	512	yes	
-0xf4fdc	FUN_000f4fdc	588	yes	
+0xf4fdc	Compiler__getOrCreateLoadConstN	588	yes	
 0xf5248	FUN_000f5248	376	yes	
-0xf53c0	FUN_000f53c0	396	yes	
-0xf554c	FUN_000f554c	352	yes	
-0xf56ac	FUN_000f56ac	324	yes	
+0xf53c0	Compiler__getOrCreateLoadConst3	396	yes	
+0xf554c	Compiler__getOrCreateLoadConst2	352	yes	
+0xf56ac	Compiler__getOrCreateLoadConst1	324	yes	
 0xf57f0	FUN_000f57f0	540	no	indirect call (driver context / vtable / callback)
 0xf5a0c	FUN_000f5a0c	512	no	indirect call (driver context / vtable / callback)
 0xf5c0c	FUN_000f5c0c	228	yes	
@@ -1572,16 +1572,16 @@
 0xf5e8c	FUN_000f5e8c	264	no	indirect call (driver context / vtable / callback)
 0xf5f94	FUN_000f5f94	304	yes	
 0xf60c4	FUN_000f60c4	388	no	indirect call (driver context / vtable / callback)
-0xf6248	FUN_000f6248	532	yes	
-0xf645c	FUN_000f645c	376	yes	
-0xf65d4	FUN_000f65d4	396	yes	
-0xf6760	FUN_000f6760	352	yes	
-0xf68c0	FUN_000f68c0	324	yes	
+0xf6248	Compiler__getOrCreateConstVectorN	532	yes	
+0xf645c	Compiler__getOrCreateConstVector4	376	yes	
+0xf65d4	Compiler__getOrCreateConstVector3	396	yes	
+0xf6760	Compiler__getOrCreateConstVector2	352	yes	
+0xf68c0	Compiler__getOrCreateConstVector1	324	yes	
 0xf6a04	FUN_000f6a04	752	yes	
 0xf6d14	FUN_000f6d14	2568	yes	
-0xf771c	FUN_000f771c	340	yes	
+0xf771c	IRInst__makeLiteralVec4Int	340	yes	
 0xf7870	FUN_000f7870	340	yes	
-0xf79c4	FUN_000f79c4	332	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xf79c4	IRInst__makeLiteralVec4Float	332	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0xf7b10	FUN_000f7b10	228	yes	
 0xf7bf4	FUN_000f7bf4	228	yes	
 0xf7cd8	FUN_000f7cd8	228	yes	
@@ -2795,7 +2795,7 @@
 0x176304	KhanPs__vslot56_scaleFloat	32	yes	
 0x176324	FUN_00176324	44	yes	
 0x176350	classifyConstantRange	148	yes	
-0x1763e4	FUN_001763e4	144	yes	
+0x1763e4	ValueKey__rowLanesAllEqual	144	yes	
 0x176474	ValueKey__findOrInsertLiteral	104	yes	
 0x1764e0	FUN_001764e0	28	yes	
 0x1764fc	ValueKey__sourceKindIs1	28	yes	
@@ -2835,7 +2835,7 @@
 0x177748	FUN_00177748	408	no	indirect call (driver context / vtable / callback)
 0x1778e0	FUN_001778e0	272	yes	
 0x1779f0	FUN_001779f0	224	yes	
-0x177ad0	FUN_00177ad0	124	yes	
+0x177ad0	ValueKey__cancelNegatedSourcePair	124	yes	
 0x177b4c	FUN_00177b4c	388	yes	
 0x177cd0	FUN_00177cd0	324	yes	
 0x177e14	FUN_00177e14	528	yes	
@@ -2856,7 +2856,7 @@
 0x1793d8	FUN_001793d8	560	yes	
 0x179608	FUN_00179608	456	yes	
 0x1797d0	FUN_001797d0	196	yes	
-0x179894	FUN_00179894	184	yes	
+0x179894	ValueKey__foldCompareSameSourcesValueNumber	184	yes	
 0x17994c	FUN_0017994c	232	yes	
 0x179a34	FUN_00179a34	244	yes	
 0x179b28	FUN_00179b28	148	yes	
@@ -2872,7 +2872,7 @@
 0x17a3d4	FUN_0017a3d4	884	no	indirect call (driver context / vtable / callback)
 0x17a748	FUN_0017a748	348	yes	
 0x17a8a4	FUN_0017a8a4	680	no	indirect call (driver context / vtable / callback)
-0x17ab4c	FUN_0017ab4c	472	no	indirect call (driver context / vtable / callback)
+0x17ab4c	ValueKey__foldDotPowerOfTwoIntoOutputScale	472	no	indirect call (driver context / vtable / callback)
 0x17ad24	FUN_0017ad24	260	yes	
 0x17ae28	FUN_0017ae28	272	yes	
 0x17af58	FUN_0017af58	200	yes	
@@ -2881,14 +2881,14 @@
 0x17b96c	FUN_0017b96c	748	no	indirect call (driver context / vtable / callback)
 0x17bc58	FUN_0017bc58	288	no	indirect call (driver context / vtable / callback)
 0x17bd78	FUN_0017bd78	500	yes	
-0x17bf70	FUN_0017bf70	392	no	indirect call (driver context / vtable / callback)
-0x17c0f8	FUN_0017c0f8	332	yes	
+0x17bf70	ValueKey__foldDot3SingleLaneSource	392	no	indirect call (driver context / vtable / callback)
+0x17c0f8	ValueKey__foldDot4UnitVectorSource	332	yes	
 0x17c244	FUN_0017c244	468	yes	
-0x17c41c	FUN_0017c41c	136	yes	
+0x17c41c	ValueKey__replaceWithSource2IfSourcesEqual23	136	yes	
 0x17c4a4	FUN_0017c4a4	316	no	indirect call (driver context / vtable / callback)
 0x17c5e0	FUN_0017c5e0	404	yes	
-0x17c774	FUN_0017c774	276	yes	
-0x17c888	FUN_0017c888	136	yes	
+0x17c774	ValueKey__foldMulByPlusMinusOne	276	yes	
+0x17c888	ValueKey__replaceWithSource1IfSourcesEqual	136	yes	
 0x17c910	FUN_0017c910	516	no	indirect call (driver context / vtable / callback)
 0x17cb14	FUN_0017cb14	516	no	indirect call (driver context / vtable / callback)
 0x17cd18	FUN_0017cd18	164	yes	
@@ -2896,19 +2896,19 @@
 0x17ce7c	FUN_0017ce7c	492	yes	
 0x17d06c	FUN_0017d06c	476	yes	
 0x17d26c	FUN_0017d26c	392	yes	
-0x17d3f8	FUN_0017d3f8	232	yes	
-0x17d4e0	FUN_0017d4e0	156	yes	
-0x17d57c	FUN_0017d57c	148	yes	
+0x17d3f8	ValueKey__foldCompareSameSourcesToConstant	232	yes	
+0x17d4e0	ValueKey__replaceWithZeroIfSourcesEqual	156	yes	
+0x17d57c	ValueKey__foldMulByZero	148	yes	
 0x17d610	FUN_0017d610	156	yes	
 0x17d6ac	FUN_0017d6ac	780	no	indirect call (driver context / vtable / callback)
 0x17d9b8	FUN_0017d9b8	548	yes	
 0x17dbdc	FUN_0017dbdc	1104	no	indirect call (driver context / vtable / callback)
 0x17e02c	FUN_0017e02c	452	yes	
-0x17e1f4	FUN_0017e1f4	324	no	indirect call (driver context / vtable / callback)
+0x17e1f4	ValueKey__foldMulPowerOfTwoIntoOutputScale	324	no	indirect call (driver context / vtable / callback)
 0x17e338	FUN_0017e338	188	no	indirect call (driver context / vtable / callback)
 0x17e3f4	FUN_0017e3f4	608	yes	
-0x17e658	FUN_0017e658	112	yes	
-0x17e6c8	FUN_0017e6c8	280	yes	
+0x17e658	ValueKey__foldMadZeroAddend	112	yes	
+0x17e6c8	ValueKey__foldMadByPlusMinusOne	280	yes	
 0x17e7e0	FUN_0017e7e0	972	no	indirect call (driver context / vtable / callback)
 0x17ebb0	FUN_0017ebb0	660	yes	
 0x17ee68	FUN_0017ee68	908	yes	

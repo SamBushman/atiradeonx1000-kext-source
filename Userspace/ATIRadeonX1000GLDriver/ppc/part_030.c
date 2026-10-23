@@ -1037,7 +1037,7 @@ int FUN_0010b32c(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefi
   else {
     uVar2 = 1;
   }
-  ((void (*)())FUN_000f79c4)(inst,uVar5,uVar2,fparam_1,fparam_1,fparam_1,fparam_1);
+  ((void (*)())IRInst__makeLiteralVec4Float)(inst,uVar5,uVar2,fparam_1,fparam_1,fparam_1,fparam_1);
   iVar6 = *(int *)(compiler + 0x3ac) + -1;
   *(int *)(compiler + 0x3ac) = iVar6;
   operandRecord = IRInst__getOperandRecord(inst,0);
@@ -1343,7 +1343,7 @@ void FUN_0010bd50(int inst,undefined4 param_2,int param_3,int compiler,double fp
   undefined4 *puVar6;
   
   *(int *)(inst + 0x84) = param_3;
-  ((void (*)())FUN_000f79c4)(inst,*(undefined4 *)(compiler + 0x6c4),param_3,fparam_1,fparam_1,fparam_1,fparam_1)
+  ((void (*)())IRInst__makeLiteralVec4Float)(inst,*(undefined4 *)(compiler + 0x6c4),param_3,fparam_1,fparam_1,fparam_1,fparam_1)
   ;
   arena = DAT_001af9fc;
   if (param_3 == 0) {

@@ -87,7 +87,7 @@ int FUN_0017356c(ctx)
         if (callResult < loopIndex) {
           return 1;
         }
-        callResult = ((int (*)())FUN_001763e4)(ctx,loopIndex);
+        callResult = ((int (*)())ValueKey__rowLanesAllEqual)(ctx,loopIndex);
         if (callResult == 0) break;
         loopIndex = loopIndex + 1;
       }
@@ -2035,8 +2035,8 @@ undefined4 classifyConstantRange(double fparam_1)
   return 0;
 }
 
-/* FUN_001763e4 @ 0x1763e4 (144 bytes) */
-int FUN_001763e4(param_1, param_2)
+/* ValueKey__rowLanesAllEqual @ 0x1763e4 (144 bytes) */
+int ValueKey__rowLanesAllEqual(param_1, param_2)
   int param_1;
   int param_2;
 {

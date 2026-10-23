@@ -108,7 +108,7 @@
 0xf2960	FUN_000f1d7c
 0xf2984	FUN_000f1d7c
 0xf29b8	FUN_000f1d7c
-0xf513c	FUN_000f4fdc
+0xf513c	Compiler__getOrCreateLoadConstN
 0xf6c50	FUN_000f6a04
 0xf8258	FUN_000f816c
 0xf8430	FUN_000f83cc

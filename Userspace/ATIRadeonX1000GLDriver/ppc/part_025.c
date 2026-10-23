@@ -1776,8 +1776,8 @@ int noop_f4c44()
   return;
 }
 
-/* FUN_000f4c48 @ 0xf4c48 (268 bytes) */
-int FUN_000f4c48(param_1, param_2, param_3, param_4, param_5, param_6)
+/* ConstKey__compareOrdered @ 0xf4c48 (268 bytes) */
+int ConstKey__compareOrdered(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -1841,8 +1841,8 @@ LAB_000f4d20:
   return 0;
 }
 
-/* FUN_000f4d54 @ 0xf4d54 (44 bytes) */
-int FUN_000f4d54(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+/* ConstKey__countPresentOperands @ 0xf4d54 (44 bytes) */
+int ConstKey__countPresentOperands(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;

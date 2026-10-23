@@ -18,7 +18,7 @@ int FUN_0010bed0(int param_1,undefined4 param_2,undefined4 param_3,int param_4,u
   uVar1 = DAT_001af9fc;
   operandRecord = IRInst__getOperandRecord(iVar2,1);
   *(undefined4 *)(operandRecord + 0x10) = uVar1;
-  ((void (*)())FUN_000f79c4)(iVar2,param_4,2,fparam_1,fparam_1,fparam_1,fparam_1);
+  ((void (*)())IRInst__makeLiteralVec4Float)(iVar2,param_4,2,fparam_1,fparam_1,fparam_1,fparam_1);
   operandRecord = IRInst__getOperandRecord(iVar2,2);
   *(undefined4 *)(operandRecord + 0x10) = uVar1;
   if (param_1 == 3) {
@@ -26,7 +26,7 @@ int FUN_0010bed0(int param_1,undefined4 param_2,undefined4 param_3,int param_4,u
     if (fparam_1 == fparam_1_00) {
       fparam_1_00 = (double)FLOAT_001aa0e8;
     }
-    ((void (*)())FUN_000f79c4)(iVar2,param_4,3,fparam_1_00,fparam_1_00,fparam_1_00,fparam_1_00);
+    ((void (*)())IRInst__makeLiteralVec4Float)(iVar2,param_4,3,fparam_1_00,fparam_1_00,fparam_1_00,fparam_1_00);
     uVar1 = DAT_001af9fc;
     operandRecord = IRInst__getOperandRecord(iVar2,3);
     *(undefined4 *)(operandRecord + 0x10) = uVar1;

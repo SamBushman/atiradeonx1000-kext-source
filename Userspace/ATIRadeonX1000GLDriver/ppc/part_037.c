@@ -3359,7 +3359,7 @@ int FUN_00123c08(compiler, param_2, param_3)
     } while (iVar16 != 0);
     uVar4 = FUN_001084b8(0x31,iVar7);
     *(undefined4 *)(compiler + COMP_arenaB) = uVar4;
-    ((void (*)())FUN_000f79c4)(uVar4,*(undefined4 *)(*(int *)(compiler + 8) + 0x6c4),1,(double)GH_U2F((unsigned int)(local_50)),
+    ((void (*)())IRInst__makeLiteralVec4Float)(uVar4,*(undefined4 *)(*(int *)(compiler + 8) + 0x6c4),1,(double)GH_U2F((unsigned int)(local_50)),
                  (double)fStack_4c,(double)fStack_48,(double)fStack_44);
     iVar3 = *(int *)(*(int *)(compiler + COMP_arenaB) + 0xa4);
     piVar5 = *(int **)(iVar3 + 0x18);

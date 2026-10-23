@@ -68,7 +68,7 @@ int R520VMachineAssembler__vslot27_assembleLoopHeader(this, node, block, param_4
       IROperand__setModifierBits(condValueInst + 0x29,1,uVar8 & 1);
       operandVReg = IRInst__getOperandSource(branchInst,1);
       IRInst__setOperandSource(condValueInst,1,operandVReg,0,compiler);
-      ((void (*)())FUN_000f79c4)(condValueInst,piVar11,2,1.0,1.0,1.0,1.0);
+      ((void (*)())IRInst__makeLiteralVec4Float)(condValueInst,piVar11,2,1.0,1.0,1.0,1.0);
       IROperand__setModifierBits(condValueInst + 0x2f,1,1);
       iVar5 = R300VMachineAssembler__getOrAllocateScratchRegister(this,piVar11);
       condValueInst[0x25] = iVar5;
@@ -591,7 +591,7 @@ int R520VMachineAssembler__vslot24_assembleWithPredicateSet(this, node, block, c
         *(undefined4 *)(iVar3 + 0x94) = uVar7;
         *(undefined4 *)(iVar3 + 0x9c) = uVar1;
         *(undefined4 *)(iVar3 + 0x98) = 0;
-        ((void (*)())FUN_000f79c4)(iVar3,piVar8,1,fparam_1,fparam_1,fparam_1,fparam_1);
+        ((void (*)())IRInst__makeLiteralVec4Float)(iVar3,piVar8,1,fparam_1,fparam_1,fparam_1,fparam_1);
         *(uint *)(iVar3 + 0x14) = *(uint *)(iVar3 + 0x14) & 0xfffffffb;
         Block__appendInst(node,iVar3);
         puVar9 = (uint *)this[0x25];

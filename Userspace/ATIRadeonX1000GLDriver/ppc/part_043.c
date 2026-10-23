@@ -926,9 +926,9 @@ int FUN_00147f54(inst, compiler)
       if (iVar17 == 3) {
         dVar19 = (double)FLOAT_001aa0e8;
         inst[0x49] = local_a8[0];
-        ((void (*)())FUN_000f79c4)(inst,iVar4,uVar16,dVar19,dVar19,dVar19,dVar19);
+        ((void (*)())IRInst__makeLiteralVec4Float)(inst,iVar4,uVar16,dVar19,dVar19,dVar19,dVar19);
         dVar19 = (double)FLOAT_001aa10c;
-        ((void (*)())FUN_000f79c4)(inst,iVar4,3,dVar19,dVar19,dVar19,dVar19);
+        ((void (*)())IRInst__makeLiteralVec4Float)(inst,iVar4,3,dVar19,dVar19,dVar19,dVar19);
         IROperand__setModifierBits(inst + 0x35,1,(uint)(local_90 < FLOAT_001aa0d4));
         return inst;
       }
@@ -2127,7 +2127,7 @@ int FUN_00149de4(inst, param_2, inst2, param_4, compiler)
                         }
                         iVar17 = iVar17 + 1;
                         piVar7[0x21] = iVar17;
-                        ((void (*)())FUN_000f79c4)(piVar7,iVar14,iVar17,fparam_1,fparam_1,fparam_1,fparam_1);
+                        ((void (*)())IRInst__makeLiteralVec4Float)(piVar7,iVar14,iVar17,fparam_1,fparam_1,fparam_1,fparam_1);
                         operandRecord4 = IRInst__getOperandRecord(piVar7,iVar17);
                         *(undefined4 *)(operandRecord4 + 0x10) = 0x4040404;
                         (**(code **)(*piVar7 + 0x88))(piVar7,iVar17,iVar8,cVar3);
@@ -3523,7 +3523,7 @@ int Inst__collapseAlgebraic_0014caec(inst, param_2)
         IROperand__setModifierBits((int)inst2 + 0xbc,1,inst[0x34] & 1);
         IROperand__setModifierBits((int)inst2 + 0xa4,2,(uint)inst[0x2e] >> 1 & 1);
         IROperand__setModifierBits((int)inst2 + 0xbc,2,(uint)inst[0x34] >> 1 & 1);
-        ((void (*)())FUN_000f79c4)(inst2,param_2,3,0.0,0.0,0.0,0.0);
+        ((void (*)())IRInst__makeLiteralVec4Float)(inst2,param_2,3,0.0,0.0,0.0,0.0);
         *(int *)((int)inst2 + 0x98) = inst[0x26];
         *(undefined4 *)((int)inst2 + 0x94) = *(undefined4 *)((int)inst2 + 0x14c);
         local_50[1] = 0;
@@ -4189,7 +4189,7 @@ LAB_0014dd2c:
   else {
     *(int *)(sourceDef5 + 0x160) = *(int *)(pass + 0x478) + 1;
   }
-  ((void (*)())FUN_000f79c4)(node,pass,2,1.0,1.0,1.0,1.0);
+  ((void (*)())IRInst__makeLiteralVec4Float)(node,pass,2,1.0,1.0,1.0,1.0);
   FUN_00105894(sourceDef,*(undefined4 *)(pass + 8));
   return 1;
 }
