@@ -472,7 +472,7 @@ LAB_0002e708:
     uVar15 = (uint)(int)fVar12;
   }
   param_2[0x13] = iVar26 << 0x10 | uVar15;
-  ((void (*)())FUN_0002d2b0)(piVar30,(double)*(float *)(iVar28 + 0x1c),(double)*(float *)(iVar28 + 0x20),
+  ((void (*)())gldPackColorForSurfaceFormat)(piVar30,(double)*(float *)(iVar28 + 0x1c),(double)*(float *)(iVar28 + 0x20),
                (double)*(float *)(iVar28 + 0x24),(double)*(float *)(iVar28 + 0x28));
   uVar14 = (uint)*(byte *)((int)param_2 + 0xa5);
   uVar15 = (uint)(int)(*(float *)(iVar28 + 0x34) + FLOAT_001aa10c);
@@ -776,7 +776,7 @@ LAB_0002f088:
   *(float *)(param_2 + 0xac) = fVar1;
   *(float *)(param_2 + 0xb0) = fVar2;
   *(float *)(param_2 + 0xb4) = fVar3;
-  ((void (*)())FUN_0002d2b0)(iVar12,(double)*(float *)(iVar11 + 0x1c),(double)*(float *)(iVar11 + 0x20),
+  ((void (*)())gldPackColorForSurfaceFormat)(iVar12,(double)*(float *)(iVar11 + 0x1c),(double)*(float *)(iVar11 + 0x20),
                (double)*(float *)(iVar11 + 0x24),(double)*(float *)(iVar11 + 0x28));
 LAB_0002f3e8:
   *(byte *)(param_2 + 0x39) = *(byte *)(param_2 + 0x39) & 0x7f;
@@ -10296,8 +10296,8 @@ switchD_0003de14_caseD_1:
   goto LAB_0003e150;
 }
 
-/* FUN_0003e1d0 @ 0x3e1d0 (124 bytes) */
-int FUN_0003e1d0(param_1)
+/* gldUpdateTextureTargetDirtyMask @ 0x3e1d0 (124 bytes) */
+int gldUpdateTextureTargetDirtyMask(param_1)
   int param_1;
 {
   uint uVar1;

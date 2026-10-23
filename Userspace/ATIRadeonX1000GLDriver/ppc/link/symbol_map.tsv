@@ -961,7 +961,7 @@ PTR_FUN_001e8af8	0x1e8af8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char 
 PTR_FUN_001e8afc	0x1e8afc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8afc asm("PTR_FUN_001e8afc");	pointer -> FUN_00087da0	data.s
 PTR_FUN_001e8b00	0x1e8b00	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b00 asm("PTR_FUN_001e8b00");	pointer -> FUN_000b5bd0	data.s
 PTR_FUN_001e8b04	0x1e8b04	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b04 asm("PTR_FUN_001e8b04");	pointer -> arbEmitIlExp	data.s
-PTR_FUN_001e8b08	0x1e8b08	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b08 asm("PTR_FUN_001e8b08");	pointer -> FUN_00065c90	data.s
+PTR_FUN_001e8b08	0x1e8b08	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b08 asm("PTR_FUN_001e8b08");	pointer -> arbEmitIlHeader	data.s
 PTR_FUN_001e8b0c	0x1e8b0c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b0c asm("PTR_FUN_001e8b0c");	pointer -> FUN_00083870	data.s
 PTR_FUN_001e8b10	0x1e8b10	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b10 asm("PTR_FUN_001e8b10");	pointer -> arbEmitIlSetCompare2	data.s
 PTR_001e8b14	0x1e8b14	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_001e8b14 asm("PTR_001e8b14");	pointer -> _calloc	data.s
@@ -972,7 +972,7 @@ PTR_FUN_001e8b24	0x1e8b24	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char 
 PTR_FUN_001e8b28	0x1e8b28	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b28 asm("PTR_FUN_001e8b28");	pointer -> FUN_000b5b60	data.s
 PTR_FUN_001e8b2c	0x1e8b2c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b2c asm("PTR_FUN_001e8b2c");	pointer -> arbEmitRecord1Src_op49	data.s
 PTR_FUN_001e8b30	0x1e8b30	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b30 asm("PTR_FUN_001e8b30");	pointer -> arbEmitRecord2Src_op02	data.s
-PTR_FUN_001e8b34	0x1e8b34	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b34 asm("PTR_FUN_001e8b34");	pointer -> FUN_00065de0	data.s
+PTR_FUN_001e8b34	0x1e8b34	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b34 asm("PTR_FUN_001e8b34");	pointer -> arbEmitIlEnd	data.s
 PTR_FUN_001e8b38	0x1e8b38	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b38 asm("PTR_FUN_001e8b38");	pointer -> FUN_000b5c00	data.s
 PTR_FUN_001e8b3c	0x1e8b3c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b3c asm("PTR_FUN_001e8b3c");	pointer -> FUN_00064f40	data.s
 PTR_FUN_001e8b40	0x1e8b40	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b40 asm("PTR_FUN_001e8b40");	pointer -> FUN_00076c60	data.s

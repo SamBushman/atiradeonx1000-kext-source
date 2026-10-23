@@ -19,9 +19,9 @@
 0x4f720	FUN_0004f720	0x4f930	memset	r9	0x9 not at argument 6 of any C call (1 C calls)	BENIGN-IMPORT-ARITY
 0x656b0	FUN_000656b0	0x65790	FUN_00065610	r5	r1+0x38 (a stack address) not at argument 2 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
 0x656b0	FUN_000656b0	0x65790	FUN_00065610	r6	r1+0x3c (a stack address) not at argument 3 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
-0x7a4a0	FUN_0007a4a0	0x7a604	FUN_00077cf0	r4	incoming param_3 not at argument 1 of any C call (2 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
-0x7a4a0	FUN_0007a4a0	0x7aaa8	FUN_00077cf0	r4	incoming param_3 not at argument 1 of any C call (2 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
-0x7aae0	FUN_0007aae0	0x7ad24	FUN_000782e0	r4	incoming param_8 not at argument 1 of any C call (1 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
+0x7a4a0	FUN_0007a4a0	0x7a604	recordDestFileIs0	r4	incoming param_3 not at argument 1 of any C call (2 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
+0x7a4a0	FUN_0007a4a0	0x7aaa8	recordDestFileIs0	r4	incoming param_3 not at argument 1 of any C call (2 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
+0x7aae0	FUN_0007aae0	0x7ad24	recordSourceFileIs0	r4	incoming param_8 not at argument 1 of any C call (1 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
 0x8b160	arbParseSourceRegister	0x8afd8	arbParseParamBinding	r5	0x0 not at argument 2 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
 0x8b160	arbParseSourceRegister	0x8afd8	arbParseParamBinding	r6	0x0 not at argument 3 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
 0x8b160	arbParseSourceRegister	0x8b010	arbParseParamBinding	r5	0x0 not at argument 2 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)

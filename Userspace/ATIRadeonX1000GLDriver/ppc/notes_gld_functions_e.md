@@ -79,7 +79,7 @@ by the fixed-function vertex program generator.
 
 ## Left
 
-Of the 420 original targets, 254 are named (268 `func` rows: some rows name neighbours outside the 420) and 166 (about 75 KB) are not. What is
+Of the 420 original targets, 276 are named (290 `func` rows: some rows name neighbours outside the 420) and 144 (about 70 KB) are not. What is
 left, by area (all have a subsystem label in `subsystem_map.tsv` unless listed under "no label"):
 
 * record-program optimizer / register allocator, 0x77500-0x7b0d0 (`vertex-program-regalloc`): FUN_0007b0d0 (5.6 KB, the optimizer driver:

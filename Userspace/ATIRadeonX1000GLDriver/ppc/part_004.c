@@ -6417,8 +6417,8 @@ int FUN_0002d210(param_1, param_2)
   return;
 }
 
-/* FUN_0002d2b0 @ 0x2d2b0 (2388 bytes) */
-void FUN_0002d2b0(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+/* gldPackColorForSurfaceFormat @ 0x2d2b0 (2388 bytes) */
+void gldPackColorForSurfaceFormat(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
   int iVar1;
   float fVar2;

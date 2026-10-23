@@ -298,7 +298,7 @@
 0x2ce40	FUN_0002ce40	492	no	indirect call (driver context / vtable / callback)
 0x2d030	FUN_0002d030	456	yes	
 0x2d210	FUN_0002d210	140	yes	
-0x2d2b0	FUN_0002d2b0	2388	yes	
+0x2d2b0	gldPackColorForSurfaceFormat	2388	yes	
 0x2dcf0	gldTextureHasNonPowerOfTwoSize2	236	yes	
 0x2ddf0	FUN_0002ddf0	3396	yes	
 0x2ebc0	FUN_0002ebc0	596	yes	
@@ -353,7 +353,7 @@
 0x3c310	gldDeleteVertexShaderObject	236	no	indirect call (driver context / vtable / callback)
 0x3c400	FUN_0003c400	4136	no	indirect call (driver context / vtable / callback)
 0x3d590	FUN_0003d590	2944	no	calls an import (glpUniformToFloat); indirect call (driver context / vtable / callback)
-0x3e1d0	FUN_0003e1d0	124	yes	
+0x3e1d0	gldUpdateTextureTargetDirtyMask	124	yes	
 0x3e250	FUN_0003e250	188	yes	
 0x3e320	FUN_0003e320	120	yes	
 0x3e3a0	FUN_0003e3a0	116	yes	
@@ -362,11 +362,11 @@
 0x3e4d0	atifsReplayTextureOps	276	yes	
 0x3e600	atifsReplayColorAlphaOps	1352	yes	
 0x3eb70	atifsReplayProgram	296	yes	
-0x3eca0	FUN_0003eca0	164	yes	
+0x3eca0	fpilEmitAngleConstants	164	yes	
 0x3ed50	FUN_0003ed50	60	yes	
 0x3ed90	fpilBuildDestinationToken	160	yes	
 0x3ee30	fpilSetComponentSelect	88	yes	
-0x3eea0	FUN_0003eea0	168	yes	
+0x3eea0	fpilEmitScalarConstant	168	yes	
 0x3ef50	fpilReserveTokens	240	no	calls an import (malloc); calls an import (realloc)
 0x3f050	FUN_0003f050	336	yes	
 0x3f1c0	fpilTranslateSource	700	yes	
@@ -375,8 +375,8 @@
 0x3f5e0	fpilDestroyTranslator	112	no	calls an import (free)
 0x3f660	fpilCreateTranslator	220	no	calls an import (free); calls an import (malloc)
 0x3f750	fpilTranslateDestination	232	yes	
-0x3f850	FUN_0003f850	396	no	calls an import (malloc); calls an import (realloc)
-0x3f9f0	FUN_0003f9f0	472	no	calls an import (malloc); calls an import (realloc)
+0x3f850	fpilEmitEmptyProgram	396	no	calls an import (malloc); calls an import (realloc)
+0x3f9f0	fpilEmitMoveFromTemp	472	no	calls an import (malloc); calls an import (realloc)
 0x3fbf0	fpilEmitInstruction	392	no	calls an import (malloc); calls an import (realloc)
 0x3fd80	fragmentTranslateSimpleOp	440	no	calls an import (malloc); calls an import (realloc)
 0x3ff40	fragmentTranslateRep	592	no	calls an import (malloc); calls an import (realloc)
@@ -470,9 +470,9 @@
 0x53220	extvsGetOrCreateStateSymbol	284	no	indirect call (driver context / vtable / callback)
 0x53340	glGenSymbolsEXT_impl	368	yes	
 0x534c0	FUN_000534c0	260	yes	
-0x53610	FUN_00053610	136	yes	
-0x536a0	FUN_000536a0	144	yes	
-0x53730	FUN_00053730	132	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x53610	extvsShaderOp1Explicit	136	yes	
+0x536a0	extvsShaderOp2Explicit	144	yes	
+0x53730	extvsShaderOp3Explicit	132	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x537c0	glSwizzleEXT_impl	276	yes	
 0x538e0	extvsBeginShader	164	yes	
 0x53990	extvsEndShader	244	no	indirect call (driver context / vtable / callback)
@@ -585,8 +585,8 @@
 0x659d0	FUN_000659d0	612	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x65c40	FUN_00065c40	52	yes	
 0x65c80	noop_65c80	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x65c90	FUN_00065c90	328	no	indirect call (driver context / vtable / callback)
-0x65de0	FUN_00065de0	192	no	indirect call (driver context / vtable / callback)
+0x65c90	arbEmitIlHeader	328	no	indirect call (driver context / vtable / callback)
+0x65de0	arbEmitIlEnd	192	no	indirect call (driver context / vtable / callback)
 0x65ea0	arbEmitIlDp4	1912	no	indirect call (driver context / vtable / callback)
 0x66640	arbEmitIlMov	1308	no	indirect call (driver context / vtable / callback)
 0x66b80	arbEmitIlMul	1912	no	indirect call (driver context / vtable / callback)
@@ -671,30 +671,30 @@
 0x77560	FUN_00077560	228	yes	
 0x77650	depListRemove	76	yes	
 0x776b0	FUN_000776b0	176	yes	
-0x77760	FUN_00077760	72	yes	
+0x77760	arrayRemoveAt	72	yes	
 0x777b0	FUN_000777b0	56	yes	
 0x77800	FUN_00077800	64	yes	
 0x77850	recordGetWriteMask	12	yes	
 0x77860	FUN_00077860	792	yes	
 0x77ba0	regBindingSet	140	yes	
-0x77c40	FUN_00077c40	124	yes	
-0x77cd0	FUN_00077cd0	24	yes	
-0x77cf0	FUN_00077cf0	20	yes	
-0x77d10	FUN_00077d10	120	yes	
+0x77c40	regBindingSetFixedRegister	124	yes	
+0x77cd0	recordSourceFileIs1	24	yes	
+0x77cf0	recordDestFileIs0	20	yes	
+0x77d10	recordCombinedWriteMask	120	yes	
 0x77d90	recordRegisterIsAssignable	1176	yes	
 0x78250	recordFindFreeTempRegister	132	yes	
-0x782e0	FUN_000782e0	20	yes	
+0x782e0	recordSourceFileIs0	20	yes	
 0x78300	recordOpcodeSourceMask	200	yes	
-0x78700	FUN_00078700	84	yes	
+0x78700	recordMarkDependentsDirty	84	yes	
 0x78760	recordAssignDestinationRegister	448	yes	
 0x78950	FUN_00078950	64	yes	
 0x78990	FUN_00078990	56	yes	
 0x789d0	FUN_000789d0	56	yes	
 0x78a10	recordCountSourceRegisterFiles	356	yes	
-0x78b80	FUN_00078b80	560	yes	
+0x78b80	recordRetargetDestination	560	yes	
 0x78db0	regBindingClear	68	yes	
 0x78e00	chunkArenaAlloc	228	yes	
-0x78ef0	FUN_00078ef0	24	yes	
+0x78ef0	recordSourceFileIs2	24	yes	
 0x78f10	recordGetWriteEnable	92	yes	
 0x78f80	FUN_00078f80	2340	yes	
 0x798f0	recordSetWriteMask	28	yes	
@@ -705,8 +705,8 @@
 0x79bd0	recordLinkSourceToDefinition	532	yes	
 0x79e10	FUN_00079e10	88	yes	
 0x79e70	FUN_00079e70	488	yes	
-0x7a060	FUN_0007a060	16	yes	
-0x7a070	FUN_0007a070	156	yes	
+0x7a060	chunkArenaResetCursor	16	yes	
+0x7a070	chunkArenaFree	156	yes	
 0x7a110	FUN_0007a110	100	yes	
 0x7a1a0	FUN_0007a1a0	756	yes	
 0x7a4a0	FUN_0007a4a0	1544	yes	

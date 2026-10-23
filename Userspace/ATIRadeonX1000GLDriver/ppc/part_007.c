@@ -4555,8 +4555,8 @@ int FUN_000534c0(param_1, param_2, param_3, param_4, param_5)
   return;
 }
 
-/* FUN_00053610 @ 0x53610 (136 bytes) */
-int FUN_00053610(param_1, param_2, param_3, param_4, param_5, param_6)
+/* extvsShaderOp1Explicit @ 0x53610 (136 bytes) */
+int extvsShaderOp1Explicit(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -4571,8 +4571,8 @@ int FUN_00053610(param_1, param_2, param_3, param_4, param_5, param_6)
   return;
 }
 
-/* FUN_000536a0 @ 0x536a0 (144 bytes) */
-int FUN_000536a0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+/* extvsShaderOp2Explicit @ 0x536a0 (144 bytes) */
+int extvsShaderOp2Explicit(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -4589,8 +4589,8 @@ int FUN_000536a0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   return;
 }
 
-/* FUN_00053730 @ 0x53730 (132 bytes) */
-int FUN_00053730(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
+/* extvsShaderOp3Explicit @ 0x53730 (132 bytes) */
+int extvsShaderOp3Explicit(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;

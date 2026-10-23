@@ -329,8 +329,8 @@ int atifsReplayProgram(param_1, param_2, param_3)
   return 1;
 }
 
-/* FUN_0003eca0 @ 0x3eca0 (164 bytes) */
-int FUN_0003eca0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+/* fpilEmitAngleConstants @ 0x3eca0 (164 bytes) */
+int fpilEmitAngleConstants(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int *param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -441,8 +441,8 @@ int fpilSetComponentSelect(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_0003eea0 @ 0x3eea0 (168 bytes) */
-int FUN_0003eea0(param_1, param_2, param_3)
+/* fpilEmitScalarConstant @ 0x3eea0 (168 bytes) */
+int fpilEmitScalarConstant(param_1, param_2, param_3)
   int param_1;
   undefined4 param_2;
   uint *param_3;
@@ -830,8 +830,8 @@ int fpilTranslateDestination(translator, irDest, outToken, outMask, flag)
   return uVar1;
 }
 
-/* FUN_0003f850 @ 0x3f850 (396 bytes) */
-int FUN_0003f850(param_1)
+/* fpilEmitEmptyProgram @ 0x3f850 (396 bytes) */
+int fpilEmitEmptyProgram(param_1)
   int param_1;
 {
   int allocation;
@@ -907,8 +907,8 @@ LAB_0003f918:
   return 0;
 }
 
-/* FUN_0003f9f0 @ 0x3f9f0 (472 bytes) */
-int FUN_0003f9f0(param_1, param_2, param_3)
+/* fpilEmitMoveFromTemp @ 0x3f9f0 (472 bytes) */
+int fpilEmitMoveFromTemp(param_1, param_2, param_3)
   int *param_1;
   uint *param_2;
   undefined4 param_3;
@@ -1218,7 +1218,7 @@ int fragmentTranslateRep(translator, slot, ilInstr)
     return aiStack_48[0];
   }
   lStack_38 = (longlong)(int)fStack_30;
-  ((int (*)())FUN_0003eea0)(translator,(int)fStack_30,aiStack_48);
+  ((int (*)())fpilEmitScalarConstant)(translator,(int)fStack_30,aiStack_48);
   ilInstr[3] = ilInstr[3] & 0xffc0ffff | 0x20000;
   *(short *)((int)ilInstr + 0xe) = (short)aiStack_48[0];
   if (translator[9] != 0) {
@@ -2351,7 +2351,7 @@ int fragmentTranslateAngleConvert(param_1, param_2, param_3, param_4, param_5, p
   
   iVar3 = (param_2 + *(int *)(*param_1 + 0x54)) * 8;
   uVar9 = *(uint *)(iVar3 + *param_1);
-  ((int (*)())FUN_0003eca0)(param_1,iVar3,param_3,param_4,param_5,param_6,param_7);
+  ((int (*)())fpilEmitAngleConstants)(param_1,iVar3,param_3,param_4,param_5,param_6,param_7);
   uVar7 = *(undefined4 *)(*param_1 + 0x28);
   param_3[7] = 0;
   param_3[4] = 0x10000;
@@ -2919,7 +2919,7 @@ LAB_000422f0:
   emitter[8] = emitter[8] + -3;
   _memset(&entryHeader,0,0x24);
   entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0x5b);
-  ((int (*)())FUN_0003eca0)(emitter,extraout_r4,uVar7,uVar8,puVar9,pcVar10,uVar12);
+  ((int (*)())fpilEmitAngleConstants)(emitter,extraout_r4,uVar7,uVar8,puVar9,pcVar10,uVar12);
   sVar17 = (short)emitter[8];
   uStack_58 = (undefined *)CONCAT22(4,sVar17 + 1);
   uStack_64 = CONCAT22(4,sVar17 + 2);
@@ -3051,7 +3051,7 @@ LAB_00042600:
 LAB_00042800:
   entryHeader = CONCAT22((*(unsigned short *)((unsigned char *)&(entryHeader) + 0)),0x5b);
   entryHeader = entryHeader & 0xc000ffff;
-  ((int (*)())FUN_0003eca0)(emitter,uVar7,entryHeader,uVar12,puVar9,ppuVar11,puVar13);
+  ((int (*)())fpilEmitAngleConstants)(emitter,uVar7,entryHeader,uVar12,puVar9,ppuVar11,puVar13);
   sVar17 = (short)emitter[8];
   uStack_5c = (undefined *)CONCAT22(1,(short)*(undefined4 *)(*emitter + 0x28));
   uStack_64 = CONCAT22(4,sVar17 + 2);
@@ -4364,7 +4364,7 @@ int fragmentTranslateWhile(translator, slot, ilInstr)
   uVar1 = *(uint *)(translator + 0x14);
   if ((uVar1 & 0x100000) == 0) {
     auStack_38[0] = uVar1 & 0x100000;
-    ((int (*)())FUN_0003eea0)(translator,0xff,auStack_38);
+    ((int (*)())fpilEmitScalarConstant)(translator,0xff,auStack_38);
     uVar1 = (auStack_38[0] & 0x1f) << 0xf | *(uint *)(translator + 0x14) & 0xfff07fff | 0x100000;
     *(uint *)(translator + 0x14) = uVar1;
   }
@@ -5843,7 +5843,7 @@ LAB_00048c78:
                   (((uVar13 & 0x4000) != 0 && ((uVar13 & 0xc0) != 0x40)))) ||
                  (((uVar13 & 0x8000) != 0 && ((uVar13 & 0x30) != 0x20)))) ||
                 (((uVar13 & 0x10000) != 0 && ((uVar13 & 0xc) != 0xc)))))) {
-              ((int (*)())FUN_0003f9f0)(translator,(int)puVar20 + iVar5 + 8,puVar19[1] >> 0x14 & 1);
+              ((int (*)())fpilEmitMoveFromTemp)(translator,(int)puVar20 + iVar5 + 8,puVar19[1] >> 0x14 & 1);
             }
           }
         }
@@ -7597,7 +7597,7 @@ LAB_0004a708:
     translator[0xb] = translator[0xb] - iVar27;
   }
   if ((translator[5] & 0xc0000000U) == 0) {
-    ((int (*)())FUN_0003f850)(translator);
+    ((int (*)())fpilEmitEmptyProgram)(translator);
   }
 LAB_0004a7b4:
   return translator[9];

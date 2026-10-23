@@ -5547,8 +5547,8 @@ int noop_65c80()
   return;
 }
 
-/* FUN_00065c90 @ 0x65c90 (328 bytes) */
-int FUN_00065c90(param_1, param_2)
+/* arbEmitIlHeader @ 0x65c90 (328 bytes) */
+int arbEmitIlHeader(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -5584,8 +5584,8 @@ int FUN_00065c90(param_1, param_2)
   return;
 }
 
-/* FUN_00065de0 @ 0x65de0 (192 bytes) */
-int FUN_00065de0(param_1, param_2)
+/* arbEmitIlEnd @ 0x65de0 (192 bytes) */
+int arbEmitIlEnd(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -9767,9 +9767,9 @@ asm(".set FUN_00065c40, _FUN_00065c40");
 asm(".globl FUN_00065c80");
 asm(".set FUN_00065c80, _noop_65c80");
 asm(".globl FUN_00065c90");
-asm(".set FUN_00065c90, _FUN_00065c90");
+asm(".set FUN_00065c90, _arbEmitIlHeader");
 asm(".globl FUN_00065de0");
-asm(".set FUN_00065de0, _FUN_00065de0");
+asm(".set FUN_00065de0, _arbEmitIlEnd");
 asm(".globl FUN_00065ea0");
 asm(".set FUN_00065ea0, _arbEmitIlDp4");
 asm(".globl FUN_00066640");
