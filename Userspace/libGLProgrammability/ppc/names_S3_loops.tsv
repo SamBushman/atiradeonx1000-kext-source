@@ -211,7 +211,7 @@ use	_DetectConstantLoopsSimple	uVar8	loopIndex	INFERRED	initialised to a literal
 use	_UnrollConstantLoopsSimple	uVar9	newOpIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#82	+113	all	all
 use	_PPParserMacroCreateFromMacro	uVar4	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#1	+14	all	all
 use	_PPParserParseAddressDeclaration	uVar3	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#3	+35	all	all
-use	_PPParserParseAddressDeclaration	uVar4	loopIndex2	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#30	+8	all	all
+use	_PPParserParseAddressDeclaration	uVar4	usageIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#30	+8	all	all
 use	_PPParserParseMacroDeclaration	uVar6	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#31	+12	all	all
 use	_PPParserExpandMacro	uVar8	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#19	+30	all	all
 use	std____default_alloc_template_true_0____S_refill	iVar2	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#8	+0	all	all
