@@ -1252,7 +1252,7 @@ int _PPParserParseStatement(parser)
   undefined4 uVar5;
   undefined4 uVar6;
   undefined4 uVar7;
-  undefined4 in_r9;
+  undefined4 leftoverR9;
   uint uVar8;
   int iVar9;
   int *opsList;
@@ -1512,7 +1512,7 @@ LAB_97b7e328:
                             }
                             uVar7 = 0;
 LAB_97b7e334:
-                            ppParserParseOperationResult = ((int (*)())_PPParserParseOperation)(parser,iVar1,uVar4,uVar5,uVar6,uVar7,in_r9);
+                            ppParserParseOperationResult = ((int (*)())_PPParserParseOperation)(parser,iVar1,uVar4,uVar5,uVar6,uVar7,leftoverR9);
                             return ppParserParseOperationResult;
                           }
 LAB_97b7e11c:

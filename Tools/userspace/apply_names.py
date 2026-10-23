@@ -13,7 +13,7 @@ named way), INFERRED (the role is clear from use, nothing names it) or UNKNOWN (
 `from`/`to` are regexes over the function's lines AS GHIDRA WROTE THEM (lines are matched with every rename of the function taken back, so a table
 stays valid after it was applied). `from` may end in @N (Nth matching line, default 1); the segment starts at that line and runs up to, not
 including, the first later line matching `to` (empty `to` = end of function). One `new` name belongs to one `old` per function; a function with
-`use` rows for a variable must not also have a `local` row for it. The declaration of `new` is added next to old's (same type); old's declaration is
+`use` rows for a variable must not also have a `local` row for it. `from` = `*` names every occurrence of `old` the earlier rows left (the rest of the function; such a row must come last: table files apply in name order). The declaration of `new` is added next to old's (same type); old's declaration is
 dropped when nothing uses it any more. Only locals (declared after the `{`) can be split.
 
     func<TAB>OLDNAME<TAB>NEWNAME<TAB>tier<TAB>evidence     rename the FUNCTION `OLDNAME` (its Ghidra name, normally FUN_<addr>) to NEWNAME everywhere the corpus names it:
@@ -203,6 +203,8 @@ def apply_uses(lines, s, e, name, uses, allrows, declset):
         if frm.startswith('#'):                # '#L': L lines after the end of the declarations (machine-written rows); '+N' as `to`: N lines after `from`
             a = d1 + int(frm[1:])
             if a >= e: print('%s:%d: %s: line anchor %s beyond the function' % (f, n, fn, frm)); nerr += 1; continue
+        elif frm == '*':                       # `*` as `from`: the rest of the function (every still-unrenamed occurrence of `old`); keep such rows after the rows that carve out the other segments
+            a = brace + 1
         else:
             m = re.match(r'(.*)@(\d+)$', frm); pat, k = (m.group(1), int(m.group(2))) if m else (frm, 1)
             hits = [i for i in range(brace + 1, e) if hit(pat, i)]

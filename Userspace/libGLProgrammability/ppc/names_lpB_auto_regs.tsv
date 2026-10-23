@@ -1,0 +1,79 @@
+local	_PPParserParseStatement	in_r9	leftoverR9	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_PPStreamChunkListRemoveChunk	extraout_r3	extraOut1	INFERRED	Ghidra extra-output of a register after a call; only forwarded
+local	_PPParserParseTextureSourceVar	extraout_r4_01	extraOut1	INFERRED	Ghidra extra-output of a register after a call; only forwarded
+local	_PPStreamFree	extraout_r3	extraOut1	INFERRED	Ghidra extra-output of a register after a call; only forwarded
+local	_FreeStringTable	extraout_r3	extraOut1	INFERRED	Ghidra extra-output of a register after a call; only forwarded
+local	_CPPif	extraout_r4	extraOut1	INFERRED	Ghidra extra-output of a register after a call; only forwarded
+local	_CPPif	in_r5	leftoverR5	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_CPPif	in_r6	leftoverR6	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_CPPif	in_r7	leftoverR7	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_CPPif	in_r8	leftoverR8	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_CPPifdef	in_r5	leftoverR5	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_CPPifdef	in_r6	leftoverR6	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_CPPifdef	in_r7	leftoverR7	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_CPPifdef	in_r8	leftoverR8	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_CPPline	extraout_r4	extraOut1	INFERRED	Ghidra extra-output of a register after a call; only forwarded
+local	_CPPline	extraout_r4_00	extraOut2	INFERRED	Ghidra extra-output of a register after a call; only forwarded
+local	_CPPline	extraout_r4_01	extraOut3	INFERRED	Ghidra extra-output of a register after a call; only forwarded
+local	_CPPline	extraout_r4_02	extraOut4	INFERRED	Ghidra extra-output of a register after a call; only forwarded
+local	_CPPline	in_r5	leftoverR5	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_CPPline	in_r6	leftoverR6	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_CPPline	in_r7	leftoverR7	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_CPPline	in_r8	leftoverR8	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_CPPline	in_r9	leftoverR9	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_CPPerror	extraout_r4	extraOut1	INFERRED	Ghidra extra-output of a register after a call; only forwarded
+local	_CPPerror	in_r5	leftoverR5	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_CPPerror	in_r6	leftoverR6	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_CPPerror	in_r7	leftoverR7	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_CPPerror	in_r8	leftoverR8	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_CPPerror	in_r9	leftoverR9	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_CPPpragma	extraout_r4	extraOut1	INFERRED	Ghidra extra-output of a register after a call; only forwarded
+local	_CPPpragma	extraout_r4_00	extraOut2	INFERRED	Ghidra extra-output of a register after a call; only forwarded
+local	_CPPpragma	extraout_r4_01	extraOut3	INFERRED	Ghidra extra-output of a register after a call; only forwarded
+local	_CPPpragma	extraout_r4_02	extraOut4	INFERRED	Ghidra extra-output of a register after a call; only forwarded
+local	_CPPpragma	in_r5	leftoverR5	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_CPPpragma	in_r6	leftoverR6	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_CPPpragma	in_r7	leftoverR7	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_CPPversion	extraout_r4	extraOut1	INFERRED	Ghidra extra-output of a register after a call; only forwarded
+local	_CPPversion	extraout_r4_00	extraOut2	INFERRED	Ghidra extra-output of a register after a call; only forwarded
+local	_CPPversion	extraout_r4_01	extraOut3	INFERRED	Ghidra extra-output of a register after a call; only forwarded
+local	_CPPversion	extraout_r4_02	extraOut4	INFERRED	Ghidra extra-output of a register after a call; only forwarded
+local	_CPPversion	extraout_r4_03	extraOut5	INFERRED	Ghidra extra-output of a register after a call; only forwarded
+local	_CPPversion	in_r6	leftoverR6	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_CPPversion	in_r7	leftoverR7	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_CPPversion	in_r8	leftoverR8	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_CPPextension	extraout_r4	extraOut1	INFERRED	Ghidra extra-output of a register after a call; only forwarded
+local	_CPPextension	extraout_r4_00	extraOut2	INFERRED	Ghidra extra-output of a register after a call; only forwarded
+local	_CPPextension	extraout_r4_01	extraOut3	INFERRED	Ghidra extra-output of a register after a call; only forwarded
+local	_CPPextension	extraout_r4_02	extraOut4	INFERRED	Ghidra extra-output of a register after a call; only forwarded
+local	_CPPextension	extraout_r4_03	extraOut5	INFERRED	Ghidra extra-output of a register after a call; only forwarded
+local	_CPPextension	in_r5	leftoverR5	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_CPPextension	in_r6	leftoverR6	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_CPPextension	in_r7	leftoverR7	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_CPPextension	in_r8	leftoverR8	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_CPPextension	in_r9	leftoverR9	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_readCPPline	extraout_r4	extraOut1	INFERRED	Ghidra extra-output of a register after a call; only forwarded
+local	_readCPPline	extraout_r4_00	extraOut2	INFERRED	Ghidra extra-output of a register after a call; only forwarded
+local	_readCPPline	extraout_r4_01	extraOut3	INFERRED	Ghidra extra-output of a register after a call; only forwarded
+local	_readCPPline	in_r5	leftoverR5	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_readCPPline	in_r6	leftoverR6	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_readCPPline	in_r7	leftoverR7	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_readCPPline	in_r8	leftoverR8	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_readCPPline	in_r9	leftoverR9	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_MacroExpand	extraout_r4	extraOut1	INFERRED	Ghidra extra-output of a register after a call; only forwarded
+local	_MacroExpand	extraout_r4_00	extraOut2	INFERRED	Ghidra extra-output of a register after a call; only forwarded
+local	_MacroExpand	in_r6	leftoverR6	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_MacroExpand	in_r7	leftoverR7	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_MacroExpand	in_r8	leftoverR8	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_lBuildFloatValue	in_r6	leftoverR6	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_lBuildFloatValue	in_r7	leftoverR7	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_lBuildFloatValue	in_r8	leftoverR8	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_InterpreterRun	extraout_f1	unaffected_ut_f1	INFERRED	Ghidra unaffected-register artifact; only forwarded
+local	_InterpreterRun	extraout_f1_00	unaffected_ut_f1_00	INFERRED	Ghidra unaffected-register artifact; only forwarded
+local	_InterpreterRun	extraout_r4	extraOut1	INFERRED	Ghidra extra-output of a register after a call; only forwarded
+local	_InterpreterRun	extraout_r4_00	extraOut2	INFERRED	Ghidra extra-output of a register after a call; only forwarded
+local	_InterpreterRun	extraout_r4_01	extraOut3	INFERRED	Ghidra extra-output of a register after a call; only forwarded
+local	_InterpreterRun	in_r5	leftoverR5	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_InterpreterRun	in_r6	leftoverR6	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_InterpreterRun	in_r7	leftoverR7	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
+local	_InterpreterRun	in_r8	leftoverR8	INFERRED	Ghidra input-register artifact (never assigned); only forwarded
