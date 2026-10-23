@@ -1,196 +1,197 @@
 #include "decls.h"
 
 /* _PPStreamRemoveOperation @ 0x97bf2714 (192 bytes) */
-int _PPStreamRemoveOperation(stream, param_2)
+int _PPStreamRemoveOperation(stream, opChunk)
   int stream;
-  int param_2;
+  int opChunk;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  int iVar5;
+  uint removedFlagBits;
+  uint nextWord0;
+  uint oldTargetIndex;
+  uint newTargetIndex;
+  int nextChunk;
   
-  iVar5 = *(int *)(param_2 + 8);
-  if (iVar5 != 0) {
-    uVar2 = *(uint *)(iVar5 + 0xc);
-    uVar1 = (*(uint *)(param_2 + 0xc) >> 0x1a & 7) << 0x1a;
-    *(uint *)(iVar5 + 0xc) = uVar1 | uVar2 & 0xe3ffffff;
-    uVar3 = *(uint *)(param_2 + 0xc) & 0x3ffff;
-    if (uVar3 == 0) {
-      uVar4 = 0;
-      uVar3 = *(uint *)(*(int *)(param_2 + 8) + 0xc);
-      *(uint *)(iVar5 + 0xc) = uVar1 | uVar2 & 0xe3fc0000;
-      uVar3 = uVar3 & 0x3ffff;
+  nextChunk = *(int *)(opChunk + 8);
+  if (nextChunk != 0) {
+    nextWord0 = *(uint *)(nextChunk + 0xc);
+    removedFlagBits = (*(uint *)(opChunk + 0xc) >> 0x1a & 7) << 0x1a;
+    *(uint *)(nextChunk + 0xc) = removedFlagBits | nextWord0 & 0xe3ffffff;
+    oldTargetIndex = *(uint *)(opChunk + 0xc) & 0x3ffff;
+    if (oldTargetIndex == 0) {
+      newTargetIndex = 0;
+      oldTargetIndex = *(uint *)(*(int *)(opChunk + 8) + 0xc);
+      *(uint *)(nextChunk + 0xc) = removedFlagBits | nextWord0 & 0xe3fc0000;
+      oldTargetIndex = oldTargetIndex & 0x3ffff;
     }
     else {
-      uVar4 = uVar2 & 0x3ffff;
+      newTargetIndex = nextWord0 & 0x3ffff;
     }
-    _renumberLabels(**(undefined4 **)(stream + 0x24),uVar3,uVar4,0);
-    _renumberTargets(**(undefined4 **)(stream + 0x20),uVar3,uVar4,0);
+    _renumberLabels(**(undefined4 **)(stream + 0x24),oldTargetIndex,newTargetIndex,0);
+    _renumberTargets(**(undefined4 **)(stream + 0x20),oldTargetIndex,newTargetIndex,0);
   }
-  _PPStreamChunkListRemoveChunk(*(undefined4 *)(stream + 0x20),param_2);
-  return iVar5;
+  _PPStreamChunkListRemoveChunk(*(undefined4 *)(stream + 0x20),opChunk);
+  return nextChunk;
 }
 
 /* _adjustAllocation_97bf27d4 @ 0x97bf27d4 (124 bytes) */
-int _adjustAllocation_97bf27d4(param_1, param_2, param_3)
-  int *param_1;
-  int *param_2;
-  int *param_3;
+int _adjustAllocation_97bf27d4(capacityPtr, bufferPtr, cursorPtr)
+  int *capacityPtr;
+  int *bufferPtr;
+  int *cursorPtr;
 {
   int allocation;
-  int iVar1;
-  int iVar2;
-  int iVar3;
+  int oldBuffer;
+  int newCapacity;
+  int oldCursor;
   
-  iVar1 = *param_2;
-  iVar3 = *param_3;
-  if (*param_1 - (iVar3 - iVar1) < 0x800) {
-    iVar2 = *param_1 + 0x1000;
-    *param_1 = iVar2;
-    allocation = _realloc(*param_2,iVar2);
-    *param_3 = allocation;
+  oldBuffer = *bufferPtr;
+  oldCursor = *cursorPtr;
+  if (*capacityPtr - (oldCursor - oldBuffer) < 0x800) {
+    newCapacity = *capacityPtr + 0x1000;
+    *capacityPtr = newCapacity;
+    allocation = _realloc(*bufferPtr,newCapacity);
+    *cursorPtr = allocation;
     if (allocation == 0) {
       return 0;
     }
-    *param_2 = allocation;
-    *param_3 = allocation + (iVar3 - iVar1);
+    *bufferPtr = allocation;
+    *cursorPtr = allocation + (oldCursor - oldBuffer);
   }
   return 1;
 }
 
 /* _ncpy_97bf2850 @ 0x97bf2850 (144 bytes) */
-int _ncpy_97bf2850(param_1, param_2)
-  char *param_1;
-  int param_2;
+int _ncpy_97bf2850(out, value)
+  char *out;
+  int value;
 {
-  int iVar1;
-  char *local_20 [4];
+  int leadingValue;
+  char *writeCursor [4];
   
-  local_20[0] = param_1;
-  if (param_2 < 0) {
-    local_20[0] = param_1 + 1;
-    *param_1 = '-';
-    param_2 = -param_2;
+  writeCursor[0] = out;
+  if (value < 0) {
+    writeCursor[0] = out + 1;
+    *out = '-';
+    value = -value;
   }
-  iVar1 = param_2 / 10;
-  if (iVar1 != 0) {
-    ((int (*)())_handleDigit_97c05b70)(local_20,iVar1);
+  leadingValue = value / 10;
+  if (leadingValue != 0) {
+    ((int (*)())_handleDigit_97c05b70)(writeCursor,leadingValue);
   }
-  *local_20[0] = (char)param_2 + (char)iVar1 * -10 + '0';
-  return local_20[0] + (1 - (int)param_1);
+  *writeCursor[0] = (char)value + (char)leadingValue * -10 + '0';
+  return writeCursor[0] + (1 - (int)out);
 }
 
 /* _glpSourceSign @ 0x97bf28e0 (180 bytes) */
-int _glpSourceSign(param_1, param_2, param_3, param_4)
-  int param_1;
-  int param_2;
-  int param_3;
-  uint param_4;
+int _glpSourceSign(operands, out, operandIndex, invert)
+  int operands;
+  int out;
+  int operandIndex;
+  uint invert;
 {
   char ch;
   int copyIndex;
   
-  if ((param_4 & 1) == 0) {
-    if ((*(uint *)(param_1 + param_3 * 8) & 0x8000000) == 0) {
-      return param_2;
+  if ((invert & 1) == 0) {
+    if ((*(uint *)(operands + operandIndex * 8) & 0x8000000) == 0) {
+      return out;
     }
     copyIndex = 0;
     ch = s___97c2a2d4[0];
     while (ch != '\0') {
-      *(char *)(param_2 + copyIndex) = ch;
+      *(char *)(out + copyIndex) = ch;
       ch = "-"[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
   }
   else {
-    if ((*(uint *)(param_1 + param_3 * 8) & 0x8000000) != 0) {
-      return param_2;
+    if ((*(uint *)(operands + operandIndex * 8) & 0x8000000) != 0) {
+      return out;
     }
     copyIndex = 0;
     ch = s___97c2a2d4[0];
     while (ch != '\0') {
-      *(char *)(param_2 + copyIndex) = ch;
+      *(char *)(out + copyIndex) = ch;
       ch = "-"[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
   }
-  return param_2 + copyIndex;
+  return out + copyIndex;
 }
 
 /* _glpSourceType @ 0x97bf2994 (1080 bytes) */
-int _glpSourceType(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int param_1;
-  int param_2;
-  int param_3;
-  int param_4;
-  int param_5;
-  uint param_6;
-  uint param_7;
+int _glpSourceType(operands, out, paramNumberMap, paramArrayMap, operandIndex, rowOffset, printFlags)
+  int operands;
+  int out;
+  int paramNumberMap;
+  int paramArrayMap;
+  int operandIndex;
+  uint rowOffset;
+  uint printFlags;
 {
+  uint addressComponent;
   int copyIndex2;
   int copyEnd2;
   int copyEnd;
   int copyEnd3;
   char ch;
-  uint uVar2;
-  int iVar3;
-  int iVar4;
+  uint registerFile;
+  int textCursor;
+  int bracketCursor;
   int copyIndex;
-  int iVar6;
+  int operandByteOffset;
   
-  if ((param_7 & 0x10) != 0) {
-    if (param_6 == 1) {
-      param_6 = *(uint *)(param_1 + 8) >> 6 & 3;
+  if ((printFlags & 0x10) != 0) {
+    if (rowOffset == 1) {
+      rowOffset = *(uint *)(operands + 8) >> 6 & 3;
     }
-    else if ((int)param_6 < 2) {
-      if (param_6 == 0) {
-        param_6 = *(uint *)(param_1 + 8) >> 8 & 3;
+    else if ((int)rowOffset < 2) {
+      if (rowOffset == 0) {
+        rowOffset = *(uint *)(operands + 8) >> 8 & 3;
       }
     }
-    else if (param_6 == 2) {
-      param_6 = *(uint *)(param_1 + 8) >> 4 & 3;
+    else if (rowOffset == 2) {
+      rowOffset = *(uint *)(operands + 8) >> 4 & 3;
     }
-    else if (param_6 == 3) {
-      param_6 = *(uint *)(param_1 + 8) >> 2 & 3;
+    else if (rowOffset == 3) {
+      rowOffset = *(uint *)(operands + 8) >> 2 & 3;
     }
   }
-  iVar6 = param_5 * 8;
-  uVar2 = *(uint *)(iVar6 + param_1) >> 0x17 & 7;
-  if (uVar2 == 1) {
+  operandByteOffset = operandIndex * 8;
+  registerFile = *(uint *)(operandByteOffset + operands) >> 0x17 & 7;
+  if (registerFile == 1) {
     copyIndex = 0;
     ch = s_tmp_97c2d76c[0];
     while (ch != '\0') {
-      *(char *)(param_2 + copyIndex) = ch;
+      *(char *)(out + copyIndex) = ch;
       ch = "tmp"[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
 LAB_97bf2d98:
-    copyEnd2 = ((int (*)())_ncpy_97bf2850)(param_2 + copyIndex,*(ushort *)(iVar6 + param_1 + 6) + param_6);
-    return param_2 + copyIndex + copyEnd2;
+    copyEnd2 = ((int (*)())_ncpy_97bf2850)(out + copyIndex,*(ushort *)(operandByteOffset + operands + 6) + rowOffset);
+    return out + copyIndex + copyEnd2;
   }
-  if (uVar2 < 2) {
-    if (uVar2 != 0) {
-      return param_2;
+  if (registerFile < 2) {
+    if (registerFile != 0) {
+      return out;
     }
     copyIndex = 0;
     ch = s_att_97c2d7e4[0];
     while (ch != '\0') {
-      *(char *)(param_2 + copyIndex) = ch;
+      *(char *)(out + copyIndex) = ch;
       ch = "att"[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
     goto LAB_97bf2d98;
   }
-  if (uVar2 != 2) {
-    if (uVar2 != 3) {
-      return param_2;
+  if (registerFile != 2) {
+    if (registerFile != 3) {
+      return out;
     }
     copyIndex = 0;
     ch = s_res_97c2d774[0];
     while (ch != '\0') {
-      *(char *)(param_2 + copyIndex) = ch;
+      *(char *)(out + copyIndex) = ch;
       ch = "res"[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
@@ -199,31 +200,31 @@ LAB_97bf2d98:
   copyIndex = 0;
   ch = s_prm_97c2d7e8[0];
   while (ch != '\0') {
-    *(char *)(param_2 + copyIndex) = ch;
+    *(char *)(out + copyIndex) = ch;
     ch = "prm"[copyIndex + 1];
     copyIndex = copyIndex + 1;
   }
-  copyEnd3 = ((int (*)())_ncpy_97bf2850)(param_2 + copyIndex,
-                         *(int *)(param_3 + (uint)*(ushort *)(iVar6 + param_1 + 6) * 4) + param_6);
-  iVar3 = param_2 + copyIndex + copyEnd3;
-  if (-1 < *(int *)(iVar6 + param_1)) {
-    if (*(int *)(param_4 + (uint)*(ushort *)(iVar6 + param_1 + 6) * 4) == -1) {
-      return iVar3;
+  copyEnd3 = ((int (*)())_ncpy_97bf2850)(out + copyIndex,
+                         *(int *)(paramNumberMap + (uint)*(ushort *)(operandByteOffset + operands + 6) * 4) + rowOffset);
+  textCursor = out + copyIndex + copyEnd3;
+  if (-1 < *(int *)(operandByteOffset + operands)) {
+    if (*(int *)(paramArrayMap + (uint)*(ushort *)(operandByteOffset + operands + 6) * 4) == -1) {
+      return textCursor;
     }
     copyIndex = 0;
     ch = s___97c29860[0];
     while (ch != '\0') {
-      *(char *)(iVar3 + copyIndex) = ch;
+      *(char *)(textCursor + copyIndex) = ch;
       ch = "["[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    copyEnd = ((int (*)())_ncpy_97bf2850)(iVar3 + copyIndex,
-                           *(undefined4 *)(param_4 + (uint)*(ushort *)(iVar6 + param_1 + 6) * 4));
-    iVar4 = iVar3 + copyIndex + copyEnd;
+    copyEnd = ((int (*)())_ncpy_97bf2850)(textCursor + copyIndex,
+                           *(undefined4 *)(paramArrayMap + (uint)*(ushort *)(operandByteOffset + operands + 6) * 4));
+    bracketCursor = textCursor + copyIndex + copyEnd;
     copyIndex2 = 0;
     ch = s___97c2d770[0];
     while (ch != '\0') {
-      *(char *)(iVar4 + copyIndex2) = ch;
+      *(char *)(bracketCursor + copyIndex2) = ch;
       ch = "]"[copyIndex2 + 1];
       copyIndex2 = copyIndex2 + 1;
     }
@@ -232,52 +233,52 @@ LAB_97bf2d98:
   copyIndex = 0;
   ch = s__adr_97c2d778[0];
   while (ch != '\0') {
-    *(char *)(iVar3 + copyIndex) = ch;
+    *(char *)(textCursor + copyIndex) = ch;
     ch = "[adr"[copyIndex + 1];
     copyIndex = copyIndex + 1;
   }
-  copyEnd = ((int (*)())_ncpy_97bf2850)(iVar3 + copyIndex,*(uint *)(iVar6 + param_1) >> 0x1e & 1);
-  iVar4 = iVar3 + copyIndex + copyEnd;
-  uVar2 = *(uint *)(iVar6 + param_1) >> 0x1c & 3;
-  if (uVar2 == 1) {
+  copyEnd = ((int (*)())_ncpy_97bf2850)(textCursor + copyIndex,*(uint *)(operandByteOffset + operands) >> 0x1e & 1);
+  bracketCursor = textCursor + copyIndex + copyEnd;
+  addressComponent = *(uint *)(operandByteOffset + operands) >> 0x1c & 3;
+  if (addressComponent == 1) {
     copyIndex2 = 0;
     ch = s__y_97c2d784[0];
     while (ch != '\0') {
-      *(char *)(iVar4 + copyIndex2) = ch;
+      *(char *)(bracketCursor + copyIndex2) = ch;
       ch = ".y"[copyIndex2 + 1];
       copyIndex2 = copyIndex2 + 1;
     }
 LAB_97bf2c84:
-    iVar4 = iVar4 + copyIndex2;
+    bracketCursor = bracketCursor + copyIndex2;
   }
   else {
-    if (1 < uVar2) {
-      if (uVar2 == 2) {
+    if (1 < addressComponent) {
+      if (addressComponent == 2) {
         copyIndex2 = 0;
         ch = s__z_97c2d788[0];
         while (ch != '\0') {
-          *(char *)(iVar4 + copyIndex2) = ch;
+          *(char *)(bracketCursor + copyIndex2) = ch;
           ch = ".z"[copyIndex2 + 1];
           copyIndex2 = copyIndex2 + 1;
         }
       }
       else {
-        if (uVar2 != 3) goto LAB_97bf2c88;
+        if (addressComponent != 3) goto LAB_97bf2c88;
         copyIndex2 = 0;
         ch = s__w_97c2d78c[0];
         while (ch != '\0') {
-          *(char *)(iVar4 + copyIndex2) = ch;
+          *(char *)(bracketCursor + copyIndex2) = ch;
           ch = ".w"[copyIndex2 + 1];
           copyIndex2 = copyIndex2 + 1;
         }
       }
       goto LAB_97bf2c84;
     }
-    if (uVar2 == 0) {
+    if (addressComponent == 0) {
       copyIndex2 = 0;
       ch = s__x_97c2d780[0];
       while (ch != '\0') {
-        *(char *)(iVar4 + copyIndex2) = ch;
+        *(char *)(bracketCursor + copyIndex2) = ch;
         ch = ".x"[copyIndex2 + 1];
         copyIndex2 = copyIndex2 + 1;
       }
@@ -288,85 +289,86 @@ LAB_97bf2c88:
   copyIndex2 = 0;
   ch = s___97c2d770[0];
   while (ch != '\0') {
-    *(char *)(iVar4 + copyIndex2) = ch;
+    *(char *)(bracketCursor + copyIndex2) = ch;
     ch = "]"[copyIndex2 + 1];
     copyIndex2 = copyIndex2 + 1;
   }
 LAB_97bf2d5c:
-  return iVar4 + copyIndex2;
+  return bracketCursor + copyIndex2;
 }
 
 /* _glpSourceComponents @ 0x97bf2dcc (504 bytes) */
-int _glpSourceComponents(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  char *param_2;
-  int param_3;
-  uint param_4;
-  uint param_5;
+int _glpSourceComponents(inst, out, operandIndex, destSwizzleOrComponent, printFlags)
+  int inst;
+  char *out;
+  int operandIndex;
+  uint destSwizzleOrComponent;
+  uint printFlags;
 {
+  int componentCount;
   int copyIndex;
   char ch;
-  uint uVar2;
+  uint bitShift;
   int copyIndex2;
-  uint uVar4;
-  uint uVar5;
-  char *pcVar6;
-  uint uVar7;
-  uint uVar8;
-  uint uVar9;
-  int iVar10;
+  uint destSwizzle;
+  uint shiftAmount;
+  char *textCursor;
+  uint sourceSwizzle;
+  uint finalSwizzle;
+  uint nibbleShift;
+  int componentsLeft;
   
-  uVar7 = 0x3210;
-  if ((param_5 & 0x40) == 0) {
-    uVar7 = *(uint *)(param_1 + param_3 * 8);
-    uVar7 = uVar7 >> 3 & 0x3000 | uVar7 >> 9 & 0x300 | uVar7 >> 0xf & 0x30 | uVar7 >> 0x15 & 3;
+  sourceSwizzle = 0x3210;
+  if ((printFlags & 0x40) == 0) {
+    sourceSwizzle = *(uint *)(inst + operandIndex * 8);
+    sourceSwizzle = sourceSwizzle >> 3 & 0x3000 | sourceSwizzle >> 9 & 0x300 | sourceSwizzle >> 0xf & 0x30 | sourceSwizzle >> 0x15 & 3;
   }
-  uVar8 = uVar7;
-  if ((param_5 & 0xc) != 0) {
-    uVar4 = param_4;
-    if ((param_5 & 4) == 0) {
-      uVar4 = *(uint *)(param_1 + 8);
-      uVar4 = (uVar4 & 0xc) << 10 | (uVar4 & 0x30) << 4 | uVar4 >> 2 & 0x30 | uVar4 >> 8 & 3;
+  finalSwizzle = sourceSwizzle;
+  if ((printFlags & 0xc) != 0) {
+    destSwizzle = destSwizzleOrComponent;
+    if ((printFlags & 4) == 0) {
+      destSwizzle = *(uint *)(inst + 8);
+      destSwizzle = (destSwizzle & 0xc) << 10 | (destSwizzle & 0x30) << 4 | destSwizzle >> 2 & 0x30 | destSwizzle >> 8 & 3;
     }
-    if (uVar4 != 0x3210) {
-      iVar10 = 4;
-      uVar9 = 0;
-      uVar8 = 0;
+    if (destSwizzle != 0x3210) {
+      componentsLeft = 4;
+      nibbleShift = 0;
+      finalSwizzle = 0;
       do {
-        uVar2 = uVar9 & 0x3f;
-        uVar5 = (uVar4 & 3) * 4 - uVar9;
-        if ((int)uVar5 < 1) {
-          uVar5 = uVar7 << (-uVar5 & 0x3f);
+        bitShift = nibbleShift & 0x3f;
+        shiftAmount = (destSwizzle & 3) * 4 - nibbleShift;
+        if ((int)shiftAmount < 1) {
+          shiftAmount = sourceSwizzle << (-shiftAmount & 0x3f);
         }
         else {
-          uVar5 = (int)uVar7 >> (uVar5 & 0x3f);
+          shiftAmount = (int)sourceSwizzle >> (shiftAmount & 0x3f);
         }
-        uVar9 = uVar9 + 4;
-        uVar8 = uVar8 | uVar5 & 3 << uVar2;
-        uVar4 = (int)uVar4 >> 4;
-        iVar10 = iVar10 + -1;
-      } while (iVar10 != 0);
+        nibbleShift = nibbleShift + 4;
+        finalSwizzle = finalSwizzle | shiftAmount & 3 << bitShift;
+        destSwizzle = (int)destSwizzle >> 4;
+        componentsLeft = componentsLeft + -1;
+      } while (componentsLeft != 0);
     }
   }
-  if ((param_5 & 2) == 0) {
-    iVar10 = 4;
-    if ((*(uint *)(param_1 + param_3 * 8) & 0x3000) == 0) {
-      iVar10 = 1;
+  if ((printFlags & 2) == 0) {
+    componentCount = 4;
+    if ((*(uint *)(inst + operandIndex * 8) & 0x3000) == 0) {
+      componentCount = 1;
     }
-    if (uVar8 != 0x3210) {
+    if (finalSwizzle != 0x3210) {
       copyIndex2 = 0;
       ch = s___97c2a130[0];
       while (ch != '\0') {
-        param_2[copyIndex2] = ch;
+        out[copyIndex2] = ch;
         ch = "."[copyIndex2 + 1];
         copyIndex2 = copyIndex2 + 1;
       }
-      param_2 = param_2 + copyIndex2;
-      for (; iVar10 != 0; iVar10 = iVar10 + -1) {
-        ch = (char)uVar8;
-        uVar8 = (int)uVar8 >> 4;
-        *param_2 = (ch + 1U & 3) + 0x77;
-        param_2 = param_2 + 1;
+      out = out + copyIndex2;
+      for (; componentCount != 0; componentCount = componentCount + -1) {
+        ch = (char)finalSwizzle;
+        finalSwizzle = (int)finalSwizzle >> 4;
+        *out = (ch + 1U & 3) + 0x77;
+        out = out + 1;
       }
     }
   }
@@ -374,223 +376,223 @@ int _glpSourceComponents(param_1, param_2, param_3, param_4, param_5)
     copyIndex = 0;
     ch = s___97c2a130[0];
     while (ch != '\0') {
-      param_2[copyIndex] = ch;
+      out[copyIndex] = ch;
       ch = "."[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    pcVar6 = param_2 + copyIndex;
-    if (param_4 == 1) {
-      uVar8 = (int)uVar8 >> 4;
+    textCursor = out + copyIndex;
+    if (destSwizzleOrComponent == 1) {
+      finalSwizzle = (int)finalSwizzle >> 4;
     }
-    else if ((int)param_4 < 2) {
-      if (param_4 != 0) {
-        return pcVar6;
+    else if ((int)destSwizzleOrComponent < 2) {
+      if (destSwizzleOrComponent != 0) {
+        return textCursor;
       }
     }
-    else if (param_4 == 2) {
-      uVar8 = (int)uVar8 >> 8;
+    else if (destSwizzleOrComponent == 2) {
+      finalSwizzle = (int)finalSwizzle >> 8;
     }
     else {
-      if (param_4 != 3) {
-        return pcVar6;
+      if (destSwizzleOrComponent != 3) {
+        return textCursor;
       }
-      uVar8 = (int)uVar8 >> 0xc;
+      finalSwizzle = (int)finalSwizzle >> 0xc;
     }
-    param_2[copyIndex] = ((char)uVar8 + 1U & 3) + 0x77;
-    param_2 = pcVar6 + 1;
+    out[copyIndex] = ((char)finalSwizzle + 1U & 3) + 0x77;
+    out = textCursor + 1;
   }
-  return param_2;
+  return out;
 }
 
 /* _glpWriteComponentsWithDestinationSwizzle @ 0x97bf2fc4 (244 bytes) */
-int _glpWriteComponentsWithDestinationSwizzle(param_1, param_2)
-  int param_1;
-  char *param_2;
+int _glpWriteComponentsWithDestinationSwizzle(inst, out)
+  int inst;
+  char *out;
 {
   int copyIndex;
   int loopIndex;
   char ch;
-  uint uVar2;
-  uint uVar3;
-  char *pcVar4;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  int iVar8;
+  uint bitShift;
+  uint shiftAmount;
+  char *textCursor;
+  uint nibbleShift;
+  uint resultSwizzle;
+  uint destSwizzle;
+  int componentsLeft;
   
-  uVar7 = *(uint *)(param_1 + 8);
-  uVar7 = (uVar7 & 0xc) << 10 | (uVar7 & 0x30) << 4 | uVar7 >> 2 & 0x30 | uVar7 >> 8 & 3;
-  if (uVar7 == 0x3210) {
-    return param_2;
+  destSwizzle = *(uint *)(inst + 8);
+  destSwizzle = (destSwizzle & 0xc) << 10 | (destSwizzle & 0x30) << 4 | destSwizzle >> 2 & 0x30 | destSwizzle >> 8 & 3;
+  if (destSwizzle == 0x3210) {
+    return out;
   }
-  iVar8 = 4;
-  uVar6 = 0;
-  uVar5 = 0;
+  componentsLeft = 4;
+  resultSwizzle = 0;
+  nibbleShift = 0;
   do {
-    uVar2 = uVar5 & 0x3f;
-    uVar3 = (uVar7 & 3) * 4 - uVar5;
-    if ((int)uVar3 < 1) {
-      uVar3 = 0x3210 << (-uVar3 & 0x3f);
+    bitShift = nibbleShift & 0x3f;
+    shiftAmount = (destSwizzle & 3) * 4 - nibbleShift;
+    if ((int)shiftAmount < 1) {
+      shiftAmount = 0x3210 << (-shiftAmount & 0x3f);
     }
     else {
-      uVar3 = 0x3210 >> (uVar3 & 0x3f);
+      shiftAmount = 0x3210 >> (shiftAmount & 0x3f);
     }
-    uVar5 = uVar5 + 4;
-    uVar6 = uVar6 | uVar3 & 3 << uVar2;
-    uVar7 = (int)uVar7 >> 4;
-    iVar8 = iVar8 + -1;
-  } while (iVar8 != 0);
-  if (uVar6 != 0x3210) {
+    nibbleShift = nibbleShift + 4;
+    resultSwizzle = resultSwizzle | shiftAmount & 3 << bitShift;
+    destSwizzle = (int)destSwizzle >> 4;
+    componentsLeft = componentsLeft + -1;
+  } while (componentsLeft != 0);
+  if (resultSwizzle != 0x3210) {
     copyIndex = 0;
     ch = s___97c2a130[0];
     while (ch != '\0') {
-      param_2[copyIndex] = ch;
+      out[copyIndex] = ch;
       ch = "."[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
-    pcVar4 = param_2 + copyIndex;
+    textCursor = out + copyIndex;
     loopIndex = 0;
     do {
       loopIndex = loopIndex + 1;
-      ch = (char)uVar6;
-      uVar6 = (int)uVar6 >> 4;
-      *pcVar4 = (ch + 1U & 3) + 0x77;
-      pcVar4 = pcVar4 + 1;
+      ch = (char)resultSwizzle;
+      resultSwizzle = (int)resultSwizzle >> 4;
+      *textCursor = (ch + 1U & 3) + 0x77;
+      textCursor = textCursor + 1;
     } while (loopIndex < 4);
-    return pcVar4;
+    return textCursor;
   }
-  return param_2;
+  return out;
 }
 
 /* _glpWriteSourceOperand_97bf30b8 @ 0x97bf30b8 (128 bytes) */
-int _glpWriteSourceOperand_97bf30b8(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int _glpWriteSourceOperand_97bf30b8(inst, out, paramNumberMap, paramArrayMap, operandIndex, rowOffset, destSwizzleOrComponent, printFlags)
+  undefined4 inst;
+  undefined4 out;
+  undefined4 paramNumberMap;
+  undefined4 paramArrayMap;
+  undefined4 operandIndex;
+  undefined4 rowOffset;
+  undefined4 destSwizzleOrComponent;
+  undefined4 printFlags;
 {
   undefined4 glpSourceComponentsResult;
   undefined4 glpSourceTypeResult;
   undefined4 glpSourceSignResult;
   
-  glpSourceSignResult = ((int (*)())_glpSourceSign)(param_1,param_2,param_5,param_8);
-  glpSourceTypeResult = ((int (*)())_glpSourceType)(param_1,glpSourceSignResult,param_3,param_4,param_5,param_6,param_8);
-  glpSourceComponentsResult = ((int (*)())_glpSourceComponents)(param_1,glpSourceTypeResult,param_5,param_7,param_8);
+  glpSourceSignResult = ((int (*)())_glpSourceSign)(inst,out,operandIndex,printFlags);
+  glpSourceTypeResult = ((int (*)())_glpSourceType)(inst,glpSourceSignResult,paramNumberMap,paramArrayMap,operandIndex,rowOffset,printFlags);
+  glpSourceComponentsResult = ((int (*)())_glpSourceComponents)(inst,glpSourceTypeResult,operandIndex,destSwizzleOrComponent,printFlags);
   return glpSourceComponentsResult;
 }
 
 /* _glpWriteDestinationMask @ 0x97bf3138 (1312 bytes) */
-int _glpWriteDestinationMask(param_1, param_2, param_3, param_4)
-  int param_1;
-  int param_2;
-  int param_3;
-  uint param_4;
+int _glpWriteDestinationMask(inst, out, maskStyle, printFlags)
+  int inst;
+  int out;
+  int maskStyle;
+  uint printFlags;
 {
   int copyIndex2;
   int copyIndex;
-  uint uVar1;
+  uint maskWord;
   char ch;
-  int iVar3;
-  int iVar4;
-  int iVar5;
+  int copyLength;
+  int copyIndex3;
+  int writeCursor;
   
-  if ((param_4 & 2) == 0) {
-    uVar1 = *(uint *)(param_1 + 8);
-    if ((uVar1 & 0x1e000) == 0x1e000) {
-      return param_2;
+  if ((printFlags & 2) == 0) {
+    maskWord = *(uint *)(inst + 8);
+    if ((maskWord & 0x1e000) == 0x1e000) {
+      return out;
     }
-    iVar5 = 0;
-    iVar4 = iVar5;
+    writeCursor = 0;
+    copyIndex3 = writeCursor;
     ch = s___97c2a130[0];
     if (s___97c2a130[0] != '\0') {
       do {
-        *(char *)(param_2 + iVar4) = ch;
-        iVar5 = iVar4 + 1;
-        ch = "."[iVar4 + 1];
-        iVar4 = iVar5;
+        *(char *)(out + copyIndex3) = ch;
+        writeCursor = copyIndex3 + 1;
+        ch = "."[copyIndex3 + 1];
+        copyIndex3 = writeCursor;
       } while (ch != '\0');
-      uVar1 = *(uint *)(param_1 + 8);
+      maskWord = *(uint *)(inst + 8);
     }
-    iVar5 = param_2 + iVar5;
-    if ((uVar1 & 0x2000) != 0) {
-      iVar3 = 0;
-      iVar4 = iVar3;
+    writeCursor = out + writeCursor;
+    if ((maskWord & 0x2000) != 0) {
+      copyLength = 0;
+      copyIndex3 = copyLength;
       ch = s_x_97c2d790[0];
       if (s_x_97c2d790[0] != '\0') {
         do {
-          *(char *)(iVar5 + iVar4) = ch;
-          iVar3 = iVar4 + 1;
-          ch = "x"[iVar4 + 1];
-          iVar4 = iVar3;
+          *(char *)(writeCursor + copyIndex3) = ch;
+          copyLength = copyIndex3 + 1;
+          ch = "x"[copyIndex3 + 1];
+          copyIndex3 = copyLength;
         } while (ch != '\0');
-        uVar1 = *(uint *)(param_1 + 8);
+        maskWord = *(uint *)(inst + 8);
       }
-      iVar5 = iVar5 + iVar3;
+      writeCursor = writeCursor + copyLength;
     }
-    if ((uVar1 & 0x4000) != 0) {
-      iVar3 = 0;
-      iVar4 = iVar3;
+    if ((maskWord & 0x4000) != 0) {
+      copyLength = 0;
+      copyIndex3 = copyLength;
       ch = s_y_97c2d794[0];
       if (s_y_97c2d794[0] != '\0') {
         do {
-          *(char *)(iVar5 + iVar4) = ch;
-          iVar3 = iVar4 + 1;
-          ch = "y"[iVar4 + 1];
-          iVar4 = iVar3;
+          *(char *)(writeCursor + copyIndex3) = ch;
+          copyLength = copyIndex3 + 1;
+          ch = "y"[copyIndex3 + 1];
+          copyIndex3 = copyLength;
         } while (ch != '\0');
-        uVar1 = *(uint *)(param_1 + 8);
+        maskWord = *(uint *)(inst + 8);
       }
-      iVar5 = iVar5 + iVar3;
+      writeCursor = writeCursor + copyLength;
     }
-    if ((uVar1 & 0x8000) != 0) {
-      iVar3 = 0;
-      iVar4 = iVar3;
+    if ((maskWord & 0x8000) != 0) {
+      copyLength = 0;
+      copyIndex3 = copyLength;
       ch = s_z_97c2d798[0];
       if (s_z_97c2d798[0] != '\0') {
         do {
-          *(char *)(iVar5 + iVar4) = ch;
-          iVar3 = iVar4 + 1;
-          ch = "z"[iVar4 + 1];
-          iVar4 = iVar3;
+          *(char *)(writeCursor + copyIndex3) = ch;
+          copyLength = copyIndex3 + 1;
+          ch = "z"[copyIndex3 + 1];
+          copyIndex3 = copyLength;
         } while (ch != '\0');
-        uVar1 = *(uint *)(param_1 + 8);
+        maskWord = *(uint *)(inst + 8);
       }
-      iVar5 = iVar5 + iVar3;
+      writeCursor = writeCursor + copyLength;
     }
-    if ((uVar1 & 0x10000) == 0) {
-      return iVar5;
+    if ((maskWord & 0x10000) == 0) {
+      return writeCursor;
     }
     copyIndex = 0;
     ch = s_w_97c2d79c[0];
     while (ch != '\0') {
-      *(char *)(iVar5 + copyIndex) = ch;
+      *(char *)(writeCursor + copyIndex) = ch;
       ch = "w"[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
   }
-  else if (param_3 == 1) {
+  else if (maskStyle == 1) {
     copyIndex2 = 0;
     ch = s___97c2a130[0];
     while (ch != '\0') {
-      *(char *)(param_2 + copyIndex2) = ch;
+      *(char *)(out + copyIndex2) = ch;
       ch = "."[copyIndex2 + 1];
       copyIndex2 = copyIndex2 + 1;
     }
-    uVar1 = *(uint *)(param_1 + 8);
-    iVar5 = param_2 + copyIndex2;
-    if ((uVar1 & 0x4000) == 0) {
-      if ((uVar1 & 0x8000) == 0) {
-        if ((uVar1 & 0x10000) == 0) {
-          return iVar5;
+    maskWord = *(uint *)(inst + 8);
+    writeCursor = out + copyIndex2;
+    if ((maskWord & 0x4000) == 0) {
+      if ((maskWord & 0x8000) == 0) {
+        if ((maskWord & 0x10000) == 0) {
+          return writeCursor;
         }
         copyIndex = 0;
         ch = s_w_97c2d79c[0];
         while (ch != '\0') {
-          *(char *)(iVar5 + copyIndex) = ch;
+          *(char *)(writeCursor + copyIndex) = ch;
           ch = "w"[copyIndex + 1];
           copyIndex = copyIndex + 1;
         }
@@ -599,7 +601,7 @@ int _glpWriteDestinationMask(param_1, param_2, param_3, param_4)
         copyIndex = 0;
         ch = s_z_97c2d798[0];
         while (ch != '\0') {
-          *(char *)(iVar5 + copyIndex) = ch;
+          *(char *)(writeCursor + copyIndex) = ch;
           ch = "z"[copyIndex + 1];
           copyIndex = copyIndex + 1;
         }
@@ -609,35 +611,35 @@ int _glpWriteDestinationMask(param_1, param_2, param_3, param_4)
       copyIndex = 0;
       ch = s_y_97c2d794[0];
       while (ch != '\0') {
-        *(char *)(iVar5 + copyIndex) = ch;
+        *(char *)(writeCursor + copyIndex) = ch;
         ch = "y"[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
     }
   }
-  else if (param_3 < 2) {
-    if (param_3 != 0) {
-      return param_2;
+  else if (maskStyle < 2) {
+    if (maskStyle != 0) {
+      return out;
     }
     copyIndex2 = 0;
     ch = s___97c2a130[0];
     while (ch != '\0') {
-      *(char *)(param_2 + copyIndex2) = ch;
+      *(char *)(out + copyIndex2) = ch;
       ch = "."[copyIndex2 + 1];
       copyIndex2 = copyIndex2 + 1;
     }
-    uVar1 = *(uint *)(param_1 + 8);
-    iVar5 = param_2 + copyIndex2;
-    if ((uVar1 & 0x2000) == 0) {
-      if ((uVar1 & 0x4000) == 0) {
-        if ((uVar1 & 0x8000) == 0) {
-          if ((uVar1 & 0x10000) == 0) {
-            return iVar5;
+    maskWord = *(uint *)(inst + 8);
+    writeCursor = out + copyIndex2;
+    if ((maskWord & 0x2000) == 0) {
+      if ((maskWord & 0x4000) == 0) {
+        if ((maskWord & 0x8000) == 0) {
+          if ((maskWord & 0x10000) == 0) {
+            return writeCursor;
           }
           copyIndex = 0;
           ch = s_w_97c2d79c[0];
           while (ch != '\0') {
-            *(char *)(iVar5 + copyIndex) = ch;
+            *(char *)(writeCursor + copyIndex) = ch;
             ch = "w"[copyIndex + 1];
             copyIndex = copyIndex + 1;
           }
@@ -646,7 +648,7 @@ int _glpWriteDestinationMask(param_1, param_2, param_3, param_4)
           copyIndex = 0;
           ch = s_z_97c2d798[0];
           while (ch != '\0') {
-            *(char *)(iVar5 + copyIndex) = ch;
+            *(char *)(writeCursor + copyIndex) = ch;
             ch = "z"[copyIndex + 1];
             copyIndex = copyIndex + 1;
           }
@@ -656,7 +658,7 @@ int _glpWriteDestinationMask(param_1, param_2, param_3, param_4)
         copyIndex = 0;
         ch = s_y_97c2d794[0];
         while (ch != '\0') {
-          *(char *)(iVar5 + copyIndex) = ch;
+          *(char *)(writeCursor + copyIndex) = ch;
           ch = "y"[copyIndex + 1];
           copyIndex = copyIndex + 1;
         }
@@ -666,29 +668,29 @@ int _glpWriteDestinationMask(param_1, param_2, param_3, param_4)
       copyIndex = 0;
       ch = s_x_97c2d790[0];
       while (ch != '\0') {
-        *(char *)(iVar5 + copyIndex) = ch;
+        *(char *)(writeCursor + copyIndex) = ch;
         ch = "x"[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
     }
   }
-  else if (param_3 == 2) {
+  else if (maskStyle == 2) {
     copyIndex2 = 0;
     ch = s___97c2a130[0];
     while (ch != '\0') {
-      *(char *)(param_2 + copyIndex2) = ch;
+      *(char *)(out + copyIndex2) = ch;
       ch = "."[copyIndex2 + 1];
       copyIndex2 = copyIndex2 + 1;
     }
-    iVar5 = param_2 + copyIndex2;
-    if ((*(uint *)(param_1 + 8) & 0x8000) == 0) {
-      if ((*(uint *)(param_1 + 8) & 0x10000) == 0) {
-        return iVar5;
+    writeCursor = out + copyIndex2;
+    if ((*(uint *)(inst + 8) & 0x8000) == 0) {
+      if ((*(uint *)(inst + 8) & 0x10000) == 0) {
+        return writeCursor;
       }
       copyIndex = 0;
       ch = s_w_97c2d79c[0];
       while (ch != '\0') {
-        *(char *)(iVar5 + copyIndex) = ch;
+        *(char *)(writeCursor + copyIndex) = ch;
         ch = "w"[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
@@ -697,219 +699,220 @@ int _glpWriteDestinationMask(param_1, param_2, param_3, param_4)
       copyIndex = 0;
       ch = s_z_97c2d798[0];
       while (ch != '\0') {
-        *(char *)(iVar5 + copyIndex) = ch;
+        *(char *)(writeCursor + copyIndex) = ch;
         ch = "z"[copyIndex + 1];
         copyIndex = copyIndex + 1;
       }
     }
   }
   else {
-    if (param_3 != 3) {
-      return param_2;
+    if (maskStyle != 3) {
+      return out;
     }
     copyIndex2 = 0;
     ch = s___97c2a130[0];
     while (ch != '\0') {
-      *(char *)(param_2 + copyIndex2) = ch;
+      *(char *)(out + copyIndex2) = ch;
       ch = "."[copyIndex2 + 1];
       copyIndex2 = copyIndex2 + 1;
     }
-    iVar5 = param_2 + copyIndex2;
-    if ((*(uint *)(param_1 + 8) & 0x10000) == 0) {
-      return iVar5;
+    writeCursor = out + copyIndex2;
+    if ((*(uint *)(inst + 8) & 0x10000) == 0) {
+      return writeCursor;
     }
     copyIndex = 0;
     ch = s_w_97c2d79c[0];
     while (ch != '\0') {
-      *(char *)(iVar5 + copyIndex) = ch;
+      *(char *)(writeCursor + copyIndex) = ch;
       ch = "w"[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
   }
-  return iVar5 + copyIndex;
+  return writeCursor + copyIndex;
 }
 
 /* _glpWriteDestinationOperand_97bf3658 @ 0x97bf3658 (348 bytes) */
-int _glpWriteDestinationOperand_97bf3658(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  int param_2;
-  int param_3;
-  undefined4 param_4;
-  uint param_5;
+int _glpWriteDestinationOperand_97bf3658(inst, out, registerOffset, maskArg, printFlags)
+  int inst;
+  int out;
+  int registerOffset;
+  undefined4 maskArg;
+  uint printFlags;
 {
   int copyEnd;
   char ch;
-  uint uVar2;
+  uint registerFile;
   int copyIndex;
-  undefined4 uVar4;
+  undefined4 suffixEnd;
   
-  uVar2 = *(uint *)(param_1 + 8) >> 0x11 & 7;
-  if (uVar2 == 3) {
+  registerFile = *(uint *)(inst + 8) >> 0x11 & 7;
+  if (registerFile == 3) {
     copyIndex = 0;
     ch = s_res_97c2d774[0];
     while (ch != '\0') {
-      *(char *)(param_2 + copyIndex) = ch;
+      *(char *)(out + copyIndex) = ch;
       ch = "res"[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
   }
-  else if (uVar2 < 4) {
-    if (uVar2 != 1) goto LAB_97bf3754;
+  else if (registerFile < 4) {
+    if (registerFile != 1) goto LAB_97bf3754;
     copyIndex = 0;
     ch = s_tmp_97c2d76c[0];
     while (ch != '\0') {
-      *(char *)(param_2 + copyIndex) = ch;
+      *(char *)(out + copyIndex) = ch;
       ch = "tmp"[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
   }
   else {
-    if (uVar2 != 4) goto LAB_97bf3754;
+    if (registerFile != 4) goto LAB_97bf3754;
     copyIndex = 0;
     ch = s_adr_97c2d7e0[0];
     while (ch != '\0') {
-      *(char *)(param_2 + copyIndex) = ch;
+      *(char *)(out + copyIndex) = ch;
       ch = "adr"[copyIndex + 1];
       copyIndex = copyIndex + 1;
     }
   }
-  param_2 = param_2 + copyIndex;
+  out = out + copyIndex;
 LAB_97bf3754:
-  copyEnd = ((int (*)())_ncpy_97bf2850)(param_2,(uint)*(ushort *)(param_1 + 0xe) + param_3);
-  if ((param_5 & 0x40) == 0) {
-    uVar4 = ((int (*)())_glpWriteDestinationMask)(param_1,param_2 + copyEnd,param_4,param_5);
+  copyEnd = ((int (*)())_ncpy_97bf2850)(out,(uint)*(ushort *)(inst + 0xe) + registerOffset);
+  if ((printFlags & 0x40) == 0) {
+    suffixEnd = ((int (*)())_glpWriteDestinationMask)(inst,out + copyEnd,maskArg,printFlags);
   }
   else {
-    uVar4 = ((int (*)())_glpSourceComponents)(param_1,param_2 + copyEnd,1,param_4,param_5);
+    suffixEnd = ((int (*)())_glpSourceComponents)(inst,out + copyEnd,1,maskArg,printFlags);
   }
-  return uVar4;
+  return suffixEnd;
 }
 
 /* _glpWriteTextureOperand_97bf37b4 @ 0x97bf37b4 (760 bytes) */
-int _glpWriteTextureOperand_97bf37b4(param_1, param_2, param_3, param_4)
-  int param_1;
-  int param_2;
-  int param_3;
-  int param_4;
+int _glpWriteTextureOperand_97bf37b4(operands, out, operandIndex, unitNumberTable)
+  int operands;
+  int out;
+  int operandIndex;
+  int unitNumberTable;
 {
+  int copyIndex3;
   int copyIndex2;
   int copyIndex;
   char ch;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
+  int unitTextLength;
+  int operandByteOffset;
+  int unitCursor;
+  int targetCursor;
   
   copyIndex = 0;
   ch = s_texture__97c2d814[0];
   while (ch != '\0') {
-    *(char *)(param_2 + copyIndex) = ch;
+    *(char *)(out + copyIndex) = ch;
     ch = "texture["[copyIndex + 1];
     copyIndex = copyIndex + 1;
   }
-  iVar4 = param_2 + copyIndex;
-  if (param_4 == 0) {
-    iVar2 = 0;
+  unitCursor = out + copyIndex;
+  if (unitNumberTable == 0) {
+    unitTextLength = 0;
     ch = s_0_97c2d800[0];
     while (ch != '\0') {
-      *(char *)(iVar4 + iVar2) = ch;
-      ch = "0"[iVar2 + 1];
-      iVar2 = iVar2 + 1;
+      *(char *)(unitCursor + unitTextLength) = ch;
+      ch = "0"[unitTextLength + 1];
+      unitTextLength = unitTextLength + 1;
     }
-    iVar3 = param_3 << 3;
+    operandByteOffset = operandIndex << 3;
   }
   else {
-    iVar3 = param_3 * 8;
-    iVar2 = ((int (*)())_ncpy_97bf2850)(iVar4,*(undefined4 *)
-                                  (param_4 + (uint)*(ushort *)(iVar3 + param_1 + 6) * 0x10));
+    operandByteOffset = operandIndex * 8;
+    unitTextLength = ((int (*)())_ncpy_97bf2850)(unitCursor,*(undefined4 *)
+                                  (unitNumberTable + (uint)*(ushort *)(operandByteOffset + operands + 6) * 0x10));
   }
   copyIndex2 = 0;
   ch = s____97c2d820[0];
   while (ch != '\0') {
-    *(char *)(iVar4 + iVar2 + copyIndex2) = ch;
+    *(char *)(unitCursor + unitTextLength + copyIndex2) = ch;
     ch = "], "[copyIndex2 + 1];
     copyIndex2 = copyIndex2 + 1;
   }
-  iVar5 = iVar4 + iVar2 + copyIndex2;
-  switch(*(uint *)(iVar3 + param_1) >> 5 & 7) {
+  targetCursor = unitCursor + unitTextLength + copyIndex2;
+  switch(*(uint *)(operandByteOffset + operands) >> 5 & 7) {
   case 0:
-    iVar4 = 0;
+    copyIndex3 = 0;
     ch = s_CUBE_97c2d830[0];
     while (ch != '\0') {
-      *(char *)(iVar5 + iVar4) = ch;
-      ch = "CUBE"[iVar4 + 1];
-      iVar4 = iVar4 + 1;
+      *(char *)(targetCursor + copyIndex3) = ch;
+      ch = "CUBE"[copyIndex3 + 1];
+      copyIndex3 = copyIndex3 + 1;
     }
     break;
   case 1:
-    iVar4 = 0;
+    copyIndex3 = 0;
     ch = s_3D_97c2d82c[0];
     while (ch != '\0') {
-      *(char *)(iVar5 + iVar4) = ch;
-      ch = "3D"[iVar4 + 1];
-      iVar4 = iVar4 + 1;
+      *(char *)(targetCursor + copyIndex3) = ch;
+      ch = "3D"[copyIndex3 + 1];
+      copyIndex3 = copyIndex3 + 1;
     }
     break;
   case 2:
-    iVar4 = 0;
+    copyIndex3 = 0;
     ch = s_RECT_97c2d838[0];
     while (ch != '\0') {
-      *(char *)(iVar5 + iVar4) = ch;
-      ch = "RECT"[iVar4 + 1];
-      iVar4 = iVar4 + 1;
+      *(char *)(targetCursor + copyIndex3) = ch;
+      ch = "RECT"[copyIndex3 + 1];
+      copyIndex3 = copyIndex3 + 1;
     }
     break;
   case 3:
-    iVar4 = 0;
+    copyIndex3 = 0;
     ch = s_2D_97c2d828[0];
     while (ch != '\0') {
-      *(char *)(iVar5 + iVar4) = ch;
-      ch = "2D"[iVar4 + 1];
-      iVar4 = iVar4 + 1;
+      *(char *)(targetCursor + copyIndex3) = ch;
+      ch = "2D"[copyIndex3 + 1];
+      copyIndex3 = copyIndex3 + 1;
     }
     break;
   case 4:
-    iVar4 = 0;
+    copyIndex3 = 0;
     ch = s_1D_97c2d824[0];
     while (ch != '\0') {
-      *(char *)(iVar5 + iVar4) = ch;
-      ch = "1D"[iVar4 + 1];
-      iVar4 = iVar4 + 1;
+      *(char *)(targetCursor + copyIndex3) = ch;
+      ch = "1D"[copyIndex3 + 1];
+      copyIndex3 = copyIndex3 + 1;
     }
     break;
   case 5:
-    iVar4 = 0;
+    copyIndex3 = 0;
     ch = s_SHADOWRECT_97c2d840[0];
     while (ch != '\0') {
-      *(char *)(iVar5 + iVar4) = ch;
-      ch = "SHADOWRECT"[iVar4 + 1];
-      iVar4 = iVar4 + 1;
+      *(char *)(targetCursor + copyIndex3) = ch;
+      ch = "SHADOWRECT"[copyIndex3 + 1];
+      copyIndex3 = copyIndex3 + 1;
     }
     break;
   case 6:
-    iVar4 = 0;
+    copyIndex3 = 0;
     ch = s_SHADOW2D_97c2d84c[0];
     while (ch != '\0') {
-      *(char *)(iVar5 + iVar4) = ch;
-      ch = "SHADOW2D"[iVar4 + 1];
-      iVar4 = iVar4 + 1;
+      *(char *)(targetCursor + copyIndex3) = ch;
+      ch = "SHADOW2D"[copyIndex3 + 1];
+      copyIndex3 = copyIndex3 + 1;
     }
     break;
   case 7:
-    iVar4 = 0;
+    copyIndex3 = 0;
     ch = s_SHADOW1D_97c2d858[0];
     while (ch != '\0') {
-      *(char *)(iVar5 + iVar4) = ch;
-      ch = "SHADOW1D"[iVar4 + 1];
-      iVar4 = iVar4 + 1;
+      *(char *)(targetCursor + copyIndex3) = ch;
+      ch = "SHADOW1D"[copyIndex3 + 1];
+      copyIndex3 = copyIndex3 + 1;
     }
     break;
   default:
     goto switchD_97bf38d0_default;
   }
-  iVar5 = iVar5 + iVar4;
+  targetCursor = targetCursor + copyIndex3;
 switchD_97bf38d0_default:
-  return iVar5;
+  return targetCursor;
 }
 
 /* _glpDisassemble2Op @ 0x97bf3acc (56112 bytes) */
@@ -926,6 +929,11 @@ int _glpDisassemble2Op(inst, outText, outWordCount, outTextLength, paramNumbers,
   int shaderType;
   undefined4 optionFlags;
 {
+  int copyIndex12;
+  uint valueType;
+  uint stateFlags1;
+  uint src3SizeMinusOne;
+  bool isFirstRow;
   int swizzleSelect;
   int nextComponent;
   int outLen;
@@ -967,19 +975,19 @@ int _glpDisassemble2Op(inst, outText, outWordCount, outTextLength, paramNumbers,
   int copyIndex5;
   int outCursor3;
   int copyIndex;
-  bool bVar1;
+  bool destOverlapsSource;
   undefined *opStringTable;
   char ch;
   char *mnemonic;
   int outLen2;
   int outStart;
   int swizzleSelect2;
-  uint uVar8;
-  uint uVar9;
+  uint src1Word0;
+  uint rowIndex;
   uint writeMaskBits3;
-  int iVar11;
+  int componentIndex;
   int nextComponent2;
-  int iVar13;
+  int swizzleSelect3;
   
   opStringTable = PTR__ppstreamOpString_a7b7c108;
   instWord0 = *inst;
@@ -3846,7 +3854,7 @@ LAB_97bfb2c8:
       outStart = outCursor + copyIndex;
     }
     else {
-      iVar11 = 0;
+      componentIndex = 0;
       do {
         copyIndex2 = 0;
         ch = s_RCP_scratch__97c2e5f0[0];
@@ -3855,7 +3863,7 @@ LAB_97bfb2c8:
           ch = "RCP scratch."[copyIndex2 + 1];
           copyIndex2 = copyIndex2 + 1;
         }
-        nextComponent = iVar11 + 1;
+        nextComponent = componentIndex + 1;
         outPtr = (char *)(outStart + copyIndex2);
         *outPtr = ((byte)nextComponent & 3) + 0x77;
         copyIndex3 = 0;
@@ -3865,7 +3873,7 @@ LAB_97bfb2c8:
           ch = ", "[copyIndex3 + 1];
           copyIndex3 = copyIndex3 + 1;
         }
-        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outPtr + copyIndex3 + 1,paramNumbers,paramArrayPos,3,0,iVar11,10);
+        outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outPtr + copyIndex3 + 1,paramNumbers,paramArrayPos,3,0,componentIndex,10);
         copyIndex = 0;
         ch = s___97c2d8f8[0];
         while (ch != '\0') {
@@ -3874,7 +3882,7 @@ LAB_97bfb2c8:
           copyIndex = copyIndex + 1;
         }
         outStart = outCursor + copyIndex;
-        iVar11 = nextComponent;
+        componentIndex = nextComponent;
       } while (nextComponent <= (int)(inst[6] >> 0xc & 3));
     }
     copyIndex = 0;
@@ -3934,14 +3942,14 @@ LAB_97bfb2c8:
     break;
   case 0x22:
   case 0x4e:
-    bVar1 = false;
+    destOverlapsSource = false;
     if ((*(short *)((int)inst + 0xe) == *(short *)((int)inst + 0x16)) ||
        (*(short *)((int)inst + 0xe) == *(short *)((int)inst + 0x1e))) {
-      bVar1 = true;
+      destOverlapsSource = true;
     }
-    uVar8 = inst[4];
-    if (((uVar8 & 0x4000) == 0) || ((inst[6] & 0x4000) == 0)) {
-      if (((uVar8 & 0x4000) == 0) && ((inst[6] & 0x4000) == 0)) {
+    src1Word0 = inst[4];
+    if (((src1Word0 & 0x4000) == 0) || ((inst[6] & 0x4000) == 0)) {
+      if (((src1Word0 & 0x4000) == 0) && ((inst[6] & 0x4000) == 0)) {
         copyIndex = 0;
         ch = s_MUL_97c2e4f0[0];
         while (ch != '\0') {
@@ -3975,7 +3983,7 @@ LAB_97bfb2c8:
         }
         break;
       }
-      if (((uVar8 & 0x3000) == 0) || (opcode = inst[6] >> 0xc & 3, opcode == 0)) {
+      if (((src1Word0 & 0x3000) == 0) || (opcode = inst[6] >> 0xc & 3, opcode == 0)) {
         loopIndex = 0;
         do {
           copyIndex2 = 0;
@@ -4021,8 +4029,8 @@ LAB_97bfb2c8:
           outStart = outCursor + copyIndex2;
         } while (loopIndex <= (int)(inst[2] >> 10 & 3));
       }
-      else if ((uVar8 & 0x4000) == 0) {
-        if (bVar1) {
+      else if ((src1Word0 & 0x4000) == 0) {
+        if (destOverlapsSource) {
           if ((opcode != 1) || (((stateFlags[1] & 0x800000) != 0 && (shaderType == 0x8b30)))) {
             *stateFlags = *stateFlags | 1;
             writeMaskBits = inst[2];
@@ -4317,40 +4325,40 @@ LAB_97bfb2c8:
       }
       else {
         *stateFlags = *stateFlags | 1;
-        uVar8 = inst[4];
-        uVar9 = 0;
+        src1Word0 = inst[4];
+        rowIndex = 0;
         do {
-          if (uVar9 == 0) {
+          if (rowIndex == 0) {
             outLen2 = 0;
-            iVar11 = outLen2;
+            copyIndex12 = outLen2;
             ch = s_MUL_97c2e4f0[0];
             if (s_MUL_97c2e4f0[0] != '\0') {
               do {
-                *(char *)(outStart + iVar11) = ch;
-                outLen2 = iVar11 + 1;
-                ch = "MUL "[iVar11 + 1];
-                iVar11 = outLen2;
+                *(char *)(outStart + copyIndex12) = ch;
+                outLen2 = copyIndex12 + 1;
+                ch = "MUL "[copyIndex12 + 1];
+                copyIndex12 = outLen2;
               } while (ch != '\0');
               goto LAB_97bf6dac;
             }
           }
           else {
             outLen2 = 0;
-            iVar11 = outLen2;
+            copyIndex12 = outLen2;
             ch = s_MAD_97c2e644[0];
             if (s_MAD_97c2e644[0] != '\0') {
               do {
-                *(char *)(outStart + iVar11) = ch;
-                outLen2 = iVar11 + 1;
-                ch = "MAD "[iVar11 + 1];
-                iVar11 = outLen2;
+                *(char *)(outStart + copyIndex12) = ch;
+                outLen2 = copyIndex12 + 1;
+                ch = "MAD "[copyIndex12 + 1];
+                copyIndex12 = outLen2;
               } while (ch != '\0');
 LAB_97bf6dac:
-              uVar8 = inst[4];
+              src1Word0 = inst[4];
             }
           }
           outCursor = outStart + outLen2;
-          if (uVar9 == (uVar8 >> 0xc & 3)) {
+          if (rowIndex == (src1Word0 >> 0xc & 3)) {
             outCursor = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor,0,0,0);
             copyIndex = 0;
             ch = s___97c2d7ec[0];
@@ -4369,7 +4377,7 @@ LAB_97bf6dac:
               copyIndex = copyIndex + 1;
             }
           }
-          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,uVar9,0,8);
+          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,rowIndex,0,8);
           copyIndex = 0;
           ch = s___97c2d7ec[0];
           while (ch != '\0') {
@@ -4377,8 +4385,8 @@ LAB_97bf6dac:
             ch = ", "[copyIndex + 1];
             copyIndex = copyIndex + 1;
           }
-          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,uVar9,2);
-          if (uVar9 == 0) {
+          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,rowIndex,2);
+          if (rowIndex == 0) {
             copyIndex = 0;
             ch = s___97c2d8f8[0];
             while (ch != '\0') {
@@ -4396,17 +4404,17 @@ LAB_97bf6dac:
               copyIndex = copyIndex + 1;
             }
           }
-          uVar8 = inst[4];
+          src1Word0 = inst[4];
           outStart = outCursor + copyIndex;
-          uVar9 = uVar9 + 1;
-        } while ((int)uVar9 <= (int)(uVar8 >> 0xc & 3));
+          rowIndex = rowIndex + 1;
+        } while ((int)rowIndex <= (int)(src1Word0 >> 0xc & 3));
       }
     }
     else {
       *stateFlags = *stateFlags | 1;
       sizeMinusOne = inst[2] >> 10 & 3;
       if (sizeMinusOne == 1) {
-        iVar11 = 0;
+        componentIndex = 0;
         do {
           copyIndex2 = 0;
           ch = s_MUL_scratch__97c2e62c[0];
@@ -4423,7 +4431,7 @@ LAB_97bf6dac:
             ch = ", "[copyIndex3 + 1];
             copyIndex3 = copyIndex3 + 1;
           }
-          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,3,0,iVar11,2);
+          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,3,0,componentIndex,2);
           copyIndex3 = 0;
           ch = s___97c2d8f8[0];
           while (ch != '\0') {
@@ -4439,8 +4447,8 @@ LAB_97bf6dac:
             copyIndex4 = copyIndex4 + 1;
           }
           outCursor4 = outCursor2 + copyIndex3 + copyIndex4;
-          if (!bVar1) {
-            outCursor = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor4,iVar11,0,0);
+          if (!destOverlapsSource) {
+            outCursor = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor4,componentIndex,0,0);
           }
           else {
             copyIndex2 = 0;
@@ -4450,10 +4458,10 @@ LAB_97bf6dac:
               ch = "scratch"[copyIndex2 + 1];
               copyIndex2 = copyIndex2 + 1;
             }
-            copyEnd = ((int (*)())_ncpy_97bf2850)(outCursor4 + copyIndex2,iVar11 + 1);
+            copyEnd = ((int (*)())_ncpy_97bf2850)(outCursor4 + copyIndex2,componentIndex + 1);
             outCursor = outCursor4 + copyIndex2 + copyEnd;
           }
-          nextComponent = iVar11 + 1;
+          nextComponent = componentIndex + 1;
           copyIndex2 = 0;
           ch = s___97c2d7ec[0];
           while (ch != '\0') {
@@ -4469,7 +4477,7 @@ LAB_97bf6dac:
             ch = ", "[copyIndex3 + 1];
             copyIndex3 = copyIndex3 + 1;
           }
-          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,3,1,iVar11,2);
+          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,3,1,componentIndex,2);
           copyIndex = 0;
           ch = s___scratch__97c2e620[0];
           while (ch != '\0') {
@@ -4478,14 +4486,14 @@ LAB_97bf6dac:
             copyIndex = copyIndex + 1;
           }
           outStart = outCursor + copyIndex;
-          iVar11 = nextComponent;
+          componentIndex = nextComponent;
         } while (nextComponent <= (int)(inst[2] >> 10 & 3));
-        if (bVar1) {
+        if (destOverlapsSource) {
           flagWord = *stateFlags | 6;
 LAB_97bf68e0:
           *stateFlags = flagWord;
 LAB_97bf68e4:
-          if (bVar1) {
+          if (destOverlapsSource) {
             loopIndex = 0;
             do {
               copyIndex2 = 0;
@@ -4519,7 +4527,7 @@ LAB_97bf68e4:
         }
       }
       else if (sizeMinusOne == 2) {
-        iVar11 = 0;
+        componentIndex = 0;
         do {
           copyIndex2 = 0;
           ch = s_MUL_scratch__97c2e62c[0];
@@ -4536,7 +4544,7 @@ LAB_97bf68e4:
             ch = ", "[copyIndex3 + 1];
             copyIndex3 = copyIndex3 + 1;
           }
-          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,3,0,iVar11,2);
+          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,3,0,componentIndex,2);
           copyIndex3 = 0;
           ch = s___97c2d8f8[0];
           while (ch != '\0') {
@@ -4559,7 +4567,7 @@ LAB_97bf68e4:
             ch = ", "[copyIndex3 + 1];
             copyIndex3 = copyIndex3 + 1;
           }
-          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,3,1,iVar11,2);
+          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,3,1,componentIndex,2);
           copyIndex3 = 0;
           ch = s___scratch__97c2e620[0];
           while (ch != '\0') {
@@ -4575,8 +4583,8 @@ LAB_97bf68e4:
             copyIndex4 = copyIndex4 + 1;
           }
           outCursor4 = outCursor2 + copyIndex3 + copyIndex4;
-          if (!bVar1) {
-            outCursor = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor4,iVar11,0,0);
+          if (!destOverlapsSource) {
+            outCursor = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor4,componentIndex,0,0);
           }
           else {
             copyIndex2 = 0;
@@ -4586,10 +4594,10 @@ LAB_97bf68e4:
               ch = "scratch"[copyIndex2 + 1];
               copyIndex2 = copyIndex2 + 1;
             }
-            copyEnd = ((int (*)())_ncpy_97bf2850)(outCursor4 + copyIndex2,iVar11 + 1);
+            copyEnd = ((int (*)())_ncpy_97bf2850)(outCursor4 + copyIndex2,componentIndex + 1);
             outCursor = outCursor4 + copyIndex2 + copyEnd;
           }
-          nextComponent = iVar11 + 1;
+          nextComponent = componentIndex + 1;
           copyIndex2 = 0;
           ch = s___97c2d7ec[0];
           while (ch != '\0') {
@@ -4605,7 +4613,7 @@ LAB_97bf68e4:
             ch = ", "[copyIndex3 + 1];
             copyIndex3 = copyIndex3 + 1;
           }
-          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,3,2,iVar11,2);
+          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,3,2,componentIndex,2);
           copyIndex = 0;
           ch = s___scratch__97c2e620[0];
           while (ch != '\0') {
@@ -4614,16 +4622,16 @@ LAB_97bf68e4:
             copyIndex = copyIndex + 1;
           }
           outStart = outCursor + copyIndex;
-          iVar11 = nextComponent;
+          componentIndex = nextComponent;
         } while (nextComponent <= (int)(inst[2] >> 10 & 3));
-        if (bVar1) {
+        if (destOverlapsSource) {
           flagWord = *stateFlags | 0xe;
           goto LAB_97bf68e0;
         }
       }
       else {
         if (sizeMinusOne != 3) goto LAB_97bf68e4;
-        iVar11 = 0;
+        componentIndex = 0;
         do {
           copyIndex2 = 0;
           ch = s_MUL_scratch__97c2e62c[0];
@@ -4640,7 +4648,7 @@ LAB_97bf68e4:
             ch = ", "[copyIndex3 + 1];
             copyIndex3 = copyIndex3 + 1;
           }
-          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,3,0,iVar11,2);
+          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,3,0,componentIndex,2);
           copyIndex3 = 0;
           ch = s___97c2d8f8[0];
           while (ch != '\0') {
@@ -4663,7 +4671,7 @@ LAB_97bf68e4:
             ch = ", "[copyIndex3 + 1];
             copyIndex3 = copyIndex3 + 1;
           }
-          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,3,1,iVar11,2);
+          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,3,1,componentIndex,2);
           copyIndex3 = 0;
           ch = s___scratch__97c2e620[0];
           while (ch != '\0') {
@@ -4686,7 +4694,7 @@ LAB_97bf68e4:
             ch = ", "[copyIndex3 + 1];
             copyIndex3 = copyIndex3 + 1;
           }
-          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,3,2,iVar11,2);
+          outCursor2 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,3,2,componentIndex,2);
           copyIndex3 = 0;
           ch = s___scratch__97c2e620[0];
           while (ch != '\0') {
@@ -4702,8 +4710,8 @@ LAB_97bf68e4:
             copyIndex4 = copyIndex4 + 1;
           }
           outCursor4 = outCursor2 + copyIndex3 + copyIndex4;
-          if (!bVar1) {
-            outCursor = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor4,iVar11,0,0);
+          if (!destOverlapsSource) {
+            outCursor = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor4,componentIndex,0,0);
           }
           else {
             copyIndex2 = 0;
@@ -4713,10 +4721,10 @@ LAB_97bf68e4:
               ch = "scratch"[copyIndex2 + 1];
               copyIndex2 = copyIndex2 + 1;
             }
-            copyEnd = ((int (*)())_ncpy_97bf2850)(outCursor4 + copyIndex2,iVar11 + 1);
+            copyEnd = ((int (*)())_ncpy_97bf2850)(outCursor4 + copyIndex2,componentIndex + 1);
             outCursor = outCursor4 + copyIndex2 + copyEnd;
           }
-          nextComponent = iVar11 + 1;
+          nextComponent = componentIndex + 1;
           copyIndex2 = 0;
           ch = s___97c2d7ec[0];
           while (ch != '\0') {
@@ -4732,7 +4740,7 @@ LAB_97bf68e4:
             ch = ", "[copyIndex3 + 1];
             copyIndex3 = copyIndex3 + 1;
           }
-          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,3,3,iVar11,2);
+          outCursor = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor2 + copyIndex3,paramNumbers,paramArrayPos,3,3,componentIndex,2);
           copyIndex = 0;
           ch = s___scratch__97c2e620[0];
           while (ch != '\0') {
@@ -4741,9 +4749,9 @@ LAB_97bf68e4:
             copyIndex = copyIndex + 1;
           }
           outStart = outCursor + copyIndex;
-          iVar11 = nextComponent;
+          componentIndex = nextComponent;
         } while (nextComponent <= (int)(inst[2] >> 10 & 3));
-        if (bVar1) {
+        if (destOverlapsSource) {
           flagWord = *stateFlags | 0x1e;
           goto LAB_97bf68e0;
         }
@@ -4751,10 +4759,10 @@ LAB_97bf68e4:
     }
     goto LAB_97c01788;
   case 0x23:
-    bVar1 = false;
+    destOverlapsSource = false;
     if ((*(short *)((int)inst + 0xe) == *(short *)((int)inst + 0x16)) ||
        (*(short *)((int)inst + 0xe) == *(short *)((int)inst + 0x1e))) {
-      bVar1 = true;
+      destOverlapsSource = true;
     }
     loopIndex = 0;
     do {
@@ -4766,7 +4774,7 @@ LAB_97bf68e4:
         copyIndex2 = copyIndex2 + 1;
       }
       outCursor = outStart + copyIndex2;
-      if (!bVar1) {
+      if (!destOverlapsSource) {
         outCursor = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor,loopIndex,0,0);
       }
       else {
@@ -4810,7 +4818,7 @@ LAB_97bf68e4:
       outStart = outCursor + copyIndex2;
       sizeMinusOne = inst[2] >> 10 & 3;
     } while (loopIndex <= (int)sizeMinusOne);
-    if (bVar1) {
+    if (destOverlapsSource) {
       if (sizeMinusOne == 1) {
         flagWord = *stateFlags | 3;
 LAB_97bf7aec:
@@ -4976,8 +4984,8 @@ LAB_97bf7aec:
     }
     break;
   case 0x27:
-    uVar8 = inst[4];
-    if (((uVar8 >> 0xc & 3) == 1) && (((stateFlags[1] & 0x800000) == 0 || (shaderType != 0x8b30)))) {
+    src1Word0 = inst[4];
+    if (((src1Word0 >> 0xc & 3) == 1) && (((stateFlags[1] & 0x800000) == 0 || (shaderType != 0x8b30)))) {
       copyIndex = 0;
       ch = s_MUL_scratch_xy__97c2e510[0];
       while (ch != '\0') {
@@ -5018,12 +5026,12 @@ LAB_97bf7aec:
       }
     }
     else {
-      if ((uVar8 >> 0xc & 3) == 1) {
+      if ((src1Word0 >> 0xc & 3) == 1) {
         *stateFlags = *stateFlags | 0x800000;
-        uVar8 = inst[4];
+        src1Word0 = inst[4];
       }
-      uVar8 = uVar8 >> 0xc & 3;
-      if (uVar8 == 0) {
+      src1Word0 = src1Word0 >> 0xc & 3;
+      if (src1Word0 == 0) {
         copyIndex = 0;
         ch = s_MUL_97c2e4f0[0];
         while (ch != '\0') {
@@ -5032,7 +5040,7 @@ LAB_97bf7aec:
           copyIndex = copyIndex + 1;
         }
       }
-      else if (uVar8 == 1) {
+      else if (src1Word0 == 1) {
         copyIndex = 0;
         ch = s_DP2_97c2e540[0];
         while (ch != '\0') {
@@ -5041,7 +5049,7 @@ LAB_97bf7aec:
           copyIndex = copyIndex + 1;
         }
       }
-      else if (uVar8 == 2) {
+      else if (src1Word0 == 2) {
         copyIndex = 0;
         ch = s_DP3_97c2e548[0];
         while (ch != '\0') {
@@ -5451,16 +5459,16 @@ LAB_97bf7aec:
     }
     else {
       *stateFlags = *stateFlags | 3;
-      uVar8 = inst[4];
-      if ((uVar8 & 0x4000) == 0) {
-        uVar8 = inst[6];
+      src1Word0 = inst[4];
+      if ((src1Word0 & 0x4000) == 0) {
+        src1Word0 = inst[6];
       }
-      uVar8 = uVar8 >> 0xc & 3;
+      src1Word0 = src1Word0 >> 0xc & 3;
       loopIndex2 = 0;
       outBase = outText;
       do {
-        bVar1 = loopIndex2 == 0;
-        if (bVar1) {
+        isFirstRow = loopIndex2 == 0;
+        if (isFirstRow) {
           copyIndex2 = 0;
           ch = s_SUB_scratch__97c2e870[0];
           while (ch != '\0') {
@@ -5478,11 +5486,11 @@ LAB_97bf7aec:
             copyIndex2 = copyIndex2 + 1;
           }
         }
-        iVar13 = loopIndex2;
+        swizzleSelect3 = loopIndex2;
         if ((inst[4] & 0x4000) == 0) {
-          iVar13 = 0;
+          swizzleSelect3 = 0;
         }
-        outCursor7 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outBase + copyIndex2,paramNumbers,paramArrayPos,2,iVar13,0,0)
+        outCursor7 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outBase + copyIndex2,paramNumbers,paramArrayPos,2,swizzleSelect3,0,0)
         ;
         copyIndex = 0;
         ch = s___97c2d7ec[0];
@@ -5491,11 +5499,11 @@ LAB_97bf7aec:
           ch = ", "[copyIndex + 1];
           copyIndex = copyIndex + 1;
         }
-        iVar13 = loopIndex2;
+        swizzleSelect3 = loopIndex2;
         if ((inst[6] & 0x4000) == 0) {
-          iVar13 = 0;
+          swizzleSelect3 = 0;
         }
-        outCursor3 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor7 + copyIndex,paramNumbers,paramArrayPos,3,iVar13,0,0);
+        outCursor3 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor7 + copyIndex,paramNumbers,paramArrayPos,3,swizzleSelect3,0,0);
         copyIndex2 = 0;
         ch = s___97c2d8f8[0];
         while (ch != '\0') {
@@ -5504,7 +5512,7 @@ LAB_97bf7aec:
           copyIndex2 = copyIndex2 + 1;
         }
         outCursor3 = outCursor3 + copyIndex2;
-        if (bVar1) {
+        if (isFirstRow) {
           copyIndex2 = 0;
           ch = s_ABS_scratch__scratch__97c2e8c0[0];
           while (ch != '\0') {
@@ -5523,7 +5531,7 @@ LAB_97bf7aec:
           }
         }
         outBase = outCursor3 + copyIndex2;
-        if (!bVar1) {
+        if (!isFirstRow) {
           copyIndex2 = 0;
           ch = s_ADD_scratch__scratch__scratch1__97c2e89c[0];
           while (ch != '\0') {
@@ -5534,7 +5542,7 @@ LAB_97bf7aec:
           outBase = outBase + copyIndex2;
         }
         loopIndex2 = loopIndex2 + 1;
-      } while (loopIndex2 <= (int)uVar8);
+      } while (loopIndex2 <= (int)src1Word0);
       copyIndex3 = 0;
       ch = s_DP4_scratch__scratch__97c2e8d8[0];
       while (ch != '\0') {
@@ -5543,7 +5551,7 @@ LAB_97bf7aec:
         copyIndex3 = copyIndex3 + 1;
       }
       outCursor3 = outBase + copyIndex3;
-      if (uVar8 == 1) {
+      if (src1Word0 == 1) {
         *stateFlags = *stateFlags | 0x1000;
         copyIndex3 = 0;
         ch = s_kVEC2_97c2e8f0[0];
@@ -5556,7 +5564,7 @@ LAB_97bf9b6c:
         outCursor3 = outCursor3 + copyIndex3;
       }
       else {
-        if (uVar8 == 2) {
+        if (src1Word0 == 2) {
           *stateFlags = *stateFlags | 0x1000;
           copyIndex3 = 0;
           ch = s_kVEC3_97c2e8f8[0];
@@ -5567,7 +5575,7 @@ LAB_97bf9b6c:
           }
           goto LAB_97bf9b6c;
         }
-        if (uVar8 == 3) {
+        if (src1Word0 == 3) {
           *stateFlags = *stateFlags | 0x1000;
           copyIndex3 = 0;
           ch = s_kVEC4_97c2e900[0];
@@ -5772,16 +5780,16 @@ LAB_97bf9b6c:
     }
     else {
       *stateFlags = *stateFlags | 3;
-      uVar8 = inst[4];
-      if ((uVar8 & 0x4000) == 0) {
-        uVar8 = inst[6];
+      src1Word0 = inst[4];
+      if ((src1Word0 & 0x4000) == 0) {
+        src1Word0 = inst[6];
       }
-      uVar8 = uVar8 >> 0xc & 3;
+      src1Word0 = src1Word0 >> 0xc & 3;
       loopIndex2 = 0;
       outBase = outText;
       do {
-        bVar1 = loopIndex2 == 0;
-        if (bVar1) {
+        isFirstRow = loopIndex2 == 0;
+        if (isFirstRow) {
           copyIndex2 = 0;
           ch = s_SUB_scratch__97c2e870[0];
           while (ch != '\0') {
@@ -5799,11 +5807,11 @@ LAB_97bf9b6c:
             copyIndex2 = copyIndex2 + 1;
           }
         }
-        iVar13 = loopIndex2;
+        swizzleSelect3 = loopIndex2;
         if ((inst[4] & 0x4000) == 0) {
-          iVar13 = 0;
+          swizzleSelect3 = 0;
         }
-        outCursor7 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outBase + copyIndex2,paramNumbers,paramArrayPos,2,iVar13,0,0)
+        outCursor7 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outBase + copyIndex2,paramNumbers,paramArrayPos,2,swizzleSelect3,0,0)
         ;
         copyIndex = 0;
         ch = s___97c2d7ec[0];
@@ -5812,11 +5820,11 @@ LAB_97bf9b6c:
           ch = ", "[copyIndex + 1];
           copyIndex = copyIndex + 1;
         }
-        iVar13 = loopIndex2;
+        swizzleSelect3 = loopIndex2;
         if ((inst[6] & 0x4000) == 0) {
-          iVar13 = 0;
+          swizzleSelect3 = 0;
         }
-        outCursor3 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor7 + copyIndex,paramNumbers,paramArrayPos,3,iVar13,0,0);
+        outCursor3 = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor7 + copyIndex,paramNumbers,paramArrayPos,3,swizzleSelect3,0,0);
         copyIndex2 = 0;
         ch = s___97c2d8f8[0];
         while (ch != '\0') {
@@ -5825,7 +5833,7 @@ LAB_97bf9b6c:
           copyIndex2 = copyIndex2 + 1;
         }
         outCursor3 = outCursor3 + copyIndex2;
-        if (bVar1) {
+        if (isFirstRow) {
           copyIndex2 = 0;
           ch = s_ABS_scratch__scratch__97c2e8c0[0];
           while (ch != '\0') {
@@ -5844,7 +5852,7 @@ LAB_97bf9b6c:
           }
         }
         outBase = outCursor3 + copyIndex2;
-        if (!bVar1) {
+        if (!isFirstRow) {
           copyIndex2 = 0;
           ch = s_ADD_scratch__scratch__scratch1__97c2e89c[0];
           while (ch != '\0') {
@@ -5855,7 +5863,7 @@ LAB_97bf9b6c:
           outBase = outBase + copyIndex2;
         }
         loopIndex2 = loopIndex2 + 1;
-      } while (loopIndex2 <= (int)uVar8);
+      } while (loopIndex2 <= (int)src1Word0);
       copyIndex3 = 0;
       ch = s_DP4_scratch__scratch__97c2e8d8[0];
       while (ch != '\0') {
@@ -5864,7 +5872,7 @@ LAB_97bf9b6c:
         copyIndex3 = copyIndex3 + 1;
       }
       outCursor3 = outBase + copyIndex3;
-      if (uVar8 == 1) {
+      if (src1Word0 == 1) {
         *stateFlags = *stateFlags | 0x1000;
         copyIndex3 = 0;
         ch = s_kVEC2_97c2e8f0[0];
@@ -5877,7 +5885,7 @@ LAB_97bf9370:
         outCursor3 = outCursor3 + copyIndex3;
       }
       else {
-        if (uVar8 == 2) {
+        if (src1Word0 == 2) {
           *stateFlags = *stateFlags | 0x1000;
           copyIndex3 = 0;
           ch = s_kVEC3_97c2e8f8[0];
@@ -5888,7 +5896,7 @@ LAB_97bf9370:
           }
           goto LAB_97bf9370;
         }
-        if (uVar8 == 3) {
+        if (src1Word0 == 3) {
           *stateFlags = *stateFlags | 0x1000;
           copyIndex3 = 0;
           ch = s_kVEC4_97c2e900[0];
@@ -6297,8 +6305,8 @@ LAB_97bf9370:
     goto LAB_97c01788;
   case 0x3b:
     *stateFlags = *stateFlags | 0x1001;
-    uVar8 = inst[8] >> 0xc & 3;
-    if (uVar8 == 1) {
+    src3SizeMinusOne = inst[8] >> 0xc & 3;
+    if (src3SizeMinusOne == 1) {
       copyIndex = 0;
       ch = s_SWZ_scratch__97c2e79c[0];
       while (ch != '\0') {
@@ -6331,7 +6339,7 @@ LAB_97bf9370:
       }
     }
     else {
-      if (uVar8 == 0) {
+      if (src3SizeMinusOne == 0) {
         copyIndex = 0;
         ch = s_MUL_scratch_x__97c2e6fc[0];
         while (ch != '\0') {
@@ -6340,7 +6348,7 @@ LAB_97bf9370:
           copyIndex = copyIndex + 1;
         }
       }
-      else if (uVar8 == 2) {
+      else if (src3SizeMinusOne == 2) {
         copyIndex = 0;
         ch = s_DP3_scratch_x__97c2e734[0];
         while (ch != '\0') {
@@ -6874,18 +6882,18 @@ LAB_97bf9370:
   case 0x43:
   case 0x44:
     if (shaderType == 0x8b30) {
-      uVar8 = stateFlags[1];
+      stateFlags1 = stateFlags[1];
     }
     else {
-      uVar8 = stateFlags[1];
-      if ((uVar8 & 0x200000) == 0) {
+      stateFlags1 = stateFlags[1];
+      if ((stateFlags1 & 0x200000) == 0) {
         return 0xffffffff;
       }
       if (shaderType != 0x8b31) {
         return 0xffffffff;
       }
     }
-    if (((uVar8 & 0x400000) == 0) || (shaderType != 0x8b30)) {
+    if (((stateFlags1 & 0x400000) == 0) || (shaderType != 0x8b30)) {
       if ((inst[8] >> 5 & 7) - 5 < 3) {
         return 0xffffffff;
       }
@@ -6966,14 +6974,14 @@ LAB_97bf9370:
     break;
   case 0x4d:
     outStart = 0;
-    iVar11 = outStart;
+    copyIndex12 = outStart;
     ch = s__97c26c38[0];
     if (s__97c26c38[0] != '\0') {
       do {
-        *(char *)(outText + iVar11) = ch;
-        outStart = iVar11 + 1;
-        ch = "\n"[iVar11 + 1];
-        iVar11 = outStart;
+        *(char *)(outText + copyIndex12) = ch;
+        outStart = copyIndex12 + 1;
+        ch = "\n"[copyIndex12 + 1];
+        copyIndex12 = outStart;
       } while (ch != '\0');
       instWord0 = *inst;
     }
@@ -7330,8 +7338,8 @@ LAB_97c00620:
     }
     break;
   case 0x6c:
-    uVar9 = inst[1] >> 0x17 & 7;
-    if (uVar9 == 4) {
+    valueType = inst[1] >> 0x17 & 7;
+    if (valueType == 4) {
       *stateFlags = *stateFlags | 0x1001;
       copyIndex = 0;
       ch = s_ABS_scratch__97c2e448[0];
@@ -7364,7 +7372,7 @@ LAB_97c00620:
         opOffsetOrTailLength = opOffsetOrTailLength + 1;
       }
     }
-    else if (uVar9 == 3) {
+    else if (valueType == 3) {
       *stateFlags = *stateFlags | 0x1003;
       copyIndex = 0;
       ch = s_SLT_scratch__97c2e474[0];
@@ -7444,7 +7452,7 @@ LAB_97c00620:
       }
     }
     else {
-      if (uVar9 != 1) goto LAB_97c0178c;
+      if (valueType != 1) goto LAB_97c0178c;
       copyIndex = 0;
       ch = s_MOV_97c2e430[0];
       while (ch != '\0') {
@@ -7698,25 +7706,25 @@ LAB_97c0178c:
 }
 
 /* _isParamArrayStart_97c017c0 @ 0x97c017c0 (96 bytes) */
-int _isParamArrayStart_97c017c0(param_1, param_2, param_3)
-  int param_1;
-  uint param_2;
-  uint *param_3;
+int _isParamArrayStart_97c017c0(program, startRegister, arraySize)
+  int program;
+  uint startRegister;
+  uint *arraySize;
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
+  int arrayTable;
+  int entryIndex;
+  int arrayCount;
   
-  iVar3 = *(int *)(param_1 + 0x38);
-  iVar1 = param_1 + *(int *)(param_1 + 0x3c) * 8;
-  if ((iVar3 != 0) && (iVar2 = 0, 0 < iVar3)) {
+  arrayCount = *(int *)(program + 0x38);
+  arrayTable = program + *(int *)(program + 0x3c) * 8;
+  if ((arrayCount != 0) && (entryIndex = 0, 0 < arrayCount)) {
     do {
-      if ((*(uint *)(iVar1 + iVar2 * 8) & 0xffff) == param_2) {
-        *param_3 = (uint)*(ushort *)(iVar2 * 8 + iVar1 + 6);
+      if ((*(uint *)(arrayTable + entryIndex * 8) & 0xffff) == startRegister) {
+        *arraySize = (uint)*(ushort *)(entryIndex * 8 + arrayTable + 6);
         return 1;
       }
-      iVar2 = iVar2 + 1;
-    } while (iVar2 < iVar3);
+      entryIndex = entryIndex + 1;
+    } while (entryIndex < arrayCount);
   }
   return 0;
 }
@@ -7727,6 +7735,23 @@ int _glpPPShaderToProgramString(shader, printOptions, printFlags)
   undefined4 printOptions;
   uint printFlags;
 {
+  uint outputKind;
+  uint matrixModifier;
+  uint texgenCoordinate;
+  uint lightProductTerm;
+  uint isBackFace;
+  uint paramKind;
+  uint paramArrayStartRegister;
+  uint highestParamRegister;
+  int *arraySizeOut;
+  int copyEnd7;
+  int arrayPos;
+  uint pendingUsageFlags;
+  uint paramRegister;
+  int instructionOffset;
+  int outputOffset;
+  int copyIndex11;
+  int nextIndex5;
   undefined8 glp_dtostrResult;
   undefined8 adjustAllocationResult;
   int adjustAllocationResult3;
@@ -7777,44 +7802,44 @@ int _glpPPShaderToProgramString(shader, printOptions, printFlags)
   int copyLength2;
   int copyIndex7;
   char ch;
-  uint uVar1;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  uint *puVar6;
-  int iVar7;
+  uint registerWord1;
+  int entriesLeft;
+  int copyEnd8;
+  int entryByteOffset;
+  uint *paramWord1Cursor;
+  int numberEnd;
   int copyEnd2;
   char *allocation8;
   char *allocation;
   undefined4 extraout_r4;
   undefined4 extraout_r4_00;
-  undefined4 uVar11;
+  undefined4 callResultLow;
   undefined4 extraout_r4_01;
   int copyLength6;
-  int iVar13;
+  int nextIndex6;
   int *allocation9;
   int *allocation10;
   int allocation3;
   int shaderTarget;
-  int *piVar18;
+  int *tempWord1Cursor;
   int addressRegCount;
   char *allocation6;
-  int iVar21;
+  int adrIndex;
   char *allocation7;
-  uint uVar23;
-  float *pfVar24;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  undefined8 uVar25;
-  double in_stack_ffffff48;
-  double in_stack_ffffff50;
-  double in_stack_ffffff58;
-  double in_stack_ffffff60;
-  double in_stack_ffffff68;
+  uint attributeKind;
+  float *constantData;
+  double leftoverFpr3;
+  double leftoverFpr4;
+  double leftoverFpr5;
+  double leftoverFpr6;
+  double leftoverFpr7;
+  double leftoverFpr8;
+  undefined8 callResultPair;
+  double leftoverStackArg1;
+  double leftoverStackArg2;
+  double leftoverStackArg3;
+  double leftoverStackArg4;
+  double leftoverStackArg5;
   uint usageFlags;
   uint requestedFlags;
   int outCapacity;
@@ -7857,7 +7882,7 @@ int _glpPPShaderToProgramString(shader, printOptions, printFlags)
     requestedFlags = requestedFlags | 0xc00000;
   }
   addressRegCount = shader[6];
-  uVar11 = extraout_r4;
+  callResultLow = extraout_r4;
   outCursor = outBuffer;
   if (addressRegCount != 0) {
     ch = 'A';
@@ -7868,7 +7893,7 @@ int _glpPPShaderToProgramString(shader, printOptions, printFlags)
       ch = "ADDRESS adr0"[copyIndex8 + 1];
       copyIndex8 = copyLength10;
     } while (ch != '\0');
-    iVar21 = 1;
+    adrIndex = 1;
     outCursor = outBuffer + copyLength10;
     if (1 < addressRegCount) {
       do {
@@ -7881,10 +7906,10 @@ int _glpPPShaderToProgramString(shader, printOptions, printFlags)
           copyIndex4 = copyLength5;
         } while (ch != '\0');
         outCursor = outCursor + copyLength5;
-        nextIndex2 = iVar21 + 1;
-        copyEnd6 = ((int (*)())_ncpy_97bf2850)(outCursor,iVar21);
+        nextIndex2 = adrIndex + 1;
+        copyEnd6 = ((int (*)())_ncpy_97bf2850)(outCursor,adrIndex);
         outCursor = outCursor + copyEnd6;
-        iVar21 = nextIndex2;
+        adrIndex = nextIndex2;
       } while (nextIndex2 < addressRegCount);
     }
     ch = ';';
@@ -7897,7 +7922,7 @@ int _glpPPShaderToProgramString(shader, printOptions, printFlags)
     } while (ch != '\0');
     outCursor = outCursor + copyLength7;
     adjustAllocationResult = ((int (*)())_adjustAllocation_97bf27d4)(&outCapacity,&outBuffer,&outCursor);
-    uVar11 = (undefined4)adjustAllocationResult;
+    callResultLow = (undefined4)adjustAllocationResult;
     allocation8 = outBuffer;
     if ((int)((ulonglong)adjustAllocationResult >> 0x20) == 0) goto LAB_97c04d50;
     ch = '\n';
@@ -7913,7 +7938,7 @@ int _glpPPShaderToProgramString(shader, printOptions, printFlags)
   tempCount = shader[4];
   loopIndex2 = 0;
   if (0 < tempCount) {
-    piVar18 = shader + shader[5] * 2 + 1;
+    tempWord1Cursor = shader + shader[5] * 2 + 1;
     do {
       ch = 'T';
       copyIndex4 = 0;
@@ -7932,7 +7957,7 @@ int _glpPPShaderToProgramString(shader, printOptions, printFlags)
         copyIndex4 = copyLength3;
       } while (ch != '\0');
       outCursor = outCursor + copyLength3 + copyLength5;
-      copyEnd3 = ((int (*)())_ncpy_97bf2850)(outCursor,(uint)(ushort)*piVar18);
+      copyEnd3 = ((int (*)())_ncpy_97bf2850)(outCursor,(uint)(ushort)*tempWord1Cursor);
       ch = ';';
       copyIndex4 = 0;
       do {
@@ -7943,11 +7968,11 @@ int _glpPPShaderToProgramString(shader, printOptions, printFlags)
       } while (ch != '\0');
       outCursor = outCursor + copyLength3 + copyEnd3;
       adjustAllocationResult = ((int (*)())_adjustAllocation_97bf27d4)(&outCapacity,&outBuffer,&outCursor);
-      uVar11 = (undefined4)adjustAllocationResult;
+      callResultLow = (undefined4)adjustAllocationResult;
       allocation8 = outBuffer;
       if ((int)((ulonglong)adjustAllocationResult >> 0x20) == 0) goto LAB_97c04d50;
       loopIndex2 = loopIndex2 + 1;
-      piVar18 = piVar18 + 2;
+      tempWord1Cursor = tempWord1Cursor + 2;
     } while (loopIndex2 < tempCount);
   }
   if (tempCount != 0) {
@@ -7966,8 +7991,8 @@ int _glpPPShaderToProgramString(shader, printOptions, printFlags)
   attribOffset = shader[9];
   if (0 < attribCount) {
     do {
-      uVar23 = (uint)shader[attribOffset * 2 + loopIndex3 * 2] >> 0x10 & 0xf;
-      if (uVar23 == 0) goto LAB_97c0239c;
+      attributeKind = (uint)shader[attribOffset * 2 + loopIndex3 * 2] >> 0x10 & 0xf;
+      if (attributeKind == 0) goto LAB_97c0239c;
       ch = 'A';
       copyIndex3 = 0;
       do {
@@ -8002,7 +8027,7 @@ LAB_97c01cf4:
         } while (ch != '\0');
         goto LAB_97c01cf4;
       }
-      switch(uVar23) {
+      switch(attributeKind) {
       default:
         goto switchD_97c01d20_caseD_0;
       case 1:
@@ -8251,7 +8276,7 @@ switchD_97c01d20_caseD_0:
       } while (ch != '\0');
       outCursor = outCursor + copyLength3;
       adjustAllocationResult = ((int (*)())_adjustAllocation_97bf27d4)(&outCapacity,&outBuffer,&outCursor);
-      uVar11 = (undefined4)adjustAllocationResult;
+      callResultLow = (undefined4)adjustAllocationResult;
       allocation8 = outBuffer;
       if ((int)((ulonglong)adjustAllocationResult >> 0x20) == 0) goto LAB_97c04d50;
 LAB_97c0239c:
@@ -8272,23 +8297,23 @@ LAB_97c0239c:
   paramCount = shader[10];
   paramOffset = shader[0xb];
   if (paramCount != 0) {
-    uVar23 = 0xffffffff;
+    highestParamRegister = 0xffffffff;
     if (0 < paramCount) {
-      puVar6 = (uint *)(shader + paramOffset * 2 + 1);
-      iVar3 = paramCount;
+      paramWord1Cursor = (uint *)(shader + paramOffset * 2 + 1);
+      entriesLeft = paramCount;
       do {
-        uVar1 = *puVar6;
-        puVar6 = puVar6 + 2;
-        if ((int)uVar23 < (int)(uVar1 & 0xffff)) {
-          uVar23 = uVar1 & 0xffff;
+        registerWord1 = *paramWord1Cursor;
+        paramWord1Cursor = paramWord1Cursor + 2;
+        if ((int)highestParamRegister < (int)(registerWord1 & 0xffff)) {
+          highestParamRegister = registerWord1 & 0xffff;
         }
-        iVar3 = iVar3 + -1;
-      } while (iVar3 != 0);
-      if (uVar23 != 0xffffffff) {
-        allocation4 = uVar23 * 4 + 4;
+        entriesLeft = entriesLeft + -1;
+      } while (entriesLeft != 0);
+      if (highestParamRegister != 0xffffffff) {
+        allocation4 = highestParamRegister * 4 + 4;
         allocation3 = _malloc(allocation4);
         allocation10 = (int *)_malloc(allocation4);
-        if ((allocation3 == 0) || (uVar11 = extraout_r4_00, allocation10 == (int *)0x0)) {
+        if ((allocation3 == 0) || (callResultLow = extraout_r4_00, allocation10 == (int *)0x0)) {
           allocation9 = allocation10;
           allocation8 = outBuffer;
           if (allocation3 != 0) {
@@ -8307,43 +8332,43 @@ joined_r0x97c02488:
     }
     if (shader[0xe] != 0) {
       allocation9 = (int *)_malloc(shader[0xe] << 2);
-      uVar11 = extraout_r4_01;
+      callResultLow = extraout_r4_01;
     }
-    uVar25 = CONCAT44(allocation9,uVar11);
+    callResultPair = CONCAT44(allocation9,callResultLow);
     loopIndex3 = 0;
-    iVar4 = -1;
+    arrayPos = -1;
     arrayEnd = 0xffffffff;
-    uVar23 = 0xffffffff;
-    piVar18 = allocation9;
+    paramArrayStartRegister = 0xffffffff;
+    arraySizeOut = allocation9;
     if (0 < paramCount) {
       do {
-        iVar5 = loopIndex3 * 8 + paramOffset * 8;
+        entryByteOffset = loopIndex3 * 8 + paramOffset * 8;
         if ((shader[paramOffset * 2 + loopIndex3 * 2] & 0x1f0000U) != 0) {
-          if (uVar23 == 0xffffffff) {
-            uVar1 = (uint)*(ushort *)((int)shader + iVar5 + 6);
-            *(uint *)(uVar1 * 4 + allocation3) = uVar1;
-            uVar25 = ((int (*)())_isParamArrayStart_97c017c0)(shader,(uint)*(ushort *)((int)shader + iVar5 + 6),&arrayEnd);
-            if ((int)((ulonglong)uVar25 >> 0x20) == 0) {
-              allocation10[*(ushort *)((int)shader + iVar5 + 6)] = iVar4;
+          if (paramArrayStartRegister == 0xffffffff) {
+            paramRegister = (uint)*(ushort *)((int)shader + entryByteOffset + 6);
+            *(uint *)(paramRegister * 4 + allocation3) = paramRegister;
+            callResultPair = ((int (*)())_isParamArrayStart_97c017c0)(shader,(uint)*(ushort *)((int)shader + entryByteOffset + 6),&arrayEnd);
+            if ((int)((ulonglong)callResultPair >> 0x20) == 0) {
+              allocation10[*(ushort *)((int)shader + entryByteOffset + 6)] = arrayPos;
             }
             else {
-              uVar23 = (uint)*(ushort *)((int)shader + iVar5 + 6);
-              allocation10[uVar23] = 0;
-              iVar4 = 1;
+              paramArrayStartRegister = (uint)*(ushort *)((int)shader + entryByteOffset + 6);
+              allocation10[paramArrayStartRegister] = 0;
+              arrayPos = 1;
             }
           }
           else {
-            uVar1 = (uint)*(ushort *)((int)shader + iVar5 + 6);
-            if ((int)uVar1 <= (int)arrayEnd) {
-              *(uint *)(uVar1 * 4 + allocation3) = uVar23;
-              allocation10[*(ushort *)((int)shader + iVar5 + 6)] = iVar4;
-              iVar4 = iVar4 + 1;
-              if (*(ushort *)((int)shader + iVar5 + 6) == arrayEnd) {
-                uVar23 = 0xffffffff;
+            paramRegister = (uint)*(ushort *)((int)shader + entryByteOffset + 6);
+            if ((int)paramRegister <= (int)arrayEnd) {
+              *(uint *)(paramRegister * 4 + allocation3) = paramArrayStartRegister;
+              allocation10[*(ushort *)((int)shader + entryByteOffset + 6)] = arrayPos;
+              arrayPos = arrayPos + 1;
+              if (*(ushort *)((int)shader + entryByteOffset + 6) == arrayEnd) {
+                paramArrayStartRegister = 0xffffffff;
                 arrayEnd = 0xffffffff;
-                *piVar18 = iVar4;
-                piVar18 = piVar18 + 1;
-                iVar4 = -1;
+                *arraySizeOut = arrayPos;
+                arraySizeOut = arraySizeOut + 1;
+                arrayPos = -1;
               }
             }
           }
@@ -8355,10 +8380,10 @@ joined_r0x97c02488:
     loopIndex7 = 0;
     if (0 < paramCount) {
       do {
-        iVar5 = loopIndex * 8;
-        uVar23 = (uint)shader[paramOffset * 2 + loopIndex * 2] >> 0x10 & 0x1f;
-        if (uVar23 == 0) goto LAB_97c04238;
-        if (allocation10[*(ushort *)((int)shader + iVar5 + paramOffset * 8 + 6)] == -1) {
+        entryByteOffset = loopIndex * 8;
+        paramKind = (uint)shader[paramOffset * 2 + loopIndex * 2] >> 0x10 & 0x1f;
+        if (paramKind == 0) goto LAB_97c04238;
+        if (allocation10[*(ushort *)((int)shader + entryByteOffset + paramOffset * 8 + 6)] == -1) {
           ch = 'P';
           copyIndex = 0;
           do {
@@ -8368,22 +8393,22 @@ joined_r0x97c02488:
             copyIndex = copyLength;
           } while (ch != '\0');
           outCursor = outCursor + copyLength;
-          uVar25 = ((int (*)())_ncpy_97bf2850)(outCursor,*(undefined4 *)
+          callResultPair = ((int (*)())_ncpy_97bf2850)(outCursor,*(undefined4 *)
                                             (allocation3 + (uint)*(ushort *)
-                                                             ((int)shader + iVar5 + paramOffset * 8 + 6)
+                                                             ((int)shader + entryByteOffset + paramOffset * 8 + 6)
                                                       * 4));
           ch = ' ';
           copyIndex = 0;
           do {
-            (outCursor + (int)((ulonglong)uVar25 >> 0x20))[copyIndex] = ch;
+            (outCursor + (int)((ulonglong)callResultPair >> 0x20))[copyIndex] = ch;
             copyLength = copyIndex + 1;
             ch = " = "[copyIndex + 1];
             copyIndex = copyLength;
           } while (ch != '\0');
-          outCursor = outCursor + (int)((ulonglong)uVar25 >> 0x20) + copyLength;
+          outCursor = outCursor + (int)((ulonglong)callResultPair >> 0x20) + copyLength;
         }
         else {
-          if (allocation10[*(ushort *)((int)shader + iVar5 + paramOffset * 8 + 6)] == 0) {
+          if (allocation10[*(ushort *)((int)shader + entryByteOffset + paramOffset * 8 + 6)] == 0) {
             loopIndex5 = 0;
             ch = 'P';
             copyIndex = 0;
@@ -8396,7 +8421,7 @@ joined_r0x97c02488:
             outCursor = outCursor + copyLength;
             copyEnd = ((int (*)())_ncpy_97bf2850)(outCursor,*(undefined4 *)
                                              (allocation3 + (uint)*(ushort *)
-                                                              ((int)shader + iVar5 + paramOffset * 8 + 6
+                                                              ((int)shader + entryByteOffset + paramOffset * 8 + 6
                                                               ) * 4));
             ch = '[';
             copyIndex = 0;
@@ -8407,16 +8432,16 @@ joined_r0x97c02488:
               copyIndex = copyLength6;
             } while (ch != '\0');
             outCursor = outCursor + copyLength6 + copyEnd;
-            uVar25 = ((int (*)())_ncpy_97bf2850)(outCursor,allocation9[loopIndex7]);
+            callResultPair = ((int (*)())_ncpy_97bf2850)(outCursor,allocation9[loopIndex7]);
             ch = ']';
             copyIndex = 0;
             do {
-              (outCursor + (int)((ulonglong)uVar25 >> 0x20))[copyIndex] = ch;
+              (outCursor + (int)((ulonglong)callResultPair >> 0x20))[copyIndex] = ch;
               copyLength = copyIndex + 1;
               ch = "]"[copyIndex + 1];
               copyIndex = copyLength;
             } while (ch != '\0');
-            outCursor = outCursor + (int)((ulonglong)uVar25 >> 0x20) + copyLength;
+            outCursor = outCursor + (int)((ulonglong)callResultPair >> 0x20) + copyLength;
             ch = ' ';
             copyIndex = 0;
             do {
@@ -8439,7 +8464,7 @@ joined_r0x97c02488:
           }
           outCursor = outCursor + copyLength;
         }
-        if (uVar23 == 0) {
+        if (paramKind == 0) {
 LAB_97c028a4:
           ch = 's';
           copyIndex = 0;
@@ -8450,7 +8475,7 @@ LAB_97c028a4:
             copyIndex = nextIndex4;
           } while (ch != '\0');
         }
-        else if (uVar23 < 3) {
+        else if (paramKind < 3) {
           ch = 'p';
           copyIndex = 0;
           do {
@@ -8461,11 +8486,11 @@ LAB_97c028a4:
           } while (ch != '\0');
         }
         else {
-          if (uVar23 != 0x11) goto LAB_97c028a4;
+          if (paramKind != 0x11) goto LAB_97c028a4;
           nextIndex4 = 0;
         }
         outCursor = outCursor + nextIndex4;
-        switch(uVar23) {
+        switch(paramKind) {
         default:
           goto switchD_97c02904_caseD_0;
         case 1:
@@ -8520,16 +8545,16 @@ LAB_97c028a4:
             copyIndex = copyLength;
           } while (ch != '\0');
           outCursor = outCursor + copyLength;
-          iVar7 = ((int (*)())_ncpy_97bf2850)(outCursor,shader[paramOffset * 2 + loopIndex * 2] & 0xff);
+          copyEnd7 = ((int (*)())_ncpy_97bf2850)(outCursor,shader[paramOffset * 2 + loopIndex * 2] & 0xff);
           ch = ']';
           copyIndex = 0;
           do {
-            outCursor[copyIndex + iVar7] = ch;
+            outCursor[copyIndex + copyEnd7] = ch;
             copyLength6 = copyIndex + 1;
             ch = "]."[copyIndex + 1];
             copyIndex = copyLength6;
           } while (ch != '\0');
-          outCursor = outCursor + copyLength6 + iVar7;
+          outCursor = outCursor + copyLength6 + copyEnd7;
           switch((uint)shader[paramOffset * 2 + loopIndex * 2] >> 8 & 0xf) {
           case 0:
             ch = 'a';
@@ -8635,8 +8660,8 @@ LAB_97c028a4:
             copyIndex = copyLength6;
           } while (ch != '\0');
           outCursor = outCursor + copyLength6 + copyEnd;
-          uVar23 = (uint)shader[paramOffset * 2 + loopIndex * 2] >> 8 & 1;
-          if (uVar23 == 0) {
+          isBackFace = (uint)shader[paramOffset * 2 + loopIndex * 2] >> 8 & 1;
+          if (isBackFace == 0) {
             ch = 'f';
             copyIndex = 0;
             do {
@@ -8648,7 +8673,7 @@ LAB_97c028a4:
 LAB_97c02e60:
             outCursor = outCursor + copyLength;
           }
-          else if (uVar23 == 1) {
+          else if (isBackFace == 1) {
             ch = 'b';
             copyIndex = 0;
             do {
@@ -8659,8 +8684,8 @@ LAB_97c02e60:
             } while (ch != '\0');
             goto LAB_97c02e60;
           }
-          uVar23 = (uint)shader[paramOffset * 2 + loopIndex * 2] >> 9 & 3;
-          if (uVar23 == 1) {
+          lightProductTerm = (uint)shader[paramOffset * 2 + loopIndex * 2] >> 9 & 3;
+          if (lightProductTerm == 1) {
             ch = 'd';
             copyIndex = 0;
             do {
@@ -8671,8 +8696,8 @@ LAB_97c02e60:
             } while (ch != '\0');
             break;
           }
-          if (uVar23 < 2) {
-            if (uVar23 == 0) {
+          if (lightProductTerm < 2) {
+            if (lightProductTerm == 0) {
               ch = 'a';
               copyIndex = 0;
               do {
@@ -8684,7 +8709,7 @@ LAB_97c02e60:
               break;
             }
           }
-          else if (uVar23 == 2) {
+          else if (lightProductTerm == 2) {
             ch = 's';
             copyIndex = 0;
             do {
@@ -8836,8 +8861,8 @@ LAB_97c03088:
             copyIndex = copyLength6;
           } while (ch != '\0');
           outCursor = outCursor + copyLength6 + copyEnd;
-          uVar23 = (uint)shader[paramOffset * 2 + loopIndex * 2] >> 5 & 7;
-          if (uVar23 == 1) {
+          texgenCoordinate = (uint)shader[paramOffset * 2 + loopIndex * 2] >> 5 & 7;
+          if (texgenCoordinate == 1) {
             ch = 't';
             copyIndex = 0;
             do {
@@ -8847,8 +8872,8 @@ LAB_97c03088:
               copyIndex = nextIndex4;
             } while (ch != '\0');
           }
-          else if (uVar23 < 2) {
-            if (uVar23 != 0) goto switchD_97c02904_caseD_0;
+          else if (texgenCoordinate < 2) {
+            if (texgenCoordinate != 0) goto switchD_97c02904_caseD_0;
             ch = 's';
             copyIndex = 0;
             do {
@@ -8858,7 +8883,7 @@ LAB_97c03088:
               copyIndex = nextIndex4;
             } while (ch != '\0');
           }
-          else if (uVar23 == 2) {
+          else if (texgenCoordinate == 2) {
             ch = 'r';
             copyIndex = 0;
             do {
@@ -8869,7 +8894,7 @@ LAB_97c03088:
             } while (ch != '\0');
           }
           else {
-            if (uVar23 != 3) goto switchD_97c02904_caseD_0;
+            if (texgenCoordinate != 3) goto switchD_97c02904_caseD_0;
             ch = 'q';
             copyIndex = 0;
             do {
@@ -8900,8 +8925,8 @@ LAB_97c03088:
             copyIndex = copyLength6;
           } while (ch != '\0');
           outCursor = outCursor + copyLength6 + copyEnd;
-          uVar23 = (uint)shader[paramOffset * 2 + loopIndex * 2] >> 5 & 7;
-          if (uVar23 == 1) {
+          texgenCoordinate = (uint)shader[paramOffset * 2 + loopIndex * 2] >> 5 & 7;
+          if (texgenCoordinate == 1) {
             ch = 't';
             copyIndex = 0;
             do {
@@ -8911,8 +8936,8 @@ LAB_97c03088:
               copyIndex = nextIndex4;
             } while (ch != '\0');
           }
-          else if (uVar23 < 2) {
-            if (uVar23 != 0) goto switchD_97c02904_caseD_0;
+          else if (texgenCoordinate < 2) {
+            if (texgenCoordinate != 0) goto switchD_97c02904_caseD_0;
             ch = 's';
             copyIndex = 0;
             do {
@@ -8922,7 +8947,7 @@ LAB_97c03088:
               copyIndex = nextIndex4;
             } while (ch != '\0');
           }
-          else if (uVar23 == 2) {
+          else if (texgenCoordinate == 2) {
             ch = 'r';
             copyIndex = 0;
             do {
@@ -8933,7 +8958,7 @@ LAB_97c03088:
             } while (ch != '\0');
           }
           else {
-            if (uVar23 != 3) goto switchD_97c02904_caseD_0;
+            if (texgenCoordinate != 3) goto switchD_97c02904_caseD_0;
             ch = 'q';
             copyIndex = 0;
             do {
@@ -9158,8 +9183,8 @@ LAB_97c038d4:
           }
           outCursor = outCursor + copyLength;
 switchD_97c0384c_default:
-          uVar23 = (uint)shader[paramOffset * 2 + loopIndex * 2] >> 0xe & 3;
-          if (uVar23 == 1) {
+          matrixModifier = (uint)shader[paramOffset * 2 + loopIndex * 2] >> 0xe & 3;
+          if (matrixModifier == 1) {
             ch = 't';
             copyIndex = 0;
             do {
@@ -9171,8 +9196,8 @@ switchD_97c0384c_default:
 LAB_97c03c14:
             outCursor = outCursor + copyLength;
           }
-          else if (1 < uVar23) {
-            if (uVar23 == 2) {
+          else if (1 < matrixModifier) {
+            if (matrixModifier == 2) {
               ch = 'i';
               copyIndex = 0;
               do {
@@ -9183,7 +9208,7 @@ LAB_97c03c14:
               } while (ch != '\0');
             }
             else {
-              if (uVar23 != 3) goto LAB_97c03c20;
+              if (matrixModifier != 3) goto LAB_97c03c20;
               ch = 'i';
               copyIndex = 0;
               do {
@@ -9219,7 +9244,7 @@ LAB_97c040c4:
           outCursor = outCursor + copyLength;
           goto switchD_97c02904_caseD_0;
         case 0x11:
-          pfVar24 = (float *)(shader +
+          constantData = (float *)(shader +
                              shader[0x1b] * 2 + (shader[paramOffset * 2 + loopIndex * 2] & 0xffffU) * 4);
           switch((uint)shader[paramOffset * 2 + loopIndex * 2] >> 0x1a & 7) {
           case 0:
@@ -9233,53 +9258,53 @@ LAB_97c040c4:
               copyIndex = copyLength;
             } while (ch != '\0');
             outCursor = outCursor + copyLength;
-            glp_dtostrResult = ((char * (*)())_glp_dtostr)((int)((ulonglong)uVar25 >> 0x20),(int)uVar25,outCursor,
-                                 outBuffer + (outCapacity - (int)outCursor),(double)*pfVar24,1e-07,in_f3,
-                                 in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffff48,in_stack_ffffff50,
-                                 in_stack_ffffff58,in_stack_ffffff60,in_stack_ffffff68);
-            iVar7 = (int)((ulonglong)glp_dtostrResult >> 0x20);
+            glp_dtostrResult = ((char * (*)())_glp_dtostr)((int)((ulonglong)callResultPair >> 0x20),(int)callResultPair,outCursor,
+                                 outBuffer + (outCapacity - (int)outCursor),(double)*constantData,1e-07,leftoverFpr3,
+                                 leftoverFpr4,leftoverFpr5,leftoverFpr6,leftoverFpr7,leftoverFpr8,leftoverStackArg1,leftoverStackArg2,
+                                 leftoverStackArg3,leftoverStackArg4,leftoverStackArg5);
+            numberEnd = (int)((ulonglong)glp_dtostrResult >> 0x20);
             ch = ',';
             copyIndex = 0;
             do {
-              *(char *)(iVar7 + copyIndex) = ch;
+              *(char *)(numberEnd + copyIndex) = ch;
               copyLength6 = copyIndex + 1;
               ch = ", "[copyIndex + 1];
               copyIndex = copyLength6;
             } while (ch != '\0');
-            outCursor = (char *)(iVar7 + copyLength6);
-            glp_dtostrResult = ((char * (*)())_glp_dtostr)(iVar7,(int)glp_dtostrResult,outCursor,outBuffer + (outCapacity - (int)outCursor),
-                                 (double)pfVar24[1],1e-07,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
-                                 in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58,
-                                 in_stack_ffffff60,in_stack_ffffff68);
-            iVar7 = (int)((ulonglong)glp_dtostrResult >> 0x20);
+            outCursor = (char *)(numberEnd + copyLength6);
+            glp_dtostrResult = ((char * (*)())_glp_dtostr)(numberEnd,(int)glp_dtostrResult,outCursor,outBuffer + (outCapacity - (int)outCursor),
+                                 (double)constantData[1],1e-07,leftoverFpr3,leftoverFpr4,leftoverFpr5,leftoverFpr6,leftoverFpr7,leftoverFpr8,
+                                 leftoverStackArg1,leftoverStackArg2,leftoverStackArg3,
+                                 leftoverStackArg4,leftoverStackArg5);
+            numberEnd = (int)((ulonglong)glp_dtostrResult >> 0x20);
             ch = ',';
             copyIndex = 0;
             do {
-              *(char *)(iVar7 + copyIndex) = ch;
+              *(char *)(numberEnd + copyIndex) = ch;
               copyLength6 = copyIndex + 1;
               ch = ", "[copyIndex + 1];
               copyIndex = copyLength6;
             } while (ch != '\0');
-            outCursor = (char *)(iVar7 + copyLength6);
-            glp_dtostrResult = ((char * (*)())_glp_dtostr)(iVar7,(int)glp_dtostrResult,outCursor,outBuffer + (outCapacity - (int)outCursor),
-                                 (double)pfVar24[2],1e-07,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
-                                 in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58,
-                                 in_stack_ffffff60,in_stack_ffffff68);
-            iVar7 = (int)((ulonglong)glp_dtostrResult >> 0x20);
+            outCursor = (char *)(numberEnd + copyLength6);
+            glp_dtostrResult = ((char * (*)())_glp_dtostr)(numberEnd,(int)glp_dtostrResult,outCursor,outBuffer + (outCapacity - (int)outCursor),
+                                 (double)constantData[2],1e-07,leftoverFpr3,leftoverFpr4,leftoverFpr5,leftoverFpr6,leftoverFpr7,leftoverFpr8,
+                                 leftoverStackArg1,leftoverStackArg2,leftoverStackArg3,
+                                 leftoverStackArg4,leftoverStackArg5);
+            numberEnd = (int)((ulonglong)glp_dtostrResult >> 0x20);
             ch = ',';
             copyIndex = 0;
             do {
-              *(char *)(iVar7 + copyIndex) = ch;
+              *(char *)(numberEnd + copyIndex) = ch;
               copyLength6 = copyIndex + 1;
               ch = ", "[copyIndex + 1];
               copyIndex = copyLength6;
             } while (ch != '\0');
-            outCursor = (char *)(iVar7 + copyLength6);
-            outCursor = (char *)((char * (*)())_glp_dtostr)(iVar7,(int)glp_dtostrResult,outCursor,
-                                           outBuffer + (outCapacity - (int)outCursor),(double)pfVar24[3],
-                                           1e-07,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
-                                           in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58,
-                                           in_stack_ffffff60,in_stack_ffffff68);
+            outCursor = (char *)(numberEnd + copyLength6);
+            outCursor = (char *)((char * (*)())_glp_dtostr)(numberEnd,(int)glp_dtostrResult,outCursor,
+                                           outBuffer + (outCapacity - (int)outCursor),(double)constantData[3],
+                                           1e-07,leftoverFpr3,leftoverFpr4,leftoverFpr5,leftoverFpr6,leftoverFpr7,leftoverFpr8,
+                                           leftoverStackArg1,leftoverStackArg2,leftoverStackArg3,
+                                           leftoverStackArg4,leftoverStackArg5);
             ch = '}';
             copyIndex = 0;
             do {
@@ -9310,7 +9335,7 @@ LAB_97c040c4:
               copyIndex = copyLength;
             } while (ch != '\0');
             outCursor = outCursor + copyLength;
-            copyEnd = ((int (*)())_ncpy_97bf2850)(outCursor, *(unsigned int *)pfVar24);
+            copyEnd = ((int (*)())_ncpy_97bf2850)(outCursor, *(unsigned int *)constantData);
             ch = ',';
             copyIndex = 0;
             do {
@@ -9320,7 +9345,7 @@ LAB_97c040c4:
               copyIndex = copyLength6;
             } while (ch != '\0');
             outCursor = outCursor + copyLength6 + copyEnd;
-            copyEnd = ((int (*)())_ncpy_97bf2850)(outCursor, ((unsigned int *)pfVar24)[1]);
+            copyEnd = ((int (*)())_ncpy_97bf2850)(outCursor, ((unsigned int *)constantData)[1]);
             ch = ',';
             copyIndex = 0;
             do {
@@ -9330,7 +9355,7 @@ LAB_97c040c4:
               copyIndex = copyLength6;
             } while (ch != '\0');
             outCursor = outCursor + copyLength6 + copyEnd;
-            copyEnd = ((int (*)())_ncpy_97bf2850)(outCursor, ((unsigned int *)pfVar24)[2]);
+            copyEnd = ((int (*)())_ncpy_97bf2850)(outCursor, ((unsigned int *)constantData)[2]);
             ch = ',';
             copyIndex = 0;
             do {
@@ -9340,7 +9365,7 @@ LAB_97c040c4:
               copyIndex = copyLength6;
             } while (ch != '\0');
             outCursor = outCursor + copyLength6 + copyEnd;
-            copyEnd2 = ((int (*)())_ncpy_97bf2850)(outCursor, ((unsigned int *)pfVar24)[3]);
+            copyEnd2 = ((int (*)())_ncpy_97bf2850)(outCursor, ((unsigned int *)constantData)[3]);
             ch = '}';
             outCursor = outCursor + copyEnd2;
             copyIndex = 0;
@@ -9367,7 +9392,7 @@ LAB_97c040c4:
         }
         outCursor = outCursor + nextIndex4;
 switchD_97c02904_caseD_0:
-        if (allocation10[*(ushort *)((int)shader + iVar5 + paramOffset * 8 + 6)] == -1) {
+        if (allocation10[*(ushort *)((int)shader + entryByteOffset + paramOffset * 8 + 6)] == -1) {
           ch = ';';
           copyIndex6 = 0;
           do {
@@ -9399,8 +9424,8 @@ switchD_97c02904_caseD_0:
           } while (ch != '\0');
         }
         outCursor = outCursor + copyLength8;
-        uVar25 = ((int (*)())_adjustAllocation_97bf27d4)(&outCapacity,&outBuffer,&outCursor);
-        if ((int)((ulonglong)uVar25 >> 0x20) == 0) {
+        callResultPair = ((int (*)())_adjustAllocation_97bf27d4)(&outCapacity,&outBuffer,&outCursor);
+        if ((int)((ulonglong)callResultPair >> 0x20) == 0) {
           if (allocation3 != 0) {
             _free(allocation3);
           }
@@ -9421,11 +9446,11 @@ LAB_97c04238:
   }
   outputCount = shader[0xc];
   loopIndex2 = 0;
-  iVar13 = shader[0xd];
+  outputOffset = shader[0xd];
   if (0 < outputCount) {
     do {
-      uVar23 = (uint)shader[iVar13 * 2 + loopIndex2 * 2] >> 0x10 & 0xf;
-      if (uVar23 == 0) goto LAB_97c04904;
+      outputKind = (uint)shader[outputOffset * 2 + loopIndex2 * 2] >> 0x10 & 0xf;
+      if (outputKind == 0) goto LAB_97c04904;
       ch = 'O';
       copyIndex4 = 0;
       do {
@@ -9435,18 +9460,18 @@ LAB_97c04238:
         copyIndex4 = copyLength5;
       } while (ch != '\0');
       outCursor = outCursor + copyLength5;
-      iVar4 = ((int (*)())_ncpy_97bf2850)(outCursor,(uint)*(ushort *)((int)shader + loopIndex2 * 8 + iVar13 * 8 + 6))
+      copyEnd8 = ((int (*)())_ncpy_97bf2850)(outCursor,(uint)*(ushort *)((int)shader + loopIndex2 * 8 + outputOffset * 8 + 6))
       ;
       ch = ' ';
       copyIndex4 = 0;
       do {
-        outCursor[copyIndex4 + iVar4] = ch;
+        outCursor[copyIndex4 + copyEnd8] = ch;
         copyLength3 = copyIndex4 + 1;
         ch = " = "[copyIndex4 + 1];
         copyIndex4 = copyLength3;
       } while (ch != '\0');
-      outCursor = outCursor + copyLength3 + iVar4;
-      switch(uVar23) {
+      outCursor = outCursor + copyLength3 + copyEnd8;
+      switch(outputKind) {
       default:
         goto switchD_97c04350_caseD_0;
       case 1:
@@ -9490,7 +9515,7 @@ LAB_97c04238:
         } while (ch != '\0');
         outCursor = outCursor + copyLength5;
         if (shaderTarget == 0x8b31) {
-          if ((shader[iVar13 * 2 + loopIndex2 * 2] & 1U) == 0) {
+          if ((shader[outputOffset * 2 + loopIndex2 * 2] & 1U) == 0) {
             ch = '.';
             copyIndex4 = 0;
             do {
@@ -9501,7 +9526,7 @@ LAB_97c04238:
             } while (ch != '\0');
           }
           else {
-            if ((shader[iVar13 * 2 + loopIndex2 * 2] & 1U) != 1) goto switchD_97c04350_caseD_0;
+            if ((shader[outputOffset * 2 + loopIndex2 * 2] & 1U) != 1) goto switchD_97c04350_caseD_0;
             ch = '.';
             copyIndex4 = 0;
             do {
@@ -9513,7 +9538,7 @@ LAB_97c04238:
           }
           break;
         }
-        if ((shaderTarget == 0x8b30) && (1 < ((uint)shader[iVar13 * 2 + loopIndex2 * 2] >> 1 & 7))) {
+        if ((shaderTarget == 0x8b30) && (1 < ((uint)shader[outputOffset * 2 + loopIndex2 * 2] >> 1 & 7))) {
           ch = '[';
           copyIndex4 = 0;
           do {
@@ -9523,7 +9548,7 @@ LAB_97c04238:
             copyIndex4 = copyLength5;
           } while (ch != '\0');
           outCursor = outCursor + copyLength5;
-          copyEnd4 = ((int (*)())_ncpy_97bf2850)(outCursor,(uint)shader[iVar13 * 2 + loopIndex2 * 2] >> 1 & 7);
+          copyEnd4 = ((int (*)())_ncpy_97bf2850)(outCursor,(uint)shader[outputOffset * 2 + loopIndex2 * 2] >> 1 & 7);
           ch = ']';
           outCursor = outCursor + copyEnd4;
           copyIndex4 = 0;
@@ -9547,7 +9572,7 @@ LAB_97c04238:
         } while (ch != '\0');
         outCursor = outCursor + copyLength5;
         if (shaderTarget == 0x8b31) {
-          if ((shader[iVar13 * 2 + loopIndex2 * 2] & 1U) == 0) {
+          if ((shader[outputOffset * 2 + loopIndex2 * 2] & 1U) == 0) {
             ch = '.';
             copyIndex4 = 0;
             do {
@@ -9558,7 +9583,7 @@ LAB_97c04238:
             } while (ch != '\0');
           }
           else {
-            if ((shader[iVar13 * 2 + loopIndex2 * 2] & 1U) != 1) goto switchD_97c04350_caseD_0;
+            if ((shader[outputOffset * 2 + loopIndex2 * 2] & 1U) != 1) goto switchD_97c04350_caseD_0;
             ch = '.';
             copyIndex4 = 0;
             do {
@@ -9581,7 +9606,7 @@ LAB_97c04238:
           copyIndex4 = copyLength5;
         } while (ch != '\0');
         outCursor = outCursor + copyLength5;
-        copyEnd4 = ((int (*)())_ncpy_97bf2850)(outCursor,shader[iVar13 * 2 + loopIndex2 * 2] & 0x1f);
+        copyEnd4 = ((int (*)())_ncpy_97bf2850)(outCursor,shader[outputOffset * 2 + loopIndex2 * 2] & 0x1f);
         ch = ']';
         outCursor = outCursor + copyEnd4;
         copyIndex4 = 0;
@@ -9632,7 +9657,7 @@ LAB_97c04238:
           copyIndex4 = copyLength5;
         } while (ch != '\0');
         outCursor = outCursor + copyLength5;
-        copyEnd4 = ((int (*)())_ncpy_97bf2850)(outCursor,shader[iVar13 * 2 + loopIndex2 * 2] & 0x1f);
+        copyEnd4 = ((int (*)())_ncpy_97bf2850)(outCursor,shader[outputOffset * 2 + loopIndex2 * 2] & 0x1f);
         ch = ']';
         outCursor = outCursor + copyEnd4;
         copyIndex4 = 0;
@@ -9685,12 +9710,12 @@ LAB_97c04904:
   if (bodyCursor[0] == (char *)0x0) goto LAB_97c04d50;
   instructionCount = shader[0x14];
   loopIndex2 = 0;
-  iVar13 = shader[0x15];
+  instructionOffset = shader[0x15];
   loopIndex7 = 0;
   bodyStart = bodyCursor[0];
   if (0 < instructionCount) {
     do {
-      glpDisassemble2OpResult = ((int (*)())_glpDisassemble2Op)(shader + iVar13 * 2 + loopIndex7 * 2,bodyCursor[0],&wordsConsumed,&charsWritten,
+      glpDisassemble2OpResult = ((int (*)())_glpDisassemble2Op)(shader + instructionOffset * 2 + loopIndex7 * 2,bodyCursor[0],&wordsConsumed,&charsWritten,
                                  allocation3,allocation10,0,&outFlagWord,&usageFlags,shaderTarget,printOptions);
       if (glpDisassemble2OpResult == -1) {
 LAB_97c04a0c:
@@ -9855,79 +9880,79 @@ LAB_97c04c9c:
         ch = "ALIAS kZERO       = kARRAY1.xxxx;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
       } while (ch != '\0');
-      shaderTarget = copyLength4 + copyLength2;
+      nextIndex5 = copyLength4 + copyLength2;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        allocation[copyIndex2 + shaderTarget] = ch;
+        allocation[copyIndex2 + nextIndex5] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "ALIAS kONE        = kARRAY1.yyyy;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
       } while (ch != '\0');
-      iVar13 = copyLength2 + shaderTarget;
+      nextIndex6 = copyLength2 + nextIndex5;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        allocation[copyIndex2 + iVar13] = ch;
+        allocation[copyIndex2 + nextIndex6] = ch;
         copyLength4 = copyIndex2 + 1;
         ch = "ALIAS kTWO        = kARRAY1.zzzz;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
       } while (ch != '\0');
-      shaderTarget = copyLength4 + iVar13;
+      nextIndex5 = copyLength4 + nextIndex6;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        allocation[copyIndex2 + shaderTarget] = ch;
+        allocation[copyIndex2 + nextIndex5] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "ALIAS kTHREE      = kARRAY1.wwww;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
       } while (ch != '\0');
-      iVar13 = copyLength2 + shaderTarget;
+      nextIndex6 = copyLength2 + nextIndex5;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        allocation[copyIndex2 + iVar13] = ch;
+        allocation[copyIndex2 + nextIndex6] = ch;
         copyLength4 = copyIndex2 + 1;
         ch = "ALIAS kSEL        = kARRAY1;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
       } while (ch != '\0');
-      shaderTarget = copyLength4 + iVar13;
+      nextIndex5 = copyLength4 + nextIndex6;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        allocation[copyIndex2 + shaderTarget] = ch;
+        allocation[copyIndex2 + nextIndex5] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "ALIAS kFLOAT      = kARRAY1.yxxx;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
       } while (ch != '\0');
-      iVar13 = copyLength2 + shaderTarget;
+      nextIndex6 = copyLength2 + nextIndex5;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        allocation[copyIndex2 + iVar13] = ch;
+        allocation[copyIndex2 + nextIndex6] = ch;
         copyLength4 = copyIndex2 + 1;
         ch = "ALIAS kVEC2       = kARRAY1.yyxx;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
       } while (ch != '\0');
-      shaderTarget = copyLength4 + iVar13;
+      nextIndex5 = copyLength4 + nextIndex6;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        allocation[copyIndex2 + shaderTarget] = ch;
+        allocation[copyIndex2 + nextIndex5] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "ALIAS kVEC3       = kARRAY1.yyyx;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
       } while (ch != '\0');
-      iVar13 = copyLength2 + shaderTarget;
+      nextIndex6 = copyLength2 + nextIndex5;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        allocation[copyIndex2 + iVar13] = ch;
+        allocation[copyIndex2 + nextIndex6] = ch;
         copyLength4 = copyIndex2 + 1;
         ch = "ALIAS kVEC4       = kARRAY1.yyyy;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
       } while (ch != '\0');
-      allocation7 = allocation + copyLength4 + iVar13;
+      allocation7 = allocation + copyLength4 + nextIndex6;
     }
     if ((usageFlags & 0x2000) != 0) {
       ch = 'P';
@@ -9947,34 +9972,34 @@ LAB_97c04c9c:
         ch = "ALIAS kHALF       = kARRAY2.xxxx;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
       } while (ch != '\0');
-      shaderTarget = copyLength4 + nextIndex;
+      nextIndex5 = copyLength4 + nextIndex;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        allocation7[copyIndex2 + shaderTarget] = ch;
+        allocation7[copyIndex2 + nextIndex5] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "ALIAS kPI         = kARRAY2.yyyy;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
       } while (ch != '\0');
-      iVar13 = copyLength2 + shaderTarget;
+      nextIndex6 = copyLength2 + nextIndex5;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        allocation7[copyIndex2 + iVar13] = ch;
+        allocation7[copyIndex2 + nextIndex6] = ch;
         copyLength4 = copyIndex2 + 1;
         ch = "ALIAS k2PI        = kARRAY2.zzzz;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
       } while (ch != '\0');
-      shaderTarget = copyLength4 + iVar13;
+      nextIndex5 = copyLength4 + nextIndex6;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        allocation7[copyIndex2 + shaderTarget] = ch;
+        allocation7[copyIndex2 + nextIndex5] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "ALIAS kHALFPI     = kARRAY2.wwww;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
       } while (ch != '\0');
-      allocation7 = allocation7 + copyLength2 + shaderTarget;
+      allocation7 = allocation7 + copyLength2 + nextIndex5;
     }
     if ((usageFlags & 0x4000) != 0) {
       ch = 'P';
@@ -9994,34 +10019,34 @@ LAB_97c04c9c:
         ch = "ALIAS kHALFPI_RCP = kARRAY3.xxxx;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
       } while (ch != '\0');
-      shaderTarget = copyLength4 + nextIndex;
+      nextIndex5 = copyLength4 + nextIndex;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        allocation7[copyIndex2 + shaderTarget] = ch;
+        allocation7[copyIndex2 + nextIndex5] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "ALIAS kPI_RCP     = kARRAY3.yyyy;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
       } while (ch != '\0');
-      iVar13 = copyLength2 + shaderTarget;
+      nextIndex6 = copyLength2 + nextIndex5;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        allocation7[copyIndex2 + iVar13] = ch;
+        allocation7[copyIndex2 + nextIndex6] = ch;
         copyLength4 = copyIndex2 + 1;
         ch = "ALIAS k2PI_RCP    = kARRAY3.zzzz;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
       } while (ch != '\0');
-      shaderTarget = copyLength4 + iVar13;
+      nextIndex5 = copyLength4 + nextIndex6;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        allocation7[copyIndex2 + shaderTarget] = ch;
+        allocation7[copyIndex2 + nextIndex5] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "ALIAS kTAN_K1     = kARRAY3.wwww;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
       } while (ch != '\0');
-      allocation7 = allocation7 + copyLength2 + shaderTarget;
+      allocation7 = allocation7 + copyLength2 + nextIndex5;
     }
     if ((usageFlags & 0x8000) != 0) {
       ch = 'P';
@@ -10041,34 +10066,34 @@ LAB_97c04c9c:
         ch = "ALIAS kTAN_K2     = kARRAY4.xxxx;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
       } while (ch != '\0');
-      shaderTarget = copyLength4 + nextIndex;
+      nextIndex5 = copyLength4 + nextIndex;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        allocation7[copyIndex2 + shaderTarget] = ch;
+        allocation7[copyIndex2 + nextIndex5] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "ALIAS kTAN_K3     = kARRAY4.yyyy;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
       } while (ch != '\0');
-      iVar13 = copyLength2 + shaderTarget;
+      nextIndex6 = copyLength2 + nextIndex5;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        allocation7[copyIndex2 + iVar13] = ch;
+        allocation7[copyIndex2 + nextIndex6] = ch;
         copyLength4 = copyIndex2 + 1;
         ch = "ALIAS kDEGREES    = kARRAY4.zzzz;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
       } while (ch != '\0');
-      shaderTarget = copyLength4 + iVar13;
+      nextIndex5 = copyLength4 + nextIndex6;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        allocation7[copyIndex2 + shaderTarget] = ch;
+        allocation7[copyIndex2 + nextIndex5] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "ALIAS kRADIANS    = kARRAY4.wwww;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
       } while (ch != '\0');
-      allocation7 = allocation7 + copyLength2 + shaderTarget;
+      allocation7 = allocation7 + copyLength2 + nextIndex5;
     }
     if ((usageFlags & 0x10000) != 0) {
       ch = 'P';
@@ -10087,34 +10112,34 @@ LAB_97c04c9c:
         ch = "ALIAS kATAN_K1    = kARRAY5.xxxx;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
       } while (ch != '\0');
-      shaderTarget = copyLength4 + copyLength2;
+      nextIndex5 = copyLength4 + copyLength2;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        allocation7[copyIndex2 + shaderTarget] = ch;
+        allocation7[copyIndex2 + nextIndex5] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "ALIAS kATAN_K2    = kARRAY5.yyyy;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
       } while (ch != '\0');
-      iVar13 = copyLength2 + shaderTarget;
+      nextIndex6 = copyLength2 + nextIndex5;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        allocation7[copyIndex2 + iVar13] = ch;
+        allocation7[copyIndex2 + nextIndex6] = ch;
         copyLength4 = copyIndex2 + 1;
         ch = "ALIAS kATAN_K3    = kARRAY5.zzzz;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
       } while (ch != '\0');
-      shaderTarget = copyLength4 + iVar13;
+      nextIndex5 = copyLength4 + nextIndex6;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        allocation7[copyIndex2 + shaderTarget] = ch;
+        allocation7[copyIndex2 + nextIndex5] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "ALIAS kATAN_K4    = kARRAY5.wwww;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
       } while (ch != '\0');
-      allocation7 = allocation7 + copyLength2 + shaderTarget;
+      allocation7 = allocation7 + copyLength2 + nextIndex5;
     }
     if ((usageFlags & 0x20000) != 0) {
       ch = 'P';
@@ -10134,25 +10159,25 @@ LAB_97c04c9c:
         ch = "ALIAS kOFFSET     = kARRAY6.xxxx;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
       } while (ch != '\0');
-      shaderTarget = copyLength4 + nextIndex;
+      nextIndex5 = copyLength4 + nextIndex;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        allocation7[copyIndex2 + shaderTarget] = ch;
+        allocation7[copyIndex2 + nextIndex5] = ch;
         copyLength2 = copyIndex2 + 1;
         ch = "ALIAS kE          = kARRAY6.y;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength2;
       } while (ch != '\0');
-      iVar13 = copyLength2 + shaderTarget;
+      nextIndex6 = copyLength2 + nextIndex5;
       ch = 'A';
       copyIndex2 = 0;
       do {
-        allocation7[copyIndex2 + iVar13] = ch;
+        allocation7[copyIndex2 + nextIndex6] = ch;
         copyLength4 = copyIndex2 + 1;
         ch = "ALIAS k1_OVER_LOG2_E = kARRAY6.zzzz;\n"[copyIndex2 + 1];
         copyIndex2 = copyLength4;
       } while (ch != '\0');
-      allocation7 = allocation7 + copyLength4 + iVar13;
+      allocation7 = allocation7 + copyLength4 + nextIndex6;
     }
     if ((usageFlags & 0xff000) != 0) {
       ch = '\n';
@@ -10166,8 +10191,8 @@ LAB_97c04c9c:
       allocation7 = allocation7 + copyLength2;
     }
     loopIndex4 = 0;
-    uVar1 = usageFlags;
-    while ((uVar1 & 1) != 0) {
+    pendingUsageFlags = usageFlags;
+    while ((pendingUsageFlags & 1) != 0) {
       ch = 'T';
       copyIndex2 = 0;
       do {
@@ -10191,7 +10216,7 @@ LAB_97c04c9c:
       } while (ch != '\0');
       loopIndex4 = loopIndex4 + 1;
       allocation7 = allocation7 + copyLength2;
-      uVar1 = (int)usageFlags >> (loopIndex4 & 0x3f);
+      pendingUsageFlags = (int)usageFlags >> (loopIndex4 & 0x3f);
     }
     if ((usageFlags & 0xfff) != 0) {
       ch = '\n';
@@ -10227,23 +10252,23 @@ LAB_97c04c9c:
       copyIndex10 = copyIndex10 + 1;
       ch = outBuffer[copyIndex10];
     }
-    shaderTarget = allocation2 + copyIndex9 + copyIndex10;
+    copyIndex11 = allocation2 + copyIndex9 + copyIndex10;
     copyIndex9 = 0;
     ch = *allocation;
     while (ch != '\0') {
-      *(char *)(shaderTarget + copyIndex9) = ch;
+      *(char *)(copyIndex11 + copyIndex9) = ch;
       copyIndex9 = copyIndex9 + 1;
       ch = allocation[copyIndex9];
     }
-    shaderTarget = shaderTarget + copyIndex9;
+    copyIndex11 = copyIndex11 + copyIndex9;
     copyIndex9 = 0;
     ch = *bodyStart;
     while (ch != '\0') {
-      *(char *)(shaderTarget + copyIndex9) = ch;
+      *(char *)(copyIndex11 + copyIndex9) = ch;
       copyIndex9 = copyIndex9 + 1;
       ch = bodyStart[copyIndex9];
     }
-    *(undefined1 *)(shaderTarget + copyIndex9) = 0;
+    *(undefined1 *)(copyIndex11 + copyIndex9) = 0;
     _free(allocation8);
     _free(outBuffer);
     _free(allocation);
@@ -10267,70 +10292,70 @@ int _glpPPShaderToProgram(shader, printOptions, printFlags)
   undefined4 allocation2;
   undefined4 ppStreamCreateResult;
   int ppParserParseResult;
-  int iVar5;
-  undefined4 local_70;
-  undefined4 local_6c;
-  undefined4 local_68;
-  undefined4 local_64;
-  undefined4 local_60;
-  undefined4 local_5c;
-  undefined4 local_58;
-  undefined4 local_54;
-  undefined4 local_50;
-  undefined4 local_4c;
-  undefined4 local_48;
-  undefined4 local_44;
-  undefined4 local_40;
-  undefined4 local_3c;
-  undefined4 local_38;
-  undefined4 local_30 [5];
+  int parser;
+  undefined4 limitAt450;
+  undefined4 limitAt454;
+  undefined4 limitAt458;
+  undefined4 limitAt45c;
+  undefined4 limitAt460;
+  undefined4 limitAt464;
+  undefined4 limitAt468;
+  undefined4 limitAt46c;
+  undefined4 limitAt470;
+  undefined4 limitAt474;
+  undefined4 limitAt478;
+  undefined4 limitAt47c;
+  undefined4 limitAt480;
+  undefined4 limitAt484;
+  undefined4 limitAt488;
+  undefined4 streamInfo [5];
   
-  _memset(&local_70,0,0x3c);
+  _memset(&limitAt450,0,0x3c);
   glpPPShaderToProgramStringResult = ((int (*)())_glpPPShaderToProgramString)(shader,printOptions,printFlags);
-  iVar5 = 0;
+  parser = 0;
   allocation2 = 0;
   if (glpPPShaderToProgramStringResult != 0) {
     if (*shader == 0x8b30) {
-      iVar5 = _PPParserCreate(2);
-      local_60 = 0x100;
-      local_64 = 0x8000;
-      local_5c = 0x80;
-      local_58 = 0x40;
-      local_54 = 0;
-      local_70 = 0x80;
-      local_6c = 0x80;
-      local_38 = 0;
+      parser = _PPParserCreate(2);
+      limitAt460 = 0x100;
+      limitAt45c = 0x8000;
+      limitAt464 = 0x80;
+      limitAt468 = 0x40;
+      limitAt46c = 0;
+      limitAt450 = 0x80;
+      limitAt454 = 0x80;
+      limitAt488 = 0;
     }
     else if (*shader == 0x8b31) {
-      iVar5 = _PPParserCreate(0);
-      local_38 = 0x10;
-      local_64 = 0x8000;
-      local_5c = 0x100;
-      local_58 = 0x20;
-      local_54 = 2;
-      local_70 = 0x100;
-      local_6c = 0x100;
-      local_60 = 0x100;
+      parser = _PPParserCreate(0);
+      limitAt488 = 0x10;
+      limitAt45c = 0x8000;
+      limitAt464 = 0x100;
+      limitAt468 = 0x20;
+      limitAt46c = 2;
+      limitAt450 = 0x100;
+      limitAt454 = 0x100;
+      limitAt460 = 0x100;
     }
     ppStreamCreateResult = _PPStreamCreate();
-    _PPParserAttachStream(iVar5,ppStreamCreateResult);
-    local_4c = 0x10;
-    local_48 = 4;
-    local_44 = 1;
-    local_40 = 6;
-    local_3c = 8;
-    local_68 = 8;
-    local_50 = 8;
-    _memcpy(iVar5 + 0x450,&local_70,0x3c);
-    _PPParserAttachString(iVar5,glpPPShaderToProgramStringResult,1);
-    ppParserParseResult = _PPParserParse(iVar5);
+    _PPParserAttachStream(parser,ppStreamCreateResult);
+    limitAt474 = 0x10;
+    limitAt478 = 4;
+    limitAt47c = 1;
+    limitAt480 = 6;
+    limitAt484 = 8;
+    limitAt458 = 8;
+    limitAt470 = 8;
+    _memcpy(parser + 0x450,&limitAt450,0x3c);
+    _PPParserAttachString(parser,glpPPShaderToProgramStringResult,1);
+    ppParserParseResult = _PPParserParse(parser);
     allocation2 = 0;
     if (ppParserParseResult == 0) {
-      _PPStreamGetStream(ppStreamCreateResult,0,local_30);
-      allocation2 = _calloc(local_30[0],8);
-      _PPStreamGetStream(ppStreamCreateResult,allocation2,local_30);
+      _PPStreamGetStream(ppStreamCreateResult,0,streamInfo);
+      allocation2 = _calloc(streamInfo[0],8);
+      _PPStreamGetStream(ppStreamCreateResult,allocation2,streamInfo);
       _PPStreamFree(ppStreamCreateResult);
-      _PPParserFree(iVar5);
+      _PPParserFree(parser);
       _free(glpPPShaderToProgramStringResult);
     }
   }
@@ -10338,69 +10363,69 @@ int _glpPPShaderToProgram(shader, printOptions, printFlags)
 }
 
 /* _glpFreePPShaderToProgram @ 0x97c0597c (12 bytes) */
-int _glpFreePPShaderToProgram(param_1)
-  int param_1;
+int _glpFreePPShaderToProgram(program)
+  int program;
 {
-  if (param_1 == 0) {
+  if (program == 0) {
     return;
   }
-  return _free(param_1);
+  return _free(program);
 }
 
 /* _glpUniformToFloat @ 0x97c05988 (344 bytes) */
-int _glpUniformToFloat(param_1, param_2, param_3, param_4)
-  int param_1;
-  uint param_2;
-  float *param_3;
-  float *param_4;
+int _glpUniformToFloat(shader, registerNumber, uniformValue, floatOut)
+  int shader;
+  uint registerNumber;
+  float *uniformValue;
+  float *floatOut;
 {
-  float fVar1;
-  float fVar2;
-  float fVar3;
-  bool bVar4;
-  bool bVar5;
-  double dVar6;
-  int iVar7;
-  uint uVar8;
-  int iVar9;
+  float component0;
+  float component1;
+  float component2;
+  bool found;
+  bool isIntegerUniform;
+  double intToDoubleBias;
+  int paramTable;
+  uint entryWord0;
+  int paramCount;
   int loopIndex;
   
-  dVar6 = DOUBLE_97c30a58;
-  if (param_1 != 0) {
-    iVar9 = *(int *)(param_1 + 0x28);
-    bVar4 = false;
-    bVar5 = false;
-    iVar7 = param_1 + *(int *)(param_1 + 0x2c) * 8;
-    if (iVar9 != 0) {
+  intToDoubleBias = DOUBLE_97c30a58;
+  if (shader != 0) {
+    paramCount = *(int *)(shader + 0x28);
+    found = false;
+    isIntegerUniform = false;
+    paramTable = shader + *(int *)(shader + 0x2c) * 8;
+    if (paramCount != 0) {
       loopIndex = 0;
-      if (0 < iVar9) {
+      if (0 < paramCount) {
         do {
-          uVar8 = *(uint *)(iVar7 + loopIndex * 8);
-          if (((uVar8 >> 0x10 & 0x1f) == 1) && ((uVar8 & 0xffff) == param_2)) {
-            bVar4 = true;
-            if ((-1 < *(int *)(loopIndex * 8 + iVar7 + 4)) && ((uVar8 >> 0x1a & 7) != 1)) {
-              bVar5 = true;
+          entryWord0 = *(uint *)(paramTable + loopIndex * 8);
+          if (((entryWord0 >> 0x10 & 0x1f) == 1) && ((entryWord0 & 0xffff) == registerNumber)) {
+            found = true;
+            if ((-1 < *(int *)(loopIndex * 8 + paramTable + 4)) && ((entryWord0 >> 0x1a & 7) != 1)) {
+              isIntegerUniform = true;
             }
             break;
           }
           loopIndex = loopIndex + 1;
-        } while (loopIndex < iVar9);
+        } while (loopIndex < paramCount);
       }
-      if (bVar4) {
-        if (bVar5) {
-          *param_4 = (float)((double)CONCAT44(0x43300000,-*param_3) - DOUBLE_97c30a58);
-          param_4[1] = (float)((double)CONCAT44(0x43300000,-param_3[1]) - dVar6);
-          param_4[2] = (float)((double)CONCAT44(0x43300000,-param_3[2]) - dVar6);
-          param_4[3] = (float)((double)CONCAT44(0x43300000,-param_3[3]) - dVar6);
+      if (found) {
+        if (isIntegerUniform) {
+          *floatOut = (float)((double)CONCAT44(0x43300000,-*uniformValue) - DOUBLE_97c30a58);
+          floatOut[1] = (float)((double)CONCAT44(0x43300000,-uniformValue[1]) - intToDoubleBias);
+          floatOut[2] = (float)((double)CONCAT44(0x43300000,-uniformValue[2]) - intToDoubleBias);
+          floatOut[3] = (float)((double)CONCAT44(0x43300000,-uniformValue[3]) - intToDoubleBias);
         }
         else {
-          fVar1 = *param_3;
-          fVar2 = param_3[1];
-          fVar3 = param_3[2];
-          param_4[3] = param_3[3];
-          *param_4 = fVar1;
-          param_4[1] = fVar2;
-          param_4[2] = fVar3;
+          component0 = *uniformValue;
+          component1 = uniformValue[1];
+          component2 = uniformValue[2];
+          floatOut[3] = uniformValue[3];
+          *floatOut = component0;
+          floatOut[1] = component1;
+          floatOut[2] = component2;
         }
       }
     }
@@ -10409,189 +10434,191 @@ int _glpUniformToFloat(param_1, param_2, param_3, param_4)
 }
 
 /* _glpUniformsToFloats @ 0x97c05ae0 (144 bytes) */
-int _glpUniformsToFloats(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  int param_3;
+int _glpUniformsToFloats(shader, uniformValues, floatsOut)
+  int shader;
+  int uniformValues;
+  int floatsOut;
 {
-  int iVar1;
-  int iVar2;
-  uint uVar3;
-  int iVar4;
-  int iVar5;
+  int registerByteOffset;
+  int paramOffset;
+  uint entryWord0;
+  int paramCount;
+  int entryIndex;
   
-  if (param_1 != 0) {
-    iVar4 = *(int *)(param_1 + 0x28);
-    iVar2 = *(int *)(param_1 + 0x2c);
-    if ((iVar4 != 0) && (iVar5 = 0, 0 < iVar4)) {
+  if (shader != 0) {
+    paramCount = *(int *)(shader + 0x28);
+    paramOffset = *(int *)(shader + 0x2c);
+    if ((paramCount != 0) && (entryIndex = 0, 0 < paramCount)) {
       do {
-        uVar3 = *(uint *)(param_1 + iVar2 * 8 + iVar5 * 8);
-        if ((uVar3 >> 0x10 & 0x1f) == 1) {
-          uVar3 = uVar3 & 0xffff;
-          iVar1 = uVar3 * 0x10;
-          ((int (*)())_glpUniformToFloat)(param_1,uVar3,param_2 + iVar1,param_3 + iVar1);
+        entryWord0 = *(uint *)(shader + paramOffset * 8 + entryIndex * 8);
+        if ((entryWord0 >> 0x10 & 0x1f) == 1) {
+          entryWord0 = entryWord0 & 0xffff;
+          registerByteOffset = entryWord0 * 0x10;
+          ((int (*)())_glpUniformToFloat)(shader,entryWord0,uniformValues + registerByteOffset,floatsOut + registerByteOffset);
         }
-        iVar5 = iVar5 + 1;
-      } while (iVar5 < iVar4);
+        entryIndex = entryIndex + 1;
+      } while (entryIndex < paramCount);
     }
   }
   return;
 }
 
 /* _handleDigit_97c05b70 @ 0x97c05b70 (112 bytes) */
-int _handleDigit_97c05b70(param_1, param_2)
-  int *param_1;
-  int param_2;
+int _handleDigit_97c05b70(writeCursorPtr, value)
+  int *writeCursorPtr;
+  int value;
 {
-  int iVar1;
+  int leadingValue;
   
-  iVar1 = param_2 / 10;
-  if (iVar1 != 0) {
-    ((int (*)())_handleDigit_97c05b70)(param_1,iVar1);
+  leadingValue = value / 10;
+  if (leadingValue != 0) {
+    ((int (*)())_handleDigit_97c05b70)(writeCursorPtr,leadingValue);
   }
-  *(char *)*param_1 = (char)param_2 + (char)iVar1 * -10 + '0';
-  *param_1 = *param_1 + 1;
+  *(char *)*writeCursorPtr = (char)value + (char)leadingValue * -10 + '0';
+  *writeCursorPtr = *writeCursorPtr + 1;
   return;
 }
 
 /* _clearFuncInfoList @ 0x97c05be0 (68 bytes) */
-int _clearFuncInfoList(param_1, param_2)
-  int param_1;
-  int param_2;
+int _clearFuncInfoList(funcInfos, count)
+  int funcInfos;
+  int count;
 {
-  int iVar1;
-  int iVar2;
-  int iVar3;
+  int recordOffset;
+  int record;
+  int recordIndex;
   
-  iVar3 = 0;
-  if (param_2 != 0) {
+  recordIndex = 0;
+  if (count != 0) {
     do {
-      iVar1 = iVar3 * 0x20;
-      iVar3 = iVar3 + 1;
-      iVar2 = iVar1 + param_1;
-      *(undefined4 *)(param_1 + iVar1) = 0xffffffff;
-      *(undefined4 *)(iVar2 + 0x14) = 0;
-      *(undefined4 *)(iVar2 + 4) = 0xffffffff;
-      *(undefined4 *)(iVar2 + 8) = 0;
-      *(undefined4 *)(iVar2 + 0xc) = 0;
-      *(undefined4 *)(iVar2 + 0x10) = 0;
-      param_2 = param_2 + -1;
-    } while (param_2 != 0);
+      recordOffset = recordIndex * 0x20;
+      recordIndex = recordIndex + 1;
+      record = recordOffset + funcInfos;
+      *(undefined4 *)(funcInfos + recordOffset) = 0xffffffff;
+      *(undefined4 *)(record + 0x14) = 0;
+      *(undefined4 *)(record + 4) = 0xffffffff;
+      *(undefined4 *)(record + 8) = 0;
+      *(undefined4 *)(record + 0xc) = 0;
+      *(undefined4 *)(record + 0x10) = 0;
+      count = count + -1;
+    } while (count != 0);
     return;
   }
   return;
 }
 
 /* _UpdateFunctionIndex @ 0x97c05c24 (60 bytes) */
-int _UpdateFunctionIndex(param_1, param_2, param_3, param_4)
-  uint param_1;
-  int param_2;
-  int param_3;
-  uint param_4;
+int _UpdateFunctionIndex(notFoundIndex, key, funcInfos, count)
+  uint notFoundIndex;
+  int key;
+  int funcInfos;
+  uint count;
 {
-  uint uVar1;
+  uint recordIndex;
   
-  uVar1 = 0;
-  if (param_4 != 0) {
+  recordIndex = 0;
+  if (count != 0) {
     do {
-      if (param_2 == *(int *)(param_3 + uVar1 * 0x20)) break;
-      uVar1 = uVar1 + 1;
-    } while (uVar1 < param_4);
+      if (key == *(int *)(funcInfos + recordIndex * 0x20)) break;
+      recordIndex = recordIndex + 1;
+    } while (recordIndex < count);
   }
-  if (uVar1 == param_4) {
-    uVar1 = param_1;
+  if (recordIndex == count) {
+    recordIndex = notFoundIndex;
   }
-  return uVar1;
+  return recordIndex;
 }
 
 /* _RecordFunctionCall @ 0x97c05c60 (188 bytes) */
-int _RecordFunctionCall(param_1, param_2, param_3)
-  int param_1;
-  int *param_2;
-  uint param_3;
+int _RecordFunctionCall(key, funcInfosPtr, count)
+  int key;
+  int *funcInfosPtr;
+  uint count;
 {
   int allocation;
   uint loopIndex;
   
   loopIndex = 0;
-  if (param_3 != 0) {
+  if (count != 0) {
     do {
-      if (param_1 == *(int *)(loopIndex * 0x20 + *param_2)) break;
+      if (key == *(int *)(loopIndex * 0x20 + *funcInfosPtr)) break;
       loopIndex = loopIndex + 1;
-    } while (loopIndex < param_3);
+    } while (loopIndex < count);
   }
-  if (loopIndex == param_3) {
-    if ((param_3 & 0x7f) == 0) {
-      allocation = _malloc(param_3 * 0x20 + 0x1000);
-      ((int (*)())_clearFuncInfoList)(allocation,param_3 + 0x80);
-      _memcpy(allocation,*param_2,param_3 * 0x20);
-      if (*param_2 != 0) {
-        _free(*param_2);
+  if (loopIndex == count) {
+    if ((count & 0x7f) == 0) {
+      allocation = _malloc(count * 0x20 + 0x1000);
+      ((int (*)())_clearFuncInfoList)(allocation,count + 0x80);
+      _memcpy(allocation,*funcInfosPtr,count * 0x20);
+      if (*funcInfosPtr != 0) {
+        _free(*funcInfosPtr);
       }
-      *param_2 = allocation;
+      *funcInfosPtr = allocation;
     }
-    param_3 = param_3 + 1;
-    *(int *)(loopIndex * 0x20 + *param_2) = param_1;
+    count = count + 1;
+    *(int *)(loopIndex * 0x20 + *funcInfosPtr) = key;
   }
-  return param_3;
+  return count;
 }
 
 /* _RecordFunctionEdge @ 0x97c05d1c (72 bytes) */
-int _RecordFunctionEdge(param_1, param_2, param_3, param_4, param_5)
-  uint param_1;
-  int param_2;
-  undefined4 param_3;
-  int param_4;
-  uint param_5;
+int _RecordFunctionEdge(currentIndex, key, edgeValue, funcInfos, count)
+  uint currentIndex;
+  int key;
+  undefined4 edgeValue;
+  int funcInfos;
+  uint count;
 {
   uint loopIndex;
   
   loopIndex = 0;
-  if (param_5 == 0) {
-    return param_1;
+  if (count == 0) {
+    return currentIndex;
   }
   do {
-    if (param_2 == *(int *)(param_4 + loopIndex * 0x20)) {
-      if (-1 < (int)param_1) {
-        *(undefined4 *)(param_1 * 0x20 + param_4 + 4) = param_3;
+    if (key == *(int *)(funcInfos + loopIndex * 0x20)) {
+      if (-1 < (int)currentIndex) {
+        *(undefined4 *)(currentIndex * 0x20 + funcInfos + 4) = edgeValue;
       }
       return loopIndex;
     }
     loopIndex = loopIndex + 1;
-  } while (loopIndex < param_5);
-  return param_1;
+  } while (loopIndex < count);
+  return currentIndex;
 }
 
 /* _ClearJumpTable @ 0x97c05d64 (92 bytes) */
-int _ClearJumpTable(param_1)
-  int param_1;
+int _ClearJumpTable(jumpTable)
+  int jumpTable;
 {
-  if (*(int *)(param_1 + 0xc) != 0) {
-    _free(*(undefined4 *)(param_1 + 0x10));
-    _free(*(undefined4 *)(param_1 + 0x14));
-    *(undefined4 *)(param_1 + 0xc) = 0;
-    *(undefined4 *)(param_1 + 0x10) = 0;
-    *(undefined4 *)(param_1 + 0x14) = 0;
+  if (*(int *)(jumpTable + 0xc) != 0) {
+    _free(*(undefined4 *)(jumpTable + 0x10));
+    _free(*(undefined4 *)(jumpTable + 0x14));
+    *(undefined4 *)(jumpTable + 0xc) = 0;
+    *(undefined4 *)(jumpTable + 0x10) = 0;
+    *(undefined4 *)(jumpTable + 0x14) = 0;
   }
-  *(undefined4 *)(param_1 + 8) = 0;
+  *(undefined4 *)(jumpTable + 8) = 0;
   return;
 }
 
 /* _AddOpToJumpTable @ 0x97c05dc0 (396 bytes) */
-int _AddOpToJumpTable(param_1, param_2)
-  uint *param_1;
-  int param_2;
+int _AddOpToJumpTable(inst, jumpTable)
+  uint *inst;
+  int jumpTable;
 {
+  int targetByteOffset;
+  uint branchCountCopy;
   uint loopIndex;
   uint loopIndex2;
-  int iVar1;
-  uint uVar2;
+  int sourceByteOffset;
+  uint branchCount;
   int allocation;
-  uint uVar4;
+  uint instWord0;
   
-  *(int *)(param_2 + 8) = *(int *)(param_2 + 8) + 1;
-  uVar4 = *param_1;
-  switch(uVar4 >> 0x12 & 0xff) {
+  *(int *)(jumpTable + 8) = *(int *)(jumpTable + 8) + 1;
+  instWord0 = *inst;
+  switch(instWord0 >> 0x12 & 0xff) {
   case 0x4b:
   case 0x4c:
   case 0x54:
@@ -10604,96 +10631,96 @@ int _AddOpToJumpTable(param_1, param_2)
   case 0x69:
   case 0x6a:
   case 0x6b:
-    uVar2 = *(uint *)(param_2 + 0xc);
-    if ((uVar2 & 0x7f) == 0) {
-      allocation = _malloc(uVar2 * 4 + 0x200);
-      _memset(allocation,0,*(int *)(param_2 + 0xc) * 4 + 0x200);
+    branchCount = *(uint *)(jumpTable + 0xc);
+    if ((branchCount & 0x7f) == 0) {
+      allocation = _malloc(branchCount * 4 + 0x200);
+      _memset(allocation,0,*(int *)(jumpTable + 0xc) * 4 + 0x200);
       loopIndex2 = 0;
-      uVar4 = 0;
-      if (*(int *)(param_2 + 0xc) != 0) {
+      branchCountCopy = 0;
+      if (*(int *)(jumpTable + 0xc) != 0) {
         do {
-          iVar1 = loopIndex2 * 4;
+          sourceByteOffset = loopIndex2 * 4;
           loopIndex2 = loopIndex2 + 1;
-          *(undefined4 *)(iVar1 + allocation) = *(undefined4 *)(iVar1 + *(int *)(param_2 + 0x10));
-          uVar4 = *(uint *)(param_2 + 0xc);
-        } while (loopIndex2 < uVar4);
+          *(undefined4 *)(sourceByteOffset + allocation) = *(undefined4 *)(sourceByteOffset + *(int *)(jumpTable + 0x10));
+          branchCountCopy = *(uint *)(jumpTable + 0xc);
+        } while (loopIndex2 < branchCountCopy);
       }
-      if (*(int *)(param_2 + 0x10) != 0) {
-        _free(*(int *)(param_2 + 0x10));
-        uVar4 = *(uint *)(param_2 + 0xc);
+      if (*(int *)(jumpTable + 0x10) != 0) {
+        _free(*(int *)(jumpTable + 0x10));
+        branchCountCopy = *(uint *)(jumpTable + 0xc);
       }
-      *(int *)(param_2 + 0x10) = allocation;
-      allocation = _malloc(uVar4 * 4 + 0x200);
-      _memset(allocation,0,*(int *)(param_2 + 0xc) * 4 + 0x200);
+      *(int *)(jumpTable + 0x10) = allocation;
+      allocation = _malloc(branchCountCopy * 4 + 0x200);
+      _memset(allocation,0,*(int *)(jumpTable + 0xc) * 4 + 0x200);
       loopIndex = 0;
-      uVar2 = 0;
-      if (*(int *)(param_2 + 0xc) != 0) {
+      branchCount = 0;
+      if (*(int *)(jumpTable + 0xc) != 0) {
         do {
-          iVar1 = loopIndex * 4;
+          targetByteOffset = loopIndex * 4;
           loopIndex = loopIndex + 1;
-          *(undefined4 *)(iVar1 + allocation) = *(undefined4 *)(iVar1 + *(int *)(param_2 + 0x14));
-          uVar2 = *(uint *)(param_2 + 0xc);
-        } while (loopIndex < uVar2);
+          *(undefined4 *)(targetByteOffset + allocation) = *(undefined4 *)(targetByteOffset + *(int *)(jumpTable + 0x14));
+          branchCount = *(uint *)(jumpTable + 0xc);
+        } while (loopIndex < branchCount);
       }
-      if (*(int *)(param_2 + 0x14) != 0) {
-        _free(*(int *)(param_2 + 0x14));
-        uVar2 = *(uint *)(param_2 + 0xc);
+      if (*(int *)(jumpTable + 0x14) != 0) {
+        _free(*(int *)(jumpTable + 0x14));
+        branchCount = *(uint *)(jumpTable + 0xc);
       }
-      *(int *)(param_2 + 0x14) = allocation;
-      uVar4 = *param_1;
+      *(int *)(jumpTable + 0x14) = allocation;
+      instWord0 = *inst;
     }
-    *(uint *)(uVar2 * 4 + *(int *)(param_2 + 0x10)) = uVar4 & 0x3ffff;
-    *(uint *)(*(int *)(param_2 + 0xc) * 4 + *(int *)(param_2 + 0x14)) = param_1[1] & 0x3ffff;
-    *(int *)(param_2 + 0xc) = *(int *)(param_2 + 0xc) + 1;
+    *(uint *)(branchCount * 4 + *(int *)(jumpTable + 0x10)) = instWord0 & 0x3ffff;
+    *(uint *)(*(int *)(jumpTable + 0xc) * 4 + *(int *)(jumpTable + 0x14)) = inst[1] & 0x3ffff;
+    *(int *)(jumpTable + 0xc) = *(int *)(jumpTable + 0xc) + 1;
   }
   return;
 }
 
 /* _UpdateFunctionTable @ 0x97c05fd0 (68 bytes) */
-int _UpdateFunctionTable(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  int param_4;
-  int param_5;
+int _UpdateFunctionTable(oldKey, newKey0, newKey1, funcInfos, count)
+  int oldKey;
+  undefined4 newKey0;
+  undefined4 newKey1;
+  int funcInfos;
+  int count;
 {
-  int iVar1;
-  int iVar2;
+  int recordOffset;
+  int recordIndex;
   
-  iVar2 = 0;
-  if (param_5 != 0) {
+  recordIndex = 0;
+  if (count != 0) {
     do {
-      iVar1 = iVar2 * 0x20;
-      if (param_1 == *(int *)(iVar1 + param_4)) {
-        *(undefined4 *)(iVar1 + param_4) = param_2;
+      recordOffset = recordIndex * 0x20;
+      if (oldKey == *(int *)(recordOffset + funcInfos)) {
+        *(undefined4 *)(recordOffset + funcInfos) = newKey0;
       }
-      if (param_1 == *(int *)(iVar1 + param_4 + 4)) {
-        *(undefined4 *)(iVar1 + param_4 + 4) = param_3;
+      if (oldKey == *(int *)(recordOffset + funcInfos + 4)) {
+        *(undefined4 *)(recordOffset + funcInfos + 4) = newKey1;
       }
-      iVar2 = iVar2 + 1;
-      param_5 = param_5 + -1;
-    } while (param_5 != 0);
+      recordIndex = recordIndex + 1;
+      count = count + -1;
+    } while (count != 0);
     return;
   }
   return;
 }
 
 /* _FindFunctionIndex @ 0x97c06014 (48 bytes) */
-int _FindFunctionIndex(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  uint param_3;
+int _FindFunctionIndex(key, funcInfos, count)
+  int key;
+  int funcInfos;
+  uint count;
 {
   uint loopIndex;
   
   loopIndex = 0;
-  if (param_3 != 0) {
+  if (count != 0) {
     do {
-      if (param_1 == *(int *)(param_2 + loopIndex * 0x20)) {
+      if (key == *(int *)(funcInfos + loopIndex * 0x20)) {
         return loopIndex;
       }
       loopIndex = loopIndex + 1;
-    } while (loopIndex < param_3);
+    } while (loopIndex < count);
   }
   return loopIndex;
 }
@@ -10702,597 +10729,626 @@ int _FindFunctionIndex(param_1, param_2, param_3)
 int _InlineFunctionsBranch(stream)
   int stream;
 {
+  bool inDeadFunction;
+  bool copyingCallee;
+  int endChunk;
+  undefined4 keepIndexFlag;
+  uint recordKey;
+  uint continuationIndex;
+  uint insertedWord1;
+  uint funcInfoIndex;
+  uint funcSearchIndex;
+  uint funcScanWord0;
+  uint callOpIndex;
+  uint opIndex;
+  uint inlinedStartIndex;
+  uint previousOpIndex;
+  int funcRecordByteOffset;
+  int continuationChunk;
+  int calleeChunk;
+  int funcRecordOffset;
+  int nextChunk;
   int findFunctionIndexResult;
-  bool bVar1;
-  uint uVar2;
-  int *piVar3;
-  int iVar4;
-  undefined4 uVar5;
-  int iVar6;
-  int iVar7;
+  bool beforeCalleeEnd;
+  uint calleeWord0;
+  int *opList;
+  int scanChunk;
+  undefined4 lastResult;
+  int calleeRecordOffset;
+  int insertedChunk;
   undefined4 extraout_r3;
-  uint uVar8;
-  int iVar9;
-  uint uVar10;
-  uint uVar11;
+  uint opWord0;
+  int opsScanned;
+  uint returnWord0;
+  uint scanWord0;
   int loopIndex;
-  uint uVar13;
-  int iVar14;
-  int iVar15;
-  bool bVar16;
-  uint uVar17;
-  int iVar18;
+  uint funcCount;
+  int currentFuncIndex;
+  int opChunk;
+  bool noOps;
+  int callPredecessor;
   uint opHeader;
   uint opFlags;
-  int local_50 [6];
+  int funcInfos [6];
   
-  piVar3 = *(int **)(stream + 0x20);
-  local_50[0] = 0;
-  uVar17 = 0;
-  iVar15 = *piVar3;
-  uVar13 = 0;
-  iVar14 = -1;
-  if (iVar15 != 0) {
+  opList = *(int **)(stream + 0x20);
+  funcInfos[0] = 0;
+  opIndex = 0;
+  opChunk = *opList;
+  funcCount = 0;
+  currentFuncIndex = -1;
+  if (opChunk != 0) {
     do {
-      uVar8 = *(uint *)(iVar15 + 0xc);
-      uVar17 = uVar8 & 0x3ffff;
-      if (uVar17 == 0) {
-        uVar13 = ((int (*)())_RecordFunctionCall)(0,local_50,uVar13);
-        uVar8 = *(uint *)(iVar15 + 0xc);
+      opWord0 = *(uint *)(opChunk + 0xc);
+      opIndex = opWord0 & 0x3ffff;
+      if (opIndex == 0) {
+        funcCount = ((int (*)())_RecordFunctionCall)(0,funcInfos,funcCount);
+        opWord0 = *(uint *)(opChunk + 0xc);
       }
-      if ((uVar8 >> 0x12 & 0xff) == 0x4c) {
-        uVar13 = ((int (*)())_RecordFunctionCall)(*(uint *)(iVar15 + 0x10) & 0x3ffff,local_50,uVar13);
+      if ((opWord0 >> 0x12 & 0xff) == 0x4c) {
+        funcCount = ((int (*)())_RecordFunctionCall)(*(uint *)(opChunk + 0x10) & 0x3ffff,funcInfos,funcCount);
       }
-      iVar15 = *(int *)(iVar15 + 8);
-    } while (iVar15 != 0);
-    piVar3 = *(int **)(stream + 0x20);
+      opChunk = *(int *)(opChunk + 8);
+    } while (opChunk != 0);
+    opList = *(int **)(stream + 0x20);
   }
-  uVar8 = 0;
-  for (iVar15 = *piVar3; iVar15 != 0; iVar15 = *(int *)(iVar15 + 8)) {
-    uVar17 = *(uint *)(iVar15 + 0xc) & 0x3ffff;
-    iVar14 = ((int (*)())_RecordFunctionEdge)(iVar14,uVar17,uVar8,local_50[0],uVar13);
-    ((int (*)())_AddOpToJumpTable)(iVar15 + 0xc,local_50[0] + iVar14 * 0x20);
-    uVar8 = uVar17;
+  previousOpIndex = 0;
+  for (opChunk = *opList; opChunk != 0; opChunk = *(int *)(opChunk + 8)) {
+    opIndex = *(uint *)(opChunk + 0xc) & 0x3ffff;
+    currentFuncIndex = ((int (*)())_RecordFunctionEdge)(currentFuncIndex,opIndex,previousOpIndex,funcInfos[0],funcCount);
+    ((int (*)())_AddOpToJumpTable)(opChunk + 0xc,funcInfos[0] + currentFuncIndex * 0x20);
+    previousOpIndex = opIndex;
   }
-  uVar5 = ((int (*)())_RecordFunctionEdge)(iVar14,0,uVar17,local_50[0],uVar13);
-  if (1 < uVar13) {
-    piVar3 = *(int **)(stream + 0x20);
-    iVar15 = *piVar3;
-    bVar16 = iVar15 == 0;
-    if (!bVar16) {
+  lastResult = ((int (*)())_RecordFunctionEdge)(currentFuncIndex,0,opIndex,funcInfos[0],funcCount);
+  if (1 < funcCount) {
+    opList = *(int **)(stream + 0x20);
+    opChunk = *opList;
+    noOps = opChunk == 0;
+    if (!noOps) {
       do {
-        iVar14 = ((int (*)())_UpdateFunctionIndex)(iVar14,*(uint *)(iVar15 + 0xc) & 0x3ffff,local_50[0],uVar13);
-        iVar18 = iVar15;
-        if ((*(uint *)(iVar15 + 0xc) >> 0x12 & 0xff) == 0x4c) {
-          uVar8 = 0xffffffff;
+        currentFuncIndex = ((int (*)())_UpdateFunctionIndex)(currentFuncIndex,*(uint *)(opChunk + 0xc) & 0x3ffff,funcInfos[0],funcCount);
+        callPredecessor = opChunk;
+        if ((*(uint *)(opChunk + 0xc) >> 0x12 & 0xff) == 0x4c) {
+          inlinedStartIndex = 0xffffffff;
           loopIndex = 0;
-          findFunctionIndexResult = ((int (*)())_FindFunctionIndex)(*(uint *)(iVar15 + 0x10) & 0x3ffff,local_50[0],uVar13);
-          uVar10 = *(uint *)(*(int *)(iVar15 + 8) + 0xc);
-          uVar17 = *(uint *)(iVar15 + 0xc) & 0x3ffff;
-          iVar18 = *(int *)(iVar15 + 4);
-          iVar6 = findFunctionIndexResult * 0x20;
-          _PPStreamChunkListRemoveChunk(*(undefined4 *)(stream + 0x20),iVar15);
-          iVar15 = **(int **)(stream + 0x20);
-          uVar2 = *(uint *)(iVar15 + 0xc);
-          while (*(uint *)(iVar6 + local_50[0]) != (uVar2 & 0x3ffff)) {
-            iVar15 = *(int *)(iVar15 + 8);
-            uVar2 = *(uint *)(iVar15 + 0xc);
+          findFunctionIndexResult = ((int (*)())_FindFunctionIndex)(*(uint *)(opChunk + 0x10) & 0x3ffff,funcInfos[0],funcCount);
+          returnWord0 = *(uint *)(*(int *)(opChunk + 8) + 0xc);
+          callOpIndex = *(uint *)(opChunk + 0xc) & 0x3ffff;
+          callPredecessor = *(int *)(opChunk + 4);
+          calleeRecordOffset = findFunctionIndexResult * 0x20;
+          _PPStreamChunkListRemoveChunk(*(undefined4 *)(stream + 0x20),opChunk);
+          calleeChunk = **(int **)(stream + 0x20);
+          calleeWord0 = *(uint *)(calleeChunk + 0xc);
+          while (*(uint *)(calleeRecordOffset + funcInfos[0]) != (calleeWord0 & 0x3ffff)) {
+            calleeChunk = *(int *)(calleeChunk + 8);
+            calleeWord0 = *(uint *)(calleeChunk + 0xc);
           }
-          bVar16 = true;
-          iVar7 = iVar18;
+          copyingCallee = true;
+          insertedChunk = callPredecessor;
           do {
-            _memcpy(&opHeader,iVar15 + 0xc,0x38);
+            _memcpy(&opHeader,calleeChunk + 0xc,0x38);
             if (((opHeader >> 0x12 & 0xff) == 0x4d) &&
-               ((opHeader & 0x3ffff) != *(uint *)(iVar6 + local_50[0] + 4))) {
-              opFlags = uVar10 & 0x3ffff | opFlags & 0xfffc0000;
+               ((opHeader & 0x3ffff) != *(uint *)(calleeRecordOffset + funcInfos[0] + 4))) {
+              opFlags = returnWord0 & 0x3ffff | opFlags & 0xfffc0000;
               opHeader = opHeader & 0xfc03ffff | 0x12c0000;
             }
             else if ((opHeader >> 0x12 & 0xff) == 0x4d) {
               opHeader = opHeader & 0xfc03ffff | 0x1b80000;
             }
-            uVar5 = 0;
-            if ((uVar17 == 0) && (uVar8 == 0xffffffff)) {
-              uVar5 = 1;
+            keepIndexFlag = 0;
+            if ((callOpIndex == 0) && (inlinedStartIndex == 0xffffffff)) {
+              keepIndexFlag = 1;
             }
-            iVar7 = _PPStreamInsertOperationAfterChunk(stream,&opHeader,iVar15 + 0x44,uVar5,iVar7);
-            uVar2 = *(uint *)(iVar7 + 0x10);
-            if ((uVar2 & 0x3ffff) != 0) {
-              iVar9 = 0;
-              iVar4 = **(int **)(stream + 0x20);
-              uVar11 = *(uint *)(iVar4 + 0xc);
-              while (*(uint *)(iVar6 + local_50[0]) != (uVar11 & 0x3ffff)) {
-                iVar4 = *(int *)(iVar4 + 8);
-                uVar11 = *(uint *)(iVar4 + 0xc);
+            insertedChunk = _PPStreamInsertOperationAfterChunk(stream,&opHeader,calleeChunk + 0x44,keepIndexFlag,insertedChunk);
+            insertedWord1 = *(uint *)(insertedChunk + 0x10);
+            if ((insertedWord1 & 0x3ffff) != 0) {
+              opsScanned = 0;
+              scanChunk = **(int **)(stream + 0x20);
+              scanWord0 = *(uint *)(scanChunk + 0xc);
+              while (*(uint *)(calleeRecordOffset + funcInfos[0]) != (scanWord0 & 0x3ffff)) {
+                scanChunk = *(int *)(scanChunk + 8);
+                scanWord0 = *(uint *)(scanChunk + 0xc);
               }
-              bVar1 = true;
-              while ((uVar11 & 0x3ffff) != (uVar2 & 0x3ffff)) {
-                if ((uVar11 & 0x3ffff) == *(uint *)(iVar6 + local_50[0] + 4)) {
-                  bVar1 = false;
+              beforeCalleeEnd = true;
+              while ((scanWord0 & 0x3ffff) != (insertedWord1 & 0x3ffff)) {
+                if ((scanWord0 & 0x3ffff) == *(uint *)(calleeRecordOffset + funcInfos[0] + 4)) {
+                  beforeCalleeEnd = false;
                 }
-                iVar4 = *(int *)(iVar4 + 8);
-                iVar9 = iVar9 + 1;
-                if (!bVar1) goto LAB_97c0638c;
-                uVar11 = *(uint *)(iVar4 + 0xc);
+                scanChunk = *(int *)(scanChunk + 8);
+                opsScanned = opsScanned + 1;
+                if (!beforeCalleeEnd) goto LAB_97c0638c;
+                scanWord0 = *(uint *)(scanChunk + 0xc);
               }
-              *(uint *)(iVar7 + 0x10) =
-                   ((*(uint *)(iVar7 + 0xc) & 0x3ffff) - loopIndex) + iVar9 & 0x3ffff |
-                   uVar2 & 0xfffc0000;
+              *(uint *)(insertedChunk + 0x10) =
+                   ((*(uint *)(insertedChunk + 0xc) & 0x3ffff) - loopIndex) + opsScanned & 0x3ffff |
+                   insertedWord1 & 0xfffc0000;
             }
 LAB_97c0638c:
-            if (uVar8 == 0xffffffff) {
-              uVar8 = *(uint *)(iVar7 + 0xc) & 0x3ffff;
+            if (inlinedStartIndex == 0xffffffff) {
+              inlinedStartIndex = *(uint *)(insertedChunk + 0xc) & 0x3ffff;
             }
-            if ((*(uint *)(iVar15 + 0xc) & 0x3ffff) == *(uint *)(iVar6 + local_50[0] + 4)) {
-              bVar16 = false;
+            if ((*(uint *)(calleeChunk + 0xc) & 0x3ffff) == *(uint *)(calleeRecordOffset + funcInfos[0] + 4)) {
+              copyingCallee = false;
             }
-            iVar15 = *(int *)(iVar15 + 8);
+            calleeChunk = *(int *)(calleeChunk + 8);
             loopIndex = loopIndex + 1;
-          } while (bVar16);
+          } while (copyingCallee);
           if (loopIndex < 1) {
-            iVar15 = *(int *)(iVar7 + 8);
-            if (uVar17 == 0) {
-              *(uint *)(iVar15 + 0xc) = *(uint *)(iVar15 + 0xc) & 0xfffc0000;
+            continuationChunk = *(int *)(insertedChunk + 8);
+            if (callOpIndex == 0) {
+              *(uint *)(continuationChunk + 0xc) = *(uint *)(continuationChunk + 0xc) & 0xfffc0000;
             }
-            uVar8 = *(uint *)(iVar15 + 0xc) & 0x3ffff;
-            uVar2 = uVar8;
+            inlinedStartIndex = *(uint *)(continuationChunk + 0xc) & 0x3ffff;
+            continuationIndex = inlinedStartIndex;
           }
           else {
-            uVar2 = *(uint *)(iVar7 + 0xc) & 0x3ffff;
+            continuationIndex = *(uint *)(insertedChunk + 0xc) & 0x3ffff;
           }
-          bVar16 = iVar18 == 0;
-          _PPStreamChangeBranchTargets(stream,uVar17,uVar8);
-          ((int (*)())_UpdateFunctionTable)(uVar17,uVar8,uVar2,local_50[0],uVar13);
+          noOps = callPredecessor == 0;
+          _PPStreamChangeBranchTargets(stream,callOpIndex,inlinedStartIndex);
+          ((int (*)())_UpdateFunctionTable)(callOpIndex,inlinedStartIndex,continuationIndex,funcInfos[0],funcCount);
         }
-        iVar15 = iVar14 * 0x20;
-        iVar6 = **(int **)(stream + 0x20);
-        ((int (*)())_ClearJumpTable)(local_50[0] + iVar15);
-        uVar17 = *(uint *)(iVar6 + 0xc);
-        while (*(uint *)(iVar15 + local_50[0]) != (uVar17 & 0x3ffff)) {
-          iVar6 = *(int *)(iVar6 + 8);
-          uVar17 = *(uint *)(iVar6 + 0xc);
+        funcRecordByteOffset = currentFuncIndex * 0x20;
+        endChunk = **(int **)(stream + 0x20);
+        ((int (*)())_ClearJumpTable)(funcInfos[0] + funcRecordByteOffset);
+        funcScanWord0 = *(uint *)(endChunk + 0xc);
+        while (*(uint *)(funcRecordByteOffset + funcInfos[0]) != (funcScanWord0 & 0x3ffff)) {
+          endChunk = *(int *)(endChunk + 8);
+          funcScanWord0 = *(uint *)(endChunk + 0xc);
         }
-        if (*(uint *)(iVar15 + local_50[0] + 4) != (uVar17 & 0x3ffff)) {
+        if (*(uint *)(funcRecordByteOffset + funcInfos[0] + 4) != (funcScanWord0 & 0x3ffff)) {
           do {
-            ((int (*)())_AddOpToJumpTable)(iVar6 + 0xc,local_50[0] + iVar15);
-            iVar6 = *(int *)(iVar6 + 8);
-          } while (*(uint *)(iVar15 + local_50[0] + 4) != (*(uint *)(iVar6 + 0xc) & 0x3ffff));
+            ((int (*)())_AddOpToJumpTable)(endChunk + 0xc,funcInfos[0] + funcRecordByteOffset);
+            endChunk = *(int *)(endChunk + 8);
+          } while (*(uint *)(funcRecordByteOffset + funcInfos[0] + 4) != (*(uint *)(endChunk + 0xc) & 0x3ffff));
         }
-        uVar5 = ((int (*)())_AddOpToJumpTable)(iVar6 + 0xc,local_50[0] + iVar15);
-        if (bVar16) {
-          iVar15 = **(int **)(stream + 0x20);
+        lastResult = ((int (*)())_AddOpToJumpTable)(endChunk + 0xc,funcInfos[0] + funcRecordByteOffset);
+        if (noOps) {
+          opChunk = **(int **)(stream + 0x20);
         }
         else {
-          iVar15 = *(int *)(iVar18 + 8);
+          opChunk = *(int *)(callPredecessor + 8);
         }
-        bVar16 = iVar15 == 0;
-      } while (!bVar16);
-      piVar3 = *(int **)(stream + 0x20);
+        noOps = opChunk == 0;
+      } while (!noOps);
+      opList = *(int **)(stream + 0x20);
     }
-    uVar17 = 0;
-    bVar16 = false;
-    iVar14 = *piVar3;
-    while (iVar15 = iVar14, iVar15 != 0) {
-      iVar14 = *(int *)(iVar15 + 8);
-      if ((bVar16) || (uVar17 = 0, uVar13 == 0)) {
-        uVar8 = *(uint *)(iVar15 + 0xc);
+    funcSearchIndex = 0;
+    inDeadFunction = false;
+    nextChunk = *opList;
+    while (opChunk = nextChunk, opChunk != 0) {
+      nextChunk = *(int *)(opChunk + 8);
+      if ((inDeadFunction) || (funcSearchIndex = 0, funcCount == 0)) {
+        opWord0 = *(uint *)(opChunk + 0xc);
       }
       else {
-        uVar8 = *(uint *)(iVar15 + 0xc);
+        opWord0 = *(uint *)(opChunk + 0xc);
         do {
-          uVar2 = *(uint *)(uVar17 * 0x20 + local_50[0]);
-          if ((uVar2 != 0) && (uVar2 == (uVar8 & 0x3ffff))) {
-            bVar16 = true;
+          recordKey = *(uint *)(funcSearchIndex * 0x20 + funcInfos[0]);
+          if ((recordKey != 0) && (recordKey == (opWord0 & 0x3ffff))) {
+            inDeadFunction = true;
             break;
           }
-          uVar17 = uVar17 + 1;
-        } while (uVar17 < uVar13);
+          funcSearchIndex = funcSearchIndex + 1;
+        } while (funcSearchIndex < funcCount);
       }
-      if (bVar16) {
-        if (*(uint *)(uVar17 * 0x20 + local_50[0] + 4) == (uVar8 & 0x3ffff)) {
-          bVar16 = false;
+      if (inDeadFunction) {
+        if (*(uint *)(funcSearchIndex * 0x20 + funcInfos[0] + 4) == (opWord0 & 0x3ffff)) {
+          inDeadFunction = false;
         }
-        _PPStreamRemoveLabelsAtOperationIndex(stream,uVar8 & 0x3ffff);
-        uVar5 = _PPStreamChunkListRemoveChunk(*(undefined4 *)(stream + 0x20),iVar15);
+        _PPStreamRemoveLabelsAtOperationIndex(stream,opWord0 & 0x3ffff);
+        lastResult = _PPStreamChunkListRemoveChunk(*(undefined4 *)(stream + 0x20),opChunk);
       }
-      else if ((uVar8 >> 0x12 & 0xff) == 0x6e) {
-        uVar5 = ((int (*)())_PPStreamRemoveOperation)(stream,iVar15);
+      else if ((opWord0 >> 0x12 & 0xff) == 0x6e) {
+        lastResult = ((int (*)())_PPStreamRemoveOperation)(stream,opChunk);
       }
     }
   }
-  if (local_50[0] != 0) {
-    uVar17 = 0;
-    if (uVar13 != 0) {
+  if (funcInfos[0] != 0) {
+    funcInfoIndex = 0;
+    if (funcCount != 0) {
       do {
-        iVar14 = uVar17 * 0x20;
-        uVar17 = uVar17 + 1;
-        ((int (*)())_ClearJumpTable)(local_50[0] + iVar14);
-      } while (uVar17 < uVar13);
+        funcRecordOffset = funcInfoIndex * 0x20;
+        funcInfoIndex = funcInfoIndex + 1;
+        ((int (*)())_ClearJumpTable)(funcInfos[0] + funcRecordOffset);
+      } while (funcInfoIndex < funcCount);
     }
-    _free(local_50[0]);
-    uVar5 = extraout_r3;
+    _free(funcInfos[0]);
+    lastResult = extraout_r3;
   }
-  return uVar5;
+  return lastResult;
 }
 
 /* _IsParamSampler @ 0x97c06614 (84 bytes) */
-int _IsParamSampler(param_1, param_2, param_3)
-  int param_1;
-  undefined4 param_2;
-  int param_3;
+int _IsParamSampler(arrayKind, paramIndex, stream)
+  int arrayKind;
+  undefined4 paramIndex;
+  int stream;
 {
-  int iVar1;
-  uint uVar2;
+  int paramChunk;
+  uint isSampler;
   
-  uVar2 = 0;
-  if ((param_1 == 2) &&
-     (iVar1 = _PPStreamChunkListChunkAtIndex(*(undefined4 *)(param_3 + 0x10),param_2),
-     (*(uint *)(iVar1 + 0xc) >> 0x10 & 0x1f) == 1)) {
-    uVar2 = *(uint *)(iVar1 + 0x10) >> 0x1f;
+  isSampler = 0;
+  if ((arrayKind == 2) &&
+     (paramChunk = _PPStreamChunkListChunkAtIndex(*(undefined4 *)(stream + 0x10),paramIndex),
+     (*(uint *)(paramChunk + 0xc) >> 0x10 & 0x1f) == 1)) {
+    isSampler = *(uint *)(paramChunk + 0x10) >> 0x1f;
   }
-  return uVar2;
+  return isSampler;
 }
 
 /* _GetStreamArray_97c06668 @ 0x97c06668 (152 bytes) */
-int _GetStreamArray_97c06668(param_1, param_2, param_3)
-  int param_1;
-  uint param_2;
-  int param_3;
+int _GetStreamArray_97c06668(arrayKind, registerIndex, stream)
+  int arrayKind;
+  uint registerIndex;
+  int stream;
 {
-  int iVar1;
-  int iVar2;
+  int arrayChunk;
+  int arrayNumber;
   
-  iVar2 = 0;
-  if (param_1 == 1) {
-    for (iVar1 = **(int **)(param_3 + 8); iVar1 != 0; iVar1 = *(int *)(iVar1 + 8)) {
-      if ((*(ushort *)(iVar1 + 0xe) <= param_2) && (param_2 <= *(ushort *)(iVar1 + 0x12))) {
-        return iVar2;
+  arrayNumber = 0;
+  if (arrayKind == 1) {
+    for (arrayChunk = **(int **)(stream + 8); arrayChunk != 0; arrayChunk = *(int *)(arrayChunk + 8)) {
+      if ((*(ushort *)(arrayChunk + 0xe) <= registerIndex) && (registerIndex <= *(ushort *)(arrayChunk + 0x12))) {
+        return arrayNumber;
       }
-      iVar2 = iVar2 + 1;
+      arrayNumber = arrayNumber + 1;
     }
   }
-  else if (param_1 == 2) {
-    for (iVar1 = **(int **)(param_3 + 0x14); iVar1 != 0; iVar1 = *(int *)(iVar1 + 8)) {
-      if ((*(ushort *)(iVar1 + 0xe) <= param_2) && (param_2 <= *(ushort *)(iVar1 + 0x12))) {
-        return iVar2;
+  else if (arrayKind == 2) {
+    for (arrayChunk = **(int **)(stream + 0x14); arrayChunk != 0; arrayChunk = *(int *)(arrayChunk + 8)) {
+      if ((*(ushort *)(arrayChunk + 0xe) <= registerIndex) && (registerIndex <= *(ushort *)(arrayChunk + 0x12))) {
+        return arrayNumber;
       }
-      iVar2 = iVar2 + 1;
+      arrayNumber = arrayNumber + 1;
     }
   }
   return -1;
 }
 
 /* _FindMatchingAvailableCopy @ 0x97c06700 (164 bytes) */
-int _FindMatchingAvailableCopy(param_1, param_2)
-  int param_1;
-  uint *param_2;
+int _FindMatchingAvailableCopy(copy, copyTable)
+  int copy;
+  uint *copyTable;
 {
-  int iVar1;
-  int iVar2;
+  int candidate;
+  int recordOffset;
   uint loopIndex;
   
   loopIndex = 0;
-  if (*param_2 != 0) {
-    iVar2 = 0;
+  if (*copyTable != 0) {
+    recordOffset = 0;
     do {
-      iVar1 = iVar2 + param_2[1];
-      if ((((*(int *)(iVar2 + param_2[1]) != 0) && (*(int *)(iVar1 + 4) == *(int *)(param_1 + 4)))
-          && (*(int *)(iVar1 + 8) == *(int *)(param_1 + 8))) &&
-         (((*(int *)(iVar1 + 0xc) == *(int *)(param_1 + 0xc) &&
-           (*(int *)(iVar1 + 0x10) == *(int *)(param_1 + 0x10))) &&
-          ((*(int *)(iVar1 + 0x38) == *(int *)(param_1 + 0x38) &&
-           (*(int *)(iVar1 + 0x3c) == *(int *)(param_1 + 0x3c))))))) {
-        return iVar1;
+      candidate = recordOffset + copyTable[1];
+      if ((((*(int *)(recordOffset + copyTable[1]) != 0) && (*(int *)(candidate + 4) == *(int *)(copy + 4)))
+          && (*(int *)(candidate + 8) == *(int *)(copy + 8))) &&
+         (((*(int *)(candidate + 0xc) == *(int *)(copy + 0xc) &&
+           (*(int *)(candidate + 0x10) == *(int *)(copy + 0x10))) &&
+          ((*(int *)(candidate + 0x38) == *(int *)(copy + 0x38) &&
+           (*(int *)(candidate + 0x3c) == *(int *)(copy + 0x3c))))))) {
+        return candidate;
       }
       loopIndex = loopIndex + 1;
-      iVar2 = iVar2 + 0x48;
-    } while (loopIndex < *param_2);
+      recordOffset = recordOffset + 0x48;
+    } while (loopIndex < *copyTable);
   }
   return 0;
 }
 
 /* _UpdateACUsingAvailableCopyTable @ 0x97c067a4 (444 bytes) */
-int _UpdateACUsingAvailableCopyTable(param_1, param_2, param_3)
-  int param_1;
-  uint *param_2;
-  undefined4 param_3;
+int _UpdateACUsingAvailableCopyTable(operand, copyTable, stream)
+  int operand;
+  uint *copyTable;
+  undefined4 stream;
 {
+  int componentIndex;
+  int negateValue;
   int loopIndex2;
-  bool bVar1;
-  uint uVar2;
+  bool allComponentsCopied;
+  uint usedCount;
   undefined4 streamArray_97c06668;
-  int iVar4;
-  int iVar5;
-  int *piVar6;
+  int entryOffset;
+  int componentsLeft;
+  int *copyEntry;
   uint loopIndex;
-  int iVar8;
-  int iVar9;
-  uint uVar10;
+  int componentOperand;
+  int componentSlot;
+  uint componentLimit;
   
   loopIndex = 0;
-  if (*param_2 != 0) {
-    piVar6 = (int *)param_2[1];
-    iVar4 = 0;
+  if (*copyTable != 0) {
+    copyEntry = (int *)copyTable[1];
+    entryOffset = 0;
     do {
-      if (((*piVar6 != 0) && (piVar6[1] == *(int *)(param_1 + 0xc))) &&
-         (piVar6[2] == *(int *)(param_1 + 0x10))) {
-        uVar10 = *(uint *)(param_1 + 0x14);
-        bVar1 = true;
+      if (((*copyEntry != 0) && (copyEntry[1] == *(int *)(operand + 0xc))) &&
+         (copyEntry[2] == *(int *)(operand + 0x10))) {
+        componentLimit = *(uint *)(operand + 0x14);
+        allComponentsCopied = true;
         loopIndex2 = 0;
-        uVar2 = 0;
-        iVar8 = param_1;
+        usedCount = 0;
+        componentOperand = operand;
         do {
-          if (((uVar2 <= uVar10) && (*(int *)(iVar8 + 0x28) != 0)) &&
-             (uVar2 = uVar2 + 1, piVar6[*(int *)(iVar8 + 0x18) + 10] != 1)) {
-            bVar1 = false;
+          if (((usedCount <= componentLimit) && (*(int *)(componentOperand + 0x28) != 0)) &&
+             (usedCount = usedCount + 1, copyEntry[*(int *)(componentOperand + 0x18) + 10] != 1)) {
+            allComponentsCopied = false;
           }
           loopIndex2 = loopIndex2 + 1;
-          iVar8 = iVar8 + 4;
+          componentOperand = componentOperand + 4;
           if (3 < loopIndex2) {
-            if (bVar1) {
-              *(int *)(param_1 + 0xc) = piVar6[3];
-              *(undefined4 *)(param_1 + 0x10) = *(undefined4 *)(iVar4 + param_2[1] + 0x10);
-              if (*(int *)(param_1 + 0x38) == 0) {
-                iVar8 = *(int *)(iVar4 + param_2[1] + 0x38);
+            if (allComponentsCopied) {
+              *(int *)(operand + 0xc) = copyEntry[3];
+              *(undefined4 *)(operand + 0x10) = *(undefined4 *)(entryOffset + copyTable[1] + 0x10);
+              if (*(int *)(operand + 0x38) == 0) {
+                negateValue = *(int *)(entryOffset + copyTable[1] + 0x38);
               }
               else {
-                iVar8 = 1 - *(int *)(iVar4 + param_2[1] + 0x38);
+                negateValue = 1 - *(int *)(entryOffset + copyTable[1] + 0x38);
               }
-              *(int *)(param_1 + 0x38) = iVar8;
-              iVar5 = 4;
-              iVar8 = 0;
+              *(int *)(operand + 0x38) = negateValue;
+              componentsLeft = 4;
+              componentIndex = 0;
               loopIndex = 0;
               do {
-                if ((uVar10 < loopIndex) || (iVar9 = iVar8 * 4 + param_1, *(int *)(iVar9 + 0x28) == 0))
+                if ((componentLimit < loopIndex) || (componentSlot = componentIndex * 4 + operand, *(int *)(componentSlot + 0x28) == 0))
                 {
-                  *(int *)(iVar8 * 4 + param_1 + 0x18) = iVar8;
+                  *(int *)(componentIndex * 4 + operand + 0x18) = componentIndex;
                 }
                 else {
                   loopIndex = loopIndex + 1;
-                  *(undefined4 *)(iVar9 + 0x18) =
-                       *(undefined4 *)(*(int *)(iVar9 + 0x18) * 4 + iVar4 + param_2[1] + 0x18);
+                  *(undefined4 *)(componentSlot + 0x18) =
+                       *(undefined4 *)(*(int *)(componentSlot + 0x18) * 4 + entryOffset + copyTable[1] + 0x18);
                 }
-                iVar8 = iVar8 + 1;
-                iVar5 = iVar5 + -1;
-              } while (iVar5 != 0);
-              streamArray_97c06668 = ((int (*)())_GetStreamArray_97c06668)(*(undefined4 *)(param_1 + 0xc),*(undefined4 *)(param_1 + 0x10),
-                                 param_3);
-              *(undefined4 *)(param_1 + 0x44) = streamArray_97c06668;
+                componentIndex = componentIndex + 1;
+                componentsLeft = componentsLeft + -1;
+              } while (componentsLeft != 0);
+              streamArray_97c06668 = ((int (*)())_GetStreamArray_97c06668)(*(undefined4 *)(operand + 0xc),*(undefined4 *)(operand + 0x10),
+                                 stream);
+              *(undefined4 *)(operand + 0x44) = streamArray_97c06668;
               return 1;
             }
             break;
           }
-        } while (bVar1);
+        } while (allComponentsCopied);
       }
       loopIndex = loopIndex + 1;
-      iVar4 = iVar4 + 0x48;
-      piVar6 = piVar6 + 0x12;
-    } while (loopIndex < *param_2);
+      entryOffset = entryOffset + 0x48;
+      copyEntry = copyEntry + 0x12;
+    } while (loopIndex < *copyTable);
   }
   return 0;
 }
 
 /* _AddToAvailableCopyTable @ 0x97c06960 (1196 bytes) */
-int _AddToAvailableCopyTable(param_1, param_2, param_3)
-  uint *param_1;
-  uint *param_2;
-  undefined4 param_3;
+int _AddToAvailableCopyTable(movInst, copyTable, stream)
+  uint *movInst;
+  uint *copyTable;
+  undefined4 stream;
 {
+  int slotsLeft;
+  int flagSlot;
+  int newEntryAddr;
+  uint entryCount;
+  uint validSoFar;
+  uint grownTable;
+  int entryOffset;
+  uint oldEntryIndex;
+  uint destComponentSelect;
   int updateACUsingAvailableCopyTableResult;
   int findMatchingAvailableCopyResult;
   int loopIndex;
-  uint uVar1;
-  undefined4 uVar2;
-  undefined4 *puVar3;
-  int *piVar4;
-  int iVar5;
-  uint uVar6;
-  int iVar7;
-  uint uVar8;
-  uint uVar9;
-  uint uVar10;
-  int iVar11;
+  uint instWord1;
+  undefined4 swizzleValue;
+  undefined4 *componentCursor;
+  int *clearCursor;
+  int newValidCount;
+  uint destWord0;
+  int unusedSlotsLeft;
+  uint srcWord0;
+  uint destWord1;
+  uint destComponentWritten;
+  int elementCount;
   int loopIndex2;
-  int iVar13;
-  int iVar14;
-  undefined4 local_80;
-  uint local_7c;
-  int local_78;
-  uint local_74;
-  int local_70;
-  uint local_6c;
-  uint local_68 [4];
-  uint local_58 [4];
-  uint local_48 [8];
+  int componentsLeft;
+  int oldEntryAddr;
+  undefined4 entryInUse;
+  uint destFile;
+  int destRegister;
+  uint srcFile;
+  int srcRegister;
+  uint componentCountMinusOne;
+  uint swizzle [4];
+  uint componentValid [4];
+  uint entryTail [8];
   
-  iVar11 = 1;
-  if (((((*param_1 >> 0x12 & 0xff) == 0) && (uVar9 = param_1[3], -1 < (int)uVar9)) &&
-      (uVar8 = param_1[4], -1 < (int)uVar8)) &&
-     ((uVar6 = param_1[2], (uVar6 >> 0x11 & 7) != (uVar8 >> 0x17 & 7) ||
-      (*(short *)((int)param_1 + 0xe) != *(short *)((int)param_1 + 0x16))))) {
-    uVar1 = param_1[1];
-    if ((uVar1 & 0x10000000) != 0) {
-      iVar11 = (uVar1 >> 0x1a & 3) + 1;
+  elementCount = 1;
+  if (((((*movInst >> 0x12 & 0xff) == 0) && (destWord1 = movInst[3], -1 < (int)destWord1)) &&
+      (srcWord0 = movInst[4], -1 < (int)srcWord0)) &&
+     ((destWord0 = movInst[2], (destWord0 >> 0x11 & 7) != (srcWord0 >> 0x17 & 7) ||
+      (*(short *)((int)movInst + 0xe) != *(short *)((int)movInst + 0x16))))) {
+    instWord1 = movInst[1];
+    if ((instWord1 & 0x10000000) != 0) {
+      elementCount = (instWord1 >> 0x1a & 3) + 1;
     }
     loopIndex2 = 0;
-    if (iVar11 != 0) {
+    if (elementCount != 0) {
       do {
-        local_78 = (uVar9 & 0xffff) + loopIndex2;
-        local_6c = uVar1 >> 0x1a & 3;
-        local_70 = (uint)*(ushort *)((int)param_1 + 0x16) + loopIndex2;
-        local_74 = uVar8 >> 0x17 & 7;
-        local_7c = uVar6 >> 0x11 & 7;
-        local_48[0] = uVar8 >> 0x1b & 1;
-        iVar13 = 4;
-        local_80 = 1;
+        destRegister = (destWord1 & 0xffff) + loopIndex2;
+        componentCountMinusOne = instWord1 >> 0x1a & 3;
+        srcRegister = (uint)*(ushort *)((int)movInst + 0x16) + loopIndex2;
+        srcFile = srcWord0 >> 0x17 & 7;
+        destFile = destWord0 >> 0x11 & 7;
+        entryTail[0] = srcWord0 >> 0x1b & 1;
+        componentsLeft = 4;
+        entryInUse = 1;
         loopIndex = 0;
-        uVar9 = 0;
-        puVar3 = &local_80;
+        validSoFar = 0;
+        componentCursor = &entryInUse;
         do {
-          uVar10 = 0;
-          uVar1 = 0;
-          if (uVar9 <= local_6c) {
+          destComponentWritten = 0;
+          destComponentSelect = 0;
+          if (validSoFar <= componentCountMinusOne) {
             if (loopIndex == 1) {
-              uVar10 = uVar6 >> 0xe & 1;
-              uVar1 = uVar6 >> 6 & 3;
+              destComponentWritten = destWord0 >> 0xe & 1;
+              destComponentSelect = destWord0 >> 6 & 3;
             }
             else if (loopIndex < 2) {
               if (loopIndex == 0) {
-                uVar10 = uVar6 >> 0xd & 1;
-                uVar1 = uVar6 >> 8 & 3;
+                destComponentWritten = destWord0 >> 0xd & 1;
+                destComponentSelect = destWord0 >> 8 & 3;
               }
             }
             else if (loopIndex == 2) {
-              uVar10 = uVar6 >> 0xf & 1;
-              uVar1 = uVar6 >> 4 & 3;
+              destComponentWritten = destWord0 >> 0xf & 1;
+              destComponentSelect = destWord0 >> 4 & 3;
             }
             else if (loopIndex == 3) {
-              uVar10 = uVar6 >> 0x10 & 1;
-              uVar1 = uVar6 >> 2 & 3;
+              destComponentWritten = destWord0 >> 0x10 & 1;
+              destComponentSelect = destWord0 >> 2 & 3;
             }
           }
-          uVar9 = uVar9 + uVar10;
-          puVar3[10] = uVar10;
-          if (uVar1 == 1) {
-            puVar3[6] = uVar8 >> 0x13 & 3;
+          validSoFar = validSoFar + destComponentWritten;
+          componentCursor[10] = destComponentWritten;
+          if (destComponentSelect == 1) {
+            componentCursor[6] = srcWord0 >> 0x13 & 3;
           }
-          else if (uVar1 == 0) {
-            puVar3[6] = uVar8 >> 0x15 & 3;
+          else if (destComponentSelect == 0) {
+            componentCursor[6] = srcWord0 >> 0x15 & 3;
           }
-          else if (uVar1 == 2) {
-            puVar3[6] = uVar8 >> 0x11 & 3;
+          else if (destComponentSelect == 2) {
+            componentCursor[6] = srcWord0 >> 0x11 & 3;
           }
-          else if (uVar1 == 3) {
-            puVar3[6] = uVar8 >> 0xf & 3;
+          else if (destComponentSelect == 3) {
+            componentCursor[6] = srcWord0 >> 0xf & 3;
           }
           loopIndex = loopIndex + 1;
-          puVar3 = puVar3 + 1;
-          iVar13 = iVar13 + -1;
-        } while (iVar13 != 0);
+          componentCursor = componentCursor + 1;
+          componentsLeft = componentsLeft + -1;
+        } while (componentsLeft != 0);
         if (loopIndex < 4) {
-          piVar4 = &local_70;
-          iVar7 = 0;
+          clearCursor = &srcRegister;
+          unusedSlotsLeft = 0;
           do {
-            piVar4[10] = 0;
-            piVar4[6] = 0;
-            piVar4 = piVar4 + 1;
-            iVar7 = iVar7 + -1;
-          } while (iVar7 != 0);
+            clearCursor[10] = 0;
+            clearCursor[6] = 0;
+            clearCursor = clearCursor + 1;
+            unusedSlotsLeft = unusedSlotsLeft + -1;
+          } while (unusedSlotsLeft != 0);
         }
-        local_48[2] = ((int (*)())_GetStreamArray_97c06668)(local_7c,local_78,param_3);
-        local_48[3] = ((int (*)())_GetStreamArray_97c06668)(local_74,local_70,param_3);
-        if (((param_1[1] & 0x10000000) != 0) && (loopIndex2 == 0)) {
-          local_48[1] = 1;
-          findMatchingAvailableCopyResult = ((int (*)())_FindMatchingAvailableCopy)(&local_80,param_2);
+        entryTail[2] = ((int (*)())_GetStreamArray_97c06668)(destFile,destRegister,stream);
+        entryTail[3] = ((int (*)())_GetStreamArray_97c06668)(srcFile,srcRegister,stream);
+        if (((movInst[1] & 0x10000000) != 0) && (loopIndex2 == 0)) {
+          entryTail[1] = 1;
+          findMatchingAvailableCopyResult = ((int (*)())_FindMatchingAvailableCopy)(&entryInUse,copyTable);
           if (findMatchingAvailableCopyResult == 0) {
-            uVar9 = *param_2;
-            if ((uVar9 & 7) == 0) {
-              uVar6 = 0;
-              uVar8 = _malloc(uVar9 * 0x48 + 0x240);
-              _memset(uVar8,0,*param_2 * 0x48 + 0x240);
-              uVar9 = 0;
-              if (*param_2 != 0) {
-                iVar7 = 0;
+            entryCount = *copyTable;
+            if ((entryCount & 7) == 0) {
+              oldEntryIndex = 0;
+              grownTable = _malloc(entryCount * 0x48 + 0x240);
+              _memset(grownTable,0,*copyTable * 0x48 + 0x240);
+              entryCount = 0;
+              if (*copyTable != 0) {
+                entryOffset = 0;
                 do {
-                  iVar13 = iVar7 + uVar8;
-                  iVar14 = iVar7 + param_2[1];
-                  iVar7 = iVar7 + 0x48;
-                  _memcpy(iVar13,iVar14,0x48);
-                  uVar9 = *param_2;
-                  uVar6 = uVar6 + 1;
-                } while (uVar6 < uVar9);
+                  newEntryAddr = entryOffset + grownTable;
+                  oldEntryAddr = entryOffset + copyTable[1];
+                  entryOffset = entryOffset + 0x48;
+                  _memcpy(newEntryAddr,oldEntryAddr,0x48);
+                  entryCount = *copyTable;
+                  oldEntryIndex = oldEntryIndex + 1;
+                } while (oldEntryIndex < entryCount);
               }
-              if (param_2[1] != 0) {
-                _free(param_2[1]);
-                uVar9 = *param_2;
+              if (copyTable[1] != 0) {
+                _free(copyTable[1]);
+                entryCount = *copyTable;
               }
-              param_2[1] = uVar8;
+              copyTable[1] = grownTable;
             }
-            _memcpy(uVar9 * 0x48 + param_2[1],&local_80,0x48);
-            *param_2 = *param_2 + 1;
+            _memcpy(entryCount * 0x48 + copyTable[1],&entryInUse,0x48);
+            *copyTable = *copyTable + 1;
           }
           else {
-            iVar14 = 4;
-            puVar3 = &local_80;
-            iVar13 = findMatchingAvailableCopyResult;
+            slotsLeft = 4;
+            componentCursor = &entryInUse;
+            flagSlot = findMatchingAvailableCopyResult;
             do {
-              if ((puVar3[10] == 1) && (*(int *)(iVar13 + 0x28) == 0)) {
-                iVar5 = *(int *)(findMatchingAvailableCopyResult + 0x14);
-                uVar2 = puVar3[6];
-                *(undefined4 *)(iVar13 + 0x28) = 1;
-                *(int *)(findMatchingAvailableCopyResult + 0x14) = iVar5 + 1;
+              if ((componentCursor[10] == 1) && (*(int *)(flagSlot + 0x28) == 0)) {
+                newValidCount = *(int *)(findMatchingAvailableCopyResult + 0x14);
+                swizzleValue = componentCursor[6];
+                *(undefined4 *)(flagSlot + 0x28) = 1;
+                *(int *)(findMatchingAvailableCopyResult + 0x14) = newValidCount + 1;
 LAB_97c06bf0:
-                *(undefined4 *)(iVar13 + 0x18) = uVar2;
+                *(undefined4 *)(flagSlot + 0x18) = swizzleValue;
               }
-              else if (puVar3[10] == 1) {
-                uVar2 = puVar3[6];
+              else if (componentCursor[10] == 1) {
+                swizzleValue = componentCursor[6];
                 goto LAB_97c06bf0;
               }
-              iVar13 = iVar13 + 4;
-              puVar3 = puVar3 + 1;
-              iVar14 = iVar14 + -1;
-            } while (iVar14 != 0);
+              flagSlot = flagSlot + 4;
+              componentCursor = componentCursor + 1;
+              slotsLeft = slotsLeft + -1;
+            } while (slotsLeft != 0);
           }
         }
-        local_48[1] = 0;
+        entryTail[1] = 0;
         do {
-          updateACUsingAvailableCopyTableResult = ((int (*)())_UpdateACUsingAvailableCopyTable)(&local_80,param_2,param_3);
+          updateACUsingAvailableCopyTableResult = ((int (*)())_UpdateACUsingAvailableCopyTable)(&entryInUse,copyTable,stream);
         } while (updateACUsingAvailableCopyTableResult != 0);
-        findMatchingAvailableCopyResult = ((int (*)())_FindMatchingAvailableCopy)(&local_80,param_2);
+        findMatchingAvailableCopyResult = ((int (*)())_FindMatchingAvailableCopy)(&entryInUse,copyTable);
         if (findMatchingAvailableCopyResult == 0) {
-          uVar9 = *param_2;
-          if ((uVar9 & 7) == 0) {
-            uVar6 = 0;
-            uVar8 = _malloc(uVar9 * 0x48 + 0x240);
-            _memset(uVar8,0,*param_2 * 0x48 + 0x240);
-            uVar9 = 0;
-            if (*param_2 != 0) {
-              iVar7 = 0;
+          entryCount = *copyTable;
+          if ((entryCount & 7) == 0) {
+            oldEntryIndex = 0;
+            grownTable = _malloc(entryCount * 0x48 + 0x240);
+            _memset(grownTable,0,*copyTable * 0x48 + 0x240);
+            entryCount = 0;
+            if (*copyTable != 0) {
+              entryOffset = 0;
               do {
-                uVar6 = uVar6 + 1;
-                _memcpy(iVar7 + uVar8,iVar7 + param_2[1],0x48);
-                uVar9 = *param_2;
-                iVar7 = iVar7 + 0x48;
-              } while (uVar6 < uVar9);
+                oldEntryIndex = oldEntryIndex + 1;
+                _memcpy(entryOffset + grownTable,entryOffset + copyTable[1],0x48);
+                entryCount = *copyTable;
+                entryOffset = entryOffset + 0x48;
+              } while (oldEntryIndex < entryCount);
             }
-            if (param_2[1] != 0) {
-              _free(param_2[1]);
-              uVar9 = *param_2;
+            if (copyTable[1] != 0) {
+              _free(copyTable[1]);
+              entryCount = *copyTable;
             }
-            param_2[1] = uVar8;
+            copyTable[1] = grownTable;
           }
-          _memcpy(uVar9 * 0x48 + param_2[1],&local_80,0x48);
-          *param_2 = *param_2 + 1;
+          _memcpy(entryCount * 0x48 + copyTable[1],&entryInUse,0x48);
+          *copyTable = *copyTable + 1;
         }
         else {
-          iVar14 = 4;
-          puVar3 = &local_80;
-          iVar13 = findMatchingAvailableCopyResult;
+          slotsLeft = 4;
+          componentCursor = &entryInUse;
+          flagSlot = findMatchingAvailableCopyResult;
           do {
-            if ((puVar3[10] == 1) && (*(int *)(iVar13 + 0x28) == 0)) {
-              iVar5 = *(int *)(findMatchingAvailableCopyResult + 0x14);
-              uVar2 = puVar3[6];
-              *(undefined4 *)(iVar13 + 0x28) = 1;
-              *(int *)(findMatchingAvailableCopyResult + 0x14) = iVar5 + 1;
+            if ((componentCursor[10] == 1) && (*(int *)(flagSlot + 0x28) == 0)) {
+              newValidCount = *(int *)(findMatchingAvailableCopyResult + 0x14);
+              swizzleValue = componentCursor[6];
+              *(undefined4 *)(flagSlot + 0x28) = 1;
+              *(int *)(findMatchingAvailableCopyResult + 0x14) = newValidCount + 1;
 LAB_97c06d30:
-              *(undefined4 *)(iVar13 + 0x18) = uVar2;
+              *(undefined4 *)(flagSlot + 0x18) = swizzleValue;
             }
-            else if (puVar3[10] == 1) {
-              uVar2 = puVar3[6];
+            else if (componentCursor[10] == 1) {
+              swizzleValue = componentCursor[6];
               goto LAB_97c06d30;
             }
-            iVar13 = iVar13 + 4;
-            puVar3 = puVar3 + 1;
-            iVar14 = iVar14 + -1;
-          } while (iVar14 != 0);
+            flagSlot = flagSlot + 4;
+            componentCursor = componentCursor + 1;
+            slotsLeft = slotsLeft + -1;
+          } while (slotsLeft != 0);
         }
         loopIndex2 = loopIndex2 + 1;
-        if (iVar11 <= loopIndex2) {
+        if (elementCount <= loopIndex2) {
           return;
         }
-        uVar9 = param_1[3];
-        uVar8 = param_1[4];
-        uVar6 = param_1[2];
-        uVar1 = param_1[1];
+        destWord1 = movInst[3];
+        srcWord0 = movInst[4];
+        destWord0 = movInst[2];
+        instWord1 = movInst[1];
       } while( true );
     }
   }
@@ -11300,416 +11356,426 @@ LAB_97c06d30:
 }
 
 /* _FindInAvailableCopyTableSource @ 0x97c06e0c (304 bytes) */
-int _FindInAvailableCopyTableSource(param_1, param_2, param_3)
-  uint param_1;
-  uint param_2;
-  uint *param_3;
+int _FindInAvailableCopyTableSource(operandWord0, operandWord1, copyTable)
+  uint operandWord0;
+  uint operandWord1;
+  uint *copyTable;
 {
-  bool bVar1;
-  uint uVar2;
-  int *piVar3;
+  bool matched;
+  uint componentCount;
+  int *copyEntry;
   uint loopIndex;
   
-  bVar1 = false;
+  matched = false;
   loopIndex = 0;
-  if (*param_3 != 0) {
-    piVar3 = (int *)param_3[1];
+  if (*copyTable != 0) {
+    copyEntry = (int *)copyTable[1];
     do {
-      if (((((*piVar3 != 0) && (piVar3[1] == (param_1 >> 0x17 & 7))) &&
-           (piVar3[2] == (param_2 & 0xffff))) &&
-          ((piVar3[0xf] == (param_1 >> 0xe & 1) &&
-           (uVar2 = param_1 >> 0xc & 3, uVar2 <= (uint)piVar3[5])))) && (-1 < (int)param_1)) {
-        bVar1 = true;
-        if (uVar2 == 1) {
+      if (((((*copyEntry != 0) && (copyEntry[1] == (operandWord0 >> 0x17 & 7))) &&
+           (copyEntry[2] == (operandWord1 & 0xffff))) &&
+          ((copyEntry[0xf] == (operandWord0 >> 0xe & 1) &&
+           (componentCount = operandWord0 >> 0xc & 3, componentCount <= (uint)copyEntry[5])))) && (-1 < (int)operandWord0)) {
+        matched = true;
+        if (componentCount == 1) {
 LAB_97c06ed8:
-          if (*(int *)((int)piVar3 + (param_1 >> 0x11 & 0xc) + 0x28) == 1) {
+          if (*(int *)((int)copyEntry + (operandWord0 >> 0x11 & 0xc) + 0x28) == 1) {
 LAB_97c06eec:
-            if (*(int *)((int)piVar3 + (param_1 >> 0x13 & 0xc) + 0x28) == 1) goto LAB_97c06f04;
+            if (*(int *)((int)copyEntry + (operandWord0 >> 0x13 & 0xc) + 0x28) == 1) goto LAB_97c06f04;
           }
         }
         else {
-          if (uVar2 < 2) {
-            if (uVar2 != 0) goto LAB_97c06f04;
+          if (componentCount < 2) {
+            if (componentCount != 0) goto LAB_97c06f04;
             goto LAB_97c06eec;
           }
-          if (uVar2 == 2) {
+          if (componentCount == 2) {
 LAB_97c06ec4:
-            if (*(int *)((int)piVar3 + (param_1 >> 0xf & 0xc) + 0x28) == 1) goto LAB_97c06ed8;
+            if (*(int *)((int)copyEntry + (operandWord0 >> 0xf & 0xc) + 0x28) == 1) goto LAB_97c06ed8;
           }
           else {
-            if (uVar2 != 3) goto LAB_97c06f04;
-            if (*(int *)((int)piVar3 + (param_1 >> 0xd & 0xc) + 0x28) == 1) goto LAB_97c06ec4;
+            if (componentCount != 3) goto LAB_97c06f04;
+            if (*(int *)((int)copyEntry + (operandWord0 >> 0xd & 0xc) + 0x28) == 1) goto LAB_97c06ec4;
           }
         }
-        bVar1 = false;
+        matched = false;
       }
 LAB_97c06f04:
       loopIndex = loopIndex + 1;
-      piVar3 = piVar3 + 0x12;
-    } while ((loopIndex < *param_3) && (!bVar1));
+      copyEntry = copyEntry + 0x12;
+    } while ((loopIndex < *copyTable) && (!matched));
   }
-  if (bVar1) {
-    return param_3[1] + (loopIndex - 1) * 0x48;
+  if (matched) {
+    return copyTable[1] + (loopIndex - 1) * 0x48;
   }
   return 0;
 }
 
 /* _CheckRemoveAvailableCopyTable @ 0x97c06f3c (756 bytes) */
-int _CheckRemoveAvailableCopyTable(param_1, param_2, param_3, param_4, param_5, param_6)
-  uint param_1;
-  uint param_2;
-  int param_3;
-  int param_4;
-  uint *param_5;
-  undefined4 param_6;
+int _CheckRemoveAvailableCopyTable(destWord0, destWord1, registerOffset, relativeFlag, copyTable, stream)
+  uint destWord0;
+  uint destWord1;
+  int registerOffset;
+  int relativeFlag;
+  uint *copyTable;
+  undefined4 stream;
 {
+  bool overlaps;
+  int flagSlot;
+  uint writeMaskBit;
+  uint writtenRegister;
   int loopIndex3;
   int loopIndex;
-  bool bVar1;
-  int iVar2;
-  int *piVar3;
-  int iVar4;
+  bool overlapsSource;
+  int componentSwizzle;
+  int *flagCursor;
+  int destArrayIndex;
   uint loopIndex2;
-  uint uVar6;
-  int iVar7;
-  int iVar8;
-  int iVar9;
-  uint uVar10;
-  uint uStack00000018;
-  uint uStack0000001c;
+  uint entryCount;
+  int entryAddr;
+  int componentFlag;
+  int entryOffset;
+  uint tableBase;
+  uint destWord0Copy;
+  uint destWord1Copy;
   
-  iVar4 = -1;
-  uStack00000018 = param_1;
-  uStack0000001c = param_2;
-  if ((int)param_2 < 0) {
-    iVar4 = ((int (*)())_GetStreamArray_97c06668)(param_1 >> 0x11 & 7,(param_2 & 0xffff) + param_3,param_6);
+  destArrayIndex = -1;
+  destWord0Copy = destWord0;
+  destWord1Copy = destWord1;
+  if ((int)destWord1 < 0) {
+    destArrayIndex = ((int (*)())_GetStreamArray_97c06668)(destWord0 >> 0x11 & 7,(destWord1 & 0xffff) + registerOffset,stream);
   }
-  uVar6 = *param_5;
+  entryCount = *copyTable;
   loopIndex2 = 0;
-  if (uVar6 != 0) {
-    iVar9 = 0;
+  if (entryCount != 0) {
+    entryOffset = 0;
     do {
-      uVar10 = param_5[1];
-      if (*(int *)(iVar9 + uVar10) != 0) {
-        bVar1 = false;
-        if ((iVar4 < 0) || (iVar4 != *(int *)(iVar9 + uVar10 + 0x40))) {
-          iVar7 = iVar9 + uVar10;
-          if ((*(int *)(iVar7 + 0x3c) != 0) &&
-             (*(uint *)(iVar7 + 4) == (uStack00000018 >> 0x11 & 7))) {
-            uVar6 = (uStack0000001c & 0xffff) + param_3;
-            if ((*(uint *)(iVar7 + 8) <= uVar6) &&
-               (uVar6 <= *(uint *)(iVar7 + 8) + *(int *)(iVar7 + 0x14))) goto LAB_97c070dc;
+      tableBase = copyTable[1];
+      if (*(int *)(entryOffset + tableBase) != 0) {
+        overlaps = false;
+        if ((destArrayIndex < 0) || (destArrayIndex != *(int *)(entryOffset + tableBase + 0x40))) {
+          entryAddr = entryOffset + tableBase;
+          if ((*(int *)(entryAddr + 0x3c) != 0) &&
+             (*(uint *)(entryAddr + 4) == (destWord0Copy >> 0x11 & 7))) {
+            writtenRegister = (destWord1Copy & 0xffff) + registerOffset;
+            if ((*(uint *)(entryAddr + 8) <= writtenRegister) &&
+               (writtenRegister <= *(uint *)(entryAddr + 8) + *(int *)(entryAddr + 0x14))) goto LAB_97c070dc;
           }
-          iVar7 = iVar9 + uVar10;
-          if ((*(uint *)(iVar7 + 4) == (uStack00000018 >> 0x11 & 7)) &&
-             ((*(int *)(iVar7 + 8) == (uStack0000001c & 0xffff) + param_3 &&
-              (*(int *)(iVar7 + 0x3c) == param_4)))) {
-            piVar3 = (int *)(iVar7 + 0x28);
+          flagSlot = entryOffset + tableBase;
+          if ((*(uint *)(flagSlot + 4) == (destWord0Copy >> 0x11 & 7)) &&
+             ((*(int *)(flagSlot + 8) == (destWord1Copy & 0xffff) + registerOffset &&
+              (*(int *)(flagSlot + 0x3c) == relativeFlag)))) {
+            flagCursor = (int *)(flagSlot + 0x28);
             loopIndex = 0;
             do {
-              iVar8 = *piVar3;
-              piVar3 = piVar3 + 1;
-              if (iVar8 == 1) {
+              componentFlag = *flagCursor;
+              flagCursor = flagCursor + 1;
+              if (componentFlag == 1) {
                 if (loopIndex == 1) {
-                  uVar6 = uStack00000018 >> 0xe & 1;
+                  writeMaskBit = destWord0Copy >> 0xe & 1;
                 }
                 else if (loopIndex < 2) {
-                  uVar6 = uStack00000018 >> 0xd & 1;
+                  writeMaskBit = destWord0Copy >> 0xd & 1;
                   if (loopIndex != 0) goto LAB_97c070c8;
                 }
                 else if (loopIndex == 2) {
-                  uVar6 = uStack00000018 >> 0xf & 1;
+                  writeMaskBit = destWord0Copy >> 0xf & 1;
                 }
                 else {
                   if (loopIndex != 3) goto LAB_97c070c8;
-                  uVar6 = uStack00000018 >> 0x10 & 1;
+                  writeMaskBit = destWord0Copy >> 0x10 & 1;
                 }
-                if (uVar6 == 1) {
-                  bVar1 = true;
+                if (writeMaskBit == 1) {
+                  overlaps = true;
                   break;
                 }
               }
 LAB_97c070c8:
               loopIndex = loopIndex + 1;
-            } while (loopIndex <= (int)(uStack00000018 >> 10 & 3));
-            if (bVar1) goto LAB_97c070dc;
+            } while (loopIndex <= (int)(destWord0Copy >> 10 & 3));
+            if (overlaps) goto LAB_97c070dc;
           }
         }
         else {
 LAB_97c070dc:
-          *(undefined4 *)(iVar9 + uVar10) = 0;
-          uVar10 = param_5[1];
+          *(undefined4 *)(entryOffset + tableBase) = 0;
+          tableBase = copyTable[1];
         }
-        bVar1 = false;
-        if ((iVar4 < 0) || (iVar4 != *(int *)(iVar9 + uVar10 + 0x44))) {
-          iVar7 = iVar9 + uVar10;
-          if ((*(int *)(iVar7 + 0x3c) != 0) &&
-             (*(uint *)(iVar7 + 0xc) == (uStack00000018 >> 0x11 & 7))) {
-            uVar6 = (uStack0000001c & 0xffff) + param_3;
-            if ((*(uint *)(iVar7 + 0x10) <= uVar6) &&
-               (uVar6 <= *(uint *)(iVar7 + 0x10) + *(int *)(iVar7 + 0x14))) goto LAB_97c07204;
+        overlapsSource = false;
+        if ((destArrayIndex < 0) || (destArrayIndex != *(int *)(entryOffset + tableBase + 0x44))) {
+          entryAddr = entryOffset + tableBase;
+          if ((*(int *)(entryAddr + 0x3c) != 0) &&
+             (*(uint *)(entryAddr + 0xc) == (destWord0Copy >> 0x11 & 7))) {
+            writtenRegister = (destWord1Copy & 0xffff) + registerOffset;
+            if ((*(uint *)(entryAddr + 0x10) <= writtenRegister) &&
+               (writtenRegister <= *(uint *)(entryAddr + 0x10) + *(int *)(entryAddr + 0x14))) goto LAB_97c07204;
           }
-          iVar7 = iVar9 + uVar10;
-          if ((*(uint *)(iVar7 + 0xc) == (uStack00000018 >> 0x11 & 7)) &&
-             ((*(int *)(iVar7 + 0x10) == (uStack0000001c & 0xffff) + param_3 &&
-              (*(int *)(iVar7 + 0x3c) == param_4)))) {
+          flagSlot = entryOffset + tableBase;
+          if ((*(uint *)(flagSlot + 0xc) == (destWord0Copy >> 0x11 & 7)) &&
+             ((*(int *)(flagSlot + 0x10) == (destWord1Copy & 0xffff) + registerOffset &&
+              (*(int *)(flagSlot + 0x3c) == relativeFlag)))) {
             loopIndex3 = 0;
             do {
-              if (*(int *)(iVar7 + 0x28) == 1) {
-                iVar2 = *(int *)(iVar7 + 0x18);
-                if (iVar2 == 1) {
-                  uVar6 = uStack00000018 >> 0xe & 1;
+              if (*(int *)(flagSlot + 0x28) == 1) {
+                componentSwizzle = *(int *)(flagSlot + 0x18);
+                if (componentSwizzle == 1) {
+                  writeMaskBit = destWord0Copy >> 0xe & 1;
                 }
                 else {
-                  uVar6 = uStack00000018 >> 0xd & 1;
-                  if (iVar2 != 0) {
-                    if (iVar2 == 2) {
-                      uVar6 = uStack00000018 >> 0xf & 1;
+                  writeMaskBit = destWord0Copy >> 0xd & 1;
+                  if (componentSwizzle != 0) {
+                    if (componentSwizzle == 2) {
+                      writeMaskBit = destWord0Copy >> 0xf & 1;
                     }
                     else {
-                      if (iVar2 != 3) goto LAB_97c071ec;
-                      uVar6 = uStack00000018 >> 0x10 & 1;
+                      if (componentSwizzle != 3) goto LAB_97c071ec;
+                      writeMaskBit = destWord0Copy >> 0x10 & 1;
                     }
                   }
                 }
-                if (uVar6 == 1) {
-                  bVar1 = true;
+                if (writeMaskBit == 1) {
+                  overlapsSource = true;
                   break;
                 }
               }
 LAB_97c071ec:
               loopIndex3 = loopIndex3 + 1;
-              iVar7 = iVar7 + 4;
-            } while (loopIndex3 <= (int)(uStack00000018 >> 10 & 3));
+              flagSlot = flagSlot + 4;
+            } while (loopIndex3 <= (int)(destWord0Copy >> 10 & 3));
           }
-          if (bVar1) goto LAB_97c07204;
+          if (overlapsSource) goto LAB_97c07204;
         }
         else {
 LAB_97c07204:
-          *(undefined4 *)(iVar9 + uVar10) = 0;
+          *(undefined4 *)(entryOffset + tableBase) = 0;
         }
-        uVar6 = *param_5;
+        entryCount = *copyTable;
       }
       loopIndex2 = loopIndex2 + 1;
-      iVar9 = iVar9 + 0x48;
-    } while (loopIndex2 < uVar6);
+      entryOffset = entryOffset + 0x48;
+    } while (loopIndex2 < entryCount);
   }
   return;
 }
 
 /* _ReplaceUsingAvailableCopyTable @ 0x97c07230 (580 bytes) */
-int _ReplaceUsingAvailableCopyTable(param_1, param_2)
-  uint *param_1;
-  undefined4 param_2;
+int _ReplaceUsingAvailableCopyTable(inst, copyTable)
+  uint *inst;
+  undefined4 copyTable;
 {
-  uint uVar1;
-  uint *puVar2;
-  uint uVar3;
+  uint swizzleSelect0;
+  uint componentCount;
+  uint swizzleSelect3;
+  uint swizzleSelect2;
+  uint swizzleSelect1;
+  uint operandWord0;
+  uint newFileBits;
+  uint *copyEntry;
+  uint oldOperandWord0;
   int loopIndex;
-  uint *puVar5;
+  uint *srcOperand;
   
   loopIndex = 0;
-  puVar2 = param_1;
-  puVar5 = param_1;
-  if (*param_1 >> 0x1d != 0) {
+  copyEntry = inst;
+  srcOperand = inst;
+  if (*inst >> 0x1d != 0) {
     do {
-      puVar2 = (uint *)((int (*)())_FindInAvailableCopyTableSource)(puVar5[4],puVar5[5],param_2);
-      if (puVar2 != (uint *)0x0) {
-        uVar3 = puVar5[4];
-        uVar1 = (puVar2[3] & 7) << 0x17;
-        puVar5[4] = uVar1 | uVar3 & 0xfc7fffff;
-        *(undefined2 *)((int)puVar5 + 0x16) = *(undefined2 *)((int)puVar2 + 0x12);
-        if ((uVar3 & 0x8000000) == 0) {
-          puVar5[4] = (puVar2[0xe] & 1) << 0x1b | uVar1 | uVar3 & 0xf47fffff;
+      copyEntry = (uint *)((int (*)())_FindInAvailableCopyTableSource)(srcOperand[4],srcOperand[5],copyTable);
+      if (copyEntry != (uint *)0x0) {
+        oldOperandWord0 = srcOperand[4];
+        newFileBits = (copyEntry[3] & 7) << 0x17;
+        srcOperand[4] = newFileBits | oldOperandWord0 & 0xfc7fffff;
+        *(undefined2 *)((int)srcOperand + 0x16) = *(undefined2 *)((int)copyEntry + 0x12);
+        if ((oldOperandWord0 & 0x8000000) == 0) {
+          srcOperand[4] = (copyEntry[0xe] & 1) << 0x1b | newFileBits | oldOperandWord0 & 0xf47fffff;
         }
         else {
-          puVar5[4] = (1 - puVar2[0xe]) * 0x8000000 & 0x8000000 | uVar1 | uVar3 & 0xf47fffff;
+          srcOperand[4] = (1 - copyEntry[0xe]) * 0x8000000 & 0x8000000 | newFileBits | oldOperandWord0 & 0xf47fffff;
         }
-        uVar1 = puVar5[4];
-        uVar3 = uVar1 >> 0xc & 3;
-        if (uVar3 == 1) goto LAB_97c07398;
-        if (uVar3 < 2) {
-          if (uVar3 != 0) goto LAB_97c07448;
+        operandWord0 = srcOperand[4];
+        componentCount = operandWord0 >> 0xc & 3;
+        if (componentCount == 1) goto LAB_97c07398;
+        if (componentCount < 2) {
+          if (componentCount != 0) goto LAB_97c07448;
         }
         else {
-          if (uVar3 == 2) goto LAB_97c07340;
-          if (uVar3 != 3) goto LAB_97c07448;
-          uVar3 = uVar1 >> 0xf & 3;
-          if (uVar3 == 1) {
-            uVar3 = puVar2[7];
+          if (componentCount == 2) goto LAB_97c07340;
+          if (componentCount != 3) goto LAB_97c07448;
+          swizzleSelect0 = operandWord0 >> 0xf & 3;
+          if (swizzleSelect0 == 1) {
+            swizzleSelect0 = copyEntry[7];
 LAB_97c07338:
-            puVar5[4] = (uVar3 & 3) << 0xf | uVar1 & 0xfffe7fff;
+            srcOperand[4] = (swizzleSelect0 & 3) << 0xf | operandWord0 & 0xfffe7fff;
           }
           else {
-            if (1 < uVar3) {
-              if (uVar3 == 2) {
-                uVar3 = puVar2[8];
+            if (1 < swizzleSelect0) {
+              if (swizzleSelect0 == 2) {
+                swizzleSelect0 = copyEntry[8];
               }
               else {
-                if (uVar3 != 3) goto LAB_97c07340;
-                uVar3 = puVar2[9];
+                if (swizzleSelect0 != 3) goto LAB_97c07340;
+                swizzleSelect0 = copyEntry[9];
               }
               goto LAB_97c07338;
             }
-            if (uVar3 == 0) {
-              uVar3 = puVar2[6];
+            if (swizzleSelect0 == 0) {
+              swizzleSelect0 = copyEntry[6];
               goto LAB_97c07338;
             }
           }
 LAB_97c07340:
-          uVar1 = puVar5[4] >> 0x11 & 3;
-          if (uVar1 == 1) {
-            uVar1 = puVar2[7];
+          swizzleSelect1 = srcOperand[4] >> 0x11 & 3;
+          if (swizzleSelect1 == 1) {
+            swizzleSelect1 = copyEntry[7];
 LAB_97c07390:
-            puVar5[4] = (uVar1 & 3) << 0x11 | puVar5[4] & 0xfff9ffff;
+            srcOperand[4] = (swizzleSelect1 & 3) << 0x11 | srcOperand[4] & 0xfff9ffff;
           }
           else {
-            if (1 < uVar1) {
-              if (uVar1 == 2) {
-                uVar1 = puVar2[8];
+            if (1 < swizzleSelect1) {
+              if (swizzleSelect1 == 2) {
+                swizzleSelect1 = copyEntry[8];
               }
               else {
-                if (uVar1 != 3) goto LAB_97c07398;
-                uVar1 = puVar2[9];
+                if (swizzleSelect1 != 3) goto LAB_97c07398;
+                swizzleSelect1 = copyEntry[9];
               }
               goto LAB_97c07390;
             }
-            if (uVar1 == 0) {
-              uVar1 = puVar2[6];
+            if (swizzleSelect1 == 0) {
+              swizzleSelect1 = copyEntry[6];
               goto LAB_97c07390;
             }
           }
 LAB_97c07398:
-          uVar1 = puVar5[4] >> 0x13 & 3;
-          if (uVar1 == 1) {
-            uVar1 = puVar2[7];
+          swizzleSelect2 = srcOperand[4] >> 0x13 & 3;
+          if (swizzleSelect2 == 1) {
+            swizzleSelect2 = copyEntry[7];
           }
-          else if (uVar1 < 2) {
-            if (uVar1 != 0) goto LAB_97c073f0;
-            uVar1 = puVar2[6];
+          else if (swizzleSelect2 < 2) {
+            if (swizzleSelect2 != 0) goto LAB_97c073f0;
+            swizzleSelect2 = copyEntry[6];
           }
-          else if (uVar1 == 2) {
-            uVar1 = puVar2[8];
+          else if (swizzleSelect2 == 2) {
+            swizzleSelect2 = copyEntry[8];
           }
           else {
-            if (uVar1 != 3) goto LAB_97c073f0;
-            uVar1 = puVar2[9];
+            if (swizzleSelect2 != 3) goto LAB_97c073f0;
+            swizzleSelect2 = copyEntry[9];
           }
-          puVar5[4] = (uVar1 & 3) << 0x13 | puVar5[4] & 0xffe7ffff;
+          srcOperand[4] = (swizzleSelect2 & 3) << 0x13 | srcOperand[4] & 0xffe7ffff;
         }
 LAB_97c073f0:
-        uVar1 = puVar5[4] >> 0x15 & 3;
-        if (uVar1 == 1) {
-          uVar1 = puVar2[7];
+        swizzleSelect3 = srcOperand[4] >> 0x15 & 3;
+        if (swizzleSelect3 == 1) {
+          swizzleSelect3 = copyEntry[7];
         }
-        else if (uVar1 < 2) {
-          if (uVar1 != 0) goto LAB_97c07448;
-          uVar1 = puVar2[6];
+        else if (swizzleSelect3 < 2) {
+          if (swizzleSelect3 != 0) goto LAB_97c07448;
+          swizzleSelect3 = copyEntry[6];
         }
-        else if (uVar1 == 2) {
-          uVar1 = puVar2[8];
+        else if (swizzleSelect3 == 2) {
+          swizzleSelect3 = copyEntry[8];
         }
         else {
-          if (uVar1 != 3) goto LAB_97c07448;
-          uVar1 = puVar2[9];
+          if (swizzleSelect3 != 3) goto LAB_97c07448;
+          swizzleSelect3 = copyEntry[9];
         }
-        puVar5[4] = (uVar1 & 3) << 0x15 | puVar5[4] & 0xff9fffff;
+        srcOperand[4] = (swizzleSelect3 & 3) << 0x15 | srcOperand[4] & 0xff9fffff;
       }
 LAB_97c07448:
       loopIndex = loopIndex + 1;
-      puVar5 = puVar5 + 2;
-    } while (loopIndex < (int)(*param_1 >> 0x1d));
+      srcOperand = srcOperand + 2;
+    } while (loopIndex < (int)(*inst >> 0x1d));
   }
-  return puVar2;
+  return copyEntry;
 }
 
 /* _RemoveFromAvailableCopyTable @ 0x97c07474 (152 bytes) */
-int _RemoveFromAvailableCopyTable(param_1, param_2, param_3)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+int _RemoveFromAvailableCopyTable(op, copyTable, stream)
+  int op;
+  undefined4 copyTable;
+  undefined4 stream;
 {
-  uint uVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
+  uint destWord0;
+  int elementCount;
+  int element;
+  int nextElement;
   
-  uVar1 = *(uint *)(param_1 + 8);
-  iVar2 = 1;
-  if ((uVar1 & 0x1000) != 0) {
-    iVar2 = (uVar1 >> 10 & 3) + 1;
-    ((int (*)())_CheckRemoveAvailableCopyTable)(uVar1,*(undefined4 *)(param_1 + 0xc),0,1,param_2,param_3);
+  destWord0 = *(uint *)(op + 8);
+  elementCount = 1;
+  if ((destWord0 & 0x1000) != 0) {
+    elementCount = (destWord0 >> 10 & 3) + 1;
+    ((int (*)())_CheckRemoveAvailableCopyTable)(destWord0,*(undefined4 *)(op + 0xc),0,1,copyTable,stream);
   }
-  iVar3 = 0;
-  if (iVar2 != 0) {
+  element = 0;
+  if (elementCount != 0) {
     do {
-      iVar4 = iVar3 + 1;
-      ((int (*)())_CheckRemoveAvailableCopyTable)(*(undefined4 *)(param_1 + 8),*(undefined4 *)(param_1 + 0xc),iVar3,0,param_2,param_3
+      nextElement = element + 1;
+      ((int (*)())_CheckRemoveAvailableCopyTable)(*(undefined4 *)(op + 8),*(undefined4 *)(op + 0xc),element,0,copyTable,stream
                 );
-      iVar3 = iVar4;
-    } while (iVar4 < iVar2);
+      element = nextElement;
+    } while (nextElement < elementCount);
   }
   return;
 }
 
 /* _CopyPropagateOperation @ 0x97c0750c (80 bytes) */
-int _CopyPropagateOperation(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+int _CopyPropagateOperation(op, copyTable, stream)
+  undefined4 op;
+  undefined4 copyTable;
+  undefined4 stream;
 {
-  ((int (*)())_ReplaceUsingAvailableCopyTable)(param_1,param_2);
-  ((int (*)())_RemoveFromAvailableCopyTable)(param_1,param_2,param_3);
-  return ((int (*)())_AddToAvailableCopyTable)(param_1,param_2,param_3);
+  ((int (*)())_ReplaceUsingAvailableCopyTable)(op,copyTable);
+  ((int (*)())_RemoveFromAvailableCopyTable)(op,copyTable,stream);
+  return ((int (*)())_AddToAvailableCopyTable)(op,copyTable,stream);
 }
 
 /* _EndLocalAvailableCopyList @ 0x97c0755c (132 bytes) */
-int _EndLocalAvailableCopyList(param_1)
-  uint *param_1;
+int _EndLocalAvailableCopyList(op)
+  uint *op;
 {
-  uint uVar1;
+  uint opcode;
   
-  uVar1 = *param_1 >> 0x12 & 0xff;
-  if (((((uVar1 != 0x4c) && (uVar1 != 0x55)) && (uVar1 != 0x58)) &&
-      ((((uVar1 != 0x6a && (uVar1 != 0x6b)) &&
-        ((uVar1 != 0x59 && ((uVar1 != 0x69 && (uVar1 != 0x54)))))) && (uVar1 != 0x4d)))) &&
-     ((((uVar1 != 0x4b && (uVar1 != 0x57)) && (uVar1 != 0x5b)) &&
-      ((uVar1 != 0x56 && (uVar1 != 0x5a)))))) {
+  opcode = *op >> 0x12 & 0xff;
+  if (((((opcode != 0x4c) && (opcode != 0x55)) && (opcode != 0x58)) &&
+      ((((opcode != 0x6a && (opcode != 0x6b)) &&
+        ((opcode != 0x59 && ((opcode != 0x69 && (opcode != 0x54)))))) && (opcode != 0x4d)))) &&
+     ((((opcode != 0x4b && (opcode != 0x57)) && (opcode != 0x5b)) &&
+      ((opcode != 0x56 && (opcode != 0x5a)))))) {
     return 0;
   }
   return 1;
 }
 
 /* _LocalCopyPropagator @ 0x97c075e0 (236 bytes) */
-int _LocalCopyPropagator(param_1)
-  int param_1;
+int _LocalCopyPropagator(stream)
+  int stream;
 {
   int endLocalAvailableCopyListResult;
   uint *allocation;
-  int iVar2;
+  int entryOffset;
   int isParamSampler;
-  int iVar4;
-  uint uVar5;
+  int opChunk;
+  uint entryIndex;
   
-  iVar4 = **(int **)(param_1 + 0x20);
+  opChunk = **(int **)(stream + 0x20);
   allocation = (uint *)_malloc(8);
   allocation[1] = 0;
   *allocation = 0;
-  for (; iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
-    endLocalAvailableCopyListResult = ((int (*)())_EndLocalAvailableCopyList)(iVar4 + 0xc);
-    if ((endLocalAvailableCopyListResult != 0) && (uVar5 = 0, *allocation != 0)) {
-      iVar2 = 0;
+  for (; opChunk != 0; opChunk = *(int *)(opChunk + 8)) {
+    endLocalAvailableCopyListResult = ((int (*)())_EndLocalAvailableCopyList)(opChunk + 0xc);
+    if ((endLocalAvailableCopyListResult != 0) && (entryIndex = 0, *allocation != 0)) {
+      entryOffset = 0;
       do {
-        isParamSampler = ((int (*)())_IsParamSampler)(*(undefined4 *)(iVar2 + allocation[1] + 0xc),
-                                *(undefined4 *)(iVar2 + allocation[1] + 0x10),param_1);
+        isParamSampler = ((int (*)())_IsParamSampler)(*(undefined4 *)(entryOffset + allocation[1] + 0xc),
+                                *(undefined4 *)(entryOffset + allocation[1] + 0x10),stream);
         if (isParamSampler == 0) {
-          *(undefined4 *)(iVar2 + allocation[1]) = 0;
+          *(undefined4 *)(entryOffset + allocation[1]) = 0;
         }
-        uVar5 = uVar5 + 1;
-        iVar2 = iVar2 + 0x48;
-      } while (uVar5 < *allocation);
+        entryIndex = entryIndex + 1;
+        entryOffset = entryOffset + 0x48;
+      } while (entryIndex < *allocation);
     }
-    ((int (*)())_CopyPropagateOperation)(iVar4 + 0xc,allocation,param_1);
+    ((int (*)())_CopyPropagateOperation)(opChunk + 0xc,allocation,stream);
   }
   if (allocation[1] != 0) {
     _free(allocation[1]);
@@ -11718,40 +11784,40 @@ int _LocalCopyPropagator(param_1)
 }
 
 /* _EmbedSamplerParamIndices @ 0x97c076cc (144 bytes) */
-int _EmbedSamplerParamIndices(param_1)
-  int param_1;
+int _EmbedSamplerParamIndices(stream)
+  int stream;
 {
-  bool bVar1;
-  short sVar2;
-  uint uVar3;
-  int iVar4;
-  int iVar5;
+  bool paramListEmpty;
+  short paramIndex;
+  uint opcode;
+  int paramChunk;
+  int opChunk;
   
-  iVar5 = **(int **)(param_1 + 0x20);
-  if (iVar5 == 0) {
+  opChunk = **(int **)(stream + 0x20);
+  if (opChunk == 0) {
     return;
   }
   do {
-    uVar3 = *(uint *)(iVar5 + 0xc) >> 0x12 & 0xff;
-    if ((0x41 < uVar3) && ((uVar3 < 0x48 || (uVar3 == 0x62)))) {
-      iVar4 = **(int **)(param_1 + 0x10);
-      bVar1 = iVar4 == 0;
-      if (!bVar1) {
-        sVar2 = *(short *)(iVar4 + 0x12);
-        while (*(short *)(iVar5 + 0x2a) != sVar2) {
-          iVar4 = *(int *)(iVar4 + 8);
-          if (iVar4 == 0) goto LAB_97c0774c;
-          bVar1 = false;
-          sVar2 = *(short *)(iVar4 + 0x12);
+    opcode = *(uint *)(opChunk + 0xc) >> 0x12 & 0xff;
+    if ((0x41 < opcode) && ((opcode < 0x48 || (opcode == 0x62)))) {
+      paramChunk = **(int **)(stream + 0x10);
+      paramListEmpty = paramChunk == 0;
+      if (!paramListEmpty) {
+        paramIndex = *(short *)(paramChunk + 0x12);
+        while (*(short *)(opChunk + 0x2a) != paramIndex) {
+          paramChunk = *(int *)(paramChunk + 8);
+          if (paramChunk == 0) goto LAB_97c0774c;
+          paramListEmpty = false;
+          paramIndex = *(short *)(paramChunk + 0x12);
         }
-        if ((!bVar1) && ((*(uint *)(iVar4 + 0xc) >> 0x10 & 0x1f) == 1)) {
-          *(short *)(iVar5 + 0x32) = (short)*(uint *)(iVar4 + 0xc);
+        if ((!paramListEmpty) && ((*(uint *)(paramChunk + 0xc) >> 0x10 & 0x1f) == 1)) {
+          *(short *)(opChunk + 0x32) = (short)*(uint *)(paramChunk + 0xc);
         }
       }
     }
 LAB_97c0774c:
-    iVar5 = *(int *)(iVar5 + 8);
-    if (iVar5 == 0) {
+    opChunk = *(int *)(opChunk + 8);
+    if (opChunk == 0) {
       return;
     }
   } while( true );
@@ -11761,256 +11827,259 @@ LAB_97c0774c:
 int _LinearizeFixOutputReads(stream)
   int stream;
 {
+  uint tempSizeMinusOne;
+  int movChunk;
+  int opChunk;
   uint loopIndex2;
   uint loopIndex;
-  ushort uVar1;
-  bool bVar2;
-  int iVar3;
-  int *piVar4;
+  ushort outputIndex;
+  bool readsOutput;
+  int sourceOperand;
+  int *opList;
   undefined4 maxIndex;
-  uint uVar6;
-  uint uVar7;
-  int iVar8;
-  int iVar9;
-  uint local_80;
-  undefined4 local_7c;
-  int local_78;
-  int local_74;
-  undefined4 local_70;
-  uint local_6c;
-  uint local_68;
-  uint local_64;
-  uint local_60;
-  uint local_5c;
-  undefined4 local_58;
-  undefined4 local_54;
-  undefined4 local_50;
-  undefined4 local_4c;
-  undefined4 local_48;
-  undefined4 local_44;
-  undefined4 local_40;
-  undefined4 local_3c;
+  uint opWord0;
+  uint sourceCount;
+  int sourceOperandRewrite;
+  int outputChunk;
+  uint tempDeclWord0;
+  undefined4 tempDeclWord1OrScanChunk;
+  int tempDeclWord2;
+  int tempDeclWord3;
+  undefined4 movHeader;
+  uint movFlags;
+  uint movDest0;
+  uint movDest1;
+  uint movSrc0A;
+  uint movSrc0B;
+  undefined4 movSrc1A;
+  undefined4 movSrc1B;
+  undefined4 movSrc2A;
+  undefined4 movSrc2B;
+  undefined4 movAuxA;
+  undefined4 movAuxB;
+  undefined4 movLine;
+  undefined4 movWord13;
   
-  iVar9 = **(int **)(stream + 0x1c);
+  outputChunk = **(int **)(stream + 0x1c);
   do {
-    if (iVar9 == 0) {
+    if (outputChunk == 0) {
       return;
     }
-    bVar2 = false;
-    uVar1 = *(ushort *)(iVar9 + 0x12);
-    local_7c = **(int **)(stream + 0x20);
-    if (local_7c != 0) {
+    readsOutput = false;
+    outputIndex = *(ushort *)(outputChunk + 0x12);
+    tempDeclWord1OrScanChunk = **(int **)(stream + 0x20);
+    if (tempDeclWord1OrScanChunk != 0) {
       do {
         loopIndex = 0;
-        uVar7 = *(uint *)(local_7c + 0xc) >> 0x1d;
-        if (uVar7 != 0) {
-          iVar3 = local_7c + 0x10;
+        sourceCount = *(uint *)(tempDeclWord1OrScanChunk + 0xc) >> 0x1d;
+        if (sourceCount != 0) {
+          sourceOperand = tempDeclWord1OrScanChunk + 0x10;
           do {
-            if ((((*(uint *)(iVar3 + 0xc) >> 0x17 & 7) == 3) && (*(ushort *)(iVar3 + 0x12) == uVar1)
-                ) || (((*(uint *)(local_7c + 0xc) >> 0x12 & 0xff) == 0x6d &&
-                      (((*(uint *)(local_7c + 0x14) >> 0x11 & 7) == 3 &&
-                       (*(ushort *)(local_7c + 0x1a) == uVar1)))))) {
-              bVar2 = true;
+            if ((((*(uint *)(sourceOperand + 0xc) >> 0x17 & 7) == 3) && (*(ushort *)(sourceOperand + 0x12) == outputIndex)
+                ) || (((*(uint *)(tempDeclWord1OrScanChunk + 0xc) >> 0x12 & 0xff) == 0x6d &&
+                      (((*(uint *)(tempDeclWord1OrScanChunk + 0x14) >> 0x11 & 7) == 3 &&
+                       (*(ushort *)(tempDeclWord1OrScanChunk + 0x1a) == outputIndex)))))) {
+              readsOutput = true;
               break;
             }
-            if (bVar2) break;
+            if (readsOutput) break;
             loopIndex = loopIndex + 1;
-            iVar3 = iVar3 + 8;
-          } while (loopIndex < uVar7);
+            sourceOperand = sourceOperand + 8;
+          } while (loopIndex < sourceCount);
         }
-        local_7c = *(int *)(local_7c + 8);
-      } while (local_7c != 0);
-      if (bVar2) {
-        local_80 = 0;
-        local_78 = local_7c;
-        local_74 = local_7c;
+        tempDeclWord1OrScanChunk = *(int *)(tempDeclWord1OrScanChunk + 8);
+      } while (tempDeclWord1OrScanChunk != 0);
+      if (readsOutput) {
+        tempDeclWord0 = 0;
+        tempDeclWord2 = tempDeclWord1OrScanChunk;
+        tempDeclWord3 = tempDeclWord1OrScanChunk;
         maxIndex = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(stream + 4));
-        local_7c = CONCAT22((*(unsigned short *)((unsigned char *)&(local_7c) + 0)),(short)maxIndex + 1);
-        local_80 = (*(uint *)(iVar9 + 0xc) >> 0x18 & 3) << 0x18 |
-                   (*(uint *)(iVar9 + 0xc) >> 0x1a & 7) << 0x1a |
-                   *(uint *)(iVar9 + 0xc) & 0xe0000000 | local_80 & 0xffffff;
-        _PPStreamAddTempUsage(stream,&local_80);
-        piVar4 = *(int **)(stream + 0x20);
-        iVar3 = *piVar4;
-        if (iVar3 != 0) {
+        tempDeclWord1OrScanChunk = CONCAT22((*(unsigned short *)((unsigned char *)&(tempDeclWord1OrScanChunk) + 0)),(short)maxIndex + 1);
+        tempDeclWord0 = (*(uint *)(outputChunk + 0xc) >> 0x18 & 3) << 0x18 |
+                   (*(uint *)(outputChunk + 0xc) >> 0x1a & 7) << 0x1a |
+                   *(uint *)(outputChunk + 0xc) & 0xe0000000 | tempDeclWord0 & 0xffffff;
+        _PPStreamAddTempUsage(stream,&tempDeclWord0);
+        opList = *(int **)(stream + 0x20);
+        opChunk = *opList;
+        if (opChunk != 0) {
           do {
-            if (((*(uint *)(iVar3 + 0x14) >> 0x11 & 7) == 3) && (*(ushort *)(iVar3 + 0x1a) == uVar1)
+            if (((*(uint *)(opChunk + 0x14) >> 0x11 & 7) == 3) && (*(ushort *)(opChunk + 0x1a) == outputIndex)
                ) {
-              *(uint *)(iVar3 + 0x14) = *(uint *)(iVar3 + 0x14) & 0xfff1ffff | 0x20000;
-              *(undefined2 *)(iVar3 + 0x1a) = (*(unsigned short *)((unsigned char *)&(local_7c) + 2));
+              *(uint *)(opChunk + 0x14) = *(uint *)(opChunk + 0x14) & 0xfff1ffff | 0x20000;
+              *(undefined2 *)(opChunk + 0x1a) = (*(unsigned short *)((unsigned char *)&(tempDeclWord1OrScanChunk) + 2));
             }
-            uVar6 = *(uint *)(iVar3 + 0xc);
+            opWord0 = *(uint *)(opChunk + 0xc);
             loopIndex2 = 0;
-            if (uVar6 >> 0x1d != 0) {
-              iVar8 = iVar3 + 0x10;
+            if (opWord0 >> 0x1d != 0) {
+              sourceOperandRewrite = opChunk + 0x10;
               do {
-                if (((*(uint *)(iVar8 + 0xc) >> 0x17 & 7) == 3) &&
-                   (*(ushort *)(iVar8 + 0x12) == uVar1)) {
-                  *(uint *)(iVar8 + 0xc) = *(uint *)(iVar8 + 0xc) & 0xfc7fffff | 0x800000;
-                  *(undefined2 *)(iVar8 + 0x12) = (*(unsigned short *)((unsigned char *)&(local_7c) + 2));
-                  uVar6 = *(uint *)(iVar3 + 0xc);
+                if (((*(uint *)(sourceOperandRewrite + 0xc) >> 0x17 & 7) == 3) &&
+                   (*(ushort *)(sourceOperandRewrite + 0x12) == outputIndex)) {
+                  *(uint *)(sourceOperandRewrite + 0xc) = *(uint *)(sourceOperandRewrite + 0xc) & 0xfc7fffff | 0x800000;
+                  *(undefined2 *)(sourceOperandRewrite + 0x12) = (*(unsigned short *)((unsigned char *)&(tempDeclWord1OrScanChunk) + 2));
+                  opWord0 = *(uint *)(opChunk + 0xc);
                 }
                 loopIndex2 = loopIndex2 + 1;
-                iVar8 = iVar8 + 8;
-              } while (loopIndex2 < uVar6 >> 0x1d);
+                sourceOperandRewrite = sourceOperandRewrite + 8;
+              } while (loopIndex2 < opWord0 >> 0x1d);
             }
-            iVar3 = *(int *)(iVar3 + 8);
-          } while (iVar3 != 0);
-          piVar4 = *(int **)(stream + 0x20);
+            opChunk = *(int *)(opChunk + 8);
+          } while (opChunk != 0);
+          opList = *(int **)(stream + 0x20);
         }
-        for (iVar3 = *piVar4; iVar3 != 0; iVar3 = *(int *)(iVar3 + 8)) {
-          if ((*(uint *)(iVar3 + 0xc) >> 0x12 & 0xff) == 0x4d) {
-            uVar7 = local_80 >> 0x18 & 3;
-            local_68 = uVar7 << 10 | 0x6c;
-            local_58 = 0;
-            local_54 = 0;
-            local_50 = 0;
-            local_4c = 0;
-            local_48 = 0;
-            local_44 = 0;
-            local_40 = *(undefined4 *)(iVar3 + 0x3c);
-            local_70 = 0x20000000;
-            local_3c = 0;
-            if (uVar7 == 1) {
+        for (opChunk = *opList; opChunk != 0; opChunk = *(int *)(opChunk + 8)) {
+          if ((*(uint *)(opChunk + 0xc) >> 0x12 & 0xff) == 0x4d) {
+            tempSizeMinusOne = tempDeclWord0 >> 0x18 & 3;
+            movDest0 = tempSizeMinusOne << 10 | 0x6c;
+            movSrc1A = 0;
+            movSrc1B = 0;
+            movSrc2A = 0;
+            movSrc2B = 0;
+            movAuxA = 0;
+            movAuxB = 0;
+            movLine = *(undefined4 *)(opChunk + 0x3c);
+            movHeader = 0x20000000;
+            movWord13 = 0;
+            if (tempSizeMinusOne == 1) {
 LAB_97c07a24:
-              local_68 = local_68 | 0x4000;
+              movDest0 = movDest0 | 0x4000;
 LAB_97c07a2c:
-              local_68 = local_68 | 0x2000;
+              movDest0 = movDest0 | 0x2000;
             }
             else {
-              if (1 < uVar7) {
-                if (uVar7 != 2) {
-                  if (uVar7 != 3) goto LAB_97c07a34;
-                  local_68 = 0x10c6c;
+              if (1 < tempSizeMinusOne) {
+                if (tempSizeMinusOne != 2) {
+                  if (tempSizeMinusOne != 3) goto LAB_97c07a34;
+                  movDest0 = 0x10c6c;
                 }
-                local_68 = local_68 | 0x8000;
+                movDest0 = movDest0 | 0x8000;
                 goto LAB_97c07a24;
               }
-              if (uVar7 == 0) goto LAB_97c07a2c;
+              if (tempSizeMinusOne == 0) goto LAB_97c07a2c;
             }
 LAB_97c07a34:
-            uVar7 = local_80 >> 0x18 & 3;
-            local_6c = (local_80 >> 0x1d & 3) << 0x12 |
-                       uVar7 << 0x1a | (local_80 >> 0x1a & 7) << 0x17;
-            local_68 = local_68 | 0x60000;
-            local_60 = uVar7 << 0xc | 0x8d8000;
-            local_5c = local_7c & 0xffff;
-            local_64 = (uint)uVar1;
-            iVar8 = _PPStreamInsertOperationAfterChunk
-                              (stream,&local_70,0,0,*(undefined4 *)(iVar3 + 4));
+            tempSizeMinusOne = tempDeclWord0 >> 0x18 & 3;
+            movFlags = (tempDeclWord0 >> 0x1d & 3) << 0x12 |
+                       tempSizeMinusOne << 0x1a | (tempDeclWord0 >> 0x1a & 7) << 0x17;
+            movDest0 = movDest0 | 0x60000;
+            movSrc0A = tempSizeMinusOne << 0xc | 0x8d8000;
+            movSrc0B = tempDeclWord1OrScanChunk & 0xffff;
+            movDest1 = (uint)outputIndex;
+            movChunk = _PPStreamInsertOperationAfterChunk
+                              (stream,&movHeader,0,0,*(undefined4 *)(opChunk + 4));
             _PPStreamChangeBranchTargets
-                      (stream,*(uint *)(iVar3 + 0xc) & 0x3ffff,*(uint *)(iVar8 + 0xc) & 0x3ffff);
+                      (stream,*(uint *)(opChunk + 0xc) & 0x3ffff,*(uint *)(movChunk + 0xc) & 0x3ffff);
           }
         }
       }
     }
-    iVar9 = *(int *)(iVar9 + 8);
+    outputChunk = *(int *)(outputChunk + 8);
   } while( true );
 }
 
 /* _glpPPShaderLinearizeStreamMgr @ 0x97c07af0 (320 bytes) */
-int _glpPPShaderLinearizeStreamMgr(stream, param_2)
+int _glpPPShaderLinearizeStreamMgr(stream, passFlags)
   undefined4 stream;
-  uint param_2;
+  uint passFlags;
 {
-  undefined4 uVar1;
+  undefined4 program;
   
-  if ((param_2 & 1) != 0) {
+  if ((passFlags & 1) != 0) {
     ((int (*)())_InlineFunctionsBranch)(stream);
   }
-  if ((param_2 & 0x102) != 0) {
+  if ((passFlags & 0x102) != 0) {
     _DetectConstantLoopsSimple(stream);
-    _UnrollConstantLoopsSimple(stream,param_2 & 0x100);
+    _UnrollConstantLoopsSimple(stream,passFlags & 0x100);
   }
-  if ((param_2 & 4) != 0) {
+  if ((passFlags & 4) != 0) {
     _PPStreamPackIndices(stream);
     _FlattenIfs(stream);
   }
-  if ((param_2 & 0x106) != 0) {
+  if ((passFlags & 0x106) != 0) {
     ((int (*)())_LinearizeFixOutputReads)(stream);
   }
-  if ((param_2 & 0x80) != 0) {
+  if ((passFlags & 0x80) != 0) {
     _ConstantPropagateFold(stream);
   }
-  if ((param_2 & 8) != 0) {
+  if ((passFlags & 8) != 0) {
     ((int (*)())_LocalCopyPropagator)(stream);
   }
-  if ((param_2 & 0x10) != 0) {
+  if ((passFlags & 0x10) != 0) {
     ((int (*)())_EmbedSamplerParamIndices)(stream);
   }
-  uVar1 = 0;
-  if (param_2 != 0) {
+  program = 0;
+  if (passFlags != 0) {
     _PPStreamPackIndices(stream);
-    uVar1 = _ProgramNew(stream);
-    _Registerify(uVar1);
-    _Blockify(uVar1);
+    program = _ProgramNew(stream);
+    _Registerify(program);
+    _Blockify(program);
   }
-  if ((param_2 & 0x60) != 0) {
-    _BuildGenKill(uVar1);
-    _BuildLiveOut(uVar1);
+  if ((passFlags & 0x60) != 0) {
+    _BuildGenKill(program);
+    _BuildLiveOut(program);
   }
-  if ((param_2 & 0x40) != 0) {
-    _DeadCodeEliminationSimple(uVar1);
+  if ((passFlags & 0x40) != 0) {
+    _DeadCodeEliminationSimple(program);
   }
-  if ((param_2 & 0x20) != 0) {
-    _BuildInterferenceSets(uVar1);
-    _RegistersMerge(uVar1);
+  if ((passFlags & 0x20) != 0) {
+    _BuildInterferenceSets(program);
+    _RegistersMerge(program);
   }
-  if (param_2 != 0) {
-    _RegistersCleanup(uVar1);
-    _ProgramFree(uVar1);
+  if (passFlags != 0) {
+    _RegistersCleanup(program);
+    _ProgramFree(program);
   }
   return _PPStreamPackIndices(stream);
 }
 
 /* _glpPPShaderLinearize @ 0x97c07c30 (156 bytes) */
-int _glpPPShaderLinearize(param_1, param_2)
-  undefined4 param_1;
-  undefined4 param_2;
+int _glpPPShaderLinearize(program, passFlags)
+  undefined4 program;
+  undefined4 passFlags;
 {
   undefined4 ppStreamCreateResult;
-  undefined4 uVar2;
-  int local_30 [7];
+  undefined4 linearizedProgram;
+  int streamInfo [7];
   
-  uVar2 = 0;
-  local_30[0] = 0;
+  linearizedProgram = 0;
+  streamInfo[0] = 0;
   ppStreamCreateResult = _PPStreamCreate();
-  _PPStreamAttachStream(ppStreamCreateResult,param_1);
-  ((int (*)())_glpPPShaderLinearizeStreamMgr)(ppStreamCreateResult,param_2);
-  _PPStreamGetStream(ppStreamCreateResult,0,local_30);
-  if (local_30[0] != 0) {
-    uVar2 = _malloc(local_30[0] * 8 + 0xfU & 0xfffffff0);
-    _PPStreamGetStream(ppStreamCreateResult,uVar2,local_30);
+  _PPStreamAttachStream(ppStreamCreateResult,program);
+  ((int (*)())_glpPPShaderLinearizeStreamMgr)(ppStreamCreateResult,passFlags);
+  _PPStreamGetStream(ppStreamCreateResult,0,streamInfo);
+  if (streamInfo[0] != 0) {
+    linearizedProgram = _malloc(streamInfo[0] * 8 + 0xfU & 0xfffffff0);
+    _PPStreamGetStream(ppStreamCreateResult,linearizedProgram,streamInfo);
   }
   _PPStreamFree(ppStreamCreateResult);
-  return uVar2;
+  return linearizedProgram;
 }
 
 /* _glpFreePPShaderLinearize @ 0x97c07ccc (12 bytes) */
-int _glpFreePPShaderLinearize(param_1)
-  int param_1;
+int _glpFreePPShaderLinearize(program)
+  int program;
 {
-  if (param_1 == 0) {
+  if (program == 0) {
     return;
   }
-  return _free(param_1);
+  return _free(program);
 }
 
 /* _BitSetNew @ 0x97c07cd8 (104 bytes) */
-int _BitSetNew(param_1)
-  uint param_1;
+int _BitSetNew(bitCount)
+  uint bitCount;
 {
   uint allocation2;
   uint *allocation;
-  uint uVar2;
+  uint byteSize;
   
-  uVar2 = (param_1 >> 3 & 0x1ffffffc) + 4;
+  byteSize = (bitCount >> 3 & 0x1ffffffc) + 4;
   allocation = (uint *)_malloc(0xc);
-  *allocation = param_1;
-  allocation[1] = uVar2;
-  allocation2 = _malloc(uVar2);
+  *allocation = bitCount;
+  allocation[1] = byteSize;
+  allocation2 = _malloc(byteSize);
   allocation[2] = allocation2;
-  ((int (*)())_BitSetSetRangeEqualsInternal)(allocation,0,param_1,0);
+  ((int (*)())_BitSetSetRangeEqualsInternal)(allocation,0,bitCount,0);
   return allocation;
 }
 
@@ -12026,13 +12095,13 @@ int _BitSetClone(bitSet)
 }
 
 /* _BitSetFree @ 0x97c07d80 (52 bytes) */
-int _BitSetFree(param_1)
-  int param_1;
+int _BitSetFree(bitSet)
+  int bitSet;
 {
   undefined4 extraout_r3;
   
-  _free(*(undefined4 *)(param_1 + 8));
-  _free(param_1);
+  _free(*(undefined4 *)(bitSet + 8));
+  _free(bitSet);
   return extraout_r3;
 }
 
@@ -12044,204 +12113,204 @@ int _BitSetGetSizeInBits(bitSet)
 }
 
 /* _BitSetGetEquals @ 0x97c07dbc (88 bytes) */
-int _BitSetGetEquals(bitSet, param_2)
+int _BitSetGetEquals(bitSet, bitIndex)
   int bitSet;
-  uint param_2;
+  uint bitIndex;
 {
-  ((int (*)())_BitSetExpandEquals)(bitSet,param_2 + 1);
-  return (*(uint *)((param_2 >> 3 & 0x1ffffffc) + *(int *)(bitSet + 8)) & 1 << (param_2 & 0x1f)) !=
+  ((int (*)())_BitSetExpandEquals)(bitSet,bitIndex + 1);
+  return (*(uint *)((bitIndex >> 3 & 0x1ffffffc) + *(int *)(bitSet + 8)) & 1 << (bitIndex & 0x1f)) !=
          0;
 }
 
 /* _BitSetSetEquals @ 0x97c07e14 (88 bytes) */
-int _BitSetSetEquals(bitSet, param_2)
+int _BitSetSetEquals(bitSet, bitIndex)
   int bitSet;
-  uint param_2;
+  uint bitIndex;
 {
-  uint uVar1;
+  uint wordByteOffset;
   
-  ((int (*)())_BitSetExpandEquals)(bitSet,param_2 + 1);
-  uVar1 = param_2 >> 3 & 0x1ffffffc;
-  *(uint *)(uVar1 + *(int *)(bitSet + 8)) =
-       *(uint *)(uVar1 + *(int *)(bitSet + 8)) | 1 << (param_2 & 0x1f);
+  ((int (*)())_BitSetExpandEquals)(bitSet,bitIndex + 1);
+  wordByteOffset = bitIndex >> 3 & 0x1ffffffc;
+  *(uint *)(wordByteOffset + *(int *)(bitSet + 8)) =
+       *(uint *)(wordByteOffset + *(int *)(bitSet + 8)) | 1 << (bitIndex & 0x1f);
   return bitSet;
 }
 
 /* _BitSetClearEquals @ 0x97c07e6c (88 bytes) */
-int _BitSetClearEquals(bitSet, param_2)
+int _BitSetClearEquals(bitSet, bitIndex)
   int bitSet;
-  uint param_2;
+  uint bitIndex;
 {
-  uint uVar1;
+  uint wordByteOffset;
   
-  ((int (*)())_BitSetExpandEquals)(bitSet,param_2 + 1);
-  uVar1 = param_2 >> 3 & 0x1ffffffc;
-  *(uint *)(uVar1 + *(int *)(bitSet + 8)) =
-       *(uint *)(uVar1 + *(int *)(bitSet + 8)) &
-       (-2 << (param_2 & 0x1f) | 0xfffffffeU >> 0x20 - (param_2 & 0x1f));
+  ((int (*)())_BitSetExpandEquals)(bitSet,bitIndex + 1);
+  wordByteOffset = bitIndex >> 3 & 0x1ffffffc;
+  *(uint *)(wordByteOffset + *(int *)(bitSet + 8)) =
+       *(uint *)(wordByteOffset + *(int *)(bitSet + 8)) &
+       (-2 << (bitIndex & 0x1f) | 0xfffffffeU >> 0x20 - (bitIndex & 0x1f));
   return bitSet;
 }
 
 /* _BitSetSetRangeEquals @ 0x97c07ec4 (84 bytes) */
-int _BitSetSetRangeEquals(bitSet, param_2, param_3, param_4)
+int _BitSetSetRangeEquals(bitSet, firstBit, endBit, value)
   undefined4 bitSet;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+  undefined4 firstBit;
+  undefined4 endBit;
+  undefined4 value;
 {
-  ((int (*)())_BitSetExpandEquals)(bitSet,param_3);
-  ((int (*)())_BitSetSetRangeEqualsInternal)(bitSet,param_2,param_3,param_4);
+  ((int (*)())_BitSetExpandEquals)(bitSet,endBit);
+  ((int (*)())_BitSetSetRangeEqualsInternal)(bitSet,firstBit,endBit,value);
   return bitSet;
 }
 
 /* _BitSetSetRangeEqualsInternal @ 0x97c07f18 (100 bytes) */
-int _BitSetSetRangeEqualsInternal(bitSet, param_2, param_3, param_4)
+int _BitSetSetRangeEqualsInternal(bitSet, firstBit, endBit, value)
   int bitSet;
-  uint param_2;
-  uint param_3;
-  int param_4;
+  uint firstBit;
+  uint endBit;
+  int value;
 {
-  int iVar1;
-  uint uVar2;
+  int bitsLeft;
+  uint wordByteOffset;
   
-  if (param_3 <= param_2) {
+  if (endBit <= firstBit) {
     return;
   }
-  iVar1 = param_3 - param_2;
+  bitsLeft = endBit - firstBit;
   do {
-    if (param_4 == 0) {
-      uVar2 = param_2 >> 3 & 0x1ffffffc;
-      *(uint *)(uVar2 + *(int *)(bitSet + 8)) =
-           *(uint *)(uVar2 + *(int *)(bitSet + 8)) & ~(1 << (param_2 & 0x1f));
+    if (value == 0) {
+      wordByteOffset = firstBit >> 3 & 0x1ffffffc;
+      *(uint *)(wordByteOffset + *(int *)(bitSet + 8)) =
+           *(uint *)(wordByteOffset + *(int *)(bitSet + 8)) & ~(1 << (firstBit & 0x1f));
     }
     else {
-      uVar2 = param_2 >> 3 & 0x1ffffffc;
-      *(uint *)(uVar2 + *(int *)(bitSet + 8)) =
-           *(uint *)(uVar2 + *(int *)(bitSet + 8)) | 1 << (param_2 & 0x1f);
+      wordByteOffset = firstBit >> 3 & 0x1ffffffc;
+      *(uint *)(wordByteOffset + *(int *)(bitSet + 8)) =
+           *(uint *)(wordByteOffset + *(int *)(bitSet + 8)) | 1 << (firstBit & 0x1f);
     }
-    param_2 = param_2 + 1;
-    iVar1 = iVar1 + -1;
-  } while (iVar1 != 0);
+    firstBit = firstBit + 1;
+    bitsLeft = bitsLeft + -1;
+  } while (bitsLeft != 0);
   return;
 }
 
 /* _BitSetExpandEquals @ 0x97c07f7c (60 bytes) */
-int _BitSetExpandEquals(bitSet, param_2)
+int _BitSetExpandEquals(bitSet, minBitCount)
   uint *bitSet;
-  uint param_2;
+  uint minBitCount;
 {
-  if (*bitSet < param_2) {
-    ((int (*)())_BitSetSetSizeEquals)(bitSet,param_2);
+  if (*bitSet < minBitCount) {
+    ((int (*)())_BitSetSetSizeEquals)(bitSet,minBitCount);
   }
   return bitSet;
 }
 
 /* _BitSetSetSizeEquals @ 0x97c07fb8 (112 bytes) */
-int _BitSetSetSizeEquals(bitSet, param_2)
+int _BitSetSetSizeEquals(bitSet, newBitCount)
   uint *bitSet;
-  uint param_2;
+  uint newBitCount;
 {
   uint allocation;
-  uint uVar2;
+  uint newByteSize;
   
-  if (*bitSet != param_2) {
-    uVar2 = (param_2 >> 3 & 0x1ffffffc) + 4;
-    allocation = _realloc(bitSet[2],uVar2);
+  if (*bitSet != newBitCount) {
+    newByteSize = (newBitCount >> 3 & 0x1ffffffc) + 4;
+    allocation = _realloc(bitSet[2],newByteSize);
     bitSet[2] = allocation;
-    ((int (*)())_BitSetSetRangeEqualsInternal)(bitSet,*bitSet,param_2,0);
-    *bitSet = param_2;
-    bitSet[1] = uVar2;
+    ((int (*)())_BitSetSetRangeEqualsInternal)(bitSet,*bitSet,newBitCount,0);
+    *bitSet = newBitCount;
+    bitSet[1] = newByteSize;
   }
   return bitSet;
 }
 
 /* _BitSetNextSetBit @ 0x97c08030 (136 bytes) */
-int _BitSetNextSetBit(bitSet, param_2)
+int _BitSetNextSetBit(bitSet, afterBit)
   uint *bitSet;
-  int param_2;
+  int afterBit;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
+  uint word;
+  uint foundBit;
+  uint bitInWord;
+  uint wordIndex;
   
-  uVar4 = param_2 + 1U >> 5;
-  uVar3 = param_2 + 1U & 0x1f;
-  if (uVar4 < bitSet[1] >> 2) {
+  wordIndex = afterBit + 1U >> 5;
+  bitInWord = afterBit + 1U & 0x1f;
+  if (wordIndex < bitSet[1] >> 2) {
     do {
-      uVar1 = *(uint *)(uVar4 * 4 + bitSet[2]);
-      if ((uVar1 != 0) && (uVar3 < 0x20)) {
+      word = *(uint *)(wordIndex * 4 + bitSet[2]);
+      if ((word != 0) && (bitInWord < 0x20)) {
         do {
-          if (((uVar1 & 1 << (uVar3 & 0x3f)) != 0) &&
-             (uVar2 = uVar4 * 0x20 + uVar3, uVar2 < *bitSet)) {
-            return uVar2;
+          if (((word & 1 << (bitInWord & 0x3f)) != 0) &&
+             (foundBit = wordIndex * 0x20 + bitInWord, foundBit < *bitSet)) {
+            return foundBit;
           }
-          uVar3 = uVar3 + 1;
-        } while (uVar3 < 0x20);
+          bitInWord = bitInWord + 1;
+        } while (bitInWord < 0x20);
       }
-      uVar4 = uVar4 + 1;
-      uVar3 = 0;
-    } while ((int)uVar4 < (int)(bitSet[1] >> 2));
+      wordIndex = wordIndex + 1;
+      bitInWord = 0;
+    } while ((int)wordIndex < (int)(bitSet[1] >> 2));
   }
   return 0xffffffff;
 }
 
 /* _BitSetAndEquals @ 0x97c080b8 (128 bytes) */
-int _BitSetAndEquals(bitSet, param_2)
+int _BitSetAndEquals(bitSet, otherSet)
   undefined4 *bitSet;
-  undefined4 *param_2;
+  undefined4 *otherSet;
 {
-  int iVar1;
-  int iVar2;
-  uint uVar3;
+  int wordByteOffset;
+  int wordIndex;
+  uint wordsLeft;
   
-  ((int (*)())_BitSetExpandEquals)(bitSet,*param_2);
-  ((int (*)())_BitSetExpandEquals)(param_2,*bitSet);
-  iVar2 = 0;
-  for (uVar3 = (uint)bitSet[1] >> 2; uVar3 != 0; uVar3 = uVar3 - 1) {
-    iVar1 = iVar2 * 4;
-    iVar2 = iVar2 + 1;
-    *(uint *)(iVar1 + bitSet[2]) = *(uint *)(iVar1 + bitSet[2]) & *(uint *)(iVar1 + param_2[2]);
+  ((int (*)())_BitSetExpandEquals)(bitSet,*otherSet);
+  ((int (*)())_BitSetExpandEquals)(otherSet,*bitSet);
+  wordIndex = 0;
+  for (wordsLeft = (uint)bitSet[1] >> 2; wordsLeft != 0; wordsLeft = wordsLeft - 1) {
+    wordByteOffset = wordIndex * 4;
+    wordIndex = wordIndex + 1;
+    *(uint *)(wordByteOffset + bitSet[2]) = *(uint *)(wordByteOffset + bitSet[2]) & *(uint *)(wordByteOffset + otherSet[2]);
   }
   return bitSet;
 }
 
 /* _BitSetAndNotEquals @ 0x97c08138 (128 bytes) */
-int _BitSetAndNotEquals(bitSet, param_2)
+int _BitSetAndNotEquals(bitSet, otherSet)
   undefined4 *bitSet;
-  undefined4 *param_2;
+  undefined4 *otherSet;
 {
-  int iVar1;
-  int iVar2;
-  uint uVar3;
+  int wordByteOffset;
+  int wordIndex;
+  uint wordsLeft;
   
-  ((int (*)())_BitSetExpandEquals)(bitSet,*param_2);
-  ((int (*)())_BitSetExpandEquals)(param_2,*bitSet);
-  iVar2 = 0;
-  for (uVar3 = (uint)bitSet[1] >> 2; uVar3 != 0; uVar3 = uVar3 - 1) {
-    iVar1 = iVar2 * 4;
-    iVar2 = iVar2 + 1;
-    *(uint *)(iVar1 + bitSet[2]) = *(uint *)(iVar1 + bitSet[2]) & ~*(uint *)(iVar1 + param_2[2]);
+  ((int (*)())_BitSetExpandEquals)(bitSet,*otherSet);
+  ((int (*)())_BitSetExpandEquals)(otherSet,*bitSet);
+  wordIndex = 0;
+  for (wordsLeft = (uint)bitSet[1] >> 2; wordsLeft != 0; wordsLeft = wordsLeft - 1) {
+    wordByteOffset = wordIndex * 4;
+    wordIndex = wordIndex + 1;
+    *(uint *)(wordByteOffset + bitSet[2]) = *(uint *)(wordByteOffset + bitSet[2]) & ~*(uint *)(wordByteOffset + otherSet[2]);
   }
   return bitSet;
 }
 
 /* _BitSetOrEquals @ 0x97c081b8 (128 bytes) */
-int _BitSetOrEquals(bitSet, param_2)
+int _BitSetOrEquals(bitSet, otherSet)
   undefined4 *bitSet;
-  undefined4 *param_2;
+  undefined4 *otherSet;
 {
-  int iVar1;
-  int iVar2;
-  uint uVar3;
+  int wordByteOffset;
+  int wordIndex;
+  uint wordsLeft;
   
-  ((int (*)())_BitSetExpandEquals)(bitSet,*param_2);
-  ((int (*)())_BitSetExpandEquals)(param_2,*bitSet);
-  iVar2 = 0;
-  for (uVar3 = (uint)bitSet[1] >> 2; uVar3 != 0; uVar3 = uVar3 - 1) {
-    iVar1 = iVar2 * 4;
-    iVar2 = iVar2 + 1;
-    *(uint *)(iVar1 + bitSet[2]) = *(uint *)(iVar1 + bitSet[2]) | *(uint *)(iVar1 + param_2[2]);
+  ((int (*)())_BitSetExpandEquals)(bitSet,*otherSet);
+  ((int (*)())_BitSetExpandEquals)(otherSet,*bitSet);
+  wordIndex = 0;
+  for (wordsLeft = (uint)bitSet[1] >> 2; wordsLeft != 0; wordsLeft = wordsLeft - 1) {
+    wordByteOffset = wordIndex * 4;
+    wordIndex = wordIndex + 1;
+    *(uint *)(wordByteOffset + bitSet[2]) = *(uint *)(wordByteOffset + bitSet[2]) | *(uint *)(wordByteOffset + otherSet[2]);
   }
   return bitSet;
 }

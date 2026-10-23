@@ -1415,5 +1415,4 @@ local	_glpPPShaderToProgramString	local_54	charsWritten	CONFIRMED	characters wri
 local	_glpPPShaderToProgramString	local_50	outFlagWord	UNKNOWN	scratch word passed as _glpDisassemble2Op's param_8, initialised to 1
 local	_glpPPShaderToProgramString	local_4c	bodyStart	CONFIRMED	start of the instruction text inside the output buffer
 local	_glpPPShaderToProgramString	local_48	bodyCursor	CONFIRMED	write pointer of the instruction text (local_48[0])
-local	_glpPPShaderToProgramString	iVar17	shaderTarget	CONFIRMED	*shader: target enum, passed to _glpDisassemble2Op as the shader type
 local	_glpPPDisassemble	local_a4	registerId	INFERRED	id compared with the ushort at +6 of each attribute record
