@@ -2719,89 +2719,94 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4ERKS3_(this, text)
 }
 
 /* std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique @ 0x97c30be0 (388 bytes) */
-int std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique(this, pair, text)
-  unsigned char * this;
-  unsigned char * pair;
-  int text;
+int std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique(retPair, tree, value)
+  unsigned char * retPair;
+  unsigned char * tree;
+  int value;
 {
-  int iVar1;
-  uint *puVar2;
-  void *pvVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  uint uVar7;
-  uint uVar8;
-  int local_70 [4];
-  int local_60 [4];
-  int local_50 [4];
-  uint local_40;
-  uint local_3c;
-  uint local_38;
-  uint local_34;
+  uint valueKeySize;
+  uint jKeySize;
+  int cmp2;
+  int jNode;
+  int cmp;
+  int comp;
+  uint *minRef;
+  void *keyChars;
+  int header;
+  int y;
+  int x;
+  uint keySize;
+  uint nodeKeySize;
+  int j [4];
+  int leftmost [4];
+  int insertResult [4];
+  uint keySizeCopy;
+  uint nodeKeySizeCopy;
+  uint jKeySizeCopy;
+  uint keySizeCopy2;
   
-  iVar4 = *(int *)(pair + 4);
-  iVar1 = 1;
-  iVar5 = iVar4;
-  if (*(int *)(iVar4 + 4) != 0) {
-    pvVar3 = *(void **)(text + 4);
-    iVar6 = *(int *)(iVar4 + 4);
+  header = *(int *)(tree + 4);
+  comp = 1;
+  y = header;
+  if (*(int *)(header + 4) != 0) {
+    keyChars = *(void **)(value + 4);
+    x = *(int *)(header + 4);
     do {
-      iVar5 = iVar6;
-      uVar7 = *(uint *)((int)pvVar3 + -0xc);
-      local_40 = uVar7;
-      uVar8 = *(uint *)(*(int *)(iVar5 + 0x14) + -0xc);
-      local_3c = uVar8;
-      puVar2 = &local_3c;
-      if (uVar7 <= uVar8) {
-        puVar2 = &local_40;
+      y = x;
+      keySize = *(uint *)((int)keyChars + -0xc);
+      keySizeCopy = keySize;
+      nodeKeySize = *(uint *)(*(int *)(y + 0x14) + -0xc);
+      nodeKeySizeCopy = nodeKeySize;
+      minRef = &nodeKeySizeCopy;
+      if (keySize <= nodeKeySize) {
+        minRef = &keySizeCopy;
       }
-      iVar1 = _memcmp(pvVar3,*(void **)(iVar5 + 0x14),*puVar2);
-      if (iVar1 == 0) {
-        iVar1 = uVar7 - uVar8;
+      cmp = _memcmp(keyChars,*(void **)(y + 0x14),*minRef);
+      if (cmp == 0) {
+        cmp = keySize - nodeKeySize;
       }
-      iVar1 = -(iVar1 >> 0x1f);
-      if (iVar1 == 0) {
-        iVar6 = *(int *)(iVar5 + 0xc);
+      comp = -(cmp >> 0x1f);
+      if (comp == 0) {
+        x = *(int *)(y + 0xc);
       }
       else {
-        iVar6 = *(int *)(iVar5 + 8);
+        x = *(int *)(y + 8);
       }
-    } while (iVar6 != 0);
+    } while (x != 0);
   }
-  local_70[0] = iVar5;
-  if (iVar1 != 0) {
-    local_60[0] = *(int *)(iVar4 + 8);
-    if (iVar5 == local_60[0]) {
-      std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol_______M_insert((unsigned char *)local_50,pair,(unsigned char *)0x0,iVar5,text);
+  j[0] = y;
+  if (comp != 0) {
+    leftmost[0] = *(int *)(header + 8);
+    if (y == leftmost[0]) {
+      std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol_______M_insert((unsigned char *)insertResult,tree,(unsigned char *)0x0,y,value);
       goto LAB_97c30d34;
     }
-    std___Rb_tree_base_iterator___M_decrement((unsigned char *)local_70);
+    std___Rb_tree_base_iterator___M_decrement((unsigned char *)j);
   }
-  iVar1 = local_70[0];
-  puVar2 = &local_34;
-  uVar7 = *(uint *)(*(int *)(local_70[0] + 0x14) + -0xc);
-  local_38 = uVar7;
-  uVar8 = *(uint *)((int)*(void **)(text + 4) + -0xc);
-  local_34 = uVar8;
-  if (uVar7 <= uVar8) {
-    puVar2 = &local_38;
+  jNode = j[0];
+  minRef = &keySizeCopy2;
+  jKeySize = *(uint *)(*(int *)(j[0] + 0x14) + -0xc);
+  jKeySizeCopy = jKeySize;
+  valueKeySize = *(uint *)((int)*(void **)(value + 4) + -0xc);
+  keySizeCopy2 = valueKeySize;
+  if (jKeySize <= valueKeySize) {
+    minRef = &jKeySizeCopy;
   }
-  iVar4 = _memcmp(*(void **)(local_70[0] + 0x14),*(void **)(text + 4),*puVar2);
-  if (iVar4 == 0) {
-    iVar4 = uVar7 - uVar8;
+  cmp2 = _memcmp(*(void **)(j[0] + 0x14),*(void **)(value + 4),*minRef);
+  if (cmp2 == 0) {
+    cmp2 = jKeySize - valueKeySize;
   }
-  if (-1 < iVar4) {
-    *(int *)this = iVar1;
-    *(undefined4 *)(this + 4) = 0;
-    return this;
+  if (-1 < cmp2) {
+    *(int *)retPair = jNode;
+    *(undefined4 *)(retPair + 4) = 0;
+    return retPair;
   }
-  std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol_______M_insert((unsigned char *)local_60,pair,(unsigned char *)0x0,iVar5,text);
-  local_50[0] = local_60[0];
+  std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol_______M_insert((unsigned char *)leftmost,tree,(unsigned char *)0x0,y,value);
+  insertResult[0] = leftmost[0];
 LAB_97c30d34:
-  *(int *)this = local_50[0];
-  *(undefined4 *)(this + 4) = 1;
-  return this;
+  *(int *)retPair = insertResult[0];
+  *(undefined4 *)(retPair + 4) = 1;
+  return retPair;
 }
 
 /* __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_ @ 0x97c30d64 (12 bytes) */

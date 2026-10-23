@@ -340,7 +340,7 @@ use	__ZN16ParseSymbolTableC4Ej	pvVar2	allocation	INFERRED	every definition is th
 use	ParseSymbolTable__FindNextParamSymbolByName	iVar1	length	INFERRED	every definition is the result of a call whose name says it returns this	#2	+11	all	all
 use	TIntermUnary__compileNode	uVar4	streamType	INFERRED	every definition is the result of a call whose name says it returns this	#179	+38	all	all
 use	TIntermAggregate__indirectNode	puVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#4	+21	all	all
-use	ConstantAllocationList__addConstant	iVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#2	+31	all	all
+use	ConstantAllocationList__addConstant	iVar3	newEntries	INFERRED	every definition is the result of a call whose name says it returns this	#2	+31	all	all
 use	store	puVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#0	+12	all	all
 use	ParseWhileLoopStack__push	puVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#0	+5	all	all
 use	ParseFunctionStack__push	puVar1	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#0	+7	all	all
@@ -533,7 +533,7 @@ use	__ZNKSs16find_last_not_ofEPKcm	uVar1	length	INFERRED	every definition is the
 use	__ZNKSs7compareEPKc	uVar1	strLen	INFERRED	every definition is the result of a call whose name says it returns this	#5	+8	all	all
 use	__ZStplIcSt11char_traitsIcESaIcEESbIT_T0_T1_EPKS3_RKS6_	iVar1	lhsLen	INFERRED	every definition is the result of a call whose name says it returns this	#2	+6	all	all
 use	operator_new	pvVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#3	+8	all	all
-use	std____default_alloc_template_true_0___reallocate	pvVar1	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#1	+1	all	all
+use	std____default_alloc_template_true_0___reallocate	pvVar1	reallocated	INFERRED	every definition is the result of a call whose name says it returns this	#1	+1	all	all
 use	operator_new__	pvVar1	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#0	+1	all	all
 use	__Z21base_of_encoded_valuehP15_Unwind_Context	uVar3	textRelBase	INFERRED	every definition is the result of a call whose name says it returns this	#3	+1	all	all
 use	__Z21base_of_encoded_valuehP15_Unwind_Context	uVar3	dataRelBase	INFERRED	every definition is the result of a call whose name says it returns this	#19	+1	all	all

@@ -938,178 +938,186 @@ joined_r0x97bb3b94:
 int TGenericLinker__FixOutputReads(this)
   unsigned char * this;
 {
+  int insertedOp;
+  uint componentCount;
+  uint chunkHeader;
+  uint fnIdx;
+  uint mainLastOp;
+  uint chunkHeaderWord;
+  int opChunk;
+  bool mainReached;
   undefined4 functionName;
   int compareResult;
-  ushort uVar1;
-  bool bVar2;
-  int iVar3;
+  ushort outputReg;
+  bool outputIsRead;
+  int operandCursor;
   undefined4 maxIndex;
-  uint uVar5;
-  int iVar6;
-  int iVar7;
-  int loopIndex;
-  unsigned char * pTVar9;
-  int iVar10;
-  uint uVar11;
-  uint local_a0;
-  undefined4 local_9c;
-  int local_98;
-  int local_94;
-  undefined4 local_90;
-  uint local_8c;
-  uint local_88;
-  uint local_84;
-  uint local_80;
-  uint local_7c;
-  undefined4 local_78;
-  undefined4 local_74;
-  undefined4 local_70;
-  undefined4 local_6c;
-  undefined4 local_68;
-  undefined4 local_64;
-  undefined4 local_60;
-  undefined4 local_5c;
+  uint operandCount;
+  int operandCursor2;
+  int stageOffset;
+  int stage;
+  unsigned char * stageEntry;
+  int outputSymbol;
+  uint operandIdx;
+  uint tempUsageFlags;
+  undefined4 opChunkOrTempIndex;
+  int tempUsageWord2;
+  int tempUsageWord3;
+  undefined4 opHeader;
+  uint opFlags;
+  uint opDest0;
+  uint opDest1;
+  uint opSrc0A;
+  uint opSrc0B;
+  undefined4 opSrc1A;
+  undefined4 opSrc1B;
+  undefined4 opSrc2A;
+  undefined4 opSrc2B;
+  undefined4 opAuxA;
+  undefined4 opAuxB;
+  undefined4 opLine;
+  undefined4 opWord13;
   
-  loopIndex = 0;
-  iVar7 = 0;
-  pTVar9 = this;
+  stage = 0;
+  stageOffset = 0;
+  stageEntry = this;
   do {
-    if (*(int *)(pTVar9 + 0x30) != 0) {
-      for (iVar10 = **(int **)(*(int *)(pTVar9 + 0x30) + 0x1c); iVar10 != 0;
-          iVar10 = *(int *)(iVar10 + 8)) {
-        bVar2 = false;
-        uVar1 = *(ushort *)(iVar10 + 0x12);
-        local_9c = **(int **)(*(int *)(pTVar9 + 0x30) + 0x20);
-        if (local_9c != 0) {
+    if (*(int *)(stageEntry + 0x30) != 0) {
+      for (outputSymbol = **(int **)(*(int *)(stageEntry + 0x30) + 0x1c); outputSymbol != 0;
+          outputSymbol = *(int *)(outputSymbol + 8)) {
+        outputIsRead = false;
+        outputReg = *(ushort *)(outputSymbol + 0x12);
+        opChunkOrTempIndex = **(int **)(*(int *)(stageEntry + 0x30) + 0x20);
+        if (opChunkOrTempIndex != 0) {
           do {
-            uVar11 = 0;
-            uVar5 = *(uint *)(local_9c + 0xc) >> 0x1d;
-            if (uVar5 != 0) {
-              iVar3 = local_9c + 0x10;
+            operandIdx = 0;
+            operandCount = *(uint *)(opChunkOrTempIndex + 0xc) >> 0x1d;
+            if (operandCount != 0) {
+              operandCursor = opChunkOrTempIndex + 0x10;
               do {
-                if ((((*(uint *)(iVar3 + 0xc) >> 0x17 & 7) == 3) &&
-                    (*(ushort *)(iVar3 + 0x12) == uVar1)) ||
-                   (((*(uint *)(local_9c + 0xc) & 0x3fc0000) == 0x1b40000 &&
-                    (((*(uint *)(local_9c + 0x14) & 0xe0000) == 0x60000 &&
-                     (*(ushort *)(local_9c + 0x1a) == uVar1)))))) {
-                  bVar2 = true;
+                if ((((*(uint *)(operandCursor + 0xc) >> 0x17 & 7) == 3) &&
+                    (*(ushort *)(operandCursor + 0x12) == outputReg)) ||
+                   (((*(uint *)(opChunkOrTempIndex + 0xc) & 0x3fc0000) == 0x1b40000 &&
+                    (((*(uint *)(opChunkOrTempIndex + 0x14) & 0xe0000) == 0x60000 &&
+                     (*(ushort *)(opChunkOrTempIndex + 0x1a) == outputReg)))))) {
+                  outputIsRead = true;
                   break;
                 }
-                if (bVar2) break;
-                uVar11 = uVar11 + 1;
-                iVar3 = iVar3 + 8;
-              } while (uVar11 < uVar5);
+                if (outputIsRead) break;
+                operandIdx = operandIdx + 1;
+                operandCursor = operandCursor + 8;
+              } while (operandIdx < operandCount);
             }
-            local_9c = *(int *)(local_9c + 8);
-          } while (local_9c != 0);
-          if (bVar2) {
-            local_a0 = 0;
-            local_98 = local_9c;
-            local_94 = local_9c;
-            maxIndex = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(*(int *)(pTVar9 + 0x30) + 4));
-            local_9c = CONCAT22((*(unsigned short *)((unsigned char *)&(local_9c) + 0)),(short)maxIndex + 1);
-            local_a0 = (*(uint *)(iVar10 + 0xc) >> 0x18 & 3) << 0x18 |
-                       (*(uint *)(iVar10 + 0xc) >> 0x1a & 7) << 0x1a |
-                       *(uint *)(iVar10 + 0xc) & 0xe0000000 | local_a0 & 0xffffff;
-            _PPStreamAddTempUsage(*(undefined4 *)(pTVar9 + 0x30),&local_a0);
-            for (iVar3 = **(int **)(*(int *)(pTVar9 + 0x30) + 0x20); iVar3 != 0;
-                iVar3 = *(int *)(iVar3 + 8)) {
-              if (((*(uint *)(iVar3 + 0x14) & 0xe0000) == 0x60000) &&
-                 (*(ushort *)(iVar3 + 0x1a) == uVar1)) {
-                *(uint *)(iVar3 + 0x14) = *(uint *)(iVar3 + 0x14) & 0xfff1ffff | 0x20000;
-                *(undefined2 *)(iVar3 + 0x1a) = (*(unsigned short *)((unsigned char *)&(local_9c) + 2));
+            opChunkOrTempIndex = *(int *)(opChunkOrTempIndex + 8);
+          } while (opChunkOrTempIndex != 0);
+          if (outputIsRead) {
+            tempUsageFlags = 0;
+            tempUsageWord2 = opChunkOrTempIndex;
+            tempUsageWord3 = opChunkOrTempIndex;
+            maxIndex = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(*(int *)(stageEntry + 0x30) + 4));
+            opChunkOrTempIndex = CONCAT22((*(unsigned short *)((unsigned char *)&(opChunkOrTempIndex) + 0)),(short)maxIndex + 1);
+            tempUsageFlags = (*(uint *)(outputSymbol + 0xc) >> 0x18 & 3) << 0x18 |
+                       (*(uint *)(outputSymbol + 0xc) >> 0x1a & 7) << 0x1a |
+                       *(uint *)(outputSymbol + 0xc) & 0xe0000000 | tempUsageFlags & 0xffffff;
+            _PPStreamAddTempUsage(*(undefined4 *)(stageEntry + 0x30),&tempUsageFlags);
+            for (opChunk = **(int **)(*(int *)(stageEntry + 0x30) + 0x20); opChunk != 0;
+                opChunk = *(int *)(opChunk + 8)) {
+              if (((*(uint *)(opChunk + 0x14) & 0xe0000) == 0x60000) &&
+                 (*(ushort *)(opChunk + 0x1a) == outputReg)) {
+                *(uint *)(opChunk + 0x14) = *(uint *)(opChunk + 0x14) & 0xfff1ffff | 0x20000;
+                *(undefined2 *)(opChunk + 0x1a) = (*(unsigned short *)((unsigned char *)&(opChunkOrTempIndex) + 2));
               }
-              uVar5 = *(uint *)(iVar3 + 0xc);
-              uVar11 = 0;
-              if (uVar5 >> 0x1d != 0) {
-                iVar6 = iVar3 + 0x10;
+              chunkHeaderWord = *(uint *)(opChunk + 0xc);
+              operandIdx = 0;
+              if (chunkHeaderWord >> 0x1d != 0) {
+                operandCursor2 = opChunk + 0x10;
                 do {
-                  if (((*(uint *)(iVar6 + 0xc) >> 0x17 & 7) == 3) &&
-                     (*(ushort *)(iVar6 + 0x12) == uVar1)) {
-                    *(uint *)(iVar6 + 0xc) = *(uint *)(iVar6 + 0xc) & 0xfc7fffff | 0x800000;
-                    *(undefined2 *)(iVar6 + 0x12) = (*(unsigned short *)((unsigned char *)&(local_9c) + 2));
-                    uVar5 = *(uint *)(iVar3 + 0xc);
+                  if (((*(uint *)(operandCursor2 + 0xc) >> 0x17 & 7) == 3) &&
+                     (*(ushort *)(operandCursor2 + 0x12) == outputReg)) {
+                    *(uint *)(operandCursor2 + 0xc) = *(uint *)(operandCursor2 + 0xc) & 0xfc7fffff | 0x800000;
+                    *(undefined2 *)(operandCursor2 + 0x12) = (*(unsigned short *)((unsigned char *)&(opChunkOrTempIndex) + 2));
+                    chunkHeaderWord = *(uint *)(opChunk + 0xc);
                   }
-                  uVar11 = uVar11 + 1;
-                  iVar6 = iVar6 + 8;
-                } while (uVar11 < uVar5 >> 0x1d);
+                  operandIdx = operandIdx + 1;
+                  operandCursor2 = operandCursor2 + 8;
+                } while (operandIdx < chunkHeaderWord >> 0x1d);
               }
             }
-            bVar2 = false;
-            uVar5 = 0;
-            uVar11 = 0;
-            if ((*(int *)(pTVar9 + 0x38) != 0) && (*(int *)(*(int *)(pTVar9 + 0x38) + 4) != 0)) {
+            mainReached = false;
+            mainLastOp = 0;
+            fnIdx = 0;
+            if ((*(int *)(stageEntry + 0x38) != 0) && (*(int *)(*(int *)(stageEntry + 0x38) + 4) != 0)) {
               do {
-                functionName = FunctionTable__getFunctionName(*(unsigned char **)(pTVar9 + 0x38),uVar11);
+                functionName = FunctionTable__getFunctionName(*(unsigned char **)(stageEntry + 0x38),fnIdx);
                 compareResult = _memcmp(functionName,"main(",6);
                 if (compareResult == 0) {
-                  uVar5 = FunctionTable__getLastOp(*(unsigned char **)(pTVar9 + 0x38),uVar11);
+                  mainLastOp = FunctionTable__getLastOp(*(unsigned char **)(stageEntry + 0x38),fnIdx);
                 }
-                uVar11 = uVar11 + 1;
-              } while ((*(int *)(pTVar9 + 0x38) != 0) &&
-                      (uVar11 < *(uint *)(*(int *)(pTVar9 + 0x38) + 4)));
+                fnIdx = fnIdx + 1;
+              } while ((*(int *)(stageEntry + 0x38) != 0) &&
+                      (fnIdx < *(uint *)(*(int *)(stageEntry + 0x38) + 4)));
             }
-            for (iVar3 = **(int **)(*(int *)(pTVar9 + 0x30) + 0x20); iVar3 != 0;
-                iVar3 = *(int *)(iVar3 + 8)) {
-              uVar11 = *(uint *)(iVar3 + 0xc);
-              if ((uVar11 & 0x3ffff) == 0) {
-                bVar2 = true;
+            for (opChunk = **(int **)(*(int *)(stageEntry + 0x30) + 0x20); opChunk != 0;
+                opChunk = *(int *)(opChunk + 8)) {
+              chunkHeader = *(uint *)(opChunk + 0xc);
+              if ((chunkHeader & 0x3ffff) == 0) {
+                mainReached = true;
               }
-              if ((bVar2) && ((uVar11 & 0x3fc0000) == 0x1340000)) {
-                uVar11 = local_a0 >> 0x18 & 3;
-                local_88 = uVar11 << 10 | 0x6c;
-                local_78 = 0;
-                local_74 = 0;
-                local_70 = 0;
-                local_6c = 0;
-                local_68 = 0;
-                local_64 = 0;
-                local_60 = *(undefined4 *)(iVar3 + 0x3c);
-                local_90 = 0x20000000;
-                local_5c = 0;
-                if (uVar11 == 1) {
+              if ((mainReached) && ((chunkHeader & 0x3fc0000) == 0x1340000)) {
+                componentCount = tempUsageFlags >> 0x18 & 3;
+                opDest0 = componentCount << 10 | 0x6c;
+                opSrc1A = 0;
+                opSrc1B = 0;
+                opSrc2A = 0;
+                opSrc2B = 0;
+                opAuxA = 0;
+                opAuxB = 0;
+                opLine = *(undefined4 *)(opChunk + 0x3c);
+                opHeader = 0x20000000;
+                opWord13 = 0;
+                if (componentCount == 1) {
 LAB_97bb40ac:
-                  local_88 = local_88 | 0x4000;
+                  opDest0 = opDest0 | 0x4000;
 LAB_97bb40b4:
-                  local_88 = local_88 | 0x2000;
+                  opDest0 = opDest0 | 0x2000;
                 }
                 else {
-                  if (uVar11 == 0) goto LAB_97bb40b4;
-                  if (uVar11 == 2) {
+                  if (componentCount == 0) goto LAB_97bb40b4;
+                  if (componentCount == 2) {
 LAB_97bb40a4:
-                    local_88 = local_88 | 0x8000;
+                    opDest0 = opDest0 | 0x8000;
                     goto LAB_97bb40ac;
                   }
-                  if (uVar11 == 3) {
-                    local_88 = 0x10c6c;
+                  if (componentCount == 3) {
+                    opDest0 = 0x10c6c;
                     goto LAB_97bb40a4;
                   }
                 }
-                uVar11 = local_a0 >> 0x18 & 3;
-                local_8c = (local_a0 >> 0x1d & 3) << 0x12 |
-                           uVar11 << 0x1a | (local_a0 >> 0x1a & 7) << 0x17;
-                local_88 = local_88 | 0x60000;
-                local_80 = uVar11 << 0xc | 0x8d8000;
-                local_7c = local_9c & 0xffff;
-                local_84 = (uint)uVar1;
-                iVar6 = _PPStreamInsertOperationAfterChunk
-                                  (*(undefined4 *)(this + iVar7 + 0x30),&local_90,0,0,
-                                   *(undefined4 *)(iVar3 + 4));
+                componentCount = tempUsageFlags >> 0x18 & 3;
+                opFlags = (tempUsageFlags >> 0x1d & 3) << 0x12 |
+                           componentCount << 0x1a | (tempUsageFlags >> 0x1a & 7) << 0x17;
+                opDest0 = opDest0 | 0x60000;
+                opSrc0A = componentCount << 0xc | 0x8d8000;
+                opSrc0B = opChunkOrTempIndex & 0xffff;
+                opDest1 = (uint)outputReg;
+                insertedOp = _PPStreamInsertOperationAfterChunk
+                                  (*(undefined4 *)(this + stageOffset + 0x30),&opHeader,0,0,
+                                   *(undefined4 *)(opChunk + 4));
                 _PPStreamChangeBranchTargets
-                          (*(undefined4 *)(this + iVar7 + 0x30),*(uint *)(iVar3 + 0xc) & 0x3ffff,
-                           *(uint *)(iVar6 + 0xc) & 0x3ffff);
-                uVar11 = *(uint *)(iVar3 + 0xc);
+                          (*(undefined4 *)(this + stageOffset + 0x30),*(uint *)(opChunk + 0xc) & 0x3ffff,
+                           *(uint *)(insertedOp + 0xc) & 0x3ffff);
+                chunkHeader = *(uint *)(opChunk + 0xc);
               }
-              if (uVar5 == (uVar11 & 0x3ffff)) break;
+              if (mainLastOp == (chunkHeader & 0x3ffff)) break;
             }
           }
         }
       }
     }
-    loopIndex = loopIndex + 1;
-    iVar7 = iVar7 + 4;
-    pTVar9 = pTVar9 + 4;
-    if (1 < loopIndex) {
+    stage = stage + 1;
+    stageOffset = stageOffset + 4;
+    stageEntry = stageEntry + 4;
+    if (1 < stage) {
       return;
     }
   } while( true );
@@ -2851,171 +2859,191 @@ int TGenericLinker__CollectUniformBindings(this)
 }
 
 /* TGenericLinker__CreateFunctionTable @ 0x97bb75c0 (428 bytes) */
-int TGenericLinker__CreateFunctionTable(this, param_2)
+int TGenericLinker__CreateFunctionTable(this, stage)
   unsigned char * this;
-  int param_2;
+  int stage;
 {
-  int iVar1;
-  bool bVar2;
-  bool bVar3;
-  bool bVar4;
-  unsigned char * this_00;
-  undefined4 uVar5;
-  undefined4 uVar6;
-  int iVar7;
-  uint uVar8;
-  int iVar9;
-  int iVar10;
-  int iVar11;
-  char *pcVar12;
-  int iVar13;
-  int iVar14;
-  int iVar15;
-  unsigned char * pFVar16;
-  unsigned char * this_01;
-  int iVar17;
-  uint uVar18;
-  void *pvVar19;
+  int calleeNameLen;
+  int compareResult2;
+  int shaderStringLen2;
+  int scanFnIdx;
+  int nameCopy;
+  int duplicateNameLen;
+  int msgFormatLen;
+  int scanObjIdx;
+  int earlierFnIdx;
+  int calleeName;
+  int mergedFnIdx;
+  char *errorMessage;
+  uint charIdx;
+  uint lastOp;
+  undefined4 calleeScanName;
+  undefined4 otherFnName;
+  undefined4 returnVal;
+  bool calleeFound;
+  int opChunk;
+  unsigned char * scanFnTable;
+  int stageOffset;
+  bool isDuplicate;
+  bool calleeMissing;
+  bool errorFound;
+  unsigned char * mergedTable;
+  undefined4 emptyFlag;
+  undefined4 thisFnName;
+  int compareResult;
+  uint nameLen;
+  int msgFormatLen2;
+  int shaderStringLen;
+  int nameCopyLen;
+  char *fnName;
+  int objectIdx;
+  int earlierObjIdx;
+  int fnIdx;
+  unsigned char * objectFnTable;
+  unsigned char * earlierFnTable;
+  int numParams;
+  uint firstOp;
+  void *infoSink;
   
-  iVar1 = param_2 * 4;
-  this_00 = operator_new(8);
-  bVar4 = false;
-  __ZN13FunctionTableC1Ev(this_00);
-  iVar13 = 0;
-  if (0 < *(int *)(this + iVar1 + 0x20)) {
+  stageOffset = stage * 4;
+  mergedTable = operator_new(8);
+  errorFound = false;
+  __ZN13FunctionTableC1Ev(mergedTable);
+  objectIdx = 0;
+  if (0 < *(int *)(this + stageOffset + 0x20)) {
     do {
-      iVar15 = 0;
-      pFVar16 = *(unsigned char **)(*(int *)(iVar13 * 4 + *(int *)(this + iVar1 + 8)) + 0x6c);
-      if (0 < *(int *)(pFVar16 + 4)) {
+      fnIdx = 0;
+      objectFnTable = *(unsigned char **)(*(int *)(objectIdx * 4 + *(int *)(this + stageOffset + 8)) + 0x6c);
+      if (0 < *(int *)(objectFnTable + 4)) {
         do {
-          bVar2 = false;
-          iVar14 = 0;
-          if (iVar13 < 1) {
+          isDuplicate = false;
+          earlierObjIdx = 0;
+          if (objectIdx < 1) {
 LAB_97bb7818:
-            pcVar12 = (char *)FunctionTable__getFunctionName(pFVar16,iVar15);
-            iVar14 = FunctionTable__addFunction(this_00,pcVar12);
-            uVar5 = FunctionTable__getEmpty(pFVar16,iVar15);
-            FunctionTable__setEmpty(this_00,iVar14,uVar5);
-            uVar5 = FunctionTable__getReturnVal(pFVar16,iVar15);
-            FunctionTable__setReturnVal(this_00,iVar14,uVar5);
-            iVar17 = FunctionTable__getNumParams(pFVar16,iVar15);
-            FunctionTable__setNumParams(this_00,iVar14,iVar17);
-            uVar18 = FunctionTable__getFirstOp(pFVar16,iVar15);
-            FunctionTable__setFirstOp(this_00,iVar14,uVar18);
-            uVar18 = FunctionTable__getLastOp(pFVar16,iVar15);
-            FunctionTable__setLastOp(this_00,iVar14,uVar18);
+            fnName = (char *)FunctionTable__getFunctionName(objectFnTable,fnIdx);
+            mergedFnIdx = FunctionTable__addFunction(mergedTable,fnName);
+            emptyFlag = FunctionTable__getEmpty(objectFnTable,fnIdx);
+            FunctionTable__setEmpty(mergedTable,mergedFnIdx,emptyFlag);
+            returnVal = FunctionTable__getReturnVal(objectFnTable,fnIdx);
+            FunctionTable__setReturnVal(mergedTable,mergedFnIdx,returnVal);
+            numParams = FunctionTable__getNumParams(objectFnTable,fnIdx);
+            FunctionTable__setNumParams(mergedTable,mergedFnIdx,numParams);
+            firstOp = FunctionTable__getFirstOp(objectFnTable,fnIdx);
+            FunctionTable__setFirstOp(mergedTable,mergedFnIdx,firstOp);
+            lastOp = FunctionTable__getLastOp(objectFnTable,fnIdx);
+            FunctionTable__setLastOp(mergedTable,mergedFnIdx,lastOp);
           }
           else {
             do {
-              iVar17 = 0;
-              this_01 = *(unsigned char **)
-                         (*(int *)(iVar14 * 4 + *(int *)(this + iVar1 + 8)) + 0x6c);
-              if (0 < *(int *)(this_01 + 4)) {
+              earlierFnIdx = 0;
+              earlierFnTable = *(unsigned char **)
+                         (*(int *)(earlierObjIdx * 4 + *(int *)(this + stageOffset + 8)) + 0x6c);
+              if (0 < *(int *)(earlierFnTable + 4)) {
                 do {
-                  uVar5 = FunctionTable__getFunctionName(this_01,iVar17);
-                  uVar6 = FunctionTable__getFunctionName(pFVar16,iVar15);
-                  iVar7 = _strcmp(uVar5,uVar6);
-                  if (iVar7 == 0) {
-                    uVar5 = FunctionTable__getFunctionName(this_01,iVar17);
-                    iVar7 = _strlen(uVar5);
-                    iVar7 = _malloc(iVar7 + 1);
-                    uVar5 = FunctionTable__getFunctionName(this_01,iVar17);
-                    _strcpy(iVar7,uVar5);
-                    for (uVar18 = 0; uVar8 = _strlen(iVar7), uVar18 < uVar8; uVar18 = uVar18 + 1) {
-                      if (*(char *)(iVar7 + uVar18) == '(') {
-                        *(undefined1 *)(iVar7 + uVar18) = 0;
+                  otherFnName = FunctionTable__getFunctionName(earlierFnTable,earlierFnIdx);
+                  thisFnName = FunctionTable__getFunctionName(objectFnTable,fnIdx);
+                  compareResult = _strcmp(otherFnName,thisFnName);
+                  if (compareResult == 0) {
+                    otherFnName = FunctionTable__getFunctionName(earlierFnTable,earlierFnIdx);
+                    duplicateNameLen = _strlen(otherFnName);
+                    nameCopy = _malloc(duplicateNameLen + 1);
+                    otherFnName = FunctionTable__getFunctionName(earlierFnTable,earlierFnIdx);
+                    _strcpy(nameCopy,otherFnName);
+                    for (charIdx = 0; nameLen = _strlen(nameCopy), charIdx < nameLen; charIdx = charIdx + 1) {
+                      if (*(char *)(nameCopy + charIdx) == '(') {
+                        *(undefined1 *)(nameCopy + charIdx) = 0;
                       }
                     }
-                    iVar9 = _strlen(DAT_a7b7bb20);
-                    iVar10 = _strlen((&_shaderString)[param_2]);
-                    iVar11 = _strlen(iVar7);
-                    pcVar12 = (char *)_malloc(iVar9 + iVar10 + iVar11 + 1);
-                    _sprintf(pcVar12,DAT_a7b7bb20,iVar7,(&_shaderString)[param_2]);
-                    pvVar19 = *(void **)(this + 0x84);
+                    msgFormatLen2 = _strlen(DAT_a7b7bb20);
+                    shaderStringLen = _strlen((&_shaderString)[stage]);
+                    nameCopyLen = _strlen(nameCopy);
+                    errorMessage = (char *)_malloc(msgFormatLen2 + shaderStringLen + nameCopyLen + 1);
+                    _sprintf(errorMessage,DAT_a7b7bb20,nameCopy,(&_shaderString)[stage]);
+                    infoSink = *(void **)(this + 0x84);
                     
-                    __ZN13TInfoSinkBase6appendEPKc(pvVar19,"ERROR: ");
-                    __ZN13TInfoSinkBase6appendEPKc(pvVar19,pcVar12);
-                    __ZN13TInfoSinkBase6appendEPKc(pvVar19,"\n");
-                    _free(pcVar12);
-                    _free(iVar7);
-                    bVar2 = true;
+                    __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
+                    __ZN13TInfoSinkBase6appendEPKc(infoSink,errorMessage);
+                    __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
+                    _free(errorMessage);
+                    _free(nameCopy);
+                    isDuplicate = true;
                   }
-                  iVar17 = iVar17 + 1;
-                } while (iVar17 < *(int *)(this_01 + 4));
+                  earlierFnIdx = earlierFnIdx + 1;
+                } while (earlierFnIdx < *(int *)(earlierFnTable + 4));
               }
-              iVar14 = iVar14 + 1;
-            } while (iVar14 < iVar13);
-            if (!bVar2) goto LAB_97bb7818;
+              earlierObjIdx = earlierObjIdx + 1;
+            } while (earlierObjIdx < objectIdx);
+            if (!isDuplicate) goto LAB_97bb7818;
           }
-          iVar15 = iVar15 + 1;
-          bVar4 = (bool)(bVar4 | bVar2);
-        } while (iVar15 < *(int *)(pFVar16 + 4));
+          fnIdx = fnIdx + 1;
+          errorFound = (bool)(errorFound | isDuplicate);
+        } while (fnIdx < *(int *)(objectFnTable + 4));
       }
-      for (iVar15 = **(int **)(*(int *)(iVar13 * 4 + *(int *)(this + iVar1 + 0x18)) + 0x20);
-          iVar15 != 0; iVar15 = *(int *)(iVar15 + 8)) {
-        if ((*(uint *)(iVar15 + 0xc) & 0x3fc0000) == 0x1300000) {
-          bVar2 = false;
-          iVar17 = 0;
-          iVar14 = _malloc(*(int *)(iVar15 + 0x40) + 1);
-          _strcpy(iVar14,iVar15 + 0x44);
-          if (*(int *)(this + iVar1 + 0x20) < 1) {
-            bVar3 = true;
+      for (opChunk = **(int **)(*(int *)(objectIdx * 4 + *(int *)(this + stageOffset + 0x18)) + 0x20);
+          opChunk != 0; opChunk = *(int *)(opChunk + 8)) {
+        if ((*(uint *)(opChunk + 0xc) & 0x3fc0000) == 0x1300000) {
+          calleeFound = false;
+          scanObjIdx = 0;
+          calleeName = _malloc(*(int *)(opChunk + 0x40) + 1);
+          _strcpy(calleeName,opChunk + 0x44);
+          if (*(int *)(this + stageOffset + 0x20) < 1) {
+            calleeMissing = true;
           }
           else {
             do {
-              iVar7 = 0;
-              pFVar16 = *(unsigned char **)
-                         (*(int *)(iVar17 * 4 + *(int *)(this + iVar1 + 8)) + 0x6c);
-              if (0 < *(int *)(pFVar16 + 4)) {
+              scanFnIdx = 0;
+              scanFnTable = *(unsigned char **)
+                         (*(int *)(scanObjIdx * 4 + *(int *)(this + stageOffset + 8)) + 0x6c);
+              if (0 < *(int *)(scanFnTable + 4)) {
                 do {
-                  uVar5 = FunctionTable__getFunctionName(pFVar16,iVar7);
-                  iVar9 = _strcmp(iVar14,uVar5);
-                  if (iVar9 == 0) {
-                    bVar2 = true;
+                  calleeScanName = FunctionTable__getFunctionName(scanFnTable,scanFnIdx);
+                  compareResult2 = _strcmp(calleeName,calleeScanName);
+                  if (compareResult2 == 0) {
+                    calleeFound = true;
                     break;
                   }
-                  iVar7 = iVar7 + 1;
-                } while (iVar7 < *(int *)(pFVar16 + 4));
+                  scanFnIdx = scanFnIdx + 1;
+                } while (scanFnIdx < *(int *)(scanFnTable + 4));
               }
-              bVar3 = !bVar2;
-              if (!bVar3) goto code_r0x97bb7ad8;
-              iVar17 = iVar17 + 1;
-            } while (iVar17 < *(int *)(this + iVar1 + 0x20));
+              calleeMissing = !calleeFound;
+              if (!calleeMissing) goto code_r0x97bb7ad8;
+              scanObjIdx = scanObjIdx + 1;
+            } while (scanObjIdx < *(int *)(this + stageOffset + 0x20));
           }
-          if (bVar3) {
-            for (uVar18 = 0; uVar8 = _strlen(iVar14), uVar18 < uVar8; uVar18 = uVar18 + 1) {
-              if (*(char *)(iVar14 + uVar18) == '(') {
-                *(undefined1 *)(iVar14 + uVar18) = 0;
+          if (calleeMissing) {
+            for (charIdx = 0; nameLen = _strlen(calleeName), charIdx < nameLen; charIdx = charIdx + 1) {
+              if (*(char *)(calleeName + charIdx) == '(') {
+                *(undefined1 *)(calleeName + charIdx) = 0;
               }
             }
-            iVar17 = _strlen(UNK_a7b7bb24);
-            iVar7 = _strlen((&_shaderString)[param_2]);
-            iVar9 = _strlen(iVar14);
-            pcVar12 = (char *)_malloc(iVar17 + iVar7 + iVar9 + 1);
-            _sprintf(pcVar12,UNK_a7b7bb24,iVar14,(&_shaderString)[param_2]);
-            pvVar19 = *(void **)(this + 0x84);
+            msgFormatLen = _strlen(UNK_a7b7bb24);
+            shaderStringLen2 = _strlen((&_shaderString)[stage]);
+            calleeNameLen = _strlen(calleeName);
+            errorMessage = (char *)_malloc(msgFormatLen + shaderStringLen2 + calleeNameLen + 1);
+            _sprintf(errorMessage,UNK_a7b7bb24,calleeName,(&_shaderString)[stage]);
+            infoSink = *(void **)(this + 0x84);
                     
-            __ZN13TInfoSinkBase6appendEPKc(pvVar19,"ERROR: ");
-            __ZN13TInfoSinkBase6appendEPKc(pvVar19,pcVar12);
-            __ZN13TInfoSinkBase6appendEPKc(pvVar19,"\n");
-            _free(pcVar12);
-            bVar4 = true;
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,errorMessage);
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
+            _free(errorMessage);
+            errorFound = true;
           }
 code_r0x97bb7ad8:
-          _free(iVar14);
+          _free(calleeName);
         }
       }
-      iVar13 = iVar13 + 1;
-    } while (iVar13 < *(int *)(this + iVar1 + 0x20));
-    if (bVar4) goto code_r0x97bb7b18;
+      objectIdx = objectIdx + 1;
+    } while (objectIdx < *(int *)(this + stageOffset + 0x20));
+    if (errorFound) goto code_r0x97bb7b18;
   }
-  if (*(int *)(this_00 + 4) != 0) {
-    return this_00;
+  if (*(int *)(mergedTable + 4) != 0) {
+    return mergedTable;
   }
 code_r0x97bb7b18:
-  if (this_00 != (unsigned char *)0x0) {
-    __ZN13FunctionTableD1Ev(this_00);
-    __ZdlPv(this_00);
+  if (mergedTable != (unsigned char *)0x0) {
+    __ZN13FunctionTableD1Ev(mergedTable);
+    __ZdlPv(mergedTable);
   }
   return (unsigned char *)0x0;
 }
@@ -4551,69 +4579,70 @@ int __ZN20AddressTempAllocatorD4Ev(this)
 int AddressTempAllocator__getTemporary(this)
   unsigned char * this;
 {
-  int iVar1;
-  int iVar2;
-  uint uVar3;
-  int iVar4;
-  int *piVar5;
-  int iVar6;
-  int iVar7;
-  int iVar8;
-  uint loopIndex;
-  int iVar10;
+  int oldCapacity;
+  int copyOffset;
+  int slotValue;
+  uint capacity;
+  int table;
+  int *slotCursor;
+  int oldTable;
+  int copyIdx;
+  int slotOffset;
+  uint slot;
+  int copyLeft;
   
-  loopIndex = 0;
-  uVar3 = *(uint *)(this + 4);
-  iVar8 = 0;
-  if (uVar3 != 0) {
-    piVar5 = *(int **)this;
-    iVar2 = *piVar5;
-    while (iVar2 != 0) {
-      loopIndex = loopIndex + 1;
-      iVar8 = loopIndex * 4;
-      if (uVar3 <= loopIndex) break;
-      piVar5 = piVar5 + 1;
-      iVar2 = *piVar5;
+  slot = 0;
+  capacity = *(uint *)(this + 4);
+  slotOffset = 0;
+  if (capacity != 0) {
+    slotCursor = *(int **)this;
+    slotValue = *slotCursor;
+    while (slotValue != 0) {
+      slot = slot + 1;
+      slotOffset = slot * 4;
+      if (capacity <= slot) break;
+      slotCursor = slotCursor + 1;
+      slotValue = *slotCursor;
     }
   }
-  if (uVar3 <= loopIndex) {
-    iVar4 = _malloc(uVar3 * 4 + 0x40);
-    iVar2 = *(int *)(this + 4);
-    iVar7 = 0;
-    if (iVar2 != 0) {
-      iVar6 = *(int *)this;
-      iVar10 = iVar2;
+  if (capacity <= slot) {
+    table = _malloc(capacity * 4 + 0x40);
+    oldCapacity = *(int *)(this + 4);
+    copyIdx = 0;
+    if (oldCapacity != 0) {
+      oldTable = *(int *)this;
+      copyLeft = oldCapacity;
       do {
-        iVar1 = iVar7 * 4;
-        iVar7 = iVar7 + 1;
-        *(undefined4 *)(iVar1 + iVar4) = *(undefined4 *)(iVar1 + iVar6);
-        iVar10 = iVar10 + -1;
-      } while (iVar10 != 0);
+        copyOffset = copyIdx * 4;
+        copyIdx = copyIdx + 1;
+        *(undefined4 *)(copyOffset + table) = *(undefined4 *)(copyOffset + oldTable);
+        copyLeft = copyLeft + -1;
+      } while (copyLeft != 0);
     }
-    _memset(iVar2 * 4 + iVar4,0,0x40);
+    _memset(oldCapacity * 4 + table,0,0x40);
     if (*(int *)this != 0) {
       _free(*(int *)this);
     }
-    *(int *)this = iVar4;
-    uVar3 = *(int *)(this + 4) + 0x10;
-    *(uint *)(this + 4) = uVar3;
-    if (loopIndex < uVar3) {
-      if (*(int *)(iVar8 + iVar4) != 0) {
-        piVar5 = (int *)(loopIndex * 4 + iVar4);
+    *(int *)this = table;
+    capacity = *(int *)(this + 4) + 0x10;
+    *(uint *)(this + 4) = capacity;
+    if (slot < capacity) {
+      if (*(int *)(slotOffset + table) != 0) {
+        slotCursor = (int *)(slot * 4 + table);
         do {
-          loopIndex = loopIndex + 1;
-          iVar8 = loopIndex * 4;
-          if (uVar3 <= loopIndex) break;
-          piVar5 = piVar5 + 1;
-        } while (*piVar5 != 0);
+          slot = slot + 1;
+          slotOffset = slot * 4;
+          if (capacity <= slot) break;
+          slotCursor = slotCursor + 1;
+        } while (*slotCursor != 0);
       }
       goto LAB_97bb9e58;
     }
   }
-  iVar4 = *(int *)this;
+  table = *(int *)this;
 LAB_97bb9e58:
-  *(undefined4 *)(iVar8 + iVar4) = 1;
-  return loopIndex;
+  *(undefined4 *)(slotOffset + table) = 1;
+  return slot;
 }
 
 /* AddressTempAllocator__releaseTemporary @ 0x97bb9e78 (20 bytes) */

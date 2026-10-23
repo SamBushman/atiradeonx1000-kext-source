@@ -265,19 +265,19 @@ int TType__isVector(this)
 }
 
 /* __ZN5TType7setTypeE10TBasicTypeibbi @ 0x97c31368 (32 bytes) */
-int __ZN5TType7setTypeE10TBasicTypeibbi(this, basicType, param_3, param_4, param_5, param_6)
+int __ZN5TType7setTypeE10TBasicTypeibbi(this, basicType, nominalSize, matrixFlag, arrayFlag, arraySizeArg)
   void *this;
   uint basicType;
-  uint param_3;
-  uint param_4;
-  uint param_5;
-  undefined4 param_6;
+  uint nominalSize;
+  uint matrixFlag;
+  uint arrayFlag;
+  undefined4 arraySizeArg;
 {
-  *(undefined4 *)((int)this + 4) = param_6;
+  *(undefined4 *)((int)this + 4) = arraySizeArg;
   *(uint *)((int)this + 0x24) =
-       (param_5 & 1) << 9 |
-       (param_4 & 1) << 10 |
-       (param_3 & 0xff) << 0xb | (basicType & 0x3f) << 0x13 | *(uint *)((int)this + 0x24) & 0xfe0001ff
+       (arrayFlag & 1) << 9 |
+       (matrixFlag & 1) << 10 |
+       (nominalSize & 0xff) << 0xb | (basicType & 0x3f) << 0x13 | *(uint *)((int)this + 0x24) & 0xfe0001ff
   ;
   return;
 }
@@ -302,27 +302,27 @@ int __ZN5TType7setTypeE10TBasicTypeibPS_(this, basicType, param_3, param_4, type
 }
 
 /* TType__setTypeName @ 0x97c313b0 (132 bytes) */
-int TType__setTypeName(this, text)
+int TType__setTypeName(this, name)
   unsigned char * this;
-  unsigned char * text;
+  unsigned char * name;
 {
-  void *pvVar1;
-  unsigned char * this_00;
-  void *this_01;
-  char *pcVar2;
-  undefined4 local_20 [4];
+  void *typeName;
+  unsigned char * globalAllocator;
+  void *stringMem;
+  char *chars;
+  undefined4 poolAllocArg [4];
   
-  *(undefined1 *)(*(int *)(text + 4) + *(int *)(*(int *)(text + 4) + -0xc)) = *DAT_a7b7b718;
-  pcVar2 = *(char **)(text + 4);
-  this_00 = (unsigned char *)GetGlobalPoolAllocator();
-  this_01 = (void *)TPoolAllocator__allocate(this_00,8);
-  pvVar1 = (void *)0x0;
-  if (this_01 != (void *)0x0) {
-    local_20[0] = GetGlobalPoolAllocator();
-    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(this_01,pcVar2,(unsigned char *)local_20);
-    pvVar1 = this_01;
+  *(undefined1 *)(*(int *)(name + 4) + *(int *)(*(int *)(name + 4) + -0xc)) = *DAT_a7b7b718;
+  chars = *(char **)(name + 4);
+  globalAllocator = (unsigned char *)GetGlobalPoolAllocator();
+  stringMem = (void *)TPoolAllocator__allocate(globalAllocator,8);
+  typeName = (void *)0x0;
+  if (stringMem != (void *)0x0) {
+    poolAllocArg[0] = GetGlobalPoolAllocator();
+    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(stringMem,chars,(unsigned char *)poolAllocArg);
+    typeName = stringMem;
   }
-  *(void **)(this + 0x10) = pvVar1;
+  *(void **)(this + 0x10) = typeName;
   return;
 }
 
@@ -775,49 +775,49 @@ int std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Sel
 }
 
 /* TType__setStructSize @ 0x97c31c44 (284 bytes) */
-int TType__setStructSize(this, vector)
+int TType__setStructSize(this, fields)
   unsigned char * this;
-  unsigned char * vector;
+  unsigned char * fields;
 {
-  int iVar1;
-  int *r3In0;
-  int iVar2;
-  int *piVar3;
+  int memberSize;
+  int *memberType;
+  int totalSize;
+  int *entry;
   
-  iVar2 = 0;
-  piVar3 = *(int **)(vector + 4);
+  totalSize = 0;
+  entry = *(int **)(fields + 4);
   do {
-    if (piVar3 == *(int **)(vector + 8)) {
-      *(int *)(this + 0x18) = iVar2;
-      return iVar2;
+    if (entry == *(int **)(fields + 8)) {
+      *(int *)(this + 0x18) = totalSize;
+      return totalSize;
     }
-    iVar1 = (**(code **)(*(int *)*piVar3 + 0x38))((int *)*piVar3);
-    if (iVar1 == 0) {
-      iVar1 = (**(code **)(*(int *)*piVar3 + 0x34))((int *)*piVar3);
-      if ((iVar1 != 0) ||
-         (iVar1 = (**(code **)(*(int *)*piVar3 + 0x3c))((int *)*piVar3), iVar1 != 0)) {
-        iVar1 = (**(code **)(*(int *)*piVar3 + 0x30))((int *)*piVar3);
+    memberSize = (**(code **)(*(int *)*entry + 0x38))((int *)*entry);
+    if (memberSize == 0) {
+      memberSize = (**(code **)(*(int *)*entry + 0x34))((int *)*entry);
+      if ((memberSize != 0) ||
+         (memberSize = (**(code **)(*(int *)*entry + 0x3c))((int *)*entry), memberSize != 0)) {
+        memberSize = (**(code **)(*(int *)*entry + 0x30))((int *)*entry);
         goto LAB_97c31d28;
       }
-      if (*(unsigned char **)(*piVar3 + 8) != (unsigned char *)0x0) {
-        iVar1 = ((int (*)())TType__setStructSize)(this,*(unsigned char **)(*piVar3 + 8));
+      if (*(unsigned char **)(*entry + 8) != (unsigned char *)0x0) {
+        memberSize = ((int (*)())TType__setStructSize)(this,*(unsigned char **)(*entry + 8));
         goto LAB_97c31d28;
       }
-      iVar2 = iVar2 + 1;
+      totalSize = totalSize + 1;
     }
     else {
-      r3In0 = (int *)*piVar3;
-      if ((unsigned char *)r3In0[2] == (unsigned char *)0x0) {
-        iVar1 = (**(code **)(*r3In0 + 0x30))(r3In0);
+      memberType = (int *)*entry;
+      if ((unsigned char *)memberType[2] == (unsigned char *)0x0) {
+        memberSize = (**(code **)(*memberType + 0x30))(memberType);
       }
       else {
-        iVar1 = ((int (*)())TType__setStructSize)(this,(unsigned char *)r3In0[2]);
+        memberSize = ((int (*)())TType__setStructSize)(this,(unsigned char *)memberType[2]);
       }
-      iVar1 = iVar1 * *(int *)(*piVar3 + 4);
+      memberSize = memberSize * *(int *)(*entry + 4);
 LAB_97c31d28:
-      iVar2 = iVar2 + iVar1;
+      totalSize = totalSize + memberSize;
     }
-    piVar3 = piVar3 + 2;
+    entry = entry + 2;
   } while( true );
 }
 
@@ -874,97 +874,97 @@ int TIntermTyped__getAsTyped()
 }
 
 /* TIntermTyped__setType @ 0x97c31d9c (152 bytes) */
-int TIntermTyped__setType(this, type)
+int TIntermTyped__setType(this, srcType)
   unsigned char * this;
-  unsigned char * type;
+  unsigned char * srcType;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  undefined4 uVar6;
-  undefined4 uVar7;
-  undefined4 uVar8;
-  undefined4 uVar9;
-  undefined4 uVar10;
-  undefined4 uVar11;
-  undefined4 uVar12;
+  uint nominalSizeBits;
+  uint qualifierBits;
+  uint basicTypeBits;
+  uint matrixBit;
+  uint oldBits;
+  undefined4 structure;
+  undefined4 word20;
+  undefined4 word1c;
+  undefined4 structureSize;
+  undefined4 fieldName;
+  undefined4 word14;
+  undefined4 typeName;
   
-  uVar6 = *(undefined4 *)(type + 8);
-  uVar10 = *(undefined4 *)(type + 0xc);
-  uVar12 = *(undefined4 *)(type + 0x10);
-  uVar11 = *(undefined4 *)(type + 0x14);
-  uVar9 = *(undefined4 *)(type + 0x18);
-  uVar8 = *(undefined4 *)(type + 0x1c);
-  uVar7 = *(undefined4 *)(type + 0x20);
-  *(undefined4 *)(this + 0xc) = *(undefined4 *)(type + 4);
-  *(undefined4 *)(this + 0x10) = uVar6;
-  *(undefined4 *)(this + 0x14) = uVar10;
-  *(undefined4 *)(this + 0x18) = uVar12;
-  *(undefined4 *)(this + 0x1c) = uVar11;
-  *(undefined4 *)(this + 0x20) = uVar9;
-  *(undefined4 *)(this + 0x24) = uVar8;
-  *(undefined4 *)(this + 0x28) = uVar7;
-  uVar5 = *(uint *)(this + 0x2c);
-  uVar2 = *(uint *)(type + 0x24) & 0xfe000000;
-  *(uint *)(this + 0x2c) = uVar2 | uVar5 & 0x1ffffff;
-  uVar3 = (*(uint *)(type + 0x24) >> 0x13 & 0x3f) << 0x13;
-  *(uint *)(this + 0x2c) = uVar3 | uVar2 | uVar5 & 0x7ffff;
-  uVar1 = *(uint *)(type + 0x24) & 0x7f800;
-  *(uint *)(this + 0x2c) = uVar1 | uVar3 | uVar2 | uVar5 & 0x7ff;
-  uVar4 = (*(uint *)(type + 0x24) >> 10 & 1) << 10;
-  *(uint *)(this + 0x2c) = uVar4 | uVar1 | uVar3 | uVar2 | uVar5 & 0x3ff;
+  structure = *(undefined4 *)(srcType + 8);
+  fieldName = *(undefined4 *)(srcType + 0xc);
+  typeName = *(undefined4 *)(srcType + 0x10);
+  word14 = *(undefined4 *)(srcType + 0x14);
+  structureSize = *(undefined4 *)(srcType + 0x18);
+  word1c = *(undefined4 *)(srcType + 0x1c);
+  word20 = *(undefined4 *)(srcType + 0x20);
+  *(undefined4 *)(this + 0xc) = *(undefined4 *)(srcType + 4);
+  *(undefined4 *)(this + 0x10) = structure;
+  *(undefined4 *)(this + 0x14) = fieldName;
+  *(undefined4 *)(this + 0x18) = typeName;
+  *(undefined4 *)(this + 0x1c) = word14;
+  *(undefined4 *)(this + 0x20) = structureSize;
+  *(undefined4 *)(this + 0x24) = word1c;
+  *(undefined4 *)(this + 0x28) = word20;
+  oldBits = *(uint *)(this + 0x2c);
+  qualifierBits = *(uint *)(srcType + 0x24) & 0xfe000000;
+  *(uint *)(this + 0x2c) = qualifierBits | oldBits & 0x1ffffff;
+  basicTypeBits = (*(uint *)(srcType + 0x24) >> 0x13 & 0x3f) << 0x13;
+  *(uint *)(this + 0x2c) = basicTypeBits | qualifierBits | oldBits & 0x7ffff;
+  nominalSizeBits = *(uint *)(srcType + 0x24) & 0x7f800;
+  *(uint *)(this + 0x2c) = nominalSizeBits | basicTypeBits | qualifierBits | oldBits & 0x7ff;
+  matrixBit = (*(uint *)(srcType + 0x24) >> 10 & 1) << 10;
+  *(uint *)(this + 0x2c) = matrixBit | nominalSizeBits | basicTypeBits | qualifierBits | oldBits & 0x3ff;
   *(uint *)(this + 0x2c) =
-       (*(uint *)(type + 0x24) >> 9 & 1) << 9 | uVar4 | uVar1 | uVar3 | uVar2 | uVar5 & 0x1ff;
+       (*(uint *)(srcType + 0x24) >> 9 & 1) << 9 | matrixBit | nominalSizeBits | basicTypeBits | qualifierBits | oldBits & 0x1ff;
   return;
 }
 
 /* TIntermTyped__getType @ 0x97c31e34 (192 bytes) */
-int TIntermTyped__getType(this, param_2)
-  undefined4 *this;
-  int param_2;
+int TIntermTyped__getType(retType, node)
+  undefined4 *retType;
+  int node;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  undefined4 uVar6;
-  undefined4 uVar7;
-  undefined4 uVar8;
-  undefined4 uVar9;
-  undefined4 uVar10;
-  undefined4 uVar11;
-  undefined4 uVar12;
+  uint nominalSizeBits;
+  uint qualifierBits;
+  uint basicTypeBits;
+  uint matrixBit;
+  uint oldBits;
+  undefined4 word1c;
+  undefined4 structureSize;
+  undefined4 word14;
+  undefined4 typeName;
+  undefined4 fieldName;
+  undefined4 structure;
+  undefined4 word20;
   
-  uVar12 = *(undefined4 *)(param_2 + 0x28);
-  uVar11 = *(undefined4 *)(param_2 + 0x10);
-  uVar10 = *(undefined4 *)(param_2 + 0x14);
-  uVar9 = *(undefined4 *)(param_2 + 0x18);
-  uVar8 = *(undefined4 *)(param_2 + 0x1c);
-  uVar7 = *(undefined4 *)(param_2 + 0x20);
-  uVar6 = *(undefined4 *)(param_2 + 0x24);
-  this[1] = *(undefined4 *)(param_2 + 0xc);
-  this[2] = uVar11;
-  this[3] = uVar10;
-  this[4] = uVar9;
-  this[5] = uVar8;
-  this[6] = uVar7;
-  this[7] = uVar6;
-  this[8] = uVar12;
-  *this = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-  uVar5 = this[9];
-  uVar2 = *(uint *)(param_2 + 0x2c) & 0xfe000000;
-  this[9] = uVar2 | uVar5 & 0x1ffffff;
-  uVar3 = (*(uint *)(param_2 + 0x2c) >> 0x13 & 0x3f) << 0x13;
-  this[9] = uVar3 | uVar2 | uVar5 & 0x7ffff;
-  uVar1 = *(uint *)(param_2 + 0x2c) & 0x7f800;
-  this[9] = uVar1 | uVar3 | uVar2 | uVar5 & 0x7ff;
-  uVar4 = (*(uint *)(param_2 + 0x2c) >> 10 & 1) << 10;
-  this[9] = uVar4 | uVar1 | uVar3 | uVar2 | uVar5 & 0x3ff;
-  this[9] = (*(uint *)(param_2 + 0x2c) >> 9 & 1) << 9 |
-               uVar4 | uVar1 | uVar3 | uVar2 | uVar5 & 0x1ff;
+  word20 = *(undefined4 *)(node + 0x28);
+  structure = *(undefined4 *)(node + 0x10);
+  fieldName = *(undefined4 *)(node + 0x14);
+  typeName = *(undefined4 *)(node + 0x18);
+  word14 = *(undefined4 *)(node + 0x1c);
+  structureSize = *(undefined4 *)(node + 0x20);
+  word1c = *(undefined4 *)(node + 0x24);
+  retType[1] = *(undefined4 *)(node + 0xc);
+  retType[2] = structure;
+  retType[3] = fieldName;
+  retType[4] = typeName;
+  retType[5] = word14;
+  retType[6] = structureSize;
+  retType[7] = word1c;
+  retType[8] = word20;
+  *retType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+  oldBits = retType[9];
+  qualifierBits = *(uint *)(node + 0x2c) & 0xfe000000;
+  retType[9] = qualifierBits | oldBits & 0x1ffffff;
+  basicTypeBits = (*(uint *)(node + 0x2c) >> 0x13 & 0x3f) << 0x13;
+  retType[9] = basicTypeBits | qualifierBits | oldBits & 0x7ffff;
+  nominalSizeBits = *(uint *)(node + 0x2c) & 0x7f800;
+  retType[9] = nominalSizeBits | basicTypeBits | qualifierBits | oldBits & 0x7ff;
+  matrixBit = (*(uint *)(node + 0x2c) >> 10 & 1) << 10;
+  retType[9] = matrixBit | nominalSizeBits | basicTypeBits | qualifierBits | oldBits & 0x3ff;
+  retType[9] = (*(uint *)(node + 0x2c) >> 9 & 1) << 9 |
+               matrixBit | nominalSizeBits | basicTypeBits | qualifierBits | oldBits & 0x1ff;
   return;
 }
 

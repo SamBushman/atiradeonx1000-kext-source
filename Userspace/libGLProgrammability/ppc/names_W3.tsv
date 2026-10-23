@@ -107,8 +107,8 @@ local	__ZNKSs7compareEmmPKcm	param_4	str	INFERRED	parameter type in the mangled 
 local	__ZNKSaIcE7addressERKc	param_2	str	INFERRED	parameter type in the mangled name (__ZNKSaIcE7addressERKc)
 local	__ZNSaIcE9constructEPcRKc	param_3	str	INFERRED	parameter type in the mangled name (__ZNSaIcE9constructEPcRKc)
 local	__ZNKSt9type_infoeqERKS_	param_2	type_info	INFERRED	parameter type in the mangled name (__ZNKSt9type_infoeqERKS_)
-local	__ZNK10__cxxabiv117__class_type_info20__do_find_public_srcEiPKvPKS0_S2_	param_4	__class_type_info	INFERRED	parameter type in the mangled name (__ZNK10__cxxabiv117__class_type_info20__do_find_public_srcEiPKvPKS0_S2_)
-local	__ZNK10__cxxabiv120__si_class_type_info20__do_find_public_srcEiPKvPKNS_17__class_type_infoES2_	param_4	__class_type_info	INFERRED	parameter type in the mangled name (__ZNK10__cxxabiv120__si_class_type_info20__do_find_public_srcEiPKvPKNS_17__class_type_infoES2_)
+local	__ZNK10__cxxabiv117__class_type_info20__do_find_public_srcEiPKvPKS0_S2_	param_4	srcType	INFERRED	parameter type in the mangled name (__ZNK10__cxxabiv117__class_type_info20__do_find_public_srcEiPKvPKS0_S2_)
+local	__ZNK10__cxxabiv120__si_class_type_info20__do_find_public_srcEiPKvPKNS_17__class_type_infoES2_	param_4	srcType	INFERRED	parameter type in the mangled name (__ZNK10__cxxabiv120__si_class_type_info20__do_find_public_srcEiPKvPKNS_17__class_type_infoES2_)
 local	__ZNK10__cxxabiv117__class_type_info12__do_dyncastEiNS0_10__sub_kindEPKS0_PKvS3_S5_RNS0_16__dyncast_resultE	param_3	accessPath	INFERRED	parameter type in the mangled name (__ZNK10__cxxabiv117__class_type_info12__do_dyncastEiNS0_10__sub_kindEPKS0_PKvS3_S5_RNS0_16__dyncast_resultE)
 local	__ZNK10__cxxabiv117__class_type_info12__do_dyncastEiNS0_10__sub_kindEPKS0_PKvS3_S5_RNS0_16__dyncast_resultE	param_4	dstType	INFERRED	parameter type in the mangled name (__ZNK10__cxxabiv117__class_type_info12__do_dyncastEiNS0_10__sub_kindEPKS0_PKvS3_S5_RNS0_16__dyncast_resultE)
 local	__ZNK10__cxxabiv117__class_type_info12__do_dyncastEiNS0_10__sub_kindEPKS0_PKvS3_S5_RNS0_16__dyncast_resultE	param_6	srcType	INFERRED	parameter type in the mangled name (__ZNK10__cxxabiv117__class_type_info12__do_dyncastEiNS0_10__sub_kindEPKS0_PKvS3_S5_RNS0_16__dyncast_resultE)
@@ -195,7 +195,7 @@ local	_HashString2	cVar3	ch	CONFIRMED	current character of the inlined strcpy: `
 local	yy_scan_string	cVar1	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar1 != '\0')`
 local	scpy	cVar1	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar1 != '\0')`
 local	ParseSymbol__ChangeArrayNameForArrayIndex	cVar1	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar1 != '\0')`
-local	ParseSymbolTable__GetString	cVar9	ch	CONFIRMED	current character of the inlined strcpy: `while (cVar9 != '\0')`
+local	ParseSymbolTable__GetString	cVar9	kindFilter	CONFIRMED	current character of the inlined strcpy: `while (cVar9 != '\0')`
 local	_PPCRuntimeCompilerInitialise	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (4 field accesses); every PPCRuntimeCompiler* function takes it first
 local	_PPCRuntimeCompilerInitialiseRegisterAllocator	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (5 field accesses); every PPCRuntimeCompiler* function takes it first
 local	_PPCRuntimeCompilerInitialiseVariableInfo	param_1	compiler	INFERRED	dereferenced as the PPCRuntimeCompiler object (10 field accesses); every PPCRuntimeCompiler* function takes it first
