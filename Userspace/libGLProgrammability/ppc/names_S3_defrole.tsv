@@ -131,7 +131,7 @@ use	_PPParserParseSwizzleCode	iVar5	part2	INFERRED	every definition is the resul
 use	_InitStringTable	iVar1	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#0	+6	all	all
 use	_AddString	iVar1	length	INFERRED	every definition is the result of a call whose name says it returns this	#0	+10	all	all
 use	_AddString	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#3	+4	all	all
-use	_InitHashTable	iVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#0	+3	all	all
+use	_InitHashTable	iVar3	entries	INFERRED	every definition is the result of a call whose name says it returns this	#0	+3	all	all
 use	_GrowAtomTable	iVar1	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#2	+20	all	all
 use	_GrowAtomTable	iVar2	allocation2	INFERRED	every definition is the result of a call whose name says it returns this	#3	+20	all	all
 use	_FindHashLoc	iVar3	compareResult	INFERRED	every definition is the result of a call whose name says it returns this	#18	+0	lhs	lhs
