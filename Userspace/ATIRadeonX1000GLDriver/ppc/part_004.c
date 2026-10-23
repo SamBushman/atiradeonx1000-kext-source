@@ -955,13 +955,13 @@ int FUN_00025bf0(ctx, program)
         nextNode = (int *)listNode[1];
       }
       else if (kind == 3) {
-        FUN_0003e4c0(listNode[2] + 0x240,listNode + 5);
+        gldDeleteFragmentShaderObject(listNode[2] + 0x240,listNode + 5);
         nextNode = (int *)listNode[1];
       }
       else {
         nextNode = savedNext;
         if (kind == 1) {
-          FUN_0003c310(listNode[2] + 0x240,listNode + 5);
+          gldDeleteVertexShaderObject(listNode[2] + 0x240,listNode + 5);
           nextNode = (int *)listNode[1];
         }
       }
@@ -1010,10 +1010,10 @@ int FUN_00025da0(param_1)
             glDeleteProgramsARB_impl(iVar3 + 0x240,1,piVar5 + 5);
           }
           else if (iVar1 == 3) {
-            FUN_0003e4c0(iVar3 + 0x240,piVar5 + 5);
+            gldDeleteFragmentShaderObject(iVar3 + 0x240,piVar5 + 5);
           }
           else if (iVar1 == 1) {
-            FUN_0003c310(iVar3 + 0x240,piVar5 + 5);
+            gldDeleteVertexShaderObject(iVar3 + 0x240,piVar5 + 5);
           }
           iVar3 = *piVar5;
           piVar5[2] = 0;
@@ -2821,7 +2821,7 @@ LAB_000284b0:
     return 0;
   }
   if (surfaceBase != 0) {
-    FUN_0000b670(ctx,surfaceBase,clampedHeight * rowBytes,widthArg,heightArg,lastHeader,0,uVar34);
+    gldFlushDataCacheRangeSync(ctx,surfaceBase,clampedHeight * rowBytes,widthArg,heightArg,lastHeader,0,uVar34);
   }
   ring = ctx + GLD_commandStream;
   unitIndex = 0xf;
@@ -3138,7 +3138,7 @@ LAB_0002918c:
         gld_submitRing(ctx,0x1000000);
       }
       if (*(int *)*surfaceInfo != 0) {
-        FUN_0000b670(ctx,*(int *)*surfaceInfo,clampedHeight * rowBytes,packet,uVar30,uVar31,surfaceInfo,
+        gldFlushDataCacheRangeSync(ctx,*(int *)*surfaceInfo,clampedHeight * rowBytes,packet,uVar30,uVar31,surfaceInfo,
                      uVar35);
         return 1;
       }
@@ -5543,59 +5543,59 @@ int FUN_0002be90(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 }
 
 /* gldTrimVertexCountToPrimitive @ 0x2bea0 (116 bytes) */
-int gldTrimVertexCountToPrimitive(param_1, param_2, param_3)
-  undefined4 param_1;
-  uint param_2;
-  uint param_3;
+int gldTrimVertexCountToPrimitive(ctx, mode, count)
+  undefined4 ctx;
+  uint mode;
+  uint count;
 {
   int iVar1;
   
-  iVar1 = (param_2 >> 3 & 1) + (param_2 >> 2 & 1) + (param_2 >> 1 & 1) + (param_2 & 1);
+  iVar1 = (mode >> 3 & 1) + (mode >> 2 & 1) + (mode >> 1 & 1) + (mode & 1);
   if (iVar1 == 2) {
-    return param_3;
+    return count;
   }
   if (iVar1 == 0) {
-    return param_3;
+    return count;
   }
-  if (param_2 == 2) {
-    return param_3;
+  if (mode == 2) {
+    return count;
   }
   if (iVar1 == 3) {
-    return param_3 & 0xfffffffc;
+    return count & 0xfffffffc;
   }
-  if (param_2 == 4) {
-    return ((int)param_3 / 3) * 3;
+  if (mode == 4) {
+    return ((int)count / 3) * 3;
   }
-  return param_3 & 0xfffffffe;
+  return count & 0xfffffffe;
 }
 
 /* gldTrimVertexCountToPrimitiveMin @ 0x2bf30 (180 bytes) */
-int gldTrimVertexCountToPrimitiveMin(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 param_2;
-  uint param_3;
+int gldTrimVertexCountToPrimitiveMin(ctx, mode, count)
+  undefined4 ctx;
+  undefined4 mode;
+  uint count;
 {
   uint uVar1;
   
-  switch(param_2) {
+  switch(mode) {
   case 0:
-    if (param_3 != 0) {
-      return param_3;
+    if (count != 0) {
+      return count;
     }
     break;
   case 1:
-    if (1 < (int)(param_3 & 0xfffffffe)) {
-      return param_3 & 0xfffffffe;
+    if (1 < (int)(count & 0xfffffffe)) {
+      return count & 0xfffffffe;
     }
     break;
   case 2:
   case 3:
-    if (1 < (int)param_3) {
-      return param_3;
+    if (1 < (int)count) {
+      return count;
     }
     break;
   case 4:
-    uVar1 = ((int)param_3 / 3) * 3;
+    uVar1 = ((int)count / 3) * 3;
     if (2 < (int)uVar1) {
       return uVar1;
     }
@@ -5603,18 +5603,18 @@ int gldTrimVertexCountToPrimitiveMin(param_1, param_2, param_3)
   case 5:
   case 6:
   case 9:
-    if (2 < (int)param_3) {
-      return param_3;
+    if (2 < (int)count) {
+      return count;
     }
     break;
   case 7:
-    if (3 < (int)(param_3 & 0xfffffffc)) {
-      return param_3 & 0xfffffffc;
+    if (3 < (int)(count & 0xfffffffc)) {
+      return count & 0xfffffffc;
     }
     break;
   case 8:
-    if (3 < (int)(param_3 & 0xfffffffe)) {
-      return param_3 & 0xfffffffe;
+    if (3 < (int)(count & 0xfffffffe)) {
+      return count & 0xfffffffe;
     }
   }
   return 0;

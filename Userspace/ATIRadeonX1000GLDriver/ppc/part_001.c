@@ -2238,8 +2238,8 @@ int FUN_000098c8(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_00009b70 @ 0x9b70 (88 bytes) */
-int FUN_00009b70(ctx)
+/* gldAllocQueryRecord @ 0x9b70 (88 bytes) */
+int gldAllocQueryRecord(ctx)
   int ctx;
 {
   undefined4 returnCode;
@@ -2421,7 +2421,7 @@ LAB_0000a030:
         if (bitmapWord != 0xffffffff) goto LAB_0000a030;
       }
     }
-    if ((*(int *)(ctx + GLD_queryRecord) == 0) && (wordByteOffset = ((int (*)())FUN_00009b70)(ctx), wordByteOffset == 0x2720)) {
+    if ((*(int *)(ctx + GLD_queryRecord) == 0) && (wordByteOffset = ((int (*)())gldAllocQueryRecord)(ctx), wordByteOffset == 0x2720)) {
 LAB_0000a010:
       _free(query);
       *queryOut = 0;
@@ -2480,22 +2480,22 @@ LAB_0000a05c:
 }
 
 /* gldFormatBitsPerPixel @ 0xa0a0 (68 bytes) */
-int gldFormatBitsPerPixel(param_1)
-  uint param_1;
+int gldFormatBitsPerPixel(formatMask)
+  uint formatMask;
 {
-  if ((param_1 & 0x3c) != 0) {
+  if ((formatMask & 0x3c) != 0) {
     return 8;
   }
-  if ((param_1 & 0x3fc0) != 0) {
+  if ((formatMask & 0x3fc0) != 0) {
     return 0x10;
   }
-  if ((param_1 & 0xfc000) != 0) {
+  if ((formatMask & 0xfc000) != 0) {
     return 0x20;
   }
-  if ((param_1 & 0x3f00000) != 0) {
+  if ((formatMask & 0x3f00000) != 0) {
     return 0x40;
   }
-  return -(param_1 & 0xc000000) >> 0x18 & 0x80;
+  return -(formatMask & 0xc000000) >> 0x18 & 0x80;
 }
 
 /* FUN_0000a0f0 @ 0xa0f0 (48 bytes) */
@@ -2515,8 +2515,8 @@ int FUN_0000a0f0(param_1)
 }
 
 /* gldFormatAlphaBits @ 0xa120 (92 bytes) */
-int gldFormatAlphaBits(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  uint param_1;
+int gldFormatAlphaBits(formatMask, param_2, param_3, param_4, param_5, param_6, param_7)
+  uint formatMask;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
@@ -2524,25 +2524,25 @@ int gldFormatAlphaBits(param_1, param_2, param_3, param_4, param_5, param_6, par
   undefined4 param_6;
   undefined4 param_7;
 {
-  if ((param_1 & 0x400) != 0) {
+  if ((formatMask & 0x400) != 0) {
     return 1;
   }
-  if ((param_1 & 0x40000) != 0) {
+  if ((formatMask & 0x40000) != 0) {
     return 2;
   }
-  if ((param_1 & 0x80) != 0) {
+  if ((formatMask & 0x80) != 0) {
     return 4;
   }
-  if ((param_1 & 0x9a928) != 0) {
+  if ((formatMask & 0x9a928) != 0) {
     return 8;
   }
-  if ((param_1 & 0x200000) != 0) {
+  if ((formatMask & 0x200000) != 0) {
     return 0xc;
   }
-  if ((param_1 & 0x2800000) != 0) {
+  if ((formatMask & 0x2800000) != 0) {
     return 0x10;
   }
-  return param_1 >> 0x16 & 0x20;
+  return formatMask >> 0x16 & 0x20;
 }
 
 /* FUN_0000a180 @ 0xa180 (344 bytes) */

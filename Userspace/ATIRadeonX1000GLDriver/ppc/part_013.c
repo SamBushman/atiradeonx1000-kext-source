@@ -4031,7 +4031,7 @@ void gldValidateState(int glContext,undefined4 param_2,undefined4 param_3,undefi
   dirtyMask = *(uint *)(glContext + 0x38);
   if (dirtyMask != 0) {
     if ((dirtyMask & 4) != 0) {
-      fparam_1 = (double)((double (*)())FUN_0004ea70)(glContext,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,
+      fparam_1 = (double)((double (*)())gldValidatePolygonMode)(glContext,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,
                                       fparam_7,fparam_8);
       dirtyMask = *(uint *)(glContext + 0x38);
       param_2 = extraout_r4_00;
@@ -4672,8 +4672,8 @@ int FUN_000913e0(param_1, param_2, param_3, param_4, param_5)
   return uVar2;
 }
 
-/* FUN_000914c0 @ 0x914c0 (28 bytes) */
-int FUN_000914c0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+/* noop_914c0 @ 0x914c0 (28 bytes) */
+int noop_914c0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;

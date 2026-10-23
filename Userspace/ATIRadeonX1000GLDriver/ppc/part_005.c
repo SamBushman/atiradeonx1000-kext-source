@@ -1567,19 +1567,19 @@ LAB_000303b4:
 }
 
 /* gldCompressedImageBytes @ 0x303d0 (68 bytes) */
-int gldCompressedImageBytes(param_1, param_2, param_3, param_4)
-  uint param_1;
-  int param_2;
-  int param_3;
-  int param_4;
+int gldCompressedImageBytes(format, width, height, depth)
+  uint format;
+  int width;
+  int height;
+  int depth;
 {
   int iVar1;
   
-  iVar1 = (param_2 + 3 >> 2) * (param_3 + 3 >> 2) * param_4;
-  if (param_1 == 0xc) {
+  iVar1 = (width + 3 >> 2) * (height + 3 >> 2) * depth;
+  if (format == 0xc) {
     return iVar1 * 8;
   }
-  if ((0xb < param_1) && (param_1 < 0x10)) {
+  if ((0xb < format) && (format < 0x10)) {
     return iVar1 * 0x10;
   }
   return 0;
@@ -1826,13 +1826,13 @@ LAB_0003093c:
 }
 
 /* floorLog2 @ 0x30990 (40 bytes) */
-int floorLog2(param_1)
-  uint param_1;
+int floorLog2(value)
+  uint value;
 {
   int iVar1;
   
   iVar1 = 0;
-  for (; 1 < param_1; param_1 = param_1 >> 1) {
+  for (; 1 < value; value = value >> 1) {
     iVar1 = iVar1 + 1;
   }
   return iVar1;
@@ -2161,8 +2161,8 @@ LAB_000310c0:
   return;
 }
 
-/* FUN_00031170 @ 0x31170 (164 bytes) */
-int FUN_00031170(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
+/* gldTextureFormatLookup @ 0x31170 (164 bytes) */
+int gldTextureFormatLookup(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
   uint param_1;
   undefined4 param_2;
   int param_3;
@@ -2188,8 +2188,8 @@ int FUN_00031170(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   return;
 }
 
-/* FUN_00031220 @ 0x31220 (280 bytes) */
-int FUN_00031220(param_1, param_2, param_3, param_4, param_5)
+/* gldTextureFormatEntryForLevel @ 0x31220 (280 bytes) */
+int gldTextureFormatEntryForLevel(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   int param_2;
   int param_3;
@@ -2347,7 +2347,7 @@ int FUN_00031340(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
       _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 4),9,puVar16 + 3,1,0,0);
     }
     if ((param_7 != 0) && ((*(uint *)(param_1 + 0x24) & 0x82) != 0)) {
-      FUN_0000b670(param_1,param_7,param_2[4],uVar17,a1,uVar10,iVar13,a7);
+      gldFlushDataCacheRangeSync(param_1,param_7,param_2[4],uVar17,a1,uVar10,iVar13,a7);
     }
     *(ushort *)((int)puVar16 + iVar14 + 0x1c) =
          *(ushort *)((int)puVar16 + iVar14 + 0x1c) | *(ushort *)((int)puVar16 + iVar14 + 0x28);
@@ -2391,7 +2391,7 @@ int FUN_00031340(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   puVar9 = auStack_13c;
   iVar12 = iVar12 / (int)(uint)*(ushort *)(iVar13 + 2);
   puVar11 = auStack_138;
-  ((int (*)())FUN_00031170)((uint)*(byte *)(param_2 + 0xe),param_2,&local_b8,auStack_140,puVar9,puVar11,
+  ((int (*)())gldTextureFormatLookup)((uint)*(byte *)(param_2 + 0xe),param_2,&local_b8,auStack_140,puVar9,puVar11,
                auStack_134,auStack_130,auStack_12c);
   uVar10 = 0;
   local_108 = 2;
@@ -2547,7 +2547,7 @@ int FUN_00031940(param_1, param_2)
   iVar26 = iVar9 * (uint)*(ushort *)(iVar30 + 0xc);
   uVar22 = uVar23 ^ 1;
   iVar9 = (uint)*(byte *)(iVar30 + 10) * (iVar9 + iVar26) + *(int *)(iVar30 + 0x14);
-  ((int (*)())FUN_00031170)((uint)*(byte *)(param_2 + 0xe),param_2,local_5c,&local_f8,puVar16,puVar16,&local_ec,
+  ((int (*)())gldTextureFormatLookup)((uint)*(byte *)(param_2 + 0xe),param_2,local_5c,&local_f8,puVar16,puVar16,&local_ec,
                &local_f4,&local_f0);
   uVar25 = (uint)*(ushort *)(iVar30 + 4) + (uint)*(byte *)(iVar30 + 10) * -2;
   if ((int)uVar25 < 1) {
@@ -3075,7 +3075,7 @@ LAB_000323a0:
       local_1a4 = 0;
       puVar17 = &local_218;
       puVar26 = &local_214;
-      ((int (*)())FUN_00031170)((uint)bVar4,texture,aiStack_1c8,puVar17,&local_208,&local_208,&local_210,puVar26,
+      ((int (*)())gldTextureFormatLookup)((uint)bVar4,texture,aiStack_1c8,puVar17,&local_208,&local_208,&local_210,puVar26,
                    &local_20c);
       iVar33 = (uint)texImages[uVar22 * 0xc + 0x52] +
                (uint)*(byte *)(texImages + uVar22 * 0xc + 0x55) * -2;
@@ -3320,7 +3320,7 @@ LAB_00034128:
 LAB_00032e78:
           local_64 = &local_158;
           local_138 = 2;
-          ((int (*)())FUN_00031170)((uint)*(byte *)(texture + 0xe),texture,local_64,&local_214,&local_208,
+          ((int (*)())gldTextureFormatLookup)((uint)*(byte *)(texture + 0xe),texture,local_64,&local_214,&local_208,
                        &local_204,&local_218,&local_210,&local_20c);
           iVar11 = (uint)*(byte *)(texture + 0xe) * 0x24;
           formatInfo = &DAT_001d9f34 + iVar11;
@@ -4196,7 +4196,7 @@ LAB_000342e0:
   nextLevel = baseLevel + 1;
   faceArg = face;
   uVar12 = baseLevel;
-  levelRecord = ((int (*)())FUN_00031220)(ctx,texture,face,baseLevel,1);
+  levelRecord = ((int (*)())gldTextureFormatEntryForLevel)(ctx,texture,face,baseLevel,1);
   if (((levelRecord == 0) || ((*(uint *)(levelRecord + 0x18) & 0x10000) == 0)) ||
      (((*(byte *)((int)texture + 0x39) & 7) != 0 &&
       (faceArg = ((int (*)())FUN_00032100)(ctx,texture,faceArg,uVar12,uVar20,in_r8), faceArg == 0))))
@@ -4852,7 +4852,7 @@ int FUN_000353a0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uVar39 = 0;
   iVar35 = param_3;
   uVar49 = param_4;
-  iVar32 = ((int (*)())FUN_00031220)(param_1,param_2,param_3,param_4,0);
+  iVar32 = ((int (*)())gldTextureFormatEntryForLevel)(param_1,param_2,param_3,param_4,0);
   iVar53 = param_1 + 0x240;
   if ((iVar32 == 0) || ((*(uint *)(iVar32 + 0x18) & 0x10000) == 0)) {
 LAB_00035740:
@@ -5581,7 +5581,7 @@ LAB_00035dd8:
     uVar9 = *(ushort *)(iVar34 + 0xc);
     iVar35 = gldPixelUnitBytes((uint)*(ushort *)(iVar34 + 0x10),(uint)*(ushort *)(iVar34 + 0x12));
     if (*(int *)(iVar34 + 0x14) != 0) {
-      FUN_0000b670(param_1,*(int *)(iVar34 + 0x14),(uint)uVar9 * iVar35 * uVar46,uVar39,uVar41,
+      gldFlushDataCacheRangeSync(param_1,*(int *)(iVar34 + 0x14),(uint)uVar9 * iVar35 * uVar46,uVar39,uVar41,
                    uVar42,uVar50,uVar43);
     }
   }
@@ -5847,7 +5847,7 @@ int glTexSubImage_impl(ctx, texture, face, level, xOffset, yOffset, zOffset, wid
     uVar44 = 0;
     faceArg = face;
     levelArg = level;
-    levelRecord = ((int (*)())FUN_00031220)(ctx,texture,face,level,0);
+    levelRecord = ((int (*)())gldTextureFormatEntryForLevel)(ctx,texture,face,level,0);
     if ((levelRecord != 0) &&
        ((iVar22 = texture[0xd], iVar22 == 0 || (*(char *)(iVar22 + 0x16) != '\x06')))) {
       if ((*(byte *)((int)texture + 0x39) & 7) != 0) {
@@ -6712,7 +6712,7 @@ LAB_00037930:
   }
   _pthread_mutex_lock(*(undefined4 *)(ctx + GLD_mutex));
   iVar22 = face;
-  levelRecordB = ((int (*)())FUN_00031220)(ctx,texture,face,level,0);
+  levelRecordB = ((int (*)())gldTextureFormatEntryForLevel)(ctx,texture,face,level,0);
   if ((levelRecordB == 0) || ((*(uint *)(levelRecordB + 0x18) & 0x10000) == 0)) goto LAB_00037930;
   levelOffset = levelOffset + texture[0xc];
   levelWidth = (uint)*(ushort *)(levelOffset + 0xa4);
@@ -7197,8 +7197,8 @@ int gld_testRendererAvailable(param_1)
   return uVar1;
 }
 
-/* FUN_000391d0 @ 0x391d0 (28 bytes) */
-int FUN_000391d0()
+/* gldRendererFamilyString @ 0x391d0 (28 bytes) */
+int gldRendererFamilyString()
 {
   return "ATIR500";
 }
@@ -9253,8 +9253,8 @@ switchD_0003bf70_caseD_1:
   goto LAB_0003c2b0;
 }
 
-/* FUN_0003c310 @ 0x3c310 (236 bytes) */
-int FUN_0003c310(param_1, param_2)
+/* gldDeleteVertexShaderObject @ 0x3c310 (236 bytes) */
+int gldDeleteVertexShaderObject(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
@@ -10457,8 +10457,8 @@ int FUN_0003e420(param_1, param_2, param_3, param_4, param_5, param_6)
   return;
 }
 
-/* FUN_0003e4c0 @ 0x3e4c0 (8 bytes) */
-int FUN_0003e4c0(param_1, param_2)
+/* gldDeleteFragmentShaderObject @ 0x3e4c0 (8 bytes) */
+int gldDeleteFragmentShaderObject(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {

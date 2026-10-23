@@ -385,37 +385,37 @@ int FUN_0003ed50(param_1, param_2)
 }
 
 /* fpilBuildDestinationToken @ 0x3ed90 (160 bytes) */
-int fpilBuildDestinationToken(param_1, param_2, param_3, param_4, param_5)
-  int *param_1;
-  uint *param_2;
-  uint *param_3;
-  uint *param_4;
-  int param_5;
+int fpilBuildDestinationToken(translator, irDest, outToken, outMask, saturate)
+  int *translator;
+  uint *irDest;
+  uint *outToken;
+  uint *outMask;
+  int saturate;
 {
-  ushort uVar1;
-  uint uVar2;
-  uint uVar3;
+  ushort irIndex;
+  uint regIndex;
+  uint modifier;
   int iVar4;
-  uint uVar5;
+  uint irWord;
   
-  uVar5 = *param_2;
-  uVar3 = 0;
-  if ((uVar5 & 0xe0000) == 0x20000) {
-    uVar2 = (uint)*(ushort *)((int)param_2 + 6);
+  irWord = *irDest;
+  modifier = 0;
+  if ((irWord & 0xe0000) == 0x20000) {
+    regIndex = (uint)*(ushort *)((int)irDest + 6);
   }
   else {
-    uVar1 = *(ushort *)((int)param_2 + 6);
-    iVar4 = *(int *)(*param_1 + 0x10);
-    param_1[4] = 1 << (uVar1 & 0x3f) | param_1[4];
-    uVar2 = (uint)uVar1 + iVar4 + 1;
-    uVar5 = *param_2;
+    irIndex = *(ushort *)((int)irDest + 6);
+    iVar4 = *(int *)(*translator + 0x10);
+    translator[4] = 1 << (irIndex & 0x3f) | translator[4];
+    regIndex = (uint)irIndex + iVar4 + 1;
+    irWord = *irDest;
   }
-  if (param_5 != 0) {
-    uVar3 = 0x100;
+  if (saturate != 0) {
+    modifier = 0x100;
   }
-  *param_3 = uVar2 & 0xffff | 0x440000;
-  *param_4 = (uVar5 >> 0x10 & 1) << 6 |
-             (uVar5 >> 0xf & 1) << 4 | (uVar5 >> 0xe & 1) << 2 | uVar5 >> 0xd & 1 | uVar3;
+  *outToken = regIndex & 0xffff | 0x440000;
+  *outMask = (irWord >> 0x10 & 1) << 6 |
+             (irWord >> 0xf & 1) << 4 | (irWord >> 0xe & 1) << 2 | irWord >> 0xd & 1 | modifier;
   return 0;
 }
 
@@ -477,27 +477,27 @@ int FUN_0003eea0(param_1, param_2, param_3)
 }
 
 /* fpilReserveTokens @ 0x3ef50 (240 bytes) */
-int fpilReserveTokens(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  int *param_3;
+int fpilReserveTokens(translator, nWords, outPtr)
+  int translator;
+  int nWords;
+  int *outPtr;
 {
   int allocation;
   uint uVar1;
   int iVar2;
   int *piVar3;
   
-  piVar3 = (int *)(param_1 + 0x28);
-  iVar2 = *(int *)(param_1 + 0x2c);
-  uVar1 = *(uint *)(param_1 + 0x30);
-  if (uVar1 < (uint)(param_2 + iVar2)) {
+  piVar3 = (int *)(translator + 0x28);
+  iVar2 = *(int *)(translator + 0x2c);
+  uVar1 = *(uint *)(translator + 0x30);
+  if (uVar1 < (uint)(nWords + iVar2)) {
     if (uVar1 == 0) {
       uVar1 = 0x10;
     }
     else {
       uVar1 = uVar1 << 1;
     }
-    for (; uVar1 < (uint)(param_2 + iVar2); uVar1 = uVar1 << 1) {
+    for (; uVar1 < (uint)(nWords + iVar2); uVar1 = uVar1 << 1) {
     }
     if (*piVar3 == 0) {
       allocation = _malloc(uVar1 << 2);
@@ -506,18 +506,18 @@ int fpilReserveTokens(param_1, param_2, param_3)
       allocation = _realloc(*piVar3,uVar1 << 2);
     }
     if (allocation == 0) {
-      if (*(int *)(param_1 + 0x24) != 0) {
-        return *(int *)(param_1 + 0x24);
+      if (*(int *)(translator + 0x24) != 0) {
+        return *(int *)(translator + 0x24);
       }
-      *(undefined4 *)(param_1 + 0x24) = 1;
+      *(undefined4 *)(translator + 0x24) = 1;
       return 1;
     }
     *piVar3 = allocation;
-    *(uint *)(param_1 + 0x30) = uVar1;
-    iVar2 = *(int *)(param_1 + 0x2c);
+    *(uint *)(translator + 0x30) = uVar1;
+    iVar2 = *(int *)(translator + 0x2c);
   }
-  *(int *)(param_1 + 0x2c) = param_2 + iVar2;
-  *param_3 = iVar2 * 4 + *piVar3;
+  *(int *)(translator + 0x2c) = nWords + iVar2;
+  *outPtr = iVar2 * 4 + *piVar3;
   return 0;
 }
 
@@ -588,11 +588,11 @@ LAB_0003f164:
 }
 
 /* fpilTranslateSource @ 0x3f1c0 (700 bytes) */
-int fpilTranslateSource(param_1, param_2, param_3, param_4)
-  int *param_1;
-  uint *param_2;
-  uint *param_3;
-  uint *param_4;
+int fpilTranslateSource(translator, irSource, outToken, outSwizzle)
+  int *translator;
+  uint *irSource;
+  uint *outToken;
+  uint *outSwizzle;
 {
   int iVar1;
   bool bVar2;
@@ -605,18 +605,18 @@ int fpilTranslateSource(param_1, param_2, param_3, param_4)
   uint uVar9;
   undefined *puVar10;
   
-  uVar7 = *param_2;
+  uVar7 = *irSource;
   uVar5 = uVar7 & 0x3800000;
   if (uVar5 == 0) {
-    iVar8 = *param_1;
-    iVar1 = ((uint)*(ushort *)((int)param_2 + 6) + *(int *)(iVar8 + 0x24)) * 8;
+    iVar8 = *translator;
+    iVar1 = ((uint)*(ushort *)((int)irSource + 6) + *(int *)(iVar8 + 0x24)) * 8;
     switch(*(ushort *)(iVar8 + iVar1) & 0xf) {
     default:
 switchD_0003f230_caseD_0:
-      if (param_1[9] != 0) {
-        return param_1[9];
+      if (translator[9] != 0) {
+        return translator[9];
       }
-      param_1[9] = 3;
+      translator[9] = 3;
       return 3;
     case 1:
       bVar2 = false;
@@ -641,20 +641,20 @@ switchD_0003f230_caseD_0:
   }
   else if (uVar5 == 0x1000000) {
     bVar2 = false;
-    puVar10 = (undefined *)(*(ushort *)((int)param_2 + 6) | 0x10000);
+    puVar10 = (undefined *)(*(ushort *)((int)irSource + 6) | 0x10000);
   }
   else if (uVar5 == 0x800000) {
     bVar2 = false;
-    puVar10 = (undefined *)(*(ushort *)((int)param_2 + 6) | 0x40000);
+    puVar10 = (undefined *)(*(ushort *)((int)irSource + 6) | 0x40000);
   }
   else {
     if (uVar5 != 0x1800000) goto switchD_0003f230_caseD_0;
     bVar2 = false;
     puVar10 = (undefined *)
-              ((uint)*(ushort *)((int)param_2 + 6) + *(int *)(*param_1 + 0x10) + 1 & 0xffff |
+              ((uint)*(ushort *)((int)irSource + 6) + *(int *)(*translator + 0x10) + 1 & 0xffff |
               0x40000);
   }
-  if ((param_1[5] & 0x20000000U) == 0) {
+  if ((translator[5] & 0x20000000U) == 0) {
     uVar5 = 4;
   }
   else {
@@ -693,8 +693,8 @@ switchD_0003f230_caseD_0:
             ((byte)(DAT_001dac00)[uVar5 >> 4 & 7] & 7) << 4 |
             (byte)(DAT_001dac00)[uVar5 & 7] & 7 | uVar5 & 0xffff8888;
   }
-  *param_3 = (uint)puVar10 | 0x400000;
-  *param_4 = uVar5;
+  *outToken = (uint)puVar10 | 0x400000;
+  *outSwizzle = uVar5;
   return 0;
 }
 
@@ -802,31 +802,31 @@ int fpilCreateTranslator()
 }
 
 /* fpilTranslateDestination @ 0x3f750 (232 bytes) */
-int fpilTranslateDestination(param_1, param_2, param_3, param_4, param_5)
-  int *param_1;
-  uint *param_2;
-  uint *param_3;
-  uint *param_4;
-  undefined4 param_5;
+int fpilTranslateDestination(translator, irDest, outToken, outMask, flag)
+  int *translator;
+  uint *irDest;
+  uint *outToken;
+  uint *outMask;
+  undefined4 flag;
 {
   undefined4 uVar1;
   uint uVar2;
   
-  if (((param_1[5] & 0x20000000U) != 0) &&
-     (((((uVar2 = *param_2, (uVar2 & 0x2000) != 0 && ((uVar2 & 0x300) != 0)) ||
+  if (((translator[5] & 0x20000000U) != 0) &&
+     (((((uVar2 = *irDest, (uVar2 & 0x2000) != 0 && ((uVar2 & 0x300) != 0)) ||
         (((uVar2 & 0x4000) != 0 && ((uVar2 & 0xc0) != 0x40)))) ||
        (((uVar2 & 0x8000) != 0 && ((uVar2 & 0x30) != 0x20)))) ||
       (((uVar2 & 0x10000) != 0 && ((uVar2 & 0xc) != 0xc)))))) {
-    uVar1 = *(undefined4 *)(*param_1 + 0x10);
-    *param_3 = 0;
-    *param_4 = 0;
-    *param_3 = *param_3 & 0xffc0ffff | 0x40000;
-    *(short *)((int)param_3 + 2) = (short)uVar1;
-    *param_3 = *param_3 | 0x400000;
-    *param_4 = *param_4 & 0xffffff00 | 0x55;
+    uVar1 = *(undefined4 *)(*translator + 0x10);
+    *outToken = 0;
+    *outMask = 0;
+    *outToken = *outToken & 0xffc0ffff | 0x40000;
+    *(short *)((int)outToken + 2) = (short)uVar1;
+    *outToken = *outToken | 0x400000;
+    *outMask = *outMask & 0xffffff00 | 0x55;
     return 0;
   }
-  uVar1 = ((int (*)())fpilBuildDestinationToken)(param_1,param_2,param_3,param_4,param_5);
+  uVar1 = ((int (*)())fpilBuildDestinationToken)(translator,irDest,outToken,outMask,flag);
   return uVar1;
 }
 
@@ -1000,11 +1000,11 @@ LAB_0003fb50:
 }
 
 /* fpilEmitInstruction @ 0x3fbf0 (392 bytes) */
-int fpilEmitInstruction(param_1, param_2, param_3, param_4)
-  int param_1;
-  undefined4 *param_2;
-  int param_3;
-  int param_4;
+int fpilEmitInstruction(translator, ilInstr, nDst, nSrc)
+  int translator;
+  undefined4 *ilInstr;
+  int nDst;
+  int nSrc;
 {
   int allocation;
   undefined4 *puVar1;
@@ -1016,13 +1016,13 @@ int fpilEmitInstruction(param_1, param_2, param_3, param_4)
   int iVar7;
   int *piVar8;
   
-  if (*(int *)(param_1 + 0x24) != 0) {
-    return *(int *)(param_1 + 0x24);
+  if (*(int *)(translator + 0x24) != 0) {
+    return *(int *)(translator + 0x24);
   }
-  piVar8 = (int *)(param_1 + 0x28);
-  iVar6 = *(int *)(param_1 + 0x2c);
-  uVar2 = *(uint *)(param_1 + 0x30);
-  iVar7 = (param_3 + param_4) * 2 + 1;
+  piVar8 = (int *)(translator + 0x28);
+  iVar6 = *(int *)(translator + 0x2c);
+  uVar2 = *(uint *)(translator + 0x30);
+  iVar7 = (nDst + nSrc) * 2 + 1;
   uVar3 = iVar7 + iVar6;
   if (uVar2 < uVar3) {
     if (uVar2 == 0) {
@@ -1040,10 +1040,10 @@ int fpilEmitInstruction(param_1, param_2, param_3, param_4)
       allocation = _realloc(*piVar8,uVar2 << 2);
     }
     if (allocation == 0) {
-      iVar6 = *(int *)(param_1 + 0x24);
+      iVar6 = *(int *)(translator + 0x24);
       if (iVar6 == 0) {
         iVar6 = 1;
-        *(undefined4 *)(param_1 + 0x24) = 1;
+        *(undefined4 *)(translator + 0x24) = 1;
       }
       puVar4 = (undefined4 *)0x0;
       if (iVar6 != 0) {
@@ -1052,42 +1052,42 @@ int fpilEmitInstruction(param_1, param_2, param_3, param_4)
       goto LAB_0003fcc0;
     }
     *piVar8 = allocation;
-    *(uint *)(param_1 + 0x30) = uVar2;
-    iVar6 = *(int *)(param_1 + 0x2c);
+    *(uint *)(translator + 0x30) = uVar2;
+    iVar6 = *(int *)(translator + 0x2c);
   }
-  *(int *)(param_1 + 0x2c) = iVar7 + iVar6;
+  *(int *)(translator + 0x2c) = iVar7 + iVar6;
   puVar4 = (undefined4 *)(iVar6 * 4 + *piVar8);
 LAB_0003fcc0:
-  *puVar4 = *param_2;
-  if (param_3 == 0) {
+  *puVar4 = *ilInstr;
+  if (nDst == 0) {
     iVar6 = 1;
   }
   else {
     iVar6 = 3;
-    puVar4[1] = param_2[1];
-    puVar4[2] = param_2[2];
+    puVar4[1] = ilInstr[1];
+    puVar4[2] = ilInstr[2];
   }
-  if (0 < param_4) {
+  if (0 < nSrc) {
     puVar4 = puVar4 + iVar6;
     puVar5 = puVar4;
     do {
-      *puVar5 = param_2[3];
+      *puVar5 = ilInstr[3];
       puVar5 = puVar5 + 2;
-      puVar1 = param_2 + 6;
-      param_2 = param_2 + 1;
+      puVar1 = ilInstr + 6;
+      ilInstr = ilInstr + 1;
       puVar4[1] = *puVar1;
       puVar4 = puVar4 + 2;
-      param_4 = param_4 + -1;
-    } while (param_4 != 0);
+      nSrc = nSrc + -1;
+    } while (nSrc != 0);
   }
   return 0;
 }
 
 /* fragmentTranslateSimpleOp @ 0x3fd80 (440 bytes) */
-int fragmentTranslateSimpleOp(param_1, param_2, param_3)
-  int *param_1;
-  int param_2;
-  undefined4 *param_3;
+int fragmentTranslateSimpleOp(translator, slot, ilInstr)
+  int *translator;
+  int slot;
+  undefined4 *ilInstr;
 {
   int allocation;
   undefined4 *puVar1;
@@ -1101,15 +1101,15 @@ int fragmentTranslateSimpleOp(param_1, param_2, param_3)
   int *piVar9;
   uint uVar10;
   
-  uVar6 = *(uint *)(*param_1 + *(int *)(*param_1 + 0x54) * 8 + param_2 * 8);
+  uVar6 = *(uint *)(*translator + *(int *)(*translator + 0x54) * 8 + slot * 8);
   uVar10 = uVar6 >> 0x1d;
   uVar6 = (*(uint *)(&DAT_001dac40 + (uVar6 >> 0xe & 0xff0)) ^ 0x20000000) >> 0x1d & 1;
-  if (param_1[9] != 0) {
-    return param_1[9];
+  if (translator[9] != 0) {
+    return translator[9];
   }
-  piVar9 = param_1 + 10;
-  iVar7 = param_1[0xb];
-  uVar2 = param_1[0xc];
+  piVar9 = translator + 10;
+  iVar7 = translator[0xb];
+  uVar2 = translator[0xc];
   iVar8 = (uVar6 + uVar10) * 2 + 1;
   uVar3 = iVar8 + iVar7;
   if (uVar2 < uVar3) {
@@ -1128,10 +1128,10 @@ int fragmentTranslateSimpleOp(param_1, param_2, param_3)
       allocation = _realloc(*piVar9,uVar2 << 2);
     }
     if (allocation == 0) {
-      iVar7 = param_1[9];
+      iVar7 = translator[9];
       if (iVar7 == 0) {
         iVar7 = 1;
-        param_1[9] = 1;
+        translator[9] = 1;
       }
       puVar4 = (undefined4 *)0x0;
       if (iVar7 != 0) {
@@ -1140,29 +1140,29 @@ int fragmentTranslateSimpleOp(param_1, param_2, param_3)
       goto LAB_0003fe80;
     }
     *piVar9 = allocation;
-    param_1[0xc] = uVar2;
-    iVar7 = param_1[0xb];
+    translator[0xc] = uVar2;
+    iVar7 = translator[0xb];
   }
-  param_1[0xb] = iVar8 + iVar7;
+  translator[0xb] = iVar8 + iVar7;
   puVar4 = (undefined4 *)(iVar7 * 4 + *piVar9);
 LAB_0003fe80:
-  *puVar4 = *param_3;
+  *puVar4 = *ilInstr;
   if (uVar6 == 0) {
     iVar7 = 1;
   }
   else {
     iVar7 = 3;
-    puVar4[1] = param_3[1];
-    puVar4[2] = param_3[2];
+    puVar4[1] = ilInstr[1];
+    puVar4[2] = ilInstr[2];
   }
   if (uVar10 != 0) {
     puVar4 = puVar4 + iVar7;
     puVar5 = puVar4;
     do {
-      *puVar5 = param_3[3];
+      *puVar5 = ilInstr[3];
       puVar5 = puVar5 + 2;
-      puVar1 = param_3 + 6;
-      param_3 = param_3 + 1;
+      puVar1 = ilInstr + 6;
+      ilInstr = ilInstr + 1;
       puVar4[1] = *puVar1;
       puVar4 = puVar4 + 2;
       uVar10 = uVar10 - 1;
@@ -1172,10 +1172,10 @@ LAB_0003fe80:
 }
 
 /* fragmentTranslateRep @ 0x3ff40 (592 bytes) */
-int fragmentTranslateRep(param_1, param_2, param_3)
-  int *param_1;
-  undefined4 param_2;
-  undefined4 *param_3;
+int fragmentTranslateRep(translator, slot, ilInstr)
+  int *translator;
+  undefined4 slot;
+  undefined4 *ilInstr;
 {
   int allocation;
   int iVar1;
@@ -1190,27 +1190,27 @@ int fragmentTranslateRep(param_1, param_2, param_3)
   longlong lStack_38;
   float fStack_30;
   
-  if ((param_3[3] & 0x3f0000) != 0x10000) {
-    if (param_1[9] != 0) {
-      return param_1[9];
+  if ((ilInstr[3] & 0x3f0000) != 0x10000) {
+    if (translator[9] != 0) {
+      return translator[9];
     }
-    param_1[9] = 2;
+    translator[9] = 2;
     return 2;
   }
-  iVar5 = *param_1;
-  iVar2 = (uint)*(ushort *)((int)param_3 + 0xe) * 8;
+  iVar5 = *translator;
+  iVar2 = (uint)*(ushort *)((int)ilInstr + 0xe) * 8;
   iVar1 = iVar5 + *(int *)(iVar5 + 0x2c) * 8;
   uVar4 = *(uint *)(iVar1 + iVar2);
-  if ((((uVar4 & 0x1f0000) == 0x110000) && ((uVar4 >> 0x1a & 7) < 2)) && ((param_3[6] & 7) < 4)) {
-    aiStack_48[0] = param_1[9];
+  if ((((uVar4 & 0x1f0000) == 0x110000) && ((uVar4 >> 0x1a & 7) < 2)) && ((ilInstr[6] & 7) < 4)) {
+    aiStack_48[0] = translator[9];
     fStack_30 = *(float *)(iVar5 + *(int *)(iVar5 + 0x6c) * 8 +
-                          ((uint)*(ushort *)(iVar1 + iVar2 + 2) * 4 + (param_3[6] & 7)) * 4);
+                          ((uint)*(ushort *)(iVar1 + iVar2 + 2) * 4 + (ilInstr[6] & 7)) * 4);
   }
   else {
-    aiStack_48[0] = param_1[9];
+    aiStack_48[0] = translator[9];
     if (aiStack_48[0] == 0) {
       aiStack_48[0] = 2;
-      param_1[9] = 2;
+      translator[9] = 2;
     }
     fStack_30 = 0.0;
   }
@@ -1218,15 +1218,15 @@ int fragmentTranslateRep(param_1, param_2, param_3)
     return aiStack_48[0];
   }
   lStack_38 = (longlong)(int)fStack_30;
-  ((int (*)())FUN_0003eea0)(param_1,(int)fStack_30,aiStack_48);
-  param_3[3] = param_3[3] & 0xffc0ffff | 0x20000;
-  *(short *)((int)param_3 + 0xe) = (short)aiStack_48[0];
-  if (param_1[9] != 0) {
-    return param_1[9];
+  ((int (*)())FUN_0003eea0)(translator,(int)fStack_30,aiStack_48);
+  ilInstr[3] = ilInstr[3] & 0xffc0ffff | 0x20000;
+  *(short *)((int)ilInstr + 0xe) = (short)aiStack_48[0];
+  if (translator[9] != 0) {
+    return translator[9];
   }
-  piVar8 = param_1 + 10;
-  iVar2 = param_1[0xb];
-  uVar4 = param_1[0xc];
+  piVar8 = translator + 10;
+  iVar2 = translator[0xb];
+  uVar4 = translator[0xc];
   if (uVar4 < iVar2 + 3U) {
     if (uVar4 == 0) {
       uVar4 = 0x10;
@@ -1243,10 +1243,10 @@ int fragmentTranslateRep(param_1, param_2, param_3)
       allocation = _realloc(*piVar8,uVar4 << 2);
     }
     if (allocation == 0) {
-      iVar2 = param_1[9];
+      iVar2 = translator[9];
       if (iVar2 == 0) {
         iVar2 = 1;
-        param_1[9] = 1;
+        translator[9] = 1;
       }
       if (iVar2 != 0) {
         return iVar2;
@@ -1257,25 +1257,25 @@ int fragmentTranslateRep(param_1, param_2, param_3)
       goto LAB_00040128;
     }
     *piVar8 = allocation;
-    param_1[0xc] = uVar4;
-    iVar2 = param_1[0xb];
+    translator[0xc] = uVar4;
+    iVar2 = translator[0xb];
   }
-  param_1[0xb] = iVar2 + 3;
+  translator[0xb] = iVar2 + 3;
   puVar3 = (undefined4 *)(iVar2 * 4 + *piVar8);
   pdVar7 = puVar3 + 1;
   pdVar6 = puVar3 + 2;
 LAB_00040128:
-  *puVar3 = *param_3;
-  *pdVar7 = param_3[3];
-  *pdVar6 = param_3[6];
+  *puVar3 = *ilInstr;
+  *pdVar7 = ilInstr[3];
+  *pdVar6 = ilInstr[6];
   return 0;
 }
 
 /* fragmentTranslateDdy @ 0x401b0 (420 bytes) */
-int fragmentTranslateDdy(param_1, param_2, param_3)
-  int param_1;
-  undefined4 param_2;
-  undefined4 *param_3;
+int fragmentTranslateDdy(translator, slot, ilInstr)
+  int translator;
+  undefined4 slot;
+  undefined4 *ilInstr;
 {
   int allocation;
   uint uVar1;
@@ -1287,20 +1287,20 @@ int fragmentTranslateDdy(param_1, param_2, param_3)
   dword *pdVar7;
   int *piVar8;
   
-  *(uint *)(*(int *)(param_1 + 0x34) + 0x20) =
-       *(uint *)(*(int *)(param_1 + 0x34) + 0x20) | 0x1000000;
-  if ((*(uint *)(*(int *)(param_1 + 0x34) + 0x20) & 0x800000) != 0) {
-    uVar1 = param_3[6];
-    param_3[6] = (uVar1 & 0xfffff777 ^ 0x8000) & 0x8000 |
+  *(uint *)(*(int *)(translator + 0x34) + 0x20) =
+       *(uint *)(*(int *)(translator + 0x34) + 0x20) | 0x1000000;
+  if ((*(uint *)(*(int *)(translator + 0x34) + 0x20) & 0x800000) != 0) {
+    uVar1 = ilInstr[6];
+    ilInstr[6] = (uVar1 & 0xfffff777 ^ 0x8000) & 0x8000 |
                  (uVar1 & 0xffffff77 ^ 0x800) & 0x800 |
                  (uVar1 & 0xfffffff7 ^ 0x80) & 0x80 | (uVar1 ^ 8) & 8 | uVar1 & 0xffff7777;
   }
-  if (*(int *)(param_1 + 0x24) != 0) {
-    return *(int *)(param_1 + 0x24);
+  if (*(int *)(translator + 0x24) != 0) {
+    return *(int *)(translator + 0x24);
   }
-  piVar8 = (int *)(param_1 + 0x28);
-  iVar2 = *(int *)(param_1 + 0x2c);
-  uVar1 = *(uint *)(param_1 + 0x30);
+  piVar8 = (int *)(translator + 0x28);
+  iVar2 = *(int *)(translator + 0x2c);
+  uVar1 = *(uint *)(translator + 0x30);
   if (uVar1 < iVar2 + 5U) {
     if (uVar1 == 0) {
       uVar1 = 0x10;
@@ -1317,10 +1317,10 @@ int fragmentTranslateDdy(param_1, param_2, param_3)
       allocation = _realloc(*piVar8,uVar1 << 2);
     }
     if (allocation == 0) {
-      iVar2 = *(int *)(param_1 + 0x24);
+      iVar2 = *(int *)(translator + 0x24);
       if (iVar2 == 0) {
         iVar2 = 1;
-        *(undefined4 *)(param_1 + 0x24) = 1;
+        *(undefined4 *)(translator + 0x24) = 1;
       }
       if (iVar2 != 0) {
         return iVar2;
@@ -1333,29 +1333,29 @@ int fragmentTranslateDdy(param_1, param_2, param_3)
       goto LAB_000402d0;
     }
     *piVar8 = allocation;
-    *(uint *)(param_1 + 0x30) = uVar1;
-    iVar2 = *(int *)(param_1 + 0x2c);
+    *(uint *)(translator + 0x30) = uVar1;
+    iVar2 = *(int *)(translator + 0x2c);
   }
-  *(int *)(param_1 + 0x2c) = iVar2 + 5;
+  *(int *)(translator + 0x2c) = iVar2 + 5;
   puVar5 = (undefined4 *)(iVar2 * 4 + *piVar8);
   pdVar3 = puVar5 + 1;
   pdVar4 = puVar5 + 2;
   pdVar6 = puVar5 + 3;
   pdVar7 = puVar5 + 4;
 LAB_000402d0:
-  *puVar5 = *param_3;
-  *pdVar3 = param_3[1];
-  *pdVar4 = param_3[2];
-  *pdVar6 = param_3[3];
-  *pdVar7 = param_3[6];
+  *puVar5 = *ilInstr;
+  *pdVar3 = ilInstr[1];
+  *pdVar4 = ilInstr[2];
+  *pdVar6 = ilInstr[3];
+  *pdVar7 = ilInstr[6];
   return 0;
 }
 
 /* fragmentTranslateScalarMath @ 0x40370 (4 bytes) */
-int fragmentTranslateScalarMath(param_1, param_2, param_3)
-  int *param_1;
-  int param_2;
-  undefined4 *param_3;
+int fragmentTranslateScalarMath(translator, slot, ilInstr)
+  int *translator;
+  int slot;
+  undefined4 *ilInstr;
 {
   undefined4 *puVar1;
   void *allocation;
@@ -1371,29 +1371,29 @@ int fragmentTranslateScalarMath(param_1, param_2, param_3)
   int *piVar10;
   
   uVar6 = 1;
-  if ((param_1[5] & 0x20000000U) != 0) {
-    uVar6 = (*(uint *)(param_2 * 8 + *param_1 + *(int *)(*param_1 + 0x54) * 8 + 4) >> 0x1a & 3) + 1;
+  if ((translator[5] & 0x20000000U) != 0) {
+    uVar6 = (*(uint *)(slot * 8 + *translator + *(int *)(*translator + 0x54) * 8 + 4) >> 0x1a & 3) + 1;
   }
-  uVar9 = param_3[6];
+  uVar9 = ilInstr[6];
   if (1 < uVar6) {
-    iVar4 = param_1[8];
-    unaff_r22 = param_3[1];
-    unaff_r21 = param_3[2];
-    param_3[1] = 0x40000;
-    *(short *)((int)param_3 + 6) = (short)iVar4;
-    param_3[2] = 0x55;
-    param_3[1] = param_3[1] | 0x400000;
+    iVar4 = translator[8];
+    unaff_r22 = ilInstr[1];
+    unaff_r21 = ilInstr[2];
+    ilInstr[1] = 0x40000;
+    *(short *)((int)ilInstr + 6) = (short)iVar4;
+    ilInstr[2] = 0x55;
+    ilInstr[1] = ilInstr[1] | 0x400000;
   }
   uVar3 = uVar9 >> 3 & 1;
-  puVar8 = param_3 + 6;
-  param_3[6] = uVar3 << 0xf |
+  puVar8 = ilInstr + 6;
+  ilInstr[6] = uVar3 << 0xf |
                (uVar9 & 7) << 0xc |
                uVar3 << 0xb |
                (uVar9 & 7) << 8 | uVar3 << 7 | (uVar9 & 7) << 4 | uVar3 << 3 | uVar9 & 0xffff0007;
-  if (param_1[9] == 0) {
-    piVar10 = param_1 + 10;
-    iVar4 = param_1[0xb];
-    uVar3 = param_1[0xc];
+  if (translator[9] == 0) {
+    piVar10 = translator + 10;
+    iVar4 = translator[0xb];
+    uVar3 = translator[0xc];
     if (uVar3 < iVar4 + 5U) {
       if (uVar3 == 0) {
         uVar3 = 0x10;
@@ -1410,39 +1410,39 @@ int fragmentTranslateScalarMath(param_1, param_2, param_3)
         allocation = _realloc((void *)*piVar10,uVar3 << 2);
       }
       if (allocation == (void *)0x0) {
-        if (param_1[9] == 0) {
-          param_1[9] = 1;
+        if (translator[9] == 0) {
+          translator[9] = 1;
         }
         goto LAB_00040524;
       }
       *piVar10 = (int)allocation;
-      param_1[0xc] = uVar3;
-      iVar4 = param_1[0xb];
+      translator[0xc] = uVar3;
+      iVar4 = translator[0xb];
     }
-    param_1[0xb] = iVar4 + 5;
+    translator[0xb] = iVar4 + 5;
     puVar1 = (undefined4 *)(iVar4 * 4 + *piVar10);
-    *puVar1 = *param_3;
-    puVar1[1] = param_3[1];
-    puVar1[2] = param_3[2];
-    puVar1[3] = param_3[3];
-    puVar1[4] = param_3[6];
+    *puVar1 = *ilInstr;
+    puVar1[1] = ilInstr[1];
+    puVar1[2] = ilInstr[2];
+    puVar1[3] = ilInstr[3];
+    puVar1[4] = ilInstr[6];
   }
 LAB_00040524:
   if (1 >= uVar6) {
-    return param_1[9];
+    return translator[9];
   }
   uVar3 = uVar9 >> 4 & 7;
   uVar5 = uVar9 >> 7 & 1;
-  puVar7 = param_3 + 2;
-  param_3[2] = param_3[2] & 0xfffffffc;
+  puVar7 = ilInstr + 2;
+  ilInstr[2] = ilInstr[2] & 0xfffffffc;
   *puVar8 = uVar5 << 0xf |
             uVar3 << 0xc |
             uVar5 << 0xb |
             uVar3 << 8 | uVar5 << 7 | uVar3 << 4 | uVar5 << 3 | uVar3 | *puVar8 & 0xffff0000;
-  if (param_1[9] == 0) {
-    piVar10 = param_1 + 10;
-    iVar4 = param_1[0xb];
-    uVar3 = param_1[0xc];
+  if (translator[9] == 0) {
+    piVar10 = translator + 10;
+    iVar4 = translator[0xb];
+    uVar3 = translator[0xc];
     if (uVar3 < iVar4 + 5U) {
       if (uVar3 == 0) {
         uVar3 = 0x10;
@@ -1459,22 +1459,22 @@ LAB_00040524:
         allocation = _realloc((void *)*piVar10,uVar3 << 2);
       }
       if (allocation == (void *)0x0) {
-        if (param_1[9] == 0) {
-          param_1[9] = 1;
+        if (translator[9] == 0) {
+          translator[9] = 1;
         }
         goto LAB_00040664;
       }
       *piVar10 = (int)allocation;
-      param_1[0xc] = uVar3;
-      iVar4 = param_1[0xb];
+      translator[0xc] = uVar3;
+      iVar4 = translator[0xb];
     }
-    param_1[0xb] = iVar4 + 5;
+    translator[0xb] = iVar4 + 5;
     puVar1 = (undefined4 *)(iVar4 * 4 + *piVar10);
-    *puVar1 = *param_3;
-    puVar1[1] = param_3[1];
-    puVar1[2] = param_3[2];
-    puVar1[3] = param_3[3];
-    puVar1[4] = param_3[6];
+    *puVar1 = *ilInstr;
+    puVar1[1] = ilInstr[1];
+    puVar1[2] = ilInstr[2];
+    puVar1[3] = ilInstr[3];
+    puVar1[4] = ilInstr[6];
   }
 LAB_00040664:
   if (uVar6 < 3) goto LAB_000408d0;
@@ -1485,10 +1485,10 @@ LAB_00040664:
             uVar3 << 0xc |
             uVar5 << 0xb |
             uVar3 << 8 | uVar5 << 7 | uVar3 << 4 | uVar5 << 3 | uVar3 | *puVar8 & 0xffff0000;
-  if (param_1[9] == 0) {
-    piVar10 = param_1 + 10;
-    iVar4 = param_1[0xb];
-    uVar3 = param_1[0xc];
+  if (translator[9] == 0) {
+    piVar10 = translator + 10;
+    iVar4 = translator[0xb];
+    uVar3 = translator[0xc];
     if (uVar3 < iVar4 + 5U) {
       if (uVar3 == 0) {
         uVar3 = 0x10;
@@ -1505,22 +1505,22 @@ LAB_00040664:
         allocation = _realloc((void *)*piVar10,uVar3 << 2);
       }
       if (allocation == (void *)0x0) {
-        if (param_1[9] == 0) {
-          param_1[9] = 1;
+        if (translator[9] == 0) {
+          translator[9] = 1;
         }
         goto LAB_00040794;
       }
       *piVar10 = (int)allocation;
-      param_1[0xc] = uVar3;
-      iVar4 = param_1[0xb];
+      translator[0xc] = uVar3;
+      iVar4 = translator[0xb];
     }
-    param_1[0xb] = iVar4 + 5;
+    translator[0xb] = iVar4 + 5;
     puVar1 = (undefined4 *)(iVar4 * 4 + *piVar10);
-    *puVar1 = *param_3;
-    puVar1[1] = param_3[1];
-    puVar1[2] = param_3[2];
-    puVar1[3] = param_3[3];
-    puVar1[4] = param_3[6];
+    *puVar1 = *ilInstr;
+    puVar1[1] = ilInstr[1];
+    puVar1[2] = ilInstr[2];
+    puVar1[3] = ilInstr[3];
+    puVar1[4] = ilInstr[6];
   }
 LAB_00040794:
   if (uVar6 == 4) {
@@ -1531,10 +1531,10 @@ LAB_00040794:
               uVar6 << 0xc |
               uVar9 << 0xb |
               uVar6 << 8 | uVar9 << 7 | uVar6 << 4 | uVar9 << 3 | uVar6 | *puVar8 & 0xffff0000;
-    if (param_1[9] == 0) {
-      piVar10 = param_1 + 10;
-      iVar4 = param_1[0xb];
-      uVar6 = param_1[0xc];
+    if (translator[9] == 0) {
+      piVar10 = translator + 10;
+      iVar4 = translator[0xb];
+      uVar6 = translator[0xc];
       if (uVar6 < iVar4 + 5U) {
         if (uVar6 == 0) {
           uVar6 = 0x10;
@@ -1551,41 +1551,41 @@ LAB_00040794:
           allocation = _realloc((void *)*piVar10,uVar6 << 2);
         }
         if (allocation == (void *)0x0) {
-          if (param_1[9] == 0) {
-            param_1[9] = 1;
+          if (translator[9] == 0) {
+            translator[9] = 1;
           }
           goto LAB_000408d0;
         }
         *piVar10 = (int)allocation;
-        param_1[0xc] = uVar6;
-        iVar4 = param_1[0xb];
+        translator[0xc] = uVar6;
+        iVar4 = translator[0xb];
       }
-      param_1[0xb] = iVar4 + 5;
+      translator[0xb] = iVar4 + 5;
       puVar1 = (undefined4 *)(iVar4 * 4 + *piVar10);
-      *puVar1 = *param_3;
-      puVar1[1] = param_3[1];
-      puVar1[2] = param_3[2];
-      puVar1[3] = param_3[3];
-      puVar1[4] = param_3[6];
+      *puVar1 = *ilInstr;
+      puVar1[1] = ilInstr[1];
+      puVar1[2] = ilInstr[2];
+      puVar1[3] = ilInstr[3];
+      puVar1[4] = ilInstr[6];
     }
   }
 LAB_000408d0:
-  iVar4 = param_1[8];
-  param_3[3] = 0;
+  iVar4 = translator[8];
+  ilInstr[3] = 0;
   *puVar8 = 0;
-  param_3[3] = param_3[3] & 0xffc0ffff | 0x40000;
-  *(short *)((int)param_3 + 0xe) = (short)iVar4;
-  param_3[3] = param_3[3] | 0x400000;
+  ilInstr[3] = ilInstr[3] & 0xffc0ffff | 0x40000;
+  *(short *)((int)ilInstr + 0xe) = (short)iVar4;
+  ilInstr[3] = ilInstr[3] | 0x400000;
   *puVar8 = *puVar8 & 0xffff0000 | 0x3210;
-  *param_3 = 0;
-  param_3[1] = unaff_r22;
-  param_3[2] = unaff_r21;
-  *(undefined2 *)((int)param_3 + 2) = 0x47;
-  iVar4 = param_1[9];
+  *ilInstr = 0;
+  ilInstr[1] = unaff_r22;
+  ilInstr[2] = unaff_r21;
+  *(undefined2 *)((int)ilInstr + 2) = 0x47;
+  iVar4 = translator[9];
   if (iVar4 == 0) {
-    piVar10 = param_1 + 10;
-    iVar4 = param_1[0xb];
-    uVar6 = param_1[0xc];
+    piVar10 = translator + 10;
+    iVar4 = translator[0xb];
+    uVar6 = translator[0xc];
     if (uVar6 < iVar4 + 5U) {
       if (uVar6 == 0) {
         uVar6 = 0x10;
@@ -1602,33 +1602,33 @@ LAB_000408d0:
         allocation = _realloc((void *)*piVar10,uVar6 << 2);
       }
       if (allocation == (void *)0x0) {
-        if (param_1[9] != 0) {
-          return param_1[9];
+        if (translator[9] != 0) {
+          return translator[9];
         }
-        param_1[9] = 1;
+        translator[9] = 1;
         return 1;
       }
       *piVar10 = (int)allocation;
-      param_1[0xc] = uVar6;
-      iVar4 = param_1[0xb];
+      translator[0xc] = uVar6;
+      iVar4 = translator[0xb];
     }
-    param_1[0xb] = iVar4 + 5;
+    translator[0xb] = iVar4 + 5;
     puVar1 = (undefined4 *)(iVar4 * 4 + *piVar10);
-    *puVar1 = *param_3;
-    puVar1[1] = param_3[1];
-    puVar1[2] = param_3[2];
-    puVar1[3] = param_3[3];
-    puVar1[4] = param_3[6];
-    iVar4 = param_1[9];
+    *puVar1 = *ilInstr;
+    puVar1[1] = ilInstr[1];
+    puVar1[2] = ilInstr[2];
+    puVar1[3] = ilInstr[3];
+    puVar1[4] = ilInstr[6];
+    iVar4 = translator[9];
   }
   return iVar4;
 }
 
 /* fragmentTranslateScalarMathBody @ 0x40374 (1800 bytes) */
-int fragmentTranslateScalarMathBody(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int *param_1;
-  int param_2;
-  undefined4 *param_3;
+int fragmentTranslateScalarMathBody(translator, slot, ilInstr, param_4, param_5, param_6, param_7, param_8)
+  int *translator;
+  int slot;
+  undefined4 *ilInstr;
   undefined4 param_4;
   undefined4 param_5;
   undefined4 param_6;
@@ -1649,29 +1649,29 @@ int fragmentTranslateScalarMathBody(param_1, param_2, param_3, param_4, param_5,
   int *piVar9;
   
   uVar5 = 1;
-  if ((param_1[5] & 0x20000000U) != 0) {
-    uVar5 = (*(uint *)(param_2 * 8 + *param_1 + *(int *)(*param_1 + 0x54) * 8 + 4) >> 0x1a & 3) + 1;
+  if ((translator[5] & 0x20000000U) != 0) {
+    uVar5 = (*(uint *)(slot * 8 + *translator + *(int *)(*translator + 0x54) * 8 + 4) >> 0x1a & 3) + 1;
   }
-  uVar8 = param_3[6];
+  uVar8 = ilInstr[6];
   if (1 < uVar5) {
-    iVar3 = param_1[8];
-    unaff_r22 = param_3[1];
-    unaff_r21 = param_3[2];
-    param_3[1] = 0x40000;
-    *(short *)((int)param_3 + 6) = (short)iVar3;
-    param_3[2] = 0x55;
-    param_3[1] = param_3[1] | 0x400000;
+    iVar3 = translator[8];
+    unaff_r22 = ilInstr[1];
+    unaff_r21 = ilInstr[2];
+    ilInstr[1] = 0x40000;
+    *(short *)((int)ilInstr + 6) = (short)iVar3;
+    ilInstr[2] = 0x55;
+    ilInstr[1] = ilInstr[1] | 0x400000;
   }
   uVar2 = uVar8 >> 3 & 1;
-  puVar7 = param_3 + 6;
-  param_3[6] = uVar2 << 0xf |
+  puVar7 = ilInstr + 6;
+  ilInstr[6] = uVar2 << 0xf |
                (uVar8 & 7) << 0xc |
                uVar2 << 0xb |
                (uVar8 & 7) << 8 | uVar2 << 7 | (uVar8 & 7) << 4 | uVar2 << 3 | uVar8 & 0xffff0007;
-  if (param_1[9] == 0) {
-    piVar9 = param_1 + 10;
-    iVar3 = param_1[0xb];
-    uVar2 = param_1[0xc];
+  if (translator[9] == 0) {
+    piVar9 = translator + 10;
+    iVar3 = translator[0xb];
+    uVar2 = translator[0xc];
     if (uVar2 < iVar3 + 5U) {
       if (uVar2 == 0) {
         uVar2 = 0x10;
@@ -1688,39 +1688,39 @@ int fragmentTranslateScalarMathBody(param_1, param_2, param_3, param_4, param_5,
         allocation = _realloc(*piVar9,uVar2 << 2);
       }
       if (allocation == 0) {
-        if (param_1[9] == 0) {
-          param_1[9] = 1;
+        if (translator[9] == 0) {
+          translator[9] = 1;
         }
         goto LAB_00040524;
       }
       *piVar9 = allocation;
-      param_1[0xc] = uVar2;
-      iVar3 = param_1[0xb];
+      translator[0xc] = uVar2;
+      iVar3 = translator[0xb];
     }
-    param_1[0xb] = iVar3 + 5;
+    translator[0xb] = iVar3 + 5;
     puVar1 = (undefined4 *)(iVar3 * 4 + *piVar9);
-    *puVar1 = *param_3;
-    puVar1[1] = param_3[1];
-    puVar1[2] = param_3[2];
-    puVar1[3] = param_3[3];
-    puVar1[4] = param_3[6];
+    *puVar1 = *ilInstr;
+    puVar1[1] = ilInstr[1];
+    puVar1[2] = ilInstr[2];
+    puVar1[3] = ilInstr[3];
+    puVar1[4] = ilInstr[6];
   }
 LAB_00040524:
   if (1 >= uVar5) {
-    return param_1[9];
+    return translator[9];
   }
   uVar2 = uVar8 >> 4 & 7;
   uVar4 = uVar8 >> 7 & 1;
-  puVar6 = param_3 + 2;
-  param_3[2] = param_3[2] & 0xfffffffc;
+  puVar6 = ilInstr + 2;
+  ilInstr[2] = ilInstr[2] & 0xfffffffc;
   *puVar7 = uVar4 << 0xf |
             uVar2 << 0xc |
             uVar4 << 0xb |
             uVar2 << 8 | uVar4 << 7 | uVar2 << 4 | uVar4 << 3 | uVar2 | *puVar7 & 0xffff0000;
-  if (param_1[9] == 0) {
-    piVar9 = param_1 + 10;
-    iVar3 = param_1[0xb];
-    uVar2 = param_1[0xc];
+  if (translator[9] == 0) {
+    piVar9 = translator + 10;
+    iVar3 = translator[0xb];
+    uVar2 = translator[0xc];
     if (uVar2 < iVar3 + 5U) {
       if (uVar2 == 0) {
         uVar2 = 0x10;
@@ -1737,22 +1737,22 @@ LAB_00040524:
         allocation = _realloc(*piVar9,uVar2 << 2);
       }
       if (allocation == 0) {
-        if (param_1[9] == 0) {
-          param_1[9] = 1;
+        if (translator[9] == 0) {
+          translator[9] = 1;
         }
         goto LAB_00040664;
       }
       *piVar9 = allocation;
-      param_1[0xc] = uVar2;
-      iVar3 = param_1[0xb];
+      translator[0xc] = uVar2;
+      iVar3 = translator[0xb];
     }
-    param_1[0xb] = iVar3 + 5;
+    translator[0xb] = iVar3 + 5;
     puVar1 = (undefined4 *)(iVar3 * 4 + *piVar9);
-    *puVar1 = *param_3;
-    puVar1[1] = param_3[1];
-    puVar1[2] = param_3[2];
-    puVar1[3] = param_3[3];
-    puVar1[4] = param_3[6];
+    *puVar1 = *ilInstr;
+    puVar1[1] = ilInstr[1];
+    puVar1[2] = ilInstr[2];
+    puVar1[3] = ilInstr[3];
+    puVar1[4] = ilInstr[6];
   }
 LAB_00040664:
   if (uVar5 < 3) goto LAB_000408d0;
@@ -1763,10 +1763,10 @@ LAB_00040664:
             uVar2 << 0xc |
             uVar4 << 0xb |
             uVar2 << 8 | uVar4 << 7 | uVar2 << 4 | uVar4 << 3 | uVar2 | *puVar7 & 0xffff0000;
-  if (param_1[9] == 0) {
-    piVar9 = param_1 + 10;
-    iVar3 = param_1[0xb];
-    uVar2 = param_1[0xc];
+  if (translator[9] == 0) {
+    piVar9 = translator + 10;
+    iVar3 = translator[0xb];
+    uVar2 = translator[0xc];
     if (uVar2 < iVar3 + 5U) {
       if (uVar2 == 0) {
         uVar2 = 0x10;
@@ -1783,22 +1783,22 @@ LAB_00040664:
         allocation = _realloc(*piVar9,uVar2 << 2);
       }
       if (allocation == 0) {
-        if (param_1[9] == 0) {
-          param_1[9] = 1;
+        if (translator[9] == 0) {
+          translator[9] = 1;
         }
         goto LAB_00040794;
       }
       *piVar9 = allocation;
-      param_1[0xc] = uVar2;
-      iVar3 = param_1[0xb];
+      translator[0xc] = uVar2;
+      iVar3 = translator[0xb];
     }
-    param_1[0xb] = iVar3 + 5;
+    translator[0xb] = iVar3 + 5;
     puVar1 = (undefined4 *)(iVar3 * 4 + *piVar9);
-    *puVar1 = *param_3;
-    puVar1[1] = param_3[1];
-    puVar1[2] = param_3[2];
-    puVar1[3] = param_3[3];
-    puVar1[4] = param_3[6];
+    *puVar1 = *ilInstr;
+    puVar1[1] = ilInstr[1];
+    puVar1[2] = ilInstr[2];
+    puVar1[3] = ilInstr[3];
+    puVar1[4] = ilInstr[6];
   }
 LAB_00040794:
   if (uVar5 == 4) {
@@ -1809,10 +1809,10 @@ LAB_00040794:
               uVar5 << 0xc |
               uVar8 << 0xb |
               uVar5 << 8 | uVar8 << 7 | uVar5 << 4 | uVar8 << 3 | uVar5 | *puVar7 & 0xffff0000;
-    if (param_1[9] == 0) {
-      piVar9 = param_1 + 10;
-      iVar3 = param_1[0xb];
-      uVar5 = param_1[0xc];
+    if (translator[9] == 0) {
+      piVar9 = translator + 10;
+      iVar3 = translator[0xb];
+      uVar5 = translator[0xc];
       if (uVar5 < iVar3 + 5U) {
         if (uVar5 == 0) {
           uVar5 = 0x10;
@@ -1829,41 +1829,41 @@ LAB_00040794:
           allocation = _realloc(*piVar9,uVar5 << 2);
         }
         if (allocation == 0) {
-          if (param_1[9] == 0) {
-            param_1[9] = 1;
+          if (translator[9] == 0) {
+            translator[9] = 1;
           }
           goto LAB_000408d0;
         }
         *piVar9 = allocation;
-        param_1[0xc] = uVar5;
-        iVar3 = param_1[0xb];
+        translator[0xc] = uVar5;
+        iVar3 = translator[0xb];
       }
-      param_1[0xb] = iVar3 + 5;
+      translator[0xb] = iVar3 + 5;
       puVar1 = (undefined4 *)(iVar3 * 4 + *piVar9);
-      *puVar1 = *param_3;
-      puVar1[1] = param_3[1];
-      puVar1[2] = param_3[2];
-      puVar1[3] = param_3[3];
-      puVar1[4] = param_3[6];
+      *puVar1 = *ilInstr;
+      puVar1[1] = ilInstr[1];
+      puVar1[2] = ilInstr[2];
+      puVar1[3] = ilInstr[3];
+      puVar1[4] = ilInstr[6];
     }
   }
 LAB_000408d0:
-  iVar3 = param_1[8];
-  param_3[3] = 0;
+  iVar3 = translator[8];
+  ilInstr[3] = 0;
   *puVar7 = 0;
-  param_3[3] = param_3[3] & 0xffc0ffff | 0x40000;
-  *(short *)((int)param_3 + 0xe) = (short)iVar3;
-  param_3[3] = param_3[3] | 0x400000;
+  ilInstr[3] = ilInstr[3] & 0xffc0ffff | 0x40000;
+  *(short *)((int)ilInstr + 0xe) = (short)iVar3;
+  ilInstr[3] = ilInstr[3] | 0x400000;
   *puVar7 = *puVar7 & 0xffff0000 | 0x3210;
-  *param_3 = 0;
-  param_3[1] = unaff_r22;
-  param_3[2] = unaff_r21;
-  *(undefined2 *)((int)param_3 + 2) = 0x47;
-  iVar3 = param_1[9];
+  *ilInstr = 0;
+  ilInstr[1] = unaff_r22;
+  ilInstr[2] = unaff_r21;
+  *(undefined2 *)((int)ilInstr + 2) = 0x47;
+  iVar3 = translator[9];
   if (iVar3 == 0) {
-    piVar9 = param_1 + 10;
-    iVar3 = param_1[0xb];
-    uVar5 = param_1[0xc];
+    piVar9 = translator + 10;
+    iVar3 = translator[0xb];
+    uVar5 = translator[0xc];
     if (uVar5 < iVar3 + 5U) {
       if (uVar5 == 0) {
         uVar5 = 0x10;
@@ -1880,24 +1880,24 @@ LAB_000408d0:
         allocation = _realloc(*piVar9,uVar5 << 2);
       }
       if (allocation == 0) {
-        if (param_1[9] != 0) {
-          return param_1[9];
+        if (translator[9] != 0) {
+          return translator[9];
         }
-        param_1[9] = 1;
+        translator[9] = 1;
         return 1;
       }
       *piVar9 = allocation;
-      param_1[0xc] = uVar5;
-      iVar3 = param_1[0xb];
+      translator[0xc] = uVar5;
+      iVar3 = translator[0xb];
     }
-    param_1[0xb] = iVar3 + 5;
+    translator[0xb] = iVar3 + 5;
     puVar1 = (undefined4 *)(iVar3 * 4 + *piVar9);
-    *puVar1 = *param_3;
-    puVar1[1] = param_3[1];
-    puVar1[2] = param_3[2];
-    puVar1[3] = param_3[3];
-    puVar1[4] = param_3[6];
-    iVar3 = param_1[9];
+    *puVar1 = *ilInstr;
+    puVar1[1] = ilInstr[1];
+    puVar1[2] = ilInstr[2];
+    puVar1[3] = ilInstr[3];
+    puVar1[4] = ilInstr[6];
+    iVar3 = translator[9];
   }
   return iVar3;
 }
@@ -2254,10 +2254,10 @@ LAB_00041170:
 }
 
 /* fragmentTranslateTrig @ 0x41310 (488 bytes) */
-int fragmentTranslateTrig(param_1, param_2, param_3)
-  int param_1;
-  undefined4 param_2;
-  int param_3;
+int fragmentTranslateTrig(translator, slot, ilInstr)
+  int translator;
+  undefined4 slot;
+  int ilInstr;
 {
   int allocation;
   undefined4 *puVar1;
@@ -2272,22 +2272,22 @@ int fragmentTranslateTrig(param_1, param_2, param_3)
   undefined4 uStack_4c;
   undefined4 uStack_40;
   
-  _memcpy(&uStack_58,param_3,0x24);
-  uVar5 = *(undefined4 *)(param_1 + 0x20);
-  *(undefined4 *)(param_3 + 0x18) = 0;
+  _memcpy(&uStack_58,ilInstr,0x24);
+  uVar5 = *(undefined4 *)(translator + 0x20);
+  *(undefined4 *)(ilInstr + 0x18) = 0;
   uVar2 = (undefined2)uVar5;
-  *(undefined4 *)(param_3 + 0xc) = 0x40000;
-  *(undefined2 *)(param_3 + 0xe) = uVar2;
+  *(undefined4 *)(ilInstr + 0xc) = 0x40000;
+  *(undefined2 *)(ilInstr + 0xe) = uVar2;
   uStack_50 = 0x55;
   uStack_54 = CONCAT22(4,uVar2);
   uStack_58 = 0x4d;
-  *(uint *)(param_3 + 0x18) = *(uint *)(param_3 + 0x18) & 0xffff0000 | 0x3210;
-  *(uint *)(param_3 + 0xc) = *(uint *)(param_3 + 0xc) | 0x400000;
+  *(uint *)(ilInstr + 0x18) = *(uint *)(ilInstr + 0x18) & 0xffff0000 | 0x3210;
+  *(uint *)(ilInstr + 0xc) = *(uint *)(ilInstr + 0xc) | 0x400000;
   uStack_54 = uStack_54 | 0x400000;
-  if (*(int *)(param_1 + 0x24) == 0) {
-    piVar6 = (int *)(param_1 + 0x28);
-    iVar4 = *(int *)(param_1 + 0x2c);
-    uVar3 = *(uint *)(param_1 + 0x30);
+  if (*(int *)(translator + 0x24) == 0) {
+    piVar6 = (int *)(translator + 0x28);
+    iVar4 = *(int *)(translator + 0x2c);
+    uVar3 = *(uint *)(translator + 0x30);
     if (uVar3 < iVar4 + 5U) {
       if (uVar3 == 0) {
         uVar3 = 0x10;
@@ -2304,16 +2304,16 @@ int fragmentTranslateTrig(param_1, param_2, param_3)
         allocation = _realloc(*piVar6,uVar3 << 2);
       }
       if (allocation == 0) {
-        if (*(int *)(param_1 + 0x24) == 0) {
-          *(undefined4 *)(param_1 + 0x24) = 1;
+        if (*(int *)(translator + 0x24) == 0) {
+          *(undefined4 *)(translator + 0x24) = 1;
         }
         goto LAB_000414c0;
       }
       *piVar6 = allocation;
-      *(uint *)(param_1 + 0x30) = uVar3;
-      iVar4 = *(int *)(param_1 + 0x2c);
+      *(uint *)(translator + 0x30) = uVar3;
+      iVar4 = *(int *)(translator + 0x2c);
     }
-    *(int *)(param_1 + 0x2c) = iVar4 + 5;
+    *(int *)(translator + 0x2c) = iVar4 + 5;
     puVar1 = (undefined4 *)(iVar4 * 4 + *piVar6);
     *puVar1 = uStack_58;
     puVar1[1] = uStack_54;
@@ -2322,10 +2322,10 @@ int fragmentTranslateTrig(param_1, param_2, param_3)
     puVar1[4] = uStack_40;
   }
 LAB_000414c0:
-  *(int *)(param_1 + 0x20) = *(int *)(param_1 + 0x20) + 1;
-  ((int (*)())fragmentTranslateScalarMath)(param_1,param_2,param_3);
-  *(int *)(param_1 + 0x20) = *(int *)(param_1 + 0x20) + -1;
-  return *(undefined4 *)(param_1 + 0x24);
+  *(int *)(translator + 0x20) = *(int *)(translator + 0x20) + 1;
+  ((int (*)())fragmentTranslateScalarMath)(translator,slot,ilInstr);
+  *(int *)(translator + 0x20) = *(int *)(translator + 0x20) + -1;
+  return *(undefined4 *)(translator + 0x24);
 }
 
 /* fragmentTranslateAngleConvert @ 0x41510 (548 bytes) */
@@ -2421,10 +2421,10 @@ LAB_00041698:
 }
 
 /* fragmentTranslateMod @ 0x41750 (1160 bytes) */
-int fragmentTranslateMod(param_1, param_2, param_3)
-  int param_1;
-  undefined4 param_2;
-  int param_3;
+int fragmentTranslateMod(translator, slot, ilInstr)
+  int translator;
+  undefined4 slot;
+  int ilInstr;
 {
   undefined4 *puVar1;
   undefined **ppuVar2;
@@ -2448,20 +2448,20 @@ int fragmentTranslateMod(param_1, param_2, param_3)
   undefined4 uStack_38;
   
   _memset(&uStack_58,0,0x24);
-  iVar7 = *(int *)(param_1 + 0x24);
-  uVar5 = (undefined2)*(undefined4 *)(param_1 + 0x20);
+  iVar7 = *(int *)(translator + 0x24);
+  uVar5 = (undefined2)*(undefined4 *)(translator + 0x20);
   uStack_54 = CONCAT22(4,uVar5);
   uStack_58 = CONCAT22((*(unsigned short *)((unsigned char *)&(uStack_58) + 0)),0x20);
   dStack_50 = 0x55;
-  uStack_4c = *(undefined **)(param_3 + 0xc);
-  puStack_40 = *(undefined **)(param_3 + 0x18);
-  uStack_48 = *(undefined4 *)(param_3 + 0x10);
-  uStack_3c = *(undefined4 *)(param_3 + 0x1c);
+  uStack_4c = *(undefined **)(ilInstr + 0xc);
+  puStack_40 = *(undefined **)(ilInstr + 0x18);
+  uStack_48 = *(undefined4 *)(ilInstr + 0x10);
+  uStack_3c = *(undefined4 *)(ilInstr + 0x1c);
   uStack_54 = uStack_54 | 0x400000;
   if (iVar7 == 0) {
-    piVar11 = (int *)(param_1 + 0x28);
-    iVar7 = *(int *)(param_1 + 0x2c);
-    uVar3 = *(uint *)(param_1 + 0x30);
+    piVar11 = (int *)(translator + 0x28);
+    iVar7 = *(int *)(translator + 0x2c);
+    uVar3 = *(uint *)(translator + 0x30);
     if (uVar3 < iVar7 + 7U) {
       if (uVar3 == 0) {
         uVar3 = 0x10;
@@ -2478,20 +2478,20 @@ int fragmentTranslateMod(param_1, param_2, param_3)
         iVar7 = _realloc(*piVar11,uVar3 << 2);
       }
       if (iVar7 == 0) {
-        iVar7 = *(int *)(param_1 + 0x24);
+        iVar7 = *(int *)(translator + 0x24);
         if (iVar7 == 0) {
           iVar7 = 1;
-          *(undefined4 *)(param_1 + 0x24) = 1;
+          *(undefined4 *)(translator + 0x24) = 1;
         }
-        uVar5 = (undefined2)*(undefined4 *)(param_1 + 0x20);
+        uVar5 = (undefined2)*(undefined4 *)(translator + 0x20);
         goto LAB_000418f0;
       }
       *piVar11 = iVar7;
-      *(uint *)(param_1 + 0x30) = uVar3;
-      iVar7 = *(int *)(param_1 + 0x2c);
+      *(uint *)(translator + 0x30) = uVar3;
+      iVar7 = *(int *)(translator + 0x2c);
     }
     puVar8 = &uStack_4c;
-    *(int *)(param_1 + 0x2c) = iVar7 + 7;
+    *(int *)(translator + 0x2c) = iVar7 + 7;
     puVar4 = (undefined4 *)(iVar7 * 4 + *piVar11);
     *puVar4 = uStack_58;
     puVar4[1] = uStack_54;
@@ -2503,8 +2503,8 @@ int fragmentTranslateMod(param_1, param_2, param_3)
       puVar4[4] = *puVar1;
       puVar4 = puVar4 + 2;
     } while (&uStack_44 != puVar8);
-    uVar5 = (undefined2)*(undefined4 *)(param_1 + 0x20);
-    iVar7 = *(int *)(param_1 + 0x24);
+    uVar5 = (undefined2)*(undefined4 *)(translator + 0x20);
+    iVar7 = *(int *)(translator + 0x24);
   }
 LAB_000418f0:
   uStack_4c = (undefined *)CONCAT22(4,uVar5);
@@ -2512,9 +2512,9 @@ LAB_000418f0:
   puStack_40 = ((unsigned char *)0x00003210);
   uStack_4c = (undefined *)((uint)uStack_4c | 0x400000);
   if (iVar7 == 0) {
-    piVar11 = (int *)(param_1 + 0x28);
-    iVar7 = *(int *)(param_1 + 0x2c);
-    uVar3 = *(uint *)(param_1 + 0x30);
+    piVar11 = (int *)(translator + 0x28);
+    iVar7 = *(int *)(translator + 0x2c);
+    uVar3 = *(uint *)(translator + 0x30);
     if (uVar3 < iVar7 + 5U) {
       if (uVar3 == 0) {
         uVar3 = 0x10;
@@ -2531,33 +2531,33 @@ LAB_000418f0:
         iVar7 = _realloc(*piVar11,uVar3 << 2);
       }
       if (iVar7 == 0) {
-        iVar7 = *(int *)(param_1 + 0x24);
+        iVar7 = *(int *)(translator + 0x24);
         if (iVar7 == 0) {
           iVar7 = 1;
-          *(undefined4 *)(param_1 + 0x24) = 1;
+          *(undefined4 *)(translator + 0x24) = 1;
         }
         goto LAB_00041a08;
       }
       *piVar11 = iVar7;
-      *(uint *)(param_1 + 0x30) = uVar3;
-      iVar7 = *(int *)(param_1 + 0x2c);
+      *(uint *)(translator + 0x30) = uVar3;
+      iVar7 = *(int *)(translator + 0x2c);
     }
-    *(int *)(param_1 + 0x2c) = iVar7 + 5;
+    *(int *)(translator + 0x2c) = iVar7 + 5;
     puVar4 = (undefined4 *)(iVar7 * 4 + *piVar11);
     *puVar4 = uStack_58;
     puVar4[1] = uStack_54;
     puVar4[2] = dStack_50;
     puVar4[3] = uStack_4c;
     puVar4[4] = puStack_40;
-    iVar7 = *(int *)(param_1 + 0x24);
+    iVar7 = *(int *)(translator + 0x24);
   }
 LAB_00041a08:
-  uVar3 = *(uint *)(param_3 + 0x1c);
-  dStack_50 = *(dword *)(param_3 + 8);
-  uStack_54 = *(dword *)(param_3 + 4);
-  uStack_48 = *(undefined4 *)(param_3 + 0x10);
-  uStack_44 = *(undefined4 *)(param_3 + 0xc);
-  uStack_38 = *(undefined4 *)(param_3 + 0x18);
+  uVar3 = *(uint *)(ilInstr + 0x1c);
+  dStack_50 = *(dword *)(ilInstr + 8);
+  uStack_54 = *(dword *)(ilInstr + 4);
+  uStack_48 = *(undefined4 *)(ilInstr + 0x10);
+  uStack_44 = *(undefined4 *)(ilInstr + 0xc);
+  uStack_38 = *(undefined4 *)(ilInstr + 0x18);
   uStack_58 = CONCAT22((*(unsigned short *)((unsigned char *)&(uStack_58) + 0)),0x40);
   uStack_3c = (uVar3 & 0xfffff777 ^ 0x8000) & 0x8000 |
               (uVar3 & 0xffffff77 ^ 0x800) & 0x800 |
@@ -2565,9 +2565,9 @@ LAB_00041a08:
   if (iVar7 != 0) {
     return iVar7;
   }
-  piVar11 = (int *)(param_1 + 0x28);
-  iVar7 = *(int *)(param_1 + 0x2c);
-  uVar3 = *(uint *)(param_1 + 0x30);
+  piVar11 = (int *)(translator + 0x28);
+  iVar7 = *(int *)(translator + 0x2c);
+  uVar3 = *(uint *)(translator + 0x30);
   if (uVar3 < iVar7 + 9U) {
     if (uVar3 == 0) {
       uVar3 = 0x10;
@@ -2584,10 +2584,10 @@ LAB_00041a08:
       iVar7 = _realloc(*piVar11,uVar3 << 2);
     }
     if (iVar7 == 0) {
-      iVar7 = *(int *)(param_1 + 0x24);
+      iVar7 = *(int *)(translator + 0x24);
       if (iVar7 == 0) {
         iVar7 = 1;
-        *(undefined4 *)(param_1 + 0x24) = 1;
+        *(undefined4 *)(translator + 0x24) = 1;
       }
       if (iVar7 != 0) {
         return iVar7;
@@ -2598,10 +2598,10 @@ LAB_00041a08:
       goto LAB_00041b48;
     }
     *piVar11 = iVar7;
-    *(uint *)(param_1 + 0x30) = uVar3;
-    iVar7 = *(int *)(param_1 + 0x2c);
+    *(uint *)(translator + 0x30) = uVar3;
+    iVar7 = *(int *)(translator + 0x2c);
   }
-  *(int *)(param_1 + 0x2c) = iVar7 + 9;
+  *(int *)(translator + 0x2c) = iVar7 + 9;
   puVar4 = (undefined4 *)(iVar7 * 4 + *piVar11);
   pdVar6 = puVar4 + 1;
   pdVar9 = puVar4 + 2;
@@ -3235,9 +3235,9 @@ LAB_00042bf0:
 }
 
 /* fragmentTranslateRfr @ 0x42e00 (4024 bytes) */
-int fragmentTranslateRfr(emitter, param_2, instr)
+int fragmentTranslateRfr(emitter, slot, instr)
   int emitter;
-  undefined4 param_2;
+  undefined4 slot;
   int instr;
 {
   undefined4 *puVar1;
@@ -3787,10 +3787,10 @@ LAB_00043be0:
 }
 
 /* fragmentTranslateFfw @ 0x43df0 (352 bytes) */
-int fragmentTranslateFfw(param_1, param_2, param_3)
-  int param_1;
-  undefined4 param_2;
-  undefined4 *param_3;
+int fragmentTranslateFfw(translator, slot, ilInstr)
+  int translator;
+  undefined4 slot;
+  undefined4 *ilInstr;
 {
   int allocation;
   undefined4 *puVar1;
@@ -3803,17 +3803,17 @@ int fragmentTranslateFfw(param_1, param_2, param_3)
   undefined4 *puVar8;
   int *piVar9;
   
-  uVar6 = param_3[5];
-  uVar7 = param_3[8];
-  param_3[5] = param_3[3];
-  param_3[8] = param_3[6];
-  param_3[3] = uVar6;
-  param_3[6] = uVar7;
-  iVar4 = *(int *)(param_1 + 0x24);
+  uVar6 = ilInstr[5];
+  uVar7 = ilInstr[8];
+  ilInstr[5] = ilInstr[3];
+  ilInstr[8] = ilInstr[6];
+  ilInstr[3] = uVar6;
+  ilInstr[6] = uVar7;
+  iVar4 = *(int *)(translator + 0x24);
   if (iVar4 == 0) {
-    piVar9 = (int *)(param_1 + 0x28);
-    iVar4 = *(int *)(param_1 + 0x2c);
-    uVar3 = *(uint *)(param_1 + 0x30);
+    piVar9 = (int *)(translator + 0x28);
+    iVar4 = *(int *)(translator + 0x2c);
+    uVar3 = *(uint *)(translator + 0x30);
     if (uVar3 < iVar4 + 9U) {
       if (uVar3 == 0) {
         uVar3 = 0x10;
@@ -3830,41 +3830,41 @@ int fragmentTranslateFfw(param_1, param_2, param_3)
         allocation = _realloc(*piVar9,uVar3 << 2);
       }
       if (allocation == 0) {
-        if (*(int *)(param_1 + 0x24) != 0) {
-          return *(int *)(param_1 + 0x24);
+        if (*(int *)(translator + 0x24) != 0) {
+          return *(int *)(translator + 0x24);
         }
-        *(undefined4 *)(param_1 + 0x24) = 1;
+        *(undefined4 *)(translator + 0x24) = 1;
         return 1;
       }
       *piVar9 = allocation;
-      *(uint *)(param_1 + 0x30) = uVar3;
-      iVar4 = *(int *)(param_1 + 0x2c);
+      *(uint *)(translator + 0x30) = uVar3;
+      iVar4 = *(int *)(translator + 0x2c);
     }
     iVar5 = 0;
-    *(int *)(param_1 + 0x2c) = iVar4 + 9;
+    *(int *)(translator + 0x2c) = iVar4 + 9;
     puVar8 = (undefined4 *)(iVar4 * 4 + *piVar9);
-    *puVar8 = *param_3;
-    puVar8[1] = param_3[1];
-    puVar8[2] = param_3[2];
+    *puVar8 = *ilInstr;
+    puVar8[1] = ilInstr[1];
+    puVar8[2] = ilInstr[2];
     do {
       bVar2 = iVar5 != 2;
       iVar5 = iVar5 + 1;
-      puVar8[3] = param_3[3];
-      puVar1 = param_3 + 6;
-      param_3 = param_3 + 1;
+      puVar8[3] = ilInstr[3];
+      puVar1 = ilInstr + 6;
+      ilInstr = ilInstr + 1;
       puVar8[4] = *puVar1;
       puVar8 = puVar8 + 2;
     } while (bVar2);
-    iVar4 = *(int *)(param_1 + 0x24);
+    iVar4 = *(int *)(translator + 0x24);
   }
   return iVar4;
 }
 
 /* fragmentTranslateDst @ 0x43f60 (996 bytes) */
-int fragmentTranslateDst(param_1, param_2, param_3)
-  int param_1;
-  undefined4 param_2;
-  undefined4 *param_3;
+int fragmentTranslateDst(translator, slot, ilInstr)
+  int translator;
+  undefined4 slot;
+  undefined4 *ilInstr;
 {
   int allocation;
   undefined4 *puVar1;
@@ -3879,32 +3879,32 @@ int fragmentTranslateDst(param_1, param_2, param_3)
   undefined4 uVar10;
   int *piVar11;
   
-  if ((*(uint *)(param_1 + 0x14) & 0x20000000) == 0) {
-    *(undefined2 *)((int)param_3 + 2) = 0x24;
-    if (*(int *)(param_1 + 0x24) != 0) {
-      return *(int *)(param_1 + 0x24);
+  if ((*(uint *)(translator + 0x14) & 0x20000000) == 0) {
+    *(undefined2 *)((int)ilInstr + 2) = 0x24;
+    if (*(int *)(translator + 0x24) != 0) {
+      return *(int *)(translator + 0x24);
     }
-    piVar11 = (int *)(param_1 + 0x28);
-    iVar4 = *(int *)(param_1 + 0x2c);
-    uVar3 = *(uint *)(param_1 + 0x30);
+    piVar11 = (int *)(translator + 0x28);
+    iVar4 = *(int *)(translator + 0x2c);
+    uVar3 = *(uint *)(translator + 0x30);
     if (iVar4 + 7U <= uVar3) {
 LAB_000442bc:
       iVar5 = 0;
-      *(int *)(param_1 + 0x2c) = iVar4 + 7;
+      *(int *)(translator + 0x2c) = iVar4 + 7;
       puVar8 = (undefined4 *)(iVar4 * 4 + *piVar11);
-      *puVar8 = *param_3;
-      puVar8[1] = param_3[1];
-      puVar8[2] = param_3[2];
+      *puVar8 = *ilInstr;
+      puVar8[1] = ilInstr[1];
+      puVar8[2] = ilInstr[2];
       do {
         bVar2 = iVar5 != 1;
         iVar5 = iVar5 + 1;
-        puVar8[3] = param_3[3];
-        puVar6 = param_3 + 6;
-        param_3 = param_3 + 1;
+        puVar8[3] = ilInstr[3];
+        puVar6 = ilInstr + 6;
+        ilInstr = ilInstr + 1;
         puVar8[4] = *puVar6;
         puVar8 = puVar8 + 2;
       } while (bVar2);
-      return *(int *)(param_1 + 0x24);
+      return *(int *)(translator + 0x24);
     }
     if (uVar3 == 0) {
       uVar3 = 0x10;
@@ -3922,23 +3922,23 @@ LAB_000442bc:
     }
     if (allocation != 0) {
       *piVar11 = allocation;
-      *(uint *)(param_1 + 0x30) = uVar3;
-      iVar4 = *(int *)(param_1 + 0x2c);
+      *(uint *)(translator + 0x30) = uVar3;
+      iVar4 = *(int *)(translator + 0x2c);
       goto LAB_000442bc;
     }
     goto LAB_0004432c;
   }
-  uVar7 = *(undefined4 *)(param_1 + 0x20);
-  uVar10 = param_3[1];
-  uVar9 = param_3[2];
-  param_3[1] = 0x40000;
-  *(short *)((int)param_3 + 6) = (short)uVar7;
-  param_3[2] = 0x55;
-  param_3[1] = param_3[1] | 0x400000;
-  if (*(int *)(param_1 + 0x24) == 0) {
-    piVar11 = (int *)(param_1 + 0x28);
-    iVar4 = *(int *)(param_1 + 0x2c);
-    uVar3 = *(uint *)(param_1 + 0x30);
+  uVar7 = *(undefined4 *)(translator + 0x20);
+  uVar10 = ilInstr[1];
+  uVar9 = ilInstr[2];
+  ilInstr[1] = 0x40000;
+  *(short *)((int)ilInstr + 6) = (short)uVar7;
+  ilInstr[2] = 0x55;
+  ilInstr[1] = ilInstr[1] | 0x400000;
+  if (*(int *)(translator + 0x24) == 0) {
+    piVar11 = (int *)(translator + 0x28);
+    iVar4 = *(int *)(translator + 0x2c);
+    uVar3 = *(uint *)(translator + 0x30);
     if (uVar3 < iVar4 + 7U) {
       if (uVar3 == 0) {
         uVar3 = 0x10;
@@ -3955,22 +3955,22 @@ LAB_000442bc:
         allocation = _realloc(*piVar11,uVar3 << 2);
       }
       if (allocation == 0) {
-        if (*(int *)(param_1 + 0x24) == 0) {
-          *(undefined4 *)(param_1 + 0x24) = 1;
+        if (*(int *)(translator + 0x24) == 0) {
+          *(undefined4 *)(translator + 0x24) = 1;
         }
         goto LAB_000440e0;
       }
       *piVar11 = allocation;
-      *(uint *)(param_1 + 0x30) = uVar3;
-      iVar4 = *(int *)(param_1 + 0x2c);
+      *(uint *)(translator + 0x30) = uVar3;
+      iVar4 = *(int *)(translator + 0x2c);
     }
     iVar5 = 0;
-    *(int *)(param_1 + 0x2c) = iVar4 + 7;
+    *(int *)(translator + 0x2c) = iVar4 + 7;
     puVar8 = (undefined4 *)(iVar4 * 4 + *piVar11);
-    *puVar8 = *param_3;
-    puVar8[1] = param_3[1];
-    puVar8[2] = param_3[2];
-    puVar6 = param_3;
+    *puVar8 = *ilInstr;
+    puVar8[1] = ilInstr[1];
+    puVar8[2] = ilInstr[2];
+    puVar6 = ilInstr;
     do {
       bVar2 = iVar5 != 1;
       iVar5 = iVar5 + 1;
@@ -3982,21 +3982,21 @@ LAB_000442bc:
     } while (bVar2);
   }
 LAB_000440e0:
-  param_3[1] = uVar10;
-  param_3[2] = uVar9;
-  *param_3 = 0;
-  *(undefined2 *)((int)param_3 + 2) = 0x38;
-  uVar7 = *(undefined4 *)(param_1 + 0x20);
-  param_3[3] = 0x40000;
-  *(short *)((int)param_3 + 0xe) = (short)uVar7;
-  param_3[6] = ((unsigned char *)0x00003210);
-  param_3[3] = param_3[3] | 0x400000;
-  if (*(int *)(param_1 + 0x24) != 0) {
-    return *(int *)(param_1 + 0x24);
+  ilInstr[1] = uVar10;
+  ilInstr[2] = uVar9;
+  *ilInstr = 0;
+  *(undefined2 *)((int)ilInstr + 2) = 0x38;
+  uVar7 = *(undefined4 *)(translator + 0x20);
+  ilInstr[3] = 0x40000;
+  *(short *)((int)ilInstr + 0xe) = (short)uVar7;
+  ilInstr[6] = ((unsigned char *)0x00003210);
+  ilInstr[3] = ilInstr[3] | 0x400000;
+  if (*(int *)(translator + 0x24) != 0) {
+    return *(int *)(translator + 0x24);
   }
-  piVar11 = (int *)(param_1 + 0x28);
-  iVar4 = *(int *)(param_1 + 0x2c);
-  uVar3 = *(uint *)(param_1 + 0x30);
+  piVar11 = (int *)(translator + 0x28);
+  iVar4 = *(int *)(translator + 0x2c);
+  uVar3 = *(uint *)(translator + 0x30);
   if (uVar3 < iVar4 + 5U) {
     if (uVar3 == 0) {
       uVar3 = 0x10;
@@ -4014,31 +4014,31 @@ LAB_000440e0:
     }
     if (allocation == 0) {
 LAB_0004432c:
-      if (*(int *)(param_1 + 0x24) == 0) {
-        *(undefined4 *)(param_1 + 0x24) = 1;
+      if (*(int *)(translator + 0x24) == 0) {
+        *(undefined4 *)(translator + 0x24) = 1;
         return 1;
       }
-      return *(int *)(param_1 + 0x24);
+      return *(int *)(translator + 0x24);
     }
     *piVar11 = allocation;
-    *(uint *)(param_1 + 0x30) = uVar3;
-    iVar4 = *(int *)(param_1 + 0x2c);
+    *(uint *)(translator + 0x30) = uVar3;
+    iVar4 = *(int *)(translator + 0x2c);
   }
-  *(int *)(param_1 + 0x2c) = iVar4 + 5;
+  *(int *)(translator + 0x2c) = iVar4 + 5;
   puVar8 = (undefined4 *)(iVar4 * 4 + *piVar11);
-  *puVar8 = *param_3;
-  puVar8[1] = param_3[1];
-  puVar8[2] = param_3[2];
-  puVar8[3] = param_3[3];
-  puVar8[4] = param_3[6];
-  return *(int *)(param_1 + 0x24);
+  *puVar8 = *ilInstr;
+  puVar8[1] = ilInstr[1];
+  puVar8[2] = ilInstr[2];
+  puVar8[3] = ilInstr[3];
+  puVar8[4] = ilInstr[6];
+  return *(int *)(translator + 0x24);
 }
 
 /* fragmentTranslateIf @ 0x44360 (388 bytes) */
-int fragmentTranslateIf(param_1, param_2, param_3)
-  int param_1;
-  undefined4 param_2;
-  undefined4 *param_3;
+int fragmentTranslateIf(translator, slot, ilInstr)
+  int translator;
+  undefined4 slot;
+  undefined4 *ilInstr;
 {
   int allocation;
   undefined4 *puVar1;
@@ -4048,16 +4048,16 @@ int fragmentTranslateIf(param_1, param_2, param_3)
   undefined4 *puVar5;
   int *piVar6;
   
-  param_3[4] = 0x40000;
-  *(undefined2 *)((int)param_3 + 0x12) = 0;
-  param_3[7] = ((unsigned char *)0x00004444);
-  param_3[4] = param_3[4] | 0x400000;
-  if (*(int *)(param_1 + 0x24) != 0) {
-    return *(int *)(param_1 + 0x24);
+  ilInstr[4] = 0x40000;
+  *(undefined2 *)((int)ilInstr + 0x12) = 0;
+  ilInstr[7] = ((unsigned char *)0x00004444);
+  ilInstr[4] = ilInstr[4] | 0x400000;
+  if (*(int *)(translator + 0x24) != 0) {
+    return *(int *)(translator + 0x24);
   }
-  piVar6 = (int *)(param_1 + 0x28);
-  iVar4 = *(int *)(param_1 + 0x2c);
-  uVar3 = *(uint *)(param_1 + 0x30);
+  piVar6 = (int *)(translator + 0x28);
+  iVar4 = *(int *)(translator + 0x2c);
+  uVar3 = *(uint *)(translator + 0x30);
   if (uVar3 < iVar4 + 5U) {
     if (uVar3 == 0) {
       uVar3 = 0x10;
@@ -4074,10 +4074,10 @@ int fragmentTranslateIf(param_1, param_2, param_3)
       allocation = _realloc(*piVar6,uVar3 << 2);
     }
     if (allocation == 0) {
-      iVar4 = *(int *)(param_1 + 0x24);
+      iVar4 = *(int *)(translator + 0x24);
       if (iVar4 == 0) {
         iVar4 = 1;
-        *(undefined4 *)(param_1 + 0x24) = 1;
+        *(undefined4 *)(translator + 0x24) = 1;
       }
       puVar5 = (undefined4 *)0x0;
       if (iVar4 != 0) {
@@ -4086,20 +4086,20 @@ int fragmentTranslateIf(param_1, param_2, param_3)
       goto LAB_00044460;
     }
     *piVar6 = allocation;
-    *(uint *)(param_1 + 0x30) = uVar3;
-    iVar4 = *(int *)(param_1 + 0x2c);
+    *(uint *)(translator + 0x30) = uVar3;
+    iVar4 = *(int *)(translator + 0x2c);
   }
-  *(int *)(param_1 + 0x2c) = iVar4 + 5;
+  *(int *)(translator + 0x2c) = iVar4 + 5;
   puVar5 = (undefined4 *)(iVar4 * 4 + *piVar6);
 LAB_00044460:
   iVar4 = 0;
-  *puVar5 = *param_3;
+  *puVar5 = *ilInstr;
   do {
     bVar2 = iVar4 != 1;
     iVar4 = iVar4 + 1;
-    puVar5[1] = param_3[3];
-    puVar1 = param_3 + 6;
-    param_3 = param_3 + 1;
+    puVar5[1] = ilInstr[3];
+    puVar1 = ilInstr + 6;
+    ilInstr = ilInstr + 1;
     puVar5[2] = *puVar1;
     puVar5 = puVar5 + 2;
   } while (bVar2);
@@ -4107,10 +4107,10 @@ LAB_00044460:
 }
 
 /* fragmentTranslateRfl @ 0x44500 (1432 bytes) */
-int fragmentTranslateRfl(param_1, param_2, param_3)
-  int param_1;
-  undefined4 param_2;
-  int param_3;
+int fragmentTranslateRfl(translator, slot, ilInstr)
+  int translator;
+  undefined4 slot;
+  int ilInstr;
 {
   int allocation;
   undefined4 *puVar1;
@@ -4130,20 +4130,20 @@ int fragmentTranslateRfl(param_1, param_2, param_3)
   undefined *puStack_3c;
   
   _memset(&uStack_58,0,0x24);
-  iVar3 = *(int *)(param_1 + 0x24);
-  uVar4 = (undefined2)*(undefined4 *)(param_1 + 0x20);
+  iVar3 = *(int *)(translator + 0x24);
+  uVar4 = (undefined2)*(undefined4 *)(translator + 0x20);
   uStack_54 = CONCAT22(4,uVar4);
   uStack_58 = CONCAT22((*(unsigned short *)((unsigned char *)&(uStack_58) + 0)),0x23);
   uStack_50 = 0x55;
-  uStack_4c = *(undefined4 *)(param_3 + 0xc);
-  puStack_40 = (undefined *)*(undefined4 *)(param_3 + 0x18);
-  uStack_48 = *(undefined4 *)(param_3 + 0x10);
-  puStack_3c = (undefined *)*(undefined4 *)(param_3 + 0x1c);
+  uStack_4c = *(undefined4 *)(ilInstr + 0xc);
+  puStack_40 = (undefined *)*(undefined4 *)(ilInstr + 0x18);
+  uStack_48 = *(undefined4 *)(ilInstr + 0x10);
+  puStack_3c = (undefined *)*(undefined4 *)(ilInstr + 0x1c);
   uStack_54 = uStack_54 | 0x400000;
   if (iVar3 == 0) {
-    piVar7 = (int *)(param_1 + 0x28);
-    iVar3 = *(int *)(param_1 + 0x2c);
-    uVar2 = *(uint *)(param_1 + 0x30);
+    piVar7 = (int *)(translator + 0x28);
+    iVar3 = *(int *)(translator + 0x2c);
+    uVar2 = *(uint *)(translator + 0x30);
     if (uVar2 < iVar3 + 7U) {
       if (uVar2 == 0) {
         uVar2 = 0x10;
@@ -4160,20 +4160,20 @@ int fragmentTranslateRfl(param_1, param_2, param_3)
         allocation = _realloc(*piVar7,uVar2 << 2);
       }
       if (allocation == 0) {
-        iVar3 = *(int *)(param_1 + 0x24);
+        iVar3 = *(int *)(translator + 0x24);
         if (iVar3 == 0) {
           iVar3 = 1;
-          *(undefined4 *)(param_1 + 0x24) = 1;
+          *(undefined4 *)(translator + 0x24) = 1;
         }
-        uVar4 = (undefined2)*(undefined4 *)(param_1 + 0x20);
+        uVar4 = (undefined2)*(undefined4 *)(translator + 0x20);
         goto LAB_000446a0;
       }
       *piVar7 = allocation;
-      *(uint *)(param_1 + 0x30) = uVar2;
-      iVar3 = *(int *)(param_1 + 0x2c);
+      *(uint *)(translator + 0x30) = uVar2;
+      iVar3 = *(int *)(translator + 0x2c);
     }
     puVar5 = &uStack_4c;
-    *(int *)(param_1 + 0x2c) = iVar3 + 7;
+    *(int *)(translator + 0x2c) = iVar3 + 7;
     puVar6 = (undefined4 *)(iVar3 * 4 + *piVar7);
     *puVar6 = uStack_58;
     puVar6[1] = uStack_54;
@@ -4185,8 +4185,8 @@ int fragmentTranslateRfl(param_1, param_2, param_3)
       puVar6[4] = *puVar1;
       puVar6 = puVar6 + 2;
     } while (&uStack_44 != puVar5);
-    uVar4 = (undefined2)*(undefined4 *)(param_1 + 0x20);
-    iVar3 = *(int *)(param_1 + 0x24);
+    uVar4 = (undefined2)*(undefined4 *)(translator + 0x20);
+    iVar3 = *(int *)(translator + 0x24);
   }
 LAB_000446a0:
   uStack_4c = CONCAT22(4,uVar4);
@@ -4194,9 +4194,9 @@ LAB_000446a0:
   puStack_40 = ((unsigned char *)0x00003210);
   uStack_4c = uStack_4c | 0x400000;
   if (iVar3 == 0) {
-    piVar7 = (int *)(param_1 + 0x28);
-    iVar3 = *(int *)(param_1 + 0x2c);
-    uVar2 = *(uint *)(param_1 + 0x30);
+    piVar7 = (int *)(translator + 0x28);
+    iVar3 = *(int *)(translator + 0x2c);
+    uVar2 = *(uint *)(translator + 0x30);
     if (uVar2 < iVar3 + 7U) {
       if (uVar2 == 0) {
         uVar2 = 0x10;
@@ -4213,20 +4213,20 @@ LAB_000446a0:
         allocation = _realloc(*piVar7,uVar2 << 2);
       }
       if (allocation == 0) {
-        iVar3 = *(int *)(param_1 + 0x24);
+        iVar3 = *(int *)(translator + 0x24);
         if (iVar3 == 0) {
           iVar3 = 1;
-          *(undefined4 *)(param_1 + 0x24) = 1;
+          *(undefined4 *)(translator + 0x24) = 1;
         }
-        uVar4 = (undefined2)*(undefined4 *)(param_1 + 0x20);
+        uVar4 = (undefined2)*(undefined4 *)(translator + 0x20);
         goto LAB_00044810;
       }
       *piVar7 = allocation;
-      *(uint *)(param_1 + 0x30) = uVar2;
-      iVar3 = *(int *)(param_1 + 0x2c);
+      *(uint *)(translator + 0x30) = uVar2;
+      iVar3 = *(int *)(translator + 0x2c);
     }
     puVar5 = &uStack_4c;
-    *(int *)(param_1 + 0x2c) = iVar3 + 7;
+    *(int *)(translator + 0x2c) = iVar3 + 7;
     puVar6 = (undefined4 *)(iVar3 * 4 + *piVar7);
     *puVar6 = uStack_58;
     puVar6[1] = uStack_54;
@@ -4238,8 +4238,8 @@ LAB_000446a0:
       puVar6[4] = *puVar1;
       puVar6 = puVar6 + 2;
     } while (&uStack_44 != puVar5);
-    uVar4 = (undefined2)*(undefined4 *)(param_1 + 0x20);
-    iVar3 = *(int *)(param_1 + 0x24);
+    uVar4 = (undefined2)*(undefined4 *)(translator + 0x20);
+    iVar3 = *(int *)(translator + 0x24);
   }
 LAB_00044810:
   uStack_48 = CONCAT22(4,uVar4);
@@ -4247,9 +4247,9 @@ LAB_00044810:
   puStack_3c = ((unsigned char *)0x00003210);
   uStack_48 = uStack_48 | 0x400000;
   if (iVar3 == 0) {
-    piVar7 = (int *)(param_1 + 0x28);
-    iVar3 = *(int *)(param_1 + 0x2c);
-    uVar2 = *(uint *)(param_1 + 0x30);
+    piVar7 = (int *)(translator + 0x28);
+    iVar3 = *(int *)(translator + 0x2c);
+    uVar2 = *(uint *)(translator + 0x30);
     if (uVar2 < iVar3 + 7U) {
       if (uVar2 == 0) {
         uVar2 = 0x10;
@@ -4266,19 +4266,19 @@ LAB_00044810:
         allocation = _realloc(*piVar7,uVar2 << 2);
       }
       if (allocation == 0) {
-        iVar3 = *(int *)(param_1 + 0x24);
+        iVar3 = *(int *)(translator + 0x24);
         if (iVar3 == 0) {
           iVar3 = 1;
-          *(undefined4 *)(param_1 + 0x24) = 1;
+          *(undefined4 *)(translator + 0x24) = 1;
         }
         goto LAB_00044970;
       }
       *piVar7 = allocation;
-      *(uint *)(param_1 + 0x30) = uVar2;
-      iVar3 = *(int *)(param_1 + 0x2c);
+      *(uint *)(translator + 0x30) = uVar2;
+      iVar3 = *(int *)(translator + 0x2c);
     }
     puVar5 = &uStack_4c;
-    *(int *)(param_1 + 0x2c) = iVar3 + 7;
+    *(int *)(translator + 0x2c) = iVar3 + 7;
     puVar6 = (undefined4 *)(iVar3 * 4 + *piVar7);
     *puVar6 = uStack_58;
     puVar6[1] = uStack_54;
@@ -4290,18 +4290,18 @@ LAB_00044810:
       puVar6[4] = *puVar1;
       puVar6 = puVar6 + 2;
     } while (puVar5 != &uStack_44);
-    iVar3 = *(int *)(param_1 + 0x24);
+    iVar3 = *(int *)(translator + 0x24);
   }
 LAB_00044970:
-  uStack_54 = *(undefined4 *)(param_3 + 4);
-  uStack_50 = *(undefined4 *)(param_3 + 8);
+  uStack_54 = *(undefined4 *)(ilInstr + 4);
+  uStack_50 = *(undefined4 *)(ilInstr + 8);
   uStack_58 = CONCAT22((*(unsigned short *)((unsigned char *)&(uStack_58) + 0)),0x5b);
-  puStack_40 = (undefined *)*(undefined4 *)(param_3 + 0x18);
-  uStack_4c = *(undefined4 *)(param_3 + 0xc);
+  puStack_40 = (undefined *)*(undefined4 *)(ilInstr + 0x18);
+  uStack_4c = *(undefined4 *)(ilInstr + 0xc);
   if (iVar3 == 0) {
-    piVar7 = (int *)(param_1 + 0x28);
-    iVar3 = *(int *)(param_1 + 0x2c);
-    uVar2 = *(uint *)(param_1 + 0x30);
+    piVar7 = (int *)(translator + 0x28);
+    iVar3 = *(int *)(translator + 0x2c);
+    uVar2 = *(uint *)(translator + 0x30);
     if (uVar2 < iVar3 + 7U) {
       if (uVar2 == 0) {
         uVar2 = 0x10;
@@ -4318,18 +4318,18 @@ LAB_00044970:
         allocation = _realloc(*piVar7,uVar2 << 2);
       }
       if (allocation == 0) {
-        if (*(int *)(param_1 + 0x24) != 0) {
-          return *(int *)(param_1 + 0x24);
+        if (*(int *)(translator + 0x24) != 0) {
+          return *(int *)(translator + 0x24);
         }
-        *(undefined4 *)(param_1 + 0x24) = 1;
+        *(undefined4 *)(translator + 0x24) = 1;
         return 1;
       }
       *piVar7 = allocation;
-      *(uint *)(param_1 + 0x30) = uVar2;
-      iVar3 = *(int *)(param_1 + 0x2c);
+      *(uint *)(translator + 0x30) = uVar2;
+      iVar3 = *(int *)(translator + 0x2c);
     }
     puVar5 = &uStack_4c;
-    *(int *)(param_1 + 0x2c) = iVar3 + 7;
+    *(int *)(translator + 0x2c) = iVar3 + 7;
     puVar6 = (undefined4 *)(iVar3 * 4 + *piVar7);
     *puVar6 = uStack_58;
     puVar6[1] = uStack_54;
@@ -4341,16 +4341,16 @@ LAB_00044970:
       puVar6[4] = *puVar1;
       puVar6 = puVar6 + 2;
     } while (puVar5 != &uStack_44);
-    iVar3 = *(int *)(param_1 + 0x24);
+    iVar3 = *(int *)(translator + 0x24);
   }
   return iVar3;
 }
 
 /* fragmentTranslateWhile @ 0x44ac0 (440 bytes) */
-int fragmentTranslateWhile(param_1, param_2, param_3)
-  int param_1;
-  undefined4 param_2;
-  undefined4 *param_3;
+int fragmentTranslateWhile(translator, slot, ilInstr)
+  int translator;
+  undefined4 slot;
+  undefined4 *ilInstr;
 {
   int allocation;
   uint uVar1;
@@ -4361,23 +4361,23 @@ int fragmentTranslateWhile(param_1, param_2, param_3)
   int *piVar6;
   uint auStack_38 [9];
   
-  uVar1 = *(uint *)(param_1 + 0x14);
+  uVar1 = *(uint *)(translator + 0x14);
   if ((uVar1 & 0x100000) == 0) {
     auStack_38[0] = uVar1 & 0x100000;
-    ((int (*)())FUN_0003eea0)(param_1,0xff,auStack_38);
-    uVar1 = (auStack_38[0] & 0x1f) << 0xf | *(uint *)(param_1 + 0x14) & 0xfff07fff | 0x100000;
-    *(uint *)(param_1 + 0x14) = uVar1;
+    ((int (*)())FUN_0003eea0)(translator,0xff,auStack_38);
+    uVar1 = (auStack_38[0] & 0x1f) << 0xf | *(uint *)(translator + 0x14) & 0xfff07fff | 0x100000;
+    *(uint *)(translator + 0x14) = uVar1;
   }
-  param_3[3] = 0x40000;
-  *(ushort *)((int)param_3 + 0xe) = (ushort)(uVar1 >> 0xf) & 0x1f;
-  param_3[6] = ((unsigned char *)0x00003210);
-  param_3[3] = param_3[3] & 0xffc0ffff | 0x420000;
-  if (*(int *)(param_1 + 0x24) != 0) {
-    return *(int *)(param_1 + 0x24);
+  ilInstr[3] = 0x40000;
+  *(ushort *)((int)ilInstr + 0xe) = (ushort)(uVar1 >> 0xf) & 0x1f;
+  ilInstr[6] = ((unsigned char *)0x00003210);
+  ilInstr[3] = ilInstr[3] & 0xffc0ffff | 0x420000;
+  if (*(int *)(translator + 0x24) != 0) {
+    return *(int *)(translator + 0x24);
   }
-  piVar6 = (int *)(param_1 + 0x28);
-  iVar2 = *(int *)(param_1 + 0x2c);
-  uVar1 = *(uint *)(param_1 + 0x30);
+  piVar6 = (int *)(translator + 0x28);
+  iVar2 = *(int *)(translator + 0x2c);
+  uVar1 = *(uint *)(translator + 0x30);
   if (uVar1 < iVar2 + 3U) {
     if (uVar1 == 0) {
       uVar1 = 0x10;
@@ -4394,10 +4394,10 @@ int fragmentTranslateWhile(param_1, param_2, param_3)
       allocation = _realloc(*piVar6,uVar1 << 2);
     }
     if (allocation == 0) {
-      iVar2 = *(int *)(param_1 + 0x24);
+      iVar2 = *(int *)(translator + 0x24);
       if (iVar2 == 0) {
         iVar2 = 1;
-        *(undefined4 *)(param_1 + 0x24) = 1;
+        *(undefined4 *)(translator + 0x24) = 1;
       }
       if (iVar2 != 0) {
         return iVar2;
@@ -4408,17 +4408,17 @@ int fragmentTranslateWhile(param_1, param_2, param_3)
       goto LAB_00044c08;
     }
     *piVar6 = allocation;
-    *(uint *)(param_1 + 0x30) = uVar1;
-    iVar2 = *(int *)(param_1 + 0x2c);
+    *(uint *)(translator + 0x30) = uVar1;
+    iVar2 = *(int *)(translator + 0x2c);
   }
-  *(int *)(param_1 + 0x2c) = iVar2 + 3;
+  *(int *)(translator + 0x2c) = iVar2 + 3;
   puVar3 = (undefined4 *)(iVar2 * 4 + *piVar6);
   pdVar5 = puVar3 + 1;
   pdVar4 = puVar3 + 2;
 LAB_00044c08:
-  *puVar3 = *param_3;
-  *pdVar5 = param_3[3];
-  *pdVar4 = param_3[6];
+  *puVar3 = *ilInstr;
+  *pdVar5 = ilInstr[3];
+  *pdVar4 = ilInstr[6];
   return 0;
 }
 
@@ -7604,13 +7604,13 @@ LAB_0004a7b4:
 }
 
 /* floatToFp24 @ 0x4a7d0 (80 bytes) */
-uint floatToFp24(double fparam_1)
+uint floatToFp24(double value)
 {
   float fVar1;
   uint uVar2;
   uint uVar3;
   
-  fVar1 = (float)fparam_1;
+  fVar1 = (float)value;
   uVar2 = (uint)GH_F2U(fVar1) >> 0x17 & 0xff;
   uVar3 = (uint)GH_F2U(fVar1) >> 8 & 0x800000;
   if (uVar2 < 0x41) {
@@ -7623,10 +7623,10 @@ uint floatToFp24(double fparam_1)
 }
 
 /* fp24ToFloat @ 0x4a830 (40 bytes) */
-double fp24ToFloat(uint param_1)
+double fp24ToFloat(uint fp24Bits)
 {
-  return (double)GH_U2F((unsigned int)(((param_1 & 0x800000) << 8 | ((param_1 >> 0x10 & 0x7f) + 0x40) * 0x800000 |
-                        (param_1 & 0xffff) << 7)));
+  return (double)GH_U2F((unsigned int)(((fp24Bits & 0x800000) << 8 | ((fp24Bits >> 0x10 & 0x7f) + 0x40) * 0x800000 |
+                        (fp24Bits & 0xffff) << 7)));
 }
 
 /* FUN_0004a860 @ 0x4a860 (112 bytes) */

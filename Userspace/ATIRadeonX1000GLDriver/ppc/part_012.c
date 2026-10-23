@@ -3346,8 +3346,8 @@ LAB_00087474:
   return;
 }
 
-/* FUN_00087800 @ 0x87800 (344 bytes) */
-int FUN_00087800(param_1, param_2, param_3, param_4)
+/* arbfpUpdateConstantsFp24 @ 0x87800 (344 bytes) */
+int arbfpUpdateConstantsFp24(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -3403,8 +3403,8 @@ int FUN_00087800(param_1, param_2, param_3, param_4)
   return;
 }
 
-/* FUN_00087960 @ 0x87960 (120 bytes) */
-int FUN_00087960(param_1)
+/* arbfpInitResourceLimits @ 0x87960 (120 bytes) */
+int arbfpInitResourceLimits(param_1)
   int param_1;
 {
   *(undefined4 *)(((unsigned char *)0x0000120cU) + param_1) = 0x1ff;
@@ -4721,7 +4721,7 @@ asm(".set FUN_000862b0, _arbEmitRecord2Src_op45");
 asm(".globl FUN_000864e0");
 asm(".set FUN_000864e0, _arbEmitRecord2Src_op4f");
 asm(".globl FUN_00087960");
-asm(".set FUN_00087960, _FUN_00087960");
+asm(".set FUN_00087960, _arbfpInitResourceLimits");
 asm(".globl FUN_000879e0");
 asm(".set FUN_000879e0, _noop_879e0");
 asm(".globl FUN_00087cd0");

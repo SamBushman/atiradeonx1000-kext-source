@@ -1143,8 +1143,8 @@ int extvsEmitMova(param_1, param_2, param_3)
   return 1;
 }
 
-/* FUN_0005e0d0 @ 0x5e0d0 (1676 bytes) */
-int FUN_0005e0d0(param_1, param_2, param_3)
+/* extvsEmitFogOutput @ 0x5e0d0 (1676 bytes) */
+int extvsEmitFogOutput(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   uint *param_3;
@@ -3279,7 +3279,7 @@ LAB_00061650:
            ((*(int *)(iVar10 + shader[6] + 4) == 1 && (*(int *)(iVar10 + shader[6] + 8) == 0x87bd)
             ))) {
           iVar11 = *(int *)(programState + 0x18);
-          iVar16 = ((int (*)())FUN_0005e0d0)(ctx,shader,iVar11 * 0x10 + *(int *)(programState + 0x1c) + -0x10);
+          iVar16 = ((int (*)())extvsEmitFogOutput)(ctx,shader,iVar11 * 0x10 + *(int *)(programState + 0x1c) + -0x10);
           *(int *)(programState + 0x18) = iVar11 + iVar16;
         }
         uVar5 = shader[5];
@@ -3398,7 +3398,7 @@ LAB_00061650:
       }
     }
     ((int (*)())extvsBuildStreamDescriptors)(ctx,shader);
-    ((int (*)())FUN_00062a70)(ctx,shader);
+    ((int (*)())extvsStateCacheInsert)(ctx,shader);
     *(undefined1 *)(shader[1] + *(int *)(((unsigned char *)0x0000118c) + ctx)) = 0;
     if (*(int *)(programState + 0x2b8) != 0) {
       (**(code **)(ctx + 0x18))(*(int *)(programState + 0x2b8));
@@ -3409,8 +3409,8 @@ LAB_00061650:
   return uVar7;
 }
 
-/* FUN_00061dc0 @ 0x61dc0 (224 bytes) */
-int FUN_00061dc0(param_1, param_2)
+/* vpUploadConstantArray @ 0x61dc0 (224 bytes) */
+int vpUploadConstantArray(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -3438,8 +3438,8 @@ int FUN_00061dc0(param_1, param_2)
   return;
 }
 
-/* FUN_00061eb0 @ 0x61eb0 (604 bytes) */
-int FUN_00061eb0(param_1, param_2, param_3, param_4, param_5)
+/* vpUploadConstantsWithFog @ 0x61eb0 (604 bytes) */
+int vpUploadConstantsWithFog(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   int param_2;
   int param_3;
@@ -3519,51 +3519,51 @@ LAB_000620ec:
   return;
 }
 
-/* FUN_00062120 @ 0x62120 (252 bytes) */
-int FUN_00062120(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  int param_3;
+/* extvsComputeStateKey @ 0x62120 (252 bytes) */
+int extvsComputeStateKey(ctx, shader, programState)
+  int ctx;
+  int shader;
+  int programState;
 {
-  short sVar1;
-  uint uVar2;
-  uint uVar3;
+  short fogMode;
+  uint stateKey;
+  uint contextFlags;
   
-  uVar3 = *(uint *)(param_1 + 0x44);
-  uVar2 = (uint)*(byte *)(param_3 + 0x43) & uVar3 >> 7 & 1 |
-          ((uint)*(byte *)(param_3 + 0x44) & uVar3 >> 6 & 1) << 1 |
-          (uint)(*(int *)(param_1 + 0x148) == 1) << 2;
-  if (*(char *)(param_2 + 0x7a) != '\0') {
-    if (*(char *)(param_2 + 0x6e) != '\0') {
-      uVar2 = uVar2 | uVar3 >> 9 & 8;
+  contextFlags = *(uint *)(ctx + 0x44);
+  stateKey = (uint)*(byte *)(programState + 0x43) & contextFlags >> 7 & 1 |
+          ((uint)*(byte *)(programState + 0x44) & contextFlags >> 6 & 1) << 1 |
+          (uint)(*(int *)(ctx + 0x148) == 1) << 2;
+  if (*(char *)(shader + 0x7a) != '\0') {
+    if (*(char *)(shader + 0x6e) != '\0') {
+      stateKey = stateKey | contextFlags >> 9 & 8;
     }
-    if ((uVar3 & 0x1000000) != 0) {
-      sVar1 = *(short *)(((unsigned char *)0x00002e04) + *(int *)(*(int *)(param_1 + 4) + 0x10));
-      if (sVar1 == 0x801) {
-        uVar2 = uVar2 | 0x30;
+    if ((contextFlags & 0x1000000) != 0) {
+      fogMode = *(short *)(((unsigned char *)0x00002e04) + *(int *)(*(int *)(ctx + 4) + 0x10));
+      if (fogMode == 0x801) {
+        stateKey = stateKey | 0x30;
       }
-      else if (sVar1 == 0x2601) {
-        uVar2 = uVar2 | 0x10;
+      else if (fogMode == 0x2601) {
+        stateKey = stateKey | 0x10;
       }
-      else if (sVar1 == 0x800) {
-        uVar2 = uVar2 | 0x20;
+      else if (fogMode == 0x800) {
+        stateKey = stateKey | 0x20;
       }
     }
-    if ((uVar3 & 0x800) != 0) {
-      uVar2 = uVar2 | (uint)(byte)((unsigned char *)0x000011d1)[param_1] << 0xf | 0x4000;
+    if ((contextFlags & 0x800) != 0) {
+      stateKey = stateKey | (uint)(byte)((unsigned char *)0x000011d1)[ctx] << 0xf | 0x4000;
     }
   }
-  if (*(char *)(param_2 + 0x6c) == '\0') {
-    return uVar2;
+  if (*(char *)(shader + 0x6c) == '\0') {
+    return stateKey;
   }
-  if ((*(uint *)(param_1 + 0x44) & 0x400) == 0) {
-    return uVar2;
+  if ((*(uint *)(ctx + 0x44) & 0x400) == 0) {
+    return stateKey;
   }
-  return uVar2 | (uint)(byte)((unsigned char *)0x000011d2)[param_1] << 0x18 | 0x800000;
+  return stateKey | (uint)(byte)((unsigned char *)0x000011d2)[ctx] << 0x18 | 0x800000;
 }
 
-/* FUN_00062220 @ 0x62220 (272 bytes) */
-int FUN_00062220(param_1, param_2)
+/* extvsStateFree @ 0x62220 (272 bytes) */
+int extvsStateFree(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -3690,8 +3690,8 @@ int FUN_00062510(param_1)
   return;
 }
 
-/* FUN_00062570 @ 0x62570 (616 bytes) */
-int FUN_00062570(param_1, param_2, param_3)
+/* extvsStateCacheCreate @ 0x62570 (616 bytes) */
+int extvsStateCacheCreate(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   uint param_3;
@@ -3811,8 +3811,8 @@ int FUN_00062570(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_000627e4 @ 0x627e4 (328 bytes) */
-int FUN_000627e4(param_1, param_2, param_3)
+/* extvsStateCacheFreeAll @ 0x627e4 (328 bytes) */
+int extvsStateCacheFreeAll(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   int param_3;
@@ -3845,7 +3845,7 @@ int FUN_000627e4(param_1, param_2, param_3)
         piVar10 = *(int **)(iVar5 + iVar9);
         if (piVar10 != (int *)0x0) {
           if (*(char *)(*piVar10 + 0x2b0) == '\0') {
-            ((int (*)())FUN_00062220)(param_1,*piVar10);
+            ((int (*)())extvsStateFree)(param_1,*piVar10);
             *piVar10 = 0;
           }
           if (param_3 != 0) {
@@ -3857,7 +3857,7 @@ int FUN_000627e4(param_1, param_2, param_3)
               iVar6 = *piVar1;
               while (iVar6 != 0) {
                 *piVar4 = *(int *)(iVar6 + 0x2b4);
-                ((int (*)())FUN_00062220)(param_1,iVar6);
+                ((int (*)())extvsStateFree)(param_1,iVar6);
                 iVar6 = *piVar4;
               }
               bVar2 = iVar5 != 0x1f;
@@ -3941,30 +3941,30 @@ int noop_62a60()
   return;
 }
 
-/* FUN_00062a70 @ 0x62a70 (116 bytes) */
-int FUN_00062a70(param_1, param_2)
-  int param_1;
-  int *param_2;
+/* extvsStateCacheInsert @ 0x62a70 (116 bytes) */
+int extvsStateCacheInsert(ctx, shader)
+  int ctx;
+  int *shader;
 {
-  uint uVar1;
-  int *piVar2;
-  int iVar3;
+  uint stateKey;
+  int *stateTable;
+  int state;
   
-  piVar2 = *(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-  iVar3 = *piVar2;
-  uVar1 = ((int (*)())FUN_00062120)(param_1,param_2,iVar3);
-  *(uint *)(iVar3 + 0x48) = uVar1;
-  *(int *)(iVar3 + 0x2b4) = piVar2[(uVar1 & 0x1f) + 1];
-  piVar2[(uVar1 & 0x1f) + 1] = iVar3;
-  *(undefined1 *)(iVar3 + 0x2b0) = 1;
-  piVar2[0x21] = piVar2[0x21] + 1;
+  stateTable = *(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+  state = *stateTable;
+  stateKey = ((int (*)())extvsComputeStateKey)(ctx,shader,state);
+  *(uint *)(state + 0x48) = stateKey;
+  *(int *)(state + 0x2b4) = stateTable[(stateKey & 0x1f) + 1];
+  stateTable[(stateKey & 0x1f) + 1] = state;
+  *(undefined1 *)(state + 0x2b0) = 1;
+  stateTable[0x21] = stateTable[0x21] + 1;
   return;
 }
 
 /* extvsBuildStreamDescriptors @ 0x62af0 (5624 bytes) */
-int extvsBuildStreamDescriptors(param_1, param_2)
-  int param_1;
-  int *param_2;
+int extvsBuildStreamDescriptors(ctx, shader)
+  int ctx;
+  int *shader;
 {
   bool bVar1;
   byte bVar2;
@@ -3976,7 +3976,7 @@ int extvsBuildStreamDescriptors(param_1, param_2)
   int iVar8;
   int iVar9;
   
-  iVar5 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
+  iVar5 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
   *(undefined4 *)(iVar5 + 0x29c) = 0;
   *(undefined4 *)(iVar5 + 0x240) = 0;
   *(undefined4 *)(iVar5 + 0x23c) = 1;
@@ -4397,32 +4397,32 @@ int extvsBuildStreamDescriptors(param_1, param_2)
       *(uint *)(iVar8 + 0x240) = *(uint *)(iVar8 + 0x240) | 0x20000000;
     }
     if (0x10 < *(uint *)(iVar5 + 0x2a0)) {
-      *(undefined1 *)(param_2 + 4) = 0;
+      *(undefined1 *)(shader + 4) = 0;
     }
   }
-  uVar7 = param_2[0x1b];
-  if ((((uVar7 & 0xffffff) == 0) && (*(char *)(param_2 + 0x1c) == '\0')) &&
-     (*(char *)((int)param_2 + 0x7a) == '\0')) {
+  uVar7 = shader[0x1b];
+  if ((((uVar7 & 0xffffff) == 0) && (*(char *)(shader + 0x1c) == '\0')) &&
+     (*(char *)((int)shader + 0x7a) == '\0')) {
     iVar8 = *(int *)(iVar5 + 0x2a8);
   }
   else {
     iVar8 = *(int *)(iVar5 + 0x2a8) + 1;
     *(uint *)(iVar5 + 0x23c) = *(uint *)(iVar5 + 0x23c) | 2;
     *(int *)(iVar5 + 0x2a8) = iVar8;
-    uVar7 = param_2[0x1b];
+    uVar7 = shader[0x1b];
   }
-  if ((((uVar7 & 0xffff) != 0) || (*(char *)(param_2 + 0x1c) != '\0')) ||
-     (*(char *)((int)param_2 + 0x7a) != '\0')) {
+  if ((((uVar7 & 0xffff) != 0) || (*(char *)(shader + 0x1c) != '\0')) ||
+     (*(char *)((int)shader + 0x7a) != '\0')) {
     iVar8 = iVar8 + 1;
     *(int *)(iVar5 + 0x2a8) = iVar8;
     *(uint *)(iVar5 + 0x23c) = *(uint *)(iVar5 + 0x23c) | 4;
   }
-  if ((*(char *)((int)param_2 + 0x6f) != '\0') || (*(char *)(param_2 + 0x1c) != '\0')) {
+  if ((*(char *)((int)shader + 0x6f) != '\0') || (*(char *)(shader + 0x1c) != '\0')) {
     iVar8 = iVar8 + 2;
     *(int *)(iVar5 + 0x2a8) = iVar8;
     *(uint *)(iVar5 + 0x23c) = *(uint *)(iVar5 + 0x23c) | 0x18;
   }
-  if (*(char *)((int)param_2 + 0x79) != '\0') {
+  if (*(char *)((int)shader + 0x79) != '\0') {
     iVar8 = iVar8 + 1;
     *(int *)(iVar5 + 0x2a8) = iVar8;
     *(uint *)(iVar5 + 0x23c) = *(uint *)(iVar5 + 0x23c) | 0x10000;
@@ -4430,7 +4430,7 @@ int extvsBuildStreamDescriptors(param_1, param_2)
   uVar7 = 0;
   iVar9 = 8;
   do {
-    bVar2 = *(byte *)((int)param_2 + 0x71);
+    bVar2 = *(byte *)((int)shader + 0x71);
     if (bVar2 != 0) {
       iVar4 = 4;
       if ((bVar2 & 8) == 0) {
@@ -4442,7 +4442,7 @@ int extvsBuildStreamDescriptors(param_1, param_2)
       *(uint *)(iVar5 + 0x240) = uVar6 | *(uint *)(iVar5 + 0x240);
       *(uint *)(iVar5 + 0x29c) = uVar6 | *(uint *)(iVar5 + 0x29c);
     }
-    param_2 = (int *)((int)param_2 + 1);
+    shader = (int *)((int)shader + 1);
     uVar7 = uVar7 + 3;
     iVar9 = iVar9 + -1;
   } while (iVar9 != 0);
@@ -4898,7 +4898,7 @@ LAB_00064c00:
           in_r6 = puVar16[0x22];
           in_r7 = 1;
           in_r5 = pcVar21;
-          ((int (*)())FUN_00061eb0)(param_1,param_2,pcVar21,in_r6,1);
+          ((int (*)())vpUploadConstantsWithFog)(param_1,param_2,pcVar21,in_r6,1);
         }
         uVar14 = *(uint *)(param_1 + 0x1b90);
         cVar11 = '\0';
@@ -4968,7 +4968,7 @@ LAB_00064af0:
             *(uint *)(pcVar21 + 0x10) = uVar17 + iVar9 + -1;
             *piVar20 = uVar17 + *piVar20;
             piVar20[1] = uVar19 + piVar20[1];
-            ((int (*)())FUN_00061dc0)(param_1,pcVar21);
+            ((int (*)())vpUploadConstantArray)(param_1,pcVar21);
             *pcVar21 = '\x01';
             FUN_0007dcd0(param_1,pcVar21);
             uVar19 = *(uint *)(pcVar21 + 0x5c);
@@ -5060,7 +5060,7 @@ int FUN_00064f40(param_1, param_2)
       iVar11 = *(int *)(((unsigned char *)0x0000118c) + param_1);
       piVar8 = *(int **)(iVar11 * 4 + *piVar9);
       iVar6 = *piVar8;
-      uVar5 = ((int (*)())FUN_00062120)(param_1,piVar9,iVar6);
+      uVar5 = ((int (*)())extvsComputeStateKey)(param_1,piVar9,iVar6);
       if ((*(char *)(param_1 + 0x31) == '\0') ||
          (bVar7 = true, *(char *)(piVar9[1] + iVar11) == '\0')) {
         bVar7 = false;
@@ -5096,7 +5096,7 @@ LAB_00065094:
           pcVar3 = *(code **)(param_1 + 0x275c);
           *(int *)(0x00002748 + param_1 + 4) = iVar11 + 8;
           (*pcVar3)(param_1,iVar11 + 8);
-          ((int (*)())FUN_00061eb0)(param_1,piVar9,iVar6,piVar8[0x22],0);
+          ((int (*)())vpUploadConstantsWithFog)(param_1,piVar9,iVar6,piVar8[0x22],0);
           return;
         }
       }
@@ -5134,7 +5134,7 @@ int FUN_000651e0(param_1)
   
   for (puVar5 = *(undefined4 **)(*(int *)(((unsigned char *)0x000011b4) + param_1) + 8); puVar5 != (undefined4 *)0x0
       ; puVar5 = (undefined4 *)puVar5[1]) {
-    ((int (*)())FUN_00061dc0)(param_1,*puVar5);
+    ((int (*)())vpUploadConstantArray)(param_1,*puVar5);
   }
   piVar6 = *(int **)(((unsigned char *)0x00001168) + param_1);
   puVar5 = *(undefined4 **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *piVar6);
@@ -5161,7 +5161,7 @@ int FUN_000651e0(param_1)
     (*pcVar3)(param_1,iVar1 + 8,in_r5,in_r6,in_r7,in_r8,a6);
     FUN_00050ef0(param_1,*(undefined4 *)(pcVar4 + 0x2a4),*(undefined4 *)(pcVar4 + 0x2a8),
                  *(undefined4 *)(pcVar4 + 0x2ac));
-    ((int (*)())FUN_00061eb0)(param_1,piVar6,pcVar4,puVar5[0x22],1);
+    ((int (*)())vpUploadConstantsWithFog)(param_1,piVar6,pcVar4,puVar5[0x22],1);
   }
   *(uint *)(param_1 + 0x8c) = *(uint *)(param_1 + 0x8c) & 0xfffeffff;
   return;
@@ -9741,9 +9741,9 @@ asm(".set FUN_00062410, _FUN_00062410");
 asm(".globl FUN_00062510");
 asm(".set FUN_00062510, _FUN_00062510");
 asm(".globl FUN_00062570");
-asm(".set FUN_00062570, _FUN_00062570");
+asm(".set FUN_00062570, _extvsStateCacheCreate");
 asm(".globl FUN_000627e4");
-asm(".set FUN_000627e4, _FUN_000627e4");
+asm(".set FUN_000627e4, _extvsStateCacheFreeAll");
 asm(".globl FUN_00062940");
 asm(".set FUN_00062940, _FUN_00062940");
 asm(".globl FUN_00062af0");

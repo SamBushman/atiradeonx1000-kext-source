@@ -137,8 +137,8 @@ int FUN_00077030(param_1)
   return;
 }
 
-/* FUN_00077090 @ 0x77090 (600 bytes) */
-int FUN_00077090(param_1, param_2, param_3)
+/* vpStateCacheCreate @ 0x77090 (600 bytes) */
+int vpStateCacheCreate(param_1, param_2, param_3)
   int param_1;
   int *param_2;
   uint param_3;
@@ -315,34 +315,34 @@ int vpStateCacheFreeAll(param_1, param_2, param_3)
 }
 
 /* vpStateSetConstantVector @ 0x77430 (132 bytes) */
-int vpStateSetConstantVector(param_1, param_2, param_3)
-  int param_1;
-  int *param_2;
-  int param_3;
+int vpStateSetConstantVector(ctx, shader, constantEntry)
+  int ctx;
+  int *shader;
+  int constantEntry;
 {
-  int iVar1;
-  int iVar2;
-  undefined4 *puVar3;
-  int iVar4;
-  int iVar5;
+  int highestSlot;
+  int slotBase;
+  undefined4 *values;
+  int programState;
+  int slotIndex;
   
-  iVar4 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-  if (param_3 != 0) {
-    puVar3 = *(undefined4 **)(param_3 + 0x38);
-    iVar5 = *(int *)(param_3 + 4);
-    iVar1 = *(int *)(((unsigned char *)0x0000137c) + iVar4);
-    iVar2 = iVar5 * 0x10 + iVar4;
-    *(undefined4 *)(iVar2 + 0x154) = *puVar3;
-    *(undefined4 *)(iVar2 + 0x158) = puVar3[1];
-    *(undefined4 *)(iVar2 + 0x15c) = puVar3[2];
-    *(undefined4 *)(iVar2 + 0x160) = puVar3[3];
-    if (iVar1 < iVar5) {
-      *(int *)(((unsigned char *)0x0000137c) + iVar4) = iVar5;
+  programState = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+  if (constantEntry != 0) {
+    values = *(undefined4 **)(constantEntry + 0x38);
+    slotIndex = *(int *)(constantEntry + 4);
+    highestSlot = *(int *)(((unsigned char *)0x0000137c) + programState);
+    slotBase = slotIndex * 0x10 + programState;
+    *(undefined4 *)(slotBase + 0x154) = *values;
+    *(undefined4 *)(slotBase + 0x158) = values[1];
+    *(undefined4 *)(slotBase + 0x15c) = values[2];
+    *(undefined4 *)(slotBase + 0x160) = values[3];
+    if (highestSlot < slotIndex) {
+      *(int *)(((unsigned char *)0x0000137c) + programState) = slotIndex;
     }
   }
-  *(uint *)(param_1 + 0x38) = *(uint *)(param_1 + 0x38) | 0x1000;
-  *(byte *)(param_1 + 0x2d) = *(byte *)(param_1 + 0x2d) | 1;
-  *(undefined1 *)(param_1 + 0x29) = 1;
+  *(uint *)(ctx + 0x38) = *(uint *)(ctx + 0x38) | 0x1000;
+  *(byte *)(ctx + 0x2d) = *(byte *)(ctx + 0x2d) | 1;
+  *(undefined1 *)(ctx + 0x29) = 1;
   return;
 }
 
@@ -544,8 +544,8 @@ int FUN_00077800(param_1, param_2)
   return 0;
 }
 
-/* FUN_00077850 @ 0x77850 (12 bytes) */
-int FUN_00077850(param_1)
+/* recordGetWriteMask @ 0x77850 (12 bytes) */
+int recordGetWriteMask(param_1)
   uint *param_1;
 {
   return *param_1 >> 0x14 & 0xf;
@@ -621,7 +621,7 @@ switchD_000778cc_caseD_1:
 LAB_000779d4:
   iVar3 = ((int (*)())FUN_000777b0)(puVar8,param_4);
   if ((iVar3 == 0) && (iVar3 = ((int (*)())FUN_00077800)(puVar8,param_4), iVar3 == 0)) {
-    uVar4 = ((int (*)())FUN_00077850)(puVar8);
+    uVar4 = ((int (*)())recordGetWriteMask)(puVar8);
     uVar2 = *puVar9;
     *puVar9 = uVar4 | uVar2;
     if ((uVar2 & uVar4 & 0xff) != 0) {
@@ -645,10 +645,10 @@ LAB_000779d4:
   } while (bVar1);
   iVar3 = ((int (*)())FUN_000777b0)(puVar8,param_4);
   if ((iVar3 != 0) && (puVar9 = *(uint **)(uVar4 * 4 + param_1 + 0xe450), puVar9 != (uint *)0x0)) {
-    uVar2 = ((int (*)())FUN_00077850)(puVar8);
+    uVar2 = ((int (*)())recordGetWriteMask)(puVar8);
     do {
       uVar10 = *puVar9;
-      uVar5 = ((int (*)())FUN_00077850)(param_2 + uVar10 * 0x10);
+      uVar5 = ((int (*)())recordGetWriteMask)(param_2 + uVar10 * 0x10);
       if ((((uVar2 & uVar5) != 0) && (uVar10 < uVar4)) &&
          ((*(uint *)(uVar10 * 4 + param_1 + 0x3348c) & 0x40000) == 0)) {
         return 0;
@@ -757,7 +757,7 @@ int FUN_00077d10(param_1, param_2)
   int iVar1;
   uint uVar2;
   
-  uVar2 = ((int (*)())FUN_00077850)(param_1 + 0x1286c + param_2 * 0x10);
+  uVar2 = ((int (*)())recordGetWriteMask)(param_1 + 0x1286c + param_2 * 0x10);
   for (iVar1 = *(int *)(param_2 * 4 + param_1 + 0xc450); iVar1 != 0; iVar1 = *(int *)(iVar1 + 0x10))
   {
     uVar2 = uVar2 | *(uint *)(iVar1 + 4);
@@ -884,7 +884,7 @@ LAB_00077f68:
               puVar4 = (uint *)puVar4[4]) {
             uVar13 = *puVar4;
             if ((*(uint *)(uVar13 * 4 + param_1 + 0x3348c) & 0x40000) == 0) {
-              uVar8 = ((int (*)())FUN_00077850)(uVar13 * 0x10 + param_2);
+              uVar8 = ((int (*)())recordGetWriteMask)(uVar13 * 0x10 + param_2);
               uVar9 = 0;
               puVar15 = local_58;
               iVar6 = 4;
@@ -1124,7 +1124,7 @@ int FUN_00078760(param_1, param_2, param_3, param_4, param_5)
   
   puVar7 = (uint *)(param_3 * 0x10 + param_2);
   uVar2 = ((int (*)())FUN_00077d10)(param_1,param_3);
-  uVar3 = ((int (*)())FUN_00077850)(puVar7);
+  uVar3 = ((int (*)())recordGetWriteMask)(puVar7);
   uVar5 = *(uint *)(param_3 * 0x10 + param_2);
   if ((uVar5 & 0xf00) == 0x400) {
     iVar4 = ((int (*)())FUN_00077d90)(param_1,param_2,
@@ -1426,8 +1426,8 @@ int FUN_00078ef0(param_1)
   return (*param_1 & 0xf) == 2;
 }
 
-/* FUN_00078f10 @ 0x78f10 (92 bytes) */
-int FUN_00078f10(param_1, param_2)
+/* recordGetWriteEnable @ 0x78f10 (92 bytes) */
+int recordGetWriteEnable(param_1, param_2)
   uint *param_1;
   int param_2;
 {
@@ -1759,7 +1759,7 @@ LAB_00079508:
             do {
               if ((((uVar16 != uVar8) && ((1 << (uVar8 & 0x3f) & uVar14) != 0)) &&
                   (uVar5 = local_58[uVar16], uVar5 < *puVar6)) &&
-                 (iVar12 = ((int (*)())FUN_00078f10)(iStack00000024 + uVar5 * 0x10,uVar8), iVar12 != 0)) {
+                 (iVar12 = ((int (*)())recordGetWriteEnable)(iStack00000024 + uVar5 * 0x10,uVar8), iVar12 != 0)) {
                 *puVar6 = uVar5;
               }
               bVar2 = uVar8 != 3;
@@ -1830,7 +1830,7 @@ LAB_00079508:
             do {
               if (((uVar14 != uVar8) && ((1 << (uVar8 & 0x3f) & uVar16) != 0)) &&
                  ((uVar5 = local_68[uVar14], uVar5 < *puVar6 &&
-                  (iVar22 = ((int (*)())FUN_00078f10)(uVar5 * 0x10 + iStack00000024,uVar8), iVar22 != 0)))) {
+                  (iVar22 = ((int (*)())recordGetWriteEnable)(uVar5 * 0x10 + iStack00000024,uVar8), iVar22 != 0)))) {
                 *puVar6 = uVar5;
               }
               bVar1 = uVar8 != 3;
@@ -1867,8 +1867,8 @@ LAB_000798a8:
   goto LAB_00079150;
 }
 
-/* FUN_000798f0 @ 0x798f0 (28 bytes) */
-int FUN_000798f0(param_1, param_2)
+/* recordSetWriteMask @ 0x798f0 (28 bytes) */
+int recordSetWriteMask(param_1, param_2)
   uint *param_1;
   uint param_2;
 {
@@ -1929,8 +1929,8 @@ int FUN_00079910(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   return 7;
 }
 
-/* FUN_00079a20 @ 0x79a20 (92 bytes) */
-int FUN_00079a20(param_1, param_2)
+/* recordGetSourceSelect @ 0x79a20 (92 bytes) */
+int recordGetSourceSelect(param_1, param_2)
   uint *param_1;
   int param_2;
 {
@@ -1949,8 +1949,8 @@ int FUN_00079a20(param_1, param_2)
   return *param_1 >> 0x16 & 7;
 }
 
-/* FUN_00079a90 @ 0x79a90 (100 bytes) */
-int FUN_00079a90(param_1, param_2, param_3)
+/* recordSetSourceSelect @ 0x79a90 (100 bytes) */
+int recordSetSourceSelect(param_1, param_2, param_3)
   uint *param_1;
   int param_2;
   uint param_3;
@@ -2024,7 +2024,7 @@ int FUN_00079bd0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   
   iVar1 = (param_5 * 4 + param_6) * 4;
   puVar7 = (uint *)(iVar1 + param_2 + 4);
-  uVar4 = ((int (*)())FUN_00079a20)(puVar7,param_7);
+  uVar4 = ((int (*)())recordGetSourceSelect)(puVar7,param_7);
   if ((1 < uVar4 - 4) && (iVar8 = param_5 + -1, -1 < iVar8)) {
     puVar10 = (uint *)(param_2 + iVar8 * 0x10);
     loopIndex = 0;
@@ -2035,7 +2035,7 @@ int FUN_00079bd0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
         bVar2 = uVar6 == 5;
 LAB_00079cd0:
         if (((!bVar2) || ((*puVar10 >> 0xd & 0x7f) != (*puVar7 >> 5 & 0xff))) ||
-           (iVar5 = ((int (*)())FUN_00078f10)(puVar10,uVar4), iVar5 == 0)) goto LAB_00079dc0;
+           (iVar5 = ((int (*)())recordGetWriteEnable)(puVar10,uVar4), iVar5 == 0)) goto LAB_00079dc0;
         if ((char)*puVar10 == 'A') {
           if (((**(uint **)(param_1 + 0x34) & 0x280) == 0) || (uVar4 != 3)) {
 LAB_00079d90:
@@ -2044,7 +2044,7 @@ LAB_00079d90:
             bVar2 = true;
           }
           else {
-            ((int (*)())FUN_00079a90)(puVar7,param_7,5);
+            ((int (*)())recordSetSourceSelect)(puVar7,param_7,5);
             if (param_3 == 0) goto LAB_00079dc8;
 LAB_00079d78:
             bVar2 = true;
@@ -2053,7 +2053,7 @@ LAB_00079d78:
         }
         else {
           if (((char)*puVar10 != 'D') || ((uVar4 != 0 && (uVar4 != 3)))) goto LAB_00079d90;
-          ((int (*)())FUN_00079a90)(puVar7,param_7,5);
+          ((int (*)())recordSetSourceSelect)(puVar7,param_7,5);
           if ((param_3 != 0) && ((**(uint **)(param_1 + 0x34) & 0x200) != 0)) goto LAB_00079d78;
 LAB_00079dc8:
           bVar2 = true;
@@ -2166,7 +2166,7 @@ int FUN_00079e70(param_1, param_2)
             do {
               iVar12 = *piVar14;
               if ((*(uint *)(iVar10 + iVar12 * 0x10) & 0xfef00) == (uVar4 & 0xfef00)) {
-                uVar17 = ((int (*)())FUN_00077850)(iVar10 + iVar12 * 0x10);
+                uVar17 = ((int (*)())recordGetWriteMask)(iVar10 + iVar12 * 0x10);
                 param_2 = (int)uVar17;
                 bVar2 = true;
                 if (((uint)((ulonglong)uVar17 >> 0x20) & piVar11[1]) == 0) goto LAB_00079fc0;
@@ -2278,7 +2278,7 @@ int FUN_0007a1a0(param_1, param_2, param_3)
   puVar15 = (uint *)(param_1 + 0x1286c + param_2 * 0x10);
   uVar14 = 0;
   uVar13 = *(uint *)(iVar2 + param_1 + 0x6450);
-  uVar6 = ((int (*)())FUN_00077850)(puVar15);
+  uVar6 = ((int (*)())recordGetWriteMask)(puVar15);
   uVar4 = 0;
   iVar16 = 4;
   do {
@@ -2408,7 +2408,7 @@ int FUN_0007a4a0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
     if (iVar5 != 0) {
       puVar18 = ((unsigned char *)0x00003210U);
       uVar6 = ((int (*)())FUN_00077d10)(param_1,param_5);
-      uVar7 = ((int (*)())FUN_00077850)(puVar16);
+      uVar7 = ((int (*)())recordGetWriteMask)(puVar16);
       uVar15 = 0;
       uVar14 = 0;
       iVar5 = param_5 * 4 + param_1;
@@ -2544,11 +2544,11 @@ LAB_0007a680:
        (iVar5 = ((int (*)())FUN_00078760)(param_1,param_2,param_5,param_6,param_7), iVar5 != 0)) {
       return 1;
     }
-    uVar6 = ((int (*)())FUN_00077850)(puVar16);
+    uVar6 = ((int (*)())recordGetWriteMask)(puVar16);
     for (piVar17 = *(int **)(param_5 * 4 + param_1 + 0xe450); piVar17 != (int *)0x0;
         piVar17 = (int *)piVar17[4]) {
       iVar5 = *piVar17;
-      uVar7 = ((int (*)())FUN_00077850)(param_2 + iVar5 * 0x10);
+      uVar7 = ((int (*)())recordGetWriteMask)(param_2 + iVar5 * 0x10);
       if (((uVar6 & uVar7) != 0) &&
          (iVar5 = iVar5 * 4 + param_1, (*(uint *)(iVar5 + 0x3348c) & 0x40000) != 0)) {
         for (piVar8 = *(int **)(iVar5 + 0xa450); piVar8 != (int *)0x0; piVar8 = (int *)piVar8[4]) {
@@ -2563,7 +2563,7 @@ LAB_0007a680:
       uVar6 = *puVar16;
 LAB_0007a634:
       cVar2 = (DAT_001aa758)[uVar6 >> 8 & 0xf];
-      uVar10 = ((int (*)())FUN_00077850)(puVar16);
+      uVar10 = ((int (*)())recordGetWriteMask)(puVar16);
       iVar5 = ((int (*)())FUN_00077d90)(param_1,param_2,cVar2 * 0x100 + (uVar6 >> 0xd & 0x7f),uVar9,param_5,
                            uVar10);
       if (iVar5 == 0) goto LAB_0007a680;
@@ -2578,13 +2578,13 @@ LAB_0007a634:
         bVar1 = false;
       }
       if (bVar1) {
-        uVar10 = ((int (*)())FUN_00077850)(puVar16);
+        uVar10 = ((int (*)())recordGetWriteMask)(puVar16);
         uVar6 = ((int (*)())FUN_00078250)(param_1,param_2,uVar9,param_5,uVar10);
         *param_7 = uVar6;
       }
     }
     else {
-      uVar10 = ((int (*)())FUN_00077850)(puVar16);
+      uVar10 = ((int (*)())recordGetWriteMask)(puVar16);
       if (param_4 != 0) {
         uVar6 = 0;
         do {
@@ -2965,7 +2965,7 @@ int FUN_0007b0d0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
         iVar38 = param_1 + 0x3348c;
         uVar22 = *(uint *)(iVar30 + iVar38);
         *(uint *)(iVar30 + iVar38) = uVar22 | 1;
-        uVar4 = ((int (*)())FUN_00077850)(pcVar39);
+        uVar4 = ((int (*)())recordGetWriteMask)(pcVar39);
         if ((((((uVar4 - 1 & uVar4) == 0) &&
               (iVar13 = ((byte)pcVar39[3] & 0xffffffbf) * 0x14,
               *(int *)(&DAT_001aa5f0 + iVar13) != 0)) &&
@@ -3233,7 +3233,7 @@ LAB_0007b894:
       iVar27 = iVar28 * 4;
       iVar30 = ((int (*)())FUN_00077800)(puVar23,*puVar19 >> 6 & 1);
       if (iVar30 != 0) {
-        param_3 = (code *)((int (*)())FUN_00077850)(puVar23);
+        param_3 = (code *)((int (*)())recordGetWriteMask)(puVar23);
         param_4 = (code *)((int)((unsigned char *)0x0) + 1);
         iVar30 = ((int (*)())FUN_00077c40)(param_1,iVar28,param_3,1,param_5);
         if (iVar30 != 0) {
@@ -3306,7 +3306,7 @@ LAB_0007bdf0:
     else {
       param_3 = (code *)((char)(DAT_001aa758)[*puVar23 >> 8 & 0xf] * 0x100 +
                         (*puVar23 >> 0xd & 0x7f));
-      uVar26 = ((int (*)())FUN_00077850)(puVar23);
+      uVar26 = ((int (*)())recordGetWriteMask)(puVar23);
       param_5 = (int *)((int)((unsigned char *)0x0) + 1);
       iVar27 = ((int (*)())FUN_00077ba0)(param_1,iVar28,param_3,uVar26,1);
       if (iVar27 != 0) {
@@ -3318,7 +3318,7 @@ LAB_0007bdf0:
           puVar35 = (uint *)puVar35[4]) {
         uVar33 = *puVar35;
         if ((*(uint *)(uVar33 * 4 + param_1 + 0x3348c) & 0x40000) == 0) {
-          uVar34 = ((int (*)())FUN_00077850)(param_1 + 0x1286c + uVar33 * 0x10);
+          uVar34 = ((int (*)())recordGetWriteMask)(param_1 + 0x1286c + uVar33 * 0x10);
           uVar22 = 0;
           puVar16 = (uint *)(local_a8 + 0xc);
           iVar30 = 4;
@@ -4071,7 +4071,7 @@ LAB_0007cc7c:
         iVar36 = iVar36 + 4;
       } while (bVar2);
       local_b0.current_version = (dword)(puVar21 + iVar19);
-      pdVar14 = (dword *)((int (*)())FUN_00077850)(puVar9);
+      pdVar14 = (dword *)((int (*)())recordGetWriteMask)(puVar9);
       if (pdVar14 == (dword *)0x0) {
 LAB_0007ceb8:
         local_90 = 0;
@@ -4084,9 +4084,9 @@ LAB_0007ceb8:
                 piVar32 = (int *)piVar32[4]) {
               local_b8 = puVar21[*piVar32 * 4];
               if (((uint)pdVar20 & 0xfef00) == (local_b8 & 0xfef00)) {
-                uVar10 = ((int (*)())FUN_00077850)(&local_b8);
+                uVar10 = ((int (*)())recordGetWriteMask)(&local_b8);
                 pdVar14 = (dword *)((uint)pdVar14 & ~uVar10);
-                ((int (*)())FUN_000798f0)(puVar9,pdVar14);
+                ((int (*)())recordSetWriteMask)(puVar9,pdVar14);
                 pdVar20 = (dword *)*puVar9;
               }
             }
@@ -4115,9 +4115,9 @@ LAB_0007ceb4:
         for (piVar32 = (int *)param_1[0x4114]; piVar32 != (int *)0x0; piVar32 = (int *)piVar32[4]) {
           local_b8 = puVar21[*piVar32 * 4];
           if (((uint)pdVar20 & 0xfe000) == (local_b8 & 0xfe000)) {
-            uVar10 = ((int (*)())FUN_00077850)(&local_b8);
+            uVar10 = ((int (*)())recordGetWriteMask)(&local_b8);
             pdVar14 = (dword *)((uint)pdVar14 & ~uVar10);
-            ((int (*)())FUN_000798f0)(puVar9,pdVar14);
+            ((int (*)())recordSetWriteMask)(puVar9,pdVar14);
             pdVar20 = (dword *)*puVar9;
           }
         }
@@ -4165,7 +4165,7 @@ LAB_0007ceb4:
           puVar16 = (uint *)((uint)puVar16 | *(uint *)(uVar10 + 4));
         }
         if (pdVar14 != puVar16) {
-          ((int (*)())FUN_000798f0)(puVar9,(uint)pdVar14 & (uint)puVar16);
+          ((int (*)())recordSetWriteMask)(puVar9,(uint)pdVar14 & (uint)puVar16);
           puVar27 = (uint *)param_1[0xd];
         }
       }
@@ -4181,8 +4181,8 @@ LAB_0007ceb4:
         } while (uVar10 != 0);
         if ((uVar17 & 7) == 2) {
           *(undefined1 *)((int)puVar9 + 3) = 6;
-          pdVar15 = (dword *)((int (*)())FUN_00079a20)(local_b4,3);
-          ((int (*)())FUN_00079a90)(puVar16,1,pdVar15);
+          pdVar15 = (dword *)((int (*)())recordGetSourceSelect)(local_b4,3);
+          ((int (*)())recordSetSourceSelect)(puVar16,1,pdVar15);
           if (!bVar1) {
             iVar36 = 4;
             pdVar14 = local_74 + iVar19;
@@ -4293,7 +4293,7 @@ LAB_0007d968:
                   bVar2 = false;
                 }
                 else {
-                  uVar37 = ((int (*)())FUN_00078f10)(&local_b8,local_8c);
+                  uVar37 = ((int (*)())recordGetWriteEnable)(&local_b8,local_8c);
                   puVar27 = (uint *)uVar37;
                   if ((int)((ulonglong)uVar37 >> 0x20) == 0) goto LAB_0007d968;
                   pdVar15 = (dword *)(puVar4 + -(int)puVar30);
@@ -4314,7 +4314,7 @@ LAB_0007d968:
           iVar33 = 0;
           dVar29 = ((lc_str *)local_b0.compatibility_version)->offset;
           do {
-            uVar37 = ((int (*)())FUN_00079a20)(dVar29,iVar33);
+            uVar37 = ((int (*)())recordGetSourceSelect)(dVar29,iVar33);
             puVar27 = (uint *)uVar37;
             if ((int)((ulonglong)uVar37 >> 0x20) != 4) {
               pdVar15 = local_74;
@@ -4331,10 +4331,10 @@ LAB_0007d968:
           bVar2 = local_90 == 0;
           do {
             if (bVar2) {
-              uVar37 = ((int (*)())FUN_00078f10)(puVar9,iVar33);
+              uVar37 = ((int (*)())recordGetWriteEnable)(puVar9,iVar33);
               puVar27 = (uint *)uVar37;
               if ((int)((ulonglong)uVar37 >> 0x20) != 0) {
-                uVar37 = ((int (*)())FUN_00079a20)(((lc_str *)local_b0.compatibility_version)->offset,iVar33);
+                uVar37 = ((int (*)())recordGetSourceSelect)(((lc_str *)local_b0.compatibility_version)->offset,iVar33);
                 puVar27 = (uint *)uVar37;
                 if ((int)((ulonglong)uVar37 >> 0x20) != 4) {
                   pdVar15 = local_74;
@@ -4345,10 +4345,10 @@ LAB_0007d968:
               }
             }
             else if (iVar33 == 0) {
-              uVar37 = ((int (*)())FUN_00077850)(puVar9);
+              uVar37 = ((int (*)())recordGetWriteMask)(puVar9);
               puVar27 = (uint *)uVar37;
               if ((int)((ulonglong)uVar37 >> 0x20) != 0) {
-                uVar37 = ((int (*)())FUN_00079a20)(((lc_str *)local_b0.compatibility_version)->offset,0);
+                uVar37 = ((int (*)())recordGetSourceSelect)(((lc_str *)local_b0.compatibility_version)->offset,0);
                 puVar27 = (uint *)uVar37;
                 if ((int)((ulonglong)uVar37 >> 0x20) != 4) {
                   pdVar15 = local_74;
@@ -4379,7 +4379,7 @@ LAB_0007d968:
           bVar2 = local_90 == 0;
           do {
             if (bVar2) {
-              uVar37 = ((int (*)())FUN_00078f10)(puVar9,iVar33);
+              uVar37 = ((int (*)())recordGetWriteEnable)(puVar9,iVar33);
               puVar27 = (uint *)uVar37;
               if ((int)((ulonglong)uVar37 >> 0x20) != 0) {
                 pdVar15 = local_74;
@@ -4389,7 +4389,7 @@ LAB_0007d968:
               }
             }
             else if (iVar33 == 0) {
-              uVar37 = ((int (*)())FUN_00077850)(puVar9);
+              uVar37 = ((int (*)())recordGetWriteMask)(puVar9);
               puVar27 = (uint *)uVar37;
               if ((int)((ulonglong)uVar37 >> 0x20) != 0) {
                 pdVar15 = local_74;
@@ -4408,7 +4408,7 @@ LAB_0007d968:
             if (uVar17 == 0) {
               if (iVar33 - 1U < 2) {
 LAB_0007d6c4:
-                uVar37 = ((int (*)())FUN_00078f10)(puVar9,iVar33);
+                uVar37 = ((int (*)())recordGetWriteEnable)(puVar9,iVar33);
                 puVar27 = (uint *)uVar37;
                 if ((int)((ulonglong)uVar37 >> 0x20) != 0) {
                   pdVar15 = local_74;
@@ -8831,8 +8831,8 @@ int FUN_00082c50(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   return;
 }
 
-/* FUN_00082f60 @ 0x82f60 (416 bytes) */
-int FUN_00082f60(param_1, param_2, param_3, param_4)
+/* interpolatorMapInit @ 0x82f60 (416 bytes) */
+int interpolatorMapInit(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -8934,7 +8934,7 @@ asm(".set FUN_00076fe0, _FUN_00076fe0");
 asm(".globl FUN_00077030");
 asm(".set FUN_00077030, _FUN_00077030");
 asm(".globl FUN_00077090");
-asm(".set FUN_00077090, _FUN_00077090");
+asm(".set FUN_00077090, _vpStateCacheCreate");
 asm(".globl FUN_000772f4");
 asm(".set FUN_000772f4, _vpStateCacheFreeAll");
 asm(".globl FUN_00077430");
@@ -8950,4 +8950,4 @@ asm(".set FUN_00082900, _FUN_00082900");
 asm(".globl FUN_00082c50");
 asm(".set FUN_00082c50, _FUN_00082c50");
 asm(".globl FUN_00082f60");
-asm(".set FUN_00082f60, _FUN_00082f60");
+asm(".set FUN_00082f60, _interpolatorMapInit");

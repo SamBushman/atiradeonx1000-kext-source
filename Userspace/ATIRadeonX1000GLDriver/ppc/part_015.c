@@ -117,24 +117,24 @@ int FUN_000a11f0(param_1, param_2, param_3)
 }
 
 /* glGenFragmentShadersATI_impl @ 0xa12b0 (52 bytes) */
-int glGenFragmentShadersATI_impl(param_1, param_2)
-  int param_1;
-  int param_2;
+int glGenFragmentShadersATI_impl(ctx, range)
+  int ctx;
+  int range;
 {
   int iVar1;
   
-  if ((param_2 != 0) && (((unsigned char *)0x00001134)[param_1] == '\0')) {
-    iVar1 = **(int **)(((unsigned char *)0x00001154) + param_1);
-    **(int **)(((unsigned char *)0x00001154) + param_1) = param_2 + iVar1;
+  if ((range != 0) && (((unsigned char *)0x00001134)[ctx] == '\0')) {
+    iVar1 = **(int **)(((unsigned char *)0x00001154) + ctx);
+    **(int **)(((unsigned char *)0x00001154) + ctx) = range + iVar1;
     return iVar1;
   }
   return 0;
 }
 
 /* glBindFragmentShaderATI_impl @ 0xa12f0 (612 bytes) */
-int glBindFragmentShaderATI_impl(param_1, param_2)
-  int param_1;
-  int param_2;
+int glBindFragmentShaderATI_impl(ctx, shaderId)
+  int ctx;
+  int shaderId;
 {
   uint loopIndex;
   bool bVar1;
@@ -145,8 +145,8 @@ int glBindFragmentShaderATI_impl(param_1, param_2)
   uint uVar6;
   int iVar7;
   
-  if (((unsigned char *)0x00001134)[param_1] == '\0') {
-    iVar7 = *(int *)(((unsigned char *)0x00001154) + param_1);
+  if (((unsigned char *)0x00001134)[ctx] == '\0') {
+    iVar7 = *(int *)(((unsigned char *)0x00001154) + ctx);
     loopIndex = 0;
     iVar4 = 0;
     uVar5 = *(uint *)(iVar7 + 4);
@@ -154,7 +154,7 @@ int glBindFragmentShaderATI_impl(param_1, param_2)
     iVar3 = 0;
     while (loopIndex < uVar5) {
       if (!bVar1) goto LAB_000a1378;
-      if (param_2 == *(int *)(iVar3 + *(int *)(iVar7 + 0x88))) {
+      if (shaderId == *(int *)(iVar3 + *(int *)(iVar7 + 0x88))) {
         bVar1 = false;
       }
       else {
@@ -165,97 +165,97 @@ int glBindFragmentShaderATI_impl(param_1, param_2)
     }
     if (bVar1) {
       if ((uVar5 & 7) == 0) {
-        uVar2 = (**(code **)(param_1 + 0x10))(1,uVar5 * 0x78 + 0x3c0);
-        (**(code **)(((unsigned char *)0x00001344) + param_1))
+        uVar2 = (**(code **)(ctx + 0x10))(1,uVar5 * 0x78 + 0x3c0);
+        (**(code **)(((unsigned char *)0x00001344) + ctx))
                   (uVar2,*(undefined4 *)(iVar7 + 0x88),*(int *)(iVar7 + 4) * 0x78);
-        (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar7 + 0x88));
+        (**(code **)(ctx + 0x18))(*(undefined4 *)(iVar7 + 0x88));
         *(undefined4 *)(iVar7 + 0x88) = uVar2;
         uVar5 = *(uint *)(iVar7 + 4);
       }
-      ((int (*)())atifsInitShader)(param_1,uVar5 * 0x78 + *(int *)(iVar7 + 0x88));
-      *(int *)(*(int *)(iVar7 + 4) * 0x78 + *(int *)(iVar7 + 0x88)) = param_2;
+      ((int (*)())atifsInitShader)(ctx,uVar5 * 0x78 + *(int *)(iVar7 + 0x88));
+      *(int *)(*(int *)(iVar7 + 4) * 0x78 + *(int *)(iVar7 + 0x88)) = shaderId;
       *(int *)(iVar7 + 4) = *(int *)(iVar7 + 4) + 1;
-      *(uint *)(((unsigned char *)0x00001140) + param_1) = loopIndex;
-      uVar5 = *(uint *)(param_1 + 0x44);
-      *(uint *)(param_1 + 0x44) = uVar5 & 0xffffbfff;
+      *(uint *)(((unsigned char *)0x00001140) + ctx) = loopIndex;
+      uVar5 = *(uint *)(ctx + 0x44);
+      *(uint *)(ctx + 0x44) = uVar5 & 0xffffbfff;
       if ((uVar5 & 0x32000) == 0x30000) {
-        *(uint *)(param_1 + 0x44) = uVar5 & 0xfffebfff;
+        *(uint *)(ctx + 0x44) = uVar5 & 0xfffebfff;
       }
-      ((unsigned char *)0x00001136)[param_1] = 1;
+      ((unsigned char *)0x00001136)[ctx] = 1;
     }
     else {
 LAB_000a1378:
       iVar4 = *(int *)(iVar7 + 0x88);
-      if (loopIndex != *(uint *)(((unsigned char *)0x00001140) + param_1)) {
-        ((unsigned char *)0x00001136)[param_1] = 1;
+      if (loopIndex != *(uint *)(((unsigned char *)0x00001140) + ctx)) {
+        ((unsigned char *)0x00001136)[ctx] = 1;
       }
-      *(uint *)(((unsigned char *)0x00001140) + param_1) = loopIndex;
+      *(uint *)(((unsigned char *)0x00001140) + ctx) = loopIndex;
       if (*(char *)(iVar3 + iVar4 + 0x6c) == '\0') {
-        uVar5 = *(uint *)(param_1 + 0x44);
-        *(uint *)(param_1 + 0x44) = uVar5 & 0xffffbfff;
+        uVar5 = *(uint *)(ctx + 0x44);
+        *(uint *)(ctx + 0x44) = uVar5 & 0xffffbfff;
         if ((uVar5 & 0x32000) == 0x30000) {
-          *(uint *)(param_1 + 0x44) = uVar5 & 0xfffebfff;
+          *(uint *)(ctx + 0x44) = uVar5 & 0xfffebfff;
         }
       }
       else {
-        uVar5 = *(uint *)(param_1 + 0x44);
+        uVar5 = *(uint *)(ctx + 0x44);
         uVar6 = uVar5 >> 1 & 0x4000 | uVar5 & 0xffffbfff;
-        *(uint *)(param_1 + 0x44) = uVar6;
+        *(uint *)(ctx + 0x44) = uVar6;
         if ((uVar5 & 0x32000) == 0x20000) {
-          *(uint *)(param_1 + 0x44) = uVar6 | 0x10000;
+          *(uint *)(ctx + 0x44) = uVar6 | 0x10000;
         }
       }
     }
     iVar3 = iVar3 + *(int *)(iVar7 + 0x88);
-    *(int *)(((unsigned char *)0x00001144) + param_1) = iVar3;
-    ((int (*)())FUN_000a11f0)(param_1,iVar3,*(undefined4 *)(iVar3 + 4));
-    if ((*(uint *)(param_1 + 0x44) & 0x22000) == 0x20000) {
-      *(uint *)(param_1 + 0x38) = *(uint *)(param_1 + 0x38) | 0x2000;
-      *(byte *)(param_1 + 0x2e) = *(byte *)(param_1 + 0x2e) | 3;
-      *(undefined1 *)(param_1 + 0x29) = 1;
+    *(int *)(((unsigned char *)0x00001144) + ctx) = iVar3;
+    ((int (*)())FUN_000a11f0)(ctx,iVar3,*(undefined4 *)(iVar3 + 4));
+    if ((*(uint *)(ctx + 0x44) & 0x22000) == 0x20000) {
+      *(uint *)(ctx + 0x38) = *(uint *)(ctx + 0x38) | 0x2000;
+      *(byte *)(ctx + 0x2e) = *(byte *)(ctx + 0x2e) | 3;
+      *(undefined1 *)(ctx + 0x29) = 1;
     }
   }
   return;
 }
 
 /* glDeleteFragmentShaderATI_impl @ 0xa1570 (312 bytes) */
-int glDeleteFragmentShaderATI_impl(param_1, param_2)
-  int param_1;
-  int param_2;
+int glDeleteFragmentShaderATI_impl(ctx, shaderId)
+  int ctx;
+  int shaderId;
 {
-  bool bVar1;
+  bool searching;
   int iVar2;
   uint loopIndex;
-  int iVar4;
+  int shaderTable;
   
-  if ((((unsigned char *)0x00001134)[param_1] == '\0') && (param_2 != 0)) {
-    iVar4 = *(int *)(((unsigned char *)0x00001154) + param_1);
-    if (param_2 == **(int **)(((unsigned char *)0x00001144) + param_1)) {
-      ((int (*)())glBindFragmentShaderATI_impl)(param_1,0);
+  if ((((unsigned char *)0x00001134)[ctx] == '\0') && (shaderId != 0)) {
+    shaderTable = *(int *)(((unsigned char *)0x00001154) + ctx);
+    if (shaderId == **(int **)(((unsigned char *)0x00001144) + ctx)) {
+      ((int (*)())glBindFragmentShaderATI_impl)(ctx,0);
     }
     loopIndex = 0;
     iVar2 = 0;
-    bVar1 = true;
-    while (loopIndex < *(uint *)(iVar4 + 4)) {
-      if (!bVar1) goto LAB_000a161c;
-      if (param_2 == *(int *)(iVar2 + *(int *)(iVar4 + 0x88))) {
-        bVar1 = false;
+    searching = true;
+    while (loopIndex < *(uint *)(shaderTable + 4)) {
+      if (!searching) goto LAB_000a161c;
+      if (shaderId == *(int *)(iVar2 + *(int *)(shaderTable + 0x88))) {
+        searching = false;
       }
       else {
         loopIndex = loopIndex + 1;
         iVar2 = iVar2 + 0x78;
       }
     }
-    if (!bVar1) {
+    if (!searching) {
 LAB_000a161c:
-      ((int (*)())atifsFreeShader)(param_1,loopIndex * 0x78 + *(int *)(iVar4 + 0x88));
-      iVar2 = loopIndex * 0x78 + *(int *)(iVar4 + 0x88);
-      _memmove(iVar2,iVar2 + 0x78,(*(int *)(iVar4 + 4) - loopIndex) * 0x78 + -0x78);
-      *(int *)(iVar4 + 4) = *(int *)(iVar4 + 4) + -1;
-      if (loopIndex < *(uint *)(((unsigned char *)0x00001140) + param_1)) {
-        iVar2 = *(uint *)(((unsigned char *)0x00001140) + param_1) - 1;
-        *(int *)(((unsigned char *)0x00001140) + param_1) = iVar2;
-        *(int *)(((unsigned char *)0x00001144) + param_1) = iVar2 * 0x78 + *(int *)(iVar4 + 0x88);
+      ((int (*)())atifsFreeShader)(ctx,loopIndex * 0x78 + *(int *)(shaderTable + 0x88));
+      iVar2 = loopIndex * 0x78 + *(int *)(shaderTable + 0x88);
+      _memmove(iVar2,iVar2 + 0x78,(*(int *)(shaderTable + 4) - loopIndex) * 0x78 + -0x78);
+      *(int *)(shaderTable + 4) = *(int *)(shaderTable + 4) + -1;
+      if (loopIndex < *(uint *)(((unsigned char *)0x00001140) + ctx)) {
+        iVar2 = *(uint *)(((unsigned char *)0x00001140) + ctx) - 1;
+        *(int *)(((unsigned char *)0x00001140) + ctx) = iVar2;
+        *(int *)(((unsigned char *)0x00001144) + ctx) = iVar2 * 0x78 + *(int *)(shaderTable + 0x88);
       }
     }
   }
@@ -263,25 +263,25 @@ LAB_000a161c:
 }
 
 /* glBeginFragmentShaderATI_impl @ 0xa16b0 (148 bytes) */
-int glBeginFragmentShaderATI_impl(param_1)
-  int param_1;
+int glBeginFragmentShaderATI_impl(ctx)
+  int ctx;
 {
-  if (((unsigned char *)0x00001134)[param_1] == '\0') {
-    ((unsigned char *)0x00001134)[param_1] = 1;
-    ((int (*)())atifsFreeShader)(param_1,*(undefined4 *)(((unsigned char *)0x00001144) + param_1));
-    ((int (*)())atifsInitShader)(param_1,*(undefined4 *)(((unsigned char *)0x00001144) + param_1));
-    if ((*(uint *)(param_1 + 0x44) & 0x22000) == 0x20000) {
-      *(undefined1 *)(param_1 + 0x29) = 1;
-      *(uint *)(param_1 + 0x38) = *(uint *)(param_1 + 0x38) | 0x2000;
-      *(byte *)(param_1 + 0x2e) = *(byte *)(param_1 + 0x2e) | 3;
+  if (((unsigned char *)0x00001134)[ctx] == '\0') {
+    ((unsigned char *)0x00001134)[ctx] = 1;
+    ((int (*)())atifsFreeShader)(ctx,*(undefined4 *)(((unsigned char *)0x00001144) + ctx));
+    ((int (*)())atifsInitShader)(ctx,*(undefined4 *)(((unsigned char *)0x00001144) + ctx));
+    if ((*(uint *)(ctx + 0x44) & 0x22000) == 0x20000) {
+      *(undefined1 *)(ctx + 0x29) = 1;
+      *(uint *)(ctx + 0x38) = *(uint *)(ctx + 0x38) | 0x2000;
+      *(byte *)(ctx + 0x2e) = *(byte *)(ctx + 0x2e) | 3;
     }
   }
   return;
 }
 
 /* glEndFragmentShaderATI_impl @ 0xa1750 (772 bytes) */
-int glEndFragmentShaderATI_impl(param_1)
-  int param_1;
+int glEndFragmentShaderATI_impl(ctx)
+  int ctx;
 {
   bool bVar1;
   bool bVar2;
@@ -297,11 +297,11 @@ int glEndFragmentShaderATI_impl(param_1)
   int iVar12;
   int iVar13;
   
-  if (((unsigned char *)0x00001134)[param_1] == '\0') {
+  if (((unsigned char *)0x00001134)[ctx] == '\0') {
     return;
   }
-  iVar13 = *(int *)(((unsigned char *)0x00001144) + param_1);
-  if ((byte)((unsigned char *)0x00001138)[param_1] == 1) {
+  iVar13 = *(int *)(((unsigned char *)0x00001144) + ctx);
+  if ((byte)((unsigned char *)0x00001138)[ctx] == 1) {
     bVar2 = false;
     iVar12 = 0;
     loopIndex = 0;
@@ -342,280 +342,280 @@ int glEndFragmentShaderATI_impl(param_1)
     }
     if (bVar2) {
       *(undefined4 *)(iVar13 + 4) = 1;
-      ((int (*)())atifsSetShaderValid)(*(undefined4 *)(((unsigned char *)0x00001144) + param_1),0);
+      ((int (*)())atifsSetShaderValid)(*(undefined4 *)(((unsigned char *)0x00001144) + ctx),0);
       goto LAB_000a1914;
     }
   }
-  *(uint *)(iVar13 + 4) = (byte)((unsigned char *)0x00001138)[param_1] + 1;
+  *(uint *)(iVar13 + 4) = (byte)((unsigned char *)0x00001138)[ctx] + 1;
 LAB_000a1914:
-  ((int (*)())FUN_000a11f0)(param_1,*(int *)(((unsigned char *)0x00001144) + param_1),
-               *(undefined4 *)(*(int *)(((unsigned char *)0x00001144) + param_1) + 4));
-  ((unsigned char *)0x00001136)[param_1] = 1;
-  ((unsigned char *)0x00001134)[param_1] = 0;
-  iVar3 = (**(code **)(((unsigned char *)0x00001164) + param_1))(param_1);
+  ((int (*)())FUN_000a11f0)(ctx,*(int *)(((unsigned char *)0x00001144) + ctx),
+               *(undefined4 *)(*(int *)(((unsigned char *)0x00001144) + ctx) + 4));
+  ((unsigned char *)0x00001136)[ctx] = 1;
+  ((unsigned char *)0x00001134)[ctx] = 0;
+  iVar3 = (**(code **)(((unsigned char *)0x00001164) + ctx))(ctx);
   if (iVar3 == 0) {
-    ((int (*)())atifsSetShaderValid)(*(undefined4 *)(((unsigned char *)0x00001144) + param_1),0);
+    ((int (*)())atifsSetShaderValid)(*(undefined4 *)(((unsigned char *)0x00001144) + ctx),0);
   }
-  ((unsigned char *)0x00001137)[param_1] = 0;
-  ((unsigned char *)0x00001138)[param_1] = 0;
+  ((unsigned char *)0x00001137)[ctx] = 0;
+  ((unsigned char *)0x00001138)[ctx] = 0;
   if (*(char *)(iVar13 + 0x6c) == '\0') {
-    uVar9 = *(uint *)(param_1 + 0x44);
+    uVar9 = *(uint *)(ctx + 0x44);
     uVar10 = uVar9 & 0xffffbfff;
-    *(uint *)(param_1 + 0x44) = uVar10;
+    *(uint *)(ctx + 0x44) = uVar10;
     if ((uVar9 & 0x32000) == 0x30000) {
       uVar10 = uVar9 & 0xfffebfff;
-      *(undefined1 *)(param_1 + 0x29) = 1;
-      *(uint *)(param_1 + 0x44) = uVar10;
-      *(uint *)(param_1 + 0x38) = *(uint *)(param_1 + 0x38) | 0x20;
+      *(undefined1 *)(ctx + 0x29) = 1;
+      *(uint *)(ctx + 0x44) = uVar10;
+      *(uint *)(ctx + 0x38) = *(uint *)(ctx + 0x38) | 0x20;
     }
   }
   else {
-    uVar9 = *(uint *)(param_1 + 0x44);
+    uVar9 = *(uint *)(ctx + 0x44);
     uVar10 = uVar9 >> 1 & 0x4000 | uVar9 & 0xffffbfff;
-    *(uint *)(param_1 + 0x44) = uVar10;
+    *(uint *)(ctx + 0x44) = uVar10;
     if ((uVar9 & 0x32000) == 0x20000) {
       uVar10 = uVar10 | 0x10000;
-      *(undefined1 *)(param_1 + 0x29) = 1;
-      *(uint *)(param_1 + 0x44) = uVar10;
-      *(uint *)(param_1 + 0x38) = *(uint *)(param_1 + 0x38) | 0x20;
+      *(undefined1 *)(ctx + 0x29) = 1;
+      *(uint *)(ctx + 0x44) = uVar10;
+      *(uint *)(ctx + 0x38) = *(uint *)(ctx + 0x38) | 0x20;
     }
   }
   if ((uVar10 & 0x22000) == 0x20000) {
-    *(uint *)(param_1 + 0x38) = *(uint *)(param_1 + 0x38) | 0x2000;
-    *(byte *)(param_1 + 0x2e) = *(byte *)(param_1 + 0x2e) | 3;
-    *(undefined1 *)(param_1 + 0x29) = 1;
+    *(uint *)(ctx + 0x38) = *(uint *)(ctx + 0x38) | 0x2000;
+    *(byte *)(ctx + 0x2e) = *(byte *)(ctx + 0x2e) | 3;
+    *(undefined1 *)(ctx + 0x29) = 1;
   }
   return;
 }
 
 /* glPassTexCoordATI_impl @ 0xa1a60 (328 bytes) */
-int glPassTexCoordATI_impl(param_1, param_2, param_3, param_4)
-  int param_1;
-  int param_2;
-  int param_3;
-  int param_4;
+int glPassTexCoordATI_impl(ctx, dst, coord, swizzle)
+  int ctx;
+  int dst;
+  int coord;
+  int swizzle;
 {
   int iVar1;
   uint uVar2;
   
-  if (((unsigned char *)0x00001134)[param_1] == '\0') {
+  if (((unsigned char *)0x00001134)[ctx] == '\0') {
     return;
   }
-  uVar2 = (uint)(byte)((unsigned char *)0x00001138)[param_1] -
-          ((int)-(uint)(byte)((unsigned char *)0x00001137)[param_1] >> 0x1f);
-  if (((uVar2 < (byte)((unsigned char *)0x00001150)[param_1]) && (param_2 - 0x8921U < 6)) &&
-     (param_4 - 0x8976U < 4)) {
-    if (param_3 - 0x84c0U < 0x20) {
-      if ((int)(uint)(byte)((unsigned char *)0x000013b2)[param_1] < (int)(param_3 - 0x84c0U)) goto LAB_000a1b60;
+  uVar2 = (uint)(byte)((unsigned char *)0x00001138)[ctx] -
+          ((int)-(uint)(byte)((unsigned char *)0x00001137)[ctx] >> 0x1f);
+  if (((uVar2 < (byte)((unsigned char *)0x00001150)[ctx]) && (dst - 0x8921U < 6)) &&
+     (swizzle - 0x8976U < 4)) {
+    if (coord - 0x84c0U < 0x20) {
+      if ((int)(uint)(byte)((unsigned char *)0x000013b2)[ctx] < (int)(coord - 0x84c0U)) goto LAB_000a1b60;
     }
-    else if (((5 < param_3 - 0x8921U) || (uVar2 == 0)) ||
-            ((param_4 != 0x8976 && (param_4 != 0x8978)))) goto LAB_000a1b60;
-    iVar1 = ((int (*)())atifsAddTextureOp)(param_1,*(undefined4 *)(((unsigned char *)0x00001144) + param_1),uVar2,param_2,param_3,0,
-                         param_4);
+    else if (((5 < coord - 0x8921U) || (uVar2 == 0)) ||
+            ((swizzle != 0x8976 && (swizzle != 0x8978)))) goto LAB_000a1b60;
+    iVar1 = ((int (*)())atifsAddTextureOp)(ctx,*(undefined4 *)(((unsigned char *)0x00001144) + ctx),uVar2,dst,coord,0,
+                         swizzle);
     if (iVar1 != 0) {
-      if (((unsigned char *)0x00001137)[param_1] == '\0') {
+      if (((unsigned char *)0x00001137)[ctx] == '\0') {
         return;
       }
-      ((unsigned char *)0x00001137)[param_1] = 0;
-      ((unsigned char *)0x00001138)[param_1] = ((unsigned char *)0x00001138)[param_1] + '\x01';
+      ((unsigned char *)0x00001137)[ctx] = 0;
+      ((unsigned char *)0x00001138)[ctx] = ((unsigned char *)0x00001138)[ctx] + '\x01';
       return;
     }
   }
 LAB_000a1b60:
-  ((int (*)())atifsSetShaderValid)(*(undefined4 *)(((unsigned char *)0x00001144) + param_1),0);
+  ((int (*)())atifsSetShaderValid)(*(undefined4 *)(((unsigned char *)0x00001144) + ctx),0);
   return;
 }
 
 /* glSampleMapATI_impl @ 0xa1bc0 (328 bytes) */
-int glSampleMapATI_impl(param_1, param_2, param_3, param_4)
-  int param_1;
-  int param_2;
-  int param_3;
-  int param_4;
+int glSampleMapATI_impl(ctx, dst, coordSource, swizzle)
+  int ctx;
+  int dst;
+  int coordSource;
+  int swizzle;
 {
   int iVar1;
   uint uVar2;
   
-  if (((unsigned char *)0x00001134)[param_1] == '\0') {
+  if (((unsigned char *)0x00001134)[ctx] == '\0') {
     return;
   }
-  uVar2 = (uint)(byte)((unsigned char *)0x00001138)[param_1] -
-          ((int)-(uint)(byte)((unsigned char *)0x00001137)[param_1] >> 0x1f);
-  if (((uVar2 < (byte)((unsigned char *)0x00001150)[param_1]) && (param_2 - 0x8921U < 6)) &&
-     (param_4 - 0x8976U < 4)) {
-    if (param_3 - 0x84c0U < 0x20) {
-      if ((int)(uint)(byte)((unsigned char *)0x000013b2)[param_1] < (int)(param_3 - 0x84c0U)) goto LAB_000a1cc0;
+  uVar2 = (uint)(byte)((unsigned char *)0x00001138)[ctx] -
+          ((int)-(uint)(byte)((unsigned char *)0x00001137)[ctx] >> 0x1f);
+  if (((uVar2 < (byte)((unsigned char *)0x00001150)[ctx]) && (dst - 0x8921U < 6)) &&
+     (swizzle - 0x8976U < 4)) {
+    if (coordSource - 0x84c0U < 0x20) {
+      if ((int)(uint)(byte)((unsigned char *)0x000013b2)[ctx] < (int)(coordSource - 0x84c0U)) goto LAB_000a1cc0;
     }
-    else if (((5 < param_3 - 0x8921U) || (uVar2 == 0)) ||
-            ((param_4 != 0x8976 && (param_4 != 0x8978)))) goto LAB_000a1cc0;
-    iVar1 = ((int (*)())atifsAddTextureOp)(param_1,*(undefined4 *)(((unsigned char *)0x00001144) + param_1),uVar2,param_2,param_3,1,
-                         param_4);
+    else if (((5 < coordSource - 0x8921U) || (uVar2 == 0)) ||
+            ((swizzle != 0x8976 && (swizzle != 0x8978)))) goto LAB_000a1cc0;
+    iVar1 = ((int (*)())atifsAddTextureOp)(ctx,*(undefined4 *)(((unsigned char *)0x00001144) + ctx),uVar2,dst,coordSource,1,
+                         swizzle);
     if (iVar1 != 0) {
-      if (((unsigned char *)0x00001137)[param_1] == '\0') {
+      if (((unsigned char *)0x00001137)[ctx] == '\0') {
         return;
       }
-      ((unsigned char *)0x00001137)[param_1] = 0;
-      ((unsigned char *)0x00001138)[param_1] = ((unsigned char *)0x00001138)[param_1] + '\x01';
+      ((unsigned char *)0x00001137)[ctx] = 0;
+      ((unsigned char *)0x00001138)[ctx] = ((unsigned char *)0x00001138)[ctx] + '\x01';
       return;
     }
   }
 LAB_000a1cc0:
-  ((int (*)())atifsSetShaderValid)(*(undefined4 *)(((unsigned char *)0x00001144) + param_1),0);
+  ((int (*)())atifsSetShaderValid)(*(undefined4 *)(((unsigned char *)0x00001144) + ctx),0);
   return;
 }
 
 /* glColorFragmentOp1ATI_impl @ 0xa1d20 (156 bytes) */
-int glColorFragmentOp1ATI_impl(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int glColorFragmentOp1ATI_impl(ctx, op, dst, dstMask, dstMod, arg1, arg1Rep, arg1Mod)
+  int ctx;
+  undefined4 op;
+  undefined4 dst;
+  undefined4 dstMask;
+  undefined4 dstMod;
+  undefined4 arg1;
+  undefined4 arg1Rep;
+  undefined4 arg1Mod;
 {
-  if (((unsigned char *)0x00001134)[param_1] != '\0') {
-    ((unsigned char *)0x00001137)[param_1] = 1;
-    ((int (*)())atifsAddColorOp)(param_1,*(undefined4 *)(((unsigned char *)0x00001144) + param_1),
-                 (uint)(byte)((unsigned char *)0x00001138)[param_1],param_2,param_3,param_4,param_5,param_6,
-                 param_7,param_8,0,0,0,0,0,0);
+  if (((unsigned char *)0x00001134)[ctx] != '\0') {
+    ((unsigned char *)0x00001137)[ctx] = 1;
+    ((int (*)())atifsAddColorOp)(ctx,*(undefined4 *)(((unsigned char *)0x00001144) + ctx),
+                 (uint)(byte)((unsigned char *)0x00001138)[ctx],op,dst,dstMask,dstMod,arg1,
+                 arg1Rep,arg1Mod,0,0,0,0,0,0);
   }
   return;
 }
 
 /* glColorFragmentOp2ATI_impl @ 0xa1dc0 (168 bytes) */
-int glColorFragmentOp2ATI_impl(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
-  undefined4 param_9;
-  undefined4 param_10;
-  undefined4 param_11;
+int glColorFragmentOp2ATI_impl(ctx, op, dst, dstMask, dstMod, arg1, arg1Rep, arg1Mod, arg2, arg2Rep, arg2Mod)
+  int ctx;
+  undefined4 op;
+  undefined4 dst;
+  undefined4 dstMask;
+  undefined4 dstMod;
+  undefined4 arg1;
+  undefined4 arg1Rep;
+  undefined4 arg1Mod;
+  undefined4 arg2;
+  undefined4 arg2Rep;
+  undefined4 arg2Mod;
 {
-  if (((unsigned char *)0x00001134)[param_1] != '\0') {
-    ((unsigned char *)0x00001137)[param_1] = 1;
-    ((int (*)())atifsAddColorOp)(param_1,*(undefined4 *)(((unsigned char *)0x00001144) + param_1),
-                 (uint)(byte)((unsigned char *)0x00001138)[param_1],param_2,param_3,param_4,param_5,param_6,
-                 param_7,param_8,param_9,param_10,param_11,0,0,0);
+  if (((unsigned char *)0x00001134)[ctx] != '\0') {
+    ((unsigned char *)0x00001137)[ctx] = 1;
+    ((int (*)())atifsAddColorOp)(ctx,*(undefined4 *)(((unsigned char *)0x00001144) + ctx),
+                 (uint)(byte)((unsigned char *)0x00001138)[ctx],op,dst,dstMask,dstMod,arg1,
+                 arg1Rep,arg1Mod,arg2,arg2Rep,arg2Mod,0,0,0);
   }
   return;
 }
 
 /* glColorFragmentOp3ATI_impl @ 0xa1e70 (176 bytes) */
-int glColorFragmentOp3ATI_impl(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12, param_13, param_14)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
-  undefined4 param_9;
-  undefined4 param_10;
-  undefined4 param_11;
-  undefined4 param_12;
-  undefined4 param_13;
-  undefined4 param_14;
+int glColorFragmentOp3ATI_impl(ctx, op, dst, dstMask, dstMod, arg1, arg1Rep, arg1Mod, arg2, arg2Rep, arg2Mod, arg3, arg3Rep, arg3Mod)
+  int ctx;
+  undefined4 op;
+  undefined4 dst;
+  undefined4 dstMask;
+  undefined4 dstMod;
+  undefined4 arg1;
+  undefined4 arg1Rep;
+  undefined4 arg1Mod;
+  undefined4 arg2;
+  undefined4 arg2Rep;
+  undefined4 arg2Mod;
+  undefined4 arg3;
+  undefined4 arg3Rep;
+  undefined4 arg3Mod;
 {
-  if (((unsigned char *)0x00001134)[param_1] != '\0') {
-    ((unsigned char *)0x00001137)[param_1] = 1;
-    ((int (*)())atifsAddColorOp)(param_1,*(undefined4 *)(((unsigned char *)0x00001144) + param_1),
-                 (uint)(byte)((unsigned char *)0x00001138)[param_1],param_2,param_3,param_4,param_5,param_6,
-                 param_7,param_8,param_9,param_10,param_11,param_12,param_13,param_14);
+  if (((unsigned char *)0x00001134)[ctx] != '\0') {
+    ((unsigned char *)0x00001137)[ctx] = 1;
+    ((int (*)())atifsAddColorOp)(ctx,*(undefined4 *)(((unsigned char *)0x00001144) + ctx),
+                 (uint)(byte)((unsigned char *)0x00001138)[ctx],op,dst,dstMask,dstMod,arg1,
+                 arg1Rep,arg1Mod,arg2,arg2Rep,arg2Mod,arg3,arg3Rep,arg3Mod);
   }
   return;
 }
 
 /* glAlphaFragmentOp1ATI_impl @ 0xa1f20 (144 bytes) */
-int glAlphaFragmentOp1ATI_impl(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int glAlphaFragmentOp1ATI_impl(ctx, op, dst, dstMod, arg1, arg1Rep, arg1Mod)
+  int ctx;
+  undefined4 op;
+  undefined4 dst;
+  undefined4 dstMod;
+  undefined4 arg1;
+  undefined4 arg1Rep;
+  undefined4 arg1Mod;
 {
-  if (((unsigned char *)0x00001134)[param_1] != '\0') {
-    ((unsigned char *)0x00001137)[param_1] = 1;
-    ((int (*)())atifsAddAlphaOp)(param_1,*(undefined4 *)(((unsigned char *)0x00001144) + param_1),
-                 (uint)(byte)((unsigned char *)0x00001138)[param_1],param_2,param_3,param_4,param_5,param_6,
-                 param_7,0,0,0,0,0,0);
+  if (((unsigned char *)0x00001134)[ctx] != '\0') {
+    ((unsigned char *)0x00001137)[ctx] = 1;
+    ((int (*)())atifsAddAlphaOp)(ctx,*(undefined4 *)(((unsigned char *)0x00001144) + ctx),
+                 (uint)(byte)((unsigned char *)0x00001138)[ctx],op,dst,dstMod,arg1,arg1Rep,
+                 arg1Mod,0,0,0,0,0,0);
   }
   return;
 }
 
 /* glAlphaFragmentOp2ATI_impl @ 0xa1fb0 (160 bytes) */
-int glAlphaFragmentOp2ATI_impl(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
-  undefined4 param_9;
-  undefined4 param_10;
+int glAlphaFragmentOp2ATI_impl(ctx, op, dst, dstMod, arg1, arg1Rep, arg1Mod, arg2, arg2Rep, arg2Mod)
+  int ctx;
+  undefined4 op;
+  undefined4 dst;
+  undefined4 dstMod;
+  undefined4 arg1;
+  undefined4 arg1Rep;
+  undefined4 arg1Mod;
+  undefined4 arg2;
+  undefined4 arg2Rep;
+  undefined4 arg2Mod;
 {
-  if (((unsigned char *)0x00001134)[param_1] != '\0') {
-    ((unsigned char *)0x00001137)[param_1] = 1;
-    ((int (*)())atifsAddAlphaOp)(param_1,*(undefined4 *)(((unsigned char *)0x00001144) + param_1),
-                 (uint)(byte)((unsigned char *)0x00001138)[param_1],param_2,param_3,param_4,param_5,param_6,
-                 param_7,param_8,param_9,param_10,0,0,0);
+  if (((unsigned char *)0x00001134)[ctx] != '\0') {
+    ((unsigned char *)0x00001137)[ctx] = 1;
+    ((int (*)())atifsAddAlphaOp)(ctx,*(undefined4 *)(((unsigned char *)0x00001144) + ctx),
+                 (uint)(byte)((unsigned char *)0x00001138)[ctx],op,dst,dstMod,arg1,arg1Rep,
+                 arg1Mod,arg2,arg2Rep,arg2Mod,0,0,0);
   }
   return;
 }
 
 /* glAlphaFragmentOp3ATI_impl @ 0xa2050 (168 bytes) */
-int glAlphaFragmentOp3ATI_impl(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12, param_13)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
-  undefined4 param_9;
-  undefined4 param_10;
-  undefined4 param_11;
-  undefined4 param_12;
-  undefined4 param_13;
+int glAlphaFragmentOp3ATI_impl(ctx, op, dst, dstMod, arg1, arg1Rep, arg1Mod, arg2, arg2Rep, arg2Mod, arg3, arg3Rep, arg3Mod)
+  int ctx;
+  undefined4 op;
+  undefined4 dst;
+  undefined4 dstMod;
+  undefined4 arg1;
+  undefined4 arg1Rep;
+  undefined4 arg1Mod;
+  undefined4 arg2;
+  undefined4 arg2Rep;
+  undefined4 arg2Mod;
+  undefined4 arg3;
+  undefined4 arg3Rep;
+  undefined4 arg3Mod;
 {
-  if (((unsigned char *)0x00001134)[param_1] != '\0') {
-    ((unsigned char *)0x00001137)[param_1] = 1;
-    ((int (*)())atifsAddAlphaOp)(param_1,*(undefined4 *)(((unsigned char *)0x00001144) + param_1),
-                 (uint)(byte)((unsigned char *)0x00001138)[param_1],param_2,param_3,param_4,param_5,param_6,
-                 param_7,param_8,param_9,param_10,param_11,param_12,param_13);
+  if (((unsigned char *)0x00001134)[ctx] != '\0') {
+    ((unsigned char *)0x00001137)[ctx] = 1;
+    ((int (*)())atifsAddAlphaOp)(ctx,*(undefined4 *)(((unsigned char *)0x00001144) + ctx),
+                 (uint)(byte)((unsigned char *)0x00001138)[ctx],op,dst,dstMod,arg1,arg1Rep,
+                 arg1Mod,arg2,arg2Rep,arg2Mod,arg3,arg3Rep,arg3Mod);
   }
   return;
 }
 
 /* glSetFragmentShaderConstantATI_impl @ 0xa2100 (192 bytes) */
-int glSetFragmentShaderConstantATI_impl(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  undefined4 param_3;
+int glSetFragmentShaderConstantATI_impl(ctx, dst, value)
+  int ctx;
+  int dst;
+  undefined4 value;
 {
-  if (7 < param_2 - 0x8941U) {
-    ((int (*)())atifsSetShaderValid)(*(undefined4 *)(((unsigned char *)0x00001144) + param_1),0);
+  if (7 < dst - 0x8941U) {
+    ((int (*)())atifsSetShaderValid)(*(undefined4 *)(((unsigned char *)0x00001144) + ctx),0);
     return;
   }
-  ((int (*)())atifsSetConstant)(param_1,*(undefined4 *)(((unsigned char *)0x00001144) + param_1),param_2,param_3,
-               (uint)(byte)((unsigned char *)0x00001134)[param_1]);
-  if (((*(uint *)(param_1 + 0x44) & 0x22000) == 0x20000) &&
-     ((*(uint *)(param_1 + 0x38) & 0x2000) != 0)) {
-    *(uint *)(param_1 + 0x38) = *(uint *)(param_1 + 0x38) | 0x2000;
-    *(undefined1 *)(param_1 + 0x29) = 1;
-    *(byte *)(param_1 + 0x2e) = *(byte *)(param_1 + 0x2e) | 2;
+  ((int (*)())atifsSetConstant)(ctx,*(undefined4 *)(((unsigned char *)0x00001144) + ctx),dst,value,
+               (uint)(byte)((unsigned char *)0x00001134)[ctx]);
+  if (((*(uint *)(ctx + 0x44) & 0x22000) == 0x20000) &&
+     ((*(uint *)(ctx + 0x38) & 0x2000) != 0)) {
+    *(uint *)(ctx + 0x38) = *(uint *)(ctx + 0x38) | 0x2000;
+    *(undefined1 *)(ctx + 0x29) = 1;
+    *(byte *)(ctx + 0x2e) = *(byte *)(ctx + 0x2e) | 2;
   }
   return;
 }
@@ -636,37 +636,37 @@ int atifsResetState(param_1)
 }
 
 /* atifsFreeShaderTable @ 0xa2240 (232 bytes) */
-int atifsFreeShaderTable(param_1)
-  int param_1;
+int atifsFreeShaderTable(ctx)
+  int ctx;
 {
-  int iVar1;
+  int shader;
   uint loopIndex;
-  int iVar3;
-  int iVar4;
+  int shaderOffset;
+  int shaderTable;
   
-  iVar4 = *(int *)(((unsigned char *)0x00001154) + param_1);
-  ((int (*)())atifsFreeShader)(param_1,iVar4 + 0x10);
-  if (*(int *)(iVar4 + 4) != 0) {
+  shaderTable = *(int *)(((unsigned char *)0x00001154) + ctx);
+  ((int (*)())atifsFreeShader)(ctx,shaderTable + 0x10);
+  if (*(int *)(shaderTable + 4) != 0) {
     loopIndex = 0;
-    iVar3 = 0;
+    shaderOffset = 0;
     do {
       loopIndex = loopIndex + 1;
-      iVar1 = iVar3 + *(int *)(iVar4 + 0x88);
-      iVar3 = iVar3 + 0x78;
-      ((int (*)())atifsFreeShader)(param_1,iVar1);
-    } while (loopIndex < *(uint *)(iVar4 + 4));
+      shader = shaderOffset + *(int *)(shaderTable + 0x88);
+      shaderOffset = shaderOffset + 0x78;
+      ((int (*)())atifsFreeShader)(ctx,shader);
+    } while (loopIndex < *(uint *)(shaderTable + 4));
   }
-  *(undefined4 *)(iVar4 + 4) = 0;
-  if (*(int *)(iVar4 + 0x88) != 0) {
-    (**(code **)(param_1 + 0x18))(*(int *)(iVar4 + 0x88));
-    *(undefined4 *)(iVar4 + 0x88) = 0;
+  *(undefined4 *)(shaderTable + 4) = 0;
+  if (*(int *)(shaderTable + 0x88) != 0) {
+    (**(code **)(ctx + 0x18))(*(int *)(shaderTable + 0x88));
+    *(undefined4 *)(shaderTable + 0x88) = 0;
   }
-  if (*(int *)(iVar4 + 0xc) != 0) {
-    (**(code **)(param_1 + 0x18))(*(int *)(iVar4 + 0xc));
-    *(undefined4 *)(iVar4 + 0xc) = 0;
+  if (*(int *)(shaderTable + 0xc) != 0) {
+    (**(code **)(ctx + 0x18))(*(int *)(shaderTable + 0xc));
+    *(undefined4 *)(shaderTable + 0xc) = 0;
   }
-  (**(code **)(param_1 + 0x18))(iVar4);
-  *(undefined4 *)(((unsigned char *)0x00001154) + param_1) = 0;
+  (**(code **)(ctx + 0x18))(shaderTable);
+  *(undefined4 *)(((unsigned char *)0x00001154) + ctx) = 0;
   return;
 }
 
@@ -736,42 +736,42 @@ int atifsUnshareShaderTable(param_1, param_2)
 }
 
 /* atifsCreateShaderTable @ 0xa2530 (288 bytes) */
-int atifsCreateShaderTable(param_1)
-  int param_1;
+int atifsCreateShaderTable(ctx)
+  int ctx;
 {
-  undefined4 *puVar1;
-  undefined1 *puVar2;
-  undefined1 *puVar3;
+  undefined4 *shaders;
+  undefined1 *defaultConstants;
+  undefined1 *constantCursor;
   int loopIndex;
   
-  *(undefined4 *)(((unsigned char *)0x0000113c) + param_1) = 0;
-  puVar1 = (undefined4 *)(**(code **)(param_1 + 0xc))(0x3c0);
-  puVar2 = (undefined1 *)
-           (**(code **)(param_1 + 0xc))((uint)*(ushort *)(((unsigned char *)0x0000114a) + param_1) * 0x14);
-  if (puVar2 != (undefined1 *)0x0) {
-    if (*(short *)(((unsigned char *)0x0000114a) + param_1) != 0) {
+  *(undefined4 *)(((unsigned char *)0x0000113c) + ctx) = 0;
+  shaders = (undefined4 *)(**(code **)(ctx + 0xc))(0x3c0);
+  defaultConstants = (undefined1 *)
+           (**(code **)(ctx + 0xc))((uint)*(ushort *)(((unsigned char *)0x0000114a) + ctx) * 0x14);
+  if (defaultConstants != (undefined1 *)0x0) {
+    if (*(short *)(((unsigned char *)0x0000114a) + ctx) != 0) {
       loopIndex = 0;
-      puVar3 = puVar2;
+      constantCursor = defaultConstants;
       do {
         loopIndex = loopIndex + 1;
-        *(undefined4 *)(puVar3 + 0x10) = 0x3f800000;
-        *puVar3 = 0;
-        *(undefined4 *)(puVar3 + 4) = 0x3f800000;
-        *(undefined4 *)(puVar3 + 8) = 0x3f800000;
-        *(undefined4 *)(puVar3 + 0xc) = 0x3f800000;
-        puVar3 = puVar3 + 0x14;
-      } while (loopIndex < (int)(uint)*(ushort *)(((unsigned char *)0x0000114a) + param_1));
+        *(undefined4 *)(constantCursor + 0x10) = 0x3f800000;
+        *constantCursor = 0;
+        *(undefined4 *)(constantCursor + 4) = 0x3f800000;
+        *(undefined4 *)(constantCursor + 8) = 0x3f800000;
+        *(undefined4 *)(constantCursor + 0xc) = 0x3f800000;
+        constantCursor = constantCursor + 0x14;
+      } while (loopIndex < (int)(uint)*(ushort *)(((unsigned char *)0x0000114a) + ctx));
     }
-    *(undefined4 *)(*(int *)(((unsigned char *)0x00001154) + param_1) + 8) = 1;
-    *(undefined4 **)(*(int *)(((unsigned char *)0x00001154) + param_1) + 0x88) = puVar1;
-    *(undefined1 **)(*(int *)(((unsigned char *)0x00001154) + param_1) + 0xc) = puVar2;
-    **(undefined4 **)(((unsigned char *)0x00001154) + param_1) = 1;
-    *(undefined4 *)(*(int *)(((unsigned char *)0x00001154) + param_1) + 4) = 1;
-    *(undefined4 *)(*(int *)(((unsigned char *)0x00001154) + param_1) + 0x8c) = 1;
-    ((int (*)())atifsInitShader)(param_1,puVar1);
-    *puVar1 = 0;
-    ((int (*)())atifsInitShader)(param_1,*(int *)(((unsigned char *)0x00001154) + param_1) + 0x10);
-    *(undefined4 *)(*(int *)(((unsigned char *)0x00001154) + param_1) + 0x10) = 0;
+    *(undefined4 *)(*(int *)(((unsigned char *)0x00001154) + ctx) + 8) = 1;
+    *(undefined4 **)(*(int *)(((unsigned char *)0x00001154) + ctx) + 0x88) = shaders;
+    *(undefined1 **)(*(int *)(((unsigned char *)0x00001154) + ctx) + 0xc) = defaultConstants;
+    **(undefined4 **)(((unsigned char *)0x00001154) + ctx) = 1;
+    *(undefined4 *)(*(int *)(((unsigned char *)0x00001154) + ctx) + 4) = 1;
+    *(undefined4 *)(*(int *)(((unsigned char *)0x00001154) + ctx) + 0x8c) = 1;
+    ((int (*)())atifsInitShader)(ctx,shaders);
+    *shaders = 0;
+    ((int (*)())atifsInitShader)(ctx,*(int *)(((unsigned char *)0x00001154) + ctx) + 0x10);
+    *(undefined4 *)(*(int *)(((unsigned char *)0x00001154) + ctx) + 0x10) = 0;
   }
   return;
 }
@@ -1256,34 +1256,34 @@ int atifsAddAlphaOp(param_1, param_2, param_3, param_4, param_5, param_6, param_
 }
 
 /* atifsSetConstant @ 0xa3490 (196 bytes) */
-int atifsSetConstant(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  int param_2;
-  int param_3;
-  undefined4 *param_4;
-  int param_5;
+int atifsSetConstant(ctx, shader, dst, value, inShader)
+  int ctx;
+  int shader;
+  int dst;
+  undefined4 *value;
+  int inShader;
 {
-  int iVar1;
-  int iVar2;
+  int constIndex;
+  int slot;
   
-  iVar1 = param_3 + -0x8941;
-  if ((-1 < iVar1) && (iVar1 < (int)(uint)*(ushort *)(((unsigned char *)0x0000114a) + param_1))) {
-    if (param_5 != 0) {
-      iVar1 = iVar1 * 0x14;
-      *(undefined1 *)(*(int *)(param_2 + 0x28) + iVar1) = 1;
-      *(undefined4 *)(iVar1 + *(int *)(param_2 + 0x28) + 4) = *param_4;
-      *(undefined4 *)(iVar1 + *(int *)(param_2 + 0x28) + 8) = param_4[1];
-      *(undefined4 *)(iVar1 + *(int *)(param_2 + 0x28) + 0xc) = param_4[2];
-      *(undefined4 *)(iVar1 + *(int *)(param_2 + 0x28) + 0x10) = param_4[3];
+  constIndex = dst + -0x8941;
+  if ((-1 < constIndex) && (constIndex < (int)(uint)*(ushort *)(((unsigned char *)0x0000114a) + ctx))) {
+    if (inShader != 0) {
+      constIndex = constIndex * 0x14;
+      *(undefined1 *)(*(int *)(shader + 0x28) + constIndex) = 1;
+      *(undefined4 *)(constIndex + *(int *)(shader + 0x28) + 4) = *value;
+      *(undefined4 *)(constIndex + *(int *)(shader + 0x28) + 8) = value[1];
+      *(undefined4 *)(constIndex + *(int *)(shader + 0x28) + 0xc) = value[2];
+      *(undefined4 *)(constIndex + *(int *)(shader + 0x28) + 0x10) = value[3];
       return 1;
     }
-    iVar2 = *(int *)(*(int *)(((unsigned char *)0x00001154) + param_1) + 0xc);
-    *(undefined1 *)(iVar1 * 0x14 + iVar2) = 1;
-    iVar2 = iVar1 * 0x14 + iVar2;
-    *(undefined4 *)(iVar2 + 4) = *param_4;
-    *(undefined4 *)(iVar2 + 8) = param_4[1];
-    *(undefined4 *)(iVar2 + 0xc) = param_4[2];
-    *(undefined4 *)(iVar2 + 0x10) = param_4[3];
+    slot = *(int *)(*(int *)(((unsigned char *)0x00001154) + ctx) + 0xc);
+    *(undefined1 *)(constIndex * 0x14 + slot) = 1;
+    slot = constIndex * 0x14 + slot;
+    *(undefined4 *)(slot + 4) = *value;
+    *(undefined4 *)(slot + 8) = value[1];
+    *(undefined4 *)(slot + 0xc) = value[2];
+    *(undefined4 *)(slot + 0x10) = value[3];
     return 1;
   }
   return 0;

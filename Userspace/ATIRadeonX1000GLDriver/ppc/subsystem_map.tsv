@@ -1,30 +1,30 @@
 # GLDriver function -> subsystem (fork D8, round 3). subsystem from: name (an existing real name), rule on the body (kernel calls, libm, strings, ring packets), RTTI (class_methods.tsv), or majority of labelled neighbours in the call graph (>=60%, iterated); empty = unclassified.
 address	name	size	subsystem	basis
 0x1740	dyld_stub_binding_helper	48	crt	name
-0x1770	FUN_00001770	32	unclassified	
+0x1770	dyld_func_lookup_stub	32	crt	I3: import/local stub (I3): body is a single call of the named import
 0x1790	cxa_atexit_check_2	40	crt	name
 0x17b8	cxa_atexit_check_1	120	crt	name
 0x1830	check_cxa_atexit	204	crt	name
 0x18fc	find_atexit_10_3	504	crt	name
 0x1af4	FUN_00001af4	32	string	calls string imports
-0x1b14	FUN_00001b14	32	unclassified	
+0x1b14	FUN_00001b14	32	crt	I3: 32-byte stub-shaped function, only referenced from the eh_frame table (I3)
 0x1b34	get_globals	528	crt	name
 0x1d44	FUN_00001d44	32	locking-and-runtime	calls pthread/keymgr
-0x1d64	FUN_00001d64	32	unclassified	
-0x1d84	FUN_00001d84	32	unclassified	
+0x1d64	FUN_00001d64	32	crt	I3: neighbours (call graph majority, I3)
+0x1d84	dlsym_stub_00001d84	32	crt	I3: import/local stub (I3): body is a single call of the named import
 0x1da4	FUN_00001da4	32	string	calls string imports
-0x1dc4	FUN_00001dc4	32	unclassified	
-0x1de4	FUN_00001de4	32	unclassified	
+0x1dc4	dlopen_stub_00001dc4	32	crt	I3: import/local stub (I3): body is a single call of the named import
+0x1de4	calloc_stub_00001de4	32	crt	I3: import/local stub (I3): body is a single call of the named import
 0x1e04	FUN_00001e04	32	locking-and-runtime	calls pthread/keymgr
 0x1e24	add_routine	268	crt	name
 0x1f30	FUN_00001f30	32	locking-and-runtime	calls pthread/keymgr
-0x1f50	FUN_00001f50	32	unclassified	
+0x1f50	malloc_stub_00001f50	32	crt	I3: import/local stub (I3): body is a single call of the named import
 0x1f70	run_routines	292	crt	name
 0x2094	FUN_00002094	32	locking-and-runtime	calls pthread/keymgr
-0x20b4	FUN_000020b4	32	unclassified	
+0x20b4	free_stub_000020b4	32	crt	I3: import/local stub (I3): body is a single call of the named import
 0x20d4	FUN_000020d4	32	locking-and-runtime	calls pthread/keymgr
 0x20f4	cxa_atexit_wrapper	312	crt	name
-0x222c	FUN_0000222c	32	unclassified	
+0x222c	run_routines_stub_0000222c	32	crt	I3: import/local stub (I3): body is a single call of the named import
 0x224c	FUN_0000224c	32	locking-and-runtime	calls pthread/keymgr
 0x226c	FUN_0000226c	32	locking-and-runtime	calls pthread/keymgr
 0x228c	our_atexit	188	crt	name
@@ -32,7 +32,7 @@ address	name	size	subsystem	basis
 0x2368	FUN_00002368	32	locking-and-runtime	calls pthread/keymgr
 0x2388	FUN_00002388	32	locking-and-runtime	calls pthread/keymgr
 0x23a8	atexit_common	672	crt	name
-0x2648	FUN_00002648	32	unclassified	
+0x2648	malloc_stub_00002648	32	crt	I3: import/local stub (I3): body is a single call of the named import
 0x2668	FUN_00002668	32	locking-and-runtime	calls pthread/keymgr
 0x2688	FUN_00002688	32	locking-and-runtime	calls pthread/keymgr
 0x26a8	FUN_000026a8	32	locking-and-runtime	calls pthread/keymgr
@@ -74,9 +74,9 @@ address	name	size	subsystem	basis
 0x7ce0	_gldReclaimFramebuffer	4	gld-api	name
 0x7cf0	_gldDestroyFramebuffer	96	gld-api	name
 0x7d50	FUN_00007d50	368	gld-api	neighbours (round 1)
-0x7ec0	FUN_00007ec0	256	unclassified	
-0x7fc0	FUN_00007fc0	112	unclassified	
-0x8030	FUN_00008030	128	unclassified	
+0x7ec0	gldDepthBitsToFormatMask	256	pixel-format	I3: pixel format layout masks (_gldChoosePixelFormat helpers)
+0x7fc0	gldColorBitsToFormatMask	112	pixel-format	I3: pixel format layout masks (_gldChoosePixelFormat helpers)
+0x8030	gldAlphaBitsToFormatMask	128	pixel-format	I3: pixel format layout masks (_gldChoosePixelFormat helpers)
 0x80b0	_gldChoosePixelFormat	1980	gld-api	name
 0x8a10	_gldDestroyPixelFormat	52	gld-api	name
 0x8a50	_gldGetRendererInfo	500	gld-api	name
@@ -97,32 +97,32 @@ address	name	size	subsystem	basis
 0x9540	_gldGetPipelineProgramInfo	36	gld-api	name
 0x9570	_gldDestroyPipelineProgram	104	gld-api	name
 0x95e0	FUN_000095e0	192	gld-api	neighbours (round 1)
-0x96b0	FUN_000096b0	72	unclassified	
-0x973c	FUN_0000973c	20	unclassified	
-0x9750	FUN_00009750	48	unclassified	
-0x979c	FUN_0000979c	16	unclassified	
-0x97ac	FUN_000097ac	16	unclassified	
-0x97bc	FUN_000097bc	16	unclassified	
-0x97cc	FUN_000097cc	16	unclassified	
-0x97dc	FUN_000097dc	16	unclassified	
-0x97ec	FUN_000097ec	16	unclassified	
-0x97fc	FUN_000097fc	16	unclassified	
-0x9810	FUN_00009810	112	unclassified	
-0x9880	FUN_00009880	48	unclassified	
-0x98c8	FUN_000098c8	16	unclassified	
-0x9b70	FUN_00009b70	88	unclassified	
+0x96b0	FUN_000096b0	72	gl-state-and-hooks	I3: state register descriptor decoder (jump-table fragments included)
+0x973c	FUN_0000973c	20	gl-state-and-hooks	I3: state register descriptor decoder (jump-table fragments included)
+0x9750	FUN_00009750	48	gl-state-and-hooks	I3: state register descriptor decoder (jump-table fragments included)
+0x979c	FUN_0000979c	16	gl-state-and-hooks	I3: state register descriptor decoder (jump-table fragments included)
+0x97ac	FUN_000097ac	16	gl-state-and-hooks	I3: state register descriptor decoder (jump-table fragments included)
+0x97bc	FUN_000097bc	16	gl-state-and-hooks	I3: state register descriptor decoder (jump-table fragments included)
+0x97cc	FUN_000097cc	16	gl-state-and-hooks	I3: state register descriptor decoder (jump-table fragments included)
+0x97dc	FUN_000097dc	16	gl-state-and-hooks	I3: state register descriptor decoder (jump-table fragments included)
+0x97ec	FUN_000097ec	16	gl-state-and-hooks	I3: state register descriptor decoder (jump-table fragments included)
+0x97fc	FUN_000097fc	16	gl-state-and-hooks	I3: state register descriptor decoder (jump-table fragments included)
+0x9810	FUN_00009810	112	gl-state-and-hooks	I3: state register descriptor decoder (jump-table fragments included)
+0x9880	FUN_00009880	48	gl-state-and-hooks	I3: state register descriptor decoder (jump-table fragments included)
+0x98c8	FUN_000098c8	16	gl-state-and-hooks	I3: state register descriptor decoder (jump-table fragments included)
+0x9b70	gldAllocQueryRecord	88	gld-api	I3: context / display notification housekeeping (strings and teardown order)
 0x9bd0	gld_waitQueryStamp	164	gl-state-and-hooks	name
 0x9c80	_gldDestroyQuery	76	gld-api	name
 0x9cd0	gld_releaseQueryMemory	152	gl-state-and-hooks	name
 0x9d70	gld_setQueryAgpRefBacking	248	gl-state-and-hooks	name
 0x9e70	_gldCreateQuery	532	gld-api	name
-0xa0a0	FUN_0000a0a0	68	unclassified	
+0xa0a0	gldFormatBitsPerPixel	68	pixel-format	I3: pixel format layout masks (_gldChoosePixelFormat helpers)
 0xa0f0	FUN_0000a0f0	48	gl-state-and-hooks	neighbours (round 1)
-0xa120	FUN_0000a120	92	unclassified	
+0xa120	gldFormatAlphaBits	92	pixel-format	I3: pixel format layout masks (_gldChoosePixelFormat helpers)
 0xa180	FUN_0000a180	344	gl-state-and-hooks	neighbours (round 1)
 0xa2f0	FUN_0000a2f0	184	gl-state-and-hooks	neighbours (round 1)
-0xa3f0	FUN_0000a3f0	592	unclassified	
-0xa670	FUN_0000a670	100	unclassified	
+0xa3f0	gldPixelUnitBytes	592	gld-api	I3: pixel transfer size / cache helper (I3)
+0xa670	gldPixelRowBytes	100	gld-api	I3: pixel transfer size / cache helper (I3)
 0xa6e0	FUN_0000a6e0	292	gl-state-and-hooks	neighbours (round 1)
 0xa820	FUN_0000a820	452	pixel-conversion	neighbours (round 1)
 0xa9f0	FUN_0000a9f0	244	gld-api	neighbours (round 1)
@@ -134,8 +134,8 @@ address	name	size	subsystem	basis
 0xb270	gld_setTextureNewTextureBacking	296	gl-state-and-hooks	name
 0xb3a0	gld_ensureTextureSurfaceBacking	332	gl-state-and-hooks	name
 0xb4f0	gld_ensureTextureGlobalBacking	292	gl-state-and-hooks	name
-0xb620	FUN_0000b620	72	unclassified	
-0xb670	FUN_0000b670	80	unclassified	
+0xb620	gldFlushDataCacheRange	72	gld-api	I3: pixel transfer size / cache helper (I3)
+0xb670	gldFlushDataCacheRangeSync	80	gld-api	I3: pixel transfer size / cache helper (I3)
 0xb6c0	_gldCreateVertexArray	80	gld-api	name
 0xb710	_gldFlushVertexArray	56	gld-api	name
 0xb750	FUN_0000b750	276	gl-state-and-hooks	neighbours (round 2)
@@ -146,21 +146,21 @@ address	name	size	subsystem	basis
 0xbc20	_gldDestroyVertexArray	56	gld-api	name
 0xbc60	gld_setVertexArrayAgpRefBacking	248	gl-state-and-hooks	name
 0xbd60	gld_setVertexArrayNewTextureBacking	264	gl-state-and-hooks	name
-0xbe70	FUN_0000be70	272	unclassified	
-0xbfa0	FUN_0000bfa0	1332	math	calls libm
+0xbe70	powerOfTenDouble	272	program-text-printer	I3: ARB program IR printer family (notes_shader_formats.md section 1/4)
+0xbfa0	textPrintDoubleShortest	1332	program-text-printer	I3: ARB program IR printer family (notes_shader_formats.md section 1/4)
 0xc500	FUN_0000c500	892	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
-0xc8a0	FUN_0000c8a0	136	unclassified	
-0xc930	FUN_0000c930	284	unclassified	
-0xca50	FUN_0000ca50	312	unclassified	
-0xcb90	FUN_0000cb90	572	unclassified	
-0xcdf0	FUN_0000cdf0	156	unclassified	
-0xce90	FUN_0000ce90	924	unclassified	
-0xd240	FUN_0000d240	308	unclassified	
-0xd380	FUN_0000d380	2976	unclassified	
-0xdf50	FUN_0000df50	648	unclassified	
-0xe1f0	FUN_0000e1f0	4068	unclassified	
-0xf250	FUN_0000f250	932	unclassified	
-0xf620	FUN_0000f620	27520	unclassified	
+0xc8a0	textBufferEnsureRoom	136	program-text-printer	I3: ARB program IR printer family (notes_shader_formats.md section 1/4)
+0xc930	arbIrPrintCcAndSaturateSuffix	284	program-text-printer	I3: ARB program IR printer family (notes_shader_formats.md section 1/4)
+0xca50	arbIrPrintPrecisionSuffix	312	program-text-printer	I3: ARB program IR printer family (notes_shader_formats.md section 1/4)
+0xcb90	textPrintDecimalDigits	572	program-text-printer	I3: ARB program IR printer family (notes_shader_formats.md section 1/4)
+0xcdf0	textPrintSignedDecimal	156	program-text-printer	I3: ARB program IR printer family (notes_shader_formats.md section 1/4)
+0xce90	arbIrPrintDeclSizeSuffix	924	program-text-printer	I3: ARB program IR printer family (notes_shader_formats.md section 1/4)
+0xd240	arbIrPrintSourceSizeSuffix	308	program-text-printer	I3: ARB program IR printer family (notes_shader_formats.md section 1/4)
+0xd380	arbIrPrintDestinationOperand	2976	program-text-printer	I3: ARB program IR printer family (notes_shader_formats.md section 1/4)
+0xdf50	arbIrPrintSizeTypeSuffix	648	program-text-printer	I3: ARB program IR printer family (notes_shader_formats.md section 1/4)
+0xe1f0	arbIrPrintSourceOperand	4068	program-text-printer	I3: ARB program IR printer family (notes_shader_formats.md section 1/4)
+0xf250	arbIrPrintTextureOperand	932	program-text-printer	I3: ARB program IR printer family (notes_shader_formats.md section 1/4)
+0xf620	arbProgramIrToText	27520	program-text-printer	I3: ARB program IR printer family (notes_shader_formats.md section 1/4)
 0x16670	glBitmap_impl	2312	gl-state-and-hooks	name
 0x16fc0	gld_bufferEnumToIndex	272	gl-state-and-hooks	name
 0x17100	FUN_00017100	84	gld-api	neighbours (round 1)
@@ -171,7 +171,7 @@ address	name	size	subsystem	basis
 0x17750	gld_fillCapsBlock	748	gl-state-and-hooks	name
 0x17a40	FUN_00017a40	200	gld-api	neighbours (round 1)
 0x17b20	FUN_00017b20	740	gl-state-and-hooks	neighbours (round 1)
-0x17e10	FUN_00017e10	204	unclassified	
+0x17e10	gldRemoveDisplayNotificationObserver	204	gld-api	I3: context / display notification housekeeping (strings and teardown order)
 0x17ee0	FUN_00017ee0	432	string	calls string imports
 0x18090	FUN_00018090	100	unclassified	
 0x18120	FUN_00018120	6016	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
@@ -203,50 +203,50 @@ address	name	size	subsystem	basis
 0x1b500	returnOne_1b500	8	trivial	name
 0x1b510	FUN_0001b510	1304	pixel-conversion	neighbours (round 1)
 0x1bac0	FUN_0001bac0	904	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
-0x1be50	FUN_0001be50	868	unclassified	
-0x1c1c0	FUN_0001c1c0	416	unclassified	
+0x1be50	dxt5EncodeAlphaBlock	868	texture-compression	I3: S3TC/DXT block codec helpers
+0x1c1c0	dxt1DecodeColorIndex	416	texture-compression	I3: S3TC/DXT block codec helpers
 0x1c380	FUN_0001c380	3664	pixel-conversion	neighbours (round 1)
-0x1d1e0	FUN_0001d1e0	808	unclassified	
-0x1d7c0	FUN_0001d7c0	148	unclassified	
-0x1d880	FUN_0001d880	704	unclassified	
-0x1db50	FUN_0001db50	180	unclassified	
+0x1d1e0	dxtDecompressImage	808	texture-compression	I3: S3TC/DXT block codec helpers
+0x1d7c0	floatToHalfBits	148	math	I3: float format conversion (bit manipulation of GH_F2U)
+0x1d880	FUN_0001d880	704	texture-compression	I3: S3TC helpers
+0x1db50	gldComputeVertexChunking	180	command-ring	I3: draw-call vertex count / chunking arithmetic
 0x1dc10	FUN_0001dc10	976	gl-state-and-hooks	neighbours (round 1)
 0x1dff0	gld_startPacket	140	gl-state-and-hooks	name
 0x1e080	_gldPageoffBuffer	480	gld-api	name
 0x1e270	returnZero_1e270	8	trivial	name
 0x1e280	FUN_0001e280	1184	gl-state-and-hooks	neighbours (round 1)
 0x1e730	FUN_0001e730	332	gl-state-and-hooks	neighbours (round 3)
-0x1e890	FUN_0001e890	16	unclassified	
-0x1e8a0	FUN_0001e8a0	564	unclassified	
-0x1eae0	FUN_0001eae0	16	unclassified	
-0x1eaf0	FUN_0001eaf0	468	unclassified	
+0x1e890	copyIndices16Swapped_prefetch_entry	16	command-ring	I3: index array copy into the ring packet (gld_drawVertexArray)
+0x1e8a0	copyIndices16Swapped_prefetch	564	command-ring	I3: index array copy into the ring packet (gld_drawVertexArray)
+0x1eae0	copyIndices16Swapped_dcbz_entry	16	command-ring	I3: index array copy into the ring packet (gld_drawVertexArray)
+0x1eaf0	copyIndices16Swapped_dcbz	468	command-ring	I3: index array copy into the ring packet (gld_drawVertexArray)
 0x1ecd0	gld_drawVertexArray	696	gl-state-and-hooks	name
 0x1fd00	FUN_0001fd00	1208	kernel-interface	neighbours (round 1)
 0x20210	FUN_00020210	280	command-ring	neighbours (round 2)
 0x20330	FUN_00020330	216	command-ring	neighbours (round 1)
-0x20420	FUN_00020420	1716	unclassified	
+0x20420	gldDisplayNotificationCallback	1716	gld-api	I3: context / display notification housekeeping (strings and teardown order)
 0x20b00	FUN_00020b00	40	gl-state-and-hooks	neighbours (round 1)
 0x20b30	FUN_00020b30	620	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
 0x21c70	FUN_00021c70	1540	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
 0x22280	noop_22280	4	trivial	name
 0x22290	_gldUpdateDispatch	2632	gld-api	name
 0x22ce0	_gldInitDispatch	456	gld-api	name
-0x22eb0	FUN_00022eb0	536	unclassified	
+0x22eb0	FUN_00022eb0	536	kernel-interface	I3: neighbours (call graph majority, I3)
 0x230d0	FUN_000230d0	1544	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
-0x236f0	FUN_000236f0	8	unclassified	
-0x23700	FUN_00023700	360	unclassified	
+0x236f0	returnSecondArgument	8	gld-api	I3: trivial helper (I3)
+0x23700	FUN_00023700	360	gl-state-and-hooks	I3: neighbours (call graph majority, I3)
 0x23870	FUN_00023870	420	gl-state-and-hooks	neighbours (round 1)
-0x243f0	FUN_000243f0	112	unclassified	
-0x24470	FUN_00024470	112	unclassified	
-0x244f0	FUN_000244f0	112	unclassified	
-0x24570	FUN_00024570	112	unclassified	
-0x245f0	FUN_000245f0	108	unclassified	
-0x24670	FUN_00024670	108	unclassified	
-0x246f0	FUN_000246f0	104	unclassified	
-0x24770	FUN_00024770	108	unclassified	
-0x247f0	FUN_000247f0	104	unclassified	
-0x24870	FUN_00024870	112	unclassified	
-0x248f0	FUN_000248f0	112	unclassified	
+0x243f0	FUN_000243f0	112	gl-state-and-hooks	I3: neighbours (call graph majority, I3)
+0x24470	FUN_00024470	112	gld-api	I3: array-pointer style entry wrapper (I3): FUN_0002cc30(ctx,0,kind,...) then FUN_00023a24/FUN_00024190(ctx+0x240, slot, ...)
+0x244f0	FUN_000244f0	112	gld-api	I3: array-pointer style entry wrapper (I3): FUN_0002cc30(ctx,0,kind,...) then FUN_00023a24/FUN_00024190(ctx+0x240, slot, ...)
+0x24570	FUN_00024570	112	gld-api	I3: array-pointer style entry wrapper (I3): FUN_0002cc30(ctx,0,kind,...) then FUN_00023a24/FUN_00024190(ctx+0x240, slot, ...)
+0x245f0	FUN_000245f0	108	gl-state-and-hooks	I3: neighbours (call graph majority, I3)
+0x24670	FUN_00024670	108	gld-api	I3: array-pointer style entry wrapper (I3): FUN_0002cc30(ctx,0,kind,...) then FUN_00023a24/FUN_00024190(ctx+0x240, slot, ...)
+0x246f0	FUN_000246f0	104	gld-api	I3: array-pointer style entry wrapper (I3): FUN_0002cc30(ctx,0,kind,...) then FUN_00023a24/FUN_00024190(ctx+0x240, slot, ...)
+0x24770	FUN_00024770	108	gld-api	I3: array-pointer style entry wrapper (I3): FUN_0002cc30(ctx,0,kind,...) then FUN_00023a24/FUN_00024190(ctx+0x240, slot, ...)
+0x247f0	FUN_000247f0	104	gld-api	I3: array-pointer style entry wrapper (I3): FUN_0002cc30(ctx,0,kind,...) then FUN_00023a24/FUN_00024190(ctx+0x240, slot, ...)
+0x24870	FUN_00024870	112	gld-api	I3: array-pointer style entry wrapper (I3): FUN_0002cc30(ctx,0,kind,...) then FUN_00023a24/FUN_00024190(ctx+0x240, slot, ...)
+0x248f0	FUN_000248f0	112	gld-api	I3: array-pointer style entry wrapper (I3): FUN_0002cc30(ctx,0,kind,...) then FUN_00023a24/FUN_00024190(ctx+0x240, slot, ...)
 0x24970	FUN_00024970	1588	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
 0x24fb0	FUN_00024fb0	16	gld-api	neighbours (round 1)
 0x24fc0	noop_24fc0	4	trivial	name
@@ -262,7 +262,7 @@ address	name	size	subsystem	basis
 0x26f80	FUN_00026f80	460	kernel-interface	calls io_connect/IOConnectMapMemory
 0x27150	FUN_00027150	564	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
 0x273a0	FUN_000273a0	1484	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
-0x27990	FUN_00027990	2360	unclassified	
+0x27990	FUN_00027990	2360	kernel-interface	I3: neighbours (call graph majority, I3)
 0x28350	gld_readPixelsViaBlit	3820	gl-state-and-hooks	name
 0x29290	FUN_00029290	4	kernel-interface	calls io_connect/IOConnectMapMemory
 0x29294	glReadPixels_impl	2376	gl-state-and-hooks	name
@@ -270,55 +270,55 @@ address	name	size	subsystem	basis
 0x2a260	FUN_0002a260	356	gl-state-and-hooks	neighbours (round 1)
 0x2a3d0	gld_drawPixelsFromClientSurface	3968	gl-state-and-hooks	name
 0x2b3b0	noop_2b3b0	4	trivial	name
-0x2b3c0	FUN_0002b3c0	464	unclassified	
+0x2b3c0	FUN_0002b3c0	464	gld-api	I3: neighbours (call graph majority, I3)
 0x2b5a0	_gldGetQueryInfo	404	gld-api	name
 0x2b740	FUN_0002b740	172	gl-state-and-hooks	neighbours (round 1)
 0x2b7f0	FUN_0002b7f0	968	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
 0x2bbc4	FUN_0002bbc4	564	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
 0x2be00	FUN_0002be00	88	gl-state-and-hooks	neighbours (round 1)
 0x2be60	FUN_0002be60	12	kernel-interface	neighbours (round 1)
-0x2be70	FUN_0002be70	8	unclassified	
+0x2be70	FUN_0002be70	8	gl-state-and-hooks	I3: neighbours (call graph majority, I3)
 0x2be80	noop_2be80	4	trivial	name
 0x2be90	FUN_0002be90	12	gl-state-and-hooks	neighbours (round 2)
-0x2bea0	FUN_0002bea0	116	unclassified	
-0x2bf30	FUN_0002bf30	180	unclassified	
+0x2bea0	gldTrimVertexCountToPrimitive	116	command-ring	I3: draw-call vertex count / chunking arithmetic
+0x2bf30	gldTrimVertexCountToPrimitiveMin	180	command-ring	I3: draw-call vertex count / chunking arithmetic
 0x2c020	FUN_0002c020	148	kernel-interface	neighbours (round 2)
 0x2c0c0	FUN_0002c0c0	180	gl-state-and-hooks	neighbours (round 1)
 0x2c180	FUN_0002c180	164	gl-state-and-hooks	neighbours (round 1)
 0x2c230	FUN_0002c230	1144	kernel-interface	calls io_connect/IOConnectMapMemory
 0x2c6c0	FUN_0002c6c0	184	gl-state-and-hooks	neighbours (round 1)
 0x2c790	gld_initContextHardwareState	932	gl-state-and-hooks	name
-0x2cb40	FUN_0002cb40	200	unclassified	
+0x2cb40	gldContextFreeResources	200	gld-api	I3: context / display notification housekeeping (strings and teardown order)
 0x2cc10	FUN_0002cc10	28	gl-state-and-hooks	neighbours (round 2)
 0x2cd50	FUN_0002cd50	236	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
 0x2ce40	FUN_0002ce40	492	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
 0x2d030	FUN_0002d030	456	command-ring	neighbours (round 2)
 0x2d210	FUN_0002d210	140	command-ring	neighbours (round 2)
-0x2d2b0	FUN_0002d2b0	2388	unclassified	
-0x2dcf0	FUN_0002dcf0	236	unclassified	
+0x2d2b0	FUN_0002d2b0	2388	command-ring	I3: neighbours (call graph majority, I3)
+0x2dcf0	gldTextureHasNonPowerOfTwoSize2	236	texture	I3: texture format / size helper (I3)
 0x2ddf0	FUN_0002ddf0	3396	command-ring	neighbours (round 3)
 0x2ebc0	FUN_0002ebc0	596	command-ring	neighbours (round 1)
 0x2ee30	FUN_0002ee30	1476	command-ring	neighbours (round 3)
 0x2f410	window_mode_to_ati_format	148	crt	name
-0x2f4d0	FUN_0002f4d0	708	unclassified	
-0x2f7c0	FUN_0002f7c0	716	unclassified	
+0x2f4d0	gldTextureFormatCodeMatchesType	708	texture	I3: texture format / size helper (I3)
+0x2f7c0	gldTextureFormatCodeFromFormatType	716	texture	I3: texture format / size helper (I3)
 0x2fac0	FUN_0002fac0	2252	kernel-interface	calls io_connect/IOConnectMapMemory
-0x303d0	FUN_000303d0	68	unclassified	
-0x30420	FUN_00030420	392	unclassified	
-0x305b0	FUN_000305b0	492	unclassified	
+0x303d0	gldCompressedImageBytes	68	texture-compression	I3: S3TC/DXT block codec helpers
+0x30420	FUN_00030420	392	pixel-conversion	I3: neighbours (call graph majority, I3)
+0x305b0	FUN_000305b0	492	pixel-conversion	I3: neighbours (call graph majority, I3)
 0x307a0	FUN_000307a0	148	unclassified	
 0x30840	FUN_00030840	124	command-ring	neighbours (round 1)
 0x308c0	FUN_000308c0	192	command-ring	neighbours (round 1)
-0x30990	FUN_00030990	40	unclassified	
+0x30990	floorLog2	40	gld-api	I3: pixel transfer size / cache helper (I3)
 0x309c0	FUN_000309c0	136	command-ring	neighbours (round 1)
 0x30a50	FUN_00030a50	8	gld-api	neighbours (round 1)
 0x30a60	FUN_00030a60	240	gl-state-and-hooks	neighbours (round 2)
-0x30b50	FUN_00030b50	236	unclassified	
+0x30b50	gldTextureHasNonPowerOfTwoSize	236	texture	I3: texture format / size helper (I3)
 0x30c50	FUN_00030c50	684	gld-api	neighbours (round 1)
 0x30f00	FUN_00030f00	88	gld-api	neighbours (round 2)
 0x30f60	FUN_00030f60	492	gld-api	neighbours (round 1)
-0x31170	FUN_00031170	164	unclassified	
-0x31220	FUN_00031220	280	unclassified	
+0x31170	gldTextureFormatLookup	164	texture	I3: texture format / size helper (I3)
+0x31220	gldTextureFormatEntryForLevel	280	texture	I3: texture format / size helper (I3)
 0x31340	FUN_00031340	1352	kernel-interface	calls io_connect/IOConnectMapMemory
 0x31890	_gldGetTextureLevel	176	gld-api	name
 0x31940	FUN_00031940	1972	pixel-conversion	calls _glg* pixel conversion imports
@@ -328,7 +328,7 @@ address	name	size	subsystem	basis
 0x353a0	FUN_000353a0	5656	locking-and-runtime	calls pthread/keymgr
 0x369f0	glTexSubImage_impl	9972	gl-state-and-hooks	name
 0x39100	gld_testRendererAvailable	188	gl-state-and-hooks	name
-0x391d0	FUN_000391d0	28	unclassified	
+0x391d0	gldRendererFamilyString	28	gld-api	I3: trivial helper (I3)
 0x391f0	_gldGetVersion	84	gld-api	name
 0x39250	_gldGetString	204	gld-api	name
 0x39330	FUN_00039330	724	gl-state-and-hooks	neighbours (round 2)
@@ -344,82 +344,82 @@ address	name	size	subsystem	basis
 0x3b160	FUN_0003b160	284	gl-state-and-hooks	neighbours (round 3)
 0x3b280	FUN_0003b280	772	kernel-interface	neighbours (round 9)
 0x3b5b0	FUN_0003b5b0	100	kernel-interface	neighbours (round 9)
-0x3b620	FUN_0003b620	592	unclassified	
+0x3b620	FUN_0003b620	592	math	I3: neighbours (call graph majority, I3)
 0x3b870	FUN_0003b870	2500	math	calls libm
-0x3c310	FUN_0003c310	236	unclassified	
+0x3c310	gldDeleteVertexShaderObject	236	ext-vertex-shader	I3: context teardown destructor for EXT vertex shaders
 0x3c400	FUN_0003c400	4136	kernel-interface	neighbours (round 7)
 0x3d590	FUN_0003d590	2944	math	calls libm
-0x3e1d0	FUN_0003e1d0	124	unclassified	
-0x3e250	FUN_0003e250	188	unclassified	
+0x3e1d0	FUN_0003e1d0	124	fragment-program-il	I3: ARB fragment program IL translator pipeline
+0x3e250	FUN_0003e250	188	fragment-program-il	I3: ARB fragment program IL translator pipeline
 0x3e320	FUN_0003e320	120	gl-state-and-hooks	neighbours (round 3)
 0x3e3a0	FUN_0003e3a0	116	gld-api	neighbours (round 3)
 0x3e420	FUN_0003e420	152	gld-api	neighbours (round 5)
-0x3e4c0	FUN_0003e4c0	8	unclassified	
-0x3e4d0	FUN_0003e4d0	276	unclassified	
-0x3e600	FUN_0003e600	1352	unclassified	
-0x3eb70	FUN_0003eb70	296	gld-api	neighbours (round 3)
-0x3eca0	FUN_0003eca0	164	unclassified	
-0x3ed50	FUN_0003ed50	60	unclassified	
-0x3ed90	FUN_0003ed90	160	unclassified	
-0x3ee30	FUN_0003ee30	88	unclassified	
-0x3eea0	FUN_0003eea0	168	unclassified	
-0x3ef50	FUN_0003ef50	240	unclassified	
-0x3f050	FUN_0003f050	336	unclassified	
-0x3f1c0	FUN_0003f1c0	700	unclassified	
-0x3f4e0	FUN_0003f4e0	232	unclassified	
+0x3e4c0	gldDeleteFragmentShaderObject	8	ati-fragment-shader	I3: GL_ATI_fragment_shader entry point or helper (enumerants 0x8921..0x8979)
+0x3e4d0	atifsReplayTextureOps	276	ati-fragment-shader	I3: GL_ATI_fragment_shader entry point or helper (enumerants 0x8921..0x8979)
+0x3e600	atifsReplayColorAlphaOps	1352	ati-fragment-shader	I3: GL_ATI_fragment_shader entry point or helper (enumerants 0x8921..0x8979)
+0x3eb70	atifsReplayProgram	296	ati-fragment-shader	I3: GL_ATI_fragment_shader entry point or helper (enumerants 0x8921..0x8979)
+0x3eca0	FUN_0003eca0	164	fragment-program-il	I3: ARB fragment program IL translator pipeline
+0x3ed50	FUN_0003ed50	60	fragment-program-il	I3: ARB fragment program IL translator pipeline
+0x3ed90	fpilBuildDestinationToken	160	fragment-program-il	I3: ARB program IR -> IL translation (opcode table at __DATA,__data+0x1c30)
+0x3ee30	fpilSetComponentSelect	88	fragment-program-il	I3: ARB program IR -> IL translation (opcode table at __DATA,__data+0x1c30)
+0x3eea0	FUN_0003eea0	168	fragment-program-il	I3: ARB fragment program IL translator pipeline
+0x3ef50	fpilReserveTokens	240	fragment-program-il	I3: ARB program IR -> IL translation (opcode table at __DATA,__data+0x1c30)
+0x3f050	FUN_0003f050	336	fragment-program-il	I3: ARB fragment program IL translator pipeline
+0x3f1c0	fpilTranslateSource	700	fragment-program-il	I3: ARB program IR -> IL translation (opcode table at __DATA,__data+0x1c30)
+0x3f4e0	fpilTranslateSourceWithSwizzle	232	fragment-program-il	I3: ARB program IR -> IL translation (opcode table at __DATA,__data+0x1c30)
 0x3f5d0	FUN_0003f5d0	12	kernel-interface	neighbours (round 9)
-0x3f5e0	FUN_0003f5e0	112	unclassified	
-0x3f660	FUN_0003f660	220	unclassified	
-0x3f750	FUN_0003f750	232	unclassified	
-0x3f850	FUN_0003f850	396	unclassified	
-0x3f9f0	FUN_0003f9f0	472	unclassified	
-0x3fbf0	FUN_0003fbf0	392	unclassified	
-0x3fd80	FUN_0003fd80	440	unclassified	
-0x3ff40	FUN_0003ff40	592	unclassified	
-0x401b0	FUN_000401b0	420	unclassified	
-0x40370	FUN_00040370	4	unclassified	
-0x40374	FUN_00040374	1800	unclassified	
-0x40ac4	FUN_00040ac4	2096	unclassified	
-0x41310	FUN_00041310	488	unclassified	
-0x41510	FUN_00041510	548	unclassified	
-0x41750	FUN_00041750	1160	unclassified	
-0x41c00	FUN_00041c00	4544	unclassified	
-0x42e00	FUN_00042e00	4024	unclassified	
-0x43df0	FUN_00043df0	352	unclassified	
-0x43f60	FUN_00043f60	996	unclassified	
-0x44360	FUN_00044360	388	unclassified	
-0x44500	FUN_00044500	1432	unclassified	
-0x44ac0	FUN_00044ac0	440	unclassified	
-0x44c90	FUN_00044c90	2856	unclassified	
-0x457f0	FUN_000457f0	2412	unclassified	
-0x46180	FUN_00046180	1528	unclassified	
-0x467a0	FUN_000467a0	632	unclassified	
-0x46a30	FUN_00046a30	1080	unclassified	
-0x46e90	FUN_00046e90	7800	unclassified	
+0x3f5e0	fpilDestroyTranslator	112	fragment-program-il	I3: ARB program IR -> IL translation (opcode table at __DATA,__data+0x1c30)
+0x3f660	fpilCreateTranslator	220	fragment-program-il	I3: ARB program IR -> IL translation (opcode table at __DATA,__data+0x1c30)
+0x3f750	fpilTranslateDestination	232	fragment-program-il	I3: ARB program IR -> IL translation (opcode table at __DATA,__data+0x1c30)
+0x3f850	FUN_0003f850	396	fragment-program-il	I3: ARB fragment program IL translator pipeline
+0x3f9f0	FUN_0003f9f0	472	fragment-program-il	I3: ARB fragment program IL translator pipeline
+0x3fbf0	fpilEmitInstruction	392	fragment-program-il	I3: ARB program IR -> IL translation (opcode table at __DATA,__data+0x1c30)
+0x3fd80	fragmentTranslateSimpleOp	440	fragment-program-il	I3: ARB program IR -> IL translation (opcode table at __DATA,__data+0x1c30)
+0x3ff40	fragmentTranslateRep	592	fragment-program-il	I3: ARB program IR -> IL translation (opcode table at __DATA,__data+0x1c30)
+0x401b0	fragmentTranslateDdy	420	fragment-program-il	I3: ARB program IR -> IL translation (opcode table at __DATA,__data+0x1c30)
+0x40370	fragmentTranslateScalarMath	4	fragment-program-il	I3: ARB program IR -> IL translation (opcode table at __DATA,__data+0x1c30)
+0x40374	fragmentTranslateScalarMathBody	1800	fragment-program-il	I3: ARB program IR -> IL translation (opcode table at __DATA,__data+0x1c30)
+0x40ac4	FUN_00040ac4	2096	fragment-program-il	I3: ARB fragment program IL translator pipeline
+0x41310	fragmentTranslateTrig	488	fragment-program-il	I3: ARB program IR -> IL translation (opcode table at __DATA,__data+0x1c30)
+0x41510	fragmentTranslateAngleConvert	548	fragment-program-il	I3: ARB program IR -> IL translation (opcode table at __DATA,__data+0x1c30)
+0x41750	fragmentTranslateMod	1160	fragment-program-il	I3: ARB program IR -> IL translation (opcode table at __DATA,__data+0x1c30)
+0x41c00	fragmentTranslateAtn	4544	fragment-program-il	I3: ARB program IR -> IL translation (opcode table at __DATA,__data+0x1c30)
+0x42e00	fragmentTranslateRfr	4024	fragment-program-il	I3: ARB program IR -> IL translation (opcode table at __DATA,__data+0x1c30)
+0x43df0	fragmentTranslateFfw	352	fragment-program-il	I3: ARB program IR -> IL translation (opcode table at __DATA,__data+0x1c30)
+0x43f60	fragmentTranslateDst	996	fragment-program-il	I3: ARB program IR -> IL translation (opcode table at __DATA,__data+0x1c30)
+0x44360	fragmentTranslateIf	388	fragment-program-il	I3: ARB program IR -> IL translation (opcode table at __DATA,__data+0x1c30)
+0x44500	fragmentTranslateRfl	1432	fragment-program-il	I3: ARB program IR -> IL translation (opcode table at __DATA,__data+0x1c30)
+0x44ac0	fragmentTranslateWhile	440	fragment-program-il	I3: ARB program IR -> IL translation (opcode table at __DATA,__data+0x1c30)
+0x44c90	fragmentTranslateDsl	2856	fragment-program-il	I3: ARB program IR -> IL translation (opcode table at __DATA,__data+0x1c30)
+0x457f0	fragmentTranslateSel	2412	fragment-program-il	I3: ARB program IR -> IL translation (opcode table at __DATA,__data+0x1c30)
+0x46180	fragmentTranslateAll	1528	fragment-program-il	I3: ARB program IR -> IL translation (opcode table at __DATA,__data+0x1c30)
+0x467a0	fragmentTranslateAny	632	fragment-program-il	I3: ARB program IR -> IL translation (opcode table at __DATA,__data+0x1c30)
+0x46a30	fragmentTranslateArithmetic	1080	fragment-program-il	I3: ARB program IR -> IL translation (opcode table at __DATA,__data+0x1c30)
+0x46e90	FUN_00046e90	7800	fragment-program-il	I3: ARB fragment program IL translator pipeline
 0x48da0	FUN_00048da0	6552	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
-0x4a7d0	FUN_0004a7d0	80	unclassified	
-0x4a830	FUN_0004a830	40	unclassified	
+0x4a7d0	floatToFp24	80	math	I3: float format conversion (bit manipulation of GH_F2U)
+0x4a830	fp24ToFloat	40	math	I3: float format conversion (bit manipulation of GH_F2U)
 0x4a860	FUN_0004a860	112	unclassified	
 0x4a8f0	FUN_0004a8f0	140	command-ring	neighbours (round 2)
-0x4a990	FUN_0004a990	100	unclassified	
+0x4a990	FUN_0004a990	100	command-ring	I3: neighbours (call graph majority, I3)
 0x4aa00	FUN_0004aa00	136	command-ring	neighbours (round 5)
-0x4aa90	FUN_0004aa90	196	unclassified	
+0x4aa90	FUN_0004aa90	196	gl-state-and-hooks	I3: neighbours (call graph majority, I3)
 0x4ab60	FUN_0004ab60	304	gl-state-and-hooks	neighbours (round 2)
 0x4ac90	FUN_0004ac90	1272	command-ring	neighbours (round 2)
 0x4b190	FUN_0004b190	700	command-ring	neighbours (round 3)
 0x4b480	FUN_0004b480	148	command-ring	neighbours (round 1)
 0x4b520	FUN_0004b520	160	unclassified	
 0x4b5d0	FUN_0004b5d0	296	command-ring	neighbours (round 3)
-0x4b710	FUN_0004b710	188	unclassified	
-0x4b7d0	FUN_0004b7d0	392	unclassified	
-0x4b980	FUN_0004b980	616	unclassified	
+0x4b710	FUN_0004b710	188	command-ring	I3: neighbours (call graph majority, I3)
+0x4b7d0	FUN_0004b7d0	392	command-ring	I3: neighbours (call graph majority, I3)
+0x4b980	FUN_0004b980	616	command-ring	I3: neighbours (call graph majority, I3)
 0x4bbf0	FUN_0004bbf0	1244	command-ring	neighbours (round 2)
 0x4c100	FUN_0004c100	336	unclassified	
-0x4c260	FUN_0004c260	732	unclassified	
+0x4c260	FUN_0004c260	732	command-ring	I3: neighbours (call graph majority, I3)
 0x4c540	noop_4c540	4	trivial	name
-0x4c560	FUN_0004c560	440	unclassified	
+0x4c560	FUN_0004c560	440	command-ring	I3: neighbours (call graph majority, I3)
 0x4c720	FUN_0004c720	1632	unclassified	
-0x4cde0	FUN_0004cde0	72	unclassified	
+0x4cde0	freeAndNullField	72	gld-api	I3: plain free-and-null helper
 0x4ce30	FUN_0004ce30	680	command-ring	neighbours (round 1)
 0x4d100	FUN_0004d100	1264	command-ring	neighbours (round 2)
 0x4d620	FUN_0004d620	328	command-ring	neighbours (round 2)
@@ -428,17 +428,17 @@ address	name	size	subsystem	basis
 0x4dbe0	FUN_0004dbe0	76	command-ring	neighbours (round 2)
 0x4dc30	FUN_0004dc30	220	command-ring	neighbours (round 2)
 0x4dd10	FUN_0004dd10	40	command-ring	neighbours (round 1)
-0x4dd40	FUN_0004dd40	116	unclassified	
+0x4dd40	FUN_0004dd40	116	command-ring	I3: neighbours (call graph majority, I3)
 0x4ddc0	FUN_0004ddc0	104	unclassified	
-0x4de30	FUN_0004de30	180	unclassified	
+0x4de30	FUN_0004de30	180	command-ring	I3: neighbours (call graph majority, I3)
 0x4def0	FUN_0004def0	2428	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
-0x4e880	FUN_0004e880	252	unclassified	
-0x4e990	FUN_0004e990	208	unclassified	
-0x4ea70	FUN_0004ea70	260	unclassified	
+0x4e880	FUN_0004e880	252	command-ring	I3: neighbours (call graph majority, I3)
+0x4e990	FUN_0004e990	208	command-ring	I3: neighbours (call graph majority, I3)
+0x4ea70	gldValidatePolygonMode	260	command-ring	I3: state validator (writes a register shadow, flags the dirty word)
 0x4eba0	FUN_0004eba0	476	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
 0x4ed90	FUN_0004ed90	692	command-ring	neighbours (round 2)
 0x4f080	FUN_0004f080	192	command-ring	neighbours (round 2)
-0x4f160	FUN_0004f160	352	unclassified	
+0x4f160	FUN_0004f160	352	command-ring	I3: neighbours (call graph majority, I3)
 0x4f2e0	FUN_0004f2e0	616	command-ring	neighbours (round 2)
 0x4f550	FUN_0004f550	452	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
 0x4f720	FUN_0004f720	1348	gl-state-and-hooks	neighbours (round 2)
@@ -457,299 +457,299 @@ address	name	size	subsystem	basis
 0x52ee0	FUN_00052ee0	128	kernel-interface	neighbours (round 6)
 0x52f60	FUN_00052f60	148	kernel-interface	neighbours (round 6)
 0x53000	FUN_00053000	52	gl-state-and-hooks	neighbours (round 4)
-0x53040	FUN_00053040	20	unclassified	
+0x53040	FUN_00053040	20	ext-vertex-shader	I3: EXT vertex shader module (0x538e0-0x62af0)
 0x53060	noop_53060	4	trivial	name
 0x53070	FUN_00053070	36	kernel-interface	neighbours (round 8)
 0x530a0	FUN_000530a0	24	kernel-interface	neighbours (round 8)
 0x530c0	FUN_000530c0	184	kernel-interface	neighbours (round 8)
-0x53190	FUN_00053190	116	unclassified	
+0x53190	FUN_00053190	116	ext-vertex-shader	I3: EXT vertex shader module (0x538e0-0x62af0)
 0x53220	FUN_00053220	284	kernel-interface	neighbours (round 9)
 0x53340	FUN_00053340	368	kernel-interface	neighbours (round 9)
 0x534c0	FUN_000534c0	260	kernel-interface	neighbours (round 10)
-0x53610	FUN_00053610	136	unclassified	
-0x536a0	FUN_000536a0	144	unclassified	
-0x53730	FUN_00053730	132	unclassified	
-0x537c0	FUN_000537c0	276	unclassified	
+0x53610	FUN_00053610	136	ext-vertex-shader	I3: glShaderOp*/glSwizzle style wrappers (extvsAppendInstruction)
+0x536a0	FUN_000536a0	144	ext-vertex-shader	I3: glShaderOp*/glSwizzle style wrappers (extvsAppendInstruction)
+0x53730	FUN_00053730	132	ext-vertex-shader	I3: glShaderOp*/glSwizzle style wrappers (extvsAppendInstruction)
+0x537c0	FUN_000537c0	276	ext-vertex-shader	I3: glShaderOp*/glSwizzle style wrappers (extvsAppendInstruction)
 0x538e0	FUN_000538e0	164	kernel-interface	neighbours (round 8)
 0x53990	FUN_00053990	244	kernel-interface	neighbours (round 8)
-0x53a90	FUN_00053a90	100	unclassified	
+0x53a90	FUN_00053a90	100	ext-vertex-shader	I3: EXT vertex shader module (0x538e0-0x62af0)
 0x53b00	FUN_00053b00	84	kernel-interface	neighbours (round 12)
 0x53b60	FUN_00053b60	568	kernel-interface	neighbours (round 10)
 0x53dc0	FUN_00053dc0	20	kernel-interface	neighbours (round 10)
 0x53de0	FUN_00053de0	268	kernel-interface	neighbours (round 11)
-0x53ef0	FUN_00053ef0	12	unclassified	
+0x53ef0	FUN_00053ef0	12	ext-vertex-shader	I3: EXT vertex shader module (0x538e0-0x62af0)
 0x53f00	FUN_00053f00	124	kernel-interface	neighbours (round 8)
 0x53f80	FUN_00053f80	124	kernel-interface	neighbours (round 8)
 0x54000	FUN_00054000	128	kernel-interface	neighbours (round 8)
 0x54080	FUN_00054080	276	kernel-interface	neighbours (round 8)
 0x541a0	FUN_000541a0	196	kernel-interface	neighbours (round 8)
-0x54270	FUN_00054270	308	unclassified	
+0x54270	FUN_00054270	308	ext-vertex-shader	I3: EXT vertex shader module (0x538e0-0x62af0)
 0x543b0	FUN_000543b0	164	kernel-interface	neighbours (round 8)
 0x54460	FUN_00054460	8	kernel-interface	neighbours (round 8)
-0x54470	FUN_00054470	272	unclassified	
-0x54590	FUN_00054590	288	unclassified	
+0x54470	FUN_00054470	272	ext-vertex-shader	I3: EXT vertex shader module (0x538e0-0x62af0)
+0x54590	FUN_00054590	288	ext-vertex-shader	I3: EXT vertex shader module (0x538e0-0x62af0)
 0x546d0	FUN_000546d0	284	command-ring	neighbours (round 3)
 0x547f0	FUN_000547f0	324	kernel-interface	neighbours (round 10)
 0x54940	FUN_00054940	56	kernel-interface	neighbours (round 8)
-0x54980	FUN_00054980	260	unclassified	
-0x54a90	FUN_00054a90	120	unclassified	
+0x54980	FUN_00054980	260	ext-vertex-shader	I3: EXT vertex shader module (0x538e0-0x62af0)
+0x54a90	FUN_00054a90	120	ext-vertex-shader	I3: EXT vertex shader module (0x538e0-0x62af0)
 0x54b20	FUN_00054b20	240	gl-state-and-hooks	neighbours (round 2)
-0x54c10	FUN_00054c10	388	unclassified	
+0x54c10	FUN_00054c10	388	ext-vertex-shader	I3: EXT vertex shader module (0x538e0-0x62af0)
 0x54da0	FUN_00054da0	36	kernel-interface	neighbours (round 5)
 0x54dd0	FUN_00054dd0	376	kernel-interface	neighbours (round 10)
-0x54f50	FUN_00054f50	380	unclassified	
+0x54f50	FUN_00054f50	380	ext-vertex-shader	I3: EXT vertex shader module (0x538e0-0x62af0)
 0x550e0	FUN_000550e0	244	kernel-interface	neighbours (round 11)
-0x551f0	FUN_000551f0	244	unclassified	
+0x551f0	FUN_000551f0	244	ext-vertex-shader	I3: EXT vertex shader module (0x538e0-0x62af0)
 0x55300	FUN_00055300	184	kernel-interface	neighbours (round 9)
-0x553c0	FUN_000553c0	556	unclassified	
+0x553c0	FUN_000553c0	556	ext-vertex-shader	I3: EXT vertex shader module (0x538e0-0x62af0)
 0x55610	FUN_00055610	1008	kernel-interface	neighbours (round 10)
 0x55a30	FUN_00055a30	48	kernel-interface	neighbours (round 10)
-0x55a60	FUN_00055a60	220	unclassified	
+0x55a60	FUN_00055a60	220	ext-vertex-shader	I3: EXT vertex shader module (0x538e0-0x62af0)
 0x55b50	FUN_00055b50	428	kernel-interface	neighbours (round 9)
 0x55d00	FUN_00055d00	148	kernel-interface	neighbours (round 11)
 0x55da0	FUN_00055da0	1756	kernel-interface	neighbours (round 5)
 0x564c0	FUN_000564c0	1668	kernel-interface	neighbours (round 5)
-0x56b80	FUN_00056b80	80	unclassified	
+0x56b80	FUN_00056b80	80	ext-vertex-shader	I3: EXT vertex shader module (0x538e0-0x62af0)
 0x56be0	FUN_00056be0	816	kernel-interface	neighbours (round 5)
-0x56f20	FUN_00056f20	988	unclassified	
-0x57340	FUN_00057340	1768	unclassified	
-0x57af0	FUN_00057af0	144	unclassified	
-0x57b80	FUN_00057b80	360	unclassified	
-0x57cf0	FUN_00057cf0	1532	unclassified	
-0x58300	FUN_00058300	332	unclassified	
-0x58450	FUN_00058450	872	unclassified	
-0x587d0	FUN_000587d0	824	unclassified	
-0x58b10	FUN_00058b10	824	unclassified	
-0x58e50	FUN_00058e50	824	unclassified	
-0x59190	FUN_00059190	2512	unclassified	
-0x59b80	FUN_00059b80	304	unclassified	
-0x59cb0	FUN_00059cb0	824	unclassified	
-0x59ff0	FUN_00059ff0	824	unclassified	
-0x5a330	FUN_0005a330	824	unclassified	
-0x5a670	FUN_0005a670	824	unclassified	
-0x5a9b0	FUN_0005a9b0	1112	unclassified	
-0x5ae10	FUN_0005ae10	512	unclassified	
-0x5b010	FUN_0005b010	932	unclassified	
-0x5b3c0	FUN_0005b3c0	304	unclassified	
-0x5b4f0	FUN_0005b4f0	304	unclassified	
-0x5b620	FUN_0005b620	824	unclassified	
-0x5b960	FUN_0005b960	304	unclassified	
-0x5ba90	FUN_0005ba90	304	unclassified	
-0x5bbc0	FUN_0005bbc0	928	unclassified	
-0x5bf60	FUN_0005bf60	1672	unclassified	
-0x5c600	FUN_0005c600	1552	unclassified	
-0x5cc20	FUN_0005cc20	320	unclassified	
-0x5cd60	FUN_0005cd60	1228	unclassified	
-0x5d2f0	FUN_0005d2f0	372	unclassified	
-0x5d470	FUN_0005d470	424	kernel-interface	neighbours (round 12)
-0x5d620	FUN_0005d620	568	kernel-interface	neighbours (round 12)
-0x5d870	FUN_0005d870	336	unclassified	
-0x5d9c0	FUN_0005d9c0	824	unclassified	
-0x5dd00	FUN_0005dd00	324	unclassified	
-0x5de50	FUN_0005de50	324	unclassified	
-0x5dfa0	FUN_0005dfa0	304	unclassified	
-0x5e0d0	FUN_0005e0d0	1676	unclassified	
-0x5e770	FUN_0005e770	108	unclassified	
-0x5e7f0	FUN_0005e7f0	3156	unclassified	
+0x56f20	FUN_00056f20	988	ext-vertex-shader	I3: EXT vertex shader module (0x538e0-0x62af0)
+0x57340	FUN_00057340	1768	ext-vertex-shader	I3: EXT vertex shader module (0x538e0-0x62af0)
+0x57af0	FUN_00057af0	144	ext-vertex-shader	I3: EXT vertex shader module (0x538e0-0x62af0)
+0x57b80	extvsAllocTempSlot	360	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x57cf0	extvsEmitIndex	1532	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x58300	FUN_00058300	332	ext-vertex-shader	I3: EXT vertex shader module (0x538e0-0x62af0)
+0x58450	extvsEmitDot3	872	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x587d0	extvsEmitDot4	824	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x58b10	extvsEmitMul	824	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x58e50	extvsEmitAdd	824	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x59190	extvsEmitMad	2512	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x59b80	extvsEmitFrc	304	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x59cb0	extvsEmitMax	824	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x59ff0	extvsEmitMin	824	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x5a330	extvsEmitSetGreaterEqual	824	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x5a670	extvsEmitSetLessThan	824	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x5a9b0	extvsEmitClamp	1112	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x5ae10	extvsEmitFlr	512	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x5b010	extvsEmitRnd	932	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x5b3c0	extvsEmitExp	304	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x5b4f0	extvsEmitLog	304	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x5b620	extvsEmitPow	824	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x5b960	extvsEmitRcp	304	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x5ba90	extvsEmitRsq	304	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x5bbc0	extvsEmitSub	928	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x5bf60	extvsEmitCrs	1672	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x5c600	extvsEmitMmul	1552	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x5cc20	extvsEmitMov	320	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x5cd60	extvsEmitSwizzle	1228	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x5d2f0	extvsEmitWriteMask	372	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x5d470	extvsEmitOp879c	424	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x5d620	extvsEmitOp879d	568	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x5d870	extvsEmitLit	336	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x5d9c0	extvsEmitDst	824	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x5dd00	extvsEmitExpp	324	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x5de50	extvsEmitLogp	324	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x5dfa0	extvsEmitMova	304	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x5e0d0	extvsEmitFogOutput	1676	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x5e770	FUN_0005e770	108	ext-vertex-shader	I3: EXT vertex shader module (0x538e0-0x62af0)
+0x5e7f0	FUN_0005e7f0	3156	ext-vertex-shader	I3: EXT vertex shader module (0x538e0-0x62af0)
 0x5f540	FUN_0005f540	688	kernel-interface	neighbours (round 4)
-0x61dc0	FUN_00061dc0	224	unclassified	
-0x61eb0	FUN_00061eb0	604	unclassified	
-0x62120	FUN_00062120	252	unclassified	
-0x62220	FUN_00062220	272	unclassified	
-0x62370	FUN_00062370	104	unclassified	
-0x623e0	FUN_000623e0	40	unclassified	
-0x62410	FUN_00062410	116	unclassified	
-0x62490	FUN_00062490	120	unclassified	
-0x62510	FUN_00062510	92	unclassified	
-0x62570	FUN_00062570	616	unclassified	
-0x627e4	FUN_000627e4	328	unclassified	
-0x62940	FUN_00062940	276	unclassified	
+0x61dc0	vpUploadConstantArray	224	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x61eb0	vpUploadConstantsWithFog	604	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x62120	extvsComputeStateKey	252	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x62220	extvsStateFree	272	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x62370	FUN_00062370	104	ext-vertex-shader	I3: EXT vertex shader module (0x538e0-0x62af0)
+0x623e0	FUN_000623e0	40	ext-vertex-shader	I3: EXT vertex shader module (0x538e0-0x62af0)
+0x62410	FUN_00062410	116	ext-vertex-shader	I3: EXT vertex shader module (0x538e0-0x62af0)
+0x62490	FUN_00062490	120	ext-vertex-shader	I3: EXT vertex shader module (0x538e0-0x62af0)
+0x62510	FUN_00062510	92	ext-vertex-shader	I3: EXT vertex shader module (0x538e0-0x62af0)
+0x62570	extvsStateCacheCreate	616	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x627e4	extvsStateCacheFreeAll	328	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x62940	FUN_00062940	276	ext-vertex-shader	I3: EXT vertex shader module (0x538e0-0x62af0)
 0x62a60	noop_62a60	4	trivial	name
-0x62a70	FUN_00062a70	116	unclassified	
-0x62af0	FUN_00062af0	5624	unclassified	
-0x640f0	FUN_000640f0	220	unclassified	
-0x64230	FUN_00064230	1256	unclassified	
+0x62a70	extvsStateCacheInsert	116	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x62af0	extvsBuildStreamDescriptors	5624	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x640f0	FUN_000640f0	220	vertex-program-emit	I3: emitter/hook family installed by FUN_000a7050
+0x64230	FUN_00064230	1256	vertex-program-emit	I3: emitter/hook family installed by FUN_000a7050
 0x64720	FUN_00064720	304	gl-state-and-hooks	neighbours (round 2)
-0x64850	FUN_00064850	436	unclassified	
+0x64850	FUN_00064850	436	vertex-program-emit	I3: emitter/hook family installed by FUN_000a7050
 0x64a10	FUN_00064a10	1304	command-ring	neighbours (round 5)
 0x64f40	FUN_00064f40	708	command-ring	neighbours (round 2)
 0x651e0	FUN_000651e0	400	command-ring	neighbours (round 3)
 0x65370	FUN_00065370	636	kernel-interface	neighbours (round 1)
-0x65610	FUN_00065610	152	unclassified	
+0x65610	FUN_00065610	152	vertex-program-emit	I3: emitter/hook family installed by FUN_000a7050
 0x656b0	FUN_000656b0	780	kernel-interface	neighbours (round 3)
-0x659d0	FUN_000659d0	612	unclassified	
-0x65c40	FUN_00065c40	52	unclassified	
+0x659d0	FUN_000659d0	612	vertex-program-emit	I3: emitter/hook family installed by FUN_000a7050
+0x65c40	FUN_00065c40	52	vertex-program-emit	I3: emitter/hook family installed by FUN_000a7050
 0x65c80	noop_65c80	4	trivial	name
-0x65c90	FUN_00065c90	328	unclassified	
-0x65de0	FUN_00065de0	192	unclassified	
-0x65ea0	FUN_00065ea0	1912	unclassified	
-0x66640	FUN_00066640	1308	unclassified	
-0x66b80	FUN_00066b80	1912	unclassified	
-0x67320	FUN_00067320	1912	unclassified	
-0x67ac0	FUN_00067ac0	2516	unclassified	
-0x684c0	FUN_000684c0	3632	unclassified	
-0x69330	FUN_00069330	4280	unclassified	
-0x6a400	FUN_0006a400	1912	unclassified	
-0x6aba0	FUN_0006aba0	1912	unclassified	
-0x6b340	FUN_0006b340	1920	unclassified	
-0x6bae0	FUN_0006bae0	1920	unclassified	
-0x6c280	FUN_0006c280	1308	unclassified	
-0x6c7c0	FUN_0006c7c0	1308	unclassified	
-0x6cd00	FUN_0006cd00	1308	unclassified	
-0x6d240	FUN_0006d240	1308	unclassified	
-0x6d780	FUN_0006d780	1308	unclassified	
-0x6dcc0	FUN_0006dcc0	1912	unclassified	
-0x6e460	FUN_0006e460	1928	unclassified	
-0x6ec10	FUN_0006ec10	4312	unclassified	
-0x6fd10	FUN_0006fd10	180	unclassified	
-0x6fdd0	FUN_0006fdd0	1812	unclassified	
-0x70520	FUN_00070520	252	kernel-interface	neighbours (round 6)
-0x70630	FUN_00070630	1412	unclassified	
-0x70bf0	FUN_00070bf0	80	unclassified	
+0x65c90	FUN_00065c90	328	vertex-program-emit	I3: emitter/hook family installed by FUN_000a7050
+0x65de0	FUN_00065de0	192	vertex-program-emit	I3: emitter/hook family installed by FUN_000a7050
+0x65ea0	arbEmitIlDp4	1912	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x66640	arbEmitIlMov	1308	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x66b80	arbEmitIlMul	1912	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x67320	arbEmitIlAdd	1912	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x67ac0	arbEmitIlMad	2516	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x684c0	arbEmitIlAddMad3Src	3632	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x69330	arbEmitIlMulMaxMin2Src	4280	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x6a400	arbEmitIlMin	1912	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x6aba0	arbEmitIlMax	1912	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x6b340	arbEmitIlSetCompare5	1920	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x6bae0	arbEmitIlSetCompare2	1920	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x6c280	arbEmitIlRnd	1308	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x6c7c0	arbEmitIlRcp	1308	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x6cd00	arbEmitIlRsq	1308	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x6d240	arbEmitIlExp	1308	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x6d780	arbEmitIlExn	1308	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x6dcc0	arbEmitIlPow	1912	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x6e460	FUN_0006e460	1928	vertex-program-emit	I3: emitter/hook family installed by FUN_000a7050
+0x6ec10	arbEmitIlMovMadMov	4312	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x6fd10	evsTokenBufPush	180	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x6fdd0	evsAllocLocalConstantRegisters	1812	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x70520	evsAllocConstantsForOperand	252	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x70630	evsAllocLocalRegisters	1412	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x70bf0	evsOperandUsesTempSlot	80	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
 0x70c50	noop_70c50	4	trivial	name
 0x70c60	noop_70c60	4	trivial	name
-0x70c70	FUN_00070c70	84	unclassified	
-0x70cd0	FUN_00070cd0	144	unclassified	
-0x70d80	FUN_00070d80	3624	unclassified	
-0x71bc0	FUN_00071bc0	7188	unclassified	
-0x738c0	FUN_000738c0	2852	unclassified	
-0x744d0	FUN_000744d0	1412	unclassified	
-0x74a70	FUN_00074a70	192	unclassified	
-0x74b30	FUN_00074b30	204	unclassified	
-0x74c00	FUN_00074c00	188	unclassified	
-0x74cc0	FUN_00074cc0	156	unclassified	
-0x74d60	FUN_00074d60	204	unclassified	
-0x74e30	FUN_00074e30	156	unclassified	
-0x74ed0	FUN_00074ed0	392	kernel-interface	neighbours (round 12)
-0x75060	FUN_00075060	584	kernel-interface	neighbours (round 12)
-0x752c0	FUN_000752c0	156	unclassified	
-0x75360	FUN_00075360	156	unclassified	
-0x75400	FUN_00075400	156	unclassified	
-0x754a0	FUN_000754a0	204	unclassified	
-0x75570	FUN_00075570	204	unclassified	
-0x75640	FUN_00075640	204	unclassified	
-0x75710	FUN_00075710	156	unclassified	
-0x757b0	FUN_000757b0	156	unclassified	
-0x75850	FUN_00075850	204	unclassified	
-0x75920	FUN_00075920	156	unclassified	
-0x759c0	FUN_000759c0	156	unclassified	
-0x75a60	FUN_00075a60	156	unclassified	
-0x75b00	FUN_00075b00	156	unclassified	
-0x75ba0	FUN_00075ba0	236	unclassified	
-0x75c90	FUN_00075c90	204	unclassified	
-0x75d60	FUN_00075d60	204	unclassified	
-0x75e30	FUN_00075e30	204	unclassified	
-0x75f00	FUN_00075f00	204	unclassified	
-0x75fd0	FUN_00075fd0	156	unclassified	
-0x76070	FUN_00076070	236	unclassified	
-0x76160	FUN_00076160	204	unclassified	
-0x76230	FUN_00076230	204	unclassified	
-0x76300	FUN_00076300	204	unclassified	
-0x763d0	FUN_000763d0	204	unclassified	
-0x764a0	FUN_000764a0	188	unclassified	
-0x76560	FUN_00076560	524	unclassified	
+0x70c70	evsFindFreeOutputRegister	84	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x70cd0	evsAllocTempSlot	144	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x70d80	evsEmitFogOutput	3624	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x71bc0	evsAssignVertexInputs	7188	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x738c0	FUN_000738c0	2852	ext-vertex-shader	I3: EXT vertex shader (IL path) helpers
+0x744d0	FUN_000744d0	1412	ext-vertex-shader	I3: EXT vertex shader (IL path) helpers
+0x74a70	FUN_00074a70	192	ext-vertex-shader	I3: EXT vertex shader (IL path) helpers
+0x74b30	FUN_00074b30	204	ext-vertex-shader	I3: EXT vertex shader (IL path) helpers
+0x74c00	FUN_00074c00	188	ext-vertex-shader	I3: EXT vertex shader (IL path) helpers
+0x74cc0	FUN_00074cc0	156	ext-vertex-shader	I3: EXT vertex shader (IL path) helpers
+0x74d60	FUN_00074d60	204	ext-vertex-shader	I3: EXT vertex shader (IL path) helpers
+0x74e30	FUN_00074e30	156	ext-vertex-shader	I3: EXT vertex shader (IL path) helpers
+0x74ed0	evsEmitOp879d	392	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x75060	evsEmitOp879c	584	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x752c0	evsEmitOp879b	156	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x75360	evsEmitOp879a	156	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x75400	evsEmitMovOp8799	156	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x754a0	FUN_000754a0	204	ext-vertex-shader	I3: EXT vertex shader (IL path) helpers
+0x75570	FUN_00075570	204	ext-vertex-shader	I3: EXT vertex shader (IL path) helpers
+0x75640	FUN_00075640	204	ext-vertex-shader	I3: EXT vertex shader (IL path) helpers
+0x75710	FUN_00075710	156	ext-vertex-shader	I3: EXT vertex shader (IL path) helpers
+0x757b0	FUN_000757b0	156	ext-vertex-shader	I3: EXT vertex shader (IL path) helpers
+0x75850	FUN_00075850	204	ext-vertex-shader	I3: EXT vertex shader (IL path) helpers
+0x75920	FUN_00075920	156	ext-vertex-shader	I3: EXT vertex shader (IL path) helpers
+0x759c0	FUN_000759c0	156	ext-vertex-shader	I3: EXT vertex shader (IL path) helpers
+0x75a60	FUN_00075a60	156	ext-vertex-shader	I3: EXT vertex shader (IL path) helpers
+0x75b00	FUN_00075b00	156	ext-vertex-shader	I3: EXT vertex shader (IL path) helpers
+0x75ba0	FUN_00075ba0	236	ext-vertex-shader	I3: EXT vertex shader (IL path) helpers
+0x75c90	FUN_00075c90	204	ext-vertex-shader	I3: EXT vertex shader (IL path) helpers
+0x75d60	FUN_00075d60	204	ext-vertex-shader	I3: EXT vertex shader (IL path) helpers
+0x75e30	FUN_00075e30	204	ext-vertex-shader	I3: EXT vertex shader (IL path) helpers
+0x75f00	FUN_00075f00	204	ext-vertex-shader	I3: EXT vertex shader (IL path) helpers
+0x75fd0	FUN_00075fd0	156	ext-vertex-shader	I3: EXT vertex shader (IL path) helpers
+0x76070	FUN_00076070	236	ext-vertex-shader	I3: EXT vertex shader (IL path) helpers
+0x76160	FUN_00076160	204	ext-vertex-shader	I3: EXT vertex shader (IL path) helpers
+0x76230	FUN_00076230	204	ext-vertex-shader	I3: EXT vertex shader (IL path) helpers
+0x76300	FUN_00076300	204	ext-vertex-shader	I3: EXT vertex shader (IL path) helpers
+0x763d0	FUN_000763d0	204	ext-vertex-shader	I3: EXT vertex shader (IL path) helpers
+0x764a0	FUN_000764a0	188	ext-vertex-shader	I3: EXT vertex shader (IL path) helpers
+0x76560	FUN_00076560	524	ext-vertex-shader	I3: EXT vertex shader (IL path) helpers
 0x76770	FUN_00076770	352	command-ring	neighbours (round 5)
 0x768e0	FUN_000768e0	384	command-ring	neighbours (round 5)
 0x76ac0	FUN_00076ac0	188	command-ring	neighbours (round 5)
-0x76b80	FUN_00076b80	116	unclassified	
+0x76b80	vpStateCacheInsert	116	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
 0x76c00	noop_76c00	4	trivial	name
-0x76c10	FUN_00076c10	72	command-ring	neighbours (round 5)
+0x76c10	vpStateCacheLookup	72	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
 0x76c60	FUN_00076c60	480	command-ring	neighbours (round 4)
 0x76e60	noop_76e60	4	trivial	name
-0x76e70	FUN_00076e70	356	unclassified	
-0x76fe0	FUN_00076fe0	76	unclassified	
-0x77030	FUN_00077030	84	unclassified	
-0x77090	FUN_00077090	600	unclassified	
-0x772f4	FUN_000772f4	300	unclassified	
-0x77430	FUN_00077430	132	unclassified	
+0x76e70	vpStateFree	356	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x76fe0	FUN_00076fe0	76	ext-vertex-shader	I3: EXT vertex shader (IL path) helpers
+0x77030	FUN_00077030	84	ext-vertex-shader	I3: EXT vertex shader (IL path) helpers
+0x77090	vpStateCacheCreate	600	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x772f4	vpStateCacheFreeAll	300	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
+0x77430	vpStateSetConstantVector	132	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
 0x774c0	FUN_000774c0	156	kernel-interface	neighbours (round 3)
-0x77560	FUN_00077560	228	unclassified	
-0x77650	FUN_00077650	76	unclassified	
-0x776b0	FUN_000776b0	176	unclassified	
-0x77760	FUN_00077760	72	unclassified	
-0x777b0	FUN_000777b0	56	unclassified	
-0x77800	FUN_00077800	64	unclassified	
-0x77850	FUN_00077850	12	unclassified	
-0x77860	FUN_00077860	792	unclassified	
-0x77ba0	FUN_00077ba0	140	unclassified	
-0x77c40	FUN_00077c40	124	unclassified	
-0x77cd0	FUN_00077cd0	24	unclassified	
-0x77cf0	FUN_00077cf0	20	unclassified	
-0x77d10	FUN_00077d10	120	unclassified	
-0x77d90	FUN_00077d90	1176	unclassified	
-0x78250	FUN_00078250	132	unclassified	
-0x782e0	FUN_000782e0	20	unclassified	
-0x78300	FUN_00078300	200	unclassified	
-0x78700	FUN_00078700	84	unclassified	
-0x78760	FUN_00078760	448	unclassified	
-0x78950	FUN_00078950	64	unclassified	
-0x78990	FUN_00078990	56	unclassified	
-0x789d0	FUN_000789d0	56	unclassified	
-0x78a10	FUN_00078a10	356	unclassified	
-0x78b80	FUN_00078b80	560	unclassified	
-0x78db0	FUN_00078db0	68	unclassified	
-0x78e00	FUN_00078e00	228	unclassified	
-0x78ef0	FUN_00078ef0	24	unclassified	
-0x78f10	FUN_00078f10	92	unclassified	
-0x78f80	FUN_00078f80	2340	unclassified	
-0x798f0	FUN_000798f0	28	unclassified	
-0x79910	FUN_00079910	248	unclassified	
-0x79a20	FUN_00079a20	92	unclassified	
-0x79a90	FUN_00079a90	100	unclassified	
-0x79b00	FUN_00079b00	200	unclassified	
-0x79bd0	FUN_00079bd0	532	unclassified	
-0x79e10	FUN_00079e10	88	unclassified	
-0x79e70	FUN_00079e70	488	unclassified	
-0x7a060	FUN_0007a060	16	unclassified	
-0x7a070	FUN_0007a070	156	unclassified	
+0x77560	FUN_00077560	228	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x77650	FUN_00077650	76	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x776b0	FUN_000776b0	176	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x77760	FUN_00077760	72	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x777b0	FUN_000777b0	56	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x77800	FUN_00077800	64	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x77850	recordGetWriteMask	12	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x77860	FUN_00077860	792	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x77ba0	FUN_00077ba0	140	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x77c40	FUN_00077c40	124	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x77cd0	FUN_00077cd0	24	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x77cf0	FUN_00077cf0	20	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x77d10	FUN_00077d10	120	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x77d90	FUN_00077d90	1176	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x78250	FUN_00078250	132	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x782e0	FUN_000782e0	20	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x78300	FUN_00078300	200	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x78700	FUN_00078700	84	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x78760	FUN_00078760	448	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x78950	FUN_00078950	64	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x78990	FUN_00078990	56	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x789d0	FUN_000789d0	56	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x78a10	FUN_00078a10	356	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x78b80	FUN_00078b80	560	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x78db0	FUN_00078db0	68	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x78e00	FUN_00078e00	228	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x78ef0	FUN_00078ef0	24	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x78f10	recordGetWriteEnable	92	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x78f80	FUN_00078f80	2340	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x798f0	recordSetWriteMask	28	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x79910	FUN_00079910	248	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x79a20	recordGetSourceSelect	92	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x79a90	recordSetSourceSelect	100	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x79b00	FUN_00079b00	200	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x79bd0	FUN_00079bd0	532	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x79e10	FUN_00079e10	88	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x79e70	FUN_00079e70	488	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x7a060	FUN_0007a060	16	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x7a070	FUN_0007a070	156	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
 0x7a110	FUN_0007a110	100	kernel-interface	neighbours (round 3)
-0x7a1a0	FUN_0007a1a0	756	unclassified	
-0x7a4a0	FUN_0007a4a0	1544	unclassified	
-0x7aae0	FUN_0007aae0	1460	unclassified	
-0x7b0d0	FUN_0007b0d0	5660	unclassified	
+0x7a1a0	FUN_0007a1a0	756	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x7a4a0	FUN_0007a4a0	1544	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x7aae0	FUN_0007aae0	1460	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x7b0d0	FUN_0007b0d0	5660	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
 0x7c760	FUN_0007c760	4940	kernel-interface	neighbours (round 4)
 0x7dcd0	FUN_0007dcd0	88	command-ring	neighbours (round 6)
 0x7dd30	FUN_0007dd30	160	unclassified	
 0x7dde0	FUN_0007dde0	3504	kernel-interface	neighbours (round 11)
 0x82900	FUN_00082900	812	command-ring	neighbours (round 5)
 0x82c50	FUN_00082c50	760	unclassified	
-0x82f60	FUN_00082f60	416	unclassified	
+0x82f60	interpolatorMapInit	416	ext-vertex-shader	I3: vertex output -> interpolator map
 0x83100	noop_83100	4	trivial	name
 0x83110	FUN_00083110	856	command-ring	neighbours (round 3)
 0x83470	FUN_00083470	828	kernel-interface	neighbours (round 3)
 0x837b0	FUN_000837b0	188	unclassified	
 0x83870	FUN_00083870	1012	kernel-interface	neighbours (round 2)
-0x83c80	FUN_00083c80	12	unclassified	
+0x83c80	FUN_00083c80	12	kernel-interface	I3: neighbours (call graph majority, I3)
 0x83c90	FUN_00083c90	372	command-ring	neighbours (round 1)
-0x83e10	FUN_00083e10	692	unclassified	
-0x840d0	FUN_000840d0	548	unclassified	
-0x84300	FUN_00084300	472	unclassified	
-0x844e0	FUN_000844e0	548	unclassified	
-0x84710	FUN_00084710	548	unclassified	
-0x84940	FUN_00084940	692	unclassified	
-0x84c00	FUN_00084c00	692	unclassified	
-0x84ec0	FUN_00084ec0	692	unclassified	
-0x85180	FUN_00085180	548	unclassified	
-0x853b0	FUN_000853b0	548	unclassified	
-0x855e0	FUN_000855e0	548	unclassified	
-0x85810	FUN_00085810	548	unclassified	
-0x85a40	FUN_00085a40	424	unclassified	
-0x85bf0	FUN_00085bf0	424	unclassified	
-0x85da0	FUN_00085da0	424	unclassified	
-0x85f50	FUN_00085f50	424	unclassified	
-0x86100	FUN_00086100	424	unclassified	
-0x862b0	FUN_000862b0	548	unclassified	
-0x864e0	FUN_000864e0	548	unclassified	
+0x83e10	arbEmitRecord3Src_op44	692	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x840d0	arbEmitRecord2Src_op01	548	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x84300	arbEmitRecord1Src_op02	472	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x844e0	arbEmitRecord2Src_op02	548	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x84710	arbEmitRecord2Src_op03	548	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x84940	arbEmitRecord3Src_op04	692	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x84c00	arbEmitRecord3Src_op0b	692	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x84ec0	arbEmitRecord3Src_op0c	692	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x85180	arbEmitRecord2Src_op08	548	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x853b0	arbEmitRecord2Src_op07	548	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x855e0	arbEmitRecord2Src_op0a	548	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x85810	arbEmitRecord2Src_op09	548	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x85a40	arbEmitRecord1Src_op0e	424	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x85bf0	arbEmitRecord1Src_op47	424	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x85da0	arbEmitRecord1Src_op49	424	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x85f50	arbEmitRecord1Src_op4b	424	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x86100	arbEmitRecord1Src_op43	424	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x862b0	arbEmitRecord2Src_op45	548	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
+0x864e0	arbEmitRecord2Src_op4f	548	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
 0x86710	FUN_00086710	152	command-ring	neighbours (round 1)
 0x867b0	FUN_000867b0	140	command-ring	neighbours (round 2)
 0x86840	FUN_00086840	228	command-ring	neighbours (round 1)
-0x86930	FUN_00086930	204	unclassified	
-0x86a10	FUN_00086a10	96	unclassified	
+0x86930	FUN_00086930	204	command-ring	I3: neighbours (call graph majority, I3)
+0x86a10	FUN_00086a10	96	command-ring	I3: neighbours (call graph majority, I3)
 0x86a80	FUN_00086a80	284	command-ring	neighbours (round 2)
 0x86ba0	FUN_00086ba0	1840	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
 0x872e0	FUN_000872e0	1296	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
-0x87800	FUN_00087800	344	unclassified	
-0x87960	FUN_00087960	120	unclassified	
+0x87800	arbfpUpdateConstantsFp24	344	arb-fragment-program	I3: ARB fragment program state (arbfp* family)
+0x87960	arbfpInitResourceLimits	120	arb-fragment-program	I3: ARB fragment program state (arbfp* family)
 0x879e0	noop_879e0	4	trivial	name
 0x879f0	FUN_000879f0	732	command-ring	neighbours (round 2)
 0x87cd0	FUN_00087cd0	188	command-ring	neighbours (round 2)
@@ -758,48 +758,48 @@ address	name	size	subsystem	basis
 0x87e70	FUN_00087e70	8	unclassified	
 0x87e80	FUN_00087e80	764	command-ring	neighbours (round 2)
 0x88190	FUN_00088190	740	command-ring	neighbours (round 4)
-0x88480	FUN_00088480	268	unclassified	
+0x88480	arbfpLookupKeyword	268	arb-fragment-program	I3: ARB fragment program state (arbfp* family)
 0x885b0	FUN_000885b0	860	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
-0x88920	FUN_00088920	892	unclassified	
-0x88e70	FUN_00088e70	112	unclassified	
-0x88ee0	FUN_00088ee0	28	unclassified	
-0x88f00	FUN_00088f00	184	unclassified	
-0x88fd0	FUN_00088fd0	332	unclassified	
-0x89140	FUN_00089140	28	unclassified	
-0x89160	FUN_00089160	44	unclassified	
-0x89190	FUN_00089190	124	unclassified	
-0x89280	FUN_00089280	156	unclassified	
-0x89320	FUN_00089320	264	unclassified	
-0x89430	FUN_00089430	348	unclassified	
-0x895b0	FUN_000895b0	364	unclassified	
-0x89740	FUN_00089740	88	unclassified	
+0x88920	arbNextToken	892	arb-program-parser	I3: ARB program text parser (strings, notes_gld_functions.md section 1)
+0x88e70	arbSetError	112	arb-program-parser	I3: ARB program text parser (strings, notes_gld_functions.md section 1)
+0x88ee0	arbErrorOutOfMemory	28	arb-program-parser	I3: ARB program text parser (strings, notes_gld_functions.md section 1)
+0x88f00	arbAllocVariable	184	arb-program-parser	I3: ARB program text parser (strings, notes_gld_functions.md section 1)
+0x88fd0	arbParseVariableName	332	arb-program-parser	I3: ARB program text parser (strings, notes_gld_functions.md section 1)
+0x89140	arbErrorInternal	28	arb-program-parser	I3: ARB program text parser (strings, notes_gld_functions.md section 1)
+0x89160	arbExpectToken	44	arb-program-parser	I3: ARB program text parser (strings, notes_gld_functions.md section 1)
+0x89190	arbComponentLetterToIndex	124	arb-program-parser	I3: ARB program text parser (strings, notes_gld_functions.md section 1)
+0x89280	arbAllocBindingEntry	156	arb-program-parser	I3: ARB program text parser (strings, notes_gld_functions.md section 1)
+0x89320	arbInternConstant	264	arb-program-parser	I3: ARB program text parser (strings, notes_gld_functions.md section 1)
+0x89430	arbDeclareVariable	348	arb-program-parser	I3: ARB program text parser (strings, notes_gld_functions.md section 1)
+0x895b0	arbParseResultBinding	364	arb-program-parser	I3: ARB program text parser (strings, notes_gld_functions.md section 1)
+0x89740	arbParseOptionalSign	88	arb-program-parser	I3: ARB program text parser (strings, notes_gld_functions.md section 1)
 0x897b0	FUN_000897b0	164	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
-0x89a20	FUN_00089a20	144	unclassified	
-0x89ac0	FUN_00089ac0	144	unclassified	
-0x89b60	FUN_00089b60	168	unclassified	
-0x89c10	FUN_00089c10	128	unclassified	
-0x89ca0	FUN_00089ca0	144	unclassified	
-0x8aa40	FUN_0008aa40	3780	unclassified	
-0x8ace0	FUN_0008ace0	464	unclassified	
-0x8aec0	FUN_0008aec0	136	unclassified	
-0x8b160	FUN_0008b160	864	unclassified	
-0x8b300	FUN_0008b300	396	unclassified	
-0x8b4b0	FUN_0008b4b0	496	unclassified	
-0x8b6d0	FUN_0008b6d0	624	unclassified	
-0x8b960	FUN_0008b960	132	unclassified	
-0x8b9f0	FUN_0008b9f0	2664	unclassified	
-0x8c490	FUN_0008c490	248	unclassified	
+0x89a20	arbParseLocalParamNumber	144	arb-program-parser	I3: ARB program text parser (strings, notes_gld_functions.md section 1)
+0x89ac0	arbParseEnvParamNumber	144	arb-program-parser	I3: ARB program text parser (strings, notes_gld_functions.md section 1)
+0x89b60	arbParseTexCoordNumber	168	arb-program-parser	I3: ARB program text parser (strings, notes_gld_functions.md section 1)
+0x89c10	arbParseMatrixRowNumber	128	arb-program-parser	I3: ARB program text parser (strings, notes_gld_functions.md section 1)
+0x89ca0	arbParseLightNumber	144	arb-program-parser	I3: ARB program text parser (strings, notes_gld_functions.md section 1)
+0x8aa40	arbParseParamBinding	3780	arb-program-parser	I3: ARB program text parser (strings, notes_gld_functions.md section 1)
+0x8ace0	arbParseFragmentAttribBinding	464	arb-program-parser	I3: ARB program text parser (strings, notes_gld_functions.md section 1)
+0x8aec0	arbParseComponentToken	136	arb-program-parser	I3: ARB program text parser (strings, notes_gld_functions.md section 1)
+0x8b160	arbParseSourceRegister	864	arb-program-parser	I3: ARB program text parser (strings, notes_gld_functions.md section 1)
+0x8b300	arbParseExtendedSwizzleSelector	396	arb-program-parser	I3: ARB program text parser (strings, notes_gld_functions.md section 1)
+0x8b4b0	arbParseDestRegister	496	arb-program-parser	I3: ARB program text parser (strings, notes_gld_functions.md section 1)
+0x8b6d0	arbParseSwizzleSuffix	624	arb-program-parser	I3: ARB program text parser (strings, notes_gld_functions.md section 1)
+0x8b960	arbfpParseScalarSourceOperand	132	arb-fragment-program	I3: ARB fragment program state (arbfp* family)
+0x8b9f0	arbParseProgramText	2664	arb-program-parser	I3: ARB program text parser (strings, notes_gld_functions.md section 1)
+0x8c490	arbfpInternParameter	248	arb-fragment-program	I3: ARB fragment program state (arbfp* family)
 0x8c590	FUN_0008c590	3768	string	calls string imports
 0x8d470	FUN_0008d470	1744	gl-state-and-hooks	neighbours (round 3)
-0x8dbd0	FUN_0008dbd0	100	unclassified	
-0x8dc40	FUN_0008dc40	12	unclassified	
-0x8dc50	FUN_0008dc50	336	unclassified	
-0x8dda0	FUN_0008dda0	408	unclassified	
+0x8dbd0	arbfpBindProgram	100	arb-fragment-program	I3: ARB fragment program state (arbfp* family)
+0x8dc40	FUN_0008dc40	12	locking-and-runtime	I3: neighbours (call graph majority, I3)
+0x8dc50	arbfpProgramObjectInit	336	arb-fragment-program	I3: ARB fragment program state (arbfp* family)
+0x8dda0	arbfpProgramObjectFree	408	arb-fragment-program	I3: ARB fragment program state (arbfp* family)
 0x8df50	FUN_0008df50	880	string	calls string imports
-0x8e2e0	FUN_0008e2e0	168	unclassified	
+0x8e2e0	arbfpProgramStringIL	168	arb-fragment-program	I3: ARB fragment program state (arbfp* family)
 0x8ebb0	FUN_0008ebb0	4284	math	calls libm
 0x8f520	FUN_0008f520	456	gl-state-and-hooks	neighbours (round 3)
-0x8f6f0	FUN_0008f6f0	108	unclassified	
+0x8f6f0	arbfpGrowInstanceTable	108	arb-fragment-program	I3: ARB fragment program state (arbfp* family)
 0x8f760	FUN_0008f760	144	gl-state-and-hooks	neighbours (round 2)
 0x8f7f0	FUN_0008f7f0	884	command-ring	neighbours (round 1)
 0x8fb70	FUN_0008fb70	248	command-ring	neighbours (round 2)
@@ -813,7 +813,7 @@ address	name	size	subsystem	basis
 0x911a0	FUN_000911a0	316	kernel-interface	neighbours (round 6)
 0x912f0	FUN_000912f0	208	kernel-interface	neighbours (round 8)
 0x913e0	FUN_000913e0	224	kernel-interface	neighbours (round 8)
-0x914c0	FUN_000914c0	28	unclassified	
+0x914c0	noop_914c0	28	gld-api	I3: trivial helper (I3)
 0x914e0	FUN_000914e0	492	kernel-interface	neighbours (round 6)
 0x916d0	FUN_000916d0	420	kernel-interface	neighbours (round 6)
 0x91880	FUN_00091880	248	kernel-interface	neighbours (round 8)
@@ -833,7 +833,7 @@ address	name	size	subsystem	basis
 0x93000	FUN_00093000	288	kernel-interface	neighbours (round 4)
 0x93130	FUN_00093130	168	kernel-interface	neighbours (round 4)
 0x931e0	FUN_000931e0	404	kernel-interface	neighbours (round 4)
-0x93390	FUN_00093390	352	unclassified	
+0x93390	FUN_00093390	352	kernel-interface	I3: neighbours (call graph majority, I3)
 0x934f0	FUN_000934f0	20	kernel-interface	neighbours (round 7)
 0x93510	FUN_00093510	1220	kernel-interface	neighbours (round 7)
 0x939e0	FUN_000939e0	52	kernel-interface	neighbours (round 7)
@@ -855,81 +855,81 @@ address	name	size	subsystem	basis
 0x99e50	FUN_00099e50	1796	kernel-interface	neighbours (round 7)
 0x9a590	FUN_0009a590	848	kernel-interface	neighbours (round 7)
 0x9a910	FUN_0009a910	120	kernel-interface	neighbours (round 4)
-0x9a990	FUN_0009a990	104	unclassified	
+0x9a990	FUN_0009a990	104	arb-fragment-program	I3: fragment program variant cache / draw-time program selection (I3: callers are arbfp* and gldValidateState)
 0x9aa00	FUN_0009aa00	1232	kernel-interface	neighbours (round 7)
-0x9af00	FUN_0009af00	172	unclassified	
+0x9af00	FUN_0009af00	172	arb-fragment-program	I3: fragment program variant cache / draw-time program selection (I3: callers are arbfp* and gldValidateState)
 0x9afc0	FUN_0009afc0	1084	kernel-interface	neighbours (round 7)
 0x9b430	FUN_0009b430	848	kernel-interface	neighbours (round 9)
-0x9b790	FUN_0009b790	172	unclassified	
+0x9b790	FUN_0009b790	172	arb-fragment-program	I3: fragment program variant cache / draw-time program selection (I3: callers are arbfp* and gldValidateState)
 0x9b850	FUN_0009b850	892	kernel-interface	neighbours (round 7)
-0x9bbf0	FUN_0009bbf0	28	unclassified	
-0x9bc10	FUN_0009bc10	228	unclassified	
+0x9bbf0	FUN_0009bbf0	28	arb-fragment-program	I3: fragment program variant cache / draw-time program selection (I3: callers are arbfp* and gldValidateState)
+0x9bc10	FUN_0009bc10	228	arb-fragment-program	I3: fragment program variant cache / draw-time program selection (I3: callers are arbfp* and gldValidateState)
 0x9bd00	FUN_0009bd00	96	kernel-interface	neighbours (round 2)
 0x9bd60	FUN_0009bd60	160	gl-state-and-hooks	neighbours (round 2)
-0x9be00	FUN_0009be00	2216	unclassified	
-0x9c700	FUN_0009c700	248	unclassified	
+0x9be00	FUN_0009be00	2216	arb-fragment-program	I3: fragment program variant cache / draw-time program selection (I3: callers are arbfp* and gldValidateState)
+0x9c700	FUN_0009c700	248	arb-fragment-program	I3: fragment program variant cache / draw-time program selection (I3: callers are arbfp* and gldValidateState)
 0x9c800	FUN_0009c800	744	kernel-interface	neighbours (round 2)
 0x9cb10	FUN_0009cb10	280	kernel-interface	neighbours (round 3)
-0x9cc30	FUN_0009cc30	712	unclassified	
+0x9cc30	FUN_0009cc30	712	arb-fragment-program	I3: fragment program variant cache / draw-time program selection (I3: callers are arbfp* and gldValidateState)
 0x9cf10	FUN_0009cf10	224	command-ring	neighbours (round 2)
 0x9cff0	FUN_0009cff0	132	command-ring	neighbours (round 2)
 0x9d080	FUN_0009d080	596	kernel-interface	neighbours (round 2)
 0x9d2e0	FUN_0009d2e0	184	command-ring	neighbours (round 3)
 0x9d3b0	FUN_0009d3b0	64	command-ring	neighbours (round 1)
 0x9d410	FUN_0009d410	5944	kernel-interface	neighbours (round 2)
-0x9eb90	FUN_0009eb90	560	unclassified	
+0x9eb90	FUN_0009eb90	560	arb-fragment-program	I3: fragment program variant cache / draw-time program selection (I3: callers are arbfp* and gldValidateState)
 0x9edd0	FUN_0009edd0	708	kernel-interface	neighbours (round 2)
 0x9f0b0	FUN_0009f0b0	4444	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
-0xa0290	FUN_000a0290	96	unclassified	
-0xa0300	FUN_000a0300	80	unclassified	
+0xa0290	arbProgramFindIndex	96	arb-program-api	I3: ARB_vertex/fragment_program object API (targets 0x8620/0x8804)
+0xa0300	glProgramStringARB_impl	80	arb-program-api	I3: ARB_vertex/fragment_program object API (targets 0x8620/0x8804)
 0xa0350	FUN_000a0350	36	gl-state-and-hooks	neighbours (round 4)
-0xa0380	FUN_000a0380	476	unclassified	
-0xa0570	FUN_000a0570	124	unclassified	
-0xa05f0	FUN_000a05f0	704	unclassified	
-0xa0ba0	FUN_000a0ba0	188	unclassified	
-0xa0c60	FUN_000a0c60	260	unclassified	
-0xa0d70	FUN_000a0d70	372	unclassified	
+0xa0380	glBindProgramARB_impl	476	arb-program-api	I3: ARB_vertex/fragment_program object API (targets 0x8620/0x8804)
+0xa0570	glGenProgramsARB_impl	124	arb-program-api	I3: ARB_vertex/fragment_program object API (targets 0x8620/0x8804)
+0xa05f0	glGetProgramivARB_impl	704	arb-program-api	I3: ARB_vertex/fragment_program object API (targets 0x8620/0x8804)
+0xa0ba0	arbProgramEntryFree	188	arb-program-api	I3: ARB_vertex/fragment_program object API (targets 0x8620/0x8804)
+0xa0c60	arbProgramTableRelease	260	arb-program-api	I3: ARB_vertex/fragment_program object API (targets 0x8620/0x8804)
+0xa0d70	glDeleteProgramsARB_impl	372	arb-program-api	I3: ARB_vertex/fragment_program object API (targets 0x8620/0x8804)
 0xa0ef0	FUN_000a0ef0	144	gl-state-and-hooks	neighbours (round 2)
 0xa0f80	noop_a0f80	4	trivial	name
 0xa0f90	FUN_000a0f90	152	gl-state-and-hooks	neighbours (round 1)
-0xa1040	FUN_000a1040	20	unclassified	
-0xa1060	FUN_000a1060	44	unclassified	
-0xa1090	FUN_000a1090	200	unclassified	
-0xa1160	FUN_000a1160	48	unclassified	
+0xa1040	FUN_000a1040	20	ati-fragment-shader	I3: ATI_fragment_shader context state accessors (ctx+0x1134..0x1154)
+0xa1060	FUN_000a1060	44	ati-fragment-shader	I3: ATI_fragment_shader context state accessors (ctx+0x1134..0x1154)
+0xa1090	FUN_000a1090	200	ati-fragment-shader	I3: ATI_fragment_shader context state accessors (ctx+0x1134..0x1154)
+0xa1160	FUN_000a1160	48	ati-fragment-shader	I3: ATI_fragment_shader context state accessors (ctx+0x1134..0x1154)
 0xa11a0	FUN_000a11a0	64	gld-api	neighbours (round 4)
-0xa11f0	FUN_000a11f0	192	unclassified	
-0xa12b0	FUN_000a12b0	52	gld-api	neighbours (round 4)
-0xa12f0	FUN_000a12f0	612	gld-api	neighbours (round 4)
-0xa1570	FUN_000a1570	312	unclassified	
-0xa16b0	FUN_000a16b0	148	gld-api	neighbours (round 4)
-0xa1750	FUN_000a1750	772	gld-api	neighbours (round 4)
-0xa1a60	FUN_000a1a60	328	unclassified	
-0xa1bc0	FUN_000a1bc0	328	unclassified	
-0xa1d20	FUN_000a1d20	156	unclassified	
-0xa1dc0	FUN_000a1dc0	168	unclassified	
-0xa1e70	FUN_000a1e70	176	unclassified	
-0xa1f20	FUN_000a1f20	144	unclassified	
-0xa1fb0	FUN_000a1fb0	160	unclassified	
-0xa2050	FUN_000a2050	168	unclassified	
-0xa2100	FUN_000a2100	192	gld-api	neighbours (round 4)
-0xa21d0	FUN_000a21d0	100	gl-state-and-hooks	neighbours (round 2)
-0xa2240	FUN_000a2240	232	unclassified	
-0xa2330	FUN_000a2330	120	unclassified	
-0xa23c0	FUN_000a23c0	356	unclassified	
-0xa2530	FUN_000a2530	288	unclassified	
-0xa2660	FUN_000a2660	392	unclassified	
-0xa27f0	FUN_000a27f0	272	unclassified	
-0xa2910	FUN_000a2910	8	unclassified	
-0xa2920	FUN_000a2920	648	unclassified	
-0xa2bb0	FUN_000a2bb0	400	unclassified	
-0xa2d60	FUN_000a2d60	276	unclassified	
-0xa2e90	FUN_000a2e90	708	unclassified	
-0xa3160	FUN_000a3160	804	unclassified	
-0xa3490	FUN_000a3490	196	unclassified	
+0xa11f0	FUN_000a11f0	192	ati-fragment-shader	I3: ATI_fragment_shader context state accessors (ctx+0x1134..0x1154)
+0xa12b0	glGenFragmentShadersATI_impl	52	ati-fragment-shader	I3: GL_ATI_fragment_shader entry point or helper (enumerants 0x8921..0x8979)
+0xa12f0	glBindFragmentShaderATI_impl	612	ati-fragment-shader	I3: GL_ATI_fragment_shader entry point or helper (enumerants 0x8921..0x8979)
+0xa1570	glDeleteFragmentShaderATI_impl	312	ati-fragment-shader	I3: GL_ATI_fragment_shader entry point or helper (enumerants 0x8921..0x8979)
+0xa16b0	glBeginFragmentShaderATI_impl	148	ati-fragment-shader	I3: GL_ATI_fragment_shader entry point or helper (enumerants 0x8921..0x8979)
+0xa1750	glEndFragmentShaderATI_impl	772	ati-fragment-shader	I3: GL_ATI_fragment_shader entry point or helper (enumerants 0x8921..0x8979)
+0xa1a60	glPassTexCoordATI_impl	328	ati-fragment-shader	I3: GL_ATI_fragment_shader entry point or helper (enumerants 0x8921..0x8979)
+0xa1bc0	glSampleMapATI_impl	328	ati-fragment-shader	I3: GL_ATI_fragment_shader entry point or helper (enumerants 0x8921..0x8979)
+0xa1d20	glColorFragmentOp1ATI_impl	156	ati-fragment-shader	I3: GL_ATI_fragment_shader entry point or helper (enumerants 0x8921..0x8979)
+0xa1dc0	glColorFragmentOp2ATI_impl	168	ati-fragment-shader	I3: GL_ATI_fragment_shader entry point or helper (enumerants 0x8921..0x8979)
+0xa1e70	glColorFragmentOp3ATI_impl	176	ati-fragment-shader	I3: GL_ATI_fragment_shader entry point or helper (enumerants 0x8921..0x8979)
+0xa1f20	glAlphaFragmentOp1ATI_impl	144	ati-fragment-shader	I3: GL_ATI_fragment_shader entry point or helper (enumerants 0x8921..0x8979)
+0xa1fb0	glAlphaFragmentOp2ATI_impl	160	ati-fragment-shader	I3: GL_ATI_fragment_shader entry point or helper (enumerants 0x8921..0x8979)
+0xa2050	glAlphaFragmentOp3ATI_impl	168	ati-fragment-shader	I3: GL_ATI_fragment_shader entry point or helper (enumerants 0x8921..0x8979)
+0xa2100	glSetFragmentShaderConstantATI_impl	192	ati-fragment-shader	I3: GL_ATI_fragment_shader entry point or helper (enumerants 0x8921..0x8979)
+0xa21d0	atifsResetState	100	ati-fragment-shader	I3: GL_ATI_fragment_shader entry point or helper (enumerants 0x8921..0x8979)
+0xa2240	atifsFreeShaderTable	232	ati-fragment-shader	I3: GL_ATI_fragment_shader entry point or helper (enumerants 0x8921..0x8979)
+0xa2330	atifsReleaseShaderTable	120	ati-fragment-shader	I3: GL_ATI_fragment_shader entry point or helper (enumerants 0x8921..0x8979)
+0xa23c0	atifsUnshareShaderTable	356	ati-fragment-shader	I3: GL_ATI_fragment_shader entry point or helper (enumerants 0x8921..0x8979)
+0xa2530	atifsCreateShaderTable	288	ati-fragment-shader	I3: GL_ATI_fragment_shader entry point or helper (enumerants 0x8921..0x8979)
+0xa2660	atifsPackArgument	392	ati-fragment-shader	I3: GL_ATI_fragment_shader entry point or helper (enumerants 0x8921..0x8979)
+0xa27f0	atifsCountPassOps	272	ati-fragment-shader	I3: GL_ATI_fragment_shader entry point or helper (enumerants 0x8921..0x8979)
+0xa2910	atifsSetShaderValid	8	ati-fragment-shader	I3: GL_ATI_fragment_shader entry point or helper (enumerants 0x8921..0x8979)
+0xa2920	atifsInitShader	648	ati-fragment-shader	I3: GL_ATI_fragment_shader entry point or helper (enumerants 0x8921..0x8979)
+0xa2bb0	atifsFreeShader	400	ati-fragment-shader	I3: GL_ATI_fragment_shader entry point or helper (enumerants 0x8921..0x8979)
+0xa2d60	atifsAddTextureOp	276	ati-fragment-shader	I3: GL_ATI_fragment_shader entry point or helper (enumerants 0x8921..0x8979)
+0xa2e90	atifsAddColorOp	708	ati-fragment-shader	I3: GL_ATI_fragment_shader entry point or helper (enumerants 0x8921..0x8979)
+0xa3160	atifsAddAlphaOp	804	ati-fragment-shader	I3: GL_ATI_fragment_shader entry point or helper (enumerants 0x8921..0x8979)
+0xa3490	atifsSetConstant	196	ati-fragment-shader	I3: GL_ATI_fragment_shader entry point or helper (enumerants 0x8921..0x8979)
 0xa3560	FUN_000a3560	164	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
-0xa3610	FUN_000a3610	88	unclassified	
+0xa3610	FUN_000a3610	88	gld-api	I3: neighbours (call graph majority, I3)
 0xa3670	FUN_000a3670	48	command-ring	neighbours (round 3)
-0xa36b0	FUN_000a36b0	212	unclassified	
+0xa36b0	FUN_000a36b0	212	gld-api	I3: neighbours (call graph majority, I3)
 0xa3790	FUN_000a3790	716	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
 0xa3a60	FUN_000a3a60	372	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
 0xa3be0	FUN_000a3be0	2056	gl-state-and-hooks	neighbours (round 1)
@@ -944,86 +944,86 @@ address	name	size	subsystem	basis
 0xa5ec0	FUN_000a5ec0	620	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
 0xa6140	FUN_000a6140	896	command-ring	neighbours (round 1)
 0xa64d0	FUN_000a64d0	36	unclassified	
-0xa6500	FUN_000a6500	828	unclassified	
+0xa6500	FUN_000a6500	828	fragment-program-assembler	I3: fragment program IL assembler pieces called by FUN_000afe40
 0xa6860	FUN_000a6860	1096	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
 0xa6cb0	FUN_000a6cb0	656	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
 0xa6f70	FUN_000a6f70	8	command-ring	neighbours (round 2)
 0xa6f80	noop_a6f80	4	trivial	name
 0xa6f90	FUN_000a6f90	168	math	calls libm
 0xa7050	FUN_000a7050	2324	gl-state-and-hooks	neighbours (round 1)
-0xa7970	FUN_000a7970	240	unclassified	
+0xa7970	FUN_000a7970	240	fragment-program-assembler	I3: fragment program IL assembler pieces called by FUN_000afe40
 0xa7a60	FUN_000a7a60	496	gld-api	neighbours (round 2)
-0xa7c60	FUN_000a7c60	176	unclassified	
+0xa7c60	FUN_000a7c60	176	fragment-program-assembler	I3: fragment program IL assembler pieces called by FUN_000afe40
 0xa7d10	FUN_000a7d10	344	kernel-interface	neighbours (round 1)
-0xa7e80	FUN_000a7e80	24	unclassified	
-0xa7ea0	FUN_000a7ea0	48	unclassified	
+0xa7e80	FUN_000a7e80	24	fragment-program-assembler	I3: fragment program IL assembler pieces called by FUN_000afe40
+0xa7ea0	FUN_000a7ea0	48	fragment-program-assembler	I3: fragment program IL assembler pieces called by FUN_000afe40
 0xa7ed0	noop_a7ed0	4	trivial	name
 0xa7ee0	FUN_000a7ee0	980	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
 0xa82c0	FUN_000a82c0	96	gld-api	neighbours (round 1)
-0xa8320	FUN_000a8320	20	unclassified	
-0xa8340	FUN_000a8340	720	unclassified	
+0xa8320	FUN_000a8320	20	fragment-program-assembler	I3: fragment program IL assembler pieces called by FUN_000afe40
+0xa8340	FUN_000a8340	720	fragment-program-assembler	I3: fragment program IL assembler pieces called by FUN_000afe40
 0xa8630	FUN_000a8630	968	command-ring	neighbours (round 2)
-0xa8a00	FUN_000a8a00	488	unclassified	
-0xa8c00	FUN_000a8c00	356	unclassified	
-0xa8d70	FUN_000a8d70	168	unclassified	
-0xa8e20	FUN_000a8e20	544	unclassified	
-0xa9070	FUN_000a9070	1476	unclassified	
+0xa8a00	FUN_000a8a00	488	fragment-program-assembler	I3: fragment program IL assembler pieces called by FUN_000afe40
+0xa8c00	FUN_000a8c00	356	fragment-program-assembler	I3: fragment program IL assembler pieces called by FUN_000afe40
+0xa8d70	FUN_000a8d70	168	fragment-program-assembler	I3: fragment program IL assembler pieces called by FUN_000afe40
+0xa8e20	FUN_000a8e20	544	fragment-program-assembler	I3: fragment program IL assembler pieces called by FUN_000afe40
+0xa9070	FUN_000a9070	1476	fragment-program-assembler	I3: fragment program IL assembler pieces called by FUN_000afe40
 0xa9640	FUN_000a9640	1116	math	calls libm
 0xa9ac0	FUN_000a9ac0	7656	gl-state-and-hooks	neighbours (round 2)
 0xab900	FUN_000ab900	60	gl-state-and-hooks	neighbours (round 2)
-0xab940	FUN_000ab940	96	unclassified	
-0xab9b0	FUN_000ab9b0	240	unclassified	
-0xabab0	FUN_000abab0	164	unclassified	
+0xab940	FUN_000ab940	96	fragment-program-assembler	I3: fragment program IL assembler pieces called by FUN_000afe40
+0xab9b0	FUN_000ab9b0	240	fragment-program-assembler	I3: fragment program IL assembler pieces called by FUN_000afe40
+0xabab0	FUN_000abab0	164	fragment-program-assembler	I3: fragment program IL assembler pieces called by FUN_000afe40
 0xabb60	FUN_000abb60	96	command-ring	neighbours (round 3)
-0xabbd0	FUN_000abbd0	312	unclassified	
-0xabd10	FUN_000abd10	1640	unclassified	
-0xac540	FUN_000ac540	476	unclassified	
-0xac720	FUN_000ac720	7944	unclassified	
-0xaec40	FUN_000aec40	3872	unclassified	
+0xabbd0	FUN_000abbd0	312	fragment-program-assembler	I3: fragment program IL assembler pieces called by FUN_000afe40
+0xabd10	FUN_000abd10	1640	fragment-program-assembler	I3: fragment program IL assembler pieces called by FUN_000afe40
+0xac540	FUN_000ac540	476	fragment-program-assembler	I3: fragment program IL assembler pieces called by FUN_000afe40
+0xac720	FUN_000ac720	7944	fragment-program-assembler	I3: fragment program IL assembler pieces called by FUN_000afe40
+0xaec40	FUN_000aec40	3872	fragment-program-assembler	I3: fragment program IL assembler pieces called by FUN_000afe40
 0xafe40	FUN_000afe40	5932	string	calls string imports
-0xb15d0	FUN_000b15d0	180	unclassified	
-0xb1690	FUN_000b1690	476	unclassified	
-0xb1870	FUN_000b1870	800	unclassified	
-0xb1b90	FUN_000b1b90	748	unclassified	
-0xb1e80	FUN_000b1e80	932	unclassified	
-0xb2260	FUN_000b2260	692	unclassified	
-0xb25a0	FUN_000b25a0	2216	unclassified	
-0xb2e60	FUN_000b2e60	636	unclassified	
-0xb30e0	FUN_000b30e0	1352	unclassified	
+0xb15d0	ilTokenBufPush	180	ati-fragment-shader	I3: GL_ATI_fragment_shader compile helpers (notes_gld_functions_c.md section 2)
+0xb1690	atifsEmitFinalColorClamp	476	ati-fragment-shader	I3: GL_ATI_fragment_shader compile helpers (notes_gld_functions_c.md section 2)
+0xb1870	atifsEmitAddSecondaryColor	800	ati-fragment-shader	I3: GL_ATI_fragment_shader compile helpers (notes_gld_functions_c.md section 2)
+0xb1b90	atifsEmitMoveWithWriteMask	748	ati-fragment-shader	I3: GL_ATI_fragment_shader compile helpers (notes_gld_functions_c.md section 2)
+0xb1e80	atifsEmitSourceOperand	932	ati-fragment-shader	I3: GL_ATI_fragment_shader compile helpers (notes_gld_functions_c.md section 2)
+0xb2260	atifsEmitDestinationOperand	692	ati-fragment-shader	I3: GL_ATI_fragment_shader compile helpers (notes_gld_functions_c.md section 2)
+0xb25a0	atifsEmitTextureOps	2216	ati-fragment-shader	I3: GL_ATI_fragment_shader compile helpers (notes_gld_functions_c.md section 2)
+0xb2e60	atifsEmitClearTemp0	636	ati-fragment-shader	I3: GL_ATI_fragment_shader compile helpers (notes_gld_functions_c.md section 2)
+0xb30e0	atifsEmitInputDeclarations	1352	ati-fragment-shader	I3: GL_ATI_fragment_shader compile helpers (notes_gld_functions_c.md section 2)
 0xb3630	FUN_000b3630	3316	command-ring	neighbours (round 1)
 0xb43f0	noop_b43f0	4	trivial	name
 0xb4400	FUN_000b4400	2136	command-ring	neighbours (round 1)
-0xb4cd0	FUN_000b4cd0	608	unclassified	
-0xb4f50	FUN_000b4f50	180	unclassified	
-0xb5010	FUN_000b5010	132	unclassified	
+0xb4cd0	FUN_000b4cd0	608	program-upload	I3: compiled program upload/free helpers (ring packets 0x8a1/0x880)
+0xb4f50	FUN_000b4f50	180	program-upload	I3: compiled program upload/free helpers (ring packets 0x8a1/0x880)
+0xb5010	FUN_000b5010	132	program-upload	I3: compiled program upload/free helpers (ring packets 0x8a1/0x880)
 0xb50a0	FUN_000b50a0	228	command-ring	neighbours (round 5)
 0xb5190	noop_b5190	4	trivial	name
 0xb51a0	FUN_000b51a0	376	command-ring	neighbours (round 5)
 0xb5320	FUN_000b5320	204	command-ring	neighbours (round 5)
 0xb53f0	noop_b53f0	4	trivial	name
-0xb5400	FUN_000b5400	928	unclassified	
+0xb5400	FUN_000b5400	928	program-upload	I3: compiled program upload/free helpers (ring packets 0x8a1/0x880)
 0xb57a0	FUN_000b57a0	688	command-ring	neighbours (round 1)
-0xb5a60	FUN_000b5a60	244	unclassified	
-0xb5b60	FUN_000b5b60	64	unclassified	
-0xb5ba0	FUN_000b5ba0	36	unclassified	
-0xb5bd0	FUN_000b5bd0	36	unclassified	
+0xb5a60	FUN_000b5a60	244	program-upload	I3: compiled program upload/free helpers (ring packets 0x8a1/0x880)
+0xb5b60	FUN_000b5b60	64	program-upload	I3: compiled program upload/free helpers (ring packets 0x8a1/0x880)
+0xb5ba0	FUN_000b5ba0	36	program-upload	I3: compiled program upload/free helpers (ring packets 0x8a1/0x880)
+0xb5bd0	FUN_000b5bd0	36	program-upload	I3: compiled program upload/free helpers (ring packets 0x8a1/0x880)
 0xb5c00	FUN_000b5c00	828	command-ring	neighbours (round 5)
-0xb5f40	FUN_000b5f40	100	unclassified	
-0xb5fb0	FUN_000b5fb0	100	unclassified	
+0xb5f40	FUN_000b5f40	100	program-upload	I3: compiled program upload/free helpers (ring packets 0x8a1/0x880)
+0xb5fb0	FUN_000b5fb0	100	program-upload	I3: compiled program upload/free helpers (ring packets 0x8a1/0x880)
 0xb6020	FUN_000b6020	1360	gl-state-and-hooks	neighbours (round 2)
 0xb6580	FUN_000b6580	2448	command-ring	neighbours (round 1)
 0xb6f20	FUN_000b6f20	928	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
 0xb72d0	FUN_000b72d0	11108	kernel-interface	neighbours (round 10)
 0xb9f10	FUN_000b9f10	11376	kernel-interface	neighbours (round 9)
-0xbd9a0	FUN_000bd9a0	160	unclassified	
+0xbd9a0	FUN_000bd9a0	160	compiler	I3: IR/compiler support called from gldValidateState
 0xbda40	FUN_000bda40	1016	gl-state-and-hooks	neighbours (round 3)
-0xbde70	FUN_000bde70	1504	unclassified	
+0xbde70	FUN_000bde70	1504	compiler	I3: IR/compiler support called from gldValidateState
 0xbe460	FUN_000be460	2472	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
-0xbee40	FUN_000bee40	244	unclassified	
-0xbef40	FUN_000bef40	1192	unclassified	
-0xbf400	FUN_000bf400	1260	unclassified	
-0xbf910	FUN_000bf910	796	unclassified	
-0xbfcc0	FUN_000bfcc0	440	unclassified	
+0xbee40	FUN_000bee40	244	compiler	I3: IR/compiler support called from gldValidateState
+0xbef40	FUN_000bef40	1192	compiler	I3: IR/compiler support called from gldValidateState
+0xbf400	FUN_000bf400	1260	compiler	I3: IR/compiler support called from gldValidateState
+0xbf910	FUN_000bf910	796	compiler	I3: IR/compiler support called from gldValidateState
+0xbfcc0	FUN_000bfcc0	440	compiler	I3: IR/compiler support called from gldValidateState
 0xbfed0	FUN_000bfed0	2464	command-ring	neighbours (round 2)
 0xc0880	FUN_000c0880	1832	unclassified	
 0xc0fd0	FUN_000c0fd0	1936	unclassified	

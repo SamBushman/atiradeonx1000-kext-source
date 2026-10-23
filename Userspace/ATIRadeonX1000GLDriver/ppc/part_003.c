@@ -1501,11 +1501,11 @@ LAB_0001bf84:
 }
 
 /* dxt1DecodeColorIndex @ 0x1c1c0 (416 bytes) */
-int dxt1DecodeColorIndex(param_1, param_2, param_3, param_4)
-  uint param_1;
-  uint param_2;
-  uint param_3;
-  undefined1 *param_4;
+int dxt1DecodeColorIndex(color0, color1, texelIndex, rgbaOut)
+  uint color0;
+  uint color1;
+  uint texelIndex;
+  undefined1 *rgbaOut;
 {
   undefined1 uVar1;
   uint uVar2;
@@ -1518,75 +1518,75 @@ int dxt1DecodeColorIndex(param_1, param_2, param_3, param_4)
   int iVar9;
   undefined1 auStack_28 [32];
   
-  if (param_2 < param_1) {
-    iVar4 = (param_1 & 0x1f) * 8;
-    uVar6 = param_1 >> 8 & 0xf8;
-    uVar5 = param_1 >> 3 & 0xfc;
-    iVar9 = (param_2 & 0x1f) * 8;
-    uVar2 = param_2 >> 8 & 0xf8;
+  if (color1 < color0) {
+    iVar4 = (color0 & 0x1f) * 8;
+    uVar6 = color0 >> 8 & 0xf8;
+    uVar5 = color0 >> 3 & 0xfc;
+    iVar9 = (color1 & 0x1f) * 8;
+    uVar2 = color1 >> 8 & 0xf8;
     auStack_28[2] = (char)iVar4;
-    uVar3 = param_2 >> 3 & 0xfc;
+    uVar3 = color1 >> 3 & 0xfc;
     auStack_28[0] = (char)uVar6;
     auStack_28[1] = (char)uVar5;
     auStack_28[3] = (char)uVar2;
     auStack_28[5] = (char)iVar9;
     auStack_28[4] = (char)uVar3;
-    if (param_3 == 2) {
+    if (texelIndex == 2) {
       iVar8 = uVar6 * 2 + uVar2;
       iVar7 = uVar5 * 2 + uVar3;
-      iVar4 = (param_1 & 0x1f) * 0x10 + iVar9;
+      iVar4 = (color0 & 0x1f) * 0x10 + iVar9;
     }
     else {
-      if (param_3 < 2) goto LAB_0001c300;
-      if (param_3 != 3) {
+      if (texelIndex < 2) goto LAB_0001c300;
+      if (texelIndex != 3) {
         return;
       }
       iVar8 = uVar6 + uVar2 * 2;
       iVar7 = uVar5 + uVar3 * 2;
-      iVar4 = iVar4 + (param_2 & 0x1f) * 0x10;
+      iVar4 = iVar4 + (color1 & 0x1f) * 0x10;
     }
-    param_4[3] = 0xff;
-    param_4[2] = (char)((ulonglong)((longlong)iVar4 * 0x55555556) >> 0x20);
-    *param_4 = (char)((ulonglong)((longlong)iVar8 * 0x55555556) >> 0x20);
-    param_4[1] = (char)((ulonglong)((longlong)iVar7 * 0x55555556) >> 0x20);
+    rgbaOut[3] = 0xff;
+    rgbaOut[2] = (char)((ulonglong)((longlong)iVar4 * 0x55555556) >> 0x20);
+    *rgbaOut = (char)((ulonglong)((longlong)iVar8 * 0x55555556) >> 0x20);
+    rgbaOut[1] = (char)((ulonglong)((longlong)iVar7 * 0x55555556) >> 0x20);
   }
   else {
-    if (param_3 == 3) {
-      param_4[3] = 0;
-      *param_4 = 0;
-      param_4[1] = 0;
-      param_4[2] = 0;
+    if (texelIndex == 3) {
+      rgbaOut[3] = 0;
+      *rgbaOut = 0;
+      rgbaOut[1] = 0;
+      rgbaOut[2] = 0;
       return;
     }
-    iVar4 = (param_1 & 0x1f) * 8;
-    uVar2 = param_1 >> 8 & 0xf8;
-    uVar6 = param_1 >> 3 & 0xfc;
-    iVar9 = (param_2 & 0x1f) * 8;
-    uVar3 = param_2 >> 8 & 0xf8;
+    iVar4 = (color0 & 0x1f) * 8;
+    uVar2 = color0 >> 8 & 0xf8;
+    uVar6 = color0 >> 3 & 0xfc;
+    iVar9 = (color1 & 0x1f) * 8;
+    uVar3 = color1 >> 8 & 0xf8;
     auStack_28[2] = (char)iVar4;
-    uVar5 = param_2 >> 3 & 0xfc;
+    uVar5 = color1 >> 3 & 0xfc;
     auStack_28[0] = (char)uVar2;
     auStack_28[1] = (char)uVar6;
     auStack_28[3] = (char)uVar3;
     auStack_28[5] = (char)iVar9;
     auStack_28[4] = (char)uVar5;
-    if (1 < param_3) {
-      if (param_3 != 2) {
+    if (1 < texelIndex) {
+      if (texelIndex != 2) {
         return;
       }
-      param_4[3] = 0xff;
-      *param_4 = (char)((int)(uVar2 + uVar3) >> 1);
-      param_4[1] = (char)((int)(uVar6 + uVar5) >> 1);
-      param_4[2] = (char)(iVar4 + iVar9 >> 1);
+      rgbaOut[3] = 0xff;
+      *rgbaOut = (char)((int)(uVar2 + uVar3) >> 1);
+      rgbaOut[1] = (char)((int)(uVar6 + uVar5) >> 1);
+      rgbaOut[2] = (char)(iVar4 + iVar9 >> 1);
       return;
     }
 LAB_0001c300:
-    iVar4 = param_3 * 3;
-    *param_4 = auStack_28[iVar4];
-    param_4[1] = auStack_28[iVar4 + 1];
+    iVar4 = texelIndex * 3;
+    *rgbaOut = auStack_28[iVar4];
+    rgbaOut[1] = auStack_28[iVar4 + 1];
     uVar1 = auStack_28[iVar4 + 2];
-    param_4[3] = 0xff;
-    param_4[2] = uVar1;
+    rgbaOut[3] = 0xff;
+    rgbaOut[2] = uVar1;
   }
   return;
 }
@@ -2511,37 +2511,37 @@ code_r0x0001d6b4:
 }
 
 /* floatToHalfBits @ 0x1d7c0 (148 bytes) */
-uint floatToHalfBits(double fparam_1)
+uint floatToHalfBits(double value)
 {
-  float fVar1;
-  int iVar2;
+  float floatValue;
+  int unbiasedExponent;
   uint uVar3;
-  int iVar4;
+  int halfExponent;
   
-  fVar1 = (float)fparam_1;
-  uVar3 = (uint)GH_F2U(fVar1) >> 0x17 & 0xff;
-  iVar2 = uVar3 - 0x7f;
-  if (iVar2 < 0x11) {
-    if (iVar2 < -0xe) {
-      if (iVar2 < -0x25) {
-        iVar4 = 0;
+  floatValue = (float)value;
+  uVar3 = (uint)GH_F2U(floatValue) >> 0x17 & 0xff;
+  unbiasedExponent = uVar3 - 0x7f;
+  if (unbiasedExponent < 0x11) {
+    if (unbiasedExponent < -0xe) {
+      if (unbiasedExponent < -0x25) {
+        halfExponent = 0;
         uVar3 = 0;
       }
       else {
-        iVar4 = 0;
-        uVar3 = (((uint)GH_F2U(fVar1) & 0x7fffff | 0x800000) >> (-iVar2 - 0xeU & 0x3f)) >> 0xd;
+        halfExponent = 0;
+        uVar3 = (((uint)GH_F2U(floatValue) & 0x7fffff | 0x800000) >> (-unbiasedExponent - 0xeU & 0x3f)) >> 0xd;
       }
     }
     else {
-      iVar4 = uVar3 - 0x70;
-      uVar3 = ((uint)GH_F2U(fVar1) & 0x7fffff) >> 0xd;
+      halfExponent = uVar3 - 0x70;
+      uVar3 = ((uint)GH_F2U(floatValue) & 0x7fffff) >> 0xd;
     }
   }
   else {
-    iVar4 = 0x1f;
+    halfExponent = 0x1f;
     uVar3 = 0x3ff;
   }
-  return ((uint)GH_F2U(fVar1) >> 0x1f) << 0xf | iVar4 << 10 | uVar3;
+  return ((uint)GH_F2U(floatValue) >> 0x1f) << 0xf | halfExponent << 10 | uVar3;
 }
 
 /* FUN_0001d880 @ 0x1d880 (704 bytes) */
@@ -2681,46 +2681,46 @@ LAB_0001dae0:
   } while( true );
 }
 
-/* FUN_0001db50 @ 0x1db50 (180 bytes) */
-int FUN_0001db50(param_1, param_2, param_3, param_4, param_5, param_6)
-  int param_1;
-  uint param_2;
-  uint *param_3;
-  uint *param_4;
-  uint *param_5;
-  int *param_6;
+/* gldComputeVertexChunking @ 0x1db50 (180 bytes) */
+int gldComputeVertexChunking(ctx, count, chunkVerts, chunkDwords, chunkCount, tailMode)
+  int ctx;
+  uint count;
+  uint *chunkVerts;
+  uint *chunkDwords;
+  uint *chunkCount;
+  int *tailMode;
 {
   uint uVar1;
   uint uVar2;
   
   uVar1 = 0x7fe0;
-  if (*(uint *)(param_1 + 0x29d8) < 0x7ffd) {
-    uVar1 = *(uint *)(param_1 + 0x29d8) & 0xffffffe0;
+  if (*(uint *)(ctx + 0x29d8) < 0x7ffd) {
+    uVar1 = *(uint *)(ctx + 0x29d8) & 0xffffffe0;
   }
-  *param_3 = 0;
-  *param_5 = 0;
-  *param_4 = 0;
-  *param_6 = 0;
-  if (param_2 < uVar1) {
-    *param_3 = param_2;
-    if ((param_2 & 0x1f) != 0) {
-      *param_3 = param_2 + 0x1f & 0xffffffe0;
+  *chunkVerts = 0;
+  *chunkCount = 0;
+  *chunkDwords = 0;
+  *tailMode = 0;
+  if (count < uVar1) {
+    *chunkVerts = count;
+    if ((count & 0x1f) != 0) {
+      *chunkVerts = count + 0x1f & 0xffffffe0;
     }
     uVar1 = 0;
-    *param_5 = 1;
-    uVar2 = *param_3;
+    *chunkCount = 1;
+    uVar2 = *chunkVerts;
   }
   else {
-    *param_3 = uVar1;
-    *param_5 = param_2 / uVar1;
-    uVar2 = *param_3;
-    uVar1 = (param_2 - (param_2 / uVar2) * uVar2) + 3 & 0xfffffffc;
+    *chunkVerts = uVar1;
+    *chunkCount = count / uVar1;
+    uVar2 = *chunkVerts;
+    uVar1 = (count - (count / uVar2) * uVar2) + 3 & 0xfffffffc;
   }
-  *param_4 = uVar2 >> 2;
-  if (0x1fff < *param_5) {
+  *chunkDwords = uVar2 >> 2;
+  if (0x1fff < *chunkCount) {
     return 0;
   }
-  *param_6 = 2 - (uint)(uVar1 == 0);
+  *tailMode = 2 - (uint)(uVar1 == 0);
   return 1;
 }
 
@@ -2779,7 +2779,7 @@ LAB_0001dcf8:
   local_38 = 0;
   local_34 = 0;
   local_30 = 0;
-  iVar5 = ((int (*)())FUN_0001db50)(param_1,*(undefined4 *)(iVar7 + 0x318),local_2c,&local_30,&local_34,&local_38
+  iVar5 = ((int (*)())gldComputeVertexChunking)(param_1,*(undefined4 *)(iVar7 + 0x318),local_2c,&local_30,&local_34,&local_38
                       );
   if (iVar5 != 0) {
     if (local_38 < 2) {
@@ -2982,7 +2982,7 @@ LAB_0001e3b0:
     local_48 = 0;
     local_44 = 0;
     local_40 = 0;
-    iVar4 = ((int (*)())FUN_0001db50)(param_1,puVar12[1],local_3c,&local_40,&local_44,&local_48);
+    iVar4 = ((int (*)())gldComputeVertexChunking)(param_1,puVar12[1],local_3c,&local_40,&local_44,&local_48);
     if (iVar4 == 0) {
       return 0;
     }
@@ -3178,10 +3178,10 @@ LAB_0001e86c:
 }
 
 /* copyIndices16Swapped_prefetch_entry @ 0x1e890 (16 bytes) */
-int copyIndices16Swapped_prefetch_entry(param_1, param_2, param_3)
-  uint *param_1;
-  uint *param_2;
-  uint param_3;
+int copyIndices16Swapped_prefetch_entry(dst, src, count)
+  uint *dst;
+  uint *src;
+  uint count;
 {
   uint uVar1;
   uint *puVar2;
@@ -3193,90 +3193,90 @@ int copyIndices16Swapped_prefetch_entry(param_1, param_2, param_3)
   vec16 auVar8;
   vec16 auVar9;
   
-  puVar3 = (uint *)((int)param_1 + (param_3 & 0x7ffffffe) * 2);
-  for (; ((uint)param_1 & 0x1f) != 0; param_1 = param_1 + 1) {
-    uVar1 = *param_2;
-    param_2 = param_2 + 1;
-    *param_1 = uVar1 << 0x10 | uVar1 >> 0x10;
+  puVar3 = (uint *)((int)dst + (count & 0x7ffffffe) * 2);
+  for (; ((uint)dst & 0x1f) != 0; dst = dst + 1) {
+    uVar1 = *src;
+    src = src + 1;
+    *dst = uVar1 << 0x10 | uVar1 >> 0x10;
   }
-  auVar6 = *(vec16 *)((uint)param_2 & 0xfffffff0);
+  auVar6 = *(vec16 *)((uint)src & 0xfffffff0);
   auVar7 = *(vec16 *)
-            (((uint)param_2 & 0xf) * 0x10 + *(int *)PTR_DAT_001e88cc & 0xfffffff0);
-  for (puVar2 = param_2; puVar2 < param_2 + 0x38; puVar2 = puVar2 + 8) {
+            (((uint)src & 0xf) * 0x10 + *(int *)PTR_DAT_001e88cc & 0xfffffff0);
+  for (puVar2 = src; puVar2 < src + 0x38; puVar2 = puVar2 + 8) {
     dataCacheBlockTouch(puVar2);
   }
-  for (; param_1 < puVar3 + -0x40; param_1 = param_1 + 0x10) {
-    dataCacheBlockTouch(param_2 + 0x38);
-    auVar4 = *(vec16 *)((uint)(param_2 + 0xc) & 0xfffffff0);
-    auVar9 = *(vec16 *)((uint)(param_2 + 8) & 0xfffffff0);
-    auVar8 = vectorPermute(auVar6,*(vec16 *)((uint)(param_2 + 4) & 0xfffffff0),auVar7);
-    dataCacheBlockTouch(param_2 + 0x40);
-    auVar6 = *(vec16 *)((uint)(param_2 + 0x10) & 0xfffffff0);
-    auVar5 = vectorPermute(*(vec16 *)((uint)(param_2 + 4) & 0xfffffff0),auVar9,auVar7);
-    dataCacheBlockAllocate(param_1);
-    *(vec16 *)((uint)param_1 & 0xfffffff0) = auVar8;
-    *(vec16 *)((uint)(param_1 + 4) & 0xfffffff0) = auVar5;
+  for (; dst < puVar3 + -0x40; dst = dst + 0x10) {
+    dataCacheBlockTouch(src + 0x38);
+    auVar4 = *(vec16 *)((uint)(src + 0xc) & 0xfffffff0);
+    auVar9 = *(vec16 *)((uint)(src + 8) & 0xfffffff0);
+    auVar8 = vectorPermute(auVar6,*(vec16 *)((uint)(src + 4) & 0xfffffff0),auVar7);
+    dataCacheBlockTouch(src + 0x40);
+    auVar6 = *(vec16 *)((uint)(src + 0x10) & 0xfffffff0);
+    auVar5 = vectorPermute(*(vec16 *)((uint)(src + 4) & 0xfffffff0),auVar9,auVar7);
+    dataCacheBlockAllocate(dst);
+    *(vec16 *)((uint)dst & 0xfffffff0) = auVar8;
+    *(vec16 *)((uint)(dst + 4) & 0xfffffff0) = auVar5;
     auVar5 = vectorPermute(auVar9,auVar4,auVar7);
     auVar4 = vectorPermute(auVar4,auVar6,auVar7);
-    dataCacheBlockAllocate(param_1 + 8);
-    *(vec16 *)((uint)(param_1 + 8) & 0xfffffff0) = auVar5;
-    *(vec16 *)((uint)(param_1 + 0xc) & 0xfffffff0) = auVar4;
-    param_2 = param_2 + 0x10;
+    dataCacheBlockAllocate(dst + 8);
+    *(vec16 *)((uint)(dst + 8) & 0xfffffff0) = auVar5;
+    *(vec16 *)((uint)(dst + 0xc) & 0xfffffff0) = auVar4;
+    src = src + 0x10;
   }
-  for (; param_1 < puVar3 + -0x10; param_1 = param_1 + 0x10) {
-    puVar2 = param_2 + 4;
-    auVar9 = *(vec16 *)((uint)(param_2 + 8) & 0xfffffff0);
-    auVar5 = *(vec16 *)((uint)(param_2 + 0xc) & 0xfffffff0);
-    param_2 = param_2 + 0x10;
+  for (; dst < puVar3 + -0x10; dst = dst + 0x10) {
+    puVar2 = src + 4;
+    auVar9 = *(vec16 *)((uint)(src + 8) & 0xfffffff0);
+    auVar5 = *(vec16 *)((uint)(src + 0xc) & 0xfffffff0);
+    src = src + 0x10;
     auVar8 = vectorPermute(auVar6,*(vec16 *)((uint)puVar2 & 0xfffffff0),auVar7);
-    auVar6 = *(vec16 *)((uint)param_2 & 0xfffffff0);
+    auVar6 = *(vec16 *)((uint)src & 0xfffffff0);
     auVar4 = vectorPermute(*(vec16 *)((uint)puVar2 & 0xfffffff0),auVar9,auVar7);
-    dataCacheBlockAllocate(param_1);
-    *(vec16 *)((uint)param_1 & 0xfffffff0) = auVar8;
+    dataCacheBlockAllocate(dst);
+    *(vec16 *)((uint)dst & 0xfffffff0) = auVar8;
     auVar8 = vectorPermute(auVar9,auVar5,auVar7);
-    *(vec16 *)((uint)(param_1 + 4) & 0xfffffff0) = auVar4;
+    *(vec16 *)((uint)(dst + 4) & 0xfffffff0) = auVar4;
     auVar4 = vectorPermute(auVar5,auVar6,auVar7);
-    dataCacheBlockAllocate(param_1 + 8);
-    *(vec16 *)((uint)(param_1 + 8) & 0xfffffff0) = auVar8;
-    *(vec16 *)((uint)(param_1 + 0xc) & 0xfffffff0) = auVar4;
+    dataCacheBlockAllocate(dst + 8);
+    *(vec16 *)((uint)(dst + 8) & 0xfffffff0) = auVar8;
+    *(vec16 *)((uint)(dst + 0xc) & 0xfffffff0) = auVar4;
   }
-  if (param_1 + 8 < puVar3) {
-    auVar4 = *(vec16 *)((uint)(param_2 + 4) & 0xfffffff0);
+  if (dst + 8 < puVar3) {
+    auVar4 = *(vec16 *)((uint)(src + 4) & 0xfffffff0);
     auVar6 = vectorPermute(auVar6,auVar4,auVar7);
-    dataCacheBlockAllocate(param_1);
-    *(vec16 *)((uint)param_1 & 0xfffffff0) = auVar6;
-    param_2 = param_2 + 8;
-    auVar6 = *(vec16 *)((uint)param_2 & 0xfffffff0);
+    dataCacheBlockAllocate(dst);
+    *(vec16 *)((uint)dst & 0xfffffff0) = auVar6;
+    src = src + 8;
+    auVar6 = *(vec16 *)((uint)src & 0xfffffff0);
     auVar4 = vectorPermute(auVar4,auVar6,auVar7);
-    *(vec16 *)((uint)(param_1 + 4) & 0xfffffff0) = auVar4;
-    param_1 = param_1 + 8;
+    *(vec16 *)((uint)(dst + 4) & 0xfffffff0) = auVar4;
+    dst = dst + 8;
   }
-  if (param_1 + 4 < puVar3) {
-    puVar2 = param_2 + 4;
-    param_2 = param_2 + 4;
+  if (dst + 4 < puVar3) {
+    puVar2 = src + 4;
+    src = src + 4;
     auVar6 = vectorPermute(auVar6,*(vec16 *)((uint)puVar2 & 0xfffffff0),auVar7);
-    *(vec16 *)((uint)param_1 & 0xfffffff0) = auVar6;
-    param_1 = param_1 + 4;
+    *(vec16 *)((uint)dst & 0xfffffff0) = auVar6;
+    dst = dst + 4;
   }
-  else if (puVar3 <= param_1) goto LAB_0001eabc;
+  else if (puVar3 <= dst) goto LAB_0001eabc;
   do {
-    uVar1 = *param_2;
-    param_2 = param_2 + 1;
-    *param_1 = uVar1 << 0x10 | uVar1 >> 0x10;
-    param_1 = param_1 + 1;
-  } while (param_1 < puVar3);
+    uVar1 = *src;
+    src = src + 1;
+    *dst = uVar1 << 0x10 | uVar1 >> 0x10;
+    dst = dst + 1;
+  } while (dst < puVar3);
 LAB_0001eabc:
-  if ((param_3 & 1) != 0) {
-    *param_1 = (uint)*(ushort *)param_2;
+  if ((count & 1) != 0) {
+    *dst = (uint)*(ushort *)src;
   }
   return;
 }
 
 /* copyIndices16Swapped_prefetch @ 0x1e8a0 (564 bytes) */
-int copyIndices16Swapped_prefetch(param_1, param_2, param_3)
-  uint *param_1;
-  uint *param_2;
-  uint param_3;
+int copyIndices16Swapped_prefetch(dst, src, count)
+  uint *dst;
+  uint *src;
+  uint count;
 {
   uint uVar1;
   uint *puVar2;
@@ -3288,90 +3288,90 @@ int copyIndices16Swapped_prefetch(param_1, param_2, param_3)
   vec16 auVar8;
   vec16 auVar9;
   
-  puVar3 = (uint *)((int)param_1 + (param_3 & 0x7ffffffe) * 2);
-  for (; ((uint)param_1 & 0x1f) != 0; param_1 = param_1 + 1) {
-    uVar1 = *param_2;
-    param_2 = param_2 + 1;
-    *param_1 = uVar1 << 0x10 | uVar1 >> 0x10;
+  puVar3 = (uint *)((int)dst + (count & 0x7ffffffe) * 2);
+  for (; ((uint)dst & 0x1f) != 0; dst = dst + 1) {
+    uVar1 = *src;
+    src = src + 1;
+    *dst = uVar1 << 0x10 | uVar1 >> 0x10;
   }
-  auVar6 = *(vec16 *)((uint)param_2 & 0xfffffff0);
+  auVar6 = *(vec16 *)((uint)src & 0xfffffff0);
   auVar7 = *(vec16 *)
-            (((uint)param_2 & 0xf) * 0x10 + *(int *)PTR_DAT_001e88cc & 0xfffffff0);
-  for (puVar2 = param_2; puVar2 < param_2 + 0x38; puVar2 = puVar2 + 8) {
+            (((uint)src & 0xf) * 0x10 + *(int *)PTR_DAT_001e88cc & 0xfffffff0);
+  for (puVar2 = src; puVar2 < src + 0x38; puVar2 = puVar2 + 8) {
     dataCacheBlockTouch(puVar2);
   }
-  for (; param_1 < puVar3 + -0x40; param_1 = param_1 + 0x10) {
-    dataCacheBlockTouch(param_2 + 0x38);
-    auVar4 = *(vec16 *)((uint)(param_2 + 0xc) & 0xfffffff0);
-    auVar9 = *(vec16 *)((uint)(param_2 + 8) & 0xfffffff0);
-    auVar8 = vectorPermute(auVar6,*(vec16 *)((uint)(param_2 + 4) & 0xfffffff0),auVar7);
-    dataCacheBlockTouch(param_2 + 0x40);
-    auVar6 = *(vec16 *)((uint)(param_2 + 0x10) & 0xfffffff0);
-    auVar5 = vectorPermute(*(vec16 *)((uint)(param_2 + 4) & 0xfffffff0),auVar9,auVar7);
-    dataCacheBlockAllocate(param_1);
-    *(vec16 *)((uint)param_1 & 0xfffffff0) = auVar8;
-    *(vec16 *)((uint)(param_1 + 4) & 0xfffffff0) = auVar5;
+  for (; dst < puVar3 + -0x40; dst = dst + 0x10) {
+    dataCacheBlockTouch(src + 0x38);
+    auVar4 = *(vec16 *)((uint)(src + 0xc) & 0xfffffff0);
+    auVar9 = *(vec16 *)((uint)(src + 8) & 0xfffffff0);
+    auVar8 = vectorPermute(auVar6,*(vec16 *)((uint)(src + 4) & 0xfffffff0),auVar7);
+    dataCacheBlockTouch(src + 0x40);
+    auVar6 = *(vec16 *)((uint)(src + 0x10) & 0xfffffff0);
+    auVar5 = vectorPermute(*(vec16 *)((uint)(src + 4) & 0xfffffff0),auVar9,auVar7);
+    dataCacheBlockAllocate(dst);
+    *(vec16 *)((uint)dst & 0xfffffff0) = auVar8;
+    *(vec16 *)((uint)(dst + 4) & 0xfffffff0) = auVar5;
     auVar5 = vectorPermute(auVar9,auVar4,auVar7);
     auVar4 = vectorPermute(auVar4,auVar6,auVar7);
-    dataCacheBlockAllocate(param_1 + 8);
-    *(vec16 *)((uint)(param_1 + 8) & 0xfffffff0) = auVar5;
-    *(vec16 *)((uint)(param_1 + 0xc) & 0xfffffff0) = auVar4;
-    param_2 = param_2 + 0x10;
+    dataCacheBlockAllocate(dst + 8);
+    *(vec16 *)((uint)(dst + 8) & 0xfffffff0) = auVar5;
+    *(vec16 *)((uint)(dst + 0xc) & 0xfffffff0) = auVar4;
+    src = src + 0x10;
   }
-  for (; param_1 < puVar3 + -0x10; param_1 = param_1 + 0x10) {
-    puVar2 = param_2 + 4;
-    auVar9 = *(vec16 *)((uint)(param_2 + 8) & 0xfffffff0);
-    auVar5 = *(vec16 *)((uint)(param_2 + 0xc) & 0xfffffff0);
-    param_2 = param_2 + 0x10;
+  for (; dst < puVar3 + -0x10; dst = dst + 0x10) {
+    puVar2 = src + 4;
+    auVar9 = *(vec16 *)((uint)(src + 8) & 0xfffffff0);
+    auVar5 = *(vec16 *)((uint)(src + 0xc) & 0xfffffff0);
+    src = src + 0x10;
     auVar8 = vectorPermute(auVar6,*(vec16 *)((uint)puVar2 & 0xfffffff0),auVar7);
-    auVar6 = *(vec16 *)((uint)param_2 & 0xfffffff0);
+    auVar6 = *(vec16 *)((uint)src & 0xfffffff0);
     auVar4 = vectorPermute(*(vec16 *)((uint)puVar2 & 0xfffffff0),auVar9,auVar7);
-    dataCacheBlockAllocate(param_1);
-    *(vec16 *)((uint)param_1 & 0xfffffff0) = auVar8;
+    dataCacheBlockAllocate(dst);
+    *(vec16 *)((uint)dst & 0xfffffff0) = auVar8;
     auVar8 = vectorPermute(auVar9,auVar5,auVar7);
-    *(vec16 *)((uint)(param_1 + 4) & 0xfffffff0) = auVar4;
+    *(vec16 *)((uint)(dst + 4) & 0xfffffff0) = auVar4;
     auVar4 = vectorPermute(auVar5,auVar6,auVar7);
-    dataCacheBlockAllocate(param_1 + 8);
-    *(vec16 *)((uint)(param_1 + 8) & 0xfffffff0) = auVar8;
-    *(vec16 *)((uint)(param_1 + 0xc) & 0xfffffff0) = auVar4;
+    dataCacheBlockAllocate(dst + 8);
+    *(vec16 *)((uint)(dst + 8) & 0xfffffff0) = auVar8;
+    *(vec16 *)((uint)(dst + 0xc) & 0xfffffff0) = auVar4;
   }
-  if (param_1 + 8 < puVar3) {
-    auVar4 = *(vec16 *)((uint)(param_2 + 4) & 0xfffffff0);
+  if (dst + 8 < puVar3) {
+    auVar4 = *(vec16 *)((uint)(src + 4) & 0xfffffff0);
     auVar6 = vectorPermute(auVar6,auVar4,auVar7);
-    dataCacheBlockAllocate(param_1);
-    *(vec16 *)((uint)param_1 & 0xfffffff0) = auVar6;
-    param_2 = param_2 + 8;
-    auVar6 = *(vec16 *)((uint)param_2 & 0xfffffff0);
+    dataCacheBlockAllocate(dst);
+    *(vec16 *)((uint)dst & 0xfffffff0) = auVar6;
+    src = src + 8;
+    auVar6 = *(vec16 *)((uint)src & 0xfffffff0);
     auVar4 = vectorPermute(auVar4,auVar6,auVar7);
-    *(vec16 *)((uint)(param_1 + 4) & 0xfffffff0) = auVar4;
-    param_1 = param_1 + 8;
+    *(vec16 *)((uint)(dst + 4) & 0xfffffff0) = auVar4;
+    dst = dst + 8;
   }
-  if (param_1 + 4 < puVar3) {
-    puVar2 = param_2 + 4;
-    param_2 = param_2 + 4;
+  if (dst + 4 < puVar3) {
+    puVar2 = src + 4;
+    src = src + 4;
     auVar6 = vectorPermute(auVar6,*(vec16 *)((uint)puVar2 & 0xfffffff0),auVar7);
-    *(vec16 *)((uint)param_1 & 0xfffffff0) = auVar6;
-    param_1 = param_1 + 4;
+    *(vec16 *)((uint)dst & 0xfffffff0) = auVar6;
+    dst = dst + 4;
   }
-  else if (puVar3 <= param_1) goto LAB_0001eabc;
+  else if (puVar3 <= dst) goto LAB_0001eabc;
   do {
-    uVar1 = *param_2;
-    param_2 = param_2 + 1;
-    *param_1 = uVar1 << 0x10 | uVar1 >> 0x10;
-    param_1 = param_1 + 1;
-  } while (param_1 < puVar3);
+    uVar1 = *src;
+    src = src + 1;
+    *dst = uVar1 << 0x10 | uVar1 >> 0x10;
+    dst = dst + 1;
+  } while (dst < puVar3);
 LAB_0001eabc:
-  if ((param_3 & 1) != 0) {
-    *param_1 = (uint)*(ushort *)param_2;
+  if ((count & 1) != 0) {
+    *dst = (uint)*(ushort *)src;
   }
   return;
 }
 
 /* copyIndices16Swapped_dcbz_entry @ 0x1eae0 (16 bytes) */
-int copyIndices16Swapped_dcbz_entry(param_1, param_2, param_3)
-  uint param_1;
-  uint param_2;
-  uint param_3;
+int copyIndices16Swapped_dcbz_entry(dst, src, count)
+  uint dst;
+  uint src;
+  uint count;
 {
   uint *puVar1;
   uint *puVar2;
@@ -3387,21 +3387,21 @@ int copyIndices16Swapped_dcbz_entry(param_1, param_2, param_3)
   vec16 auVar12;
   vec16 auVar13;
   
-  puVar7 = (uint *)(param_1 + (param_3 & 0x7ffffffe) * 2);
-  for (uVar5 = param_1 + 0x7f & 0xffffff80; uVar5 < ((uint)puVar7 & 0xffffff80);
+  puVar7 = (uint *)(dst + (count & 0x7ffffffe) * 2);
+  for (uVar5 = dst + 0x7f & 0xffffff80; uVar5 < ((uint)puVar7 & 0xffffff80);
       uVar5 = uVar5 + 0x80) {
     dataCacheBlockClearToZero(uVar5);
   }
-  uVar5 = param_1 & 0xf;
-  puVar4 = (uint *)(param_1 - uVar5);
-  puVar6 = (uint *)(param_2 - uVar5);
+  uVar5 = dst & 0xf;
+  puVar4 = (uint *)(dst - uVar5);
+  puVar6 = (uint *)(src - uVar5);
   auVar11 = *(vec16 *)
              (*(int *)PTR_DAT_001e88cc + ((int)puVar6 * 0x10 & 0xf0U) & 0xfffffff0);
-  auVar9 = *(vec16 *)(param_2 & 0xfffffff0);
+  auVar9 = *(vec16 *)(src & 0xfffffff0);
   if (uVar5 != 0) {
     auVar9 = *(vec16 *)((uint)(puVar6 + 4) & 0xfffffff0);
     puVar6 = puVar6 + 4;
-    auVar8 = vectorPermute(*(vec16 *)(param_2 & 0xfffffff0),auVar9,auVar11);
+    auVar8 = vectorPermute(*(vec16 *)(src & 0xfffffff0),auVar9,auVar11);
     auVar8 = vectorConditionalSelect
                        (*(vec16 *)((uint)puVar4 & 0xfffffff0),auVar8,
                         *(vec16 *)
@@ -3451,17 +3451,17 @@ int copyIndices16Swapped_dcbz_entry(param_1, param_2, param_3)
     puVar4 = puVar4 + 1;
   } while (puVar4 < puVar7);
 LAB_0001ecac:
-  if ((param_3 & 1) != 0) {
+  if ((count & 1) != 0) {
     *puVar4 = (uint)*(ushort *)puVar6;
   }
   return;
 }
 
 /* copyIndices16Swapped_dcbz @ 0x1eaf0 (468 bytes) */
-int copyIndices16Swapped_dcbz(param_1, param_2, param_3)
-  uint param_1;
-  uint param_2;
-  uint param_3;
+int copyIndices16Swapped_dcbz(dst, src, count)
+  uint dst;
+  uint src;
+  uint count;
 {
   uint *puVar1;
   uint *puVar2;
@@ -3477,21 +3477,21 @@ int copyIndices16Swapped_dcbz(param_1, param_2, param_3)
   vec16 auVar12;
   vec16 auVar13;
   
-  puVar7 = (uint *)(param_1 + (param_3 & 0x7ffffffe) * 2);
-  for (uVar5 = param_1 + 0x7f & 0xffffff80; uVar5 < ((uint)puVar7 & 0xffffff80);
+  puVar7 = (uint *)(dst + (count & 0x7ffffffe) * 2);
+  for (uVar5 = dst + 0x7f & 0xffffff80; uVar5 < ((uint)puVar7 & 0xffffff80);
       uVar5 = uVar5 + 0x80) {
     dataCacheBlockClearToZero(uVar5);
   }
-  uVar5 = param_1 & 0xf;
-  puVar4 = (uint *)(param_1 - uVar5);
-  puVar6 = (uint *)(param_2 - uVar5);
+  uVar5 = dst & 0xf;
+  puVar4 = (uint *)(dst - uVar5);
+  puVar6 = (uint *)(src - uVar5);
   auVar11 = *(vec16 *)
              (*(int *)PTR_DAT_001e88cc + ((int)puVar6 * 0x10 & 0xf0U) & 0xfffffff0);
-  auVar9 = *(vec16 *)(param_2 & 0xfffffff0);
+  auVar9 = *(vec16 *)(src & 0xfffffff0);
   if (uVar5 != 0) {
     auVar9 = *(vec16 *)((uint)(puVar6 + 4) & 0xfffffff0);
     puVar6 = puVar6 + 4;
-    auVar8 = vectorPermute(*(vec16 *)(param_2 & 0xfffffff0),auVar9,auVar11);
+    auVar8 = vectorPermute(*(vec16 *)(src & 0xfffffff0),auVar9,auVar11);
     auVar8 = vectorConditionalSelect
                        (*(vec16 *)((uint)puVar4 & 0xfffffff0),auVar8,
                         *(vec16 *)
@@ -3541,7 +3541,7 @@ int copyIndices16Swapped_dcbz(param_1, param_2, param_3)
     puVar4 = puVar4 + 1;
   } while (puVar4 < puVar7);
 LAB_0001ecac:
-  if ((param_3 & 1) != 0) {
+  if ((count & 1) != 0) {
     *puVar4 = (uint)*(ushort *)puVar6;
   }
   return;
@@ -5996,8 +5996,8 @@ int FUN_000230d0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   return param_2;
 }
 
-/* FUN_000236f0 @ 0x236f0 (8 bytes) */
-int FUN_000236f0(param_1, param_2)
+/* returnSecondArgument @ 0x236f0 (8 bytes) */
+int returnSecondArgument(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {

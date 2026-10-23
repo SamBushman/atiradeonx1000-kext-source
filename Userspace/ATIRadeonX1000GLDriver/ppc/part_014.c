@@ -7388,61 +7388,61 @@ LAB_0009fb60:
 }
 
 /* arbProgramFindIndex @ 0xa0290 (96 bytes) */
-int arbProgramFindIndex(param_1, param_2, param_3)
-  undefined4 param_1;
-  int param_2;
-  int param_3;
+int arbProgramFindIndex(ctx, programTable, programId)
+  undefined4 ctx;
+  int programTable;
+  int programId;
 {
-  bool bVar1;
-  uint uVar2;
-  int iVar3;
+  bool searching;
+  uint entryIndex;
+  int idOffset;
   
-  if (param_3 != 0) {
-    uVar2 = 3;
-    iVar3 = 0x48;
-    bVar1 = true;
-    while (uVar2 < *(uint *)(param_2 + 4)) {
-      if (!bVar1) {
-        return uVar2;
+  if (programId != 0) {
+    entryIndex = 3;
+    idOffset = 0x48;
+    searching = true;
+    while (entryIndex < *(uint *)(programTable + 4)) {
+      if (!searching) {
+        return entryIndex;
       }
-      if (param_3 == *(int *)(iVar3 + *(int *)(param_2 + 8))) {
-        bVar1 = false;
+      if (programId == *(int *)(idOffset + *(int *)(programTable + 8))) {
+        searching = false;
       }
       else {
-        uVar2 = uVar2 + 1;
-        iVar3 = iVar3 + 0x18;
+        entryIndex = entryIndex + 1;
+        idOffset = idOffset + 0x18;
       }
     }
-    if (!bVar1) {
-      return uVar2;
+    if (!searching) {
+      return entryIndex;
     }
   }
   return 0;
 }
 
 /* glProgramStringARB_impl @ 0xa0300 (80 bytes) */
-int glProgramStringARB_impl(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int param_1;
-  int param_2;
-  int param_3;
-  int param_4;
+int glProgramStringARB_impl(ctx, target, format, length, param_5, param_6, param_7, param_8)
+  int ctx;
+  int target;
+  int format;
+  int length;
   undefined4 param_5;
   undefined4 param_6;
   undefined4 param_7;
   undefined4 param_8;
 {
-  *(undefined4 *)(((unsigned char *)0x00001124) + param_1) = 0xffffffff;
-  **(undefined1 **)(((unsigned char *)0x00001128) + param_1) = 0;
-  if (param_4 < 1) {
+  *(undefined4 *)(((unsigned char *)0x00001124) + ctx) = 0xffffffff;
+  **(undefined1 **)(((unsigned char *)0x00001128) + ctx) = 0;
+  if (length < 1) {
     return;
   }
-  if (param_3 != 0x8875) {
+  if (format != 0x8875) {
     return;
   }
-  if (param_2 != 0x8804) {
+  if (target != 0x8804) {
     return;
   }
-  return arbfpProgramString(param_1,0x8875,param_4,param_5);
+  return arbfpProgramString(ctx,0x8875,length,param_5);
 }
 
 /* FUN_000a0350 @ 0xa0350 (36 bytes) */
@@ -7460,10 +7460,10 @@ int FUN_000a0350(param_1, param_2)
 }
 
 /* glBindProgramARB_impl @ 0xa0380 (476 bytes) */
-int glBindProgramARB_impl(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int param_1;
-  int param_2;
-  int param_3;
+int glBindProgramARB_impl(ctx, target, programId, param_4, param_5, param_6, param_7)
+  int ctx;
+  int target;
+  int programId;
   undefined4 param_4;
   undefined4 param_5;
   undefined4 param_6;
@@ -7478,35 +7478,35 @@ int glBindProgramARB_impl(param_1, param_2, param_3, param_4, param_5, param_6, 
   int iVar4;
   int iVar5;
   
-  if ((param_2 == 0x8620) || (param_2 == 0x8804)) {
-    iVar5 = *(int *)(((unsigned char *)0x0000112c) + param_1);
-    a2 = param_3;
-    iVar2 = ((int (*)())arbProgramFindIndex)(param_1,iVar5,param_3);
+  if ((target == 0x8620) || (target == 0x8804)) {
+    iVar5 = *(int *)(((unsigned char *)0x0000112c) + ctx);
+    a2 = programId;
+    iVar2 = ((int (*)())arbProgramFindIndex)(ctx,iVar5,programId);
     if (iVar2 == 0) {
-      if (param_3 != 0) {
+      if (programId != 0) {
         uVar1 = *(uint *)(iVar5 + 4);
         if ((uVar1 & 7) == 0) {
-          iVar2 = (**(code **)(param_1 + 0xc))(uVar1 * 0x18 + 0xc0);
+          iVar2 = (**(code **)(ctx + 0xc))(uVar1 * 0x18 + 0xc0);
           if (iVar2 == 0) {
             return;
           }
           a2 = *(int *)(iVar5 + 4) * 0x18;
-          (**(code **)(((unsigned char *)0x00001344) + param_1))(iVar2,*(undefined4 *)(iVar5 + 8),a2);
-          (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar5 + 8));
+          (**(code **)(((unsigned char *)0x00001344) + ctx))(iVar2,*(undefined4 *)(iVar5 + 8),a2);
+          (**(code **)(ctx + 0x18))(*(undefined4 *)(iVar5 + 8));
           *(int *)(iVar5 + 8) = iVar2;
           uVar1 = *(uint *)(iVar5 + 4);
         }
-        ((int (*)())FUN_000a0350)(param_1,uVar1 * 0x18 + *(int *)(iVar5 + 8));
-        *(int *)(*(int *)(iVar5 + 4) * 0x18 + *(int *)(iVar5 + 8) + 4) = param_2;
-        *(int *)(*(int *)(iVar5 + 4) * 0x18 + *(int *)(iVar5 + 8)) = param_3;
-        if (param_2 == 0x8804) {
+        ((int (*)())FUN_000a0350)(ctx,uVar1 * 0x18 + *(int *)(iVar5 + 8));
+        *(int *)(*(int *)(iVar5 + 4) * 0x18 + *(int *)(iVar5 + 8) + 4) = target;
+        *(int *)(*(int *)(iVar5 + 4) * 0x18 + *(int *)(iVar5 + 8)) = programId;
+        if (target == 0x8804) {
           iVar2 = *(int *)(iVar5 + 8);
           iVar4 = *(int *)(iVar5 + 4) * 0x18 + iVar2;
-          uVar3 = (**(code **)(param_1 + 0xc))(0x78,a1,a2,param_4,param_5,param_6,iVar2);
+          uVar3 = (**(code **)(ctx + 0xc))(0x78,a1,a2,param_4,param_5,param_6,iVar2);
           *(undefined4 *)(iVar4 + 0x14) = uVar3;
-          arbfpProgramObjectInit(param_1,*(undefined4 *)
+          arbfpProgramObjectInit(ctx,*(undefined4 *)
                                 (*(int *)(iVar5 + 4) * 0x18 + *(int *)(iVar5 + 8) + 0x14));
-          arbfpBindProgram(param_1,*(undefined4 *)(iVar5 + 4),a2,param_4,param_5,param_6,iVar2,in_r10);
+          arbfpBindProgram(ctx,*(undefined4 *)(iVar5 + 4),a2,param_4,param_5,param_6,iVar2,in_r10);
         }
         *(int *)(iVar5 + 4) = *(int *)(iVar5 + 4) + 1;
         return;
@@ -7514,15 +7514,15 @@ int glBindProgramARB_impl(param_1, param_2, param_3, param_4, param_5, param_6, 
     }
     else {
       param_7 = *(int *)(iVar5 + 8);
-      if (param_2 != *(int *)(iVar2 * 0x18 + param_7 + 4)) {
+      if (target != *(int *)(iVar2 * 0x18 + param_7 + 4)) {
         return;
       }
     }
-    if (param_2 == 0x8804) {
+    if (target == 0x8804) {
       if (iVar2 == 0) {
-        iVar2 = *(int *)(((unsigned char *)0x0000126c) + param_1);
+        iVar2 = *(int *)(((unsigned char *)0x0000126c) + ctx);
       }
-      arbfpBindProgram(param_1,iVar2,a2,param_4,param_5,param_6,param_7,in_r10);
+      arbfpBindProgram(ctx,iVar2,a2,param_4,param_5,param_6,param_7,in_r10);
       return;
     }
   }
@@ -7530,102 +7530,102 @@ int glBindProgramARB_impl(param_1, param_2, param_3, param_4, param_5, param_6, 
 }
 
 /* glGenProgramsARB_impl @ 0xa0570 (124 bytes) */
-int glGenProgramsARB_impl(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  int param_3;
+int glGenProgramsARB_impl(ctx, count, ids)
+  int ctx;
+  int count;
+  int ids;
 {
   int iVar1;
   int loopIndex;
   int *piVar3;
   int iVar4;
   
-  if (0 < param_2) {
-    piVar3 = *(int **)(((unsigned char *)0x0000112c) + param_1);
+  if (0 < count) {
+    piVar3 = *(int **)(((unsigned char *)0x0000112c) + ctx);
     loopIndex = 0;
     iVar4 = *piVar3;
     do {
-      while (iVar1 = ((int (*)())arbProgramFindIndex)(param_1,piVar3,iVar4), iVar1 != 0) {
+      while (iVar1 = ((int (*)())arbProgramFindIndex)(ctx,piVar3,iVar4), iVar1 != 0) {
         iVar4 = iVar4 + 1;
       }
       iVar1 = loopIndex * 4;
       loopIndex = loopIndex + 1;
-      *(int *)(param_3 + iVar1) = iVar4;
+      *(int *)(ids + iVar1) = iVar4;
       iVar4 = iVar4 + 1;
-    } while (param_2 != loopIndex);
+    } while (count != loopIndex);
     *piVar3 = iVar4;
   }
   return;
 }
 
 /* glGetProgramivARB_impl @ 0xa05f0 (704 bytes) */
-int glGetProgramivARB_impl(param_1, param_2, param_3, param_4)
-  int param_1;
-  int param_2;
-  int param_3;
-  uint *param_4;
+int glGetProgramivARB_impl(ctx, target, pname, params)
+  int ctx;
+  int target;
+  int pname;
+  uint *params;
 {
   int iVar1;
   int iVar2;
   
-  if (param_2 == 0x8620) {
-    iVar2 = *(int *)(((unsigned char *)0x000014a0) + param_1);
+  if (target == 0x8620) {
+    iVar2 = *(int *)(((unsigned char *)0x000014a0) + ctx);
   }
   else {
-    if (param_2 != 0x8804) {
+    if (target != 0x8804) {
       return;
     }
-    iVar2 = *(int *)(((unsigned char *)0x00001270) + param_1);
+    iVar2 = *(int *)(((unsigned char *)0x00001270) + ctx);
   }
-  iVar1 = *(int *)(((unsigned char *)0x0000112c) + param_1);
-  if (param_3 == 0x8627) {
-    *param_4 = *(uint *)(iVar2 * 0x18 + *(int *)(iVar1 + 8) + 0xc);
+  iVar1 = *(int *)(((unsigned char *)0x0000112c) + ctx);
+  if (pname == 0x8627) {
+    *params = *(uint *)(iVar2 * 0x18 + *(int *)(iVar1 + 8) + 0xc);
     return;
   }
-  if (param_3 == 0x8876) {
-    *param_4 = *(uint *)(iVar2 * 0x18 + *(int *)(iVar1 + 8) + 8);
+  if (pname == 0x8876) {
+    *params = *(uint *)(iVar2 * 0x18 + *(int *)(iVar1 + 8) + 8);
     return;
   }
-  if (param_3 != 0x8677) {
-    if (param_2 == 0x8804) {
+  if (pname != 0x8677) {
+    if (target == 0x8804) {
       iVar2 = *(int *)(iVar2 * 0x18 + *(int *)(iVar1 + 8) + 0x14);
-      switch(param_3) {
+      switch(pname) {
       case 0x8805:
-        *param_4 = *(uint *)(*(int *)(iVar2 + 0x74) + 0x6c);
+        *params = *(uint *)(*(int *)(iVar2 + 0x74) + 0x6c);
         return;
       case 0x8806:
-        *param_4 = *(uint *)(*(int *)(iVar2 + 0x74) + 0x70);
+        *params = *(uint *)(*(int *)(iVar2 + 0x74) + 0x70);
         return;
       case 0x8807:
-        *param_4 = *(uint *)(*(int *)(iVar2 + 0x74) + 0x74);
+        *params = *(uint *)(*(int *)(iVar2 + 0x74) + 0x74);
         return;
       case 0x8808:
-        *param_4 = *(uint *)(iVar2 + 0x54);
+        *params = *(uint *)(iVar2 + 0x54);
         return;
       case 0x8809:
-        *param_4 = *(uint *)(iVar2 + 0x58);
+        *params = *(uint *)(iVar2 + 0x58);
         return;
       case 0x880a:
-        *param_4 = *(uint *)(iVar2 + 0x5c);
+        *params = *(uint *)(iVar2 + 0x5c);
 switchD_000a0718_caseD_8811:
         return;
       case 0x880b:
-        *param_4 = *(uint *)(((unsigned char *)0x00001204) + param_1);
+        *params = *(uint *)(((unsigned char *)0x00001204) + ctx);
         return;
       case 0x880c:
-        *param_4 = *(uint *)(((unsigned char *)0x00001208) + param_1);
+        *params = *(uint *)(((unsigned char *)0x00001208) + ctx);
         return;
       case 0x880d:
-        *param_4 = *(uint *)(((unsigned char *)0x0000120cU) + param_1);
+        *params = *(uint *)(((unsigned char *)0x0000120cU) + ctx);
         return;
       case 0x880e:
-        *param_4 = *(uint *)(((unsigned char *)0x00001210) + param_1);
+        *params = *(uint *)(((unsigned char *)0x00001210) + ctx);
         return;
       case 0x880f:
-        *param_4 = *(uint *)(((unsigned char *)0x00001214) + param_1);
+        *params = *(uint *)(((unsigned char *)0x00001214) + ctx);
         return;
       case 0x8810:
-        *param_4 = *(uint *)(((unsigned char *)0x00001218) + param_1);
+        *params = *(uint *)(((unsigned char *)0x00001218) + ctx);
         return;
       case 0x8811:
       case 0x8812:
@@ -7772,71 +7772,71 @@ switchD_000a0718_caseD_8811:
       case 0x889f:
         goto switchD_000a0718_caseD_8811;
       case 0x88a0:
-        *param_4 = *(uint *)(*(int *)(iVar2 + 0x74) + 0x68);
+        *params = *(uint *)(*(int *)(iVar2 + 0x74) + 0x68);
         return;
       case 0x88a1:
-        *param_4 = *(uint *)(((unsigned char *)0x000011d4) + param_1);
+        *params = *(uint *)(((unsigned char *)0x000011d4) + ctx);
         return;
       case 0x88a2:
-        *param_4 = *(uint *)(iVar2 + 0x50);
+        *params = *(uint *)(iVar2 + 0x50);
         return;
       case 0x88a3:
-        *param_4 = *(uint *)(((unsigned char *)0x000011d8) + param_1);
+        *params = *(uint *)(((unsigned char *)0x000011d8) + ctx);
         return;
       case 0x88a4:
-        *param_4 = *(uint *)(*(int *)(iVar2 + 0x74) + 0x88);
+        *params = *(uint *)(*(int *)(iVar2 + 0x74) + 0x88);
         return;
       case 0x88a5:
-        *param_4 = *(uint *)(((unsigned char *)0x000011dc) + param_1);
+        *params = *(uint *)(((unsigned char *)0x000011dc) + ctx);
         return;
       case 0x88a6:
-        *param_4 = *(uint *)(iVar2 + 0x68);
+        *params = *(uint *)(iVar2 + 0x68);
         return;
       case 0x88a7:
-        *param_4 = *(uint *)(((unsigned char *)0x000011e0) + param_1);
+        *params = *(uint *)(((unsigned char *)0x000011e0) + ctx);
         return;
       case 0x88a8:
-        *param_4 = *(uint *)(*(int *)(iVar2 + 0x74) + 0x84);
+        *params = *(uint *)(*(int *)(iVar2 + 0x74) + 0x84);
         return;
       case 0x88a9:
-        *param_4 = *(uint *)(((unsigned char *)0x000011e4) + param_1);
+        *params = *(uint *)(((unsigned char *)0x000011e4) + ctx);
         return;
       case 0x88aa:
-        *param_4 = *(uint *)(iVar2 + 100);
+        *params = *(uint *)(iVar2 + 100);
         return;
       case 0x88ab:
-        *param_4 = *(uint *)(((unsigned char *)0x000011e8) + param_1);
+        *params = *(uint *)(((unsigned char *)0x000011e8) + ctx);
         return;
       case 0x88ac:
-        *param_4 = *(uint *)(*(int *)(iVar2 + 0x74) + 0x7c);
+        *params = *(uint *)(*(int *)(iVar2 + 0x74) + 0x7c);
         return;
       case 0x88ad:
-        *param_4 = *(uint *)(((unsigned char *)0x000011ec) + param_1);
+        *params = *(uint *)(((unsigned char *)0x000011ec) + ctx);
         return;
       case 0x88ae:
-        *param_4 = *(uint *)(iVar2 + 0x60);
+        *params = *(uint *)(iVar2 + 0x60);
         return;
       case 0x88af:
-        *param_4 = *(uint *)(((unsigned char *)0x000011f0) + param_1);
+        *params = *(uint *)(((unsigned char *)0x000011f0) + ctx);
         return;
       case 0x88b0:
       case 0x88b2:
-        *param_4 = 0;
+        *params = 0;
         return;
       case 0x88b1:
-        *param_4 = *(uint *)(((unsigned char *)0x000011f4) + param_1);
+        *params = *(uint *)(((unsigned char *)0x000011f4) + ctx);
         return;
       case 0x88b3:
-        *param_4 = *(uint *)(((unsigned char *)0x000011f8) + param_1);
+        *params = *(uint *)(((unsigned char *)0x000011f8) + ctx);
         return;
       case 0x88b4:
-        *param_4 = *(uint *)(((unsigned char *)0x000011fc) + param_1);
+        *params = *(uint *)(((unsigned char *)0x000011fc) + ctx);
         return;
       case 0x88b5:
-        *param_4 = *(uint *)(((unsigned char *)0x00001200) + param_1);
+        *params = *(uint *)(((unsigned char *)0x00001200) + ctx);
         return;
       case 0x88b6:
-        *param_4 = (uint)*(byte *)(iVar2 + 0x6c);
+        *params = (uint)*(byte *)(iVar2 + 0x6c);
         return;
       default:
         return;
@@ -7844,7 +7844,7 @@ switchD_000a0718_caseD_8811:
     }
     return;
   }
-  *param_4 = *(uint *)(iVar2 * 0x18 + *(int *)(iVar1 + 8));
+  *params = *(uint *)(iVar2 * 0x18 + *(int *)(iVar1 + 8));
   return;
 }
 
@@ -7876,90 +7876,90 @@ int arbProgramEntryFree(param_1, param_2)
 }
 
 /* arbProgramTableRelease @ 0xa0c60 (260 bytes) */
-int arbProgramTableRelease(param_1)
-  int param_1;
+int arbProgramTableRelease(ctx)
+  int ctx;
 {
-  int iVar1;
+  int entry;
   uint loopIndex;
-  int iVar3;
-  int iVar4;
+  int entryOffset;
+  int programTable;
   
-  FUN_0008dc40(param_1);
-  if (*(int *)(((unsigned char *)0x00001128) + param_1) != 0) {
-    (**(code **)(param_1 + 0x18))(*(int *)(((unsigned char *)0x00001128) + param_1));
-    *(undefined4 *)(((unsigned char *)0x00001128) + param_1) = 0;
+  FUN_0008dc40(ctx);
+  if (*(int *)(((unsigned char *)0x00001128) + ctx) != 0) {
+    (**(code **)(ctx + 0x18))(*(int *)(((unsigned char *)0x00001128) + ctx));
+    *(undefined4 *)(((unsigned char *)0x00001128) + ctx) = 0;
   }
-  *(int *)(*(int *)(((unsigned char *)0x0000112c) + param_1) + 0xc) =
-       *(int *)(*(int *)(((unsigned char *)0x0000112c) + param_1) + 0xc) + -1;
-  if (*(int *)(*(int *)(((unsigned char *)0x0000112c) + param_1) + 0xc) == 0) {
-    iVar4 = *(int *)(((unsigned char *)0x0000112c) + param_1);
-    if (*(int *)(iVar4 + 4) != 0) {
+  *(int *)(*(int *)(((unsigned char *)0x0000112c) + ctx) + 0xc) =
+       *(int *)(*(int *)(((unsigned char *)0x0000112c) + ctx) + 0xc) + -1;
+  if (*(int *)(*(int *)(((unsigned char *)0x0000112c) + ctx) + 0xc) == 0) {
+    programTable = *(int *)(((unsigned char *)0x0000112c) + ctx);
+    if (*(int *)(programTable + 4) != 0) {
       loopIndex = 0;
-      iVar3 = 0;
+      entryOffset = 0;
       do {
         loopIndex = loopIndex + 1;
-        iVar1 = iVar3 + *(int *)(iVar4 + 8);
-        iVar3 = iVar3 + 0x18;
-        ((int (*)())arbProgramEntryFree)(param_1,iVar1);
-      } while (loopIndex < *(uint *)(iVar4 + 4));
+        entry = entryOffset + *(int *)(programTable + 8);
+        entryOffset = entryOffset + 0x18;
+        ((int (*)())arbProgramEntryFree)(ctx,entry);
+      } while (loopIndex < *(uint *)(programTable + 4));
     }
-    *(undefined4 *)(iVar4 + 4) = 0;
-    if (*(int *)(iVar4 + 8) != 0) {
-      (**(code **)(param_1 + 0x18))(*(int *)(iVar4 + 8));
-      *(undefined4 *)(iVar4 + 8) = 0;
+    *(undefined4 *)(programTable + 4) = 0;
+    if (*(int *)(programTable + 8) != 0) {
+      (**(code **)(ctx + 0x18))(*(int *)(programTable + 8));
+      *(undefined4 *)(programTable + 8) = 0;
     }
-    (**(code **)(param_1 + 0x18))(iVar4);
-    *(undefined4 *)(((unsigned char *)0x0000112c) + param_1) = 0;
+    (**(code **)(ctx + 0x18))(programTable);
+    *(undefined4 *)(((unsigned char *)0x0000112c) + ctx) = 0;
   }
   return;
 }
 
 /* glDeleteProgramsARB_impl @ 0xa0d70 (372 bytes) */
-int glDeleteProgramsARB_impl(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  int *param_3;
+int glDeleteProgramsARB_impl(ctx, count, ids)
+  int ctx;
+  int count;
+  int *ids;
 {
-  uint uVar1;
+  uint entryIndex;
   undefined4 in_r6;
   undefined4 in_r7;
   undefined4 in_r8;
   int iVar2;
   int loopIndex;
-  int iVar4;
-  int iVar5;
+  int entryOffset;
+  int programTable;
   
-  if (0 < param_2) {
-    iVar5 = *(int *)(((unsigned char *)0x0000112c) + param_1);
+  if (0 < count) {
+    programTable = *(int *)(((unsigned char *)0x0000112c) + ctx);
     loopIndex = 0;
     do {
-      uVar1 = ((int (*)())arbProgramFindIndex)(param_1,iVar5,*param_3);
-      if (uVar1 != 0) {
-        iVar2 = *(int *)(iVar5 + 8);
-        iVar4 = uVar1 * 0x18;
-        if ((*(int *)(iVar2 + iVar4 + 4) == 0x8804) &&
-           (*(int *)(*(int *)(((unsigned char *)0x00001270) + param_1) * 0x18 + iVar2) == *param_3)) {
-          ((int (*)())glBindProgramARB_impl)(param_1,0x8804,0,in_r6,in_r7,in_r8,*param_3);
-          iVar2 = *(int *)(iVar5 + 8);
+      entryIndex = ((int (*)())arbProgramFindIndex)(ctx,programTable,*ids);
+      if (entryIndex != 0) {
+        iVar2 = *(int *)(programTable + 8);
+        entryOffset = entryIndex * 0x18;
+        if ((*(int *)(iVar2 + entryOffset + 4) == 0x8804) &&
+           (*(int *)(*(int *)(((unsigned char *)0x00001270) + ctx) * 0x18 + iVar2) == *ids)) {
+          ((int (*)())glBindProgramARB_impl)(ctx,0x8804,0,in_r6,in_r7,in_r8,*ids);
+          iVar2 = *(int *)(programTable + 8);
         }
-        ((int (*)())arbProgramEntryFree)(param_1,iVar4 + iVar2);
-        iVar4 = iVar4 + *(int *)(iVar5 + 8);
-        _memmove(iVar4,iVar4 + 0x18,(*(int *)(iVar5 + 4) - uVar1) * 0x18 + -0x18);
-        iVar4 = *(int *)(iVar5 + 4) + -1;
-        *(int *)(iVar5 + 4) = iVar4;
-        *(undefined4 *)(iVar4 * 0x18 + *(int *)(iVar5 + 8) + 8) = 0;
-        *(undefined4 *)(*(int *)(iVar5 + 4) * 0x18 + *(int *)(iVar5 + 8)) = 0;
-        *(undefined4 *)(*(int *)(iVar5 + 4) * 0x18 + *(int *)(iVar5 + 8) + 0xc) = 0xffffffff;
-        *(undefined4 *)(*(int *)(iVar5 + 4) * 0x18 + *(int *)(iVar5 + 8) + 0x10) = 0;
-        *(undefined4 *)(*(int *)(iVar5 + 4) * 0x18 + *(int *)(iVar5 + 8) + 4) = 0;
-        *(undefined4 *)(*(int *)(iVar5 + 4) * 0x18 + *(int *)(iVar5 + 8) + 0x14) = 0;
-        if (uVar1 < *(uint *)(((unsigned char *)0x00001270) + param_1)) {
-          *(uint *)(((unsigned char *)0x00001270) + param_1) = *(uint *)(((unsigned char *)0x00001270) + param_1) - 1;
+        ((int (*)())arbProgramEntryFree)(ctx,entryOffset + iVar2);
+        entryOffset = entryOffset + *(int *)(programTable + 8);
+        _memmove(entryOffset,entryOffset + 0x18,(*(int *)(programTable + 4) - entryIndex) * 0x18 + -0x18);
+        entryOffset = *(int *)(programTable + 4) + -1;
+        *(int *)(programTable + 4) = entryOffset;
+        *(undefined4 *)(entryOffset * 0x18 + *(int *)(programTable + 8) + 8) = 0;
+        *(undefined4 *)(*(int *)(programTable + 4) * 0x18 + *(int *)(programTable + 8)) = 0;
+        *(undefined4 *)(*(int *)(programTable + 4) * 0x18 + *(int *)(programTable + 8) + 0xc) = 0xffffffff;
+        *(undefined4 *)(*(int *)(programTable + 4) * 0x18 + *(int *)(programTable + 8) + 0x10) = 0;
+        *(undefined4 *)(*(int *)(programTable + 4) * 0x18 + *(int *)(programTable + 8) + 4) = 0;
+        *(undefined4 *)(*(int *)(programTable + 4) * 0x18 + *(int *)(programTable + 8) + 0x14) = 0;
+        if (entryIndex < *(uint *)(((unsigned char *)0x00001270) + ctx)) {
+          *(uint *)(((unsigned char *)0x00001270) + ctx) = *(uint *)(((unsigned char *)0x00001270) + ctx) - 1;
         }
       }
       loopIndex = loopIndex + 1;
-      param_3 = param_3 + 1;
-    } while (param_2 != loopIndex);
+      ids = ids + 1;
+    } while (count != loopIndex);
   }
   return;
 }

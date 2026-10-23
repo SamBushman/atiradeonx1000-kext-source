@@ -2398,55 +2398,55 @@ int extvsOperandsConflictInBank(symbolList, operandA, operandB)
 }
 
 /* extvsAllocTempSlot @ 0x57b80 (360 bytes) */
-int extvsAllocTempSlot(param_1, param_2)
-  int param_1;
-  int *param_2;
+int extvsAllocTempSlot(ctx, shader)
+  int ctx;
+  int *shader;
 {
-  bool bVar1;
+  bool searching;
   int iVar2;
-  int iVar3;
-  undefined4 uVar4;
-  uint uVar5;
-  int iVar6;
+  int newSlotOffset;
+  undefined4 foundFree;
+  uint slotIndex;
+  int programState;
   
-  uVar5 = 0;
-  bVar1 = true;
-  uVar4 = 0;
+  slotIndex = 0;
+  searching = true;
+  foundFree = 0;
   iVar2 = 0;
-  iVar6 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
+  programState = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
   while( true ) {
-    if (*(uint *)(iVar6 + 0x50) <= uVar5) {
-      if (bVar1) {
-        *(char *)(param_2 + 4) = (char)uVar4;
-        uVar5 = *(uint *)(iVar6 + 0x50);
-        iVar2 = (**(code **)(param_1 + 0x10))(uVar5 + 0x10,0x28);
-        (**(code **)(((unsigned char *)0x00001344) + param_1))
-                  (iVar2,*(undefined4 *)(iVar6 + 0x4c),*(int *)(iVar6 + 0x50) * 0x28);
-        (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar6 + 0x4c));
-        iVar3 = uVar5 * 0x28;
-        *(int *)(iVar6 + 0x4c) = iVar2;
-        *(int *)(iVar6 + 0x50) = *(int *)(iVar6 + 0x50) + 0x10;
-        *(undefined1 *)(iVar2 + iVar3 + 0x10) = 1;
-        *(undefined4 *)(iVar3 + *(int *)(iVar6 + 0x4c) + 0x14) = 4;
-        *(undefined4 *)(iVar3 + *(int *)(iVar6 + 0x4c) + 0x18) = uVar4;
-        *(undefined4 *)(iVar3 + *(int *)(iVar6 + 0x4c) + 0x1c) = uVar4;
-        *(undefined4 *)(iVar3 + *(int *)(iVar6 + 0x4c) + 0x20) = uVar4;
-        *(undefined4 *)(iVar3 + *(int *)(iVar6 + 0x4c) + 0x24) = uVar4;
-        param_2[0x19] = param_2[0x19] + 1;
+    if (*(uint *)(programState + 0x50) <= slotIndex) {
+      if (searching) {
+        *(char *)(shader + 4) = (char)foundFree;
+        slotIndex = *(uint *)(programState + 0x50);
+        iVar2 = (**(code **)(ctx + 0x10))(slotIndex + 0x10,0x28);
+        (**(code **)(((unsigned char *)0x00001344) + ctx))
+                  (iVar2,*(undefined4 *)(programState + 0x4c),*(int *)(programState + 0x50) * 0x28);
+        (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x4c));
+        newSlotOffset = slotIndex * 0x28;
+        *(int *)(programState + 0x4c) = iVar2;
+        *(int *)(programState + 0x50) = *(int *)(programState + 0x50) + 0x10;
+        *(undefined1 *)(iVar2 + newSlotOffset + 0x10) = 1;
+        *(undefined4 *)(newSlotOffset + *(int *)(programState + 0x4c) + 0x14) = 4;
+        *(undefined4 *)(newSlotOffset + *(int *)(programState + 0x4c) + 0x18) = foundFree;
+        *(undefined4 *)(newSlotOffset + *(int *)(programState + 0x4c) + 0x1c) = foundFree;
+        *(undefined4 *)(newSlotOffset + *(int *)(programState + 0x4c) + 0x20) = foundFree;
+        *(undefined4 *)(newSlotOffset + *(int *)(programState + 0x4c) + 0x24) = foundFree;
+        shader[0x19] = shader[0x19] + 1;
       }
-      return uVar5;
+      return slotIndex;
     }
-    if (!bVar1) break;
-    if (*(char *)(iVar2 + *(int *)(iVar6 + 0x4c) + 0x10) == '\0') {
-      uVar4 = 1;
-      bVar1 = false;
+    if (!searching) break;
+    if (*(char *)(iVar2 + *(int *)(programState + 0x4c) + 0x10) == '\0') {
+      foundFree = 1;
+      searching = false;
     }
     else {
-      uVar5 = uVar5 + 1;
+      slotIndex = slotIndex + 1;
       iVar2 = iVar2 + 0x28;
     }
   }
-  return uVar5;
+  return slotIndex;
 }
 
 /* extvsEmitIndex @ 0x57cf0 (1532 bytes) */

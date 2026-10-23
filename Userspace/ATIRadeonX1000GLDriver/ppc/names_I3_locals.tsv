@@ -1,0 +1,312 @@
+# round 5 fork I3: parameters of the functions named in names_I3_func.tsv
+local	glGenFragmentShadersATI_impl	param_1	ctx	CONFIRMED	glGenFragmentShadersATI(range) with the context first
+local	glGenFragmentShadersATI_impl	param_2	range	CONFIRMED	glGenFragmentShadersATI(range) with the context first
+local	glBindFragmentShaderATI_impl	param_1	ctx	CONFIRMED	glBindFragmentShaderATI(id)
+local	glBindFragmentShaderATI_impl	param_2	shaderId	CONFIRMED	glBindFragmentShaderATI(id)
+local	glDeleteFragmentShaderATI_impl	param_1	ctx	CONFIRMED	glDeleteFragmentShaderATI(id)
+local	glDeleteFragmentShaderATI_impl	param_2	shaderId	CONFIRMED	glDeleteFragmentShaderATI(id)
+local	glBeginFragmentShaderATI_impl	param_1	ctx	CONFIRMED	context argument
+local	glEndFragmentShaderATI_impl	param_1	ctx	CONFIRMED	context argument
+local	glPassTexCoordATI_impl	param_1	ctx	CONFIRMED	glPassTexCoordATI(dst, coord, swizzle) argument order, checked against GL_REG_0..5_ATI / GL_SWIZZLE_*_ATI ranges
+local	glPassTexCoordATI_impl	param_2	dst	CONFIRMED	glPassTexCoordATI(dst, coord, swizzle) argument order, checked against GL_REG_0..5_ATI / GL_SWIZZLE_*_ATI ranges
+local	glPassTexCoordATI_impl	param_3	coord	CONFIRMED	glPassTexCoordATI(dst, coord, swizzle) argument order, checked against GL_REG_0..5_ATI / GL_SWIZZLE_*_ATI ranges
+local	glPassTexCoordATI_impl	param_4	swizzle	CONFIRMED	glPassTexCoordATI(dst, coord, swizzle) argument order, checked against GL_REG_0..5_ATI / GL_SWIZZLE_*_ATI ranges
+local	glSampleMapATI_impl	param_1	ctx	CONFIRMED	glSampleMapATI(dst, interp, swizzle) argument order
+local	glSampleMapATI_impl	param_2	dst	CONFIRMED	glSampleMapATI(dst, interp, swizzle) argument order
+local	glSampleMapATI_impl	param_3	coordSource	CONFIRMED	glSampleMapATI(dst, interp, swizzle) argument order
+local	glSampleMapATI_impl	param_4	swizzle	CONFIRMED	glSampleMapATI(dst, interp, swizzle) argument order
+local	glColorFragmentOp1ATI_impl	param_1	ctx	CONFIRMED	glColorFragmentOp1ATI(op, dst, dstMask, dstMod, arg1, arg1Rep, arg1Mod)
+local	glColorFragmentOp1ATI_impl	param_2	op	CONFIRMED	glColorFragmentOp1ATI(op, dst, dstMask, dstMod, arg1, arg1Rep, arg1Mod)
+local	glColorFragmentOp1ATI_impl	param_3	dst	CONFIRMED	glColorFragmentOp1ATI(op, dst, dstMask, dstMod, arg1, arg1Rep, arg1Mod)
+local	glColorFragmentOp1ATI_impl	param_4	dstMask	CONFIRMED	glColorFragmentOp1ATI(op, dst, dstMask, dstMod, arg1, arg1Rep, arg1Mod)
+local	glColorFragmentOp1ATI_impl	param_5	dstMod	CONFIRMED	glColorFragmentOp1ATI(op, dst, dstMask, dstMod, arg1, arg1Rep, arg1Mod)
+local	glColorFragmentOp1ATI_impl	param_6	arg1	CONFIRMED	glColorFragmentOp1ATI(op, dst, dstMask, dstMod, arg1, arg1Rep, arg1Mod)
+local	glColorFragmentOp1ATI_impl	param_7	arg1Rep	CONFIRMED	glColorFragmentOp1ATI(op, dst, dstMask, dstMod, arg1, arg1Rep, arg1Mod)
+local	glColorFragmentOp1ATI_impl	param_8	arg1Mod	CONFIRMED	glColorFragmentOp1ATI(op, dst, dstMask, dstMod, arg1, arg1Rep, arg1Mod)
+local	glColorFragmentOp2ATI_impl	param_1	ctx	CONFIRMED	glColorFragmentOp2ATI argument order
+local	glColorFragmentOp2ATI_impl	param_2	op	CONFIRMED	glColorFragmentOp2ATI argument order
+local	glColorFragmentOp2ATI_impl	param_3	dst	CONFIRMED	glColorFragmentOp2ATI argument order
+local	glColorFragmentOp2ATI_impl	param_4	dstMask	CONFIRMED	glColorFragmentOp2ATI argument order
+local	glColorFragmentOp2ATI_impl	param_5	dstMod	CONFIRMED	glColorFragmentOp2ATI argument order
+local	glColorFragmentOp2ATI_impl	param_6	arg1	CONFIRMED	glColorFragmentOp2ATI argument order
+local	glColorFragmentOp2ATI_impl	param_7	arg1Rep	CONFIRMED	glColorFragmentOp2ATI argument order
+local	glColorFragmentOp2ATI_impl	param_8	arg1Mod	CONFIRMED	glColorFragmentOp2ATI argument order
+local	glColorFragmentOp2ATI_impl	param_9	arg2	CONFIRMED	glColorFragmentOp2ATI argument order
+local	glColorFragmentOp2ATI_impl	param_10	arg2Rep	CONFIRMED	glColorFragmentOp2ATI argument order
+local	glColorFragmentOp2ATI_impl	param_11	arg2Mod	CONFIRMED	glColorFragmentOp2ATI argument order
+local	glColorFragmentOp3ATI_impl	param_1	ctx	CONFIRMED	glColorFragmentOp3ATI argument order
+local	glColorFragmentOp3ATI_impl	param_2	op	CONFIRMED	glColorFragmentOp3ATI argument order
+local	glColorFragmentOp3ATI_impl	param_3	dst	CONFIRMED	glColorFragmentOp3ATI argument order
+local	glColorFragmentOp3ATI_impl	param_4	dstMask	CONFIRMED	glColorFragmentOp3ATI argument order
+local	glColorFragmentOp3ATI_impl	param_5	dstMod	CONFIRMED	glColorFragmentOp3ATI argument order
+local	glColorFragmentOp3ATI_impl	param_6	arg1	CONFIRMED	glColorFragmentOp3ATI argument order
+local	glColorFragmentOp3ATI_impl	param_7	arg1Rep	CONFIRMED	glColorFragmentOp3ATI argument order
+local	glColorFragmentOp3ATI_impl	param_8	arg1Mod	CONFIRMED	glColorFragmentOp3ATI argument order
+local	glColorFragmentOp3ATI_impl	param_9	arg2	CONFIRMED	glColorFragmentOp3ATI argument order
+local	glColorFragmentOp3ATI_impl	param_10	arg2Rep	CONFIRMED	glColorFragmentOp3ATI argument order
+local	glColorFragmentOp3ATI_impl	param_11	arg2Mod	CONFIRMED	glColorFragmentOp3ATI argument order
+local	glColorFragmentOp3ATI_impl	param_12	arg3	CONFIRMED	glColorFragmentOp3ATI argument order
+local	glColorFragmentOp3ATI_impl	param_13	arg3Rep	CONFIRMED	glColorFragmentOp3ATI argument order
+local	glColorFragmentOp3ATI_impl	param_14	arg3Mod	CONFIRMED	glColorFragmentOp3ATI argument order
+local	glAlphaFragmentOp1ATI_impl	param_1	ctx	CONFIRMED	glAlphaFragmentOp1ATI(op, dst, dstMod, arg1, arg1Rep, arg1Mod)
+local	glAlphaFragmentOp1ATI_impl	param_2	op	CONFIRMED	glAlphaFragmentOp1ATI(op, dst, dstMod, arg1, arg1Rep, arg1Mod)
+local	glAlphaFragmentOp1ATI_impl	param_3	dst	CONFIRMED	glAlphaFragmentOp1ATI(op, dst, dstMod, arg1, arg1Rep, arg1Mod)
+local	glAlphaFragmentOp1ATI_impl	param_4	dstMod	CONFIRMED	glAlphaFragmentOp1ATI(op, dst, dstMod, arg1, arg1Rep, arg1Mod)
+local	glAlphaFragmentOp1ATI_impl	param_5	arg1	CONFIRMED	glAlphaFragmentOp1ATI(op, dst, dstMod, arg1, arg1Rep, arg1Mod)
+local	glAlphaFragmentOp1ATI_impl	param_6	arg1Rep	CONFIRMED	glAlphaFragmentOp1ATI(op, dst, dstMod, arg1, arg1Rep, arg1Mod)
+local	glAlphaFragmentOp1ATI_impl	param_7	arg1Mod	CONFIRMED	glAlphaFragmentOp1ATI(op, dst, dstMod, arg1, arg1Rep, arg1Mod)
+local	glAlphaFragmentOp2ATI_impl	param_1	ctx	CONFIRMED	glAlphaFragmentOp2ATI argument order
+local	glAlphaFragmentOp2ATI_impl	param_2	op	CONFIRMED	glAlphaFragmentOp2ATI argument order
+local	glAlphaFragmentOp2ATI_impl	param_3	dst	CONFIRMED	glAlphaFragmentOp2ATI argument order
+local	glAlphaFragmentOp2ATI_impl	param_4	dstMod	CONFIRMED	glAlphaFragmentOp2ATI argument order
+local	glAlphaFragmentOp2ATI_impl	param_5	arg1	CONFIRMED	glAlphaFragmentOp2ATI argument order
+local	glAlphaFragmentOp2ATI_impl	param_6	arg1Rep	CONFIRMED	glAlphaFragmentOp2ATI argument order
+local	glAlphaFragmentOp2ATI_impl	param_7	arg1Mod	CONFIRMED	glAlphaFragmentOp2ATI argument order
+local	glAlphaFragmentOp2ATI_impl	param_8	arg2	CONFIRMED	glAlphaFragmentOp2ATI argument order
+local	glAlphaFragmentOp2ATI_impl	param_9	arg2Rep	CONFIRMED	glAlphaFragmentOp2ATI argument order
+local	glAlphaFragmentOp2ATI_impl	param_10	arg2Mod	CONFIRMED	glAlphaFragmentOp2ATI argument order
+local	glAlphaFragmentOp3ATI_impl	param_1	ctx	CONFIRMED	glAlphaFragmentOp3ATI argument order
+local	glAlphaFragmentOp3ATI_impl	param_2	op	CONFIRMED	glAlphaFragmentOp3ATI argument order
+local	glAlphaFragmentOp3ATI_impl	param_3	dst	CONFIRMED	glAlphaFragmentOp3ATI argument order
+local	glAlphaFragmentOp3ATI_impl	param_4	dstMod	CONFIRMED	glAlphaFragmentOp3ATI argument order
+local	glAlphaFragmentOp3ATI_impl	param_5	arg1	CONFIRMED	glAlphaFragmentOp3ATI argument order
+local	glAlphaFragmentOp3ATI_impl	param_6	arg1Rep	CONFIRMED	glAlphaFragmentOp3ATI argument order
+local	glAlphaFragmentOp3ATI_impl	param_7	arg1Mod	CONFIRMED	glAlphaFragmentOp3ATI argument order
+local	glAlphaFragmentOp3ATI_impl	param_8	arg2	CONFIRMED	glAlphaFragmentOp3ATI argument order
+local	glAlphaFragmentOp3ATI_impl	param_9	arg2Rep	CONFIRMED	glAlphaFragmentOp3ATI argument order
+local	glAlphaFragmentOp3ATI_impl	param_10	arg2Mod	CONFIRMED	glAlphaFragmentOp3ATI argument order
+local	glAlphaFragmentOp3ATI_impl	param_11	arg3	CONFIRMED	glAlphaFragmentOp3ATI argument order
+local	glAlphaFragmentOp3ATI_impl	param_12	arg3Rep	CONFIRMED	glAlphaFragmentOp3ATI argument order
+local	glAlphaFragmentOp3ATI_impl	param_13	arg3Mod	CONFIRMED	glAlphaFragmentOp3ATI argument order
+local	glSetFragmentShaderConstantATI_impl	param_1	ctx	CONFIRMED	glSetFragmentShaderConstantATI(dst, const float *value)
+local	glSetFragmentShaderConstantATI_impl	param_2	dst	CONFIRMED	glSetFragmentShaderConstantATI(dst, const float *value)
+local	glSetFragmentShaderConstantATI_impl	param_3	value	CONFIRMED	glSetFragmentShaderConstantATI(dst, const float *value)
+local	glBindProgramARB_impl	param_1	ctx	CONFIRMED	glBindProgramARB(target, id)
+local	glBindProgramARB_impl	param_2	target	CONFIRMED	glBindProgramARB(target, id)
+local	glBindProgramARB_impl	param_3	programId	CONFIRMED	glBindProgramARB(target, id)
+local	glGenProgramsARB_impl	param_1	ctx	CONFIRMED	glGenProgramsARB(n, ids)
+local	glGenProgramsARB_impl	param_2	count	CONFIRMED	glGenProgramsARB(n, ids)
+local	glGenProgramsARB_impl	param_3	ids	CONFIRMED	glGenProgramsARB(n, ids)
+local	glDeleteProgramsARB_impl	param_1	ctx	CONFIRMED	glDeleteProgramsARB(n, ids)
+local	glDeleteProgramsARB_impl	param_2	count	CONFIRMED	glDeleteProgramsARB(n, ids)
+local	glDeleteProgramsARB_impl	param_3	ids	CONFIRMED	glDeleteProgramsARB(n, ids)
+local	glGetProgramivARB_impl	param_1	ctx	CONFIRMED	glGetProgramivARB(target, pname, params)
+local	glGetProgramivARB_impl	param_2	target	CONFIRMED	glGetProgramivARB(target, pname, params)
+local	glGetProgramivARB_impl	param_3	pname	CONFIRMED	glGetProgramivARB(target, pname, params)
+local	glGetProgramivARB_impl	param_4	params	CONFIRMED	glGetProgramivARB(target, pname, params)
+local	glProgramStringARB_impl	param_1	ctx	CONFIRMED	glProgramStringARB(target, format, len, string)
+local	glProgramStringARB_impl	param_2	target	CONFIRMED	glProgramStringARB(target, format, len, string)
+local	glProgramStringARB_impl	param_3	format	CONFIRMED	glProgramStringARB(target, format, len, string)
+local	glProgramStringARB_impl	param_4	length	CONFIRMED	glProgramStringARB(target, format, len, string)
+local	floatToHalfBits	fparam_1	value	CONFIRMED	the float being converted
+local	floatToFp24	fparam_1	value	CONFIRMED	the float being converted
+local	fp24ToFloat	param_1	fp24Bits	CONFIRMED	the 24-bit float word being widened
+local	gldCompressedImageBytes	param_1	format	CONFIRMED	format selects 8 or 16 bytes per 4x4 block; the others are multiplied in
+local	gldCompressedImageBytes	param_2	width	CONFIRMED	format selects 8 or 16 bytes per 4x4 block; the others are multiplied in
+local	gldCompressedImageBytes	param_3	height	CONFIRMED	format selects 8 or 16 bytes per 4x4 block; the others are multiplied in
+local	gldCompressedImageBytes	param_4	depth	CONFIRMED	format selects 8 or 16 bytes per 4x4 block; the others are multiplied in
+local	gldPixelUnitBytes	param_1	format	INFERRED	GL format and type enumerants tested in the body (0x1909, 0x1907, 0x1a00 ...)
+local	gldPixelUnitBytes	param_2	pixelType	INFERRED	GL format and type enumerants tested in the body (0x1909, 0x1907, 0x1a00 ...)
+local	gldPixelRowBytes	param_1	format	INFERRED	unit bytes times width, with the compressed and bitmap special cases
+local	gldPixelRowBytes	param_2	pixelType	INFERRED	unit bytes times width, with the compressed and bitmap special cases
+local	gldPixelRowBytes	param_3	width	INFERRED	unit bytes times width, with the compressed and bitmap special cases
+local	floorLog2	param_1	value	CONFIRMED	shifted right until 1
+local	malloc_stub_00001f50	param_1	size	CONFIRMED	argument of _malloc
+local	malloc_stub_00002648	param_1	size	CONFIRMED	argument of _malloc
+local	free_stub_000020b4	param_1	ptr	CONFIRMED	argument of _free
+local	calloc_stub_00001de4	param_1	count	CONFIRMED	arguments of _calloc
+local	calloc_stub_00001de4	param_2	size	CONFIRMED	arguments of _calloc
+local	dxt1DecodeColorIndex	param_1	color0	CONFIRMED	two RGB565 endpoints, 2-bit index and the 4-byte output texel
+local	dxt1DecodeColorIndex	param_2	color1	CONFIRMED	two RGB565 endpoints, 2-bit index and the 4-byte output texel
+local	dxt1DecodeColorIndex	param_3	texelIndex	CONFIRMED	two RGB565 endpoints, 2-bit index and the 4-byte output texel
+local	dxt1DecodeColorIndex	param_4	rgbaOut	CONFIRMED	two RGB565 endpoints, 2-bit index and the 4-byte output texel
+local	gldFormatBitsPerPixel	param_1	formatMask	INFERRED	the layout bit mask tested against 0x3c / 0x3fc0 / 0xfc000 ...
+local	gldFormatAlphaBits	param_1	formatMask	INFERRED	the layout bit mask tested against 0x400 / 0x40000 / 0x80 ...
+local	gldTrimVertexCountToPrimitive	param_1	ctx	INFERRED	GL primitive mode and vertex count
+local	gldTrimVertexCountToPrimitive	param_2	mode	INFERRED	GL primitive mode and vertex count
+local	gldTrimVertexCountToPrimitive	param_3	count	INFERRED	GL primitive mode and vertex count
+local	gldTrimVertexCountToPrimitiveMin	param_1	ctx	INFERRED	GL primitive mode (switch 0..9) and vertex count
+local	gldTrimVertexCountToPrimitiveMin	param_2	mode	INFERRED	GL primitive mode (switch 0..9) and vertex count
+local	gldTrimVertexCountToPrimitiveMin	param_3	count	INFERRED	GL primitive mode (switch 0..9) and vertex count
+local	fpilReserveTokens	param_1	translator	CONFIRMED	see the function row
+local	fpilReserveTokens	param_2	nWords	CONFIRMED	see the function row
+local	fpilReserveTokens	param_3	outPtr	CONFIRMED	see the function row
+local	fpilEmitInstruction	param_1	translator	CONFIRMED	reserve (nDst+nSrc)*2+1 words and copy the instruction
+local	fpilEmitInstruction	param_2	ilInstr	CONFIRMED	reserve (nDst+nSrc)*2+1 words and copy the instruction
+local	fpilEmitInstruction	param_3	nDst	CONFIRMED	reserve (nDst+nSrc)*2+1 words and copy the instruction
+local	fpilEmitInstruction	param_4	nSrc	CONFIRMED	reserve (nDst+nSrc)*2+1 words and copy the instruction
+local	fpilTranslateDestination	param_1	translator	INFERRED	see the function row
+local	fpilTranslateDestination	param_2	irDest	INFERRED	see the function row
+local	fpilTranslateDestination	param_3	outToken	INFERRED	see the function row
+local	fpilTranslateDestination	param_4	outMask	INFERRED	see the function row
+local	fpilTranslateDestination	param_5	flag	INFERRED	see the function row
+local	fpilTranslateSource	param_1	translator	INFERRED	see the function row
+local	fpilTranslateSource	param_2	irSource	INFERRED	see the function row
+local	fpilTranslateSource	param_3	outToken	INFERRED	see the function row
+local	fpilTranslateSource	param_4	outSwizzle	INFERRED	see the function row
+local	copyIndices16Swapped_prefetch	param_1	dst	CONFIRMED	destination ring pointer, source index array, number of 16-bit indices
+local	copyIndices16Swapped_prefetch	param_2	src	CONFIRMED	destination ring pointer, source index array, number of 16-bit indices
+local	copyIndices16Swapped_prefetch	param_3	count	CONFIRMED	destination ring pointer, source index array, number of 16-bit indices
+local	copyIndices16Swapped_prefetch_entry	param_1	dst	CONFIRMED	as the full routine
+local	copyIndices16Swapped_prefetch_entry	param_2	src	CONFIRMED	as the full routine
+local	copyIndices16Swapped_prefetch_entry	param_3	count	CONFIRMED	as the full routine
+local	copyIndices16Swapped_dcbz	param_1	dst	CONFIRMED	destination ring pointer, source index array, number of 16-bit indices
+local	copyIndices16Swapped_dcbz	param_2	src	CONFIRMED	destination ring pointer, source index array, number of 16-bit indices
+local	copyIndices16Swapped_dcbz	param_3	count	CONFIRMED	destination ring pointer, source index array, number of 16-bit indices
+local	copyIndices16Swapped_dcbz_entry	param_1	dst	CONFIRMED	as the full routine
+local	copyIndices16Swapped_dcbz_entry	param_2	src	CONFIRMED	as the full routine
+local	copyIndices16Swapped_dcbz_entry	param_3	count	CONFIRMED	as the full routine
+local	arbProgramFindIndex	param_1	ctx	INFERRED	scan of the program table for an id
+local	arbProgramFindIndex	param_2	programTable	INFERRED	scan of the program table for an id
+local	arbProgramFindIndex	param_3	programId	INFERRED	scan of the program table for an id
+local	fragmentTranslateSimpleOp	param_1	translator	INFERRED	first argument of every opcode-table translator: the 0x38-byte translator object (*translator = program IR, translator[10..12] = token vector); same role as `emitter` in fragmentTranslateAtn
+local	fragmentTranslateSimpleOp	param_2	slot	INFERRED	second argument: instruction slot index (record base + slot*8), as `slot` in fragmentTranslateAtn
+local	fragmentTranslateSimpleOp	param_3	ilInstr	INFERRED	third argument: the IL instruction template being filled (opcode/dst/src words), as `instr` in fragmentTranslateAtn
+local	fragmentTranslateRep	param_1	translator	INFERRED	first argument of every opcode-table translator: the 0x38-byte translator object (*translator = program IR, translator[10..12] = token vector); same role as `emitter` in fragmentTranslateAtn
+local	fragmentTranslateRep	param_2	slot	INFERRED	second argument: instruction slot index (record base + slot*8), as `slot` in fragmentTranslateAtn
+local	fragmentTranslateRep	param_3	ilInstr	INFERRED	third argument: the IL instruction template being filled (opcode/dst/src words), as `instr` in fragmentTranslateAtn
+local	fragmentTranslateDdy	param_1	translator	INFERRED	first argument of every opcode-table translator: the 0x38-byte translator object (*translator = program IR, translator[10..12] = token vector); same role as `emitter` in fragmentTranslateAtn
+local	fragmentTranslateDdy	param_2	slot	INFERRED	second argument: instruction slot index (record base + slot*8), as `slot` in fragmentTranslateAtn
+local	fragmentTranslateDdy	param_3	ilInstr	INFERRED	third argument: the IL instruction template being filled (opcode/dst/src words), as `instr` in fragmentTranslateAtn
+local	fragmentTranslateScalarMath	param_1	translator	INFERRED	first argument of every opcode-table translator: the 0x38-byte translator object (*translator = program IR, translator[10..12] = token vector); same role as `emitter` in fragmentTranslateAtn
+local	fragmentTranslateScalarMath	param_2	slot	INFERRED	second argument: instruction slot index (record base + slot*8), as `slot` in fragmentTranslateAtn
+local	fragmentTranslateScalarMath	param_3	ilInstr	INFERRED	third argument: the IL instruction template being filled (opcode/dst/src words), as `instr` in fragmentTranslateAtn
+local	fragmentTranslateScalarMathBody	param_1	translator	INFERRED	first argument of every opcode-table translator: the 0x38-byte translator object (*translator = program IR, translator[10..12] = token vector); same role as `emitter` in fragmentTranslateAtn
+local	fragmentTranslateScalarMathBody	param_2	slot	INFERRED	second argument: instruction slot index (record base + slot*8), as `slot` in fragmentTranslateAtn
+local	fragmentTranslateScalarMathBody	param_3	ilInstr	INFERRED	third argument: the IL instruction template being filled (opcode/dst/src words), as `instr` in fragmentTranslateAtn
+local	fragmentTranslateTrig	param_1	translator	INFERRED	first argument of every opcode-table translator: the 0x38-byte translator object (*translator = program IR, translator[10..12] = token vector); same role as `emitter` in fragmentTranslateAtn
+local	fragmentTranslateTrig	param_2	slot	INFERRED	second argument: instruction slot index (record base + slot*8), as `slot` in fragmentTranslateAtn
+local	fragmentTranslateTrig	param_3	ilInstr	INFERRED	third argument: the IL instruction template being filled (opcode/dst/src words), as `instr` in fragmentTranslateAtn
+local	fragmentTranslateMod	param_1	translator	INFERRED	first argument of every opcode-table translator: the 0x38-byte translator object (*translator = program IR, translator[10..12] = token vector); same role as `emitter` in fragmentTranslateAtn
+local	fragmentTranslateMod	param_2	slot	INFERRED	second argument: instruction slot index (record base + slot*8), as `slot` in fragmentTranslateAtn
+local	fragmentTranslateMod	param_3	ilInstr	INFERRED	third argument: the IL instruction template being filled (opcode/dst/src words), as `instr` in fragmentTranslateAtn
+local	fragmentTranslateFfw	param_1	translator	INFERRED	first argument of every opcode-table translator: the 0x38-byte translator object (*translator = program IR, translator[10..12] = token vector); same role as `emitter` in fragmentTranslateAtn
+local	fragmentTranslateFfw	param_2	slot	INFERRED	second argument: instruction slot index (record base + slot*8), as `slot` in fragmentTranslateAtn
+local	fragmentTranslateFfw	param_3	ilInstr	INFERRED	third argument: the IL instruction template being filled (opcode/dst/src words), as `instr` in fragmentTranslateAtn
+local	fragmentTranslateDst	param_1	translator	INFERRED	first argument of every opcode-table translator: the 0x38-byte translator object (*translator = program IR, translator[10..12] = token vector); same role as `emitter` in fragmentTranslateAtn
+local	fragmentTranslateDst	param_2	slot	INFERRED	second argument: instruction slot index (record base + slot*8), as `slot` in fragmentTranslateAtn
+local	fragmentTranslateDst	param_3	ilInstr	INFERRED	third argument: the IL instruction template being filled (opcode/dst/src words), as `instr` in fragmentTranslateAtn
+local	fragmentTranslateIf	param_1	translator	INFERRED	first argument of every opcode-table translator: the 0x38-byte translator object (*translator = program IR, translator[10..12] = token vector); same role as `emitter` in fragmentTranslateAtn
+local	fragmentTranslateIf	param_2	slot	INFERRED	second argument: instruction slot index (record base + slot*8), as `slot` in fragmentTranslateAtn
+local	fragmentTranslateIf	param_3	ilInstr	INFERRED	third argument: the IL instruction template being filled (opcode/dst/src words), as `instr` in fragmentTranslateAtn
+local	fragmentTranslateRfl	param_1	translator	INFERRED	first argument of every opcode-table translator: the 0x38-byte translator object (*translator = program IR, translator[10..12] = token vector); same role as `emitter` in fragmentTranslateAtn
+local	fragmentTranslateRfl	param_2	slot	INFERRED	second argument: instruction slot index (record base + slot*8), as `slot` in fragmentTranslateAtn
+local	fragmentTranslateRfl	param_3	ilInstr	INFERRED	third argument: the IL instruction template being filled (opcode/dst/src words), as `instr` in fragmentTranslateAtn
+local	fragmentTranslateWhile	param_1	translator	INFERRED	first argument of every opcode-table translator: the 0x38-byte translator object (*translator = program IR, translator[10..12] = token vector); same role as `emitter` in fragmentTranslateAtn
+local	fragmentTranslateWhile	param_2	slot	INFERRED	second argument: instruction slot index (record base + slot*8), as `slot` in fragmentTranslateAtn
+local	fragmentTranslateWhile	param_3	ilInstr	INFERRED	third argument: the IL instruction template being filled (opcode/dst/src words), as `instr` in fragmentTranslateAtn
+local	fragmentTranslateRfr	param_2	slot	INFERRED	second argument: instruction slot index, as in fragmentTranslateAtn
+local	evsAssignVertexInputs	param_1	ctx	INFERRED	same argument roles as extvsAssignVertexInputs/extvsAllocConstantRegisters: ctx hooks at +0xc/+0x10/+0x18/+0x1344, shader object with symbol list at +0x1c/+0x20, per-table program state at +0x118/+0x3c/+0x4c
+local	evsAssignVertexInputs	param_2	shader	INFERRED	same argument roles as extvsAssignVertexInputs/extvsAllocConstantRegisters: ctx hooks at +0xc/+0x10/+0x18/+0x1344, shader object with symbol list at +0x1c/+0x20, per-table program state at +0x118/+0x3c/+0x4c
+local	extvsBuildStreamDescriptors	param_1	ctx	INFERRED	same argument roles as extvsAssignVertexInputs/extvsAllocConstantRegisters: ctx hooks at +0xc/+0x10/+0x18/+0x1344, shader object with symbol list at +0x1c/+0x20, per-table program state at +0x118/+0x3c/+0x4c
+local	extvsBuildStreamDescriptors	param_2	shader	INFERRED	same argument roles as extvsAssignVertexInputs/extvsAllocConstantRegisters: ctx hooks at +0xc/+0x10/+0x18/+0x1344, shader object with symbol list at +0x1c/+0x20, per-table program state at +0x118/+0x3c/+0x4c
+local	evsAllocLocalConstantRegisters	param_1	ctx	INFERRED	same argument roles as extvsAssignVertexInputs/extvsAllocConstantRegisters: ctx hooks at +0xc/+0x10/+0x18/+0x1344, shader object with symbol list at +0x1c/+0x20, per-table program state at +0x118/+0x3c/+0x4c
+local	evsAllocLocalConstantRegisters	param_2	shader	INFERRED	same argument roles as extvsAssignVertexInputs/extvsAllocConstantRegisters: ctx hooks at +0xc/+0x10/+0x18/+0x1344, shader object with symbol list at +0x1c/+0x20, per-table program state at +0x118/+0x3c/+0x4c
+local	evsAllocLocalConstantRegisters	param_3	programState	INFERRED	same argument roles as extvsAssignVertexInputs/extvsAllocConstantRegisters: ctx hooks at +0xc/+0x10/+0x18/+0x1344, shader object with symbol list at +0x1c/+0x20, per-table program state at +0x118/+0x3c/+0x4c
+local	evsAllocLocalConstantRegisters	param_4	symbol	INFERRED	same argument roles as extvsAssignVertexInputs/extvsAllocConstantRegisters: ctx hooks at +0xc/+0x10/+0x18/+0x1344, shader object with symbol list at +0x1c/+0x20, per-table program state at +0x118/+0x3c/+0x4c
+local	evsAllocLocalRegisters	param_1	ctx	INFERRED	same argument roles as extvsAssignVertexInputs/extvsAllocConstantRegisters: ctx hooks at +0xc/+0x10/+0x18/+0x1344, shader object with symbol list at +0x1c/+0x20, per-table program state at +0x118/+0x3c/+0x4c
+local	evsAllocLocalRegisters	param_2	shader	INFERRED	same argument roles as extvsAssignVertexInputs/extvsAllocConstantRegisters: ctx hooks at +0xc/+0x10/+0x18/+0x1344, shader object with symbol list at +0x1c/+0x20, per-table program state at +0x118/+0x3c/+0x4c
+local	evsAllocLocalRegisters	param_3	programState	INFERRED	same argument roles as extvsAssignVertexInputs/extvsAllocConstantRegisters: ctx hooks at +0xc/+0x10/+0x18/+0x1344, shader object with symbol list at +0x1c/+0x20, per-table program state at +0x118/+0x3c/+0x4c
+local	evsAllocLocalRegisters	param_4	operand	INFERRED	same argument roles as extvsAssignVertexInputs/extvsAllocConstantRegisters: ctx hooks at +0xc/+0x10/+0x18/+0x1344, shader object with symbol list at +0x1c/+0x20, per-table program state at +0x118/+0x3c/+0x4c
+local	evsAllocConstantsForOperand	param_1	ctx	INFERRED	same argument roles as extvsAssignVertexInputs/extvsAllocConstantRegisters: ctx hooks at +0xc/+0x10/+0x18/+0x1344, shader object with symbol list at +0x1c/+0x20, per-table program state at +0x118/+0x3c/+0x4c
+local	evsAllocConstantsForOperand	param_2	shader	INFERRED	same argument roles as extvsAssignVertexInputs/extvsAllocConstantRegisters: ctx hooks at +0xc/+0x10/+0x18/+0x1344, shader object with symbol list at +0x1c/+0x20, per-table program state at +0x118/+0x3c/+0x4c
+local	evsAllocConstantsForOperand	param_3	programState	INFERRED	same argument roles as extvsAssignVertexInputs/extvsAllocConstantRegisters: ctx hooks at +0xc/+0x10/+0x18/+0x1344, shader object with symbol list at +0x1c/+0x20, per-table program state at +0x118/+0x3c/+0x4c
+local	evsAllocConstantsForOperand	param_4	operand	INFERRED	same argument roles as extvsAssignVertexInputs/extvsAllocConstantRegisters: ctx hooks at +0xc/+0x10/+0x18/+0x1344, shader object with symbol list at +0x1c/+0x20, per-table program state at +0x118/+0x3c/+0x4c
+local	evsEmitFogOutput	param_1	ctx	INFERRED	same argument roles as extvsAssignVertexInputs/extvsAllocConstantRegisters: ctx hooks at +0xc/+0x10/+0x18/+0x1344, shader object with symbol list at +0x1c/+0x20, per-table program state at +0x118/+0x3c/+0x4c
+local	evsEmitFogOutput	param_2	tokens	INFERRED	same argument roles as extvsAssignVertexInputs/extvsAllocConstantRegisters: ctx hooks at +0xc/+0x10/+0x18/+0x1344, shader object with symbol list at +0x1c/+0x20, per-table program state at +0x118/+0x3c/+0x4c
+local	evsEmitFogOutput	param_3	programState	INFERRED	same argument roles as extvsAssignVertexInputs/extvsAllocConstantRegisters: ctx hooks at +0xc/+0x10/+0x18/+0x1344, shader object with symbol list at +0x1c/+0x20, per-table program state at +0x118/+0x3c/+0x4c
+local	evsEmitFogOutput	param_4	mode	INFERRED	same argument roles as extvsAssignVertexInputs/extvsAllocConstantRegisters: ctx hooks at +0xc/+0x10/+0x18/+0x1344, shader object with symbol list at +0x1c/+0x20, per-table program state at +0x118/+0x3c/+0x4c
+local	extvsAllocTempSlot	param_1	ctx	INFERRED	CONFIRMED: ctx hooks +0x10 calloc, +0x18 free, +0x1344 memcpy and +0x118c table index are used on it
+local	extvsAllocTempSlot	param_2	shader	INFERRED	shader object: *shader = table chain, shader[4] byte and shader[0x19] counter updated
+local	extvsAllocTempSlot	bVar1	searching	INFERRED	true while the scan for an unused slot is still running
+local	extvsAllocTempSlot	uVar4	foundFree	INFERRED	1 once an unused slot was found, 0 when the pool has to grow (stored into the new slots words)
+local	extvsAllocTempSlot	uVar5	slotIndex	INFERRED	index of the slot returned; after the scan equals the old pool size when the pool is grown
+local	extvsAllocTempSlot	iVar6	programState	INFERRED	**(table[ctx+0x118c] + *shader): slot pool at +0x4c, count +0x50
+local	extvsAllocTempSlot	iVar3	newSlotOffset	INFERRED	slotIndex * 0x28: byte offset of the first slot of the grown part
+local	evsAllocTempSlot	param_1	programState	INFERRED	slot pool at +0x3c, count +0x40
+local	evsAllocTempSlot	iVar3	slotsLeft	INFERRED	remaining slot count, decremented per step
+local	evsAllocTempSlot	iVar7	slots	INFERRED	pool base +0x3c
+local	evsAllocTempSlot	iVar4	slotIndex	INFERRED	index of the slot being returned
+local	evsAllocTempSlot	iVar5	slotOffset	INFERRED	0x28 * slotIndex
+local	evsAllocTempSlot	iVar8	slotPtr	INFERRED	address of the chosen slot
+local	evsAllocTempSlot	pcVar6	usedFlagCursor	INFERRED	points at the used byte (+0x10) of the next slot
+local	evsAllocTempSlot	cVar1	usedFlag	INFERRED	used byte of the slot just stepped over
+local	evsAllocTempSlot	iVar2	nextSlotOffset	INFERRED	offset of the following slot
+local	evsFindFreeOutputRegister	param_1	programState	INFERRED	output register ids at +0x60 (-1 = free)
+local	evsFindFreeOutputRegister	uVar2	regIndex	INFERRED	candidate register id
+local	evsFindFreeOutputRegister	uVar1	candidate	INFERRED	copy of the id used for the skip tests
+local	vpStateCacheLookup	param_1	stateTable	INFERRED	bucket heads at +4 (32 buckets)
+local	vpStateCacheLookup	param_2	stateId	INFERRED	id compared with state+0x38
+local	vpStateCacheLookup	iVar1	state	INFERRED	chain cursor
+local	vpStateCacheInsert	param_1	ctx	INFERRED	ctx+0x118c selects the table
+local	vpStateCacheInsert	param_2	shader	INFERRED	*shader = table chain
+local	vpStateCacheInsert	piVar2	stateTable	INFERRED	bucket heads at +4, count at +0x84
+local	vpStateCacheInsert	iVar3	state	INFERRED	the program state being inserted
+local	vpStateCacheInsert	uVar1	stateKey	INFERRED	id computed by FUN_00076ac0 and stored at +0x38
+local	extvsStateCacheInsert	param_1	ctx	INFERRED	ctx+0x118c selects the table
+local	extvsStateCacheInsert	param_2	shader	INFERRED	*shader = table chain
+local	extvsStateCacheInsert	piVar2	stateTable	INFERRED	bucket heads at +4, count at +0x84
+local	extvsStateCacheInsert	iVar3	state	INFERRED	the program state being inserted
+local	extvsStateCacheInsert	uVar1	stateKey	INFERRED	result of extvsComputeStateKey, stored at +0x48
+local	extvsComputeStateKey	param_1	ctx	INFERRED	context: enable bits at +0x44, engine state pointer at +4
+local	extvsComputeStateKey	param_2	shader	INFERRED	shader object flags at +0x6c/+0x6e/+0x7a
+local	extvsComputeStateKey	param_3	programState	INFERRED	per-table state, flag bytes +0x43/+0x44
+local	extvsComputeStateKey	uVar3	contextFlags	INFERRED	ctx+0x44
+local	extvsComputeStateKey	uVar2	stateKey	INFERRED	the key being assembled
+local	extvsComputeStateKey	sVar1	fogMode	INFERRED	fog mode short at engine state +0x2e04 (GL_EXP2 0x801, GL_LINEAR 0x2601, GL_EXP 0x800)
+local	vpStateSetConstantVector	param_1	ctx	INFERRED	context: dirty word +0x38, flag bytes +0x29/+0x2d
+local	vpStateSetConstantVector	param_2	shader	INFERRED	*shader = table chain
+local	vpStateSetConstantVector	param_3	constantEntry	INFERRED	entry: +4 slot index, +0x38 pointer to 4 floats
+local	vpStateSetConstantVector	iVar4	programState	INFERRED	selected program state
+local	vpStateSetConstantVector	puVar3	values	INFERRED	the four floats
+local	vpStateSetConstantVector	iVar5	slotIndex	INFERRED	constant slot number
+local	vpStateSetConstantVector	iVar1	highestSlot	INFERRED	previous highest slot index (+0x137c)
+local	vpStateSetConstantVector	iVar2	slotBase	INFERRED	state + slot*0x10
+local	arbProgramFindIndex	bVar1	searching	INFERRED	true while the scan runs
+local	arbProgramFindIndex	uVar2	entryIndex	INFERRED	entry index returned
+local	arbProgramFindIndex	iVar3	idOffset	INFERRED	byte offset of the id field of entry `index` (0x48 + 0x18*(index-3))
+local	atifsCreateShaderTable	param_1	ctx	INFERRED	context
+local	atifsCreateShaderTable	puVar1	shaders	INFERRED	the 0x3c0-byte array of eight 0x78-byte shader objects
+local	atifsCreateShaderTable	puVar2	defaultConstants	INFERRED	array of ctx+0x114a constants of 0x14 bytes
+local	atifsCreateShaderTable	puVar3	constantCursor	INFERRED	walks the constants while they are initialised to 1.0f x4
+local	glDeleteFragmentShaderATI_impl	bVar1	searching	INFERRED	true while the id has not been found
+local	glDeleteFragmentShaderATI_impl	iVar4	shaderTable	INFERRED	ctx+0x1154
+local	floatToHalfBits	fVar1	floatValue	CONFIRMED	the argument narrowed to float
+local	floatToHalfBits	iVar2	unbiasedExponent	CONFIRMED	float exponent - 0x7f
+local	floatToHalfBits	iVar4	halfExponent	CONFIRMED	5-bit half exponent (0, exp - 0x70 or 0x1f)
+local	powerOfTenDouble	param_1	exponent	INFERRED	the decimal exponent n of 10^n
+local	powerOfTenDouble	dVar2	result	INFERRED	accumulated power
+local	powerOfTenDouble	iVar1	blocks	INFERRED	number of 32-digit blocks still to apply
+local	gldComputeVertexChunking	param_1	ctx	INFERRED	context: +0x29d8 vertex limit
+local	gldComputeVertexChunking	param_2	count	INFERRED	vertices to split
+local	gldComputeVertexChunking	param_3	chunkVerts	INFERRED	out: vertices per chunk (multiple of 32)
+local	gldComputeVertexChunking	param_4	chunkDwords	INFERRED	out: chunkVerts >> 2
+local	gldComputeVertexChunking	param_5	chunkCount	INFERRED	out: number of full chunks
+local	gldComputeVertexChunking	param_6	tailMode	INFERRED	out: 1 when no partial chunk remains, else 2 (2 - (tail == 0))
+local	glDeleteProgramsARB_impl	uVar1	entryIndex	INFERRED	index of the program in the table from arbProgramFindIndex
+local	glDeleteProgramsARB_impl	iVar5	programTable	INFERRED	ctx+0x112c: count +4, entries +8, refcount +0xc
+local	glDeleteProgramsARB_impl	iVar4	entryOffset	INFERRED	entryIndex * 0x18, later the address of the entry
+local	atifsSetConstant	param_1	ctx	CONFIRMED	context: +0x114a constant count, +0x1154 shader table
+local	atifsSetConstant	param_2	shader	CONFIRMED	shader object: constants at +0x28
+local	atifsSetConstant	param_3	dst	CONFIRMED	GL_CON_0_ATI + n (0x8941 + n)
+local	atifsSetConstant	param_4	value	CONFIRMED	four floats
+local	atifsSetConstant	param_5	inShader	CONFIRMED	nonzero stores into the shader object, zero into the table defaults
+local	atifsSetConstant	iVar1	constIndex	CONFIRMED	dst - 0x8941, later its byte offset * 0x14
+local	atifsSetConstant	iVar2	slot	CONFIRMED	address of the 0x14-byte constant slot of the table defaults
+local	fpilBuildDestinationToken	param_1	translator	INFERRED	translator object: *translator = program IR, [4] = used temp bitmask
+local	fpilBuildDestinationToken	param_2	irDest	INFERRED	IR destination entry (register file bits 17..19, index at +6, write mask bits 13..16)
+local	fpilBuildDestinationToken	param_3	outToken	INFERRED	IL destination token: index | 0x440000
+local	fpilBuildDestinationToken	param_4	outMask	INFERRED	IL write mask: 4 enable bits spread to bits 0/2/4/6, plus 0x100 saturate
+local	fpilBuildDestinationToken	param_5	saturate	INFERRED	nonzero adds the 0x100 modifier
+local	fpilBuildDestinationToken	uVar5	irWord	INFERRED	first word of the IR destination
+local	fpilBuildDestinationToken	uVar3	modifier	INFERRED	0x100 when saturate
+local	fpilBuildDestinationToken	uVar2	regIndex	INFERRED	IL register number (IR index, plus the temp base when not a result register)
+local	fpilBuildDestinationToken	uVar1	irIndex	INFERRED	register index field of the IR destination
+local	atifsFreeShaderTable	param_1	ctx	INFERRED	context: shader table at +0x1154, free hook +0x18
+local	atifsFreeShaderTable	iVar4	shaderTable	INFERRED	ctx+0x1154
+local	atifsFreeShaderTable	iVar3	shaderOffset	INFERRED	byte offset of the current 0x78-byte shader
+local	atifsFreeShaderTable	iVar1	shader	INFERRED	address of the current shader
+local	arbProgramTableRelease	param_1	ctx	INFERRED	context: program table at +0x112c, text buffer +0x1128
+local	arbProgramTableRelease	iVar4	programTable	INFERRED	ctx+0x112c
+local	arbProgramTableRelease	iVar3	entryOffset	INFERRED	byte offset of the current 0x18-byte entry
+local	arbProgramTableRelease	iVar1	entry	INFERRED	address of the current entry

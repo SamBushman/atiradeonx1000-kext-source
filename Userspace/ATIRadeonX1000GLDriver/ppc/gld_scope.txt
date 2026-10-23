@@ -2,7 +2,7 @@
 gld_waitBufferStamp
 FUN_00005eb0
 FUN_00007020
-FUN_00009b70
+gldAllocQueryRecord
 gld_releaseQueryMemory
 gld_setQueryAgpRefBacking
 gld_waitTextureStamp

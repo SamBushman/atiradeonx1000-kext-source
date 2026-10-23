@@ -293,11 +293,11 @@ int dlopen_stub_00001dc4()
 }
 
 /* calloc_stub_00001de4 @ 0x1de4 (32 bytes) */
-int calloc_stub_00001de4(param_1, param_2)
-  size_t param_1;
-  size_t param_2;
+int calloc_stub_00001de4(count, size)
+  size_t count;
+  size_t size;
 {
-  _calloc(param_1,param_2);
+  _calloc(count,size);
   return;
 }
 
@@ -357,10 +357,10 @@ int FUN_00001f30()
 }
 
 /* malloc_stub_00001f50 @ 0x1f50 (32 bytes) */
-int malloc_stub_00001f50(param_1)
-  size_t param_1;
+int malloc_stub_00001f50(size)
+  size_t size;
 {
-  _malloc(param_1);
+  _malloc(size);
   return;
 }
 
@@ -418,10 +418,10 @@ int FUN_00002094()
 }
 
 /* free_stub_000020b4 @ 0x20b4 (32 bytes) */
-int free_stub_000020b4(param_1)
-  void *param_1;
+int free_stub_000020b4(ptr)
+  void *ptr;
 {
-  _free(param_1);
+  _free(ptr);
   return;
 }
 
@@ -652,10 +652,10 @@ int atexit_common(atexit_entry, dsoHandle)
 }
 
 /* malloc_stub_00002648 @ 0x2648 (32 bytes) */
-int malloc_stub_00002648(param_1)
-  size_t param_1;
+int malloc_stub_00002648(size)
+  size_t size;
 {
-  _malloc(param_1);
+  _malloc(size);
   return;
 }
 
