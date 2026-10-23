@@ -9,17 +9,17 @@ int _PPCRuntimeCompilerGetBaseIndexInRegister(param_1, param_2)
 }
 
 /* _PPCRuntimeCompilerGetOffsetInRegister @ 0x97bda07c (88 bytes) */
-int _PPCRuntimeCompilerGetOffsetInRegister(param_1, param_2)
-  int param_1;
-  int param_2;
+int _PPCRuntimeCompilerGetOffsetInRegister(compiler, registerIndex)
+  int compiler;
+  int registerIndex;
 {
-  int iVar1;
-  int local_40 [2];
+  int registerRecord;
+  int descriptorCopy [2];
   byte abStack_38 [40];
   
-  iVar1 = param_2 * 0x38 + param_1;
-  _memcpy(local_40,iVar1 + 8,0x24);
-  return *(undefined4 *)(local_40[0] + (uint)abStack_38[*(int *)(iVar1 + 4)] * 4);
+  registerRecord = registerIndex * 0x38 + compiler;
+  _memcpy(descriptorCopy,registerRecord + 8,0x24);
+  return *(undefined4 *)(descriptorCopy[0] + (uint)abStack_38[*(int *)(registerRecord + 4)] * 4);
 }
 
 /* _PPCRuntimeCompilerBuildTransferSwizzle @ 0x97bda0d4 (104 bytes) */
@@ -921,46 +921,48 @@ int _PPCRuntimeCompilerWriteFinalFragmentToBuffer(compiler, param_2, param_3, pa
 int _PPCRuntimeCompilerWritePrologNO(compiler)
   int compiler;
 {
+  int programInfo;
+  int gprCountdown;
   int ppcInstWord;
-  int fieldInstWord;
+  int regIndex;
   int codeCursor3;
   int chunkIndex;
   uint *codeCursor2;
   undefined4 *codeCursor;
-  uint fieldInstWord2;
+  uint saveOffset;
   int *piVar4;
-  int iVar5;
-  uint fieldInstWord3;
+  int fprCountdown;
+  uint fprIndex;
   int iVar7;
   
-  iVar7 = 0x13;
-  fieldInstWord = 0xd;
-  fieldInstWord2 = 0x284;
+  gprCountdown = 0x13;
+  regIndex = 0xd;
+  saveOffset = 0x284;
   do {
-    if ((fieldInstWord != 0x10) || ((*(uint *)(*(int *)(compiler + 0xe24) + 0x34) & 0x200) != 0)) {
+    if ((regIndex != 0x10) || ((*(uint *)(*(int *)(compiler + 0xe24) + 0x34) & 0x200) != 0)) {
       codeCursor2 = *(uint **)(compiler + 0xe30);
-      *codeCursor2 = fieldInstWord << 0x15 | fieldInstWord2 & 0xffff | 0x90030000;
+      *codeCursor2 = regIndex << 0x15 | saveOffset & 0xffff | 0x90030000;
       *(uint **)(compiler + 0xe30) = codeCursor2 + 1;
     }
-    fieldInstWord = fieldInstWord + 1;
-    fieldInstWord2 = fieldInstWord2 + 4;
-    iVar7 = iVar7 + -1;
-  } while (iVar7 != 0);
-  fieldInstWord3 = 0xe;
-  iVar5 = 0x12;
-  fieldInstWord2 = 0x308;
+    regIndex = regIndex + 1;
+    saveOffset = saveOffset + 4;
+    gprCountdown = gprCountdown + -1;
+  } while (gprCountdown != 0);
+  fprIndex = 0xe;
+  fprCountdown = 0x12;
+  saveOffset = 0x308;
   piVar4 = (int *)(compiler + 0x33c);
   do {
-    if ((fieldInstWord3 < 0x14) || (*piVar4 != 0)) {
+    if ((fprIndex < 0x14) || (*piVar4 != 0)) {
       codeCursor2 = *(uint **)(compiler + 0xe30);
-      *codeCursor2 = fieldInstWord3 << 0x15 | fieldInstWord2 & 0xffff | 0xd0030000;
+      *codeCursor2 = fprIndex << 0x15 | saveOffset & 0xffff | 0xd0030000;
       *(uint **)(compiler + 0xe30) = codeCursor2 + 1;
     }
-    fieldInstWord3 = fieldInstWord3 + 1;
+    fprIndex = fprIndex + 1;
     piVar4 = piVar4 + 0xe;
-    fieldInstWord2 = fieldInstWord2 + 4;
-    iVar5 = iVar5 + -1;
-  } while (iVar5 != 0);
+    saveOffset = saveOffset + 4;
+    fprCountdown = fprCountdown + -1;
+  } while (fprCountdown != 0);
   if ((*(uint *)(*(int *)(compiler + 0xe24) + 0x34) & 0x400) != 0) {
     codeCursor = *(undefined4 **)(compiler + 0xe30);
     *codeCursor = 0xfd00048e;
@@ -971,45 +973,45 @@ int _PPCRuntimeCompilerWritePrologNO(compiler)
   }
   codeCursor = *(undefined4 **)(compiler + 0xe30);
   *codeCursor = 0x80430d9c;
-  iVar5 = *(int *)(compiler + 0xe24);
+  programInfo = *(int *)(compiler + 0xe24);
   *(undefined4 **)(compiler + 0xe30) = codeCursor + 1;
-  if ((*(uint *)(iVar5 + 0x34) & 1) != 0) {
+  if ((*(uint *)(programInfo + 0x34) & 1) != 0) {
     codeCursor[1] = 0x80a30d84;
-    iVar5 = *(int *)(compiler + 0xe24);
+    programInfo = *(int *)(compiler + 0xe24);
     *(undefined4 **)(compiler + 0xe30) = codeCursor + 2;
   }
-  if ((*(uint *)(iVar5 + 0x34) & 2) != 0) {
+  if ((*(uint *)(programInfo + 0x34) & 2) != 0) {
     codeCursor = *(undefined4 **)(compiler + 0xe30);
     *codeCursor = 0x80c30d88;
-    iVar5 = *(int *)(compiler + 0xe24);
+    programInfo = *(int *)(compiler + 0xe24);
     *(undefined4 **)(compiler + 0xe30) = codeCursor + 1;
   }
-  if ((*(uint *)(iVar5 + 0x34) & 4) != 0) {
+  if ((*(uint *)(programInfo + 0x34) & 4) != 0) {
     codeCursor = *(undefined4 **)(compiler + 0xe30);
     *codeCursor = 0x80e30d8c;
-    iVar5 = *(int *)(compiler + 0xe24);
+    programInfo = *(int *)(compiler + 0xe24);
     *(undefined4 **)(compiler + 0xe30) = codeCursor + 1;
   }
-  if ((*(uint *)(iVar5 + 0x34) & 8) != 0) {
+  if ((*(uint *)(programInfo + 0x34) & 8) != 0) {
     codeCursor = *(undefined4 **)(compiler + 0xe30);
     *codeCursor = 0x81030d90;
-    iVar5 = *(int *)(compiler + 0xe24);
+    programInfo = *(int *)(compiler + 0xe24);
     *(undefined4 **)(compiler + 0xe30) = codeCursor + 1;
   }
-  if ((*(uint *)(iVar5 + 0x34) & 0x10) != 0) {
+  if ((*(uint *)(programInfo + 0x34) & 0x10) != 0) {
     codeCursor = *(undefined4 **)(compiler + 0xe30);
     *codeCursor = 0x81230d94;
-    iVar5 = *(int *)(compiler + 0xe24);
+    programInfo = *(int *)(compiler + 0xe24);
     *(undefined4 **)(compiler + 0xe30) = codeCursor + 1;
   }
-  if ((*(uint *)(iVar5 + 0x34) & 0x20) != 0) {
+  if ((*(uint *)(programInfo + 0x34) & 0x20) != 0) {
     codeCursor = *(undefined4 **)(compiler + 0xe30);
     *codeCursor = 0x81430d98;
-    iVar5 = *(int *)(compiler + 0xe24);
+    programInfo = *(int *)(compiler + 0xe24);
     *(undefined4 **)(compiler + 0xe30) = codeCursor + 1;
   }
-  if (((*(int *)(iVar5 + 0x38) == 0x8804) || (*(int *)(iVar5 + 0x38) == 0x8b30)) &&
-     ((*(uint *)(iVar5 + 0x34) & 0x1004) != 0)) {
+  if (((*(int *)(programInfo + 0x38) == 0x8804) || (*(int *)(programInfo + 0x38) == 0x8b30)) &&
+     ((*(uint *)(programInfo + 0x34) & 0x1004) != 0)) {
     codeCursor = *(undefined4 **)(compiler + 0xe30);
     *codeCursor = 0x81830da4;
     codeCursor[1] = 0x81a30da0;
@@ -1039,56 +1041,57 @@ int _PPCRuntimeCompilerWritePrologNO(compiler)
 int _PPCRuntimeCompilerWriteEpilogNO(compiler)
   int compiler;
 {
-  int fieldInstWord;
+  int programInfo;
+  int regIndex;
   undefined4 *codeCursor;
   int iVar2;
   uint *codeCursor2;
-  uint fieldInstWord2;
-  int *piVar5;
-  uint fieldInstWord3;
-  int iVar7;
+  uint saveOffset;
+  int *fprSlotPtr;
+  uint fprIndex;
+  int gprCountdown;
   
-  iVar2 = *(int *)(compiler + 0xe24);
-  if ((*(int *)(iVar2 + 0x38) != 0x8804) && (*(int *)(iVar2 + 0x38) != 0x8b30)) {
+  programInfo = *(int *)(compiler + 0xe24);
+  if ((*(int *)(programInfo + 0x38) != 0x8804) && (*(int *)(programInfo + 0x38) != 0x8b30)) {
     codeCursor = *(undefined4 **)(compiler + 0xe30);
     *codeCursor = 0x39e00008;
     codeCursor[1] = 0x7e317830;
     codeCursor[2] = 0x7e259378;
-    iVar2 = *(int *)(compiler + 0xe24);
+    programInfo = *(int *)(compiler + 0xe24);
     *(undefined4 **)(compiler + 0xe30) = codeCursor + 3;
   }
-  if ((*(uint *)(iVar2 + 0x34) & 0x400) != 0) {
+  if ((*(uint *)(programInfo + 0x34) & 0x400) != 0) {
     codeCursor = *(undefined4 **)(compiler + 0xe30);
     *codeCursor = 0xc1030350;
     codeCursor[1] = 0xfdfe458e;
     *(undefined4 **)(compiler + 0xe30) = codeCursor + 2;
   }
-  fieldInstWord = 0xd;
-  iVar7 = 0x13;
-  fieldInstWord2 = 0x284;
+  regIndex = 0xd;
+  gprCountdown = 0x13;
+  saveOffset = 0x284;
   do {
-    if ((fieldInstWord != 0x10) || ((*(uint *)(*(int *)(compiler + 0xe24) + 0x34) & 0x200) != 0)) {
+    if ((regIndex != 0x10) || ((*(uint *)(*(int *)(compiler + 0xe24) + 0x34) & 0x200) != 0)) {
       codeCursor2 = *(uint **)(compiler + 0xe30);
-      *codeCursor2 = fieldInstWord << 0x15 | fieldInstWord2 & 0xffff | 0x80030000;
+      *codeCursor2 = regIndex << 0x15 | saveOffset & 0xffff | 0x80030000;
       *(uint **)(compiler + 0xe30) = codeCursor2 + 1;
     }
-    fieldInstWord = fieldInstWord + 1;
-    fieldInstWord2 = fieldInstWord2 + 4;
-    iVar7 = iVar7 + -1;
-  } while (iVar7 != 0);
-  fieldInstWord3 = 0xe;
+    regIndex = regIndex + 1;
+    saveOffset = saveOffset + 4;
+    gprCountdown = gprCountdown + -1;
+  } while (gprCountdown != 0);
+  fprIndex = 0xe;
   iVar2 = 0x12;
-  fieldInstWord2 = 0x308;
-  piVar5 = (int *)(compiler + 0x33c);
+  saveOffset = 0x308;
+  fprSlotPtr = (int *)(compiler + 0x33c);
   do {
-    if ((fieldInstWord3 < 0x14) || (*piVar5 != 0)) {
+    if ((fprIndex < 0x14) || (*fprSlotPtr != 0)) {
       codeCursor2 = *(uint **)(compiler + 0xe30);
-      *codeCursor2 = fieldInstWord3 << 0x15 | fieldInstWord2 & 0xffff | 0xc0030000;
+      *codeCursor2 = fprIndex << 0x15 | saveOffset & 0xffff | 0xc0030000;
       *(uint **)(compiler + 0xe30) = codeCursor2 + 1;
     }
-    fieldInstWord3 = fieldInstWord3 + 1;
-    piVar5 = piVar5 + 0xe;
-    fieldInstWord2 = fieldInstWord2 + 4;
+    fprIndex = fprIndex + 1;
+    fprSlotPtr = fprSlotPtr + 0xe;
+    saveOffset = saveOffset + 4;
     iVar2 = iVar2 + -1;
   } while (iVar2 != 0);
   codeCursor = *(undefined4 **)(compiler + 0xe30);
@@ -1102,97 +1105,99 @@ int _PPCRuntimeCompilerWriteEpilogNO(compiler)
 int _PPCRuntimeCompilerWritePrologAV(compiler)
   int compiler;
 {
-  int fieldInstWord;
+  int programInfo2;
+  int programInfo;
+  int regIndex;
   undefined4 *codeCursor;
   uint framebufferFormat;
   int chunkIndex;
   undefined4 *puVar1;
   uint *codeCursor2;
   undefined4 *vectorInstWord;
-  uint fieldInstWord2;
+  uint saveOffset;
   int codeCursor3;
   int ppcInstWord;
-  int iVar7;
-  int iVar8;
+  int vectorSaveCountdown;
+  int regCountdown;
   
   codeCursor = *(undefined4 **)(compiler + 0xe30);
   *codeCursor = 0x7c0042a6;
-  iVar7 = 0x20;
+  vectorSaveCountdown = 0x20;
   *(undefined4 **)(compiler + 0xe30) = codeCursor + 1;
   do {
-    iVar7 = iVar7 + -1;
-  } while (iVar7 != 0);
+    vectorSaveCountdown = vectorSaveCountdown + -1;
+  } while (vectorSaveCountdown != 0);
   codeCursor = *(undefined4 **)(compiler + 0xe30);
   *codeCursor = 0x6405ffff;
   codeCursor[1] = 0x60a5ffff;
   codeCursor[2] = 0x7ca043a6;
   codeCursor[3] = 0x10ff038c;
-  iVar8 = 0x13;
+  regCountdown = 0x13;
   codeCursor[4] = 0x10e73984;
-  fieldInstWord = 0xd;
+  regIndex = 0xd;
   *(undefined4 **)(compiler + 0xe30) = codeCursor + 5;
-  fieldInstWord2 = 0x284;
+  saveOffset = 0x284;
   do {
-    if ((fieldInstWord != 0x10) || ((*(uint *)(*(int *)(compiler + 0xe24) + 0x34) & 0x200) != 0)) {
+    if ((regIndex != 0x10) || ((*(uint *)(*(int *)(compiler + 0xe24) + 0x34) & 0x200) != 0)) {
       codeCursor2 = *(uint **)(compiler + 0xe30);
-      *codeCursor2 = fieldInstWord << 0x15 | fieldInstWord2 & 0xffff | 0x90030000;
+      *codeCursor2 = regIndex << 0x15 | saveOffset & 0xffff | 0x90030000;
       *(uint **)(compiler + 0xe30) = codeCursor2 + 1;
     }
-    fieldInstWord = fieldInstWord + 1;
-    fieldInstWord2 = fieldInstWord2 + 4;
-    iVar8 = iVar8 + -1;
-  } while (iVar8 != 0);
+    regIndex = regIndex + 1;
+    saveOffset = saveOffset + 4;
+    regCountdown = regCountdown + -1;
+  } while (regCountdown != 0);
   codeCursor = *(undefined4 **)(compiler + 0xe30);
   *codeCursor = 0x80430d9c;
-  iVar7 = *(int *)(compiler + 0xe24);
+  programInfo = *(int *)(compiler + 0xe24);
   *(undefined4 **)(compiler + 0xe30) = codeCursor + 1;
-  if ((*(uint *)(iVar7 + 0x34) & 1) != 0) {
+  if ((*(uint *)(programInfo + 0x34) & 1) != 0) {
     codeCursor[1] = 0x80a30d84;
-    iVar7 = *(int *)(compiler + 0xe24);
+    programInfo = *(int *)(compiler + 0xe24);
     *(undefined4 **)(compiler + 0xe30) = codeCursor + 2;
   }
-  if ((*(uint *)(iVar7 + 0x34) & 2) != 0) {
+  if ((*(uint *)(programInfo + 0x34) & 2) != 0) {
     codeCursor = *(undefined4 **)(compiler + 0xe30);
     *codeCursor = 0x80c30d88;
-    iVar7 = *(int *)(compiler + 0xe24);
+    programInfo = *(int *)(compiler + 0xe24);
     *(undefined4 **)(compiler + 0xe30) = codeCursor + 1;
   }
-  if ((*(uint *)(iVar7 + 0x34) & 4) != 0) {
+  if ((*(uint *)(programInfo + 0x34) & 4) != 0) {
     codeCursor = *(undefined4 **)(compiler + 0xe30);
     *codeCursor = 0x80e30d8c;
-    iVar7 = *(int *)(compiler + 0xe24);
+    programInfo = *(int *)(compiler + 0xe24);
     *(undefined4 **)(compiler + 0xe30) = codeCursor + 1;
   }
-  if ((*(uint *)(iVar7 + 0x34) & 8) != 0) {
+  if ((*(uint *)(programInfo + 0x34) & 8) != 0) {
     codeCursor = *(undefined4 **)(compiler + 0xe30);
     *codeCursor = 0x81030d90;
-    iVar7 = *(int *)(compiler + 0xe24);
+    programInfo = *(int *)(compiler + 0xe24);
     *(undefined4 **)(compiler + 0xe30) = codeCursor + 1;
   }
-  if ((*(uint *)(iVar7 + 0x34) & 0x10) != 0) {
+  if ((*(uint *)(programInfo + 0x34) & 0x10) != 0) {
     codeCursor = *(undefined4 **)(compiler + 0xe30);
     *codeCursor = 0x81230d94;
-    iVar7 = *(int *)(compiler + 0xe24);
+    programInfo = *(int *)(compiler + 0xe24);
     *(undefined4 **)(compiler + 0xe30) = codeCursor + 1;
   }
-  if ((*(uint *)(iVar7 + 0x34) & 0x20) != 0) {
+  if ((*(uint *)(programInfo + 0x34) & 0x20) != 0) {
     codeCursor = *(undefined4 **)(compiler + 0xe30);
     *codeCursor = 0x81430d98;
     *(undefined4 **)(compiler + 0xe30) = codeCursor + 1;
   }
   chunkIndex = _glpRTCAddAChunk_97bd7cbc(&_glpOpLoadOneAndZeroAVRTC,*(undefined4 *)(compiler + 0xe30));
   codeCursor3 = *(int *)(compiler + 0xe30);
-  iVar8 = *(int *)(compiler + 0xe24);
+  programInfo2 = *(int *)(compiler + 0xe24);
   ppcInstWord = codeCursor3 + chunkIndex * 4;
   *(int *)(compiler + 0xe30) = ppcInstWord;
-  if (((*(int *)(iVar8 + 0x38) == 0x8804) || (*(int *)(iVar8 + 0x38) == 0x8b30)) &&
-     ((*(uint *)(iVar8 + 0x34) & 0x1004) != 0)) {
+  if (((*(int *)(programInfo2 + 0x38) == 0x8804) || (*(int *)(programInfo2 + 0x38) == 0x8b30)) &&
+     ((*(uint *)(programInfo2 + 0x34) & 0x1004) != 0)) {
     *(undefined4 *)(codeCursor3 + chunkIndex * 4) = 0x81830da4;
     *(undefined4 *)(ppcInstWord + 4) = 0x81a30da0;
-    iVar8 = *(int *)(compiler + 0xe24);
+    programInfo2 = *(int *)(compiler + 0xe24);
     *(int *)(compiler + 0xe30) = ppcInstWord + 8;
   }
-  if ((*(int *)(iVar8 + 0x38) != 0x8804) && (*(int *)(iVar8 + 0x38) != 0x8b30)) {
+  if ((*(int *)(programInfo2 + 0x38) != 0x8804) && (*(int *)(programInfo2 + 0x38) != 0x8b30)) {
     codeCursor = *(undefined4 **)(compiler + 0xe30);
     *codeCursor = 0x39e01b70;
     codeCursor[1] = 0x7dcf10ce;
@@ -1209,9 +1214,9 @@ int _PPCRuntimeCompilerWritePrologAV(compiler)
   puVar1 = codeCursor + 1;
   *(undefined4 **)(compiler + 0xe30) = puVar1;
   chunkIndex = _glpRTCAddAChunk_97bd7cbc(&_glpOpLoadOneAndZeroRTC,puVar1);
-  iVar8 = *(int *)(compiler + 0xe24);
+  programInfo2 = *(int *)(compiler + 0xe24);
   *(int *)(compiler + 0xe30) = *(int *)(compiler + 0xe30) + chunkIndex * 4;
-  if ((*(int *)(iVar8 + 0x38) == 0x8804) || (*(int *)(iVar8 + 0x38) == 0x8b30)) {
+  if ((*(int *)(programInfo2 + 0x38) == 0x8804) || (*(int *)(programInfo2 + 0x38) == 0x8b30)) {
     framebufferFormat = _PPEmulatorFramebufferFormat(*(undefined4 *)(compiler + 0xe20));
     if ((framebufferFormat & 0x8000) != 0) {
       codeCursor = *(undefined4 **)(compiler + 0xe30);
@@ -1219,27 +1224,27 @@ int _PPCRuntimeCompilerWritePrologAV(compiler)
       codeCursor[1] = 0x7e4378ce;
       *(undefined4 **)(compiler + 0xe30) = codeCursor + 2;
     }
-    iVar8 = *(int *)(compiler + 0xe24);
+    programInfo2 = *(int *)(compiler + 0xe24);
   }
-  if ((*(int *)(iVar8 + 0x38) == 0x8804) || (*(int *)(iVar8 + 0x38) == 0x8b30)) {
-    if ((*(uint *)(iVar8 + 0x34) & 4) != 0) {
+  if ((*(int *)(programInfo2 + 0x38) == 0x8804) || (*(int *)(programInfo2 + 0x38) == 0x8b30)) {
+    if ((*(uint *)(programInfo2 + 0x34) & 4) != 0) {
       codeCursor = *(undefined4 **)(compiler + 0xe30);
       *codeCursor = 0x7c6068ce;
       vectorInstWord = codeCursor + 1;
       *(undefined4 **)(compiler + 0xe30) = vectorInstWord;
       if ((*(uint *)(compiler + 0xe50) & 8) == 0) {
         *vectorInstWord = 0x11c9436a;
-        iVar8 = *(int *)(compiler + 0xe24);
+        programInfo2 = *(int *)(compiler + 0xe24);
         *(undefined4 **)(compiler + 0xe30) = codeCursor + 2;
       }
       else {
         *vectorInstWord = 0x1080190a;
         codeCursor[2] = 0x11c9236a;
-        iVar8 = *(int *)(compiler + 0xe24);
+        programInfo2 = *(int *)(compiler + 0xe24);
         *(undefined4 **)(compiler + 0xe30) = codeCursor + 3;
       }
     }
-    if ((*(uint *)(iVar8 + 0x34) & 0x1000) != 0) {
+    if ((*(uint *)(programInfo2 + 0x34) & 0x1000) != 0) {
       codeCursor = *(undefined4 **)(compiler + 0xe30);
       *codeCursor = 0xfd805890;
       codeCursor[1] = 0xc1ad0008;
@@ -1253,17 +1258,17 @@ int _PPCRuntimeCompilerWritePrologAV(compiler)
 int _PPCRuntimeCompilerWriteEpilogAV(compiler)
   int compiler;
 {
-  int fieldInstWord;
+  int regIndex;
   undefined4 *codeCursor;
   int chunkIndex;
-  int iVar1;
+  int programTarget;
   uint *codeCursor2;
-  uint fieldInstWord2;
+  uint saveOffset;
   undefined4 *puVar4;
-  int iVar5;
+  int regCountdown;
   
-  iVar1 = *(int *)(*(int *)(compiler + 0xe24) + 0x38);
-  if ((iVar1 != 0x8804) && (iVar1 != 0x8b30)) {
+  programTarget = *(int *)(*(int *)(compiler + 0xe24) + 0x38);
+  if ((programTarget != 0x8804) && (programTarget != 0x8b30)) {
     codeCursor = *(undefined4 **)(compiler + 0xe30);
     *codeCursor = 0x1210486c;
     codeCursor[1] = 0x39e0020e;
@@ -1272,19 +1277,19 @@ int _PPCRuntimeCompilerWriteEpilogAV(compiler)
     codeCursor[4] = 0x7caf1a2e;
     *(undefined4 **)(compiler + 0xe30) = codeCursor + 5;
   }
-  fieldInstWord = 0xd;
-  iVar5 = 0x13;
-  fieldInstWord2 = 0x284;
+  regIndex = 0xd;
+  regCountdown = 0x13;
+  saveOffset = 0x284;
   do {
-    if ((fieldInstWord != 0x10) || ((*(uint *)(*(int *)(compiler + 0xe24) + 0x34) & 0x200) != 0)) {
+    if ((regIndex != 0x10) || ((*(uint *)(*(int *)(compiler + 0xe24) + 0x34) & 0x200) != 0)) {
       codeCursor2 = *(uint **)(compiler + 0xe30);
-      *codeCursor2 = fieldInstWord << 0x15 | fieldInstWord2 & 0xffff | 0x80030000;
+      *codeCursor2 = regIndex << 0x15 | saveOffset & 0xffff | 0x80030000;
       *(uint **)(compiler + 0xe30) = codeCursor2 + 1;
     }
-    fieldInstWord = fieldInstWord + 1;
-    fieldInstWord2 = fieldInstWord2 + 4;
-    iVar5 = iVar5 + -1;
-  } while (iVar5 != 0);
+    regIndex = regIndex + 1;
+    saveOffset = saveOffset + 4;
+    regCountdown = regCountdown + -1;
+  } while (regCountdown != 0);
   codeCursor = *(undefined4 **)(compiler + 0xe30);
   *codeCursor = 0x7ca32b78;
   puVar4 = codeCursor + 1;
@@ -4873,23 +4878,23 @@ void _PPCTextureSamplerAttachDerivatives(int param_1,undefined4 param_2,double f
 }
 
 /* _glpRTCAddAChunk_97be1c2c @ 0x97be1c2c (48 bytes) */
-int _glpRTCAddAChunk_97be1c2c(param_1, param_2)
-  int *param_1;
-  int *param_2;
+int _glpRTCAddAChunk_97be1c2c(chunk, dest)
+  int *chunk;
+  int *dest;
 {
-  int iVar1;
-  int iVar2;
+  int word;
+  int wordCount;
   
-  iVar2 = 0;
-  iVar1 = *param_1;
-  while (iVar1 != 0) {
-    *param_2 = iVar1;
-    iVar2 = iVar2 + 1;
-    param_1 = param_1 + 1;
-    param_2 = param_2 + 1;
-    iVar1 = *param_1;
+  wordCount = 0;
+  word = *chunk;
+  while (word != 0) {
+    *dest = word;
+    wordCount = wordCount + 1;
+    chunk = chunk + 1;
+    dest = dest + 1;
+    word = *chunk;
   }
-  return iVar2;
+  return wordCount;
 }
 
 /* _PPCTextureSamplerSampleTexel1DRTCNO @ 0x97be1c5c (8 bytes) */
@@ -6214,23 +6219,23 @@ int _PPCNoiseGeneratorInitialise(param_1)
 }
 
 /* _glpRTCAddAChunk_97be4088 @ 0x97be4088 (48 bytes) */
-int _glpRTCAddAChunk_97be4088(param_1, param_2)
-  int *param_1;
-  int *param_2;
+int _glpRTCAddAChunk_97be4088(chunk, dest)
+  int *chunk;
+  int *dest;
 {
-  int iVar1;
-  int iVar2;
+  int word;
+  int wordCount;
   
-  iVar2 = 0;
-  iVar1 = *param_1;
-  while (iVar1 != 0) {
-    *param_2 = iVar1;
-    iVar2 = iVar2 + 1;
-    param_1 = param_1 + 1;
-    param_2 = param_2 + 1;
-    iVar1 = *param_1;
+  wordCount = 0;
+  word = *chunk;
+  while (word != 0) {
+    *dest = word;
+    wordCount = wordCount + 1;
+    chunk = chunk + 1;
+    dest = dest + 1;
+    word = *chunk;
   }
-  return iVar2;
+  return wordCount;
 }
 
 /* _PPCNoiseGeneratorCalculate1DAVRTC @ 0x97be40b8 (228 bytes) */
