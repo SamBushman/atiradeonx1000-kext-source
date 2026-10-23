@@ -240,7 +240,6 @@ local	FUN_000055a4	param_3	unusedArg3	CONFIRMED	never read
 local	FUN_000055a4	param_4	blitFlags	CONFIRMED	param_4&0x7ffff000 is compared with 0, 0x1000, 0x3000, 0x7000 to pick the source kind
 local	FUN_000055a4	param_5	blitReq	INFERRED	+0x58/+0x5c offsets, +0x60 region list
 local	FUN_000055a4	param_6	srcRef	INFERRED	a surface descriptor (kind 0x3000) or surface id (kind 0x7000)
-local	FUN_000055a4	uVar55	blitKindOrWordsLeft	UNKNOWN	param_4&0x7ffff000, reused later as a words-left counter and rect extent
 local	FUN_000055a4	bVar1	isScreenCopyOrNeedsSetup	UNKNOWN	kind==0x1000, reused as a needs-setup flag in the later loops
 local	FUN_000055a4	bVar14	needsSetup	INFERRED	true when a new command block must emit the 3D setup
 local	FUN_000055a4	piVar54	regionRect	INFERRED	walks the region list: shorts x,y at +0/+2 and w,h at +4/+6
@@ -285,7 +284,6 @@ local	FUN_000055a4	dVar64	srcRightFloat	INFERRED	srcLeftFloat + width
 local	FUN_000055a4	dVar65	srcBottomFloat	INFERRED	srcTopFloat + height
 local	FUN_000055a4	puVar18	lastHeader	CONFIRMED	*(accel+0x7c): previous command header, ORed with its length
 local	FUN_000055a4	pdVar53	cmdWrite	CONFIRMED	loaded from accel+0x80 and stored back there at the end: command-buffer write cursor
-local	FUN_000055a4	uVar48	cmdWordsLeft	CONFIRMED	capacity minus words written; compared with each block size before a flush
 local	FUN_000055a4	uVar39	cmdCapacity	CONFIRMED	(*(accel+0x18)+0x10)-7: usable words of the mapped command buffer
 local	FUN_000055a4	puVar15	taskPtr	INFERRED	PTR_0000e694: target task argument of _IOConnectMapMemory
 local	FUN_000055a4	fparam_1	unusedFloatArg1	CONFIRMED	floating-point argument register never read
@@ -326,7 +324,6 @@ local	_radeonFill	local_2e8	scratchWord1	CONFIRMED	&local_2e8 is an _IOConnectMa
 local	_radeonFill	local_2e4	scratchWord2	CONFIRMED	padding/word scratch
 local	_radeonFill	puVar24	lastHeader	CONFIRMED	*(accel+0x7c): previous command header, ORed with its length
 local	_radeonFill	pdVar44	cmdWrite	CONFIRMED	loaded from accel+0x80 and stored back there at the end: command-buffer write cursor
-local	_radeonFill	uVar32	cmdWordsLeft	CONFIRMED	capacity minus words written; compared with each block size before a flush
 local	_radeonFill	uVar29	cmdCapacity	CONFIRMED	(*(accel+0x18)+0x10)-7: usable words of the mapped command buffer
 local	_radeonFill	puVar7	taskPtr	INFERRED	PTR_0000e694: target task argument of _IOConnectMapMemory
 local	_radeonHighlight	param_1	accel	CONFIRMED	cmd buffer at +0x18/+0x7c/+0x80
