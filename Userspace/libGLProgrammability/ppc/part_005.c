@@ -386,7 +386,7 @@ int TParseContext__arrayErrorCheck(parseContext, line, text, publicType, intermT
   unsigned char * nameStringRef;
   undefined **structTypeNameString;
   undefined4 a1;
-  undefined4 extraout_r4;
+  undefined4 r4Out0;
   undefined4 passThroughR4;
   undefined4 a1_00;
   char *typeNameString;
@@ -542,7 +542,7 @@ int TParseContext__arrayErrorCheck(parseContext, line, text, publicType, intermT
             poolAllocatorArg1[0] = ((int (*)())GetGlobalPoolAllocator)();
             a2 = (unsigned char *)poolAllocatorArg1;
             __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(structTypeNameString,structTypeNameChars,a2);
-            passThroughR4 = extraout_r4;
+            passThroughR4 = r4Out0;
             structTypeName = structTypeNameString;
           }
         }
@@ -852,8 +852,8 @@ int TParseContext__arraySetMaxSize(this, intermSymbol, type, maxSize, updateFlag
   int maxTexCoordsNameChars;
   undefined4 allocatorArg [4];
   char *destroyAllocatorArg [4];
-  char acStack_a0 [64];
-  unsigned char aaStack_60 [16];
+  char locTextBuf [64];
+  unsigned char allocatorDummy [16];
   uint builtIn;
   
   builtIn = 0;
@@ -962,12 +962,12 @@ LAB_97b9cf8c:
       lineInString = line & 0xffff;
       cr0Flags = (lineInString == 0) << 1;
       if (lineInString == 0) {
-        _sprintf(acStack_a0,"%d:? ",line >> 0x10);
+        _sprintf(locTextBuf,"%d:? ",line >> 0x10);
       }
       else {
-        _sprintf(acStack_a0,"%d:%d",line >> 0x10,lineInString);
+        _sprintf(locTextBuf,"%d:%d",line >> 0x10,lineInString);
       }
-      __ZNSsC1EPKcRKSaIcE(&maxTexCoordsName,acStack_a0,aaStack_60);
+      __ZNSsC1EPKcRKSaIcE(&maxTexCoordsName,locTextBuf,allocatorDummy);
       maxTexCoordsName[*(int *)(maxTexCoordsName + -0xc)] = *PTR__S_terminal_a7b7c0b8;
       __ZN13TInfoSinkBase6appendEPKc(infoSink,maxTexCoordsName);
       refCountPtr = (int *)(maxTexCoordsName + -4);
@@ -980,7 +980,7 @@ LAB_97b9cf8c:
         }
       } while (!(bool)(cr0Flags >> 1 & 1));
       if (oldRefCount < 1) {
-        __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(maxTexCoordsName + -0xc),acStack_a0);
+        __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(maxTexCoordsName + -0xc),locTextBuf);
       }
       __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
       __ZN13TInfoSinkBase6appendEPKc(infoSink,"gl_MaxTextureCoords not defined");
@@ -1026,7 +1026,7 @@ int TParseContext__nonInitErrorCheck(this, sourceLoc, text, publicType)
   int structTypeNameRef;
   void *this_00;
   unsigned char * variableNameRef;
-  undefined4 extraout_r4;
+  undefined4 r4Out0;
   undefined4 a1;
   unsigned char * a2;
   int ptQualifier;
@@ -1127,7 +1127,7 @@ int TParseContext__nonInitErrorCheck(this, sourceLoc, text, publicType)
       allocatorArg[0] = ((int (*)())GetGlobalPoolAllocator)();
       a2 = (unsigned char *)allocatorArg;
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(this_00,structTypeNameChars,a2);
-      a1 = extraout_r4;
+      a1 = r4Out0;
       typeNameString = this_00;
     }
   }
@@ -1293,12 +1293,12 @@ int TParseContext__extensionErrorCheck(this, sourceLoc, str)
   undefined4 strCopy;
   int strCopyChars;
   undefined4 allocatorArg2 [4];
-  char *apcStack_110 [4];
-  char acStack_100 [64];
-  unsigned char aaStack_c0 [16];
-  int aiStack_b0 [4];
-  int aiStack_a0 [4];
-  undefined4 auStack_90 [4];
+  char *locString [4];
+  char locTextBuf [64];
+  unsigned char allocatorDummy [16];
+  int msgDestroyArg [4];
+  int msgPrefixDestroyArg [4];
+  undefined4 strCopyDestroyArg [4];
   undefined4 allocatorArg3 [4];
   undefined4 entryKey2;
   int entryKey2Chars;
@@ -1393,15 +1393,15 @@ LAB_97b9d574:
     lineInString = sourceLoc & 0xffff;
     cr0Flags = (lineInString == 0) << 1;
     if (lineInString == 0) {
-      _sprintf(acStack_100,"%d:? ",sourceLoc >> 0x10);
+      _sprintf(locTextBuf,"%d:? ",sourceLoc >> 0x10);
     }
     else {
-      _sprintf(acStack_100,"%d:%d",sourceLoc >> 0x10,lineInString);
+      _sprintf(locTextBuf,"%d:%d",sourceLoc >> 0x10,lineInString);
     }
-    __ZNSsC1EPKcRKSaIcE(apcStack_110,acStack_100,aaStack_c0);
-    apcStack_110[0][*(int *)(apcStack_110[0] + -0xc)] = *PTR__S_terminal_a7b7c0b8;
-    __ZN13TInfoSinkBase6appendEPKc(this_00,apcStack_110[0]);
-    refCountPtr = (int *)(apcStack_110[0] + -4);
+    __ZNSsC1EPKcRKSaIcE(locString,locTextBuf,allocatorDummy);
+    locString[0][*(int *)(locString[0] + -0xc)] = *PTR__S_terminal_a7b7c0b8;
+    __ZN13TInfoSinkBase6appendEPKc(this_00,locString[0]);
+    refCountPtr = (int *)(locString[0] + -4);
     do {
       oldRefCount = *refCountPtr;
       if (reservation != '\0') {
@@ -1411,13 +1411,13 @@ LAB_97b9d574:
       }
     } while (!(bool)(cr0Flags >> 1 & 1));
     if (oldRefCount < 1) {
-      __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(apcStack_110[0] + -0xc));
+      __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(locString[0] + -0xc));
     }
     __ZN13TInfoSinkBase6appendEPKc(this_00,": ");
     __ZN13TInfoSinkBase6appendEPKc(this_00,messageChars);
     __ZN13TInfoSinkBase6appendEPKc(this_00,"\n");
     refCountPtr = (int *)(msgChars + -4);
-    aiStack_b0[0] = mapIterOrMsgString;
+    msgDestroyArg[0] = mapIterOrMsgString;
     do {
       oldRefCount = *refCountPtr;
       if (reservation != '\0') {
@@ -1428,10 +1428,10 @@ LAB_97b9d574:
     } while (!(bool)(cr0Flags >> 1 & 1));
     if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(msgChars + -0xc),aiStack_b0);
+                ((unsigned char *)(msgChars + -0xc),msgDestroyArg);
     }
     refCountPtr = (int *)(msgPrefixChars + -4);
-    aiStack_a0[0] = mapEndOrMsgPrefix;
+    msgPrefixDestroyArg[0] = mapEndOrMsgPrefix;
     do {
       oldRefCount = *refCountPtr;
       if (reservation != '\0') {
@@ -1442,10 +1442,10 @@ LAB_97b9d574:
     } while (!(bool)(cr0Flags >> 1 & 1));
     if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(msgPrefixChars + -0xc),aiStack_a0);
+                ((unsigned char *)(msgPrefixChars + -0xc),msgPrefixDestroyArg);
     }
     refCountPtr = (int *)(strCopyChars + -4);
-    auStack_90[0] = strCopy;
+    strCopyDestroyArg[0] = strCopy;
     do {
       oldRefCount = *refCountPtr;
       if (reservation != '\0') {
@@ -1456,7 +1456,7 @@ LAB_97b9d574:
     } while (!(bool)(cr0Flags >> 1 & 1));
     if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(strCopyChars + -0xc),auStack_90);
+                ((unsigned char *)(strCopyChars + -0xc),strCopyDestroyArg);
     }
     return false;
   }
@@ -1665,12 +1665,12 @@ int TParseContext__executeInitializer(this, line, identifier, publicType, initia
   undefined **this_00;
   unsigned char * this_01;
   unsigned char * assignNode;
-  undefined4 extraout_r4;
-  undefined4 extraout_r4_00;
-  undefined4 extraout_r4_01;
+  undefined4 r4Out0;
+  undefined4 r4Out1;
+  undefined4 r4Out2;
   undefined **structTypeName;
-  undefined **extraout_r4_02;
-  undefined4 extraout_r4_03;
+  undefined **r4Out3;
+  undefined4 r4Out4;
   undefined4 a1;
   undefined4 a1_00;
   undefined ***destroyAllocatorArg;
@@ -1795,7 +1795,7 @@ int TParseContext__executeInitializer(this, line, identifier, publicType, initia
       poolAllocatorArg1[0] = ((int (*)())GetGlobalPoolAllocator)();
       ptUserDef = (unsigned char *)poolAllocatorArg1;
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(structTypeNameString,typeNameChars,ptUserDef);
-      passThroughR4 = extraout_r4;
+      passThroughR4 = r4Out0;
       structTypeName = structTypeNameString;
     }
   }
@@ -1852,11 +1852,11 @@ int TParseContext__executeInitializer(this, line, identifier, publicType, initia
       cr0Flags = 2;
     }
   } while (!(bool)(cr0Flags >> 1 & 1));
-  passThroughR4 = extraout_r4_00;
+  passThroughR4 = r4Out1;
   if (oldRefCount < 1) {
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
               ((unsigned char *)(nameCopyChars + -0xc),destroyAllocator1);
-    passThroughR4 = extraout_r4_01;
+    passThroughR4 = r4Out2;
   }
   if (nameStringChars == 0) {
     levelsBegin = newNode[1];
@@ -2038,7 +2038,7 @@ LAB_97b9e184:
       }
       aggregateNode = (int *)(**(code **)(*(int *)initializer + 0x1c))(initializer);
       sequence = (**(code **)(*aggregateNode + 100))(aggregateNode);
-      passThroughR4 = extraout_r4_03;
+      passThroughR4 = r4Out4;
       if (*(int *)(sequence + 8) - *(int *)(sequence + 4) >> 2 == 1) {
         aggregateNode = (int *)(**(code **)(*(int *)initializer + 0x1c))(initializer);
         sequence = (**(code **)(*aggregateNode + 100))(aggregateNode);
@@ -2225,7 +2225,7 @@ LAB_97b9e6d8:
           poolAllocatorArg3[0] = ((int (*)())GetGlobalPoolAllocator)();
           __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
                     (this_00,typeNameChars,(unsigned char *)poolAllocatorArg3);
-          ptSizeCopy = extraout_r4_02;
+          ptSizeCopy = r4Out3;
           structTypeNameString = this_00;
         }
       }
@@ -2333,7 +2333,7 @@ int TParseContext__addConstructor(this, intermNode, type, op, function, line)
   undefined4 *structFieldBegin;
   int structFieldList;
   undefined4 *childCursor;
-  undefined1 auStack_40 [4];
+  undefined1 eraseResultSlot [4];
   int argIndex;
   undefined4 *iteratorSlot;
   unsigned char * replacementNode;
@@ -2422,10 +2422,10 @@ int TParseContext__addConstructor(this, intermNode, type, op, function, line)
           if (a0_00 != (unsigned char *)0x0) {
 LAB_97b9ed60:
             std__vector_TIntermNode__pool_allocator_TIntermNode_____erase
-                      (auStack_40,pTVar7,iteratorSlot);
+                      (eraseResultSlot,pTVar7,iteratorSlot);
             replacementNode = a0_00;
             std__vector_TIntermNode__pool_allocator_TIntermNode_____insert
-                      (auStack_40,pTVar7,iteratorSlot,&replacementNode);
+                      (eraseResultSlot,pTVar7,iteratorSlot,&replacementNode);
           }
         }
         argIndex = argIndex + 1;
@@ -2612,9 +2612,9 @@ int TParseContext__addConstVectorNode(this, vectorFields, intermTyped, line, scr
   char reservation;
   byte cr0Flags;
   undefined **typeTempOrTextBuf [4];
-  char acStack_80 [20];
+  char locTextBuf [20];
   uint typeTempBits;
-  unsigned char aaStack_40 [16];
+  unsigned char allocatorDummy [16];
   
   pTVar9 = intermTyped;
   lineCopy = line;
@@ -2629,12 +2629,12 @@ int TParseContext__addConstVectorNode(this, vectorFields, intermTyped, line, scr
       a1_01 = line & 0xffff;
       cr0Flags = (a1_01 == 0) << 1;
       if (a1_01 == 0) {
-        _sprintf(acStack_80,"%d:? ",line >> 0x10);
+        _sprintf(locTextBuf,"%d:? ",line >> 0x10);
       }
       else {
-        _sprintf(acStack_80,"%d:%d",line >> 0x10,a1_01);
+        _sprintf(locTextBuf,"%d:%d",line >> 0x10,a1_01);
       }
-      __ZNSsC1EPKcRKSaIcE(typeTempOrTextBuf,acStack_80,aaStack_40);
+      __ZNSsC1EPKcRKSaIcE(typeTempOrTextBuf,locTextBuf,allocatorDummy);
       *(undefined *)((int)typeTempOrTextBuf[0] + (int)typeTempOrTextBuf[0][-3]) = *PTR__S_terminal_a7b7c0b8;
       __ZN13TInfoSinkBase6appendEPKc(this_00,(char *)typeTempOrTextBuf[0]);
       refCountPtr = typeTempOrTextBuf[0] + -1;
@@ -2647,7 +2647,7 @@ int TParseContext__addConstVectorNode(this, vectorFields, intermTyped, line, scr
         }
       } while (!(bool)(cr0Flags >> 1 & 1));
       if ((int)oldRefCount < 1) {
-        __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(typeTempOrTextBuf[0] + -3),acStack_80);
+        __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(typeTempOrTextBuf[0] + -3),locTextBuf);
       }
       __ZN13TInfoSinkBase6appendEPKc(this_00,": ");
       __ZN13TInfoSinkBase6appendEPKc
@@ -3709,7 +3709,7 @@ int _ShInitialize()
   undefined4 emptyStringAllocator1;
   undefined *emptyStringData2;
   undefined4 emptyStringAllocator2;
-  undefined1 auStack_30 [28];
+  undefined1 destroyAllocatorArg [28];
   
   emptyStringData1 = PTR__S_empty_rep_storage_a7b7c0f0;
   emptyRepRefCount = (int *)(PTR__S_empty_rep_storage_a7b7c0f0 + 8);
@@ -3759,7 +3759,7 @@ int _ShInitialize()
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
   if (oldRefCount < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(emptyStringData2 + -0xc),auStack_30);
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(emptyStringData2 + -0xc),destroyAllocatorArg);
   }
   refCountPtr = (int *)(emptyStringData1 + -4);
   do {
@@ -3771,7 +3771,7 @@ int _ShInitialize()
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
   if (oldRefCount < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(emptyStringData1 + -0xc),auStack_30);
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(emptyStringData1 + -0xc),destroyAllocatorArg);
   }
   return result;
 }
@@ -3904,8 +3904,8 @@ int initializeSymbolTable(builtIns, language, infoSink, builtInResource, symbolT
   unsigned char * levelAllocator;
   undefined4 *levelSlot [4];
   undefined4 destroyArgA [4];
-  undefined4 auStack_60 [4];
-  undefined4 auStack_50 [4];
+  undefined4 destroyArgB [4];
+  undefined4 destroyArgC [4];
   void *intermediateStorage [7];
   
   intermediateStorage[0] = infoSink;
@@ -4003,7 +4003,7 @@ LAB_97ba0e34:
       __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
       _FinalizePreprocessor();
       refCountPtr = (int *)(emptyStringChars + -4);
-      auStack_60[0] = emptyStringAllocator;
+      destroyArgB[0] = emptyStringAllocator;
       do {
         oldRefCount = *refCountPtr;
         if (reservation != '\0') {
@@ -4013,7 +4013,7 @@ LAB_97ba0e34:
         }
       } while (!(bool)(cr0Flags >> 1 & 1));
       if (oldRefCount < 1) {
-        destroyArg = auStack_60;
+        destroyArg = destroyArgB;
         goto code_r0x97ba0f54;
       }
       goto code_r0x97ba0f58;
@@ -4059,7 +4059,7 @@ LAB_97ba0fe4:
     __ZN13TInfoSinkBase6appendEPKc(infoSink,"Unable to intialize the Preprocessor");
     __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
     refCountPtr = (int *)(emptyStringChars + -4);
-    auStack_50[0] = emptyStringAllocator;
+    destroyArgC[0] = emptyStringAllocator;
     do {
       oldRefCount = *refCountPtr;
       if (reservation != '\0') {
@@ -4068,7 +4068,7 @@ LAB_97ba0fe4:
         cr0Flags = 2;
       }
     } while (!(bool)(cr0Flags >> 1 & 1));
-    destroyArg = auStack_50;
+    destroyArg = destroyArgC;
     if (oldRefCount < 1) {
 code_r0x97ba0f54:
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
@@ -4169,9 +4169,9 @@ int _ShCompile(handle, str, numStrings, optLevel, debugOptions)
   unsigned char * levelAllocator2;
   undefined4 numErrorsString;
   int numErrorsStringChars;
-  char acStack_80 [16];
-  undefined4 auStack_70 [4];
-  undefined4 auStack_60 [4];
+  char numErrorsTextBuf [16];
+  undefined4 allocatorArgN [4];
+  undefined4 numErrorsDestroyArg [4];
   undefined4 destroyArg [4];
   int intermediate;
   char *preprocessorBuiltinStrings [3];
@@ -4363,14 +4363,14 @@ int _ShCompile(handle, str, numStrings, optLevel, debugOptions)
     else {
       __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
       infoSinkRef = infoSink;
-      _sprintf(acStack_80,"%d",numErrors);
-      auStack_70[0] = ((int (*)())GetGlobalPoolAllocator)();
+      _sprintf(numErrorsTextBuf,"%d",numErrors);
+      allocatorArgN[0] = ((int (*)())GetGlobalPoolAllocator)();
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-                ((unsigned char *)&numErrorsString,acStack_80,(unsigned char *)auStack_70);
+                ((unsigned char *)&numErrorsString,numErrorsTextBuf,(unsigned char *)allocatorArgN);
       __ZN13TInfoSinkBase6appendERKSbIcSt11char_traitsIcE14pool_allocatorIcEE
                 (infoSinkRef,(unsigned char *)&numErrorsString);
       refCountPtr = (int *)(numErrorsStringChars + -4);
-      auStack_60[0] = numErrorsString;
+      numErrorsDestroyArg[0] = numErrorsString;
       do {
         parseResult = *refCountPtr;
         if (reservation != '\0') {
@@ -4381,7 +4381,7 @@ int _ShCompile(handle, str, numStrings, optLevel, debugOptions)
       } while (!(bool)(cr0Flags >> 1 & 1));
       if (parseResult < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                  ((unsigned char *)(numErrorsStringChars + -0xc),auStack_60);
+                  ((unsigned char *)(numErrorsStringChars + -0xc),numErrorsDestroyArg);
       }
       messageText = " compilation errors. No code generated.";
       success = 0;

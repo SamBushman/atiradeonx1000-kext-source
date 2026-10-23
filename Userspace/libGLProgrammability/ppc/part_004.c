@@ -82,16 +82,16 @@ int TIntermBinary__promote(this, infoSink, scratchR5, scratchR6, scratchR7, scra
   uint leftIsMatrix;
   int rightBasicType;
   undefined4 a1;
-  undefined4 extraout_r4;
-  undefined4 extraout_r4_00;
-  undefined4 extraout_r4_01;
-  undefined4 extraout_r4_02;
-  undefined4 extraout_r4_03;
-  undefined4 extraout_r4_04;
-  undefined4 extraout_r4_05;
-  undefined4 extraout_r4_06;
-  undefined4 extraout_r4_07;
-  undefined4 extraout_r4_08;
+  undefined4 r4Out0;
+  undefined4 r4Out1;
+  undefined4 r4Out2;
+  undefined4 r4Out3;
+  undefined4 r4Out4;
+  undefined4 r4Out5;
+  undefined4 r4Out6;
+  undefined4 r4Out7;
+  undefined4 r4Out8;
+  undefined4 r4Out9;
   code *setTypeFn;
   char reservation;
   byte cr0Flags;
@@ -107,7 +107,7 @@ int TIntermBinary__promote(this, infoSink, scratchR5, scratchR6, scratchR7, scra
   uint stackTypeBits;
   char typeTempOrTextBuf [8];
   int typeTempStructure;
-  unsigned char aaStack_50 [4];
+  unsigned char allocatorDummy [4];
   uint typeTempBits;
   
   resultNominalSize = (**(code **)(**(int **)(this + 0x34) + 0x48))
@@ -221,10 +221,10 @@ LAB_97b90940:
     return 0;
   }
   leftNominalSize = (**(code **)(**(int **)(this + 0x38) + 0x48))(*(int **)(this + 0x38));
-  scratchR4 = extraout_r4;
+  scratchR4 = r4Out0;
   if ((leftNominalSize != resultNominalSize) &&
      (queryResultOrOperator = (**(code **)(**(int **)(this + 0x38) + 0x48))(*(int **)(this + 0x38)),
-     scratchR4 = extraout_r4_00, queryResultOrOperator != 1)) {
+     scratchR4 = r4Out1, queryResultOrOperator != 1)) {
     return 0;
   }
   leftNominalSize = *(int *)(this + 0x30) - 0x13;
@@ -245,10 +245,10 @@ LAB_97b90940:
   case 0x15:
     leftMatrixFlag = (**(code **)(**(int **)(this + 0x34) + 0x50))
                        (*(int **)(this + 0x34),scratchR4,scratchR5,scratchR6,scratchR7,scratchR8,queryResultOrOperator);
-    scratchR4 = extraout_r4_01;
+    scratchR4 = r4Out2;
     if ((leftMatrixFlag == 0) &&
        (leftMatrixFlag = (**(code **)(**(int **)(this + 0x38) + 0x50))(*(int **)(this + 0x38)),
-       scratchR4 = extraout_r4_02, leftMatrixFlag != 0)) {
+       scratchR4 = r4Out3, leftMatrixFlag != 0)) {
       queryResultOrOperator = (**(code **)(**(int **)(this + 0x34) + 0x58))(*(int **)(this + 0x34));
       if (queryResultOrOperator != 0) {
         newOperator = 0x27;
@@ -261,10 +261,10 @@ LAB_97b90940:
     else {
       leftMatrixFlag = (**(code **)(**(int **)(this + 0x34) + 0x50))
                          (*(int **)(this + 0x34),scratchR4,scratchR5,scratchR6,scratchR7,scratchR8,queryResultOrOperator);
-      scratchR4 = extraout_r4_03;
+      scratchR4 = r4Out4;
       if ((leftMatrixFlag == 0) ||
          (leftMatrixFlag = (**(code **)(**(int **)(this + 0x38) + 0x50))(*(int **)(this + 0x38)),
-         scratchR4 = extraout_r4_04, leftMatrixFlag != 0)) {
+         scratchR4 = r4Out5, leftMatrixFlag != 0)) {
         leftMatrixFlag = (**(code **)(**(int **)(this + 0x34) + 0x50))
                            (*(int **)(this + 0x34),scratchR4,scratchR5,scratchR6,scratchR7,scratchR8,queryResultOrOperator);
         if (leftMatrixFlag != 0) {
@@ -273,10 +273,10 @@ LAB_97b90940:
           if (rightMatrixFlag != 0) goto LAB_97b9100c;
         }
         leftMatrixFlag = (**(code **)(**(int **)(this + 0x34) + 0x50))(*(int **)(this + 0x34));
-        scratchR4 = extraout_r4_05;
+        scratchR4 = r4Out6;
         if ((leftMatrixFlag != 0) ||
            (leftMatrixFlag = (**(code **)(**(int **)(this + 0x38) + 0x50))(*(int **)(this + 0x38)),
-           scratchR4 = extraout_r4_06, leftMatrixFlag != 0)) {
+           scratchR4 = r4Out7, leftMatrixFlag != 0)) {
           resultNominalSize = (*(code *)**(undefined4 **)this)(this,scratchR4,scratchR5,scratchR6,scratchR7,scratchR8,queryResultOrOperator)
           ;
                     
@@ -389,10 +389,10 @@ LAB_97b914fc:
            (leftMatrixFlag = (**(code **)(**(int **)(this + 0x38) + 0x50))(*(int **)(this + 0x38)),
            leftMatrixFlag == 0)) {
           leftMatrixFlag = (**(code **)(**(int **)(this + 0x34) + 0x50))(*(int **)(this + 0x34));
-          scratchR4 = extraout_r4_07;
+          scratchR4 = r4Out8;
           if ((leftMatrixFlag != 0) ||
              (leftMatrixFlag = (**(code **)(**(int **)(this + 0x38) + 0x50))(*(int **)(this + 0x38)),
-             scratchR4 = extraout_r4_08, leftMatrixFlag != 0)) {
+             scratchR4 = r4Out9, leftMatrixFlag != 0)) {
             resultNominalSize = (*(code *)**(undefined4 **)this)
                               (this,scratchR4,scratchR5,scratchR6,scratchR7,scratchR8,queryResultOrOperator);
                     
@@ -405,7 +405,7 @@ LAB_97b914fc:
             else {
               _sprintf((char *)&stackTypeTypeName,"%d:%d",(int)resultNominalSize >> 0x10,leftBasicType);
             }
-            __ZNSsC1EPKcRKSaIcE(&stackType,(char *)&stackTypeTypeName,aaStack_50);
+            __ZNSsC1EPKcRKSaIcE(&stackType,(char *)&stackTypeTypeName,allocatorDummy);
             *(undefined *)((int)stackType + (int)stackType[-3]) = *PTR__S_terminal_a7b7c0b8;
             __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)stackType);
             refCountPtr = stackType + -1;
@@ -523,8 +523,8 @@ int compareStructure(type, constUnion1, constUnion2, constIndexPtr)
   int fieldOffset;
   int fieldsBegin;
   int *a0;
-  undefined4 extraout_r4;
-  undefined4 extraout_r4_00;
+  undefined4 r4Out0;
+  undefined4 r4Out1;
   undefined4 scratchR4;
   unsigned char * a2;
   int *a3;
@@ -550,13 +550,13 @@ int compareStructure(type, constUnion1, constUnion2, constIndexPtr)
     fieldOffset = fieldIndex * 8;
     memberIndex = 0;
     fieldSize = (**(code **)(**(int **)(fieldsBegin + fieldOffset) + 0x30))(*(int **)(fieldsBegin + fieldOffset));
-    scratchR4 = extraout_r4;
+    scratchR4 = r4Out0;
     if (0 < fieldSize) {
       do {
         a0 = *(int **)(*(int *)(typeList + 4) + fieldOffset);
         fieldVtableThenBasicType = *a0;
         fieldVtableThenBasicType = (**(code **)(fieldVtableThenBasicType + 0x20))(a0,scratchR4,a2,a3,scratchR7,scratchR8,fieldVtableThenBasicType);
-        scratchR4 = extraout_r4_00;
+        scratchR4 = r4Out1;
         if (fieldVtableThenBasicType == 2) {
 LAB_97b916a8:
           constIndex = *constIndexPtr;
@@ -2765,7 +2765,7 @@ int TIntermediate__promoteConstantUnion(this, basicType, intermConstantUnion)
   byte cr0Flags;
   double i2dBias;
   undefined **typeTempOrTextBuf [4];
-  unsigned char aaStack_b0 [20];
+  unsigned char allocatorDummy [20];
   uint typeTempBits;
   undefined4 i2dHi;
   uint i2dLo;
@@ -2841,7 +2841,7 @@ override_jmp_97b960f0_case_0:
           else {
             _sprintf((char *)&stackType,"%d:%d",(int)sourceLoc >> 0x10,a1_02);
           }
-          __ZNSsC1EPKcRKSaIcE(typeTempOrTextBuf,(char *)&stackType,aaStack_b0);
+          __ZNSsC1EPKcRKSaIcE(typeTempOrTextBuf,(char *)&stackType,allocatorDummy);
           *(undefined *)((int)typeTempOrTextBuf[0] + (int)typeTempOrTextBuf[0][-3]) = *PTR__S_terminal_a7b7c0b8;
           __ZN13TInfoSinkBase6appendEPKc(this_01,(char *)typeTempOrTextBuf[0]);
           refCountPtr = typeTempOrTextBuf[0] + -1;
@@ -2854,7 +2854,7 @@ override_jmp_97b960f0_case_0:
             }
           } while (!(bool)(cr0Flags >> 1 & 1));
           if ((int)oldRefCount < 1) {
-            __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(typeTempOrTextBuf[0] + -3),aaStack_b0);
+            __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(typeTempOrTextBuf[0] + -3),allocatorDummy);
           }
           __ZN13TInfoSinkBase6appendEPKc(this_01,": ");
           __ZN13TInfoSinkBase6appendEPKc(this_01,errorText);
@@ -3101,7 +3101,7 @@ int __ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggrega
   unsigned char * a3;
   undefined4 scratchR7;
   undefined4 scratchR8;
-  undefined1 auStack_30 [20];
+  undefined1 eraseResultSlot [20];
   
   a2 = type;
   a3 = intermAggregate;
@@ -3160,7 +3160,7 @@ int __ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggrega
       }
     }
     std__vector_TIntermNode__pool_allocator_TIntermNode_____erase
-              (auStack_30,this_00,*(undefined4 *)(this_00 + 4));
+              (eraseResultSlot,this_00,*(undefined4 *)(this_00 + 4));
   }
   return intermTyped;
 }
@@ -3210,7 +3210,7 @@ int TIntermediate__removeMatrixConstNode(this, vector, type, intermAggregate, in
   int stackTypeWord1c;
   int stackTypeWord20;
   uint stackTypeBits;
-  undefined1 auStack_50 [4];
+  undefined1 insertResultSlot [4];
   int *insertNodeSlot [3];
   
   result = 0;
@@ -3297,7 +3297,7 @@ LAB_97b96b5c:
         a3 = (unsigned char *)insertNodeSlot;
         elementIndex = elementIndex + 1;
         insertNodeSlot[0] = a0;
-        std__vector_TIntermNode__pool_allocator_TIntermNode_____insert(auStack_50,vector,a2,a3);
+        std__vector_TIntermNode__pool_allocator_TIntermNode_____insert(insertResultSlot,vector,a2,a3);
       }
     }
   }
@@ -3347,11 +3347,11 @@ int TType__getCompleteString(result, type)
   int nominalSize;
   uint typeBits;
   char *writeCursor;
-  char acStack_90 [112];
+  char descriptionBuf [112];
   undefined4 allocatorArg [4];
   
   typeBits = *(uint *)(type + 0x24);
-  writeCursor = acStack_90;
+  writeCursor = descriptionBuf;
   if (1 < typeBits >> 0x19) {
     qualifierString = getQualifierString(typeBits >> 0x19);
     sprintfResult = _sprintf(writeCursor,"%s ",qualifierString);
@@ -3379,7 +3379,7 @@ LAB_97b96e98:
   _sprintf(writeCursor,"%s",basicString);
   allocatorArg[0] = GetGlobalPoolAllocator();
   __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-            (result,acStack_90,(unsigned char *)allocatorArg);
+            (result,descriptionBuf,(unsigned char *)allocatorArg);
   return result;
 }
 
@@ -3397,19 +3397,19 @@ int OutputTreeText(infoSink, intermNode, depth)
   char reservation;
   byte cr0Flags;
   int locString [4];
-  char acStack_70 [64];
-  unsigned char aaStack_30 [28];
+  char locTextBuf [64];
+  unsigned char allocatorDummy [28];
   
   sourceLoc = (*(code *)**(undefined4 **)intermNode)(intermNode,intermNode,depth);
   a1 = sourceLoc & 0xffff;
   cr0Flags = (a1 == 0) << 1;
   if (a1 == 0) {
-    _sprintf(acStack_70,"%d:? ",(int)sourceLoc >> 0x10);
+    _sprintf(locTextBuf,"%d:? ",(int)sourceLoc >> 0x10);
   }
   else {
-    _sprintf(acStack_70,"%d:%d",(int)sourceLoc >> 0x10,a1);
+    _sprintf(locTextBuf,"%d:%d",(int)sourceLoc >> 0x10,a1);
   }
-  __ZNSsC1EPKcRKSaIcE(locString,acStack_70,aaStack_30);
+  __ZNSsC1EPKcRKSaIcE(locString,locTextBuf,allocatorDummy);
   __ZN13TInfoSinkBase6appendERKSs(infoSink + 8,(unsigned char *)locString);
   refCountPtr = (int *)(locString[0] + -4);
   do {
@@ -3421,7 +3421,7 @@ int OutputTreeText(infoSink, intermNode, depth)
     }
   } while (!(bool)(cr0Flags >> 1 & 1));
   if (oldRefCount < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(locString[0] + -0xc),acStack_70);
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(locString[0] + -0xc),locTextBuf);
   }
   if (0 < depth) {
     do {
@@ -3455,7 +3455,7 @@ int OutputSymbol(intermSymbol, intermTraverser, scratchR5, scratchR6, scratchR7,
   undefined4 nameChars;
   char reservation;
   byte cr0Reg;
-  char acStack_b0 [112];
+  char symbolTextBuf [112];
   undefined4 typeString;
   int typeStringChars;
   undefined4 destroyAllocatorArg [7];
@@ -3471,7 +3471,7 @@ int OutputSymbol(intermSymbol, intermTraverser, scratchR5, scratchR6, scratchR7,
   *(undefined1 *)(a6 + *(int *)(a6 + -0xc)) = *stringTerminal;
   nameChars = *(undefined4 *)(symbolName + 4);
   symbolId = (**(code **)(*(int *)intermSymbol + 0x5c))(intermSymbol,a1_00,a2,scratchR6,scratchR7,scratchR8,a6,symbolName);
-  _sprintf(acStack_b0,"\'%s\' (%s) id: %d\n",nameChars,typeCharsCopy,symbolId);
+  _sprintf(symbolTextBuf,"\'%s\' (%s) id: %d\n",nameChars,typeCharsCopy,symbolId);
   refCountPtr = (int *)(typeStringChars + -4);
   destroyAllocatorArg[0] = typeString;
   do {
@@ -3486,7 +3486,7 @@ int OutputSymbol(intermSymbol, intermTraverser, scratchR5, scratchR6, scratchR7,
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
               ((unsigned char *)(typeStringChars + -0xc),destroyAllocatorArg);
   }
-  return __ZN13TInfoSinkBase6appendEPKc((void *)(*(int *)(intermTraverser + 0x30) + 8),acStack_b0);
+  return __ZN13TInfoSinkBase6appendEPKc((void *)(*(int *)(intermTraverser + 0x30) + 8),symbolTextBuf);
 }
 
 /* OutputBinary @ 0x97b970e0 (248 bytes) */
@@ -3738,13 +3738,13 @@ int OutputConstantUnion(intermConstantUnion, intermTraverser)
   double in_stack_fffffe20;
   double in_stack_fffffe28;
   undefined **typeTemp1OrTextBuf [4];
-  char acStack_1b0 [20];
+  char locTextBuf [20];
   uint typeTemp1Bits;
   undefined **typeTemp2 [6];
   int typeTemp2Structure;
-  unsigned char aaStack_170 [4];
+  unsigned char allocatorDummy [4];
   uint typeTemp2Bits;
-  char acStack_160 [312];
+  char floatTextBuf [312];
   
   this = *(unsigned char **)(intermTraverser + 0x30);
   (**(code **)(*(int *)intermConstantUnion + 0x38))(typeTemp1OrTextBuf,intermConstantUnion);
@@ -3783,12 +3783,12 @@ LAB_97b977f8:
       else {
         if (componentBasicType < 3) {
           if (componentBasicType == 1) {
-            ((char * (*)())_glp_dtostr)(getTypeResult,a1,acStack_160,300,
+            ((char * (*)())_glp_dtostr)(getTypeResult,a1,floatTextBuf,300,
                         (double)*(float *)(*(int *)(intermConstantUnion + 0x30) + componentIndex * 4),DOUBLE_97c30a70,
                         scratchF3,scratchF4,scratchF5,scratchF6,scratchF7,scratchF8,in_stack_fffffe08,in_stack_fffffe10,
                         in_stack_fffffe18,in_stack_fffffe20,in_stack_fffffe28);
-            _sprintf(acStack_160,"%s (%s)",acStack_160,"const float");
-            __ZN13TInfoSinkBase6appendEPKc(this + 8,acStack_160);
+            _sprintf(floatTextBuf,"%s (%s)",floatTextBuf,"const float");
+            __ZN13TInfoSinkBase6appendEPKc(this + 8,floatTextBuf);
             goto LAB_97b977f8;
           }
         }
@@ -3812,12 +3812,12 @@ LAB_97b977f8:
         a1_00 = sourceLoc & 0xffff;
         cr0Flags = (a1_00 == 0) << 1;
         if (a1_00 == 0) {
-          _sprintf(acStack_1b0,"%d:? ",(int)sourceLoc >> 0x10);
+          _sprintf(locTextBuf,"%d:? ",(int)sourceLoc >> 0x10);
         }
         else {
-          _sprintf(acStack_1b0,"%d:%d",(int)sourceLoc >> 0x10,a1_00);
+          _sprintf(locTextBuf,"%d:%d",(int)sourceLoc >> 0x10,a1_00);
         }
-        __ZNSsC1EPKcRKSaIcE(typeTemp1OrTextBuf,acStack_1b0,aaStack_170);
+        __ZNSsC1EPKcRKSaIcE(typeTemp1OrTextBuf,locTextBuf,allocatorDummy);
         *(undefined *)((int)typeTemp1OrTextBuf[0] + (int)typeTemp1OrTextBuf[0][-3]) = *PTR__S_terminal_a7b7c0b8;
         __ZN13TInfoSinkBase6appendEPKc(this,(char *)typeTemp1OrTextBuf[0]);
         refCountPtr = typeTemp1OrTextBuf[0] + -1;
@@ -4239,7 +4239,7 @@ int ParseSymbol(intermSymbol, intermTraverser)
   uint variableBasicTypeU;
   int componentSrcBasicType;
   undefined4 a1;
-  undefined4 extraout_r4;
+  undefined4 r4Out0;
   undefined ***pppuVar9;
   uint traverserTypeBits;
   int levelsBeginOrVariable;
@@ -4257,15 +4257,15 @@ int ParseSymbol(intermSymbol, intermTraverser)
   undefined8 constArrayAlloc;
   undefined **stackType;
   int stackTypeArraySize;
-  unsigned char aaStack_1a0 [20];
+  unsigned char locTextBuf [20];
   uint stackTypeBits;
-  undefined **appuStack_180 [8];
-  unsigned char aaStack_160 [128];
-  char *apcStack_e0 [4];
-  char acStack_d0 [32];
+  undefined **messageBuf [8];
+  unsigned char allocatorDummy [128];
+  char *locString [4];
+  char locTextBuf2 [32];
   undefined **destroyAllocatorArg [4];
-  char acStack_a0 [16];
-  unsigned char aaStack_90 [48];
+  char locTextBuf3 [16];
+  unsigned char allocatorDummy2 [48];
   int findResult [2];
   longlong d2iScratch;
   undefined4 i2dHi;
@@ -4306,7 +4306,7 @@ int ParseSymbol(intermSymbol, intermTraverser)
         if ((levelsBeginOrVariable != 0) || (levelIndex < 0)) break;
         levelsBeginOrVariable = *levelsVector;
       }
-      constArrayAlloc = CONCAT44(*(int *)(levelsBeginOrVariable + 0x38),extraout_r4);
+      constArrayAlloc = CONCAT44(*(int *)(levelsBeginOrVariable + 0x38),r4Out0);
       if (*(int *)(levelsBeginOrVariable + 0x38) == 0) {
         if (*(int *)(levelsBeginOrVariable + 0x14) == 0) {
           variableTypeBits = *(uint *)(levelsBeginOrVariable + 0x30);
@@ -4418,12 +4418,12 @@ override_jmp_97b98aec_case_0:
               lineInString = sourceLoc & 0xffff;
               cr0Flags = (lineInString == 0) << 1;
               if (lineInString == 0) {
-                _sprintf((char *)aaStack_1a0,"%d:? ",(int)sourceLoc >> 0x10);
+                _sprintf((char *)locTextBuf,"%d:? ",(int)sourceLoc >> 0x10);
               }
               else {
-                _sprintf((char *)aaStack_1a0,"%d:%d",(int)sourceLoc >> 0x10,lineInString);
+                _sprintf((char *)locTextBuf,"%d:%d",(int)sourceLoc >> 0x10,lineInString);
               }
-              __ZNSsC1EPKcRKSaIcE(&stackType,(char *)aaStack_1a0,aaStack_160);
+              __ZNSsC1EPKcRKSaIcE(&stackType,(char *)locTextBuf,allocatorDummy);
               *(undefined *)((int)stackType + (int)stackType[-3]) = *PTR__S_terminal_a7b7c0b8;
               __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)stackType);
               refCountPtr2 = stackType + -1;
@@ -4463,15 +4463,15 @@ code_r0x97b98dd8:
       lineInString = sourceLoc & 0xffff;
       cr0Flags = (lineInString == 0) << 1;
       if (lineInString == 0) {
-        _sprintf(acStack_d0,"%d:? ",(int)sourceLoc >> 0x10);
+        _sprintf(locTextBuf2,"%d:? ",(int)sourceLoc >> 0x10);
       }
       else {
-        _sprintf(acStack_d0,"%d:%d",(int)sourceLoc >> 0x10,lineInString);
+        _sprintf(locTextBuf2,"%d:%d",(int)sourceLoc >> 0x10,lineInString);
       }
-      __ZNSsC1EPKcRKSaIcE(apcStack_e0,acStack_d0,aaStack_90);
-      apcStack_e0[0][*(int *)(apcStack_e0[0] + -0xc)] = *PTR__S_terminal_a7b7c0b8;
-      __ZN13TInfoSinkBase6appendEPKc(infoSink,apcStack_e0[0]);
-      refCountPtr = (int *)(apcStack_e0[0] + -4);
+      __ZNSsC1EPKcRKSaIcE(locString,locTextBuf2,allocatorDummy2);
+      locString[0][*(int *)(locString[0] + -0xc)] = *PTR__S_terminal_a7b7c0b8;
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,locString[0]);
+      refCountPtr = (int *)(locString[0] + -4);
       do {
         oldRefCount = *refCountPtr;
         if (reservation != '\0') {
@@ -4481,14 +4481,14 @@ code_r0x97b98dd8:
         }
       } while (!(bool)(cr0Flags >> 1 & 1));
       if (oldRefCount < 1) {
-        __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(apcStack_e0[0] + -0xc));
+        __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(locString[0] + -0xc));
       }
       __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
       pppuVar9 = &stackType;
     }
     else {
       ((int (*)())TType__getCompleteString)(&stackType,intermTraverser + 0x3c);
-      pppuVar9 = appuStack_180;
+      pppuVar9 = messageBuf;
       *(undefined1 *)(stackTypeArraySize + *(int *)(stackTypeArraySize + -0xc)) = *DAT_a7b7ba10;
       _sprintf((char *)pppuVar9,"\'constructor\' : assigning non-constant to %s",stackTypeArraySize);
       refCountPtr = (int *)(stackTypeArraySize + -4);
@@ -4512,12 +4512,12 @@ code_r0x97b98dd8:
       lineInString = sourceLoc & 0xffff;
       cr0Flags = (lineInString == 0) << 1;
       if (lineInString == 0) {
-        _sprintf(acStack_a0,"%d:? ",(int)sourceLoc >> 0x10);
+        _sprintf(locTextBuf3,"%d:? ",(int)sourceLoc >> 0x10);
       }
       else {
-        _sprintf(acStack_a0,"%d:%d",(int)sourceLoc >> 0x10,lineInString);
+        _sprintf(locTextBuf3,"%d:%d",(int)sourceLoc >> 0x10,lineInString);
       }
-      __ZNSsC1EPKcRKSaIcE(&stackType,acStack_a0,aaStack_1a0);
+      __ZNSsC1EPKcRKSaIcE(&stackType,locTextBuf3,locTextBuf);
       *(undefined *)((int)stackType + (int)stackType[-3]) = *PTR__S_terminal_a7b7c0b8;
       __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)stackType);
       refCountPtr2 = stackType + -1;
@@ -4561,12 +4561,12 @@ int ParseBinary(preVisit, intermBinary, intermTraverser)
   byte cr0Flags;
   undefined **stackType;
   int stackTypeArraySize;
-  unsigned char aaStack_160 [20];
+  unsigned char locTextBuf [20];
   uint stackTypeBits;
-  char acStack_140 [32];
-  unsigned char aaStack_120 [176];
+  char messageBuf [32];
+  unsigned char allocatorDummy [176];
   undefined **destroyAllocatorArg [4];
-  char acStack_60 [72];
+  char locTextBuf2 [72];
   
   (**(code **)(*(int *)intermBinary + 0x38))(&stackType,intermBinary,intermTraverser);
   stackType = &PTR___ZN5TTypeD1Ev_a7b7d488;
@@ -4577,12 +4577,12 @@ int ParseBinary(preVisit, intermBinary, intermTraverser)
     lineInString = sourceLoc & 0xffff;
     cr0Flags = (lineInString == 0) << 1;
     if (lineInString == 0) {
-      _sprintf((char *)aaStack_160,"%d:? ",(int)sourceLoc >> 0x10);
+      _sprintf((char *)locTextBuf,"%d:? ",(int)sourceLoc >> 0x10);
     }
     else {
-      _sprintf((char *)aaStack_160,"%d:%d",(int)sourceLoc >> 0x10,lineInString);
+      _sprintf((char *)locTextBuf,"%d:%d",(int)sourceLoc >> 0x10,lineInString);
     }
-    __ZNSsC1EPKcRKSaIcE(&stackType,(char *)aaStack_160,aaStack_120);
+    __ZNSsC1EPKcRKSaIcE(&stackType,(char *)locTextBuf,allocatorDummy);
     *(undefined *)((int)stackType + (int)stackType[-3]) = *PTR__S_terminal_a7b7c0b8;
     __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)stackType);
     refCountPtr2 = stackType + -1;
@@ -4595,7 +4595,7 @@ int ParseBinary(preVisit, intermBinary, intermTraverser)
       }
     } while (!(bool)(cr0Flags >> 1 & 1));
     if ((int)oldRefCount < 1) {
-      __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(stackType + -3),aaStack_160);
+      __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(stackType + -3),locTextBuf);
     }
     __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
     __ZN13TInfoSinkBase6appendEPKc(infoSink,"Binary Node found in constant constructor");
@@ -4604,7 +4604,7 @@ int ParseBinary(preVisit, intermBinary, intermTraverser)
   else {
     ((int (*)())TType__getCompleteString)(&stackType,intermTraverser + 0x3c);
     *(undefined1 *)(stackTypeArraySize + *(int *)(stackTypeArraySize + -0xc)) = *DAT_a7b7ba10;
-    _sprintf(acStack_140,"\'constructor\' : assigning non-constant to %s",stackTypeArraySize);
+    _sprintf(messageBuf,"\'constructor\' : assigning non-constant to %s",stackTypeArraySize);
     refCountPtr = (int *)(stackTypeArraySize + -4);
     destroyAllocatorArg[0] = stackType;
     do {
@@ -4625,12 +4625,12 @@ int ParseBinary(preVisit, intermBinary, intermTraverser)
     lineInString = sourceLoc & 0xffff;
     cr0Flags = (lineInString == 0) << 1;
     if (lineInString == 0) {
-      _sprintf(acStack_60,"%d:? ",(int)sourceLoc >> 0x10);
+      _sprintf(locTextBuf2,"%d:? ",(int)sourceLoc >> 0x10);
     }
     else {
-      _sprintf(acStack_60,"%d:%d",(int)sourceLoc >> 0x10,lineInString);
+      _sprintf(locTextBuf2,"%d:%d",(int)sourceLoc >> 0x10,lineInString);
     }
-    __ZNSsC1EPKcRKSaIcE(&stackType,acStack_60,aaStack_160);
+    __ZNSsC1EPKcRKSaIcE(&stackType,locTextBuf2,locTextBuf);
     *(undefined *)((int)stackType + (int)stackType[-3]) = *PTR__S_terminal_a7b7c0b8;
     __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)stackType);
     refCountPtr2 = stackType + -1;
@@ -4643,42 +4643,42 @@ int ParseBinary(preVisit, intermBinary, intermTraverser)
       }
     } while (!(bool)(cr0Flags >> 1 & 1));
     if ((int)oldRefCount < 1) {
-      __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(stackType + -3),aaStack_160);
+      __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(stackType + -3),locTextBuf);
     }
     __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
-    __ZN13TInfoSinkBase6appendEPKc(infoSink,acStack_140);
+    __ZN13TInfoSinkBase6appendEPKc(infoSink,messageBuf);
     __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
     *(undefined4 *)(intermTraverser + 0x74) = 1;
   }
   return 0;
 }
 
-/* FUN_97b9907c @ 0x97b9907c (12 bytes) */
-int FUN_97b9907c()
+/* ParseBinary__errorReportTail @ 0x97b9907c (12 bytes) */
+int ParseBinary__errorReportTail()
 {
   bool columnIsZero;
   int atomicStore;
   int *refCountPtr;
   int oldRefCount;
-  char *unaff_r28;
-  void *unaff_r29;
-  uint unaff_r30;
-  int unaff_r31;
+  char *messageText;
+  void *infoSink;
+  uint sourceLoc;
+  int picBase;
   char reservation;
   byte cr0Flags;
   
-  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x8f990));
-  columnIsZero = (unaff_r30 & 0xffff) == 0;
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)(picBase + 0x8f990));
+  columnIsZero = (sourceLoc & 0xffff) == 0;
   cr0Flags = columnIsZero << 1;
   if (columnIsZero) {
-    _sprintf(&STACKARG(0x50),(char *)(unaff_r31 + 0x8f9d8),(int)unaff_r30 >> 0x10);
+    _sprintf(&STACKARG(0x50),(char *)(picBase + 0x8f9d8),(int)sourceLoc >> 0x10);
   }
   else {
-    _sprintf(&STACKARG(0x50),(char *)(unaff_r31 + 0x8f9d0),(int)unaff_r30 >> 0x10);
+    _sprintf(&STACKARG(0x50),(char *)(picBase + 0x8f9d0),(int)sourceLoc >> 0x10);
   }
   __ZNSsC1EPKcRKSaIcE(&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
-  (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc)] = **(char **)(unaff_r31 + 0xffe32a4);
-  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)));
+  (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc)] = **(char **)(picBase + 0xffe32a4);
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)));
   refCountPtr = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -4);
   do {
     oldRefCount = *refCountPtr;
@@ -4691,9 +4691,9 @@ int FUN_97b9907c()
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc));
   }
-  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x8f9e0));
-  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,unaff_r28);
-  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x8de24));
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)(picBase + 0x8f9e0));
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,messageText);
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)(picBase + 0x8de24));
   return 0;
 }
 
@@ -4712,16 +4712,16 @@ int ParseUnary(preVisit, intermUnary, intermTraverser)
   char reservation;
   byte cr0Reg;
   byte cr0Flags;
-  char acStack_160 [208];
+  char messageBuf [208];
   char *typeString;
   int typeStringChars;
   char *destroyAllocatorArg [4];
-  char acStack_70 [64];
-  unsigned char aaStack_30 [28];
+  char locTextBuf [64];
+  unsigned char allocatorDummy [28];
   
   ((int (*)())TType__getCompleteString)(&typeString,intermTraverser + 0x3c);
   *(undefined1 *)(typeStringChars + *(int *)(typeStringChars + -0xc)) = *DAT_a7b7ba10;
-  _sprintf(acStack_160,"\'constructor\' : assigning non-constant to \'%s\'",typeStringChars);
+  _sprintf(messageBuf,"\'constructor\' : assigning non-constant to \'%s\'",typeStringChars);
   refCountPtr = (int *)(typeStringChars + -4);
   destroyAllocatorArg[0] = typeString;
   do {
@@ -4742,12 +4742,12 @@ int ParseUnary(preVisit, intermUnary, intermTraverser)
   a1 = sourceLoc & 0xffff;
   cr0Flags = (a1 == 0) << 1;
   if (a1 == 0) {
-    _sprintf(acStack_70,"%d:? ",(int)sourceLoc >> 0x10);
+    _sprintf(locTextBuf,"%d:? ",(int)sourceLoc >> 0x10);
   }
   else {
-    _sprintf(acStack_70,"%d:%d",(int)sourceLoc >> 0x10,a1);
+    _sprintf(locTextBuf,"%d:%d",(int)sourceLoc >> 0x10,a1);
   }
-  __ZNSsC1EPKcRKSaIcE(&typeString,acStack_70,aaStack_30);
+  __ZNSsC1EPKcRKSaIcE(&typeString,locTextBuf,allocatorDummy);
   typeString[*(int *)(typeString + -0xc)] = *PTR__S_terminal_a7b7c0b8;
   __ZN13TInfoSinkBase6appendEPKc(this,typeString);
   refCountPtr = (int *)(typeString + -4);
@@ -4763,39 +4763,39 @@ int ParseUnary(preVisit, intermUnary, intermTraverser)
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(typeString + -0xc));
   }
   __ZN13TInfoSinkBase6appendEPKc(this,": ");
-  __ZN13TInfoSinkBase6appendEPKc(this,acStack_160);
+  __ZN13TInfoSinkBase6appendEPKc(this,messageBuf);
   __ZN13TInfoSinkBase6appendEPKc(this,"\n");
   *(undefined4 *)(intermTraverser + 0x74) = 1;
   return 0;
 }
 
-/* FUN_97b99274 @ 0x97b99274 (12 bytes) */
-int FUN_97b99274()
+/* ParseUnary__errorReportTail @ 0x97b99274 (12 bytes) */
+int ParseUnary__errorReportTail()
 {
   bool columnIsZero;
   int atomicStore;
   int *refCountPtr;
   int oldRefCount;
-  void *unaff_r27;
-  int unaff_r28;
-  uint unaff_r29;
-  void *unaff_r30;
-  int unaff_r31;
+  void *locStringObj;
+  int traverser;
+  uint sourceLoc;
+  void *infoSink;
+  int picBase;
   char reservation;
   byte cr0Flags;
   
-  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8f5fc));
-  columnIsZero = (unaff_r29 & 0xffff) == 0;
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)(picBase + 0x8f5fc));
+  columnIsZero = (sourceLoc & 0xffff) == 0;
   cr0Flags = columnIsZero << 1;
   if (columnIsZero) {
-    _sprintf(&STACKARG(0x130),(char *)(unaff_r31 + 0x8f644),(int)unaff_r29 >> 0x10);
+    _sprintf(&STACKARG(0x130),(char *)(picBase + 0x8f644),(int)sourceLoc >> 0x10);
   }
   else {
-    _sprintf(&STACKARG(0x130),(char *)(unaff_r31 + 0x8f63c),(int)unaff_r29 >> 0x10);
+    _sprintf(&STACKARG(0x130),(char *)(picBase + 0x8f63c),(int)sourceLoc >> 0x10);
   }
-  __ZNSsC1EPKcRKSaIcE(unaff_r27,&STACKARG(0x130),(unsigned char *)&STACKARG(0x170));
-  (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x110))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x110)) + -0xc)] = **(char **)(unaff_r31 + 0xffe2f10);
-  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x110)));
+  __ZNSsC1EPKcRKSaIcE(locStringObj,&STACKARG(0x130),(unsigned char *)&STACKARG(0x170));
+  (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x110))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x110)) + -0xc)] = **(char **)(picBase + 0xffe2f10);
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x110)));
   refCountPtr = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x110)) + -4);
   do {
     oldRefCount = *refCountPtr;
@@ -4808,10 +4808,10 @@ int FUN_97b99274()
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x110)) + -0xc));
   }
-  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8f64c));
-  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,&STACKARG(0x40));
-  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8da90));
-  *(undefined4 *)(unaff_r28 + 0x74) = 1;
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)(picBase + 0x8f64c));
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,&STACKARG(0x40));
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)(picBase + 0x8da90));
+  *(undefined4 *)(traverser + 0x74) = 1;
   return 0;
 }
 
@@ -4851,8 +4851,8 @@ int ParseAggregate(preVisit, intermAggregate, intermTraverser, scratchR6, scratc
   char *typeString;
   int typeStringChars;
   char *destroyAllocatorArg [4];
-  char acStack_70 [64];
-  unsigned char aaStack_30 [24];
+  char locTextBuf [64];
+  unsigned char allocatorDummy [24];
   
   a2 = intermTraverser;
   isConstructorResult = ((int (*)())TIntermOperator__isConstructor)((unsigned char *)intermAggregate);
@@ -4881,12 +4881,12 @@ int ParseAggregate(preVisit, intermAggregate, intermTraverser, scratchR6, scratc
     a1_00 = sourceLoc & 0xffff;
     cr0Flags = (a1_00 == 0) << 1;
     if (a1_00 == 0) {
-      _sprintf(acStack_70,"%d:? ",(int)sourceLoc >> 0x10);
+      _sprintf(locTextBuf,"%d:? ",(int)sourceLoc >> 0x10);
     }
     else {
-      _sprintf(acStack_70,"%d:%d",(int)sourceLoc >> 0x10,a1_00);
+      _sprintf(locTextBuf,"%d:%d",(int)sourceLoc >> 0x10,a1_00);
     }
-    __ZNSsC1EPKcRKSaIcE(&typeString,acStack_70,aaStack_30);
+    __ZNSsC1EPKcRKSaIcE(&typeString,locTextBuf,allocatorDummy);
     typeString[*(int *)(typeString + -0xc)] = *PTR__S_terminal_a7b7c0b8;
     __ZN13TInfoSinkBase6appendEPKc(this,typeString);
     refCountPtr = (int *)(typeString + -4);
@@ -4991,9 +4991,9 @@ int ParseSelection(preVisit, intermSelection, intermTraverser)
   void *this;
   char reservation;
   byte cr0Flags;
-  char *apcStack_80 [4];
-  char acStack_70 [64];
-  unsigned char aaStack_30 [28];
+  char *locString [4];
+  char locTextBuf [64];
+  unsigned char allocatorDummy [28];
   
   this = *(void **)(intermTraverser + 0x6c);
   sourceLoc = (*(code *)**(undefined4 **)intermSelection)(intermSelection,intermSelection,intermTraverser);
@@ -5001,15 +5001,15 @@ int ParseSelection(preVisit, intermSelection, intermTraverser)
   a1 = sourceLoc & 0xffff;
   cr0Flags = (a1 == 0) << 1;
   if (a1 == 0) {
-    _sprintf(acStack_70,"%d:? ",(int)sourceLoc >> 0x10);
+    _sprintf(locTextBuf,"%d:? ",(int)sourceLoc >> 0x10);
   }
   else {
-    _sprintf(acStack_70,"%d:%d",(int)sourceLoc >> 0x10,a1);
+    _sprintf(locTextBuf,"%d:%d",(int)sourceLoc >> 0x10,a1);
   }
-  __ZNSsC1EPKcRKSaIcE(apcStack_80,acStack_70,aaStack_30);
-  apcStack_80[0][*(int *)(apcStack_80[0] + -0xc)] = *PTR__S_terminal_a7b7c0b8;
-  __ZN13TInfoSinkBase6appendEPKc(this,apcStack_80[0]);
-  refCountPtr = (int *)(apcStack_80[0] + -4);
+  __ZNSsC1EPKcRKSaIcE(locString,locTextBuf,allocatorDummy);
+  locString[0][*(int *)(locString[0] + -0xc)] = *PTR__S_terminal_a7b7c0b8;
+  __ZN13TInfoSinkBase6appendEPKc(this,locString[0]);
+  refCountPtr = (int *)(locString[0] + -4);
   do {
     oldRefCount = *refCountPtr;
     if (reservation != '\0') {
@@ -5019,7 +5019,7 @@ int ParseSelection(preVisit, intermSelection, intermTraverser)
     }
   } while (!(bool)(cr0Flags >> 1 & 1));
   if (oldRefCount < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(apcStack_80[0] + -0xc),acStack_70);
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(locString[0] + -0xc),locTextBuf);
   }
   __ZN13TInfoSinkBase6appendEPKc(this,": ");
   __ZN13TInfoSinkBase6appendEPKc(this,"Selection Node found in constant constructor");
@@ -5028,33 +5028,33 @@ int ParseSelection(preVisit, intermSelection, intermTraverser)
   return 0;
 }
 
-/* FUN_97b9989c @ 0x97b9989c (12 bytes) */
-int FUN_97b9989c()
+/* ParseSelection__errorReportTail @ 0x97b9989c (12 bytes) */
+int ParseSelection__errorReportTail()
 {
   bool columnIsZero;
   int atomicStore;
   int *refCountPtr;
   int oldRefCount;
-  int unaff_r27;
-  char *unaff_r28;
-  uint unaff_r29;
-  void *unaff_r30;
-  int unaff_r31;
+  int traverser;
+  char *messageText;
+  uint sourceLoc;
+  void *infoSink;
+  int picBase;
   char reservation;
   byte cr0Flags;
   
-  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8ef68));
-  columnIsZero = (unaff_r29 & 0xffff) == 0;
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)(picBase + 0x8ef68));
+  columnIsZero = (sourceLoc & 0xffff) == 0;
   cr0Flags = columnIsZero << 1;
   if (columnIsZero) {
-    _sprintf(&STACKARG(0x50),(char *)(unaff_r31 + 0x8efb0),(int)unaff_r29 >> 0x10);
+    _sprintf(&STACKARG(0x50),(char *)(picBase + 0x8efb0),(int)sourceLoc >> 0x10);
   }
   else {
-    _sprintf(&STACKARG(0x50),(char *)(unaff_r31 + 0x8efa8),(int)unaff_r29 >> 0x10);
+    _sprintf(&STACKARG(0x50),(char *)(picBase + 0x8efa8),(int)sourceLoc >> 0x10);
   }
   __ZNSsC1EPKcRKSaIcE(&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
-  (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc)] = **(char **)(unaff_r31 + 0xffe287c);
-  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)));
+  (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc)] = **(char **)(picBase + 0xffe287c);
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)));
   refCountPtr = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -4);
   do {
     oldRefCount = *refCountPtr;
@@ -5067,10 +5067,10 @@ int FUN_97b9989c()
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc));
   }
-  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8efb8));
-  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,unaff_r28);
-  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8d3fc));
-  *(undefined4 *)(unaff_r27 + 0x74) = 1;
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)(picBase + 0x8efb8));
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,messageText);
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)(picBase + 0x8d3fc));
+  *(undefined4 *)(traverser + 0x74) = 1;
   return 0;
 }
 
@@ -5306,9 +5306,9 @@ int ParseLoop(preVisit, intermLoop, intermTraverser)
   void *this;
   char reservation;
   byte cr0Flags;
-  char *apcStack_80 [4];
-  char acStack_70 [64];
-  unsigned char aaStack_30 [28];
+  char *locString [4];
+  char locTextBuf [64];
+  unsigned char allocatorDummy [28];
   
   this = *(void **)(intermTraverser + 0x6c);
   sourceLoc = (*(code *)**(undefined4 **)intermLoop)(intermLoop,intermLoop,intermTraverser);
@@ -5316,15 +5316,15 @@ int ParseLoop(preVisit, intermLoop, intermTraverser)
   a1 = sourceLoc & 0xffff;
   cr0Flags = (a1 == 0) << 1;
   if (a1 == 0) {
-    _sprintf(acStack_70,"%d:? ",(int)sourceLoc >> 0x10);
+    _sprintf(locTextBuf,"%d:? ",(int)sourceLoc >> 0x10);
   }
   else {
-    _sprintf(acStack_70,"%d:%d",(int)sourceLoc >> 0x10,a1);
+    _sprintf(locTextBuf,"%d:%d",(int)sourceLoc >> 0x10,a1);
   }
-  __ZNSsC1EPKcRKSaIcE(apcStack_80,acStack_70,aaStack_30);
-  apcStack_80[0][*(int *)(apcStack_80[0] + -0xc)] = *PTR__S_terminal_a7b7c0b8;
-  __ZN13TInfoSinkBase6appendEPKc(this,apcStack_80[0]);
-  refCountPtr = (int *)(apcStack_80[0] + -4);
+  __ZNSsC1EPKcRKSaIcE(locString,locTextBuf,allocatorDummy);
+  locString[0][*(int *)(locString[0] + -0xc)] = *PTR__S_terminal_a7b7c0b8;
+  __ZN13TInfoSinkBase6appendEPKc(this,locString[0]);
+  refCountPtr = (int *)(locString[0] + -4);
   do {
     oldRefCount = *refCountPtr;
     if (reservation != '\0') {
@@ -5334,7 +5334,7 @@ int ParseLoop(preVisit, intermLoop, intermTraverser)
     }
   } while (!(bool)(cr0Flags >> 1 & 1));
   if (oldRefCount < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(apcStack_80[0] + -0xc),acStack_70);
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(locString[0] + -0xc),locTextBuf);
   }
   __ZN13TInfoSinkBase6appendEPKc(this,": ");
   __ZN13TInfoSinkBase6appendEPKc(this,"Loop Node found in constant constructor");
@@ -5343,33 +5343,33 @@ int ParseLoop(preVisit, intermLoop, intermTraverser)
   return 0;
 }
 
-/* FUN_97b99eb8 @ 0x97b99eb8 (12 bytes) */
-int FUN_97b99eb8()
+/* ParseLoop__errorReportTail @ 0x97b99eb8 (12 bytes) */
+int ParseLoop__errorReportTail()
 {
   bool columnIsZero;
   int atomicStore;
   int *refCountPtr;
   int oldRefCount;
-  int unaff_r27;
-  char *unaff_r28;
-  uint unaff_r29;
-  void *unaff_r30;
-  int unaff_r31;
+  int traverser;
+  char *messageText;
+  uint sourceLoc;
+  void *infoSink;
+  int picBase;
   char reservation;
   byte cr0Flags;
   
-  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8e94c));
-  columnIsZero = (unaff_r29 & 0xffff) == 0;
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)(picBase + 0x8e94c));
+  columnIsZero = (sourceLoc & 0xffff) == 0;
   cr0Flags = columnIsZero << 1;
   if (columnIsZero) {
-    _sprintf(&STACKARG(0x50),(char *)(unaff_r31 + 0x8e994),(int)unaff_r29 >> 0x10);
+    _sprintf(&STACKARG(0x50),(char *)(picBase + 0x8e994),(int)sourceLoc >> 0x10);
   }
   else {
-    _sprintf(&STACKARG(0x50),(char *)(unaff_r31 + 0x8e98c),(int)unaff_r29 >> 0x10);
+    _sprintf(&STACKARG(0x50),(char *)(picBase + 0x8e98c),(int)sourceLoc >> 0x10);
   }
   __ZNSsC1EPKcRKSaIcE(&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
-  (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc)] = **(char **)(unaff_r31 + 0xffe2260);
-  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)));
+  (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc)] = **(char **)(picBase + 0xffe2260);
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)));
   refCountPtr = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -4);
   do {
     oldRefCount = *refCountPtr;
@@ -5382,10 +5382,10 @@ int FUN_97b99eb8()
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc));
   }
-  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8e99c));
-  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,unaff_r28);
-  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8cde0));
-  *(undefined4 *)(unaff_r27 + 0x74) = 1;
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)(picBase + 0x8e99c));
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,messageText);
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)(picBase + 0x8cde0));
+  *(undefined4 *)(traverser + 0x74) = 1;
   return 0;
 }
 
@@ -5403,9 +5403,9 @@ int ParseBranch(preVisit, intermBranch, intermTraverser)
   void *this;
   char reservation;
   byte cr0Flags;
-  char *apcStack_80 [4];
-  char acStack_70 [64];
-  unsigned char aaStack_30 [28];
+  char *locString [4];
+  char locTextBuf [64];
+  unsigned char allocatorDummy [28];
   
   this = *(void **)(intermTraverser + 0x6c);
   sourceLoc = (*(code *)**(undefined4 **)intermBranch)(intermBranch,intermBranch,intermTraverser);
@@ -5413,15 +5413,15 @@ int ParseBranch(preVisit, intermBranch, intermTraverser)
   a1 = sourceLoc & 0xffff;
   cr0Flags = (a1 == 0) << 1;
   if (a1 == 0) {
-    _sprintf(acStack_70,"%d:? ",(int)sourceLoc >> 0x10);
+    _sprintf(locTextBuf,"%d:? ",(int)sourceLoc >> 0x10);
   }
   else {
-    _sprintf(acStack_70,"%d:%d",(int)sourceLoc >> 0x10,a1);
+    _sprintf(locTextBuf,"%d:%d",(int)sourceLoc >> 0x10,a1);
   }
-  __ZNSsC1EPKcRKSaIcE(apcStack_80,acStack_70,aaStack_30);
-  apcStack_80[0][*(int *)(apcStack_80[0] + -0xc)] = *PTR__S_terminal_a7b7c0b8;
-  __ZN13TInfoSinkBase6appendEPKc(this,apcStack_80[0]);
-  refCountPtr = (int *)(apcStack_80[0] + -4);
+  __ZNSsC1EPKcRKSaIcE(locString,locTextBuf,allocatorDummy);
+  locString[0][*(int *)(locString[0] + -0xc)] = *PTR__S_terminal_a7b7c0b8;
+  __ZN13TInfoSinkBase6appendEPKc(this,locString[0]);
+  refCountPtr = (int *)(locString[0] + -4);
   do {
     oldRefCount = *refCountPtr;
     if (reservation != '\0') {
@@ -5431,7 +5431,7 @@ int ParseBranch(preVisit, intermBranch, intermTraverser)
     }
   } while (!(bool)(cr0Flags >> 1 & 1));
   if (oldRefCount < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(apcStack_80[0] + -0xc),acStack_70);
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(locString[0] + -0xc),locTextBuf);
   }
   __ZN13TInfoSinkBase6appendEPKc(this,": ");
   __ZN13TInfoSinkBase6appendEPKc(this,"Branch Node found in constant constructor");
@@ -5440,33 +5440,33 @@ int ParseBranch(preVisit, intermBranch, intermTraverser)
   return 0;
 }
 
-/* FUN_97b9a04c @ 0x97b9a04c (12 bytes) */
-int FUN_97b9a04c()
+/* ParseBranch__errorReportTail @ 0x97b9a04c (12 bytes) */
+int ParseBranch__errorReportTail()
 {
   bool columnIsZero;
   int atomicStore;
   int *refCountPtr;
   int oldRefCount;
-  int unaff_r27;
-  char *unaff_r28;
-  uint unaff_r29;
-  void *unaff_r30;
-  int unaff_r31;
+  int traverser;
+  char *messageText;
+  uint sourceLoc;
+  void *infoSink;
+  int picBase;
   char reservation;
   byte cr0Flags;
   
-  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8e7b8));
-  columnIsZero = (unaff_r29 & 0xffff) == 0;
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)(picBase + 0x8e7b8));
+  columnIsZero = (sourceLoc & 0xffff) == 0;
   cr0Flags = columnIsZero << 1;
   if (columnIsZero) {
-    _sprintf(&STACKARG(0x50),(char *)(unaff_r31 + 0x8e800),(int)unaff_r29 >> 0x10);
+    _sprintf(&STACKARG(0x50),(char *)(picBase + 0x8e800),(int)sourceLoc >> 0x10);
   }
   else {
-    _sprintf(&STACKARG(0x50),(char *)(unaff_r31 + 0x8e7f8),(int)unaff_r29 >> 0x10);
+    _sprintf(&STACKARG(0x50),(char *)(picBase + 0x8e7f8),(int)sourceLoc >> 0x10);
   }
   __ZNSsC1EPKcRKSaIcE(&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
-  (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc)] = **(char **)(unaff_r31 + 0xffe20cc);
-  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)));
+  (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc)] = **(char **)(picBase + 0xffe20cc);
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)));
   refCountPtr = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -4);
   do {
     oldRefCount = *refCountPtr;
@@ -5479,10 +5479,10 @@ int FUN_97b9a04c()
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x40)) + -0xc));
   }
-  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8e808));
-  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,unaff_r28);
-  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8cc4c));
-  *(undefined4 *)(unaff_r27 + 0x74) = 1;
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)(picBase + 0x8e808));
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,messageText);
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)(picBase + 0x8cc4c));
+  *(undefined4 *)(traverser + 0x74) = 1;
   return 0;
 }
 
@@ -5815,29 +5815,29 @@ int TParseContext__error(this, sourceLoc, reason, str, extraInfoFormat, varArg1,
   void *infoSink;
   char reservation;
   byte cr0Flags;
-  char acStack_210 [400];
-  char *apcStack_80 [4];
-  char acStack_70 [64];
-  unsigned char aaStack_30 [24];
+  char formattedInfoBuf [400];
+  char *locString [4];
+  char locTextBuf [64];
+  unsigned char allocatorDummy [24];
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = varArg1;
   (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = varArg2;
   (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = varArg3;
-  _vsnprintf(acStack_210,400,extraInfoFormat,&(*(unsigned int *)((unsigned char *)ghidra_home + 20)));
+  _vsnprintf(formattedInfoBuf,400,extraInfoFormat,&(*(unsigned int *)((unsigned char *)ghidra_home + 20)));
   __ZN13TInfoSinkBase6appendEPKc(*(void **)(this + 8),"ERROR: ");
   infoSink = *(void **)(this + 8);
   a1 = (uint)sourceLoc & 0xffff;
   cr0Flags = (a1 == 0) << 1;
   if (a1 == 0) {
-    _sprintf(acStack_70,"%d:? ",(int)sourceLoc >> 0x10);
+    _sprintf(locTextBuf,"%d:? ",(int)sourceLoc >> 0x10);
   }
   else {
-    _sprintf(acStack_70,"%d:%d",(int)sourceLoc >> 0x10,a1);
+    _sprintf(locTextBuf,"%d:%d",(int)sourceLoc >> 0x10,a1);
   }
-  __ZNSsC1EPKcRKSaIcE(apcStack_80,acStack_70,aaStack_30);
-  apcStack_80[0][*(int *)(apcStack_80[0] + -0xc)] = *PTR__S_terminal_a7b7c0b8;
-  __ZN13TInfoSinkBase6appendEPKc(infoSink,apcStack_80[0]);
-  refCountPtr = (int *)(apcStack_80[0] + -4);
+  __ZNSsC1EPKcRKSaIcE(locString,locTextBuf,allocatorDummy);
+  locString[0][*(int *)(locString[0] + -0xc)] = *PTR__S_terminal_a7b7c0b8;
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,locString[0]);
+  refCountPtr = (int *)(locString[0] + -4);
   do {
     oldRefCount = *refCountPtr;
     if (reservation != '\0') {
@@ -5847,7 +5847,7 @@ int TParseContext__error(this, sourceLoc, reason, str, extraInfoFormat, varArg1,
     }
   } while (!(bool)(cr0Flags >> 1 & 1));
   if (oldRefCount < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(apcStack_80[0] + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(locString[0] + -0xc));
   }
   __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
   infoSink = *(void **)(this + 8);
@@ -5856,41 +5856,41 @@ int TParseContext__error(this, sourceLoc, reason, str, extraInfoFormat, varArg1,
   __ZN13TInfoSinkBase6appendEPKc(infoSink,"\' : ");
   __ZN13TInfoSinkBase6appendEPKc(infoSink,reason);
   __ZN13TInfoSinkBase6appendEPKc(infoSink," ");
-  __ZN13TInfoSinkBase6appendEPKc(infoSink,acStack_210);
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,formattedInfoBuf);
   __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
   *(int *)(this + 0x18) = *(int *)(this + 0x18) + 1;
   return;
 }
 
-/* FUN_97b9a844 @ 0x97b9a844 (12 bytes) */
-int FUN_97b9a844(infoSink)
+/* TParseContext__error__tail @ 0x97b9a844 (12 bytes) */
+int TParseContext__error__tail(infoSink)
   void *infoSink;
 {
   bool columnIsZero;
   int atomicStore;
   int *refCountPtr;
   int oldRefCount;
-  char *unaff_r26;
-  char *unaff_r27;
-  uint unaff_r28;
+  char *reason;
+  char *token;
+  uint sourceLoc;
   void *infoSink2;
-  int unaff_r30;
-  int unaff_r31;
+  int parseContext;
+  int picBase;
   char reservation;
   byte cr0Flags;
   
-  __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)(unaff_r31 + 0x8dfd0));
-  infoSink2 = *(void **)(unaff_r30 + 8);
-  columnIsZero = (unaff_r28 & 0xffff) == 0;
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)(picBase + 0x8dfd0));
+  infoSink2 = *(void **)(parseContext + 8);
+  columnIsZero = (sourceLoc & 0xffff) == 0;
   cr0Flags = columnIsZero << 1;
   if (columnIsZero) {
-    _sprintf(&STACKARG(0x1e0),(char *)(unaff_r31 + 0x8e018),(int)unaff_r28 >> 0x10);
+    _sprintf(&STACKARG(0x1e0),(char *)(picBase + 0x8e018),(int)sourceLoc >> 0x10);
   }
   else {
-    _sprintf(&STACKARG(0x1e0),(char *)(unaff_r31 + 0x8e010),(int)unaff_r28 >> 0x10);
+    _sprintf(&STACKARG(0x1e0),(char *)(picBase + 0x8e010),(int)sourceLoc >> 0x10);
   }
   __ZNSsC1EPKcRKSaIcE(&STACKARG(0x1d0),&STACKARG(0x1e0),(unsigned char *)&STACKARG(0x220));
-  (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d0))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d0)) + -0xc)] = **(char **)(unaff_r31 + 0xffe18e4);
+  (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d0))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d0)) + -0xc)] = **(char **)(picBase + 0xffe18e4);
   __ZN13TInfoSinkBase6appendEPKc(infoSink2,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d0)));
   refCountPtr = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d0)) + -4);
   do {
@@ -5904,16 +5904,16 @@ int FUN_97b9a844(infoSink)
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d0)) + -0xc));
   }
-  __ZN13TInfoSinkBase6appendEPKc(infoSink2,(char *)(unaff_r31 + 0x8e020));
-  infoSink2 = *(void **)(unaff_r30 + 8);
-  __ZN13TInfoSinkBase6appendEPKc(infoSink2,(char *)(unaff_r31 + 0x8e9e0));
-  __ZN13TInfoSinkBase6appendEPKc(infoSink2,unaff_r27);
-  __ZN13TInfoSinkBase6appendEPKc(infoSink2,(char *)(unaff_r31 + 0x8e9e4));
-  __ZN13TInfoSinkBase6appendEPKc(infoSink2,unaff_r26);
-  __ZN13TInfoSinkBase6appendEPKc(infoSink2,(char *)(unaff_r31 + 0x8e9ec));
+  __ZN13TInfoSinkBase6appendEPKc(infoSink2,(char *)(picBase + 0x8e020));
+  infoSink2 = *(void **)(parseContext + 8);
+  __ZN13TInfoSinkBase6appendEPKc(infoSink2,(char *)(picBase + 0x8e9e0));
+  __ZN13TInfoSinkBase6appendEPKc(infoSink2,token);
+  __ZN13TInfoSinkBase6appendEPKc(infoSink2,(char *)(picBase + 0x8e9e4));
+  __ZN13TInfoSinkBase6appendEPKc(infoSink2,reason);
+  __ZN13TInfoSinkBase6appendEPKc(infoSink2,(char *)(picBase + 0x8e9ec));
   __ZN13TInfoSinkBase6appendEPKc(infoSink2,&STACKARG(0x40));
-  __ZN13TInfoSinkBase6appendEPKc(infoSink2,(char *)(unaff_r31 + 0x8c464));
-  *(int *)(unaff_r30 + 0x18) = *(int *)(unaff_r30 + 0x18) + 1;
+  __ZN13TInfoSinkBase6appendEPKc(infoSink2,(char *)(picBase + 0x8c464));
+  *(int *)(parseContext + 0x18) = *(int *)(parseContext + 0x18) + 1;
   return;
 }
 
@@ -5997,8 +5997,8 @@ int TParseContext__lValueErrorCheck(this, sourceLoc, str, intermTyped, scratchR7
   unsigned char * pTVar5;
   int componentConstUnion;
   uint qualifier;
-  undefined4 extraout_r4;
-  undefined4 extraout_r4_00;
+  undefined4 r4Out0;
+  undefined4 r4Out1;
   undefined4 a1;
   undefined4 a1_00;
   char *tokenCopy;
@@ -6015,13 +6015,13 @@ int TParseContext__lValueErrorCheck(this, sourceLoc, str, intermTyped, scratchR7
   if (binaryNode == (int *)0x0) {
     hasSymbolNode = symbolNode != (int *)0x0;
     symbolNameChars = 0;
-    a1 = extraout_r4;
+    a1 = r4Out0;
     if (hasSymbolNode) {
       symbolName = (**(code **)(*symbolNode + 0x60))(symbolNode);
       scratchR9 = (uint)*DAT_a7b7ba18;
       *(byte *)(*(int *)(symbolName + 4) + *(int *)(*(int *)(symbolName + 4) + -0xc)) = *DAT_a7b7ba18;
       symbolNameChars = *(undefined4 *)(symbolName + 4);
-      a1 = extraout_r4_00;
+      a1 = r4Out1;
     }
     modifyReason = (char *)0x0;
     qualifier = (**(code **)(*(int *)intermTyped + 0x44))(intermTyped,a1,tokenCopy,pTVar5,scratchR7,scratchR8,scratchR9);
@@ -6303,18 +6303,18 @@ int TParseContext__constructorErrorCheck(this, sourceLoc, intermNode, function, 
   void *this_01;
   uint *a0;
   int paramSizeOrScratchR4;
-  int extraout_r4;
-  int extraout_r4_00;
-  int extraout_r4_01;
+  int r4Out0;
+  int r4Out1;
+  int r4Out2;
   undefined4 a1;
-  undefined4 extraout_r4_02;
-  undefined4 extraout_r4_03;
+  undefined4 r4Out3;
+  undefined4 r4Out4;
   undefined4 a1_00;
-  int extraout_r4_04;
-  int extraout_r4_05;
-  int extraout_r4_06;
+  int r4Out5;
+  int r4Out6;
+  int r4Out7;
   undefined4 a1_01;
-  undefined4 extraout_r4_07;
+  undefined4 r4Out8;
   undefined4 scratchR4;
   unsigned char * pTVar12;
   char *structNameChars;
@@ -6487,7 +6487,7 @@ LAB_97b9b4a0:
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
                 (this_01,structNameChars,(unsigned char *)pTVar12);
       stackTypeTypeName = this_01;
-      paramSizeOrScratchR4 = extraout_r4;
+      paramSizeOrScratchR4 = r4Out0;
     }
     refCountPtr = (int *)(nameCopy2Chars + -4);
     destroyArgA[0] = nameCopy2;
@@ -6502,7 +6502,7 @@ LAB_97b9b4a0:
     if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(nameCopy2Chars + -0xc),destroyArgA);
-      paramSizeOrScratchR4 = extraout_r4_00;
+      paramSizeOrScratchR4 = r4Out1;
     }
     type[1] = stackTypeArraySize;
     type[2] = (int)stackTypeStructure;
@@ -6531,7 +6531,7 @@ LAB_97b9b4a0:
     if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(nameCopy1CharsOrScratch + -0xc),destroyArgB);
-      paramSizeOrScratchR4 = extraout_r4_01;
+      paramSizeOrScratchR4 = r4Out2;
     }
     goto LAB_97b9b714;
   default:
@@ -6579,14 +6579,14 @@ LAB_97b9b714:
     if ((op - 0x72U < 3) &&
        (paramType = *(int **)(*(int *)(function + 0x10) + paramOffset + 4), paramSizeOrScratchR4 = *paramType,
        paramSizeOrScratchR4 = (**(code **)(paramSizeOrScratchR4 + 0x34))(paramType,a1,pTVar12,pTVar14,opCopy,typeCopy,paramSizeOrScratchR4),
-       scratchR4 = extraout_r4_02, paramSizeOrScratchR4 != 0)) {
+       scratchR4 = r4Out3, paramSizeOrScratchR4 != 0)) {
       matrixInMatrix = true;
     }
     if (full) {
       overFull = true;
     }
     if ((op != 0x75) &&
-       (paramSizeOrScratchR4 = (**(code **)(*type + 0x30))(type), scratchR4 = extraout_r4_03, paramSizeOrScratchR4 <= totalSize))
+       (paramSizeOrScratchR4 = (**(code **)(*type + 0x30))(type), scratchR4 = r4Out4, paramSizeOrScratchR4 <= totalSize))
     {
       full = true;
     }
@@ -6602,11 +6602,11 @@ LAB_97b9b714:
     if (paramIsArray != 0) {
       arrayArg = true;
     }
-    paramSizeOrScratchR4 = extraout_r4_04;
+    paramSizeOrScratchR4 = r4Out5;
   }
   if (constType) {
     (**(code **)(*type + 0x28))(type,2);
-    paramSizeOrScratchR4 = extraout_r4_05;
+    paramSizeOrScratchR4 = r4Out6;
   }
   if (arrayArg) {
     errorReason = "constructing from a non-dereferenced array";
@@ -6623,7 +6623,7 @@ LAB_97b9b714:
     }
     else if (((totalSize == 1) ||
              (paramIndex = (**(code **)(*type + 0x30))(type,paramSizeOrScratchR4,pTVar12,pTVar14,opCopy),
-             paramSizeOrScratchR4 = extraout_r4_06, paramIndex <= totalSize)) && ((0 < totalSize || (op != 0x75)))) {
+             paramSizeOrScratchR4 = r4Out7, paramIndex <= totalSize)) && ((0 < totalSize || (op != 0x75)))) {
       argTyped = (int *)(**(code **)(*(int *)intermNode + 0x14))(intermNode,paramSizeOrScratchR4,pTVar12,pTVar14,opCopy);
       if (argTyped == (int *)0x0) {
         errorReason = "constructor argument does not have a type";
@@ -6632,7 +6632,7 @@ LAB_97b9b714:
         scratchR4 = a1_01;
         if ((op == 0x75) ||
            (paramSizeOrScratchR4 = (**(code **)(*argTyped + 0x40))(argTyped,a1_01,pTVar12,pTVar14,opCopy),
-           scratchR4 = extraout_r4_07, 7 < paramSizeOrScratchR4 - 5U)) {
+           scratchR4 = r4Out8, 7 < paramSizeOrScratchR4 - 5U)) {
           argBasicType = (**(code **)(*argTyped + 0x40))(argTyped,scratchR4,pTVar12,pTVar14,opCopy);
           if (argBasicType != 0) {
             return 0;
