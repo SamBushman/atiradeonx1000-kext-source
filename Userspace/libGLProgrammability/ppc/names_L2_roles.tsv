@@ -515,7 +515,7 @@ use	__ZN16TIntermAggregateD1Ev	iVar1	atomicStore	INFERRED	every definition is th
 use	__ZN16TIntermAggregateD0Ev	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#20	+1	all	all
 use	__ZN13TIntermSymbolD1Ev	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#9	+1	all	all
 use	__ZN13TIntermSymbolD0Ev	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#9	+1	all	all
-use	__ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_EPKS4_RKS7_	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#9	+1	all	all
+use	__ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_EPKS4_RKS7_	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	iVar1 = storeWordConditionalIndexed\(\*piVar3 \+ 1,0,piVar3\);	+1	all	all
 use	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE7reserveEm	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#20	+1	all	all
 use	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE10_M_replaceIPKcEERS3_N9__gnu_cxx17__normal_iteratorIPcS3_EESB_T_SC_St18input_iterator_tag	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#16	+1	all	all
 use	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE9_M_mutateEmmm	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#33	+1	all	all

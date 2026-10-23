@@ -548,7 +548,7 @@ use	std__vector_TIntermNode__pool_allocator_TIntermNode______M_range_insert___gn
 use	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4ERKS3_mm	uVar4	poolAllocator	INFERRED	every definition is the result of a call whose name says it returns this	#13	+1	all	all
 use	__ZNKSbIcSt11char_traitsIcE14pool_allocatorIcEE7compareEPKc	sVar1	length	INFERRED	every definition is the result of a call whose name says it returns this	#5	+8	all	all
 use	__ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_EPKS4_RKS7_	sVar5	length	INFERRED	every definition is the result of a call whose name says it returns this	#4	+23	all	all
-use	__ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_EPKS4_RKS7_	uVar6	poolAllocator	INFERRED	every definition is the result of a call whose name says it returns this	#14	+1	all	all
+use	__ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_EPKS4_RKS7_	uVar6	poolAllocator	INFERRED	every definition is the result of a call whose name says it returns this	uVar6 = GetGlobalPoolAllocator\(\);	+1	all	all
 use	std__vector_TParameter_pool_allocator_TParameter_____M_insert_aux	iVar1	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#9	+12	all	all
 use	std__vector_TTypeLine_pool_allocator_TTypeLine_____M_insert_aux	iVar1	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#9	+12	all	all
 use	std__vector_int_pool_allocator_int_____M_insert_aux	pvVar5	newStart	INFERRED	every definition is the result of a call whose name says it returns this	#7	+11	all	all
